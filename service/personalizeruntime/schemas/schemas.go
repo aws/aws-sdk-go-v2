@@ -7,431 +7,330 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetActionRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetActionRecommendations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iGetActionRecommendations         = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetActionRecommendations"}
+	iGetPersonalizedRanking           = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetPersonalizedRanking"}
+	iGetRecommendations               = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetRecommendations"}
+	i_AmazonPersonalizeRuntime        = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "AmazonPersonalizeRuntime"}
+	i_ActionID                        = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ActionID"}
+	i_ActionList                      = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ActionList"}
+	i_Arn                             = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "Arn"}
+	i_AttributeName                   = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "AttributeName"}
+	i_AttributeValue                  = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "AttributeValue"}
+	i_ColumnName                      = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ColumnName"}
+	i_ColumnNamesList                 = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ColumnNamesList"}
+	i_ColumnValue                     = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ColumnValue"}
+	i_Context                         = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "Context"}
+	i_DatasetType                     = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "DatasetType"}
+	i_ErrorMessage                    = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ErrorMessage"}
+	i_FilterAttributeName             = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "FilterAttributeName"}
+	i_FilterAttributeValue            = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "FilterAttributeValue"}
+	i_FilterValues                    = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "FilterValues"}
+	i_InputList                       = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "InputList"}
+	iInvalidInputException            = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "InvalidInputException"}
+	i_ItemID                          = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ItemID"}
+	i_ItemList                        = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ItemList"}
+	i_Metadata                        = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "Metadata"}
+	i_MetadataColumns                 = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "MetadataColumns"}
+	i_Name                            = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "Name"}
+	i_NumResults                      = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "NumResults"}
+	i_PercentPromotedItems            = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "PercentPromotedItems"}
+	iPredictedAction                  = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "PredictedAction"}
+	iPredictedItem                    = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "PredictedItem"}
+	iPromotion                        = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "Promotion"}
+	i_PromotionList                   = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "PromotionList"}
+	i_Reason                          = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "Reason"}
+	i_ReasonList                      = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ReasonList"}
+	i_RecommendationID                = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "RecommendationID"}
+	iResourceNotFoundException        = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "ResourceNotFoundException"}
+	i_Score                           = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "Score"}
+	i_UserID                          = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "UserID"}
+	iGetActionRecommendationsRequest  = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetActionRecommendationsRequest"}
+	iGetActionRecommendationsResponse = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetActionRecommendationsResponse"}
+	iGetPersonalizedRankingRequest    = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetPersonalizedRankingRequest"}
+	iGetPersonalizedRankingResponse   = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetPersonalizedRankingResponse"}
+	iGetRecommendationsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetRecommendationsRequest"}
+	iGetRecommendationsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.personalizeruntime", Name: "GetRecommendationsResponse"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/action-recommendations",
-	Code: 200})
-
-var GetPersonalizedRanking = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetPersonalizedRanking",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/personalize-ranking",
-	Code: 200})
-
-var GetRecommendations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetRecommendations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/recommendations",
-	Code: 200})
-
-var _AmazonPersonalizeRuntime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "AmazonPersonalizeRuntime",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonPersonalizeRuntime = smithy.NewServiceSchema(_AmazonPersonalizeRuntime, "2018-05-22")
-
-var _ActionID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ActionID",
-}, smithy.ShapeTypeString, 0)
-
-var _ActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ActionList",
-}, smithy.ShapeTypeList, 1)
-var _ActionList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ColumnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ColumnName",
-}, smithy.ShapeTypeString, 0)
-
-var _ColumnNamesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ColumnNamesList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnNamesList_member *smithy.Schema
-
-var _ColumnValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ColumnValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Context = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Context",
-}, smithy.ShapeTypeMap, 2)
-var _Context_key *smithy.Schema
-
-var _Context_value *smithy.Schema
-
-var _DatasetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "DatasetType",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "FilterAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "FilterAttributeValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeMap, 2)
-var _FilterValues_key *smithy.Schema
-
-var _FilterValues_value *smithy.Schema
-
-var _InputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "InputList",
-}, smithy.ShapeTypeList, 1)
-var _InputList_member *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_message *smithy.Schema
-
-var _ItemID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ItemID",
-}, smithy.ShapeTypeString, 0)
-
-var _ItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ItemList",
-}, smithy.ShapeTypeList, 1)
-var _ItemList_member *smithy.Schema
-
-var _Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Metadata",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _Metadata_key *smithy.Schema
-
-var _Metadata_value *smithy.Schema
-
-var _MetadataColumns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "MetadataColumns",
-}, smithy.ShapeTypeMap, 2)
-var _MetadataColumns_key *smithy.Schema
-
-var _MetadataColumns_value *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NumResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "NumResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PercentPromotedItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PercentPromotedItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var PredictedAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PredictedAction",
-}, smithy.ShapeTypeStructure, 2)
-var PredictedAction_actionId *smithy.Schema
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var m_ActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionList_member}}
+var m_ColumnNamesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnNamesList_member}}
+var m_Context = smithy.SchemaMembers{List: []*smithy.Schema{&s_Context_key, &s_Context_value}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_key, &s_FilterValues_value}}
+var m_InputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InputList_member}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_message}}
+var m_ItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ItemList_member}}
+var m_Metadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_Metadata_key, &s_Metadata_value}}
+var m_MetadataColumns = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetadataColumns_key, &s_MetadataColumns_value}}
+var mPredictedAction = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictedAction_actionId, &sPredictedAction_score}}
+var mPredictedItem = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictedItem_itemId, &sPredictedItem_score, &sPredictedItem_promotionName, &sPredictedItem_metadata, &sPredictedItem_reason}}
+var mPromotion = smithy.SchemaMembers{List: []*smithy.Schema{&sPromotion_name, &sPromotion_percentPromotedItems, &sPromotion_filterArn, &sPromotion_filterValues}}
+var m_PromotionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PromotionList_member}}
+var m_ReasonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReasonList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mGetActionRecommendationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetActionRecommendationsRequest_campaignArn, &sGetActionRecommendationsRequest_userId, &sGetActionRecommendationsRequest_numResults, &sGetActionRecommendationsRequest_filterArn, &sGetActionRecommendationsRequest_filterValues}}
+var mGetActionRecommendationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetActionRecommendationsResponse_actionList, &sGetActionRecommendationsResponse_recommendationId}}
+var mGetPersonalizedRankingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPersonalizedRankingRequest_campaignArn, &sGetPersonalizedRankingRequest_inputList, &sGetPersonalizedRankingRequest_userId, &sGetPersonalizedRankingRequest_context, &sGetPersonalizedRankingRequest_filterArn, &sGetPersonalizedRankingRequest_filterValues, &sGetPersonalizedRankingRequest_metadataColumns}}
+var mGetPersonalizedRankingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPersonalizedRankingResponse_personalizedRanking, &sGetPersonalizedRankingResponse_recommendationId}}
+var mGetRecommendationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecommendationsRequest_campaignArn, &sGetRecommendationsRequest_itemId, &sGetRecommendationsRequest_userId, &sGetRecommendationsRequest_numResults, &sGetRecommendationsRequest_context, &sGetRecommendationsRequest_filterArn, &sGetRecommendationsRequest_filterValues, &sGetRecommendationsRequest_recommenderArn, &sGetRecommendationsRequest_promotions, &sGetRecommendationsRequest_metadataColumns}, Seed: 2, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 10, 0, 0, 8, 0, 0, 0, 0, 0, 9, 0, 0, 0,
+	6, 5, 2, 0, 7, 3, 0, 0,
+}}
+var mGetRecommendationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecommendationsResponse_itemList, &sGetRecommendationsResponse_recommendationId}}
+
+var sGetActionRecommendations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionRecommendations, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetPersonalizedRanking = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPersonalizedRanking, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sGetRecommendations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecommendations, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var s_AmazonPersonalizeRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonPersonalizeRuntime, Type: smithy.ShapeTypeService})
+var s_ActionID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionID, Type: smithy.ShapeTypeString})
+var s_ActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString})
+var s_AttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeValue, Traits: &t3, Type: smithy.ShapeTypeString})
+var s_ColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var s_ColumnNamesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnNamesList, Members: &m_ColumnNamesList, Type: smithy.ShapeTypeList})
+var s_ColumnValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnValue, Type: smithy.ShapeTypeString})
+var s_Context = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Context, Members: &m_Context, Type: smithy.ShapeTypeMap})
+var s_DatasetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetType, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_FilterAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterAttributeName, Type: smithy.ShapeTypeString})
+var s_FilterAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterAttributeValue, Traits: &t3, Type: smithy.ShapeTypeString})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeMap})
+var s_InputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputList, Members: &m_InputList, Type: smithy.ShapeTypeList})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_ItemID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemID, Type: smithy.ShapeTypeString})
+var s_ItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ItemList, Members: &m_ItemList, Type: smithy.ShapeTypeList})
+var s_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Metadata, Members: &m_Metadata, Traits: &t3, Type: smithy.ShapeTypeMap})
+var s_MetadataColumns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataColumns, Members: &m_MetadataColumns, Type: smithy.ShapeTypeMap})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_NumResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumResults, Type: smithy.ShapeTypeInteger})
+var s_PercentPromotedItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PercentPromotedItems, Type: smithy.ShapeTypeInteger})
+var sPredictedAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictedAction, Members: &mPredictedAction, Type: smithy.ShapeTypeStructure})
+var sPredictedItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictedItem, Members: &mPredictedItem, Type: smithy.ShapeTypeStructure})
+var sPromotion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPromotion, Members: &mPromotion, Type: smithy.ShapeTypeStructure})
+var s_PromotionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PromotionList, Members: &m_PromotionList, Type: smithy.ShapeTypeList})
+var s_Reason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reason, Type: smithy.ShapeTypeString})
+var s_ReasonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReasonList, Members: &m_ReasonList, Type: smithy.ShapeTypeList})
+var s_RecommendationID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationID, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_Score = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Score, Type: smithy.ShapeTypeDouble})
+var s_UserID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserID, Type: smithy.ShapeTypeString})
+var sGetActionRecommendationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionRecommendationsRequest, Members: &mGetActionRecommendationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetActionRecommendationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetActionRecommendationsResponse, Members: &mGetActionRecommendationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetPersonalizedRankingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPersonalizedRankingRequest, Members: &mGetPersonalizedRankingRequest, Type: smithy.ShapeTypeStructure})
+var sGetPersonalizedRankingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPersonalizedRankingResponse, Members: &mGetPersonalizedRankingResponse, Type: smithy.ShapeTypeStructure})
+var sGetRecommendationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecommendationsRequest, Members: &mGetRecommendationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetRecommendationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecommendationsResponse, Members: &mGetRecommendationsResponse, Type: smithy.ShapeTypeStructure})
+
+var s_ActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictedAction, Members: &mPredictedAction, Type: smithy.ShapeTypeStructure})
+var s_ColumnNamesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var s_Context_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString})
+var s_Context_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_AttributeValue, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_FilterValues_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_FilterAttributeName, Type: smithy.ShapeTypeString})
+var s_FilterValues_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FilterAttributeValue, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_InputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ItemID, Type: smithy.ShapeTypeString})
+var sInvalidInputException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictedItem, Members: &mPredictedItem, Type: smithy.ShapeTypeStructure})
+var s_Metadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var s_Metadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ColumnValue, Type: smithy.ShapeTypeString})
+var s_MetadataColumns_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DatasetType, Type: smithy.ShapeTypeString})
+var s_MetadataColumns_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ColumnNamesList, Members: &m_ColumnNamesList, Type: smithy.ShapeTypeList})
+var sPredictedAction_actionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionId", ID: &i_ActionID, Type: smithy.ShapeTypeString})
+var sPredictedAction_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &i_Score, Type: smithy.ShapeTypeDouble})
+var sPredictedItem_itemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemId", ID: &i_ItemID, Type: smithy.ShapeTypeString})
+var sPredictedItem_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &i_Score, Type: smithy.ShapeTypeDouble})
+var sPredictedItem_promotionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promotionName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sPredictedItem_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_Metadata, Members: &m_Metadata, Traits: &t4, Type: smithy.ShapeTypeMap})
+var sPredictedItem_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ReasonList, Members: &m_ReasonList, Type: smithy.ShapeTypeList})
+var sPromotion_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sPromotion_percentPromotedItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "percentPromotedItems", ID: &i_PercentPromotedItems, Type: smithy.ShapeTypeInteger})
+var sPromotion_filterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sPromotion_filterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValues", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeMap})
+var s_PromotionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPromotion, Members: &mPromotion, Type: smithy.ShapeTypeStructure})
+var s_ReasonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Reason, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGetActionRecommendationsRequest_campaignArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetActionRecommendationsRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserID, Type: smithy.ShapeTypeString})
+var sGetActionRecommendationsRequest_numResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numResults", ID: &i_NumResults, Type: smithy.ShapeTypeInteger})
+var sGetActionRecommendationsRequest_filterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetActionRecommendationsRequest_filterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValues", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeMap})
+var sGetActionRecommendationsResponse_actionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionList", ID: &i_ActionList, Members: &m_ActionList, Type: smithy.ShapeTypeList})
+var sGetActionRecommendationsResponse_recommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationId", ID: &i_RecommendationID, Type: smithy.ShapeTypeString})
+var sGetPersonalizedRankingRequest_campaignArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetPersonalizedRankingRequest_inputList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputList", ID: &i_InputList, Members: &m_InputList, Type: smithy.ShapeTypeList})
+var sGetPersonalizedRankingRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserID, Type: smithy.ShapeTypeString})
+var sGetPersonalizedRankingRequest_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_Context, Members: &m_Context, Type: smithy.ShapeTypeMap})
+var sGetPersonalizedRankingRequest_filterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetPersonalizedRankingRequest_filterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValues", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeMap})
+var sGetPersonalizedRankingRequest_metadataColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataColumns", ID: &i_MetadataColumns, Members: &m_MetadataColumns, Type: smithy.ShapeTypeMap})
+var sGetPersonalizedRankingResponse_personalizedRanking = smithy.NewStaticSchema(smithy.StaticSchema{Member: "personalizedRanking", ID: &i_ItemList, Members: &m_ItemList, Type: smithy.ShapeTypeList})
+var sGetPersonalizedRankingResponse_recommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationId", ID: &i_RecommendationID, Type: smithy.ShapeTypeString})
+var sGetRecommendationsRequest_campaignArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "campaignArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetRecommendationsRequest_itemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemId", ID: &i_ItemID, Type: smithy.ShapeTypeString})
+var sGetRecommendationsRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserID, Type: smithy.ShapeTypeString})
+var sGetRecommendationsRequest_numResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numResults", ID: &i_NumResults, Type: smithy.ShapeTypeInteger})
+var sGetRecommendationsRequest_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_Context, Members: &m_Context, Type: smithy.ShapeTypeMap})
+var sGetRecommendationsRequest_filterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetRecommendationsRequest_filterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValues", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeMap})
+var sGetRecommendationsRequest_recommenderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommenderArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetRecommendationsRequest_promotions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "promotions", ID: &i_PromotionList, Members: &m_PromotionList, Type: smithy.ShapeTypeList})
+var sGetRecommendationsRequest_metadataColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataColumns", ID: &i_MetadataColumns, Members: &m_MetadataColumns, Type: smithy.ShapeTypeMap})
+var sGetRecommendationsResponse_itemList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "itemList", ID: &i_ItemList, Members: &m_ItemList, Type: smithy.ShapeTypeList})
+var sGetRecommendationsResponse_recommendationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationId", ID: &i_RecommendationID, Type: smithy.ShapeTypeString})
 
-var PredictedAction_score *smithy.Schema
+var GetActionRecommendations = &sGetActionRecommendations
 
-var PredictedItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PredictedItem",
-}, smithy.ShapeTypeStructure, 5)
-var PredictedItem_itemId *smithy.Schema
+var GetPersonalizedRanking = &sGetPersonalizedRanking
 
-var PredictedItem_score *smithy.Schema
+var GetRecommendations = &sGetRecommendations
 
-var PredictedItem_promotionName *smithy.Schema
+var _AmazonPersonalizeRuntime = &s_AmazonPersonalizeRuntime
 
-var PredictedItem_metadata *smithy.Schema
+var _ActionID = &s_ActionID
 
-var PredictedItem_reason *smithy.Schema
+var _ActionList = &s_ActionList
+var _ActionList_member = &s_ActionList_member
 
-var Promotion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Promotion",
-}, smithy.ShapeTypeStructure, 4)
-var Promotion_name *smithy.Schema
+var _Arn = &s_Arn
 
-var Promotion_percentPromotedItems *smithy.Schema
+var _AttributeName = &s_AttributeName
 
-var Promotion_filterArn *smithy.Schema
+var _AttributeValue = &s_AttributeValue
 
-var Promotion_filterValues *smithy.Schema
+var _ColumnName = &s_ColumnName
 
-var _PromotionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "PromotionList",
-}, smithy.ShapeTypeList, 1)
-var _PromotionList_member *smithy.Schema
+var _ColumnNamesList = &s_ColumnNamesList
+var _ColumnNamesList_member = &s_ColumnNamesList_member
 
-var _Reason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Reason",
-}, smithy.ShapeTypeString, 0)
+var _ColumnValue = &s_ColumnValue
 
-var _ReasonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ReasonList",
-}, smithy.ShapeTypeList, 1)
-var _ReasonList_member *smithy.Schema
+var _Context = &s_Context
+var _Context_key = &s_Context_key
+var _Context_value = &s_Context_value
 
-var _RecommendationID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "RecommendationID",
-}, smithy.ShapeTypeString, 0)
+var _DatasetType = &s_DatasetType
 
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
+var _ErrorMessage = &s_ErrorMessage
 
-var _Score = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "Score",
-}, smithy.ShapeTypeDouble, 0)
+var _FilterAttributeName = &s_FilterAttributeName
 
-var _UserID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "UserID",
-}, smithy.ShapeTypeString, 0)
+var _FilterAttributeValue = &s_FilterAttributeValue
 
-var GetActionRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetActionRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetActionRecommendationsRequest_campaignArn *smithy.Schema
+var _FilterValues = &s_FilterValues
+var _FilterValues_key = &s_FilterValues_key
+var _FilterValues_value = &s_FilterValues_value
 
-var GetActionRecommendationsRequest_userId *smithy.Schema
+var _InputList = &s_InputList
+var _InputList_member = &s_InputList_member
 
-var GetActionRecommendationsRequest_numResults *smithy.Schema
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_message = &sInvalidInputException_message
 
-var GetActionRecommendationsRequest_filterArn *smithy.Schema
+var _ItemID = &s_ItemID
 
-var GetActionRecommendationsRequest_filterValues *smithy.Schema
+var _ItemList = &s_ItemList
+var _ItemList_member = &s_ItemList_member
 
-var GetActionRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetActionRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetActionRecommendationsResponse_actionList *smithy.Schema
+var _Metadata = &s_Metadata
+var _Metadata_key = &s_Metadata_key
+var _Metadata_value = &s_Metadata_value
 
-var GetActionRecommendationsResponse_recommendationId *smithy.Schema
+var _MetadataColumns = &s_MetadataColumns
+var _MetadataColumns_key = &s_MetadataColumns_key
+var _MetadataColumns_value = &s_MetadataColumns_value
 
-var GetPersonalizedRankingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetPersonalizedRankingRequest",
-}, smithy.ShapeTypeStructure, 7)
-var GetPersonalizedRankingRequest_campaignArn *smithy.Schema
+var _Name = &s_Name
 
-var GetPersonalizedRankingRequest_inputList *smithy.Schema
+var _NumResults = &s_NumResults
 
-var GetPersonalizedRankingRequest_userId *smithy.Schema
+var _PercentPromotedItems = &s_PercentPromotedItems
 
-var GetPersonalizedRankingRequest_context *smithy.Schema
+var PredictedAction = &sPredictedAction
+var PredictedAction_actionId = &sPredictedAction_actionId
+var PredictedAction_score = &sPredictedAction_score
 
-var GetPersonalizedRankingRequest_filterArn *smithy.Schema
+var PredictedItem = &sPredictedItem
+var PredictedItem_itemId = &sPredictedItem_itemId
+var PredictedItem_score = &sPredictedItem_score
+var PredictedItem_promotionName = &sPredictedItem_promotionName
+var PredictedItem_metadata = &sPredictedItem_metadata
+var PredictedItem_reason = &sPredictedItem_reason
 
-var GetPersonalizedRankingRequest_filterValues *smithy.Schema
+var Promotion = &sPromotion
+var Promotion_name = &sPromotion_name
+var Promotion_percentPromotedItems = &sPromotion_percentPromotedItems
+var Promotion_filterArn = &sPromotion_filterArn
+var Promotion_filterValues = &sPromotion_filterValues
 
-var GetPersonalizedRankingRequest_metadataColumns *smithy.Schema
+var _PromotionList = &s_PromotionList
+var _PromotionList_member = &s_PromotionList_member
 
-var GetPersonalizedRankingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetPersonalizedRankingResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPersonalizedRankingResponse_personalizedRanking *smithy.Schema
+var _Reason = &s_Reason
 
-var GetPersonalizedRankingResponse_recommendationId *smithy.Schema
+var _ReasonList = &s_ReasonList
+var _ReasonList_member = &s_ReasonList_member
 
-var GetRecommendationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetRecommendationsRequest",
-}, smithy.ShapeTypeStructure, 10)
-var GetRecommendationsRequest_campaignArn *smithy.Schema
+var _RecommendationID = &s_RecommendationID
 
-var GetRecommendationsRequest_itemId *smithy.Schema
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
 
-var GetRecommendationsRequest_userId *smithy.Schema
+var _Score = &s_Score
 
-var GetRecommendationsRequest_numResults *smithy.Schema
+var _UserID = &s_UserID
 
-var GetRecommendationsRequest_context *smithy.Schema
+var GetActionRecommendationsRequest = &sGetActionRecommendationsRequest
+var GetActionRecommendationsRequest_campaignArn = &sGetActionRecommendationsRequest_campaignArn
+var GetActionRecommendationsRequest_userId = &sGetActionRecommendationsRequest_userId
+var GetActionRecommendationsRequest_numResults = &sGetActionRecommendationsRequest_numResults
+var GetActionRecommendationsRequest_filterArn = &sGetActionRecommendationsRequest_filterArn
+var GetActionRecommendationsRequest_filterValues = &sGetActionRecommendationsRequest_filterValues
 
-var GetRecommendationsRequest_filterArn *smithy.Schema
+var GetActionRecommendationsResponse = &sGetActionRecommendationsResponse
+var GetActionRecommendationsResponse_actionList = &sGetActionRecommendationsResponse_actionList
+var GetActionRecommendationsResponse_recommendationId = &sGetActionRecommendationsResponse_recommendationId
 
-var GetRecommendationsRequest_filterValues *smithy.Schema
+var GetPersonalizedRankingRequest = &sGetPersonalizedRankingRequest
+var GetPersonalizedRankingRequest_campaignArn = &sGetPersonalizedRankingRequest_campaignArn
+var GetPersonalizedRankingRequest_inputList = &sGetPersonalizedRankingRequest_inputList
+var GetPersonalizedRankingRequest_userId = &sGetPersonalizedRankingRequest_userId
+var GetPersonalizedRankingRequest_context = &sGetPersonalizedRankingRequest_context
+var GetPersonalizedRankingRequest_filterArn = &sGetPersonalizedRankingRequest_filterArn
+var GetPersonalizedRankingRequest_filterValues = &sGetPersonalizedRankingRequest_filterValues
+var GetPersonalizedRankingRequest_metadataColumns = &sGetPersonalizedRankingRequest_metadataColumns
 
-var GetRecommendationsRequest_recommenderArn *smithy.Schema
+var GetPersonalizedRankingResponse = &sGetPersonalizedRankingResponse
+var GetPersonalizedRankingResponse_personalizedRanking = &sGetPersonalizedRankingResponse_personalizedRanking
+var GetPersonalizedRankingResponse_recommendationId = &sGetPersonalizedRankingResponse_recommendationId
 
-var GetRecommendationsRequest_promotions *smithy.Schema
+var GetRecommendationsRequest = &sGetRecommendationsRequest
+var GetRecommendationsRequest_campaignArn = &sGetRecommendationsRequest_campaignArn
+var GetRecommendationsRequest_itemId = &sGetRecommendationsRequest_itemId
+var GetRecommendationsRequest_userId = &sGetRecommendationsRequest_userId
+var GetRecommendationsRequest_numResults = &sGetRecommendationsRequest_numResults
+var GetRecommendationsRequest_context = &sGetRecommendationsRequest_context
+var GetRecommendationsRequest_filterArn = &sGetRecommendationsRequest_filterArn
+var GetRecommendationsRequest_filterValues = &sGetRecommendationsRequest_filterValues
+var GetRecommendationsRequest_recommenderArn = &sGetRecommendationsRequest_recommenderArn
+var GetRecommendationsRequest_promotions = &sGetRecommendationsRequest_promotions
+var GetRecommendationsRequest_metadataColumns = &sGetRecommendationsRequest_metadataColumns
 
-var GetRecommendationsRequest_metadataColumns *smithy.Schema
+var GetRecommendationsResponse = &sGetRecommendationsResponse
+var GetRecommendationsResponse_itemList = &sGetRecommendationsResponse_itemList
+var GetRecommendationsResponse_recommendationId = &sGetRecommendationsResponse_recommendationId
 
-var GetRecommendationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.personalizeruntime",
-	Name:      "GetRecommendationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecommendationsResponse_itemList *smithy.Schema
-
-var GetRecommendationsResponse_recommendationId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	PredictedAction_actionId = PredictedAction.AddMember("actionId", _ActionID)
-
-	PredictedAction_score = PredictedAction.AddMember("score", _Score)
-
-	_ActionList_member = _ActionList.AddMember("member", PredictedAction)
-
-	_ColumnNamesList_member = _ColumnNamesList.AddMember("member", _ColumnName)
-
-	_Context_key = _Context.AddMember("key", _AttributeName)
-
-	_Context_value = _Context.AddMember("value", _AttributeValue)
-
-	_FilterValues_key = _FilterValues.AddMember("key", _FilterAttributeName)
-
-	_FilterValues_value = _FilterValues.AddMember("value", _FilterAttributeValue)
-
-	_InputList_member = _InputList.AddMember("member", _ItemID)
-
-	InvalidInputException_message = InvalidInputException.AddMember("message", _ErrorMessage)
-
-	_Metadata_key = _Metadata.AddMember("key", _ColumnName)
-
-	_Metadata_value = _Metadata.AddMember("value", _ColumnValue)
-
-	_ReasonList_member = _ReasonList.AddMember("member", _Reason)
-
-	PredictedItem_itemId = PredictedItem.AddMember("itemId", _ItemID)
-
-	PredictedItem_score = PredictedItem.AddMember("score", _Score)
-
-	PredictedItem_promotionName = PredictedItem.AddMember("promotionName", _Name)
-
-	PredictedItem_metadata = PredictedItem.AddMember("metadata", _Metadata)
-
-	PredictedItem_reason = PredictedItem.AddMember("reason", _ReasonList)
-
-	_ItemList_member = _ItemList.AddMember("member", PredictedItem)
-
-	_MetadataColumns_key = _MetadataColumns.AddMember("key", _DatasetType)
-
-	_MetadataColumns_value = _MetadataColumns.AddMember("value", _ColumnNamesList)
-
-	Promotion_name = Promotion.AddMember("name", _Name)
-
-	Promotion_percentPromotedItems = Promotion.AddMember("percentPromotedItems", _PercentPromotedItems)
-
-	Promotion_filterArn = Promotion.AddMember("filterArn", _Arn)
-
-	Promotion_filterValues = Promotion.AddMember("filterValues", _FilterValues)
-
-	_PromotionList_member = _PromotionList.AddMember("member", Promotion)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	GetActionRecommendationsRequest_campaignArn = GetActionRecommendationsRequest.AddMember("campaignArn", _Arn)
-
-	GetActionRecommendationsRequest_userId = GetActionRecommendationsRequest.AddMember("userId", _UserID)
-
-	GetActionRecommendationsRequest_numResults = GetActionRecommendationsRequest.AddMember("numResults", _NumResults)
-
-	GetActionRecommendationsRequest_filterArn = GetActionRecommendationsRequest.AddMember("filterArn", _Arn)
-
-	GetActionRecommendationsRequest_filterValues = GetActionRecommendationsRequest.AddMember("filterValues", _FilterValues)
-
-	GetActionRecommendationsResponse_actionList = GetActionRecommendationsResponse.AddMember("actionList", _ActionList)
-
-	GetActionRecommendationsResponse_recommendationId = GetActionRecommendationsResponse.AddMember("recommendationId", _RecommendationID)
-
-	GetPersonalizedRankingRequest_campaignArn = GetPersonalizedRankingRequest.AddMember("campaignArn", _Arn)
-
-	GetPersonalizedRankingRequest_inputList = GetPersonalizedRankingRequest.AddMember("inputList", _InputList)
-
-	GetPersonalizedRankingRequest_userId = GetPersonalizedRankingRequest.AddMember("userId", _UserID)
-
-	GetPersonalizedRankingRequest_context = GetPersonalizedRankingRequest.AddMember("context", _Context)
-
-	GetPersonalizedRankingRequest_filterArn = GetPersonalizedRankingRequest.AddMember("filterArn", _Arn)
-
-	GetPersonalizedRankingRequest_filterValues = GetPersonalizedRankingRequest.AddMember("filterValues", _FilterValues)
-
-	GetPersonalizedRankingRequest_metadataColumns = GetPersonalizedRankingRequest.AddMember("metadataColumns", _MetadataColumns)
-
-	GetPersonalizedRankingResponse_personalizedRanking = GetPersonalizedRankingResponse.AddMember("personalizedRanking", _ItemList)
-
-	GetPersonalizedRankingResponse_recommendationId = GetPersonalizedRankingResponse.AddMember("recommendationId", _RecommendationID)
-
-	GetRecommendationsRequest_campaignArn = GetRecommendationsRequest.AddMember("campaignArn", _Arn)
-
-	GetRecommendationsRequest_itemId = GetRecommendationsRequest.AddMember("itemId", _ItemID)
-
-	GetRecommendationsRequest_userId = GetRecommendationsRequest.AddMember("userId", _UserID)
-
-	GetRecommendationsRequest_numResults = GetRecommendationsRequest.AddMember("numResults", _NumResults)
-
-	GetRecommendationsRequest_context = GetRecommendationsRequest.AddMember("context", _Context)
-
-	GetRecommendationsRequest_filterArn = GetRecommendationsRequest.AddMember("filterArn", _Arn)
-
-	GetRecommendationsRequest_filterValues = GetRecommendationsRequest.AddMember("filterValues", _FilterValues)
-
-	GetRecommendationsRequest_recommenderArn = GetRecommendationsRequest.AddMember("recommenderArn", _Arn)
-
-	GetRecommendationsRequest_promotions = GetRecommendationsRequest.AddMember("promotions", _PromotionList)
-
-	GetRecommendationsRequest_metadataColumns = GetRecommendationsRequest.AddMember("metadataColumns", _MetadataColumns)
-
-	GetRecommendationsResponse_itemList = GetRecommendationsResponse.AddMember("itemList", _ItemList)
-
-	GetRecommendationsResponse_recommendationId = GetRecommendationsResponse.AddMember("recommendationId", _RecommendationID)
-
-}
+var AmazonPersonalizeRuntime = &smithy.ServiceSchema{Schema: &s_AmazonPersonalizeRuntime, Version: "2018-05-22"}

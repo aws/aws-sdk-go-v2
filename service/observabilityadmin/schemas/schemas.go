@@ -4,3250 +4,2434 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateCentralizationRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateCentralizationRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateCentralizationRuleForOrganization           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateCentralizationRuleForOrganization"}
+	iCreateDatasetIntegration                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateDatasetIntegration"}
+	iCreateS3TableIntegration                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateS3TableIntegration"}
+	iCreateTelemetryPipeline                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryPipeline"}
+	iCreateTelemetryRule                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryRule"}
+	iCreateTelemetryRuleForOrganization                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryRuleForOrganization"}
+	iDeleteCentralizationRuleForOrganization           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteCentralizationRuleForOrganization"}
+	iDeleteDatasetIntegration                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteDatasetIntegration"}
+	iDeleteS3TableIntegration                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteS3TableIntegration"}
+	iDeleteTelemetryPipeline                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteTelemetryPipeline"}
+	iDeleteTelemetryRule                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteTelemetryRule"}
+	iDeleteTelemetryRuleForOrganization                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteTelemetryRuleForOrganization"}
+	iGetCentralizationRuleForOrganization              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetCentralizationRuleForOrganization"}
+	iGetDatasetIntegration                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetDatasetIntegration"}
+	iGetS3TableIntegration                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetS3TableIntegration"}
+	iGetTelemetryEnrichmentStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryEnrichmentStatus"}
+	iGetTelemetryEvaluationStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryEvaluationStatus"}
+	iGetTelemetryEvaluationStatusForOrganization       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryEvaluationStatusForOrganization"}
+	iGetTelemetryPipeline                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryPipeline"}
+	iGetTelemetryRule                                  = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryRule"}
+	iGetTelemetryRuleForOrganization                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryRuleForOrganization"}
+	iListCentralizationRulesForOrganization            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListCentralizationRulesForOrganization"}
+	iListDatasetIntegrations                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListDatasetIntegrations"}
+	iListResourceTelemetry                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetry"}
+	iListResourceTelemetryForOrganization              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetryForOrganization"}
+	iListS3TableIntegrations                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListS3TableIntegrations"}
+	iListTagsForResource                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTagsForResource"}
+	iListTelemetryPipelines                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryPipelines"}
+	iListTelemetryRules                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRules"}
+	iListTelemetryRulesForOrganization                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRulesForOrganization"}
+	iStartTelemetryEnrichment                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StartTelemetryEnrichment"}
+	iStartTelemetryEvaluation                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StartTelemetryEvaluation"}
+	iStartTelemetryEvaluationForOrganization           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StartTelemetryEvaluationForOrganization"}
+	iStopTelemetryEnrichment                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StopTelemetryEnrichment"}
+	iStopTelemetryEvaluation                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StopTelemetryEvaluation"}
+	iStopTelemetryEvaluationForOrganization            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StopTelemetryEvaluationForOrganization"}
+	iTagResource                                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagResource"}
+	iTestTelemetryPipeline                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TestTelemetryPipeline"}
+	iUntagResource                                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UntagResource"}
+	iUpdateCentralizationRuleForOrganization           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateCentralizationRuleForOrganization"}
+	iUpdateDatasetIntegration                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateDatasetIntegration"}
+	iUpdateTelemetryPipeline                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryPipeline"}
+	iUpdateTelemetryRule                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryRule"}
+	iUpdateTelemetryRuleForOrganization                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryRuleForOrganization"}
+	iValidateTelemetryPipelineConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ValidateTelemetryPipelineConfiguration"}
+	i_ObservabilityAdmin                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ObservabilityAdmin"}
+	iAccessDeniedException                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AccessDeniedException"}
+	i_AccountIdentifier                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AccountIdentifier"}
+	i_AccountIdentifiers                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AccountIdentifiers"}
+	iAction                                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Action"}
+	iActionCondition                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ActionCondition"}
+	iAdvancedEventSelector                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AdvancedEventSelector"}
+	i_AdvancedEventSelectors                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AdvancedEventSelectors"}
+	iAdvancedFieldSelector                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AdvancedFieldSelector"}
+	i_AllRegions                                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AllRegions"}
+	i_AwsResourceExplorerManagedViewArn                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "AwsResourceExplorerManagedViewArn"}
+	iCentralizationFailureReason                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CentralizationFailureReason"}
+	iCentralizationRule                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CentralizationRule"}
+	iCentralizationRuleDestination                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CentralizationRuleDestination"}
+	iCentralizationRuleSource                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CentralizationRuleSource"}
+	i_CentralizationRuleSummaries                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CentralizationRuleSummaries"}
+	iCentralizationRuleSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CentralizationRuleSummary"}
+	iCloudtrailParameters                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CloudtrailParameters"}
+	iCondition                                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Condition"}
+	i_Conditions                                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Conditions"}
+	iConfigurationSummary                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ConfigurationSummary"}
+	iConflictException                                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ConflictException"}
+	iContextGraphStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ContextGraphStatus"}
+	i_DatasetIntegrationSummaries                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DatasetIntegrationSummaries"}
+	iDatasetIntegrationSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DatasetIntegrationSummary"}
+	iDataSource                                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DataSource"}
+	i_DataSourceFilterString                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DataSourceFilterString"}
+	i_DataSources                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DataSources"}
+	iDeletionProtection                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeletionProtection"}
+	iDestinationLogsConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DestinationLogsConfiguration"}
+	iDestinationMetricsConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DestinationMetricsConfiguration"}
+	iDestinationType                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DestinationType"}
+	iELBLoadBalancerLoggingParameters                  = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ELBLoadBalancerLoggingParameters"}
+	iEncryptedLogGroupStrategy                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "EncryptedLogGroupStrategy"}
+	iEncryption                                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Encryption"}
+	iEncryptionConflictResolutionStrategy              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "EncryptionConflictResolutionStrategy"}
+	iEncryptionScope                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "EncryptionScope"}
+	iEncryptionStrategy                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "EncryptionStrategy"}
+	i_FailureReason                                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "FailureReason"}
+	i_FieldMap                                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "FieldMap"}
+	i_FieldSelectors                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "FieldSelectors"}
+	iFieldToMatch                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "FieldToMatch"}
+	iFilter                                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Filter"}
+	iFilterBehavior                                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "FilterBehavior"}
+	iFilterRequirement                                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "FilterRequirement"}
+	i_Filters                                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Filters"}
+	i_IamRoleArn                                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "IamRoleArn"}
+	iIntegrationStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "IntegrationStatus"}
+	i_IntegrationSummaries                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "IntegrationSummaries"}
+	iIntegrationSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "IntegrationSummary"}
+	iInternalServerException                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "InternalServerException"}
+	iInvalidStateException                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "InvalidStateException"}
+	i_IsReplicated                                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "IsReplicated"}
+	i_KmsKeyArn                                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "KmsKeyArn"}
+	iLabelNameCondition                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LabelNameCondition"}
+	i_ListCentralizationRulesForOrganizationMaxResults = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListCentralizationRulesForOrganizationMaxResults"}
+	i_ListDatasetIntegrationsMaxResults                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListDatasetIntegrationsMaxResults"}
+	i_ListResourceTelemetryForOrganizationMaxResults   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetryForOrganizationMaxResults"}
+	i_ListResourceTelemetryMaxResults                  = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetryMaxResults"}
+	i_ListS3TableIntegrationsMaxResults                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListS3TableIntegrationsMaxResults"}
+	i_ListTelemetryPipelinesMaxResults                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryPipelinesMaxResults"}
+	i_ListTelemetryRulesForOrganizationMaxResults      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRulesForOrganizationMaxResults"}
+	i_ListTelemetryRulesMaxResults                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRulesMaxResults"}
+	iLogDeliveryParameters                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogDeliveryParameters"}
+	iLoggingFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LoggingFilter"}
+	iLogGroupNameConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogGroupNameConfiguration"}
+	i_LogGroupNamePattern                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogGroupNamePattern"}
+	iLogsBackupConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogsBackupConfiguration"}
+	iLogsEncryptionConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogsEncryptionConfiguration"}
+	i_LogsFilterString                                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogsFilterString"}
+	iLogType                                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogType"}
+	i_LogTypes                                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "LogTypes"}
+	iMetricsBackupConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "MetricsBackupConfiguration"}
+	i_MetricsFilterString                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "MetricsFilterString"}
+	iMskEnhancedMonitoringLevel                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "MskEnhancedMonitoringLevel"}
+	iMskMonitoringParameters                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "MskMonitoringParameters"}
+	i_NextToken                                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "NextToken"}
+	i_OrganizationUnitIdentifier                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "OrganizationUnitIdentifier"}
+	i_OrganizationUnitIdentifiers                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "OrganizationUnitIdentifiers"}
+	iOutputFormat                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "OutputFormat"}
+	iPipelineOutput                                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "PipelineOutput"}
+	iPipelineOutputError                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "PipelineOutputError"}
+	i_PipelineOutputs                                  = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "PipelineOutputs"}
+	i_Processors                                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Processors"}
+	iRecord                                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Record"}
+	iRecordFormat                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RecordFormat"}
+	i_Records                                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Records"}
+	i_RedactedFields                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RedactedFields"}
+	i_Region                                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Region"}
+	i_Regions                                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Regions"}
+	iRegionStatus                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RegionStatus"}
+	i_RegionStatuses                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RegionStatuses"}
+	i_ResourceArn                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ResourceArn"}
+	i_ResourceIdentifier                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ResourceIdentifier"}
+	i_ResourceIdentifierPrefix                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ResourceIdentifierPrefix"}
+	iResourceNotFoundException                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ResourceNotFoundException"}
+	iResourceType                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ResourceType"}
+	i_ResourceTypes                                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ResourceTypes"}
+	i_RetentionPeriodInDays                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RetentionPeriodInDays"}
+	iRuleHealth                                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RuleHealth"}
+	i_RuleIdentifier                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RuleIdentifier"}
+	i_RuleName                                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "RuleName"}
+	iServiceQuotaExceededException                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ServiceQuotaExceededException"}
+	iSignalType                                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "SignalType"}
+	iSingleHeader                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "SingleHeader"}
+	i_Sinks                                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Sinks"}
+	iSource                                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Source"}
+	iSourceContextGraphConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "SourceContextGraphConfiguration"}
+	i_SourceFilterString                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "SourceFilterString"}
+	iSourceLogsConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "SourceLogsConfiguration"}
+	iSourceMetricsConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "SourceMetricsConfiguration"}
+	i_Sources                                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Sources"}
+	iSSEAlgorithm                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "SSEAlgorithm"}
+	iStatus                                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "Status"}
+	i_StringList                                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StringList"}
+	iTagConflictResolutionStrategy                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagConflictResolutionStrategy"}
+	i_TagKey                                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagKey"}
+	i_TagKeyList                                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagKeyList"}
+	i_TagMapInput                                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagMapInput"}
+	i_TagMapOutput                                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagMapOutput"}
+	iTagPropagationConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagPropagationConfiguration"}
+	iTagPropagationFailureReason                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagPropagationFailureReason"}
+	iTagPropagationStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagPropagationStatus"}
+	i_TagValue                                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagValue"}
+	iTelemetryConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryConfiguration"}
+	i_TelemetryConfigurations                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryConfigurations"}
+	i_TelemetryConfigurationState                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryConfigurationState"}
+	iTelemetryDestinationConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryDestinationConfiguration"}
+	iTelemetryEnrichmentStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryEnrichmentStatus"}
+	iTelemetryPipeline                                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipeline"}
+	iTelemetryPipelineConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineConfiguration"}
+	i_TelemetryPipelineConfigurationBody               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineConfigurationBody"}
+	i_TelemetryPipelineIdentifier                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineIdentifier"}
+	i_TelemetryPipelineName                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineName"}
+	iTelemetryPipelineStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineStatus"}
+	iTelemetryPipelineStatusReason                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineStatusReason"}
+	i_TelemetryPipelineSummaries                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineSummaries"}
+	iTelemetryPipelineSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryPipelineSummary"}
+	iTelemetryRule                                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryRule"}
+	i_TelemetryRuleSummaries                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryRuleSummaries"}
+	iTelemetryRuleSummary                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryRuleSummary"}
+	iTelemetrySourceType                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetrySourceType"}
+	i_TelemetrySourceTypes                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetrySourceTypes"}
+	iTelemetryState                                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryState"}
+	iTelemetryType                                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TelemetryType"}
+	iTooManyRequestsException                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TooManyRequestsException"}
+	iValidationError                                   = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ValidationError"}
+	i_ValidationErrors                                 = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ValidationErrors"}
+	iValidationException                               = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ValidationException"}
+	iVPCFlowLogParameters                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "VPCFlowLogParameters"}
+	iWAFLoggingParameters                              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "WAFLoggingParameters"}
+	iWAFLogType                                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "WAFLogType"}
+	iCreateCentralizationRuleForOrganizationInput      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateCentralizationRuleForOrganizationInput"}
+	iCreateCentralizationRuleForOrganizationOutput     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateCentralizationRuleForOrganizationOutput"}
+	iCreateDatasetIntegrationInput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateDatasetIntegrationInput"}
+	iCreateDatasetIntegrationOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateDatasetIntegrationOutput"}
+	iCreateS3TableIntegrationInput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateS3TableIntegrationInput"}
+	iCreateS3TableIntegrationOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateS3TableIntegrationOutput"}
+	iCreateTelemetryPipelineInput                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryPipelineInput"}
+	iCreateTelemetryPipelineOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryPipelineOutput"}
+	iCreateTelemetryRuleForOrganizationInput           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryRuleForOrganizationInput"}
+	iCreateTelemetryRuleForOrganizationOutput          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryRuleForOrganizationOutput"}
+	iCreateTelemetryRuleInput                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryRuleInput"}
+	iCreateTelemetryRuleOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "CreateTelemetryRuleOutput"}
+	iDeleteCentralizationRuleForOrganizationInput      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteCentralizationRuleForOrganizationInput"}
+	iDeleteDatasetIntegrationInput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteDatasetIntegrationInput"}
+	iDeleteS3TableIntegrationInput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteS3TableIntegrationInput"}
+	iDeleteTelemetryPipelineInput                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteTelemetryPipelineInput"}
+	iDeleteTelemetryPipelineOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteTelemetryPipelineOutput"}
+	iDeleteTelemetryRuleForOrganizationInput           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteTelemetryRuleForOrganizationInput"}
+	iDeleteTelemetryRuleInput                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "DeleteTelemetryRuleInput"}
+	iGetCentralizationRuleForOrganizationInput         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetCentralizationRuleForOrganizationInput"}
+	iGetCentralizationRuleForOrganizationOutput        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetCentralizationRuleForOrganizationOutput"}
+	iGetDatasetIntegrationInput                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetDatasetIntegrationInput"}
+	iGetDatasetIntegrationOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetDatasetIntegrationOutput"}
+	iGetS3TableIntegrationInput                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetS3TableIntegrationInput"}
+	iGetS3TableIntegrationOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetS3TableIntegrationOutput"}
+	iGetTelemetryEnrichmentStatusOutput                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryEnrichmentStatusOutput"}
+	iGetTelemetryEvaluationStatusForOrganizationOutput = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryEvaluationStatusForOrganizationOutput"}
+	iGetTelemetryEvaluationStatusOutput                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryEvaluationStatusOutput"}
+	iGetTelemetryPipelineInput                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryPipelineInput"}
+	iGetTelemetryPipelineOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryPipelineOutput"}
+	iGetTelemetryRuleForOrganizationInput              = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryRuleForOrganizationInput"}
+	iGetTelemetryRuleForOrganizationOutput             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryRuleForOrganizationOutput"}
+	iGetTelemetryRuleInput                             = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryRuleInput"}
+	iGetTelemetryRuleOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "GetTelemetryRuleOutput"}
+	iListCentralizationRulesForOrganizationInput       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListCentralizationRulesForOrganizationInput"}
+	iListCentralizationRulesForOrganizationOutput      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListCentralizationRulesForOrganizationOutput"}
+	iListDatasetIntegrationsInput                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListDatasetIntegrationsInput"}
+	iListDatasetIntegrationsOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListDatasetIntegrationsOutput"}
+	iListResourceTelemetryForOrganizationInput         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetryForOrganizationInput"}
+	iListResourceTelemetryForOrganizationOutput        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetryForOrganizationOutput"}
+	iListResourceTelemetryInput                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetryInput"}
+	iListResourceTelemetryOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListResourceTelemetryOutput"}
+	iListS3TableIntegrationsInput                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListS3TableIntegrationsInput"}
+	iListS3TableIntegrationsOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListS3TableIntegrationsOutput"}
+	iListTagsForResourceInput                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTagsForResourceOutput"}
+	iListTelemetryPipelinesInput                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryPipelinesInput"}
+	iListTelemetryPipelinesOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryPipelinesOutput"}
+	iListTelemetryRulesForOrganizationInput            = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRulesForOrganizationInput"}
+	iListTelemetryRulesForOrganizationOutput           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRulesForOrganizationOutput"}
+	iListTelemetryRulesInput                           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRulesInput"}
+	iListTelemetryRulesOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ListTelemetryRulesOutput"}
+	iStartTelemetryEnrichmentOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StartTelemetryEnrichmentOutput"}
+	iStartTelemetryEvaluationForOrganizationInput      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StartTelemetryEvaluationForOrganizationInput"}
+	iStartTelemetryEvaluationInput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StartTelemetryEvaluationInput"}
+	iStopTelemetryEnrichmentOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "StopTelemetryEnrichmentOutput"}
+	iTagResourceInput                                  = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TagResourceInput"}
+	iTestTelemetryPipelineInput                        = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TestTelemetryPipelineInput"}
+	iTestTelemetryPipelineOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "TestTelemetryPipelineOutput"}
+	iUntagResourceInput                                = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UntagResourceInput"}
+	iUpdateCentralizationRuleForOrganizationInput      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateCentralizationRuleForOrganizationInput"}
+	iUpdateCentralizationRuleForOrganizationOutput     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateCentralizationRuleForOrganizationOutput"}
+	iUpdateDatasetIntegrationInput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateDatasetIntegrationInput"}
+	iUpdateDatasetIntegrationOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateDatasetIntegrationOutput"}
+	iUpdateTelemetryPipelineInput                      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryPipelineInput"}
+	iUpdateTelemetryPipelineOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryPipelineOutput"}
+	iUpdateTelemetryRuleForOrganizationInput           = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryRuleForOrganizationInput"}
+	iUpdateTelemetryRuleForOrganizationOutput          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryRuleForOrganizationOutput"}
+	iUpdateTelemetryRuleInput                          = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryRuleInput"}
+	iUpdateTelemetryRuleOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "UpdateTelemetryRuleOutput"}
+	iValidateTelemetryPipelineConfigurationInput       = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ValidateTelemetryPipelineConfigurationInput"}
+	iValidateTelemetryPipelineConfigurationOutput      = smithy.ShapeID{Namespace: "com.amazonaws.observabilityadmin", Name: "ValidateTelemetryPipelineConfigurationOutput"}
+	pString                                            = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pLong                                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+	pInteger                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pBoolean                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateCentralizationRuleForOrganization",
-	Code: 200})
-
-var CreateDatasetIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateDatasetIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateDatasetIntegration",
-	Code: 201})
-
-var CreateS3TableIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateS3TableIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateS3TableIntegration",
-	Code: 200})
-
-var CreateTelemetryPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateTelemetryPipeline",
-	Code: 200})
-
-var CreateTelemetryRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateTelemetryRule",
-	Code: 200})
-
-var CreateTelemetryRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateTelemetryRuleForOrganization",
-	Code: 200})
-
-var DeleteCentralizationRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteCentralizationRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteCentralizationRuleForOrganization",
-	Code: 200})
-
-var DeleteDatasetIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteDatasetIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteDatasetIntegration",
-	Code: 204})
-
-var DeleteS3TableIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteS3TableIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteS3TableIntegration",
-	Code: 204})
-
-var DeleteTelemetryPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteTelemetryPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteTelemetryPipeline",
-	Code: 200})
-
-var DeleteTelemetryRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteTelemetryRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteTelemetryRule",
-	Code: 200})
-
-var DeleteTelemetryRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteTelemetryRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteTelemetryRuleForOrganization",
-	Code: 200})
-
-var GetCentralizationRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetCentralizationRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetCentralizationRuleForOrganization",
-	Code: 200})
-
-var GetDatasetIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetDatasetIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetDatasetIntegration",
-	Code: 200})
-
-var GetS3TableIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetS3TableIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetS3TableIntegration",
-	Code: 200})
-
-var GetTelemetryEnrichmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryEnrichmentStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTelemetryEnrichmentStatus",
-	Code: 200})
-
-var GetTelemetryEvaluationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryEvaluationStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTelemetryEvaluationStatus",
-	Code: 200})
-
-var GetTelemetryEvaluationStatusForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryEvaluationStatusForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTelemetryEvaluationStatusForOrganization",
-	Code: 200})
-
-var GetTelemetryPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTelemetryPipeline",
-	Code: 200})
-
-var GetTelemetryRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTelemetryRule",
-	Code: 200})
-
-var GetTelemetryRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetTelemetryRuleForOrganization",
-	Code: 200})
-
-var ListCentralizationRulesForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListCentralizationRulesForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListCentralizationRulesForOrganization",
-	Code: 200})
-
-var ListDatasetIntegrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListDatasetIntegrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListDatasetIntegrations",
-	Code: 200})
-
-var ListResourceTelemetry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListResourceTelemetry",
-	Code: 200})
-
-var ListResourceTelemetryForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetryForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListResourceTelemetryForOrganization",
-	Code: 200})
-
-var ListS3TableIntegrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListS3TableIntegrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListS3TableIntegrations",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var ListTelemetryPipelines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryPipelines",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTelemetryPipelines",
-	Code: 200})
-
-var ListTelemetryRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTelemetryRules",
-	Code: 200})
-
-var ListTelemetryRulesForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRulesForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTelemetryRulesForOrganization",
-	Code: 200})
-
-var StartTelemetryEnrichment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StartTelemetryEnrichment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartTelemetryEnrichment",
-	Code: 202})
-
-var StartTelemetryEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StartTelemetryEvaluation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartTelemetryEvaluation",
-	Code: 200})
-
-var StartTelemetryEvaluationForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StartTelemetryEvaluationForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartTelemetryEvaluationForOrganization",
-	Code: 200})
-
-var StopTelemetryEnrichment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StopTelemetryEnrichment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopTelemetryEnrichment",
-	Code: 202})
-
-var StopTelemetryEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StopTelemetryEvaluation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopTelemetryEvaluation",
-	Code: 200})
-
-var StopTelemetryEvaluationForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StopTelemetryEvaluationForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopTelemetryEvaluationForOrganization",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TagResource",
-	Code: 200})
-
-var TestTelemetryPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TestTelemetryPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TestTelemetryPipeline",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UntagResource",
-	Code: 200})
-
-var UpdateCentralizationRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateCentralizationRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateCentralizationRuleForOrganization",
-	Code: 200})
-
-var UpdateDatasetIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateDatasetIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateDatasetIntegration",
-	Code: 200})
-
-var UpdateTelemetryPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateTelemetryPipeline",
-	Code: 200})
-
-var UpdateTelemetryRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateTelemetryRule",
-	Code: 200})
-
-var UpdateTelemetryRuleForOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryRuleForOrganization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateTelemetryRuleForOrganization",
-	Code: 200})
-
-var ValidateTelemetryPipelineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ValidateTelemetryPipelineConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ValidateTelemetryPipelineConfiguration",
-	Code: 200})
-
-var _ObservabilityAdmin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ObservabilityAdmin",
-}, smithy.ShapeTypeService, 0)
-
-var ObservabilityAdmin = smithy.NewServiceSchema(_ObservabilityAdmin, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDeniedException_amznErrorType *smithy.Schema
-
-var _AccountIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AccountIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AccountIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdentifiers_member *smithy.Schema
-
-var Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Action",
-}, smithy.ShapeTypeEnum, 6)
-var Action_ALLOW *smithy.Schema
-
-var Action_BLOCK *smithy.Schema
-
-var Action_COUNT *smithy.Schema
-
-var Action_CAPTCHA *smithy.Schema
-
-var Action_CHALLENGE *smithy.Schema
-
-var Action_EXCLUDED_AS_COUNT *smithy.Schema
-
-var ActionCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ActionCondition",
-}, smithy.ShapeTypeStructure, 1)
-var ActionCondition_Action *smithy.Schema
-
-var AdvancedEventSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AdvancedEventSelector",
-}, smithy.ShapeTypeStructure, 2)
-var AdvancedEventSelector_Name *smithy.Schema
-
-var AdvancedEventSelector_FieldSelectors *smithy.Schema
-
-var _AdvancedEventSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AdvancedEventSelectors",
-}, smithy.ShapeTypeList, 1)
-var _AdvancedEventSelectors_member *smithy.Schema
-
-var AdvancedFieldSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AdvancedFieldSelector",
-}, smithy.ShapeTypeStructure, 7)
-var AdvancedFieldSelector_Field *smithy.Schema
-
-var AdvancedFieldSelector_Equals *smithy.Schema
-
-var AdvancedFieldSelector_StartsWith *smithy.Schema
-
-var AdvancedFieldSelector_EndsWith *smithy.Schema
-
-var AdvancedFieldSelector_NotEquals *smithy.Schema
-
-var AdvancedFieldSelector_NotStartsWith *smithy.Schema
-
-var AdvancedFieldSelector_NotEndsWith *smithy.Schema
-
-var _AllRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AllRegions",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AwsResourceExplorerManagedViewArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "AwsResourceExplorerManagedViewArn",
-}, smithy.ShapeTypeString, 0)
-
-var CentralizationFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CentralizationFailureReason",
-}, smithy.ShapeTypeEnum, 3)
-var CentralizationFailureReason_TRUSTED_ACCESS_NOT_ENABLED *smithy.Schema
-
-var CentralizationFailureReason_DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION *smithy.Schema
-
-var CentralizationFailureReason_INTERNAL_SERVER_ERROR *smithy.Schema
-
-var CentralizationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CentralizationRule",
-}, smithy.ShapeTypeStructure, 2)
-var CentralizationRule_Source *smithy.Schema
-
-var CentralizationRule_Destination *smithy.Schema
-
-var CentralizationRuleDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CentralizationRuleDestination",
-}, smithy.ShapeTypeStructure, 4)
-var CentralizationRuleDestination_Region *smithy.Schema
-
-var CentralizationRuleDestination_Account *smithy.Schema
-
-var CentralizationRuleDestination_DestinationLogsConfiguration *smithy.Schema
-
-var CentralizationRuleDestination_DestinationMetricsConfiguration *smithy.Schema
-
-var CentralizationRuleSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CentralizationRuleSource",
-}, smithy.ShapeTypeStructure, 5)
-var CentralizationRuleSource_Regions *smithy.Schema
-
-var CentralizationRuleSource_Scope *smithy.Schema
-
-var CentralizationRuleSource_SourceLogsConfiguration *smithy.Schema
-
-var CentralizationRuleSource_SourceMetricsConfiguration *smithy.Schema
-
-var CentralizationRuleSource_SourceContextGraphConfiguration *smithy.Schema
-
-var _CentralizationRuleSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CentralizationRuleSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CentralizationRuleSummaries_member *smithy.Schema
-
-var CentralizationRuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CentralizationRuleSummary",
-}, smithy.ShapeTypeStructure, 13)
-var CentralizationRuleSummary_RuleName *smithy.Schema
-
-var CentralizationRuleSummary_RuleArn *smithy.Schema
-
-var CentralizationRuleSummary_CreatorAccountId *smithy.Schema
-
-var CentralizationRuleSummary_CreatedTimeStamp *smithy.Schema
-
-var CentralizationRuleSummary_CreatedRegion *smithy.Schema
-
-var CentralizationRuleSummary_LastUpdateTimeStamp *smithy.Schema
-
-var CentralizationRuleSummary_RuleHealth *smithy.Schema
-
-var CentralizationRuleSummary_FailureReason *smithy.Schema
-
-var CentralizationRuleSummary_TagPropagationStatus *smithy.Schema
-
-var CentralizationRuleSummary_TagPropagationFailureReason *smithy.Schema
-
-var CentralizationRuleSummary_ContextGraphStatus *smithy.Schema
-
-var CentralizationRuleSummary_DestinationAccountId *smithy.Schema
-
-var CentralizationRuleSummary_DestinationRegion *smithy.Schema
-
-var CloudtrailParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CloudtrailParameters",
-}, smithy.ShapeTypeStructure, 1)
-var CloudtrailParameters_AdvancedEventSelectors *smithy.Schema
-
-var Condition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Condition",
-}, smithy.ShapeTypeStructure, 2)
-var Condition_ActionCondition *smithy.Schema
-
-var Condition_LabelNameCondition *smithy.Schema
-
-var _Conditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Conditions",
-}, smithy.ShapeTypeList, 1)
-var _Conditions_member *smithy.Schema
-
-var ConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ConfigurationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConfigurationSummary_Sources *smithy.Schema
-
-var ConfigurationSummary_DataSources *smithy.Schema
-
-var ConfigurationSummary_Processors *smithy.Schema
-
-var ConfigurationSummary_ProcessorCount *smithy.Schema
-
-var ConfigurationSummary_Sinks *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ResourceId *smithy.Schema
-
-var ConflictException_ResourceType *smithy.Schema
-
-var ContextGraphStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ContextGraphStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ContextGraphStatus_HEALTHY *smithy.Schema
-
-var ContextGraphStatus_UNHEALTHY *smithy.Schema
-
-var ContextGraphStatus_PROVISIONING *smithy.Schema
-
-var _DatasetIntegrationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DatasetIntegrationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _DatasetIntegrationSummaries_member *smithy.Schema
-
-var DatasetIntegrationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DatasetIntegrationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var DatasetIntegrationSummary_Arn *smithy.Schema
-
-var DatasetIntegrationSummary_RoleArn *smithy.Schema
-
-var DatasetIntegrationSummary_CreatedAt *smithy.Schema
-
-var DatasetIntegrationSummary_UpdatedAt *smithy.Schema
-
-var DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DataSource",
-}, smithy.ShapeTypeStructure, 2)
-var DataSource_Name *smithy.Schema
-
-var DataSource_Type *smithy.Schema
-
-var _DataSourceFilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DataSourceFilterString",
-}, smithy.ShapeTypeString, 0)
-
-var _DataSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DataSources",
-}, smithy.ShapeTypeList, 1)
-var _DataSources_member *smithy.Schema
-
-var DeletionProtection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeletionProtection",
-}, smithy.ShapeTypeEnum, 1)
-var DeletionProtection_ENABLED *smithy.Schema
-
-var DestinationLogsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DestinationLogsConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var DestinationLogsConfiguration_LogsEncryptionConfiguration *smithy.Schema
-
-var DestinationLogsConfiguration_BackupConfiguration *smithy.Schema
-
-var DestinationLogsConfiguration_LogGroupNameConfiguration *smithy.Schema
-
-var DestinationLogsConfiguration_TagPropagationConfiguration *smithy.Schema
-
-var DestinationLogsConfiguration_LogGroupDeletionProtection *smithy.Schema
-
-var DestinationMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DestinationMetricsConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DestinationMetricsConfiguration_BackupConfiguration *smithy.Schema
-
-var DestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DestinationType",
-}, smithy.ShapeTypeEnum, 1)
-var DestinationType_CLOUDWATCH_LOGS *smithy.Schema
-
-var ELBLoadBalancerLoggingParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ELBLoadBalancerLoggingParameters",
-}, smithy.ShapeTypeStructure, 2)
-var ELBLoadBalancerLoggingParameters_OutputFormat *smithy.Schema
-
-var ELBLoadBalancerLoggingParameters_FieldDelimiter *smithy.Schema
-
-var EncryptedLogGroupStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "EncryptedLogGroupStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptedLogGroupStrategy_ALLOW *smithy.Schema
-
-var EncryptedLogGroupStrategy_SKIP *smithy.Schema
-
-var Encryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Encryption",
-}, smithy.ShapeTypeStructure, 2)
-var Encryption_SseAlgorithm *smithy.Schema
-
-var Encryption_KmsKeyArn *smithy.Schema
-
-var EncryptionConflictResolutionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "EncryptionConflictResolutionStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionConflictResolutionStrategy_ALLOW *smithy.Schema
-
-var EncryptionConflictResolutionStrategy_SKIP *smithy.Schema
-
-var EncryptionScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "EncryptionScope",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionScope_ENCRYPTED_SOURCE_ONLY *smithy.Schema
-
-var EncryptionScope_NEW_DESTINATION_LOG_GROUPS *smithy.Schema
-
-var EncryptionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "EncryptionStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionStrategy_CUSTOMER_MANAGED *smithy.Schema
-
-var EncryptionStrategy_AWS_OWNED *smithy.Schema
-
-var _FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeString, 0)
-
-var _FieldMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "FieldMap",
-}, smithy.ShapeTypeMap, 2)
-var _FieldMap_key *smithy.Schema
-
-var _FieldMap_value *smithy.Schema
-
-var _FieldSelectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "FieldSelectors",
-}, smithy.ShapeTypeList, 1)
-var _FieldSelectors_member *smithy.Schema
-
-var FieldToMatch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "FieldToMatch",
-}, smithy.ShapeTypeStructure, 4)
-var FieldToMatch_SingleHeader *smithy.Schema
-
-var FieldToMatch_UriPath *smithy.Schema
-
-var FieldToMatch_QueryString *smithy.Schema
-
-var FieldToMatch_Method *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 3)
-var Filter_Behavior *smithy.Schema
-
-var Filter_Requirement *smithy.Schema
-
-var Filter_Conditions *smithy.Schema
-
-var FilterBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "FilterBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var FilterBehavior_KEEP *smithy.Schema
-
-var FilterBehavior_DROP *smithy.Schema
-
-var FilterRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "FilterRequirement",
-}, smithy.ShapeTypeEnum, 2)
-var FilterRequirement_MEETS_ALL *smithy.Schema
-
-var FilterRequirement_MEETS_ANY *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var IntegrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "IntegrationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var IntegrationStatus_ACTIVE *smithy.Schema
-
-var IntegrationStatus_DELETING *smithy.Schema
-
-var _IntegrationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "IntegrationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _IntegrationSummaries_member *smithy.Schema
-
-var IntegrationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "IntegrationSummary",
-}, smithy.ShapeTypeStructure, 2)
-var IntegrationSummary_Arn *smithy.Schema
-
-var IntegrationSummary_Status *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InternalServerException_amznErrorType *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidStateException_Message *smithy.Schema
-
-var _IsReplicated = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "IsReplicated",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var LabelNameCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LabelNameCondition",
-}, smithy.ShapeTypeStructure, 1)
-var LabelNameCondition_LabelName *smithy.Schema
-
-var _ListCentralizationRulesForOrganizationMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListCentralizationRulesForOrganizationMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListDatasetIntegrationsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListDatasetIntegrationsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListResourceTelemetryForOrganizationMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetryForOrganizationMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListResourceTelemetryMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetryMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListS3TableIntegrationsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListS3TableIntegrationsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListTelemetryPipelinesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryPipelinesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListTelemetryRulesForOrganizationMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRulesForOrganizationMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListTelemetryRulesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRulesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var LogDeliveryParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogDeliveryParameters",
-}, smithy.ShapeTypeStructure, 1)
-var LogDeliveryParameters_LogTypes *smithy.Schema
-
-var LoggingFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LoggingFilter",
-}, smithy.ShapeTypeStructure, 2)
-var LoggingFilter_Filters *smithy.Schema
-
-var LoggingFilter_DefaultBehavior *smithy.Schema
-
-var LogGroupNameConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogGroupNameConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LogGroupNameConfiguration_LogGroupNamePattern *smithy.Schema
-
-var _LogGroupNamePattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogGroupNamePattern",
-}, smithy.ShapeTypeString, 0)
-
-var LogsBackupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogsBackupConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LogsBackupConfiguration_Region *smithy.Schema
-
-var LogsBackupConfiguration_KmsKeyArn *smithy.Schema
-
-var LogsEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogsEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var LogsEncryptionConfiguration_EncryptionStrategy *smithy.Schema
-
-var LogsEncryptionConfiguration_KmsKeyArn *smithy.Schema
-
-var LogsEncryptionConfiguration_EncryptionConflictResolutionStrategy *smithy.Schema
-
-var LogsEncryptionConfiguration_EncryptionScope *smithy.Schema
-
-var _LogsFilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogsFilterString",
-}, smithy.ShapeTypeString, 0)
-
-var LogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogType",
-}, smithy.ShapeTypeEnum, 9)
-var LogType_APPLICATION *smithy.Schema
-
-var LogType_USAGE *smithy.Schema
-
-var LogType_SECURITY_FINDING *smithy.Schema
-
-var LogType_ACCESS *smithy.Schema
-
-var LogType_CONNECTION *smithy.Schema
-
-var LogType_S3_SERVER_ACCESS *smithy.Schema
-
-var LogType_ALB_ACCESS *smithy.Schema
-
-var LogType_ALB_CONNECTION *smithy.Schema
-
-var LogType_ALB_HEALTH_CHECK *smithy.Schema
-
-var _LogTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "LogTypes",
-}, smithy.ShapeTypeList, 1)
-var _LogTypes_member *smithy.Schema
-
-var MetricsBackupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "MetricsBackupConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MetricsBackupConfiguration_Region *smithy.Schema
-
-var _MetricsFilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "MetricsFilterString",
-}, smithy.ShapeTypeString, 0)
-
-var MskEnhancedMonitoringLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "MskEnhancedMonitoringLevel",
-}, smithy.ShapeTypeEnum, 4)
-var MskEnhancedMonitoringLevel_DEFAULT *smithy.Schema
-
-var MskEnhancedMonitoringLevel_PER_BROKER *smithy.Schema
-
-var MskEnhancedMonitoringLevel_PER_TOPIC_PER_BROKER *smithy.Schema
-
-var MskEnhancedMonitoringLevel_PER_TOPIC_PER_PARTITION *smithy.Schema
-
-var MskMonitoringParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "MskMonitoringParameters",
-}, smithy.ShapeTypeStructure, 1)
-var MskMonitoringParameters_EnhancedMonitoring *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationUnitIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "OrganizationUnitIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationUnitIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "OrganizationUnitIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationUnitIdentifiers_member *smithy.Schema
-
-var OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "OutputFormat",
-}, smithy.ShapeTypeEnum, 2)
-var OutputFormat_PLAIN *smithy.Schema
-
-var OutputFormat_JSON *smithy.Schema
-
-var PipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "PipelineOutput",
-}, smithy.ShapeTypeStructure, 2)
-var PipelineOutput_Record *smithy.Schema
-
-var PipelineOutput_Error *smithy.Schema
-
-var PipelineOutputError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "PipelineOutputError",
-}, smithy.ShapeTypeStructure, 1)
-var PipelineOutputError_Message *smithy.Schema
-
-var _PipelineOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "PipelineOutputs",
-}, smithy.ShapeTypeList, 1)
-var _PipelineOutputs_member *smithy.Schema
-
-var _Processors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Processors",
-}, smithy.ShapeTypeList, 1)
-var _Processors_member *smithy.Schema
-
-var Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Record",
-}, smithy.ShapeTypeStructure, 2)
-var Record_Data *smithy.Schema
-
-var Record_Type *smithy.Schema
-
-var RecordFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RecordFormat",
-}, smithy.ShapeTypeEnum, 2)
-var RecordFormat_STRING *smithy.Schema
-
-var RecordFormat_JSON *smithy.Schema
-
-var _Records = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Records",
-}, smithy.ShapeTypeList, 1)
-var _Records_member *smithy.Schema
-
-var _RedactedFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RedactedFields",
-}, smithy.ShapeTypeList, 1)
-var _RedactedFields_member *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _Regions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Regions",
-}, smithy.ShapeTypeList, 1)
-var _Regions_member *smithy.Schema
-
-var RegionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RegionStatus",
-}, smithy.ShapeTypeStructure, 4)
-var RegionStatus_Region *smithy.Schema
-
-var RegionStatus_Status *smithy.Schema
-
-var RegionStatus_FailureReason *smithy.Schema
-
-var RegionStatus_RuleArn *smithy.Schema
-
-var _RegionStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RegionStatuses",
-}, smithy.ShapeTypeList, 1)
-var _RegionStatuses_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdentifierPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ResourceIdentifierPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 23)
-var ResourceType_AWS_EC2_INSTANCE *smithy.Schema
-
-var ResourceType_AWS_EC2_VPC *smithy.Schema
-
-var ResourceType_AWS_LAMDBA_FUNCTION *smithy.Schema
-
-var ResourceType_AWS_CLOUDTRAIL *smithy.Schema
-
-var ResourceType_AWS_EKS_CLUSTER *smithy.Schema
-
-var ResourceType_AWS_WAF_V2_WEB_ACL *smithy.Schema
-
-var ResourceType_AWS_ELB_LOADBALANCER *smithy.Schema
-
-var ResourceType_AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_AGENTCORE_RUNTIME *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_AGENTCORE_BROWSER *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_AGENTCORE_GATEWAY *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_AGENTCORE_MEMORY *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER *smithy.Schema
-
-var ResourceType_AWS_SECURITY_HUB *smithy.Schema
-
-var ResourceType_AWS_CLOUDFRONT_DISTRIBUTION *smithy.Schema
-
-var ResourceType_AWS_SECURITY_HUB_HUBV2 *smithy.Schema
-
-var ResourceType_AWS_OTEL_ENRICHMENT *smithy.Schema
-
-var ResourceType_AWS_MSK_CLUSTER *smithy.Schema
-
-var ResourceType_AWS_S3_BUCKET *smithy.Schema
-
-var ResourceType_AWS_BEDROCK_KNOWLEDGEBASE *smithy.Schema
-
-var ResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG *smithy.Schema
-
-var _ResourceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ResourceTypes",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypes_member *smithy.Schema
-
-var _RetentionPeriodInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RetentionPeriodInDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var RuleHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RuleHealth",
-}, smithy.ShapeTypeEnum, 3)
-var RuleHealth_HEALTHY *smithy.Schema
-
-var RuleHealth_UNHEALTHY *smithy.Schema
-
-var RuleHealth_PROVISIONING *smithy.Schema
-
-var _RuleIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RuleIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "RuleName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 6, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceId *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceType *smithy.Schema
-
-var ServiceQuotaExceededException_ServiceCode *smithy.Schema
-
-var ServiceQuotaExceededException_QuotaCode *smithy.Schema
-
-var ServiceQuotaExceededException_amznErrorType *smithy.Schema
-
-var SignalType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "SignalType",
-}, smithy.ShapeTypeEnum, 2)
-var SignalType_LOG *smithy.Schema
-
-var SignalType_METRIC *smithy.Schema
-
-var SingleHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "SingleHeader",
-}, smithy.ShapeTypeStructure, 1)
-var SingleHeader_Name *smithy.Schema
-
-var _Sinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Sinks",
-}, smithy.ShapeTypeList, 1)
-var _Sinks_member *smithy.Schema
-
-var Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Source",
-}, smithy.ShapeTypeStructure, 1)
-var Source_Type *smithy.Schema
-
-var SourceContextGraphConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "SourceContextGraphConfiguration",
-}, smithy.ShapeTypeStructure, 0)
-
-var _SourceFilterString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "SourceFilterString",
-}, smithy.ShapeTypeString, 0)
-
-var SourceLogsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "SourceLogsConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var SourceLogsConfiguration_LogGroupSelectionCriteria *smithy.Schema
-
-var SourceLogsConfiguration_DataSourceSelectionCriteria *smithy.Schema
-
-var SourceLogsConfiguration_EncryptedLogGroupStrategy *smithy.Schema
-
-var SourceMetricsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "SourceMetricsConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SourceMetricsConfiguration_MetricsSelectionCriteria *smithy.Schema
-
-var _Sources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Sources",
-}, smithy.ShapeTypeList, 1)
-var _Sources_member *smithy.Schema
-
-var SSEAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "SSEAlgorithm",
-}, smithy.ShapeTypeEnum, 2)
-var SSEAlgorithm_SSE_KMS *smithy.Schema
-
-var SSEAlgorithm_SSE_S3 *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 7)
-var Status_NOT_STARTED *smithy.Schema
-
-var Status_STARTING *smithy.Schema
-
-var Status_FAILED_START *smithy.Schema
-
-var Status_RUNNING *smithy.Schema
-
-var Status_STOPPING *smithy.Schema
-
-var Status_FAILED_STOP *smithy.Schema
-
-var Status_STOPPED *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var TagConflictResolutionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagConflictResolutionStrategy",
-}, smithy.ShapeTypeEnum, 3)
-var TagConflictResolutionStrategy_IN_SYNC *smithy.Schema
-
-var TagConflictResolutionStrategy_ADD_ONLY *smithy.Schema
-
-var TagConflictResolutionStrategy_UPDATE_SYNC *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMapInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagMapInput",
-}, smithy.ShapeTypeMap, 2)
-var _TagMapInput_key *smithy.Schema
-
-var _TagMapInput_value *smithy.Schema
-
-var _TagMapOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagMapOutput",
-}, smithy.ShapeTypeMap, 2)
-var _TagMapOutput_key *smithy.Schema
-
-var _TagMapOutput_value *smithy.Schema
-
-var TagPropagationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagPropagationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var TagPropagationConfiguration_DestinationRoleArn *smithy.Schema
-
-var TagPropagationConfiguration_TagConflictResolutionStrategy *smithy.Schema
-
-var TagPropagationFailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagPropagationFailureReason",
-}, smithy.ShapeTypeEnum, 2)
-var TagPropagationFailureReason_ROLE_NOT_ASSUMABLE *smithy.Schema
-
-var TagPropagationFailureReason_ROLE_LACKS_PERMISSIONS *smithy.Schema
-
-var TagPropagationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagPropagationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var TagPropagationStatus_HEALTHY *smithy.Schema
-
-var TagPropagationStatus_UNHEALTHY *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TelemetryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var TelemetryConfiguration_AccountIdentifier *smithy.Schema
-
-var TelemetryConfiguration_TelemetryConfigurationState *smithy.Schema
-
-var TelemetryConfiguration_ResourceType *smithy.Schema
-
-var TelemetryConfiguration_ResourceIdentifier *smithy.Schema
-
-var TelemetryConfiguration_ResourceTags *smithy.Schema
-
-var TelemetryConfiguration_LastUpdateTimeStamp *smithy.Schema
-
-var TelemetryConfiguration_TelemetrySourceType *smithy.Schema
-
-var _TelemetryConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _TelemetryConfigurations_member *smithy.Schema
-
-var _TelemetryConfigurationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryConfigurationState",
-}, smithy.ShapeTypeMap, 2)
-var _TelemetryConfigurationState_key *smithy.Schema
-
-var _TelemetryConfigurationState_value *smithy.Schema
-
-var TelemetryDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 10)
-var TelemetryDestinationConfiguration_DestinationType *smithy.Schema
-
-var TelemetryDestinationConfiguration_DestinationPattern *smithy.Schema
-
-var TelemetryDestinationConfiguration_RetentionInDays *smithy.Schema
-
-var TelemetryDestinationConfiguration_VPCFlowLogParameters *smithy.Schema
-
-var TelemetryDestinationConfiguration_CloudtrailParameters *smithy.Schema
-
-var TelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters *smithy.Schema
-
-var TelemetryDestinationConfiguration_WAFLoggingParameters *smithy.Schema
-
-var TelemetryDestinationConfiguration_LogDeliveryParameters *smithy.Schema
-
-var TelemetryDestinationConfiguration_MskMonitoringParameters *smithy.Schema
-
-var TelemetryDestinationConfiguration_KmsKeyArn *smithy.Schema
-
-var TelemetryEnrichmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryEnrichmentStatus",
-}, smithy.ShapeTypeEnum, 3)
-var TelemetryEnrichmentStatus_RUNNING *smithy.Schema
-
-var TelemetryEnrichmentStatus_STOPPED *smithy.Schema
-
-var TelemetryEnrichmentStatus_IMPAIRED *smithy.Schema
-
-var TelemetryPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipeline",
-}, smithy.ShapeTypeStructure, 8)
-var TelemetryPipeline_CreatedTimeStamp *smithy.Schema
-
-var TelemetryPipeline_LastUpdateTimeStamp *smithy.Schema
-
-var TelemetryPipeline_Arn *smithy.Schema
-
-var TelemetryPipeline_Name *smithy.Schema
-
-var TelemetryPipeline_Configuration *smithy.Schema
-
-var TelemetryPipeline_Status *smithy.Schema
-
-var TelemetryPipeline_StatusReason *smithy.Schema
-
-var TelemetryPipeline_Tags *smithy.Schema
-
-var TelemetryPipelineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var TelemetryPipelineConfiguration_Body *smithy.Schema
-
-var _TelemetryPipelineConfigurationBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineConfigurationBody",
-}, smithy.ShapeTypeString, 0)
-
-var _TelemetryPipelineIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _TelemetryPipelineName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineName",
-}, smithy.ShapeTypeString, 0)
-
-var TelemetryPipelineStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineStatus",
-}, smithy.ShapeTypeEnum, 6)
-var TelemetryPipelineStatus_CREATING *smithy.Schema
-
-var TelemetryPipelineStatus_ACTIVE *smithy.Schema
-
-var TelemetryPipelineStatus_UPDATING *smithy.Schema
-
-var TelemetryPipelineStatus_DELETING *smithy.Schema
-
-var TelemetryPipelineStatus_CREATE_FAILED *smithy.Schema
-
-var TelemetryPipelineStatus_UPDATE_FAILED *smithy.Schema
-
-var TelemetryPipelineStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineStatusReason",
-}, smithy.ShapeTypeStructure, 1)
-var TelemetryPipelineStatusReason_Description *smithy.Schema
-
-var _TelemetryPipelineSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineSummaries",
-}, smithy.ShapeTypeList, 1)
-var _TelemetryPipelineSummaries_member *smithy.Schema
-
-var TelemetryPipelineSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryPipelineSummary",
-}, smithy.ShapeTypeStructure, 7)
-var TelemetryPipelineSummary_CreatedTimeStamp *smithy.Schema
-
-var TelemetryPipelineSummary_LastUpdateTimeStamp *smithy.Schema
-
-var TelemetryPipelineSummary_Arn *smithy.Schema
-
-var TelemetryPipelineSummary_Name *smithy.Schema
-
-var TelemetryPipelineSummary_Status *smithy.Schema
-
-var TelemetryPipelineSummary_Tags *smithy.Schema
-
-var TelemetryPipelineSummary_ConfigurationSummary *smithy.Schema
-
-var TelemetryRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryRule",
-}, smithy.ShapeTypeStructure, 9)
-var TelemetryRule_ResourceType *smithy.Schema
-
-var TelemetryRule_TelemetryType *smithy.Schema
-
-var TelemetryRule_TelemetrySourceTypes *smithy.Schema
-
-var TelemetryRule_DestinationConfiguration *smithy.Schema
-
-var TelemetryRule_Scope *smithy.Schema
-
-var TelemetryRule_SelectionCriteria *smithy.Schema
-
-var TelemetryRule_AllowFieldUpdates *smithy.Schema
-
-var TelemetryRule_Regions *smithy.Schema
-
-var TelemetryRule_AllRegions *smithy.Schema
-
-var _TelemetryRuleSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryRuleSummaries",
-}, smithy.ShapeTypeList, 1)
-var _TelemetryRuleSummaries_member *smithy.Schema
-
-var TelemetryRuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryRuleSummary",
-}, smithy.ShapeTypeStructure, 7)
-var TelemetryRuleSummary_RuleName *smithy.Schema
-
-var TelemetryRuleSummary_RuleArn *smithy.Schema
-
-var TelemetryRuleSummary_CreatedTimeStamp *smithy.Schema
-
-var TelemetryRuleSummary_LastUpdateTimeStamp *smithy.Schema
-
-var TelemetryRuleSummary_ResourceType *smithy.Schema
-
-var TelemetryRuleSummary_TelemetryType *smithy.Schema
-
-var TelemetryRuleSummary_TelemetrySourceTypes *smithy.Schema
-
-var TelemetrySourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetrySourceType",
-}, smithy.ShapeTypeEnum, 7)
-var TelemetrySourceType_VPC_FLOW_LOGS *smithy.Schema
-
-var TelemetrySourceType_ROUTE53_RESOLVER_QUERY_LOGS *smithy.Schema
-
-var TelemetrySourceType_EKS_AUDIT_LOGS *smithy.Schema
-
-var TelemetrySourceType_EKS_AUTHENTICATOR_LOGS *smithy.Schema
-
-var TelemetrySourceType_EKS_CONTROLLER_MANAGER_LOGS *smithy.Schema
-
-var TelemetrySourceType_EKS_SCHEDULER_LOGS *smithy.Schema
-
-var TelemetrySourceType_EKS_API_LOGS *smithy.Schema
-
-var _TelemetrySourceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetrySourceTypes",
-}, smithy.ShapeTypeList, 1)
-var _TelemetrySourceTypes_member *smithy.Schema
-
-var TelemetryState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryState",
-}, smithy.ShapeTypeEnum, 3)
-var TelemetryState_ENABLED *smithy.Schema
-
-var TelemetryState_DISABLED *smithy.Schema
-
-var TelemetryState_NOT_APPLICABLE *smithy.Schema
-
-var TelemetryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TelemetryType",
-}, smithy.ShapeTypeEnum, 4)
-var TelemetryType_LOGS *smithy.Schema
-
-var TelemetryType_METRICS *smithy.Schema
-
-var TelemetryType_TRACES *smithy.Schema
-
-var TelemetryType_INSIGHTS *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var ValidationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ValidationError",
-}, smithy.ShapeTypeStructure, 3)
-var ValidationError_Message *smithy.Schema
-
-var ValidationError_Reason *smithy.Schema
-
-var ValidationError_FieldMap *smithy.Schema
-
-var _ValidationErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ValidationErrors",
-}, smithy.ShapeTypeList, 1)
-var _ValidationErrors_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Errors *smithy.Schema
-
-var VPCFlowLogParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "VPCFlowLogParameters",
-}, smithy.ShapeTypeStructure, 3)
-var VPCFlowLogParameters_LogFormat *smithy.Schema
-
-var VPCFlowLogParameters_TrafficType *smithy.Schema
-
-var VPCFlowLogParameters_MaxAggregationInterval *smithy.Schema
-
-var WAFLoggingParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "WAFLoggingParameters",
-}, smithy.ShapeTypeStructure, 3)
-var WAFLoggingParameters_RedactedFields *smithy.Schema
-
-var WAFLoggingParameters_LoggingFilter *smithy.Schema
-
-var WAFLoggingParameters_LogType *smithy.Schema
-
-var WAFLogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "WAFLogType",
-}, smithy.ShapeTypeEnum, 1)
-var WAFLogType_WAF_LOGS *smithy.Schema
-
-var CreateCentralizationRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateCentralizationRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCentralizationRuleForOrganizationInput_RuleName *smithy.Schema
-
-var CreateCentralizationRuleForOrganizationInput_Rule *smithy.Schema
-
-var CreateCentralizationRuleForOrganizationInput_Tags *smithy.Schema
-
-var CreateCentralizationRuleForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateCentralizationRuleForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCentralizationRuleForOrganizationOutput_RuleArn *smithy.Schema
-
-var CreateDatasetIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateDatasetIntegrationInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateDatasetIntegrationInput_RoleArn *smithy.Schema
-
-var CreateDatasetIntegrationInput_Tags *smithy.Schema
-
-var CreateDatasetIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateDatasetIntegrationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDatasetIntegrationOutput_Arn *smithy.Schema
-
-var CreateDatasetIntegrationOutput_RoleArn *smithy.Schema
-
-var CreateDatasetIntegrationOutput_CreatedAt *smithy.Schema
-
-var CreateDatasetIntegrationOutput_UpdatedAt *smithy.Schema
-
-var CreateS3TableIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateS3TableIntegrationInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateS3TableIntegrationInput_Encryption *smithy.Schema
-
-var CreateS3TableIntegrationInput_RoleArn *smithy.Schema
-
-var CreateS3TableIntegrationInput_Tags *smithy.Schema
-
-var CreateS3TableIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateS3TableIntegrationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateS3TableIntegrationOutput_Arn *smithy.Schema
-
-var CreateTelemetryPipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryPipelineInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTelemetryPipelineInput_Name *smithy.Schema
-
-var CreateTelemetryPipelineInput_Configuration *smithy.Schema
-
-var CreateTelemetryPipelineInput_Tags *smithy.Schema
-
-var CreateTelemetryPipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryPipelineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTelemetryPipelineOutput_Arn *smithy.Schema
-
-var CreateTelemetryRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTelemetryRuleForOrganizationInput_RuleName *smithy.Schema
-
-var CreateTelemetryRuleForOrganizationInput_Rule *smithy.Schema
-
-var CreateTelemetryRuleForOrganizationInput_Tags *smithy.Schema
-
-var CreateTelemetryRuleForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryRuleForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTelemetryRuleForOrganizationOutput_RuleArn *smithy.Schema
-
-var CreateTelemetryRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryRuleInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTelemetryRuleInput_RuleName *smithy.Schema
-
-var CreateTelemetryRuleInput_Rule *smithy.Schema
-
-var CreateTelemetryRuleInput_Tags *smithy.Schema
-
-var CreateTelemetryRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "CreateTelemetryRuleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTelemetryRuleOutput_RuleArn *smithy.Schema
-
-var DeleteCentralizationRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteCentralizationRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCentralizationRuleForOrganizationInput_RuleIdentifier *smithy.Schema
-
-var DeleteDatasetIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteDatasetIntegrationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDatasetIntegrationInput_Arn *smithy.Schema
-
-var DeleteS3TableIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteS3TableIntegrationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteS3TableIntegrationInput_Arn *smithy.Schema
-
-var DeleteTelemetryPipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteTelemetryPipelineInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTelemetryPipelineInput_PipelineIdentifier *smithy.Schema
-
-var DeleteTelemetryPipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteTelemetryPipelineOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTelemetryRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteTelemetryRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTelemetryRuleForOrganizationInput_RuleIdentifier *smithy.Schema
-
-var DeleteTelemetryRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "DeleteTelemetryRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTelemetryRuleInput_RuleIdentifier *smithy.Schema
-
-var GetCentralizationRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetCentralizationRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCentralizationRuleForOrganizationInput_RuleIdentifier *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetCentralizationRuleForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 12)
-var GetCentralizationRuleForOrganizationOutput_RuleName *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_RuleArn *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_CreatorAccountId *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_CreatedTimeStamp *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_CreatedRegion *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_RuleHealth *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_FailureReason *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_TagPropagationStatus *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_TagPropagationFailureReason *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_ContextGraphStatus *smithy.Schema
-
-var GetCentralizationRuleForOrganizationOutput_CentralizationRule *smithy.Schema
-
-var GetDatasetIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetDatasetIntegrationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDatasetIntegrationInput_Arn *smithy.Schema
-
-var GetDatasetIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetDatasetIntegrationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetDatasetIntegrationOutput_Arn *smithy.Schema
-
-var GetDatasetIntegrationOutput_RoleArn *smithy.Schema
-
-var GetDatasetIntegrationOutput_CreatedAt *smithy.Schema
-
-var GetDatasetIntegrationOutput_UpdatedAt *smithy.Schema
-
-var GetS3TableIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetS3TableIntegrationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetS3TableIntegrationInput_Arn *smithy.Schema
-
-var GetS3TableIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetS3TableIntegrationOutput",
-}, smithy.ShapeTypeStructure, 6)
-var GetS3TableIntegrationOutput_Arn *smithy.Schema
-
-var GetS3TableIntegrationOutput_RoleArn *smithy.Schema
-
-var GetS3TableIntegrationOutput_Status *smithy.Schema
-
-var GetS3TableIntegrationOutput_Encryption *smithy.Schema
-
-var GetS3TableIntegrationOutput_DestinationTableBucketArn *smithy.Schema
-
-var GetS3TableIntegrationOutput_CreatedTimeStamp *smithy.Schema
-
-var GetTelemetryEnrichmentStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryEnrichmentStatusOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetTelemetryEnrichmentStatusOutput_Status *smithy.Schema
-
-var GetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn *smithy.Schema
-
-var GetTelemetryEvaluationStatusForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryEvaluationStatusForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetTelemetryEvaluationStatusForOrganizationOutput_Status *smithy.Schema
-
-var GetTelemetryEvaluationStatusForOrganizationOutput_FailureReason *smithy.Schema
-
-var GetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion *smithy.Schema
-
-var GetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses *smithy.Schema
-
-var GetTelemetryEvaluationStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryEvaluationStatusOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetTelemetryEvaluationStatusOutput_Status *smithy.Schema
-
-var GetTelemetryEvaluationStatusOutput_FailureReason *smithy.Schema
-
-var GetTelemetryEvaluationStatusOutput_HomeRegion *smithy.Schema
-
-var GetTelemetryEvaluationStatusOutput_RegionStatuses *smithy.Schema
-
-var GetTelemetryPipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryPipelineInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTelemetryPipelineInput_PipelineIdentifier *smithy.Schema
-
-var GetTelemetryPipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryPipelineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTelemetryPipelineOutput_Pipeline *smithy.Schema
-
-var GetTelemetryRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTelemetryRuleForOrganizationInput_RuleIdentifier *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryRuleForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetTelemetryRuleForOrganizationOutput_RuleName *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput_RuleArn *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput_CreatedTimeStamp *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput_TelemetryRule *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput_HomeRegion *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput_IsReplicated *smithy.Schema
-
-var GetTelemetryRuleForOrganizationOutput_RegionStatuses *smithy.Schema
-
-var GetTelemetryRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryRuleInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTelemetryRuleInput_RuleIdentifier *smithy.Schema
-
-var GetTelemetryRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "GetTelemetryRuleOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetTelemetryRuleOutput_RuleName *smithy.Schema
-
-var GetTelemetryRuleOutput_RuleArn *smithy.Schema
-
-var GetTelemetryRuleOutput_CreatedTimeStamp *smithy.Schema
-
-var GetTelemetryRuleOutput_LastUpdateTimeStamp *smithy.Schema
-
-var GetTelemetryRuleOutput_TelemetryRule *smithy.Schema
-
-var GetTelemetryRuleOutput_HomeRegion *smithy.Schema
-
-var GetTelemetryRuleOutput_IsReplicated *smithy.Schema
-
-var GetTelemetryRuleOutput_RegionStatuses *smithy.Schema
-
-var ListCentralizationRulesForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListCentralizationRulesForOrganizationInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListCentralizationRulesForOrganizationInput_RuleNamePrefix *smithy.Schema
-
-var ListCentralizationRulesForOrganizationInput_AllRegions *smithy.Schema
-
-var ListCentralizationRulesForOrganizationInput_MaxResults *smithy.Schema
-
-var ListCentralizationRulesForOrganizationInput_NextToken *smithy.Schema
-
-var ListCentralizationRulesForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListCentralizationRulesForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries *smithy.Schema
-
-var ListCentralizationRulesForOrganizationOutput_NextToken *smithy.Schema
-
-var ListDatasetIntegrationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListDatasetIntegrationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetIntegrationsInput_MaxResults *smithy.Schema
-
-var ListDatasetIntegrationsInput_NextToken *smithy.Schema
-
-var ListDatasetIntegrationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListDatasetIntegrationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDatasetIntegrationsOutput_DatasetIntegrationSummaries *smithy.Schema
-
-var ListDatasetIntegrationsOutput_NextToken *smithy.Schema
-
-var ListResourceTelemetryForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetryForOrganizationInput",
-}, smithy.ShapeTypeStructure, 7)
-var ListResourceTelemetryForOrganizationInput_AccountIdentifiers *smithy.Schema
-
-var ListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix *smithy.Schema
-
-var ListResourceTelemetryForOrganizationInput_ResourceTypes *smithy.Schema
-
-var ListResourceTelemetryForOrganizationInput_TelemetryConfigurationState *smithy.Schema
-
-var ListResourceTelemetryForOrganizationInput_ResourceTags *smithy.Schema
-
-var ListResourceTelemetryForOrganizationInput_MaxResults *smithy.Schema
-
-var ListResourceTelemetryForOrganizationInput_NextToken *smithy.Schema
-
-var ListResourceTelemetryForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetryForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceTelemetryForOrganizationOutput_TelemetryConfigurations *smithy.Schema
-
-var ListResourceTelemetryForOrganizationOutput_NextToken *smithy.Schema
-
-var ListResourceTelemetryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetryInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListResourceTelemetryInput_ResourceIdentifierPrefix *smithy.Schema
-
-var ListResourceTelemetryInput_ResourceTypes *smithy.Schema
-
-var ListResourceTelemetryInput_TelemetryConfigurationState *smithy.Schema
-
-var ListResourceTelemetryInput_ResourceTags *smithy.Schema
-
-var ListResourceTelemetryInput_MaxResults *smithy.Schema
-
-var ListResourceTelemetryInput_NextToken *smithy.Schema
-
-var ListResourceTelemetryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListResourceTelemetryOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceTelemetryOutput_TelemetryConfigurations *smithy.Schema
-
-var ListResourceTelemetryOutput_NextToken *smithy.Schema
-
-var ListS3TableIntegrationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListS3TableIntegrationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListS3TableIntegrationsInput_MaxResults *smithy.Schema
-
-var ListS3TableIntegrationsInput_NextToken *smithy.Schema
-
-var ListS3TableIntegrationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListS3TableIntegrationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListS3TableIntegrationsOutput_IntegrationSummaries *smithy.Schema
-
-var ListS3TableIntegrationsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTelemetryPipelinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryPipelinesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTelemetryPipelinesInput_MaxResults *smithy.Schema
-
-var ListTelemetryPipelinesInput_NextToken *smithy.Schema
-
-var ListTelemetryPipelinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryPipelinesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTelemetryPipelinesOutput_PipelineSummaries *smithy.Schema
-
-var ListTelemetryPipelinesOutput_NextToken *smithy.Schema
-
-var ListTelemetryRulesForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRulesForOrganizationInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListTelemetryRulesForOrganizationInput_RuleNamePrefix *smithy.Schema
-
-var ListTelemetryRulesForOrganizationInput_SourceAccountIds *smithy.Schema
-
-var ListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds *smithy.Schema
-
-var ListTelemetryRulesForOrganizationInput_MaxResults *smithy.Schema
-
-var ListTelemetryRulesForOrganizationInput_NextToken *smithy.Schema
-
-var ListTelemetryRulesForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRulesForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries *smithy.Schema
-
-var ListTelemetryRulesForOrganizationOutput_NextToken *smithy.Schema
-
-var ListTelemetryRulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRulesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTelemetryRulesInput_RuleNamePrefix *smithy.Schema
-
-var ListTelemetryRulesInput_MaxResults *smithy.Schema
-
-var ListTelemetryRulesInput_NextToken *smithy.Schema
-
-var ListTelemetryRulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ListTelemetryRulesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTelemetryRulesOutput_TelemetryRuleSummaries *smithy.Schema
-
-var ListTelemetryRulesOutput_NextToken *smithy.Schema
-
-var StartTelemetryEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StartTelemetryEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 2)
-var StartTelemetryEnrichmentOutput_Status *smithy.Schema
-
-var StartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn *smithy.Schema
-
-var StartTelemetryEvaluationForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StartTelemetryEvaluationForOrganizationInput",
-}, smithy.ShapeTypeStructure, 2)
-var StartTelemetryEvaluationForOrganizationInput_Regions *smithy.Schema
-
-var StartTelemetryEvaluationForOrganizationInput_AllRegions *smithy.Schema
-
-var StartTelemetryEvaluationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StartTelemetryEvaluationInput",
-}, smithy.ShapeTypeStructure, 2)
-var StartTelemetryEvaluationInput_Regions *smithy.Schema
-
-var StartTelemetryEvaluationInput_AllRegions *smithy.Schema
-
-var StopTelemetryEnrichmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "StopTelemetryEnrichmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StopTelemetryEnrichmentOutput_Status *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceARN *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TestTelemetryPipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TestTelemetryPipelineInput",
-}, smithy.ShapeTypeStructure, 3)
-var TestTelemetryPipelineInput_Records *smithy.Schema
-
-var TestTelemetryPipelineInput_Configuration *smithy.Schema
-
-var TestTelemetryPipelineInput_SignalType *smithy.Schema
-
-var TestTelemetryPipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "TestTelemetryPipelineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var TestTelemetryPipelineOutput_Results *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceARN *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UpdateCentralizationRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateCentralizationRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCentralizationRuleForOrganizationInput_RuleIdentifier *smithy.Schema
-
-var UpdateCentralizationRuleForOrganizationInput_Rule *smithy.Schema
-
-var UpdateCentralizationRuleForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateCentralizationRuleForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCentralizationRuleForOrganizationOutput_RuleArn *smithy.Schema
-
-var UpdateDatasetIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateDatasetIntegrationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDatasetIntegrationInput_Arn *smithy.Schema
-
-var UpdateDatasetIntegrationInput_RoleArn *smithy.Schema
-
-var UpdateDatasetIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateDatasetIntegrationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDatasetIntegrationOutput_Arn *smithy.Schema
-
-var UpdateDatasetIntegrationOutput_RoleArn *smithy.Schema
-
-var UpdateDatasetIntegrationOutput_CreatedAt *smithy.Schema
-
-var UpdateDatasetIntegrationOutput_UpdatedAt *smithy.Schema
-
-var UpdateTelemetryPipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryPipelineInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateTelemetryPipelineInput_PipelineIdentifier *smithy.Schema
-
-var UpdateTelemetryPipelineInput_Configuration *smithy.Schema
-
-var UpdateTelemetryPipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryPipelineOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateTelemetryRuleForOrganizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryRuleForOrganizationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateTelemetryRuleForOrganizationInput_RuleIdentifier *smithy.Schema
-
-var UpdateTelemetryRuleForOrganizationInput_Rule *smithy.Schema
-
-var UpdateTelemetryRuleForOrganizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryRuleForOrganizationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTelemetryRuleForOrganizationOutput_RuleArn *smithy.Schema
-
-var UpdateTelemetryRuleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryRuleInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateTelemetryRuleInput_RuleIdentifier *smithy.Schema
-
-var UpdateTelemetryRuleInput_Rule *smithy.Schema
-
-var UpdateTelemetryRuleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "UpdateTelemetryRuleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTelemetryRuleOutput_RuleArn *smithy.Schema
-
-var ValidateTelemetryPipelineConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ValidateTelemetryPipelineConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var ValidateTelemetryPipelineConfigurationInput_Configuration *smithy.Schema
-
-var ValidateTelemetryPipelineConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.observabilityadmin",
-	Name:      "ValidateTelemetryPipelineConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ValidateTelemetryPipelineConfigurationOutput_Errors *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	AccessDeniedException_amznErrorType = AccessDeniedException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	_AccountIdentifiers_member = _AccountIdentifiers.AddMember("member", _AccountIdentifier)
-
-	Action_ALLOW = Action.AddMember("ALLOW", smithyprelude.Unit)
-
-	Action_BLOCK = Action.AddMember("BLOCK", smithyprelude.Unit)
-
-	Action_COUNT = Action.AddMember("COUNT", smithyprelude.Unit)
-
-	Action_CAPTCHA = Action.AddMember("CAPTCHA", smithyprelude.Unit)
-
-	Action_CHALLENGE = Action.AddMember("CHALLENGE", smithyprelude.Unit)
-
-	Action_EXCLUDED_AS_COUNT = Action.AddMember("EXCLUDED_AS_COUNT", smithyprelude.Unit)
-
-	ActionCondition_Action = ActionCondition.AddMember("Action", Action)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	AdvancedFieldSelector_Field = AdvancedFieldSelector.AddMember("Field", smithyprelude.String)
-
-	AdvancedFieldSelector_Equals = AdvancedFieldSelector.AddMember("Equals", _StringList)
-
-	AdvancedFieldSelector_StartsWith = AdvancedFieldSelector.AddMember("StartsWith", _StringList)
-
-	AdvancedFieldSelector_EndsWith = AdvancedFieldSelector.AddMember("EndsWith", _StringList)
-
-	AdvancedFieldSelector_NotEquals = AdvancedFieldSelector.AddMember("NotEquals", _StringList)
-
-	AdvancedFieldSelector_NotStartsWith = AdvancedFieldSelector.AddMember("NotStartsWith", _StringList)
-
-	AdvancedFieldSelector_NotEndsWith = AdvancedFieldSelector.AddMember("NotEndsWith", _StringList)
-
-	_FieldSelectors_member = _FieldSelectors.AddMember("member", AdvancedFieldSelector)
-
-	AdvancedEventSelector_Name = AdvancedEventSelector.AddMember("Name", smithyprelude.String)
-
-	AdvancedEventSelector_FieldSelectors = AdvancedEventSelector.AddMember("FieldSelectors", _FieldSelectors)
-
-	_AdvancedEventSelectors_member = _AdvancedEventSelectors.AddMember("member", AdvancedEventSelector)
-
-	CentralizationFailureReason_TRUSTED_ACCESS_NOT_ENABLED = CentralizationFailureReason.AddMember("TRUSTED_ACCESS_NOT_ENABLED", smithyprelude.Unit)
-
-	CentralizationFailureReason_DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION = CentralizationFailureReason.AddMember("DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION", smithyprelude.Unit)
-
-	CentralizationFailureReason_INTERNAL_SERVER_ERROR = CentralizationFailureReason.AddMember("INTERNAL_SERVER_ERROR", smithyprelude.Unit)
-
-	_Regions_member = _Regions.AddMember("member", _Region)
-
-	EncryptedLogGroupStrategy_ALLOW = EncryptedLogGroupStrategy.AddMember("ALLOW", smithyprelude.Unit)
-
-	EncryptedLogGroupStrategy_SKIP = EncryptedLogGroupStrategy.AddMember("SKIP", smithyprelude.Unit)
-
-	SourceLogsConfiguration_LogGroupSelectionCriteria = SourceLogsConfiguration.AddMember("LogGroupSelectionCriteria", _LogsFilterString)
-
-	SourceLogsConfiguration_DataSourceSelectionCriteria = SourceLogsConfiguration.AddMember("DataSourceSelectionCriteria", _DataSourceFilterString)
-
-	SourceLogsConfiguration_EncryptedLogGroupStrategy = SourceLogsConfiguration.AddMember("EncryptedLogGroupStrategy", EncryptedLogGroupStrategy)
-
-	SourceMetricsConfiguration_MetricsSelectionCriteria = SourceMetricsConfiguration.AddMember("MetricsSelectionCriteria", _MetricsFilterString)
-
-	CentralizationRuleSource_Regions = CentralizationRuleSource.AddMember("Regions", _Regions)
-
-	CentralizationRuleSource_Scope = CentralizationRuleSource.AddMember("Scope", _SourceFilterString)
-
-	CentralizationRuleSource_SourceLogsConfiguration = CentralizationRuleSource.AddMember("SourceLogsConfiguration", SourceLogsConfiguration)
-
-	CentralizationRuleSource_SourceMetricsConfiguration = CentralizationRuleSource.AddMember("SourceMetricsConfiguration", SourceMetricsConfiguration)
-
-	CentralizationRuleSource_SourceContextGraphConfiguration = CentralizationRuleSource.AddMember("SourceContextGraphConfiguration", SourceContextGraphConfiguration)
-
-	EncryptionStrategy_CUSTOMER_MANAGED = EncryptionStrategy.AddMember("CUSTOMER_MANAGED", smithyprelude.Unit)
-
-	EncryptionStrategy_AWS_OWNED = EncryptionStrategy.AddMember("AWS_OWNED", smithyprelude.Unit)
-
-	EncryptionConflictResolutionStrategy_ALLOW = EncryptionConflictResolutionStrategy.AddMember("ALLOW", smithyprelude.Unit)
-
-	EncryptionConflictResolutionStrategy_SKIP = EncryptionConflictResolutionStrategy.AddMember("SKIP", smithyprelude.Unit)
-
-	EncryptionScope_ENCRYPTED_SOURCE_ONLY = EncryptionScope.AddMember("ENCRYPTED_SOURCE_ONLY", smithyprelude.Unit)
-
-	EncryptionScope_NEW_DESTINATION_LOG_GROUPS = EncryptionScope.AddMember("NEW_DESTINATION_LOG_GROUPS", smithyprelude.Unit)
-
-	LogsEncryptionConfiguration_EncryptionStrategy = LogsEncryptionConfiguration.AddMember("EncryptionStrategy", EncryptionStrategy)
-
-	LogsEncryptionConfiguration_KmsKeyArn = LogsEncryptionConfiguration.AddMember("KmsKeyArn", _ResourceArn)
-
-	LogsEncryptionConfiguration_EncryptionConflictResolutionStrategy = LogsEncryptionConfiguration.AddMember("EncryptionConflictResolutionStrategy", EncryptionConflictResolutionStrategy)
-
-	LogsEncryptionConfiguration_EncryptionScope = LogsEncryptionConfiguration.AddMember("EncryptionScope", EncryptionScope)
-
-	LogsBackupConfiguration_Region = LogsBackupConfiguration.AddMember("Region", _Region)
-
-	LogsBackupConfiguration_KmsKeyArn = LogsBackupConfiguration.AddMember("KmsKeyArn", _ResourceArn)
-
-	LogGroupNameConfiguration_LogGroupNamePattern = LogGroupNameConfiguration.AddMember("LogGroupNamePattern", _LogGroupNamePattern)
-
-	TagConflictResolutionStrategy_IN_SYNC = TagConflictResolutionStrategy.AddMember("IN_SYNC", smithyprelude.Unit)
-
-	TagConflictResolutionStrategy_ADD_ONLY = TagConflictResolutionStrategy.AddMember("ADD_ONLY", smithyprelude.Unit)
-
-	TagConflictResolutionStrategy_UPDATE_SYNC = TagConflictResolutionStrategy.AddMember("UPDATE_SYNC", smithyprelude.Unit)
-
-	TagPropagationConfiguration_DestinationRoleArn = TagPropagationConfiguration.AddMember("DestinationRoleArn", _IamRoleArn)
-
-	TagPropagationConfiguration_TagConflictResolutionStrategy = TagPropagationConfiguration.AddMember("TagConflictResolutionStrategy", TagConflictResolutionStrategy)
-
-	DeletionProtection_ENABLED = DeletionProtection.AddMember("ENABLED", smithyprelude.Unit)
-
-	DestinationLogsConfiguration_LogsEncryptionConfiguration = DestinationLogsConfiguration.AddMember("LogsEncryptionConfiguration", LogsEncryptionConfiguration)
-
-	DestinationLogsConfiguration_BackupConfiguration = DestinationLogsConfiguration.AddMember("BackupConfiguration", LogsBackupConfiguration)
-
-	DestinationLogsConfiguration_LogGroupNameConfiguration = DestinationLogsConfiguration.AddMember("LogGroupNameConfiguration", LogGroupNameConfiguration)
-
-	DestinationLogsConfiguration_TagPropagationConfiguration = DestinationLogsConfiguration.AddMember("TagPropagationConfiguration", TagPropagationConfiguration)
-
-	DestinationLogsConfiguration_LogGroupDeletionProtection = DestinationLogsConfiguration.AddMember("LogGroupDeletionProtection", DeletionProtection)
-
-	MetricsBackupConfiguration_Region = MetricsBackupConfiguration.AddMember("Region", _Region)
-
-	DestinationMetricsConfiguration_BackupConfiguration = DestinationMetricsConfiguration.AddMember("BackupConfiguration", MetricsBackupConfiguration)
-
-	CentralizationRuleDestination_Region = CentralizationRuleDestination.AddMember("Region", _Region)
-
-	CentralizationRuleDestination_Account = CentralizationRuleDestination.AddMember("Account", _AccountIdentifier)
-
-	CentralizationRuleDestination_DestinationLogsConfiguration = CentralizationRuleDestination.AddMember("DestinationLogsConfiguration", DestinationLogsConfiguration)
-
-	CentralizationRuleDestination_DestinationMetricsConfiguration = CentralizationRuleDestination.AddMember("DestinationMetricsConfiguration", DestinationMetricsConfiguration)
-
-	CentralizationRule_Source = CentralizationRule.AddMember("Source", CentralizationRuleSource)
-
-	CentralizationRule_Destination = CentralizationRule.AddMember("Destination", CentralizationRuleDestination)
-
-	RuleHealth_HEALTHY = RuleHealth.AddMember("HEALTHY", smithyprelude.Unit)
-
-	RuleHealth_UNHEALTHY = RuleHealth.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	RuleHealth_PROVISIONING = RuleHealth.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	TagPropagationStatus_HEALTHY = TagPropagationStatus.AddMember("HEALTHY", smithyprelude.Unit)
-
-	TagPropagationStatus_UNHEALTHY = TagPropagationStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	TagPropagationFailureReason_ROLE_NOT_ASSUMABLE = TagPropagationFailureReason.AddMember("ROLE_NOT_ASSUMABLE", smithyprelude.Unit)
-
-	TagPropagationFailureReason_ROLE_LACKS_PERMISSIONS = TagPropagationFailureReason.AddMember("ROLE_LACKS_PERMISSIONS", smithyprelude.Unit)
-
-	ContextGraphStatus_HEALTHY = ContextGraphStatus.AddMember("HEALTHY", smithyprelude.Unit)
-
-	ContextGraphStatus_UNHEALTHY = ContextGraphStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	ContextGraphStatus_PROVISIONING = ContextGraphStatus.AddMember("PROVISIONING", smithyprelude.Unit)
-
-	CentralizationRuleSummary_RuleName = CentralizationRuleSummary.AddMember("RuleName", _RuleName)
-
-	CentralizationRuleSummary_RuleArn = CentralizationRuleSummary.AddMember("RuleArn", _ResourceArn)
-
-	CentralizationRuleSummary_CreatorAccountId = CentralizationRuleSummary.AddMember("CreatorAccountId", smithyprelude.String)
-
-	CentralizationRuleSummary_CreatedTimeStamp = CentralizationRuleSummary.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	CentralizationRuleSummary_CreatedRegion = CentralizationRuleSummary.AddMember("CreatedRegion", _Region)
-
-	CentralizationRuleSummary_LastUpdateTimeStamp = CentralizationRuleSummary.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	CentralizationRuleSummary_RuleHealth = CentralizationRuleSummary.AddMember("RuleHealth", RuleHealth)
-
-	CentralizationRuleSummary_FailureReason = CentralizationRuleSummary.AddMember("FailureReason", CentralizationFailureReason)
-
-	CentralizationRuleSummary_TagPropagationStatus = CentralizationRuleSummary.AddMember("TagPropagationStatus", TagPropagationStatus)
-
-	CentralizationRuleSummary_TagPropagationFailureReason = CentralizationRuleSummary.AddMember("TagPropagationFailureReason", TagPropagationFailureReason)
-
-	CentralizationRuleSummary_ContextGraphStatus = CentralizationRuleSummary.AddMember("ContextGraphStatus", ContextGraphStatus)
-
-	CentralizationRuleSummary_DestinationAccountId = CentralizationRuleSummary.AddMember("DestinationAccountId", smithyprelude.String)
-
-	CentralizationRuleSummary_DestinationRegion = CentralizationRuleSummary.AddMember("DestinationRegion", _Region)
-
-	_CentralizationRuleSummaries_member = _CentralizationRuleSummaries.AddMember("member", CentralizationRuleSummary)
-
-	CloudtrailParameters_AdvancedEventSelectors = CloudtrailParameters.AddMember("AdvancedEventSelectors", _AdvancedEventSelectors)
-
-	LabelNameCondition_LabelName = LabelNameCondition.AddMember("LabelName", smithyprelude.String)
-
-	Condition_ActionCondition = Condition.AddMember("ActionCondition", ActionCondition)
-
-	Condition_LabelNameCondition = Condition.AddMember("LabelNameCondition", LabelNameCondition)
-
-	_Conditions_member = _Conditions.AddMember("member", Condition)
-
-	Source_Type = Source.AddMember("Type", smithyprelude.String)
-
-	_Sources_member = _Sources.AddMember("member", Source)
-
-	DataSource_Name = DataSource.AddMember("Name", smithyprelude.String)
-
-	DataSource_Type = DataSource.AddMember("Type", smithyprelude.String)
-
-	_DataSources_member = _DataSources.AddMember("member", DataSource)
-
-	_Processors_member = _Processors.AddMember("member", smithyprelude.String)
-
-	_Sinks_member = _Sinks.AddMember("member", smithyprelude.String)
-
-	ConfigurationSummary_Sources = ConfigurationSummary.AddMember("Sources", _Sources)
-
-	ConfigurationSummary_DataSources = ConfigurationSummary.AddMember("DataSources", _DataSources)
-
-	ConfigurationSummary_Processors = ConfigurationSummary.AddMember("Processors", _Processors)
-
-	ConfigurationSummary_ProcessorCount = ConfigurationSummary.AddMember("ProcessorCount", smithyprelude.Integer)
-
-	ConfigurationSummary_Sinks = ConfigurationSummary.AddMember("Sinks", _Sinks)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_ResourceId = ConflictException.AddMember("ResourceId", smithyprelude.String)
-
-	ConflictException_ResourceType = ConflictException.AddMember("ResourceType", smithyprelude.String)
-
-	DatasetIntegrationSummary_Arn = DatasetIntegrationSummary.AddMember("Arn", _ResourceArn)
-
-	DatasetIntegrationSummary_RoleArn = DatasetIntegrationSummary.AddMember("RoleArn", _ResourceArn)
-
-	DatasetIntegrationSummary_CreatedAt = DatasetIntegrationSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	DatasetIntegrationSummary_UpdatedAt = DatasetIntegrationSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_DatasetIntegrationSummaries_member = _DatasetIntegrationSummaries.AddMember("member", DatasetIntegrationSummary)
-
-	DestinationType_CLOUDWATCH_LOGS = DestinationType.AddMember("CLOUDWATCH_LOGS", smithyprelude.Unit)
-
-	OutputFormat_PLAIN = OutputFormat.AddMember("PLAIN", smithyprelude.Unit)
-
-	OutputFormat_JSON = OutputFormat.AddMember("JSON", smithyprelude.Unit)
-
-	ELBLoadBalancerLoggingParameters_OutputFormat = ELBLoadBalancerLoggingParameters.AddMember("OutputFormat", OutputFormat)
-
-	ELBLoadBalancerLoggingParameters_FieldDelimiter = ELBLoadBalancerLoggingParameters.AddMember("FieldDelimiter", smithyprelude.String)
-
-	SSEAlgorithm_SSE_KMS = SSEAlgorithm.AddMember("SSE_KMS", smithyprelude.Unit)
-
-	SSEAlgorithm_SSE_S3 = SSEAlgorithm.AddMember("SSE_S3", smithyprelude.Unit)
-
-	Encryption_SseAlgorithm = Encryption.AddMember("SseAlgorithm", SSEAlgorithm)
-
-	Encryption_KmsKeyArn = Encryption.AddMember("KmsKeyArn", _ResourceArn)
-
-	_FieldMap_key = _FieldMap.AddMember("key", smithyprelude.String)
-
-	_FieldMap_value = _FieldMap.AddMember("value", smithyprelude.String)
-
-	SingleHeader_Name = SingleHeader.AddMember("Name", smithyprelude.String)
-
-	FieldToMatch_SingleHeader = FieldToMatch.AddMember("SingleHeader", SingleHeader)
-
-	FieldToMatch_UriPath = FieldToMatch.AddMember("UriPath", smithyprelude.String)
-
-	FieldToMatch_QueryString = FieldToMatch.AddMember("QueryString", smithyprelude.String)
-
-	FieldToMatch_Method = FieldToMatch.AddMember("Method", smithyprelude.String)
-
-	FilterBehavior_KEEP = FilterBehavior.AddMember("KEEP", smithyprelude.Unit)
-
-	FilterBehavior_DROP = FilterBehavior.AddMember("DROP", smithyprelude.Unit)
-
-	FilterRequirement_MEETS_ALL = FilterRequirement.AddMember("MEETS_ALL", smithyprelude.Unit)
-
-	FilterRequirement_MEETS_ANY = FilterRequirement.AddMember("MEETS_ANY", smithyprelude.Unit)
-
-	Filter_Behavior = Filter.AddMember("Behavior", FilterBehavior)
-
-	Filter_Requirement = Filter.AddMember("Requirement", FilterRequirement)
-
-	Filter_Conditions = Filter.AddMember("Conditions", _Conditions)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	IntegrationStatus_ACTIVE = IntegrationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	IntegrationStatus_DELETING = IntegrationStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	IntegrationSummary_Arn = IntegrationSummary.AddMember("Arn", _ResourceArn)
-
-	IntegrationSummary_Status = IntegrationSummary.AddMember("Status", IntegrationStatus)
-
-	_IntegrationSummaries_member = _IntegrationSummaries.AddMember("member", IntegrationSummary)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	InternalServerException_amznErrorType = InternalServerException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	InvalidStateException_Message = InvalidStateException.AddMember("Message", smithyprelude.String)
-
-	LogType_APPLICATION = LogType.AddMember("APPLICATION", smithyprelude.Unit)
-
-	LogType_USAGE = LogType.AddMember("USAGE", smithyprelude.Unit)
-
-	LogType_SECURITY_FINDING = LogType.AddMember("SECURITY_FINDING", smithyprelude.Unit)
-
-	LogType_ACCESS = LogType.AddMember("ACCESS", smithyprelude.Unit)
-
-	LogType_CONNECTION = LogType.AddMember("CONNECTION", smithyprelude.Unit)
-
-	LogType_S3_SERVER_ACCESS = LogType.AddMember("S3_SERVER_ACCESS", smithyprelude.Unit)
-
-	LogType_ALB_ACCESS = LogType.AddMember("ALB_ACCESS", smithyprelude.Unit)
-
-	LogType_ALB_CONNECTION = LogType.AddMember("ALB_CONNECTION", smithyprelude.Unit)
-
-	LogType_ALB_HEALTH_CHECK = LogType.AddMember("ALB_HEALTH_CHECK", smithyprelude.Unit)
-
-	_LogTypes_member = _LogTypes.AddMember("member", LogType)
-
-	LogDeliveryParameters_LogTypes = LogDeliveryParameters.AddMember("LogTypes", _LogTypes)
-
-	LoggingFilter_Filters = LoggingFilter.AddMember("Filters", _Filters)
-
-	LoggingFilter_DefaultBehavior = LoggingFilter.AddMember("DefaultBehavior", FilterBehavior)
-
-	MskEnhancedMonitoringLevel_DEFAULT = MskEnhancedMonitoringLevel.AddMember("DEFAULT", smithyprelude.Unit)
-
-	MskEnhancedMonitoringLevel_PER_BROKER = MskEnhancedMonitoringLevel.AddMember("PER_BROKER", smithyprelude.Unit)
-
-	MskEnhancedMonitoringLevel_PER_TOPIC_PER_BROKER = MskEnhancedMonitoringLevel.AddMember("PER_TOPIC_PER_BROKER", smithyprelude.Unit)
-
-	MskEnhancedMonitoringLevel_PER_TOPIC_PER_PARTITION = MskEnhancedMonitoringLevel.AddMember("PER_TOPIC_PER_PARTITION", smithyprelude.Unit)
-
-	MskMonitoringParameters_EnhancedMonitoring = MskMonitoringParameters.AddMember("EnhancedMonitoring", MskEnhancedMonitoringLevel)
-
-	_OrganizationUnitIdentifiers_member = _OrganizationUnitIdentifiers.AddMember("member", _OrganizationUnitIdentifier)
-
-	RecordFormat_STRING = RecordFormat.AddMember("STRING", smithyprelude.Unit)
-
-	RecordFormat_JSON = RecordFormat.AddMember("JSON", smithyprelude.Unit)
-
-	Record_Data = Record.AddMember("Data", smithyprelude.String)
-
-	Record_Type = Record.AddMember("Type", RecordFormat)
-
-	PipelineOutputError_Message = PipelineOutputError.AddMember("Message", smithyprelude.String)
-
-	PipelineOutput_Record = PipelineOutput.AddMember("Record", Record)
-
-	PipelineOutput_Error = PipelineOutput.AddMember("Error", PipelineOutputError)
-
-	_PipelineOutputs_member = _PipelineOutputs.AddMember("member", PipelineOutput)
-
-	_Records_member = _Records.AddMember("member", Record)
-
-	_RedactedFields_member = _RedactedFields.AddMember("member", FieldToMatch)
-
-	RegionStatus_Region = RegionStatus.AddMember("Region", _Region)
-
-	RegionStatus_Status = RegionStatus.AddMember("Status", smithyprelude.String)
-
-	RegionStatus_FailureReason = RegionStatus.AddMember("FailureReason", smithyprelude.String)
-
-	RegionStatus_RuleArn = RegionStatus.AddMember("RuleArn", _ResourceArn)
-
-	_RegionStatuses_member = _RegionStatuses.AddMember("member", RegionStatus)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", smithyprelude.String)
-
-	ResourceType_AWS_EC2_INSTANCE = ResourceType.AddMember("AWS_EC2_INSTANCE", smithyprelude.Unit)
-
-	ResourceType_AWS_EC2_VPC = ResourceType.AddMember("AWS_EC2_VPC", smithyprelude.Unit)
-
-	ResourceType_AWS_LAMDBA_FUNCTION = ResourceType.AddMember("AWS_LAMDBA_FUNCTION", smithyprelude.Unit)
-
-	ResourceType_AWS_CLOUDTRAIL = ResourceType.AddMember("AWS_CLOUDTRAIL", smithyprelude.Unit)
-
-	ResourceType_AWS_EKS_CLUSTER = ResourceType.AddMember("AWS_EKS_CLUSTER", smithyprelude.Unit)
-
-	ResourceType_AWS_WAF_V2_WEB_ACL = ResourceType.AddMember("AWS_WAF_V2_WEB_ACL", smithyprelude.Unit)
-
-	ResourceType_AWS_ELB_LOADBALANCER = ResourceType.AddMember("AWS_ELB_LOADBALANCER", smithyprelude.Unit)
-
-	ResourceType_AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT = ResourceType.AddMember("AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_AGENTCORE_RUNTIME = ResourceType.AddMember("AWS_BEDROCK_AGENTCORE_RUNTIME", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_AGENTCORE_BROWSER = ResourceType.AddMember("AWS_BEDROCK_AGENTCORE_BROWSER", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER = ResourceType.AddMember("AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_AGENTCORE_GATEWAY = ResourceType.AddMember("AWS_BEDROCK_AGENTCORE_GATEWAY", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_AGENTCORE_MEMORY = ResourceType.AddMember("AWS_BEDROCK_AGENTCORE_MEMORY", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY = ResourceType.AddMember("AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER = ResourceType.AddMember("AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER", smithyprelude.Unit)
-
-	ResourceType_AWS_SECURITY_HUB = ResourceType.AddMember("AWS_SECURITY_HUB", smithyprelude.Unit)
-
-	ResourceType_AWS_CLOUDFRONT_DISTRIBUTION = ResourceType.AddMember("AWS_CLOUDFRONT_DISTRIBUTION", smithyprelude.Unit)
-
-	ResourceType_AWS_SECURITY_HUB_HUBV2 = ResourceType.AddMember("AWS_SECURITY_HUB_HUBV2", smithyprelude.Unit)
-
-	ResourceType_AWS_OTEL_ENRICHMENT = ResourceType.AddMember("AWS_OTEL_ENRICHMENT", smithyprelude.Unit)
-
-	ResourceType_AWS_MSK_CLUSTER = ResourceType.AddMember("AWS_MSK_CLUSTER", smithyprelude.Unit)
-
-	ResourceType_AWS_S3_BUCKET = ResourceType.AddMember("AWS_S3_BUCKET", smithyprelude.Unit)
-
-	ResourceType_AWS_BEDROCK_KNOWLEDGEBASE = ResourceType.AddMember("AWS_BEDROCK_KNOWLEDGEBASE", smithyprelude.Unit)
-
-	ResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG = ResourceType.AddMember("AWS_XRAY_TRANSACTION_SEARCH_CONFIG", smithyprelude.Unit)
-
-	_ResourceTypes_member = _ResourceTypes.AddMember("member", ResourceType)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceId = ServiceQuotaExceededException.AddMember("ResourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceType = ServiceQuotaExceededException.AddMember("ResourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_ServiceCode = ServiceQuotaExceededException.AddMember("ServiceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_QuotaCode = ServiceQuotaExceededException.AddMember("QuotaCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_amznErrorType = ServiceQuotaExceededException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	SignalType_LOG = SignalType.AddMember("LOG", smithyprelude.Unit)
-
-	SignalType_METRIC = SignalType.AddMember("METRIC", smithyprelude.Unit)
-
-	Status_NOT_STARTED = Status.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	Status_STARTING = Status.AddMember("STARTING", smithyprelude.Unit)
-
-	Status_FAILED_START = Status.AddMember("FAILED_START", smithyprelude.Unit)
-
-	Status_RUNNING = Status.AddMember("RUNNING", smithyprelude.Unit)
-
-	Status_STOPPING = Status.AddMember("STOPPING", smithyprelude.Unit)
-
-	Status_FAILED_STOP = Status.AddMember("FAILED_STOP", smithyprelude.Unit)
-
-	Status_STOPPED = Status.AddMember("STOPPED", smithyprelude.Unit)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMapInput_key = _TagMapInput.AddMember("key", _TagKey)
-
-	_TagMapInput_value = _TagMapInput.AddMember("value", _TagValue)
-
-	_TagMapOutput_key = _TagMapOutput.AddMember("key", smithyprelude.String)
-
-	_TagMapOutput_value = _TagMapOutput.AddMember("value", smithyprelude.String)
-
-	TelemetryType_LOGS = TelemetryType.AddMember("LOGS", smithyprelude.Unit)
-
-	TelemetryType_METRICS = TelemetryType.AddMember("METRICS", smithyprelude.Unit)
-
-	TelemetryType_TRACES = TelemetryType.AddMember("TRACES", smithyprelude.Unit)
-
-	TelemetryType_INSIGHTS = TelemetryType.AddMember("INSIGHTS", smithyprelude.Unit)
-
-	TelemetryState_ENABLED = TelemetryState.AddMember("ENABLED", smithyprelude.Unit)
-
-	TelemetryState_DISABLED = TelemetryState.AddMember("DISABLED", smithyprelude.Unit)
-
-	TelemetryState_NOT_APPLICABLE = TelemetryState.AddMember("NOT_APPLICABLE", smithyprelude.Unit)
-
-	_TelemetryConfigurationState_key = _TelemetryConfigurationState.AddMember("key", TelemetryType)
-
-	_TelemetryConfigurationState_value = _TelemetryConfigurationState.AddMember("value", TelemetryState)
-
-	TelemetrySourceType_VPC_FLOW_LOGS = TelemetrySourceType.AddMember("VPC_FLOW_LOGS", smithyprelude.Unit)
-
-	TelemetrySourceType_ROUTE53_RESOLVER_QUERY_LOGS = TelemetrySourceType.AddMember("ROUTE53_RESOLVER_QUERY_LOGS", smithyprelude.Unit)
-
-	TelemetrySourceType_EKS_AUDIT_LOGS = TelemetrySourceType.AddMember("EKS_AUDIT_LOGS", smithyprelude.Unit)
-
-	TelemetrySourceType_EKS_AUTHENTICATOR_LOGS = TelemetrySourceType.AddMember("EKS_AUTHENTICATOR_LOGS", smithyprelude.Unit)
-
-	TelemetrySourceType_EKS_CONTROLLER_MANAGER_LOGS = TelemetrySourceType.AddMember("EKS_CONTROLLER_MANAGER_LOGS", smithyprelude.Unit)
-
-	TelemetrySourceType_EKS_SCHEDULER_LOGS = TelemetrySourceType.AddMember("EKS_SCHEDULER_LOGS", smithyprelude.Unit)
-
-	TelemetrySourceType_EKS_API_LOGS = TelemetrySourceType.AddMember("EKS_API_LOGS", smithyprelude.Unit)
-
-	TelemetryConfiguration_AccountIdentifier = TelemetryConfiguration.AddMember("AccountIdentifier", _AccountIdentifier)
-
-	TelemetryConfiguration_TelemetryConfigurationState = TelemetryConfiguration.AddMember("TelemetryConfigurationState", _TelemetryConfigurationState)
-
-	TelemetryConfiguration_ResourceType = TelemetryConfiguration.AddMember("ResourceType", ResourceType)
-
-	TelemetryConfiguration_ResourceIdentifier = TelemetryConfiguration.AddMember("ResourceIdentifier", _ResourceIdentifier)
-
-	TelemetryConfiguration_ResourceTags = TelemetryConfiguration.AddMember("ResourceTags", _TagMapOutput)
-
-	TelemetryConfiguration_LastUpdateTimeStamp = TelemetryConfiguration.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	TelemetryConfiguration_TelemetrySourceType = TelemetryConfiguration.AddMember("TelemetrySourceType", TelemetrySourceType)
-
-	_TelemetryConfigurations_member = _TelemetryConfigurations.AddMember("member", TelemetryConfiguration)
-
-	VPCFlowLogParameters_LogFormat = VPCFlowLogParameters.AddMember("LogFormat", smithyprelude.String)
-
-	VPCFlowLogParameters_TrafficType = VPCFlowLogParameters.AddMember("TrafficType", smithyprelude.String)
-
-	VPCFlowLogParameters_MaxAggregationInterval = VPCFlowLogParameters.AddMember("MaxAggregationInterval", smithyprelude.Integer)
-
-	WAFLogType_WAF_LOGS = WAFLogType.AddMember("WAF_LOGS", smithyprelude.Unit)
-
-	WAFLoggingParameters_RedactedFields = WAFLoggingParameters.AddMember("RedactedFields", _RedactedFields)
-
-	WAFLoggingParameters_LoggingFilter = WAFLoggingParameters.AddMember("LoggingFilter", LoggingFilter)
-
-	WAFLoggingParameters_LogType = WAFLoggingParameters.AddMember("LogType", WAFLogType)
-
-	TelemetryDestinationConfiguration_DestinationType = TelemetryDestinationConfiguration.AddMember("DestinationType", DestinationType)
-
-	TelemetryDestinationConfiguration_DestinationPattern = TelemetryDestinationConfiguration.AddMember("DestinationPattern", smithyprelude.String)
-
-	TelemetryDestinationConfiguration_RetentionInDays = TelemetryDestinationConfiguration.AddMember("RetentionInDays", _RetentionPeriodInDays)
-
-	TelemetryDestinationConfiguration_VPCFlowLogParameters = TelemetryDestinationConfiguration.AddMember("VPCFlowLogParameters", VPCFlowLogParameters)
-
-	TelemetryDestinationConfiguration_CloudtrailParameters = TelemetryDestinationConfiguration.AddMember("CloudtrailParameters", CloudtrailParameters)
-
-	TelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters = TelemetryDestinationConfiguration.AddMember("ELBLoadBalancerLoggingParameters", ELBLoadBalancerLoggingParameters)
-
-	TelemetryDestinationConfiguration_WAFLoggingParameters = TelemetryDestinationConfiguration.AddMember("WAFLoggingParameters", WAFLoggingParameters)
-
-	TelemetryDestinationConfiguration_LogDeliveryParameters = TelemetryDestinationConfiguration.AddMember("LogDeliveryParameters", LogDeliveryParameters)
-
-	TelemetryDestinationConfiguration_MskMonitoringParameters = TelemetryDestinationConfiguration.AddMember("MskMonitoringParameters", MskMonitoringParameters)
-
-	TelemetryDestinationConfiguration_KmsKeyArn = TelemetryDestinationConfiguration.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	TelemetryEnrichmentStatus_RUNNING = TelemetryEnrichmentStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	TelemetryEnrichmentStatus_STOPPED = TelemetryEnrichmentStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	TelemetryEnrichmentStatus_IMPAIRED = TelemetryEnrichmentStatus.AddMember("IMPAIRED", smithyprelude.Unit)
-
-	TelemetryPipelineConfiguration_Body = TelemetryPipelineConfiguration.AddMember("Body", _TelemetryPipelineConfigurationBody)
-
-	TelemetryPipelineStatus_CREATING = TelemetryPipelineStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	TelemetryPipelineStatus_ACTIVE = TelemetryPipelineStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TelemetryPipelineStatus_UPDATING = TelemetryPipelineStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	TelemetryPipelineStatus_DELETING = TelemetryPipelineStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	TelemetryPipelineStatus_CREATE_FAILED = TelemetryPipelineStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	TelemetryPipelineStatus_UPDATE_FAILED = TelemetryPipelineStatus.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	TelemetryPipelineStatusReason_Description = TelemetryPipelineStatusReason.AddMember("Description", smithyprelude.String)
-
-	TelemetryPipeline_CreatedTimeStamp = TelemetryPipeline.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	TelemetryPipeline_LastUpdateTimeStamp = TelemetryPipeline.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	TelemetryPipeline_Arn = TelemetryPipeline.AddMember("Arn", _ResourceArn)
-
-	TelemetryPipeline_Name = TelemetryPipeline.AddMember("Name", _TelemetryPipelineName)
-
-	TelemetryPipeline_Configuration = TelemetryPipeline.AddMember("Configuration", TelemetryPipelineConfiguration)
-
-	TelemetryPipeline_Status = TelemetryPipeline.AddMember("Status", TelemetryPipelineStatus)
-
-	TelemetryPipeline_StatusReason = TelemetryPipeline.AddMember("StatusReason", TelemetryPipelineStatusReason)
-
-	TelemetryPipeline_Tags = TelemetryPipeline.AddMember("Tags", _TagMapOutput)
-
-	TelemetryPipelineSummary_CreatedTimeStamp = TelemetryPipelineSummary.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	TelemetryPipelineSummary_LastUpdateTimeStamp = TelemetryPipelineSummary.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	TelemetryPipelineSummary_Arn = TelemetryPipelineSummary.AddMember("Arn", _ResourceArn)
-
-	TelemetryPipelineSummary_Name = TelemetryPipelineSummary.AddMember("Name", _TelemetryPipelineName)
-
-	TelemetryPipelineSummary_Status = TelemetryPipelineSummary.AddMember("Status", TelemetryPipelineStatus)
-
-	TelemetryPipelineSummary_Tags = TelemetryPipelineSummary.AddMember("Tags", _TagMapOutput)
-
-	TelemetryPipelineSummary_ConfigurationSummary = TelemetryPipelineSummary.AddMember("ConfigurationSummary", ConfigurationSummary)
-
-	_TelemetryPipelineSummaries_member = _TelemetryPipelineSummaries.AddMember("member", TelemetryPipelineSummary)
-
-	_TelemetrySourceTypes_member = _TelemetrySourceTypes.AddMember("member", TelemetrySourceType)
-
-	TelemetryRule_ResourceType = TelemetryRule.AddMember("ResourceType", ResourceType)
-
-	TelemetryRule_TelemetryType = TelemetryRule.AddMember("TelemetryType", TelemetryType)
-
-	TelemetryRule_TelemetrySourceTypes = TelemetryRule.AddMember("TelemetrySourceTypes", _TelemetrySourceTypes)
-
-	TelemetryRule_DestinationConfiguration = TelemetryRule.AddMember("DestinationConfiguration", TelemetryDestinationConfiguration)
-
-	TelemetryRule_Scope = TelemetryRule.AddMember("Scope", smithyprelude.String)
-
-	TelemetryRule_SelectionCriteria = TelemetryRule.AddMember("SelectionCriteria", smithyprelude.String)
-
-	TelemetryRule_AllowFieldUpdates = TelemetryRule.AddMember("AllowFieldUpdates", smithyprelude.Boolean)
-
-	TelemetryRule_Regions = TelemetryRule.AddMember("Regions", _Regions)
-
-	TelemetryRule_AllRegions = TelemetryRule.AddMember("AllRegions", _AllRegions)
-
-	TelemetryRuleSummary_RuleName = TelemetryRuleSummary.AddMember("RuleName", _RuleName)
-
-	TelemetryRuleSummary_RuleArn = TelemetryRuleSummary.AddMember("RuleArn", _ResourceArn)
-
-	TelemetryRuleSummary_CreatedTimeStamp = TelemetryRuleSummary.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	TelemetryRuleSummary_LastUpdateTimeStamp = TelemetryRuleSummary.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	TelemetryRuleSummary_ResourceType = TelemetryRuleSummary.AddMember("ResourceType", ResourceType)
-
-	TelemetryRuleSummary_TelemetryType = TelemetryRuleSummary.AddMember("TelemetryType", TelemetryType)
-
-	TelemetryRuleSummary_TelemetrySourceTypes = TelemetryRuleSummary.AddMember("TelemetrySourceTypes", _TelemetrySourceTypes)
-
-	_TelemetryRuleSummaries_member = _TelemetryRuleSummaries.AddMember("member", TelemetryRuleSummary)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", smithyprelude.String)
-
-	ValidationError_Message = ValidationError.AddMember("Message", smithyprelude.String)
-
-	ValidationError_Reason = ValidationError.AddMember("Reason", smithyprelude.String)
-
-	ValidationError_FieldMap = ValidationError.AddMember("FieldMap", _FieldMap)
-
-	_ValidationErrors_member = _ValidationErrors.AddMember("member", ValidationError)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Errors = ValidationException.AddMember("Errors", _ValidationErrors)
-
-	CreateCentralizationRuleForOrganizationInput_RuleName = CreateCentralizationRuleForOrganizationInput.AddMember("RuleName", _RuleName)
-
-	CreateCentralizationRuleForOrganizationInput_Rule = CreateCentralizationRuleForOrganizationInput.AddMember("Rule", CentralizationRule)
-
-	CreateCentralizationRuleForOrganizationInput_Tags = CreateCentralizationRuleForOrganizationInput.AddMember("Tags", _TagMapInput)
-
-	CreateCentralizationRuleForOrganizationOutput_RuleArn = CreateCentralizationRuleForOrganizationOutput.AddMember("RuleArn", _ResourceArn)
-
-	CreateDatasetIntegrationInput_RoleArn = CreateDatasetIntegrationInput.AddMember("RoleArn", _ResourceArn)
-
-	CreateDatasetIntegrationInput_Tags = CreateDatasetIntegrationInput.AddMember("Tags", _TagMapInput)
-
-	CreateDatasetIntegrationOutput_Arn = CreateDatasetIntegrationOutput.AddMember("Arn", _ResourceArn)
-
-	CreateDatasetIntegrationOutput_RoleArn = CreateDatasetIntegrationOutput.AddMember("RoleArn", _ResourceArn)
-
-	CreateDatasetIntegrationOutput_CreatedAt = CreateDatasetIntegrationOutput.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	CreateDatasetIntegrationOutput_UpdatedAt = CreateDatasetIntegrationOutput.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	CreateS3TableIntegrationInput_Encryption = CreateS3TableIntegrationInput.AddMember("Encryption", Encryption)
-
-	CreateS3TableIntegrationInput_RoleArn = CreateS3TableIntegrationInput.AddMember("RoleArn", _ResourceArn)
-
-	CreateS3TableIntegrationInput_Tags = CreateS3TableIntegrationInput.AddMember("Tags", _TagMapInput)
-
-	CreateS3TableIntegrationOutput_Arn = CreateS3TableIntegrationOutput.AddMember("Arn", _ResourceArn)
-
-	CreateTelemetryPipelineInput_Name = CreateTelemetryPipelineInput.AddMember("Name", _TelemetryPipelineName)
-
-	CreateTelemetryPipelineInput_Configuration = CreateTelemetryPipelineInput.AddMember("Configuration", TelemetryPipelineConfiguration)
-
-	CreateTelemetryPipelineInput_Tags = CreateTelemetryPipelineInput.AddMember("Tags", _TagMapInput)
-
-	CreateTelemetryPipelineOutput_Arn = CreateTelemetryPipelineOutput.AddMember("Arn", _ResourceArn)
-
-	CreateTelemetryRuleForOrganizationInput_RuleName = CreateTelemetryRuleForOrganizationInput.AddMember("RuleName", _RuleName)
-
-	CreateTelemetryRuleForOrganizationInput_Rule = CreateTelemetryRuleForOrganizationInput.AddMember("Rule", TelemetryRule)
-
-	CreateTelemetryRuleForOrganizationInput_Tags = CreateTelemetryRuleForOrganizationInput.AddMember("Tags", _TagMapInput)
-
-	CreateTelemetryRuleForOrganizationOutput_RuleArn = CreateTelemetryRuleForOrganizationOutput.AddMember("RuleArn", _ResourceArn)
-
-	CreateTelemetryRuleInput_RuleName = CreateTelemetryRuleInput.AddMember("RuleName", _RuleName)
-
-	CreateTelemetryRuleInput_Rule = CreateTelemetryRuleInput.AddMember("Rule", TelemetryRule)
-
-	CreateTelemetryRuleInput_Tags = CreateTelemetryRuleInput.AddMember("Tags", _TagMapInput)
-
-	CreateTelemetryRuleOutput_RuleArn = CreateTelemetryRuleOutput.AddMember("RuleArn", _ResourceArn)
-
-	DeleteCentralizationRuleForOrganizationInput_RuleIdentifier = DeleteCentralizationRuleForOrganizationInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	DeleteDatasetIntegrationInput_Arn = DeleteDatasetIntegrationInput.AddMember("Arn", _ResourceArn)
-
-	DeleteS3TableIntegrationInput_Arn = DeleteS3TableIntegrationInput.AddMember("Arn", _ResourceArn)
-
-	DeleteTelemetryPipelineInput_PipelineIdentifier = DeleteTelemetryPipelineInput.AddMember("PipelineIdentifier", _TelemetryPipelineIdentifier)
-
-	DeleteTelemetryRuleForOrganizationInput_RuleIdentifier = DeleteTelemetryRuleForOrganizationInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	DeleteTelemetryRuleInput_RuleIdentifier = DeleteTelemetryRuleInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	GetCentralizationRuleForOrganizationInput_RuleIdentifier = GetCentralizationRuleForOrganizationInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	GetCentralizationRuleForOrganizationOutput_RuleName = GetCentralizationRuleForOrganizationOutput.AddMember("RuleName", _RuleName)
-
-	GetCentralizationRuleForOrganizationOutput_RuleArn = GetCentralizationRuleForOrganizationOutput.AddMember("RuleArn", _ResourceArn)
-
-	GetCentralizationRuleForOrganizationOutput_CreatorAccountId = GetCentralizationRuleForOrganizationOutput.AddMember("CreatorAccountId", smithyprelude.String)
-
-	GetCentralizationRuleForOrganizationOutput_CreatedTimeStamp = GetCentralizationRuleForOrganizationOutput.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	GetCentralizationRuleForOrganizationOutput_CreatedRegion = GetCentralizationRuleForOrganizationOutput.AddMember("CreatedRegion", _Region)
-
-	GetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp = GetCentralizationRuleForOrganizationOutput.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	GetCentralizationRuleForOrganizationOutput_RuleHealth = GetCentralizationRuleForOrganizationOutput.AddMember("RuleHealth", RuleHealth)
-
-	GetCentralizationRuleForOrganizationOutput_FailureReason = GetCentralizationRuleForOrganizationOutput.AddMember("FailureReason", CentralizationFailureReason)
-
-	GetCentralizationRuleForOrganizationOutput_TagPropagationStatus = GetCentralizationRuleForOrganizationOutput.AddMember("TagPropagationStatus", TagPropagationStatus)
-
-	GetCentralizationRuleForOrganizationOutput_TagPropagationFailureReason = GetCentralizationRuleForOrganizationOutput.AddMember("TagPropagationFailureReason", TagPropagationFailureReason)
-
-	GetCentralizationRuleForOrganizationOutput_ContextGraphStatus = GetCentralizationRuleForOrganizationOutput.AddMember("ContextGraphStatus", ContextGraphStatus)
-
-	GetCentralizationRuleForOrganizationOutput_CentralizationRule = GetCentralizationRuleForOrganizationOutput.AddMember("CentralizationRule", CentralizationRule)
-
-	GetDatasetIntegrationInput_Arn = GetDatasetIntegrationInput.AddMember("Arn", _ResourceArn)
-
-	GetDatasetIntegrationOutput_Arn = GetDatasetIntegrationOutput.AddMember("Arn", _ResourceArn)
-
-	GetDatasetIntegrationOutput_RoleArn = GetDatasetIntegrationOutput.AddMember("RoleArn", _ResourceArn)
-
-	GetDatasetIntegrationOutput_CreatedAt = GetDatasetIntegrationOutput.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	GetDatasetIntegrationOutput_UpdatedAt = GetDatasetIntegrationOutput.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	GetS3TableIntegrationInput_Arn = GetS3TableIntegrationInput.AddMember("Arn", _ResourceArn)
-
-	GetS3TableIntegrationOutput_Arn = GetS3TableIntegrationOutput.AddMember("Arn", _ResourceArn)
-
-	GetS3TableIntegrationOutput_RoleArn = GetS3TableIntegrationOutput.AddMember("RoleArn", _ResourceArn)
-
-	GetS3TableIntegrationOutput_Status = GetS3TableIntegrationOutput.AddMember("Status", IntegrationStatus)
-
-	GetS3TableIntegrationOutput_Encryption = GetS3TableIntegrationOutput.AddMember("Encryption", Encryption)
-
-	GetS3TableIntegrationOutput_DestinationTableBucketArn = GetS3TableIntegrationOutput.AddMember("DestinationTableBucketArn", _ResourceArn)
-
-	GetS3TableIntegrationOutput_CreatedTimeStamp = GetS3TableIntegrationOutput.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	GetTelemetryEnrichmentStatusOutput_Status = GetTelemetryEnrichmentStatusOutput.AddMember("Status", TelemetryEnrichmentStatus)
-
-	GetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn = GetTelemetryEnrichmentStatusOutput.AddMember("AwsResourceExplorerManagedViewArn", _AwsResourceExplorerManagedViewArn)
-
-	GetTelemetryEvaluationStatusForOrganizationOutput_Status = GetTelemetryEvaluationStatusForOrganizationOutput.AddMember("Status", Status)
-
-	GetTelemetryEvaluationStatusForOrganizationOutput_FailureReason = GetTelemetryEvaluationStatusForOrganizationOutput.AddMember("FailureReason", _FailureReason)
-
-	GetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion = GetTelemetryEvaluationStatusForOrganizationOutput.AddMember("HomeRegion", _Region)
-
-	GetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses = GetTelemetryEvaluationStatusForOrganizationOutput.AddMember("RegionStatuses", _RegionStatuses)
-
-	GetTelemetryEvaluationStatusOutput_Status = GetTelemetryEvaluationStatusOutput.AddMember("Status", Status)
-
-	GetTelemetryEvaluationStatusOutput_FailureReason = GetTelemetryEvaluationStatusOutput.AddMember("FailureReason", _FailureReason)
-
-	GetTelemetryEvaluationStatusOutput_HomeRegion = GetTelemetryEvaluationStatusOutput.AddMember("HomeRegion", _Region)
-
-	GetTelemetryEvaluationStatusOutput_RegionStatuses = GetTelemetryEvaluationStatusOutput.AddMember("RegionStatuses", _RegionStatuses)
-
-	GetTelemetryPipelineInput_PipelineIdentifier = GetTelemetryPipelineInput.AddMember("PipelineIdentifier", _TelemetryPipelineIdentifier)
-
-	GetTelemetryPipelineOutput_Pipeline = GetTelemetryPipelineOutput.AddMember("Pipeline", TelemetryPipeline)
-
-	GetTelemetryRuleForOrganizationInput_RuleIdentifier = GetTelemetryRuleForOrganizationInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	GetTelemetryRuleForOrganizationOutput_RuleName = GetTelemetryRuleForOrganizationOutput.AddMember("RuleName", _RuleName)
-
-	GetTelemetryRuleForOrganizationOutput_RuleArn = GetTelemetryRuleForOrganizationOutput.AddMember("RuleArn", _ResourceArn)
-
-	GetTelemetryRuleForOrganizationOutput_CreatedTimeStamp = GetTelemetryRuleForOrganizationOutput.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	GetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp = GetTelemetryRuleForOrganizationOutput.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	GetTelemetryRuleForOrganizationOutput_TelemetryRule = GetTelemetryRuleForOrganizationOutput.AddMember("TelemetryRule", TelemetryRule)
-
-	GetTelemetryRuleForOrganizationOutput_HomeRegion = GetTelemetryRuleForOrganizationOutput.AddMember("HomeRegion", _Region)
-
-	GetTelemetryRuleForOrganizationOutput_IsReplicated = GetTelemetryRuleForOrganizationOutput.AddMember("IsReplicated", _IsReplicated)
-
-	GetTelemetryRuleForOrganizationOutput_RegionStatuses = GetTelemetryRuleForOrganizationOutput.AddMember("RegionStatuses", _RegionStatuses)
-
-	GetTelemetryRuleInput_RuleIdentifier = GetTelemetryRuleInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	GetTelemetryRuleOutput_RuleName = GetTelemetryRuleOutput.AddMember("RuleName", _RuleName)
-
-	GetTelemetryRuleOutput_RuleArn = GetTelemetryRuleOutput.AddMember("RuleArn", _ResourceArn)
-
-	GetTelemetryRuleOutput_CreatedTimeStamp = GetTelemetryRuleOutput.AddMember("CreatedTimeStamp", smithyprelude.Long)
-
-	GetTelemetryRuleOutput_LastUpdateTimeStamp = GetTelemetryRuleOutput.AddMember("LastUpdateTimeStamp", smithyprelude.Long)
-
-	GetTelemetryRuleOutput_TelemetryRule = GetTelemetryRuleOutput.AddMember("TelemetryRule", TelemetryRule)
-
-	GetTelemetryRuleOutput_HomeRegion = GetTelemetryRuleOutput.AddMember("HomeRegion", _Region)
-
-	GetTelemetryRuleOutput_IsReplicated = GetTelemetryRuleOutput.AddMember("IsReplicated", _IsReplicated)
-
-	GetTelemetryRuleOutput_RegionStatuses = GetTelemetryRuleOutput.AddMember("RegionStatuses", _RegionStatuses)
-
-	ListCentralizationRulesForOrganizationInput_RuleNamePrefix = ListCentralizationRulesForOrganizationInput.AddMember("RuleNamePrefix", smithyprelude.String)
-
-	ListCentralizationRulesForOrganizationInput_AllRegions = ListCentralizationRulesForOrganizationInput.AddMember("AllRegions", smithyprelude.Boolean)
-
-	ListCentralizationRulesForOrganizationInput_MaxResults = ListCentralizationRulesForOrganizationInput.AddMember("MaxResults", _ListCentralizationRulesForOrganizationMaxResults)
-
-	ListCentralizationRulesForOrganizationInput_NextToken = ListCentralizationRulesForOrganizationInput.AddMember("NextToken", _NextToken)
-
-	ListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries = ListCentralizationRulesForOrganizationOutput.AddMember("CentralizationRuleSummaries", _CentralizationRuleSummaries)
-
-	ListCentralizationRulesForOrganizationOutput_NextToken = ListCentralizationRulesForOrganizationOutput.AddMember("NextToken", _NextToken)
-
-	ListDatasetIntegrationsInput_MaxResults = ListDatasetIntegrationsInput.AddMember("MaxResults", _ListDatasetIntegrationsMaxResults)
-
-	ListDatasetIntegrationsInput_NextToken = ListDatasetIntegrationsInput.AddMember("NextToken", _NextToken)
-
-	ListDatasetIntegrationsOutput_DatasetIntegrationSummaries = ListDatasetIntegrationsOutput.AddMember("DatasetIntegrationSummaries", _DatasetIntegrationSummaries)
-
-	ListDatasetIntegrationsOutput_NextToken = ListDatasetIntegrationsOutput.AddMember("NextToken", _NextToken)
-
-	ListResourceTelemetryForOrganizationInput_AccountIdentifiers = ListResourceTelemetryForOrganizationInput.AddMember("AccountIdentifiers", _AccountIdentifiers)
-
-	ListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix = ListResourceTelemetryForOrganizationInput.AddMember("ResourceIdentifierPrefix", _ResourceIdentifierPrefix)
-
-	ListResourceTelemetryForOrganizationInput_ResourceTypes = ListResourceTelemetryForOrganizationInput.AddMember("ResourceTypes", _ResourceTypes)
-
-	ListResourceTelemetryForOrganizationInput_TelemetryConfigurationState = ListResourceTelemetryForOrganizationInput.AddMember("TelemetryConfigurationState", _TelemetryConfigurationState)
-
-	ListResourceTelemetryForOrganizationInput_ResourceTags = ListResourceTelemetryForOrganizationInput.AddMember("ResourceTags", _TagMapInput)
-
-	ListResourceTelemetryForOrganizationInput_MaxResults = ListResourceTelemetryForOrganizationInput.AddMember("MaxResults", _ListResourceTelemetryForOrganizationMaxResults)
-
-	ListResourceTelemetryForOrganizationInput_NextToken = ListResourceTelemetryForOrganizationInput.AddMember("NextToken", _NextToken)
-
-	ListResourceTelemetryForOrganizationOutput_TelemetryConfigurations = ListResourceTelemetryForOrganizationOutput.AddMember("TelemetryConfigurations", _TelemetryConfigurations)
-
-	ListResourceTelemetryForOrganizationOutput_NextToken = ListResourceTelemetryForOrganizationOutput.AddMember("NextToken", _NextToken)
-
-	ListResourceTelemetryInput_ResourceIdentifierPrefix = ListResourceTelemetryInput.AddMember("ResourceIdentifierPrefix", _ResourceIdentifierPrefix)
-
-	ListResourceTelemetryInput_ResourceTypes = ListResourceTelemetryInput.AddMember("ResourceTypes", _ResourceTypes)
-
-	ListResourceTelemetryInput_TelemetryConfigurationState = ListResourceTelemetryInput.AddMember("TelemetryConfigurationState", _TelemetryConfigurationState)
-
-	ListResourceTelemetryInput_ResourceTags = ListResourceTelemetryInput.AddMember("ResourceTags", _TagMapInput)
-
-	ListResourceTelemetryInput_MaxResults = ListResourceTelemetryInput.AddMember("MaxResults", _ListResourceTelemetryMaxResults)
-
-	ListResourceTelemetryInput_NextToken = ListResourceTelemetryInput.AddMember("NextToken", _NextToken)
-
-	ListResourceTelemetryOutput_TelemetryConfigurations = ListResourceTelemetryOutput.AddMember("TelemetryConfigurations", _TelemetryConfigurations)
-
-	ListResourceTelemetryOutput_NextToken = ListResourceTelemetryOutput.AddMember("NextToken", _NextToken)
-
-	ListS3TableIntegrationsInput_MaxResults = ListS3TableIntegrationsInput.AddMember("MaxResults", _ListS3TableIntegrationsMaxResults)
-
-	ListS3TableIntegrationsInput_NextToken = ListS3TableIntegrationsInput.AddMember("NextToken", _NextToken)
-
-	ListS3TableIntegrationsOutput_IntegrationSummaries = ListS3TableIntegrationsOutput.AddMember("IntegrationSummaries", _IntegrationSummaries)
-
-	ListS3TableIntegrationsOutput_NextToken = ListS3TableIntegrationsOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_ResourceARN = ListTagsForResourceInput.AddMember("ResourceARN", _ResourceArn)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagMapOutput)
-
-	ListTelemetryPipelinesInput_MaxResults = ListTelemetryPipelinesInput.AddMember("MaxResults", _ListTelemetryPipelinesMaxResults)
-
-	ListTelemetryPipelinesInput_NextToken = ListTelemetryPipelinesInput.AddMember("NextToken", _NextToken)
-
-	ListTelemetryPipelinesOutput_PipelineSummaries = ListTelemetryPipelinesOutput.AddMember("PipelineSummaries", _TelemetryPipelineSummaries)
-
-	ListTelemetryPipelinesOutput_NextToken = ListTelemetryPipelinesOutput.AddMember("NextToken", _NextToken)
-
-	ListTelemetryRulesForOrganizationInput_RuleNamePrefix = ListTelemetryRulesForOrganizationInput.AddMember("RuleNamePrefix", smithyprelude.String)
-
-	ListTelemetryRulesForOrganizationInput_SourceAccountIds = ListTelemetryRulesForOrganizationInput.AddMember("SourceAccountIds", _AccountIdentifiers)
-
-	ListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds = ListTelemetryRulesForOrganizationInput.AddMember("SourceOrganizationUnitIds", _OrganizationUnitIdentifiers)
-
-	ListTelemetryRulesForOrganizationInput_MaxResults = ListTelemetryRulesForOrganizationInput.AddMember("MaxResults", _ListTelemetryRulesForOrganizationMaxResults)
-
-	ListTelemetryRulesForOrganizationInput_NextToken = ListTelemetryRulesForOrganizationInput.AddMember("NextToken", _NextToken)
-
-	ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries = ListTelemetryRulesForOrganizationOutput.AddMember("TelemetryRuleSummaries", _TelemetryRuleSummaries)
-
-	ListTelemetryRulesForOrganizationOutput_NextToken = ListTelemetryRulesForOrganizationOutput.AddMember("NextToken", _NextToken)
-
-	ListTelemetryRulesInput_RuleNamePrefix = ListTelemetryRulesInput.AddMember("RuleNamePrefix", smithyprelude.String)
-
-	ListTelemetryRulesInput_MaxResults = ListTelemetryRulesInput.AddMember("MaxResults", _ListTelemetryRulesMaxResults)
-
-	ListTelemetryRulesInput_NextToken = ListTelemetryRulesInput.AddMember("NextToken", _NextToken)
-
-	ListTelemetryRulesOutput_TelemetryRuleSummaries = ListTelemetryRulesOutput.AddMember("TelemetryRuleSummaries", _TelemetryRuleSummaries)
-
-	ListTelemetryRulesOutput_NextToken = ListTelemetryRulesOutput.AddMember("NextToken", _NextToken)
-
-	StartTelemetryEnrichmentOutput_Status = StartTelemetryEnrichmentOutput.AddMember("Status", TelemetryEnrichmentStatus)
-
-	StartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn = StartTelemetryEnrichmentOutput.AddMember("AwsResourceExplorerManagedViewArn", _AwsResourceExplorerManagedViewArn)
-
-	StartTelemetryEvaluationForOrganizationInput_Regions = StartTelemetryEvaluationForOrganizationInput.AddMember("Regions", _Regions)
-
-	StartTelemetryEvaluationForOrganizationInput_AllRegions = StartTelemetryEvaluationForOrganizationInput.AddMember("AllRegions", _AllRegions)
-
-	StartTelemetryEvaluationInput_Regions = StartTelemetryEvaluationInput.AddMember("Regions", _Regions)
-
-	StartTelemetryEvaluationInput_AllRegions = StartTelemetryEvaluationInput.AddMember("AllRegions", _AllRegions)
-
-	StopTelemetryEnrichmentOutput_Status = StopTelemetryEnrichmentOutput.AddMember("Status", TelemetryEnrichmentStatus)
-
-	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _ResourceArn)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMapInput)
-
-	TestTelemetryPipelineInput_Records = TestTelemetryPipelineInput.AddMember("Records", _Records)
-
-	TestTelemetryPipelineInput_Configuration = TestTelemetryPipelineInput.AddMember("Configuration", TelemetryPipelineConfiguration)
-
-	TestTelemetryPipelineInput_SignalType = TestTelemetryPipelineInput.AddMember("SignalType", SignalType)
-
-	TestTelemetryPipelineOutput_Results = TestTelemetryPipelineOutput.AddMember("Results", _PipelineOutputs)
-
-	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _ResourceArn)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
-
-	UpdateCentralizationRuleForOrganizationInput_RuleIdentifier = UpdateCentralizationRuleForOrganizationInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	UpdateCentralizationRuleForOrganizationInput_Rule = UpdateCentralizationRuleForOrganizationInput.AddMember("Rule", CentralizationRule)
-
-	UpdateCentralizationRuleForOrganizationOutput_RuleArn = UpdateCentralizationRuleForOrganizationOutput.AddMember("RuleArn", _ResourceArn)
-
-	UpdateDatasetIntegrationInput_Arn = UpdateDatasetIntegrationInput.AddMember("Arn", _ResourceArn)
-
-	UpdateDatasetIntegrationInput_RoleArn = UpdateDatasetIntegrationInput.AddMember("RoleArn", _ResourceArn)
-
-	UpdateDatasetIntegrationOutput_Arn = UpdateDatasetIntegrationOutput.AddMember("Arn", _ResourceArn)
-
-	UpdateDatasetIntegrationOutput_RoleArn = UpdateDatasetIntegrationOutput.AddMember("RoleArn", _ResourceArn)
-
-	UpdateDatasetIntegrationOutput_CreatedAt = UpdateDatasetIntegrationOutput.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	UpdateDatasetIntegrationOutput_UpdatedAt = UpdateDatasetIntegrationOutput.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	UpdateTelemetryPipelineInput_PipelineIdentifier = UpdateTelemetryPipelineInput.AddMember("PipelineIdentifier", _TelemetryPipelineIdentifier)
-
-	UpdateTelemetryPipelineInput_Configuration = UpdateTelemetryPipelineInput.AddMember("Configuration", TelemetryPipelineConfiguration)
-
-	UpdateTelemetryRuleForOrganizationInput_RuleIdentifier = UpdateTelemetryRuleForOrganizationInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	UpdateTelemetryRuleForOrganizationInput_Rule = UpdateTelemetryRuleForOrganizationInput.AddMember("Rule", TelemetryRule)
-
-	UpdateTelemetryRuleForOrganizationOutput_RuleArn = UpdateTelemetryRuleForOrganizationOutput.AddMember("RuleArn", _ResourceArn)
-
-	UpdateTelemetryRuleInput_RuleIdentifier = UpdateTelemetryRuleInput.AddMember("RuleIdentifier", _RuleIdentifier)
-
-	UpdateTelemetryRuleInput_Rule = UpdateTelemetryRuleInput.AddMember("Rule", TelemetryRule)
-
-	UpdateTelemetryRuleOutput_RuleArn = UpdateTelemetryRuleOutput.AddMember("RuleArn", _ResourceArn)
-
-	ValidateTelemetryPipelineConfigurationInput_Configuration = ValidateTelemetryPipelineConfigurationInput.AddMember("Configuration", TelemetryPipelineConfiguration)
-
-	ValidateTelemetryPipelineConfigurationOutput_Errors = ValidateTelemetryPipelineConfigurationOutput.AddMember("Errors", _ValidationErrors)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"}}, DirectMask: 0x80}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message, &sAccessDeniedException_amznErrorType}}
+var m_AccountIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIdentifiers_member}}
+var mAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAction_ALLOW, &sAction_BLOCK, &sAction_COUNT, &sAction_CAPTCHA, &sAction_CHALLENGE, &sAction_EXCLUDED_AS_COUNT}}
+var mActionCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sActionCondition_Action}}
+var mAdvancedEventSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedEventSelector_Name, &sAdvancedEventSelector_FieldSelectors}}
+var m_AdvancedEventSelectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdvancedEventSelectors_member}}
+var mAdvancedFieldSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sAdvancedFieldSelector_Field, &sAdvancedFieldSelector_Equals, &sAdvancedFieldSelector_StartsWith, &sAdvancedFieldSelector_EndsWith, &sAdvancedFieldSelector_NotEquals, &sAdvancedFieldSelector_NotStartsWith, &sAdvancedFieldSelector_NotEndsWith}}
+var mCentralizationFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sCentralizationFailureReason_TRUSTED_ACCESS_NOT_ENABLED, &sCentralizationFailureReason_DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION, &sCentralizationFailureReason_INTERNAL_SERVER_ERROR}}
+var mCentralizationRule = smithy.SchemaMembers{List: []*smithy.Schema{&sCentralizationRule_Source, &sCentralizationRule_Destination}}
+var mCentralizationRuleDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sCentralizationRuleDestination_Region, &sCentralizationRuleDestination_Account, &sCentralizationRuleDestination_DestinationLogsConfiguration, &sCentralizationRuleDestination_DestinationMetricsConfiguration}}
+var mCentralizationRuleSource = smithy.SchemaMembers{List: []*smithy.Schema{&sCentralizationRuleSource_Regions, &sCentralizationRuleSource_Scope, &sCentralizationRuleSource_SourceLogsConfiguration, &sCentralizationRuleSource_SourceMetricsConfiguration, &sCentralizationRuleSource_SourceContextGraphConfiguration}}
+var m_CentralizationRuleSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CentralizationRuleSummaries_member}}
+var mCentralizationRuleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCentralizationRuleSummary_RuleName, &sCentralizationRuleSummary_RuleArn, &sCentralizationRuleSummary_CreatorAccountId, &sCentralizationRuleSummary_CreatedTimeStamp, &sCentralizationRuleSummary_CreatedRegion, &sCentralizationRuleSummary_LastUpdateTimeStamp, &sCentralizationRuleSummary_RuleHealth, &sCentralizationRuleSummary_FailureReason, &sCentralizationRuleSummary_TagPropagationStatus, &sCentralizationRuleSummary_TagPropagationFailureReason, &sCentralizationRuleSummary_ContextGraphStatus, &sCentralizationRuleSummary_DestinationAccountId, &sCentralizationRuleSummary_DestinationRegion}, Seed: 12, Slots: []uint16{
+	10, 7, 0, 0, 0, 0, 0, 0, 0, 0, 4, 11, 0, 8, 0, 0, 2, 0, 0, 6, 0, 3, 0, 5,
+	0, 12, 13, 0, 1, 9, 0, 0,
+}}
+var mCloudtrailParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudtrailParameters_AdvancedEventSelectors}}
+var mCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sCondition_ActionCondition, &sCondition_LabelNameCondition}}
+var m_Conditions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Conditions_member}}
+var mConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationSummary_Sources, &sConfigurationSummary_DataSources, &sConfigurationSummary_Processors, &sConfigurationSummary_ProcessorCount, &sConfigurationSummary_Sinks}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_ResourceId, &sConflictException_ResourceType}}
+var mContextGraphStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sContextGraphStatus_HEALTHY, &sContextGraphStatus_UNHEALTHY, &sContextGraphStatus_PROVISIONING}}
+var m_DatasetIntegrationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_DatasetIntegrationSummaries_member}}
+var mDatasetIntegrationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDatasetIntegrationSummary_Arn, &sDatasetIntegrationSummary_RoleArn, &sDatasetIntegrationSummary_CreatedAt, &sDatasetIntegrationSummary_UpdatedAt}}
+var mDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSource_Name, &sDataSource_Type}}
+var m_DataSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSources_member}}
+var mDeletionProtection = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletionProtection_ENABLED}}
+var mDestinationLogsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationLogsConfiguration_LogsEncryptionConfiguration, &sDestinationLogsConfiguration_BackupConfiguration, &sDestinationLogsConfiguration_LogGroupNameConfiguration, &sDestinationLogsConfiguration_TagPropagationConfiguration, &sDestinationLogsConfiguration_LogGroupDeletionProtection}}
+var mDestinationMetricsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationMetricsConfiguration_BackupConfiguration}}
+var mDestinationType = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationType_CLOUDWATCH_LOGS}}
+var mELBLoadBalancerLoggingParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sELBLoadBalancerLoggingParameters_OutputFormat, &sELBLoadBalancerLoggingParameters_FieldDelimiter}}
+var mEncryptedLogGroupStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptedLogGroupStrategy_ALLOW, &sEncryptedLogGroupStrategy_SKIP}}
+var mEncryption = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryption_SseAlgorithm, &sEncryption_KmsKeyArn}}
+var mEncryptionConflictResolutionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConflictResolutionStrategy_ALLOW, &sEncryptionConflictResolutionStrategy_SKIP}}
+var mEncryptionScope = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionScope_ENCRYPTED_SOURCE_ONLY, &sEncryptionScope_NEW_DESTINATION_LOG_GROUPS}}
+var mEncryptionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionStrategy_CUSTOMER_MANAGED, &sEncryptionStrategy_AWS_OWNED}}
+var m_FieldMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldMap_key, &s_FieldMap_value}}
+var m_FieldSelectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldSelectors_member}}
+var mFieldToMatch = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldToMatch_SingleHeader, &sFieldToMatch_UriPath, &sFieldToMatch_QueryString, &sFieldToMatch_Method}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Behavior, &sFilter_Requirement, &sFilter_Conditions}}
+var mFilterBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterBehavior_KEEP, &sFilterBehavior_DROP}}
+var mFilterRequirement = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterRequirement_MEETS_ALL, &sFilterRequirement_MEETS_ANY}}
+var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_member}}
+var mIntegrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrationStatus_ACTIVE, &sIntegrationStatus_DELETING}}
+var m_IntegrationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegrationSummaries_member}}
+var mIntegrationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrationSummary_Arn, &sIntegrationSummary_Status}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message, &sInternalServerException_amznErrorType, &sInternalServerException_retryAfterSeconds}}
+var mInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateException_Message}}
+var mLabelNameCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sLabelNameCondition_LabelName}}
+var mLogDeliveryParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sLogDeliveryParameters_LogTypes}}
+var mLoggingFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingFilter_Filters, &sLoggingFilter_DefaultBehavior}}
+var mLogGroupNameConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogGroupNameConfiguration_LogGroupNamePattern}}
+var mLogsBackupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsBackupConfiguration_Region, &sLogsBackupConfiguration_KmsKeyArn}}
+var mLogsEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogsEncryptionConfiguration_EncryptionStrategy, &sLogsEncryptionConfiguration_KmsKeyArn, &sLogsEncryptionConfiguration_EncryptionConflictResolutionStrategy, &sLogsEncryptionConfiguration_EncryptionScope}}
+var mLogType = smithy.SchemaMembers{List: []*smithy.Schema{&sLogType_APPLICATION, &sLogType_USAGE, &sLogType_SECURITY_FINDING, &sLogType_ACCESS, &sLogType_CONNECTION, &sLogType_S3_SERVER_ACCESS, &sLogType_ALB_ACCESS, &sLogType_ALB_CONNECTION, &sLogType_ALB_HEALTH_CHECK}, Seed: 3, Slots: []uint16{
+	0, 3, 0, 1, 0, 5, 0, 0, 0, 4, 0, 0, 0, 0, 0, 8, 2, 0, 0, 0, 7, 9, 0, 0,
+	0, 0, 0, 0, 0, 0, 6, 0,
+}}
+var m_LogTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogTypes_member}}
+var mMetricsBackupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricsBackupConfiguration_Region}}
+var mMskEnhancedMonitoringLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sMskEnhancedMonitoringLevel_DEFAULT, &sMskEnhancedMonitoringLevel_PER_BROKER, &sMskEnhancedMonitoringLevel_PER_TOPIC_PER_BROKER, &sMskEnhancedMonitoringLevel_PER_TOPIC_PER_PARTITION}}
+var mMskMonitoringParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sMskMonitoringParameters_EnhancedMonitoring}}
+var m_OrganizationUnitIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationUnitIdentifiers_member}}
+var mOutputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputFormat_PLAIN, &sOutputFormat_JSON}}
+var mPipelineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineOutput_Record, &sPipelineOutput_Error}}
+var mPipelineOutputError = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineOutputError_Message}}
+var m_PipelineOutputs = smithy.SchemaMembers{List: []*smithy.Schema{&s_PipelineOutputs_member}}
+var m_Processors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Processors_member}}
+var mRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRecord_Data, &sRecord_Type}}
+var mRecordFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordFormat_STRING, &sRecordFormat_JSON}}
+var m_Records = smithy.SchemaMembers{List: []*smithy.Schema{&s_Records_member}}
+var m_RedactedFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_RedactedFields_member}}
+var m_Regions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Regions_member}}
+var mRegionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionStatus_Region, &sRegionStatus_Status, &sRegionStatus_FailureReason, &sRegionStatus_RuleArn}}
+var m_RegionStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionStatuses_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_ResourceType}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_AWS_EC2_INSTANCE, &sResourceType_AWS_EC2_VPC, &sResourceType_AWS_LAMDBA_FUNCTION, &sResourceType_AWS_CLOUDTRAIL, &sResourceType_AWS_EKS_CLUSTER, &sResourceType_AWS_WAF_V2_WEB_ACL, &sResourceType_AWS_ELB_LOADBALANCER, &sResourceType_AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT, &sResourceType_AWS_BEDROCK_AGENTCORE_RUNTIME, &sResourceType_AWS_BEDROCK_AGENTCORE_BROWSER, &sResourceType_AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER, &sResourceType_AWS_BEDROCK_AGENTCORE_GATEWAY, &sResourceType_AWS_BEDROCK_AGENTCORE_MEMORY, &sResourceType_AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY, &sResourceType_AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER, &sResourceType_AWS_SECURITY_HUB, &sResourceType_AWS_CLOUDFRONT_DISTRIBUTION, &sResourceType_AWS_SECURITY_HUB_HUBV2, &sResourceType_AWS_OTEL_ENRICHMENT, &sResourceType_AWS_MSK_CLUSTER, &sResourceType_AWS_S3_BUCKET, &sResourceType_AWS_BEDROCK_KNOWLEDGEBASE, &sResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG}, Seed: 48, Slots: []uint16{
+	0, 0, 0, 9, 0, 17, 0, 0, 0, 0, 0, 4, 0, 19, 5, 20, 6, 0, 23, 16, 0, 0, 0, 0,
+	0, 0, 0, 8, 0, 0, 7, 12, 3, 13, 10, 2, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 22,
+	0, 15, 0, 0, 1, 0, 11, 21, 0, 0, 0, 0, 0, 0, 18, 0,
+}}
+var m_ResourceTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTypes_member}}
+var mRuleHealth = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleHealth_HEALTHY, &sRuleHealth_UNHEALTHY, &sRuleHealth_PROVISIONING}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_ResourceId, &sServiceQuotaExceededException_ResourceType, &sServiceQuotaExceededException_ServiceCode, &sServiceQuotaExceededException_QuotaCode, &sServiceQuotaExceededException_amznErrorType}}
+var mSignalType = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalType_LOG, &sSignalType_METRIC}}
+var mSingleHeader = smithy.SchemaMembers{List: []*smithy.Schema{&sSingleHeader_Name}}
+var m_Sinks = smithy.SchemaMembers{List: []*smithy.Schema{&s_Sinks_member}}
+var mSource = smithy.SchemaMembers{List: []*smithy.Schema{&sSource_Type}}
+var mSourceLogsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceLogsConfiguration_LogGroupSelectionCriteria, &sSourceLogsConfiguration_DataSourceSelectionCriteria, &sSourceLogsConfiguration_EncryptedLogGroupStrategy}}
+var mSourceMetricsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceMetricsConfiguration_MetricsSelectionCriteria}}
+var m_Sources = smithy.SchemaMembers{List: []*smithy.Schema{&s_Sources_member}}
+var mSSEAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sSSEAlgorithm_SSE_KMS, &sSSEAlgorithm_SSE_S3}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_NOT_STARTED, &sStatus_STARTING, &sStatus_FAILED_START, &sStatus_RUNNING, &sStatus_STOPPING, &sStatus_FAILED_STOP, &sStatus_STOPPED}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mTagConflictResolutionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sTagConflictResolutionStrategy_IN_SYNC, &sTagConflictResolutionStrategy_ADD_ONLY, &sTagConflictResolutionStrategy_UPDATE_SYNC}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMapInput = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMapInput_key, &s_TagMapInput_value}}
+var m_TagMapOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMapOutput_key, &s_TagMapOutput_value}}
+var mTagPropagationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTagPropagationConfiguration_DestinationRoleArn, &sTagPropagationConfiguration_TagConflictResolutionStrategy}}
+var mTagPropagationFailureReason = smithy.SchemaMembers{List: []*smithy.Schema{&sTagPropagationFailureReason_ROLE_NOT_ASSUMABLE, &sTagPropagationFailureReason_ROLE_LACKS_PERMISSIONS}}
+var mTagPropagationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTagPropagationStatus_HEALTHY, &sTagPropagationStatus_UNHEALTHY}}
+var mTelemetryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryConfiguration_AccountIdentifier, &sTelemetryConfiguration_TelemetryConfigurationState, &sTelemetryConfiguration_ResourceType, &sTelemetryConfiguration_ResourceIdentifier, &sTelemetryConfiguration_ResourceTags, &sTelemetryConfiguration_LastUpdateTimeStamp, &sTelemetryConfiguration_TelemetrySourceType}}
+var m_TelemetryConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_TelemetryConfigurations_member}}
+var m_TelemetryConfigurationState = smithy.SchemaMembers{List: []*smithy.Schema{&s_TelemetryConfigurationState_key, &s_TelemetryConfigurationState_value}}
+var mTelemetryDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryDestinationConfiguration_DestinationType, &sTelemetryDestinationConfiguration_DestinationPattern, &sTelemetryDestinationConfiguration_RetentionInDays, &sTelemetryDestinationConfiguration_VPCFlowLogParameters, &sTelemetryDestinationConfiguration_CloudtrailParameters, &sTelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters, &sTelemetryDestinationConfiguration_WAFLoggingParameters, &sTelemetryDestinationConfiguration_LogDeliveryParameters, &sTelemetryDestinationConfiguration_MskMonitoringParameters, &sTelemetryDestinationConfiguration_KmsKeyArn}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 8, 6, 0, 5, 0, 0, 9, 0, 0, 0, 0, 7, 0, 0, 4, 2, 0, 0, 10, 0,
+	0, 0, 0, 0, 0, 3, 0, 1,
+}}
+var mTelemetryEnrichmentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryEnrichmentStatus_RUNNING, &sTelemetryEnrichmentStatus_STOPPED, &sTelemetryEnrichmentStatus_IMPAIRED}}
+var mTelemetryPipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryPipeline_CreatedTimeStamp, &sTelemetryPipeline_LastUpdateTimeStamp, &sTelemetryPipeline_Arn, &sTelemetryPipeline_Name, &sTelemetryPipeline_Configuration, &sTelemetryPipeline_Status, &sTelemetryPipeline_StatusReason, &sTelemetryPipeline_Tags}}
+var mTelemetryPipelineConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryPipelineConfiguration_Body}}
+var mTelemetryPipelineStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryPipelineStatus_CREATING, &sTelemetryPipelineStatus_ACTIVE, &sTelemetryPipelineStatus_UPDATING, &sTelemetryPipelineStatus_DELETING, &sTelemetryPipelineStatus_CREATE_FAILED, &sTelemetryPipelineStatus_UPDATE_FAILED}}
+var mTelemetryPipelineStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryPipelineStatusReason_Description}}
+var m_TelemetryPipelineSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_TelemetryPipelineSummaries_member}}
+var mTelemetryPipelineSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryPipelineSummary_CreatedTimeStamp, &sTelemetryPipelineSummary_LastUpdateTimeStamp, &sTelemetryPipelineSummary_Arn, &sTelemetryPipelineSummary_Name, &sTelemetryPipelineSummary_Status, &sTelemetryPipelineSummary_Tags, &sTelemetryPipelineSummary_ConfigurationSummary}}
+var mTelemetryRule = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryRule_ResourceType, &sTelemetryRule_TelemetryType, &sTelemetryRule_TelemetrySourceTypes, &sTelemetryRule_DestinationConfiguration, &sTelemetryRule_Scope, &sTelemetryRule_SelectionCriteria, &sTelemetryRule_AllowFieldUpdates, &sTelemetryRule_Regions, &sTelemetryRule_AllRegions}, Seed: 12, Slots: []uint16{
+	0, 0, 0, 3, 2, 0, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 9, 0, 0,
+	0, 1, 0, 5, 0, 0, 0, 7,
+}}
+var m_TelemetryRuleSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_TelemetryRuleSummaries_member}}
+var mTelemetryRuleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryRuleSummary_RuleName, &sTelemetryRuleSummary_RuleArn, &sTelemetryRuleSummary_CreatedTimeStamp, &sTelemetryRuleSummary_LastUpdateTimeStamp, &sTelemetryRuleSummary_ResourceType, &sTelemetryRuleSummary_TelemetryType, &sTelemetryRuleSummary_TelemetrySourceTypes}}
+var mTelemetrySourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetrySourceType_VPC_FLOW_LOGS, &sTelemetrySourceType_ROUTE53_RESOLVER_QUERY_LOGS, &sTelemetrySourceType_EKS_AUDIT_LOGS, &sTelemetrySourceType_EKS_AUTHENTICATOR_LOGS, &sTelemetrySourceType_EKS_CONTROLLER_MANAGER_LOGS, &sTelemetrySourceType_EKS_SCHEDULER_LOGS, &sTelemetrySourceType_EKS_API_LOGS}}
+var m_TelemetrySourceTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_TelemetrySourceTypes_member}}
+var mTelemetryState = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryState_ENABLED, &sTelemetryState_DISABLED, &sTelemetryState_NOT_APPLICABLE}}
+var mTelemetryType = smithy.SchemaMembers{List: []*smithy.Schema{&sTelemetryType_LOGS, &sTelemetryType_METRICS, &sTelemetryType_TRACES, &sTelemetryType_INSIGHTS}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_Message}}
+var mValidationError = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationError_Message, &sValidationError_Reason, &sValidationError_FieldMap}}
+var m_ValidationErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationErrors_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Errors}}
+var mVPCFlowLogParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sVPCFlowLogParameters_LogFormat, &sVPCFlowLogParameters_TrafficType, &sVPCFlowLogParameters_MaxAggregationInterval}}
+var mWAFLoggingParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFLoggingParameters_RedactedFields, &sWAFLoggingParameters_LoggingFilter, &sWAFLoggingParameters_LogType}}
+var mWAFLogType = smithy.SchemaMembers{List: []*smithy.Schema{&sWAFLogType_WAF_LOGS}}
+var mCreateCentralizationRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCentralizationRuleForOrganizationInput_RuleName, &sCreateCentralizationRuleForOrganizationInput_Rule, &sCreateCentralizationRuleForOrganizationInput_Tags}}
+var mCreateCentralizationRuleForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCentralizationRuleForOrganizationOutput_RuleArn}}
+var mCreateDatasetIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetIntegrationInput_RoleArn, &sCreateDatasetIntegrationInput_Tags}}
+var mCreateDatasetIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDatasetIntegrationOutput_Arn, &sCreateDatasetIntegrationOutput_RoleArn, &sCreateDatasetIntegrationOutput_CreatedAt, &sCreateDatasetIntegrationOutput_UpdatedAt}}
+var mCreateS3TableIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateS3TableIntegrationInput_Encryption, &sCreateS3TableIntegrationInput_RoleArn, &sCreateS3TableIntegrationInput_Tags}}
+var mCreateS3TableIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateS3TableIntegrationOutput_Arn}}
+var mCreateTelemetryPipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTelemetryPipelineInput_Name, &sCreateTelemetryPipelineInput_Configuration, &sCreateTelemetryPipelineInput_Tags}}
+var mCreateTelemetryPipelineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTelemetryPipelineOutput_Arn}}
+var mCreateTelemetryRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTelemetryRuleForOrganizationInput_RuleName, &sCreateTelemetryRuleForOrganizationInput_Rule, &sCreateTelemetryRuleForOrganizationInput_Tags}}
+var mCreateTelemetryRuleForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTelemetryRuleForOrganizationOutput_RuleArn}}
+var mCreateTelemetryRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTelemetryRuleInput_RuleName, &sCreateTelemetryRuleInput_Rule, &sCreateTelemetryRuleInput_Tags}}
+var mCreateTelemetryRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTelemetryRuleOutput_RuleArn}}
+var mDeleteCentralizationRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCentralizationRuleForOrganizationInput_RuleIdentifier}}
+var mDeleteDatasetIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDatasetIntegrationInput_Arn}}
+var mDeleteS3TableIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteS3TableIntegrationInput_Arn}}
+var mDeleteTelemetryPipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTelemetryPipelineInput_PipelineIdentifier}}
+var mDeleteTelemetryRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTelemetryRuleForOrganizationInput_RuleIdentifier}}
+var mDeleteTelemetryRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTelemetryRuleInput_RuleIdentifier}}
+var mGetCentralizationRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCentralizationRuleForOrganizationInput_RuleIdentifier}}
+var mGetCentralizationRuleForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCentralizationRuleForOrganizationOutput_RuleName, &sGetCentralizationRuleForOrganizationOutput_RuleArn, &sGetCentralizationRuleForOrganizationOutput_CreatorAccountId, &sGetCentralizationRuleForOrganizationOutput_CreatedTimeStamp, &sGetCentralizationRuleForOrganizationOutput_CreatedRegion, &sGetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp, &sGetCentralizationRuleForOrganizationOutput_RuleHealth, &sGetCentralizationRuleForOrganizationOutput_FailureReason, &sGetCentralizationRuleForOrganizationOutput_TagPropagationStatus, &sGetCentralizationRuleForOrganizationOutput_TagPropagationFailureReason, &sGetCentralizationRuleForOrganizationOutput_ContextGraphStatus, &sGetCentralizationRuleForOrganizationOutput_CentralizationRule}, Seed: 2, Slots: []uint16{
+	10, 11, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 6, 0, 8, 0, 0, 0,
+	4, 3, 2, 0, 1, 5, 0, 7,
+}}
+var mGetDatasetIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatasetIntegrationInput_Arn}}
+var mGetDatasetIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDatasetIntegrationOutput_Arn, &sGetDatasetIntegrationOutput_RoleArn, &sGetDatasetIntegrationOutput_CreatedAt, &sGetDatasetIntegrationOutput_UpdatedAt}}
+var mGetS3TableIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetS3TableIntegrationInput_Arn}}
+var mGetS3TableIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetS3TableIntegrationOutput_Arn, &sGetS3TableIntegrationOutput_RoleArn, &sGetS3TableIntegrationOutput_Status, &sGetS3TableIntegrationOutput_Encryption, &sGetS3TableIntegrationOutput_DestinationTableBucketArn, &sGetS3TableIntegrationOutput_CreatedTimeStamp}}
+var mGetTelemetryEnrichmentStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryEnrichmentStatusOutput_Status, &sGetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn}}
+var mGetTelemetryEvaluationStatusForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryEvaluationStatusForOrganizationOutput_Status, &sGetTelemetryEvaluationStatusForOrganizationOutput_FailureReason, &sGetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion, &sGetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses}}
+var mGetTelemetryEvaluationStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryEvaluationStatusOutput_Status, &sGetTelemetryEvaluationStatusOutput_FailureReason, &sGetTelemetryEvaluationStatusOutput_HomeRegion, &sGetTelemetryEvaluationStatusOutput_RegionStatuses}}
+var mGetTelemetryPipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryPipelineInput_PipelineIdentifier}}
+var mGetTelemetryPipelineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryPipelineOutput_Pipeline}}
+var mGetTelemetryRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryRuleForOrganizationInput_RuleIdentifier}}
+var mGetTelemetryRuleForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryRuleForOrganizationOutput_RuleName, &sGetTelemetryRuleForOrganizationOutput_RuleArn, &sGetTelemetryRuleForOrganizationOutput_CreatedTimeStamp, &sGetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp, &sGetTelemetryRuleForOrganizationOutput_TelemetryRule, &sGetTelemetryRuleForOrganizationOutput_HomeRegion, &sGetTelemetryRuleForOrganizationOutput_IsReplicated, &sGetTelemetryRuleForOrganizationOutput_RegionStatuses}}
+var mGetTelemetryRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryRuleInput_RuleIdentifier}}
+var mGetTelemetryRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTelemetryRuleOutput_RuleName, &sGetTelemetryRuleOutput_RuleArn, &sGetTelemetryRuleOutput_CreatedTimeStamp, &sGetTelemetryRuleOutput_LastUpdateTimeStamp, &sGetTelemetryRuleOutput_TelemetryRule, &sGetTelemetryRuleOutput_HomeRegion, &sGetTelemetryRuleOutput_IsReplicated, &sGetTelemetryRuleOutput_RegionStatuses}}
+var mListCentralizationRulesForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCentralizationRulesForOrganizationInput_RuleNamePrefix, &sListCentralizationRulesForOrganizationInput_AllRegions, &sListCentralizationRulesForOrganizationInput_MaxResults, &sListCentralizationRulesForOrganizationInput_NextToken}}
+var mListCentralizationRulesForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries, &sListCentralizationRulesForOrganizationOutput_NextToken}}
+var mListDatasetIntegrationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetIntegrationsInput_MaxResults, &sListDatasetIntegrationsInput_NextToken}}
+var mListDatasetIntegrationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDatasetIntegrationsOutput_DatasetIntegrationSummaries, &sListDatasetIntegrationsOutput_NextToken}}
+var mListResourceTelemetryForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceTelemetryForOrganizationInput_AccountIdentifiers, &sListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix, &sListResourceTelemetryForOrganizationInput_ResourceTypes, &sListResourceTelemetryForOrganizationInput_TelemetryConfigurationState, &sListResourceTelemetryForOrganizationInput_ResourceTags, &sListResourceTelemetryForOrganizationInput_MaxResults, &sListResourceTelemetryForOrganizationInput_NextToken}}
+var mListResourceTelemetryForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceTelemetryForOrganizationOutput_TelemetryConfigurations, &sListResourceTelemetryForOrganizationOutput_NextToken}}
+var mListResourceTelemetryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceTelemetryInput_ResourceIdentifierPrefix, &sListResourceTelemetryInput_ResourceTypes, &sListResourceTelemetryInput_TelemetryConfigurationState, &sListResourceTelemetryInput_ResourceTags, &sListResourceTelemetryInput_MaxResults, &sListResourceTelemetryInput_NextToken}}
+var mListResourceTelemetryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceTelemetryOutput_TelemetryConfigurations, &sListResourceTelemetryOutput_NextToken}}
+var mListS3TableIntegrationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListS3TableIntegrationsInput_MaxResults, &sListS3TableIntegrationsInput_NextToken}}
+var mListS3TableIntegrationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListS3TableIntegrationsOutput_IntegrationSummaries, &sListS3TableIntegrationsOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceARN}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mListTelemetryPipelinesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTelemetryPipelinesInput_MaxResults, &sListTelemetryPipelinesInput_NextToken}}
+var mListTelemetryPipelinesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTelemetryPipelinesOutput_PipelineSummaries, &sListTelemetryPipelinesOutput_NextToken}}
+var mListTelemetryRulesForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTelemetryRulesForOrganizationInput_RuleNamePrefix, &sListTelemetryRulesForOrganizationInput_SourceAccountIds, &sListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds, &sListTelemetryRulesForOrganizationInput_MaxResults, &sListTelemetryRulesForOrganizationInput_NextToken}}
+var mListTelemetryRulesForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries, &sListTelemetryRulesForOrganizationOutput_NextToken}}
+var mListTelemetryRulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTelemetryRulesInput_RuleNamePrefix, &sListTelemetryRulesInput_MaxResults, &sListTelemetryRulesInput_NextToken}}
+var mListTelemetryRulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTelemetryRulesOutput_TelemetryRuleSummaries, &sListTelemetryRulesOutput_NextToken}}
+var mStartTelemetryEnrichmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTelemetryEnrichmentOutput_Status, &sStartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn}}
+var mStartTelemetryEvaluationForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTelemetryEvaluationForOrganizationInput_Regions, &sStartTelemetryEvaluationForOrganizationInput_AllRegions}}
+var mStartTelemetryEvaluationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTelemetryEvaluationInput_Regions, &sStartTelemetryEvaluationInput_AllRegions}}
+var mStopTelemetryEnrichmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopTelemetryEnrichmentOutput_Status}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceARN, &sTagResourceInput_Tags}}
+var mTestTelemetryPipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTestTelemetryPipelineInput_Records, &sTestTelemetryPipelineInput_Configuration, &sTestTelemetryPipelineInput_SignalType}}
+var mTestTelemetryPipelineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sTestTelemetryPipelineOutput_Results}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceARN, &sUntagResourceInput_TagKeys}}
+var mUpdateCentralizationRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCentralizationRuleForOrganizationInput_RuleIdentifier, &sUpdateCentralizationRuleForOrganizationInput_Rule}}
+var mUpdateCentralizationRuleForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCentralizationRuleForOrganizationOutput_RuleArn}}
+var mUpdateDatasetIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatasetIntegrationInput_Arn, &sUpdateDatasetIntegrationInput_RoleArn}}
+var mUpdateDatasetIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDatasetIntegrationOutput_Arn, &sUpdateDatasetIntegrationOutput_RoleArn, &sUpdateDatasetIntegrationOutput_CreatedAt, &sUpdateDatasetIntegrationOutput_UpdatedAt}}
+var mUpdateTelemetryPipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTelemetryPipelineInput_PipelineIdentifier, &sUpdateTelemetryPipelineInput_Configuration}}
+var mUpdateTelemetryRuleForOrganizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTelemetryRuleForOrganizationInput_RuleIdentifier, &sUpdateTelemetryRuleForOrganizationInput_Rule}}
+var mUpdateTelemetryRuleForOrganizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTelemetryRuleForOrganizationOutput_RuleArn}}
+var mUpdateTelemetryRuleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTelemetryRuleInput_RuleIdentifier, &sUpdateTelemetryRuleInput_Rule}}
+var mUpdateTelemetryRuleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTelemetryRuleOutput_RuleArn}}
+var mValidateTelemetryPipelineConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateTelemetryPipelineConfigurationInput_Configuration}}
+var mValidateTelemetryPipelineConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sValidateTelemetryPipelineConfigurationOutput_Errors}}
+
+var sCreateCentralizationRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCentralizationRuleForOrganization, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateDatasetIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetIntegration, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateS3TableIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateS3TableIntegration, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateTelemetryPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryPipeline, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateTelemetryRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryRule, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateTelemetryRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryRuleForOrganization, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteCentralizationRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCentralizationRuleForOrganization, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteDatasetIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetIntegration, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteS3TableIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteS3TableIntegration, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteTelemetryPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTelemetryPipeline, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteTelemetryRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTelemetryRule, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteTelemetryRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTelemetryRuleForOrganization, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetCentralizationRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCentralizationRuleForOrganization, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetDatasetIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatasetIntegration, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetS3TableIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetS3TableIntegration, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetTelemetryEnrichmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryEnrichmentStatus, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetTelemetryEvaluationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryEvaluationStatus, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetTelemetryEvaluationStatusForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryEvaluationStatusForOrganization, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetTelemetryPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryPipeline, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetTelemetryRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryRule, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sGetTelemetryRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryRuleForOrganization, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListCentralizationRulesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCentralizationRulesForOrganization, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListDatasetIntegrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetIntegrations, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListResourceTelemetry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTelemetry, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListResourceTelemetryForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTelemetryForOrganization, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListS3TableIntegrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListS3TableIntegrations, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListTelemetryPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryPipelines, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListTelemetryRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryRules, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListTelemetryRulesForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryRulesForOrganization, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sStartTelemetryEnrichment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTelemetryEnrichment, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sStartTelemetryEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTelemetryEvaluation, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sStartTelemetryEvaluationForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTelemetryEvaluationForOrganization, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sStopTelemetryEnrichment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopTelemetryEnrichment, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sStopTelemetryEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopTelemetryEvaluation, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sStopTelemetryEvaluationForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopTelemetryEvaluationForOrganization, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sTestTelemetryPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestTelemetryPipeline, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sUpdateCentralizationRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCentralizationRuleForOrganization, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sUpdateDatasetIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetIntegration, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sUpdateTelemetryPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryPipeline, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sUpdateTelemetryRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryRule, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sUpdateTelemetryRuleForOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryRuleForOrganization, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sValidateTelemetryPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateTelemetryPipelineConfiguration, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var s_ObservabilityAdmin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObservabilityAdmin, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var s_AccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdentifier, Type: smithy.ShapeTypeString})
+var s_AccountIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdentifiers, Members: &m_AccountIdentifiers, Type: smithy.ShapeTypeList})
+var sAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeEnum})
+var sActionCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActionCondition, Members: &mActionCondition, Type: smithy.ShapeTypeStructure})
+var sAdvancedEventSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedEventSelector, Members: &mAdvancedEventSelector, Type: smithy.ShapeTypeStructure})
+var s_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdvancedFieldSelector, Members: &mAdvancedFieldSelector, Type: smithy.ShapeTypeStructure})
+var s_AllRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AllRegions, Type: smithy.ShapeTypeBoolean})
+var s_AwsResourceExplorerManagedViewArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsResourceExplorerManagedViewArn, Type: smithy.ShapeTypeString})
+var sCentralizationFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCentralizationFailureReason, Members: &mCentralizationFailureReason, Type: smithy.ShapeTypeEnum})
+var sCentralizationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCentralizationRule, Members: &mCentralizationRule, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCentralizationRuleDestination, Members: &mCentralizationRuleDestination, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCentralizationRuleSource, Members: &mCentralizationRuleSource, Type: smithy.ShapeTypeStructure})
+var s_CentralizationRuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CentralizationRuleSummaries, Members: &m_CentralizationRuleSummaries, Type: smithy.ShapeTypeList})
+var sCentralizationRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCentralizationRuleSummary, Members: &mCentralizationRuleSummary, Type: smithy.ShapeTypeStructure})
+var sCloudtrailParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudtrailParameters, Members: &mCloudtrailParameters, Type: smithy.ShapeTypeStructure})
+var sCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure})
+var s_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Conditions, Members: &m_Conditions, Type: smithy.ShapeTypeList})
+var sConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSummary, Members: &mConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t47, Type: smithy.ShapeTypeStructure})
+var sContextGraphStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContextGraphStatus, Members: &mContextGraphStatus, Type: smithy.ShapeTypeEnum})
+var s_DatasetIntegrationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatasetIntegrationSummaries, Members: &m_DatasetIntegrationSummaries, Type: smithy.ShapeTypeList})
+var sDatasetIntegrationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatasetIntegrationSummary, Members: &mDatasetIntegrationSummary, Type: smithy.ShapeTypeStructure})
+var sDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure})
+var s_DataSourceFilterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSourceFilterString, Type: smithy.ShapeTypeString})
+var s_DataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSources, Members: &m_DataSources, Type: smithy.ShapeTypeList})
+var sDeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletionProtection, Members: &mDeletionProtection, Type: smithy.ShapeTypeEnum})
+var sDestinationLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationLogsConfiguration, Members: &mDestinationLogsConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationMetricsConfiguration, Members: &mDestinationMetricsConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationType, Members: &mDestinationType, Type: smithy.ShapeTypeEnum})
+var sELBLoadBalancerLoggingParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iELBLoadBalancerLoggingParameters, Members: &mELBLoadBalancerLoggingParameters, Type: smithy.ShapeTypeStructure})
+var sEncryptedLogGroupStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptedLogGroupStrategy, Members: &mEncryptedLogGroupStrategy, Type: smithy.ShapeTypeEnum})
+var sEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryption, Members: &mEncryption, Type: smithy.ShapeTypeStructure})
+var sEncryptionConflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConflictResolutionStrategy, Members: &mEncryptionConflictResolutionStrategy, Type: smithy.ShapeTypeEnum})
+var sEncryptionScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionScope, Members: &mEncryptionScope, Type: smithy.ShapeTypeEnum})
+var sEncryptionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionStrategy, Members: &mEncryptionStrategy, Type: smithy.ShapeTypeEnum})
+var s_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var s_FieldMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldMap, Members: &m_FieldMap, Type: smithy.ShapeTypeMap})
+var s_FieldSelectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldSelectors, Members: &m_FieldSelectors, Type: smithy.ShapeTypeList})
+var sFieldToMatch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFilterBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterBehavior, Members: &mFilterBehavior, Type: smithy.ShapeTypeEnum})
+var sFilterRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterRequirement, Members: &mFilterRequirement, Type: smithy.ShapeTypeEnum})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sIntegrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrationStatus, Members: &mIntegrationStatus, Type: smithy.ShapeTypeEnum})
+var s_IntegrationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationSummaries, Members: &m_IntegrationSummaries, Type: smithy.ShapeTypeList})
+var sIntegrationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrationSummary, Members: &mIntegrationSummary, Type: smithy.ShapeTypeStructure})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t48, Type: smithy.ShapeTypeStructure})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var s_IsReplicated = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsReplicated, Type: smithy.ShapeTypeBoolean})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sLabelNameCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLabelNameCondition, Members: &mLabelNameCondition, Type: smithy.ShapeTypeStructure})
+var s_ListCentralizationRulesForOrganizationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListCentralizationRulesForOrganizationMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListDatasetIntegrationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListDatasetIntegrationsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListResourceTelemetryForOrganizationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListResourceTelemetryForOrganizationMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListResourceTelemetryMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListResourceTelemetryMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListS3TableIntegrationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListS3TableIntegrationsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListTelemetryPipelinesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTelemetryPipelinesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListTelemetryRulesForOrganizationMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTelemetryRulesForOrganizationMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListTelemetryRulesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTelemetryRulesMaxResults, Type: smithy.ShapeTypeInteger})
+var sLogDeliveryParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDeliveryParameters, Members: &mLogDeliveryParameters, Type: smithy.ShapeTypeStructure})
+var sLoggingFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingFilter, Members: &mLoggingFilter, Type: smithy.ShapeTypeStructure})
+var sLogGroupNameConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogGroupNameConfiguration, Members: &mLogGroupNameConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LogGroupNamePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupNamePattern, Type: smithy.ShapeTypeString})
+var sLogsBackupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsBackupConfiguration, Members: &mLogsBackupConfiguration, Type: smithy.ShapeTypeStructure})
+var sLogsEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogsEncryptionConfiguration, Members: &mLogsEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LogsFilterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogsFilterString, Type: smithy.ShapeTypeString})
+var sLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum})
+var s_LogTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogTypes, Members: &m_LogTypes, Type: smithy.ShapeTypeList})
+var sMetricsBackupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricsBackupConfiguration, Members: &mMetricsBackupConfiguration, Type: smithy.ShapeTypeStructure})
+var s_MetricsFilterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricsFilterString, Type: smithy.ShapeTypeString})
+var sMskEnhancedMonitoringLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMskEnhancedMonitoringLevel, Members: &mMskEnhancedMonitoringLevel, Type: smithy.ShapeTypeEnum})
+var sMskMonitoringParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMskMonitoringParameters, Members: &mMskMonitoringParameters, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OrganizationUnitIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationUnitIdentifier, Type: smithy.ShapeTypeString})
+var s_OrganizationUnitIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationUnitIdentifiers, Members: &m_OrganizationUnitIdentifiers, Type: smithy.ShapeTypeList})
+var sOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum})
+var sPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineOutput, Members: &mPipelineOutput, Type: smithy.ShapeTypeStructure})
+var sPipelineOutputError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineOutputError, Members: &mPipelineOutputError, Type: smithy.ShapeTypeStructure})
+var s_PipelineOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineOutputs, Members: &m_PipelineOutputs, Type: smithy.ShapeTypeList})
+var s_Processors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Processors, Members: &m_Processors, Type: smithy.ShapeTypeList})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var sRecordFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordFormat, Members: &mRecordFormat, Type: smithy.ShapeTypeEnum})
+var s_Records = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Records, Members: &m_Records, Type: smithy.ShapeTypeList})
+var s_RedactedFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedactedFields, Members: &m_RedactedFields, Type: smithy.ShapeTypeList})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString})
+var s_Regions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sRegionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionStatus, Members: &mRegionStatus, Type: smithy.ShapeTypeStructure})
+var s_RegionStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionStatuses, Members: &m_RegionStatuses, Type: smithy.ShapeTypeList})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var s_ResourceIdentifierPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifierPrefix, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t50, Type: smithy.ShapeTypeStructure})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var s_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypes, Members: &m_ResourceTypes, Type: smithy.ShapeTypeList})
+var s_RetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionPeriodInDays, Type: smithy.ShapeTypeInteger})
+var sRuleHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleHealth, Members: &mRuleHealth, Type: smithy.ShapeTypeEnum})
+var s_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t51, Type: smithy.ShapeTypeStructure})
+var sSignalType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalType, Members: &mSignalType, Type: smithy.ShapeTypeEnum})
+var sSingleHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingleHeader, Members: &mSingleHeader, Type: smithy.ShapeTypeStructure})
+var s_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sinks, Members: &m_Sinks, Type: smithy.ShapeTypeList})
+var sSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure})
+var sSourceContextGraphConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceContextGraphConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SourceFilterString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceFilterString, Type: smithy.ShapeTypeString})
+var sSourceLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceLogsConfiguration, Members: &mSourceLogsConfiguration, Type: smithy.ShapeTypeStructure})
+var sSourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceMetricsConfiguration, Members: &mSourceMetricsConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Sources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sources, Members: &m_Sources, Type: smithy.ShapeTypeList})
+var sSSEAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSSEAlgorithm, Members: &mSSEAlgorithm, Type: smithy.ShapeTypeEnum})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTagConflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagConflictResolutionStrategy, Members: &mTagConflictResolutionStrategy, Type: smithy.ShapeTypeEnum})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMapInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var s_TagMapOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sTagPropagationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPropagationConfiguration, Members: &mTagPropagationConfiguration, Type: smithy.ShapeTypeStructure})
+var sTagPropagationFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPropagationFailureReason, Members: &mTagPropagationFailureReason, Type: smithy.ShapeTypeEnum})
+var sTagPropagationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPropagationStatus, Members: &mTagPropagationStatus, Type: smithy.ShapeTypeEnum})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTelemetryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryConfiguration, Members: &mTelemetryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_TelemetryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetryConfigurations, Members: &m_TelemetryConfigurations, Type: smithy.ShapeTypeList})
+var s_TelemetryConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetryConfigurationState, Members: &m_TelemetryConfigurationState, Type: smithy.ShapeTypeMap})
+var sTelemetryDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryDestinationConfiguration, Members: &mTelemetryDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sTelemetryEnrichmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryEnrichmentStatus, Members: &mTelemetryEnrichmentStatus, Type: smithy.ShapeTypeEnum})
+var sTelemetryPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryPipeline, Members: &mTelemetryPipeline, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryPipelineConfiguration, Members: &mTelemetryPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var s_TelemetryPipelineConfigurationBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetryPipelineConfigurationBody, Type: smithy.ShapeTypeString})
+var s_TelemetryPipelineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetryPipelineIdentifier, Type: smithy.ShapeTypeString})
+var s_TelemetryPipelineName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetryPipelineName, Type: smithy.ShapeTypeString})
+var sTelemetryPipelineStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryPipelineStatus, Members: &mTelemetryPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sTelemetryPipelineStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryPipelineStatusReason, Members: &mTelemetryPipelineStatusReason, Type: smithy.ShapeTypeStructure})
+var s_TelemetryPipelineSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetryPipelineSummaries, Members: &m_TelemetryPipelineSummaries, Type: smithy.ShapeTypeList})
+var sTelemetryPipelineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryPipelineSummary, Members: &mTelemetryPipelineSummary, Type: smithy.ShapeTypeStructure})
+var sTelemetryRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryRule, Members: &mTelemetryRule, Type: smithy.ShapeTypeStructure})
+var s_TelemetryRuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetryRuleSummaries, Members: &m_TelemetryRuleSummaries, Type: smithy.ShapeTypeList})
+var sTelemetryRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryRuleSummary, Members: &mTelemetryRuleSummary, Type: smithy.ShapeTypeStructure})
+var sTelemetrySourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetrySourceType, Members: &mTelemetrySourceType, Type: smithy.ShapeTypeEnum})
+var s_TelemetrySourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TelemetrySourceTypes, Members: &m_TelemetrySourceTypes, Type: smithy.ShapeTypeList})
+var sTelemetryState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryState, Members: &mTelemetryState, Type: smithy.ShapeTypeEnum})
+var sTelemetryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelemetryType, Members: &mTelemetryType, Type: smithy.ShapeTypeEnum})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t52, Type: smithy.ShapeTypeStructure})
+var sValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationError, Members: &mValidationError, Type: smithy.ShapeTypeStructure})
+var s_ValidationErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var sVPCFlowLogParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVPCFlowLogParameters, Members: &mVPCFlowLogParameters, Type: smithy.ShapeTypeStructure})
+var sWAFLoggingParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFLoggingParameters, Members: &mWAFLoggingParameters, Type: smithy.ShapeTypeStructure})
+var sWAFLogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWAFLogType, Members: &mWAFLogType, Type: smithy.ShapeTypeEnum})
+var sCreateCentralizationRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCentralizationRuleForOrganizationInput, Members: &mCreateCentralizationRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sCreateCentralizationRuleForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCentralizationRuleForOrganizationOutput, Members: &mCreateCentralizationRuleForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetIntegrationInput, Members: &mCreateDatasetIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sCreateDatasetIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDatasetIntegrationOutput, Members: &mCreateDatasetIntegrationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateS3TableIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateS3TableIntegrationInput, Members: &mCreateS3TableIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sCreateS3TableIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateS3TableIntegrationOutput, Members: &mCreateS3TableIntegrationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryPipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryPipelineInput, Members: &mCreateTelemetryPipelineInput, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryPipelineOutput, Members: &mCreateTelemetryPipelineOutput, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryRuleForOrganizationInput, Members: &mCreateTelemetryRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryRuleForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryRuleForOrganizationOutput, Members: &mCreateTelemetryRuleForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryRuleInput, Members: &mCreateTelemetryRuleInput, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTelemetryRuleOutput, Members: &mCreateTelemetryRuleOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteCentralizationRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCentralizationRuleForOrganizationInput, Members: &mDeleteCentralizationRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteDatasetIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDatasetIntegrationInput, Members: &mDeleteDatasetIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteS3TableIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteS3TableIntegrationInput, Members: &mDeleteS3TableIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTelemetryPipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTelemetryPipelineInput, Members: &mDeleteTelemetryPipelineInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTelemetryPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTelemetryPipelineOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteTelemetryRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTelemetryRuleForOrganizationInput, Members: &mDeleteTelemetryRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTelemetryRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTelemetryRuleInput, Members: &mDeleteTelemetryRuleInput, Type: smithy.ShapeTypeStructure})
+var sGetCentralizationRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCentralizationRuleForOrganizationInput, Members: &mGetCentralizationRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sGetCentralizationRuleForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCentralizationRuleForOrganizationOutput, Members: &mGetCentralizationRuleForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sGetDatasetIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatasetIntegrationInput, Members: &mGetDatasetIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sGetDatasetIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDatasetIntegrationOutput, Members: &mGetDatasetIntegrationOutput, Type: smithy.ShapeTypeStructure})
+var sGetS3TableIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetS3TableIntegrationInput, Members: &mGetS3TableIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sGetS3TableIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetS3TableIntegrationOutput, Members: &mGetS3TableIntegrationOutput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryEnrichmentStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryEnrichmentStatusOutput, Members: &mGetTelemetryEnrichmentStatusOutput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryEvaluationStatusForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryEvaluationStatusForOrganizationOutput, Members: &mGetTelemetryEvaluationStatusForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryEvaluationStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryEvaluationStatusOutput, Members: &mGetTelemetryEvaluationStatusOutput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryPipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryPipelineInput, Members: &mGetTelemetryPipelineInput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryPipelineOutput, Members: &mGetTelemetryPipelineOutput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryRuleForOrganizationInput, Members: &mGetTelemetryRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryRuleForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryRuleForOrganizationOutput, Members: &mGetTelemetryRuleForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryRuleInput, Members: &mGetTelemetryRuleInput, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTelemetryRuleOutput, Members: &mGetTelemetryRuleOutput, Type: smithy.ShapeTypeStructure})
+var sListCentralizationRulesForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCentralizationRulesForOrganizationInput, Members: &mListCentralizationRulesForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sListCentralizationRulesForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCentralizationRulesForOrganizationOutput, Members: &mListCentralizationRulesForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sListDatasetIntegrationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetIntegrationsInput, Members: &mListDatasetIntegrationsInput, Type: smithy.ShapeTypeStructure})
+var sListDatasetIntegrationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDatasetIntegrationsOutput, Members: &mListDatasetIntegrationsOutput, Type: smithy.ShapeTypeStructure})
+var sListResourceTelemetryForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTelemetryForOrganizationInput, Members: &mListResourceTelemetryForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sListResourceTelemetryForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTelemetryForOrganizationOutput, Members: &mListResourceTelemetryForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sListResourceTelemetryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTelemetryInput, Members: &mListResourceTelemetryInput, Type: smithy.ShapeTypeStructure})
+var sListResourceTelemetryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceTelemetryOutput, Members: &mListResourceTelemetryOutput, Type: smithy.ShapeTypeStructure})
+var sListS3TableIntegrationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListS3TableIntegrationsInput, Members: &mListS3TableIntegrationsInput, Type: smithy.ShapeTypeStructure})
+var sListS3TableIntegrationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListS3TableIntegrationsOutput, Members: &mListS3TableIntegrationsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListTelemetryPipelinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryPipelinesInput, Members: &mListTelemetryPipelinesInput, Type: smithy.ShapeTypeStructure})
+var sListTelemetryPipelinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryPipelinesOutput, Members: &mListTelemetryPipelinesOutput, Type: smithy.ShapeTypeStructure})
+var sListTelemetryRulesForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryRulesForOrganizationInput, Members: &mListTelemetryRulesForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sListTelemetryRulesForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryRulesForOrganizationOutput, Members: &mListTelemetryRulesForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sListTelemetryRulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryRulesInput, Members: &mListTelemetryRulesInput, Type: smithy.ShapeTypeStructure})
+var sListTelemetryRulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTelemetryRulesOutput, Members: &mListTelemetryRulesOutput, Type: smithy.ShapeTypeStructure})
+var sStartTelemetryEnrichmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTelemetryEnrichmentOutput, Members: &mStartTelemetryEnrichmentOutput, Type: smithy.ShapeTypeStructure})
+var sStartTelemetryEvaluationForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTelemetryEvaluationForOrganizationInput, Members: &mStartTelemetryEvaluationForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sStartTelemetryEvaluationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTelemetryEvaluationInput, Members: &mStartTelemetryEvaluationInput, Type: smithy.ShapeTypeStructure})
+var sStopTelemetryEnrichmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopTelemetryEnrichmentOutput, Members: &mStopTelemetryEnrichmentOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTestTelemetryPipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestTelemetryPipelineInput, Members: &mTestTelemetryPipelineInput, Type: smithy.ShapeTypeStructure})
+var sTestTelemetryPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestTelemetryPipelineOutput, Members: &mTestTelemetryPipelineOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUpdateCentralizationRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCentralizationRuleForOrganizationInput, Members: &mUpdateCentralizationRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateCentralizationRuleForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCentralizationRuleForOrganizationOutput, Members: &mUpdateCentralizationRuleForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasetIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetIntegrationInput, Members: &mUpdateDatasetIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateDatasetIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDatasetIntegrationOutput, Members: &mUpdateDatasetIntegrationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryPipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryPipelineInput, Members: &mUpdateTelemetryPipelineInput, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryPipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryPipelineOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryRuleForOrganizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryRuleForOrganizationInput, Members: &mUpdateTelemetryRuleForOrganizationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryRuleForOrganizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryRuleForOrganizationOutput, Members: &mUpdateTelemetryRuleForOrganizationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryRuleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryRuleInput, Members: &mUpdateTelemetryRuleInput, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryRuleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTelemetryRuleOutput, Members: &mUpdateTelemetryRuleOutput, Type: smithy.ShapeTypeStructure})
+var sValidateTelemetryPipelineConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateTelemetryPipelineConfigurationInput, Members: &mValidateTelemetryPipelineConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sValidateTelemetryPipelineConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidateTelemetryPipelineConfigurationOutput, Members: &mValidateTelemetryPipelineConfigurationOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_AccountIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountIdentifier, Type: smithy.ShapeTypeString})
+var sAction_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAction_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAction_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAction_CAPTCHA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAPTCHA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAction_CHALLENGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHALLENGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAction_EXCLUDED_AS_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXCLUDED_AS_COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActionCondition_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iAction, Members: &mAction, Type: smithy.ShapeTypeEnum})
+var sAdvancedEventSelector_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sAdvancedEventSelector_FieldSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldSelectors", ID: &i_FieldSelectors, Members: &m_FieldSelectors, Type: smithy.ShapeTypeList})
+var s_AdvancedEventSelectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdvancedEventSelector, Members: &mAdvancedEventSelector, Type: smithy.ShapeTypeStructure})
+var sAdvancedFieldSelector_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &pString, Type: smithy.ShapeTypeString})
+var sAdvancedFieldSelector_Equals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Equals", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_StartsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartsWith", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_EndsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndsWith", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_NotEquals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotEquals", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_NotStartsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotStartsWith", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAdvancedFieldSelector_NotEndsWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotEndsWith", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCentralizationFailureReason_TRUSTED_ACCESS_NOT_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUSTED_ACCESS_NOT_ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCentralizationFailureReason_DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCentralizationFailureReason_INTERNAL_SERVER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCentralizationRule_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iCentralizationRuleSource, Members: &mCentralizationRuleSource, Type: smithy.ShapeTypeStructure})
+var sCentralizationRule_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iCentralizationRuleDestination, Members: &mCentralizationRuleDestination, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleDestination_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sCentralizationRuleDestination_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &i_AccountIdentifier, Type: smithy.ShapeTypeString})
+var sCentralizationRuleDestination_DestinationLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationLogsConfiguration", ID: &iDestinationLogsConfiguration, Members: &mDestinationLogsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleDestination_DestinationMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationMetricsConfiguration", ID: &iDestinationMetricsConfiguration, Members: &mDestinationMetricsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleSource_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sCentralizationRuleSource_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &i_SourceFilterString, Type: smithy.ShapeTypeString})
+var sCentralizationRuleSource_SourceLogsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceLogsConfiguration", ID: &iSourceLogsConfiguration, Members: &mSourceLogsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleSource_SourceMetricsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceMetricsConfiguration", ID: &iSourceMetricsConfiguration, Members: &mSourceMetricsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleSource_SourceContextGraphConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceContextGraphConfiguration", ID: &iSourceContextGraphConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CentralizationRuleSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCentralizationRuleSummary, Members: &mCentralizationRuleSummary, Type: smithy.ShapeTypeStructure})
+var sCentralizationRuleSummary_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sCentralizationRuleSummary_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCentralizationRuleSummary_CreatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorAccountId", ID: &pString, Type: smithy.ShapeTypeString})
+var sCentralizationRuleSummary_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCentralizationRuleSummary_CreatedRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sCentralizationRuleSummary_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCentralizationRuleSummary_RuleHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleHealth", ID: &iRuleHealth, Members: &mRuleHealth, Type: smithy.ShapeTypeEnum})
+var sCentralizationRuleSummary_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &iCentralizationFailureReason, Members: &mCentralizationFailureReason, Type: smithy.ShapeTypeEnum})
+var sCentralizationRuleSummary_TagPropagationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagPropagationStatus", ID: &iTagPropagationStatus, Members: &mTagPropagationStatus, Type: smithy.ShapeTypeEnum})
+var sCentralizationRuleSummary_TagPropagationFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagPropagationFailureReason", ID: &iTagPropagationFailureReason, Members: &mTagPropagationFailureReason, Type: smithy.ShapeTypeEnum})
+var sCentralizationRuleSummary_ContextGraphStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextGraphStatus", ID: &iContextGraphStatus, Members: &mContextGraphStatus, Type: smithy.ShapeTypeEnum})
+var sCentralizationRuleSummary_DestinationAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationAccountId", ID: &pString, Type: smithy.ShapeTypeString})
+var sCentralizationRuleSummary_DestinationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sCloudtrailParameters_AdvancedEventSelectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdvancedEventSelectors", ID: &i_AdvancedEventSelectors, Members: &m_AdvancedEventSelectors, Type: smithy.ShapeTypeList})
+var sCondition_ActionCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionCondition", ID: &iActionCondition, Members: &mActionCondition, Type: smithy.ShapeTypeStructure})
+var sCondition_LabelNameCondition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelNameCondition", ID: &iLabelNameCondition, Members: &mLabelNameCondition, Type: smithy.ShapeTypeStructure})
+var s_Conditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCondition, Members: &mCondition, Type: smithy.ShapeTypeStructure})
+var sConfigurationSummary_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_Sources, Members: &m_Sources, Type: smithy.ShapeTypeList})
+var sConfigurationSummary_DataSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSources", ID: &i_DataSources, Members: &m_DataSources, Type: smithy.ShapeTypeList})
+var sConfigurationSummary_Processors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processors", ID: &i_Processors, Members: &m_Processors, Type: smithy.ShapeTypeList})
+var sConfigurationSummary_ProcessorCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProcessorCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sConfigurationSummary_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sinks", ID: &i_Sinks, Members: &m_Sinks, Type: smithy.ShapeTypeList})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sContextGraphStatus_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContextGraphStatus_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContextGraphStatus_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DatasetIntegrationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDatasetIntegrationSummary, Members: &mDatasetIntegrationSummary, Type: smithy.ShapeTypeStructure})
+var sDatasetIntegrationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDatasetIntegrationSummary_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDatasetIntegrationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDatasetIntegrationSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDataSource_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sDataSource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var s_DataSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure})
+var sDeletionProtection_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestinationLogsConfiguration_LogsEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogsEncryptionConfiguration", ID: &iLogsEncryptionConfiguration, Members: &mLogsEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationLogsConfiguration_BackupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupConfiguration", ID: &iLogsBackupConfiguration, Members: &mLogsBackupConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationLogsConfiguration_LogGroupNameConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupNameConfiguration", ID: &iLogGroupNameConfiguration, Members: &mLogGroupNameConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationLogsConfiguration_TagPropagationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagPropagationConfiguration", ID: &iTagPropagationConfiguration, Members: &mTagPropagationConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationLogsConfiguration_LogGroupDeletionProtection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupDeletionProtection", ID: &iDeletionProtection, Members: &mDeletionProtection, Type: smithy.ShapeTypeEnum})
+var sDestinationMetricsConfiguration_BackupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupConfiguration", ID: &iMetricsBackupConfiguration, Members: &mMetricsBackupConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationType_CLOUDWATCH_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOUDWATCH_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sELBLoadBalancerLoggingParameters_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &iOutputFormat, Members: &mOutputFormat, Type: smithy.ShapeTypeEnum})
+var sELBLoadBalancerLoggingParameters_FieldDelimiter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldDelimiter", ID: &pString, Type: smithy.ShapeTypeString})
+var sEncryptedLogGroupStrategy_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptedLogGroupStrategy_SKIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryption_SseAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SseAlgorithm", ID: &iSSEAlgorithm, Members: &mSSEAlgorithm, Type: smithy.ShapeTypeEnum})
+var sEncryption_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sEncryptionConflictResolutionStrategy_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionConflictResolutionStrategy_SKIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionScope_ENCRYPTED_SOURCE_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTED_SOURCE_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionScope_NEW_DESTINATION_LOG_GROUPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_DESTINATION_LOG_GROUPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionStrategy_CUSTOMER_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionStrategy_AWS_OWNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_OWNED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FieldMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_FieldMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_FieldSelectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdvancedFieldSelector, Members: &mAdvancedFieldSelector, Type: smithy.ShapeTypeStructure})
+var sFieldToMatch_SingleHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleHeader", ID: &iSingleHeader, Members: &mSingleHeader, Type: smithy.ShapeTypeStructure})
+var sFieldToMatch_UriPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPath", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldToMatch_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldToMatch_Method = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Method", ID: &pString, Type: smithy.ShapeTypeString})
+var sFilter_Behavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Behavior", ID: &iFilterBehavior, Members: &mFilterBehavior, Type: smithy.ShapeTypeEnum})
+var sFilter_Requirement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Requirement", ID: &iFilterRequirement, Members: &mFilterRequirement, Type: smithy.ShapeTypeEnum})
+var sFilter_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i_Conditions, Members: &m_Conditions, Type: smithy.ShapeTypeList})
+var sFilterBehavior_KEEP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEEP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterBehavior_DROP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DROP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterRequirement_MEETS_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEETS_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterRequirement_MEETS_ANY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEETS_ANY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Filters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sIntegrationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_IntegrationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntegrationSummary, Members: &mIntegrationSummary, Type: smithy.ShapeTypeStructure})
+var sIntegrationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sIntegrationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIntegrationStatus, Members: &mIntegrationStatus, Type: smithy.ShapeTypeEnum})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t49, Type: smithy.ShapeTypeInteger})
+var sInvalidStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sLabelNameCondition_LabelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelName", ID: &pString, Type: smithy.ShapeTypeString})
+var sLogDeliveryParameters_LogTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogTypes", ID: &i_LogTypes, Members: &m_LogTypes, Type: smithy.ShapeTypeList})
+var sLoggingFilter_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList})
+var sLoggingFilter_DefaultBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultBehavior", ID: &iFilterBehavior, Members: &mFilterBehavior, Type: smithy.ShapeTypeEnum})
+var sLogGroupNameConfiguration_LogGroupNamePattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupNamePattern", ID: &i_LogGroupNamePattern, Type: smithy.ShapeTypeString})
+var sLogsBackupConfiguration_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sLogsBackupConfiguration_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sLogsEncryptionConfiguration_EncryptionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionStrategy", ID: &iEncryptionStrategy, Members: &mEncryptionStrategy, Type: smithy.ShapeTypeEnum})
+var sLogsEncryptionConfiguration_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sLogsEncryptionConfiguration_EncryptionConflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConflictResolutionStrategy", ID: &iEncryptionConflictResolutionStrategy, Members: &mEncryptionConflictResolutionStrategy, Type: smithy.ShapeTypeEnum})
+var sLogsEncryptionConfiguration_EncryptionScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionScope", ID: &iEncryptionScope, Members: &mEncryptionScope, Type: smithy.ShapeTypeEnum})
+var sLogType_APPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_USAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_SECURITY_FINDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_FINDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_CONNECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_S3_SERVER_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_SERVER_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_ALB_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALB_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_ALB_CONNECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALB_CONNECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogType_ALB_HEALTH_CHECK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALB_HEALTH_CHECK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LogTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLogType, Members: &mLogType, Type: smithy.ShapeTypeEnum})
+var sMetricsBackupConfiguration_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sMskEnhancedMonitoringLevel_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMskEnhancedMonitoringLevel_PER_BROKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_BROKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMskEnhancedMonitoringLevel_PER_TOPIC_PER_BROKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_TOPIC_PER_BROKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMskEnhancedMonitoringLevel_PER_TOPIC_PER_PARTITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PER_TOPIC_PER_PARTITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMskMonitoringParameters_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &iMskEnhancedMonitoringLevel, Members: &mMskEnhancedMonitoringLevel, Type: smithy.ShapeTypeEnum})
+var s_OrganizationUnitIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OrganizationUnitIdentifier, Type: smithy.ShapeTypeString})
+var sOutputFormat_PLAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPipelineOutput_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var sPipelineOutput_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iPipelineOutputError, Members: &mPipelineOutputError, Type: smithy.ShapeTypeStructure})
+var sPipelineOutputError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_PipelineOutputs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineOutput, Members: &mPipelineOutput, Type: smithy.ShapeTypeStructure})
+var s_Processors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecord_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecord_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRecordFormat, Members: &mRecordFormat, Type: smithy.ShapeTypeEnum})
+var sRecordFormat_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Records_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var s_RedactedFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldToMatch, Members: &mFieldToMatch, Type: smithy.ShapeTypeStructure})
+var s_Regions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sRegionStatus_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sRegionStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegionStatus_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegionStatus_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_RegionStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegionStatus, Members: &mRegionStatus, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceType_AWS_EC2_INSTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_EC2_INSTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_EC2_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_EC2_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_LAMDBA_FUNCTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_LAMDBA_FUNCTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_CLOUDTRAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDTRAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_EKS_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_EKS_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_WAF_V2_WEB_ACL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_WAF_V2_WEB_ACL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_ELB_LOADBALANCER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ELB_LOADBALANCER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_AGENTCORE_RUNTIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_AGENTCORE_RUNTIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_AGENTCORE_BROWSER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_AGENTCORE_BROWSER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_AGENTCORE_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_AGENTCORE_GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_AGENTCORE_MEMORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_AGENTCORE_MEMORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_SECURITY_HUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SECURITY_HUB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_CLOUDFRONT_DISTRIBUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDFRONT_DISTRIBUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_SECURITY_HUB_HUBV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SECURITY_HUB_HUBV2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_OTEL_ENRICHMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_OTEL_ENRICHMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_MSK_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MSK_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_S3_BUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_S3_BUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_BEDROCK_KNOWLEDGEBASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BEDROCK_KNOWLEDGEBASE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_XRAY_TRANSACTION_SEARCH_CONFIG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ResourceTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sRuleHealth_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleHealth_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleHealth_PROVISIONING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sSignalType_LOG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalType_METRIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METRIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingleHeader_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Sinks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sSource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sSourceLogsConfiguration_LogGroupSelectionCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupSelectionCriteria", ID: &i_LogsFilterString, Type: smithy.ShapeTypeString})
+var sSourceLogsConfiguration_DataSourceSelectionCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceSelectionCriteria", ID: &i_DataSourceFilterString, Type: smithy.ShapeTypeString})
+var sSourceLogsConfiguration_EncryptedLogGroupStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptedLogGroupStrategy", ID: &iEncryptedLogGroupStrategy, Members: &mEncryptedLogGroupStrategy, Type: smithy.ShapeTypeEnum})
+var sSourceMetricsConfiguration_MetricsSelectionCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricsSelectionCriteria", ID: &i_MetricsFilterString, Type: smithy.ShapeTypeString})
+var s_Sources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSource, Members: &mSource, Type: smithy.ShapeTypeStructure})
+var sSSEAlgorithm_SSE_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSSEAlgorithm_SSE_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSE_S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FAILED_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_START", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FAILED_STOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_STOP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagConflictResolutionStrategy_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTagConflictResolutionStrategy_ADD_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTagConflictResolutionStrategy_UPDATE_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMapInput_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMapInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagMapOutput_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagMapOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagPropagationConfiguration_DestinationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sTagPropagationConfiguration_TagConflictResolutionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagConflictResolutionStrategy", ID: &iTagConflictResolutionStrategy, Members: &mTagConflictResolutionStrategy, Type: smithy.ShapeTypeEnum})
+var sTagPropagationFailureReason_ROLE_NOT_ASSUMABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLE_NOT_ASSUMABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTagPropagationFailureReason_ROLE_LACKS_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLE_LACKS_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTagPropagationStatus_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTagPropagationStatus_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryConfiguration_AccountIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIdentifier", ID: &i_AccountIdentifier, Type: smithy.ShapeTypeString})
+var sTelemetryConfiguration_TelemetryConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryConfigurationState", ID: &i_TelemetryConfigurationState, Members: &m_TelemetryConfigurationState, Type: smithy.ShapeTypeMap})
+var sTelemetryConfiguration_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sTelemetryConfiguration_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sTelemetryConfiguration_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sTelemetryConfiguration_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTelemetryConfiguration_TelemetrySourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetrySourceType", ID: &iTelemetrySourceType, Members: &mTelemetrySourceType, Type: smithy.ShapeTypeEnum})
+var s_TelemetryConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTelemetryConfiguration, Members: &mTelemetryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_TelemetryConfigurationState_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iTelemetryType, Members: &mTelemetryType, Type: smithy.ShapeTypeEnum})
+var s_TelemetryConfigurationState_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iTelemetryState, Members: &mTelemetryState, Type: smithy.ShapeTypeEnum})
+var sTelemetryDestinationConfiguration_DestinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationType", ID: &iDestinationType, Members: &mDestinationType, Type: smithy.ShapeTypeEnum})
+var sTelemetryDestinationConfiguration_DestinationPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPattern", ID: &pString, Type: smithy.ShapeTypeString})
+var sTelemetryDestinationConfiguration_RetentionInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionInDays", ID: &i_RetentionPeriodInDays, Type: smithy.ShapeTypeInteger})
+var sTelemetryDestinationConfiguration_VPCFlowLogParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPCFlowLogParameters", ID: &iVPCFlowLogParameters, Members: &mVPCFlowLogParameters, Type: smithy.ShapeTypeStructure})
+var sTelemetryDestinationConfiguration_CloudtrailParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudtrailParameters", ID: &iCloudtrailParameters, Members: &mCloudtrailParameters, Type: smithy.ShapeTypeStructure})
+var sTelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELBLoadBalancerLoggingParameters", ID: &iELBLoadBalancerLoggingParameters, Members: &mELBLoadBalancerLoggingParameters, Type: smithy.ShapeTypeStructure})
+var sTelemetryDestinationConfiguration_WAFLoggingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAFLoggingParameters", ID: &iWAFLoggingParameters, Members: &mWAFLoggingParameters, Type: smithy.ShapeTypeStructure})
+var sTelemetryDestinationConfiguration_LogDeliveryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogDeliveryParameters", ID: &iLogDeliveryParameters, Members: &mLogDeliveryParameters, Type: smithy.ShapeTypeStructure})
+var sTelemetryDestinationConfiguration_MskMonitoringParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MskMonitoringParameters", ID: &iMskMonitoringParameters, Members: &mMskMonitoringParameters, Type: smithy.ShapeTypeStructure})
+var sTelemetryDestinationConfiguration_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sTelemetryEnrichmentStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryEnrichmentStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryEnrichmentStatus_IMPAIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPAIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipeline_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTelemetryPipeline_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTelemetryPipeline_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTelemetryPipeline_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TelemetryPipelineName, Type: smithy.ShapeTypeString})
+var sTelemetryPipeline_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iTelemetryPipelineConfiguration, Members: &mTelemetryPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTelemetryPipelineStatus, Members: &mTelemetryPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sTelemetryPipeline_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iTelemetryPipelineStatusReason, Members: &mTelemetryPipelineStatusReason, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipeline_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sTelemetryPipelineConfiguration_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_TelemetryPipelineConfigurationBody, Type: smithy.ShapeTypeString})
+var sTelemetryPipelineStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineStatus_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineStatusReason_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TelemetryPipelineSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTelemetryPipelineSummary, Members: &mTelemetryPipelineSummary, Type: smithy.ShapeTypeStructure})
+var sTelemetryPipelineSummary_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTelemetryPipelineSummary_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTelemetryPipelineSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTelemetryPipelineSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TelemetryPipelineName, Type: smithy.ShapeTypeString})
+var sTelemetryPipelineSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTelemetryPipelineStatus, Members: &mTelemetryPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sTelemetryPipelineSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sTelemetryPipelineSummary_ConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSummary", ID: &iConfigurationSummary, Members: &mConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sTelemetryRule_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sTelemetryRule_TelemetryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryType", ID: &iTelemetryType, Members: &mTelemetryType, Type: smithy.ShapeTypeEnum})
+var sTelemetryRule_TelemetrySourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetrySourceTypes", ID: &i_TelemetrySourceTypes, Members: &m_TelemetrySourceTypes, Type: smithy.ShapeTypeList})
+var sTelemetryRule_DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationConfiguration", ID: &iTelemetryDestinationConfiguration, Members: &mTelemetryDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sTelemetryRule_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &pString, Type: smithy.ShapeTypeString})
+var sTelemetryRule_SelectionCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectionCriteria", ID: &pString, Type: smithy.ShapeTypeString})
+var sTelemetryRule_AllowFieldUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowFieldUpdates", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sTelemetryRule_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sTelemetryRule_AllRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllRegions", ID: &i_AllRegions, Type: smithy.ShapeTypeBoolean})
+var s_TelemetryRuleSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTelemetryRuleSummary, Members: &mTelemetryRuleSummary, Type: smithy.ShapeTypeStructure})
+var sTelemetryRuleSummary_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sTelemetryRuleSummary_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTelemetryRuleSummary_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTelemetryRuleSummary_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTelemetryRuleSummary_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sTelemetryRuleSummary_TelemetryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryType", ID: &iTelemetryType, Members: &mTelemetryType, Type: smithy.ShapeTypeEnum})
+var sTelemetryRuleSummary_TelemetrySourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetrySourceTypes", ID: &i_TelemetrySourceTypes, Members: &m_TelemetrySourceTypes, Type: smithy.ShapeTypeList})
+var sTelemetrySourceType_VPC_FLOW_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_FLOW_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetrySourceType_ROUTE53_RESOLVER_QUERY_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE53_RESOLVER_QUERY_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetrySourceType_EKS_AUDIT_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_AUDIT_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetrySourceType_EKS_AUTHENTICATOR_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_AUTHENTICATOR_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetrySourceType_EKS_CONTROLLER_MANAGER_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_CONTROLLER_MANAGER_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetrySourceType_EKS_SCHEDULER_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_SCHEDULER_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetrySourceType_EKS_API_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_API_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TelemetrySourceTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTelemetrySourceType, Members: &mTelemetrySourceType, Type: smithy.ShapeTypeEnum})
+var sTelemetryState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryState_NOT_APPLICABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_APPLICABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryType_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryType_METRICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METRICS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryType_TRACES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRACES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTelemetryType_INSIGHTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSIGHTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationError_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationError_FieldMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldMap", ID: &i_FieldMap, Members: &m_FieldMap, Type: smithy.ShapeTypeMap})
+var s_ValidationErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationError, Members: &mValidationError, Type: smithy.ShapeTypeStructure})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList})
+var sVPCFlowLogParameters_LogFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogFormat", ID: &pString, Type: smithy.ShapeTypeString})
+var sVPCFlowLogParameters_TrafficType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrafficType", ID: &pString, Type: smithy.ShapeTypeString})
+var sVPCFlowLogParameters_MaxAggregationInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAggregationInterval", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sWAFLoggingParameters_RedactedFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedactedFields", ID: &i_RedactedFields, Members: &m_RedactedFields, Type: smithy.ShapeTypeList})
+var sWAFLoggingParameters_LoggingFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingFilter", ID: &iLoggingFilter, Members: &mLoggingFilter, Type: smithy.ShapeTypeStructure})
+var sWAFLoggingParameters_LogType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogType", ID: &iWAFLogType, Members: &mWAFLogType, Type: smithy.ShapeTypeEnum})
+var sWAFLogType_WAF_LOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAF_LOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreateCentralizationRuleForOrganizationInput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sCreateCentralizationRuleForOrganizationInput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iCentralizationRule, Members: &mCentralizationRule, Type: smithy.ShapeTypeStructure})
+var sCreateCentralizationRuleForOrganizationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateCentralizationRuleForOrganizationOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateDatasetIntegrationInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateDatasetIntegrationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateDatasetIntegrationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateDatasetIntegrationOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateDatasetIntegrationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateDatasetIntegrationOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateS3TableIntegrationInput_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iEncryption, Members: &mEncryption, Type: smithy.ShapeTypeStructure})
+var sCreateS3TableIntegrationInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateS3TableIntegrationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateS3TableIntegrationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateTelemetryPipelineInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TelemetryPipelineName, Type: smithy.ShapeTypeString})
+var sCreateTelemetryPipelineInput_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iTelemetryPipelineConfiguration, Members: &mTelemetryPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryPipelineInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateTelemetryPipelineOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateTelemetryRuleForOrganizationInput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sCreateTelemetryRuleForOrganizationInput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iTelemetryRule, Members: &mTelemetryRule, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryRuleForOrganizationInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateTelemetryRuleForOrganizationOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateTelemetryRuleInput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sCreateTelemetryRuleInput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iTelemetryRule, Members: &mTelemetryRule, Type: smithy.ShapeTypeStructure})
+var sCreateTelemetryRuleInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateTelemetryRuleOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteCentralizationRuleForOrganizationInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteDatasetIntegrationInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteS3TableIntegrationInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteTelemetryPipelineInput_PipelineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineIdentifier", ID: &i_TelemetryPipelineIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteTelemetryRuleForOrganizationInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteTelemetryRuleInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sGetCentralizationRuleForOrganizationInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sGetCentralizationRuleForOrganizationOutput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sGetCentralizationRuleForOrganizationOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetCentralizationRuleForOrganizationOutput_CreatorAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatorAccountId", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetCentralizationRuleForOrganizationOutput_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetCentralizationRuleForOrganizationOutput_CreatedRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sGetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetCentralizationRuleForOrganizationOutput_RuleHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleHealth", ID: &iRuleHealth, Members: &mRuleHealth, Type: smithy.ShapeTypeEnum})
+var sGetCentralizationRuleForOrganizationOutput_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &iCentralizationFailureReason, Members: &mCentralizationFailureReason, Type: smithy.ShapeTypeEnum})
+var sGetCentralizationRuleForOrganizationOutput_TagPropagationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagPropagationStatus", ID: &iTagPropagationStatus, Members: &mTagPropagationStatus, Type: smithy.ShapeTypeEnum})
+var sGetCentralizationRuleForOrganizationOutput_TagPropagationFailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagPropagationFailureReason", ID: &iTagPropagationFailureReason, Members: &mTagPropagationFailureReason, Type: smithy.ShapeTypeEnum})
+var sGetCentralizationRuleForOrganizationOutput_ContextGraphStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextGraphStatus", ID: &iContextGraphStatus, Members: &mContextGraphStatus, Type: smithy.ShapeTypeEnum})
+var sGetCentralizationRuleForOrganizationOutput_CentralizationRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CentralizationRule", ID: &iCentralizationRule, Members: &mCentralizationRule, Type: smithy.ShapeTypeStructure})
+var sGetDatasetIntegrationInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetDatasetIntegrationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetDatasetIntegrationOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetDatasetIntegrationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetDatasetIntegrationOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetS3TableIntegrationInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetS3TableIntegrationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetS3TableIntegrationOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetS3TableIntegrationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iIntegrationStatus, Members: &mIntegrationStatus, Type: smithy.ShapeTypeEnum})
+var sGetS3TableIntegrationOutput_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iEncryption, Members: &mEncryption, Type: smithy.ShapeTypeStructure})
+var sGetS3TableIntegrationOutput_DestinationTableBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationTableBucketArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetS3TableIntegrationOutput_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetTelemetryEnrichmentStatusOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTelemetryEnrichmentStatus, Members: &mTelemetryEnrichmentStatus, Type: smithy.ShapeTypeEnum})
+var sGetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsResourceExplorerManagedViewArn", ID: &i_AwsResourceExplorerManagedViewArn, Type: smithy.ShapeTypeString})
+var sGetTelemetryEvaluationStatusForOrganizationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sGetTelemetryEvaluationStatusForOrganizationOutput_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sGetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sGetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionStatuses", ID: &i_RegionStatuses, Members: &m_RegionStatuses, Type: smithy.ShapeTypeList})
+var sGetTelemetryEvaluationStatusOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sGetTelemetryEvaluationStatusOutput_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sGetTelemetryEvaluationStatusOutput_HomeRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sGetTelemetryEvaluationStatusOutput_RegionStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionStatuses", ID: &i_RegionStatuses, Members: &m_RegionStatuses, Type: smithy.ShapeTypeList})
+var sGetTelemetryPipelineInput_PipelineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineIdentifier", ID: &i_TelemetryPipelineIdentifier, Type: smithy.ShapeTypeString})
+var sGetTelemetryPipelineOutput_Pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipeline", ID: &iTelemetryPipeline, Members: &mTelemetryPipeline, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryRuleForOrganizationInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleForOrganizationOutput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleForOrganizationOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleForOrganizationOutput_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetTelemetryRuleForOrganizationOutput_TelemetryRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryRule", ID: &iTelemetryRule, Members: &mTelemetryRule, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryRuleForOrganizationOutput_HomeRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleForOrganizationOutput_IsReplicated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsReplicated", ID: &i_IsReplicated, Type: smithy.ShapeTypeBoolean})
+var sGetTelemetryRuleForOrganizationOutput_RegionStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionStatuses", ID: &i_RegionStatuses, Members: &m_RegionStatuses, Type: smithy.ShapeTypeList})
+var sGetTelemetryRuleInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleOutput_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleOutput_CreatedTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetTelemetryRuleOutput_LastUpdateTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateTimeStamp", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetTelemetryRuleOutput_TelemetryRule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryRule", ID: &iTelemetryRule, Members: &mTelemetryRule, Type: smithy.ShapeTypeStructure})
+var sGetTelemetryRuleOutput_HomeRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sGetTelemetryRuleOutput_IsReplicated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsReplicated", ID: &i_IsReplicated, Type: smithy.ShapeTypeBoolean})
+var sGetTelemetryRuleOutput_RegionStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionStatuses", ID: &i_RegionStatuses, Members: &m_RegionStatuses, Type: smithy.ShapeTypeList})
+var sListCentralizationRulesForOrganizationInput_RuleNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNamePrefix", ID: &pString, Type: smithy.ShapeTypeString})
+var sListCentralizationRulesForOrganizationInput_AllRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllRegions", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sListCentralizationRulesForOrganizationInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListCentralizationRulesForOrganizationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListCentralizationRulesForOrganizationInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CentralizationRuleSummaries", ID: &i_CentralizationRuleSummaries, Members: &m_CentralizationRuleSummaries, Type: smithy.ShapeTypeList})
+var sListCentralizationRulesForOrganizationOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDatasetIntegrationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListDatasetIntegrationsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListDatasetIntegrationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDatasetIntegrationsOutput_DatasetIntegrationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatasetIntegrationSummaries", ID: &i_DatasetIntegrationSummaries, Members: &m_DatasetIntegrationSummaries, Type: smithy.ShapeTypeList})
+var sListDatasetIntegrationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourceTelemetryForOrganizationInput_AccountIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIdentifiers", ID: &i_AccountIdentifiers, Members: &m_AccountIdentifiers, Type: smithy.ShapeTypeList})
+var sListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifierPrefix", ID: &i_ResourceIdentifierPrefix, Type: smithy.ShapeTypeString})
+var sListResourceTelemetryForOrganizationInput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypes, Members: &m_ResourceTypes, Type: smithy.ShapeTypeList})
+var sListResourceTelemetryForOrganizationInput_TelemetryConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryConfigurationState", ID: &i_TelemetryConfigurationState, Members: &m_TelemetryConfigurationState, Type: smithy.ShapeTypeMap})
+var sListResourceTelemetryForOrganizationInput_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sListResourceTelemetryForOrganizationInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListResourceTelemetryForOrganizationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourceTelemetryForOrganizationInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourceTelemetryForOrganizationOutput_TelemetryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryConfigurations", ID: &i_TelemetryConfigurations, Members: &m_TelemetryConfigurations, Type: smithy.ShapeTypeList})
+var sListResourceTelemetryForOrganizationOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourceTelemetryInput_ResourceIdentifierPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifierPrefix", ID: &i_ResourceIdentifierPrefix, Type: smithy.ShapeTypeString})
+var sListResourceTelemetryInput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypes, Members: &m_ResourceTypes, Type: smithy.ShapeTypeList})
+var sListResourceTelemetryInput_TelemetryConfigurationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryConfigurationState", ID: &i_TelemetryConfigurationState, Members: &m_TelemetryConfigurationState, Type: smithy.ShapeTypeMap})
+var sListResourceTelemetryInput_ResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sListResourceTelemetryInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListResourceTelemetryMaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourceTelemetryInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourceTelemetryOutput_TelemetryConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryConfigurations", ID: &i_TelemetryConfigurations, Members: &m_TelemetryConfigurations, Type: smithy.ShapeTypeList})
+var sListResourceTelemetryOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListS3TableIntegrationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListS3TableIntegrationsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListS3TableIntegrationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListS3TableIntegrationsOutput_IntegrationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationSummaries", ID: &i_IntegrationSummaries, Members: &m_IntegrationSummaries, Type: smithy.ShapeTypeList})
+var sListS3TableIntegrationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sListTelemetryPipelinesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListTelemetryPipelinesMaxResults, Type: smithy.ShapeTypeInteger})
+var sListTelemetryPipelinesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTelemetryPipelinesOutput_PipelineSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineSummaries", ID: &i_TelemetryPipelineSummaries, Members: &m_TelemetryPipelineSummaries, Type: smithy.ShapeTypeList})
+var sListTelemetryPipelinesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTelemetryRulesForOrganizationInput_RuleNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNamePrefix", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTelemetryRulesForOrganizationInput_SourceAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAccountIds", ID: &i_AccountIdentifiers, Members: &m_AccountIdentifiers, Type: smithy.ShapeTypeList})
+var sListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceOrganizationUnitIds", ID: &i_OrganizationUnitIdentifiers, Members: &m_OrganizationUnitIdentifiers, Type: smithy.ShapeTypeList})
+var sListTelemetryRulesForOrganizationInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListTelemetryRulesForOrganizationMaxResults, Type: smithy.ShapeTypeInteger})
+var sListTelemetryRulesForOrganizationInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryRuleSummaries", ID: &i_TelemetryRuleSummaries, Members: &m_TelemetryRuleSummaries, Type: smithy.ShapeTypeList})
+var sListTelemetryRulesForOrganizationOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTelemetryRulesInput_RuleNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNamePrefix", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTelemetryRulesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListTelemetryRulesMaxResults, Type: smithy.ShapeTypeInteger})
+var sListTelemetryRulesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTelemetryRulesOutput_TelemetryRuleSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TelemetryRuleSummaries", ID: &i_TelemetryRuleSummaries, Members: &m_TelemetryRuleSummaries, Type: smithy.ShapeTypeList})
+var sListTelemetryRulesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sStartTelemetryEnrichmentOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTelemetryEnrichmentStatus, Members: &mTelemetryEnrichmentStatus, Type: smithy.ShapeTypeEnum})
+var sStartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsResourceExplorerManagedViewArn", ID: &i_AwsResourceExplorerManagedViewArn, Type: smithy.ShapeTypeString})
+var sStartTelemetryEvaluationForOrganizationInput_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sStartTelemetryEvaluationForOrganizationInput_AllRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllRegions", ID: &i_AllRegions, Type: smithy.ShapeTypeBoolean})
+var sStartTelemetryEvaluationInput_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_Regions, Members: &m_Regions, Type: smithy.ShapeTypeList})
+var sStartTelemetryEvaluationInput_AllRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllRegions", ID: &i_AllRegions, Type: smithy.ShapeTypeBoolean})
+var sStopTelemetryEnrichmentOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTelemetryEnrichmentStatus, Members: &mTelemetryEnrichmentStatus, Type: smithy.ShapeTypeEnum})
+var sTagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sTestTelemetryPipelineInput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_Records, Members: &m_Records, Type: smithy.ShapeTypeList})
+var sTestTelemetryPipelineInput_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iTelemetryPipelineConfiguration, Members: &mTelemetryPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sTestTelemetryPipelineInput_SignalType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SignalType", ID: &iSignalType, Members: &mSignalType, Type: smithy.ShapeTypeEnum})
+var sTestTelemetryPipelineOutput_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_PipelineOutputs, Members: &m_PipelineOutputs, Type: smithy.ShapeTypeList})
+var sUntagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateCentralizationRuleForOrganizationInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateCentralizationRuleForOrganizationInput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iCentralizationRule, Members: &mCentralizationRule, Type: smithy.ShapeTypeStructure})
+var sUpdateCentralizationRuleForOrganizationOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateDatasetIntegrationInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateDatasetIntegrationInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateDatasetIntegrationOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateDatasetIntegrationOutput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateDatasetIntegrationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateDatasetIntegrationOutput_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateTelemetryPipelineInput_PipelineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineIdentifier", ID: &i_TelemetryPipelineIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateTelemetryPipelineInput_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iTelemetryPipelineConfiguration, Members: &mTelemetryPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryRuleForOrganizationInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateTelemetryRuleForOrganizationInput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iTelemetryRule, Members: &mTelemetryRule, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryRuleForOrganizationOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateTelemetryRuleInput_RuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleIdentifier", ID: &i_RuleIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateTelemetryRuleInput_Rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rule", ID: &iTelemetryRule, Members: &mTelemetryRule, Type: smithy.ShapeTypeStructure})
+var sUpdateTelemetryRuleOutput_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sValidateTelemetryPipelineConfigurationInput_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iTelemetryPipelineConfiguration, Members: &mTelemetryPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sValidateTelemetryPipelineConfigurationOutput_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_ValidationErrors, Members: &m_ValidationErrors, Type: smithy.ShapeTypeList})
+
+var CreateCentralizationRuleForOrganization = &sCreateCentralizationRuleForOrganization
+
+var CreateDatasetIntegration = &sCreateDatasetIntegration
+
+var CreateS3TableIntegration = &sCreateS3TableIntegration
+
+var CreateTelemetryPipeline = &sCreateTelemetryPipeline
+
+var CreateTelemetryRule = &sCreateTelemetryRule
+
+var CreateTelemetryRuleForOrganization = &sCreateTelemetryRuleForOrganization
+
+var DeleteCentralizationRuleForOrganization = &sDeleteCentralizationRuleForOrganization
+
+var DeleteDatasetIntegration = &sDeleteDatasetIntegration
+
+var DeleteS3TableIntegration = &sDeleteS3TableIntegration
+
+var DeleteTelemetryPipeline = &sDeleteTelemetryPipeline
+
+var DeleteTelemetryRule = &sDeleteTelemetryRule
+
+var DeleteTelemetryRuleForOrganization = &sDeleteTelemetryRuleForOrganization
+
+var GetCentralizationRuleForOrganization = &sGetCentralizationRuleForOrganization
+
+var GetDatasetIntegration = &sGetDatasetIntegration
+
+var GetS3TableIntegration = &sGetS3TableIntegration
+
+var GetTelemetryEnrichmentStatus = &sGetTelemetryEnrichmentStatus
+
+var GetTelemetryEvaluationStatus = &sGetTelemetryEvaluationStatus
+
+var GetTelemetryEvaluationStatusForOrganization = &sGetTelemetryEvaluationStatusForOrganization
+
+var GetTelemetryPipeline = &sGetTelemetryPipeline
+
+var GetTelemetryRule = &sGetTelemetryRule
+
+var GetTelemetryRuleForOrganization = &sGetTelemetryRuleForOrganization
+
+var ListCentralizationRulesForOrganization = &sListCentralizationRulesForOrganization
+
+var ListDatasetIntegrations = &sListDatasetIntegrations
+
+var ListResourceTelemetry = &sListResourceTelemetry
+
+var ListResourceTelemetryForOrganization = &sListResourceTelemetryForOrganization
+
+var ListS3TableIntegrations = &sListS3TableIntegrations
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTelemetryPipelines = &sListTelemetryPipelines
+
+var ListTelemetryRules = &sListTelemetryRules
+
+var ListTelemetryRulesForOrganization = &sListTelemetryRulesForOrganization
+
+var StartTelemetryEnrichment = &sStartTelemetryEnrichment
+
+var StartTelemetryEvaluation = &sStartTelemetryEvaluation
+
+var StartTelemetryEvaluationForOrganization = &sStartTelemetryEvaluationForOrganization
+
+var StopTelemetryEnrichment = &sStopTelemetryEnrichment
+
+var StopTelemetryEvaluation = &sStopTelemetryEvaluation
+
+var StopTelemetryEvaluationForOrganization = &sStopTelemetryEvaluationForOrganization
+
+var TagResource = &sTagResource
+
+var TestTelemetryPipeline = &sTestTelemetryPipeline
+
+var UntagResource = &sUntagResource
+
+var UpdateCentralizationRuleForOrganization = &sUpdateCentralizationRuleForOrganization
+
+var UpdateDatasetIntegration = &sUpdateDatasetIntegration
+
+var UpdateTelemetryPipeline = &sUpdateTelemetryPipeline
+
+var UpdateTelemetryRule = &sUpdateTelemetryRule
+
+var UpdateTelemetryRuleForOrganization = &sUpdateTelemetryRuleForOrganization
+
+var ValidateTelemetryPipelineConfiguration = &sValidateTelemetryPipelineConfiguration
+
+var _ObservabilityAdmin = &s_ObservabilityAdmin
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+var AccessDeniedException_amznErrorType = &sAccessDeniedException_amznErrorType
+
+var _AccountIdentifier = &s_AccountIdentifier
+
+var _AccountIdentifiers = &s_AccountIdentifiers
+var _AccountIdentifiers_member = &s_AccountIdentifiers_member
+
+var Action = &sAction
+var Action_ALLOW = &sAction_ALLOW
+var Action_BLOCK = &sAction_BLOCK
+var Action_COUNT = &sAction_COUNT
+var Action_CAPTCHA = &sAction_CAPTCHA
+var Action_CHALLENGE = &sAction_CHALLENGE
+var Action_EXCLUDED_AS_COUNT = &sAction_EXCLUDED_AS_COUNT
+
+var ActionCondition = &sActionCondition
+var ActionCondition_Action = &sActionCondition_Action
+
+var AdvancedEventSelector = &sAdvancedEventSelector
+var AdvancedEventSelector_Name = &sAdvancedEventSelector_Name
+var AdvancedEventSelector_FieldSelectors = &sAdvancedEventSelector_FieldSelectors
+
+var _AdvancedEventSelectors = &s_AdvancedEventSelectors
+var _AdvancedEventSelectors_member = &s_AdvancedEventSelectors_member
+
+var AdvancedFieldSelector = &sAdvancedFieldSelector
+var AdvancedFieldSelector_Field = &sAdvancedFieldSelector_Field
+var AdvancedFieldSelector_Equals = &sAdvancedFieldSelector_Equals
+var AdvancedFieldSelector_StartsWith = &sAdvancedFieldSelector_StartsWith
+var AdvancedFieldSelector_EndsWith = &sAdvancedFieldSelector_EndsWith
+var AdvancedFieldSelector_NotEquals = &sAdvancedFieldSelector_NotEquals
+var AdvancedFieldSelector_NotStartsWith = &sAdvancedFieldSelector_NotStartsWith
+var AdvancedFieldSelector_NotEndsWith = &sAdvancedFieldSelector_NotEndsWith
+
+var _AllRegions = &s_AllRegions
+
+var _AwsResourceExplorerManagedViewArn = &s_AwsResourceExplorerManagedViewArn
+
+var CentralizationFailureReason = &sCentralizationFailureReason
+var CentralizationFailureReason_TRUSTED_ACCESS_NOT_ENABLED = &sCentralizationFailureReason_TRUSTED_ACCESS_NOT_ENABLED
+var CentralizationFailureReason_DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION = &sCentralizationFailureReason_DESTINATION_ACCOUNT_NOT_IN_ORGANIZATION
+var CentralizationFailureReason_INTERNAL_SERVER_ERROR = &sCentralizationFailureReason_INTERNAL_SERVER_ERROR
+
+var CentralizationRule = &sCentralizationRule
+var CentralizationRule_Source = &sCentralizationRule_Source
+var CentralizationRule_Destination = &sCentralizationRule_Destination
+
+var CentralizationRuleDestination = &sCentralizationRuleDestination
+var CentralizationRuleDestination_Region = &sCentralizationRuleDestination_Region
+var CentralizationRuleDestination_Account = &sCentralizationRuleDestination_Account
+var CentralizationRuleDestination_DestinationLogsConfiguration = &sCentralizationRuleDestination_DestinationLogsConfiguration
+var CentralizationRuleDestination_DestinationMetricsConfiguration = &sCentralizationRuleDestination_DestinationMetricsConfiguration
+
+var CentralizationRuleSource = &sCentralizationRuleSource
+var CentralizationRuleSource_Regions = &sCentralizationRuleSource_Regions
+var CentralizationRuleSource_Scope = &sCentralizationRuleSource_Scope
+var CentralizationRuleSource_SourceLogsConfiguration = &sCentralizationRuleSource_SourceLogsConfiguration
+var CentralizationRuleSource_SourceMetricsConfiguration = &sCentralizationRuleSource_SourceMetricsConfiguration
+var CentralizationRuleSource_SourceContextGraphConfiguration = &sCentralizationRuleSource_SourceContextGraphConfiguration
+
+var _CentralizationRuleSummaries = &s_CentralizationRuleSummaries
+var _CentralizationRuleSummaries_member = &s_CentralizationRuleSummaries_member
+
+var CentralizationRuleSummary = &sCentralizationRuleSummary
+var CentralizationRuleSummary_RuleName = &sCentralizationRuleSummary_RuleName
+var CentralizationRuleSummary_RuleArn = &sCentralizationRuleSummary_RuleArn
+var CentralizationRuleSummary_CreatorAccountId = &sCentralizationRuleSummary_CreatorAccountId
+var CentralizationRuleSummary_CreatedTimeStamp = &sCentralizationRuleSummary_CreatedTimeStamp
+var CentralizationRuleSummary_CreatedRegion = &sCentralizationRuleSummary_CreatedRegion
+var CentralizationRuleSummary_LastUpdateTimeStamp = &sCentralizationRuleSummary_LastUpdateTimeStamp
+var CentralizationRuleSummary_RuleHealth = &sCentralizationRuleSummary_RuleHealth
+var CentralizationRuleSummary_FailureReason = &sCentralizationRuleSummary_FailureReason
+var CentralizationRuleSummary_TagPropagationStatus = &sCentralizationRuleSummary_TagPropagationStatus
+var CentralizationRuleSummary_TagPropagationFailureReason = &sCentralizationRuleSummary_TagPropagationFailureReason
+var CentralizationRuleSummary_ContextGraphStatus = &sCentralizationRuleSummary_ContextGraphStatus
+var CentralizationRuleSummary_DestinationAccountId = &sCentralizationRuleSummary_DestinationAccountId
+var CentralizationRuleSummary_DestinationRegion = &sCentralizationRuleSummary_DestinationRegion
+
+var CloudtrailParameters = &sCloudtrailParameters
+var CloudtrailParameters_AdvancedEventSelectors = &sCloudtrailParameters_AdvancedEventSelectors
+
+var Condition = &sCondition
+var Condition_ActionCondition = &sCondition_ActionCondition
+var Condition_LabelNameCondition = &sCondition_LabelNameCondition
+
+var _Conditions = &s_Conditions
+var _Conditions_member = &s_Conditions_member
+
+var ConfigurationSummary = &sConfigurationSummary
+var ConfigurationSummary_Sources = &sConfigurationSummary_Sources
+var ConfigurationSummary_DataSources = &sConfigurationSummary_DataSources
+var ConfigurationSummary_Processors = &sConfigurationSummary_Processors
+var ConfigurationSummary_ProcessorCount = &sConfigurationSummary_ProcessorCount
+var ConfigurationSummary_Sinks = &sConfigurationSummary_Sinks
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_ResourceId = &sConflictException_ResourceId
+var ConflictException_ResourceType = &sConflictException_ResourceType
+
+var ContextGraphStatus = &sContextGraphStatus
+var ContextGraphStatus_HEALTHY = &sContextGraphStatus_HEALTHY
+var ContextGraphStatus_UNHEALTHY = &sContextGraphStatus_UNHEALTHY
+var ContextGraphStatus_PROVISIONING = &sContextGraphStatus_PROVISIONING
+
+var _DatasetIntegrationSummaries = &s_DatasetIntegrationSummaries
+var _DatasetIntegrationSummaries_member = &s_DatasetIntegrationSummaries_member
+
+var DatasetIntegrationSummary = &sDatasetIntegrationSummary
+var DatasetIntegrationSummary_Arn = &sDatasetIntegrationSummary_Arn
+var DatasetIntegrationSummary_RoleArn = &sDatasetIntegrationSummary_RoleArn
+var DatasetIntegrationSummary_CreatedAt = &sDatasetIntegrationSummary_CreatedAt
+var DatasetIntegrationSummary_UpdatedAt = &sDatasetIntegrationSummary_UpdatedAt
+
+var DataSource = &sDataSource
+var DataSource_Name = &sDataSource_Name
+var DataSource_Type = &sDataSource_Type
+
+var _DataSourceFilterString = &s_DataSourceFilterString
+
+var _DataSources = &s_DataSources
+var _DataSources_member = &s_DataSources_member
+
+var DeletionProtection = &sDeletionProtection
+var DeletionProtection_ENABLED = &sDeletionProtection_ENABLED
+
+var DestinationLogsConfiguration = &sDestinationLogsConfiguration
+var DestinationLogsConfiguration_LogsEncryptionConfiguration = &sDestinationLogsConfiguration_LogsEncryptionConfiguration
+var DestinationLogsConfiguration_BackupConfiguration = &sDestinationLogsConfiguration_BackupConfiguration
+var DestinationLogsConfiguration_LogGroupNameConfiguration = &sDestinationLogsConfiguration_LogGroupNameConfiguration
+var DestinationLogsConfiguration_TagPropagationConfiguration = &sDestinationLogsConfiguration_TagPropagationConfiguration
+var DestinationLogsConfiguration_LogGroupDeletionProtection = &sDestinationLogsConfiguration_LogGroupDeletionProtection
+
+var DestinationMetricsConfiguration = &sDestinationMetricsConfiguration
+var DestinationMetricsConfiguration_BackupConfiguration = &sDestinationMetricsConfiguration_BackupConfiguration
+
+var DestinationType = &sDestinationType
+var DestinationType_CLOUDWATCH_LOGS = &sDestinationType_CLOUDWATCH_LOGS
+
+var ELBLoadBalancerLoggingParameters = &sELBLoadBalancerLoggingParameters
+var ELBLoadBalancerLoggingParameters_OutputFormat = &sELBLoadBalancerLoggingParameters_OutputFormat
+var ELBLoadBalancerLoggingParameters_FieldDelimiter = &sELBLoadBalancerLoggingParameters_FieldDelimiter
+
+var EncryptedLogGroupStrategy = &sEncryptedLogGroupStrategy
+var EncryptedLogGroupStrategy_ALLOW = &sEncryptedLogGroupStrategy_ALLOW
+var EncryptedLogGroupStrategy_SKIP = &sEncryptedLogGroupStrategy_SKIP
+
+var Encryption = &sEncryption
+var Encryption_SseAlgorithm = &sEncryption_SseAlgorithm
+var Encryption_KmsKeyArn = &sEncryption_KmsKeyArn
+
+var EncryptionConflictResolutionStrategy = &sEncryptionConflictResolutionStrategy
+var EncryptionConflictResolutionStrategy_ALLOW = &sEncryptionConflictResolutionStrategy_ALLOW
+var EncryptionConflictResolutionStrategy_SKIP = &sEncryptionConflictResolutionStrategy_SKIP
+
+var EncryptionScope = &sEncryptionScope
+var EncryptionScope_ENCRYPTED_SOURCE_ONLY = &sEncryptionScope_ENCRYPTED_SOURCE_ONLY
+var EncryptionScope_NEW_DESTINATION_LOG_GROUPS = &sEncryptionScope_NEW_DESTINATION_LOG_GROUPS
+
+var EncryptionStrategy = &sEncryptionStrategy
+var EncryptionStrategy_CUSTOMER_MANAGED = &sEncryptionStrategy_CUSTOMER_MANAGED
+var EncryptionStrategy_AWS_OWNED = &sEncryptionStrategy_AWS_OWNED
+
+var _FailureReason = &s_FailureReason
+
+var _FieldMap = &s_FieldMap
+var _FieldMap_key = &s_FieldMap_key
+var _FieldMap_value = &s_FieldMap_value
+
+var _FieldSelectors = &s_FieldSelectors
+var _FieldSelectors_member = &s_FieldSelectors_member
+
+var FieldToMatch = &sFieldToMatch
+var FieldToMatch_SingleHeader = &sFieldToMatch_SingleHeader
+var FieldToMatch_UriPath = &sFieldToMatch_UriPath
+var FieldToMatch_QueryString = &sFieldToMatch_QueryString
+var FieldToMatch_Method = &sFieldToMatch_Method
+
+var Filter = &sFilter
+var Filter_Behavior = &sFilter_Behavior
+var Filter_Requirement = &sFilter_Requirement
+var Filter_Conditions = &sFilter_Conditions
+
+var FilterBehavior = &sFilterBehavior
+var FilterBehavior_KEEP = &sFilterBehavior_KEEP
+var FilterBehavior_DROP = &sFilterBehavior_DROP
+
+var FilterRequirement = &sFilterRequirement
+var FilterRequirement_MEETS_ALL = &sFilterRequirement_MEETS_ALL
+var FilterRequirement_MEETS_ANY = &sFilterRequirement_MEETS_ANY
+
+var _Filters = &s_Filters
+var _Filters_member = &s_Filters_member
+
+var _IamRoleArn = &s_IamRoleArn
+
+var IntegrationStatus = &sIntegrationStatus
+var IntegrationStatus_ACTIVE = &sIntegrationStatus_ACTIVE
+var IntegrationStatus_DELETING = &sIntegrationStatus_DELETING
+
+var _IntegrationSummaries = &s_IntegrationSummaries
+var _IntegrationSummaries_member = &s_IntegrationSummaries_member
+
+var IntegrationSummary = &sIntegrationSummary
+var IntegrationSummary_Arn = &sIntegrationSummary_Arn
+var IntegrationSummary_Status = &sIntegrationSummary_Status
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+var InternalServerException_amznErrorType = &sInternalServerException_amznErrorType
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var InvalidStateException = &sInvalidStateException
+var InvalidStateException_Message = &sInvalidStateException_Message
+
+var _IsReplicated = &s_IsReplicated
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var LabelNameCondition = &sLabelNameCondition
+var LabelNameCondition_LabelName = &sLabelNameCondition_LabelName
+
+var _ListCentralizationRulesForOrganizationMaxResults = &s_ListCentralizationRulesForOrganizationMaxResults
+
+var _ListDatasetIntegrationsMaxResults = &s_ListDatasetIntegrationsMaxResults
+
+var _ListResourceTelemetryForOrganizationMaxResults = &s_ListResourceTelemetryForOrganizationMaxResults
+
+var _ListResourceTelemetryMaxResults = &s_ListResourceTelemetryMaxResults
+
+var _ListS3TableIntegrationsMaxResults = &s_ListS3TableIntegrationsMaxResults
+
+var _ListTelemetryPipelinesMaxResults = &s_ListTelemetryPipelinesMaxResults
+
+var _ListTelemetryRulesForOrganizationMaxResults = &s_ListTelemetryRulesForOrganizationMaxResults
+
+var _ListTelemetryRulesMaxResults = &s_ListTelemetryRulesMaxResults
+
+var LogDeliveryParameters = &sLogDeliveryParameters
+var LogDeliveryParameters_LogTypes = &sLogDeliveryParameters_LogTypes
+
+var LoggingFilter = &sLoggingFilter
+var LoggingFilter_Filters = &sLoggingFilter_Filters
+var LoggingFilter_DefaultBehavior = &sLoggingFilter_DefaultBehavior
+
+var LogGroupNameConfiguration = &sLogGroupNameConfiguration
+var LogGroupNameConfiguration_LogGroupNamePattern = &sLogGroupNameConfiguration_LogGroupNamePattern
+
+var _LogGroupNamePattern = &s_LogGroupNamePattern
+
+var LogsBackupConfiguration = &sLogsBackupConfiguration
+var LogsBackupConfiguration_Region = &sLogsBackupConfiguration_Region
+var LogsBackupConfiguration_KmsKeyArn = &sLogsBackupConfiguration_KmsKeyArn
+
+var LogsEncryptionConfiguration = &sLogsEncryptionConfiguration
+var LogsEncryptionConfiguration_EncryptionStrategy = &sLogsEncryptionConfiguration_EncryptionStrategy
+var LogsEncryptionConfiguration_KmsKeyArn = &sLogsEncryptionConfiguration_KmsKeyArn
+var LogsEncryptionConfiguration_EncryptionConflictResolutionStrategy = &sLogsEncryptionConfiguration_EncryptionConflictResolutionStrategy
+var LogsEncryptionConfiguration_EncryptionScope = &sLogsEncryptionConfiguration_EncryptionScope
+
+var _LogsFilterString = &s_LogsFilterString
+
+var LogType = &sLogType
+var LogType_APPLICATION = &sLogType_APPLICATION
+var LogType_USAGE = &sLogType_USAGE
+var LogType_SECURITY_FINDING = &sLogType_SECURITY_FINDING
+var LogType_ACCESS = &sLogType_ACCESS
+var LogType_CONNECTION = &sLogType_CONNECTION
+var LogType_S3_SERVER_ACCESS = &sLogType_S3_SERVER_ACCESS
+var LogType_ALB_ACCESS = &sLogType_ALB_ACCESS
+var LogType_ALB_CONNECTION = &sLogType_ALB_CONNECTION
+var LogType_ALB_HEALTH_CHECK = &sLogType_ALB_HEALTH_CHECK
+
+var _LogTypes = &s_LogTypes
+var _LogTypes_member = &s_LogTypes_member
+
+var MetricsBackupConfiguration = &sMetricsBackupConfiguration
+var MetricsBackupConfiguration_Region = &sMetricsBackupConfiguration_Region
+
+var _MetricsFilterString = &s_MetricsFilterString
+
+var MskEnhancedMonitoringLevel = &sMskEnhancedMonitoringLevel
+var MskEnhancedMonitoringLevel_DEFAULT = &sMskEnhancedMonitoringLevel_DEFAULT
+var MskEnhancedMonitoringLevel_PER_BROKER = &sMskEnhancedMonitoringLevel_PER_BROKER
+var MskEnhancedMonitoringLevel_PER_TOPIC_PER_BROKER = &sMskEnhancedMonitoringLevel_PER_TOPIC_PER_BROKER
+var MskEnhancedMonitoringLevel_PER_TOPIC_PER_PARTITION = &sMskEnhancedMonitoringLevel_PER_TOPIC_PER_PARTITION
+
+var MskMonitoringParameters = &sMskMonitoringParameters
+var MskMonitoringParameters_EnhancedMonitoring = &sMskMonitoringParameters_EnhancedMonitoring
+
+var _NextToken = &s_NextToken
+
+var _OrganizationUnitIdentifier = &s_OrganizationUnitIdentifier
+
+var _OrganizationUnitIdentifiers = &s_OrganizationUnitIdentifiers
+var _OrganizationUnitIdentifiers_member = &s_OrganizationUnitIdentifiers_member
+
+var OutputFormat = &sOutputFormat
+var OutputFormat_PLAIN = &sOutputFormat_PLAIN
+var OutputFormat_JSON = &sOutputFormat_JSON
+
+var PipelineOutput = &sPipelineOutput
+var PipelineOutput_Record = &sPipelineOutput_Record
+var PipelineOutput_Error = &sPipelineOutput_Error
+
+var PipelineOutputError = &sPipelineOutputError
+var PipelineOutputError_Message = &sPipelineOutputError_Message
+
+var _PipelineOutputs = &s_PipelineOutputs
+var _PipelineOutputs_member = &s_PipelineOutputs_member
+
+var _Processors = &s_Processors
+var _Processors_member = &s_Processors_member
+
+var Record = &sRecord
+var Record_Data = &sRecord_Data
+var Record_Type = &sRecord_Type
+
+var RecordFormat = &sRecordFormat
+var RecordFormat_STRING = &sRecordFormat_STRING
+var RecordFormat_JSON = &sRecordFormat_JSON
+
+var _Records = &s_Records
+var _Records_member = &s_Records_member
+
+var _RedactedFields = &s_RedactedFields
+var _RedactedFields_member = &s_RedactedFields_member
+
+var _Region = &s_Region
+
+var _Regions = &s_Regions
+var _Regions_member = &s_Regions_member
+
+var RegionStatus = &sRegionStatus
+var RegionStatus_Region = &sRegionStatus_Region
+var RegionStatus_Status = &sRegionStatus_Status
+var RegionStatus_FailureReason = &sRegionStatus_FailureReason
+var RegionStatus_RuleArn = &sRegionStatus_RuleArn
+
+var _RegionStatuses = &s_RegionStatuses
+var _RegionStatuses_member = &s_RegionStatuses_member
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceIdentifier = &s_ResourceIdentifier
+
+var _ResourceIdentifierPrefix = &s_ResourceIdentifierPrefix
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+
+var ResourceType = &sResourceType
+var ResourceType_AWS_EC2_INSTANCE = &sResourceType_AWS_EC2_INSTANCE
+var ResourceType_AWS_EC2_VPC = &sResourceType_AWS_EC2_VPC
+var ResourceType_AWS_LAMDBA_FUNCTION = &sResourceType_AWS_LAMDBA_FUNCTION
+var ResourceType_AWS_CLOUDTRAIL = &sResourceType_AWS_CLOUDTRAIL
+var ResourceType_AWS_EKS_CLUSTER = &sResourceType_AWS_EKS_CLUSTER
+var ResourceType_AWS_WAF_V2_WEB_ACL = &sResourceType_AWS_WAF_V2_WEB_ACL
+var ResourceType_AWS_ELB_LOADBALANCER = &sResourceType_AWS_ELB_LOADBALANCER
+var ResourceType_AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT = &sResourceType_AWS_ROUTE53_RESOLVER_RESOLVER_ENDPOINT
+var ResourceType_AWS_BEDROCK_AGENTCORE_RUNTIME = &sResourceType_AWS_BEDROCK_AGENTCORE_RUNTIME
+var ResourceType_AWS_BEDROCK_AGENTCORE_BROWSER = &sResourceType_AWS_BEDROCK_AGENTCORE_BROWSER
+var ResourceType_AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER = &sResourceType_AWS_BEDROCK_AGENTCORE_CODE_INTERPRETER
+var ResourceType_AWS_BEDROCK_AGENTCORE_GATEWAY = &sResourceType_AWS_BEDROCK_AGENTCORE_GATEWAY
+var ResourceType_AWS_BEDROCK_AGENTCORE_MEMORY = &sResourceType_AWS_BEDROCK_AGENTCORE_MEMORY
+var ResourceType_AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY = &sResourceType_AWS_BEDROCK_AGENTCORE_WORKLOAD_IDENTITY
+var ResourceType_AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER = &sResourceType_AWS_BEDROCK_AGENTCORE_PAYMENT_MANAGER
+var ResourceType_AWS_SECURITY_HUB = &sResourceType_AWS_SECURITY_HUB
+var ResourceType_AWS_CLOUDFRONT_DISTRIBUTION = &sResourceType_AWS_CLOUDFRONT_DISTRIBUTION
+var ResourceType_AWS_SECURITY_HUB_HUBV2 = &sResourceType_AWS_SECURITY_HUB_HUBV2
+var ResourceType_AWS_OTEL_ENRICHMENT = &sResourceType_AWS_OTEL_ENRICHMENT
+var ResourceType_AWS_MSK_CLUSTER = &sResourceType_AWS_MSK_CLUSTER
+var ResourceType_AWS_S3_BUCKET = &sResourceType_AWS_S3_BUCKET
+var ResourceType_AWS_BEDROCK_KNOWLEDGEBASE = &sResourceType_AWS_BEDROCK_KNOWLEDGEBASE
+var ResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG = &sResourceType_AWS_XRAY_TRANSACTION_SEARCH_CONFIG
+
+var _ResourceTypes = &s_ResourceTypes
+var _ResourceTypes_member = &s_ResourceTypes_member
+
+var _RetentionPeriodInDays = &s_RetentionPeriodInDays
+
+var RuleHealth = &sRuleHealth
+var RuleHealth_HEALTHY = &sRuleHealth_HEALTHY
+var RuleHealth_UNHEALTHY = &sRuleHealth_UNHEALTHY
+var RuleHealth_PROVISIONING = &sRuleHealth_PROVISIONING
+
+var _RuleIdentifier = &s_RuleIdentifier
+
+var _RuleName = &s_RuleName
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_ResourceId = &sServiceQuotaExceededException_ResourceId
+var ServiceQuotaExceededException_ResourceType = &sServiceQuotaExceededException_ResourceType
+var ServiceQuotaExceededException_ServiceCode = &sServiceQuotaExceededException_ServiceCode
+var ServiceQuotaExceededException_QuotaCode = &sServiceQuotaExceededException_QuotaCode
+var ServiceQuotaExceededException_amznErrorType = &sServiceQuotaExceededException_amznErrorType
+
+var SignalType = &sSignalType
+var SignalType_LOG = &sSignalType_LOG
+var SignalType_METRIC = &sSignalType_METRIC
+
+var SingleHeader = &sSingleHeader
+var SingleHeader_Name = &sSingleHeader_Name
+
+var _Sinks = &s_Sinks
+var _Sinks_member = &s_Sinks_member
+
+var Source = &sSource
+var Source_Type = &sSource_Type
+
+var SourceContextGraphConfiguration = &sSourceContextGraphConfiguration
+
+var _SourceFilterString = &s_SourceFilterString
+
+var SourceLogsConfiguration = &sSourceLogsConfiguration
+var SourceLogsConfiguration_LogGroupSelectionCriteria = &sSourceLogsConfiguration_LogGroupSelectionCriteria
+var SourceLogsConfiguration_DataSourceSelectionCriteria = &sSourceLogsConfiguration_DataSourceSelectionCriteria
+var SourceLogsConfiguration_EncryptedLogGroupStrategy = &sSourceLogsConfiguration_EncryptedLogGroupStrategy
+
+var SourceMetricsConfiguration = &sSourceMetricsConfiguration
+var SourceMetricsConfiguration_MetricsSelectionCriteria = &sSourceMetricsConfiguration_MetricsSelectionCriteria
+
+var _Sources = &s_Sources
+var _Sources_member = &s_Sources_member
+
+var SSEAlgorithm = &sSSEAlgorithm
+var SSEAlgorithm_SSE_KMS = &sSSEAlgorithm_SSE_KMS
+var SSEAlgorithm_SSE_S3 = &sSSEAlgorithm_SSE_S3
+
+var Status = &sStatus
+var Status_NOT_STARTED = &sStatus_NOT_STARTED
+var Status_STARTING = &sStatus_STARTING
+var Status_FAILED_START = &sStatus_FAILED_START
+var Status_RUNNING = &sStatus_RUNNING
+var Status_STOPPING = &sStatus_STOPPING
+var Status_FAILED_STOP = &sStatus_FAILED_STOP
+var Status_STOPPED = &sStatus_STOPPED
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var TagConflictResolutionStrategy = &sTagConflictResolutionStrategy
+var TagConflictResolutionStrategy_IN_SYNC = &sTagConflictResolutionStrategy_IN_SYNC
+var TagConflictResolutionStrategy_ADD_ONLY = &sTagConflictResolutionStrategy_ADD_ONLY
+var TagConflictResolutionStrategy_UPDATE_SYNC = &sTagConflictResolutionStrategy_UPDATE_SYNC
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMapInput = &s_TagMapInput
+var _TagMapInput_key = &s_TagMapInput_key
+var _TagMapInput_value = &s_TagMapInput_value
+
+var _TagMapOutput = &s_TagMapOutput
+var _TagMapOutput_key = &s_TagMapOutput_key
+var _TagMapOutput_value = &s_TagMapOutput_value
+
+var TagPropagationConfiguration = &sTagPropagationConfiguration
+var TagPropagationConfiguration_DestinationRoleArn = &sTagPropagationConfiguration_DestinationRoleArn
+var TagPropagationConfiguration_TagConflictResolutionStrategy = &sTagPropagationConfiguration_TagConflictResolutionStrategy
+
+var TagPropagationFailureReason = &sTagPropagationFailureReason
+var TagPropagationFailureReason_ROLE_NOT_ASSUMABLE = &sTagPropagationFailureReason_ROLE_NOT_ASSUMABLE
+var TagPropagationFailureReason_ROLE_LACKS_PERMISSIONS = &sTagPropagationFailureReason_ROLE_LACKS_PERMISSIONS
+
+var TagPropagationStatus = &sTagPropagationStatus
+var TagPropagationStatus_HEALTHY = &sTagPropagationStatus_HEALTHY
+var TagPropagationStatus_UNHEALTHY = &sTagPropagationStatus_UNHEALTHY
+
+var _TagValue = &s_TagValue
+
+var TelemetryConfiguration = &sTelemetryConfiguration
+var TelemetryConfiguration_AccountIdentifier = &sTelemetryConfiguration_AccountIdentifier
+var TelemetryConfiguration_TelemetryConfigurationState = &sTelemetryConfiguration_TelemetryConfigurationState
+var TelemetryConfiguration_ResourceType = &sTelemetryConfiguration_ResourceType
+var TelemetryConfiguration_ResourceIdentifier = &sTelemetryConfiguration_ResourceIdentifier
+var TelemetryConfiguration_ResourceTags = &sTelemetryConfiguration_ResourceTags
+var TelemetryConfiguration_LastUpdateTimeStamp = &sTelemetryConfiguration_LastUpdateTimeStamp
+var TelemetryConfiguration_TelemetrySourceType = &sTelemetryConfiguration_TelemetrySourceType
+
+var _TelemetryConfigurations = &s_TelemetryConfigurations
+var _TelemetryConfigurations_member = &s_TelemetryConfigurations_member
+
+var _TelemetryConfigurationState = &s_TelemetryConfigurationState
+var _TelemetryConfigurationState_key = &s_TelemetryConfigurationState_key
+var _TelemetryConfigurationState_value = &s_TelemetryConfigurationState_value
+
+var TelemetryDestinationConfiguration = &sTelemetryDestinationConfiguration
+var TelemetryDestinationConfiguration_DestinationType = &sTelemetryDestinationConfiguration_DestinationType
+var TelemetryDestinationConfiguration_DestinationPattern = &sTelemetryDestinationConfiguration_DestinationPattern
+var TelemetryDestinationConfiguration_RetentionInDays = &sTelemetryDestinationConfiguration_RetentionInDays
+var TelemetryDestinationConfiguration_VPCFlowLogParameters = &sTelemetryDestinationConfiguration_VPCFlowLogParameters
+var TelemetryDestinationConfiguration_CloudtrailParameters = &sTelemetryDestinationConfiguration_CloudtrailParameters
+var TelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters = &sTelemetryDestinationConfiguration_ELBLoadBalancerLoggingParameters
+var TelemetryDestinationConfiguration_WAFLoggingParameters = &sTelemetryDestinationConfiguration_WAFLoggingParameters
+var TelemetryDestinationConfiguration_LogDeliveryParameters = &sTelemetryDestinationConfiguration_LogDeliveryParameters
+var TelemetryDestinationConfiguration_MskMonitoringParameters = &sTelemetryDestinationConfiguration_MskMonitoringParameters
+var TelemetryDestinationConfiguration_KmsKeyArn = &sTelemetryDestinationConfiguration_KmsKeyArn
+
+var TelemetryEnrichmentStatus = &sTelemetryEnrichmentStatus
+var TelemetryEnrichmentStatus_RUNNING = &sTelemetryEnrichmentStatus_RUNNING
+var TelemetryEnrichmentStatus_STOPPED = &sTelemetryEnrichmentStatus_STOPPED
+var TelemetryEnrichmentStatus_IMPAIRED = &sTelemetryEnrichmentStatus_IMPAIRED
+
+var TelemetryPipeline = &sTelemetryPipeline
+var TelemetryPipeline_CreatedTimeStamp = &sTelemetryPipeline_CreatedTimeStamp
+var TelemetryPipeline_LastUpdateTimeStamp = &sTelemetryPipeline_LastUpdateTimeStamp
+var TelemetryPipeline_Arn = &sTelemetryPipeline_Arn
+var TelemetryPipeline_Name = &sTelemetryPipeline_Name
+var TelemetryPipeline_Configuration = &sTelemetryPipeline_Configuration
+var TelemetryPipeline_Status = &sTelemetryPipeline_Status
+var TelemetryPipeline_StatusReason = &sTelemetryPipeline_StatusReason
+var TelemetryPipeline_Tags = &sTelemetryPipeline_Tags
+
+var TelemetryPipelineConfiguration = &sTelemetryPipelineConfiguration
+var TelemetryPipelineConfiguration_Body = &sTelemetryPipelineConfiguration_Body
+
+var _TelemetryPipelineConfigurationBody = &s_TelemetryPipelineConfigurationBody
+
+var _TelemetryPipelineIdentifier = &s_TelemetryPipelineIdentifier
+
+var _TelemetryPipelineName = &s_TelemetryPipelineName
+
+var TelemetryPipelineStatus = &sTelemetryPipelineStatus
+var TelemetryPipelineStatus_CREATING = &sTelemetryPipelineStatus_CREATING
+var TelemetryPipelineStatus_ACTIVE = &sTelemetryPipelineStatus_ACTIVE
+var TelemetryPipelineStatus_UPDATING = &sTelemetryPipelineStatus_UPDATING
+var TelemetryPipelineStatus_DELETING = &sTelemetryPipelineStatus_DELETING
+var TelemetryPipelineStatus_CREATE_FAILED = &sTelemetryPipelineStatus_CREATE_FAILED
+var TelemetryPipelineStatus_UPDATE_FAILED = &sTelemetryPipelineStatus_UPDATE_FAILED
+
+var TelemetryPipelineStatusReason = &sTelemetryPipelineStatusReason
+var TelemetryPipelineStatusReason_Description = &sTelemetryPipelineStatusReason_Description
+
+var _TelemetryPipelineSummaries = &s_TelemetryPipelineSummaries
+var _TelemetryPipelineSummaries_member = &s_TelemetryPipelineSummaries_member
+
+var TelemetryPipelineSummary = &sTelemetryPipelineSummary
+var TelemetryPipelineSummary_CreatedTimeStamp = &sTelemetryPipelineSummary_CreatedTimeStamp
+var TelemetryPipelineSummary_LastUpdateTimeStamp = &sTelemetryPipelineSummary_LastUpdateTimeStamp
+var TelemetryPipelineSummary_Arn = &sTelemetryPipelineSummary_Arn
+var TelemetryPipelineSummary_Name = &sTelemetryPipelineSummary_Name
+var TelemetryPipelineSummary_Status = &sTelemetryPipelineSummary_Status
+var TelemetryPipelineSummary_Tags = &sTelemetryPipelineSummary_Tags
+var TelemetryPipelineSummary_ConfigurationSummary = &sTelemetryPipelineSummary_ConfigurationSummary
+
+var TelemetryRule = &sTelemetryRule
+var TelemetryRule_ResourceType = &sTelemetryRule_ResourceType
+var TelemetryRule_TelemetryType = &sTelemetryRule_TelemetryType
+var TelemetryRule_TelemetrySourceTypes = &sTelemetryRule_TelemetrySourceTypes
+var TelemetryRule_DestinationConfiguration = &sTelemetryRule_DestinationConfiguration
+var TelemetryRule_Scope = &sTelemetryRule_Scope
+var TelemetryRule_SelectionCriteria = &sTelemetryRule_SelectionCriteria
+var TelemetryRule_AllowFieldUpdates = &sTelemetryRule_AllowFieldUpdates
+var TelemetryRule_Regions = &sTelemetryRule_Regions
+var TelemetryRule_AllRegions = &sTelemetryRule_AllRegions
+
+var _TelemetryRuleSummaries = &s_TelemetryRuleSummaries
+var _TelemetryRuleSummaries_member = &s_TelemetryRuleSummaries_member
+
+var TelemetryRuleSummary = &sTelemetryRuleSummary
+var TelemetryRuleSummary_RuleName = &sTelemetryRuleSummary_RuleName
+var TelemetryRuleSummary_RuleArn = &sTelemetryRuleSummary_RuleArn
+var TelemetryRuleSummary_CreatedTimeStamp = &sTelemetryRuleSummary_CreatedTimeStamp
+var TelemetryRuleSummary_LastUpdateTimeStamp = &sTelemetryRuleSummary_LastUpdateTimeStamp
+var TelemetryRuleSummary_ResourceType = &sTelemetryRuleSummary_ResourceType
+var TelemetryRuleSummary_TelemetryType = &sTelemetryRuleSummary_TelemetryType
+var TelemetryRuleSummary_TelemetrySourceTypes = &sTelemetryRuleSummary_TelemetrySourceTypes
+
+var TelemetrySourceType = &sTelemetrySourceType
+var TelemetrySourceType_VPC_FLOW_LOGS = &sTelemetrySourceType_VPC_FLOW_LOGS
+var TelemetrySourceType_ROUTE53_RESOLVER_QUERY_LOGS = &sTelemetrySourceType_ROUTE53_RESOLVER_QUERY_LOGS
+var TelemetrySourceType_EKS_AUDIT_LOGS = &sTelemetrySourceType_EKS_AUDIT_LOGS
+var TelemetrySourceType_EKS_AUTHENTICATOR_LOGS = &sTelemetrySourceType_EKS_AUTHENTICATOR_LOGS
+var TelemetrySourceType_EKS_CONTROLLER_MANAGER_LOGS = &sTelemetrySourceType_EKS_CONTROLLER_MANAGER_LOGS
+var TelemetrySourceType_EKS_SCHEDULER_LOGS = &sTelemetrySourceType_EKS_SCHEDULER_LOGS
+var TelemetrySourceType_EKS_API_LOGS = &sTelemetrySourceType_EKS_API_LOGS
+
+var _TelemetrySourceTypes = &s_TelemetrySourceTypes
+var _TelemetrySourceTypes_member = &s_TelemetrySourceTypes_member
+
+var TelemetryState = &sTelemetryState
+var TelemetryState_ENABLED = &sTelemetryState_ENABLED
+var TelemetryState_DISABLED = &sTelemetryState_DISABLED
+var TelemetryState_NOT_APPLICABLE = &sTelemetryState_NOT_APPLICABLE
+
+var TelemetryType = &sTelemetryType
+var TelemetryType_LOGS = &sTelemetryType_LOGS
+var TelemetryType_METRICS = &sTelemetryType_METRICS
+var TelemetryType_TRACES = &sTelemetryType_TRACES
+var TelemetryType_INSIGHTS = &sTelemetryType_INSIGHTS
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var ValidationError = &sValidationError
+var ValidationError_Message = &sValidationError_Message
+var ValidationError_Reason = &sValidationError_Reason
+var ValidationError_FieldMap = &sValidationError_FieldMap
+
+var _ValidationErrors = &s_ValidationErrors
+var _ValidationErrors_member = &s_ValidationErrors_member
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Errors = &sValidationException_Errors
+
+var VPCFlowLogParameters = &sVPCFlowLogParameters
+var VPCFlowLogParameters_LogFormat = &sVPCFlowLogParameters_LogFormat
+var VPCFlowLogParameters_TrafficType = &sVPCFlowLogParameters_TrafficType
+var VPCFlowLogParameters_MaxAggregationInterval = &sVPCFlowLogParameters_MaxAggregationInterval
+
+var WAFLoggingParameters = &sWAFLoggingParameters
+var WAFLoggingParameters_RedactedFields = &sWAFLoggingParameters_RedactedFields
+var WAFLoggingParameters_LoggingFilter = &sWAFLoggingParameters_LoggingFilter
+var WAFLoggingParameters_LogType = &sWAFLoggingParameters_LogType
+
+var WAFLogType = &sWAFLogType
+var WAFLogType_WAF_LOGS = &sWAFLogType_WAF_LOGS
+
+var CreateCentralizationRuleForOrganizationInput = &sCreateCentralizationRuleForOrganizationInput
+var CreateCentralizationRuleForOrganizationInput_RuleName = &sCreateCentralizationRuleForOrganizationInput_RuleName
+var CreateCentralizationRuleForOrganizationInput_Rule = &sCreateCentralizationRuleForOrganizationInput_Rule
+var CreateCentralizationRuleForOrganizationInput_Tags = &sCreateCentralizationRuleForOrganizationInput_Tags
+
+var CreateCentralizationRuleForOrganizationOutput = &sCreateCentralizationRuleForOrganizationOutput
+var CreateCentralizationRuleForOrganizationOutput_RuleArn = &sCreateCentralizationRuleForOrganizationOutput_RuleArn
+
+var CreateDatasetIntegrationInput = &sCreateDatasetIntegrationInput
+var CreateDatasetIntegrationInput_RoleArn = &sCreateDatasetIntegrationInput_RoleArn
+var CreateDatasetIntegrationInput_Tags = &sCreateDatasetIntegrationInput_Tags
+
+var CreateDatasetIntegrationOutput = &sCreateDatasetIntegrationOutput
+var CreateDatasetIntegrationOutput_Arn = &sCreateDatasetIntegrationOutput_Arn
+var CreateDatasetIntegrationOutput_RoleArn = &sCreateDatasetIntegrationOutput_RoleArn
+var CreateDatasetIntegrationOutput_CreatedAt = &sCreateDatasetIntegrationOutput_CreatedAt
+var CreateDatasetIntegrationOutput_UpdatedAt = &sCreateDatasetIntegrationOutput_UpdatedAt
+
+var CreateS3TableIntegrationInput = &sCreateS3TableIntegrationInput
+var CreateS3TableIntegrationInput_Encryption = &sCreateS3TableIntegrationInput_Encryption
+var CreateS3TableIntegrationInput_RoleArn = &sCreateS3TableIntegrationInput_RoleArn
+var CreateS3TableIntegrationInput_Tags = &sCreateS3TableIntegrationInput_Tags
+
+var CreateS3TableIntegrationOutput = &sCreateS3TableIntegrationOutput
+var CreateS3TableIntegrationOutput_Arn = &sCreateS3TableIntegrationOutput_Arn
+
+var CreateTelemetryPipelineInput = &sCreateTelemetryPipelineInput
+var CreateTelemetryPipelineInput_Name = &sCreateTelemetryPipelineInput_Name
+var CreateTelemetryPipelineInput_Configuration = &sCreateTelemetryPipelineInput_Configuration
+var CreateTelemetryPipelineInput_Tags = &sCreateTelemetryPipelineInput_Tags
+
+var CreateTelemetryPipelineOutput = &sCreateTelemetryPipelineOutput
+var CreateTelemetryPipelineOutput_Arn = &sCreateTelemetryPipelineOutput_Arn
+
+var CreateTelemetryRuleForOrganizationInput = &sCreateTelemetryRuleForOrganizationInput
+var CreateTelemetryRuleForOrganizationInput_RuleName = &sCreateTelemetryRuleForOrganizationInput_RuleName
+var CreateTelemetryRuleForOrganizationInput_Rule = &sCreateTelemetryRuleForOrganizationInput_Rule
+var CreateTelemetryRuleForOrganizationInput_Tags = &sCreateTelemetryRuleForOrganizationInput_Tags
+
+var CreateTelemetryRuleForOrganizationOutput = &sCreateTelemetryRuleForOrganizationOutput
+var CreateTelemetryRuleForOrganizationOutput_RuleArn = &sCreateTelemetryRuleForOrganizationOutput_RuleArn
+
+var CreateTelemetryRuleInput = &sCreateTelemetryRuleInput
+var CreateTelemetryRuleInput_RuleName = &sCreateTelemetryRuleInput_RuleName
+var CreateTelemetryRuleInput_Rule = &sCreateTelemetryRuleInput_Rule
+var CreateTelemetryRuleInput_Tags = &sCreateTelemetryRuleInput_Tags
+
+var CreateTelemetryRuleOutput = &sCreateTelemetryRuleOutput
+var CreateTelemetryRuleOutput_RuleArn = &sCreateTelemetryRuleOutput_RuleArn
+
+var DeleteCentralizationRuleForOrganizationInput = &sDeleteCentralizationRuleForOrganizationInput
+var DeleteCentralizationRuleForOrganizationInput_RuleIdentifier = &sDeleteCentralizationRuleForOrganizationInput_RuleIdentifier
+
+var DeleteDatasetIntegrationInput = &sDeleteDatasetIntegrationInput
+var DeleteDatasetIntegrationInput_Arn = &sDeleteDatasetIntegrationInput_Arn
+
+var DeleteS3TableIntegrationInput = &sDeleteS3TableIntegrationInput
+var DeleteS3TableIntegrationInput_Arn = &sDeleteS3TableIntegrationInput_Arn
+
+var DeleteTelemetryPipelineInput = &sDeleteTelemetryPipelineInput
+var DeleteTelemetryPipelineInput_PipelineIdentifier = &sDeleteTelemetryPipelineInput_PipelineIdentifier
+
+var DeleteTelemetryPipelineOutput = &sDeleteTelemetryPipelineOutput
+
+var DeleteTelemetryRuleForOrganizationInput = &sDeleteTelemetryRuleForOrganizationInput
+var DeleteTelemetryRuleForOrganizationInput_RuleIdentifier = &sDeleteTelemetryRuleForOrganizationInput_RuleIdentifier
+
+var DeleteTelemetryRuleInput = &sDeleteTelemetryRuleInput
+var DeleteTelemetryRuleInput_RuleIdentifier = &sDeleteTelemetryRuleInput_RuleIdentifier
+
+var GetCentralizationRuleForOrganizationInput = &sGetCentralizationRuleForOrganizationInput
+var GetCentralizationRuleForOrganizationInput_RuleIdentifier = &sGetCentralizationRuleForOrganizationInput_RuleIdentifier
+
+var GetCentralizationRuleForOrganizationOutput = &sGetCentralizationRuleForOrganizationOutput
+var GetCentralizationRuleForOrganizationOutput_RuleName = &sGetCentralizationRuleForOrganizationOutput_RuleName
+var GetCentralizationRuleForOrganizationOutput_RuleArn = &sGetCentralizationRuleForOrganizationOutput_RuleArn
+var GetCentralizationRuleForOrganizationOutput_CreatorAccountId = &sGetCentralizationRuleForOrganizationOutput_CreatorAccountId
+var GetCentralizationRuleForOrganizationOutput_CreatedTimeStamp = &sGetCentralizationRuleForOrganizationOutput_CreatedTimeStamp
+var GetCentralizationRuleForOrganizationOutput_CreatedRegion = &sGetCentralizationRuleForOrganizationOutput_CreatedRegion
+var GetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp = &sGetCentralizationRuleForOrganizationOutput_LastUpdateTimeStamp
+var GetCentralizationRuleForOrganizationOutput_RuleHealth = &sGetCentralizationRuleForOrganizationOutput_RuleHealth
+var GetCentralizationRuleForOrganizationOutput_FailureReason = &sGetCentralizationRuleForOrganizationOutput_FailureReason
+var GetCentralizationRuleForOrganizationOutput_TagPropagationStatus = &sGetCentralizationRuleForOrganizationOutput_TagPropagationStatus
+var GetCentralizationRuleForOrganizationOutput_TagPropagationFailureReason = &sGetCentralizationRuleForOrganizationOutput_TagPropagationFailureReason
+var GetCentralizationRuleForOrganizationOutput_ContextGraphStatus = &sGetCentralizationRuleForOrganizationOutput_ContextGraphStatus
+var GetCentralizationRuleForOrganizationOutput_CentralizationRule = &sGetCentralizationRuleForOrganizationOutput_CentralizationRule
+
+var GetDatasetIntegrationInput = &sGetDatasetIntegrationInput
+var GetDatasetIntegrationInput_Arn = &sGetDatasetIntegrationInput_Arn
+
+var GetDatasetIntegrationOutput = &sGetDatasetIntegrationOutput
+var GetDatasetIntegrationOutput_Arn = &sGetDatasetIntegrationOutput_Arn
+var GetDatasetIntegrationOutput_RoleArn = &sGetDatasetIntegrationOutput_RoleArn
+var GetDatasetIntegrationOutput_CreatedAt = &sGetDatasetIntegrationOutput_CreatedAt
+var GetDatasetIntegrationOutput_UpdatedAt = &sGetDatasetIntegrationOutput_UpdatedAt
+
+var GetS3TableIntegrationInput = &sGetS3TableIntegrationInput
+var GetS3TableIntegrationInput_Arn = &sGetS3TableIntegrationInput_Arn
+
+var GetS3TableIntegrationOutput = &sGetS3TableIntegrationOutput
+var GetS3TableIntegrationOutput_Arn = &sGetS3TableIntegrationOutput_Arn
+var GetS3TableIntegrationOutput_RoleArn = &sGetS3TableIntegrationOutput_RoleArn
+var GetS3TableIntegrationOutput_Status = &sGetS3TableIntegrationOutput_Status
+var GetS3TableIntegrationOutput_Encryption = &sGetS3TableIntegrationOutput_Encryption
+var GetS3TableIntegrationOutput_DestinationTableBucketArn = &sGetS3TableIntegrationOutput_DestinationTableBucketArn
+var GetS3TableIntegrationOutput_CreatedTimeStamp = &sGetS3TableIntegrationOutput_CreatedTimeStamp
+
+var GetTelemetryEnrichmentStatusOutput = &sGetTelemetryEnrichmentStatusOutput
+var GetTelemetryEnrichmentStatusOutput_Status = &sGetTelemetryEnrichmentStatusOutput_Status
+var GetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn = &sGetTelemetryEnrichmentStatusOutput_AwsResourceExplorerManagedViewArn
+
+var GetTelemetryEvaluationStatusForOrganizationOutput = &sGetTelemetryEvaluationStatusForOrganizationOutput
+var GetTelemetryEvaluationStatusForOrganizationOutput_Status = &sGetTelemetryEvaluationStatusForOrganizationOutput_Status
+var GetTelemetryEvaluationStatusForOrganizationOutput_FailureReason = &sGetTelemetryEvaluationStatusForOrganizationOutput_FailureReason
+var GetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion = &sGetTelemetryEvaluationStatusForOrganizationOutput_HomeRegion
+var GetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses = &sGetTelemetryEvaluationStatusForOrganizationOutput_RegionStatuses
+
+var GetTelemetryEvaluationStatusOutput = &sGetTelemetryEvaluationStatusOutput
+var GetTelemetryEvaluationStatusOutput_Status = &sGetTelemetryEvaluationStatusOutput_Status
+var GetTelemetryEvaluationStatusOutput_FailureReason = &sGetTelemetryEvaluationStatusOutput_FailureReason
+var GetTelemetryEvaluationStatusOutput_HomeRegion = &sGetTelemetryEvaluationStatusOutput_HomeRegion
+var GetTelemetryEvaluationStatusOutput_RegionStatuses = &sGetTelemetryEvaluationStatusOutput_RegionStatuses
+
+var GetTelemetryPipelineInput = &sGetTelemetryPipelineInput
+var GetTelemetryPipelineInput_PipelineIdentifier = &sGetTelemetryPipelineInput_PipelineIdentifier
+
+var GetTelemetryPipelineOutput = &sGetTelemetryPipelineOutput
+var GetTelemetryPipelineOutput_Pipeline = &sGetTelemetryPipelineOutput_Pipeline
+
+var GetTelemetryRuleForOrganizationInput = &sGetTelemetryRuleForOrganizationInput
+var GetTelemetryRuleForOrganizationInput_RuleIdentifier = &sGetTelemetryRuleForOrganizationInput_RuleIdentifier
+
+var GetTelemetryRuleForOrganizationOutput = &sGetTelemetryRuleForOrganizationOutput
+var GetTelemetryRuleForOrganizationOutput_RuleName = &sGetTelemetryRuleForOrganizationOutput_RuleName
+var GetTelemetryRuleForOrganizationOutput_RuleArn = &sGetTelemetryRuleForOrganizationOutput_RuleArn
+var GetTelemetryRuleForOrganizationOutput_CreatedTimeStamp = &sGetTelemetryRuleForOrganizationOutput_CreatedTimeStamp
+var GetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp = &sGetTelemetryRuleForOrganizationOutput_LastUpdateTimeStamp
+var GetTelemetryRuleForOrganizationOutput_TelemetryRule = &sGetTelemetryRuleForOrganizationOutput_TelemetryRule
+var GetTelemetryRuleForOrganizationOutput_HomeRegion = &sGetTelemetryRuleForOrganizationOutput_HomeRegion
+var GetTelemetryRuleForOrganizationOutput_IsReplicated = &sGetTelemetryRuleForOrganizationOutput_IsReplicated
+var GetTelemetryRuleForOrganizationOutput_RegionStatuses = &sGetTelemetryRuleForOrganizationOutput_RegionStatuses
+
+var GetTelemetryRuleInput = &sGetTelemetryRuleInput
+var GetTelemetryRuleInput_RuleIdentifier = &sGetTelemetryRuleInput_RuleIdentifier
+
+var GetTelemetryRuleOutput = &sGetTelemetryRuleOutput
+var GetTelemetryRuleOutput_RuleName = &sGetTelemetryRuleOutput_RuleName
+var GetTelemetryRuleOutput_RuleArn = &sGetTelemetryRuleOutput_RuleArn
+var GetTelemetryRuleOutput_CreatedTimeStamp = &sGetTelemetryRuleOutput_CreatedTimeStamp
+var GetTelemetryRuleOutput_LastUpdateTimeStamp = &sGetTelemetryRuleOutput_LastUpdateTimeStamp
+var GetTelemetryRuleOutput_TelemetryRule = &sGetTelemetryRuleOutput_TelemetryRule
+var GetTelemetryRuleOutput_HomeRegion = &sGetTelemetryRuleOutput_HomeRegion
+var GetTelemetryRuleOutput_IsReplicated = &sGetTelemetryRuleOutput_IsReplicated
+var GetTelemetryRuleOutput_RegionStatuses = &sGetTelemetryRuleOutput_RegionStatuses
+
+var ListCentralizationRulesForOrganizationInput = &sListCentralizationRulesForOrganizationInput
+var ListCentralizationRulesForOrganizationInput_RuleNamePrefix = &sListCentralizationRulesForOrganizationInput_RuleNamePrefix
+var ListCentralizationRulesForOrganizationInput_AllRegions = &sListCentralizationRulesForOrganizationInput_AllRegions
+var ListCentralizationRulesForOrganizationInput_MaxResults = &sListCentralizationRulesForOrganizationInput_MaxResults
+var ListCentralizationRulesForOrganizationInput_NextToken = &sListCentralizationRulesForOrganizationInput_NextToken
+
+var ListCentralizationRulesForOrganizationOutput = &sListCentralizationRulesForOrganizationOutput
+var ListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries = &sListCentralizationRulesForOrganizationOutput_CentralizationRuleSummaries
+var ListCentralizationRulesForOrganizationOutput_NextToken = &sListCentralizationRulesForOrganizationOutput_NextToken
+
+var ListDatasetIntegrationsInput = &sListDatasetIntegrationsInput
+var ListDatasetIntegrationsInput_MaxResults = &sListDatasetIntegrationsInput_MaxResults
+var ListDatasetIntegrationsInput_NextToken = &sListDatasetIntegrationsInput_NextToken
+
+var ListDatasetIntegrationsOutput = &sListDatasetIntegrationsOutput
+var ListDatasetIntegrationsOutput_DatasetIntegrationSummaries = &sListDatasetIntegrationsOutput_DatasetIntegrationSummaries
+var ListDatasetIntegrationsOutput_NextToken = &sListDatasetIntegrationsOutput_NextToken
+
+var ListResourceTelemetryForOrganizationInput = &sListResourceTelemetryForOrganizationInput
+var ListResourceTelemetryForOrganizationInput_AccountIdentifiers = &sListResourceTelemetryForOrganizationInput_AccountIdentifiers
+var ListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix = &sListResourceTelemetryForOrganizationInput_ResourceIdentifierPrefix
+var ListResourceTelemetryForOrganizationInput_ResourceTypes = &sListResourceTelemetryForOrganizationInput_ResourceTypes
+var ListResourceTelemetryForOrganizationInput_TelemetryConfigurationState = &sListResourceTelemetryForOrganizationInput_TelemetryConfigurationState
+var ListResourceTelemetryForOrganizationInput_ResourceTags = &sListResourceTelemetryForOrganizationInput_ResourceTags
+var ListResourceTelemetryForOrganizationInput_MaxResults = &sListResourceTelemetryForOrganizationInput_MaxResults
+var ListResourceTelemetryForOrganizationInput_NextToken = &sListResourceTelemetryForOrganizationInput_NextToken
+
+var ListResourceTelemetryForOrganizationOutput = &sListResourceTelemetryForOrganizationOutput
+var ListResourceTelemetryForOrganizationOutput_TelemetryConfigurations = &sListResourceTelemetryForOrganizationOutput_TelemetryConfigurations
+var ListResourceTelemetryForOrganizationOutput_NextToken = &sListResourceTelemetryForOrganizationOutput_NextToken
+
+var ListResourceTelemetryInput = &sListResourceTelemetryInput
+var ListResourceTelemetryInput_ResourceIdentifierPrefix = &sListResourceTelemetryInput_ResourceIdentifierPrefix
+var ListResourceTelemetryInput_ResourceTypes = &sListResourceTelemetryInput_ResourceTypes
+var ListResourceTelemetryInput_TelemetryConfigurationState = &sListResourceTelemetryInput_TelemetryConfigurationState
+var ListResourceTelemetryInput_ResourceTags = &sListResourceTelemetryInput_ResourceTags
+var ListResourceTelemetryInput_MaxResults = &sListResourceTelemetryInput_MaxResults
+var ListResourceTelemetryInput_NextToken = &sListResourceTelemetryInput_NextToken
+
+var ListResourceTelemetryOutput = &sListResourceTelemetryOutput
+var ListResourceTelemetryOutput_TelemetryConfigurations = &sListResourceTelemetryOutput_TelemetryConfigurations
+var ListResourceTelemetryOutput_NextToken = &sListResourceTelemetryOutput_NextToken
+
+var ListS3TableIntegrationsInput = &sListS3TableIntegrationsInput
+var ListS3TableIntegrationsInput_MaxResults = &sListS3TableIntegrationsInput_MaxResults
+var ListS3TableIntegrationsInput_NextToken = &sListS3TableIntegrationsInput_NextToken
+
+var ListS3TableIntegrationsOutput = &sListS3TableIntegrationsOutput
+var ListS3TableIntegrationsOutput_IntegrationSummaries = &sListS3TableIntegrationsOutput_IntegrationSummaries
+var ListS3TableIntegrationsOutput_NextToken = &sListS3TableIntegrationsOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceARN = &sListTagsForResourceInput_ResourceARN
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var ListTelemetryPipelinesInput = &sListTelemetryPipelinesInput
+var ListTelemetryPipelinesInput_MaxResults = &sListTelemetryPipelinesInput_MaxResults
+var ListTelemetryPipelinesInput_NextToken = &sListTelemetryPipelinesInput_NextToken
+
+var ListTelemetryPipelinesOutput = &sListTelemetryPipelinesOutput
+var ListTelemetryPipelinesOutput_PipelineSummaries = &sListTelemetryPipelinesOutput_PipelineSummaries
+var ListTelemetryPipelinesOutput_NextToken = &sListTelemetryPipelinesOutput_NextToken
+
+var ListTelemetryRulesForOrganizationInput = &sListTelemetryRulesForOrganizationInput
+var ListTelemetryRulesForOrganizationInput_RuleNamePrefix = &sListTelemetryRulesForOrganizationInput_RuleNamePrefix
+var ListTelemetryRulesForOrganizationInput_SourceAccountIds = &sListTelemetryRulesForOrganizationInput_SourceAccountIds
+var ListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds = &sListTelemetryRulesForOrganizationInput_SourceOrganizationUnitIds
+var ListTelemetryRulesForOrganizationInput_MaxResults = &sListTelemetryRulesForOrganizationInput_MaxResults
+var ListTelemetryRulesForOrganizationInput_NextToken = &sListTelemetryRulesForOrganizationInput_NextToken
+
+var ListTelemetryRulesForOrganizationOutput = &sListTelemetryRulesForOrganizationOutput
+var ListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries = &sListTelemetryRulesForOrganizationOutput_TelemetryRuleSummaries
+var ListTelemetryRulesForOrganizationOutput_NextToken = &sListTelemetryRulesForOrganizationOutput_NextToken
+
+var ListTelemetryRulesInput = &sListTelemetryRulesInput
+var ListTelemetryRulesInput_RuleNamePrefix = &sListTelemetryRulesInput_RuleNamePrefix
+var ListTelemetryRulesInput_MaxResults = &sListTelemetryRulesInput_MaxResults
+var ListTelemetryRulesInput_NextToken = &sListTelemetryRulesInput_NextToken
+
+var ListTelemetryRulesOutput = &sListTelemetryRulesOutput
+var ListTelemetryRulesOutput_TelemetryRuleSummaries = &sListTelemetryRulesOutput_TelemetryRuleSummaries
+var ListTelemetryRulesOutput_NextToken = &sListTelemetryRulesOutput_NextToken
+
+var StartTelemetryEnrichmentOutput = &sStartTelemetryEnrichmentOutput
+var StartTelemetryEnrichmentOutput_Status = &sStartTelemetryEnrichmentOutput_Status
+var StartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn = &sStartTelemetryEnrichmentOutput_AwsResourceExplorerManagedViewArn
+
+var StartTelemetryEvaluationForOrganizationInput = &sStartTelemetryEvaluationForOrganizationInput
+var StartTelemetryEvaluationForOrganizationInput_Regions = &sStartTelemetryEvaluationForOrganizationInput_Regions
+var StartTelemetryEvaluationForOrganizationInput_AllRegions = &sStartTelemetryEvaluationForOrganizationInput_AllRegions
+
+var StartTelemetryEvaluationInput = &sStartTelemetryEvaluationInput
+var StartTelemetryEvaluationInput_Regions = &sStartTelemetryEvaluationInput_Regions
+var StartTelemetryEvaluationInput_AllRegions = &sStartTelemetryEvaluationInput_AllRegions
+
+var StopTelemetryEnrichmentOutput = &sStopTelemetryEnrichmentOutput
+var StopTelemetryEnrichmentOutput_Status = &sStopTelemetryEnrichmentOutput_Status
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceARN = &sTagResourceInput_ResourceARN
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TestTelemetryPipelineInput = &sTestTelemetryPipelineInput
+var TestTelemetryPipelineInput_Records = &sTestTelemetryPipelineInput_Records
+var TestTelemetryPipelineInput_Configuration = &sTestTelemetryPipelineInput_Configuration
+var TestTelemetryPipelineInput_SignalType = &sTestTelemetryPipelineInput_SignalType
+
+var TestTelemetryPipelineOutput = &sTestTelemetryPipelineOutput
+var TestTelemetryPipelineOutput_Results = &sTestTelemetryPipelineOutput_Results
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceARN = &sUntagResourceInput_ResourceARN
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UpdateCentralizationRuleForOrganizationInput = &sUpdateCentralizationRuleForOrganizationInput
+var UpdateCentralizationRuleForOrganizationInput_RuleIdentifier = &sUpdateCentralizationRuleForOrganizationInput_RuleIdentifier
+var UpdateCentralizationRuleForOrganizationInput_Rule = &sUpdateCentralizationRuleForOrganizationInput_Rule
+
+var UpdateCentralizationRuleForOrganizationOutput = &sUpdateCentralizationRuleForOrganizationOutput
+var UpdateCentralizationRuleForOrganizationOutput_RuleArn = &sUpdateCentralizationRuleForOrganizationOutput_RuleArn
+
+var UpdateDatasetIntegrationInput = &sUpdateDatasetIntegrationInput
+var UpdateDatasetIntegrationInput_Arn = &sUpdateDatasetIntegrationInput_Arn
+var UpdateDatasetIntegrationInput_RoleArn = &sUpdateDatasetIntegrationInput_RoleArn
+
+var UpdateDatasetIntegrationOutput = &sUpdateDatasetIntegrationOutput
+var UpdateDatasetIntegrationOutput_Arn = &sUpdateDatasetIntegrationOutput_Arn
+var UpdateDatasetIntegrationOutput_RoleArn = &sUpdateDatasetIntegrationOutput_RoleArn
+var UpdateDatasetIntegrationOutput_CreatedAt = &sUpdateDatasetIntegrationOutput_CreatedAt
+var UpdateDatasetIntegrationOutput_UpdatedAt = &sUpdateDatasetIntegrationOutput_UpdatedAt
+
+var UpdateTelemetryPipelineInput = &sUpdateTelemetryPipelineInput
+var UpdateTelemetryPipelineInput_PipelineIdentifier = &sUpdateTelemetryPipelineInput_PipelineIdentifier
+var UpdateTelemetryPipelineInput_Configuration = &sUpdateTelemetryPipelineInput_Configuration
+
+var UpdateTelemetryPipelineOutput = &sUpdateTelemetryPipelineOutput
+
+var UpdateTelemetryRuleForOrganizationInput = &sUpdateTelemetryRuleForOrganizationInput
+var UpdateTelemetryRuleForOrganizationInput_RuleIdentifier = &sUpdateTelemetryRuleForOrganizationInput_RuleIdentifier
+var UpdateTelemetryRuleForOrganizationInput_Rule = &sUpdateTelemetryRuleForOrganizationInput_Rule
+
+var UpdateTelemetryRuleForOrganizationOutput = &sUpdateTelemetryRuleForOrganizationOutput
+var UpdateTelemetryRuleForOrganizationOutput_RuleArn = &sUpdateTelemetryRuleForOrganizationOutput_RuleArn
+
+var UpdateTelemetryRuleInput = &sUpdateTelemetryRuleInput
+var UpdateTelemetryRuleInput_RuleIdentifier = &sUpdateTelemetryRuleInput_RuleIdentifier
+var UpdateTelemetryRuleInput_Rule = &sUpdateTelemetryRuleInput_Rule
+
+var UpdateTelemetryRuleOutput = &sUpdateTelemetryRuleOutput
+var UpdateTelemetryRuleOutput_RuleArn = &sUpdateTelemetryRuleOutput_RuleArn
+
+var ValidateTelemetryPipelineConfigurationInput = &sValidateTelemetryPipelineConfigurationInput
+var ValidateTelemetryPipelineConfigurationInput_Configuration = &sValidateTelemetryPipelineConfigurationInput_Configuration
+
+var ValidateTelemetryPipelineConfigurationOutput = &sValidateTelemetryPipelineConfigurationOutput
+var ValidateTelemetryPipelineConfigurationOutput_Errors = &sValidateTelemetryPipelineConfigurationOutput_Errors
+
+var ObservabilityAdmin = &smithy.ServiceSchema{Schema: &s_ObservabilityAdmin, Version: "2018-05-10"}

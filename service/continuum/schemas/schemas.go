@@ -4,4964 +4,3476 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateCollector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociateCollector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAssociateCollector                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociateCollector"}
+	iCreateCodeFinding                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCodeFinding"}
+	iCreateCodeScan                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCodeScan"}
+	iCreateCollector                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCollector"}
+	iCreateEnvironment                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateEnvironment"}
+	iCreateIntegration                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateIntegration"}
+	iDeleteCollector                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeleteCollector"}
+	iDeleteEnvironment                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeleteEnvironment"}
+	iDeleteIntegration                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeleteIntegration"}
+	iDisassociateCollector                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DisassociateCollector"}
+	iGetCodeFinding                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeFinding"}
+	iGetCodeIssue                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeIssue"}
+	iGetCodeIssueArtifact                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeIssueArtifact"}
+	iGetCodeScan                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeScan"}
+	iGetCollector                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCollector"}
+	iGetCollectorDataAccessAuthorization       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCollectorDataAccessAuthorization"}
+	iGetEnvironment                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetEnvironment"}
+	iGetIntegration                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetIntegration"}
+	iGetResourcePolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetResourcePolicy"}
+	iListAssociatedCollectors                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListAssociatedCollectors"}
+	iListAssociatedEnvironments                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListAssociatedEnvironments"}
+	iListCodeFindings                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeFindings"}
+	iListCodeIssueArtifacts                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeIssueArtifacts"}
+	iListCodeIssues                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeIssues"}
+	iListCodeScans                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeScans"}
+	iListCollectors                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCollectors"}
+	iListEnvironments                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListEnvironments"}
+	iListIntegrations                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListIntegrations"}
+	iPutResourcePolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PutResourcePolicy"}
+	iStartIntegrationAuthorization             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "StartIntegrationAuthorization"}
+	iUpdateCollector                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateCollector"}
+	iUpdateEnvironment                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateEnvironment"}
+	iUpdateIntegration                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateIntegration"}
+	i_ContinuumControlPlane                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ContinuumControlPlane"}
+	iAccessDeniedException                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AccessDeniedException"}
+	iAffectedPackage                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AffectedPackage"}
+	i_AffectedPackageList                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AffectedPackageList"}
+	i_ArtifactCitation                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ArtifactCitation"}
+	i_ArtifactCitations                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ArtifactCitations"}
+	i_ArtifactHeaders                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ArtifactHeaders"}
+	iArtifactHttpMethod                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ArtifactHttpMethod"}
+	i_ArtifactProofBody                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ArtifactProofBody"}
+	i_ArtifactSha256                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ArtifactSha256"}
+	i_ArtifactText                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ArtifactText"}
+	iAssociatedCollector                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociatedCollector"}
+	i_AssociatedCollectors                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociatedCollectors"}
+	iAssociatedEnvironment                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociatedEnvironment"}
+	i_AssociatedEnvironments                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociatedEnvironments"}
+	i_AssociationClientToken                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociationClientToken"}
+	i_AttackFlowId                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AttackFlowId"}
+	i_AttackFlowIds                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AttackFlowIds"}
+	i_AuthorizationCode                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AuthorizationCode"}
+	i_AwsAccountId                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AwsAccountId"}
+	i_BuildRepositoryName                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "BuildRepositoryName"}
+	iCodeConfigurationDetails                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CodeConfigurationDetails"}
+	i_CodeFindingSummaries                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CodeFindingSummaries"}
+	i_CodeIssueArtifactItems                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CodeIssueArtifactItems"}
+	i_CodeIssueSummaries                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CodeIssueSummaries"}
+	iCodeScanData                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CodeScanData"}
+	i_CodeScanSummaries                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CodeScanSummaries"}
+	iCodeScanSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CodeScanSummary"}
+	i_CollectorArn                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorArn"}
+	i_CollectorClientToken                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorClientToken"}
+	iCollectorDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorDetails"}
+	i_CollectorId                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorId"}
+	i_CollectorName                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorName"}
+	iCollectorStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorStatus"}
+	i_CollectorSummaries                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorSummaries"}
+	iCollectorSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorSummary"}
+	iCollectorType                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CollectorType"}
+	i_ConfigRecorderArn                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ConfigRecorderArn"}
+	iConflictException                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ConflictException"}
+	iCreateCodeConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCodeConfiguration"}
+	iCreateEnvironmentConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateEnvironmentConfiguration"}
+	i_CveId                                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CveId"}
+	i_CweId                                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CweId"}
+	i_CweIdList                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CweIdList"}
+	i_DeliveryGitCommitSha                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeliveryGitCommitSha"}
+	i_DeliveryGitHubName                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeliveryGitHubName"}
+	i_DeliveryObjectKey                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeliveryObjectKey"}
+	i_DeliveryPullRequestNumber                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeliveryPullRequestNumber"}
+	iDeliveryReason                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeliveryReason"}
+	iDeliveryStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeliveryStatus"}
+	i_DeliveryVersionId                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeliveryVersionId"}
+	iDestinationTarget                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DestinationTarget"}
+	i_DomainName                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DomainName"}
+	i_DomainNames                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DomainNames"}
+	i_EnvironmentArn                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentArn"}
+	iEnvironmentConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentConfiguration"}
+	iEnvironmentConfigurationDetails           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentConfigurationDetails"}
+	i_EnvironmentId                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentId"}
+	i_EnvironmentListEntries                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentListEntries"}
+	iEnvironmentListEntry                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentListEntry"}
+	i_EnvironmentName                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentName"}
+	iEnvironmentNetworkConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentNetworkConfiguration"}
+	iEnvironmentRepositorySource               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentRepositorySource"}
+	i_EnvironmentRepositorySources             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentRepositorySources"}
+	iEnvironmentS3IntegrationSource            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentS3IntegrationSource"}
+	i_EnvironmentS3Sources                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentS3Sources"}
+	i_EnvironmentSourceBucketName              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentSourceBucketName"}
+	iEnvironmentSourceConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentSourceConfiguration"}
+	i_EnvironmentSourcePrefix                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentSourcePrefix"}
+	i_EnvironmentSourceRoleArn                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentSourceRoleArn"}
+	iEnvironmentStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentStatus"}
+	i_EnvironmentStatusMessage                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "EnvironmentStatusMessage"}
+	iExploitabilityVerdict                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ExploitabilityVerdict"}
+	iExploitEffect                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ExploitEffect"}
+	i_FindingArn                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingArn"}
+	iFindingBlockingReason                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingBlockingReason"}
+	i_FindingCategory                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingCategory"}
+	i_FindingClientToken                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingClientToken"}
+	i_FindingCodeSnippet                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingCodeSnippet"}
+	iFindingComplianceCheck                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingComplianceCheck"}
+	i_FindingComplianceCheckList               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingComplianceCheckList"}
+	i_FindingDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingDescription"}
+	iFindingDiscardReason                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingDiscardReason"}
+	iFindingEvidence                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingEvidence"}
+	i_FindingEvidenceList                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingEvidenceList"}
+	i_FindingFilePath                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingFilePath"}
+	i_FindingId                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingId"}
+	i_FindingListEntry                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingListEntry"}
+	iFindingLocation                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingLocation"}
+	i_FindingLocationList                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingLocationList"}
+	iFindingOcsfClass                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingOcsfClass"}
+	iFindingPosture                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingPosture"}
+	iFindingResource                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingResource"}
+	i_FindingResourceList                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingResourceList"}
+	i_FindingResourceUid                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingResourceUid"}
+	iFindingSeverityAdjustment                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingSeverityAdjustment"}
+	iFindingSeverityId                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingSeverityId"}
+	i_FindingSource                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingSource"}
+	iFindingStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingStatus"}
+	i_FindingStatusMessage                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingStatusMessage"}
+	i_FindingStringList                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingStringList"}
+	iFindingSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingSummary"}
+	i_FindingTitle                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingTitle"}
+	iFindingType                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingType"}
+	iFindingValidation                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingValidation"}
+	iFindingVerdict                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingVerdict"}
+	iFindingVulnerability                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingVulnerability"}
+	i_FindingVulnerabilityList                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FindingVulnerabilityList"}
+	iFlowVerdict                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FlowVerdict"}
+	i_FlowVerdicts                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FlowVerdicts"}
+	iFlowVerdictValue                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "FlowVerdictValue"}
+	iGitHubAuthorizationConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitHubAuthorizationConfiguration"}
+	iGitHubConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitHubConfiguration"}
+	iGitHubDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitHubDetails"}
+	i_GitHubOrganizationName                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitHubOrganizationName"}
+	iGitHubTarget                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitHubTarget"}
+	i_GitLabAccessToken                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitLabAccessToken"}
+	iGitLabConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitLabConfiguration"}
+	iGitLabDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitLabDetails"}
+	i_GitLabInstanceUrl                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitLabInstanceUrl"}
+	i_GitLabTargetPath                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitLabTargetPath"}
+	iGitLabTargetType                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitLabTargetType"}
+	iGitLabTokenRotation                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GitLabTokenRotation"}
+	i_IntegrationArn                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationArn"}
+	iIntegrationAuthorizationProviderType      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationAuthorizationProviderType"}
+	i_IntegrationClientToken                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationClientToken"}
+	i_IntegrationId                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationId"}
+	i_IntegrationName                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationName"}
+	i_IntegrationS3BucketName                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationS3BucketName"}
+	i_IntegrationS3ExternalId                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationS3ExternalId"}
+	i_IntegrationS3RoleArn                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationS3RoleArn"}
+	i_IntegrationSummaries                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationSummaries"}
+	iIntegrationSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationSummary"}
+	iIntegrationType                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IntegrationType"}
+	iInternalServerException                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "InternalServerException"}
+	i_IssueArn                                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArn"}
+	iIssueArtifactBody                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactBody"}
+	i_IssueArtifactContent                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactContent"}
+	i_IssueArtifactId                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactId"}
+	iIssueArtifactItem                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactItem"}
+	i_IssueArtifactMediaType                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactMediaType"}
+	i_IssueArtifactProducerName                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactProducerName"}
+	iIssueArtifactProducerSummary              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactProducerSummary"}
+	iIssueArtifactType                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueArtifactType"}
+	i_IssueConfidence                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueConfidence"}
+	iIssueEvidenceAvailability                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueEvidenceAvailability"}
+	i_IssueFindingIds                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueFindingIds"}
+	i_IssueId                                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueId"}
+	i_IssueName                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueName"}
+	iIssuePatchDelivery                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssuePatchDelivery"}
+	i_IssuePatchDeliveryCount                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssuePatchDeliveryCount"}
+	i_IssuePatchDeliveryFailureReasons         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssuePatchDeliveryFailureReasons"}
+	iIssuePatchDeliveryStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssuePatchDeliveryStatus"}
+	iIssuePhase                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssuePhase"}
+	i_IssueRemediationSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueRemediationSummary"}
+	iIssueSeverity                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueSeverity"}
+	i_IssueSeverityReasoning                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueSeverityReasoning"}
+	iIssueStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueStatus"}
+	i_IssueStatusMessage                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueStatusMessage"}
+	iIssueStatusReason                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueStatusReason"}
+	iIssueSummary                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueSummary"}
+	i_IssueSynopsis                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "IssueSynopsis"}
+	i_KubernetesClusterExternalId              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "KubernetesClusterExternalId"}
+	i_KubernetesClusterRoleArn                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "KubernetesClusterRoleArn"}
+	iKubernetesClusterRoleConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "KubernetesClusterRoleConfiguration"}
+	iKubernetesClusterRoleUpdate               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "KubernetesClusterRoleUpdate"}
+	i_MaxResults                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "MaxResults"}
+	i_NextToken                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "NextToken"}
+	i_OAuthCodeChallenge                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "OAuthCodeChallenge"}
+	iOAuthCodeChallengeMethod                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "OAuthCodeChallengeMethod"}
+	i_OAuthState                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "OAuthState"}
+	i_PackageManager                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PackageManager"}
+	i_PackageName                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PackageName"}
+	i_PackageVersion                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PackageVersion"}
+	iPatchBody                                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PatchBody"}
+	iPatchCreationPolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PatchCreationPolicy"}
+	iPatchDelivery                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PatchDelivery"}
+	iPatchFormat                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PatchFormat"}
+	iPerFindingResult                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PerFindingResult"}
+	i_PerFindingResults                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PerFindingResults"}
+	iPrevalidationSignal                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PrevalidationSignal"}
+	i_PrevalidationSignals                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PrevalidationSignals"}
+	iPrevalidationSignalsBody                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PrevalidationSignalsBody"}
+	iProviderConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ProviderConfiguration"}
+	iProviderDetails                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ProviderDetails"}
+	iReasoningStep                             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ReasoningStep"}
+	i_ReasoningSteps                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ReasoningSteps"}
+	i_RedirectUrl                              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "RedirectUrl"}
+	iRemediationProposalBody                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "RemediationProposalBody"}
+	iRemoveKubernetesClusterRole               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "RemoveKubernetesClusterRole"}
+	i_RepositoryBranch                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "RepositoryBranch"}
+	i_RepositoryName                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "RepositoryName"}
+	iResourceNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ResourceNotFoundException"}
+	i_ResourcePolicyDocument                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ResourcePolicyDocument"}
+	i_ResourcePolicyInputDocument              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ResourcePolicyInputDocument"}
+	i_ResourcePolicyRevisionId                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ResourcePolicyRevisionId"}
+	i_ResourcePolicyTargetArn                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ResourcePolicyTargetArn"}
+	iS3Configuration                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "S3Configuration"}
+	iS3Details                                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "S3Details"}
+	iS3Target                                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "S3Target"}
+	i_ScanClientToken                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ScanClientToken"}
+	iScanFailureStage                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ScanFailureStage"}
+	i_ScanFrequency                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ScanFrequency"}
+	iScanOrigin                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ScanOrigin"}
+	i_ScanRunFailureMessage                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ScanRunFailureMessage"}
+	i_ScanRunId                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ScanRunId"}
+	iScanStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ScanStatus"}
+	iServiceQuotaExceededException             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ServiceQuotaExceededException"}
+	iSignalAccessLevel                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalAccessLevel"}
+	iSignalAccessPrecondition                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalAccessPrecondition"}
+	iSignalAttackerGains                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalAttackerGains"}
+	iSignalAttackerGainsDimension              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalAttackerGainsDimension"}
+	iSignalBand                                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalBand"}
+	iSignalBasis                               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalBasis"}
+	iSignalBlastRadius                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalBlastRadius"}
+	iSignalBlastRadiusDimension                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalBlastRadiusDimension"}
+	iSignalComputation                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalComputation"}
+	iSignalConfidenceReasoning                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalConfidenceReasoning"}
+	iSignalDimension                           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalDimension"}
+	iSignalExploitability                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalExploitability"}
+	iSignalImpactDimensions                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalImpactDimensions"}
+	iSignalPrecondition                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalPrecondition"}
+	iSignalPreconditions                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalPreconditions"}
+	iSignalStrength                            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalStrength"}
+	iSignalTargetValue                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalTargetValue"}
+	iSignalTargetValueDimension                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SignalTargetValueDimension"}
+	i_SourceFindingId                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "SourceFindingId"}
+	iThrottlingException                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ThrottlingException"}
+	iUpdateCodeConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateCodeConfiguration"}
+	iUpdateEnvironmentConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateEnvironmentConfiguration"}
+	iUpdateProviderConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateProviderConfiguration"}
+	iUpdateS3Configuration                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateS3Configuration"}
+	i_ValidationConfidence                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationConfidence"}
+	iValidationConfidenceTier                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationConfidenceTier"}
+	iValidationEvidenceBody                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationEvidenceBody"}
+	iValidationException                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationException"}
+	iValidationExceptionField                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationExceptionFieldList"}
+	iValidationExecutedProof                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationExecutedProof"}
+	iValidationExploitArtifact                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationExploitArtifact"}
+	iValidationProofCode                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationProofCode"}
+	i_ValidationProofConsoleOutput             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationProofConsoleOutput"}
+	iValidationProofMaterial                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationProofMaterial"}
+	i_ValidationProofMaterials                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationProofMaterials"}
+	i_ValidationProofMaterialText              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationProofMaterialText"}
+	iValidationProofOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationProofOutput"}
+	i_ValidationProofSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationProofSummary"}
+	iValidationSourceAnalysis                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationSourceAnalysis"}
+	iValidationTerminalStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ValidationTerminalStatus"}
+	iAssociateCollectorInput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociateCollectorInput"}
+	iAssociateCollectorOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "AssociateCollectorOutput"}
+	iCreateCodeFindingInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCodeFindingInput"}
+	iCreateCodeFindingOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCodeFindingOutput"}
+	iCreateCodeScanInput                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCodeScanInput"}
+	iCreateCodeScanOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCodeScanOutput"}
+	iCreateCollectorInput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCollectorInput"}
+	iCreateCollectorOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateCollectorOutput"}
+	iCreateEnvironmentInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateEnvironmentInput"}
+	iCreateEnvironmentOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateEnvironmentOutput"}
+	iCreateIntegrationInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateIntegrationInput"}
+	iCreateIntegrationOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "CreateIntegrationOutput"}
+	iDeleteCollectorInput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeleteCollectorInput"}
+	iDeleteEnvironmentInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeleteEnvironmentInput"}
+	iDeleteIntegrationInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DeleteIntegrationInput"}
+	iDisassociateCollectorInput                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "DisassociateCollectorInput"}
+	iGetCodeFindingInput                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeFindingInput"}
+	iGetCodeFindingOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeFindingOutput"}
+	iGetCodeIssueArtifactInput                 = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeIssueArtifactInput"}
+	iGetCodeIssueArtifactOutput                = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeIssueArtifactOutput"}
+	iGetCodeIssueInput                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeIssueInput"}
+	iGetCodeIssueOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeIssueOutput"}
+	iGetCodeScanInput                          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeScanInput"}
+	iGetCodeScanOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCodeScanOutput"}
+	iGetCollectorDataAccessAuthorizationInput  = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCollectorDataAccessAuthorizationInput"}
+	iGetCollectorDataAccessAuthorizationOutput = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCollectorDataAccessAuthorizationOutput"}
+	iGetCollectorInput                         = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCollectorInput"}
+	iGetCollectorOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetCollectorOutput"}
+	iGetEnvironmentInput                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetEnvironmentInput"}
+	iGetEnvironmentOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetEnvironmentOutput"}
+	iGetIntegrationInput                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetIntegrationInput"}
+	iGetIntegrationOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetIntegrationOutput"}
+	iGetResourcePolicyInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetResourcePolicyInput"}
+	iGetResourcePolicyOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "GetResourcePolicyOutput"}
+	iListAssociatedCollectorsInput             = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListAssociatedCollectorsInput"}
+	iListAssociatedCollectorsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListAssociatedCollectorsOutput"}
+	iListAssociatedEnvironmentsInput           = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListAssociatedEnvironmentsInput"}
+	iListAssociatedEnvironmentsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListAssociatedEnvironmentsOutput"}
+	iListCodeFindingsInput                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeFindingsInput"}
+	iListCodeFindingsOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeFindingsOutput"}
+	iListCodeIssueArtifactsInput               = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeIssueArtifactsInput"}
+	iListCodeIssueArtifactsOutput              = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeIssueArtifactsOutput"}
+	iListCodeIssuesInput                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeIssuesInput"}
+	iListCodeIssuesOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeIssuesOutput"}
+	iListCodeScansInput                        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeScansInput"}
+	iListCodeScansOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCodeScansOutput"}
+	iListCollectorsInput                       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCollectorsInput"}
+	iListCollectorsOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListCollectorsOutput"}
+	iListEnvironmentsInput                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListEnvironmentsInput"}
+	iListEnvironmentsOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListEnvironmentsOutput"}
+	iListIntegrationsInput                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListIntegrationsInput"}
+	iListIntegrationsOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "ListIntegrationsOutput"}
+	iPutResourcePolicyInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PutResourcePolicyInput"}
+	iPutResourcePolicyOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "PutResourcePolicyOutput"}
+	iStartIntegrationAuthorizationInput        = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "StartIntegrationAuthorizationInput"}
+	iStartIntegrationAuthorizationOutput       = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "StartIntegrationAuthorizationOutput"}
+	iUpdateCollectorInput                      = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateCollectorInput"}
+	iUpdateCollectorOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateCollectorOutput"}
+	iUpdateEnvironmentInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateEnvironmentInput"}
+	iUpdateEnvironmentOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateEnvironmentOutput"}
+	iUpdateIntegrationInput                    = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateIntegrationInput"}
+	iUpdateIntegrationOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.continuum", Name: "UpdateIntegrationOutput"}
+	pString                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pDouble                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Double"}
+	pLong                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+	pBoolean                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pDocument                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Document"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/environments/{environmentId}/collectors",
-	Code: 201})
-
-var CreateCodeFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCodeFinding",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/environments/{environmentId}/code-findings",
-	Code: 201})
-
-var CreateCodeScan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCodeScan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/environments/{environmentId}/code-scans",
-	Code: 201})
-
-var CreateCollector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCollector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/collectors",
-	Code: 201})
-
-var CreateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/environments",
-	Code: 201})
-
-var CreateIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/integrations",
-	Code: 201})
-
-var DeleteCollector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeleteCollector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/collectors/{collectorId}",
-	Code: 204})
-
-var DeleteEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeleteEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/environments/{environmentId}",
-	Code: 204})
-
-var DeleteIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeleteIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/integrations/{integrationId}",
-	Code: 204})
-
-var DisassociateCollector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DisassociateCollector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/environments/{environmentId}/collectors/disassociate",
-	Code: 204})
-
-var GetCodeFinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeFinding",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-findings/{findingId}",
-	Code: 200})
-
-var GetCodeIssue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeIssue",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-issues/{issueId}",
-	Code: 200})
-
-var GetCodeIssueArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeIssueArtifact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-issues/{issueId}/artifacts/{artifactId}",
-	Code: 200})
-
-var GetCodeScan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeScan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-scans/{scanRunId}",
-	Code: 200})
-
-var GetCollector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCollector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collectors/{collectorId}",
-	Code: 200})
-
-var GetCollectorDataAccessAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCollectorDataAccessAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collectors/{collectorId}/data-access-authorization",
-	Code: 200})
-
-var GetEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}",
-	Code: 200})
-
-var GetIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/integrations/{integrationId}",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resourcepolicy",
-	Code: 200})
-
-var ListAssociatedCollectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListAssociatedCollectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/collectors",
-	Code: 200})
-
-var ListAssociatedEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListAssociatedEnvironments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collectors/{collectorId}/environments",
-	Code: 200})
-
-var ListCodeFindings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeFindings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-findings",
-	Code: 200})
-
-var ListCodeIssueArtifacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeIssueArtifacts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-issues/{issueId}/artifacts",
-	Code: 200})
-
-var ListCodeIssues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeIssues",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-issues",
-	Code: 200})
-
-var ListCodeScans = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeScans",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{environmentId}/code-scans",
-	Code: 200})
-
-var ListCollectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCollectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/collectors",
-	Code: 200})
-
-var ListEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListEnvironments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments",
-	Code: 200})
-
-var ListIntegrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListIntegrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/integrations",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/resourcepolicy",
-	Code: 200})
-
-var StartIntegrationAuthorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "StartIntegrationAuthorization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/integration-authorizations",
-	Code: 201})
-
-var UpdateCollector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateCollector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 201}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/collectors/{collectorId}",
-	Code: 200})
-
-var UpdateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/environments/{environmentId}",
-	Code: 200})
-
-var UpdateIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/integrations/{integrationId}",
-	Code: 200})
-
-var _ContinuumControlPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ContinuumControlPlane",
-}, smithy.ShapeTypeService, 0)
-
-var ContinuumControlPlane = smithy.NewServiceSchema(_ContinuumControlPlane, "2022-07-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AffectedPackage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AffectedPackage",
-}, smithy.ShapeTypeStructure, 4)
-var AffectedPackage_name *smithy.Schema
-
-var AffectedPackage_version *smithy.Schema
-
-var AffectedPackage_fixedInVersion *smithy.Schema
-
-var AffectedPackage_packageManager *smithy.Schema
-
-var _AffectedPackageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AffectedPackageList",
-}, smithy.ShapeTypeList, 1)
-var _AffectedPackageList_member *smithy.Schema
-
-var _ArtifactCitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ArtifactCitation",
-}, smithy.ShapeTypeString, 0)
-
-var _ArtifactCitations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ArtifactCitations",
-}, smithy.ShapeTypeList, 1)
-var _ArtifactCitations_member *smithy.Schema
-
-var _ArtifactHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ArtifactHeaders",
-}, smithy.ShapeTypeMap, 2)
-var _ArtifactHeaders_key *smithy.Schema
-
-var _ArtifactHeaders_value *smithy.Schema
-
-var ArtifactHttpMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ArtifactHttpMethod",
-}, smithy.ShapeTypeEnum, 7)
-var ArtifactHttpMethod_GET *smithy.Schema
-
-var ArtifactHttpMethod_HEAD *smithy.Schema
-
-var ArtifactHttpMethod_POST *smithy.Schema
-
-var ArtifactHttpMethod_PUT *smithy.Schema
-
-var ArtifactHttpMethod_PATCH *smithy.Schema
-
-var ArtifactHttpMethod_DELETE *smithy.Schema
-
-var ArtifactHttpMethod_OPTIONS *smithy.Schema
-
-var _ArtifactProofBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ArtifactProofBody",
-}, smithy.ShapeTypeString, 0)
-
-var _ArtifactSha256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ArtifactSha256",
-}, smithy.ShapeTypeString, 0)
-
-var _ArtifactText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ArtifactText",
-}, smithy.ShapeTypeString, 0)
-
-var AssociatedCollector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociatedCollector",
-}, smithy.ShapeTypeStructure, 2)
-var AssociatedCollector_collectorId *smithy.Schema
-
-var AssociatedCollector_collectorArn *smithy.Schema
-
-var _AssociatedCollectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociatedCollectors",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedCollectors_member *smithy.Schema
-
-var AssociatedEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociatedEnvironment",
-}, smithy.ShapeTypeStructure, 5)
-var AssociatedEnvironment_environmentId *smithy.Schema
-
-var AssociatedEnvironment_environmentArn *smithy.Schema
-
-var AssociatedEnvironment_name *smithy.Schema
-
-var AssociatedEnvironment_status *smithy.Schema
-
-var AssociatedEnvironment_createdAt *smithy.Schema
-
-var _AssociatedEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociatedEnvironments",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedEnvironments_member *smithy.Schema
-
-var _AssociationClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociationClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _AttackFlowId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AttackFlowId",
-}, smithy.ShapeTypeString, 0)
-
-var _AttackFlowIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AttackFlowIds",
-}, smithy.ShapeTypeList, 1)
-var _AttackFlowIds_member *smithy.Schema
-
-var _AuthorizationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AuthorizationCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _BuildRepositoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "BuildRepositoryName",
-}, smithy.ShapeTypeString, 0)
-
-var CodeConfigurationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CodeConfigurationDetails",
-}, smithy.ShapeTypeStructure, 4)
-var CodeConfigurationDetails_collectorDetails *smithy.Schema
-
-var CodeConfigurationDetails_sourceConfiguration *smithy.Schema
-
-var CodeConfigurationDetails_environmentConfiguration *smithy.Schema
-
-var CodeConfigurationDetails_latestScan *smithy.Schema
-
-var _CodeFindingSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CodeFindingSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CodeFindingSummaries_member *smithy.Schema
-
-var _CodeIssueArtifactItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CodeIssueArtifactItems",
-}, smithy.ShapeTypeList, 1)
-var _CodeIssueArtifactItems_member *smithy.Schema
-
-var _CodeIssueSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CodeIssueSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CodeIssueSummaries_member *smithy.Schema
-
-var CodeScanData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CodeScanData",
-}, smithy.ShapeTypeStructure, 7)
-var CodeScanData_scanRunId *smithy.Schema
-
-var CodeScanData_status *smithy.Schema
-
-var CodeScanData_origin *smithy.Schema
-
-var CodeScanData_createdAt *smithy.Schema
-
-var CodeScanData_completedAt *smithy.Schema
-
-var CodeScanData_failureMessage *smithy.Schema
-
-var CodeScanData_failureStage *smithy.Schema
-
-var _CodeScanSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CodeScanSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CodeScanSummaries_member *smithy.Schema
-
-var CodeScanSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CodeScanSummary",
-}, smithy.ShapeTypeStructure, 7)
-var CodeScanSummary_scanRunId *smithy.Schema
-
-var CodeScanSummary_status *smithy.Schema
-
-var CodeScanSummary_origin *smithy.Schema
-
-var CodeScanSummary_createdAt *smithy.Schema
-
-var CodeScanSummary_completedAt *smithy.Schema
-
-var CodeScanSummary_failureMessage *smithy.Schema
-
-var CodeScanSummary_failureStage *smithy.Schema
-
-var _CollectorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CollectorClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var CollectorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorDetails",
-}, smithy.ShapeTypeStructure, 1)
-var CollectorDetails_collectorDataAccessRoleArn *smithy.Schema
-
-var _CollectorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorId",
-}, smithy.ShapeTypeString, 0)
-
-var _CollectorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorName",
-}, smithy.ShapeTypeString, 0)
-
-var CollectorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CollectorStatus_ACTIVE *smithy.Schema
-
-var CollectorStatus_PENDING_DELETION *smithy.Schema
-
-var _CollectorSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorSummaries",
-}, smithy.ShapeTypeList, 1)
-var _CollectorSummaries_member *smithy.Schema
-
-var CollectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorSummary",
-}, smithy.ShapeTypeStructure, 5)
-var CollectorSummary_collectorId *smithy.Schema
-
-var CollectorSummary_collectorArn *smithy.Schema
-
-var CollectorSummary_type *smithy.Schema
-
-var CollectorSummary_status *smithy.Schema
-
-var CollectorSummary_createdAt *smithy.Schema
-
-var CollectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CollectorType",
-}, smithy.ShapeTypeEnum, 1)
-var CollectorType_AWS_COLLECTOR *smithy.Schema
-
-var _ConfigRecorderArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ConfigRecorderArn",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CreateCodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCodeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCodeConfiguration_sourceConfiguration *smithy.Schema
-
-var CreateCodeConfiguration_environmentConfiguration *smithy.Schema
-
-var CreateEnvironmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateEnvironmentConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEnvironmentConfiguration_codeConfiguration *smithy.Schema
-
-var _CveId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CveId",
-}, smithy.ShapeTypeString, 0)
-
-var _CweId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CweId",
-}, smithy.ShapeTypeString, 0)
-
-var _CweIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CweIdList",
-}, smithy.ShapeTypeList, 1)
-var _CweIdList_member *smithy.Schema
-
-var _DeliveryGitCommitSha = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeliveryGitCommitSha",
-}, smithy.ShapeTypeString, 0)
-
-var _DeliveryGitHubName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeliveryGitHubName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeliveryObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeliveryObjectKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DeliveryPullRequestNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeliveryPullRequestNumber",
-}, smithy.ShapeTypeLong, 0)
-
-var DeliveryReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeliveryReason",
-}, smithy.ShapeTypeEnum, 81)
-var DeliveryReason_ARTIFACT_READ_FAILED *smithy.Schema
-
-var DeliveryReason_ARTIFACT_SOURCE_MISMATCH *smithy.Schema
-
-var DeliveryReason_ARTIFACT_SOURCE_MISSING *smithy.Schema
-
-var DeliveryReason_BUILD_NOT_FOUND *smithy.Schema
-
-var DeliveryReason_BUILD_READ_FAILED *smithy.Schema
-
-var DeliveryReason_BUILD_RESULT_SCOPE_MISMATCH *smithy.Schema
-
-var DeliveryReason_DELIVERY_NOT_CONFIGURED *smithy.Schema
-
-var DeliveryReason_DELIVERY_SOURCE_KIND_CHANGED *smithy.Schema
-
-var DeliveryReason_DUPLICATE_LOGICAL_REPOSITORY *smithy.Schema
-
-var DeliveryReason_DUPLICATE_OR_INVALID_REPOSITORY *smithy.Schema
-
-var DeliveryReason_ENVIRONMENT_DELETED *smithy.Schema
-
-var DeliveryReason_ENVIRONMENT_NOT_ACTIVE *smithy.Schema
-
-var DeliveryReason_ENVIRONMENT_NOT_FOUND *smithy.Schema
-
-var DeliveryReason_ENVIRONMENT_READ_FAILED *smithy.Schema
-
-var DeliveryReason_S3_ACCESS_DENIED *smithy.Schema
-
-var DeliveryReason_S3_SOURCE_PREFIX_OVERLAP *smithy.Schema
-
-var DeliveryReason_SOURCE_INTEGRATION_UNRESOLVED *smithy.Schema
-
-var DeliveryReason_SOURCE_INTEGRATION_READ_FAILED *smithy.Schema
-
-var DeliveryReason_SOURCE_INTEGRATION_INVALID *smithy.Schema
-
-var DeliveryReason_SOURCE_INTEGRATION_CHANGED *smithy.Schema
-
-var DeliveryReason_EXPORT_CREDENTIALS_MISSING *smithy.Schema
-
-var DeliveryReason_EXPORT_CREDENTIAL_EXPIRY_INVALID *smithy.Schema
-
-var DeliveryReason_EXPORT_DESTINATION_INVALID *smithy.Schema
-
-var DeliveryReason_EXPORT_EXISTING_OBJECT_MISMATCH *smithy.Schema
-
-var DeliveryReason_EXPORT_PUT_FAILED *smithy.Schema
-
-var DeliveryReason_EXPORT_RECONCILIATION_READ_FAILED *smithy.Schema
-
-var DeliveryReason_EXPORT_ROLE_ASSUMPTION_FAILED *smithy.Schema
-
-var DeliveryReason_GITHUB_ACCESS_DENIED *smithy.Schema
-
-var DeliveryReason_GITHUB_BASE_NOT_FOUND *smithy.Schema
-
-var DeliveryReason_GITHUB_BRANCH_CONFLICT *smithy.Schema
-
-var DeliveryReason_GITHUB_NOT_FOUND *smithy.Schema
-
-var DeliveryReason_GITHUB_RATE_LIMITED *smithy.Schema
-
-var DeliveryReason_GITHUB_REPOSITORY_CHANGED *smithy.Schema
-
-var DeliveryReason_GITHUB_REPOSITORY_NOT_FOUND *smithy.Schema
-
-var DeliveryReason_GITHUB_REQUEST_FAILED *smithy.Schema
-
-var DeliveryReason_GITHUB_REQUEST_REJECTED *smithy.Schema
-
-var DeliveryReason_GITHUB_RESPONSE_INVALID *smithy.Schema
-
-var DeliveryReason_GREEN_ATTEMPT_NOT_SUCCESSFUL *smithy.Schema
-
-var DeliveryReason_GREEN_COMPLETION_NOT_OBSERVED *smithy.Schema
-
-var DeliveryReason_PATCH_NOT_SELECTED *smithy.Schema
-
-var DeliveryReason_INCOMPLETE_SOURCE_REFERENCE *smithy.Schema
-
-var DeliveryReason_INVALID_ARCHIVE_DIGEST *smithy.Schema
-
-var DeliveryReason_INVALID_ARTIFACT_SOURCE *smithy.Schema
-
-var DeliveryReason_INVALID_COMPLETED_MANIFEST *smithy.Schema
-
-var DeliveryReason_INVALID_EXPORT_RECEIPT *smithy.Schema
-
-var DeliveryReason_INVALID_GITHUB_PROVENANCE *smithy.Schema
-
-var DeliveryReason_INVALID_S3_DESTINATION *smithy.Schema
-
-var DeliveryReason_INVALID_SERVICE_RECEIPT *smithy.Schema
-
-var DeliveryReason_INVALID_SOURCE_INVENTORY *smithy.Schema
-
-var DeliveryReason_INVALID_SOURCE_MANIFEST *smithy.Schema
-
-var DeliveryReason_INVALID_SOURCE_REFERENCE *smithy.Schema
-
-var DeliveryReason_ISSUE_INTEGRITY_FAILURE *smithy.Schema
-
-var DeliveryReason_ISSUE_NOT_FOUND *smithy.Schema
-
-var DeliveryReason_MANIFEST_INVENTORY_MISMATCH *smithy.Schema
-
-var DeliveryReason_MANIFEST_PROVENANCE_CHANGED *smithy.Schema
-
-var DeliveryReason_MANIFEST_REPOSITORY_SET_MISMATCH *smithy.Schema
-
-var DeliveryReason_MANIFEST_SCOPE_OR_VERSION_MISMATCH *smithy.Schema
-
-var DeliveryReason_MISSING_BUILD_RESULT *smithy.Schema
-
-var DeliveryReason_MISSING_COMPLETED_MANIFEST *smithy.Schema
-
-var DeliveryReason_MISSING_RESULT_DIGEST *smithy.Schema
-
-var DeliveryReason_MISSING_SOURCE_MANIFEST *smithy.Schema
-
-var DeliveryReason_MISSING_SOURCE_TARGET *smithy.Schema
-
-var DeliveryReason_PATCH_NOT_APPLICABLE *smithy.Schema
-
-var DeliveryReason_PATCH_STORAGE_IDENTITY_MISSING *smithy.Schema
-
-var DeliveryReason_PATCH_UNSUPPORTED *smithy.Schema
-
-var DeliveryReason_PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT *smithy.Schema
-
-var DeliveryReason_PUBLISHER_DEADLINE_EXCEEDED *smithy.Schema
-
-var DeliveryReason_RESULT_COMPLETED_MANIFEST_MISMATCH *smithy.Schema
-
-var DeliveryReason_RESULT_SOURCE_BINDING_MISMATCH *smithy.Schema
-
-var DeliveryReason_SERVICE_COPY_DIGEST_MISMATCH *smithy.Schema
-
-var DeliveryReason_SERVICE_OBJECT_READ_FAILED *smithy.Schema
-
-var DeliveryReason_SERVICE_OBJECT_TOO_LARGE *smithy.Schema
-
-var DeliveryReason_SERVICE_RECEIPT_OUTSIDE_ISSUE *smithy.Schema
-
-var DeliveryReason_SOURCE_OBJECT_DIGEST_MISMATCH *smithy.Schema
-
-var DeliveryReason_SOURCE_REFERENCE_OUTSIDE_BUILD *smithy.Schema
-
-var DeliveryReason_SOURCE_TARGET_BUILD_MISMATCH *smithy.Schema
-
-var DeliveryReason_UNKNOWN_REPOSITORY *smithy.Schema
-
-var DeliveryReason_UNKNOWN_SOURCE_PROVIDER *smithy.Schema
-
-var DeliveryReason_UNSUPPORTED_ENVIRONMENT_SCHEMA *smithy.Schema
-
-var DeliveryReason_GITHUB_DESTINATION_NOT_ENABLED *smithy.Schema
-
-var DeliveryReason_PATCH_CREATION_POLICY_DISABLED *smithy.Schema
-
-var DeliveryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeliveryStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DeliveryStatus_PENDING *smithy.Schema
-
-var DeliveryStatus_SUCCEEDED *smithy.Schema
-
-var DeliveryStatus_FAILED *smithy.Schema
-
-var DeliveryStatus_SKIPPED *smithy.Schema
-
-var DeliveryStatus_ABANDONED *smithy.Schema
-
-var _DeliveryVersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeliveryVersionId",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DestinationTarget",
-}, smithy.ShapeTypeUnion, 2)
-var DestinationTarget_s3 *smithy.Schema
-
-var DestinationTarget_github *smithy.Schema
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DomainNames",
-}, smithy.ShapeTypeList, 1)
-var _DomainNames_member *smithy.Schema
-
-var _EnvironmentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentArn",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var EnvironmentConfiguration_network *smithy.Schema
-
-var EnvironmentConfiguration_scanFrequency *smithy.Schema
-
-var EnvironmentConfiguration_patchCreationPolicy *smithy.Schema
-
-var EnvironmentConfigurationDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentConfigurationDetails",
-}, smithy.ShapeTypeStructure, 1)
-var EnvironmentConfigurationDetails_codeConfiguration *smithy.Schema
-
-var _EnvironmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentListEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentListEntries",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentListEntries_member *smithy.Schema
-
-var EnvironmentListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentListEntry",
-}, smithy.ShapeTypeStructure, 5)
-var EnvironmentListEntry_environmentId *smithy.Schema
-
-var EnvironmentListEntry_environmentArn *smithy.Schema
-
-var EnvironmentListEntry_name *smithy.Schema
-
-var EnvironmentListEntry_status *smithy.Schema
-
-var EnvironmentListEntry_createdAt *smithy.Schema
-
-var _EnvironmentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentName",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentNetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EnvironmentNetworkConfiguration_allowedDomains *smithy.Schema
-
-var EnvironmentRepositorySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentRepositorySource",
-}, smithy.ShapeTypeStructure, 3)
-var EnvironmentRepositorySource_integrationId *smithy.Schema
-
-var EnvironmentRepositorySource_repository *smithy.Schema
-
-var EnvironmentRepositorySource_defaultBranch *smithy.Schema
-
-var _EnvironmentRepositorySources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentRepositorySources",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentRepositorySources_member *smithy.Schema
-
-var EnvironmentS3IntegrationSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentS3IntegrationSource",
-}, smithy.ShapeTypeStructure, 3)
-var EnvironmentS3IntegrationSource_integrationId *smithy.Schema
-
-var EnvironmentS3IntegrationSource_codePrefix *smithy.Schema
-
-var EnvironmentS3IntegrationSource_contextPrefix *smithy.Schema
-
-var _EnvironmentS3Sources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentS3Sources",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentS3Sources_member *smithy.Schema
-
-var _EnvironmentSourceBucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentSourceBucketName",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentSourceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EnvironmentSourceConfiguration_s3Sources *smithy.Schema
-
-var EnvironmentSourceConfiguration_repositorySources *smithy.Schema
-
-var _EnvironmentSourcePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentSourcePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentSourceRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentSourceRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentStatus",
-}, smithy.ShapeTypeEnum, 1)
-var EnvironmentStatus_ACTIVE *smithy.Schema
-
-var _EnvironmentStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "EnvironmentStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExploitabilityVerdict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ExploitabilityVerdict",
-}, smithy.ShapeTypeEnum, 3)
-var ExploitabilityVerdict_EXPLOITABLE *smithy.Schema
-
-var ExploitabilityVerdict_NOT_EXPLOITABLE *smithy.Schema
-
-var ExploitabilityVerdict_UNCERTAIN *smithy.Schema
-
-var ExploitEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ExploitEffect",
-}, smithy.ShapeTypeEnum, 4)
-var ExploitEffect_DATA_LEAKED *smithy.Schema
-
-var ExploitEffect_ERROR_REVEALED *smithy.Schema
-
-var ExploitEffect_BEHAVIOR_CHANGED *smithy.Schema
-
-var ExploitEffect_NO_EFFECT *smithy.Schema
-
-var _FindingArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingArn",
-}, smithy.ShapeTypeString, 0)
-
-var FindingBlockingReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingBlockingReason",
-}, smithy.ShapeTypeEnum, 7)
-var FindingBlockingReason_UNREACHABLE *smithy.Schema
-
-var FindingBlockingReason_PROTECTED *smithy.Schema
-
-var FindingBlockingReason_MISCLASSIFIED *smithy.Schema
-
-var FindingBlockingReason_EXCLUDED *smithy.Schema
-
-var FindingBlockingReason_NOT_FEASIBLE *smithy.Schema
-
-var FindingBlockingReason_RISK_MITIGATED *smithy.Schema
-
-var FindingBlockingReason_NONE *smithy.Schema
-
-var _FindingCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _FindingClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _FindingCodeSnippet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingCodeSnippet",
-}, smithy.ShapeTypeString, 0)
-
-var FindingComplianceCheck = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingComplianceCheck",
-}, smithy.ShapeTypeStructure, 3)
-var FindingComplianceCheck_uid *smithy.Schema
-
-var FindingComplianceCheck_name *smithy.Schema
-
-var FindingComplianceCheck_description *smithy.Schema
-
-var _FindingComplianceCheckList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingComplianceCheckList",
-}, smithy.ShapeTypeList, 1)
-var _FindingComplianceCheckList_member *smithy.Schema
-
-var _FindingDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingDescription",
-}, smithy.ShapeTypeString, 0)
-
-var FindingDiscardReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingDiscardReason",
-}, smithy.ShapeTypeEnum, 10)
-var FindingDiscardReason_SCANNER_VALIDATED_FALSE_POSITIVE *smithy.Schema
-
-var FindingDiscardReason_SCANNER_NEEDS_REVIEW *smithy.Schema
-
-var FindingDiscardReason_FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT *smithy.Schema
-
-var FindingDiscardReason_DUPLICATE_OF_OPEN_ISSUE *smithy.Schema
-
-var FindingDiscardReason_DUPLICATE_OF_CLOSED_ISSUE *smithy.Schema
-
-var FindingDiscardReason_COMPENSATING_CONTROL_PRESENT *smithy.Schema
-
-var FindingDiscardReason_OUT_OF_SCOPE *smithy.Schema
-
-var FindingDiscardReason_INSUFFICIENT_EVIDENCE *smithy.Schema
-
-var FindingDiscardReason_PROCESSING_FAILED *smithy.Schema
-
-var FindingDiscardReason_SOURCE_REPO_NOT_FOUND *smithy.Schema
-
-var FindingEvidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingEvidence",
-}, smithy.ShapeTypeStructure, 3)
-var FindingEvidence_file *smithy.Schema
-
-var FindingEvidence_line *smithy.Schema
-
-var FindingEvidence_snippet *smithy.Schema
-
-var _FindingEvidenceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingEvidenceList",
-}, smithy.ShapeTypeList, 1)
-var _FindingEvidenceList_member *smithy.Schema
-
-var _FindingFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var _FindingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingId",
-}, smithy.ShapeTypeString, 0)
-
-var _FindingListEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingListEntry",
-}, smithy.ShapeTypeString, 0)
-
-var FindingLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingLocation",
-}, smithy.ShapeTypeStructure, 3)
-var FindingLocation_filePath *smithy.Schema
-
-var FindingLocation_startLine *smithy.Schema
-
-var FindingLocation_endLine *smithy.Schema
-
-var _FindingLocationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingLocationList",
-}, smithy.ShapeTypeList, 1)
-var _FindingLocationList_member *smithy.Schema
-
-var FindingOcsfClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingOcsfClass",
-}, smithy.ShapeTypeEnum, 2)
-var FindingOcsfClass_VULNERABILITY_FINDING *smithy.Schema
-
-var FindingOcsfClass_APPLICATION_SECURITY_POSTURE_FINDING *smithy.Schema
-
-var FindingPosture = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingPosture",
-}, smithy.ShapeTypeStructure, 12)
-var FindingPosture_application *smithy.Schema
-
-var FindingPosture_applicationUid *smithy.Schema
-
-var FindingPosture_applicationVersion *smithy.Schema
-
-var FindingPosture_control *smithy.Schema
-
-var FindingPosture_description *smithy.Schema
-
-var FindingPosture_standards *smithy.Schema
-
-var FindingPosture_requirements *smithy.Schema
-
-var FindingPosture_checks *smithy.Schema
-
-var FindingPosture_status *smithy.Schema
-
-var FindingPosture_statusId *smithy.Schema
-
-var FindingPosture_remediation *smithy.Schema
-
-var FindingPosture_remediationReferences *smithy.Schema
-
-var FindingResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingResource",
-}, smithy.ShapeTypeStructure, 4)
-var FindingResource_uid *smithy.Schema
-
-var FindingResource_name *smithy.Schema
-
-var FindingResource_type *smithy.Schema
-
-var FindingResource_region *smithy.Schema
-
-var _FindingResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingResourceList",
-}, smithy.ShapeTypeList, 1)
-var _FindingResourceList_member *smithy.Schema
-
-var _FindingResourceUid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingResourceUid",
-}, smithy.ShapeTypeString, 0)
-
-var FindingSeverityAdjustment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingSeverityAdjustment",
-}, smithy.ShapeTypeEnum, 6)
-var FindingSeverityAdjustment_CRITICAL *smithy.Schema
-
-var FindingSeverityAdjustment_HIGH *smithy.Schema
-
-var FindingSeverityAdjustment_MEDIUM *smithy.Schema
-
-var FindingSeverityAdjustment_LOW *smithy.Schema
-
-var FindingSeverityAdjustment_INFORMATIONAL *smithy.Schema
-
-var FindingSeverityAdjustment_UNCHANGED *smithy.Schema
-
-var FindingSeverityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingSeverityId",
-}, smithy.ShapeTypeEnum, 8)
-var FindingSeverityId_UNKNOWN *smithy.Schema
-
-var FindingSeverityId_INFORMATIONAL *smithy.Schema
-
-var FindingSeverityId_LOW *smithy.Schema
-
-var FindingSeverityId_MEDIUM *smithy.Schema
-
-var FindingSeverityId_HIGH *smithy.Schema
-
-var FindingSeverityId_CRITICAL *smithy.Schema
-
-var FindingSeverityId_FATAL *smithy.Schema
-
-var FindingSeverityId_OTHER *smithy.Schema
-
-var _FindingSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingSource",
-}, smithy.ShapeTypeString, 0)
-
-var FindingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingStatus",
-}, smithy.ShapeTypeEnum, 4)
-var FindingStatus_SUBMITTED *smithy.Schema
-
-var FindingStatus_VALIDATING *smithy.Schema
-
-var FindingStatus_CONFIRMED *smithy.Schema
-
-var FindingStatus_DISCARDED *smithy.Schema
-
-var _FindingStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FindingStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingStringList",
-}, smithy.ShapeTypeList, 1)
-var _FindingStringList_member *smithy.Schema
-
-var FindingSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingSummary",
-}, smithy.ShapeTypeStructure, 21)
-var FindingSummary_findingId *smithy.Schema
-
-var FindingSummary_findingArn *smithy.Schema
-
-var FindingSummary_environmentId *smithy.Schema
-
-var FindingSummary_source *smithy.Schema
-
-var FindingSummary_sourceFindingId *smithy.Schema
-
-var FindingSummary_reportedAt *smithy.Schema
-
-var FindingSummary_status *smithy.Schema
-
-var FindingSummary_statusUpdatedAt *smithy.Schema
-
-var FindingSummary_createdAt *smithy.Schema
-
-var FindingSummary_scanRunId *smithy.Schema
-
-var FindingSummary_statusMessage *smithy.Schema
-
-var FindingSummary_discardReason *smithy.Schema
-
-var FindingSummary_discardReasoning *smithy.Schema
-
-var FindingSummary_duplicateOfIssueId *smithy.Schema
-
-var FindingSummary_createdIssueId *smithy.Schema
-
-var FindingSummary_completedAt *smithy.Schema
-
-var FindingSummary_type *smithy.Schema
-
-var FindingSummary_title *smithy.Schema
-
-var FindingSummary_severity *smithy.Schema
-
-var FindingSummary_category *smithy.Schema
-
-var FindingSummary_filePath *smithy.Schema
-
-var _FindingTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingTitle",
-}, smithy.ShapeTypeString, 0)
-
-var FindingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingType",
-}, smithy.ShapeTypeEnum, 2)
-var FindingType_CONTINUUM_CODE_VULN *smithy.Schema
-
-var FindingType_CUSTOMER_CODE_VULN *smithy.Schema
-
-var FindingValidation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingValidation",
-}, smithy.ShapeTypeStructure, 8)
-var FindingValidation_verdict *smithy.Schema
-
-var FindingValidation_blockingReason *smithy.Schema
-
-var FindingValidation_confidence *smithy.Schema
-
-var FindingValidation_rationale *smithy.Schema
-
-var FindingValidation_severityAdjustment *smithy.Schema
-
-var FindingValidation_mitigatingControls *smithy.Schema
-
-var FindingValidation_preconditions *smithy.Schema
-
-var FindingValidation_evidence *smithy.Schema
-
-var FindingVerdict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingVerdict",
-}, smithy.ShapeTypeEnum, 4)
-var FindingVerdict_TRUE_POSITIVE *smithy.Schema
-
-var FindingVerdict_FALSE_POSITIVE *smithy.Schema
-
-var FindingVerdict_BENIGN_TRUE_POSITIVE *smithy.Schema
-
-var FindingVerdict_NEEDS_REVIEW *smithy.Schema
-
-var FindingVulnerability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingVulnerability",
-}, smithy.ShapeTypeStructure, 15)
-var FindingVulnerability_title *smithy.Schema
-
-var FindingVulnerability_description *smithy.Schema
-
-var FindingVulnerability_cweId *smithy.Schema
-
-var FindingVulnerability_cweCaption *smithy.Schema
-
-var FindingVulnerability_additionalCweIds *smithy.Schema
-
-var FindingVulnerability_cveId *smithy.Schema
-
-var FindingVulnerability_cvssBaseScore *smithy.Schema
-
-var FindingVulnerability_fixCoverage *smithy.Schema
-
-var FindingVulnerability_fixCoverageId *smithy.Schema
-
-var FindingVulnerability_locations *smithy.Schema
-
-var FindingVulnerability_remediation *smithy.Schema
-
-var FindingVulnerability_remediationReferences *smithy.Schema
-
-var FindingVulnerability_code *smithy.Schema
-
-var FindingVulnerability_details *smithy.Schema
-
-var FindingVulnerability_affectedPackages *smithy.Schema
-
-var _FindingVulnerabilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FindingVulnerabilityList",
-}, smithy.ShapeTypeList, 1)
-var _FindingVulnerabilityList_member *smithy.Schema
-
-var FlowVerdict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FlowVerdict",
-}, smithy.ShapeTypeStructure, 4)
-var FlowVerdict_flowId *smithy.Schema
-
-var FlowVerdict_verdict *smithy.Schema
-
-var FlowVerdict_confidence *smithy.Schema
-
-var FlowVerdict_evidence *smithy.Schema
-
-var _FlowVerdicts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FlowVerdicts",
-}, smithy.ShapeTypeList, 1)
-var _FlowVerdicts_member *smithy.Schema
-
-var FlowVerdictValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "FlowVerdictValue",
-}, smithy.ShapeTypeEnum, 3)
-var FlowVerdictValue_CONFIRMED *smithy.Schema
-
-var FlowVerdictValue_DENIED *smithy.Schema
-
-var FlowVerdictValue_INCONCLUSIVE *smithy.Schema
-
-var GitHubAuthorizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitHubAuthorizationConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var GitHubAuthorizationConfiguration_authorizationCode *smithy.Schema
-
-var GitHubAuthorizationConfiguration_state *smithy.Schema
-
-var GitHubAuthorizationConfiguration_redirectUrl *smithy.Schema
-
-var GitHubConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitHubConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var GitHubConfiguration_authorization *smithy.Schema
-
-var GitHubConfiguration_organizationName *smithy.Schema
-
-var GitHubDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitHubDetails",
-}, smithy.ShapeTypeStructure, 1)
-var GitHubDetails_organizationName *smithy.Schema
-
-var _GitHubOrganizationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitHubOrganizationName",
-}, smithy.ShapeTypeString, 0)
-
-var GitHubTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitHubTarget",
-}, smithy.ShapeTypeStructure, 4)
-var GitHubTarget_owner *smithy.Schema
-
-var GitHubTarget_repository *smithy.Schema
-
-var GitHubTarget_pullRequestNumber *smithy.Schema
-
-var GitHubTarget_headSha *smithy.Schema
-
-var _GitLabAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitLabAccessToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var GitLabConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitLabConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var GitLabConfiguration_instanceUrl *smithy.Schema
-
-var GitLabConfiguration_targetType *smithy.Schema
-
-var GitLabConfiguration_targetPath *smithy.Schema
-
-var GitLabConfiguration_accessToken *smithy.Schema
-
-var GitLabDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitLabDetails",
-}, smithy.ShapeTypeStructure, 5)
-var GitLabDetails_instanceUrl *smithy.Schema
-
-var GitLabDetails_targetType *smithy.Schema
-
-var GitLabDetails_targetPath *smithy.Schema
-
-var GitLabDetails_tokenRotation *smithy.Schema
-
-var GitLabDetails_expiresAt *smithy.Schema
-
-var _GitLabInstanceUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitLabInstanceUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _GitLabTargetPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitLabTargetPath",
-}, smithy.ShapeTypeString, 0)
-
-var GitLabTargetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitLabTargetType",
-}, smithy.ShapeTypeEnum, 2)
-var GitLabTargetType_GROUP *smithy.Schema
-
-var GitLabTargetType_PROJECT *smithy.Schema
-
-var GitLabTokenRotation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GitLabTokenRotation",
-}, smithy.ShapeTypeEnum, 2)
-var GitLabTokenRotation_AUTOMATIC *smithy.Schema
-
-var GitLabTokenRotation_NONE *smithy.Schema
-
-var _IntegrationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationArn",
-}, smithy.ShapeTypeString, 0)
-
-var IntegrationAuthorizationProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationAuthorizationProviderType",
-}, smithy.ShapeTypeEnum, 1)
-var IntegrationAuthorizationProviderType_GITHUB *smithy.Schema
-
-var _IntegrationClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _IntegrationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationId",
-}, smithy.ShapeTypeString, 0)
-
-var _IntegrationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationName",
-}, smithy.ShapeTypeString, 0)
-
-var _IntegrationS3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationS3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _IntegrationS3ExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationS3ExternalId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _IntegrationS3RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationS3RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IntegrationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _IntegrationSummaries_member *smithy.Schema
-
-var IntegrationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationSummary",
-}, smithy.ShapeTypeStructure, 7)
-var IntegrationSummary_integrationId *smithy.Schema
-
-var IntegrationSummary_integrationArn *smithy.Schema
-
-var IntegrationSummary_name *smithy.Schema
-
-var IntegrationSummary_integrationType *smithy.Schema
-
-var IntegrationSummary_providerDetails *smithy.Schema
-
-var IntegrationSummary_createdAt *smithy.Schema
-
-var IntegrationSummary_updatedAt *smithy.Schema
-
-var IntegrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IntegrationType",
-}, smithy.ShapeTypeEnum, 3)
-var IntegrationType_GITHUB *smithy.Schema
-
-var IntegrationType_GITLAB *smithy.Schema
-
-var IntegrationType_S3 *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _IssueArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArn",
-}, smithy.ShapeTypeString, 0)
-
-var IssueArtifactBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactBody",
-}, smithy.ShapeTypeUnion, 5)
-var IssueArtifactBody_validationEvidence *smithy.Schema
-
-var IssueArtifactBody_prevalidationSignals *smithy.Schema
-
-var IssueArtifactBody_remediationProposal *smithy.Schema
-
-var IssueArtifactBody_patch *smithy.Schema
-
-var IssueArtifactBody_raw *smithy.Schema
-
-var _IssueArtifactContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactContent",
-}, smithy.ShapeTypeString, 0)
-
-var _IssueArtifactId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactId",
-}, smithy.ShapeTypeString, 0)
-
-var IssueArtifactItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactItem",
-}, smithy.ShapeTypeStructure, 6)
-var IssueArtifactItem_artifactId *smithy.Schema
-
-var IssueArtifactItem_artifactType *smithy.Schema
-
-var IssueArtifactItem_mediaType *smithy.Schema
-
-var IssueArtifactItem_producer *smithy.Schema
-
-var IssueArtifactItem_contentSizeBytes *smithy.Schema
-
-var IssueArtifactItem_createdAt *smithy.Schema
-
-var _IssueArtifactMediaType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactMediaType",
-}, smithy.ShapeTypeString, 0)
-
-var _IssueArtifactProducerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactProducerName",
-}, smithy.ShapeTypeString, 0)
-
-var IssueArtifactProducerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactProducerSummary",
-}, smithy.ShapeTypeStructure, 1)
-var IssueArtifactProducerSummary_agent *smithy.Schema
-
-var IssueArtifactType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueArtifactType",
-}, smithy.ShapeTypeEnum, 6)
-var IssueArtifactType_EVIDENCE *smithy.Schema
-
-var IssueArtifactType_AGENT_COMMUNICATION *smithy.Schema
-
-var IssueArtifactType_VALIDATION_EVIDENCE *smithy.Schema
-
-var IssueArtifactType_REMEDIATION_PROPOSAL *smithy.Schema
-
-var IssueArtifactType_DECISION *smithy.Schema
-
-var IssueArtifactType_PATCH *smithy.Schema
-
-var _IssueConfidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueConfidence",
-}, smithy.ShapeTypeInteger, 0)
-
-var IssueEvidenceAvailability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueEvidenceAvailability",
-}, smithy.ShapeTypeEnum, 2)
-var IssueEvidenceAvailability_NONE *smithy.Schema
-
-var IssueEvidenceAvailability_AVAILABLE *smithy.Schema
-
-var _IssueFindingIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueFindingIds",
-}, smithy.ShapeTypeList, 1)
-var _IssueFindingIds_member *smithy.Schema
-
-var _IssueId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueId",
-}, smithy.ShapeTypeString, 0)
-
-var _IssueName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueName",
-}, smithy.ShapeTypeString, 0)
-
-var IssuePatchDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssuePatchDelivery",
-}, smithy.ShapeTypeStructure, 5)
-var IssuePatchDelivery_status *smithy.Schema
-
-var IssuePatchDelivery_patchCount *smithy.Schema
-
-var IssuePatchDelivery_succeededCount *smithy.Schema
-
-var IssuePatchDelivery_failedCount *smithy.Schema
-
-var IssuePatchDelivery_failureReasons *smithy.Schema
-
-var _IssuePatchDeliveryCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssuePatchDeliveryCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IssuePatchDeliveryFailureReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssuePatchDeliveryFailureReasons",
-}, smithy.ShapeTypeList, 1)
-var _IssuePatchDeliveryFailureReasons_member *smithy.Schema
-
-var IssuePatchDeliveryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssuePatchDeliveryStatus",
-}, smithy.ShapeTypeEnum, 4)
-var IssuePatchDeliveryStatus_PENDING *smithy.Schema
-
-var IssuePatchDeliveryStatus_SUCCEEDED *smithy.Schema
-
-var IssuePatchDeliveryStatus_FAILED *smithy.Schema
-
-var IssuePatchDeliveryStatus_SKIPPED *smithy.Schema
-
-var IssuePhase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssuePhase",
-}, smithy.ShapeTypeEnum, 3)
-var IssuePhase_VALIDATION *smithy.Schema
-
-var IssuePhase_PRIORITIZATION *smithy.Schema
-
-var IssuePhase_REMEDIATION *smithy.Schema
-
-var _IssueRemediationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueRemediationSummary",
-}, smithy.ShapeTypeString, 0)
-
-var IssueSeverity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueSeverity",
-}, smithy.ShapeTypeEnum, 4)
-var IssueSeverity_LOW *smithy.Schema
-
-var IssueSeverity_MEDIUM *smithy.Schema
-
-var IssueSeverity_HIGH *smithy.Schema
-
-var IssueSeverity_CRITICAL *smithy.Schema
-
-var _IssueSeverityReasoning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueSeverityReasoning",
-}, smithy.ShapeTypeString, 0)
-
-var IssueStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueStatus",
-}, smithy.ShapeTypeEnum, 4)
-var IssueStatus_CREATED *smithy.Schema
-
-var IssueStatus_IN_PROGRESS *smithy.Schema
-
-var IssueStatus_COMPLETED *smithy.Schema
-
-var IssueStatus_FAILED *smithy.Schema
-
-var _IssueStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var IssueStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueStatusReason",
-}, smithy.ShapeTypeEnum, 2)
-var IssueStatusReason_INTERNAL_ERROR *smithy.Schema
-
-var IssueStatusReason_REMEDIATION_FAILED *smithy.Schema
-
-var IssueSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueSummary",
-}, smithy.ShapeTypeStructure, 12)
-var IssueSummary_issueId *smithy.Schema
-
-var IssueSummary_issueArn *smithy.Schema
-
-var IssueSummary_name *smithy.Schema
-
-var IssueSummary_severity *smithy.Schema
-
-var IssueSummary_confidence *smithy.Schema
-
-var IssueSummary_status *smithy.Schema
-
-var IssueSummary_phase *smithy.Schema
-
-var IssueSummary_statusReason *smithy.Schema
-
-var IssueSummary_statusMessage *smithy.Schema
-
-var IssueSummary_statusUpdatedAt *smithy.Schema
-
-var IssueSummary_createdAt *smithy.Schema
-
-var IssueSummary_updatedAt *smithy.Schema
-
-var _IssueSynopsis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "IssueSynopsis",
-}, smithy.ShapeTypeString, 0)
-
-var _KubernetesClusterExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "KubernetesClusterExternalId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _KubernetesClusterRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "KubernetesClusterRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var KubernetesClusterRoleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "KubernetesClusterRoleConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var KubernetesClusterRoleConfiguration_roleArn *smithy.Schema
-
-var KubernetesClusterRoleConfiguration_externalId *smithy.Schema
-
-var KubernetesClusterRoleUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "KubernetesClusterRoleUpdate",
-}, smithy.ShapeTypeUnion, 2)
-var KubernetesClusterRoleUpdate_set *smithy.Schema
-
-var KubernetesClusterRoleUpdate_remove *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OAuthCodeChallenge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "OAuthCodeChallenge",
-}, smithy.ShapeTypeString, 0)
-
-var OAuthCodeChallengeMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "OAuthCodeChallengeMethod",
-}, smithy.ShapeTypeEnum, 1)
-var OAuthCodeChallengeMethod_S256 *smithy.Schema
-
-var _OAuthState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "OAuthState",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PackageManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PackageManager",
-}, smithy.ShapeTypeString, 0)
-
-var _PackageName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PackageName",
-}, smithy.ShapeTypeString, 0)
-
-var _PackageVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PackageVersion",
-}, smithy.ShapeTypeString, 0)
-
-var PatchBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PatchBody",
-}, smithy.ShapeTypeStructure, 6)
-var PatchBody_patch *smithy.Schema
-
-var PatchBody_format *smithy.Schema
-
-var PatchBody_repositoryName *smithy.Schema
-
-var PatchBody_patchSha256 *smithy.Schema
-
-var PatchBody_sizeBytes *smithy.Schema
-
-var PatchBody_delivery *smithy.Schema
-
-var PatchCreationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PatchCreationPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var PatchCreationPolicy_ENABLED *smithy.Schema
-
-var PatchCreationPolicy_DISABLED *smithy.Schema
-
-var PatchDelivery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PatchDelivery",
-}, smithy.ShapeTypeStructure, 3)
-var PatchDelivery_status *smithy.Schema
-
-var PatchDelivery_target *smithy.Schema
-
-var PatchDelivery_updatedAt *smithy.Schema
-
-var PatchFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PatchFormat",
-}, smithy.ShapeTypeEnum, 3)
-var PatchFormat_GIT_MAILBOX_PATCH *smithy.Schema
-
-var PatchFormat_GIT_BINARY_DIFF *smithy.Schema
-
-var PatchFormat_GIT_DIFF *smithy.Schema
-
-var PerFindingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PerFindingResult",
-}, smithy.ShapeTypeStructure, 6)
-var PerFindingResult_findingId *smithy.Schema
-
-var PerFindingResult_exploitable *smithy.Schema
-
-var PerFindingResult_confidence *smithy.Schema
-
-var PerFindingResult_flowVerdicts *smithy.Schema
-
-var PerFindingResult_reasoningChain *smithy.Schema
-
-var PerFindingResult_exploitArtifact *smithy.Schema
-
-var _PerFindingResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PerFindingResults",
-}, smithy.ShapeTypeList, 1)
-var _PerFindingResults_member *smithy.Schema
-
-var PrevalidationSignal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PrevalidationSignal",
-}, smithy.ShapeTypeStructure, 12)
-var PrevalidationSignal_subjectRef *smithy.Schema
-
-var PrevalidationSignal_dimension *smithy.Schema
-
-var PrevalidationSignal_signalStrength *smithy.Schema
-
-var PrevalidationSignal_conclusion *smithy.Schema
-
-var PrevalidationSignal_producerId *smithy.Schema
-
-var PrevalidationSignal_producerVersion *smithy.Schema
-
-var PrevalidationSignal_confidence *smithy.Schema
-
-var PrevalidationSignal_confidenceReasoning *smithy.Schema
-
-var PrevalidationSignal_computed *smithy.Schema
-
-var PrevalidationSignal_preconditions *smithy.Schema
-
-var PrevalidationSignal_impactDimensions *smithy.Schema
-
-var PrevalidationSignal_exploitability *smithy.Schema
-
-var _PrevalidationSignals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PrevalidationSignals",
-}, smithy.ShapeTypeList, 1)
-var _PrevalidationSignals_member *smithy.Schema
-
-var PrevalidationSignalsBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PrevalidationSignalsBody",
-}, smithy.ShapeTypeStructure, 2)
-var PrevalidationSignalsBody_producedBy *smithy.Schema
-
-var PrevalidationSignalsBody_signals *smithy.Schema
-
-var ProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ProviderConfiguration",
-}, smithy.ShapeTypeUnion, 3)
-var ProviderConfiguration_github *smithy.Schema
-
-var ProviderConfiguration_gitlab *smithy.Schema
-
-var ProviderConfiguration_s3 *smithy.Schema
-
-var ProviderDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ProviderDetails",
-}, smithy.ShapeTypeUnion, 3)
-var ProviderDetails_github *smithy.Schema
-
-var ProviderDetails_gitlab *smithy.Schema
-
-var ProviderDetails_s3 *smithy.Schema
-
-var ReasoningStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ReasoningStep",
-}, smithy.ShapeTypeStructure, 4)
-var ReasoningStep_step *smithy.Schema
-
-var ReasoningStep_claim *smithy.Schema
-
-var ReasoningStep_source *smithy.Schema
-
-var ReasoningStep_confidence *smithy.Schema
-
-var _ReasoningSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ReasoningSteps",
-}, smithy.ShapeTypeList, 1)
-var _ReasoningSteps_member *smithy.Schema
-
-var _RedirectUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "RedirectUrl",
-}, smithy.ShapeTypeString, 0)
-
-var RemediationProposalBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "RemediationProposalBody",
-}, smithy.ShapeTypeStructure, 4)
-var RemediationProposalBody_patch *smithy.Schema
-
-var RemediationProposalBody_format *smithy.Schema
-
-var RemediationProposalBody_filename *smithy.Schema
-
-var RemediationProposalBody_patchSha256 *smithy.Schema
-
-var RemoveKubernetesClusterRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "RemoveKubernetesClusterRole",
-}, smithy.ShapeTypeStructure, 0)
-
-var _RepositoryBranch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "RepositoryBranch",
-}, smithy.ShapeTypeString, 0)
-
-var _RepositoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "RepositoryName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _ResourcePolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ResourcePolicyDocument",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ResourcePolicyInputDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ResourcePolicyInputDocument",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ResourcePolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ResourcePolicyRevisionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourcePolicyTargetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ResourcePolicyTargetArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "S3Configuration",
-}, smithy.ShapeTypeStructure, 3)
-var S3Configuration_bucket *smithy.Schema
-
-var S3Configuration_roleArn *smithy.Schema
-
-var S3Configuration_externalId *smithy.Schema
-
-var S3Details = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "S3Details",
-}, smithy.ShapeTypeStructure, 2)
-var S3Details_bucket *smithy.Schema
-
-var S3Details_roleArn *smithy.Schema
-
-var S3Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "S3Target",
-}, smithy.ShapeTypeStructure, 3)
-var S3Target_bucket *smithy.Schema
-
-var S3Target_key *smithy.Schema
-
-var S3Target_version *smithy.Schema
-
-var _ScanClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ScanClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ScanFailureStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ScanFailureStage",
-}, smithy.ShapeTypeEnum, 5)
-var ScanFailureStage_SUBMITTED *smithy.Schema
-
-var ScanFailureStage_WAITING_FOR_BUILD *smithy.Schema
-
-var ScanFailureStage_BUILDING *smithy.Schema
-
-var ScanFailureStage_WAITING_FOR_SCAN *smithy.Schema
-
-var ScanFailureStage_SCANNING *smithy.Schema
-
-var _ScanFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ScanFrequency",
-}, smithy.ShapeTypeString, 0)
-
-var ScanOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ScanOrigin",
-}, smithy.ShapeTypeEnum, 2)
-var ScanOrigin_MANUAL *smithy.Schema
-
-var ScanOrigin_SCHEDULED *smithy.Schema
-
-var _ScanRunFailureMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ScanRunFailureMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ScanRunId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ScanRunId",
-}, smithy.ShapeTypeString, 0)
-
-var ScanStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ScanStatus",
-}, smithy.ShapeTypeEnum, 7)
-var ScanStatus_SUBMITTED *smithy.Schema
-
-var ScanStatus_WAITING_FOR_BUILD *smithy.Schema
-
-var ScanStatus_BUILDING *smithy.Schema
-
-var ScanStatus_WAITING_FOR_SCAN *smithy.Schema
-
-var ScanStatus_SCANNING *smithy.Schema
-
-var ScanStatus_SUCCEEDED *smithy.Schema
-
-var ScanStatus_FAILED *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var SignalAccessLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalAccessLevel",
-}, smithy.ShapeTypeEnum, 3)
-var SignalAccessLevel_NONE *smithy.Schema
-
-var SignalAccessLevel_ANY_AUTHENTICATED *smithy.Schema
-
-var SignalAccessLevel_PRIVILEGED *smithy.Schema
-
-var SignalAccessPrecondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalAccessPrecondition",
-}, smithy.ShapeTypeStructure, 4)
-var SignalAccessPrecondition_value *smithy.Schema
-
-var SignalAccessPrecondition_basis *smithy.Schema
-
-var SignalAccessPrecondition_reason *smithy.Schema
-
-var SignalAccessPrecondition_missingInfo *smithy.Schema
-
-var SignalAttackerGains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalAttackerGains",
-}, smithy.ShapeTypeEnum, 6)
-var SignalAttackerGains_EXECUTE *smithy.Schema
-
-var SignalAttackerGains_MODIFY_PRIVILEGED *smithy.Schema
-
-var SignalAttackerGains_MODIFY_DATA *smithy.Schema
-
-var SignalAttackerGains_MODIFY_COSMETIC *smithy.Schema
-
-var SignalAttackerGains_READ *smithy.Schema
-
-var SignalAttackerGains_NEITHER *smithy.Schema
-
-var SignalAttackerGainsDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalAttackerGainsDimension",
-}, smithy.ShapeTypeStructure, 4)
-var SignalAttackerGainsDimension_value *smithy.Schema
-
-var SignalAttackerGainsDimension_basis *smithy.Schema
-
-var SignalAttackerGainsDimension_reason *smithy.Schema
-
-var SignalAttackerGainsDimension_missingInfo *smithy.Schema
-
-var SignalBand = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalBand",
-}, smithy.ShapeTypeEnum, 4)
-var SignalBand_VERY_LOW *smithy.Schema
-
-var SignalBand_LOW *smithy.Schema
-
-var SignalBand_MODERATE *smithy.Schema
-
-var SignalBand_HIGH *smithy.Schema
-
-var SignalBasis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalBasis",
-}, smithy.ShapeTypeEnum, 5)
-var SignalBasis_CODE *smithy.Schema
-
-var SignalBasis_GRAPH *smithy.Schema
-
-var SignalBasis_FINDING *smithy.Schema
-
-var SignalBasis_INFERRED *smithy.Schema
-
-var SignalBasis_NO_EVIDENCE_DEFAULT *smithy.Schema
-
-var SignalBlastRadius = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalBlastRadius",
-}, smithy.ShapeTypeEnum, 3)
-var SignalBlastRadius_CROSS_TENANT *smithy.Schema
-
-var SignalBlastRadius_OTHER_USERS_IN_TENANT *smithy.Schema
-
-var SignalBlastRadius_OWN_SCOPE *smithy.Schema
-
-var SignalBlastRadiusDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalBlastRadiusDimension",
-}, smithy.ShapeTypeStructure, 4)
-var SignalBlastRadiusDimension_value *smithy.Schema
-
-var SignalBlastRadiusDimension_basis *smithy.Schema
-
-var SignalBlastRadiusDimension_reason *smithy.Schema
-
-var SignalBlastRadiusDimension_missingInfo *smithy.Schema
-
-var SignalComputation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalComputation",
-}, smithy.ShapeTypeStructure, 3)
-var SignalComputation_likelihoodBand *smithy.Schema
-
-var SignalComputation_impactBand *smithy.Schema
-
-var SignalComputation_barriers *smithy.Schema
-
-var SignalConfidenceReasoning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalConfidenceReasoning",
-}, smithy.ShapeTypeStructure, 2)
-var SignalConfidenceReasoning_summary *smithy.Schema
-
-var SignalConfidenceReasoning_factors *smithy.Schema
-
-var SignalDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalDimension",
-}, smithy.ShapeTypeEnum, 7)
-var SignalDimension_EXPLOITABILITY *smithy.Schema
-
-var SignalDimension_BLAST_RADIUS *smithy.Schema
-
-var SignalDimension_NETWORK_EXPOSURE *smithy.Schema
-
-var SignalDimension_PRECONDITION *smithy.Schema
-
-var SignalDimension_CODE_CONTEXT *smithy.Schema
-
-var SignalDimension_LIKELIHOOD_ASSESSMENT *smithy.Schema
-
-var SignalDimension_IMPACT_ASSESSMENT *smithy.Schema
-
-var SignalExploitability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalExploitability",
-}, smithy.ShapeTypeStructure, 6)
-var SignalExploitability_verdict *smithy.Schema
-
-var SignalExploitability_reachedCrownJewels *smithy.Schema
-
-var SignalExploitability_highestLayerReached *smithy.Schema
-
-var SignalExploitability_confidenceTier *smithy.Schema
-
-var SignalExploitability_scriptable *smithy.Schema
-
-var SignalExploitability_sourceValidationArtifactId *smithy.Schema
-
-var SignalImpactDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalImpactDimensions",
-}, smithy.ShapeTypeStructure, 3)
-var SignalImpactDimensions_attackerGains *smithy.Schema
-
-var SignalImpactDimensions_blastRadius *smithy.Schema
-
-var SignalImpactDimensions_targetValue *smithy.Schema
-
-var SignalPrecondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalPrecondition",
-}, smithy.ShapeTypeStructure, 4)
-var SignalPrecondition_value *smithy.Schema
-
-var SignalPrecondition_basis *smithy.Schema
-
-var SignalPrecondition_reason *smithy.Schema
-
-var SignalPrecondition_missingInfo *smithy.Schema
-
-var SignalPreconditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalPreconditions",
-}, smithy.ShapeTypeStructure, 4)
-var SignalPreconditions_reachableFromAttacker *smithy.Schema
-
-var SignalPreconditions_configurationNeeded *smithy.Schema
-
-var SignalPreconditions_accessLevel *smithy.Schema
-
-var SignalPreconditions_userInteractionRequired *smithy.Schema
-
-var SignalStrength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalStrength",
-}, smithy.ShapeTypeEnum, 4)
-var SignalStrength_NONE *smithy.Schema
-
-var SignalStrength_WEAK *smithy.Schema
-
-var SignalStrength_MODERATE *smithy.Schema
-
-var SignalStrength_STRONG *smithy.Schema
-
-var SignalTargetValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalTargetValue",
-}, smithy.ShapeTypeEnum, 3)
-var SignalTargetValue_HIGH *smithy.Schema
-
-var SignalTargetValue_MEDIUM *smithy.Schema
-
-var SignalTargetValue_LOW *smithy.Schema
-
-var SignalTargetValueDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SignalTargetValueDimension",
-}, smithy.ShapeTypeStructure, 4)
-var SignalTargetValueDimension_value *smithy.Schema
-
-var SignalTargetValueDimension_basis *smithy.Schema
-
-var SignalTargetValueDimension_reason *smithy.Schema
-
-var SignalTargetValueDimension_missingInfo *smithy.Schema
-
-var _SourceFindingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "SourceFindingId",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var UpdateCodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateCodeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCodeConfiguration_sourceConfiguration *smithy.Schema
-
-var UpdateCodeConfiguration_environmentConfiguration *smithy.Schema
-
-var UpdateEnvironmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateEnvironmentConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnvironmentConfiguration_codeConfiguration *smithy.Schema
-
-var UpdateProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateProviderConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var UpdateProviderConfiguration_s3 *smithy.Schema
-
-var UpdateS3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateS3Configuration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateS3Configuration_roleArn *smithy.Schema
-
-var UpdateS3Configuration_externalId *smithy.Schema
-
-var _ValidationConfidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationConfidence",
-}, smithy.ShapeTypeDouble, 0)
-
-var ValidationConfidenceTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationConfidenceTier",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationConfidenceTier_SOURCE_READ *smithy.Schema
-
-var ValidationConfidenceTier_STATIC_PROVEN *smithy.Schema
-
-var ValidationConfidenceTier_BUILD_PROVEN *smithy.Schema
-
-var ValidationConfidenceTier_RUNTIME_PROVEN *smithy.Schema
-
-var ValidationEvidenceBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationEvidenceBody",
-}, smithy.ShapeTypeStructure, 8)
-var ValidationEvidenceBody_exploitable *smithy.Schema
-
-var ValidationEvidenceBody_terminalStatus *smithy.Schema
-
-var ValidationEvidenceBody_flowVerdicts *smithy.Schema
-
-var ValidationEvidenceBody_attackFlowsConfirmed *smithy.Schema
-
-var ValidationEvidenceBody_exploitArtifact *smithy.Schema
-
-var ValidationEvidenceBody_executedProof *smithy.Schema
-
-var ValidationEvidenceBody_sourceAnalysis *smithy.Schema
-
-var ValidationEvidenceBody_perFindingResults *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_path *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExecutedProof = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationExecutedProof",
-}, smithy.ShapeTypeStructure, 3)
-var ValidationExecutedProof_code *smithy.Schema
-
-var ValidationExecutedProof_output *smithy.Schema
-
-var ValidationExecutedProof_observedEffect *smithy.Schema
-
-var ValidationExploitArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationExploitArtifact",
-}, smithy.ShapeTypeStructure, 7)
-var ValidationExploitArtifact_payload *smithy.Schema
-
-var ValidationExploitArtifact_targetUrl *smithy.Schema
-
-var ValidationExploitArtifact_httpMethod *smithy.Schema
-
-var ValidationExploitArtifact_headers *smithy.Schema
-
-var ValidationExploitArtifact_responseStatus *smithy.Schema
-
-var ValidationExploitArtifact_responseSnippet *smithy.Schema
-
-var ValidationExploitArtifact_effect *smithy.Schema
-
-var ValidationProofCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationProofCode",
-}, smithy.ShapeTypeStructure, 1)
-var ValidationProofCode_proofCode *smithy.Schema
-
-var _ValidationProofConsoleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationProofConsoleOutput",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationProofMaterial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationProofMaterial",
-}, smithy.ShapeTypeStructure, 1)
-var ValidationProofMaterial_content *smithy.Schema
-
-var _ValidationProofMaterials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationProofMaterials",
-}, smithy.ShapeTypeList, 1)
-var _ValidationProofMaterials_member *smithy.Schema
-
-var _ValidationProofMaterialText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationProofMaterialText",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationProofOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationProofOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ValidationProofOutput_consoleOutput *smithy.Schema
-
-var _ValidationProofSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationProofSummary",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationSourceAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationSourceAnalysis",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationSourceAnalysis_summary *smithy.Schema
-
-var ValidationSourceAnalysis_inferredEffect *smithy.Schema
-
-var ValidationTerminalStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ValidationTerminalStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationTerminalStatus_COMPLETED *smithy.Schema
-
-var ValidationTerminalStatus_FAILED *smithy.Schema
-
-var ValidationTerminalStatus_NO_SOURCE_AVAILABLE *smithy.Schema
-
-var ValidationTerminalStatus_PARTIAL *smithy.Schema
-
-var AssociateCollectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociateCollectorInput",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateCollectorInput_environmentId *smithy.Schema
-
-var AssociateCollectorInput_clientToken *smithy.Schema
-
-var AssociateCollectorInput_collectorArn *smithy.Schema
-
-var AssociateCollectorInput_collectorDataAccessRoleArn *smithy.Schema
-
-var AssociateCollectorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "AssociateCollectorOutput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateCollectorOutput_environmentId *smithy.Schema
-
-var AssociateCollectorOutput_environmentArn *smithy.Schema
-
-var AssociateCollectorOutput_associatedCollector *smithy.Schema
-
-var CreateCodeFindingInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCodeFindingInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCodeFindingInput_environmentId *smithy.Schema
-
-var CreateCodeFindingInput_ocsfDocument *smithy.Schema
-
-var CreateCodeFindingInput_clientToken *smithy.Schema
-
-var CreateCodeFindingOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCodeFindingOutput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCodeFindingOutput_findingId *smithy.Schema
-
-var CreateCodeFindingOutput_findingArn *smithy.Schema
-
-var CreateCodeFindingOutput_title *smithy.Schema
-
-var CreateCodeFindingOutput_status *smithy.Schema
-
-var CreateCodeFindingOutput_createdAt *smithy.Schema
-
-var CreateCodeScanInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCodeScanInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCodeScanInput_environmentId *smithy.Schema
-
-var CreateCodeScanInput_clientToken *smithy.Schema
-
-var CreateCodeScanOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCodeScanOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCodeScanOutput_scan *smithy.Schema
-
-var CreateCollectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCollectorInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCollectorInput_type *smithy.Schema
-
-var CreateCollectorInput_kubernetesClusterRole *smithy.Schema
-
-var CreateCollectorInput_clientToken *smithy.Schema
-
-var CreateCollectorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateCollectorOutput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCollectorOutput_collectorId *smithy.Schema
-
-var CreateCollectorOutput_collectorArn *smithy.Schema
-
-var CreateCollectorOutput_type *smithy.Schema
-
-var CreateCollectorOutput_status *smithy.Schema
-
-var CreateCollectorOutput_createdAt *smithy.Schema
-
-var CreateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateEnvironmentInput_name *smithy.Schema
-
-var CreateEnvironmentInput_configuration *smithy.Schema
-
-var CreateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateEnvironmentOutput_environmentId *smithy.Schema
-
-var CreateEnvironmentOutput_environmentArn *smithy.Schema
-
-var CreateEnvironmentOutput_status *smithy.Schema
-
-var CreateEnvironmentOutput_createdAt *smithy.Schema
-
-var CreateIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateIntegrationInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIntegrationInput_clientToken *smithy.Schema
-
-var CreateIntegrationInput_name *smithy.Schema
-
-var CreateIntegrationInput_providerConfiguration *smithy.Schema
-
-var CreateIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "CreateIntegrationOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIntegrationOutput_integrationId *smithy.Schema
-
-var CreateIntegrationOutput_integrationArn *smithy.Schema
-
-var CreateIntegrationOutput_createdAt *smithy.Schema
-
-var DeleteCollectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeleteCollectorInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCollectorInput_collectorId *smithy.Schema
-
-var DeleteEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeleteEnvironmentInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentInput_environmentId *smithy.Schema
-
-var DeleteIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DeleteIntegrationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIntegrationInput_integrationId *smithy.Schema
-
-var DisassociateCollectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "DisassociateCollectorInput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateCollectorInput_environmentId *smithy.Schema
-
-var DisassociateCollectorInput_collectorArn *smithy.Schema
-
-var GetCodeFindingInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeFindingInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetCodeFindingInput_environmentId *smithy.Schema
-
-var GetCodeFindingInput_findingId *smithy.Schema
-
-var GetCodeFindingOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeFindingOutput",
-}, smithy.ShapeTypeStructure, 50)
-var GetCodeFindingOutput_type *smithy.Schema
-
-var GetCodeFindingOutput_title *smithy.Schema
-
-var GetCodeFindingOutput_severity *smithy.Schema
-
-var GetCodeFindingOutput_summary *smithy.Schema
-
-var GetCodeFindingOutput_detailedDescription *smithy.Schema
-
-var GetCodeFindingOutput_category *smithy.Schema
-
-var GetCodeFindingOutput_subCategory *smithy.Schema
-
-var GetCodeFindingOutput_cweIds *smithy.Schema
-
-var GetCodeFindingOutput_owaspCategory *smithy.Schema
-
-var GetCodeFindingOutput_mitigation *smithy.Schema
-
-var GetCodeFindingOutput_filePath *smithy.Schema
-
-var GetCodeFindingOutput_lineNumber *smithy.Schema
-
-var GetCodeFindingOutput_cveId *smithy.Schema
-
-var GetCodeFindingOutput_cvssBaseScore *smithy.Schema
-
-var GetCodeFindingOutput_affectedPackages *smithy.Schema
-
-var GetCodeFindingOutput_vulnerableCode *smithy.Schema
-
-var GetCodeFindingOutput_relevantInputs *smithy.Schema
-
-var GetCodeFindingOutput_stepsToReproduce *smithy.Schema
-
-var GetCodeFindingOutput_validation *smithy.Schema
-
-var GetCodeFindingOutput_endLine *smithy.Schema
-
-var GetCodeFindingOutput_mitreTechniques *smithy.Schema
-
-var GetCodeFindingOutput_remediationReferences *smithy.Schema
-
-var GetCodeFindingOutput_ocsfClass *smithy.Schema
-
-var GetCodeFindingOutput_ocsfSchemaVersion *smithy.Schema
-
-var GetCodeFindingOutput_productName *smithy.Schema
-
-var GetCodeFindingOutput_productVendorName *smithy.Schema
-
-var GetCodeFindingOutput_productVersion *smithy.Schema
-
-var GetCodeFindingOutput_sourceStatus *smithy.Schema
-
-var GetCodeFindingOutput_sourceStatusId *smithy.Schema
-
-var GetCodeFindingOutput_firstSeenAt *smithy.Schema
-
-var GetCodeFindingOutput_findingTypes *smithy.Schema
-
-var GetCodeFindingOutput_vulnerabilities *smithy.Schema
-
-var GetCodeFindingOutput_resources *smithy.Schema
-
-var GetCodeFindingOutput_posture *smithy.Schema
-
-var GetCodeFindingOutput_findingId *smithy.Schema
-
-var GetCodeFindingOutput_findingArn *smithy.Schema
-
-var GetCodeFindingOutput_environmentId *smithy.Schema
-
-var GetCodeFindingOutput_source *smithy.Schema
-
-var GetCodeFindingOutput_sourceFindingId *smithy.Schema
-
-var GetCodeFindingOutput_reportedAt *smithy.Schema
-
-var GetCodeFindingOutput_status *smithy.Schema
-
-var GetCodeFindingOutput_statusUpdatedAt *smithy.Schema
-
-var GetCodeFindingOutput_createdAt *smithy.Schema
-
-var GetCodeFindingOutput_scanRunId *smithy.Schema
-
-var GetCodeFindingOutput_statusMessage *smithy.Schema
-
-var GetCodeFindingOutput_discardReason *smithy.Schema
-
-var GetCodeFindingOutput_discardReasoning *smithy.Schema
-
-var GetCodeFindingOutput_duplicateOfIssueId *smithy.Schema
-
-var GetCodeFindingOutput_createdIssueId *smithy.Schema
-
-var GetCodeFindingOutput_completedAt *smithy.Schema
-
-var GetCodeIssueArtifactInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeIssueArtifactInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetCodeIssueArtifactInput_environmentId *smithy.Schema
-
-var GetCodeIssueArtifactInput_issueId *smithy.Schema
-
-var GetCodeIssueArtifactInput_artifactId *smithy.Schema
-
-var GetCodeIssueArtifactOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeIssueArtifactOutput",
-}, smithy.ShapeTypeStructure, 7)
-var GetCodeIssueArtifactOutput_artifactId *smithy.Schema
-
-var GetCodeIssueArtifactOutput_artifactType *smithy.Schema
-
-var GetCodeIssueArtifactOutput_mediaType *smithy.Schema
-
-var GetCodeIssueArtifactOutput_body *smithy.Schema
-
-var GetCodeIssueArtifactOutput_metadata *smithy.Schema
-
-var GetCodeIssueArtifactOutput_producer *smithy.Schema
-
-var GetCodeIssueArtifactOutput_createdAt *smithy.Schema
-
-var GetCodeIssueInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeIssueInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetCodeIssueInput_environmentId *smithy.Schema
-
-var GetCodeIssueInput_issueId *smithy.Schema
-
-var GetCodeIssueOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeIssueOutput",
-}, smithy.ShapeTypeStructure, 18)
-var GetCodeIssueOutput_issueId *smithy.Schema
-
-var GetCodeIssueOutput_issueArn *smithy.Schema
-
-var GetCodeIssueOutput_name *smithy.Schema
-
-var GetCodeIssueOutput_synopsis *smithy.Schema
-
-var GetCodeIssueOutput_severity *smithy.Schema
-
-var GetCodeIssueOutput_confidence *smithy.Schema
-
-var GetCodeIssueOutput_severityReasoning *smithy.Schema
-
-var GetCodeIssueOutput_summary *smithy.Schema
-
-var GetCodeIssueOutput_findingIds *smithy.Schema
-
-var GetCodeIssueOutput_status *smithy.Schema
-
-var GetCodeIssueOutput_phase *smithy.Schema
-
-var GetCodeIssueOutput_statusReason *smithy.Schema
-
-var GetCodeIssueOutput_statusMessage *smithy.Schema
-
-var GetCodeIssueOutput_statusUpdatedAt *smithy.Schema
-
-var GetCodeIssueOutput_createdAt *smithy.Schema
-
-var GetCodeIssueOutput_updatedAt *smithy.Schema
-
-var GetCodeIssueOutput_evidenceAvailability *smithy.Schema
-
-var GetCodeIssueOutput_patchDelivery *smithy.Schema
-
-var GetCodeScanInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeScanInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetCodeScanInput_environmentId *smithy.Schema
-
-var GetCodeScanInput_scanRunId *smithy.Schema
-
-var GetCodeScanOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCodeScanOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCodeScanOutput_scan *smithy.Schema
-
-var GetCollectorDataAccessAuthorizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCollectorDataAccessAuthorizationInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetCollectorDataAccessAuthorizationInput_accountId *smithy.Schema
-
-var GetCollectorDataAccessAuthorizationInput_collectorId *smithy.Schema
-
-var GetCollectorDataAccessAuthorizationInput_environmentArn *smithy.Schema
-
-var GetCollectorDataAccessAuthorizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCollectorDataAccessAuthorizationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetCollectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCollectorInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetCollectorInput_collectorId *smithy.Schema
-
-var GetCollectorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetCollectorOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetCollectorOutput_collectorId *smithy.Schema
-
-var GetCollectorOutput_collectorArn *smithy.Schema
-
-var GetCollectorOutput_type *smithy.Schema
-
-var GetCollectorOutput_status *smithy.Schema
-
-var GetCollectorOutput_configRecorderArn *smithy.Schema
-
-var GetCollectorOutput_kubernetesClusterRoleArn *smithy.Schema
-
-var GetCollectorOutput_createdAt *smithy.Schema
-
-var GetCollectorOutput_updatedAt *smithy.Schema
-
-var GetEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetEnvironmentInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentInput_environmentId *smithy.Schema
-
-var GetEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 9)
-var GetEnvironmentOutput_environmentId *smithy.Schema
-
-var GetEnvironmentOutput_environmentArn *smithy.Schema
-
-var GetEnvironmentOutput_name *smithy.Schema
-
-var GetEnvironmentOutput_status *smithy.Schema
-
-var GetEnvironmentOutput_statusMessage *smithy.Schema
-
-var GetEnvironmentOutput_statusUpdatedAt *smithy.Schema
-
-var GetEnvironmentOutput_createdAt *smithy.Schema
-
-var GetEnvironmentOutput_updatedAt *smithy.Schema
-
-var GetEnvironmentOutput_configuration *smithy.Schema
-
-var GetIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetIntegrationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetIntegrationInput_integrationId *smithy.Schema
-
-var GetIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetIntegrationOutput",
-}, smithy.ShapeTypeStructure, 7)
-var GetIntegrationOutput_integrationId *smithy.Schema
-
-var GetIntegrationOutput_integrationArn *smithy.Schema
-
-var GetIntegrationOutput_name *smithy.Schema
-
-var GetIntegrationOutput_integrationType *smithy.Schema
-
-var GetIntegrationOutput_providerDetails *smithy.Schema
-
-var GetIntegrationOutput_createdAt *smithy.Schema
-
-var GetIntegrationOutput_updatedAt *smithy.Schema
-
-var GetResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyInput_arn *smithy.Schema
-
-var GetResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "GetResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetResourcePolicyOutput_arn *smithy.Schema
-
-var GetResourcePolicyOutput_policy *smithy.Schema
-
-var GetResourcePolicyOutput_revisionId *smithy.Schema
-
-var ListAssociatedCollectorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListAssociatedCollectorsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssociatedCollectorsInput_environmentId *smithy.Schema
-
-var ListAssociatedCollectorsInput_maxResults *smithy.Schema
-
-var ListAssociatedCollectorsInput_nextToken *smithy.Schema
-
-var ListAssociatedCollectorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListAssociatedCollectorsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedCollectorsOutput_associatedCollectors *smithy.Schema
-
-var ListAssociatedCollectorsOutput_nextToken *smithy.Schema
-
-var ListAssociatedEnvironmentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListAssociatedEnvironmentsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssociatedEnvironmentsInput_collectorId *smithy.Schema
-
-var ListAssociatedEnvironmentsInput_maxResults *smithy.Schema
-
-var ListAssociatedEnvironmentsInput_nextToken *smithy.Schema
-
-var ListAssociatedEnvironmentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListAssociatedEnvironmentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedEnvironmentsOutput_associatedEnvironments *smithy.Schema
-
-var ListAssociatedEnvironmentsOutput_nextToken *smithy.Schema
-
-var ListCodeFindingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeFindingsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListCodeFindingsInput_environmentId *smithy.Schema
-
-var ListCodeFindingsInput_maxResults *smithy.Schema
-
-var ListCodeFindingsInput_nextToken *smithy.Schema
-
-var ListCodeFindingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeFindingsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCodeFindingsOutput_items *smithy.Schema
-
-var ListCodeFindingsOutput_nextToken *smithy.Schema
-
-var ListCodeIssueArtifactsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeIssueArtifactsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListCodeIssueArtifactsInput_environmentId *smithy.Schema
-
-var ListCodeIssueArtifactsInput_issueId *smithy.Schema
-
-var ListCodeIssueArtifactsInput_artifactType *smithy.Schema
-
-var ListCodeIssueArtifactsInput_maxResults *smithy.Schema
-
-var ListCodeIssueArtifactsInput_nextToken *smithy.Schema
-
-var ListCodeIssueArtifactsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeIssueArtifactsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCodeIssueArtifactsOutput_items *smithy.Schema
-
-var ListCodeIssueArtifactsOutput_nextToken *smithy.Schema
-
-var ListCodeIssuesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeIssuesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListCodeIssuesInput_environmentId *smithy.Schema
-
-var ListCodeIssuesInput_maxResults *smithy.Schema
-
-var ListCodeIssuesInput_nextToken *smithy.Schema
-
-var ListCodeIssuesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeIssuesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCodeIssuesOutput_items *smithy.Schema
-
-var ListCodeIssuesOutput_nextToken *smithy.Schema
-
-var ListCodeScansInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeScansInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListCodeScansInput_environmentId *smithy.Schema
-
-var ListCodeScansInput_maxResults *smithy.Schema
-
-var ListCodeScansInput_nextToken *smithy.Schema
-
-var ListCodeScansOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCodeScansOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListCodeScansOutput_scans *smithy.Schema
-
-var ListCodeScansOutput_nextToken *smithy.Schema
-
-var ListCollectorsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCollectorsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListCollectorsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListCollectorsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListCollectorsOutput_items *smithy.Schema
-
-var ListEnvironmentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListEnvironmentsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentsInput_maxResults *smithy.Schema
-
-var ListEnvironmentsInput_nextToken *smithy.Schema
-
-var ListEnvironmentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListEnvironmentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentsOutput_items *smithy.Schema
-
-var ListEnvironmentsOutput_nextToken *smithy.Schema
-
-var ListIntegrationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListIntegrationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListIntegrationsInput_maxResults *smithy.Schema
-
-var ListIntegrationsInput_nextToken *smithy.Schema
-
-var ListIntegrationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "ListIntegrationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListIntegrationsOutput_items *smithy.Schema
-
-var ListIntegrationsOutput_nextToken *smithy.Schema
-
-var PutResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PutResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyInput_arn *smithy.Schema
-
-var PutResourcePolicyInput_policy *smithy.Schema
-
-var PutResourcePolicyInput_expectedRevisionId *smithy.Schema
-
-var PutResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "PutResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyOutput_arn *smithy.Schema
-
-var PutResourcePolicyOutput_policy *smithy.Schema
-
-var PutResourcePolicyOutput_revisionId *smithy.Schema
-
-var StartIntegrationAuthorizationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "StartIntegrationAuthorizationInput",
-}, smithy.ShapeTypeStructure, 2)
-var StartIntegrationAuthorizationInput_providerType *smithy.Schema
-
-var StartIntegrationAuthorizationInput_name *smithy.Schema
-
-var StartIntegrationAuthorizationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "StartIntegrationAuthorizationOutput",
-}, smithy.ShapeTypeStructure, 4)
-var StartIntegrationAuthorizationOutput_state *smithy.Schema
-
-var StartIntegrationAuthorizationOutput_codeChallenge *smithy.Schema
-
-var StartIntegrationAuthorizationOutput_codeChallengeMethod *smithy.Schema
-
-var StartIntegrationAuthorizationOutput_expiresAt *smithy.Schema
-
-var UpdateCollectorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateCollectorInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateCollectorInput_collectorId *smithy.Schema
-
-var UpdateCollectorInput_name *smithy.Schema
-
-var UpdateCollectorInput_kubernetesClusterRole *smithy.Schema
-
-var UpdateCollectorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateCollectorOutput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateCollectorOutput_collectorId *smithy.Schema
-
-var UpdateCollectorOutput_collectorArn *smithy.Schema
-
-var UpdateCollectorOutput_type *smithy.Schema
-
-var UpdateCollectorOutput_status *smithy.Schema
-
-var UpdateCollectorOutput_configRecorderArn *smithy.Schema
-
-var UpdateCollectorOutput_kubernetesClusterRoleArn *smithy.Schema
-
-var UpdateCollectorOutput_createdAt *smithy.Schema
-
-var UpdateCollectorOutput_updatedAt *smithy.Schema
-
-var UpdateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateEnvironmentInput_environmentId *smithy.Schema
-
-var UpdateEnvironmentInput_name *smithy.Schema
-
-var UpdateEnvironmentInput_configuration *smithy.Schema
-
-var UpdateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateEnvironmentOutput_environmentId *smithy.Schema
-
-var UpdateEnvironmentOutput_environmentArn *smithy.Schema
-
-var UpdateEnvironmentOutput_name *smithy.Schema
-
-var UpdateEnvironmentOutput_status *smithy.Schema
-
-var UpdateEnvironmentOutput_statusMessage *smithy.Schema
-
-var UpdateEnvironmentOutput_statusUpdatedAt *smithy.Schema
-
-var UpdateEnvironmentOutput_createdAt *smithy.Schema
-
-var UpdateEnvironmentOutput_configuration *smithy.Schema
-
-var UpdateIntegrationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateIntegrationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateIntegrationInput_integrationId *smithy.Schema
-
-var UpdateIntegrationInput_providerConfiguration *smithy.Schema
-
-var UpdateIntegrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.continuum",
-	Name:      "UpdateIntegrationOutput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateIntegrationOutput_integrationId *smithy.Schema
-
-var UpdateIntegrationOutput_integrationArn *smithy.Schema
-
-var UpdateIntegrationOutput_name *smithy.Schema
-
-var UpdateIntegrationOutput_integrationType *smithy.Schema
-
-var UpdateIntegrationOutput_providerDetails *smithy.Schema
-
-var UpdateIntegrationOutput_createdAt *smithy.Schema
-
-var UpdateIntegrationOutput_updatedAt *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AffectedPackage_name = AffectedPackage.AddMember("name", _PackageName)
-
-	AffectedPackage_version = AffectedPackage.AddMember("version", _PackageVersion)
-
-	AffectedPackage_fixedInVersion = AffectedPackage.AddMember("fixedInVersion", _PackageVersion)
-
-	AffectedPackage_packageManager = AffectedPackage.AddMember("packageManager", _PackageManager)
-
-	_AffectedPackageList_member = _AffectedPackageList.AddMember("member", AffectedPackage)
-
-	_ArtifactCitations_member = _ArtifactCitations.AddMember("member", _ArtifactCitation)
-
-	_ArtifactHeaders_key = _ArtifactHeaders.AddMember("key", _ArtifactCitation)
-
-	_ArtifactHeaders_value = _ArtifactHeaders.AddMember("value", _ArtifactText)
-
-	ArtifactHttpMethod_GET = ArtifactHttpMethod.AddMember("GET", smithyprelude.Unit)
-
-	ArtifactHttpMethod_HEAD = ArtifactHttpMethod.AddMember("HEAD", smithyprelude.Unit)
-
-	ArtifactHttpMethod_POST = ArtifactHttpMethod.AddMember("POST", smithyprelude.Unit)
-
-	ArtifactHttpMethod_PUT = ArtifactHttpMethod.AddMember("PUT", smithyprelude.Unit)
-
-	ArtifactHttpMethod_PATCH = ArtifactHttpMethod.AddMember("PATCH", smithyprelude.Unit)
-
-	ArtifactHttpMethod_DELETE = ArtifactHttpMethod.AddMember("DELETE", smithyprelude.Unit)
-
-	ArtifactHttpMethod_OPTIONS = ArtifactHttpMethod.AddMember("OPTIONS", smithyprelude.Unit)
-
-	AssociatedCollector_collectorId = AssociatedCollector.AddMember("collectorId", _CollectorId)
-
-	AssociatedCollector_collectorArn = AssociatedCollector.AddMember("collectorArn", _CollectorArn)
-
-	_AssociatedCollectors_member = _AssociatedCollectors.AddMember("member", AssociatedCollector)
-
-	EnvironmentStatus_ACTIVE = EnvironmentStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AssociatedEnvironment_environmentId = AssociatedEnvironment.AddMember("environmentId", _EnvironmentId)
-
-	AssociatedEnvironment_environmentArn = AssociatedEnvironment.AddMember("environmentArn", _EnvironmentArn)
-
-	AssociatedEnvironment_name = AssociatedEnvironment.AddMember("name", _EnvironmentName)
-
-	AssociatedEnvironment_status = AssociatedEnvironment.AddMember("status", EnvironmentStatus)
-
-	AssociatedEnvironment_createdAt = AssociatedEnvironment.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_AssociatedEnvironments_member = _AssociatedEnvironments.AddMember("member", AssociatedEnvironment)
-
-	_AttackFlowIds_member = _AttackFlowIds.AddMember("member", _AttackFlowId)
-
-	CollectorDetails_collectorDataAccessRoleArn = CollectorDetails.AddMember("collectorDataAccessRoleArn", _EnvironmentSourceRoleArn)
-
-	EnvironmentS3IntegrationSource_integrationId = EnvironmentS3IntegrationSource.AddMember("integrationId", _IntegrationId)
-
-	EnvironmentS3IntegrationSource_codePrefix = EnvironmentS3IntegrationSource.AddMember("codePrefix", _EnvironmentSourcePrefix)
-
-	EnvironmentS3IntegrationSource_contextPrefix = EnvironmentS3IntegrationSource.AddMember("contextPrefix", _EnvironmentSourcePrefix)
-
-	_EnvironmentS3Sources_member = _EnvironmentS3Sources.AddMember("member", EnvironmentS3IntegrationSource)
-
-	EnvironmentRepositorySource_integrationId = EnvironmentRepositorySource.AddMember("integrationId", _IntegrationId)
-
-	EnvironmentRepositorySource_repository = EnvironmentRepositorySource.AddMember("repository", _RepositoryName)
-
-	EnvironmentRepositorySource_defaultBranch = EnvironmentRepositorySource.AddMember("defaultBranch", _RepositoryBranch)
-
-	_EnvironmentRepositorySources_member = _EnvironmentRepositorySources.AddMember("member", EnvironmentRepositorySource)
-
-	EnvironmentSourceConfiguration_s3Sources = EnvironmentSourceConfiguration.AddMember("s3Sources", _EnvironmentS3Sources)
-
-	EnvironmentSourceConfiguration_repositorySources = EnvironmentSourceConfiguration.AddMember("repositorySources", _EnvironmentRepositorySources)
-
-	_DomainNames_member = _DomainNames.AddMember("member", _DomainName)
-
-	EnvironmentNetworkConfiguration_allowedDomains = EnvironmentNetworkConfiguration.AddMember("allowedDomains", _DomainNames)
-
-	PatchCreationPolicy_ENABLED = PatchCreationPolicy.AddMember("ENABLED", smithyprelude.Unit)
-
-	PatchCreationPolicy_DISABLED = PatchCreationPolicy.AddMember("DISABLED", smithyprelude.Unit)
-
-	EnvironmentConfiguration_network = EnvironmentConfiguration.AddMember("network", EnvironmentNetworkConfiguration)
-
-	EnvironmentConfiguration_scanFrequency = EnvironmentConfiguration.AddMember("scanFrequency", _ScanFrequency)
-
-	EnvironmentConfiguration_patchCreationPolicy = EnvironmentConfiguration.AddMember("patchCreationPolicy", PatchCreationPolicy)
-
-	ScanStatus_SUBMITTED = ScanStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	ScanStatus_WAITING_FOR_BUILD = ScanStatus.AddMember("WAITING_FOR_BUILD", smithyprelude.Unit)
-
-	ScanStatus_BUILDING = ScanStatus.AddMember("BUILDING", smithyprelude.Unit)
-
-	ScanStatus_WAITING_FOR_SCAN = ScanStatus.AddMember("WAITING_FOR_SCAN", smithyprelude.Unit)
-
-	ScanStatus_SCANNING = ScanStatus.AddMember("SCANNING", smithyprelude.Unit)
-
-	ScanStatus_SUCCEEDED = ScanStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ScanStatus_FAILED = ScanStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ScanOrigin_MANUAL = ScanOrigin.AddMember("MANUAL", smithyprelude.Unit)
-
-	ScanOrigin_SCHEDULED = ScanOrigin.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	ScanFailureStage_SUBMITTED = ScanFailureStage.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	ScanFailureStage_WAITING_FOR_BUILD = ScanFailureStage.AddMember("WAITING_FOR_BUILD", smithyprelude.Unit)
-
-	ScanFailureStage_BUILDING = ScanFailureStage.AddMember("BUILDING", smithyprelude.Unit)
-
-	ScanFailureStage_WAITING_FOR_SCAN = ScanFailureStage.AddMember("WAITING_FOR_SCAN", smithyprelude.Unit)
-
-	ScanFailureStage_SCANNING = ScanFailureStage.AddMember("SCANNING", smithyprelude.Unit)
-
-	CodeScanSummary_scanRunId = CodeScanSummary.AddMember("scanRunId", _ScanRunId)
-
-	CodeScanSummary_status = CodeScanSummary.AddMember("status", ScanStatus)
-
-	CodeScanSummary_origin = CodeScanSummary.AddMember("origin", ScanOrigin)
-
-	CodeScanSummary_createdAt = CodeScanSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CodeScanSummary_completedAt = CodeScanSummary.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CodeScanSummary_failureMessage = CodeScanSummary.AddMember("failureMessage", _ScanRunFailureMessage)
-
-	CodeScanSummary_failureStage = CodeScanSummary.AddMember("failureStage", ScanFailureStage)
-
-	CodeConfigurationDetails_collectorDetails = CodeConfigurationDetails.AddMember("collectorDetails", CollectorDetails)
-
-	CodeConfigurationDetails_sourceConfiguration = CodeConfigurationDetails.AddMember("sourceConfiguration", EnvironmentSourceConfiguration)
-
-	CodeConfigurationDetails_environmentConfiguration = CodeConfigurationDetails.AddMember("environmentConfiguration", EnvironmentConfiguration)
-
-	CodeConfigurationDetails_latestScan = CodeConfigurationDetails.AddMember("latestScan", CodeScanSummary)
-
-	FindingStatus_SUBMITTED = FindingStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	FindingStatus_VALIDATING = FindingStatus.AddMember("VALIDATING", smithyprelude.Unit)
-
-	FindingStatus_CONFIRMED = FindingStatus.AddMember("CONFIRMED", smithyprelude.Unit)
-
-	FindingStatus_DISCARDED = FindingStatus.AddMember("DISCARDED", smithyprelude.Unit)
-
-	FindingDiscardReason_SCANNER_VALIDATED_FALSE_POSITIVE = FindingDiscardReason.AddMember("SCANNER_VALIDATED_FALSE_POSITIVE", smithyprelude.Unit)
-
-	FindingDiscardReason_SCANNER_NEEDS_REVIEW = FindingDiscardReason.AddMember("SCANNER_NEEDS_REVIEW", smithyprelude.Unit)
-
-	FindingDiscardReason_FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT = FindingDiscardReason.AddMember("FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT", smithyprelude.Unit)
-
-	FindingDiscardReason_DUPLICATE_OF_OPEN_ISSUE = FindingDiscardReason.AddMember("DUPLICATE_OF_OPEN_ISSUE", smithyprelude.Unit)
-
-	FindingDiscardReason_DUPLICATE_OF_CLOSED_ISSUE = FindingDiscardReason.AddMember("DUPLICATE_OF_CLOSED_ISSUE", smithyprelude.Unit)
-
-	FindingDiscardReason_COMPENSATING_CONTROL_PRESENT = FindingDiscardReason.AddMember("COMPENSATING_CONTROL_PRESENT", smithyprelude.Unit)
-
-	FindingDiscardReason_OUT_OF_SCOPE = FindingDiscardReason.AddMember("OUT_OF_SCOPE", smithyprelude.Unit)
-
-	FindingDiscardReason_INSUFFICIENT_EVIDENCE = FindingDiscardReason.AddMember("INSUFFICIENT_EVIDENCE", smithyprelude.Unit)
-
-	FindingDiscardReason_PROCESSING_FAILED = FindingDiscardReason.AddMember("PROCESSING_FAILED", smithyprelude.Unit)
-
-	FindingDiscardReason_SOURCE_REPO_NOT_FOUND = FindingDiscardReason.AddMember("SOURCE_REPO_NOT_FOUND", smithyprelude.Unit)
-
-	FindingType_CONTINUUM_CODE_VULN = FindingType.AddMember("CONTINUUM_CODE_VULN", smithyprelude.Unit)
-
-	FindingType_CUSTOMER_CODE_VULN = FindingType.AddMember("CUSTOMER_CODE_VULN", smithyprelude.Unit)
-
-	FindingSeverityId_UNKNOWN = FindingSeverityId.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	FindingSeverityId_INFORMATIONAL = FindingSeverityId.AddMember("INFORMATIONAL", smithyprelude.Unit)
-
-	FindingSeverityId_LOW = FindingSeverityId.AddMember("LOW", smithyprelude.Unit)
-
-	FindingSeverityId_MEDIUM = FindingSeverityId.AddMember("MEDIUM", smithyprelude.Unit)
-
-	FindingSeverityId_HIGH = FindingSeverityId.AddMember("HIGH", smithyprelude.Unit)
-
-	FindingSeverityId_CRITICAL = FindingSeverityId.AddMember("CRITICAL", smithyprelude.Unit)
-
-	FindingSeverityId_FATAL = FindingSeverityId.AddMember("FATAL", smithyprelude.Unit)
-
-	FindingSeverityId_OTHER = FindingSeverityId.AddMember("OTHER", smithyprelude.Unit)
-
-	FindingSummary_findingId = FindingSummary.AddMember("findingId", _FindingId)
-
-	FindingSummary_findingArn = FindingSummary.AddMember("findingArn", _FindingArn)
-
-	FindingSummary_environmentId = FindingSummary.AddMember("environmentId", _EnvironmentId)
-
-	FindingSummary_source = FindingSummary.AddMember("source", _FindingSource)
-
-	FindingSummary_sourceFindingId = FindingSummary.AddMember("sourceFindingId", _SourceFindingId)
-
-	FindingSummary_reportedAt = FindingSummary.AddMember("reportedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	FindingSummary_status = FindingSummary.AddMember("status", FindingStatus)
-
-	FindingSummary_statusUpdatedAt = FindingSummary.AddMember("statusUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	FindingSummary_createdAt = FindingSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	FindingSummary_scanRunId = FindingSummary.AddMember("scanRunId", _ScanRunId)
-
-	FindingSummary_statusMessage = FindingSummary.AddMember("statusMessage", _FindingStatusMessage)
-
-	FindingSummary_discardReason = FindingSummary.AddMember("discardReason", FindingDiscardReason)
-
-	FindingSummary_discardReasoning = FindingSummary.AddMember("discardReasoning", _FindingStatusMessage)
-
-	FindingSummary_duplicateOfIssueId = FindingSummary.AddMember("duplicateOfIssueId", _IssueId)
-
-	FindingSummary_createdIssueId = FindingSummary.AddMember("createdIssueId", _IssueId)
-
-	FindingSummary_completedAt = FindingSummary.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	FindingSummary_type = FindingSummary.AddMember("type", FindingType)
-
-	FindingSummary_title = FindingSummary.AddMember("title", _FindingTitle)
-
-	FindingSummary_severity = FindingSummary.AddMember("severity", FindingSeverityId)
-
-	FindingSummary_category = FindingSummary.AddMember("category", _FindingCategory)
-
-	FindingSummary_filePath = FindingSummary.AddMember("filePath", _FindingFilePath)
-
-	_CodeFindingSummaries_member = _CodeFindingSummaries.AddMember("member", FindingSummary)
-
-	IssueArtifactType_EVIDENCE = IssueArtifactType.AddMember("EVIDENCE", smithyprelude.Unit)
-
-	IssueArtifactType_AGENT_COMMUNICATION = IssueArtifactType.AddMember("AGENT_COMMUNICATION", smithyprelude.Unit)
-
-	IssueArtifactType_VALIDATION_EVIDENCE = IssueArtifactType.AddMember("VALIDATION_EVIDENCE", smithyprelude.Unit)
-
-	IssueArtifactType_REMEDIATION_PROPOSAL = IssueArtifactType.AddMember("REMEDIATION_PROPOSAL", smithyprelude.Unit)
-
-	IssueArtifactType_DECISION = IssueArtifactType.AddMember("DECISION", smithyprelude.Unit)
-
-	IssueArtifactType_PATCH = IssueArtifactType.AddMember("PATCH", smithyprelude.Unit)
-
-	IssueArtifactProducerSummary_agent = IssueArtifactProducerSummary.AddMember("agent", _IssueArtifactProducerName)
-
-	IssueArtifactItem_artifactId = IssueArtifactItem.AddMember("artifactId", _IssueArtifactId)
-
-	IssueArtifactItem_artifactType = IssueArtifactItem.AddMember("artifactType", IssueArtifactType)
-
-	IssueArtifactItem_mediaType = IssueArtifactItem.AddMember("mediaType", _IssueArtifactMediaType)
-
-	IssueArtifactItem_producer = IssueArtifactItem.AddMember("producer", IssueArtifactProducerSummary)
-
-	IssueArtifactItem_contentSizeBytes = IssueArtifactItem.AddMember("contentSizeBytes", smithyprelude.Long)
-
-	IssueArtifactItem_createdAt = IssueArtifactItem.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_CodeIssueArtifactItems_member = _CodeIssueArtifactItems.AddMember("member", IssueArtifactItem)
-
-	IssueSeverity_LOW = IssueSeverity.AddMember("LOW", smithyprelude.Unit)
-
-	IssueSeverity_MEDIUM = IssueSeverity.AddMember("MEDIUM", smithyprelude.Unit)
-
-	IssueSeverity_HIGH = IssueSeverity.AddMember("HIGH", smithyprelude.Unit)
-
-	IssueSeverity_CRITICAL = IssueSeverity.AddMember("CRITICAL", smithyprelude.Unit)
-
-	IssueStatus_CREATED = IssueStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	IssueStatus_IN_PROGRESS = IssueStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	IssueStatus_COMPLETED = IssueStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	IssueStatus_FAILED = IssueStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	IssuePhase_VALIDATION = IssuePhase.AddMember("VALIDATION", smithyprelude.Unit)
-
-	IssuePhase_PRIORITIZATION = IssuePhase.AddMember("PRIORITIZATION", smithyprelude.Unit)
-
-	IssuePhase_REMEDIATION = IssuePhase.AddMember("REMEDIATION", smithyprelude.Unit)
-
-	IssueStatusReason_INTERNAL_ERROR = IssueStatusReason.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	IssueStatusReason_REMEDIATION_FAILED = IssueStatusReason.AddMember("REMEDIATION_FAILED", smithyprelude.Unit)
-
-	IssueSummary_issueId = IssueSummary.AddMember("issueId", _IssueId)
-
-	IssueSummary_issueArn = IssueSummary.AddMember("issueArn", _IssueArn)
-
-	IssueSummary_name = IssueSummary.AddMember("name", _IssueName)
-
-	IssueSummary_severity = IssueSummary.AddMember("severity", IssueSeverity)
-
-	IssueSummary_confidence = IssueSummary.AddMember("confidence", _IssueConfidence)
-
-	IssueSummary_status = IssueSummary.AddMember("status", IssueStatus)
-
-	IssueSummary_phase = IssueSummary.AddMember("phase", IssuePhase)
-
-	IssueSummary_statusReason = IssueSummary.AddMember("statusReason", IssueStatusReason)
-
-	IssueSummary_statusMessage = IssueSummary.AddMember("statusMessage", _IssueStatusMessage)
-
-	IssueSummary_statusUpdatedAt = IssueSummary.AddMember("statusUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	IssueSummary_createdAt = IssueSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	IssueSummary_updatedAt = IssueSummary.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_CodeIssueSummaries_member = _CodeIssueSummaries.AddMember("member", IssueSummary)
-
-	CodeScanData_scanRunId = CodeScanData.AddMember("scanRunId", _ScanRunId)
-
-	CodeScanData_status = CodeScanData.AddMember("status", ScanStatus)
-
-	CodeScanData_origin = CodeScanData.AddMember("origin", ScanOrigin)
-
-	CodeScanData_createdAt = CodeScanData.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CodeScanData_completedAt = CodeScanData.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CodeScanData_failureMessage = CodeScanData.AddMember("failureMessage", _ScanRunFailureMessage)
-
-	CodeScanData_failureStage = CodeScanData.AddMember("failureStage", ScanFailureStage)
-
-	_CodeScanSummaries_member = _CodeScanSummaries.AddMember("member", CodeScanSummary)
-
-	CollectorStatus_ACTIVE = CollectorStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	CollectorStatus_PENDING_DELETION = CollectorStatus.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	CollectorType_AWS_COLLECTOR = CollectorType.AddMember("AWS_COLLECTOR", smithyprelude.Unit)
-
-	CollectorSummary_collectorId = CollectorSummary.AddMember("collectorId", _CollectorId)
-
-	CollectorSummary_collectorArn = CollectorSummary.AddMember("collectorArn", _CollectorArn)
-
-	CollectorSummary_type = CollectorSummary.AddMember("type", CollectorType)
-
-	CollectorSummary_status = CollectorSummary.AddMember("status", CollectorStatus)
-
-	CollectorSummary_createdAt = CollectorSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_CollectorSummaries_member = _CollectorSummaries.AddMember("member", CollectorSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	CreateCodeConfiguration_sourceConfiguration = CreateCodeConfiguration.AddMember("sourceConfiguration", EnvironmentSourceConfiguration)
-
-	CreateCodeConfiguration_environmentConfiguration = CreateCodeConfiguration.AddMember("environmentConfiguration", EnvironmentConfiguration)
-
-	CreateEnvironmentConfiguration_codeConfiguration = CreateEnvironmentConfiguration.AddMember("codeConfiguration", CreateCodeConfiguration)
-
-	_CweIdList_member = _CweIdList.AddMember("member", _CweId)
-
-	DeliveryReason_ARTIFACT_READ_FAILED = DeliveryReason.AddMember("ARTIFACT_READ_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_ARTIFACT_SOURCE_MISMATCH = DeliveryReason.AddMember("ARTIFACT_SOURCE_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_ARTIFACT_SOURCE_MISSING = DeliveryReason.AddMember("ARTIFACT_SOURCE_MISSING", smithyprelude.Unit)
-
-	DeliveryReason_BUILD_NOT_FOUND = DeliveryReason.AddMember("BUILD_NOT_FOUND", smithyprelude.Unit)
-
-	DeliveryReason_BUILD_READ_FAILED = DeliveryReason.AddMember("BUILD_READ_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_BUILD_RESULT_SCOPE_MISMATCH = DeliveryReason.AddMember("BUILD_RESULT_SCOPE_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_DELIVERY_NOT_CONFIGURED = DeliveryReason.AddMember("DELIVERY_NOT_CONFIGURED", smithyprelude.Unit)
-
-	DeliveryReason_DELIVERY_SOURCE_KIND_CHANGED = DeliveryReason.AddMember("DELIVERY_SOURCE_KIND_CHANGED", smithyprelude.Unit)
-
-	DeliveryReason_DUPLICATE_LOGICAL_REPOSITORY = DeliveryReason.AddMember("DUPLICATE_LOGICAL_REPOSITORY", smithyprelude.Unit)
-
-	DeliveryReason_DUPLICATE_OR_INVALID_REPOSITORY = DeliveryReason.AddMember("DUPLICATE_OR_INVALID_REPOSITORY", smithyprelude.Unit)
-
-	DeliveryReason_ENVIRONMENT_DELETED = DeliveryReason.AddMember("ENVIRONMENT_DELETED", smithyprelude.Unit)
-
-	DeliveryReason_ENVIRONMENT_NOT_ACTIVE = DeliveryReason.AddMember("ENVIRONMENT_NOT_ACTIVE", smithyprelude.Unit)
-
-	DeliveryReason_ENVIRONMENT_NOT_FOUND = DeliveryReason.AddMember("ENVIRONMENT_NOT_FOUND", smithyprelude.Unit)
-
-	DeliveryReason_ENVIRONMENT_READ_FAILED = DeliveryReason.AddMember("ENVIRONMENT_READ_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_S3_ACCESS_DENIED = DeliveryReason.AddMember("S3_ACCESS_DENIED", smithyprelude.Unit)
-
-	DeliveryReason_S3_SOURCE_PREFIX_OVERLAP = DeliveryReason.AddMember("S3_SOURCE_PREFIX_OVERLAP", smithyprelude.Unit)
-
-	DeliveryReason_SOURCE_INTEGRATION_UNRESOLVED = DeliveryReason.AddMember("SOURCE_INTEGRATION_UNRESOLVED", smithyprelude.Unit)
-
-	DeliveryReason_SOURCE_INTEGRATION_READ_FAILED = DeliveryReason.AddMember("SOURCE_INTEGRATION_READ_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_SOURCE_INTEGRATION_INVALID = DeliveryReason.AddMember("SOURCE_INTEGRATION_INVALID", smithyprelude.Unit)
-
-	DeliveryReason_SOURCE_INTEGRATION_CHANGED = DeliveryReason.AddMember("SOURCE_INTEGRATION_CHANGED", smithyprelude.Unit)
-
-	DeliveryReason_EXPORT_CREDENTIALS_MISSING = DeliveryReason.AddMember("EXPORT_CREDENTIALS_MISSING", smithyprelude.Unit)
-
-	DeliveryReason_EXPORT_CREDENTIAL_EXPIRY_INVALID = DeliveryReason.AddMember("EXPORT_CREDENTIAL_EXPIRY_INVALID", smithyprelude.Unit)
-
-	DeliveryReason_EXPORT_DESTINATION_INVALID = DeliveryReason.AddMember("EXPORT_DESTINATION_INVALID", smithyprelude.Unit)
-
-	DeliveryReason_EXPORT_EXISTING_OBJECT_MISMATCH = DeliveryReason.AddMember("EXPORT_EXISTING_OBJECT_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_EXPORT_PUT_FAILED = DeliveryReason.AddMember("EXPORT_PUT_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_EXPORT_RECONCILIATION_READ_FAILED = DeliveryReason.AddMember("EXPORT_RECONCILIATION_READ_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_EXPORT_ROLE_ASSUMPTION_FAILED = DeliveryReason.AddMember("EXPORT_ROLE_ASSUMPTION_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_ACCESS_DENIED = DeliveryReason.AddMember("GITHUB_ACCESS_DENIED", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_BASE_NOT_FOUND = DeliveryReason.AddMember("GITHUB_BASE_NOT_FOUND", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_BRANCH_CONFLICT = DeliveryReason.AddMember("GITHUB_BRANCH_CONFLICT", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_NOT_FOUND = DeliveryReason.AddMember("GITHUB_NOT_FOUND", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_RATE_LIMITED = DeliveryReason.AddMember("GITHUB_RATE_LIMITED", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_REPOSITORY_CHANGED = DeliveryReason.AddMember("GITHUB_REPOSITORY_CHANGED", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_REPOSITORY_NOT_FOUND = DeliveryReason.AddMember("GITHUB_REPOSITORY_NOT_FOUND", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_REQUEST_FAILED = DeliveryReason.AddMember("GITHUB_REQUEST_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_REQUEST_REJECTED = DeliveryReason.AddMember("GITHUB_REQUEST_REJECTED", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_RESPONSE_INVALID = DeliveryReason.AddMember("GITHUB_RESPONSE_INVALID", smithyprelude.Unit)
-
-	DeliveryReason_GREEN_ATTEMPT_NOT_SUCCESSFUL = DeliveryReason.AddMember("GREEN_ATTEMPT_NOT_SUCCESSFUL", smithyprelude.Unit)
-
-	DeliveryReason_GREEN_COMPLETION_NOT_OBSERVED = DeliveryReason.AddMember("GREEN_COMPLETION_NOT_OBSERVED", smithyprelude.Unit)
-
-	DeliveryReason_PATCH_NOT_SELECTED = DeliveryReason.AddMember("PATCH_NOT_SELECTED", smithyprelude.Unit)
-
-	DeliveryReason_INCOMPLETE_SOURCE_REFERENCE = DeliveryReason.AddMember("INCOMPLETE_SOURCE_REFERENCE", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_ARCHIVE_DIGEST = DeliveryReason.AddMember("INVALID_ARCHIVE_DIGEST", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_ARTIFACT_SOURCE = DeliveryReason.AddMember("INVALID_ARTIFACT_SOURCE", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_COMPLETED_MANIFEST = DeliveryReason.AddMember("INVALID_COMPLETED_MANIFEST", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_EXPORT_RECEIPT = DeliveryReason.AddMember("INVALID_EXPORT_RECEIPT", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_GITHUB_PROVENANCE = DeliveryReason.AddMember("INVALID_GITHUB_PROVENANCE", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_S3_DESTINATION = DeliveryReason.AddMember("INVALID_S3_DESTINATION", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_SERVICE_RECEIPT = DeliveryReason.AddMember("INVALID_SERVICE_RECEIPT", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_SOURCE_INVENTORY = DeliveryReason.AddMember("INVALID_SOURCE_INVENTORY", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_SOURCE_MANIFEST = DeliveryReason.AddMember("INVALID_SOURCE_MANIFEST", smithyprelude.Unit)
-
-	DeliveryReason_INVALID_SOURCE_REFERENCE = DeliveryReason.AddMember("INVALID_SOURCE_REFERENCE", smithyprelude.Unit)
-
-	DeliveryReason_ISSUE_INTEGRITY_FAILURE = DeliveryReason.AddMember("ISSUE_INTEGRITY_FAILURE", smithyprelude.Unit)
-
-	DeliveryReason_ISSUE_NOT_FOUND = DeliveryReason.AddMember("ISSUE_NOT_FOUND", smithyprelude.Unit)
-
-	DeliveryReason_MANIFEST_INVENTORY_MISMATCH = DeliveryReason.AddMember("MANIFEST_INVENTORY_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_MANIFEST_PROVENANCE_CHANGED = DeliveryReason.AddMember("MANIFEST_PROVENANCE_CHANGED", smithyprelude.Unit)
-
-	DeliveryReason_MANIFEST_REPOSITORY_SET_MISMATCH = DeliveryReason.AddMember("MANIFEST_REPOSITORY_SET_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_MANIFEST_SCOPE_OR_VERSION_MISMATCH = DeliveryReason.AddMember("MANIFEST_SCOPE_OR_VERSION_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_MISSING_BUILD_RESULT = DeliveryReason.AddMember("MISSING_BUILD_RESULT", smithyprelude.Unit)
-
-	DeliveryReason_MISSING_COMPLETED_MANIFEST = DeliveryReason.AddMember("MISSING_COMPLETED_MANIFEST", smithyprelude.Unit)
-
-	DeliveryReason_MISSING_RESULT_DIGEST = DeliveryReason.AddMember("MISSING_RESULT_DIGEST", smithyprelude.Unit)
-
-	DeliveryReason_MISSING_SOURCE_MANIFEST = DeliveryReason.AddMember("MISSING_SOURCE_MANIFEST", smithyprelude.Unit)
-
-	DeliveryReason_MISSING_SOURCE_TARGET = DeliveryReason.AddMember("MISSING_SOURCE_TARGET", smithyprelude.Unit)
-
-	DeliveryReason_PATCH_NOT_APPLICABLE = DeliveryReason.AddMember("PATCH_NOT_APPLICABLE", smithyprelude.Unit)
-
-	DeliveryReason_PATCH_STORAGE_IDENTITY_MISSING = DeliveryReason.AddMember("PATCH_STORAGE_IDENTITY_MISSING", smithyprelude.Unit)
-
-	DeliveryReason_PATCH_UNSUPPORTED = DeliveryReason.AddMember("PATCH_UNSUPPORTED", smithyprelude.Unit)
-
-	DeliveryReason_PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT = DeliveryReason.AddMember("PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT", smithyprelude.Unit)
-
-	DeliveryReason_PUBLISHER_DEADLINE_EXCEEDED = DeliveryReason.AddMember("PUBLISHER_DEADLINE_EXCEEDED", smithyprelude.Unit)
-
-	DeliveryReason_RESULT_COMPLETED_MANIFEST_MISMATCH = DeliveryReason.AddMember("RESULT_COMPLETED_MANIFEST_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_RESULT_SOURCE_BINDING_MISMATCH = DeliveryReason.AddMember("RESULT_SOURCE_BINDING_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_SERVICE_COPY_DIGEST_MISMATCH = DeliveryReason.AddMember("SERVICE_COPY_DIGEST_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_SERVICE_OBJECT_READ_FAILED = DeliveryReason.AddMember("SERVICE_OBJECT_READ_FAILED", smithyprelude.Unit)
-
-	DeliveryReason_SERVICE_OBJECT_TOO_LARGE = DeliveryReason.AddMember("SERVICE_OBJECT_TOO_LARGE", smithyprelude.Unit)
-
-	DeliveryReason_SERVICE_RECEIPT_OUTSIDE_ISSUE = DeliveryReason.AddMember("SERVICE_RECEIPT_OUTSIDE_ISSUE", smithyprelude.Unit)
-
-	DeliveryReason_SOURCE_OBJECT_DIGEST_MISMATCH = DeliveryReason.AddMember("SOURCE_OBJECT_DIGEST_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_SOURCE_REFERENCE_OUTSIDE_BUILD = DeliveryReason.AddMember("SOURCE_REFERENCE_OUTSIDE_BUILD", smithyprelude.Unit)
-
-	DeliveryReason_SOURCE_TARGET_BUILD_MISMATCH = DeliveryReason.AddMember("SOURCE_TARGET_BUILD_MISMATCH", smithyprelude.Unit)
-
-	DeliveryReason_UNKNOWN_REPOSITORY = DeliveryReason.AddMember("UNKNOWN_REPOSITORY", smithyprelude.Unit)
-
-	DeliveryReason_UNKNOWN_SOURCE_PROVIDER = DeliveryReason.AddMember("UNKNOWN_SOURCE_PROVIDER", smithyprelude.Unit)
-
-	DeliveryReason_UNSUPPORTED_ENVIRONMENT_SCHEMA = DeliveryReason.AddMember("UNSUPPORTED_ENVIRONMENT_SCHEMA", smithyprelude.Unit)
-
-	DeliveryReason_GITHUB_DESTINATION_NOT_ENABLED = DeliveryReason.AddMember("GITHUB_DESTINATION_NOT_ENABLED", smithyprelude.Unit)
-
-	DeliveryReason_PATCH_CREATION_POLICY_DISABLED = DeliveryReason.AddMember("PATCH_CREATION_POLICY_DISABLED", smithyprelude.Unit)
-
-	DeliveryStatus_PENDING = DeliveryStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	DeliveryStatus_SUCCEEDED = DeliveryStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	DeliveryStatus_FAILED = DeliveryStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DeliveryStatus_SKIPPED = DeliveryStatus.AddMember("SKIPPED", smithyprelude.Unit)
-
-	DeliveryStatus_ABANDONED = DeliveryStatus.AddMember("ABANDONED", smithyprelude.Unit)
-
-	S3Target_bucket = S3Target.AddMember("bucket", _EnvironmentSourceBucketName)
-
-	S3Target_key = S3Target.AddMember("key", _DeliveryObjectKey)
-
-	S3Target_version = S3Target.AddMember("version", _DeliveryVersionId)
-
-	GitHubTarget_owner = GitHubTarget.AddMember("owner", _DeliveryGitHubName)
-
-	GitHubTarget_repository = GitHubTarget.AddMember("repository", _DeliveryGitHubName)
-
-	GitHubTarget_pullRequestNumber = GitHubTarget.AddMember("pullRequestNumber", _DeliveryPullRequestNumber)
-
-	GitHubTarget_headSha = GitHubTarget.AddMember("headSha", _DeliveryGitCommitSha)
-
-	DestinationTarget_s3 = DestinationTarget.AddMember("s3", S3Target)
-
-	DestinationTarget_github = DestinationTarget.AddMember("github", GitHubTarget)
-
-	EnvironmentConfigurationDetails_codeConfiguration = EnvironmentConfigurationDetails.AddMember("codeConfiguration", CodeConfigurationDetails)
-
-	EnvironmentListEntry_environmentId = EnvironmentListEntry.AddMember("environmentId", _EnvironmentId)
-
-	EnvironmentListEntry_environmentArn = EnvironmentListEntry.AddMember("environmentArn", _EnvironmentArn)
-
-	EnvironmentListEntry_name = EnvironmentListEntry.AddMember("name", _EnvironmentName)
-
-	EnvironmentListEntry_status = EnvironmentListEntry.AddMember("status", EnvironmentStatus)
-
-	EnvironmentListEntry_createdAt = EnvironmentListEntry.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_EnvironmentListEntries_member = _EnvironmentListEntries.AddMember("member", EnvironmentListEntry)
-
-	ExploitabilityVerdict_EXPLOITABLE = ExploitabilityVerdict.AddMember("EXPLOITABLE", smithyprelude.Unit)
-
-	ExploitabilityVerdict_NOT_EXPLOITABLE = ExploitabilityVerdict.AddMember("NOT_EXPLOITABLE", smithyprelude.Unit)
-
-	ExploitabilityVerdict_UNCERTAIN = ExploitabilityVerdict.AddMember("UNCERTAIN", smithyprelude.Unit)
-
-	ExploitEffect_DATA_LEAKED = ExploitEffect.AddMember("DATA_LEAKED", smithyprelude.Unit)
-
-	ExploitEffect_ERROR_REVEALED = ExploitEffect.AddMember("ERROR_REVEALED", smithyprelude.Unit)
-
-	ExploitEffect_BEHAVIOR_CHANGED = ExploitEffect.AddMember("BEHAVIOR_CHANGED", smithyprelude.Unit)
-
-	ExploitEffect_NO_EFFECT = ExploitEffect.AddMember("NO_EFFECT", smithyprelude.Unit)
-
-	FindingBlockingReason_UNREACHABLE = FindingBlockingReason.AddMember("UNREACHABLE", smithyprelude.Unit)
-
-	FindingBlockingReason_PROTECTED = FindingBlockingReason.AddMember("PROTECTED", smithyprelude.Unit)
-
-	FindingBlockingReason_MISCLASSIFIED = FindingBlockingReason.AddMember("MISCLASSIFIED", smithyprelude.Unit)
-
-	FindingBlockingReason_EXCLUDED = FindingBlockingReason.AddMember("EXCLUDED", smithyprelude.Unit)
-
-	FindingBlockingReason_NOT_FEASIBLE = FindingBlockingReason.AddMember("NOT_FEASIBLE", smithyprelude.Unit)
-
-	FindingBlockingReason_RISK_MITIGATED = FindingBlockingReason.AddMember("RISK_MITIGATED", smithyprelude.Unit)
-
-	FindingBlockingReason_NONE = FindingBlockingReason.AddMember("NONE", smithyprelude.Unit)
-
-	FindingComplianceCheck_uid = FindingComplianceCheck.AddMember("uid", _FindingCategory)
-
-	FindingComplianceCheck_name = FindingComplianceCheck.AddMember("name", _FindingCategory)
-
-	FindingComplianceCheck_description = FindingComplianceCheck.AddMember("description", _FindingDescription)
-
-	_FindingComplianceCheckList_member = _FindingComplianceCheckList.AddMember("member", FindingComplianceCheck)
-
-	FindingEvidence_file = FindingEvidence.AddMember("file", _FindingFilePath)
-
-	FindingEvidence_line = FindingEvidence.AddMember("line", smithyprelude.Integer)
-
-	FindingEvidence_snippet = FindingEvidence.AddMember("snippet", _FindingCodeSnippet)
-
-	_FindingEvidenceList_member = _FindingEvidenceList.AddMember("member", FindingEvidence)
-
-	FindingLocation_filePath = FindingLocation.AddMember("filePath", _FindingFilePath)
-
-	FindingLocation_startLine = FindingLocation.AddMember("startLine", smithyprelude.Integer)
-
-	FindingLocation_endLine = FindingLocation.AddMember("endLine", smithyprelude.Integer)
-
-	_FindingLocationList_member = _FindingLocationList.AddMember("member", FindingLocation)
-
-	FindingOcsfClass_VULNERABILITY_FINDING = FindingOcsfClass.AddMember("VULNERABILITY_FINDING", smithyprelude.Unit)
-
-	FindingOcsfClass_APPLICATION_SECURITY_POSTURE_FINDING = FindingOcsfClass.AddMember("APPLICATION_SECURITY_POSTURE_FINDING", smithyprelude.Unit)
-
-	_FindingStringList_member = _FindingStringList.AddMember("member", _FindingListEntry)
-
-	FindingPosture_application = FindingPosture.AddMember("application", _FindingCategory)
-
-	FindingPosture_applicationUid = FindingPosture.AddMember("applicationUid", _FindingCategory)
-
-	FindingPosture_applicationVersion = FindingPosture.AddMember("applicationVersion", _FindingCategory)
-
-	FindingPosture_control = FindingPosture.AddMember("control", _FindingCategory)
-
-	FindingPosture_description = FindingPosture.AddMember("description", _FindingDescription)
-
-	FindingPosture_standards = FindingPosture.AddMember("standards", _FindingStringList)
-
-	FindingPosture_requirements = FindingPosture.AddMember("requirements", _FindingStringList)
-
-	FindingPosture_checks = FindingPosture.AddMember("checks", _FindingComplianceCheckList)
-
-	FindingPosture_status = FindingPosture.AddMember("status", _FindingCategory)
-
-	FindingPosture_statusId = FindingPosture.AddMember("statusId", smithyprelude.Integer)
-
-	FindingPosture_remediation = FindingPosture.AddMember("remediation", _FindingDescription)
-
-	FindingPosture_remediationReferences = FindingPosture.AddMember("remediationReferences", _FindingStringList)
-
-	FindingResource_uid = FindingResource.AddMember("uid", _FindingResourceUid)
-
-	FindingResource_name = FindingResource.AddMember("name", _FindingCategory)
-
-	FindingResource_type = FindingResource.AddMember("type", _FindingCategory)
-
-	FindingResource_region = FindingResource.AddMember("region", _FindingCategory)
-
-	_FindingResourceList_member = _FindingResourceList.AddMember("member", FindingResource)
-
-	FindingSeverityAdjustment_CRITICAL = FindingSeverityAdjustment.AddMember("CRITICAL", smithyprelude.Unit)
-
-	FindingSeverityAdjustment_HIGH = FindingSeverityAdjustment.AddMember("HIGH", smithyprelude.Unit)
-
-	FindingSeverityAdjustment_MEDIUM = FindingSeverityAdjustment.AddMember("MEDIUM", smithyprelude.Unit)
-
-	FindingSeverityAdjustment_LOW = FindingSeverityAdjustment.AddMember("LOW", smithyprelude.Unit)
-
-	FindingSeverityAdjustment_INFORMATIONAL = FindingSeverityAdjustment.AddMember("INFORMATIONAL", smithyprelude.Unit)
-
-	FindingSeverityAdjustment_UNCHANGED = FindingSeverityAdjustment.AddMember("UNCHANGED", smithyprelude.Unit)
-
-	FindingVerdict_TRUE_POSITIVE = FindingVerdict.AddMember("TRUE_POSITIVE", smithyprelude.Unit)
-
-	FindingVerdict_FALSE_POSITIVE = FindingVerdict.AddMember("FALSE_POSITIVE", smithyprelude.Unit)
-
-	FindingVerdict_BENIGN_TRUE_POSITIVE = FindingVerdict.AddMember("BENIGN_TRUE_POSITIVE", smithyprelude.Unit)
-
-	FindingVerdict_NEEDS_REVIEW = FindingVerdict.AddMember("NEEDS_REVIEW", smithyprelude.Unit)
-
-	FindingValidation_verdict = FindingValidation.AddMember("verdict", FindingVerdict)
-
-	FindingValidation_blockingReason = FindingValidation.AddMember("blockingReason", FindingBlockingReason)
-
-	FindingValidation_confidence = FindingValidation.AddMember("confidence", smithyprelude.Double)
-
-	FindingValidation_rationale = FindingValidation.AddMember("rationale", _FindingDescription)
-
-	FindingValidation_severityAdjustment = FindingValidation.AddMember("severityAdjustment", FindingSeverityAdjustment)
-
-	FindingValidation_mitigatingControls = FindingValidation.AddMember("mitigatingControls", _FindingStringList)
-
-	FindingValidation_preconditions = FindingValidation.AddMember("preconditions", _FindingStringList)
-
-	FindingValidation_evidence = FindingValidation.AddMember("evidence", _FindingEvidenceList)
-
-	FindingVulnerability_title = FindingVulnerability.AddMember("title", _FindingTitle)
-
-	FindingVulnerability_description = FindingVulnerability.AddMember("description", _FindingDescription)
-
-	FindingVulnerability_cweId = FindingVulnerability.AddMember("cweId", _CweId)
-
-	FindingVulnerability_cweCaption = FindingVulnerability.AddMember("cweCaption", _FindingCategory)
-
-	FindingVulnerability_additionalCweIds = FindingVulnerability.AddMember("additionalCweIds", _CweIdList)
-
-	FindingVulnerability_cveId = FindingVulnerability.AddMember("cveId", _CveId)
-
-	FindingVulnerability_cvssBaseScore = FindingVulnerability.AddMember("cvssBaseScore", smithyprelude.Double)
-
-	FindingVulnerability_fixCoverage = FindingVulnerability.AddMember("fixCoverage", _FindingCategory)
-
-	FindingVulnerability_fixCoverageId = FindingVulnerability.AddMember("fixCoverageId", smithyprelude.Integer)
-
-	FindingVulnerability_locations = FindingVulnerability.AddMember("locations", _FindingLocationList)
-
-	FindingVulnerability_remediation = FindingVulnerability.AddMember("remediation", _FindingDescription)
-
-	FindingVulnerability_remediationReferences = FindingVulnerability.AddMember("remediationReferences", _FindingStringList)
-
-	FindingVulnerability_code = FindingVulnerability.AddMember("code", _FindingCodeSnippet)
-
-	FindingVulnerability_details = FindingVulnerability.AddMember("details", _FindingDescription)
-
-	FindingVulnerability_affectedPackages = FindingVulnerability.AddMember("affectedPackages", _AffectedPackageList)
-
-	_FindingVulnerabilityList_member = _FindingVulnerabilityList.AddMember("member", FindingVulnerability)
-
-	FlowVerdictValue_CONFIRMED = FlowVerdictValue.AddMember("CONFIRMED", smithyprelude.Unit)
-
-	FlowVerdictValue_DENIED = FlowVerdictValue.AddMember("DENIED", smithyprelude.Unit)
-
-	FlowVerdictValue_INCONCLUSIVE = FlowVerdictValue.AddMember("INCONCLUSIVE", smithyprelude.Unit)
-
-	FlowVerdict_flowId = FlowVerdict.AddMember("flowId", _AttackFlowId)
-
-	FlowVerdict_verdict = FlowVerdict.AddMember("verdict", FlowVerdictValue)
-
-	FlowVerdict_confidence = FlowVerdict.AddMember("confidence", _ValidationConfidence)
-
-	FlowVerdict_evidence = FlowVerdict.AddMember("evidence", _ArtifactCitations)
-
-	_FlowVerdicts_member = _FlowVerdicts.AddMember("member", FlowVerdict)
-
-	GitHubAuthorizationConfiguration_authorizationCode = GitHubAuthorizationConfiguration.AddMember("authorizationCode", _AuthorizationCode)
-
-	GitHubAuthorizationConfiguration_state = GitHubAuthorizationConfiguration.AddMember("state", _OAuthState)
-
-	GitHubAuthorizationConfiguration_redirectUrl = GitHubAuthorizationConfiguration.AddMember("redirectUrl", _RedirectUrl)
-
-	GitHubConfiguration_authorization = GitHubConfiguration.AddMember("authorization", GitHubAuthorizationConfiguration)
-
-	GitHubConfiguration_organizationName = GitHubConfiguration.AddMember("organizationName", _GitHubOrganizationName)
-
-	GitHubDetails_organizationName = GitHubDetails.AddMember("organizationName", _GitHubOrganizationName)
-
-	GitLabTargetType_GROUP = GitLabTargetType.AddMember("GROUP", smithyprelude.Unit)
-
-	GitLabTargetType_PROJECT = GitLabTargetType.AddMember("PROJECT", smithyprelude.Unit)
-
-	GitLabConfiguration_instanceUrl = GitLabConfiguration.AddMember("instanceUrl", _GitLabInstanceUrl)
-
-	GitLabConfiguration_targetType = GitLabConfiguration.AddMember("targetType", GitLabTargetType)
-
-	GitLabConfiguration_targetPath = GitLabConfiguration.AddMember("targetPath", _GitLabTargetPath)
-
-	GitLabConfiguration_accessToken = GitLabConfiguration.AddMember("accessToken", _GitLabAccessToken)
-
-	GitLabTokenRotation_AUTOMATIC = GitLabTokenRotation.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	GitLabTokenRotation_NONE = GitLabTokenRotation.AddMember("NONE", smithyprelude.Unit)
-
-	GitLabDetails_instanceUrl = GitLabDetails.AddMember("instanceUrl", _GitLabInstanceUrl)
-
-	GitLabDetails_targetType = GitLabDetails.AddMember("targetType", GitLabTargetType)
-
-	GitLabDetails_targetPath = GitLabDetails.AddMember("targetPath", _GitLabTargetPath)
-
-	GitLabDetails_tokenRotation = GitLabDetails.AddMember("tokenRotation", GitLabTokenRotation)
-
-	GitLabDetails_expiresAt = GitLabDetails.AddMember("expiresAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	IntegrationAuthorizationProviderType_GITHUB = IntegrationAuthorizationProviderType.AddMember("GITHUB", smithyprelude.Unit)
-
-	IntegrationType_GITHUB = IntegrationType.AddMember("GITHUB", smithyprelude.Unit)
-
-	IntegrationType_GITLAB = IntegrationType.AddMember("GITLAB", smithyprelude.Unit)
-
-	IntegrationType_S3 = IntegrationType.AddMember("S3", smithyprelude.Unit)
-
-	S3Details_bucket = S3Details.AddMember("bucket", _IntegrationS3BucketName)
-
-	S3Details_roleArn = S3Details.AddMember("roleArn", _IntegrationS3RoleArn)
-
-	ProviderDetails_github = ProviderDetails.AddMember("github", GitHubDetails)
-
-	ProviderDetails_gitlab = ProviderDetails.AddMember("gitlab", GitLabDetails)
-
-	ProviderDetails_s3 = ProviderDetails.AddMember("s3", S3Details)
-
-	IntegrationSummary_integrationId = IntegrationSummary.AddMember("integrationId", _IntegrationId)
-
-	IntegrationSummary_integrationArn = IntegrationSummary.AddMember("integrationArn", _IntegrationArn)
-
-	IntegrationSummary_name = IntegrationSummary.AddMember("name", _IntegrationName)
-
-	IntegrationSummary_integrationType = IntegrationSummary.AddMember("integrationType", IntegrationType)
-
-	IntegrationSummary_providerDetails = IntegrationSummary.AddMember("providerDetails", ProviderDetails)
-
-	IntegrationSummary_createdAt = IntegrationSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	IntegrationSummary_updatedAt = IntegrationSummary.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_IntegrationSummaries_member = _IntegrationSummaries.AddMember("member", IntegrationSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ValidationTerminalStatus_COMPLETED = ValidationTerminalStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ValidationTerminalStatus_FAILED = ValidationTerminalStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ValidationTerminalStatus_NO_SOURCE_AVAILABLE = ValidationTerminalStatus.AddMember("NO_SOURCE_AVAILABLE", smithyprelude.Unit)
-
-	ValidationTerminalStatus_PARTIAL = ValidationTerminalStatus.AddMember("PARTIAL", smithyprelude.Unit)
-
-	ValidationExploitArtifact_payload = ValidationExploitArtifact.AddMember("payload", _ArtifactText)
-
-	ValidationExploitArtifact_targetUrl = ValidationExploitArtifact.AddMember("targetUrl", _ArtifactCitation)
-
-	ValidationExploitArtifact_httpMethod = ValidationExploitArtifact.AddMember("httpMethod", ArtifactHttpMethod)
-
-	ValidationExploitArtifact_headers = ValidationExploitArtifact.AddMember("headers", _ArtifactHeaders)
-
-	ValidationExploitArtifact_responseStatus = ValidationExploitArtifact.AddMember("responseStatus", smithyprelude.Integer)
-
-	ValidationExploitArtifact_responseSnippet = ValidationExploitArtifact.AddMember("responseSnippet", _ArtifactProofBody)
-
-	ValidationExploitArtifact_effect = ValidationExploitArtifact.AddMember("effect", ExploitEffect)
-
-	ValidationProofMaterial_content = ValidationProofMaterial.AddMember("content", _ValidationProofMaterialText)
-
-	_ValidationProofMaterials_member = _ValidationProofMaterials.AddMember("member", ValidationProofMaterial)
-
-	ValidationProofCode_proofCode = ValidationProofCode.AddMember("proofCode", _ValidationProofMaterials)
-
-	ValidationProofOutput_consoleOutput = ValidationProofOutput.AddMember("consoleOutput", _ValidationProofConsoleOutput)
-
-	ValidationExecutedProof_code = ValidationExecutedProof.AddMember("code", ValidationProofCode)
-
-	ValidationExecutedProof_output = ValidationExecutedProof.AddMember("output", ValidationProofOutput)
-
-	ValidationExecutedProof_observedEffect = ValidationExecutedProof.AddMember("observedEffect", ExploitEffect)
-
-	ValidationSourceAnalysis_summary = ValidationSourceAnalysis.AddMember("summary", _ValidationProofSummary)
-
-	ValidationSourceAnalysis_inferredEffect = ValidationSourceAnalysis.AddMember("inferredEffect", ExploitEffect)
-
-	ReasoningStep_step = ReasoningStep.AddMember("step", smithyprelude.Integer)
-
-	ReasoningStep_claim = ReasoningStep.AddMember("claim", _ArtifactText)
-
-	ReasoningStep_source = ReasoningStep.AddMember("source", _ArtifactCitation)
-
-	ReasoningStep_confidence = ReasoningStep.AddMember("confidence", _ValidationConfidence)
-
-	_ReasoningSteps_member = _ReasoningSteps.AddMember("member", ReasoningStep)
-
-	PerFindingResult_findingId = PerFindingResult.AddMember("findingId", _FindingId)
-
-	PerFindingResult_exploitable = PerFindingResult.AddMember("exploitable", ExploitabilityVerdict)
-
-	PerFindingResult_confidence = PerFindingResult.AddMember("confidence", _ValidationConfidence)
-
-	PerFindingResult_flowVerdicts = PerFindingResult.AddMember("flowVerdicts", _FlowVerdicts)
-
-	PerFindingResult_reasoningChain = PerFindingResult.AddMember("reasoningChain", _ReasoningSteps)
-
-	PerFindingResult_exploitArtifact = PerFindingResult.AddMember("exploitArtifact", ValidationExploitArtifact)
-
-	_PerFindingResults_member = _PerFindingResults.AddMember("member", PerFindingResult)
-
-	ValidationEvidenceBody_exploitable = ValidationEvidenceBody.AddMember("exploitable", ExploitabilityVerdict)
-
-	ValidationEvidenceBody_terminalStatus = ValidationEvidenceBody.AddMember("terminalStatus", ValidationTerminalStatus)
-
-	ValidationEvidenceBody_flowVerdicts = ValidationEvidenceBody.AddMember("flowVerdicts", _FlowVerdicts)
-
-	ValidationEvidenceBody_attackFlowsConfirmed = ValidationEvidenceBody.AddMember("attackFlowsConfirmed", _AttackFlowIds)
-
-	ValidationEvidenceBody_exploitArtifact = ValidationEvidenceBody.AddMember("exploitArtifact", ValidationExploitArtifact)
-
-	ValidationEvidenceBody_executedProof = ValidationEvidenceBody.AddMember("executedProof", ValidationExecutedProof)
-
-	ValidationEvidenceBody_sourceAnalysis = ValidationEvidenceBody.AddMember("sourceAnalysis", ValidationSourceAnalysis)
-
-	ValidationEvidenceBody_perFindingResults = ValidationEvidenceBody.AddMember("perFindingResults", _PerFindingResults)
-
-	SignalDimension_EXPLOITABILITY = SignalDimension.AddMember("EXPLOITABILITY", smithyprelude.Unit)
-
-	SignalDimension_BLAST_RADIUS = SignalDimension.AddMember("BLAST_RADIUS", smithyprelude.Unit)
-
-	SignalDimension_NETWORK_EXPOSURE = SignalDimension.AddMember("NETWORK_EXPOSURE", smithyprelude.Unit)
-
-	SignalDimension_PRECONDITION = SignalDimension.AddMember("PRECONDITION", smithyprelude.Unit)
-
-	SignalDimension_CODE_CONTEXT = SignalDimension.AddMember("CODE_CONTEXT", smithyprelude.Unit)
-
-	SignalDimension_LIKELIHOOD_ASSESSMENT = SignalDimension.AddMember("LIKELIHOOD_ASSESSMENT", smithyprelude.Unit)
-
-	SignalDimension_IMPACT_ASSESSMENT = SignalDimension.AddMember("IMPACT_ASSESSMENT", smithyprelude.Unit)
-
-	SignalStrength_NONE = SignalStrength.AddMember("NONE", smithyprelude.Unit)
-
-	SignalStrength_WEAK = SignalStrength.AddMember("WEAK", smithyprelude.Unit)
-
-	SignalStrength_MODERATE = SignalStrength.AddMember("MODERATE", smithyprelude.Unit)
-
-	SignalStrength_STRONG = SignalStrength.AddMember("STRONG", smithyprelude.Unit)
-
-	SignalConfidenceReasoning_summary = SignalConfidenceReasoning.AddMember("summary", _ArtifactText)
-
-	SignalConfidenceReasoning_factors = SignalConfidenceReasoning.AddMember("factors", _ArtifactCitations)
-
-	SignalBand_VERY_LOW = SignalBand.AddMember("VERY_LOW", smithyprelude.Unit)
-
-	SignalBand_LOW = SignalBand.AddMember("LOW", smithyprelude.Unit)
-
-	SignalBand_MODERATE = SignalBand.AddMember("MODERATE", smithyprelude.Unit)
-
-	SignalBand_HIGH = SignalBand.AddMember("HIGH", smithyprelude.Unit)
-
-	SignalComputation_likelihoodBand = SignalComputation.AddMember("likelihoodBand", SignalBand)
-
-	SignalComputation_impactBand = SignalComputation.AddMember("impactBand", SignalBand)
-
-	SignalComputation_barriers = SignalComputation.AddMember("barriers", smithyprelude.Integer)
-
-	SignalBasis_CODE = SignalBasis.AddMember("CODE", smithyprelude.Unit)
-
-	SignalBasis_GRAPH = SignalBasis.AddMember("GRAPH", smithyprelude.Unit)
-
-	SignalBasis_FINDING = SignalBasis.AddMember("FINDING", smithyprelude.Unit)
-
-	SignalBasis_INFERRED = SignalBasis.AddMember("INFERRED", smithyprelude.Unit)
-
-	SignalBasis_NO_EVIDENCE_DEFAULT = SignalBasis.AddMember("NO_EVIDENCE_DEFAULT", smithyprelude.Unit)
-
-	SignalPrecondition_value = SignalPrecondition.AddMember("value", smithyprelude.Boolean)
-
-	SignalPrecondition_basis = SignalPrecondition.AddMember("basis", SignalBasis)
-
-	SignalPrecondition_reason = SignalPrecondition.AddMember("reason", _ArtifactText)
-
-	SignalPrecondition_missingInfo = SignalPrecondition.AddMember("missingInfo", _ArtifactText)
-
-	SignalAccessLevel_NONE = SignalAccessLevel.AddMember("NONE", smithyprelude.Unit)
-
-	SignalAccessLevel_ANY_AUTHENTICATED = SignalAccessLevel.AddMember("ANY_AUTHENTICATED", smithyprelude.Unit)
-
-	SignalAccessLevel_PRIVILEGED = SignalAccessLevel.AddMember("PRIVILEGED", smithyprelude.Unit)
-
-	SignalAccessPrecondition_value = SignalAccessPrecondition.AddMember("value", SignalAccessLevel)
-
-	SignalAccessPrecondition_basis = SignalAccessPrecondition.AddMember("basis", SignalBasis)
-
-	SignalAccessPrecondition_reason = SignalAccessPrecondition.AddMember("reason", _ArtifactText)
-
-	SignalAccessPrecondition_missingInfo = SignalAccessPrecondition.AddMember("missingInfo", _ArtifactText)
-
-	SignalPreconditions_reachableFromAttacker = SignalPreconditions.AddMember("reachableFromAttacker", SignalPrecondition)
-
-	SignalPreconditions_configurationNeeded = SignalPreconditions.AddMember("configurationNeeded", SignalPrecondition)
-
-	SignalPreconditions_accessLevel = SignalPreconditions.AddMember("accessLevel", SignalAccessPrecondition)
-
-	SignalPreconditions_userInteractionRequired = SignalPreconditions.AddMember("userInteractionRequired", SignalPrecondition)
-
-	SignalAttackerGains_EXECUTE = SignalAttackerGains.AddMember("EXECUTE", smithyprelude.Unit)
-
-	SignalAttackerGains_MODIFY_PRIVILEGED = SignalAttackerGains.AddMember("MODIFY_PRIVILEGED", smithyprelude.Unit)
-
-	SignalAttackerGains_MODIFY_DATA = SignalAttackerGains.AddMember("MODIFY_DATA", smithyprelude.Unit)
-
-	SignalAttackerGains_MODIFY_COSMETIC = SignalAttackerGains.AddMember("MODIFY_COSMETIC", smithyprelude.Unit)
-
-	SignalAttackerGains_READ = SignalAttackerGains.AddMember("READ", smithyprelude.Unit)
-
-	SignalAttackerGains_NEITHER = SignalAttackerGains.AddMember("NEITHER", smithyprelude.Unit)
-
-	SignalAttackerGainsDimension_value = SignalAttackerGainsDimension.AddMember("value", SignalAttackerGains)
-
-	SignalAttackerGainsDimension_basis = SignalAttackerGainsDimension.AddMember("basis", SignalBasis)
-
-	SignalAttackerGainsDimension_reason = SignalAttackerGainsDimension.AddMember("reason", _ArtifactText)
-
-	SignalAttackerGainsDimension_missingInfo = SignalAttackerGainsDimension.AddMember("missingInfo", _ArtifactText)
-
-	SignalBlastRadius_CROSS_TENANT = SignalBlastRadius.AddMember("CROSS_TENANT", smithyprelude.Unit)
-
-	SignalBlastRadius_OTHER_USERS_IN_TENANT = SignalBlastRadius.AddMember("OTHER_USERS_IN_TENANT", smithyprelude.Unit)
-
-	SignalBlastRadius_OWN_SCOPE = SignalBlastRadius.AddMember("OWN_SCOPE", smithyprelude.Unit)
-
-	SignalBlastRadiusDimension_value = SignalBlastRadiusDimension.AddMember("value", SignalBlastRadius)
-
-	SignalBlastRadiusDimension_basis = SignalBlastRadiusDimension.AddMember("basis", SignalBasis)
-
-	SignalBlastRadiusDimension_reason = SignalBlastRadiusDimension.AddMember("reason", _ArtifactText)
-
-	SignalBlastRadiusDimension_missingInfo = SignalBlastRadiusDimension.AddMember("missingInfo", _ArtifactText)
-
-	SignalTargetValue_HIGH = SignalTargetValue.AddMember("HIGH", smithyprelude.Unit)
-
-	SignalTargetValue_MEDIUM = SignalTargetValue.AddMember("MEDIUM", smithyprelude.Unit)
-
-	SignalTargetValue_LOW = SignalTargetValue.AddMember("LOW", smithyprelude.Unit)
-
-	SignalTargetValueDimension_value = SignalTargetValueDimension.AddMember("value", SignalTargetValue)
-
-	SignalTargetValueDimension_basis = SignalTargetValueDimension.AddMember("basis", SignalBasis)
-
-	SignalTargetValueDimension_reason = SignalTargetValueDimension.AddMember("reason", _ArtifactText)
-
-	SignalTargetValueDimension_missingInfo = SignalTargetValueDimension.AddMember("missingInfo", _ArtifactText)
-
-	SignalImpactDimensions_attackerGains = SignalImpactDimensions.AddMember("attackerGains", SignalAttackerGainsDimension)
-
-	SignalImpactDimensions_blastRadius = SignalImpactDimensions.AddMember("blastRadius", SignalBlastRadiusDimension)
-
-	SignalImpactDimensions_targetValue = SignalImpactDimensions.AddMember("targetValue", SignalTargetValueDimension)
-
-	ValidationConfidenceTier_SOURCE_READ = ValidationConfidenceTier.AddMember("SOURCE_READ", smithyprelude.Unit)
-
-	ValidationConfidenceTier_STATIC_PROVEN = ValidationConfidenceTier.AddMember("STATIC_PROVEN", smithyprelude.Unit)
-
-	ValidationConfidenceTier_BUILD_PROVEN = ValidationConfidenceTier.AddMember("BUILD_PROVEN", smithyprelude.Unit)
-
-	ValidationConfidenceTier_RUNTIME_PROVEN = ValidationConfidenceTier.AddMember("RUNTIME_PROVEN", smithyprelude.Unit)
-
-	SignalExploitability_verdict = SignalExploitability.AddMember("verdict", ExploitabilityVerdict)
-
-	SignalExploitability_reachedCrownJewels = SignalExploitability.AddMember("reachedCrownJewels", smithyprelude.Boolean)
-
-	SignalExploitability_highestLayerReached = SignalExploitability.AddMember("highestLayerReached", smithyprelude.Integer)
-
-	SignalExploitability_confidenceTier = SignalExploitability.AddMember("confidenceTier", ValidationConfidenceTier)
-
-	SignalExploitability_scriptable = SignalExploitability.AddMember("scriptable", smithyprelude.Boolean)
-
-	SignalExploitability_sourceValidationArtifactId = SignalExploitability.AddMember("sourceValidationArtifactId", _IssueArtifactId)
-
-	PrevalidationSignal_subjectRef = PrevalidationSignal.AddMember("subjectRef", _ArtifactCitation)
-
-	PrevalidationSignal_dimension = PrevalidationSignal.AddMember("dimension", SignalDimension)
-
-	PrevalidationSignal_signalStrength = PrevalidationSignal.AddMember("signalStrength", SignalStrength)
-
-	PrevalidationSignal_conclusion = PrevalidationSignal.AddMember("conclusion", _ArtifactText)
-
-	PrevalidationSignal_producerId = PrevalidationSignal.AddMember("producerId", _IssueArtifactProducerName)
-
-	PrevalidationSignal_producerVersion = PrevalidationSignal.AddMember("producerVersion", _ArtifactCitation)
-
-	PrevalidationSignal_confidence = PrevalidationSignal.AddMember("confidence", _ValidationConfidence)
-
-	PrevalidationSignal_confidenceReasoning = PrevalidationSignal.AddMember("confidenceReasoning", SignalConfidenceReasoning)
-
-	PrevalidationSignal_computed = PrevalidationSignal.AddMember("computed", SignalComputation)
-
-	PrevalidationSignal_preconditions = PrevalidationSignal.AddMember("preconditions", SignalPreconditions)
-
-	PrevalidationSignal_impactDimensions = PrevalidationSignal.AddMember("impactDimensions", SignalImpactDimensions)
-
-	PrevalidationSignal_exploitability = PrevalidationSignal.AddMember("exploitability", SignalExploitability)
-
-	_PrevalidationSignals_member = _PrevalidationSignals.AddMember("member", PrevalidationSignal)
-
-	PrevalidationSignalsBody_producedBy = PrevalidationSignalsBody.AddMember("producedBy", _IssueArtifactProducerName)
-
-	PrevalidationSignalsBody_signals = PrevalidationSignalsBody.AddMember("signals", _PrevalidationSignals)
-
-	PatchFormat_GIT_MAILBOX_PATCH = PatchFormat.AddMember("GIT_MAILBOX_PATCH", smithyprelude.Unit)
-
-	PatchFormat_GIT_BINARY_DIFF = PatchFormat.AddMember("GIT_BINARY_DIFF", smithyprelude.Unit)
-
-	PatchFormat_GIT_DIFF = PatchFormat.AddMember("GIT_DIFF", smithyprelude.Unit)
-
-	RemediationProposalBody_patch = RemediationProposalBody.AddMember("patch", _IssueArtifactContent)
-
-	RemediationProposalBody_format = RemediationProposalBody.AddMember("format", PatchFormat)
-
-	RemediationProposalBody_filename = RemediationProposalBody.AddMember("filename", _ArtifactCitation)
-
-	RemediationProposalBody_patchSha256 = RemediationProposalBody.AddMember("patchSha256", _ArtifactSha256)
-
-	PatchDelivery_status = PatchDelivery.AddMember("status", DeliveryStatus)
-
-	PatchDelivery_target = PatchDelivery.AddMember("target", DestinationTarget)
-
-	PatchDelivery_updatedAt = PatchDelivery.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	PatchBody_patch = PatchBody.AddMember("patch", _IssueArtifactContent)
-
-	PatchBody_format = PatchBody.AddMember("format", PatchFormat)
-
-	PatchBody_repositoryName = PatchBody.AddMember("repositoryName", _BuildRepositoryName)
-
-	PatchBody_patchSha256 = PatchBody.AddMember("patchSha256", _ArtifactSha256)
-
-	PatchBody_sizeBytes = PatchBody.AddMember("sizeBytes", smithyprelude.Long)
-
-	PatchBody_delivery = PatchBody.AddMember("delivery", PatchDelivery)
-
-	IssueArtifactBody_validationEvidence = IssueArtifactBody.AddMember("validationEvidence", ValidationEvidenceBody)
-
-	IssueArtifactBody_prevalidationSignals = IssueArtifactBody.AddMember("prevalidationSignals", PrevalidationSignalsBody)
-
-	IssueArtifactBody_remediationProposal = IssueArtifactBody.AddMember("remediationProposal", RemediationProposalBody)
-
-	IssueArtifactBody_patch = IssueArtifactBody.AddMember("patch", PatchBody)
-
-	IssueArtifactBody_raw = IssueArtifactBody.AddMember("raw", _IssueArtifactContent)
-
-	IssueEvidenceAvailability_NONE = IssueEvidenceAvailability.AddMember("NONE", smithyprelude.Unit)
-
-	IssueEvidenceAvailability_AVAILABLE = IssueEvidenceAvailability.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	_IssueFindingIds_member = _IssueFindingIds.AddMember("member", _FindingId)
-
-	IssuePatchDeliveryStatus_PENDING = IssuePatchDeliveryStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	IssuePatchDeliveryStatus_SUCCEEDED = IssuePatchDeliveryStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	IssuePatchDeliveryStatus_FAILED = IssuePatchDeliveryStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	IssuePatchDeliveryStatus_SKIPPED = IssuePatchDeliveryStatus.AddMember("SKIPPED", smithyprelude.Unit)
-
-	_IssuePatchDeliveryFailureReasons_member = _IssuePatchDeliveryFailureReasons.AddMember("member", DeliveryReason)
-
-	IssuePatchDelivery_status = IssuePatchDelivery.AddMember("status", IssuePatchDeliveryStatus)
-
-	IssuePatchDelivery_patchCount = IssuePatchDelivery.AddMember("patchCount", _IssuePatchDeliveryCount)
-
-	IssuePatchDelivery_succeededCount = IssuePatchDelivery.AddMember("succeededCount", _IssuePatchDeliveryCount)
-
-	IssuePatchDelivery_failedCount = IssuePatchDelivery.AddMember("failedCount", _IssuePatchDeliveryCount)
-
-	IssuePatchDelivery_failureReasons = IssuePatchDelivery.AddMember("failureReasons", _IssuePatchDeliveryFailureReasons)
-
-	KubernetesClusterRoleConfiguration_roleArn = KubernetesClusterRoleConfiguration.AddMember("roleArn", _KubernetesClusterRoleArn)
-
-	KubernetesClusterRoleConfiguration_externalId = KubernetesClusterRoleConfiguration.AddMember("externalId", _KubernetesClusterExternalId)
-
-	KubernetesClusterRoleUpdate_set = KubernetesClusterRoleUpdate.AddMember("set", KubernetesClusterRoleConfiguration)
-
-	KubernetesClusterRoleUpdate_remove = KubernetesClusterRoleUpdate.AddMember("remove", RemoveKubernetesClusterRole)
-
-	OAuthCodeChallengeMethod_S256 = OAuthCodeChallengeMethod.AddMember("S256", smithyprelude.Unit)
-
-	S3Configuration_bucket = S3Configuration.AddMember("bucket", _IntegrationS3BucketName)
-
-	S3Configuration_roleArn = S3Configuration.AddMember("roleArn", _IntegrationS3RoleArn)
-
-	S3Configuration_externalId = S3Configuration.AddMember("externalId", _IntegrationS3ExternalId)
-
-	ProviderConfiguration_github = ProviderConfiguration.AddMember("github", GitHubConfiguration)
-
-	ProviderConfiguration_gitlab = ProviderConfiguration.AddMember("gitlab", GitLabConfiguration)
-
-	ProviderConfiguration_s3 = ProviderConfiguration.AddMember("s3", S3Configuration)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	UpdateCodeConfiguration_sourceConfiguration = UpdateCodeConfiguration.AddMember("sourceConfiguration", EnvironmentSourceConfiguration)
-
-	UpdateCodeConfiguration_environmentConfiguration = UpdateCodeConfiguration.AddMember("environmentConfiguration", EnvironmentConfiguration)
-
-	UpdateEnvironmentConfiguration_codeConfiguration = UpdateEnvironmentConfiguration.AddMember("codeConfiguration", UpdateCodeConfiguration)
-
-	UpdateS3Configuration_roleArn = UpdateS3Configuration.AddMember("roleArn", _IntegrationS3RoleArn)
-
-	UpdateS3Configuration_externalId = UpdateS3Configuration.AddMember("externalId", _IntegrationS3ExternalId)
-
-	UpdateProviderConfiguration_s3 = UpdateProviderConfiguration.AddMember("s3", UpdateS3Configuration)
-
-	ValidationExceptionField_path = ValidationExceptionField.AddMember("path", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	AssociateCollectorInput_environmentId = AssociateCollectorInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	AssociateCollectorInput_clientToken = AssociateCollectorInput.AddMember("clientToken", _AssociationClientToken)
-
-	AssociateCollectorInput_collectorArn = AssociateCollectorInput.AddMember("collectorArn", _CollectorArn)
-
-	AssociateCollectorInput_collectorDataAccessRoleArn = AssociateCollectorInput.AddMember("collectorDataAccessRoleArn", _EnvironmentSourceRoleArn)
-
-	AssociateCollectorOutput_environmentId = AssociateCollectorOutput.AddMember("environmentId", _EnvironmentId)
-
-	AssociateCollectorOutput_environmentArn = AssociateCollectorOutput.AddMember("environmentArn", _EnvironmentArn)
-
-	AssociateCollectorOutput_associatedCollector = AssociateCollectorOutput.AddMember("associatedCollector", AssociatedCollector)
-
-	CreateCodeFindingInput_environmentId = CreateCodeFindingInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	CreateCodeFindingInput_ocsfDocument = CreateCodeFindingInput.AddMember("ocsfDocument", smithyprelude.Document)
-
-	CreateCodeFindingInput_clientToken = CreateCodeFindingInput.AddMember("clientToken", _FindingClientToken)
-
-	CreateCodeFindingOutput_findingId = CreateCodeFindingOutput.AddMember("findingId", _FindingId)
-
-	CreateCodeFindingOutput_findingArn = CreateCodeFindingOutput.AddMember("findingArn", _FindingArn)
-
-	CreateCodeFindingOutput_title = CreateCodeFindingOutput.AddMember("title", _FindingTitle)
-
-	CreateCodeFindingOutput_status = CreateCodeFindingOutput.AddMember("status", FindingStatus)
-
-	CreateCodeFindingOutput_createdAt = CreateCodeFindingOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateCodeScanInput_environmentId = CreateCodeScanInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	CreateCodeScanInput_clientToken = CreateCodeScanInput.AddMember("clientToken", _ScanClientToken)
-
-	CreateCodeScanOutput_scan = CreateCodeScanOutput.AddMember("scan", CodeScanSummary)
-
-	CreateCollectorInput_type = CreateCollectorInput.AddMember("type", CollectorType)
-
-	CreateCollectorInput_kubernetesClusterRole = CreateCollectorInput.AddMember("kubernetesClusterRole", KubernetesClusterRoleConfiguration, &smithytraits.JSONName{Name: "k8ClusterRole"})
-
-	CreateCollectorInput_clientToken = CreateCollectorInput.AddMember("clientToken", _CollectorClientToken)
-
-	CreateCollectorOutput_collectorId = CreateCollectorOutput.AddMember("collectorId", _CollectorId)
-
-	CreateCollectorOutput_collectorArn = CreateCollectorOutput.AddMember("collectorArn", _CollectorArn)
-
-	CreateCollectorOutput_type = CreateCollectorOutput.AddMember("type", CollectorType)
-
-	CreateCollectorOutput_status = CreateCollectorOutput.AddMember("status", CollectorStatus)
-
-	CreateCollectorOutput_createdAt = CreateCollectorOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateEnvironmentInput_name = CreateEnvironmentInput.AddMember("name", _EnvironmentName)
-
-	CreateEnvironmentInput_configuration = CreateEnvironmentInput.AddMember("configuration", CreateEnvironmentConfiguration)
-
-	CreateEnvironmentOutput_environmentId = CreateEnvironmentOutput.AddMember("environmentId", _EnvironmentId)
-
-	CreateEnvironmentOutput_environmentArn = CreateEnvironmentOutput.AddMember("environmentArn", _EnvironmentArn)
-
-	CreateEnvironmentOutput_status = CreateEnvironmentOutput.AddMember("status", EnvironmentStatus)
-
-	CreateEnvironmentOutput_createdAt = CreateEnvironmentOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateIntegrationInput_clientToken = CreateIntegrationInput.AddMember("clientToken", _IntegrationClientToken)
-
-	CreateIntegrationInput_name = CreateIntegrationInput.AddMember("name", _IntegrationName)
-
-	CreateIntegrationInput_providerConfiguration = CreateIntegrationInput.AddMember("providerConfiguration", ProviderConfiguration)
-
-	CreateIntegrationOutput_integrationId = CreateIntegrationOutput.AddMember("integrationId", _IntegrationId)
-
-	CreateIntegrationOutput_integrationArn = CreateIntegrationOutput.AddMember("integrationArn", _IntegrationArn)
-
-	CreateIntegrationOutput_createdAt = CreateIntegrationOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DeleteCollectorInput_collectorId = DeleteCollectorInput.AddMember("collectorId", _CollectorId, &smithytraits.HTTPLabel{})
-
-	DeleteEnvironmentInput_environmentId = DeleteEnvironmentInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	DeleteIntegrationInput_integrationId = DeleteIntegrationInput.AddMember("integrationId", _IntegrationId, &smithytraits.HTTPLabel{})
-
-	DisassociateCollectorInput_environmentId = DisassociateCollectorInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	DisassociateCollectorInput_collectorArn = DisassociateCollectorInput.AddMember("collectorArn", _CollectorArn)
-
-	GetCodeFindingInput_environmentId = GetCodeFindingInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	GetCodeFindingInput_findingId = GetCodeFindingInput.AddMember("findingId", _FindingId, &smithytraits.HTTPLabel{})
-
-	GetCodeFindingOutput_type = GetCodeFindingOutput.AddMember("type", FindingType)
-
-	GetCodeFindingOutput_title = GetCodeFindingOutput.AddMember("title", _FindingTitle)
-
-	GetCodeFindingOutput_severity = GetCodeFindingOutput.AddMember("severity", FindingSeverityId)
-
-	GetCodeFindingOutput_summary = GetCodeFindingOutput.AddMember("summary", _FindingDescription)
-
-	GetCodeFindingOutput_detailedDescription = GetCodeFindingOutput.AddMember("detailedDescription", _FindingDescription)
-
-	GetCodeFindingOutput_category = GetCodeFindingOutput.AddMember("category", _FindingCategory)
-
-	GetCodeFindingOutput_subCategory = GetCodeFindingOutput.AddMember("subCategory", _FindingCategory)
-
-	GetCodeFindingOutput_cweIds = GetCodeFindingOutput.AddMember("cweIds", _CweIdList)
-
-	GetCodeFindingOutput_owaspCategory = GetCodeFindingOutput.AddMember("owaspCategory", _FindingCategory)
-
-	GetCodeFindingOutput_mitigation = GetCodeFindingOutput.AddMember("mitigation", _FindingDescription)
-
-	GetCodeFindingOutput_filePath = GetCodeFindingOutput.AddMember("filePath", _FindingFilePath)
-
-	GetCodeFindingOutput_lineNumber = GetCodeFindingOutput.AddMember("lineNumber", smithyprelude.Integer)
-
-	GetCodeFindingOutput_cveId = GetCodeFindingOutput.AddMember("cveId", _CveId)
-
-	GetCodeFindingOutput_cvssBaseScore = GetCodeFindingOutput.AddMember("cvssBaseScore", smithyprelude.Double)
-
-	GetCodeFindingOutput_affectedPackages = GetCodeFindingOutput.AddMember("affectedPackages", _AffectedPackageList)
-
-	GetCodeFindingOutput_vulnerableCode = GetCodeFindingOutput.AddMember("vulnerableCode", _FindingCodeSnippet)
-
-	GetCodeFindingOutput_relevantInputs = GetCodeFindingOutput.AddMember("relevantInputs", _FindingStringList)
-
-	GetCodeFindingOutput_stepsToReproduce = GetCodeFindingOutput.AddMember("stepsToReproduce", _FindingStringList)
-
-	GetCodeFindingOutput_validation = GetCodeFindingOutput.AddMember("validation", FindingValidation)
-
-	GetCodeFindingOutput_endLine = GetCodeFindingOutput.AddMember("endLine", smithyprelude.Integer)
-
-	GetCodeFindingOutput_mitreTechniques = GetCodeFindingOutput.AddMember("mitreTechniques", _FindingStringList)
-
-	GetCodeFindingOutput_remediationReferences = GetCodeFindingOutput.AddMember("remediationReferences", _FindingStringList)
-
-	GetCodeFindingOutput_ocsfClass = GetCodeFindingOutput.AddMember("ocsfClass", FindingOcsfClass)
-
-	GetCodeFindingOutput_ocsfSchemaVersion = GetCodeFindingOutput.AddMember("ocsfSchemaVersion", _FindingCategory)
-
-	GetCodeFindingOutput_productName = GetCodeFindingOutput.AddMember("productName", _FindingCategory)
-
-	GetCodeFindingOutput_productVendorName = GetCodeFindingOutput.AddMember("productVendorName", _FindingCategory)
-
-	GetCodeFindingOutput_productVersion = GetCodeFindingOutput.AddMember("productVersion", _FindingCategory)
-
-	GetCodeFindingOutput_sourceStatus = GetCodeFindingOutput.AddMember("sourceStatus", _FindingCategory)
-
-	GetCodeFindingOutput_sourceStatusId = GetCodeFindingOutput.AddMember("sourceStatusId", smithyprelude.Integer)
-
-	GetCodeFindingOutput_firstSeenAt = GetCodeFindingOutput.AddMember("firstSeenAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeFindingOutput_findingTypes = GetCodeFindingOutput.AddMember("findingTypes", _FindingStringList)
-
-	GetCodeFindingOutput_vulnerabilities = GetCodeFindingOutput.AddMember("vulnerabilities", _FindingVulnerabilityList)
-
-	GetCodeFindingOutput_resources = GetCodeFindingOutput.AddMember("resources", _FindingResourceList)
-
-	GetCodeFindingOutput_posture = GetCodeFindingOutput.AddMember("posture", FindingPosture)
-
-	GetCodeFindingOutput_findingId = GetCodeFindingOutput.AddMember("findingId", _FindingId)
-
-	GetCodeFindingOutput_findingArn = GetCodeFindingOutput.AddMember("findingArn", _FindingArn)
-
-	GetCodeFindingOutput_environmentId = GetCodeFindingOutput.AddMember("environmentId", _EnvironmentId)
-
-	GetCodeFindingOutput_source = GetCodeFindingOutput.AddMember("source", _FindingSource)
-
-	GetCodeFindingOutput_sourceFindingId = GetCodeFindingOutput.AddMember("sourceFindingId", _SourceFindingId)
-
-	GetCodeFindingOutput_reportedAt = GetCodeFindingOutput.AddMember("reportedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeFindingOutput_status = GetCodeFindingOutput.AddMember("status", FindingStatus)
-
-	GetCodeFindingOutput_statusUpdatedAt = GetCodeFindingOutput.AddMember("statusUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeFindingOutput_createdAt = GetCodeFindingOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeFindingOutput_scanRunId = GetCodeFindingOutput.AddMember("scanRunId", _ScanRunId)
-
-	GetCodeFindingOutput_statusMessage = GetCodeFindingOutput.AddMember("statusMessage", _FindingStatusMessage)
-
-	GetCodeFindingOutput_discardReason = GetCodeFindingOutput.AddMember("discardReason", FindingDiscardReason)
-
-	GetCodeFindingOutput_discardReasoning = GetCodeFindingOutput.AddMember("discardReasoning", _FindingStatusMessage)
-
-	GetCodeFindingOutput_duplicateOfIssueId = GetCodeFindingOutput.AddMember("duplicateOfIssueId", _IssueId)
-
-	GetCodeFindingOutput_createdIssueId = GetCodeFindingOutput.AddMember("createdIssueId", _IssueId)
-
-	GetCodeFindingOutput_completedAt = GetCodeFindingOutput.AddMember("completedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeIssueArtifactInput_environmentId = GetCodeIssueArtifactInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	GetCodeIssueArtifactInput_issueId = GetCodeIssueArtifactInput.AddMember("issueId", _IssueId, &smithytraits.HTTPLabel{})
-
-	GetCodeIssueArtifactInput_artifactId = GetCodeIssueArtifactInput.AddMember("artifactId", _IssueArtifactId, &smithytraits.HTTPLabel{})
-
-	GetCodeIssueArtifactOutput_artifactId = GetCodeIssueArtifactOutput.AddMember("artifactId", _IssueArtifactId)
-
-	GetCodeIssueArtifactOutput_artifactType = GetCodeIssueArtifactOutput.AddMember("artifactType", IssueArtifactType)
-
-	GetCodeIssueArtifactOutput_mediaType = GetCodeIssueArtifactOutput.AddMember("mediaType", _IssueArtifactMediaType)
-
-	GetCodeIssueArtifactOutput_body = GetCodeIssueArtifactOutput.AddMember("body", IssueArtifactBody)
-
-	GetCodeIssueArtifactOutput_metadata = GetCodeIssueArtifactOutput.AddMember("metadata", smithyprelude.Document)
-
-	GetCodeIssueArtifactOutput_producer = GetCodeIssueArtifactOutput.AddMember("producer", IssueArtifactProducerSummary)
-
-	GetCodeIssueArtifactOutput_createdAt = GetCodeIssueArtifactOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeIssueInput_environmentId = GetCodeIssueInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	GetCodeIssueInput_issueId = GetCodeIssueInput.AddMember("issueId", _IssueId, &smithytraits.HTTPLabel{})
-
-	GetCodeIssueOutput_issueId = GetCodeIssueOutput.AddMember("issueId", _IssueId)
-
-	GetCodeIssueOutput_issueArn = GetCodeIssueOutput.AddMember("issueArn", _IssueArn)
-
-	GetCodeIssueOutput_name = GetCodeIssueOutput.AddMember("name", _IssueName)
-
-	GetCodeIssueOutput_synopsis = GetCodeIssueOutput.AddMember("synopsis", _IssueSynopsis)
-
-	GetCodeIssueOutput_severity = GetCodeIssueOutput.AddMember("severity", IssueSeverity)
-
-	GetCodeIssueOutput_confidence = GetCodeIssueOutput.AddMember("confidence", _IssueConfidence)
-
-	GetCodeIssueOutput_severityReasoning = GetCodeIssueOutput.AddMember("severityReasoning", _IssueSeverityReasoning)
-
-	GetCodeIssueOutput_summary = GetCodeIssueOutput.AddMember("summary", _IssueRemediationSummary)
-
-	GetCodeIssueOutput_findingIds = GetCodeIssueOutput.AddMember("findingIds", _IssueFindingIds)
-
-	GetCodeIssueOutput_status = GetCodeIssueOutput.AddMember("status", IssueStatus)
-
-	GetCodeIssueOutput_phase = GetCodeIssueOutput.AddMember("phase", IssuePhase)
-
-	GetCodeIssueOutput_statusReason = GetCodeIssueOutput.AddMember("statusReason", IssueStatusReason)
-
-	GetCodeIssueOutput_statusMessage = GetCodeIssueOutput.AddMember("statusMessage", _IssueStatusMessage)
-
-	GetCodeIssueOutput_statusUpdatedAt = GetCodeIssueOutput.AddMember("statusUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeIssueOutput_createdAt = GetCodeIssueOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeIssueOutput_updatedAt = GetCodeIssueOutput.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCodeIssueOutput_evidenceAvailability = GetCodeIssueOutput.AddMember("evidenceAvailability", IssueEvidenceAvailability)
-
-	GetCodeIssueOutput_patchDelivery = GetCodeIssueOutput.AddMember("patchDelivery", IssuePatchDelivery)
-
-	GetCodeScanInput_environmentId = GetCodeScanInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	GetCodeScanInput_scanRunId = GetCodeScanInput.AddMember("scanRunId", _ScanRunId, &smithytraits.HTTPLabel{})
-
-	GetCodeScanOutput_scan = GetCodeScanOutput.AddMember("scan", CodeScanData)
-
-	GetCollectorDataAccessAuthorizationInput_accountId = GetCollectorDataAccessAuthorizationInput.AddMember("accountId", _AwsAccountId, &smithytraits.HTTPQuery{Name: "accountId"})
-
-	GetCollectorDataAccessAuthorizationInput_collectorId = GetCollectorDataAccessAuthorizationInput.AddMember("collectorId", _CollectorId, &smithytraits.HTTPLabel{})
-
-	GetCollectorDataAccessAuthorizationInput_environmentArn = GetCollectorDataAccessAuthorizationInput.AddMember("environmentArn", _EnvironmentArn, &smithytraits.HTTPQuery{Name: "environmentArn"})
-
-	GetCollectorInput_collectorId = GetCollectorInput.AddMember("collectorId", _CollectorId, &smithytraits.HTTPLabel{})
-
-	GetCollectorOutput_collectorId = GetCollectorOutput.AddMember("collectorId", _CollectorId)
-
-	GetCollectorOutput_collectorArn = GetCollectorOutput.AddMember("collectorArn", _CollectorArn)
-
-	GetCollectorOutput_type = GetCollectorOutput.AddMember("type", CollectorType)
-
-	GetCollectorOutput_status = GetCollectorOutput.AddMember("status", CollectorStatus)
-
-	GetCollectorOutput_configRecorderArn = GetCollectorOutput.AddMember("configRecorderArn", _ConfigRecorderArn)
-
-	GetCollectorOutput_kubernetesClusterRoleArn = GetCollectorOutput.AddMember("kubernetesClusterRoleArn", _KubernetesClusterRoleArn, &smithytraits.JSONName{Name: "k8ClusterRole"})
-
-	GetCollectorOutput_createdAt = GetCollectorOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetCollectorOutput_updatedAt = GetCollectorOutput.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetEnvironmentInput_environmentId = GetEnvironmentInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	GetEnvironmentOutput_environmentId = GetEnvironmentOutput.AddMember("environmentId", _EnvironmentId)
-
-	GetEnvironmentOutput_environmentArn = GetEnvironmentOutput.AddMember("environmentArn", _EnvironmentArn)
-
-	GetEnvironmentOutput_name = GetEnvironmentOutput.AddMember("name", _EnvironmentName)
-
-	GetEnvironmentOutput_status = GetEnvironmentOutput.AddMember("status", EnvironmentStatus)
-
-	GetEnvironmentOutput_statusMessage = GetEnvironmentOutput.AddMember("statusMessage", _EnvironmentStatusMessage)
-
-	GetEnvironmentOutput_statusUpdatedAt = GetEnvironmentOutput.AddMember("statusUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetEnvironmentOutput_createdAt = GetEnvironmentOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetEnvironmentOutput_updatedAt = GetEnvironmentOutput.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetEnvironmentOutput_configuration = GetEnvironmentOutput.AddMember("configuration", EnvironmentConfigurationDetails)
-
-	GetIntegrationInput_integrationId = GetIntegrationInput.AddMember("integrationId", _IntegrationId, &smithytraits.HTTPLabel{})
-
-	GetIntegrationOutput_integrationId = GetIntegrationOutput.AddMember("integrationId", _IntegrationId)
-
-	GetIntegrationOutput_integrationArn = GetIntegrationOutput.AddMember("integrationArn", _IntegrationArn)
-
-	GetIntegrationOutput_name = GetIntegrationOutput.AddMember("name", _IntegrationName)
-
-	GetIntegrationOutput_integrationType = GetIntegrationOutput.AddMember("integrationType", IntegrationType)
-
-	GetIntegrationOutput_providerDetails = GetIntegrationOutput.AddMember("providerDetails", ProviderDetails)
-
-	GetIntegrationOutput_createdAt = GetIntegrationOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetIntegrationOutput_updatedAt = GetIntegrationOutput.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetResourcePolicyInput_arn = GetResourcePolicyInput.AddMember("arn", _ResourcePolicyTargetArn, &smithytraits.HTTPQuery{Name: "arn"})
-
-	GetResourcePolicyOutput_arn = GetResourcePolicyOutput.AddMember("arn", _ResourcePolicyTargetArn)
-
-	GetResourcePolicyOutput_policy = GetResourcePolicyOutput.AddMember("policy", _ResourcePolicyDocument)
-
-	GetResourcePolicyOutput_revisionId = GetResourcePolicyOutput.AddMember("revisionId", _ResourcePolicyRevisionId)
-
-	ListAssociatedCollectorsInput_environmentId = ListAssociatedCollectorsInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	ListAssociatedCollectorsInput_maxResults = ListAssociatedCollectorsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssociatedCollectorsInput_nextToken = ListAssociatedCollectorsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssociatedCollectorsOutput_associatedCollectors = ListAssociatedCollectorsOutput.AddMember("associatedCollectors", _AssociatedCollectors)
-
-	ListAssociatedCollectorsOutput_nextToken = ListAssociatedCollectorsOutput.AddMember("nextToken", _NextToken)
-
-	ListAssociatedEnvironmentsInput_collectorId = ListAssociatedEnvironmentsInput.AddMember("collectorId", _CollectorId, &smithytraits.HTTPLabel{})
-
-	ListAssociatedEnvironmentsInput_maxResults = ListAssociatedEnvironmentsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssociatedEnvironmentsInput_nextToken = ListAssociatedEnvironmentsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssociatedEnvironmentsOutput_associatedEnvironments = ListAssociatedEnvironmentsOutput.AddMember("associatedEnvironments", _AssociatedEnvironments)
-
-	ListAssociatedEnvironmentsOutput_nextToken = ListAssociatedEnvironmentsOutput.AddMember("nextToken", _NextToken)
-
-	ListCodeFindingsInput_environmentId = ListCodeFindingsInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	ListCodeFindingsInput_maxResults = ListCodeFindingsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCodeFindingsInput_nextToken = ListCodeFindingsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCodeFindingsOutput_items = ListCodeFindingsOutput.AddMember("items", _CodeFindingSummaries)
-
-	ListCodeFindingsOutput_nextToken = ListCodeFindingsOutput.AddMember("nextToken", _NextToken)
-
-	ListCodeIssueArtifactsInput_environmentId = ListCodeIssueArtifactsInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	ListCodeIssueArtifactsInput_issueId = ListCodeIssueArtifactsInput.AddMember("issueId", _IssueId, &smithytraits.HTTPLabel{})
-
-	ListCodeIssueArtifactsInput_artifactType = ListCodeIssueArtifactsInput.AddMember("artifactType", IssueArtifactType, &smithytraits.HTTPQuery{Name: "artifactType"})
-
-	ListCodeIssueArtifactsInput_maxResults = ListCodeIssueArtifactsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCodeIssueArtifactsInput_nextToken = ListCodeIssueArtifactsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCodeIssueArtifactsOutput_items = ListCodeIssueArtifactsOutput.AddMember("items", _CodeIssueArtifactItems)
-
-	ListCodeIssueArtifactsOutput_nextToken = ListCodeIssueArtifactsOutput.AddMember("nextToken", _NextToken)
-
-	ListCodeIssuesInput_environmentId = ListCodeIssuesInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	ListCodeIssuesInput_maxResults = ListCodeIssuesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCodeIssuesInput_nextToken = ListCodeIssuesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCodeIssuesOutput_items = ListCodeIssuesOutput.AddMember("items", _CodeIssueSummaries)
-
-	ListCodeIssuesOutput_nextToken = ListCodeIssuesOutput.AddMember("nextToken", _NextToken)
-
-	ListCodeScansInput_environmentId = ListCodeScansInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	ListCodeScansInput_maxResults = ListCodeScansInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCodeScansInput_nextToken = ListCodeScansInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCodeScansOutput_scans = ListCodeScansOutput.AddMember("scans", _CodeScanSummaries)
-
-	ListCodeScansOutput_nextToken = ListCodeScansOutput.AddMember("nextToken", _NextToken)
-
-	ListCollectorsOutput_items = ListCollectorsOutput.AddMember("items", _CollectorSummaries)
-
-	ListEnvironmentsInput_maxResults = ListEnvironmentsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListEnvironmentsInput_nextToken = ListEnvironmentsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListEnvironmentsOutput_items = ListEnvironmentsOutput.AddMember("items", _EnvironmentListEntries)
-
-	ListEnvironmentsOutput_nextToken = ListEnvironmentsOutput.AddMember("nextToken", _NextToken)
-
-	ListIntegrationsInput_maxResults = ListIntegrationsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListIntegrationsInput_nextToken = ListIntegrationsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListIntegrationsOutput_items = ListIntegrationsOutput.AddMember("items", _IntegrationSummaries)
-
-	ListIntegrationsOutput_nextToken = ListIntegrationsOutput.AddMember("nextToken", _NextToken)
-
-	PutResourcePolicyInput_arn = PutResourcePolicyInput.AddMember("arn", _ResourcePolicyTargetArn)
-
-	PutResourcePolicyInput_policy = PutResourcePolicyInput.AddMember("policy", _ResourcePolicyInputDocument)
-
-	PutResourcePolicyInput_expectedRevisionId = PutResourcePolicyInput.AddMember("expectedRevisionId", _ResourcePolicyRevisionId)
-
-	PutResourcePolicyOutput_arn = PutResourcePolicyOutput.AddMember("arn", _ResourcePolicyTargetArn)
-
-	PutResourcePolicyOutput_policy = PutResourcePolicyOutput.AddMember("policy", _ResourcePolicyDocument)
-
-	PutResourcePolicyOutput_revisionId = PutResourcePolicyOutput.AddMember("revisionId", _ResourcePolicyRevisionId)
-
-	StartIntegrationAuthorizationInput_providerType = StartIntegrationAuthorizationInput.AddMember("providerType", IntegrationAuthorizationProviderType)
-
-	StartIntegrationAuthorizationInput_name = StartIntegrationAuthorizationInput.AddMember("name", _IntegrationName)
-
-	StartIntegrationAuthorizationOutput_state = StartIntegrationAuthorizationOutput.AddMember("state", _OAuthState)
-
-	StartIntegrationAuthorizationOutput_codeChallenge = StartIntegrationAuthorizationOutput.AddMember("codeChallenge", _OAuthCodeChallenge)
-
-	StartIntegrationAuthorizationOutput_codeChallengeMethod = StartIntegrationAuthorizationOutput.AddMember("codeChallengeMethod", OAuthCodeChallengeMethod)
-
-	StartIntegrationAuthorizationOutput_expiresAt = StartIntegrationAuthorizationOutput.AddMember("expiresAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateCollectorInput_collectorId = UpdateCollectorInput.AddMember("collectorId", _CollectorId, &smithytraits.HTTPLabel{})
-
-	UpdateCollectorInput_name = UpdateCollectorInput.AddMember("name", _CollectorName)
-
-	UpdateCollectorInput_kubernetesClusterRole = UpdateCollectorInput.AddMember("kubernetesClusterRole", KubernetesClusterRoleUpdate, &smithytraits.JSONName{Name: "k8ClusterRole"})
-
-	UpdateCollectorOutput_collectorId = UpdateCollectorOutput.AddMember("collectorId", _CollectorId)
-
-	UpdateCollectorOutput_collectorArn = UpdateCollectorOutput.AddMember("collectorArn", _CollectorArn)
-
-	UpdateCollectorOutput_type = UpdateCollectorOutput.AddMember("type", CollectorType)
-
-	UpdateCollectorOutput_status = UpdateCollectorOutput.AddMember("status", CollectorStatus)
-
-	UpdateCollectorOutput_configRecorderArn = UpdateCollectorOutput.AddMember("configRecorderArn", _ConfigRecorderArn)
-
-	UpdateCollectorOutput_kubernetesClusterRoleArn = UpdateCollectorOutput.AddMember("kubernetesClusterRoleArn", _KubernetesClusterRoleArn, &smithytraits.JSONName{Name: "k8ClusterRole"})
-
-	UpdateCollectorOutput_createdAt = UpdateCollectorOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateCollectorOutput_updatedAt = UpdateCollectorOutput.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateEnvironmentInput_environmentId = UpdateEnvironmentInput.AddMember("environmentId", _EnvironmentId, &smithytraits.HTTPLabel{})
-
-	UpdateEnvironmentInput_name = UpdateEnvironmentInput.AddMember("name", _EnvironmentName)
-
-	UpdateEnvironmentInput_configuration = UpdateEnvironmentInput.AddMember("configuration", UpdateEnvironmentConfiguration)
-
-	UpdateEnvironmentOutput_environmentId = UpdateEnvironmentOutput.AddMember("environmentId", _EnvironmentId)
-
-	UpdateEnvironmentOutput_environmentArn = UpdateEnvironmentOutput.AddMember("environmentArn", _EnvironmentArn)
-
-	UpdateEnvironmentOutput_name = UpdateEnvironmentOutput.AddMember("name", _EnvironmentName)
-
-	UpdateEnvironmentOutput_status = UpdateEnvironmentOutput.AddMember("status", EnvironmentStatus)
-
-	UpdateEnvironmentOutput_statusMessage = UpdateEnvironmentOutput.AddMember("statusMessage", _EnvironmentStatusMessage)
-
-	UpdateEnvironmentOutput_statusUpdatedAt = UpdateEnvironmentOutput.AddMember("statusUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateEnvironmentOutput_createdAt = UpdateEnvironmentOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateEnvironmentOutput_configuration = UpdateEnvironmentOutput.AddMember("configuration", EnvironmentConfigurationDetails)
-
-	UpdateIntegrationInput_integrationId = UpdateIntegrationInput.AddMember("integrationId", _IntegrationId, &smithytraits.HTTPLabel{})
-
-	UpdateIntegrationInput_providerConfiguration = UpdateIntegrationInput.AddMember("providerConfiguration", UpdateProviderConfiguration)
-
-	UpdateIntegrationOutput_integrationId = UpdateIntegrationOutput.AddMember("integrationId", _IntegrationId)
-
-	UpdateIntegrationOutput_integrationArn = UpdateIntegrationOutput.AddMember("integrationArn", _IntegrationArn)
-
-	UpdateIntegrationOutput_name = UpdateIntegrationOutput.AddMember("name", _IntegrationName)
-
-	UpdateIntegrationOutput_integrationType = UpdateIntegrationOutput.AddMember("integrationType", IntegrationType)
-
-	UpdateIntegrationOutput_providerDetails = UpdateIntegrationOutput.AddMember("providerDetails", ProviderDetails)
-
-	UpdateIntegrationOutput_createdAt = UpdateIntegrationOutput.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateIntegrationOutput_updatedAt = UpdateIntegrationOutput.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "k8ClusterRole"}}, DirectMask: 0x1}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "accountId"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "environmentArn"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "arn"}}, DirectMask: 0x10}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "artifactType"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAffectedPackage = smithy.SchemaMembers{List: []*smithy.Schema{&sAffectedPackage_name, &sAffectedPackage_version, &sAffectedPackage_fixedInVersion, &sAffectedPackage_packageManager}}
+var m_AffectedPackageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AffectedPackageList_member}}
+var m_ArtifactCitations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArtifactCitations_member}}
+var m_ArtifactHeaders = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArtifactHeaders_key, &s_ArtifactHeaders_value}}
+var mArtifactHttpMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactHttpMethod_GET, &sArtifactHttpMethod_HEAD, &sArtifactHttpMethod_POST, &sArtifactHttpMethod_PUT, &sArtifactHttpMethod_PATCH, &sArtifactHttpMethod_DELETE, &sArtifactHttpMethod_OPTIONS}}
+var mAssociatedCollector = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedCollector_collectorId, &sAssociatedCollector_collectorArn}}
+var m_AssociatedCollectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedCollectors_member}}
+var mAssociatedEnvironment = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedEnvironment_environmentId, &sAssociatedEnvironment_environmentArn, &sAssociatedEnvironment_name, &sAssociatedEnvironment_status, &sAssociatedEnvironment_createdAt}}
+var m_AssociatedEnvironments = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedEnvironments_member}}
+var m_AttackFlowIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttackFlowIds_member}}
+var mCodeConfigurationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeConfigurationDetails_collectorDetails, &sCodeConfigurationDetails_sourceConfiguration, &sCodeConfigurationDetails_environmentConfiguration, &sCodeConfigurationDetails_latestScan}}
+var m_CodeFindingSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodeFindingSummaries_member}}
+var m_CodeIssueArtifactItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodeIssueArtifactItems_member}}
+var m_CodeIssueSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodeIssueSummaries_member}}
+var mCodeScanData = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeScanData_scanRunId, &sCodeScanData_status, &sCodeScanData_origin, &sCodeScanData_createdAt, &sCodeScanData_completedAt, &sCodeScanData_failureMessage, &sCodeScanData_failureStage}}
+var m_CodeScanSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CodeScanSummaries_member}}
+var mCodeScanSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeScanSummary_scanRunId, &sCodeScanSummary_status, &sCodeScanSummary_origin, &sCodeScanSummary_createdAt, &sCodeScanSummary_completedAt, &sCodeScanSummary_failureMessage, &sCodeScanSummary_failureStage}}
+var mCollectorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectorDetails_collectorDataAccessRoleArn}}
+var mCollectorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectorStatus_ACTIVE, &sCollectorStatus_PENDING_DELETION}}
+var m_CollectorSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_CollectorSummaries_member}}
+var mCollectorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectorSummary_collectorId, &sCollectorSummary_collectorArn, &sCollectorSummary_type, &sCollectorSummary_status, &sCollectorSummary_createdAt}}
+var mCollectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sCollectorType_AWS_COLLECTOR}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCreateCodeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCodeConfiguration_sourceConfiguration, &sCreateCodeConfiguration_environmentConfiguration}}
+var mCreateEnvironmentConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentConfiguration_codeConfiguration}}
+var m_CweIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CweIdList_member}}
+var mDeliveryReason = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryReason_ARTIFACT_READ_FAILED, &sDeliveryReason_ARTIFACT_SOURCE_MISMATCH, &sDeliveryReason_ARTIFACT_SOURCE_MISSING, &sDeliveryReason_BUILD_NOT_FOUND, &sDeliveryReason_BUILD_READ_FAILED, &sDeliveryReason_BUILD_RESULT_SCOPE_MISMATCH, &sDeliveryReason_DELIVERY_NOT_CONFIGURED, &sDeliveryReason_DELIVERY_SOURCE_KIND_CHANGED, &sDeliveryReason_DUPLICATE_LOGICAL_REPOSITORY, &sDeliveryReason_DUPLICATE_OR_INVALID_REPOSITORY, &sDeliveryReason_ENVIRONMENT_DELETED, &sDeliveryReason_ENVIRONMENT_NOT_ACTIVE, &sDeliveryReason_ENVIRONMENT_NOT_FOUND, &sDeliveryReason_ENVIRONMENT_READ_FAILED, &sDeliveryReason_S3_ACCESS_DENIED, &sDeliveryReason_S3_SOURCE_PREFIX_OVERLAP, &sDeliveryReason_SOURCE_INTEGRATION_UNRESOLVED, &sDeliveryReason_SOURCE_INTEGRATION_READ_FAILED, &sDeliveryReason_SOURCE_INTEGRATION_INVALID, &sDeliveryReason_SOURCE_INTEGRATION_CHANGED, &sDeliveryReason_EXPORT_CREDENTIALS_MISSING, &sDeliveryReason_EXPORT_CREDENTIAL_EXPIRY_INVALID, &sDeliveryReason_EXPORT_DESTINATION_INVALID, &sDeliveryReason_EXPORT_EXISTING_OBJECT_MISMATCH, &sDeliveryReason_EXPORT_PUT_FAILED, &sDeliveryReason_EXPORT_RECONCILIATION_READ_FAILED, &sDeliveryReason_EXPORT_ROLE_ASSUMPTION_FAILED, &sDeliveryReason_GITHUB_ACCESS_DENIED, &sDeliveryReason_GITHUB_BASE_NOT_FOUND, &sDeliveryReason_GITHUB_BRANCH_CONFLICT, &sDeliveryReason_GITHUB_NOT_FOUND, &sDeliveryReason_GITHUB_RATE_LIMITED, &sDeliveryReason_GITHUB_REPOSITORY_CHANGED, &sDeliveryReason_GITHUB_REPOSITORY_NOT_FOUND, &sDeliveryReason_GITHUB_REQUEST_FAILED, &sDeliveryReason_GITHUB_REQUEST_REJECTED, &sDeliveryReason_GITHUB_RESPONSE_INVALID, &sDeliveryReason_GREEN_ATTEMPT_NOT_SUCCESSFUL, &sDeliveryReason_GREEN_COMPLETION_NOT_OBSERVED, &sDeliveryReason_PATCH_NOT_SELECTED, &sDeliveryReason_INCOMPLETE_SOURCE_REFERENCE, &sDeliveryReason_INVALID_ARCHIVE_DIGEST, &sDeliveryReason_INVALID_ARTIFACT_SOURCE, &sDeliveryReason_INVALID_COMPLETED_MANIFEST, &sDeliveryReason_INVALID_EXPORT_RECEIPT, &sDeliveryReason_INVALID_GITHUB_PROVENANCE, &sDeliveryReason_INVALID_S3_DESTINATION, &sDeliveryReason_INVALID_SERVICE_RECEIPT, &sDeliveryReason_INVALID_SOURCE_INVENTORY, &sDeliveryReason_INVALID_SOURCE_MANIFEST, &sDeliveryReason_INVALID_SOURCE_REFERENCE, &sDeliveryReason_ISSUE_INTEGRITY_FAILURE, &sDeliveryReason_ISSUE_NOT_FOUND, &sDeliveryReason_MANIFEST_INVENTORY_MISMATCH, &sDeliveryReason_MANIFEST_PROVENANCE_CHANGED, &sDeliveryReason_MANIFEST_REPOSITORY_SET_MISMATCH, &sDeliveryReason_MANIFEST_SCOPE_OR_VERSION_MISMATCH, &sDeliveryReason_MISSING_BUILD_RESULT, &sDeliveryReason_MISSING_COMPLETED_MANIFEST, &sDeliveryReason_MISSING_RESULT_DIGEST, &sDeliveryReason_MISSING_SOURCE_MANIFEST, &sDeliveryReason_MISSING_SOURCE_TARGET, &sDeliveryReason_PATCH_NOT_APPLICABLE, &sDeliveryReason_PATCH_STORAGE_IDENTITY_MISSING, &sDeliveryReason_PATCH_UNSUPPORTED, &sDeliveryReason_PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT, &sDeliveryReason_PUBLISHER_DEADLINE_EXCEEDED, &sDeliveryReason_RESULT_COMPLETED_MANIFEST_MISMATCH, &sDeliveryReason_RESULT_SOURCE_BINDING_MISMATCH, &sDeliveryReason_SERVICE_COPY_DIGEST_MISMATCH, &sDeliveryReason_SERVICE_OBJECT_READ_FAILED, &sDeliveryReason_SERVICE_OBJECT_TOO_LARGE, &sDeliveryReason_SERVICE_RECEIPT_OUTSIDE_ISSUE, &sDeliveryReason_SOURCE_OBJECT_DIGEST_MISMATCH, &sDeliveryReason_SOURCE_REFERENCE_OUTSIDE_BUILD, &sDeliveryReason_SOURCE_TARGET_BUILD_MISMATCH, &sDeliveryReason_UNKNOWN_REPOSITORY, &sDeliveryReason_UNKNOWN_SOURCE_PROVIDER, &sDeliveryReason_UNSUPPORTED_ENVIRONMENT_SCHEMA, &sDeliveryReason_GITHUB_DESTINATION_NOT_ENABLED, &sDeliveryReason_PATCH_CREATION_POLICY_DISABLED}, Seed: 386, Slots: []uint16{
+	0, 62, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21, 0, 0, 0, 0, 65, 38, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 50, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 53, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0,
+	0, 0, 39, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 76, 0, 0, 0, 0, 61, 1, 0, 0, 0, 0,
+	0, 0, 3, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 60,
+	7, 0, 57, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 37, 0, 12, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 54, 0, 24, 20, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 75, 0,
+	0, 0, 0, 42, 0, 0, 0, 0, 44, 66, 0, 0, 0, 0, 0, 0, 79, 0, 0, 47, 0, 17, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 64, 80, 78, 0, 0, 0, 29, 14, 0,
+	0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 46, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 81, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 0, 67, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 28,
+	0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 15, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 40, 32, 0,
+	0, 0, 0, 45, 52, 63, 0, 35, 0, 0, 0, 43, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0,
+	0, 4, 0, 0, 0, 0, 16, 0, 0, 27, 0, 0, 0, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 72, 0, 0, 0, 0, 0, 2, 0, 58, 0, 68, 0, 0, 0, 0, 59, 0, 0, 0, 0, 71,
+	0, 0, 0, 0, 0, 0, 0, 0, 69, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 0,
+	0, 0, 55, 0, 13, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 74, 0, 0, 0, 0, 0, 0, 0, 56,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 77, 0, 0, 0, 0,
+	18, 0, 0, 0, 0, 22, 0, 0,
+}}
+var mDeliveryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryStatus_PENDING, &sDeliveryStatus_SUCCEEDED, &sDeliveryStatus_FAILED, &sDeliveryStatus_SKIPPED, &sDeliveryStatus_ABANDONED}}
+var mDestinationTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationTarget_s3, &sDestinationTarget_github}}
+var m_DomainNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainNames_member}}
+var mEnvironmentConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentConfiguration_network, &sEnvironmentConfiguration_scanFrequency, &sEnvironmentConfiguration_patchCreationPolicy}}
+var mEnvironmentConfigurationDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentConfigurationDetails_codeConfiguration}}
+var m_EnvironmentListEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentListEntries_member}}
+var mEnvironmentListEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentListEntry_environmentId, &sEnvironmentListEntry_environmentArn, &sEnvironmentListEntry_name, &sEnvironmentListEntry_status, &sEnvironmentListEntry_createdAt}}
+var mEnvironmentNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentNetworkConfiguration_allowedDomains}}
+var mEnvironmentRepositorySource = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentRepositorySource_integrationId, &sEnvironmentRepositorySource_repository, &sEnvironmentRepositorySource_defaultBranch}}
+var m_EnvironmentRepositorySources = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentRepositorySources_member}}
+var mEnvironmentS3IntegrationSource = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentS3IntegrationSource_integrationId, &sEnvironmentS3IntegrationSource_codePrefix, &sEnvironmentS3IntegrationSource_contextPrefix}}
+var m_EnvironmentS3Sources = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentS3Sources_member}}
+var mEnvironmentSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentSourceConfiguration_s3Sources, &sEnvironmentSourceConfiguration_repositorySources}}
+var mEnvironmentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentStatus_ACTIVE}}
+var mExploitabilityVerdict = smithy.SchemaMembers{List: []*smithy.Schema{&sExploitabilityVerdict_EXPLOITABLE, &sExploitabilityVerdict_NOT_EXPLOITABLE, &sExploitabilityVerdict_UNCERTAIN}}
+var mExploitEffect = smithy.SchemaMembers{List: []*smithy.Schema{&sExploitEffect_DATA_LEAKED, &sExploitEffect_ERROR_REVEALED, &sExploitEffect_BEHAVIOR_CHANGED, &sExploitEffect_NO_EFFECT}}
+var mFindingBlockingReason = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingBlockingReason_UNREACHABLE, &sFindingBlockingReason_PROTECTED, &sFindingBlockingReason_MISCLASSIFIED, &sFindingBlockingReason_EXCLUDED, &sFindingBlockingReason_NOT_FEASIBLE, &sFindingBlockingReason_RISK_MITIGATED, &sFindingBlockingReason_NONE}}
+var mFindingComplianceCheck = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingComplianceCheck_uid, &sFindingComplianceCheck_name, &sFindingComplianceCheck_description}}
+var m_FindingComplianceCheckList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingComplianceCheckList_member}}
+var mFindingDiscardReason = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingDiscardReason_SCANNER_VALIDATED_FALSE_POSITIVE, &sFindingDiscardReason_SCANNER_NEEDS_REVIEW, &sFindingDiscardReason_FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT, &sFindingDiscardReason_DUPLICATE_OF_OPEN_ISSUE, &sFindingDiscardReason_DUPLICATE_OF_CLOSED_ISSUE, &sFindingDiscardReason_COMPENSATING_CONTROL_PRESENT, &sFindingDiscardReason_OUT_OF_SCOPE, &sFindingDiscardReason_INSUFFICIENT_EVIDENCE, &sFindingDiscardReason_PROCESSING_FAILED, &sFindingDiscardReason_SOURCE_REPO_NOT_FOUND}, Seed: 3, Slots: []uint16{
+	6, 0, 0, 0, 0, 5, 0, 4, 0, 9, 0, 0, 0, 3, 0, 0, 0, 0, 1, 8, 0, 0, 0, 0,
+	10, 0, 0, 0, 7, 0, 0, 2,
+}}
+var mFindingEvidence = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingEvidence_file, &sFindingEvidence_line, &sFindingEvidence_snippet}}
+var m_FindingEvidenceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingEvidenceList_member}}
+var mFindingLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingLocation_filePath, &sFindingLocation_startLine, &sFindingLocation_endLine}}
+var m_FindingLocationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingLocationList_member}}
+var mFindingOcsfClass = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingOcsfClass_VULNERABILITY_FINDING, &sFindingOcsfClass_APPLICATION_SECURITY_POSTURE_FINDING}}
+var mFindingPosture = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingPosture_application, &sFindingPosture_applicationUid, &sFindingPosture_applicationVersion, &sFindingPosture_control, &sFindingPosture_description, &sFindingPosture_standards, &sFindingPosture_requirements, &sFindingPosture_checks, &sFindingPosture_status, &sFindingPosture_statusId, &sFindingPosture_remediation, &sFindingPosture_remediationReferences}, Seed: 4, Slots: []uint16{
+	0, 4, 0, 11, 7, 2, 6, 0, 3, 9, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 12,
+	8, 0, 0, 0, 0, 1, 0, 0,
+}}
+var mFindingResource = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingResource_uid, &sFindingResource_name, &sFindingResource_type, &sFindingResource_region}}
+var m_FindingResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingResourceList_member}}
+var mFindingSeverityAdjustment = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingSeverityAdjustment_CRITICAL, &sFindingSeverityAdjustment_HIGH, &sFindingSeverityAdjustment_MEDIUM, &sFindingSeverityAdjustment_LOW, &sFindingSeverityAdjustment_INFORMATIONAL, &sFindingSeverityAdjustment_UNCHANGED}}
+var mFindingSeverityId = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingSeverityId_UNKNOWN, &sFindingSeverityId_INFORMATIONAL, &sFindingSeverityId_LOW, &sFindingSeverityId_MEDIUM, &sFindingSeverityId_HIGH, &sFindingSeverityId_CRITICAL, &sFindingSeverityId_FATAL, &sFindingSeverityId_OTHER}}
+var mFindingStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingStatus_SUBMITTED, &sFindingStatus_VALIDATING, &sFindingStatus_CONFIRMED, &sFindingStatus_DISCARDED}}
+var m_FindingStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingStringList_member}}
+var mFindingSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingSummary_findingId, &sFindingSummary_findingArn, &sFindingSummary_environmentId, &sFindingSummary_source, &sFindingSummary_sourceFindingId, &sFindingSummary_reportedAt, &sFindingSummary_status, &sFindingSummary_statusUpdatedAt, &sFindingSummary_createdAt, &sFindingSummary_scanRunId, &sFindingSummary_statusMessage, &sFindingSummary_discardReason, &sFindingSummary_discardReasoning, &sFindingSummary_duplicateOfIssueId, &sFindingSummary_createdIssueId, &sFindingSummary_completedAt, &sFindingSummary_type, &sFindingSummary_title, &sFindingSummary_severity, &sFindingSummary_category, &sFindingSummary_filePath}, Seed: 27, Slots: []uint16{
+	0, 0, 0, 0, 0, 5, 19, 0, 17, 14, 0, 0, 0, 6, 0, 0, 0, 0, 10, 0, 11, 0, 0, 13,
+	0, 0, 0, 3, 0, 0, 0, 20, 0, 9, 16, 0, 0, 0, 0, 0, 0, 4, 18, 0, 0, 1, 0, 0,
+	0, 15, 0, 0, 0, 0, 0, 0, 2, 12, 8, 0, 21, 0, 7, 0,
+}}
+var mFindingType = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingType_CONTINUUM_CODE_VULN, &sFindingType_CUSTOMER_CODE_VULN}}
+var mFindingValidation = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingValidation_verdict, &sFindingValidation_blockingReason, &sFindingValidation_confidence, &sFindingValidation_rationale, &sFindingValidation_severityAdjustment, &sFindingValidation_mitigatingControls, &sFindingValidation_preconditions, &sFindingValidation_evidence}}
+var mFindingVerdict = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingVerdict_TRUE_POSITIVE, &sFindingVerdict_FALSE_POSITIVE, &sFindingVerdict_BENIGN_TRUE_POSITIVE, &sFindingVerdict_NEEDS_REVIEW}}
+var mFindingVulnerability = smithy.SchemaMembers{List: []*smithy.Schema{&sFindingVulnerability_title, &sFindingVulnerability_description, &sFindingVulnerability_cweId, &sFindingVulnerability_cweCaption, &sFindingVulnerability_additionalCweIds, &sFindingVulnerability_cveId, &sFindingVulnerability_cvssBaseScore, &sFindingVulnerability_fixCoverage, &sFindingVulnerability_fixCoverageId, &sFindingVulnerability_locations, &sFindingVulnerability_remediation, &sFindingVulnerability_remediationReferences, &sFindingVulnerability_code, &sFindingVulnerability_details, &sFindingVulnerability_affectedPackages}, Seed: 26, Slots: []uint16{
+	8, 0, 0, 0, 11, 0, 10, 7, 15, 2, 0, 6, 1, 0, 0, 5, 4, 0, 9, 14, 0, 13, 0, 0,
+	0, 0, 0, 0, 12, 0, 3, 0,
+}}
+var m_FindingVulnerabilityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FindingVulnerabilityList_member}}
+var mFlowVerdict = smithy.SchemaMembers{List: []*smithy.Schema{&sFlowVerdict_flowId, &sFlowVerdict_verdict, &sFlowVerdict_confidence, &sFlowVerdict_evidence}}
+var m_FlowVerdicts = smithy.SchemaMembers{List: []*smithy.Schema{&s_FlowVerdicts_member}}
+var mFlowVerdictValue = smithy.SchemaMembers{List: []*smithy.Schema{&sFlowVerdictValue_CONFIRMED, &sFlowVerdictValue_DENIED, &sFlowVerdictValue_INCONCLUSIVE}}
+var mGitHubAuthorizationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGitHubAuthorizationConfiguration_authorizationCode, &sGitHubAuthorizationConfiguration_state, &sGitHubAuthorizationConfiguration_redirectUrl}}
+var mGitHubConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGitHubConfiguration_authorization, &sGitHubConfiguration_organizationName}}
+var mGitHubDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sGitHubDetails_organizationName}}
+var mGitHubTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sGitHubTarget_owner, &sGitHubTarget_repository, &sGitHubTarget_pullRequestNumber, &sGitHubTarget_headSha}}
+var mGitLabConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGitLabConfiguration_instanceUrl, &sGitLabConfiguration_targetType, &sGitLabConfiguration_targetPath, &sGitLabConfiguration_accessToken}}
+var mGitLabDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sGitLabDetails_instanceUrl, &sGitLabDetails_targetType, &sGitLabDetails_targetPath, &sGitLabDetails_tokenRotation, &sGitLabDetails_expiresAt}}
+var mGitLabTargetType = smithy.SchemaMembers{List: []*smithy.Schema{&sGitLabTargetType_GROUP, &sGitLabTargetType_PROJECT}}
+var mGitLabTokenRotation = smithy.SchemaMembers{List: []*smithy.Schema{&sGitLabTokenRotation_AUTOMATIC, &sGitLabTokenRotation_NONE}}
+var mIntegrationAuthorizationProviderType = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrationAuthorizationProviderType_GITHUB}}
+var m_IntegrationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegrationSummaries_member}}
+var mIntegrationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrationSummary_integrationId, &sIntegrationSummary_integrationArn, &sIntegrationSummary_name, &sIntegrationSummary_integrationType, &sIntegrationSummary_providerDetails, &sIntegrationSummary_createdAt, &sIntegrationSummary_updatedAt}}
+var mIntegrationType = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrationType_GITHUB, &sIntegrationType_GITLAB, &sIntegrationType_S3}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mIssueArtifactBody = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueArtifactBody_validationEvidence, &sIssueArtifactBody_prevalidationSignals, &sIssueArtifactBody_remediationProposal, &sIssueArtifactBody_patch, &sIssueArtifactBody_raw}}
+var mIssueArtifactItem = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueArtifactItem_artifactId, &sIssueArtifactItem_artifactType, &sIssueArtifactItem_mediaType, &sIssueArtifactItem_producer, &sIssueArtifactItem_contentSizeBytes, &sIssueArtifactItem_createdAt}}
+var mIssueArtifactProducerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueArtifactProducerSummary_agent}}
+var mIssueArtifactType = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueArtifactType_EVIDENCE, &sIssueArtifactType_AGENT_COMMUNICATION, &sIssueArtifactType_VALIDATION_EVIDENCE, &sIssueArtifactType_REMEDIATION_PROPOSAL, &sIssueArtifactType_DECISION, &sIssueArtifactType_PATCH}}
+var mIssueEvidenceAvailability = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueEvidenceAvailability_NONE, &sIssueEvidenceAvailability_AVAILABLE}}
+var m_IssueFindingIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_IssueFindingIds_member}}
+var mIssuePatchDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sIssuePatchDelivery_status, &sIssuePatchDelivery_patchCount, &sIssuePatchDelivery_succeededCount, &sIssuePatchDelivery_failedCount, &sIssuePatchDelivery_failureReasons}}
+var m_IssuePatchDeliveryFailureReasons = smithy.SchemaMembers{List: []*smithy.Schema{&s_IssuePatchDeliveryFailureReasons_member}}
+var mIssuePatchDeliveryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIssuePatchDeliveryStatus_PENDING, &sIssuePatchDeliveryStatus_SUCCEEDED, &sIssuePatchDeliveryStatus_FAILED, &sIssuePatchDeliveryStatus_SKIPPED}}
+var mIssuePhase = smithy.SchemaMembers{List: []*smithy.Schema{&sIssuePhase_VALIDATION, &sIssuePhase_PRIORITIZATION, &sIssuePhase_REMEDIATION}}
+var mIssueSeverity = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueSeverity_LOW, &sIssueSeverity_MEDIUM, &sIssueSeverity_HIGH, &sIssueSeverity_CRITICAL}}
+var mIssueStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueStatus_CREATED, &sIssueStatus_IN_PROGRESS, &sIssueStatus_COMPLETED, &sIssueStatus_FAILED}}
+var mIssueStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueStatusReason_INTERNAL_ERROR, &sIssueStatusReason_REMEDIATION_FAILED}}
+var mIssueSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueSummary_issueId, &sIssueSummary_issueArn, &sIssueSummary_name, &sIssueSummary_severity, &sIssueSummary_confidence, &sIssueSummary_status, &sIssueSummary_phase, &sIssueSummary_statusReason, &sIssueSummary_statusMessage, &sIssueSummary_statusUpdatedAt, &sIssueSummary_createdAt, &sIssueSummary_updatedAt}, Seed: 6, Slots: []uint16{
+	0, 0, 3, 1, 0, 0, 0, 6, 9, 0, 0, 11, 0, 5, 12, 2, 0, 0, 4, 0, 10, 0, 0, 0,
+	8, 0, 7, 0, 0, 0, 0, 0,
+}}
+var mKubernetesClusterRoleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKubernetesClusterRoleConfiguration_roleArn, &sKubernetesClusterRoleConfiguration_externalId}}
+var mKubernetesClusterRoleUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sKubernetesClusterRoleUpdate_set, &sKubernetesClusterRoleUpdate_remove}}
+var mOAuthCodeChallengeMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuthCodeChallengeMethod_S256}}
+var mPatchBody = smithy.SchemaMembers{List: []*smithy.Schema{&sPatchBody_patch, &sPatchBody_format, &sPatchBody_repositoryName, &sPatchBody_patchSha256, &sPatchBody_sizeBytes, &sPatchBody_delivery}}
+var mPatchCreationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sPatchCreationPolicy_ENABLED, &sPatchCreationPolicy_DISABLED}}
+var mPatchDelivery = smithy.SchemaMembers{List: []*smithy.Schema{&sPatchDelivery_status, &sPatchDelivery_target, &sPatchDelivery_updatedAt}}
+var mPatchFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sPatchFormat_GIT_MAILBOX_PATCH, &sPatchFormat_GIT_BINARY_DIFF, &sPatchFormat_GIT_DIFF}}
+var mPerFindingResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPerFindingResult_findingId, &sPerFindingResult_exploitable, &sPerFindingResult_confidence, &sPerFindingResult_flowVerdicts, &sPerFindingResult_reasoningChain, &sPerFindingResult_exploitArtifact}}
+var m_PerFindingResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_PerFindingResults_member}}
+var mPrevalidationSignal = smithy.SchemaMembers{List: []*smithy.Schema{&sPrevalidationSignal_subjectRef, &sPrevalidationSignal_dimension, &sPrevalidationSignal_signalStrength, &sPrevalidationSignal_conclusion, &sPrevalidationSignal_producerId, &sPrevalidationSignal_producerVersion, &sPrevalidationSignal_confidence, &sPrevalidationSignal_confidenceReasoning, &sPrevalidationSignal_computed, &sPrevalidationSignal_preconditions, &sPrevalidationSignal_impactDimensions, &sPrevalidationSignal_exploitability}, Seed: 18, Slots: []uint16{
+	3, 5, 0, 0, 7, 0, 2, 0, 0, 0, 0, 0, 0, 12, 0, 9, 0, 0, 6, 0, 0, 4, 0, 0,
+	0, 10, 11, 0, 8, 0, 1, 0,
+}}
+var m_PrevalidationSignals = smithy.SchemaMembers{List: []*smithy.Schema{&s_PrevalidationSignals_member}}
+var mPrevalidationSignalsBody = smithy.SchemaMembers{List: []*smithy.Schema{&sPrevalidationSignalsBody_producedBy, &sPrevalidationSignalsBody_signals}}
+var mProviderConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sProviderConfiguration_github, &sProviderConfiguration_gitlab, &sProviderConfiguration_s3}}
+var mProviderDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sProviderDetails_github, &sProviderDetails_gitlab, &sProviderDetails_s3}}
+var mReasoningStep = smithy.SchemaMembers{List: []*smithy.Schema{&sReasoningStep_step, &sReasoningStep_claim, &sReasoningStep_source, &sReasoningStep_confidence}}
+var m_ReasoningSteps = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReasoningSteps_member}}
+var mRemediationProposalBody = smithy.SchemaMembers{List: []*smithy.Schema{&sRemediationProposalBody_patch, &sRemediationProposalBody_format, &sRemediationProposalBody_filename, &sRemediationProposalBody_patchSha256}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Configuration_bucket, &sS3Configuration_roleArn, &sS3Configuration_externalId}}
+var mS3Details = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Details_bucket, &sS3Details_roleArn}}
+var mS3Target = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Target_bucket, &sS3Target_key, &sS3Target_version}}
+var mScanFailureStage = smithy.SchemaMembers{List: []*smithy.Schema{&sScanFailureStage_SUBMITTED, &sScanFailureStage_WAITING_FOR_BUILD, &sScanFailureStage_BUILDING, &sScanFailureStage_WAITING_FOR_SCAN, &sScanFailureStage_SCANNING}}
+var mScanOrigin = smithy.SchemaMembers{List: []*smithy.Schema{&sScanOrigin_MANUAL, &sScanOrigin_SCHEDULED}}
+var mScanStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sScanStatus_SUBMITTED, &sScanStatus_WAITING_FOR_BUILD, &sScanStatus_BUILDING, &sScanStatus_WAITING_FOR_SCAN, &sScanStatus_SCANNING, &sScanStatus_SUCCEEDED, &sScanStatus_FAILED}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_quotaCode, &sServiceQuotaExceededException_serviceCode}}
+var mSignalAccessLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalAccessLevel_NONE, &sSignalAccessLevel_ANY_AUTHENTICATED, &sSignalAccessLevel_PRIVILEGED}}
+var mSignalAccessPrecondition = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalAccessPrecondition_value, &sSignalAccessPrecondition_basis, &sSignalAccessPrecondition_reason, &sSignalAccessPrecondition_missingInfo}}
+var mSignalAttackerGains = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalAttackerGains_EXECUTE, &sSignalAttackerGains_MODIFY_PRIVILEGED, &sSignalAttackerGains_MODIFY_DATA, &sSignalAttackerGains_MODIFY_COSMETIC, &sSignalAttackerGains_READ, &sSignalAttackerGains_NEITHER}}
+var mSignalAttackerGainsDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalAttackerGainsDimension_value, &sSignalAttackerGainsDimension_basis, &sSignalAttackerGainsDimension_reason, &sSignalAttackerGainsDimension_missingInfo}}
+var mSignalBand = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalBand_VERY_LOW, &sSignalBand_LOW, &sSignalBand_MODERATE, &sSignalBand_HIGH}}
+var mSignalBasis = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalBasis_CODE, &sSignalBasis_GRAPH, &sSignalBasis_FINDING, &sSignalBasis_INFERRED, &sSignalBasis_NO_EVIDENCE_DEFAULT}}
+var mSignalBlastRadius = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalBlastRadius_CROSS_TENANT, &sSignalBlastRadius_OTHER_USERS_IN_TENANT, &sSignalBlastRadius_OWN_SCOPE}}
+var mSignalBlastRadiusDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalBlastRadiusDimension_value, &sSignalBlastRadiusDimension_basis, &sSignalBlastRadiusDimension_reason, &sSignalBlastRadiusDimension_missingInfo}}
+var mSignalComputation = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalComputation_likelihoodBand, &sSignalComputation_impactBand, &sSignalComputation_barriers}}
+var mSignalConfidenceReasoning = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalConfidenceReasoning_summary, &sSignalConfidenceReasoning_factors}}
+var mSignalDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalDimension_EXPLOITABILITY, &sSignalDimension_BLAST_RADIUS, &sSignalDimension_NETWORK_EXPOSURE, &sSignalDimension_PRECONDITION, &sSignalDimension_CODE_CONTEXT, &sSignalDimension_LIKELIHOOD_ASSESSMENT, &sSignalDimension_IMPACT_ASSESSMENT}}
+var mSignalExploitability = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalExploitability_verdict, &sSignalExploitability_reachedCrownJewels, &sSignalExploitability_highestLayerReached, &sSignalExploitability_confidenceTier, &sSignalExploitability_scriptable, &sSignalExploitability_sourceValidationArtifactId}}
+var mSignalImpactDimensions = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalImpactDimensions_attackerGains, &sSignalImpactDimensions_blastRadius, &sSignalImpactDimensions_targetValue}}
+var mSignalPrecondition = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalPrecondition_value, &sSignalPrecondition_basis, &sSignalPrecondition_reason, &sSignalPrecondition_missingInfo}}
+var mSignalPreconditions = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalPreconditions_reachableFromAttacker, &sSignalPreconditions_configurationNeeded, &sSignalPreconditions_accessLevel, &sSignalPreconditions_userInteractionRequired}}
+var mSignalStrength = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalStrength_NONE, &sSignalStrength_WEAK, &sSignalStrength_MODERATE, &sSignalStrength_STRONG}}
+var mSignalTargetValue = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalTargetValue_HIGH, &sSignalTargetValue_MEDIUM, &sSignalTargetValue_LOW}}
+var mSignalTargetValueDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sSignalTargetValueDimension_value, &sSignalTargetValueDimension_basis, &sSignalTargetValueDimension_reason, &sSignalTargetValueDimension_missingInfo}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUpdateCodeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCodeConfiguration_sourceConfiguration, &sUpdateCodeConfiguration_environmentConfiguration}}
+var mUpdateEnvironmentConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentConfiguration_codeConfiguration}}
+var mUpdateProviderConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProviderConfiguration_s3}}
+var mUpdateS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateS3Configuration_roleArn, &sUpdateS3Configuration_externalId}}
+var mValidationConfidenceTier = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationConfidenceTier_SOURCE_READ, &sValidationConfidenceTier_STATIC_PROVEN, &sValidationConfidenceTier_BUILD_PROVEN, &sValidationConfidenceTier_RUNTIME_PROVEN}}
+var mValidationEvidenceBody = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationEvidenceBody_exploitable, &sValidationEvidenceBody_terminalStatus, &sValidationEvidenceBody_flowVerdicts, &sValidationEvidenceBody_attackFlowsConfirmed, &sValidationEvidenceBody_exploitArtifact, &sValidationEvidenceBody_executedProof, &sValidationEvidenceBody_sourceAnalysis, &sValidationEvidenceBody_perFindingResults}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_path, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExecutedProof = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExecutedProof_code, &sValidationExecutedProof_output, &sValidationExecutedProof_observedEffect}}
+var mValidationExploitArtifact = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExploitArtifact_payload, &sValidationExploitArtifact_targetUrl, &sValidationExploitArtifact_httpMethod, &sValidationExploitArtifact_headers, &sValidationExploitArtifact_responseStatus, &sValidationExploitArtifact_responseSnippet, &sValidationExploitArtifact_effect}}
+var mValidationProofCode = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationProofCode_proofCode}}
+var mValidationProofMaterial = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationProofMaterial_content}}
+var m_ValidationProofMaterials = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationProofMaterials_member}}
+var mValidationProofOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationProofOutput_consoleOutput}}
+var mValidationSourceAnalysis = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationSourceAnalysis_summary, &sValidationSourceAnalysis_inferredEffect}}
+var mValidationTerminalStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationTerminalStatus_COMPLETED, &sValidationTerminalStatus_FAILED, &sValidationTerminalStatus_NO_SOURCE_AVAILABLE, &sValidationTerminalStatus_PARTIAL}}
+var mAssociateCollectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateCollectorInput_environmentId, &sAssociateCollectorInput_clientToken, &sAssociateCollectorInput_collectorArn, &sAssociateCollectorInput_collectorDataAccessRoleArn}}
+var mAssociateCollectorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateCollectorOutput_environmentId, &sAssociateCollectorOutput_environmentArn, &sAssociateCollectorOutput_associatedCollector}}
+var mCreateCodeFindingInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCodeFindingInput_environmentId, &sCreateCodeFindingInput_ocsfDocument, &sCreateCodeFindingInput_clientToken}}
+var mCreateCodeFindingOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCodeFindingOutput_findingId, &sCreateCodeFindingOutput_findingArn, &sCreateCodeFindingOutput_title, &sCreateCodeFindingOutput_status, &sCreateCodeFindingOutput_createdAt}}
+var mCreateCodeScanInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCodeScanInput_environmentId, &sCreateCodeScanInput_clientToken}}
+var mCreateCodeScanOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCodeScanOutput_scan}}
+var mCreateCollectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectorInput_type, &sCreateCollectorInput_kubernetesClusterRole, &sCreateCollectorInput_clientToken}}
+var mCreateCollectorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCollectorOutput_collectorId, &sCreateCollectorOutput_collectorArn, &sCreateCollectorOutput_type, &sCreateCollectorOutput_status, &sCreateCollectorOutput_createdAt}}
+var mCreateEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentInput_name, &sCreateEnvironmentInput_configuration}}
+var mCreateEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentOutput_environmentId, &sCreateEnvironmentOutput_environmentArn, &sCreateEnvironmentOutput_status, &sCreateEnvironmentOutput_createdAt}}
+var mCreateIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntegrationInput_clientToken, &sCreateIntegrationInput_name, &sCreateIntegrationInput_providerConfiguration}}
+var mCreateIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntegrationOutput_integrationId, &sCreateIntegrationOutput_integrationArn, &sCreateIntegrationOutput_createdAt}}
+var mDeleteCollectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCollectorInput_collectorId}}
+var mDeleteEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentInput_environmentId}}
+var mDeleteIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIntegrationInput_integrationId}}
+var mDisassociateCollectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateCollectorInput_environmentId, &sDisassociateCollectorInput_collectorArn}}
+var mGetCodeFindingInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeFindingInput_environmentId, &sGetCodeFindingInput_findingId}}
+var mGetCodeFindingOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeFindingOutput_type, &sGetCodeFindingOutput_title, &sGetCodeFindingOutput_severity, &sGetCodeFindingOutput_summary, &sGetCodeFindingOutput_detailedDescription, &sGetCodeFindingOutput_category, &sGetCodeFindingOutput_subCategory, &sGetCodeFindingOutput_cweIds, &sGetCodeFindingOutput_owaspCategory, &sGetCodeFindingOutput_mitigation, &sGetCodeFindingOutput_filePath, &sGetCodeFindingOutput_lineNumber, &sGetCodeFindingOutput_cveId, &sGetCodeFindingOutput_cvssBaseScore, &sGetCodeFindingOutput_affectedPackages, &sGetCodeFindingOutput_vulnerableCode, &sGetCodeFindingOutput_relevantInputs, &sGetCodeFindingOutput_stepsToReproduce, &sGetCodeFindingOutput_validation, &sGetCodeFindingOutput_endLine, &sGetCodeFindingOutput_mitreTechniques, &sGetCodeFindingOutput_remediationReferences, &sGetCodeFindingOutput_ocsfClass, &sGetCodeFindingOutput_ocsfSchemaVersion, &sGetCodeFindingOutput_productName, &sGetCodeFindingOutput_productVendorName, &sGetCodeFindingOutput_productVersion, &sGetCodeFindingOutput_sourceStatus, &sGetCodeFindingOutput_sourceStatusId, &sGetCodeFindingOutput_firstSeenAt, &sGetCodeFindingOutput_findingTypes, &sGetCodeFindingOutput_vulnerabilities, &sGetCodeFindingOutput_resources, &sGetCodeFindingOutput_posture, &sGetCodeFindingOutput_findingId, &sGetCodeFindingOutput_findingArn, &sGetCodeFindingOutput_environmentId, &sGetCodeFindingOutput_source, &sGetCodeFindingOutput_sourceFindingId, &sGetCodeFindingOutput_reportedAt, &sGetCodeFindingOutput_status, &sGetCodeFindingOutput_statusUpdatedAt, &sGetCodeFindingOutput_createdAt, &sGetCodeFindingOutput_scanRunId, &sGetCodeFindingOutput_statusMessage, &sGetCodeFindingOutput_discardReason, &sGetCodeFindingOutput_discardReasoning, &sGetCodeFindingOutput_duplicateOfIssueId, &sGetCodeFindingOutput_createdIssueId, &sGetCodeFindingOutput_completedAt}, Seed: 29039, Slots: []uint16{
+	0, 23, 0, 0, 0, 0, 0, 0, 5, 29, 0, 0, 0, 0, 14, 0, 0, 0, 0, 43, 0, 0, 32, 41,
+	46, 0, 0, 0, 0, 21, 27, 0, 0, 20, 10, 6, 17, 34, 0, 0, 44, 0, 0, 36, 0, 26, 0, 0,
+	0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 4, 50, 40, 42, 0, 15, 0, 35, 0, 0, 1, 12, 0, 0,
+	45, 0, 49, 33, 0, 0, 0, 0, 30, 0, 0, 38, 0, 0, 0, 0, 2, 0, 16, 0, 0, 22, 0, 0,
+	0, 0, 18, 3, 0, 0, 31, 37, 0, 19, 0, 7, 0, 0, 13, 28, 0, 48, 47, 39, 0, 0, 24, 0,
+	8, 0, 0, 11, 0, 25, 0, 0,
+}}
+var mGetCodeIssueArtifactInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeIssueArtifactInput_environmentId, &sGetCodeIssueArtifactInput_issueId, &sGetCodeIssueArtifactInput_artifactId}}
+var mGetCodeIssueArtifactOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeIssueArtifactOutput_artifactId, &sGetCodeIssueArtifactOutput_artifactType, &sGetCodeIssueArtifactOutput_mediaType, &sGetCodeIssueArtifactOutput_body, &sGetCodeIssueArtifactOutput_metadata, &sGetCodeIssueArtifactOutput_producer, &sGetCodeIssueArtifactOutput_createdAt}}
+var mGetCodeIssueInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeIssueInput_environmentId, &sGetCodeIssueInput_issueId}}
+var mGetCodeIssueOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeIssueOutput_issueId, &sGetCodeIssueOutput_issueArn, &sGetCodeIssueOutput_name, &sGetCodeIssueOutput_synopsis, &sGetCodeIssueOutput_severity, &sGetCodeIssueOutput_confidence, &sGetCodeIssueOutput_severityReasoning, &sGetCodeIssueOutput_summary, &sGetCodeIssueOutput_findingIds, &sGetCodeIssueOutput_status, &sGetCodeIssueOutput_phase, &sGetCodeIssueOutput_statusReason, &sGetCodeIssueOutput_statusMessage, &sGetCodeIssueOutput_statusUpdatedAt, &sGetCodeIssueOutput_createdAt, &sGetCodeIssueOutput_updatedAt, &sGetCodeIssueOutput_evidenceAvailability, &sGetCodeIssueOutput_patchDelivery}, Seed: 6, Slots: []uint16{
+	0, 0, 3, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 9, 0, 2, 0, 0, 0, 0, 14, 17, 0, 0,
+	12, 0, 11, 0, 0, 0, 0, 0, 0, 7, 0, 1, 0, 0, 0, 10, 13, 0, 0, 15, 0, 6, 16, 0,
+	0, 0, 5, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0,
+}}
+var mGetCodeScanInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeScanInput_environmentId, &sGetCodeScanInput_scanRunId}}
+var mGetCodeScanOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeScanOutput_scan}}
+var mGetCollectorDataAccessAuthorizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollectorDataAccessAuthorizationInput_accountId, &sGetCollectorDataAccessAuthorizationInput_collectorId, &sGetCollectorDataAccessAuthorizationInput_environmentArn}}
+var mGetCollectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollectorInput_collectorId}}
+var mGetCollectorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCollectorOutput_collectorId, &sGetCollectorOutput_collectorArn, &sGetCollectorOutput_type, &sGetCollectorOutput_status, &sGetCollectorOutput_configRecorderArn, &sGetCollectorOutput_kubernetesClusterRoleArn, &sGetCollectorOutput_createdAt, &sGetCollectorOutput_updatedAt}}
+var mGetEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentInput_environmentId}}
+var mGetEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentOutput_environmentId, &sGetEnvironmentOutput_environmentArn, &sGetEnvironmentOutput_name, &sGetEnvironmentOutput_status, &sGetEnvironmentOutput_statusMessage, &sGetEnvironmentOutput_statusUpdatedAt, &sGetEnvironmentOutput_createdAt, &sGetEnvironmentOutput_updatedAt, &sGetEnvironmentOutput_configuration}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 0, 3, 2, 0, 9, 0, 5, 0, 0, 4, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0,
+	0, 0, 7, 0, 0, 0, 1, 8,
+}}
+var mGetIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationInput_integrationId}}
+var mGetIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationOutput_integrationId, &sGetIntegrationOutput_integrationArn, &sGetIntegrationOutput_name, &sGetIntegrationOutput_integrationType, &sGetIntegrationOutput_providerDetails, &sGetIntegrationOutput_createdAt, &sGetIntegrationOutput_updatedAt}}
+var mGetResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyInput_arn}}
+var mGetResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyOutput_arn, &sGetResourcePolicyOutput_policy, &sGetResourcePolicyOutput_revisionId}}
+var mListAssociatedCollectorsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedCollectorsInput_environmentId, &sListAssociatedCollectorsInput_maxResults, &sListAssociatedCollectorsInput_nextToken}}
+var mListAssociatedCollectorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedCollectorsOutput_associatedCollectors, &sListAssociatedCollectorsOutput_nextToken}}
+var mListAssociatedEnvironmentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedEnvironmentsInput_collectorId, &sListAssociatedEnvironmentsInput_maxResults, &sListAssociatedEnvironmentsInput_nextToken}}
+var mListAssociatedEnvironmentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedEnvironmentsOutput_associatedEnvironments, &sListAssociatedEnvironmentsOutput_nextToken}}
+var mListCodeFindingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeFindingsInput_environmentId, &sListCodeFindingsInput_maxResults, &sListCodeFindingsInput_nextToken}}
+var mListCodeFindingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeFindingsOutput_items, &sListCodeFindingsOutput_nextToken}}
+var mListCodeIssueArtifactsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeIssueArtifactsInput_environmentId, &sListCodeIssueArtifactsInput_issueId, &sListCodeIssueArtifactsInput_artifactType, &sListCodeIssueArtifactsInput_maxResults, &sListCodeIssueArtifactsInput_nextToken}}
+var mListCodeIssueArtifactsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeIssueArtifactsOutput_items, &sListCodeIssueArtifactsOutput_nextToken}}
+var mListCodeIssuesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeIssuesInput_environmentId, &sListCodeIssuesInput_maxResults, &sListCodeIssuesInput_nextToken}}
+var mListCodeIssuesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeIssuesOutput_items, &sListCodeIssuesOutput_nextToken}}
+var mListCodeScansInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeScansInput_environmentId, &sListCodeScansInput_maxResults, &sListCodeScansInput_nextToken}}
+var mListCodeScansOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCodeScansOutput_scans, &sListCodeScansOutput_nextToken}}
+var mListCollectorsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollectorsOutput_items}}
+var mListEnvironmentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentsInput_maxResults, &sListEnvironmentsInput_nextToken}}
+var mListEnvironmentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentsOutput_items, &sListEnvironmentsOutput_nextToken}}
+var mListIntegrationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIntegrationsInput_maxResults, &sListIntegrationsInput_nextToken}}
+var mListIntegrationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIntegrationsOutput_items, &sListIntegrationsOutput_nextToken}}
+var mPutResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyInput_arn, &sPutResourcePolicyInput_policy, &sPutResourcePolicyInput_expectedRevisionId}}
+var mPutResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyOutput_arn, &sPutResourcePolicyOutput_policy, &sPutResourcePolicyOutput_revisionId}}
+var mStartIntegrationAuthorizationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartIntegrationAuthorizationInput_providerType, &sStartIntegrationAuthorizationInput_name}}
+var mStartIntegrationAuthorizationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartIntegrationAuthorizationOutput_state, &sStartIntegrationAuthorizationOutput_codeChallenge, &sStartIntegrationAuthorizationOutput_codeChallengeMethod, &sStartIntegrationAuthorizationOutput_expiresAt}}
+var mUpdateCollectorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectorInput_collectorId, &sUpdateCollectorInput_name, &sUpdateCollectorInput_kubernetesClusterRole}}
+var mUpdateCollectorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCollectorOutput_collectorId, &sUpdateCollectorOutput_collectorArn, &sUpdateCollectorOutput_type, &sUpdateCollectorOutput_status, &sUpdateCollectorOutput_configRecorderArn, &sUpdateCollectorOutput_kubernetesClusterRoleArn, &sUpdateCollectorOutput_createdAt, &sUpdateCollectorOutput_updatedAt}}
+var mUpdateEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentInput_environmentId, &sUpdateEnvironmentInput_name, &sUpdateEnvironmentInput_configuration}}
+var mUpdateEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentOutput_environmentId, &sUpdateEnvironmentOutput_environmentArn, &sUpdateEnvironmentOutput_name, &sUpdateEnvironmentOutput_status, &sUpdateEnvironmentOutput_statusMessage, &sUpdateEnvironmentOutput_statusUpdatedAt, &sUpdateEnvironmentOutput_createdAt, &sUpdateEnvironmentOutput_configuration}}
+var mUpdateIntegrationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIntegrationInput_integrationId, &sUpdateIntegrationInput_providerConfiguration}}
+var mUpdateIntegrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIntegrationOutput_integrationId, &sUpdateIntegrationOutput_integrationArn, &sUpdateIntegrationOutput_name, &sUpdateIntegrationOutput_integrationType, &sUpdateIntegrationOutput_providerDetails, &sUpdateIntegrationOutput_createdAt, &sUpdateIntegrationOutput_updatedAt}}
+
+var sAssociateCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCollector, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateCodeFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeFinding, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateCodeScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeScan, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollector, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironment, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegration, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollector, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironment, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntegration, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDisassociateCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCollector, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sGetCodeFinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeFinding, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetCodeIssue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeIssue, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetCodeIssueArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeIssueArtifact, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetCodeScan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeScan, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollector, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetCollectorDataAccessAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollectorDataAccessAuthorization, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironment, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegration, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListAssociatedCollectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedCollectors, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListAssociatedEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedEnvironments, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListCodeFindings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeFindings, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListCodeIssueArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeIssueArtifacts, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListCodeIssues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeIssues, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListCodeScans = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeScans, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListCollectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectors, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironments, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListIntegrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIntegrations, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sStartIntegrationAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIntegrationAuthorization, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sUpdateCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollector, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sUpdateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironment, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sUpdateIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegration, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var s_ContinuumControlPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContinuumControlPlane, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sAffectedPackage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAffectedPackage, Members: &mAffectedPackage, Type: smithy.ShapeTypeStructure})
+var s_AffectedPackageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AffectedPackageList, Members: &m_AffectedPackageList, Type: smithy.ShapeTypeList})
+var s_ArtifactCitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var s_ArtifactCitations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactCitations, Members: &m_ArtifactCitations, Type: smithy.ShapeTypeList})
+var s_ArtifactHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactHeaders, Members: &m_ArtifactHeaders, Type: smithy.ShapeTypeMap})
+var sArtifactHttpMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactHttpMethod, Members: &mArtifactHttpMethod, Type: smithy.ShapeTypeEnum})
+var s_ArtifactProofBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactProofBody, Type: smithy.ShapeTypeString})
+var s_ArtifactSha256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactSha256, Type: smithy.ShapeTypeString})
+var s_ArtifactText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sAssociatedCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedCollector, Members: &mAssociatedCollector, Type: smithy.ShapeTypeStructure})
+var s_AssociatedCollectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedCollectors, Members: &m_AssociatedCollectors, Type: smithy.ShapeTypeList})
+var sAssociatedEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedEnvironment, Members: &mAssociatedEnvironment, Type: smithy.ShapeTypeStructure})
+var s_AssociatedEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedEnvironments, Members: &m_AssociatedEnvironments, Type: smithy.ShapeTypeList})
+var s_AssociationClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationClientToken, Type: smithy.ShapeTypeString})
+var s_AttackFlowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttackFlowId, Type: smithy.ShapeTypeString})
+var s_AttackFlowIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttackFlowIds, Members: &m_AttackFlowIds, Type: smithy.ShapeTypeList})
+var s_AuthorizationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthorizationCode, Traits: &t35, Type: smithy.ShapeTypeString})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var s_BuildRepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildRepositoryName, Type: smithy.ShapeTypeString})
+var sCodeConfigurationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeConfigurationDetails, Members: &mCodeConfigurationDetails, Type: smithy.ShapeTypeStructure})
+var s_CodeFindingSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeFindingSummaries, Members: &m_CodeFindingSummaries, Type: smithy.ShapeTypeList})
+var s_CodeIssueArtifactItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeIssueArtifactItems, Members: &m_CodeIssueArtifactItems, Type: smithy.ShapeTypeList})
+var s_CodeIssueSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeIssueSummaries, Members: &m_CodeIssueSummaries, Type: smithy.ShapeTypeList})
+var sCodeScanData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeScanData, Members: &mCodeScanData, Type: smithy.ShapeTypeStructure})
+var s_CodeScanSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeScanSummaries, Members: &m_CodeScanSummaries, Type: smithy.ShapeTypeList})
+var sCodeScanSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeScanSummary, Members: &mCodeScanSummary, Type: smithy.ShapeTypeStructure})
+var s_CollectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var s_CollectorClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectorClientToken, Type: smithy.ShapeTypeString})
+var sCollectorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectorDetails, Members: &mCollectorDetails, Type: smithy.ShapeTypeStructure})
+var s_CollectorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectorId, Type: smithy.ShapeTypeString})
+var s_CollectorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectorName, Type: smithy.ShapeTypeString})
+var sCollectorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectorStatus, Members: &mCollectorStatus, Type: smithy.ShapeTypeEnum})
+var s_CollectorSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectorSummaries, Members: &m_CollectorSummaries, Type: smithy.ShapeTypeList})
+var sCollectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectorSummary, Members: &mCollectorSummary, Type: smithy.ShapeTypeStructure})
+var sCollectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollectorType, Members: &mCollectorType, Type: smithy.ShapeTypeEnum})
+var s_ConfigRecorderArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigRecorderArn, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sCreateCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeConfiguration, Members: &mCreateCodeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentConfiguration, Members: &mCreateEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CveId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CveId, Type: smithy.ShapeTypeString})
+var s_CweId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CweId, Type: smithy.ShapeTypeString})
+var s_CweIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CweIdList, Members: &m_CweIdList, Type: smithy.ShapeTypeList})
+var s_DeliveryGitCommitSha = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryGitCommitSha, Type: smithy.ShapeTypeString})
+var s_DeliveryGitHubName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryGitHubName, Type: smithy.ShapeTypeString})
+var s_DeliveryObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryObjectKey, Type: smithy.ShapeTypeString})
+var s_DeliveryPullRequestNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryPullRequestNumber, Type: smithy.ShapeTypeLong})
+var sDeliveryReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryReason, Members: &mDeliveryReason, Type: smithy.ShapeTypeEnum})
+var sDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryStatus, Members: &mDeliveryStatus, Type: smithy.ShapeTypeEnum})
+var s_DeliveryVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryVersionId, Type: smithy.ShapeTypeString})
+var sDestinationTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationTarget, Members: &mDestinationTarget, Type: smithy.ShapeTypeUnion})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_DomainNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNames, Members: &m_DomainNames, Type: smithy.ShapeTypeList})
+var s_EnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sEnvironmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentConfiguration, Members: &mEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sEnvironmentConfigurationDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentConfigurationDetails, Members: &mEnvironmentConfigurationDetails, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var s_EnvironmentListEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentListEntries, Members: &m_EnvironmentListEntries, Type: smithy.ShapeTypeList})
+var sEnvironmentListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentListEntry, Members: &mEnvironmentListEntry, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sEnvironmentNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentNetworkConfiguration, Members: &mEnvironmentNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sEnvironmentRepositorySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentRepositorySource, Members: &mEnvironmentRepositorySource, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentRepositorySources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentRepositorySources, Members: &m_EnvironmentRepositorySources, Type: smithy.ShapeTypeList})
+var sEnvironmentS3IntegrationSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentS3IntegrationSource, Members: &mEnvironmentS3IntegrationSource, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentS3Sources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentS3Sources, Members: &m_EnvironmentS3Sources, Type: smithy.ShapeTypeList})
+var s_EnvironmentSourceBucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentSourceBucketName, Type: smithy.ShapeTypeString})
+var sEnvironmentSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentSourceConfiguration, Members: &mEnvironmentSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentSourcePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentSourcePrefix, Type: smithy.ShapeTypeString})
+var s_EnvironmentSourceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentSourceRoleArn, Type: smithy.ShapeTypeString})
+var sEnvironmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var s_EnvironmentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentStatusMessage, Type: smithy.ShapeTypeString})
+var sExploitabilityVerdict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExploitabilityVerdict, Members: &mExploitabilityVerdict, Type: smithy.ShapeTypeEnum})
+var sExploitEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExploitEffect, Members: &mExploitEffect, Type: smithy.ShapeTypeEnum})
+var s_FindingArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingArn, Type: smithy.ShapeTypeString})
+var sFindingBlockingReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingBlockingReason, Members: &mFindingBlockingReason, Type: smithy.ShapeTypeEnum})
+var s_FindingCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var s_FindingClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingClientToken, Type: smithy.ShapeTypeString})
+var s_FindingCodeSnippet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingCodeSnippet, Type: smithy.ShapeTypeString})
+var sFindingComplianceCheck = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingComplianceCheck, Members: &mFindingComplianceCheck, Type: smithy.ShapeTypeStructure})
+var s_FindingComplianceCheckList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingComplianceCheckList, Members: &m_FindingComplianceCheckList, Type: smithy.ShapeTypeList})
+var s_FindingDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sFindingDiscardReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingDiscardReason, Members: &mFindingDiscardReason, Type: smithy.ShapeTypeEnum})
+var sFindingEvidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingEvidence, Members: &mFindingEvidence, Type: smithy.ShapeTypeStructure})
+var s_FindingEvidenceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingEvidenceList, Members: &m_FindingEvidenceList, Type: smithy.ShapeTypeList})
+var s_FindingFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingFilePath, Type: smithy.ShapeTypeString})
+var s_FindingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingId, Type: smithy.ShapeTypeString})
+var s_FindingListEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingListEntry, Type: smithy.ShapeTypeString})
+var sFindingLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingLocation, Members: &mFindingLocation, Type: smithy.ShapeTypeStructure})
+var s_FindingLocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingLocationList, Members: &m_FindingLocationList, Type: smithy.ShapeTypeList})
+var sFindingOcsfClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingOcsfClass, Members: &mFindingOcsfClass, Type: smithy.ShapeTypeEnum})
+var sFindingPosture = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingPosture, Members: &mFindingPosture, Type: smithy.ShapeTypeStructure})
+var sFindingResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingResource, Members: &mFindingResource, Type: smithy.ShapeTypeStructure})
+var s_FindingResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingResourceList, Members: &m_FindingResourceList, Type: smithy.ShapeTypeList})
+var s_FindingResourceUid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingResourceUid, Type: smithy.ShapeTypeString})
+var sFindingSeverityAdjustment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingSeverityAdjustment, Members: &mFindingSeverityAdjustment, Type: smithy.ShapeTypeEnum})
+var sFindingSeverityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingSeverityId, Members: &mFindingSeverityId, Type: smithy.ShapeTypeEnum})
+var s_FindingSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingSource, Type: smithy.ShapeTypeString})
+var sFindingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingStatus, Members: &mFindingStatus, Type: smithy.ShapeTypeEnum})
+var s_FindingStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingStatusMessage, Type: smithy.ShapeTypeString})
+var s_FindingStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sFindingSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingSummary, Members: &mFindingSummary, Type: smithy.ShapeTypeStructure})
+var s_FindingTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingTitle, Type: smithy.ShapeTypeString})
+var sFindingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingType, Members: &mFindingType, Type: smithy.ShapeTypeEnum})
+var sFindingValidation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingValidation, Members: &mFindingValidation, Type: smithy.ShapeTypeStructure})
+var sFindingVerdict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingVerdict, Members: &mFindingVerdict, Type: smithy.ShapeTypeEnum})
+var sFindingVulnerability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFindingVulnerability, Members: &mFindingVulnerability, Type: smithy.ShapeTypeStructure})
+var s_FindingVulnerabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FindingVulnerabilityList, Members: &m_FindingVulnerabilityList, Type: smithy.ShapeTypeList})
+var sFlowVerdict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowVerdict, Members: &mFlowVerdict, Type: smithy.ShapeTypeStructure})
+var s_FlowVerdicts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowVerdicts, Members: &m_FlowVerdicts, Type: smithy.ShapeTypeList})
+var sFlowVerdictValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowVerdictValue, Members: &mFlowVerdictValue, Type: smithy.ShapeTypeEnum})
+var sGitHubAuthorizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitHubAuthorizationConfiguration, Members: &mGitHubAuthorizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sGitHubConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitHubConfiguration, Members: &mGitHubConfiguration, Type: smithy.ShapeTypeStructure})
+var sGitHubDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitHubDetails, Members: &mGitHubDetails, Type: smithy.ShapeTypeStructure})
+var s_GitHubOrganizationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitHubOrganizationName, Type: smithy.ShapeTypeString})
+var sGitHubTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitHubTarget, Members: &mGitHubTarget, Type: smithy.ShapeTypeStructure})
+var s_GitLabAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitLabAccessToken, Traits: &t35, Type: smithy.ShapeTypeString})
+var sGitLabConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitLabConfiguration, Members: &mGitLabConfiguration, Type: smithy.ShapeTypeStructure})
+var sGitLabDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitLabDetails, Members: &mGitLabDetails, Type: smithy.ShapeTypeStructure})
+var s_GitLabInstanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitLabInstanceUrl, Type: smithy.ShapeTypeString})
+var s_GitLabTargetPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitLabTargetPath, Type: smithy.ShapeTypeString})
+var sGitLabTargetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitLabTargetType, Members: &mGitLabTargetType, Type: smithy.ShapeTypeEnum})
+var sGitLabTokenRotation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGitLabTokenRotation, Members: &mGitLabTokenRotation, Type: smithy.ShapeTypeEnum})
+var s_IntegrationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationArn, Type: smithy.ShapeTypeString})
+var sIntegrationAuthorizationProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrationAuthorizationProviderType, Members: &mIntegrationAuthorizationProviderType, Type: smithy.ShapeTypeEnum})
+var s_IntegrationClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationClientToken, Type: smithy.ShapeTypeString})
+var s_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationId, Type: smithy.ShapeTypeString})
+var s_IntegrationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationName, Type: smithy.ShapeTypeString})
+var s_IntegrationS3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationS3BucketName, Type: smithy.ShapeTypeString})
+var s_IntegrationS3ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationS3ExternalId, Traits: &t35, Type: smithy.ShapeTypeString})
+var s_IntegrationS3RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationS3RoleArn, Type: smithy.ShapeTypeString})
+var s_IntegrationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationSummaries, Members: &m_IntegrationSummaries, Type: smithy.ShapeTypeList})
+var sIntegrationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrationSummary, Members: &mIntegrationSummary, Type: smithy.ShapeTypeStructure})
+var sIntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrationType, Members: &mIntegrationType, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_IssueArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueArn, Type: smithy.ShapeTypeString})
+var sIssueArtifactBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueArtifactBody, Members: &mIssueArtifactBody, Type: smithy.ShapeTypeUnion})
+var s_IssueArtifactContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueArtifactContent, Type: smithy.ShapeTypeString})
+var s_IssueArtifactId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueArtifactId, Type: smithy.ShapeTypeString})
+var sIssueArtifactItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueArtifactItem, Members: &mIssueArtifactItem, Type: smithy.ShapeTypeStructure})
+var s_IssueArtifactMediaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueArtifactMediaType, Type: smithy.ShapeTypeString})
+var s_IssueArtifactProducerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueArtifactProducerName, Type: smithy.ShapeTypeString})
+var sIssueArtifactProducerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueArtifactProducerSummary, Members: &mIssueArtifactProducerSummary, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueArtifactType, Members: &mIssueArtifactType, Type: smithy.ShapeTypeEnum})
+var s_IssueConfidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueConfidence, Type: smithy.ShapeTypeInteger})
+var sIssueEvidenceAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueEvidenceAvailability, Members: &mIssueEvidenceAvailability, Type: smithy.ShapeTypeEnum})
+var s_IssueFindingIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueFindingIds, Members: &m_IssueFindingIds, Type: smithy.ShapeTypeList})
+var s_IssueId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueId, Type: smithy.ShapeTypeString})
+var s_IssueName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueName, Type: smithy.ShapeTypeString})
+var sIssuePatchDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssuePatchDelivery, Members: &mIssuePatchDelivery, Type: smithy.ShapeTypeStructure})
+var s_IssuePatchDeliveryCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssuePatchDeliveryCount, Type: smithy.ShapeTypeInteger})
+var s_IssuePatchDeliveryFailureReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssuePatchDeliveryFailureReasons, Members: &m_IssuePatchDeliveryFailureReasons, Type: smithy.ShapeTypeList})
+var sIssuePatchDeliveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssuePatchDeliveryStatus, Members: &mIssuePatchDeliveryStatus, Type: smithy.ShapeTypeEnum})
+var sIssuePhase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssuePhase, Members: &mIssuePhase, Type: smithy.ShapeTypeEnum})
+var s_IssueRemediationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueRemediationSummary, Type: smithy.ShapeTypeString})
+var sIssueSeverity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueSeverity, Members: &mIssueSeverity, Type: smithy.ShapeTypeEnum})
+var s_IssueSeverityReasoning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueSeverityReasoning, Type: smithy.ShapeTypeString})
+var sIssueStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueStatus, Members: &mIssueStatus, Type: smithy.ShapeTypeEnum})
+var s_IssueStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueStatusMessage, Type: smithy.ShapeTypeString})
+var sIssueStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueStatusReason, Members: &mIssueStatusReason, Type: smithy.ShapeTypeEnum})
+var sIssueSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueSummary, Members: &mIssueSummary, Type: smithy.ShapeTypeStructure})
+var s_IssueSynopsis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IssueSynopsis, Type: smithy.ShapeTypeString})
+var s_KubernetesClusterExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KubernetesClusterExternalId, Traits: &t35, Type: smithy.ShapeTypeString})
+var s_KubernetesClusterRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KubernetesClusterRoleArn, Type: smithy.ShapeTypeString})
+var sKubernetesClusterRoleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKubernetesClusterRoleConfiguration, Members: &mKubernetesClusterRoleConfiguration, Type: smithy.ShapeTypeStructure})
+var sKubernetesClusterRoleUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKubernetesClusterRoleUpdate, Members: &mKubernetesClusterRoleUpdate, Type: smithy.ShapeTypeUnion})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OAuthCodeChallenge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuthCodeChallenge, Type: smithy.ShapeTypeString})
+var sOAuthCodeChallengeMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuthCodeChallengeMethod, Members: &mOAuthCodeChallengeMethod, Type: smithy.ShapeTypeEnum})
+var s_OAuthState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuthState, Traits: &t35, Type: smithy.ShapeTypeString})
+var s_PackageManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageManager, Type: smithy.ShapeTypeString})
+var s_PackageName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var s_PackageVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sPatchBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPatchBody, Members: &mPatchBody, Type: smithy.ShapeTypeStructure})
+var sPatchCreationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPatchCreationPolicy, Members: &mPatchCreationPolicy, Type: smithy.ShapeTypeEnum})
+var sPatchDelivery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPatchDelivery, Members: &mPatchDelivery, Type: smithy.ShapeTypeStructure})
+var sPatchFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPatchFormat, Members: &mPatchFormat, Type: smithy.ShapeTypeEnum})
+var sPerFindingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerFindingResult, Members: &mPerFindingResult, Type: smithy.ShapeTypeStructure})
+var s_PerFindingResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PerFindingResults, Members: &m_PerFindingResults, Type: smithy.ShapeTypeList})
+var sPrevalidationSignal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrevalidationSignal, Members: &mPrevalidationSignal, Type: smithy.ShapeTypeStructure})
+var s_PrevalidationSignals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrevalidationSignals, Members: &m_PrevalidationSignals, Type: smithy.ShapeTypeList})
+var sPrevalidationSignalsBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrevalidationSignalsBody, Members: &mPrevalidationSignalsBody, Type: smithy.ShapeTypeStructure})
+var sProviderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProviderConfiguration, Members: &mProviderConfiguration, Type: smithy.ShapeTypeUnion})
+var sProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProviderDetails, Members: &mProviderDetails, Type: smithy.ShapeTypeUnion})
+var sReasoningStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReasoningStep, Members: &mReasoningStep, Type: smithy.ShapeTypeStructure})
+var s_ReasoningSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReasoningSteps, Members: &m_ReasoningSteps, Type: smithy.ShapeTypeList})
+var s_RedirectUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectUrl, Type: smithy.ShapeTypeString})
+var sRemediationProposalBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediationProposalBody, Members: &mRemediationProposalBody, Type: smithy.ShapeTypeStructure})
+var sRemoveKubernetesClusterRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveKubernetesClusterRole, Type: smithy.ShapeTypeStructure})
+var s_RepositoryBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryBranch, Type: smithy.ShapeTypeString})
+var s_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var s_ResourcePolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicyDocument, Traits: &t35, Type: smithy.ShapeTypeString})
+var s_ResourcePolicyInputDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicyInputDocument, Traits: &t35, Type: smithy.ShapeTypeString})
+var s_ResourcePolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicyRevisionId, Type: smithy.ShapeTypeString})
+var s_ResourcePolicyTargetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicyTargetArn, Type: smithy.ShapeTypeString})
+var sS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Configuration, Members: &mS3Configuration, Type: smithy.ShapeTypeStructure})
+var sS3Details = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Details, Members: &mS3Details, Type: smithy.ShapeTypeStructure})
+var sS3Target = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Target, Members: &mS3Target, Type: smithy.ShapeTypeStructure})
+var s_ScanClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanClientToken, Type: smithy.ShapeTypeString})
+var sScanFailureStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanFailureStage, Members: &mScanFailureStage, Type: smithy.ShapeTypeEnum})
+var s_ScanFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanFrequency, Type: smithy.ShapeTypeString})
+var sScanOrigin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanOrigin, Members: &mScanOrigin, Type: smithy.ShapeTypeEnum})
+var s_ScanRunFailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanRunFailureMessage, Type: smithy.ShapeTypeString})
+var s_ScanRunId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScanRunId, Type: smithy.ShapeTypeString})
+var sScanStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScanStatus, Members: &mScanStatus, Type: smithy.ShapeTypeEnum})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var sSignalAccessLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalAccessLevel, Members: &mSignalAccessLevel, Type: smithy.ShapeTypeEnum})
+var sSignalAccessPrecondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalAccessPrecondition, Members: &mSignalAccessPrecondition, Type: smithy.ShapeTypeStructure})
+var sSignalAttackerGains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalAttackerGains, Members: &mSignalAttackerGains, Type: smithy.ShapeTypeEnum})
+var sSignalAttackerGainsDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalAttackerGainsDimension, Members: &mSignalAttackerGainsDimension, Type: smithy.ShapeTypeStructure})
+var sSignalBand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalBand, Members: &mSignalBand, Type: smithy.ShapeTypeEnum})
+var sSignalBasis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalBasis, Members: &mSignalBasis, Type: smithy.ShapeTypeEnum})
+var sSignalBlastRadius = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalBlastRadius, Members: &mSignalBlastRadius, Type: smithy.ShapeTypeEnum})
+var sSignalBlastRadiusDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalBlastRadiusDimension, Members: &mSignalBlastRadiusDimension, Type: smithy.ShapeTypeStructure})
+var sSignalComputation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalComputation, Members: &mSignalComputation, Type: smithy.ShapeTypeStructure})
+var sSignalConfidenceReasoning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalConfidenceReasoning, Members: &mSignalConfidenceReasoning, Type: smithy.ShapeTypeStructure})
+var sSignalDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalDimension, Members: &mSignalDimension, Type: smithy.ShapeTypeEnum})
+var sSignalExploitability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalExploitability, Members: &mSignalExploitability, Type: smithy.ShapeTypeStructure})
+var sSignalImpactDimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalImpactDimensions, Members: &mSignalImpactDimensions, Type: smithy.ShapeTypeStructure})
+var sSignalPrecondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalPrecondition, Members: &mSignalPrecondition, Type: smithy.ShapeTypeStructure})
+var sSignalPreconditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalPreconditions, Members: &mSignalPreconditions, Type: smithy.ShapeTypeStructure})
+var sSignalStrength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalStrength, Members: &mSignalStrength, Type: smithy.ShapeTypeEnum})
+var sSignalTargetValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalTargetValue, Members: &mSignalTargetValue, Type: smithy.ShapeTypeEnum})
+var sSignalTargetValueDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSignalTargetValueDimension, Members: &mSignalTargetValueDimension, Type: smithy.ShapeTypeStructure})
+var s_SourceFindingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceFindingId, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var sUpdateCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCodeConfiguration, Members: &mUpdateCodeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentConfiguration, Members: &mUpdateEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateProviderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProviderConfiguration, Members: &mUpdateProviderConfiguration, Type: smithy.ShapeTypeUnion})
+var sUpdateS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateS3Configuration, Members: &mUpdateS3Configuration, Type: smithy.ShapeTypeStructure})
+var s_ValidationConfidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationConfidence, Type: smithy.ShapeTypeDouble})
+var sValidationConfidenceTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationConfidenceTier, Members: &mValidationConfidenceTier, Type: smithy.ShapeTypeEnum})
+var sValidationEvidenceBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationEvidenceBody, Members: &mValidationEvidenceBody, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExecutedProof = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExecutedProof, Members: &mValidationExecutedProof, Type: smithy.ShapeTypeStructure})
+var sValidationExploitArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExploitArtifact, Members: &mValidationExploitArtifact, Type: smithy.ShapeTypeStructure})
+var sValidationProofCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationProofCode, Members: &mValidationProofCode, Type: smithy.ShapeTypeStructure})
+var s_ValidationProofConsoleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationProofConsoleOutput, Type: smithy.ShapeTypeString})
+var sValidationProofMaterial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationProofMaterial, Members: &mValidationProofMaterial, Type: smithy.ShapeTypeStructure})
+var s_ValidationProofMaterials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationProofMaterials, Members: &m_ValidationProofMaterials, Type: smithy.ShapeTypeList})
+var s_ValidationProofMaterialText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationProofMaterialText, Type: smithy.ShapeTypeString})
+var sValidationProofOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationProofOutput, Members: &mValidationProofOutput, Type: smithy.ShapeTypeStructure})
+var s_ValidationProofSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationProofSummary, Type: smithy.ShapeTypeString})
+var sValidationSourceAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationSourceAnalysis, Members: &mValidationSourceAnalysis, Type: smithy.ShapeTypeStructure})
+var sValidationTerminalStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationTerminalStatus, Members: &mValidationTerminalStatus, Type: smithy.ShapeTypeEnum})
+var sAssociateCollectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCollectorInput, Members: &mAssociateCollectorInput, Type: smithy.ShapeTypeStructure})
+var sAssociateCollectorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCollectorOutput, Members: &mAssociateCollectorOutput, Type: smithy.ShapeTypeStructure})
+var sCreateCodeFindingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeFindingInput, Members: &mCreateCodeFindingInput, Type: smithy.ShapeTypeStructure})
+var sCreateCodeFindingOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeFindingOutput, Members: &mCreateCodeFindingOutput, Type: smithy.ShapeTypeStructure})
+var sCreateCodeScanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeScanInput, Members: &mCreateCodeScanInput, Type: smithy.ShapeTypeStructure})
+var sCreateCodeScanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCodeScanOutput, Members: &mCreateCodeScanOutput, Type: smithy.ShapeTypeStructure})
+var sCreateCollectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectorInput, Members: &mCreateCollectorInput, Type: smithy.ShapeTypeStructure})
+var sCreateCollectorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCollectorOutput, Members: &mCreateCollectorOutput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentInput, Members: &mCreateEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentOutput, Members: &mCreateEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegrationInput, Members: &mCreateIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegrationOutput, Members: &mCreateIntegrationOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteCollectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCollectorInput, Members: &mDeleteCollectorInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentInput, Members: &mDeleteEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sDeleteIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntegrationInput, Members: &mDeleteIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sDisassociateCollectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCollectorInput, Members: &mDisassociateCollectorInput, Type: smithy.ShapeTypeStructure})
+var sGetCodeFindingInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeFindingInput, Members: &mGetCodeFindingInput, Type: smithy.ShapeTypeStructure})
+var sGetCodeFindingOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeFindingOutput, Members: &mGetCodeFindingOutput, Type: smithy.ShapeTypeStructure})
+var sGetCodeIssueArtifactInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeIssueArtifactInput, Members: &mGetCodeIssueArtifactInput, Type: smithy.ShapeTypeStructure})
+var sGetCodeIssueArtifactOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeIssueArtifactOutput, Members: &mGetCodeIssueArtifactOutput, Type: smithy.ShapeTypeStructure})
+var sGetCodeIssueInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeIssueInput, Members: &mGetCodeIssueInput, Type: smithy.ShapeTypeStructure})
+var sGetCodeIssueOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeIssueOutput, Members: &mGetCodeIssueOutput, Type: smithy.ShapeTypeStructure})
+var sGetCodeScanInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeScanInput, Members: &mGetCodeScanInput, Type: smithy.ShapeTypeStructure})
+var sGetCodeScanOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeScanOutput, Members: &mGetCodeScanOutput, Type: smithy.ShapeTypeStructure})
+var sGetCollectorDataAccessAuthorizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollectorDataAccessAuthorizationInput, Members: &mGetCollectorDataAccessAuthorizationInput, Type: smithy.ShapeTypeStructure})
+var sGetCollectorDataAccessAuthorizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollectorDataAccessAuthorizationOutput, Type: smithy.ShapeTypeStructure})
+var sGetCollectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollectorInput, Members: &mGetCollectorInput, Type: smithy.ShapeTypeStructure})
+var sGetCollectorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCollectorOutput, Members: &mGetCollectorOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentInput, Members: &mGetEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentOutput, Members: &mGetEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationInput, Members: &mGetIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationOutput, Members: &mGetIntegrationOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyInput, Members: &mGetResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyOutput, Members: &mGetResourcePolicyOutput, Type: smithy.ShapeTypeStructure})
+var sListAssociatedCollectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedCollectorsInput, Members: &mListAssociatedCollectorsInput, Type: smithy.ShapeTypeStructure})
+var sListAssociatedCollectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedCollectorsOutput, Members: &mListAssociatedCollectorsOutput, Type: smithy.ShapeTypeStructure})
+var sListAssociatedEnvironmentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedEnvironmentsInput, Members: &mListAssociatedEnvironmentsInput, Type: smithy.ShapeTypeStructure})
+var sListAssociatedEnvironmentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedEnvironmentsOutput, Members: &mListAssociatedEnvironmentsOutput, Type: smithy.ShapeTypeStructure})
+var sListCodeFindingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeFindingsInput, Members: &mListCodeFindingsInput, Type: smithy.ShapeTypeStructure})
+var sListCodeFindingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeFindingsOutput, Members: &mListCodeFindingsOutput, Type: smithy.ShapeTypeStructure})
+var sListCodeIssueArtifactsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeIssueArtifactsInput, Members: &mListCodeIssueArtifactsInput, Type: smithy.ShapeTypeStructure})
+var sListCodeIssueArtifactsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeIssueArtifactsOutput, Members: &mListCodeIssueArtifactsOutput, Type: smithy.ShapeTypeStructure})
+var sListCodeIssuesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeIssuesInput, Members: &mListCodeIssuesInput, Type: smithy.ShapeTypeStructure})
+var sListCodeIssuesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeIssuesOutput, Members: &mListCodeIssuesOutput, Type: smithy.ShapeTypeStructure})
+var sListCodeScansInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeScansInput, Members: &mListCodeScansInput, Type: smithy.ShapeTypeStructure})
+var sListCodeScansOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCodeScansOutput, Members: &mListCodeScansOutput, Type: smithy.ShapeTypeStructure})
+var sListCollectorsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectorsInput, Type: smithy.ShapeTypeStructure})
+var sListCollectorsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectorsOutput, Members: &mListCollectorsOutput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsInput, Members: &mListEnvironmentsInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsOutput, Members: &mListEnvironmentsOutput, Type: smithy.ShapeTypeStructure})
+var sListIntegrationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIntegrationsInput, Members: &mListIntegrationsInput, Type: smithy.ShapeTypeStructure})
+var sListIntegrationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIntegrationsOutput, Members: &mListIntegrationsOutput, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyInput, Members: &mPutResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyOutput, Members: &mPutResourcePolicyOutput, Type: smithy.ShapeTypeStructure})
+var sStartIntegrationAuthorizationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIntegrationAuthorizationInput, Members: &mStartIntegrationAuthorizationInput, Type: smithy.ShapeTypeStructure})
+var sStartIntegrationAuthorizationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartIntegrationAuthorizationOutput, Members: &mStartIntegrationAuthorizationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectorInput, Members: &mUpdateCollectorInput, Type: smithy.ShapeTypeStructure})
+var sUpdateCollectorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCollectorOutput, Members: &mUpdateCollectorOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentInput, Members: &mUpdateEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentOutput, Members: &mUpdateEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegrationInput, Members: &mUpdateIntegrationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegrationOutput, Members: &mUpdateIntegrationOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAffectedPackage_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_PackageName, Type: smithy.ShapeTypeString})
+var sAffectedPackage_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sAffectedPackage_fixedInVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fixedInVersion", ID: &i_PackageVersion, Type: smithy.ShapeTypeString})
+var sAffectedPackage_packageManager = smithy.NewStaticSchema(smithy.StaticSchema{Member: "packageManager", ID: &i_PackageManager, Type: smithy.ShapeTypeString})
+var s_AffectedPackageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAffectedPackage, Members: &mAffectedPackage, Type: smithy.ShapeTypeStructure})
+var s_ArtifactCitations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var s_ArtifactHeaders_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var s_ArtifactHeaders_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sArtifactHttpMethod_GET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactHttpMethod_HEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactHttpMethod_POST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactHttpMethod_PUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactHttpMethod_PATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactHttpMethod_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactHttpMethod_OPTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssociatedCollector_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Type: smithy.ShapeTypeString})
+var sAssociatedCollector_collectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorArn", ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var s_AssociatedCollectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedCollector, Members: &mAssociatedCollector, Type: smithy.ShapeTypeStructure})
+var sAssociatedEnvironment_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sAssociatedEnvironment_environmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentArn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sAssociatedEnvironment_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sAssociatedEnvironment_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var sAssociatedEnvironment_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var s_AssociatedEnvironments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedEnvironment, Members: &mAssociatedEnvironment, Type: smithy.ShapeTypeStructure})
+var s_AttackFlowIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttackFlowId, Type: smithy.ShapeTypeString})
+var sCodeConfigurationDetails_collectorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorDetails", ID: &iCollectorDetails, Members: &mCollectorDetails, Type: smithy.ShapeTypeStructure})
+var sCodeConfigurationDetails_sourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConfiguration", ID: &iEnvironmentSourceConfiguration, Members: &mEnvironmentSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sCodeConfigurationDetails_environmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentConfiguration", ID: &iEnvironmentConfiguration, Members: &mEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sCodeConfigurationDetails_latestScan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestScan", ID: &iCodeScanSummary, Members: &mCodeScanSummary, Type: smithy.ShapeTypeStructure})
+var s_CodeFindingSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingSummary, Members: &mFindingSummary, Type: smithy.ShapeTypeStructure})
+var s_CodeIssueArtifactItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIssueArtifactItem, Members: &mIssueArtifactItem, Type: smithy.ShapeTypeStructure})
+var s_CodeIssueSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIssueSummary, Members: &mIssueSummary, Type: smithy.ShapeTypeStructure})
+var sCodeScanData_scanRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanRunId", ID: &i_ScanRunId, Type: smithy.ShapeTypeString})
+var sCodeScanData_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScanStatus, Members: &mScanStatus, Type: smithy.ShapeTypeEnum})
+var sCodeScanData_origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "origin", ID: &iScanOrigin, Members: &mScanOrigin, Type: smithy.ShapeTypeEnum})
+var sCodeScanData_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCodeScanData_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCodeScanData_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &i_ScanRunFailureMessage, Type: smithy.ShapeTypeString})
+var sCodeScanData_failureStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureStage", ID: &iScanFailureStage, Members: &mScanFailureStage, Type: smithy.ShapeTypeEnum})
+var s_CodeScanSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCodeScanSummary, Members: &mCodeScanSummary, Type: smithy.ShapeTypeStructure})
+var sCodeScanSummary_scanRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanRunId", ID: &i_ScanRunId, Type: smithy.ShapeTypeString})
+var sCodeScanSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iScanStatus, Members: &mScanStatus, Type: smithy.ShapeTypeEnum})
+var sCodeScanSummary_origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "origin", ID: &iScanOrigin, Members: &mScanOrigin, Type: smithy.ShapeTypeEnum})
+var sCodeScanSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCodeScanSummary_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCodeScanSummary_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &i_ScanRunFailureMessage, Type: smithy.ShapeTypeString})
+var sCodeScanSummary_failureStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureStage", ID: &iScanFailureStage, Members: &mScanFailureStage, Type: smithy.ShapeTypeEnum})
+var sCollectorDetails_collectorDataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorDataAccessRoleArn", ID: &i_EnvironmentSourceRoleArn, Type: smithy.ShapeTypeString})
+var sCollectorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCollectorStatus_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CollectorSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollectorSummary, Members: &mCollectorSummary, Type: smithy.ShapeTypeStructure})
+var sCollectorSummary_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Type: smithy.ShapeTypeString})
+var sCollectorSummary_collectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorArn", ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var sCollectorSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCollectorType, Members: &mCollectorType, Type: smithy.ShapeTypeEnum})
+var sCollectorSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCollectorStatus, Members: &mCollectorStatus, Type: smithy.ShapeTypeEnum})
+var sCollectorSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCollectorType_AWS_COLLECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_COLLECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCodeConfiguration_sourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConfiguration", ID: &iEnvironmentSourceConfiguration, Members: &mEnvironmentSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateCodeConfiguration_environmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentConfiguration", ID: &iEnvironmentConfiguration, Members: &mEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentConfiguration_codeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeConfiguration", ID: &iCreateCodeConfiguration, Members: &mCreateCodeConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CweIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CweId, Type: smithy.ShapeTypeString})
+var sDeliveryReason_ARTIFACT_READ_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARTIFACT_READ_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ARTIFACT_SOURCE_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARTIFACT_SOURCE_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ARTIFACT_SOURCE_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARTIFACT_SOURCE_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_BUILD_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_BUILD_READ_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_READ_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_BUILD_RESULT_SCOPE_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_RESULT_SCOPE_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_DELIVERY_NOT_CONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY_NOT_CONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_DELIVERY_SOURCE_KIND_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELIVERY_SOURCE_KIND_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_DUPLICATE_LOGICAL_REPOSITORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_LOGICAL_REPOSITORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_DUPLICATE_OR_INVALID_REPOSITORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_OR_INVALID_REPOSITORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ENVIRONMENT_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENVIRONMENT_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ENVIRONMENT_NOT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENVIRONMENT_NOT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ENVIRONMENT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENVIRONMENT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ENVIRONMENT_READ_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENVIRONMENT_READ_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_S3_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_S3_SOURCE_PREFIX_OVERLAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_SOURCE_PREFIX_OVERLAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SOURCE_INTEGRATION_UNRESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_INTEGRATION_UNRESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SOURCE_INTEGRATION_READ_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_INTEGRATION_READ_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SOURCE_INTEGRATION_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_INTEGRATION_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SOURCE_INTEGRATION_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_INTEGRATION_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_EXPORT_CREDENTIALS_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_CREDENTIALS_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_EXPORT_CREDENTIAL_EXPIRY_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_CREDENTIAL_EXPIRY_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_EXPORT_DESTINATION_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_DESTINATION_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_EXPORT_EXISTING_OBJECT_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_EXISTING_OBJECT_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_EXPORT_PUT_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_PUT_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_EXPORT_RECONCILIATION_READ_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_RECONCILIATION_READ_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_EXPORT_ROLE_ASSUMPTION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT_ROLE_ASSUMPTION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_BASE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_BASE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_BRANCH_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_BRANCH_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_RATE_LIMITED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_RATE_LIMITED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_REPOSITORY_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_REPOSITORY_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_REPOSITORY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_REPOSITORY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_REQUEST_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_REQUEST_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_REQUEST_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_REQUEST_REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_RESPONSE_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_RESPONSE_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GREEN_ATTEMPT_NOT_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREEN_ATTEMPT_NOT_SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GREEN_COMPLETION_NOT_OBSERVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREEN_COMPLETION_NOT_OBSERVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_PATCH_NOT_SELECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH_NOT_SELECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INCOMPLETE_SOURCE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPLETE_SOURCE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_ARCHIVE_DIGEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ARCHIVE_DIGEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_ARTIFACT_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ARTIFACT_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_COMPLETED_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_COMPLETED_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_EXPORT_RECEIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_EXPORT_RECEIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_GITHUB_PROVENANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_GITHUB_PROVENANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_S3_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_S3_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_SERVICE_RECEIPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SERVICE_RECEIPT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_SOURCE_INVENTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SOURCE_INVENTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_SOURCE_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SOURCE_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_INVALID_SOURCE_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SOURCE_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ISSUE_INTEGRITY_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUE_INTEGRITY_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_ISSUE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISSUE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MANIFEST_INVENTORY_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANIFEST_INVENTORY_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MANIFEST_PROVENANCE_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANIFEST_PROVENANCE_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MANIFEST_REPOSITORY_SET_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANIFEST_REPOSITORY_SET_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MANIFEST_SCOPE_OR_VERSION_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANIFEST_SCOPE_OR_VERSION_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MISSING_BUILD_RESULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_BUILD_RESULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MISSING_COMPLETED_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_COMPLETED_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MISSING_RESULT_DIGEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_RESULT_DIGEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MISSING_SOURCE_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_SOURCE_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_MISSING_SOURCE_TARGET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_SOURCE_TARGET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_PATCH_NOT_APPLICABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH_NOT_APPLICABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_PATCH_STORAGE_IDENTITY_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH_STORAGE_IDENTITY_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_PATCH_UNSUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH_UNSUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_PUBLISHER_DEADLINE_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISHER_DEADLINE_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_RESULT_COMPLETED_MANIFEST_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESULT_COMPLETED_MANIFEST_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_RESULT_SOURCE_BINDING_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESULT_SOURCE_BINDING_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SERVICE_COPY_DIGEST_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_COPY_DIGEST_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SERVICE_OBJECT_READ_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_OBJECT_READ_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SERVICE_OBJECT_TOO_LARGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_OBJECT_TOO_LARGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SERVICE_RECEIPT_OUTSIDE_ISSUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_RECEIPT_OUTSIDE_ISSUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SOURCE_OBJECT_DIGEST_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_OBJECT_DIGEST_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SOURCE_REFERENCE_OUTSIDE_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_REFERENCE_OUTSIDE_BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_SOURCE_TARGET_BUILD_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_TARGET_BUILD_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_UNKNOWN_REPOSITORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_REPOSITORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_UNKNOWN_SOURCE_PROVIDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_SOURCE_PROVIDER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_UNSUPPORTED_ENVIRONMENT_SCHEMA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSUPPORTED_ENVIRONMENT_SCHEMA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_GITHUB_DESTINATION_NOT_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_DESTINATION_NOT_ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryReason_PATCH_CREATION_POLICY_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH_CREATION_POLICY_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_SKIPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryStatus_ABANDONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ABANDONED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestinationTarget_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3Target, Members: &mS3Target, Type: smithy.ShapeTypeStructure})
+var sDestinationTarget_github = smithy.NewStaticSchema(smithy.StaticSchema{Member: "github", ID: &iGitHubTarget, Members: &mGitHubTarget, Type: smithy.ShapeTypeStructure})
+var s_DomainNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sEnvironmentConfiguration_network = smithy.NewStaticSchema(smithy.StaticSchema{Member: "network", ID: &iEnvironmentNetworkConfiguration, Members: &mEnvironmentNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sEnvironmentConfiguration_scanFrequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanFrequency", ID: &i_ScanFrequency, Type: smithy.ShapeTypeString})
+var sEnvironmentConfiguration_patchCreationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patchCreationPolicy", ID: &iPatchCreationPolicy, Members: &mPatchCreationPolicy, Type: smithy.ShapeTypeEnum})
+var sEnvironmentConfigurationDetails_codeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeConfiguration", ID: &iCodeConfigurationDetails, Members: &mCodeConfigurationDetails, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentListEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentListEntry, Members: &mEnvironmentListEntry, Type: smithy.ShapeTypeStructure})
+var sEnvironmentListEntry_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sEnvironmentListEntry_environmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentArn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sEnvironmentListEntry_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sEnvironmentListEntry_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var sEnvironmentListEntry_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentNetworkConfiguration_allowedDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedDomains", ID: &i_DomainNames, Members: &m_DomainNames, Type: smithy.ShapeTypeList})
+var sEnvironmentRepositorySource_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Type: smithy.ShapeTypeString})
+var sEnvironmentRepositorySource_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sEnvironmentRepositorySource_defaultBranch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultBranch", ID: &i_RepositoryBranch, Type: smithy.ShapeTypeString})
+var s_EnvironmentRepositorySources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentRepositorySource, Members: &mEnvironmentRepositorySource, Type: smithy.ShapeTypeStructure})
+var sEnvironmentS3IntegrationSource_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Type: smithy.ShapeTypeString})
+var sEnvironmentS3IntegrationSource_codePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codePrefix", ID: &i_EnvironmentSourcePrefix, Type: smithy.ShapeTypeString})
+var sEnvironmentS3IntegrationSource_contextPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contextPrefix", ID: &i_EnvironmentSourcePrefix, Type: smithy.ShapeTypeString})
+var s_EnvironmentS3Sources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentS3IntegrationSource, Members: &mEnvironmentS3IntegrationSource, Type: smithy.ShapeTypeStructure})
+var sEnvironmentSourceConfiguration_s3Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Sources", ID: &i_EnvironmentS3Sources, Members: &m_EnvironmentS3Sources, Type: smithy.ShapeTypeList})
+var sEnvironmentSourceConfiguration_repositorySources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositorySources", ID: &i_EnvironmentRepositorySources, Members: &m_EnvironmentRepositorySources, Type: smithy.ShapeTypeList})
+var sEnvironmentStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExploitabilityVerdict_EXPLOITABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPLOITABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExploitabilityVerdict_NOT_EXPLOITABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EXPLOITABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExploitabilityVerdict_UNCERTAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCERTAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExploitEffect_DATA_LEAKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_LEAKED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExploitEffect_ERROR_REVEALED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_REVEALED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExploitEffect_BEHAVIOR_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEHAVIOR_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExploitEffect_NO_EFFECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_EFFECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingBlockingReason_UNREACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNREACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingBlockingReason_PROTECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROTECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingBlockingReason_MISCLASSIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCLASSIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingBlockingReason_EXCLUDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXCLUDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingBlockingReason_NOT_FEASIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_FEASIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingBlockingReason_RISK_MITIGATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RISK_MITIGATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingBlockingReason_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingComplianceCheck_uid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uid", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingComplianceCheck_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingComplianceCheck_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var s_FindingComplianceCheckList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingComplianceCheck, Members: &mFindingComplianceCheck, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_SCANNER_VALIDATED_FALSE_POSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCANNER_VALIDATED_FALSE_POSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_SCANNER_NEEDS_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCANNER_NEEDS_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_DUPLICATE_OF_OPEN_ISSUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_OF_OPEN_ISSUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_DUPLICATE_OF_CLOSED_ISSUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_OF_CLOSED_ISSUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_COMPENSATING_CONTROL_PRESENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPENSATING_CONTROL_PRESENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_OUT_OF_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUT_OF_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_INSUFFICIENT_EVIDENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_EVIDENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_PROCESSING_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingDiscardReason_SOURCE_REPO_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_REPO_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingEvidence_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &i_FindingFilePath, Type: smithy.ShapeTypeString})
+var sFindingEvidence_line = smithy.NewStaticSchema(smithy.StaticSchema{Member: "line", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sFindingEvidence_snippet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snippet", ID: &i_FindingCodeSnippet, Type: smithy.ShapeTypeString})
+var s_FindingEvidenceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingEvidence, Members: &mFindingEvidence, Type: smithy.ShapeTypeStructure})
+var sFindingLocation_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_FindingFilePath, Type: smithy.ShapeTypeString})
+var sFindingLocation_startLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startLine", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sFindingLocation_endLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endLine", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var s_FindingLocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingLocation, Members: &mFindingLocation, Type: smithy.ShapeTypeStructure})
+var sFindingOcsfClass_VULNERABILITY_FINDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VULNERABILITY_FINDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingOcsfClass_APPLICATION_SECURITY_POSTURE_FINDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLICATION_SECURITY_POSTURE_FINDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingPosture_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingPosture_applicationUid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationUid", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingPosture_applicationVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationVersion", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingPosture_control = smithy.NewStaticSchema(smithy.StaticSchema{Member: "control", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingPosture_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sFindingPosture_standards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standards", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sFindingPosture_requirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requirements", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sFindingPosture_checks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checks", ID: &i_FindingComplianceCheckList, Members: &m_FindingComplianceCheckList, Type: smithy.ShapeTypeList})
+var sFindingPosture_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingPosture_statusId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusId", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sFindingPosture_remediation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediation", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sFindingPosture_remediationReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationReferences", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sFindingResource_uid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uid", ID: &i_FindingResourceUid, Type: smithy.ShapeTypeString})
+var sFindingResource_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingResource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingResource_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var s_FindingResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingResource, Members: &mFindingResource, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityAdjustment_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityAdjustment_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityAdjustment_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityAdjustment_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityAdjustment_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityAdjustment_UNCHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNCHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_INFORMATIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORMATIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_FATAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FATAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingSeverityId_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingStatus_VALIDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingStatus_CONFIRMED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIRMED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingStatus_DISCARDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCARDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FindingStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FindingListEntry, Type: smithy.ShapeTypeString})
+var sFindingSummary_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &i_FindingId, Type: smithy.ShapeTypeString})
+var sFindingSummary_findingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingArn", ID: &i_FindingArn, Type: smithy.ShapeTypeString})
+var sFindingSummary_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sFindingSummary_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_FindingSource, Type: smithy.ShapeTypeString})
+var sFindingSummary_sourceFindingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFindingId", ID: &i_SourceFindingId, Type: smithy.ShapeTypeString})
+var sFindingSummary_reportedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sFindingSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iFindingStatus, Members: &mFindingStatus, Type: smithy.ShapeTypeEnum})
+var sFindingSummary_statusUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusUpdatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sFindingSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sFindingSummary_scanRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanRunId", ID: &i_ScanRunId, Type: smithy.ShapeTypeString})
+var sFindingSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_FindingStatusMessage, Type: smithy.ShapeTypeString})
+var sFindingSummary_discardReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "discardReason", ID: &iFindingDiscardReason, Members: &mFindingDiscardReason, Type: smithy.ShapeTypeEnum})
+var sFindingSummary_discardReasoning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "discardReasoning", ID: &i_FindingStatusMessage, Type: smithy.ShapeTypeString})
+var sFindingSummary_duplicateOfIssueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "duplicateOfIssueId", ID: &i_IssueId, Type: smithy.ShapeTypeString})
+var sFindingSummary_createdIssueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdIssueId", ID: &i_IssueId, Type: smithy.ShapeTypeString})
+var sFindingSummary_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sFindingSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFindingType, Members: &mFindingType, Type: smithy.ShapeTypeEnum})
+var sFindingSummary_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_FindingTitle, Type: smithy.ShapeTypeString})
+var sFindingSummary_severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severity", ID: &iFindingSeverityId, Members: &mFindingSeverityId, Type: smithy.ShapeTypeEnum})
+var sFindingSummary_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingSummary_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_FindingFilePath, Type: smithy.ShapeTypeString})
+var sFindingType_CONTINUUM_CODE_VULN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTINUUM_CODE_VULN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingType_CUSTOMER_CODE_VULN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_CODE_VULN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingValidation_verdict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verdict", ID: &iFindingVerdict, Members: &mFindingVerdict, Type: smithy.ShapeTypeEnum})
+var sFindingValidation_blockingReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockingReason", ID: &iFindingBlockingReason, Members: &mFindingBlockingReason, Type: smithy.ShapeTypeEnum})
+var sFindingValidation_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sFindingValidation_rationale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rationale", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sFindingValidation_severityAdjustment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityAdjustment", ID: &iFindingSeverityAdjustment, Members: &mFindingSeverityAdjustment, Type: smithy.ShapeTypeEnum})
+var sFindingValidation_mitigatingControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mitigatingControls", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sFindingValidation_preconditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preconditions", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sFindingValidation_evidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidence", ID: &i_FindingEvidenceList, Members: &m_FindingEvidenceList, Type: smithy.ShapeTypeList})
+var sFindingVerdict_TRUE_POSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUE_POSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingVerdict_FALSE_POSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FALSE_POSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingVerdict_BENIGN_TRUE_POSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BENIGN_TRUE_POSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingVerdict_NEEDS_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEEDS_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFindingVulnerability_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_FindingTitle, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_cweId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cweId", ID: &i_CweId, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_cweCaption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cweCaption", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_additionalCweIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalCweIds", ID: &i_CweIdList, Members: &m_CweIdList, Type: smithy.ShapeTypeList})
+var sFindingVulnerability_cveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cveId", ID: &i_CveId, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_cvssBaseScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cvssBaseScore", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sFindingVulnerability_fixCoverage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fixCoverage", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_fixCoverageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fixCoverageId", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sFindingVulnerability_locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locations", ID: &i_FindingLocationList, Members: &m_FindingLocationList, Type: smithy.ShapeTypeList})
+var sFindingVulnerability_remediation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediation", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_remediationReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationReferences", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sFindingVulnerability_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_FindingCodeSnippet, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sFindingVulnerability_affectedPackages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "affectedPackages", ID: &i_AffectedPackageList, Members: &m_AffectedPackageList, Type: smithy.ShapeTypeList})
+var s_FindingVulnerabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFindingVulnerability, Members: &mFindingVulnerability, Type: smithy.ShapeTypeStructure})
+var sFlowVerdict_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_AttackFlowId, Type: smithy.ShapeTypeString})
+var sFlowVerdict_verdict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verdict", ID: &iFlowVerdictValue, Members: &mFlowVerdictValue, Type: smithy.ShapeTypeEnum})
+var sFlowVerdict_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &i_ValidationConfidence, Type: smithy.ShapeTypeDouble})
+var sFlowVerdict_evidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidence", ID: &i_ArtifactCitations, Members: &m_ArtifactCitations, Type: smithy.ShapeTypeList})
+var s_FlowVerdicts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlowVerdict, Members: &mFlowVerdict, Type: smithy.ShapeTypeStructure})
+var sFlowVerdictValue_CONFIRMED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIRMED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlowVerdictValue_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlowVerdictValue_INCONCLUSIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCONCLUSIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGitHubAuthorizationConfiguration_authorizationCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationCode", ID: &i_AuthorizationCode, Traits: &t37, Type: smithy.ShapeTypeString})
+var sGitHubAuthorizationConfiguration_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_OAuthState, Traits: &t37, Type: smithy.ShapeTypeString})
+var sGitHubAuthorizationConfiguration_redirectUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUrl", ID: &i_RedirectUrl, Type: smithy.ShapeTypeString})
+var sGitHubConfiguration_authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorization", ID: &iGitHubAuthorizationConfiguration, Members: &mGitHubAuthorizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sGitHubConfiguration_organizationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationName", ID: &i_GitHubOrganizationName, Type: smithy.ShapeTypeString})
+var sGitHubDetails_organizationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationName", ID: &i_GitHubOrganizationName, Type: smithy.ShapeTypeString})
+var sGitHubTarget_owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owner", ID: &i_DeliveryGitHubName, Type: smithy.ShapeTypeString})
+var sGitHubTarget_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_DeliveryGitHubName, Type: smithy.ShapeTypeString})
+var sGitHubTarget_pullRequestNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pullRequestNumber", ID: &i_DeliveryPullRequestNumber, Type: smithy.ShapeTypeLong})
+var sGitHubTarget_headSha = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headSha", ID: &i_DeliveryGitCommitSha, Type: smithy.ShapeTypeString})
+var sGitLabConfiguration_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_GitLabInstanceUrl, Type: smithy.ShapeTypeString})
+var sGitLabConfiguration_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &iGitLabTargetType, Members: &mGitLabTargetType, Type: smithy.ShapeTypeEnum})
+var sGitLabConfiguration_targetPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPath", ID: &i_GitLabTargetPath, Type: smithy.ShapeTypeString})
+var sGitLabConfiguration_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_GitLabAccessToken, Traits: &t37, Type: smithy.ShapeTypeString})
+var sGitLabDetails_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_GitLabInstanceUrl, Type: smithy.ShapeTypeString})
+var sGitLabDetails_targetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetType", ID: &iGitLabTargetType, Members: &mGitLabTargetType, Type: smithy.ShapeTypeEnum})
+var sGitLabDetails_targetPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetPath", ID: &i_GitLabTargetPath, Type: smithy.ShapeTypeString})
+var sGitLabDetails_tokenRotation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenRotation", ID: &iGitLabTokenRotation, Members: &mGitLabTokenRotation, Type: smithy.ShapeTypeEnum})
+var sGitLabDetails_expiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGitLabTargetType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGitLabTargetType_PROJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGitLabTokenRotation_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGitLabTokenRotation_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationAuthorizationProviderType_GITHUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_IntegrationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntegrationSummary, Members: &mIntegrationSummary, Type: smithy.ShapeTypeStructure})
+var sIntegrationSummary_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Type: smithy.ShapeTypeString})
+var sIntegrationSummary_integrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationArn", ID: &i_IntegrationArn, Type: smithy.ShapeTypeString})
+var sIntegrationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntegrationName, Type: smithy.ShapeTypeString})
+var sIntegrationSummary_integrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationType", ID: &iIntegrationType, Members: &mIntegrationType, Type: smithy.ShapeTypeEnum})
+var sIntegrationSummary_providerDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerDetails", ID: &iProviderDetails, Members: &mProviderDetails, Type: smithy.ShapeTypeUnion})
+var sIntegrationSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sIntegrationSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sIntegrationType_GITHUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationType_GITLAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIssueArtifactBody_validationEvidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationEvidence", ID: &iValidationEvidenceBody, Members: &mValidationEvidenceBody, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactBody_prevalidationSignals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prevalidationSignals", ID: &iPrevalidationSignalsBody, Members: &mPrevalidationSignalsBody, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactBody_remediationProposal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationProposal", ID: &iRemediationProposalBody, Members: &mRemediationProposalBody, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactBody_patch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patch", ID: &iPatchBody, Members: &mPatchBody, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactBody_raw = smithy.NewStaticSchema(smithy.StaticSchema{Member: "raw", ID: &i_IssueArtifactContent, Type: smithy.ShapeTypeString})
+var sIssueArtifactItem_artifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactId", ID: &i_IssueArtifactId, Type: smithy.ShapeTypeString})
+var sIssueArtifactItem_artifactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactType", ID: &iIssueArtifactType, Members: &mIssueArtifactType, Type: smithy.ShapeTypeEnum})
+var sIssueArtifactItem_mediaType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaType", ID: &i_IssueArtifactMediaType, Type: smithy.ShapeTypeString})
+var sIssueArtifactItem_producer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "producer", ID: &iIssueArtifactProducerSummary, Members: &mIssueArtifactProducerSummary, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactItem_contentSizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentSizeBytes", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sIssueArtifactItem_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sIssueArtifactProducerSummary_agent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agent", ID: &i_IssueArtifactProducerName, Type: smithy.ShapeTypeString})
+var sIssueArtifactType_EVIDENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVIDENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactType_AGENT_COMMUNICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGENT_COMMUNICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactType_VALIDATION_EVIDENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_EVIDENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactType_REMEDIATION_PROPOSAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMEDIATION_PROPOSAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactType_DECISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueArtifactType_PATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueEvidenceAvailability_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueEvidenceAvailability_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_IssueFindingIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FindingId, Type: smithy.ShapeTypeString})
+var sIssuePatchDelivery_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iIssuePatchDeliveryStatus, Members: &mIssuePatchDeliveryStatus, Type: smithy.ShapeTypeEnum})
+var sIssuePatchDelivery_patchCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patchCount", ID: &i_IssuePatchDeliveryCount, Type: smithy.ShapeTypeInteger})
+var sIssuePatchDelivery_succeededCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "succeededCount", ID: &i_IssuePatchDeliveryCount, Type: smithy.ShapeTypeInteger})
+var sIssuePatchDelivery_failedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedCount", ID: &i_IssuePatchDeliveryCount, Type: smithy.ShapeTypeInteger})
+var sIssuePatchDelivery_failureReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureReasons", ID: &i_IssuePatchDeliveryFailureReasons, Members: &m_IssuePatchDeliveryFailureReasons, Type: smithy.ShapeTypeList})
+var s_IssuePatchDeliveryFailureReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeliveryReason, Members: &mDeliveryReason, Type: smithy.ShapeTypeEnum})
+var sIssuePatchDeliveryStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssuePatchDeliveryStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssuePatchDeliveryStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssuePatchDeliveryStatus_SKIPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssuePhase_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssuePhase_PRIORITIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIORITIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssuePhase_REMEDIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMEDIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueSeverity_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueSeverity_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueSeverity_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueSeverity_CRITICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRITICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueStatusReason_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueStatusReason_REMEDIATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMEDIATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueSummary_issueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueId", ID: &i_IssueId, Type: smithy.ShapeTypeString})
+var sIssueSummary_issueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueArn", ID: &i_IssueArn, Type: smithy.ShapeTypeString})
+var sIssueSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IssueName, Type: smithy.ShapeTypeString})
+var sIssueSummary_severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severity", ID: &iIssueSeverity, Members: &mIssueSeverity, Type: smithy.ShapeTypeEnum})
+var sIssueSummary_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &i_IssueConfidence, Type: smithy.ShapeTypeInteger})
+var sIssueSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iIssueStatus, Members: &mIssueStatus, Type: smithy.ShapeTypeEnum})
+var sIssueSummary_phase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phase", ID: &iIssuePhase, Members: &mIssuePhase, Type: smithy.ShapeTypeEnum})
+var sIssueSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &iIssueStatusReason, Members: &mIssueStatusReason, Type: smithy.ShapeTypeEnum})
+var sIssueSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_IssueStatusMessage, Type: smithy.ShapeTypeString})
+var sIssueSummary_statusUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusUpdatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sIssueSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sIssueSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sKubernetesClusterRoleConfiguration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_KubernetesClusterRoleArn, Type: smithy.ShapeTypeString})
+var sKubernetesClusterRoleConfiguration_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_KubernetesClusterExternalId, Traits: &t37, Type: smithy.ShapeTypeString})
+var sKubernetesClusterRoleUpdate_set = smithy.NewStaticSchema(smithy.StaticSchema{Member: "set", ID: &iKubernetesClusterRoleConfiguration, Members: &mKubernetesClusterRoleConfiguration, Type: smithy.ShapeTypeStructure})
+var sKubernetesClusterRoleUpdate_remove = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remove", ID: &iRemoveKubernetesClusterRole, Type: smithy.ShapeTypeStructure})
+var sOAuthCodeChallengeMethod_S256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPatchBody_patch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patch", ID: &i_IssueArtifactContent, Type: smithy.ShapeTypeString})
+var sPatchBody_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPatchFormat, Members: &mPatchFormat, Type: smithy.ShapeTypeEnum})
+var sPatchBody_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_BuildRepositoryName, Type: smithy.ShapeTypeString})
+var sPatchBody_patchSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patchSha256", ID: &i_ArtifactSha256, Type: smithy.ShapeTypeString})
+var sPatchBody_sizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeBytes", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sPatchBody_delivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "delivery", ID: &iPatchDelivery, Members: &mPatchDelivery, Type: smithy.ShapeTypeStructure})
+var sPatchCreationPolicy_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPatchCreationPolicy_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPatchDelivery_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDeliveryStatus, Members: &mDeliveryStatus, Type: smithy.ShapeTypeEnum})
+var sPatchDelivery_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &iDestinationTarget, Members: &mDestinationTarget, Type: smithy.ShapeTypeUnion})
+var sPatchDelivery_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sPatchFormat_GIT_MAILBOX_PATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIT_MAILBOX_PATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPatchFormat_GIT_BINARY_DIFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIT_BINARY_DIFF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPatchFormat_GIT_DIFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIT_DIFF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPerFindingResult_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &i_FindingId, Type: smithy.ShapeTypeString})
+var sPerFindingResult_exploitable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exploitable", ID: &iExploitabilityVerdict, Members: &mExploitabilityVerdict, Type: smithy.ShapeTypeEnum})
+var sPerFindingResult_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &i_ValidationConfidence, Type: smithy.ShapeTypeDouble})
+var sPerFindingResult_flowVerdicts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowVerdicts", ID: &i_FlowVerdicts, Members: &m_FlowVerdicts, Type: smithy.ShapeTypeList})
+var sPerFindingResult_reasoningChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reasoningChain", ID: &i_ReasoningSteps, Members: &m_ReasoningSteps, Type: smithy.ShapeTypeList})
+var sPerFindingResult_exploitArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exploitArtifact", ID: &iValidationExploitArtifact, Members: &mValidationExploitArtifact, Type: smithy.ShapeTypeStructure})
+var s_PerFindingResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPerFindingResult, Members: &mPerFindingResult, Type: smithy.ShapeTypeStructure})
+var sPrevalidationSignal_subjectRef = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subjectRef", ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var sPrevalidationSignal_dimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimension", ID: &iSignalDimension, Members: &mSignalDimension, Type: smithy.ShapeTypeEnum})
+var sPrevalidationSignal_signalStrength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signalStrength", ID: &iSignalStrength, Members: &mSignalStrength, Type: smithy.ShapeTypeEnum})
+var sPrevalidationSignal_conclusion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conclusion", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sPrevalidationSignal_producerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "producerId", ID: &i_IssueArtifactProducerName, Type: smithy.ShapeTypeString})
+var sPrevalidationSignal_producerVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "producerVersion", ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var sPrevalidationSignal_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &i_ValidationConfidence, Type: smithy.ShapeTypeDouble})
+var sPrevalidationSignal_confidenceReasoning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidenceReasoning", ID: &iSignalConfidenceReasoning, Members: &mSignalConfidenceReasoning, Type: smithy.ShapeTypeStructure})
+var sPrevalidationSignal_computed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computed", ID: &iSignalComputation, Members: &mSignalComputation, Type: smithy.ShapeTypeStructure})
+var sPrevalidationSignal_preconditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preconditions", ID: &iSignalPreconditions, Members: &mSignalPreconditions, Type: smithy.ShapeTypeStructure})
+var sPrevalidationSignal_impactDimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impactDimensions", ID: &iSignalImpactDimensions, Members: &mSignalImpactDimensions, Type: smithy.ShapeTypeStructure})
+var sPrevalidationSignal_exploitability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exploitability", ID: &iSignalExploitability, Members: &mSignalExploitability, Type: smithy.ShapeTypeStructure})
+var s_PrevalidationSignals_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPrevalidationSignal, Members: &mPrevalidationSignal, Type: smithy.ShapeTypeStructure})
+var sPrevalidationSignalsBody_producedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "producedBy", ID: &i_IssueArtifactProducerName, Type: smithy.ShapeTypeString})
+var sPrevalidationSignalsBody_signals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signals", ID: &i_PrevalidationSignals, Members: &m_PrevalidationSignals, Type: smithy.ShapeTypeList})
+var sProviderConfiguration_github = smithy.NewStaticSchema(smithy.StaticSchema{Member: "github", ID: &iGitHubConfiguration, Members: &mGitHubConfiguration, Type: smithy.ShapeTypeStructure})
+var sProviderConfiguration_gitlab = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitlab", ID: &iGitLabConfiguration, Members: &mGitLabConfiguration, Type: smithy.ShapeTypeStructure})
+var sProviderConfiguration_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3Configuration, Members: &mS3Configuration, Type: smithy.ShapeTypeStructure})
+var sProviderDetails_github = smithy.NewStaticSchema(smithy.StaticSchema{Member: "github", ID: &iGitHubDetails, Members: &mGitHubDetails, Type: smithy.ShapeTypeStructure})
+var sProviderDetails_gitlab = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gitlab", ID: &iGitLabDetails, Members: &mGitLabDetails, Type: smithy.ShapeTypeStructure})
+var sProviderDetails_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3Details, Members: &mS3Details, Type: smithy.ShapeTypeStructure})
+var sReasoningStep_step = smithy.NewStaticSchema(smithy.StaticSchema{Member: "step", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sReasoningStep_claim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "claim", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sReasoningStep_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var sReasoningStep_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &i_ValidationConfidence, Type: smithy.ShapeTypeDouble})
+var s_ReasoningSteps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReasoningStep, Members: &mReasoningStep, Type: smithy.ShapeTypeStructure})
+var sRemediationProposalBody_patch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patch", ID: &i_IssueArtifactContent, Type: smithy.ShapeTypeString})
+var sRemediationProposalBody_format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "format", ID: &iPatchFormat, Members: &mPatchFormat, Type: smithy.ShapeTypeEnum})
+var sRemediationProposalBody_filename = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filename", ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var sRemediationProposalBody_patchSha256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patchSha256", ID: &i_ArtifactSha256, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3Configuration_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_IntegrationS3BucketName, Type: smithy.ShapeTypeString})
+var sS3Configuration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IntegrationS3RoleArn, Type: smithy.ShapeTypeString})
+var sS3Configuration_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_IntegrationS3ExternalId, Traits: &t37, Type: smithy.ShapeTypeString})
+var sS3Details_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_IntegrationS3BucketName, Type: smithy.ShapeTypeString})
+var sS3Details_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IntegrationS3RoleArn, Type: smithy.ShapeTypeString})
+var sS3Target_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_EnvironmentSourceBucketName, Type: smithy.ShapeTypeString})
+var sS3Target_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DeliveryObjectKey, Type: smithy.ShapeTypeString})
+var sS3Target_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_DeliveryVersionId, Type: smithy.ShapeTypeString})
+var sScanFailureStage_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanFailureStage_WAITING_FOR_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAITING_FOR_BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanFailureStage_BUILDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanFailureStage_WAITING_FOR_SCAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAITING_FOR_SCAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanFailureStage_SCANNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCANNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanOrigin_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanOrigin_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanStatus_WAITING_FOR_BUILD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAITING_FOR_BUILD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanStatus_BUILDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanStatus_WAITING_FOR_SCAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAITING_FOR_SCAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanStatus_SCANNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCANNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScanStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sSignalAccessLevel_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAccessLevel_ANY_AUTHENTICATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY_AUTHENTICATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAccessLevel_PRIVILEGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVILEGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAccessPrecondition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSignalAccessLevel, Members: &mSignalAccessLevel, Type: smithy.ShapeTypeEnum})
+var sSignalAccessPrecondition_basis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basis", ID: &iSignalBasis, Members: &mSignalBasis, Type: smithy.ShapeTypeEnum})
+var sSignalAccessPrecondition_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalAccessPrecondition_missingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingInfo", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalAttackerGains_EXECUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAttackerGains_MODIFY_PRIVILEGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY_PRIVILEGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAttackerGains_MODIFY_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAttackerGains_MODIFY_COSMETIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY_COSMETIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAttackerGains_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAttackerGains_NEITHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEITHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalAttackerGainsDimension_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSignalAttackerGains, Members: &mSignalAttackerGains, Type: smithy.ShapeTypeEnum})
+var sSignalAttackerGainsDimension_basis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basis", ID: &iSignalBasis, Members: &mSignalBasis, Type: smithy.ShapeTypeEnum})
+var sSignalAttackerGainsDimension_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalAttackerGainsDimension_missingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingInfo", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalBand_VERY_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERY_LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBand_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBand_MODERATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODERATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBand_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBasis_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBasis_GRAPH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRAPH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBasis_FINDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBasis_INFERRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFERRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBasis_NO_EVIDENCE_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_EVIDENCE_DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBlastRadius_CROSS_TENANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CROSS_TENANT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBlastRadius_OTHER_USERS_IN_TENANT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER_USERS_IN_TENANT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBlastRadius_OWN_SCOPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OWN_SCOPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalBlastRadiusDimension_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSignalBlastRadius, Members: &mSignalBlastRadius, Type: smithy.ShapeTypeEnum})
+var sSignalBlastRadiusDimension_basis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basis", ID: &iSignalBasis, Members: &mSignalBasis, Type: smithy.ShapeTypeEnum})
+var sSignalBlastRadiusDimension_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalBlastRadiusDimension_missingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingInfo", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalComputation_likelihoodBand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "likelihoodBand", ID: &iSignalBand, Members: &mSignalBand, Type: smithy.ShapeTypeEnum})
+var sSignalComputation_impactBand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "impactBand", ID: &iSignalBand, Members: &mSignalBand, Type: smithy.ShapeTypeEnum})
+var sSignalComputation_barriers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "barriers", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSignalConfidenceReasoning_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalConfidenceReasoning_factors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "factors", ID: &i_ArtifactCitations, Members: &m_ArtifactCitations, Type: smithy.ShapeTypeList})
+var sSignalDimension_EXPLOITABILITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPLOITABILITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalDimension_BLAST_RADIUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLAST_RADIUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalDimension_NETWORK_EXPOSURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_EXPOSURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalDimension_PRECONDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRECONDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalDimension_CODE_CONTEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_CONTEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalDimension_LIKELIHOOD_ASSESSMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIKELIHOOD_ASSESSMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalDimension_IMPACT_ASSESSMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPACT_ASSESSMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalExploitability_verdict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verdict", ID: &iExploitabilityVerdict, Members: &mExploitabilityVerdict, Type: smithy.ShapeTypeEnum})
+var sSignalExploitability_reachedCrownJewels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reachedCrownJewels", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSignalExploitability_highestLayerReached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "highestLayerReached", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSignalExploitability_confidenceTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidenceTier", ID: &iValidationConfidenceTier, Members: &mValidationConfidenceTier, Type: smithy.ShapeTypeEnum})
+var sSignalExploitability_scriptable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scriptable", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSignalExploitability_sourceValidationArtifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceValidationArtifactId", ID: &i_IssueArtifactId, Type: smithy.ShapeTypeString})
+var sSignalImpactDimensions_attackerGains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attackerGains", ID: &iSignalAttackerGainsDimension, Members: &mSignalAttackerGainsDimension, Type: smithy.ShapeTypeStructure})
+var sSignalImpactDimensions_blastRadius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blastRadius", ID: &iSignalBlastRadiusDimension, Members: &mSignalBlastRadiusDimension, Type: smithy.ShapeTypeStructure})
+var sSignalImpactDimensions_targetValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetValue", ID: &iSignalTargetValueDimension, Members: &mSignalTargetValueDimension, Type: smithy.ShapeTypeStructure})
+var sSignalPrecondition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSignalPrecondition_basis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basis", ID: &iSignalBasis, Members: &mSignalBasis, Type: smithy.ShapeTypeEnum})
+var sSignalPrecondition_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalPrecondition_missingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingInfo", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalPreconditions_reachableFromAttacker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reachableFromAttacker", ID: &iSignalPrecondition, Members: &mSignalPrecondition, Type: smithy.ShapeTypeStructure})
+var sSignalPreconditions_configurationNeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationNeeded", ID: &iSignalPrecondition, Members: &mSignalPrecondition, Type: smithy.ShapeTypeStructure})
+var sSignalPreconditions_accessLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessLevel", ID: &iSignalAccessPrecondition, Members: &mSignalAccessPrecondition, Type: smithy.ShapeTypeStructure})
+var sSignalPreconditions_userInteractionRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userInteractionRequired", ID: &iSignalPrecondition, Members: &mSignalPrecondition, Type: smithy.ShapeTypeStructure})
+var sSignalStrength_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalStrength_WEAK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEAK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalStrength_MODERATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODERATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalStrength_STRONG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRONG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalTargetValue_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalTargetValue_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalTargetValue_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSignalTargetValueDimension_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSignalTargetValue, Members: &mSignalTargetValue, Type: smithy.ShapeTypeEnum})
+var sSignalTargetValueDimension_basis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basis", ID: &iSignalBasis, Members: &mSignalBasis, Type: smithy.ShapeTypeEnum})
+var sSignalTargetValueDimension_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sSignalTargetValueDimension_missingInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "missingInfo", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateCodeConfiguration_sourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConfiguration", ID: &iEnvironmentSourceConfiguration, Members: &mEnvironmentSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateCodeConfiguration_environmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentConfiguration", ID: &iEnvironmentConfiguration, Members: &mEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentConfiguration_codeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeConfiguration", ID: &iUpdateCodeConfiguration, Members: &mUpdateCodeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateProviderConfiguration_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iUpdateS3Configuration, Members: &mUpdateS3Configuration, Type: smithy.ShapeTypeStructure})
+var sUpdateS3Configuration_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_IntegrationS3RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateS3Configuration_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_IntegrationS3ExternalId, Traits: &t37, Type: smithy.ShapeTypeString})
+var sValidationConfidenceTier_SOURCE_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_READ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationConfidenceTier_STATIC_PROVEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATIC_PROVEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationConfidenceTier_BUILD_PROVEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILD_PROVEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationConfidenceTier_RUNTIME_PROVEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNTIME_PROVEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationEvidenceBody_exploitable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exploitable", ID: &iExploitabilityVerdict, Members: &mExploitabilityVerdict, Type: smithy.ShapeTypeEnum})
+var sValidationEvidenceBody_terminalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminalStatus", ID: &iValidationTerminalStatus, Members: &mValidationTerminalStatus, Type: smithy.ShapeTypeEnum})
+var sValidationEvidenceBody_flowVerdicts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowVerdicts", ID: &i_FlowVerdicts, Members: &m_FlowVerdicts, Type: smithy.ShapeTypeList})
+var sValidationEvidenceBody_attackFlowsConfirmed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attackFlowsConfirmed", ID: &i_AttackFlowIds, Members: &m_AttackFlowIds, Type: smithy.ShapeTypeList})
+var sValidationEvidenceBody_exploitArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exploitArtifact", ID: &iValidationExploitArtifact, Members: &mValidationExploitArtifact, Type: smithy.ShapeTypeStructure})
+var sValidationEvidenceBody_executedProof = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executedProof", ID: &iValidationExecutedProof, Members: &mValidationExecutedProof, Type: smithy.ShapeTypeStructure})
+var sValidationEvidenceBody_sourceAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceAnalysis", ID: &iValidationSourceAnalysis, Members: &mValidationSourceAnalysis, Type: smithy.ShapeTypeStructure})
+var sValidationEvidenceBody_perFindingResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "perFindingResults", ID: &i_PerFindingResults, Members: &m_PerFindingResults, Type: smithy.ShapeTypeList})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExecutedProof_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &iValidationProofCode, Members: &mValidationProofCode, Type: smithy.ShapeTypeStructure})
+var sValidationExecutedProof_output = smithy.NewStaticSchema(smithy.StaticSchema{Member: "output", ID: &iValidationProofOutput, Members: &mValidationProofOutput, Type: smithy.ShapeTypeStructure})
+var sValidationExecutedProof_observedEffect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "observedEffect", ID: &iExploitEffect, Members: &mExploitEffect, Type: smithy.ShapeTypeEnum})
+var sValidationExploitArtifact_payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "payload", ID: &i_ArtifactText, Type: smithy.ShapeTypeString})
+var sValidationExploitArtifact_targetUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetUrl", ID: &i_ArtifactCitation, Type: smithy.ShapeTypeString})
+var sValidationExploitArtifact_httpMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "httpMethod", ID: &iArtifactHttpMethod, Members: &mArtifactHttpMethod, Type: smithy.ShapeTypeEnum})
+var sValidationExploitArtifact_headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headers", ID: &i_ArtifactHeaders, Members: &m_ArtifactHeaders, Type: smithy.ShapeTypeMap})
+var sValidationExploitArtifact_responseStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseStatus", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sValidationExploitArtifact_responseSnippet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseSnippet", ID: &i_ArtifactProofBody, Type: smithy.ShapeTypeString})
+var sValidationExploitArtifact_effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effect", ID: &iExploitEffect, Members: &mExploitEffect, Type: smithy.ShapeTypeEnum})
+var sValidationProofCode_proofCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proofCode", ID: &i_ValidationProofMaterials, Members: &m_ValidationProofMaterials, Type: smithy.ShapeTypeList})
+var sValidationProofMaterial_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_ValidationProofMaterialText, Type: smithy.ShapeTypeString})
+var s_ValidationProofMaterials_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationProofMaterial, Members: &mValidationProofMaterial, Type: smithy.ShapeTypeStructure})
+var sValidationProofOutput_consoleOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consoleOutput", ID: &i_ValidationProofConsoleOutput, Type: smithy.ShapeTypeString})
+var sValidationSourceAnalysis_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_ValidationProofSummary, Type: smithy.ShapeTypeString})
+var sValidationSourceAnalysis_inferredEffect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inferredEffect", ID: &iExploitEffect, Members: &mExploitEffect, Type: smithy.ShapeTypeEnum})
+var sValidationTerminalStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationTerminalStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationTerminalStatus_NO_SOURCE_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_SOURCE_AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationTerminalStatus_PARTIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssociateCollectorInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sAssociateCollectorInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_AssociationClientToken, Type: smithy.ShapeTypeString})
+var sAssociateCollectorInput_collectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorArn", ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var sAssociateCollectorInput_collectorDataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorDataAccessRoleArn", ID: &i_EnvironmentSourceRoleArn, Type: smithy.ShapeTypeString})
+var sAssociateCollectorOutput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sAssociateCollectorOutput_environmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentArn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sAssociateCollectorOutput_associatedCollector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedCollector", ID: &iAssociatedCollector, Members: &mAssociatedCollector, Type: smithy.ShapeTypeStructure})
+var sCreateCodeFindingInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sCreateCodeFindingInput_ocsfDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ocsfDocument", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var sCreateCodeFindingInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_FindingClientToken, Type: smithy.ShapeTypeString})
+var sCreateCodeFindingOutput_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &i_FindingId, Type: smithy.ShapeTypeString})
+var sCreateCodeFindingOutput_findingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingArn", ID: &i_FindingArn, Type: smithy.ShapeTypeString})
+var sCreateCodeFindingOutput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_FindingTitle, Type: smithy.ShapeTypeString})
+var sCreateCodeFindingOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iFindingStatus, Members: &mFindingStatus, Type: smithy.ShapeTypeEnum})
+var sCreateCodeFindingOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCreateCodeScanInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sCreateCodeScanInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ScanClientToken, Type: smithy.ShapeTypeString})
+var sCreateCodeScanOutput_scan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scan", ID: &iCodeScanSummary, Members: &mCodeScanSummary, Type: smithy.ShapeTypeStructure})
+var sCreateCollectorInput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCollectorType, Members: &mCollectorType, Type: smithy.ShapeTypeEnum})
+var sCreateCollectorInput_kubernetesClusterRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kubernetesClusterRole", ID: &iKubernetesClusterRoleConfiguration, Members: &mKubernetesClusterRoleConfiguration, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var sCreateCollectorInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_CollectorClientToken, Type: smithy.ShapeTypeString})
+var sCreateCollectorOutput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Type: smithy.ShapeTypeString})
+var sCreateCollectorOutput_collectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorArn", ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var sCreateCollectorOutput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCollectorType, Members: &mCollectorType, Type: smithy.ShapeTypeEnum})
+var sCreateCollectorOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCollectorStatus, Members: &mCollectorStatus, Type: smithy.ShapeTypeEnum})
+var sCreateCollectorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCreateEnvironmentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iCreateEnvironmentConfiguration, Members: &mCreateEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentOutput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentOutput_environmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentArn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var sCreateEnvironmentOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sCreateIntegrationInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IntegrationClientToken, Type: smithy.ShapeTypeString})
+var sCreateIntegrationInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntegrationName, Type: smithy.ShapeTypeString})
+var sCreateIntegrationInput_providerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerConfiguration", ID: &iProviderConfiguration, Members: &mProviderConfiguration, Type: smithy.ShapeTypeUnion})
+var sCreateIntegrationOutput_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Type: smithy.ShapeTypeString})
+var sCreateIntegrationOutput_integrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationArn", ID: &i_IntegrationArn, Type: smithy.ShapeTypeString})
+var sCreateIntegrationOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sDeleteCollectorInput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDeleteIntegrationInput_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDisassociateCollectorInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDisassociateCollectorInput_collectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorArn", ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var sGetCodeFindingInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeFindingInput_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &i_FindingId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFindingType, Members: &mFindingType, Type: smithy.ShapeTypeEnum})
+var sGetCodeFindingOutput_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_FindingTitle, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severity", ID: &iFindingSeverityId, Members: &mFindingSeverityId, Type: smithy.ShapeTypeEnum})
+var sGetCodeFindingOutput_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_detailedDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detailedDescription", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_subCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subCategory", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_cweIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cweIds", ID: &i_CweIdList, Members: &m_CweIdList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_owaspCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "owaspCategory", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_mitigation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mitigation", ID: &i_FindingDescription, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_FindingFilePath, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_lineNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lineNumber", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetCodeFindingOutput_cveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cveId", ID: &i_CveId, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_cvssBaseScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cvssBaseScore", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sGetCodeFindingOutput_affectedPackages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "affectedPackages", ID: &i_AffectedPackageList, Members: &m_AffectedPackageList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_vulnerableCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vulnerableCode", ID: &i_FindingCodeSnippet, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_relevantInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relevantInputs", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_stepsToReproduce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepsToReproduce", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_validation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validation", ID: &iFindingValidation, Members: &mFindingValidation, Type: smithy.ShapeTypeStructure})
+var sGetCodeFindingOutput_endLine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endLine", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetCodeFindingOutput_mitreTechniques = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mitreTechniques", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_remediationReferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationReferences", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_ocsfClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ocsfClass", ID: &iFindingOcsfClass, Members: &mFindingOcsfClass, Type: smithy.ShapeTypeEnum})
+var sGetCodeFindingOutput_ocsfSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ocsfSchemaVersion", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_productName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productName", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_productVendorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productVendorName", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_productVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "productVersion", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_sourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceStatus", ID: &i_FindingCategory, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_sourceStatusId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceStatusId", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetCodeFindingOutput_firstSeenAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstSeenAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeFindingOutput_findingTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingTypes", ID: &i_FindingStringList, Members: &m_FindingStringList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_vulnerabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vulnerabilities", ID: &i_FindingVulnerabilityList, Members: &m_FindingVulnerabilityList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_FindingResourceList, Members: &m_FindingResourceList, Type: smithy.ShapeTypeList})
+var sGetCodeFindingOutput_posture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "posture", ID: &iFindingPosture, Members: &mFindingPosture, Type: smithy.ShapeTypeStructure})
+var sGetCodeFindingOutput_findingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingId", ID: &i_FindingId, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_findingArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingArn", ID: &i_FindingArn, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_FindingSource, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_sourceFindingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFindingId", ID: &i_SourceFindingId, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_reportedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeFindingOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iFindingStatus, Members: &mFindingStatus, Type: smithy.ShapeTypeEnum})
+var sGetCodeFindingOutput_statusUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusUpdatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeFindingOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeFindingOutput_scanRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanRunId", ID: &i_ScanRunId, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_FindingStatusMessage, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_discardReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "discardReason", ID: &iFindingDiscardReason, Members: &mFindingDiscardReason, Type: smithy.ShapeTypeEnum})
+var sGetCodeFindingOutput_discardReasoning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "discardReasoning", ID: &i_FindingStatusMessage, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_duplicateOfIssueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "duplicateOfIssueId", ID: &i_IssueId, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_createdIssueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdIssueId", ID: &i_IssueId, Type: smithy.ShapeTypeString})
+var sGetCodeFindingOutput_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeIssueArtifactInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeIssueArtifactInput_issueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueId", ID: &i_IssueId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeIssueArtifactInput_artifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactId", ID: &i_IssueArtifactId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeIssueArtifactOutput_artifactId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactId", ID: &i_IssueArtifactId, Type: smithy.ShapeTypeString})
+var sGetCodeIssueArtifactOutput_artifactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactType", ID: &iIssueArtifactType, Members: &mIssueArtifactType, Type: smithy.ShapeTypeEnum})
+var sGetCodeIssueArtifactOutput_mediaType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaType", ID: &i_IssueArtifactMediaType, Type: smithy.ShapeTypeString})
+var sGetCodeIssueArtifactOutput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &iIssueArtifactBody, Members: &mIssueArtifactBody, Type: smithy.ShapeTypeUnion})
+var sGetCodeIssueArtifactOutput_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var sGetCodeIssueArtifactOutput_producer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "producer", ID: &iIssueArtifactProducerSummary, Members: &mIssueArtifactProducerSummary, Type: smithy.ShapeTypeStructure})
+var sGetCodeIssueArtifactOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeIssueInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeIssueInput_issueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueId", ID: &i_IssueId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_issueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueId", ID: &i_IssueId, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_issueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueArn", ID: &i_IssueArn, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IssueName, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_synopsis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "synopsis", ID: &i_IssueSynopsis, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severity", ID: &iIssueSeverity, Members: &mIssueSeverity, Type: smithy.ShapeTypeEnum})
+var sGetCodeIssueOutput_confidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidence", ID: &i_IssueConfidence, Type: smithy.ShapeTypeInteger})
+var sGetCodeIssueOutput_severityReasoning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severityReasoning", ID: &i_IssueSeverityReasoning, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_summary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "summary", ID: &i_IssueRemediationSummary, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_findingIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "findingIds", ID: &i_IssueFindingIds, Members: &m_IssueFindingIds, Type: smithy.ShapeTypeList})
+var sGetCodeIssueOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iIssueStatus, Members: &mIssueStatus, Type: smithy.ShapeTypeEnum})
+var sGetCodeIssueOutput_phase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phase", ID: &iIssuePhase, Members: &mIssuePhase, Type: smithy.ShapeTypeEnum})
+var sGetCodeIssueOutput_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &iIssueStatusReason, Members: &mIssueStatusReason, Type: smithy.ShapeTypeEnum})
+var sGetCodeIssueOutput_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_IssueStatusMessage, Type: smithy.ShapeTypeString})
+var sGetCodeIssueOutput_statusUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusUpdatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeIssueOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeIssueOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCodeIssueOutput_evidenceAvailability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evidenceAvailability", ID: &iIssueEvidenceAvailability, Members: &mIssueEvidenceAvailability, Type: smithy.ShapeTypeEnum})
+var sGetCodeIssueOutput_patchDelivery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patchDelivery", ID: &iIssuePatchDelivery, Members: &mIssuePatchDelivery, Type: smithy.ShapeTypeStructure})
+var sGetCodeScanInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeScanInput_scanRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scanRunId", ID: &i_ScanRunId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCodeScanOutput_scan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scan", ID: &iCodeScanData, Members: &mCodeScanData, Type: smithy.ShapeTypeStructure})
+var sGetCollectorDataAccessAuthorizationInput_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AwsAccountId, Traits: &t45, Type: smithy.ShapeTypeString})
+var sGetCollectorDataAccessAuthorizationInput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCollectorDataAccessAuthorizationInput_environmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentArn", ID: &i_EnvironmentArn, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetCollectorInput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCollectorOutput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Type: smithy.ShapeTypeString})
+var sGetCollectorOutput_collectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorArn", ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var sGetCollectorOutput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCollectorType, Members: &mCollectorType, Type: smithy.ShapeTypeEnum})
+var sGetCollectorOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCollectorStatus, Members: &mCollectorStatus, Type: smithy.ShapeTypeEnum})
+var sGetCollectorOutput_configRecorderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configRecorderArn", ID: &i_ConfigRecorderArn, Type: smithy.ShapeTypeString})
+var sGetCollectorOutput_kubernetesClusterRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kubernetesClusterRoleArn", ID: &i_KubernetesClusterRoleArn, Traits: &t44, Type: smithy.ShapeTypeString})
+var sGetCollectorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetCollectorOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetEnvironmentInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetEnvironmentOutput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sGetEnvironmentOutput_environmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentArn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sGetEnvironmentOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sGetEnvironmentOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var sGetEnvironmentOutput_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_EnvironmentStatusMessage, Type: smithy.ShapeTypeString})
+var sGetEnvironmentOutput_statusUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusUpdatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetEnvironmentOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetEnvironmentOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetEnvironmentOutput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iEnvironmentConfigurationDetails, Members: &mEnvironmentConfigurationDetails, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationInput_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetIntegrationOutput_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Type: smithy.ShapeTypeString})
+var sGetIntegrationOutput_integrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationArn", ID: &i_IntegrationArn, Type: smithy.ShapeTypeString})
+var sGetIntegrationOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntegrationName, Type: smithy.ShapeTypeString})
+var sGetIntegrationOutput_integrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationType", ID: &iIntegrationType, Members: &mIntegrationType, Type: smithy.ShapeTypeEnum})
+var sGetIntegrationOutput_providerDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerDetails", ID: &iProviderDetails, Members: &mProviderDetails, Type: smithy.ShapeTypeUnion})
+var sGetIntegrationOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetIntegrationOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sGetResourcePolicyInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourcePolicyTargetArn, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourcePolicyTargetArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyOutput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_ResourcePolicyDocument, Traits: &t37, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyOutput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_ResourcePolicyRevisionId, Type: smithy.ShapeTypeString})
+var sListAssociatedCollectorsInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListAssociatedCollectorsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListAssociatedCollectorsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListAssociatedCollectorsOutput_associatedCollectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedCollectors", ID: &i_AssociatedCollectors, Members: &m_AssociatedCollectors, Type: smithy.ShapeTypeList})
+var sListAssociatedCollectorsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAssociatedEnvironmentsInput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListAssociatedEnvironmentsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListAssociatedEnvironmentsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListAssociatedEnvironmentsOutput_associatedEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedEnvironments", ID: &i_AssociatedEnvironments, Members: &m_AssociatedEnvironments, Type: smithy.ShapeTypeList})
+var sListAssociatedEnvironmentsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCodeFindingsInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListCodeFindingsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListCodeFindingsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListCodeFindingsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_CodeFindingSummaries, Members: &m_CodeFindingSummaries, Type: smithy.ShapeTypeList})
+var sListCodeFindingsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCodeIssueArtifactsInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListCodeIssueArtifactsInput_issueId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issueId", ID: &i_IssueId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListCodeIssueArtifactsInput_artifactType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactType", ID: &iIssueArtifactType, Members: &mIssueArtifactType, Traits: &t50, Type: smithy.ShapeTypeEnum})
+var sListCodeIssueArtifactsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListCodeIssueArtifactsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListCodeIssueArtifactsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_CodeIssueArtifactItems, Members: &m_CodeIssueArtifactItems, Type: smithy.ShapeTypeList})
+var sListCodeIssueArtifactsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCodeIssuesInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListCodeIssuesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListCodeIssuesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListCodeIssuesOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_CodeIssueSummaries, Members: &m_CodeIssueSummaries, Type: smithy.ShapeTypeList})
+var sListCodeIssuesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCodeScansInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListCodeScansInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListCodeScansInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListCodeScansOutput_scans = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scans", ID: &i_CodeScanSummaries, Members: &m_CodeScanSummaries, Type: smithy.ShapeTypeList})
+var sListCodeScansOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCollectorsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_CollectorSummaries, Members: &m_CollectorSummaries, Type: smithy.ShapeTypeList})
+var sListEnvironmentsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListEnvironmentsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListEnvironmentsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_EnvironmentListEntries, Members: &m_EnvironmentListEntries, Type: smithy.ShapeTypeList})
+var sListEnvironmentsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListIntegrationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t48, Type: smithy.ShapeTypeInteger})
+var sListIntegrationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t49, Type: smithy.ShapeTypeString})
+var sListIntegrationsOutput_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_IntegrationSummaries, Members: &m_IntegrationSummaries, Type: smithy.ShapeTypeList})
+var sListIntegrationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourcePolicyTargetArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyInput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_ResourcePolicyInputDocument, Traits: &t37, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyInput_expectedRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expectedRevisionId", ID: &i_ResourcePolicyRevisionId, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ResourcePolicyTargetArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyOutput_policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "policy", ID: &i_ResourcePolicyDocument, Traits: &t37, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyOutput_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_ResourcePolicyRevisionId, Type: smithy.ShapeTypeString})
+var sStartIntegrationAuthorizationInput_providerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerType", ID: &iIntegrationAuthorizationProviderType, Members: &mIntegrationAuthorizationProviderType, Type: smithy.ShapeTypeEnum})
+var sStartIntegrationAuthorizationInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntegrationName, Type: smithy.ShapeTypeString})
+var sStartIntegrationAuthorizationOutput_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_OAuthState, Traits: &t37, Type: smithy.ShapeTypeString})
+var sStartIntegrationAuthorizationOutput_codeChallenge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeChallenge", ID: &i_OAuthCodeChallenge, Type: smithy.ShapeTypeString})
+var sStartIntegrationAuthorizationOutput_codeChallengeMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeChallengeMethod", ID: &iOAuthCodeChallengeMethod, Members: &mOAuthCodeChallengeMethod, Type: smithy.ShapeTypeEnum})
+var sStartIntegrationAuthorizationOutput_expiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sUpdateCollectorInput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUpdateCollectorInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CollectorName, Type: smithy.ShapeTypeString})
+var sUpdateCollectorInput_kubernetesClusterRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kubernetesClusterRole", ID: &iKubernetesClusterRoleUpdate, Members: &mKubernetesClusterRoleUpdate, Traits: &t44, Type: smithy.ShapeTypeUnion})
+var sUpdateCollectorOutput_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_CollectorId, Type: smithy.ShapeTypeString})
+var sUpdateCollectorOutput_collectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorArn", ID: &i_CollectorArn, Type: smithy.ShapeTypeString})
+var sUpdateCollectorOutput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCollectorType, Members: &mCollectorType, Type: smithy.ShapeTypeEnum})
+var sUpdateCollectorOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCollectorStatus, Members: &mCollectorStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateCollectorOutput_configRecorderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configRecorderArn", ID: &i_ConfigRecorderArn, Type: smithy.ShapeTypeString})
+var sUpdateCollectorOutput_kubernetesClusterRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kubernetesClusterRoleArn", ID: &i_KubernetesClusterRoleArn, Traits: &t44, Type: smithy.ShapeTypeString})
+var sUpdateCollectorOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sUpdateCollectorOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEnvironmentInput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iUpdateEnvironmentConfiguration, Members: &mUpdateEnvironmentConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentOutput_environmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentId", ID: &i_EnvironmentId, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentOutput_environmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentArn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnvironmentStatus, Members: &mEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateEnvironmentOutput_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_EnvironmentStatusMessage, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentOutput_statusUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusUpdatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEnvironmentOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEnvironmentOutput_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iEnvironmentConfigurationDetails, Members: &mEnvironmentConfigurationDetails, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationInput_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationInput_providerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerConfiguration", ID: &iUpdateProviderConfiguration, Members: &mUpdateProviderConfiguration, Type: smithy.ShapeTypeUnion})
+var sUpdateIntegrationOutput_integrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationId", ID: &i_IntegrationId, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationOutput_integrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationArn", ID: &i_IntegrationArn, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_IntegrationName, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationOutput_integrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrationType", ID: &iIntegrationType, Members: &mIntegrationType, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationOutput_providerDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerDetails", ID: &iProviderDetails, Members: &mProviderDetails, Type: smithy.ShapeTypeUnion})
+var sUpdateIntegrationOutput_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+var sUpdateIntegrationOutput_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t34, Type: smithy.ShapeTypeTimestamp})
+
+var AssociateCollector = &sAssociateCollector
+
+var CreateCodeFinding = &sCreateCodeFinding
+
+var CreateCodeScan = &sCreateCodeScan
+
+var CreateCollector = &sCreateCollector
+
+var CreateEnvironment = &sCreateEnvironment
+
+var CreateIntegration = &sCreateIntegration
+
+var DeleteCollector = &sDeleteCollector
+
+var DeleteEnvironment = &sDeleteEnvironment
+
+var DeleteIntegration = &sDeleteIntegration
+
+var DisassociateCollector = &sDisassociateCollector
+
+var GetCodeFinding = &sGetCodeFinding
+
+var GetCodeIssue = &sGetCodeIssue
+
+var GetCodeIssueArtifact = &sGetCodeIssueArtifact
+
+var GetCodeScan = &sGetCodeScan
+
+var GetCollector = &sGetCollector
+
+var GetCollectorDataAccessAuthorization = &sGetCollectorDataAccessAuthorization
+
+var GetEnvironment = &sGetEnvironment
+
+var GetIntegration = &sGetIntegration
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var ListAssociatedCollectors = &sListAssociatedCollectors
+
+var ListAssociatedEnvironments = &sListAssociatedEnvironments
+
+var ListCodeFindings = &sListCodeFindings
+
+var ListCodeIssueArtifacts = &sListCodeIssueArtifacts
+
+var ListCodeIssues = &sListCodeIssues
+
+var ListCodeScans = &sListCodeScans
+
+var ListCollectors = &sListCollectors
+
+var ListEnvironments = &sListEnvironments
+
+var ListIntegrations = &sListIntegrations
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var StartIntegrationAuthorization = &sStartIntegrationAuthorization
+
+var UpdateCollector = &sUpdateCollector
+
+var UpdateEnvironment = &sUpdateEnvironment
+
+var UpdateIntegration = &sUpdateIntegration
+
+var _ContinuumControlPlane = &s_ContinuumControlPlane
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AffectedPackage = &sAffectedPackage
+var AffectedPackage_name = &sAffectedPackage_name
+var AffectedPackage_version = &sAffectedPackage_version
+var AffectedPackage_fixedInVersion = &sAffectedPackage_fixedInVersion
+var AffectedPackage_packageManager = &sAffectedPackage_packageManager
+
+var _AffectedPackageList = &s_AffectedPackageList
+var _AffectedPackageList_member = &s_AffectedPackageList_member
+
+var _ArtifactCitation = &s_ArtifactCitation
+
+var _ArtifactCitations = &s_ArtifactCitations
+var _ArtifactCitations_member = &s_ArtifactCitations_member
+
+var _ArtifactHeaders = &s_ArtifactHeaders
+var _ArtifactHeaders_key = &s_ArtifactHeaders_key
+var _ArtifactHeaders_value = &s_ArtifactHeaders_value
+
+var ArtifactHttpMethod = &sArtifactHttpMethod
+var ArtifactHttpMethod_GET = &sArtifactHttpMethod_GET
+var ArtifactHttpMethod_HEAD = &sArtifactHttpMethod_HEAD
+var ArtifactHttpMethod_POST = &sArtifactHttpMethod_POST
+var ArtifactHttpMethod_PUT = &sArtifactHttpMethod_PUT
+var ArtifactHttpMethod_PATCH = &sArtifactHttpMethod_PATCH
+var ArtifactHttpMethod_DELETE = &sArtifactHttpMethod_DELETE
+var ArtifactHttpMethod_OPTIONS = &sArtifactHttpMethod_OPTIONS
+
+var _ArtifactProofBody = &s_ArtifactProofBody
+
+var _ArtifactSha256 = &s_ArtifactSha256
+
+var _ArtifactText = &s_ArtifactText
+
+var AssociatedCollector = &sAssociatedCollector
+var AssociatedCollector_collectorId = &sAssociatedCollector_collectorId
+var AssociatedCollector_collectorArn = &sAssociatedCollector_collectorArn
+
+var _AssociatedCollectors = &s_AssociatedCollectors
+var _AssociatedCollectors_member = &s_AssociatedCollectors_member
+
+var AssociatedEnvironment = &sAssociatedEnvironment
+var AssociatedEnvironment_environmentId = &sAssociatedEnvironment_environmentId
+var AssociatedEnvironment_environmentArn = &sAssociatedEnvironment_environmentArn
+var AssociatedEnvironment_name = &sAssociatedEnvironment_name
+var AssociatedEnvironment_status = &sAssociatedEnvironment_status
+var AssociatedEnvironment_createdAt = &sAssociatedEnvironment_createdAt
+
+var _AssociatedEnvironments = &s_AssociatedEnvironments
+var _AssociatedEnvironments_member = &s_AssociatedEnvironments_member
+
+var _AssociationClientToken = &s_AssociationClientToken
+
+var _AttackFlowId = &s_AttackFlowId
+
+var _AttackFlowIds = &s_AttackFlowIds
+var _AttackFlowIds_member = &s_AttackFlowIds_member
+
+var _AuthorizationCode = &s_AuthorizationCode
+
+var _AwsAccountId = &s_AwsAccountId
+
+var _BuildRepositoryName = &s_BuildRepositoryName
+
+var CodeConfigurationDetails = &sCodeConfigurationDetails
+var CodeConfigurationDetails_collectorDetails = &sCodeConfigurationDetails_collectorDetails
+var CodeConfigurationDetails_sourceConfiguration = &sCodeConfigurationDetails_sourceConfiguration
+var CodeConfigurationDetails_environmentConfiguration = &sCodeConfigurationDetails_environmentConfiguration
+var CodeConfigurationDetails_latestScan = &sCodeConfigurationDetails_latestScan
+
+var _CodeFindingSummaries = &s_CodeFindingSummaries
+var _CodeFindingSummaries_member = &s_CodeFindingSummaries_member
+
+var _CodeIssueArtifactItems = &s_CodeIssueArtifactItems
+var _CodeIssueArtifactItems_member = &s_CodeIssueArtifactItems_member
+
+var _CodeIssueSummaries = &s_CodeIssueSummaries
+var _CodeIssueSummaries_member = &s_CodeIssueSummaries_member
+
+var CodeScanData = &sCodeScanData
+var CodeScanData_scanRunId = &sCodeScanData_scanRunId
+var CodeScanData_status = &sCodeScanData_status
+var CodeScanData_origin = &sCodeScanData_origin
+var CodeScanData_createdAt = &sCodeScanData_createdAt
+var CodeScanData_completedAt = &sCodeScanData_completedAt
+var CodeScanData_failureMessage = &sCodeScanData_failureMessage
+var CodeScanData_failureStage = &sCodeScanData_failureStage
+
+var _CodeScanSummaries = &s_CodeScanSummaries
+var _CodeScanSummaries_member = &s_CodeScanSummaries_member
+
+var CodeScanSummary = &sCodeScanSummary
+var CodeScanSummary_scanRunId = &sCodeScanSummary_scanRunId
+var CodeScanSummary_status = &sCodeScanSummary_status
+var CodeScanSummary_origin = &sCodeScanSummary_origin
+var CodeScanSummary_createdAt = &sCodeScanSummary_createdAt
+var CodeScanSummary_completedAt = &sCodeScanSummary_completedAt
+var CodeScanSummary_failureMessage = &sCodeScanSummary_failureMessage
+var CodeScanSummary_failureStage = &sCodeScanSummary_failureStage
+
+var _CollectorArn = &s_CollectorArn
+
+var _CollectorClientToken = &s_CollectorClientToken
+
+var CollectorDetails = &sCollectorDetails
+var CollectorDetails_collectorDataAccessRoleArn = &sCollectorDetails_collectorDataAccessRoleArn
+
+var _CollectorId = &s_CollectorId
+
+var _CollectorName = &s_CollectorName
+
+var CollectorStatus = &sCollectorStatus
+var CollectorStatus_ACTIVE = &sCollectorStatus_ACTIVE
+var CollectorStatus_PENDING_DELETION = &sCollectorStatus_PENDING_DELETION
+
+var _CollectorSummaries = &s_CollectorSummaries
+var _CollectorSummaries_member = &s_CollectorSummaries_member
+
+var CollectorSummary = &sCollectorSummary
+var CollectorSummary_collectorId = &sCollectorSummary_collectorId
+var CollectorSummary_collectorArn = &sCollectorSummary_collectorArn
+var CollectorSummary_type = &sCollectorSummary_type
+var CollectorSummary_status = &sCollectorSummary_status
+var CollectorSummary_createdAt = &sCollectorSummary_createdAt
+
+var CollectorType = &sCollectorType
+var CollectorType_AWS_COLLECTOR = &sCollectorType_AWS_COLLECTOR
+
+var _ConfigRecorderArn = &s_ConfigRecorderArn
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CreateCodeConfiguration = &sCreateCodeConfiguration
+var CreateCodeConfiguration_sourceConfiguration = &sCreateCodeConfiguration_sourceConfiguration
+var CreateCodeConfiguration_environmentConfiguration = &sCreateCodeConfiguration_environmentConfiguration
+
+var CreateEnvironmentConfiguration = &sCreateEnvironmentConfiguration
+var CreateEnvironmentConfiguration_codeConfiguration = &sCreateEnvironmentConfiguration_codeConfiguration
+
+var _CveId = &s_CveId
+
+var _CweId = &s_CweId
+
+var _CweIdList = &s_CweIdList
+var _CweIdList_member = &s_CweIdList_member
+
+var _DeliveryGitCommitSha = &s_DeliveryGitCommitSha
+
+var _DeliveryGitHubName = &s_DeliveryGitHubName
+
+var _DeliveryObjectKey = &s_DeliveryObjectKey
+
+var _DeliveryPullRequestNumber = &s_DeliveryPullRequestNumber
+
+var DeliveryReason = &sDeliveryReason
+var DeliveryReason_ARTIFACT_READ_FAILED = &sDeliveryReason_ARTIFACT_READ_FAILED
+var DeliveryReason_ARTIFACT_SOURCE_MISMATCH = &sDeliveryReason_ARTIFACT_SOURCE_MISMATCH
+var DeliveryReason_ARTIFACT_SOURCE_MISSING = &sDeliveryReason_ARTIFACT_SOURCE_MISSING
+var DeliveryReason_BUILD_NOT_FOUND = &sDeliveryReason_BUILD_NOT_FOUND
+var DeliveryReason_BUILD_READ_FAILED = &sDeliveryReason_BUILD_READ_FAILED
+var DeliveryReason_BUILD_RESULT_SCOPE_MISMATCH = &sDeliveryReason_BUILD_RESULT_SCOPE_MISMATCH
+var DeliveryReason_DELIVERY_NOT_CONFIGURED = &sDeliveryReason_DELIVERY_NOT_CONFIGURED
+var DeliveryReason_DELIVERY_SOURCE_KIND_CHANGED = &sDeliveryReason_DELIVERY_SOURCE_KIND_CHANGED
+var DeliveryReason_DUPLICATE_LOGICAL_REPOSITORY = &sDeliveryReason_DUPLICATE_LOGICAL_REPOSITORY
+var DeliveryReason_DUPLICATE_OR_INVALID_REPOSITORY = &sDeliveryReason_DUPLICATE_OR_INVALID_REPOSITORY
+var DeliveryReason_ENVIRONMENT_DELETED = &sDeliveryReason_ENVIRONMENT_DELETED
+var DeliveryReason_ENVIRONMENT_NOT_ACTIVE = &sDeliveryReason_ENVIRONMENT_NOT_ACTIVE
+var DeliveryReason_ENVIRONMENT_NOT_FOUND = &sDeliveryReason_ENVIRONMENT_NOT_FOUND
+var DeliveryReason_ENVIRONMENT_READ_FAILED = &sDeliveryReason_ENVIRONMENT_READ_FAILED
+var DeliveryReason_S3_ACCESS_DENIED = &sDeliveryReason_S3_ACCESS_DENIED
+var DeliveryReason_S3_SOURCE_PREFIX_OVERLAP = &sDeliveryReason_S3_SOURCE_PREFIX_OVERLAP
+var DeliveryReason_SOURCE_INTEGRATION_UNRESOLVED = &sDeliveryReason_SOURCE_INTEGRATION_UNRESOLVED
+var DeliveryReason_SOURCE_INTEGRATION_READ_FAILED = &sDeliveryReason_SOURCE_INTEGRATION_READ_FAILED
+var DeliveryReason_SOURCE_INTEGRATION_INVALID = &sDeliveryReason_SOURCE_INTEGRATION_INVALID
+var DeliveryReason_SOURCE_INTEGRATION_CHANGED = &sDeliveryReason_SOURCE_INTEGRATION_CHANGED
+var DeliveryReason_EXPORT_CREDENTIALS_MISSING = &sDeliveryReason_EXPORT_CREDENTIALS_MISSING
+var DeliveryReason_EXPORT_CREDENTIAL_EXPIRY_INVALID = &sDeliveryReason_EXPORT_CREDENTIAL_EXPIRY_INVALID
+var DeliveryReason_EXPORT_DESTINATION_INVALID = &sDeliveryReason_EXPORT_DESTINATION_INVALID
+var DeliveryReason_EXPORT_EXISTING_OBJECT_MISMATCH = &sDeliveryReason_EXPORT_EXISTING_OBJECT_MISMATCH
+var DeliveryReason_EXPORT_PUT_FAILED = &sDeliveryReason_EXPORT_PUT_FAILED
+var DeliveryReason_EXPORT_RECONCILIATION_READ_FAILED = &sDeliveryReason_EXPORT_RECONCILIATION_READ_FAILED
+var DeliveryReason_EXPORT_ROLE_ASSUMPTION_FAILED = &sDeliveryReason_EXPORT_ROLE_ASSUMPTION_FAILED
+var DeliveryReason_GITHUB_ACCESS_DENIED = &sDeliveryReason_GITHUB_ACCESS_DENIED
+var DeliveryReason_GITHUB_BASE_NOT_FOUND = &sDeliveryReason_GITHUB_BASE_NOT_FOUND
+var DeliveryReason_GITHUB_BRANCH_CONFLICT = &sDeliveryReason_GITHUB_BRANCH_CONFLICT
+var DeliveryReason_GITHUB_NOT_FOUND = &sDeliveryReason_GITHUB_NOT_FOUND
+var DeliveryReason_GITHUB_RATE_LIMITED = &sDeliveryReason_GITHUB_RATE_LIMITED
+var DeliveryReason_GITHUB_REPOSITORY_CHANGED = &sDeliveryReason_GITHUB_REPOSITORY_CHANGED
+var DeliveryReason_GITHUB_REPOSITORY_NOT_FOUND = &sDeliveryReason_GITHUB_REPOSITORY_NOT_FOUND
+var DeliveryReason_GITHUB_REQUEST_FAILED = &sDeliveryReason_GITHUB_REQUEST_FAILED
+var DeliveryReason_GITHUB_REQUEST_REJECTED = &sDeliveryReason_GITHUB_REQUEST_REJECTED
+var DeliveryReason_GITHUB_RESPONSE_INVALID = &sDeliveryReason_GITHUB_RESPONSE_INVALID
+var DeliveryReason_GREEN_ATTEMPT_NOT_SUCCESSFUL = &sDeliveryReason_GREEN_ATTEMPT_NOT_SUCCESSFUL
+var DeliveryReason_GREEN_COMPLETION_NOT_OBSERVED = &sDeliveryReason_GREEN_COMPLETION_NOT_OBSERVED
+var DeliveryReason_PATCH_NOT_SELECTED = &sDeliveryReason_PATCH_NOT_SELECTED
+var DeliveryReason_INCOMPLETE_SOURCE_REFERENCE = &sDeliveryReason_INCOMPLETE_SOURCE_REFERENCE
+var DeliveryReason_INVALID_ARCHIVE_DIGEST = &sDeliveryReason_INVALID_ARCHIVE_DIGEST
+var DeliveryReason_INVALID_ARTIFACT_SOURCE = &sDeliveryReason_INVALID_ARTIFACT_SOURCE
+var DeliveryReason_INVALID_COMPLETED_MANIFEST = &sDeliveryReason_INVALID_COMPLETED_MANIFEST
+var DeliveryReason_INVALID_EXPORT_RECEIPT = &sDeliveryReason_INVALID_EXPORT_RECEIPT
+var DeliveryReason_INVALID_GITHUB_PROVENANCE = &sDeliveryReason_INVALID_GITHUB_PROVENANCE
+var DeliveryReason_INVALID_S3_DESTINATION = &sDeliveryReason_INVALID_S3_DESTINATION
+var DeliveryReason_INVALID_SERVICE_RECEIPT = &sDeliveryReason_INVALID_SERVICE_RECEIPT
+var DeliveryReason_INVALID_SOURCE_INVENTORY = &sDeliveryReason_INVALID_SOURCE_INVENTORY
+var DeliveryReason_INVALID_SOURCE_MANIFEST = &sDeliveryReason_INVALID_SOURCE_MANIFEST
+var DeliveryReason_INVALID_SOURCE_REFERENCE = &sDeliveryReason_INVALID_SOURCE_REFERENCE
+var DeliveryReason_ISSUE_INTEGRITY_FAILURE = &sDeliveryReason_ISSUE_INTEGRITY_FAILURE
+var DeliveryReason_ISSUE_NOT_FOUND = &sDeliveryReason_ISSUE_NOT_FOUND
+var DeliveryReason_MANIFEST_INVENTORY_MISMATCH = &sDeliveryReason_MANIFEST_INVENTORY_MISMATCH
+var DeliveryReason_MANIFEST_PROVENANCE_CHANGED = &sDeliveryReason_MANIFEST_PROVENANCE_CHANGED
+var DeliveryReason_MANIFEST_REPOSITORY_SET_MISMATCH = &sDeliveryReason_MANIFEST_REPOSITORY_SET_MISMATCH
+var DeliveryReason_MANIFEST_SCOPE_OR_VERSION_MISMATCH = &sDeliveryReason_MANIFEST_SCOPE_OR_VERSION_MISMATCH
+var DeliveryReason_MISSING_BUILD_RESULT = &sDeliveryReason_MISSING_BUILD_RESULT
+var DeliveryReason_MISSING_COMPLETED_MANIFEST = &sDeliveryReason_MISSING_COMPLETED_MANIFEST
+var DeliveryReason_MISSING_RESULT_DIGEST = &sDeliveryReason_MISSING_RESULT_DIGEST
+var DeliveryReason_MISSING_SOURCE_MANIFEST = &sDeliveryReason_MISSING_SOURCE_MANIFEST
+var DeliveryReason_MISSING_SOURCE_TARGET = &sDeliveryReason_MISSING_SOURCE_TARGET
+var DeliveryReason_PATCH_NOT_APPLICABLE = &sDeliveryReason_PATCH_NOT_APPLICABLE
+var DeliveryReason_PATCH_STORAGE_IDENTITY_MISSING = &sDeliveryReason_PATCH_STORAGE_IDENTITY_MISSING
+var DeliveryReason_PATCH_UNSUPPORTED = &sDeliveryReason_PATCH_UNSUPPORTED
+var DeliveryReason_PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT = &sDeliveryReason_PUBLICATION_OUTCOME_UNKNOWN_AFTER_RETRY_LIMIT
+var DeliveryReason_PUBLISHER_DEADLINE_EXCEEDED = &sDeliveryReason_PUBLISHER_DEADLINE_EXCEEDED
+var DeliveryReason_RESULT_COMPLETED_MANIFEST_MISMATCH = &sDeliveryReason_RESULT_COMPLETED_MANIFEST_MISMATCH
+var DeliveryReason_RESULT_SOURCE_BINDING_MISMATCH = &sDeliveryReason_RESULT_SOURCE_BINDING_MISMATCH
+var DeliveryReason_SERVICE_COPY_DIGEST_MISMATCH = &sDeliveryReason_SERVICE_COPY_DIGEST_MISMATCH
+var DeliveryReason_SERVICE_OBJECT_READ_FAILED = &sDeliveryReason_SERVICE_OBJECT_READ_FAILED
+var DeliveryReason_SERVICE_OBJECT_TOO_LARGE = &sDeliveryReason_SERVICE_OBJECT_TOO_LARGE
+var DeliveryReason_SERVICE_RECEIPT_OUTSIDE_ISSUE = &sDeliveryReason_SERVICE_RECEIPT_OUTSIDE_ISSUE
+var DeliveryReason_SOURCE_OBJECT_DIGEST_MISMATCH = &sDeliveryReason_SOURCE_OBJECT_DIGEST_MISMATCH
+var DeliveryReason_SOURCE_REFERENCE_OUTSIDE_BUILD = &sDeliveryReason_SOURCE_REFERENCE_OUTSIDE_BUILD
+var DeliveryReason_SOURCE_TARGET_BUILD_MISMATCH = &sDeliveryReason_SOURCE_TARGET_BUILD_MISMATCH
+var DeliveryReason_UNKNOWN_REPOSITORY = &sDeliveryReason_UNKNOWN_REPOSITORY
+var DeliveryReason_UNKNOWN_SOURCE_PROVIDER = &sDeliveryReason_UNKNOWN_SOURCE_PROVIDER
+var DeliveryReason_UNSUPPORTED_ENVIRONMENT_SCHEMA = &sDeliveryReason_UNSUPPORTED_ENVIRONMENT_SCHEMA
+var DeliveryReason_GITHUB_DESTINATION_NOT_ENABLED = &sDeliveryReason_GITHUB_DESTINATION_NOT_ENABLED
+var DeliveryReason_PATCH_CREATION_POLICY_DISABLED = &sDeliveryReason_PATCH_CREATION_POLICY_DISABLED
+
+var DeliveryStatus = &sDeliveryStatus
+var DeliveryStatus_PENDING = &sDeliveryStatus_PENDING
+var DeliveryStatus_SUCCEEDED = &sDeliveryStatus_SUCCEEDED
+var DeliveryStatus_FAILED = &sDeliveryStatus_FAILED
+var DeliveryStatus_SKIPPED = &sDeliveryStatus_SKIPPED
+var DeliveryStatus_ABANDONED = &sDeliveryStatus_ABANDONED
+
+var _DeliveryVersionId = &s_DeliveryVersionId
+
+var DestinationTarget = &sDestinationTarget
+var DestinationTarget_s3 = &sDestinationTarget_s3
+var DestinationTarget_github = &sDestinationTarget_github
+
+var _DomainName = &s_DomainName
+
+var _DomainNames = &s_DomainNames
+var _DomainNames_member = &s_DomainNames_member
+
+var _EnvironmentArn = &s_EnvironmentArn
+
+var EnvironmentConfiguration = &sEnvironmentConfiguration
+var EnvironmentConfiguration_network = &sEnvironmentConfiguration_network
+var EnvironmentConfiguration_scanFrequency = &sEnvironmentConfiguration_scanFrequency
+var EnvironmentConfiguration_patchCreationPolicy = &sEnvironmentConfiguration_patchCreationPolicy
+
+var EnvironmentConfigurationDetails = &sEnvironmentConfigurationDetails
+var EnvironmentConfigurationDetails_codeConfiguration = &sEnvironmentConfigurationDetails_codeConfiguration
+
+var _EnvironmentId = &s_EnvironmentId
+
+var _EnvironmentListEntries = &s_EnvironmentListEntries
+var _EnvironmentListEntries_member = &s_EnvironmentListEntries_member
+
+var EnvironmentListEntry = &sEnvironmentListEntry
+var EnvironmentListEntry_environmentId = &sEnvironmentListEntry_environmentId
+var EnvironmentListEntry_environmentArn = &sEnvironmentListEntry_environmentArn
+var EnvironmentListEntry_name = &sEnvironmentListEntry_name
+var EnvironmentListEntry_status = &sEnvironmentListEntry_status
+var EnvironmentListEntry_createdAt = &sEnvironmentListEntry_createdAt
+
+var _EnvironmentName = &s_EnvironmentName
+
+var EnvironmentNetworkConfiguration = &sEnvironmentNetworkConfiguration
+var EnvironmentNetworkConfiguration_allowedDomains = &sEnvironmentNetworkConfiguration_allowedDomains
+
+var EnvironmentRepositorySource = &sEnvironmentRepositorySource
+var EnvironmentRepositorySource_integrationId = &sEnvironmentRepositorySource_integrationId
+var EnvironmentRepositorySource_repository = &sEnvironmentRepositorySource_repository
+var EnvironmentRepositorySource_defaultBranch = &sEnvironmentRepositorySource_defaultBranch
+
+var _EnvironmentRepositorySources = &s_EnvironmentRepositorySources
+var _EnvironmentRepositorySources_member = &s_EnvironmentRepositorySources_member
+
+var EnvironmentS3IntegrationSource = &sEnvironmentS3IntegrationSource
+var EnvironmentS3IntegrationSource_integrationId = &sEnvironmentS3IntegrationSource_integrationId
+var EnvironmentS3IntegrationSource_codePrefix = &sEnvironmentS3IntegrationSource_codePrefix
+var EnvironmentS3IntegrationSource_contextPrefix = &sEnvironmentS3IntegrationSource_contextPrefix
+
+var _EnvironmentS3Sources = &s_EnvironmentS3Sources
+var _EnvironmentS3Sources_member = &s_EnvironmentS3Sources_member
+
+var _EnvironmentSourceBucketName = &s_EnvironmentSourceBucketName
+
+var EnvironmentSourceConfiguration = &sEnvironmentSourceConfiguration
+var EnvironmentSourceConfiguration_s3Sources = &sEnvironmentSourceConfiguration_s3Sources
+var EnvironmentSourceConfiguration_repositorySources = &sEnvironmentSourceConfiguration_repositorySources
+
+var _EnvironmentSourcePrefix = &s_EnvironmentSourcePrefix
+
+var _EnvironmentSourceRoleArn = &s_EnvironmentSourceRoleArn
+
+var EnvironmentStatus = &sEnvironmentStatus
+var EnvironmentStatus_ACTIVE = &sEnvironmentStatus_ACTIVE
+
+var _EnvironmentStatusMessage = &s_EnvironmentStatusMessage
+
+var ExploitabilityVerdict = &sExploitabilityVerdict
+var ExploitabilityVerdict_EXPLOITABLE = &sExploitabilityVerdict_EXPLOITABLE
+var ExploitabilityVerdict_NOT_EXPLOITABLE = &sExploitabilityVerdict_NOT_EXPLOITABLE
+var ExploitabilityVerdict_UNCERTAIN = &sExploitabilityVerdict_UNCERTAIN
+
+var ExploitEffect = &sExploitEffect
+var ExploitEffect_DATA_LEAKED = &sExploitEffect_DATA_LEAKED
+var ExploitEffect_ERROR_REVEALED = &sExploitEffect_ERROR_REVEALED
+var ExploitEffect_BEHAVIOR_CHANGED = &sExploitEffect_BEHAVIOR_CHANGED
+var ExploitEffect_NO_EFFECT = &sExploitEffect_NO_EFFECT
+
+var _FindingArn = &s_FindingArn
+
+var FindingBlockingReason = &sFindingBlockingReason
+var FindingBlockingReason_UNREACHABLE = &sFindingBlockingReason_UNREACHABLE
+var FindingBlockingReason_PROTECTED = &sFindingBlockingReason_PROTECTED
+var FindingBlockingReason_MISCLASSIFIED = &sFindingBlockingReason_MISCLASSIFIED
+var FindingBlockingReason_EXCLUDED = &sFindingBlockingReason_EXCLUDED
+var FindingBlockingReason_NOT_FEASIBLE = &sFindingBlockingReason_NOT_FEASIBLE
+var FindingBlockingReason_RISK_MITIGATED = &sFindingBlockingReason_RISK_MITIGATED
+var FindingBlockingReason_NONE = &sFindingBlockingReason_NONE
+
+var _FindingCategory = &s_FindingCategory
+
+var _FindingClientToken = &s_FindingClientToken
+
+var _FindingCodeSnippet = &s_FindingCodeSnippet
+
+var FindingComplianceCheck = &sFindingComplianceCheck
+var FindingComplianceCheck_uid = &sFindingComplianceCheck_uid
+var FindingComplianceCheck_name = &sFindingComplianceCheck_name
+var FindingComplianceCheck_description = &sFindingComplianceCheck_description
+
+var _FindingComplianceCheckList = &s_FindingComplianceCheckList
+var _FindingComplianceCheckList_member = &s_FindingComplianceCheckList_member
+
+var _FindingDescription = &s_FindingDescription
+
+var FindingDiscardReason = &sFindingDiscardReason
+var FindingDiscardReason_SCANNER_VALIDATED_FALSE_POSITIVE = &sFindingDiscardReason_SCANNER_VALIDATED_FALSE_POSITIVE
+var FindingDiscardReason_SCANNER_NEEDS_REVIEW = &sFindingDiscardReason_SCANNER_NEEDS_REVIEW
+var FindingDiscardReason_FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT = &sFindingDiscardReason_FALSE_POSITIVE_VALIDATED_AGAINST_CONTEXT
+var FindingDiscardReason_DUPLICATE_OF_OPEN_ISSUE = &sFindingDiscardReason_DUPLICATE_OF_OPEN_ISSUE
+var FindingDiscardReason_DUPLICATE_OF_CLOSED_ISSUE = &sFindingDiscardReason_DUPLICATE_OF_CLOSED_ISSUE
+var FindingDiscardReason_COMPENSATING_CONTROL_PRESENT = &sFindingDiscardReason_COMPENSATING_CONTROL_PRESENT
+var FindingDiscardReason_OUT_OF_SCOPE = &sFindingDiscardReason_OUT_OF_SCOPE
+var FindingDiscardReason_INSUFFICIENT_EVIDENCE = &sFindingDiscardReason_INSUFFICIENT_EVIDENCE
+var FindingDiscardReason_PROCESSING_FAILED = &sFindingDiscardReason_PROCESSING_FAILED
+var FindingDiscardReason_SOURCE_REPO_NOT_FOUND = &sFindingDiscardReason_SOURCE_REPO_NOT_FOUND
+
+var FindingEvidence = &sFindingEvidence
+var FindingEvidence_file = &sFindingEvidence_file
+var FindingEvidence_line = &sFindingEvidence_line
+var FindingEvidence_snippet = &sFindingEvidence_snippet
+
+var _FindingEvidenceList = &s_FindingEvidenceList
+var _FindingEvidenceList_member = &s_FindingEvidenceList_member
+
+var _FindingFilePath = &s_FindingFilePath
+
+var _FindingId = &s_FindingId
+
+var _FindingListEntry = &s_FindingListEntry
+
+var FindingLocation = &sFindingLocation
+var FindingLocation_filePath = &sFindingLocation_filePath
+var FindingLocation_startLine = &sFindingLocation_startLine
+var FindingLocation_endLine = &sFindingLocation_endLine
+
+var _FindingLocationList = &s_FindingLocationList
+var _FindingLocationList_member = &s_FindingLocationList_member
+
+var FindingOcsfClass = &sFindingOcsfClass
+var FindingOcsfClass_VULNERABILITY_FINDING = &sFindingOcsfClass_VULNERABILITY_FINDING
+var FindingOcsfClass_APPLICATION_SECURITY_POSTURE_FINDING = &sFindingOcsfClass_APPLICATION_SECURITY_POSTURE_FINDING
+
+var FindingPosture = &sFindingPosture
+var FindingPosture_application = &sFindingPosture_application
+var FindingPosture_applicationUid = &sFindingPosture_applicationUid
+var FindingPosture_applicationVersion = &sFindingPosture_applicationVersion
+var FindingPosture_control = &sFindingPosture_control
+var FindingPosture_description = &sFindingPosture_description
+var FindingPosture_standards = &sFindingPosture_standards
+var FindingPosture_requirements = &sFindingPosture_requirements
+var FindingPosture_checks = &sFindingPosture_checks
+var FindingPosture_status = &sFindingPosture_status
+var FindingPosture_statusId = &sFindingPosture_statusId
+var FindingPosture_remediation = &sFindingPosture_remediation
+var FindingPosture_remediationReferences = &sFindingPosture_remediationReferences
+
+var FindingResource = &sFindingResource
+var FindingResource_uid = &sFindingResource_uid
+var FindingResource_name = &sFindingResource_name
+var FindingResource_type = &sFindingResource_type
+var FindingResource_region = &sFindingResource_region
+
+var _FindingResourceList = &s_FindingResourceList
+var _FindingResourceList_member = &s_FindingResourceList_member
+
+var _FindingResourceUid = &s_FindingResourceUid
+
+var FindingSeverityAdjustment = &sFindingSeverityAdjustment
+var FindingSeverityAdjustment_CRITICAL = &sFindingSeverityAdjustment_CRITICAL
+var FindingSeverityAdjustment_HIGH = &sFindingSeverityAdjustment_HIGH
+var FindingSeverityAdjustment_MEDIUM = &sFindingSeverityAdjustment_MEDIUM
+var FindingSeverityAdjustment_LOW = &sFindingSeverityAdjustment_LOW
+var FindingSeverityAdjustment_INFORMATIONAL = &sFindingSeverityAdjustment_INFORMATIONAL
+var FindingSeverityAdjustment_UNCHANGED = &sFindingSeverityAdjustment_UNCHANGED
+
+var FindingSeverityId = &sFindingSeverityId
+var FindingSeverityId_UNKNOWN = &sFindingSeverityId_UNKNOWN
+var FindingSeverityId_INFORMATIONAL = &sFindingSeverityId_INFORMATIONAL
+var FindingSeverityId_LOW = &sFindingSeverityId_LOW
+var FindingSeverityId_MEDIUM = &sFindingSeverityId_MEDIUM
+var FindingSeverityId_HIGH = &sFindingSeverityId_HIGH
+var FindingSeverityId_CRITICAL = &sFindingSeverityId_CRITICAL
+var FindingSeverityId_FATAL = &sFindingSeverityId_FATAL
+var FindingSeverityId_OTHER = &sFindingSeverityId_OTHER
+
+var _FindingSource = &s_FindingSource
+
+var FindingStatus = &sFindingStatus
+var FindingStatus_SUBMITTED = &sFindingStatus_SUBMITTED
+var FindingStatus_VALIDATING = &sFindingStatus_VALIDATING
+var FindingStatus_CONFIRMED = &sFindingStatus_CONFIRMED
+var FindingStatus_DISCARDED = &sFindingStatus_DISCARDED
+
+var _FindingStatusMessage = &s_FindingStatusMessage
+
+var _FindingStringList = &s_FindingStringList
+var _FindingStringList_member = &s_FindingStringList_member
+
+var FindingSummary = &sFindingSummary
+var FindingSummary_findingId = &sFindingSummary_findingId
+var FindingSummary_findingArn = &sFindingSummary_findingArn
+var FindingSummary_environmentId = &sFindingSummary_environmentId
+var FindingSummary_source = &sFindingSummary_source
+var FindingSummary_sourceFindingId = &sFindingSummary_sourceFindingId
+var FindingSummary_reportedAt = &sFindingSummary_reportedAt
+var FindingSummary_status = &sFindingSummary_status
+var FindingSummary_statusUpdatedAt = &sFindingSummary_statusUpdatedAt
+var FindingSummary_createdAt = &sFindingSummary_createdAt
+var FindingSummary_scanRunId = &sFindingSummary_scanRunId
+var FindingSummary_statusMessage = &sFindingSummary_statusMessage
+var FindingSummary_discardReason = &sFindingSummary_discardReason
+var FindingSummary_discardReasoning = &sFindingSummary_discardReasoning
+var FindingSummary_duplicateOfIssueId = &sFindingSummary_duplicateOfIssueId
+var FindingSummary_createdIssueId = &sFindingSummary_createdIssueId
+var FindingSummary_completedAt = &sFindingSummary_completedAt
+var FindingSummary_type = &sFindingSummary_type
+var FindingSummary_title = &sFindingSummary_title
+var FindingSummary_severity = &sFindingSummary_severity
+var FindingSummary_category = &sFindingSummary_category
+var FindingSummary_filePath = &sFindingSummary_filePath
+
+var _FindingTitle = &s_FindingTitle
+
+var FindingType = &sFindingType
+var FindingType_CONTINUUM_CODE_VULN = &sFindingType_CONTINUUM_CODE_VULN
+var FindingType_CUSTOMER_CODE_VULN = &sFindingType_CUSTOMER_CODE_VULN
+
+var FindingValidation = &sFindingValidation
+var FindingValidation_verdict = &sFindingValidation_verdict
+var FindingValidation_blockingReason = &sFindingValidation_blockingReason
+var FindingValidation_confidence = &sFindingValidation_confidence
+var FindingValidation_rationale = &sFindingValidation_rationale
+var FindingValidation_severityAdjustment = &sFindingValidation_severityAdjustment
+var FindingValidation_mitigatingControls = &sFindingValidation_mitigatingControls
+var FindingValidation_preconditions = &sFindingValidation_preconditions
+var FindingValidation_evidence = &sFindingValidation_evidence
+
+var FindingVerdict = &sFindingVerdict
+var FindingVerdict_TRUE_POSITIVE = &sFindingVerdict_TRUE_POSITIVE
+var FindingVerdict_FALSE_POSITIVE = &sFindingVerdict_FALSE_POSITIVE
+var FindingVerdict_BENIGN_TRUE_POSITIVE = &sFindingVerdict_BENIGN_TRUE_POSITIVE
+var FindingVerdict_NEEDS_REVIEW = &sFindingVerdict_NEEDS_REVIEW
+
+var FindingVulnerability = &sFindingVulnerability
+var FindingVulnerability_title = &sFindingVulnerability_title
+var FindingVulnerability_description = &sFindingVulnerability_description
+var FindingVulnerability_cweId = &sFindingVulnerability_cweId
+var FindingVulnerability_cweCaption = &sFindingVulnerability_cweCaption
+var FindingVulnerability_additionalCweIds = &sFindingVulnerability_additionalCweIds
+var FindingVulnerability_cveId = &sFindingVulnerability_cveId
+var FindingVulnerability_cvssBaseScore = &sFindingVulnerability_cvssBaseScore
+var FindingVulnerability_fixCoverage = &sFindingVulnerability_fixCoverage
+var FindingVulnerability_fixCoverageId = &sFindingVulnerability_fixCoverageId
+var FindingVulnerability_locations = &sFindingVulnerability_locations
+var FindingVulnerability_remediation = &sFindingVulnerability_remediation
+var FindingVulnerability_remediationReferences = &sFindingVulnerability_remediationReferences
+var FindingVulnerability_code = &sFindingVulnerability_code
+var FindingVulnerability_details = &sFindingVulnerability_details
+var FindingVulnerability_affectedPackages = &sFindingVulnerability_affectedPackages
+
+var _FindingVulnerabilityList = &s_FindingVulnerabilityList
+var _FindingVulnerabilityList_member = &s_FindingVulnerabilityList_member
+
+var FlowVerdict = &sFlowVerdict
+var FlowVerdict_flowId = &sFlowVerdict_flowId
+var FlowVerdict_verdict = &sFlowVerdict_verdict
+var FlowVerdict_confidence = &sFlowVerdict_confidence
+var FlowVerdict_evidence = &sFlowVerdict_evidence
+
+var _FlowVerdicts = &s_FlowVerdicts
+var _FlowVerdicts_member = &s_FlowVerdicts_member
+
+var FlowVerdictValue = &sFlowVerdictValue
+var FlowVerdictValue_CONFIRMED = &sFlowVerdictValue_CONFIRMED
+var FlowVerdictValue_DENIED = &sFlowVerdictValue_DENIED
+var FlowVerdictValue_INCONCLUSIVE = &sFlowVerdictValue_INCONCLUSIVE
+
+var GitHubAuthorizationConfiguration = &sGitHubAuthorizationConfiguration
+var GitHubAuthorizationConfiguration_authorizationCode = &sGitHubAuthorizationConfiguration_authorizationCode
+var GitHubAuthorizationConfiguration_state = &sGitHubAuthorizationConfiguration_state
+var GitHubAuthorizationConfiguration_redirectUrl = &sGitHubAuthorizationConfiguration_redirectUrl
+
+var GitHubConfiguration = &sGitHubConfiguration
+var GitHubConfiguration_authorization = &sGitHubConfiguration_authorization
+var GitHubConfiguration_organizationName = &sGitHubConfiguration_organizationName
+
+var GitHubDetails = &sGitHubDetails
+var GitHubDetails_organizationName = &sGitHubDetails_organizationName
+
+var _GitHubOrganizationName = &s_GitHubOrganizationName
+
+var GitHubTarget = &sGitHubTarget
+var GitHubTarget_owner = &sGitHubTarget_owner
+var GitHubTarget_repository = &sGitHubTarget_repository
+var GitHubTarget_pullRequestNumber = &sGitHubTarget_pullRequestNumber
+var GitHubTarget_headSha = &sGitHubTarget_headSha
+
+var _GitLabAccessToken = &s_GitLabAccessToken
+
+var GitLabConfiguration = &sGitLabConfiguration
+var GitLabConfiguration_instanceUrl = &sGitLabConfiguration_instanceUrl
+var GitLabConfiguration_targetType = &sGitLabConfiguration_targetType
+var GitLabConfiguration_targetPath = &sGitLabConfiguration_targetPath
+var GitLabConfiguration_accessToken = &sGitLabConfiguration_accessToken
+
+var GitLabDetails = &sGitLabDetails
+var GitLabDetails_instanceUrl = &sGitLabDetails_instanceUrl
+var GitLabDetails_targetType = &sGitLabDetails_targetType
+var GitLabDetails_targetPath = &sGitLabDetails_targetPath
+var GitLabDetails_tokenRotation = &sGitLabDetails_tokenRotation
+var GitLabDetails_expiresAt = &sGitLabDetails_expiresAt
+
+var _GitLabInstanceUrl = &s_GitLabInstanceUrl
+
+var _GitLabTargetPath = &s_GitLabTargetPath
+
+var GitLabTargetType = &sGitLabTargetType
+var GitLabTargetType_GROUP = &sGitLabTargetType_GROUP
+var GitLabTargetType_PROJECT = &sGitLabTargetType_PROJECT
+
+var GitLabTokenRotation = &sGitLabTokenRotation
+var GitLabTokenRotation_AUTOMATIC = &sGitLabTokenRotation_AUTOMATIC
+var GitLabTokenRotation_NONE = &sGitLabTokenRotation_NONE
+
+var _IntegrationArn = &s_IntegrationArn
+
+var IntegrationAuthorizationProviderType = &sIntegrationAuthorizationProviderType
+var IntegrationAuthorizationProviderType_GITHUB = &sIntegrationAuthorizationProviderType_GITHUB
+
+var _IntegrationClientToken = &s_IntegrationClientToken
+
+var _IntegrationId = &s_IntegrationId
+
+var _IntegrationName = &s_IntegrationName
+
+var _IntegrationS3BucketName = &s_IntegrationS3BucketName
+
+var _IntegrationS3ExternalId = &s_IntegrationS3ExternalId
+
+var _IntegrationS3RoleArn = &s_IntegrationS3RoleArn
+
+var _IntegrationSummaries = &s_IntegrationSummaries
+var _IntegrationSummaries_member = &s_IntegrationSummaries_member
+
+var IntegrationSummary = &sIntegrationSummary
+var IntegrationSummary_integrationId = &sIntegrationSummary_integrationId
+var IntegrationSummary_integrationArn = &sIntegrationSummary_integrationArn
+var IntegrationSummary_name = &sIntegrationSummary_name
+var IntegrationSummary_integrationType = &sIntegrationSummary_integrationType
+var IntegrationSummary_providerDetails = &sIntegrationSummary_providerDetails
+var IntegrationSummary_createdAt = &sIntegrationSummary_createdAt
+var IntegrationSummary_updatedAt = &sIntegrationSummary_updatedAt
+
+var IntegrationType = &sIntegrationType
+var IntegrationType_GITHUB = &sIntegrationType_GITHUB
+var IntegrationType_GITLAB = &sIntegrationType_GITLAB
+var IntegrationType_S3 = &sIntegrationType_S3
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _IssueArn = &s_IssueArn
+
+var IssueArtifactBody = &sIssueArtifactBody
+var IssueArtifactBody_validationEvidence = &sIssueArtifactBody_validationEvidence
+var IssueArtifactBody_prevalidationSignals = &sIssueArtifactBody_prevalidationSignals
+var IssueArtifactBody_remediationProposal = &sIssueArtifactBody_remediationProposal
+var IssueArtifactBody_patch = &sIssueArtifactBody_patch
+var IssueArtifactBody_raw = &sIssueArtifactBody_raw
+
+var _IssueArtifactContent = &s_IssueArtifactContent
+
+var _IssueArtifactId = &s_IssueArtifactId
+
+var IssueArtifactItem = &sIssueArtifactItem
+var IssueArtifactItem_artifactId = &sIssueArtifactItem_artifactId
+var IssueArtifactItem_artifactType = &sIssueArtifactItem_artifactType
+var IssueArtifactItem_mediaType = &sIssueArtifactItem_mediaType
+var IssueArtifactItem_producer = &sIssueArtifactItem_producer
+var IssueArtifactItem_contentSizeBytes = &sIssueArtifactItem_contentSizeBytes
+var IssueArtifactItem_createdAt = &sIssueArtifactItem_createdAt
+
+var _IssueArtifactMediaType = &s_IssueArtifactMediaType
+
+var _IssueArtifactProducerName = &s_IssueArtifactProducerName
+
+var IssueArtifactProducerSummary = &sIssueArtifactProducerSummary
+var IssueArtifactProducerSummary_agent = &sIssueArtifactProducerSummary_agent
+
+var IssueArtifactType = &sIssueArtifactType
+var IssueArtifactType_EVIDENCE = &sIssueArtifactType_EVIDENCE
+var IssueArtifactType_AGENT_COMMUNICATION = &sIssueArtifactType_AGENT_COMMUNICATION
+var IssueArtifactType_VALIDATION_EVIDENCE = &sIssueArtifactType_VALIDATION_EVIDENCE
+var IssueArtifactType_REMEDIATION_PROPOSAL = &sIssueArtifactType_REMEDIATION_PROPOSAL
+var IssueArtifactType_DECISION = &sIssueArtifactType_DECISION
+var IssueArtifactType_PATCH = &sIssueArtifactType_PATCH
+
+var _IssueConfidence = &s_IssueConfidence
+
+var IssueEvidenceAvailability = &sIssueEvidenceAvailability
+var IssueEvidenceAvailability_NONE = &sIssueEvidenceAvailability_NONE
+var IssueEvidenceAvailability_AVAILABLE = &sIssueEvidenceAvailability_AVAILABLE
+
+var _IssueFindingIds = &s_IssueFindingIds
+var _IssueFindingIds_member = &s_IssueFindingIds_member
+
+var _IssueId = &s_IssueId
+
+var _IssueName = &s_IssueName
+
+var IssuePatchDelivery = &sIssuePatchDelivery
+var IssuePatchDelivery_status = &sIssuePatchDelivery_status
+var IssuePatchDelivery_patchCount = &sIssuePatchDelivery_patchCount
+var IssuePatchDelivery_succeededCount = &sIssuePatchDelivery_succeededCount
+var IssuePatchDelivery_failedCount = &sIssuePatchDelivery_failedCount
+var IssuePatchDelivery_failureReasons = &sIssuePatchDelivery_failureReasons
+
+var _IssuePatchDeliveryCount = &s_IssuePatchDeliveryCount
+
+var _IssuePatchDeliveryFailureReasons = &s_IssuePatchDeliveryFailureReasons
+var _IssuePatchDeliveryFailureReasons_member = &s_IssuePatchDeliveryFailureReasons_member
+
+var IssuePatchDeliveryStatus = &sIssuePatchDeliveryStatus
+var IssuePatchDeliveryStatus_PENDING = &sIssuePatchDeliveryStatus_PENDING
+var IssuePatchDeliveryStatus_SUCCEEDED = &sIssuePatchDeliveryStatus_SUCCEEDED
+var IssuePatchDeliveryStatus_FAILED = &sIssuePatchDeliveryStatus_FAILED
+var IssuePatchDeliveryStatus_SKIPPED = &sIssuePatchDeliveryStatus_SKIPPED
+
+var IssuePhase = &sIssuePhase
+var IssuePhase_VALIDATION = &sIssuePhase_VALIDATION
+var IssuePhase_PRIORITIZATION = &sIssuePhase_PRIORITIZATION
+var IssuePhase_REMEDIATION = &sIssuePhase_REMEDIATION
+
+var _IssueRemediationSummary = &s_IssueRemediationSummary
+
+var IssueSeverity = &sIssueSeverity
+var IssueSeverity_LOW = &sIssueSeverity_LOW
+var IssueSeverity_MEDIUM = &sIssueSeverity_MEDIUM
+var IssueSeverity_HIGH = &sIssueSeverity_HIGH
+var IssueSeverity_CRITICAL = &sIssueSeverity_CRITICAL
+
+var _IssueSeverityReasoning = &s_IssueSeverityReasoning
+
+var IssueStatus = &sIssueStatus
+var IssueStatus_CREATED = &sIssueStatus_CREATED
+var IssueStatus_IN_PROGRESS = &sIssueStatus_IN_PROGRESS
+var IssueStatus_COMPLETED = &sIssueStatus_COMPLETED
+var IssueStatus_FAILED = &sIssueStatus_FAILED
+
+var _IssueStatusMessage = &s_IssueStatusMessage
+
+var IssueStatusReason = &sIssueStatusReason
+var IssueStatusReason_INTERNAL_ERROR = &sIssueStatusReason_INTERNAL_ERROR
+var IssueStatusReason_REMEDIATION_FAILED = &sIssueStatusReason_REMEDIATION_FAILED
+
+var IssueSummary = &sIssueSummary
+var IssueSummary_issueId = &sIssueSummary_issueId
+var IssueSummary_issueArn = &sIssueSummary_issueArn
+var IssueSummary_name = &sIssueSummary_name
+var IssueSummary_severity = &sIssueSummary_severity
+var IssueSummary_confidence = &sIssueSummary_confidence
+var IssueSummary_status = &sIssueSummary_status
+var IssueSummary_phase = &sIssueSummary_phase
+var IssueSummary_statusReason = &sIssueSummary_statusReason
+var IssueSummary_statusMessage = &sIssueSummary_statusMessage
+var IssueSummary_statusUpdatedAt = &sIssueSummary_statusUpdatedAt
+var IssueSummary_createdAt = &sIssueSummary_createdAt
+var IssueSummary_updatedAt = &sIssueSummary_updatedAt
+
+var _IssueSynopsis = &s_IssueSynopsis
+
+var _KubernetesClusterExternalId = &s_KubernetesClusterExternalId
+
+var _KubernetesClusterRoleArn = &s_KubernetesClusterRoleArn
+
+var KubernetesClusterRoleConfiguration = &sKubernetesClusterRoleConfiguration
+var KubernetesClusterRoleConfiguration_roleArn = &sKubernetesClusterRoleConfiguration_roleArn
+var KubernetesClusterRoleConfiguration_externalId = &sKubernetesClusterRoleConfiguration_externalId
+
+var KubernetesClusterRoleUpdate = &sKubernetesClusterRoleUpdate
+var KubernetesClusterRoleUpdate_set = &sKubernetesClusterRoleUpdate_set
+var KubernetesClusterRoleUpdate_remove = &sKubernetesClusterRoleUpdate_remove
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var _OAuthCodeChallenge = &s_OAuthCodeChallenge
+
+var OAuthCodeChallengeMethod = &sOAuthCodeChallengeMethod
+var OAuthCodeChallengeMethod_S256 = &sOAuthCodeChallengeMethod_S256
+
+var _OAuthState = &s_OAuthState
+
+var _PackageManager = &s_PackageManager
+
+var _PackageName = &s_PackageName
+
+var _PackageVersion = &s_PackageVersion
+
+var PatchBody = &sPatchBody
+var PatchBody_patch = &sPatchBody_patch
+var PatchBody_format = &sPatchBody_format
+var PatchBody_repositoryName = &sPatchBody_repositoryName
+var PatchBody_patchSha256 = &sPatchBody_patchSha256
+var PatchBody_sizeBytes = &sPatchBody_sizeBytes
+var PatchBody_delivery = &sPatchBody_delivery
+
+var PatchCreationPolicy = &sPatchCreationPolicy
+var PatchCreationPolicy_ENABLED = &sPatchCreationPolicy_ENABLED
+var PatchCreationPolicy_DISABLED = &sPatchCreationPolicy_DISABLED
+
+var PatchDelivery = &sPatchDelivery
+var PatchDelivery_status = &sPatchDelivery_status
+var PatchDelivery_target = &sPatchDelivery_target
+var PatchDelivery_updatedAt = &sPatchDelivery_updatedAt
+
+var PatchFormat = &sPatchFormat
+var PatchFormat_GIT_MAILBOX_PATCH = &sPatchFormat_GIT_MAILBOX_PATCH
+var PatchFormat_GIT_BINARY_DIFF = &sPatchFormat_GIT_BINARY_DIFF
+var PatchFormat_GIT_DIFF = &sPatchFormat_GIT_DIFF
+
+var PerFindingResult = &sPerFindingResult
+var PerFindingResult_findingId = &sPerFindingResult_findingId
+var PerFindingResult_exploitable = &sPerFindingResult_exploitable
+var PerFindingResult_confidence = &sPerFindingResult_confidence
+var PerFindingResult_flowVerdicts = &sPerFindingResult_flowVerdicts
+var PerFindingResult_reasoningChain = &sPerFindingResult_reasoningChain
+var PerFindingResult_exploitArtifact = &sPerFindingResult_exploitArtifact
+
+var _PerFindingResults = &s_PerFindingResults
+var _PerFindingResults_member = &s_PerFindingResults_member
+
+var PrevalidationSignal = &sPrevalidationSignal
+var PrevalidationSignal_subjectRef = &sPrevalidationSignal_subjectRef
+var PrevalidationSignal_dimension = &sPrevalidationSignal_dimension
+var PrevalidationSignal_signalStrength = &sPrevalidationSignal_signalStrength
+var PrevalidationSignal_conclusion = &sPrevalidationSignal_conclusion
+var PrevalidationSignal_producerId = &sPrevalidationSignal_producerId
+var PrevalidationSignal_producerVersion = &sPrevalidationSignal_producerVersion
+var PrevalidationSignal_confidence = &sPrevalidationSignal_confidence
+var PrevalidationSignal_confidenceReasoning = &sPrevalidationSignal_confidenceReasoning
+var PrevalidationSignal_computed = &sPrevalidationSignal_computed
+var PrevalidationSignal_preconditions = &sPrevalidationSignal_preconditions
+var PrevalidationSignal_impactDimensions = &sPrevalidationSignal_impactDimensions
+var PrevalidationSignal_exploitability = &sPrevalidationSignal_exploitability
+
+var _PrevalidationSignals = &s_PrevalidationSignals
+var _PrevalidationSignals_member = &s_PrevalidationSignals_member
+
+var PrevalidationSignalsBody = &sPrevalidationSignalsBody
+var PrevalidationSignalsBody_producedBy = &sPrevalidationSignalsBody_producedBy
+var PrevalidationSignalsBody_signals = &sPrevalidationSignalsBody_signals
+
+var ProviderConfiguration = &sProviderConfiguration
+var ProviderConfiguration_github = &sProviderConfiguration_github
+var ProviderConfiguration_gitlab = &sProviderConfiguration_gitlab
+var ProviderConfiguration_s3 = &sProviderConfiguration_s3
+
+var ProviderDetails = &sProviderDetails
+var ProviderDetails_github = &sProviderDetails_github
+var ProviderDetails_gitlab = &sProviderDetails_gitlab
+var ProviderDetails_s3 = &sProviderDetails_s3
+
+var ReasoningStep = &sReasoningStep
+var ReasoningStep_step = &sReasoningStep_step
+var ReasoningStep_claim = &sReasoningStep_claim
+var ReasoningStep_source = &sReasoningStep_source
+var ReasoningStep_confidence = &sReasoningStep_confidence
+
+var _ReasoningSteps = &s_ReasoningSteps
+var _ReasoningSteps_member = &s_ReasoningSteps_member
+
+var _RedirectUrl = &s_RedirectUrl
+
+var RemediationProposalBody = &sRemediationProposalBody
+var RemediationProposalBody_patch = &sRemediationProposalBody_patch
+var RemediationProposalBody_format = &sRemediationProposalBody_format
+var RemediationProposalBody_filename = &sRemediationProposalBody_filename
+var RemediationProposalBody_patchSha256 = &sRemediationProposalBody_patchSha256
+
+var RemoveKubernetesClusterRole = &sRemoveKubernetesClusterRole
+
+var _RepositoryBranch = &s_RepositoryBranch
+
+var _RepositoryName = &s_RepositoryName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _ResourcePolicyDocument = &s_ResourcePolicyDocument
+
+var _ResourcePolicyInputDocument = &s_ResourcePolicyInputDocument
+
+var _ResourcePolicyRevisionId = &s_ResourcePolicyRevisionId
+
+var _ResourcePolicyTargetArn = &s_ResourcePolicyTargetArn
+
+var S3Configuration = &sS3Configuration
+var S3Configuration_bucket = &sS3Configuration_bucket
+var S3Configuration_roleArn = &sS3Configuration_roleArn
+var S3Configuration_externalId = &sS3Configuration_externalId
+
+var S3Details = &sS3Details
+var S3Details_bucket = &sS3Details_bucket
+var S3Details_roleArn = &sS3Details_roleArn
+
+var S3Target = &sS3Target
+var S3Target_bucket = &sS3Target_bucket
+var S3Target_key = &sS3Target_key
+var S3Target_version = &sS3Target_version
+
+var _ScanClientToken = &s_ScanClientToken
+
+var ScanFailureStage = &sScanFailureStage
+var ScanFailureStage_SUBMITTED = &sScanFailureStage_SUBMITTED
+var ScanFailureStage_WAITING_FOR_BUILD = &sScanFailureStage_WAITING_FOR_BUILD
+var ScanFailureStage_BUILDING = &sScanFailureStage_BUILDING
+var ScanFailureStage_WAITING_FOR_SCAN = &sScanFailureStage_WAITING_FOR_SCAN
+var ScanFailureStage_SCANNING = &sScanFailureStage_SCANNING
+
+var _ScanFrequency = &s_ScanFrequency
+
+var ScanOrigin = &sScanOrigin
+var ScanOrigin_MANUAL = &sScanOrigin_MANUAL
+var ScanOrigin_SCHEDULED = &sScanOrigin_SCHEDULED
+
+var _ScanRunFailureMessage = &s_ScanRunFailureMessage
+
+var _ScanRunId = &s_ScanRunId
+
+var ScanStatus = &sScanStatus
+var ScanStatus_SUBMITTED = &sScanStatus_SUBMITTED
+var ScanStatus_WAITING_FOR_BUILD = &sScanStatus_WAITING_FOR_BUILD
+var ScanStatus_BUILDING = &sScanStatus_BUILDING
+var ScanStatus_WAITING_FOR_SCAN = &sScanStatus_WAITING_FOR_SCAN
+var ScanStatus_SCANNING = &sScanStatus_SCANNING
+var ScanStatus_SUCCEEDED = &sScanStatus_SUCCEEDED
+var ScanStatus_FAILED = &sScanStatus_FAILED
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+
+var SignalAccessLevel = &sSignalAccessLevel
+var SignalAccessLevel_NONE = &sSignalAccessLevel_NONE
+var SignalAccessLevel_ANY_AUTHENTICATED = &sSignalAccessLevel_ANY_AUTHENTICATED
+var SignalAccessLevel_PRIVILEGED = &sSignalAccessLevel_PRIVILEGED
+
+var SignalAccessPrecondition = &sSignalAccessPrecondition
+var SignalAccessPrecondition_value = &sSignalAccessPrecondition_value
+var SignalAccessPrecondition_basis = &sSignalAccessPrecondition_basis
+var SignalAccessPrecondition_reason = &sSignalAccessPrecondition_reason
+var SignalAccessPrecondition_missingInfo = &sSignalAccessPrecondition_missingInfo
+
+var SignalAttackerGains = &sSignalAttackerGains
+var SignalAttackerGains_EXECUTE = &sSignalAttackerGains_EXECUTE
+var SignalAttackerGains_MODIFY_PRIVILEGED = &sSignalAttackerGains_MODIFY_PRIVILEGED
+var SignalAttackerGains_MODIFY_DATA = &sSignalAttackerGains_MODIFY_DATA
+var SignalAttackerGains_MODIFY_COSMETIC = &sSignalAttackerGains_MODIFY_COSMETIC
+var SignalAttackerGains_READ = &sSignalAttackerGains_READ
+var SignalAttackerGains_NEITHER = &sSignalAttackerGains_NEITHER
+
+var SignalAttackerGainsDimension = &sSignalAttackerGainsDimension
+var SignalAttackerGainsDimension_value = &sSignalAttackerGainsDimension_value
+var SignalAttackerGainsDimension_basis = &sSignalAttackerGainsDimension_basis
+var SignalAttackerGainsDimension_reason = &sSignalAttackerGainsDimension_reason
+var SignalAttackerGainsDimension_missingInfo = &sSignalAttackerGainsDimension_missingInfo
+
+var SignalBand = &sSignalBand
+var SignalBand_VERY_LOW = &sSignalBand_VERY_LOW
+var SignalBand_LOW = &sSignalBand_LOW
+var SignalBand_MODERATE = &sSignalBand_MODERATE
+var SignalBand_HIGH = &sSignalBand_HIGH
+
+var SignalBasis = &sSignalBasis
+var SignalBasis_CODE = &sSignalBasis_CODE
+var SignalBasis_GRAPH = &sSignalBasis_GRAPH
+var SignalBasis_FINDING = &sSignalBasis_FINDING
+var SignalBasis_INFERRED = &sSignalBasis_INFERRED
+var SignalBasis_NO_EVIDENCE_DEFAULT = &sSignalBasis_NO_EVIDENCE_DEFAULT
+
+var SignalBlastRadius = &sSignalBlastRadius
+var SignalBlastRadius_CROSS_TENANT = &sSignalBlastRadius_CROSS_TENANT
+var SignalBlastRadius_OTHER_USERS_IN_TENANT = &sSignalBlastRadius_OTHER_USERS_IN_TENANT
+var SignalBlastRadius_OWN_SCOPE = &sSignalBlastRadius_OWN_SCOPE
+
+var SignalBlastRadiusDimension = &sSignalBlastRadiusDimension
+var SignalBlastRadiusDimension_value = &sSignalBlastRadiusDimension_value
+var SignalBlastRadiusDimension_basis = &sSignalBlastRadiusDimension_basis
+var SignalBlastRadiusDimension_reason = &sSignalBlastRadiusDimension_reason
+var SignalBlastRadiusDimension_missingInfo = &sSignalBlastRadiusDimension_missingInfo
+
+var SignalComputation = &sSignalComputation
+var SignalComputation_likelihoodBand = &sSignalComputation_likelihoodBand
+var SignalComputation_impactBand = &sSignalComputation_impactBand
+var SignalComputation_barriers = &sSignalComputation_barriers
+
+var SignalConfidenceReasoning = &sSignalConfidenceReasoning
+var SignalConfidenceReasoning_summary = &sSignalConfidenceReasoning_summary
+var SignalConfidenceReasoning_factors = &sSignalConfidenceReasoning_factors
+
+var SignalDimension = &sSignalDimension
+var SignalDimension_EXPLOITABILITY = &sSignalDimension_EXPLOITABILITY
+var SignalDimension_BLAST_RADIUS = &sSignalDimension_BLAST_RADIUS
+var SignalDimension_NETWORK_EXPOSURE = &sSignalDimension_NETWORK_EXPOSURE
+var SignalDimension_PRECONDITION = &sSignalDimension_PRECONDITION
+var SignalDimension_CODE_CONTEXT = &sSignalDimension_CODE_CONTEXT
+var SignalDimension_LIKELIHOOD_ASSESSMENT = &sSignalDimension_LIKELIHOOD_ASSESSMENT
+var SignalDimension_IMPACT_ASSESSMENT = &sSignalDimension_IMPACT_ASSESSMENT
+
+var SignalExploitability = &sSignalExploitability
+var SignalExploitability_verdict = &sSignalExploitability_verdict
+var SignalExploitability_reachedCrownJewels = &sSignalExploitability_reachedCrownJewels
+var SignalExploitability_highestLayerReached = &sSignalExploitability_highestLayerReached
+var SignalExploitability_confidenceTier = &sSignalExploitability_confidenceTier
+var SignalExploitability_scriptable = &sSignalExploitability_scriptable
+var SignalExploitability_sourceValidationArtifactId = &sSignalExploitability_sourceValidationArtifactId
+
+var SignalImpactDimensions = &sSignalImpactDimensions
+var SignalImpactDimensions_attackerGains = &sSignalImpactDimensions_attackerGains
+var SignalImpactDimensions_blastRadius = &sSignalImpactDimensions_blastRadius
+var SignalImpactDimensions_targetValue = &sSignalImpactDimensions_targetValue
+
+var SignalPrecondition = &sSignalPrecondition
+var SignalPrecondition_value = &sSignalPrecondition_value
+var SignalPrecondition_basis = &sSignalPrecondition_basis
+var SignalPrecondition_reason = &sSignalPrecondition_reason
+var SignalPrecondition_missingInfo = &sSignalPrecondition_missingInfo
+
+var SignalPreconditions = &sSignalPreconditions
+var SignalPreconditions_reachableFromAttacker = &sSignalPreconditions_reachableFromAttacker
+var SignalPreconditions_configurationNeeded = &sSignalPreconditions_configurationNeeded
+var SignalPreconditions_accessLevel = &sSignalPreconditions_accessLevel
+var SignalPreconditions_userInteractionRequired = &sSignalPreconditions_userInteractionRequired
+
+var SignalStrength = &sSignalStrength
+var SignalStrength_NONE = &sSignalStrength_NONE
+var SignalStrength_WEAK = &sSignalStrength_WEAK
+var SignalStrength_MODERATE = &sSignalStrength_MODERATE
+var SignalStrength_STRONG = &sSignalStrength_STRONG
+
+var SignalTargetValue = &sSignalTargetValue
+var SignalTargetValue_HIGH = &sSignalTargetValue_HIGH
+var SignalTargetValue_MEDIUM = &sSignalTargetValue_MEDIUM
+var SignalTargetValue_LOW = &sSignalTargetValue_LOW
+
+var SignalTargetValueDimension = &sSignalTargetValueDimension
+var SignalTargetValueDimension_value = &sSignalTargetValueDimension_value
+var SignalTargetValueDimension_basis = &sSignalTargetValueDimension_basis
+var SignalTargetValueDimension_reason = &sSignalTargetValueDimension_reason
+var SignalTargetValueDimension_missingInfo = &sSignalTargetValueDimension_missingInfo
+
+var _SourceFindingId = &s_SourceFindingId
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var UpdateCodeConfiguration = &sUpdateCodeConfiguration
+var UpdateCodeConfiguration_sourceConfiguration = &sUpdateCodeConfiguration_sourceConfiguration
+var UpdateCodeConfiguration_environmentConfiguration = &sUpdateCodeConfiguration_environmentConfiguration
+
+var UpdateEnvironmentConfiguration = &sUpdateEnvironmentConfiguration
+var UpdateEnvironmentConfiguration_codeConfiguration = &sUpdateEnvironmentConfiguration_codeConfiguration
+
+var UpdateProviderConfiguration = &sUpdateProviderConfiguration
+var UpdateProviderConfiguration_s3 = &sUpdateProviderConfiguration_s3
+
+var UpdateS3Configuration = &sUpdateS3Configuration
+var UpdateS3Configuration_roleArn = &sUpdateS3Configuration_roleArn
+var UpdateS3Configuration_externalId = &sUpdateS3Configuration_externalId
+
+var _ValidationConfidence = &s_ValidationConfidence
+
+var ValidationConfidenceTier = &sValidationConfidenceTier
+var ValidationConfidenceTier_SOURCE_READ = &sValidationConfidenceTier_SOURCE_READ
+var ValidationConfidenceTier_STATIC_PROVEN = &sValidationConfidenceTier_STATIC_PROVEN
+var ValidationConfidenceTier_BUILD_PROVEN = &sValidationConfidenceTier_BUILD_PROVEN
+var ValidationConfidenceTier_RUNTIME_PROVEN = &sValidationConfidenceTier_RUNTIME_PROVEN
+
+var ValidationEvidenceBody = &sValidationEvidenceBody
+var ValidationEvidenceBody_exploitable = &sValidationEvidenceBody_exploitable
+var ValidationEvidenceBody_terminalStatus = &sValidationEvidenceBody_terminalStatus
+var ValidationEvidenceBody_flowVerdicts = &sValidationEvidenceBody_flowVerdicts
+var ValidationEvidenceBody_attackFlowsConfirmed = &sValidationEvidenceBody_attackFlowsConfirmed
+var ValidationEvidenceBody_exploitArtifact = &sValidationEvidenceBody_exploitArtifact
+var ValidationEvidenceBody_executedProof = &sValidationEvidenceBody_executedProof
+var ValidationEvidenceBody_sourceAnalysis = &sValidationEvidenceBody_sourceAnalysis
+var ValidationEvidenceBody_perFindingResults = &sValidationEvidenceBody_perFindingResults
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_path = &sValidationExceptionField_path
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExecutedProof = &sValidationExecutedProof
+var ValidationExecutedProof_code = &sValidationExecutedProof_code
+var ValidationExecutedProof_output = &sValidationExecutedProof_output
+var ValidationExecutedProof_observedEffect = &sValidationExecutedProof_observedEffect
+
+var ValidationExploitArtifact = &sValidationExploitArtifact
+var ValidationExploitArtifact_payload = &sValidationExploitArtifact_payload
+var ValidationExploitArtifact_targetUrl = &sValidationExploitArtifact_targetUrl
+var ValidationExploitArtifact_httpMethod = &sValidationExploitArtifact_httpMethod
+var ValidationExploitArtifact_headers = &sValidationExploitArtifact_headers
+var ValidationExploitArtifact_responseStatus = &sValidationExploitArtifact_responseStatus
+var ValidationExploitArtifact_responseSnippet = &sValidationExploitArtifact_responseSnippet
+var ValidationExploitArtifact_effect = &sValidationExploitArtifact_effect
+
+var ValidationProofCode = &sValidationProofCode
+var ValidationProofCode_proofCode = &sValidationProofCode_proofCode
+
+var _ValidationProofConsoleOutput = &s_ValidationProofConsoleOutput
+
+var ValidationProofMaterial = &sValidationProofMaterial
+var ValidationProofMaterial_content = &sValidationProofMaterial_content
+
+var _ValidationProofMaterials = &s_ValidationProofMaterials
+var _ValidationProofMaterials_member = &s_ValidationProofMaterials_member
+
+var _ValidationProofMaterialText = &s_ValidationProofMaterialText
+
+var ValidationProofOutput = &sValidationProofOutput
+var ValidationProofOutput_consoleOutput = &sValidationProofOutput_consoleOutput
+
+var _ValidationProofSummary = &s_ValidationProofSummary
+
+var ValidationSourceAnalysis = &sValidationSourceAnalysis
+var ValidationSourceAnalysis_summary = &sValidationSourceAnalysis_summary
+var ValidationSourceAnalysis_inferredEffect = &sValidationSourceAnalysis_inferredEffect
+
+var ValidationTerminalStatus = &sValidationTerminalStatus
+var ValidationTerminalStatus_COMPLETED = &sValidationTerminalStatus_COMPLETED
+var ValidationTerminalStatus_FAILED = &sValidationTerminalStatus_FAILED
+var ValidationTerminalStatus_NO_SOURCE_AVAILABLE = &sValidationTerminalStatus_NO_SOURCE_AVAILABLE
+var ValidationTerminalStatus_PARTIAL = &sValidationTerminalStatus_PARTIAL
+
+var AssociateCollectorInput = &sAssociateCollectorInput
+var AssociateCollectorInput_environmentId = &sAssociateCollectorInput_environmentId
+var AssociateCollectorInput_clientToken = &sAssociateCollectorInput_clientToken
+var AssociateCollectorInput_collectorArn = &sAssociateCollectorInput_collectorArn
+var AssociateCollectorInput_collectorDataAccessRoleArn = &sAssociateCollectorInput_collectorDataAccessRoleArn
+
+var AssociateCollectorOutput = &sAssociateCollectorOutput
+var AssociateCollectorOutput_environmentId = &sAssociateCollectorOutput_environmentId
+var AssociateCollectorOutput_environmentArn = &sAssociateCollectorOutput_environmentArn
+var AssociateCollectorOutput_associatedCollector = &sAssociateCollectorOutput_associatedCollector
+
+var CreateCodeFindingInput = &sCreateCodeFindingInput
+var CreateCodeFindingInput_environmentId = &sCreateCodeFindingInput_environmentId
+var CreateCodeFindingInput_ocsfDocument = &sCreateCodeFindingInput_ocsfDocument
+var CreateCodeFindingInput_clientToken = &sCreateCodeFindingInput_clientToken
+
+var CreateCodeFindingOutput = &sCreateCodeFindingOutput
+var CreateCodeFindingOutput_findingId = &sCreateCodeFindingOutput_findingId
+var CreateCodeFindingOutput_findingArn = &sCreateCodeFindingOutput_findingArn
+var CreateCodeFindingOutput_title = &sCreateCodeFindingOutput_title
+var CreateCodeFindingOutput_status = &sCreateCodeFindingOutput_status
+var CreateCodeFindingOutput_createdAt = &sCreateCodeFindingOutput_createdAt
+
+var CreateCodeScanInput = &sCreateCodeScanInput
+var CreateCodeScanInput_environmentId = &sCreateCodeScanInput_environmentId
+var CreateCodeScanInput_clientToken = &sCreateCodeScanInput_clientToken
+
+var CreateCodeScanOutput = &sCreateCodeScanOutput
+var CreateCodeScanOutput_scan = &sCreateCodeScanOutput_scan
+
+var CreateCollectorInput = &sCreateCollectorInput
+var CreateCollectorInput_type = &sCreateCollectorInput_type
+var CreateCollectorInput_kubernetesClusterRole = &sCreateCollectorInput_kubernetesClusterRole
+var CreateCollectorInput_clientToken = &sCreateCollectorInput_clientToken
+
+var CreateCollectorOutput = &sCreateCollectorOutput
+var CreateCollectorOutput_collectorId = &sCreateCollectorOutput_collectorId
+var CreateCollectorOutput_collectorArn = &sCreateCollectorOutput_collectorArn
+var CreateCollectorOutput_type = &sCreateCollectorOutput_type
+var CreateCollectorOutput_status = &sCreateCollectorOutput_status
+var CreateCollectorOutput_createdAt = &sCreateCollectorOutput_createdAt
+
+var CreateEnvironmentInput = &sCreateEnvironmentInput
+var CreateEnvironmentInput_name = &sCreateEnvironmentInput_name
+var CreateEnvironmentInput_configuration = &sCreateEnvironmentInput_configuration
+
+var CreateEnvironmentOutput = &sCreateEnvironmentOutput
+var CreateEnvironmentOutput_environmentId = &sCreateEnvironmentOutput_environmentId
+var CreateEnvironmentOutput_environmentArn = &sCreateEnvironmentOutput_environmentArn
+var CreateEnvironmentOutput_status = &sCreateEnvironmentOutput_status
+var CreateEnvironmentOutput_createdAt = &sCreateEnvironmentOutput_createdAt
+
+var CreateIntegrationInput = &sCreateIntegrationInput
+var CreateIntegrationInput_clientToken = &sCreateIntegrationInput_clientToken
+var CreateIntegrationInput_name = &sCreateIntegrationInput_name
+var CreateIntegrationInput_providerConfiguration = &sCreateIntegrationInput_providerConfiguration
+
+var CreateIntegrationOutput = &sCreateIntegrationOutput
+var CreateIntegrationOutput_integrationId = &sCreateIntegrationOutput_integrationId
+var CreateIntegrationOutput_integrationArn = &sCreateIntegrationOutput_integrationArn
+var CreateIntegrationOutput_createdAt = &sCreateIntegrationOutput_createdAt
+
+var DeleteCollectorInput = &sDeleteCollectorInput
+var DeleteCollectorInput_collectorId = &sDeleteCollectorInput_collectorId
+
+var DeleteEnvironmentInput = &sDeleteEnvironmentInput
+var DeleteEnvironmentInput_environmentId = &sDeleteEnvironmentInput_environmentId
+
+var DeleteIntegrationInput = &sDeleteIntegrationInput
+var DeleteIntegrationInput_integrationId = &sDeleteIntegrationInput_integrationId
+
+var DisassociateCollectorInput = &sDisassociateCollectorInput
+var DisassociateCollectorInput_environmentId = &sDisassociateCollectorInput_environmentId
+var DisassociateCollectorInput_collectorArn = &sDisassociateCollectorInput_collectorArn
+
+var GetCodeFindingInput = &sGetCodeFindingInput
+var GetCodeFindingInput_environmentId = &sGetCodeFindingInput_environmentId
+var GetCodeFindingInput_findingId = &sGetCodeFindingInput_findingId
+
+var GetCodeFindingOutput = &sGetCodeFindingOutput
+var GetCodeFindingOutput_type = &sGetCodeFindingOutput_type
+var GetCodeFindingOutput_title = &sGetCodeFindingOutput_title
+var GetCodeFindingOutput_severity = &sGetCodeFindingOutput_severity
+var GetCodeFindingOutput_summary = &sGetCodeFindingOutput_summary
+var GetCodeFindingOutput_detailedDescription = &sGetCodeFindingOutput_detailedDescription
+var GetCodeFindingOutput_category = &sGetCodeFindingOutput_category
+var GetCodeFindingOutput_subCategory = &sGetCodeFindingOutput_subCategory
+var GetCodeFindingOutput_cweIds = &sGetCodeFindingOutput_cweIds
+var GetCodeFindingOutput_owaspCategory = &sGetCodeFindingOutput_owaspCategory
+var GetCodeFindingOutput_mitigation = &sGetCodeFindingOutput_mitigation
+var GetCodeFindingOutput_filePath = &sGetCodeFindingOutput_filePath
+var GetCodeFindingOutput_lineNumber = &sGetCodeFindingOutput_lineNumber
+var GetCodeFindingOutput_cveId = &sGetCodeFindingOutput_cveId
+var GetCodeFindingOutput_cvssBaseScore = &sGetCodeFindingOutput_cvssBaseScore
+var GetCodeFindingOutput_affectedPackages = &sGetCodeFindingOutput_affectedPackages
+var GetCodeFindingOutput_vulnerableCode = &sGetCodeFindingOutput_vulnerableCode
+var GetCodeFindingOutput_relevantInputs = &sGetCodeFindingOutput_relevantInputs
+var GetCodeFindingOutput_stepsToReproduce = &sGetCodeFindingOutput_stepsToReproduce
+var GetCodeFindingOutput_validation = &sGetCodeFindingOutput_validation
+var GetCodeFindingOutput_endLine = &sGetCodeFindingOutput_endLine
+var GetCodeFindingOutput_mitreTechniques = &sGetCodeFindingOutput_mitreTechniques
+var GetCodeFindingOutput_remediationReferences = &sGetCodeFindingOutput_remediationReferences
+var GetCodeFindingOutput_ocsfClass = &sGetCodeFindingOutput_ocsfClass
+var GetCodeFindingOutput_ocsfSchemaVersion = &sGetCodeFindingOutput_ocsfSchemaVersion
+var GetCodeFindingOutput_productName = &sGetCodeFindingOutput_productName
+var GetCodeFindingOutput_productVendorName = &sGetCodeFindingOutput_productVendorName
+var GetCodeFindingOutput_productVersion = &sGetCodeFindingOutput_productVersion
+var GetCodeFindingOutput_sourceStatus = &sGetCodeFindingOutput_sourceStatus
+var GetCodeFindingOutput_sourceStatusId = &sGetCodeFindingOutput_sourceStatusId
+var GetCodeFindingOutput_firstSeenAt = &sGetCodeFindingOutput_firstSeenAt
+var GetCodeFindingOutput_findingTypes = &sGetCodeFindingOutput_findingTypes
+var GetCodeFindingOutput_vulnerabilities = &sGetCodeFindingOutput_vulnerabilities
+var GetCodeFindingOutput_resources = &sGetCodeFindingOutput_resources
+var GetCodeFindingOutput_posture = &sGetCodeFindingOutput_posture
+var GetCodeFindingOutput_findingId = &sGetCodeFindingOutput_findingId
+var GetCodeFindingOutput_findingArn = &sGetCodeFindingOutput_findingArn
+var GetCodeFindingOutput_environmentId = &sGetCodeFindingOutput_environmentId
+var GetCodeFindingOutput_source = &sGetCodeFindingOutput_source
+var GetCodeFindingOutput_sourceFindingId = &sGetCodeFindingOutput_sourceFindingId
+var GetCodeFindingOutput_reportedAt = &sGetCodeFindingOutput_reportedAt
+var GetCodeFindingOutput_status = &sGetCodeFindingOutput_status
+var GetCodeFindingOutput_statusUpdatedAt = &sGetCodeFindingOutput_statusUpdatedAt
+var GetCodeFindingOutput_createdAt = &sGetCodeFindingOutput_createdAt
+var GetCodeFindingOutput_scanRunId = &sGetCodeFindingOutput_scanRunId
+var GetCodeFindingOutput_statusMessage = &sGetCodeFindingOutput_statusMessage
+var GetCodeFindingOutput_discardReason = &sGetCodeFindingOutput_discardReason
+var GetCodeFindingOutput_discardReasoning = &sGetCodeFindingOutput_discardReasoning
+var GetCodeFindingOutput_duplicateOfIssueId = &sGetCodeFindingOutput_duplicateOfIssueId
+var GetCodeFindingOutput_createdIssueId = &sGetCodeFindingOutput_createdIssueId
+var GetCodeFindingOutput_completedAt = &sGetCodeFindingOutput_completedAt
+
+var GetCodeIssueArtifactInput = &sGetCodeIssueArtifactInput
+var GetCodeIssueArtifactInput_environmentId = &sGetCodeIssueArtifactInput_environmentId
+var GetCodeIssueArtifactInput_issueId = &sGetCodeIssueArtifactInput_issueId
+var GetCodeIssueArtifactInput_artifactId = &sGetCodeIssueArtifactInput_artifactId
+
+var GetCodeIssueArtifactOutput = &sGetCodeIssueArtifactOutput
+var GetCodeIssueArtifactOutput_artifactId = &sGetCodeIssueArtifactOutput_artifactId
+var GetCodeIssueArtifactOutput_artifactType = &sGetCodeIssueArtifactOutput_artifactType
+var GetCodeIssueArtifactOutput_mediaType = &sGetCodeIssueArtifactOutput_mediaType
+var GetCodeIssueArtifactOutput_body = &sGetCodeIssueArtifactOutput_body
+var GetCodeIssueArtifactOutput_metadata = &sGetCodeIssueArtifactOutput_metadata
+var GetCodeIssueArtifactOutput_producer = &sGetCodeIssueArtifactOutput_producer
+var GetCodeIssueArtifactOutput_createdAt = &sGetCodeIssueArtifactOutput_createdAt
+
+var GetCodeIssueInput = &sGetCodeIssueInput
+var GetCodeIssueInput_environmentId = &sGetCodeIssueInput_environmentId
+var GetCodeIssueInput_issueId = &sGetCodeIssueInput_issueId
+
+var GetCodeIssueOutput = &sGetCodeIssueOutput
+var GetCodeIssueOutput_issueId = &sGetCodeIssueOutput_issueId
+var GetCodeIssueOutput_issueArn = &sGetCodeIssueOutput_issueArn
+var GetCodeIssueOutput_name = &sGetCodeIssueOutput_name
+var GetCodeIssueOutput_synopsis = &sGetCodeIssueOutput_synopsis
+var GetCodeIssueOutput_severity = &sGetCodeIssueOutput_severity
+var GetCodeIssueOutput_confidence = &sGetCodeIssueOutput_confidence
+var GetCodeIssueOutput_severityReasoning = &sGetCodeIssueOutput_severityReasoning
+var GetCodeIssueOutput_summary = &sGetCodeIssueOutput_summary
+var GetCodeIssueOutput_findingIds = &sGetCodeIssueOutput_findingIds
+var GetCodeIssueOutput_status = &sGetCodeIssueOutput_status
+var GetCodeIssueOutput_phase = &sGetCodeIssueOutput_phase
+var GetCodeIssueOutput_statusReason = &sGetCodeIssueOutput_statusReason
+var GetCodeIssueOutput_statusMessage = &sGetCodeIssueOutput_statusMessage
+var GetCodeIssueOutput_statusUpdatedAt = &sGetCodeIssueOutput_statusUpdatedAt
+var GetCodeIssueOutput_createdAt = &sGetCodeIssueOutput_createdAt
+var GetCodeIssueOutput_updatedAt = &sGetCodeIssueOutput_updatedAt
+var GetCodeIssueOutput_evidenceAvailability = &sGetCodeIssueOutput_evidenceAvailability
+var GetCodeIssueOutput_patchDelivery = &sGetCodeIssueOutput_patchDelivery
+
+var GetCodeScanInput = &sGetCodeScanInput
+var GetCodeScanInput_environmentId = &sGetCodeScanInput_environmentId
+var GetCodeScanInput_scanRunId = &sGetCodeScanInput_scanRunId
+
+var GetCodeScanOutput = &sGetCodeScanOutput
+var GetCodeScanOutput_scan = &sGetCodeScanOutput_scan
+
+var GetCollectorDataAccessAuthorizationInput = &sGetCollectorDataAccessAuthorizationInput
+var GetCollectorDataAccessAuthorizationInput_accountId = &sGetCollectorDataAccessAuthorizationInput_accountId
+var GetCollectorDataAccessAuthorizationInput_collectorId = &sGetCollectorDataAccessAuthorizationInput_collectorId
+var GetCollectorDataAccessAuthorizationInput_environmentArn = &sGetCollectorDataAccessAuthorizationInput_environmentArn
+
+var GetCollectorDataAccessAuthorizationOutput = &sGetCollectorDataAccessAuthorizationOutput
+
+var GetCollectorInput = &sGetCollectorInput
+var GetCollectorInput_collectorId = &sGetCollectorInput_collectorId
+
+var GetCollectorOutput = &sGetCollectorOutput
+var GetCollectorOutput_collectorId = &sGetCollectorOutput_collectorId
+var GetCollectorOutput_collectorArn = &sGetCollectorOutput_collectorArn
+var GetCollectorOutput_type = &sGetCollectorOutput_type
+var GetCollectorOutput_status = &sGetCollectorOutput_status
+var GetCollectorOutput_configRecorderArn = &sGetCollectorOutput_configRecorderArn
+var GetCollectorOutput_kubernetesClusterRoleArn = &sGetCollectorOutput_kubernetesClusterRoleArn
+var GetCollectorOutput_createdAt = &sGetCollectorOutput_createdAt
+var GetCollectorOutput_updatedAt = &sGetCollectorOutput_updatedAt
+
+var GetEnvironmentInput = &sGetEnvironmentInput
+var GetEnvironmentInput_environmentId = &sGetEnvironmentInput_environmentId
+
+var GetEnvironmentOutput = &sGetEnvironmentOutput
+var GetEnvironmentOutput_environmentId = &sGetEnvironmentOutput_environmentId
+var GetEnvironmentOutput_environmentArn = &sGetEnvironmentOutput_environmentArn
+var GetEnvironmentOutput_name = &sGetEnvironmentOutput_name
+var GetEnvironmentOutput_status = &sGetEnvironmentOutput_status
+var GetEnvironmentOutput_statusMessage = &sGetEnvironmentOutput_statusMessage
+var GetEnvironmentOutput_statusUpdatedAt = &sGetEnvironmentOutput_statusUpdatedAt
+var GetEnvironmentOutput_createdAt = &sGetEnvironmentOutput_createdAt
+var GetEnvironmentOutput_updatedAt = &sGetEnvironmentOutput_updatedAt
+var GetEnvironmentOutput_configuration = &sGetEnvironmentOutput_configuration
+
+var GetIntegrationInput = &sGetIntegrationInput
+var GetIntegrationInput_integrationId = &sGetIntegrationInput_integrationId
+
+var GetIntegrationOutput = &sGetIntegrationOutput
+var GetIntegrationOutput_integrationId = &sGetIntegrationOutput_integrationId
+var GetIntegrationOutput_integrationArn = &sGetIntegrationOutput_integrationArn
+var GetIntegrationOutput_name = &sGetIntegrationOutput_name
+var GetIntegrationOutput_integrationType = &sGetIntegrationOutput_integrationType
+var GetIntegrationOutput_providerDetails = &sGetIntegrationOutput_providerDetails
+var GetIntegrationOutput_createdAt = &sGetIntegrationOutput_createdAt
+var GetIntegrationOutput_updatedAt = &sGetIntegrationOutput_updatedAt
+
+var GetResourcePolicyInput = &sGetResourcePolicyInput
+var GetResourcePolicyInput_arn = &sGetResourcePolicyInput_arn
+
+var GetResourcePolicyOutput = &sGetResourcePolicyOutput
+var GetResourcePolicyOutput_arn = &sGetResourcePolicyOutput_arn
+var GetResourcePolicyOutput_policy = &sGetResourcePolicyOutput_policy
+var GetResourcePolicyOutput_revisionId = &sGetResourcePolicyOutput_revisionId
+
+var ListAssociatedCollectorsInput = &sListAssociatedCollectorsInput
+var ListAssociatedCollectorsInput_environmentId = &sListAssociatedCollectorsInput_environmentId
+var ListAssociatedCollectorsInput_maxResults = &sListAssociatedCollectorsInput_maxResults
+var ListAssociatedCollectorsInput_nextToken = &sListAssociatedCollectorsInput_nextToken
+
+var ListAssociatedCollectorsOutput = &sListAssociatedCollectorsOutput
+var ListAssociatedCollectorsOutput_associatedCollectors = &sListAssociatedCollectorsOutput_associatedCollectors
+var ListAssociatedCollectorsOutput_nextToken = &sListAssociatedCollectorsOutput_nextToken
+
+var ListAssociatedEnvironmentsInput = &sListAssociatedEnvironmentsInput
+var ListAssociatedEnvironmentsInput_collectorId = &sListAssociatedEnvironmentsInput_collectorId
+var ListAssociatedEnvironmentsInput_maxResults = &sListAssociatedEnvironmentsInput_maxResults
+var ListAssociatedEnvironmentsInput_nextToken = &sListAssociatedEnvironmentsInput_nextToken
+
+var ListAssociatedEnvironmentsOutput = &sListAssociatedEnvironmentsOutput
+var ListAssociatedEnvironmentsOutput_associatedEnvironments = &sListAssociatedEnvironmentsOutput_associatedEnvironments
+var ListAssociatedEnvironmentsOutput_nextToken = &sListAssociatedEnvironmentsOutput_nextToken
+
+var ListCodeFindingsInput = &sListCodeFindingsInput
+var ListCodeFindingsInput_environmentId = &sListCodeFindingsInput_environmentId
+var ListCodeFindingsInput_maxResults = &sListCodeFindingsInput_maxResults
+var ListCodeFindingsInput_nextToken = &sListCodeFindingsInput_nextToken
+
+var ListCodeFindingsOutput = &sListCodeFindingsOutput
+var ListCodeFindingsOutput_items = &sListCodeFindingsOutput_items
+var ListCodeFindingsOutput_nextToken = &sListCodeFindingsOutput_nextToken
+
+var ListCodeIssueArtifactsInput = &sListCodeIssueArtifactsInput
+var ListCodeIssueArtifactsInput_environmentId = &sListCodeIssueArtifactsInput_environmentId
+var ListCodeIssueArtifactsInput_issueId = &sListCodeIssueArtifactsInput_issueId
+var ListCodeIssueArtifactsInput_artifactType = &sListCodeIssueArtifactsInput_artifactType
+var ListCodeIssueArtifactsInput_maxResults = &sListCodeIssueArtifactsInput_maxResults
+var ListCodeIssueArtifactsInput_nextToken = &sListCodeIssueArtifactsInput_nextToken
+
+var ListCodeIssueArtifactsOutput = &sListCodeIssueArtifactsOutput
+var ListCodeIssueArtifactsOutput_items = &sListCodeIssueArtifactsOutput_items
+var ListCodeIssueArtifactsOutput_nextToken = &sListCodeIssueArtifactsOutput_nextToken
+
+var ListCodeIssuesInput = &sListCodeIssuesInput
+var ListCodeIssuesInput_environmentId = &sListCodeIssuesInput_environmentId
+var ListCodeIssuesInput_maxResults = &sListCodeIssuesInput_maxResults
+var ListCodeIssuesInput_nextToken = &sListCodeIssuesInput_nextToken
+
+var ListCodeIssuesOutput = &sListCodeIssuesOutput
+var ListCodeIssuesOutput_items = &sListCodeIssuesOutput_items
+var ListCodeIssuesOutput_nextToken = &sListCodeIssuesOutput_nextToken
+
+var ListCodeScansInput = &sListCodeScansInput
+var ListCodeScansInput_environmentId = &sListCodeScansInput_environmentId
+var ListCodeScansInput_maxResults = &sListCodeScansInput_maxResults
+var ListCodeScansInput_nextToken = &sListCodeScansInput_nextToken
+
+var ListCodeScansOutput = &sListCodeScansOutput
+var ListCodeScansOutput_scans = &sListCodeScansOutput_scans
+var ListCodeScansOutput_nextToken = &sListCodeScansOutput_nextToken
+
+var ListCollectorsInput = &sListCollectorsInput
+
+var ListCollectorsOutput = &sListCollectorsOutput
+var ListCollectorsOutput_items = &sListCollectorsOutput_items
+
+var ListEnvironmentsInput = &sListEnvironmentsInput
+var ListEnvironmentsInput_maxResults = &sListEnvironmentsInput_maxResults
+var ListEnvironmentsInput_nextToken = &sListEnvironmentsInput_nextToken
+
+var ListEnvironmentsOutput = &sListEnvironmentsOutput
+var ListEnvironmentsOutput_items = &sListEnvironmentsOutput_items
+var ListEnvironmentsOutput_nextToken = &sListEnvironmentsOutput_nextToken
+
+var ListIntegrationsInput = &sListIntegrationsInput
+var ListIntegrationsInput_maxResults = &sListIntegrationsInput_maxResults
+var ListIntegrationsInput_nextToken = &sListIntegrationsInput_nextToken
+
+var ListIntegrationsOutput = &sListIntegrationsOutput
+var ListIntegrationsOutput_items = &sListIntegrationsOutput_items
+var ListIntegrationsOutput_nextToken = &sListIntegrationsOutput_nextToken
+
+var PutResourcePolicyInput = &sPutResourcePolicyInput
+var PutResourcePolicyInput_arn = &sPutResourcePolicyInput_arn
+var PutResourcePolicyInput_policy = &sPutResourcePolicyInput_policy
+var PutResourcePolicyInput_expectedRevisionId = &sPutResourcePolicyInput_expectedRevisionId
+
+var PutResourcePolicyOutput = &sPutResourcePolicyOutput
+var PutResourcePolicyOutput_arn = &sPutResourcePolicyOutput_arn
+var PutResourcePolicyOutput_policy = &sPutResourcePolicyOutput_policy
+var PutResourcePolicyOutput_revisionId = &sPutResourcePolicyOutput_revisionId
+
+var StartIntegrationAuthorizationInput = &sStartIntegrationAuthorizationInput
+var StartIntegrationAuthorizationInput_providerType = &sStartIntegrationAuthorizationInput_providerType
+var StartIntegrationAuthorizationInput_name = &sStartIntegrationAuthorizationInput_name
+
+var StartIntegrationAuthorizationOutput = &sStartIntegrationAuthorizationOutput
+var StartIntegrationAuthorizationOutput_state = &sStartIntegrationAuthorizationOutput_state
+var StartIntegrationAuthorizationOutput_codeChallenge = &sStartIntegrationAuthorizationOutput_codeChallenge
+var StartIntegrationAuthorizationOutput_codeChallengeMethod = &sStartIntegrationAuthorizationOutput_codeChallengeMethod
+var StartIntegrationAuthorizationOutput_expiresAt = &sStartIntegrationAuthorizationOutput_expiresAt
+
+var UpdateCollectorInput = &sUpdateCollectorInput
+var UpdateCollectorInput_collectorId = &sUpdateCollectorInput_collectorId
+var UpdateCollectorInput_name = &sUpdateCollectorInput_name
+var UpdateCollectorInput_kubernetesClusterRole = &sUpdateCollectorInput_kubernetesClusterRole
+
+var UpdateCollectorOutput = &sUpdateCollectorOutput
+var UpdateCollectorOutput_collectorId = &sUpdateCollectorOutput_collectorId
+var UpdateCollectorOutput_collectorArn = &sUpdateCollectorOutput_collectorArn
+var UpdateCollectorOutput_type = &sUpdateCollectorOutput_type
+var UpdateCollectorOutput_status = &sUpdateCollectorOutput_status
+var UpdateCollectorOutput_configRecorderArn = &sUpdateCollectorOutput_configRecorderArn
+var UpdateCollectorOutput_kubernetesClusterRoleArn = &sUpdateCollectorOutput_kubernetesClusterRoleArn
+var UpdateCollectorOutput_createdAt = &sUpdateCollectorOutput_createdAt
+var UpdateCollectorOutput_updatedAt = &sUpdateCollectorOutput_updatedAt
+
+var UpdateEnvironmentInput = &sUpdateEnvironmentInput
+var UpdateEnvironmentInput_environmentId = &sUpdateEnvironmentInput_environmentId
+var UpdateEnvironmentInput_name = &sUpdateEnvironmentInput_name
+var UpdateEnvironmentInput_configuration = &sUpdateEnvironmentInput_configuration
+
+var UpdateEnvironmentOutput = &sUpdateEnvironmentOutput
+var UpdateEnvironmentOutput_environmentId = &sUpdateEnvironmentOutput_environmentId
+var UpdateEnvironmentOutput_environmentArn = &sUpdateEnvironmentOutput_environmentArn
+var UpdateEnvironmentOutput_name = &sUpdateEnvironmentOutput_name
+var UpdateEnvironmentOutput_status = &sUpdateEnvironmentOutput_status
+var UpdateEnvironmentOutput_statusMessage = &sUpdateEnvironmentOutput_statusMessage
+var UpdateEnvironmentOutput_statusUpdatedAt = &sUpdateEnvironmentOutput_statusUpdatedAt
+var UpdateEnvironmentOutput_createdAt = &sUpdateEnvironmentOutput_createdAt
+var UpdateEnvironmentOutput_configuration = &sUpdateEnvironmentOutput_configuration
+
+var UpdateIntegrationInput = &sUpdateIntegrationInput
+var UpdateIntegrationInput_integrationId = &sUpdateIntegrationInput_integrationId
+var UpdateIntegrationInput_providerConfiguration = &sUpdateIntegrationInput_providerConfiguration
+
+var UpdateIntegrationOutput = &sUpdateIntegrationOutput
+var UpdateIntegrationOutput_integrationId = &sUpdateIntegrationOutput_integrationId
+var UpdateIntegrationOutput_integrationArn = &sUpdateIntegrationOutput_integrationArn
+var UpdateIntegrationOutput_name = &sUpdateIntegrationOutput_name
+var UpdateIntegrationOutput_integrationType = &sUpdateIntegrationOutput_integrationType
+var UpdateIntegrationOutput_providerDetails = &sUpdateIntegrationOutput_providerDetails
+var UpdateIntegrationOutput_createdAt = &sUpdateIntegrationOutput_createdAt
+var UpdateIntegrationOutput_updatedAt = &sUpdateIntegrationOutput_updatedAt
+
+var ContinuumControlPlane = &smithy.ServiceSchema{Schema: &s_ContinuumControlPlane, Version: "2022-07-26"}

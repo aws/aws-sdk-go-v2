@@ -4,2609 +4,1837 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateConnector                               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateConnector"}
+	iCreateDirectoryRegistration                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateDirectoryRegistration"}
+	iCreateServicePrincipalName                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateServicePrincipalName"}
+	iCreateTemplate                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateTemplate"}
+	iCreateTemplateGroupAccessControlEntry         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateTemplateGroupAccessControlEntry"}
+	iDeleteConnector                               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteConnector"}
+	iDeleteDirectoryRegistration                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteDirectoryRegistration"}
+	iDeleteServicePrincipalName                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteServicePrincipalName"}
+	iDeleteTemplate                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteTemplate"}
+	iDeleteTemplateGroupAccessControlEntry         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteTemplateGroupAccessControlEntry"}
+	iGetConnector                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetConnector"}
+	iGetDirectoryRegistration                      = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetDirectoryRegistration"}
+	iGetServicePrincipalName                       = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetServicePrincipalName"}
+	iGetTemplate                                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetTemplate"}
+	iGetTemplateGroupAccessControlEntry            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetTemplateGroupAccessControlEntry"}
+	iListConnectors                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListConnectors"}
+	iListDirectoryRegistrations                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListDirectoryRegistrations"}
+	iListServicePrincipalNames                     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListServicePrincipalNames"}
+	iListTagsForResource                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTagsForResource"}
+	iListTemplateGroupAccessControlEntries         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTemplateGroupAccessControlEntries"}
+	iListTemplates                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTemplates"}
+	iTagResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TagResource"}
+	iUntagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "UntagResource"}
+	iUpdateTemplate                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "UpdateTemplate"}
+	iUpdateTemplateGroupAccessControlEntry         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "UpdateTemplateGroupAccessControlEntry"}
+	i_PcaConnectorAd                               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PcaConnectorAd"}
+	iAccessControlEntry                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "AccessControlEntry"}
+	i_AccessControlEntryList                       = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "AccessControlEntryList"}
+	iAccessControlEntrySummary                     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "AccessControlEntrySummary"}
+	iAccessDeniedException                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "AccessDeniedException"}
+	iAccessRight                                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "AccessRight"}
+	iAccessRights                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "AccessRights"}
+	iApplicationPolicies                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ApplicationPolicies"}
+	iApplicationPolicy                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ApplicationPolicy"}
+	i_ApplicationPolicyList                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ApplicationPolicyList"}
+	iApplicationPolicyType                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ApplicationPolicyType"}
+	i_CertificateAuthorityArn                      = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CertificateAuthorityArn"}
+	iCertificateValidity                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CertificateValidity"}
+	iClientCompatibilityV2                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ClientCompatibilityV2"}
+	iClientCompatibilityV3                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ClientCompatibilityV3"}
+	iClientCompatibilityV4                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ClientCompatibilityV4"}
+	i_ClientToken                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ClientToken"}
+	iConflictException                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ConflictException"}
+	iConnector                                     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "Connector"}
+	i_ConnectorArn                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ConnectorArn"}
+	i_ConnectorList                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ConnectorList"}
+	iConnectorStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ConnectorStatus"}
+	iConnectorStatusReason                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ConnectorStatusReason"}
+	iConnectorSummary                              = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ConnectorSummary"}
+	i_CryptoProvidersList                          = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CryptoProvidersList"}
+	i_CustomObjectIdentifier                       = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CustomObjectIdentifier"}
+	i_DirectoryId                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DirectoryId"}
+	iDirectoryRegistration                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DirectoryRegistration"}
+	i_DirectoryRegistrationArn                     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DirectoryRegistrationArn"}
+	i_DirectoryRegistrationList                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DirectoryRegistrationList"}
+	iDirectoryRegistrationStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DirectoryRegistrationStatus"}
+	iDirectoryRegistrationStatusReason             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DirectoryRegistrationStatusReason"}
+	iDirectoryRegistrationSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DirectoryRegistrationSummary"}
+	i_DisplayName                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DisplayName"}
+	iEnrollmentFlagsV2                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "EnrollmentFlagsV2"}
+	iEnrollmentFlagsV3                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "EnrollmentFlagsV3"}
+	iEnrollmentFlagsV4                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "EnrollmentFlagsV4"}
+	iExtensionsV2                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ExtensionsV2"}
+	iExtensionsV3                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ExtensionsV3"}
+	iExtensionsV4                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ExtensionsV4"}
+	iGeneralFlagsV2                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GeneralFlagsV2"}
+	iGeneralFlagsV3                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GeneralFlagsV3"}
+	iGeneralFlagsV4                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GeneralFlagsV4"}
+	i_GroupSecurityIdentifier                      = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GroupSecurityIdentifier"}
+	iHashAlgorithm                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "HashAlgorithm"}
+	iInternalServerException                       = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "InternalServerException"}
+	iIpAddressType                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "IpAddressType"}
+	iKeySpec                                       = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "KeySpec"}
+	iKeyUsage                                      = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "KeyUsage"}
+	iKeyUsageFlags                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "KeyUsageFlags"}
+	iKeyUsageProperty                              = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "KeyUsageProperty"}
+	iKeyUsagePropertyFlags                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "KeyUsagePropertyFlags"}
+	iKeyUsagePropertyType                          = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "KeyUsagePropertyType"}
+	i_MaxResults                                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "MaxResults"}
+	i_NextToken                                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "NextToken"}
+	iPrivateKeyAlgorithm                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PrivateKeyAlgorithm"}
+	iPrivateKeyAttributesV2                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PrivateKeyAttributesV2"}
+	iPrivateKeyAttributesV3                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PrivateKeyAttributesV3"}
+	iPrivateKeyAttributesV4                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PrivateKeyAttributesV4"}
+	iPrivateKeyFlagsV2                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PrivateKeyFlagsV2"}
+	iPrivateKeyFlagsV3                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PrivateKeyFlagsV3"}
+	iPrivateKeyFlagsV4                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "PrivateKeyFlagsV4"}
+	iResourceNotFoundException                     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ResourceNotFoundException"}
+	i_SecurityGroupId                              = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "SecurityGroupId"}
+	i_SecurityGroupIdList                          = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "SecurityGroupIdList"}
+	iServicePrincipalName                          = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ServicePrincipalName"}
+	i_ServicePrincipalNameList                     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ServicePrincipalNameList"}
+	iServicePrincipalNameStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ServicePrincipalNameStatus"}
+	iServicePrincipalNameStatusReason              = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ServicePrincipalNameStatusReason"}
+	iServicePrincipalNameSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ServicePrincipalNameSummary"}
+	iServiceQuotaExceededException                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ServiceQuotaExceededException"}
+	iSubjectNameFlagsV2                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "SubjectNameFlagsV2"}
+	iSubjectNameFlagsV3                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "SubjectNameFlagsV3"}
+	iSubjectNameFlagsV4                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "SubjectNameFlagsV4"}
+	i_TagKeyList                                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TagKeyList"}
+	i_Tags                                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "Tags"}
+	iTemplate                                      = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "Template"}
+	i_TemplateArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateArn"}
+	iTemplateDefinition                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateDefinition"}
+	i_TemplateList                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateList"}
+	i_TemplateName                                 = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateName"}
+	i_TemplateNameList                             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateNameList"}
+	iTemplateRevision                              = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateRevision"}
+	iTemplateStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateStatus"}
+	iTemplateSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateSummary"}
+	iTemplateV2                                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateV2"}
+	iTemplateV3                                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateV3"}
+	iTemplateV4                                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TemplateV4"}
+	iThrottlingException                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ThrottlingException"}
+	iValidationException                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ValidationException"}
+	iValidationExceptionReason                     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ValidationExceptionReason"}
+	iValidityPeriod                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ValidityPeriod"}
+	iValidityPeriodType                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ValidityPeriodType"}
+	iVpcInformation                                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "VpcInformation"}
+	iCreateConnectorRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateConnectorRequest"}
+	iCreateConnectorResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateConnectorResponse"}
+	iCreateDirectoryRegistrationRequest            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateDirectoryRegistrationRequest"}
+	iCreateDirectoryRegistrationResponse           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateDirectoryRegistrationResponse"}
+	iCreateServicePrincipalNameRequest             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateServicePrincipalNameRequest"}
+	iCreateTemplateGroupAccessControlEntryRequest  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateTemplateGroupAccessControlEntryRequest"}
+	iCreateTemplateRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateTemplateRequest"}
+	iCreateTemplateResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "CreateTemplateResponse"}
+	iDeleteConnectorRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteConnectorRequest"}
+	iDeleteDirectoryRegistrationRequest            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteDirectoryRegistrationRequest"}
+	iDeleteServicePrincipalNameRequest             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteServicePrincipalNameRequest"}
+	iDeleteTemplateGroupAccessControlEntryRequest  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteTemplateGroupAccessControlEntryRequest"}
+	iDeleteTemplateRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "DeleteTemplateRequest"}
+	iGetConnectorRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetConnectorRequest"}
+	iGetConnectorResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetConnectorResponse"}
+	iGetDirectoryRegistrationRequest               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetDirectoryRegistrationRequest"}
+	iGetDirectoryRegistrationResponse              = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetDirectoryRegistrationResponse"}
+	iGetServicePrincipalNameRequest                = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetServicePrincipalNameRequest"}
+	iGetServicePrincipalNameResponse               = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetServicePrincipalNameResponse"}
+	iGetTemplateGroupAccessControlEntryRequest     = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetTemplateGroupAccessControlEntryRequest"}
+	iGetTemplateGroupAccessControlEntryResponse    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetTemplateGroupAccessControlEntryResponse"}
+	iGetTemplateRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetTemplateRequest"}
+	iGetTemplateResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "GetTemplateResponse"}
+	iListConnectorsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListConnectorsRequest"}
+	iListConnectorsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListConnectorsResponse"}
+	iListDirectoryRegistrationsRequest             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListDirectoryRegistrationsRequest"}
+	iListDirectoryRegistrationsResponse            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListDirectoryRegistrationsResponse"}
+	iListServicePrincipalNamesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListServicePrincipalNamesRequest"}
+	iListServicePrincipalNamesResponse             = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListServicePrincipalNamesResponse"}
+	iListTagsForResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTagsForResourceResponse"}
+	iListTemplateGroupAccessControlEntriesRequest  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTemplateGroupAccessControlEntriesRequest"}
+	iListTemplateGroupAccessControlEntriesResponse = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTemplateGroupAccessControlEntriesResponse"}
+	iListTemplatesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTemplatesRequest"}
+	iListTemplatesResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "ListTemplatesResponse"}
+	iTagResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "TagResourceRequest"}
+	iUntagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "UntagResourceRequest"}
+	iUpdateTemplateGroupAccessControlEntryRequest  = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "UpdateTemplateGroupAccessControlEntryRequest"}
+	iUpdateTemplateRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.pcaconnectorad", Name: "UpdateTemplateRequest"}
+	pTimestamp                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pString                                        = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/connectors",
-	Code: 202})
-
-var CreateDirectoryRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateDirectoryRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/directoryRegistrations",
-	Code: 202})
-
-var CreateServicePrincipalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateServicePrincipalName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/directoryRegistrations/{DirectoryRegistrationArn}/servicePrincipalNames/{ConnectorArn}",
-	Code: 202})
-
-var CreateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/templates",
-	Code: 200})
-
-var CreateTemplateGroupAccessControlEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateTemplateGroupAccessControlEntry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/templates/{TemplateArn}/accessControlEntries",
-	Code: 200})
-
-var DeleteConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/connectors/{ConnectorArn}",
-	Code: 202})
-
-var DeleteDirectoryRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteDirectoryRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/directoryRegistrations/{DirectoryRegistrationArn}",
-	Code: 202})
-
-var DeleteServicePrincipalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteServicePrincipalName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/directoryRegistrations/{DirectoryRegistrationArn}/servicePrincipalNames/{ConnectorArn}",
-	Code: 202})
-
-var DeleteTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/templates/{TemplateArn}",
-	Code: 202})
-
-var DeleteTemplateGroupAccessControlEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteTemplateGroupAccessControlEntry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/templates/{TemplateArn}/accessControlEntries/{GroupSecurityIdentifier}",
-	Code: 200})
-
-var GetConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/connectors/{ConnectorArn}",
-	Code: 200})
-
-var GetDirectoryRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetDirectoryRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/directoryRegistrations/{DirectoryRegistrationArn}",
-	Code: 200})
-
-var GetServicePrincipalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetServicePrincipalName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/directoryRegistrations/{DirectoryRegistrationArn}/servicePrincipalNames/{ConnectorArn}",
-	Code: 200})
-
-var GetTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/templates/{TemplateArn}",
-	Code: 200})
-
-var GetTemplateGroupAccessControlEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetTemplateGroupAccessControlEntry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/templates/{TemplateArn}/accessControlEntries/{GroupSecurityIdentifier}",
-	Code: 200})
-
-var ListConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/connectors",
-	Code: 200})
-
-var ListDirectoryRegistrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListDirectoryRegistrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/directoryRegistrations",
-	Code: 200})
-
-var ListServicePrincipalNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListServicePrincipalNames",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/directoryRegistrations/{DirectoryRegistrationArn}/servicePrincipalNames",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var ListTemplateGroupAccessControlEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTemplateGroupAccessControlEntries",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/templates/{TemplateArn}/accessControlEntries",
-	Code: 200})
-
-var ListTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/templates",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "UpdateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/templates/{TemplateArn}",
-	Code: 200})
-
-var UpdateTemplateGroupAccessControlEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "UpdateTemplateGroupAccessControlEntry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/templates/{TemplateArn}/accessControlEntries/{GroupSecurityIdentifier}",
-	Code: 200})
-
-var _PcaConnectorAd = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PcaConnectorAd",
-}, smithy.ShapeTypeService, 0)
-
-var PcaConnectorAd = smithy.NewServiceSchema(_PcaConnectorAd, "2018-05-10")
-
-var AccessControlEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "AccessControlEntry",
-}, smithy.ShapeTypeStructure, 6)
-var AccessControlEntry_GroupDisplayName *smithy.Schema
-
-var AccessControlEntry_GroupSecurityIdentifier *smithy.Schema
-
-var AccessControlEntry_AccessRights *smithy.Schema
-
-var AccessControlEntry_TemplateArn *smithy.Schema
-
-var AccessControlEntry_CreatedAt *smithy.Schema
-
-var AccessControlEntry_UpdatedAt *smithy.Schema
-
-var _AccessControlEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "AccessControlEntryList",
-}, smithy.ShapeTypeList, 1)
-var _AccessControlEntryList_member *smithy.Schema
-
-var AccessControlEntrySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "AccessControlEntrySummary",
-}, smithy.ShapeTypeStructure, 6)
-var AccessControlEntrySummary_GroupDisplayName *smithy.Schema
-
-var AccessControlEntrySummary_GroupSecurityIdentifier *smithy.Schema
-
-var AccessControlEntrySummary_AccessRights *smithy.Schema
-
-var AccessControlEntrySummary_TemplateArn *smithy.Schema
-
-var AccessControlEntrySummary_CreatedAt *smithy.Schema
-
-var AccessControlEntrySummary_UpdatedAt *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessRight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "AccessRight",
-}, smithy.ShapeTypeEnum, 2)
-var AccessRight_ALLOW *smithy.Schema
-
-var AccessRight_DENY *smithy.Schema
-
-var AccessRights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "AccessRights",
-}, smithy.ShapeTypeStructure, 2)
-var AccessRights_Enroll *smithy.Schema
-
-var AccessRights_AutoEnroll *smithy.Schema
-
-var ApplicationPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ApplicationPolicies",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationPolicies_Critical *smithy.Schema
-
-var ApplicationPolicies_Policies *smithy.Schema
-
-var ApplicationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ApplicationPolicy",
-}, smithy.ShapeTypeUnion, 2)
-var ApplicationPolicy_PolicyType *smithy.Schema
-
-var ApplicationPolicy_PolicyObjectIdentifier *smithy.Schema
-
-var _ApplicationPolicyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ApplicationPolicyList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationPolicyList_member *smithy.Schema
-
-var ApplicationPolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ApplicationPolicyType",
-}, smithy.ShapeTypeEnum, 67)
-var ApplicationPolicyType_ALL_APPLICATION_POLICIES *smithy.Schema
-
-var ApplicationPolicyType_ANY_PURPOSE *smithy.Schema
-
-var ApplicationPolicyType_ATTESTATION_IDENTITY_KEY_CERTIFICATE *smithy.Schema
-
-var ApplicationPolicyType_CERTIFICATE_REQUEST_AGENT *smithy.Schema
-
-var ApplicationPolicyType_CLIENT_AUTHENTICATION *smithy.Schema
-
-var ApplicationPolicyType_CODE_SIGNING *smithy.Schema
-
-var ApplicationPolicyType_CTL_USAGE *smithy.Schema
-
-var ApplicationPolicyType_DIGITAL_RIGHTS *smithy.Schema
-
-var ApplicationPolicyType_DIRECTORY_SERVICE_EMAIL_REPLICATION *smithy.Schema
-
-var ApplicationPolicyType_DISALLOWED_LIST *smithy.Schema
-
-var ApplicationPolicyType_DNS_SERVER_TRUST *smithy.Schema
-
-var ApplicationPolicyType_DOCUMENT_ENCRYPTION *smithy.Schema
-
-var ApplicationPolicyType_DOCUMENT_SIGNING *smithy.Schema
-
-var ApplicationPolicyType_DYNAMIC_CODE_GENERATOR *smithy.Schema
-
-var ApplicationPolicyType_EARLY_LAUNCH_ANTIMALWARE_DRIVER *smithy.Schema
-
-var ApplicationPolicyType_EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_ENCLAVE *smithy.Schema
-
-var ApplicationPolicyType_ENCRYPTING_FILE_SYSTEM *smithy.Schema
-
-var ApplicationPolicyType_ENDORSEMENT_KEY_CERTIFICATE *smithy.Schema
-
-var ApplicationPolicyType_FILE_RECOVERY *smithy.Schema
-
-var ApplicationPolicyType_HAL_EXTENSION *smithy.Schema
-
-var ApplicationPolicyType_IP_SECURITY_END_SYSTEM *smithy.Schema
-
-var ApplicationPolicyType_IP_SECURITY_IKE_INTERMEDIATE *smithy.Schema
-
-var ApplicationPolicyType_IP_SECURITY_TUNNEL_TERMINATION *smithy.Schema
-
-var ApplicationPolicyType_IP_SECURITY_USER *smithy.Schema
-
-var ApplicationPolicyType_ISOLATED_USER_MODE *smithy.Schema
-
-var ApplicationPolicyType_KDC_AUTHENTICATION *smithy.Schema
-
-var ApplicationPolicyType_KERNEL_MODE_CODE_SIGNING *smithy.Schema
-
-var ApplicationPolicyType_KEY_PACK_LICENSES *smithy.Schema
-
-var ApplicationPolicyType_KEY_RECOVERY *smithy.Schema
-
-var ApplicationPolicyType_KEY_RECOVERY_AGENT *smithy.Schema
-
-var ApplicationPolicyType_LICENSE_SERVER_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_LIFETIME_SIGNING *smithy.Schema
-
-var ApplicationPolicyType_MICROSOFT_PUBLISHER *smithy.Schema
-
-var ApplicationPolicyType_MICROSOFT_TIME_STAMPING *smithy.Schema
-
-var ApplicationPolicyType_MICROSOFT_TRUST_LIST_SIGNING *smithy.Schema
-
-var ApplicationPolicyType_OCSP_SIGNING *smithy.Schema
-
-var ApplicationPolicyType_OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_PLATFORM_CERTIFICATE *smithy.Schema
-
-var ApplicationPolicyType_PREVIEW_BUILD_SIGNING *smithy.Schema
-
-var ApplicationPolicyType_PRIVATE_KEY_ARCHIVAL *smithy.Schema
-
-var ApplicationPolicyType_PROTECTED_PROCESS_LIGHT_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_PROTECTED_PROCESS_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_QUALIFIED_SUBORDINATION *smithy.Schema
-
-var ApplicationPolicyType_REVOKED_LIST_SIGNER *smithy.Schema
-
-var ApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION *smithy.Schema
-
-var ApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION *smithy.Schema
-
-var ApplicationPolicyType_ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL *smithy.Schema
-
-var ApplicationPolicyType_ROOT_LIST_SIGNER *smithy.Schema
-
-var ApplicationPolicyType_SECURE_EMAIL *smithy.Schema
-
-var ApplicationPolicyType_SERVER_AUTHENTICATION *smithy.Schema
-
-var ApplicationPolicyType_SMART_CARD_LOGIN *smithy.Schema
-
-var ApplicationPolicyType_SPC_ENCRYPTED_DIGEST_RETRY_COUNT *smithy.Schema
-
-var ApplicationPolicyType_SPC_RELAXED_PE_MARKER_CHECK *smithy.Schema
-
-var ApplicationPolicyType_TIME_STAMPING *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_KITS_COMPONENT *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_RT_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_SOFTWARE_EXTENSION_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_STORE *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_SYSTEM_COMPONENT_VERIFICATION *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_TCB_COMPONENT *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT *smithy.Schema
-
-var ApplicationPolicyType_WINDOWS_UPDATE *smithy.Schema
-
-var _CertificateAuthorityArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CertificateAuthorityArn",
-}, smithy.ShapeTypeString, 0)
-
-var CertificateValidity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CertificateValidity",
-}, smithy.ShapeTypeStructure, 2)
-var CertificateValidity_ValidityPeriod *smithy.Schema
-
-var CertificateValidity_RenewalPeriod *smithy.Schema
-
-var ClientCompatibilityV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ClientCompatibilityV2",
-}, smithy.ShapeTypeEnum, 6)
-var ClientCompatibilityV2_WINDOWS_SERVER_2003 *smithy.Schema
-
-var ClientCompatibilityV2_WINDOWS_SERVER_2008 *smithy.Schema
-
-var ClientCompatibilityV2_WINDOWS_SERVER_2008_R2 *smithy.Schema
-
-var ClientCompatibilityV2_WINDOWS_SERVER_2012 *smithy.Schema
-
-var ClientCompatibilityV2_WINDOWS_SERVER_2012_R2 *smithy.Schema
-
-var ClientCompatibilityV2_WINDOWS_SERVER_2016 *smithy.Schema
-
-var ClientCompatibilityV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ClientCompatibilityV3",
-}, smithy.ShapeTypeEnum, 5)
-var ClientCompatibilityV3_WINDOWS_SERVER_2008 *smithy.Schema
-
-var ClientCompatibilityV3_WINDOWS_SERVER_2008_R2 *smithy.Schema
-
-var ClientCompatibilityV3_WINDOWS_SERVER_2012 *smithy.Schema
-
-var ClientCompatibilityV3_WINDOWS_SERVER_2012_R2 *smithy.Schema
-
-var ClientCompatibilityV3_WINDOWS_SERVER_2016 *smithy.Schema
-
-var ClientCompatibilityV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ClientCompatibilityV4",
-}, smithy.ShapeTypeEnum, 3)
-var ClientCompatibilityV4_WINDOWS_SERVER_2012 *smithy.Schema
-
-var ClientCompatibilityV4_WINDOWS_SERVER_2012_R2 *smithy.Schema
-
-var ClientCompatibilityV4_WINDOWS_SERVER_2016 *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ResourceId *smithy.Schema
-
-var ConflictException_ResourceType *smithy.Schema
-
-var Connector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "Connector",
-}, smithy.ShapeTypeStructure, 9)
-var Connector_Arn *smithy.Schema
-
-var Connector_CertificateAuthorityArn *smithy.Schema
-
-var Connector_CertificateEnrollmentPolicyServerEndpoint *smithy.Schema
-
-var Connector_DirectoryId *smithy.Schema
-
-var Connector_VpcInformation *smithy.Schema
-
-var Connector_Status *smithy.Schema
-
-var Connector_StatusReason *smithy.Schema
-
-var Connector_CreatedAt *smithy.Schema
-
-var Connector_UpdatedAt *smithy.Schema
-
-var _ConnectorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ConnectorArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ConnectorList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorList_member *smithy.Schema
-
-var ConnectorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ConnectorStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ConnectorStatus_CREATING *smithy.Schema
-
-var ConnectorStatus_ACTIVE *smithy.Schema
-
-var ConnectorStatus_DELETING *smithy.Schema
-
-var ConnectorStatus_FAILED *smithy.Schema
-
-var ConnectorStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ConnectorStatusReason",
-}, smithy.ShapeTypeEnum, 11)
-var ConnectorStatusReason_CA_CERTIFICATE_REGISTRATION_FAILED *smithy.Schema
-
-var ConnectorStatusReason_DIRECTORY_ACCESS_DENIED *smithy.Schema
-
-var ConnectorStatusReason_INTERNAL_FAILURE *smithy.Schema
-
-var ConnectorStatusReason_INSUFFICIENT_FREE_ADDRESSES *smithy.Schema
-
-var ConnectorStatusReason_INVALID_SUBNET_IP_PROTOCOL *smithy.Schema
-
-var ConnectorStatusReason_PRIVATECA_ACCESS_DENIED *smithy.Schema
-
-var ConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND *smithy.Schema
-
-var ConnectorStatusReason_SECURITY_GROUP_NOT_IN_VPC *smithy.Schema
-
-var ConnectorStatusReason_VPC_ACCESS_DENIED *smithy.Schema
-
-var ConnectorStatusReason_VPC_ENDPOINT_LIMIT_EXCEEDED *smithy.Schema
-
-var ConnectorStatusReason_VPC_RESOURCE_NOT_FOUND *smithy.Schema
-
-var ConnectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ConnectorSummary",
-}, smithy.ShapeTypeStructure, 9)
-var ConnectorSummary_Arn *smithy.Schema
-
-var ConnectorSummary_CertificateAuthorityArn *smithy.Schema
-
-var ConnectorSummary_CertificateEnrollmentPolicyServerEndpoint *smithy.Schema
-
-var ConnectorSummary_DirectoryId *smithy.Schema
-
-var ConnectorSummary_VpcInformation *smithy.Schema
-
-var ConnectorSummary_Status *smithy.Schema
-
-var ConnectorSummary_StatusReason *smithy.Schema
-
-var ConnectorSummary_CreatedAt *smithy.Schema
-
-var ConnectorSummary_UpdatedAt *smithy.Schema
-
-var _CryptoProvidersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CryptoProvidersList",
-}, smithy.ShapeTypeList, 1)
-var _CryptoProvidersList_member *smithy.Schema
-
-var _CustomObjectIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CustomObjectIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DirectoryId",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DirectoryRegistration",
-}, smithy.ShapeTypeStructure, 6)
-var DirectoryRegistration_Arn *smithy.Schema
-
-var DirectoryRegistration_DirectoryId *smithy.Schema
-
-var DirectoryRegistration_Status *smithy.Schema
-
-var DirectoryRegistration_StatusReason *smithy.Schema
-
-var DirectoryRegistration_CreatedAt *smithy.Schema
-
-var DirectoryRegistration_UpdatedAt *smithy.Schema
-
-var _DirectoryRegistrationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DirectoryRegistrationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryRegistrationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DirectoryRegistrationList",
-}, smithy.ShapeTypeList, 1)
-var _DirectoryRegistrationList_member *smithy.Schema
-
-var DirectoryRegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DirectoryRegistrationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var DirectoryRegistrationStatus_CREATING *smithy.Schema
-
-var DirectoryRegistrationStatus_ACTIVE *smithy.Schema
-
-var DirectoryRegistrationStatus_DELETING *smithy.Schema
-
-var DirectoryRegistrationStatus_FAILED *smithy.Schema
-
-var DirectoryRegistrationStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DirectoryRegistrationStatusReason",
-}, smithy.ShapeTypeEnum, 6)
-var DirectoryRegistrationStatusReason_DIRECTORY_ACCESS_DENIED *smithy.Schema
-
-var DirectoryRegistrationStatusReason_DIRECTORY_RESOURCE_NOT_FOUND *smithy.Schema
-
-var DirectoryRegistrationStatusReason_DIRECTORY_NOT_ACTIVE *smithy.Schema
-
-var DirectoryRegistrationStatusReason_DIRECTORY_NOT_REACHABLE *smithy.Schema
-
-var DirectoryRegistrationStatusReason_DIRECTORY_TYPE_NOT_SUPPORTED *smithy.Schema
-
-var DirectoryRegistrationStatusReason_INTERNAL_FAILURE *smithy.Schema
-
-var DirectoryRegistrationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DirectoryRegistrationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var DirectoryRegistrationSummary_Arn *smithy.Schema
-
-var DirectoryRegistrationSummary_DirectoryId *smithy.Schema
-
-var DirectoryRegistrationSummary_Status *smithy.Schema
-
-var DirectoryRegistrationSummary_StatusReason *smithy.Schema
-
-var DirectoryRegistrationSummary_CreatedAt *smithy.Schema
-
-var DirectoryRegistrationSummary_UpdatedAt *smithy.Schema
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var EnrollmentFlagsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "EnrollmentFlagsV2",
-}, smithy.ShapeTypeStructure, 5)
-var EnrollmentFlagsV2_IncludeSymmetricAlgorithms *smithy.Schema
-
-var EnrollmentFlagsV2_UserInteractionRequired *smithy.Schema
-
-var EnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore *smithy.Schema
-
-var EnrollmentFlagsV2_NoSecurityExtension *smithy.Schema
-
-var EnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull *smithy.Schema
-
-var EnrollmentFlagsV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "EnrollmentFlagsV3",
-}, smithy.ShapeTypeStructure, 5)
-var EnrollmentFlagsV3_IncludeSymmetricAlgorithms *smithy.Schema
-
-var EnrollmentFlagsV3_UserInteractionRequired *smithy.Schema
-
-var EnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore *smithy.Schema
-
-var EnrollmentFlagsV3_NoSecurityExtension *smithy.Schema
-
-var EnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull *smithy.Schema
-
-var EnrollmentFlagsV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "EnrollmentFlagsV4",
-}, smithy.ShapeTypeStructure, 5)
-var EnrollmentFlagsV4_IncludeSymmetricAlgorithms *smithy.Schema
-
-var EnrollmentFlagsV4_UserInteractionRequired *smithy.Schema
-
-var EnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore *smithy.Schema
-
-var EnrollmentFlagsV4_NoSecurityExtension *smithy.Schema
-
-var EnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull *smithy.Schema
-
-var ExtensionsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ExtensionsV2",
-}, smithy.ShapeTypeStructure, 2)
-var ExtensionsV2_KeyUsage *smithy.Schema
-
-var ExtensionsV2_ApplicationPolicies *smithy.Schema
-
-var ExtensionsV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ExtensionsV3",
-}, smithy.ShapeTypeStructure, 2)
-var ExtensionsV3_KeyUsage *smithy.Schema
-
-var ExtensionsV3_ApplicationPolicies *smithy.Schema
-
-var ExtensionsV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ExtensionsV4",
-}, smithy.ShapeTypeStructure, 2)
-var ExtensionsV4_KeyUsage *smithy.Schema
-
-var ExtensionsV4_ApplicationPolicies *smithy.Schema
-
-var GeneralFlagsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GeneralFlagsV2",
-}, smithy.ShapeTypeStructure, 2)
-var GeneralFlagsV2_AutoEnrollment *smithy.Schema
-
-var GeneralFlagsV2_MachineType *smithy.Schema
-
-var GeneralFlagsV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GeneralFlagsV3",
-}, smithy.ShapeTypeStructure, 2)
-var GeneralFlagsV3_AutoEnrollment *smithy.Schema
-
-var GeneralFlagsV3_MachineType *smithy.Schema
-
-var GeneralFlagsV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GeneralFlagsV4",
-}, smithy.ShapeTypeStructure, 2)
-var GeneralFlagsV4_AutoEnrollment *smithy.Schema
-
-var GeneralFlagsV4_MachineType *smithy.Schema
-
-var _GroupSecurityIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GroupSecurityIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var HashAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "HashAlgorithm",
-}, smithy.ShapeTypeEnum, 3)
-var HashAlgorithm_SHA256 *smithy.Schema
-
-var HashAlgorithm_SHA384 *smithy.Schema
-
-var HashAlgorithm_SHA512 *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var IpAddressType_IPV4 *smithy.Schema
-
-var IpAddressType_DUALSTACK *smithy.Schema
-
-var KeySpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "KeySpec",
-}, smithy.ShapeTypeEnum, 2)
-var KeySpec_KEY_EXCHANGE *smithy.Schema
-
-var KeySpec_SIGNATURE *smithy.Schema
-
-var KeyUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "KeyUsage",
-}, smithy.ShapeTypeStructure, 2)
-var KeyUsage_Critical *smithy.Schema
-
-var KeyUsage_UsageFlags *smithy.Schema
-
-var KeyUsageFlags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "KeyUsageFlags",
-}, smithy.ShapeTypeStructure, 5)
-var KeyUsageFlags_DigitalSignature *smithy.Schema
-
-var KeyUsageFlags_NonRepudiation *smithy.Schema
-
-var KeyUsageFlags_KeyEncipherment *smithy.Schema
-
-var KeyUsageFlags_DataEncipherment *smithy.Schema
-
-var KeyUsageFlags_KeyAgreement *smithy.Schema
-
-var KeyUsageProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "KeyUsageProperty",
-}, smithy.ShapeTypeUnion, 2)
-var KeyUsageProperty_PropertyType *smithy.Schema
-
-var KeyUsageProperty_PropertyFlags *smithy.Schema
-
-var KeyUsagePropertyFlags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "KeyUsagePropertyFlags",
-}, smithy.ShapeTypeStructure, 3)
-var KeyUsagePropertyFlags_Decrypt *smithy.Schema
-
-var KeyUsagePropertyFlags_KeyAgreement *smithy.Schema
-
-var KeyUsagePropertyFlags_Sign *smithy.Schema
-
-var KeyUsagePropertyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "KeyUsagePropertyType",
-}, smithy.ShapeTypeEnum, 1)
-var KeyUsagePropertyType_ALL *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var PrivateKeyAlgorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PrivateKeyAlgorithm",
-}, smithy.ShapeTypeEnum, 4)
-var PrivateKeyAlgorithm_RSA *smithy.Schema
-
-var PrivateKeyAlgorithm_ECDH_P256 *smithy.Schema
-
-var PrivateKeyAlgorithm_ECDH_P384 *smithy.Schema
-
-var PrivateKeyAlgorithm_ECDH_P521 *smithy.Schema
-
-var PrivateKeyAttributesV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PrivateKeyAttributesV2",
-}, smithy.ShapeTypeStructure, 3)
-var PrivateKeyAttributesV2_MinimalKeyLength *smithy.Schema
-
-var PrivateKeyAttributesV2_KeySpec *smithy.Schema
-
-var PrivateKeyAttributesV2_CryptoProviders *smithy.Schema
-
-var PrivateKeyAttributesV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PrivateKeyAttributesV3",
-}, smithy.ShapeTypeStructure, 5)
-var PrivateKeyAttributesV3_MinimalKeyLength *smithy.Schema
-
-var PrivateKeyAttributesV3_KeySpec *smithy.Schema
-
-var PrivateKeyAttributesV3_CryptoProviders *smithy.Schema
-
-var PrivateKeyAttributesV3_KeyUsageProperty *smithy.Schema
-
-var PrivateKeyAttributesV3_Algorithm *smithy.Schema
-
-var PrivateKeyAttributesV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PrivateKeyAttributesV4",
-}, smithy.ShapeTypeStructure, 5)
-var PrivateKeyAttributesV4_MinimalKeyLength *smithy.Schema
-
-var PrivateKeyAttributesV4_KeySpec *smithy.Schema
-
-var PrivateKeyAttributesV4_CryptoProviders *smithy.Schema
-
-var PrivateKeyAttributesV4_KeyUsageProperty *smithy.Schema
-
-var PrivateKeyAttributesV4_Algorithm *smithy.Schema
-
-var PrivateKeyFlagsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PrivateKeyFlagsV2",
-}, smithy.ShapeTypeStructure, 3)
-var PrivateKeyFlagsV2_ExportableKey *smithy.Schema
-
-var PrivateKeyFlagsV2_StrongKeyProtectionRequired *smithy.Schema
-
-var PrivateKeyFlagsV2_ClientVersion *smithy.Schema
-
-var PrivateKeyFlagsV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PrivateKeyFlagsV3",
-}, smithy.ShapeTypeStructure, 4)
-var PrivateKeyFlagsV3_ExportableKey *smithy.Schema
-
-var PrivateKeyFlagsV3_StrongKeyProtectionRequired *smithy.Schema
-
-var PrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm *smithy.Schema
-
-var PrivateKeyFlagsV3_ClientVersion *smithy.Schema
-
-var PrivateKeyFlagsV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "PrivateKeyFlagsV4",
-}, smithy.ShapeTypeStructure, 6)
-var PrivateKeyFlagsV4_ExportableKey *smithy.Schema
-
-var PrivateKeyFlagsV4_StrongKeyProtectionRequired *smithy.Schema
-
-var PrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm *smithy.Schema
-
-var PrivateKeyFlagsV4_RequireSameKeyRenewal *smithy.Schema
-
-var PrivateKeyFlagsV4_UseLegacyProvider *smithy.Schema
-
-var PrivateKeyFlagsV4_ClientVersion *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "SecurityGroupIdList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIdList_member *smithy.Schema
-
-var ServicePrincipalName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ServicePrincipalName",
-}, smithy.ShapeTypeStructure, 6)
-var ServicePrincipalName_DirectoryRegistrationArn *smithy.Schema
-
-var ServicePrincipalName_ConnectorArn *smithy.Schema
-
-var ServicePrincipalName_Status *smithy.Schema
-
-var ServicePrincipalName_StatusReason *smithy.Schema
-
-var ServicePrincipalName_CreatedAt *smithy.Schema
-
-var ServicePrincipalName_UpdatedAt *smithy.Schema
-
-var _ServicePrincipalNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ServicePrincipalNameList",
-}, smithy.ShapeTypeList, 1)
-var _ServicePrincipalNameList_member *smithy.Schema
-
-var ServicePrincipalNameStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ServicePrincipalNameStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ServicePrincipalNameStatus_CREATING *smithy.Schema
-
-var ServicePrincipalNameStatus_ACTIVE *smithy.Schema
-
-var ServicePrincipalNameStatus_DELETING *smithy.Schema
-
-var ServicePrincipalNameStatus_FAILED *smithy.Schema
-
-var ServicePrincipalNameStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ServicePrincipalNameStatusReason",
-}, smithy.ShapeTypeEnum, 6)
-var ServicePrincipalNameStatusReason_DIRECTORY_ACCESS_DENIED *smithy.Schema
-
-var ServicePrincipalNameStatusReason_DIRECTORY_NOT_REACHABLE *smithy.Schema
-
-var ServicePrincipalNameStatusReason_DIRECTORY_RESOURCE_NOT_FOUND *smithy.Schema
-
-var ServicePrincipalNameStatusReason_SPN_EXISTS_ON_DIFFERENT_AD_OBJECT *smithy.Schema
-
-var ServicePrincipalNameStatusReason_SPN_LIMIT_EXCEEDED *smithy.Schema
-
-var ServicePrincipalNameStatusReason_INTERNAL_FAILURE *smithy.Schema
-
-var ServicePrincipalNameSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ServicePrincipalNameSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ServicePrincipalNameSummary_DirectoryRegistrationArn *smithy.Schema
-
-var ServicePrincipalNameSummary_ConnectorArn *smithy.Schema
-
-var ServicePrincipalNameSummary_Status *smithy.Schema
-
-var ServicePrincipalNameSummary_StatusReason *smithy.Schema
-
-var ServicePrincipalNameSummary_CreatedAt *smithy.Schema
-
-var ServicePrincipalNameSummary_UpdatedAt *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceId *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceType *smithy.Schema
-
-var ServiceQuotaExceededException_ServiceCode *smithy.Schema
-
-var ServiceQuotaExceededException_QuotaCode *smithy.Schema
-
-var SubjectNameFlagsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "SubjectNameFlagsV2",
-}, smithy.ShapeTypeStructure, 10)
-var SubjectNameFlagsV2_SanRequireDomainDns *smithy.Schema
-
-var SubjectNameFlagsV2_SanRequireSpn *smithy.Schema
-
-var SubjectNameFlagsV2_SanRequireDirectoryGuid *smithy.Schema
-
-var SubjectNameFlagsV2_SanRequireUpn *smithy.Schema
-
-var SubjectNameFlagsV2_SanRequireEmail *smithy.Schema
-
-var SubjectNameFlagsV2_SanRequireDns *smithy.Schema
-
-var SubjectNameFlagsV2_RequireDnsAsCn *smithy.Schema
-
-var SubjectNameFlagsV2_RequireEmail *smithy.Schema
-
-var SubjectNameFlagsV2_RequireCommonName *smithy.Schema
-
-var SubjectNameFlagsV2_RequireDirectoryPath *smithy.Schema
-
-var SubjectNameFlagsV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "SubjectNameFlagsV3",
-}, smithy.ShapeTypeStructure, 10)
-var SubjectNameFlagsV3_SanRequireDomainDns *smithy.Schema
-
-var SubjectNameFlagsV3_SanRequireSpn *smithy.Schema
-
-var SubjectNameFlagsV3_SanRequireDirectoryGuid *smithy.Schema
-
-var SubjectNameFlagsV3_SanRequireUpn *smithy.Schema
-
-var SubjectNameFlagsV3_SanRequireEmail *smithy.Schema
-
-var SubjectNameFlagsV3_SanRequireDns *smithy.Schema
-
-var SubjectNameFlagsV3_RequireDnsAsCn *smithy.Schema
-
-var SubjectNameFlagsV3_RequireEmail *smithy.Schema
-
-var SubjectNameFlagsV3_RequireCommonName *smithy.Schema
-
-var SubjectNameFlagsV3_RequireDirectoryPath *smithy.Schema
-
-var SubjectNameFlagsV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "SubjectNameFlagsV4",
-}, smithy.ShapeTypeStructure, 10)
-var SubjectNameFlagsV4_SanRequireDomainDns *smithy.Schema
-
-var SubjectNameFlagsV4_SanRequireSpn *smithy.Schema
-
-var SubjectNameFlagsV4_SanRequireDirectoryGuid *smithy.Schema
-
-var SubjectNameFlagsV4_SanRequireUpn *smithy.Schema
-
-var SubjectNameFlagsV4_SanRequireEmail *smithy.Schema
-
-var SubjectNameFlagsV4_SanRequireDns *smithy.Schema
-
-var SubjectNameFlagsV4_RequireDnsAsCn *smithy.Schema
-
-var SubjectNameFlagsV4_RequireEmail *smithy.Schema
-
-var SubjectNameFlagsV4_RequireCommonName *smithy.Schema
-
-var SubjectNameFlagsV4_RequireDirectoryPath *smithy.Schema
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var Template = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "Template",
-}, smithy.ShapeTypeStructure, 10)
-var Template_Arn *smithy.Schema
-
-var Template_ConnectorArn *smithy.Schema
-
-var Template_Definition *smithy.Schema
-
-var Template_Name *smithy.Schema
-
-var Template_ObjectIdentifier *smithy.Schema
-
-var Template_PolicySchema *smithy.Schema
-
-var Template_Status *smithy.Schema
-
-var Template_Revision *smithy.Schema
-
-var Template_CreatedAt *smithy.Schema
-
-var Template_UpdatedAt *smithy.Schema
-
-var _TemplateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateArn",
-}, smithy.ShapeTypeString, 0)
-
-var TemplateDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateDefinition",
-}, smithy.ShapeTypeUnion, 3)
-var TemplateDefinition_TemplateV2 *smithy.Schema
-
-var TemplateDefinition_TemplateV3 *smithy.Schema
-
-var TemplateDefinition_TemplateV4 *smithy.Schema
-
-var _TemplateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateList_member *smithy.Schema
-
-var _TemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateNameList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateNameList_member *smithy.Schema
-
-var TemplateRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateRevision",
-}, smithy.ShapeTypeStructure, 2)
-var TemplateRevision_MajorRevision *smithy.Schema
-
-var TemplateRevision_MinorRevision *smithy.Schema
-
-var TemplateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateStatus",
-}, smithy.ShapeTypeEnum, 2)
-var TemplateStatus_ACTIVE *smithy.Schema
-
-var TemplateStatus_DELETING *smithy.Schema
-
-var TemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateSummary",
-}, smithy.ShapeTypeStructure, 10)
-var TemplateSummary_Arn *smithy.Schema
-
-var TemplateSummary_ConnectorArn *smithy.Schema
-
-var TemplateSummary_Definition *smithy.Schema
-
-var TemplateSummary_Name *smithy.Schema
-
-var TemplateSummary_ObjectIdentifier *smithy.Schema
-
-var TemplateSummary_PolicySchema *smithy.Schema
-
-var TemplateSummary_Status *smithy.Schema
-
-var TemplateSummary_Revision *smithy.Schema
-
-var TemplateSummary_CreatedAt *smithy.Schema
-
-var TemplateSummary_UpdatedAt *smithy.Schema
-
-var TemplateV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateV2",
-}, smithy.ShapeTypeStructure, 8)
-var TemplateV2_CertificateValidity *smithy.Schema
-
-var TemplateV2_SupersededTemplates *smithy.Schema
-
-var TemplateV2_PrivateKeyAttributes *smithy.Schema
-
-var TemplateV2_PrivateKeyFlags *smithy.Schema
-
-var TemplateV2_EnrollmentFlags *smithy.Schema
-
-var TemplateV2_SubjectNameFlags *smithy.Schema
-
-var TemplateV2_GeneralFlags *smithy.Schema
-
-var TemplateV2_Extensions *smithy.Schema
-
-var TemplateV3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateV3",
-}, smithy.ShapeTypeStructure, 9)
-var TemplateV3_CertificateValidity *smithy.Schema
-
-var TemplateV3_SupersededTemplates *smithy.Schema
-
-var TemplateV3_PrivateKeyAttributes *smithy.Schema
-
-var TemplateV3_PrivateKeyFlags *smithy.Schema
-
-var TemplateV3_EnrollmentFlags *smithy.Schema
-
-var TemplateV3_SubjectNameFlags *smithy.Schema
-
-var TemplateV3_GeneralFlags *smithy.Schema
-
-var TemplateV3_HashAlgorithm *smithy.Schema
-
-var TemplateV3_Extensions *smithy.Schema
-
-var TemplateV4 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TemplateV4",
-}, smithy.ShapeTypeStructure, 9)
-var TemplateV4_CertificateValidity *smithy.Schema
-
-var TemplateV4_SupersededTemplates *smithy.Schema
-
-var TemplateV4_PrivateKeyAttributes *smithy.Schema
-
-var TemplateV4_PrivateKeyFlags *smithy.Schema
-
-var TemplateV4_EnrollmentFlags *smithy.Schema
-
-var TemplateV4_SubjectNameFlags *smithy.Schema
-
-var TemplateV4_GeneralFlags *smithy.Schema
-
-var TemplateV4_HashAlgorithm *smithy.Schema
-
-var TemplateV4_Extensions *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_ServiceCode *smithy.Schema
-
-var ThrottlingException_QuotaCode *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 9)
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_INVALID_CA_SUBJECT *smithy.Schema
-
-var ValidationExceptionReason_INVALID_PERMISSION *smithy.Schema
-
-var ValidationExceptionReason_INVALID_STATE *smithy.Schema
-
-var ValidationExceptionReason_MISMATCHED_CONNECTOR *smithy.Schema
-
-var ValidationExceptionReason_MISMATCHED_VPC *smithy.Schema
-
-var ValidationExceptionReason_NO_CLIENT_TOKEN *smithy.Schema
-
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var ValidityPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ValidityPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var ValidityPeriod_PeriodType *smithy.Schema
-
-var ValidityPeriod_Period *smithy.Schema
-
-var ValidityPeriodType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ValidityPeriodType",
-}, smithy.ShapeTypeEnum, 5)
-var ValidityPeriodType_HOURS *smithy.Schema
-
-var ValidityPeriodType_DAYS *smithy.Schema
-
-var ValidityPeriodType_WEEKS *smithy.Schema
-
-var ValidityPeriodType_MONTHS *smithy.Schema
-
-var ValidityPeriodType_YEARS *smithy.Schema
-
-var VpcInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "VpcInformation",
-}, smithy.ShapeTypeStructure, 2)
-var VpcInformation_IpAddressType *smithy.Schema
-
-var VpcInformation_SecurityGroupIds *smithy.Schema
-
-var CreateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateConnectorRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateConnectorRequest_DirectoryId *smithy.Schema
-
-var CreateConnectorRequest_CertificateAuthorityArn *smithy.Schema
-
-var CreateConnectorRequest_VpcInformation *smithy.Schema
-
-var CreateConnectorRequest_ClientToken *smithy.Schema
-
-var CreateConnectorRequest_Tags *smithy.Schema
-
-var CreateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectorResponse_ConnectorArn *smithy.Schema
-
-var CreateDirectoryRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateDirectoryRegistrationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDirectoryRegistrationRequest_DirectoryId *smithy.Schema
-
-var CreateDirectoryRegistrationRequest_ClientToken *smithy.Schema
-
-var CreateDirectoryRegistrationRequest_Tags *smithy.Schema
-
-var CreateDirectoryRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateDirectoryRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDirectoryRegistrationResponse_DirectoryRegistrationArn *smithy.Schema
-
-var CreateServicePrincipalNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateServicePrincipalNameRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateServicePrincipalNameRequest_DirectoryRegistrationArn *smithy.Schema
-
-var CreateServicePrincipalNameRequest_ConnectorArn *smithy.Schema
-
-var CreateServicePrincipalNameRequest_ClientToken *smithy.Schema
-
-var CreateTemplateGroupAccessControlEntryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateTemplateGroupAccessControlEntryRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTemplateGroupAccessControlEntryRequest_TemplateArn *smithy.Schema
-
-var CreateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier *smithy.Schema
-
-var CreateTemplateGroupAccessControlEntryRequest_GroupDisplayName *smithy.Schema
-
-var CreateTemplateGroupAccessControlEntryRequest_AccessRights *smithy.Schema
-
-var CreateTemplateGroupAccessControlEntryRequest_ClientToken *smithy.Schema
-
-var CreateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateTemplateRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTemplateRequest_ConnectorArn *smithy.Schema
-
-var CreateTemplateRequest_Name *smithy.Schema
-
-var CreateTemplateRequest_Definition *smithy.Schema
-
-var CreateTemplateRequest_ClientToken *smithy.Schema
-
-var CreateTemplateRequest_Tags *smithy.Schema
-
-var CreateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "CreateTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTemplateResponse_TemplateArn *smithy.Schema
-
-var DeleteConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectorRequest_ConnectorArn *smithy.Schema
-
-var DeleteDirectoryRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteDirectoryRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectoryRegistrationRequest_DirectoryRegistrationArn *smithy.Schema
-
-var DeleteServicePrincipalNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteServicePrincipalNameRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteServicePrincipalNameRequest_DirectoryRegistrationArn *smithy.Schema
-
-var DeleteServicePrincipalNameRequest_ConnectorArn *smithy.Schema
-
-var DeleteTemplateGroupAccessControlEntryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteTemplateGroupAccessControlEntryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTemplateGroupAccessControlEntryRequest_TemplateArn *smithy.Schema
-
-var DeleteTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier *smithy.Schema
-
-var DeleteTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "DeleteTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTemplateRequest_TemplateArn *smithy.Schema
-
-var GetConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectorRequest_ConnectorArn *smithy.Schema
-
-var GetConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectorResponse_Connector *smithy.Schema
-
-var GetDirectoryRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetDirectoryRegistrationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDirectoryRegistrationRequest_DirectoryRegistrationArn *smithy.Schema
-
-var GetDirectoryRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetDirectoryRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDirectoryRegistrationResponse_DirectoryRegistration *smithy.Schema
-
-var GetServicePrincipalNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetServicePrincipalNameRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetServicePrincipalNameRequest_DirectoryRegistrationArn *smithy.Schema
-
-var GetServicePrincipalNameRequest_ConnectorArn *smithy.Schema
-
-var GetServicePrincipalNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetServicePrincipalNameResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetServicePrincipalNameResponse_ServicePrincipalName *smithy.Schema
-
-var GetTemplateGroupAccessControlEntryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetTemplateGroupAccessControlEntryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTemplateGroupAccessControlEntryRequest_TemplateArn *smithy.Schema
-
-var GetTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier *smithy.Schema
-
-var GetTemplateGroupAccessControlEntryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetTemplateGroupAccessControlEntryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTemplateGroupAccessControlEntryResponse_AccessControlEntry *smithy.Schema
-
-var GetTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetTemplateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTemplateRequest_TemplateArn *smithy.Schema
-
-var GetTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "GetTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTemplateResponse_Template *smithy.Schema
-
-var ListConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListConnectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsRequest_MaxResults *smithy.Schema
-
-var ListConnectorsRequest_NextToken *smithy.Schema
-
-var ListConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsResponse_Connectors *smithy.Schema
-
-var ListConnectorsResponse_NextToken *smithy.Schema
-
-var ListDirectoryRegistrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListDirectoryRegistrationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDirectoryRegistrationsRequest_MaxResults *smithy.Schema
-
-var ListDirectoryRegistrationsRequest_NextToken *smithy.Schema
-
-var ListDirectoryRegistrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListDirectoryRegistrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDirectoryRegistrationsResponse_DirectoryRegistrations *smithy.Schema
-
-var ListDirectoryRegistrationsResponse_NextToken *smithy.Schema
-
-var ListServicePrincipalNamesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListServicePrincipalNamesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListServicePrincipalNamesRequest_MaxResults *smithy.Schema
-
-var ListServicePrincipalNamesRequest_NextToken *smithy.Schema
-
-var ListServicePrincipalNamesRequest_DirectoryRegistrationArn *smithy.Schema
-
-var ListServicePrincipalNamesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListServicePrincipalNamesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicePrincipalNamesResponse_ServicePrincipalNames *smithy.Schema
-
-var ListServicePrincipalNamesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTemplateGroupAccessControlEntriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTemplateGroupAccessControlEntriesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTemplateGroupAccessControlEntriesRequest_MaxResults *smithy.Schema
-
-var ListTemplateGroupAccessControlEntriesRequest_NextToken *smithy.Schema
-
-var ListTemplateGroupAccessControlEntriesRequest_TemplateArn *smithy.Schema
-
-var ListTemplateGroupAccessControlEntriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTemplateGroupAccessControlEntriesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries *smithy.Schema
-
-var ListTemplateGroupAccessControlEntriesResponse_NextToken *smithy.Schema
-
-var ListTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTemplatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTemplatesRequest_MaxResults *smithy.Schema
-
-var ListTemplatesRequest_NextToken *smithy.Schema
-
-var ListTemplatesRequest_ConnectorArn *smithy.Schema
-
-var ListTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "ListTemplatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTemplatesResponse_Templates *smithy.Schema
-
-var ListTemplatesResponse_NextToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateTemplateGroupAccessControlEntryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "UpdateTemplateGroupAccessControlEntryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTemplateGroupAccessControlEntryRequest_TemplateArn *smithy.Schema
-
-var UpdateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier *smithy.Schema
-
-var UpdateTemplateGroupAccessControlEntryRequest_GroupDisplayName *smithy.Schema
-
-var UpdateTemplateGroupAccessControlEntryRequest_AccessRights *smithy.Schema
-
-var UpdateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pcaconnectorad",
-	Name:      "UpdateTemplateRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateTemplateRequest_TemplateArn *smithy.Schema
-
-var UpdateTemplateRequest_Definition *smithy.Schema
-
-var UpdateTemplateRequest_ReenrollAllCertificateHolders *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessRight_ALLOW = AccessRight.AddMember("ALLOW", smithyprelude.Unit)
-
-	AccessRight_DENY = AccessRight.AddMember("DENY", smithyprelude.Unit)
-
-	AccessRights_Enroll = AccessRights.AddMember("Enroll", AccessRight)
-
-	AccessRights_AutoEnroll = AccessRights.AddMember("AutoEnroll", AccessRight)
-
-	AccessControlEntry_GroupDisplayName = AccessControlEntry.AddMember("GroupDisplayName", _DisplayName)
-
-	AccessControlEntry_GroupSecurityIdentifier = AccessControlEntry.AddMember("GroupSecurityIdentifier", _GroupSecurityIdentifier)
-
-	AccessControlEntry_AccessRights = AccessControlEntry.AddMember("AccessRights", AccessRights)
-
-	AccessControlEntry_TemplateArn = AccessControlEntry.AddMember("TemplateArn", _TemplateArn)
-
-	AccessControlEntry_CreatedAt = AccessControlEntry.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AccessControlEntry_UpdatedAt = AccessControlEntry.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	AccessControlEntrySummary_GroupDisplayName = AccessControlEntrySummary.AddMember("GroupDisplayName", _DisplayName)
-
-	AccessControlEntrySummary_GroupSecurityIdentifier = AccessControlEntrySummary.AddMember("GroupSecurityIdentifier", _GroupSecurityIdentifier)
-
-	AccessControlEntrySummary_AccessRights = AccessControlEntrySummary.AddMember("AccessRights", AccessRights)
-
-	AccessControlEntrySummary_TemplateArn = AccessControlEntrySummary.AddMember("TemplateArn", _TemplateArn)
-
-	AccessControlEntrySummary_CreatedAt = AccessControlEntrySummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	AccessControlEntrySummary_UpdatedAt = AccessControlEntrySummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_AccessControlEntryList_member = _AccessControlEntryList.AddMember("member", AccessControlEntrySummary)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	ApplicationPolicyType_ALL_APPLICATION_POLICIES = ApplicationPolicyType.AddMember("ALL_APPLICATION_POLICIES", smithyprelude.Unit)
-
-	ApplicationPolicyType_ANY_PURPOSE = ApplicationPolicyType.AddMember("ANY_PURPOSE", smithyprelude.Unit)
-
-	ApplicationPolicyType_ATTESTATION_IDENTITY_KEY_CERTIFICATE = ApplicationPolicyType.AddMember("ATTESTATION_IDENTITY_KEY_CERTIFICATE", smithyprelude.Unit)
-
-	ApplicationPolicyType_CERTIFICATE_REQUEST_AGENT = ApplicationPolicyType.AddMember("CERTIFICATE_REQUEST_AGENT", smithyprelude.Unit)
-
-	ApplicationPolicyType_CLIENT_AUTHENTICATION = ApplicationPolicyType.AddMember("CLIENT_AUTHENTICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_CODE_SIGNING = ApplicationPolicyType.AddMember("CODE_SIGNING", smithyprelude.Unit)
-
-	ApplicationPolicyType_CTL_USAGE = ApplicationPolicyType.AddMember("CTL_USAGE", smithyprelude.Unit)
-
-	ApplicationPolicyType_DIGITAL_RIGHTS = ApplicationPolicyType.AddMember("DIGITAL_RIGHTS", smithyprelude.Unit)
-
-	ApplicationPolicyType_DIRECTORY_SERVICE_EMAIL_REPLICATION = ApplicationPolicyType.AddMember("DIRECTORY_SERVICE_EMAIL_REPLICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_DISALLOWED_LIST = ApplicationPolicyType.AddMember("DISALLOWED_LIST", smithyprelude.Unit)
-
-	ApplicationPolicyType_DNS_SERVER_TRUST = ApplicationPolicyType.AddMember("DNS_SERVER_TRUST", smithyprelude.Unit)
-
-	ApplicationPolicyType_DOCUMENT_ENCRYPTION = ApplicationPolicyType.AddMember("DOCUMENT_ENCRYPTION", smithyprelude.Unit)
-
-	ApplicationPolicyType_DOCUMENT_SIGNING = ApplicationPolicyType.AddMember("DOCUMENT_SIGNING", smithyprelude.Unit)
-
-	ApplicationPolicyType_DYNAMIC_CODE_GENERATOR = ApplicationPolicyType.AddMember("DYNAMIC_CODE_GENERATOR", smithyprelude.Unit)
-
-	ApplicationPolicyType_EARLY_LAUNCH_ANTIMALWARE_DRIVER = ApplicationPolicyType.AddMember("EARLY_LAUNCH_ANTIMALWARE_DRIVER", smithyprelude.Unit)
-
-	ApplicationPolicyType_EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = ApplicationPolicyType.AddMember("EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_ENCLAVE = ApplicationPolicyType.AddMember("ENCLAVE", smithyprelude.Unit)
-
-	ApplicationPolicyType_ENCRYPTING_FILE_SYSTEM = ApplicationPolicyType.AddMember("ENCRYPTING_FILE_SYSTEM", smithyprelude.Unit)
-
-	ApplicationPolicyType_ENDORSEMENT_KEY_CERTIFICATE = ApplicationPolicyType.AddMember("ENDORSEMENT_KEY_CERTIFICATE", smithyprelude.Unit)
-
-	ApplicationPolicyType_FILE_RECOVERY = ApplicationPolicyType.AddMember("FILE_RECOVERY", smithyprelude.Unit)
-
-	ApplicationPolicyType_HAL_EXTENSION = ApplicationPolicyType.AddMember("HAL_EXTENSION", smithyprelude.Unit)
-
-	ApplicationPolicyType_IP_SECURITY_END_SYSTEM = ApplicationPolicyType.AddMember("IP_SECURITY_END_SYSTEM", smithyprelude.Unit)
-
-	ApplicationPolicyType_IP_SECURITY_IKE_INTERMEDIATE = ApplicationPolicyType.AddMember("IP_SECURITY_IKE_INTERMEDIATE", smithyprelude.Unit)
-
-	ApplicationPolicyType_IP_SECURITY_TUNNEL_TERMINATION = ApplicationPolicyType.AddMember("IP_SECURITY_TUNNEL_TERMINATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_IP_SECURITY_USER = ApplicationPolicyType.AddMember("IP_SECURITY_USER", smithyprelude.Unit)
-
-	ApplicationPolicyType_ISOLATED_USER_MODE = ApplicationPolicyType.AddMember("ISOLATED_USER_MODE", smithyprelude.Unit)
-
-	ApplicationPolicyType_KDC_AUTHENTICATION = ApplicationPolicyType.AddMember("KDC_AUTHENTICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_KERNEL_MODE_CODE_SIGNING = ApplicationPolicyType.AddMember("KERNEL_MODE_CODE_SIGNING", smithyprelude.Unit)
-
-	ApplicationPolicyType_KEY_PACK_LICENSES = ApplicationPolicyType.AddMember("KEY_PACK_LICENSES", smithyprelude.Unit)
-
-	ApplicationPolicyType_KEY_RECOVERY = ApplicationPolicyType.AddMember("KEY_RECOVERY", smithyprelude.Unit)
-
-	ApplicationPolicyType_KEY_RECOVERY_AGENT = ApplicationPolicyType.AddMember("KEY_RECOVERY_AGENT", smithyprelude.Unit)
-
-	ApplicationPolicyType_LICENSE_SERVER_VERIFICATION = ApplicationPolicyType.AddMember("LICENSE_SERVER_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_LIFETIME_SIGNING = ApplicationPolicyType.AddMember("LIFETIME_SIGNING", smithyprelude.Unit)
-
-	ApplicationPolicyType_MICROSOFT_PUBLISHER = ApplicationPolicyType.AddMember("MICROSOFT_PUBLISHER", smithyprelude.Unit)
-
-	ApplicationPolicyType_MICROSOFT_TIME_STAMPING = ApplicationPolicyType.AddMember("MICROSOFT_TIME_STAMPING", smithyprelude.Unit)
-
-	ApplicationPolicyType_MICROSOFT_TRUST_LIST_SIGNING = ApplicationPolicyType.AddMember("MICROSOFT_TRUST_LIST_SIGNING", smithyprelude.Unit)
-
-	ApplicationPolicyType_OCSP_SIGNING = ApplicationPolicyType.AddMember("OCSP_SIGNING", smithyprelude.Unit)
-
-	ApplicationPolicyType_OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = ApplicationPolicyType.AddMember("OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_PLATFORM_CERTIFICATE = ApplicationPolicyType.AddMember("PLATFORM_CERTIFICATE", smithyprelude.Unit)
-
-	ApplicationPolicyType_PREVIEW_BUILD_SIGNING = ApplicationPolicyType.AddMember("PREVIEW_BUILD_SIGNING", smithyprelude.Unit)
-
-	ApplicationPolicyType_PRIVATE_KEY_ARCHIVAL = ApplicationPolicyType.AddMember("PRIVATE_KEY_ARCHIVAL", smithyprelude.Unit)
-
-	ApplicationPolicyType_PROTECTED_PROCESS_LIGHT_VERIFICATION = ApplicationPolicyType.AddMember("PROTECTED_PROCESS_LIGHT_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_PROTECTED_PROCESS_VERIFICATION = ApplicationPolicyType.AddMember("PROTECTED_PROCESS_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_QUALIFIED_SUBORDINATION = ApplicationPolicyType.AddMember("QUALIFIED_SUBORDINATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_REVOKED_LIST_SIGNER = ApplicationPolicyType.AddMember("REVOKED_LIST_SIGNER", smithyprelude.Unit)
-
-	ApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION = ApplicationPolicyType.AddMember("ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION = ApplicationPolicyType.AddMember("ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL = ApplicationPolicyType.AddMember("ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL", smithyprelude.Unit)
-
-	ApplicationPolicyType_ROOT_LIST_SIGNER = ApplicationPolicyType.AddMember("ROOT_LIST_SIGNER", smithyprelude.Unit)
-
-	ApplicationPolicyType_SECURE_EMAIL = ApplicationPolicyType.AddMember("SECURE_EMAIL", smithyprelude.Unit)
-
-	ApplicationPolicyType_SERVER_AUTHENTICATION = ApplicationPolicyType.AddMember("SERVER_AUTHENTICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_SMART_CARD_LOGIN = ApplicationPolicyType.AddMember("SMART_CARD_LOGIN", smithyprelude.Unit)
-
-	ApplicationPolicyType_SPC_ENCRYPTED_DIGEST_RETRY_COUNT = ApplicationPolicyType.AddMember("SPC_ENCRYPTED_DIGEST_RETRY_COUNT", smithyprelude.Unit)
-
-	ApplicationPolicyType_SPC_RELAXED_PE_MARKER_CHECK = ApplicationPolicyType.AddMember("SPC_RELAXED_PE_MARKER_CHECK", smithyprelude.Unit)
-
-	ApplicationPolicyType_TIME_STAMPING = ApplicationPolicyType.AddMember("TIME_STAMPING", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION = ApplicationPolicyType.AddMember("WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION = ApplicationPolicyType.AddMember("WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_VERIFICATION = ApplicationPolicyType.AddMember("WINDOWS_HARDWARE_DRIVER_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION = ApplicationPolicyType.AddMember("WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_KITS_COMPONENT = ApplicationPolicyType.AddMember("WINDOWS_KITS_COMPONENT", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_RT_VERIFICATION = ApplicationPolicyType.AddMember("WINDOWS_RT_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_SOFTWARE_EXTENSION_VERIFICATION = ApplicationPolicyType.AddMember("WINDOWS_SOFTWARE_EXTENSION_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_STORE = ApplicationPolicyType.AddMember("WINDOWS_STORE", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = ApplicationPolicyType.AddMember("WINDOWS_SYSTEM_COMPONENT_VERIFICATION", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_TCB_COMPONENT = ApplicationPolicyType.AddMember("WINDOWS_TCB_COMPONENT", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT = ApplicationPolicyType.AddMember("WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT", smithyprelude.Unit)
-
-	ApplicationPolicyType_WINDOWS_UPDATE = ApplicationPolicyType.AddMember("WINDOWS_UPDATE", smithyprelude.Unit)
-
-	ApplicationPolicy_PolicyType = ApplicationPolicy.AddMember("PolicyType", ApplicationPolicyType)
-
-	ApplicationPolicy_PolicyObjectIdentifier = ApplicationPolicy.AddMember("PolicyObjectIdentifier", _CustomObjectIdentifier)
-
-	_ApplicationPolicyList_member = _ApplicationPolicyList.AddMember("member", ApplicationPolicy)
-
-	ApplicationPolicies_Critical = ApplicationPolicies.AddMember("Critical", smithyprelude.Boolean)
-
-	ApplicationPolicies_Policies = ApplicationPolicies.AddMember("Policies", _ApplicationPolicyList)
-
-	ValidityPeriodType_HOURS = ValidityPeriodType.AddMember("HOURS", smithyprelude.Unit)
-
-	ValidityPeriodType_DAYS = ValidityPeriodType.AddMember("DAYS", smithyprelude.Unit)
-
-	ValidityPeriodType_WEEKS = ValidityPeriodType.AddMember("WEEKS", smithyprelude.Unit)
-
-	ValidityPeriodType_MONTHS = ValidityPeriodType.AddMember("MONTHS", smithyprelude.Unit)
-
-	ValidityPeriodType_YEARS = ValidityPeriodType.AddMember("YEARS", smithyprelude.Unit)
-
-	ValidityPeriod_PeriodType = ValidityPeriod.AddMember("PeriodType", ValidityPeriodType)
-
-	ValidityPeriod_Period = ValidityPeriod.AddMember("Period", smithyprelude.Long)
-
-	CertificateValidity_ValidityPeriod = CertificateValidity.AddMember("ValidityPeriod", ValidityPeriod)
-
-	CertificateValidity_RenewalPeriod = CertificateValidity.AddMember("RenewalPeriod", ValidityPeriod)
-
-	ClientCompatibilityV2_WINDOWS_SERVER_2003 = ClientCompatibilityV2.AddMember("WINDOWS_SERVER_2003", smithyprelude.Unit)
-
-	ClientCompatibilityV2_WINDOWS_SERVER_2008 = ClientCompatibilityV2.AddMember("WINDOWS_SERVER_2008", smithyprelude.Unit)
-
-	ClientCompatibilityV2_WINDOWS_SERVER_2008_R2 = ClientCompatibilityV2.AddMember("WINDOWS_SERVER_2008_R2", smithyprelude.Unit)
-
-	ClientCompatibilityV2_WINDOWS_SERVER_2012 = ClientCompatibilityV2.AddMember("WINDOWS_SERVER_2012", smithyprelude.Unit)
-
-	ClientCompatibilityV2_WINDOWS_SERVER_2012_R2 = ClientCompatibilityV2.AddMember("WINDOWS_SERVER_2012_R2", smithyprelude.Unit)
-
-	ClientCompatibilityV2_WINDOWS_SERVER_2016 = ClientCompatibilityV2.AddMember("WINDOWS_SERVER_2016", smithyprelude.Unit)
-
-	ClientCompatibilityV3_WINDOWS_SERVER_2008 = ClientCompatibilityV3.AddMember("WINDOWS_SERVER_2008", smithyprelude.Unit)
-
-	ClientCompatibilityV3_WINDOWS_SERVER_2008_R2 = ClientCompatibilityV3.AddMember("WINDOWS_SERVER_2008_R2", smithyprelude.Unit)
-
-	ClientCompatibilityV3_WINDOWS_SERVER_2012 = ClientCompatibilityV3.AddMember("WINDOWS_SERVER_2012", smithyprelude.Unit)
-
-	ClientCompatibilityV3_WINDOWS_SERVER_2012_R2 = ClientCompatibilityV3.AddMember("WINDOWS_SERVER_2012_R2", smithyprelude.Unit)
-
-	ClientCompatibilityV3_WINDOWS_SERVER_2016 = ClientCompatibilityV3.AddMember("WINDOWS_SERVER_2016", smithyprelude.Unit)
-
-	ClientCompatibilityV4_WINDOWS_SERVER_2012 = ClientCompatibilityV4.AddMember("WINDOWS_SERVER_2012", smithyprelude.Unit)
-
-	ClientCompatibilityV4_WINDOWS_SERVER_2012_R2 = ClientCompatibilityV4.AddMember("WINDOWS_SERVER_2012_R2", smithyprelude.Unit)
-
-	ClientCompatibilityV4_WINDOWS_SERVER_2016 = ClientCompatibilityV4.AddMember("WINDOWS_SERVER_2016", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_ResourceId = ConflictException.AddMember("ResourceId", smithyprelude.String)
-
-	ConflictException_ResourceType = ConflictException.AddMember("ResourceType", smithyprelude.String)
-
-	IpAddressType_IPV4 = IpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	IpAddressType_DUALSTACK = IpAddressType.AddMember("DUALSTACK", smithyprelude.Unit)
-
-	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", _SecurityGroupId)
-
-	VpcInformation_IpAddressType = VpcInformation.AddMember("IpAddressType", IpAddressType)
-
-	VpcInformation_SecurityGroupIds = VpcInformation.AddMember("SecurityGroupIds", _SecurityGroupIdList)
-
-	ConnectorStatus_CREATING = ConnectorStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ConnectorStatus_ACTIVE = ConnectorStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ConnectorStatus_DELETING = ConnectorStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ConnectorStatus_FAILED = ConnectorStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ConnectorStatusReason_CA_CERTIFICATE_REGISTRATION_FAILED = ConnectorStatusReason.AddMember("CA_CERTIFICATE_REGISTRATION_FAILED", smithyprelude.Unit)
-
-	ConnectorStatusReason_DIRECTORY_ACCESS_DENIED = ConnectorStatusReason.AddMember("DIRECTORY_ACCESS_DENIED", smithyprelude.Unit)
-
-	ConnectorStatusReason_INTERNAL_FAILURE = ConnectorStatusReason.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
-
-	ConnectorStatusReason_INSUFFICIENT_FREE_ADDRESSES = ConnectorStatusReason.AddMember("INSUFFICIENT_FREE_ADDRESSES", smithyprelude.Unit)
-
-	ConnectorStatusReason_INVALID_SUBNET_IP_PROTOCOL = ConnectorStatusReason.AddMember("INVALID_SUBNET_IP_PROTOCOL", smithyprelude.Unit)
-
-	ConnectorStatusReason_PRIVATECA_ACCESS_DENIED = ConnectorStatusReason.AddMember("PRIVATECA_ACCESS_DENIED", smithyprelude.Unit)
-
-	ConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND = ConnectorStatusReason.AddMember("PRIVATECA_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ConnectorStatusReason_SECURITY_GROUP_NOT_IN_VPC = ConnectorStatusReason.AddMember("SECURITY_GROUP_NOT_IN_VPC", smithyprelude.Unit)
-
-	ConnectorStatusReason_VPC_ACCESS_DENIED = ConnectorStatusReason.AddMember("VPC_ACCESS_DENIED", smithyprelude.Unit)
-
-	ConnectorStatusReason_VPC_ENDPOINT_LIMIT_EXCEEDED = ConnectorStatusReason.AddMember("VPC_ENDPOINT_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ConnectorStatusReason_VPC_RESOURCE_NOT_FOUND = ConnectorStatusReason.AddMember("VPC_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	Connector_Arn = Connector.AddMember("Arn", _ConnectorArn)
-
-	Connector_CertificateAuthorityArn = Connector.AddMember("CertificateAuthorityArn", _CertificateAuthorityArn)
-
-	Connector_CertificateEnrollmentPolicyServerEndpoint = Connector.AddMember("CertificateEnrollmentPolicyServerEndpoint", smithyprelude.String)
-
-	Connector_DirectoryId = Connector.AddMember("DirectoryId", _DirectoryId)
-
-	Connector_VpcInformation = Connector.AddMember("VpcInformation", VpcInformation)
-
-	Connector_Status = Connector.AddMember("Status", ConnectorStatus)
-
-	Connector_StatusReason = Connector.AddMember("StatusReason", ConnectorStatusReason)
-
-	Connector_CreatedAt = Connector.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	Connector_UpdatedAt = Connector.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	ConnectorSummary_Arn = ConnectorSummary.AddMember("Arn", _ConnectorArn)
-
-	ConnectorSummary_CertificateAuthorityArn = ConnectorSummary.AddMember("CertificateAuthorityArn", _CertificateAuthorityArn)
-
-	ConnectorSummary_CertificateEnrollmentPolicyServerEndpoint = ConnectorSummary.AddMember("CertificateEnrollmentPolicyServerEndpoint", smithyprelude.String)
-
-	ConnectorSummary_DirectoryId = ConnectorSummary.AddMember("DirectoryId", _DirectoryId)
-
-	ConnectorSummary_VpcInformation = ConnectorSummary.AddMember("VpcInformation", VpcInformation)
-
-	ConnectorSummary_Status = ConnectorSummary.AddMember("Status", ConnectorStatus)
-
-	ConnectorSummary_StatusReason = ConnectorSummary.AddMember("StatusReason", ConnectorStatusReason)
-
-	ConnectorSummary_CreatedAt = ConnectorSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ConnectorSummary_UpdatedAt = ConnectorSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_ConnectorList_member = _ConnectorList.AddMember("member", ConnectorSummary)
-
-	_CryptoProvidersList_member = _CryptoProvidersList.AddMember("member", smithyprelude.String)
-
-	DirectoryRegistrationStatus_CREATING = DirectoryRegistrationStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	DirectoryRegistrationStatus_ACTIVE = DirectoryRegistrationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DirectoryRegistrationStatus_DELETING = DirectoryRegistrationStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	DirectoryRegistrationStatus_FAILED = DirectoryRegistrationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DirectoryRegistrationStatusReason_DIRECTORY_ACCESS_DENIED = DirectoryRegistrationStatusReason.AddMember("DIRECTORY_ACCESS_DENIED", smithyprelude.Unit)
-
-	DirectoryRegistrationStatusReason_DIRECTORY_RESOURCE_NOT_FOUND = DirectoryRegistrationStatusReason.AddMember("DIRECTORY_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	DirectoryRegistrationStatusReason_DIRECTORY_NOT_ACTIVE = DirectoryRegistrationStatusReason.AddMember("DIRECTORY_NOT_ACTIVE", smithyprelude.Unit)
-
-	DirectoryRegistrationStatusReason_DIRECTORY_NOT_REACHABLE = DirectoryRegistrationStatusReason.AddMember("DIRECTORY_NOT_REACHABLE", smithyprelude.Unit)
-
-	DirectoryRegistrationStatusReason_DIRECTORY_TYPE_NOT_SUPPORTED = DirectoryRegistrationStatusReason.AddMember("DIRECTORY_TYPE_NOT_SUPPORTED", smithyprelude.Unit)
-
-	DirectoryRegistrationStatusReason_INTERNAL_FAILURE = DirectoryRegistrationStatusReason.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
-
-	DirectoryRegistration_Arn = DirectoryRegistration.AddMember("Arn", _DirectoryRegistrationArn)
-
-	DirectoryRegistration_DirectoryId = DirectoryRegistration.AddMember("DirectoryId", _DirectoryId)
-
-	DirectoryRegistration_Status = DirectoryRegistration.AddMember("Status", DirectoryRegistrationStatus)
-
-	DirectoryRegistration_StatusReason = DirectoryRegistration.AddMember("StatusReason", DirectoryRegistrationStatusReason)
-
-	DirectoryRegistration_CreatedAt = DirectoryRegistration.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	DirectoryRegistration_UpdatedAt = DirectoryRegistration.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	DirectoryRegistrationSummary_Arn = DirectoryRegistrationSummary.AddMember("Arn", _DirectoryRegistrationArn)
-
-	DirectoryRegistrationSummary_DirectoryId = DirectoryRegistrationSummary.AddMember("DirectoryId", _DirectoryId)
-
-	DirectoryRegistrationSummary_Status = DirectoryRegistrationSummary.AddMember("Status", DirectoryRegistrationStatus)
-
-	DirectoryRegistrationSummary_StatusReason = DirectoryRegistrationSummary.AddMember("StatusReason", DirectoryRegistrationStatusReason)
-
-	DirectoryRegistrationSummary_CreatedAt = DirectoryRegistrationSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	DirectoryRegistrationSummary_UpdatedAt = DirectoryRegistrationSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_DirectoryRegistrationList_member = _DirectoryRegistrationList.AddMember("member", DirectoryRegistrationSummary)
-
-	EnrollmentFlagsV2_IncludeSymmetricAlgorithms = EnrollmentFlagsV2.AddMember("IncludeSymmetricAlgorithms", smithyprelude.Boolean)
-
-	EnrollmentFlagsV2_UserInteractionRequired = EnrollmentFlagsV2.AddMember("UserInteractionRequired", smithyprelude.Boolean)
-
-	EnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore = EnrollmentFlagsV2.AddMember("RemoveInvalidCertificateFromPersonalStore", smithyprelude.Boolean)
-
-	EnrollmentFlagsV2_NoSecurityExtension = EnrollmentFlagsV2.AddMember("NoSecurityExtension", smithyprelude.Boolean)
-
-	EnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull = EnrollmentFlagsV2.AddMember("EnableKeyReuseOnNtTokenKeysetStorageFull", smithyprelude.Boolean)
-
-	EnrollmentFlagsV3_IncludeSymmetricAlgorithms = EnrollmentFlagsV3.AddMember("IncludeSymmetricAlgorithms", smithyprelude.Boolean)
-
-	EnrollmentFlagsV3_UserInteractionRequired = EnrollmentFlagsV3.AddMember("UserInteractionRequired", smithyprelude.Boolean)
-
-	EnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore = EnrollmentFlagsV3.AddMember("RemoveInvalidCertificateFromPersonalStore", smithyprelude.Boolean)
-
-	EnrollmentFlagsV3_NoSecurityExtension = EnrollmentFlagsV3.AddMember("NoSecurityExtension", smithyprelude.Boolean)
-
-	EnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull = EnrollmentFlagsV3.AddMember("EnableKeyReuseOnNtTokenKeysetStorageFull", smithyprelude.Boolean)
-
-	EnrollmentFlagsV4_IncludeSymmetricAlgorithms = EnrollmentFlagsV4.AddMember("IncludeSymmetricAlgorithms", smithyprelude.Boolean)
-
-	EnrollmentFlagsV4_UserInteractionRequired = EnrollmentFlagsV4.AddMember("UserInteractionRequired", smithyprelude.Boolean)
-
-	EnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore = EnrollmentFlagsV4.AddMember("RemoveInvalidCertificateFromPersonalStore", smithyprelude.Boolean)
-
-	EnrollmentFlagsV4_NoSecurityExtension = EnrollmentFlagsV4.AddMember("NoSecurityExtension", smithyprelude.Boolean)
-
-	EnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull = EnrollmentFlagsV4.AddMember("EnableKeyReuseOnNtTokenKeysetStorageFull", smithyprelude.Boolean)
-
-	KeyUsageFlags_DigitalSignature = KeyUsageFlags.AddMember("DigitalSignature", smithyprelude.Boolean)
-
-	KeyUsageFlags_NonRepudiation = KeyUsageFlags.AddMember("NonRepudiation", smithyprelude.Boolean)
-
-	KeyUsageFlags_KeyEncipherment = KeyUsageFlags.AddMember("KeyEncipherment", smithyprelude.Boolean)
-
-	KeyUsageFlags_DataEncipherment = KeyUsageFlags.AddMember("DataEncipherment", smithyprelude.Boolean)
-
-	KeyUsageFlags_KeyAgreement = KeyUsageFlags.AddMember("KeyAgreement", smithyprelude.Boolean)
-
-	KeyUsage_Critical = KeyUsage.AddMember("Critical", smithyprelude.Boolean)
-
-	KeyUsage_UsageFlags = KeyUsage.AddMember("UsageFlags", KeyUsageFlags)
-
-	ExtensionsV2_KeyUsage = ExtensionsV2.AddMember("KeyUsage", KeyUsage)
-
-	ExtensionsV2_ApplicationPolicies = ExtensionsV2.AddMember("ApplicationPolicies", ApplicationPolicies)
-
-	ExtensionsV3_KeyUsage = ExtensionsV3.AddMember("KeyUsage", KeyUsage)
-
-	ExtensionsV3_ApplicationPolicies = ExtensionsV3.AddMember("ApplicationPolicies", ApplicationPolicies)
-
-	ExtensionsV4_KeyUsage = ExtensionsV4.AddMember("KeyUsage", KeyUsage)
-
-	ExtensionsV4_ApplicationPolicies = ExtensionsV4.AddMember("ApplicationPolicies", ApplicationPolicies)
-
-	GeneralFlagsV2_AutoEnrollment = GeneralFlagsV2.AddMember("AutoEnrollment", smithyprelude.Boolean)
-
-	GeneralFlagsV2_MachineType = GeneralFlagsV2.AddMember("MachineType", smithyprelude.Boolean)
-
-	GeneralFlagsV3_AutoEnrollment = GeneralFlagsV3.AddMember("AutoEnrollment", smithyprelude.Boolean)
-
-	GeneralFlagsV3_MachineType = GeneralFlagsV3.AddMember("MachineType", smithyprelude.Boolean)
-
-	GeneralFlagsV4_AutoEnrollment = GeneralFlagsV4.AddMember("AutoEnrollment", smithyprelude.Boolean)
-
-	GeneralFlagsV4_MachineType = GeneralFlagsV4.AddMember("MachineType", smithyprelude.Boolean)
-
-	HashAlgorithm_SHA256 = HashAlgorithm.AddMember("SHA256", smithyprelude.Unit)
-
-	HashAlgorithm_SHA384 = HashAlgorithm.AddMember("SHA384", smithyprelude.Unit)
-
-	HashAlgorithm_SHA512 = HashAlgorithm.AddMember("SHA512", smithyprelude.Unit)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	KeySpec_KEY_EXCHANGE = KeySpec.AddMember("KEY_EXCHANGE", smithyprelude.Unit)
-
-	KeySpec_SIGNATURE = KeySpec.AddMember("SIGNATURE", smithyprelude.Unit)
-
-	KeyUsagePropertyType_ALL = KeyUsagePropertyType.AddMember("ALL", smithyprelude.Unit)
-
-	KeyUsagePropertyFlags_Decrypt = KeyUsagePropertyFlags.AddMember("Decrypt", smithyprelude.Boolean)
-
-	KeyUsagePropertyFlags_KeyAgreement = KeyUsagePropertyFlags.AddMember("KeyAgreement", smithyprelude.Boolean)
-
-	KeyUsagePropertyFlags_Sign = KeyUsagePropertyFlags.AddMember("Sign", smithyprelude.Boolean)
-
-	KeyUsageProperty_PropertyType = KeyUsageProperty.AddMember("PropertyType", KeyUsagePropertyType)
-
-	KeyUsageProperty_PropertyFlags = KeyUsageProperty.AddMember("PropertyFlags", KeyUsagePropertyFlags)
-
-	PrivateKeyAlgorithm_RSA = PrivateKeyAlgorithm.AddMember("RSA", smithyprelude.Unit)
-
-	PrivateKeyAlgorithm_ECDH_P256 = PrivateKeyAlgorithm.AddMember("ECDH_P256", smithyprelude.Unit)
-
-	PrivateKeyAlgorithm_ECDH_P384 = PrivateKeyAlgorithm.AddMember("ECDH_P384", smithyprelude.Unit)
-
-	PrivateKeyAlgorithm_ECDH_P521 = PrivateKeyAlgorithm.AddMember("ECDH_P521", smithyprelude.Unit)
-
-	PrivateKeyAttributesV2_MinimalKeyLength = PrivateKeyAttributesV2.AddMember("MinimalKeyLength", smithyprelude.Integer)
-
-	PrivateKeyAttributesV2_KeySpec = PrivateKeyAttributesV2.AddMember("KeySpec", KeySpec)
-
-	PrivateKeyAttributesV2_CryptoProviders = PrivateKeyAttributesV2.AddMember("CryptoProviders", _CryptoProvidersList)
-
-	PrivateKeyAttributesV3_MinimalKeyLength = PrivateKeyAttributesV3.AddMember("MinimalKeyLength", smithyprelude.Integer)
-
-	PrivateKeyAttributesV3_KeySpec = PrivateKeyAttributesV3.AddMember("KeySpec", KeySpec)
-
-	PrivateKeyAttributesV3_CryptoProviders = PrivateKeyAttributesV3.AddMember("CryptoProviders", _CryptoProvidersList)
-
-	PrivateKeyAttributesV3_KeyUsageProperty = PrivateKeyAttributesV3.AddMember("KeyUsageProperty", KeyUsageProperty)
-
-	PrivateKeyAttributesV3_Algorithm = PrivateKeyAttributesV3.AddMember("Algorithm", PrivateKeyAlgorithm)
-
-	PrivateKeyAttributesV4_MinimalKeyLength = PrivateKeyAttributesV4.AddMember("MinimalKeyLength", smithyprelude.Integer)
-
-	PrivateKeyAttributesV4_KeySpec = PrivateKeyAttributesV4.AddMember("KeySpec", KeySpec)
-
-	PrivateKeyAttributesV4_CryptoProviders = PrivateKeyAttributesV4.AddMember("CryptoProviders", _CryptoProvidersList)
-
-	PrivateKeyAttributesV4_KeyUsageProperty = PrivateKeyAttributesV4.AddMember("KeyUsageProperty", KeyUsageProperty)
-
-	PrivateKeyAttributesV4_Algorithm = PrivateKeyAttributesV4.AddMember("Algorithm", PrivateKeyAlgorithm)
-
-	PrivateKeyFlagsV2_ExportableKey = PrivateKeyFlagsV2.AddMember("ExportableKey", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV2_StrongKeyProtectionRequired = PrivateKeyFlagsV2.AddMember("StrongKeyProtectionRequired", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV2_ClientVersion = PrivateKeyFlagsV2.AddMember("ClientVersion", ClientCompatibilityV2)
-
-	PrivateKeyFlagsV3_ExportableKey = PrivateKeyFlagsV3.AddMember("ExportableKey", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV3_StrongKeyProtectionRequired = PrivateKeyFlagsV3.AddMember("StrongKeyProtectionRequired", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm = PrivateKeyFlagsV3.AddMember("RequireAlternateSignatureAlgorithm", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV3_ClientVersion = PrivateKeyFlagsV3.AddMember("ClientVersion", ClientCompatibilityV3)
-
-	PrivateKeyFlagsV4_ExportableKey = PrivateKeyFlagsV4.AddMember("ExportableKey", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV4_StrongKeyProtectionRequired = PrivateKeyFlagsV4.AddMember("StrongKeyProtectionRequired", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm = PrivateKeyFlagsV4.AddMember("RequireAlternateSignatureAlgorithm", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV4_RequireSameKeyRenewal = PrivateKeyFlagsV4.AddMember("RequireSameKeyRenewal", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV4_UseLegacyProvider = PrivateKeyFlagsV4.AddMember("UseLegacyProvider", smithyprelude.Boolean)
-
-	PrivateKeyFlagsV4_ClientVersion = PrivateKeyFlagsV4.AddMember("ClientVersion", ClientCompatibilityV4)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", smithyprelude.String)
-
-	ServicePrincipalNameStatus_CREATING = ServicePrincipalNameStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ServicePrincipalNameStatus_ACTIVE = ServicePrincipalNameStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ServicePrincipalNameStatus_DELETING = ServicePrincipalNameStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ServicePrincipalNameStatus_FAILED = ServicePrincipalNameStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ServicePrincipalNameStatusReason_DIRECTORY_ACCESS_DENIED = ServicePrincipalNameStatusReason.AddMember("DIRECTORY_ACCESS_DENIED", smithyprelude.Unit)
-
-	ServicePrincipalNameStatusReason_DIRECTORY_NOT_REACHABLE = ServicePrincipalNameStatusReason.AddMember("DIRECTORY_NOT_REACHABLE", smithyprelude.Unit)
-
-	ServicePrincipalNameStatusReason_DIRECTORY_RESOURCE_NOT_FOUND = ServicePrincipalNameStatusReason.AddMember("DIRECTORY_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ServicePrincipalNameStatusReason_SPN_EXISTS_ON_DIFFERENT_AD_OBJECT = ServicePrincipalNameStatusReason.AddMember("SPN_EXISTS_ON_DIFFERENT_AD_OBJECT", smithyprelude.Unit)
-
-	ServicePrincipalNameStatusReason_SPN_LIMIT_EXCEEDED = ServicePrincipalNameStatusReason.AddMember("SPN_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ServicePrincipalNameStatusReason_INTERNAL_FAILURE = ServicePrincipalNameStatusReason.AddMember("INTERNAL_FAILURE", smithyprelude.Unit)
-
-	ServicePrincipalName_DirectoryRegistrationArn = ServicePrincipalName.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn)
-
-	ServicePrincipalName_ConnectorArn = ServicePrincipalName.AddMember("ConnectorArn", _ConnectorArn)
-
-	ServicePrincipalName_Status = ServicePrincipalName.AddMember("Status", ServicePrincipalNameStatus)
-
-	ServicePrincipalName_StatusReason = ServicePrincipalName.AddMember("StatusReason", ServicePrincipalNameStatusReason)
-
-	ServicePrincipalName_CreatedAt = ServicePrincipalName.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ServicePrincipalName_UpdatedAt = ServicePrincipalName.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	ServicePrincipalNameSummary_DirectoryRegistrationArn = ServicePrincipalNameSummary.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn)
-
-	ServicePrincipalNameSummary_ConnectorArn = ServicePrincipalNameSummary.AddMember("ConnectorArn", _ConnectorArn)
-
-	ServicePrincipalNameSummary_Status = ServicePrincipalNameSummary.AddMember("Status", ServicePrincipalNameStatus)
-
-	ServicePrincipalNameSummary_StatusReason = ServicePrincipalNameSummary.AddMember("StatusReason", ServicePrincipalNameStatusReason)
-
-	ServicePrincipalNameSummary_CreatedAt = ServicePrincipalNameSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ServicePrincipalNameSummary_UpdatedAt = ServicePrincipalNameSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_ServicePrincipalNameList_member = _ServicePrincipalNameList.AddMember("member", ServicePrincipalNameSummary)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceId = ServiceQuotaExceededException.AddMember("ResourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_ResourceType = ServiceQuotaExceededException.AddMember("ResourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_ServiceCode = ServiceQuotaExceededException.AddMember("ServiceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_QuotaCode = ServiceQuotaExceededException.AddMember("QuotaCode", smithyprelude.String)
-
-	SubjectNameFlagsV2_SanRequireDomainDns = SubjectNameFlagsV2.AddMember("SanRequireDomainDns", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_SanRequireSpn = SubjectNameFlagsV2.AddMember("SanRequireSpn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_SanRequireDirectoryGuid = SubjectNameFlagsV2.AddMember("SanRequireDirectoryGuid", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_SanRequireUpn = SubjectNameFlagsV2.AddMember("SanRequireUpn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_SanRequireEmail = SubjectNameFlagsV2.AddMember("SanRequireEmail", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_SanRequireDns = SubjectNameFlagsV2.AddMember("SanRequireDns", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_RequireDnsAsCn = SubjectNameFlagsV2.AddMember("RequireDnsAsCn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_RequireEmail = SubjectNameFlagsV2.AddMember("RequireEmail", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_RequireCommonName = SubjectNameFlagsV2.AddMember("RequireCommonName", smithyprelude.Boolean)
-
-	SubjectNameFlagsV2_RequireDirectoryPath = SubjectNameFlagsV2.AddMember("RequireDirectoryPath", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_SanRequireDomainDns = SubjectNameFlagsV3.AddMember("SanRequireDomainDns", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_SanRequireSpn = SubjectNameFlagsV3.AddMember("SanRequireSpn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_SanRequireDirectoryGuid = SubjectNameFlagsV3.AddMember("SanRequireDirectoryGuid", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_SanRequireUpn = SubjectNameFlagsV3.AddMember("SanRequireUpn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_SanRequireEmail = SubjectNameFlagsV3.AddMember("SanRequireEmail", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_SanRequireDns = SubjectNameFlagsV3.AddMember("SanRequireDns", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_RequireDnsAsCn = SubjectNameFlagsV3.AddMember("RequireDnsAsCn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_RequireEmail = SubjectNameFlagsV3.AddMember("RequireEmail", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_RequireCommonName = SubjectNameFlagsV3.AddMember("RequireCommonName", smithyprelude.Boolean)
-
-	SubjectNameFlagsV3_RequireDirectoryPath = SubjectNameFlagsV3.AddMember("RequireDirectoryPath", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_SanRequireDomainDns = SubjectNameFlagsV4.AddMember("SanRequireDomainDns", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_SanRequireSpn = SubjectNameFlagsV4.AddMember("SanRequireSpn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_SanRequireDirectoryGuid = SubjectNameFlagsV4.AddMember("SanRequireDirectoryGuid", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_SanRequireUpn = SubjectNameFlagsV4.AddMember("SanRequireUpn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_SanRequireEmail = SubjectNameFlagsV4.AddMember("SanRequireEmail", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_SanRequireDns = SubjectNameFlagsV4.AddMember("SanRequireDns", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_RequireDnsAsCn = SubjectNameFlagsV4.AddMember("RequireDnsAsCn", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_RequireEmail = SubjectNameFlagsV4.AddMember("RequireEmail", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_RequireCommonName = SubjectNameFlagsV4.AddMember("RequireCommonName", smithyprelude.Boolean)
-
-	SubjectNameFlagsV4_RequireDirectoryPath = SubjectNameFlagsV4.AddMember("RequireDirectoryPath", smithyprelude.Boolean)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", smithyprelude.String)
-
-	_Tags_key = _Tags.AddMember("key", smithyprelude.String)
-
-	_Tags_value = _Tags.AddMember("value", smithyprelude.String)
-
-	_TemplateNameList_member = _TemplateNameList.AddMember("member", _TemplateName)
-
-	TemplateV2_CertificateValidity = TemplateV2.AddMember("CertificateValidity", CertificateValidity)
-
-	TemplateV2_SupersededTemplates = TemplateV2.AddMember("SupersededTemplates", _TemplateNameList)
-
-	TemplateV2_PrivateKeyAttributes = TemplateV2.AddMember("PrivateKeyAttributes", PrivateKeyAttributesV2)
-
-	TemplateV2_PrivateKeyFlags = TemplateV2.AddMember("PrivateKeyFlags", PrivateKeyFlagsV2)
-
-	TemplateV2_EnrollmentFlags = TemplateV2.AddMember("EnrollmentFlags", EnrollmentFlagsV2)
-
-	TemplateV2_SubjectNameFlags = TemplateV2.AddMember("SubjectNameFlags", SubjectNameFlagsV2)
-
-	TemplateV2_GeneralFlags = TemplateV2.AddMember("GeneralFlags", GeneralFlagsV2)
-
-	TemplateV2_Extensions = TemplateV2.AddMember("Extensions", ExtensionsV2)
-
-	TemplateV3_CertificateValidity = TemplateV3.AddMember("CertificateValidity", CertificateValidity)
-
-	TemplateV3_SupersededTemplates = TemplateV3.AddMember("SupersededTemplates", _TemplateNameList)
-
-	TemplateV3_PrivateKeyAttributes = TemplateV3.AddMember("PrivateKeyAttributes", PrivateKeyAttributesV3)
-
-	TemplateV3_PrivateKeyFlags = TemplateV3.AddMember("PrivateKeyFlags", PrivateKeyFlagsV3)
-
-	TemplateV3_EnrollmentFlags = TemplateV3.AddMember("EnrollmentFlags", EnrollmentFlagsV3)
-
-	TemplateV3_SubjectNameFlags = TemplateV3.AddMember("SubjectNameFlags", SubjectNameFlagsV3)
-
-	TemplateV3_GeneralFlags = TemplateV3.AddMember("GeneralFlags", GeneralFlagsV3)
-
-	TemplateV3_HashAlgorithm = TemplateV3.AddMember("HashAlgorithm", HashAlgorithm)
-
-	TemplateV3_Extensions = TemplateV3.AddMember("Extensions", ExtensionsV3)
-
-	TemplateV4_CertificateValidity = TemplateV4.AddMember("CertificateValidity", CertificateValidity)
-
-	TemplateV4_SupersededTemplates = TemplateV4.AddMember("SupersededTemplates", _TemplateNameList)
-
-	TemplateV4_PrivateKeyAttributes = TemplateV4.AddMember("PrivateKeyAttributes", PrivateKeyAttributesV4)
-
-	TemplateV4_PrivateKeyFlags = TemplateV4.AddMember("PrivateKeyFlags", PrivateKeyFlagsV4)
-
-	TemplateV4_EnrollmentFlags = TemplateV4.AddMember("EnrollmentFlags", EnrollmentFlagsV4)
-
-	TemplateV4_SubjectNameFlags = TemplateV4.AddMember("SubjectNameFlags", SubjectNameFlagsV4)
-
-	TemplateV4_GeneralFlags = TemplateV4.AddMember("GeneralFlags", GeneralFlagsV4)
-
-	TemplateV4_HashAlgorithm = TemplateV4.AddMember("HashAlgorithm", HashAlgorithm)
-
-	TemplateV4_Extensions = TemplateV4.AddMember("Extensions", ExtensionsV4)
-
-	TemplateDefinition_TemplateV2 = TemplateDefinition.AddMember("TemplateV2", TemplateV2)
-
-	TemplateDefinition_TemplateV3 = TemplateDefinition.AddMember("TemplateV3", TemplateV3)
-
-	TemplateDefinition_TemplateV4 = TemplateDefinition.AddMember("TemplateV4", TemplateV4)
-
-	TemplateStatus_ACTIVE = TemplateStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	TemplateStatus_DELETING = TemplateStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	TemplateRevision_MajorRevision = TemplateRevision.AddMember("MajorRevision", smithyprelude.Integer)
-
-	TemplateRevision_MinorRevision = TemplateRevision.AddMember("MinorRevision", smithyprelude.Integer)
-
-	Template_Arn = Template.AddMember("Arn", _TemplateArn)
-
-	Template_ConnectorArn = Template.AddMember("ConnectorArn", _ConnectorArn)
-
-	Template_Definition = Template.AddMember("Definition", TemplateDefinition)
-
-	Template_Name = Template.AddMember("Name", _TemplateName)
-
-	Template_ObjectIdentifier = Template.AddMember("ObjectIdentifier", _CustomObjectIdentifier)
-
-	Template_PolicySchema = Template.AddMember("PolicySchema", smithyprelude.Integer)
-
-	Template_Status = Template.AddMember("Status", TemplateStatus)
-
-	Template_Revision = Template.AddMember("Revision", TemplateRevision)
-
-	Template_CreatedAt = Template.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	Template_UpdatedAt = Template.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	TemplateSummary_Arn = TemplateSummary.AddMember("Arn", _TemplateArn)
-
-	TemplateSummary_ConnectorArn = TemplateSummary.AddMember("ConnectorArn", _ConnectorArn)
-
-	TemplateSummary_Definition = TemplateSummary.AddMember("Definition", TemplateDefinition)
-
-	TemplateSummary_Name = TemplateSummary.AddMember("Name", _TemplateName)
-
-	TemplateSummary_ObjectIdentifier = TemplateSummary.AddMember("ObjectIdentifier", _CustomObjectIdentifier)
-
-	TemplateSummary_PolicySchema = TemplateSummary.AddMember("PolicySchema", smithyprelude.Integer)
-
-	TemplateSummary_Status = TemplateSummary.AddMember("Status", TemplateStatus)
-
-	TemplateSummary_Revision = TemplateSummary.AddMember("Revision", TemplateRevision)
-
-	TemplateSummary_CreatedAt = TemplateSummary.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	TemplateSummary_UpdatedAt = TemplateSummary.AddMember("UpdatedAt", smithyprelude.Timestamp)
-
-	_TemplateList_member = _TemplateList.AddMember("member", TemplateSummary)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ThrottlingException_ServiceCode = ThrottlingException.AddMember("ServiceCode", smithyprelude.String)
-
-	ThrottlingException_QuotaCode = ThrottlingException.AddMember("QuotaCode", smithyprelude.String)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_CA_SUBJECT = ValidationExceptionReason.AddMember("INVALID_CA_SUBJECT", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_PERMISSION = ValidationExceptionReason.AddMember("INVALID_PERMISSION", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_STATE = ValidationExceptionReason.AddMember("INVALID_STATE", smithyprelude.Unit)
-
-	ValidationExceptionReason_MISMATCHED_CONNECTOR = ValidationExceptionReason.AddMember("MISMATCHED_CONNECTOR", smithyprelude.Unit)
-
-	ValidationExceptionReason_MISMATCHED_VPC = ValidationExceptionReason.AddMember("MISMATCHED_VPC", smithyprelude.Unit)
-
-	ValidationExceptionReason_NO_CLIENT_TOKEN = ValidationExceptionReason.AddMember("NO_CLIENT_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	CreateConnectorRequest_DirectoryId = CreateConnectorRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateConnectorRequest_CertificateAuthorityArn = CreateConnectorRequest.AddMember("CertificateAuthorityArn", _CertificateAuthorityArn)
-
-	CreateConnectorRequest_VpcInformation = CreateConnectorRequest.AddMember("VpcInformation", VpcInformation)
-
-	CreateConnectorRequest_ClientToken = CreateConnectorRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateConnectorRequest_Tags = CreateConnectorRequest.AddMember("Tags", _Tags)
-
-	CreateConnectorResponse_ConnectorArn = CreateConnectorResponse.AddMember("ConnectorArn", _ConnectorArn)
-
-	CreateDirectoryRegistrationRequest_DirectoryId = CreateDirectoryRegistrationRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateDirectoryRegistrationRequest_ClientToken = CreateDirectoryRegistrationRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateDirectoryRegistrationRequest_Tags = CreateDirectoryRegistrationRequest.AddMember("Tags", _Tags)
-
-	CreateDirectoryRegistrationResponse_DirectoryRegistrationArn = CreateDirectoryRegistrationResponse.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn)
-
-	CreateServicePrincipalNameRequest_DirectoryRegistrationArn = CreateServicePrincipalNameRequest.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn, &smithytraits.HTTPLabel{})
-
-	CreateServicePrincipalNameRequest_ConnectorArn = CreateServicePrincipalNameRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPLabel{})
-
-	CreateServicePrincipalNameRequest_ClientToken = CreateServicePrincipalNameRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateTemplateGroupAccessControlEntryRequest_TemplateArn = CreateTemplateGroupAccessControlEntryRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	CreateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = CreateTemplateGroupAccessControlEntryRequest.AddMember("GroupSecurityIdentifier", _GroupSecurityIdentifier)
-
-	CreateTemplateGroupAccessControlEntryRequest_GroupDisplayName = CreateTemplateGroupAccessControlEntryRequest.AddMember("GroupDisplayName", _DisplayName)
-
-	CreateTemplateGroupAccessControlEntryRequest_AccessRights = CreateTemplateGroupAccessControlEntryRequest.AddMember("AccessRights", AccessRights)
-
-	CreateTemplateGroupAccessControlEntryRequest_ClientToken = CreateTemplateGroupAccessControlEntryRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateTemplateRequest_ConnectorArn = CreateTemplateRequest.AddMember("ConnectorArn", _ConnectorArn)
-
-	CreateTemplateRequest_Name = CreateTemplateRequest.AddMember("Name", _TemplateName)
-
-	CreateTemplateRequest_Definition = CreateTemplateRequest.AddMember("Definition", TemplateDefinition)
-
-	CreateTemplateRequest_ClientToken = CreateTemplateRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateTemplateRequest_Tags = CreateTemplateRequest.AddMember("Tags", _Tags)
-
-	CreateTemplateResponse_TemplateArn = CreateTemplateResponse.AddMember("TemplateArn", _TemplateArn)
-
-	DeleteConnectorRequest_ConnectorArn = DeleteConnectorRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPLabel{})
-
-	DeleteDirectoryRegistrationRequest_DirectoryRegistrationArn = DeleteDirectoryRegistrationRequest.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn, &smithytraits.HTTPLabel{})
-
-	DeleteServicePrincipalNameRequest_DirectoryRegistrationArn = DeleteServicePrincipalNameRequest.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn, &smithytraits.HTTPLabel{})
-
-	DeleteServicePrincipalNameRequest_ConnectorArn = DeleteServicePrincipalNameRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPLabel{})
-
-	DeleteTemplateGroupAccessControlEntryRequest_TemplateArn = DeleteTemplateGroupAccessControlEntryRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	DeleteTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = DeleteTemplateGroupAccessControlEntryRequest.AddMember("GroupSecurityIdentifier", _GroupSecurityIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteTemplateRequest_TemplateArn = DeleteTemplateRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	GetConnectorRequest_ConnectorArn = GetConnectorRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPLabel{})
-
-	GetConnectorResponse_Connector = GetConnectorResponse.AddMember("Connector", Connector)
-
-	GetDirectoryRegistrationRequest_DirectoryRegistrationArn = GetDirectoryRegistrationRequest.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn, &smithytraits.HTTPLabel{})
-
-	GetDirectoryRegistrationResponse_DirectoryRegistration = GetDirectoryRegistrationResponse.AddMember("DirectoryRegistration", DirectoryRegistration)
-
-	GetServicePrincipalNameRequest_DirectoryRegistrationArn = GetServicePrincipalNameRequest.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn, &smithytraits.HTTPLabel{})
-
-	GetServicePrincipalNameRequest_ConnectorArn = GetServicePrincipalNameRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPLabel{})
-
-	GetServicePrincipalNameResponse_ServicePrincipalName = GetServicePrincipalNameResponse.AddMember("ServicePrincipalName", ServicePrincipalName)
-
-	GetTemplateGroupAccessControlEntryRequest_TemplateArn = GetTemplateGroupAccessControlEntryRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	GetTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = GetTemplateGroupAccessControlEntryRequest.AddMember("GroupSecurityIdentifier", _GroupSecurityIdentifier, &smithytraits.HTTPLabel{})
-
-	GetTemplateGroupAccessControlEntryResponse_AccessControlEntry = GetTemplateGroupAccessControlEntryResponse.AddMember("AccessControlEntry", AccessControlEntry)
-
-	GetTemplateRequest_TemplateArn = GetTemplateRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	GetTemplateResponse_Template = GetTemplateResponse.AddMember("Template", Template)
-
-	ListConnectorsRequest_MaxResults = ListConnectorsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListConnectorsRequest_NextToken = ListConnectorsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListConnectorsResponse_Connectors = ListConnectorsResponse.AddMember("Connectors", _ConnectorList)
-
-	ListConnectorsResponse_NextToken = ListConnectorsResponse.AddMember("NextToken", _NextToken)
-
-	ListDirectoryRegistrationsRequest_MaxResults = ListDirectoryRegistrationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListDirectoryRegistrationsRequest_NextToken = ListDirectoryRegistrationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListDirectoryRegistrationsResponse_DirectoryRegistrations = ListDirectoryRegistrationsResponse.AddMember("DirectoryRegistrations", _DirectoryRegistrationList)
-
-	ListDirectoryRegistrationsResponse_NextToken = ListDirectoryRegistrationsResponse.AddMember("NextToken", _NextToken)
-
-	ListServicePrincipalNamesRequest_MaxResults = ListServicePrincipalNamesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListServicePrincipalNamesRequest_NextToken = ListServicePrincipalNamesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListServicePrincipalNamesRequest_DirectoryRegistrationArn = ListServicePrincipalNamesRequest.AddMember("DirectoryRegistrationArn", _DirectoryRegistrationArn, &smithytraits.HTTPLabel{})
-
-	ListServicePrincipalNamesResponse_ServicePrincipalNames = ListServicePrincipalNamesResponse.AddMember("ServicePrincipalNames", _ServicePrincipalNameList)
-
-	ListServicePrincipalNamesResponse_NextToken = ListServicePrincipalNamesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	ListTemplateGroupAccessControlEntriesRequest_MaxResults = ListTemplateGroupAccessControlEntriesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListTemplateGroupAccessControlEntriesRequest_NextToken = ListTemplateGroupAccessControlEntriesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListTemplateGroupAccessControlEntriesRequest_TemplateArn = ListTemplateGroupAccessControlEntriesRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries = ListTemplateGroupAccessControlEntriesResponse.AddMember("AccessControlEntries", _AccessControlEntryList)
-
-	ListTemplateGroupAccessControlEntriesResponse_NextToken = ListTemplateGroupAccessControlEntriesResponse.AddMember("NextToken", _NextToken)
-
-	ListTemplatesRequest_MaxResults = ListTemplatesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListTemplatesRequest_NextToken = ListTemplatesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListTemplatesRequest_ConnectorArn = ListTemplatesRequest.AddMember("ConnectorArn", _ConnectorArn, &smithytraits.HTTPQuery{Name: "ConnectorArn"})
-
-	ListTemplatesResponse_Templates = ListTemplatesResponse.AddMember("Templates", _TemplateList)
-
-	ListTemplatesResponse_NextToken = ListTemplatesResponse.AddMember("NextToken", _NextToken)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateTemplateGroupAccessControlEntryRequest_TemplateArn = UpdateTemplateGroupAccessControlEntryRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	UpdateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = UpdateTemplateGroupAccessControlEntryRequest.AddMember("GroupSecurityIdentifier", _GroupSecurityIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateTemplateGroupAccessControlEntryRequest_GroupDisplayName = UpdateTemplateGroupAccessControlEntryRequest.AddMember("GroupDisplayName", _DisplayName)
-
-	UpdateTemplateGroupAccessControlEntryRequest_AccessRights = UpdateTemplateGroupAccessControlEntryRequest.AddMember("AccessRights", AccessRights)
-
-	UpdateTemplateRequest_TemplateArn = UpdateTemplateRequest.AddMember("TemplateArn", _TemplateArn, &smithytraits.HTTPLabel{})
-
-	UpdateTemplateRequest_Definition = UpdateTemplateRequest.AddMember("Definition", TemplateDefinition)
-
-	UpdateTemplateRequest_ReenrollAllCertificateHolders = UpdateTemplateRequest.AddMember("ReenrollAllCertificateHolders", smithyprelude.Boolean)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ConnectorArn"}}, DirectMask: 0x10}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessControlEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessControlEntry_GroupDisplayName, &sAccessControlEntry_GroupSecurityIdentifier, &sAccessControlEntry_AccessRights, &sAccessControlEntry_TemplateArn, &sAccessControlEntry_CreatedAt, &sAccessControlEntry_UpdatedAt}}
+var m_AccessControlEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessControlEntryList_member}}
+var mAccessControlEntrySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessControlEntrySummary_GroupDisplayName, &sAccessControlEntrySummary_GroupSecurityIdentifier, &sAccessControlEntrySummary_AccessRights, &sAccessControlEntrySummary_TemplateArn, &sAccessControlEntrySummary_CreatedAt, &sAccessControlEntrySummary_UpdatedAt}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAccessRight = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessRight_ALLOW, &sAccessRight_DENY}}
+var mAccessRights = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessRights_Enroll, &sAccessRights_AutoEnroll}}
+var mApplicationPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationPolicies_Critical, &sApplicationPolicies_Policies}}
+var mApplicationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationPolicy_PolicyType, &sApplicationPolicy_PolicyObjectIdentifier}}
+var m_ApplicationPolicyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationPolicyList_member}}
+var mApplicationPolicyType = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationPolicyType_ALL_APPLICATION_POLICIES, &sApplicationPolicyType_ANY_PURPOSE, &sApplicationPolicyType_ATTESTATION_IDENTITY_KEY_CERTIFICATE, &sApplicationPolicyType_CERTIFICATE_REQUEST_AGENT, &sApplicationPolicyType_CLIENT_AUTHENTICATION, &sApplicationPolicyType_CODE_SIGNING, &sApplicationPolicyType_CTL_USAGE, &sApplicationPolicyType_DIGITAL_RIGHTS, &sApplicationPolicyType_DIRECTORY_SERVICE_EMAIL_REPLICATION, &sApplicationPolicyType_DISALLOWED_LIST, &sApplicationPolicyType_DNS_SERVER_TRUST, &sApplicationPolicyType_DOCUMENT_ENCRYPTION, &sApplicationPolicyType_DOCUMENT_SIGNING, &sApplicationPolicyType_DYNAMIC_CODE_GENERATOR, &sApplicationPolicyType_EARLY_LAUNCH_ANTIMALWARE_DRIVER, &sApplicationPolicyType_EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION, &sApplicationPolicyType_ENCLAVE, &sApplicationPolicyType_ENCRYPTING_FILE_SYSTEM, &sApplicationPolicyType_ENDORSEMENT_KEY_CERTIFICATE, &sApplicationPolicyType_FILE_RECOVERY, &sApplicationPolicyType_HAL_EXTENSION, &sApplicationPolicyType_IP_SECURITY_END_SYSTEM, &sApplicationPolicyType_IP_SECURITY_IKE_INTERMEDIATE, &sApplicationPolicyType_IP_SECURITY_TUNNEL_TERMINATION, &sApplicationPolicyType_IP_SECURITY_USER, &sApplicationPolicyType_ISOLATED_USER_MODE, &sApplicationPolicyType_KDC_AUTHENTICATION, &sApplicationPolicyType_KERNEL_MODE_CODE_SIGNING, &sApplicationPolicyType_KEY_PACK_LICENSES, &sApplicationPolicyType_KEY_RECOVERY, &sApplicationPolicyType_KEY_RECOVERY_AGENT, &sApplicationPolicyType_LICENSE_SERVER_VERIFICATION, &sApplicationPolicyType_LIFETIME_SIGNING, &sApplicationPolicyType_MICROSOFT_PUBLISHER, &sApplicationPolicyType_MICROSOFT_TIME_STAMPING, &sApplicationPolicyType_MICROSOFT_TRUST_LIST_SIGNING, &sApplicationPolicyType_OCSP_SIGNING, &sApplicationPolicyType_OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION, &sApplicationPolicyType_PLATFORM_CERTIFICATE, &sApplicationPolicyType_PREVIEW_BUILD_SIGNING, &sApplicationPolicyType_PRIVATE_KEY_ARCHIVAL, &sApplicationPolicyType_PROTECTED_PROCESS_LIGHT_VERIFICATION, &sApplicationPolicyType_PROTECTED_PROCESS_VERIFICATION, &sApplicationPolicyType_QUALIFIED_SUBORDINATION, &sApplicationPolicyType_REVOKED_LIST_SIGNER, &sApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION, &sApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION, &sApplicationPolicyType_ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL, &sApplicationPolicyType_ROOT_LIST_SIGNER, &sApplicationPolicyType_SECURE_EMAIL, &sApplicationPolicyType_SERVER_AUTHENTICATION, &sApplicationPolicyType_SMART_CARD_LOGIN, &sApplicationPolicyType_SPC_ENCRYPTED_DIGEST_RETRY_COUNT, &sApplicationPolicyType_SPC_RELAXED_PE_MARKER_CHECK, &sApplicationPolicyType_TIME_STAMPING, &sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION, &sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION, &sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_VERIFICATION, &sApplicationPolicyType_WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION, &sApplicationPolicyType_WINDOWS_KITS_COMPONENT, &sApplicationPolicyType_WINDOWS_RT_VERIFICATION, &sApplicationPolicyType_WINDOWS_SOFTWARE_EXTENSION_VERIFICATION, &sApplicationPolicyType_WINDOWS_STORE, &sApplicationPolicyType_WINDOWS_SYSTEM_COMPONENT_VERIFICATION, &sApplicationPolicyType_WINDOWS_TCB_COMPONENT, &sApplicationPolicyType_WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT, &sApplicationPolicyType_WINDOWS_UPDATE}, Seed: 5430, Slots: []uint16{
+	44, 0, 0, 0, 14, 56, 49, 0, 0, 0, 0, 0, 0, 6, 0, 0, 40, 0, 67, 59, 30, 11, 0, 60,
+	57, 0, 37, 0, 15, 50, 0, 0, 0, 0, 23, 0, 0, 0, 0, 54, 0, 19, 0, 0, 0, 10, 0, 0,
+	0, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 31, 0, 0, 0, 0, 48,
+	0, 0, 0, 58, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 7, 0, 0, 0, 9, 0, 0, 0, 0, 0,
+	51, 53, 0, 0, 0, 0, 0, 0, 16, 0, 0, 32, 0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 63, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 43, 52, 0, 0, 21, 0, 0, 0, 0, 0, 0,
+	28, 0, 8, 20, 41, 0, 0, 42, 0, 0, 34, 0, 38, 0, 0, 2, 0, 0, 17, 55, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 61, 0, 25, 35, 0, 0, 0, 0, 0, 62, 3, 0, 4, 0, 0, 0, 0, 0,
+	39, 0, 13, 0, 0, 64, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 27, 0, 0, 0,
+	18, 36, 0, 0, 0, 65, 0, 0, 0, 0, 0, 29, 0, 0, 0, 24, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 46, 0, 12,
+}}
+var mCertificateValidity = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateValidity_ValidityPeriod, &sCertificateValidity_RenewalPeriod}}
+var mClientCompatibilityV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sClientCompatibilityV2_WINDOWS_SERVER_2003, &sClientCompatibilityV2_WINDOWS_SERVER_2008, &sClientCompatibilityV2_WINDOWS_SERVER_2008_R2, &sClientCompatibilityV2_WINDOWS_SERVER_2012, &sClientCompatibilityV2_WINDOWS_SERVER_2012_R2, &sClientCompatibilityV2_WINDOWS_SERVER_2016}}
+var mClientCompatibilityV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sClientCompatibilityV3_WINDOWS_SERVER_2008, &sClientCompatibilityV3_WINDOWS_SERVER_2008_R2, &sClientCompatibilityV3_WINDOWS_SERVER_2012, &sClientCompatibilityV3_WINDOWS_SERVER_2012_R2, &sClientCompatibilityV3_WINDOWS_SERVER_2016}}
+var mClientCompatibilityV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sClientCompatibilityV4_WINDOWS_SERVER_2012, &sClientCompatibilityV4_WINDOWS_SERVER_2012_R2, &sClientCompatibilityV4_WINDOWS_SERVER_2016}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_ResourceId, &sConflictException_ResourceType}}
+var mConnector = smithy.SchemaMembers{List: []*smithy.Schema{&sConnector_Arn, &sConnector_CertificateAuthorityArn, &sConnector_CertificateEnrollmentPolicyServerEndpoint, &sConnector_DirectoryId, &sConnector_VpcInformation, &sConnector_Status, &sConnector_StatusReason, &sConnector_CreatedAt, &sConnector_UpdatedAt}, Seed: 3, Slots: []uint16{
+	0, 7, 0, 0, 6, 0, 0, 0, 0, 0, 4, 0, 0, 0, 3, 0, 0, 0, 0, 2, 0, 0, 1, 0,
+	0, 8, 0, 5, 0, 0, 9, 0,
+}}
+var m_ConnectorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorList_member}}
+var mConnectorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorStatus_CREATING, &sConnectorStatus_ACTIVE, &sConnectorStatus_DELETING, &sConnectorStatus_FAILED}}
+var mConnectorStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorStatusReason_CA_CERTIFICATE_REGISTRATION_FAILED, &sConnectorStatusReason_DIRECTORY_ACCESS_DENIED, &sConnectorStatusReason_INTERNAL_FAILURE, &sConnectorStatusReason_INSUFFICIENT_FREE_ADDRESSES, &sConnectorStatusReason_INVALID_SUBNET_IP_PROTOCOL, &sConnectorStatusReason_PRIVATECA_ACCESS_DENIED, &sConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND, &sConnectorStatusReason_SECURITY_GROUP_NOT_IN_VPC, &sConnectorStatusReason_VPC_ACCESS_DENIED, &sConnectorStatusReason_VPC_ENDPOINT_LIMIT_EXCEEDED, &sConnectorStatusReason_VPC_RESOURCE_NOT_FOUND}, Seed: 4, Slots: []uint16{
+	5, 11, 0, 0, 0, 0, 0, 0, 0, 0, 3, 7, 4, 0, 8, 1, 0, 10, 0, 9, 0, 0, 0, 0,
+	0, 2, 6, 0, 0, 0, 0, 0,
+}}
+var mConnectorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorSummary_Arn, &sConnectorSummary_CertificateAuthorityArn, &sConnectorSummary_CertificateEnrollmentPolicyServerEndpoint, &sConnectorSummary_DirectoryId, &sConnectorSummary_VpcInformation, &sConnectorSummary_Status, &sConnectorSummary_StatusReason, &sConnectorSummary_CreatedAt, &sConnectorSummary_UpdatedAt}, Seed: 3, Slots: []uint16{
+	0, 7, 0, 0, 6, 0, 0, 0, 0, 0, 4, 0, 0, 0, 3, 0, 0, 0, 0, 2, 0, 0, 1, 0,
+	0, 8, 0, 5, 0, 0, 9, 0,
+}}
+var m_CryptoProvidersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CryptoProvidersList_member}}
+var mDirectoryRegistration = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryRegistration_Arn, &sDirectoryRegistration_DirectoryId, &sDirectoryRegistration_Status, &sDirectoryRegistration_StatusReason, &sDirectoryRegistration_CreatedAt, &sDirectoryRegistration_UpdatedAt}}
+var m_DirectoryRegistrationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectoryRegistrationList_member}}
+var mDirectoryRegistrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryRegistrationStatus_CREATING, &sDirectoryRegistrationStatus_ACTIVE, &sDirectoryRegistrationStatus_DELETING, &sDirectoryRegistrationStatus_FAILED}}
+var mDirectoryRegistrationStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryRegistrationStatusReason_DIRECTORY_ACCESS_DENIED, &sDirectoryRegistrationStatusReason_DIRECTORY_RESOURCE_NOT_FOUND, &sDirectoryRegistrationStatusReason_DIRECTORY_NOT_ACTIVE, &sDirectoryRegistrationStatusReason_DIRECTORY_NOT_REACHABLE, &sDirectoryRegistrationStatusReason_DIRECTORY_TYPE_NOT_SUPPORTED, &sDirectoryRegistrationStatusReason_INTERNAL_FAILURE}}
+var mDirectoryRegistrationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryRegistrationSummary_Arn, &sDirectoryRegistrationSummary_DirectoryId, &sDirectoryRegistrationSummary_Status, &sDirectoryRegistrationSummary_StatusReason, &sDirectoryRegistrationSummary_CreatedAt, &sDirectoryRegistrationSummary_UpdatedAt}}
+var mEnrollmentFlagsV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sEnrollmentFlagsV2_IncludeSymmetricAlgorithms, &sEnrollmentFlagsV2_UserInteractionRequired, &sEnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore, &sEnrollmentFlagsV2_NoSecurityExtension, &sEnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull}}
+var mEnrollmentFlagsV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sEnrollmentFlagsV3_IncludeSymmetricAlgorithms, &sEnrollmentFlagsV3_UserInteractionRequired, &sEnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore, &sEnrollmentFlagsV3_NoSecurityExtension, &sEnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull}}
+var mEnrollmentFlagsV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sEnrollmentFlagsV4_IncludeSymmetricAlgorithms, &sEnrollmentFlagsV4_UserInteractionRequired, &sEnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore, &sEnrollmentFlagsV4_NoSecurityExtension, &sEnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull}}
+var mExtensionsV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensionsV2_KeyUsage, &sExtensionsV2_ApplicationPolicies}}
+var mExtensionsV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensionsV3_KeyUsage, &sExtensionsV3_ApplicationPolicies}}
+var mExtensionsV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sExtensionsV4_KeyUsage, &sExtensionsV4_ApplicationPolicies}}
+var mGeneralFlagsV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sGeneralFlagsV2_AutoEnrollment, &sGeneralFlagsV2_MachineType}}
+var mGeneralFlagsV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sGeneralFlagsV3_AutoEnrollment, &sGeneralFlagsV3_MachineType}}
+var mGeneralFlagsV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sGeneralFlagsV4_AutoEnrollment, &sGeneralFlagsV4_MachineType}}
+var mHashAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sHashAlgorithm_SHA256, &sHashAlgorithm_SHA384, &sHashAlgorithm_SHA512}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressType_IPV4, &sIpAddressType_DUALSTACK}}
+var mKeySpec = smithy.SchemaMembers{List: []*smithy.Schema{&sKeySpec_KEY_EXCHANGE, &sKeySpec_SIGNATURE}}
+var mKeyUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyUsage_Critical, &sKeyUsage_UsageFlags}}
+var mKeyUsageFlags = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyUsageFlags_DigitalSignature, &sKeyUsageFlags_NonRepudiation, &sKeyUsageFlags_KeyEncipherment, &sKeyUsageFlags_DataEncipherment, &sKeyUsageFlags_KeyAgreement}}
+var mKeyUsageProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyUsageProperty_PropertyType, &sKeyUsageProperty_PropertyFlags}}
+var mKeyUsagePropertyFlags = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyUsagePropertyFlags_Decrypt, &sKeyUsagePropertyFlags_KeyAgreement, &sKeyUsagePropertyFlags_Sign}}
+var mKeyUsagePropertyType = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyUsagePropertyType_ALL}}
+var mPrivateKeyAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateKeyAlgorithm_RSA, &sPrivateKeyAlgorithm_ECDH_P256, &sPrivateKeyAlgorithm_ECDH_P384, &sPrivateKeyAlgorithm_ECDH_P521}}
+var mPrivateKeyAttributesV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateKeyAttributesV2_MinimalKeyLength, &sPrivateKeyAttributesV2_KeySpec, &sPrivateKeyAttributesV2_CryptoProviders}}
+var mPrivateKeyAttributesV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateKeyAttributesV3_MinimalKeyLength, &sPrivateKeyAttributesV3_KeySpec, &sPrivateKeyAttributesV3_CryptoProviders, &sPrivateKeyAttributesV3_KeyUsageProperty, &sPrivateKeyAttributesV3_Algorithm}}
+var mPrivateKeyAttributesV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateKeyAttributesV4_MinimalKeyLength, &sPrivateKeyAttributesV4_KeySpec, &sPrivateKeyAttributesV4_CryptoProviders, &sPrivateKeyAttributesV4_KeyUsageProperty, &sPrivateKeyAttributesV4_Algorithm}}
+var mPrivateKeyFlagsV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateKeyFlagsV2_ExportableKey, &sPrivateKeyFlagsV2_StrongKeyProtectionRequired, &sPrivateKeyFlagsV2_ClientVersion}}
+var mPrivateKeyFlagsV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateKeyFlagsV3_ExportableKey, &sPrivateKeyFlagsV3_StrongKeyProtectionRequired, &sPrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm, &sPrivateKeyFlagsV3_ClientVersion}}
+var mPrivateKeyFlagsV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateKeyFlagsV4_ExportableKey, &sPrivateKeyFlagsV4_StrongKeyProtectionRequired, &sPrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm, &sPrivateKeyFlagsV4_RequireSameKeyRenewal, &sPrivateKeyFlagsV4_UseLegacyProvider, &sPrivateKeyFlagsV4_ClientVersion}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_ResourceType}}
+var m_SecurityGroupIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIdList_member}}
+var mServicePrincipalName = smithy.SchemaMembers{List: []*smithy.Schema{&sServicePrincipalName_DirectoryRegistrationArn, &sServicePrincipalName_ConnectorArn, &sServicePrincipalName_Status, &sServicePrincipalName_StatusReason, &sServicePrincipalName_CreatedAt, &sServicePrincipalName_UpdatedAt}}
+var m_ServicePrincipalNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServicePrincipalNameList_member}}
+var mServicePrincipalNameStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sServicePrincipalNameStatus_CREATING, &sServicePrincipalNameStatus_ACTIVE, &sServicePrincipalNameStatus_DELETING, &sServicePrincipalNameStatus_FAILED}}
+var mServicePrincipalNameStatusReason = smithy.SchemaMembers{List: []*smithy.Schema{&sServicePrincipalNameStatusReason_DIRECTORY_ACCESS_DENIED, &sServicePrincipalNameStatusReason_DIRECTORY_NOT_REACHABLE, &sServicePrincipalNameStatusReason_DIRECTORY_RESOURCE_NOT_FOUND, &sServicePrincipalNameStatusReason_SPN_EXISTS_ON_DIFFERENT_AD_OBJECT, &sServicePrincipalNameStatusReason_SPN_LIMIT_EXCEEDED, &sServicePrincipalNameStatusReason_INTERNAL_FAILURE}}
+var mServicePrincipalNameSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServicePrincipalNameSummary_DirectoryRegistrationArn, &sServicePrincipalNameSummary_ConnectorArn, &sServicePrincipalNameSummary_Status, &sServicePrincipalNameSummary_StatusReason, &sServicePrincipalNameSummary_CreatedAt, &sServicePrincipalNameSummary_UpdatedAt}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_ResourceId, &sServiceQuotaExceededException_ResourceType, &sServiceQuotaExceededException_ServiceCode, &sServiceQuotaExceededException_QuotaCode}}
+var mSubjectNameFlagsV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectNameFlagsV2_SanRequireDomainDns, &sSubjectNameFlagsV2_SanRequireSpn, &sSubjectNameFlagsV2_SanRequireDirectoryGuid, &sSubjectNameFlagsV2_SanRequireUpn, &sSubjectNameFlagsV2_SanRequireEmail, &sSubjectNameFlagsV2_SanRequireDns, &sSubjectNameFlagsV2_RequireDnsAsCn, &sSubjectNameFlagsV2_RequireEmail, &sSubjectNameFlagsV2_RequireCommonName, &sSubjectNameFlagsV2_RequireDirectoryPath}, Seed: 16, Slots: []uint16{
+	7, 0, 8, 0, 0, 0, 2, 6, 10, 0, 0, 0, 0, 5, 0, 9, 0, 4, 0, 1, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 3,
+}}
+var mSubjectNameFlagsV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectNameFlagsV3_SanRequireDomainDns, &sSubjectNameFlagsV3_SanRequireSpn, &sSubjectNameFlagsV3_SanRequireDirectoryGuid, &sSubjectNameFlagsV3_SanRequireUpn, &sSubjectNameFlagsV3_SanRequireEmail, &sSubjectNameFlagsV3_SanRequireDns, &sSubjectNameFlagsV3_RequireDnsAsCn, &sSubjectNameFlagsV3_RequireEmail, &sSubjectNameFlagsV3_RequireCommonName, &sSubjectNameFlagsV3_RequireDirectoryPath}, Seed: 16, Slots: []uint16{
+	7, 0, 8, 0, 0, 0, 2, 6, 10, 0, 0, 0, 0, 5, 0, 9, 0, 4, 0, 1, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 3,
+}}
+var mSubjectNameFlagsV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sSubjectNameFlagsV4_SanRequireDomainDns, &sSubjectNameFlagsV4_SanRequireSpn, &sSubjectNameFlagsV4_SanRequireDirectoryGuid, &sSubjectNameFlagsV4_SanRequireUpn, &sSubjectNameFlagsV4_SanRequireEmail, &sSubjectNameFlagsV4_SanRequireDns, &sSubjectNameFlagsV4_RequireDnsAsCn, &sSubjectNameFlagsV4_RequireEmail, &sSubjectNameFlagsV4_RequireCommonName, &sSubjectNameFlagsV4_RequireDirectoryPath}, Seed: 16, Slots: []uint16{
+	7, 0, 8, 0, 0, 0, 2, 6, 10, 0, 0, 0, 0, 5, 0, 9, 0, 4, 0, 1, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 3,
+}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplate_Arn, &sTemplate_ConnectorArn, &sTemplate_Definition, &sTemplate_Name, &sTemplate_ObjectIdentifier, &sTemplate_PolicySchema, &sTemplate_Status, &sTemplate_Revision, &sTemplate_CreatedAt, &sTemplate_UpdatedAt}, Seed: 8, Slots: []uint16{
+	0, 4, 0, 0, 0, 0, 5, 3, 10, 0, 0, 0, 0, 0, 0, 0, 1, 9, 0, 6, 0, 7, 0, 0,
+	0, 0, 0, 8, 2, 0, 0, 0,
+}}
+var mTemplateDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateDefinition_TemplateV2, &sTemplateDefinition_TemplateV3, &sTemplateDefinition_TemplateV4}}
+var m_TemplateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateList_member}}
+var m_TemplateNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateNameList_member}}
+var mTemplateRevision = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateRevision_MajorRevision, &sTemplateRevision_MinorRevision}}
+var mTemplateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateStatus_ACTIVE, &sTemplateStatus_DELETING}}
+var mTemplateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateSummary_Arn, &sTemplateSummary_ConnectorArn, &sTemplateSummary_Definition, &sTemplateSummary_Name, &sTemplateSummary_ObjectIdentifier, &sTemplateSummary_PolicySchema, &sTemplateSummary_Status, &sTemplateSummary_Revision, &sTemplateSummary_CreatedAt, &sTemplateSummary_UpdatedAt}, Seed: 8, Slots: []uint16{
+	0, 4, 0, 0, 0, 0, 5, 3, 10, 0, 0, 0, 0, 0, 0, 0, 1, 9, 0, 6, 0, 7, 0, 0,
+	0, 0, 0, 8, 2, 0, 0, 0,
+}}
+var mTemplateV2 = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateV2_CertificateValidity, &sTemplateV2_SupersededTemplates, &sTemplateV2_PrivateKeyAttributes, &sTemplateV2_PrivateKeyFlags, &sTemplateV2_EnrollmentFlags, &sTemplateV2_SubjectNameFlags, &sTemplateV2_GeneralFlags, &sTemplateV2_Extensions}}
+var mTemplateV3 = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateV3_CertificateValidity, &sTemplateV3_SupersededTemplates, &sTemplateV3_PrivateKeyAttributes, &sTemplateV3_PrivateKeyFlags, &sTemplateV3_EnrollmentFlags, &sTemplateV3_SubjectNameFlags, &sTemplateV3_GeneralFlags, &sTemplateV3_HashAlgorithm, &sTemplateV3_Extensions}, Seed: 3, Slots: []uint16{
+	0, 3, 6, 7, 0, 0, 0, 0, 8, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4,
+	0, 0, 0, 0, 5, 9, 0, 0,
+}}
+var mTemplateV4 = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateV4_CertificateValidity, &sTemplateV4_SupersededTemplates, &sTemplateV4_PrivateKeyAttributes, &sTemplateV4_PrivateKeyFlags, &sTemplateV4_EnrollmentFlags, &sTemplateV4_SubjectNameFlags, &sTemplateV4_GeneralFlags, &sTemplateV4_HashAlgorithm, &sTemplateV4_Extensions}, Seed: 3, Slots: []uint16{
+	0, 3, 6, 7, 0, 0, 0, 0, 8, 0, 0, 0, 0, 2, 0, 1, 0, 0, 0, 0, 0, 0, 0, 4,
+	0, 0, 0, 0, 5, 9, 0, 0,
+}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message, &sThrottlingException_ServiceCode, &sThrottlingException_QuotaCode}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Reason}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_INVALID_CA_SUBJECT, &sValidationExceptionReason_INVALID_PERMISSION, &sValidationExceptionReason_INVALID_STATE, &sValidationExceptionReason_MISMATCHED_CONNECTOR, &sValidationExceptionReason_MISMATCHED_VPC, &sValidationExceptionReason_NO_CLIENT_TOKEN, &sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_OTHER}, Seed: 22, Slots: []uint16{
+	0, 0, 8, 9, 4, 0, 0, 0, 0, 7, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 6,
+	0, 0, 0, 0, 3, 5, 0, 0,
+}}
+var mValidityPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sValidityPeriod_PeriodType, &sValidityPeriod_Period}}
+var mValidityPeriodType = smithy.SchemaMembers{List: []*smithy.Schema{&sValidityPeriodType_HOURS, &sValidityPeriodType_DAYS, &sValidityPeriodType_WEEKS, &sValidityPeriodType_MONTHS, &sValidityPeriodType_YEARS}}
+var mVpcInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcInformation_IpAddressType, &sVpcInformation_SecurityGroupIds}}
+var mCreateConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorRequest_DirectoryId, &sCreateConnectorRequest_CertificateAuthorityArn, &sCreateConnectorRequest_VpcInformation, &sCreateConnectorRequest_ClientToken, &sCreateConnectorRequest_Tags}}
+var mCreateConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorResponse_ConnectorArn}}
+var mCreateDirectoryRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryRegistrationRequest_DirectoryId, &sCreateDirectoryRegistrationRequest_ClientToken, &sCreateDirectoryRegistrationRequest_Tags}}
+var mCreateDirectoryRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectoryRegistrationResponse_DirectoryRegistrationArn}}
+var mCreateServicePrincipalNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServicePrincipalNameRequest_DirectoryRegistrationArn, &sCreateServicePrincipalNameRequest_ConnectorArn, &sCreateServicePrincipalNameRequest_ClientToken}}
+var mCreateTemplateGroupAccessControlEntryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTemplateGroupAccessControlEntryRequest_TemplateArn, &sCreateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier, &sCreateTemplateGroupAccessControlEntryRequest_GroupDisplayName, &sCreateTemplateGroupAccessControlEntryRequest_AccessRights, &sCreateTemplateGroupAccessControlEntryRequest_ClientToken}}
+var mCreateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTemplateRequest_ConnectorArn, &sCreateTemplateRequest_Name, &sCreateTemplateRequest_Definition, &sCreateTemplateRequest_ClientToken, &sCreateTemplateRequest_Tags}}
+var mCreateTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTemplateResponse_TemplateArn}}
+var mDeleteConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectorRequest_ConnectorArn}}
+var mDeleteDirectoryRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectoryRegistrationRequest_DirectoryRegistrationArn}}
+var mDeleteServicePrincipalNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServicePrincipalNameRequest_DirectoryRegistrationArn, &sDeleteServicePrincipalNameRequest_ConnectorArn}}
+var mDeleteTemplateGroupAccessControlEntryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTemplateGroupAccessControlEntryRequest_TemplateArn, &sDeleteTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier}}
+var mDeleteTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTemplateRequest_TemplateArn}}
+var mGetConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectorRequest_ConnectorArn}}
+var mGetConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectorResponse_Connector}}
+var mGetDirectoryRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDirectoryRegistrationRequest_DirectoryRegistrationArn}}
+var mGetDirectoryRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDirectoryRegistrationResponse_DirectoryRegistration}}
+var mGetServicePrincipalNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServicePrincipalNameRequest_DirectoryRegistrationArn, &sGetServicePrincipalNameRequest_ConnectorArn}}
+var mGetServicePrincipalNameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServicePrincipalNameResponse_ServicePrincipalName}}
+var mGetTemplateGroupAccessControlEntryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateGroupAccessControlEntryRequest_TemplateArn, &sGetTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier}}
+var mGetTemplateGroupAccessControlEntryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateGroupAccessControlEntryResponse_AccessControlEntry}}
+var mGetTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateRequest_TemplateArn}}
+var mGetTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateResponse_Template}}
+var mListConnectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsRequest_MaxResults, &sListConnectorsRequest_NextToken}}
+var mListConnectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsResponse_Connectors, &sListConnectorsResponse_NextToken}}
+var mListDirectoryRegistrationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDirectoryRegistrationsRequest_MaxResults, &sListDirectoryRegistrationsRequest_NextToken}}
+var mListDirectoryRegistrationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDirectoryRegistrationsResponse_DirectoryRegistrations, &sListDirectoryRegistrationsResponse_NextToken}}
+var mListServicePrincipalNamesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicePrincipalNamesRequest_MaxResults, &sListServicePrincipalNamesRequest_NextToken, &sListServicePrincipalNamesRequest_DirectoryRegistrationArn}}
+var mListServicePrincipalNamesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicePrincipalNamesResponse_ServicePrincipalNames, &sListServicePrincipalNamesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListTemplateGroupAccessControlEntriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTemplateGroupAccessControlEntriesRequest_MaxResults, &sListTemplateGroupAccessControlEntriesRequest_NextToken, &sListTemplateGroupAccessControlEntriesRequest_TemplateArn}}
+var mListTemplateGroupAccessControlEntriesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTemplateGroupAccessControlEntriesResponse_AccessControlEntries, &sListTemplateGroupAccessControlEntriesResponse_NextToken}}
+var mListTemplatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTemplatesRequest_MaxResults, &sListTemplatesRequest_NextToken, &sListTemplatesRequest_ConnectorArn}}
+var mListTemplatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTemplatesResponse_Templates, &sListTemplatesResponse_NextToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateTemplateGroupAccessControlEntryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTemplateGroupAccessControlEntryRequest_TemplateArn, &sUpdateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier, &sUpdateTemplateGroupAccessControlEntryRequest_GroupDisplayName, &sUpdateTemplateGroupAccessControlEntryRequest_AccessRights}}
+var mUpdateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTemplateRequest_TemplateArn, &sUpdateTemplateRequest_Definition, &sUpdateTemplateRequest_ReenrollAllCertificateHolders}}
+
+var sCreateConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnector, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateDirectoryRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryRegistration, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateServicePrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServicePrincipalName, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplate, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateTemplateGroupAccessControlEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateGroupAccessControlEntry, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnector, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteDirectoryRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryRegistration, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteServicePrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServicePrincipalName, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplate, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteTemplateGroupAccessControlEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateGroupAccessControlEntry, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sGetConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnector, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetDirectoryRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryRegistration, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetServicePrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServicePrincipalName, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplate, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetTemplateGroupAccessControlEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateGroupAccessControlEntry, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sListConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectors, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListDirectoryRegistrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDirectoryRegistrations, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListServicePrincipalNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePrincipalNames, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListTemplateGroupAccessControlEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateGroupAccessControlEntries, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplates, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sUpdateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplate, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sUpdateTemplateGroupAccessControlEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateGroupAccessControlEntry, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var s_PcaConnectorAd = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PcaConnectorAd, Type: smithy.ShapeTypeService})
+var sAccessControlEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessControlEntry, Members: &mAccessControlEntry, Type: smithy.ShapeTypeStructure})
+var s_AccessControlEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessControlEntryList, Members: &m_AccessControlEntryList, Type: smithy.ShapeTypeList})
+var sAccessControlEntrySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessControlEntrySummary, Members: &mAccessControlEntrySummary, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var sAccessRight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessRight, Members: &mAccessRight, Type: smithy.ShapeTypeEnum})
+var sAccessRights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessRights, Members: &mAccessRights, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationPolicies, Members: &mApplicationPolicies, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationPolicy, Members: &mApplicationPolicy, Type: smithy.ShapeTypeUnion})
+var s_ApplicationPolicyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationPolicyList, Members: &m_ApplicationPolicyList, Type: smithy.ShapeTypeList})
+var sApplicationPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationPolicyType, Members: &mApplicationPolicyType, Type: smithy.ShapeTypeEnum})
+var s_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString})
+var sCertificateValidity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateValidity, Members: &mCertificateValidity, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientCompatibilityV2, Members: &mClientCompatibilityV2, Type: smithy.ShapeTypeEnum})
+var sClientCompatibilityV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientCompatibilityV3, Members: &mClientCompatibilityV3, Type: smithy.ShapeTypeEnum})
+var sClientCompatibilityV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientCompatibilityV4, Members: &mClientCompatibilityV4, Type: smithy.ShapeTypeEnum})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var sConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnector, Members: &mConnector, Type: smithy.ShapeTypeStructure})
+var s_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var s_ConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList})
+var sConnectorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum})
+var sConnectorStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum})
+var sConnectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure})
+var s_CryptoProvidersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CryptoProvidersList, Members: &m_CryptoProvidersList, Type: smithy.ShapeTypeList})
+var s_CustomObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomObjectIdentifier, Type: smithy.ShapeTypeString})
+var s_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDirectoryRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryRegistration, Members: &mDirectoryRegistration, Type: smithy.ShapeTypeStructure})
+var s_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryRegistrationArn, Type: smithy.ShapeTypeString})
+var s_DirectoryRegistrationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryRegistrationList, Members: &m_DirectoryRegistrationList, Type: smithy.ShapeTypeList})
+var sDirectoryRegistrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryRegistrationStatus, Members: &mDirectoryRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sDirectoryRegistrationStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryRegistrationStatusReason, Members: &mDirectoryRegistrationStatusReason, Type: smithy.ShapeTypeEnum})
+var sDirectoryRegistrationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryRegistrationSummary, Members: &mDirectoryRegistrationSummary, Type: smithy.ShapeTypeStructure})
+var s_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sEnrollmentFlagsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentFlagsV2, Members: &mEnrollmentFlagsV2, Type: smithy.ShapeTypeStructure})
+var sEnrollmentFlagsV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentFlagsV3, Members: &mEnrollmentFlagsV3, Type: smithy.ShapeTypeStructure})
+var sEnrollmentFlagsV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentFlagsV4, Members: &mEnrollmentFlagsV4, Type: smithy.ShapeTypeStructure})
+var sExtensionsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensionsV2, Members: &mExtensionsV2, Type: smithy.ShapeTypeStructure})
+var sExtensionsV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensionsV3, Members: &mExtensionsV3, Type: smithy.ShapeTypeStructure})
+var sExtensionsV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExtensionsV4, Members: &mExtensionsV4, Type: smithy.ShapeTypeStructure})
+var sGeneralFlagsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneralFlagsV2, Members: &mGeneralFlagsV2, Type: smithy.ShapeTypeStructure})
+var sGeneralFlagsV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneralFlagsV3, Members: &mGeneralFlagsV3, Type: smithy.ShapeTypeStructure})
+var sGeneralFlagsV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneralFlagsV4, Members: &mGeneralFlagsV4, Type: smithy.ShapeTypeStructure})
+var s_GroupSecurityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupSecurityIdentifier, Type: smithy.ShapeTypeString})
+var sHashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sKeySpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum})
+var sKeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsage, Members: &mKeyUsage, Type: smithy.ShapeTypeStructure})
+var sKeyUsageFlags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsageFlags, Members: &mKeyUsageFlags, Type: smithy.ShapeTypeStructure})
+var sKeyUsageProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsageProperty, Members: &mKeyUsageProperty, Type: smithy.ShapeTypeUnion})
+var sKeyUsagePropertyFlags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsagePropertyFlags, Members: &mKeyUsagePropertyFlags, Type: smithy.ShapeTypeStructure})
+var sKeyUsagePropertyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyUsagePropertyType, Members: &mKeyUsagePropertyType, Type: smithy.ShapeTypeEnum})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPrivateKeyAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateKeyAlgorithm, Members: &mPrivateKeyAlgorithm, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyAttributesV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateKeyAttributesV2, Members: &mPrivateKeyAttributesV2, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyAttributesV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateKeyAttributesV3, Members: &mPrivateKeyAttributesV3, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyAttributesV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateKeyAttributesV4, Members: &mPrivateKeyAttributesV4, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyFlagsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateKeyFlagsV2, Members: &mPrivateKeyFlagsV2, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyFlagsV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateKeyFlagsV3, Members: &mPrivateKeyFlagsV3, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyFlagsV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateKeyFlagsV4, Members: &mPrivateKeyFlagsV4, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sServicePrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePrincipalName, Members: &mServicePrincipalName, Type: smithy.ShapeTypeStructure})
+var s_ServicePrincipalNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServicePrincipalNameList, Members: &m_ServicePrincipalNameList, Type: smithy.ShapeTypeList})
+var sServicePrincipalNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePrincipalNameStatus, Members: &mServicePrincipalNameStatus, Type: smithy.ShapeTypeEnum})
+var sServicePrincipalNameStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePrincipalNameStatusReason, Members: &mServicePrincipalNameStatusReason, Type: smithy.ShapeTypeEnum})
+var sServicePrincipalNameSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePrincipalNameSummary, Members: &mServicePrincipalNameSummary, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var sSubjectNameFlagsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectNameFlagsV2, Members: &mSubjectNameFlagsV2, Type: smithy.ShapeTypeStructure})
+var sSubjectNameFlagsV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectNameFlagsV3, Members: &mSubjectNameFlagsV3, Type: smithy.ShapeTypeStructure})
+var sSubjectNameFlagsV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubjectNameFlagsV4, Members: &mSubjectNameFlagsV4, Type: smithy.ShapeTypeStructure})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure})
+var s_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sTemplateDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateDefinition, Members: &mTemplateDefinition, Type: smithy.ShapeTypeUnion})
+var s_TemplateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateList, Members: &m_TemplateList, Type: smithy.ShapeTypeList})
+var s_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var s_TemplateNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateNameList, Members: &m_TemplateNameList, Type: smithy.ShapeTypeList})
+var sTemplateRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateRevision, Members: &mTemplateRevision, Type: smithy.ShapeTypeStructure})
+var sTemplateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateStatus, Members: &mTemplateStatus, Type: smithy.ShapeTypeEnum})
+var sTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure})
+var sTemplateV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateV2, Members: &mTemplateV2, Type: smithy.ShapeTypeStructure})
+var sTemplateV3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateV3, Members: &mTemplateV3, Type: smithy.ShapeTypeStructure})
+var sTemplateV4 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateV4, Members: &mTemplateV4, Type: smithy.ShapeTypeStructure})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t31, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidityPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidityPeriod, Members: &mValidityPeriod, Type: smithy.ShapeTypeStructure})
+var sValidityPeriodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidityPeriodType, Members: &mValidityPeriodType, Type: smithy.ShapeTypeEnum})
+var sVpcInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcInformation, Members: &mVpcInformation, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorRequest, Members: &mCreateConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorResponse, Members: &mCreateConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDirectoryRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryRegistrationRequest, Members: &mCreateDirectoryRegistrationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDirectoryRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectoryRegistrationResponse, Members: &mCreateDirectoryRegistrationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateServicePrincipalNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServicePrincipalNameRequest, Members: &mCreateServicePrincipalNameRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateGroupAccessControlEntryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateGroupAccessControlEntryRequest, Members: &mCreateTemplateGroupAccessControlEntryRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateRequest, Members: &mCreateTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateResponse, Members: &mCreateTemplateResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorRequest, Members: &mDeleteConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectoryRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectoryRegistrationRequest, Members: &mDeleteDirectoryRegistrationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteServicePrincipalNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServicePrincipalNameRequest, Members: &mDeleteServicePrincipalNameRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTemplateGroupAccessControlEntryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateGroupAccessControlEntryRequest, Members: &mDeleteTemplateGroupAccessControlEntryRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateRequest, Members: &mDeleteTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sGetConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectorRequest, Members: &mGetConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sGetConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectorResponse, Members: &mGetConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sGetDirectoryRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryRegistrationRequest, Members: &mGetDirectoryRegistrationRequest, Type: smithy.ShapeTypeStructure})
+var sGetDirectoryRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectoryRegistrationResponse, Members: &mGetDirectoryRegistrationResponse, Type: smithy.ShapeTypeStructure})
+var sGetServicePrincipalNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServicePrincipalNameRequest, Members: &mGetServicePrincipalNameRequest, Type: smithy.ShapeTypeStructure})
+var sGetServicePrincipalNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServicePrincipalNameResponse, Members: &mGetServicePrincipalNameResponse, Type: smithy.ShapeTypeStructure})
+var sGetTemplateGroupAccessControlEntryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateGroupAccessControlEntryRequest, Members: &mGetTemplateGroupAccessControlEntryRequest, Type: smithy.ShapeTypeStructure})
+var sGetTemplateGroupAccessControlEntryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateGroupAccessControlEntryResponse, Members: &mGetTemplateGroupAccessControlEntryResponse, Type: smithy.ShapeTypeStructure})
+var sGetTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateRequest, Members: &mGetTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sGetTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateResponse, Members: &mGetTemplateResponse, Type: smithy.ShapeTypeStructure})
+var sListConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsRequest, Members: &mListConnectorsRequest, Type: smithy.ShapeTypeStructure})
+var sListConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsResponse, Members: &mListConnectorsResponse, Type: smithy.ShapeTypeStructure})
+var sListDirectoryRegistrationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDirectoryRegistrationsRequest, Members: &mListDirectoryRegistrationsRequest, Type: smithy.ShapeTypeStructure})
+var sListDirectoryRegistrationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDirectoryRegistrationsResponse, Members: &mListDirectoryRegistrationsResponse, Type: smithy.ShapeTypeStructure})
+var sListServicePrincipalNamesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePrincipalNamesRequest, Members: &mListServicePrincipalNamesRequest, Type: smithy.ShapeTypeStructure})
+var sListServicePrincipalNamesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePrincipalNamesResponse, Members: &mListServicePrincipalNamesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListTemplateGroupAccessControlEntriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateGroupAccessControlEntriesRequest, Members: &mListTemplateGroupAccessControlEntriesRequest, Type: smithy.ShapeTypeStructure})
+var sListTemplateGroupAccessControlEntriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplateGroupAccessControlEntriesResponse, Members: &mListTemplateGroupAccessControlEntriesResponse, Type: smithy.ShapeTypeStructure})
+var sListTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplatesRequest, Members: &mListTemplatesRequest, Type: smithy.ShapeTypeStructure})
+var sListTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplatesResponse, Members: &mListTemplatesResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateGroupAccessControlEntryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateGroupAccessControlEntryRequest, Members: &mUpdateTemplateGroupAccessControlEntryRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateRequest, Members: &mUpdateTemplateRequest, Type: smithy.ShapeTypeStructure})
+
+var sAccessControlEntry_GroupDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sAccessControlEntry_GroupSecurityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupSecurityIdentifier", ID: &i_GroupSecurityIdentifier, Type: smithy.ShapeTypeString})
+var sAccessControlEntry_AccessRights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRights", ID: &iAccessRights, Members: &mAccessRights, Type: smithy.ShapeTypeStructure})
+var sAccessControlEntry_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sAccessControlEntry_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAccessControlEntry_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_AccessControlEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessControlEntrySummary, Members: &mAccessControlEntrySummary, Type: smithy.ShapeTypeStructure})
+var sAccessControlEntrySummary_GroupDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sAccessControlEntrySummary_GroupSecurityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupSecurityIdentifier", ID: &i_GroupSecurityIdentifier, Type: smithy.ShapeTypeString})
+var sAccessControlEntrySummary_AccessRights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRights", ID: &iAccessRights, Members: &mAccessRights, Type: smithy.ShapeTypeStructure})
+var sAccessControlEntrySummary_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sAccessControlEntrySummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAccessControlEntrySummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAccessRight_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessRight_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessRights_Enroll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enroll", ID: &iAccessRight, Members: &mAccessRight, Type: smithy.ShapeTypeEnum})
+var sAccessRights_AutoEnroll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoEnroll", ID: &iAccessRight, Members: &mAccessRight, Type: smithy.ShapeTypeEnum})
+var sApplicationPolicies_Critical = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Critical", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sApplicationPolicies_Policies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policies", ID: &i_ApplicationPolicyList, Members: &m_ApplicationPolicyList, Type: smithy.ShapeTypeList})
+var sApplicationPolicy_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iApplicationPolicyType, Members: &mApplicationPolicyType, Type: smithy.ShapeTypeEnum})
+var sApplicationPolicy_PolicyObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyObjectIdentifier", ID: &i_CustomObjectIdentifier, Type: smithy.ShapeTypeString})
+var s_ApplicationPolicyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationPolicy, Members: &mApplicationPolicy, Type: smithy.ShapeTypeUnion})
+var sApplicationPolicyType_ALL_APPLICATION_POLICIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL_APPLICATION_POLICIES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ANY_PURPOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY_PURPOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ATTESTATION_IDENTITY_KEY_CERTIFICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTESTATION_IDENTITY_KEY_CERTIFICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_CERTIFICATE_REQUEST_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_REQUEST_AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_CLIENT_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT_AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_CODE_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CODE_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_CTL_USAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CTL_USAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_DIGITAL_RIGHTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIGITAL_RIGHTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_DIRECTORY_SERVICE_EMAIL_REPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_SERVICE_EMAIL_REPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_DISALLOWED_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISALLOWED_LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_DNS_SERVER_TRUST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNS_SERVER_TRUST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_DOCUMENT_ENCRYPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENT_ENCRYPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_DOCUMENT_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOCUMENT_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_DYNAMIC_CODE_GENERATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMIC_CODE_GENERATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_EARLY_LAUNCH_ANTIMALWARE_DRIVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EARLY_LAUNCH_ANTIMALWARE_DRIVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ENCLAVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCLAVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ENCRYPTING_FILE_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTING_FILE_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ENDORSEMENT_KEY_CERTIFICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDORSEMENT_KEY_CERTIFICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_FILE_RECOVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_RECOVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_HAL_EXTENSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAL_EXTENSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_IP_SECURITY_END_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_SECURITY_END_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_IP_SECURITY_IKE_INTERMEDIATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_SECURITY_IKE_INTERMEDIATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_IP_SECURITY_TUNNEL_TERMINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_SECURITY_TUNNEL_TERMINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_IP_SECURITY_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_SECURITY_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ISOLATED_USER_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISOLATED_USER_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_KDC_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KDC_AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_KERNEL_MODE_CODE_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KERNEL_MODE_CODE_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_KEY_PACK_LICENSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_PACK_LICENSES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_KEY_RECOVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_RECOVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_KEY_RECOVERY_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_RECOVERY_AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_LICENSE_SERVER_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LICENSE_SERVER_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_LIFETIME_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIFETIME_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_MICROSOFT_PUBLISHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSOFT_PUBLISHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_MICROSOFT_TIME_STAMPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSOFT_TIME_STAMPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_MICROSOFT_TRUST_LIST_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSOFT_TRUST_LIST_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_OCSP_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OCSP_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_PLATFORM_CERTIFICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLATFORM_CERTIFICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_PREVIEW_BUILD_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREVIEW_BUILD_SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_PRIVATE_KEY_ARCHIVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE_KEY_ARCHIVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_PROTECTED_PROCESS_LIGHT_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROTECTED_PROCESS_LIGHT_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_PROTECTED_PROCESS_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROTECTED_PROCESS_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_QUALIFIED_SUBORDINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALIFIED_SUBORDINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_REVOKED_LIST_SIGNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REVOKED_LIST_SIGNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_ROOT_LIST_SIGNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT_LIST_SIGNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_SECURE_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURE_EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_SERVER_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_SMART_CARD_LOGIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMART_CARD_LOGIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_SPC_ENCRYPTED_DIGEST_RETRY_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPC_ENCRYPTED_DIGEST_RETRY_COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_SPC_RELAXED_PE_MARKER_CHECK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPC_RELAXED_PE_MARKER_CHECK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_TIME_STAMPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_STAMPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_HARDWARE_DRIVER_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_KITS_COMPONENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_KITS_COMPONENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_RT_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_RT_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_SOFTWARE_EXTENSION_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SOFTWARE_EXTENSION_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_STORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_STORE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SYSTEM_COMPONENT_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_TCB_COMPONENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_TCB_COMPONENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationPolicyType_WINDOWS_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateValidity_ValidityPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidityPeriod", ID: &iValidityPeriod, Members: &mValidityPeriod, Type: smithy.ShapeTypeStructure})
+var sCertificateValidity_RenewalPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RenewalPeriod", ID: &iValidityPeriod, Members: &mValidityPeriod, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV2_WINDOWS_SERVER_2003 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2003", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV2_WINDOWS_SERVER_2008 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2008", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV2_WINDOWS_SERVER_2008_R2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2008_R2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV2_WINDOWS_SERVER_2012 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2012", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV2_WINDOWS_SERVER_2012_R2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2012_R2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV2_WINDOWS_SERVER_2016 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2016", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV3_WINDOWS_SERVER_2008 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2008", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV3_WINDOWS_SERVER_2008_R2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2008_R2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV3_WINDOWS_SERVER_2012 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2012", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV3_WINDOWS_SERVER_2012_R2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2012_R2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV3_WINDOWS_SERVER_2016 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2016", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV4_WINDOWS_SERVER_2012 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2012", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV4_WINDOWS_SERVER_2012_R2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2012_R2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientCompatibilityV4_WINDOWS_SERVER_2016 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS_SERVER_2016", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sConnector_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sConnector_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString})
+var sConnector_CertificateEnrollmentPolicyServerEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateEnrollmentPolicyServerEndpoint", ID: &pString, Type: smithy.ShapeTypeString})
+var sConnector_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sConnector_VpcInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcInformation", ID: &iVpcInformation, Members: &mVpcInformation, Type: smithy.ShapeTypeStructure})
+var sConnector_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum})
+var sConnector_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum})
+var sConnector_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sConnector_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorSummary, Members: &mConnectorSummary, Type: smithy.ShapeTypeStructure})
+var sConnectorStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_CA_CERTIFICATE_REGISTRATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA_CERTIFICATE_REGISTRATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_DIRECTORY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_INSUFFICIENT_FREE_ADDRESSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_FREE_ADDRESSES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_INVALID_SUBNET_IP_PROTOCOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SUBNET_IP_PROTOCOL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_PRIVATECA_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATECA_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_SECURITY_GROUP_NOT_IN_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_GROUP_NOT_IN_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_VPC_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_VPC_ENDPOINT_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatusReason_VPC_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sConnectorSummary_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString})
+var sConnectorSummary_CertificateEnrollmentPolicyServerEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateEnrollmentPolicyServerEndpoint", ID: &pString, Type: smithy.ShapeTypeString})
+var sConnectorSummary_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sConnectorSummary_VpcInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcInformation", ID: &iVpcInformation, Members: &mVpcInformation, Type: smithy.ShapeTypeStructure})
+var sConnectorSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum})
+var sConnectorSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iConnectorStatusReason, Members: &mConnectorStatusReason, Type: smithy.ShapeTypeEnum})
+var sConnectorSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sConnectorSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_CryptoProvidersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sDirectoryRegistration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DirectoryRegistrationArn, Type: smithy.ShapeTypeString})
+var sDirectoryRegistration_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDirectoryRegistration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDirectoryRegistrationStatus, Members: &mDirectoryRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sDirectoryRegistration_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iDirectoryRegistrationStatusReason, Members: &mDirectoryRegistrationStatusReason, Type: smithy.ShapeTypeEnum})
+var sDirectoryRegistration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDirectoryRegistration_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_DirectoryRegistrationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectoryRegistrationSummary, Members: &mDirectoryRegistrationSummary, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatusReason_DIRECTORY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatusReason_DIRECTORY_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatusReason_DIRECTORY_NOT_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_NOT_ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatusReason_DIRECTORY_NOT_REACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_NOT_REACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatusReason_DIRECTORY_TYPE_NOT_SUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_TYPE_NOT_SUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationStatusReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryRegistrationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DirectoryRegistrationArn, Type: smithy.ShapeTypeString})
+var sDirectoryRegistrationSummary_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDirectoryRegistrationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDirectoryRegistrationStatus, Members: &mDirectoryRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sDirectoryRegistrationSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iDirectoryRegistrationStatusReason, Members: &mDirectoryRegistrationStatusReason, Type: smithy.ShapeTypeEnum})
+var sDirectoryRegistrationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDirectoryRegistrationSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnrollmentFlagsV2_IncludeSymmetricAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSymmetricAlgorithms", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV2_UserInteractionRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserInteractionRequired", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveInvalidCertificateFromPersonalStore", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV2_NoSecurityExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSecurityExtension", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableKeyReuseOnNtTokenKeysetStorageFull", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV3_IncludeSymmetricAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSymmetricAlgorithms", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV3_UserInteractionRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserInteractionRequired", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveInvalidCertificateFromPersonalStore", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV3_NoSecurityExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSecurityExtension", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableKeyReuseOnNtTokenKeysetStorageFull", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV4_IncludeSymmetricAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeSymmetricAlgorithms", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV4_UserInteractionRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserInteractionRequired", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveInvalidCertificateFromPersonalStore", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV4_NoSecurityExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSecurityExtension", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableKeyReuseOnNtTokenKeysetStorageFull", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sExtensionsV2_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsage, Members: &mKeyUsage, Type: smithy.ShapeTypeStructure})
+var sExtensionsV2_ApplicationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationPolicies", ID: &iApplicationPolicies, Members: &mApplicationPolicies, Type: smithy.ShapeTypeStructure})
+var sExtensionsV3_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsage, Members: &mKeyUsage, Type: smithy.ShapeTypeStructure})
+var sExtensionsV3_ApplicationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationPolicies", ID: &iApplicationPolicies, Members: &mApplicationPolicies, Type: smithy.ShapeTypeStructure})
+var sExtensionsV4_KeyUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsage", ID: &iKeyUsage, Members: &mKeyUsage, Type: smithy.ShapeTypeStructure})
+var sExtensionsV4_ApplicationPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationPolicies", ID: &iApplicationPolicies, Members: &mApplicationPolicies, Type: smithy.ShapeTypeStructure})
+var sGeneralFlagsV2_AutoEnrollment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoEnrollment", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGeneralFlagsV2_MachineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MachineType", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGeneralFlagsV3_AutoEnrollment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoEnrollment", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGeneralFlagsV3_MachineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MachineType", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGeneralFlagsV4_AutoEnrollment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoEnrollment", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGeneralFlagsV4_MachineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MachineType", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sHashAlgorithm_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithm_SHA384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA384", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHashAlgorithm_SHA512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA512", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeySpec_KEY_EXCHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEY_EXCHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeySpec_SIGNATURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNATURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyUsage_Critical = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Critical", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsage_UsageFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageFlags", ID: &iKeyUsageFlags, Members: &mKeyUsageFlags, Type: smithy.ShapeTypeStructure})
+var sKeyUsageFlags_DigitalSignature = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DigitalSignature", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsageFlags_NonRepudiation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NonRepudiation", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsageFlags_KeyEncipherment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyEncipherment", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsageFlags_DataEncipherment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataEncipherment", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsageFlags_KeyAgreement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreement", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsageProperty_PropertyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyType", ID: &iKeyUsagePropertyType, Members: &mKeyUsagePropertyType, Type: smithy.ShapeTypeEnum})
+var sKeyUsageProperty_PropertyFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropertyFlags", ID: &iKeyUsagePropertyFlags, Members: &mKeyUsagePropertyFlags, Type: smithy.ShapeTypeStructure})
+var sKeyUsagePropertyFlags_Decrypt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Decrypt", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsagePropertyFlags_KeyAgreement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyAgreement", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsagePropertyFlags_Sign = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sign", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sKeyUsagePropertyType_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyAlgorithm_RSA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyAlgorithm_ECDH_P256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDH_P256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyAlgorithm_ECDH_P384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDH_P384", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyAlgorithm_ECDH_P521 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECDH_P521", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateKeyAttributesV2_MinimalKeyLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimalKeyLength", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPrivateKeyAttributesV2_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyAttributesV2_CryptoProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CryptoProviders", ID: &i_CryptoProvidersList, Members: &m_CryptoProvidersList, Type: smithy.ShapeTypeList})
+var sPrivateKeyAttributesV3_MinimalKeyLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimalKeyLength", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPrivateKeyAttributesV3_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyAttributesV3_CryptoProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CryptoProviders", ID: &i_CryptoProvidersList, Members: &m_CryptoProvidersList, Type: smithy.ShapeTypeList})
+var sPrivateKeyAttributesV3_KeyUsageProperty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsageProperty", ID: &iKeyUsageProperty, Members: &mKeyUsageProperty, Type: smithy.ShapeTypeUnion})
+var sPrivateKeyAttributesV3_Algorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Algorithm", ID: &iPrivateKeyAlgorithm, Members: &mPrivateKeyAlgorithm, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyAttributesV4_MinimalKeyLength = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimalKeyLength", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPrivateKeyAttributesV4_KeySpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySpec", ID: &iKeySpec, Members: &mKeySpec, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyAttributesV4_CryptoProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CryptoProviders", ID: &i_CryptoProvidersList, Members: &m_CryptoProvidersList, Type: smithy.ShapeTypeList})
+var sPrivateKeyAttributesV4_KeyUsageProperty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyUsageProperty", ID: &iKeyUsageProperty, Members: &mKeyUsageProperty, Type: smithy.ShapeTypeUnion})
+var sPrivateKeyAttributesV4_Algorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Algorithm", ID: &iPrivateKeyAlgorithm, Members: &mPrivateKeyAlgorithm, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyFlagsV2_ExportableKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportableKey", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV2_StrongKeyProtectionRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StrongKeyProtectionRequired", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV2_ClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVersion", ID: &iClientCompatibilityV2, Members: &mClientCompatibilityV2, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyFlagsV3_ExportableKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportableKey", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV3_StrongKeyProtectionRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StrongKeyProtectionRequired", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireAlternateSignatureAlgorithm", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV3_ClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVersion", ID: &iClientCompatibilityV3, Members: &mClientCompatibilityV3, Type: smithy.ShapeTypeEnum})
+var sPrivateKeyFlagsV4_ExportableKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportableKey", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV4_StrongKeyProtectionRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StrongKeyProtectionRequired", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireAlternateSignatureAlgorithm", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV4_RequireSameKeyRenewal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireSameKeyRenewal", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV4_UseLegacyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseLegacyProvider", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPrivateKeyFlagsV4_ClientVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientVersion", ID: &iClientCompatibilityV4, Members: &mClientCompatibilityV4, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sServicePrincipalName_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Type: smithy.ShapeTypeString})
+var sServicePrincipalName_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sServicePrincipalName_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iServicePrincipalNameStatus, Members: &mServicePrincipalNameStatus, Type: smithy.ShapeTypeEnum})
+var sServicePrincipalName_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iServicePrincipalNameStatusReason, Members: &mServicePrincipalNameStatusReason, Type: smithy.ShapeTypeEnum})
+var sServicePrincipalName_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServicePrincipalName_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ServicePrincipalNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServicePrincipalNameSummary, Members: &mServicePrincipalNameSummary, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatusReason_DIRECTORY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatusReason_DIRECTORY_NOT_REACHABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_NOT_REACHABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatusReason_DIRECTORY_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatusReason_SPN_EXISTS_ON_DIFFERENT_AD_OBJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPN_EXISTS_ON_DIFFERENT_AD_OBJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatusReason_SPN_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPN_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameStatusReason_INTERNAL_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServicePrincipalNameSummary_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Type: smithy.ShapeTypeString})
+var sServicePrincipalNameSummary_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sServicePrincipalNameSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iServicePrincipalNameStatus, Members: &mServicePrincipalNameStatus, Type: smithy.ShapeTypeEnum})
+var sServicePrincipalNameSummary_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusReason", ID: &iServicePrincipalNameStatusReason, Members: &mServicePrincipalNameStatusReason, Type: smithy.ShapeTypeEnum})
+var sServicePrincipalNameSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServicePrincipalNameSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubjectNameFlagsV2_SanRequireDomainDns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDomainDns", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_SanRequireSpn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireSpn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_SanRequireDirectoryGuid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDirectoryGuid", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_SanRequireUpn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireUpn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_SanRequireEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireEmail", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_SanRequireDns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDns", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_RequireDnsAsCn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireDnsAsCn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_RequireEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEmail", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_RequireCommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireCommonName", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV2_RequireDirectoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireDirectoryPath", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_SanRequireDomainDns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDomainDns", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_SanRequireSpn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireSpn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_SanRequireDirectoryGuid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDirectoryGuid", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_SanRequireUpn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireUpn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_SanRequireEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireEmail", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_SanRequireDns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDns", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_RequireDnsAsCn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireDnsAsCn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_RequireEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEmail", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_RequireCommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireCommonName", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV3_RequireDirectoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireDirectoryPath", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_SanRequireDomainDns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDomainDns", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_SanRequireSpn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireSpn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_SanRequireDirectoryGuid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDirectoryGuid", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_SanRequireUpn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireUpn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_SanRequireEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireEmail", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_SanRequireDns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SanRequireDns", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_RequireDnsAsCn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireDnsAsCn", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_RequireEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireEmail", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_RequireCommonName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireCommonName", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubjectNameFlagsV4_RequireDirectoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequireDirectoryPath", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sTemplate_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sTemplate_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sTemplate_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iTemplateDefinition, Members: &mTemplateDefinition, Type: smithy.ShapeTypeUnion})
+var sTemplate_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sTemplate_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_CustomObjectIdentifier, Type: smithy.ShapeTypeString})
+var sTemplate_PolicySchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicySchema", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sTemplate_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTemplateStatus, Members: &mTemplateStatus, Type: smithy.ShapeTypeEnum})
+var sTemplate_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &iTemplateRevision, Members: &mTemplateRevision, Type: smithy.ShapeTypeStructure})
+var sTemplate_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sTemplate_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sTemplateDefinition_TemplateV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateV2", ID: &iTemplateV2, Members: &mTemplateV2, Type: smithy.ShapeTypeStructure})
+var sTemplateDefinition_TemplateV3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateV3", ID: &iTemplateV3, Members: &mTemplateV3, Type: smithy.ShapeTypeStructure})
+var sTemplateDefinition_TemplateV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateV4", ID: &iTemplateV4, Members: &mTemplateV4, Type: smithy.ShapeTypeStructure})
+var s_TemplateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure})
+var s_TemplateNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sTemplateRevision_MajorRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MajorRevision", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sTemplateRevision_MinorRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinorRevision", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sTemplateStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTemplateStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTemplateSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sTemplateSummary_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sTemplateSummary_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iTemplateDefinition, Members: &mTemplateDefinition, Type: smithy.ShapeTypeUnion})
+var sTemplateSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sTemplateSummary_ObjectIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectIdentifier", ID: &i_CustomObjectIdentifier, Type: smithy.ShapeTypeString})
+var sTemplateSummary_PolicySchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicySchema", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sTemplateSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iTemplateStatus, Members: &mTemplateStatus, Type: smithy.ShapeTypeEnum})
+var sTemplateSummary_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &iTemplateRevision, Members: &mTemplateRevision, Type: smithy.ShapeTypeStructure})
+var sTemplateSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sTemplateSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sTemplateV2_CertificateValidity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateValidity", ID: &iCertificateValidity, Members: &mCertificateValidity, Type: smithy.ShapeTypeStructure})
+var sTemplateV2_SupersededTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupersededTemplates", ID: &i_TemplateNameList, Members: &m_TemplateNameList, Type: smithy.ShapeTypeList})
+var sTemplateV2_PrivateKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyAttributes", ID: &iPrivateKeyAttributesV2, Members: &mPrivateKeyAttributesV2, Type: smithy.ShapeTypeStructure})
+var sTemplateV2_PrivateKeyFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyFlags", ID: &iPrivateKeyFlagsV2, Members: &mPrivateKeyFlagsV2, Type: smithy.ShapeTypeStructure})
+var sTemplateV2_EnrollmentFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrollmentFlags", ID: &iEnrollmentFlagsV2, Members: &mEnrollmentFlagsV2, Type: smithy.ShapeTypeStructure})
+var sTemplateV2_SubjectNameFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectNameFlags", ID: &iSubjectNameFlagsV2, Members: &mSubjectNameFlagsV2, Type: smithy.ShapeTypeStructure})
+var sTemplateV2_GeneralFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneralFlags", ID: &iGeneralFlagsV2, Members: &mGeneralFlagsV2, Type: smithy.ShapeTypeStructure})
+var sTemplateV2_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &iExtensionsV2, Members: &mExtensionsV2, Type: smithy.ShapeTypeStructure})
+var sTemplateV3_CertificateValidity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateValidity", ID: &iCertificateValidity, Members: &mCertificateValidity, Type: smithy.ShapeTypeStructure})
+var sTemplateV3_SupersededTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupersededTemplates", ID: &i_TemplateNameList, Members: &m_TemplateNameList, Type: smithy.ShapeTypeList})
+var sTemplateV3_PrivateKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyAttributes", ID: &iPrivateKeyAttributesV3, Members: &mPrivateKeyAttributesV3, Type: smithy.ShapeTypeStructure})
+var sTemplateV3_PrivateKeyFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyFlags", ID: &iPrivateKeyFlagsV3, Members: &mPrivateKeyFlagsV3, Type: smithy.ShapeTypeStructure})
+var sTemplateV3_EnrollmentFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrollmentFlags", ID: &iEnrollmentFlagsV3, Members: &mEnrollmentFlagsV3, Type: smithy.ShapeTypeStructure})
+var sTemplateV3_SubjectNameFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectNameFlags", ID: &iSubjectNameFlagsV3, Members: &mSubjectNameFlagsV3, Type: smithy.ShapeTypeStructure})
+var sTemplateV3_GeneralFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneralFlags", ID: &iGeneralFlagsV3, Members: &mGeneralFlagsV3, Type: smithy.ShapeTypeStructure})
+var sTemplateV3_HashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HashAlgorithm", ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sTemplateV3_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &iExtensionsV3, Members: &mExtensionsV3, Type: smithy.ShapeTypeStructure})
+var sTemplateV4_CertificateValidity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateValidity", ID: &iCertificateValidity, Members: &mCertificateValidity, Type: smithy.ShapeTypeStructure})
+var sTemplateV4_SupersededTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupersededTemplates", ID: &i_TemplateNameList, Members: &m_TemplateNameList, Type: smithy.ShapeTypeList})
+var sTemplateV4_PrivateKeyAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyAttributes", ID: &iPrivateKeyAttributesV4, Members: &mPrivateKeyAttributesV4, Type: smithy.ShapeTypeStructure})
+var sTemplateV4_PrivateKeyFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKeyFlags", ID: &iPrivateKeyFlagsV4, Members: &mPrivateKeyFlagsV4, Type: smithy.ShapeTypeStructure})
+var sTemplateV4_EnrollmentFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrollmentFlags", ID: &iEnrollmentFlagsV4, Members: &mEnrollmentFlagsV4, Type: smithy.ShapeTypeStructure})
+var sTemplateV4_SubjectNameFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubjectNameFlags", ID: &iSubjectNameFlagsV4, Members: &mSubjectNameFlagsV4, Type: smithy.ShapeTypeStructure})
+var sTemplateV4_GeneralFlags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GeneralFlags", ID: &iGeneralFlagsV4, Members: &mGeneralFlagsV4, Type: smithy.ShapeTypeStructure})
+var sTemplateV4_HashAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HashAlgorithm", ID: &iHashAlgorithm, Members: &mHashAlgorithm, Type: smithy.ShapeTypeEnum})
+var sTemplateV4_Extensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Extensions", ID: &iExtensionsV4, Members: &mExtensionsV4, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_INVALID_CA_SUBJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CA_SUBJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_INVALID_PERMISSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PERMISSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_INVALID_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_MISMATCHED_CONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_CONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_MISMATCHED_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISMATCHED_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_NO_CLIENT_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CLIENT_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidityPeriod_PeriodType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodType", ID: &iValidityPeriodType, Members: &mValidityPeriodType, Type: smithy.ShapeTypeEnum})
+var sValidityPeriod_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sValidityPeriodType_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidityPeriodType_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidityPeriodType_WEEKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidityPeriodType_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidityPeriodType_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcInformation_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sVpcInformation_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sCreateConnectorRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_CertificateAuthorityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateAuthorityArn", ID: &i_CertificateAuthorityArn, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_VpcInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcInformation", ID: &iVpcInformation, Members: &mVpcInformation, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sCreateConnectorResponse_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sCreateDirectoryRegistrationRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateDirectoryRegistrationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateDirectoryRegistrationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sCreateDirectoryRegistrationResponse_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Type: smithy.ShapeTypeString})
+var sCreateServicePrincipalNameRequest_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sCreateServicePrincipalNameRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sCreateServicePrincipalNameRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateTemplateGroupAccessControlEntryRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sCreateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupSecurityIdentifier", ID: &i_GroupSecurityIdentifier, Type: smithy.ShapeTypeString})
+var sCreateTemplateGroupAccessControlEntryRequest_GroupDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sCreateTemplateGroupAccessControlEntryRequest_AccessRights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRights", ID: &iAccessRights, Members: &mAccessRights, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateGroupAccessControlEntryRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iTemplateDefinition, Members: &mTemplateDefinition, Type: smithy.ShapeTypeUnion})
+var sCreateTemplateRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sCreateTemplateResponse_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sDeleteConnectorRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteDirectoryRegistrationRequest_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteServicePrincipalNameRequest_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteServicePrincipalNameRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteTemplateGroupAccessControlEntryRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupSecurityIdentifier", ID: &i_GroupSecurityIdentifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteTemplateRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetConnectorRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetConnectorResponse_Connector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connector", ID: &iConnector, Members: &mConnector, Type: smithy.ShapeTypeStructure})
+var sGetDirectoryRegistrationRequest_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetDirectoryRegistrationResponse_DirectoryRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistration", ID: &iDirectoryRegistration, Members: &mDirectoryRegistration, Type: smithy.ShapeTypeStructure})
+var sGetServicePrincipalNameRequest_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetServicePrincipalNameRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetServicePrincipalNameResponse_ServicePrincipalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServicePrincipalName", ID: &iServicePrincipalName, Members: &mServicePrincipalName, Type: smithy.ShapeTypeStructure})
+var sGetTemplateGroupAccessControlEntryRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupSecurityIdentifier", ID: &i_GroupSecurityIdentifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetTemplateGroupAccessControlEntryResponse_AccessControlEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessControlEntry", ID: &iAccessControlEntry, Members: &mAccessControlEntry, Type: smithy.ShapeTypeStructure})
+var sGetTemplateRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetTemplateResponse_Template = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Template", ID: &iTemplate, Members: &mTemplate, Type: smithy.ShapeTypeStructure})
+var sListConnectorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t33, Type: smithy.ShapeTypeInteger})
+var sListConnectorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t34, Type: smithy.ShapeTypeString})
+var sListConnectorsResponse_Connectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connectors", ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList})
+var sListConnectorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDirectoryRegistrationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t33, Type: smithy.ShapeTypeInteger})
+var sListDirectoryRegistrationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t34, Type: smithy.ShapeTypeString})
+var sListDirectoryRegistrationsResponse_DirectoryRegistrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrations", ID: &i_DirectoryRegistrationList, Members: &m_DirectoryRegistrationList, Type: smithy.ShapeTypeList})
+var sListDirectoryRegistrationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServicePrincipalNamesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t33, Type: smithy.ShapeTypeInteger})
+var sListServicePrincipalNamesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t34, Type: smithy.ShapeTypeString})
+var sListServicePrincipalNamesRequest_DirectoryRegistrationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryRegistrationArn", ID: &i_DirectoryRegistrationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListServicePrincipalNamesResponse_ServicePrincipalNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServicePrincipalNames", ID: &i_ServicePrincipalNameList, Members: &m_ServicePrincipalNameList, Type: smithy.ShapeTypeList})
+var sListServicePrincipalNamesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sListTemplateGroupAccessControlEntriesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t33, Type: smithy.ShapeTypeInteger})
+var sListTemplateGroupAccessControlEntriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t34, Type: smithy.ShapeTypeString})
+var sListTemplateGroupAccessControlEntriesRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListTemplateGroupAccessControlEntriesResponse_AccessControlEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessControlEntries", ID: &i_AccessControlEntryList, Members: &m_AccessControlEntryList, Type: smithy.ShapeTypeList})
+var sListTemplateGroupAccessControlEntriesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTemplatesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t33, Type: smithy.ShapeTypeInteger})
+var sListTemplatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t34, Type: smithy.ShapeTypeString})
+var sListTemplatesRequest_ConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorArn", ID: &i_ConnectorArn, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListTemplatesResponse_Templates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Templates", ID: &i_TemplateList, Members: &m_TemplateList, Type: smithy.ShapeTypeList})
+var sListTemplatesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t36, Type: smithy.ShapeTypeList})
+var sUpdateTemplateGroupAccessControlEntryRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sUpdateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupSecurityIdentifier", ID: &i_GroupSecurityIdentifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sUpdateTemplateGroupAccessControlEntryRequest_GroupDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupDisplayName", ID: &i_DisplayName, Type: smithy.ShapeTypeString})
+var sUpdateTemplateGroupAccessControlEntryRequest_AccessRights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRights", ID: &iAccessRights, Members: &mAccessRights, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateRequest_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateArn", ID: &i_TemplateArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sUpdateTemplateRequest_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &iTemplateDefinition, Members: &mTemplateDefinition, Type: smithy.ShapeTypeUnion})
+var sUpdateTemplateRequest_ReenrollAllCertificateHolders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReenrollAllCertificateHolders", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+
+var CreateConnector = &sCreateConnector
+
+var CreateDirectoryRegistration = &sCreateDirectoryRegistration
+
+var CreateServicePrincipalName = &sCreateServicePrincipalName
+
+var CreateTemplate = &sCreateTemplate
+
+var CreateTemplateGroupAccessControlEntry = &sCreateTemplateGroupAccessControlEntry
+
+var DeleteConnector = &sDeleteConnector
+
+var DeleteDirectoryRegistration = &sDeleteDirectoryRegistration
+
+var DeleteServicePrincipalName = &sDeleteServicePrincipalName
+
+var DeleteTemplate = &sDeleteTemplate
+
+var DeleteTemplateGroupAccessControlEntry = &sDeleteTemplateGroupAccessControlEntry
+
+var GetConnector = &sGetConnector
+
+var GetDirectoryRegistration = &sGetDirectoryRegistration
+
+var GetServicePrincipalName = &sGetServicePrincipalName
+
+var GetTemplate = &sGetTemplate
+
+var GetTemplateGroupAccessControlEntry = &sGetTemplateGroupAccessControlEntry
+
+var ListConnectors = &sListConnectors
+
+var ListDirectoryRegistrations = &sListDirectoryRegistrations
+
+var ListServicePrincipalNames = &sListServicePrincipalNames
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTemplateGroupAccessControlEntries = &sListTemplateGroupAccessControlEntries
+
+var ListTemplates = &sListTemplates
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateTemplate = &sUpdateTemplate
+
+var UpdateTemplateGroupAccessControlEntry = &sUpdateTemplateGroupAccessControlEntry
+
+var _PcaConnectorAd = &s_PcaConnectorAd
+
+var AccessControlEntry = &sAccessControlEntry
+var AccessControlEntry_GroupDisplayName = &sAccessControlEntry_GroupDisplayName
+var AccessControlEntry_GroupSecurityIdentifier = &sAccessControlEntry_GroupSecurityIdentifier
+var AccessControlEntry_AccessRights = &sAccessControlEntry_AccessRights
+var AccessControlEntry_TemplateArn = &sAccessControlEntry_TemplateArn
+var AccessControlEntry_CreatedAt = &sAccessControlEntry_CreatedAt
+var AccessControlEntry_UpdatedAt = &sAccessControlEntry_UpdatedAt
+
+var _AccessControlEntryList = &s_AccessControlEntryList
+var _AccessControlEntryList_member = &s_AccessControlEntryList_member
+
+var AccessControlEntrySummary = &sAccessControlEntrySummary
+var AccessControlEntrySummary_GroupDisplayName = &sAccessControlEntrySummary_GroupDisplayName
+var AccessControlEntrySummary_GroupSecurityIdentifier = &sAccessControlEntrySummary_GroupSecurityIdentifier
+var AccessControlEntrySummary_AccessRights = &sAccessControlEntrySummary_AccessRights
+var AccessControlEntrySummary_TemplateArn = &sAccessControlEntrySummary_TemplateArn
+var AccessControlEntrySummary_CreatedAt = &sAccessControlEntrySummary_CreatedAt
+var AccessControlEntrySummary_UpdatedAt = &sAccessControlEntrySummary_UpdatedAt
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AccessRight = &sAccessRight
+var AccessRight_ALLOW = &sAccessRight_ALLOW
+var AccessRight_DENY = &sAccessRight_DENY
+
+var AccessRights = &sAccessRights
+var AccessRights_Enroll = &sAccessRights_Enroll
+var AccessRights_AutoEnroll = &sAccessRights_AutoEnroll
+
+var ApplicationPolicies = &sApplicationPolicies
+var ApplicationPolicies_Critical = &sApplicationPolicies_Critical
+var ApplicationPolicies_Policies = &sApplicationPolicies_Policies
+
+var ApplicationPolicy = &sApplicationPolicy
+var ApplicationPolicy_PolicyType = &sApplicationPolicy_PolicyType
+var ApplicationPolicy_PolicyObjectIdentifier = &sApplicationPolicy_PolicyObjectIdentifier
+
+var _ApplicationPolicyList = &s_ApplicationPolicyList
+var _ApplicationPolicyList_member = &s_ApplicationPolicyList_member
+
+var ApplicationPolicyType = &sApplicationPolicyType
+var ApplicationPolicyType_ALL_APPLICATION_POLICIES = &sApplicationPolicyType_ALL_APPLICATION_POLICIES
+var ApplicationPolicyType_ANY_PURPOSE = &sApplicationPolicyType_ANY_PURPOSE
+var ApplicationPolicyType_ATTESTATION_IDENTITY_KEY_CERTIFICATE = &sApplicationPolicyType_ATTESTATION_IDENTITY_KEY_CERTIFICATE
+var ApplicationPolicyType_CERTIFICATE_REQUEST_AGENT = &sApplicationPolicyType_CERTIFICATE_REQUEST_AGENT
+var ApplicationPolicyType_CLIENT_AUTHENTICATION = &sApplicationPolicyType_CLIENT_AUTHENTICATION
+var ApplicationPolicyType_CODE_SIGNING = &sApplicationPolicyType_CODE_SIGNING
+var ApplicationPolicyType_CTL_USAGE = &sApplicationPolicyType_CTL_USAGE
+var ApplicationPolicyType_DIGITAL_RIGHTS = &sApplicationPolicyType_DIGITAL_RIGHTS
+var ApplicationPolicyType_DIRECTORY_SERVICE_EMAIL_REPLICATION = &sApplicationPolicyType_DIRECTORY_SERVICE_EMAIL_REPLICATION
+var ApplicationPolicyType_DISALLOWED_LIST = &sApplicationPolicyType_DISALLOWED_LIST
+var ApplicationPolicyType_DNS_SERVER_TRUST = &sApplicationPolicyType_DNS_SERVER_TRUST
+var ApplicationPolicyType_DOCUMENT_ENCRYPTION = &sApplicationPolicyType_DOCUMENT_ENCRYPTION
+var ApplicationPolicyType_DOCUMENT_SIGNING = &sApplicationPolicyType_DOCUMENT_SIGNING
+var ApplicationPolicyType_DYNAMIC_CODE_GENERATOR = &sApplicationPolicyType_DYNAMIC_CODE_GENERATOR
+var ApplicationPolicyType_EARLY_LAUNCH_ANTIMALWARE_DRIVER = &sApplicationPolicyType_EARLY_LAUNCH_ANTIMALWARE_DRIVER
+var ApplicationPolicyType_EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = &sApplicationPolicyType_EMBEDDED_WINDOWS_SYSTEM_COMPONENT_VERIFICATION
+var ApplicationPolicyType_ENCLAVE = &sApplicationPolicyType_ENCLAVE
+var ApplicationPolicyType_ENCRYPTING_FILE_SYSTEM = &sApplicationPolicyType_ENCRYPTING_FILE_SYSTEM
+var ApplicationPolicyType_ENDORSEMENT_KEY_CERTIFICATE = &sApplicationPolicyType_ENDORSEMENT_KEY_CERTIFICATE
+var ApplicationPolicyType_FILE_RECOVERY = &sApplicationPolicyType_FILE_RECOVERY
+var ApplicationPolicyType_HAL_EXTENSION = &sApplicationPolicyType_HAL_EXTENSION
+var ApplicationPolicyType_IP_SECURITY_END_SYSTEM = &sApplicationPolicyType_IP_SECURITY_END_SYSTEM
+var ApplicationPolicyType_IP_SECURITY_IKE_INTERMEDIATE = &sApplicationPolicyType_IP_SECURITY_IKE_INTERMEDIATE
+var ApplicationPolicyType_IP_SECURITY_TUNNEL_TERMINATION = &sApplicationPolicyType_IP_SECURITY_TUNNEL_TERMINATION
+var ApplicationPolicyType_IP_SECURITY_USER = &sApplicationPolicyType_IP_SECURITY_USER
+var ApplicationPolicyType_ISOLATED_USER_MODE = &sApplicationPolicyType_ISOLATED_USER_MODE
+var ApplicationPolicyType_KDC_AUTHENTICATION = &sApplicationPolicyType_KDC_AUTHENTICATION
+var ApplicationPolicyType_KERNEL_MODE_CODE_SIGNING = &sApplicationPolicyType_KERNEL_MODE_CODE_SIGNING
+var ApplicationPolicyType_KEY_PACK_LICENSES = &sApplicationPolicyType_KEY_PACK_LICENSES
+var ApplicationPolicyType_KEY_RECOVERY = &sApplicationPolicyType_KEY_RECOVERY
+var ApplicationPolicyType_KEY_RECOVERY_AGENT = &sApplicationPolicyType_KEY_RECOVERY_AGENT
+var ApplicationPolicyType_LICENSE_SERVER_VERIFICATION = &sApplicationPolicyType_LICENSE_SERVER_VERIFICATION
+var ApplicationPolicyType_LIFETIME_SIGNING = &sApplicationPolicyType_LIFETIME_SIGNING
+var ApplicationPolicyType_MICROSOFT_PUBLISHER = &sApplicationPolicyType_MICROSOFT_PUBLISHER
+var ApplicationPolicyType_MICROSOFT_TIME_STAMPING = &sApplicationPolicyType_MICROSOFT_TIME_STAMPING
+var ApplicationPolicyType_MICROSOFT_TRUST_LIST_SIGNING = &sApplicationPolicyType_MICROSOFT_TRUST_LIST_SIGNING
+var ApplicationPolicyType_OCSP_SIGNING = &sApplicationPolicyType_OCSP_SIGNING
+var ApplicationPolicyType_OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = &sApplicationPolicyType_OEM_WINDOWS_SYSTEM_COMPONENT_VERIFICATION
+var ApplicationPolicyType_PLATFORM_CERTIFICATE = &sApplicationPolicyType_PLATFORM_CERTIFICATE
+var ApplicationPolicyType_PREVIEW_BUILD_SIGNING = &sApplicationPolicyType_PREVIEW_BUILD_SIGNING
+var ApplicationPolicyType_PRIVATE_KEY_ARCHIVAL = &sApplicationPolicyType_PRIVATE_KEY_ARCHIVAL
+var ApplicationPolicyType_PROTECTED_PROCESS_LIGHT_VERIFICATION = &sApplicationPolicyType_PROTECTED_PROCESS_LIGHT_VERIFICATION
+var ApplicationPolicyType_PROTECTED_PROCESS_VERIFICATION = &sApplicationPolicyType_PROTECTED_PROCESS_VERIFICATION
+var ApplicationPolicyType_QUALIFIED_SUBORDINATION = &sApplicationPolicyType_QUALIFIED_SUBORDINATION
+var ApplicationPolicyType_REVOKED_LIST_SIGNER = &sApplicationPolicyType_REVOKED_LIST_SIGNER
+var ApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION = &sApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_CA_REVOCATION
+var ApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION = &sApplicationPolicyType_ROOT_PROGRAM_AUTO_UPDATE_END_REVOCATION
+var ApplicationPolicyType_ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL = &sApplicationPolicyType_ROOT_PROGRAM_NO_OSCP_FAILOVER_TO_CRL
+var ApplicationPolicyType_ROOT_LIST_SIGNER = &sApplicationPolicyType_ROOT_LIST_SIGNER
+var ApplicationPolicyType_SECURE_EMAIL = &sApplicationPolicyType_SECURE_EMAIL
+var ApplicationPolicyType_SERVER_AUTHENTICATION = &sApplicationPolicyType_SERVER_AUTHENTICATION
+var ApplicationPolicyType_SMART_CARD_LOGIN = &sApplicationPolicyType_SMART_CARD_LOGIN
+var ApplicationPolicyType_SPC_ENCRYPTED_DIGEST_RETRY_COUNT = &sApplicationPolicyType_SPC_ENCRYPTED_DIGEST_RETRY_COUNT
+var ApplicationPolicyType_SPC_RELAXED_PE_MARKER_CHECK = &sApplicationPolicyType_SPC_RELAXED_PE_MARKER_CHECK
+var ApplicationPolicyType_TIME_STAMPING = &sApplicationPolicyType_TIME_STAMPING
+var ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION = &sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_ATTESTED_VERIFICATION
+var ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION = &sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_EXTENDED_VERIFICATION
+var ApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_VERIFICATION = &sApplicationPolicyType_WINDOWS_HARDWARE_DRIVER_VERIFICATION
+var ApplicationPolicyType_WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION = &sApplicationPolicyType_WINDOWS_HELLO_RECOVERY_KEY_ENCRYPTION
+var ApplicationPolicyType_WINDOWS_KITS_COMPONENT = &sApplicationPolicyType_WINDOWS_KITS_COMPONENT
+var ApplicationPolicyType_WINDOWS_RT_VERIFICATION = &sApplicationPolicyType_WINDOWS_RT_VERIFICATION
+var ApplicationPolicyType_WINDOWS_SOFTWARE_EXTENSION_VERIFICATION = &sApplicationPolicyType_WINDOWS_SOFTWARE_EXTENSION_VERIFICATION
+var ApplicationPolicyType_WINDOWS_STORE = &sApplicationPolicyType_WINDOWS_STORE
+var ApplicationPolicyType_WINDOWS_SYSTEM_COMPONENT_VERIFICATION = &sApplicationPolicyType_WINDOWS_SYSTEM_COMPONENT_VERIFICATION
+var ApplicationPolicyType_WINDOWS_TCB_COMPONENT = &sApplicationPolicyType_WINDOWS_TCB_COMPONENT
+var ApplicationPolicyType_WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT = &sApplicationPolicyType_WINDOWS_THIRD_PARTY_APPLICATION_COMPONENT
+var ApplicationPolicyType_WINDOWS_UPDATE = &sApplicationPolicyType_WINDOWS_UPDATE
+
+var _CertificateAuthorityArn = &s_CertificateAuthorityArn
+
+var CertificateValidity = &sCertificateValidity
+var CertificateValidity_ValidityPeriod = &sCertificateValidity_ValidityPeriod
+var CertificateValidity_RenewalPeriod = &sCertificateValidity_RenewalPeriod
+
+var ClientCompatibilityV2 = &sClientCompatibilityV2
+var ClientCompatibilityV2_WINDOWS_SERVER_2003 = &sClientCompatibilityV2_WINDOWS_SERVER_2003
+var ClientCompatibilityV2_WINDOWS_SERVER_2008 = &sClientCompatibilityV2_WINDOWS_SERVER_2008
+var ClientCompatibilityV2_WINDOWS_SERVER_2008_R2 = &sClientCompatibilityV2_WINDOWS_SERVER_2008_R2
+var ClientCompatibilityV2_WINDOWS_SERVER_2012 = &sClientCompatibilityV2_WINDOWS_SERVER_2012
+var ClientCompatibilityV2_WINDOWS_SERVER_2012_R2 = &sClientCompatibilityV2_WINDOWS_SERVER_2012_R2
+var ClientCompatibilityV2_WINDOWS_SERVER_2016 = &sClientCompatibilityV2_WINDOWS_SERVER_2016
+
+var ClientCompatibilityV3 = &sClientCompatibilityV3
+var ClientCompatibilityV3_WINDOWS_SERVER_2008 = &sClientCompatibilityV3_WINDOWS_SERVER_2008
+var ClientCompatibilityV3_WINDOWS_SERVER_2008_R2 = &sClientCompatibilityV3_WINDOWS_SERVER_2008_R2
+var ClientCompatibilityV3_WINDOWS_SERVER_2012 = &sClientCompatibilityV3_WINDOWS_SERVER_2012
+var ClientCompatibilityV3_WINDOWS_SERVER_2012_R2 = &sClientCompatibilityV3_WINDOWS_SERVER_2012_R2
+var ClientCompatibilityV3_WINDOWS_SERVER_2016 = &sClientCompatibilityV3_WINDOWS_SERVER_2016
+
+var ClientCompatibilityV4 = &sClientCompatibilityV4
+var ClientCompatibilityV4_WINDOWS_SERVER_2012 = &sClientCompatibilityV4_WINDOWS_SERVER_2012
+var ClientCompatibilityV4_WINDOWS_SERVER_2012_R2 = &sClientCompatibilityV4_WINDOWS_SERVER_2012_R2
+var ClientCompatibilityV4_WINDOWS_SERVER_2016 = &sClientCompatibilityV4_WINDOWS_SERVER_2016
+
+var _ClientToken = &s_ClientToken
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_ResourceId = &sConflictException_ResourceId
+var ConflictException_ResourceType = &sConflictException_ResourceType
+
+var Connector = &sConnector
+var Connector_Arn = &sConnector_Arn
+var Connector_CertificateAuthorityArn = &sConnector_CertificateAuthorityArn
+var Connector_CertificateEnrollmentPolicyServerEndpoint = &sConnector_CertificateEnrollmentPolicyServerEndpoint
+var Connector_DirectoryId = &sConnector_DirectoryId
+var Connector_VpcInformation = &sConnector_VpcInformation
+var Connector_Status = &sConnector_Status
+var Connector_StatusReason = &sConnector_StatusReason
+var Connector_CreatedAt = &sConnector_CreatedAt
+var Connector_UpdatedAt = &sConnector_UpdatedAt
+
+var _ConnectorArn = &s_ConnectorArn
+
+var _ConnectorList = &s_ConnectorList
+var _ConnectorList_member = &s_ConnectorList_member
+
+var ConnectorStatus = &sConnectorStatus
+var ConnectorStatus_CREATING = &sConnectorStatus_CREATING
+var ConnectorStatus_ACTIVE = &sConnectorStatus_ACTIVE
+var ConnectorStatus_DELETING = &sConnectorStatus_DELETING
+var ConnectorStatus_FAILED = &sConnectorStatus_FAILED
+
+var ConnectorStatusReason = &sConnectorStatusReason
+var ConnectorStatusReason_CA_CERTIFICATE_REGISTRATION_FAILED = &sConnectorStatusReason_CA_CERTIFICATE_REGISTRATION_FAILED
+var ConnectorStatusReason_DIRECTORY_ACCESS_DENIED = &sConnectorStatusReason_DIRECTORY_ACCESS_DENIED
+var ConnectorStatusReason_INTERNAL_FAILURE = &sConnectorStatusReason_INTERNAL_FAILURE
+var ConnectorStatusReason_INSUFFICIENT_FREE_ADDRESSES = &sConnectorStatusReason_INSUFFICIENT_FREE_ADDRESSES
+var ConnectorStatusReason_INVALID_SUBNET_IP_PROTOCOL = &sConnectorStatusReason_INVALID_SUBNET_IP_PROTOCOL
+var ConnectorStatusReason_PRIVATECA_ACCESS_DENIED = &sConnectorStatusReason_PRIVATECA_ACCESS_DENIED
+var ConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND = &sConnectorStatusReason_PRIVATECA_RESOURCE_NOT_FOUND
+var ConnectorStatusReason_SECURITY_GROUP_NOT_IN_VPC = &sConnectorStatusReason_SECURITY_GROUP_NOT_IN_VPC
+var ConnectorStatusReason_VPC_ACCESS_DENIED = &sConnectorStatusReason_VPC_ACCESS_DENIED
+var ConnectorStatusReason_VPC_ENDPOINT_LIMIT_EXCEEDED = &sConnectorStatusReason_VPC_ENDPOINT_LIMIT_EXCEEDED
+var ConnectorStatusReason_VPC_RESOURCE_NOT_FOUND = &sConnectorStatusReason_VPC_RESOURCE_NOT_FOUND
+
+var ConnectorSummary = &sConnectorSummary
+var ConnectorSummary_Arn = &sConnectorSummary_Arn
+var ConnectorSummary_CertificateAuthorityArn = &sConnectorSummary_CertificateAuthorityArn
+var ConnectorSummary_CertificateEnrollmentPolicyServerEndpoint = &sConnectorSummary_CertificateEnrollmentPolicyServerEndpoint
+var ConnectorSummary_DirectoryId = &sConnectorSummary_DirectoryId
+var ConnectorSummary_VpcInformation = &sConnectorSummary_VpcInformation
+var ConnectorSummary_Status = &sConnectorSummary_Status
+var ConnectorSummary_StatusReason = &sConnectorSummary_StatusReason
+var ConnectorSummary_CreatedAt = &sConnectorSummary_CreatedAt
+var ConnectorSummary_UpdatedAt = &sConnectorSummary_UpdatedAt
+
+var _CryptoProvidersList = &s_CryptoProvidersList
+var _CryptoProvidersList_member = &s_CryptoProvidersList_member
+
+var _CustomObjectIdentifier = &s_CustomObjectIdentifier
+
+var _DirectoryId = &s_DirectoryId
+
+var DirectoryRegistration = &sDirectoryRegistration
+var DirectoryRegistration_Arn = &sDirectoryRegistration_Arn
+var DirectoryRegistration_DirectoryId = &sDirectoryRegistration_DirectoryId
+var DirectoryRegistration_Status = &sDirectoryRegistration_Status
+var DirectoryRegistration_StatusReason = &sDirectoryRegistration_StatusReason
+var DirectoryRegistration_CreatedAt = &sDirectoryRegistration_CreatedAt
+var DirectoryRegistration_UpdatedAt = &sDirectoryRegistration_UpdatedAt
+
+var _DirectoryRegistrationArn = &s_DirectoryRegistrationArn
+
+var _DirectoryRegistrationList = &s_DirectoryRegistrationList
+var _DirectoryRegistrationList_member = &s_DirectoryRegistrationList_member
+
+var DirectoryRegistrationStatus = &sDirectoryRegistrationStatus
+var DirectoryRegistrationStatus_CREATING = &sDirectoryRegistrationStatus_CREATING
+var DirectoryRegistrationStatus_ACTIVE = &sDirectoryRegistrationStatus_ACTIVE
+var DirectoryRegistrationStatus_DELETING = &sDirectoryRegistrationStatus_DELETING
+var DirectoryRegistrationStatus_FAILED = &sDirectoryRegistrationStatus_FAILED
+
+var DirectoryRegistrationStatusReason = &sDirectoryRegistrationStatusReason
+var DirectoryRegistrationStatusReason_DIRECTORY_ACCESS_DENIED = &sDirectoryRegistrationStatusReason_DIRECTORY_ACCESS_DENIED
+var DirectoryRegistrationStatusReason_DIRECTORY_RESOURCE_NOT_FOUND = &sDirectoryRegistrationStatusReason_DIRECTORY_RESOURCE_NOT_FOUND
+var DirectoryRegistrationStatusReason_DIRECTORY_NOT_ACTIVE = &sDirectoryRegistrationStatusReason_DIRECTORY_NOT_ACTIVE
+var DirectoryRegistrationStatusReason_DIRECTORY_NOT_REACHABLE = &sDirectoryRegistrationStatusReason_DIRECTORY_NOT_REACHABLE
+var DirectoryRegistrationStatusReason_DIRECTORY_TYPE_NOT_SUPPORTED = &sDirectoryRegistrationStatusReason_DIRECTORY_TYPE_NOT_SUPPORTED
+var DirectoryRegistrationStatusReason_INTERNAL_FAILURE = &sDirectoryRegistrationStatusReason_INTERNAL_FAILURE
+
+var DirectoryRegistrationSummary = &sDirectoryRegistrationSummary
+var DirectoryRegistrationSummary_Arn = &sDirectoryRegistrationSummary_Arn
+var DirectoryRegistrationSummary_DirectoryId = &sDirectoryRegistrationSummary_DirectoryId
+var DirectoryRegistrationSummary_Status = &sDirectoryRegistrationSummary_Status
+var DirectoryRegistrationSummary_StatusReason = &sDirectoryRegistrationSummary_StatusReason
+var DirectoryRegistrationSummary_CreatedAt = &sDirectoryRegistrationSummary_CreatedAt
+var DirectoryRegistrationSummary_UpdatedAt = &sDirectoryRegistrationSummary_UpdatedAt
+
+var _DisplayName = &s_DisplayName
+
+var EnrollmentFlagsV2 = &sEnrollmentFlagsV2
+var EnrollmentFlagsV2_IncludeSymmetricAlgorithms = &sEnrollmentFlagsV2_IncludeSymmetricAlgorithms
+var EnrollmentFlagsV2_UserInteractionRequired = &sEnrollmentFlagsV2_UserInteractionRequired
+var EnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore = &sEnrollmentFlagsV2_RemoveInvalidCertificateFromPersonalStore
+var EnrollmentFlagsV2_NoSecurityExtension = &sEnrollmentFlagsV2_NoSecurityExtension
+var EnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull = &sEnrollmentFlagsV2_EnableKeyReuseOnNtTokenKeysetStorageFull
+
+var EnrollmentFlagsV3 = &sEnrollmentFlagsV3
+var EnrollmentFlagsV3_IncludeSymmetricAlgorithms = &sEnrollmentFlagsV3_IncludeSymmetricAlgorithms
+var EnrollmentFlagsV3_UserInteractionRequired = &sEnrollmentFlagsV3_UserInteractionRequired
+var EnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore = &sEnrollmentFlagsV3_RemoveInvalidCertificateFromPersonalStore
+var EnrollmentFlagsV3_NoSecurityExtension = &sEnrollmentFlagsV3_NoSecurityExtension
+var EnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull = &sEnrollmentFlagsV3_EnableKeyReuseOnNtTokenKeysetStorageFull
+
+var EnrollmentFlagsV4 = &sEnrollmentFlagsV4
+var EnrollmentFlagsV4_IncludeSymmetricAlgorithms = &sEnrollmentFlagsV4_IncludeSymmetricAlgorithms
+var EnrollmentFlagsV4_UserInteractionRequired = &sEnrollmentFlagsV4_UserInteractionRequired
+var EnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore = &sEnrollmentFlagsV4_RemoveInvalidCertificateFromPersonalStore
+var EnrollmentFlagsV4_NoSecurityExtension = &sEnrollmentFlagsV4_NoSecurityExtension
+var EnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull = &sEnrollmentFlagsV4_EnableKeyReuseOnNtTokenKeysetStorageFull
+
+var ExtensionsV2 = &sExtensionsV2
+var ExtensionsV2_KeyUsage = &sExtensionsV2_KeyUsage
+var ExtensionsV2_ApplicationPolicies = &sExtensionsV2_ApplicationPolicies
+
+var ExtensionsV3 = &sExtensionsV3
+var ExtensionsV3_KeyUsage = &sExtensionsV3_KeyUsage
+var ExtensionsV3_ApplicationPolicies = &sExtensionsV3_ApplicationPolicies
+
+var ExtensionsV4 = &sExtensionsV4
+var ExtensionsV4_KeyUsage = &sExtensionsV4_KeyUsage
+var ExtensionsV4_ApplicationPolicies = &sExtensionsV4_ApplicationPolicies
+
+var GeneralFlagsV2 = &sGeneralFlagsV2
+var GeneralFlagsV2_AutoEnrollment = &sGeneralFlagsV2_AutoEnrollment
+var GeneralFlagsV2_MachineType = &sGeneralFlagsV2_MachineType
+
+var GeneralFlagsV3 = &sGeneralFlagsV3
+var GeneralFlagsV3_AutoEnrollment = &sGeneralFlagsV3_AutoEnrollment
+var GeneralFlagsV3_MachineType = &sGeneralFlagsV3_MachineType
+
+var GeneralFlagsV4 = &sGeneralFlagsV4
+var GeneralFlagsV4_AutoEnrollment = &sGeneralFlagsV4_AutoEnrollment
+var GeneralFlagsV4_MachineType = &sGeneralFlagsV4_MachineType
+
+var _GroupSecurityIdentifier = &s_GroupSecurityIdentifier
+
+var HashAlgorithm = &sHashAlgorithm
+var HashAlgorithm_SHA256 = &sHashAlgorithm_SHA256
+var HashAlgorithm_SHA384 = &sHashAlgorithm_SHA384
+var HashAlgorithm_SHA512 = &sHashAlgorithm_SHA512
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var IpAddressType = &sIpAddressType
+var IpAddressType_IPV4 = &sIpAddressType_IPV4
+var IpAddressType_DUALSTACK = &sIpAddressType_DUALSTACK
+
+var KeySpec = &sKeySpec
+var KeySpec_KEY_EXCHANGE = &sKeySpec_KEY_EXCHANGE
+var KeySpec_SIGNATURE = &sKeySpec_SIGNATURE
+
+var KeyUsage = &sKeyUsage
+var KeyUsage_Critical = &sKeyUsage_Critical
+var KeyUsage_UsageFlags = &sKeyUsage_UsageFlags
+
+var KeyUsageFlags = &sKeyUsageFlags
+var KeyUsageFlags_DigitalSignature = &sKeyUsageFlags_DigitalSignature
+var KeyUsageFlags_NonRepudiation = &sKeyUsageFlags_NonRepudiation
+var KeyUsageFlags_KeyEncipherment = &sKeyUsageFlags_KeyEncipherment
+var KeyUsageFlags_DataEncipherment = &sKeyUsageFlags_DataEncipherment
+var KeyUsageFlags_KeyAgreement = &sKeyUsageFlags_KeyAgreement
+
+var KeyUsageProperty = &sKeyUsageProperty
+var KeyUsageProperty_PropertyType = &sKeyUsageProperty_PropertyType
+var KeyUsageProperty_PropertyFlags = &sKeyUsageProperty_PropertyFlags
+
+var KeyUsagePropertyFlags = &sKeyUsagePropertyFlags
+var KeyUsagePropertyFlags_Decrypt = &sKeyUsagePropertyFlags_Decrypt
+var KeyUsagePropertyFlags_KeyAgreement = &sKeyUsagePropertyFlags_KeyAgreement
+var KeyUsagePropertyFlags_Sign = &sKeyUsagePropertyFlags_Sign
+
+var KeyUsagePropertyType = &sKeyUsagePropertyType
+var KeyUsagePropertyType_ALL = &sKeyUsagePropertyType_ALL
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var PrivateKeyAlgorithm = &sPrivateKeyAlgorithm
+var PrivateKeyAlgorithm_RSA = &sPrivateKeyAlgorithm_RSA
+var PrivateKeyAlgorithm_ECDH_P256 = &sPrivateKeyAlgorithm_ECDH_P256
+var PrivateKeyAlgorithm_ECDH_P384 = &sPrivateKeyAlgorithm_ECDH_P384
+var PrivateKeyAlgorithm_ECDH_P521 = &sPrivateKeyAlgorithm_ECDH_P521
+
+var PrivateKeyAttributesV2 = &sPrivateKeyAttributesV2
+var PrivateKeyAttributesV2_MinimalKeyLength = &sPrivateKeyAttributesV2_MinimalKeyLength
+var PrivateKeyAttributesV2_KeySpec = &sPrivateKeyAttributesV2_KeySpec
+var PrivateKeyAttributesV2_CryptoProviders = &sPrivateKeyAttributesV2_CryptoProviders
+
+var PrivateKeyAttributesV3 = &sPrivateKeyAttributesV3
+var PrivateKeyAttributesV3_MinimalKeyLength = &sPrivateKeyAttributesV3_MinimalKeyLength
+var PrivateKeyAttributesV3_KeySpec = &sPrivateKeyAttributesV3_KeySpec
+var PrivateKeyAttributesV3_CryptoProviders = &sPrivateKeyAttributesV3_CryptoProviders
+var PrivateKeyAttributesV3_KeyUsageProperty = &sPrivateKeyAttributesV3_KeyUsageProperty
+var PrivateKeyAttributesV3_Algorithm = &sPrivateKeyAttributesV3_Algorithm
+
+var PrivateKeyAttributesV4 = &sPrivateKeyAttributesV4
+var PrivateKeyAttributesV4_MinimalKeyLength = &sPrivateKeyAttributesV4_MinimalKeyLength
+var PrivateKeyAttributesV4_KeySpec = &sPrivateKeyAttributesV4_KeySpec
+var PrivateKeyAttributesV4_CryptoProviders = &sPrivateKeyAttributesV4_CryptoProviders
+var PrivateKeyAttributesV4_KeyUsageProperty = &sPrivateKeyAttributesV4_KeyUsageProperty
+var PrivateKeyAttributesV4_Algorithm = &sPrivateKeyAttributesV4_Algorithm
+
+var PrivateKeyFlagsV2 = &sPrivateKeyFlagsV2
+var PrivateKeyFlagsV2_ExportableKey = &sPrivateKeyFlagsV2_ExportableKey
+var PrivateKeyFlagsV2_StrongKeyProtectionRequired = &sPrivateKeyFlagsV2_StrongKeyProtectionRequired
+var PrivateKeyFlagsV2_ClientVersion = &sPrivateKeyFlagsV2_ClientVersion
+
+var PrivateKeyFlagsV3 = &sPrivateKeyFlagsV3
+var PrivateKeyFlagsV3_ExportableKey = &sPrivateKeyFlagsV3_ExportableKey
+var PrivateKeyFlagsV3_StrongKeyProtectionRequired = &sPrivateKeyFlagsV3_StrongKeyProtectionRequired
+var PrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm = &sPrivateKeyFlagsV3_RequireAlternateSignatureAlgorithm
+var PrivateKeyFlagsV3_ClientVersion = &sPrivateKeyFlagsV3_ClientVersion
+
+var PrivateKeyFlagsV4 = &sPrivateKeyFlagsV4
+var PrivateKeyFlagsV4_ExportableKey = &sPrivateKeyFlagsV4_ExportableKey
+var PrivateKeyFlagsV4_StrongKeyProtectionRequired = &sPrivateKeyFlagsV4_StrongKeyProtectionRequired
+var PrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm = &sPrivateKeyFlagsV4_RequireAlternateSignatureAlgorithm
+var PrivateKeyFlagsV4_RequireSameKeyRenewal = &sPrivateKeyFlagsV4_RequireSameKeyRenewal
+var PrivateKeyFlagsV4_UseLegacyProvider = &sPrivateKeyFlagsV4_UseLegacyProvider
+var PrivateKeyFlagsV4_ClientVersion = &sPrivateKeyFlagsV4_ClientVersion
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIdList = &s_SecurityGroupIdList
+var _SecurityGroupIdList_member = &s_SecurityGroupIdList_member
+
+var ServicePrincipalName = &sServicePrincipalName
+var ServicePrincipalName_DirectoryRegistrationArn = &sServicePrincipalName_DirectoryRegistrationArn
+var ServicePrincipalName_ConnectorArn = &sServicePrincipalName_ConnectorArn
+var ServicePrincipalName_Status = &sServicePrincipalName_Status
+var ServicePrincipalName_StatusReason = &sServicePrincipalName_StatusReason
+var ServicePrincipalName_CreatedAt = &sServicePrincipalName_CreatedAt
+var ServicePrincipalName_UpdatedAt = &sServicePrincipalName_UpdatedAt
+
+var _ServicePrincipalNameList = &s_ServicePrincipalNameList
+var _ServicePrincipalNameList_member = &s_ServicePrincipalNameList_member
+
+var ServicePrincipalNameStatus = &sServicePrincipalNameStatus
+var ServicePrincipalNameStatus_CREATING = &sServicePrincipalNameStatus_CREATING
+var ServicePrincipalNameStatus_ACTIVE = &sServicePrincipalNameStatus_ACTIVE
+var ServicePrincipalNameStatus_DELETING = &sServicePrincipalNameStatus_DELETING
+var ServicePrincipalNameStatus_FAILED = &sServicePrincipalNameStatus_FAILED
+
+var ServicePrincipalNameStatusReason = &sServicePrincipalNameStatusReason
+var ServicePrincipalNameStatusReason_DIRECTORY_ACCESS_DENIED = &sServicePrincipalNameStatusReason_DIRECTORY_ACCESS_DENIED
+var ServicePrincipalNameStatusReason_DIRECTORY_NOT_REACHABLE = &sServicePrincipalNameStatusReason_DIRECTORY_NOT_REACHABLE
+var ServicePrincipalNameStatusReason_DIRECTORY_RESOURCE_NOT_FOUND = &sServicePrincipalNameStatusReason_DIRECTORY_RESOURCE_NOT_FOUND
+var ServicePrincipalNameStatusReason_SPN_EXISTS_ON_DIFFERENT_AD_OBJECT = &sServicePrincipalNameStatusReason_SPN_EXISTS_ON_DIFFERENT_AD_OBJECT
+var ServicePrincipalNameStatusReason_SPN_LIMIT_EXCEEDED = &sServicePrincipalNameStatusReason_SPN_LIMIT_EXCEEDED
+var ServicePrincipalNameStatusReason_INTERNAL_FAILURE = &sServicePrincipalNameStatusReason_INTERNAL_FAILURE
+
+var ServicePrincipalNameSummary = &sServicePrincipalNameSummary
+var ServicePrincipalNameSummary_DirectoryRegistrationArn = &sServicePrincipalNameSummary_DirectoryRegistrationArn
+var ServicePrincipalNameSummary_ConnectorArn = &sServicePrincipalNameSummary_ConnectorArn
+var ServicePrincipalNameSummary_Status = &sServicePrincipalNameSummary_Status
+var ServicePrincipalNameSummary_StatusReason = &sServicePrincipalNameSummary_StatusReason
+var ServicePrincipalNameSummary_CreatedAt = &sServicePrincipalNameSummary_CreatedAt
+var ServicePrincipalNameSummary_UpdatedAt = &sServicePrincipalNameSummary_UpdatedAt
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_ResourceId = &sServiceQuotaExceededException_ResourceId
+var ServiceQuotaExceededException_ResourceType = &sServiceQuotaExceededException_ResourceType
+var ServiceQuotaExceededException_ServiceCode = &sServiceQuotaExceededException_ServiceCode
+var ServiceQuotaExceededException_QuotaCode = &sServiceQuotaExceededException_QuotaCode
+
+var SubjectNameFlagsV2 = &sSubjectNameFlagsV2
+var SubjectNameFlagsV2_SanRequireDomainDns = &sSubjectNameFlagsV2_SanRequireDomainDns
+var SubjectNameFlagsV2_SanRequireSpn = &sSubjectNameFlagsV2_SanRequireSpn
+var SubjectNameFlagsV2_SanRequireDirectoryGuid = &sSubjectNameFlagsV2_SanRequireDirectoryGuid
+var SubjectNameFlagsV2_SanRequireUpn = &sSubjectNameFlagsV2_SanRequireUpn
+var SubjectNameFlagsV2_SanRequireEmail = &sSubjectNameFlagsV2_SanRequireEmail
+var SubjectNameFlagsV2_SanRequireDns = &sSubjectNameFlagsV2_SanRequireDns
+var SubjectNameFlagsV2_RequireDnsAsCn = &sSubjectNameFlagsV2_RequireDnsAsCn
+var SubjectNameFlagsV2_RequireEmail = &sSubjectNameFlagsV2_RequireEmail
+var SubjectNameFlagsV2_RequireCommonName = &sSubjectNameFlagsV2_RequireCommonName
+var SubjectNameFlagsV2_RequireDirectoryPath = &sSubjectNameFlagsV2_RequireDirectoryPath
+
+var SubjectNameFlagsV3 = &sSubjectNameFlagsV3
+var SubjectNameFlagsV3_SanRequireDomainDns = &sSubjectNameFlagsV3_SanRequireDomainDns
+var SubjectNameFlagsV3_SanRequireSpn = &sSubjectNameFlagsV3_SanRequireSpn
+var SubjectNameFlagsV3_SanRequireDirectoryGuid = &sSubjectNameFlagsV3_SanRequireDirectoryGuid
+var SubjectNameFlagsV3_SanRequireUpn = &sSubjectNameFlagsV3_SanRequireUpn
+var SubjectNameFlagsV3_SanRequireEmail = &sSubjectNameFlagsV3_SanRequireEmail
+var SubjectNameFlagsV3_SanRequireDns = &sSubjectNameFlagsV3_SanRequireDns
+var SubjectNameFlagsV3_RequireDnsAsCn = &sSubjectNameFlagsV3_RequireDnsAsCn
+var SubjectNameFlagsV3_RequireEmail = &sSubjectNameFlagsV3_RequireEmail
+var SubjectNameFlagsV3_RequireCommonName = &sSubjectNameFlagsV3_RequireCommonName
+var SubjectNameFlagsV3_RequireDirectoryPath = &sSubjectNameFlagsV3_RequireDirectoryPath
+
+var SubjectNameFlagsV4 = &sSubjectNameFlagsV4
+var SubjectNameFlagsV4_SanRequireDomainDns = &sSubjectNameFlagsV4_SanRequireDomainDns
+var SubjectNameFlagsV4_SanRequireSpn = &sSubjectNameFlagsV4_SanRequireSpn
+var SubjectNameFlagsV4_SanRequireDirectoryGuid = &sSubjectNameFlagsV4_SanRequireDirectoryGuid
+var SubjectNameFlagsV4_SanRequireUpn = &sSubjectNameFlagsV4_SanRequireUpn
+var SubjectNameFlagsV4_SanRequireEmail = &sSubjectNameFlagsV4_SanRequireEmail
+var SubjectNameFlagsV4_SanRequireDns = &sSubjectNameFlagsV4_SanRequireDns
+var SubjectNameFlagsV4_RequireDnsAsCn = &sSubjectNameFlagsV4_RequireDnsAsCn
+var SubjectNameFlagsV4_RequireEmail = &sSubjectNameFlagsV4_RequireEmail
+var SubjectNameFlagsV4_RequireCommonName = &sSubjectNameFlagsV4_RequireCommonName
+var SubjectNameFlagsV4_RequireDirectoryPath = &sSubjectNameFlagsV4_RequireDirectoryPath
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var Template = &sTemplate
+var Template_Arn = &sTemplate_Arn
+var Template_ConnectorArn = &sTemplate_ConnectorArn
+var Template_Definition = &sTemplate_Definition
+var Template_Name = &sTemplate_Name
+var Template_ObjectIdentifier = &sTemplate_ObjectIdentifier
+var Template_PolicySchema = &sTemplate_PolicySchema
+var Template_Status = &sTemplate_Status
+var Template_Revision = &sTemplate_Revision
+var Template_CreatedAt = &sTemplate_CreatedAt
+var Template_UpdatedAt = &sTemplate_UpdatedAt
+
+var _TemplateArn = &s_TemplateArn
+
+var TemplateDefinition = &sTemplateDefinition
+var TemplateDefinition_TemplateV2 = &sTemplateDefinition_TemplateV2
+var TemplateDefinition_TemplateV3 = &sTemplateDefinition_TemplateV3
+var TemplateDefinition_TemplateV4 = &sTemplateDefinition_TemplateV4
+
+var _TemplateList = &s_TemplateList
+var _TemplateList_member = &s_TemplateList_member
+
+var _TemplateName = &s_TemplateName
+
+var _TemplateNameList = &s_TemplateNameList
+var _TemplateNameList_member = &s_TemplateNameList_member
+
+var TemplateRevision = &sTemplateRevision
+var TemplateRevision_MajorRevision = &sTemplateRevision_MajorRevision
+var TemplateRevision_MinorRevision = &sTemplateRevision_MinorRevision
+
+var TemplateStatus = &sTemplateStatus
+var TemplateStatus_ACTIVE = &sTemplateStatus_ACTIVE
+var TemplateStatus_DELETING = &sTemplateStatus_DELETING
+
+var TemplateSummary = &sTemplateSummary
+var TemplateSummary_Arn = &sTemplateSummary_Arn
+var TemplateSummary_ConnectorArn = &sTemplateSummary_ConnectorArn
+var TemplateSummary_Definition = &sTemplateSummary_Definition
+var TemplateSummary_Name = &sTemplateSummary_Name
+var TemplateSummary_ObjectIdentifier = &sTemplateSummary_ObjectIdentifier
+var TemplateSummary_PolicySchema = &sTemplateSummary_PolicySchema
+var TemplateSummary_Status = &sTemplateSummary_Status
+var TemplateSummary_Revision = &sTemplateSummary_Revision
+var TemplateSummary_CreatedAt = &sTemplateSummary_CreatedAt
+var TemplateSummary_UpdatedAt = &sTemplateSummary_UpdatedAt
+
+var TemplateV2 = &sTemplateV2
+var TemplateV2_CertificateValidity = &sTemplateV2_CertificateValidity
+var TemplateV2_SupersededTemplates = &sTemplateV2_SupersededTemplates
+var TemplateV2_PrivateKeyAttributes = &sTemplateV2_PrivateKeyAttributes
+var TemplateV2_PrivateKeyFlags = &sTemplateV2_PrivateKeyFlags
+var TemplateV2_EnrollmentFlags = &sTemplateV2_EnrollmentFlags
+var TemplateV2_SubjectNameFlags = &sTemplateV2_SubjectNameFlags
+var TemplateV2_GeneralFlags = &sTemplateV2_GeneralFlags
+var TemplateV2_Extensions = &sTemplateV2_Extensions
+
+var TemplateV3 = &sTemplateV3
+var TemplateV3_CertificateValidity = &sTemplateV3_CertificateValidity
+var TemplateV3_SupersededTemplates = &sTemplateV3_SupersededTemplates
+var TemplateV3_PrivateKeyAttributes = &sTemplateV3_PrivateKeyAttributes
+var TemplateV3_PrivateKeyFlags = &sTemplateV3_PrivateKeyFlags
+var TemplateV3_EnrollmentFlags = &sTemplateV3_EnrollmentFlags
+var TemplateV3_SubjectNameFlags = &sTemplateV3_SubjectNameFlags
+var TemplateV3_GeneralFlags = &sTemplateV3_GeneralFlags
+var TemplateV3_HashAlgorithm = &sTemplateV3_HashAlgorithm
+var TemplateV3_Extensions = &sTemplateV3_Extensions
+
+var TemplateV4 = &sTemplateV4
+var TemplateV4_CertificateValidity = &sTemplateV4_CertificateValidity
+var TemplateV4_SupersededTemplates = &sTemplateV4_SupersededTemplates
+var TemplateV4_PrivateKeyAttributes = &sTemplateV4_PrivateKeyAttributes
+var TemplateV4_PrivateKeyFlags = &sTemplateV4_PrivateKeyFlags
+var TemplateV4_EnrollmentFlags = &sTemplateV4_EnrollmentFlags
+var TemplateV4_SubjectNameFlags = &sTemplateV4_SubjectNameFlags
+var TemplateV4_GeneralFlags = &sTemplateV4_GeneralFlags
+var TemplateV4_HashAlgorithm = &sTemplateV4_HashAlgorithm
+var TemplateV4_Extensions = &sTemplateV4_Extensions
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+var ThrottlingException_ServiceCode = &sThrottlingException_ServiceCode
+var ThrottlingException_QuotaCode = &sThrottlingException_QuotaCode
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Reason = &sValidationException_Reason
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_INVALID_CA_SUBJECT = &sValidationExceptionReason_INVALID_CA_SUBJECT
+var ValidationExceptionReason_INVALID_PERMISSION = &sValidationExceptionReason_INVALID_PERMISSION
+var ValidationExceptionReason_INVALID_STATE = &sValidationExceptionReason_INVALID_STATE
+var ValidationExceptionReason_MISMATCHED_CONNECTOR = &sValidationExceptionReason_MISMATCHED_CONNECTOR
+var ValidationExceptionReason_MISMATCHED_VPC = &sValidationExceptionReason_MISMATCHED_VPC
+var ValidationExceptionReason_NO_CLIENT_TOKEN = &sValidationExceptionReason_NO_CLIENT_TOKEN
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var ValidityPeriod = &sValidityPeriod
+var ValidityPeriod_PeriodType = &sValidityPeriod_PeriodType
+var ValidityPeriod_Period = &sValidityPeriod_Period
+
+var ValidityPeriodType = &sValidityPeriodType
+var ValidityPeriodType_HOURS = &sValidityPeriodType_HOURS
+var ValidityPeriodType_DAYS = &sValidityPeriodType_DAYS
+var ValidityPeriodType_WEEKS = &sValidityPeriodType_WEEKS
+var ValidityPeriodType_MONTHS = &sValidityPeriodType_MONTHS
+var ValidityPeriodType_YEARS = &sValidityPeriodType_YEARS
+
+var VpcInformation = &sVpcInformation
+var VpcInformation_IpAddressType = &sVpcInformation_IpAddressType
+var VpcInformation_SecurityGroupIds = &sVpcInformation_SecurityGroupIds
+
+var CreateConnectorRequest = &sCreateConnectorRequest
+var CreateConnectorRequest_DirectoryId = &sCreateConnectorRequest_DirectoryId
+var CreateConnectorRequest_CertificateAuthorityArn = &sCreateConnectorRequest_CertificateAuthorityArn
+var CreateConnectorRequest_VpcInformation = &sCreateConnectorRequest_VpcInformation
+var CreateConnectorRequest_ClientToken = &sCreateConnectorRequest_ClientToken
+var CreateConnectorRequest_Tags = &sCreateConnectorRequest_Tags
+
+var CreateConnectorResponse = &sCreateConnectorResponse
+var CreateConnectorResponse_ConnectorArn = &sCreateConnectorResponse_ConnectorArn
+
+var CreateDirectoryRegistrationRequest = &sCreateDirectoryRegistrationRequest
+var CreateDirectoryRegistrationRequest_DirectoryId = &sCreateDirectoryRegistrationRequest_DirectoryId
+var CreateDirectoryRegistrationRequest_ClientToken = &sCreateDirectoryRegistrationRequest_ClientToken
+var CreateDirectoryRegistrationRequest_Tags = &sCreateDirectoryRegistrationRequest_Tags
+
+var CreateDirectoryRegistrationResponse = &sCreateDirectoryRegistrationResponse
+var CreateDirectoryRegistrationResponse_DirectoryRegistrationArn = &sCreateDirectoryRegistrationResponse_DirectoryRegistrationArn
+
+var CreateServicePrincipalNameRequest = &sCreateServicePrincipalNameRequest
+var CreateServicePrincipalNameRequest_DirectoryRegistrationArn = &sCreateServicePrincipalNameRequest_DirectoryRegistrationArn
+var CreateServicePrincipalNameRequest_ConnectorArn = &sCreateServicePrincipalNameRequest_ConnectorArn
+var CreateServicePrincipalNameRequest_ClientToken = &sCreateServicePrincipalNameRequest_ClientToken
+
+var CreateTemplateGroupAccessControlEntryRequest = &sCreateTemplateGroupAccessControlEntryRequest
+var CreateTemplateGroupAccessControlEntryRequest_TemplateArn = &sCreateTemplateGroupAccessControlEntryRequest_TemplateArn
+var CreateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = &sCreateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier
+var CreateTemplateGroupAccessControlEntryRequest_GroupDisplayName = &sCreateTemplateGroupAccessControlEntryRequest_GroupDisplayName
+var CreateTemplateGroupAccessControlEntryRequest_AccessRights = &sCreateTemplateGroupAccessControlEntryRequest_AccessRights
+var CreateTemplateGroupAccessControlEntryRequest_ClientToken = &sCreateTemplateGroupAccessControlEntryRequest_ClientToken
+
+var CreateTemplateRequest = &sCreateTemplateRequest
+var CreateTemplateRequest_ConnectorArn = &sCreateTemplateRequest_ConnectorArn
+var CreateTemplateRequest_Name = &sCreateTemplateRequest_Name
+var CreateTemplateRequest_Definition = &sCreateTemplateRequest_Definition
+var CreateTemplateRequest_ClientToken = &sCreateTemplateRequest_ClientToken
+var CreateTemplateRequest_Tags = &sCreateTemplateRequest_Tags
+
+var CreateTemplateResponse = &sCreateTemplateResponse
+var CreateTemplateResponse_TemplateArn = &sCreateTemplateResponse_TemplateArn
+
+var DeleteConnectorRequest = &sDeleteConnectorRequest
+var DeleteConnectorRequest_ConnectorArn = &sDeleteConnectorRequest_ConnectorArn
+
+var DeleteDirectoryRegistrationRequest = &sDeleteDirectoryRegistrationRequest
+var DeleteDirectoryRegistrationRequest_DirectoryRegistrationArn = &sDeleteDirectoryRegistrationRequest_DirectoryRegistrationArn
+
+var DeleteServicePrincipalNameRequest = &sDeleteServicePrincipalNameRequest
+var DeleteServicePrincipalNameRequest_DirectoryRegistrationArn = &sDeleteServicePrincipalNameRequest_DirectoryRegistrationArn
+var DeleteServicePrincipalNameRequest_ConnectorArn = &sDeleteServicePrincipalNameRequest_ConnectorArn
+
+var DeleteTemplateGroupAccessControlEntryRequest = &sDeleteTemplateGroupAccessControlEntryRequest
+var DeleteTemplateGroupAccessControlEntryRequest_TemplateArn = &sDeleteTemplateGroupAccessControlEntryRequest_TemplateArn
+var DeleteTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = &sDeleteTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier
+
+var DeleteTemplateRequest = &sDeleteTemplateRequest
+var DeleteTemplateRequest_TemplateArn = &sDeleteTemplateRequest_TemplateArn
+
+var GetConnectorRequest = &sGetConnectorRequest
+var GetConnectorRequest_ConnectorArn = &sGetConnectorRequest_ConnectorArn
+
+var GetConnectorResponse = &sGetConnectorResponse
+var GetConnectorResponse_Connector = &sGetConnectorResponse_Connector
+
+var GetDirectoryRegistrationRequest = &sGetDirectoryRegistrationRequest
+var GetDirectoryRegistrationRequest_DirectoryRegistrationArn = &sGetDirectoryRegistrationRequest_DirectoryRegistrationArn
+
+var GetDirectoryRegistrationResponse = &sGetDirectoryRegistrationResponse
+var GetDirectoryRegistrationResponse_DirectoryRegistration = &sGetDirectoryRegistrationResponse_DirectoryRegistration
+
+var GetServicePrincipalNameRequest = &sGetServicePrincipalNameRequest
+var GetServicePrincipalNameRequest_DirectoryRegistrationArn = &sGetServicePrincipalNameRequest_DirectoryRegistrationArn
+var GetServicePrincipalNameRequest_ConnectorArn = &sGetServicePrincipalNameRequest_ConnectorArn
+
+var GetServicePrincipalNameResponse = &sGetServicePrincipalNameResponse
+var GetServicePrincipalNameResponse_ServicePrincipalName = &sGetServicePrincipalNameResponse_ServicePrincipalName
+
+var GetTemplateGroupAccessControlEntryRequest = &sGetTemplateGroupAccessControlEntryRequest
+var GetTemplateGroupAccessControlEntryRequest_TemplateArn = &sGetTemplateGroupAccessControlEntryRequest_TemplateArn
+var GetTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = &sGetTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier
+
+var GetTemplateGroupAccessControlEntryResponse = &sGetTemplateGroupAccessControlEntryResponse
+var GetTemplateGroupAccessControlEntryResponse_AccessControlEntry = &sGetTemplateGroupAccessControlEntryResponse_AccessControlEntry
+
+var GetTemplateRequest = &sGetTemplateRequest
+var GetTemplateRequest_TemplateArn = &sGetTemplateRequest_TemplateArn
+
+var GetTemplateResponse = &sGetTemplateResponse
+var GetTemplateResponse_Template = &sGetTemplateResponse_Template
+
+var ListConnectorsRequest = &sListConnectorsRequest
+var ListConnectorsRequest_MaxResults = &sListConnectorsRequest_MaxResults
+var ListConnectorsRequest_NextToken = &sListConnectorsRequest_NextToken
+
+var ListConnectorsResponse = &sListConnectorsResponse
+var ListConnectorsResponse_Connectors = &sListConnectorsResponse_Connectors
+var ListConnectorsResponse_NextToken = &sListConnectorsResponse_NextToken
+
+var ListDirectoryRegistrationsRequest = &sListDirectoryRegistrationsRequest
+var ListDirectoryRegistrationsRequest_MaxResults = &sListDirectoryRegistrationsRequest_MaxResults
+var ListDirectoryRegistrationsRequest_NextToken = &sListDirectoryRegistrationsRequest_NextToken
+
+var ListDirectoryRegistrationsResponse = &sListDirectoryRegistrationsResponse
+var ListDirectoryRegistrationsResponse_DirectoryRegistrations = &sListDirectoryRegistrationsResponse_DirectoryRegistrations
+var ListDirectoryRegistrationsResponse_NextToken = &sListDirectoryRegistrationsResponse_NextToken
+
+var ListServicePrincipalNamesRequest = &sListServicePrincipalNamesRequest
+var ListServicePrincipalNamesRequest_MaxResults = &sListServicePrincipalNamesRequest_MaxResults
+var ListServicePrincipalNamesRequest_NextToken = &sListServicePrincipalNamesRequest_NextToken
+var ListServicePrincipalNamesRequest_DirectoryRegistrationArn = &sListServicePrincipalNamesRequest_DirectoryRegistrationArn
+
+var ListServicePrincipalNamesResponse = &sListServicePrincipalNamesResponse
+var ListServicePrincipalNamesResponse_ServicePrincipalNames = &sListServicePrincipalNamesResponse_ServicePrincipalNames
+var ListServicePrincipalNamesResponse_NextToken = &sListServicePrincipalNamesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListTemplateGroupAccessControlEntriesRequest = &sListTemplateGroupAccessControlEntriesRequest
+var ListTemplateGroupAccessControlEntriesRequest_MaxResults = &sListTemplateGroupAccessControlEntriesRequest_MaxResults
+var ListTemplateGroupAccessControlEntriesRequest_NextToken = &sListTemplateGroupAccessControlEntriesRequest_NextToken
+var ListTemplateGroupAccessControlEntriesRequest_TemplateArn = &sListTemplateGroupAccessControlEntriesRequest_TemplateArn
+
+var ListTemplateGroupAccessControlEntriesResponse = &sListTemplateGroupAccessControlEntriesResponse
+var ListTemplateGroupAccessControlEntriesResponse_AccessControlEntries = &sListTemplateGroupAccessControlEntriesResponse_AccessControlEntries
+var ListTemplateGroupAccessControlEntriesResponse_NextToken = &sListTemplateGroupAccessControlEntriesResponse_NextToken
+
+var ListTemplatesRequest = &sListTemplatesRequest
+var ListTemplatesRequest_MaxResults = &sListTemplatesRequest_MaxResults
+var ListTemplatesRequest_NextToken = &sListTemplatesRequest_NextToken
+var ListTemplatesRequest_ConnectorArn = &sListTemplatesRequest_ConnectorArn
+
+var ListTemplatesResponse = &sListTemplatesResponse
+var ListTemplatesResponse_Templates = &sListTemplatesResponse_Templates
+var ListTemplatesResponse_NextToken = &sListTemplatesResponse_NextToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateTemplateGroupAccessControlEntryRequest = &sUpdateTemplateGroupAccessControlEntryRequest
+var UpdateTemplateGroupAccessControlEntryRequest_TemplateArn = &sUpdateTemplateGroupAccessControlEntryRequest_TemplateArn
+var UpdateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier = &sUpdateTemplateGroupAccessControlEntryRequest_GroupSecurityIdentifier
+var UpdateTemplateGroupAccessControlEntryRequest_GroupDisplayName = &sUpdateTemplateGroupAccessControlEntryRequest_GroupDisplayName
+var UpdateTemplateGroupAccessControlEntryRequest_AccessRights = &sUpdateTemplateGroupAccessControlEntryRequest_AccessRights
+
+var UpdateTemplateRequest = &sUpdateTemplateRequest
+var UpdateTemplateRequest_TemplateArn = &sUpdateTemplateRequest_TemplateArn
+var UpdateTemplateRequest_Definition = &sUpdateTemplateRequest_Definition
+var UpdateTemplateRequest_ReenrollAllCertificateHolders = &sUpdateTemplateRequest_ReenrollAllCertificateHolders
+
+var PcaConnectorAd = &smithy.ServiceSchema{Schema: &s_PcaConnectorAd, Version: "2018-05-10"}

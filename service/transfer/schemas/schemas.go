@@ -4,5670 +4,4092 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateAccess",
-}, smithy.ShapeTypeOperation, 0)
+var (
+	iCreateAccess                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateAccess"}
+	iCreateAgreement                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateAgreement"}
+	iCreateConnector                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateConnector"}
+	iCreateProfile                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateProfile"}
+	iCreateServer                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateServer"}
+	iCreateUser                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateUser"}
+	iCreateWebApp                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateWebApp"}
+	iCreateWorkflow                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateWorkflow"}
+	iDeleteAccess                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteAccess"}
+	iDeleteAgreement                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteAgreement"}
+	iDeleteCertificate                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteCertificate"}
+	iDeleteConnector                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteConnector"}
+	iDeleteHostKey                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteHostKey"}
+	iDeleteProfile                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteProfile"}
+	iDeleteServer                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteServer"}
+	iDeleteSshPublicKey                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteSshPublicKey"}
+	iDeleteUser                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteUser"}
+	iDeleteWebApp                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteWebApp"}
+	iDeleteWebAppCustomization                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteWebAppCustomization"}
+	iDeleteWorkflow                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteWorkflow"}
+	iDescribeAccess                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeAccess"}
+	iDescribeAgreement                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeAgreement"}
+	iDescribeCertificate                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeCertificate"}
+	iDescribeConnector                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeConnector"}
+	iDescribeExecution                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeExecution"}
+	iDescribeHostKey                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeHostKey"}
+	iDescribeProfile                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeProfile"}
+	iDescribeSecurityPolicy                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeSecurityPolicy"}
+	iDescribeServer                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeServer"}
+	iDescribeUser                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeUser"}
+	iDescribeWebApp                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWebApp"}
+	iDescribeWebAppCustomization              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWebAppCustomization"}
+	iDescribeWorkflow                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWorkflow"}
+	iImportCertificate                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportCertificate"}
+	iImportHostKey                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportHostKey"}
+	iImportSshPublicKey                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportSshPublicKey"}
+	iListAccesses                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListAccesses"}
+	iListAgreements                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListAgreements"}
+	iListCertificates                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListCertificates"}
+	iListConnectors                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListConnectors"}
+	iListExecutions                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListExecutions"}
+	iListFileTransferResults                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListFileTransferResults"}
+	iListHostKeys                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListHostKeys"}
+	iListProfiles                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListProfiles"}
+	iListSecurityPolicies                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListSecurityPolicies"}
+	iListServers                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListServers"}
+	iListTagsForResource                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListTagsForResource"}
+	iListUsers                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListUsers"}
+	iListWebApps                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListWebApps"}
+	iListWorkflows                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListWorkflows"}
+	iSendWorkflowStepState                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SendWorkflowStepState"}
+	iStartDirectoryListing                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartDirectoryListing"}
+	iStartFileTransfer                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartFileTransfer"}
+	iStartRemoteDelete                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartRemoteDelete"}
+	iStartRemoteMove                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartRemoteMove"}
+	iStartServer                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartServer"}
+	iStopServer                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StopServer"}
+	iTagResource                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TagResource"}
+	iTestConnection                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TestConnection"}
+	iTestIdentityProvider                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TestIdentityProvider"}
+	iUntagResource                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UntagResource"}
+	iUpdateAccess                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateAccess"}
+	iUpdateAgreement                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateAgreement"}
+	iUpdateCertificate                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateCertificate"}
+	iUpdateConnector                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateConnector"}
+	iUpdateHostKey                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateHostKey"}
+	iUpdateProfile                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateProfile"}
+	iUpdateServer                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateServer"}
+	iUpdateUser                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateUser"}
+	iUpdateWebApp                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebApp"}
+	iUpdateWebAppCustomization                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppCustomization"}
+	i_TransferService                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TransferService"}
+	iAccessDeniedException                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "AccessDeniedException"}
+	i_AddressAllocationId                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "AddressAllocationId"}
+	i_AddressAllocationIds                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "AddressAllocationIds"}
+	i_AgreementId                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "AgreementId"}
+	iAgreementStatusType                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "AgreementStatusType"}
+	i_Arn                                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Arn"}
+	iAs2AsyncMdnConnectorConfig               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "As2AsyncMdnConnectorConfig"}
+	i_As2AsyncMdnServerIds                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "As2AsyncMdnServerIds"}
+	iAs2ConnectorConfig                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "As2ConnectorConfig"}
+	i_As2ConnectorSecretId                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "As2ConnectorSecretId"}
+	i_As2Id                                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "As2Id"}
+	iAs2Transport                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "As2Transport"}
+	i_As2Transports                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "As2Transports"}
+	i_CallbackToken                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CallbackToken"}
+	i_CertDate                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertDate"}
+	i_Certificate                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Certificate"}
+	i_CertificateBodyType                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertificateBodyType"}
+	i_CertificateChainType                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertificateChainType"}
+	i_CertificateId                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertificateId"}
+	i_CertificateIds                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertificateIds"}
+	iCertificateStatusType                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertificateStatusType"}
+	iCertificateType                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertificateType"}
+	iCertificateUsageType                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertificateUsageType"}
+	i_CertSerial                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CertSerial"}
+	iCommunicationMode                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CommunicationMode"}
+	iCompressionEnum                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CompressionEnum"}
+	iConflictException                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConflictException"}
+	iConnectorEgressConfig                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorEgressConfig"}
+	iConnectorEgressType                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorEgressType"}
+	i_ConnectorErrorMessage                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorErrorMessage"}
+	iConnectorFileTransferResult              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorFileTransferResult"}
+	i_ConnectorFileTransferResults            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorFileTransferResults"}
+	i_ConnectorId                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorId"}
+	i_ConnectorSecurityPolicyName             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorSecurityPolicyName"}
+	iConnectorsIpAddressType                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorsIpAddressType"}
+	iConnectorStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorStatus"}
+	iConnectorVpcLatticeEgressConfig          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ConnectorVpcLatticeEgressConfig"}
+	iCopyStepDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CopyStepDetails"}
+	iCustomDirectoriesType                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomDirectoriesType"}
+	iCustomHttpHeader                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomHttpHeader"}
+	i_CustomHttpHeaderKeyType                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomHttpHeaderKeyType"}
+	i_CustomHttpHeaders                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomHttpHeaders"}
+	i_CustomHttpHeaderValueType               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomHttpHeaderValueType"}
+	iCustomStepDetails                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomStepDetails"}
+	iCustomStepStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomStepStatus"}
+	i_CustomStepTarget                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomStepTarget"}
+	i_CustomStepTimeoutSeconds                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CustomStepTimeoutSeconds"}
+	i_DateImported                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DateImported"}
+	iDecryptStepDetails                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DecryptStepDetails"}
+	i_DeleteId                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteId"}
+	iDeleteStepDetails                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteStepDetails"}
+	iDescribedAccess                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedAccess"}
+	iDescribedAgreement                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedAgreement"}
+	iDescribedCertificate                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedCertificate"}
+	iDescribedConnector                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedConnector"}
+	iDescribedConnectorEgressConfig           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedConnectorEgressConfig"}
+	iDescribedConnectorVpcLatticeEgressConfig = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedConnectorVpcLatticeEgressConfig"}
+	iDescribedExecution                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedExecution"}
+	iDescribedHostKey                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedHostKey"}
+	iDescribedIdentityCenterConfig            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedIdentityCenterConfig"}
+	iDescribedProfile                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedProfile"}
+	iDescribedSecurityPolicy                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedSecurityPolicy"}
+	iDescribedServer                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedServer"}
+	iDescribedUser                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedUser"}
+	iDescribedWebApp                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedWebApp"}
+	iDescribedWebAppCustomization             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedWebAppCustomization"}
+	iDescribedWebAppEndpointDetails           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedWebAppEndpointDetails"}
+	iDescribedWebAppIdentityProviderDetails   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedWebAppIdentityProviderDetails"}
+	iDescribedWebAppVpcConfig                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedWebAppVpcConfig"}
+	iDescribedWorkflow                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribedWorkflow"}
+	i_Description                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Description"}
+	i_DirectoryId                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DirectoryId"}
+	iDirectoryListingOptimization             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DirectoryListingOptimization"}
+	iDomain                                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Domain"}
+	iEfsFileLocation                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EfsFileLocation"}
+	i_EfsFileSystemId                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EfsFileSystemId"}
+	i_EfsPath                                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EfsPath"}
+	iEncryptionAlg                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EncryptionAlg"}
+	iEncryptionType                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EncryptionType"}
+	iEndpointDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EndpointDetails"}
+	iEndpointType                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EndpointType"}
+	iEnforceMessageSigningType                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "EnforceMessageSigningType"}
+	iExecutionError                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionError"}
+	i_ExecutionErrorMessage                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionErrorMessage"}
+	iExecutionErrorType                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionErrorType"}
+	i_ExecutionId                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionId"}
+	iExecutionResults                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionResults"}
+	iExecutionStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionStatus"}
+	iExecutionStepResult                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionStepResult"}
+	i_ExecutionStepResults                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExecutionStepResults"}
+	i_ExternalId                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ExternalId"}
+	i_FailureCode                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "FailureCode"}
+	iFileLocation                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "FileLocation"}
+	i_FilePath                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "FilePath"}
+	i_FilePaths                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "FilePaths"}
+	i_Fips                                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Fips"}
+	i_Function                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Function"}
+	i_HomeDirectory                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HomeDirectory"}
+	iHomeDirectoryMapEntry                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HomeDirectoryMapEntry"}
+	i_HomeDirectoryMappings                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HomeDirectoryMappings"}
+	iHomeDirectoryType                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HomeDirectoryType"}
+	i_HostKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HostKey"}
+	i_HostKeyDescription                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HostKeyDescription"}
+	i_HostKeyFingerprint                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HostKeyFingerprint"}
+	i_HostKeyId                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HostKeyId"}
+	iHostKeyStorageType                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HostKeyStorageType"}
+	i_HostKeyType                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "HostKeyType"}
+	i_IdentityCenterApplicationArn            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "IdentityCenterApplicationArn"}
+	iIdentityCenterConfig                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "IdentityCenterConfig"}
+	i_IdentityCenterInstanceArn               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "IdentityCenterInstanceArn"}
+	iIdentityProviderDetails                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "IdentityProviderDetails"}
+	iIdentityProviderType                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "IdentityProviderType"}
+	iInputFileLocation                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "InputFileLocation"}
+	iInternalServiceError                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "InternalServiceError"}
+	iInvalidNextTokenException                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "InvalidNextTokenException"}
+	iInvalidRequestException                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "InvalidRequestException"}
+	iIpAddressType                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "IpAddressType"}
+	i_KmsKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "KmsKey"}
+	iListedAccess                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedAccess"}
+	i_ListedAccesses                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedAccesses"}
+	iListedAgreement                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedAgreement"}
+	i_ListedAgreements                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedAgreements"}
+	iListedCertificate                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedCertificate"}
+	i_ListedCertificates                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedCertificates"}
+	iListedConnector                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedConnector"}
+	i_ListedConnectors                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedConnectors"}
+	iListedExecution                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedExecution"}
+	i_ListedExecutions                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedExecutions"}
+	iListedHostKey                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedHostKey"}
+	i_ListedHostKeys                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedHostKeys"}
+	iListedProfile                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedProfile"}
+	i_ListedProfiles                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedProfiles"}
+	iListedServer                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedServer"}
+	i_ListedServers                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedServers"}
+	iListedUser                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedUser"}
+	i_ListedUsers                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedUsers"}
+	iListedWebApp                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedWebApp"}
+	i_ListedWebApps                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedWebApps"}
+	iListedWorkflow                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedWorkflow"}
+	i_ListedWorkflows                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListedWorkflows"}
+	i_ListingId                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListingId"}
+	iLoggingConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "LoggingConfiguration"}
+	i_LogGroupName                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "LogGroupName"}
+	i_MapEntry                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MapEntry"}
+	i_MapTarget                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MapTarget"}
+	iMapType                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MapType"}
+	i_MaxConcurrentConnections                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MaxConcurrentConnections"}
+	i_MaxItems                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MaxItems"}
+	i_MaxResults                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MaxResults"}
+	iMdnResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MdnResponse"}
+	iMdnSigningAlg                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MdnSigningAlg"}
+	i_Message                                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Message"}
+	i_MessageSubject                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MessageSubject"}
+	i_MoveId                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "MoveId"}
+	i_NextToken                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "NextToken"}
+	i_NullableRole                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "NullableRole"}
+	i_OnPartialUploadWorkflowDetails          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "OnPartialUploadWorkflowDetails"}
+	i_OnUploadWorkflowDetails                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "OnUploadWorkflowDetails"}
+	i_OutputFileName                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "OutputFileName"}
+	iOverwriteExisting                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "OverwriteExisting"}
+	i_PassiveIp                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PassiveIp"}
+	i_Policy                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Policy"}
+	i_PosixId                                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PosixId"}
+	iPosixProfile                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PosixProfile"}
+	i_PostAuthenticationLoginBanner           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PostAuthenticationLoginBanner"}
+	i_PreAuthenticationLoginBanner            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PreAuthenticationLoginBanner"}
+	iPreserveContentType                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PreserveContentType"}
+	iPreserveFilenameType                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PreserveFilenameType"}
+	i_PrivateKeyType                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "PrivateKeyType"}
+	i_ProfileId                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ProfileId"}
+	iProfileType                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ProfileType"}
+	iProtocol                                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Protocol"}
+	iProtocolDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ProtocolDetails"}
+	i_Protocols                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Protocols"}
+	iProxyConfig                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ProxyConfig"}
+	iProxyMode                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ProxyMode"}
+	i_Resource                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Resource"}
+	iResourceExistsException                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ResourceExistsException"}
+	iResourceNotFoundException                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ResourceNotFoundException"}
+	i_ResourceType                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ResourceType"}
+	i_Response                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Response"}
+	i_RetryAfterSeconds                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "RetryAfterSeconds"}
+	i_Role                                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Role"}
+	i_S3Bucket                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3Bucket"}
+	i_S3Etag                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3Etag"}
+	iS3FileLocation                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3FileLocation"}
+	iS3InputFileLocation                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3InputFileLocation"}
+	i_S3Key                                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3Key"}
+	iS3StorageOptions                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3StorageOptions"}
+	iS3Tag                                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3Tag"}
+	i_S3TagKey                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3TagKey"}
+	i_S3Tags                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3Tags"}
+	i_S3TagValue                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3TagValue"}
+	i_S3VersionId                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "S3VersionId"}
+	i_SecondaryGids                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecondaryGids"}
+	i_SecretId                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecretId"}
+	i_SecretVersionStage                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecretVersionStage"}
+	i_SecretVersionStageList                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecretVersionStageList"}
+	i_SecurityGroupId                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityGroupIds"}
+	i_SecurityPolicyName                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityPolicyName"}
+	i_SecurityPolicyNames                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityPolicyNames"}
+	i_SecurityPolicyOption                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityPolicyOption"}
+	i_SecurityPolicyOptions                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityPolicyOptions"}
+	iSecurityPolicyProtocol                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityPolicyProtocol"}
+	i_SecurityPolicyProtocols                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityPolicyProtocols"}
+	iSecurityPolicyResourceType               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SecurityPolicyResourceType"}
+	i_ServerId                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ServerId"}
+	i_ServiceErrorMessage                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ServiceErrorMessage"}
+	i_ServiceManagedEgressIpAddress           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ServiceManagedEgressIpAddress"}
+	i_ServiceManagedEgressIpAddresses         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ServiceManagedEgressIpAddresses"}
+	iServiceMetadata                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ServiceMetadata"}
+	iServiceUnavailableException              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ServiceUnavailableException"}
+	i_SessionId                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SessionId"}
+	iSetStatOption                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SetStatOption"}
+	iSftpAuthenticationMethods                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpAuthenticationMethods"}
+	iSftpConnectorConfig                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpConnectorConfig"}
+	iSftpConnectorConnectionDetails           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpConnectorConnectionDetails"}
+	i_SftpConnectorHostKey                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpConnectorHostKey"}
+	i_SftpConnectorTrustedHostKey             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpConnectorTrustedHostKey"}
+	i_SftpConnectorTrustedHostKeyList         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpConnectorTrustedHostKeyList"}
+	i_SftpPort                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpPort"}
+	i_SftpPorts                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpPorts"}
+	iSftpPortWithOptions                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SftpPortWithOptions"}
+	iSigningAlg                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SigningAlg"}
+	i_SourceFileLocation                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SourceFileLocation"}
+	i_SourceIp                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SourceIp"}
+	iSshPublicKey                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SshPublicKey"}
+	i_SshPublicKeyBody                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SshPublicKeyBody"}
+	i_SshPublicKeyCount                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SshPublicKeyCount"}
+	i_SshPublicKeyId                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SshPublicKeyId"}
+	i_SshPublicKeys                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SshPublicKeys"}
+	iState                                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "State"}
+	i_Status                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Status"}
+	i_StatusCode                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StatusCode"}
+	i_StepResultOutputsJson                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StepResultOutputsJson"}
+	i_StructuredLogDestinations               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StructuredLogDestinations"}
+	i_SubnetId                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SubnetId"}
+	i_SubnetIds                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SubnetIds"}
+	iTag                                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Tag"}
+	i_TagKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TagKey"}
+	i_TagKeys                                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TagKeys"}
+	i_Tags                                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Tags"}
+	iTagStepDetails                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TagStepDetails"}
+	i_TagValue                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TagValue"}
+	iThrottlingException                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ThrottlingException"}
+	iTlsSessionResumptionMode                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TlsSessionResumptionMode"}
+	i_TransferId                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TransferId"}
+	iTransferTableStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TransferTableStatus"}
+	iUpdateConnectorEgressConfig              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateConnectorEgressConfig"}
+	iUpdateConnectorVpcLatticeEgressConfig    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateConnectorVpcLatticeEgressConfig"}
+	iUpdateWebAppEndpointDetails              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppEndpointDetails"}
+	iUpdateWebAppIdentityCenterConfig         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppIdentityCenterConfig"}
+	iUpdateWebAppIdentityProviderDetails      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppIdentityProviderDetails"}
+	iUpdateWebAppVpcConfig                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppVpcConfig"}
+	i_Url                                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "Url"}
+	i_UserCount                               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UserCount"}
+	iUserDetails                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UserDetails"}
+	i_UserName                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UserName"}
+	i_UserPassword                            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UserPassword"}
+	i_VpcEndpointId                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "VpcEndpointId"}
+	i_VpcId                                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "VpcId"}
+	i_VpcLatticeResourceConfigurationArn      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "VpcLatticeResourceConfigurationArn"}
+	i_WebAppAccessEndpoint                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppAccessEndpoint"}
+	i_WebAppEndpoint                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppEndpoint"}
+	iWebAppEndpointDetails                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppEndpointDetails"}
+	iWebAppEndpointPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppEndpointPolicy"}
+	iWebAppEndpointType                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppEndpointType"}
+	i_WebAppFaviconFile                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppFaviconFile"}
+	i_WebAppId                                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppId"}
+	iWebAppIdentityProviderDetails            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppIdentityProviderDetails"}
+	i_WebAppLogoFile                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppLogoFile"}
+	i_WebAppTitle                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppTitle"}
+	i_WebAppUnitCount                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppUnitCount"}
+	iWebAppUnits                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppUnits"}
+	iWebAppVpcConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppVpcConfig"}
+	iWebAppVpcEndpointIpAddressType           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WebAppVpcEndpointIpAddressType"}
+	i_WorkflowDescription                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowDescription"}
+	iWorkflowDetail                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowDetail"}
+	iWorkflowDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowDetails"}
+	i_WorkflowId                              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowId"}
+	iWorkflowStep                             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowStep"}
+	i_WorkflowStepName                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowStepName"}
+	i_WorkflowSteps                           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowSteps"}
+	iWorkflowStepType                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "WorkflowStepType"}
+	iCreateAccessRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateAccessRequest"}
+	iCreateAccessResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateAccessResponse"}
+	iCreateAgreementRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateAgreementRequest"}
+	iCreateAgreementResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateAgreementResponse"}
+	iCreateConnectorRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateConnectorRequest"}
+	iCreateConnectorResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateConnectorResponse"}
+	iCreateProfileRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateProfileRequest"}
+	iCreateProfileResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateProfileResponse"}
+	iCreateServerRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateServerRequest"}
+	iCreateServerResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateServerResponse"}
+	iCreateUserRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateUserRequest"}
+	iCreateUserResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateUserResponse"}
+	iCreateWebAppRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateWebAppRequest"}
+	iCreateWebAppResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateWebAppResponse"}
+	iCreateWorkflowRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateWorkflowRequest"}
+	iCreateWorkflowResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "CreateWorkflowResponse"}
+	iDeleteAccessRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteAccessRequest"}
+	iDeleteAgreementRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteAgreementRequest"}
+	iDeleteCertificateRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteCertificateRequest"}
+	iDeleteConnectorRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteConnectorRequest"}
+	iDeleteHostKeyRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteHostKeyRequest"}
+	iDeleteProfileRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteProfileRequest"}
+	iDeleteServerRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteServerRequest"}
+	iDeleteSshPublicKeyRequest                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteSshPublicKeyRequest"}
+	iDeleteUserRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteUserRequest"}
+	iDeleteWebAppCustomizationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteWebAppCustomizationRequest"}
+	iDeleteWebAppRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteWebAppRequest"}
+	iDeleteWorkflowRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DeleteWorkflowRequest"}
+	iDescribeAccessRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeAccessRequest"}
+	iDescribeAccessResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeAccessResponse"}
+	iDescribeAgreementRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeAgreementRequest"}
+	iDescribeAgreementResponse                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeAgreementResponse"}
+	iDescribeCertificateRequest               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeCertificateRequest"}
+	iDescribeCertificateResponse              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeCertificateResponse"}
+	iDescribeConnectorRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeConnectorRequest"}
+	iDescribeConnectorResponse                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeConnectorResponse"}
+	iDescribeExecutionRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeExecutionRequest"}
+	iDescribeExecutionResponse                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeExecutionResponse"}
+	iDescribeHostKeyRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeHostKeyRequest"}
+	iDescribeHostKeyResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeHostKeyResponse"}
+	iDescribeProfileRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeProfileRequest"}
+	iDescribeProfileResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeProfileResponse"}
+	iDescribeSecurityPolicyRequest            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeSecurityPolicyRequest"}
+	iDescribeSecurityPolicyResponse           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeSecurityPolicyResponse"}
+	iDescribeServerRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeServerRequest"}
+	iDescribeServerResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeServerResponse"}
+	iDescribeUserRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeUserRequest"}
+	iDescribeUserResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeUserResponse"}
+	iDescribeWebAppCustomizationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWebAppCustomizationRequest"}
+	iDescribeWebAppCustomizationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWebAppCustomizationResponse"}
+	iDescribeWebAppRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWebAppRequest"}
+	iDescribeWebAppResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWebAppResponse"}
+	iDescribeWorkflowRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWorkflowRequest"}
+	iDescribeWorkflowResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "DescribeWorkflowResponse"}
+	iImportCertificateRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportCertificateRequest"}
+	iImportCertificateResponse                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportCertificateResponse"}
+	iImportHostKeyRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportHostKeyRequest"}
+	iImportHostKeyResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportHostKeyResponse"}
+	iImportSshPublicKeyRequest                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportSshPublicKeyRequest"}
+	iImportSshPublicKeyResponse               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ImportSshPublicKeyResponse"}
+	iListAccessesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListAccessesRequest"}
+	iListAccessesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListAccessesResponse"}
+	iListAgreementsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListAgreementsRequest"}
+	iListAgreementsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListAgreementsResponse"}
+	iListCertificatesRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListCertificatesRequest"}
+	iListCertificatesResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListCertificatesResponse"}
+	iListConnectorsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListConnectorsRequest"}
+	iListConnectorsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListConnectorsResponse"}
+	iListExecutionsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListExecutionsRequest"}
+	iListExecutionsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListExecutionsResponse"}
+	iListFileTransferResultsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListFileTransferResultsRequest"}
+	iListFileTransferResultsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListFileTransferResultsResponse"}
+	iListHostKeysRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListHostKeysRequest"}
+	iListHostKeysResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListHostKeysResponse"}
+	iListProfilesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListProfilesRequest"}
+	iListProfilesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListProfilesResponse"}
+	iListSecurityPoliciesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListSecurityPoliciesRequest"}
+	iListSecurityPoliciesResponse             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListSecurityPoliciesResponse"}
+	iListServersRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListServersRequest"}
+	iListServersResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListServersResponse"}
+	iListTagsForResourceRequest               = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListTagsForResourceResponse"}
+	iListUsersRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListUsersRequest"}
+	iListUsersResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListUsersResponse"}
+	iListWebAppsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListWebAppsRequest"}
+	iListWebAppsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListWebAppsResponse"}
+	iListWorkflowsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListWorkflowsRequest"}
+	iListWorkflowsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "ListWorkflowsResponse"}
+	iSendWorkflowStepStateRequest             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SendWorkflowStepStateRequest"}
+	iSendWorkflowStepStateResponse            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "SendWorkflowStepStateResponse"}
+	iStartDirectoryListingRequest             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartDirectoryListingRequest"}
+	iStartDirectoryListingResponse            = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartDirectoryListingResponse"}
+	iStartFileTransferRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartFileTransferRequest"}
+	iStartFileTransferResponse                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartFileTransferResponse"}
+	iStartRemoteDeleteRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartRemoteDeleteRequest"}
+	iStartRemoteDeleteResponse                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartRemoteDeleteResponse"}
+	iStartRemoteMoveRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartRemoteMoveRequest"}
+	iStartRemoteMoveResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartRemoteMoveResponse"}
+	iStartServerRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StartServerRequest"}
+	iStopServerRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "StopServerRequest"}
+	iTagResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TagResourceRequest"}
+	iTestConnectionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TestConnectionRequest"}
+	iTestConnectionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TestConnectionResponse"}
+	iTestIdentityProviderRequest              = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TestIdentityProviderRequest"}
+	iTestIdentityProviderResponse             = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "TestIdentityProviderResponse"}
+	iUntagResourceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UntagResourceRequest"}
+	iUpdateAccessRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateAccessRequest"}
+	iUpdateAccessResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateAccessResponse"}
+	iUpdateAgreementRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateAgreementRequest"}
+	iUpdateAgreementResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateAgreementResponse"}
+	iUpdateCertificateRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateCertificateRequest"}
+	iUpdateCertificateResponse                = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateCertificateResponse"}
+	iUpdateConnectorRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateConnectorRequest"}
+	iUpdateConnectorResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateConnectorResponse"}
+	iUpdateHostKeyRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateHostKeyRequest"}
+	iUpdateHostKeyResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateHostKeyResponse"}
+	iUpdateProfileRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateProfileRequest"}
+	iUpdateProfileResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateProfileResponse"}
+	iUpdateServerRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateServerRequest"}
+	iUpdateServerResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateServerResponse"}
+	iUpdateUserRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateUserRequest"}
+	iUpdateUserResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateUserResponse"}
+	iUpdateWebAppCustomizationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppCustomizationRequest"}
+	iUpdateWebAppCustomizationResponse        = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppCustomizationResponse"}
+	iUpdateWebAppRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppRequest"}
+	iUpdateWebAppResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.transfer", Name: "UpdateWebAppResponse"}
+	pUnit                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var CreateAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateAgreement",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateConnector",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateProfile",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateWebApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateWebApp",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/createWebApp",
-	Code: 200})
-
-var CreateWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateWorkflow",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteAccess",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteAgreement",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteConnector",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteHostKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteProfile",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSshPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteSshPublicKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteWebApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteWebApp",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteWebApp",
-	Code: 200})
-
-var DeleteWebAppCustomization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteWebAppCustomization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/deleteWebAppCustomization",
-	Code: 200})
-
-var DeleteWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteWorkflow",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeAccess",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeAgreement",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeConnector",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeExecution",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeHostKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeProfile",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeSecurityPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeWebApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWebApp",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeWebApp",
-	Code: 200})
-
-var DescribeWebAppCustomization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWebAppCustomization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describeWebAppCustomization",
-	Code: 200})
-
-var DescribeWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWorkflow",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportHostKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportSshPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportSshPublicKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAccesses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListAccesses",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAgreements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListAgreements",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListCertificates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListConnectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListExecutions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListFileTransferResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListFileTransferResults",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listFileTransferResults",
-	Code: 200})
-
-var ListHostKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListHostKeys",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListProfiles",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSecurityPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListSecurityPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListServers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListUsers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListWebApps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListWebApps",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listWebApps",
-	Code: 200})
-
-var ListWorkflows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListWorkflows",
-}, smithy.ShapeTypeOperation, 0)
-
-var SendWorkflowStepState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SendWorkflowStepState",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDirectoryListing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartDirectoryListing",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartFileTransfer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartFileTransfer",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartRemoteDelete = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartRemoteDelete",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/startRemoteDelete",
-	Code: 200})
-
-var StartRemoteMove = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartRemoteMove",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/startRemoteMove",
-	Code: 200})
-
-var StartServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StopServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TestConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TestConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var TestIdentityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TestIdentityProvider",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateAccess",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateAgreement",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateCertificate",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateConnector",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateHostKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateProfile",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateServer",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateWebApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebApp",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateWebApp",
-	Code: 200})
-
-var UpdateWebAppCustomization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppCustomization",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/updateWebAppCustomization",
-	Code: 200})
-
-var _TransferService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TransferService",
-}, smithy.ShapeTypeService, 0)
-
-var TransferService = smithy.NewServiceSchema(_TransferService, "2018-11-05")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
-		StatusCode: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AddressAllocationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "AddressAllocationId",
-}, smithy.ShapeTypeString, 0)
-
-var _AddressAllocationIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "AddressAllocationIds",
-}, smithy.ShapeTypeList, 1)
-var _AddressAllocationIds_member *smithy.Schema
-
-var _AgreementId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "AgreementId",
-}, smithy.ShapeTypeString, 0)
-
-var AgreementStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "AgreementStatusType",
-}, smithy.ShapeTypeEnum, 2)
-var AgreementStatusType_ACTIVE *smithy.Schema
-
-var AgreementStatusType_INACTIVE *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var As2AsyncMdnConnectorConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "As2AsyncMdnConnectorConfig",
-}, smithy.ShapeTypeStructure, 2)
-var As2AsyncMdnConnectorConfig_Url *smithy.Schema
-
-var As2AsyncMdnConnectorConfig_ServerIds *smithy.Schema
-
-var _As2AsyncMdnServerIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "As2AsyncMdnServerIds",
-}, smithy.ShapeTypeList, 1)
-var _As2AsyncMdnServerIds_member *smithy.Schema
-
-var As2ConnectorConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "As2ConnectorConfig",
-}, smithy.ShapeTypeStructure, 11)
-var As2ConnectorConfig_LocalProfileId *smithy.Schema
-
-var As2ConnectorConfig_PartnerProfileId *smithy.Schema
-
-var As2ConnectorConfig_MessageSubject *smithy.Schema
-
-var As2ConnectorConfig_Compression *smithy.Schema
-
-var As2ConnectorConfig_EncryptionAlgorithm *smithy.Schema
-
-var As2ConnectorConfig_SigningAlgorithm *smithy.Schema
-
-var As2ConnectorConfig_MdnSigningAlgorithm *smithy.Schema
-
-var As2ConnectorConfig_MdnResponse *smithy.Schema
-
-var As2ConnectorConfig_BasicAuthSecretId *smithy.Schema
-
-var As2ConnectorConfig_PreserveContentType *smithy.Schema
-
-var As2ConnectorConfig_AsyncMdnConfig *smithy.Schema
-
-var _As2ConnectorSecretId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "As2ConnectorSecretId",
-}, smithy.ShapeTypeString, 0)
-
-var _As2Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "As2Id",
-}, smithy.ShapeTypeString, 0)
-
-var As2Transport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "As2Transport",
-}, smithy.ShapeTypeEnum, 1)
-var As2Transport_HTTP *smithy.Schema
-
-var _As2Transports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "As2Transports",
-}, smithy.ShapeTypeList, 1)
-var _As2Transports_member *smithy.Schema
-
-var _CallbackToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CallbackToken",
-}, smithy.ShapeTypeString, 0)
-
-var _CertDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Certificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Certificate",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateBodyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertificateBodyType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CertificateChainType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertificateChainType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CertificateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertificateId",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertificateIds",
-}, smithy.ShapeTypeList, 1)
-var _CertificateIds_member *smithy.Schema
-
-var CertificateStatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertificateStatusType",
-}, smithy.ShapeTypeEnum, 3)
-var CertificateStatusType_ACTIVE *smithy.Schema
-
-var CertificateStatusType_PENDING_ROTATION *smithy.Schema
-
-var CertificateStatusType_INACTIVE *smithy.Schema
-
-var CertificateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertificateType",
-}, smithy.ShapeTypeEnum, 2)
-var CertificateType_CERTIFICATE *smithy.Schema
-
-var CertificateType_CERTIFICATE_WITH_PRIVATE_KEY *smithy.Schema
-
-var CertificateUsageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertificateUsageType",
-}, smithy.ShapeTypeEnum, 3)
-var CertificateUsageType_SIGNING *smithy.Schema
-
-var CertificateUsageType_ENCRYPTION *smithy.Schema
-
-var CertificateUsageType_TLS *smithy.Schema
-
-var _CertSerial = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CertSerial",
-}, smithy.ShapeTypeString, 0)
-
-var CommunicationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CommunicationMode",
-}, smithy.ShapeTypeEnum, 2)
-var CommunicationMode_CLIENT_TALK_FIRST *smithy.Schema
-
-var CommunicationMode_SERVER_TALK_FIRST *smithy.Schema
-
-var CompressionEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CompressionEnum",
-}, smithy.ShapeTypeEnum, 2)
-var CompressionEnum_ZLIB *smithy.Schema
-
-var CompressionEnum_DISABLED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConnectorEgressConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorEgressConfig",
-}, smithy.ShapeTypeUnion, 1)
-var ConnectorEgressConfig_VpcLattice *smithy.Schema
-
-var ConnectorEgressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorEgressType",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectorEgressType_SERVICE_MANAGED *smithy.Schema
-
-var ConnectorEgressType_VPC_LATTICE *smithy.Schema
-
-var _ConnectorErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorFileTransferResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorFileTransferResult",
-}, smithy.ShapeTypeStructure, 4)
-var ConnectorFileTransferResult_FilePath *smithy.Schema
-
-var ConnectorFileTransferResult_StatusCode *smithy.Schema
-
-var ConnectorFileTransferResult_FailureCode *smithy.Schema
-
-var ConnectorFileTransferResult_FailureMessage *smithy.Schema
-
-var _ConnectorFileTransferResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorFileTransferResults",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorFileTransferResults_member *smithy.Schema
-
-var _ConnectorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorId",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorSecurityPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorSecurityPolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorsIpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorsIpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectorsIpAddressType_IPV4 *smithy.Schema
-
-var ConnectorsIpAddressType_DUALSTACK *smithy.Schema
-
-var ConnectorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ConnectorStatus_ACTIVE *smithy.Schema
-
-var ConnectorStatus_ERRORED *smithy.Schema
-
-var ConnectorStatus_PENDING *smithy.Schema
-
-var ConnectorVpcLatticeEgressConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ConnectorVpcLatticeEgressConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectorVpcLatticeEgressConfig_ResourceConfigurationArn *smithy.Schema
-
-var ConnectorVpcLatticeEgressConfig_PortNumber *smithy.Schema
-
-var CopyStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CopyStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var CopyStepDetails_Name *smithy.Schema
-
-var CopyStepDetails_DestinationFileLocation *smithy.Schema
-
-var CopyStepDetails_OverwriteExisting *smithy.Schema
-
-var CopyStepDetails_SourceFileLocation *smithy.Schema
-
-var CustomDirectoriesType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomDirectoriesType",
-}, smithy.ShapeTypeStructure, 5)
-var CustomDirectoriesType_FailedFilesDirectory *smithy.Schema
-
-var CustomDirectoriesType_MdnFilesDirectory *smithy.Schema
-
-var CustomDirectoriesType_PayloadFilesDirectory *smithy.Schema
-
-var CustomDirectoriesType_StatusFilesDirectory *smithy.Schema
-
-var CustomDirectoriesType_TemporaryFilesDirectory *smithy.Schema
-
-var CustomHttpHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomHttpHeader",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var CustomHttpHeader_Key *smithy.Schema
-
-var CustomHttpHeader_Value *smithy.Schema
-
-var _CustomHttpHeaderKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomHttpHeaderKeyType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CustomHttpHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomHttpHeaders",
-}, smithy.ShapeTypeList, 1)
-var _CustomHttpHeaders_member *smithy.Schema
-
-var _CustomHttpHeaderValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomHttpHeaderValueType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CustomStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomStepDetails",
-}, smithy.ShapeTypeStructure, 4)
-var CustomStepDetails_Name *smithy.Schema
-
-var CustomStepDetails_Target *smithy.Schema
-
-var CustomStepDetails_TimeoutSeconds *smithy.Schema
-
-var CustomStepDetails_SourceFileLocation *smithy.Schema
-
-var CustomStepStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomStepStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CustomStepStatus_SUCCESS *smithy.Schema
-
-var CustomStepStatus_FAILURE *smithy.Schema
-
-var _CustomStepTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomStepTarget",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomStepTimeoutSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CustomStepTimeoutSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DateImported = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DateImported",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DecryptStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DecryptStepDetails",
-}, smithy.ShapeTypeStructure, 5)
-var DecryptStepDetails_Name *smithy.Schema
-
-var DecryptStepDetails_Type *smithy.Schema
-
-var DecryptStepDetails_SourceFileLocation *smithy.Schema
-
-var DecryptStepDetails_OverwriteExisting *smithy.Schema
-
-var DecryptStepDetails_DestinationFileLocation *smithy.Schema
-
-var _DeleteId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteId",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteStepDetails",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteStepDetails_Name *smithy.Schema
-
-var DeleteStepDetails_SourceFileLocation *smithy.Schema
-
-var DescribedAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedAccess",
-}, smithy.ShapeTypeStructure, 7)
-var DescribedAccess_HomeDirectory *smithy.Schema
-
-var DescribedAccess_HomeDirectoryMappings *smithy.Schema
-
-var DescribedAccess_HomeDirectoryType *smithy.Schema
-
-var DescribedAccess_Policy *smithy.Schema
-
-var DescribedAccess_PosixProfile *smithy.Schema
-
-var DescribedAccess_Role *smithy.Schema
-
-var DescribedAccess_ExternalId *smithy.Schema
-
-var DescribedAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedAgreement",
-}, smithy.ShapeTypeStructure, 13)
-var DescribedAgreement_Arn *smithy.Schema
-
-var DescribedAgreement_AgreementId *smithy.Schema
-
-var DescribedAgreement_Description *smithy.Schema
-
-var DescribedAgreement_Status *smithy.Schema
-
-var DescribedAgreement_ServerId *smithy.Schema
-
-var DescribedAgreement_LocalProfileId *smithy.Schema
-
-var DescribedAgreement_PartnerProfileId *smithy.Schema
-
-var DescribedAgreement_BaseDirectory *smithy.Schema
-
-var DescribedAgreement_AccessRole *smithy.Schema
-
-var DescribedAgreement_Tags *smithy.Schema
-
-var DescribedAgreement_PreserveFilename *smithy.Schema
-
-var DescribedAgreement_EnforceMessageSigning *smithy.Schema
-
-var DescribedAgreement_CustomDirectories *smithy.Schema
-
-var DescribedCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedCertificate",
-}, smithy.ShapeTypeStructure, 14)
-var DescribedCertificate_Arn *smithy.Schema
-
-var DescribedCertificate_CertificateId *smithy.Schema
-
-var DescribedCertificate_Usage *smithy.Schema
-
-var DescribedCertificate_Status *smithy.Schema
-
-var DescribedCertificate_Certificate *smithy.Schema
-
-var DescribedCertificate_CertificateChain *smithy.Schema
-
-var DescribedCertificate_ActiveDate *smithy.Schema
-
-var DescribedCertificate_InactiveDate *smithy.Schema
-
-var DescribedCertificate_Serial *smithy.Schema
-
-var DescribedCertificate_NotBeforeDate *smithy.Schema
-
-var DescribedCertificate_NotAfterDate *smithy.Schema
-
-var DescribedCertificate_Type *smithy.Schema
-
-var DescribedCertificate_Description *smithy.Schema
-
-var DescribedCertificate_Tags *smithy.Schema
-
-var DescribedConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedConnector",
-}, smithy.ShapeTypeStructure, 15)
-var DescribedConnector_Arn *smithy.Schema
-
-var DescribedConnector_ConnectorId *smithy.Schema
-
-var DescribedConnector_Url *smithy.Schema
-
-var DescribedConnector_As2Config *smithy.Schema
-
-var DescribedConnector_AccessRole *smithy.Schema
-
-var DescribedConnector_LoggingRole *smithy.Schema
-
-var DescribedConnector_Tags *smithy.Schema
-
-var DescribedConnector_SftpConfig *smithy.Schema
-
-var DescribedConnector_ServiceManagedEgressIpAddresses *smithy.Schema
-
-var DescribedConnector_SecurityPolicyName *smithy.Schema
-
-var DescribedConnector_EgressConfig *smithy.Schema
-
-var DescribedConnector_EgressType *smithy.Schema
-
-var DescribedConnector_ErrorMessage *smithy.Schema
-
-var DescribedConnector_Status *smithy.Schema
-
-var DescribedConnector_IpAddressType *smithy.Schema
-
-var DescribedConnectorEgressConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedConnectorEgressConfig",
-}, smithy.ShapeTypeUnion, 1)
-var DescribedConnectorEgressConfig_VpcLattice *smithy.Schema
-
-var DescribedConnectorVpcLatticeEgressConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedConnectorVpcLatticeEgressConfig",
-}, smithy.ShapeTypeStructure, 2)
-var DescribedConnectorVpcLatticeEgressConfig_ResourceConfigurationArn *smithy.Schema
-
-var DescribedConnectorVpcLatticeEgressConfig_PortNumber *smithy.Schema
-
-var DescribedExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedExecution",
-}, smithy.ShapeTypeStructure, 8)
-var DescribedExecution_ExecutionId *smithy.Schema
-
-var DescribedExecution_InitialFileLocation *smithy.Schema
-
-var DescribedExecution_ServiceMetadata *smithy.Schema
-
-var DescribedExecution_ExecutionRole *smithy.Schema
-
-var DescribedExecution_LoggingConfiguration *smithy.Schema
-
-var DescribedExecution_PosixProfile *smithy.Schema
-
-var DescribedExecution_Status *smithy.Schema
-
-var DescribedExecution_Results *smithy.Schema
-
-var DescribedHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedHostKey",
-}, smithy.ShapeTypeStructure, 9)
-var DescribedHostKey_Arn *smithy.Schema
-
-var DescribedHostKey_HostKeyId *smithy.Schema
-
-var DescribedHostKey_HostKeyFingerprint *smithy.Schema
-
-var DescribedHostKey_Description *smithy.Schema
-
-var DescribedHostKey_Type *smithy.Schema
-
-var DescribedHostKey_DateImported *smithy.Schema
-
-var DescribedHostKey_Tags *smithy.Schema
-
-var DescribedHostKey_StorageType *smithy.Schema
-
-var DescribedHostKey_SecretId *smithy.Schema
-
-var DescribedIdentityCenterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedIdentityCenterConfig",
-}, smithy.ShapeTypeStructure, 3)
-var DescribedIdentityCenterConfig_ApplicationArn *smithy.Schema
-
-var DescribedIdentityCenterConfig_InstanceArn *smithy.Schema
-
-var DescribedIdentityCenterConfig_Role *smithy.Schema
-
-var DescribedProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedProfile",
-}, smithy.ShapeTypeStructure, 6)
-var DescribedProfile_Arn *smithy.Schema
-
-var DescribedProfile_ProfileId *smithy.Schema
-
-var DescribedProfile_ProfileType *smithy.Schema
-
-var DescribedProfile_As2Id *smithy.Schema
-
-var DescribedProfile_CertificateIds *smithy.Schema
-
-var DescribedProfile_Tags *smithy.Schema
-
-var DescribedSecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedSecurityPolicy",
-}, smithy.ShapeTypeStructure, 9)
-var DescribedSecurityPolicy_Fips *smithy.Schema
-
-var DescribedSecurityPolicy_SecurityPolicyName *smithy.Schema
-
-var DescribedSecurityPolicy_SshCiphers *smithy.Schema
-
-var DescribedSecurityPolicy_SshKexs *smithy.Schema
-
-var DescribedSecurityPolicy_SshMacs *smithy.Schema
-
-var DescribedSecurityPolicy_TlsCiphers *smithy.Schema
-
-var DescribedSecurityPolicy_SshHostKeyAlgorithms *smithy.Schema
-
-var DescribedSecurityPolicy_Type *smithy.Schema
-
-var DescribedSecurityPolicy_Protocols *smithy.Schema
-
-var DescribedServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedServer",
-}, smithy.ShapeTypeStructure, 23)
-var DescribedServer_Arn *smithy.Schema
-
-var DescribedServer_Certificate *smithy.Schema
-
-var DescribedServer_ProtocolDetails *smithy.Schema
-
-var DescribedServer_Domain *smithy.Schema
-
-var DescribedServer_EndpointDetails *smithy.Schema
-
-var DescribedServer_EndpointType *smithy.Schema
-
-var DescribedServer_HostKeyFingerprint *smithy.Schema
-
-var DescribedServer_IdentityProviderDetails *smithy.Schema
-
-var DescribedServer_IdentityProviderType *smithy.Schema
-
-var DescribedServer_LoggingRole *smithy.Schema
-
-var DescribedServer_PostAuthenticationLoginBanner *smithy.Schema
-
-var DescribedServer_PreAuthenticationLoginBanner *smithy.Schema
-
-var DescribedServer_Protocols *smithy.Schema
-
-var DescribedServer_SecurityPolicyName *smithy.Schema
-
-var DescribedServer_ServerId *smithy.Schema
-
-var DescribedServer_State *smithy.Schema
-
-var DescribedServer_Tags *smithy.Schema
-
-var DescribedServer_UserCount *smithy.Schema
-
-var DescribedServer_WorkflowDetails *smithy.Schema
-
-var DescribedServer_StructuredLogDestinations *smithy.Schema
-
-var DescribedServer_S3StorageOptions *smithy.Schema
-
-var DescribedServer_As2ServiceManagedEgressIpAddresses *smithy.Schema
-
-var DescribedServer_IpAddressType *smithy.Schema
-
-var DescribedUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedUser",
-}, smithy.ShapeTypeStructure, 10)
-var DescribedUser_Arn *smithy.Schema
-
-var DescribedUser_HomeDirectory *smithy.Schema
-
-var DescribedUser_HomeDirectoryMappings *smithy.Schema
-
-var DescribedUser_HomeDirectoryType *smithy.Schema
-
-var DescribedUser_Policy *smithy.Schema
-
-var DescribedUser_PosixProfile *smithy.Schema
-
-var DescribedUser_Role *smithy.Schema
-
-var DescribedUser_SshPublicKeys *smithy.Schema
-
-var DescribedUser_Tags *smithy.Schema
-
-var DescribedUser_UserName *smithy.Schema
-
-var DescribedWebApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedWebApp",
-}, smithy.ShapeTypeStructure, 10)
-var DescribedWebApp_Arn *smithy.Schema
-
-var DescribedWebApp_WebAppId *smithy.Schema
-
-var DescribedWebApp_DescribedIdentityProviderDetails *smithy.Schema
-
-var DescribedWebApp_AccessEndpoint *smithy.Schema
-
-var DescribedWebApp_WebAppEndpoint *smithy.Schema
-
-var DescribedWebApp_WebAppUnits *smithy.Schema
-
-var DescribedWebApp_Tags *smithy.Schema
-
-var DescribedWebApp_WebAppEndpointPolicy *smithy.Schema
-
-var DescribedWebApp_EndpointType *smithy.Schema
-
-var DescribedWebApp_DescribedEndpointDetails *smithy.Schema
-
-var DescribedWebAppCustomization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedWebAppCustomization",
-}, smithy.ShapeTypeStructure, 5)
-var DescribedWebAppCustomization_Arn *smithy.Schema
-
-var DescribedWebAppCustomization_WebAppId *smithy.Schema
-
-var DescribedWebAppCustomization_Title *smithy.Schema
-
-var DescribedWebAppCustomization_LogoFile *smithy.Schema
-
-var DescribedWebAppCustomization_FaviconFile *smithy.Schema
-
-var DescribedWebAppEndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedWebAppEndpointDetails",
-}, smithy.ShapeTypeUnion, 1)
-var DescribedWebAppEndpointDetails_Vpc *smithy.Schema
-
-var DescribedWebAppIdentityProviderDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedWebAppIdentityProviderDetails",
-}, smithy.ShapeTypeUnion, 1)
-var DescribedWebAppIdentityProviderDetails_IdentityCenterConfig *smithy.Schema
-
-var DescribedWebAppVpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedWebAppVpcConfig",
-}, smithy.ShapeTypeStructure, 3)
-var DescribedWebAppVpcConfig_SubnetIds *smithy.Schema
-
-var DescribedWebAppVpcConfig_VpcId *smithy.Schema
-
-var DescribedWebAppVpcConfig_VpcEndpointId *smithy.Schema
-
-var DescribedWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribedWorkflow",
-}, smithy.ShapeTypeStructure, 7)
-var DescribedWorkflow_Arn *smithy.Schema
-
-var DescribedWorkflow_Description *smithy.Schema
-
-var DescribedWorkflow_Steps *smithy.Schema
-
-var DescribedWorkflow_OnExceptionSteps *smithy.Schema
-
-var DescribedWorkflow_WorkflowId *smithy.Schema
-
-var DescribedWorkflow_Tags *smithy.Schema
-
-var DescribedWorkflow_StructuredLogDestinations *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DirectoryId",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryListingOptimization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DirectoryListingOptimization",
-}, smithy.ShapeTypeEnum, 2)
-var DirectoryListingOptimization_ENABLED *smithy.Schema
-
-var DirectoryListingOptimization_DISABLED *smithy.Schema
-
-var Domain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Domain",
-}, smithy.ShapeTypeEnum, 2)
-var Domain_S3 *smithy.Schema
-
-var Domain_EFS *smithy.Schema
-
-var EfsFileLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EfsFileLocation",
-}, smithy.ShapeTypeStructure, 2)
-var EfsFileLocation_FileSystemId *smithy.Schema
-
-var EfsFileLocation_Path *smithy.Schema
-
-var _EfsFileSystemId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EfsFileSystemId",
-}, smithy.ShapeTypeString, 0)
-
-var _EfsPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EfsPath",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionAlg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EncryptionAlg",
-}, smithy.ShapeTypeEnum, 5)
-var EncryptionAlg_AES128_CBC *smithy.Schema
-
-var EncryptionAlg_AES192_CBC *smithy.Schema
-
-var EncryptionAlg_AES256_CBC *smithy.Schema
-
-var EncryptionAlg_DES_EDE3_CBC *smithy.Schema
-
-var EncryptionAlg_NONE *smithy.Schema
-
-var EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeEnum, 1)
-var EncryptionType_PGP *smithy.Schema
-
-var EndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EndpointDetails",
-}, smithy.ShapeTypeStructure, 5)
-var EndpointDetails_AddressAllocationIds *smithy.Schema
-
-var EndpointDetails_SubnetIds *smithy.Schema
-
-var EndpointDetails_VpcEndpointId *smithy.Schema
-
-var EndpointDetails_VpcId *smithy.Schema
-
-var EndpointDetails_SecurityGroupIds *smithy.Schema
-
-var EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EndpointType",
-}, smithy.ShapeTypeEnum, 3)
-var EndpointType_PUBLIC *smithy.Schema
-
-var EndpointType_VPC *smithy.Schema
-
-var EndpointType_VPC_ENDPOINT *smithy.Schema
-
-var EnforceMessageSigningType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "EnforceMessageSigningType",
-}, smithy.ShapeTypeEnum, 2)
-var EnforceMessageSigningType_ENABLED *smithy.Schema
-
-var EnforceMessageSigningType_DISABLED *smithy.Schema
-
-var ExecutionError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionError",
-}, smithy.ShapeTypeStructure, 2)
-var ExecutionError_Type *smithy.Schema
-
-var ExecutionError_Message *smithy.Schema
-
-var _ExecutionErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExecutionErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionErrorType",
-}, smithy.ShapeTypeEnum, 8)
-var ExecutionErrorType_PERMISSION_DENIED *smithy.Schema
-
-var ExecutionErrorType_CUSTOM_STEP_FAILED *smithy.Schema
-
-var ExecutionErrorType_THROTTLED *smithy.Schema
-
-var ExecutionErrorType_ALREADY_EXISTS *smithy.Schema
-
-var ExecutionErrorType_NOT_FOUND *smithy.Schema
-
-var ExecutionErrorType_BAD_REQUEST *smithy.Schema
-
-var ExecutionErrorType_TIMEOUT *smithy.Schema
-
-var ExecutionErrorType_INTERNAL_SERVER_ERROR *smithy.Schema
-
-var _ExecutionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionId",
-}, smithy.ShapeTypeString, 0)
-
-var ExecutionResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionResults",
-}, smithy.ShapeTypeStructure, 2)
-var ExecutionResults_Steps *smithy.Schema
-
-var ExecutionResults_OnExceptionSteps *smithy.Schema
-
-var ExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ExecutionStatus_IN_PROGRESS *smithy.Schema
-
-var ExecutionStatus_COMPLETED *smithy.Schema
-
-var ExecutionStatus_EXCEPTION *smithy.Schema
-
-var ExecutionStatus_HANDLING_EXCEPTION *smithy.Schema
-
-var ExecutionStepResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionStepResult",
-}, smithy.ShapeTypeStructure, 3)
-var ExecutionStepResult_StepType *smithy.Schema
-
-var ExecutionStepResult_Outputs *smithy.Schema
-
-var ExecutionStepResult_Error *smithy.Schema
-
-var _ExecutionStepResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExecutionStepResults",
-}, smithy.ShapeTypeList, 1)
-var _ExecutionStepResults_member *smithy.Schema
-
-var _ExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ExternalId",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "FailureCode",
-}, smithy.ShapeTypeString, 0)
-
-var FileLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "FileLocation",
-}, smithy.ShapeTypeStructure, 2)
-var FileLocation_S3FileLocation *smithy.Schema
-
-var FileLocation_EfsFileLocation *smithy.Schema
-
-var _FilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "FilePath",
-}, smithy.ShapeTypeString, 0)
-
-var _FilePaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "FilePaths",
-}, smithy.ShapeTypeList, 1)
-var _FilePaths_member *smithy.Schema
-
-var _Fips = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Fips",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Function = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Function",
-}, smithy.ShapeTypeString, 0)
-
-var _HomeDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HomeDirectory",
-}, smithy.ShapeTypeString, 0)
-
-var HomeDirectoryMapEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HomeDirectoryMapEntry",
-}, smithy.ShapeTypeStructure, 3)
-var HomeDirectoryMapEntry_Entry *smithy.Schema
-
-var HomeDirectoryMapEntry_Target *smithy.Schema
-
-var HomeDirectoryMapEntry_Type *smithy.Schema
-
-var _HomeDirectoryMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HomeDirectoryMappings",
-}, smithy.ShapeTypeList, 1)
-var _HomeDirectoryMappings_member *smithy.Schema
-
-var HomeDirectoryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HomeDirectoryType",
-}, smithy.ShapeTypeEnum, 2)
-var HomeDirectoryType_PATH *smithy.Schema
-
-var HomeDirectoryType_LOGICAL *smithy.Schema
-
-var _HostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HostKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _HostKeyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HostKeyDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _HostKeyFingerprint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HostKeyFingerprint",
-}, smithy.ShapeTypeString, 0)
-
-var _HostKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HostKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var HostKeyStorageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HostKeyStorageType",
-}, smithy.ShapeTypeEnum, 2)
-var HostKeyStorageType_SERVICE_MANAGED *smithy.Schema
-
-var HostKeyStorageType_SECRETS_MANAGER *smithy.Schema
-
-var _HostKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "HostKeyType",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityCenterApplicationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "IdentityCenterApplicationArn",
-}, smithy.ShapeTypeString, 0)
-
-var IdentityCenterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "IdentityCenterConfig",
-}, smithy.ShapeTypeStructure, 2)
-var IdentityCenterConfig_InstanceArn *smithy.Schema
-
-var IdentityCenterConfig_Role *smithy.Schema
-
-var _IdentityCenterInstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "IdentityCenterInstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var IdentityProviderDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "IdentityProviderDetails",
-}, smithy.ShapeTypeStructure, 5)
-var IdentityProviderDetails_Url *smithy.Schema
-
-var IdentityProviderDetails_InvocationRole *smithy.Schema
-
-var IdentityProviderDetails_DirectoryId *smithy.Schema
-
-var IdentityProviderDetails_Function *smithy.Schema
-
-var IdentityProviderDetails_SftpAuthenticationMethods *smithy.Schema
-
-var IdentityProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "IdentityProviderType",
-}, smithy.ShapeTypeEnum, 4)
-var IdentityProviderType_SERVICE_MANAGED *smithy.Schema
-
-var IdentityProviderType_API_GATEWAY *smithy.Schema
-
-var IdentityProviderType_AWS_DIRECTORY_SERVICE *smithy.Schema
-
-var IdentityProviderType_AWS_LAMBDA *smithy.Schema
-
-var InputFileLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "InputFileLocation",
-}, smithy.ShapeTypeStructure, 2)
-var InputFileLocation_S3FileLocation *smithy.Schema
-
-var InputFileLocation_EfsFileLocation *smithy.Schema
-
-var InternalServiceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "InternalServiceError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var InternalServiceError_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var IpAddressType_IPV4 *smithy.Schema
-
-var IpAddressType_DUALSTACK *smithy.Schema
-
-var _KmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "KmsKey",
-}, smithy.ShapeTypeString, 0)
-
-var ListedAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedAccess",
-}, smithy.ShapeTypeStructure, 4)
-var ListedAccess_HomeDirectory *smithy.Schema
-
-var ListedAccess_HomeDirectoryType *smithy.Schema
-
-var ListedAccess_Role *smithy.Schema
-
-var ListedAccess_ExternalId *smithy.Schema
-
-var _ListedAccesses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedAccesses",
-}, smithy.ShapeTypeList, 1)
-var _ListedAccesses_member *smithy.Schema
-
-var ListedAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedAgreement",
-}, smithy.ShapeTypeStructure, 7)
-var ListedAgreement_Arn *smithy.Schema
-
-var ListedAgreement_AgreementId *smithy.Schema
-
-var ListedAgreement_Description *smithy.Schema
-
-var ListedAgreement_Status *smithy.Schema
-
-var ListedAgreement_ServerId *smithy.Schema
-
-var ListedAgreement_LocalProfileId *smithy.Schema
-
-var ListedAgreement_PartnerProfileId *smithy.Schema
-
-var _ListedAgreements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedAgreements",
-}, smithy.ShapeTypeList, 1)
-var _ListedAgreements_member *smithy.Schema
-
-var ListedCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedCertificate",
-}, smithy.ShapeTypeStructure, 8)
-var ListedCertificate_Arn *smithy.Schema
-
-var ListedCertificate_CertificateId *smithy.Schema
-
-var ListedCertificate_Usage *smithy.Schema
-
-var ListedCertificate_Status *smithy.Schema
-
-var ListedCertificate_ActiveDate *smithy.Schema
-
-var ListedCertificate_InactiveDate *smithy.Schema
-
-var ListedCertificate_Type *smithy.Schema
-
-var ListedCertificate_Description *smithy.Schema
-
-var _ListedCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedCertificates",
-}, smithy.ShapeTypeList, 1)
-var _ListedCertificates_member *smithy.Schema
-
-var ListedConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedConnector",
-}, smithy.ShapeTypeStructure, 3)
-var ListedConnector_Arn *smithy.Schema
-
-var ListedConnector_ConnectorId *smithy.Schema
-
-var ListedConnector_Url *smithy.Schema
-
-var _ListedConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedConnectors",
-}, smithy.ShapeTypeList, 1)
-var _ListedConnectors_member *smithy.Schema
-
-var ListedExecution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedExecution",
-}, smithy.ShapeTypeStructure, 4)
-var ListedExecution_ExecutionId *smithy.Schema
-
-var ListedExecution_InitialFileLocation *smithy.Schema
-
-var ListedExecution_ServiceMetadata *smithy.Schema
-
-var ListedExecution_Status *smithy.Schema
-
-var _ListedExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedExecutions",
-}, smithy.ShapeTypeList, 1)
-var _ListedExecutions_member *smithy.Schema
-
-var ListedHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedHostKey",
-}, smithy.ShapeTypeStructure, 8)
-var ListedHostKey_Arn *smithy.Schema
-
-var ListedHostKey_HostKeyId *smithy.Schema
-
-var ListedHostKey_Fingerprint *smithy.Schema
-
-var ListedHostKey_Description *smithy.Schema
-
-var ListedHostKey_Type *smithy.Schema
-
-var ListedHostKey_DateImported *smithy.Schema
-
-var ListedHostKey_StorageType *smithy.Schema
-
-var ListedHostKey_SecretId *smithy.Schema
-
-var _ListedHostKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedHostKeys",
-}, smithy.ShapeTypeList, 1)
-var _ListedHostKeys_member *smithy.Schema
-
-var ListedProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedProfile",
-}, smithy.ShapeTypeStructure, 4)
-var ListedProfile_Arn *smithy.Schema
-
-var ListedProfile_ProfileId *smithy.Schema
-
-var ListedProfile_As2Id *smithy.Schema
-
-var ListedProfile_ProfileType *smithy.Schema
-
-var _ListedProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedProfiles",
-}, smithy.ShapeTypeList, 1)
-var _ListedProfiles_member *smithy.Schema
-
-var ListedServer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedServer",
-}, smithy.ShapeTypeStructure, 8)
-var ListedServer_Arn *smithy.Schema
-
-var ListedServer_Domain *smithy.Schema
-
-var ListedServer_IdentityProviderType *smithy.Schema
-
-var ListedServer_EndpointType *smithy.Schema
-
-var ListedServer_LoggingRole *smithy.Schema
-
-var ListedServer_ServerId *smithy.Schema
-
-var ListedServer_State *smithy.Schema
-
-var ListedServer_UserCount *smithy.Schema
-
-var _ListedServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedServers",
-}, smithy.ShapeTypeList, 1)
-var _ListedServers_member *smithy.Schema
-
-var ListedUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedUser",
-}, smithy.ShapeTypeStructure, 6)
-var ListedUser_Arn *smithy.Schema
-
-var ListedUser_HomeDirectory *smithy.Schema
-
-var ListedUser_HomeDirectoryType *smithy.Schema
-
-var ListedUser_Role *smithy.Schema
-
-var ListedUser_SshPublicKeyCount *smithy.Schema
-
-var ListedUser_UserName *smithy.Schema
-
-var _ListedUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedUsers",
-}, smithy.ShapeTypeList, 1)
-var _ListedUsers_member *smithy.Schema
-
-var ListedWebApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedWebApp",
-}, smithy.ShapeTypeStructure, 5)
-var ListedWebApp_Arn *smithy.Schema
-
-var ListedWebApp_WebAppId *smithy.Schema
-
-var ListedWebApp_AccessEndpoint *smithy.Schema
-
-var ListedWebApp_WebAppEndpoint *smithy.Schema
-
-var ListedWebApp_EndpointType *smithy.Schema
-
-var _ListedWebApps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedWebApps",
-}, smithy.ShapeTypeList, 1)
-var _ListedWebApps_member *smithy.Schema
-
-var ListedWorkflow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedWorkflow",
-}, smithy.ShapeTypeStructure, 3)
-var ListedWorkflow_WorkflowId *smithy.Schema
-
-var ListedWorkflow_Description *smithy.Schema
-
-var ListedWorkflow_Arn *smithy.Schema
-
-var _ListedWorkflows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListedWorkflows",
-}, smithy.ShapeTypeList, 1)
-var _ListedWorkflows_member *smithy.Schema
-
-var _ListingId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListingId",
-}, smithy.ShapeTypeString, 0)
-
-var LoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "LoggingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LoggingConfiguration_LoggingRole *smithy.Schema
-
-var LoggingConfiguration_LogGroupName *smithy.Schema
-
-var _LogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "LogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _MapEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MapEntry",
-}, smithy.ShapeTypeString, 0)
-
-var _MapTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MapTarget",
-}, smithy.ShapeTypeString, 0)
-
-var MapType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MapType",
-}, smithy.ShapeTypeEnum, 2)
-var MapType_FILE *smithy.Schema
-
-var MapType_DIRECTORY *smithy.Schema
-
-var _MaxConcurrentConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MaxConcurrentConnections",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MaxItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MdnResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MdnResponse",
-}, smithy.ShapeTypeEnum, 3)
-var MdnResponse_SYNC *smithy.Schema
-
-var MdnResponse_NONE *smithy.Schema
-
-var MdnResponse_ASYNC *smithy.Schema
-
-var MdnSigningAlg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MdnSigningAlg",
-}, smithy.ShapeTypeEnum, 6)
-var MdnSigningAlg_SHA256 *smithy.Schema
-
-var MdnSigningAlg_SHA384 *smithy.Schema
-
-var MdnSigningAlg_SHA512 *smithy.Schema
-
-var MdnSigningAlg_SHA1 *smithy.Schema
-
-var MdnSigningAlg_NONE *smithy.Schema
-
-var MdnSigningAlg_DEFAULT *smithy.Schema
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var _MessageSubject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MessageSubject",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MoveId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "MoveId",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "NullableRole",
-}, smithy.ShapeTypeString, 0)
-
-var _OnPartialUploadWorkflowDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "OnPartialUploadWorkflowDetails",
-}, smithy.ShapeTypeList, 1)
-var _OnPartialUploadWorkflowDetails_member *smithy.Schema
-
-var _OnUploadWorkflowDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "OnUploadWorkflowDetails",
-}, smithy.ShapeTypeList, 1)
-var _OnUploadWorkflowDetails_member *smithy.Schema
-
-var _OutputFileName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "OutputFileName",
-}, smithy.ShapeTypeString, 0)
-
-var OverwriteExisting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "OverwriteExisting",
-}, smithy.ShapeTypeEnum, 2)
-var OverwriteExisting_TRUE *smithy.Schema
-
-var OverwriteExisting_FALSE *smithy.Schema
-
-var _PassiveIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PassiveIp",
-}, smithy.ShapeTypeString, 0)
-
-var _Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Policy",
-}, smithy.ShapeTypeString, 0)
-
-var _PosixId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PosixId",
-}, smithy.ShapeTypeLong, 0)
-
-var PosixProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PosixProfile",
-}, smithy.ShapeTypeStructure, 3)
-var PosixProfile_Uid *smithy.Schema
-
-var PosixProfile_Gid *smithy.Schema
-
-var PosixProfile_SecondaryGids *smithy.Schema
-
-var _PostAuthenticationLoginBanner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PostAuthenticationLoginBanner",
-}, smithy.ShapeTypeString, 0)
-
-var _PreAuthenticationLoginBanner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PreAuthenticationLoginBanner",
-}, smithy.ShapeTypeString, 0)
-
-var PreserveContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PreserveContentType",
-}, smithy.ShapeTypeEnum, 2)
-var PreserveContentType_ENABLED *smithy.Schema
-
-var PreserveContentType_DISABLED *smithy.Schema
-
-var PreserveFilenameType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PreserveFilenameType",
-}, smithy.ShapeTypeEnum, 2)
-var PreserveFilenameType_ENABLED *smithy.Schema
-
-var PreserveFilenameType_DISABLED *smithy.Schema
-
-var _PrivateKeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "PrivateKeyType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ProfileId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ProfileId",
-}, smithy.ShapeTypeString, 0)
-
-var ProfileType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ProfileType",
-}, smithy.ShapeTypeEnum, 2)
-var ProfileType_LOCAL *smithy.Schema
-
-var ProfileType_PARTNER *smithy.Schema
-
-var Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Protocol",
-}, smithy.ShapeTypeEnum, 4)
-var Protocol_SFTP *smithy.Schema
-
-var Protocol_FTP *smithy.Schema
-
-var Protocol_FTPS *smithy.Schema
-
-var Protocol_AS2 *smithy.Schema
-
-var ProtocolDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ProtocolDetails",
-}, smithy.ShapeTypeStructure, 6)
-var ProtocolDetails_PassiveIp *smithy.Schema
-
-var ProtocolDetails_TlsSessionResumptionMode *smithy.Schema
-
-var ProtocolDetails_SetStatOption *smithy.Schema
-
-var ProtocolDetails_SftpPorts *smithy.Schema
-
-var ProtocolDetails_As2Transports *smithy.Schema
-
-var ProtocolDetails_ProxyConfig *smithy.Schema
-
-var _Protocols = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Protocols",
-}, smithy.ShapeTypeList, 1)
-var _Protocols_member *smithy.Schema
-
-var ProxyConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ProxyConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ProxyConfig_SftpMode *smithy.Schema
-
-var ProxyMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ProxyMode",
-}, smithy.ShapeTypeEnum, 2)
-var ProxyMode_NONE *smithy.Schema
-
-var ProxyMode_PROXY_PROTOCOL_V2_ENFORCED *smithy.Schema
-
-var _Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Resource",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ResourceExistsException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceExistsException_Message *smithy.Schema
-
-var ResourceExistsException_Resource *smithy.Schema
-
-var ResourceExistsException_ResourceType *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_Resource *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Response",
-}, smithy.ShapeTypeString, 0)
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeString, 0)
-
-var _Role = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Role",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Etag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3Etag",
-}, smithy.ShapeTypeString, 0)
-
-var S3FileLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3FileLocation",
-}, smithy.ShapeTypeStructure, 4)
-var S3FileLocation_Bucket *smithy.Schema
-
-var S3FileLocation_Key *smithy.Schema
-
-var S3FileLocation_VersionId *smithy.Schema
-
-var S3FileLocation_Etag *smithy.Schema
-
-var S3InputFileLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3InputFileLocation",
-}, smithy.ShapeTypeStructure, 2)
-var S3InputFileLocation_Bucket *smithy.Schema
-
-var S3InputFileLocation_Key *smithy.Schema
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var S3StorageOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3StorageOptions",
-}, smithy.ShapeTypeStructure, 1)
-var S3StorageOptions_DirectoryListingOptimization *smithy.Schema
-
-var S3Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3Tag",
-}, smithy.ShapeTypeStructure, 2)
-var S3Tag_Key *smithy.Schema
-
-var S3Tag_Value *smithy.Schema
-
-var _S3TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3Tags",
-}, smithy.ShapeTypeList, 1)
-var _S3Tags_member *smithy.Schema
-
-var _S3TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _S3VersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "S3VersionId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecondaryGids = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecondaryGids",
-}, smithy.ShapeTypeList, 1)
-var _SecondaryGids_member *smithy.Schema
-
-var _SecretId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecretId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecretVersionStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecretVersionStage",
-}, smithy.ShapeTypeString, 0)
-
-var _SecretVersionStageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecretVersionStageList",
-}, smithy.ShapeTypeList, 1)
-var _SecretVersionStageList_member *smithy.Schema
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var _SecurityPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityPolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityPolicyNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityPolicyNames",
-}, smithy.ShapeTypeList, 1)
-var _SecurityPolicyNames_member *smithy.Schema
-
-var _SecurityPolicyOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityPolicyOption",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityPolicyOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityPolicyOptions",
-}, smithy.ShapeTypeList, 1)
-var _SecurityPolicyOptions_member *smithy.Schema
-
-var SecurityPolicyProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityPolicyProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var SecurityPolicyProtocol_SFTP *smithy.Schema
-
-var SecurityPolicyProtocol_FTPS *smithy.Schema
-
-var _SecurityPolicyProtocols = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityPolicyProtocols",
-}, smithy.ShapeTypeList, 1)
-var _SecurityPolicyProtocols_member *smithy.Schema
-
-var SecurityPolicyResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SecurityPolicyResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var SecurityPolicyResourceType_SERVER *smithy.Schema
-
-var SecurityPolicyResourceType_CONNECTOR *smithy.Schema
-
-var _ServerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ServerId",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ServiceErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceManagedEgressIpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ServiceManagedEgressIpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceManagedEgressIpAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ServiceManagedEgressIpAddresses",
-}, smithy.ShapeTypeList, 1)
-var _ServiceManagedEgressIpAddresses_member *smithy.Schema
-
-var ServiceMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ServiceMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceMetadata_UserDetails *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceUnavailable",
-		StatusCode: 503})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var _SessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SessionId",
-}, smithy.ShapeTypeString, 0)
-
-var SetStatOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SetStatOption",
-}, smithy.ShapeTypeEnum, 2)
-var SetStatOption_DEFAULT *smithy.Schema
-
-var SetStatOption_ENABLE_NO_OP *smithy.Schema
-
-var SftpAuthenticationMethods = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpAuthenticationMethods",
-}, smithy.ShapeTypeEnum, 4)
-var SftpAuthenticationMethods_PASSWORD *smithy.Schema
-
-var SftpAuthenticationMethods_PUBLIC_KEY *smithy.Schema
-
-var SftpAuthenticationMethods_PUBLIC_KEY_OR_PASSWORD *smithy.Schema
-
-var SftpAuthenticationMethods_PUBLIC_KEY_AND_PASSWORD *smithy.Schema
-
-var SftpConnectorConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpConnectorConfig",
-}, smithy.ShapeTypeStructure, 4)
-var SftpConnectorConfig_UserSecretId *smithy.Schema
-
-var SftpConnectorConfig_TrustedHostKeys *smithy.Schema
-
-var SftpConnectorConfig_MaxConcurrentConnections *smithy.Schema
-
-var SftpConnectorConfig_OrderedUserSecretVersionStages *smithy.Schema
-
-var SftpConnectorConnectionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpConnectorConnectionDetails",
-}, smithy.ShapeTypeStructure, 1)
-var SftpConnectorConnectionDetails_HostKey *smithy.Schema
-
-var _SftpConnectorHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpConnectorHostKey",
-}, smithy.ShapeTypeString, 0)
-
-var _SftpConnectorTrustedHostKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpConnectorTrustedHostKey",
-}, smithy.ShapeTypeString, 0)
-
-var _SftpConnectorTrustedHostKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpConnectorTrustedHostKeyList",
-}, smithy.ShapeTypeList, 1)
-var _SftpConnectorTrustedHostKeyList_member *smithy.Schema
-
-var _SftpPort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpPort",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SftpPorts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpPorts",
-}, smithy.ShapeTypeList, 1)
-var _SftpPorts_member *smithy.Schema
-
-var SftpPortWithOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SftpPortWithOptions",
-}, smithy.ShapeTypeStructure, 2)
-var SftpPortWithOptions_SftpPort *smithy.Schema
-
-var SftpPortWithOptions_CommunicationMode *smithy.Schema
-
-var SigningAlg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SigningAlg",
-}, smithy.ShapeTypeEnum, 5)
-var SigningAlg_SHA256 *smithy.Schema
-
-var SigningAlg_SHA384 *smithy.Schema
-
-var SigningAlg_SHA512 *smithy.Schema
-
-var SigningAlg_SHA1 *smithy.Schema
-
-var SigningAlg_NONE *smithy.Schema
-
-var _SourceFileLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SourceFileLocation",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SourceIp",
-}, smithy.ShapeTypeString, 0)
-
-var SshPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SshPublicKey",
-}, smithy.ShapeTypeStructure, 3)
-var SshPublicKey_DateImported *smithy.Schema
-
-var SshPublicKey_SshPublicKeyBody *smithy.Schema
-
-var SshPublicKey_SshPublicKeyId *smithy.Schema
-
-var _SshPublicKeyBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SshPublicKeyBody",
-}, smithy.ShapeTypeString, 0)
-
-var _SshPublicKeyCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SshPublicKeyCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SshPublicKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SshPublicKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _SshPublicKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SshPublicKeys",
-}, smithy.ShapeTypeList, 1)
-var _SshPublicKeys_member *smithy.Schema
-
-var State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "State",
-}, smithy.ShapeTypeEnum, 6)
-var State_OFFLINE *smithy.Schema
-
-var State_ONLINE *smithy.Schema
-
-var State_STARTING *smithy.Schema
-
-var State_STOPPING *smithy.Schema
-
-var State_START_FAILED *smithy.Schema
-
-var State_STOP_FAILED *smithy.Schema
-
-var _Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Status",
-}, smithy.ShapeTypeString, 0)
-
-var _StatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StatusCode",
-}, smithy.ShapeTypeInteger, 0)
-
-var _StepResultOutputsJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StepResultOutputsJson",
-}, smithy.ShapeTypeString, 0)
-
-var _StructuredLogDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StructuredLogDestinations",
-}, smithy.ShapeTypeList, 1)
-var _StructuredLogDestinations_member *smithy.Schema
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var TagStepDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TagStepDetails",
-}, smithy.ShapeTypeStructure, 3)
-var TagStepDetails_Name *smithy.Schema
-
-var TagStepDetails_Tags *smithy.Schema
-
-var TagStepDetails_SourceFileLocation *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_RetryAfterSeconds *smithy.Schema
-
-var TlsSessionResumptionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TlsSessionResumptionMode",
-}, smithy.ShapeTypeEnum, 3)
-var TlsSessionResumptionMode_DISABLED *smithy.Schema
-
-var TlsSessionResumptionMode_ENABLED *smithy.Schema
-
-var TlsSessionResumptionMode_ENFORCED *smithy.Schema
-
-var _TransferId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TransferId",
-}, smithy.ShapeTypeString, 0)
-
-var TransferTableStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TransferTableStatus",
-}, smithy.ShapeTypeEnum, 4)
-var TransferTableStatus_QUEUED *smithy.Schema
-
-var TransferTableStatus_IN_PROGRESS *smithy.Schema
-
-var TransferTableStatus_COMPLETED *smithy.Schema
-
-var TransferTableStatus_FAILED *smithy.Schema
-
-var UpdateConnectorEgressConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateConnectorEgressConfig",
-}, smithy.ShapeTypeUnion, 1)
-var UpdateConnectorEgressConfig_VpcLattice *smithy.Schema
-
-var UpdateConnectorVpcLatticeEgressConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateConnectorVpcLatticeEgressConfig",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectorVpcLatticeEgressConfig_ResourceConfigurationArn *smithy.Schema
-
-var UpdateConnectorVpcLatticeEgressConfig_PortNumber *smithy.Schema
-
-var UpdateWebAppEndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppEndpointDetails",
-}, smithy.ShapeTypeUnion, 1)
-var UpdateWebAppEndpointDetails_Vpc *smithy.Schema
-
-var UpdateWebAppIdentityCenterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppIdentityCenterConfig",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWebAppIdentityCenterConfig_Role *smithy.Schema
-
-var UpdateWebAppIdentityProviderDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppIdentityProviderDetails",
-}, smithy.ShapeTypeUnion, 1)
-var UpdateWebAppIdentityProviderDetails_IdentityCenterConfig *smithy.Schema
-
-var UpdateWebAppVpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppVpcConfig",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateWebAppVpcConfig_SubnetIds *smithy.Schema
-
-var UpdateWebAppVpcConfig_IpAddressType *smithy.Schema
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var _UserCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UserCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var UserDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UserDetails",
-}, smithy.ShapeTypeStructure, 3)
-var UserDetails_UserName *smithy.Schema
-
-var UserDetails_ServerId *smithy.Schema
-
-var UserDetails_SessionId *smithy.Schema
-
-var _UserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UserName",
-}, smithy.ShapeTypeString, 0)
-
-var _UserPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UserPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _VpcEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "VpcEndpointId",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcLatticeResourceConfigurationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "VpcLatticeResourceConfigurationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _WebAppAccessEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppAccessEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _WebAppEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var WebAppEndpointDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppEndpointDetails",
-}, smithy.ShapeTypeUnion, 1)
-var WebAppEndpointDetails_Vpc *smithy.Schema
-
-var WebAppEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppEndpointPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var WebAppEndpointPolicy_FIPS *smithy.Schema
-
-var WebAppEndpointPolicy_STANDARD *smithy.Schema
-
-var WebAppEndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppEndpointType",
-}, smithy.ShapeTypeEnum, 2)
-var WebAppEndpointType_PUBLIC *smithy.Schema
-
-var WebAppEndpointType_VPC *smithy.Schema
-
-var _WebAppFaviconFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppFaviconFile",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _WebAppId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppId",
-}, smithy.ShapeTypeString, 0)
-
-var WebAppIdentityProviderDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppIdentityProviderDetails",
-}, smithy.ShapeTypeUnion, 1)
-var WebAppIdentityProviderDetails_IdentityCenterConfig *smithy.Schema
-
-var _WebAppLogoFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppLogoFile",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _WebAppTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppTitle",
-}, smithy.ShapeTypeString, 0)
-
-var _WebAppUnitCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppUnitCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var WebAppUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppUnits",
-}, smithy.ShapeTypeUnion, 1)
-var WebAppUnits_Provisioned *smithy.Schema
-
-var WebAppVpcConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppVpcConfig",
-}, smithy.ShapeTypeStructure, 4)
-var WebAppVpcConfig_SubnetIds *smithy.Schema
-
-var WebAppVpcConfig_VpcId *smithy.Schema
-
-var WebAppVpcConfig_SecurityGroupIds *smithy.Schema
-
-var WebAppVpcConfig_IpAddressType *smithy.Schema
-
-var WebAppVpcEndpointIpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WebAppVpcEndpointIpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var WebAppVpcEndpointIpAddressType_IPV4 *smithy.Schema
-
-var WebAppVpcEndpointIpAddressType_DUALSTACK *smithy.Schema
-
-var _WorkflowDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowDescription",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowDetail",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowDetail_WorkflowId *smithy.Schema
-
-var WorkflowDetail_ExecutionRole *smithy.Schema
-
-var WorkflowDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowDetails",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowDetails_OnUpload *smithy.Schema
-
-var WorkflowDetails_OnPartialUpload *smithy.Schema
-
-var _WorkflowId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowId",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowStep",
-}, smithy.ShapeTypeStructure, 6)
-var WorkflowStep_Type *smithy.Schema
-
-var WorkflowStep_CopyStepDetails *smithy.Schema
-
-var WorkflowStep_CustomStepDetails *smithy.Schema
-
-var WorkflowStep_DeleteStepDetails *smithy.Schema
-
-var WorkflowStep_TagStepDetails *smithy.Schema
-
-var WorkflowStep_DecryptStepDetails *smithy.Schema
-
-var _WorkflowStepName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowStepName",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkflowSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowSteps",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowSteps_member *smithy.Schema
-
-var WorkflowStepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "WorkflowStepType",
-}, smithy.ShapeTypeEnum, 5)
-var WorkflowStepType_COPY *smithy.Schema
-
-var WorkflowStepType_CUSTOM *smithy.Schema
-
-var WorkflowStepType_TAG *smithy.Schema
-
-var WorkflowStepType_DELETE *smithy.Schema
-
-var WorkflowStepType_DECRYPT *smithy.Schema
-
-var CreateAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateAccessRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateAccessRequest_HomeDirectory *smithy.Schema
-
-var CreateAccessRequest_HomeDirectoryType *smithy.Schema
-
-var CreateAccessRequest_HomeDirectoryMappings *smithy.Schema
-
-var CreateAccessRequest_Policy *smithy.Schema
-
-var CreateAccessRequest_PosixProfile *smithy.Schema
-
-var CreateAccessRequest_Role *smithy.Schema
-
-var CreateAccessRequest_ServerId *smithy.Schema
-
-var CreateAccessRequest_ExternalId *smithy.Schema
-
-var CreateAccessResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateAccessResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAccessResponse_ServerId *smithy.Schema
-
-var CreateAccessResponse_ExternalId *smithy.Schema
-
-var CreateAgreementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateAgreementRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateAgreementRequest_Description *smithy.Schema
-
-var CreateAgreementRequest_ServerId *smithy.Schema
-
-var CreateAgreementRequest_LocalProfileId *smithy.Schema
-
-var CreateAgreementRequest_PartnerProfileId *smithy.Schema
-
-var CreateAgreementRequest_BaseDirectory *smithy.Schema
-
-var CreateAgreementRequest_AccessRole *smithy.Schema
-
-var CreateAgreementRequest_Status *smithy.Schema
-
-var CreateAgreementRequest_Tags *smithy.Schema
-
-var CreateAgreementRequest_PreserveFilename *smithy.Schema
-
-var CreateAgreementRequest_EnforceMessageSigning *smithy.Schema
-
-var CreateAgreementRequest_CustomDirectories *smithy.Schema
-
-var CreateAgreementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateAgreementResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAgreementResponse_AgreementId *smithy.Schema
-
-var CreateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateConnectorRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateConnectorRequest_Url *smithy.Schema
-
-var CreateConnectorRequest_As2Config *smithy.Schema
-
-var CreateConnectorRequest_AccessRole *smithy.Schema
-
-var CreateConnectorRequest_LoggingRole *smithy.Schema
-
-var CreateConnectorRequest_Tags *smithy.Schema
-
-var CreateConnectorRequest_SftpConfig *smithy.Schema
-
-var CreateConnectorRequest_SecurityPolicyName *smithy.Schema
-
-var CreateConnectorRequest_EgressConfig *smithy.Schema
-
-var CreateConnectorRequest_IpAddressType *smithy.Schema
-
-var CreateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectorResponse_ConnectorId *smithy.Schema
-
-var CreateProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateProfileRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateProfileRequest_As2Id *smithy.Schema
-
-var CreateProfileRequest_ProfileType *smithy.Schema
-
-var CreateProfileRequest_CertificateIds *smithy.Schema
-
-var CreateProfileRequest_Tags *smithy.Schema
-
-var CreateProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateProfileResponse_ProfileId *smithy.Schema
-
-var CreateServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateServerRequest",
-}, smithy.ShapeTypeStructure, 19)
-var CreateServerRequest_Certificate *smithy.Schema
-
-var CreateServerRequest_Domain *smithy.Schema
-
-var CreateServerRequest_EndpointDetails *smithy.Schema
-
-var CreateServerRequest_EndpointType *smithy.Schema
-
-var CreateServerRequest_HostKey *smithy.Schema
-
-var CreateServerRequest_IdentityProviderDetails *smithy.Schema
-
-var CreateServerRequest_IdentityProviderType *smithy.Schema
-
-var CreateServerRequest_LoggingRole *smithy.Schema
-
-var CreateServerRequest_PostAuthenticationLoginBanner *smithy.Schema
-
-var CreateServerRequest_PreAuthenticationLoginBanner *smithy.Schema
-
-var CreateServerRequest_Protocols *smithy.Schema
-
-var CreateServerRequest_ProtocolDetails *smithy.Schema
-
-var CreateServerRequest_SecurityPolicyName *smithy.Schema
-
-var CreateServerRequest_Tags *smithy.Schema
-
-var CreateServerRequest_WorkflowDetails *smithy.Schema
-
-var CreateServerRequest_StructuredLogDestinations *smithy.Schema
-
-var CreateServerRequest_S3StorageOptions *smithy.Schema
-
-var CreateServerRequest_IpAddressType *smithy.Schema
-
-var CreateServerRequest_HostKeyStorageType *smithy.Schema
-
-var CreateServerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateServerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServerResponse_ServerId *smithy.Schema
-
-var CreateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateUserRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateUserRequest_HomeDirectory *smithy.Schema
-
-var CreateUserRequest_HomeDirectoryType *smithy.Schema
-
-var CreateUserRequest_HomeDirectoryMappings *smithy.Schema
-
-var CreateUserRequest_Policy *smithy.Schema
-
-var CreateUserRequest_PosixProfile *smithy.Schema
-
-var CreateUserRequest_Role *smithy.Schema
-
-var CreateUserRequest_ServerId *smithy.Schema
-
-var CreateUserRequest_SshPublicKeyBody *smithy.Schema
-
-var CreateUserRequest_Tags *smithy.Schema
-
-var CreateUserRequest_UserName *smithy.Schema
-
-var CreateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateUserResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateUserResponse_ServerId *smithy.Schema
-
-var CreateUserResponse_UserName *smithy.Schema
-
-var CreateWebAppRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateWebAppRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateWebAppRequest_IdentityProviderDetails *smithy.Schema
-
-var CreateWebAppRequest_AccessEndpoint *smithy.Schema
-
-var CreateWebAppRequest_WebAppUnits *smithy.Schema
-
-var CreateWebAppRequest_Tags *smithy.Schema
-
-var CreateWebAppRequest_WebAppEndpointPolicy *smithy.Schema
-
-var CreateWebAppRequest_EndpointDetails *smithy.Schema
-
-var CreateWebAppResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateWebAppResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWebAppResponse_WebAppId *smithy.Schema
-
-var CreateWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateWorkflowRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWorkflowRequest_Description *smithy.Schema
-
-var CreateWorkflowRequest_Steps *smithy.Schema
-
-var CreateWorkflowRequest_OnExceptionSteps *smithy.Schema
-
-var CreateWorkflowRequest_Tags *smithy.Schema
-
-var CreateWorkflowRequest_StructuredLogDestinations *smithy.Schema
-
-var CreateWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "CreateWorkflowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWorkflowResponse_WorkflowId *smithy.Schema
-
-var DeleteAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteAccessRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAccessRequest_ServerId *smithy.Schema
-
-var DeleteAccessRequest_ExternalId *smithy.Schema
-
-var DeleteAgreementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteAgreementRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAgreementRequest_AgreementId *smithy.Schema
-
-var DeleteAgreementRequest_ServerId *smithy.Schema
-
-var DeleteCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteCertificateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCertificateRequest_CertificateId *smithy.Schema
-
-var DeleteConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectorRequest_ConnectorId *smithy.Schema
-
-var DeleteHostKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteHostKeyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteHostKeyRequest_ServerId *smithy.Schema
-
-var DeleteHostKeyRequest_HostKeyId *smithy.Schema
-
-var DeleteProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteProfileRequest_ProfileId *smithy.Schema
-
-var DeleteServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteServerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServerRequest_ServerId *smithy.Schema
-
-var DeleteSshPublicKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteSshPublicKeyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSshPublicKeyRequest_ServerId *smithy.Schema
-
-var DeleteSshPublicKeyRequest_SshPublicKeyId *smithy.Schema
-
-var DeleteSshPublicKeyRequest_UserName *smithy.Schema
-
-var DeleteUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteUserRequest_ServerId *smithy.Schema
-
-var DeleteUserRequest_UserName *smithy.Schema
-
-var DeleteWebAppCustomizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteWebAppCustomizationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWebAppCustomizationRequest_WebAppId *smithy.Schema
-
-var DeleteWebAppRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteWebAppRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWebAppRequest_WebAppId *smithy.Schema
-
-var DeleteWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DeleteWorkflowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkflowRequest_WorkflowId *smithy.Schema
-
-var DescribeAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeAccessRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAccessRequest_ServerId *smithy.Schema
-
-var DescribeAccessRequest_ExternalId *smithy.Schema
-
-var DescribeAccessResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeAccessResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAccessResponse_ServerId *smithy.Schema
-
-var DescribeAccessResponse_Access *smithy.Schema
-
-var DescribeAgreementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeAgreementRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeAgreementRequest_AgreementId *smithy.Schema
-
-var DescribeAgreementRequest_ServerId *smithy.Schema
-
-var DescribeAgreementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeAgreementResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAgreementResponse_Agreement *smithy.Schema
-
-var DescribeCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeCertificateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCertificateRequest_CertificateId *smithy.Schema
-
-var DescribeCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeCertificateResponse_Certificate *smithy.Schema
-
-var DescribeConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorRequest_ConnectorId *smithy.Schema
-
-var DescribeConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorResponse_Connector *smithy.Schema
-
-var DescribeExecutionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeExecutionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeExecutionRequest_ExecutionId *smithy.Schema
-
-var DescribeExecutionRequest_WorkflowId *smithy.Schema
-
-var DescribeExecutionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeExecutionResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeExecutionResponse_WorkflowId *smithy.Schema
-
-var DescribeExecutionResponse_Execution *smithy.Schema
-
-var DescribeHostKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeHostKeyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeHostKeyRequest_ServerId *smithy.Schema
-
-var DescribeHostKeyRequest_HostKeyId *smithy.Schema
-
-var DescribeHostKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeHostKeyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeHostKeyResponse_HostKey *smithy.Schema
-
-var DescribeProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeProfileRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeProfileRequest_ProfileId *smithy.Schema
-
-var DescribeProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeProfileResponse_Profile *smithy.Schema
-
-var DescribeSecurityPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeSecurityPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSecurityPolicyRequest_SecurityPolicyName *smithy.Schema
-
-var DescribeSecurityPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeSecurityPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSecurityPolicyResponse_SecurityPolicy *smithy.Schema
-
-var DescribeServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeServerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeServerRequest_ServerId *smithy.Schema
-
-var DescribeServerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeServerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeServerResponse_Server *smithy.Schema
-
-var DescribeUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUserRequest_ServerId *smithy.Schema
-
-var DescribeUserRequest_UserName *smithy.Schema
-
-var DescribeUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeUserResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUserResponse_ServerId *smithy.Schema
-
-var DescribeUserResponse_User *smithy.Schema
-
-var DescribeWebAppCustomizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWebAppCustomizationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWebAppCustomizationRequest_WebAppId *smithy.Schema
-
-var DescribeWebAppCustomizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWebAppCustomizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWebAppCustomizationResponse_WebAppCustomization *smithy.Schema
-
-var DescribeWebAppRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWebAppRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWebAppRequest_WebAppId *smithy.Schema
-
-var DescribeWebAppResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWebAppResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWebAppResponse_WebApp *smithy.Schema
-
-var DescribeWorkflowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWorkflowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkflowRequest_WorkflowId *smithy.Schema
-
-var DescribeWorkflowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "DescribeWorkflowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeWorkflowResponse_Workflow *smithy.Schema
-
-var ImportCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportCertificateRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ImportCertificateRequest_Usage *smithy.Schema
-
-var ImportCertificateRequest_Certificate *smithy.Schema
-
-var ImportCertificateRequest_CertificateChain *smithy.Schema
-
-var ImportCertificateRequest_PrivateKey *smithy.Schema
-
-var ImportCertificateRequest_ActiveDate *smithy.Schema
-
-var ImportCertificateRequest_InactiveDate *smithy.Schema
-
-var ImportCertificateRequest_Description *smithy.Schema
-
-var ImportCertificateRequest_Tags *smithy.Schema
-
-var ImportCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ImportCertificateResponse_CertificateId *smithy.Schema
-
-var ImportHostKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportHostKeyRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ImportHostKeyRequest_ServerId *smithy.Schema
-
-var ImportHostKeyRequest_HostKeyBody *smithy.Schema
-
-var ImportHostKeyRequest_Description *smithy.Schema
-
-var ImportHostKeyRequest_Tags *smithy.Schema
-
-var ImportHostKeyRequest_StorageType *smithy.Schema
-
-var ImportHostKeyRequest_KmsKey *smithy.Schema
-
-var ImportHostKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportHostKeyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ImportHostKeyResponse_ServerId *smithy.Schema
-
-var ImportHostKeyResponse_HostKeyId *smithy.Schema
-
-var ImportSshPublicKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportSshPublicKeyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ImportSshPublicKeyRequest_ServerId *smithy.Schema
-
-var ImportSshPublicKeyRequest_SshPublicKeyBody *smithy.Schema
-
-var ImportSshPublicKeyRequest_UserName *smithy.Schema
-
-var ImportSshPublicKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ImportSshPublicKeyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ImportSshPublicKeyResponse_ServerId *smithy.Schema
-
-var ImportSshPublicKeyResponse_SshPublicKeyId *smithy.Schema
-
-var ImportSshPublicKeyResponse_UserName *smithy.Schema
-
-var ListAccessesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListAccessesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAccessesRequest_MaxResults *smithy.Schema
-
-var ListAccessesRequest_NextToken *smithy.Schema
-
-var ListAccessesRequest_ServerId *smithy.Schema
-
-var ListAccessesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListAccessesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListAccessesResponse_NextToken *smithy.Schema
-
-var ListAccessesResponse_ServerId *smithy.Schema
-
-var ListAccessesResponse_Accesses *smithy.Schema
-
-var ListAgreementsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListAgreementsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAgreementsRequest_MaxResults *smithy.Schema
-
-var ListAgreementsRequest_NextToken *smithy.Schema
-
-var ListAgreementsRequest_ServerId *smithy.Schema
-
-var ListAgreementsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListAgreementsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAgreementsResponse_NextToken *smithy.Schema
-
-var ListAgreementsResponse_Agreements *smithy.Schema
-
-var ListCertificatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListCertificatesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCertificatesRequest_MaxResults *smithy.Schema
-
-var ListCertificatesRequest_NextToken *smithy.Schema
-
-var ListCertificatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListCertificatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCertificatesResponse_NextToken *smithy.Schema
-
-var ListCertificatesResponse_Certificates *smithy.Schema
-
-var ListConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListConnectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsRequest_MaxResults *smithy.Schema
-
-var ListConnectorsRequest_NextToken *smithy.Schema
-
-var ListConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsResponse_NextToken *smithy.Schema
-
-var ListConnectorsResponse_Connectors *smithy.Schema
-
-var ListExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListExecutionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListExecutionsRequest_MaxResults *smithy.Schema
-
-var ListExecutionsRequest_NextToken *smithy.Schema
-
-var ListExecutionsRequest_WorkflowId *smithy.Schema
-
-var ListExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListExecutionsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListExecutionsResponse_NextToken *smithy.Schema
-
-var ListExecutionsResponse_WorkflowId *smithy.Schema
-
-var ListExecutionsResponse_Executions *smithy.Schema
-
-var ListFileTransferResultsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListFileTransferResultsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListFileTransferResultsRequest_ConnectorId *smithy.Schema
-
-var ListFileTransferResultsRequest_TransferId *smithy.Schema
-
-var ListFileTransferResultsRequest_NextToken *smithy.Schema
-
-var ListFileTransferResultsRequest_MaxResults *smithy.Schema
-
-var ListFileTransferResultsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListFileTransferResultsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFileTransferResultsResponse_FileTransferResults *smithy.Schema
-
-var ListFileTransferResultsResponse_NextToken *smithy.Schema
-
-var ListHostKeysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListHostKeysRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListHostKeysRequest_MaxResults *smithy.Schema
-
-var ListHostKeysRequest_NextToken *smithy.Schema
-
-var ListHostKeysRequest_ServerId *smithy.Schema
-
-var ListHostKeysResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListHostKeysResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListHostKeysResponse_NextToken *smithy.Schema
-
-var ListHostKeysResponse_ServerId *smithy.Schema
-
-var ListHostKeysResponse_HostKeys *smithy.Schema
-
-var ListProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListProfilesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListProfilesRequest_MaxResults *smithy.Schema
-
-var ListProfilesRequest_NextToken *smithy.Schema
-
-var ListProfilesRequest_ProfileType *smithy.Schema
-
-var ListProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProfilesResponse_NextToken *smithy.Schema
-
-var ListProfilesResponse_Profiles *smithy.Schema
-
-var ListSecurityPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListSecurityPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSecurityPoliciesRequest_MaxResults *smithy.Schema
-
-var ListSecurityPoliciesRequest_NextToken *smithy.Schema
-
-var ListSecurityPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListSecurityPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSecurityPoliciesResponse_NextToken *smithy.Schema
-
-var ListSecurityPoliciesResponse_SecurityPolicyNames *smithy.Schema
-
-var ListServersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListServersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListServersRequest_MaxResults *smithy.Schema
-
-var ListServersRequest_NextToken *smithy.Schema
-
-var ListServersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListServersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServersResponse_NextToken *smithy.Schema
-
-var ListServersResponse_Servers *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_Arn *smithy.Schema
-
-var ListTagsForResourceRequest_MaxResults *smithy.Schema
-
-var ListTagsForResourceRequest_NextToken *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceResponse_Arn *smithy.Schema
-
-var ListTagsForResourceResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListUsersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListUsersRequest_MaxResults *smithy.Schema
-
-var ListUsersRequest_NextToken *smithy.Schema
-
-var ListUsersRequest_ServerId *smithy.Schema
-
-var ListUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListUsersResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListUsersResponse_NextToken *smithy.Schema
-
-var ListUsersResponse_ServerId *smithy.Schema
-
-var ListUsersResponse_Users *smithy.Schema
-
-var ListWebAppsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListWebAppsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListWebAppsRequest_MaxResults *smithy.Schema
-
-var ListWebAppsRequest_NextToken *smithy.Schema
-
-var ListWebAppsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListWebAppsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWebAppsResponse_NextToken *smithy.Schema
-
-var ListWebAppsResponse_WebApps *smithy.Schema
-
-var ListWorkflowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListWorkflowsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowsRequest_MaxResults *smithy.Schema
-
-var ListWorkflowsRequest_NextToken *smithy.Schema
-
-var ListWorkflowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "ListWorkflowsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowsResponse_NextToken *smithy.Schema
-
-var ListWorkflowsResponse_Workflows *smithy.Schema
-
-var SendWorkflowStepStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SendWorkflowStepStateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SendWorkflowStepStateRequest_WorkflowId *smithy.Schema
-
-var SendWorkflowStepStateRequest_ExecutionId *smithy.Schema
-
-var SendWorkflowStepStateRequest_Token *smithy.Schema
-
-var SendWorkflowStepStateRequest_Status *smithy.Schema
-
-var SendWorkflowStepStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "SendWorkflowStepStateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartDirectoryListingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartDirectoryListingRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartDirectoryListingRequest_ConnectorId *smithy.Schema
-
-var StartDirectoryListingRequest_RemoteDirectoryPath *smithy.Schema
-
-var StartDirectoryListingRequest_MaxItems *smithy.Schema
-
-var StartDirectoryListingRequest_OutputDirectoryPath *smithy.Schema
-
-var StartDirectoryListingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartDirectoryListingResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartDirectoryListingResponse_ListingId *smithy.Schema
-
-var StartDirectoryListingResponse_OutputFileName *smithy.Schema
-
-var StartFileTransferRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartFileTransferRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartFileTransferRequest_ConnectorId *smithy.Schema
-
-var StartFileTransferRequest_SendFilePaths *smithy.Schema
-
-var StartFileTransferRequest_RetrieveFilePaths *smithy.Schema
-
-var StartFileTransferRequest_LocalDirectoryPath *smithy.Schema
-
-var StartFileTransferRequest_RemoteDirectoryPath *smithy.Schema
-
-var StartFileTransferRequest_CustomHttpHeaders *smithy.Schema
-
-var StartFileTransferResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartFileTransferResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartFileTransferResponse_TransferId *smithy.Schema
-
-var StartRemoteDeleteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartRemoteDeleteRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartRemoteDeleteRequest_ConnectorId *smithy.Schema
-
-var StartRemoteDeleteRequest_DeletePath *smithy.Schema
-
-var StartRemoteDeleteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartRemoteDeleteResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRemoteDeleteResponse_DeleteId *smithy.Schema
-
-var StartRemoteMoveRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartRemoteMoveRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartRemoteMoveRequest_ConnectorId *smithy.Schema
-
-var StartRemoteMoveRequest_SourcePath *smithy.Schema
-
-var StartRemoteMoveRequest_TargetPath *smithy.Schema
-
-var StartRemoteMoveResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartRemoteMoveResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRemoteMoveResponse_MoveId *smithy.Schema
-
-var StartServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StartServerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartServerRequest_ServerId *smithy.Schema
-
-var StopServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "StopServerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopServerRequest_ServerId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_Arn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TestConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TestConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var TestConnectionRequest_ConnectorId *smithy.Schema
-
-var TestConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TestConnectionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var TestConnectionResponse_ConnectorId *smithy.Schema
-
-var TestConnectionResponse_Status *smithy.Schema
-
-var TestConnectionResponse_StatusMessage *smithy.Schema
-
-var TestConnectionResponse_SftpConnectionDetails *smithy.Schema
-
-var TestIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TestIdentityProviderRequest",
-}, smithy.ShapeTypeStructure, 5)
-var TestIdentityProviderRequest_ServerId *smithy.Schema
-
-var TestIdentityProviderRequest_ServerProtocol *smithy.Schema
-
-var TestIdentityProviderRequest_SourceIp *smithy.Schema
-
-var TestIdentityProviderRequest_UserName *smithy.Schema
-
-var TestIdentityProviderRequest_UserPassword *smithy.Schema
-
-var TestIdentityProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "TestIdentityProviderResponse",
-}, smithy.ShapeTypeStructure, 4)
-var TestIdentityProviderResponse_Response *smithy.Schema
-
-var TestIdentityProviderResponse_StatusCode *smithy.Schema
-
-var TestIdentityProviderResponse_Message *smithy.Schema
-
-var TestIdentityProviderResponse_Url *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_Arn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateAccessRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateAccessRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateAccessRequest_HomeDirectory *smithy.Schema
-
-var UpdateAccessRequest_HomeDirectoryType *smithy.Schema
-
-var UpdateAccessRequest_HomeDirectoryMappings *smithy.Schema
-
-var UpdateAccessRequest_Policy *smithy.Schema
-
-var UpdateAccessRequest_PosixProfile *smithy.Schema
-
-var UpdateAccessRequest_Role *smithy.Schema
-
-var UpdateAccessRequest_ServerId *smithy.Schema
-
-var UpdateAccessRequest_ExternalId *smithy.Schema
-
-var UpdateAccessResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateAccessResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAccessResponse_ServerId *smithy.Schema
-
-var UpdateAccessResponse_ExternalId *smithy.Schema
-
-var UpdateAgreementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateAgreementRequest",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateAgreementRequest_AgreementId *smithy.Schema
-
-var UpdateAgreementRequest_ServerId *smithy.Schema
-
-var UpdateAgreementRequest_Description *smithy.Schema
-
-var UpdateAgreementRequest_Status *smithy.Schema
-
-var UpdateAgreementRequest_LocalProfileId *smithy.Schema
-
-var UpdateAgreementRequest_PartnerProfileId *smithy.Schema
-
-var UpdateAgreementRequest_BaseDirectory *smithy.Schema
-
-var UpdateAgreementRequest_AccessRole *smithy.Schema
-
-var UpdateAgreementRequest_PreserveFilename *smithy.Schema
-
-var UpdateAgreementRequest_EnforceMessageSigning *smithy.Schema
-
-var UpdateAgreementRequest_CustomDirectories *smithy.Schema
-
-var UpdateAgreementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateAgreementResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAgreementResponse_AgreementId *smithy.Schema
-
-var UpdateCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateCertificateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCertificateRequest_CertificateId *smithy.Schema
-
-var UpdateCertificateRequest_ActiveDate *smithy.Schema
-
-var UpdateCertificateRequest_InactiveDate *smithy.Schema
-
-var UpdateCertificateRequest_Description *smithy.Schema
-
-var UpdateCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateCertificateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCertificateResponse_CertificateId *smithy.Schema
-
-var UpdateConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateConnectorRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateConnectorRequest_ConnectorId *smithy.Schema
-
-var UpdateConnectorRequest_Url *smithy.Schema
-
-var UpdateConnectorRequest_As2Config *smithy.Schema
-
-var UpdateConnectorRequest_AccessRole *smithy.Schema
-
-var UpdateConnectorRequest_LoggingRole *smithy.Schema
-
-var UpdateConnectorRequest_SftpConfig *smithy.Schema
-
-var UpdateConnectorRequest_SecurityPolicyName *smithy.Schema
-
-var UpdateConnectorRequest_EgressConfig *smithy.Schema
-
-var UpdateConnectorRequest_IpAddressType *smithy.Schema
-
-var UpdateConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateConnectorResponse_ConnectorId *smithy.Schema
-
-var UpdateHostKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateHostKeyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateHostKeyRequest_ServerId *smithy.Schema
-
-var UpdateHostKeyRequest_HostKeyId *smithy.Schema
-
-var UpdateHostKeyRequest_Description *smithy.Schema
-
-var UpdateHostKeyRequest_StorageType *smithy.Schema
-
-var UpdateHostKeyRequest_KmsKey *smithy.Schema
-
-var UpdateHostKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateHostKeyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateHostKeyResponse_ServerId *smithy.Schema
-
-var UpdateHostKeyResponse_HostKeyId *smithy.Schema
-
-var UpdateProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateProfileRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateProfileRequest_ProfileId *smithy.Schema
-
-var UpdateProfileRequest_CertificateIds *smithy.Schema
-
-var UpdateProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateProfileResponse_ProfileId *smithy.Schema
-
-var UpdateServerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateServerRequest",
-}, smithy.ShapeTypeStructure, 17)
-var UpdateServerRequest_Certificate *smithy.Schema
-
-var UpdateServerRequest_ProtocolDetails *smithy.Schema
-
-var UpdateServerRequest_EndpointDetails *smithy.Schema
-
-var UpdateServerRequest_EndpointType *smithy.Schema
-
-var UpdateServerRequest_HostKey *smithy.Schema
-
-var UpdateServerRequest_IdentityProviderDetails *smithy.Schema
-
-var UpdateServerRequest_LoggingRole *smithy.Schema
-
-var UpdateServerRequest_PostAuthenticationLoginBanner *smithy.Schema
-
-var UpdateServerRequest_PreAuthenticationLoginBanner *smithy.Schema
-
-var UpdateServerRequest_Protocols *smithy.Schema
-
-var UpdateServerRequest_SecurityPolicyName *smithy.Schema
-
-var UpdateServerRequest_ServerId *smithy.Schema
-
-var UpdateServerRequest_WorkflowDetails *smithy.Schema
-
-var UpdateServerRequest_StructuredLogDestinations *smithy.Schema
-
-var UpdateServerRequest_S3StorageOptions *smithy.Schema
-
-var UpdateServerRequest_IpAddressType *smithy.Schema
-
-var UpdateServerRequest_IdentityProviderType *smithy.Schema
-
-var UpdateServerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateServerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServerResponse_ServerId *smithy.Schema
-
-var UpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateUserRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateUserRequest_HomeDirectory *smithy.Schema
-
-var UpdateUserRequest_HomeDirectoryType *smithy.Schema
-
-var UpdateUserRequest_HomeDirectoryMappings *smithy.Schema
-
-var UpdateUserRequest_Policy *smithy.Schema
-
-var UpdateUserRequest_PosixProfile *smithy.Schema
-
-var UpdateUserRequest_Role *smithy.Schema
-
-var UpdateUserRequest_ServerId *smithy.Schema
-
-var UpdateUserRequest_UserName *smithy.Schema
-
-var UpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateUserResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateUserResponse_ServerId *smithy.Schema
-
-var UpdateUserResponse_UserName *smithy.Schema
-
-var UpdateWebAppCustomizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppCustomizationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateWebAppCustomizationRequest_WebAppId *smithy.Schema
-
-var UpdateWebAppCustomizationRequest_Title *smithy.Schema
-
-var UpdateWebAppCustomizationRequest_LogoFile *smithy.Schema
-
-var UpdateWebAppCustomizationRequest_FaviconFile *smithy.Schema
-
-var UpdateWebAppCustomizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppCustomizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWebAppCustomizationResponse_WebAppId *smithy.Schema
-
-var UpdateWebAppRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateWebAppRequest_WebAppId *smithy.Schema
-
-var UpdateWebAppRequest_IdentityProviderDetails *smithy.Schema
-
-var UpdateWebAppRequest_AccessEndpoint *smithy.Schema
-
-var UpdateWebAppRequest_WebAppUnits *smithy.Schema
-
-var UpdateWebAppRequest_EndpointDetails *smithy.Schema
-
-var UpdateWebAppResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.transfer",
-	Name:      "UpdateWebAppResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWebAppResponse_WebAppId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ServiceErrorMessage)
-
-	_AddressAllocationIds_member = _AddressAllocationIds.AddMember("member", _AddressAllocationId)
-
-	AgreementStatusType_ACTIVE = AgreementStatusType.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AgreementStatusType_INACTIVE = AgreementStatusType.AddMember("INACTIVE", smithyprelude.Unit)
-
-	_As2AsyncMdnServerIds_member = _As2AsyncMdnServerIds.AddMember("member", _ServerId)
-
-	As2AsyncMdnConnectorConfig_Url = As2AsyncMdnConnectorConfig.AddMember("Url", _Url)
-
-	As2AsyncMdnConnectorConfig_ServerIds = As2AsyncMdnConnectorConfig.AddMember("ServerIds", _As2AsyncMdnServerIds)
-
-	CompressionEnum_ZLIB = CompressionEnum.AddMember("ZLIB", smithyprelude.Unit)
-
-	CompressionEnum_DISABLED = CompressionEnum.AddMember("DISABLED", smithyprelude.Unit)
-
-	EncryptionAlg_AES128_CBC = EncryptionAlg.AddMember("AES128_CBC", smithyprelude.Unit)
-
-	EncryptionAlg_AES192_CBC = EncryptionAlg.AddMember("AES192_CBC", smithyprelude.Unit)
-
-	EncryptionAlg_AES256_CBC = EncryptionAlg.AddMember("AES256_CBC", smithyprelude.Unit)
-
-	EncryptionAlg_DES_EDE3_CBC = EncryptionAlg.AddMember("DES_EDE3_CBC", smithyprelude.Unit)
-
-	EncryptionAlg_NONE = EncryptionAlg.AddMember("NONE", smithyprelude.Unit)
-
-	SigningAlg_SHA256 = SigningAlg.AddMember("SHA256", smithyprelude.Unit)
-
-	SigningAlg_SHA384 = SigningAlg.AddMember("SHA384", smithyprelude.Unit)
-
-	SigningAlg_SHA512 = SigningAlg.AddMember("SHA512", smithyprelude.Unit)
-
-	SigningAlg_SHA1 = SigningAlg.AddMember("SHA1", smithyprelude.Unit)
-
-	SigningAlg_NONE = SigningAlg.AddMember("NONE", smithyprelude.Unit)
-
-	MdnSigningAlg_SHA256 = MdnSigningAlg.AddMember("SHA256", smithyprelude.Unit)
-
-	MdnSigningAlg_SHA384 = MdnSigningAlg.AddMember("SHA384", smithyprelude.Unit)
-
-	MdnSigningAlg_SHA512 = MdnSigningAlg.AddMember("SHA512", smithyprelude.Unit)
-
-	MdnSigningAlg_SHA1 = MdnSigningAlg.AddMember("SHA1", smithyprelude.Unit)
-
-	MdnSigningAlg_NONE = MdnSigningAlg.AddMember("NONE", smithyprelude.Unit)
-
-	MdnSigningAlg_DEFAULT = MdnSigningAlg.AddMember("DEFAULT", smithyprelude.Unit)
-
-	MdnResponse_SYNC = MdnResponse.AddMember("SYNC", smithyprelude.Unit)
-
-	MdnResponse_NONE = MdnResponse.AddMember("NONE", smithyprelude.Unit)
-
-	MdnResponse_ASYNC = MdnResponse.AddMember("ASYNC", smithyprelude.Unit)
-
-	PreserveContentType_ENABLED = PreserveContentType.AddMember("ENABLED", smithyprelude.Unit)
-
-	PreserveContentType_DISABLED = PreserveContentType.AddMember("DISABLED", smithyprelude.Unit)
-
-	As2ConnectorConfig_LocalProfileId = As2ConnectorConfig.AddMember("LocalProfileId", _ProfileId)
-
-	As2ConnectorConfig_PartnerProfileId = As2ConnectorConfig.AddMember("PartnerProfileId", _ProfileId)
-
-	As2ConnectorConfig_MessageSubject = As2ConnectorConfig.AddMember("MessageSubject", _MessageSubject)
-
-	As2ConnectorConfig_Compression = As2ConnectorConfig.AddMember("Compression", CompressionEnum)
-
-	As2ConnectorConfig_EncryptionAlgorithm = As2ConnectorConfig.AddMember("EncryptionAlgorithm", EncryptionAlg)
-
-	As2ConnectorConfig_SigningAlgorithm = As2ConnectorConfig.AddMember("SigningAlgorithm", SigningAlg)
-
-	As2ConnectorConfig_MdnSigningAlgorithm = As2ConnectorConfig.AddMember("MdnSigningAlgorithm", MdnSigningAlg)
-
-	As2ConnectorConfig_MdnResponse = As2ConnectorConfig.AddMember("MdnResponse", MdnResponse)
-
-	As2ConnectorConfig_BasicAuthSecretId = As2ConnectorConfig.AddMember("BasicAuthSecretId", _As2ConnectorSecretId)
-
-	As2ConnectorConfig_PreserveContentType = As2ConnectorConfig.AddMember("PreserveContentType", PreserveContentType)
-
-	As2ConnectorConfig_AsyncMdnConfig = As2ConnectorConfig.AddMember("AsyncMdnConfig", As2AsyncMdnConnectorConfig)
-
-	As2Transport_HTTP = As2Transport.AddMember("HTTP", smithyprelude.Unit)
-
-	_As2Transports_member = _As2Transports.AddMember("member", As2Transport)
-
-	_CertificateIds_member = _CertificateIds.AddMember("member", _CertificateId)
-
-	CertificateStatusType_ACTIVE = CertificateStatusType.AddMember("ACTIVE", smithyprelude.Unit)
-
-	CertificateStatusType_PENDING_ROTATION = CertificateStatusType.AddMember("PENDING_ROTATION", smithyprelude.Unit)
-
-	CertificateStatusType_INACTIVE = CertificateStatusType.AddMember("INACTIVE", smithyprelude.Unit)
-
-	CertificateType_CERTIFICATE = CertificateType.AddMember("CERTIFICATE", smithyprelude.Unit)
-
-	CertificateType_CERTIFICATE_WITH_PRIVATE_KEY = CertificateType.AddMember("CERTIFICATE_WITH_PRIVATE_KEY", smithyprelude.Unit)
-
-	CertificateUsageType_SIGNING = CertificateUsageType.AddMember("SIGNING", smithyprelude.Unit)
-
-	CertificateUsageType_ENCRYPTION = CertificateUsageType.AddMember("ENCRYPTION", smithyprelude.Unit)
-
-	CertificateUsageType_TLS = CertificateUsageType.AddMember("TLS", smithyprelude.Unit)
-
-	CommunicationMode_CLIENT_TALK_FIRST = CommunicationMode.AddMember("CLIENT_TALK_FIRST", smithyprelude.Unit)
-
-	CommunicationMode_SERVER_TALK_FIRST = CommunicationMode.AddMember("SERVER_TALK_FIRST", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _Message)
-
-	ConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = ConnectorVpcLatticeEgressConfig.AddMember("ResourceConfigurationArn", _VpcLatticeResourceConfigurationArn)
-
-	ConnectorVpcLatticeEgressConfig_PortNumber = ConnectorVpcLatticeEgressConfig.AddMember("PortNumber", _SftpPort)
-
-	ConnectorEgressConfig_VpcLattice = ConnectorEgressConfig.AddMember("VpcLattice", ConnectorVpcLatticeEgressConfig)
-
-	ConnectorEgressType_SERVICE_MANAGED = ConnectorEgressType.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
-
-	ConnectorEgressType_VPC_LATTICE = ConnectorEgressType.AddMember("VPC_LATTICE", smithyprelude.Unit)
-
-	TransferTableStatus_QUEUED = TransferTableStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	TransferTableStatus_IN_PROGRESS = TransferTableStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	TransferTableStatus_COMPLETED = TransferTableStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	TransferTableStatus_FAILED = TransferTableStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ConnectorFileTransferResult_FilePath = ConnectorFileTransferResult.AddMember("FilePath", _FilePath)
-
-	ConnectorFileTransferResult_StatusCode = ConnectorFileTransferResult.AddMember("StatusCode", TransferTableStatus)
-
-	ConnectorFileTransferResult_FailureCode = ConnectorFileTransferResult.AddMember("FailureCode", _FailureCode)
-
-	ConnectorFileTransferResult_FailureMessage = ConnectorFileTransferResult.AddMember("FailureMessage", _Message)
-
-	_ConnectorFileTransferResults_member = _ConnectorFileTransferResults.AddMember("member", ConnectorFileTransferResult)
-
-	ConnectorsIpAddressType_IPV4 = ConnectorsIpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	ConnectorsIpAddressType_DUALSTACK = ConnectorsIpAddressType.AddMember("DUALSTACK", smithyprelude.Unit)
-
-	ConnectorStatus_ACTIVE = ConnectorStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ConnectorStatus_ERRORED = ConnectorStatus.AddMember("ERRORED", smithyprelude.Unit)
-
-	ConnectorStatus_PENDING = ConnectorStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	S3InputFileLocation_Bucket = S3InputFileLocation.AddMember("Bucket", _S3Bucket)
-
-	S3InputFileLocation_Key = S3InputFileLocation.AddMember("Key", _S3Key)
-
-	EfsFileLocation_FileSystemId = EfsFileLocation.AddMember("FileSystemId", _EfsFileSystemId)
-
-	EfsFileLocation_Path = EfsFileLocation.AddMember("Path", _EfsPath)
-
-	InputFileLocation_S3FileLocation = InputFileLocation.AddMember("S3FileLocation", S3InputFileLocation)
-
-	InputFileLocation_EfsFileLocation = InputFileLocation.AddMember("EfsFileLocation", EfsFileLocation)
-
-	OverwriteExisting_TRUE = OverwriteExisting.AddMember("TRUE", smithyprelude.Unit)
-
-	OverwriteExisting_FALSE = OverwriteExisting.AddMember("FALSE", smithyprelude.Unit)
-
-	CopyStepDetails_Name = CopyStepDetails.AddMember("Name", _WorkflowStepName)
-
-	CopyStepDetails_DestinationFileLocation = CopyStepDetails.AddMember("DestinationFileLocation", InputFileLocation)
-
-	CopyStepDetails_OverwriteExisting = CopyStepDetails.AddMember("OverwriteExisting", OverwriteExisting)
-
-	CopyStepDetails_SourceFileLocation = CopyStepDetails.AddMember("SourceFileLocation", _SourceFileLocation)
-
-	CustomDirectoriesType_FailedFilesDirectory = CustomDirectoriesType.AddMember("FailedFilesDirectory", _HomeDirectory)
-
-	CustomDirectoriesType_MdnFilesDirectory = CustomDirectoriesType.AddMember("MdnFilesDirectory", _HomeDirectory)
-
-	CustomDirectoriesType_PayloadFilesDirectory = CustomDirectoriesType.AddMember("PayloadFilesDirectory", _HomeDirectory)
-
-	CustomDirectoriesType_StatusFilesDirectory = CustomDirectoriesType.AddMember("StatusFilesDirectory", _HomeDirectory)
-
-	CustomDirectoriesType_TemporaryFilesDirectory = CustomDirectoriesType.AddMember("TemporaryFilesDirectory", _HomeDirectory)
-
-	CustomHttpHeader_Key = CustomHttpHeader.AddMember("Key", _CustomHttpHeaderKeyType)
-
-	CustomHttpHeader_Value = CustomHttpHeader.AddMember("Value", _CustomHttpHeaderValueType)
-
-	_CustomHttpHeaders_member = _CustomHttpHeaders.AddMember("member", CustomHttpHeader)
-
-	CustomStepDetails_Name = CustomStepDetails.AddMember("Name", _WorkflowStepName)
-
-	CustomStepDetails_Target = CustomStepDetails.AddMember("Target", _CustomStepTarget)
-
-	CustomStepDetails_TimeoutSeconds = CustomStepDetails.AddMember("TimeoutSeconds", _CustomStepTimeoutSeconds)
-
-	CustomStepDetails_SourceFileLocation = CustomStepDetails.AddMember("SourceFileLocation", _SourceFileLocation)
-
-	CustomStepStatus_SUCCESS = CustomStepStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	CustomStepStatus_FAILURE = CustomStepStatus.AddMember("FAILURE", smithyprelude.Unit)
-
-	EncryptionType_PGP = EncryptionType.AddMember("PGP", smithyprelude.Unit)
-
-	DecryptStepDetails_Name = DecryptStepDetails.AddMember("Name", _WorkflowStepName)
-
-	DecryptStepDetails_Type = DecryptStepDetails.AddMember("Type", EncryptionType)
-
-	DecryptStepDetails_SourceFileLocation = DecryptStepDetails.AddMember("SourceFileLocation", _SourceFileLocation)
-
-	DecryptStepDetails_OverwriteExisting = DecryptStepDetails.AddMember("OverwriteExisting", OverwriteExisting)
-
-	DecryptStepDetails_DestinationFileLocation = DecryptStepDetails.AddMember("DestinationFileLocation", InputFileLocation)
-
-	DeleteStepDetails_Name = DeleteStepDetails.AddMember("Name", _WorkflowStepName)
-
-	DeleteStepDetails_SourceFileLocation = DeleteStepDetails.AddMember("SourceFileLocation", _SourceFileLocation)
-
-	MapType_FILE = MapType.AddMember("FILE", smithyprelude.Unit)
-
-	MapType_DIRECTORY = MapType.AddMember("DIRECTORY", smithyprelude.Unit)
-
-	HomeDirectoryMapEntry_Entry = HomeDirectoryMapEntry.AddMember("Entry", _MapEntry)
-
-	HomeDirectoryMapEntry_Target = HomeDirectoryMapEntry.AddMember("Target", _MapTarget)
-
-	HomeDirectoryMapEntry_Type = HomeDirectoryMapEntry.AddMember("Type", MapType)
-
-	_HomeDirectoryMappings_member = _HomeDirectoryMappings.AddMember("member", HomeDirectoryMapEntry)
-
-	HomeDirectoryType_PATH = HomeDirectoryType.AddMember("PATH", smithyprelude.Unit)
-
-	HomeDirectoryType_LOGICAL = HomeDirectoryType.AddMember("LOGICAL", smithyprelude.Unit)
-
-	_SecondaryGids_member = _SecondaryGids.AddMember("member", _PosixId)
-
-	PosixProfile_Uid = PosixProfile.AddMember("Uid", _PosixId)
-
-	PosixProfile_Gid = PosixProfile.AddMember("Gid", _PosixId)
-
-	PosixProfile_SecondaryGids = PosixProfile.AddMember("SecondaryGids", _SecondaryGids)
-
-	DescribedAccess_HomeDirectory = DescribedAccess.AddMember("HomeDirectory", _HomeDirectory)
-
-	DescribedAccess_HomeDirectoryMappings = DescribedAccess.AddMember("HomeDirectoryMappings", _HomeDirectoryMappings)
-
-	DescribedAccess_HomeDirectoryType = DescribedAccess.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	DescribedAccess_Policy = DescribedAccess.AddMember("Policy", _Policy)
-
-	DescribedAccess_PosixProfile = DescribedAccess.AddMember("PosixProfile", PosixProfile)
-
-	DescribedAccess_Role = DescribedAccess.AddMember("Role", _Role)
-
-	DescribedAccess_ExternalId = DescribedAccess.AddMember("ExternalId", _ExternalId)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	PreserveFilenameType_ENABLED = PreserveFilenameType.AddMember("ENABLED", smithyprelude.Unit)
-
-	PreserveFilenameType_DISABLED = PreserveFilenameType.AddMember("DISABLED", smithyprelude.Unit)
-
-	EnforceMessageSigningType_ENABLED = EnforceMessageSigningType.AddMember("ENABLED", smithyprelude.Unit)
-
-	EnforceMessageSigningType_DISABLED = EnforceMessageSigningType.AddMember("DISABLED", smithyprelude.Unit)
-
-	DescribedAgreement_Arn = DescribedAgreement.AddMember("Arn", _Arn)
-
-	DescribedAgreement_AgreementId = DescribedAgreement.AddMember("AgreementId", _AgreementId)
-
-	DescribedAgreement_Description = DescribedAgreement.AddMember("Description", _Description)
-
-	DescribedAgreement_Status = DescribedAgreement.AddMember("Status", AgreementStatusType)
-
-	DescribedAgreement_ServerId = DescribedAgreement.AddMember("ServerId", _ServerId)
-
-	DescribedAgreement_LocalProfileId = DescribedAgreement.AddMember("LocalProfileId", _ProfileId)
-
-	DescribedAgreement_PartnerProfileId = DescribedAgreement.AddMember("PartnerProfileId", _ProfileId)
-
-	DescribedAgreement_BaseDirectory = DescribedAgreement.AddMember("BaseDirectory", _HomeDirectory)
-
-	DescribedAgreement_AccessRole = DescribedAgreement.AddMember("AccessRole", _Role)
-
-	DescribedAgreement_Tags = DescribedAgreement.AddMember("Tags", _Tags)
-
-	DescribedAgreement_PreserveFilename = DescribedAgreement.AddMember("PreserveFilename", PreserveFilenameType)
-
-	DescribedAgreement_EnforceMessageSigning = DescribedAgreement.AddMember("EnforceMessageSigning", EnforceMessageSigningType)
-
-	DescribedAgreement_CustomDirectories = DescribedAgreement.AddMember("CustomDirectories", CustomDirectoriesType)
-
-	DescribedCertificate_Arn = DescribedCertificate.AddMember("Arn", _Arn)
-
-	DescribedCertificate_CertificateId = DescribedCertificate.AddMember("CertificateId", _CertificateId)
-
-	DescribedCertificate_Usage = DescribedCertificate.AddMember("Usage", CertificateUsageType)
-
-	DescribedCertificate_Status = DescribedCertificate.AddMember("Status", CertificateStatusType)
-
-	DescribedCertificate_Certificate = DescribedCertificate.AddMember("Certificate", _CertificateBodyType)
-
-	DescribedCertificate_CertificateChain = DescribedCertificate.AddMember("CertificateChain", _CertificateChainType)
-
-	DescribedCertificate_ActiveDate = DescribedCertificate.AddMember("ActiveDate", _CertDate)
-
-	DescribedCertificate_InactiveDate = DescribedCertificate.AddMember("InactiveDate", _CertDate)
-
-	DescribedCertificate_Serial = DescribedCertificate.AddMember("Serial", _CertSerial)
-
-	DescribedCertificate_NotBeforeDate = DescribedCertificate.AddMember("NotBeforeDate", _CertDate)
-
-	DescribedCertificate_NotAfterDate = DescribedCertificate.AddMember("NotAfterDate", _CertDate)
-
-	DescribedCertificate_Type = DescribedCertificate.AddMember("Type", CertificateType)
-
-	DescribedCertificate_Description = DescribedCertificate.AddMember("Description", _Description)
-
-	DescribedCertificate_Tags = DescribedCertificate.AddMember("Tags", _Tags)
-
-	_SftpConnectorTrustedHostKeyList_member = _SftpConnectorTrustedHostKeyList.AddMember("member", _SftpConnectorTrustedHostKey)
-
-	_SecretVersionStageList_member = _SecretVersionStageList.AddMember("member", _SecretVersionStage)
-
-	SftpConnectorConfig_UserSecretId = SftpConnectorConfig.AddMember("UserSecretId", _SecretId)
-
-	SftpConnectorConfig_TrustedHostKeys = SftpConnectorConfig.AddMember("TrustedHostKeys", _SftpConnectorTrustedHostKeyList)
-
-	SftpConnectorConfig_MaxConcurrentConnections = SftpConnectorConfig.AddMember("MaxConcurrentConnections", _MaxConcurrentConnections)
-
-	SftpConnectorConfig_OrderedUserSecretVersionStages = SftpConnectorConfig.AddMember("OrderedUserSecretVersionStages", _SecretVersionStageList)
-
-	_ServiceManagedEgressIpAddresses_member = _ServiceManagedEgressIpAddresses.AddMember("member", _ServiceManagedEgressIpAddress)
-
-	DescribedConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = DescribedConnectorVpcLatticeEgressConfig.AddMember("ResourceConfigurationArn", _VpcLatticeResourceConfigurationArn)
-
-	DescribedConnectorVpcLatticeEgressConfig_PortNumber = DescribedConnectorVpcLatticeEgressConfig.AddMember("PortNumber", _SftpPort)
-
-	DescribedConnectorEgressConfig_VpcLattice = DescribedConnectorEgressConfig.AddMember("VpcLattice", DescribedConnectorVpcLatticeEgressConfig)
-
-	DescribedConnector_Arn = DescribedConnector.AddMember("Arn", _Arn)
-
-	DescribedConnector_ConnectorId = DescribedConnector.AddMember("ConnectorId", _ConnectorId)
-
-	DescribedConnector_Url = DescribedConnector.AddMember("Url", _Url)
-
-	DescribedConnector_As2Config = DescribedConnector.AddMember("As2Config", As2ConnectorConfig)
-
-	DescribedConnector_AccessRole = DescribedConnector.AddMember("AccessRole", _Role)
-
-	DescribedConnector_LoggingRole = DescribedConnector.AddMember("LoggingRole", _Role)
-
-	DescribedConnector_Tags = DescribedConnector.AddMember("Tags", _Tags)
-
-	DescribedConnector_SftpConfig = DescribedConnector.AddMember("SftpConfig", SftpConnectorConfig)
-
-	DescribedConnector_ServiceManagedEgressIpAddresses = DescribedConnector.AddMember("ServiceManagedEgressIpAddresses", _ServiceManagedEgressIpAddresses)
-
-	DescribedConnector_SecurityPolicyName = DescribedConnector.AddMember("SecurityPolicyName", _ConnectorSecurityPolicyName)
-
-	DescribedConnector_EgressConfig = DescribedConnector.AddMember("EgressConfig", DescribedConnectorEgressConfig)
-
-	DescribedConnector_EgressType = DescribedConnector.AddMember("EgressType", ConnectorEgressType)
-
-	DescribedConnector_ErrorMessage = DescribedConnector.AddMember("ErrorMessage", _ConnectorErrorMessage)
-
-	DescribedConnector_Status = DescribedConnector.AddMember("Status", ConnectorStatus)
-
-	DescribedConnector_IpAddressType = DescribedConnector.AddMember("IpAddressType", ConnectorsIpAddressType)
-
-	S3FileLocation_Bucket = S3FileLocation.AddMember("Bucket", _S3Bucket)
-
-	S3FileLocation_Key = S3FileLocation.AddMember("Key", _S3Key)
-
-	S3FileLocation_VersionId = S3FileLocation.AddMember("VersionId", _S3VersionId)
-
-	S3FileLocation_Etag = S3FileLocation.AddMember("Etag", _S3Etag)
-
-	FileLocation_S3FileLocation = FileLocation.AddMember("S3FileLocation", S3FileLocation)
-
-	FileLocation_EfsFileLocation = FileLocation.AddMember("EfsFileLocation", EfsFileLocation)
-
-	UserDetails_UserName = UserDetails.AddMember("UserName", _UserName)
-
-	UserDetails_ServerId = UserDetails.AddMember("ServerId", _ServerId)
-
-	UserDetails_SessionId = UserDetails.AddMember("SessionId", _SessionId)
-
-	ServiceMetadata_UserDetails = ServiceMetadata.AddMember("UserDetails", UserDetails)
-
-	LoggingConfiguration_LoggingRole = LoggingConfiguration.AddMember("LoggingRole", _Role)
-
-	LoggingConfiguration_LogGroupName = LoggingConfiguration.AddMember("LogGroupName", _LogGroupName)
-
-	ExecutionStatus_IN_PROGRESS = ExecutionStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ExecutionStatus_COMPLETED = ExecutionStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ExecutionStatus_EXCEPTION = ExecutionStatus.AddMember("EXCEPTION", smithyprelude.Unit)
-
-	ExecutionStatus_HANDLING_EXCEPTION = ExecutionStatus.AddMember("HANDLING_EXCEPTION", smithyprelude.Unit)
-
-	WorkflowStepType_COPY = WorkflowStepType.AddMember("COPY", smithyprelude.Unit)
-
-	WorkflowStepType_CUSTOM = WorkflowStepType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	WorkflowStepType_TAG = WorkflowStepType.AddMember("TAG", smithyprelude.Unit)
-
-	WorkflowStepType_DELETE = WorkflowStepType.AddMember("DELETE", smithyprelude.Unit)
-
-	WorkflowStepType_DECRYPT = WorkflowStepType.AddMember("DECRYPT", smithyprelude.Unit)
-
-	ExecutionErrorType_PERMISSION_DENIED = ExecutionErrorType.AddMember("PERMISSION_DENIED", smithyprelude.Unit)
-
-	ExecutionErrorType_CUSTOM_STEP_FAILED = ExecutionErrorType.AddMember("CUSTOM_STEP_FAILED", smithyprelude.Unit)
-
-	ExecutionErrorType_THROTTLED = ExecutionErrorType.AddMember("THROTTLED", smithyprelude.Unit)
-
-	ExecutionErrorType_ALREADY_EXISTS = ExecutionErrorType.AddMember("ALREADY_EXISTS", smithyprelude.Unit)
-
-	ExecutionErrorType_NOT_FOUND = ExecutionErrorType.AddMember("NOT_FOUND", smithyprelude.Unit)
-
-	ExecutionErrorType_BAD_REQUEST = ExecutionErrorType.AddMember("BAD_REQUEST", smithyprelude.Unit)
-
-	ExecutionErrorType_TIMEOUT = ExecutionErrorType.AddMember("TIMEOUT", smithyprelude.Unit)
-
-	ExecutionErrorType_INTERNAL_SERVER_ERROR = ExecutionErrorType.AddMember("INTERNAL_SERVER_ERROR", smithyprelude.Unit)
-
-	ExecutionError_Type = ExecutionError.AddMember("Type", ExecutionErrorType)
-
-	ExecutionError_Message = ExecutionError.AddMember("Message", _ExecutionErrorMessage)
-
-	ExecutionStepResult_StepType = ExecutionStepResult.AddMember("StepType", WorkflowStepType)
-
-	ExecutionStepResult_Outputs = ExecutionStepResult.AddMember("Outputs", _StepResultOutputsJson)
-
-	ExecutionStepResult_Error = ExecutionStepResult.AddMember("Error", ExecutionError)
-
-	_ExecutionStepResults_member = _ExecutionStepResults.AddMember("member", ExecutionStepResult)
-
-	ExecutionResults_Steps = ExecutionResults.AddMember("Steps", _ExecutionStepResults)
-
-	ExecutionResults_OnExceptionSteps = ExecutionResults.AddMember("OnExceptionSteps", _ExecutionStepResults)
-
-	DescribedExecution_ExecutionId = DescribedExecution.AddMember("ExecutionId", _ExecutionId)
-
-	DescribedExecution_InitialFileLocation = DescribedExecution.AddMember("InitialFileLocation", FileLocation)
-
-	DescribedExecution_ServiceMetadata = DescribedExecution.AddMember("ServiceMetadata", ServiceMetadata)
-
-	DescribedExecution_ExecutionRole = DescribedExecution.AddMember("ExecutionRole", _Role)
-
-	DescribedExecution_LoggingConfiguration = DescribedExecution.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	DescribedExecution_PosixProfile = DescribedExecution.AddMember("PosixProfile", PosixProfile)
-
-	DescribedExecution_Status = DescribedExecution.AddMember("Status", ExecutionStatus)
-
-	DescribedExecution_Results = DescribedExecution.AddMember("Results", ExecutionResults)
-
-	HostKeyStorageType_SERVICE_MANAGED = HostKeyStorageType.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
-
-	HostKeyStorageType_SECRETS_MANAGER = HostKeyStorageType.AddMember("SECRETS_MANAGER", smithyprelude.Unit)
-
-	DescribedHostKey_Arn = DescribedHostKey.AddMember("Arn", _Arn)
-
-	DescribedHostKey_HostKeyId = DescribedHostKey.AddMember("HostKeyId", _HostKeyId)
-
-	DescribedHostKey_HostKeyFingerprint = DescribedHostKey.AddMember("HostKeyFingerprint", _HostKeyFingerprint)
-
-	DescribedHostKey_Description = DescribedHostKey.AddMember("Description", _HostKeyDescription)
-
-	DescribedHostKey_Type = DescribedHostKey.AddMember("Type", _HostKeyType)
-
-	DescribedHostKey_DateImported = DescribedHostKey.AddMember("DateImported", _DateImported)
-
-	DescribedHostKey_Tags = DescribedHostKey.AddMember("Tags", _Tags)
-
-	DescribedHostKey_StorageType = DescribedHostKey.AddMember("StorageType", HostKeyStorageType)
-
-	DescribedHostKey_SecretId = DescribedHostKey.AddMember("SecretId", _SecretId)
-
-	DescribedIdentityCenterConfig_ApplicationArn = DescribedIdentityCenterConfig.AddMember("ApplicationArn", _IdentityCenterApplicationArn)
-
-	DescribedIdentityCenterConfig_InstanceArn = DescribedIdentityCenterConfig.AddMember("InstanceArn", _IdentityCenterInstanceArn)
-
-	DescribedIdentityCenterConfig_Role = DescribedIdentityCenterConfig.AddMember("Role", _Role)
-
-	ProfileType_LOCAL = ProfileType.AddMember("LOCAL", smithyprelude.Unit)
-
-	ProfileType_PARTNER = ProfileType.AddMember("PARTNER", smithyprelude.Unit)
-
-	DescribedProfile_Arn = DescribedProfile.AddMember("Arn", _Arn)
-
-	DescribedProfile_ProfileId = DescribedProfile.AddMember("ProfileId", _ProfileId)
-
-	DescribedProfile_ProfileType = DescribedProfile.AddMember("ProfileType", ProfileType)
-
-	DescribedProfile_As2Id = DescribedProfile.AddMember("As2Id", _As2Id)
-
-	DescribedProfile_CertificateIds = DescribedProfile.AddMember("CertificateIds", _CertificateIds)
-
-	DescribedProfile_Tags = DescribedProfile.AddMember("Tags", _Tags)
-
-	_SecurityPolicyOptions_member = _SecurityPolicyOptions.AddMember("member", _SecurityPolicyOption)
-
-	SecurityPolicyResourceType_SERVER = SecurityPolicyResourceType.AddMember("SERVER", smithyprelude.Unit)
-
-	SecurityPolicyResourceType_CONNECTOR = SecurityPolicyResourceType.AddMember("CONNECTOR", smithyprelude.Unit)
-
-	SecurityPolicyProtocol_SFTP = SecurityPolicyProtocol.AddMember("SFTP", smithyprelude.Unit)
-
-	SecurityPolicyProtocol_FTPS = SecurityPolicyProtocol.AddMember("FTPS", smithyprelude.Unit)
-
-	_SecurityPolicyProtocols_member = _SecurityPolicyProtocols.AddMember("member", SecurityPolicyProtocol)
-
-	DescribedSecurityPolicy_Fips = DescribedSecurityPolicy.AddMember("Fips", _Fips)
-
-	DescribedSecurityPolicy_SecurityPolicyName = DescribedSecurityPolicy.AddMember("SecurityPolicyName", _SecurityPolicyName)
-
-	DescribedSecurityPolicy_SshCiphers = DescribedSecurityPolicy.AddMember("SshCiphers", _SecurityPolicyOptions)
-
-	DescribedSecurityPolicy_SshKexs = DescribedSecurityPolicy.AddMember("SshKexs", _SecurityPolicyOptions)
-
-	DescribedSecurityPolicy_SshMacs = DescribedSecurityPolicy.AddMember("SshMacs", _SecurityPolicyOptions)
-
-	DescribedSecurityPolicy_TlsCiphers = DescribedSecurityPolicy.AddMember("TlsCiphers", _SecurityPolicyOptions)
-
-	DescribedSecurityPolicy_SshHostKeyAlgorithms = DescribedSecurityPolicy.AddMember("SshHostKeyAlgorithms", _SecurityPolicyOptions)
-
-	DescribedSecurityPolicy_Type = DescribedSecurityPolicy.AddMember("Type", SecurityPolicyResourceType)
-
-	DescribedSecurityPolicy_Protocols = DescribedSecurityPolicy.AddMember("Protocols", _SecurityPolicyProtocols)
-
-	TlsSessionResumptionMode_DISABLED = TlsSessionResumptionMode.AddMember("DISABLED", smithyprelude.Unit)
-
-	TlsSessionResumptionMode_ENABLED = TlsSessionResumptionMode.AddMember("ENABLED", smithyprelude.Unit)
-
-	TlsSessionResumptionMode_ENFORCED = TlsSessionResumptionMode.AddMember("ENFORCED", smithyprelude.Unit)
-
-	SetStatOption_DEFAULT = SetStatOption.AddMember("DEFAULT", smithyprelude.Unit)
-
-	SetStatOption_ENABLE_NO_OP = SetStatOption.AddMember("ENABLE_NO_OP", smithyprelude.Unit)
-
-	SftpPortWithOptions_SftpPort = SftpPortWithOptions.AddMember("SftpPort", _SftpPort)
-
-	SftpPortWithOptions_CommunicationMode = SftpPortWithOptions.AddMember("CommunicationMode", CommunicationMode)
-
-	_SftpPorts_member = _SftpPorts.AddMember("member", SftpPortWithOptions)
-
-	ProxyMode_NONE = ProxyMode.AddMember("NONE", smithyprelude.Unit)
-
-	ProxyMode_PROXY_PROTOCOL_V2_ENFORCED = ProxyMode.AddMember("PROXY_PROTOCOL_V2_ENFORCED", smithyprelude.Unit)
-
-	ProxyConfig_SftpMode = ProxyConfig.AddMember("SftpMode", ProxyMode)
-
-	ProtocolDetails_PassiveIp = ProtocolDetails.AddMember("PassiveIp", _PassiveIp)
-
-	ProtocolDetails_TlsSessionResumptionMode = ProtocolDetails.AddMember("TlsSessionResumptionMode", TlsSessionResumptionMode)
-
-	ProtocolDetails_SetStatOption = ProtocolDetails.AddMember("SetStatOption", SetStatOption)
-
-	ProtocolDetails_SftpPorts = ProtocolDetails.AddMember("SftpPorts", _SftpPorts)
-
-	ProtocolDetails_As2Transports = ProtocolDetails.AddMember("As2Transports", _As2Transports)
-
-	ProtocolDetails_ProxyConfig = ProtocolDetails.AddMember("ProxyConfig", ProxyConfig)
-
-	Domain_S3 = Domain.AddMember("S3", smithyprelude.Unit)
-
-	Domain_EFS = Domain.AddMember("EFS", smithyprelude.Unit)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	EndpointDetails_AddressAllocationIds = EndpointDetails.AddMember("AddressAllocationIds", _AddressAllocationIds)
-
-	EndpointDetails_SubnetIds = EndpointDetails.AddMember("SubnetIds", _SubnetIds)
-
-	EndpointDetails_VpcEndpointId = EndpointDetails.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	EndpointDetails_VpcId = EndpointDetails.AddMember("VpcId", _VpcId)
-
-	EndpointDetails_SecurityGroupIds = EndpointDetails.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	EndpointType_PUBLIC = EndpointType.AddMember("PUBLIC", smithyprelude.Unit)
-
-	EndpointType_VPC = EndpointType.AddMember("VPC", smithyprelude.Unit)
-
-	EndpointType_VPC_ENDPOINT = EndpointType.AddMember("VPC_ENDPOINT", smithyprelude.Unit)
-
-	SftpAuthenticationMethods_PASSWORD = SftpAuthenticationMethods.AddMember("PASSWORD", smithyprelude.Unit)
-
-	SftpAuthenticationMethods_PUBLIC_KEY = SftpAuthenticationMethods.AddMember("PUBLIC_KEY", smithyprelude.Unit)
-
-	SftpAuthenticationMethods_PUBLIC_KEY_OR_PASSWORD = SftpAuthenticationMethods.AddMember("PUBLIC_KEY_OR_PASSWORD", smithyprelude.Unit)
-
-	SftpAuthenticationMethods_PUBLIC_KEY_AND_PASSWORD = SftpAuthenticationMethods.AddMember("PUBLIC_KEY_AND_PASSWORD", smithyprelude.Unit)
-
-	IdentityProviderDetails_Url = IdentityProviderDetails.AddMember("Url", _Url)
-
-	IdentityProviderDetails_InvocationRole = IdentityProviderDetails.AddMember("InvocationRole", _Role)
-
-	IdentityProviderDetails_DirectoryId = IdentityProviderDetails.AddMember("DirectoryId", _DirectoryId)
-
-	IdentityProviderDetails_Function = IdentityProviderDetails.AddMember("Function", _Function)
-
-	IdentityProviderDetails_SftpAuthenticationMethods = IdentityProviderDetails.AddMember("SftpAuthenticationMethods", SftpAuthenticationMethods)
-
-	IdentityProviderType_SERVICE_MANAGED = IdentityProviderType.AddMember("SERVICE_MANAGED", smithyprelude.Unit)
-
-	IdentityProviderType_API_GATEWAY = IdentityProviderType.AddMember("API_GATEWAY", smithyprelude.Unit)
-
-	IdentityProviderType_AWS_DIRECTORY_SERVICE = IdentityProviderType.AddMember("AWS_DIRECTORY_SERVICE", smithyprelude.Unit)
-
-	IdentityProviderType_AWS_LAMBDA = IdentityProviderType.AddMember("AWS_LAMBDA", smithyprelude.Unit)
-
-	Protocol_SFTP = Protocol.AddMember("SFTP", smithyprelude.Unit)
-
-	Protocol_FTP = Protocol.AddMember("FTP", smithyprelude.Unit)
-
-	Protocol_FTPS = Protocol.AddMember("FTPS", smithyprelude.Unit)
-
-	Protocol_AS2 = Protocol.AddMember("AS2", smithyprelude.Unit)
-
-	_Protocols_member = _Protocols.AddMember("member", Protocol)
-
-	State_OFFLINE = State.AddMember("OFFLINE", smithyprelude.Unit)
-
-	State_ONLINE = State.AddMember("ONLINE", smithyprelude.Unit)
-
-	State_STARTING = State.AddMember("STARTING", smithyprelude.Unit)
-
-	State_STOPPING = State.AddMember("STOPPING", smithyprelude.Unit)
-
-	State_START_FAILED = State.AddMember("START_FAILED", smithyprelude.Unit)
-
-	State_STOP_FAILED = State.AddMember("STOP_FAILED", smithyprelude.Unit)
-
-	WorkflowDetail_WorkflowId = WorkflowDetail.AddMember("WorkflowId", _WorkflowId)
-
-	WorkflowDetail_ExecutionRole = WorkflowDetail.AddMember("ExecutionRole", _Role)
-
-	_OnUploadWorkflowDetails_member = _OnUploadWorkflowDetails.AddMember("member", WorkflowDetail)
-
-	_OnPartialUploadWorkflowDetails_member = _OnPartialUploadWorkflowDetails.AddMember("member", WorkflowDetail)
-
-	WorkflowDetails_OnUpload = WorkflowDetails.AddMember("OnUpload", _OnUploadWorkflowDetails)
-
-	WorkflowDetails_OnPartialUpload = WorkflowDetails.AddMember("OnPartialUpload", _OnPartialUploadWorkflowDetails)
-
-	_StructuredLogDestinations_member = _StructuredLogDestinations.AddMember("member", _Arn)
-
-	DirectoryListingOptimization_ENABLED = DirectoryListingOptimization.AddMember("ENABLED", smithyprelude.Unit)
-
-	DirectoryListingOptimization_DISABLED = DirectoryListingOptimization.AddMember("DISABLED", smithyprelude.Unit)
-
-	S3StorageOptions_DirectoryListingOptimization = S3StorageOptions.AddMember("DirectoryListingOptimization", DirectoryListingOptimization)
-
-	IpAddressType_IPV4 = IpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	IpAddressType_DUALSTACK = IpAddressType.AddMember("DUALSTACK", smithyprelude.Unit)
-
-	DescribedServer_Arn = DescribedServer.AddMember("Arn", _Arn)
-
-	DescribedServer_Certificate = DescribedServer.AddMember("Certificate", _Certificate)
-
-	DescribedServer_ProtocolDetails = DescribedServer.AddMember("ProtocolDetails", ProtocolDetails)
-
-	DescribedServer_Domain = DescribedServer.AddMember("Domain", Domain)
-
-	DescribedServer_EndpointDetails = DescribedServer.AddMember("EndpointDetails", EndpointDetails)
-
-	DescribedServer_EndpointType = DescribedServer.AddMember("EndpointType", EndpointType)
-
-	DescribedServer_HostKeyFingerprint = DescribedServer.AddMember("HostKeyFingerprint", _HostKeyFingerprint)
-
-	DescribedServer_IdentityProviderDetails = DescribedServer.AddMember("IdentityProviderDetails", IdentityProviderDetails)
-
-	DescribedServer_IdentityProviderType = DescribedServer.AddMember("IdentityProviderType", IdentityProviderType)
-
-	DescribedServer_LoggingRole = DescribedServer.AddMember("LoggingRole", _NullableRole)
-
-	DescribedServer_PostAuthenticationLoginBanner = DescribedServer.AddMember("PostAuthenticationLoginBanner", _PostAuthenticationLoginBanner)
-
-	DescribedServer_PreAuthenticationLoginBanner = DescribedServer.AddMember("PreAuthenticationLoginBanner", _PreAuthenticationLoginBanner)
-
-	DescribedServer_Protocols = DescribedServer.AddMember("Protocols", _Protocols)
-
-	DescribedServer_SecurityPolicyName = DescribedServer.AddMember("SecurityPolicyName", _SecurityPolicyName)
-
-	DescribedServer_ServerId = DescribedServer.AddMember("ServerId", _ServerId)
-
-	DescribedServer_State = DescribedServer.AddMember("State", State)
-
-	DescribedServer_Tags = DescribedServer.AddMember("Tags", _Tags)
-
-	DescribedServer_UserCount = DescribedServer.AddMember("UserCount", _UserCount)
-
-	DescribedServer_WorkflowDetails = DescribedServer.AddMember("WorkflowDetails", WorkflowDetails)
-
-	DescribedServer_StructuredLogDestinations = DescribedServer.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
-
-	DescribedServer_S3StorageOptions = DescribedServer.AddMember("S3StorageOptions", S3StorageOptions)
-
-	DescribedServer_As2ServiceManagedEgressIpAddresses = DescribedServer.AddMember("As2ServiceManagedEgressIpAddresses", _ServiceManagedEgressIpAddresses)
-
-	DescribedServer_IpAddressType = DescribedServer.AddMember("IpAddressType", IpAddressType)
-
-	SshPublicKey_DateImported = SshPublicKey.AddMember("DateImported", _DateImported)
-
-	SshPublicKey_SshPublicKeyBody = SshPublicKey.AddMember("SshPublicKeyBody", _SshPublicKeyBody)
-
-	SshPublicKey_SshPublicKeyId = SshPublicKey.AddMember("SshPublicKeyId", _SshPublicKeyId)
-
-	_SshPublicKeys_member = _SshPublicKeys.AddMember("member", SshPublicKey)
-
-	DescribedUser_Arn = DescribedUser.AddMember("Arn", _Arn)
-
-	DescribedUser_HomeDirectory = DescribedUser.AddMember("HomeDirectory", _HomeDirectory)
-
-	DescribedUser_HomeDirectoryMappings = DescribedUser.AddMember("HomeDirectoryMappings", _HomeDirectoryMappings)
-
-	DescribedUser_HomeDirectoryType = DescribedUser.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	DescribedUser_Policy = DescribedUser.AddMember("Policy", _Policy)
-
-	DescribedUser_PosixProfile = DescribedUser.AddMember("PosixProfile", PosixProfile)
-
-	DescribedUser_Role = DescribedUser.AddMember("Role", _Role)
-
-	DescribedUser_SshPublicKeys = DescribedUser.AddMember("SshPublicKeys", _SshPublicKeys)
-
-	DescribedUser_Tags = DescribedUser.AddMember("Tags", _Tags)
-
-	DescribedUser_UserName = DescribedUser.AddMember("UserName", _UserName)
-
-	DescribedWebAppIdentityProviderDetails_IdentityCenterConfig = DescribedWebAppIdentityProviderDetails.AddMember("IdentityCenterConfig", DescribedIdentityCenterConfig)
-
-	WebAppUnits_Provisioned = WebAppUnits.AddMember("Provisioned", _WebAppUnitCount)
-
-	WebAppEndpointPolicy_FIPS = WebAppEndpointPolicy.AddMember("FIPS", smithyprelude.Unit)
-
-	WebAppEndpointPolicy_STANDARD = WebAppEndpointPolicy.AddMember("STANDARD", smithyprelude.Unit)
-
-	WebAppEndpointType_PUBLIC = WebAppEndpointType.AddMember("PUBLIC", smithyprelude.Unit)
-
-	WebAppEndpointType_VPC = WebAppEndpointType.AddMember("VPC", smithyprelude.Unit)
-
-	DescribedWebAppVpcConfig_SubnetIds = DescribedWebAppVpcConfig.AddMember("SubnetIds", _SubnetIds)
-
-	DescribedWebAppVpcConfig_VpcId = DescribedWebAppVpcConfig.AddMember("VpcId", _VpcId)
-
-	DescribedWebAppVpcConfig_VpcEndpointId = DescribedWebAppVpcConfig.AddMember("VpcEndpointId", _VpcEndpointId)
-
-	DescribedWebAppEndpointDetails_Vpc = DescribedWebAppEndpointDetails.AddMember("Vpc", DescribedWebAppVpcConfig)
-
-	DescribedWebApp_Arn = DescribedWebApp.AddMember("Arn", _Arn)
-
-	DescribedWebApp_WebAppId = DescribedWebApp.AddMember("WebAppId", _WebAppId)
-
-	DescribedWebApp_DescribedIdentityProviderDetails = DescribedWebApp.AddMember("DescribedIdentityProviderDetails", DescribedWebAppIdentityProviderDetails)
-
-	DescribedWebApp_AccessEndpoint = DescribedWebApp.AddMember("AccessEndpoint", _WebAppAccessEndpoint)
-
-	DescribedWebApp_WebAppEndpoint = DescribedWebApp.AddMember("WebAppEndpoint", _WebAppEndpoint)
-
-	DescribedWebApp_WebAppUnits = DescribedWebApp.AddMember("WebAppUnits", WebAppUnits)
-
-	DescribedWebApp_Tags = DescribedWebApp.AddMember("Tags", _Tags)
-
-	DescribedWebApp_WebAppEndpointPolicy = DescribedWebApp.AddMember("WebAppEndpointPolicy", WebAppEndpointPolicy)
-
-	DescribedWebApp_EndpointType = DescribedWebApp.AddMember("EndpointType", WebAppEndpointType)
-
-	DescribedWebApp_DescribedEndpointDetails = DescribedWebApp.AddMember("DescribedEndpointDetails", DescribedWebAppEndpointDetails)
-
-	DescribedWebAppCustomization_Arn = DescribedWebAppCustomization.AddMember("Arn", _Arn)
-
-	DescribedWebAppCustomization_WebAppId = DescribedWebAppCustomization.AddMember("WebAppId", _WebAppId)
-
-	DescribedWebAppCustomization_Title = DescribedWebAppCustomization.AddMember("Title", _WebAppTitle)
-
-	DescribedWebAppCustomization_LogoFile = DescribedWebAppCustomization.AddMember("LogoFile", _WebAppLogoFile)
-
-	DescribedWebAppCustomization_FaviconFile = DescribedWebAppCustomization.AddMember("FaviconFile", _WebAppFaviconFile)
-
-	S3Tag_Key = S3Tag.AddMember("Key", _S3TagKey)
-
-	S3Tag_Value = S3Tag.AddMember("Value", _S3TagValue)
-
-	_S3Tags_member = _S3Tags.AddMember("member", S3Tag)
-
-	TagStepDetails_Name = TagStepDetails.AddMember("Name", _WorkflowStepName)
-
-	TagStepDetails_Tags = TagStepDetails.AddMember("Tags", _S3Tags)
-
-	TagStepDetails_SourceFileLocation = TagStepDetails.AddMember("SourceFileLocation", _SourceFileLocation)
-
-	WorkflowStep_Type = WorkflowStep.AddMember("Type", WorkflowStepType)
-
-	WorkflowStep_CopyStepDetails = WorkflowStep.AddMember("CopyStepDetails", CopyStepDetails)
-
-	WorkflowStep_CustomStepDetails = WorkflowStep.AddMember("CustomStepDetails", CustomStepDetails)
-
-	WorkflowStep_DeleteStepDetails = WorkflowStep.AddMember("DeleteStepDetails", DeleteStepDetails)
-
-	WorkflowStep_TagStepDetails = WorkflowStep.AddMember("TagStepDetails", TagStepDetails)
-
-	WorkflowStep_DecryptStepDetails = WorkflowStep.AddMember("DecryptStepDetails", DecryptStepDetails)
-
-	_WorkflowSteps_member = _WorkflowSteps.AddMember("member", WorkflowStep)
-
-	DescribedWorkflow_Arn = DescribedWorkflow.AddMember("Arn", _Arn)
-
-	DescribedWorkflow_Description = DescribedWorkflow.AddMember("Description", _WorkflowDescription)
-
-	DescribedWorkflow_Steps = DescribedWorkflow.AddMember("Steps", _WorkflowSteps)
-
-	DescribedWorkflow_OnExceptionSteps = DescribedWorkflow.AddMember("OnExceptionSteps", _WorkflowSteps)
-
-	DescribedWorkflow_WorkflowId = DescribedWorkflow.AddMember("WorkflowId", _WorkflowId)
-
-	DescribedWorkflow_Tags = DescribedWorkflow.AddMember("Tags", _Tags)
-
-	DescribedWorkflow_StructuredLogDestinations = DescribedWorkflow.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
-
-	_FilePaths_member = _FilePaths.AddMember("member", _FilePath)
-
-	IdentityCenterConfig_InstanceArn = IdentityCenterConfig.AddMember("InstanceArn", _IdentityCenterInstanceArn)
-
-	IdentityCenterConfig_Role = IdentityCenterConfig.AddMember("Role", _Role)
-
-	InternalServiceError_Message = InternalServiceError.AddMember("Message", _Message)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _Message)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _Message)
-
-	ListedAccess_HomeDirectory = ListedAccess.AddMember("HomeDirectory", _HomeDirectory)
-
-	ListedAccess_HomeDirectoryType = ListedAccess.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	ListedAccess_Role = ListedAccess.AddMember("Role", _Role)
-
-	ListedAccess_ExternalId = ListedAccess.AddMember("ExternalId", _ExternalId)
-
-	_ListedAccesses_member = _ListedAccesses.AddMember("member", ListedAccess)
-
-	ListedAgreement_Arn = ListedAgreement.AddMember("Arn", _Arn)
-
-	ListedAgreement_AgreementId = ListedAgreement.AddMember("AgreementId", _AgreementId)
-
-	ListedAgreement_Description = ListedAgreement.AddMember("Description", _Description)
-
-	ListedAgreement_Status = ListedAgreement.AddMember("Status", AgreementStatusType)
-
-	ListedAgreement_ServerId = ListedAgreement.AddMember("ServerId", _ServerId)
-
-	ListedAgreement_LocalProfileId = ListedAgreement.AddMember("LocalProfileId", _ProfileId)
-
-	ListedAgreement_PartnerProfileId = ListedAgreement.AddMember("PartnerProfileId", _ProfileId)
-
-	_ListedAgreements_member = _ListedAgreements.AddMember("member", ListedAgreement)
-
-	ListedCertificate_Arn = ListedCertificate.AddMember("Arn", _Arn)
-
-	ListedCertificate_CertificateId = ListedCertificate.AddMember("CertificateId", _CertificateId)
-
-	ListedCertificate_Usage = ListedCertificate.AddMember("Usage", CertificateUsageType)
-
-	ListedCertificate_Status = ListedCertificate.AddMember("Status", CertificateStatusType)
-
-	ListedCertificate_ActiveDate = ListedCertificate.AddMember("ActiveDate", _CertDate)
-
-	ListedCertificate_InactiveDate = ListedCertificate.AddMember("InactiveDate", _CertDate)
-
-	ListedCertificate_Type = ListedCertificate.AddMember("Type", CertificateType)
-
-	ListedCertificate_Description = ListedCertificate.AddMember("Description", _Description)
-
-	_ListedCertificates_member = _ListedCertificates.AddMember("member", ListedCertificate)
-
-	ListedConnector_Arn = ListedConnector.AddMember("Arn", _Arn)
-
-	ListedConnector_ConnectorId = ListedConnector.AddMember("ConnectorId", _ConnectorId)
-
-	ListedConnector_Url = ListedConnector.AddMember("Url", _Url)
-
-	_ListedConnectors_member = _ListedConnectors.AddMember("member", ListedConnector)
-
-	ListedExecution_ExecutionId = ListedExecution.AddMember("ExecutionId", _ExecutionId)
-
-	ListedExecution_InitialFileLocation = ListedExecution.AddMember("InitialFileLocation", FileLocation)
-
-	ListedExecution_ServiceMetadata = ListedExecution.AddMember("ServiceMetadata", ServiceMetadata)
-
-	ListedExecution_Status = ListedExecution.AddMember("Status", ExecutionStatus)
-
-	_ListedExecutions_member = _ListedExecutions.AddMember("member", ListedExecution)
-
-	ListedHostKey_Arn = ListedHostKey.AddMember("Arn", _Arn)
-
-	ListedHostKey_HostKeyId = ListedHostKey.AddMember("HostKeyId", _HostKeyId)
-
-	ListedHostKey_Fingerprint = ListedHostKey.AddMember("Fingerprint", _HostKeyFingerprint)
-
-	ListedHostKey_Description = ListedHostKey.AddMember("Description", _HostKeyDescription)
-
-	ListedHostKey_Type = ListedHostKey.AddMember("Type", _HostKeyType)
-
-	ListedHostKey_DateImported = ListedHostKey.AddMember("DateImported", _DateImported)
-
-	ListedHostKey_StorageType = ListedHostKey.AddMember("StorageType", HostKeyStorageType)
-
-	ListedHostKey_SecretId = ListedHostKey.AddMember("SecretId", _SecretId)
-
-	_ListedHostKeys_member = _ListedHostKeys.AddMember("member", ListedHostKey)
-
-	ListedProfile_Arn = ListedProfile.AddMember("Arn", _Arn)
-
-	ListedProfile_ProfileId = ListedProfile.AddMember("ProfileId", _ProfileId)
-
-	ListedProfile_As2Id = ListedProfile.AddMember("As2Id", _As2Id)
-
-	ListedProfile_ProfileType = ListedProfile.AddMember("ProfileType", ProfileType)
-
-	_ListedProfiles_member = _ListedProfiles.AddMember("member", ListedProfile)
-
-	ListedServer_Arn = ListedServer.AddMember("Arn", _Arn)
-
-	ListedServer_Domain = ListedServer.AddMember("Domain", Domain)
-
-	ListedServer_IdentityProviderType = ListedServer.AddMember("IdentityProviderType", IdentityProviderType)
-
-	ListedServer_EndpointType = ListedServer.AddMember("EndpointType", EndpointType)
-
-	ListedServer_LoggingRole = ListedServer.AddMember("LoggingRole", _Role)
-
-	ListedServer_ServerId = ListedServer.AddMember("ServerId", _ServerId)
-
-	ListedServer_State = ListedServer.AddMember("State", State)
-
-	ListedServer_UserCount = ListedServer.AddMember("UserCount", _UserCount)
-
-	_ListedServers_member = _ListedServers.AddMember("member", ListedServer)
-
-	ListedUser_Arn = ListedUser.AddMember("Arn", _Arn)
-
-	ListedUser_HomeDirectory = ListedUser.AddMember("HomeDirectory", _HomeDirectory)
-
-	ListedUser_HomeDirectoryType = ListedUser.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	ListedUser_Role = ListedUser.AddMember("Role", _Role)
-
-	ListedUser_SshPublicKeyCount = ListedUser.AddMember("SshPublicKeyCount", _SshPublicKeyCount)
-
-	ListedUser_UserName = ListedUser.AddMember("UserName", _UserName)
-
-	_ListedUsers_member = _ListedUsers.AddMember("member", ListedUser)
-
-	ListedWebApp_Arn = ListedWebApp.AddMember("Arn", _Arn)
-
-	ListedWebApp_WebAppId = ListedWebApp.AddMember("WebAppId", _WebAppId)
-
-	ListedWebApp_AccessEndpoint = ListedWebApp.AddMember("AccessEndpoint", _WebAppAccessEndpoint)
-
-	ListedWebApp_WebAppEndpoint = ListedWebApp.AddMember("WebAppEndpoint", _WebAppEndpoint)
-
-	ListedWebApp_EndpointType = ListedWebApp.AddMember("EndpointType", WebAppEndpointType)
-
-	_ListedWebApps_member = _ListedWebApps.AddMember("member", ListedWebApp)
-
-	ListedWorkflow_WorkflowId = ListedWorkflow.AddMember("WorkflowId", _WorkflowId)
-
-	ListedWorkflow_Description = ListedWorkflow.AddMember("Description", _WorkflowDescription)
-
-	ListedWorkflow_Arn = ListedWorkflow.AddMember("Arn", _Arn)
-
-	_ListedWorkflows_member = _ListedWorkflows.AddMember("member", ListedWorkflow)
-
-	ResourceExistsException_Message = ResourceExistsException.AddMember("Message", _Message)
-
-	ResourceExistsException_Resource = ResourceExistsException.AddMember("Resource", _Resource)
-
-	ResourceExistsException_ResourceType = ResourceExistsException.AddMember("ResourceType", _ResourceType)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _Message)
-
-	ResourceNotFoundException_Resource = ResourceNotFoundException.AddMember("Resource", _Resource)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _ResourceType)
-
-	_SecurityPolicyNames_member = _SecurityPolicyNames.AddMember("member", _SecurityPolicyName)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _ServiceErrorMessage)
-
-	SftpConnectorConnectionDetails_HostKey = SftpConnectorConnectionDetails.AddMember("HostKey", _SftpConnectorHostKey)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	ThrottlingException_RetryAfterSeconds = ThrottlingException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	UpdateConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = UpdateConnectorVpcLatticeEgressConfig.AddMember("ResourceConfigurationArn", _VpcLatticeResourceConfigurationArn)
-
-	UpdateConnectorVpcLatticeEgressConfig_PortNumber = UpdateConnectorVpcLatticeEgressConfig.AddMember("PortNumber", _SftpPort)
-
-	UpdateConnectorEgressConfig_VpcLattice = UpdateConnectorEgressConfig.AddMember("VpcLattice", UpdateConnectorVpcLatticeEgressConfig)
-
-	WebAppVpcEndpointIpAddressType_IPV4 = WebAppVpcEndpointIpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	WebAppVpcEndpointIpAddressType_DUALSTACK = WebAppVpcEndpointIpAddressType.AddMember("DUALSTACK", smithyprelude.Unit)
-
-	UpdateWebAppVpcConfig_SubnetIds = UpdateWebAppVpcConfig.AddMember("SubnetIds", _SubnetIds)
-
-	UpdateWebAppVpcConfig_IpAddressType = UpdateWebAppVpcConfig.AddMember("IpAddressType", WebAppVpcEndpointIpAddressType)
-
-	UpdateWebAppEndpointDetails_Vpc = UpdateWebAppEndpointDetails.AddMember("Vpc", UpdateWebAppVpcConfig)
-
-	UpdateWebAppIdentityCenterConfig_Role = UpdateWebAppIdentityCenterConfig.AddMember("Role", _Role)
-
-	UpdateWebAppIdentityProviderDetails_IdentityCenterConfig = UpdateWebAppIdentityProviderDetails.AddMember("IdentityCenterConfig", UpdateWebAppIdentityCenterConfig)
-
-	WebAppVpcConfig_SubnetIds = WebAppVpcConfig.AddMember("SubnetIds", _SubnetIds)
-
-	WebAppVpcConfig_VpcId = WebAppVpcConfig.AddMember("VpcId", _VpcId)
-
-	WebAppVpcConfig_SecurityGroupIds = WebAppVpcConfig.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	WebAppVpcConfig_IpAddressType = WebAppVpcConfig.AddMember("IpAddressType", WebAppVpcEndpointIpAddressType)
-
-	WebAppEndpointDetails_Vpc = WebAppEndpointDetails.AddMember("Vpc", WebAppVpcConfig)
-
-	WebAppIdentityProviderDetails_IdentityCenterConfig = WebAppIdentityProviderDetails.AddMember("IdentityCenterConfig", IdentityCenterConfig)
-
-	CreateAccessRequest_HomeDirectory = CreateAccessRequest.AddMember("HomeDirectory", _HomeDirectory)
-
-	CreateAccessRequest_HomeDirectoryType = CreateAccessRequest.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	CreateAccessRequest_HomeDirectoryMappings = CreateAccessRequest.AddMember("HomeDirectoryMappings", _HomeDirectoryMappings)
-
-	CreateAccessRequest_Policy = CreateAccessRequest.AddMember("Policy", _Policy)
-
-	CreateAccessRequest_PosixProfile = CreateAccessRequest.AddMember("PosixProfile", PosixProfile)
-
-	CreateAccessRequest_Role = CreateAccessRequest.AddMember("Role", _Role)
-
-	CreateAccessRequest_ServerId = CreateAccessRequest.AddMember("ServerId", _ServerId)
-
-	CreateAccessRequest_ExternalId = CreateAccessRequest.AddMember("ExternalId", _ExternalId)
-
-	CreateAccessResponse_ServerId = CreateAccessResponse.AddMember("ServerId", _ServerId)
-
-	CreateAccessResponse_ExternalId = CreateAccessResponse.AddMember("ExternalId", _ExternalId)
-
-	CreateAgreementRequest_Description = CreateAgreementRequest.AddMember("Description", _Description)
-
-	CreateAgreementRequest_ServerId = CreateAgreementRequest.AddMember("ServerId", _ServerId)
-
-	CreateAgreementRequest_LocalProfileId = CreateAgreementRequest.AddMember("LocalProfileId", _ProfileId)
-
-	CreateAgreementRequest_PartnerProfileId = CreateAgreementRequest.AddMember("PartnerProfileId", _ProfileId)
-
-	CreateAgreementRequest_BaseDirectory = CreateAgreementRequest.AddMember("BaseDirectory", _HomeDirectory)
-
-	CreateAgreementRequest_AccessRole = CreateAgreementRequest.AddMember("AccessRole", _Role)
-
-	CreateAgreementRequest_Status = CreateAgreementRequest.AddMember("Status", AgreementStatusType)
-
-	CreateAgreementRequest_Tags = CreateAgreementRequest.AddMember("Tags", _Tags)
-
-	CreateAgreementRequest_PreserveFilename = CreateAgreementRequest.AddMember("PreserveFilename", PreserveFilenameType)
-
-	CreateAgreementRequest_EnforceMessageSigning = CreateAgreementRequest.AddMember("EnforceMessageSigning", EnforceMessageSigningType)
-
-	CreateAgreementRequest_CustomDirectories = CreateAgreementRequest.AddMember("CustomDirectories", CustomDirectoriesType)
-
-	CreateAgreementResponse_AgreementId = CreateAgreementResponse.AddMember("AgreementId", _AgreementId)
-
-	CreateConnectorRequest_Url = CreateConnectorRequest.AddMember("Url", _Url)
-
-	CreateConnectorRequest_As2Config = CreateConnectorRequest.AddMember("As2Config", As2ConnectorConfig)
-
-	CreateConnectorRequest_AccessRole = CreateConnectorRequest.AddMember("AccessRole", _Role)
-
-	CreateConnectorRequest_LoggingRole = CreateConnectorRequest.AddMember("LoggingRole", _Role)
-
-	CreateConnectorRequest_Tags = CreateConnectorRequest.AddMember("Tags", _Tags)
-
-	CreateConnectorRequest_SftpConfig = CreateConnectorRequest.AddMember("SftpConfig", SftpConnectorConfig)
-
-	CreateConnectorRequest_SecurityPolicyName = CreateConnectorRequest.AddMember("SecurityPolicyName", _ConnectorSecurityPolicyName)
-
-	CreateConnectorRequest_EgressConfig = CreateConnectorRequest.AddMember("EgressConfig", ConnectorEgressConfig)
-
-	CreateConnectorRequest_IpAddressType = CreateConnectorRequest.AddMember("IpAddressType", ConnectorsIpAddressType)
-
-	CreateConnectorResponse_ConnectorId = CreateConnectorResponse.AddMember("ConnectorId", _ConnectorId)
-
-	CreateProfileRequest_As2Id = CreateProfileRequest.AddMember("As2Id", _As2Id)
-
-	CreateProfileRequest_ProfileType = CreateProfileRequest.AddMember("ProfileType", ProfileType)
-
-	CreateProfileRequest_CertificateIds = CreateProfileRequest.AddMember("CertificateIds", _CertificateIds)
-
-	CreateProfileRequest_Tags = CreateProfileRequest.AddMember("Tags", _Tags)
-
-	CreateProfileResponse_ProfileId = CreateProfileResponse.AddMember("ProfileId", _ProfileId)
-
-	CreateServerRequest_Certificate = CreateServerRequest.AddMember("Certificate", _Certificate)
-
-	CreateServerRequest_Domain = CreateServerRequest.AddMember("Domain", Domain)
-
-	CreateServerRequest_EndpointDetails = CreateServerRequest.AddMember("EndpointDetails", EndpointDetails)
-
-	CreateServerRequest_EndpointType = CreateServerRequest.AddMember("EndpointType", EndpointType)
-
-	CreateServerRequest_HostKey = CreateServerRequest.AddMember("HostKey", _HostKey)
-
-	CreateServerRequest_IdentityProviderDetails = CreateServerRequest.AddMember("IdentityProviderDetails", IdentityProviderDetails)
-
-	CreateServerRequest_IdentityProviderType = CreateServerRequest.AddMember("IdentityProviderType", IdentityProviderType)
-
-	CreateServerRequest_LoggingRole = CreateServerRequest.AddMember("LoggingRole", _NullableRole)
-
-	CreateServerRequest_PostAuthenticationLoginBanner = CreateServerRequest.AddMember("PostAuthenticationLoginBanner", _PostAuthenticationLoginBanner)
-
-	CreateServerRequest_PreAuthenticationLoginBanner = CreateServerRequest.AddMember("PreAuthenticationLoginBanner", _PreAuthenticationLoginBanner)
-
-	CreateServerRequest_Protocols = CreateServerRequest.AddMember("Protocols", _Protocols)
-
-	CreateServerRequest_ProtocolDetails = CreateServerRequest.AddMember("ProtocolDetails", ProtocolDetails)
-
-	CreateServerRequest_SecurityPolicyName = CreateServerRequest.AddMember("SecurityPolicyName", _SecurityPolicyName)
-
-	CreateServerRequest_Tags = CreateServerRequest.AddMember("Tags", _Tags)
-
-	CreateServerRequest_WorkflowDetails = CreateServerRequest.AddMember("WorkflowDetails", WorkflowDetails)
-
-	CreateServerRequest_StructuredLogDestinations = CreateServerRequest.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
-
-	CreateServerRequest_S3StorageOptions = CreateServerRequest.AddMember("S3StorageOptions", S3StorageOptions)
-
-	CreateServerRequest_IpAddressType = CreateServerRequest.AddMember("IpAddressType", IpAddressType)
-
-	CreateServerRequest_HostKeyStorageType = CreateServerRequest.AddMember("HostKeyStorageType", HostKeyStorageType)
-
-	CreateServerResponse_ServerId = CreateServerResponse.AddMember("ServerId", _ServerId)
-
-	CreateUserRequest_HomeDirectory = CreateUserRequest.AddMember("HomeDirectory", _HomeDirectory)
-
-	CreateUserRequest_HomeDirectoryType = CreateUserRequest.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	CreateUserRequest_HomeDirectoryMappings = CreateUserRequest.AddMember("HomeDirectoryMappings", _HomeDirectoryMappings)
-
-	CreateUserRequest_Policy = CreateUserRequest.AddMember("Policy", _Policy)
-
-	CreateUserRequest_PosixProfile = CreateUserRequest.AddMember("PosixProfile", PosixProfile)
-
-	CreateUserRequest_Role = CreateUserRequest.AddMember("Role", _Role)
-
-	CreateUserRequest_ServerId = CreateUserRequest.AddMember("ServerId", _ServerId)
-
-	CreateUserRequest_SshPublicKeyBody = CreateUserRequest.AddMember("SshPublicKeyBody", _SshPublicKeyBody)
-
-	CreateUserRequest_Tags = CreateUserRequest.AddMember("Tags", _Tags)
-
-	CreateUserRequest_UserName = CreateUserRequest.AddMember("UserName", _UserName)
-
-	CreateUserResponse_ServerId = CreateUserResponse.AddMember("ServerId", _ServerId)
-
-	CreateUserResponse_UserName = CreateUserResponse.AddMember("UserName", _UserName)
-
-	CreateWebAppRequest_IdentityProviderDetails = CreateWebAppRequest.AddMember("IdentityProviderDetails", WebAppIdentityProviderDetails)
-
-	CreateWebAppRequest_AccessEndpoint = CreateWebAppRequest.AddMember("AccessEndpoint", _WebAppAccessEndpoint)
-
-	CreateWebAppRequest_WebAppUnits = CreateWebAppRequest.AddMember("WebAppUnits", WebAppUnits)
-
-	CreateWebAppRequest_Tags = CreateWebAppRequest.AddMember("Tags", _Tags)
-
-	CreateWebAppRequest_WebAppEndpointPolicy = CreateWebAppRequest.AddMember("WebAppEndpointPolicy", WebAppEndpointPolicy)
-
-	CreateWebAppRequest_EndpointDetails = CreateWebAppRequest.AddMember("EndpointDetails", WebAppEndpointDetails)
-
-	CreateWebAppResponse_WebAppId = CreateWebAppResponse.AddMember("WebAppId", _WebAppId)
-
-	CreateWorkflowRequest_Description = CreateWorkflowRequest.AddMember("Description", _WorkflowDescription)
-
-	CreateWorkflowRequest_Steps = CreateWorkflowRequest.AddMember("Steps", _WorkflowSteps)
-
-	CreateWorkflowRequest_OnExceptionSteps = CreateWorkflowRequest.AddMember("OnExceptionSteps", _WorkflowSteps)
-
-	CreateWorkflowRequest_Tags = CreateWorkflowRequest.AddMember("Tags", _Tags)
-
-	CreateWorkflowRequest_StructuredLogDestinations = CreateWorkflowRequest.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
-
-	CreateWorkflowResponse_WorkflowId = CreateWorkflowResponse.AddMember("WorkflowId", _WorkflowId)
-
-	DeleteAccessRequest_ServerId = DeleteAccessRequest.AddMember("ServerId", _ServerId)
-
-	DeleteAccessRequest_ExternalId = DeleteAccessRequest.AddMember("ExternalId", _ExternalId)
-
-	DeleteAgreementRequest_AgreementId = DeleteAgreementRequest.AddMember("AgreementId", _AgreementId)
-
-	DeleteAgreementRequest_ServerId = DeleteAgreementRequest.AddMember("ServerId", _ServerId)
-
-	DeleteCertificateRequest_CertificateId = DeleteCertificateRequest.AddMember("CertificateId", _CertificateId)
-
-	DeleteConnectorRequest_ConnectorId = DeleteConnectorRequest.AddMember("ConnectorId", _ConnectorId)
-
-	DeleteHostKeyRequest_ServerId = DeleteHostKeyRequest.AddMember("ServerId", _ServerId)
-
-	DeleteHostKeyRequest_HostKeyId = DeleteHostKeyRequest.AddMember("HostKeyId", _HostKeyId)
-
-	DeleteProfileRequest_ProfileId = DeleteProfileRequest.AddMember("ProfileId", _ProfileId)
-
-	DeleteServerRequest_ServerId = DeleteServerRequest.AddMember("ServerId", _ServerId)
-
-	DeleteSshPublicKeyRequest_ServerId = DeleteSshPublicKeyRequest.AddMember("ServerId", _ServerId)
-
-	DeleteSshPublicKeyRequest_SshPublicKeyId = DeleteSshPublicKeyRequest.AddMember("SshPublicKeyId", _SshPublicKeyId)
-
-	DeleteSshPublicKeyRequest_UserName = DeleteSshPublicKeyRequest.AddMember("UserName", _UserName)
-
-	DeleteUserRequest_ServerId = DeleteUserRequest.AddMember("ServerId", _ServerId)
-
-	DeleteUserRequest_UserName = DeleteUserRequest.AddMember("UserName", _UserName)
-
-	DeleteWebAppCustomizationRequest_WebAppId = DeleteWebAppCustomizationRequest.AddMember("WebAppId", _WebAppId)
-
-	DeleteWebAppRequest_WebAppId = DeleteWebAppRequest.AddMember("WebAppId", _WebAppId)
-
-	DeleteWorkflowRequest_WorkflowId = DeleteWorkflowRequest.AddMember("WorkflowId", _WorkflowId)
-
-	DescribeAccessRequest_ServerId = DescribeAccessRequest.AddMember("ServerId", _ServerId)
-
-	DescribeAccessRequest_ExternalId = DescribeAccessRequest.AddMember("ExternalId", _ExternalId)
-
-	DescribeAccessResponse_ServerId = DescribeAccessResponse.AddMember("ServerId", _ServerId)
-
-	DescribeAccessResponse_Access = DescribeAccessResponse.AddMember("Access", DescribedAccess)
-
-	DescribeAgreementRequest_AgreementId = DescribeAgreementRequest.AddMember("AgreementId", _AgreementId)
-
-	DescribeAgreementRequest_ServerId = DescribeAgreementRequest.AddMember("ServerId", _ServerId)
-
-	DescribeAgreementResponse_Agreement = DescribeAgreementResponse.AddMember("Agreement", DescribedAgreement)
-
-	DescribeCertificateRequest_CertificateId = DescribeCertificateRequest.AddMember("CertificateId", _CertificateId)
-
-	DescribeCertificateResponse_Certificate = DescribeCertificateResponse.AddMember("Certificate", DescribedCertificate)
-
-	DescribeConnectorRequest_ConnectorId = DescribeConnectorRequest.AddMember("ConnectorId", _ConnectorId)
-
-	DescribeConnectorResponse_Connector = DescribeConnectorResponse.AddMember("Connector", DescribedConnector)
-
-	DescribeExecutionRequest_ExecutionId = DescribeExecutionRequest.AddMember("ExecutionId", _ExecutionId)
-
-	DescribeExecutionRequest_WorkflowId = DescribeExecutionRequest.AddMember("WorkflowId", _WorkflowId)
-
-	DescribeExecutionResponse_WorkflowId = DescribeExecutionResponse.AddMember("WorkflowId", _WorkflowId)
-
-	DescribeExecutionResponse_Execution = DescribeExecutionResponse.AddMember("Execution", DescribedExecution)
-
-	DescribeHostKeyRequest_ServerId = DescribeHostKeyRequest.AddMember("ServerId", _ServerId)
-
-	DescribeHostKeyRequest_HostKeyId = DescribeHostKeyRequest.AddMember("HostKeyId", _HostKeyId)
-
-	DescribeHostKeyResponse_HostKey = DescribeHostKeyResponse.AddMember("HostKey", DescribedHostKey)
-
-	DescribeProfileRequest_ProfileId = DescribeProfileRequest.AddMember("ProfileId", _ProfileId)
-
-	DescribeProfileResponse_Profile = DescribeProfileResponse.AddMember("Profile", DescribedProfile)
-
-	DescribeSecurityPolicyRequest_SecurityPolicyName = DescribeSecurityPolicyRequest.AddMember("SecurityPolicyName", _SecurityPolicyName)
-
-	DescribeSecurityPolicyResponse_SecurityPolicy = DescribeSecurityPolicyResponse.AddMember("SecurityPolicy", DescribedSecurityPolicy)
-
-	DescribeServerRequest_ServerId = DescribeServerRequest.AddMember("ServerId", _ServerId)
-
-	DescribeServerResponse_Server = DescribeServerResponse.AddMember("Server", DescribedServer)
-
-	DescribeUserRequest_ServerId = DescribeUserRequest.AddMember("ServerId", _ServerId)
-
-	DescribeUserRequest_UserName = DescribeUserRequest.AddMember("UserName", _UserName)
-
-	DescribeUserResponse_ServerId = DescribeUserResponse.AddMember("ServerId", _ServerId)
-
-	DescribeUserResponse_User = DescribeUserResponse.AddMember("User", DescribedUser)
-
-	DescribeWebAppCustomizationRequest_WebAppId = DescribeWebAppCustomizationRequest.AddMember("WebAppId", _WebAppId)
-
-	DescribeWebAppCustomizationResponse_WebAppCustomization = DescribeWebAppCustomizationResponse.AddMember("WebAppCustomization", DescribedWebAppCustomization)
-
-	DescribeWebAppRequest_WebAppId = DescribeWebAppRequest.AddMember("WebAppId", _WebAppId)
-
-	DescribeWebAppResponse_WebApp = DescribeWebAppResponse.AddMember("WebApp", DescribedWebApp)
-
-	DescribeWorkflowRequest_WorkflowId = DescribeWorkflowRequest.AddMember("WorkflowId", _WorkflowId)
-
-	DescribeWorkflowResponse_Workflow = DescribeWorkflowResponse.AddMember("Workflow", DescribedWorkflow)
-
-	ImportCertificateRequest_Usage = ImportCertificateRequest.AddMember("Usage", CertificateUsageType)
-
-	ImportCertificateRequest_Certificate = ImportCertificateRequest.AddMember("Certificate", _CertificateBodyType)
-
-	ImportCertificateRequest_CertificateChain = ImportCertificateRequest.AddMember("CertificateChain", _CertificateChainType)
-
-	ImportCertificateRequest_PrivateKey = ImportCertificateRequest.AddMember("PrivateKey", _PrivateKeyType)
-
-	ImportCertificateRequest_ActiveDate = ImportCertificateRequest.AddMember("ActiveDate", _CertDate)
-
-	ImportCertificateRequest_InactiveDate = ImportCertificateRequest.AddMember("InactiveDate", _CertDate)
-
-	ImportCertificateRequest_Description = ImportCertificateRequest.AddMember("Description", _Description)
-
-	ImportCertificateRequest_Tags = ImportCertificateRequest.AddMember("Tags", _Tags)
-
-	ImportCertificateResponse_CertificateId = ImportCertificateResponse.AddMember("CertificateId", _CertificateId)
-
-	ImportHostKeyRequest_ServerId = ImportHostKeyRequest.AddMember("ServerId", _ServerId)
-
-	ImportHostKeyRequest_HostKeyBody = ImportHostKeyRequest.AddMember("HostKeyBody", _HostKey)
-
-	ImportHostKeyRequest_Description = ImportHostKeyRequest.AddMember("Description", _HostKeyDescription)
-
-	ImportHostKeyRequest_Tags = ImportHostKeyRequest.AddMember("Tags", _Tags)
-
-	ImportHostKeyRequest_StorageType = ImportHostKeyRequest.AddMember("StorageType", HostKeyStorageType)
-
-	ImportHostKeyRequest_KmsKey = ImportHostKeyRequest.AddMember("KmsKey", _KmsKey)
-
-	ImportHostKeyResponse_ServerId = ImportHostKeyResponse.AddMember("ServerId", _ServerId)
-
-	ImportHostKeyResponse_HostKeyId = ImportHostKeyResponse.AddMember("HostKeyId", _HostKeyId)
-
-	ImportSshPublicKeyRequest_ServerId = ImportSshPublicKeyRequest.AddMember("ServerId", _ServerId)
-
-	ImportSshPublicKeyRequest_SshPublicKeyBody = ImportSshPublicKeyRequest.AddMember("SshPublicKeyBody", _SshPublicKeyBody)
-
-	ImportSshPublicKeyRequest_UserName = ImportSshPublicKeyRequest.AddMember("UserName", _UserName)
-
-	ImportSshPublicKeyResponse_ServerId = ImportSshPublicKeyResponse.AddMember("ServerId", _ServerId)
-
-	ImportSshPublicKeyResponse_SshPublicKeyId = ImportSshPublicKeyResponse.AddMember("SshPublicKeyId", _SshPublicKeyId)
-
-	ImportSshPublicKeyResponse_UserName = ImportSshPublicKeyResponse.AddMember("UserName", _UserName)
-
-	ListAccessesRequest_MaxResults = ListAccessesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAccessesRequest_NextToken = ListAccessesRequest.AddMember("NextToken", _NextToken)
-
-	ListAccessesRequest_ServerId = ListAccessesRequest.AddMember("ServerId", _ServerId)
-
-	ListAccessesResponse_NextToken = ListAccessesResponse.AddMember("NextToken", _NextToken)
-
-	ListAccessesResponse_ServerId = ListAccessesResponse.AddMember("ServerId", _ServerId)
-
-	ListAccessesResponse_Accesses = ListAccessesResponse.AddMember("Accesses", _ListedAccesses)
-
-	ListAgreementsRequest_MaxResults = ListAgreementsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAgreementsRequest_NextToken = ListAgreementsRequest.AddMember("NextToken", _NextToken)
-
-	ListAgreementsRequest_ServerId = ListAgreementsRequest.AddMember("ServerId", _ServerId)
-
-	ListAgreementsResponse_NextToken = ListAgreementsResponse.AddMember("NextToken", _NextToken)
-
-	ListAgreementsResponse_Agreements = ListAgreementsResponse.AddMember("Agreements", _ListedAgreements)
-
-	ListCertificatesRequest_MaxResults = ListCertificatesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListCertificatesRequest_NextToken = ListCertificatesRequest.AddMember("NextToken", _NextToken)
-
-	ListCertificatesResponse_NextToken = ListCertificatesResponse.AddMember("NextToken", _NextToken)
-
-	ListCertificatesResponse_Certificates = ListCertificatesResponse.AddMember("Certificates", _ListedCertificates)
-
-	ListConnectorsRequest_MaxResults = ListConnectorsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListConnectorsRequest_NextToken = ListConnectorsRequest.AddMember("NextToken", _NextToken)
-
-	ListConnectorsResponse_NextToken = ListConnectorsResponse.AddMember("NextToken", _NextToken)
-
-	ListConnectorsResponse_Connectors = ListConnectorsResponse.AddMember("Connectors", _ListedConnectors)
-
-	ListExecutionsRequest_MaxResults = ListExecutionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListExecutionsRequest_NextToken = ListExecutionsRequest.AddMember("NextToken", _NextToken)
-
-	ListExecutionsRequest_WorkflowId = ListExecutionsRequest.AddMember("WorkflowId", _WorkflowId)
-
-	ListExecutionsResponse_NextToken = ListExecutionsResponse.AddMember("NextToken", _NextToken)
-
-	ListExecutionsResponse_WorkflowId = ListExecutionsResponse.AddMember("WorkflowId", _WorkflowId)
-
-	ListExecutionsResponse_Executions = ListExecutionsResponse.AddMember("Executions", _ListedExecutions)
-
-	ListFileTransferResultsRequest_ConnectorId = ListFileTransferResultsRequest.AddMember("ConnectorId", _ConnectorId)
-
-	ListFileTransferResultsRequest_TransferId = ListFileTransferResultsRequest.AddMember("TransferId", _TransferId)
-
-	ListFileTransferResultsRequest_NextToken = ListFileTransferResultsRequest.AddMember("NextToken", _NextToken)
-
-	ListFileTransferResultsRequest_MaxResults = ListFileTransferResultsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListFileTransferResultsResponse_FileTransferResults = ListFileTransferResultsResponse.AddMember("FileTransferResults", _ConnectorFileTransferResults)
-
-	ListFileTransferResultsResponse_NextToken = ListFileTransferResultsResponse.AddMember("NextToken", _NextToken)
-
-	ListHostKeysRequest_MaxResults = ListHostKeysRequest.AddMember("MaxResults", _MaxResults)
-
-	ListHostKeysRequest_NextToken = ListHostKeysRequest.AddMember("NextToken", _NextToken)
-
-	ListHostKeysRequest_ServerId = ListHostKeysRequest.AddMember("ServerId", _ServerId)
-
-	ListHostKeysResponse_NextToken = ListHostKeysResponse.AddMember("NextToken", _NextToken)
-
-	ListHostKeysResponse_ServerId = ListHostKeysResponse.AddMember("ServerId", _ServerId)
-
-	ListHostKeysResponse_HostKeys = ListHostKeysResponse.AddMember("HostKeys", _ListedHostKeys)
-
-	ListProfilesRequest_MaxResults = ListProfilesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListProfilesRequest_NextToken = ListProfilesRequest.AddMember("NextToken", _NextToken)
-
-	ListProfilesRequest_ProfileType = ListProfilesRequest.AddMember("ProfileType", ProfileType)
-
-	ListProfilesResponse_NextToken = ListProfilesResponse.AddMember("NextToken", _NextToken)
-
-	ListProfilesResponse_Profiles = ListProfilesResponse.AddMember("Profiles", _ListedProfiles)
-
-	ListSecurityPoliciesRequest_MaxResults = ListSecurityPoliciesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListSecurityPoliciesRequest_NextToken = ListSecurityPoliciesRequest.AddMember("NextToken", _NextToken)
-
-	ListSecurityPoliciesResponse_NextToken = ListSecurityPoliciesResponse.AddMember("NextToken", _NextToken)
-
-	ListSecurityPoliciesResponse_SecurityPolicyNames = ListSecurityPoliciesResponse.AddMember("SecurityPolicyNames", _SecurityPolicyNames)
-
-	ListServersRequest_MaxResults = ListServersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListServersRequest_NextToken = ListServersRequest.AddMember("NextToken", _NextToken)
-
-	ListServersResponse_NextToken = ListServersResponse.AddMember("NextToken", _NextToken)
-
-	ListServersResponse_Servers = ListServersResponse.AddMember("Servers", _ListedServers)
-
-	ListTagsForResourceRequest_Arn = ListTagsForResourceRequest.AddMember("Arn", _Arn)
-
-	ListTagsForResourceRequest_MaxResults = ListTagsForResourceRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTagsForResourceRequest_NextToken = ListTagsForResourceRequest.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceResponse_Arn = ListTagsForResourceResponse.AddMember("Arn", _Arn)
-
-	ListTagsForResourceResponse_NextToken = ListTagsForResourceResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	ListUsersRequest_MaxResults = ListUsersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListUsersRequest_NextToken = ListUsersRequest.AddMember("NextToken", _NextToken)
-
-	ListUsersRequest_ServerId = ListUsersRequest.AddMember("ServerId", _ServerId)
-
-	ListUsersResponse_NextToken = ListUsersResponse.AddMember("NextToken", _NextToken)
-
-	ListUsersResponse_ServerId = ListUsersResponse.AddMember("ServerId", _ServerId)
-
-	ListUsersResponse_Users = ListUsersResponse.AddMember("Users", _ListedUsers)
-
-	ListWebAppsRequest_MaxResults = ListWebAppsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListWebAppsRequest_NextToken = ListWebAppsRequest.AddMember("NextToken", _NextToken)
-
-	ListWebAppsResponse_NextToken = ListWebAppsResponse.AddMember("NextToken", _NextToken)
-
-	ListWebAppsResponse_WebApps = ListWebAppsResponse.AddMember("WebApps", _ListedWebApps)
-
-	ListWorkflowsRequest_MaxResults = ListWorkflowsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListWorkflowsRequest_NextToken = ListWorkflowsRequest.AddMember("NextToken", _NextToken)
-
-	ListWorkflowsResponse_NextToken = ListWorkflowsResponse.AddMember("NextToken", _NextToken)
-
-	ListWorkflowsResponse_Workflows = ListWorkflowsResponse.AddMember("Workflows", _ListedWorkflows)
-
-	SendWorkflowStepStateRequest_WorkflowId = SendWorkflowStepStateRequest.AddMember("WorkflowId", _WorkflowId)
-
-	SendWorkflowStepStateRequest_ExecutionId = SendWorkflowStepStateRequest.AddMember("ExecutionId", _ExecutionId)
-
-	SendWorkflowStepStateRequest_Token = SendWorkflowStepStateRequest.AddMember("Token", _CallbackToken)
-
-	SendWorkflowStepStateRequest_Status = SendWorkflowStepStateRequest.AddMember("Status", CustomStepStatus)
-
-	StartDirectoryListingRequest_ConnectorId = StartDirectoryListingRequest.AddMember("ConnectorId", _ConnectorId)
-
-	StartDirectoryListingRequest_RemoteDirectoryPath = StartDirectoryListingRequest.AddMember("RemoteDirectoryPath", _FilePath)
-
-	StartDirectoryListingRequest_MaxItems = StartDirectoryListingRequest.AddMember("MaxItems", _MaxItems)
-
-	StartDirectoryListingRequest_OutputDirectoryPath = StartDirectoryListingRequest.AddMember("OutputDirectoryPath", _FilePath)
-
-	StartDirectoryListingResponse_ListingId = StartDirectoryListingResponse.AddMember("ListingId", _ListingId)
-
-	StartDirectoryListingResponse_OutputFileName = StartDirectoryListingResponse.AddMember("OutputFileName", _OutputFileName)
-
-	StartFileTransferRequest_ConnectorId = StartFileTransferRequest.AddMember("ConnectorId", _ConnectorId)
-
-	StartFileTransferRequest_SendFilePaths = StartFileTransferRequest.AddMember("SendFilePaths", _FilePaths)
-
-	StartFileTransferRequest_RetrieveFilePaths = StartFileTransferRequest.AddMember("RetrieveFilePaths", _FilePaths)
-
-	StartFileTransferRequest_LocalDirectoryPath = StartFileTransferRequest.AddMember("LocalDirectoryPath", _FilePath)
-
-	StartFileTransferRequest_RemoteDirectoryPath = StartFileTransferRequest.AddMember("RemoteDirectoryPath", _FilePath)
-
-	StartFileTransferRequest_CustomHttpHeaders = StartFileTransferRequest.AddMember("CustomHttpHeaders", _CustomHttpHeaders)
-
-	StartFileTransferResponse_TransferId = StartFileTransferResponse.AddMember("TransferId", _TransferId)
-
-	StartRemoteDeleteRequest_ConnectorId = StartRemoteDeleteRequest.AddMember("ConnectorId", _ConnectorId)
-
-	StartRemoteDeleteRequest_DeletePath = StartRemoteDeleteRequest.AddMember("DeletePath", _FilePath)
-
-	StartRemoteDeleteResponse_DeleteId = StartRemoteDeleteResponse.AddMember("DeleteId", _DeleteId)
-
-	StartRemoteMoveRequest_ConnectorId = StartRemoteMoveRequest.AddMember("ConnectorId", _ConnectorId)
-
-	StartRemoteMoveRequest_SourcePath = StartRemoteMoveRequest.AddMember("SourcePath", _FilePath)
-
-	StartRemoteMoveRequest_TargetPath = StartRemoteMoveRequest.AddMember("TargetPath", _FilePath)
-
-	StartRemoteMoveResponse_MoveId = StartRemoteMoveResponse.AddMember("MoveId", _MoveId)
-
-	StartServerRequest_ServerId = StartServerRequest.AddMember("ServerId", _ServerId)
-
-	StopServerRequest_ServerId = StopServerRequest.AddMember("ServerId", _ServerId)
-
-	TagResourceRequest_Arn = TagResourceRequest.AddMember("Arn", _Arn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	TestConnectionRequest_ConnectorId = TestConnectionRequest.AddMember("ConnectorId", _ConnectorId)
-
-	TestConnectionResponse_ConnectorId = TestConnectionResponse.AddMember("ConnectorId", _ConnectorId)
-
-	TestConnectionResponse_Status = TestConnectionResponse.AddMember("Status", _Status)
-
-	TestConnectionResponse_StatusMessage = TestConnectionResponse.AddMember("StatusMessage", _Message)
-
-	TestConnectionResponse_SftpConnectionDetails = TestConnectionResponse.AddMember("SftpConnectionDetails", SftpConnectorConnectionDetails)
-
-	TestIdentityProviderRequest_ServerId = TestIdentityProviderRequest.AddMember("ServerId", _ServerId)
-
-	TestIdentityProviderRequest_ServerProtocol = TestIdentityProviderRequest.AddMember("ServerProtocol", Protocol)
-
-	TestIdentityProviderRequest_SourceIp = TestIdentityProviderRequest.AddMember("SourceIp", _SourceIp)
-
-	TestIdentityProviderRequest_UserName = TestIdentityProviderRequest.AddMember("UserName", _UserName)
-
-	TestIdentityProviderRequest_UserPassword = TestIdentityProviderRequest.AddMember("UserPassword", _UserPassword)
-
-	TestIdentityProviderResponse_Response = TestIdentityProviderResponse.AddMember("Response", _Response)
-
-	TestIdentityProviderResponse_StatusCode = TestIdentityProviderResponse.AddMember("StatusCode", _StatusCode)
-
-	TestIdentityProviderResponse_Message = TestIdentityProviderResponse.AddMember("Message", _Message)
-
-	TestIdentityProviderResponse_Url = TestIdentityProviderResponse.AddMember("Url", _Url)
-
-	UntagResourceRequest_Arn = UntagResourceRequest.AddMember("Arn", _Arn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys)
-
-	UpdateAccessRequest_HomeDirectory = UpdateAccessRequest.AddMember("HomeDirectory", _HomeDirectory)
-
-	UpdateAccessRequest_HomeDirectoryType = UpdateAccessRequest.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	UpdateAccessRequest_HomeDirectoryMappings = UpdateAccessRequest.AddMember("HomeDirectoryMappings", _HomeDirectoryMappings)
-
-	UpdateAccessRequest_Policy = UpdateAccessRequest.AddMember("Policy", _Policy)
-
-	UpdateAccessRequest_PosixProfile = UpdateAccessRequest.AddMember("PosixProfile", PosixProfile)
-
-	UpdateAccessRequest_Role = UpdateAccessRequest.AddMember("Role", _Role)
-
-	UpdateAccessRequest_ServerId = UpdateAccessRequest.AddMember("ServerId", _ServerId)
-
-	UpdateAccessRequest_ExternalId = UpdateAccessRequest.AddMember("ExternalId", _ExternalId)
-
-	UpdateAccessResponse_ServerId = UpdateAccessResponse.AddMember("ServerId", _ServerId)
-
-	UpdateAccessResponse_ExternalId = UpdateAccessResponse.AddMember("ExternalId", _ExternalId)
-
-	UpdateAgreementRequest_AgreementId = UpdateAgreementRequest.AddMember("AgreementId", _AgreementId)
-
-	UpdateAgreementRequest_ServerId = UpdateAgreementRequest.AddMember("ServerId", _ServerId)
-
-	UpdateAgreementRequest_Description = UpdateAgreementRequest.AddMember("Description", _Description)
-
-	UpdateAgreementRequest_Status = UpdateAgreementRequest.AddMember("Status", AgreementStatusType)
-
-	UpdateAgreementRequest_LocalProfileId = UpdateAgreementRequest.AddMember("LocalProfileId", _ProfileId)
-
-	UpdateAgreementRequest_PartnerProfileId = UpdateAgreementRequest.AddMember("PartnerProfileId", _ProfileId)
-
-	UpdateAgreementRequest_BaseDirectory = UpdateAgreementRequest.AddMember("BaseDirectory", _HomeDirectory)
-
-	UpdateAgreementRequest_AccessRole = UpdateAgreementRequest.AddMember("AccessRole", _Role)
-
-	UpdateAgreementRequest_PreserveFilename = UpdateAgreementRequest.AddMember("PreserveFilename", PreserveFilenameType)
-
-	UpdateAgreementRequest_EnforceMessageSigning = UpdateAgreementRequest.AddMember("EnforceMessageSigning", EnforceMessageSigningType)
-
-	UpdateAgreementRequest_CustomDirectories = UpdateAgreementRequest.AddMember("CustomDirectories", CustomDirectoriesType)
-
-	UpdateAgreementResponse_AgreementId = UpdateAgreementResponse.AddMember("AgreementId", _AgreementId)
-
-	UpdateCertificateRequest_CertificateId = UpdateCertificateRequest.AddMember("CertificateId", _CertificateId)
-
-	UpdateCertificateRequest_ActiveDate = UpdateCertificateRequest.AddMember("ActiveDate", _CertDate)
-
-	UpdateCertificateRequest_InactiveDate = UpdateCertificateRequest.AddMember("InactiveDate", _CertDate)
-
-	UpdateCertificateRequest_Description = UpdateCertificateRequest.AddMember("Description", _Description)
-
-	UpdateCertificateResponse_CertificateId = UpdateCertificateResponse.AddMember("CertificateId", _CertificateId)
-
-	UpdateConnectorRequest_ConnectorId = UpdateConnectorRequest.AddMember("ConnectorId", _ConnectorId)
-
-	UpdateConnectorRequest_Url = UpdateConnectorRequest.AddMember("Url", _Url)
-
-	UpdateConnectorRequest_As2Config = UpdateConnectorRequest.AddMember("As2Config", As2ConnectorConfig)
-
-	UpdateConnectorRequest_AccessRole = UpdateConnectorRequest.AddMember("AccessRole", _Role)
-
-	UpdateConnectorRequest_LoggingRole = UpdateConnectorRequest.AddMember("LoggingRole", _Role)
-
-	UpdateConnectorRequest_SftpConfig = UpdateConnectorRequest.AddMember("SftpConfig", SftpConnectorConfig)
-
-	UpdateConnectorRequest_SecurityPolicyName = UpdateConnectorRequest.AddMember("SecurityPolicyName", _ConnectorSecurityPolicyName)
-
-	UpdateConnectorRequest_EgressConfig = UpdateConnectorRequest.AddMember("EgressConfig", UpdateConnectorEgressConfig)
-
-	UpdateConnectorRequest_IpAddressType = UpdateConnectorRequest.AddMember("IpAddressType", ConnectorsIpAddressType)
-
-	UpdateConnectorResponse_ConnectorId = UpdateConnectorResponse.AddMember("ConnectorId", _ConnectorId)
-
-	UpdateHostKeyRequest_ServerId = UpdateHostKeyRequest.AddMember("ServerId", _ServerId)
-
-	UpdateHostKeyRequest_HostKeyId = UpdateHostKeyRequest.AddMember("HostKeyId", _HostKeyId)
-
-	UpdateHostKeyRequest_Description = UpdateHostKeyRequest.AddMember("Description", _HostKeyDescription)
-
-	UpdateHostKeyRequest_StorageType = UpdateHostKeyRequest.AddMember("StorageType", HostKeyStorageType)
-
-	UpdateHostKeyRequest_KmsKey = UpdateHostKeyRequest.AddMember("KmsKey", _KmsKey)
-
-	UpdateHostKeyResponse_ServerId = UpdateHostKeyResponse.AddMember("ServerId", _ServerId)
-
-	UpdateHostKeyResponse_HostKeyId = UpdateHostKeyResponse.AddMember("HostKeyId", _HostKeyId)
-
-	UpdateProfileRequest_ProfileId = UpdateProfileRequest.AddMember("ProfileId", _ProfileId)
-
-	UpdateProfileRequest_CertificateIds = UpdateProfileRequest.AddMember("CertificateIds", _CertificateIds)
-
-	UpdateProfileResponse_ProfileId = UpdateProfileResponse.AddMember("ProfileId", _ProfileId)
-
-	UpdateServerRequest_Certificate = UpdateServerRequest.AddMember("Certificate", _Certificate)
-
-	UpdateServerRequest_ProtocolDetails = UpdateServerRequest.AddMember("ProtocolDetails", ProtocolDetails)
-
-	UpdateServerRequest_EndpointDetails = UpdateServerRequest.AddMember("EndpointDetails", EndpointDetails)
-
-	UpdateServerRequest_EndpointType = UpdateServerRequest.AddMember("EndpointType", EndpointType)
-
-	UpdateServerRequest_HostKey = UpdateServerRequest.AddMember("HostKey", _HostKey)
-
-	UpdateServerRequest_IdentityProviderDetails = UpdateServerRequest.AddMember("IdentityProviderDetails", IdentityProviderDetails)
-
-	UpdateServerRequest_LoggingRole = UpdateServerRequest.AddMember("LoggingRole", _NullableRole)
-
-	UpdateServerRequest_PostAuthenticationLoginBanner = UpdateServerRequest.AddMember("PostAuthenticationLoginBanner", _PostAuthenticationLoginBanner)
-
-	UpdateServerRequest_PreAuthenticationLoginBanner = UpdateServerRequest.AddMember("PreAuthenticationLoginBanner", _PreAuthenticationLoginBanner)
-
-	UpdateServerRequest_Protocols = UpdateServerRequest.AddMember("Protocols", _Protocols)
-
-	UpdateServerRequest_SecurityPolicyName = UpdateServerRequest.AddMember("SecurityPolicyName", _SecurityPolicyName)
-
-	UpdateServerRequest_ServerId = UpdateServerRequest.AddMember("ServerId", _ServerId)
-
-	UpdateServerRequest_WorkflowDetails = UpdateServerRequest.AddMember("WorkflowDetails", WorkflowDetails)
-
-	UpdateServerRequest_StructuredLogDestinations = UpdateServerRequest.AddMember("StructuredLogDestinations", _StructuredLogDestinations)
-
-	UpdateServerRequest_S3StorageOptions = UpdateServerRequest.AddMember("S3StorageOptions", S3StorageOptions)
-
-	UpdateServerRequest_IpAddressType = UpdateServerRequest.AddMember("IpAddressType", IpAddressType)
-
-	UpdateServerRequest_IdentityProviderType = UpdateServerRequest.AddMember("IdentityProviderType", IdentityProviderType)
-
-	UpdateServerResponse_ServerId = UpdateServerResponse.AddMember("ServerId", _ServerId)
-
-	UpdateUserRequest_HomeDirectory = UpdateUserRequest.AddMember("HomeDirectory", _HomeDirectory)
-
-	UpdateUserRequest_HomeDirectoryType = UpdateUserRequest.AddMember("HomeDirectoryType", HomeDirectoryType)
-
-	UpdateUserRequest_HomeDirectoryMappings = UpdateUserRequest.AddMember("HomeDirectoryMappings", _HomeDirectoryMappings)
-
-	UpdateUserRequest_Policy = UpdateUserRequest.AddMember("Policy", _Policy)
-
-	UpdateUserRequest_PosixProfile = UpdateUserRequest.AddMember("PosixProfile", PosixProfile)
-
-	UpdateUserRequest_Role = UpdateUserRequest.AddMember("Role", _Role)
-
-	UpdateUserRequest_ServerId = UpdateUserRequest.AddMember("ServerId", _ServerId)
-
-	UpdateUserRequest_UserName = UpdateUserRequest.AddMember("UserName", _UserName)
-
-	UpdateUserResponse_ServerId = UpdateUserResponse.AddMember("ServerId", _ServerId)
-
-	UpdateUserResponse_UserName = UpdateUserResponse.AddMember("UserName", _UserName)
-
-	UpdateWebAppCustomizationRequest_WebAppId = UpdateWebAppCustomizationRequest.AddMember("WebAppId", _WebAppId)
-
-	UpdateWebAppCustomizationRequest_Title = UpdateWebAppCustomizationRequest.AddMember("Title", _WebAppTitle)
-
-	UpdateWebAppCustomizationRequest_LogoFile = UpdateWebAppCustomizationRequest.AddMember("LogoFile", _WebAppLogoFile)
-
-	UpdateWebAppCustomizationRequest_FaviconFile = UpdateWebAppCustomizationRequest.AddMember("FaviconFile", _WebAppFaviconFile)
-
-	UpdateWebAppCustomizationResponse_WebAppId = UpdateWebAppCustomizationResponse.AddMember("WebAppId", _WebAppId)
-
-	UpdateWebAppRequest_WebAppId = UpdateWebAppRequest.AddMember("WebAppId", _WebAppId)
-
-	UpdateWebAppRequest_IdentityProviderDetails = UpdateWebAppRequest.AddMember("IdentityProviderDetails", UpdateWebAppIdentityProviderDetails)
-
-	UpdateWebAppRequest_AccessEndpoint = UpdateWebAppRequest.AddMember("AccessEndpoint", _WebAppAccessEndpoint)
-
-	UpdateWebAppRequest_WebAppUnits = UpdateWebAppRequest.AddMember("WebAppUnits", WebAppUnits)
-
-	UpdateWebAppRequest_EndpointDetails = UpdateWebAppRequest.AddMember("EndpointDetails", UpdateWebAppEndpointDetails)
-
-	UpdateWebAppResponse_WebAppId = UpdateWebAppResponse.AddMember("WebAppId", _WebAppId)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccessDenied",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceUnavailable",
+	StatusCode: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var m_AddressAllocationIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AddressAllocationIds_member}}
+var mAgreementStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sAgreementStatusType_ACTIVE, &sAgreementStatusType_INACTIVE}}
+var mAs2AsyncMdnConnectorConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAs2AsyncMdnConnectorConfig_Url, &sAs2AsyncMdnConnectorConfig_ServerIds}}
+var m_As2AsyncMdnServerIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_As2AsyncMdnServerIds_member}}
+var mAs2ConnectorConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAs2ConnectorConfig_LocalProfileId, &sAs2ConnectorConfig_PartnerProfileId, &sAs2ConnectorConfig_MessageSubject, &sAs2ConnectorConfig_Compression, &sAs2ConnectorConfig_EncryptionAlgorithm, &sAs2ConnectorConfig_SigningAlgorithm, &sAs2ConnectorConfig_MdnSigningAlgorithm, &sAs2ConnectorConfig_MdnResponse, &sAs2ConnectorConfig_BasicAuthSecretId, &sAs2ConnectorConfig_PreserveContentType, &sAs2ConnectorConfig_AsyncMdnConfig}, Seed: 5, Slots: []uint16{
+	0, 7, 0, 0, 2, 0, 11, 1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 3, 0, 5,
+	10, 0, 0, 8, 0, 0, 9, 4,
+}}
+var mAs2Transport = smithy.SchemaMembers{List: []*smithy.Schema{&sAs2Transport_HTTP}}
+var m_As2Transports = smithy.SchemaMembers{List: []*smithy.Schema{&s_As2Transports_member}}
+var m_CertificateIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateIds_member}}
+var mCertificateStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateStatusType_ACTIVE, &sCertificateStatusType_PENDING_ROTATION, &sCertificateStatusType_INACTIVE}}
+var mCertificateType = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateType_CERTIFICATE, &sCertificateType_CERTIFICATE_WITH_PRIVATE_KEY}}
+var mCertificateUsageType = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateUsageType_SIGNING, &sCertificateUsageType_ENCRYPTION, &sCertificateUsageType_TLS}}
+var mCommunicationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sCommunicationMode_CLIENT_TALK_FIRST, &sCommunicationMode_SERVER_TALK_FIRST}}
+var mCompressionEnum = smithy.SchemaMembers{List: []*smithy.Schema{&sCompressionEnum_ZLIB, &sCompressionEnum_DISABLED}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mConnectorEgressConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorEgressConfig_VpcLattice}}
+var mConnectorEgressType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorEgressType_SERVICE_MANAGED, &sConnectorEgressType_VPC_LATTICE}}
+var mConnectorFileTransferResult = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorFileTransferResult_FilePath, &sConnectorFileTransferResult_StatusCode, &sConnectorFileTransferResult_FailureCode, &sConnectorFileTransferResult_FailureMessage}}
+var m_ConnectorFileTransferResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorFileTransferResults_member}}
+var mConnectorsIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorsIpAddressType_IPV4, &sConnectorsIpAddressType_DUALSTACK}}
+var mConnectorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorStatus_ACTIVE, &sConnectorStatus_ERRORED, &sConnectorStatus_PENDING}}
+var mConnectorVpcLatticeEgressConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorVpcLatticeEgressConfig_ResourceConfigurationArn, &sConnectorVpcLatticeEgressConfig_PortNumber}}
+var mCopyStepDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyStepDetails_Name, &sCopyStepDetails_DestinationFileLocation, &sCopyStepDetails_OverwriteExisting, &sCopyStepDetails_SourceFileLocation}}
+var mCustomDirectoriesType = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomDirectoriesType_FailedFilesDirectory, &sCustomDirectoriesType_MdnFilesDirectory, &sCustomDirectoriesType_PayloadFilesDirectory, &sCustomDirectoriesType_StatusFilesDirectory, &sCustomDirectoriesType_TemporaryFilesDirectory}}
+var mCustomHttpHeader = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomHttpHeader_Key, &sCustomHttpHeader_Value}}
+var m_CustomHttpHeaders = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomHttpHeaders_member}}
+var mCustomStepDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomStepDetails_Name, &sCustomStepDetails_Target, &sCustomStepDetails_TimeoutSeconds, &sCustomStepDetails_SourceFileLocation}}
+var mCustomStepStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomStepStatus_SUCCESS, &sCustomStepStatus_FAILURE}}
+var mDecryptStepDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDecryptStepDetails_Name, &sDecryptStepDetails_Type, &sDecryptStepDetails_SourceFileLocation, &sDecryptStepDetails_OverwriteExisting, &sDecryptStepDetails_DestinationFileLocation}}
+var mDeleteStepDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStepDetails_Name, &sDeleteStepDetails_SourceFileLocation}}
+var mDescribedAccess = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedAccess_HomeDirectory, &sDescribedAccess_HomeDirectoryMappings, &sDescribedAccess_HomeDirectoryType, &sDescribedAccess_Policy, &sDescribedAccess_PosixProfile, &sDescribedAccess_Role, &sDescribedAccess_ExternalId}}
+var mDescribedAgreement = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedAgreement_Arn, &sDescribedAgreement_AgreementId, &sDescribedAgreement_Description, &sDescribedAgreement_Status, &sDescribedAgreement_ServerId, &sDescribedAgreement_LocalProfileId, &sDescribedAgreement_PartnerProfileId, &sDescribedAgreement_BaseDirectory, &sDescribedAgreement_AccessRole, &sDescribedAgreement_Tags, &sDescribedAgreement_PreserveFilename, &sDescribedAgreement_EnforceMessageSigning, &sDescribedAgreement_CustomDirectories}, Seed: 1, Slots: []uint16{
+	0, 10, 9, 0, 7, 0, 0, 0, 6, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 12, 3, 1, 11, 0,
+	0, 0, 2, 0, 0, 4, 13, 5,
+}}
+var mDescribedCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedCertificate_Arn, &sDescribedCertificate_CertificateId, &sDescribedCertificate_Usage, &sDescribedCertificate_Status, &sDescribedCertificate_Certificate, &sDescribedCertificate_CertificateChain, &sDescribedCertificate_ActiveDate, &sDescribedCertificate_InactiveDate, &sDescribedCertificate_Serial, &sDescribedCertificate_NotBeforeDate, &sDescribedCertificate_NotAfterDate, &sDescribedCertificate_Type, &sDescribedCertificate_Description, &sDescribedCertificate_Tags}, Seed: 41, Slots: []uint16{
+	14, 0, 5, 0, 1, 6, 12, 0, 0, 0, 0, 13, 4, 2, 0, 0, 0, 9, 0, 7, 11, 0, 0, 0,
+	0, 0, 0, 3, 0, 10, 0, 8,
+}}
+var mDescribedConnector = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedConnector_Arn, &sDescribedConnector_ConnectorId, &sDescribedConnector_Url, &sDescribedConnector_As2Config, &sDescribedConnector_AccessRole, &sDescribedConnector_LoggingRole, &sDescribedConnector_Tags, &sDescribedConnector_SftpConfig, &sDescribedConnector_ServiceManagedEgressIpAddresses, &sDescribedConnector_SecurityPolicyName, &sDescribedConnector_EgressConfig, &sDescribedConnector_EgressType, &sDescribedConnector_ErrorMessage, &sDescribedConnector_Status, &sDescribedConnector_IpAddressType}, Seed: 107, Slots: []uint16{
+	0, 0, 0, 0, 11, 10, 3, 15, 5, 0, 8, 0, 6, 1, 12, 4, 0, 9, 13, 0, 7, 0, 0, 0,
+	0, 0, 0, 14, 0, 0, 0, 2,
+}}
+var mDescribedConnectorEgressConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedConnectorEgressConfig_VpcLattice}}
+var mDescribedConnectorVpcLatticeEgressConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedConnectorVpcLatticeEgressConfig_ResourceConfigurationArn, &sDescribedConnectorVpcLatticeEgressConfig_PortNumber}}
+var mDescribedExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedExecution_ExecutionId, &sDescribedExecution_InitialFileLocation, &sDescribedExecution_ServiceMetadata, &sDescribedExecution_ExecutionRole, &sDescribedExecution_LoggingConfiguration, &sDescribedExecution_PosixProfile, &sDescribedExecution_Status, &sDescribedExecution_Results}}
+var mDescribedHostKey = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedHostKey_Arn, &sDescribedHostKey_HostKeyId, &sDescribedHostKey_HostKeyFingerprint, &sDescribedHostKey_Description, &sDescribedHostKey_Type, &sDescribedHostKey_DateImported, &sDescribedHostKey_Tags, &sDescribedHostKey_StorageType, &sDescribedHostKey_SecretId}, Seed: 1, Slots: []uint16{
+	0, 7, 0, 0, 3, 6, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 9, 4, 1, 0, 0,
+	0, 0, 0, 8, 0, 0, 0, 0,
+}}
+var mDescribedIdentityCenterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedIdentityCenterConfig_ApplicationArn, &sDescribedIdentityCenterConfig_InstanceArn, &sDescribedIdentityCenterConfig_Role}}
+var mDescribedProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedProfile_Arn, &sDescribedProfile_ProfileId, &sDescribedProfile_ProfileType, &sDescribedProfile_As2Id, &sDescribedProfile_CertificateIds, &sDescribedProfile_Tags}}
+var mDescribedSecurityPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedSecurityPolicy_Fips, &sDescribedSecurityPolicy_SecurityPolicyName, &sDescribedSecurityPolicy_SshCiphers, &sDescribedSecurityPolicy_SshKexs, &sDescribedSecurityPolicy_SshMacs, &sDescribedSecurityPolicy_TlsCiphers, &sDescribedSecurityPolicy_SshHostKeyAlgorithms, &sDescribedSecurityPolicy_Type, &sDescribedSecurityPolicy_Protocols}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 5, 0, 0, 0, 6, 0, 0, 0, 9, 0, 4, 7, 2, 0, 0, 0, 0, 1, 0,
+	8, 0, 0, 3, 0, 0, 0, 0,
+}}
+var mDescribedServer = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedServer_Arn, &sDescribedServer_Certificate, &sDescribedServer_ProtocolDetails, &sDescribedServer_Domain, &sDescribedServer_EndpointDetails, &sDescribedServer_EndpointType, &sDescribedServer_HostKeyFingerprint, &sDescribedServer_IdentityProviderDetails, &sDescribedServer_IdentityProviderType, &sDescribedServer_LoggingRole, &sDescribedServer_PostAuthenticationLoginBanner, &sDescribedServer_PreAuthenticationLoginBanner, &sDescribedServer_Protocols, &sDescribedServer_SecurityPolicyName, &sDescribedServer_ServerId, &sDescribedServer_State, &sDescribedServer_Tags, &sDescribedServer_UserCount, &sDescribedServer_WorkflowDetails, &sDescribedServer_StructuredLogDestinations, &sDescribedServer_S3StorageOptions, &sDescribedServer_As2ServiceManagedEgressIpAddresses, &sDescribedServer_IpAddressType}, Seed: 11, Slots: []uint16{
+	0, 0, 18, 0, 0, 0, 0, 0, 0, 0, 13, 12, 0, 0, 0, 0, 0, 21, 0, 0, 0, 14, 0, 0,
+	0, 0, 0, 0, 0, 20, 8, 15, 2, 6, 0, 0, 0, 0, 0, 11, 17, 0, 0, 22, 9, 0, 0, 0,
+	0, 1, 0, 10, 0, 7, 23, 0, 0, 16, 5, 0, 19, 0, 4, 3,
+}}
+var mDescribedUser = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedUser_Arn, &sDescribedUser_HomeDirectory, &sDescribedUser_HomeDirectoryMappings, &sDescribedUser_HomeDirectoryType, &sDescribedUser_Policy, &sDescribedUser_PosixProfile, &sDescribedUser_Role, &sDescribedUser_SshPublicKeys, &sDescribedUser_Tags, &sDescribedUser_UserName}, Seed: 1, Slots: []uint16{
+	5, 9, 7, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 8, 0, 0, 10, 3, 0, 1, 0, 0,
+	2, 0, 0, 0, 0, 6, 0, 0,
+}}
+var mDescribedWebApp = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedWebApp_Arn, &sDescribedWebApp_WebAppId, &sDescribedWebApp_DescribedIdentityProviderDetails, &sDescribedWebApp_AccessEndpoint, &sDescribedWebApp_WebAppEndpoint, &sDescribedWebApp_WebAppUnits, &sDescribedWebApp_Tags, &sDescribedWebApp_WebAppEndpointPolicy, &sDescribedWebApp_EndpointType, &sDescribedWebApp_DescribedEndpointDetails}, Seed: 3, Slots: []uint16{
+	0, 0, 10, 0, 8, 0, 4, 0, 3, 0, 9, 6, 0, 7, 0, 0, 0, 2, 0, 0, 0, 0, 1, 0,
+	0, 0, 0, 0, 5, 0, 0, 0,
+}}
+var mDescribedWebAppCustomization = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedWebAppCustomization_Arn, &sDescribedWebAppCustomization_WebAppId, &sDescribedWebAppCustomization_Title, &sDescribedWebAppCustomization_LogoFile, &sDescribedWebAppCustomization_FaviconFile}}
+var mDescribedWebAppEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedWebAppEndpointDetails_Vpc}}
+var mDescribedWebAppIdentityProviderDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedWebAppIdentityProviderDetails_IdentityCenterConfig}}
+var mDescribedWebAppVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedWebAppVpcConfig_SubnetIds, &sDescribedWebAppVpcConfig_VpcId, &sDescribedWebAppVpcConfig_VpcEndpointId}}
+var mDescribedWorkflow = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribedWorkflow_Arn, &sDescribedWorkflow_Description, &sDescribedWorkflow_Steps, &sDescribedWorkflow_OnExceptionSteps, &sDescribedWorkflow_WorkflowId, &sDescribedWorkflow_Tags, &sDescribedWorkflow_StructuredLogDestinations}}
+var mDirectoryListingOptimization = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryListingOptimization_ENABLED, &sDirectoryListingOptimization_DISABLED}}
+var mDomain = smithy.SchemaMembers{List: []*smithy.Schema{&sDomain_S3, &sDomain_EFS}}
+var mEfsFileLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sEfsFileLocation_FileSystemId, &sEfsFileLocation_Path}}
+var mEncryptionAlg = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionAlg_AES128_CBC, &sEncryptionAlg_AES192_CBC, &sEncryptionAlg_AES256_CBC, &sEncryptionAlg_DES_EDE3_CBC, &sEncryptionAlg_NONE}}
+var mEncryptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionType_PGP}}
+var mEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointDetails_AddressAllocationIds, &sEndpointDetails_SubnetIds, &sEndpointDetails_VpcEndpointId, &sEndpointDetails_VpcId, &sEndpointDetails_SecurityGroupIds}}
+var mEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointType_PUBLIC, &sEndpointType_VPC, &sEndpointType_VPC_ENDPOINT}}
+var mEnforceMessageSigningType = smithy.SchemaMembers{List: []*smithy.Schema{&sEnforceMessageSigningType_ENABLED, &sEnforceMessageSigningType_DISABLED}}
+var mExecutionError = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionError_Type, &sExecutionError_Message}}
+var mExecutionErrorType = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionErrorType_PERMISSION_DENIED, &sExecutionErrorType_CUSTOM_STEP_FAILED, &sExecutionErrorType_THROTTLED, &sExecutionErrorType_ALREADY_EXISTS, &sExecutionErrorType_NOT_FOUND, &sExecutionErrorType_BAD_REQUEST, &sExecutionErrorType_TIMEOUT, &sExecutionErrorType_INTERNAL_SERVER_ERROR}}
+var mExecutionResults = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionResults_Steps, &sExecutionResults_OnExceptionSteps}}
+var mExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionStatus_IN_PROGRESS, &sExecutionStatus_COMPLETED, &sExecutionStatus_EXCEPTION, &sExecutionStatus_HANDLING_EXCEPTION}}
+var mExecutionStepResult = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionStepResult_StepType, &sExecutionStepResult_Outputs, &sExecutionStepResult_Error}}
+var m_ExecutionStepResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExecutionStepResults_member}}
+var mFileLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sFileLocation_S3FileLocation, &sFileLocation_EfsFileLocation}}
+var m_FilePaths = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilePaths_member}}
+var mHomeDirectoryMapEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sHomeDirectoryMapEntry_Entry, &sHomeDirectoryMapEntry_Target, &sHomeDirectoryMapEntry_Type}}
+var m_HomeDirectoryMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_HomeDirectoryMappings_member}}
+var mHomeDirectoryType = smithy.SchemaMembers{List: []*smithy.Schema{&sHomeDirectoryType_PATH, &sHomeDirectoryType_LOGICAL}}
+var mHostKeyStorageType = smithy.SchemaMembers{List: []*smithy.Schema{&sHostKeyStorageType_SERVICE_MANAGED, &sHostKeyStorageType_SECRETS_MANAGER}}
+var mIdentityCenterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityCenterConfig_InstanceArn, &sIdentityCenterConfig_Role}}
+var mIdentityProviderDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityProviderDetails_Url, &sIdentityProviderDetails_InvocationRole, &sIdentityProviderDetails_DirectoryId, &sIdentityProviderDetails_Function, &sIdentityProviderDetails_SftpAuthenticationMethods}}
+var mIdentityProviderType = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityProviderType_SERVICE_MANAGED, &sIdentityProviderType_API_GATEWAY, &sIdentityProviderType_AWS_DIRECTORY_SERVICE, &sIdentityProviderType_AWS_LAMBDA}}
+var mInputFileLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sInputFileLocation_S3FileLocation, &sInputFileLocation_EfsFileLocation}}
+var mInternalServiceError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceError_Message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_Message}}
+var mIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressType_IPV4, &sIpAddressType_DUALSTACK}}
+var mListedAccess = smithy.SchemaMembers{List: []*smithy.Schema{&sListedAccess_HomeDirectory, &sListedAccess_HomeDirectoryType, &sListedAccess_Role, &sListedAccess_ExternalId}}
+var m_ListedAccesses = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedAccesses_member}}
+var mListedAgreement = smithy.SchemaMembers{List: []*smithy.Schema{&sListedAgreement_Arn, &sListedAgreement_AgreementId, &sListedAgreement_Description, &sListedAgreement_Status, &sListedAgreement_ServerId, &sListedAgreement_LocalProfileId, &sListedAgreement_PartnerProfileId}}
+var m_ListedAgreements = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedAgreements_member}}
+var mListedCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sListedCertificate_Arn, &sListedCertificate_CertificateId, &sListedCertificate_Usage, &sListedCertificate_Status, &sListedCertificate_ActiveDate, &sListedCertificate_InactiveDate, &sListedCertificate_Type, &sListedCertificate_Description}}
+var m_ListedCertificates = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedCertificates_member}}
+var mListedConnector = smithy.SchemaMembers{List: []*smithy.Schema{&sListedConnector_Arn, &sListedConnector_ConnectorId, &sListedConnector_Url}}
+var m_ListedConnectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedConnectors_member}}
+var mListedExecution = smithy.SchemaMembers{List: []*smithy.Schema{&sListedExecution_ExecutionId, &sListedExecution_InitialFileLocation, &sListedExecution_ServiceMetadata, &sListedExecution_Status}}
+var m_ListedExecutions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedExecutions_member}}
+var mListedHostKey = smithy.SchemaMembers{List: []*smithy.Schema{&sListedHostKey_Arn, &sListedHostKey_HostKeyId, &sListedHostKey_Fingerprint, &sListedHostKey_Description, &sListedHostKey_Type, &sListedHostKey_DateImported, &sListedHostKey_StorageType, &sListedHostKey_SecretId}}
+var m_ListedHostKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedHostKeys_member}}
+var mListedProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sListedProfile_Arn, &sListedProfile_ProfileId, &sListedProfile_As2Id, &sListedProfile_ProfileType}}
+var m_ListedProfiles = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedProfiles_member}}
+var mListedServer = smithy.SchemaMembers{List: []*smithy.Schema{&sListedServer_Arn, &sListedServer_Domain, &sListedServer_IdentityProviderType, &sListedServer_EndpointType, &sListedServer_LoggingRole, &sListedServer_ServerId, &sListedServer_State, &sListedServer_UserCount}}
+var m_ListedServers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedServers_member}}
+var mListedUser = smithy.SchemaMembers{List: []*smithy.Schema{&sListedUser_Arn, &sListedUser_HomeDirectory, &sListedUser_HomeDirectoryType, &sListedUser_Role, &sListedUser_SshPublicKeyCount, &sListedUser_UserName}}
+var m_ListedUsers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedUsers_member}}
+var mListedWebApp = smithy.SchemaMembers{List: []*smithy.Schema{&sListedWebApp_Arn, &sListedWebApp_WebAppId, &sListedWebApp_AccessEndpoint, &sListedWebApp_WebAppEndpoint, &sListedWebApp_EndpointType}}
+var m_ListedWebApps = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedWebApps_member}}
+var mListedWorkflow = smithy.SchemaMembers{List: []*smithy.Schema{&sListedWorkflow_WorkflowId, &sListedWorkflow_Description, &sListedWorkflow_Arn}}
+var m_ListedWorkflows = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListedWorkflows_member}}
+var mLoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingConfiguration_LoggingRole, &sLoggingConfiguration_LogGroupName}}
+var mMapType = smithy.SchemaMembers{List: []*smithy.Schema{&sMapType_FILE, &sMapType_DIRECTORY}}
+var mMdnResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sMdnResponse_SYNC, &sMdnResponse_NONE, &sMdnResponse_ASYNC}}
+var mMdnSigningAlg = smithy.SchemaMembers{List: []*smithy.Schema{&sMdnSigningAlg_SHA256, &sMdnSigningAlg_SHA384, &sMdnSigningAlg_SHA512, &sMdnSigningAlg_SHA1, &sMdnSigningAlg_NONE, &sMdnSigningAlg_DEFAULT}}
+var m_OnPartialUploadWorkflowDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_OnPartialUploadWorkflowDetails_member}}
+var m_OnUploadWorkflowDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_OnUploadWorkflowDetails_member}}
+var mOverwriteExisting = smithy.SchemaMembers{List: []*smithy.Schema{&sOverwriteExisting_TRUE, &sOverwriteExisting_FALSE}}
+var mPosixProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sPosixProfile_Uid, &sPosixProfile_Gid, &sPosixProfile_SecondaryGids}}
+var mPreserveContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sPreserveContentType_ENABLED, &sPreserveContentType_DISABLED}}
+var mPreserveFilenameType = smithy.SchemaMembers{List: []*smithy.Schema{&sPreserveFilenameType_ENABLED, &sPreserveFilenameType_DISABLED}}
+var mProfileType = smithy.SchemaMembers{List: []*smithy.Schema{&sProfileType_LOCAL, &sProfileType_PARTNER}}
+var mProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocol_SFTP, &sProtocol_FTP, &sProtocol_FTPS, &sProtocol_AS2}}
+var mProtocolDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocolDetails_PassiveIp, &sProtocolDetails_TlsSessionResumptionMode, &sProtocolDetails_SetStatOption, &sProtocolDetails_SftpPorts, &sProtocolDetails_As2Transports, &sProtocolDetails_ProxyConfig}}
+var m_Protocols = smithy.SchemaMembers{List: []*smithy.Schema{&s_Protocols_member}}
+var mProxyConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sProxyConfig_SftpMode}}
+var mProxyMode = smithy.SchemaMembers{List: []*smithy.Schema{&sProxyMode_NONE, &sProxyMode_PROXY_PROTOCOL_V2_ENFORCED}}
+var mResourceExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceExistsException_Message, &sResourceExistsException_Resource, &sResourceExistsException_ResourceType}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_Resource, &sResourceNotFoundException_ResourceType}}
+var mS3FileLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sS3FileLocation_Bucket, &sS3FileLocation_Key, &sS3FileLocation_VersionId, &sS3FileLocation_Etag}}
+var mS3InputFileLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sS3InputFileLocation_Bucket, &sS3InputFileLocation_Key}}
+var mS3StorageOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sS3StorageOptions_DirectoryListingOptimization}}
+var mS3Tag = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Tag_Key, &sS3Tag_Value}}
+var m_S3Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3Tags_member}}
+var m_SecondaryGids = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecondaryGids_member}}
+var m_SecretVersionStageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecretVersionStageList_member}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var m_SecurityPolicyNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityPolicyNames_member}}
+var m_SecurityPolicyOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityPolicyOptions_member}}
+var mSecurityPolicyProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityPolicyProtocol_SFTP, &sSecurityPolicyProtocol_FTPS}}
+var m_SecurityPolicyProtocols = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityPolicyProtocols_member}}
+var mSecurityPolicyResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityPolicyResourceType_SERVER, &sSecurityPolicyResourceType_CONNECTOR}}
+var m_ServiceManagedEgressIpAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceManagedEgressIpAddresses_member}}
+var mServiceMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceMetadata_UserDetails}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Message}}
+var mSetStatOption = smithy.SchemaMembers{List: []*smithy.Schema{&sSetStatOption_DEFAULT, &sSetStatOption_ENABLE_NO_OP}}
+var mSftpAuthenticationMethods = smithy.SchemaMembers{List: []*smithy.Schema{&sSftpAuthenticationMethods_PASSWORD, &sSftpAuthenticationMethods_PUBLIC_KEY, &sSftpAuthenticationMethods_PUBLIC_KEY_OR_PASSWORD, &sSftpAuthenticationMethods_PUBLIC_KEY_AND_PASSWORD}}
+var mSftpConnectorConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSftpConnectorConfig_UserSecretId, &sSftpConnectorConfig_TrustedHostKeys, &sSftpConnectorConfig_MaxConcurrentConnections, &sSftpConnectorConfig_OrderedUserSecretVersionStages}}
+var mSftpConnectorConnectionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sSftpConnectorConnectionDetails_HostKey}}
+var m_SftpConnectorTrustedHostKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SftpConnectorTrustedHostKeyList_member}}
+var m_SftpPorts = smithy.SchemaMembers{List: []*smithy.Schema{&s_SftpPorts_member}}
+var mSftpPortWithOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sSftpPortWithOptions_SftpPort, &sSftpPortWithOptions_CommunicationMode}}
+var mSigningAlg = smithy.SchemaMembers{List: []*smithy.Schema{&sSigningAlg_SHA256, &sSigningAlg_SHA384, &sSigningAlg_SHA512, &sSigningAlg_SHA1, &sSigningAlg_NONE}}
+var mSshPublicKey = smithy.SchemaMembers{List: []*smithy.Schema{&sSshPublicKey_DateImported, &sSshPublicKey_SshPublicKeyBody, &sSshPublicKey_SshPublicKeyId}}
+var m_SshPublicKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_SshPublicKeys_member}}
+var mState = smithy.SchemaMembers{List: []*smithy.Schema{&sState_OFFLINE, &sState_ONLINE, &sState_STARTING, &sState_STOPPING, &sState_START_FAILED, &sState_STOP_FAILED}}
+var m_StructuredLogDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_StructuredLogDestinations_member}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mTagStepDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sTagStepDetails_Name, &sTagStepDetails_Tags, &sTagStepDetails_SourceFileLocation}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_RetryAfterSeconds}}
+var mTlsSessionResumptionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsSessionResumptionMode_DISABLED, &sTlsSessionResumptionMode_ENABLED, &sTlsSessionResumptionMode_ENFORCED}}
+var mTransferTableStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTransferTableStatus_QUEUED, &sTransferTableStatus_IN_PROGRESS, &sTransferTableStatus_COMPLETED, &sTransferTableStatus_FAILED}}
+var mUpdateConnectorEgressConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorEgressConfig_VpcLattice}}
+var mUpdateConnectorVpcLatticeEgressConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorVpcLatticeEgressConfig_ResourceConfigurationArn, &sUpdateConnectorVpcLatticeEgressConfig_PortNumber}}
+var mUpdateWebAppEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppEndpointDetails_Vpc}}
+var mUpdateWebAppIdentityCenterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppIdentityCenterConfig_Role}}
+var mUpdateWebAppIdentityProviderDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppIdentityProviderDetails_IdentityCenterConfig}}
+var mUpdateWebAppVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppVpcConfig_SubnetIds, &sUpdateWebAppVpcConfig_IpAddressType}}
+var mUserDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUserDetails_UserName, &sUserDetails_ServerId, &sUserDetails_SessionId}}
+var mWebAppEndpointDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppEndpointDetails_Vpc}}
+var mWebAppEndpointPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppEndpointPolicy_FIPS, &sWebAppEndpointPolicy_STANDARD}}
+var mWebAppEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppEndpointType_PUBLIC, &sWebAppEndpointType_VPC}}
+var mWebAppIdentityProviderDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppIdentityProviderDetails_IdentityCenterConfig}}
+var mWebAppUnits = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppUnits_Provisioned}}
+var mWebAppVpcConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppVpcConfig_SubnetIds, &sWebAppVpcConfig_VpcId, &sWebAppVpcConfig_SecurityGroupIds, &sWebAppVpcConfig_IpAddressType}}
+var mWebAppVpcEndpointIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sWebAppVpcEndpointIpAddressType_IPV4, &sWebAppVpcEndpointIpAddressType_DUALSTACK}}
+var mWorkflowDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowDetail_WorkflowId, &sWorkflowDetail_ExecutionRole}}
+var mWorkflowDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowDetails_OnUpload, &sWorkflowDetails_OnPartialUpload}}
+var mWorkflowStep = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowStep_Type, &sWorkflowStep_CopyStepDetails, &sWorkflowStep_CustomStepDetails, &sWorkflowStep_DeleteStepDetails, &sWorkflowStep_TagStepDetails, &sWorkflowStep_DecryptStepDetails}}
+var m_WorkflowSteps = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowSteps_member}}
+var mWorkflowStepType = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowStepType_COPY, &sWorkflowStepType_CUSTOM, &sWorkflowStepType_TAG, &sWorkflowStepType_DELETE, &sWorkflowStepType_DECRYPT}}
+var mCreateAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessRequest_HomeDirectory, &sCreateAccessRequest_HomeDirectoryType, &sCreateAccessRequest_HomeDirectoryMappings, &sCreateAccessRequest_Policy, &sCreateAccessRequest_PosixProfile, &sCreateAccessRequest_Role, &sCreateAccessRequest_ServerId, &sCreateAccessRequest_ExternalId}}
+var mCreateAccessResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccessResponse_ServerId, &sCreateAccessResponse_ExternalId}}
+var mCreateAgreementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAgreementRequest_Description, &sCreateAgreementRequest_ServerId, &sCreateAgreementRequest_LocalProfileId, &sCreateAgreementRequest_PartnerProfileId, &sCreateAgreementRequest_BaseDirectory, &sCreateAgreementRequest_AccessRole, &sCreateAgreementRequest_Status, &sCreateAgreementRequest_Tags, &sCreateAgreementRequest_PreserveFilename, &sCreateAgreementRequest_EnforceMessageSigning, &sCreateAgreementRequest_CustomDirectories}, Seed: 1, Slots: []uint16{
+	0, 8, 6, 0, 4, 0, 0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 10, 1, 0, 9, 0,
+	0, 0, 0, 0, 0, 7, 11, 2,
+}}
+var mCreateAgreementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAgreementResponse_AgreementId}}
+var mCreateConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorRequest_Url, &sCreateConnectorRequest_As2Config, &sCreateConnectorRequest_AccessRole, &sCreateConnectorRequest_LoggingRole, &sCreateConnectorRequest_Tags, &sCreateConnectorRequest_SftpConfig, &sCreateConnectorRequest_SecurityPolicyName, &sCreateConnectorRequest_EgressConfig, &sCreateConnectorRequest_IpAddressType}, Seed: 12, Slots: []uint16{
+	0, 0, 0, 8, 0, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 9, 4,
+	0, 0, 3, 0, 2, 0, 0, 1,
+}}
+var mCreateConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorResponse_ConnectorId}}
+var mCreateProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProfileRequest_As2Id, &sCreateProfileRequest_ProfileType, &sCreateProfileRequest_CertificateIds, &sCreateProfileRequest_Tags}}
+var mCreateProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProfileResponse_ProfileId}}
+var mCreateServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServerRequest_Certificate, &sCreateServerRequest_Domain, &sCreateServerRequest_EndpointDetails, &sCreateServerRequest_EndpointType, &sCreateServerRequest_HostKey, &sCreateServerRequest_IdentityProviderDetails, &sCreateServerRequest_IdentityProviderType, &sCreateServerRequest_LoggingRole, &sCreateServerRequest_PostAuthenticationLoginBanner, &sCreateServerRequest_PreAuthenticationLoginBanner, &sCreateServerRequest_Protocols, &sCreateServerRequest_ProtocolDetails, &sCreateServerRequest_SecurityPolicyName, &sCreateServerRequest_Tags, &sCreateServerRequest_WorkflowDetails, &sCreateServerRequest_StructuredLogDestinations, &sCreateServerRequest_S3StorageOptions, &sCreateServerRequest_IpAddressType, &sCreateServerRequest_HostKeyStorageType}, Seed: 9, Slots: []uint16{
+	0, 0, 11, 0, 5, 0, 0, 17, 0, 0, 0, 8, 14, 19, 0, 0, 0, 0, 7, 0, 0, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 10, 0, 3, 2, 0, 15, 0, 0, 13, 0,
+	0, 0, 0, 0, 18, 0, 0, 0, 0, 0, 1, 0, 0, 16, 12, 6,
+}}
+var mCreateServerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServerResponse_ServerId}}
+var mCreateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserRequest_HomeDirectory, &sCreateUserRequest_HomeDirectoryType, &sCreateUserRequest_HomeDirectoryMappings, &sCreateUserRequest_Policy, &sCreateUserRequest_PosixProfile, &sCreateUserRequest_Role, &sCreateUserRequest_ServerId, &sCreateUserRequest_SshPublicKeyBody, &sCreateUserRequest_Tags, &sCreateUserRequest_UserName}, Seed: 1, Slots: []uint16{
+	4, 9, 6, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 10, 3, 0, 0, 0, 0,
+	1, 0, 0, 8, 0, 5, 0, 7,
+}}
+var mCreateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserResponse_ServerId, &sCreateUserResponse_UserName}}
+var mCreateWebAppRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebAppRequest_IdentityProviderDetails, &sCreateWebAppRequest_AccessEndpoint, &sCreateWebAppRequest_WebAppUnits, &sCreateWebAppRequest_Tags, &sCreateWebAppRequest_WebAppEndpointPolicy, &sCreateWebAppRequest_EndpointDetails}}
+var mCreateWebAppResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebAppResponse_WebAppId}}
+var mCreateWorkflowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkflowRequest_Description, &sCreateWorkflowRequest_Steps, &sCreateWorkflowRequest_OnExceptionSteps, &sCreateWorkflowRequest_Tags, &sCreateWorkflowRequest_StructuredLogDestinations}}
+var mCreateWorkflowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkflowResponse_WorkflowId}}
+var mDeleteAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessRequest_ServerId, &sDeleteAccessRequest_ExternalId}}
+var mDeleteAgreementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAgreementRequest_AgreementId, &sDeleteAgreementRequest_ServerId}}
+var mDeleteCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCertificateRequest_CertificateId}}
+var mDeleteConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectorRequest_ConnectorId}}
+var mDeleteHostKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHostKeyRequest_ServerId, &sDeleteHostKeyRequest_HostKeyId}}
+var mDeleteProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProfileRequest_ProfileId}}
+var mDeleteServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServerRequest_ServerId}}
+var mDeleteSshPublicKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSshPublicKeyRequest_ServerId, &sDeleteSshPublicKeyRequest_SshPublicKeyId, &sDeleteSshPublicKeyRequest_UserName}}
+var mDeleteUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUserRequest_ServerId, &sDeleteUserRequest_UserName}}
+var mDeleteWebAppCustomizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebAppCustomizationRequest_WebAppId}}
+var mDeleteWebAppRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWebAppRequest_WebAppId}}
+var mDeleteWorkflowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkflowRequest_WorkflowId}}
+var mDescribeAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccessRequest_ServerId, &sDescribeAccessRequest_ExternalId}}
+var mDescribeAccessResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccessResponse_ServerId, &sDescribeAccessResponse_Access}}
+var mDescribeAgreementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAgreementRequest_AgreementId, &sDescribeAgreementRequest_ServerId}}
+var mDescribeAgreementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAgreementResponse_Agreement}}
+var mDescribeCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCertificateRequest_CertificateId}}
+var mDescribeCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCertificateResponse_Certificate}}
+var mDescribeConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorRequest_ConnectorId}}
+var mDescribeConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorResponse_Connector}}
+var mDescribeExecutionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExecutionRequest_ExecutionId, &sDescribeExecutionRequest_WorkflowId}}
+var mDescribeExecutionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeExecutionResponse_WorkflowId, &sDescribeExecutionResponse_Execution}}
+var mDescribeHostKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHostKeyRequest_ServerId, &sDescribeHostKeyRequest_HostKeyId}}
+var mDescribeHostKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHostKeyResponse_HostKey}}
+var mDescribeProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProfileRequest_ProfileId}}
+var mDescribeProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeProfileResponse_Profile}}
+var mDescribeSecurityPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSecurityPolicyRequest_SecurityPolicyName}}
+var mDescribeSecurityPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSecurityPolicyResponse_SecurityPolicy}}
+var mDescribeServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServerRequest_ServerId}}
+var mDescribeServerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServerResponse_Server}}
+var mDescribeUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserRequest_ServerId, &sDescribeUserRequest_UserName}}
+var mDescribeUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserResponse_ServerId, &sDescribeUserResponse_User}}
+var mDescribeWebAppCustomizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWebAppCustomizationRequest_WebAppId}}
+var mDescribeWebAppCustomizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWebAppCustomizationResponse_WebAppCustomization}}
+var mDescribeWebAppRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWebAppRequest_WebAppId}}
+var mDescribeWebAppResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWebAppResponse_WebApp}}
+var mDescribeWorkflowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkflowRequest_WorkflowId}}
+var mDescribeWorkflowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeWorkflowResponse_Workflow}}
+var mImportCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportCertificateRequest_Usage, &sImportCertificateRequest_Certificate, &sImportCertificateRequest_CertificateChain, &sImportCertificateRequest_PrivateKey, &sImportCertificateRequest_ActiveDate, &sImportCertificateRequest_InactiveDate, &sImportCertificateRequest_Description, &sImportCertificateRequest_Tags}}
+var mImportCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportCertificateResponse_CertificateId}}
+var mImportHostKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportHostKeyRequest_ServerId, &sImportHostKeyRequest_HostKeyBody, &sImportHostKeyRequest_Description, &sImportHostKeyRequest_Tags, &sImportHostKeyRequest_StorageType, &sImportHostKeyRequest_KmsKey}}
+var mImportHostKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportHostKeyResponse_ServerId, &sImportHostKeyResponse_HostKeyId}}
+var mImportSshPublicKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportSshPublicKeyRequest_ServerId, &sImportSshPublicKeyRequest_SshPublicKeyBody, &sImportSshPublicKeyRequest_UserName}}
+var mImportSshPublicKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportSshPublicKeyResponse_ServerId, &sImportSshPublicKeyResponse_SshPublicKeyId, &sImportSshPublicKeyResponse_UserName}}
+var mListAccessesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessesRequest_MaxResults, &sListAccessesRequest_NextToken, &sListAccessesRequest_ServerId}}
+var mListAccessesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessesResponse_NextToken, &sListAccessesResponse_ServerId, &sListAccessesResponse_Accesses}}
+var mListAgreementsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAgreementsRequest_MaxResults, &sListAgreementsRequest_NextToken, &sListAgreementsRequest_ServerId}}
+var mListAgreementsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAgreementsResponse_NextToken, &sListAgreementsResponse_Agreements}}
+var mListCertificatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificatesRequest_MaxResults, &sListCertificatesRequest_NextToken}}
+var mListCertificatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCertificatesResponse_NextToken, &sListCertificatesResponse_Certificates}}
+var mListConnectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsRequest_MaxResults, &sListConnectorsRequest_NextToken}}
+var mListConnectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsResponse_NextToken, &sListConnectorsResponse_Connectors}}
+var mListExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutionsRequest_MaxResults, &sListExecutionsRequest_NextToken, &sListExecutionsRequest_WorkflowId}}
+var mListExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListExecutionsResponse_NextToken, &sListExecutionsResponse_WorkflowId, &sListExecutionsResponse_Executions}}
+var mListFileTransferResultsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileTransferResultsRequest_ConnectorId, &sListFileTransferResultsRequest_TransferId, &sListFileTransferResultsRequest_NextToken, &sListFileTransferResultsRequest_MaxResults}}
+var mListFileTransferResultsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFileTransferResultsResponse_FileTransferResults, &sListFileTransferResultsResponse_NextToken}}
+var mListHostKeysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListHostKeysRequest_MaxResults, &sListHostKeysRequest_NextToken, &sListHostKeysRequest_ServerId}}
+var mListHostKeysResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListHostKeysResponse_NextToken, &sListHostKeysResponse_ServerId, &sListHostKeysResponse_HostKeys}}
+var mListProfilesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProfilesRequest_MaxResults, &sListProfilesRequest_NextToken, &sListProfilesRequest_ProfileType}}
+var mListProfilesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProfilesResponse_NextToken, &sListProfilesResponse_Profiles}}
+var mListSecurityPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityPoliciesRequest_MaxResults, &sListSecurityPoliciesRequest_NextToken}}
+var mListSecurityPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSecurityPoliciesResponse_NextToken, &sListSecurityPoliciesResponse_SecurityPolicyNames}}
+var mListServersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServersRequest_MaxResults, &sListServersRequest_NextToken}}
+var mListServersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListServersResponse_NextToken, &sListServersResponse_Servers}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_Arn, &sListTagsForResourceRequest_MaxResults, &sListTagsForResourceRequest_NextToken}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Arn, &sListTagsForResourceResponse_NextToken, &sListTagsForResourceResponse_Tags}}
+var mListUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersRequest_MaxResults, &sListUsersRequest_NextToken, &sListUsersRequest_ServerId}}
+var mListUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersResponse_NextToken, &sListUsersResponse_ServerId, &sListUsersResponse_Users}}
+var mListWebAppsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebAppsRequest_MaxResults, &sListWebAppsRequest_NextToken}}
+var mListWebAppsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWebAppsResponse_NextToken, &sListWebAppsResponse_WebApps}}
+var mListWorkflowsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowsRequest_MaxResults, &sListWorkflowsRequest_NextToken}}
+var mListWorkflowsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowsResponse_NextToken, &sListWorkflowsResponse_Workflows}}
+var mSendWorkflowStepStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSendWorkflowStepStateRequest_WorkflowId, &sSendWorkflowStepStateRequest_ExecutionId, &sSendWorkflowStepStateRequest_Token, &sSendWorkflowStepStateRequest_Status}}
+var mStartDirectoryListingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDirectoryListingRequest_ConnectorId, &sStartDirectoryListingRequest_RemoteDirectoryPath, &sStartDirectoryListingRequest_MaxItems, &sStartDirectoryListingRequest_OutputDirectoryPath}}
+var mStartDirectoryListingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDirectoryListingResponse_ListingId, &sStartDirectoryListingResponse_OutputFileName}}
+var mStartFileTransferRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartFileTransferRequest_ConnectorId, &sStartFileTransferRequest_SendFilePaths, &sStartFileTransferRequest_RetrieveFilePaths, &sStartFileTransferRequest_LocalDirectoryPath, &sStartFileTransferRequest_RemoteDirectoryPath, &sStartFileTransferRequest_CustomHttpHeaders}}
+var mStartFileTransferResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartFileTransferResponse_TransferId}}
+var mStartRemoteDeleteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRemoteDeleteRequest_ConnectorId, &sStartRemoteDeleteRequest_DeletePath}}
+var mStartRemoteDeleteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRemoteDeleteResponse_DeleteId}}
+var mStartRemoteMoveRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRemoteMoveRequest_ConnectorId, &sStartRemoteMoveRequest_SourcePath, &sStartRemoteMoveRequest_TargetPath}}
+var mStartRemoteMoveResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRemoteMoveResponse_MoveId}}
+var mStartServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartServerRequest_ServerId}}
+var mStopServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopServerRequest_ServerId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_Arn, &sTagResourceRequest_Tags}}
+var mTestConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTestConnectionRequest_ConnectorId}}
+var mTestConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTestConnectionResponse_ConnectorId, &sTestConnectionResponse_Status, &sTestConnectionResponse_StatusMessage, &sTestConnectionResponse_SftpConnectionDetails}}
+var mTestIdentityProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTestIdentityProviderRequest_ServerId, &sTestIdentityProviderRequest_ServerProtocol, &sTestIdentityProviderRequest_SourceIp, &sTestIdentityProviderRequest_UserName, &sTestIdentityProviderRequest_UserPassword}}
+var mTestIdentityProviderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTestIdentityProviderResponse_Response, &sTestIdentityProviderResponse_StatusCode, &sTestIdentityProviderResponse_Message, &sTestIdentityProviderResponse_Url}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_Arn, &sUntagResourceRequest_TagKeys}}
+var mUpdateAccessRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessRequest_HomeDirectory, &sUpdateAccessRequest_HomeDirectoryType, &sUpdateAccessRequest_HomeDirectoryMappings, &sUpdateAccessRequest_Policy, &sUpdateAccessRequest_PosixProfile, &sUpdateAccessRequest_Role, &sUpdateAccessRequest_ServerId, &sUpdateAccessRequest_ExternalId}}
+var mUpdateAccessResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccessResponse_ServerId, &sUpdateAccessResponse_ExternalId}}
+var mUpdateAgreementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAgreementRequest_AgreementId, &sUpdateAgreementRequest_ServerId, &sUpdateAgreementRequest_Description, &sUpdateAgreementRequest_Status, &sUpdateAgreementRequest_LocalProfileId, &sUpdateAgreementRequest_PartnerProfileId, &sUpdateAgreementRequest_BaseDirectory, &sUpdateAgreementRequest_AccessRole, &sUpdateAgreementRequest_PreserveFilename, &sUpdateAgreementRequest_EnforceMessageSigning, &sUpdateAgreementRequest_CustomDirectories}, Seed: 1, Slots: []uint16{
+	0, 0, 8, 0, 6, 0, 0, 0, 5, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 10, 3, 0, 9, 0,
+	0, 0, 1, 0, 0, 4, 11, 2,
+}}
+var mUpdateAgreementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAgreementResponse_AgreementId}}
+var mUpdateCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCertificateRequest_CertificateId, &sUpdateCertificateRequest_ActiveDate, &sUpdateCertificateRequest_InactiveDate, &sUpdateCertificateRequest_Description}}
+var mUpdateCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCertificateResponse_CertificateId}}
+var mUpdateConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorRequest_ConnectorId, &sUpdateConnectorRequest_Url, &sUpdateConnectorRequest_As2Config, &sUpdateConnectorRequest_AccessRole, &sUpdateConnectorRequest_LoggingRole, &sUpdateConnectorRequest_SftpConfig, &sUpdateConnectorRequest_SecurityPolicyName, &sUpdateConnectorRequest_EgressConfig, &sUpdateConnectorRequest_IpAddressType}, Seed: 12, Slots: []uint16{
+	1, 0, 0, 8, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 9, 5,
+	0, 0, 4, 0, 3, 0, 0, 2,
+}}
+var mUpdateConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorResponse_ConnectorId}}
+var mUpdateHostKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHostKeyRequest_ServerId, &sUpdateHostKeyRequest_HostKeyId, &sUpdateHostKeyRequest_Description, &sUpdateHostKeyRequest_StorageType, &sUpdateHostKeyRequest_KmsKey}}
+var mUpdateHostKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHostKeyResponse_ServerId, &sUpdateHostKeyResponse_HostKeyId}}
+var mUpdateProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProfileRequest_ProfileId, &sUpdateProfileRequest_CertificateIds}}
+var mUpdateProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProfileResponse_ProfileId}}
+var mUpdateServerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServerRequest_Certificate, &sUpdateServerRequest_ProtocolDetails, &sUpdateServerRequest_EndpointDetails, &sUpdateServerRequest_EndpointType, &sUpdateServerRequest_HostKey, &sUpdateServerRequest_IdentityProviderDetails, &sUpdateServerRequest_LoggingRole, &sUpdateServerRequest_PostAuthenticationLoginBanner, &sUpdateServerRequest_PreAuthenticationLoginBanner, &sUpdateServerRequest_Protocols, &sUpdateServerRequest_SecurityPolicyName, &sUpdateServerRequest_ServerId, &sUpdateServerRequest_WorkflowDetails, &sUpdateServerRequest_StructuredLogDestinations, &sUpdateServerRequest_S3StorageOptions, &sUpdateServerRequest_IpAddressType, &sUpdateServerRequest_IdentityProviderType}, Seed: 9, Slots: []uint16{
+	0, 0, 10, 0, 5, 0, 0, 15, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 4, 0,
+	0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 9, 0, 3, 0, 0, 13, 0, 0, 11, 0,
+	0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 1, 0, 0, 14, 2, 6,
+}}
+var mUpdateServerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServerResponse_ServerId}}
+var mUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequest_HomeDirectory, &sUpdateUserRequest_HomeDirectoryType, &sUpdateUserRequest_HomeDirectoryMappings, &sUpdateUserRequest_Policy, &sUpdateUserRequest_PosixProfile, &sUpdateUserRequest_Role, &sUpdateUserRequest_ServerId, &sUpdateUserRequest_UserName}}
+var mUpdateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserResponse_ServerId, &sUpdateUserResponse_UserName}}
+var mUpdateWebAppCustomizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppCustomizationRequest_WebAppId, &sUpdateWebAppCustomizationRequest_Title, &sUpdateWebAppCustomizationRequest_LogoFile, &sUpdateWebAppCustomizationRequest_FaviconFile}}
+var mUpdateWebAppCustomizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppCustomizationResponse_WebAppId}}
+var mUpdateWebAppRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppRequest_WebAppId, &sUpdateWebAppRequest_IdentityProviderDetails, &sUpdateWebAppRequest_AccessEndpoint, &sUpdateWebAppRequest_WebAppUnits, &sUpdateWebAppRequest_EndpointDetails}}
+var mUpdateWebAppResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWebAppResponse_WebAppId}}
+
+var sCreateAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccess, Type: smithy.ShapeTypeOperation})
+var sCreateAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAgreement, Type: smithy.ShapeTypeOperation})
+var sCreateConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnector, Type: smithy.ShapeTypeOperation})
+var sCreateProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfile, Type: smithy.ShapeTypeOperation})
+var sCreateServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServer, Type: smithy.ShapeTypeOperation})
+var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Type: smithy.ShapeTypeOperation})
+var sCreateWebApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebApp, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflow, Type: smithy.ShapeTypeOperation})
+var sDeleteAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccess, Type: smithy.ShapeTypeOperation})
+var sDeleteAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAgreement, Type: smithy.ShapeTypeOperation})
+var sDeleteCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCertificate, Type: smithy.ShapeTypeOperation})
+var sDeleteConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnector, Type: smithy.ShapeTypeOperation})
+var sDeleteHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHostKey, Type: smithy.ShapeTypeOperation})
+var sDeleteProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProfile, Type: smithy.ShapeTypeOperation})
+var sDeleteServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServer, Type: smithy.ShapeTypeOperation})
+var sDeleteSshPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSshPublicKey, Type: smithy.ShapeTypeOperation})
+var sDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUser, Type: smithy.ShapeTypeOperation})
+var sDeleteWebApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebApp, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDeleteWebAppCustomization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebAppCustomization, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflow, Type: smithy.ShapeTypeOperation})
+var sDescribeAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccess, Type: smithy.ShapeTypeOperation})
+var sDescribeAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAgreement, Type: smithy.ShapeTypeOperation})
+var sDescribeCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificate, Type: smithy.ShapeTypeOperation})
+var sDescribeConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnector, Type: smithy.ShapeTypeOperation})
+var sDescribeExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExecution, Type: smithy.ShapeTypeOperation})
+var sDescribeHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHostKey, Type: smithy.ShapeTypeOperation})
+var sDescribeProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProfile, Type: smithy.ShapeTypeOperation})
+var sDescribeSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecurityPolicy, Type: smithy.ShapeTypeOperation})
+var sDescribeServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServer, Type: smithy.ShapeTypeOperation})
+var sDescribeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUser, Type: smithy.ShapeTypeOperation})
+var sDescribeWebApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWebApp, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDescribeWebAppCustomization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWebAppCustomization, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDescribeWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkflow, Type: smithy.ShapeTypeOperation})
+var sImportCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCertificate, Type: smithy.ShapeTypeOperation})
+var sImportHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportHostKey, Type: smithy.ShapeTypeOperation})
+var sImportSshPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSshPublicKey, Type: smithy.ShapeTypeOperation})
+var sListAccesses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccesses, Type: smithy.ShapeTypeOperation})
+var sListAgreements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAgreements, Type: smithy.ShapeTypeOperation})
+var sListCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificates, Type: smithy.ShapeTypeOperation})
+var sListConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectors, Type: smithy.ShapeTypeOperation})
+var sListExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutions, Type: smithy.ShapeTypeOperation})
+var sListFileTransferResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileTransferResults, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListHostKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostKeys, Type: smithy.ShapeTypeOperation})
+var sListProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfiles, Type: smithy.ShapeTypeOperation})
+var sListSecurityPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityPolicies, Type: smithy.ShapeTypeOperation})
+var sListServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServers, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Type: smithy.ShapeTypeOperation})
+var sListWebApps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebApps, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListWorkflows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflows, Type: smithy.ShapeTypeOperation})
+var sSendWorkflowStepState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWorkflowStepState, Type: smithy.ShapeTypeOperation})
+var sStartDirectoryListing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDirectoryListing, Type: smithy.ShapeTypeOperation})
+var sStartFileTransfer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFileTransfer, Type: smithy.ShapeTypeOperation})
+var sStartRemoteDelete = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRemoteDelete, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sStartRemoteMove = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRemoteMove, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sStartServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServer, Type: smithy.ShapeTypeOperation})
+var sStopServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopServer, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sTestConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestConnection, Type: smithy.ShapeTypeOperation})
+var sTestIdentityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestIdentityProvider, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccess, Type: smithy.ShapeTypeOperation})
+var sUpdateAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgreement, Type: smithy.ShapeTypeOperation})
+var sUpdateCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCertificate, Type: smithy.ShapeTypeOperation})
+var sUpdateConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnector, Type: smithy.ShapeTypeOperation})
+var sUpdateHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostKey, Type: smithy.ShapeTypeOperation})
+var sUpdateProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfile, Type: smithy.ShapeTypeOperation})
+var sUpdateServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServer, Type: smithy.ShapeTypeOperation})
+var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Type: smithy.ShapeTypeOperation})
+var sUpdateWebApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebApp, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sUpdateWebAppCustomization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppCustomization, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var s_TransferService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransferService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var s_AddressAllocationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressAllocationId, Type: smithy.ShapeTypeString})
+var s_AddressAllocationIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressAllocationIds, Members: &m_AddressAllocationIds, Type: smithy.ShapeTypeList})
+var s_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sAgreementStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAgreementStatusType, Members: &mAgreementStatusType, Type: smithy.ShapeTypeEnum})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sAs2AsyncMdnConnectorConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAs2AsyncMdnConnectorConfig, Members: &mAs2AsyncMdnConnectorConfig, Type: smithy.ShapeTypeStructure})
+var s_As2AsyncMdnServerIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_As2AsyncMdnServerIds, Members: &m_As2AsyncMdnServerIds, Type: smithy.ShapeTypeList})
+var sAs2ConnectorConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAs2ConnectorConfig, Members: &mAs2ConnectorConfig, Type: smithy.ShapeTypeStructure})
+var s_As2ConnectorSecretId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_As2ConnectorSecretId, Type: smithy.ShapeTypeString})
+var s_As2Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_As2Id, Type: smithy.ShapeTypeString})
+var sAs2Transport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAs2Transport, Members: &mAs2Transport, Type: smithy.ShapeTypeEnum})
+var s_As2Transports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_As2Transports, Members: &m_As2Transports, Type: smithy.ShapeTypeList})
+var s_CallbackToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallbackToken, Type: smithy.ShapeTypeString})
+var s_CertDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var s_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var s_CertificateBodyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateBodyType, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_CertificateChainType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateChainType, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var s_CertificateIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateIds, Members: &m_CertificateIds, Type: smithy.ShapeTypeList})
+var sCertificateStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateStatusType, Members: &mCertificateStatusType, Type: smithy.ShapeTypeEnum})
+var sCertificateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum})
+var sCertificateUsageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateUsageType, Members: &mCertificateUsageType, Type: smithy.ShapeTypeEnum})
+var s_CertSerial = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertSerial, Type: smithy.ShapeTypeString})
+var sCommunicationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommunicationMode, Members: &mCommunicationMode, Type: smithy.ShapeTypeEnum})
+var sCompressionEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompressionEnum, Members: &mCompressionEnum, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var sConnectorEgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorEgressConfig, Members: &mConnectorEgressConfig, Type: smithy.ShapeTypeUnion})
+var sConnectorEgressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorEgressType, Members: &mConnectorEgressType, Type: smithy.ShapeTypeEnum})
+var s_ConnectorErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorErrorMessage, Type: smithy.ShapeTypeString})
+var sConnectorFileTransferResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorFileTransferResult, Members: &mConnectorFileTransferResult, Type: smithy.ShapeTypeStructure})
+var s_ConnectorFileTransferResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorFileTransferResults, Members: &m_ConnectorFileTransferResults, Type: smithy.ShapeTypeList})
+var s_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var s_ConnectorSecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorSecurityPolicyName, Type: smithy.ShapeTypeString})
+var sConnectorsIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorsIpAddressType, Members: &mConnectorsIpAddressType, Type: smithy.ShapeTypeEnum})
+var sConnectorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum})
+var sConnectorVpcLatticeEgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorVpcLatticeEgressConfig, Members: &mConnectorVpcLatticeEgressConfig, Type: smithy.ShapeTypeStructure})
+var sCopyStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyStepDetails, Members: &mCopyStepDetails, Type: smithy.ShapeTypeStructure})
+var sCustomDirectoriesType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDirectoriesType, Members: &mCustomDirectoriesType, Type: smithy.ShapeTypeStructure})
+var sCustomHttpHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomHttpHeader, Members: &mCustomHttpHeader, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var s_CustomHttpHeaderKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomHttpHeaderKeyType, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_CustomHttpHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomHttpHeaders, Members: &m_CustomHttpHeaders, Type: smithy.ShapeTypeList})
+var s_CustomHttpHeaderValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomHttpHeaderValueType, Traits: &t13, Type: smithy.ShapeTypeString})
+var sCustomStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomStepDetails, Members: &mCustomStepDetails, Type: smithy.ShapeTypeStructure})
+var sCustomStepStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomStepStatus, Members: &mCustomStepStatus, Type: smithy.ShapeTypeEnum})
+var s_CustomStepTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomStepTarget, Type: smithy.ShapeTypeString})
+var s_CustomStepTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomStepTimeoutSeconds, Type: smithy.ShapeTypeInteger})
+var s_DateImported = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateImported, Type: smithy.ShapeTypeTimestamp})
+var sDecryptStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecryptStepDetails, Members: &mDecryptStepDetails, Type: smithy.ShapeTypeStructure})
+var s_DeleteId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteId, Type: smithy.ShapeTypeString})
+var sDeleteStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStepDetails, Members: &mDeleteStepDetails, Type: smithy.ShapeTypeStructure})
+var sDescribedAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedAccess, Members: &mDescribedAccess, Type: smithy.ShapeTypeStructure})
+var sDescribedAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedAgreement, Members: &mDescribedAgreement, Type: smithy.ShapeTypeStructure})
+var sDescribedCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedCertificate, Members: &mDescribedCertificate, Type: smithy.ShapeTypeStructure})
+var sDescribedConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedConnector, Members: &mDescribedConnector, Type: smithy.ShapeTypeStructure})
+var sDescribedConnectorEgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedConnectorEgressConfig, Members: &mDescribedConnectorEgressConfig, Type: smithy.ShapeTypeUnion})
+var sDescribedConnectorVpcLatticeEgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedConnectorVpcLatticeEgressConfig, Members: &mDescribedConnectorVpcLatticeEgressConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedExecution, Members: &mDescribedExecution, Type: smithy.ShapeTypeStructure})
+var sDescribedHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedHostKey, Members: &mDescribedHostKey, Type: smithy.ShapeTypeStructure})
+var sDescribedIdentityCenterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedIdentityCenterConfig, Members: &mDescribedIdentityCenterConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedProfile, Members: &mDescribedProfile, Type: smithy.ShapeTypeStructure})
+var sDescribedSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedSecurityPolicy, Members: &mDescribedSecurityPolicy, Type: smithy.ShapeTypeStructure})
+var sDescribedServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedServer, Members: &mDescribedServer, Type: smithy.ShapeTypeStructure})
+var sDescribedUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedUser, Members: &mDescribedUser, Type: smithy.ShapeTypeStructure})
+var sDescribedWebApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedWebApp, Members: &mDescribedWebApp, Type: smithy.ShapeTypeStructure})
+var sDescribedWebAppCustomization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedWebAppCustomization, Members: &mDescribedWebAppCustomization, Type: smithy.ShapeTypeStructure})
+var sDescribedWebAppEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedWebAppEndpointDetails, Members: &mDescribedWebAppEndpointDetails, Type: smithy.ShapeTypeUnion})
+var sDescribedWebAppIdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedWebAppIdentityProviderDetails, Members: &mDescribedWebAppIdentityProviderDetails, Type: smithy.ShapeTypeUnion})
+var sDescribedWebAppVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedWebAppVpcConfig, Members: &mDescribedWebAppVpcConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribedWorkflow, Members: &mDescribedWorkflow, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDirectoryListingOptimization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryListingOptimization, Members: &mDirectoryListingOptimization, Type: smithy.ShapeTypeEnum})
+var sDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum})
+var sEfsFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEfsFileLocation, Members: &mEfsFileLocation, Type: smithy.ShapeTypeStructure})
+var s_EfsFileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EfsFileSystemId, Type: smithy.ShapeTypeString})
+var s_EfsPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EfsPath, Type: smithy.ShapeTypeString})
+var sEncryptionAlg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionAlg, Members: &mEncryptionAlg, Type: smithy.ShapeTypeEnum})
+var sEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointDetails, Members: &mEndpointDetails, Type: smithy.ShapeTypeStructure})
+var sEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum})
+var sEnforceMessageSigningType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnforceMessageSigningType, Members: &mEnforceMessageSigningType, Type: smithy.ShapeTypeEnum})
+var sExecutionError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionError, Members: &mExecutionError, Type: smithy.ShapeTypeStructure})
+var s_ExecutionErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionErrorMessage, Type: smithy.ShapeTypeString})
+var sExecutionErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionErrorType, Members: &mExecutionErrorType, Type: smithy.ShapeTypeEnum})
+var s_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sExecutionResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionResults, Members: &mExecutionResults, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sExecutionStepResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionStepResult, Members: &mExecutionStepResult, Type: smithy.ShapeTypeStructure})
+var s_ExecutionStepResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionStepResults, Members: &m_ExecutionStepResults, Type: smithy.ShapeTypeList})
+var s_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var s_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureCode, Type: smithy.ShapeTypeString})
+var sFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileLocation, Members: &mFileLocation, Type: smithy.ShapeTypeStructure})
+var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var s_FilePaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList})
+var s_Fips = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Fips, Type: smithy.ShapeTypeBoolean})
+var s_Function = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Function, Type: smithy.ShapeTypeString})
+var s_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sHomeDirectoryMapEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHomeDirectoryMapEntry, Members: &mHomeDirectoryMapEntry, Type: smithy.ShapeTypeStructure})
+var s_HomeDirectoryMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HomeDirectoryMappings, Members: &m_HomeDirectoryMappings, Type: smithy.ShapeTypeList})
+var sHomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var s_HostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostKey, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_HostKeyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostKeyDescription, Type: smithy.ShapeTypeString})
+var s_HostKeyFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostKeyFingerprint, Type: smithy.ShapeTypeString})
+var s_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sHostKeyStorageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHostKeyStorageType, Members: &mHostKeyStorageType, Type: smithy.ShapeTypeEnum})
+var s_HostKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostKeyType, Type: smithy.ShapeTypeString})
+var s_IdentityCenterApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityCenterApplicationArn, Type: smithy.ShapeTypeString})
+var sIdentityCenterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityCenterConfig, Members: &mIdentityCenterConfig, Type: smithy.ShapeTypeStructure})
+var s_IdentityCenterInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var sIdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityProviderDetails, Members: &mIdentityProviderDetails, Type: smithy.ShapeTypeStructure})
+var sIdentityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityProviderType, Members: &mIdentityProviderType, Type: smithy.ShapeTypeEnum})
+var sInputFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputFileLocation, Members: &mInputFileLocation, Type: smithy.ShapeTypeStructure})
+var sInternalServiceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceError, Members: &mInternalServiceError, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var s_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sListedAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedAccess, Members: &mListedAccess, Type: smithy.ShapeTypeStructure})
+var s_ListedAccesses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedAccesses, Members: &m_ListedAccesses, Type: smithy.ShapeTypeList})
+var sListedAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedAgreement, Members: &mListedAgreement, Type: smithy.ShapeTypeStructure})
+var s_ListedAgreements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedAgreements, Members: &m_ListedAgreements, Type: smithy.ShapeTypeList})
+var sListedCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedCertificate, Members: &mListedCertificate, Type: smithy.ShapeTypeStructure})
+var s_ListedCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedCertificates, Members: &m_ListedCertificates, Type: smithy.ShapeTypeList})
+var sListedConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedConnector, Members: &mListedConnector, Type: smithy.ShapeTypeStructure})
+var s_ListedConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedConnectors, Members: &m_ListedConnectors, Type: smithy.ShapeTypeList})
+var sListedExecution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedExecution, Members: &mListedExecution, Type: smithy.ShapeTypeStructure})
+var s_ListedExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedExecutions, Members: &m_ListedExecutions, Type: smithy.ShapeTypeList})
+var sListedHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedHostKey, Members: &mListedHostKey, Type: smithy.ShapeTypeStructure})
+var s_ListedHostKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedHostKeys, Members: &m_ListedHostKeys, Type: smithy.ShapeTypeList})
+var sListedProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedProfile, Members: &mListedProfile, Type: smithy.ShapeTypeStructure})
+var s_ListedProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedProfiles, Members: &m_ListedProfiles, Type: smithy.ShapeTypeList})
+var sListedServer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedServer, Members: &mListedServer, Type: smithy.ShapeTypeStructure})
+var s_ListedServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedServers, Members: &m_ListedServers, Type: smithy.ShapeTypeList})
+var sListedUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedUser, Members: &mListedUser, Type: smithy.ShapeTypeStructure})
+var s_ListedUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedUsers, Members: &m_ListedUsers, Type: smithy.ShapeTypeList})
+var sListedWebApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedWebApp, Members: &mListedWebApp, Type: smithy.ShapeTypeStructure})
+var s_ListedWebApps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedWebApps, Members: &m_ListedWebApps, Type: smithy.ShapeTypeList})
+var sListedWorkflow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListedWorkflow, Members: &mListedWorkflow, Type: smithy.ShapeTypeStructure})
+var s_ListedWorkflows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListedWorkflows, Members: &m_ListedWorkflows, Type: smithy.ShapeTypeList})
+var s_ListingId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListingId, Type: smithy.ShapeTypeString})
+var sLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var s_MapEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapEntry, Type: smithy.ShapeTypeString})
+var s_MapTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapTarget, Type: smithy.ShapeTypeString})
+var sMapType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMapType, Members: &mMapType, Type: smithy.ShapeTypeEnum})
+var s_MaxConcurrentConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxConcurrentConnections, Type: smithy.ShapeTypeInteger})
+var s_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxItems, Type: smithy.ShapeTypeInteger})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMdnResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMdnResponse, Members: &mMdnResponse, Type: smithy.ShapeTypeEnum})
+var sMdnSigningAlg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMdnSigningAlg, Members: &mMdnSigningAlg, Type: smithy.ShapeTypeEnum})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString})
+var s_MessageSubject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageSubject, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_MoveId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MoveId, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_NullableRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableRole, Type: smithy.ShapeTypeString})
+var s_OnPartialUploadWorkflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnPartialUploadWorkflowDetails, Members: &m_OnPartialUploadWorkflowDetails, Type: smithy.ShapeTypeList})
+var s_OnUploadWorkflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnUploadWorkflowDetails, Members: &m_OnUploadWorkflowDetails, Type: smithy.ShapeTypeList})
+var s_OutputFileName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputFileName, Type: smithy.ShapeTypeString})
+var sOverwriteExisting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOverwriteExisting, Members: &mOverwriteExisting, Type: smithy.ShapeTypeEnum})
+var s_PassiveIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PassiveIp, Type: smithy.ShapeTypeString})
+var s_Policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policy, Type: smithy.ShapeTypeString})
+var s_PosixId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PosixId, Type: smithy.ShapeTypeLong})
+var sPosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var s_PostAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PostAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var s_PreAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var sPreserveContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreserveContentType, Members: &mPreserveContentType, Type: smithy.ShapeTypeEnum})
+var sPreserveFilenameType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreserveFilenameType, Members: &mPreserveFilenameType, Type: smithy.ShapeTypeEnum})
+var s_PrivateKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateKeyType, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sProfileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfileType, Members: &mProfileType, Type: smithy.ShapeTypeEnum})
+var sProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var sProtocolDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocolDetails, Members: &mProtocolDetails, Type: smithy.ShapeTypeStructure})
+var s_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Protocols, Members: &m_Protocols, Type: smithy.ShapeTypeList})
+var sProxyConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyConfig, Members: &mProxyConfig, Type: smithy.ShapeTypeStructure})
+var sProxyMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProxyMode, Members: &mProxyMode, Type: smithy.ShapeTypeEnum})
+var s_Resource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resource, Type: smithy.ShapeTypeString})
+var sResourceExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceExistsException, Members: &mResourceExistsException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var s_Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Response, Type: smithy.ShapeTypeString})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeString})
+var s_Role = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Role, Type: smithy.ShapeTypeString})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var s_S3Etag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Etag, Type: smithy.ShapeTypeString})
+var sS3FileLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3FileLocation, Members: &mS3FileLocation, Type: smithy.ShapeTypeStructure})
+var sS3InputFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3InputFileLocation, Members: &mS3InputFileLocation, Type: smithy.ShapeTypeStructure})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sS3StorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3StorageOptions, Members: &mS3StorageOptions, Type: smithy.ShapeTypeStructure})
+var sS3Tag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Tag, Members: &mS3Tag, Type: smithy.ShapeTypeStructure})
+var s_S3TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3TagKey, Type: smithy.ShapeTypeString})
+var s_S3Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Tags, Members: &m_S3Tags, Type: smithy.ShapeTypeList})
+var s_S3TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3TagValue, Type: smithy.ShapeTypeString})
+var s_S3VersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3VersionId, Type: smithy.ShapeTypeString})
+var s_SecondaryGids = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecondaryGids, Members: &m_SecondaryGids, Type: smithy.ShapeTypeList})
+var s_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretId, Type: smithy.ShapeTypeString})
+var s_SecretVersionStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionStage, Type: smithy.ShapeTypeString})
+var s_SecretVersionStageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretVersionStageList, Members: &m_SecretVersionStageList, Type: smithy.ShapeTypeList})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var s_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityPolicyName, Type: smithy.ShapeTypeString})
+var s_SecurityPolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityPolicyNames, Members: &m_SecurityPolicyNames, Type: smithy.ShapeTypeList})
+var s_SecurityPolicyOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityPolicyOption, Type: smithy.ShapeTypeString})
+var s_SecurityPolicyOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityPolicyOptions, Members: &m_SecurityPolicyOptions, Type: smithy.ShapeTypeList})
+var sSecurityPolicyProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityPolicyProtocol, Members: &mSecurityPolicyProtocol, Type: smithy.ShapeTypeEnum})
+var s_SecurityPolicyProtocols = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityPolicyProtocols, Members: &m_SecurityPolicyProtocols, Type: smithy.ShapeTypeList})
+var sSecurityPolicyResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityPolicyResourceType, Members: &mSecurityPolicyResourceType, Type: smithy.ShapeTypeEnum})
+var s_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var s_ServiceErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceErrorMessage, Type: smithy.ShapeTypeString})
+var s_ServiceManagedEgressIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceManagedEgressIpAddress, Type: smithy.ShapeTypeString})
+var s_ServiceManagedEgressIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceManagedEgressIpAddresses, Members: &m_ServiceManagedEgressIpAddresses, Type: smithy.ShapeTypeList})
+var sServiceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceMetadata, Members: &mServiceMetadata, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sSetStatOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSetStatOption, Members: &mSetStatOption, Type: smithy.ShapeTypeEnum})
+var sSftpAuthenticationMethods = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSftpAuthenticationMethods, Members: &mSftpAuthenticationMethods, Type: smithy.ShapeTypeEnum})
+var sSftpConnectorConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSftpConnectorConfig, Members: &mSftpConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sSftpConnectorConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSftpConnectorConnectionDetails, Members: &mSftpConnectorConnectionDetails, Type: smithy.ShapeTypeStructure})
+var s_SftpConnectorHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SftpConnectorHostKey, Type: smithy.ShapeTypeString})
+var s_SftpConnectorTrustedHostKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SftpConnectorTrustedHostKey, Type: smithy.ShapeTypeString})
+var s_SftpConnectorTrustedHostKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SftpConnectorTrustedHostKeyList, Members: &m_SftpConnectorTrustedHostKeyList, Type: smithy.ShapeTypeList})
+var s_SftpPort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SftpPort, Type: smithy.ShapeTypeInteger})
+var s_SftpPorts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SftpPorts, Members: &m_SftpPorts, Type: smithy.ShapeTypeList})
+var sSftpPortWithOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSftpPortWithOptions, Members: &mSftpPortWithOptions, Type: smithy.ShapeTypeStructure})
+var sSigningAlg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigningAlg, Members: &mSigningAlg, Type: smithy.ShapeTypeEnum})
+var s_SourceFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceFileLocation, Type: smithy.ShapeTypeString})
+var s_SourceIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceIp, Type: smithy.ShapeTypeString})
+var sSshPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSshPublicKey, Members: &mSshPublicKey, Type: smithy.ShapeTypeStructure})
+var s_SshPublicKeyBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SshPublicKeyBody, Type: smithy.ShapeTypeString})
+var s_SshPublicKeyCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SshPublicKeyCount, Type: smithy.ShapeTypeInteger})
+var s_SshPublicKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SshPublicKeyId, Type: smithy.ShapeTypeString})
+var s_SshPublicKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SshPublicKeys, Members: &m_SshPublicKeys, Type: smithy.ShapeTypeList})
+var sState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString})
+var s_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusCode, Type: smithy.ShapeTypeInteger})
+var s_StepResultOutputsJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepResultOutputsJson, Type: smithy.ShapeTypeString})
+var s_StructuredLogDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StructuredLogDestinations, Members: &m_StructuredLogDestinations, Type: smithy.ShapeTypeList})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sTagStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagStepDetails, Members: &mTagStepDetails, Type: smithy.ShapeTypeStructure})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var sTlsSessionResumptionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsSessionResumptionMode, Members: &mTlsSessionResumptionMode, Type: smithy.ShapeTypeEnum})
+var s_TransferId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransferId, Type: smithy.ShapeTypeString})
+var sTransferTableStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransferTableStatus, Members: &mTransferTableStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectorEgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorEgressConfig, Members: &mUpdateConnectorEgressConfig, Type: smithy.ShapeTypeUnion})
+var sUpdateConnectorVpcLatticeEgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorVpcLatticeEgressConfig, Members: &mUpdateConnectorVpcLatticeEgressConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppEndpointDetails, Members: &mUpdateWebAppEndpointDetails, Type: smithy.ShapeTypeUnion})
+var sUpdateWebAppIdentityCenterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppIdentityCenterConfig, Members: &mUpdateWebAppIdentityCenterConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppIdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppIdentityProviderDetails, Members: &mUpdateWebAppIdentityProviderDetails, Type: smithy.ShapeTypeUnion})
+var sUpdateWebAppVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppVpcConfig, Members: &mUpdateWebAppVpcConfig, Type: smithy.ShapeTypeStructure})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString})
+var s_UserCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserCount, Type: smithy.ShapeTypeInteger})
+var sUserDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserDetails, Members: &mUserDetails, Type: smithy.ShapeTypeStructure})
+var s_UserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserName, Type: smithy.ShapeTypeString})
+var s_UserPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserPassword, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var s_VpcLatticeResourceConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcLatticeResourceConfigurationArn, Type: smithy.ShapeTypeString})
+var s_WebAppAccessEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppAccessEndpoint, Type: smithy.ShapeTypeString})
+var s_WebAppEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppEndpoint, Type: smithy.ShapeTypeString})
+var sWebAppEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppEndpointDetails, Members: &mWebAppEndpointDetails, Type: smithy.ShapeTypeUnion})
+var sWebAppEndpointPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppEndpointPolicy, Members: &mWebAppEndpointPolicy, Type: smithy.ShapeTypeEnum})
+var sWebAppEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppEndpointType, Members: &mWebAppEndpointType, Type: smithy.ShapeTypeEnum})
+var s_WebAppFaviconFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppFaviconFile, Traits: &t13, Type: smithy.ShapeTypeBlob})
+var s_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sWebAppIdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppIdentityProviderDetails, Members: &mWebAppIdentityProviderDetails, Type: smithy.ShapeTypeUnion})
+var s_WebAppLogoFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppLogoFile, Traits: &t13, Type: smithy.ShapeTypeBlob})
+var s_WebAppTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppTitle, Type: smithy.ShapeTypeString})
+var s_WebAppUnitCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebAppUnitCount, Type: smithy.ShapeTypeInteger})
+var sWebAppUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppUnits, Members: &mWebAppUnits, Type: smithy.ShapeTypeUnion})
+var sWebAppVpcConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppVpcConfig, Members: &mWebAppVpcConfig, Type: smithy.ShapeTypeStructure})
+var sWebAppVpcEndpointIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebAppVpcEndpointIpAddressType, Members: &mWebAppVpcEndpointIpAddressType, Type: smithy.ShapeTypeEnum})
+var s_WorkflowDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowDescription, Type: smithy.ShapeTypeString})
+var sWorkflowDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowDetail, Members: &mWorkflowDetail, Type: smithy.ShapeTypeStructure})
+var sWorkflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowDetails, Members: &mWorkflowDetails, Type: smithy.ShapeTypeStructure})
+var s_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sWorkflowStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStep, Members: &mWorkflowStep, Type: smithy.ShapeTypeStructure})
+var s_WorkflowStepName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowStepName, Type: smithy.ShapeTypeString})
+var s_WorkflowSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowSteps, Members: &m_WorkflowSteps, Type: smithy.ShapeTypeList})
+var sWorkflowStepType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowStepType, Members: &mWorkflowStepType, Type: smithy.ShapeTypeEnum})
+var sCreateAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessRequest, Members: &mCreateAccessRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAccessResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccessResponse, Members: &mCreateAccessResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAgreementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAgreementRequest, Members: &mCreateAgreementRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAgreementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAgreementResponse, Members: &mCreateAgreementResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorRequest, Members: &mCreateConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorResponse, Members: &mCreateConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sCreateProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfileRequest, Members: &mCreateProfileRequest, Type: smithy.ShapeTypeStructure})
+var sCreateProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProfileResponse, Members: &mCreateProfileResponse, Type: smithy.ShapeTypeStructure})
+var sCreateServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServerRequest, Members: &mCreateServerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateServerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServerResponse, Members: &mCreateServerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure})
+var sCreateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResponse, Members: &mCreateUserResponse, Type: smithy.ShapeTypeStructure})
+var sCreateWebAppRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebAppRequest, Members: &mCreateWebAppRequest, Type: smithy.ShapeTypeStructure})
+var sCreateWebAppResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebAppResponse, Members: &mCreateWebAppResponse, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowRequest, Members: &mCreateWorkflowRequest, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowResponse, Members: &mCreateWorkflowResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessRequest, Members: &mDeleteAccessRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAgreementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAgreementRequest, Members: &mDeleteAgreementRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCertificateRequest, Members: &mDeleteCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorRequest, Members: &mDeleteConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteHostKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHostKeyRequest, Members: &mDeleteHostKeyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProfileRequest, Members: &mDeleteProfileRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServerRequest, Members: &mDeleteServerRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSshPublicKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSshPublicKeyRequest, Members: &mDeleteSshPublicKeyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserRequest, Members: &mDeleteUserRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteWebAppCustomizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebAppCustomizationRequest, Members: &mDeleteWebAppCustomizationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteWebAppRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWebAppRequest, Members: &mDeleteWebAppRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowRequest, Members: &mDeleteWorkflowRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccessRequest, Members: &mDescribeAccessRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAccessResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccessResponse, Members: &mDescribeAccessResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeAgreementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAgreementRequest, Members: &mDescribeAgreementRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAgreementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAgreementResponse, Members: &mDescribeAgreementResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificateRequest, Members: &mDescribeCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCertificateResponse, Members: &mDescribeCertificateResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorRequest, Members: &mDescribeConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorResponse, Members: &mDescribeConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeExecutionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExecutionRequest, Members: &mDescribeExecutionRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeExecutionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeExecutionResponse, Members: &mDescribeExecutionResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeHostKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHostKeyRequest, Members: &mDescribeHostKeyRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeHostKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHostKeyResponse, Members: &mDescribeHostKeyResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProfileRequest, Members: &mDescribeProfileRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeProfileResponse, Members: &mDescribeProfileResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSecurityPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecurityPolicyRequest, Members: &mDescribeSecurityPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSecurityPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSecurityPolicyResponse, Members: &mDescribeSecurityPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServerRequest, Members: &mDescribeServerRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeServerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServerResponse, Members: &mDescribeServerResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserRequest, Members: &mDescribeUserRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserResponse, Members: &mDescribeUserResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeWebAppCustomizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWebAppCustomizationRequest, Members: &mDescribeWebAppCustomizationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeWebAppCustomizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWebAppCustomizationResponse, Members: &mDescribeWebAppCustomizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeWebAppRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWebAppRequest, Members: &mDescribeWebAppRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeWebAppResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWebAppResponse, Members: &mDescribeWebAppResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkflowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkflowRequest, Members: &mDescribeWorkflowRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkflowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeWorkflowResponse, Members: &mDescribeWorkflowResponse, Type: smithy.ShapeTypeStructure})
+var sImportCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCertificateRequest, Members: &mImportCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sImportCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportCertificateResponse, Members: &mImportCertificateResponse, Type: smithy.ShapeTypeStructure})
+var sImportHostKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportHostKeyRequest, Members: &mImportHostKeyRequest, Type: smithy.ShapeTypeStructure})
+var sImportHostKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportHostKeyResponse, Members: &mImportHostKeyResponse, Type: smithy.ShapeTypeStructure})
+var sImportSshPublicKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSshPublicKeyRequest, Members: &mImportSshPublicKeyRequest, Type: smithy.ShapeTypeStructure})
+var sImportSshPublicKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportSshPublicKeyResponse, Members: &mImportSshPublicKeyResponse, Type: smithy.ShapeTypeStructure})
+var sListAccessesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessesRequest, Members: &mListAccessesRequest, Type: smithy.ShapeTypeStructure})
+var sListAccessesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessesResponse, Members: &mListAccessesResponse, Type: smithy.ShapeTypeStructure})
+var sListAgreementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAgreementsRequest, Members: &mListAgreementsRequest, Type: smithy.ShapeTypeStructure})
+var sListAgreementsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAgreementsResponse, Members: &mListAgreementsResponse, Type: smithy.ShapeTypeStructure})
+var sListCertificatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificatesRequest, Members: &mListCertificatesRequest, Type: smithy.ShapeTypeStructure})
+var sListCertificatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCertificatesResponse, Members: &mListCertificatesResponse, Type: smithy.ShapeTypeStructure})
+var sListConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsRequest, Members: &mListConnectorsRequest, Type: smithy.ShapeTypeStructure})
+var sListConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsResponse, Members: &mListConnectorsResponse, Type: smithy.ShapeTypeStructure})
+var sListExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutionsRequest, Members: &mListExecutionsRequest, Type: smithy.ShapeTypeStructure})
+var sListExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListExecutionsResponse, Members: &mListExecutionsResponse, Type: smithy.ShapeTypeStructure})
+var sListFileTransferResultsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileTransferResultsRequest, Members: &mListFileTransferResultsRequest, Type: smithy.ShapeTypeStructure})
+var sListFileTransferResultsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFileTransferResultsResponse, Members: &mListFileTransferResultsResponse, Type: smithy.ShapeTypeStructure})
+var sListHostKeysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostKeysRequest, Members: &mListHostKeysRequest, Type: smithy.ShapeTypeStructure})
+var sListHostKeysResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostKeysResponse, Members: &mListHostKeysResponse, Type: smithy.ShapeTypeStructure})
+var sListProfilesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfilesRequest, Members: &mListProfilesRequest, Type: smithy.ShapeTypeStructure})
+var sListProfilesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProfilesResponse, Members: &mListProfilesResponse, Type: smithy.ShapeTypeStructure})
+var sListSecurityPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityPoliciesRequest, Members: &mListSecurityPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListSecurityPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSecurityPoliciesResponse, Members: &mListSecurityPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListServersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServersRequest, Members: &mListServersRequest, Type: smithy.ShapeTypeStructure})
+var sListServersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServersResponse, Members: &mListServersResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure})
+var sListUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResponse, Members: &mListUsersResponse, Type: smithy.ShapeTypeStructure})
+var sListWebAppsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebAppsRequest, Members: &mListWebAppsRequest, Type: smithy.ShapeTypeStructure})
+var sListWebAppsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWebAppsResponse, Members: &mListWebAppsResponse, Type: smithy.ShapeTypeStructure})
+var sListWorkflowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowsRequest, Members: &mListWorkflowsRequest, Type: smithy.ShapeTypeStructure})
+var sListWorkflowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowsResponse, Members: &mListWorkflowsResponse, Type: smithy.ShapeTypeStructure})
+var sSendWorkflowStepStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWorkflowStepStateRequest, Members: &mSendWorkflowStepStateRequest, Type: smithy.ShapeTypeStructure})
+var sSendWorkflowStepStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWorkflowStepStateResponse, Type: smithy.ShapeTypeStructure})
+var sStartDirectoryListingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDirectoryListingRequest, Members: &mStartDirectoryListingRequest, Type: smithy.ShapeTypeStructure})
+var sStartDirectoryListingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDirectoryListingResponse, Members: &mStartDirectoryListingResponse, Type: smithy.ShapeTypeStructure})
+var sStartFileTransferRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFileTransferRequest, Members: &mStartFileTransferRequest, Type: smithy.ShapeTypeStructure})
+var sStartFileTransferResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFileTransferResponse, Members: &mStartFileTransferResponse, Type: smithy.ShapeTypeStructure})
+var sStartRemoteDeleteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRemoteDeleteRequest, Members: &mStartRemoteDeleteRequest, Type: smithy.ShapeTypeStructure})
+var sStartRemoteDeleteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRemoteDeleteResponse, Members: &mStartRemoteDeleteResponse, Type: smithy.ShapeTypeStructure})
+var sStartRemoteMoveRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRemoteMoveRequest, Members: &mStartRemoteMoveRequest, Type: smithy.ShapeTypeStructure})
+var sStartRemoteMoveResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRemoteMoveResponse, Members: &mStartRemoteMoveResponse, Type: smithy.ShapeTypeStructure})
+var sStartServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartServerRequest, Members: &mStartServerRequest, Type: smithy.ShapeTypeStructure})
+var sStopServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopServerRequest, Members: &mStopServerRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTestConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestConnectionRequest, Members: &mTestConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sTestConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestConnectionResponse, Members: &mTestConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sTestIdentityProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestIdentityProviderRequest, Members: &mTestIdentityProviderRequest, Type: smithy.ShapeTypeStructure})
+var sTestIdentityProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestIdentityProviderResponse, Members: &mTestIdentityProviderResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAccessRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessRequest, Members: &mUpdateAccessRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAccessResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccessResponse, Members: &mUpdateAccessResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAgreementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgreementRequest, Members: &mUpdateAgreementRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAgreementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAgreementResponse, Members: &mUpdateAgreementResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCertificateRequest, Members: &mUpdateCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCertificateResponse, Members: &mUpdateCertificateResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorRequest, Members: &mUpdateConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorResponse, Members: &mUpdateConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateHostKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostKeyRequest, Members: &mUpdateHostKeyRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateHostKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostKeyResponse, Members: &mUpdateHostKeyResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfileRequest, Members: &mUpdateProfileRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProfileResponse, Members: &mUpdateProfileResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateServerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServerRequest, Members: &mUpdateServerRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateServerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServerResponse, Members: &mUpdateServerResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResponse, Members: &mUpdateUserResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppCustomizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppCustomizationRequest, Members: &mUpdateWebAppCustomizationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppCustomizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppCustomizationResponse, Members: &mUpdateWebAppCustomizationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppRequest, Members: &mUpdateWebAppRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWebAppResponse, Members: &mUpdateWebAppResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServiceErrorMessage, Type: smithy.ShapeTypeString})
+var s_AddressAllocationIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AddressAllocationId, Type: smithy.ShapeTypeString})
+var sAgreementStatusType_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAgreementStatusType_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAs2AsyncMdnConnectorConfig_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sAs2AsyncMdnConnectorConfig_ServerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerIds", ID: &i_As2AsyncMdnServerIds, Members: &m_As2AsyncMdnServerIds, Type: smithy.ShapeTypeList})
+var s_As2AsyncMdnServerIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sAs2ConnectorConfig_LocalProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sAs2ConnectorConfig_PartnerProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sAs2ConnectorConfig_MessageSubject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageSubject", ID: &i_MessageSubject, Traits: &t12, Type: smithy.ShapeTypeString})
+var sAs2ConnectorConfig_Compression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compression", ID: &iCompressionEnum, Members: &mCompressionEnum, Type: smithy.ShapeTypeEnum})
+var sAs2ConnectorConfig_EncryptionAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionAlgorithm", ID: &iEncryptionAlg, Members: &mEncryptionAlg, Type: smithy.ShapeTypeEnum})
+var sAs2ConnectorConfig_SigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigningAlgorithm", ID: &iSigningAlg, Members: &mSigningAlg, Type: smithy.ShapeTypeEnum})
+var sAs2ConnectorConfig_MdnSigningAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MdnSigningAlgorithm", ID: &iMdnSigningAlg, Members: &mMdnSigningAlg, Type: smithy.ShapeTypeEnum})
+var sAs2ConnectorConfig_MdnResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MdnResponse", ID: &iMdnResponse, Members: &mMdnResponse, Type: smithy.ShapeTypeEnum})
+var sAs2ConnectorConfig_BasicAuthSecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicAuthSecretId", ID: &i_As2ConnectorSecretId, Type: smithy.ShapeTypeString})
+var sAs2ConnectorConfig_PreserveContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreserveContentType", ID: &iPreserveContentType, Members: &mPreserveContentType, Type: smithy.ShapeTypeEnum})
+var sAs2ConnectorConfig_AsyncMdnConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsyncMdnConfig", ID: &iAs2AsyncMdnConnectorConfig, Members: &mAs2AsyncMdnConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sAs2Transport_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_As2Transports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAs2Transport, Members: &mAs2Transport, Type: smithy.ShapeTypeEnum})
+var s_CertificateIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sCertificateStatusType_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateStatusType_PENDING_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateStatusType_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateType_CERTIFICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateType_CERTIFICATE_WITH_PRIVATE_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_WITH_PRIVATE_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateUsageType_SIGNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateUsageType_ENCRYPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateUsageType_TLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCommunicationMode_CLIENT_TALK_FIRST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT_TALK_FIRST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCommunicationMode_SERVER_TALK_FIRST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TALK_FIRST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionEnum_ZLIB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZLIB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompressionEnum_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sConnectorEgressConfig_VpcLattice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLattice", ID: &iConnectorVpcLatticeEgressConfig, Members: &mConnectorVpcLatticeEgressConfig, Type: smithy.ShapeTypeStructure})
+var sConnectorEgressType_SERVICE_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorEgressType_VPC_LATTICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_LATTICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorFileTransferResult_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilePath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sConnectorFileTransferResult_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iTransferTableStatus, Members: &mTransferTableStatus, Type: smithy.ShapeTypeEnum})
+var sConnectorFileTransferResult_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &i_FailureCode, Type: smithy.ShapeTypeString})
+var sConnectorFileTransferResult_FailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMessage", ID: &i_Message, Type: smithy.ShapeTypeString})
+var s_ConnectorFileTransferResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorFileTransferResult, Members: &mConnectorFileTransferResult, Type: smithy.ShapeTypeStructure})
+var sConnectorsIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorsIpAddressType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatus_ERRORED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERRORED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfigurationArn", ID: &i_VpcLatticeResourceConfigurationArn, Type: smithy.ShapeTypeString})
+var sConnectorVpcLatticeEgressConfig_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortNumber", ID: &i_SftpPort, Type: smithy.ShapeTypeInteger})
+var sCopyStepDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkflowStepName, Type: smithy.ShapeTypeString})
+var sCopyStepDetails_DestinationFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationFileLocation", ID: &iInputFileLocation, Members: &mInputFileLocation, Type: smithy.ShapeTypeStructure})
+var sCopyStepDetails_OverwriteExisting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverwriteExisting", ID: &iOverwriteExisting, Members: &mOverwriteExisting, Type: smithy.ShapeTypeEnum})
+var sCopyStepDetails_SourceFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFileLocation", ID: &i_SourceFileLocation, Type: smithy.ShapeTypeString})
+var sCustomDirectoriesType_FailedFilesDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedFilesDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCustomDirectoriesType_MdnFilesDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MdnFilesDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCustomDirectoriesType_PayloadFilesDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadFilesDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCustomDirectoriesType_StatusFilesDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusFilesDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCustomDirectoriesType_TemporaryFilesDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemporaryFilesDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCustomHttpHeader_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_CustomHttpHeaderKeyType, Traits: &t12, Type: smithy.ShapeTypeString})
+var sCustomHttpHeader_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_CustomHttpHeaderValueType, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_CustomHttpHeaders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomHttpHeader, Members: &mCustomHttpHeader, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sCustomStepDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkflowStepName, Type: smithy.ShapeTypeString})
+var sCustomStepDetails_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_CustomStepTarget, Type: smithy.ShapeTypeString})
+var sCustomStepDetails_TimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutSeconds", ID: &i_CustomStepTimeoutSeconds, Type: smithy.ShapeTypeInteger})
+var sCustomStepDetails_SourceFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFileLocation", ID: &i_SourceFileLocation, Type: smithy.ShapeTypeString})
+var sCustomStepStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomStepStatus_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDecryptStepDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkflowStepName, Type: smithy.ShapeTypeString})
+var sDecryptStepDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sDecryptStepDetails_SourceFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFileLocation", ID: &i_SourceFileLocation, Type: smithy.ShapeTypeString})
+var sDecryptStepDetails_OverwriteExisting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverwriteExisting", ID: &iOverwriteExisting, Members: &mOverwriteExisting, Type: smithy.ShapeTypeEnum})
+var sDecryptStepDetails_DestinationFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationFileLocation", ID: &iInputFileLocation, Members: &mInputFileLocation, Type: smithy.ShapeTypeStructure})
+var sDeleteStepDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkflowStepName, Type: smithy.ShapeTypeString})
+var sDeleteStepDetails_SourceFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFileLocation", ID: &i_SourceFileLocation, Type: smithy.ShapeTypeString})
+var sDescribedAccess_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sDescribedAccess_HomeDirectoryMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryMappings", ID: &i_HomeDirectoryMappings, Members: &m_HomeDirectoryMappings, Type: smithy.ShapeTypeList})
+var sDescribedAccess_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sDescribedAccess_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sDescribedAccess_PosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixProfile", ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var sDescribedAccess_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sDescribedAccess_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAgreementStatusType, Members: &mAgreementStatusType, Type: smithy.ShapeTypeEnum})
+var sDescribedAgreement_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_LocalProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_PartnerProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_BaseDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_AccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sDescribedAgreement_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedAgreement_PreserveFilename = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreserveFilename", ID: &iPreserveFilenameType, Members: &mPreserveFilenameType, Type: smithy.ShapeTypeEnum})
+var sDescribedAgreement_EnforceMessageSigning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceMessageSigning", ID: &iEnforceMessageSigningType, Members: &mEnforceMessageSigningType, Type: smithy.ShapeTypeEnum})
+var sDescribedAgreement_CustomDirectories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomDirectories", ID: &iCustomDirectoriesType, Members: &mCustomDirectoriesType, Type: smithy.ShapeTypeStructure})
+var sDescribedCertificate_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedCertificate_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sDescribedCertificate_Usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usage", ID: &iCertificateUsageType, Members: &mCertificateUsageType, Type: smithy.ShapeTypeEnum})
+var sDescribedCertificate_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateStatusType, Members: &mCertificateStatusType, Type: smithy.ShapeTypeEnum})
+var sDescribedCertificate_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_CertificateBodyType, Traits: &t12, Type: smithy.ShapeTypeString})
+var sDescribedCertificate_CertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateChain", ID: &i_CertificateChainType, Traits: &t12, Type: smithy.ShapeTypeString})
+var sDescribedCertificate_ActiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sDescribedCertificate_InactiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InactiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sDescribedCertificate_Serial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Serial", ID: &i_CertSerial, Type: smithy.ShapeTypeString})
+var sDescribedCertificate_NotBeforeDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotBeforeDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sDescribedCertificate_NotAfterDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotAfterDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sDescribedCertificate_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum})
+var sDescribedCertificate_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribedCertificate_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedConnector_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedConnector_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sDescribedConnector_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sDescribedConnector_As2Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2Config", ID: &iAs2ConnectorConfig, Members: &mAs2ConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedConnector_AccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sDescribedConnector_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sDescribedConnector_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedConnector_SftpConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpConfig", ID: &iSftpConnectorConfig, Members: &mSftpConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedConnector_ServiceManagedEgressIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceManagedEgressIpAddresses", ID: &i_ServiceManagedEgressIpAddresses, Members: &m_ServiceManagedEgressIpAddresses, Type: smithy.ShapeTypeList})
+var sDescribedConnector_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_ConnectorSecurityPolicyName, Type: smithy.ShapeTypeString})
+var sDescribedConnector_EgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressConfig", ID: &iDescribedConnectorEgressConfig, Members: &mDescribedConnectorEgressConfig, Type: smithy.ShapeTypeUnion})
+var sDescribedConnector_EgressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressType", ID: &iConnectorEgressType, Members: &mConnectorEgressType, Type: smithy.ShapeTypeEnum})
+var sDescribedConnector_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ConnectorErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribedConnector_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectorStatus, Members: &mConnectorStatus, Type: smithy.ShapeTypeEnum})
+var sDescribedConnector_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iConnectorsIpAddressType, Members: &mConnectorsIpAddressType, Type: smithy.ShapeTypeEnum})
+var sDescribedConnectorEgressConfig_VpcLattice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLattice", ID: &iDescribedConnectorVpcLatticeEgressConfig, Members: &mDescribedConnectorVpcLatticeEgressConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfigurationArn", ID: &i_VpcLatticeResourceConfigurationArn, Type: smithy.ShapeTypeString})
+var sDescribedConnectorVpcLatticeEgressConfig_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortNumber", ID: &i_SftpPort, Type: smithy.ShapeTypeInteger})
+var sDescribedExecution_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sDescribedExecution_InitialFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitialFileLocation", ID: &iFileLocation, Members: &mFileLocation, Type: smithy.ShapeTypeStructure})
+var sDescribedExecution_ServiceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceMetadata", ID: &iServiceMetadata, Members: &mServiceMetadata, Type: smithy.ShapeTypeStructure})
+var sDescribedExecution_ExecutionRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sDescribedExecution_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribedExecution_PosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixProfile", ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var sDescribedExecution_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sDescribedExecution_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &iExecutionResults, Members: &mExecutionResults, Type: smithy.ShapeTypeStructure})
+var sDescribedHostKey_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedHostKey_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyId", ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sDescribedHostKey_HostKeyFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyFingerprint", ID: &i_HostKeyFingerprint, Type: smithy.ShapeTypeString})
+var sDescribedHostKey_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_HostKeyDescription, Type: smithy.ShapeTypeString})
+var sDescribedHostKey_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_HostKeyType, Type: smithy.ShapeTypeString})
+var sDescribedHostKey_DateImported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateImported", ID: &i_DateImported, Type: smithy.ShapeTypeTimestamp})
+var sDescribedHostKey_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedHostKey_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iHostKeyStorageType, Members: &mHostKeyStorageType, Type: smithy.ShapeTypeEnum})
+var sDescribedHostKey_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretId, Type: smithy.ShapeTypeString})
+var sDescribedIdentityCenterConfig_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_IdentityCenterApplicationArn, Type: smithy.ShapeTypeString})
+var sDescribedIdentityCenterConfig_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceArn", ID: &i_IdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var sDescribedIdentityCenterConfig_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sDescribedProfile_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedProfile_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sDescribedProfile_ProfileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileType", ID: &iProfileType, Members: &mProfileType, Type: smithy.ShapeTypeEnum})
+var sDescribedProfile_As2Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2Id", ID: &i_As2Id, Type: smithy.ShapeTypeString})
+var sDescribedProfile_CertificateIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateIds", ID: &i_CertificateIds, Members: &m_CertificateIds, Type: smithy.ShapeTypeList})
+var sDescribedProfile_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedSecurityPolicy_Fips = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fips", ID: &i_Fips, Type: smithy.ShapeTypeBoolean})
+var sDescribedSecurityPolicy_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_SecurityPolicyName, Type: smithy.ShapeTypeString})
+var sDescribedSecurityPolicy_SshCiphers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshCiphers", ID: &i_SecurityPolicyOptions, Members: &m_SecurityPolicyOptions, Type: smithy.ShapeTypeList})
+var sDescribedSecurityPolicy_SshKexs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshKexs", ID: &i_SecurityPolicyOptions, Members: &m_SecurityPolicyOptions, Type: smithy.ShapeTypeList})
+var sDescribedSecurityPolicy_SshMacs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshMacs", ID: &i_SecurityPolicyOptions, Members: &m_SecurityPolicyOptions, Type: smithy.ShapeTypeList})
+var sDescribedSecurityPolicy_TlsCiphers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsCiphers", ID: &i_SecurityPolicyOptions, Members: &m_SecurityPolicyOptions, Type: smithy.ShapeTypeList})
+var sDescribedSecurityPolicy_SshHostKeyAlgorithms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshHostKeyAlgorithms", ID: &i_SecurityPolicyOptions, Members: &m_SecurityPolicyOptions, Type: smithy.ShapeTypeList})
+var sDescribedSecurityPolicy_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSecurityPolicyResourceType, Members: &mSecurityPolicyResourceType, Type: smithy.ShapeTypeEnum})
+var sDescribedSecurityPolicy_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_SecurityPolicyProtocols, Members: &m_SecurityPolicyProtocols, Type: smithy.ShapeTypeList})
+var sDescribedServer_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedServer_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var sDescribedServer_ProtocolDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolDetails", ID: &iProtocolDetails, Members: &mProtocolDetails, Type: smithy.ShapeTypeStructure})
+var sDescribedServer_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum})
+var sDescribedServer_EndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDetails", ID: &iEndpointDetails, Members: &mEndpointDetails, Type: smithy.ShapeTypeStructure})
+var sDescribedServer_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum})
+var sDescribedServer_HostKeyFingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyFingerprint", ID: &i_HostKeyFingerprint, Type: smithy.ShapeTypeString})
+var sDescribedServer_IdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderDetails", ID: &iIdentityProviderDetails, Members: &mIdentityProviderDetails, Type: smithy.ShapeTypeStructure})
+var sDescribedServer_IdentityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderType", ID: &iIdentityProviderType, Members: &mIdentityProviderType, Type: smithy.ShapeTypeEnum})
+var sDescribedServer_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_NullableRole, Type: smithy.ShapeTypeString})
+var sDescribedServer_PostAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostAuthenticationLoginBanner", ID: &i_PostAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var sDescribedServer_PreAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreAuthenticationLoginBanner", ID: &i_PreAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var sDescribedServer_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_Protocols, Members: &m_Protocols, Type: smithy.ShapeTypeList})
+var sDescribedServer_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_SecurityPolicyName, Type: smithy.ShapeTypeString})
+var sDescribedServer_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribedServer_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum})
+var sDescribedServer_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedServer_UserCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserCount", ID: &i_UserCount, Type: smithy.ShapeTypeInteger})
+var sDescribedServer_WorkflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowDetails", ID: &iWorkflowDetails, Members: &mWorkflowDetails, Type: smithy.ShapeTypeStructure})
+var sDescribedServer_StructuredLogDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StructuredLogDestinations", ID: &i_StructuredLogDestinations, Members: &m_StructuredLogDestinations, Type: smithy.ShapeTypeList})
+var sDescribedServer_S3StorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StorageOptions", ID: &iS3StorageOptions, Members: &mS3StorageOptions, Type: smithy.ShapeTypeStructure})
+var sDescribedServer_As2ServiceManagedEgressIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2ServiceManagedEgressIpAddresses", ID: &i_ServiceManagedEgressIpAddresses, Members: &m_ServiceManagedEgressIpAddresses, Type: smithy.ShapeTypeList})
+var sDescribedServer_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sDescribedUser_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedUser_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sDescribedUser_HomeDirectoryMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryMappings", ID: &i_HomeDirectoryMappings, Members: &m_HomeDirectoryMappings, Type: smithy.ShapeTypeList})
+var sDescribedUser_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sDescribedUser_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sDescribedUser_PosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixProfile", ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var sDescribedUser_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sDescribedUser_SshPublicKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeys", ID: &i_SshPublicKeys, Members: &m_SshPublicKeys, Type: smithy.ShapeTypeList})
+var sDescribedUser_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedUser_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDescribedWebApp_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedWebApp_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sDescribedWebApp_DescribedIdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescribedIdentityProviderDetails", ID: &iDescribedWebAppIdentityProviderDetails, Members: &mDescribedWebAppIdentityProviderDetails, Type: smithy.ShapeTypeUnion})
+var sDescribedWebApp_AccessEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoint", ID: &i_WebAppAccessEndpoint, Type: smithy.ShapeTypeString})
+var sDescribedWebApp_WebAppEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppEndpoint", ID: &i_WebAppEndpoint, Type: smithy.ShapeTypeString})
+var sDescribedWebApp_WebAppUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppUnits", ID: &iWebAppUnits, Members: &mWebAppUnits, Type: smithy.ShapeTypeUnion})
+var sDescribedWebApp_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedWebApp_WebAppEndpointPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppEndpointPolicy", ID: &iWebAppEndpointPolicy, Members: &mWebAppEndpointPolicy, Type: smithy.ShapeTypeEnum})
+var sDescribedWebApp_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iWebAppEndpointType, Members: &mWebAppEndpointType, Type: smithy.ShapeTypeEnum})
+var sDescribedWebApp_DescribedEndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DescribedEndpointDetails", ID: &iDescribedWebAppEndpointDetails, Members: &mDescribedWebAppEndpointDetails, Type: smithy.ShapeTypeUnion})
+var sDescribedWebAppCustomization_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedWebAppCustomization_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sDescribedWebAppCustomization_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_WebAppTitle, Type: smithy.ShapeTypeString})
+var sDescribedWebAppCustomization_LogoFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogoFile", ID: &i_WebAppLogoFile, Traits: &t12, Type: smithy.ShapeTypeBlob})
+var sDescribedWebAppCustomization_FaviconFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaviconFile", ID: &i_WebAppFaviconFile, Traits: &t12, Type: smithy.ShapeTypeBlob})
+var sDescribedWebAppEndpointDetails_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &iDescribedWebAppVpcConfig, Members: &mDescribedWebAppVpcConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedWebAppIdentityProviderDetails_IdentityCenterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterConfig", ID: &iDescribedIdentityCenterConfig, Members: &mDescribedIdentityCenterConfig, Type: smithy.ShapeTypeStructure})
+var sDescribedWebAppVpcConfig_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sDescribedWebAppVpcConfig_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sDescribedWebAppVpcConfig_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sDescribedWorkflow_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribedWorkflow_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WorkflowDescription, Type: smithy.ShapeTypeString})
+var sDescribedWorkflow_Steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Steps", ID: &i_WorkflowSteps, Members: &m_WorkflowSteps, Type: smithy.ShapeTypeList})
+var sDescribedWorkflow_OnExceptionSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnExceptionSteps", ID: &i_WorkflowSteps, Members: &m_WorkflowSteps, Type: smithy.ShapeTypeList})
+var sDescribedWorkflow_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sDescribedWorkflow_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDescribedWorkflow_StructuredLogDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StructuredLogDestinations", ID: &i_StructuredLogDestinations, Members: &m_StructuredLogDestinations, Type: smithy.ShapeTypeList})
+var sDirectoryListingOptimization_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectoryListingOptimization_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomain_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomain_EFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EFS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEfsFileLocation_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_EfsFileSystemId, Type: smithy.ShapeTypeString})
+var sEfsFileLocation_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_EfsPath, Type: smithy.ShapeTypeString})
+var sEncryptionAlg_AES128_CBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES128_CBC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionAlg_AES192_CBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES192_CBC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionAlg_AES256_CBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES256_CBC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionAlg_DES_EDE3_CBC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DES_EDE3_CBC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionAlg_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionType_PGP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PGP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointDetails_AddressAllocationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddressAllocationIds", ID: &i_AddressAllocationIds, Members: &m_AddressAllocationIds, Type: smithy.ShapeTypeList})
+var sEndpointDetails_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sEndpointDetails_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_VpcEndpointId, Type: smithy.ShapeTypeString})
+var sEndpointDetails_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sEndpointDetails_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sEndpointType_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointType_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointType_VPC_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnforceMessageSigningType_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnforceMessageSigningType_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionError_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iExecutionErrorType, Members: &mExecutionErrorType, Type: smithy.ShapeTypeEnum})
+var sExecutionError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExecutionErrorMessage, Type: smithy.ShapeTypeString})
+var sExecutionErrorType_PERMISSION_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERMISSION_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionErrorType_CUSTOM_STEP_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_STEP_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionErrorType_THROTTLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THROTTLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionErrorType_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionErrorType_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionErrorType_BAD_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAD_REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionErrorType_TIMEOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMEOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionErrorType_INTERNAL_SERVER_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVER_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionResults_Steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Steps", ID: &i_ExecutionStepResults, Members: &m_ExecutionStepResults, Type: smithy.ShapeTypeList})
+var sExecutionResults_OnExceptionSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnExceptionSteps", ID: &i_ExecutionStepResults, Members: &m_ExecutionStepResults, Type: smithy.ShapeTypeList})
+var sExecutionStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_HANDLING_EXCEPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HANDLING_EXCEPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStepResult_StepType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepType", ID: &iWorkflowStepType, Members: &mWorkflowStepType, Type: smithy.ShapeTypeEnum})
+var sExecutionStepResult_Outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Outputs", ID: &i_StepResultOutputsJson, Type: smithy.ShapeTypeString})
+var sExecutionStepResult_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iExecutionError, Members: &mExecutionError, Type: smithy.ShapeTypeStructure})
+var s_ExecutionStepResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExecutionStepResult, Members: &mExecutionStepResult, Type: smithy.ShapeTypeStructure})
+var sFileLocation_S3FileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3FileLocation", ID: &iS3FileLocation, Members: &mS3FileLocation, Type: smithy.ShapeTypeStructure})
+var sFileLocation_EfsFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EfsFileLocation", ID: &iEfsFileLocation, Members: &mEfsFileLocation, Type: smithy.ShapeTypeStructure})
+var s_FilePaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sHomeDirectoryMapEntry_Entry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entry", ID: &i_MapEntry, Type: smithy.ShapeTypeString})
+var sHomeDirectoryMapEntry_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_MapTarget, Type: smithy.ShapeTypeString})
+var sHomeDirectoryMapEntry_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMapType, Members: &mMapType, Type: smithy.ShapeTypeEnum})
+var s_HomeDirectoryMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHomeDirectoryMapEntry, Members: &mHomeDirectoryMapEntry, Type: smithy.ShapeTypeStructure})
+var sHomeDirectoryType_PATH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHomeDirectoryType_LOGICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOGICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHostKeyStorageType_SERVICE_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHostKeyStorageType_SECRETS_MANAGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRETS_MANAGER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityCenterConfig_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceArn", ID: &i_IdentityCenterInstanceArn, Type: smithy.ShapeTypeString})
+var sIdentityCenterConfig_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sIdentityProviderDetails_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sIdentityProviderDetails_InvocationRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sIdentityProviderDetails_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sIdentityProviderDetails_Function = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Function", ID: &i_Function, Type: smithy.ShapeTypeString})
+var sIdentityProviderDetails_SftpAuthenticationMethods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpAuthenticationMethods", ID: &iSftpAuthenticationMethods, Members: &mSftpAuthenticationMethods, Type: smithy.ShapeTypeEnum})
+var sIdentityProviderType_SERVICE_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityProviderType_API_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityProviderType_AWS_DIRECTORY_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_DIRECTORY_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityProviderType_AWS_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputFileLocation_S3FileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3FileLocation", ID: &iS3InputFileLocation, Members: &mS3InputFileLocation, Type: smithy.ShapeTypeStructure})
+var sInputFileLocation_EfsFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EfsFileLocation", ID: &iEfsFileLocation, Members: &mEfsFileLocation, Type: smithy.ShapeTypeStructure})
+var sInternalServiceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sListedAccess_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sListedAccess_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sListedAccess_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sListedAccess_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var s_ListedAccesses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedAccess, Members: &mListedAccess, Type: smithy.ShapeTypeStructure})
+var sListedAgreement_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedAgreement_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sListedAgreement_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sListedAgreement_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAgreementStatusType, Members: &mAgreementStatusType, Type: smithy.ShapeTypeEnum})
+var sListedAgreement_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListedAgreement_LocalProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sListedAgreement_PartnerProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var s_ListedAgreements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedAgreement, Members: &mListedAgreement, Type: smithy.ShapeTypeStructure})
+var sListedCertificate_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedCertificate_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sListedCertificate_Usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usage", ID: &iCertificateUsageType, Members: &mCertificateUsageType, Type: smithy.ShapeTypeEnum})
+var sListedCertificate_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateStatusType, Members: &mCertificateStatusType, Type: smithy.ShapeTypeEnum})
+var sListedCertificate_ActiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sListedCertificate_InactiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InactiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sListedCertificate_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iCertificateType, Members: &mCertificateType, Type: smithy.ShapeTypeEnum})
+var sListedCertificate_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_ListedCertificates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedCertificate, Members: &mListedCertificate, Type: smithy.ShapeTypeStructure})
+var sListedConnector_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedConnector_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sListedConnector_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_Url, Type: smithy.ShapeTypeString})
+var s_ListedConnectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedConnector, Members: &mListedConnector, Type: smithy.ShapeTypeStructure})
+var sListedExecution_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sListedExecution_InitialFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitialFileLocation", ID: &iFileLocation, Members: &mFileLocation, Type: smithy.ShapeTypeStructure})
+var sListedExecution_ServiceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceMetadata", ID: &iServiceMetadata, Members: &mServiceMetadata, Type: smithy.ShapeTypeStructure})
+var sListedExecution_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var s_ListedExecutions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedExecution, Members: &mListedExecution, Type: smithy.ShapeTypeStructure})
+var sListedHostKey_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedHostKey_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyId", ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sListedHostKey_Fingerprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fingerprint", ID: &i_HostKeyFingerprint, Type: smithy.ShapeTypeString})
+var sListedHostKey_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_HostKeyDescription, Type: smithy.ShapeTypeString})
+var sListedHostKey_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_HostKeyType, Type: smithy.ShapeTypeString})
+var sListedHostKey_DateImported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateImported", ID: &i_DateImported, Type: smithy.ShapeTypeTimestamp})
+var sListedHostKey_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iHostKeyStorageType, Members: &mHostKeyStorageType, Type: smithy.ShapeTypeEnum})
+var sListedHostKey_SecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretId", ID: &i_SecretId, Type: smithy.ShapeTypeString})
+var s_ListedHostKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedHostKey, Members: &mListedHostKey, Type: smithy.ShapeTypeStructure})
+var sListedProfile_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedProfile_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sListedProfile_As2Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2Id", ID: &i_As2Id, Type: smithy.ShapeTypeString})
+var sListedProfile_ProfileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileType", ID: &iProfileType, Members: &mProfileType, Type: smithy.ShapeTypeEnum})
+var s_ListedProfiles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedProfile, Members: &mListedProfile, Type: smithy.ShapeTypeStructure})
+var sListedServer_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedServer_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum})
+var sListedServer_IdentityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderType", ID: &iIdentityProviderType, Members: &mIdentityProviderType, Type: smithy.ShapeTypeEnum})
+var sListedServer_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum})
+var sListedServer_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sListedServer_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListedServer_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iState, Members: &mState, Type: smithy.ShapeTypeEnum})
+var sListedServer_UserCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserCount", ID: &i_UserCount, Type: smithy.ShapeTypeInteger})
+var s_ListedServers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedServer, Members: &mListedServer, Type: smithy.ShapeTypeStructure})
+var sListedUser_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedUser_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sListedUser_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sListedUser_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sListedUser_SshPublicKeyCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeyCount", ID: &i_SshPublicKeyCount, Type: smithy.ShapeTypeInteger})
+var sListedUser_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var s_ListedUsers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedUser, Members: &mListedUser, Type: smithy.ShapeTypeStructure})
+var sListedWebApp_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListedWebApp_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sListedWebApp_AccessEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoint", ID: &i_WebAppAccessEndpoint, Type: smithy.ShapeTypeString})
+var sListedWebApp_WebAppEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppEndpoint", ID: &i_WebAppEndpoint, Type: smithy.ShapeTypeString})
+var sListedWebApp_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iWebAppEndpointType, Members: &mWebAppEndpointType, Type: smithy.ShapeTypeEnum})
+var s_ListedWebApps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedWebApp, Members: &mListedWebApp, Type: smithy.ShapeTypeStructure})
+var sListedWorkflow_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sListedWorkflow_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WorkflowDescription, Type: smithy.ShapeTypeString})
+var sListedWorkflow_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_ListedWorkflows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListedWorkflow, Members: &mListedWorkflow, Type: smithy.ShapeTypeStructure})
+var sLoggingConfiguration_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sLoggingConfiguration_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_LogGroupName, Type: smithy.ShapeTypeString})
+var sMapType_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMapType_DIRECTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnResponse_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnResponse_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnResponse_ASYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnSigningAlg_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnSigningAlg_SHA384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA384", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnSigningAlg_SHA512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA512", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnSigningAlg_SHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnSigningAlg_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMdnSigningAlg_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_OnPartialUploadWorkflowDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowDetail, Members: &mWorkflowDetail, Type: smithy.ShapeTypeStructure})
+var s_OnUploadWorkflowDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowDetail, Members: &mWorkflowDetail, Type: smithy.ShapeTypeStructure})
+var sOverwriteExisting_TRUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOverwriteExisting_FALSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FALSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPosixProfile_Uid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uid", ID: &i_PosixId, Type: smithy.ShapeTypeLong})
+var sPosixProfile_Gid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gid", ID: &i_PosixId, Type: smithy.ShapeTypeLong})
+var sPosixProfile_SecondaryGids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryGids", ID: &i_SecondaryGids, Members: &m_SecondaryGids, Type: smithy.ShapeTypeList})
+var sPreserveContentType_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPreserveContentType_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPreserveFilenameType_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPreserveFilenameType_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProfileType_LOCAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOCAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProfileType_PARTNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProtocol_SFTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SFTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProtocol_FTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProtocol_FTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProtocol_AS2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AS2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProtocolDetails_PassiveIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PassiveIp", ID: &i_PassiveIp, Type: smithy.ShapeTypeString})
+var sProtocolDetails_TlsSessionResumptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsSessionResumptionMode", ID: &iTlsSessionResumptionMode, Members: &mTlsSessionResumptionMode, Type: smithy.ShapeTypeEnum})
+var sProtocolDetails_SetStatOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SetStatOption", ID: &iSetStatOption, Members: &mSetStatOption, Type: smithy.ShapeTypeEnum})
+var sProtocolDetails_SftpPorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpPorts", ID: &i_SftpPorts, Members: &m_SftpPorts, Type: smithy.ShapeTypeList})
+var sProtocolDetails_As2Transports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2Transports", ID: &i_As2Transports, Members: &m_As2Transports, Type: smithy.ShapeTypeList})
+var sProtocolDetails_ProxyConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProxyConfig", ID: &iProxyConfig, Members: &mProxyConfig, Type: smithy.ShapeTypeStructure})
+var s_Protocols_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var sProxyConfig_SftpMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpMode", ID: &iProxyMode, Members: &mProxyMode, Type: smithy.ShapeTypeEnum})
+var sProxyMode_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProxyMode_PROXY_PROTOCOL_V2_ENFORCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROXY_PROTOCOL_V2_ENFORCED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sResourceExistsException_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_Resource, Type: smithy.ShapeTypeString})
+var sResourceExistsException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &i_Resource, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sS3FileLocation_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sS3FileLocation_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sS3FileLocation_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &i_S3VersionId, Type: smithy.ShapeTypeString})
+var sS3FileLocation_Etag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Etag", ID: &i_S3Etag, Type: smithy.ShapeTypeString})
+var sS3InputFileLocation_Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sS3InputFileLocation_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sS3StorageOptions_DirectoryListingOptimization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryListingOptimization", ID: &iDirectoryListingOptimization, Members: &mDirectoryListingOptimization, Type: smithy.ShapeTypeEnum})
+var sS3Tag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_S3TagKey, Type: smithy.ShapeTypeString})
+var sS3Tag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_S3TagValue, Type: smithy.ShapeTypeString})
+var s_S3Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3Tag, Members: &mS3Tag, Type: smithy.ShapeTypeStructure})
+var s_SecondaryGids_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PosixId, Type: smithy.ShapeTypeLong})
+var s_SecretVersionStageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecretVersionStage, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityPolicyNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityPolicyName, Type: smithy.ShapeTypeString})
+var s_SecurityPolicyOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityPolicyOption, Type: smithy.ShapeTypeString})
+var sSecurityPolicyProtocol_SFTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SFTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityPolicyProtocol_FTPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FTPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SecurityPolicyProtocols_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecurityPolicyProtocol, Members: &mSecurityPolicyProtocol, Type: smithy.ShapeTypeEnum})
+var sSecurityPolicyResourceType_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityPolicyResourceType_CONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ServiceManagedEgressIpAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServiceManagedEgressIpAddress, Type: smithy.ShapeTypeString})
+var sServiceMetadata_UserDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserDetails", ID: &iUserDetails, Members: &mUserDetails, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServiceErrorMessage, Type: smithy.ShapeTypeString})
+var sSetStatOption_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSetStatOption_ENABLE_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSftpAuthenticationMethods_PASSWORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSWORD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSftpAuthenticationMethods_PUBLIC_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSftpAuthenticationMethods_PUBLIC_KEY_OR_PASSWORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_KEY_OR_PASSWORD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSftpAuthenticationMethods_PUBLIC_KEY_AND_PASSWORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC_KEY_AND_PASSWORD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSftpConnectorConfig_UserSecretId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSecretId", ID: &i_SecretId, Type: smithy.ShapeTypeString})
+var sSftpConnectorConfig_TrustedHostKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustedHostKeys", ID: &i_SftpConnectorTrustedHostKeyList, Members: &m_SftpConnectorTrustedHostKeyList, Type: smithy.ShapeTypeList})
+var sSftpConnectorConfig_MaxConcurrentConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrentConnections", ID: &i_MaxConcurrentConnections, Type: smithy.ShapeTypeInteger})
+var sSftpConnectorConfig_OrderedUserSecretVersionStages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedUserSecretVersionStages", ID: &i_SecretVersionStageList, Members: &m_SecretVersionStageList, Type: smithy.ShapeTypeList})
+var sSftpConnectorConnectionDetails_HostKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKey", ID: &i_SftpConnectorHostKey, Type: smithy.ShapeTypeString})
+var s_SftpConnectorTrustedHostKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SftpConnectorTrustedHostKey, Type: smithy.ShapeTypeString})
+var s_SftpPorts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSftpPortWithOptions, Members: &mSftpPortWithOptions, Type: smithy.ShapeTypeStructure})
+var sSftpPortWithOptions_SftpPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpPort", ID: &i_SftpPort, Type: smithy.ShapeTypeInteger})
+var sSftpPortWithOptions_CommunicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommunicationMode", ID: &iCommunicationMode, Members: &mCommunicationMode, Type: smithy.ShapeTypeEnum})
+var sSigningAlg_SHA256 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA256", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningAlg_SHA384 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA384", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningAlg_SHA512 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA512", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningAlg_SHA1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHA1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSigningAlg_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSshPublicKey_DateImported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateImported", ID: &i_DateImported, Type: smithy.ShapeTypeTimestamp})
+var sSshPublicKey_SshPublicKeyBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeyBody", ID: &i_SshPublicKeyBody, Type: smithy.ShapeTypeString})
+var sSshPublicKey_SshPublicKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeyId", ID: &i_SshPublicKeyId, Type: smithy.ShapeTypeString})
+var s_SshPublicKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSshPublicKey, Members: &mSshPublicKey, Type: smithy.ShapeTypeStructure})
+var sState_OFFLINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFFLINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sState_ONLINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sState_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sState_START_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sState_STOP_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StructuredLogDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTagStepDetails_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_WorkflowStepName, Type: smithy.ShapeTypeString})
+var sTagStepDetails_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_S3Tags, Members: &m_S3Tags, Type: smithy.ShapeTypeList})
+var sTagStepDetails_SourceFileLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceFileLocation", ID: &i_SourceFileLocation, Type: smithy.ShapeTypeString})
+var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t20, Type: smithy.ShapeTypeString})
+var sTlsSessionResumptionMode_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTlsSessionResumptionMode_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTlsSessionResumptionMode_ENFORCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENFORCED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransferTableStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransferTableStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransferTableStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransferTableStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorEgressConfig_VpcLattice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLattice", ID: &iUpdateConnectorVpcLatticeEgressConfig, Members: &mUpdateConnectorVpcLatticeEgressConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceConfigurationArn", ID: &i_VpcLatticeResourceConfigurationArn, Type: smithy.ShapeTypeString})
+var sUpdateConnectorVpcLatticeEgressConfig_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortNumber", ID: &i_SftpPort, Type: smithy.ShapeTypeInteger})
+var sUpdateWebAppEndpointDetails_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &iUpdateWebAppVpcConfig, Members: &mUpdateWebAppVpcConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppIdentityCenterConfig_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sUpdateWebAppIdentityProviderDetails_IdentityCenterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterConfig", ID: &iUpdateWebAppIdentityCenterConfig, Members: &mUpdateWebAppIdentityCenterConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateWebAppVpcConfig_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sUpdateWebAppVpcConfig_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iWebAppVpcEndpointIpAddressType, Members: &mWebAppVpcEndpointIpAddressType, Type: smithy.ShapeTypeEnum})
+var sUserDetails_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sUserDetails_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUserDetails_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sWebAppEndpointDetails_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &iWebAppVpcConfig, Members: &mWebAppVpcConfig, Type: smithy.ShapeTypeStructure})
+var sWebAppEndpointPolicy_FIPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWebAppEndpointPolicy_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWebAppEndpointType_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWebAppEndpointType_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWebAppIdentityProviderDetails_IdentityCenterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterConfig", ID: &iIdentityCenterConfig, Members: &mIdentityCenterConfig, Type: smithy.ShapeTypeStructure})
+var sWebAppUnits_Provisioned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provisioned", ID: &i_WebAppUnitCount, Type: smithy.ShapeTypeInteger})
+var sWebAppVpcConfig_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sWebAppVpcConfig_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sWebAppVpcConfig_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sWebAppVpcConfig_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iWebAppVpcEndpointIpAddressType, Members: &mWebAppVpcEndpointIpAddressType, Type: smithy.ShapeTypeEnum})
+var sWebAppVpcEndpointIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWebAppVpcEndpointIpAddressType_DUALSTACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUALSTACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowDetail_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sWorkflowDetail_ExecutionRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sWorkflowDetails_OnUpload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnUpload", ID: &i_OnUploadWorkflowDetails, Members: &m_OnUploadWorkflowDetails, Type: smithy.ShapeTypeList})
+var sWorkflowDetails_OnPartialUpload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPartialUpload", ID: &i_OnPartialUploadWorkflowDetails, Members: &m_OnPartialUploadWorkflowDetails, Type: smithy.ShapeTypeList})
+var sWorkflowStep_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iWorkflowStepType, Members: &mWorkflowStepType, Type: smithy.ShapeTypeEnum})
+var sWorkflowStep_CopyStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyStepDetails", ID: &iCopyStepDetails, Members: &mCopyStepDetails, Type: smithy.ShapeTypeStructure})
+var sWorkflowStep_CustomStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomStepDetails", ID: &iCustomStepDetails, Members: &mCustomStepDetails, Type: smithy.ShapeTypeStructure})
+var sWorkflowStep_DeleteStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteStepDetails", ID: &iDeleteStepDetails, Members: &mDeleteStepDetails, Type: smithy.ShapeTypeStructure})
+var sWorkflowStep_TagStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagStepDetails", ID: &iTagStepDetails, Members: &mTagStepDetails, Type: smithy.ShapeTypeStructure})
+var sWorkflowStep_DecryptStepDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DecryptStepDetails", ID: &iDecryptStepDetails, Members: &mDecryptStepDetails, Type: smithy.ShapeTypeStructure})
+var s_WorkflowSteps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowStep, Members: &mWorkflowStep, Type: smithy.ShapeTypeStructure})
+var sWorkflowStepType_COPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowStepType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowStepType_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowStepType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowStepType_DECRYPT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECRYPT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreateAccessRequest_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCreateAccessRequest_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sCreateAccessRequest_HomeDirectoryMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryMappings", ID: &i_HomeDirectoryMappings, Members: &m_HomeDirectoryMappings, Type: smithy.ShapeTypeList})
+var sCreateAccessRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sCreateAccessRequest_PosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixProfile", ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var sCreateAccessRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCreateAccessRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sCreateAccessRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sCreateAccessResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sCreateAccessResponse_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sCreateAgreementRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateAgreementRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sCreateAgreementRequest_LocalProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sCreateAgreementRequest_PartnerProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sCreateAgreementRequest_BaseDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCreateAgreementRequest_AccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCreateAgreementRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAgreementStatusType, Members: &mAgreementStatusType, Type: smithy.ShapeTypeEnum})
+var sCreateAgreementRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateAgreementRequest_PreserveFilename = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreserveFilename", ID: &iPreserveFilenameType, Members: &mPreserveFilenameType, Type: smithy.ShapeTypeEnum})
+var sCreateAgreementRequest_EnforceMessageSigning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceMessageSigning", ID: &iEnforceMessageSigningType, Members: &mEnforceMessageSigningType, Type: smithy.ShapeTypeEnum})
+var sCreateAgreementRequest_CustomDirectories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomDirectories", ID: &iCustomDirectoriesType, Members: &mCustomDirectoriesType, Type: smithy.ShapeTypeStructure})
+var sCreateAgreementResponse_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_As2Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2Config", ID: &iAs2ConnectorConfig, Members: &mAs2ConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorRequest_AccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateConnectorRequest_SftpConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpConfig", ID: &iSftpConnectorConfig, Members: &mSftpConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorRequest_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_ConnectorSecurityPolicyName, Type: smithy.ShapeTypeString})
+var sCreateConnectorRequest_EgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressConfig", ID: &iConnectorEgressConfig, Members: &mConnectorEgressConfig, Type: smithy.ShapeTypeUnion})
+var sCreateConnectorRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iConnectorsIpAddressType, Members: &mConnectorsIpAddressType, Type: smithy.ShapeTypeEnum})
+var sCreateConnectorResponse_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sCreateProfileRequest_As2Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2Id", ID: &i_As2Id, Type: smithy.ShapeTypeString})
+var sCreateProfileRequest_ProfileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileType", ID: &iProfileType, Members: &mProfileType, Type: smithy.ShapeTypeEnum})
+var sCreateProfileRequest_CertificateIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateIds", ID: &i_CertificateIds, Members: &m_CertificateIds, Type: smithy.ShapeTypeList})
+var sCreateProfileRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateProfileResponse_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sCreateServerRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var sCreateServerRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeEnum})
+var sCreateServerRequest_EndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDetails", ID: &iEndpointDetails, Members: &mEndpointDetails, Type: smithy.ShapeTypeStructure})
+var sCreateServerRequest_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum})
+var sCreateServerRequest_HostKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKey", ID: &i_HostKey, Traits: &t12, Type: smithy.ShapeTypeString})
+var sCreateServerRequest_IdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderDetails", ID: &iIdentityProviderDetails, Members: &mIdentityProviderDetails, Type: smithy.ShapeTypeStructure})
+var sCreateServerRequest_IdentityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderType", ID: &iIdentityProviderType, Members: &mIdentityProviderType, Type: smithy.ShapeTypeEnum})
+var sCreateServerRequest_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_NullableRole, Type: smithy.ShapeTypeString})
+var sCreateServerRequest_PostAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostAuthenticationLoginBanner", ID: &i_PostAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var sCreateServerRequest_PreAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreAuthenticationLoginBanner", ID: &i_PreAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var sCreateServerRequest_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_Protocols, Members: &m_Protocols, Type: smithy.ShapeTypeList})
+var sCreateServerRequest_ProtocolDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolDetails", ID: &iProtocolDetails, Members: &mProtocolDetails, Type: smithy.ShapeTypeStructure})
+var sCreateServerRequest_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_SecurityPolicyName, Type: smithy.ShapeTypeString})
+var sCreateServerRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateServerRequest_WorkflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowDetails", ID: &iWorkflowDetails, Members: &mWorkflowDetails, Type: smithy.ShapeTypeStructure})
+var sCreateServerRequest_StructuredLogDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StructuredLogDestinations", ID: &i_StructuredLogDestinations, Members: &m_StructuredLogDestinations, Type: smithy.ShapeTypeList})
+var sCreateServerRequest_S3StorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StorageOptions", ID: &iS3StorageOptions, Members: &mS3StorageOptions, Type: smithy.ShapeTypeStructure})
+var sCreateServerRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sCreateServerRequest_HostKeyStorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyStorageType", ID: &iHostKeyStorageType, Members: &mHostKeyStorageType, Type: smithy.ShapeTypeEnum})
+var sCreateServerResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sCreateUserRequest_HomeDirectoryMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryMappings", ID: &i_HomeDirectoryMappings, Members: &m_HomeDirectoryMappings, Type: smithy.ShapeTypeList})
+var sCreateUserRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_PosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixProfile", ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var sCreateUserRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_SshPublicKeyBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeyBody", ID: &i_SshPublicKeyBody, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sCreateUserResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sCreateUserResponse_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sCreateWebAppRequest_IdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderDetails", ID: &iWebAppIdentityProviderDetails, Members: &mWebAppIdentityProviderDetails, Type: smithy.ShapeTypeUnion})
+var sCreateWebAppRequest_AccessEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoint", ID: &i_WebAppAccessEndpoint, Type: smithy.ShapeTypeString})
+var sCreateWebAppRequest_WebAppUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppUnits", ID: &iWebAppUnits, Members: &mWebAppUnits, Type: smithy.ShapeTypeUnion})
+var sCreateWebAppRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateWebAppRequest_WebAppEndpointPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppEndpointPolicy", ID: &iWebAppEndpointPolicy, Members: &mWebAppEndpointPolicy, Type: smithy.ShapeTypeEnum})
+var sCreateWebAppRequest_EndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDetails", ID: &iWebAppEndpointDetails, Members: &mWebAppEndpointDetails, Type: smithy.ShapeTypeUnion})
+var sCreateWebAppResponse_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sCreateWorkflowRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_WorkflowDescription, Type: smithy.ShapeTypeString})
+var sCreateWorkflowRequest_Steps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Steps", ID: &i_WorkflowSteps, Members: &m_WorkflowSteps, Type: smithy.ShapeTypeList})
+var sCreateWorkflowRequest_OnExceptionSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnExceptionSteps", ID: &i_WorkflowSteps, Members: &m_WorkflowSteps, Type: smithy.ShapeTypeList})
+var sCreateWorkflowRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateWorkflowRequest_StructuredLogDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StructuredLogDestinations", ID: &i_StructuredLogDestinations, Members: &m_StructuredLogDestinations, Type: smithy.ShapeTypeList})
+var sCreateWorkflowResponse_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sDeleteAccessRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDeleteAccessRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sDeleteAgreementRequest_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sDeleteAgreementRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDeleteCertificateRequest_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sDeleteConnectorRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sDeleteHostKeyRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDeleteHostKeyRequest_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyId", ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sDeleteProfileRequest_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sDeleteServerRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDeleteSshPublicKeyRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDeleteSshPublicKeyRequest_SshPublicKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeyId", ID: &i_SshPublicKeyId, Type: smithy.ShapeTypeString})
+var sDeleteSshPublicKeyRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDeleteUserRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDeleteUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDeleteWebAppCustomizationRequest_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sDeleteWebAppRequest_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sDeleteWorkflowRequest_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sDescribeAccessRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribeAccessRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sDescribeAccessResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribeAccessResponse_Access = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Access", ID: &iDescribedAccess, Members: &mDescribedAccess, Type: smithy.ShapeTypeStructure})
+var sDescribeAgreementRequest_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sDescribeAgreementRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribeAgreementResponse_Agreement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Agreement", ID: &iDescribedAgreement, Members: &mDescribedAgreement, Type: smithy.ShapeTypeStructure})
+var sDescribeCertificateRequest_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sDescribeCertificateResponse_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &iDescribedCertificate, Members: &mDescribedCertificate, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sDescribeConnectorResponse_Connector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connector", ID: &iDescribedConnector, Members: &mDescribedConnector, Type: smithy.ShapeTypeStructure})
+var sDescribeExecutionRequest_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sDescribeExecutionRequest_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sDescribeExecutionResponse_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sDescribeExecutionResponse_Execution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Execution", ID: &iDescribedExecution, Members: &mDescribedExecution, Type: smithy.ShapeTypeStructure})
+var sDescribeHostKeyRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribeHostKeyRequest_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyId", ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sDescribeHostKeyResponse_HostKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKey", ID: &iDescribedHostKey, Members: &mDescribedHostKey, Type: smithy.ShapeTypeStructure})
+var sDescribeProfileRequest_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sDescribeProfileResponse_Profile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profile", ID: &iDescribedProfile, Members: &mDescribedProfile, Type: smithy.ShapeTypeStructure})
+var sDescribeSecurityPolicyRequest_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_SecurityPolicyName, Type: smithy.ShapeTypeString})
+var sDescribeSecurityPolicyResponse_SecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicy", ID: &iDescribedSecurityPolicy, Members: &mDescribedSecurityPolicy, Type: smithy.ShapeTypeStructure})
+var sDescribeServerRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribeServerResponse_Server = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Server", ID: &iDescribedServer, Members: &mDescribedServer, Type: smithy.ShapeTypeStructure})
+var sDescribeUserRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribeUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &iDescribedUser, Members: &mDescribedUser, Type: smithy.ShapeTypeStructure})
+var sDescribeWebAppCustomizationRequest_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sDescribeWebAppCustomizationResponse_WebAppCustomization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppCustomization", ID: &iDescribedWebAppCustomization, Members: &mDescribedWebAppCustomization, Type: smithy.ShapeTypeStructure})
+var sDescribeWebAppRequest_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sDescribeWebAppResponse_WebApp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebApp", ID: &iDescribedWebApp, Members: &mDescribedWebApp, Type: smithy.ShapeTypeStructure})
+var sDescribeWorkflowRequest_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sDescribeWorkflowResponse_Workflow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Workflow", ID: &iDescribedWorkflow, Members: &mDescribedWorkflow, Type: smithy.ShapeTypeStructure})
+var sImportCertificateRequest_Usage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usage", ID: &iCertificateUsageType, Members: &mCertificateUsageType, Type: smithy.ShapeTypeEnum})
+var sImportCertificateRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_CertificateBodyType, Traits: &t12, Type: smithy.ShapeTypeString})
+var sImportCertificateRequest_CertificateChain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateChain", ID: &i_CertificateChainType, Traits: &t12, Type: smithy.ShapeTypeString})
+var sImportCertificateRequest_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateKey", ID: &i_PrivateKeyType, Traits: &t12, Type: smithy.ShapeTypeString})
+var sImportCertificateRequest_ActiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sImportCertificateRequest_InactiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InactiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sImportCertificateRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sImportCertificateRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sImportCertificateResponse_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sImportHostKeyRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sImportHostKeyRequest_HostKeyBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyBody", ID: &i_HostKey, Traits: &t12, Type: smithy.ShapeTypeString})
+var sImportHostKeyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_HostKeyDescription, Type: smithy.ShapeTypeString})
+var sImportHostKeyRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sImportHostKeyRequest_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iHostKeyStorageType, Members: &mHostKeyStorageType, Type: smithy.ShapeTypeEnum})
+var sImportHostKeyRequest_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sImportHostKeyResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sImportHostKeyResponse_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyId", ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sImportSshPublicKeyRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sImportSshPublicKeyRequest_SshPublicKeyBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeyBody", ID: &i_SshPublicKeyBody, Type: smithy.ShapeTypeString})
+var sImportSshPublicKeyRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sImportSshPublicKeyResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sImportSshPublicKeyResponse_SshPublicKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SshPublicKeyId", ID: &i_SshPublicKeyId, Type: smithy.ShapeTypeString})
+var sImportSshPublicKeyResponse_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sListAccessesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAccessesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAccessesRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListAccessesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAccessesResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListAccessesResponse_Accesses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accesses", ID: &i_ListedAccesses, Members: &m_ListedAccesses, Type: smithy.ShapeTypeList})
+var sListAgreementsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAgreementsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAgreementsRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListAgreementsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAgreementsResponse_Agreements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Agreements", ID: &i_ListedAgreements, Members: &m_ListedAgreements, Type: smithy.ShapeTypeList})
+var sListCertificatesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListCertificatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCertificatesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCertificatesResponse_Certificates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificates", ID: &i_ListedCertificates, Members: &m_ListedCertificates, Type: smithy.ShapeTypeList})
+var sListConnectorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListConnectorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectorsResponse_Connectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connectors", ID: &i_ListedConnectors, Members: &m_ListedConnectors, Type: smithy.ShapeTypeList})
+var sListExecutionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListExecutionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListExecutionsRequest_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sListExecutionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListExecutionsResponse_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sListExecutionsResponse_Executions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Executions", ID: &i_ListedExecutions, Members: &m_ListedExecutions, Type: smithy.ShapeTypeList})
+var sListFileTransferResultsRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sListFileTransferResultsRequest_TransferId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferId", ID: &i_TransferId, Type: smithy.ShapeTypeString})
+var sListFileTransferResultsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListFileTransferResultsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListFileTransferResultsResponse_FileTransferResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileTransferResults", ID: &i_ConnectorFileTransferResults, Members: &m_ConnectorFileTransferResults, Type: smithy.ShapeTypeList})
+var sListFileTransferResultsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListHostKeysRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListHostKeysRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListHostKeysRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListHostKeysResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListHostKeysResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListHostKeysResponse_HostKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeys", ID: &i_ListedHostKeys, Members: &m_ListedHostKeys, Type: smithy.ShapeTypeList})
+var sListProfilesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListProfilesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListProfilesRequest_ProfileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileType", ID: &iProfileType, Members: &mProfileType, Type: smithy.ShapeTypeEnum})
+var sListProfilesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListProfilesResponse_Profiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profiles", ID: &i_ListedProfiles, Members: &m_ListedProfiles, Type: smithy.ShapeTypeList})
+var sListSecurityPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListSecurityPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSecurityPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSecurityPoliciesResponse_SecurityPolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyNames", ID: &i_SecurityPolicyNames, Members: &m_SecurityPolicyNames, Type: smithy.ShapeTypeList})
+var sListServersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListServersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServersResponse_Servers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Servers", ID: &i_ListedServers, Members: &m_ListedServers, Type: smithy.ShapeTypeList})
+var sListTagsForResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sListUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListUsersRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListUsersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListUsersResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sListUsersResponse_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_ListedUsers, Members: &m_ListedUsers, Type: smithy.ShapeTypeList})
+var sListWebAppsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListWebAppsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWebAppsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWebAppsResponse_WebApps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebApps", ID: &i_ListedWebApps, Members: &m_ListedWebApps, Type: smithy.ShapeTypeList})
+var sListWorkflowsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListWorkflowsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWorkflowsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWorkflowsResponse_Workflows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Workflows", ID: &i_ListedWorkflows, Members: &m_ListedWorkflows, Type: smithy.ShapeTypeList})
+var sSendWorkflowStepStateRequest_WorkflowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowId", ID: &i_WorkflowId, Type: smithy.ShapeTypeString})
+var sSendWorkflowStepStateRequest_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sSendWorkflowStepStateRequest_Token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Token", ID: &i_CallbackToken, Type: smithy.ShapeTypeString})
+var sSendWorkflowStepStateRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCustomStepStatus, Members: &mCustomStepStatus, Type: smithy.ShapeTypeEnum})
+var sStartDirectoryListingRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sStartDirectoryListingRequest_RemoteDirectoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDirectoryPath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sStartDirectoryListingRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_MaxItems, Type: smithy.ShapeTypeInteger})
+var sStartDirectoryListingRequest_OutputDirectoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDirectoryPath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sStartDirectoryListingResponse_ListingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ListingId", ID: &i_ListingId, Type: smithy.ShapeTypeString})
+var sStartDirectoryListingResponse_OutputFileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFileName", ID: &i_OutputFileName, Type: smithy.ShapeTypeString})
+var sStartFileTransferRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sStartFileTransferRequest_SendFilePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendFilePaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList})
+var sStartFileTransferRequest_RetrieveFilePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetrieveFilePaths", ID: &i_FilePaths, Members: &m_FilePaths, Type: smithy.ShapeTypeList})
+var sStartFileTransferRequest_LocalDirectoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalDirectoryPath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sStartFileTransferRequest_RemoteDirectoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteDirectoryPath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sStartFileTransferRequest_CustomHttpHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomHttpHeaders", ID: &i_CustomHttpHeaders, Members: &m_CustomHttpHeaders, Type: smithy.ShapeTypeList})
+var sStartFileTransferResponse_TransferId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransferId", ID: &i_TransferId, Type: smithy.ShapeTypeString})
+var sStartRemoteDeleteRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sStartRemoteDeleteRequest_DeletePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletePath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sStartRemoteDeleteResponse_DeleteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteId", ID: &i_DeleteId, Type: smithy.ShapeTypeString})
+var sStartRemoteMoveRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sStartRemoteMoveRequest_SourcePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sStartRemoteMoveRequest_TargetPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetPath", ID: &i_FilePath, Type: smithy.ShapeTypeString})
+var sStartRemoteMoveResponse_MoveId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MoveId", ID: &i_MoveId, Type: smithy.ShapeTypeString})
+var sStartServerRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sStopServerRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sTestConnectionRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sTestConnectionResponse_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sTestConnectionResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sTestConnectionResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sTestConnectionResponse_SftpConnectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpConnectionDetails", ID: &iSftpConnectorConnectionDetails, Members: &mSftpConnectorConnectionDetails, Type: smithy.ShapeTypeStructure})
+var sTestIdentityProviderRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sTestIdentityProviderRequest_ServerProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerProtocol", ID: &iProtocol, Members: &mProtocol, Type: smithy.ShapeTypeEnum})
+var sTestIdentityProviderRequest_SourceIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceIp", ID: &i_SourceIp, Type: smithy.ShapeTypeString})
+var sTestIdentityProviderRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sTestIdentityProviderRequest_UserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPassword", ID: &i_UserPassword, Traits: &t12, Type: smithy.ShapeTypeString})
+var sTestIdentityProviderResponse_Response = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Response", ID: &i_Response, Type: smithy.ShapeTypeString})
+var sTestIdentityProviderResponse_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &i_StatusCode, Type: smithy.ShapeTypeInteger})
+var sTestIdentityProviderResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sTestIdentityProviderResponse_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sUpdateAccessRequest_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sUpdateAccessRequest_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sUpdateAccessRequest_HomeDirectoryMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryMappings", ID: &i_HomeDirectoryMappings, Members: &m_HomeDirectoryMappings, Type: smithy.ShapeTypeList})
+var sUpdateAccessRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sUpdateAccessRequest_PosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixProfile", ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var sUpdateAccessRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sUpdateAccessRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateAccessRequest_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sUpdateAccessResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateAccessResponse_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAgreementStatusType, Members: &mAgreementStatusType, Type: smithy.ShapeTypeEnum})
+var sUpdateAgreementRequest_LocalProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_PartnerProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_BaseDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_AccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sUpdateAgreementRequest_PreserveFilename = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreserveFilename", ID: &iPreserveFilenameType, Members: &mPreserveFilenameType, Type: smithy.ShapeTypeEnum})
+var sUpdateAgreementRequest_EnforceMessageSigning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceMessageSigning", ID: &iEnforceMessageSigningType, Members: &mEnforceMessageSigningType, Type: smithy.ShapeTypeEnum})
+var sUpdateAgreementRequest_CustomDirectories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomDirectories", ID: &iCustomDirectoriesType, Members: &mCustomDirectoriesType, Type: smithy.ShapeTypeStructure})
+var sUpdateAgreementResponse_AgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AgreementId", ID: &i_AgreementId, Type: smithy.ShapeTypeString})
+var sUpdateCertificateRequest_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sUpdateCertificateRequest_ActiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sUpdateCertificateRequest_InactiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InactiveDate", ID: &i_CertDate, Type: smithy.ShapeTypeTimestamp})
+var sUpdateCertificateRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateCertificateResponse_CertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateId", ID: &i_CertificateId, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRequest_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRequest_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRequest_As2Config = smithy.NewStaticSchema(smithy.StaticSchema{Member: "As2Config", ID: &iAs2ConnectorConfig, Members: &mAs2ConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorRequest_AccessRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRequest_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRequest_SftpConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SftpConfig", ID: &iSftpConnectorConfig, Members: &mSftpConnectorConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorRequest_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_ConnectorSecurityPolicyName, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRequest_EgressConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressConfig", ID: &iUpdateConnectorEgressConfig, Members: &mUpdateConnectorEgressConfig, Type: smithy.ShapeTypeUnion})
+var sUpdateConnectorRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iConnectorsIpAddressType, Members: &mConnectorsIpAddressType, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectorResponse_ConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectorId", ID: &i_ConnectorId, Type: smithy.ShapeTypeString})
+var sUpdateHostKeyRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateHostKeyRequest_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyId", ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sUpdateHostKeyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_HostKeyDescription, Type: smithy.ShapeTypeString})
+var sUpdateHostKeyRequest_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iHostKeyStorageType, Members: &mHostKeyStorageType, Type: smithy.ShapeTypeEnum})
+var sUpdateHostKeyRequest_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sUpdateHostKeyResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateHostKeyResponse_HostKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKeyId", ID: &i_HostKeyId, Type: smithy.ShapeTypeString})
+var sUpdateProfileRequest_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sUpdateProfileRequest_CertificateIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateIds", ID: &i_CertificateIds, Members: &m_CertificateIds, Type: smithy.ShapeTypeList})
+var sUpdateProfileResponse_ProfileId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProfileId", ID: &i_ProfileId, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_Certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Certificate", ID: &i_Certificate, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_ProtocolDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolDetails", ID: &iProtocolDetails, Members: &mProtocolDetails, Type: smithy.ShapeTypeStructure})
+var sUpdateServerRequest_EndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDetails", ID: &iEndpointDetails, Members: &mEndpointDetails, Type: smithy.ShapeTypeStructure})
+var sUpdateServerRequest_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum})
+var sUpdateServerRequest_HostKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostKey", ID: &i_HostKey, Traits: &t12, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_IdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderDetails", ID: &iIdentityProviderDetails, Members: &mIdentityProviderDetails, Type: smithy.ShapeTypeStructure})
+var sUpdateServerRequest_LoggingRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingRole", ID: &i_NullableRole, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_PostAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostAuthenticationLoginBanner", ID: &i_PostAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_PreAuthenticationLoginBanner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreAuthenticationLoginBanner", ID: &i_PreAuthenticationLoginBanner, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_Protocols = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocols", ID: &i_Protocols, Members: &m_Protocols, Type: smithy.ShapeTypeList})
+var sUpdateServerRequest_SecurityPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicyName", ID: &i_SecurityPolicyName, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateServerRequest_WorkflowDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkflowDetails", ID: &iWorkflowDetails, Members: &mWorkflowDetails, Type: smithy.ShapeTypeStructure})
+var sUpdateServerRequest_StructuredLogDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StructuredLogDestinations", ID: &i_StructuredLogDestinations, Members: &m_StructuredLogDestinations, Type: smithy.ShapeTypeList})
+var sUpdateServerRequest_S3StorageOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StorageOptions", ID: &iS3StorageOptions, Members: &mS3StorageOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateServerRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sUpdateServerRequest_IdentityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderType", ID: &iIdentityProviderType, Members: &mIdentityProviderType, Type: smithy.ShapeTypeEnum})
+var sUpdateServerResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_HomeDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectory", ID: &i_HomeDirectory, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_HomeDirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryType", ID: &iHomeDirectoryType, Members: &mHomeDirectoryType, Type: smithy.ShapeTypeEnum})
+var sUpdateUserRequest_HomeDirectoryMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeDirectoryMappings", ID: &i_HomeDirectoryMappings, Members: &m_HomeDirectoryMappings, Type: smithy.ShapeTypeList})
+var sUpdateUserRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_PosixProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixProfile", ID: &iPosixProfile, Members: &mPosixProfile, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &i_Role, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateUserResponse_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sUpdateWebAppCustomizationRequest_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sUpdateWebAppCustomizationRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_WebAppTitle, Type: smithy.ShapeTypeString})
+var sUpdateWebAppCustomizationRequest_LogoFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogoFile", ID: &i_WebAppLogoFile, Traits: &t12, Type: smithy.ShapeTypeBlob})
+var sUpdateWebAppCustomizationRequest_FaviconFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FaviconFile", ID: &i_WebAppFaviconFile, Traits: &t12, Type: smithy.ShapeTypeBlob})
+var sUpdateWebAppCustomizationResponse_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sUpdateWebAppRequest_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+var sUpdateWebAppRequest_IdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderDetails", ID: &iUpdateWebAppIdentityProviderDetails, Members: &mUpdateWebAppIdentityProviderDetails, Type: smithy.ShapeTypeUnion})
+var sUpdateWebAppRequest_AccessEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessEndpoint", ID: &i_WebAppAccessEndpoint, Type: smithy.ShapeTypeString})
+var sUpdateWebAppRequest_WebAppUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppUnits", ID: &iWebAppUnits, Members: &mWebAppUnits, Type: smithy.ShapeTypeUnion})
+var sUpdateWebAppRequest_EndpointDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointDetails", ID: &iUpdateWebAppEndpointDetails, Members: &mUpdateWebAppEndpointDetails, Type: smithy.ShapeTypeUnion})
+var sUpdateWebAppResponse_WebAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebAppId", ID: &i_WebAppId, Type: smithy.ShapeTypeString})
+
+var CreateAccess = &sCreateAccess
+
+var CreateAgreement = &sCreateAgreement
+
+var CreateConnector = &sCreateConnector
+
+var CreateProfile = &sCreateProfile
+
+var CreateServer = &sCreateServer
+
+var CreateUser = &sCreateUser
+
+var CreateWebApp = &sCreateWebApp
+
+var CreateWorkflow = &sCreateWorkflow
+
+var DeleteAccess = &sDeleteAccess
+
+var DeleteAgreement = &sDeleteAgreement
+
+var DeleteCertificate = &sDeleteCertificate
+
+var DeleteConnector = &sDeleteConnector
+
+var DeleteHostKey = &sDeleteHostKey
+
+var DeleteProfile = &sDeleteProfile
+
+var DeleteServer = &sDeleteServer
+
+var DeleteSshPublicKey = &sDeleteSshPublicKey
+
+var DeleteUser = &sDeleteUser
+
+var DeleteWebApp = &sDeleteWebApp
+
+var DeleteWebAppCustomization = &sDeleteWebAppCustomization
+
+var DeleteWorkflow = &sDeleteWorkflow
+
+var DescribeAccess = &sDescribeAccess
+
+var DescribeAgreement = &sDescribeAgreement
+
+var DescribeCertificate = &sDescribeCertificate
+
+var DescribeConnector = &sDescribeConnector
+
+var DescribeExecution = &sDescribeExecution
+
+var DescribeHostKey = &sDescribeHostKey
+
+var DescribeProfile = &sDescribeProfile
+
+var DescribeSecurityPolicy = &sDescribeSecurityPolicy
+
+var DescribeServer = &sDescribeServer
+
+var DescribeUser = &sDescribeUser
+
+var DescribeWebApp = &sDescribeWebApp
+
+var DescribeWebAppCustomization = &sDescribeWebAppCustomization
+
+var DescribeWorkflow = &sDescribeWorkflow
+
+var ImportCertificate = &sImportCertificate
+
+var ImportHostKey = &sImportHostKey
+
+var ImportSshPublicKey = &sImportSshPublicKey
+
+var ListAccesses = &sListAccesses
+
+var ListAgreements = &sListAgreements
+
+var ListCertificates = &sListCertificates
+
+var ListConnectors = &sListConnectors
+
+var ListExecutions = &sListExecutions
+
+var ListFileTransferResults = &sListFileTransferResults
+
+var ListHostKeys = &sListHostKeys
+
+var ListProfiles = &sListProfiles
+
+var ListSecurityPolicies = &sListSecurityPolicies
+
+var ListServers = &sListServers
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListUsers = &sListUsers
+
+var ListWebApps = &sListWebApps
+
+var ListWorkflows = &sListWorkflows
+
+var SendWorkflowStepState = &sSendWorkflowStepState
+
+var StartDirectoryListing = &sStartDirectoryListing
+
+var StartFileTransfer = &sStartFileTransfer
+
+var StartRemoteDelete = &sStartRemoteDelete
+
+var StartRemoteMove = &sStartRemoteMove
+
+var StartServer = &sStartServer
+
+var StopServer = &sStopServer
+
+var TagResource = &sTagResource
+
+var TestConnection = &sTestConnection
+
+var TestIdentityProvider = &sTestIdentityProvider
+
+var UntagResource = &sUntagResource
+
+var UpdateAccess = &sUpdateAccess
+
+var UpdateAgreement = &sUpdateAgreement
+
+var UpdateCertificate = &sUpdateCertificate
+
+var UpdateConnector = &sUpdateConnector
+
+var UpdateHostKey = &sUpdateHostKey
+
+var UpdateProfile = &sUpdateProfile
+
+var UpdateServer = &sUpdateServer
+
+var UpdateUser = &sUpdateUser
+
+var UpdateWebApp = &sUpdateWebApp
+
+var UpdateWebAppCustomization = &sUpdateWebAppCustomization
+
+var _TransferService = &s_TransferService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AddressAllocationId = &s_AddressAllocationId
+
+var _AddressAllocationIds = &s_AddressAllocationIds
+var _AddressAllocationIds_member = &s_AddressAllocationIds_member
+
+var _AgreementId = &s_AgreementId
+
+var AgreementStatusType = &sAgreementStatusType
+var AgreementStatusType_ACTIVE = &sAgreementStatusType_ACTIVE
+var AgreementStatusType_INACTIVE = &sAgreementStatusType_INACTIVE
+
+var _Arn = &s_Arn
+
+var As2AsyncMdnConnectorConfig = &sAs2AsyncMdnConnectorConfig
+var As2AsyncMdnConnectorConfig_Url = &sAs2AsyncMdnConnectorConfig_Url
+var As2AsyncMdnConnectorConfig_ServerIds = &sAs2AsyncMdnConnectorConfig_ServerIds
+
+var _As2AsyncMdnServerIds = &s_As2AsyncMdnServerIds
+var _As2AsyncMdnServerIds_member = &s_As2AsyncMdnServerIds_member
+
+var As2ConnectorConfig = &sAs2ConnectorConfig
+var As2ConnectorConfig_LocalProfileId = &sAs2ConnectorConfig_LocalProfileId
+var As2ConnectorConfig_PartnerProfileId = &sAs2ConnectorConfig_PartnerProfileId
+var As2ConnectorConfig_MessageSubject = &sAs2ConnectorConfig_MessageSubject
+var As2ConnectorConfig_Compression = &sAs2ConnectorConfig_Compression
+var As2ConnectorConfig_EncryptionAlgorithm = &sAs2ConnectorConfig_EncryptionAlgorithm
+var As2ConnectorConfig_SigningAlgorithm = &sAs2ConnectorConfig_SigningAlgorithm
+var As2ConnectorConfig_MdnSigningAlgorithm = &sAs2ConnectorConfig_MdnSigningAlgorithm
+var As2ConnectorConfig_MdnResponse = &sAs2ConnectorConfig_MdnResponse
+var As2ConnectorConfig_BasicAuthSecretId = &sAs2ConnectorConfig_BasicAuthSecretId
+var As2ConnectorConfig_PreserveContentType = &sAs2ConnectorConfig_PreserveContentType
+var As2ConnectorConfig_AsyncMdnConfig = &sAs2ConnectorConfig_AsyncMdnConfig
+
+var _As2ConnectorSecretId = &s_As2ConnectorSecretId
+
+var _As2Id = &s_As2Id
+
+var As2Transport = &sAs2Transport
+var As2Transport_HTTP = &sAs2Transport_HTTP
+
+var _As2Transports = &s_As2Transports
+var _As2Transports_member = &s_As2Transports_member
+
+var _CallbackToken = &s_CallbackToken
+
+var _CertDate = &s_CertDate
+
+var _Certificate = &s_Certificate
+
+var _CertificateBodyType = &s_CertificateBodyType
+
+var _CertificateChainType = &s_CertificateChainType
+
+var _CertificateId = &s_CertificateId
+
+var _CertificateIds = &s_CertificateIds
+var _CertificateIds_member = &s_CertificateIds_member
+
+var CertificateStatusType = &sCertificateStatusType
+var CertificateStatusType_ACTIVE = &sCertificateStatusType_ACTIVE
+var CertificateStatusType_PENDING_ROTATION = &sCertificateStatusType_PENDING_ROTATION
+var CertificateStatusType_INACTIVE = &sCertificateStatusType_INACTIVE
+
+var CertificateType = &sCertificateType
+var CertificateType_CERTIFICATE = &sCertificateType_CERTIFICATE
+var CertificateType_CERTIFICATE_WITH_PRIVATE_KEY = &sCertificateType_CERTIFICATE_WITH_PRIVATE_KEY
+
+var CertificateUsageType = &sCertificateUsageType
+var CertificateUsageType_SIGNING = &sCertificateUsageType_SIGNING
+var CertificateUsageType_ENCRYPTION = &sCertificateUsageType_ENCRYPTION
+var CertificateUsageType_TLS = &sCertificateUsageType_TLS
+
+var _CertSerial = &s_CertSerial
+
+var CommunicationMode = &sCommunicationMode
+var CommunicationMode_CLIENT_TALK_FIRST = &sCommunicationMode_CLIENT_TALK_FIRST
+var CommunicationMode_SERVER_TALK_FIRST = &sCommunicationMode_SERVER_TALK_FIRST
+
+var CompressionEnum = &sCompressionEnum
+var CompressionEnum_ZLIB = &sCompressionEnum_ZLIB
+var CompressionEnum_DISABLED = &sCompressionEnum_DISABLED
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var ConnectorEgressConfig = &sConnectorEgressConfig
+var ConnectorEgressConfig_VpcLattice = &sConnectorEgressConfig_VpcLattice
+
+var ConnectorEgressType = &sConnectorEgressType
+var ConnectorEgressType_SERVICE_MANAGED = &sConnectorEgressType_SERVICE_MANAGED
+var ConnectorEgressType_VPC_LATTICE = &sConnectorEgressType_VPC_LATTICE
+
+var _ConnectorErrorMessage = &s_ConnectorErrorMessage
+
+var ConnectorFileTransferResult = &sConnectorFileTransferResult
+var ConnectorFileTransferResult_FilePath = &sConnectorFileTransferResult_FilePath
+var ConnectorFileTransferResult_StatusCode = &sConnectorFileTransferResult_StatusCode
+var ConnectorFileTransferResult_FailureCode = &sConnectorFileTransferResult_FailureCode
+var ConnectorFileTransferResult_FailureMessage = &sConnectorFileTransferResult_FailureMessage
+
+var _ConnectorFileTransferResults = &s_ConnectorFileTransferResults
+var _ConnectorFileTransferResults_member = &s_ConnectorFileTransferResults_member
+
+var _ConnectorId = &s_ConnectorId
+
+var _ConnectorSecurityPolicyName = &s_ConnectorSecurityPolicyName
+
+var ConnectorsIpAddressType = &sConnectorsIpAddressType
+var ConnectorsIpAddressType_IPV4 = &sConnectorsIpAddressType_IPV4
+var ConnectorsIpAddressType_DUALSTACK = &sConnectorsIpAddressType_DUALSTACK
+
+var ConnectorStatus = &sConnectorStatus
+var ConnectorStatus_ACTIVE = &sConnectorStatus_ACTIVE
+var ConnectorStatus_ERRORED = &sConnectorStatus_ERRORED
+var ConnectorStatus_PENDING = &sConnectorStatus_PENDING
+
+var ConnectorVpcLatticeEgressConfig = &sConnectorVpcLatticeEgressConfig
+var ConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = &sConnectorVpcLatticeEgressConfig_ResourceConfigurationArn
+var ConnectorVpcLatticeEgressConfig_PortNumber = &sConnectorVpcLatticeEgressConfig_PortNumber
+
+var CopyStepDetails = &sCopyStepDetails
+var CopyStepDetails_Name = &sCopyStepDetails_Name
+var CopyStepDetails_DestinationFileLocation = &sCopyStepDetails_DestinationFileLocation
+var CopyStepDetails_OverwriteExisting = &sCopyStepDetails_OverwriteExisting
+var CopyStepDetails_SourceFileLocation = &sCopyStepDetails_SourceFileLocation
+
+var CustomDirectoriesType = &sCustomDirectoriesType
+var CustomDirectoriesType_FailedFilesDirectory = &sCustomDirectoriesType_FailedFilesDirectory
+var CustomDirectoriesType_MdnFilesDirectory = &sCustomDirectoriesType_MdnFilesDirectory
+var CustomDirectoriesType_PayloadFilesDirectory = &sCustomDirectoriesType_PayloadFilesDirectory
+var CustomDirectoriesType_StatusFilesDirectory = &sCustomDirectoriesType_StatusFilesDirectory
+var CustomDirectoriesType_TemporaryFilesDirectory = &sCustomDirectoriesType_TemporaryFilesDirectory
+
+var CustomHttpHeader = &sCustomHttpHeader
+var CustomHttpHeader_Key = &sCustomHttpHeader_Key
+var CustomHttpHeader_Value = &sCustomHttpHeader_Value
+
+var _CustomHttpHeaderKeyType = &s_CustomHttpHeaderKeyType
+
+var _CustomHttpHeaders = &s_CustomHttpHeaders
+var _CustomHttpHeaders_member = &s_CustomHttpHeaders_member
+
+var _CustomHttpHeaderValueType = &s_CustomHttpHeaderValueType
+
+var CustomStepDetails = &sCustomStepDetails
+var CustomStepDetails_Name = &sCustomStepDetails_Name
+var CustomStepDetails_Target = &sCustomStepDetails_Target
+var CustomStepDetails_TimeoutSeconds = &sCustomStepDetails_TimeoutSeconds
+var CustomStepDetails_SourceFileLocation = &sCustomStepDetails_SourceFileLocation
+
+var CustomStepStatus = &sCustomStepStatus
+var CustomStepStatus_SUCCESS = &sCustomStepStatus_SUCCESS
+var CustomStepStatus_FAILURE = &sCustomStepStatus_FAILURE
+
+var _CustomStepTarget = &s_CustomStepTarget
+
+var _CustomStepTimeoutSeconds = &s_CustomStepTimeoutSeconds
+
+var _DateImported = &s_DateImported
+
+var DecryptStepDetails = &sDecryptStepDetails
+var DecryptStepDetails_Name = &sDecryptStepDetails_Name
+var DecryptStepDetails_Type = &sDecryptStepDetails_Type
+var DecryptStepDetails_SourceFileLocation = &sDecryptStepDetails_SourceFileLocation
+var DecryptStepDetails_OverwriteExisting = &sDecryptStepDetails_OverwriteExisting
+var DecryptStepDetails_DestinationFileLocation = &sDecryptStepDetails_DestinationFileLocation
+
+var _DeleteId = &s_DeleteId
+
+var DeleteStepDetails = &sDeleteStepDetails
+var DeleteStepDetails_Name = &sDeleteStepDetails_Name
+var DeleteStepDetails_SourceFileLocation = &sDeleteStepDetails_SourceFileLocation
+
+var DescribedAccess = &sDescribedAccess
+var DescribedAccess_HomeDirectory = &sDescribedAccess_HomeDirectory
+var DescribedAccess_HomeDirectoryMappings = &sDescribedAccess_HomeDirectoryMappings
+var DescribedAccess_HomeDirectoryType = &sDescribedAccess_HomeDirectoryType
+var DescribedAccess_Policy = &sDescribedAccess_Policy
+var DescribedAccess_PosixProfile = &sDescribedAccess_PosixProfile
+var DescribedAccess_Role = &sDescribedAccess_Role
+var DescribedAccess_ExternalId = &sDescribedAccess_ExternalId
+
+var DescribedAgreement = &sDescribedAgreement
+var DescribedAgreement_Arn = &sDescribedAgreement_Arn
+var DescribedAgreement_AgreementId = &sDescribedAgreement_AgreementId
+var DescribedAgreement_Description = &sDescribedAgreement_Description
+var DescribedAgreement_Status = &sDescribedAgreement_Status
+var DescribedAgreement_ServerId = &sDescribedAgreement_ServerId
+var DescribedAgreement_LocalProfileId = &sDescribedAgreement_LocalProfileId
+var DescribedAgreement_PartnerProfileId = &sDescribedAgreement_PartnerProfileId
+var DescribedAgreement_BaseDirectory = &sDescribedAgreement_BaseDirectory
+var DescribedAgreement_AccessRole = &sDescribedAgreement_AccessRole
+var DescribedAgreement_Tags = &sDescribedAgreement_Tags
+var DescribedAgreement_PreserveFilename = &sDescribedAgreement_PreserveFilename
+var DescribedAgreement_EnforceMessageSigning = &sDescribedAgreement_EnforceMessageSigning
+var DescribedAgreement_CustomDirectories = &sDescribedAgreement_CustomDirectories
+
+var DescribedCertificate = &sDescribedCertificate
+var DescribedCertificate_Arn = &sDescribedCertificate_Arn
+var DescribedCertificate_CertificateId = &sDescribedCertificate_CertificateId
+var DescribedCertificate_Usage = &sDescribedCertificate_Usage
+var DescribedCertificate_Status = &sDescribedCertificate_Status
+var DescribedCertificate_Certificate = &sDescribedCertificate_Certificate
+var DescribedCertificate_CertificateChain = &sDescribedCertificate_CertificateChain
+var DescribedCertificate_ActiveDate = &sDescribedCertificate_ActiveDate
+var DescribedCertificate_InactiveDate = &sDescribedCertificate_InactiveDate
+var DescribedCertificate_Serial = &sDescribedCertificate_Serial
+var DescribedCertificate_NotBeforeDate = &sDescribedCertificate_NotBeforeDate
+var DescribedCertificate_NotAfterDate = &sDescribedCertificate_NotAfterDate
+var DescribedCertificate_Type = &sDescribedCertificate_Type
+var DescribedCertificate_Description = &sDescribedCertificate_Description
+var DescribedCertificate_Tags = &sDescribedCertificate_Tags
+
+var DescribedConnector = &sDescribedConnector
+var DescribedConnector_Arn = &sDescribedConnector_Arn
+var DescribedConnector_ConnectorId = &sDescribedConnector_ConnectorId
+var DescribedConnector_Url = &sDescribedConnector_Url
+var DescribedConnector_As2Config = &sDescribedConnector_As2Config
+var DescribedConnector_AccessRole = &sDescribedConnector_AccessRole
+var DescribedConnector_LoggingRole = &sDescribedConnector_LoggingRole
+var DescribedConnector_Tags = &sDescribedConnector_Tags
+var DescribedConnector_SftpConfig = &sDescribedConnector_SftpConfig
+var DescribedConnector_ServiceManagedEgressIpAddresses = &sDescribedConnector_ServiceManagedEgressIpAddresses
+var DescribedConnector_SecurityPolicyName = &sDescribedConnector_SecurityPolicyName
+var DescribedConnector_EgressConfig = &sDescribedConnector_EgressConfig
+var DescribedConnector_EgressType = &sDescribedConnector_EgressType
+var DescribedConnector_ErrorMessage = &sDescribedConnector_ErrorMessage
+var DescribedConnector_Status = &sDescribedConnector_Status
+var DescribedConnector_IpAddressType = &sDescribedConnector_IpAddressType
+
+var DescribedConnectorEgressConfig = &sDescribedConnectorEgressConfig
+var DescribedConnectorEgressConfig_VpcLattice = &sDescribedConnectorEgressConfig_VpcLattice
+
+var DescribedConnectorVpcLatticeEgressConfig = &sDescribedConnectorVpcLatticeEgressConfig
+var DescribedConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = &sDescribedConnectorVpcLatticeEgressConfig_ResourceConfigurationArn
+var DescribedConnectorVpcLatticeEgressConfig_PortNumber = &sDescribedConnectorVpcLatticeEgressConfig_PortNumber
+
+var DescribedExecution = &sDescribedExecution
+var DescribedExecution_ExecutionId = &sDescribedExecution_ExecutionId
+var DescribedExecution_InitialFileLocation = &sDescribedExecution_InitialFileLocation
+var DescribedExecution_ServiceMetadata = &sDescribedExecution_ServiceMetadata
+var DescribedExecution_ExecutionRole = &sDescribedExecution_ExecutionRole
+var DescribedExecution_LoggingConfiguration = &sDescribedExecution_LoggingConfiguration
+var DescribedExecution_PosixProfile = &sDescribedExecution_PosixProfile
+var DescribedExecution_Status = &sDescribedExecution_Status
+var DescribedExecution_Results = &sDescribedExecution_Results
+
+var DescribedHostKey = &sDescribedHostKey
+var DescribedHostKey_Arn = &sDescribedHostKey_Arn
+var DescribedHostKey_HostKeyId = &sDescribedHostKey_HostKeyId
+var DescribedHostKey_HostKeyFingerprint = &sDescribedHostKey_HostKeyFingerprint
+var DescribedHostKey_Description = &sDescribedHostKey_Description
+var DescribedHostKey_Type = &sDescribedHostKey_Type
+var DescribedHostKey_DateImported = &sDescribedHostKey_DateImported
+var DescribedHostKey_Tags = &sDescribedHostKey_Tags
+var DescribedHostKey_StorageType = &sDescribedHostKey_StorageType
+var DescribedHostKey_SecretId = &sDescribedHostKey_SecretId
+
+var DescribedIdentityCenterConfig = &sDescribedIdentityCenterConfig
+var DescribedIdentityCenterConfig_ApplicationArn = &sDescribedIdentityCenterConfig_ApplicationArn
+var DescribedIdentityCenterConfig_InstanceArn = &sDescribedIdentityCenterConfig_InstanceArn
+var DescribedIdentityCenterConfig_Role = &sDescribedIdentityCenterConfig_Role
+
+var DescribedProfile = &sDescribedProfile
+var DescribedProfile_Arn = &sDescribedProfile_Arn
+var DescribedProfile_ProfileId = &sDescribedProfile_ProfileId
+var DescribedProfile_ProfileType = &sDescribedProfile_ProfileType
+var DescribedProfile_As2Id = &sDescribedProfile_As2Id
+var DescribedProfile_CertificateIds = &sDescribedProfile_CertificateIds
+var DescribedProfile_Tags = &sDescribedProfile_Tags
+
+var DescribedSecurityPolicy = &sDescribedSecurityPolicy
+var DescribedSecurityPolicy_Fips = &sDescribedSecurityPolicy_Fips
+var DescribedSecurityPolicy_SecurityPolicyName = &sDescribedSecurityPolicy_SecurityPolicyName
+var DescribedSecurityPolicy_SshCiphers = &sDescribedSecurityPolicy_SshCiphers
+var DescribedSecurityPolicy_SshKexs = &sDescribedSecurityPolicy_SshKexs
+var DescribedSecurityPolicy_SshMacs = &sDescribedSecurityPolicy_SshMacs
+var DescribedSecurityPolicy_TlsCiphers = &sDescribedSecurityPolicy_TlsCiphers
+var DescribedSecurityPolicy_SshHostKeyAlgorithms = &sDescribedSecurityPolicy_SshHostKeyAlgorithms
+var DescribedSecurityPolicy_Type = &sDescribedSecurityPolicy_Type
+var DescribedSecurityPolicy_Protocols = &sDescribedSecurityPolicy_Protocols
+
+var DescribedServer = &sDescribedServer
+var DescribedServer_Arn = &sDescribedServer_Arn
+var DescribedServer_Certificate = &sDescribedServer_Certificate
+var DescribedServer_ProtocolDetails = &sDescribedServer_ProtocolDetails
+var DescribedServer_Domain = &sDescribedServer_Domain
+var DescribedServer_EndpointDetails = &sDescribedServer_EndpointDetails
+var DescribedServer_EndpointType = &sDescribedServer_EndpointType
+var DescribedServer_HostKeyFingerprint = &sDescribedServer_HostKeyFingerprint
+var DescribedServer_IdentityProviderDetails = &sDescribedServer_IdentityProviderDetails
+var DescribedServer_IdentityProviderType = &sDescribedServer_IdentityProviderType
+var DescribedServer_LoggingRole = &sDescribedServer_LoggingRole
+var DescribedServer_PostAuthenticationLoginBanner = &sDescribedServer_PostAuthenticationLoginBanner
+var DescribedServer_PreAuthenticationLoginBanner = &sDescribedServer_PreAuthenticationLoginBanner
+var DescribedServer_Protocols = &sDescribedServer_Protocols
+var DescribedServer_SecurityPolicyName = &sDescribedServer_SecurityPolicyName
+var DescribedServer_ServerId = &sDescribedServer_ServerId
+var DescribedServer_State = &sDescribedServer_State
+var DescribedServer_Tags = &sDescribedServer_Tags
+var DescribedServer_UserCount = &sDescribedServer_UserCount
+var DescribedServer_WorkflowDetails = &sDescribedServer_WorkflowDetails
+var DescribedServer_StructuredLogDestinations = &sDescribedServer_StructuredLogDestinations
+var DescribedServer_S3StorageOptions = &sDescribedServer_S3StorageOptions
+var DescribedServer_As2ServiceManagedEgressIpAddresses = &sDescribedServer_As2ServiceManagedEgressIpAddresses
+var DescribedServer_IpAddressType = &sDescribedServer_IpAddressType
+
+var DescribedUser = &sDescribedUser
+var DescribedUser_Arn = &sDescribedUser_Arn
+var DescribedUser_HomeDirectory = &sDescribedUser_HomeDirectory
+var DescribedUser_HomeDirectoryMappings = &sDescribedUser_HomeDirectoryMappings
+var DescribedUser_HomeDirectoryType = &sDescribedUser_HomeDirectoryType
+var DescribedUser_Policy = &sDescribedUser_Policy
+var DescribedUser_PosixProfile = &sDescribedUser_PosixProfile
+var DescribedUser_Role = &sDescribedUser_Role
+var DescribedUser_SshPublicKeys = &sDescribedUser_SshPublicKeys
+var DescribedUser_Tags = &sDescribedUser_Tags
+var DescribedUser_UserName = &sDescribedUser_UserName
+
+var DescribedWebApp = &sDescribedWebApp
+var DescribedWebApp_Arn = &sDescribedWebApp_Arn
+var DescribedWebApp_WebAppId = &sDescribedWebApp_WebAppId
+var DescribedWebApp_DescribedIdentityProviderDetails = &sDescribedWebApp_DescribedIdentityProviderDetails
+var DescribedWebApp_AccessEndpoint = &sDescribedWebApp_AccessEndpoint
+var DescribedWebApp_WebAppEndpoint = &sDescribedWebApp_WebAppEndpoint
+var DescribedWebApp_WebAppUnits = &sDescribedWebApp_WebAppUnits
+var DescribedWebApp_Tags = &sDescribedWebApp_Tags
+var DescribedWebApp_WebAppEndpointPolicy = &sDescribedWebApp_WebAppEndpointPolicy
+var DescribedWebApp_EndpointType = &sDescribedWebApp_EndpointType
+var DescribedWebApp_DescribedEndpointDetails = &sDescribedWebApp_DescribedEndpointDetails
+
+var DescribedWebAppCustomization = &sDescribedWebAppCustomization
+var DescribedWebAppCustomization_Arn = &sDescribedWebAppCustomization_Arn
+var DescribedWebAppCustomization_WebAppId = &sDescribedWebAppCustomization_WebAppId
+var DescribedWebAppCustomization_Title = &sDescribedWebAppCustomization_Title
+var DescribedWebAppCustomization_LogoFile = &sDescribedWebAppCustomization_LogoFile
+var DescribedWebAppCustomization_FaviconFile = &sDescribedWebAppCustomization_FaviconFile
+
+var DescribedWebAppEndpointDetails = &sDescribedWebAppEndpointDetails
+var DescribedWebAppEndpointDetails_Vpc = &sDescribedWebAppEndpointDetails_Vpc
+
+var DescribedWebAppIdentityProviderDetails = &sDescribedWebAppIdentityProviderDetails
+var DescribedWebAppIdentityProviderDetails_IdentityCenterConfig = &sDescribedWebAppIdentityProviderDetails_IdentityCenterConfig
+
+var DescribedWebAppVpcConfig = &sDescribedWebAppVpcConfig
+var DescribedWebAppVpcConfig_SubnetIds = &sDescribedWebAppVpcConfig_SubnetIds
+var DescribedWebAppVpcConfig_VpcId = &sDescribedWebAppVpcConfig_VpcId
+var DescribedWebAppVpcConfig_VpcEndpointId = &sDescribedWebAppVpcConfig_VpcEndpointId
+
+var DescribedWorkflow = &sDescribedWorkflow
+var DescribedWorkflow_Arn = &sDescribedWorkflow_Arn
+var DescribedWorkflow_Description = &sDescribedWorkflow_Description
+var DescribedWorkflow_Steps = &sDescribedWorkflow_Steps
+var DescribedWorkflow_OnExceptionSteps = &sDescribedWorkflow_OnExceptionSteps
+var DescribedWorkflow_WorkflowId = &sDescribedWorkflow_WorkflowId
+var DescribedWorkflow_Tags = &sDescribedWorkflow_Tags
+var DescribedWorkflow_StructuredLogDestinations = &sDescribedWorkflow_StructuredLogDestinations
+
+var _Description = &s_Description
+
+var _DirectoryId = &s_DirectoryId
+
+var DirectoryListingOptimization = &sDirectoryListingOptimization
+var DirectoryListingOptimization_ENABLED = &sDirectoryListingOptimization_ENABLED
+var DirectoryListingOptimization_DISABLED = &sDirectoryListingOptimization_DISABLED
+
+var Domain = &sDomain
+var Domain_S3 = &sDomain_S3
+var Domain_EFS = &sDomain_EFS
+
+var EfsFileLocation = &sEfsFileLocation
+var EfsFileLocation_FileSystemId = &sEfsFileLocation_FileSystemId
+var EfsFileLocation_Path = &sEfsFileLocation_Path
+
+var _EfsFileSystemId = &s_EfsFileSystemId
+
+var _EfsPath = &s_EfsPath
+
+var EncryptionAlg = &sEncryptionAlg
+var EncryptionAlg_AES128_CBC = &sEncryptionAlg_AES128_CBC
+var EncryptionAlg_AES192_CBC = &sEncryptionAlg_AES192_CBC
+var EncryptionAlg_AES256_CBC = &sEncryptionAlg_AES256_CBC
+var EncryptionAlg_DES_EDE3_CBC = &sEncryptionAlg_DES_EDE3_CBC
+var EncryptionAlg_NONE = &sEncryptionAlg_NONE
+
+var EncryptionType = &sEncryptionType
+var EncryptionType_PGP = &sEncryptionType_PGP
+
+var EndpointDetails = &sEndpointDetails
+var EndpointDetails_AddressAllocationIds = &sEndpointDetails_AddressAllocationIds
+var EndpointDetails_SubnetIds = &sEndpointDetails_SubnetIds
+var EndpointDetails_VpcEndpointId = &sEndpointDetails_VpcEndpointId
+var EndpointDetails_VpcId = &sEndpointDetails_VpcId
+var EndpointDetails_SecurityGroupIds = &sEndpointDetails_SecurityGroupIds
+
+var EndpointType = &sEndpointType
+var EndpointType_PUBLIC = &sEndpointType_PUBLIC
+var EndpointType_VPC = &sEndpointType_VPC
+var EndpointType_VPC_ENDPOINT = &sEndpointType_VPC_ENDPOINT
+
+var EnforceMessageSigningType = &sEnforceMessageSigningType
+var EnforceMessageSigningType_ENABLED = &sEnforceMessageSigningType_ENABLED
+var EnforceMessageSigningType_DISABLED = &sEnforceMessageSigningType_DISABLED
+
+var ExecutionError = &sExecutionError
+var ExecutionError_Type = &sExecutionError_Type
+var ExecutionError_Message = &sExecutionError_Message
+
+var _ExecutionErrorMessage = &s_ExecutionErrorMessage
+
+var ExecutionErrorType = &sExecutionErrorType
+var ExecutionErrorType_PERMISSION_DENIED = &sExecutionErrorType_PERMISSION_DENIED
+var ExecutionErrorType_CUSTOM_STEP_FAILED = &sExecutionErrorType_CUSTOM_STEP_FAILED
+var ExecutionErrorType_THROTTLED = &sExecutionErrorType_THROTTLED
+var ExecutionErrorType_ALREADY_EXISTS = &sExecutionErrorType_ALREADY_EXISTS
+var ExecutionErrorType_NOT_FOUND = &sExecutionErrorType_NOT_FOUND
+var ExecutionErrorType_BAD_REQUEST = &sExecutionErrorType_BAD_REQUEST
+var ExecutionErrorType_TIMEOUT = &sExecutionErrorType_TIMEOUT
+var ExecutionErrorType_INTERNAL_SERVER_ERROR = &sExecutionErrorType_INTERNAL_SERVER_ERROR
+
+var _ExecutionId = &s_ExecutionId
+
+var ExecutionResults = &sExecutionResults
+var ExecutionResults_Steps = &sExecutionResults_Steps
+var ExecutionResults_OnExceptionSteps = &sExecutionResults_OnExceptionSteps
+
+var ExecutionStatus = &sExecutionStatus
+var ExecutionStatus_IN_PROGRESS = &sExecutionStatus_IN_PROGRESS
+var ExecutionStatus_COMPLETED = &sExecutionStatus_COMPLETED
+var ExecutionStatus_EXCEPTION = &sExecutionStatus_EXCEPTION
+var ExecutionStatus_HANDLING_EXCEPTION = &sExecutionStatus_HANDLING_EXCEPTION
+
+var ExecutionStepResult = &sExecutionStepResult
+var ExecutionStepResult_StepType = &sExecutionStepResult_StepType
+var ExecutionStepResult_Outputs = &sExecutionStepResult_Outputs
+var ExecutionStepResult_Error = &sExecutionStepResult_Error
+
+var _ExecutionStepResults = &s_ExecutionStepResults
+var _ExecutionStepResults_member = &s_ExecutionStepResults_member
+
+var _ExternalId = &s_ExternalId
+
+var _FailureCode = &s_FailureCode
+
+var FileLocation = &sFileLocation
+var FileLocation_S3FileLocation = &sFileLocation_S3FileLocation
+var FileLocation_EfsFileLocation = &sFileLocation_EfsFileLocation
+
+var _FilePath = &s_FilePath
+
+var _FilePaths = &s_FilePaths
+var _FilePaths_member = &s_FilePaths_member
+
+var _Fips = &s_Fips
+
+var _Function = &s_Function
+
+var _HomeDirectory = &s_HomeDirectory
+
+var HomeDirectoryMapEntry = &sHomeDirectoryMapEntry
+var HomeDirectoryMapEntry_Entry = &sHomeDirectoryMapEntry_Entry
+var HomeDirectoryMapEntry_Target = &sHomeDirectoryMapEntry_Target
+var HomeDirectoryMapEntry_Type = &sHomeDirectoryMapEntry_Type
+
+var _HomeDirectoryMappings = &s_HomeDirectoryMappings
+var _HomeDirectoryMappings_member = &s_HomeDirectoryMappings_member
+
+var HomeDirectoryType = &sHomeDirectoryType
+var HomeDirectoryType_PATH = &sHomeDirectoryType_PATH
+var HomeDirectoryType_LOGICAL = &sHomeDirectoryType_LOGICAL
+
+var _HostKey = &s_HostKey
+
+var _HostKeyDescription = &s_HostKeyDescription
+
+var _HostKeyFingerprint = &s_HostKeyFingerprint
+
+var _HostKeyId = &s_HostKeyId
+
+var HostKeyStorageType = &sHostKeyStorageType
+var HostKeyStorageType_SERVICE_MANAGED = &sHostKeyStorageType_SERVICE_MANAGED
+var HostKeyStorageType_SECRETS_MANAGER = &sHostKeyStorageType_SECRETS_MANAGER
+
+var _HostKeyType = &s_HostKeyType
+
+var _IdentityCenterApplicationArn = &s_IdentityCenterApplicationArn
+
+var IdentityCenterConfig = &sIdentityCenterConfig
+var IdentityCenterConfig_InstanceArn = &sIdentityCenterConfig_InstanceArn
+var IdentityCenterConfig_Role = &sIdentityCenterConfig_Role
+
+var _IdentityCenterInstanceArn = &s_IdentityCenterInstanceArn
+
+var IdentityProviderDetails = &sIdentityProviderDetails
+var IdentityProviderDetails_Url = &sIdentityProviderDetails_Url
+var IdentityProviderDetails_InvocationRole = &sIdentityProviderDetails_InvocationRole
+var IdentityProviderDetails_DirectoryId = &sIdentityProviderDetails_DirectoryId
+var IdentityProviderDetails_Function = &sIdentityProviderDetails_Function
+var IdentityProviderDetails_SftpAuthenticationMethods = &sIdentityProviderDetails_SftpAuthenticationMethods
+
+var IdentityProviderType = &sIdentityProviderType
+var IdentityProviderType_SERVICE_MANAGED = &sIdentityProviderType_SERVICE_MANAGED
+var IdentityProviderType_API_GATEWAY = &sIdentityProviderType_API_GATEWAY
+var IdentityProviderType_AWS_DIRECTORY_SERVICE = &sIdentityProviderType_AWS_DIRECTORY_SERVICE
+var IdentityProviderType_AWS_LAMBDA = &sIdentityProviderType_AWS_LAMBDA
+
+var InputFileLocation = &sInputFileLocation
+var InputFileLocation_S3FileLocation = &sInputFileLocation_S3FileLocation
+var InputFileLocation_EfsFileLocation = &sInputFileLocation_EfsFileLocation
+
+var InternalServiceError = &sInternalServiceError
+var InternalServiceError_Message = &sInternalServiceError_Message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_Message = &sInvalidRequestException_Message
+
+var IpAddressType = &sIpAddressType
+var IpAddressType_IPV4 = &sIpAddressType_IPV4
+var IpAddressType_DUALSTACK = &sIpAddressType_DUALSTACK
+
+var _KmsKey = &s_KmsKey
+
+var ListedAccess = &sListedAccess
+var ListedAccess_HomeDirectory = &sListedAccess_HomeDirectory
+var ListedAccess_HomeDirectoryType = &sListedAccess_HomeDirectoryType
+var ListedAccess_Role = &sListedAccess_Role
+var ListedAccess_ExternalId = &sListedAccess_ExternalId
+
+var _ListedAccesses = &s_ListedAccesses
+var _ListedAccesses_member = &s_ListedAccesses_member
+
+var ListedAgreement = &sListedAgreement
+var ListedAgreement_Arn = &sListedAgreement_Arn
+var ListedAgreement_AgreementId = &sListedAgreement_AgreementId
+var ListedAgreement_Description = &sListedAgreement_Description
+var ListedAgreement_Status = &sListedAgreement_Status
+var ListedAgreement_ServerId = &sListedAgreement_ServerId
+var ListedAgreement_LocalProfileId = &sListedAgreement_LocalProfileId
+var ListedAgreement_PartnerProfileId = &sListedAgreement_PartnerProfileId
+
+var _ListedAgreements = &s_ListedAgreements
+var _ListedAgreements_member = &s_ListedAgreements_member
+
+var ListedCertificate = &sListedCertificate
+var ListedCertificate_Arn = &sListedCertificate_Arn
+var ListedCertificate_CertificateId = &sListedCertificate_CertificateId
+var ListedCertificate_Usage = &sListedCertificate_Usage
+var ListedCertificate_Status = &sListedCertificate_Status
+var ListedCertificate_ActiveDate = &sListedCertificate_ActiveDate
+var ListedCertificate_InactiveDate = &sListedCertificate_InactiveDate
+var ListedCertificate_Type = &sListedCertificate_Type
+var ListedCertificate_Description = &sListedCertificate_Description
+
+var _ListedCertificates = &s_ListedCertificates
+var _ListedCertificates_member = &s_ListedCertificates_member
+
+var ListedConnector = &sListedConnector
+var ListedConnector_Arn = &sListedConnector_Arn
+var ListedConnector_ConnectorId = &sListedConnector_ConnectorId
+var ListedConnector_Url = &sListedConnector_Url
+
+var _ListedConnectors = &s_ListedConnectors
+var _ListedConnectors_member = &s_ListedConnectors_member
+
+var ListedExecution = &sListedExecution
+var ListedExecution_ExecutionId = &sListedExecution_ExecutionId
+var ListedExecution_InitialFileLocation = &sListedExecution_InitialFileLocation
+var ListedExecution_ServiceMetadata = &sListedExecution_ServiceMetadata
+var ListedExecution_Status = &sListedExecution_Status
+
+var _ListedExecutions = &s_ListedExecutions
+var _ListedExecutions_member = &s_ListedExecutions_member
+
+var ListedHostKey = &sListedHostKey
+var ListedHostKey_Arn = &sListedHostKey_Arn
+var ListedHostKey_HostKeyId = &sListedHostKey_HostKeyId
+var ListedHostKey_Fingerprint = &sListedHostKey_Fingerprint
+var ListedHostKey_Description = &sListedHostKey_Description
+var ListedHostKey_Type = &sListedHostKey_Type
+var ListedHostKey_DateImported = &sListedHostKey_DateImported
+var ListedHostKey_StorageType = &sListedHostKey_StorageType
+var ListedHostKey_SecretId = &sListedHostKey_SecretId
+
+var _ListedHostKeys = &s_ListedHostKeys
+var _ListedHostKeys_member = &s_ListedHostKeys_member
+
+var ListedProfile = &sListedProfile
+var ListedProfile_Arn = &sListedProfile_Arn
+var ListedProfile_ProfileId = &sListedProfile_ProfileId
+var ListedProfile_As2Id = &sListedProfile_As2Id
+var ListedProfile_ProfileType = &sListedProfile_ProfileType
+
+var _ListedProfiles = &s_ListedProfiles
+var _ListedProfiles_member = &s_ListedProfiles_member
+
+var ListedServer = &sListedServer
+var ListedServer_Arn = &sListedServer_Arn
+var ListedServer_Domain = &sListedServer_Domain
+var ListedServer_IdentityProviderType = &sListedServer_IdentityProviderType
+var ListedServer_EndpointType = &sListedServer_EndpointType
+var ListedServer_LoggingRole = &sListedServer_LoggingRole
+var ListedServer_ServerId = &sListedServer_ServerId
+var ListedServer_State = &sListedServer_State
+var ListedServer_UserCount = &sListedServer_UserCount
+
+var _ListedServers = &s_ListedServers
+var _ListedServers_member = &s_ListedServers_member
+
+var ListedUser = &sListedUser
+var ListedUser_Arn = &sListedUser_Arn
+var ListedUser_HomeDirectory = &sListedUser_HomeDirectory
+var ListedUser_HomeDirectoryType = &sListedUser_HomeDirectoryType
+var ListedUser_Role = &sListedUser_Role
+var ListedUser_SshPublicKeyCount = &sListedUser_SshPublicKeyCount
+var ListedUser_UserName = &sListedUser_UserName
+
+var _ListedUsers = &s_ListedUsers
+var _ListedUsers_member = &s_ListedUsers_member
+
+var ListedWebApp = &sListedWebApp
+var ListedWebApp_Arn = &sListedWebApp_Arn
+var ListedWebApp_WebAppId = &sListedWebApp_WebAppId
+var ListedWebApp_AccessEndpoint = &sListedWebApp_AccessEndpoint
+var ListedWebApp_WebAppEndpoint = &sListedWebApp_WebAppEndpoint
+var ListedWebApp_EndpointType = &sListedWebApp_EndpointType
+
+var _ListedWebApps = &s_ListedWebApps
+var _ListedWebApps_member = &s_ListedWebApps_member
+
+var ListedWorkflow = &sListedWorkflow
+var ListedWorkflow_WorkflowId = &sListedWorkflow_WorkflowId
+var ListedWorkflow_Description = &sListedWorkflow_Description
+var ListedWorkflow_Arn = &sListedWorkflow_Arn
+
+var _ListedWorkflows = &s_ListedWorkflows
+var _ListedWorkflows_member = &s_ListedWorkflows_member
+
+var _ListingId = &s_ListingId
+
+var LoggingConfiguration = &sLoggingConfiguration
+var LoggingConfiguration_LoggingRole = &sLoggingConfiguration_LoggingRole
+var LoggingConfiguration_LogGroupName = &sLoggingConfiguration_LogGroupName
+
+var _LogGroupName = &s_LogGroupName
+
+var _MapEntry = &s_MapEntry
+
+var _MapTarget = &s_MapTarget
+
+var MapType = &sMapType
+var MapType_FILE = &sMapType_FILE
+var MapType_DIRECTORY = &sMapType_DIRECTORY
+
+var _MaxConcurrentConnections = &s_MaxConcurrentConnections
+
+var _MaxItems = &s_MaxItems
+
+var _MaxResults = &s_MaxResults
+
+var MdnResponse = &sMdnResponse
+var MdnResponse_SYNC = &sMdnResponse_SYNC
+var MdnResponse_NONE = &sMdnResponse_NONE
+var MdnResponse_ASYNC = &sMdnResponse_ASYNC
+
+var MdnSigningAlg = &sMdnSigningAlg
+var MdnSigningAlg_SHA256 = &sMdnSigningAlg_SHA256
+var MdnSigningAlg_SHA384 = &sMdnSigningAlg_SHA384
+var MdnSigningAlg_SHA512 = &sMdnSigningAlg_SHA512
+var MdnSigningAlg_SHA1 = &sMdnSigningAlg_SHA1
+var MdnSigningAlg_NONE = &sMdnSigningAlg_NONE
+var MdnSigningAlg_DEFAULT = &sMdnSigningAlg_DEFAULT
+
+var _Message = &s_Message
+
+var _MessageSubject = &s_MessageSubject
+
+var _MoveId = &s_MoveId
+
+var _NextToken = &s_NextToken
+
+var _NullableRole = &s_NullableRole
+
+var _OnPartialUploadWorkflowDetails = &s_OnPartialUploadWorkflowDetails
+var _OnPartialUploadWorkflowDetails_member = &s_OnPartialUploadWorkflowDetails_member
+
+var _OnUploadWorkflowDetails = &s_OnUploadWorkflowDetails
+var _OnUploadWorkflowDetails_member = &s_OnUploadWorkflowDetails_member
+
+var _OutputFileName = &s_OutputFileName
+
+var OverwriteExisting = &sOverwriteExisting
+var OverwriteExisting_TRUE = &sOverwriteExisting_TRUE
+var OverwriteExisting_FALSE = &sOverwriteExisting_FALSE
+
+var _PassiveIp = &s_PassiveIp
+
+var _Policy = &s_Policy
+
+var _PosixId = &s_PosixId
+
+var PosixProfile = &sPosixProfile
+var PosixProfile_Uid = &sPosixProfile_Uid
+var PosixProfile_Gid = &sPosixProfile_Gid
+var PosixProfile_SecondaryGids = &sPosixProfile_SecondaryGids
+
+var _PostAuthenticationLoginBanner = &s_PostAuthenticationLoginBanner
+
+var _PreAuthenticationLoginBanner = &s_PreAuthenticationLoginBanner
+
+var PreserveContentType = &sPreserveContentType
+var PreserveContentType_ENABLED = &sPreserveContentType_ENABLED
+var PreserveContentType_DISABLED = &sPreserveContentType_DISABLED
+
+var PreserveFilenameType = &sPreserveFilenameType
+var PreserveFilenameType_ENABLED = &sPreserveFilenameType_ENABLED
+var PreserveFilenameType_DISABLED = &sPreserveFilenameType_DISABLED
+
+var _PrivateKeyType = &s_PrivateKeyType
+
+var _ProfileId = &s_ProfileId
+
+var ProfileType = &sProfileType
+var ProfileType_LOCAL = &sProfileType_LOCAL
+var ProfileType_PARTNER = &sProfileType_PARTNER
+
+var Protocol = &sProtocol
+var Protocol_SFTP = &sProtocol_SFTP
+var Protocol_FTP = &sProtocol_FTP
+var Protocol_FTPS = &sProtocol_FTPS
+var Protocol_AS2 = &sProtocol_AS2
+
+var ProtocolDetails = &sProtocolDetails
+var ProtocolDetails_PassiveIp = &sProtocolDetails_PassiveIp
+var ProtocolDetails_TlsSessionResumptionMode = &sProtocolDetails_TlsSessionResumptionMode
+var ProtocolDetails_SetStatOption = &sProtocolDetails_SetStatOption
+var ProtocolDetails_SftpPorts = &sProtocolDetails_SftpPorts
+var ProtocolDetails_As2Transports = &sProtocolDetails_As2Transports
+var ProtocolDetails_ProxyConfig = &sProtocolDetails_ProxyConfig
+
+var _Protocols = &s_Protocols
+var _Protocols_member = &s_Protocols_member
+
+var ProxyConfig = &sProxyConfig
+var ProxyConfig_SftpMode = &sProxyConfig_SftpMode
+
+var ProxyMode = &sProxyMode
+var ProxyMode_NONE = &sProxyMode_NONE
+var ProxyMode_PROXY_PROTOCOL_V2_ENFORCED = &sProxyMode_PROXY_PROTOCOL_V2_ENFORCED
+
+var _Resource = &s_Resource
+
+var ResourceExistsException = &sResourceExistsException
+var ResourceExistsException_Message = &sResourceExistsException_Message
+var ResourceExistsException_Resource = &sResourceExistsException_Resource
+var ResourceExistsException_ResourceType = &sResourceExistsException_ResourceType
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_Resource = &sResourceNotFoundException_Resource
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+
+var _ResourceType = &s_ResourceType
+
+var _Response = &s_Response
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var _Role = &s_Role
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Etag = &s_S3Etag
+
+var S3FileLocation = &sS3FileLocation
+var S3FileLocation_Bucket = &sS3FileLocation_Bucket
+var S3FileLocation_Key = &sS3FileLocation_Key
+var S3FileLocation_VersionId = &sS3FileLocation_VersionId
+var S3FileLocation_Etag = &sS3FileLocation_Etag
+
+var S3InputFileLocation = &sS3InputFileLocation
+var S3InputFileLocation_Bucket = &sS3InputFileLocation_Bucket
+var S3InputFileLocation_Key = &sS3InputFileLocation_Key
+
+var _S3Key = &s_S3Key
+
+var S3StorageOptions = &sS3StorageOptions
+var S3StorageOptions_DirectoryListingOptimization = &sS3StorageOptions_DirectoryListingOptimization
+
+var S3Tag = &sS3Tag
+var S3Tag_Key = &sS3Tag_Key
+var S3Tag_Value = &sS3Tag_Value
+
+var _S3TagKey = &s_S3TagKey
+
+var _S3Tags = &s_S3Tags
+var _S3Tags_member = &s_S3Tags_member
+
+var _S3TagValue = &s_S3TagValue
+
+var _S3VersionId = &s_S3VersionId
+
+var _SecondaryGids = &s_SecondaryGids
+var _SecondaryGids_member = &s_SecondaryGids_member
+
+var _SecretId = &s_SecretId
+
+var _SecretVersionStage = &s_SecretVersionStage
+
+var _SecretVersionStageList = &s_SecretVersionStageList
+var _SecretVersionStageList_member = &s_SecretVersionStageList_member
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var _SecurityPolicyName = &s_SecurityPolicyName
+
+var _SecurityPolicyNames = &s_SecurityPolicyNames
+var _SecurityPolicyNames_member = &s_SecurityPolicyNames_member
+
+var _SecurityPolicyOption = &s_SecurityPolicyOption
+
+var _SecurityPolicyOptions = &s_SecurityPolicyOptions
+var _SecurityPolicyOptions_member = &s_SecurityPolicyOptions_member
+
+var SecurityPolicyProtocol = &sSecurityPolicyProtocol
+var SecurityPolicyProtocol_SFTP = &sSecurityPolicyProtocol_SFTP
+var SecurityPolicyProtocol_FTPS = &sSecurityPolicyProtocol_FTPS
+
+var _SecurityPolicyProtocols = &s_SecurityPolicyProtocols
+var _SecurityPolicyProtocols_member = &s_SecurityPolicyProtocols_member
+
+var SecurityPolicyResourceType = &sSecurityPolicyResourceType
+var SecurityPolicyResourceType_SERVER = &sSecurityPolicyResourceType_SERVER
+var SecurityPolicyResourceType_CONNECTOR = &sSecurityPolicyResourceType_CONNECTOR
+
+var _ServerId = &s_ServerId
+
+var _ServiceErrorMessage = &s_ServiceErrorMessage
+
+var _ServiceManagedEgressIpAddress = &s_ServiceManagedEgressIpAddress
+
+var _ServiceManagedEgressIpAddresses = &s_ServiceManagedEgressIpAddresses
+var _ServiceManagedEgressIpAddresses_member = &s_ServiceManagedEgressIpAddresses_member
+
+var ServiceMetadata = &sServiceMetadata
+var ServiceMetadata_UserDetails = &sServiceMetadata_UserDetails
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var _SessionId = &s_SessionId
+
+var SetStatOption = &sSetStatOption
+var SetStatOption_DEFAULT = &sSetStatOption_DEFAULT
+var SetStatOption_ENABLE_NO_OP = &sSetStatOption_ENABLE_NO_OP
+
+var SftpAuthenticationMethods = &sSftpAuthenticationMethods
+var SftpAuthenticationMethods_PASSWORD = &sSftpAuthenticationMethods_PASSWORD
+var SftpAuthenticationMethods_PUBLIC_KEY = &sSftpAuthenticationMethods_PUBLIC_KEY
+var SftpAuthenticationMethods_PUBLIC_KEY_OR_PASSWORD = &sSftpAuthenticationMethods_PUBLIC_KEY_OR_PASSWORD
+var SftpAuthenticationMethods_PUBLIC_KEY_AND_PASSWORD = &sSftpAuthenticationMethods_PUBLIC_KEY_AND_PASSWORD
+
+var SftpConnectorConfig = &sSftpConnectorConfig
+var SftpConnectorConfig_UserSecretId = &sSftpConnectorConfig_UserSecretId
+var SftpConnectorConfig_TrustedHostKeys = &sSftpConnectorConfig_TrustedHostKeys
+var SftpConnectorConfig_MaxConcurrentConnections = &sSftpConnectorConfig_MaxConcurrentConnections
+var SftpConnectorConfig_OrderedUserSecretVersionStages = &sSftpConnectorConfig_OrderedUserSecretVersionStages
+
+var SftpConnectorConnectionDetails = &sSftpConnectorConnectionDetails
+var SftpConnectorConnectionDetails_HostKey = &sSftpConnectorConnectionDetails_HostKey
+
+var _SftpConnectorHostKey = &s_SftpConnectorHostKey
+
+var _SftpConnectorTrustedHostKey = &s_SftpConnectorTrustedHostKey
+
+var _SftpConnectorTrustedHostKeyList = &s_SftpConnectorTrustedHostKeyList
+var _SftpConnectorTrustedHostKeyList_member = &s_SftpConnectorTrustedHostKeyList_member
+
+var _SftpPort = &s_SftpPort
+
+var _SftpPorts = &s_SftpPorts
+var _SftpPorts_member = &s_SftpPorts_member
+
+var SftpPortWithOptions = &sSftpPortWithOptions
+var SftpPortWithOptions_SftpPort = &sSftpPortWithOptions_SftpPort
+var SftpPortWithOptions_CommunicationMode = &sSftpPortWithOptions_CommunicationMode
+
+var SigningAlg = &sSigningAlg
+var SigningAlg_SHA256 = &sSigningAlg_SHA256
+var SigningAlg_SHA384 = &sSigningAlg_SHA384
+var SigningAlg_SHA512 = &sSigningAlg_SHA512
+var SigningAlg_SHA1 = &sSigningAlg_SHA1
+var SigningAlg_NONE = &sSigningAlg_NONE
+
+var _SourceFileLocation = &s_SourceFileLocation
+
+var _SourceIp = &s_SourceIp
+
+var SshPublicKey = &sSshPublicKey
+var SshPublicKey_DateImported = &sSshPublicKey_DateImported
+var SshPublicKey_SshPublicKeyBody = &sSshPublicKey_SshPublicKeyBody
+var SshPublicKey_SshPublicKeyId = &sSshPublicKey_SshPublicKeyId
+
+var _SshPublicKeyBody = &s_SshPublicKeyBody
+
+var _SshPublicKeyCount = &s_SshPublicKeyCount
+
+var _SshPublicKeyId = &s_SshPublicKeyId
+
+var _SshPublicKeys = &s_SshPublicKeys
+var _SshPublicKeys_member = &s_SshPublicKeys_member
+
+var State = &sState
+var State_OFFLINE = &sState_OFFLINE
+var State_ONLINE = &sState_ONLINE
+var State_STARTING = &sState_STARTING
+var State_STOPPING = &sState_STOPPING
+var State_START_FAILED = &sState_START_FAILED
+var State_STOP_FAILED = &sState_STOP_FAILED
+
+var _Status = &s_Status
+
+var _StatusCode = &s_StatusCode
+
+var _StepResultOutputsJson = &s_StepResultOutputsJson
+
+var _StructuredLogDestinations = &s_StructuredLogDestinations
+var _StructuredLogDestinations_member = &s_StructuredLogDestinations_member
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var TagStepDetails = &sTagStepDetails
+var TagStepDetails_Name = &sTagStepDetails_Name
+var TagStepDetails_Tags = &sTagStepDetails_Tags
+var TagStepDetails_SourceFileLocation = &sTagStepDetails_SourceFileLocation
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_RetryAfterSeconds = &sThrottlingException_RetryAfterSeconds
+
+var TlsSessionResumptionMode = &sTlsSessionResumptionMode
+var TlsSessionResumptionMode_DISABLED = &sTlsSessionResumptionMode_DISABLED
+var TlsSessionResumptionMode_ENABLED = &sTlsSessionResumptionMode_ENABLED
+var TlsSessionResumptionMode_ENFORCED = &sTlsSessionResumptionMode_ENFORCED
+
+var _TransferId = &s_TransferId
+
+var TransferTableStatus = &sTransferTableStatus
+var TransferTableStatus_QUEUED = &sTransferTableStatus_QUEUED
+var TransferTableStatus_IN_PROGRESS = &sTransferTableStatus_IN_PROGRESS
+var TransferTableStatus_COMPLETED = &sTransferTableStatus_COMPLETED
+var TransferTableStatus_FAILED = &sTransferTableStatus_FAILED
+
+var UpdateConnectorEgressConfig = &sUpdateConnectorEgressConfig
+var UpdateConnectorEgressConfig_VpcLattice = &sUpdateConnectorEgressConfig_VpcLattice
+
+var UpdateConnectorVpcLatticeEgressConfig = &sUpdateConnectorVpcLatticeEgressConfig
+var UpdateConnectorVpcLatticeEgressConfig_ResourceConfigurationArn = &sUpdateConnectorVpcLatticeEgressConfig_ResourceConfigurationArn
+var UpdateConnectorVpcLatticeEgressConfig_PortNumber = &sUpdateConnectorVpcLatticeEgressConfig_PortNumber
+
+var UpdateWebAppEndpointDetails = &sUpdateWebAppEndpointDetails
+var UpdateWebAppEndpointDetails_Vpc = &sUpdateWebAppEndpointDetails_Vpc
+
+var UpdateWebAppIdentityCenterConfig = &sUpdateWebAppIdentityCenterConfig
+var UpdateWebAppIdentityCenterConfig_Role = &sUpdateWebAppIdentityCenterConfig_Role
+
+var UpdateWebAppIdentityProviderDetails = &sUpdateWebAppIdentityProviderDetails
+var UpdateWebAppIdentityProviderDetails_IdentityCenterConfig = &sUpdateWebAppIdentityProviderDetails_IdentityCenterConfig
+
+var UpdateWebAppVpcConfig = &sUpdateWebAppVpcConfig
+var UpdateWebAppVpcConfig_SubnetIds = &sUpdateWebAppVpcConfig_SubnetIds
+var UpdateWebAppVpcConfig_IpAddressType = &sUpdateWebAppVpcConfig_IpAddressType
+
+var _Url = &s_Url
+
+var _UserCount = &s_UserCount
+
+var UserDetails = &sUserDetails
+var UserDetails_UserName = &sUserDetails_UserName
+var UserDetails_ServerId = &sUserDetails_ServerId
+var UserDetails_SessionId = &sUserDetails_SessionId
+
+var _UserName = &s_UserName
+
+var _UserPassword = &s_UserPassword
+
+var _VpcEndpointId = &s_VpcEndpointId
+
+var _VpcId = &s_VpcId
+
+var _VpcLatticeResourceConfigurationArn = &s_VpcLatticeResourceConfigurationArn
+
+var _WebAppAccessEndpoint = &s_WebAppAccessEndpoint
+
+var _WebAppEndpoint = &s_WebAppEndpoint
+
+var WebAppEndpointDetails = &sWebAppEndpointDetails
+var WebAppEndpointDetails_Vpc = &sWebAppEndpointDetails_Vpc
+
+var WebAppEndpointPolicy = &sWebAppEndpointPolicy
+var WebAppEndpointPolicy_FIPS = &sWebAppEndpointPolicy_FIPS
+var WebAppEndpointPolicy_STANDARD = &sWebAppEndpointPolicy_STANDARD
+
+var WebAppEndpointType = &sWebAppEndpointType
+var WebAppEndpointType_PUBLIC = &sWebAppEndpointType_PUBLIC
+var WebAppEndpointType_VPC = &sWebAppEndpointType_VPC
+
+var _WebAppFaviconFile = &s_WebAppFaviconFile
+
+var _WebAppId = &s_WebAppId
+
+var WebAppIdentityProviderDetails = &sWebAppIdentityProviderDetails
+var WebAppIdentityProviderDetails_IdentityCenterConfig = &sWebAppIdentityProviderDetails_IdentityCenterConfig
+
+var _WebAppLogoFile = &s_WebAppLogoFile
+
+var _WebAppTitle = &s_WebAppTitle
+
+var _WebAppUnitCount = &s_WebAppUnitCount
+
+var WebAppUnits = &sWebAppUnits
+var WebAppUnits_Provisioned = &sWebAppUnits_Provisioned
+
+var WebAppVpcConfig = &sWebAppVpcConfig
+var WebAppVpcConfig_SubnetIds = &sWebAppVpcConfig_SubnetIds
+var WebAppVpcConfig_VpcId = &sWebAppVpcConfig_VpcId
+var WebAppVpcConfig_SecurityGroupIds = &sWebAppVpcConfig_SecurityGroupIds
+var WebAppVpcConfig_IpAddressType = &sWebAppVpcConfig_IpAddressType
+
+var WebAppVpcEndpointIpAddressType = &sWebAppVpcEndpointIpAddressType
+var WebAppVpcEndpointIpAddressType_IPV4 = &sWebAppVpcEndpointIpAddressType_IPV4
+var WebAppVpcEndpointIpAddressType_DUALSTACK = &sWebAppVpcEndpointIpAddressType_DUALSTACK
+
+var _WorkflowDescription = &s_WorkflowDescription
+
+var WorkflowDetail = &sWorkflowDetail
+var WorkflowDetail_WorkflowId = &sWorkflowDetail_WorkflowId
+var WorkflowDetail_ExecutionRole = &sWorkflowDetail_ExecutionRole
+
+var WorkflowDetails = &sWorkflowDetails
+var WorkflowDetails_OnUpload = &sWorkflowDetails_OnUpload
+var WorkflowDetails_OnPartialUpload = &sWorkflowDetails_OnPartialUpload
+
+var _WorkflowId = &s_WorkflowId
+
+var WorkflowStep = &sWorkflowStep
+var WorkflowStep_Type = &sWorkflowStep_Type
+var WorkflowStep_CopyStepDetails = &sWorkflowStep_CopyStepDetails
+var WorkflowStep_CustomStepDetails = &sWorkflowStep_CustomStepDetails
+var WorkflowStep_DeleteStepDetails = &sWorkflowStep_DeleteStepDetails
+var WorkflowStep_TagStepDetails = &sWorkflowStep_TagStepDetails
+var WorkflowStep_DecryptStepDetails = &sWorkflowStep_DecryptStepDetails
+
+var _WorkflowStepName = &s_WorkflowStepName
+
+var _WorkflowSteps = &s_WorkflowSteps
+var _WorkflowSteps_member = &s_WorkflowSteps_member
+
+var WorkflowStepType = &sWorkflowStepType
+var WorkflowStepType_COPY = &sWorkflowStepType_COPY
+var WorkflowStepType_CUSTOM = &sWorkflowStepType_CUSTOM
+var WorkflowStepType_TAG = &sWorkflowStepType_TAG
+var WorkflowStepType_DELETE = &sWorkflowStepType_DELETE
+var WorkflowStepType_DECRYPT = &sWorkflowStepType_DECRYPT
+
+var CreateAccessRequest = &sCreateAccessRequest
+var CreateAccessRequest_HomeDirectory = &sCreateAccessRequest_HomeDirectory
+var CreateAccessRequest_HomeDirectoryType = &sCreateAccessRequest_HomeDirectoryType
+var CreateAccessRequest_HomeDirectoryMappings = &sCreateAccessRequest_HomeDirectoryMappings
+var CreateAccessRequest_Policy = &sCreateAccessRequest_Policy
+var CreateAccessRequest_PosixProfile = &sCreateAccessRequest_PosixProfile
+var CreateAccessRequest_Role = &sCreateAccessRequest_Role
+var CreateAccessRequest_ServerId = &sCreateAccessRequest_ServerId
+var CreateAccessRequest_ExternalId = &sCreateAccessRequest_ExternalId
+
+var CreateAccessResponse = &sCreateAccessResponse
+var CreateAccessResponse_ServerId = &sCreateAccessResponse_ServerId
+var CreateAccessResponse_ExternalId = &sCreateAccessResponse_ExternalId
+
+var CreateAgreementRequest = &sCreateAgreementRequest
+var CreateAgreementRequest_Description = &sCreateAgreementRequest_Description
+var CreateAgreementRequest_ServerId = &sCreateAgreementRequest_ServerId
+var CreateAgreementRequest_LocalProfileId = &sCreateAgreementRequest_LocalProfileId
+var CreateAgreementRequest_PartnerProfileId = &sCreateAgreementRequest_PartnerProfileId
+var CreateAgreementRequest_BaseDirectory = &sCreateAgreementRequest_BaseDirectory
+var CreateAgreementRequest_AccessRole = &sCreateAgreementRequest_AccessRole
+var CreateAgreementRequest_Status = &sCreateAgreementRequest_Status
+var CreateAgreementRequest_Tags = &sCreateAgreementRequest_Tags
+var CreateAgreementRequest_PreserveFilename = &sCreateAgreementRequest_PreserveFilename
+var CreateAgreementRequest_EnforceMessageSigning = &sCreateAgreementRequest_EnforceMessageSigning
+var CreateAgreementRequest_CustomDirectories = &sCreateAgreementRequest_CustomDirectories
+
+var CreateAgreementResponse = &sCreateAgreementResponse
+var CreateAgreementResponse_AgreementId = &sCreateAgreementResponse_AgreementId
+
+var CreateConnectorRequest = &sCreateConnectorRequest
+var CreateConnectorRequest_Url = &sCreateConnectorRequest_Url
+var CreateConnectorRequest_As2Config = &sCreateConnectorRequest_As2Config
+var CreateConnectorRequest_AccessRole = &sCreateConnectorRequest_AccessRole
+var CreateConnectorRequest_LoggingRole = &sCreateConnectorRequest_LoggingRole
+var CreateConnectorRequest_Tags = &sCreateConnectorRequest_Tags
+var CreateConnectorRequest_SftpConfig = &sCreateConnectorRequest_SftpConfig
+var CreateConnectorRequest_SecurityPolicyName = &sCreateConnectorRequest_SecurityPolicyName
+var CreateConnectorRequest_EgressConfig = &sCreateConnectorRequest_EgressConfig
+var CreateConnectorRequest_IpAddressType = &sCreateConnectorRequest_IpAddressType
+
+var CreateConnectorResponse = &sCreateConnectorResponse
+var CreateConnectorResponse_ConnectorId = &sCreateConnectorResponse_ConnectorId
+
+var CreateProfileRequest = &sCreateProfileRequest
+var CreateProfileRequest_As2Id = &sCreateProfileRequest_As2Id
+var CreateProfileRequest_ProfileType = &sCreateProfileRequest_ProfileType
+var CreateProfileRequest_CertificateIds = &sCreateProfileRequest_CertificateIds
+var CreateProfileRequest_Tags = &sCreateProfileRequest_Tags
+
+var CreateProfileResponse = &sCreateProfileResponse
+var CreateProfileResponse_ProfileId = &sCreateProfileResponse_ProfileId
+
+var CreateServerRequest = &sCreateServerRequest
+var CreateServerRequest_Certificate = &sCreateServerRequest_Certificate
+var CreateServerRequest_Domain = &sCreateServerRequest_Domain
+var CreateServerRequest_EndpointDetails = &sCreateServerRequest_EndpointDetails
+var CreateServerRequest_EndpointType = &sCreateServerRequest_EndpointType
+var CreateServerRequest_HostKey = &sCreateServerRequest_HostKey
+var CreateServerRequest_IdentityProviderDetails = &sCreateServerRequest_IdentityProviderDetails
+var CreateServerRequest_IdentityProviderType = &sCreateServerRequest_IdentityProviderType
+var CreateServerRequest_LoggingRole = &sCreateServerRequest_LoggingRole
+var CreateServerRequest_PostAuthenticationLoginBanner = &sCreateServerRequest_PostAuthenticationLoginBanner
+var CreateServerRequest_PreAuthenticationLoginBanner = &sCreateServerRequest_PreAuthenticationLoginBanner
+var CreateServerRequest_Protocols = &sCreateServerRequest_Protocols
+var CreateServerRequest_ProtocolDetails = &sCreateServerRequest_ProtocolDetails
+var CreateServerRequest_SecurityPolicyName = &sCreateServerRequest_SecurityPolicyName
+var CreateServerRequest_Tags = &sCreateServerRequest_Tags
+var CreateServerRequest_WorkflowDetails = &sCreateServerRequest_WorkflowDetails
+var CreateServerRequest_StructuredLogDestinations = &sCreateServerRequest_StructuredLogDestinations
+var CreateServerRequest_S3StorageOptions = &sCreateServerRequest_S3StorageOptions
+var CreateServerRequest_IpAddressType = &sCreateServerRequest_IpAddressType
+var CreateServerRequest_HostKeyStorageType = &sCreateServerRequest_HostKeyStorageType
+
+var CreateServerResponse = &sCreateServerResponse
+var CreateServerResponse_ServerId = &sCreateServerResponse_ServerId
+
+var CreateUserRequest = &sCreateUserRequest
+var CreateUserRequest_HomeDirectory = &sCreateUserRequest_HomeDirectory
+var CreateUserRequest_HomeDirectoryType = &sCreateUserRequest_HomeDirectoryType
+var CreateUserRequest_HomeDirectoryMappings = &sCreateUserRequest_HomeDirectoryMappings
+var CreateUserRequest_Policy = &sCreateUserRequest_Policy
+var CreateUserRequest_PosixProfile = &sCreateUserRequest_PosixProfile
+var CreateUserRequest_Role = &sCreateUserRequest_Role
+var CreateUserRequest_ServerId = &sCreateUserRequest_ServerId
+var CreateUserRequest_SshPublicKeyBody = &sCreateUserRequest_SshPublicKeyBody
+var CreateUserRequest_Tags = &sCreateUserRequest_Tags
+var CreateUserRequest_UserName = &sCreateUserRequest_UserName
+
+var CreateUserResponse = &sCreateUserResponse
+var CreateUserResponse_ServerId = &sCreateUserResponse_ServerId
+var CreateUserResponse_UserName = &sCreateUserResponse_UserName
+
+var CreateWebAppRequest = &sCreateWebAppRequest
+var CreateWebAppRequest_IdentityProviderDetails = &sCreateWebAppRequest_IdentityProviderDetails
+var CreateWebAppRequest_AccessEndpoint = &sCreateWebAppRequest_AccessEndpoint
+var CreateWebAppRequest_WebAppUnits = &sCreateWebAppRequest_WebAppUnits
+var CreateWebAppRequest_Tags = &sCreateWebAppRequest_Tags
+var CreateWebAppRequest_WebAppEndpointPolicy = &sCreateWebAppRequest_WebAppEndpointPolicy
+var CreateWebAppRequest_EndpointDetails = &sCreateWebAppRequest_EndpointDetails
+
+var CreateWebAppResponse = &sCreateWebAppResponse
+var CreateWebAppResponse_WebAppId = &sCreateWebAppResponse_WebAppId
+
+var CreateWorkflowRequest = &sCreateWorkflowRequest
+var CreateWorkflowRequest_Description = &sCreateWorkflowRequest_Description
+var CreateWorkflowRequest_Steps = &sCreateWorkflowRequest_Steps
+var CreateWorkflowRequest_OnExceptionSteps = &sCreateWorkflowRequest_OnExceptionSteps
+var CreateWorkflowRequest_Tags = &sCreateWorkflowRequest_Tags
+var CreateWorkflowRequest_StructuredLogDestinations = &sCreateWorkflowRequest_StructuredLogDestinations
+
+var CreateWorkflowResponse = &sCreateWorkflowResponse
+var CreateWorkflowResponse_WorkflowId = &sCreateWorkflowResponse_WorkflowId
+
+var DeleteAccessRequest = &sDeleteAccessRequest
+var DeleteAccessRequest_ServerId = &sDeleteAccessRequest_ServerId
+var DeleteAccessRequest_ExternalId = &sDeleteAccessRequest_ExternalId
+
+var DeleteAgreementRequest = &sDeleteAgreementRequest
+var DeleteAgreementRequest_AgreementId = &sDeleteAgreementRequest_AgreementId
+var DeleteAgreementRequest_ServerId = &sDeleteAgreementRequest_ServerId
+
+var DeleteCertificateRequest = &sDeleteCertificateRequest
+var DeleteCertificateRequest_CertificateId = &sDeleteCertificateRequest_CertificateId
+
+var DeleteConnectorRequest = &sDeleteConnectorRequest
+var DeleteConnectorRequest_ConnectorId = &sDeleteConnectorRequest_ConnectorId
+
+var DeleteHostKeyRequest = &sDeleteHostKeyRequest
+var DeleteHostKeyRequest_ServerId = &sDeleteHostKeyRequest_ServerId
+var DeleteHostKeyRequest_HostKeyId = &sDeleteHostKeyRequest_HostKeyId
+
+var DeleteProfileRequest = &sDeleteProfileRequest
+var DeleteProfileRequest_ProfileId = &sDeleteProfileRequest_ProfileId
+
+var DeleteServerRequest = &sDeleteServerRequest
+var DeleteServerRequest_ServerId = &sDeleteServerRequest_ServerId
+
+var DeleteSshPublicKeyRequest = &sDeleteSshPublicKeyRequest
+var DeleteSshPublicKeyRequest_ServerId = &sDeleteSshPublicKeyRequest_ServerId
+var DeleteSshPublicKeyRequest_SshPublicKeyId = &sDeleteSshPublicKeyRequest_SshPublicKeyId
+var DeleteSshPublicKeyRequest_UserName = &sDeleteSshPublicKeyRequest_UserName
+
+var DeleteUserRequest = &sDeleteUserRequest
+var DeleteUserRequest_ServerId = &sDeleteUserRequest_ServerId
+var DeleteUserRequest_UserName = &sDeleteUserRequest_UserName
+
+var DeleteWebAppCustomizationRequest = &sDeleteWebAppCustomizationRequest
+var DeleteWebAppCustomizationRequest_WebAppId = &sDeleteWebAppCustomizationRequest_WebAppId
+
+var DeleteWebAppRequest = &sDeleteWebAppRequest
+var DeleteWebAppRequest_WebAppId = &sDeleteWebAppRequest_WebAppId
+
+var DeleteWorkflowRequest = &sDeleteWorkflowRequest
+var DeleteWorkflowRequest_WorkflowId = &sDeleteWorkflowRequest_WorkflowId
+
+var DescribeAccessRequest = &sDescribeAccessRequest
+var DescribeAccessRequest_ServerId = &sDescribeAccessRequest_ServerId
+var DescribeAccessRequest_ExternalId = &sDescribeAccessRequest_ExternalId
+
+var DescribeAccessResponse = &sDescribeAccessResponse
+var DescribeAccessResponse_ServerId = &sDescribeAccessResponse_ServerId
+var DescribeAccessResponse_Access = &sDescribeAccessResponse_Access
+
+var DescribeAgreementRequest = &sDescribeAgreementRequest
+var DescribeAgreementRequest_AgreementId = &sDescribeAgreementRequest_AgreementId
+var DescribeAgreementRequest_ServerId = &sDescribeAgreementRequest_ServerId
+
+var DescribeAgreementResponse = &sDescribeAgreementResponse
+var DescribeAgreementResponse_Agreement = &sDescribeAgreementResponse_Agreement
+
+var DescribeCertificateRequest = &sDescribeCertificateRequest
+var DescribeCertificateRequest_CertificateId = &sDescribeCertificateRequest_CertificateId
+
+var DescribeCertificateResponse = &sDescribeCertificateResponse
+var DescribeCertificateResponse_Certificate = &sDescribeCertificateResponse_Certificate
+
+var DescribeConnectorRequest = &sDescribeConnectorRequest
+var DescribeConnectorRequest_ConnectorId = &sDescribeConnectorRequest_ConnectorId
+
+var DescribeConnectorResponse = &sDescribeConnectorResponse
+var DescribeConnectorResponse_Connector = &sDescribeConnectorResponse_Connector
+
+var DescribeExecutionRequest = &sDescribeExecutionRequest
+var DescribeExecutionRequest_ExecutionId = &sDescribeExecutionRequest_ExecutionId
+var DescribeExecutionRequest_WorkflowId = &sDescribeExecutionRequest_WorkflowId
+
+var DescribeExecutionResponse = &sDescribeExecutionResponse
+var DescribeExecutionResponse_WorkflowId = &sDescribeExecutionResponse_WorkflowId
+var DescribeExecutionResponse_Execution = &sDescribeExecutionResponse_Execution
+
+var DescribeHostKeyRequest = &sDescribeHostKeyRequest
+var DescribeHostKeyRequest_ServerId = &sDescribeHostKeyRequest_ServerId
+var DescribeHostKeyRequest_HostKeyId = &sDescribeHostKeyRequest_HostKeyId
+
+var DescribeHostKeyResponse = &sDescribeHostKeyResponse
+var DescribeHostKeyResponse_HostKey = &sDescribeHostKeyResponse_HostKey
+
+var DescribeProfileRequest = &sDescribeProfileRequest
+var DescribeProfileRequest_ProfileId = &sDescribeProfileRequest_ProfileId
+
+var DescribeProfileResponse = &sDescribeProfileResponse
+var DescribeProfileResponse_Profile = &sDescribeProfileResponse_Profile
+
+var DescribeSecurityPolicyRequest = &sDescribeSecurityPolicyRequest
+var DescribeSecurityPolicyRequest_SecurityPolicyName = &sDescribeSecurityPolicyRequest_SecurityPolicyName
+
+var DescribeSecurityPolicyResponse = &sDescribeSecurityPolicyResponse
+var DescribeSecurityPolicyResponse_SecurityPolicy = &sDescribeSecurityPolicyResponse_SecurityPolicy
+
+var DescribeServerRequest = &sDescribeServerRequest
+var DescribeServerRequest_ServerId = &sDescribeServerRequest_ServerId
+
+var DescribeServerResponse = &sDescribeServerResponse
+var DescribeServerResponse_Server = &sDescribeServerResponse_Server
+
+var DescribeUserRequest = &sDescribeUserRequest
+var DescribeUserRequest_ServerId = &sDescribeUserRequest_ServerId
+var DescribeUserRequest_UserName = &sDescribeUserRequest_UserName
+
+var DescribeUserResponse = &sDescribeUserResponse
+var DescribeUserResponse_ServerId = &sDescribeUserResponse_ServerId
+var DescribeUserResponse_User = &sDescribeUserResponse_User
+
+var DescribeWebAppCustomizationRequest = &sDescribeWebAppCustomizationRequest
+var DescribeWebAppCustomizationRequest_WebAppId = &sDescribeWebAppCustomizationRequest_WebAppId
+
+var DescribeWebAppCustomizationResponse = &sDescribeWebAppCustomizationResponse
+var DescribeWebAppCustomizationResponse_WebAppCustomization = &sDescribeWebAppCustomizationResponse_WebAppCustomization
+
+var DescribeWebAppRequest = &sDescribeWebAppRequest
+var DescribeWebAppRequest_WebAppId = &sDescribeWebAppRequest_WebAppId
+
+var DescribeWebAppResponse = &sDescribeWebAppResponse
+var DescribeWebAppResponse_WebApp = &sDescribeWebAppResponse_WebApp
+
+var DescribeWorkflowRequest = &sDescribeWorkflowRequest
+var DescribeWorkflowRequest_WorkflowId = &sDescribeWorkflowRequest_WorkflowId
+
+var DescribeWorkflowResponse = &sDescribeWorkflowResponse
+var DescribeWorkflowResponse_Workflow = &sDescribeWorkflowResponse_Workflow
+
+var ImportCertificateRequest = &sImportCertificateRequest
+var ImportCertificateRequest_Usage = &sImportCertificateRequest_Usage
+var ImportCertificateRequest_Certificate = &sImportCertificateRequest_Certificate
+var ImportCertificateRequest_CertificateChain = &sImportCertificateRequest_CertificateChain
+var ImportCertificateRequest_PrivateKey = &sImportCertificateRequest_PrivateKey
+var ImportCertificateRequest_ActiveDate = &sImportCertificateRequest_ActiveDate
+var ImportCertificateRequest_InactiveDate = &sImportCertificateRequest_InactiveDate
+var ImportCertificateRequest_Description = &sImportCertificateRequest_Description
+var ImportCertificateRequest_Tags = &sImportCertificateRequest_Tags
+
+var ImportCertificateResponse = &sImportCertificateResponse
+var ImportCertificateResponse_CertificateId = &sImportCertificateResponse_CertificateId
+
+var ImportHostKeyRequest = &sImportHostKeyRequest
+var ImportHostKeyRequest_ServerId = &sImportHostKeyRequest_ServerId
+var ImportHostKeyRequest_HostKeyBody = &sImportHostKeyRequest_HostKeyBody
+var ImportHostKeyRequest_Description = &sImportHostKeyRequest_Description
+var ImportHostKeyRequest_Tags = &sImportHostKeyRequest_Tags
+var ImportHostKeyRequest_StorageType = &sImportHostKeyRequest_StorageType
+var ImportHostKeyRequest_KmsKey = &sImportHostKeyRequest_KmsKey
+
+var ImportHostKeyResponse = &sImportHostKeyResponse
+var ImportHostKeyResponse_ServerId = &sImportHostKeyResponse_ServerId
+var ImportHostKeyResponse_HostKeyId = &sImportHostKeyResponse_HostKeyId
+
+var ImportSshPublicKeyRequest = &sImportSshPublicKeyRequest
+var ImportSshPublicKeyRequest_ServerId = &sImportSshPublicKeyRequest_ServerId
+var ImportSshPublicKeyRequest_SshPublicKeyBody = &sImportSshPublicKeyRequest_SshPublicKeyBody
+var ImportSshPublicKeyRequest_UserName = &sImportSshPublicKeyRequest_UserName
+
+var ImportSshPublicKeyResponse = &sImportSshPublicKeyResponse
+var ImportSshPublicKeyResponse_ServerId = &sImportSshPublicKeyResponse_ServerId
+var ImportSshPublicKeyResponse_SshPublicKeyId = &sImportSshPublicKeyResponse_SshPublicKeyId
+var ImportSshPublicKeyResponse_UserName = &sImportSshPublicKeyResponse_UserName
+
+var ListAccessesRequest = &sListAccessesRequest
+var ListAccessesRequest_MaxResults = &sListAccessesRequest_MaxResults
+var ListAccessesRequest_NextToken = &sListAccessesRequest_NextToken
+var ListAccessesRequest_ServerId = &sListAccessesRequest_ServerId
+
+var ListAccessesResponse = &sListAccessesResponse
+var ListAccessesResponse_NextToken = &sListAccessesResponse_NextToken
+var ListAccessesResponse_ServerId = &sListAccessesResponse_ServerId
+var ListAccessesResponse_Accesses = &sListAccessesResponse_Accesses
+
+var ListAgreementsRequest = &sListAgreementsRequest
+var ListAgreementsRequest_MaxResults = &sListAgreementsRequest_MaxResults
+var ListAgreementsRequest_NextToken = &sListAgreementsRequest_NextToken
+var ListAgreementsRequest_ServerId = &sListAgreementsRequest_ServerId
+
+var ListAgreementsResponse = &sListAgreementsResponse
+var ListAgreementsResponse_NextToken = &sListAgreementsResponse_NextToken
+var ListAgreementsResponse_Agreements = &sListAgreementsResponse_Agreements
+
+var ListCertificatesRequest = &sListCertificatesRequest
+var ListCertificatesRequest_MaxResults = &sListCertificatesRequest_MaxResults
+var ListCertificatesRequest_NextToken = &sListCertificatesRequest_NextToken
+
+var ListCertificatesResponse = &sListCertificatesResponse
+var ListCertificatesResponse_NextToken = &sListCertificatesResponse_NextToken
+var ListCertificatesResponse_Certificates = &sListCertificatesResponse_Certificates
+
+var ListConnectorsRequest = &sListConnectorsRequest
+var ListConnectorsRequest_MaxResults = &sListConnectorsRequest_MaxResults
+var ListConnectorsRequest_NextToken = &sListConnectorsRequest_NextToken
+
+var ListConnectorsResponse = &sListConnectorsResponse
+var ListConnectorsResponse_NextToken = &sListConnectorsResponse_NextToken
+var ListConnectorsResponse_Connectors = &sListConnectorsResponse_Connectors
+
+var ListExecutionsRequest = &sListExecutionsRequest
+var ListExecutionsRequest_MaxResults = &sListExecutionsRequest_MaxResults
+var ListExecutionsRequest_NextToken = &sListExecutionsRequest_NextToken
+var ListExecutionsRequest_WorkflowId = &sListExecutionsRequest_WorkflowId
+
+var ListExecutionsResponse = &sListExecutionsResponse
+var ListExecutionsResponse_NextToken = &sListExecutionsResponse_NextToken
+var ListExecutionsResponse_WorkflowId = &sListExecutionsResponse_WorkflowId
+var ListExecutionsResponse_Executions = &sListExecutionsResponse_Executions
+
+var ListFileTransferResultsRequest = &sListFileTransferResultsRequest
+var ListFileTransferResultsRequest_ConnectorId = &sListFileTransferResultsRequest_ConnectorId
+var ListFileTransferResultsRequest_TransferId = &sListFileTransferResultsRequest_TransferId
+var ListFileTransferResultsRequest_NextToken = &sListFileTransferResultsRequest_NextToken
+var ListFileTransferResultsRequest_MaxResults = &sListFileTransferResultsRequest_MaxResults
+
+var ListFileTransferResultsResponse = &sListFileTransferResultsResponse
+var ListFileTransferResultsResponse_FileTransferResults = &sListFileTransferResultsResponse_FileTransferResults
+var ListFileTransferResultsResponse_NextToken = &sListFileTransferResultsResponse_NextToken
+
+var ListHostKeysRequest = &sListHostKeysRequest
+var ListHostKeysRequest_MaxResults = &sListHostKeysRequest_MaxResults
+var ListHostKeysRequest_NextToken = &sListHostKeysRequest_NextToken
+var ListHostKeysRequest_ServerId = &sListHostKeysRequest_ServerId
+
+var ListHostKeysResponse = &sListHostKeysResponse
+var ListHostKeysResponse_NextToken = &sListHostKeysResponse_NextToken
+var ListHostKeysResponse_ServerId = &sListHostKeysResponse_ServerId
+var ListHostKeysResponse_HostKeys = &sListHostKeysResponse_HostKeys
+
+var ListProfilesRequest = &sListProfilesRequest
+var ListProfilesRequest_MaxResults = &sListProfilesRequest_MaxResults
+var ListProfilesRequest_NextToken = &sListProfilesRequest_NextToken
+var ListProfilesRequest_ProfileType = &sListProfilesRequest_ProfileType
+
+var ListProfilesResponse = &sListProfilesResponse
+var ListProfilesResponse_NextToken = &sListProfilesResponse_NextToken
+var ListProfilesResponse_Profiles = &sListProfilesResponse_Profiles
+
+var ListSecurityPoliciesRequest = &sListSecurityPoliciesRequest
+var ListSecurityPoliciesRequest_MaxResults = &sListSecurityPoliciesRequest_MaxResults
+var ListSecurityPoliciesRequest_NextToken = &sListSecurityPoliciesRequest_NextToken
+
+var ListSecurityPoliciesResponse = &sListSecurityPoliciesResponse
+var ListSecurityPoliciesResponse_NextToken = &sListSecurityPoliciesResponse_NextToken
+var ListSecurityPoliciesResponse_SecurityPolicyNames = &sListSecurityPoliciesResponse_SecurityPolicyNames
+
+var ListServersRequest = &sListServersRequest
+var ListServersRequest_MaxResults = &sListServersRequest_MaxResults
+var ListServersRequest_NextToken = &sListServersRequest_NextToken
+
+var ListServersResponse = &sListServersResponse
+var ListServersResponse_NextToken = &sListServersResponse_NextToken
+var ListServersResponse_Servers = &sListServersResponse_Servers
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_Arn = &sListTagsForResourceRequest_Arn
+var ListTagsForResourceRequest_MaxResults = &sListTagsForResourceRequest_MaxResults
+var ListTagsForResourceRequest_NextToken = &sListTagsForResourceRequest_NextToken
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Arn = &sListTagsForResourceResponse_Arn
+var ListTagsForResourceResponse_NextToken = &sListTagsForResourceResponse_NextToken
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListUsersRequest = &sListUsersRequest
+var ListUsersRequest_MaxResults = &sListUsersRequest_MaxResults
+var ListUsersRequest_NextToken = &sListUsersRequest_NextToken
+var ListUsersRequest_ServerId = &sListUsersRequest_ServerId
+
+var ListUsersResponse = &sListUsersResponse
+var ListUsersResponse_NextToken = &sListUsersResponse_NextToken
+var ListUsersResponse_ServerId = &sListUsersResponse_ServerId
+var ListUsersResponse_Users = &sListUsersResponse_Users
+
+var ListWebAppsRequest = &sListWebAppsRequest
+var ListWebAppsRequest_MaxResults = &sListWebAppsRequest_MaxResults
+var ListWebAppsRequest_NextToken = &sListWebAppsRequest_NextToken
+
+var ListWebAppsResponse = &sListWebAppsResponse
+var ListWebAppsResponse_NextToken = &sListWebAppsResponse_NextToken
+var ListWebAppsResponse_WebApps = &sListWebAppsResponse_WebApps
+
+var ListWorkflowsRequest = &sListWorkflowsRequest
+var ListWorkflowsRequest_MaxResults = &sListWorkflowsRequest_MaxResults
+var ListWorkflowsRequest_NextToken = &sListWorkflowsRequest_NextToken
+
+var ListWorkflowsResponse = &sListWorkflowsResponse
+var ListWorkflowsResponse_NextToken = &sListWorkflowsResponse_NextToken
+var ListWorkflowsResponse_Workflows = &sListWorkflowsResponse_Workflows
+
+var SendWorkflowStepStateRequest = &sSendWorkflowStepStateRequest
+var SendWorkflowStepStateRequest_WorkflowId = &sSendWorkflowStepStateRequest_WorkflowId
+var SendWorkflowStepStateRequest_ExecutionId = &sSendWorkflowStepStateRequest_ExecutionId
+var SendWorkflowStepStateRequest_Token = &sSendWorkflowStepStateRequest_Token
+var SendWorkflowStepStateRequest_Status = &sSendWorkflowStepStateRequest_Status
+
+var SendWorkflowStepStateResponse = &sSendWorkflowStepStateResponse
+
+var StartDirectoryListingRequest = &sStartDirectoryListingRequest
+var StartDirectoryListingRequest_ConnectorId = &sStartDirectoryListingRequest_ConnectorId
+var StartDirectoryListingRequest_RemoteDirectoryPath = &sStartDirectoryListingRequest_RemoteDirectoryPath
+var StartDirectoryListingRequest_MaxItems = &sStartDirectoryListingRequest_MaxItems
+var StartDirectoryListingRequest_OutputDirectoryPath = &sStartDirectoryListingRequest_OutputDirectoryPath
+
+var StartDirectoryListingResponse = &sStartDirectoryListingResponse
+var StartDirectoryListingResponse_ListingId = &sStartDirectoryListingResponse_ListingId
+var StartDirectoryListingResponse_OutputFileName = &sStartDirectoryListingResponse_OutputFileName
+
+var StartFileTransferRequest = &sStartFileTransferRequest
+var StartFileTransferRequest_ConnectorId = &sStartFileTransferRequest_ConnectorId
+var StartFileTransferRequest_SendFilePaths = &sStartFileTransferRequest_SendFilePaths
+var StartFileTransferRequest_RetrieveFilePaths = &sStartFileTransferRequest_RetrieveFilePaths
+var StartFileTransferRequest_LocalDirectoryPath = &sStartFileTransferRequest_LocalDirectoryPath
+var StartFileTransferRequest_RemoteDirectoryPath = &sStartFileTransferRequest_RemoteDirectoryPath
+var StartFileTransferRequest_CustomHttpHeaders = &sStartFileTransferRequest_CustomHttpHeaders
+
+var StartFileTransferResponse = &sStartFileTransferResponse
+var StartFileTransferResponse_TransferId = &sStartFileTransferResponse_TransferId
+
+var StartRemoteDeleteRequest = &sStartRemoteDeleteRequest
+var StartRemoteDeleteRequest_ConnectorId = &sStartRemoteDeleteRequest_ConnectorId
+var StartRemoteDeleteRequest_DeletePath = &sStartRemoteDeleteRequest_DeletePath
+
+var StartRemoteDeleteResponse = &sStartRemoteDeleteResponse
+var StartRemoteDeleteResponse_DeleteId = &sStartRemoteDeleteResponse_DeleteId
+
+var StartRemoteMoveRequest = &sStartRemoteMoveRequest
+var StartRemoteMoveRequest_ConnectorId = &sStartRemoteMoveRequest_ConnectorId
+var StartRemoteMoveRequest_SourcePath = &sStartRemoteMoveRequest_SourcePath
+var StartRemoteMoveRequest_TargetPath = &sStartRemoteMoveRequest_TargetPath
+
+var StartRemoteMoveResponse = &sStartRemoteMoveResponse
+var StartRemoteMoveResponse_MoveId = &sStartRemoteMoveResponse_MoveId
+
+var StartServerRequest = &sStartServerRequest
+var StartServerRequest_ServerId = &sStartServerRequest_ServerId
+
+var StopServerRequest = &sStopServerRequest
+var StopServerRequest_ServerId = &sStopServerRequest_ServerId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_Arn = &sTagResourceRequest_Arn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TestConnectionRequest = &sTestConnectionRequest
+var TestConnectionRequest_ConnectorId = &sTestConnectionRequest_ConnectorId
+
+var TestConnectionResponse = &sTestConnectionResponse
+var TestConnectionResponse_ConnectorId = &sTestConnectionResponse_ConnectorId
+var TestConnectionResponse_Status = &sTestConnectionResponse_Status
+var TestConnectionResponse_StatusMessage = &sTestConnectionResponse_StatusMessage
+var TestConnectionResponse_SftpConnectionDetails = &sTestConnectionResponse_SftpConnectionDetails
+
+var TestIdentityProviderRequest = &sTestIdentityProviderRequest
+var TestIdentityProviderRequest_ServerId = &sTestIdentityProviderRequest_ServerId
+var TestIdentityProviderRequest_ServerProtocol = &sTestIdentityProviderRequest_ServerProtocol
+var TestIdentityProviderRequest_SourceIp = &sTestIdentityProviderRequest_SourceIp
+var TestIdentityProviderRequest_UserName = &sTestIdentityProviderRequest_UserName
+var TestIdentityProviderRequest_UserPassword = &sTestIdentityProviderRequest_UserPassword
+
+var TestIdentityProviderResponse = &sTestIdentityProviderResponse
+var TestIdentityProviderResponse_Response = &sTestIdentityProviderResponse_Response
+var TestIdentityProviderResponse_StatusCode = &sTestIdentityProviderResponse_StatusCode
+var TestIdentityProviderResponse_Message = &sTestIdentityProviderResponse_Message
+var TestIdentityProviderResponse_Url = &sTestIdentityProviderResponse_Url
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_Arn = &sUntagResourceRequest_Arn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateAccessRequest = &sUpdateAccessRequest
+var UpdateAccessRequest_HomeDirectory = &sUpdateAccessRequest_HomeDirectory
+var UpdateAccessRequest_HomeDirectoryType = &sUpdateAccessRequest_HomeDirectoryType
+var UpdateAccessRequest_HomeDirectoryMappings = &sUpdateAccessRequest_HomeDirectoryMappings
+var UpdateAccessRequest_Policy = &sUpdateAccessRequest_Policy
+var UpdateAccessRequest_PosixProfile = &sUpdateAccessRequest_PosixProfile
+var UpdateAccessRequest_Role = &sUpdateAccessRequest_Role
+var UpdateAccessRequest_ServerId = &sUpdateAccessRequest_ServerId
+var UpdateAccessRequest_ExternalId = &sUpdateAccessRequest_ExternalId
+
+var UpdateAccessResponse = &sUpdateAccessResponse
+var UpdateAccessResponse_ServerId = &sUpdateAccessResponse_ServerId
+var UpdateAccessResponse_ExternalId = &sUpdateAccessResponse_ExternalId
+
+var UpdateAgreementRequest = &sUpdateAgreementRequest
+var UpdateAgreementRequest_AgreementId = &sUpdateAgreementRequest_AgreementId
+var UpdateAgreementRequest_ServerId = &sUpdateAgreementRequest_ServerId
+var UpdateAgreementRequest_Description = &sUpdateAgreementRequest_Description
+var UpdateAgreementRequest_Status = &sUpdateAgreementRequest_Status
+var UpdateAgreementRequest_LocalProfileId = &sUpdateAgreementRequest_LocalProfileId
+var UpdateAgreementRequest_PartnerProfileId = &sUpdateAgreementRequest_PartnerProfileId
+var UpdateAgreementRequest_BaseDirectory = &sUpdateAgreementRequest_BaseDirectory
+var UpdateAgreementRequest_AccessRole = &sUpdateAgreementRequest_AccessRole
+var UpdateAgreementRequest_PreserveFilename = &sUpdateAgreementRequest_PreserveFilename
+var UpdateAgreementRequest_EnforceMessageSigning = &sUpdateAgreementRequest_EnforceMessageSigning
+var UpdateAgreementRequest_CustomDirectories = &sUpdateAgreementRequest_CustomDirectories
+
+var UpdateAgreementResponse = &sUpdateAgreementResponse
+var UpdateAgreementResponse_AgreementId = &sUpdateAgreementResponse_AgreementId
+
+var UpdateCertificateRequest = &sUpdateCertificateRequest
+var UpdateCertificateRequest_CertificateId = &sUpdateCertificateRequest_CertificateId
+var UpdateCertificateRequest_ActiveDate = &sUpdateCertificateRequest_ActiveDate
+var UpdateCertificateRequest_InactiveDate = &sUpdateCertificateRequest_InactiveDate
+var UpdateCertificateRequest_Description = &sUpdateCertificateRequest_Description
+
+var UpdateCertificateResponse = &sUpdateCertificateResponse
+var UpdateCertificateResponse_CertificateId = &sUpdateCertificateResponse_CertificateId
+
+var UpdateConnectorRequest = &sUpdateConnectorRequest
+var UpdateConnectorRequest_ConnectorId = &sUpdateConnectorRequest_ConnectorId
+var UpdateConnectorRequest_Url = &sUpdateConnectorRequest_Url
+var UpdateConnectorRequest_As2Config = &sUpdateConnectorRequest_As2Config
+var UpdateConnectorRequest_AccessRole = &sUpdateConnectorRequest_AccessRole
+var UpdateConnectorRequest_LoggingRole = &sUpdateConnectorRequest_LoggingRole
+var UpdateConnectorRequest_SftpConfig = &sUpdateConnectorRequest_SftpConfig
+var UpdateConnectorRequest_SecurityPolicyName = &sUpdateConnectorRequest_SecurityPolicyName
+var UpdateConnectorRequest_EgressConfig = &sUpdateConnectorRequest_EgressConfig
+var UpdateConnectorRequest_IpAddressType = &sUpdateConnectorRequest_IpAddressType
+
+var UpdateConnectorResponse = &sUpdateConnectorResponse
+var UpdateConnectorResponse_ConnectorId = &sUpdateConnectorResponse_ConnectorId
+
+var UpdateHostKeyRequest = &sUpdateHostKeyRequest
+var UpdateHostKeyRequest_ServerId = &sUpdateHostKeyRequest_ServerId
+var UpdateHostKeyRequest_HostKeyId = &sUpdateHostKeyRequest_HostKeyId
+var UpdateHostKeyRequest_Description = &sUpdateHostKeyRequest_Description
+var UpdateHostKeyRequest_StorageType = &sUpdateHostKeyRequest_StorageType
+var UpdateHostKeyRequest_KmsKey = &sUpdateHostKeyRequest_KmsKey
+
+var UpdateHostKeyResponse = &sUpdateHostKeyResponse
+var UpdateHostKeyResponse_ServerId = &sUpdateHostKeyResponse_ServerId
+var UpdateHostKeyResponse_HostKeyId = &sUpdateHostKeyResponse_HostKeyId
+
+var UpdateProfileRequest = &sUpdateProfileRequest
+var UpdateProfileRequest_ProfileId = &sUpdateProfileRequest_ProfileId
+var UpdateProfileRequest_CertificateIds = &sUpdateProfileRequest_CertificateIds
+
+var UpdateProfileResponse = &sUpdateProfileResponse
+var UpdateProfileResponse_ProfileId = &sUpdateProfileResponse_ProfileId
+
+var UpdateServerRequest = &sUpdateServerRequest
+var UpdateServerRequest_Certificate = &sUpdateServerRequest_Certificate
+var UpdateServerRequest_ProtocolDetails = &sUpdateServerRequest_ProtocolDetails
+var UpdateServerRequest_EndpointDetails = &sUpdateServerRequest_EndpointDetails
+var UpdateServerRequest_EndpointType = &sUpdateServerRequest_EndpointType
+var UpdateServerRequest_HostKey = &sUpdateServerRequest_HostKey
+var UpdateServerRequest_IdentityProviderDetails = &sUpdateServerRequest_IdentityProviderDetails
+var UpdateServerRequest_LoggingRole = &sUpdateServerRequest_LoggingRole
+var UpdateServerRequest_PostAuthenticationLoginBanner = &sUpdateServerRequest_PostAuthenticationLoginBanner
+var UpdateServerRequest_PreAuthenticationLoginBanner = &sUpdateServerRequest_PreAuthenticationLoginBanner
+var UpdateServerRequest_Protocols = &sUpdateServerRequest_Protocols
+var UpdateServerRequest_SecurityPolicyName = &sUpdateServerRequest_SecurityPolicyName
+var UpdateServerRequest_ServerId = &sUpdateServerRequest_ServerId
+var UpdateServerRequest_WorkflowDetails = &sUpdateServerRequest_WorkflowDetails
+var UpdateServerRequest_StructuredLogDestinations = &sUpdateServerRequest_StructuredLogDestinations
+var UpdateServerRequest_S3StorageOptions = &sUpdateServerRequest_S3StorageOptions
+var UpdateServerRequest_IpAddressType = &sUpdateServerRequest_IpAddressType
+var UpdateServerRequest_IdentityProviderType = &sUpdateServerRequest_IdentityProviderType
+
+var UpdateServerResponse = &sUpdateServerResponse
+var UpdateServerResponse_ServerId = &sUpdateServerResponse_ServerId
+
+var UpdateUserRequest = &sUpdateUserRequest
+var UpdateUserRequest_HomeDirectory = &sUpdateUserRequest_HomeDirectory
+var UpdateUserRequest_HomeDirectoryType = &sUpdateUserRequest_HomeDirectoryType
+var UpdateUserRequest_HomeDirectoryMappings = &sUpdateUserRequest_HomeDirectoryMappings
+var UpdateUserRequest_Policy = &sUpdateUserRequest_Policy
+var UpdateUserRequest_PosixProfile = &sUpdateUserRequest_PosixProfile
+var UpdateUserRequest_Role = &sUpdateUserRequest_Role
+var UpdateUserRequest_ServerId = &sUpdateUserRequest_ServerId
+var UpdateUserRequest_UserName = &sUpdateUserRequest_UserName
+
+var UpdateUserResponse = &sUpdateUserResponse
+var UpdateUserResponse_ServerId = &sUpdateUserResponse_ServerId
+var UpdateUserResponse_UserName = &sUpdateUserResponse_UserName
+
+var UpdateWebAppCustomizationRequest = &sUpdateWebAppCustomizationRequest
+var UpdateWebAppCustomizationRequest_WebAppId = &sUpdateWebAppCustomizationRequest_WebAppId
+var UpdateWebAppCustomizationRequest_Title = &sUpdateWebAppCustomizationRequest_Title
+var UpdateWebAppCustomizationRequest_LogoFile = &sUpdateWebAppCustomizationRequest_LogoFile
+var UpdateWebAppCustomizationRequest_FaviconFile = &sUpdateWebAppCustomizationRequest_FaviconFile
+
+var UpdateWebAppCustomizationResponse = &sUpdateWebAppCustomizationResponse
+var UpdateWebAppCustomizationResponse_WebAppId = &sUpdateWebAppCustomizationResponse_WebAppId
+
+var UpdateWebAppRequest = &sUpdateWebAppRequest
+var UpdateWebAppRequest_WebAppId = &sUpdateWebAppRequest_WebAppId
+var UpdateWebAppRequest_IdentityProviderDetails = &sUpdateWebAppRequest_IdentityProviderDetails
+var UpdateWebAppRequest_AccessEndpoint = &sUpdateWebAppRequest_AccessEndpoint
+var UpdateWebAppRequest_WebAppUnits = &sUpdateWebAppRequest_WebAppUnits
+var UpdateWebAppRequest_EndpointDetails = &sUpdateWebAppRequest_EndpointDetails
+
+var UpdateWebAppResponse = &sUpdateWebAppResponse
+var UpdateWebAppResponse_WebAppId = &sUpdateWebAppResponse_WebAppId
+
+var TransferService = &smithy.ServiceSchema{Schema: &s_TransferService, Version: "2018-11-05"}

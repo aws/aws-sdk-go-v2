@@ -4,1187 +4,886 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateCreatedArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateCreatedArtifact",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateDiscoveredResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateDiscoveredResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateSourceResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateSourceResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateProgressUpdateStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "CreateProgressUpdateStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteProgressUpdateStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DeleteProgressUpdateStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeApplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DescribeApplicationState",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeMigrationTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DescribeMigrationTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateCreatedArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateCreatedArtifact",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateDiscoveredResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateDiscoveredResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateSourceResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateSourceResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ImportMigrationTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ImportMigrationTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListApplicationStates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListApplicationStates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListCreatedArtifacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListCreatedArtifacts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDiscoveredResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListDiscoveredResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMigrationTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListMigrationTasks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMigrationTaskUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListMigrationTaskUpdates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListProgressUpdateStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListProgressUpdateStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSourceResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListSourceResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var NotifyApplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "NotifyApplicationState",
-}, smithy.ShapeTypeOperation, 0)
-
-var NotifyMigrationTaskState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "NotifyMigrationTaskState",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "PutResourceAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSMigrationHub = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AWSMigrationHub",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMigrationHub = smithy.NewServiceSchema(_AWSMigrationHub, "2017-05-31")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var AccessDeniedException_Message *smithy.Schema
-
-var _ApplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ApplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ApplicationIds",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationIds_member *smithy.Schema
-
-var ApplicationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ApplicationState",
-}, smithy.ShapeTypeStructure, 3)
-var ApplicationState_ApplicationId *smithy.Schema
-
-var ApplicationState_ApplicationStatus *smithy.Schema
-
-var ApplicationState_LastUpdatedTime *smithy.Schema
-
-var _ApplicationStateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ApplicationStateList",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationStateList_member *smithy.Schema
-
-var ApplicationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ApplicationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ApplicationStatus_NOT_STARTED *smithy.Schema
-
-var ApplicationStatus_IN_PROGRESS *smithy.Schema
-
-var ApplicationStatus_COMPLETED *smithy.Schema
-
-var _ConfigurationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ConfigurationId",
-}, smithy.ShapeTypeString, 0)
-
-var CreatedArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "CreatedArtifact",
-}, smithy.ShapeTypeStructure, 2)
-var CreatedArtifact_Name *smithy.Schema
-
-var CreatedArtifact_Description *smithy.Schema
-
-var _CreatedArtifactDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "CreatedArtifactDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _CreatedArtifactList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "CreatedArtifactList",
-}, smithy.ShapeTypeList, 1)
-var _CreatedArtifactList_member *smithy.Schema
-
-var _CreatedArtifactName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "CreatedArtifactName",
-}, smithy.ShapeTypeString, 0)
-
-var DiscoveredResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DiscoveredResource",
-}, smithy.ShapeTypeStructure, 2)
-var DiscoveredResource_ConfigurationId *smithy.Schema
-
-var DiscoveredResource_Description *smithy.Schema
-
-var _DiscoveredResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DiscoveredResourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _DiscoveredResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DiscoveredResourceList",
-}, smithy.ShapeTypeList, 1)
-var _DiscoveredResourceList_member *smithy.Schema
-
-var _DryRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DryRun",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DryRunOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DryRunOperation",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DryRunOperation_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var HomeRegionNotSetException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "HomeRegionNotSetException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var HomeRegionNotSetException_Message *smithy.Schema
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerError_Message *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidInputException_Message *smithy.Schema
-
-var _LatestResourceAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "LatestResourceAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _LatestResourceAttributeList_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsCreatedArtifacts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MaxResultsCreatedArtifacts",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MaxResultsResources",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsSourceResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MaxResultsSourceResources",
-}, smithy.ShapeTypeInteger, 0)
-
-var MigrationTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MigrationTask",
-}, smithy.ShapeTypeStructure, 5)
-var MigrationTask_ProgressUpdateStream *smithy.Schema
-
-var MigrationTask_MigrationTaskName *smithy.Schema
-
-var MigrationTask_Task *smithy.Schema
-
-var MigrationTask_UpdateDateTime *smithy.Schema
-
-var MigrationTask_ResourceAttributeList *smithy.Schema
-
-var _MigrationTaskName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MigrationTaskName",
-}, smithy.ShapeTypeString, 0)
-
-var MigrationTaskSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MigrationTaskSummary",
-}, smithy.ShapeTypeStructure, 6)
-var MigrationTaskSummary_ProgressUpdateStream *smithy.Schema
-
-var MigrationTaskSummary_MigrationTaskName *smithy.Schema
-
-var MigrationTaskSummary_Status *smithy.Schema
-
-var MigrationTaskSummary_ProgressPercent *smithy.Schema
-
-var MigrationTaskSummary_StatusDetail *smithy.Schema
-
-var MigrationTaskSummary_UpdateDateTime *smithy.Schema
-
-var _MigrationTaskSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MigrationTaskSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MigrationTaskSummaryList_member *smithy.Schema
-
-var MigrationTaskUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MigrationTaskUpdate",
-}, smithy.ShapeTypeStructure, 3)
-var MigrationTaskUpdate_UpdateDateTime *smithy.Schema
-
-var MigrationTaskUpdate_UpdateType *smithy.Schema
-
-var MigrationTaskUpdate_MigrationTaskState *smithy.Schema
-
-var _MigrationTaskUpdateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "MigrationTaskUpdateList",
-}, smithy.ShapeTypeList, 1)
-var _MigrationTaskUpdateList_member *smithy.Schema
-
-var _NextUpdateSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "NextUpdateSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var PolicyErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "PolicyErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var PolicyErrorException_Message *smithy.Schema
-
-var _ProgressPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ProgressPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProgressUpdateStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ProgressUpdateStream",
-}, smithy.ShapeTypeString, 0)
-
-var ProgressUpdateStreamSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ProgressUpdateStreamSummary",
-}, smithy.ShapeTypeStructure, 1)
-var ProgressUpdateStreamSummary_ProgressUpdateStreamName *smithy.Schema
-
-var _ProgressUpdateStreamSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ProgressUpdateStreamSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ProgressUpdateStreamSummaryList_member *smithy.Schema
-
-var ResourceAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ResourceAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceAttribute_Type *smithy.Schema
-
-var ResourceAttribute_Value *smithy.Schema
-
-var _ResourceAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ResourceAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceAttributeList_member *smithy.Schema
-
-var ResourceAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ResourceAttributeType",
-}, smithy.ShapeTypeEnum, 10)
-var ResourceAttributeType_IPV4_ADDRESS *smithy.Schema
-
-var ResourceAttributeType_IPV6_ADDRESS *smithy.Schema
-
-var ResourceAttributeType_MAC_ADDRESS *smithy.Schema
-
-var ResourceAttributeType_FQDN *smithy.Schema
-
-var ResourceAttributeType_VM_MANAGER_ID *smithy.Schema
-
-var ResourceAttributeType_VM_MANAGED_OBJECT_REFERENCE *smithy.Schema
-
-var ResourceAttributeType_VM_NAME *smithy.Schema
-
-var ResourceAttributeType_VM_PATH *smithy.Schema
-
-var ResourceAttributeType_BIOS_ID *smithy.Schema
-
-var ResourceAttributeType_MOTHERBOARD_SERIAL_NUMBER *smithy.Schema
-
-var _ResourceAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ResourceAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var SourceResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "SourceResource",
-}, smithy.ShapeTypeStructure, 3)
-var SourceResource_Name *smithy.Schema
-
-var SourceResource_Description *smithy.Schema
-
-var SourceResource_StatusDetail *smithy.Schema
-
-var _SourceResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "SourceResourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "SourceResourceList",
-}, smithy.ShapeTypeList, 1)
-var _SourceResourceList_member *smithy.Schema
-
-var _SourceResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "SourceResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 4)
-var Status_NOT_STARTED *smithy.Schema
-
-var Status_IN_PROGRESS *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var Status_COMPLETED *smithy.Schema
-
-var _StatusDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "StatusDetail",
-}, smithy.ShapeTypeString, 0)
-
-var Task = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "Task",
-}, smithy.ShapeTypeStructure, 3)
-var Task_Status *smithy.Schema
-
-var Task_StatusDetail *smithy.Schema
-
-var Task_ProgressPercent *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_RetryAfterSeconds *smithy.Schema
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var UnauthorizedOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "UnauthorizedOperation",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var UnauthorizedOperation_Message *smithy.Schema
-
-var _UpdateDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "UpdateDateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "UpdateType",
-}, smithy.ShapeTypeEnum, 1)
-var UpdateType_MigrationTaskStateUpdated *smithy.Schema
-
-var AssociateCreatedArtifactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateCreatedArtifactRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateCreatedArtifactRequest_ProgressUpdateStream *smithy.Schema
-
-var AssociateCreatedArtifactRequest_MigrationTaskName *smithy.Schema
-
-var AssociateCreatedArtifactRequest_CreatedArtifact *smithy.Schema
-
-var AssociateCreatedArtifactRequest_DryRun *smithy.Schema
-
-var AssociateCreatedArtifactResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateCreatedArtifactResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateDiscoveredResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateDiscoveredResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateDiscoveredResourceRequest_ProgressUpdateStream *smithy.Schema
-
-var AssociateDiscoveredResourceRequest_MigrationTaskName *smithy.Schema
-
-var AssociateDiscoveredResourceRequest_DiscoveredResource *smithy.Schema
-
-var AssociateDiscoveredResourceRequest_DryRun *smithy.Schema
-
-var AssociateDiscoveredResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateDiscoveredResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateSourceResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateSourceResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateSourceResourceRequest_ProgressUpdateStream *smithy.Schema
-
-var AssociateSourceResourceRequest_MigrationTaskName *smithy.Schema
-
-var AssociateSourceResourceRequest_SourceResource *smithy.Schema
-
-var AssociateSourceResourceRequest_DryRun *smithy.Schema
-
-var AssociateSourceResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "AssociateSourceResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateProgressUpdateStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "CreateProgressUpdateStreamRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateProgressUpdateStreamRequest_ProgressUpdateStreamName *smithy.Schema
-
-var CreateProgressUpdateStreamRequest_DryRun *smithy.Schema
-
-var CreateProgressUpdateStreamResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "CreateProgressUpdateStreamResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteProgressUpdateStreamRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DeleteProgressUpdateStreamRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProgressUpdateStreamRequest_ProgressUpdateStreamName *smithy.Schema
-
-var DeleteProgressUpdateStreamRequest_DryRun *smithy.Schema
-
-var DeleteProgressUpdateStreamResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DeleteProgressUpdateStreamResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeApplicationStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DescribeApplicationStateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeApplicationStateRequest_ApplicationId *smithy.Schema
-
-var DescribeApplicationStateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DescribeApplicationStateResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeApplicationStateResult_ApplicationStatus *smithy.Schema
-
-var DescribeApplicationStateResult_LastUpdatedTime *smithy.Schema
-
-var DescribeMigrationTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DescribeMigrationTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeMigrationTaskRequest_ProgressUpdateStream *smithy.Schema
-
-var DescribeMigrationTaskRequest_MigrationTaskName *smithy.Schema
-
-var DescribeMigrationTaskResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DescribeMigrationTaskResult",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeMigrationTaskResult_MigrationTask *smithy.Schema
-
-var DisassociateCreatedArtifactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateCreatedArtifactRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateCreatedArtifactRequest_ProgressUpdateStream *smithy.Schema
-
-var DisassociateCreatedArtifactRequest_MigrationTaskName *smithy.Schema
-
-var DisassociateCreatedArtifactRequest_CreatedArtifactName *smithy.Schema
-
-var DisassociateCreatedArtifactRequest_DryRun *smithy.Schema
-
-var DisassociateCreatedArtifactResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateCreatedArtifactResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateDiscoveredResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateDiscoveredResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateDiscoveredResourceRequest_ProgressUpdateStream *smithy.Schema
-
-var DisassociateDiscoveredResourceRequest_MigrationTaskName *smithy.Schema
-
-var DisassociateDiscoveredResourceRequest_ConfigurationId *smithy.Schema
-
-var DisassociateDiscoveredResourceRequest_DryRun *smithy.Schema
-
-var DisassociateDiscoveredResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateDiscoveredResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateSourceResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateSourceResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateSourceResourceRequest_ProgressUpdateStream *smithy.Schema
-
-var DisassociateSourceResourceRequest_MigrationTaskName *smithy.Schema
-
-var DisassociateSourceResourceRequest_SourceResourceName *smithy.Schema
-
-var DisassociateSourceResourceRequest_DryRun *smithy.Schema
-
-var DisassociateSourceResourceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "DisassociateSourceResourceResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var ImportMigrationTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ImportMigrationTaskRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ImportMigrationTaskRequest_ProgressUpdateStream *smithy.Schema
-
-var ImportMigrationTaskRequest_MigrationTaskName *smithy.Schema
-
-var ImportMigrationTaskRequest_DryRun *smithy.Schema
-
-var ImportMigrationTaskResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ImportMigrationTaskResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var ListApplicationStatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListApplicationStatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListApplicationStatesRequest_ApplicationIds *smithy.Schema
-
-var ListApplicationStatesRequest_NextToken *smithy.Schema
-
-var ListApplicationStatesRequest_MaxResults *smithy.Schema
-
-var ListApplicationStatesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListApplicationStatesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationStatesResult_ApplicationStateList *smithy.Schema
-
-var ListApplicationStatesResult_NextToken *smithy.Schema
-
-var ListCreatedArtifactsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListCreatedArtifactsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCreatedArtifactsRequest_ProgressUpdateStream *smithy.Schema
-
-var ListCreatedArtifactsRequest_MigrationTaskName *smithy.Schema
-
-var ListCreatedArtifactsRequest_NextToken *smithy.Schema
-
-var ListCreatedArtifactsRequest_MaxResults *smithy.Schema
-
-var ListCreatedArtifactsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListCreatedArtifactsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListCreatedArtifactsResult_NextToken *smithy.Schema
-
-var ListCreatedArtifactsResult_CreatedArtifactList *smithy.Schema
-
-var ListDiscoveredResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListDiscoveredResourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDiscoveredResourcesRequest_ProgressUpdateStream *smithy.Schema
-
-var ListDiscoveredResourcesRequest_MigrationTaskName *smithy.Schema
-
-var ListDiscoveredResourcesRequest_NextToken *smithy.Schema
-
-var ListDiscoveredResourcesRequest_MaxResults *smithy.Schema
-
-var ListDiscoveredResourcesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListDiscoveredResourcesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListDiscoveredResourcesResult_NextToken *smithy.Schema
-
-var ListDiscoveredResourcesResult_DiscoveredResourceList *smithy.Schema
-
-var ListMigrationTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListMigrationTasksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMigrationTasksRequest_NextToken *smithy.Schema
-
-var ListMigrationTasksRequest_MaxResults *smithy.Schema
-
-var ListMigrationTasksRequest_ResourceName *smithy.Schema
-
-var ListMigrationTasksResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListMigrationTasksResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListMigrationTasksResult_NextToken *smithy.Schema
-
-var ListMigrationTasksResult_MigrationTaskSummaryList *smithy.Schema
-
-var ListMigrationTaskUpdatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListMigrationTaskUpdatesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMigrationTaskUpdatesRequest_ProgressUpdateStream *smithy.Schema
-
-var ListMigrationTaskUpdatesRequest_MigrationTaskName *smithy.Schema
-
-var ListMigrationTaskUpdatesRequest_NextToken *smithy.Schema
-
-var ListMigrationTaskUpdatesRequest_MaxResults *smithy.Schema
-
-var ListMigrationTaskUpdatesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListMigrationTaskUpdatesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListMigrationTaskUpdatesResult_NextToken *smithy.Schema
-
-var ListMigrationTaskUpdatesResult_MigrationTaskUpdateList *smithy.Schema
-
-var ListProgressUpdateStreamsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListProgressUpdateStreamsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListProgressUpdateStreamsRequest_NextToken *smithy.Schema
-
-var ListProgressUpdateStreamsRequest_MaxResults *smithy.Schema
-
-var ListProgressUpdateStreamsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListProgressUpdateStreamsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList *smithy.Schema
-
-var ListProgressUpdateStreamsResult_NextToken *smithy.Schema
-
-var ListSourceResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListSourceResourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSourceResourcesRequest_ProgressUpdateStream *smithy.Schema
-
-var ListSourceResourcesRequest_MigrationTaskName *smithy.Schema
-
-var ListSourceResourcesRequest_NextToken *smithy.Schema
-
-var ListSourceResourcesRequest_MaxResults *smithy.Schema
-
-var ListSourceResourcesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "ListSourceResourcesResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListSourceResourcesResult_NextToken *smithy.Schema
-
-var ListSourceResourcesResult_SourceResourceList *smithy.Schema
-
-var NotifyApplicationStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "NotifyApplicationStateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var NotifyApplicationStateRequest_ApplicationId *smithy.Schema
-
-var NotifyApplicationStateRequest_Status *smithy.Schema
-
-var NotifyApplicationStateRequest_UpdateDateTime *smithy.Schema
-
-var NotifyApplicationStateRequest_DryRun *smithy.Schema
-
-var NotifyApplicationStateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "NotifyApplicationStateResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var NotifyMigrationTaskStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "NotifyMigrationTaskStateRequest",
-}, smithy.ShapeTypeStructure, 6)
-var NotifyMigrationTaskStateRequest_ProgressUpdateStream *smithy.Schema
-
-var NotifyMigrationTaskStateRequest_MigrationTaskName *smithy.Schema
-
-var NotifyMigrationTaskStateRequest_Task *smithy.Schema
-
-var NotifyMigrationTaskStateRequest_UpdateDateTime *smithy.Schema
-
-var NotifyMigrationTaskStateRequest_NextUpdateSeconds *smithy.Schema
-
-var NotifyMigrationTaskStateRequest_DryRun *smithy.Schema
-
-var NotifyMigrationTaskStateResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "NotifyMigrationTaskStateResult",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutResourceAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "PutResourceAttributesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutResourceAttributesRequest_ProgressUpdateStream *smithy.Schema
-
-var PutResourceAttributesRequest_MigrationTaskName *smithy.Schema
-
-var PutResourceAttributesRequest_ResourceAttributeList *smithy.Schema
-
-var PutResourceAttributesRequest_DryRun *smithy.Schema
-
-var PutResourceAttributesResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhub",
-	Name:      "PutResourceAttributesResult",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	_ApplicationIds_member = _ApplicationIds.AddMember("member", _ApplicationId)
-
-	ApplicationStatus_NOT_STARTED = ApplicationStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	ApplicationStatus_IN_PROGRESS = ApplicationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ApplicationStatus_COMPLETED = ApplicationStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ApplicationState_ApplicationId = ApplicationState.AddMember("ApplicationId", _ApplicationId)
-
-	ApplicationState_ApplicationStatus = ApplicationState.AddMember("ApplicationStatus", ApplicationStatus)
-
-	ApplicationState_LastUpdatedTime = ApplicationState.AddMember("LastUpdatedTime", _UpdateDateTime)
-
-	_ApplicationStateList_member = _ApplicationStateList.AddMember("member", ApplicationState)
-
-	CreatedArtifact_Name = CreatedArtifact.AddMember("Name", _CreatedArtifactName)
-
-	CreatedArtifact_Description = CreatedArtifact.AddMember("Description", _CreatedArtifactDescription)
-
-	_CreatedArtifactList_member = _CreatedArtifactList.AddMember("member", CreatedArtifact)
-
-	DiscoveredResource_ConfigurationId = DiscoveredResource.AddMember("ConfigurationId", _ConfigurationId)
-
-	DiscoveredResource_Description = DiscoveredResource.AddMember("Description", _DiscoveredResourceDescription)
-
-	_DiscoveredResourceList_member = _DiscoveredResourceList.AddMember("member", DiscoveredResource)
-
-	DryRunOperation_Message = DryRunOperation.AddMember("Message", _ErrorMessage)
-
-	HomeRegionNotSetException_Message = HomeRegionNotSetException.AddMember("Message", _ErrorMessage)
-
-	InternalServerError_Message = InternalServerError.AddMember("Message", _ErrorMessage)
-
-	InvalidInputException_Message = InvalidInputException.AddMember("Message", _ErrorMessage)
-
-	ResourceAttributeType_IPV4_ADDRESS = ResourceAttributeType.AddMember("IPV4_ADDRESS", smithyprelude.Unit)
-
-	ResourceAttributeType_IPV6_ADDRESS = ResourceAttributeType.AddMember("IPV6_ADDRESS", smithyprelude.Unit)
-
-	ResourceAttributeType_MAC_ADDRESS = ResourceAttributeType.AddMember("MAC_ADDRESS", smithyprelude.Unit)
-
-	ResourceAttributeType_FQDN = ResourceAttributeType.AddMember("FQDN", smithyprelude.Unit)
-
-	ResourceAttributeType_VM_MANAGER_ID = ResourceAttributeType.AddMember("VM_MANAGER_ID", smithyprelude.Unit)
-
-	ResourceAttributeType_VM_MANAGED_OBJECT_REFERENCE = ResourceAttributeType.AddMember("VM_MANAGED_OBJECT_REFERENCE", smithyprelude.Unit)
-
-	ResourceAttributeType_VM_NAME = ResourceAttributeType.AddMember("VM_NAME", smithyprelude.Unit)
-
-	ResourceAttributeType_VM_PATH = ResourceAttributeType.AddMember("VM_PATH", smithyprelude.Unit)
-
-	ResourceAttributeType_BIOS_ID = ResourceAttributeType.AddMember("BIOS_ID", smithyprelude.Unit)
-
-	ResourceAttributeType_MOTHERBOARD_SERIAL_NUMBER = ResourceAttributeType.AddMember("MOTHERBOARD_SERIAL_NUMBER", smithyprelude.Unit)
-
-	ResourceAttribute_Type = ResourceAttribute.AddMember("Type", ResourceAttributeType)
-
-	ResourceAttribute_Value = ResourceAttribute.AddMember("Value", _ResourceAttributeValue)
-
-	_LatestResourceAttributeList_member = _LatestResourceAttributeList.AddMember("member", ResourceAttribute)
-
-	Status_NOT_STARTED = Status.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	Status_IN_PROGRESS = Status.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	Status_COMPLETED = Status.AddMember("COMPLETED", smithyprelude.Unit)
-
-	Task_Status = Task.AddMember("Status", Status)
-
-	Task_StatusDetail = Task.AddMember("StatusDetail", _StatusDetail)
-
-	Task_ProgressPercent = Task.AddMember("ProgressPercent", _ProgressPercent)
-
-	MigrationTask_ProgressUpdateStream = MigrationTask.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	MigrationTask_MigrationTaskName = MigrationTask.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	MigrationTask_Task = MigrationTask.AddMember("Task", Task)
-
-	MigrationTask_UpdateDateTime = MigrationTask.AddMember("UpdateDateTime", _UpdateDateTime)
-
-	MigrationTask_ResourceAttributeList = MigrationTask.AddMember("ResourceAttributeList", _LatestResourceAttributeList)
-
-	MigrationTaskSummary_ProgressUpdateStream = MigrationTaskSummary.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	MigrationTaskSummary_MigrationTaskName = MigrationTaskSummary.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	MigrationTaskSummary_Status = MigrationTaskSummary.AddMember("Status", Status)
-
-	MigrationTaskSummary_ProgressPercent = MigrationTaskSummary.AddMember("ProgressPercent", _ProgressPercent)
-
-	MigrationTaskSummary_StatusDetail = MigrationTaskSummary.AddMember("StatusDetail", _StatusDetail)
-
-	MigrationTaskSummary_UpdateDateTime = MigrationTaskSummary.AddMember("UpdateDateTime", _UpdateDateTime)
-
-	_MigrationTaskSummaryList_member = _MigrationTaskSummaryList.AddMember("member", MigrationTaskSummary)
-
-	UpdateType_MigrationTaskStateUpdated = UpdateType.AddMember("MigrationTaskStateUpdated", smithyprelude.Unit)
-
-	MigrationTaskUpdate_UpdateDateTime = MigrationTaskUpdate.AddMember("UpdateDateTime", _UpdateDateTime)
-
-	MigrationTaskUpdate_UpdateType = MigrationTaskUpdate.AddMember("UpdateType", UpdateType)
-
-	MigrationTaskUpdate_MigrationTaskState = MigrationTaskUpdate.AddMember("MigrationTaskState", Task)
-
-	_MigrationTaskUpdateList_member = _MigrationTaskUpdateList.AddMember("member", MigrationTaskUpdate)
-
-	PolicyErrorException_Message = PolicyErrorException.AddMember("Message", _ErrorMessage)
-
-	ProgressUpdateStreamSummary_ProgressUpdateStreamName = ProgressUpdateStreamSummary.AddMember("ProgressUpdateStreamName", _ProgressUpdateStream)
-
-	_ProgressUpdateStreamSummaryList_member = _ProgressUpdateStreamSummaryList.AddMember("member", ProgressUpdateStreamSummary)
-
-	_ResourceAttributeList_member = _ResourceAttributeList.AddMember("member", ResourceAttribute)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _ErrorMessage)
-
-	SourceResource_Name = SourceResource.AddMember("Name", _SourceResourceName)
-
-	SourceResource_Description = SourceResource.AddMember("Description", _SourceResourceDescription)
-
-	SourceResource_StatusDetail = SourceResource.AddMember("StatusDetail", _StatusDetail)
-
-	_SourceResourceList_member = _SourceResourceList.AddMember("member", SourceResource)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	ThrottlingException_RetryAfterSeconds = ThrottlingException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	UnauthorizedOperation_Message = UnauthorizedOperation.AddMember("Message", _ErrorMessage)
-
-	AssociateCreatedArtifactRequest_ProgressUpdateStream = AssociateCreatedArtifactRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	AssociateCreatedArtifactRequest_MigrationTaskName = AssociateCreatedArtifactRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	AssociateCreatedArtifactRequest_CreatedArtifact = AssociateCreatedArtifactRequest.AddMember("CreatedArtifact", CreatedArtifact)
-
-	AssociateCreatedArtifactRequest_DryRun = AssociateCreatedArtifactRequest.AddMember("DryRun", _DryRun)
-
-	AssociateDiscoveredResourceRequest_ProgressUpdateStream = AssociateDiscoveredResourceRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	AssociateDiscoveredResourceRequest_MigrationTaskName = AssociateDiscoveredResourceRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	AssociateDiscoveredResourceRequest_DiscoveredResource = AssociateDiscoveredResourceRequest.AddMember("DiscoveredResource", DiscoveredResource)
-
-	AssociateDiscoveredResourceRequest_DryRun = AssociateDiscoveredResourceRequest.AddMember("DryRun", _DryRun)
-
-	AssociateSourceResourceRequest_ProgressUpdateStream = AssociateSourceResourceRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	AssociateSourceResourceRequest_MigrationTaskName = AssociateSourceResourceRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	AssociateSourceResourceRequest_SourceResource = AssociateSourceResourceRequest.AddMember("SourceResource", SourceResource)
-
-	AssociateSourceResourceRequest_DryRun = AssociateSourceResourceRequest.AddMember("DryRun", _DryRun)
-
-	CreateProgressUpdateStreamRequest_ProgressUpdateStreamName = CreateProgressUpdateStreamRequest.AddMember("ProgressUpdateStreamName", _ProgressUpdateStream)
-
-	CreateProgressUpdateStreamRequest_DryRun = CreateProgressUpdateStreamRequest.AddMember("DryRun", _DryRun)
-
-	DeleteProgressUpdateStreamRequest_ProgressUpdateStreamName = DeleteProgressUpdateStreamRequest.AddMember("ProgressUpdateStreamName", _ProgressUpdateStream)
-
-	DeleteProgressUpdateStreamRequest_DryRun = DeleteProgressUpdateStreamRequest.AddMember("DryRun", _DryRun)
-
-	DescribeApplicationStateRequest_ApplicationId = DescribeApplicationStateRequest.AddMember("ApplicationId", _ApplicationId)
-
-	DescribeApplicationStateResult_ApplicationStatus = DescribeApplicationStateResult.AddMember("ApplicationStatus", ApplicationStatus)
-
-	DescribeApplicationStateResult_LastUpdatedTime = DescribeApplicationStateResult.AddMember("LastUpdatedTime", _UpdateDateTime)
-
-	DescribeMigrationTaskRequest_ProgressUpdateStream = DescribeMigrationTaskRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	DescribeMigrationTaskRequest_MigrationTaskName = DescribeMigrationTaskRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	DescribeMigrationTaskResult_MigrationTask = DescribeMigrationTaskResult.AddMember("MigrationTask", MigrationTask)
-
-	DisassociateCreatedArtifactRequest_ProgressUpdateStream = DisassociateCreatedArtifactRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	DisassociateCreatedArtifactRequest_MigrationTaskName = DisassociateCreatedArtifactRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	DisassociateCreatedArtifactRequest_CreatedArtifactName = DisassociateCreatedArtifactRequest.AddMember("CreatedArtifactName", _CreatedArtifactName)
-
-	DisassociateCreatedArtifactRequest_DryRun = DisassociateCreatedArtifactRequest.AddMember("DryRun", _DryRun)
-
-	DisassociateDiscoveredResourceRequest_ProgressUpdateStream = DisassociateDiscoveredResourceRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	DisassociateDiscoveredResourceRequest_MigrationTaskName = DisassociateDiscoveredResourceRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	DisassociateDiscoveredResourceRequest_ConfigurationId = DisassociateDiscoveredResourceRequest.AddMember("ConfigurationId", _ConfigurationId)
-
-	DisassociateDiscoveredResourceRequest_DryRun = DisassociateDiscoveredResourceRequest.AddMember("DryRun", _DryRun)
-
-	DisassociateSourceResourceRequest_ProgressUpdateStream = DisassociateSourceResourceRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	DisassociateSourceResourceRequest_MigrationTaskName = DisassociateSourceResourceRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	DisassociateSourceResourceRequest_SourceResourceName = DisassociateSourceResourceRequest.AddMember("SourceResourceName", _SourceResourceName)
-
-	DisassociateSourceResourceRequest_DryRun = DisassociateSourceResourceRequest.AddMember("DryRun", _DryRun)
-
-	ImportMigrationTaskRequest_ProgressUpdateStream = ImportMigrationTaskRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	ImportMigrationTaskRequest_MigrationTaskName = ImportMigrationTaskRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	ImportMigrationTaskRequest_DryRun = ImportMigrationTaskRequest.AddMember("DryRun", _DryRun)
-
-	ListApplicationStatesRequest_ApplicationIds = ListApplicationStatesRequest.AddMember("ApplicationIds", _ApplicationIds)
-
-	ListApplicationStatesRequest_NextToken = ListApplicationStatesRequest.AddMember("NextToken", _Token)
-
-	ListApplicationStatesRequest_MaxResults = ListApplicationStatesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListApplicationStatesResult_ApplicationStateList = ListApplicationStatesResult.AddMember("ApplicationStateList", _ApplicationStateList)
-
-	ListApplicationStatesResult_NextToken = ListApplicationStatesResult.AddMember("NextToken", _Token)
-
-	ListCreatedArtifactsRequest_ProgressUpdateStream = ListCreatedArtifactsRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	ListCreatedArtifactsRequest_MigrationTaskName = ListCreatedArtifactsRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	ListCreatedArtifactsRequest_NextToken = ListCreatedArtifactsRequest.AddMember("NextToken", _Token)
-
-	ListCreatedArtifactsRequest_MaxResults = ListCreatedArtifactsRequest.AddMember("MaxResults", _MaxResultsCreatedArtifacts)
-
-	ListCreatedArtifactsResult_NextToken = ListCreatedArtifactsResult.AddMember("NextToken", _Token)
-
-	ListCreatedArtifactsResult_CreatedArtifactList = ListCreatedArtifactsResult.AddMember("CreatedArtifactList", _CreatedArtifactList)
-
-	ListDiscoveredResourcesRequest_ProgressUpdateStream = ListDiscoveredResourcesRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	ListDiscoveredResourcesRequest_MigrationTaskName = ListDiscoveredResourcesRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	ListDiscoveredResourcesRequest_NextToken = ListDiscoveredResourcesRequest.AddMember("NextToken", _Token)
-
-	ListDiscoveredResourcesRequest_MaxResults = ListDiscoveredResourcesRequest.AddMember("MaxResults", _MaxResultsResources)
-
-	ListDiscoveredResourcesResult_NextToken = ListDiscoveredResourcesResult.AddMember("NextToken", _Token)
-
-	ListDiscoveredResourcesResult_DiscoveredResourceList = ListDiscoveredResourcesResult.AddMember("DiscoveredResourceList", _DiscoveredResourceList)
-
-	ListMigrationTasksRequest_NextToken = ListMigrationTasksRequest.AddMember("NextToken", _Token)
-
-	ListMigrationTasksRequest_MaxResults = ListMigrationTasksRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMigrationTasksRequest_ResourceName = ListMigrationTasksRequest.AddMember("ResourceName", _ResourceName)
-
-	ListMigrationTasksResult_NextToken = ListMigrationTasksResult.AddMember("NextToken", _Token)
-
-	ListMigrationTasksResult_MigrationTaskSummaryList = ListMigrationTasksResult.AddMember("MigrationTaskSummaryList", _MigrationTaskSummaryList)
-
-	ListMigrationTaskUpdatesRequest_ProgressUpdateStream = ListMigrationTaskUpdatesRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	ListMigrationTaskUpdatesRequest_MigrationTaskName = ListMigrationTaskUpdatesRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	ListMigrationTaskUpdatesRequest_NextToken = ListMigrationTaskUpdatesRequest.AddMember("NextToken", _Token)
-
-	ListMigrationTaskUpdatesRequest_MaxResults = ListMigrationTaskUpdatesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMigrationTaskUpdatesResult_NextToken = ListMigrationTaskUpdatesResult.AddMember("NextToken", _Token)
-
-	ListMigrationTaskUpdatesResult_MigrationTaskUpdateList = ListMigrationTaskUpdatesResult.AddMember("MigrationTaskUpdateList", _MigrationTaskUpdateList)
-
-	ListProgressUpdateStreamsRequest_NextToken = ListProgressUpdateStreamsRequest.AddMember("NextToken", _Token)
-
-	ListProgressUpdateStreamsRequest_MaxResults = ListProgressUpdateStreamsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList = ListProgressUpdateStreamsResult.AddMember("ProgressUpdateStreamSummaryList", _ProgressUpdateStreamSummaryList)
-
-	ListProgressUpdateStreamsResult_NextToken = ListProgressUpdateStreamsResult.AddMember("NextToken", _Token)
-
-	ListSourceResourcesRequest_ProgressUpdateStream = ListSourceResourcesRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	ListSourceResourcesRequest_MigrationTaskName = ListSourceResourcesRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	ListSourceResourcesRequest_NextToken = ListSourceResourcesRequest.AddMember("NextToken", _Token)
-
-	ListSourceResourcesRequest_MaxResults = ListSourceResourcesRequest.AddMember("MaxResults", _MaxResultsSourceResources)
-
-	ListSourceResourcesResult_NextToken = ListSourceResourcesResult.AddMember("NextToken", _Token)
-
-	ListSourceResourcesResult_SourceResourceList = ListSourceResourcesResult.AddMember("SourceResourceList", _SourceResourceList)
-
-	NotifyApplicationStateRequest_ApplicationId = NotifyApplicationStateRequest.AddMember("ApplicationId", _ApplicationId)
-
-	NotifyApplicationStateRequest_Status = NotifyApplicationStateRequest.AddMember("Status", ApplicationStatus)
-
-	NotifyApplicationStateRequest_UpdateDateTime = NotifyApplicationStateRequest.AddMember("UpdateDateTime", _UpdateDateTime)
-
-	NotifyApplicationStateRequest_DryRun = NotifyApplicationStateRequest.AddMember("DryRun", _DryRun)
-
-	NotifyMigrationTaskStateRequest_ProgressUpdateStream = NotifyMigrationTaskStateRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	NotifyMigrationTaskStateRequest_MigrationTaskName = NotifyMigrationTaskStateRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	NotifyMigrationTaskStateRequest_Task = NotifyMigrationTaskStateRequest.AddMember("Task", Task)
-
-	NotifyMigrationTaskStateRequest_UpdateDateTime = NotifyMigrationTaskStateRequest.AddMember("UpdateDateTime", _UpdateDateTime)
-
-	NotifyMigrationTaskStateRequest_NextUpdateSeconds = NotifyMigrationTaskStateRequest.AddMember("NextUpdateSeconds", _NextUpdateSeconds)
-
-	NotifyMigrationTaskStateRequest_DryRun = NotifyMigrationTaskStateRequest.AddMember("DryRun", _DryRun)
-
-	PutResourceAttributesRequest_ProgressUpdateStream = PutResourceAttributesRequest.AddMember("ProgressUpdateStream", _ProgressUpdateStream)
-
-	PutResourceAttributesRequest_MigrationTaskName = PutResourceAttributesRequest.AddMember("MigrationTaskName", _MigrationTaskName)
-
-	PutResourceAttributesRequest_ResourceAttributeList = PutResourceAttributesRequest.AddMember("ResourceAttributeList", _ResourceAttributeList)
-
-	PutResourceAttributesRequest_DryRun = PutResourceAttributesRequest.AddMember("DryRun", _DryRun)
-
-}
+var (
+	iAssociateCreatedArtifact              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateCreatedArtifact"}
+	iAssociateDiscoveredResource           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateDiscoveredResource"}
+	iAssociateSourceResource               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateSourceResource"}
+	iCreateProgressUpdateStream            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "CreateProgressUpdateStream"}
+	iDeleteProgressUpdateStream            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DeleteProgressUpdateStream"}
+	iDescribeApplicationState              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DescribeApplicationState"}
+	iDescribeMigrationTask                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DescribeMigrationTask"}
+	iDisassociateCreatedArtifact           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateCreatedArtifact"}
+	iDisassociateDiscoveredResource        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateDiscoveredResource"}
+	iDisassociateSourceResource            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateSourceResource"}
+	iImportMigrationTask                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ImportMigrationTask"}
+	iListApplicationStates                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListApplicationStates"}
+	iListCreatedArtifacts                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListCreatedArtifacts"}
+	iListDiscoveredResources               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListDiscoveredResources"}
+	iListMigrationTasks                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListMigrationTasks"}
+	iListMigrationTaskUpdates              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListMigrationTaskUpdates"}
+	iListProgressUpdateStreams             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListProgressUpdateStreams"}
+	iListSourceResources                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListSourceResources"}
+	iNotifyApplicationState                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "NotifyApplicationState"}
+	iNotifyMigrationTaskState              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "NotifyMigrationTaskState"}
+	iPutResourceAttributes                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "PutResourceAttributes"}
+	i_AWSMigrationHub                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AWSMigrationHub"}
+	iAccessDeniedException                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AccessDeniedException"}
+	i_ApplicationId                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ApplicationId"}
+	i_ApplicationIds                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ApplicationIds"}
+	iApplicationState                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ApplicationState"}
+	i_ApplicationStateList                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ApplicationStateList"}
+	iApplicationStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ApplicationStatus"}
+	i_ConfigurationId                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ConfigurationId"}
+	iCreatedArtifact                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "CreatedArtifact"}
+	i_CreatedArtifactDescription           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "CreatedArtifactDescription"}
+	i_CreatedArtifactList                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "CreatedArtifactList"}
+	i_CreatedArtifactName                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "CreatedArtifactName"}
+	iDiscoveredResource                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DiscoveredResource"}
+	i_DiscoveredResourceDescription        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DiscoveredResourceDescription"}
+	i_DiscoveredResourceList               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DiscoveredResourceList"}
+	i_DryRun                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DryRun"}
+	iDryRunOperation                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DryRunOperation"}
+	i_ErrorMessage                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ErrorMessage"}
+	iHomeRegionNotSetException             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "HomeRegionNotSetException"}
+	iInternalServerError                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "InternalServerError"}
+	iInvalidInputException                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "InvalidInputException"}
+	i_LatestResourceAttributeList          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "LatestResourceAttributeList"}
+	i_MaxResults                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MaxResults"}
+	i_MaxResultsCreatedArtifacts           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MaxResultsCreatedArtifacts"}
+	i_MaxResultsResources                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MaxResultsResources"}
+	i_MaxResultsSourceResources            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MaxResultsSourceResources"}
+	iMigrationTask                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MigrationTask"}
+	i_MigrationTaskName                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MigrationTaskName"}
+	iMigrationTaskSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MigrationTaskSummary"}
+	i_MigrationTaskSummaryList             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MigrationTaskSummaryList"}
+	iMigrationTaskUpdate                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MigrationTaskUpdate"}
+	i_MigrationTaskUpdateList              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "MigrationTaskUpdateList"}
+	i_NextUpdateSeconds                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "NextUpdateSeconds"}
+	iPolicyErrorException                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "PolicyErrorException"}
+	i_ProgressPercent                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ProgressPercent"}
+	i_ProgressUpdateStream                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ProgressUpdateStream"}
+	iProgressUpdateStreamSummary           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ProgressUpdateStreamSummary"}
+	i_ProgressUpdateStreamSummaryList      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ProgressUpdateStreamSummaryList"}
+	iResourceAttribute                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ResourceAttribute"}
+	i_ResourceAttributeList                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ResourceAttributeList"}
+	iResourceAttributeType                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ResourceAttributeType"}
+	i_ResourceAttributeValue               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ResourceAttributeValue"}
+	i_ResourceName                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ResourceName"}
+	iResourceNotFoundException             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ResourceNotFoundException"}
+	i_RetryAfterSeconds                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "RetryAfterSeconds"}
+	iServiceUnavailableException           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ServiceUnavailableException"}
+	iSourceResource                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "SourceResource"}
+	i_SourceResourceDescription            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "SourceResourceDescription"}
+	i_SourceResourceList                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "SourceResourceList"}
+	i_SourceResourceName                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "SourceResourceName"}
+	iStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "Status"}
+	i_StatusDetail                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "StatusDetail"}
+	iTask                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "Task"}
+	iThrottlingException                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ThrottlingException"}
+	i_Token                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "Token"}
+	iUnauthorizedOperation                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "UnauthorizedOperation"}
+	i_UpdateDateTime                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "UpdateDateTime"}
+	iUpdateType                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "UpdateType"}
+	iAssociateCreatedArtifactRequest       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateCreatedArtifactRequest"}
+	iAssociateCreatedArtifactResult        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateCreatedArtifactResult"}
+	iAssociateDiscoveredResourceRequest    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateDiscoveredResourceRequest"}
+	iAssociateDiscoveredResourceResult     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateDiscoveredResourceResult"}
+	iAssociateSourceResourceRequest        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateSourceResourceRequest"}
+	iAssociateSourceResourceResult         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "AssociateSourceResourceResult"}
+	iCreateProgressUpdateStreamRequest     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "CreateProgressUpdateStreamRequest"}
+	iCreateProgressUpdateStreamResult      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "CreateProgressUpdateStreamResult"}
+	iDeleteProgressUpdateStreamRequest     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DeleteProgressUpdateStreamRequest"}
+	iDeleteProgressUpdateStreamResult      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DeleteProgressUpdateStreamResult"}
+	iDescribeApplicationStateRequest       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DescribeApplicationStateRequest"}
+	iDescribeApplicationStateResult        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DescribeApplicationStateResult"}
+	iDescribeMigrationTaskRequest          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DescribeMigrationTaskRequest"}
+	iDescribeMigrationTaskResult           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DescribeMigrationTaskResult"}
+	iDisassociateCreatedArtifactRequest    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateCreatedArtifactRequest"}
+	iDisassociateCreatedArtifactResult     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateCreatedArtifactResult"}
+	iDisassociateDiscoveredResourceRequest = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateDiscoveredResourceRequest"}
+	iDisassociateDiscoveredResourceResult  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateDiscoveredResourceResult"}
+	iDisassociateSourceResourceRequest     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateSourceResourceRequest"}
+	iDisassociateSourceResourceResult      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "DisassociateSourceResourceResult"}
+	iImportMigrationTaskRequest            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ImportMigrationTaskRequest"}
+	iImportMigrationTaskResult             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ImportMigrationTaskResult"}
+	iListApplicationStatesRequest          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListApplicationStatesRequest"}
+	iListApplicationStatesResult           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListApplicationStatesResult"}
+	iListCreatedArtifactsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListCreatedArtifactsRequest"}
+	iListCreatedArtifactsResult            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListCreatedArtifactsResult"}
+	iListDiscoveredResourcesRequest        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListDiscoveredResourcesRequest"}
+	iListDiscoveredResourcesResult         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListDiscoveredResourcesResult"}
+	iListMigrationTasksRequest             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListMigrationTasksRequest"}
+	iListMigrationTasksResult              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListMigrationTasksResult"}
+	iListMigrationTaskUpdatesRequest       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListMigrationTaskUpdatesRequest"}
+	iListMigrationTaskUpdatesResult        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListMigrationTaskUpdatesResult"}
+	iListProgressUpdateStreamsRequest      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListProgressUpdateStreamsRequest"}
+	iListProgressUpdateStreamsResult       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListProgressUpdateStreamsResult"}
+	iListSourceResourcesRequest            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListSourceResourcesRequest"}
+	iListSourceResourcesResult             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "ListSourceResourcesResult"}
+	iNotifyApplicationStateRequest         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "NotifyApplicationStateRequest"}
+	iNotifyApplicationStateResult          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "NotifyApplicationStateResult"}
+	iNotifyMigrationTaskStateRequest       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "NotifyMigrationTaskStateRequest"}
+	iNotifyMigrationTaskStateResult        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "NotifyMigrationTaskStateResult"}
+	iPutResourceAttributesRequest          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "PutResourceAttributesRequest"}
+	iPutResourceAttributesResult           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhub", Name: "PutResourceAttributesResult"}
+	pUnit                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var m_ApplicationIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationIds_member}}
+var mApplicationState = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationState_ApplicationId, &sApplicationState_ApplicationStatus, &sApplicationState_LastUpdatedTime}}
+var m_ApplicationStateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationStateList_member}}
+var mApplicationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationStatus_NOT_STARTED, &sApplicationStatus_IN_PROGRESS, &sApplicationStatus_COMPLETED}}
+var mCreatedArtifact = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatedArtifact_Name, &sCreatedArtifact_Description}}
+var m_CreatedArtifactList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreatedArtifactList_member}}
+var mDiscoveredResource = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscoveredResource_ConfigurationId, &sDiscoveredResource_Description}}
+var m_DiscoveredResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DiscoveredResourceList_member}}
+var mDryRunOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sDryRunOperation_Message}}
+var mHomeRegionNotSetException = smithy.SchemaMembers{List: []*smithy.Schema{&sHomeRegionNotSetException_Message}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_Message}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_Message}}
+var m_LatestResourceAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LatestResourceAttributeList_member}}
+var mMigrationTask = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationTask_ProgressUpdateStream, &sMigrationTask_MigrationTaskName, &sMigrationTask_Task, &sMigrationTask_UpdateDateTime, &sMigrationTask_ResourceAttributeList}}
+var mMigrationTaskSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationTaskSummary_ProgressUpdateStream, &sMigrationTaskSummary_MigrationTaskName, &sMigrationTaskSummary_Status, &sMigrationTaskSummary_ProgressPercent, &sMigrationTaskSummary_StatusDetail, &sMigrationTaskSummary_UpdateDateTime}}
+var m_MigrationTaskSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MigrationTaskSummaryList_member}}
+var mMigrationTaskUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sMigrationTaskUpdate_UpdateDateTime, &sMigrationTaskUpdate_UpdateType, &sMigrationTaskUpdate_MigrationTaskState}}
+var m_MigrationTaskUpdateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MigrationTaskUpdateList_member}}
+var mPolicyErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyErrorException_Message}}
+var mProgressUpdateStreamSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sProgressUpdateStreamSummary_ProgressUpdateStreamName}}
+var m_ProgressUpdateStreamSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProgressUpdateStreamSummaryList_member}}
+var mResourceAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAttribute_Type, &sResourceAttribute_Value}}
+var m_ResourceAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceAttributeList_member}}
+var mResourceAttributeType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAttributeType_IPV4_ADDRESS, &sResourceAttributeType_IPV6_ADDRESS, &sResourceAttributeType_MAC_ADDRESS, &sResourceAttributeType_FQDN, &sResourceAttributeType_VM_MANAGER_ID, &sResourceAttributeType_VM_MANAGED_OBJECT_REFERENCE, &sResourceAttributeType_VM_NAME, &sResourceAttributeType_VM_PATH, &sResourceAttributeType_BIOS_ID, &sResourceAttributeType_MOTHERBOARD_SERIAL_NUMBER}, Seed: 4, Slots: []uint16{
+	1, 0, 0, 4, 3, 7, 0, 2, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0,
+	0, 8, 0, 0, 0, 9, 10, 0,
+}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Message}}
+var mSourceResource = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceResource_Name, &sSourceResource_Description, &sSourceResource_StatusDetail}}
+var m_SourceResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceResourceList_member}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_NOT_STARTED, &sStatus_IN_PROGRESS, &sStatus_FAILED, &sStatus_COMPLETED}}
+var mTask = smithy.SchemaMembers{List: []*smithy.Schema{&sTask_Status, &sTask_StatusDetail, &sTask_ProgressPercent}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message, &sThrottlingException_RetryAfterSeconds}}
+var mUnauthorizedOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedOperation_Message}}
+var mUpdateType = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateType_MigrationTaskStateUpdated}}
+var mAssociateCreatedArtifactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateCreatedArtifactRequest_ProgressUpdateStream, &sAssociateCreatedArtifactRequest_MigrationTaskName, &sAssociateCreatedArtifactRequest_CreatedArtifact, &sAssociateCreatedArtifactRequest_DryRun}}
+var mAssociateDiscoveredResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateDiscoveredResourceRequest_ProgressUpdateStream, &sAssociateDiscoveredResourceRequest_MigrationTaskName, &sAssociateDiscoveredResourceRequest_DiscoveredResource, &sAssociateDiscoveredResourceRequest_DryRun}}
+var mAssociateSourceResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSourceResourceRequest_ProgressUpdateStream, &sAssociateSourceResourceRequest_MigrationTaskName, &sAssociateSourceResourceRequest_SourceResource, &sAssociateSourceResourceRequest_DryRun}}
+var mCreateProgressUpdateStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProgressUpdateStreamRequest_ProgressUpdateStreamName, &sCreateProgressUpdateStreamRequest_DryRun}}
+var mDeleteProgressUpdateStreamRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProgressUpdateStreamRequest_ProgressUpdateStreamName, &sDeleteProgressUpdateStreamRequest_DryRun}}
+var mDescribeApplicationStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationStateRequest_ApplicationId}}
+var mDescribeApplicationStateResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeApplicationStateResult_ApplicationStatus, &sDescribeApplicationStateResult_LastUpdatedTime}}
+var mDescribeMigrationTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMigrationTaskRequest_ProgressUpdateStream, &sDescribeMigrationTaskRequest_MigrationTaskName}}
+var mDescribeMigrationTaskResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMigrationTaskResult_MigrationTask}}
+var mDisassociateCreatedArtifactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateCreatedArtifactRequest_ProgressUpdateStream, &sDisassociateCreatedArtifactRequest_MigrationTaskName, &sDisassociateCreatedArtifactRequest_CreatedArtifactName, &sDisassociateCreatedArtifactRequest_DryRun}}
+var mDisassociateDiscoveredResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateDiscoveredResourceRequest_ProgressUpdateStream, &sDisassociateDiscoveredResourceRequest_MigrationTaskName, &sDisassociateDiscoveredResourceRequest_ConfigurationId, &sDisassociateDiscoveredResourceRequest_DryRun}}
+var mDisassociateSourceResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateSourceResourceRequest_ProgressUpdateStream, &sDisassociateSourceResourceRequest_MigrationTaskName, &sDisassociateSourceResourceRequest_SourceResourceName, &sDisassociateSourceResourceRequest_DryRun}}
+var mImportMigrationTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportMigrationTaskRequest_ProgressUpdateStream, &sImportMigrationTaskRequest_MigrationTaskName, &sImportMigrationTaskRequest_DryRun}}
+var mListApplicationStatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationStatesRequest_ApplicationIds, &sListApplicationStatesRequest_NextToken, &sListApplicationStatesRequest_MaxResults}}
+var mListApplicationStatesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationStatesResult_ApplicationStateList, &sListApplicationStatesResult_NextToken}}
+var mListCreatedArtifactsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCreatedArtifactsRequest_ProgressUpdateStream, &sListCreatedArtifactsRequest_MigrationTaskName, &sListCreatedArtifactsRequest_NextToken, &sListCreatedArtifactsRequest_MaxResults}}
+var mListCreatedArtifactsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListCreatedArtifactsResult_NextToken, &sListCreatedArtifactsResult_CreatedArtifactList}}
+var mListDiscoveredResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoveredResourcesRequest_ProgressUpdateStream, &sListDiscoveredResourcesRequest_MigrationTaskName, &sListDiscoveredResourcesRequest_NextToken, &sListDiscoveredResourcesRequest_MaxResults}}
+var mListDiscoveredResourcesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoveredResourcesResult_NextToken, &sListDiscoveredResourcesResult_DiscoveredResourceList}}
+var mListMigrationTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMigrationTasksRequest_NextToken, &sListMigrationTasksRequest_MaxResults, &sListMigrationTasksRequest_ResourceName}}
+var mListMigrationTasksResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListMigrationTasksResult_NextToken, &sListMigrationTasksResult_MigrationTaskSummaryList}}
+var mListMigrationTaskUpdatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMigrationTaskUpdatesRequest_ProgressUpdateStream, &sListMigrationTaskUpdatesRequest_MigrationTaskName, &sListMigrationTaskUpdatesRequest_NextToken, &sListMigrationTaskUpdatesRequest_MaxResults}}
+var mListMigrationTaskUpdatesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListMigrationTaskUpdatesResult_NextToken, &sListMigrationTaskUpdatesResult_MigrationTaskUpdateList}}
+var mListProgressUpdateStreamsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProgressUpdateStreamsRequest_NextToken, &sListProgressUpdateStreamsRequest_MaxResults}}
+var mListProgressUpdateStreamsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList, &sListProgressUpdateStreamsResult_NextToken}}
+var mListSourceResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceResourcesRequest_ProgressUpdateStream, &sListSourceResourcesRequest_MigrationTaskName, &sListSourceResourcesRequest_NextToken, &sListSourceResourcesRequest_MaxResults}}
+var mListSourceResourcesResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListSourceResourcesResult_NextToken, &sListSourceResourcesResult_SourceResourceList}}
+var mNotifyApplicationStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyApplicationStateRequest_ApplicationId, &sNotifyApplicationStateRequest_Status, &sNotifyApplicationStateRequest_UpdateDateTime, &sNotifyApplicationStateRequest_DryRun}}
+var mNotifyMigrationTaskStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyMigrationTaskStateRequest_ProgressUpdateStream, &sNotifyMigrationTaskStateRequest_MigrationTaskName, &sNotifyMigrationTaskStateRequest_Task, &sNotifyMigrationTaskStateRequest_UpdateDateTime, &sNotifyMigrationTaskStateRequest_NextUpdateSeconds, &sNotifyMigrationTaskStateRequest_DryRun}}
+var mPutResourceAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourceAttributesRequest_ProgressUpdateStream, &sPutResourceAttributesRequest_MigrationTaskName, &sPutResourceAttributesRequest_ResourceAttributeList, &sPutResourceAttributesRequest_DryRun}}
+
+var sAssociateCreatedArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCreatedArtifact, Type: smithy.ShapeTypeOperation})
+var sAssociateDiscoveredResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDiscoveredResource, Type: smithy.ShapeTypeOperation})
+var sAssociateSourceResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceResource, Type: smithy.ShapeTypeOperation})
+var sCreateProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgressUpdateStream, Type: smithy.ShapeTypeOperation})
+var sDeleteProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgressUpdateStream, Type: smithy.ShapeTypeOperation})
+var sDescribeApplicationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationState, Type: smithy.ShapeTypeOperation})
+var sDescribeMigrationTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMigrationTask, Type: smithy.ShapeTypeOperation})
+var sDisassociateCreatedArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCreatedArtifact, Type: smithy.ShapeTypeOperation})
+var sDisassociateDiscoveredResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDiscoveredResource, Type: smithy.ShapeTypeOperation})
+var sDisassociateSourceResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSourceResource, Type: smithy.ShapeTypeOperation})
+var sImportMigrationTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportMigrationTask, Type: smithy.ShapeTypeOperation})
+var sListApplicationStates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationStates, Type: smithy.ShapeTypeOperation})
+var sListCreatedArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCreatedArtifacts, Type: smithy.ShapeTypeOperation})
+var sListDiscoveredResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoveredResources, Type: smithy.ShapeTypeOperation})
+var sListMigrationTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationTasks, Type: smithy.ShapeTypeOperation})
+var sListMigrationTaskUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationTaskUpdates, Type: smithy.ShapeTypeOperation})
+var sListProgressUpdateStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgressUpdateStreams, Type: smithy.ShapeTypeOperation})
+var sListSourceResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceResources, Type: smithy.ShapeTypeOperation})
+var sNotifyApplicationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyApplicationState, Type: smithy.ShapeTypeOperation})
+var sNotifyMigrationTaskState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyMigrationTaskState, Type: smithy.ShapeTypeOperation})
+var sPutResourceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourceAttributes, Type: smithy.ShapeTypeOperation})
+var s_AWSMigrationHub = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMigrationHub, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var s_ApplicationIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationIds, Members: &m_ApplicationIds, Type: smithy.ShapeTypeList})
+var sApplicationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationState, Members: &mApplicationState, Type: smithy.ShapeTypeStructure})
+var s_ApplicationStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationStateList, Members: &m_ApplicationStateList, Type: smithy.ShapeTypeList})
+var sApplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum})
+var s_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationId, Type: smithy.ShapeTypeString})
+var sCreatedArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatedArtifact, Members: &mCreatedArtifact, Type: smithy.ShapeTypeStructure})
+var s_CreatedArtifactDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedArtifactDescription, Type: smithy.ShapeTypeString})
+var s_CreatedArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedArtifactList, Members: &m_CreatedArtifactList, Type: smithy.ShapeTypeList})
+var s_CreatedArtifactName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedArtifactName, Type: smithy.ShapeTypeString})
+var sDiscoveredResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscoveredResource, Members: &mDiscoveredResource, Type: smithy.ShapeTypeStructure})
+var s_DiscoveredResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoveredResourceDescription, Type: smithy.ShapeTypeString})
+var s_DiscoveredResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DiscoveredResourceList, Members: &m_DiscoveredResourceList, Type: smithy.ShapeTypeList})
+var s_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sDryRunOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunOperation, Members: &mDryRunOperation, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHomeRegionNotSetException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHomeRegionNotSetException, Members: &mHomeRegionNotSetException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_LatestResourceAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LatestResourceAttributeList, Members: &m_LatestResourceAttributeList, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MaxResultsCreatedArtifacts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsCreatedArtifacts, Type: smithy.ShapeTypeInteger})
+var s_MaxResultsResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsResources, Type: smithy.ShapeTypeInteger})
+var s_MaxResultsSourceResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsSourceResources, Type: smithy.ShapeTypeInteger})
+var sMigrationTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationTask, Members: &mMigrationTask, Type: smithy.ShapeTypeStructure})
+var s_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sMigrationTaskSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationTaskSummary, Members: &mMigrationTaskSummary, Type: smithy.ShapeTypeStructure})
+var s_MigrationTaskSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationTaskSummaryList, Members: &m_MigrationTaskSummaryList, Type: smithy.ShapeTypeList})
+var sMigrationTaskUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMigrationTaskUpdate, Members: &mMigrationTaskUpdate, Type: smithy.ShapeTypeStructure})
+var s_MigrationTaskUpdateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MigrationTaskUpdateList, Members: &m_MigrationTaskUpdateList, Type: smithy.ShapeTypeList})
+var s_NextUpdateSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextUpdateSeconds, Type: smithy.ShapeTypeInteger})
+var sPolicyErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyErrorException, Members: &mPolicyErrorException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_ProgressPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgressPercent, Type: smithy.ShapeTypeInteger})
+var s_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sProgressUpdateStreamSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgressUpdateStreamSummary, Members: &mProgressUpdateStreamSummary, Type: smithy.ShapeTypeStructure})
+var s_ProgressUpdateStreamSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgressUpdateStreamSummaryList, Members: &m_ProgressUpdateStreamSummaryList, Type: smithy.ShapeTypeList})
+var sResourceAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAttribute, Members: &mResourceAttribute, Type: smithy.ShapeTypeStructure})
+var s_ResourceAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceAttributeList, Members: &m_ResourceAttributeList, Type: smithy.ShapeTypeList})
+var sResourceAttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAttributeType, Members: &mResourceAttributeType, Type: smithy.ShapeTypeEnum})
+var s_ResourceAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceAttributeValue, Type: smithy.ShapeTypeString})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSourceResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceResource, Members: &mSourceResource, Type: smithy.ShapeTypeStructure})
+var s_SourceResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceResourceDescription, Type: smithy.ShapeTypeString})
+var s_SourceResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceResourceList, Members: &m_SourceResourceList, Type: smithy.ShapeTypeList})
+var s_SourceResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceResourceName, Type: smithy.ShapeTypeString})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var s_StatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusDetail, Type: smithy.ShapeTypeString})
+var sTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTask, Members: &mTask, Type: smithy.ShapeTypeStructure})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString})
+var sUnauthorizedOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedOperation, Members: &mUnauthorizedOperation, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_UpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum})
+var sAssociateCreatedArtifactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCreatedArtifactRequest, Members: &mAssociateCreatedArtifactRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateCreatedArtifactResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCreatedArtifactResult, Type: smithy.ShapeTypeStructure})
+var sAssociateDiscoveredResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDiscoveredResourceRequest, Members: &mAssociateDiscoveredResourceRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateDiscoveredResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDiscoveredResourceResult, Type: smithy.ShapeTypeStructure})
+var sAssociateSourceResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceResourceRequest, Members: &mAssociateSourceResourceRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateSourceResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSourceResourceResult, Type: smithy.ShapeTypeStructure})
+var sCreateProgressUpdateStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgressUpdateStreamRequest, Members: &mCreateProgressUpdateStreamRequest, Type: smithy.ShapeTypeStructure})
+var sCreateProgressUpdateStreamResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProgressUpdateStreamResult, Type: smithy.ShapeTypeStructure})
+var sDeleteProgressUpdateStreamRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgressUpdateStreamRequest, Members: &mDeleteProgressUpdateStreamRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteProgressUpdateStreamResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProgressUpdateStreamResult, Type: smithy.ShapeTypeStructure})
+var sDescribeApplicationStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationStateRequest, Members: &mDescribeApplicationStateRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeApplicationStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeApplicationStateResult, Members: &mDescribeApplicationStateResult, Type: smithy.ShapeTypeStructure})
+var sDescribeMigrationTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMigrationTaskRequest, Members: &mDescribeMigrationTaskRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeMigrationTaskResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMigrationTaskResult, Members: &mDescribeMigrationTaskResult, Type: smithy.ShapeTypeStructure})
+var sDisassociateCreatedArtifactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCreatedArtifactRequest, Members: &mDisassociateCreatedArtifactRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateCreatedArtifactResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCreatedArtifactResult, Type: smithy.ShapeTypeStructure})
+var sDisassociateDiscoveredResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDiscoveredResourceRequest, Members: &mDisassociateDiscoveredResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateDiscoveredResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDiscoveredResourceResult, Type: smithy.ShapeTypeStructure})
+var sDisassociateSourceResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSourceResourceRequest, Members: &mDisassociateSourceResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateSourceResourceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSourceResourceResult, Type: smithy.ShapeTypeStructure})
+var sImportMigrationTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportMigrationTaskRequest, Members: &mImportMigrationTaskRequest, Type: smithy.ShapeTypeStructure})
+var sImportMigrationTaskResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportMigrationTaskResult, Type: smithy.ShapeTypeStructure})
+var sListApplicationStatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationStatesRequest, Members: &mListApplicationStatesRequest, Type: smithy.ShapeTypeStructure})
+var sListApplicationStatesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationStatesResult, Members: &mListApplicationStatesResult, Type: smithy.ShapeTypeStructure})
+var sListCreatedArtifactsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCreatedArtifactsRequest, Members: &mListCreatedArtifactsRequest, Type: smithy.ShapeTypeStructure})
+var sListCreatedArtifactsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCreatedArtifactsResult, Members: &mListCreatedArtifactsResult, Type: smithy.ShapeTypeStructure})
+var sListDiscoveredResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoveredResourcesRequest, Members: &mListDiscoveredResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListDiscoveredResourcesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoveredResourcesResult, Members: &mListDiscoveredResourcesResult, Type: smithy.ShapeTypeStructure})
+var sListMigrationTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationTasksRequest, Members: &mListMigrationTasksRequest, Type: smithy.ShapeTypeStructure})
+var sListMigrationTasksResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationTasksResult, Members: &mListMigrationTasksResult, Type: smithy.ShapeTypeStructure})
+var sListMigrationTaskUpdatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationTaskUpdatesRequest, Members: &mListMigrationTaskUpdatesRequest, Type: smithy.ShapeTypeStructure})
+var sListMigrationTaskUpdatesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMigrationTaskUpdatesResult, Members: &mListMigrationTaskUpdatesResult, Type: smithy.ShapeTypeStructure})
+var sListProgressUpdateStreamsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgressUpdateStreamsRequest, Members: &mListProgressUpdateStreamsRequest, Type: smithy.ShapeTypeStructure})
+var sListProgressUpdateStreamsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProgressUpdateStreamsResult, Members: &mListProgressUpdateStreamsResult, Type: smithy.ShapeTypeStructure})
+var sListSourceResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceResourcesRequest, Members: &mListSourceResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListSourceResourcesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSourceResourcesResult, Members: &mListSourceResourcesResult, Type: smithy.ShapeTypeStructure})
+var sNotifyApplicationStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyApplicationStateRequest, Members: &mNotifyApplicationStateRequest, Type: smithy.ShapeTypeStructure})
+var sNotifyApplicationStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyApplicationStateResult, Type: smithy.ShapeTypeStructure})
+var sNotifyMigrationTaskStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyMigrationTaskStateRequest, Members: &mNotifyMigrationTaskStateRequest, Type: smithy.ShapeTypeStructure})
+var sNotifyMigrationTaskStateResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyMigrationTaskStateResult, Type: smithy.ShapeTypeStructure})
+var sPutResourceAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourceAttributesRequest, Members: &mPutResourceAttributesRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourceAttributesResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourceAttributesResult, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ApplicationIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var sApplicationState_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var sApplicationState_ApplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationStatus", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum})
+var sApplicationState_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_ApplicationStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationState, Members: &mApplicationState, Type: smithy.ShapeTypeStructure})
+var sApplicationStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreatedArtifact_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_CreatedArtifactName, Type: smithy.ShapeTypeString})
+var sCreatedArtifact_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_CreatedArtifactDescription, Type: smithy.ShapeTypeString})
+var s_CreatedArtifactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreatedArtifact, Members: &mCreatedArtifact, Type: smithy.ShapeTypeStructure})
+var sDiscoveredResource_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i_ConfigurationId, Type: smithy.ShapeTypeString})
+var sDiscoveredResource_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_DiscoveredResourceDescription, Type: smithy.ShapeTypeString})
+var s_DiscoveredResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscoveredResource, Members: &mDiscoveredResource, Type: smithy.ShapeTypeStructure})
+var sDryRunOperation_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHomeRegionNotSetException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidInputException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_LatestResourceAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceAttribute, Members: &mResourceAttribute, Type: smithy.ShapeTypeStructure})
+var sMigrationTask_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sMigrationTask_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sMigrationTask_Task = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Task", ID: &iTask, Members: &mTask, Type: smithy.ShapeTypeStructure})
+var sMigrationTask_UpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDateTime", ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sMigrationTask_ResourceAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceAttributeList", ID: &i_LatestResourceAttributeList, Members: &m_LatestResourceAttributeList, Type: smithy.ShapeTypeList})
+var sMigrationTaskSummary_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sMigrationTaskSummary_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sMigrationTaskSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sMigrationTaskSummary_ProgressPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressPercent", ID: &i_ProgressPercent, Type: smithy.ShapeTypeInteger})
+var sMigrationTaskSummary_StatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetail", ID: &i_StatusDetail, Type: smithy.ShapeTypeString})
+var sMigrationTaskSummary_UpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDateTime", ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var s_MigrationTaskSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMigrationTaskSummary, Members: &mMigrationTaskSummary, Type: smithy.ShapeTypeStructure})
+var sMigrationTaskUpdate_UpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDateTime", ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sMigrationTaskUpdate_UpdateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateType", ID: &iUpdateType, Members: &mUpdateType, Type: smithy.ShapeTypeEnum})
+var sMigrationTaskUpdate_MigrationTaskState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskState", ID: &iTask, Members: &mTask, Type: smithy.ShapeTypeStructure})
+var s_MigrationTaskUpdateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMigrationTaskUpdate, Members: &mMigrationTaskUpdate, Type: smithy.ShapeTypeStructure})
+var sPolicyErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sProgressUpdateStreamSummary_ProgressUpdateStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStreamName", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var s_ProgressUpdateStreamSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgressUpdateStreamSummary, Members: &mProgressUpdateStreamSummary, Type: smithy.ShapeTypeStructure})
+var sResourceAttribute_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iResourceAttributeType, Members: &mResourceAttributeType, Type: smithy.ShapeTypeEnum})
+var sResourceAttribute_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ResourceAttributeValue, Type: smithy.ShapeTypeString})
+var s_ResourceAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceAttribute, Members: &mResourceAttribute, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_IPV4_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_IPV6_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV6_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_MAC_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAC_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_FQDN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FQDN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_VM_MANAGER_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VM_MANAGER_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_VM_MANAGED_OBJECT_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VM_MANAGED_OBJECT_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_VM_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VM_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_VM_PATH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VM_PATH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_BIOS_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIOS_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAttributeType_MOTHERBOARD_SERIAL_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MOTHERBOARD_SERIAL_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSourceResource_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SourceResourceName, Type: smithy.ShapeTypeString})
+var sSourceResource_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_SourceResourceDescription, Type: smithy.ShapeTypeString})
+var sSourceResource_StatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetail", ID: &i_StatusDetail, Type: smithy.ShapeTypeString})
+var s_SourceResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceResource, Members: &mSourceResource, Type: smithy.ShapeTypeStructure})
+var sStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTask_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sTask_StatusDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetail", ID: &i_StatusDetail, Type: smithy.ShapeTypeString})
+var sTask_ProgressPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressPercent", ID: &i_ProgressPercent, Type: smithy.ShapeTypeInteger})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t3, Type: smithy.ShapeTypeInteger})
+var sUnauthorizedOperation_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateType_MigrationTaskStateUpdated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskStateUpdated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssociateCreatedArtifactRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sAssociateCreatedArtifactRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sAssociateCreatedArtifactRequest_CreatedArtifact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedArtifact", ID: &iCreatedArtifact, Members: &mCreatedArtifact, Type: smithy.ShapeTypeStructure})
+var sAssociateCreatedArtifactRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sAssociateDiscoveredResourceRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sAssociateDiscoveredResourceRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sAssociateDiscoveredResourceRequest_DiscoveredResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscoveredResource", ID: &iDiscoveredResource, Members: &mDiscoveredResource, Type: smithy.ShapeTypeStructure})
+var sAssociateDiscoveredResourceRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sAssociateSourceResourceRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sAssociateSourceResourceRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sAssociateSourceResourceRequest_SourceResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceResource", ID: &iSourceResource, Members: &mSourceResource, Type: smithy.ShapeTypeStructure})
+var sAssociateSourceResourceRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sCreateProgressUpdateStreamRequest_ProgressUpdateStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStreamName", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sCreateProgressUpdateStreamRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sDeleteProgressUpdateStreamRequest_ProgressUpdateStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStreamName", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sDeleteProgressUpdateStreamRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sDescribeApplicationStateRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var sDescribeApplicationStateResult_ApplicationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationStatus", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeApplicationStateResult_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sDescribeMigrationTaskRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sDescribeMigrationTaskRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sDescribeMigrationTaskResult_MigrationTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTask", ID: &iMigrationTask, Members: &mMigrationTask, Type: smithy.ShapeTypeStructure})
+var sDisassociateCreatedArtifactRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sDisassociateCreatedArtifactRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sDisassociateCreatedArtifactRequest_CreatedArtifactName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedArtifactName", ID: &i_CreatedArtifactName, Type: smithy.ShapeTypeString})
+var sDisassociateCreatedArtifactRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sDisassociateDiscoveredResourceRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sDisassociateDiscoveredResourceRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sDisassociateDiscoveredResourceRequest_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &i_ConfigurationId, Type: smithy.ShapeTypeString})
+var sDisassociateDiscoveredResourceRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sDisassociateSourceResourceRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sDisassociateSourceResourceRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sDisassociateSourceResourceRequest_SourceResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceResourceName", ID: &i_SourceResourceName, Type: smithy.ShapeTypeString})
+var sDisassociateSourceResourceRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sImportMigrationTaskRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sImportMigrationTaskRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sImportMigrationTaskRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sListApplicationStatesRequest_ApplicationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationIds", ID: &i_ApplicationIds, Members: &m_ApplicationIds, Type: smithy.ShapeTypeList})
+var sListApplicationStatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListApplicationStatesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListApplicationStatesResult_ApplicationStateList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationStateList", ID: &i_ApplicationStateList, Members: &m_ApplicationStateList, Type: smithy.ShapeTypeList})
+var sListApplicationStatesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListCreatedArtifactsRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sListCreatedArtifactsRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sListCreatedArtifactsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListCreatedArtifactsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsCreatedArtifacts, Type: smithy.ShapeTypeInteger})
+var sListCreatedArtifactsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListCreatedArtifactsResult_CreatedArtifactList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedArtifactList", ID: &i_CreatedArtifactList, Members: &m_CreatedArtifactList, Type: smithy.ShapeTypeList})
+var sListDiscoveredResourcesRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sListDiscoveredResourcesRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sListDiscoveredResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListDiscoveredResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsResources, Type: smithy.ShapeTypeInteger})
+var sListDiscoveredResourcesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListDiscoveredResourcesResult_DiscoveredResourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscoveredResourceList", ID: &i_DiscoveredResourceList, Members: &m_DiscoveredResourceList, Type: smithy.ShapeTypeList})
+var sListMigrationTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListMigrationTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMigrationTasksRequest_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListMigrationTasksResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListMigrationTasksResult_MigrationTaskSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskSummaryList", ID: &i_MigrationTaskSummaryList, Members: &m_MigrationTaskSummaryList, Type: smithy.ShapeTypeList})
+var sListMigrationTaskUpdatesRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sListMigrationTaskUpdatesRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sListMigrationTaskUpdatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListMigrationTaskUpdatesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMigrationTaskUpdatesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListMigrationTaskUpdatesResult_MigrationTaskUpdateList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskUpdateList", ID: &i_MigrationTaskUpdateList, Members: &m_MigrationTaskUpdateList, Type: smithy.ShapeTypeList})
+var sListProgressUpdateStreamsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListProgressUpdateStreamsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStreamSummaryList", ID: &i_ProgressUpdateStreamSummaryList, Members: &m_ProgressUpdateStreamSummaryList, Type: smithy.ShapeTypeList})
+var sListProgressUpdateStreamsResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListSourceResourcesRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sListSourceResourcesRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sListSourceResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListSourceResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsSourceResources, Type: smithy.ShapeTypeInteger})
+var sListSourceResourcesResult_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sListSourceResourcesResult_SourceResourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceResourceList", ID: &i_SourceResourceList, Members: &m_SourceResourceList, Type: smithy.ShapeTypeList})
+var sNotifyApplicationStateRequest_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationId", ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var sNotifyApplicationStateRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iApplicationStatus, Members: &mApplicationStatus, Type: smithy.ShapeTypeEnum})
+var sNotifyApplicationStateRequest_UpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDateTime", ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sNotifyApplicationStateRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sNotifyMigrationTaskStateRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sNotifyMigrationTaskStateRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sNotifyMigrationTaskStateRequest_Task = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Task", ID: &iTask, Members: &mTask, Type: smithy.ShapeTypeStructure})
+var sNotifyMigrationTaskStateRequest_UpdateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateDateTime", ID: &i_UpdateDateTime, Type: smithy.ShapeTypeTimestamp})
+var sNotifyMigrationTaskStateRequest_NextUpdateSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextUpdateSeconds", ID: &i_NextUpdateSeconds, Type: smithy.ShapeTypeInteger})
+var sNotifyMigrationTaskStateRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+var sPutResourceAttributesRequest_ProgressUpdateStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressUpdateStream", ID: &i_ProgressUpdateStream, Type: smithy.ShapeTypeString})
+var sPutResourceAttributesRequest_MigrationTaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationTaskName", ID: &i_MigrationTaskName, Type: smithy.ShapeTypeString})
+var sPutResourceAttributesRequest_ResourceAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceAttributeList", ID: &i_ResourceAttributeList, Members: &m_ResourceAttributeList, Type: smithy.ShapeTypeList})
+var sPutResourceAttributesRequest_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_DryRun, Type: smithy.ShapeTypeBoolean})
+
+var AssociateCreatedArtifact = &sAssociateCreatedArtifact
+
+var AssociateDiscoveredResource = &sAssociateDiscoveredResource
+
+var AssociateSourceResource = &sAssociateSourceResource
+
+var CreateProgressUpdateStream = &sCreateProgressUpdateStream
+
+var DeleteProgressUpdateStream = &sDeleteProgressUpdateStream
+
+var DescribeApplicationState = &sDescribeApplicationState
+
+var DescribeMigrationTask = &sDescribeMigrationTask
+
+var DisassociateCreatedArtifact = &sDisassociateCreatedArtifact
+
+var DisassociateDiscoveredResource = &sDisassociateDiscoveredResource
+
+var DisassociateSourceResource = &sDisassociateSourceResource
+
+var ImportMigrationTask = &sImportMigrationTask
+
+var ListApplicationStates = &sListApplicationStates
+
+var ListCreatedArtifacts = &sListCreatedArtifacts
+
+var ListDiscoveredResources = &sListDiscoveredResources
+
+var ListMigrationTasks = &sListMigrationTasks
+
+var ListMigrationTaskUpdates = &sListMigrationTaskUpdates
+
+var ListProgressUpdateStreams = &sListProgressUpdateStreams
+
+var ListSourceResources = &sListSourceResources
+
+var NotifyApplicationState = &sNotifyApplicationState
+
+var NotifyMigrationTaskState = &sNotifyMigrationTaskState
+
+var PutResourceAttributes = &sPutResourceAttributes
+
+var _AWSMigrationHub = &s_AWSMigrationHub
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _ApplicationId = &s_ApplicationId
+
+var _ApplicationIds = &s_ApplicationIds
+var _ApplicationIds_member = &s_ApplicationIds_member
+
+var ApplicationState = &sApplicationState
+var ApplicationState_ApplicationId = &sApplicationState_ApplicationId
+var ApplicationState_ApplicationStatus = &sApplicationState_ApplicationStatus
+var ApplicationState_LastUpdatedTime = &sApplicationState_LastUpdatedTime
+
+var _ApplicationStateList = &s_ApplicationStateList
+var _ApplicationStateList_member = &s_ApplicationStateList_member
+
+var ApplicationStatus = &sApplicationStatus
+var ApplicationStatus_NOT_STARTED = &sApplicationStatus_NOT_STARTED
+var ApplicationStatus_IN_PROGRESS = &sApplicationStatus_IN_PROGRESS
+var ApplicationStatus_COMPLETED = &sApplicationStatus_COMPLETED
+
+var _ConfigurationId = &s_ConfigurationId
+
+var CreatedArtifact = &sCreatedArtifact
+var CreatedArtifact_Name = &sCreatedArtifact_Name
+var CreatedArtifact_Description = &sCreatedArtifact_Description
+
+var _CreatedArtifactDescription = &s_CreatedArtifactDescription
+
+var _CreatedArtifactList = &s_CreatedArtifactList
+var _CreatedArtifactList_member = &s_CreatedArtifactList_member
+
+var _CreatedArtifactName = &s_CreatedArtifactName
+
+var DiscoveredResource = &sDiscoveredResource
+var DiscoveredResource_ConfigurationId = &sDiscoveredResource_ConfigurationId
+var DiscoveredResource_Description = &sDiscoveredResource_Description
+
+var _DiscoveredResourceDescription = &s_DiscoveredResourceDescription
+
+var _DiscoveredResourceList = &s_DiscoveredResourceList
+var _DiscoveredResourceList_member = &s_DiscoveredResourceList_member
+
+var _DryRun = &s_DryRun
+
+var DryRunOperation = &sDryRunOperation
+var DryRunOperation_Message = &sDryRunOperation_Message
+
+var _ErrorMessage = &s_ErrorMessage
+
+var HomeRegionNotSetException = &sHomeRegionNotSetException
+var HomeRegionNotSetException_Message = &sHomeRegionNotSetException_Message
+
+var InternalServerError = &sInternalServerError
+var InternalServerError_Message = &sInternalServerError_Message
+
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_Message = &sInvalidInputException_Message
+
+var _LatestResourceAttributeList = &s_LatestResourceAttributeList
+var _LatestResourceAttributeList_member = &s_LatestResourceAttributeList_member
+
+var _MaxResults = &s_MaxResults
+
+var _MaxResultsCreatedArtifacts = &s_MaxResultsCreatedArtifacts
+
+var _MaxResultsResources = &s_MaxResultsResources
+
+var _MaxResultsSourceResources = &s_MaxResultsSourceResources
+
+var MigrationTask = &sMigrationTask
+var MigrationTask_ProgressUpdateStream = &sMigrationTask_ProgressUpdateStream
+var MigrationTask_MigrationTaskName = &sMigrationTask_MigrationTaskName
+var MigrationTask_Task = &sMigrationTask_Task
+var MigrationTask_UpdateDateTime = &sMigrationTask_UpdateDateTime
+var MigrationTask_ResourceAttributeList = &sMigrationTask_ResourceAttributeList
+
+var _MigrationTaskName = &s_MigrationTaskName
+
+var MigrationTaskSummary = &sMigrationTaskSummary
+var MigrationTaskSummary_ProgressUpdateStream = &sMigrationTaskSummary_ProgressUpdateStream
+var MigrationTaskSummary_MigrationTaskName = &sMigrationTaskSummary_MigrationTaskName
+var MigrationTaskSummary_Status = &sMigrationTaskSummary_Status
+var MigrationTaskSummary_ProgressPercent = &sMigrationTaskSummary_ProgressPercent
+var MigrationTaskSummary_StatusDetail = &sMigrationTaskSummary_StatusDetail
+var MigrationTaskSummary_UpdateDateTime = &sMigrationTaskSummary_UpdateDateTime
+
+var _MigrationTaskSummaryList = &s_MigrationTaskSummaryList
+var _MigrationTaskSummaryList_member = &s_MigrationTaskSummaryList_member
+
+var MigrationTaskUpdate = &sMigrationTaskUpdate
+var MigrationTaskUpdate_UpdateDateTime = &sMigrationTaskUpdate_UpdateDateTime
+var MigrationTaskUpdate_UpdateType = &sMigrationTaskUpdate_UpdateType
+var MigrationTaskUpdate_MigrationTaskState = &sMigrationTaskUpdate_MigrationTaskState
+
+var _MigrationTaskUpdateList = &s_MigrationTaskUpdateList
+var _MigrationTaskUpdateList_member = &s_MigrationTaskUpdateList_member
+
+var _NextUpdateSeconds = &s_NextUpdateSeconds
+
+var PolicyErrorException = &sPolicyErrorException
+var PolicyErrorException_Message = &sPolicyErrorException_Message
+
+var _ProgressPercent = &s_ProgressPercent
+
+var _ProgressUpdateStream = &s_ProgressUpdateStream
+
+var ProgressUpdateStreamSummary = &sProgressUpdateStreamSummary
+var ProgressUpdateStreamSummary_ProgressUpdateStreamName = &sProgressUpdateStreamSummary_ProgressUpdateStreamName
+
+var _ProgressUpdateStreamSummaryList = &s_ProgressUpdateStreamSummaryList
+var _ProgressUpdateStreamSummaryList_member = &s_ProgressUpdateStreamSummaryList_member
+
+var ResourceAttribute = &sResourceAttribute
+var ResourceAttribute_Type = &sResourceAttribute_Type
+var ResourceAttribute_Value = &sResourceAttribute_Value
+
+var _ResourceAttributeList = &s_ResourceAttributeList
+var _ResourceAttributeList_member = &s_ResourceAttributeList_member
+
+var ResourceAttributeType = &sResourceAttributeType
+var ResourceAttributeType_IPV4_ADDRESS = &sResourceAttributeType_IPV4_ADDRESS
+var ResourceAttributeType_IPV6_ADDRESS = &sResourceAttributeType_IPV6_ADDRESS
+var ResourceAttributeType_MAC_ADDRESS = &sResourceAttributeType_MAC_ADDRESS
+var ResourceAttributeType_FQDN = &sResourceAttributeType_FQDN
+var ResourceAttributeType_VM_MANAGER_ID = &sResourceAttributeType_VM_MANAGER_ID
+var ResourceAttributeType_VM_MANAGED_OBJECT_REFERENCE = &sResourceAttributeType_VM_MANAGED_OBJECT_REFERENCE
+var ResourceAttributeType_VM_NAME = &sResourceAttributeType_VM_NAME
+var ResourceAttributeType_VM_PATH = &sResourceAttributeType_VM_PATH
+var ResourceAttributeType_BIOS_ID = &sResourceAttributeType_BIOS_ID
+var ResourceAttributeType_MOTHERBOARD_SERIAL_NUMBER = &sResourceAttributeType_MOTHERBOARD_SERIAL_NUMBER
+
+var _ResourceAttributeValue = &s_ResourceAttributeValue
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var SourceResource = &sSourceResource
+var SourceResource_Name = &sSourceResource_Name
+var SourceResource_Description = &sSourceResource_Description
+var SourceResource_StatusDetail = &sSourceResource_StatusDetail
+
+var _SourceResourceDescription = &s_SourceResourceDescription
+
+var _SourceResourceList = &s_SourceResourceList
+var _SourceResourceList_member = &s_SourceResourceList_member
+
+var _SourceResourceName = &s_SourceResourceName
+
+var Status = &sStatus
+var Status_NOT_STARTED = &sStatus_NOT_STARTED
+var Status_IN_PROGRESS = &sStatus_IN_PROGRESS
+var Status_FAILED = &sStatus_FAILED
+var Status_COMPLETED = &sStatus_COMPLETED
+
+var _StatusDetail = &s_StatusDetail
+
+var Task = &sTask
+var Task_Status = &sTask_Status
+var Task_StatusDetail = &sTask_StatusDetail
+var Task_ProgressPercent = &sTask_ProgressPercent
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+var ThrottlingException_RetryAfterSeconds = &sThrottlingException_RetryAfterSeconds
+
+var _Token = &s_Token
+
+var UnauthorizedOperation = &sUnauthorizedOperation
+var UnauthorizedOperation_Message = &sUnauthorizedOperation_Message
+
+var _UpdateDateTime = &s_UpdateDateTime
+
+var UpdateType = &sUpdateType
+var UpdateType_MigrationTaskStateUpdated = &sUpdateType_MigrationTaskStateUpdated
+
+var AssociateCreatedArtifactRequest = &sAssociateCreatedArtifactRequest
+var AssociateCreatedArtifactRequest_ProgressUpdateStream = &sAssociateCreatedArtifactRequest_ProgressUpdateStream
+var AssociateCreatedArtifactRequest_MigrationTaskName = &sAssociateCreatedArtifactRequest_MigrationTaskName
+var AssociateCreatedArtifactRequest_CreatedArtifact = &sAssociateCreatedArtifactRequest_CreatedArtifact
+var AssociateCreatedArtifactRequest_DryRun = &sAssociateCreatedArtifactRequest_DryRun
+
+var AssociateCreatedArtifactResult = &sAssociateCreatedArtifactResult
+
+var AssociateDiscoveredResourceRequest = &sAssociateDiscoveredResourceRequest
+var AssociateDiscoveredResourceRequest_ProgressUpdateStream = &sAssociateDiscoveredResourceRequest_ProgressUpdateStream
+var AssociateDiscoveredResourceRequest_MigrationTaskName = &sAssociateDiscoveredResourceRequest_MigrationTaskName
+var AssociateDiscoveredResourceRequest_DiscoveredResource = &sAssociateDiscoveredResourceRequest_DiscoveredResource
+var AssociateDiscoveredResourceRequest_DryRun = &sAssociateDiscoveredResourceRequest_DryRun
+
+var AssociateDiscoveredResourceResult = &sAssociateDiscoveredResourceResult
+
+var AssociateSourceResourceRequest = &sAssociateSourceResourceRequest
+var AssociateSourceResourceRequest_ProgressUpdateStream = &sAssociateSourceResourceRequest_ProgressUpdateStream
+var AssociateSourceResourceRequest_MigrationTaskName = &sAssociateSourceResourceRequest_MigrationTaskName
+var AssociateSourceResourceRequest_SourceResource = &sAssociateSourceResourceRequest_SourceResource
+var AssociateSourceResourceRequest_DryRun = &sAssociateSourceResourceRequest_DryRun
+
+var AssociateSourceResourceResult = &sAssociateSourceResourceResult
+
+var CreateProgressUpdateStreamRequest = &sCreateProgressUpdateStreamRequest
+var CreateProgressUpdateStreamRequest_ProgressUpdateStreamName = &sCreateProgressUpdateStreamRequest_ProgressUpdateStreamName
+var CreateProgressUpdateStreamRequest_DryRun = &sCreateProgressUpdateStreamRequest_DryRun
+
+var CreateProgressUpdateStreamResult = &sCreateProgressUpdateStreamResult
+
+var DeleteProgressUpdateStreamRequest = &sDeleteProgressUpdateStreamRequest
+var DeleteProgressUpdateStreamRequest_ProgressUpdateStreamName = &sDeleteProgressUpdateStreamRequest_ProgressUpdateStreamName
+var DeleteProgressUpdateStreamRequest_DryRun = &sDeleteProgressUpdateStreamRequest_DryRun
+
+var DeleteProgressUpdateStreamResult = &sDeleteProgressUpdateStreamResult
+
+var DescribeApplicationStateRequest = &sDescribeApplicationStateRequest
+var DescribeApplicationStateRequest_ApplicationId = &sDescribeApplicationStateRequest_ApplicationId
+
+var DescribeApplicationStateResult = &sDescribeApplicationStateResult
+var DescribeApplicationStateResult_ApplicationStatus = &sDescribeApplicationStateResult_ApplicationStatus
+var DescribeApplicationStateResult_LastUpdatedTime = &sDescribeApplicationStateResult_LastUpdatedTime
+
+var DescribeMigrationTaskRequest = &sDescribeMigrationTaskRequest
+var DescribeMigrationTaskRequest_ProgressUpdateStream = &sDescribeMigrationTaskRequest_ProgressUpdateStream
+var DescribeMigrationTaskRequest_MigrationTaskName = &sDescribeMigrationTaskRequest_MigrationTaskName
+
+var DescribeMigrationTaskResult = &sDescribeMigrationTaskResult
+var DescribeMigrationTaskResult_MigrationTask = &sDescribeMigrationTaskResult_MigrationTask
+
+var DisassociateCreatedArtifactRequest = &sDisassociateCreatedArtifactRequest
+var DisassociateCreatedArtifactRequest_ProgressUpdateStream = &sDisassociateCreatedArtifactRequest_ProgressUpdateStream
+var DisassociateCreatedArtifactRequest_MigrationTaskName = &sDisassociateCreatedArtifactRequest_MigrationTaskName
+var DisassociateCreatedArtifactRequest_CreatedArtifactName = &sDisassociateCreatedArtifactRequest_CreatedArtifactName
+var DisassociateCreatedArtifactRequest_DryRun = &sDisassociateCreatedArtifactRequest_DryRun
+
+var DisassociateCreatedArtifactResult = &sDisassociateCreatedArtifactResult
+
+var DisassociateDiscoveredResourceRequest = &sDisassociateDiscoveredResourceRequest
+var DisassociateDiscoveredResourceRequest_ProgressUpdateStream = &sDisassociateDiscoveredResourceRequest_ProgressUpdateStream
+var DisassociateDiscoveredResourceRequest_MigrationTaskName = &sDisassociateDiscoveredResourceRequest_MigrationTaskName
+var DisassociateDiscoveredResourceRequest_ConfigurationId = &sDisassociateDiscoveredResourceRequest_ConfigurationId
+var DisassociateDiscoveredResourceRequest_DryRun = &sDisassociateDiscoveredResourceRequest_DryRun
+
+var DisassociateDiscoveredResourceResult = &sDisassociateDiscoveredResourceResult
+
+var DisassociateSourceResourceRequest = &sDisassociateSourceResourceRequest
+var DisassociateSourceResourceRequest_ProgressUpdateStream = &sDisassociateSourceResourceRequest_ProgressUpdateStream
+var DisassociateSourceResourceRequest_MigrationTaskName = &sDisassociateSourceResourceRequest_MigrationTaskName
+var DisassociateSourceResourceRequest_SourceResourceName = &sDisassociateSourceResourceRequest_SourceResourceName
+var DisassociateSourceResourceRequest_DryRun = &sDisassociateSourceResourceRequest_DryRun
+
+var DisassociateSourceResourceResult = &sDisassociateSourceResourceResult
+
+var ImportMigrationTaskRequest = &sImportMigrationTaskRequest
+var ImportMigrationTaskRequest_ProgressUpdateStream = &sImportMigrationTaskRequest_ProgressUpdateStream
+var ImportMigrationTaskRequest_MigrationTaskName = &sImportMigrationTaskRequest_MigrationTaskName
+var ImportMigrationTaskRequest_DryRun = &sImportMigrationTaskRequest_DryRun
+
+var ImportMigrationTaskResult = &sImportMigrationTaskResult
+
+var ListApplicationStatesRequest = &sListApplicationStatesRequest
+var ListApplicationStatesRequest_ApplicationIds = &sListApplicationStatesRequest_ApplicationIds
+var ListApplicationStatesRequest_NextToken = &sListApplicationStatesRequest_NextToken
+var ListApplicationStatesRequest_MaxResults = &sListApplicationStatesRequest_MaxResults
+
+var ListApplicationStatesResult = &sListApplicationStatesResult
+var ListApplicationStatesResult_ApplicationStateList = &sListApplicationStatesResult_ApplicationStateList
+var ListApplicationStatesResult_NextToken = &sListApplicationStatesResult_NextToken
+
+var ListCreatedArtifactsRequest = &sListCreatedArtifactsRequest
+var ListCreatedArtifactsRequest_ProgressUpdateStream = &sListCreatedArtifactsRequest_ProgressUpdateStream
+var ListCreatedArtifactsRequest_MigrationTaskName = &sListCreatedArtifactsRequest_MigrationTaskName
+var ListCreatedArtifactsRequest_NextToken = &sListCreatedArtifactsRequest_NextToken
+var ListCreatedArtifactsRequest_MaxResults = &sListCreatedArtifactsRequest_MaxResults
+
+var ListCreatedArtifactsResult = &sListCreatedArtifactsResult
+var ListCreatedArtifactsResult_NextToken = &sListCreatedArtifactsResult_NextToken
+var ListCreatedArtifactsResult_CreatedArtifactList = &sListCreatedArtifactsResult_CreatedArtifactList
+
+var ListDiscoveredResourcesRequest = &sListDiscoveredResourcesRequest
+var ListDiscoveredResourcesRequest_ProgressUpdateStream = &sListDiscoveredResourcesRequest_ProgressUpdateStream
+var ListDiscoveredResourcesRequest_MigrationTaskName = &sListDiscoveredResourcesRequest_MigrationTaskName
+var ListDiscoveredResourcesRequest_NextToken = &sListDiscoveredResourcesRequest_NextToken
+var ListDiscoveredResourcesRequest_MaxResults = &sListDiscoveredResourcesRequest_MaxResults
+
+var ListDiscoveredResourcesResult = &sListDiscoveredResourcesResult
+var ListDiscoveredResourcesResult_NextToken = &sListDiscoveredResourcesResult_NextToken
+var ListDiscoveredResourcesResult_DiscoveredResourceList = &sListDiscoveredResourcesResult_DiscoveredResourceList
+
+var ListMigrationTasksRequest = &sListMigrationTasksRequest
+var ListMigrationTasksRequest_NextToken = &sListMigrationTasksRequest_NextToken
+var ListMigrationTasksRequest_MaxResults = &sListMigrationTasksRequest_MaxResults
+var ListMigrationTasksRequest_ResourceName = &sListMigrationTasksRequest_ResourceName
+
+var ListMigrationTasksResult = &sListMigrationTasksResult
+var ListMigrationTasksResult_NextToken = &sListMigrationTasksResult_NextToken
+var ListMigrationTasksResult_MigrationTaskSummaryList = &sListMigrationTasksResult_MigrationTaskSummaryList
+
+var ListMigrationTaskUpdatesRequest = &sListMigrationTaskUpdatesRequest
+var ListMigrationTaskUpdatesRequest_ProgressUpdateStream = &sListMigrationTaskUpdatesRequest_ProgressUpdateStream
+var ListMigrationTaskUpdatesRequest_MigrationTaskName = &sListMigrationTaskUpdatesRequest_MigrationTaskName
+var ListMigrationTaskUpdatesRequest_NextToken = &sListMigrationTaskUpdatesRequest_NextToken
+var ListMigrationTaskUpdatesRequest_MaxResults = &sListMigrationTaskUpdatesRequest_MaxResults
+
+var ListMigrationTaskUpdatesResult = &sListMigrationTaskUpdatesResult
+var ListMigrationTaskUpdatesResult_NextToken = &sListMigrationTaskUpdatesResult_NextToken
+var ListMigrationTaskUpdatesResult_MigrationTaskUpdateList = &sListMigrationTaskUpdatesResult_MigrationTaskUpdateList
+
+var ListProgressUpdateStreamsRequest = &sListProgressUpdateStreamsRequest
+var ListProgressUpdateStreamsRequest_NextToken = &sListProgressUpdateStreamsRequest_NextToken
+var ListProgressUpdateStreamsRequest_MaxResults = &sListProgressUpdateStreamsRequest_MaxResults
+
+var ListProgressUpdateStreamsResult = &sListProgressUpdateStreamsResult
+var ListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList = &sListProgressUpdateStreamsResult_ProgressUpdateStreamSummaryList
+var ListProgressUpdateStreamsResult_NextToken = &sListProgressUpdateStreamsResult_NextToken
+
+var ListSourceResourcesRequest = &sListSourceResourcesRequest
+var ListSourceResourcesRequest_ProgressUpdateStream = &sListSourceResourcesRequest_ProgressUpdateStream
+var ListSourceResourcesRequest_MigrationTaskName = &sListSourceResourcesRequest_MigrationTaskName
+var ListSourceResourcesRequest_NextToken = &sListSourceResourcesRequest_NextToken
+var ListSourceResourcesRequest_MaxResults = &sListSourceResourcesRequest_MaxResults
+
+var ListSourceResourcesResult = &sListSourceResourcesResult
+var ListSourceResourcesResult_NextToken = &sListSourceResourcesResult_NextToken
+var ListSourceResourcesResult_SourceResourceList = &sListSourceResourcesResult_SourceResourceList
+
+var NotifyApplicationStateRequest = &sNotifyApplicationStateRequest
+var NotifyApplicationStateRequest_ApplicationId = &sNotifyApplicationStateRequest_ApplicationId
+var NotifyApplicationStateRequest_Status = &sNotifyApplicationStateRequest_Status
+var NotifyApplicationStateRequest_UpdateDateTime = &sNotifyApplicationStateRequest_UpdateDateTime
+var NotifyApplicationStateRequest_DryRun = &sNotifyApplicationStateRequest_DryRun
+
+var NotifyApplicationStateResult = &sNotifyApplicationStateResult
+
+var NotifyMigrationTaskStateRequest = &sNotifyMigrationTaskStateRequest
+var NotifyMigrationTaskStateRequest_ProgressUpdateStream = &sNotifyMigrationTaskStateRequest_ProgressUpdateStream
+var NotifyMigrationTaskStateRequest_MigrationTaskName = &sNotifyMigrationTaskStateRequest_MigrationTaskName
+var NotifyMigrationTaskStateRequest_Task = &sNotifyMigrationTaskStateRequest_Task
+var NotifyMigrationTaskStateRequest_UpdateDateTime = &sNotifyMigrationTaskStateRequest_UpdateDateTime
+var NotifyMigrationTaskStateRequest_NextUpdateSeconds = &sNotifyMigrationTaskStateRequest_NextUpdateSeconds
+var NotifyMigrationTaskStateRequest_DryRun = &sNotifyMigrationTaskStateRequest_DryRun
+
+var NotifyMigrationTaskStateResult = &sNotifyMigrationTaskStateResult
+
+var PutResourceAttributesRequest = &sPutResourceAttributesRequest
+var PutResourceAttributesRequest_ProgressUpdateStream = &sPutResourceAttributesRequest_ProgressUpdateStream
+var PutResourceAttributesRequest_MigrationTaskName = &sPutResourceAttributesRequest_MigrationTaskName
+var PutResourceAttributesRequest_ResourceAttributeList = &sPutResourceAttributesRequest_ResourceAttributeList
+var PutResourceAttributesRequest_DryRun = &sPutResourceAttributesRequest_DryRun
+
+var PutResourceAttributesResult = &sPutResourceAttributesResult
+
+var AWSMigrationHub = &smithy.ServiceSchema{Schema: &s_AWSMigrationHub, Version: "2017-05-31"}

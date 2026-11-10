@@ -4,4533 +4,3415 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateBrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateBrowserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	iAssociateBrowserSettings                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateBrowserSettings"}
+	iAssociateDataProtectionSettings               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateDataProtectionSettings"}
+	iAssociateIpAccessSettings                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateIpAccessSettings"}
+	iAssociateNetworkSettings                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateNetworkSettings"}
+	iAssociateSessionLogger                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateSessionLogger"}
+	iAssociateTrustStore                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateTrustStore"}
+	iAssociateUserAccessLoggingSettings            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateUserAccessLoggingSettings"}
+	iAssociateUserSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateUserSettings"}
+	iCreateBrowserSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateBrowserSettings"}
+	iCreateDataProtectionSettings                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateDataProtectionSettings"}
+	iCreateIdentityProvider                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateIdentityProvider"}
+	iCreateIpAccessSettings                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateIpAccessSettings"}
+	iCreateNetworkSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateNetworkSettings"}
+	iCreatePortal                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreatePortal"}
+	iCreateSessionLogger                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateSessionLogger"}
+	iCreateTrustStore                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateTrustStore"}
+	iCreateUserAccessLoggingSettings               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateUserAccessLoggingSettings"}
+	iCreateUserSettings                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateUserSettings"}
+	iDeleteBrowserSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteBrowserSettings"}
+	iDeleteDataProtectionSettings                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteDataProtectionSettings"}
+	iDeleteIdentityProvider                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteIdentityProvider"}
+	iDeleteIpAccessSettings                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteIpAccessSettings"}
+	iDeleteNetworkSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteNetworkSettings"}
+	iDeletePortal                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeletePortal"}
+	iDeleteSessionLogger                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteSessionLogger"}
+	iDeleteTrustStore                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteTrustStore"}
+	iDeleteUserAccessLoggingSettings               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteUserAccessLoggingSettings"}
+	iDeleteUserSettings                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteUserSettings"}
+	iDisassociateBrowserSettings                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateBrowserSettings"}
+	iDisassociateDataProtectionSettings            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateDataProtectionSettings"}
+	iDisassociateIpAccessSettings                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateIpAccessSettings"}
+	iDisassociateNetworkSettings                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateNetworkSettings"}
+	iDisassociateSessionLogger                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateSessionLogger"}
+	iDisassociateTrustStore                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateTrustStore"}
+	iDisassociateUserAccessLoggingSettings         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateUserAccessLoggingSettings"}
+	iDisassociateUserSettings                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateUserSettings"}
+	iExpireSession                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ExpireSession"}
+	iGetBrowserSettings                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetBrowserSettings"}
+	iGetDataProtectionSettings                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetDataProtectionSettings"}
+	iGetIdentityProvider                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetIdentityProvider"}
+	iGetIpAccessSettings                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetIpAccessSettings"}
+	iGetNetworkSettings                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetNetworkSettings"}
+	iGetPortal                                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetPortal"}
+	iGetPortalServiceProviderMetadata              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetPortalServiceProviderMetadata"}
+	iGetSession                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetSession"}
+	iGetSessionLogger                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetSessionLogger"}
+	iGetTrustStore                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetTrustStore"}
+	iGetTrustStoreCertificate                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetTrustStoreCertificate"}
+	iGetUserAccessLoggingSettings                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetUserAccessLoggingSettings"}
+	iGetUserSettings                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetUserSettings"}
+	iListBrowserSettings                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListBrowserSettings"}
+	iListDataProtectionSettings                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListDataProtectionSettings"}
+	iListIdentityProviders                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListIdentityProviders"}
+	iListIpAccessSettings                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListIpAccessSettings"}
+	iListNetworkSettings                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListNetworkSettings"}
+	iListPortals                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListPortals"}
+	iListSessionLoggers                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListSessionLoggers"}
+	iListSessions                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListSessions"}
+	iListTagsForResource                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTagsForResource"}
+	iListTrustStoreCertificates                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTrustStoreCertificates"}
+	iListTrustStores                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTrustStores"}
+	iListUserAccessLoggingSettings                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListUserAccessLoggingSettings"}
+	iListUserSettings                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListUserSettings"}
+	iTagResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagResource"}
+	iUntagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UntagResource"}
+	iUpdateBrowserSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateBrowserSettings"}
+	iUpdateDataProtectionSettings                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateDataProtectionSettings"}
+	iUpdateIdentityProvider                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateIdentityProvider"}
+	iUpdateIpAccessSettings                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateIpAccessSettings"}
+	iUpdateNetworkSettings                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateNetworkSettings"}
+	iUpdatePortal                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdatePortal"}
+	iUpdateSessionLogger                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateSessionLogger"}
+	iUpdateTrustStore                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateTrustStore"}
+	iUpdateUserAccessLoggingSettings               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateUserAccessLoggingSettings"}
+	iUpdateUserSettings                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateUserSettings"}
+	i_AWSErmineControlPlaneService                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AWSErmineControlPlaneService"}
+	iAccessDeniedException                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AccessDeniedException"}
+	i_ARN                                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ARN"}
+	i_ArnList                                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ArnList"}
+	i_AuthenticationType                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AuthenticationType"}
+	i_BlockedCategories                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BlockedCategories"}
+	iBrandingConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrandingConfiguration"}
+	iBrandingConfigurationCreateInput              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrandingConfigurationCreateInput"}
+	iBrandingConfigurationUpdateInput              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrandingConfigurationUpdateInput"}
+	i_BrandingSafeStringType                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrandingSafeStringType"}
+	i_BrowserPolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrowserPolicy"}
+	iBrowserSettings                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrowserSettings"}
+	i_BrowserSettingsList                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrowserSettingsList"}
+	iBrowserSettingsSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrowserSettingsSummary"}
+	i_BrowserType                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BrowserType"}
+	i_BuiltInPatternId                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "BuiltInPatternId"}
+	iCategory                                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Category"}
+	iCertificate                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Certificate"}
+	i_CertificateAuthorityBody                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CertificateAuthorityBody"}
+	i_CertificateList                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CertificateList"}
+	i_CertificatePrincipal                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CertificatePrincipal"}
+	iCertificateSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CertificateSummary"}
+	i_CertificateSummaryList                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CertificateSummaryList"}
+	i_CertificateThumbprint                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CertificateThumbprint"}
+	i_CertificateThumbprintList                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CertificateThumbprintList"}
+	i_ClientToken                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ClientToken"}
+	iColorTheme                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ColorTheme"}
+	i_ConfidenceLevel                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ConfidenceLevel"}
+	iConflictException                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ConflictException"}
+	i_ContactLinkUrl                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ContactLinkUrl"}
+	i_CookieDomain                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CookieDomain"}
+	i_CookieName                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CookieName"}
+	i_CookiePath                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CookiePath"}
+	iCookieSpecification                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CookieSpecification"}
+	i_CookieSpecifications                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CookieSpecifications"}
+	iCookieSynchronizationConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CookieSynchronizationConfiguration"}
+	iCustomPattern                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CustomPattern"}
+	iDataProtectionSettings                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DataProtectionSettings"}
+	i_DataProtectionSettingsList                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DataProtectionSettingsList"}
+	iDataProtectionSettingsSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DataProtectionSettingsSummary"}
+	i_Description                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Description"}
+	i_DescriptionSafe                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DescriptionSafe"}
+	i_DisconnectTimeoutInMinutes                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisconnectTimeoutInMinutes"}
+	i_DisplayName                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisplayName"}
+	i_DisplayNameSafe                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisplayNameSafe"}
+	i_EnabledType                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "EnabledType"}
+	i_EncryptionContextMap                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "EncryptionContextMap"}
+	iEvent                                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Event"}
+	iEventFilter                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "EventFilter"}
+	i_Events                                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Events"}
+	i_ExceptionMessage                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ExceptionMessage"}
+	i_FieldName                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "FieldName"}
+	iFolderStructure                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "FolderStructure"}
+	i_GlobalInlineRedactionUrls                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GlobalInlineRedactionUrls"}
+	i_HiddenToolbarItemList                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "HiddenToolbarItemList"}
+	i_IconImage                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IconImage"}
+	iIconImageInput                                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IconImageInput"}
+	iIdentityProvider                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IdentityProvider"}
+	i_IdentityProviderDetails                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IdentityProviderDetails"}
+	i_IdentityProviderList                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IdentityProviderList"}
+	i_IdentityProviderName                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IdentityProviderName"}
+	iIdentityProviderSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IdentityProviderSummary"}
+	i_IdentityProviderType                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IdentityProviderType"}
+	i_IdleDisconnectTimeoutInMinutes               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IdleDisconnectTimeoutInMinutes"}
+	iImageMetadata                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ImageMetadata"}
+	iInlineRedactionConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "InlineRedactionConfiguration"}
+	iInlineRedactionPattern                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "InlineRedactionPattern"}
+	i_InlineRedactionPatterns                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "InlineRedactionPatterns"}
+	i_InlineRedactionUrl                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "InlineRedactionUrl"}
+	i_InlineRedactionUrls                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "InlineRedactionUrls"}
+	i_InstanceType                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "InstanceType"}
+	iInternalServerException                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "InternalServerException"}
+	iIpAccessSettings                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpAccessSettings"}
+	i_IpAccessSettingsList                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpAccessSettingsList"}
+	iIpAccessSettingsSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpAccessSettingsSummary"}
+	i_IpAddress                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpAddress"}
+	i_IpAddressList                                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpAddressList"}
+	i_IpRange                                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpRange"}
+	iIpRule                                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpRule"}
+	i_IpRuleList                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "IpRuleList"}
+	i_keyArn                                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "keyArn"}
+	i_KinesisStreamArn                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "KinesisStreamArn"}
+	iLocale                                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Locale"}
+	i_LocalizedBrandingStringMap                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "LocalizedBrandingStringMap"}
+	iLocalizedBrandingStrings                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "LocalizedBrandingStrings"}
+	iLogConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "LogConfiguration"}
+	iLogFileFormat                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "LogFileFormat"}
+	i_Markdown                                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Markdown"}
+	i_MaxConcurrentSessions                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "MaxConcurrentSessions"}
+	i_MaxDisplayResolution                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "MaxDisplayResolution"}
+	i_MaxResults                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "MaxResults"}
+	iMimeType                                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "MimeType"}
+	iNetworkSettings                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "NetworkSettings"}
+	i_NetworkSettingsList                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "NetworkSettingsList"}
+	iNetworkSettingsSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "NetworkSettingsSummary"}
+	i_PaginationToken                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PaginationToken"}
+	i_PatternName                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PatternName"}
+	iPortal                                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Portal"}
+	i_PortalCustomDomain                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PortalCustomDomain"}
+	i_PortalEndpoint                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PortalEndpoint"}
+	i_PortalId                                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PortalId"}
+	i_PortalList                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PortalList"}
+	i_PortalStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PortalStatus"}
+	iPortalSummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "PortalSummary"}
+	i_QuotaCode                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "QuotaCode"}
+	iRedactionPlaceHolder                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "RedactionPlaceHolder"}
+	i_RedactionPlaceHolderText                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "RedactionPlaceHolderText"}
+	i_RedactionPlaceHolderType                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "RedactionPlaceHolderType"}
+	i_Regex                                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Regex"}
+	i_RendererType                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "RendererType"}
+	i_ResourceId                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ResourceId"}
+	iResourceNotFoundException                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ResourceNotFoundException"}
+	i_ResourceType                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ResourceType"}
+	i_RetryAfterSeconds                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "RetryAfterSeconds"}
+	i_S3Bucket                                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "S3Bucket"}
+	i_S3BucketOwner                                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "S3BucketOwner"}
+	i_S3KeyPrefix                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "S3KeyPrefix"}
+	iS3LogConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "S3LogConfiguration"}
+	i_S3Uri                                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "S3Uri"}
+	i_SamlMetadata                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SamlMetadata"}
+	i_SecurityGroupId                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SecurityGroupId"}
+	i_SecurityGroupIdList                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SecurityGroupIdList"}
+	i_ServiceCode                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ServiceCode"}
+	iServiceQuotaExceededException                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ServiceQuotaExceededException"}
+	iSession                                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Session"}
+	i_SessionId                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionId"}
+	iSessionLogger                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionLogger"}
+	i_SessionLoggerList                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionLoggerList"}
+	iSessionLoggerSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionLoggerSummary"}
+	iSessionSortBy                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionSortBy"}
+	iSessionStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionStatus"}
+	iSessionSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionSummary"}
+	i_SessionSummaryList                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SessionSummaryList"}
+	i_StatusReason                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "StatusReason"}
+	i_StringType                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "StringType"}
+	i_SubnetId                                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SubnetId"}
+	i_SubnetIdList                                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SubnetIdList"}
+	i_SubresourceARN                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "SubresourceARN"}
+	iTag                                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Tag"}
+	i_TagExceptionMessage                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagExceptionMessage"}
+	i_TagKey                                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagKey"}
+	i_TagKeyList                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagKeyList"}
+	i_TagList                                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagList"}
+	i_TagValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagValue"}
+	iThrottlingException                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ThrottlingException"}
+	i_Timestamp                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Timestamp"}
+	iToolbarConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ToolbarConfiguration"}
+	i_ToolbarItem                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ToolbarItem"}
+	i_ToolbarType                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ToolbarType"}
+	iTooManyTagsException                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TooManyTagsException"}
+	iTrustStore                                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TrustStore"}
+	iTrustStoreSummary                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TrustStoreSummary"}
+	i_TrustStoreSummaryList                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TrustStoreSummaryList"}
+	i_UrlPattern                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UrlPattern"}
+	i_UrlPatternList                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UrlPatternList"}
+	iUserAccessLoggingSettings                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UserAccessLoggingSettings"}
+	i_UserAccessLoggingSettingsList                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UserAccessLoggingSettingsList"}
+	iUserAccessLoggingSettingsSummary              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UserAccessLoggingSettingsSummary"}
+	i_Username                                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "Username"}
+	iUserSettings                                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UserSettings"}
+	i_UserSettingsList                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UserSettingsList"}
+	iUserSettingsSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UserSettingsSummary"}
+	iValidationException                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ValidationException"}
+	iValidationExceptionField                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ValidationExceptionFieldList"}
+	i_ValidationExceptionReason                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ValidationExceptionReason"}
+	i_VisualMode                                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "VisualMode"}
+	i_VpcId                                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "VpcId"}
+	i_WallpaperImage                               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "WallpaperImage"}
+	iWallpaperImageInput                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "WallpaperImageInput"}
+	iWebContentFilteringPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "WebContentFilteringPolicy"}
+	iAssociateBrowserSettingsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateBrowserSettingsRequest"}
+	iAssociateBrowserSettingsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateBrowserSettingsResponse"}
+	iAssociateDataProtectionSettingsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateDataProtectionSettingsRequest"}
+	iAssociateDataProtectionSettingsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateDataProtectionSettingsResponse"}
+	iAssociateIpAccessSettingsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateIpAccessSettingsRequest"}
+	iAssociateIpAccessSettingsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateIpAccessSettingsResponse"}
+	iAssociateNetworkSettingsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateNetworkSettingsRequest"}
+	iAssociateNetworkSettingsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateNetworkSettingsResponse"}
+	iAssociateSessionLoggerRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateSessionLoggerRequest"}
+	iAssociateSessionLoggerResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateSessionLoggerResponse"}
+	iAssociateTrustStoreRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateTrustStoreRequest"}
+	iAssociateTrustStoreResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateTrustStoreResponse"}
+	iAssociateUserAccessLoggingSettingsRequest     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateUserAccessLoggingSettingsRequest"}
+	iAssociateUserAccessLoggingSettingsResponse    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateUserAccessLoggingSettingsResponse"}
+	iAssociateUserSettingsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateUserSettingsRequest"}
+	iAssociateUserSettingsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "AssociateUserSettingsResponse"}
+	iCreateBrowserSettingsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateBrowserSettingsRequest"}
+	iCreateBrowserSettingsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateBrowserSettingsResponse"}
+	iCreateDataProtectionSettingsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateDataProtectionSettingsRequest"}
+	iCreateDataProtectionSettingsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateDataProtectionSettingsResponse"}
+	iCreateIdentityProviderRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateIdentityProviderRequest"}
+	iCreateIdentityProviderResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateIdentityProviderResponse"}
+	iCreateIpAccessSettingsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateIpAccessSettingsRequest"}
+	iCreateIpAccessSettingsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateIpAccessSettingsResponse"}
+	iCreateNetworkSettingsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateNetworkSettingsRequest"}
+	iCreateNetworkSettingsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateNetworkSettingsResponse"}
+	iCreatePortalRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreatePortalRequest"}
+	iCreatePortalResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreatePortalResponse"}
+	iCreateSessionLoggerRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateSessionLoggerRequest"}
+	iCreateSessionLoggerResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateSessionLoggerResponse"}
+	iCreateTrustStoreRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateTrustStoreRequest"}
+	iCreateTrustStoreResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateTrustStoreResponse"}
+	iCreateUserAccessLoggingSettingsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateUserAccessLoggingSettingsRequest"}
+	iCreateUserAccessLoggingSettingsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateUserAccessLoggingSettingsResponse"}
+	iCreateUserSettingsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateUserSettingsRequest"}
+	iCreateUserSettingsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "CreateUserSettingsResponse"}
+	iDeleteBrowserSettingsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteBrowserSettingsRequest"}
+	iDeleteBrowserSettingsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteBrowserSettingsResponse"}
+	iDeleteDataProtectionSettingsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteDataProtectionSettingsRequest"}
+	iDeleteDataProtectionSettingsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteDataProtectionSettingsResponse"}
+	iDeleteIdentityProviderRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteIdentityProviderRequest"}
+	iDeleteIdentityProviderResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteIdentityProviderResponse"}
+	iDeleteIpAccessSettingsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteIpAccessSettingsRequest"}
+	iDeleteIpAccessSettingsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteIpAccessSettingsResponse"}
+	iDeleteNetworkSettingsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteNetworkSettingsRequest"}
+	iDeleteNetworkSettingsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteNetworkSettingsResponse"}
+	iDeletePortalRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeletePortalRequest"}
+	iDeletePortalResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeletePortalResponse"}
+	iDeleteSessionLoggerRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteSessionLoggerRequest"}
+	iDeleteSessionLoggerResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteSessionLoggerResponse"}
+	iDeleteTrustStoreRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteTrustStoreRequest"}
+	iDeleteTrustStoreResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteTrustStoreResponse"}
+	iDeleteUserAccessLoggingSettingsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteUserAccessLoggingSettingsRequest"}
+	iDeleteUserAccessLoggingSettingsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteUserAccessLoggingSettingsResponse"}
+	iDeleteUserSettingsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteUserSettingsRequest"}
+	iDeleteUserSettingsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DeleteUserSettingsResponse"}
+	iDisassociateBrowserSettingsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateBrowserSettingsRequest"}
+	iDisassociateBrowserSettingsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateBrowserSettingsResponse"}
+	iDisassociateDataProtectionSettingsRequest     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateDataProtectionSettingsRequest"}
+	iDisassociateDataProtectionSettingsResponse    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateDataProtectionSettingsResponse"}
+	iDisassociateIpAccessSettingsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateIpAccessSettingsRequest"}
+	iDisassociateIpAccessSettingsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateIpAccessSettingsResponse"}
+	iDisassociateNetworkSettingsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateNetworkSettingsRequest"}
+	iDisassociateNetworkSettingsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateNetworkSettingsResponse"}
+	iDisassociateSessionLoggerRequest              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateSessionLoggerRequest"}
+	iDisassociateSessionLoggerResponse             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateSessionLoggerResponse"}
+	iDisassociateTrustStoreRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateTrustStoreRequest"}
+	iDisassociateTrustStoreResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateTrustStoreResponse"}
+	iDisassociateUserAccessLoggingSettingsRequest  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateUserAccessLoggingSettingsRequest"}
+	iDisassociateUserAccessLoggingSettingsResponse = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateUserAccessLoggingSettingsResponse"}
+	iDisassociateUserSettingsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateUserSettingsRequest"}
+	iDisassociateUserSettingsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "DisassociateUserSettingsResponse"}
+	iExpireSessionRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ExpireSessionRequest"}
+	iExpireSessionResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ExpireSessionResponse"}
+	iGetBrowserSettingsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetBrowserSettingsRequest"}
+	iGetBrowserSettingsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetBrowserSettingsResponse"}
+	iGetDataProtectionSettingsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetDataProtectionSettingsRequest"}
+	iGetDataProtectionSettingsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetDataProtectionSettingsResponse"}
+	iGetIdentityProviderRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetIdentityProviderRequest"}
+	iGetIdentityProviderResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetIdentityProviderResponse"}
+	iGetIpAccessSettingsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetIpAccessSettingsRequest"}
+	iGetIpAccessSettingsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetIpAccessSettingsResponse"}
+	iGetNetworkSettingsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetNetworkSettingsRequest"}
+	iGetNetworkSettingsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetNetworkSettingsResponse"}
+	iGetPortalRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetPortalRequest"}
+	iGetPortalResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetPortalResponse"}
+	iGetPortalServiceProviderMetadataRequest       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetPortalServiceProviderMetadataRequest"}
+	iGetPortalServiceProviderMetadataResponse      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetPortalServiceProviderMetadataResponse"}
+	iGetSessionRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetSessionRequest"}
+	iGetSessionLoggerRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetSessionLoggerRequest"}
+	iGetSessionLoggerResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetSessionLoggerResponse"}
+	iGetSessionResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetSessionResponse"}
+	iGetTrustStoreCertificateRequest               = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetTrustStoreCertificateRequest"}
+	iGetTrustStoreCertificateResponse              = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetTrustStoreCertificateResponse"}
+	iGetTrustStoreRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetTrustStoreRequest"}
+	iGetTrustStoreResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetTrustStoreResponse"}
+	iGetUserAccessLoggingSettingsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetUserAccessLoggingSettingsRequest"}
+	iGetUserAccessLoggingSettingsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetUserAccessLoggingSettingsResponse"}
+	iGetUserSettingsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetUserSettingsRequest"}
+	iGetUserSettingsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "GetUserSettingsResponse"}
+	iListBrowserSettingsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListBrowserSettingsRequest"}
+	iListBrowserSettingsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListBrowserSettingsResponse"}
+	iListDataProtectionSettingsRequest             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListDataProtectionSettingsRequest"}
+	iListDataProtectionSettingsResponse            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListDataProtectionSettingsResponse"}
+	iListIdentityProvidersRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListIdentityProvidersRequest"}
+	iListIdentityProvidersResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListIdentityProvidersResponse"}
+	iListIpAccessSettingsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListIpAccessSettingsRequest"}
+	iListIpAccessSettingsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListIpAccessSettingsResponse"}
+	iListNetworkSettingsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListNetworkSettingsRequest"}
+	iListNetworkSettingsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListNetworkSettingsResponse"}
+	iListPortalsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListPortalsRequest"}
+	iListPortalsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListPortalsResponse"}
+	iListSessionLoggersRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListSessionLoggersRequest"}
+	iListSessionLoggersResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListSessionLoggersResponse"}
+	iListSessionsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListSessionsRequest"}
+	iListSessionsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListSessionsResponse"}
+	iListTagsForResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTagsForResourceResponse"}
+	iListTrustStoreCertificatesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTrustStoreCertificatesRequest"}
+	iListTrustStoreCertificatesResponse            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTrustStoreCertificatesResponse"}
+	iListTrustStoresRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTrustStoresRequest"}
+	iListTrustStoresResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListTrustStoresResponse"}
+	iListUserAccessLoggingSettingsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListUserAccessLoggingSettingsRequest"}
+	iListUserAccessLoggingSettingsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListUserAccessLoggingSettingsResponse"}
+	iListUserSettingsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListUserSettingsRequest"}
+	iListUserSettingsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "ListUserSettingsResponse"}
+	iTagResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagResourceRequest"}
+	iTagResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "TagResourceResponse"}
+	iUntagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UntagResourceResponse"}
+	iUpdateBrowserSettingsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateBrowserSettingsRequest"}
+	iUpdateBrowserSettingsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateBrowserSettingsResponse"}
+	iUpdateDataProtectionSettingsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateDataProtectionSettingsRequest"}
+	iUpdateDataProtectionSettingsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateDataProtectionSettingsResponse"}
+	iUpdateIdentityProviderRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateIdentityProviderRequest"}
+	iUpdateIdentityProviderResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateIdentityProviderResponse"}
+	iUpdateIpAccessSettingsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateIpAccessSettingsRequest"}
+	iUpdateIpAccessSettingsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateIpAccessSettingsResponse"}
+	iUpdateNetworkSettingsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateNetworkSettingsRequest"}
+	iUpdateNetworkSettingsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateNetworkSettingsResponse"}
+	iUpdatePortalRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdatePortalRequest"}
+	iUpdatePortalResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdatePortalResponse"}
+	iUpdateSessionLoggerRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateSessionLoggerRequest"}
+	iUpdateSessionLoggerResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateSessionLoggerResponse"}
+	iUpdateTrustStoreRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateTrustStoreRequest"}
+	iUpdateTrustStoreResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateTrustStoreResponse"}
+	iUpdateUserAccessLoggingSettingsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateUserAccessLoggingSettingsRequest"}
+	iUpdateUserAccessLoggingSettingsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateUserAccessLoggingSettingsResponse"}
+	iUpdateUserSettingsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateUserSettingsRequest"}
+	iUpdateUserSettingsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workspacesweb", Name: "UpdateUserSettingsResponse"}
+	pUnit                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/browserSettings",
-	Code: 200})
-
-var AssociateDataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateDataProtectionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/dataProtectionSettings",
-	Code: 200})
-
-var AssociateIpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateIpAccessSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/ipAccessSettings",
-	Code: 200})
-
-var AssociateNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/networkSettings",
-	Code: 200})
-
-var AssociateSessionLogger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateSessionLogger",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/sessionLogger",
-	Code: 200})
-
-var AssociateTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateTrustStore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/trustStores",
-	Code: 200})
-
-var AssociateUserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateUserAccessLoggingSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/userAccessLoggingSettings",
-	Code: 200})
-
-var AssociateUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}/userSettings",
-	Code: 200})
-
-var CreateBrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateBrowserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/browserSettings",
-	Code: 200})
-
-var CreateDataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateDataProtectionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/dataProtectionSettings",
-	Code: 200})
-
-var CreateIdentityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateIdentityProvider",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/identityProviders",
-	Code: 200})
-
-var CreateIpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateIpAccessSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ipAccessSettings",
-	Code: 200})
-
-var CreateNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/networkSettings",
-	Code: 200})
-
-var CreatePortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreatePortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/portals",
-	Code: 200})
-
-var CreateSessionLogger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateSessionLogger",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sessionLoggers",
-	Code: 200})
-
-var CreateTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateTrustStore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/trustStores",
-	Code: 200})
-
-var CreateUserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateUserAccessLoggingSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/userAccessLoggingSettings",
-	Code: 200})
-
-var CreateUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/userSettings",
-	Code: 200})
-
-var DeleteBrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteBrowserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/browserSettings/{browserSettingsArn+}",
-	Code: 200})
-
-var DeleteDataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteDataProtectionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/dataProtectionSettings/{dataProtectionSettingsArn+}",
-	Code: 200})
-
-var DeleteIdentityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteIdentityProvider",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/identityProviders/{identityProviderArn+}",
-	Code: 200})
-
-var DeleteIpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteIpAccessSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/ipAccessSettings/{ipAccessSettingsArn+}",
-	Code: 200})
-
-var DeleteNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/networkSettings/{networkSettingsArn+}",
-	Code: 200})
-
-var DeletePortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeletePortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}",
-	Code: 200})
-
-var DeleteSessionLogger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteSessionLogger",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/sessionLoggers/{sessionLoggerArn+}",
-	Code: 200})
-
-var DeleteTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteTrustStore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/trustStores/{trustStoreArn+}",
-	Code: 200})
-
-var DeleteUserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteUserAccessLoggingSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/userAccessLoggingSettings/{userAccessLoggingSettingsArn+}",
-	Code: 200})
-
-var DeleteUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/userSettings/{userSettingsArn+}",
-	Code: 200})
-
-var DisassociateBrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateBrowserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/browserSettings",
-	Code: 200})
-
-var DisassociateDataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateDataProtectionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/dataProtectionSettings",
-	Code: 200})
-
-var DisassociateIpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateIpAccessSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/ipAccessSettings",
-	Code: 200})
-
-var DisassociateNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/networkSettings",
-	Code: 200})
-
-var DisassociateSessionLogger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateSessionLogger",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/sessionLogger",
-	Code: 200})
-
-var DisassociateTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateTrustStore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/trustStores",
-	Code: 200})
-
-var DisassociateUserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateUserAccessLoggingSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/userAccessLoggingSettings",
-	Code: 200})
-
-var DisassociateUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalArn+}/userSettings",
-	Code: 200})
-
-var ExpireSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ExpireSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/portals/{portalId}/sessions/{sessionId}",
-	Code: 200})
-
-var GetBrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetBrowserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/browserSettings/{browserSettingsArn+}",
-	Code: 200})
-
-var GetDataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetDataProtectionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/dataProtectionSettings/{dataProtectionSettingsArn+}",
-	Code: 200})
-
-var GetIdentityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetIdentityProvider",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/identityProviders/{identityProviderArn+}",
-	Code: 200})
-
-var GetIpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetIpAccessSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/ipAccessSettings/{ipAccessSettingsArn+}",
-	Code: 200})
-
-var GetNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networkSettings/{networkSettingsArn+}",
-	Code: 200})
-
-var GetPortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetPortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/portals/{portalArn+}",
-	Code: 200})
-
-var GetPortalServiceProviderMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetPortalServiceProviderMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/portalIdp/{portalArn+}",
-	Code: 200})
-
-var GetSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/portals/{portalId}/sessions/{sessionId}",
-	Code: 200})
-
-var GetSessionLogger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetSessionLogger",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sessionLoggers/{sessionLoggerArn+}",
-	Code: 200})
-
-var GetTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetTrustStore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/trustStores/{trustStoreArn+}",
-	Code: 200})
-
-var GetTrustStoreCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetTrustStoreCertificate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/trustStores/{trustStoreArn+}/certificate",
-	Code: 200})
-
-var GetUserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetUserAccessLoggingSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/userAccessLoggingSettings/{userAccessLoggingSettingsArn+}",
-	Code: 200})
-
-var GetUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/userSettings/{userSettingsArn+}",
-	Code: 200})
-
-var ListBrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListBrowserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/browserSettings",
-	Code: 200})
-
-var ListDataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListDataProtectionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/dataProtectionSettings",
-	Code: 200})
-
-var ListIdentityProviders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListIdentityProviders",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/portals/{portalArn+}/identityProviders",
-	Code: 200})
-
-var ListIpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListIpAccessSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/ipAccessSettings",
-	Code: 200})
-
-var ListNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/networkSettings",
-	Code: 200})
-
-var ListPortals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListPortals",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/portals",
-	Code: 200})
-
-var ListSessionLoggers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListSessionLoggers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sessionLoggers",
-	Code: 200})
-
-var ListSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListSessions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/portals/{portalId}/sessions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn+}",
-	Code: 200})
-
-var ListTrustStoreCertificates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTrustStoreCertificates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/trustStores/{trustStoreArn+}/certificates",
-	Code: 200})
-
-var ListTrustStores = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTrustStores",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/trustStores",
-	Code: 200})
-
-var ListUserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListUserAccessLoggingSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/userAccessLoggingSettings",
-	Code: 200})
-
-var ListUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/userSettings",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn+}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn+}",
-	Code: 200})
-
-var UpdateBrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateBrowserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/browserSettings/{browserSettingsArn+}",
-	Code: 200})
-
-var UpdateDataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateDataProtectionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/dataProtectionSettings/{dataProtectionSettingsArn+}",
-	Code: 200})
-
-var UpdateIdentityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateIdentityProvider",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/identityProviders/{identityProviderArn+}",
-	Code: 200})
-
-var UpdateIpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateIpAccessSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/ipAccessSettings/{ipAccessSettingsArn+}",
-	Code: 200})
-
-var UpdateNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateNetworkSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/networkSettings/{networkSettingsArn+}",
-	Code: 200})
-
-var UpdatePortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdatePortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/portals/{portalArn+}",
-	Code: 200})
-
-var UpdateSessionLogger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateSessionLogger",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sessionLoggers/{sessionLoggerArn+}",
-	Code: 200})
-
-var UpdateTrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateTrustStore",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/trustStores/{trustStoreArn+}",
-	Code: 200})
-
-var UpdateUserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateUserAccessLoggingSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/userAccessLoggingSettings/{userAccessLoggingSettingsArn+}",
-	Code: 200})
-
-var UpdateUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/userSettings/{userSettingsArn+}",
-	Code: 200})
-
-var _AWSErmineControlPlaneService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AWSErmineControlPlaneService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSErmineControlPlaneService = smithy.NewServiceSchema(_AWSErmineControlPlaneService, "2020-07-08")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ArnList",
-}, smithy.ShapeTypeList, 1)
-var _ArnList_member *smithy.Schema
-
-var _AuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AuthenticationType",
-}, smithy.ShapeTypeString, 0)
-
-var _BlockedCategories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BlockedCategories",
-}, smithy.ShapeTypeList, 1)
-var _BlockedCategories_member *smithy.Schema
-
-var BrandingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrandingConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var BrandingConfiguration_logo *smithy.Schema
-
-var BrandingConfiguration_wallpaper *smithy.Schema
-
-var BrandingConfiguration_favicon *smithy.Schema
-
-var BrandingConfiguration_localizedStrings *smithy.Schema
-
-var BrandingConfiguration_colorTheme *smithy.Schema
-
-var BrandingConfiguration_termsOfService *smithy.Schema
-
-var BrandingConfigurationCreateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrandingConfigurationCreateInput",
-}, smithy.ShapeTypeStructure, 6)
-var BrandingConfigurationCreateInput_logo *smithy.Schema
-
-var BrandingConfigurationCreateInput_wallpaper *smithy.Schema
-
-var BrandingConfigurationCreateInput_favicon *smithy.Schema
-
-var BrandingConfigurationCreateInput_localizedStrings *smithy.Schema
-
-var BrandingConfigurationCreateInput_colorTheme *smithy.Schema
-
-var BrandingConfigurationCreateInput_termsOfService *smithy.Schema
-
-var BrandingConfigurationUpdateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrandingConfigurationUpdateInput",
-}, smithy.ShapeTypeStructure, 6)
-var BrandingConfigurationUpdateInput_logo *smithy.Schema
-
-var BrandingConfigurationUpdateInput_wallpaper *smithy.Schema
-
-var BrandingConfigurationUpdateInput_favicon *smithy.Schema
-
-var BrandingConfigurationUpdateInput_localizedStrings *smithy.Schema
-
-var BrandingConfigurationUpdateInput_colorTheme *smithy.Schema
-
-var BrandingConfigurationUpdateInput_termsOfService *smithy.Schema
-
-var _BrandingSafeStringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrandingSafeStringType",
-}, smithy.ShapeTypeString, 0)
-
-var _BrowserPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrowserPolicy",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var BrowserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrowserSettings",
-}, smithy.ShapeTypeStructure, 6)
-var BrowserSettings_browserSettingsArn *smithy.Schema
-
-var BrowserSettings_associatedPortalArns *smithy.Schema
-
-var BrowserSettings_browserPolicy *smithy.Schema
-
-var BrowserSettings_customerManagedKey *smithy.Schema
-
-var BrowserSettings_additionalEncryptionContext *smithy.Schema
-
-var BrowserSettings_webContentFilteringPolicy *smithy.Schema
-
-var _BrowserSettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrowserSettingsList",
-}, smithy.ShapeTypeList, 1)
-var _BrowserSettingsList_member *smithy.Schema
-
-var BrowserSettingsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrowserSettingsSummary",
-}, smithy.ShapeTypeStructure, 1)
-var BrowserSettingsSummary_browserSettingsArn *smithy.Schema
-
-var _BrowserType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BrowserType",
-}, smithy.ShapeTypeString, 0)
-
-var _BuiltInPatternId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "BuiltInPatternId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Category = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Category",
-}, smithy.ShapeTypeEnum, 27)
-var Category_CULTS *smithy.Schema
-
-var Category_GAMBLING *smithy.Schema
-
-var Category_NUDITY *smithy.Schema
-
-var Category_PORNOGRAPHY *smithy.Schema
-
-var Category_SEX_EDUCATION *smithy.Schema
-
-var Category_TASTELESS *smithy.Schema
-
-var Category_VIOLENCE *smithy.Schema
-
-var Category_DOWNLOAD_SITES *smithy.Schema
-
-var Category_IMAGE_SHARING *smithy.Schema
-
-var Category_PEER_TO_PEER *smithy.Schema
-
-var Category_STREAMING_MEDIA_AND_DOWNLOADS *smithy.Schema
-
-var Category_GENERATIVE_AI *smithy.Schema
-
-var Category_CRIMINAL_ACTIVITY *smithy.Schema
-
-var Category_HACKING *smithy.Schema
-
-var Category_HATE_AND_INTOLERANCE *smithy.Schema
-
-var Category_ILLEGAL_DRUG *smithy.Schema
-
-var Category_ILLEGAL_SOFTWARE *smithy.Schema
-
-var Category_SCHOOL_CHEATING *smithy.Schema
-
-var Category_SELF_HARM *smithy.Schema
-
-var Category_WEAPONS *smithy.Schema
-
-var Category_CHAT *smithy.Schema
-
-var Category_GAMES *smithy.Schema
-
-var Category_INSTANT_MESSAGING *smithy.Schema
-
-var Category_PROFESSIONAL_NETWORK *smithy.Schema
-
-var Category_SOCIAL_NETWORKING *smithy.Schema
-
-var Category_WEB_BASED_EMAIL *smithy.Schema
-
-var Category_PARKED_DOMAINS *smithy.Schema
-
-var Certificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Certificate",
-}, smithy.ShapeTypeStructure, 6)
-var Certificate_thumbprint *smithy.Schema
-
-var Certificate_subject *smithy.Schema
-
-var Certificate_issuer *smithy.Schema
-
-var Certificate_notValidBefore *smithy.Schema
-
-var Certificate_notValidAfter *smithy.Schema
-
-var Certificate_body *smithy.Schema
-
-var _CertificateAuthorityBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CertificateAuthorityBody",
-}, smithy.ShapeTypeBlob, 0)
-
-var _CertificateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CertificateList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateList_member *smithy.Schema
-
-var _CertificatePrincipal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CertificatePrincipal",
-}, smithy.ShapeTypeString, 0)
-
-var CertificateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CertificateSummary",
-}, smithy.ShapeTypeStructure, 5)
-var CertificateSummary_thumbprint *smithy.Schema
-
-var CertificateSummary_subject *smithy.Schema
-
-var CertificateSummary_issuer *smithy.Schema
-
-var CertificateSummary_notValidBefore *smithy.Schema
-
-var CertificateSummary_notValidAfter *smithy.Schema
-
-var _CertificateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CertificateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateSummaryList_member *smithy.Schema
-
-var _CertificateThumbprint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CertificateThumbprint",
-}, smithy.ShapeTypeString, 0)
-
-var _CertificateThumbprintList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CertificateThumbprintList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateThumbprintList_member *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ColorTheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ColorTheme",
-}, smithy.ShapeTypeEnum, 2)
-var ColorTheme_LIGHT *smithy.Schema
-
-var ColorTheme_DARK *smithy.Schema
-
-var _ConfidenceLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ConfidenceLevel",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _ContactLinkUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ContactLinkUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _CookieDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CookieDomain",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CookieName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CookieName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CookiePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CookiePath",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CookieSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CookieSpecification",
-}, smithy.ShapeTypeStructure, 3)
-var CookieSpecification_domain *smithy.Schema
-
-var CookieSpecification_name *smithy.Schema
-
-var CookieSpecification_path *smithy.Schema
-
-var _CookieSpecifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CookieSpecifications",
-}, smithy.ShapeTypeList, 1)
-var _CookieSpecifications_member *smithy.Schema
-
-var CookieSynchronizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CookieSynchronizationConfiguration",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var CookieSynchronizationConfiguration_allowlist *smithy.Schema
-
-var CookieSynchronizationConfiguration_blocklist *smithy.Schema
-
-var CustomPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CustomPattern",
-}, smithy.ShapeTypeStructure, 4)
-var CustomPattern_patternName *smithy.Schema
-
-var CustomPattern_patternRegex *smithy.Schema
-
-var CustomPattern_patternDescription *smithy.Schema
-
-var CustomPattern_keywordRegex *smithy.Schema
-
-var DataProtectionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DataProtectionSettings",
-}, smithy.ShapeTypeStructure, 8)
-var DataProtectionSettings_dataProtectionSettingsArn *smithy.Schema
-
-var DataProtectionSettings_inlineRedactionConfiguration *smithy.Schema
-
-var DataProtectionSettings_associatedPortalArns *smithy.Schema
-
-var DataProtectionSettings_displayName *smithy.Schema
-
-var DataProtectionSettings_description *smithy.Schema
-
-var DataProtectionSettings_creationDate *smithy.Schema
-
-var DataProtectionSettings_customerManagedKey *smithy.Schema
-
-var DataProtectionSettings_additionalEncryptionContext *smithy.Schema
-
-var _DataProtectionSettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DataProtectionSettingsList",
-}, smithy.ShapeTypeList, 1)
-var _DataProtectionSettingsList_member *smithy.Schema
-
-var DataProtectionSettingsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DataProtectionSettingsSummary",
-}, smithy.ShapeTypeStructure, 4)
-var DataProtectionSettingsSummary_dataProtectionSettingsArn *smithy.Schema
-
-var DataProtectionSettingsSummary_displayName *smithy.Schema
-
-var DataProtectionSettingsSummary_description *smithy.Schema
-
-var DataProtectionSettingsSummary_creationDate *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DescriptionSafe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DescriptionSafe",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DisconnectTimeoutInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisconnectTimeoutInMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DisplayNameSafe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisplayNameSafe",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EnabledType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "EnabledType",
-}, smithy.ShapeTypeString, 0)
-
-var _EncryptionContextMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "EncryptionContextMap",
-}, smithy.ShapeTypeMap, 2)
-var _EncryptionContextMap_key *smithy.Schema
-
-var _EncryptionContextMap_value *smithy.Schema
-
-var Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Event",
-}, smithy.ShapeTypeEnum, 17)
-var Event_WEBSITE_INTERACT *smithy.Schema
-
-var Event_FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK *smithy.Schema
-
-var Event_FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK *smithy.Schema
-
-var Event_FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK *smithy.Schema
-
-var Event_FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER *smithy.Schema
-
-var Event_CONTENT_PASTE_TO_WEBSITE *smithy.Schema
-
-var Event_CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD *smithy.Schema
-
-var Event_CONTENT_COPY_FROM_WEBSITE *smithy.Schema
-
-var Event_URL_LOAD *smithy.Schema
-
-var Event_TAB_OPEN *smithy.Schema
-
-var Event_TAB_CLOSE *smithy.Schema
-
-var Event_PRINT_JOB_SUBMIT *smithy.Schema
-
-var Event_SESSION_CONNECT *smithy.Schema
-
-var Event_SESSION_START *smithy.Schema
-
-var Event_SESSION_DISCONNECT *smithy.Schema
-
-var Event_SESSION_END *smithy.Schema
-
-var Event_URL_BLOCK_BY_CONTENT_FILTER *smithy.Schema
-
-var EventFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "EventFilter",
-}, smithy.ShapeTypeUnion, 2)
-var EventFilter_all *smithy.Schema
-
-var EventFilter_include *smithy.Schema
-
-var _Events = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Events",
-}, smithy.ShapeTypeList, 1)
-var _Events_member *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var FolderStructure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "FolderStructure",
-}, smithy.ShapeTypeEnum, 2)
-var FolderStructure_FLAT *smithy.Schema
-
-var FolderStructure_NESTED_BY_DATE *smithy.Schema
-
-var _GlobalInlineRedactionUrls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GlobalInlineRedactionUrls",
-}, smithy.ShapeTypeList, 1)
-var _GlobalInlineRedactionUrls_member *smithy.Schema
-
-var _HiddenToolbarItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "HiddenToolbarItemList",
-}, smithy.ShapeTypeList, 1)
-var _HiddenToolbarItemList_member *smithy.Schema
-
-var _IconImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IconImage",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.MediaType{Type: "image/*"})
-
-var IconImageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IconImageInput",
-}, smithy.ShapeTypeUnion, 2)
-var IconImageInput_blob *smithy.Schema
-
-var IconImageInput_s3Uri *smithy.Schema
-
-var IdentityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IdentityProvider",
-}, smithy.ShapeTypeStructure, 4)
-var IdentityProvider_identityProviderArn *smithy.Schema
-
-var IdentityProvider_identityProviderName *smithy.Schema
-
-var IdentityProvider_identityProviderType *smithy.Schema
-
-var IdentityProvider_identityProviderDetails *smithy.Schema
-
-var _IdentityProviderDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IdentityProviderDetails",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _IdentityProviderDetails_key *smithy.Schema
-
-var _IdentityProviderDetails_value *smithy.Schema
-
-var _IdentityProviderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IdentityProviderList",
-}, smithy.ShapeTypeList, 1)
-var _IdentityProviderList_member *smithy.Schema
-
-var _IdentityProviderName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IdentityProviderName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var IdentityProviderSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IdentityProviderSummary",
-}, smithy.ShapeTypeStructure, 3)
-var IdentityProviderSummary_identityProviderArn *smithy.Schema
-
-var IdentityProviderSummary_identityProviderName *smithy.Schema
-
-var IdentityProviderSummary_identityProviderType *smithy.Schema
-
-var _IdentityProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IdentityProviderType",
-}, smithy.ShapeTypeString, 0)
-
-var _IdleDisconnectTimeoutInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IdleDisconnectTimeoutInMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var ImageMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ImageMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var ImageMetadata_mimeType *smithy.Schema
-
-var ImageMetadata_fileExtension *smithy.Schema
-
-var ImageMetadata_lastUploadTimestamp *smithy.Schema
-
-var InlineRedactionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "InlineRedactionConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var InlineRedactionConfiguration_inlineRedactionPatterns *smithy.Schema
-
-var InlineRedactionConfiguration_globalEnforcedUrls *smithy.Schema
-
-var InlineRedactionConfiguration_globalExemptUrls *smithy.Schema
-
-var InlineRedactionConfiguration_globalConfidenceLevel *smithy.Schema
-
-var InlineRedactionPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "InlineRedactionPattern",
-}, smithy.ShapeTypeStructure, 6)
-var InlineRedactionPattern_builtInPatternId *smithy.Schema
-
-var InlineRedactionPattern_customPattern *smithy.Schema
-
-var InlineRedactionPattern_redactionPlaceHolder *smithy.Schema
-
-var InlineRedactionPattern_enforcedUrls *smithy.Schema
-
-var InlineRedactionPattern_exemptUrls *smithy.Schema
-
-var InlineRedactionPattern_confidenceLevel *smithy.Schema
-
-var _InlineRedactionPatterns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "InlineRedactionPatterns",
-}, smithy.ShapeTypeList, 1)
-var _InlineRedactionPatterns_member *smithy.Schema
-
-var _InlineRedactionUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "InlineRedactionUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _InlineRedactionUrls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "InlineRedactionUrls",
-}, smithy.ShapeTypeList, 1)
-var _InlineRedactionUrls_member *smithy.Schema
-
-var _InstanceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "InstanceType",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var IpAccessSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpAccessSettings",
-}, smithy.ShapeTypeStructure, 8)
-var IpAccessSettings_ipAccessSettingsArn *smithy.Schema
-
-var IpAccessSettings_associatedPortalArns *smithy.Schema
-
-var IpAccessSettings_ipRules *smithy.Schema
-
-var IpAccessSettings_displayName *smithy.Schema
-
-var IpAccessSettings_description *smithy.Schema
-
-var IpAccessSettings_creationDate *smithy.Schema
-
-var IpAccessSettings_customerManagedKey *smithy.Schema
-
-var IpAccessSettings_additionalEncryptionContext *smithy.Schema
-
-var _IpAccessSettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpAccessSettingsList",
-}, smithy.ShapeTypeList, 1)
-var _IpAccessSettingsList_member *smithy.Schema
-
-var IpAccessSettingsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpAccessSettingsSummary",
-}, smithy.ShapeTypeStructure, 4)
-var IpAccessSettingsSummary_ipAccessSettingsArn *smithy.Schema
-
-var IpAccessSettingsSummary_displayName *smithy.Schema
-
-var IpAccessSettingsSummary_description *smithy.Schema
-
-var IpAccessSettingsSummary_creationDate *smithy.Schema
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _IpAddressList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpAddressList",
-}, smithy.ShapeTypeList, 1)
-var _IpAddressList_member *smithy.Schema
-
-var _IpRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpRange",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var IpRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpRule",
-}, smithy.ShapeTypeStructure, 2)
-var IpRule_ipRange *smithy.Schema
-
-var IpRule_description *smithy.Schema
-
-var _IpRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "IpRuleList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _IpRuleList_member *smithy.Schema
-
-var _keyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "keyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _KinesisStreamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "KinesisStreamArn",
-}, smithy.ShapeTypeString, 0)
-
-var Locale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Locale",
-}, smithy.ShapeTypeEnum, 11)
-var Locale_DE *smithy.Schema
-
-var Locale_EN *smithy.Schema
-
-var Locale_ES *smithy.Schema
-
-var Locale_FR *smithy.Schema
-
-var Locale_ID *smithy.Schema
-
-var Locale_IT *smithy.Schema
-
-var Locale_JP *smithy.Schema
-
-var Locale_KR *smithy.Schema
-
-var Locale_BR *smithy.Schema
-
-var Locale_CN *smithy.Schema
-
-var Locale_TW *smithy.Schema
-
-var _LocalizedBrandingStringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "LocalizedBrandingStringMap",
-}, smithy.ShapeTypeMap, 2)
-var _LocalizedBrandingStringMap_key *smithy.Schema
-
-var _LocalizedBrandingStringMap_value *smithy.Schema
-
-var LocalizedBrandingStrings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "LocalizedBrandingStrings",
-}, smithy.ShapeTypeStructure, 8)
-var LocalizedBrandingStrings_browserTabTitle *smithy.Schema
-
-var LocalizedBrandingStrings_welcomeText *smithy.Schema
-
-var LocalizedBrandingStrings_loginTitle *smithy.Schema
-
-var LocalizedBrandingStrings_loginDescription *smithy.Schema
-
-var LocalizedBrandingStrings_loginButtonText *smithy.Schema
-
-var LocalizedBrandingStrings_contactLink *smithy.Schema
-
-var LocalizedBrandingStrings_contactButtonText *smithy.Schema
-
-var LocalizedBrandingStrings_loadingText *smithy.Schema
-
-var LogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "LogConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LogConfiguration_s3 *smithy.Schema
-
-var LogFileFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "LogFileFormat",
-}, smithy.ShapeTypeEnum, 2)
-var LogFileFormat_JSON_LINES *smithy.Schema
-
-var LogFileFormat_JSON *smithy.Schema
-
-var _Markdown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Markdown",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "text/markdown"},
-
-	&smithytraits.Sensitive{})
-
-var _MaxConcurrentSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "MaxConcurrentSessions",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxDisplayResolution = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "MaxDisplayResolution",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MimeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "MimeType",
-}, smithy.ShapeTypeEnum, 3)
-var MimeType_PNG *smithy.Schema
-
-var MimeType_JPEG *smithy.Schema
-
-var MimeType_ICO *smithy.Schema
-
-var NetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "NetworkSettings",
-}, smithy.ShapeTypeStructure, 5)
-var NetworkSettings_networkSettingsArn *smithy.Schema
-
-var NetworkSettings_associatedPortalArns *smithy.Schema
-
-var NetworkSettings_vpcId *smithy.Schema
-
-var NetworkSettings_subnetIds *smithy.Schema
-
-var NetworkSettings_securityGroupIds *smithy.Schema
-
-var _NetworkSettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "NetworkSettingsList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkSettingsList_member *smithy.Schema
-
-var NetworkSettingsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "NetworkSettingsSummary",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkSettingsSummary_networkSettingsArn *smithy.Schema
-
-var NetworkSettingsSummary_vpcId *smithy.Schema
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PatternName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PatternName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Portal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Portal",
-}, smithy.ShapeTypeStructure, 22)
-var Portal_portalArn *smithy.Schema
-
-var Portal_rendererType *smithy.Schema
-
-var Portal_browserType *smithy.Schema
-
-var Portal_portalStatus *smithy.Schema
-
-var Portal_portalEndpoint *smithy.Schema
-
-var Portal_displayName *smithy.Schema
-
-var Portal_creationDate *smithy.Schema
-
-var Portal_browserSettingsArn *smithy.Schema
-
-var Portal_dataProtectionSettingsArn *smithy.Schema
-
-var Portal_userSettingsArn *smithy.Schema
-
-var Portal_networkSettingsArn *smithy.Schema
-
-var Portal_sessionLoggerArn *smithy.Schema
-
-var Portal_trustStoreArn *smithy.Schema
-
-var Portal_statusReason *smithy.Schema
-
-var Portal_userAccessLoggingSettingsArn *smithy.Schema
-
-var Portal_authenticationType *smithy.Schema
-
-var Portal_ipAccessSettingsArn *smithy.Schema
-
-var Portal_customerManagedKey *smithy.Schema
-
-var Portal_additionalEncryptionContext *smithy.Schema
-
-var Portal_instanceType *smithy.Schema
-
-var Portal_maxConcurrentSessions *smithy.Schema
-
-var Portal_portalCustomDomain *smithy.Schema
-
-var _PortalCustomDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PortalCustomDomain",
-}, smithy.ShapeTypeString, 0)
-
-var _PortalEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PortalEndpoint",
-}, smithy.ShapeTypeString, 0)
-
-var _PortalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PortalId",
-}, smithy.ShapeTypeString, 0)
-
-var _PortalList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PortalList",
-}, smithy.ShapeTypeList, 1)
-var _PortalList_member *smithy.Schema
-
-var _PortalStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PortalStatus",
-}, smithy.ShapeTypeString, 0)
-
-var PortalSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "PortalSummary",
-}, smithy.ShapeTypeStructure, 19)
-var PortalSummary_portalArn *smithy.Schema
-
-var PortalSummary_rendererType *smithy.Schema
-
-var PortalSummary_browserType *smithy.Schema
-
-var PortalSummary_portalStatus *smithy.Schema
-
-var PortalSummary_portalEndpoint *smithy.Schema
-
-var PortalSummary_displayName *smithy.Schema
-
-var PortalSummary_creationDate *smithy.Schema
-
-var PortalSummary_browserSettingsArn *smithy.Schema
-
-var PortalSummary_dataProtectionSettingsArn *smithy.Schema
-
-var PortalSummary_userSettingsArn *smithy.Schema
-
-var PortalSummary_networkSettingsArn *smithy.Schema
-
-var PortalSummary_sessionLoggerArn *smithy.Schema
-
-var PortalSummary_trustStoreArn *smithy.Schema
-
-var PortalSummary_userAccessLoggingSettingsArn *smithy.Schema
-
-var PortalSummary_authenticationType *smithy.Schema
-
-var PortalSummary_ipAccessSettingsArn *smithy.Schema
-
-var PortalSummary_instanceType *smithy.Schema
-
-var PortalSummary_maxConcurrentSessions *smithy.Schema
-
-var PortalSummary_portalCustomDomain *smithy.Schema
-
-var _QuotaCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "QuotaCode",
-}, smithy.ShapeTypeString, 0)
-
-var RedactionPlaceHolder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "RedactionPlaceHolder",
-}, smithy.ShapeTypeStructure, 2)
-var RedactionPlaceHolder_redactionPlaceHolderType *smithy.Schema
-
-var RedactionPlaceHolder_redactionPlaceHolderText *smithy.Schema
-
-var _RedactionPlaceHolderText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "RedactionPlaceHolderText",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RedactionPlaceHolderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "RedactionPlaceHolderType",
-}, smithy.ShapeTypeString, 0)
-
-var _Regex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Regex",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RendererType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "RendererType",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _S3BucketOwner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "S3BucketOwner",
-}, smithy.ShapeTypeString, 0)
-
-var _S3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "S3KeyPrefix",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var S3LogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "S3LogConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var S3LogConfiguration_bucket *smithy.Schema
-
-var S3LogConfiguration_keyPrefix *smithy.Schema
-
-var S3LogConfiguration_bucketOwner *smithy.Schema
-
-var S3LogConfiguration_logFileFormat *smithy.Schema
-
-var S3LogConfiguration_folderStructure *smithy.Schema
-
-var _S3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "S3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _SamlMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SamlMetadata",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SecurityGroupIdList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIdList_member *smithy.Schema
-
-var _ServiceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ServiceCode",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var Session = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Session",
-}, smithy.ShapeTypeStructure, 7)
-var Session_portalArn *smithy.Schema
-
-var Session_sessionId *smithy.Schema
-
-var Session_username *smithy.Schema
-
-var Session_clientIpAddresses *smithy.Schema
-
-var Session_status *smithy.Schema
-
-var Session_startTime *smithy.Schema
-
-var Session_endTime *smithy.Schema
-
-var _SessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionId",
-}, smithy.ShapeTypeString, 0)
-
-var SessionLogger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionLogger",
-}, smithy.ShapeTypeStructure, 8)
-var SessionLogger_sessionLoggerArn *smithy.Schema
-
-var SessionLogger_eventFilter *smithy.Schema
-
-var SessionLogger_logConfiguration *smithy.Schema
-
-var SessionLogger_customerManagedKey *smithy.Schema
-
-var SessionLogger_additionalEncryptionContext *smithy.Schema
-
-var SessionLogger_associatedPortalArns *smithy.Schema
-
-var SessionLogger_displayName *smithy.Schema
-
-var SessionLogger_creationDate *smithy.Schema
-
-var _SessionLoggerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionLoggerList",
-}, smithy.ShapeTypeList, 1)
-var _SessionLoggerList_member *smithy.Schema
-
-var SessionLoggerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionLoggerSummary",
-}, smithy.ShapeTypeStructure, 4)
-var SessionLoggerSummary_sessionLoggerArn *smithy.Schema
-
-var SessionLoggerSummary_logConfiguration *smithy.Schema
-
-var SessionLoggerSummary_displayName *smithy.Schema
-
-var SessionLoggerSummary_creationDate *smithy.Schema
-
-var SessionSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionSortBy",
-}, smithy.ShapeTypeEnum, 2)
-var SessionSortBy_START_TIME_ASCENDING *smithy.Schema
-
-var SessionSortBy_START_TIME_DESCENDING *smithy.Schema
-
-var SessionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var SessionStatus_ACTIVE *smithy.Schema
-
-var SessionStatus_TERMINATED *smithy.Schema
-
-var SessionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionSummary",
-}, smithy.ShapeTypeStructure, 6)
-var SessionSummary_portalArn *smithy.Schema
-
-var SessionSummary_sessionId *smithy.Schema
-
-var SessionSummary_username *smithy.Schema
-
-var SessionSummary_status *smithy.Schema
-
-var SessionSummary_startTime *smithy.Schema
-
-var SessionSummary_endTime *smithy.Schema
-
-var _SessionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SessionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SessionSummaryList_member *smithy.Schema
-
-var _StatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "StatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var _StringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "StringType",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SubnetIdList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIdList_member *smithy.Schema
-
-var _SubresourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "SubresourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var ToolbarConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ToolbarConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ToolbarConfiguration_toolbarType *smithy.Schema
-
-var ToolbarConfiguration_visualMode *smithy.Schema
-
-var ToolbarConfiguration_hiddenToolbarItems *smithy.Schema
-
-var ToolbarConfiguration_maxDisplayResolution *smithy.Schema
-
-var _ToolbarItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ToolbarItem",
-}, smithy.ShapeTypeString, 0)
-
-var _ToolbarType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ToolbarType",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var TooManyTagsException_resourceName *smithy.Schema
-
-var TrustStore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TrustStore",
-}, smithy.ShapeTypeStructure, 2)
-var TrustStore_associatedPortalArns *smithy.Schema
-
-var TrustStore_trustStoreArn *smithy.Schema
-
-var TrustStoreSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TrustStoreSummary",
-}, smithy.ShapeTypeStructure, 1)
-var TrustStoreSummary_trustStoreArn *smithy.Schema
-
-var _TrustStoreSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TrustStoreSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TrustStoreSummaryList_member *smithy.Schema
-
-var _UrlPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UrlPattern",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UrlPatternList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UrlPatternList",
-}, smithy.ShapeTypeList, 1)
-var _UrlPatternList_member *smithy.Schema
-
-var UserAccessLoggingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UserAccessLoggingSettings",
-}, smithy.ShapeTypeStructure, 3)
-var UserAccessLoggingSettings_userAccessLoggingSettingsArn *smithy.Schema
-
-var UserAccessLoggingSettings_associatedPortalArns *smithy.Schema
-
-var UserAccessLoggingSettings_kinesisStreamArn *smithy.Schema
-
-var _UserAccessLoggingSettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UserAccessLoggingSettingsList",
-}, smithy.ShapeTypeList, 1)
-var _UserAccessLoggingSettingsList_member *smithy.Schema
-
-var UserAccessLoggingSettingsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UserAccessLoggingSettingsSummary",
-}, smithy.ShapeTypeStructure, 2)
-var UserAccessLoggingSettingsSummary_userAccessLoggingSettingsArn *smithy.Schema
-
-var UserAccessLoggingSettingsSummary_kinesisStreamArn *smithy.Schema
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var UserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UserSettings",
-}, smithy.ShapeTypeStructure, 16)
-var UserSettings_userSettingsArn *smithy.Schema
-
-var UserSettings_associatedPortalArns *smithy.Schema
-
-var UserSettings_copyAllowed *smithy.Schema
-
-var UserSettings_pasteAllowed *smithy.Schema
-
-var UserSettings_downloadAllowed *smithy.Schema
-
-var UserSettings_uploadAllowed *smithy.Schema
-
-var UserSettings_printAllowed *smithy.Schema
-
-var UserSettings_disconnectTimeoutInMinutes *smithy.Schema
-
-var UserSettings_idleDisconnectTimeoutInMinutes *smithy.Schema
-
-var UserSettings_cookieSynchronizationConfiguration *smithy.Schema
-
-var UserSettings_customerManagedKey *smithy.Schema
-
-var UserSettings_additionalEncryptionContext *smithy.Schema
-
-var UserSettings_deepLinkAllowed *smithy.Schema
-
-var UserSettings_toolbarConfiguration *smithy.Schema
-
-var UserSettings_brandingConfiguration *smithy.Schema
-
-var UserSettings_webAuthnAllowed *smithy.Schema
-
-var _UserSettingsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UserSettingsList",
-}, smithy.ShapeTypeList, 1)
-var _UserSettingsList_member *smithy.Schema
-
-var UserSettingsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UserSettingsSummary",
-}, smithy.ShapeTypeStructure, 13)
-var UserSettingsSummary_userSettingsArn *smithy.Schema
-
-var UserSettingsSummary_copyAllowed *smithy.Schema
-
-var UserSettingsSummary_pasteAllowed *smithy.Schema
-
-var UserSettingsSummary_downloadAllowed *smithy.Schema
-
-var UserSettingsSummary_uploadAllowed *smithy.Schema
-
-var UserSettingsSummary_printAllowed *smithy.Schema
-
-var UserSettingsSummary_disconnectTimeoutInMinutes *smithy.Schema
-
-var UserSettingsSummary_idleDisconnectTimeoutInMinutes *smithy.Schema
-
-var UserSettingsSummary_cookieSynchronizationConfiguration *smithy.Schema
-
-var UserSettingsSummary_deepLinkAllowed *smithy.Schema
-
-var UserSettingsSummary_toolbarConfiguration *smithy.Schema
-
-var UserSettingsSummary_brandingConfiguration *smithy.Schema
-
-var UserSettingsSummary_webAuthnAllowed *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var _VisualMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "VisualMode",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var _WallpaperImage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "WallpaperImage",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.MediaType{Type: "image/*"})
-
-var WallpaperImageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "WallpaperImageInput",
-}, smithy.ShapeTypeUnion, 2)
-var WallpaperImageInput_blob *smithy.Schema
-
-var WallpaperImageInput_s3Uri *smithy.Schema
-
-var WebContentFilteringPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "WebContentFilteringPolicy",
-}, smithy.ShapeTypeStructure, 3)
-var WebContentFilteringPolicy_blockedCategories *smithy.Schema
-
-var WebContentFilteringPolicy_allowedUrls *smithy.Schema
-
-var WebContentFilteringPolicy_blockedUrls *smithy.Schema
-
-var AssociateBrowserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateBrowserSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateBrowserSettingsRequest_portalArn *smithy.Schema
-
-var AssociateBrowserSettingsRequest_browserSettingsArn *smithy.Schema
-
-var AssociateBrowserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateBrowserSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateBrowserSettingsResponse_portalArn *smithy.Schema
-
-var AssociateBrowserSettingsResponse_browserSettingsArn *smithy.Schema
-
-var AssociateDataProtectionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateDataProtectionSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateDataProtectionSettingsRequest_portalArn *smithy.Schema
-
-var AssociateDataProtectionSettingsRequest_dataProtectionSettingsArn *smithy.Schema
-
-var AssociateDataProtectionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateDataProtectionSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateDataProtectionSettingsResponse_portalArn *smithy.Schema
-
-var AssociateDataProtectionSettingsResponse_dataProtectionSettingsArn *smithy.Schema
-
-var AssociateIpAccessSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateIpAccessSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateIpAccessSettingsRequest_portalArn *smithy.Schema
-
-var AssociateIpAccessSettingsRequest_ipAccessSettingsArn *smithy.Schema
-
-var AssociateIpAccessSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateIpAccessSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateIpAccessSettingsResponse_portalArn *smithy.Schema
-
-var AssociateIpAccessSettingsResponse_ipAccessSettingsArn *smithy.Schema
-
-var AssociateNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateNetworkSettingsRequest_portalArn *smithy.Schema
-
-var AssociateNetworkSettingsRequest_networkSettingsArn *smithy.Schema
-
-var AssociateNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateNetworkSettingsResponse_portalArn *smithy.Schema
-
-var AssociateNetworkSettingsResponse_networkSettingsArn *smithy.Schema
-
-var AssociateSessionLoggerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateSessionLoggerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateSessionLoggerRequest_portalArn *smithy.Schema
-
-var AssociateSessionLoggerRequest_sessionLoggerArn *smithy.Schema
-
-var AssociateSessionLoggerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateSessionLoggerResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateSessionLoggerResponse_portalArn *smithy.Schema
-
-var AssociateSessionLoggerResponse_sessionLoggerArn *smithy.Schema
-
-var AssociateTrustStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateTrustStoreRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateTrustStoreRequest_portalArn *smithy.Schema
-
-var AssociateTrustStoreRequest_trustStoreArn *smithy.Schema
-
-var AssociateTrustStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateTrustStoreResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateTrustStoreResponse_portalArn *smithy.Schema
-
-var AssociateTrustStoreResponse_trustStoreArn *smithy.Schema
-
-var AssociateUserAccessLoggingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateUserAccessLoggingSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateUserAccessLoggingSettingsRequest_portalArn *smithy.Schema
-
-var AssociateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn *smithy.Schema
-
-var AssociateUserAccessLoggingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateUserAccessLoggingSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateUserAccessLoggingSettingsResponse_portalArn *smithy.Schema
-
-var AssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn *smithy.Schema
-
-var AssociateUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateUserSettingsRequest_portalArn *smithy.Schema
-
-var AssociateUserSettingsRequest_userSettingsArn *smithy.Schema
-
-var AssociateUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "AssociateUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateUserSettingsResponse_portalArn *smithy.Schema
-
-var AssociateUserSettingsResponse_userSettingsArn *smithy.Schema
-
-var CreateBrowserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateBrowserSettingsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateBrowserSettingsRequest_tags *smithy.Schema
-
-var CreateBrowserSettingsRequest_customerManagedKey *smithy.Schema
-
-var CreateBrowserSettingsRequest_additionalEncryptionContext *smithy.Schema
-
-var CreateBrowserSettingsRequest_browserPolicy *smithy.Schema
-
-var CreateBrowserSettingsRequest_clientToken *smithy.Schema
-
-var CreateBrowserSettingsRequest_webContentFilteringPolicy *smithy.Schema
-
-var CreateBrowserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateBrowserSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBrowserSettingsResponse_browserSettingsArn *smithy.Schema
-
-var CreateDataProtectionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateDataProtectionSettingsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDataProtectionSettingsRequest_displayName *smithy.Schema
-
-var CreateDataProtectionSettingsRequest_description *smithy.Schema
-
-var CreateDataProtectionSettingsRequest_tags *smithy.Schema
-
-var CreateDataProtectionSettingsRequest_customerManagedKey *smithy.Schema
-
-var CreateDataProtectionSettingsRequest_additionalEncryptionContext *smithy.Schema
-
-var CreateDataProtectionSettingsRequest_inlineRedactionConfiguration *smithy.Schema
-
-var CreateDataProtectionSettingsRequest_clientToken *smithy.Schema
-
-var CreateDataProtectionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateDataProtectionSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataProtectionSettingsResponse_dataProtectionSettingsArn *smithy.Schema
-
-var CreateIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateIdentityProviderRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateIdentityProviderRequest_portalArn *smithy.Schema
-
-var CreateIdentityProviderRequest_identityProviderName *smithy.Schema
-
-var CreateIdentityProviderRequest_identityProviderType *smithy.Schema
-
-var CreateIdentityProviderRequest_identityProviderDetails *smithy.Schema
-
-var CreateIdentityProviderRequest_clientToken *smithy.Schema
-
-var CreateIdentityProviderRequest_tags *smithy.Schema
-
-var CreateIdentityProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateIdentityProviderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIdentityProviderResponse_identityProviderArn *smithy.Schema
-
-var CreateIpAccessSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateIpAccessSettingsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateIpAccessSettingsRequest_displayName *smithy.Schema
-
-var CreateIpAccessSettingsRequest_description *smithy.Schema
-
-var CreateIpAccessSettingsRequest_tags *smithy.Schema
-
-var CreateIpAccessSettingsRequest_customerManagedKey *smithy.Schema
-
-var CreateIpAccessSettingsRequest_additionalEncryptionContext *smithy.Schema
-
-var CreateIpAccessSettingsRequest_ipRules *smithy.Schema
-
-var CreateIpAccessSettingsRequest_clientToken *smithy.Schema
-
-var CreateIpAccessSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateIpAccessSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIpAccessSettingsResponse_ipAccessSettingsArn *smithy.Schema
-
-var CreateNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateNetworkSettingsRequest_vpcId *smithy.Schema
-
-var CreateNetworkSettingsRequest_subnetIds *smithy.Schema
-
-var CreateNetworkSettingsRequest_securityGroupIds *smithy.Schema
-
-var CreateNetworkSettingsRequest_tags *smithy.Schema
-
-var CreateNetworkSettingsRequest_clientToken *smithy.Schema
-
-var CreateNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateNetworkSettingsResponse_networkSettingsArn *smithy.Schema
-
-var CreatePortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreatePortalRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreatePortalRequest_displayName *smithy.Schema
-
-var CreatePortalRequest_tags *smithy.Schema
-
-var CreatePortalRequest_customerManagedKey *smithy.Schema
-
-var CreatePortalRequest_additionalEncryptionContext *smithy.Schema
-
-var CreatePortalRequest_clientToken *smithy.Schema
-
-var CreatePortalRequest_authenticationType *smithy.Schema
-
-var CreatePortalRequest_instanceType *smithy.Schema
-
-var CreatePortalRequest_maxConcurrentSessions *smithy.Schema
-
-var CreatePortalRequest_portalCustomDomain *smithy.Schema
-
-var CreatePortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreatePortalResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePortalResponse_portalArn *smithy.Schema
-
-var CreatePortalResponse_portalEndpoint *smithy.Schema
-
-var CreateSessionLoggerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateSessionLoggerRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateSessionLoggerRequest_eventFilter *smithy.Schema
-
-var CreateSessionLoggerRequest_logConfiguration *smithy.Schema
-
-var CreateSessionLoggerRequest_displayName *smithy.Schema
-
-var CreateSessionLoggerRequest_customerManagedKey *smithy.Schema
-
-var CreateSessionLoggerRequest_additionalEncryptionContext *smithy.Schema
-
-var CreateSessionLoggerRequest_tags *smithy.Schema
-
-var CreateSessionLoggerRequest_clientToken *smithy.Schema
-
-var CreateSessionLoggerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateSessionLoggerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSessionLoggerResponse_sessionLoggerArn *smithy.Schema
-
-var CreateTrustStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateTrustStoreRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTrustStoreRequest_certificateList *smithy.Schema
-
-var CreateTrustStoreRequest_tags *smithy.Schema
-
-var CreateTrustStoreRequest_clientToken *smithy.Schema
-
-var CreateTrustStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateTrustStoreResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTrustStoreResponse_trustStoreArn *smithy.Schema
-
-var CreateUserAccessLoggingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateUserAccessLoggingSettingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateUserAccessLoggingSettingsRequest_kinesisStreamArn *smithy.Schema
-
-var CreateUserAccessLoggingSettingsRequest_tags *smithy.Schema
-
-var CreateUserAccessLoggingSettingsRequest_clientToken *smithy.Schema
-
-var CreateUserAccessLoggingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateUserAccessLoggingSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn *smithy.Schema
-
-var CreateUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 16)
-var CreateUserSettingsRequest_copyAllowed *smithy.Schema
-
-var CreateUserSettingsRequest_pasteAllowed *smithy.Schema
-
-var CreateUserSettingsRequest_downloadAllowed *smithy.Schema
-
-var CreateUserSettingsRequest_uploadAllowed *smithy.Schema
-
-var CreateUserSettingsRequest_printAllowed *smithy.Schema
-
-var CreateUserSettingsRequest_tags *smithy.Schema
-
-var CreateUserSettingsRequest_disconnectTimeoutInMinutes *smithy.Schema
-
-var CreateUserSettingsRequest_idleDisconnectTimeoutInMinutes *smithy.Schema
-
-var CreateUserSettingsRequest_clientToken *smithy.Schema
-
-var CreateUserSettingsRequest_cookieSynchronizationConfiguration *smithy.Schema
-
-var CreateUserSettingsRequest_customerManagedKey *smithy.Schema
-
-var CreateUserSettingsRequest_additionalEncryptionContext *smithy.Schema
-
-var CreateUserSettingsRequest_deepLinkAllowed *smithy.Schema
-
-var CreateUserSettingsRequest_toolbarConfiguration *smithy.Schema
-
-var CreateUserSettingsRequest_brandingConfigurationInput *smithy.Schema
-
-var CreateUserSettingsRequest_webAuthnAllowed *smithy.Schema
-
-var CreateUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "CreateUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateUserSettingsResponse_userSettingsArn *smithy.Schema
-
-var DeleteBrowserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteBrowserSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBrowserSettingsRequest_browserSettingsArn *smithy.Schema
-
-var DeleteBrowserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteBrowserSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDataProtectionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteDataProtectionSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataProtectionSettingsRequest_dataProtectionSettingsArn *smithy.Schema
-
-var DeleteDataProtectionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteDataProtectionSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteIdentityProviderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIdentityProviderRequest_identityProviderArn *smithy.Schema
-
-var DeleteIdentityProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteIdentityProviderResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIpAccessSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteIpAccessSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIpAccessSettingsRequest_ipAccessSettingsArn *smithy.Schema
-
-var DeleteIpAccessSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteIpAccessSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNetworkSettingsRequest_networkSettingsArn *smithy.Schema
-
-var DeleteNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeletePortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeletePortalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePortalRequest_portalArn *smithy.Schema
-
-var DeletePortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeletePortalResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSessionLoggerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteSessionLoggerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSessionLoggerRequest_sessionLoggerArn *smithy.Schema
-
-var DeleteSessionLoggerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteSessionLoggerResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTrustStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteTrustStoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTrustStoreRequest_trustStoreArn *smithy.Schema
-
-var DeleteTrustStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteTrustStoreResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteUserAccessLoggingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteUserAccessLoggingSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn *smithy.Schema
-
-var DeleteUserAccessLoggingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteUserAccessLoggingSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteUserSettingsRequest_userSettingsArn *smithy.Schema
-
-var DeleteUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DeleteUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateBrowserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateBrowserSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateBrowserSettingsRequest_portalArn *smithy.Schema
-
-var DisassociateBrowserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateBrowserSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateDataProtectionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateDataProtectionSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateDataProtectionSettingsRequest_portalArn *smithy.Schema
-
-var DisassociateDataProtectionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateDataProtectionSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateIpAccessSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateIpAccessSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateIpAccessSettingsRequest_portalArn *smithy.Schema
-
-var DisassociateIpAccessSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateIpAccessSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateNetworkSettingsRequest_portalArn *smithy.Schema
-
-var DisassociateNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateSessionLoggerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateSessionLoggerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateSessionLoggerRequest_portalArn *smithy.Schema
-
-var DisassociateSessionLoggerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateSessionLoggerResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateTrustStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateTrustStoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateTrustStoreRequest_portalArn *smithy.Schema
-
-var DisassociateTrustStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateTrustStoreResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateUserAccessLoggingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateUserAccessLoggingSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateUserAccessLoggingSettingsRequest_portalArn *smithy.Schema
-
-var DisassociateUserAccessLoggingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateUserAccessLoggingSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateUserSettingsRequest_portalArn *smithy.Schema
-
-var DisassociateUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "DisassociateUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var ExpireSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ExpireSessionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ExpireSessionRequest_portalId *smithy.Schema
-
-var ExpireSessionRequest_sessionId *smithy.Schema
-
-var ExpireSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ExpireSessionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetBrowserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetBrowserSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetBrowserSettingsRequest_browserSettingsArn *smithy.Schema
-
-var GetBrowserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetBrowserSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetBrowserSettingsResponse_browserSettings *smithy.Schema
-
-var GetDataProtectionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetDataProtectionSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataProtectionSettingsRequest_dataProtectionSettingsArn *smithy.Schema
-
-var GetDataProtectionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetDataProtectionSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDataProtectionSettingsResponse_dataProtectionSettings *smithy.Schema
-
-var GetIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetIdentityProviderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetIdentityProviderRequest_identityProviderArn *smithy.Schema
-
-var GetIdentityProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetIdentityProviderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIdentityProviderResponse_identityProvider *smithy.Schema
-
-var GetIpAccessSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetIpAccessSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetIpAccessSettingsRequest_ipAccessSettingsArn *smithy.Schema
-
-var GetIpAccessSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetIpAccessSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetIpAccessSettingsResponse_ipAccessSettings *smithy.Schema
-
-var GetNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkSettingsRequest_networkSettingsArn *smithy.Schema
-
-var GetNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkSettingsResponse_networkSettings *smithy.Schema
-
-var GetPortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetPortalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPortalRequest_portalArn *smithy.Schema
-
-var GetPortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetPortalResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPortalResponse_portal *smithy.Schema
-
-var GetPortalServiceProviderMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetPortalServiceProviderMetadataRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPortalServiceProviderMetadataRequest_portalArn *smithy.Schema
-
-var GetPortalServiceProviderMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetPortalServiceProviderMetadataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPortalServiceProviderMetadataResponse_portalArn *smithy.Schema
-
-var GetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata *smithy.Schema
-
-var GetSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetSessionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSessionRequest_portalId *smithy.Schema
-
-var GetSessionRequest_sessionId *smithy.Schema
-
-var GetSessionLoggerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetSessionLoggerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSessionLoggerRequest_sessionLoggerArn *smithy.Schema
-
-var GetSessionLoggerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetSessionLoggerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSessionLoggerResponse_sessionLogger *smithy.Schema
-
-var GetSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetSessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSessionResponse_session *smithy.Schema
-
-var GetTrustStoreCertificateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetTrustStoreCertificateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTrustStoreCertificateRequest_trustStoreArn *smithy.Schema
-
-var GetTrustStoreCertificateRequest_thumbprint *smithy.Schema
-
-var GetTrustStoreCertificateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetTrustStoreCertificateResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTrustStoreCertificateResponse_trustStoreArn *smithy.Schema
-
-var GetTrustStoreCertificateResponse_certificate *smithy.Schema
-
-var GetTrustStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetTrustStoreRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrustStoreRequest_trustStoreArn *smithy.Schema
-
-var GetTrustStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetTrustStoreResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTrustStoreResponse_trustStore *smithy.Schema
-
-var GetUserAccessLoggingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetUserAccessLoggingSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn *smithy.Schema
-
-var GetUserAccessLoggingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetUserAccessLoggingSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetUserAccessLoggingSettingsResponse_userAccessLoggingSettings *smithy.Schema
-
-var GetUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetUserSettingsRequest_userSettingsArn *smithy.Schema
-
-var GetUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "GetUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetUserSettingsResponse_userSettings *smithy.Schema
-
-var ListBrowserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListBrowserSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListBrowserSettingsRequest_nextToken *smithy.Schema
-
-var ListBrowserSettingsRequest_maxResults *smithy.Schema
-
-var ListBrowserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListBrowserSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListBrowserSettingsResponse_browserSettings *smithy.Schema
-
-var ListBrowserSettingsResponse_nextToken *smithy.Schema
-
-var ListDataProtectionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListDataProtectionSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataProtectionSettingsRequest_nextToken *smithy.Schema
-
-var ListDataProtectionSettingsRequest_maxResults *smithy.Schema
-
-var ListDataProtectionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListDataProtectionSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDataProtectionSettingsResponse_dataProtectionSettings *smithy.Schema
-
-var ListDataProtectionSettingsResponse_nextToken *smithy.Schema
-
-var ListIdentityProvidersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListIdentityProvidersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListIdentityProvidersRequest_nextToken *smithy.Schema
-
-var ListIdentityProvidersRequest_maxResults *smithy.Schema
-
-var ListIdentityProvidersRequest_portalArn *smithy.Schema
-
-var ListIdentityProvidersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListIdentityProvidersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIdentityProvidersResponse_nextToken *smithy.Schema
-
-var ListIdentityProvidersResponse_identityProviders *smithy.Schema
-
-var ListIpAccessSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListIpAccessSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListIpAccessSettingsRequest_nextToken *smithy.Schema
-
-var ListIpAccessSettingsRequest_maxResults *smithy.Schema
-
-var ListIpAccessSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListIpAccessSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListIpAccessSettingsResponse_ipAccessSettings *smithy.Schema
-
-var ListIpAccessSettingsResponse_nextToken *smithy.Schema
-
-var ListNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListNetworkSettingsRequest_nextToken *smithy.Schema
-
-var ListNetworkSettingsRequest_maxResults *smithy.Schema
-
-var ListNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNetworkSettingsResponse_networkSettings *smithy.Schema
-
-var ListNetworkSettingsResponse_nextToken *smithy.Schema
-
-var ListPortalsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListPortalsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPortalsRequest_nextToken *smithy.Schema
-
-var ListPortalsRequest_maxResults *smithy.Schema
-
-var ListPortalsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListPortalsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPortalsResponse_portals *smithy.Schema
-
-var ListPortalsResponse_nextToken *smithy.Schema
-
-var ListSessionLoggersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListSessionLoggersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSessionLoggersRequest_nextToken *smithy.Schema
-
-var ListSessionLoggersRequest_maxResults *smithy.Schema
-
-var ListSessionLoggersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListSessionLoggersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSessionLoggersResponse_sessionLoggers *smithy.Schema
-
-var ListSessionLoggersResponse_nextToken *smithy.Schema
-
-var ListSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListSessionsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListSessionsRequest_portalId *smithy.Schema
-
-var ListSessionsRequest_username *smithy.Schema
-
-var ListSessionsRequest_sessionId *smithy.Schema
-
-var ListSessionsRequest_sortBy *smithy.Schema
-
-var ListSessionsRequest_status *smithy.Schema
-
-var ListSessionsRequest_maxResults *smithy.Schema
-
-var ListSessionsRequest_nextToken *smithy.Schema
-
-var ListSessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListSessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSessionsResponse_sessions *smithy.Schema
-
-var ListSessionsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTrustStoreCertificatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTrustStoreCertificatesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTrustStoreCertificatesRequest_trustStoreArn *smithy.Schema
-
-var ListTrustStoreCertificatesRequest_nextToken *smithy.Schema
-
-var ListTrustStoreCertificatesRequest_maxResults *smithy.Schema
-
-var ListTrustStoreCertificatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTrustStoreCertificatesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListTrustStoreCertificatesResponse_certificateList *smithy.Schema
-
-var ListTrustStoreCertificatesResponse_trustStoreArn *smithy.Schema
-
-var ListTrustStoreCertificatesResponse_nextToken *smithy.Schema
-
-var ListTrustStoresRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTrustStoresRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrustStoresRequest_nextToken *smithy.Schema
-
-var ListTrustStoresRequest_maxResults *smithy.Schema
-
-var ListTrustStoresResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListTrustStoresResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTrustStoresResponse_trustStores *smithy.Schema
-
-var ListTrustStoresResponse_nextToken *smithy.Schema
-
-var ListUserAccessLoggingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListUserAccessLoggingSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListUserAccessLoggingSettingsRequest_nextToken *smithy.Schema
-
-var ListUserAccessLoggingSettingsRequest_maxResults *smithy.Schema
-
-var ListUserAccessLoggingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListUserAccessLoggingSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListUserAccessLoggingSettingsResponse_userAccessLoggingSettings *smithy.Schema
-
-var ListUserAccessLoggingSettingsResponse_nextToken *smithy.Schema
-
-var ListUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListUserSettingsRequest_nextToken *smithy.Schema
-
-var ListUserSettingsRequest_maxResults *smithy.Schema
-
-var ListUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "ListUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListUserSettingsResponse_userSettings *smithy.Schema
-
-var ListUserSettingsResponse_nextToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceRequest_clientToken *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateBrowserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateBrowserSettingsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateBrowserSettingsRequest_browserSettingsArn *smithy.Schema
-
-var UpdateBrowserSettingsRequest_browserPolicy *smithy.Schema
-
-var UpdateBrowserSettingsRequest_clientToken *smithy.Schema
-
-var UpdateBrowserSettingsRequest_webContentFilteringPolicy *smithy.Schema
-
-var UpdateBrowserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateBrowserSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBrowserSettingsResponse_browserSettings *smithy.Schema
-
-var UpdateDataProtectionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateDataProtectionSettingsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateDataProtectionSettingsRequest_dataProtectionSettingsArn *smithy.Schema
-
-var UpdateDataProtectionSettingsRequest_inlineRedactionConfiguration *smithy.Schema
-
-var UpdateDataProtectionSettingsRequest_displayName *smithy.Schema
-
-var UpdateDataProtectionSettingsRequest_description *smithy.Schema
-
-var UpdateDataProtectionSettingsRequest_clientToken *smithy.Schema
-
-var UpdateDataProtectionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateDataProtectionSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDataProtectionSettingsResponse_dataProtectionSettings *smithy.Schema
-
-var UpdateIdentityProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateIdentityProviderRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateIdentityProviderRequest_identityProviderArn *smithy.Schema
-
-var UpdateIdentityProviderRequest_identityProviderName *smithy.Schema
-
-var UpdateIdentityProviderRequest_identityProviderType *smithy.Schema
-
-var UpdateIdentityProviderRequest_identityProviderDetails *smithy.Schema
-
-var UpdateIdentityProviderRequest_clientToken *smithy.Schema
-
-var UpdateIdentityProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateIdentityProviderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateIdentityProviderResponse_identityProvider *smithy.Schema
-
-var UpdateIpAccessSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateIpAccessSettingsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateIpAccessSettingsRequest_ipAccessSettingsArn *smithy.Schema
-
-var UpdateIpAccessSettingsRequest_displayName *smithy.Schema
-
-var UpdateIpAccessSettingsRequest_description *smithy.Schema
-
-var UpdateIpAccessSettingsRequest_ipRules *smithy.Schema
-
-var UpdateIpAccessSettingsRequest_clientToken *smithy.Schema
-
-var UpdateIpAccessSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateIpAccessSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateIpAccessSettingsResponse_ipAccessSettings *smithy.Schema
-
-var UpdateNetworkSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateNetworkSettingsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateNetworkSettingsRequest_networkSettingsArn *smithy.Schema
-
-var UpdateNetworkSettingsRequest_vpcId *smithy.Schema
-
-var UpdateNetworkSettingsRequest_subnetIds *smithy.Schema
-
-var UpdateNetworkSettingsRequest_securityGroupIds *smithy.Schema
-
-var UpdateNetworkSettingsRequest_clientToken *smithy.Schema
-
-var UpdateNetworkSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateNetworkSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNetworkSettingsResponse_networkSettings *smithy.Schema
-
-var UpdatePortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdatePortalRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdatePortalRequest_portalArn *smithy.Schema
-
-var UpdatePortalRequest_displayName *smithy.Schema
-
-var UpdatePortalRequest_authenticationType *smithy.Schema
-
-var UpdatePortalRequest_instanceType *smithy.Schema
-
-var UpdatePortalRequest_maxConcurrentSessions *smithy.Schema
-
-var UpdatePortalRequest_portalCustomDomain *smithy.Schema
-
-var UpdatePortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdatePortalResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePortalResponse_portal *smithy.Schema
-
-var UpdateSessionLoggerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateSessionLoggerRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSessionLoggerRequest_sessionLoggerArn *smithy.Schema
-
-var UpdateSessionLoggerRequest_eventFilter *smithy.Schema
-
-var UpdateSessionLoggerRequest_logConfiguration *smithy.Schema
-
-var UpdateSessionLoggerRequest_displayName *smithy.Schema
-
-var UpdateSessionLoggerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateSessionLoggerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSessionLoggerResponse_sessionLogger *smithy.Schema
-
-var UpdateTrustStoreRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateTrustStoreRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateTrustStoreRequest_trustStoreArn *smithy.Schema
-
-var UpdateTrustStoreRequest_certificatesToAdd *smithy.Schema
-
-var UpdateTrustStoreRequest_certificatesToDelete *smithy.Schema
-
-var UpdateTrustStoreRequest_clientToken *smithy.Schema
-
-var UpdateTrustStoreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateTrustStoreResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTrustStoreResponse_trustStoreArn *smithy.Schema
-
-var UpdateUserAccessLoggingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateUserAccessLoggingSettingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn *smithy.Schema
-
-var UpdateUserAccessLoggingSettingsRequest_kinesisStreamArn *smithy.Schema
-
-var UpdateUserAccessLoggingSettingsRequest_clientToken *smithy.Schema
-
-var UpdateUserAccessLoggingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateUserAccessLoggingSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateUserAccessLoggingSettingsResponse_userAccessLoggingSettings *smithy.Schema
-
-var UpdateUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 14)
-var UpdateUserSettingsRequest_userSettingsArn *smithy.Schema
-
-var UpdateUserSettingsRequest_copyAllowed *smithy.Schema
-
-var UpdateUserSettingsRequest_pasteAllowed *smithy.Schema
-
-var UpdateUserSettingsRequest_downloadAllowed *smithy.Schema
-
-var UpdateUserSettingsRequest_uploadAllowed *smithy.Schema
-
-var UpdateUserSettingsRequest_printAllowed *smithy.Schema
-
-var UpdateUserSettingsRequest_disconnectTimeoutInMinutes *smithy.Schema
-
-var UpdateUserSettingsRequest_idleDisconnectTimeoutInMinutes *smithy.Schema
-
-var UpdateUserSettingsRequest_clientToken *smithy.Schema
-
-var UpdateUserSettingsRequest_cookieSynchronizationConfiguration *smithy.Schema
-
-var UpdateUserSettingsRequest_deepLinkAllowed *smithy.Schema
-
-var UpdateUserSettingsRequest_toolbarConfiguration *smithy.Schema
-
-var UpdateUserSettingsRequest_brandingConfigurationInput *smithy.Schema
-
-var UpdateUserSettingsRequest_webAuthnAllowed *smithy.Schema
-
-var UpdateUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workspacesweb",
-	Name:      "UpdateUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateUserSettingsResponse_userSettings *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ExceptionMessage)
-
-	_ArnList_member = _ArnList.AddMember("member", _ARN)
-
-	Category_CULTS = Category.AddMember("CULTS", smithyprelude.Unit)
-
-	Category_GAMBLING = Category.AddMember("GAMBLING", smithyprelude.Unit)
-
-	Category_NUDITY = Category.AddMember("NUDITY", smithyprelude.Unit)
-
-	Category_PORNOGRAPHY = Category.AddMember("PORNOGRAPHY", smithyprelude.Unit)
-
-	Category_SEX_EDUCATION = Category.AddMember("SEX_EDUCATION", smithyprelude.Unit)
-
-	Category_TASTELESS = Category.AddMember("TASTELESS", smithyprelude.Unit)
-
-	Category_VIOLENCE = Category.AddMember("VIOLENCE", smithyprelude.Unit)
-
-	Category_DOWNLOAD_SITES = Category.AddMember("DOWNLOAD_SITES", smithyprelude.Unit)
-
-	Category_IMAGE_SHARING = Category.AddMember("IMAGE_SHARING", smithyprelude.Unit)
-
-	Category_PEER_TO_PEER = Category.AddMember("PEER_TO_PEER", smithyprelude.Unit)
-
-	Category_STREAMING_MEDIA_AND_DOWNLOADS = Category.AddMember("STREAMING_MEDIA_AND_DOWNLOADS", smithyprelude.Unit)
-
-	Category_GENERATIVE_AI = Category.AddMember("GENERATIVE_AI", smithyprelude.Unit)
-
-	Category_CRIMINAL_ACTIVITY = Category.AddMember("CRIMINAL_ACTIVITY", smithyprelude.Unit)
-
-	Category_HACKING = Category.AddMember("HACKING", smithyprelude.Unit)
-
-	Category_HATE_AND_INTOLERANCE = Category.AddMember("HATE_AND_INTOLERANCE", smithyprelude.Unit)
-
-	Category_ILLEGAL_DRUG = Category.AddMember("ILLEGAL_DRUG", smithyprelude.Unit)
-
-	Category_ILLEGAL_SOFTWARE = Category.AddMember("ILLEGAL_SOFTWARE", smithyprelude.Unit)
-
-	Category_SCHOOL_CHEATING = Category.AddMember("SCHOOL_CHEATING", smithyprelude.Unit)
-
-	Category_SELF_HARM = Category.AddMember("SELF_HARM", smithyprelude.Unit)
-
-	Category_WEAPONS = Category.AddMember("WEAPONS", smithyprelude.Unit)
-
-	Category_CHAT = Category.AddMember("CHAT", smithyprelude.Unit)
-
-	Category_GAMES = Category.AddMember("GAMES", smithyprelude.Unit)
-
-	Category_INSTANT_MESSAGING = Category.AddMember("INSTANT_MESSAGING", smithyprelude.Unit)
-
-	Category_PROFESSIONAL_NETWORK = Category.AddMember("PROFESSIONAL_NETWORK", smithyprelude.Unit)
-
-	Category_SOCIAL_NETWORKING = Category.AddMember("SOCIAL_NETWORKING", smithyprelude.Unit)
-
-	Category_WEB_BASED_EMAIL = Category.AddMember("WEB_BASED_EMAIL", smithyprelude.Unit)
-
-	Category_PARKED_DOMAINS = Category.AddMember("PARKED_DOMAINS", smithyprelude.Unit)
-
-	_BlockedCategories_member = _BlockedCategories.AddMember("member", Category)
-
-	MimeType_PNG = MimeType.AddMember("PNG", smithyprelude.Unit)
-
-	MimeType_JPEG = MimeType.AddMember("JPEG", smithyprelude.Unit)
-
-	MimeType_ICO = MimeType.AddMember("ICO", smithyprelude.Unit)
-
-	ImageMetadata_mimeType = ImageMetadata.AddMember("mimeType", MimeType)
-
-	ImageMetadata_fileExtension = ImageMetadata.AddMember("fileExtension", _StringType)
-
-	ImageMetadata_lastUploadTimestamp = ImageMetadata.AddMember("lastUploadTimestamp", _Timestamp)
-
-	Locale_DE = Locale.AddMember("DE", smithyprelude.Unit)
-
-	Locale_EN = Locale.AddMember("EN", smithyprelude.Unit)
-
-	Locale_ES = Locale.AddMember("ES", smithyprelude.Unit)
-
-	Locale_FR = Locale.AddMember("FR", smithyprelude.Unit)
-
-	Locale_ID = Locale.AddMember("ID", smithyprelude.Unit)
-
-	Locale_IT = Locale.AddMember("IT", smithyprelude.Unit)
-
-	Locale_JP = Locale.AddMember("JP", smithyprelude.Unit)
-
-	Locale_KR = Locale.AddMember("KR", smithyprelude.Unit)
-
-	Locale_BR = Locale.AddMember("BR", smithyprelude.Unit)
-
-	Locale_CN = Locale.AddMember("CN", smithyprelude.Unit)
-
-	Locale_TW = Locale.AddMember("TW", smithyprelude.Unit)
-
-	LocalizedBrandingStrings_browserTabTitle = LocalizedBrandingStrings.AddMember("browserTabTitle", _BrandingSafeStringType)
-
-	LocalizedBrandingStrings_welcomeText = LocalizedBrandingStrings.AddMember("welcomeText", _BrandingSafeStringType)
-
-	LocalizedBrandingStrings_loginTitle = LocalizedBrandingStrings.AddMember("loginTitle", _BrandingSafeStringType)
-
-	LocalizedBrandingStrings_loginDescription = LocalizedBrandingStrings.AddMember("loginDescription", _BrandingSafeStringType)
-
-	LocalizedBrandingStrings_loginButtonText = LocalizedBrandingStrings.AddMember("loginButtonText", _BrandingSafeStringType)
-
-	LocalizedBrandingStrings_contactLink = LocalizedBrandingStrings.AddMember("contactLink", _ContactLinkUrl)
-
-	LocalizedBrandingStrings_contactButtonText = LocalizedBrandingStrings.AddMember("contactButtonText", _BrandingSafeStringType)
-
-	LocalizedBrandingStrings_loadingText = LocalizedBrandingStrings.AddMember("loadingText", _BrandingSafeStringType)
-
-	_LocalizedBrandingStringMap_key = _LocalizedBrandingStringMap.AddMember("key", Locale)
-
-	_LocalizedBrandingStringMap_value = _LocalizedBrandingStringMap.AddMember("value", LocalizedBrandingStrings)
-
-	ColorTheme_LIGHT = ColorTheme.AddMember("LIGHT", smithyprelude.Unit)
-
-	ColorTheme_DARK = ColorTheme.AddMember("DARK", smithyprelude.Unit)
-
-	BrandingConfiguration_logo = BrandingConfiguration.AddMember("logo", ImageMetadata)
-
-	BrandingConfiguration_wallpaper = BrandingConfiguration.AddMember("wallpaper", ImageMetadata)
-
-	BrandingConfiguration_favicon = BrandingConfiguration.AddMember("favicon", ImageMetadata)
-
-	BrandingConfiguration_localizedStrings = BrandingConfiguration.AddMember("localizedStrings", _LocalizedBrandingStringMap)
-
-	BrandingConfiguration_colorTheme = BrandingConfiguration.AddMember("colorTheme", ColorTheme)
-
-	BrandingConfiguration_termsOfService = BrandingConfiguration.AddMember("termsOfService", _Markdown)
-
-	IconImageInput_blob = IconImageInput.AddMember("blob", _IconImage)
-
-	IconImageInput_s3Uri = IconImageInput.AddMember("s3Uri", _S3Uri)
-
-	WallpaperImageInput_blob = WallpaperImageInput.AddMember("blob", _WallpaperImage)
-
-	WallpaperImageInput_s3Uri = WallpaperImageInput.AddMember("s3Uri", _S3Uri)
-
-	BrandingConfigurationCreateInput_logo = BrandingConfigurationCreateInput.AddMember("logo", IconImageInput)
-
-	BrandingConfigurationCreateInput_wallpaper = BrandingConfigurationCreateInput.AddMember("wallpaper", WallpaperImageInput)
-
-	BrandingConfigurationCreateInput_favicon = BrandingConfigurationCreateInput.AddMember("favicon", IconImageInput)
-
-	BrandingConfigurationCreateInput_localizedStrings = BrandingConfigurationCreateInput.AddMember("localizedStrings", _LocalizedBrandingStringMap)
-
-	BrandingConfigurationCreateInput_colorTheme = BrandingConfigurationCreateInput.AddMember("colorTheme", ColorTheme)
-
-	BrandingConfigurationCreateInput_termsOfService = BrandingConfigurationCreateInput.AddMember("termsOfService", _Markdown)
-
-	BrandingConfigurationUpdateInput_logo = BrandingConfigurationUpdateInput.AddMember("logo", IconImageInput)
-
-	BrandingConfigurationUpdateInput_wallpaper = BrandingConfigurationUpdateInput.AddMember("wallpaper", WallpaperImageInput)
-
-	BrandingConfigurationUpdateInput_favicon = BrandingConfigurationUpdateInput.AddMember("favicon", IconImageInput)
-
-	BrandingConfigurationUpdateInput_localizedStrings = BrandingConfigurationUpdateInput.AddMember("localizedStrings", _LocalizedBrandingStringMap)
-
-	BrandingConfigurationUpdateInput_colorTheme = BrandingConfigurationUpdateInput.AddMember("colorTheme", ColorTheme)
-
-	BrandingConfigurationUpdateInput_termsOfService = BrandingConfigurationUpdateInput.AddMember("termsOfService", _Markdown)
-
-	_EncryptionContextMap_key = _EncryptionContextMap.AddMember("key", _StringType)
-
-	_EncryptionContextMap_value = _EncryptionContextMap.AddMember("value", _StringType)
-
-	_UrlPatternList_member = _UrlPatternList.AddMember("member", _UrlPattern)
-
-	WebContentFilteringPolicy_blockedCategories = WebContentFilteringPolicy.AddMember("blockedCategories", _BlockedCategories)
-
-	WebContentFilteringPolicy_allowedUrls = WebContentFilteringPolicy.AddMember("allowedUrls", _UrlPatternList)
-
-	WebContentFilteringPolicy_blockedUrls = WebContentFilteringPolicy.AddMember("blockedUrls", _UrlPatternList)
-
-	BrowserSettings_browserSettingsArn = BrowserSettings.AddMember("browserSettingsArn", _ARN)
-
-	BrowserSettings_associatedPortalArns = BrowserSettings.AddMember("associatedPortalArns", _ArnList)
-
-	BrowserSettings_browserPolicy = BrowserSettings.AddMember("browserPolicy", _BrowserPolicy)
-
-	BrowserSettings_customerManagedKey = BrowserSettings.AddMember("customerManagedKey", _keyArn)
-
-	BrowserSettings_additionalEncryptionContext = BrowserSettings.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	BrowserSettings_webContentFilteringPolicy = BrowserSettings.AddMember("webContentFilteringPolicy", WebContentFilteringPolicy)
-
-	BrowserSettingsSummary_browserSettingsArn = BrowserSettingsSummary.AddMember("browserSettingsArn", _ARN)
-
-	_BrowserSettingsList_member = _BrowserSettingsList.AddMember("member", BrowserSettingsSummary)
-
-	Certificate_thumbprint = Certificate.AddMember("thumbprint", _CertificateThumbprint)
-
-	Certificate_subject = Certificate.AddMember("subject", _CertificatePrincipal)
-
-	Certificate_issuer = Certificate.AddMember("issuer", _CertificatePrincipal)
-
-	Certificate_notValidBefore = Certificate.AddMember("notValidBefore", _Timestamp)
-
-	Certificate_notValidAfter = Certificate.AddMember("notValidAfter", _Timestamp)
-
-	Certificate_body = Certificate.AddMember("body", _CertificateAuthorityBody)
-
-	_CertificateList_member = _CertificateList.AddMember("member", _CertificateAuthorityBody)
-
-	CertificateSummary_thumbprint = CertificateSummary.AddMember("thumbprint", _CertificateThumbprint)
-
-	CertificateSummary_subject = CertificateSummary.AddMember("subject", _CertificatePrincipal)
-
-	CertificateSummary_issuer = CertificateSummary.AddMember("issuer", _CertificatePrincipal)
-
-	CertificateSummary_notValidBefore = CertificateSummary.AddMember("notValidBefore", _Timestamp)
-
-	CertificateSummary_notValidAfter = CertificateSummary.AddMember("notValidAfter", _Timestamp)
-
-	_CertificateSummaryList_member = _CertificateSummaryList.AddMember("member", CertificateSummary)
-
-	_CertificateThumbprintList_member = _CertificateThumbprintList.AddMember("member", _CertificateThumbprint)
-
-	ConflictException_message = ConflictException.AddMember("message", _ExceptionMessage)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _ResourceId)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _ResourceType)
-
-	CookieSpecification_domain = CookieSpecification.AddMember("domain", _CookieDomain)
-
-	CookieSpecification_name = CookieSpecification.AddMember("name", _CookieName)
-
-	CookieSpecification_path = CookieSpecification.AddMember("path", _CookiePath)
-
-	_CookieSpecifications_member = _CookieSpecifications.AddMember("member", CookieSpecification)
-
-	CookieSynchronizationConfiguration_allowlist = CookieSynchronizationConfiguration.AddMember("allowlist", _CookieSpecifications)
-
-	CookieSynchronizationConfiguration_blocklist = CookieSynchronizationConfiguration.AddMember("blocklist", _CookieSpecifications)
-
-	CustomPattern_patternName = CustomPattern.AddMember("patternName", _PatternName)
-
-	CustomPattern_patternRegex = CustomPattern.AddMember("patternRegex", _Regex)
-
-	CustomPattern_patternDescription = CustomPattern.AddMember("patternDescription", _DescriptionSafe)
-
-	CustomPattern_keywordRegex = CustomPattern.AddMember("keywordRegex", _Regex)
-
-	RedactionPlaceHolder_redactionPlaceHolderType = RedactionPlaceHolder.AddMember("redactionPlaceHolderType", _RedactionPlaceHolderType)
-
-	RedactionPlaceHolder_redactionPlaceHolderText = RedactionPlaceHolder.AddMember("redactionPlaceHolderText", _RedactionPlaceHolderText)
-
-	_InlineRedactionUrls_member = _InlineRedactionUrls.AddMember("member", _InlineRedactionUrl)
-
-	InlineRedactionPattern_builtInPatternId = InlineRedactionPattern.AddMember("builtInPatternId", _BuiltInPatternId)
-
-	InlineRedactionPattern_customPattern = InlineRedactionPattern.AddMember("customPattern", CustomPattern)
-
-	InlineRedactionPattern_redactionPlaceHolder = InlineRedactionPattern.AddMember("redactionPlaceHolder", RedactionPlaceHolder)
-
-	InlineRedactionPattern_enforcedUrls = InlineRedactionPattern.AddMember("enforcedUrls", _InlineRedactionUrls)
-
-	InlineRedactionPattern_exemptUrls = InlineRedactionPattern.AddMember("exemptUrls", _InlineRedactionUrls)
-
-	InlineRedactionPattern_confidenceLevel = InlineRedactionPattern.AddMember("confidenceLevel", _ConfidenceLevel)
-
-	_InlineRedactionPatterns_member = _InlineRedactionPatterns.AddMember("member", InlineRedactionPattern)
-
-	_GlobalInlineRedactionUrls_member = _GlobalInlineRedactionUrls.AddMember("member", _InlineRedactionUrl)
-
-	InlineRedactionConfiguration_inlineRedactionPatterns = InlineRedactionConfiguration.AddMember("inlineRedactionPatterns", _InlineRedactionPatterns)
-
-	InlineRedactionConfiguration_globalEnforcedUrls = InlineRedactionConfiguration.AddMember("globalEnforcedUrls", _GlobalInlineRedactionUrls)
-
-	InlineRedactionConfiguration_globalExemptUrls = InlineRedactionConfiguration.AddMember("globalExemptUrls", _GlobalInlineRedactionUrls)
-
-	InlineRedactionConfiguration_globalConfidenceLevel = InlineRedactionConfiguration.AddMember("globalConfidenceLevel", _ConfidenceLevel)
-
-	DataProtectionSettings_dataProtectionSettingsArn = DataProtectionSettings.AddMember("dataProtectionSettingsArn", _ARN)
-
-	DataProtectionSettings_inlineRedactionConfiguration = DataProtectionSettings.AddMember("inlineRedactionConfiguration", InlineRedactionConfiguration)
-
-	DataProtectionSettings_associatedPortalArns = DataProtectionSettings.AddMember("associatedPortalArns", _ArnList)
-
-	DataProtectionSettings_displayName = DataProtectionSettings.AddMember("displayName", _DisplayNameSafe)
-
-	DataProtectionSettings_description = DataProtectionSettings.AddMember("description", _DescriptionSafe)
-
-	DataProtectionSettings_creationDate = DataProtectionSettings.AddMember("creationDate", _Timestamp)
-
-	DataProtectionSettings_customerManagedKey = DataProtectionSettings.AddMember("customerManagedKey", _keyArn)
-
-	DataProtectionSettings_additionalEncryptionContext = DataProtectionSettings.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	DataProtectionSettingsSummary_dataProtectionSettingsArn = DataProtectionSettingsSummary.AddMember("dataProtectionSettingsArn", _ARN)
-
-	DataProtectionSettingsSummary_displayName = DataProtectionSettingsSummary.AddMember("displayName", _DisplayNameSafe)
-
-	DataProtectionSettingsSummary_description = DataProtectionSettingsSummary.AddMember("description", _DescriptionSafe)
-
-	DataProtectionSettingsSummary_creationDate = DataProtectionSettingsSummary.AddMember("creationDate", _Timestamp)
-
-	_DataProtectionSettingsList_member = _DataProtectionSettingsList.AddMember("member", DataProtectionSettingsSummary)
-
-	Event_WEBSITE_INTERACT = Event.AddMember("WEBSITE_INTERACT", smithyprelude.Unit)
-
-	Event_FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK = Event.AddMember("FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK", smithyprelude.Unit)
-
-	Event_FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK = Event.AddMember("FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK", smithyprelude.Unit)
-
-	Event_FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK = Event.AddMember("FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK", smithyprelude.Unit)
-
-	Event_FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER = Event.AddMember("FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER", smithyprelude.Unit)
-
-	Event_CONTENT_PASTE_TO_WEBSITE = Event.AddMember("CONTENT_PASTE_TO_WEBSITE", smithyprelude.Unit)
-
-	Event_CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD = Event.AddMember("CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD", smithyprelude.Unit)
-
-	Event_CONTENT_COPY_FROM_WEBSITE = Event.AddMember("CONTENT_COPY_FROM_WEBSITE", smithyprelude.Unit)
-
-	Event_URL_LOAD = Event.AddMember("URL_LOAD", smithyprelude.Unit)
-
-	Event_TAB_OPEN = Event.AddMember("TAB_OPEN", smithyprelude.Unit)
-
-	Event_TAB_CLOSE = Event.AddMember("TAB_CLOSE", smithyprelude.Unit)
-
-	Event_PRINT_JOB_SUBMIT = Event.AddMember("PRINT_JOB_SUBMIT", smithyprelude.Unit)
-
-	Event_SESSION_CONNECT = Event.AddMember("SESSION_CONNECT", smithyprelude.Unit)
-
-	Event_SESSION_START = Event.AddMember("SESSION_START", smithyprelude.Unit)
-
-	Event_SESSION_DISCONNECT = Event.AddMember("SESSION_DISCONNECT", smithyprelude.Unit)
-
-	Event_SESSION_END = Event.AddMember("SESSION_END", smithyprelude.Unit)
-
-	Event_URL_BLOCK_BY_CONTENT_FILTER = Event.AddMember("URL_BLOCK_BY_CONTENT_FILTER", smithyprelude.Unit)
-
-	_Events_member = _Events.AddMember("member", Event)
-
-	EventFilter_all = EventFilter.AddMember("all", smithyprelude.Unit)
-
-	EventFilter_include = EventFilter.AddMember("include", _Events)
-
-	FolderStructure_FLAT = FolderStructure.AddMember("FLAT", smithyprelude.Unit)
-
-	FolderStructure_NESTED_BY_DATE = FolderStructure.AddMember("NESTED_BY_DATE", smithyprelude.Unit)
-
-	_HiddenToolbarItemList_member = _HiddenToolbarItemList.AddMember("member", _ToolbarItem)
-
-	_IdentityProviderDetails_key = _IdentityProviderDetails.AddMember("key", _StringType)
-
-	_IdentityProviderDetails_value = _IdentityProviderDetails.AddMember("value", _StringType)
-
-	IdentityProvider_identityProviderArn = IdentityProvider.AddMember("identityProviderArn", _SubresourceARN)
-
-	IdentityProvider_identityProviderName = IdentityProvider.AddMember("identityProviderName", _IdentityProviderName)
-
-	IdentityProvider_identityProviderType = IdentityProvider.AddMember("identityProviderType", _IdentityProviderType)
-
-	IdentityProvider_identityProviderDetails = IdentityProvider.AddMember("identityProviderDetails", _IdentityProviderDetails)
-
-	IdentityProviderSummary_identityProviderArn = IdentityProviderSummary.AddMember("identityProviderArn", _SubresourceARN)
-
-	IdentityProviderSummary_identityProviderName = IdentityProviderSummary.AddMember("identityProviderName", _IdentityProviderName)
-
-	IdentityProviderSummary_identityProviderType = IdentityProviderSummary.AddMember("identityProviderType", _IdentityProviderType)
-
-	_IdentityProviderList_member = _IdentityProviderList.AddMember("member", IdentityProviderSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ExceptionMessage)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	IpRule_ipRange = IpRule.AddMember("ipRange", _IpRange)
-
-	IpRule_description = IpRule.AddMember("description", _Description)
-
-	_IpRuleList_member = _IpRuleList.AddMember("member", IpRule)
-
-	IpAccessSettings_ipAccessSettingsArn = IpAccessSettings.AddMember("ipAccessSettingsArn", _ARN)
-
-	IpAccessSettings_associatedPortalArns = IpAccessSettings.AddMember("associatedPortalArns", _ArnList)
-
-	IpAccessSettings_ipRules = IpAccessSettings.AddMember("ipRules", _IpRuleList)
-
-	IpAccessSettings_displayName = IpAccessSettings.AddMember("displayName", _DisplayName)
-
-	IpAccessSettings_description = IpAccessSettings.AddMember("description", _Description)
-
-	IpAccessSettings_creationDate = IpAccessSettings.AddMember("creationDate", _Timestamp)
-
-	IpAccessSettings_customerManagedKey = IpAccessSettings.AddMember("customerManagedKey", _keyArn)
-
-	IpAccessSettings_additionalEncryptionContext = IpAccessSettings.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	IpAccessSettingsSummary_ipAccessSettingsArn = IpAccessSettingsSummary.AddMember("ipAccessSettingsArn", _ARN)
-
-	IpAccessSettingsSummary_displayName = IpAccessSettingsSummary.AddMember("displayName", _DisplayName)
-
-	IpAccessSettingsSummary_description = IpAccessSettingsSummary.AddMember("description", _Description)
-
-	IpAccessSettingsSummary_creationDate = IpAccessSettingsSummary.AddMember("creationDate", _Timestamp)
-
-	_IpAccessSettingsList_member = _IpAccessSettingsList.AddMember("member", IpAccessSettingsSummary)
-
-	_IpAddressList_member = _IpAddressList.AddMember("member", _IpAddress)
-
-	LogFileFormat_JSON_LINES = LogFileFormat.AddMember("JSON_LINES", smithyprelude.Unit)
-
-	LogFileFormat_JSON = LogFileFormat.AddMember("JSON", smithyprelude.Unit)
-
-	S3LogConfiguration_bucket = S3LogConfiguration.AddMember("bucket", _S3Bucket)
-
-	S3LogConfiguration_keyPrefix = S3LogConfiguration.AddMember("keyPrefix", _S3KeyPrefix)
-
-	S3LogConfiguration_bucketOwner = S3LogConfiguration.AddMember("bucketOwner", _S3BucketOwner)
-
-	S3LogConfiguration_logFileFormat = S3LogConfiguration.AddMember("logFileFormat", LogFileFormat)
-
-	S3LogConfiguration_folderStructure = S3LogConfiguration.AddMember("folderStructure", FolderStructure)
-
-	LogConfiguration_s3 = LogConfiguration.AddMember("s3", S3LogConfiguration)
-
-	_SubnetIdList_member = _SubnetIdList.AddMember("member", _SubnetId)
-
-	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", _SecurityGroupId)
-
-	NetworkSettings_networkSettingsArn = NetworkSettings.AddMember("networkSettingsArn", _ARN)
-
-	NetworkSettings_associatedPortalArns = NetworkSettings.AddMember("associatedPortalArns", _ArnList)
-
-	NetworkSettings_vpcId = NetworkSettings.AddMember("vpcId", _VpcId)
-
-	NetworkSettings_subnetIds = NetworkSettings.AddMember("subnetIds", _SubnetIdList)
-
-	NetworkSettings_securityGroupIds = NetworkSettings.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	NetworkSettingsSummary_networkSettingsArn = NetworkSettingsSummary.AddMember("networkSettingsArn", _ARN)
-
-	NetworkSettingsSummary_vpcId = NetworkSettingsSummary.AddMember("vpcId", _VpcId)
-
-	_NetworkSettingsList_member = _NetworkSettingsList.AddMember("member", NetworkSettingsSummary)
-
-	Portal_portalArn = Portal.AddMember("portalArn", _ARN)
-
-	Portal_rendererType = Portal.AddMember("rendererType", _RendererType)
-
-	Portal_browserType = Portal.AddMember("browserType", _BrowserType)
-
-	Portal_portalStatus = Portal.AddMember("portalStatus", _PortalStatus)
-
-	Portal_portalEndpoint = Portal.AddMember("portalEndpoint", _PortalEndpoint)
-
-	Portal_displayName = Portal.AddMember("displayName", _DisplayName)
-
-	Portal_creationDate = Portal.AddMember("creationDate", _Timestamp)
-
-	Portal_browserSettingsArn = Portal.AddMember("browserSettingsArn", _ARN)
-
-	Portal_dataProtectionSettingsArn = Portal.AddMember("dataProtectionSettingsArn", _ARN)
-
-	Portal_userSettingsArn = Portal.AddMember("userSettingsArn", _ARN)
-
-	Portal_networkSettingsArn = Portal.AddMember("networkSettingsArn", _ARN)
-
-	Portal_sessionLoggerArn = Portal.AddMember("sessionLoggerArn", _ARN)
-
-	Portal_trustStoreArn = Portal.AddMember("trustStoreArn", _ARN)
-
-	Portal_statusReason = Portal.AddMember("statusReason", _StatusReason)
-
-	Portal_userAccessLoggingSettingsArn = Portal.AddMember("userAccessLoggingSettingsArn", _ARN)
-
-	Portal_authenticationType = Portal.AddMember("authenticationType", _AuthenticationType)
-
-	Portal_ipAccessSettingsArn = Portal.AddMember("ipAccessSettingsArn", _ARN)
-
-	Portal_customerManagedKey = Portal.AddMember("customerManagedKey", _keyArn)
-
-	Portal_additionalEncryptionContext = Portal.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	Portal_instanceType = Portal.AddMember("instanceType", _InstanceType)
-
-	Portal_maxConcurrentSessions = Portal.AddMember("maxConcurrentSessions", _MaxConcurrentSessions)
-
-	Portal_portalCustomDomain = Portal.AddMember("portalCustomDomain", _PortalCustomDomain)
-
-	PortalSummary_portalArn = PortalSummary.AddMember("portalArn", _ARN)
-
-	PortalSummary_rendererType = PortalSummary.AddMember("rendererType", _RendererType)
-
-	PortalSummary_browserType = PortalSummary.AddMember("browserType", _BrowserType)
-
-	PortalSummary_portalStatus = PortalSummary.AddMember("portalStatus", _PortalStatus)
-
-	PortalSummary_portalEndpoint = PortalSummary.AddMember("portalEndpoint", _PortalEndpoint)
-
-	PortalSummary_displayName = PortalSummary.AddMember("displayName", _DisplayName)
-
-	PortalSummary_creationDate = PortalSummary.AddMember("creationDate", _Timestamp)
-
-	PortalSummary_browserSettingsArn = PortalSummary.AddMember("browserSettingsArn", _ARN)
-
-	PortalSummary_dataProtectionSettingsArn = PortalSummary.AddMember("dataProtectionSettingsArn", _ARN)
-
-	PortalSummary_userSettingsArn = PortalSummary.AddMember("userSettingsArn", _ARN)
-
-	PortalSummary_networkSettingsArn = PortalSummary.AddMember("networkSettingsArn", _ARN)
-
-	PortalSummary_sessionLoggerArn = PortalSummary.AddMember("sessionLoggerArn", _ARN)
-
-	PortalSummary_trustStoreArn = PortalSummary.AddMember("trustStoreArn", _ARN)
-
-	PortalSummary_userAccessLoggingSettingsArn = PortalSummary.AddMember("userAccessLoggingSettingsArn", _ARN)
-
-	PortalSummary_authenticationType = PortalSummary.AddMember("authenticationType", _AuthenticationType)
-
-	PortalSummary_ipAccessSettingsArn = PortalSummary.AddMember("ipAccessSettingsArn", _ARN)
-
-	PortalSummary_instanceType = PortalSummary.AddMember("instanceType", _InstanceType)
-
-	PortalSummary_maxConcurrentSessions = PortalSummary.AddMember("maxConcurrentSessions", _MaxConcurrentSessions)
-
-	PortalSummary_portalCustomDomain = PortalSummary.AddMember("portalCustomDomain", _PortalCustomDomain)
-
-	_PortalList_member = _PortalList.AddMember("member", PortalSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ExceptionMessage)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _ResourceId)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ExceptionMessage)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _ResourceId)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _ResourceType)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _ServiceCode)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _QuotaCode)
-
-	SessionStatus_ACTIVE = SessionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SessionStatus_TERMINATED = SessionStatus.AddMember("TERMINATED", smithyprelude.Unit)
-
-	Session_portalArn = Session.AddMember("portalArn", _ARN)
-
-	Session_sessionId = Session.AddMember("sessionId", _StringType)
-
-	Session_username = Session.AddMember("username", _Username)
-
-	Session_clientIpAddresses = Session.AddMember("clientIpAddresses", _IpAddressList)
-
-	Session_status = Session.AddMember("status", SessionStatus)
-
-	Session_startTime = Session.AddMember("startTime", _Timestamp)
-
-	Session_endTime = Session.AddMember("endTime", _Timestamp)
-
-	SessionLogger_sessionLoggerArn = SessionLogger.AddMember("sessionLoggerArn", _ARN)
-
-	SessionLogger_eventFilter = SessionLogger.AddMember("eventFilter", EventFilter)
-
-	SessionLogger_logConfiguration = SessionLogger.AddMember("logConfiguration", LogConfiguration)
-
-	SessionLogger_customerManagedKey = SessionLogger.AddMember("customerManagedKey", _keyArn)
-
-	SessionLogger_additionalEncryptionContext = SessionLogger.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	SessionLogger_associatedPortalArns = SessionLogger.AddMember("associatedPortalArns", _ArnList)
-
-	SessionLogger_displayName = SessionLogger.AddMember("displayName", _DisplayNameSafe)
-
-	SessionLogger_creationDate = SessionLogger.AddMember("creationDate", _Timestamp)
-
-	SessionLoggerSummary_sessionLoggerArn = SessionLoggerSummary.AddMember("sessionLoggerArn", _ARN)
-
-	SessionLoggerSummary_logConfiguration = SessionLoggerSummary.AddMember("logConfiguration", LogConfiguration)
-
-	SessionLoggerSummary_displayName = SessionLoggerSummary.AddMember("displayName", _DisplayNameSafe)
-
-	SessionLoggerSummary_creationDate = SessionLoggerSummary.AddMember("creationDate", _Timestamp)
-
-	_SessionLoggerList_member = _SessionLoggerList.AddMember("member", SessionLoggerSummary)
-
-	SessionSortBy_START_TIME_ASCENDING = SessionSortBy.AddMember("START_TIME_ASCENDING", smithyprelude.Unit)
-
-	SessionSortBy_START_TIME_DESCENDING = SessionSortBy.AddMember("START_TIME_DESCENDING", smithyprelude.Unit)
-
-	SessionSummary_portalArn = SessionSummary.AddMember("portalArn", _ARN)
-
-	SessionSummary_sessionId = SessionSummary.AddMember("sessionId", _StringType)
-
-	SessionSummary_username = SessionSummary.AddMember("username", _Username)
-
-	SessionSummary_status = SessionSummary.AddMember("status", SessionStatus)
-
-	SessionSummary_startTime = SessionSummary.AddMember("startTime", _Timestamp)
-
-	SessionSummary_endTime = SessionSummary.AddMember("endTime", _Timestamp)
-
-	_SessionSummaryList_member = _SessionSummaryList.AddMember("member", SessionSummary)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ExceptionMessage)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _ServiceCode)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _QuotaCode)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ToolbarConfiguration_toolbarType = ToolbarConfiguration.AddMember("toolbarType", _ToolbarType)
-
-	ToolbarConfiguration_visualMode = ToolbarConfiguration.AddMember("visualMode", _VisualMode)
-
-	ToolbarConfiguration_hiddenToolbarItems = ToolbarConfiguration.AddMember("hiddenToolbarItems", _HiddenToolbarItemList)
-
-	ToolbarConfiguration_maxDisplayResolution = ToolbarConfiguration.AddMember("maxDisplayResolution", _MaxDisplayResolution)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _TagExceptionMessage)
-
-	TooManyTagsException_resourceName = TooManyTagsException.AddMember("resourceName", _ARN)
-
-	TrustStore_associatedPortalArns = TrustStore.AddMember("associatedPortalArns", _ArnList)
-
-	TrustStore_trustStoreArn = TrustStore.AddMember("trustStoreArn", _ARN)
-
-	TrustStoreSummary_trustStoreArn = TrustStoreSummary.AddMember("trustStoreArn", _ARN)
-
-	_TrustStoreSummaryList_member = _TrustStoreSummaryList.AddMember("member", TrustStoreSummary)
-
-	UserAccessLoggingSettings_userAccessLoggingSettingsArn = UserAccessLoggingSettings.AddMember("userAccessLoggingSettingsArn", _ARN)
-
-	UserAccessLoggingSettings_associatedPortalArns = UserAccessLoggingSettings.AddMember("associatedPortalArns", _ArnList)
-
-	UserAccessLoggingSettings_kinesisStreamArn = UserAccessLoggingSettings.AddMember("kinesisStreamArn", _KinesisStreamArn)
-
-	UserAccessLoggingSettingsSummary_userAccessLoggingSettingsArn = UserAccessLoggingSettingsSummary.AddMember("userAccessLoggingSettingsArn", _ARN)
-
-	UserAccessLoggingSettingsSummary_kinesisStreamArn = UserAccessLoggingSettingsSummary.AddMember("kinesisStreamArn", _KinesisStreamArn)
-
-	_UserAccessLoggingSettingsList_member = _UserAccessLoggingSettingsList.AddMember("member", UserAccessLoggingSettingsSummary)
-
-	UserSettings_userSettingsArn = UserSettings.AddMember("userSettingsArn", _ARN)
-
-	UserSettings_associatedPortalArns = UserSettings.AddMember("associatedPortalArns", _ArnList)
-
-	UserSettings_copyAllowed = UserSettings.AddMember("copyAllowed", _EnabledType)
-
-	UserSettings_pasteAllowed = UserSettings.AddMember("pasteAllowed", _EnabledType)
-
-	UserSettings_downloadAllowed = UserSettings.AddMember("downloadAllowed", _EnabledType)
-
-	UserSettings_uploadAllowed = UserSettings.AddMember("uploadAllowed", _EnabledType)
-
-	UserSettings_printAllowed = UserSettings.AddMember("printAllowed", _EnabledType)
-
-	UserSettings_disconnectTimeoutInMinutes = UserSettings.AddMember("disconnectTimeoutInMinutes", _DisconnectTimeoutInMinutes)
-
-	UserSettings_idleDisconnectTimeoutInMinutes = UserSettings.AddMember("idleDisconnectTimeoutInMinutes", _IdleDisconnectTimeoutInMinutes)
-
-	UserSettings_cookieSynchronizationConfiguration = UserSettings.AddMember("cookieSynchronizationConfiguration", CookieSynchronizationConfiguration)
-
-	UserSettings_customerManagedKey = UserSettings.AddMember("customerManagedKey", _keyArn)
-
-	UserSettings_additionalEncryptionContext = UserSettings.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	UserSettings_deepLinkAllowed = UserSettings.AddMember("deepLinkAllowed", _EnabledType)
-
-	UserSettings_toolbarConfiguration = UserSettings.AddMember("toolbarConfiguration", ToolbarConfiguration)
-
-	UserSettings_brandingConfiguration = UserSettings.AddMember("brandingConfiguration", BrandingConfiguration)
-
-	UserSettings_webAuthnAllowed = UserSettings.AddMember("webAuthnAllowed", _EnabledType)
-
-	UserSettingsSummary_userSettingsArn = UserSettingsSummary.AddMember("userSettingsArn", _ARN)
-
-	UserSettingsSummary_copyAllowed = UserSettingsSummary.AddMember("copyAllowed", _EnabledType)
-
-	UserSettingsSummary_pasteAllowed = UserSettingsSummary.AddMember("pasteAllowed", _EnabledType)
-
-	UserSettingsSummary_downloadAllowed = UserSettingsSummary.AddMember("downloadAllowed", _EnabledType)
-
-	UserSettingsSummary_uploadAllowed = UserSettingsSummary.AddMember("uploadAllowed", _EnabledType)
-
-	UserSettingsSummary_printAllowed = UserSettingsSummary.AddMember("printAllowed", _EnabledType)
-
-	UserSettingsSummary_disconnectTimeoutInMinutes = UserSettingsSummary.AddMember("disconnectTimeoutInMinutes", _DisconnectTimeoutInMinutes)
-
-	UserSettingsSummary_idleDisconnectTimeoutInMinutes = UserSettingsSummary.AddMember("idleDisconnectTimeoutInMinutes", _IdleDisconnectTimeoutInMinutes)
-
-	UserSettingsSummary_cookieSynchronizationConfiguration = UserSettingsSummary.AddMember("cookieSynchronizationConfiguration", CookieSynchronizationConfiguration)
-
-	UserSettingsSummary_deepLinkAllowed = UserSettingsSummary.AddMember("deepLinkAllowed", _EnabledType)
-
-	UserSettingsSummary_toolbarConfiguration = UserSettingsSummary.AddMember("toolbarConfiguration", ToolbarConfiguration)
-
-	UserSettingsSummary_brandingConfiguration = UserSettingsSummary.AddMember("brandingConfiguration", BrandingConfiguration)
-
-	UserSettingsSummary_webAuthnAllowed = UserSettingsSummary.AddMember("webAuthnAllowed", _EnabledType)
-
-	_UserSettingsList_member = _UserSettingsList.AddMember("member", UserSettingsSummary)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _FieldName)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _ExceptionMessage)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ExceptionMessage)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	AssociateBrowserSettingsRequest_portalArn = AssociateBrowserSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateBrowserSettingsRequest_browserSettingsArn = AssociateBrowserSettingsRequest.AddMember("browserSettingsArn", _ARN, &smithytraits.HTTPQuery{Name: "browserSettingsArn"})
-
-	AssociateBrowserSettingsResponse_portalArn = AssociateBrowserSettingsResponse.AddMember("portalArn", _ARN)
-
-	AssociateBrowserSettingsResponse_browserSettingsArn = AssociateBrowserSettingsResponse.AddMember("browserSettingsArn", _ARN)
-
-	AssociateDataProtectionSettingsRequest_portalArn = AssociateDataProtectionSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateDataProtectionSettingsRequest_dataProtectionSettingsArn = AssociateDataProtectionSettingsRequest.AddMember("dataProtectionSettingsArn", _ARN, &smithytraits.HTTPQuery{Name: "dataProtectionSettingsArn"})
-
-	AssociateDataProtectionSettingsResponse_portalArn = AssociateDataProtectionSettingsResponse.AddMember("portalArn", _ARN)
-
-	AssociateDataProtectionSettingsResponse_dataProtectionSettingsArn = AssociateDataProtectionSettingsResponse.AddMember("dataProtectionSettingsArn", _ARN)
-
-	AssociateIpAccessSettingsRequest_portalArn = AssociateIpAccessSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateIpAccessSettingsRequest_ipAccessSettingsArn = AssociateIpAccessSettingsRequest.AddMember("ipAccessSettingsArn", _ARN, &smithytraits.HTTPQuery{Name: "ipAccessSettingsArn"})
-
-	AssociateIpAccessSettingsResponse_portalArn = AssociateIpAccessSettingsResponse.AddMember("portalArn", _ARN)
-
-	AssociateIpAccessSettingsResponse_ipAccessSettingsArn = AssociateIpAccessSettingsResponse.AddMember("ipAccessSettingsArn", _ARN)
-
-	AssociateNetworkSettingsRequest_portalArn = AssociateNetworkSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateNetworkSettingsRequest_networkSettingsArn = AssociateNetworkSettingsRequest.AddMember("networkSettingsArn", _ARN, &smithytraits.HTTPQuery{Name: "networkSettingsArn"})
-
-	AssociateNetworkSettingsResponse_portalArn = AssociateNetworkSettingsResponse.AddMember("portalArn", _ARN)
-
-	AssociateNetworkSettingsResponse_networkSettingsArn = AssociateNetworkSettingsResponse.AddMember("networkSettingsArn", _ARN)
-
-	AssociateSessionLoggerRequest_portalArn = AssociateSessionLoggerRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateSessionLoggerRequest_sessionLoggerArn = AssociateSessionLoggerRequest.AddMember("sessionLoggerArn", _ARN, &smithytraits.HTTPQuery{Name: "sessionLoggerArn"})
-
-	AssociateSessionLoggerResponse_portalArn = AssociateSessionLoggerResponse.AddMember("portalArn", _ARN)
-
-	AssociateSessionLoggerResponse_sessionLoggerArn = AssociateSessionLoggerResponse.AddMember("sessionLoggerArn", _ARN)
-
-	AssociateTrustStoreRequest_portalArn = AssociateTrustStoreRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateTrustStoreRequest_trustStoreArn = AssociateTrustStoreRequest.AddMember("trustStoreArn", _ARN, &smithytraits.HTTPQuery{Name: "trustStoreArn"})
-
-	AssociateTrustStoreResponse_portalArn = AssociateTrustStoreResponse.AddMember("portalArn", _ARN)
-
-	AssociateTrustStoreResponse_trustStoreArn = AssociateTrustStoreResponse.AddMember("trustStoreArn", _ARN)
-
-	AssociateUserAccessLoggingSettingsRequest_portalArn = AssociateUserAccessLoggingSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = AssociateUserAccessLoggingSettingsRequest.AddMember("userAccessLoggingSettingsArn", _ARN, &smithytraits.HTTPQuery{Name: "userAccessLoggingSettingsArn"})
-
-	AssociateUserAccessLoggingSettingsResponse_portalArn = AssociateUserAccessLoggingSettingsResponse.AddMember("portalArn", _ARN)
-
-	AssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn = AssociateUserAccessLoggingSettingsResponse.AddMember("userAccessLoggingSettingsArn", _ARN)
-
-	AssociateUserSettingsRequest_portalArn = AssociateUserSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	AssociateUserSettingsRequest_userSettingsArn = AssociateUserSettingsRequest.AddMember("userSettingsArn", _ARN, &smithytraits.HTTPQuery{Name: "userSettingsArn"})
-
-	AssociateUserSettingsResponse_portalArn = AssociateUserSettingsResponse.AddMember("portalArn", _ARN)
-
-	AssociateUserSettingsResponse_userSettingsArn = AssociateUserSettingsResponse.AddMember("userSettingsArn", _ARN)
-
-	CreateBrowserSettingsRequest_tags = CreateBrowserSettingsRequest.AddMember("tags", _TagList)
-
-	CreateBrowserSettingsRequest_customerManagedKey = CreateBrowserSettingsRequest.AddMember("customerManagedKey", _keyArn)
-
-	CreateBrowserSettingsRequest_additionalEncryptionContext = CreateBrowserSettingsRequest.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	CreateBrowserSettingsRequest_browserPolicy = CreateBrowserSettingsRequest.AddMember("browserPolicy", _BrowserPolicy)
-
-	CreateBrowserSettingsRequest_clientToken = CreateBrowserSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	CreateBrowserSettingsRequest_webContentFilteringPolicy = CreateBrowserSettingsRequest.AddMember("webContentFilteringPolicy", WebContentFilteringPolicy)
-
-	CreateBrowserSettingsResponse_browserSettingsArn = CreateBrowserSettingsResponse.AddMember("browserSettingsArn", _ARN)
-
-	CreateDataProtectionSettingsRequest_displayName = CreateDataProtectionSettingsRequest.AddMember("displayName", _DisplayNameSafe)
-
-	CreateDataProtectionSettingsRequest_description = CreateDataProtectionSettingsRequest.AddMember("description", _DescriptionSafe)
-
-	CreateDataProtectionSettingsRequest_tags = CreateDataProtectionSettingsRequest.AddMember("tags", _TagList)
-
-	CreateDataProtectionSettingsRequest_customerManagedKey = CreateDataProtectionSettingsRequest.AddMember("customerManagedKey", _keyArn)
-
-	CreateDataProtectionSettingsRequest_additionalEncryptionContext = CreateDataProtectionSettingsRequest.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	CreateDataProtectionSettingsRequest_inlineRedactionConfiguration = CreateDataProtectionSettingsRequest.AddMember("inlineRedactionConfiguration", InlineRedactionConfiguration)
-
-	CreateDataProtectionSettingsRequest_clientToken = CreateDataProtectionSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	CreateDataProtectionSettingsResponse_dataProtectionSettingsArn = CreateDataProtectionSettingsResponse.AddMember("dataProtectionSettingsArn", _ARN)
-
-	CreateIdentityProviderRequest_portalArn = CreateIdentityProviderRequest.AddMember("portalArn", _ARN)
-
-	CreateIdentityProviderRequest_identityProviderName = CreateIdentityProviderRequest.AddMember("identityProviderName", _IdentityProviderName)
-
-	CreateIdentityProviderRequest_identityProviderType = CreateIdentityProviderRequest.AddMember("identityProviderType", _IdentityProviderType)
-
-	CreateIdentityProviderRequest_identityProviderDetails = CreateIdentityProviderRequest.AddMember("identityProviderDetails", _IdentityProviderDetails)
-
-	CreateIdentityProviderRequest_clientToken = CreateIdentityProviderRequest.AddMember("clientToken", _ClientToken)
-
-	CreateIdentityProviderRequest_tags = CreateIdentityProviderRequest.AddMember("tags", _TagList)
-
-	CreateIdentityProviderResponse_identityProviderArn = CreateIdentityProviderResponse.AddMember("identityProviderArn", _SubresourceARN)
-
-	CreateIpAccessSettingsRequest_displayName = CreateIpAccessSettingsRequest.AddMember("displayName", _DisplayName)
-
-	CreateIpAccessSettingsRequest_description = CreateIpAccessSettingsRequest.AddMember("description", _Description)
-
-	CreateIpAccessSettingsRequest_tags = CreateIpAccessSettingsRequest.AddMember("tags", _TagList)
-
-	CreateIpAccessSettingsRequest_customerManagedKey = CreateIpAccessSettingsRequest.AddMember("customerManagedKey", _keyArn)
-
-	CreateIpAccessSettingsRequest_additionalEncryptionContext = CreateIpAccessSettingsRequest.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	CreateIpAccessSettingsRequest_ipRules = CreateIpAccessSettingsRequest.AddMember("ipRules", _IpRuleList)
-
-	CreateIpAccessSettingsRequest_clientToken = CreateIpAccessSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	CreateIpAccessSettingsResponse_ipAccessSettingsArn = CreateIpAccessSettingsResponse.AddMember("ipAccessSettingsArn", _ARN)
-
-	CreateNetworkSettingsRequest_vpcId = CreateNetworkSettingsRequest.AddMember("vpcId", _VpcId)
-
-	CreateNetworkSettingsRequest_subnetIds = CreateNetworkSettingsRequest.AddMember("subnetIds", _SubnetIdList)
-
-	CreateNetworkSettingsRequest_securityGroupIds = CreateNetworkSettingsRequest.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	CreateNetworkSettingsRequest_tags = CreateNetworkSettingsRequest.AddMember("tags", _TagList)
-
-	CreateNetworkSettingsRequest_clientToken = CreateNetworkSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	CreateNetworkSettingsResponse_networkSettingsArn = CreateNetworkSettingsResponse.AddMember("networkSettingsArn", _ARN)
-
-	CreatePortalRequest_displayName = CreatePortalRequest.AddMember("displayName", _DisplayName)
-
-	CreatePortalRequest_tags = CreatePortalRequest.AddMember("tags", _TagList)
-
-	CreatePortalRequest_customerManagedKey = CreatePortalRequest.AddMember("customerManagedKey", _keyArn)
-
-	CreatePortalRequest_additionalEncryptionContext = CreatePortalRequest.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	CreatePortalRequest_clientToken = CreatePortalRequest.AddMember("clientToken", _ClientToken)
-
-	CreatePortalRequest_authenticationType = CreatePortalRequest.AddMember("authenticationType", _AuthenticationType)
-
-	CreatePortalRequest_instanceType = CreatePortalRequest.AddMember("instanceType", _InstanceType)
-
-	CreatePortalRequest_maxConcurrentSessions = CreatePortalRequest.AddMember("maxConcurrentSessions", _MaxConcurrentSessions)
-
-	CreatePortalRequest_portalCustomDomain = CreatePortalRequest.AddMember("portalCustomDomain", _PortalCustomDomain)
-
-	CreatePortalResponse_portalArn = CreatePortalResponse.AddMember("portalArn", _ARN)
-
-	CreatePortalResponse_portalEndpoint = CreatePortalResponse.AddMember("portalEndpoint", _PortalEndpoint)
-
-	CreateSessionLoggerRequest_eventFilter = CreateSessionLoggerRequest.AddMember("eventFilter", EventFilter)
-
-	CreateSessionLoggerRequest_logConfiguration = CreateSessionLoggerRequest.AddMember("logConfiguration", LogConfiguration)
-
-	CreateSessionLoggerRequest_displayName = CreateSessionLoggerRequest.AddMember("displayName", _DisplayNameSafe)
-
-	CreateSessionLoggerRequest_customerManagedKey = CreateSessionLoggerRequest.AddMember("customerManagedKey", _keyArn)
-
-	CreateSessionLoggerRequest_additionalEncryptionContext = CreateSessionLoggerRequest.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	CreateSessionLoggerRequest_tags = CreateSessionLoggerRequest.AddMember("tags", _TagList)
-
-	CreateSessionLoggerRequest_clientToken = CreateSessionLoggerRequest.AddMember("clientToken", _ClientToken)
-
-	CreateSessionLoggerResponse_sessionLoggerArn = CreateSessionLoggerResponse.AddMember("sessionLoggerArn", _ARN)
-
-	CreateTrustStoreRequest_certificateList = CreateTrustStoreRequest.AddMember("certificateList", _CertificateList)
-
-	CreateTrustStoreRequest_tags = CreateTrustStoreRequest.AddMember("tags", _TagList)
-
-	CreateTrustStoreRequest_clientToken = CreateTrustStoreRequest.AddMember("clientToken", _ClientToken)
-
-	CreateTrustStoreResponse_trustStoreArn = CreateTrustStoreResponse.AddMember("trustStoreArn", _ARN)
-
-	CreateUserAccessLoggingSettingsRequest_kinesisStreamArn = CreateUserAccessLoggingSettingsRequest.AddMember("kinesisStreamArn", _KinesisStreamArn)
-
-	CreateUserAccessLoggingSettingsRequest_tags = CreateUserAccessLoggingSettingsRequest.AddMember("tags", _TagList)
-
-	CreateUserAccessLoggingSettingsRequest_clientToken = CreateUserAccessLoggingSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn = CreateUserAccessLoggingSettingsResponse.AddMember("userAccessLoggingSettingsArn", _ARN)
-
-	CreateUserSettingsRequest_copyAllowed = CreateUserSettingsRequest.AddMember("copyAllowed", _EnabledType)
-
-	CreateUserSettingsRequest_pasteAllowed = CreateUserSettingsRequest.AddMember("pasteAllowed", _EnabledType)
-
-	CreateUserSettingsRequest_downloadAllowed = CreateUserSettingsRequest.AddMember("downloadAllowed", _EnabledType)
-
-	CreateUserSettingsRequest_uploadAllowed = CreateUserSettingsRequest.AddMember("uploadAllowed", _EnabledType)
-
-	CreateUserSettingsRequest_printAllowed = CreateUserSettingsRequest.AddMember("printAllowed", _EnabledType)
-
-	CreateUserSettingsRequest_tags = CreateUserSettingsRequest.AddMember("tags", _TagList)
-
-	CreateUserSettingsRequest_disconnectTimeoutInMinutes = CreateUserSettingsRequest.AddMember("disconnectTimeoutInMinutes", _DisconnectTimeoutInMinutes)
-
-	CreateUserSettingsRequest_idleDisconnectTimeoutInMinutes = CreateUserSettingsRequest.AddMember("idleDisconnectTimeoutInMinutes", _IdleDisconnectTimeoutInMinutes)
-
-	CreateUserSettingsRequest_clientToken = CreateUserSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	CreateUserSettingsRequest_cookieSynchronizationConfiguration = CreateUserSettingsRequest.AddMember("cookieSynchronizationConfiguration", CookieSynchronizationConfiguration)
-
-	CreateUserSettingsRequest_customerManagedKey = CreateUserSettingsRequest.AddMember("customerManagedKey", _keyArn)
-
-	CreateUserSettingsRequest_additionalEncryptionContext = CreateUserSettingsRequest.AddMember("additionalEncryptionContext", _EncryptionContextMap)
-
-	CreateUserSettingsRequest_deepLinkAllowed = CreateUserSettingsRequest.AddMember("deepLinkAllowed", _EnabledType)
-
-	CreateUserSettingsRequest_toolbarConfiguration = CreateUserSettingsRequest.AddMember("toolbarConfiguration", ToolbarConfiguration)
-
-	CreateUserSettingsRequest_brandingConfigurationInput = CreateUserSettingsRequest.AddMember("brandingConfigurationInput", BrandingConfigurationCreateInput)
-
-	CreateUserSettingsRequest_webAuthnAllowed = CreateUserSettingsRequest.AddMember("webAuthnAllowed", _EnabledType)
-
-	CreateUserSettingsResponse_userSettingsArn = CreateUserSettingsResponse.AddMember("userSettingsArn", _ARN)
-
-	DeleteBrowserSettingsRequest_browserSettingsArn = DeleteBrowserSettingsRequest.AddMember("browserSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeleteDataProtectionSettingsRequest_dataProtectionSettingsArn = DeleteDataProtectionSettingsRequest.AddMember("dataProtectionSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeleteIdentityProviderRequest_identityProviderArn = DeleteIdentityProviderRequest.AddMember("identityProviderArn", _SubresourceARN, &smithytraits.HTTPLabel{})
-
-	DeleteIpAccessSettingsRequest_ipAccessSettingsArn = DeleteIpAccessSettingsRequest.AddMember("ipAccessSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeleteNetworkSettingsRequest_networkSettingsArn = DeleteNetworkSettingsRequest.AddMember("networkSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeletePortalRequest_portalArn = DeletePortalRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeleteSessionLoggerRequest_sessionLoggerArn = DeleteSessionLoggerRequest.AddMember("sessionLoggerArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeleteTrustStoreRequest_trustStoreArn = DeleteTrustStoreRequest.AddMember("trustStoreArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeleteUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = DeleteUserAccessLoggingSettingsRequest.AddMember("userAccessLoggingSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DeleteUserSettingsRequest_userSettingsArn = DeleteUserSettingsRequest.AddMember("userSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateBrowserSettingsRequest_portalArn = DisassociateBrowserSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateDataProtectionSettingsRequest_portalArn = DisassociateDataProtectionSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateIpAccessSettingsRequest_portalArn = DisassociateIpAccessSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateNetworkSettingsRequest_portalArn = DisassociateNetworkSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateSessionLoggerRequest_portalArn = DisassociateSessionLoggerRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateTrustStoreRequest_portalArn = DisassociateTrustStoreRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateUserAccessLoggingSettingsRequest_portalArn = DisassociateUserAccessLoggingSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	DisassociateUserSettingsRequest_portalArn = DisassociateUserSettingsRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	ExpireSessionRequest_portalId = ExpireSessionRequest.AddMember("portalId", _PortalId, &smithytraits.HTTPLabel{})
-
-	ExpireSessionRequest_sessionId = ExpireSessionRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	GetBrowserSettingsRequest_browserSettingsArn = GetBrowserSettingsRequest.AddMember("browserSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetBrowserSettingsResponse_browserSettings = GetBrowserSettingsResponse.AddMember("browserSettings", BrowserSettings)
-
-	GetDataProtectionSettingsRequest_dataProtectionSettingsArn = GetDataProtectionSettingsRequest.AddMember("dataProtectionSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetDataProtectionSettingsResponse_dataProtectionSettings = GetDataProtectionSettingsResponse.AddMember("dataProtectionSettings", DataProtectionSettings)
-
-	GetIdentityProviderRequest_identityProviderArn = GetIdentityProviderRequest.AddMember("identityProviderArn", _SubresourceARN, &smithytraits.HTTPLabel{})
-
-	GetIdentityProviderResponse_identityProvider = GetIdentityProviderResponse.AddMember("identityProvider", IdentityProvider)
-
-	GetIpAccessSettingsRequest_ipAccessSettingsArn = GetIpAccessSettingsRequest.AddMember("ipAccessSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetIpAccessSettingsResponse_ipAccessSettings = GetIpAccessSettingsResponse.AddMember("ipAccessSettings", IpAccessSettings)
-
-	GetNetworkSettingsRequest_networkSettingsArn = GetNetworkSettingsRequest.AddMember("networkSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetNetworkSettingsResponse_networkSettings = GetNetworkSettingsResponse.AddMember("networkSettings", NetworkSettings)
-
-	GetPortalRequest_portalArn = GetPortalRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetPortalResponse_portal = GetPortalResponse.AddMember("portal", Portal)
-
-	GetPortalServiceProviderMetadataRequest_portalArn = GetPortalServiceProviderMetadataRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetPortalServiceProviderMetadataResponse_portalArn = GetPortalServiceProviderMetadataResponse.AddMember("portalArn", _ARN)
-
-	GetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata = GetPortalServiceProviderMetadataResponse.AddMember("serviceProviderSamlMetadata", _SamlMetadata)
-
-	GetSessionRequest_portalId = GetSessionRequest.AddMember("portalId", _PortalId, &smithytraits.HTTPLabel{})
-
-	GetSessionRequest_sessionId = GetSessionRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	GetSessionLoggerRequest_sessionLoggerArn = GetSessionLoggerRequest.AddMember("sessionLoggerArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetSessionLoggerResponse_sessionLogger = GetSessionLoggerResponse.AddMember("sessionLogger", SessionLogger)
-
-	GetSessionResponse_session = GetSessionResponse.AddMember("session", Session)
-
-	GetTrustStoreCertificateRequest_trustStoreArn = GetTrustStoreCertificateRequest.AddMember("trustStoreArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetTrustStoreCertificateRequest_thumbprint = GetTrustStoreCertificateRequest.AddMember("thumbprint", _CertificateThumbprint, &smithytraits.HTTPQuery{Name: "thumbprint"})
-
-	GetTrustStoreCertificateResponse_trustStoreArn = GetTrustStoreCertificateResponse.AddMember("trustStoreArn", _ARN)
-
-	GetTrustStoreCertificateResponse_certificate = GetTrustStoreCertificateResponse.AddMember("certificate", Certificate)
-
-	GetTrustStoreRequest_trustStoreArn = GetTrustStoreRequest.AddMember("trustStoreArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetTrustStoreResponse_trustStore = GetTrustStoreResponse.AddMember("trustStore", TrustStore)
-
-	GetUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = GetUserAccessLoggingSettingsRequest.AddMember("userAccessLoggingSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetUserAccessLoggingSettingsResponse_userAccessLoggingSettings = GetUserAccessLoggingSettingsResponse.AddMember("userAccessLoggingSettings", UserAccessLoggingSettings)
-
-	GetUserSettingsRequest_userSettingsArn = GetUserSettingsRequest.AddMember("userSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	GetUserSettingsResponse_userSettings = GetUserSettingsResponse.AddMember("userSettings", UserSettings)
-
-	ListBrowserSettingsRequest_nextToken = ListBrowserSettingsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListBrowserSettingsRequest_maxResults = ListBrowserSettingsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListBrowserSettingsResponse_browserSettings = ListBrowserSettingsResponse.AddMember("browserSettings", _BrowserSettingsList)
-
-	ListBrowserSettingsResponse_nextToken = ListBrowserSettingsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListDataProtectionSettingsRequest_nextToken = ListDataProtectionSettingsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDataProtectionSettingsRequest_maxResults = ListDataProtectionSettingsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDataProtectionSettingsResponse_dataProtectionSettings = ListDataProtectionSettingsResponse.AddMember("dataProtectionSettings", _DataProtectionSettingsList)
-
-	ListDataProtectionSettingsResponse_nextToken = ListDataProtectionSettingsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListIdentityProvidersRequest_nextToken = ListIdentityProvidersRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListIdentityProvidersRequest_maxResults = ListIdentityProvidersRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListIdentityProvidersRequest_portalArn = ListIdentityProvidersRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	ListIdentityProvidersResponse_nextToken = ListIdentityProvidersResponse.AddMember("nextToken", _PaginationToken)
-
-	ListIdentityProvidersResponse_identityProviders = ListIdentityProvidersResponse.AddMember("identityProviders", _IdentityProviderList)
-
-	ListIpAccessSettingsRequest_nextToken = ListIpAccessSettingsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListIpAccessSettingsRequest_maxResults = ListIpAccessSettingsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListIpAccessSettingsResponse_ipAccessSettings = ListIpAccessSettingsResponse.AddMember("ipAccessSettings", _IpAccessSettingsList)
-
-	ListIpAccessSettingsResponse_nextToken = ListIpAccessSettingsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListNetworkSettingsRequest_nextToken = ListNetworkSettingsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListNetworkSettingsRequest_maxResults = ListNetworkSettingsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListNetworkSettingsResponse_networkSettings = ListNetworkSettingsResponse.AddMember("networkSettings", _NetworkSettingsList)
-
-	ListNetworkSettingsResponse_nextToken = ListNetworkSettingsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListPortalsRequest_nextToken = ListPortalsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListPortalsRequest_maxResults = ListPortalsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListPortalsResponse_portals = ListPortalsResponse.AddMember("portals", _PortalList)
-
-	ListPortalsResponse_nextToken = ListPortalsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListSessionLoggersRequest_nextToken = ListSessionLoggersRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSessionLoggersRequest_maxResults = ListSessionLoggersRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSessionLoggersResponse_sessionLoggers = ListSessionLoggersResponse.AddMember("sessionLoggers", _SessionLoggerList)
-
-	ListSessionLoggersResponse_nextToken = ListSessionLoggersResponse.AddMember("nextToken", _PaginationToken)
-
-	ListSessionsRequest_portalId = ListSessionsRequest.AddMember("portalId", _PortalId, &smithytraits.HTTPLabel{})
-
-	ListSessionsRequest_username = ListSessionsRequest.AddMember("username", _Username, &smithytraits.HTTPQuery{Name: "username"})
-
-	ListSessionsRequest_sessionId = ListSessionsRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPQuery{Name: "sessionId"})
-
-	ListSessionsRequest_sortBy = ListSessionsRequest.AddMember("sortBy", SessionSortBy, &smithytraits.HTTPQuery{Name: "sortBy"})
-
-	ListSessionsRequest_status = ListSessionsRequest.AddMember("status", SessionStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListSessionsRequest_maxResults = ListSessionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSessionsRequest_nextToken = ListSessionsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSessionsResponse_sessions = ListSessionsResponse.AddMember("sessions", _SessionSummaryList)
-
-	ListSessionsResponse_nextToken = ListSessionsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	ListTrustStoreCertificatesRequest_trustStoreArn = ListTrustStoreCertificatesRequest.AddMember("trustStoreArn", _ARN, &smithytraits.HTTPLabel{})
-
-	ListTrustStoreCertificatesRequest_nextToken = ListTrustStoreCertificatesRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTrustStoreCertificatesRequest_maxResults = ListTrustStoreCertificatesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTrustStoreCertificatesResponse_certificateList = ListTrustStoreCertificatesResponse.AddMember("certificateList", _CertificateSummaryList)
-
-	ListTrustStoreCertificatesResponse_trustStoreArn = ListTrustStoreCertificatesResponse.AddMember("trustStoreArn", _ARN)
-
-	ListTrustStoreCertificatesResponse_nextToken = ListTrustStoreCertificatesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListTrustStoresRequest_nextToken = ListTrustStoresRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTrustStoresRequest_maxResults = ListTrustStoresRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTrustStoresResponse_trustStores = ListTrustStoresResponse.AddMember("trustStores", _TrustStoreSummaryList)
-
-	ListTrustStoresResponse_nextToken = ListTrustStoresResponse.AddMember("nextToken", _PaginationToken)
-
-	ListUserAccessLoggingSettingsRequest_nextToken = ListUserAccessLoggingSettingsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListUserAccessLoggingSettingsRequest_maxResults = ListUserAccessLoggingSettingsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListUserAccessLoggingSettingsResponse_userAccessLoggingSettings = ListUserAccessLoggingSettingsResponse.AddMember("userAccessLoggingSettings", _UserAccessLoggingSettingsList)
-
-	ListUserAccessLoggingSettingsResponse_nextToken = ListUserAccessLoggingSettingsResponse.AddMember("nextToken", _PaginationToken)
-
-	ListUserSettingsRequest_nextToken = ListUserSettingsRequest.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListUserSettingsRequest_maxResults = ListUserSettingsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListUserSettingsResponse_userSettings = ListUserSettingsResponse.AddMember("userSettings", _UserSettingsList)
-
-	ListUserSettingsResponse_nextToken = ListUserSettingsResponse.AddMember("nextToken", _PaginationToken)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	TagResourceRequest_clientToken = TagResourceRequest.AddMember("clientToken", _ClientToken)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateBrowserSettingsRequest_browserSettingsArn = UpdateBrowserSettingsRequest.AddMember("browserSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateBrowserSettingsRequest_browserPolicy = UpdateBrowserSettingsRequest.AddMember("browserPolicy", _BrowserPolicy)
-
-	UpdateBrowserSettingsRequest_clientToken = UpdateBrowserSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateBrowserSettingsRequest_webContentFilteringPolicy = UpdateBrowserSettingsRequest.AddMember("webContentFilteringPolicy", WebContentFilteringPolicy)
-
-	UpdateBrowserSettingsResponse_browserSettings = UpdateBrowserSettingsResponse.AddMember("browserSettings", BrowserSettings)
-
-	UpdateDataProtectionSettingsRequest_dataProtectionSettingsArn = UpdateDataProtectionSettingsRequest.AddMember("dataProtectionSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateDataProtectionSettingsRequest_inlineRedactionConfiguration = UpdateDataProtectionSettingsRequest.AddMember("inlineRedactionConfiguration", InlineRedactionConfiguration)
-
-	UpdateDataProtectionSettingsRequest_displayName = UpdateDataProtectionSettingsRequest.AddMember("displayName", _DisplayNameSafe)
-
-	UpdateDataProtectionSettingsRequest_description = UpdateDataProtectionSettingsRequest.AddMember("description", _DescriptionSafe)
-
-	UpdateDataProtectionSettingsRequest_clientToken = UpdateDataProtectionSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateDataProtectionSettingsResponse_dataProtectionSettings = UpdateDataProtectionSettingsResponse.AddMember("dataProtectionSettings", DataProtectionSettings)
-
-	UpdateIdentityProviderRequest_identityProviderArn = UpdateIdentityProviderRequest.AddMember("identityProviderArn", _SubresourceARN, &smithytraits.HTTPLabel{})
-
-	UpdateIdentityProviderRequest_identityProviderName = UpdateIdentityProviderRequest.AddMember("identityProviderName", _IdentityProviderName)
-
-	UpdateIdentityProviderRequest_identityProviderType = UpdateIdentityProviderRequest.AddMember("identityProviderType", _IdentityProviderType)
-
-	UpdateIdentityProviderRequest_identityProviderDetails = UpdateIdentityProviderRequest.AddMember("identityProviderDetails", _IdentityProviderDetails)
-
-	UpdateIdentityProviderRequest_clientToken = UpdateIdentityProviderRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateIdentityProviderResponse_identityProvider = UpdateIdentityProviderResponse.AddMember("identityProvider", IdentityProvider)
-
-	UpdateIpAccessSettingsRequest_ipAccessSettingsArn = UpdateIpAccessSettingsRequest.AddMember("ipAccessSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateIpAccessSettingsRequest_displayName = UpdateIpAccessSettingsRequest.AddMember("displayName", _DisplayName)
-
-	UpdateIpAccessSettingsRequest_description = UpdateIpAccessSettingsRequest.AddMember("description", _Description)
-
-	UpdateIpAccessSettingsRequest_ipRules = UpdateIpAccessSettingsRequest.AddMember("ipRules", _IpRuleList)
-
-	UpdateIpAccessSettingsRequest_clientToken = UpdateIpAccessSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateIpAccessSettingsResponse_ipAccessSettings = UpdateIpAccessSettingsResponse.AddMember("ipAccessSettings", IpAccessSettings)
-
-	UpdateNetworkSettingsRequest_networkSettingsArn = UpdateNetworkSettingsRequest.AddMember("networkSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateNetworkSettingsRequest_vpcId = UpdateNetworkSettingsRequest.AddMember("vpcId", _VpcId)
-
-	UpdateNetworkSettingsRequest_subnetIds = UpdateNetworkSettingsRequest.AddMember("subnetIds", _SubnetIdList)
-
-	UpdateNetworkSettingsRequest_securityGroupIds = UpdateNetworkSettingsRequest.AddMember("securityGroupIds", _SecurityGroupIdList)
-
-	UpdateNetworkSettingsRequest_clientToken = UpdateNetworkSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateNetworkSettingsResponse_networkSettings = UpdateNetworkSettingsResponse.AddMember("networkSettings", NetworkSettings)
-
-	UpdatePortalRequest_portalArn = UpdatePortalRequest.AddMember("portalArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdatePortalRequest_displayName = UpdatePortalRequest.AddMember("displayName", _DisplayName)
-
-	UpdatePortalRequest_authenticationType = UpdatePortalRequest.AddMember("authenticationType", _AuthenticationType)
-
-	UpdatePortalRequest_instanceType = UpdatePortalRequest.AddMember("instanceType", _InstanceType)
-
-	UpdatePortalRequest_maxConcurrentSessions = UpdatePortalRequest.AddMember("maxConcurrentSessions", _MaxConcurrentSessions)
-
-	UpdatePortalRequest_portalCustomDomain = UpdatePortalRequest.AddMember("portalCustomDomain", _PortalCustomDomain)
-
-	UpdatePortalResponse_portal = UpdatePortalResponse.AddMember("portal", Portal)
-
-	UpdateSessionLoggerRequest_sessionLoggerArn = UpdateSessionLoggerRequest.AddMember("sessionLoggerArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateSessionLoggerRequest_eventFilter = UpdateSessionLoggerRequest.AddMember("eventFilter", EventFilter)
-
-	UpdateSessionLoggerRequest_logConfiguration = UpdateSessionLoggerRequest.AddMember("logConfiguration", LogConfiguration)
-
-	UpdateSessionLoggerRequest_displayName = UpdateSessionLoggerRequest.AddMember("displayName", _DisplayNameSafe)
-
-	UpdateSessionLoggerResponse_sessionLogger = UpdateSessionLoggerResponse.AddMember("sessionLogger", SessionLogger)
-
-	UpdateTrustStoreRequest_trustStoreArn = UpdateTrustStoreRequest.AddMember("trustStoreArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateTrustStoreRequest_certificatesToAdd = UpdateTrustStoreRequest.AddMember("certificatesToAdd", _CertificateList)
-
-	UpdateTrustStoreRequest_certificatesToDelete = UpdateTrustStoreRequest.AddMember("certificatesToDelete", _CertificateThumbprintList)
-
-	UpdateTrustStoreRequest_clientToken = UpdateTrustStoreRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateTrustStoreResponse_trustStoreArn = UpdateTrustStoreResponse.AddMember("trustStoreArn", _ARN)
-
-	UpdateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = UpdateUserAccessLoggingSettingsRequest.AddMember("userAccessLoggingSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateUserAccessLoggingSettingsRequest_kinesisStreamArn = UpdateUserAccessLoggingSettingsRequest.AddMember("kinesisStreamArn", _KinesisStreamArn)
-
-	UpdateUserAccessLoggingSettingsRequest_clientToken = UpdateUserAccessLoggingSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateUserAccessLoggingSettingsResponse_userAccessLoggingSettings = UpdateUserAccessLoggingSettingsResponse.AddMember("userAccessLoggingSettings", UserAccessLoggingSettings)
-
-	UpdateUserSettingsRequest_userSettingsArn = UpdateUserSettingsRequest.AddMember("userSettingsArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UpdateUserSettingsRequest_copyAllowed = UpdateUserSettingsRequest.AddMember("copyAllowed", _EnabledType)
-
-	UpdateUserSettingsRequest_pasteAllowed = UpdateUserSettingsRequest.AddMember("pasteAllowed", _EnabledType)
-
-	UpdateUserSettingsRequest_downloadAllowed = UpdateUserSettingsRequest.AddMember("downloadAllowed", _EnabledType)
-
-	UpdateUserSettingsRequest_uploadAllowed = UpdateUserSettingsRequest.AddMember("uploadAllowed", _EnabledType)
-
-	UpdateUserSettingsRequest_printAllowed = UpdateUserSettingsRequest.AddMember("printAllowed", _EnabledType)
-
-	UpdateUserSettingsRequest_disconnectTimeoutInMinutes = UpdateUserSettingsRequest.AddMember("disconnectTimeoutInMinutes", _DisconnectTimeoutInMinutes)
-
-	UpdateUserSettingsRequest_idleDisconnectTimeoutInMinutes = UpdateUserSettingsRequest.AddMember("idleDisconnectTimeoutInMinutes", _IdleDisconnectTimeoutInMinutes)
-
-	UpdateUserSettingsRequest_clientToken = UpdateUserSettingsRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateUserSettingsRequest_cookieSynchronizationConfiguration = UpdateUserSettingsRequest.AddMember("cookieSynchronizationConfiguration", CookieSynchronizationConfiguration)
-
-	UpdateUserSettingsRequest_deepLinkAllowed = UpdateUserSettingsRequest.AddMember("deepLinkAllowed", _EnabledType)
-
-	UpdateUserSettingsRequest_toolbarConfiguration = UpdateUserSettingsRequest.AddMember("toolbarConfiguration", ToolbarConfiguration)
-
-	UpdateUserSettingsRequest_brandingConfigurationInput = UpdateUserSettingsRequest.AddMember("brandingConfigurationInput", BrandingConfigurationUpdateInput)
-
-	UpdateUserSettingsRequest_webAuthnAllowed = UpdateUserSettingsRequest.AddMember("webAuthnAllowed", _EnabledType)
-
-	UpdateUserSettingsResponse_userSettings = UpdateUserSettingsResponse.AddMember("userSettings", UserSettings)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "text/markdown"}}}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "image/*"}}, DirectMask: 0x40000}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "image/*"}}}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "text/markdown"}}, DirectMask: 0x40100}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "browserSettingsArn"}}, DirectMask: 0x10}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "dataProtectionSettingsArn"}}, DirectMask: 0x10}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ipAccessSettingsArn"}}, DirectMask: 0x10}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "networkSettingsArn"}}, DirectMask: 0x10}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sessionLoggerArn"}}, DirectMask: 0x10}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "trustStoreArn"}}, DirectMask: 0x10}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "userAccessLoggingSettingsArn"}}, DirectMask: 0x10}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "userSettingsArn"}}, DirectMask: 0x10}
+var t98 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "thumbprint"}}, DirectMask: 0x10}
+var t99 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t100 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t101 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "username"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t102 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sessionId"}}, DirectMask: 0x10}
+var t103 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sortBy"}}, DirectMask: 0x10}
+var t104 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t105 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_ArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArnList_member}}
+var m_BlockedCategories = smithy.SchemaMembers{List: []*smithy.Schema{&s_BlockedCategories_member}}
+var mBrandingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandingConfiguration_logo, &sBrandingConfiguration_wallpaper, &sBrandingConfiguration_favicon, &sBrandingConfiguration_localizedStrings, &sBrandingConfiguration_colorTheme, &sBrandingConfiguration_termsOfService}}
+var mBrandingConfigurationCreateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandingConfigurationCreateInput_logo, &sBrandingConfigurationCreateInput_wallpaper, &sBrandingConfigurationCreateInput_favicon, &sBrandingConfigurationCreateInput_localizedStrings, &sBrandingConfigurationCreateInput_colorTheme, &sBrandingConfigurationCreateInput_termsOfService}}
+var mBrandingConfigurationUpdateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBrandingConfigurationUpdateInput_logo, &sBrandingConfigurationUpdateInput_wallpaper, &sBrandingConfigurationUpdateInput_favicon, &sBrandingConfigurationUpdateInput_localizedStrings, &sBrandingConfigurationUpdateInput_colorTheme, &sBrandingConfigurationUpdateInput_termsOfService}}
+var mBrowserSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sBrowserSettings_browserSettingsArn, &sBrowserSettings_associatedPortalArns, &sBrowserSettings_browserPolicy, &sBrowserSettings_customerManagedKey, &sBrowserSettings_additionalEncryptionContext, &sBrowserSettings_webContentFilteringPolicy}}
+var m_BrowserSettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BrowserSettingsList_member}}
+var mBrowserSettingsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sBrowserSettingsSummary_browserSettingsArn}}
+var mCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sCategory_CULTS, &sCategory_GAMBLING, &sCategory_NUDITY, &sCategory_PORNOGRAPHY, &sCategory_SEX_EDUCATION, &sCategory_TASTELESS, &sCategory_VIOLENCE, &sCategory_DOWNLOAD_SITES, &sCategory_IMAGE_SHARING, &sCategory_PEER_TO_PEER, &sCategory_STREAMING_MEDIA_AND_DOWNLOADS, &sCategory_GENERATIVE_AI, &sCategory_CRIMINAL_ACTIVITY, &sCategory_HACKING, &sCategory_HATE_AND_INTOLERANCE, &sCategory_ILLEGAL_DRUG, &sCategory_ILLEGAL_SOFTWARE, &sCategory_SCHOOL_CHEATING, &sCategory_SELF_HARM, &sCategory_WEAPONS, &sCategory_CHAT, &sCategory_GAMES, &sCategory_INSTANT_MESSAGING, &sCategory_PROFESSIONAL_NETWORK, &sCategory_SOCIAL_NETWORKING, &sCategory_WEB_BASED_EMAIL, &sCategory_PARKED_DOMAINS}, Seed: 225, Slots: []uint16{
+	13, 0, 8, 17, 0, 0, 0, 15, 0, 9, 0, 20, 25, 0, 0, 0, 0, 0, 22, 0, 7, 21, 0, 0,
+	0, 0, 27, 26, 3, 0, 19, 0, 0, 10, 0, 0, 2, 0, 0, 0, 0, 23, 0, 14, 0, 0, 0, 16,
+	18, 4, 1, 0, 0, 0, 24, 0, 0, 11, 12, 5, 0, 0, 0, 6,
+}}
+var mCertificate = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificate_thumbprint, &sCertificate_subject, &sCertificate_issuer, &sCertificate_notValidBefore, &sCertificate_notValidAfter, &sCertificate_body}}
+var m_CertificateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateList_member}}
+var mCertificateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateSummary_thumbprint, &sCertificateSummary_subject, &sCertificateSummary_issuer, &sCertificateSummary_notValidBefore, &sCertificateSummary_notValidAfter}}
+var m_CertificateSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateSummaryList_member}}
+var m_CertificateThumbprintList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateThumbprintList_member}}
+var mColorTheme = smithy.SchemaMembers{List: []*smithy.Schema{&sColorTheme_LIGHT, &sColorTheme_DARK}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mCookieSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sCookieSpecification_domain, &sCookieSpecification_name, &sCookieSpecification_path}}
+var m_CookieSpecifications = smithy.SchemaMembers{List: []*smithy.Schema{&s_CookieSpecifications_member}}
+var mCookieSynchronizationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCookieSynchronizationConfiguration_allowlist, &sCookieSynchronizationConfiguration_blocklist}}
+var mCustomPattern = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomPattern_patternName, &sCustomPattern_patternRegex, &sCustomPattern_patternDescription, &sCustomPattern_keywordRegex}}
+var mDataProtectionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProtectionSettings_dataProtectionSettingsArn, &sDataProtectionSettings_inlineRedactionConfiguration, &sDataProtectionSettings_associatedPortalArns, &sDataProtectionSettings_displayName, &sDataProtectionSettings_description, &sDataProtectionSettings_creationDate, &sDataProtectionSettings_customerManagedKey, &sDataProtectionSettings_additionalEncryptionContext}}
+var m_DataProtectionSettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataProtectionSettingsList_member}}
+var mDataProtectionSettingsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProtectionSettingsSummary_dataProtectionSettingsArn, &sDataProtectionSettingsSummary_displayName, &sDataProtectionSettingsSummary_description, &sDataProtectionSettingsSummary_creationDate}}
+var m_EncryptionContextMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EncryptionContextMap_key, &s_EncryptionContextMap_value}}
+var mEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sEvent_WEBSITE_INTERACT, &sEvent_FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK, &sEvent_FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK, &sEvent_FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK, &sEvent_FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER, &sEvent_CONTENT_PASTE_TO_WEBSITE, &sEvent_CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD, &sEvent_CONTENT_COPY_FROM_WEBSITE, &sEvent_URL_LOAD, &sEvent_TAB_OPEN, &sEvent_TAB_CLOSE, &sEvent_PRINT_JOB_SUBMIT, &sEvent_SESSION_CONNECT, &sEvent_SESSION_START, &sEvent_SESSION_DISCONNECT, &sEvent_SESSION_END, &sEvent_URL_BLOCK_BY_CONTENT_FILTER}, Seed: 1, Slots: []uint16{
+	0, 0, 2, 0, 0, 0, 0, 14, 7, 0, 0, 10, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0,
+	0, 16, 0, 0, 11, 12, 0, 0, 0, 0, 0, 0, 0, 1, 9, 0, 0, 0, 0, 17, 5, 0, 3, 4,
+	0, 15, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 6, 0, 0, 0,
+}}
+var mEventFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEventFilter_all, &sEventFilter_include}}
+var m_Events = smithy.SchemaMembers{List: []*smithy.Schema{&s_Events_member}}
+var mFolderStructure = smithy.SchemaMembers{List: []*smithy.Schema{&sFolderStructure_FLAT, &sFolderStructure_NESTED_BY_DATE}}
+var m_GlobalInlineRedactionUrls = smithy.SchemaMembers{List: []*smithy.Schema{&s_GlobalInlineRedactionUrls_member}}
+var m_HiddenToolbarItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HiddenToolbarItemList_member}}
+var mIconImageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sIconImageInput_blob, &sIconImageInput_s3Uri}}
+var mIdentityProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityProvider_identityProviderArn, &sIdentityProvider_identityProviderName, &sIdentityProvider_identityProviderType, &sIdentityProvider_identityProviderDetails}}
+var m_IdentityProviderDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentityProviderDetails_key, &s_IdentityProviderDetails_value}}
+var m_IdentityProviderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentityProviderList_member}}
+var mIdentityProviderSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityProviderSummary_identityProviderArn, &sIdentityProviderSummary_identityProviderName, &sIdentityProviderSummary_identityProviderType}}
+var mImageMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sImageMetadata_mimeType, &sImageMetadata_fileExtension, &sImageMetadata_lastUploadTimestamp}}
+var mInlineRedactionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInlineRedactionConfiguration_inlineRedactionPatterns, &sInlineRedactionConfiguration_globalEnforcedUrls, &sInlineRedactionConfiguration_globalExemptUrls, &sInlineRedactionConfiguration_globalConfidenceLevel}}
+var mInlineRedactionPattern = smithy.SchemaMembers{List: []*smithy.Schema{&sInlineRedactionPattern_builtInPatternId, &sInlineRedactionPattern_customPattern, &sInlineRedactionPattern_redactionPlaceHolder, &sInlineRedactionPattern_enforcedUrls, &sInlineRedactionPattern_exemptUrls, &sInlineRedactionPattern_confidenceLevel}}
+var m_InlineRedactionPatterns = smithy.SchemaMembers{List: []*smithy.Schema{&s_InlineRedactionPatterns_member}}
+var m_InlineRedactionUrls = smithy.SchemaMembers{List: []*smithy.Schema{&s_InlineRedactionUrls_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mIpAccessSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAccessSettings_ipAccessSettingsArn, &sIpAccessSettings_associatedPortalArns, &sIpAccessSettings_ipRules, &sIpAccessSettings_displayName, &sIpAccessSettings_description, &sIpAccessSettings_creationDate, &sIpAccessSettings_customerManagedKey, &sIpAccessSettings_additionalEncryptionContext}}
+var m_IpAccessSettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpAccessSettingsList_member}}
+var mIpAccessSettingsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAccessSettingsSummary_ipAccessSettingsArn, &sIpAccessSettingsSummary_displayName, &sIpAccessSettingsSummary_description, &sIpAccessSettingsSummary_creationDate}}
+var m_IpAddressList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpAddressList_member}}
+var mIpRule = smithy.SchemaMembers{List: []*smithy.Schema{&sIpRule_ipRange, &sIpRule_description}}
+var m_IpRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpRuleList_member}}
+var mLocale = smithy.SchemaMembers{List: []*smithy.Schema{&sLocale_DE, &sLocale_EN, &sLocale_ES, &sLocale_FR, &sLocale_ID, &sLocale_IT, &sLocale_JP, &sLocale_KR, &sLocale_BR, &sLocale_CN, &sLocale_TW}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 7, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 3, 11, 0, 0, 0, 0, 4, 5, 0, 10,
+	0, 9, 0, 0, 0, 1, 6, 8,
+}}
+var m_LocalizedBrandingStringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_LocalizedBrandingStringMap_key, &s_LocalizedBrandingStringMap_value}}
+var mLocalizedBrandingStrings = smithy.SchemaMembers{List: []*smithy.Schema{&sLocalizedBrandingStrings_browserTabTitle, &sLocalizedBrandingStrings_welcomeText, &sLocalizedBrandingStrings_loginTitle, &sLocalizedBrandingStrings_loginDescription, &sLocalizedBrandingStrings_loginButtonText, &sLocalizedBrandingStrings_contactLink, &sLocalizedBrandingStrings_contactButtonText, &sLocalizedBrandingStrings_loadingText}}
+var mLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfiguration_s3}}
+var mLogFileFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sLogFileFormat_JSON_LINES, &sLogFileFormat_JSON}}
+var mMimeType = smithy.SchemaMembers{List: []*smithy.Schema{&sMimeType_PNG, &sMimeType_JPEG, &sMimeType_ICO}}
+var mNetworkSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkSettings_networkSettingsArn, &sNetworkSettings_associatedPortalArns, &sNetworkSettings_vpcId, &sNetworkSettings_subnetIds, &sNetworkSettings_securityGroupIds}}
+var m_NetworkSettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkSettingsList_member}}
+var mNetworkSettingsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkSettingsSummary_networkSettingsArn, &sNetworkSettingsSummary_vpcId}}
+var mPortal = smithy.SchemaMembers{List: []*smithy.Schema{&sPortal_portalArn, &sPortal_rendererType, &sPortal_browserType, &sPortal_portalStatus, &sPortal_portalEndpoint, &sPortal_displayName, &sPortal_creationDate, &sPortal_browserSettingsArn, &sPortal_dataProtectionSettingsArn, &sPortal_userSettingsArn, &sPortal_networkSettingsArn, &sPortal_sessionLoggerArn, &sPortal_trustStoreArn, &sPortal_statusReason, &sPortal_userAccessLoggingSettingsArn, &sPortal_authenticationType, &sPortal_ipAccessSettingsArn, &sPortal_customerManagedKey, &sPortal_additionalEncryptionContext, &sPortal_instanceType, &sPortal_maxConcurrentSessions, &sPortal_portalCustomDomain}, Seed: 36, Slots: []uint16{
+	10, 20, 4, 0, 1, 5, 0, 9, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	0, 0, 8, 21, 0, 0, 0, 0, 0, 16, 22, 11, 0, 0, 0, 0, 0, 0, 12, 0, 13, 6, 15, 0,
+	18, 0, 0, 0, 0, 0, 0, 7, 14, 0, 17, 0, 0, 0, 19, 0,
+}}
+var m_PortalList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PortalList_member}}
+var mPortalSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPortalSummary_portalArn, &sPortalSummary_rendererType, &sPortalSummary_browserType, &sPortalSummary_portalStatus, &sPortalSummary_portalEndpoint, &sPortalSummary_displayName, &sPortalSummary_creationDate, &sPortalSummary_browserSettingsArn, &sPortalSummary_dataProtectionSettingsArn, &sPortalSummary_userSettingsArn, &sPortalSummary_networkSettingsArn, &sPortalSummary_sessionLoggerArn, &sPortalSummary_trustStoreArn, &sPortalSummary_userAccessLoggingSettingsArn, &sPortalSummary_authenticationType, &sPortalSummary_ipAccessSettingsArn, &sPortalSummary_instanceType, &sPortalSummary_maxConcurrentSessions, &sPortalSummary_portalCustomDomain}, Seed: 24, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 15, 14, 7, 2, 0, 0, 0, 0, 0, 0,
+	10, 11, 13, 0, 1, 0, 0, 6, 8, 4, 0, 5, 0, 0, 0, 0, 3, 16, 0, 0, 0, 12, 0, 0,
+	0, 17, 0, 0, 0, 0, 19, 0, 18, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mRedactionPlaceHolder = smithy.SchemaMembers{List: []*smithy.Schema{&sRedactionPlaceHolder_redactionPlaceHolderType, &sRedactionPlaceHolder_redactionPlaceHolderText}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mS3LogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LogConfiguration_bucket, &sS3LogConfiguration_keyPrefix, &sS3LogConfiguration_bucketOwner, &sS3LogConfiguration_logFileFormat, &sS3LogConfiguration_folderStructure}}
+var m_SecurityGroupIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIdList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSession = smithy.SchemaMembers{List: []*smithy.Schema{&sSession_portalArn, &sSession_sessionId, &sSession_username, &sSession_clientIpAddresses, &sSession_status, &sSession_startTime, &sSession_endTime}}
+var mSessionLogger = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionLogger_sessionLoggerArn, &sSessionLogger_eventFilter, &sSessionLogger_logConfiguration, &sSessionLogger_customerManagedKey, &sSessionLogger_additionalEncryptionContext, &sSessionLogger_associatedPortalArns, &sSessionLogger_displayName, &sSessionLogger_creationDate}}
+var m_SessionLoggerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SessionLoggerList_member}}
+var mSessionLoggerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionLoggerSummary_sessionLoggerArn, &sSessionLoggerSummary_logConfiguration, &sSessionLoggerSummary_displayName, &sSessionLoggerSummary_creationDate}}
+var mSessionSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionSortBy_START_TIME_ASCENDING, &sSessionSortBy_START_TIME_DESCENDING}}
+var mSessionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionStatus_ACTIVE, &sSessionStatus_TERMINATED}}
+var mSessionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionSummary_portalArn, &sSessionSummary_sessionId, &sSessionSummary_username, &sSessionSummary_status, &sSessionSummary_startTime, &sSessionSummary_endTime}}
+var m_SessionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SessionSummaryList_member}}
+var m_SubnetIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIdList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mToolbarConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sToolbarConfiguration_toolbarType, &sToolbarConfiguration_visualMode, &sToolbarConfiguration_hiddenToolbarItems, &sToolbarConfiguration_maxDisplayResolution}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message, &sTooManyTagsException_resourceName}}
+var mTrustStore = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStore_associatedPortalArns, &sTrustStore_trustStoreArn}}
+var mTrustStoreSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTrustStoreSummary_trustStoreArn}}
+var m_TrustStoreSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrustStoreSummaryList_member}}
+var m_UrlPatternList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UrlPatternList_member}}
+var mUserAccessLoggingSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sUserAccessLoggingSettings_userAccessLoggingSettingsArn, &sUserAccessLoggingSettings_associatedPortalArns, &sUserAccessLoggingSettings_kinesisStreamArn}}
+var m_UserAccessLoggingSettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserAccessLoggingSettingsList_member}}
+var mUserAccessLoggingSettingsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sUserAccessLoggingSettingsSummary_userAccessLoggingSettingsArn, &sUserAccessLoggingSettingsSummary_kinesisStreamArn}}
+var mUserSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sUserSettings_userSettingsArn, &sUserSettings_associatedPortalArns, &sUserSettings_copyAllowed, &sUserSettings_pasteAllowed, &sUserSettings_downloadAllowed, &sUserSettings_uploadAllowed, &sUserSettings_printAllowed, &sUserSettings_disconnectTimeoutInMinutes, &sUserSettings_idleDisconnectTimeoutInMinutes, &sUserSettings_cookieSynchronizationConfiguration, &sUserSettings_customerManagedKey, &sUserSettings_additionalEncryptionContext, &sUserSettings_deepLinkAllowed, &sUserSettings_toolbarConfiguration, &sUserSettings_brandingConfiguration, &sUserSettings_webAuthnAllowed}, Seed: 224, Slots: []uint16{
+	0, 0, 0, 0, 2, 3, 10, 11, 0, 0, 0, 0, 0, 0, 12, 0, 0, 1, 15, 6, 8, 4, 0, 13,
+	16, 0, 7, 0, 14, 0, 9, 5,
+}}
+var m_UserSettingsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserSettingsList_member}}
+var mUserSettingsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sUserSettingsSummary_userSettingsArn, &sUserSettingsSummary_copyAllowed, &sUserSettingsSummary_pasteAllowed, &sUserSettingsSummary_downloadAllowed, &sUserSettingsSummary_uploadAllowed, &sUserSettingsSummary_printAllowed, &sUserSettingsSummary_disconnectTimeoutInMinutes, &sUserSettingsSummary_idleDisconnectTimeoutInMinutes, &sUserSettingsSummary_cookieSynchronizationConfiguration, &sUserSettingsSummary_deepLinkAllowed, &sUserSettingsSummary_toolbarConfiguration, &sUserSettingsSummary_brandingConfiguration, &sUserSettingsSummary_webAuthnAllowed}, Seed: 26, Slots: []uint16{
+	0, 9, 2, 0, 0, 0, 13, 3, 0, 0, 0, 0, 0, 6, 1, 0, 7, 0, 0, 0, 0, 5, 12, 0,
+	10, 0, 0, 4, 0, 0, 11, 8,
+}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mWallpaperImageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sWallpaperImageInput_blob, &sWallpaperImageInput_s3Uri}}
+var mWebContentFilteringPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sWebContentFilteringPolicy_blockedCategories, &sWebContentFilteringPolicy_allowedUrls, &sWebContentFilteringPolicy_blockedUrls}}
+var mAssociateBrowserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateBrowserSettingsRequest_portalArn, &sAssociateBrowserSettingsRequest_browserSettingsArn}}
+var mAssociateBrowserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateBrowserSettingsResponse_portalArn, &sAssociateBrowserSettingsResponse_browserSettingsArn}}
+var mAssociateDataProtectionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateDataProtectionSettingsRequest_portalArn, &sAssociateDataProtectionSettingsRequest_dataProtectionSettingsArn}}
+var mAssociateDataProtectionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateDataProtectionSettingsResponse_portalArn, &sAssociateDataProtectionSettingsResponse_dataProtectionSettingsArn}}
+var mAssociateIpAccessSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateIpAccessSettingsRequest_portalArn, &sAssociateIpAccessSettingsRequest_ipAccessSettingsArn}}
+var mAssociateIpAccessSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateIpAccessSettingsResponse_portalArn, &sAssociateIpAccessSettingsResponse_ipAccessSettingsArn}}
+var mAssociateNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateNetworkSettingsRequest_portalArn, &sAssociateNetworkSettingsRequest_networkSettingsArn}}
+var mAssociateNetworkSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateNetworkSettingsResponse_portalArn, &sAssociateNetworkSettingsResponse_networkSettingsArn}}
+var mAssociateSessionLoggerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSessionLoggerRequest_portalArn, &sAssociateSessionLoggerRequest_sessionLoggerArn}}
+var mAssociateSessionLoggerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSessionLoggerResponse_portalArn, &sAssociateSessionLoggerResponse_sessionLoggerArn}}
+var mAssociateTrustStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateTrustStoreRequest_portalArn, &sAssociateTrustStoreRequest_trustStoreArn}}
+var mAssociateTrustStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateTrustStoreResponse_portalArn, &sAssociateTrustStoreResponse_trustStoreArn}}
+var mAssociateUserAccessLoggingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateUserAccessLoggingSettingsRequest_portalArn, &sAssociateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn}}
+var mAssociateUserAccessLoggingSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateUserAccessLoggingSettingsResponse_portalArn, &sAssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn}}
+var mAssociateUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateUserSettingsRequest_portalArn, &sAssociateUserSettingsRequest_userSettingsArn}}
+var mAssociateUserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateUserSettingsResponse_portalArn, &sAssociateUserSettingsResponse_userSettingsArn}}
+var mCreateBrowserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrowserSettingsRequest_tags, &sCreateBrowserSettingsRequest_customerManagedKey, &sCreateBrowserSettingsRequest_additionalEncryptionContext, &sCreateBrowserSettingsRequest_browserPolicy, &sCreateBrowserSettingsRequest_clientToken, &sCreateBrowserSettingsRequest_webContentFilteringPolicy}}
+var mCreateBrowserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBrowserSettingsResponse_browserSettingsArn}}
+var mCreateDataProtectionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataProtectionSettingsRequest_displayName, &sCreateDataProtectionSettingsRequest_description, &sCreateDataProtectionSettingsRequest_tags, &sCreateDataProtectionSettingsRequest_customerManagedKey, &sCreateDataProtectionSettingsRequest_additionalEncryptionContext, &sCreateDataProtectionSettingsRequest_inlineRedactionConfiguration, &sCreateDataProtectionSettingsRequest_clientToken}}
+var mCreateDataProtectionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataProtectionSettingsResponse_dataProtectionSettingsArn}}
+var mCreateIdentityProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentityProviderRequest_portalArn, &sCreateIdentityProviderRequest_identityProviderName, &sCreateIdentityProviderRequest_identityProviderType, &sCreateIdentityProviderRequest_identityProviderDetails, &sCreateIdentityProviderRequest_clientToken, &sCreateIdentityProviderRequest_tags}}
+var mCreateIdentityProviderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentityProviderResponse_identityProviderArn}}
+var mCreateIpAccessSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIpAccessSettingsRequest_displayName, &sCreateIpAccessSettingsRequest_description, &sCreateIpAccessSettingsRequest_tags, &sCreateIpAccessSettingsRequest_customerManagedKey, &sCreateIpAccessSettingsRequest_additionalEncryptionContext, &sCreateIpAccessSettingsRequest_ipRules, &sCreateIpAccessSettingsRequest_clientToken}}
+var mCreateIpAccessSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIpAccessSettingsResponse_ipAccessSettingsArn}}
+var mCreateNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkSettingsRequest_vpcId, &sCreateNetworkSettingsRequest_subnetIds, &sCreateNetworkSettingsRequest_securityGroupIds, &sCreateNetworkSettingsRequest_tags, &sCreateNetworkSettingsRequest_clientToken}}
+var mCreateNetworkSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkSettingsResponse_networkSettingsArn}}
+var mCreatePortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePortalRequest_displayName, &sCreatePortalRequest_tags, &sCreatePortalRequest_customerManagedKey, &sCreatePortalRequest_additionalEncryptionContext, &sCreatePortalRequest_clientToken, &sCreatePortalRequest_authenticationType, &sCreatePortalRequest_instanceType, &sCreatePortalRequest_maxConcurrentSessions, &sCreatePortalRequest_portalCustomDomain}, Seed: 6, Slots: []uint16{
+	2, 0, 7, 0, 0, 0, 0, 1, 0, 3, 0, 0, 8, 0, 0, 0, 0, 0, 6, 0, 0, 5, 0, 4,
+	0, 0, 0, 9, 0, 0, 0, 0,
+}}
+var mCreatePortalResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePortalResponse_portalArn, &sCreatePortalResponse_portalEndpoint}}
+var mCreateSessionLoggerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSessionLoggerRequest_eventFilter, &sCreateSessionLoggerRequest_logConfiguration, &sCreateSessionLoggerRequest_displayName, &sCreateSessionLoggerRequest_customerManagedKey, &sCreateSessionLoggerRequest_additionalEncryptionContext, &sCreateSessionLoggerRequest_tags, &sCreateSessionLoggerRequest_clientToken}}
+var mCreateSessionLoggerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSessionLoggerResponse_sessionLoggerArn}}
+var mCreateTrustStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrustStoreRequest_certificateList, &sCreateTrustStoreRequest_tags, &sCreateTrustStoreRequest_clientToken}}
+var mCreateTrustStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTrustStoreResponse_trustStoreArn}}
+var mCreateUserAccessLoggingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserAccessLoggingSettingsRequest_kinesisStreamArn, &sCreateUserAccessLoggingSettingsRequest_tags, &sCreateUserAccessLoggingSettingsRequest_clientToken}}
+var mCreateUserAccessLoggingSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn}}
+var mCreateUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserSettingsRequest_copyAllowed, &sCreateUserSettingsRequest_pasteAllowed, &sCreateUserSettingsRequest_downloadAllowed, &sCreateUserSettingsRequest_uploadAllowed, &sCreateUserSettingsRequest_printAllowed, &sCreateUserSettingsRequest_tags, &sCreateUserSettingsRequest_disconnectTimeoutInMinutes, &sCreateUserSettingsRequest_idleDisconnectTimeoutInMinutes, &sCreateUserSettingsRequest_clientToken, &sCreateUserSettingsRequest_cookieSynchronizationConfiguration, &sCreateUserSettingsRequest_customerManagedKey, &sCreateUserSettingsRequest_additionalEncryptionContext, &sCreateUserSettingsRequest_deepLinkAllowed, &sCreateUserSettingsRequest_toolbarConfiguration, &sCreateUserSettingsRequest_brandingConfigurationInput, &sCreateUserSettingsRequest_webAuthnAllowed}, Seed: 47, Slots: []uint16{
+	16, 6, 15, 0, 0, 14, 4, 8, 0, 2, 0, 0, 12, 5, 11, 0, 0, 0, 0, 0, 0, 13, 0, 7,
+	0, 0, 9, 1, 10, 3, 0, 0,
+}}
+var mCreateUserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserSettingsResponse_userSettingsArn}}
+var mDeleteBrowserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBrowserSettingsRequest_browserSettingsArn}}
+var mDeleteDataProtectionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataProtectionSettingsRequest_dataProtectionSettingsArn}}
+var mDeleteIdentityProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIdentityProviderRequest_identityProviderArn}}
+var mDeleteIpAccessSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIpAccessSettingsRequest_ipAccessSettingsArn}}
+var mDeleteNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNetworkSettingsRequest_networkSettingsArn}}
+var mDeletePortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePortalRequest_portalArn}}
+var mDeleteSessionLoggerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSessionLoggerRequest_sessionLoggerArn}}
+var mDeleteTrustStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTrustStoreRequest_trustStoreArn}}
+var mDeleteUserAccessLoggingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn}}
+var mDeleteUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUserSettingsRequest_userSettingsArn}}
+var mDisassociateBrowserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateBrowserSettingsRequest_portalArn}}
+var mDisassociateDataProtectionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateDataProtectionSettingsRequest_portalArn}}
+var mDisassociateIpAccessSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateIpAccessSettingsRequest_portalArn}}
+var mDisassociateNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateNetworkSettingsRequest_portalArn}}
+var mDisassociateSessionLoggerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateSessionLoggerRequest_portalArn}}
+var mDisassociateTrustStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateTrustStoreRequest_portalArn}}
+var mDisassociateUserAccessLoggingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateUserAccessLoggingSettingsRequest_portalArn}}
+var mDisassociateUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateUserSettingsRequest_portalArn}}
+var mExpireSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExpireSessionRequest_portalId, &sExpireSessionRequest_sessionId}}
+var mGetBrowserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBrowserSettingsRequest_browserSettingsArn}}
+var mGetBrowserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBrowserSettingsResponse_browserSettings}}
+var mGetDataProtectionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataProtectionSettingsRequest_dataProtectionSettingsArn}}
+var mGetDataProtectionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataProtectionSettingsResponse_dataProtectionSettings}}
+var mGetIdentityProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIdentityProviderRequest_identityProviderArn}}
+var mGetIdentityProviderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIdentityProviderResponse_identityProvider}}
+var mGetIpAccessSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIpAccessSettingsRequest_ipAccessSettingsArn}}
+var mGetIpAccessSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIpAccessSettingsResponse_ipAccessSettings}}
+var mGetNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkSettingsRequest_networkSettingsArn}}
+var mGetNetworkSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkSettingsResponse_networkSettings}}
+var mGetPortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalRequest_portalArn}}
+var mGetPortalResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalResponse_portal}}
+var mGetPortalServiceProviderMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalServiceProviderMetadataRequest_portalArn}}
+var mGetPortalServiceProviderMetadataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalServiceProviderMetadataResponse_portalArn, &sGetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata}}
+var mGetSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionRequest_portalId, &sGetSessionRequest_sessionId}}
+var mGetSessionLoggerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionLoggerRequest_sessionLoggerArn}}
+var mGetSessionLoggerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionLoggerResponse_sessionLogger}}
+var mGetSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionResponse_session}}
+var mGetTrustStoreCertificateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreCertificateRequest_trustStoreArn, &sGetTrustStoreCertificateRequest_thumbprint}}
+var mGetTrustStoreCertificateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreCertificateResponse_trustStoreArn, &sGetTrustStoreCertificateResponse_certificate}}
+var mGetTrustStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreRequest_trustStoreArn}}
+var mGetTrustStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTrustStoreResponse_trustStore}}
+var mGetUserAccessLoggingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn}}
+var mGetUserAccessLoggingSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserAccessLoggingSettingsResponse_userAccessLoggingSettings}}
+var mGetUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserSettingsRequest_userSettingsArn}}
+var mGetUserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserSettingsResponse_userSettings}}
+var mListBrowserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrowserSettingsRequest_nextToken, &sListBrowserSettingsRequest_maxResults}}
+var mListBrowserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListBrowserSettingsResponse_browserSettings, &sListBrowserSettingsResponse_nextToken}}
+var mListDataProtectionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataProtectionSettingsRequest_nextToken, &sListDataProtectionSettingsRequest_maxResults}}
+var mListDataProtectionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDataProtectionSettingsResponse_dataProtectionSettings, &sListDataProtectionSettingsResponse_nextToken}}
+var mListIdentityProvidersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentityProvidersRequest_nextToken, &sListIdentityProvidersRequest_maxResults, &sListIdentityProvidersRequest_portalArn}}
+var mListIdentityProvidersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIdentityProvidersResponse_nextToken, &sListIdentityProvidersResponse_identityProviders}}
+var mListIpAccessSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListIpAccessSettingsRequest_nextToken, &sListIpAccessSettingsRequest_maxResults}}
+var mListIpAccessSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListIpAccessSettingsResponse_ipAccessSettings, &sListIpAccessSettingsResponse_nextToken}}
+var mListNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworkSettingsRequest_nextToken, &sListNetworkSettingsRequest_maxResults}}
+var mListNetworkSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworkSettingsResponse_networkSettings, &sListNetworkSettingsResponse_nextToken}}
+var mListPortalsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPortalsRequest_nextToken, &sListPortalsRequest_maxResults}}
+var mListPortalsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPortalsResponse_portals, &sListPortalsResponse_nextToken}}
+var mListSessionLoggersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionLoggersRequest_nextToken, &sListSessionLoggersRequest_maxResults}}
+var mListSessionLoggersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionLoggersResponse_sessionLoggers, &sListSessionLoggersResponse_nextToken}}
+var mListSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsRequest_portalId, &sListSessionsRequest_username, &sListSessionsRequest_sessionId, &sListSessionsRequest_sortBy, &sListSessionsRequest_status, &sListSessionsRequest_maxResults, &sListSessionsRequest_nextToken}}
+var mListSessionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsResponse_sessions, &sListSessionsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListTrustStoreCertificatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrustStoreCertificatesRequest_trustStoreArn, &sListTrustStoreCertificatesRequest_nextToken, &sListTrustStoreCertificatesRequest_maxResults}}
+var mListTrustStoreCertificatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrustStoreCertificatesResponse_certificateList, &sListTrustStoreCertificatesResponse_trustStoreArn, &sListTrustStoreCertificatesResponse_nextToken}}
+var mListTrustStoresRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrustStoresRequest_nextToken, &sListTrustStoresRequest_maxResults}}
+var mListTrustStoresResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTrustStoresResponse_trustStores, &sListTrustStoresResponse_nextToken}}
+var mListUserAccessLoggingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUserAccessLoggingSettingsRequest_nextToken, &sListUserAccessLoggingSettingsRequest_maxResults}}
+var mListUserAccessLoggingSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUserAccessLoggingSettingsResponse_userAccessLoggingSettings, &sListUserAccessLoggingSettingsResponse_nextToken}}
+var mListUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUserSettingsRequest_nextToken, &sListUserSettingsRequest_maxResults}}
+var mListUserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUserSettingsResponse_userSettings, &sListUserSettingsResponse_nextToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags, &sTagResourceRequest_clientToken}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateBrowserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrowserSettingsRequest_browserSettingsArn, &sUpdateBrowserSettingsRequest_browserPolicy, &sUpdateBrowserSettingsRequest_clientToken, &sUpdateBrowserSettingsRequest_webContentFilteringPolicy}}
+var mUpdateBrowserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBrowserSettingsResponse_browserSettings}}
+var mUpdateDataProtectionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataProtectionSettingsRequest_dataProtectionSettingsArn, &sUpdateDataProtectionSettingsRequest_inlineRedactionConfiguration, &sUpdateDataProtectionSettingsRequest_displayName, &sUpdateDataProtectionSettingsRequest_description, &sUpdateDataProtectionSettingsRequest_clientToken}}
+var mUpdateDataProtectionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataProtectionSettingsResponse_dataProtectionSettings}}
+var mUpdateIdentityProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIdentityProviderRequest_identityProviderArn, &sUpdateIdentityProviderRequest_identityProviderName, &sUpdateIdentityProviderRequest_identityProviderType, &sUpdateIdentityProviderRequest_identityProviderDetails, &sUpdateIdentityProviderRequest_clientToken}}
+var mUpdateIdentityProviderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIdentityProviderResponse_identityProvider}}
+var mUpdateIpAccessSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIpAccessSettingsRequest_ipAccessSettingsArn, &sUpdateIpAccessSettingsRequest_displayName, &sUpdateIpAccessSettingsRequest_description, &sUpdateIpAccessSettingsRequest_ipRules, &sUpdateIpAccessSettingsRequest_clientToken}}
+var mUpdateIpAccessSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIpAccessSettingsResponse_ipAccessSettings}}
+var mUpdateNetworkSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkSettingsRequest_networkSettingsArn, &sUpdateNetworkSettingsRequest_vpcId, &sUpdateNetworkSettingsRequest_subnetIds, &sUpdateNetworkSettingsRequest_securityGroupIds, &sUpdateNetworkSettingsRequest_clientToken}}
+var mUpdateNetworkSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkSettingsResponse_networkSettings}}
+var mUpdatePortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePortalRequest_portalArn, &sUpdatePortalRequest_displayName, &sUpdatePortalRequest_authenticationType, &sUpdatePortalRequest_instanceType, &sUpdatePortalRequest_maxConcurrentSessions, &sUpdatePortalRequest_portalCustomDomain}}
+var mUpdatePortalResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePortalResponse_portal}}
+var mUpdateSessionLoggerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSessionLoggerRequest_sessionLoggerArn, &sUpdateSessionLoggerRequest_eventFilter, &sUpdateSessionLoggerRequest_logConfiguration, &sUpdateSessionLoggerRequest_displayName}}
+var mUpdateSessionLoggerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSessionLoggerResponse_sessionLogger}}
+var mUpdateTrustStoreRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrustStoreRequest_trustStoreArn, &sUpdateTrustStoreRequest_certificatesToAdd, &sUpdateTrustStoreRequest_certificatesToDelete, &sUpdateTrustStoreRequest_clientToken}}
+var mUpdateTrustStoreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTrustStoreResponse_trustStoreArn}}
+var mUpdateUserAccessLoggingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn, &sUpdateUserAccessLoggingSettingsRequest_kinesisStreamArn, &sUpdateUserAccessLoggingSettingsRequest_clientToken}}
+var mUpdateUserAccessLoggingSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserAccessLoggingSettingsResponse_userAccessLoggingSettings}}
+var mUpdateUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserSettingsRequest_userSettingsArn, &sUpdateUserSettingsRequest_copyAllowed, &sUpdateUserSettingsRequest_pasteAllowed, &sUpdateUserSettingsRequest_downloadAllowed, &sUpdateUserSettingsRequest_uploadAllowed, &sUpdateUserSettingsRequest_printAllowed, &sUpdateUserSettingsRequest_disconnectTimeoutInMinutes, &sUpdateUserSettingsRequest_idleDisconnectTimeoutInMinutes, &sUpdateUserSettingsRequest_clientToken, &sUpdateUserSettingsRequest_cookieSynchronizationConfiguration, &sUpdateUserSettingsRequest_deepLinkAllowed, &sUpdateUserSettingsRequest_toolbarConfiguration, &sUpdateUserSettingsRequest_brandingConfigurationInput, &sUpdateUserSettingsRequest_webAuthnAllowed}, Seed: 90, Slots: []uint16{
+	0, 7, 0, 0, 0, 0, 5, 0, 10, 9, 0, 0, 4, 11, 0, 12, 3, 0, 14, 13, 0, 1, 2, 0,
+	6, 0, 0, 0, 0, 8, 0, 0,
+}}
+var mUpdateUserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserSettingsResponse_userSettings}}
+
+var sAssociateBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBrowserSettings, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sAssociateDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDataProtectionSettings, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sAssociateIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateIpAccessSettings, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sAssociateNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateNetworkSettings, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sAssociateSessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSessionLogger, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sAssociateTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateTrustStore, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sAssociateUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateUserAccessLoggingSettings, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sAssociateUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateUserSettings, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreateBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrowserSettings, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sCreateDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataProtectionSettings, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sCreateIdentityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentityProvider, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sCreateIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIpAccessSettings, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sCreateNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkSettings, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sCreatePortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortal, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sCreateSessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSessionLogger, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sCreateTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustStore, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sCreateUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserAccessLoggingSettings, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sCreateUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserSettings, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sDeleteBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrowserSettings, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sDeleteDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataProtectionSettings, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sDeleteIdentityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityProvider, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sDeleteIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIpAccessSettings, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sDeleteNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkSettings, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sDeletePortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortal, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sDeleteSessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSessionLogger, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sDeleteTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustStore, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sDeleteUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserAccessLoggingSettings, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sDeleteUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserSettings, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sDisassociateBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBrowserSettings, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sDisassociateDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDataProtectionSettings, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sDisassociateIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateIpAccessSettings, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sDisassociateNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateNetworkSettings, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sDisassociateSessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSessionLogger, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sDisassociateTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateTrustStore, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sDisassociateUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateUserAccessLoggingSettings, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sDisassociateUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateUserSettings, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sExpireSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpireSession, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sGetBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrowserSettings, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sGetDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataProtectionSettings, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sGetIdentityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityProvider, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sGetIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIpAccessSettings, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sGetNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkSettings, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sGetPortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortal, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sGetPortalServiceProviderMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalServiceProviderMetadata, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sGetSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSession, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var sGetSessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionLogger, Traits: &t45, Type: smithy.ShapeTypeOperation})
+var sGetTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStore, Traits: &t46, Type: smithy.ShapeTypeOperation})
+var sGetTrustStoreCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreCertificate, Traits: &t47, Type: smithy.ShapeTypeOperation})
+var sGetUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserAccessLoggingSettings, Traits: &t48, Type: smithy.ShapeTypeOperation})
+var sGetUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserSettings, Traits: &t49, Type: smithy.ShapeTypeOperation})
+var sListBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrowserSettings, Traits: &t50, Type: smithy.ShapeTypeOperation})
+var sListDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataProtectionSettings, Traits: &t51, Type: smithy.ShapeTypeOperation})
+var sListIdentityProviders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityProviders, Traits: &t52, Type: smithy.ShapeTypeOperation})
+var sListIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIpAccessSettings, Traits: &t53, Type: smithy.ShapeTypeOperation})
+var sListNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkSettings, Traits: &t54, Type: smithy.ShapeTypeOperation})
+var sListPortals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortals, Traits: &t55, Type: smithy.ShapeTypeOperation})
+var sListSessionLoggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionLoggers, Traits: &t56, Type: smithy.ShapeTypeOperation})
+var sListSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessions, Traits: &t57, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t58, Type: smithy.ShapeTypeOperation})
+var sListTrustStoreCertificates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustStoreCertificates, Traits: &t59, Type: smithy.ShapeTypeOperation})
+var sListTrustStores = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustStores, Traits: &t60, Type: smithy.ShapeTypeOperation})
+var sListUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUserAccessLoggingSettings, Traits: &t61, Type: smithy.ShapeTypeOperation})
+var sListUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUserSettings, Traits: &t62, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t63, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t64, Type: smithy.ShapeTypeOperation})
+var sUpdateBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrowserSettings, Traits: &t65, Type: smithy.ShapeTypeOperation})
+var sUpdateDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataProtectionSettings, Traits: &t66, Type: smithy.ShapeTypeOperation})
+var sUpdateIdentityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentityProvider, Traits: &t67, Type: smithy.ShapeTypeOperation})
+var sUpdateIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIpAccessSettings, Traits: &t68, Type: smithy.ShapeTypeOperation})
+var sUpdateNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkSettings, Traits: &t69, Type: smithy.ShapeTypeOperation})
+var sUpdatePortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortal, Traits: &t70, Type: smithy.ShapeTypeOperation})
+var sUpdateSessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSessionLogger, Traits: &t71, Type: smithy.ShapeTypeOperation})
+var sUpdateTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrustStore, Traits: &t72, Type: smithy.ShapeTypeOperation})
+var sUpdateUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserAccessLoggingSettings, Traits: &t73, Type: smithy.ShapeTypeOperation})
+var sUpdateUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserSettings, Traits: &t74, Type: smithy.ShapeTypeOperation})
+var s_AWSErmineControlPlaneService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSErmineControlPlaneService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t75, Type: smithy.ShapeTypeStructure})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString})
+var s_ArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var s_AuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthenticationType, Type: smithy.ShapeTypeString})
+var s_BlockedCategories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockedCategories, Members: &m_BlockedCategories, Type: smithy.ShapeTypeList})
+var sBrandingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandingConfiguration, Members: &mBrandingConfiguration, Type: smithy.ShapeTypeStructure})
+var sBrandingConfigurationCreateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandingConfigurationCreateInput, Members: &mBrandingConfigurationCreateInput, Type: smithy.ShapeTypeStructure})
+var sBrandingConfigurationUpdateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrandingConfigurationUpdateInput, Members: &mBrandingConfigurationUpdateInput, Type: smithy.ShapeTypeStructure})
+var s_BrandingSafeStringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var s_BrowserPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrowserPolicy, Traits: &t77, Type: smithy.ShapeTypeString})
+var sBrowserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrowserSettings, Members: &mBrowserSettings, Type: smithy.ShapeTypeStructure})
+var s_BrowserSettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrowserSettingsList, Members: &m_BrowserSettingsList, Type: smithy.ShapeTypeList})
+var sBrowserSettingsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBrowserSettingsSummary, Members: &mBrowserSettingsSummary, Type: smithy.ShapeTypeStructure})
+var s_BrowserType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BrowserType, Type: smithy.ShapeTypeString})
+var s_BuiltInPatternId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuiltInPatternId, Traits: &t77, Type: smithy.ShapeTypeString})
+var sCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeEnum})
+var sCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificate, Members: &mCertificate, Type: smithy.ShapeTypeStructure})
+var s_CertificateAuthorityBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateAuthorityBody, Type: smithy.ShapeTypeBlob})
+var s_CertificateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList})
+var s_CertificatePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificatePrincipal, Type: smithy.ShapeTypeString})
+var sCertificateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateSummary, Members: &mCertificateSummary, Type: smithy.ShapeTypeStructure})
+var s_CertificateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateSummaryList, Members: &m_CertificateSummaryList, Type: smithy.ShapeTypeList})
+var s_CertificateThumbprint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateThumbprint, Type: smithy.ShapeTypeString})
+var s_CertificateThumbprintList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateThumbprintList, Members: &m_CertificateThumbprintList, Type: smithy.ShapeTypeList})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sColorTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColorTheme, Members: &mColorTheme, Type: smithy.ShapeTypeEnum})
+var s_ConfidenceLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfidenceLevel, Type: smithy.ShapeTypeInteger})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t79, Type: smithy.ShapeTypeStructure})
+var s_ContactLinkUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactLinkUrl, Type: smithy.ShapeTypeString})
+var s_CookieDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CookieDomain, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_CookieName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CookieName, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_CookiePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CookiePath, Traits: &t77, Type: smithy.ShapeTypeString})
+var sCookieSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCookieSpecification, Members: &mCookieSpecification, Type: smithy.ShapeTypeStructure})
+var s_CookieSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CookieSpecifications, Members: &m_CookieSpecifications, Type: smithy.ShapeTypeList})
+var sCookieSynchronizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCookieSynchronizationConfiguration, Members: &mCookieSynchronizationConfiguration, Traits: &t77, Type: smithy.ShapeTypeStructure})
+var sCustomPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomPattern, Members: &mCustomPattern, Type: smithy.ShapeTypeStructure})
+var sDataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProtectionSettings, Members: &mDataProtectionSettings, Type: smithy.ShapeTypeStructure})
+var s_DataProtectionSettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataProtectionSettingsList, Members: &m_DataProtectionSettingsList, Type: smithy.ShapeTypeList})
+var sDataProtectionSettingsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProtectionSettingsSummary, Members: &mDataProtectionSettingsSummary, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_DescriptionSafe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionSafe, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_DisconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var s_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayName, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_DisplayNameSafe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayNameSafe, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_EnabledType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var s_EncryptionContextMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeEnum})
+var sEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeUnion})
+var s_Events = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeList})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var s_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sFolderStructure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolderStructure, Members: &mFolderStructure, Type: smithy.ShapeTypeEnum})
+var s_GlobalInlineRedactionUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalInlineRedactionUrls, Members: &m_GlobalInlineRedactionUrls, Type: smithy.ShapeTypeList})
+var s_HiddenToolbarItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HiddenToolbarItemList, Members: &m_HiddenToolbarItemList, Type: smithy.ShapeTypeList})
+var s_IconImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IconImage, Traits: &t80, Type: smithy.ShapeTypeBlob})
+var sIconImageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIconImageInput, Members: &mIconImageInput, Type: smithy.ShapeTypeUnion})
+var sIdentityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityProvider, Members: &mIdentityProvider, Type: smithy.ShapeTypeStructure})
+var s_IdentityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderDetails, Members: &m_IdentityProviderDetails, Traits: &t77, Type: smithy.ShapeTypeMap})
+var s_IdentityProviderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderList, Members: &m_IdentityProviderList, Type: smithy.ShapeTypeList})
+var s_IdentityProviderName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderName, Traits: &t77, Type: smithy.ShapeTypeString})
+var sIdentityProviderSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityProviderSummary, Members: &mIdentityProviderSummary, Type: smithy.ShapeTypeStructure})
+var s_IdentityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderType, Type: smithy.ShapeTypeString})
+var s_IdleDisconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdleDisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sImageMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageMetadata, Members: &mImageMetadata, Type: smithy.ShapeTypeStructure})
+var sInlineRedactionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInlineRedactionConfiguration, Members: &mInlineRedactionConfiguration, Type: smithy.ShapeTypeStructure})
+var sInlineRedactionPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInlineRedactionPattern, Members: &mInlineRedactionPattern, Type: smithy.ShapeTypeStructure})
+var s_InlineRedactionPatterns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InlineRedactionPatterns, Members: &m_InlineRedactionPatterns, Type: smithy.ShapeTypeList})
+var s_InlineRedactionUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InlineRedactionUrl, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_InlineRedactionUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InlineRedactionUrls, Members: &m_InlineRedactionUrls, Type: smithy.ShapeTypeList})
+var s_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceType, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t82, Type: smithy.ShapeTypeStructure})
+var sIpAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAccessSettings, Members: &mIpAccessSettings, Type: smithy.ShapeTypeStructure})
+var s_IpAccessSettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAccessSettingsList, Members: &m_IpAccessSettingsList, Type: smithy.ShapeTypeList})
+var sIpAccessSettingsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAccessSettingsSummary, Members: &mIpAccessSettingsSummary, Type: smithy.ShapeTypeStructure})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_IpAddressList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddressList, Members: &m_IpAddressList, Type: smithy.ShapeTypeList})
+var s_IpRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpRange, Traits: &t77, Type: smithy.ShapeTypeString})
+var sIpRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpRule, Members: &mIpRule, Type: smithy.ShapeTypeStructure})
+var s_IpRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpRuleList, Members: &m_IpRuleList, Traits: &t77, Type: smithy.ShapeTypeList})
+var s_keyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var s_KinesisStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisStreamArn, Type: smithy.ShapeTypeString})
+var sLocale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum})
+var s_LocalizedBrandingStringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocalizedBrandingStringMap, Members: &m_LocalizedBrandingStringMap, Type: smithy.ShapeTypeMap})
+var sLocalizedBrandingStrings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocalizedBrandingStrings, Members: &mLocalizedBrandingStrings, Type: smithy.ShapeTypeStructure})
+var sLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sLogFileFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogFileFormat, Members: &mLogFileFormat, Type: smithy.ShapeTypeEnum})
+var s_Markdown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Markdown, Traits: &t84, Type: smithy.ShapeTypeString})
+var s_MaxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxConcurrentSessions, Type: smithy.ShapeTypeInteger})
+var s_MaxDisplayResolution = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxDisplayResolution, Type: smithy.ShapeTypeString})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMimeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMimeType, Members: &mMimeType, Type: smithy.ShapeTypeEnum})
+var sNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkSettings, Members: &mNetworkSettings, Type: smithy.ShapeTypeStructure})
+var s_NetworkSettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkSettingsList, Members: &m_NetworkSettingsList, Type: smithy.ShapeTypeList})
+var sNetworkSettingsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkSettingsSummary, Members: &mNetworkSettingsSummary, Type: smithy.ShapeTypeStructure})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_PatternName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PatternName, Traits: &t77, Type: smithy.ShapeTypeString})
+var sPortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortal, Members: &mPortal, Type: smithy.ShapeTypeStructure})
+var s_PortalCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortalCustomDomain, Type: smithy.ShapeTypeString})
+var s_PortalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortalEndpoint, Type: smithy.ShapeTypeString})
+var s_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortalId, Type: smithy.ShapeTypeString})
+var s_PortalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortalList, Members: &m_PortalList, Type: smithy.ShapeTypeList})
+var s_PortalStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortalStatus, Type: smithy.ShapeTypeString})
+var sPortalSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortalSummary, Members: &mPortalSummary, Type: smithy.ShapeTypeStructure})
+var s_QuotaCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaCode, Type: smithy.ShapeTypeString})
+var sRedactionPlaceHolder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactionPlaceHolder, Members: &mRedactionPlaceHolder, Type: smithy.ShapeTypeStructure})
+var s_RedactionPlaceHolderText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedactionPlaceHolderText, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_RedactionPlaceHolderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedactionPlaceHolderType, Type: smithy.ShapeTypeString})
+var s_Regex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Regex, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_RendererType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RendererType, Type: smithy.ShapeTypeString})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t85, Type: smithy.ShapeTypeStructure})
+var s_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_S3BucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketOwner, Type: smithy.ShapeTypeString})
+var s_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3KeyPrefix, Traits: &t77, Type: smithy.ShapeTypeString})
+var sS3LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LogConfiguration, Members: &mS3LogConfiguration, Type: smithy.ShapeTypeStructure})
+var s_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var s_SamlMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SamlMetadata, Type: smithy.ShapeTypeString})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var s_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceCode, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t86, Type: smithy.ShapeTypeStructure})
+var sSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSession, Members: &mSession, Type: smithy.ShapeTypeStructure})
+var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sSessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionLogger, Members: &mSessionLogger, Type: smithy.ShapeTypeStructure})
+var s_SessionLoggerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionLoggerList, Members: &m_SessionLoggerList, Type: smithy.ShapeTypeList})
+var sSessionLoggerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionLoggerSummary, Members: &mSessionLoggerSummary, Type: smithy.ShapeTypeStructure})
+var sSessionSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionSortBy, Members: &mSessionSortBy, Type: smithy.ShapeTypeEnum})
+var sSessionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var sSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionSummary, Members: &mSessionSummary, Type: smithy.ShapeTypeStructure})
+var s_SessionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionSummaryList, Members: &m_SessionSummaryList, Type: smithy.ShapeTypeList})
+var s_StatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusReason, Type: smithy.ShapeTypeString})
+var s_StringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringType, Type: smithy.ShapeTypeString})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_SubnetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList})
+var s_SubresourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubresourceARN, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Traits: &t77, Type: smithy.ShapeTypeStructure})
+var s_TagExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagExceptionMessage, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t77, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t87, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sToolbarConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolbarConfiguration, Members: &mToolbarConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ToolbarItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolbarItem, Type: smithy.ShapeTypeString})
+var s_ToolbarType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolbarType, Type: smithy.ShapeTypeString})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t88, Type: smithy.ShapeTypeStructure})
+var sTrustStore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStore, Members: &mTrustStore, Type: smithy.ShapeTypeStructure})
+var sTrustStoreSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrustStoreSummary, Members: &mTrustStoreSummary, Type: smithy.ShapeTypeStructure})
+var s_TrustStoreSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrustStoreSummaryList, Members: &m_TrustStoreSummaryList, Type: smithy.ShapeTypeList})
+var s_UrlPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlPattern, Traits: &t77, Type: smithy.ShapeTypeString})
+var s_UrlPatternList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UrlPatternList, Members: &m_UrlPatternList, Type: smithy.ShapeTypeList})
+var sUserAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserAccessLoggingSettings, Members: &mUserAccessLoggingSettings, Type: smithy.ShapeTypeStructure})
+var s_UserAccessLoggingSettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserAccessLoggingSettingsList, Members: &m_UserAccessLoggingSettingsList, Type: smithy.ShapeTypeList})
+var sUserAccessLoggingSettingsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserAccessLoggingSettingsSummary, Members: &mUserAccessLoggingSettingsSummary, Type: smithy.ShapeTypeStructure})
+var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Traits: &t77, Type: smithy.ShapeTypeString})
+var sUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserSettings, Members: &mUserSettings, Type: smithy.ShapeTypeStructure})
+var s_UserSettingsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserSettingsList, Members: &m_UserSettingsList, Type: smithy.ShapeTypeList})
+var sUserSettingsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserSettingsSummary, Members: &mUserSettingsSummary, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t88, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString})
+var s_VisualMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VisualMode, Type: smithy.ShapeTypeString})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var s_WallpaperImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WallpaperImage, Traits: &t80, Type: smithy.ShapeTypeBlob})
+var sWallpaperImageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWallpaperImageInput, Members: &mWallpaperImageInput, Type: smithy.ShapeTypeUnion})
+var sWebContentFilteringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWebContentFilteringPolicy, Members: &mWebContentFilteringPolicy, Type: smithy.ShapeTypeStructure})
+var sAssociateBrowserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBrowserSettingsRequest, Members: &mAssociateBrowserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateBrowserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateBrowserSettingsResponse, Members: &mAssociateBrowserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateDataProtectionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDataProtectionSettingsRequest, Members: &mAssociateDataProtectionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateDataProtectionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDataProtectionSettingsResponse, Members: &mAssociateDataProtectionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateIpAccessSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateIpAccessSettingsRequest, Members: &mAssociateIpAccessSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateIpAccessSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateIpAccessSettingsResponse, Members: &mAssociateIpAccessSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateNetworkSettingsRequest, Members: &mAssociateNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateNetworkSettingsResponse, Members: &mAssociateNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateSessionLoggerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSessionLoggerRequest, Members: &mAssociateSessionLoggerRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateSessionLoggerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSessionLoggerResponse, Members: &mAssociateSessionLoggerResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateTrustStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateTrustStoreRequest, Members: &mAssociateTrustStoreRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateTrustStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateTrustStoreResponse, Members: &mAssociateTrustStoreResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateUserAccessLoggingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateUserAccessLoggingSettingsRequest, Members: &mAssociateUserAccessLoggingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateUserAccessLoggingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateUserAccessLoggingSettingsResponse, Members: &mAssociateUserAccessLoggingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateUserSettingsRequest, Members: &mAssociateUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateUserSettingsResponse, Members: &mAssociateUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateBrowserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrowserSettingsRequest, Members: &mCreateBrowserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sCreateBrowserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBrowserSettingsResponse, Members: &mCreateBrowserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDataProtectionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataProtectionSettingsRequest, Members: &mCreateDataProtectionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDataProtectionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataProtectionSettingsResponse, Members: &mCreateDataProtectionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIdentityProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentityProviderRequest, Members: &mCreateIdentityProviderRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIdentityProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentityProviderResponse, Members: &mCreateIdentityProviderResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIpAccessSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIpAccessSettingsRequest, Members: &mCreateIpAccessSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIpAccessSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIpAccessSettingsResponse, Members: &mCreateIpAccessSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkSettingsRequest, Members: &mCreateNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkSettingsResponse, Members: &mCreateNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sCreatePortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortalRequest, Members: &mCreatePortalRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortalResponse, Members: &mCreatePortalResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSessionLoggerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSessionLoggerRequest, Members: &mCreateSessionLoggerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSessionLoggerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSessionLoggerResponse, Members: &mCreateSessionLoggerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTrustStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustStoreRequest, Members: &mCreateTrustStoreRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTrustStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTrustStoreResponse, Members: &mCreateTrustStoreResponse, Type: smithy.ShapeTypeStructure})
+var sCreateUserAccessLoggingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserAccessLoggingSettingsRequest, Members: &mCreateUserAccessLoggingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sCreateUserAccessLoggingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserAccessLoggingSettingsResponse, Members: &mCreateUserAccessLoggingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserSettingsRequest, Members: &mCreateUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sCreateUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserSettingsResponse, Members: &mCreateUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteBrowserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrowserSettingsRequest, Members: &mDeleteBrowserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteBrowserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBrowserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDataProtectionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataProtectionSettingsRequest, Members: &mDeleteDataProtectionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDataProtectionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataProtectionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteIdentityProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityProviderRequest, Members: &mDeleteIdentityProviderRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIdentityProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityProviderResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteIpAccessSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIpAccessSettingsRequest, Members: &mDeleteIpAccessSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIpAccessSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIpAccessSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkSettingsRequest, Members: &mDeleteNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDeletePortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortalRequest, Members: &mDeletePortalRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortalResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSessionLoggerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSessionLoggerRequest, Members: &mDeleteSessionLoggerRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSessionLoggerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSessionLoggerResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteTrustStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustStoreRequest, Members: &mDeleteTrustStoreRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTrustStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTrustStoreResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteUserAccessLoggingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserAccessLoggingSettingsRequest, Members: &mDeleteUserAccessLoggingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteUserAccessLoggingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserAccessLoggingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserSettingsRequest, Members: &mDeleteUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateBrowserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBrowserSettingsRequest, Members: &mDisassociateBrowserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateBrowserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateBrowserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateDataProtectionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDataProtectionSettingsRequest, Members: &mDisassociateDataProtectionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateDataProtectionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDataProtectionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateIpAccessSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateIpAccessSettingsRequest, Members: &mDisassociateIpAccessSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateIpAccessSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateIpAccessSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateNetworkSettingsRequest, Members: &mDisassociateNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateSessionLoggerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSessionLoggerRequest, Members: &mDisassociateSessionLoggerRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateSessionLoggerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSessionLoggerResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateTrustStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateTrustStoreRequest, Members: &mDisassociateTrustStoreRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateTrustStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateTrustStoreResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateUserAccessLoggingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateUserAccessLoggingSettingsRequest, Members: &mDisassociateUserAccessLoggingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateUserAccessLoggingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateUserAccessLoggingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateUserSettingsRequest, Members: &mDisassociateUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sExpireSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpireSessionRequest, Members: &mExpireSessionRequest, Type: smithy.ShapeTypeStructure})
+var sExpireSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpireSessionResponse, Type: smithy.ShapeTypeStructure})
+var sGetBrowserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrowserSettingsRequest, Members: &mGetBrowserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetBrowserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBrowserSettingsResponse, Members: &mGetBrowserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetDataProtectionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataProtectionSettingsRequest, Members: &mGetDataProtectionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetDataProtectionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataProtectionSettingsResponse, Members: &mGetDataProtectionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetIdentityProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityProviderRequest, Members: &mGetIdentityProviderRequest, Type: smithy.ShapeTypeStructure})
+var sGetIdentityProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIdentityProviderResponse, Members: &mGetIdentityProviderResponse, Type: smithy.ShapeTypeStructure})
+var sGetIpAccessSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIpAccessSettingsRequest, Members: &mGetIpAccessSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetIpAccessSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIpAccessSettingsResponse, Members: &mGetIpAccessSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkSettingsRequest, Members: &mGetNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkSettingsResponse, Members: &mGetNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetPortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalRequest, Members: &mGetPortalRequest, Type: smithy.ShapeTypeStructure})
+var sGetPortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalResponse, Members: &mGetPortalResponse, Type: smithy.ShapeTypeStructure})
+var sGetPortalServiceProviderMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalServiceProviderMetadataRequest, Members: &mGetPortalServiceProviderMetadataRequest, Type: smithy.ShapeTypeStructure})
+var sGetPortalServiceProviderMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalServiceProviderMetadataResponse, Members: &mGetPortalServiceProviderMetadataResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionRequest, Members: &mGetSessionRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionLoggerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionLoggerRequest, Members: &mGetSessionLoggerRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionLoggerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionLoggerResponse, Members: &mGetSessionLoggerResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionResponse, Members: &mGetSessionResponse, Type: smithy.ShapeTypeStructure})
+var sGetTrustStoreCertificateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreCertificateRequest, Members: &mGetTrustStoreCertificateRequest, Type: smithy.ShapeTypeStructure})
+var sGetTrustStoreCertificateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreCertificateResponse, Members: &mGetTrustStoreCertificateResponse, Type: smithy.ShapeTypeStructure})
+var sGetTrustStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreRequest, Members: &mGetTrustStoreRequest, Type: smithy.ShapeTypeStructure})
+var sGetTrustStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTrustStoreResponse, Members: &mGetTrustStoreResponse, Type: smithy.ShapeTypeStructure})
+var sGetUserAccessLoggingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserAccessLoggingSettingsRequest, Members: &mGetUserAccessLoggingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetUserAccessLoggingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserAccessLoggingSettingsResponse, Members: &mGetUserAccessLoggingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserSettingsRequest, Members: &mGetUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserSettingsResponse, Members: &mGetUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListBrowserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrowserSettingsRequest, Members: &mListBrowserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sListBrowserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBrowserSettingsResponse, Members: &mListBrowserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListDataProtectionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataProtectionSettingsRequest, Members: &mListDataProtectionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sListDataProtectionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDataProtectionSettingsResponse, Members: &mListDataProtectionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListIdentityProvidersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityProvidersRequest, Members: &mListIdentityProvidersRequest, Type: smithy.ShapeTypeStructure})
+var sListIdentityProvidersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIdentityProvidersResponse, Members: &mListIdentityProvidersResponse, Type: smithy.ShapeTypeStructure})
+var sListIpAccessSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIpAccessSettingsRequest, Members: &mListIpAccessSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sListIpAccessSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIpAccessSettingsResponse, Members: &mListIpAccessSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkSettingsRequest, Members: &mListNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sListNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkSettingsResponse, Members: &mListNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListPortalsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortalsRequest, Members: &mListPortalsRequest, Type: smithy.ShapeTypeStructure})
+var sListPortalsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortalsResponse, Members: &mListPortalsResponse, Type: smithy.ShapeTypeStructure})
+var sListSessionLoggersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionLoggersRequest, Members: &mListSessionLoggersRequest, Type: smithy.ShapeTypeStructure})
+var sListSessionLoggersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionLoggersResponse, Members: &mListSessionLoggersResponse, Type: smithy.ShapeTypeStructure})
+var sListSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsRequest, Members: &mListSessionsRequest, Type: smithy.ShapeTypeStructure})
+var sListSessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsResponse, Members: &mListSessionsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListTrustStoreCertificatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustStoreCertificatesRequest, Members: &mListTrustStoreCertificatesRequest, Type: smithy.ShapeTypeStructure})
+var sListTrustStoreCertificatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustStoreCertificatesResponse, Members: &mListTrustStoreCertificatesResponse, Type: smithy.ShapeTypeStructure})
+var sListTrustStoresRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustStoresRequest, Members: &mListTrustStoresRequest, Type: smithy.ShapeTypeStructure})
+var sListTrustStoresResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTrustStoresResponse, Members: &mListTrustStoresResponse, Type: smithy.ShapeTypeStructure})
+var sListUserAccessLoggingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUserAccessLoggingSettingsRequest, Members: &mListUserAccessLoggingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sListUserAccessLoggingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUserAccessLoggingSettingsResponse, Members: &mListUserAccessLoggingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUserSettingsRequest, Members: &mListUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sListUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUserSettingsResponse, Members: &mListUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateBrowserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrowserSettingsRequest, Members: &mUpdateBrowserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateBrowserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBrowserSettingsResponse, Members: &mUpdateBrowserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDataProtectionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataProtectionSettingsRequest, Members: &mUpdateDataProtectionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDataProtectionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataProtectionSettingsResponse, Members: &mUpdateDataProtectionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateIdentityProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentityProviderRequest, Members: &mUpdateIdentityProviderRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateIdentityProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIdentityProviderResponse, Members: &mUpdateIdentityProviderResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateIpAccessSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIpAccessSettingsRequest, Members: &mUpdateIpAccessSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateIpAccessSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIpAccessSettingsResponse, Members: &mUpdateIpAccessSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkSettingsRequest, Members: &mUpdateNetworkSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkSettingsResponse, Members: &mUpdateNetworkSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortalRequest, Members: &mUpdatePortalRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortalResponse, Members: &mUpdatePortalResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSessionLoggerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSessionLoggerRequest, Members: &mUpdateSessionLoggerRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSessionLoggerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSessionLoggerResponse, Members: &mUpdateSessionLoggerResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateTrustStoreRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrustStoreRequest, Members: &mUpdateTrustStoreRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTrustStoreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTrustStoreResponse, Members: &mUpdateTrustStoreResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateUserAccessLoggingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserAccessLoggingSettingsRequest, Members: &mUpdateUserAccessLoggingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateUserAccessLoggingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserAccessLoggingSettingsResponse, Members: &mUpdateUserAccessLoggingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserSettingsRequest, Members: &mUpdateUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserSettingsResponse, Members: &mUpdateUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var s_ArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var s_BlockedCategories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCategory, Members: &mCategory, Type: smithy.ShapeTypeEnum})
+var sBrandingConfiguration_logo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logo", ID: &iImageMetadata, Members: &mImageMetadata, Type: smithy.ShapeTypeStructure})
+var sBrandingConfiguration_wallpaper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wallpaper", ID: &iImageMetadata, Members: &mImageMetadata, Type: smithy.ShapeTypeStructure})
+var sBrandingConfiguration_favicon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "favicon", ID: &iImageMetadata, Members: &mImageMetadata, Type: smithy.ShapeTypeStructure})
+var sBrandingConfiguration_localizedStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localizedStrings", ID: &i_LocalizedBrandingStringMap, Members: &m_LocalizedBrandingStringMap, Type: smithy.ShapeTypeMap})
+var sBrandingConfiguration_colorTheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "colorTheme", ID: &iColorTheme, Members: &mColorTheme, Type: smithy.ShapeTypeEnum})
+var sBrandingConfiguration_termsOfService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "termsOfService", ID: &i_Markdown, Traits: &t76, Type: smithy.ShapeTypeString})
+var sBrandingConfigurationCreateInput_logo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logo", ID: &iIconImageInput, Members: &mIconImageInput, Type: smithy.ShapeTypeUnion})
+var sBrandingConfigurationCreateInput_wallpaper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wallpaper", ID: &iWallpaperImageInput, Members: &mWallpaperImageInput, Type: smithy.ShapeTypeUnion})
+var sBrandingConfigurationCreateInput_favicon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "favicon", ID: &iIconImageInput, Members: &mIconImageInput, Type: smithy.ShapeTypeUnion})
+var sBrandingConfigurationCreateInput_localizedStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localizedStrings", ID: &i_LocalizedBrandingStringMap, Members: &m_LocalizedBrandingStringMap, Type: smithy.ShapeTypeMap})
+var sBrandingConfigurationCreateInput_colorTheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "colorTheme", ID: &iColorTheme, Members: &mColorTheme, Type: smithy.ShapeTypeEnum})
+var sBrandingConfigurationCreateInput_termsOfService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "termsOfService", ID: &i_Markdown, Traits: &t76, Type: smithy.ShapeTypeString})
+var sBrandingConfigurationUpdateInput_logo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logo", ID: &iIconImageInput, Members: &mIconImageInput, Type: smithy.ShapeTypeUnion})
+var sBrandingConfigurationUpdateInput_wallpaper = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wallpaper", ID: &iWallpaperImageInput, Members: &mWallpaperImageInput, Type: smithy.ShapeTypeUnion})
+var sBrandingConfigurationUpdateInput_favicon = smithy.NewStaticSchema(smithy.StaticSchema{Member: "favicon", ID: &iIconImageInput, Members: &mIconImageInput, Type: smithy.ShapeTypeUnion})
+var sBrandingConfigurationUpdateInput_localizedStrings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localizedStrings", ID: &i_LocalizedBrandingStringMap, Members: &m_LocalizedBrandingStringMap, Type: smithy.ShapeTypeMap})
+var sBrandingConfigurationUpdateInput_colorTheme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "colorTheme", ID: &iColorTheme, Members: &mColorTheme, Type: smithy.ShapeTypeEnum})
+var sBrandingConfigurationUpdateInput_termsOfService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "termsOfService", ID: &i_Markdown, Traits: &t76, Type: smithy.ShapeTypeString})
+var sBrowserSettings_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sBrowserSettings_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sBrowserSettings_browserPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserPolicy", ID: &i_BrowserPolicy, Traits: &t78, Type: smithy.ShapeTypeString})
+var sBrowserSettings_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sBrowserSettings_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sBrowserSettings_webContentFilteringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webContentFilteringPolicy", ID: &iWebContentFilteringPolicy, Members: &mWebContentFilteringPolicy, Type: smithy.ShapeTypeStructure})
+var s_BrowserSettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBrowserSettingsSummary, Members: &mBrowserSettingsSummary, Type: smithy.ShapeTypeStructure})
+var sBrowserSettingsSummary_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCategory_CULTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CULTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_GAMBLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GAMBLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_NUDITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUDITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_PORNOGRAPHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PORNOGRAPHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_SEX_EDUCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEX_EDUCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_TASTELESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TASTELESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_VIOLENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIOLENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_DOWNLOAD_SITES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNLOAD_SITES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_IMAGE_SHARING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_SHARING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_PEER_TO_PEER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PEER_TO_PEER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_STREAMING_MEDIA_AND_DOWNLOADS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREAMING_MEDIA_AND_DOWNLOADS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_GENERATIVE_AI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERATIVE_AI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_CRIMINAL_ACTIVITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRIMINAL_ACTIVITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_HACKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HACKING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_HATE_AND_INTOLERANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HATE_AND_INTOLERANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_ILLEGAL_DRUG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_DRUG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_ILLEGAL_SOFTWARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILLEGAL_SOFTWARE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_SCHOOL_CHEATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHOOL_CHEATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_SELF_HARM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELF_HARM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_WEAPONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEAPONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_CHAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHAT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_GAMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GAMES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_INSTANT_MESSAGING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTANT_MESSAGING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_PROFESSIONAL_NETWORK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFESSIONAL_NETWORK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_SOCIAL_NETWORKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOCIAL_NETWORKING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_WEB_BASED_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEB_BASED_EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCategory_PARKED_DOMAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARKED_DOMAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificate_thumbprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thumbprint", ID: &i_CertificateThumbprint, Type: smithy.ShapeTypeString})
+var sCertificate_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &i_CertificatePrincipal, Type: smithy.ShapeTypeString})
+var sCertificate_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_CertificatePrincipal, Type: smithy.ShapeTypeString})
+var sCertificate_notValidBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notValidBefore", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCertificate_notValidAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notValidAfter", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCertificate_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_CertificateAuthorityBody, Type: smithy.ShapeTypeBlob})
+var s_CertificateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CertificateAuthorityBody, Type: smithy.ShapeTypeBlob})
+var sCertificateSummary_thumbprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thumbprint", ID: &i_CertificateThumbprint, Type: smithy.ShapeTypeString})
+var sCertificateSummary_subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subject", ID: &i_CertificatePrincipal, Type: smithy.ShapeTypeString})
+var sCertificateSummary_issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "issuer", ID: &i_CertificatePrincipal, Type: smithy.ShapeTypeString})
+var sCertificateSummary_notValidBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notValidBefore", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCertificateSummary_notValidAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notValidAfter", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_CertificateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateSummary, Members: &mCertificateSummary, Type: smithy.ShapeTypeStructure})
+var s_CertificateThumbprintList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CertificateThumbprint, Type: smithy.ShapeTypeString})
+var sColorTheme_LIGHT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIGHT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sColorTheme_DARK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DARK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sCookieSpecification_domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domain", ID: &i_CookieDomain, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCookieSpecification_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CookieName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCookieSpecification_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_CookiePath, Traits: &t78, Type: smithy.ShapeTypeString})
+var s_CookieSpecifications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCookieSpecification, Members: &mCookieSpecification, Type: smithy.ShapeTypeStructure})
+var sCookieSynchronizationConfiguration_allowlist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowlist", ID: &i_CookieSpecifications, Members: &m_CookieSpecifications, Type: smithy.ShapeTypeList})
+var sCookieSynchronizationConfiguration_blocklist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blocklist", ID: &i_CookieSpecifications, Members: &m_CookieSpecifications, Type: smithy.ShapeTypeList})
+var sCustomPattern_patternName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patternName", ID: &i_PatternName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCustomPattern_patternRegex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patternRegex", ID: &i_Regex, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCustomPattern_patternDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "patternDescription", ID: &i_DescriptionSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCustomPattern_keywordRegex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keywordRegex", ID: &i_Regex, Traits: &t78, Type: smithy.ShapeTypeString})
+var sDataProtectionSettings_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDataProtectionSettings_inlineRedactionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineRedactionConfiguration", ID: &iInlineRedactionConfiguration, Members: &mInlineRedactionConfiguration, Type: smithy.ShapeTypeStructure})
+var sDataProtectionSettings_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sDataProtectionSettings_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sDataProtectionSettings_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_DescriptionSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sDataProtectionSettings_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDataProtectionSettings_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sDataProtectionSettings_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var s_DataProtectionSettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataProtectionSettingsSummary, Members: &mDataProtectionSettingsSummary, Type: smithy.ShapeTypeStructure})
+var sDataProtectionSettingsSummary_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDataProtectionSettingsSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sDataProtectionSettingsSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_DescriptionSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sDataProtectionSettingsSummary_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_EncryptionContextMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var s_EncryptionContextMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sEvent_WEBSITE_INTERACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBSITE_INTERACT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_CONTENT_PASTE_TO_WEBSITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_PASTE_TO_WEBSITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_CONTENT_COPY_FROM_WEBSITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_COPY_FROM_WEBSITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_URL_LOAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_LOAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_TAB_OPEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAB_OPEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_TAB_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAB_CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_PRINT_JOB_SUBMIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRINT_JOB_SUBMIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_SESSION_CONNECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_CONNECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_SESSION_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_START", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_SESSION_DISCONNECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_DISCONNECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_SESSION_END = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SESSION_END", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvent_URL_BLOCK_BY_CONTENT_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_BLOCK_BY_CONTENT_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventFilter_all = smithy.NewStaticSchema(smithy.StaticSchema{Member: "all", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventFilter_include = smithy.NewStaticSchema(smithy.StaticSchema{Member: "include", ID: &i_Events, Members: &m_Events, Type: smithy.ShapeTypeList})
+var s_Events_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvent, Members: &mEvent, Type: smithy.ShapeTypeEnum})
+var sFolderStructure_FLAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLAT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFolderStructure_NESTED_BY_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NESTED_BY_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_GlobalInlineRedactionUrls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InlineRedactionUrl, Traits: &t78, Type: smithy.ShapeTypeString})
+var s_HiddenToolbarItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ToolbarItem, Type: smithy.ShapeTypeString})
+var sIconImageInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_IconImage, Traits: &t81, Type: smithy.ShapeTypeBlob})
+var sIconImageInput_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sIdentityProvider_identityProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderArn", ID: &i_SubresourceARN, Type: smithy.ShapeTypeString})
+var sIdentityProvider_identityProviderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderName", ID: &i_IdentityProviderName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIdentityProvider_identityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderType", ID: &i_IdentityProviderType, Type: smithy.ShapeTypeString})
+var sIdentityProvider_identityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderDetails", ID: &i_IdentityProviderDetails, Members: &m_IdentityProviderDetails, Traits: &t78, Type: smithy.ShapeTypeMap})
+var s_IdentityProviderDetails_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var s_IdentityProviderDetails_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var s_IdentityProviderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIdentityProviderSummary, Members: &mIdentityProviderSummary, Type: smithy.ShapeTypeStructure})
+var sIdentityProviderSummary_identityProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderArn", ID: &i_SubresourceARN, Type: smithy.ShapeTypeString})
+var sIdentityProviderSummary_identityProviderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderName", ID: &i_IdentityProviderName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIdentityProviderSummary_identityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderType", ID: &i_IdentityProviderType, Type: smithy.ShapeTypeString})
+var sImageMetadata_mimeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mimeType", ID: &iMimeType, Members: &mMimeType, Type: smithy.ShapeTypeEnum})
+var sImageMetadata_fileExtension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileExtension", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sImageMetadata_lastUploadTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUploadTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInlineRedactionConfiguration_inlineRedactionPatterns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineRedactionPatterns", ID: &i_InlineRedactionPatterns, Members: &m_InlineRedactionPatterns, Type: smithy.ShapeTypeList})
+var sInlineRedactionConfiguration_globalEnforcedUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalEnforcedUrls", ID: &i_GlobalInlineRedactionUrls, Members: &m_GlobalInlineRedactionUrls, Type: smithy.ShapeTypeList})
+var sInlineRedactionConfiguration_globalExemptUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalExemptUrls", ID: &i_GlobalInlineRedactionUrls, Members: &m_GlobalInlineRedactionUrls, Type: smithy.ShapeTypeList})
+var sInlineRedactionConfiguration_globalConfidenceLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "globalConfidenceLevel", ID: &i_ConfidenceLevel, Type: smithy.ShapeTypeInteger})
+var sInlineRedactionPattern_builtInPatternId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "builtInPatternId", ID: &i_BuiltInPatternId, Traits: &t78, Type: smithy.ShapeTypeString})
+var sInlineRedactionPattern_customPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customPattern", ID: &iCustomPattern, Members: &mCustomPattern, Type: smithy.ShapeTypeStructure})
+var sInlineRedactionPattern_redactionPlaceHolder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redactionPlaceHolder", ID: &iRedactionPlaceHolder, Members: &mRedactionPlaceHolder, Type: smithy.ShapeTypeStructure})
+var sInlineRedactionPattern_enforcedUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enforcedUrls", ID: &i_InlineRedactionUrls, Members: &m_InlineRedactionUrls, Type: smithy.ShapeTypeList})
+var sInlineRedactionPattern_exemptUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exemptUrls", ID: &i_InlineRedactionUrls, Members: &m_InlineRedactionUrls, Type: smithy.ShapeTypeList})
+var sInlineRedactionPattern_confidenceLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confidenceLevel", ID: &i_ConfidenceLevel, Type: smithy.ShapeTypeInteger})
+var s_InlineRedactionPatterns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInlineRedactionPattern, Members: &mInlineRedactionPattern, Type: smithy.ShapeTypeStructure})
+var s_InlineRedactionUrls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InlineRedactionUrl, Traits: &t78, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t83, Type: smithy.ShapeTypeInteger})
+var sIpAccessSettings_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sIpAccessSettings_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sIpAccessSettings_ipRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipRules", ID: &i_IpRuleList, Members: &m_IpRuleList, Traits: &t78, Type: smithy.ShapeTypeList})
+var sIpAccessSettings_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIpAccessSettings_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIpAccessSettings_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sIpAccessSettings_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sIpAccessSettings_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var s_IpAccessSettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIpAccessSettingsSummary, Members: &mIpAccessSettingsSummary, Type: smithy.ShapeTypeStructure})
+var sIpAccessSettingsSummary_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sIpAccessSettingsSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIpAccessSettingsSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIpAccessSettingsSummary_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_IpAddressList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddress, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIpRule_ipRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipRange", ID: &i_IpRange, Traits: &t78, Type: smithy.ShapeTypeString})
+var sIpRule_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t78, Type: smithy.ShapeTypeString})
+var s_IpRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIpRule, Members: &mIpRule, Type: smithy.ShapeTypeStructure})
+var sLocale_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_EN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocale_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LocalizedBrandingStringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iLocale, Members: &mLocale, Type: smithy.ShapeTypeEnum})
+var s_LocalizedBrandingStringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iLocalizedBrandingStrings, Members: &mLocalizedBrandingStrings, Type: smithy.ShapeTypeStructure})
+var sLocalizedBrandingStrings_browserTabTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserTabTitle", ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var sLocalizedBrandingStrings_welcomeText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "welcomeText", ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var sLocalizedBrandingStrings_loginTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loginTitle", ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var sLocalizedBrandingStrings_loginDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loginDescription", ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var sLocalizedBrandingStrings_loginButtonText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loginButtonText", ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var sLocalizedBrandingStrings_contactLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactLink", ID: &i_ContactLinkUrl, Type: smithy.ShapeTypeString})
+var sLocalizedBrandingStrings_contactButtonText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactButtonText", ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var sLocalizedBrandingStrings_loadingText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loadingText", ID: &i_BrandingSafeStringType, Type: smithy.ShapeTypeString})
+var sLogConfiguration_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3LogConfiguration, Members: &mS3LogConfiguration, Type: smithy.ShapeTypeStructure})
+var sLogFileFormat_JSON_LINES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON_LINES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogFileFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMimeType_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMimeType_JPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMimeType_ICO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkSettings_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sNetworkSettings_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sNetworkSettings_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sNetworkSettings_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList})
+var sNetworkSettings_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var s_NetworkSettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkSettingsSummary, Members: &mNetworkSettingsSummary, Type: smithy.ShapeTypeStructure})
+var sNetworkSettingsSummary_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sNetworkSettingsSummary_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sPortal_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_rendererType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rendererType", ID: &i_RendererType, Type: smithy.ShapeTypeString})
+var sPortal_browserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserType", ID: &i_BrowserType, Type: smithy.ShapeTypeString})
+var sPortal_portalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalStatus", ID: &i_PortalStatus, Type: smithy.ShapeTypeString})
+var sPortal_portalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalEndpoint", ID: &i_PortalEndpoint, Type: smithy.ShapeTypeString})
+var sPortal_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sPortal_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPortal_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_StatusReason, Type: smithy.ShapeTypeString})
+var sPortal_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &i_AuthenticationType, Type: smithy.ShapeTypeString})
+var sPortal_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortal_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sPortal_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sPortal_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString})
+var sPortal_maxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConcurrentSessions", ID: &i_MaxConcurrentSessions, Type: smithy.ShapeTypeInteger})
+var sPortal_portalCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalCustomDomain", ID: &i_PortalCustomDomain, Type: smithy.ShapeTypeString})
+var s_PortalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortalSummary, Members: &mPortalSummary, Type: smithy.ShapeTypeStructure})
+var sPortalSummary_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_rendererType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rendererType", ID: &i_RendererType, Type: smithy.ShapeTypeString})
+var sPortalSummary_browserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserType", ID: &i_BrowserType, Type: smithy.ShapeTypeString})
+var sPortalSummary_portalStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalStatus", ID: &i_PortalStatus, Type: smithy.ShapeTypeString})
+var sPortalSummary_portalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalEndpoint", ID: &i_PortalEndpoint, Type: smithy.ShapeTypeString})
+var sPortalSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sPortalSummary_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPortalSummary_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &i_AuthenticationType, Type: smithy.ShapeTypeString})
+var sPortalSummary_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sPortalSummary_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString})
+var sPortalSummary_maxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConcurrentSessions", ID: &i_MaxConcurrentSessions, Type: smithy.ShapeTypeInteger})
+var sPortalSummary_portalCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalCustomDomain", ID: &i_PortalCustomDomain, Type: smithy.ShapeTypeString})
+var sRedactionPlaceHolder_redactionPlaceHolderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redactionPlaceHolderType", ID: &i_RedactionPlaceHolderType, Type: smithy.ShapeTypeString})
+var sRedactionPlaceHolder_redactionPlaceHolderText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redactionPlaceHolderText", ID: &i_RedactionPlaceHolderText, Traits: &t78, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sS3LogConfiguration_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3Bucket, Traits: &t78, Type: smithy.ShapeTypeString})
+var sS3LogConfiguration_keyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyPrefix", ID: &i_S3KeyPrefix, Traits: &t78, Type: smithy.ShapeTypeString})
+var sS3LogConfiguration_bucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketOwner", ID: &i_S3BucketOwner, Type: smithy.ShapeTypeString})
+var sS3LogConfiguration_logFileFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logFileFormat", ID: &iLogFileFormat, Members: &mLogFileFormat, Type: smithy.ShapeTypeEnum})
+var sS3LogConfiguration_folderStructure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "folderStructure", ID: &iFolderStructure, Members: &mFolderStructure, Type: smithy.ShapeTypeEnum})
+var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceType, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString})
+var sSession_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sSession_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sSession_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_Username, Traits: &t78, Type: smithy.ShapeTypeString})
+var sSession_clientIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientIpAddresses", ID: &i_IpAddressList, Members: &m_IpAddressList, Type: smithy.ShapeTypeList})
+var sSession_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var sSession_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSession_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSessionLogger_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sSessionLogger_eventFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventFilter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeUnion})
+var sSessionLogger_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sSessionLogger_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sSessionLogger_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sSessionLogger_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sSessionLogger_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sSessionLogger_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_SessionLoggerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSessionLoggerSummary, Members: &mSessionLoggerSummary, Type: smithy.ShapeTypeStructure})
+var sSessionLoggerSummary_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sSessionLoggerSummary_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sSessionLoggerSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sSessionLoggerSummary_creationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSessionSortBy_START_TIME_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TIME_ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionSortBy_START_TIME_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TIME_DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionStatus_TERMINATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionSummary_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sSessionSummary_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sSessionSummary_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_Username, Traits: &t78, Type: smithy.ShapeTypeString})
+var sSessionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSessionStatus, Members: &mSessionStatus, Type: smithy.ShapeTypeEnum})
+var sSessionSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSessionSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_SessionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSessionSummary, Members: &mSessionSummary, Type: smithy.ShapeTypeStructure})
+var s_SubnetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Traits: &t78, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t78, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Traits: &t78, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Traits: &t78, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_ServiceCode, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_QuotaCode, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t83, Type: smithy.ShapeTypeInteger})
+var sToolbarConfiguration_toolbarType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolbarType", ID: &i_ToolbarType, Type: smithy.ShapeTypeString})
+var sToolbarConfiguration_visualMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "visualMode", ID: &i_VisualMode, Type: smithy.ShapeTypeString})
+var sToolbarConfiguration_hiddenToolbarItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hiddenToolbarItems", ID: &i_HiddenToolbarItemList, Members: &m_HiddenToolbarItemList, Type: smithy.ShapeTypeList})
+var sToolbarConfiguration_maxDisplayResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxDisplayResolution", ID: &i_MaxDisplayResolution, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_TagExceptionMessage, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sTrustStore_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sTrustStore_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sTrustStoreSummary_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var s_TrustStoreSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrustStoreSummary, Members: &mTrustStoreSummary, Type: smithy.ShapeTypeStructure})
+var s_UrlPatternList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_UrlPattern, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUserAccessLoggingSettings_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUserAccessLoggingSettings_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sUserAccessLoggingSettings_kinesisStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kinesisStreamArn", ID: &i_KinesisStreamArn, Type: smithy.ShapeTypeString})
+var s_UserAccessLoggingSettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserAccessLoggingSettingsSummary, Members: &mUserAccessLoggingSettingsSummary, Type: smithy.ShapeTypeStructure})
+var sUserAccessLoggingSettingsSummary_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUserAccessLoggingSettingsSummary_kinesisStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kinesisStreamArn", ID: &i_KinesisStreamArn, Type: smithy.ShapeTypeString})
+var sUserSettings_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUserSettings_associatedPortalArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedPortalArns", ID: &i_ArnList, Members: &m_ArnList, Type: smithy.ShapeTypeList})
+var sUserSettings_copyAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettings_pasteAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pasteAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettings_downloadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettings_uploadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettings_printAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "printAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettings_disconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disconnectTimeoutInMinutes", ID: &i_DisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sUserSettings_idleDisconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleDisconnectTimeoutInMinutes", ID: &i_IdleDisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sUserSettings_cookieSynchronizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cookieSynchronizationConfiguration", ID: &iCookieSynchronizationConfiguration, Members: &mCookieSynchronizationConfiguration, Traits: &t78, Type: smithy.ShapeTypeStructure})
+var sUserSettings_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sUserSettings_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sUserSettings_deepLinkAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deepLinkAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettings_toolbarConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolbarConfiguration", ID: &iToolbarConfiguration, Members: &mToolbarConfiguration, Type: smithy.ShapeTypeStructure})
+var sUserSettings_brandingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandingConfiguration", ID: &iBrandingConfiguration, Members: &mBrandingConfiguration, Type: smithy.ShapeTypeStructure})
+var sUserSettings_webAuthnAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAuthnAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var s_UserSettingsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserSettingsSummary, Members: &mUserSettingsSummary, Type: smithy.ShapeTypeStructure})
+var sUserSettingsSummary_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUserSettingsSummary_copyAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettingsSummary_pasteAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pasteAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettingsSummary_downloadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettingsSummary_uploadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettingsSummary_printAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "printAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettingsSummary_disconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disconnectTimeoutInMinutes", ID: &i_DisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sUserSettingsSummary_idleDisconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleDisconnectTimeoutInMinutes", ID: &i_IdleDisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sUserSettingsSummary_cookieSynchronizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cookieSynchronizationConfiguration", ID: &iCookieSynchronizationConfiguration, Members: &mCookieSynchronizationConfiguration, Traits: &t78, Type: smithy.ShapeTypeStructure})
+var sUserSettingsSummary_deepLinkAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deepLinkAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUserSettingsSummary_toolbarConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolbarConfiguration", ID: &iToolbarConfiguration, Members: &mToolbarConfiguration, Type: smithy.ShapeTypeStructure})
+var sUserSettingsSummary_brandingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandingConfiguration", ID: &iBrandingConfiguration, Members: &mBrandingConfiguration, Type: smithy.ShapeTypeStructure})
+var sUserSettingsSummary_webAuthnAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAuthnAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sWallpaperImageInput_blob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blob", ID: &i_WallpaperImage, Traits: &t81, Type: smithy.ShapeTypeBlob})
+var sWallpaperImageInput_s3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Uri", ID: &i_S3Uri, Type: smithy.ShapeTypeString})
+var sWebContentFilteringPolicy_blockedCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedCategories", ID: &i_BlockedCategories, Members: &m_BlockedCategories, Type: smithy.ShapeTypeList})
+var sWebContentFilteringPolicy_allowedUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedUrls", ID: &i_UrlPatternList, Members: &m_UrlPatternList, Type: smithy.ShapeTypeList})
+var sWebContentFilteringPolicy_blockedUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "blockedUrls", ID: &i_UrlPatternList, Members: &m_UrlPatternList, Type: smithy.ShapeTypeList})
+var sAssociateBrowserSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateBrowserSettingsRequest_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Traits: &t90, Type: smithy.ShapeTypeString})
+var sAssociateBrowserSettingsResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateBrowserSettingsResponse_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateDataProtectionSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateDataProtectionSettingsRequest_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Traits: &t91, Type: smithy.ShapeTypeString})
+var sAssociateDataProtectionSettingsResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateDataProtectionSettingsResponse_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateIpAccessSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateIpAccessSettingsRequest_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Traits: &t92, Type: smithy.ShapeTypeString})
+var sAssociateIpAccessSettingsResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateIpAccessSettingsResponse_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateNetworkSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateNetworkSettingsRequest_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Traits: &t93, Type: smithy.ShapeTypeString})
+var sAssociateNetworkSettingsResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateNetworkSettingsResponse_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateSessionLoggerRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateSessionLoggerRequest_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Traits: &t94, Type: smithy.ShapeTypeString})
+var sAssociateSessionLoggerResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateSessionLoggerResponse_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateTrustStoreRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateTrustStoreRequest_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Traits: &t95, Type: smithy.ShapeTypeString})
+var sAssociateTrustStoreResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateTrustStoreResponse_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateUserAccessLoggingSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Traits: &t96, Type: smithy.ShapeTypeString})
+var sAssociateUserAccessLoggingSettingsResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateUserSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sAssociateUserSettingsRequest_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Traits: &t97, Type: smithy.ShapeTypeString})
+var sAssociateUserSettingsResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssociateUserSettingsResponse_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateBrowserSettingsRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateBrowserSettingsRequest_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sCreateBrowserSettingsRequest_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sCreateBrowserSettingsRequest_browserPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserPolicy", ID: &i_BrowserPolicy, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreateBrowserSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateBrowserSettingsRequest_webContentFilteringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webContentFilteringPolicy", ID: &iWebContentFilteringPolicy, Members: &mWebContentFilteringPolicy, Type: smithy.ShapeTypeStructure})
+var sCreateBrowserSettingsResponse_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateDataProtectionSettingsRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreateDataProtectionSettingsRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_DescriptionSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreateDataProtectionSettingsRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDataProtectionSettingsRequest_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sCreateDataProtectionSettingsRequest_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sCreateDataProtectionSettingsRequest_inlineRedactionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineRedactionConfiguration", ID: &iInlineRedactionConfiguration, Members: &mInlineRedactionConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateDataProtectionSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateDataProtectionSettingsResponse_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateIdentityProviderRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateIdentityProviderRequest_identityProviderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderName", ID: &i_IdentityProviderName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreateIdentityProviderRequest_identityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderType", ID: &i_IdentityProviderType, Type: smithy.ShapeTypeString})
+var sCreateIdentityProviderRequest_identityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderDetails", ID: &i_IdentityProviderDetails, Members: &m_IdentityProviderDetails, Traits: &t78, Type: smithy.ShapeTypeMap})
+var sCreateIdentityProviderRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateIdentityProviderRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateIdentityProviderResponse_identityProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderArn", ID: &i_SubresourceARN, Type: smithy.ShapeTypeString})
+var sCreateIpAccessSettingsRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreateIpAccessSettingsRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreateIpAccessSettingsRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateIpAccessSettingsRequest_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sCreateIpAccessSettingsRequest_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sCreateIpAccessSettingsRequest_ipRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipRules", ID: &i_IpRuleList, Members: &m_IpRuleList, Traits: &t78, Type: smithy.ShapeTypeList})
+var sCreateIpAccessSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateIpAccessSettingsResponse_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateNetworkSettingsRequest_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sCreateNetworkSettingsRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList})
+var sCreateNetworkSettingsRequest_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sCreateNetworkSettingsRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateNetworkSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateNetworkSettingsResponse_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreatePortalRequest_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sCreatePortalRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &i_AuthenticationType, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_maxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConcurrentSessions", ID: &i_MaxConcurrentSessions, Type: smithy.ShapeTypeInteger})
+var sCreatePortalRequest_portalCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalCustomDomain", ID: &i_PortalCustomDomain, Type: smithy.ShapeTypeString})
+var sCreatePortalResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreatePortalResponse_portalEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalEndpoint", ID: &i_PortalEndpoint, Type: smithy.ShapeTypeString})
+var sCreateSessionLoggerRequest_eventFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventFilter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeUnion})
+var sCreateSessionLoggerRequest_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSessionLoggerRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sCreateSessionLoggerRequest_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sCreateSessionLoggerRequest_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sCreateSessionLoggerRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateSessionLoggerRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSessionLoggerResponse_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateTrustStoreRequest_certificateList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateList", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList})
+var sCreateTrustStoreRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateTrustStoreRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateTrustStoreResponse_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateUserAccessLoggingSettingsRequest_kinesisStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kinesisStreamArn", ID: &i_KinesisStreamArn, Type: smithy.ShapeTypeString})
+var sCreateUserAccessLoggingSettingsRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateUserAccessLoggingSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_copyAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_pasteAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pasteAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_downloadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_uploadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_printAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "printAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateUserSettingsRequest_disconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disconnectTimeoutInMinutes", ID: &i_DisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sCreateUserSettingsRequest_idleDisconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleDisconnectTimeoutInMinutes", ID: &i_IdleDisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sCreateUserSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_cookieSynchronizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cookieSynchronizationConfiguration", ID: &iCookieSynchronizationConfiguration, Members: &mCookieSynchronizationConfiguration, Traits: &t78, Type: smithy.ShapeTypeStructure})
+var sCreateUserSettingsRequest_customerManagedKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerManagedKey", ID: &i_keyArn, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_additionalEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "additionalEncryptionContext", ID: &i_EncryptionContextMap, Members: &m_EncryptionContextMap, Type: smithy.ShapeTypeMap})
+var sCreateUserSettingsRequest_deepLinkAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deepLinkAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsRequest_toolbarConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolbarConfiguration", ID: &iToolbarConfiguration, Members: &mToolbarConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateUserSettingsRequest_brandingConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandingConfigurationInput", ID: &iBrandingConfigurationCreateInput, Members: &mBrandingConfigurationCreateInput, Type: smithy.ShapeTypeStructure})
+var sCreateUserSettingsRequest_webAuthnAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAuthnAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sCreateUserSettingsResponse_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDeleteBrowserSettingsRequest_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteDataProtectionSettingsRequest_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteIdentityProviderRequest_identityProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderArn", ID: &i_SubresourceARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteIpAccessSettingsRequest_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteNetworkSettingsRequest_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeletePortalRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteSessionLoggerRequest_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteTrustStoreRequest_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDeleteUserSettingsRequest_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateBrowserSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateDataProtectionSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateIpAccessSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateNetworkSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateSessionLoggerRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateTrustStoreRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateUserAccessLoggingSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sDisassociateUserSettingsRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sExpireSessionRequest_portalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalId", ID: &i_PortalId, Traits: &t89, Type: smithy.ShapeTypeString})
+var sExpireSessionRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetBrowserSettingsRequest_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetBrowserSettingsResponse_browserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettings", ID: &iBrowserSettings, Members: &mBrowserSettings, Type: smithy.ShapeTypeStructure})
+var sGetDataProtectionSettingsRequest_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetDataProtectionSettingsResponse_dataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettings", ID: &iDataProtectionSettings, Members: &mDataProtectionSettings, Type: smithy.ShapeTypeStructure})
+var sGetIdentityProviderRequest_identityProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderArn", ID: &i_SubresourceARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetIdentityProviderResponse_identityProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProvider", ID: &iIdentityProvider, Members: &mIdentityProvider, Type: smithy.ShapeTypeStructure})
+var sGetIpAccessSettingsRequest_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetIpAccessSettingsResponse_ipAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettings", ID: &iIpAccessSettings, Members: &mIpAccessSettings, Type: smithy.ShapeTypeStructure})
+var sGetNetworkSettingsRequest_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetNetworkSettingsResponse_networkSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettings", ID: &iNetworkSettings, Members: &mNetworkSettings, Type: smithy.ShapeTypeStructure})
+var sGetPortalRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetPortalResponse_portal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portal", ID: &iPortal, Members: &mPortal, Type: smithy.ShapeTypeStructure})
+var sGetPortalServiceProviderMetadataRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetPortalServiceProviderMetadataResponse_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sGetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceProviderSamlMetadata", ID: &i_SamlMetadata, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_portalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalId", ID: &i_PortalId, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetSessionLoggerRequest_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetSessionLoggerResponse_sessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLogger", ID: &iSessionLogger, Members: &mSessionLogger, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse_session = smithy.NewStaticSchema(smithy.StaticSchema{Member: "session", ID: &iSession, Members: &mSession, Type: smithy.ShapeTypeStructure})
+var sGetTrustStoreCertificateRequest_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetTrustStoreCertificateRequest_thumbprint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thumbprint", ID: &i_CertificateThumbprint, Traits: &t98, Type: smithy.ShapeTypeString})
+var sGetTrustStoreCertificateResponse_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sGetTrustStoreCertificateResponse_certificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificate", ID: &iCertificate, Members: &mCertificate, Type: smithy.ShapeTypeStructure})
+var sGetTrustStoreRequest_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetTrustStoreResponse_trustStore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStore", ID: &iTrustStore, Members: &mTrustStore, Type: smithy.ShapeTypeStructure})
+var sGetUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetUserAccessLoggingSettingsResponse_userAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettings", ID: &iUserAccessLoggingSettings, Members: &mUserAccessLoggingSettings, Type: smithy.ShapeTypeStructure})
+var sGetUserSettingsRequest_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sGetUserSettingsResponse_userSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettings", ID: &iUserSettings, Members: &mUserSettings, Type: smithy.ShapeTypeStructure})
+var sListBrowserSettingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListBrowserSettingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListBrowserSettingsResponse_browserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettings", ID: &i_BrowserSettingsList, Members: &m_BrowserSettingsList, Type: smithy.ShapeTypeList})
+var sListBrowserSettingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListDataProtectionSettingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListDataProtectionSettingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListDataProtectionSettingsResponse_dataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettings", ID: &i_DataProtectionSettingsList, Members: &m_DataProtectionSettingsList, Type: smithy.ShapeTypeList})
+var sListDataProtectionSettingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListIdentityProvidersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListIdentityProvidersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListIdentityProvidersRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sListIdentityProvidersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListIdentityProvidersResponse_identityProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviders", ID: &i_IdentityProviderList, Members: &m_IdentityProviderList, Type: smithy.ShapeTypeList})
+var sListIpAccessSettingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListIpAccessSettingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListIpAccessSettingsResponse_ipAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettings", ID: &i_IpAccessSettingsList, Members: &m_IpAccessSettingsList, Type: smithy.ShapeTypeList})
+var sListIpAccessSettingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListNetworkSettingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListNetworkSettingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListNetworkSettingsResponse_networkSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettings", ID: &i_NetworkSettingsList, Members: &m_NetworkSettingsList, Type: smithy.ShapeTypeList})
+var sListNetworkSettingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPortalsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListPortalsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListPortalsResponse_portals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portals", ID: &i_PortalList, Members: &m_PortalList, Type: smithy.ShapeTypeList})
+var sListPortalsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListSessionLoggersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListSessionLoggersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListSessionLoggersResponse_sessionLoggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggers", ID: &i_SessionLoggerList, Members: &m_SessionLoggerList, Type: smithy.ShapeTypeList})
+var sListSessionLoggersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_portalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalId", ID: &i_PortalId, Traits: &t89, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_Username, Traits: &t101, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t102, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &iSessionSortBy, Members: &mSessionSortBy, Traits: &t103, Type: smithy.ShapeTypeEnum})
+var sListSessionsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSessionStatus, Members: &mSessionStatus, Traits: &t104, Type: smithy.ShapeTypeEnum})
+var sListSessionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListSessionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListSessionsResponse_sessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessions", ID: &i_SessionSummaryList, Members: &m_SessionSummaryList, Type: smithy.ShapeTypeList})
+var sListSessionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListTrustStoreCertificatesRequest_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sListTrustStoreCertificatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListTrustStoreCertificatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListTrustStoreCertificatesResponse_certificateList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificateList", ID: &i_CertificateSummaryList, Members: &m_CertificateSummaryList, Type: smithy.ShapeTypeList})
+var sListTrustStoreCertificatesResponse_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sListTrustStoreCertificatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTrustStoresRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListTrustStoresRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListTrustStoresResponse_trustStores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStores", ID: &i_TrustStoreSummaryList, Members: &m_TrustStoreSummaryList, Type: smithy.ShapeTypeList})
+var sListTrustStoresResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListUserAccessLoggingSettingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListUserAccessLoggingSettingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListUserAccessLoggingSettingsResponse_userAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettings", ID: &i_UserAccessLoggingSettingsList, Members: &m_UserAccessLoggingSettingsList, Type: smithy.ShapeTypeList})
+var sListUserAccessLoggingSettingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListUserSettingsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t99, Type: smithy.ShapeTypeString})
+var sListUserSettingsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t100, Type: smithy.ShapeTypeInteger})
+var sListUserSettingsResponse_userSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettings", ID: &i_UserSettingsList, Members: &m_UserSettingsList, Type: smithy.ShapeTypeList})
+var sListUserSettingsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTagResourceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t105, Type: smithy.ShapeTypeList})
+var sUpdateBrowserSettingsRequest_browserSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateBrowserSettingsRequest_browserPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserPolicy", ID: &i_BrowserPolicy, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdateBrowserSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateBrowserSettingsRequest_webContentFilteringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webContentFilteringPolicy", ID: &iWebContentFilteringPolicy, Members: &mWebContentFilteringPolicy, Type: smithy.ShapeTypeStructure})
+var sUpdateBrowserSettingsResponse_browserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "browserSettings", ID: &iBrowserSettings, Members: &mBrowserSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateDataProtectionSettingsRequest_dataProtectionSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateDataProtectionSettingsRequest_inlineRedactionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineRedactionConfiguration", ID: &iInlineRedactionConfiguration, Members: &mInlineRedactionConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateDataProtectionSettingsRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdateDataProtectionSettingsRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_DescriptionSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdateDataProtectionSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateDataProtectionSettingsResponse_dataProtectionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataProtectionSettings", ID: &iDataProtectionSettings, Members: &mDataProtectionSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateIdentityProviderRequest_identityProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderArn", ID: &i_SubresourceARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateIdentityProviderRequest_identityProviderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderName", ID: &i_IdentityProviderName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdateIdentityProviderRequest_identityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderType", ID: &i_IdentityProviderType, Type: smithy.ShapeTypeString})
+var sUpdateIdentityProviderRequest_identityProviderDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProviderDetails", ID: &i_IdentityProviderDetails, Members: &m_IdentityProviderDetails, Traits: &t78, Type: smithy.ShapeTypeMap})
+var sUpdateIdentityProviderRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateIdentityProviderResponse_identityProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identityProvider", ID: &iIdentityProvider, Members: &mIdentityProvider, Type: smithy.ShapeTypeStructure})
+var sUpdateIpAccessSettingsRequest_ipAccessSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateIpAccessSettingsRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdateIpAccessSettingsRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdateIpAccessSettingsRequest_ipRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipRules", ID: &i_IpRuleList, Members: &m_IpRuleList, Traits: &t78, Type: smithy.ShapeTypeList})
+var sUpdateIpAccessSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateIpAccessSettingsResponse_ipAccessSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAccessSettings", ID: &iIpAccessSettings, Members: &mIpAccessSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkSettingsRequest_networkSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateNetworkSettingsRequest_vpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sUpdateNetworkSettingsRequest_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList})
+var sUpdateNetworkSettingsRequest_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sUpdateNetworkSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateNetworkSettingsResponse_networkSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkSettings", ID: &iNetworkSettings, Members: &mNetworkSettings, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalRequest_portalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdatePortalRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdatePortalRequest_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &i_AuthenticationType, Type: smithy.ShapeTypeString})
+var sUpdatePortalRequest_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_InstanceType, Type: smithy.ShapeTypeString})
+var sUpdatePortalRequest_maxConcurrentSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxConcurrentSessions", ID: &i_MaxConcurrentSessions, Type: smithy.ShapeTypeInteger})
+var sUpdatePortalRequest_portalCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portalCustomDomain", ID: &i_PortalCustomDomain, Type: smithy.ShapeTypeString})
+var sUpdatePortalResponse_portal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portal", ID: &iPortal, Members: &mPortal, Type: smithy.ShapeTypeStructure})
+var sUpdateSessionLoggerRequest_sessionLoggerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLoggerArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateSessionLoggerRequest_eventFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventFilter", ID: &iEventFilter, Members: &mEventFilter, Type: smithy.ShapeTypeUnion})
+var sUpdateSessionLoggerRequest_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSessionLoggerRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayNameSafe, Traits: &t78, Type: smithy.ShapeTypeString})
+var sUpdateSessionLoggerResponse_sessionLogger = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionLogger", ID: &iSessionLogger, Members: &mSessionLogger, Type: smithy.ShapeTypeStructure})
+var sUpdateTrustStoreRequest_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateTrustStoreRequest_certificatesToAdd = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificatesToAdd", ID: &i_CertificateList, Members: &m_CertificateList, Type: smithy.ShapeTypeList})
+var sUpdateTrustStoreRequest_certificatesToDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "certificatesToDelete", ID: &i_CertificateThumbprintList, Members: &m_CertificateThumbprintList, Type: smithy.ShapeTypeList})
+var sUpdateTrustStoreRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateTrustStoreResponse_trustStoreArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "trustStoreArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUpdateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateUserAccessLoggingSettingsRequest_kinesisStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kinesisStreamArn", ID: &i_KinesisStreamArn, Type: smithy.ShapeTypeString})
+var sUpdateUserAccessLoggingSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateUserAccessLoggingSettingsResponse_userAccessLoggingSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userAccessLoggingSettings", ID: &iUserAccessLoggingSettings, Members: &mUserAccessLoggingSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsRequest_userSettingsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettingsArn", ID: &i_ARN, Traits: &t89, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_copyAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_pasteAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pasteAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_downloadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_uploadAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uploadAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_printAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "printAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_disconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disconnectTimeoutInMinutes", ID: &i_DisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sUpdateUserSettingsRequest_idleDisconnectTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleDisconnectTimeoutInMinutes", ID: &i_IdleDisconnectTimeoutInMinutes, Type: smithy.ShapeTypeInteger})
+var sUpdateUserSettingsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_cookieSynchronizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cookieSynchronizationConfiguration", ID: &iCookieSynchronizationConfiguration, Members: &mCookieSynchronizationConfiguration, Traits: &t78, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsRequest_deepLinkAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deepLinkAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_toolbarConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolbarConfiguration", ID: &iToolbarConfiguration, Members: &mToolbarConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsRequest_brandingConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "brandingConfigurationInput", ID: &iBrandingConfigurationUpdateInput, Members: &mBrandingConfigurationUpdateInput, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsRequest_webAuthnAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "webAuthnAllowed", ID: &i_EnabledType, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsResponse_userSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userSettings", ID: &iUserSettings, Members: &mUserSettings, Type: smithy.ShapeTypeStructure})
+
+var AssociateBrowserSettings = &sAssociateBrowserSettings
+
+var AssociateDataProtectionSettings = &sAssociateDataProtectionSettings
+
+var AssociateIpAccessSettings = &sAssociateIpAccessSettings
+
+var AssociateNetworkSettings = &sAssociateNetworkSettings
+
+var AssociateSessionLogger = &sAssociateSessionLogger
+
+var AssociateTrustStore = &sAssociateTrustStore
+
+var AssociateUserAccessLoggingSettings = &sAssociateUserAccessLoggingSettings
+
+var AssociateUserSettings = &sAssociateUserSettings
+
+var CreateBrowserSettings = &sCreateBrowserSettings
+
+var CreateDataProtectionSettings = &sCreateDataProtectionSettings
+
+var CreateIdentityProvider = &sCreateIdentityProvider
+
+var CreateIpAccessSettings = &sCreateIpAccessSettings
+
+var CreateNetworkSettings = &sCreateNetworkSettings
+
+var CreatePortal = &sCreatePortal
+
+var CreateSessionLogger = &sCreateSessionLogger
+
+var CreateTrustStore = &sCreateTrustStore
+
+var CreateUserAccessLoggingSettings = &sCreateUserAccessLoggingSettings
+
+var CreateUserSettings = &sCreateUserSettings
+
+var DeleteBrowserSettings = &sDeleteBrowserSettings
+
+var DeleteDataProtectionSettings = &sDeleteDataProtectionSettings
+
+var DeleteIdentityProvider = &sDeleteIdentityProvider
+
+var DeleteIpAccessSettings = &sDeleteIpAccessSettings
+
+var DeleteNetworkSettings = &sDeleteNetworkSettings
+
+var DeletePortal = &sDeletePortal
+
+var DeleteSessionLogger = &sDeleteSessionLogger
+
+var DeleteTrustStore = &sDeleteTrustStore
+
+var DeleteUserAccessLoggingSettings = &sDeleteUserAccessLoggingSettings
+
+var DeleteUserSettings = &sDeleteUserSettings
+
+var DisassociateBrowserSettings = &sDisassociateBrowserSettings
+
+var DisassociateDataProtectionSettings = &sDisassociateDataProtectionSettings
+
+var DisassociateIpAccessSettings = &sDisassociateIpAccessSettings
+
+var DisassociateNetworkSettings = &sDisassociateNetworkSettings
+
+var DisassociateSessionLogger = &sDisassociateSessionLogger
+
+var DisassociateTrustStore = &sDisassociateTrustStore
+
+var DisassociateUserAccessLoggingSettings = &sDisassociateUserAccessLoggingSettings
+
+var DisassociateUserSettings = &sDisassociateUserSettings
+
+var ExpireSession = &sExpireSession
+
+var GetBrowserSettings = &sGetBrowserSettings
+
+var GetDataProtectionSettings = &sGetDataProtectionSettings
+
+var GetIdentityProvider = &sGetIdentityProvider
+
+var GetIpAccessSettings = &sGetIpAccessSettings
+
+var GetNetworkSettings = &sGetNetworkSettings
+
+var GetPortal = &sGetPortal
+
+var GetPortalServiceProviderMetadata = &sGetPortalServiceProviderMetadata
+
+var GetSession = &sGetSession
+
+var GetSessionLogger = &sGetSessionLogger
+
+var GetTrustStore = &sGetTrustStore
+
+var GetTrustStoreCertificate = &sGetTrustStoreCertificate
+
+var GetUserAccessLoggingSettings = &sGetUserAccessLoggingSettings
+
+var GetUserSettings = &sGetUserSettings
+
+var ListBrowserSettings = &sListBrowserSettings
+
+var ListDataProtectionSettings = &sListDataProtectionSettings
+
+var ListIdentityProviders = &sListIdentityProviders
+
+var ListIpAccessSettings = &sListIpAccessSettings
+
+var ListNetworkSettings = &sListNetworkSettings
+
+var ListPortals = &sListPortals
+
+var ListSessionLoggers = &sListSessionLoggers
+
+var ListSessions = &sListSessions
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTrustStoreCertificates = &sListTrustStoreCertificates
+
+var ListTrustStores = &sListTrustStores
+
+var ListUserAccessLoggingSettings = &sListUserAccessLoggingSettings
+
+var ListUserSettings = &sListUserSettings
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateBrowserSettings = &sUpdateBrowserSettings
+
+var UpdateDataProtectionSettings = &sUpdateDataProtectionSettings
+
+var UpdateIdentityProvider = &sUpdateIdentityProvider
+
+var UpdateIpAccessSettings = &sUpdateIpAccessSettings
+
+var UpdateNetworkSettings = &sUpdateNetworkSettings
+
+var UpdatePortal = &sUpdatePortal
+
+var UpdateSessionLogger = &sUpdateSessionLogger
+
+var UpdateTrustStore = &sUpdateTrustStore
+
+var UpdateUserAccessLoggingSettings = &sUpdateUserAccessLoggingSettings
+
+var UpdateUserSettings = &sUpdateUserSettings
+
+var _AWSErmineControlPlaneService = &s_AWSErmineControlPlaneService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _ARN = &s_ARN
+
+var _ArnList = &s_ArnList
+var _ArnList_member = &s_ArnList_member
+
+var _AuthenticationType = &s_AuthenticationType
+
+var _BlockedCategories = &s_BlockedCategories
+var _BlockedCategories_member = &s_BlockedCategories_member
+
+var BrandingConfiguration = &sBrandingConfiguration
+var BrandingConfiguration_logo = &sBrandingConfiguration_logo
+var BrandingConfiguration_wallpaper = &sBrandingConfiguration_wallpaper
+var BrandingConfiguration_favicon = &sBrandingConfiguration_favicon
+var BrandingConfiguration_localizedStrings = &sBrandingConfiguration_localizedStrings
+var BrandingConfiguration_colorTheme = &sBrandingConfiguration_colorTheme
+var BrandingConfiguration_termsOfService = &sBrandingConfiguration_termsOfService
+
+var BrandingConfigurationCreateInput = &sBrandingConfigurationCreateInput
+var BrandingConfigurationCreateInput_logo = &sBrandingConfigurationCreateInput_logo
+var BrandingConfigurationCreateInput_wallpaper = &sBrandingConfigurationCreateInput_wallpaper
+var BrandingConfigurationCreateInput_favicon = &sBrandingConfigurationCreateInput_favicon
+var BrandingConfigurationCreateInput_localizedStrings = &sBrandingConfigurationCreateInput_localizedStrings
+var BrandingConfigurationCreateInput_colorTheme = &sBrandingConfigurationCreateInput_colorTheme
+var BrandingConfigurationCreateInput_termsOfService = &sBrandingConfigurationCreateInput_termsOfService
+
+var BrandingConfigurationUpdateInput = &sBrandingConfigurationUpdateInput
+var BrandingConfigurationUpdateInput_logo = &sBrandingConfigurationUpdateInput_logo
+var BrandingConfigurationUpdateInput_wallpaper = &sBrandingConfigurationUpdateInput_wallpaper
+var BrandingConfigurationUpdateInput_favicon = &sBrandingConfigurationUpdateInput_favicon
+var BrandingConfigurationUpdateInput_localizedStrings = &sBrandingConfigurationUpdateInput_localizedStrings
+var BrandingConfigurationUpdateInput_colorTheme = &sBrandingConfigurationUpdateInput_colorTheme
+var BrandingConfigurationUpdateInput_termsOfService = &sBrandingConfigurationUpdateInput_termsOfService
+
+var _BrandingSafeStringType = &s_BrandingSafeStringType
+
+var _BrowserPolicy = &s_BrowserPolicy
+
+var BrowserSettings = &sBrowserSettings
+var BrowserSettings_browserSettingsArn = &sBrowserSettings_browserSettingsArn
+var BrowserSettings_associatedPortalArns = &sBrowserSettings_associatedPortalArns
+var BrowserSettings_browserPolicy = &sBrowserSettings_browserPolicy
+var BrowserSettings_customerManagedKey = &sBrowserSettings_customerManagedKey
+var BrowserSettings_additionalEncryptionContext = &sBrowserSettings_additionalEncryptionContext
+var BrowserSettings_webContentFilteringPolicy = &sBrowserSettings_webContentFilteringPolicy
+
+var _BrowserSettingsList = &s_BrowserSettingsList
+var _BrowserSettingsList_member = &s_BrowserSettingsList_member
+
+var BrowserSettingsSummary = &sBrowserSettingsSummary
+var BrowserSettingsSummary_browserSettingsArn = &sBrowserSettingsSummary_browserSettingsArn
+
+var _BrowserType = &s_BrowserType
+
+var _BuiltInPatternId = &s_BuiltInPatternId
+
+var Category = &sCategory
+var Category_CULTS = &sCategory_CULTS
+var Category_GAMBLING = &sCategory_GAMBLING
+var Category_NUDITY = &sCategory_NUDITY
+var Category_PORNOGRAPHY = &sCategory_PORNOGRAPHY
+var Category_SEX_EDUCATION = &sCategory_SEX_EDUCATION
+var Category_TASTELESS = &sCategory_TASTELESS
+var Category_VIOLENCE = &sCategory_VIOLENCE
+var Category_DOWNLOAD_SITES = &sCategory_DOWNLOAD_SITES
+var Category_IMAGE_SHARING = &sCategory_IMAGE_SHARING
+var Category_PEER_TO_PEER = &sCategory_PEER_TO_PEER
+var Category_STREAMING_MEDIA_AND_DOWNLOADS = &sCategory_STREAMING_MEDIA_AND_DOWNLOADS
+var Category_GENERATIVE_AI = &sCategory_GENERATIVE_AI
+var Category_CRIMINAL_ACTIVITY = &sCategory_CRIMINAL_ACTIVITY
+var Category_HACKING = &sCategory_HACKING
+var Category_HATE_AND_INTOLERANCE = &sCategory_HATE_AND_INTOLERANCE
+var Category_ILLEGAL_DRUG = &sCategory_ILLEGAL_DRUG
+var Category_ILLEGAL_SOFTWARE = &sCategory_ILLEGAL_SOFTWARE
+var Category_SCHOOL_CHEATING = &sCategory_SCHOOL_CHEATING
+var Category_SELF_HARM = &sCategory_SELF_HARM
+var Category_WEAPONS = &sCategory_WEAPONS
+var Category_CHAT = &sCategory_CHAT
+var Category_GAMES = &sCategory_GAMES
+var Category_INSTANT_MESSAGING = &sCategory_INSTANT_MESSAGING
+var Category_PROFESSIONAL_NETWORK = &sCategory_PROFESSIONAL_NETWORK
+var Category_SOCIAL_NETWORKING = &sCategory_SOCIAL_NETWORKING
+var Category_WEB_BASED_EMAIL = &sCategory_WEB_BASED_EMAIL
+var Category_PARKED_DOMAINS = &sCategory_PARKED_DOMAINS
+
+var Certificate = &sCertificate
+var Certificate_thumbprint = &sCertificate_thumbprint
+var Certificate_subject = &sCertificate_subject
+var Certificate_issuer = &sCertificate_issuer
+var Certificate_notValidBefore = &sCertificate_notValidBefore
+var Certificate_notValidAfter = &sCertificate_notValidAfter
+var Certificate_body = &sCertificate_body
+
+var _CertificateAuthorityBody = &s_CertificateAuthorityBody
+
+var _CertificateList = &s_CertificateList
+var _CertificateList_member = &s_CertificateList_member
+
+var _CertificatePrincipal = &s_CertificatePrincipal
+
+var CertificateSummary = &sCertificateSummary
+var CertificateSummary_thumbprint = &sCertificateSummary_thumbprint
+var CertificateSummary_subject = &sCertificateSummary_subject
+var CertificateSummary_issuer = &sCertificateSummary_issuer
+var CertificateSummary_notValidBefore = &sCertificateSummary_notValidBefore
+var CertificateSummary_notValidAfter = &sCertificateSummary_notValidAfter
+
+var _CertificateSummaryList = &s_CertificateSummaryList
+var _CertificateSummaryList_member = &s_CertificateSummaryList_member
+
+var _CertificateThumbprint = &s_CertificateThumbprint
+
+var _CertificateThumbprintList = &s_CertificateThumbprintList
+var _CertificateThumbprintList_member = &s_CertificateThumbprintList_member
+
+var _ClientToken = &s_ClientToken
+
+var ColorTheme = &sColorTheme
+var ColorTheme_LIGHT = &sColorTheme_LIGHT
+var ColorTheme_DARK = &sColorTheme_DARK
+
+var _ConfidenceLevel = &s_ConfidenceLevel
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _ContactLinkUrl = &s_ContactLinkUrl
+
+var _CookieDomain = &s_CookieDomain
+
+var _CookieName = &s_CookieName
+
+var _CookiePath = &s_CookiePath
+
+var CookieSpecification = &sCookieSpecification
+var CookieSpecification_domain = &sCookieSpecification_domain
+var CookieSpecification_name = &sCookieSpecification_name
+var CookieSpecification_path = &sCookieSpecification_path
+
+var _CookieSpecifications = &s_CookieSpecifications
+var _CookieSpecifications_member = &s_CookieSpecifications_member
+
+var CookieSynchronizationConfiguration = &sCookieSynchronizationConfiguration
+var CookieSynchronizationConfiguration_allowlist = &sCookieSynchronizationConfiguration_allowlist
+var CookieSynchronizationConfiguration_blocklist = &sCookieSynchronizationConfiguration_blocklist
+
+var CustomPattern = &sCustomPattern
+var CustomPattern_patternName = &sCustomPattern_patternName
+var CustomPattern_patternRegex = &sCustomPattern_patternRegex
+var CustomPattern_patternDescription = &sCustomPattern_patternDescription
+var CustomPattern_keywordRegex = &sCustomPattern_keywordRegex
+
+var DataProtectionSettings = &sDataProtectionSettings
+var DataProtectionSettings_dataProtectionSettingsArn = &sDataProtectionSettings_dataProtectionSettingsArn
+var DataProtectionSettings_inlineRedactionConfiguration = &sDataProtectionSettings_inlineRedactionConfiguration
+var DataProtectionSettings_associatedPortalArns = &sDataProtectionSettings_associatedPortalArns
+var DataProtectionSettings_displayName = &sDataProtectionSettings_displayName
+var DataProtectionSettings_description = &sDataProtectionSettings_description
+var DataProtectionSettings_creationDate = &sDataProtectionSettings_creationDate
+var DataProtectionSettings_customerManagedKey = &sDataProtectionSettings_customerManagedKey
+var DataProtectionSettings_additionalEncryptionContext = &sDataProtectionSettings_additionalEncryptionContext
+
+var _DataProtectionSettingsList = &s_DataProtectionSettingsList
+var _DataProtectionSettingsList_member = &s_DataProtectionSettingsList_member
+
+var DataProtectionSettingsSummary = &sDataProtectionSettingsSummary
+var DataProtectionSettingsSummary_dataProtectionSettingsArn = &sDataProtectionSettingsSummary_dataProtectionSettingsArn
+var DataProtectionSettingsSummary_displayName = &sDataProtectionSettingsSummary_displayName
+var DataProtectionSettingsSummary_description = &sDataProtectionSettingsSummary_description
+var DataProtectionSettingsSummary_creationDate = &sDataProtectionSettingsSummary_creationDate
+
+var _Description = &s_Description
+
+var _DescriptionSafe = &s_DescriptionSafe
+
+var _DisconnectTimeoutInMinutes = &s_DisconnectTimeoutInMinutes
+
+var _DisplayName = &s_DisplayName
+
+var _DisplayNameSafe = &s_DisplayNameSafe
+
+var _EnabledType = &s_EnabledType
+
+var _EncryptionContextMap = &s_EncryptionContextMap
+var _EncryptionContextMap_key = &s_EncryptionContextMap_key
+var _EncryptionContextMap_value = &s_EncryptionContextMap_value
+
+var Event = &sEvent
+var Event_WEBSITE_INTERACT = &sEvent_WEBSITE_INTERACT
+var Event_FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK = &sEvent_FILE_DOWNLOAD_FROM_SECURE_BROWSER_TO_REMOTE_DISK
+var Event_FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK = &sEvent_FILE_TRANSFER_FROM_REMOTE_TO_LOCAL_DISK
+var Event_FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK = &sEvent_FILE_TRANSFER_FROM_LOCAL_TO_REMOTE_DISK
+var Event_FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER = &sEvent_FILE_UPLOAD_FROM_REMOTE_DISK_TO_SECURE_BROWSER
+var Event_CONTENT_PASTE_TO_WEBSITE = &sEvent_CONTENT_PASTE_TO_WEBSITE
+var Event_CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD = &sEvent_CONTENT_TRANSFER_FROM_LOCAL_TO_REMOTE_CLIPBOARD
+var Event_CONTENT_COPY_FROM_WEBSITE = &sEvent_CONTENT_COPY_FROM_WEBSITE
+var Event_URL_LOAD = &sEvent_URL_LOAD
+var Event_TAB_OPEN = &sEvent_TAB_OPEN
+var Event_TAB_CLOSE = &sEvent_TAB_CLOSE
+var Event_PRINT_JOB_SUBMIT = &sEvent_PRINT_JOB_SUBMIT
+var Event_SESSION_CONNECT = &sEvent_SESSION_CONNECT
+var Event_SESSION_START = &sEvent_SESSION_START
+var Event_SESSION_DISCONNECT = &sEvent_SESSION_DISCONNECT
+var Event_SESSION_END = &sEvent_SESSION_END
+var Event_URL_BLOCK_BY_CONTENT_FILTER = &sEvent_URL_BLOCK_BY_CONTENT_FILTER
+
+var EventFilter = &sEventFilter
+var EventFilter_all = &sEventFilter_all
+var EventFilter_include = &sEventFilter_include
+
+var _Events = &s_Events
+var _Events_member = &s_Events_member
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _FieldName = &s_FieldName
+
+var FolderStructure = &sFolderStructure
+var FolderStructure_FLAT = &sFolderStructure_FLAT
+var FolderStructure_NESTED_BY_DATE = &sFolderStructure_NESTED_BY_DATE
+
+var _GlobalInlineRedactionUrls = &s_GlobalInlineRedactionUrls
+var _GlobalInlineRedactionUrls_member = &s_GlobalInlineRedactionUrls_member
+
+var _HiddenToolbarItemList = &s_HiddenToolbarItemList
+var _HiddenToolbarItemList_member = &s_HiddenToolbarItemList_member
+
+var _IconImage = &s_IconImage
+
+var IconImageInput = &sIconImageInput
+var IconImageInput_blob = &sIconImageInput_blob
+var IconImageInput_s3Uri = &sIconImageInput_s3Uri
+
+var IdentityProvider = &sIdentityProvider
+var IdentityProvider_identityProviderArn = &sIdentityProvider_identityProviderArn
+var IdentityProvider_identityProviderName = &sIdentityProvider_identityProviderName
+var IdentityProvider_identityProviderType = &sIdentityProvider_identityProviderType
+var IdentityProvider_identityProviderDetails = &sIdentityProvider_identityProviderDetails
+
+var _IdentityProviderDetails = &s_IdentityProviderDetails
+var _IdentityProviderDetails_key = &s_IdentityProviderDetails_key
+var _IdentityProviderDetails_value = &s_IdentityProviderDetails_value
+
+var _IdentityProviderList = &s_IdentityProviderList
+var _IdentityProviderList_member = &s_IdentityProviderList_member
+
+var _IdentityProviderName = &s_IdentityProviderName
+
+var IdentityProviderSummary = &sIdentityProviderSummary
+var IdentityProviderSummary_identityProviderArn = &sIdentityProviderSummary_identityProviderArn
+var IdentityProviderSummary_identityProviderName = &sIdentityProviderSummary_identityProviderName
+var IdentityProviderSummary_identityProviderType = &sIdentityProviderSummary_identityProviderType
+
+var _IdentityProviderType = &s_IdentityProviderType
+
+var _IdleDisconnectTimeoutInMinutes = &s_IdleDisconnectTimeoutInMinutes
+
+var ImageMetadata = &sImageMetadata
+var ImageMetadata_mimeType = &sImageMetadata_mimeType
+var ImageMetadata_fileExtension = &sImageMetadata_fileExtension
+var ImageMetadata_lastUploadTimestamp = &sImageMetadata_lastUploadTimestamp
+
+var InlineRedactionConfiguration = &sInlineRedactionConfiguration
+var InlineRedactionConfiguration_inlineRedactionPatterns = &sInlineRedactionConfiguration_inlineRedactionPatterns
+var InlineRedactionConfiguration_globalEnforcedUrls = &sInlineRedactionConfiguration_globalEnforcedUrls
+var InlineRedactionConfiguration_globalExemptUrls = &sInlineRedactionConfiguration_globalExemptUrls
+var InlineRedactionConfiguration_globalConfidenceLevel = &sInlineRedactionConfiguration_globalConfidenceLevel
+
+var InlineRedactionPattern = &sInlineRedactionPattern
+var InlineRedactionPattern_builtInPatternId = &sInlineRedactionPattern_builtInPatternId
+var InlineRedactionPattern_customPattern = &sInlineRedactionPattern_customPattern
+var InlineRedactionPattern_redactionPlaceHolder = &sInlineRedactionPattern_redactionPlaceHolder
+var InlineRedactionPattern_enforcedUrls = &sInlineRedactionPattern_enforcedUrls
+var InlineRedactionPattern_exemptUrls = &sInlineRedactionPattern_exemptUrls
+var InlineRedactionPattern_confidenceLevel = &sInlineRedactionPattern_confidenceLevel
+
+var _InlineRedactionPatterns = &s_InlineRedactionPatterns
+var _InlineRedactionPatterns_member = &s_InlineRedactionPatterns_member
+
+var _InlineRedactionUrl = &s_InlineRedactionUrl
+
+var _InlineRedactionUrls = &s_InlineRedactionUrls
+var _InlineRedactionUrls_member = &s_InlineRedactionUrls_member
+
+var _InstanceType = &s_InstanceType
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var IpAccessSettings = &sIpAccessSettings
+var IpAccessSettings_ipAccessSettingsArn = &sIpAccessSettings_ipAccessSettingsArn
+var IpAccessSettings_associatedPortalArns = &sIpAccessSettings_associatedPortalArns
+var IpAccessSettings_ipRules = &sIpAccessSettings_ipRules
+var IpAccessSettings_displayName = &sIpAccessSettings_displayName
+var IpAccessSettings_description = &sIpAccessSettings_description
+var IpAccessSettings_creationDate = &sIpAccessSettings_creationDate
+var IpAccessSettings_customerManagedKey = &sIpAccessSettings_customerManagedKey
+var IpAccessSettings_additionalEncryptionContext = &sIpAccessSettings_additionalEncryptionContext
+
+var _IpAccessSettingsList = &s_IpAccessSettingsList
+var _IpAccessSettingsList_member = &s_IpAccessSettingsList_member
+
+var IpAccessSettingsSummary = &sIpAccessSettingsSummary
+var IpAccessSettingsSummary_ipAccessSettingsArn = &sIpAccessSettingsSummary_ipAccessSettingsArn
+var IpAccessSettingsSummary_displayName = &sIpAccessSettingsSummary_displayName
+var IpAccessSettingsSummary_description = &sIpAccessSettingsSummary_description
+var IpAccessSettingsSummary_creationDate = &sIpAccessSettingsSummary_creationDate
+
+var _IpAddress = &s_IpAddress
+
+var _IpAddressList = &s_IpAddressList
+var _IpAddressList_member = &s_IpAddressList_member
+
+var _IpRange = &s_IpRange
+
+var IpRule = &sIpRule
+var IpRule_ipRange = &sIpRule_ipRange
+var IpRule_description = &sIpRule_description
+
+var _IpRuleList = &s_IpRuleList
+var _IpRuleList_member = &s_IpRuleList_member
+
+var _keyArn = &s_keyArn
+
+var _KinesisStreamArn = &s_KinesisStreamArn
+
+var Locale = &sLocale
+var Locale_DE = &sLocale_DE
+var Locale_EN = &sLocale_EN
+var Locale_ES = &sLocale_ES
+var Locale_FR = &sLocale_FR
+var Locale_ID = &sLocale_ID
+var Locale_IT = &sLocale_IT
+var Locale_JP = &sLocale_JP
+var Locale_KR = &sLocale_KR
+var Locale_BR = &sLocale_BR
+var Locale_CN = &sLocale_CN
+var Locale_TW = &sLocale_TW
+
+var _LocalizedBrandingStringMap = &s_LocalizedBrandingStringMap
+var _LocalizedBrandingStringMap_key = &s_LocalizedBrandingStringMap_key
+var _LocalizedBrandingStringMap_value = &s_LocalizedBrandingStringMap_value
+
+var LocalizedBrandingStrings = &sLocalizedBrandingStrings
+var LocalizedBrandingStrings_browserTabTitle = &sLocalizedBrandingStrings_browserTabTitle
+var LocalizedBrandingStrings_welcomeText = &sLocalizedBrandingStrings_welcomeText
+var LocalizedBrandingStrings_loginTitle = &sLocalizedBrandingStrings_loginTitle
+var LocalizedBrandingStrings_loginDescription = &sLocalizedBrandingStrings_loginDescription
+var LocalizedBrandingStrings_loginButtonText = &sLocalizedBrandingStrings_loginButtonText
+var LocalizedBrandingStrings_contactLink = &sLocalizedBrandingStrings_contactLink
+var LocalizedBrandingStrings_contactButtonText = &sLocalizedBrandingStrings_contactButtonText
+var LocalizedBrandingStrings_loadingText = &sLocalizedBrandingStrings_loadingText
+
+var LogConfiguration = &sLogConfiguration
+var LogConfiguration_s3 = &sLogConfiguration_s3
+
+var LogFileFormat = &sLogFileFormat
+var LogFileFormat_JSON_LINES = &sLogFileFormat_JSON_LINES
+var LogFileFormat_JSON = &sLogFileFormat_JSON
+
+var _Markdown = &s_Markdown
+
+var _MaxConcurrentSessions = &s_MaxConcurrentSessions
+
+var _MaxDisplayResolution = &s_MaxDisplayResolution
+
+var _MaxResults = &s_MaxResults
+
+var MimeType = &sMimeType
+var MimeType_PNG = &sMimeType_PNG
+var MimeType_JPEG = &sMimeType_JPEG
+var MimeType_ICO = &sMimeType_ICO
+
+var NetworkSettings = &sNetworkSettings
+var NetworkSettings_networkSettingsArn = &sNetworkSettings_networkSettingsArn
+var NetworkSettings_associatedPortalArns = &sNetworkSettings_associatedPortalArns
+var NetworkSettings_vpcId = &sNetworkSettings_vpcId
+var NetworkSettings_subnetIds = &sNetworkSettings_subnetIds
+var NetworkSettings_securityGroupIds = &sNetworkSettings_securityGroupIds
+
+var _NetworkSettingsList = &s_NetworkSettingsList
+var _NetworkSettingsList_member = &s_NetworkSettingsList_member
+
+var NetworkSettingsSummary = &sNetworkSettingsSummary
+var NetworkSettingsSummary_networkSettingsArn = &sNetworkSettingsSummary_networkSettingsArn
+var NetworkSettingsSummary_vpcId = &sNetworkSettingsSummary_vpcId
+
+var _PaginationToken = &s_PaginationToken
+
+var _PatternName = &s_PatternName
+
+var Portal = &sPortal
+var Portal_portalArn = &sPortal_portalArn
+var Portal_rendererType = &sPortal_rendererType
+var Portal_browserType = &sPortal_browserType
+var Portal_portalStatus = &sPortal_portalStatus
+var Portal_portalEndpoint = &sPortal_portalEndpoint
+var Portal_displayName = &sPortal_displayName
+var Portal_creationDate = &sPortal_creationDate
+var Portal_browserSettingsArn = &sPortal_browserSettingsArn
+var Portal_dataProtectionSettingsArn = &sPortal_dataProtectionSettingsArn
+var Portal_userSettingsArn = &sPortal_userSettingsArn
+var Portal_networkSettingsArn = &sPortal_networkSettingsArn
+var Portal_sessionLoggerArn = &sPortal_sessionLoggerArn
+var Portal_trustStoreArn = &sPortal_trustStoreArn
+var Portal_statusReason = &sPortal_statusReason
+var Portal_userAccessLoggingSettingsArn = &sPortal_userAccessLoggingSettingsArn
+var Portal_authenticationType = &sPortal_authenticationType
+var Portal_ipAccessSettingsArn = &sPortal_ipAccessSettingsArn
+var Portal_customerManagedKey = &sPortal_customerManagedKey
+var Portal_additionalEncryptionContext = &sPortal_additionalEncryptionContext
+var Portal_instanceType = &sPortal_instanceType
+var Portal_maxConcurrentSessions = &sPortal_maxConcurrentSessions
+var Portal_portalCustomDomain = &sPortal_portalCustomDomain
+
+var _PortalCustomDomain = &s_PortalCustomDomain
+
+var _PortalEndpoint = &s_PortalEndpoint
+
+var _PortalId = &s_PortalId
+
+var _PortalList = &s_PortalList
+var _PortalList_member = &s_PortalList_member
+
+var _PortalStatus = &s_PortalStatus
+
+var PortalSummary = &sPortalSummary
+var PortalSummary_portalArn = &sPortalSummary_portalArn
+var PortalSummary_rendererType = &sPortalSummary_rendererType
+var PortalSummary_browserType = &sPortalSummary_browserType
+var PortalSummary_portalStatus = &sPortalSummary_portalStatus
+var PortalSummary_portalEndpoint = &sPortalSummary_portalEndpoint
+var PortalSummary_displayName = &sPortalSummary_displayName
+var PortalSummary_creationDate = &sPortalSummary_creationDate
+var PortalSummary_browserSettingsArn = &sPortalSummary_browserSettingsArn
+var PortalSummary_dataProtectionSettingsArn = &sPortalSummary_dataProtectionSettingsArn
+var PortalSummary_userSettingsArn = &sPortalSummary_userSettingsArn
+var PortalSummary_networkSettingsArn = &sPortalSummary_networkSettingsArn
+var PortalSummary_sessionLoggerArn = &sPortalSummary_sessionLoggerArn
+var PortalSummary_trustStoreArn = &sPortalSummary_trustStoreArn
+var PortalSummary_userAccessLoggingSettingsArn = &sPortalSummary_userAccessLoggingSettingsArn
+var PortalSummary_authenticationType = &sPortalSummary_authenticationType
+var PortalSummary_ipAccessSettingsArn = &sPortalSummary_ipAccessSettingsArn
+var PortalSummary_instanceType = &sPortalSummary_instanceType
+var PortalSummary_maxConcurrentSessions = &sPortalSummary_maxConcurrentSessions
+var PortalSummary_portalCustomDomain = &sPortalSummary_portalCustomDomain
+
+var _QuotaCode = &s_QuotaCode
+
+var RedactionPlaceHolder = &sRedactionPlaceHolder
+var RedactionPlaceHolder_redactionPlaceHolderType = &sRedactionPlaceHolder_redactionPlaceHolderType
+var RedactionPlaceHolder_redactionPlaceHolderText = &sRedactionPlaceHolder_redactionPlaceHolderText
+
+var _RedactionPlaceHolderText = &s_RedactionPlaceHolderText
+
+var _RedactionPlaceHolderType = &s_RedactionPlaceHolderType
+
+var _Regex = &s_Regex
+
+var _RendererType = &s_RendererType
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _ResourceType = &s_ResourceType
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3BucketOwner = &s_S3BucketOwner
+
+var _S3KeyPrefix = &s_S3KeyPrefix
+
+var S3LogConfiguration = &sS3LogConfiguration
+var S3LogConfiguration_bucket = &sS3LogConfiguration_bucket
+var S3LogConfiguration_keyPrefix = &sS3LogConfiguration_keyPrefix
+var S3LogConfiguration_bucketOwner = &sS3LogConfiguration_bucketOwner
+var S3LogConfiguration_logFileFormat = &sS3LogConfiguration_logFileFormat
+var S3LogConfiguration_folderStructure = &sS3LogConfiguration_folderStructure
+
+var _S3Uri = &s_S3Uri
+
+var _SamlMetadata = &s_SamlMetadata
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIdList = &s_SecurityGroupIdList
+var _SecurityGroupIdList_member = &s_SecurityGroupIdList_member
+
+var _ServiceCode = &s_ServiceCode
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var Session = &sSession
+var Session_portalArn = &sSession_portalArn
+var Session_sessionId = &sSession_sessionId
+var Session_username = &sSession_username
+var Session_clientIpAddresses = &sSession_clientIpAddresses
+var Session_status = &sSession_status
+var Session_startTime = &sSession_startTime
+var Session_endTime = &sSession_endTime
+
+var _SessionId = &s_SessionId
+
+var SessionLogger = &sSessionLogger
+var SessionLogger_sessionLoggerArn = &sSessionLogger_sessionLoggerArn
+var SessionLogger_eventFilter = &sSessionLogger_eventFilter
+var SessionLogger_logConfiguration = &sSessionLogger_logConfiguration
+var SessionLogger_customerManagedKey = &sSessionLogger_customerManagedKey
+var SessionLogger_additionalEncryptionContext = &sSessionLogger_additionalEncryptionContext
+var SessionLogger_associatedPortalArns = &sSessionLogger_associatedPortalArns
+var SessionLogger_displayName = &sSessionLogger_displayName
+var SessionLogger_creationDate = &sSessionLogger_creationDate
+
+var _SessionLoggerList = &s_SessionLoggerList
+var _SessionLoggerList_member = &s_SessionLoggerList_member
+
+var SessionLoggerSummary = &sSessionLoggerSummary
+var SessionLoggerSummary_sessionLoggerArn = &sSessionLoggerSummary_sessionLoggerArn
+var SessionLoggerSummary_logConfiguration = &sSessionLoggerSummary_logConfiguration
+var SessionLoggerSummary_displayName = &sSessionLoggerSummary_displayName
+var SessionLoggerSummary_creationDate = &sSessionLoggerSummary_creationDate
+
+var SessionSortBy = &sSessionSortBy
+var SessionSortBy_START_TIME_ASCENDING = &sSessionSortBy_START_TIME_ASCENDING
+var SessionSortBy_START_TIME_DESCENDING = &sSessionSortBy_START_TIME_DESCENDING
+
+var SessionStatus = &sSessionStatus
+var SessionStatus_ACTIVE = &sSessionStatus_ACTIVE
+var SessionStatus_TERMINATED = &sSessionStatus_TERMINATED
+
+var SessionSummary = &sSessionSummary
+var SessionSummary_portalArn = &sSessionSummary_portalArn
+var SessionSummary_sessionId = &sSessionSummary_sessionId
+var SessionSummary_username = &sSessionSummary_username
+var SessionSummary_status = &sSessionSummary_status
+var SessionSummary_startTime = &sSessionSummary_startTime
+var SessionSummary_endTime = &sSessionSummary_endTime
+
+var _SessionSummaryList = &s_SessionSummaryList
+var _SessionSummaryList_member = &s_SessionSummaryList_member
+
+var _StatusReason = &s_StatusReason
+
+var _StringType = &s_StringType
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIdList = &s_SubnetIdList
+var _SubnetIdList_member = &s_SubnetIdList_member
+
+var _SubresourceARN = &s_SubresourceARN
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagExceptionMessage = &s_TagExceptionMessage
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _Timestamp = &s_Timestamp
+
+var ToolbarConfiguration = &sToolbarConfiguration
+var ToolbarConfiguration_toolbarType = &sToolbarConfiguration_toolbarType
+var ToolbarConfiguration_visualMode = &sToolbarConfiguration_visualMode
+var ToolbarConfiguration_hiddenToolbarItems = &sToolbarConfiguration_hiddenToolbarItems
+var ToolbarConfiguration_maxDisplayResolution = &sToolbarConfiguration_maxDisplayResolution
+
+var _ToolbarItem = &s_ToolbarItem
+
+var _ToolbarType = &s_ToolbarType
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+var TooManyTagsException_resourceName = &sTooManyTagsException_resourceName
+
+var TrustStore = &sTrustStore
+var TrustStore_associatedPortalArns = &sTrustStore_associatedPortalArns
+var TrustStore_trustStoreArn = &sTrustStore_trustStoreArn
+
+var TrustStoreSummary = &sTrustStoreSummary
+var TrustStoreSummary_trustStoreArn = &sTrustStoreSummary_trustStoreArn
+
+var _TrustStoreSummaryList = &s_TrustStoreSummaryList
+var _TrustStoreSummaryList_member = &s_TrustStoreSummaryList_member
+
+var _UrlPattern = &s_UrlPattern
+
+var _UrlPatternList = &s_UrlPatternList
+var _UrlPatternList_member = &s_UrlPatternList_member
+
+var UserAccessLoggingSettings = &sUserAccessLoggingSettings
+var UserAccessLoggingSettings_userAccessLoggingSettingsArn = &sUserAccessLoggingSettings_userAccessLoggingSettingsArn
+var UserAccessLoggingSettings_associatedPortalArns = &sUserAccessLoggingSettings_associatedPortalArns
+var UserAccessLoggingSettings_kinesisStreamArn = &sUserAccessLoggingSettings_kinesisStreamArn
+
+var _UserAccessLoggingSettingsList = &s_UserAccessLoggingSettingsList
+var _UserAccessLoggingSettingsList_member = &s_UserAccessLoggingSettingsList_member
+
+var UserAccessLoggingSettingsSummary = &sUserAccessLoggingSettingsSummary
+var UserAccessLoggingSettingsSummary_userAccessLoggingSettingsArn = &sUserAccessLoggingSettingsSummary_userAccessLoggingSettingsArn
+var UserAccessLoggingSettingsSummary_kinesisStreamArn = &sUserAccessLoggingSettingsSummary_kinesisStreamArn
+
+var _Username = &s_Username
+
+var UserSettings = &sUserSettings
+var UserSettings_userSettingsArn = &sUserSettings_userSettingsArn
+var UserSettings_associatedPortalArns = &sUserSettings_associatedPortalArns
+var UserSettings_copyAllowed = &sUserSettings_copyAllowed
+var UserSettings_pasteAllowed = &sUserSettings_pasteAllowed
+var UserSettings_downloadAllowed = &sUserSettings_downloadAllowed
+var UserSettings_uploadAllowed = &sUserSettings_uploadAllowed
+var UserSettings_printAllowed = &sUserSettings_printAllowed
+var UserSettings_disconnectTimeoutInMinutes = &sUserSettings_disconnectTimeoutInMinutes
+var UserSettings_idleDisconnectTimeoutInMinutes = &sUserSettings_idleDisconnectTimeoutInMinutes
+var UserSettings_cookieSynchronizationConfiguration = &sUserSettings_cookieSynchronizationConfiguration
+var UserSettings_customerManagedKey = &sUserSettings_customerManagedKey
+var UserSettings_additionalEncryptionContext = &sUserSettings_additionalEncryptionContext
+var UserSettings_deepLinkAllowed = &sUserSettings_deepLinkAllowed
+var UserSettings_toolbarConfiguration = &sUserSettings_toolbarConfiguration
+var UserSettings_brandingConfiguration = &sUserSettings_brandingConfiguration
+var UserSettings_webAuthnAllowed = &sUserSettings_webAuthnAllowed
+
+var _UserSettingsList = &s_UserSettingsList
+var _UserSettingsList_member = &s_UserSettingsList_member
+
+var UserSettingsSummary = &sUserSettingsSummary
+var UserSettingsSummary_userSettingsArn = &sUserSettingsSummary_userSettingsArn
+var UserSettingsSummary_copyAllowed = &sUserSettingsSummary_copyAllowed
+var UserSettingsSummary_pasteAllowed = &sUserSettingsSummary_pasteAllowed
+var UserSettingsSummary_downloadAllowed = &sUserSettingsSummary_downloadAllowed
+var UserSettingsSummary_uploadAllowed = &sUserSettingsSummary_uploadAllowed
+var UserSettingsSummary_printAllowed = &sUserSettingsSummary_printAllowed
+var UserSettingsSummary_disconnectTimeoutInMinutes = &sUserSettingsSummary_disconnectTimeoutInMinutes
+var UserSettingsSummary_idleDisconnectTimeoutInMinutes = &sUserSettingsSummary_idleDisconnectTimeoutInMinutes
+var UserSettingsSummary_cookieSynchronizationConfiguration = &sUserSettingsSummary_cookieSynchronizationConfiguration
+var UserSettingsSummary_deepLinkAllowed = &sUserSettingsSummary_deepLinkAllowed
+var UserSettingsSummary_toolbarConfiguration = &sUserSettingsSummary_toolbarConfiguration
+var UserSettingsSummary_brandingConfiguration = &sUserSettingsSummary_brandingConfiguration
+var UserSettingsSummary_webAuthnAllowed = &sUserSettingsSummary_webAuthnAllowed
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidationExceptionReason = &s_ValidationExceptionReason
+
+var _VisualMode = &s_VisualMode
+
+var _VpcId = &s_VpcId
+
+var _WallpaperImage = &s_WallpaperImage
+
+var WallpaperImageInput = &sWallpaperImageInput
+var WallpaperImageInput_blob = &sWallpaperImageInput_blob
+var WallpaperImageInput_s3Uri = &sWallpaperImageInput_s3Uri
+
+var WebContentFilteringPolicy = &sWebContentFilteringPolicy
+var WebContentFilteringPolicy_blockedCategories = &sWebContentFilteringPolicy_blockedCategories
+var WebContentFilteringPolicy_allowedUrls = &sWebContentFilteringPolicy_allowedUrls
+var WebContentFilteringPolicy_blockedUrls = &sWebContentFilteringPolicy_blockedUrls
+
+var AssociateBrowserSettingsRequest = &sAssociateBrowserSettingsRequest
+var AssociateBrowserSettingsRequest_portalArn = &sAssociateBrowserSettingsRequest_portalArn
+var AssociateBrowserSettingsRequest_browserSettingsArn = &sAssociateBrowserSettingsRequest_browserSettingsArn
+
+var AssociateBrowserSettingsResponse = &sAssociateBrowserSettingsResponse
+var AssociateBrowserSettingsResponse_portalArn = &sAssociateBrowserSettingsResponse_portalArn
+var AssociateBrowserSettingsResponse_browserSettingsArn = &sAssociateBrowserSettingsResponse_browserSettingsArn
+
+var AssociateDataProtectionSettingsRequest = &sAssociateDataProtectionSettingsRequest
+var AssociateDataProtectionSettingsRequest_portalArn = &sAssociateDataProtectionSettingsRequest_portalArn
+var AssociateDataProtectionSettingsRequest_dataProtectionSettingsArn = &sAssociateDataProtectionSettingsRequest_dataProtectionSettingsArn
+
+var AssociateDataProtectionSettingsResponse = &sAssociateDataProtectionSettingsResponse
+var AssociateDataProtectionSettingsResponse_portalArn = &sAssociateDataProtectionSettingsResponse_portalArn
+var AssociateDataProtectionSettingsResponse_dataProtectionSettingsArn = &sAssociateDataProtectionSettingsResponse_dataProtectionSettingsArn
+
+var AssociateIpAccessSettingsRequest = &sAssociateIpAccessSettingsRequest
+var AssociateIpAccessSettingsRequest_portalArn = &sAssociateIpAccessSettingsRequest_portalArn
+var AssociateIpAccessSettingsRequest_ipAccessSettingsArn = &sAssociateIpAccessSettingsRequest_ipAccessSettingsArn
+
+var AssociateIpAccessSettingsResponse = &sAssociateIpAccessSettingsResponse
+var AssociateIpAccessSettingsResponse_portalArn = &sAssociateIpAccessSettingsResponse_portalArn
+var AssociateIpAccessSettingsResponse_ipAccessSettingsArn = &sAssociateIpAccessSettingsResponse_ipAccessSettingsArn
+
+var AssociateNetworkSettingsRequest = &sAssociateNetworkSettingsRequest
+var AssociateNetworkSettingsRequest_portalArn = &sAssociateNetworkSettingsRequest_portalArn
+var AssociateNetworkSettingsRequest_networkSettingsArn = &sAssociateNetworkSettingsRequest_networkSettingsArn
+
+var AssociateNetworkSettingsResponse = &sAssociateNetworkSettingsResponse
+var AssociateNetworkSettingsResponse_portalArn = &sAssociateNetworkSettingsResponse_portalArn
+var AssociateNetworkSettingsResponse_networkSettingsArn = &sAssociateNetworkSettingsResponse_networkSettingsArn
+
+var AssociateSessionLoggerRequest = &sAssociateSessionLoggerRequest
+var AssociateSessionLoggerRequest_portalArn = &sAssociateSessionLoggerRequest_portalArn
+var AssociateSessionLoggerRequest_sessionLoggerArn = &sAssociateSessionLoggerRequest_sessionLoggerArn
+
+var AssociateSessionLoggerResponse = &sAssociateSessionLoggerResponse
+var AssociateSessionLoggerResponse_portalArn = &sAssociateSessionLoggerResponse_portalArn
+var AssociateSessionLoggerResponse_sessionLoggerArn = &sAssociateSessionLoggerResponse_sessionLoggerArn
+
+var AssociateTrustStoreRequest = &sAssociateTrustStoreRequest
+var AssociateTrustStoreRequest_portalArn = &sAssociateTrustStoreRequest_portalArn
+var AssociateTrustStoreRequest_trustStoreArn = &sAssociateTrustStoreRequest_trustStoreArn
+
+var AssociateTrustStoreResponse = &sAssociateTrustStoreResponse
+var AssociateTrustStoreResponse_portalArn = &sAssociateTrustStoreResponse_portalArn
+var AssociateTrustStoreResponse_trustStoreArn = &sAssociateTrustStoreResponse_trustStoreArn
+
+var AssociateUserAccessLoggingSettingsRequest = &sAssociateUserAccessLoggingSettingsRequest
+var AssociateUserAccessLoggingSettingsRequest_portalArn = &sAssociateUserAccessLoggingSettingsRequest_portalArn
+var AssociateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = &sAssociateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn
+
+var AssociateUserAccessLoggingSettingsResponse = &sAssociateUserAccessLoggingSettingsResponse
+var AssociateUserAccessLoggingSettingsResponse_portalArn = &sAssociateUserAccessLoggingSettingsResponse_portalArn
+var AssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn = &sAssociateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn
+
+var AssociateUserSettingsRequest = &sAssociateUserSettingsRequest
+var AssociateUserSettingsRequest_portalArn = &sAssociateUserSettingsRequest_portalArn
+var AssociateUserSettingsRequest_userSettingsArn = &sAssociateUserSettingsRequest_userSettingsArn
+
+var AssociateUserSettingsResponse = &sAssociateUserSettingsResponse
+var AssociateUserSettingsResponse_portalArn = &sAssociateUserSettingsResponse_portalArn
+var AssociateUserSettingsResponse_userSettingsArn = &sAssociateUserSettingsResponse_userSettingsArn
+
+var CreateBrowserSettingsRequest = &sCreateBrowserSettingsRequest
+var CreateBrowserSettingsRequest_tags = &sCreateBrowserSettingsRequest_tags
+var CreateBrowserSettingsRequest_customerManagedKey = &sCreateBrowserSettingsRequest_customerManagedKey
+var CreateBrowserSettingsRequest_additionalEncryptionContext = &sCreateBrowserSettingsRequest_additionalEncryptionContext
+var CreateBrowserSettingsRequest_browserPolicy = &sCreateBrowserSettingsRequest_browserPolicy
+var CreateBrowserSettingsRequest_clientToken = &sCreateBrowserSettingsRequest_clientToken
+var CreateBrowserSettingsRequest_webContentFilteringPolicy = &sCreateBrowserSettingsRequest_webContentFilteringPolicy
+
+var CreateBrowserSettingsResponse = &sCreateBrowserSettingsResponse
+var CreateBrowserSettingsResponse_browserSettingsArn = &sCreateBrowserSettingsResponse_browserSettingsArn
+
+var CreateDataProtectionSettingsRequest = &sCreateDataProtectionSettingsRequest
+var CreateDataProtectionSettingsRequest_displayName = &sCreateDataProtectionSettingsRequest_displayName
+var CreateDataProtectionSettingsRequest_description = &sCreateDataProtectionSettingsRequest_description
+var CreateDataProtectionSettingsRequest_tags = &sCreateDataProtectionSettingsRequest_tags
+var CreateDataProtectionSettingsRequest_customerManagedKey = &sCreateDataProtectionSettingsRequest_customerManagedKey
+var CreateDataProtectionSettingsRequest_additionalEncryptionContext = &sCreateDataProtectionSettingsRequest_additionalEncryptionContext
+var CreateDataProtectionSettingsRequest_inlineRedactionConfiguration = &sCreateDataProtectionSettingsRequest_inlineRedactionConfiguration
+var CreateDataProtectionSettingsRequest_clientToken = &sCreateDataProtectionSettingsRequest_clientToken
+
+var CreateDataProtectionSettingsResponse = &sCreateDataProtectionSettingsResponse
+var CreateDataProtectionSettingsResponse_dataProtectionSettingsArn = &sCreateDataProtectionSettingsResponse_dataProtectionSettingsArn
+
+var CreateIdentityProviderRequest = &sCreateIdentityProviderRequest
+var CreateIdentityProviderRequest_portalArn = &sCreateIdentityProviderRequest_portalArn
+var CreateIdentityProviderRequest_identityProviderName = &sCreateIdentityProviderRequest_identityProviderName
+var CreateIdentityProviderRequest_identityProviderType = &sCreateIdentityProviderRequest_identityProviderType
+var CreateIdentityProviderRequest_identityProviderDetails = &sCreateIdentityProviderRequest_identityProviderDetails
+var CreateIdentityProviderRequest_clientToken = &sCreateIdentityProviderRequest_clientToken
+var CreateIdentityProviderRequest_tags = &sCreateIdentityProviderRequest_tags
+
+var CreateIdentityProviderResponse = &sCreateIdentityProviderResponse
+var CreateIdentityProviderResponse_identityProviderArn = &sCreateIdentityProviderResponse_identityProviderArn
+
+var CreateIpAccessSettingsRequest = &sCreateIpAccessSettingsRequest
+var CreateIpAccessSettingsRequest_displayName = &sCreateIpAccessSettingsRequest_displayName
+var CreateIpAccessSettingsRequest_description = &sCreateIpAccessSettingsRequest_description
+var CreateIpAccessSettingsRequest_tags = &sCreateIpAccessSettingsRequest_tags
+var CreateIpAccessSettingsRequest_customerManagedKey = &sCreateIpAccessSettingsRequest_customerManagedKey
+var CreateIpAccessSettingsRequest_additionalEncryptionContext = &sCreateIpAccessSettingsRequest_additionalEncryptionContext
+var CreateIpAccessSettingsRequest_ipRules = &sCreateIpAccessSettingsRequest_ipRules
+var CreateIpAccessSettingsRequest_clientToken = &sCreateIpAccessSettingsRequest_clientToken
+
+var CreateIpAccessSettingsResponse = &sCreateIpAccessSettingsResponse
+var CreateIpAccessSettingsResponse_ipAccessSettingsArn = &sCreateIpAccessSettingsResponse_ipAccessSettingsArn
+
+var CreateNetworkSettingsRequest = &sCreateNetworkSettingsRequest
+var CreateNetworkSettingsRequest_vpcId = &sCreateNetworkSettingsRequest_vpcId
+var CreateNetworkSettingsRequest_subnetIds = &sCreateNetworkSettingsRequest_subnetIds
+var CreateNetworkSettingsRequest_securityGroupIds = &sCreateNetworkSettingsRequest_securityGroupIds
+var CreateNetworkSettingsRequest_tags = &sCreateNetworkSettingsRequest_tags
+var CreateNetworkSettingsRequest_clientToken = &sCreateNetworkSettingsRequest_clientToken
+
+var CreateNetworkSettingsResponse = &sCreateNetworkSettingsResponse
+var CreateNetworkSettingsResponse_networkSettingsArn = &sCreateNetworkSettingsResponse_networkSettingsArn
+
+var CreatePortalRequest = &sCreatePortalRequest
+var CreatePortalRequest_displayName = &sCreatePortalRequest_displayName
+var CreatePortalRequest_tags = &sCreatePortalRequest_tags
+var CreatePortalRequest_customerManagedKey = &sCreatePortalRequest_customerManagedKey
+var CreatePortalRequest_additionalEncryptionContext = &sCreatePortalRequest_additionalEncryptionContext
+var CreatePortalRequest_clientToken = &sCreatePortalRequest_clientToken
+var CreatePortalRequest_authenticationType = &sCreatePortalRequest_authenticationType
+var CreatePortalRequest_instanceType = &sCreatePortalRequest_instanceType
+var CreatePortalRequest_maxConcurrentSessions = &sCreatePortalRequest_maxConcurrentSessions
+var CreatePortalRequest_portalCustomDomain = &sCreatePortalRequest_portalCustomDomain
+
+var CreatePortalResponse = &sCreatePortalResponse
+var CreatePortalResponse_portalArn = &sCreatePortalResponse_portalArn
+var CreatePortalResponse_portalEndpoint = &sCreatePortalResponse_portalEndpoint
+
+var CreateSessionLoggerRequest = &sCreateSessionLoggerRequest
+var CreateSessionLoggerRequest_eventFilter = &sCreateSessionLoggerRequest_eventFilter
+var CreateSessionLoggerRequest_logConfiguration = &sCreateSessionLoggerRequest_logConfiguration
+var CreateSessionLoggerRequest_displayName = &sCreateSessionLoggerRequest_displayName
+var CreateSessionLoggerRequest_customerManagedKey = &sCreateSessionLoggerRequest_customerManagedKey
+var CreateSessionLoggerRequest_additionalEncryptionContext = &sCreateSessionLoggerRequest_additionalEncryptionContext
+var CreateSessionLoggerRequest_tags = &sCreateSessionLoggerRequest_tags
+var CreateSessionLoggerRequest_clientToken = &sCreateSessionLoggerRequest_clientToken
+
+var CreateSessionLoggerResponse = &sCreateSessionLoggerResponse
+var CreateSessionLoggerResponse_sessionLoggerArn = &sCreateSessionLoggerResponse_sessionLoggerArn
+
+var CreateTrustStoreRequest = &sCreateTrustStoreRequest
+var CreateTrustStoreRequest_certificateList = &sCreateTrustStoreRequest_certificateList
+var CreateTrustStoreRequest_tags = &sCreateTrustStoreRequest_tags
+var CreateTrustStoreRequest_clientToken = &sCreateTrustStoreRequest_clientToken
+
+var CreateTrustStoreResponse = &sCreateTrustStoreResponse
+var CreateTrustStoreResponse_trustStoreArn = &sCreateTrustStoreResponse_trustStoreArn
+
+var CreateUserAccessLoggingSettingsRequest = &sCreateUserAccessLoggingSettingsRequest
+var CreateUserAccessLoggingSettingsRequest_kinesisStreamArn = &sCreateUserAccessLoggingSettingsRequest_kinesisStreamArn
+var CreateUserAccessLoggingSettingsRequest_tags = &sCreateUserAccessLoggingSettingsRequest_tags
+var CreateUserAccessLoggingSettingsRequest_clientToken = &sCreateUserAccessLoggingSettingsRequest_clientToken
+
+var CreateUserAccessLoggingSettingsResponse = &sCreateUserAccessLoggingSettingsResponse
+var CreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn = &sCreateUserAccessLoggingSettingsResponse_userAccessLoggingSettingsArn
+
+var CreateUserSettingsRequest = &sCreateUserSettingsRequest
+var CreateUserSettingsRequest_copyAllowed = &sCreateUserSettingsRequest_copyAllowed
+var CreateUserSettingsRequest_pasteAllowed = &sCreateUserSettingsRequest_pasteAllowed
+var CreateUserSettingsRequest_downloadAllowed = &sCreateUserSettingsRequest_downloadAllowed
+var CreateUserSettingsRequest_uploadAllowed = &sCreateUserSettingsRequest_uploadAllowed
+var CreateUserSettingsRequest_printAllowed = &sCreateUserSettingsRequest_printAllowed
+var CreateUserSettingsRequest_tags = &sCreateUserSettingsRequest_tags
+var CreateUserSettingsRequest_disconnectTimeoutInMinutes = &sCreateUserSettingsRequest_disconnectTimeoutInMinutes
+var CreateUserSettingsRequest_idleDisconnectTimeoutInMinutes = &sCreateUserSettingsRequest_idleDisconnectTimeoutInMinutes
+var CreateUserSettingsRequest_clientToken = &sCreateUserSettingsRequest_clientToken
+var CreateUserSettingsRequest_cookieSynchronizationConfiguration = &sCreateUserSettingsRequest_cookieSynchronizationConfiguration
+var CreateUserSettingsRequest_customerManagedKey = &sCreateUserSettingsRequest_customerManagedKey
+var CreateUserSettingsRequest_additionalEncryptionContext = &sCreateUserSettingsRequest_additionalEncryptionContext
+var CreateUserSettingsRequest_deepLinkAllowed = &sCreateUserSettingsRequest_deepLinkAllowed
+var CreateUserSettingsRequest_toolbarConfiguration = &sCreateUserSettingsRequest_toolbarConfiguration
+var CreateUserSettingsRequest_brandingConfigurationInput = &sCreateUserSettingsRequest_brandingConfigurationInput
+var CreateUserSettingsRequest_webAuthnAllowed = &sCreateUserSettingsRequest_webAuthnAllowed
+
+var CreateUserSettingsResponse = &sCreateUserSettingsResponse
+var CreateUserSettingsResponse_userSettingsArn = &sCreateUserSettingsResponse_userSettingsArn
+
+var DeleteBrowserSettingsRequest = &sDeleteBrowserSettingsRequest
+var DeleteBrowserSettingsRequest_browserSettingsArn = &sDeleteBrowserSettingsRequest_browserSettingsArn
+
+var DeleteBrowserSettingsResponse = &sDeleteBrowserSettingsResponse
+
+var DeleteDataProtectionSettingsRequest = &sDeleteDataProtectionSettingsRequest
+var DeleteDataProtectionSettingsRequest_dataProtectionSettingsArn = &sDeleteDataProtectionSettingsRequest_dataProtectionSettingsArn
+
+var DeleteDataProtectionSettingsResponse = &sDeleteDataProtectionSettingsResponse
+
+var DeleteIdentityProviderRequest = &sDeleteIdentityProviderRequest
+var DeleteIdentityProviderRequest_identityProviderArn = &sDeleteIdentityProviderRequest_identityProviderArn
+
+var DeleteIdentityProviderResponse = &sDeleteIdentityProviderResponse
+
+var DeleteIpAccessSettingsRequest = &sDeleteIpAccessSettingsRequest
+var DeleteIpAccessSettingsRequest_ipAccessSettingsArn = &sDeleteIpAccessSettingsRequest_ipAccessSettingsArn
+
+var DeleteIpAccessSettingsResponse = &sDeleteIpAccessSettingsResponse
+
+var DeleteNetworkSettingsRequest = &sDeleteNetworkSettingsRequest
+var DeleteNetworkSettingsRequest_networkSettingsArn = &sDeleteNetworkSettingsRequest_networkSettingsArn
+
+var DeleteNetworkSettingsResponse = &sDeleteNetworkSettingsResponse
+
+var DeletePortalRequest = &sDeletePortalRequest
+var DeletePortalRequest_portalArn = &sDeletePortalRequest_portalArn
+
+var DeletePortalResponse = &sDeletePortalResponse
+
+var DeleteSessionLoggerRequest = &sDeleteSessionLoggerRequest
+var DeleteSessionLoggerRequest_sessionLoggerArn = &sDeleteSessionLoggerRequest_sessionLoggerArn
+
+var DeleteSessionLoggerResponse = &sDeleteSessionLoggerResponse
+
+var DeleteTrustStoreRequest = &sDeleteTrustStoreRequest
+var DeleteTrustStoreRequest_trustStoreArn = &sDeleteTrustStoreRequest_trustStoreArn
+
+var DeleteTrustStoreResponse = &sDeleteTrustStoreResponse
+
+var DeleteUserAccessLoggingSettingsRequest = &sDeleteUserAccessLoggingSettingsRequest
+var DeleteUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = &sDeleteUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn
+
+var DeleteUserAccessLoggingSettingsResponse = &sDeleteUserAccessLoggingSettingsResponse
+
+var DeleteUserSettingsRequest = &sDeleteUserSettingsRequest
+var DeleteUserSettingsRequest_userSettingsArn = &sDeleteUserSettingsRequest_userSettingsArn
+
+var DeleteUserSettingsResponse = &sDeleteUserSettingsResponse
+
+var DisassociateBrowserSettingsRequest = &sDisassociateBrowserSettingsRequest
+var DisassociateBrowserSettingsRequest_portalArn = &sDisassociateBrowserSettingsRequest_portalArn
+
+var DisassociateBrowserSettingsResponse = &sDisassociateBrowserSettingsResponse
+
+var DisassociateDataProtectionSettingsRequest = &sDisassociateDataProtectionSettingsRequest
+var DisassociateDataProtectionSettingsRequest_portalArn = &sDisassociateDataProtectionSettingsRequest_portalArn
+
+var DisassociateDataProtectionSettingsResponse = &sDisassociateDataProtectionSettingsResponse
+
+var DisassociateIpAccessSettingsRequest = &sDisassociateIpAccessSettingsRequest
+var DisassociateIpAccessSettingsRequest_portalArn = &sDisassociateIpAccessSettingsRequest_portalArn
+
+var DisassociateIpAccessSettingsResponse = &sDisassociateIpAccessSettingsResponse
+
+var DisassociateNetworkSettingsRequest = &sDisassociateNetworkSettingsRequest
+var DisassociateNetworkSettingsRequest_portalArn = &sDisassociateNetworkSettingsRequest_portalArn
+
+var DisassociateNetworkSettingsResponse = &sDisassociateNetworkSettingsResponse
+
+var DisassociateSessionLoggerRequest = &sDisassociateSessionLoggerRequest
+var DisassociateSessionLoggerRequest_portalArn = &sDisassociateSessionLoggerRequest_portalArn
+
+var DisassociateSessionLoggerResponse = &sDisassociateSessionLoggerResponse
+
+var DisassociateTrustStoreRequest = &sDisassociateTrustStoreRequest
+var DisassociateTrustStoreRequest_portalArn = &sDisassociateTrustStoreRequest_portalArn
+
+var DisassociateTrustStoreResponse = &sDisassociateTrustStoreResponse
+
+var DisassociateUserAccessLoggingSettingsRequest = &sDisassociateUserAccessLoggingSettingsRequest
+var DisassociateUserAccessLoggingSettingsRequest_portalArn = &sDisassociateUserAccessLoggingSettingsRequest_portalArn
+
+var DisassociateUserAccessLoggingSettingsResponse = &sDisassociateUserAccessLoggingSettingsResponse
+
+var DisassociateUserSettingsRequest = &sDisassociateUserSettingsRequest
+var DisassociateUserSettingsRequest_portalArn = &sDisassociateUserSettingsRequest_portalArn
+
+var DisassociateUserSettingsResponse = &sDisassociateUserSettingsResponse
+
+var ExpireSessionRequest = &sExpireSessionRequest
+var ExpireSessionRequest_portalId = &sExpireSessionRequest_portalId
+var ExpireSessionRequest_sessionId = &sExpireSessionRequest_sessionId
+
+var ExpireSessionResponse = &sExpireSessionResponse
+
+var GetBrowserSettingsRequest = &sGetBrowserSettingsRequest
+var GetBrowserSettingsRequest_browserSettingsArn = &sGetBrowserSettingsRequest_browserSettingsArn
+
+var GetBrowserSettingsResponse = &sGetBrowserSettingsResponse
+var GetBrowserSettingsResponse_browserSettings = &sGetBrowserSettingsResponse_browserSettings
+
+var GetDataProtectionSettingsRequest = &sGetDataProtectionSettingsRequest
+var GetDataProtectionSettingsRequest_dataProtectionSettingsArn = &sGetDataProtectionSettingsRequest_dataProtectionSettingsArn
+
+var GetDataProtectionSettingsResponse = &sGetDataProtectionSettingsResponse
+var GetDataProtectionSettingsResponse_dataProtectionSettings = &sGetDataProtectionSettingsResponse_dataProtectionSettings
+
+var GetIdentityProviderRequest = &sGetIdentityProviderRequest
+var GetIdentityProviderRequest_identityProviderArn = &sGetIdentityProviderRequest_identityProviderArn
+
+var GetIdentityProviderResponse = &sGetIdentityProviderResponse
+var GetIdentityProviderResponse_identityProvider = &sGetIdentityProviderResponse_identityProvider
+
+var GetIpAccessSettingsRequest = &sGetIpAccessSettingsRequest
+var GetIpAccessSettingsRequest_ipAccessSettingsArn = &sGetIpAccessSettingsRequest_ipAccessSettingsArn
+
+var GetIpAccessSettingsResponse = &sGetIpAccessSettingsResponse
+var GetIpAccessSettingsResponse_ipAccessSettings = &sGetIpAccessSettingsResponse_ipAccessSettings
+
+var GetNetworkSettingsRequest = &sGetNetworkSettingsRequest
+var GetNetworkSettingsRequest_networkSettingsArn = &sGetNetworkSettingsRequest_networkSettingsArn
+
+var GetNetworkSettingsResponse = &sGetNetworkSettingsResponse
+var GetNetworkSettingsResponse_networkSettings = &sGetNetworkSettingsResponse_networkSettings
+
+var GetPortalRequest = &sGetPortalRequest
+var GetPortalRequest_portalArn = &sGetPortalRequest_portalArn
+
+var GetPortalResponse = &sGetPortalResponse
+var GetPortalResponse_portal = &sGetPortalResponse_portal
+
+var GetPortalServiceProviderMetadataRequest = &sGetPortalServiceProviderMetadataRequest
+var GetPortalServiceProviderMetadataRequest_portalArn = &sGetPortalServiceProviderMetadataRequest_portalArn
+
+var GetPortalServiceProviderMetadataResponse = &sGetPortalServiceProviderMetadataResponse
+var GetPortalServiceProviderMetadataResponse_portalArn = &sGetPortalServiceProviderMetadataResponse_portalArn
+var GetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata = &sGetPortalServiceProviderMetadataResponse_serviceProviderSamlMetadata
+
+var GetSessionRequest = &sGetSessionRequest
+var GetSessionRequest_portalId = &sGetSessionRequest_portalId
+var GetSessionRequest_sessionId = &sGetSessionRequest_sessionId
+
+var GetSessionLoggerRequest = &sGetSessionLoggerRequest
+var GetSessionLoggerRequest_sessionLoggerArn = &sGetSessionLoggerRequest_sessionLoggerArn
+
+var GetSessionLoggerResponse = &sGetSessionLoggerResponse
+var GetSessionLoggerResponse_sessionLogger = &sGetSessionLoggerResponse_sessionLogger
+
+var GetSessionResponse = &sGetSessionResponse
+var GetSessionResponse_session = &sGetSessionResponse_session
+
+var GetTrustStoreCertificateRequest = &sGetTrustStoreCertificateRequest
+var GetTrustStoreCertificateRequest_trustStoreArn = &sGetTrustStoreCertificateRequest_trustStoreArn
+var GetTrustStoreCertificateRequest_thumbprint = &sGetTrustStoreCertificateRequest_thumbprint
+
+var GetTrustStoreCertificateResponse = &sGetTrustStoreCertificateResponse
+var GetTrustStoreCertificateResponse_trustStoreArn = &sGetTrustStoreCertificateResponse_trustStoreArn
+var GetTrustStoreCertificateResponse_certificate = &sGetTrustStoreCertificateResponse_certificate
+
+var GetTrustStoreRequest = &sGetTrustStoreRequest
+var GetTrustStoreRequest_trustStoreArn = &sGetTrustStoreRequest_trustStoreArn
+
+var GetTrustStoreResponse = &sGetTrustStoreResponse
+var GetTrustStoreResponse_trustStore = &sGetTrustStoreResponse_trustStore
+
+var GetUserAccessLoggingSettingsRequest = &sGetUserAccessLoggingSettingsRequest
+var GetUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = &sGetUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn
+
+var GetUserAccessLoggingSettingsResponse = &sGetUserAccessLoggingSettingsResponse
+var GetUserAccessLoggingSettingsResponse_userAccessLoggingSettings = &sGetUserAccessLoggingSettingsResponse_userAccessLoggingSettings
+
+var GetUserSettingsRequest = &sGetUserSettingsRequest
+var GetUserSettingsRequest_userSettingsArn = &sGetUserSettingsRequest_userSettingsArn
+
+var GetUserSettingsResponse = &sGetUserSettingsResponse
+var GetUserSettingsResponse_userSettings = &sGetUserSettingsResponse_userSettings
+
+var ListBrowserSettingsRequest = &sListBrowserSettingsRequest
+var ListBrowserSettingsRequest_nextToken = &sListBrowserSettingsRequest_nextToken
+var ListBrowserSettingsRequest_maxResults = &sListBrowserSettingsRequest_maxResults
+
+var ListBrowserSettingsResponse = &sListBrowserSettingsResponse
+var ListBrowserSettingsResponse_browserSettings = &sListBrowserSettingsResponse_browserSettings
+var ListBrowserSettingsResponse_nextToken = &sListBrowserSettingsResponse_nextToken
+
+var ListDataProtectionSettingsRequest = &sListDataProtectionSettingsRequest
+var ListDataProtectionSettingsRequest_nextToken = &sListDataProtectionSettingsRequest_nextToken
+var ListDataProtectionSettingsRequest_maxResults = &sListDataProtectionSettingsRequest_maxResults
+
+var ListDataProtectionSettingsResponse = &sListDataProtectionSettingsResponse
+var ListDataProtectionSettingsResponse_dataProtectionSettings = &sListDataProtectionSettingsResponse_dataProtectionSettings
+var ListDataProtectionSettingsResponse_nextToken = &sListDataProtectionSettingsResponse_nextToken
+
+var ListIdentityProvidersRequest = &sListIdentityProvidersRequest
+var ListIdentityProvidersRequest_nextToken = &sListIdentityProvidersRequest_nextToken
+var ListIdentityProvidersRequest_maxResults = &sListIdentityProvidersRequest_maxResults
+var ListIdentityProvidersRequest_portalArn = &sListIdentityProvidersRequest_portalArn
+
+var ListIdentityProvidersResponse = &sListIdentityProvidersResponse
+var ListIdentityProvidersResponse_nextToken = &sListIdentityProvidersResponse_nextToken
+var ListIdentityProvidersResponse_identityProviders = &sListIdentityProvidersResponse_identityProviders
+
+var ListIpAccessSettingsRequest = &sListIpAccessSettingsRequest
+var ListIpAccessSettingsRequest_nextToken = &sListIpAccessSettingsRequest_nextToken
+var ListIpAccessSettingsRequest_maxResults = &sListIpAccessSettingsRequest_maxResults
+
+var ListIpAccessSettingsResponse = &sListIpAccessSettingsResponse
+var ListIpAccessSettingsResponse_ipAccessSettings = &sListIpAccessSettingsResponse_ipAccessSettings
+var ListIpAccessSettingsResponse_nextToken = &sListIpAccessSettingsResponse_nextToken
+
+var ListNetworkSettingsRequest = &sListNetworkSettingsRequest
+var ListNetworkSettingsRequest_nextToken = &sListNetworkSettingsRequest_nextToken
+var ListNetworkSettingsRequest_maxResults = &sListNetworkSettingsRequest_maxResults
+
+var ListNetworkSettingsResponse = &sListNetworkSettingsResponse
+var ListNetworkSettingsResponse_networkSettings = &sListNetworkSettingsResponse_networkSettings
+var ListNetworkSettingsResponse_nextToken = &sListNetworkSettingsResponse_nextToken
+
+var ListPortalsRequest = &sListPortalsRequest
+var ListPortalsRequest_nextToken = &sListPortalsRequest_nextToken
+var ListPortalsRequest_maxResults = &sListPortalsRequest_maxResults
+
+var ListPortalsResponse = &sListPortalsResponse
+var ListPortalsResponse_portals = &sListPortalsResponse_portals
+var ListPortalsResponse_nextToken = &sListPortalsResponse_nextToken
+
+var ListSessionLoggersRequest = &sListSessionLoggersRequest
+var ListSessionLoggersRequest_nextToken = &sListSessionLoggersRequest_nextToken
+var ListSessionLoggersRequest_maxResults = &sListSessionLoggersRequest_maxResults
+
+var ListSessionLoggersResponse = &sListSessionLoggersResponse
+var ListSessionLoggersResponse_sessionLoggers = &sListSessionLoggersResponse_sessionLoggers
+var ListSessionLoggersResponse_nextToken = &sListSessionLoggersResponse_nextToken
+
+var ListSessionsRequest = &sListSessionsRequest
+var ListSessionsRequest_portalId = &sListSessionsRequest_portalId
+var ListSessionsRequest_username = &sListSessionsRequest_username
+var ListSessionsRequest_sessionId = &sListSessionsRequest_sessionId
+var ListSessionsRequest_sortBy = &sListSessionsRequest_sortBy
+var ListSessionsRequest_status = &sListSessionsRequest_status
+var ListSessionsRequest_maxResults = &sListSessionsRequest_maxResults
+var ListSessionsRequest_nextToken = &sListSessionsRequest_nextToken
+
+var ListSessionsResponse = &sListSessionsResponse
+var ListSessionsResponse_sessions = &sListSessionsResponse_sessions
+var ListSessionsResponse_nextToken = &sListSessionsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListTrustStoreCertificatesRequest = &sListTrustStoreCertificatesRequest
+var ListTrustStoreCertificatesRequest_trustStoreArn = &sListTrustStoreCertificatesRequest_trustStoreArn
+var ListTrustStoreCertificatesRequest_nextToken = &sListTrustStoreCertificatesRequest_nextToken
+var ListTrustStoreCertificatesRequest_maxResults = &sListTrustStoreCertificatesRequest_maxResults
+
+var ListTrustStoreCertificatesResponse = &sListTrustStoreCertificatesResponse
+var ListTrustStoreCertificatesResponse_certificateList = &sListTrustStoreCertificatesResponse_certificateList
+var ListTrustStoreCertificatesResponse_trustStoreArn = &sListTrustStoreCertificatesResponse_trustStoreArn
+var ListTrustStoreCertificatesResponse_nextToken = &sListTrustStoreCertificatesResponse_nextToken
+
+var ListTrustStoresRequest = &sListTrustStoresRequest
+var ListTrustStoresRequest_nextToken = &sListTrustStoresRequest_nextToken
+var ListTrustStoresRequest_maxResults = &sListTrustStoresRequest_maxResults
+
+var ListTrustStoresResponse = &sListTrustStoresResponse
+var ListTrustStoresResponse_trustStores = &sListTrustStoresResponse_trustStores
+var ListTrustStoresResponse_nextToken = &sListTrustStoresResponse_nextToken
+
+var ListUserAccessLoggingSettingsRequest = &sListUserAccessLoggingSettingsRequest
+var ListUserAccessLoggingSettingsRequest_nextToken = &sListUserAccessLoggingSettingsRequest_nextToken
+var ListUserAccessLoggingSettingsRequest_maxResults = &sListUserAccessLoggingSettingsRequest_maxResults
+
+var ListUserAccessLoggingSettingsResponse = &sListUserAccessLoggingSettingsResponse
+var ListUserAccessLoggingSettingsResponse_userAccessLoggingSettings = &sListUserAccessLoggingSettingsResponse_userAccessLoggingSettings
+var ListUserAccessLoggingSettingsResponse_nextToken = &sListUserAccessLoggingSettingsResponse_nextToken
+
+var ListUserSettingsRequest = &sListUserSettingsRequest
+var ListUserSettingsRequest_nextToken = &sListUserSettingsRequest_nextToken
+var ListUserSettingsRequest_maxResults = &sListUserSettingsRequest_maxResults
+
+var ListUserSettingsResponse = &sListUserSettingsResponse
+var ListUserSettingsResponse_userSettings = &sListUserSettingsResponse_userSettings
+var ListUserSettingsResponse_nextToken = &sListUserSettingsResponse_nextToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+var TagResourceRequest_clientToken = &sTagResourceRequest_clientToken
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateBrowserSettingsRequest = &sUpdateBrowserSettingsRequest
+var UpdateBrowserSettingsRequest_browserSettingsArn = &sUpdateBrowserSettingsRequest_browserSettingsArn
+var UpdateBrowserSettingsRequest_browserPolicy = &sUpdateBrowserSettingsRequest_browserPolicy
+var UpdateBrowserSettingsRequest_clientToken = &sUpdateBrowserSettingsRequest_clientToken
+var UpdateBrowserSettingsRequest_webContentFilteringPolicy = &sUpdateBrowserSettingsRequest_webContentFilteringPolicy
+
+var UpdateBrowserSettingsResponse = &sUpdateBrowserSettingsResponse
+var UpdateBrowserSettingsResponse_browserSettings = &sUpdateBrowserSettingsResponse_browserSettings
+
+var UpdateDataProtectionSettingsRequest = &sUpdateDataProtectionSettingsRequest
+var UpdateDataProtectionSettingsRequest_dataProtectionSettingsArn = &sUpdateDataProtectionSettingsRequest_dataProtectionSettingsArn
+var UpdateDataProtectionSettingsRequest_inlineRedactionConfiguration = &sUpdateDataProtectionSettingsRequest_inlineRedactionConfiguration
+var UpdateDataProtectionSettingsRequest_displayName = &sUpdateDataProtectionSettingsRequest_displayName
+var UpdateDataProtectionSettingsRequest_description = &sUpdateDataProtectionSettingsRequest_description
+var UpdateDataProtectionSettingsRequest_clientToken = &sUpdateDataProtectionSettingsRequest_clientToken
+
+var UpdateDataProtectionSettingsResponse = &sUpdateDataProtectionSettingsResponse
+var UpdateDataProtectionSettingsResponse_dataProtectionSettings = &sUpdateDataProtectionSettingsResponse_dataProtectionSettings
+
+var UpdateIdentityProviderRequest = &sUpdateIdentityProviderRequest
+var UpdateIdentityProviderRequest_identityProviderArn = &sUpdateIdentityProviderRequest_identityProviderArn
+var UpdateIdentityProviderRequest_identityProviderName = &sUpdateIdentityProviderRequest_identityProviderName
+var UpdateIdentityProviderRequest_identityProviderType = &sUpdateIdentityProviderRequest_identityProviderType
+var UpdateIdentityProviderRequest_identityProviderDetails = &sUpdateIdentityProviderRequest_identityProviderDetails
+var UpdateIdentityProviderRequest_clientToken = &sUpdateIdentityProviderRequest_clientToken
+
+var UpdateIdentityProviderResponse = &sUpdateIdentityProviderResponse
+var UpdateIdentityProviderResponse_identityProvider = &sUpdateIdentityProviderResponse_identityProvider
+
+var UpdateIpAccessSettingsRequest = &sUpdateIpAccessSettingsRequest
+var UpdateIpAccessSettingsRequest_ipAccessSettingsArn = &sUpdateIpAccessSettingsRequest_ipAccessSettingsArn
+var UpdateIpAccessSettingsRequest_displayName = &sUpdateIpAccessSettingsRequest_displayName
+var UpdateIpAccessSettingsRequest_description = &sUpdateIpAccessSettingsRequest_description
+var UpdateIpAccessSettingsRequest_ipRules = &sUpdateIpAccessSettingsRequest_ipRules
+var UpdateIpAccessSettingsRequest_clientToken = &sUpdateIpAccessSettingsRequest_clientToken
+
+var UpdateIpAccessSettingsResponse = &sUpdateIpAccessSettingsResponse
+var UpdateIpAccessSettingsResponse_ipAccessSettings = &sUpdateIpAccessSettingsResponse_ipAccessSettings
+
+var UpdateNetworkSettingsRequest = &sUpdateNetworkSettingsRequest
+var UpdateNetworkSettingsRequest_networkSettingsArn = &sUpdateNetworkSettingsRequest_networkSettingsArn
+var UpdateNetworkSettingsRequest_vpcId = &sUpdateNetworkSettingsRequest_vpcId
+var UpdateNetworkSettingsRequest_subnetIds = &sUpdateNetworkSettingsRequest_subnetIds
+var UpdateNetworkSettingsRequest_securityGroupIds = &sUpdateNetworkSettingsRequest_securityGroupIds
+var UpdateNetworkSettingsRequest_clientToken = &sUpdateNetworkSettingsRequest_clientToken
+
+var UpdateNetworkSettingsResponse = &sUpdateNetworkSettingsResponse
+var UpdateNetworkSettingsResponse_networkSettings = &sUpdateNetworkSettingsResponse_networkSettings
+
+var UpdatePortalRequest = &sUpdatePortalRequest
+var UpdatePortalRequest_portalArn = &sUpdatePortalRequest_portalArn
+var UpdatePortalRequest_displayName = &sUpdatePortalRequest_displayName
+var UpdatePortalRequest_authenticationType = &sUpdatePortalRequest_authenticationType
+var UpdatePortalRequest_instanceType = &sUpdatePortalRequest_instanceType
+var UpdatePortalRequest_maxConcurrentSessions = &sUpdatePortalRequest_maxConcurrentSessions
+var UpdatePortalRequest_portalCustomDomain = &sUpdatePortalRequest_portalCustomDomain
+
+var UpdatePortalResponse = &sUpdatePortalResponse
+var UpdatePortalResponse_portal = &sUpdatePortalResponse_portal
+
+var UpdateSessionLoggerRequest = &sUpdateSessionLoggerRequest
+var UpdateSessionLoggerRequest_sessionLoggerArn = &sUpdateSessionLoggerRequest_sessionLoggerArn
+var UpdateSessionLoggerRequest_eventFilter = &sUpdateSessionLoggerRequest_eventFilter
+var UpdateSessionLoggerRequest_logConfiguration = &sUpdateSessionLoggerRequest_logConfiguration
+var UpdateSessionLoggerRequest_displayName = &sUpdateSessionLoggerRequest_displayName
+
+var UpdateSessionLoggerResponse = &sUpdateSessionLoggerResponse
+var UpdateSessionLoggerResponse_sessionLogger = &sUpdateSessionLoggerResponse_sessionLogger
+
+var UpdateTrustStoreRequest = &sUpdateTrustStoreRequest
+var UpdateTrustStoreRequest_trustStoreArn = &sUpdateTrustStoreRequest_trustStoreArn
+var UpdateTrustStoreRequest_certificatesToAdd = &sUpdateTrustStoreRequest_certificatesToAdd
+var UpdateTrustStoreRequest_certificatesToDelete = &sUpdateTrustStoreRequest_certificatesToDelete
+var UpdateTrustStoreRequest_clientToken = &sUpdateTrustStoreRequest_clientToken
+
+var UpdateTrustStoreResponse = &sUpdateTrustStoreResponse
+var UpdateTrustStoreResponse_trustStoreArn = &sUpdateTrustStoreResponse_trustStoreArn
+
+var UpdateUserAccessLoggingSettingsRequest = &sUpdateUserAccessLoggingSettingsRequest
+var UpdateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn = &sUpdateUserAccessLoggingSettingsRequest_userAccessLoggingSettingsArn
+var UpdateUserAccessLoggingSettingsRequest_kinesisStreamArn = &sUpdateUserAccessLoggingSettingsRequest_kinesisStreamArn
+var UpdateUserAccessLoggingSettingsRequest_clientToken = &sUpdateUserAccessLoggingSettingsRequest_clientToken
+
+var UpdateUserAccessLoggingSettingsResponse = &sUpdateUserAccessLoggingSettingsResponse
+var UpdateUserAccessLoggingSettingsResponse_userAccessLoggingSettings = &sUpdateUserAccessLoggingSettingsResponse_userAccessLoggingSettings
+
+var UpdateUserSettingsRequest = &sUpdateUserSettingsRequest
+var UpdateUserSettingsRequest_userSettingsArn = &sUpdateUserSettingsRequest_userSettingsArn
+var UpdateUserSettingsRequest_copyAllowed = &sUpdateUserSettingsRequest_copyAllowed
+var UpdateUserSettingsRequest_pasteAllowed = &sUpdateUserSettingsRequest_pasteAllowed
+var UpdateUserSettingsRequest_downloadAllowed = &sUpdateUserSettingsRequest_downloadAllowed
+var UpdateUserSettingsRequest_uploadAllowed = &sUpdateUserSettingsRequest_uploadAllowed
+var UpdateUserSettingsRequest_printAllowed = &sUpdateUserSettingsRequest_printAllowed
+var UpdateUserSettingsRequest_disconnectTimeoutInMinutes = &sUpdateUserSettingsRequest_disconnectTimeoutInMinutes
+var UpdateUserSettingsRequest_idleDisconnectTimeoutInMinutes = &sUpdateUserSettingsRequest_idleDisconnectTimeoutInMinutes
+var UpdateUserSettingsRequest_clientToken = &sUpdateUserSettingsRequest_clientToken
+var UpdateUserSettingsRequest_cookieSynchronizationConfiguration = &sUpdateUserSettingsRequest_cookieSynchronizationConfiguration
+var UpdateUserSettingsRequest_deepLinkAllowed = &sUpdateUserSettingsRequest_deepLinkAllowed
+var UpdateUserSettingsRequest_toolbarConfiguration = &sUpdateUserSettingsRequest_toolbarConfiguration
+var UpdateUserSettingsRequest_brandingConfigurationInput = &sUpdateUserSettingsRequest_brandingConfigurationInput
+var UpdateUserSettingsRequest_webAuthnAllowed = &sUpdateUserSettingsRequest_webAuthnAllowed
+
+var UpdateUserSettingsResponse = &sUpdateUserSettingsResponse
+var UpdateUserSettingsResponse_userSettings = &sUpdateUserSettingsResponse_userSettings
+
+var AWSErmineControlPlaneService = &smithy.ServiceSchema{Schema: &s_AWSErmineControlPlaneService, Version: "2020-07-08"}

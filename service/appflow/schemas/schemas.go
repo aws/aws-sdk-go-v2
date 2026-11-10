@@ -4,6544 +4,4526 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelFlowExecutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CancelFlowExecutions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCancelFlowExecutions                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CancelFlowExecutions"}
+	iCreateConnectorProfile                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CreateConnectorProfile"}
+	iCreateFlow                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CreateFlow"}
+	iDeleteConnectorProfile                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DeleteConnectorProfile"}
+	iDeleteFlow                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DeleteFlow"}
+	iDescribeConnector                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnector"}
+	iDescribeConnectorEntity                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorEntity"}
+	iDescribeConnectorProfiles                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorProfiles"}
+	iDescribeConnectors                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectors"}
+	iDescribeFlow                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeFlow"}
+	iDescribeFlowExecutionRecords                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeFlowExecutionRecords"}
+	iListConnectorEntities                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListConnectorEntities"}
+	iListConnectors                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListConnectors"}
+	iListFlows                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListFlows"}
+	iListTagsForResource                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListTagsForResource"}
+	iRegisterConnector                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RegisterConnector"}
+	iResetConnectorMetadataCache                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ResetConnectorMetadataCache"}
+	iStartFlow                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "StartFlow"}
+	iStopFlow                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "StopFlow"}
+	iTagResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TagResource"}
+	iUnregisterConnector                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UnregisterConnector"}
+	iUntagResource                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UntagResource"}
+	iUpdateConnectorProfile                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateConnectorProfile"}
+	iUpdateConnectorRegistration                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateConnectorRegistration"}
+	iUpdateFlow                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateFlow"}
+	i_SandstoneConfigurationServiceLambda         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SandstoneConfigurationServiceLambda"}
+	iAccessDeniedException                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AccessDeniedException"}
+	i_AccessKeyId                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AccessKeyId"}
+	i_AccessToken                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AccessToken"}
+	i_AccountName                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AccountName"}
+	iAggregationConfig                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AggregationConfig"}
+	iAggregationType                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AggregationType"}
+	iAmplitudeConnectorOperator                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AmplitudeConnectorOperator"}
+	iAmplitudeConnectorProfileCredentials         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AmplitudeConnectorProfileCredentials"}
+	iAmplitudeConnectorProfileProperties          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AmplitudeConnectorProfileProperties"}
+	iAmplitudeMetadata                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AmplitudeMetadata"}
+	iAmplitudeSourceProperties                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AmplitudeSourceProperties"}
+	i_ApiKey                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApiKey"}
+	iApiKeyCredentials                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApiKeyCredentials"}
+	i_ApiSecretKey                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApiSecretKey"}
+	i_ApiToken                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApiToken"}
+	i_ApiVersion                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApiVersion"}
+	i_ApplicationHostUrl                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApplicationHostUrl"}
+	i_ApplicationKey                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApplicationKey"}
+	i_ApplicationServicePath                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApplicationServicePath"}
+	i_ApplicationType                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ApplicationType"}
+	i_ARN                                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ARN"}
+	i_AuthCode                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AuthCode"}
+	i_AuthCodeUrl                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AuthCodeUrl"}
+	i_AuthCodeUrlList                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AuthCodeUrlList"}
+	iAuthenticationConfig                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AuthenticationConfig"}
+	iAuthenticationType                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AuthenticationType"}
+	iAuthParameter                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AuthParameter"}
+	i_AuthParameterList                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "AuthParameterList"}
+	iBasicAuthCredentials                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "BasicAuthCredentials"}
+	i_Boolean                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Boolean"}
+	i_BucketName                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "BucketName"}
+	i_BucketPrefix                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "BucketPrefix"}
+	i_BusinessUnitId                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "BusinessUnitId"}
+	iCatalogType                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CatalogType"}
+	i_ClientCredentialsArn                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ClientCredentialsArn"}
+	i_ClientId                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ClientId"}
+	i_ClientNumber                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ClientNumber"}
+	i_ClientSecret                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ClientSecret"}
+	i_ClientToken                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ClientToken"}
+	i_ClusterIdentifier                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ClusterIdentifier"}
+	i_CodeVerifier                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CodeVerifier"}
+	iConflictException                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConflictException"}
+	iConnectionMode                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectionMode"}
+	iConnectorAuthenticationException             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorAuthenticationException"}
+	iConnectorConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorConfiguration"}
+	i_ConnectorConfigurationsMap                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorConfigurationsMap"}
+	i_ConnectorDescription                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorDescription"}
+	iConnectorDetail                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorDetail"}
+	iConnectorEntity                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorEntity"}
+	iConnectorEntityField                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorEntityField"}
+	i_ConnectorEntityFieldList                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorEntityFieldList"}
+	i_ConnectorEntityList                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorEntityList"}
+	i_ConnectorEntityMap                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorEntityMap"}
+	i_ConnectorLabel                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorLabel"}
+	i_ConnectorList                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorList"}
+	iConnectorMetadata                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorMetadata"}
+	i_ConnectorMode                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorMode"}
+	i_ConnectorModeList                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorModeList"}
+	i_ConnectorName                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorName"}
+	iConnectorOAuthRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorOAuthRequest"}
+	iConnectorOperator                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorOperator"}
+	i_ConnectorOwner                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorOwner"}
+	iConnectorProfile                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfile"}
+	i_ConnectorProfileArn                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfileArn"}
+	iConnectorProfileConfig                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfileConfig"}
+	iConnectorProfileCredentials                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfileCredentials"}
+	i_ConnectorProfileDetailList                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfileDetailList"}
+	i_ConnectorProfileName                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfileName"}
+	i_ConnectorProfileNameList                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfileNameList"}
+	iConnectorProfileProperties                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProfileProperties"}
+	iConnectorProvisioningConfig                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProvisioningConfig"}
+	iConnectorProvisioningType                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorProvisioningType"}
+	iConnectorRuntimeSetting                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorRuntimeSetting"}
+	i_ConnectorRuntimeSettingDataType             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorRuntimeSettingDataType"}
+	i_ConnectorRuntimeSettingList                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorRuntimeSettingList"}
+	i_ConnectorRuntimeSettingScope                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorRuntimeSettingScope"}
+	iConnectorServerException                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorServerException"}
+	i_ConnectorSuppliedValue                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorSuppliedValue"}
+	i_ConnectorSuppliedValueList                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorSuppliedValueList"}
+	i_ConnectorSuppliedValueOptionList            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorSuppliedValueOptionList"}
+	iConnectorType                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorType"}
+	i_ConnectorTypeList                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorTypeList"}
+	i_ConnectorVersion                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ConnectorVersion"}
+	i_CreatedBy                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CreatedBy"}
+	i_CredentialsMap                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CredentialsMap"}
+	i_CredentialsMapKey                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CredentialsMapKey"}
+	i_CredentialsMapValue                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CredentialsMapValue"}
+	iCustomAuthConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomAuthConfig"}
+	i_CustomAuthConfigList                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomAuthConfigList"}
+	iCustomAuthCredentials                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomAuthCredentials"}
+	i_CustomAuthenticationType                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomAuthenticationType"}
+	iCustomConnectorDestinationProperties         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomConnectorDestinationProperties"}
+	iCustomConnectorProfileCredentials            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomConnectorProfileCredentials"}
+	iCustomConnectorProfileProperties             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomConnectorProfileProperties"}
+	iCustomConnectorSourceProperties              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomConnectorSourceProperties"}
+	iCustomerProfilesDestinationProperties        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomerProfilesDestinationProperties"}
+	iCustomerProfilesMetadata                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomerProfilesMetadata"}
+	i_CustomProperties                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomProperties"}
+	i_CustomPropertyKey                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomPropertyKey"}
+	i_CustomPropertyValue                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CustomPropertyValue"}
+	i_DataApiRoleArn                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DataApiRoleArn"}
+	i_DatabaseName                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatabaseName"}
+	i_DatabaseUrl                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatabaseUrl"}
+	iDatadogConnectorOperator                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatadogConnectorOperator"}
+	iDatadogConnectorProfileCredentials           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatadogConnectorProfileCredentials"}
+	iDatadogConnectorProfileProperties            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatadogConnectorProfileProperties"}
+	iDatadogMetadata                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatadogMetadata"}
+	iDatadogSourceProperties                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatadogSourceProperties"}
+	iDataPullMode                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DataPullMode"}
+	iDataTransferApi                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DataTransferApi"}
+	iDataTransferApiType                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DataTransferApiType"}
+	i_DataTransferApiTypeName                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DataTransferApiTypeName"}
+	i_Date                                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Date"}
+	i_DatetimeTypeFieldName                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DatetimeTypeFieldName"}
+	i_Description                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Description"}
+	iDestinationConnectorProperties               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DestinationConnectorProperties"}
+	i_DestinationField                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DestinationField"}
+	iDestinationFieldProperties                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DestinationFieldProperties"}
+	iDestinationFlowConfig                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DestinationFlowConfig"}
+	i_DestinationFlowConfigList                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DestinationFlowConfigList"}
+	i_DocumentType                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DocumentType"}
+	i_DomainName                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DomainName"}
+	i_Double                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Double"}
+	iDynatraceConnectorOperator                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DynatraceConnectorOperator"}
+	iDynatraceConnectorProfileCredentials         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DynatraceConnectorProfileCredentials"}
+	iDynatraceConnectorProfileProperties          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DynatraceConnectorProfileProperties"}
+	iDynatraceMetadata                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DynatraceMetadata"}
+	iDynatraceSourceProperties                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DynatraceSourceProperties"}
+	i_EntitiesPath                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "EntitiesPath"}
+	i_EntityName                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "EntityName"}
+	iErrorHandlingConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ErrorHandlingConfig"}
+	iErrorInfo                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ErrorInfo"}
+	i_ErrorMessage                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ErrorMessage"}
+	iEventBridgeDestinationProperties             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "EventBridgeDestinationProperties"}
+	iEventBridgeMetadata                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "EventBridgeMetadata"}
+	iExecutionDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ExecutionDetails"}
+	i_ExecutionId                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ExecutionId"}
+	i_ExecutionIds                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ExecutionIds"}
+	i_ExecutionMessage                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ExecutionMessage"}
+	iExecutionRecord                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ExecutionRecord"}
+	iExecutionResult                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ExecutionResult"}
+	iExecutionStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ExecutionStatus"}
+	i_FieldType                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FieldType"}
+	iFieldTypeDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FieldTypeDetails"}
+	iFileType                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FileType"}
+	i_FilterOperatorList                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FilterOperatorList"}
+	i_FlowArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowArn"}
+	iFlowDefinition                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowDefinition"}
+	i_FlowDescription                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowDescription"}
+	i_FlowErrorDeactivationThreshold              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowErrorDeactivationThreshold"}
+	i_FlowExecutionList                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowExecutionList"}
+	i_FlowList                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowList"}
+	i_FlowName                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowName"}
+	iFlowStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowStatus"}
+	i_FlowStatusMessage                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "FlowStatusMessage"}
+	iGlueDataCatalogConfig                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GlueDataCatalogConfig"}
+	i_GlueDataCatalogDatabaseName                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GlueDataCatalogDatabaseName"}
+	i_GlueDataCatalogIAMRole                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GlueDataCatalogIAMRole"}
+	i_GlueDataCatalogTablePrefix                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GlueDataCatalogTablePrefix"}
+	iGoogleAnalyticsConnectorOperator             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GoogleAnalyticsConnectorOperator"}
+	iGoogleAnalyticsConnectorProfileCredentials   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GoogleAnalyticsConnectorProfileCredentials"}
+	iGoogleAnalyticsConnectorProfileProperties    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GoogleAnalyticsConnectorProfileProperties"}
+	iGoogleAnalyticsMetadata                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GoogleAnalyticsMetadata"}
+	iGoogleAnalyticsSourceProperties              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "GoogleAnalyticsSourceProperties"}
+	i_Group                                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Group"}
+	iHoneycodeConnectorProfileCredentials         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "HoneycodeConnectorProfileCredentials"}
+	iHoneycodeConnectorProfileProperties          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "HoneycodeConnectorProfileProperties"}
+	iHoneycodeDestinationProperties               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "HoneycodeDestinationProperties"}
+	iHoneycodeMetadata                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "HoneycodeMetadata"}
+	i_Identifier                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Identifier"}
+	i_IdFieldNameList                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "IdFieldNameList"}
+	iIncrementalPullConfig                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "IncrementalPullConfig"}
+	iInforNexusConnectorOperator                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "InforNexusConnectorOperator"}
+	iInforNexusConnectorProfileCredentials        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "InforNexusConnectorProfileCredentials"}
+	iInforNexusConnectorProfileProperties         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "InforNexusConnectorProfileProperties"}
+	iInforNexusMetadata                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "InforNexusMetadata"}
+	iInforNexusSourceProperties                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "InforNexusSourceProperties"}
+	i_InstanceUrl                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "InstanceUrl"}
+	iInternalServerException                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "InternalServerException"}
+	i_JavaBoolean                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "JavaBoolean"}
+	i_JwtToken                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "JwtToken"}
+	i_Key                                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Key"}
+	i_KMSArn                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "KMSArn"}
+	i_Label                                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Label"}
+	iLambdaConnectorProvisioningConfig            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "LambdaConnectorProvisioningConfig"}
+	i_ListEntitiesMaxResults                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListEntitiesMaxResults"}
+	i_LogonLanguage                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "LogonLanguage"}
+	i_LogoURL                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "LogoURL"}
+	i_Long                                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Long"}
+	iLookoutMetricsDestinationProperties          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "LookoutMetricsDestinationProperties"}
+	iMarketoConnectorOperator                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MarketoConnectorOperator"}
+	iMarketoConnectorProfileCredentials           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MarketoConnectorProfileCredentials"}
+	iMarketoConnectorProfileProperties            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MarketoConnectorProfileProperties"}
+	iMarketoDestinationProperties                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MarketoDestinationProperties"}
+	iMarketoMetadata                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MarketoMetadata"}
+	iMarketoSourceProperties                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MarketoSourceProperties"}
+	i_MaxResults                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MaxResults"}
+	iMetadataCatalogConfig                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MetadataCatalogConfig"}
+	iMetadataCatalogDetail                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MetadataCatalogDetail"}
+	i_MetadataCatalogDetails                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MetadataCatalogDetails"}
+	i_MostRecentExecutionMessage                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "MostRecentExecutionMessage"}
+	i_Name                                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Name"}
+	i_NextToken                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "NextToken"}
+	iOAuth2Credentials                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2Credentials"}
+	iOAuth2CustomParameter                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2CustomParameter"}
+	i_OAuth2CustomPropertiesList                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2CustomPropertiesList"}
+	iOAuth2CustomPropType                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2CustomPropType"}
+	iOAuth2Defaults                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2Defaults"}
+	iOAuth2GrantType                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2GrantType"}
+	i_OAuth2GrantTypeSupportedList                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2GrantTypeSupportedList"}
+	iOAuth2Properties                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuth2Properties"}
+	iOAuthCredentials                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuthCredentials"}
+	iOAuthProperties                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuthProperties"}
+	i_OAuthScope                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuthScope"}
+	i_OAuthScopeList                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OAuthScopeList"}
+	i_Object                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Object"}
+	i_ObjectTypeName                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ObjectTypeName"}
+	iOperator                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Operator"}
+	iOperatorPropertiesKeys                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "OperatorPropertiesKeys"}
+	iOperators                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Operators"}
+	iPardotConnectorOperator                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PardotConnectorOperator"}
+	iPardotConnectorProfileCredentials            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PardotConnectorProfileCredentials"}
+	iPardotConnectorProfileProperties             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PardotConnectorProfileProperties"}
+	iPardotMetadata                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PardotMetadata"}
+	iPardotSourceProperties                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PardotSourceProperties"}
+	i_Password                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Password"}
+	iPathPrefix                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PathPrefix"}
+	i_PathPrefixHierarchy                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PathPrefixHierarchy"}
+	i_PortNumber                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PortNumber"}
+	iPrefixConfig                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrefixConfig"}
+	iPrefixFormat                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrefixFormat"}
+	iPrefixType                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrefixType"}
+	iPrivateConnectionProvisioningFailureCause    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrivateConnectionProvisioningFailureCause"}
+	i_PrivateConnectionProvisioningFailureMessage = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrivateConnectionProvisioningFailureMessage"}
+	iPrivateConnectionProvisioningState           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrivateConnectionProvisioningState"}
+	iPrivateConnectionProvisioningStatus          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrivateConnectionProvisioningStatus"}
+	i_PrivateKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrivateKey"}
+	i_PrivateLinkServiceName                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "PrivateLinkServiceName"}
+	i_ProfilePropertiesMap                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ProfilePropertiesMap"}
+	i_ProfilePropertyKey                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ProfilePropertyKey"}
+	i_ProfilePropertyValue                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ProfilePropertyValue"}
+	i_Property                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Property"}
+	iRange                                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Range"}
+	i_RedirectUri                                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RedirectUri"}
+	iRedshiftConnectorProfileCredentials          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RedshiftConnectorProfileCredentials"}
+	iRedshiftConnectorProfileProperties           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RedshiftConnectorProfileProperties"}
+	iRedshiftDestinationProperties                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RedshiftDestinationProperties"}
+	iRedshiftMetadata                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RedshiftMetadata"}
+	i_RefreshToken                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RefreshToken"}
+	i_Region                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Region"}
+	i_RegionList                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RegionList"}
+	i_RegisteredBy                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RegisteredBy"}
+	iRegistrationOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RegistrationOutput"}
+	iResourceNotFoundException                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ResourceNotFoundException"}
+	i_RoleArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RoleArn"}
+	iS3ConnectorOperator                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "S3ConnectorOperator"}
+	iS3DestinationProperties                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "S3DestinationProperties"}
+	iS3InputFileType                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "S3InputFileType"}
+	iS3InputFormatConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "S3InputFormatConfig"}
+	iS3Metadata                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "S3Metadata"}
+	iS3OutputFormatConfig                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "S3OutputFormatConfig"}
+	iS3SourceProperties                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "S3SourceProperties"}
+	iSalesforceConnectorOperator                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceConnectorOperator"}
+	iSalesforceConnectorProfileCredentials        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceConnectorProfileCredentials"}
+	iSalesforceConnectorProfileProperties         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceConnectorProfileProperties"}
+	iSalesforceDataTransferApi                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceDataTransferApi"}
+	i_SalesforceDataTransferApiList               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceDataTransferApiList"}
+	iSalesforceDestinationProperties              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceDestinationProperties"}
+	iSalesforceMetadata                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceMetadata"}
+	iSalesforceSourceProperties                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SalesforceSourceProperties"}
+	iSAPODataConnectorOperator                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataConnectorOperator"}
+	iSAPODataConnectorProfileCredentials          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataConnectorProfileCredentials"}
+	iSAPODataConnectorProfileProperties           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataConnectorProfileProperties"}
+	iSAPODataDestinationProperties                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataDestinationProperties"}
+	i_SAPODataMaxPageSize                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataMaxPageSize"}
+	i_SAPODataMaxParallelism                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataMaxParallelism"}
+	iSAPODataMetadata                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataMetadata"}
+	iSAPODataPaginationConfig                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataPaginationConfig"}
+	iSAPODataParallelismConfig                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataParallelismConfig"}
+	iSAPODataSourceProperties                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SAPODataSourceProperties"}
+	iScheduledTriggerProperties                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ScheduledTriggerProperties"}
+	i_ScheduleExpression                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ScheduleExpression"}
+	iScheduleFrequencyType                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ScheduleFrequencyType"}
+	i_ScheduleOffset                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ScheduleOffset"}
+	i_SchedulingFrequencyTypeList                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SchedulingFrequencyTypeList"}
+	i_SecretKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SecretKey"}
+	iServiceNowConnectorOperator                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ServiceNowConnectorOperator"}
+	iServiceNowConnectorProfileCredentials        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ServiceNowConnectorProfileCredentials"}
+	iServiceNowConnectorProfileProperties         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ServiceNowConnectorProfileProperties"}
+	iServiceNowMetadata                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ServiceNowMetadata"}
+	iServiceNowSourceProperties                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ServiceNowSourceProperties"}
+	iServiceQuotaExceededException                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ServiceQuotaExceededException"}
+	iSingularConnectorOperator                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SingularConnectorOperator"}
+	iSingularConnectorProfileCredentials          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SingularConnectorProfileCredentials"}
+	iSingularConnectorProfileProperties           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SingularConnectorProfileProperties"}
+	iSingularMetadata                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SingularMetadata"}
+	iSingularSourceProperties                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SingularSourceProperties"}
+	iSlackConnectorOperator                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SlackConnectorOperator"}
+	iSlackConnectorProfileCredentials             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SlackConnectorProfileCredentials"}
+	iSlackConnectorProfileProperties              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SlackConnectorProfileProperties"}
+	iSlackMetadata                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SlackMetadata"}
+	iSlackSourceProperties                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SlackSourceProperties"}
+	iSnowflakeConnectorProfileCredentials         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SnowflakeConnectorProfileCredentials"}
+	iSnowflakeConnectorProfileProperties          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SnowflakeConnectorProfileProperties"}
+	iSnowflakeDestinationProperties               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SnowflakeDestinationProperties"}
+	iSnowflakeMetadata                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SnowflakeMetadata"}
+	iSourceConnectorProperties                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SourceConnectorProperties"}
+	iSourceFieldProperties                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SourceFieldProperties"}
+	i_SourceFields                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SourceFields"}
+	iSourceFlowConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SourceFlowConfig"}
+	i_Stage                                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Stage"}
+	i_String                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "String"}
+	iSuccessResponseHandlingConfig                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SuccessResponseHandlingConfig"}
+	i_SupportedApiVersion                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedApiVersion"}
+	i_SupportedApiVersionList                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedApiVersionList"}
+	i_SupportedDataTransferApis                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedDataTransferApis"}
+	iSupportedDataTransferType                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedDataTransferType"}
+	i_SupportedDataTransferTypeList               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedDataTransferTypeList"}
+	iSupportedFieldTypeDetails                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedFieldTypeDetails"}
+	i_SupportedOperatorList                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedOperatorList"}
+	i_SupportedValueList                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedValueList"}
+	i_SupportedWriteOperationList                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "SupportedWriteOperationList"}
+	i_TagKey                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TagKey"}
+	i_TagKeyList                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TagKeyList"}
+	i_TagMap                                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TagMap"}
+	i_TagValue                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TagValue"}
+	iTask                                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Task"}
+	i_TaskPropertiesMap                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TaskPropertiesMap"}
+	i_Tasks                                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Tasks"}
+	iTaskType                                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TaskType"}
+	iThrottlingException                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ThrottlingException"}
+	i_Timezone                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Timezone"}
+	i_TokenUrl                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TokenUrl"}
+	i_TokenUrlCustomProperties                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TokenUrlCustomProperties"}
+	i_TokenUrlList                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TokenUrlList"}
+	iTrendmicroConnectorOperator                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TrendmicroConnectorOperator"}
+	iTrendmicroConnectorProfileCredentials        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TrendmicroConnectorProfileCredentials"}
+	iTrendmicroConnectorProfileProperties         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TrendmicroConnectorProfileProperties"}
+	iTrendmicroMetadata                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TrendmicroMetadata"}
+	iTrendmicroSourceProperties                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TrendmicroSourceProperties"}
+	iTriggerConfig                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TriggerConfig"}
+	iTriggerProperties                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TriggerProperties"}
+	iTriggerType                                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TriggerType"}
+	i_TriggerTypeList                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TriggerTypeList"}
+	iUnsupportedOperationException                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UnsupportedOperationException"}
+	i_UpdatedBy                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdatedBy"}
+	i_UpsolverBucketName                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpsolverBucketName"}
+	iUpsolverDestinationProperties                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpsolverDestinationProperties"}
+	iUpsolverMetadata                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpsolverMetadata"}
+	iUpsolverS3OutputFormatConfig                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpsolverS3OutputFormatConfig"}
+	i_Username                                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Username"}
+	iValidationException                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ValidationException"}
+	i_Value                                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Value"}
+	iVeevaConnectorOperator                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "VeevaConnectorOperator"}
+	iVeevaConnectorProfileCredentials             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "VeevaConnectorProfileCredentials"}
+	iVeevaConnectorProfileProperties              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "VeevaConnectorProfileProperties"}
+	iVeevaMetadata                                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "VeevaMetadata"}
+	iVeevaSourceProperties                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "VeevaSourceProperties"}
+	i_Warehouse                                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "Warehouse"}
+	i_WorkgroupName                               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "WorkgroupName"}
+	iWriteOperationType                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "WriteOperationType"}
+	iZendeskConnectorOperator                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ZendeskConnectorOperator"}
+	iZendeskConnectorProfileCredentials           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ZendeskConnectorProfileCredentials"}
+	iZendeskConnectorProfileProperties            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ZendeskConnectorProfileProperties"}
+	iZendeskDestinationProperties                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ZendeskDestinationProperties"}
+	iZendeskMetadata                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ZendeskMetadata"}
+	iZendeskSourceProperties                      = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ZendeskSourceProperties"}
+	iCancelFlowExecutionsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CancelFlowExecutionsRequest"}
+	iCancelFlowExecutionsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CancelFlowExecutionsResponse"}
+	iCreateConnectorProfileRequest                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CreateConnectorProfileRequest"}
+	iCreateConnectorProfileResponse               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CreateConnectorProfileResponse"}
+	iCreateFlowRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CreateFlowRequest"}
+	iCreateFlowResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "CreateFlowResponse"}
+	iDeleteConnectorProfileRequest                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DeleteConnectorProfileRequest"}
+	iDeleteConnectorProfileResponse               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DeleteConnectorProfileResponse"}
+	iDeleteFlowRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DeleteFlowRequest"}
+	iDeleteFlowResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DeleteFlowResponse"}
+	iDescribeConnectorEntityRequest               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorEntityRequest"}
+	iDescribeConnectorEntityResponse              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorEntityResponse"}
+	iDescribeConnectorRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorRequest"}
+	iDescribeConnectorResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorResponse"}
+	iDescribeConnectorProfilesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorProfilesRequest"}
+	iDescribeConnectorProfilesResponse            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorProfilesResponse"}
+	iDescribeConnectorsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorsRequest"}
+	iDescribeConnectorsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeConnectorsResponse"}
+	iDescribeFlowExecutionRecordsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeFlowExecutionRecordsRequest"}
+	iDescribeFlowExecutionRecordsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeFlowExecutionRecordsResponse"}
+	iDescribeFlowRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeFlowRequest"}
+	iDescribeFlowResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "DescribeFlowResponse"}
+	iListConnectorEntitiesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListConnectorEntitiesRequest"}
+	iListConnectorEntitiesResponse                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListConnectorEntitiesResponse"}
+	iListConnectorsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListConnectorsRequest"}
+	iListConnectorsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListConnectorsResponse"}
+	iListFlowsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListFlowsRequest"}
+	iListFlowsResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListFlowsResponse"}
+	iListTagsForResourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ListTagsForResourceResponse"}
+	iRegisterConnectorRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RegisterConnectorRequest"}
+	iRegisterConnectorResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "RegisterConnectorResponse"}
+	iResetConnectorMetadataCacheRequest           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ResetConnectorMetadataCacheRequest"}
+	iResetConnectorMetadataCacheResponse          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "ResetConnectorMetadataCacheResponse"}
+	iStartFlowRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "StartFlowRequest"}
+	iStartFlowResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "StartFlowResponse"}
+	iStopFlowRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "StopFlowRequest"}
+	iStopFlowResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "StopFlowResponse"}
+	iTagResourceRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TagResourceRequest"}
+	iTagResourceResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "TagResourceResponse"}
+	iUnregisterConnectorRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UnregisterConnectorRequest"}
+	iUnregisterConnectorResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UnregisterConnectorResponse"}
+	iUntagResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UntagResourceResponse"}
+	iUpdateConnectorProfileRequest                = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateConnectorProfileRequest"}
+	iUpdateConnectorProfileResponse               = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateConnectorProfileResponse"}
+	iUpdateConnectorRegistrationRequest           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateConnectorRegistrationRequest"}
+	iUpdateConnectorRegistrationResponse          = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateConnectorRegistrationResponse"}
+	iUpdateFlowRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateFlowRequest"}
+	iUpdateFlowResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.appflow", Name: "UpdateFlowResponse"}
+	pUnit                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cancel-flow-executions",
-	Code: 200})
-
-var CreateConnectorProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CreateConnectorProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-connector-profile",
-	Code: 200})
-
-var CreateFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CreateFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-flow",
-	Code: 200})
-
-var DeleteConnectorProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DeleteConnectorProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-connector-profile",
-	Code: 200})
-
-var DeleteFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DeleteFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-flow",
-	Code: 200})
-
-var DescribeConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-connector",
-	Code: 200})
-
-var DescribeConnectorEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorEntity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-connector-entity",
-	Code: 200})
-
-var DescribeConnectorProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorProfiles",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-connector-profiles",
-	Code: 200})
-
-var DescribeConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-connectors",
-	Code: 200})
-
-var DescribeFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-flow",
-	Code: 200})
-
-var DescribeFlowExecutionRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeFlowExecutionRecords",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/describe-flow-execution-records",
-	Code: 200})
-
-var ListConnectorEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListConnectorEntities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-connector-entities",
-	Code: 200})
-
-var ListConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-connectors",
-	Code: 200})
-
-var ListFlows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListFlows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-flows",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RegisterConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/register-connector",
-	Code: 200})
-
-var ResetConnectorMetadataCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ResetConnectorMetadataCache",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/reset-connector-metadata-cache",
-	Code: 200})
-
-var StartFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "StartFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/start-flow",
-	Code: 200})
-
-var StopFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "StopFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/stop-flow",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UnregisterConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UnregisterConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/unregister-connector",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateConnectorProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateConnectorProfile",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-connector-profile",
-	Code: 200})
-
-var UpdateConnectorRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateConnectorRegistration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-connector-registration",
-	Code: 200})
-
-var UpdateFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-flow",
-	Code: 200})
-
-var _SandstoneConfigurationServiceLambda = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SandstoneConfigurationServiceLambda",
-}, smithy.ShapeTypeService, 0)
-
-var SandstoneConfigurationServiceLambda = smithy.NewServiceSchema(_SandstoneConfigurationServiceLambda, "2020-08-23")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccessKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AccessKeyId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AccessToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AccountName",
-}, smithy.ShapeTypeString, 0)
-
-var AggregationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AggregationConfig",
-}, smithy.ShapeTypeStructure, 2)
-var AggregationConfig_aggregationType *smithy.Schema
-
-var AggregationConfig_targetFileSize *smithy.Schema
-
-var AggregationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AggregationType",
-}, smithy.ShapeTypeEnum, 2)
-var AggregationType_NONE *smithy.Schema
-
-var AggregationType_SINGLE_FILE *smithy.Schema
-
-var AmplitudeConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AmplitudeConnectorOperator",
-}, smithy.ShapeTypeEnum, 1)
-var AmplitudeConnectorOperator_BETWEEN *smithy.Schema
-
-var AmplitudeConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AmplitudeConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var AmplitudeConnectorProfileCredentials_apiKey *smithy.Schema
-
-var AmplitudeConnectorProfileCredentials_secretKey *smithy.Schema
-
-var AmplitudeConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AmplitudeConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 0)
-
-var AmplitudeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AmplitudeMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var AmplitudeSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AmplitudeSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var AmplitudeSourceProperties_object *smithy.Schema
-
-var _ApiKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApiKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ApiKeyCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApiKeyCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var ApiKeyCredentials_apiKey *smithy.Schema
-
-var ApiKeyCredentials_apiSecretKey *smithy.Schema
-
-var _ApiSecretKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApiSecretKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ApiToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApiToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ApiVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApiVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationHostUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApplicationHostUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApplicationKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationServicePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApplicationServicePath",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ApplicationType",
-}, smithy.ShapeTypeString, 0)
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AuthCode",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthCodeUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AuthCodeUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthCodeUrlList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AuthCodeUrlList",
-}, smithy.ShapeTypeList, 1)
-var _AuthCodeUrlList_member *smithy.Schema
-
-var AuthenticationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AuthenticationConfig",
-}, smithy.ShapeTypeStructure, 6)
-var AuthenticationConfig_isBasicAuthSupported *smithy.Schema
-
-var AuthenticationConfig_isApiKeyAuthSupported *smithy.Schema
-
-var AuthenticationConfig_isOAuth2Supported *smithy.Schema
-
-var AuthenticationConfig_isCustomAuthSupported *smithy.Schema
-
-var AuthenticationConfig_oAuth2Defaults *smithy.Schema
-
-var AuthenticationConfig_customAuthConfigs *smithy.Schema
-
-var AuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AuthenticationType",
-}, smithy.ShapeTypeEnum, 4)
-var AuthenticationType_OAUTH2 *smithy.Schema
-
-var AuthenticationType_APIKEY *smithy.Schema
-
-var AuthenticationType_BASIC *smithy.Schema
-
-var AuthenticationType_CUSTOM *smithy.Schema
-
-var AuthParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AuthParameter",
-}, smithy.ShapeTypeStructure, 6)
-var AuthParameter_key *smithy.Schema
-
-var AuthParameter_isRequired *smithy.Schema
-
-var AuthParameter_label *smithy.Schema
-
-var AuthParameter_description *smithy.Schema
-
-var AuthParameter_isSensitiveField *smithy.Schema
-
-var AuthParameter_connectorSuppliedValues *smithy.Schema
-
-var _AuthParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "AuthParameterList",
-}, smithy.ShapeTypeList, 1)
-var _AuthParameterList_member *smithy.Schema
-
-var BasicAuthCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "BasicAuthCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var BasicAuthCredentials_username *smithy.Schema
-
-var BasicAuthCredentials_password *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _BucketPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "BucketPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _BusinessUnitId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "BusinessUnitId",
-}, smithy.ShapeTypeString, 0)
-
-var CatalogType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CatalogType",
-}, smithy.ShapeTypeEnum, 1)
-var CatalogType_GLUE *smithy.Schema
-
-var _ClientCredentialsArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ClientCredentialsArn",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ClientId",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ClientNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ClientSecret",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ClusterIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ClusterIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeVerifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CodeVerifier",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConnectionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectionMode",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectionMode_PUBLIC *smithy.Schema
-
-var ConnectionMode_PRIVATE *smithy.Schema
-
-var ConnectorAuthenticationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorAuthenticationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var ConnectorAuthenticationException_message *smithy.Schema
-
-var ConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorConfiguration",
-}, smithy.ShapeTypeStructure, 28)
-var ConnectorConfiguration_canUseAsSource *smithy.Schema
-
-var ConnectorConfiguration_canUseAsDestination *smithy.Schema
-
-var ConnectorConfiguration_supportedDestinationConnectors *smithy.Schema
-
-var ConnectorConfiguration_supportedSchedulingFrequencies *smithy.Schema
-
-var ConnectorConfiguration_isPrivateLinkEnabled *smithy.Schema
-
-var ConnectorConfiguration_isPrivateLinkEndpointUrlRequired *smithy.Schema
-
-var ConnectorConfiguration_supportedTriggerTypes *smithy.Schema
-
-var ConnectorConfiguration_connectorMetadata *smithy.Schema
-
-var ConnectorConfiguration_connectorType *smithy.Schema
-
-var ConnectorConfiguration_connectorLabel *smithy.Schema
-
-var ConnectorConfiguration_connectorDescription *smithy.Schema
-
-var ConnectorConfiguration_connectorOwner *smithy.Schema
-
-var ConnectorConfiguration_connectorName *smithy.Schema
-
-var ConnectorConfiguration_connectorVersion *smithy.Schema
-
-var ConnectorConfiguration_connectorArn *smithy.Schema
-
-var ConnectorConfiguration_connectorModes *smithy.Schema
-
-var ConnectorConfiguration_authenticationConfig *smithy.Schema
-
-var ConnectorConfiguration_connectorRuntimeSettings *smithy.Schema
-
-var ConnectorConfiguration_supportedApiVersions *smithy.Schema
-
-var ConnectorConfiguration_supportedOperators *smithy.Schema
-
-var ConnectorConfiguration_supportedWriteOperations *smithy.Schema
-
-var ConnectorConfiguration_connectorProvisioningType *smithy.Schema
-
-var ConnectorConfiguration_connectorProvisioningConfig *smithy.Schema
-
-var ConnectorConfiguration_logoURL *smithy.Schema
-
-var ConnectorConfiguration_registeredAt *smithy.Schema
-
-var ConnectorConfiguration_registeredBy *smithy.Schema
-
-var ConnectorConfiguration_supportedDataTransferTypes *smithy.Schema
-
-var ConnectorConfiguration_supportedDataTransferApis *smithy.Schema
-
-var _ConnectorConfigurationsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorConfigurationsMap",
-}, smithy.ShapeTypeMap, 2)
-var _ConnectorConfigurationsMap_key *smithy.Schema
-
-var _ConnectorConfigurationsMap_value *smithy.Schema
-
-var _ConnectorDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorDescription",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorDetail",
-}, smithy.ShapeTypeStructure, 12)
-var ConnectorDetail_connectorDescription *smithy.Schema
-
-var ConnectorDetail_connectorName *smithy.Schema
-
-var ConnectorDetail_connectorOwner *smithy.Schema
-
-var ConnectorDetail_connectorVersion *smithy.Schema
-
-var ConnectorDetail_applicationType *smithy.Schema
-
-var ConnectorDetail_connectorType *smithy.Schema
-
-var ConnectorDetail_connectorLabel *smithy.Schema
-
-var ConnectorDetail_registeredAt *smithy.Schema
-
-var ConnectorDetail_registeredBy *smithy.Schema
-
-var ConnectorDetail_connectorProvisioningType *smithy.Schema
-
-var ConnectorDetail_connectorModes *smithy.Schema
-
-var ConnectorDetail_supportedDataTransferTypes *smithy.Schema
-
-var ConnectorEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorEntity",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectorEntity_name *smithy.Schema
-
-var ConnectorEntity_label *smithy.Schema
-
-var ConnectorEntity_hasNestedEntities *smithy.Schema
-
-var ConnectorEntityField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorEntityField",
-}, smithy.ShapeTypeStructure, 11)
-var ConnectorEntityField_identifier *smithy.Schema
-
-var ConnectorEntityField_parentIdentifier *smithy.Schema
-
-var ConnectorEntityField_label *smithy.Schema
-
-var ConnectorEntityField_isPrimaryKey *smithy.Schema
-
-var ConnectorEntityField_defaultValue *smithy.Schema
-
-var ConnectorEntityField_isDeprecated *smithy.Schema
-
-var ConnectorEntityField_supportedFieldTypeDetails *smithy.Schema
-
-var ConnectorEntityField_description *smithy.Schema
-
-var ConnectorEntityField_sourceProperties *smithy.Schema
-
-var ConnectorEntityField_destinationProperties *smithy.Schema
-
-var ConnectorEntityField_customProperties *smithy.Schema
-
-var _ConnectorEntityFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorEntityFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorEntityFieldList_member *smithy.Schema
-
-var _ConnectorEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorEntityList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorEntityList_member *smithy.Schema
-
-var _ConnectorEntityMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorEntityMap",
-}, smithy.ShapeTypeMap, 2)
-var _ConnectorEntityMap_key *smithy.Schema
-
-var _ConnectorEntityMap_value *smithy.Schema
-
-var _ConnectorLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorList_member *smithy.Schema
-
-var ConnectorMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorMetadata",
-}, smithy.ShapeTypeStructure, 22)
-var ConnectorMetadata_Amplitude *smithy.Schema
-
-var ConnectorMetadata_Datadog *smithy.Schema
-
-var ConnectorMetadata_Dynatrace *smithy.Schema
-
-var ConnectorMetadata_GoogleAnalytics *smithy.Schema
-
-var ConnectorMetadata_InforNexus *smithy.Schema
-
-var ConnectorMetadata_Marketo *smithy.Schema
-
-var ConnectorMetadata_Redshift *smithy.Schema
-
-var ConnectorMetadata_S3 *smithy.Schema
-
-var ConnectorMetadata_Salesforce *smithy.Schema
-
-var ConnectorMetadata_ServiceNow *smithy.Schema
-
-var ConnectorMetadata_Singular *smithy.Schema
-
-var ConnectorMetadata_Slack *smithy.Schema
-
-var ConnectorMetadata_Snowflake *smithy.Schema
-
-var ConnectorMetadata_Trendmicro *smithy.Schema
-
-var ConnectorMetadata_Veeva *smithy.Schema
-
-var ConnectorMetadata_Zendesk *smithy.Schema
-
-var ConnectorMetadata_EventBridge *smithy.Schema
-
-var ConnectorMetadata_Upsolver *smithy.Schema
-
-var ConnectorMetadata_CustomerProfiles *smithy.Schema
-
-var ConnectorMetadata_Honeycode *smithy.Schema
-
-var ConnectorMetadata_SAPOData *smithy.Schema
-
-var ConnectorMetadata_Pardot *smithy.Schema
-
-var _ConnectorMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorMode",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorModeList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorModeList_member *smithy.Schema
-
-var _ConnectorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorName",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorOAuthRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorOAuthRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectorOAuthRequest_authCode *smithy.Schema
-
-var ConnectorOAuthRequest_redirectUri *smithy.Schema
-
-var ConnectorOAuthRequest_codeVerifier *smithy.Schema
-
-var ConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorOperator",
-}, smithy.ShapeTypeStructure, 17)
-var ConnectorOperator_Amplitude *smithy.Schema
-
-var ConnectorOperator_Datadog *smithy.Schema
-
-var ConnectorOperator_Dynatrace *smithy.Schema
-
-var ConnectorOperator_GoogleAnalytics *smithy.Schema
-
-var ConnectorOperator_InforNexus *smithy.Schema
-
-var ConnectorOperator_Marketo *smithy.Schema
-
-var ConnectorOperator_S3 *smithy.Schema
-
-var ConnectorOperator_Salesforce *smithy.Schema
-
-var ConnectorOperator_ServiceNow *smithy.Schema
-
-var ConnectorOperator_Singular *smithy.Schema
-
-var ConnectorOperator_Slack *smithy.Schema
-
-var ConnectorOperator_Trendmicro *smithy.Schema
-
-var ConnectorOperator_Veeva *smithy.Schema
-
-var ConnectorOperator_Zendesk *smithy.Schema
-
-var ConnectorOperator_SAPOData *smithy.Schema
-
-var ConnectorOperator_CustomConnector *smithy.Schema
-
-var ConnectorOperator_Pardot *smithy.Schema
-
-var _ConnectorOwner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorOwner",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfile",
-}, smithy.ShapeTypeStructure, 10)
-var ConnectorProfile_connectorProfileArn *smithy.Schema
-
-var ConnectorProfile_connectorProfileName *smithy.Schema
-
-var ConnectorProfile_connectorType *smithy.Schema
-
-var ConnectorProfile_connectorLabel *smithy.Schema
-
-var ConnectorProfile_connectionMode *smithy.Schema
-
-var ConnectorProfile_credentialsArn *smithy.Schema
-
-var ConnectorProfile_connectorProfileProperties *smithy.Schema
-
-var ConnectorProfile_createdAt *smithy.Schema
-
-var ConnectorProfile_lastUpdatedAt *smithy.Schema
-
-var ConnectorProfile_privateConnectionProvisioningState *smithy.Schema
-
-var _ConnectorProfileArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfileArn",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorProfileConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfileConfig",
-}, smithy.ShapeTypeStructure, 2)
-var ConnectorProfileConfig_connectorProfileProperties *smithy.Schema
-
-var ConnectorProfileConfig_connectorProfileCredentials *smithy.Schema
-
-var ConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 19)
-var ConnectorProfileCredentials_Amplitude *smithy.Schema
-
-var ConnectorProfileCredentials_Datadog *smithy.Schema
-
-var ConnectorProfileCredentials_Dynatrace *smithy.Schema
-
-var ConnectorProfileCredentials_GoogleAnalytics *smithy.Schema
-
-var ConnectorProfileCredentials_Honeycode *smithy.Schema
-
-var ConnectorProfileCredentials_InforNexus *smithy.Schema
-
-var ConnectorProfileCredentials_Marketo *smithy.Schema
-
-var ConnectorProfileCredentials_Redshift *smithy.Schema
-
-var ConnectorProfileCredentials_Salesforce *smithy.Schema
-
-var ConnectorProfileCredentials_ServiceNow *smithy.Schema
-
-var ConnectorProfileCredentials_Singular *smithy.Schema
-
-var ConnectorProfileCredentials_Slack *smithy.Schema
-
-var ConnectorProfileCredentials_Snowflake *smithy.Schema
-
-var ConnectorProfileCredentials_Trendmicro *smithy.Schema
-
-var ConnectorProfileCredentials_Veeva *smithy.Schema
-
-var ConnectorProfileCredentials_Zendesk *smithy.Schema
-
-var ConnectorProfileCredentials_SAPOData *smithy.Schema
-
-var ConnectorProfileCredentials_CustomConnector *smithy.Schema
-
-var ConnectorProfileCredentials_Pardot *smithy.Schema
-
-var _ConnectorProfileDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfileDetailList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorProfileDetailList_member *smithy.Schema
-
-var _ConnectorProfileName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfileName",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorProfileNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfileNameList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorProfileNameList_member *smithy.Schema
-
-var ConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 19)
-var ConnectorProfileProperties_Amplitude *smithy.Schema
-
-var ConnectorProfileProperties_Datadog *smithy.Schema
-
-var ConnectorProfileProperties_Dynatrace *smithy.Schema
-
-var ConnectorProfileProperties_GoogleAnalytics *smithy.Schema
-
-var ConnectorProfileProperties_Honeycode *smithy.Schema
-
-var ConnectorProfileProperties_InforNexus *smithy.Schema
-
-var ConnectorProfileProperties_Marketo *smithy.Schema
-
-var ConnectorProfileProperties_Redshift *smithy.Schema
-
-var ConnectorProfileProperties_Salesforce *smithy.Schema
-
-var ConnectorProfileProperties_ServiceNow *smithy.Schema
-
-var ConnectorProfileProperties_Singular *smithy.Schema
-
-var ConnectorProfileProperties_Slack *smithy.Schema
-
-var ConnectorProfileProperties_Snowflake *smithy.Schema
-
-var ConnectorProfileProperties_Trendmicro *smithy.Schema
-
-var ConnectorProfileProperties_Veeva *smithy.Schema
-
-var ConnectorProfileProperties_Zendesk *smithy.Schema
-
-var ConnectorProfileProperties_SAPOData *smithy.Schema
-
-var ConnectorProfileProperties_CustomConnector *smithy.Schema
-
-var ConnectorProfileProperties_Pardot *smithy.Schema
-
-var ConnectorProvisioningConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProvisioningConfig",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectorProvisioningConfig_lambda *smithy.Schema
-
-var ConnectorProvisioningType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorProvisioningType",
-}, smithy.ShapeTypeEnum, 1)
-var ConnectorProvisioningType_LAMBDA *smithy.Schema
-
-var ConnectorRuntimeSetting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorRuntimeSetting",
-}, smithy.ShapeTypeStructure, 7)
-var ConnectorRuntimeSetting_key *smithy.Schema
-
-var ConnectorRuntimeSetting_dataType *smithy.Schema
-
-var ConnectorRuntimeSetting_isRequired *smithy.Schema
-
-var ConnectorRuntimeSetting_label *smithy.Schema
-
-var ConnectorRuntimeSetting_description *smithy.Schema
-
-var ConnectorRuntimeSetting_scope *smithy.Schema
-
-var ConnectorRuntimeSetting_connectorSuppliedValueOptions *smithy.Schema
-
-var _ConnectorRuntimeSettingDataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorRuntimeSettingDataType",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorRuntimeSettingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorRuntimeSettingList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorRuntimeSettingList_member *smithy.Schema
-
-var _ConnectorRuntimeSettingScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorRuntimeSettingScope",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectorServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ConnectorServerException_message *smithy.Schema
-
-var _ConnectorSuppliedValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorSuppliedValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectorSuppliedValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorSuppliedValueList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorSuppliedValueList_member *smithy.Schema
-
-var _ConnectorSuppliedValueOptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorSuppliedValueOptionList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorSuppliedValueOptionList_member *smithy.Schema
-
-var ConnectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorType",
-}, smithy.ShapeTypeEnum, 24)
-var ConnectorType_SALESFORCE *smithy.Schema
-
-var ConnectorType_SINGULAR *smithy.Schema
-
-var ConnectorType_SLACK *smithy.Schema
-
-var ConnectorType_REDSHIFT *smithy.Schema
-
-var ConnectorType_S3 *smithy.Schema
-
-var ConnectorType_MARKETO *smithy.Schema
-
-var ConnectorType_GOOGLEANALYTICS *smithy.Schema
-
-var ConnectorType_ZENDESK *smithy.Schema
-
-var ConnectorType_SERVICENOW *smithy.Schema
-
-var ConnectorType_DATADOG *smithy.Schema
-
-var ConnectorType_TRENDMICRO *smithy.Schema
-
-var ConnectorType_SNOWFLAKE *smithy.Schema
-
-var ConnectorType_DYNATRACE *smithy.Schema
-
-var ConnectorType_INFORNEXUS *smithy.Schema
-
-var ConnectorType_AMPLITUDE *smithy.Schema
-
-var ConnectorType_VEEVA *smithy.Schema
-
-var ConnectorType_EVENTBRIDGE *smithy.Schema
-
-var ConnectorType_LOOKOUTMETRICS *smithy.Schema
-
-var ConnectorType_UPSOLVER *smithy.Schema
-
-var ConnectorType_HONEYCODE *smithy.Schema
-
-var ConnectorType_CUSTOMERPROFILES *smithy.Schema
-
-var ConnectorType_SAPODATA *smithy.Schema
-
-var ConnectorType_CUSTOMCONNECTOR *smithy.Schema
-
-var ConnectorType_PARDOT *smithy.Schema
-
-var _ConnectorTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectorTypeList_member *smithy.Schema
-
-var _ConnectorVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ConnectorVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _CreatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CreatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _CredentialsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CredentialsMap",
-}, smithy.ShapeTypeMap, 2)
-var _CredentialsMap_key *smithy.Schema
-
-var _CredentialsMap_value *smithy.Schema
-
-var _CredentialsMapKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CredentialsMapKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CredentialsMapValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CredentialsMapValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CustomAuthConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomAuthConfig",
-}, smithy.ShapeTypeStructure, 2)
-var CustomAuthConfig_customAuthenticationType *smithy.Schema
-
-var CustomAuthConfig_authParameters *smithy.Schema
-
-var _CustomAuthConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomAuthConfigList",
-}, smithy.ShapeTypeList, 1)
-var _CustomAuthConfigList_member *smithy.Schema
-
-var CustomAuthCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomAuthCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var CustomAuthCredentials_customAuthenticationType *smithy.Schema
-
-var CustomAuthCredentials_credentialsMap *smithy.Schema
-
-var _CustomAuthenticationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomAuthenticationType",
-}, smithy.ShapeTypeString, 0)
-
-var CustomConnectorDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomConnectorDestinationProperties",
-}, smithy.ShapeTypeStructure, 5)
-var CustomConnectorDestinationProperties_entityName *smithy.Schema
-
-var CustomConnectorDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var CustomConnectorDestinationProperties_writeOperationType *smithy.Schema
-
-var CustomConnectorDestinationProperties_idFieldNames *smithy.Schema
-
-var CustomConnectorDestinationProperties_customProperties *smithy.Schema
-
-var CustomConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 5)
-var CustomConnectorProfileCredentials_authenticationType *smithy.Schema
-
-var CustomConnectorProfileCredentials_basic *smithy.Schema
-
-var CustomConnectorProfileCredentials_oauth2 *smithy.Schema
-
-var CustomConnectorProfileCredentials_apiKey *smithy.Schema
-
-var CustomConnectorProfileCredentials_custom *smithy.Schema
-
-var CustomConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 2)
-var CustomConnectorProfileProperties_profileProperties *smithy.Schema
-
-var CustomConnectorProfileProperties_oAuth2Properties *smithy.Schema
-
-var CustomConnectorSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomConnectorSourceProperties",
-}, smithy.ShapeTypeStructure, 3)
-var CustomConnectorSourceProperties_entityName *smithy.Schema
-
-var CustomConnectorSourceProperties_customProperties *smithy.Schema
-
-var CustomConnectorSourceProperties_dataTransferApi *smithy.Schema
-
-var CustomerProfilesDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomerProfilesDestinationProperties",
-}, smithy.ShapeTypeStructure, 2)
-var CustomerProfilesDestinationProperties_domainName *smithy.Schema
-
-var CustomerProfilesDestinationProperties_objectTypeName *smithy.Schema
-
-var CustomerProfilesMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomerProfilesMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var _CustomProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomProperties",
-}, smithy.ShapeTypeMap, 2)
-var _CustomProperties_key *smithy.Schema
-
-var _CustomProperties_value *smithy.Schema
-
-var _CustomPropertyKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomPropertyKey",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomPropertyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CustomPropertyValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DataApiRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DataApiRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var _DatabaseUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatabaseUrl",
-}, smithy.ShapeTypeString, 0)
-
-var DatadogConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatadogConnectorOperator",
-}, smithy.ShapeTypeEnum, 15)
-var DatadogConnectorOperator_PROJECTION *smithy.Schema
-
-var DatadogConnectorOperator_BETWEEN *smithy.Schema
-
-var DatadogConnectorOperator_EQUAL_TO *smithy.Schema
-
-var DatadogConnectorOperator_ADDITION *smithy.Schema
-
-var DatadogConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var DatadogConnectorOperator_DIVISION *smithy.Schema
-
-var DatadogConnectorOperator_SUBTRACTION *smithy.Schema
-
-var DatadogConnectorOperator_MASK_ALL *smithy.Schema
-
-var DatadogConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var DatadogConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var DatadogConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var DatadogConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var DatadogConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var DatadogConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var DatadogConnectorOperator_NO_OP *smithy.Schema
-
-var DatadogConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatadogConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var DatadogConnectorProfileCredentials_apiKey *smithy.Schema
-
-var DatadogConnectorProfileCredentials_applicationKey *smithy.Schema
-
-var DatadogConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatadogConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var DatadogConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var DatadogMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatadogMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var DatadogSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatadogSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var DatadogSourceProperties_object *smithy.Schema
-
-var DataPullMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DataPullMode",
-}, smithy.ShapeTypeEnum, 2)
-var DataPullMode_INCREMENTAL *smithy.Schema
-
-var DataPullMode_COMPLETE *smithy.Schema
-
-var DataTransferApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DataTransferApi",
-}, smithy.ShapeTypeStructure, 2)
-var DataTransferApi_Name *smithy.Schema
-
-var DataTransferApi_Type *smithy.Schema
-
-var DataTransferApiType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DataTransferApiType",
-}, smithy.ShapeTypeEnum, 3)
-var DataTransferApiType_SYNC *smithy.Schema
-
-var DataTransferApiType_ASYNC *smithy.Schema
-
-var DataTransferApiType_AUTOMATIC *smithy.Schema
-
-var _DataTransferApiTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DataTransferApiTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _DatetimeTypeFieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DatetimeTypeFieldName",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationConnectorProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DestinationConnectorProperties",
-}, smithy.ShapeTypeStructure, 13)
-var DestinationConnectorProperties_Redshift *smithy.Schema
-
-var DestinationConnectorProperties_S3 *smithy.Schema
-
-var DestinationConnectorProperties_Salesforce *smithy.Schema
-
-var DestinationConnectorProperties_Snowflake *smithy.Schema
-
-var DestinationConnectorProperties_EventBridge *smithy.Schema
-
-var DestinationConnectorProperties_LookoutMetrics *smithy.Schema
-
-var DestinationConnectorProperties_Upsolver *smithy.Schema
-
-var DestinationConnectorProperties_Honeycode *smithy.Schema
-
-var DestinationConnectorProperties_CustomerProfiles *smithy.Schema
-
-var DestinationConnectorProperties_Zendesk *smithy.Schema
-
-var DestinationConnectorProperties_Marketo *smithy.Schema
-
-var DestinationConnectorProperties_CustomConnector *smithy.Schema
-
-var DestinationConnectorProperties_SAPOData *smithy.Schema
-
-var _DestinationField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DestinationField",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationFieldProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DestinationFieldProperties",
-}, smithy.ShapeTypeStructure, 6)
-var DestinationFieldProperties_isCreatable *smithy.Schema
-
-var DestinationFieldProperties_isNullable *smithy.Schema
-
-var DestinationFieldProperties_isUpsertable *smithy.Schema
-
-var DestinationFieldProperties_isUpdatable *smithy.Schema
-
-var DestinationFieldProperties_isDefaultedOnCreate *smithy.Schema
-
-var DestinationFieldProperties_supportedWriteOperations *smithy.Schema
-
-var DestinationFlowConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DestinationFlowConfig",
-}, smithy.ShapeTypeStructure, 4)
-var DestinationFlowConfig_connectorType *smithy.Schema
-
-var DestinationFlowConfig_apiVersion *smithy.Schema
-
-var DestinationFlowConfig_connectorProfileName *smithy.Schema
-
-var DestinationFlowConfig_destinationConnectorProperties *smithy.Schema
-
-var _DestinationFlowConfigList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DestinationFlowConfigList",
-}, smithy.ShapeTypeList, 1)
-var _DestinationFlowConfigList_member *smithy.Schema
-
-var _DocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DocumentType",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var DynatraceConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DynatraceConnectorOperator",
-}, smithy.ShapeTypeEnum, 15)
-var DynatraceConnectorOperator_PROJECTION *smithy.Schema
-
-var DynatraceConnectorOperator_BETWEEN *smithy.Schema
-
-var DynatraceConnectorOperator_EQUAL_TO *smithy.Schema
-
-var DynatraceConnectorOperator_ADDITION *smithy.Schema
-
-var DynatraceConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var DynatraceConnectorOperator_DIVISION *smithy.Schema
-
-var DynatraceConnectorOperator_SUBTRACTION *smithy.Schema
-
-var DynatraceConnectorOperator_MASK_ALL *smithy.Schema
-
-var DynatraceConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var DynatraceConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var DynatraceConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var DynatraceConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var DynatraceConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var DynatraceConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var DynatraceConnectorOperator_NO_OP *smithy.Schema
-
-var DynatraceConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DynatraceConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 1)
-var DynatraceConnectorProfileCredentials_apiToken *smithy.Schema
-
-var DynatraceConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DynatraceConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var DynatraceConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var DynatraceMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DynatraceMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var DynatraceSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DynatraceSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var DynatraceSourceProperties_object *smithy.Schema
-
-var _EntitiesPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "EntitiesPath",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "EntityName",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorHandlingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ErrorHandlingConfig",
-}, smithy.ShapeTypeStructure, 3)
-var ErrorHandlingConfig_failOnFirstDestinationError *smithy.Schema
-
-var ErrorHandlingConfig_bucketPrefix *smithy.Schema
-
-var ErrorHandlingConfig_bucketName *smithy.Schema
-
-var ErrorInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ErrorInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorInfo_putFailuresCount *smithy.Schema
-
-var ErrorInfo_executionMessage *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EventBridgeDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "EventBridgeDestinationProperties",
-}, smithy.ShapeTypeStructure, 2)
-var EventBridgeDestinationProperties_object *smithy.Schema
-
-var EventBridgeDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var EventBridgeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "EventBridgeMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var ExecutionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ExecutionDetails",
-}, smithy.ShapeTypeStructure, 3)
-var ExecutionDetails_mostRecentExecutionMessage *smithy.Schema
-
-var ExecutionDetails_mostRecentExecutionTime *smithy.Schema
-
-var ExecutionDetails_mostRecentExecutionStatus *smithy.Schema
-
-var _ExecutionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ExecutionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ExecutionIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ExecutionIds",
-}, smithy.ShapeTypeList, 1)
-var _ExecutionIds_member *smithy.Schema
-
-var _ExecutionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ExecutionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExecutionRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ExecutionRecord",
-}, smithy.ShapeTypeStructure, 8)
-var ExecutionRecord_executionId *smithy.Schema
-
-var ExecutionRecord_executionStatus *smithy.Schema
-
-var ExecutionRecord_executionResult *smithy.Schema
-
-var ExecutionRecord_startedAt *smithy.Schema
-
-var ExecutionRecord_lastUpdatedAt *smithy.Schema
-
-var ExecutionRecord_dataPullStartTime *smithy.Schema
-
-var ExecutionRecord_dataPullEndTime *smithy.Schema
-
-var ExecutionRecord_metadataCatalogDetails *smithy.Schema
-
-var ExecutionResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ExecutionResult",
-}, smithy.ShapeTypeStructure, 6)
-var ExecutionResult_errorInfo *smithy.Schema
-
-var ExecutionResult_bytesProcessed *smithy.Schema
-
-var ExecutionResult_bytesWritten *smithy.Schema
-
-var ExecutionResult_recordsProcessed *smithy.Schema
-
-var ExecutionResult_numParallelProcesses *smithy.Schema
-
-var ExecutionResult_maxPageSize *smithy.Schema
-
-var ExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ExecutionStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ExecutionStatus_INPROGRESS *smithy.Schema
-
-var ExecutionStatus_SUCCESSFUL *smithy.Schema
-
-var ExecutionStatus_ERROR *smithy.Schema
-
-var ExecutionStatus_CANCELSTARTED *smithy.Schema
-
-var ExecutionStatus_CANCELED *smithy.Schema
-
-var _FieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FieldType",
-}, smithy.ShapeTypeString, 0)
-
-var FieldTypeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FieldTypeDetails",
-}, smithy.ShapeTypeStructure, 7)
-var FieldTypeDetails_fieldType *smithy.Schema
-
-var FieldTypeDetails_filterOperators *smithy.Schema
-
-var FieldTypeDetails_supportedValues *smithy.Schema
-
-var FieldTypeDetails_valueRegexPattern *smithy.Schema
-
-var FieldTypeDetails_supportedDateFormat *smithy.Schema
-
-var FieldTypeDetails_fieldValueRange *smithy.Schema
-
-var FieldTypeDetails_fieldLengthRange *smithy.Schema
-
-var FileType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FileType",
-}, smithy.ShapeTypeEnum, 3)
-var FileType_CSV *smithy.Schema
-
-var FileType_JSON *smithy.Schema
-
-var FileType_PARQUET *smithy.Schema
-
-var _FilterOperatorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FilterOperatorList",
-}, smithy.ShapeTypeList, 1)
-var _FilterOperatorList_member *smithy.Schema
-
-var _FlowArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowArn",
-}, smithy.ShapeTypeString, 0)
-
-var FlowDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowDefinition",
-}, smithy.ShapeTypeStructure, 15)
-var FlowDefinition_flowArn *smithy.Schema
-
-var FlowDefinition_description *smithy.Schema
-
-var FlowDefinition_flowName *smithy.Schema
-
-var FlowDefinition_flowStatus *smithy.Schema
-
-var FlowDefinition_sourceConnectorType *smithy.Schema
-
-var FlowDefinition_sourceConnectorLabel *smithy.Schema
-
-var FlowDefinition_destinationConnectorType *smithy.Schema
-
-var FlowDefinition_destinationConnectorLabel *smithy.Schema
-
-var FlowDefinition_triggerType *smithy.Schema
-
-var FlowDefinition_createdAt *smithy.Schema
-
-var FlowDefinition_lastUpdatedAt *smithy.Schema
-
-var FlowDefinition_createdBy *smithy.Schema
-
-var FlowDefinition_lastUpdatedBy *smithy.Schema
-
-var FlowDefinition_tags *smithy.Schema
-
-var FlowDefinition_lastRunExecutionDetails *smithy.Schema
-
-var _FlowDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _FlowErrorDeactivationThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowErrorDeactivationThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var _FlowExecutionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowExecutionList",
-}, smithy.ShapeTypeList, 1)
-var _FlowExecutionList_member *smithy.Schema
-
-var _FlowList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowList",
-}, smithy.ShapeTypeList, 1)
-var _FlowList_member *smithy.Schema
-
-var _FlowName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowName",
-}, smithy.ShapeTypeString, 0)
-
-var FlowStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowStatus",
-}, smithy.ShapeTypeEnum, 6)
-var FlowStatus_ACTIVE *smithy.Schema
-
-var FlowStatus_DEPRECATED *smithy.Schema
-
-var FlowStatus_DELETED *smithy.Schema
-
-var FlowStatus_DRAFT *smithy.Schema
-
-var FlowStatus_ERRORED *smithy.Schema
-
-var FlowStatus_SUSPENDED *smithy.Schema
-
-var _FlowStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "FlowStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var GlueDataCatalogConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GlueDataCatalogConfig",
-}, smithy.ShapeTypeStructure, 3)
-var GlueDataCatalogConfig_roleArn *smithy.Schema
-
-var GlueDataCatalogConfig_databaseName *smithy.Schema
-
-var GlueDataCatalogConfig_tablePrefix *smithy.Schema
-
-var _GlueDataCatalogDatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GlueDataCatalogDatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var _GlueDataCatalogIAMRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GlueDataCatalogIAMRole",
-}, smithy.ShapeTypeString, 0)
-
-var _GlueDataCatalogTablePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GlueDataCatalogTablePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var GoogleAnalyticsConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GoogleAnalyticsConnectorOperator",
-}, smithy.ShapeTypeEnum, 2)
-var GoogleAnalyticsConnectorOperator_PROJECTION *smithy.Schema
-
-var GoogleAnalyticsConnectorOperator_BETWEEN *smithy.Schema
-
-var GoogleAnalyticsConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GoogleAnalyticsConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 5)
-var GoogleAnalyticsConnectorProfileCredentials_clientId *smithy.Schema
-
-var GoogleAnalyticsConnectorProfileCredentials_clientSecret *smithy.Schema
-
-var GoogleAnalyticsConnectorProfileCredentials_accessToken *smithy.Schema
-
-var GoogleAnalyticsConnectorProfileCredentials_refreshToken *smithy.Schema
-
-var GoogleAnalyticsConnectorProfileCredentials_oAuthRequest *smithy.Schema
-
-var GoogleAnalyticsConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GoogleAnalyticsConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 0)
-
-var GoogleAnalyticsMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GoogleAnalyticsMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var GoogleAnalyticsMetadata_oAuthScopes *smithy.Schema
-
-var GoogleAnalyticsSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "GoogleAnalyticsSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var GoogleAnalyticsSourceProperties_object *smithy.Schema
-
-var _Group = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Group",
-}, smithy.ShapeTypeString, 0)
-
-var HoneycodeConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "HoneycodeConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 3)
-var HoneycodeConnectorProfileCredentials_accessToken *smithy.Schema
-
-var HoneycodeConnectorProfileCredentials_refreshToken *smithy.Schema
-
-var HoneycodeConnectorProfileCredentials_oAuthRequest *smithy.Schema
-
-var HoneycodeConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "HoneycodeConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 0)
-
-var HoneycodeDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "HoneycodeDestinationProperties",
-}, smithy.ShapeTypeStructure, 2)
-var HoneycodeDestinationProperties_object *smithy.Schema
-
-var HoneycodeDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var HoneycodeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "HoneycodeMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var HoneycodeMetadata_oAuthScopes *smithy.Schema
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var _IdFieldNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "IdFieldNameList",
-}, smithy.ShapeTypeList, 1)
-var _IdFieldNameList_member *smithy.Schema
-
-var IncrementalPullConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "IncrementalPullConfig",
-}, smithy.ShapeTypeStructure, 1)
-var IncrementalPullConfig_datetimeTypeFieldName *smithy.Schema
-
-var InforNexusConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "InforNexusConnectorOperator",
-}, smithy.ShapeTypeEnum, 15)
-var InforNexusConnectorOperator_PROJECTION *smithy.Schema
-
-var InforNexusConnectorOperator_BETWEEN *smithy.Schema
-
-var InforNexusConnectorOperator_EQUAL_TO *smithy.Schema
-
-var InforNexusConnectorOperator_ADDITION *smithy.Schema
-
-var InforNexusConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var InforNexusConnectorOperator_DIVISION *smithy.Schema
-
-var InforNexusConnectorOperator_SUBTRACTION *smithy.Schema
-
-var InforNexusConnectorOperator_MASK_ALL *smithy.Schema
-
-var InforNexusConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var InforNexusConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var InforNexusConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var InforNexusConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var InforNexusConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var InforNexusConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var InforNexusConnectorOperator_NO_OP *smithy.Schema
-
-var InforNexusConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "InforNexusConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 4)
-var InforNexusConnectorProfileCredentials_accessKeyId *smithy.Schema
-
-var InforNexusConnectorProfileCredentials_userId *smithy.Schema
-
-var InforNexusConnectorProfileCredentials_secretAccessKey *smithy.Schema
-
-var InforNexusConnectorProfileCredentials_datakey *smithy.Schema
-
-var InforNexusConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "InforNexusConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var InforNexusConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var InforNexusMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "InforNexusMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var InforNexusSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "InforNexusSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var InforNexusSourceProperties_object *smithy.Schema
-
-var _InstanceUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "InstanceUrl",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _JavaBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "JavaBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _JwtToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "JwtToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Key",
-}, smithy.ShapeTypeString, 0)
-
-var _KMSArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "KMSArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Label = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Label",
-}, smithy.ShapeTypeString, 0)
-
-var LambdaConnectorProvisioningConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "LambdaConnectorProvisioningConfig",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaConnectorProvisioningConfig_lambdaArn *smithy.Schema
-
-var _ListEntitiesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListEntitiesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LogonLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "LogonLanguage",
-}, smithy.ShapeTypeString, 0)
-
-var _LogoURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "LogoURL",
-}, smithy.ShapeTypeString, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var LookoutMetricsDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "LookoutMetricsDestinationProperties",
-}, smithy.ShapeTypeStructure, 0)
-
-var MarketoConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MarketoConnectorOperator",
-}, smithy.ShapeTypeEnum, 16)
-var MarketoConnectorOperator_PROJECTION *smithy.Schema
-
-var MarketoConnectorOperator_LESS_THAN *smithy.Schema
-
-var MarketoConnectorOperator_GREATER_THAN *smithy.Schema
-
-var MarketoConnectorOperator_BETWEEN *smithy.Schema
-
-var MarketoConnectorOperator_ADDITION *smithy.Schema
-
-var MarketoConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var MarketoConnectorOperator_DIVISION *smithy.Schema
-
-var MarketoConnectorOperator_SUBTRACTION *smithy.Schema
-
-var MarketoConnectorOperator_MASK_ALL *smithy.Schema
-
-var MarketoConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var MarketoConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var MarketoConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var MarketoConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var MarketoConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var MarketoConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var MarketoConnectorOperator_NO_OP *smithy.Schema
-
-var MarketoConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MarketoConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 4)
-var MarketoConnectorProfileCredentials_clientId *smithy.Schema
-
-var MarketoConnectorProfileCredentials_clientSecret *smithy.Schema
-
-var MarketoConnectorProfileCredentials_accessToken *smithy.Schema
-
-var MarketoConnectorProfileCredentials_oAuthRequest *smithy.Schema
-
-var MarketoConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MarketoConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var MarketoConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var MarketoDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MarketoDestinationProperties",
-}, smithy.ShapeTypeStructure, 2)
-var MarketoDestinationProperties_object *smithy.Schema
-
-var MarketoDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var MarketoMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MarketoMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var MarketoSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MarketoSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var MarketoSourceProperties_object *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetadataCatalogConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MetadataCatalogConfig",
-}, smithy.ShapeTypeStructure, 1)
-var MetadataCatalogConfig_glueDataCatalog *smithy.Schema
-
-var MetadataCatalogDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MetadataCatalogDetail",
-}, smithy.ShapeTypeStructure, 4)
-var MetadataCatalogDetail_catalogType *smithy.Schema
-
-var MetadataCatalogDetail_tableName *smithy.Schema
-
-var MetadataCatalogDetail_tableRegistrationOutput *smithy.Schema
-
-var MetadataCatalogDetail_partitionRegistrationOutput *smithy.Schema
-
-var _MetadataCatalogDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MetadataCatalogDetails",
-}, smithy.ShapeTypeList, 1)
-var _MetadataCatalogDetails_member *smithy.Schema
-
-var _MostRecentExecutionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "MostRecentExecutionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OAuth2Credentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2Credentials",
-}, smithy.ShapeTypeStructure, 5)
-var OAuth2Credentials_clientId *smithy.Schema
-
-var OAuth2Credentials_clientSecret *smithy.Schema
-
-var OAuth2Credentials_accessToken *smithy.Schema
-
-var OAuth2Credentials_refreshToken *smithy.Schema
-
-var OAuth2Credentials_oAuthRequest *smithy.Schema
-
-var OAuth2CustomParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2CustomParameter",
-}, smithy.ShapeTypeStructure, 7)
-var OAuth2CustomParameter_key *smithy.Schema
-
-var OAuth2CustomParameter_isRequired *smithy.Schema
-
-var OAuth2CustomParameter_label *smithy.Schema
-
-var OAuth2CustomParameter_description *smithy.Schema
-
-var OAuth2CustomParameter_isSensitiveField *smithy.Schema
-
-var OAuth2CustomParameter_connectorSuppliedValues *smithy.Schema
-
-var OAuth2CustomParameter_type *smithy.Schema
-
-var _OAuth2CustomPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2CustomPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _OAuth2CustomPropertiesList_member *smithy.Schema
-
-var OAuth2CustomPropType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2CustomPropType",
-}, smithy.ShapeTypeEnum, 2)
-var OAuth2CustomPropType_TOKEN_URL *smithy.Schema
-
-var OAuth2CustomPropType_AUTH_URL *smithy.Schema
-
-var OAuth2Defaults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2Defaults",
-}, smithy.ShapeTypeStructure, 5)
-var OAuth2Defaults_oauthScopes *smithy.Schema
-
-var OAuth2Defaults_tokenUrls *smithy.Schema
-
-var OAuth2Defaults_authCodeUrls *smithy.Schema
-
-var OAuth2Defaults_oauth2GrantTypesSupported *smithy.Schema
-
-var OAuth2Defaults_oauth2CustomProperties *smithy.Schema
-
-var OAuth2GrantType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2GrantType",
-}, smithy.ShapeTypeEnum, 3)
-var OAuth2GrantType_CLIENT_CREDENTIALS *smithy.Schema
-
-var OAuth2GrantType_AUTHORIZATION_CODE *smithy.Schema
-
-var OAuth2GrantType_JWT_BEARER *smithy.Schema
-
-var _OAuth2GrantTypeSupportedList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2GrantTypeSupportedList",
-}, smithy.ShapeTypeList, 1)
-var _OAuth2GrantTypeSupportedList_member *smithy.Schema
-
-var OAuth2Properties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuth2Properties",
-}, smithy.ShapeTypeStructure, 3)
-var OAuth2Properties_tokenUrl *smithy.Schema
-
-var OAuth2Properties_oAuth2GrantType *smithy.Schema
-
-var OAuth2Properties_tokenUrlCustomProperties *smithy.Schema
-
-var OAuthCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuthCredentials",
-}, smithy.ShapeTypeStructure, 5)
-var OAuthCredentials_clientId *smithy.Schema
-
-var OAuthCredentials_clientSecret *smithy.Schema
-
-var OAuthCredentials_accessToken *smithy.Schema
-
-var OAuthCredentials_refreshToken *smithy.Schema
-
-var OAuthCredentials_oAuthRequest *smithy.Schema
-
-var OAuthProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuthProperties",
-}, smithy.ShapeTypeStructure, 3)
-var OAuthProperties_tokenUrl *smithy.Schema
-
-var OAuthProperties_authCodeUrl *smithy.Schema
-
-var OAuthProperties_oAuthScopes *smithy.Schema
-
-var _OAuthScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuthScope",
-}, smithy.ShapeTypeString, 0)
-
-var _OAuthScopeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OAuthScopeList",
-}, smithy.ShapeTypeList, 1)
-var _OAuthScopeList_member *smithy.Schema
-
-var _Object = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Object",
-}, smithy.ShapeTypeString, 0)
-
-var _ObjectTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ObjectTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Operator",
-}, smithy.ShapeTypeEnum, 21)
-var Operator_PROJECTION *smithy.Schema
-
-var Operator_LESS_THAN *smithy.Schema
-
-var Operator_GREATER_THAN *smithy.Schema
-
-var Operator_CONTAINS *smithy.Schema
-
-var Operator_BETWEEN *smithy.Schema
-
-var Operator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var Operator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var Operator_EQUAL_TO *smithy.Schema
-
-var Operator_NOT_EQUAL_TO *smithy.Schema
-
-var Operator_ADDITION *smithy.Schema
-
-var Operator_MULTIPLICATION *smithy.Schema
-
-var Operator_DIVISION *smithy.Schema
-
-var Operator_SUBTRACTION *smithy.Schema
-
-var Operator_MASK_ALL *smithy.Schema
-
-var Operator_MASK_FIRST_N *smithy.Schema
-
-var Operator_MASK_LAST_N *smithy.Schema
-
-var Operator_VALIDATE_NON_NULL *smithy.Schema
-
-var Operator_VALIDATE_NON_ZERO *smithy.Schema
-
-var Operator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var Operator_VALIDATE_NUMERIC *smithy.Schema
-
-var Operator_NO_OP *smithy.Schema
-
-var OperatorPropertiesKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "OperatorPropertiesKeys",
-}, smithy.ShapeTypeEnum, 17)
-var OperatorPropertiesKeys_VALUE *smithy.Schema
-
-var OperatorPropertiesKeys_VALUES *smithy.Schema
-
-var OperatorPropertiesKeys_DATA_TYPE *smithy.Schema
-
-var OperatorPropertiesKeys_UPPER_BOUND *smithy.Schema
-
-var OperatorPropertiesKeys_LOWER_BOUND *smithy.Schema
-
-var OperatorPropertiesKeys_SOURCE_DATA_TYPE *smithy.Schema
-
-var OperatorPropertiesKeys_DESTINATION_DATA_TYPE *smithy.Schema
-
-var OperatorPropertiesKeys_VALIDATION_ACTION *smithy.Schema
-
-var OperatorPropertiesKeys_MASK_VALUE *smithy.Schema
-
-var OperatorPropertiesKeys_MASK_LENGTH *smithy.Schema
-
-var OperatorPropertiesKeys_TRUNCATE_LENGTH *smithy.Schema
-
-var OperatorPropertiesKeys_MATH_OPERATION_FIELDS_ORDER *smithy.Schema
-
-var OperatorPropertiesKeys_CONCAT_FORMAT *smithy.Schema
-
-var OperatorPropertiesKeys_SUBFIELD_CATEGORY_MAP *smithy.Schema
-
-var OperatorPropertiesKeys_EXCLUDE_SOURCE_FIELDS_LIST *smithy.Schema
-
-var OperatorPropertiesKeys_INCLUDE_NEW_FIELDS *smithy.Schema
-
-var OperatorPropertiesKeys_ORDERED_PARTITION_KEYS_LIST *smithy.Schema
-
-var Operators = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Operators",
-}, smithy.ShapeTypeEnum, 21)
-var Operators_PROJECTION *smithy.Schema
-
-var Operators_LESS_THAN *smithy.Schema
-
-var Operators_GREATER_THAN *smithy.Schema
-
-var Operators_CONTAINS *smithy.Schema
-
-var Operators_BETWEEN *smithy.Schema
-
-var Operators_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var Operators_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var Operators_EQUAL_TO *smithy.Schema
-
-var Operators_NOT_EQUAL_TO *smithy.Schema
-
-var Operators_ADDITION *smithy.Schema
-
-var Operators_MULTIPLICATION *smithy.Schema
-
-var Operators_DIVISION *smithy.Schema
-
-var Operators_SUBTRACTION *smithy.Schema
-
-var Operators_MASK_ALL *smithy.Schema
-
-var Operators_MASK_FIRST_N *smithy.Schema
-
-var Operators_MASK_LAST_N *smithy.Schema
-
-var Operators_VALIDATE_NON_NULL *smithy.Schema
-
-var Operators_VALIDATE_NON_ZERO *smithy.Schema
-
-var Operators_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var Operators_VALIDATE_NUMERIC *smithy.Schema
-
-var Operators_NO_OP *smithy.Schema
-
-var PardotConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PardotConnectorOperator",
-}, smithy.ShapeTypeEnum, 14)
-var PardotConnectorOperator_PROJECTION *smithy.Schema
-
-var PardotConnectorOperator_EQUAL_TO *smithy.Schema
-
-var PardotConnectorOperator_NO_OP *smithy.Schema
-
-var PardotConnectorOperator_ADDITION *smithy.Schema
-
-var PardotConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var PardotConnectorOperator_DIVISION *smithy.Schema
-
-var PardotConnectorOperator_SUBTRACTION *smithy.Schema
-
-var PardotConnectorOperator_MASK_ALL *smithy.Schema
-
-var PardotConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var PardotConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var PardotConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var PardotConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var PardotConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var PardotConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var PardotConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PardotConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 4)
-var PardotConnectorProfileCredentials_accessToken *smithy.Schema
-
-var PardotConnectorProfileCredentials_refreshToken *smithy.Schema
-
-var PardotConnectorProfileCredentials_oAuthRequest *smithy.Schema
-
-var PardotConnectorProfileCredentials_clientCredentialsArn *smithy.Schema
-
-var PardotConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PardotConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 3)
-var PardotConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var PardotConnectorProfileProperties_isSandboxEnvironment *smithy.Schema
-
-var PardotConnectorProfileProperties_businessUnitId *smithy.Schema
-
-var PardotMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PardotMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var PardotSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PardotSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var PardotSourceProperties_object *smithy.Schema
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PathPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PathPrefix",
-}, smithy.ShapeTypeEnum, 2)
-var PathPrefix_EXECUTION_ID *smithy.Schema
-
-var PathPrefix_SCHEMA_VERSION *smithy.Schema
-
-var _PathPrefixHierarchy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PathPrefixHierarchy",
-}, smithy.ShapeTypeList, 1)
-var _PathPrefixHierarchy_member *smithy.Schema
-
-var _PortNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PortNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var PrefixConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrefixConfig",
-}, smithy.ShapeTypeStructure, 3)
-var PrefixConfig_prefixType *smithy.Schema
-
-var PrefixConfig_prefixFormat *smithy.Schema
-
-var PrefixConfig_pathPrefixHierarchy *smithy.Schema
-
-var PrefixFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrefixFormat",
-}, smithy.ShapeTypeEnum, 5)
-var PrefixFormat_YEAR *smithy.Schema
-
-var PrefixFormat_MONTH *smithy.Schema
-
-var PrefixFormat_DAY *smithy.Schema
-
-var PrefixFormat_HOUR *smithy.Schema
-
-var PrefixFormat_MINUTE *smithy.Schema
-
-var PrefixType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrefixType",
-}, smithy.ShapeTypeEnum, 3)
-var PrefixType_FILENAME *smithy.Schema
-
-var PrefixType_PATH *smithy.Schema
-
-var PrefixType_PATH_AND_FILENAME *smithy.Schema
-
-var PrivateConnectionProvisioningFailureCause = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrivateConnectionProvisioningFailureCause",
-}, smithy.ShapeTypeEnum, 5)
-var PrivateConnectionProvisioningFailureCause_CONNECTOR_AUTHENTICATION *smithy.Schema
-
-var PrivateConnectionProvisioningFailureCause_CONNECTOR_SERVER *smithy.Schema
-
-var PrivateConnectionProvisioningFailureCause_INTERNAL_SERVER *smithy.Schema
-
-var PrivateConnectionProvisioningFailureCause_ACCESS_DENIED *smithy.Schema
-
-var PrivateConnectionProvisioningFailureCause_VALIDATION *smithy.Schema
-
-var _PrivateConnectionProvisioningFailureMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrivateConnectionProvisioningFailureMessage",
-}, smithy.ShapeTypeString, 0)
-
-var PrivateConnectionProvisioningState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrivateConnectionProvisioningState",
-}, smithy.ShapeTypeStructure, 3)
-var PrivateConnectionProvisioningState_status *smithy.Schema
-
-var PrivateConnectionProvisioningState_failureMessage *smithy.Schema
-
-var PrivateConnectionProvisioningState_failureCause *smithy.Schema
-
-var PrivateConnectionProvisioningStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrivateConnectionProvisioningStatus",
-}, smithy.ShapeTypeEnum, 3)
-var PrivateConnectionProvisioningStatus_FAILED *smithy.Schema
-
-var PrivateConnectionProvisioningStatus_PENDING *smithy.Schema
-
-var PrivateConnectionProvisioningStatus_CREATED *smithy.Schema
-
-var _PrivateKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrivateKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PrivateLinkServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "PrivateLinkServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfilePropertiesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ProfilePropertiesMap",
-}, smithy.ShapeTypeMap, 2)
-var _ProfilePropertiesMap_key *smithy.Schema
-
-var _ProfilePropertiesMap_value *smithy.Schema
-
-var _ProfilePropertyKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ProfilePropertyKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ProfilePropertyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ProfilePropertyValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Property = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Property",
-}, smithy.ShapeTypeString, 0)
-
-var Range = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Range",
-}, smithy.ShapeTypeStructure, 2)
-var Range_maximum *smithy.Schema
-
-var Range_minimum *smithy.Schema
-
-var _RedirectUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RedirectUri",
-}, smithy.ShapeTypeString, 0)
-
-var RedshiftConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RedshiftConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var RedshiftConnectorProfileCredentials_username *smithy.Schema
-
-var RedshiftConnectorProfileCredentials_password *smithy.Schema
-
-var RedshiftConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RedshiftConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 9)
-var RedshiftConnectorProfileProperties_databaseUrl *smithy.Schema
-
-var RedshiftConnectorProfileProperties_bucketName *smithy.Schema
-
-var RedshiftConnectorProfileProperties_bucketPrefix *smithy.Schema
-
-var RedshiftConnectorProfileProperties_roleArn *smithy.Schema
-
-var RedshiftConnectorProfileProperties_dataApiRoleArn *smithy.Schema
-
-var RedshiftConnectorProfileProperties_isRedshiftServerless *smithy.Schema
-
-var RedshiftConnectorProfileProperties_clusterIdentifier *smithy.Schema
-
-var RedshiftConnectorProfileProperties_workgroupName *smithy.Schema
-
-var RedshiftConnectorProfileProperties_databaseName *smithy.Schema
-
-var RedshiftDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RedshiftDestinationProperties",
-}, smithy.ShapeTypeStructure, 4)
-var RedshiftDestinationProperties_object *smithy.Schema
-
-var RedshiftDestinationProperties_intermediateBucketName *smithy.Schema
-
-var RedshiftDestinationProperties_bucketPrefix *smithy.Schema
-
-var RedshiftDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var RedshiftMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RedshiftMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var _RefreshToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RefreshToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RegionList",
-}, smithy.ShapeTypeList, 1)
-var _RegionList_member *smithy.Schema
-
-var _RegisteredBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RegisteredBy",
-}, smithy.ShapeTypeString, 0)
-
-var RegistrationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RegistrationOutput",
-}, smithy.ShapeTypeStructure, 3)
-var RegistrationOutput_message *smithy.Schema
-
-var RegistrationOutput_result *smithy.Schema
-
-var RegistrationOutput_status *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3ConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "S3ConnectorOperator",
-}, smithy.ShapeTypeEnum, 20)
-var S3ConnectorOperator_PROJECTION *smithy.Schema
-
-var S3ConnectorOperator_LESS_THAN *smithy.Schema
-
-var S3ConnectorOperator_GREATER_THAN *smithy.Schema
-
-var S3ConnectorOperator_BETWEEN *smithy.Schema
-
-var S3ConnectorOperator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var S3ConnectorOperator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var S3ConnectorOperator_EQUAL_TO *smithy.Schema
-
-var S3ConnectorOperator_NOT_EQUAL_TO *smithy.Schema
-
-var S3ConnectorOperator_ADDITION *smithy.Schema
-
-var S3ConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var S3ConnectorOperator_DIVISION *smithy.Schema
-
-var S3ConnectorOperator_SUBTRACTION *smithy.Schema
-
-var S3ConnectorOperator_MASK_ALL *smithy.Schema
-
-var S3ConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var S3ConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var S3ConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var S3ConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var S3ConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var S3ConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var S3ConnectorOperator_NO_OP *smithy.Schema
-
-var S3DestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "S3DestinationProperties",
-}, smithy.ShapeTypeStructure, 3)
-var S3DestinationProperties_bucketName *smithy.Schema
-
-var S3DestinationProperties_bucketPrefix *smithy.Schema
-
-var S3DestinationProperties_s3OutputFormatConfig *smithy.Schema
-
-var S3InputFileType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "S3InputFileType",
-}, smithy.ShapeTypeEnum, 2)
-var S3InputFileType_CSV *smithy.Schema
-
-var S3InputFileType_JSON *smithy.Schema
-
-var S3InputFormatConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "S3InputFormatConfig",
-}, smithy.ShapeTypeStructure, 1)
-var S3InputFormatConfig_s3InputFileType *smithy.Schema
-
-var S3Metadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "S3Metadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var S3OutputFormatConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "S3OutputFormatConfig",
-}, smithy.ShapeTypeStructure, 4)
-var S3OutputFormatConfig_fileType *smithy.Schema
-
-var S3OutputFormatConfig_prefixConfig *smithy.Schema
-
-var S3OutputFormatConfig_aggregationConfig *smithy.Schema
-
-var S3OutputFormatConfig_preserveSourceDataTyping *smithy.Schema
-
-var S3SourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "S3SourceProperties",
-}, smithy.ShapeTypeStructure, 3)
-var S3SourceProperties_bucketName *smithy.Schema
-
-var S3SourceProperties_bucketPrefix *smithy.Schema
-
-var S3SourceProperties_s3InputFormatConfig *smithy.Schema
-
-var SalesforceConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceConnectorOperator",
-}, smithy.ShapeTypeEnum, 21)
-var SalesforceConnectorOperator_PROJECTION *smithy.Schema
-
-var SalesforceConnectorOperator_LESS_THAN *smithy.Schema
-
-var SalesforceConnectorOperator_CONTAINS *smithy.Schema
-
-var SalesforceConnectorOperator_GREATER_THAN *smithy.Schema
-
-var SalesforceConnectorOperator_BETWEEN *smithy.Schema
-
-var SalesforceConnectorOperator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var SalesforceConnectorOperator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var SalesforceConnectorOperator_EQUAL_TO *smithy.Schema
-
-var SalesforceConnectorOperator_NOT_EQUAL_TO *smithy.Schema
-
-var SalesforceConnectorOperator_ADDITION *smithy.Schema
-
-var SalesforceConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var SalesforceConnectorOperator_DIVISION *smithy.Schema
-
-var SalesforceConnectorOperator_SUBTRACTION *smithy.Schema
-
-var SalesforceConnectorOperator_MASK_ALL *smithy.Schema
-
-var SalesforceConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var SalesforceConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var SalesforceConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var SalesforceConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var SalesforceConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var SalesforceConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var SalesforceConnectorOperator_NO_OP *smithy.Schema
-
-var SalesforceConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 6)
-var SalesforceConnectorProfileCredentials_accessToken *smithy.Schema
-
-var SalesforceConnectorProfileCredentials_refreshToken *smithy.Schema
-
-var SalesforceConnectorProfileCredentials_oAuthRequest *smithy.Schema
-
-var SalesforceConnectorProfileCredentials_clientCredentialsArn *smithy.Schema
-
-var SalesforceConnectorProfileCredentials_oAuth2GrantType *smithy.Schema
-
-var SalesforceConnectorProfileCredentials_jwtToken *smithy.Schema
-
-var SalesforceConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 3)
-var SalesforceConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var SalesforceConnectorProfileProperties_isSandboxEnvironment *smithy.Schema
-
-var SalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization *smithy.Schema
-
-var SalesforceDataTransferApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceDataTransferApi",
-}, smithy.ShapeTypeEnum, 3)
-var SalesforceDataTransferApi_AUTOMATIC *smithy.Schema
-
-var SalesforceDataTransferApi_BULKV2 *smithy.Schema
-
-var SalesforceDataTransferApi_REST_SYNC *smithy.Schema
-
-var _SalesforceDataTransferApiList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceDataTransferApiList",
-}, smithy.ShapeTypeList, 1)
-var _SalesforceDataTransferApiList_member *smithy.Schema
-
-var SalesforceDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceDestinationProperties",
-}, smithy.ShapeTypeStructure, 5)
-var SalesforceDestinationProperties_object *smithy.Schema
-
-var SalesforceDestinationProperties_idFieldNames *smithy.Schema
-
-var SalesforceDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var SalesforceDestinationProperties_writeOperationType *smithy.Schema
-
-var SalesforceDestinationProperties_dataTransferApi *smithy.Schema
-
-var SalesforceMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var SalesforceMetadata_oAuthScopes *smithy.Schema
-
-var SalesforceMetadata_dataTransferApis *smithy.Schema
-
-var SalesforceMetadata_oauth2GrantTypesSupported *smithy.Schema
-
-var SalesforceSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SalesforceSourceProperties",
-}, smithy.ShapeTypeStructure, 4)
-var SalesforceSourceProperties_object *smithy.Schema
-
-var SalesforceSourceProperties_enableDynamicFieldUpdate *smithy.Schema
-
-var SalesforceSourceProperties_includeDeletedRecords *smithy.Schema
-
-var SalesforceSourceProperties_dataTransferApi *smithy.Schema
-
-var SAPODataConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataConnectorOperator",
-}, smithy.ShapeTypeEnum, 21)
-var SAPODataConnectorOperator_PROJECTION *smithy.Schema
-
-var SAPODataConnectorOperator_LESS_THAN *smithy.Schema
-
-var SAPODataConnectorOperator_CONTAINS *smithy.Schema
-
-var SAPODataConnectorOperator_GREATER_THAN *smithy.Schema
-
-var SAPODataConnectorOperator_BETWEEN *smithy.Schema
-
-var SAPODataConnectorOperator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var SAPODataConnectorOperator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var SAPODataConnectorOperator_EQUAL_TO *smithy.Schema
-
-var SAPODataConnectorOperator_NOT_EQUAL_TO *smithy.Schema
-
-var SAPODataConnectorOperator_ADDITION *smithy.Schema
-
-var SAPODataConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var SAPODataConnectorOperator_DIVISION *smithy.Schema
-
-var SAPODataConnectorOperator_SUBTRACTION *smithy.Schema
-
-var SAPODataConnectorOperator_MASK_ALL *smithy.Schema
-
-var SAPODataConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var SAPODataConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var SAPODataConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var SAPODataConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var SAPODataConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var SAPODataConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var SAPODataConnectorOperator_NO_OP *smithy.Schema
-
-var SAPODataConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var SAPODataConnectorProfileCredentials_basicAuthCredentials *smithy.Schema
-
-var SAPODataConnectorProfileCredentials_oAuthCredentials *smithy.Schema
-
-var SAPODataConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 8)
-var SAPODataConnectorProfileProperties_applicationHostUrl *smithy.Schema
-
-var SAPODataConnectorProfileProperties_applicationServicePath *smithy.Schema
-
-var SAPODataConnectorProfileProperties_portNumber *smithy.Schema
-
-var SAPODataConnectorProfileProperties_clientNumber *smithy.Schema
-
-var SAPODataConnectorProfileProperties_logonLanguage *smithy.Schema
-
-var SAPODataConnectorProfileProperties_privateLinkServiceName *smithy.Schema
-
-var SAPODataConnectorProfileProperties_oAuthProperties *smithy.Schema
-
-var SAPODataConnectorProfileProperties_disableSSO *smithy.Schema
-
-var SAPODataDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataDestinationProperties",
-}, smithy.ShapeTypeStructure, 5)
-var SAPODataDestinationProperties_objectPath *smithy.Schema
-
-var SAPODataDestinationProperties_successResponseHandlingConfig *smithy.Schema
-
-var SAPODataDestinationProperties_idFieldNames *smithy.Schema
-
-var SAPODataDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var SAPODataDestinationProperties_writeOperationType *smithy.Schema
-
-var _SAPODataMaxPageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataMaxPageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SAPODataMaxParallelism = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataMaxParallelism",
-}, smithy.ShapeTypeInteger, 0)
-
-var SAPODataMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var SAPODataPaginationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataPaginationConfig",
-}, smithy.ShapeTypeStructure, 1)
-var SAPODataPaginationConfig_maxPageSize *smithy.Schema
-
-var SAPODataParallelismConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataParallelismConfig",
-}, smithy.ShapeTypeStructure, 1)
-var SAPODataParallelismConfig_maxParallelism *smithy.Schema
-
-var SAPODataSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SAPODataSourceProperties",
-}, smithy.ShapeTypeStructure, 3)
-var SAPODataSourceProperties_objectPath *smithy.Schema
-
-var SAPODataSourceProperties_parallelismConfig *smithy.Schema
-
-var SAPODataSourceProperties_paginationConfig *smithy.Schema
-
-var ScheduledTriggerProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ScheduledTriggerProperties",
-}, smithy.ShapeTypeStructure, 8)
-var ScheduledTriggerProperties_scheduleExpression *smithy.Schema
-
-var ScheduledTriggerProperties_dataPullMode *smithy.Schema
-
-var ScheduledTriggerProperties_scheduleStartTime *smithy.Schema
-
-var ScheduledTriggerProperties_scheduleEndTime *smithy.Schema
-
-var ScheduledTriggerProperties_timezone *smithy.Schema
-
-var ScheduledTriggerProperties_scheduleOffset *smithy.Schema
-
-var ScheduledTriggerProperties_firstExecutionFrom *smithy.Schema
-
-var ScheduledTriggerProperties_flowErrorDeactivationThreshold *smithy.Schema
-
-var _ScheduleExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ScheduleExpression",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduleFrequencyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ScheduleFrequencyType",
-}, smithy.ShapeTypeEnum, 6)
-var ScheduleFrequencyType_BYMINUTE *smithy.Schema
-
-var ScheduleFrequencyType_HOURLY *smithy.Schema
-
-var ScheduleFrequencyType_DAILY *smithy.Schema
-
-var ScheduleFrequencyType_WEEKLY *smithy.Schema
-
-var ScheduleFrequencyType_MONTHLY *smithy.Schema
-
-var ScheduleFrequencyType_ONCE *smithy.Schema
-
-var _ScheduleOffset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ScheduleOffset",
-}, smithy.ShapeTypeLong, 0)
-
-var _SchedulingFrequencyTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SchedulingFrequencyTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SchedulingFrequencyTypeList_member *smithy.Schema
-
-var _SecretKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SecretKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceNowConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ServiceNowConnectorOperator",
-}, smithy.ShapeTypeEnum, 21)
-var ServiceNowConnectorOperator_PROJECTION *smithy.Schema
-
-var ServiceNowConnectorOperator_CONTAINS *smithy.Schema
-
-var ServiceNowConnectorOperator_LESS_THAN *smithy.Schema
-
-var ServiceNowConnectorOperator_GREATER_THAN *smithy.Schema
-
-var ServiceNowConnectorOperator_BETWEEN *smithy.Schema
-
-var ServiceNowConnectorOperator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var ServiceNowConnectorOperator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var ServiceNowConnectorOperator_EQUAL_TO *smithy.Schema
-
-var ServiceNowConnectorOperator_NOT_EQUAL_TO *smithy.Schema
-
-var ServiceNowConnectorOperator_ADDITION *smithy.Schema
-
-var ServiceNowConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var ServiceNowConnectorOperator_DIVISION *smithy.Schema
-
-var ServiceNowConnectorOperator_SUBTRACTION *smithy.Schema
-
-var ServiceNowConnectorOperator_MASK_ALL *smithy.Schema
-
-var ServiceNowConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var ServiceNowConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var ServiceNowConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var ServiceNowConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var ServiceNowConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var ServiceNowConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var ServiceNowConnectorOperator_NO_OP *smithy.Schema
-
-var ServiceNowConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ServiceNowConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceNowConnectorProfileCredentials_username *smithy.Schema
-
-var ServiceNowConnectorProfileCredentials_password *smithy.Schema
-
-var ServiceNowConnectorProfileCredentials_oAuth2Credentials *smithy.Schema
-
-var ServiceNowConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ServiceNowConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceNowConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var ServiceNowMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ServiceNowMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var ServiceNowSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ServiceNowSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceNowSourceProperties_object *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var SingularConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SingularConnectorOperator",
-}, smithy.ShapeTypeEnum, 14)
-var SingularConnectorOperator_PROJECTION *smithy.Schema
-
-var SingularConnectorOperator_EQUAL_TO *smithy.Schema
-
-var SingularConnectorOperator_ADDITION *smithy.Schema
-
-var SingularConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var SingularConnectorOperator_DIVISION *smithy.Schema
-
-var SingularConnectorOperator_SUBTRACTION *smithy.Schema
-
-var SingularConnectorOperator_MASK_ALL *smithy.Schema
-
-var SingularConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var SingularConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var SingularConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var SingularConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var SingularConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var SingularConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var SingularConnectorOperator_NO_OP *smithy.Schema
-
-var SingularConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SingularConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 1)
-var SingularConnectorProfileCredentials_apiKey *smithy.Schema
-
-var SingularConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SingularConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 0)
-
-var SingularMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SingularMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var SingularSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SingularSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var SingularSourceProperties_object *smithy.Schema
-
-var SlackConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SlackConnectorOperator",
-}, smithy.ShapeTypeEnum, 19)
-var SlackConnectorOperator_PROJECTION *smithy.Schema
-
-var SlackConnectorOperator_LESS_THAN *smithy.Schema
-
-var SlackConnectorOperator_GREATER_THAN *smithy.Schema
-
-var SlackConnectorOperator_BETWEEN *smithy.Schema
-
-var SlackConnectorOperator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var SlackConnectorOperator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var SlackConnectorOperator_EQUAL_TO *smithy.Schema
-
-var SlackConnectorOperator_ADDITION *smithy.Schema
-
-var SlackConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var SlackConnectorOperator_DIVISION *smithy.Schema
-
-var SlackConnectorOperator_SUBTRACTION *smithy.Schema
-
-var SlackConnectorOperator_MASK_ALL *smithy.Schema
-
-var SlackConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var SlackConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var SlackConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var SlackConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var SlackConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var SlackConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var SlackConnectorOperator_NO_OP *smithy.Schema
-
-var SlackConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SlackConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 4)
-var SlackConnectorProfileCredentials_clientId *smithy.Schema
-
-var SlackConnectorProfileCredentials_clientSecret *smithy.Schema
-
-var SlackConnectorProfileCredentials_accessToken *smithy.Schema
-
-var SlackConnectorProfileCredentials_oAuthRequest *smithy.Schema
-
-var SlackConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SlackConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var SlackConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var SlackMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SlackMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var SlackMetadata_oAuthScopes *smithy.Schema
-
-var SlackSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SlackSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var SlackSourceProperties_object *smithy.Schema
-
-var SnowflakeConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SnowflakeConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 3)
-var SnowflakeConnectorProfileCredentials_username *smithy.Schema
-
-var SnowflakeConnectorProfileCredentials_password *smithy.Schema
-
-var SnowflakeConnectorProfileCredentials_privateKey *smithy.Schema
-
-var SnowflakeConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SnowflakeConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 7)
-var SnowflakeConnectorProfileProperties_warehouse *smithy.Schema
-
-var SnowflakeConnectorProfileProperties_stage *smithy.Schema
-
-var SnowflakeConnectorProfileProperties_bucketName *smithy.Schema
-
-var SnowflakeConnectorProfileProperties_bucketPrefix *smithy.Schema
-
-var SnowflakeConnectorProfileProperties_privateLinkServiceName *smithy.Schema
-
-var SnowflakeConnectorProfileProperties_accountName *smithy.Schema
-
-var SnowflakeConnectorProfileProperties_region *smithy.Schema
-
-var SnowflakeDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SnowflakeDestinationProperties",
-}, smithy.ShapeTypeStructure, 4)
-var SnowflakeDestinationProperties_object *smithy.Schema
-
-var SnowflakeDestinationProperties_intermediateBucketName *smithy.Schema
-
-var SnowflakeDestinationProperties_bucketPrefix *smithy.Schema
-
-var SnowflakeDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var SnowflakeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SnowflakeMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var SnowflakeMetadata_supportedRegions *smithy.Schema
-
-var SourceConnectorProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SourceConnectorProperties",
-}, smithy.ShapeTypeStructure, 17)
-var SourceConnectorProperties_Amplitude *smithy.Schema
-
-var SourceConnectorProperties_Datadog *smithy.Schema
-
-var SourceConnectorProperties_Dynatrace *smithy.Schema
-
-var SourceConnectorProperties_GoogleAnalytics *smithy.Schema
-
-var SourceConnectorProperties_InforNexus *smithy.Schema
-
-var SourceConnectorProperties_Marketo *smithy.Schema
-
-var SourceConnectorProperties_S3 *smithy.Schema
-
-var SourceConnectorProperties_Salesforce *smithy.Schema
-
-var SourceConnectorProperties_ServiceNow *smithy.Schema
-
-var SourceConnectorProperties_Singular *smithy.Schema
-
-var SourceConnectorProperties_Slack *smithy.Schema
-
-var SourceConnectorProperties_Trendmicro *smithy.Schema
-
-var SourceConnectorProperties_Veeva *smithy.Schema
-
-var SourceConnectorProperties_Zendesk *smithy.Schema
-
-var SourceConnectorProperties_SAPOData *smithy.Schema
-
-var SourceConnectorProperties_CustomConnector *smithy.Schema
-
-var SourceConnectorProperties_Pardot *smithy.Schema
-
-var SourceFieldProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SourceFieldProperties",
-}, smithy.ShapeTypeStructure, 3)
-var SourceFieldProperties_isRetrievable *smithy.Schema
-
-var SourceFieldProperties_isQueryable *smithy.Schema
-
-var SourceFieldProperties_isTimestampFieldForIncrementalQueries *smithy.Schema
-
-var _SourceFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SourceFields",
-}, smithy.ShapeTypeList, 1)
-var _SourceFields_member *smithy.Schema
-
-var SourceFlowConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SourceFlowConfig",
-}, smithy.ShapeTypeStructure, 5)
-var SourceFlowConfig_connectorType *smithy.Schema
-
-var SourceFlowConfig_apiVersion *smithy.Schema
-
-var SourceFlowConfig_connectorProfileName *smithy.Schema
-
-var SourceFlowConfig_sourceConnectorProperties *smithy.Schema
-
-var SourceFlowConfig_incrementalPullConfig *smithy.Schema
-
-var _Stage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Stage",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var SuccessResponseHandlingConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SuccessResponseHandlingConfig",
-}, smithy.ShapeTypeStructure, 2)
-var SuccessResponseHandlingConfig_bucketPrefix *smithy.Schema
-
-var SuccessResponseHandlingConfig_bucketName *smithy.Schema
-
-var _SupportedApiVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedApiVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _SupportedApiVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedApiVersionList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedApiVersionList_member *smithy.Schema
-
-var _SupportedDataTransferApis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedDataTransferApis",
-}, smithy.ShapeTypeList, 1)
-var _SupportedDataTransferApis_member *smithy.Schema
-
-var SupportedDataTransferType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedDataTransferType",
-}, smithy.ShapeTypeEnum, 2)
-var SupportedDataTransferType_RECORD *smithy.Schema
-
-var SupportedDataTransferType_FILE *smithy.Schema
-
-var _SupportedDataTransferTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedDataTransferTypeList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedDataTransferTypeList_member *smithy.Schema
-
-var SupportedFieldTypeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedFieldTypeDetails",
-}, smithy.ShapeTypeStructure, 1)
-var SupportedFieldTypeDetails_v1 *smithy.Schema
-
-var _SupportedOperatorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedOperatorList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedOperatorList_member *smithy.Schema
-
-var _SupportedValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedValueList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedValueList_member *smithy.Schema
-
-var _SupportedWriteOperationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "SupportedWriteOperationList",
-}, smithy.ShapeTypeList, 1)
-var _SupportedWriteOperationList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Task = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Task",
-}, smithy.ShapeTypeStructure, 5)
-var Task_sourceFields *smithy.Schema
-
-var Task_connectorOperator *smithy.Schema
-
-var Task_destinationField *smithy.Schema
-
-var Task_taskType *smithy.Schema
-
-var Task_taskProperties *smithy.Schema
-
-var _TaskPropertiesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TaskPropertiesMap",
-}, smithy.ShapeTypeMap, 2)
-var _TaskPropertiesMap_key *smithy.Schema
-
-var _TaskPropertiesMap_value *smithy.Schema
-
-var _Tasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Tasks",
-}, smithy.ShapeTypeList, 1)
-var _Tasks_member *smithy.Schema
-
-var TaskType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TaskType",
-}, smithy.ShapeTypeEnum, 10)
-var TaskType_ARITHMETIC *smithy.Schema
-
-var TaskType_FILTER *smithy.Schema
-
-var TaskType_MAP *smithy.Schema
-
-var TaskType_MAP_ALL *smithy.Schema
-
-var TaskType_MASK *smithy.Schema
-
-var TaskType_MERGE *smithy.Schema
-
-var TaskType_PASSTHROUGH *smithy.Schema
-
-var TaskType_TRUNCATE *smithy.Schema
-
-var TaskType_VALIDATE *smithy.Schema
-
-var TaskType_PARTITION *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Timezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Timezone",
-}, smithy.ShapeTypeString, 0)
-
-var _TokenUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TokenUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _TokenUrlCustomProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TokenUrlCustomProperties",
-}, smithy.ShapeTypeMap, 2)
-var _TokenUrlCustomProperties_key *smithy.Schema
-
-var _TokenUrlCustomProperties_value *smithy.Schema
-
-var _TokenUrlList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TokenUrlList",
-}, smithy.ShapeTypeList, 1)
-var _TokenUrlList_member *smithy.Schema
-
-var TrendmicroConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TrendmicroConnectorOperator",
-}, smithy.ShapeTypeEnum, 14)
-var TrendmicroConnectorOperator_PROJECTION *smithy.Schema
-
-var TrendmicroConnectorOperator_EQUAL_TO *smithy.Schema
-
-var TrendmicroConnectorOperator_ADDITION *smithy.Schema
-
-var TrendmicroConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var TrendmicroConnectorOperator_DIVISION *smithy.Schema
-
-var TrendmicroConnectorOperator_SUBTRACTION *smithy.Schema
-
-var TrendmicroConnectorOperator_MASK_ALL *smithy.Schema
-
-var TrendmicroConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var TrendmicroConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var TrendmicroConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var TrendmicroConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var TrendmicroConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var TrendmicroConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var TrendmicroConnectorOperator_NO_OP *smithy.Schema
-
-var TrendmicroConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TrendmicroConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 1)
-var TrendmicroConnectorProfileCredentials_apiSecretKey *smithy.Schema
-
-var TrendmicroConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TrendmicroConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 0)
-
-var TrendmicroMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TrendmicroMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var TrendmicroSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TrendmicroSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var TrendmicroSourceProperties_object *smithy.Schema
-
-var TriggerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TriggerConfig",
-}, smithy.ShapeTypeStructure, 2)
-var TriggerConfig_triggerType *smithy.Schema
-
-var TriggerConfig_triggerProperties *smithy.Schema
-
-var TriggerProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TriggerProperties",
-}, smithy.ShapeTypeStructure, 1)
-var TriggerProperties_Scheduled *smithy.Schema
-
-var TriggerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TriggerType",
-}, smithy.ShapeTypeEnum, 3)
-var TriggerType_SCHEDULED *smithy.Schema
-
-var TriggerType_EVENT *smithy.Schema
-
-var TriggerType_ONDEMAND *smithy.Schema
-
-var _TriggerTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TriggerTypeList",
-}, smithy.ShapeTypeList, 1)
-var _TriggerTypeList_member *smithy.Schema
-
-var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedOperationException_message *smithy.Schema
-
-var _UpdatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _UpsolverBucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpsolverBucketName",
-}, smithy.ShapeTypeString, 0)
-
-var UpsolverDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpsolverDestinationProperties",
-}, smithy.ShapeTypeStructure, 3)
-var UpsolverDestinationProperties_bucketName *smithy.Schema
-
-var UpsolverDestinationProperties_bucketPrefix *smithy.Schema
-
-var UpsolverDestinationProperties_s3OutputFormatConfig *smithy.Schema
-
-var UpsolverMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpsolverMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpsolverS3OutputFormatConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpsolverS3OutputFormatConfig",
-}, smithy.ShapeTypeStructure, 3)
-var UpsolverS3OutputFormatConfig_fileType *smithy.Schema
-
-var UpsolverS3OutputFormatConfig_prefixConfig *smithy.Schema
-
-var UpsolverS3OutputFormatConfig_aggregationConfig *smithy.Schema
-
-var _Username = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Username",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var VeevaConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "VeevaConnectorOperator",
-}, smithy.ShapeTypeEnum, 21)
-var VeevaConnectorOperator_PROJECTION *smithy.Schema
-
-var VeevaConnectorOperator_LESS_THAN *smithy.Schema
-
-var VeevaConnectorOperator_GREATER_THAN *smithy.Schema
-
-var VeevaConnectorOperator_CONTAINS *smithy.Schema
-
-var VeevaConnectorOperator_BETWEEN *smithy.Schema
-
-var VeevaConnectorOperator_LESS_THAN_OR_EQUAL_TO *smithy.Schema
-
-var VeevaConnectorOperator_GREATER_THAN_OR_EQUAL_TO *smithy.Schema
-
-var VeevaConnectorOperator_EQUAL_TO *smithy.Schema
-
-var VeevaConnectorOperator_NOT_EQUAL_TO *smithy.Schema
-
-var VeevaConnectorOperator_ADDITION *smithy.Schema
-
-var VeevaConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var VeevaConnectorOperator_DIVISION *smithy.Schema
-
-var VeevaConnectorOperator_SUBTRACTION *smithy.Schema
-
-var VeevaConnectorOperator_MASK_ALL *smithy.Schema
-
-var VeevaConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var VeevaConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var VeevaConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var VeevaConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var VeevaConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var VeevaConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var VeevaConnectorOperator_NO_OP *smithy.Schema
-
-var VeevaConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "VeevaConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var VeevaConnectorProfileCredentials_username *smithy.Schema
-
-var VeevaConnectorProfileCredentials_password *smithy.Schema
-
-var VeevaConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "VeevaConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var VeevaConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var VeevaMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "VeevaMetadata",
-}, smithy.ShapeTypeStructure, 0)
-
-var VeevaSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "VeevaSourceProperties",
-}, smithy.ShapeTypeStructure, 5)
-var VeevaSourceProperties_object *smithy.Schema
-
-var VeevaSourceProperties_documentType *smithy.Schema
-
-var VeevaSourceProperties_includeSourceFiles *smithy.Schema
-
-var VeevaSourceProperties_includeRenditions *smithy.Schema
-
-var VeevaSourceProperties_includeAllVersions *smithy.Schema
-
-var _Warehouse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "Warehouse",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkgroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "WorkgroupName",
-}, smithy.ShapeTypeString, 0)
-
-var WriteOperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "WriteOperationType",
-}, smithy.ShapeTypeEnum, 4)
-var WriteOperationType_INSERT *smithy.Schema
-
-var WriteOperationType_UPSERT *smithy.Schema
-
-var WriteOperationType_UPDATE *smithy.Schema
-
-var WriteOperationType_DELETE *smithy.Schema
-
-var ZendeskConnectorOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ZendeskConnectorOperator",
-}, smithy.ShapeTypeEnum, 14)
-var ZendeskConnectorOperator_PROJECTION *smithy.Schema
-
-var ZendeskConnectorOperator_GREATER_THAN *smithy.Schema
-
-var ZendeskConnectorOperator_ADDITION *smithy.Schema
-
-var ZendeskConnectorOperator_MULTIPLICATION *smithy.Schema
-
-var ZendeskConnectorOperator_DIVISION *smithy.Schema
-
-var ZendeskConnectorOperator_SUBTRACTION *smithy.Schema
-
-var ZendeskConnectorOperator_MASK_ALL *smithy.Schema
-
-var ZendeskConnectorOperator_MASK_FIRST_N *smithy.Schema
-
-var ZendeskConnectorOperator_MASK_LAST_N *smithy.Schema
-
-var ZendeskConnectorOperator_VALIDATE_NON_NULL *smithy.Schema
-
-var ZendeskConnectorOperator_VALIDATE_NON_ZERO *smithy.Schema
-
-var ZendeskConnectorOperator_VALIDATE_NON_NEGATIVE *smithy.Schema
-
-var ZendeskConnectorOperator_VALIDATE_NUMERIC *smithy.Schema
-
-var ZendeskConnectorOperator_NO_OP *smithy.Schema
-
-var ZendeskConnectorProfileCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ZendeskConnectorProfileCredentials",
-}, smithy.ShapeTypeStructure, 4)
-var ZendeskConnectorProfileCredentials_clientId *smithy.Schema
-
-var ZendeskConnectorProfileCredentials_clientSecret *smithy.Schema
-
-var ZendeskConnectorProfileCredentials_accessToken *smithy.Schema
-
-var ZendeskConnectorProfileCredentials_oAuthRequest *smithy.Schema
-
-var ZendeskConnectorProfileProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ZendeskConnectorProfileProperties",
-}, smithy.ShapeTypeStructure, 1)
-var ZendeskConnectorProfileProperties_instanceUrl *smithy.Schema
-
-var ZendeskDestinationProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ZendeskDestinationProperties",
-}, smithy.ShapeTypeStructure, 4)
-var ZendeskDestinationProperties_object *smithy.Schema
-
-var ZendeskDestinationProperties_idFieldNames *smithy.Schema
-
-var ZendeskDestinationProperties_errorHandlingConfig *smithy.Schema
-
-var ZendeskDestinationProperties_writeOperationType *smithy.Schema
-
-var ZendeskMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ZendeskMetadata",
-}, smithy.ShapeTypeStructure, 1)
-var ZendeskMetadata_oAuthScopes *smithy.Schema
-
-var ZendeskSourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ZendeskSourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var ZendeskSourceProperties_object *smithy.Schema
-
-var CancelFlowExecutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CancelFlowExecutionsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelFlowExecutionsRequest_flowName *smithy.Schema
-
-var CancelFlowExecutionsRequest_executionIds *smithy.Schema
-
-var CancelFlowExecutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CancelFlowExecutionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CancelFlowExecutionsResponse_invalidExecutions *smithy.Schema
-
-var CreateConnectorProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CreateConnectorProfileRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateConnectorProfileRequest_connectorProfileName *smithy.Schema
-
-var CreateConnectorProfileRequest_kmsArn *smithy.Schema
-
-var CreateConnectorProfileRequest_connectorType *smithy.Schema
-
-var CreateConnectorProfileRequest_connectorLabel *smithy.Schema
-
-var CreateConnectorProfileRequest_connectionMode *smithy.Schema
-
-var CreateConnectorProfileRequest_connectorProfileConfig *smithy.Schema
-
-var CreateConnectorProfileRequest_clientToken *smithy.Schema
-
-var CreateConnectorProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CreateConnectorProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectorProfileResponse_connectorProfileArn *smithy.Schema
-
-var CreateFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CreateFlowRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateFlowRequest_flowName *smithy.Schema
-
-var CreateFlowRequest_description *smithy.Schema
-
-var CreateFlowRequest_kmsArn *smithy.Schema
-
-var CreateFlowRequest_triggerConfig *smithy.Schema
-
-var CreateFlowRequest_sourceFlowConfig *smithy.Schema
-
-var CreateFlowRequest_destinationFlowConfigList *smithy.Schema
-
-var CreateFlowRequest_tasks *smithy.Schema
-
-var CreateFlowRequest_tags *smithy.Schema
-
-var CreateFlowRequest_metadataCatalogConfig *smithy.Schema
-
-var CreateFlowRequest_clientToken *smithy.Schema
-
-var CreateFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "CreateFlowResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateFlowResponse_flowArn *smithy.Schema
-
-var CreateFlowResponse_flowStatus *smithy.Schema
-
-var DeleteConnectorProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DeleteConnectorProfileRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConnectorProfileRequest_connectorProfileName *smithy.Schema
-
-var DeleteConnectorProfileRequest_forceDelete *smithy.Schema
-
-var DeleteConnectorProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DeleteConnectorProfileResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DeleteFlowRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFlowRequest_flowName *smithy.Schema
-
-var DeleteFlowRequest_forceDelete *smithy.Schema
-
-var DeleteFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DeleteFlowResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeConnectorEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorEntityRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeConnectorEntityRequest_connectorEntityName *smithy.Schema
-
-var DescribeConnectorEntityRequest_connectorType *smithy.Schema
-
-var DescribeConnectorEntityRequest_connectorProfileName *smithy.Schema
-
-var DescribeConnectorEntityRequest_apiVersion *smithy.Schema
-
-var DescribeConnectorEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorEntityResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorEntityResponse_connectorEntityFields *smithy.Schema
-
-var DescribeConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeConnectorRequest_connectorType *smithy.Schema
-
-var DescribeConnectorRequest_connectorLabel *smithy.Schema
-
-var DescribeConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectorResponse_connectorConfiguration *smithy.Schema
-
-var DescribeConnectorProfilesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorProfilesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeConnectorProfilesRequest_connectorProfileNames *smithy.Schema
-
-var DescribeConnectorProfilesRequest_connectorType *smithy.Schema
-
-var DescribeConnectorProfilesRequest_connectorLabel *smithy.Schema
-
-var DescribeConnectorProfilesRequest_maxResults *smithy.Schema
-
-var DescribeConnectorProfilesRequest_nextToken *smithy.Schema
-
-var DescribeConnectorProfilesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorProfilesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeConnectorProfilesResponse_connectorProfileDetails *smithy.Schema
-
-var DescribeConnectorProfilesResponse_nextToken *smithy.Schema
-
-var DescribeConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeConnectorsRequest_connectorTypes *smithy.Schema
-
-var DescribeConnectorsRequest_maxResults *smithy.Schema
-
-var DescribeConnectorsRequest_nextToken *smithy.Schema
-
-var DescribeConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeConnectorsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeConnectorsResponse_connectorConfigurations *smithy.Schema
-
-var DescribeConnectorsResponse_connectors *smithy.Schema
-
-var DescribeConnectorsResponse_nextToken *smithy.Schema
-
-var DescribeFlowExecutionRecordsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeFlowExecutionRecordsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeFlowExecutionRecordsRequest_flowName *smithy.Schema
-
-var DescribeFlowExecutionRecordsRequest_maxResults *smithy.Schema
-
-var DescribeFlowExecutionRecordsRequest_nextToken *smithy.Schema
-
-var DescribeFlowExecutionRecordsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeFlowExecutionRecordsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFlowExecutionRecordsResponse_flowExecutions *smithy.Schema
-
-var DescribeFlowExecutionRecordsResponse_nextToken *smithy.Schema
-
-var DescribeFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeFlowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeFlowRequest_flowName *smithy.Schema
-
-var DescribeFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "DescribeFlowResponse",
-}, smithy.ShapeTypeStructure, 19)
-var DescribeFlowResponse_flowArn *smithy.Schema
-
-var DescribeFlowResponse_description *smithy.Schema
-
-var DescribeFlowResponse_flowName *smithy.Schema
-
-var DescribeFlowResponse_kmsArn *smithy.Schema
-
-var DescribeFlowResponse_flowStatus *smithy.Schema
-
-var DescribeFlowResponse_flowStatusMessage *smithy.Schema
-
-var DescribeFlowResponse_sourceFlowConfig *smithy.Schema
-
-var DescribeFlowResponse_destinationFlowConfigList *smithy.Schema
-
-var DescribeFlowResponse_lastRunExecutionDetails *smithy.Schema
-
-var DescribeFlowResponse_triggerConfig *smithy.Schema
-
-var DescribeFlowResponse_tasks *smithy.Schema
-
-var DescribeFlowResponse_createdAt *smithy.Schema
-
-var DescribeFlowResponse_lastUpdatedAt *smithy.Schema
-
-var DescribeFlowResponse_createdBy *smithy.Schema
-
-var DescribeFlowResponse_lastUpdatedBy *smithy.Schema
-
-var DescribeFlowResponse_tags *smithy.Schema
-
-var DescribeFlowResponse_metadataCatalogConfig *smithy.Schema
-
-var DescribeFlowResponse_lastRunMetadataCatalogDetails *smithy.Schema
-
-var DescribeFlowResponse_schemaVersion *smithy.Schema
-
-var ListConnectorEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListConnectorEntitiesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListConnectorEntitiesRequest_connectorProfileName *smithy.Schema
-
-var ListConnectorEntitiesRequest_connectorType *smithy.Schema
-
-var ListConnectorEntitiesRequest_entitiesPath *smithy.Schema
-
-var ListConnectorEntitiesRequest_apiVersion *smithy.Schema
-
-var ListConnectorEntitiesRequest_maxResults *smithy.Schema
-
-var ListConnectorEntitiesRequest_nextToken *smithy.Schema
-
-var ListConnectorEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListConnectorEntitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorEntitiesResponse_connectorEntityMap *smithy.Schema
-
-var ListConnectorEntitiesResponse_nextToken *smithy.Schema
-
-var ListConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListConnectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsRequest_maxResults *smithy.Schema
-
-var ListConnectorsRequest_nextToken *smithy.Schema
-
-var ListConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectorsResponse_connectors *smithy.Schema
-
-var ListConnectorsResponse_nextToken *smithy.Schema
-
-var ListFlowsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListFlowsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListFlowsRequest_maxResults *smithy.Schema
-
-var ListFlowsRequest_nextToken *smithy.Schema
-
-var ListFlowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListFlowsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFlowsResponse_flows *smithy.Schema
-
-var ListFlowsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RegisterConnectorRequest",
-}, smithy.ShapeTypeStructure, 5)
-var RegisterConnectorRequest_connectorLabel *smithy.Schema
-
-var RegisterConnectorRequest_description *smithy.Schema
-
-var RegisterConnectorRequest_connectorProvisioningType *smithy.Schema
-
-var RegisterConnectorRequest_connectorProvisioningConfig *smithy.Schema
-
-var RegisterConnectorRequest_clientToken *smithy.Schema
-
-var RegisterConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "RegisterConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterConnectorResponse_connectorArn *smithy.Schema
-
-var ResetConnectorMetadataCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ResetConnectorMetadataCacheRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ResetConnectorMetadataCacheRequest_connectorProfileName *smithy.Schema
-
-var ResetConnectorMetadataCacheRequest_connectorType *smithy.Schema
-
-var ResetConnectorMetadataCacheRequest_connectorEntityName *smithy.Schema
-
-var ResetConnectorMetadataCacheRequest_entitiesPath *smithy.Schema
-
-var ResetConnectorMetadataCacheRequest_apiVersion *smithy.Schema
-
-var ResetConnectorMetadataCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "ResetConnectorMetadataCacheResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "StartFlowRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartFlowRequest_flowName *smithy.Schema
-
-var StartFlowRequest_clientToken *smithy.Schema
-
-var StartFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "StartFlowResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartFlowResponse_flowArn *smithy.Schema
-
-var StartFlowResponse_flowStatus *smithy.Schema
-
-var StartFlowResponse_executionId *smithy.Schema
-
-var StopFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "StopFlowRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopFlowRequest_flowName *smithy.Schema
-
-var StopFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "StopFlowResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StopFlowResponse_flowArn *smithy.Schema
-
-var StopFlowResponse_flowStatus *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UnregisterConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UnregisterConnectorRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UnregisterConnectorRequest_connectorLabel *smithy.Schema
-
-var UnregisterConnectorRequest_forceDelete *smithy.Schema
-
-var UnregisterConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UnregisterConnectorResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConnectorProfileRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateConnectorProfileRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConnectorProfileRequest_connectorProfileName *smithy.Schema
-
-var UpdateConnectorProfileRequest_connectionMode *smithy.Schema
-
-var UpdateConnectorProfileRequest_connectorProfileConfig *smithy.Schema
-
-var UpdateConnectorProfileRequest_clientToken *smithy.Schema
-
-var UpdateConnectorProfileResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateConnectorProfileResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateConnectorProfileResponse_connectorProfileArn *smithy.Schema
-
-var UpdateConnectorRegistrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateConnectorRegistrationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConnectorRegistrationRequest_connectorLabel *smithy.Schema
-
-var UpdateConnectorRegistrationRequest_description *smithy.Schema
-
-var UpdateConnectorRegistrationRequest_connectorProvisioningConfig *smithy.Schema
-
-var UpdateConnectorRegistrationRequest_clientToken *smithy.Schema
-
-var UpdateConnectorRegistrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateConnectorRegistrationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateConnectorRegistrationResponse_connectorArn *smithy.Schema
-
-var UpdateFlowRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateFlowRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateFlowRequest_flowName *smithy.Schema
-
-var UpdateFlowRequest_description *smithy.Schema
-
-var UpdateFlowRequest_triggerConfig *smithy.Schema
-
-var UpdateFlowRequest_sourceFlowConfig *smithy.Schema
-
-var UpdateFlowRequest_destinationFlowConfigList *smithy.Schema
-
-var UpdateFlowRequest_tasks *smithy.Schema
-
-var UpdateFlowRequest_metadataCatalogConfig *smithy.Schema
-
-var UpdateFlowRequest_clientToken *smithy.Schema
-
-var UpdateFlowResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.appflow",
-	Name:      "UpdateFlowResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFlowResponse_flowStatus *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	AggregationType_NONE = AggregationType.AddMember("NONE", smithyprelude.Unit)
-
-	AggregationType_SINGLE_FILE = AggregationType.AddMember("SINGLE_FILE", smithyprelude.Unit)
-
-	AggregationConfig_aggregationType = AggregationConfig.AddMember("aggregationType", AggregationType)
-
-	AggregationConfig_targetFileSize = AggregationConfig.AddMember("targetFileSize", _Long)
-
-	AmplitudeConnectorOperator_BETWEEN = AmplitudeConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	AmplitudeConnectorProfileCredentials_apiKey = AmplitudeConnectorProfileCredentials.AddMember("apiKey", _ApiKey)
-
-	AmplitudeConnectorProfileCredentials_secretKey = AmplitudeConnectorProfileCredentials.AddMember("secretKey", _SecretKey)
-
-	AmplitudeSourceProperties_object = AmplitudeSourceProperties.AddMember("object", _Object)
-
-	ApiKeyCredentials_apiKey = ApiKeyCredentials.AddMember("apiKey", _ApiKey)
-
-	ApiKeyCredentials_apiSecretKey = ApiKeyCredentials.AddMember("apiSecretKey", _ApiSecretKey)
-
-	_AuthCodeUrlList_member = _AuthCodeUrlList.AddMember("member", _AuthCodeUrl)
-
-	_OAuthScopeList_member = _OAuthScopeList.AddMember("member", _OAuthScope)
-
-	_TokenUrlList_member = _TokenUrlList.AddMember("member", _TokenUrl)
-
-	OAuth2GrantType_CLIENT_CREDENTIALS = OAuth2GrantType.AddMember("CLIENT_CREDENTIALS", smithyprelude.Unit)
-
-	OAuth2GrantType_AUTHORIZATION_CODE = OAuth2GrantType.AddMember("AUTHORIZATION_CODE", smithyprelude.Unit)
-
-	OAuth2GrantType_JWT_BEARER = OAuth2GrantType.AddMember("JWT_BEARER", smithyprelude.Unit)
-
-	_OAuth2GrantTypeSupportedList_member = _OAuth2GrantTypeSupportedList.AddMember("member", OAuth2GrantType)
-
-	_ConnectorSuppliedValueList_member = _ConnectorSuppliedValueList.AddMember("member", _ConnectorSuppliedValue)
-
-	OAuth2CustomPropType_TOKEN_URL = OAuth2CustomPropType.AddMember("TOKEN_URL", smithyprelude.Unit)
-
-	OAuth2CustomPropType_AUTH_URL = OAuth2CustomPropType.AddMember("AUTH_URL", smithyprelude.Unit)
-
-	OAuth2CustomParameter_key = OAuth2CustomParameter.AddMember("key", _Key)
-
-	OAuth2CustomParameter_isRequired = OAuth2CustomParameter.AddMember("isRequired", _Boolean)
-
-	OAuth2CustomParameter_label = OAuth2CustomParameter.AddMember("label", _Label)
-
-	OAuth2CustomParameter_description = OAuth2CustomParameter.AddMember("description", _Description)
-
-	OAuth2CustomParameter_isSensitiveField = OAuth2CustomParameter.AddMember("isSensitiveField", _Boolean)
-
-	OAuth2CustomParameter_connectorSuppliedValues = OAuth2CustomParameter.AddMember("connectorSuppliedValues", _ConnectorSuppliedValueList)
-
-	OAuth2CustomParameter_type = OAuth2CustomParameter.AddMember("type", OAuth2CustomPropType)
-
-	_OAuth2CustomPropertiesList_member = _OAuth2CustomPropertiesList.AddMember("member", OAuth2CustomParameter)
-
-	OAuth2Defaults_oauthScopes = OAuth2Defaults.AddMember("oauthScopes", _OAuthScopeList)
-
-	OAuth2Defaults_tokenUrls = OAuth2Defaults.AddMember("tokenUrls", _TokenUrlList)
-
-	OAuth2Defaults_authCodeUrls = OAuth2Defaults.AddMember("authCodeUrls", _AuthCodeUrlList)
-
-	OAuth2Defaults_oauth2GrantTypesSupported = OAuth2Defaults.AddMember("oauth2GrantTypesSupported", _OAuth2GrantTypeSupportedList)
-
-	OAuth2Defaults_oauth2CustomProperties = OAuth2Defaults.AddMember("oauth2CustomProperties", _OAuth2CustomPropertiesList)
-
-	AuthParameter_key = AuthParameter.AddMember("key", _Key)
-
-	AuthParameter_isRequired = AuthParameter.AddMember("isRequired", _Boolean)
-
-	AuthParameter_label = AuthParameter.AddMember("label", _Label)
-
-	AuthParameter_description = AuthParameter.AddMember("description", _Description)
-
-	AuthParameter_isSensitiveField = AuthParameter.AddMember("isSensitiveField", _Boolean)
-
-	AuthParameter_connectorSuppliedValues = AuthParameter.AddMember("connectorSuppliedValues", _ConnectorSuppliedValueList)
-
-	_AuthParameterList_member = _AuthParameterList.AddMember("member", AuthParameter)
-
-	CustomAuthConfig_customAuthenticationType = CustomAuthConfig.AddMember("customAuthenticationType", _CustomAuthenticationType)
-
-	CustomAuthConfig_authParameters = CustomAuthConfig.AddMember("authParameters", _AuthParameterList)
-
-	_CustomAuthConfigList_member = _CustomAuthConfigList.AddMember("member", CustomAuthConfig)
-
-	AuthenticationConfig_isBasicAuthSupported = AuthenticationConfig.AddMember("isBasicAuthSupported", _Boolean)
-
-	AuthenticationConfig_isApiKeyAuthSupported = AuthenticationConfig.AddMember("isApiKeyAuthSupported", _Boolean)
-
-	AuthenticationConfig_isOAuth2Supported = AuthenticationConfig.AddMember("isOAuth2Supported", _Boolean)
-
-	AuthenticationConfig_isCustomAuthSupported = AuthenticationConfig.AddMember("isCustomAuthSupported", _Boolean)
-
-	AuthenticationConfig_oAuth2Defaults = AuthenticationConfig.AddMember("oAuth2Defaults", OAuth2Defaults)
-
-	AuthenticationConfig_customAuthConfigs = AuthenticationConfig.AddMember("customAuthConfigs", _CustomAuthConfigList)
-
-	AuthenticationType_OAUTH2 = AuthenticationType.AddMember("OAUTH2", smithyprelude.Unit)
-
-	AuthenticationType_APIKEY = AuthenticationType.AddMember("APIKEY", smithyprelude.Unit)
-
-	AuthenticationType_BASIC = AuthenticationType.AddMember("BASIC", smithyprelude.Unit)
-
-	AuthenticationType_CUSTOM = AuthenticationType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	BasicAuthCredentials_username = BasicAuthCredentials.AddMember("username", _Username)
-
-	BasicAuthCredentials_password = BasicAuthCredentials.AddMember("password", _Password)
-
-	CatalogType_GLUE = CatalogType.AddMember("GLUE", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConnectionMode_PUBLIC = ConnectionMode.AddMember("PUBLIC", smithyprelude.Unit)
-
-	ConnectionMode_PRIVATE = ConnectionMode.AddMember("PRIVATE", smithyprelude.Unit)
-
-	ConnectorAuthenticationException_message = ConnectorAuthenticationException.AddMember("message", _ErrorMessage)
-
-	ConnectorType_SALESFORCE = ConnectorType.AddMember("SALESFORCE", smithyprelude.Unit)
-
-	ConnectorType_SINGULAR = ConnectorType.AddMember("SINGULAR", smithyprelude.Unit)
-
-	ConnectorType_SLACK = ConnectorType.AddMember("SLACK", smithyprelude.Unit)
-
-	ConnectorType_REDSHIFT = ConnectorType.AddMember("REDSHIFT", smithyprelude.Unit)
-
-	ConnectorType_S3 = ConnectorType.AddMember("S3", smithyprelude.Unit)
-
-	ConnectorType_MARKETO = ConnectorType.AddMember("MARKETO", smithyprelude.Unit)
-
-	ConnectorType_GOOGLEANALYTICS = ConnectorType.AddMember("GOOGLEANALYTICS", smithyprelude.Unit)
-
-	ConnectorType_ZENDESK = ConnectorType.AddMember("ZENDESK", smithyprelude.Unit)
-
-	ConnectorType_SERVICENOW = ConnectorType.AddMember("SERVICENOW", smithyprelude.Unit)
-
-	ConnectorType_DATADOG = ConnectorType.AddMember("DATADOG", smithyprelude.Unit)
-
-	ConnectorType_TRENDMICRO = ConnectorType.AddMember("TRENDMICRO", smithyprelude.Unit)
-
-	ConnectorType_SNOWFLAKE = ConnectorType.AddMember("SNOWFLAKE", smithyprelude.Unit)
-
-	ConnectorType_DYNATRACE = ConnectorType.AddMember("DYNATRACE", smithyprelude.Unit)
-
-	ConnectorType_INFORNEXUS = ConnectorType.AddMember("INFORNEXUS", smithyprelude.Unit)
-
-	ConnectorType_AMPLITUDE = ConnectorType.AddMember("AMPLITUDE", smithyprelude.Unit)
-
-	ConnectorType_VEEVA = ConnectorType.AddMember("VEEVA", smithyprelude.Unit)
-
-	ConnectorType_EVENTBRIDGE = ConnectorType.AddMember("EVENTBRIDGE", smithyprelude.Unit)
-
-	ConnectorType_LOOKOUTMETRICS = ConnectorType.AddMember("LOOKOUTMETRICS", smithyprelude.Unit)
-
-	ConnectorType_UPSOLVER = ConnectorType.AddMember("UPSOLVER", smithyprelude.Unit)
-
-	ConnectorType_HONEYCODE = ConnectorType.AddMember("HONEYCODE", smithyprelude.Unit)
-
-	ConnectorType_CUSTOMERPROFILES = ConnectorType.AddMember("CUSTOMERPROFILES", smithyprelude.Unit)
-
-	ConnectorType_SAPODATA = ConnectorType.AddMember("SAPODATA", smithyprelude.Unit)
-
-	ConnectorType_CUSTOMCONNECTOR = ConnectorType.AddMember("CUSTOMCONNECTOR", smithyprelude.Unit)
-
-	ConnectorType_PARDOT = ConnectorType.AddMember("PARDOT", smithyprelude.Unit)
-
-	_ConnectorTypeList_member = _ConnectorTypeList.AddMember("member", ConnectorType)
-
-	ScheduleFrequencyType_BYMINUTE = ScheduleFrequencyType.AddMember("BYMINUTE", smithyprelude.Unit)
-
-	ScheduleFrequencyType_HOURLY = ScheduleFrequencyType.AddMember("HOURLY", smithyprelude.Unit)
-
-	ScheduleFrequencyType_DAILY = ScheduleFrequencyType.AddMember("DAILY", smithyprelude.Unit)
-
-	ScheduleFrequencyType_WEEKLY = ScheduleFrequencyType.AddMember("WEEKLY", smithyprelude.Unit)
-
-	ScheduleFrequencyType_MONTHLY = ScheduleFrequencyType.AddMember("MONTHLY", smithyprelude.Unit)
-
-	ScheduleFrequencyType_ONCE = ScheduleFrequencyType.AddMember("ONCE", smithyprelude.Unit)
-
-	_SchedulingFrequencyTypeList_member = _SchedulingFrequencyTypeList.AddMember("member", ScheduleFrequencyType)
-
-	TriggerType_SCHEDULED = TriggerType.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	TriggerType_EVENT = TriggerType.AddMember("EVENT", smithyprelude.Unit)
-
-	TriggerType_ONDEMAND = TriggerType.AddMember("ONDEMAND", smithyprelude.Unit)
-
-	_TriggerTypeList_member = _TriggerTypeList.AddMember("member", TriggerType)
-
-	GoogleAnalyticsMetadata_oAuthScopes = GoogleAnalyticsMetadata.AddMember("oAuthScopes", _OAuthScopeList)
-
-	SalesforceDataTransferApi_AUTOMATIC = SalesforceDataTransferApi.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	SalesforceDataTransferApi_BULKV2 = SalesforceDataTransferApi.AddMember("BULKV2", smithyprelude.Unit)
-
-	SalesforceDataTransferApi_REST_SYNC = SalesforceDataTransferApi.AddMember("REST_SYNC", smithyprelude.Unit)
-
-	_SalesforceDataTransferApiList_member = _SalesforceDataTransferApiList.AddMember("member", SalesforceDataTransferApi)
-
-	SalesforceMetadata_oAuthScopes = SalesforceMetadata.AddMember("oAuthScopes", _OAuthScopeList)
-
-	SalesforceMetadata_dataTransferApis = SalesforceMetadata.AddMember("dataTransferApis", _SalesforceDataTransferApiList)
-
-	SalesforceMetadata_oauth2GrantTypesSupported = SalesforceMetadata.AddMember("oauth2GrantTypesSupported", _OAuth2GrantTypeSupportedList)
-
-	SlackMetadata_oAuthScopes = SlackMetadata.AddMember("oAuthScopes", _OAuthScopeList)
-
-	_RegionList_member = _RegionList.AddMember("member", _Region)
-
-	SnowflakeMetadata_supportedRegions = SnowflakeMetadata.AddMember("supportedRegions", _RegionList)
-
-	ZendeskMetadata_oAuthScopes = ZendeskMetadata.AddMember("oAuthScopes", _OAuthScopeList)
-
-	HoneycodeMetadata_oAuthScopes = HoneycodeMetadata.AddMember("oAuthScopes", _OAuthScopeList)
-
-	ConnectorMetadata_Amplitude = ConnectorMetadata.AddMember("Amplitude", AmplitudeMetadata)
-
-	ConnectorMetadata_Datadog = ConnectorMetadata.AddMember("Datadog", DatadogMetadata)
-
-	ConnectorMetadata_Dynatrace = ConnectorMetadata.AddMember("Dynatrace", DynatraceMetadata)
-
-	ConnectorMetadata_GoogleAnalytics = ConnectorMetadata.AddMember("GoogleAnalytics", GoogleAnalyticsMetadata)
-
-	ConnectorMetadata_InforNexus = ConnectorMetadata.AddMember("InforNexus", InforNexusMetadata)
-
-	ConnectorMetadata_Marketo = ConnectorMetadata.AddMember("Marketo", MarketoMetadata)
-
-	ConnectorMetadata_Redshift = ConnectorMetadata.AddMember("Redshift", RedshiftMetadata)
-
-	ConnectorMetadata_S3 = ConnectorMetadata.AddMember("S3", S3Metadata)
-
-	ConnectorMetadata_Salesforce = ConnectorMetadata.AddMember("Salesforce", SalesforceMetadata)
-
-	ConnectorMetadata_ServiceNow = ConnectorMetadata.AddMember("ServiceNow", ServiceNowMetadata)
-
-	ConnectorMetadata_Singular = ConnectorMetadata.AddMember("Singular", SingularMetadata)
-
-	ConnectorMetadata_Slack = ConnectorMetadata.AddMember("Slack", SlackMetadata)
-
-	ConnectorMetadata_Snowflake = ConnectorMetadata.AddMember("Snowflake", SnowflakeMetadata)
-
-	ConnectorMetadata_Trendmicro = ConnectorMetadata.AddMember("Trendmicro", TrendmicroMetadata)
-
-	ConnectorMetadata_Veeva = ConnectorMetadata.AddMember("Veeva", VeevaMetadata)
-
-	ConnectorMetadata_Zendesk = ConnectorMetadata.AddMember("Zendesk", ZendeskMetadata)
-
-	ConnectorMetadata_EventBridge = ConnectorMetadata.AddMember("EventBridge", EventBridgeMetadata)
-
-	ConnectorMetadata_Upsolver = ConnectorMetadata.AddMember("Upsolver", UpsolverMetadata)
-
-	ConnectorMetadata_CustomerProfiles = ConnectorMetadata.AddMember("CustomerProfiles", CustomerProfilesMetadata)
-
-	ConnectorMetadata_Honeycode = ConnectorMetadata.AddMember("Honeycode", HoneycodeMetadata)
-
-	ConnectorMetadata_SAPOData = ConnectorMetadata.AddMember("SAPOData", SAPODataMetadata)
-
-	ConnectorMetadata_Pardot = ConnectorMetadata.AddMember("Pardot", PardotMetadata)
-
-	_ConnectorModeList_member = _ConnectorModeList.AddMember("member", _ConnectorMode)
-
-	_ConnectorSuppliedValueOptionList_member = _ConnectorSuppliedValueOptionList.AddMember("member", _ConnectorSuppliedValue)
-
-	ConnectorRuntimeSetting_key = ConnectorRuntimeSetting.AddMember("key", _Key)
-
-	ConnectorRuntimeSetting_dataType = ConnectorRuntimeSetting.AddMember("dataType", _ConnectorRuntimeSettingDataType)
-
-	ConnectorRuntimeSetting_isRequired = ConnectorRuntimeSetting.AddMember("isRequired", _Boolean)
-
-	ConnectorRuntimeSetting_label = ConnectorRuntimeSetting.AddMember("label", _Label)
-
-	ConnectorRuntimeSetting_description = ConnectorRuntimeSetting.AddMember("description", _Description)
-
-	ConnectorRuntimeSetting_scope = ConnectorRuntimeSetting.AddMember("scope", _ConnectorRuntimeSettingScope)
-
-	ConnectorRuntimeSetting_connectorSuppliedValueOptions = ConnectorRuntimeSetting.AddMember("connectorSuppliedValueOptions", _ConnectorSuppliedValueOptionList)
-
-	_ConnectorRuntimeSettingList_member = _ConnectorRuntimeSettingList.AddMember("member", ConnectorRuntimeSetting)
-
-	_SupportedApiVersionList_member = _SupportedApiVersionList.AddMember("member", _SupportedApiVersion)
-
-	Operators_PROJECTION = Operators.AddMember("PROJECTION", smithyprelude.Unit)
-
-	Operators_LESS_THAN = Operators.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	Operators_GREATER_THAN = Operators.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	Operators_CONTAINS = Operators.AddMember("CONTAINS", smithyprelude.Unit)
-
-	Operators_BETWEEN = Operators.AddMember("BETWEEN", smithyprelude.Unit)
-
-	Operators_LESS_THAN_OR_EQUAL_TO = Operators.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	Operators_GREATER_THAN_OR_EQUAL_TO = Operators.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	Operators_EQUAL_TO = Operators.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	Operators_NOT_EQUAL_TO = Operators.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
-
-	Operators_ADDITION = Operators.AddMember("ADDITION", smithyprelude.Unit)
-
-	Operators_MULTIPLICATION = Operators.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	Operators_DIVISION = Operators.AddMember("DIVISION", smithyprelude.Unit)
-
-	Operators_SUBTRACTION = Operators.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	Operators_MASK_ALL = Operators.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	Operators_MASK_FIRST_N = Operators.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	Operators_MASK_LAST_N = Operators.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	Operators_VALIDATE_NON_NULL = Operators.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	Operators_VALIDATE_NON_ZERO = Operators.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	Operators_VALIDATE_NON_NEGATIVE = Operators.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	Operators_VALIDATE_NUMERIC = Operators.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	Operators_NO_OP = Operators.AddMember("NO_OP", smithyprelude.Unit)
-
-	_SupportedOperatorList_member = _SupportedOperatorList.AddMember("member", Operators)
-
-	WriteOperationType_INSERT = WriteOperationType.AddMember("INSERT", smithyprelude.Unit)
-
-	WriteOperationType_UPSERT = WriteOperationType.AddMember("UPSERT", smithyprelude.Unit)
-
-	WriteOperationType_UPDATE = WriteOperationType.AddMember("UPDATE", smithyprelude.Unit)
-
-	WriteOperationType_DELETE = WriteOperationType.AddMember("DELETE", smithyprelude.Unit)
-
-	_SupportedWriteOperationList_member = _SupportedWriteOperationList.AddMember("member", WriteOperationType)
-
-	ConnectorProvisioningType_LAMBDA = ConnectorProvisioningType.AddMember("LAMBDA", smithyprelude.Unit)
-
-	LambdaConnectorProvisioningConfig_lambdaArn = LambdaConnectorProvisioningConfig.AddMember("lambdaArn", _ARN)
-
-	ConnectorProvisioningConfig_lambda = ConnectorProvisioningConfig.AddMember("lambda", LambdaConnectorProvisioningConfig)
-
-	SupportedDataTransferType_RECORD = SupportedDataTransferType.AddMember("RECORD", smithyprelude.Unit)
-
-	SupportedDataTransferType_FILE = SupportedDataTransferType.AddMember("FILE", smithyprelude.Unit)
-
-	_SupportedDataTransferTypeList_member = _SupportedDataTransferTypeList.AddMember("member", SupportedDataTransferType)
-
-	DataTransferApiType_SYNC = DataTransferApiType.AddMember("SYNC", smithyprelude.Unit)
-
-	DataTransferApiType_ASYNC = DataTransferApiType.AddMember("ASYNC", smithyprelude.Unit)
-
-	DataTransferApiType_AUTOMATIC = DataTransferApiType.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	DataTransferApi_Name = DataTransferApi.AddMember("Name", _DataTransferApiTypeName)
-
-	DataTransferApi_Type = DataTransferApi.AddMember("Type", DataTransferApiType)
-
-	_SupportedDataTransferApis_member = _SupportedDataTransferApis.AddMember("member", DataTransferApi)
-
-	ConnectorConfiguration_canUseAsSource = ConnectorConfiguration.AddMember("canUseAsSource", _Boolean)
-
-	ConnectorConfiguration_canUseAsDestination = ConnectorConfiguration.AddMember("canUseAsDestination", _Boolean)
-
-	ConnectorConfiguration_supportedDestinationConnectors = ConnectorConfiguration.AddMember("supportedDestinationConnectors", _ConnectorTypeList)
-
-	ConnectorConfiguration_supportedSchedulingFrequencies = ConnectorConfiguration.AddMember("supportedSchedulingFrequencies", _SchedulingFrequencyTypeList)
-
-	ConnectorConfiguration_isPrivateLinkEnabled = ConnectorConfiguration.AddMember("isPrivateLinkEnabled", _Boolean)
-
-	ConnectorConfiguration_isPrivateLinkEndpointUrlRequired = ConnectorConfiguration.AddMember("isPrivateLinkEndpointUrlRequired", _Boolean)
-
-	ConnectorConfiguration_supportedTriggerTypes = ConnectorConfiguration.AddMember("supportedTriggerTypes", _TriggerTypeList)
-
-	ConnectorConfiguration_connectorMetadata = ConnectorConfiguration.AddMember("connectorMetadata", ConnectorMetadata)
-
-	ConnectorConfiguration_connectorType = ConnectorConfiguration.AddMember("connectorType", ConnectorType)
-
-	ConnectorConfiguration_connectorLabel = ConnectorConfiguration.AddMember("connectorLabel", _ConnectorLabel)
-
-	ConnectorConfiguration_connectorDescription = ConnectorConfiguration.AddMember("connectorDescription", _ConnectorDescription)
-
-	ConnectorConfiguration_connectorOwner = ConnectorConfiguration.AddMember("connectorOwner", _ConnectorOwner)
-
-	ConnectorConfiguration_connectorName = ConnectorConfiguration.AddMember("connectorName", _ConnectorName)
-
-	ConnectorConfiguration_connectorVersion = ConnectorConfiguration.AddMember("connectorVersion", _ConnectorVersion)
-
-	ConnectorConfiguration_connectorArn = ConnectorConfiguration.AddMember("connectorArn", _ARN)
-
-	ConnectorConfiguration_connectorModes = ConnectorConfiguration.AddMember("connectorModes", _ConnectorModeList)
-
-	ConnectorConfiguration_authenticationConfig = ConnectorConfiguration.AddMember("authenticationConfig", AuthenticationConfig)
-
-	ConnectorConfiguration_connectorRuntimeSettings = ConnectorConfiguration.AddMember("connectorRuntimeSettings", _ConnectorRuntimeSettingList)
-
-	ConnectorConfiguration_supportedApiVersions = ConnectorConfiguration.AddMember("supportedApiVersions", _SupportedApiVersionList)
-
-	ConnectorConfiguration_supportedOperators = ConnectorConfiguration.AddMember("supportedOperators", _SupportedOperatorList)
-
-	ConnectorConfiguration_supportedWriteOperations = ConnectorConfiguration.AddMember("supportedWriteOperations", _SupportedWriteOperationList)
-
-	ConnectorConfiguration_connectorProvisioningType = ConnectorConfiguration.AddMember("connectorProvisioningType", ConnectorProvisioningType)
-
-	ConnectorConfiguration_connectorProvisioningConfig = ConnectorConfiguration.AddMember("connectorProvisioningConfig", ConnectorProvisioningConfig)
-
-	ConnectorConfiguration_logoURL = ConnectorConfiguration.AddMember("logoURL", _LogoURL)
-
-	ConnectorConfiguration_registeredAt = ConnectorConfiguration.AddMember("registeredAt", _Date)
-
-	ConnectorConfiguration_registeredBy = ConnectorConfiguration.AddMember("registeredBy", _RegisteredBy)
-
-	ConnectorConfiguration_supportedDataTransferTypes = ConnectorConfiguration.AddMember("supportedDataTransferTypes", _SupportedDataTransferTypeList)
-
-	ConnectorConfiguration_supportedDataTransferApis = ConnectorConfiguration.AddMember("supportedDataTransferApis", _SupportedDataTransferApis)
-
-	_ConnectorConfigurationsMap_key = _ConnectorConfigurationsMap.AddMember("key", ConnectorType)
-
-	_ConnectorConfigurationsMap_value = _ConnectorConfigurationsMap.AddMember("value", ConnectorConfiguration)
-
-	ConnectorDetail_connectorDescription = ConnectorDetail.AddMember("connectorDescription", _ConnectorDescription)
-
-	ConnectorDetail_connectorName = ConnectorDetail.AddMember("connectorName", _ConnectorName)
-
-	ConnectorDetail_connectorOwner = ConnectorDetail.AddMember("connectorOwner", _ConnectorOwner)
-
-	ConnectorDetail_connectorVersion = ConnectorDetail.AddMember("connectorVersion", _ConnectorVersion)
-
-	ConnectorDetail_applicationType = ConnectorDetail.AddMember("applicationType", _ApplicationType)
-
-	ConnectorDetail_connectorType = ConnectorDetail.AddMember("connectorType", ConnectorType)
-
-	ConnectorDetail_connectorLabel = ConnectorDetail.AddMember("connectorLabel", _ConnectorLabel)
-
-	ConnectorDetail_registeredAt = ConnectorDetail.AddMember("registeredAt", _Date)
-
-	ConnectorDetail_registeredBy = ConnectorDetail.AddMember("registeredBy", _RegisteredBy)
-
-	ConnectorDetail_connectorProvisioningType = ConnectorDetail.AddMember("connectorProvisioningType", ConnectorProvisioningType)
-
-	ConnectorDetail_connectorModes = ConnectorDetail.AddMember("connectorModes", _ConnectorModeList)
-
-	ConnectorDetail_supportedDataTransferTypes = ConnectorDetail.AddMember("supportedDataTransferTypes", _SupportedDataTransferTypeList)
-
-	ConnectorEntity_name = ConnectorEntity.AddMember("name", _Name)
-
-	ConnectorEntity_label = ConnectorEntity.AddMember("label", _Label)
-
-	ConnectorEntity_hasNestedEntities = ConnectorEntity.AddMember("hasNestedEntities", _Boolean)
-
-	Operator_PROJECTION = Operator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	Operator_LESS_THAN = Operator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	Operator_GREATER_THAN = Operator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	Operator_CONTAINS = Operator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	Operator_BETWEEN = Operator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	Operator_LESS_THAN_OR_EQUAL_TO = Operator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	Operator_GREATER_THAN_OR_EQUAL_TO = Operator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	Operator_EQUAL_TO = Operator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	Operator_NOT_EQUAL_TO = Operator.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
-
-	Operator_ADDITION = Operator.AddMember("ADDITION", smithyprelude.Unit)
-
-	Operator_MULTIPLICATION = Operator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	Operator_DIVISION = Operator.AddMember("DIVISION", smithyprelude.Unit)
-
-	Operator_SUBTRACTION = Operator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	Operator_MASK_ALL = Operator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	Operator_MASK_FIRST_N = Operator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	Operator_MASK_LAST_N = Operator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	Operator_VALIDATE_NON_NULL = Operator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	Operator_VALIDATE_NON_ZERO = Operator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	Operator_VALIDATE_NON_NEGATIVE = Operator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	Operator_VALIDATE_NUMERIC = Operator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	Operator_NO_OP = Operator.AddMember("NO_OP", smithyprelude.Unit)
-
-	_FilterOperatorList_member = _FilterOperatorList.AddMember("member", Operator)
-
-	_SupportedValueList_member = _SupportedValueList.AddMember("member", _Value)
-
-	Range_maximum = Range.AddMember("maximum", _Double)
-
-	Range_minimum = Range.AddMember("minimum", _Double)
-
-	FieldTypeDetails_fieldType = FieldTypeDetails.AddMember("fieldType", _FieldType)
-
-	FieldTypeDetails_filterOperators = FieldTypeDetails.AddMember("filterOperators", _FilterOperatorList)
-
-	FieldTypeDetails_supportedValues = FieldTypeDetails.AddMember("supportedValues", _SupportedValueList)
-
-	FieldTypeDetails_valueRegexPattern = FieldTypeDetails.AddMember("valueRegexPattern", _String)
-
-	FieldTypeDetails_supportedDateFormat = FieldTypeDetails.AddMember("supportedDateFormat", _String)
-
-	FieldTypeDetails_fieldValueRange = FieldTypeDetails.AddMember("fieldValueRange", Range)
-
-	FieldTypeDetails_fieldLengthRange = FieldTypeDetails.AddMember("fieldLengthRange", Range)
-
-	SupportedFieldTypeDetails_v1 = SupportedFieldTypeDetails.AddMember("v1", FieldTypeDetails)
-
-	SourceFieldProperties_isRetrievable = SourceFieldProperties.AddMember("isRetrievable", _Boolean)
-
-	SourceFieldProperties_isQueryable = SourceFieldProperties.AddMember("isQueryable", _Boolean)
-
-	SourceFieldProperties_isTimestampFieldForIncrementalQueries = SourceFieldProperties.AddMember("isTimestampFieldForIncrementalQueries", _Boolean)
-
-	DestinationFieldProperties_isCreatable = DestinationFieldProperties.AddMember("isCreatable", _Boolean)
-
-	DestinationFieldProperties_isNullable = DestinationFieldProperties.AddMember("isNullable", _Boolean)
-
-	DestinationFieldProperties_isUpsertable = DestinationFieldProperties.AddMember("isUpsertable", _Boolean)
-
-	DestinationFieldProperties_isUpdatable = DestinationFieldProperties.AddMember("isUpdatable", _Boolean)
-
-	DestinationFieldProperties_isDefaultedOnCreate = DestinationFieldProperties.AddMember("isDefaultedOnCreate", _Boolean)
-
-	DestinationFieldProperties_supportedWriteOperations = DestinationFieldProperties.AddMember("supportedWriteOperations", _SupportedWriteOperationList)
-
-	_CustomProperties_key = _CustomProperties.AddMember("key", _CustomPropertyKey)
-
-	_CustomProperties_value = _CustomProperties.AddMember("value", _CustomPropertyValue)
-
-	ConnectorEntityField_identifier = ConnectorEntityField.AddMember("identifier", _Identifier)
-
-	ConnectorEntityField_parentIdentifier = ConnectorEntityField.AddMember("parentIdentifier", _Identifier)
-
-	ConnectorEntityField_label = ConnectorEntityField.AddMember("label", _Label)
-
-	ConnectorEntityField_isPrimaryKey = ConnectorEntityField.AddMember("isPrimaryKey", _Boolean)
-
-	ConnectorEntityField_defaultValue = ConnectorEntityField.AddMember("defaultValue", _String)
-
-	ConnectorEntityField_isDeprecated = ConnectorEntityField.AddMember("isDeprecated", _Boolean)
-
-	ConnectorEntityField_supportedFieldTypeDetails = ConnectorEntityField.AddMember("supportedFieldTypeDetails", SupportedFieldTypeDetails)
-
-	ConnectorEntityField_description = ConnectorEntityField.AddMember("description", _Description)
-
-	ConnectorEntityField_sourceProperties = ConnectorEntityField.AddMember("sourceProperties", SourceFieldProperties)
-
-	ConnectorEntityField_destinationProperties = ConnectorEntityField.AddMember("destinationProperties", DestinationFieldProperties)
-
-	ConnectorEntityField_customProperties = ConnectorEntityField.AddMember("customProperties", _CustomProperties)
-
-	_ConnectorEntityFieldList_member = _ConnectorEntityFieldList.AddMember("member", ConnectorEntityField)
-
-	_ConnectorEntityList_member = _ConnectorEntityList.AddMember("member", ConnectorEntity)
-
-	_ConnectorEntityMap_key = _ConnectorEntityMap.AddMember("key", _Group)
-
-	_ConnectorEntityMap_value = _ConnectorEntityMap.AddMember("value", _ConnectorEntityList)
-
-	_ConnectorList_member = _ConnectorList.AddMember("member", ConnectorDetail)
-
-	ConnectorOAuthRequest_authCode = ConnectorOAuthRequest.AddMember("authCode", _AuthCode)
-
-	ConnectorOAuthRequest_redirectUri = ConnectorOAuthRequest.AddMember("redirectUri", _RedirectUri)
-
-	ConnectorOAuthRequest_codeVerifier = ConnectorOAuthRequest.AddMember("codeVerifier", _CodeVerifier)
-
-	DatadogConnectorOperator_PROJECTION = DatadogConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	DatadogConnectorOperator_BETWEEN = DatadogConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	DatadogConnectorOperator_EQUAL_TO = DatadogConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	DatadogConnectorOperator_ADDITION = DatadogConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	DatadogConnectorOperator_MULTIPLICATION = DatadogConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	DatadogConnectorOperator_DIVISION = DatadogConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	DatadogConnectorOperator_SUBTRACTION = DatadogConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	DatadogConnectorOperator_MASK_ALL = DatadogConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	DatadogConnectorOperator_MASK_FIRST_N = DatadogConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	DatadogConnectorOperator_MASK_LAST_N = DatadogConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	DatadogConnectorOperator_VALIDATE_NON_NULL = DatadogConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	DatadogConnectorOperator_VALIDATE_NON_ZERO = DatadogConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	DatadogConnectorOperator_VALIDATE_NON_NEGATIVE = DatadogConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	DatadogConnectorOperator_VALIDATE_NUMERIC = DatadogConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	DatadogConnectorOperator_NO_OP = DatadogConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_PROJECTION = DynatraceConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_BETWEEN = DynatraceConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_EQUAL_TO = DynatraceConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_ADDITION = DynatraceConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_MULTIPLICATION = DynatraceConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_DIVISION = DynatraceConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_SUBTRACTION = DynatraceConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_MASK_ALL = DynatraceConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_MASK_FIRST_N = DynatraceConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_MASK_LAST_N = DynatraceConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_VALIDATE_NON_NULL = DynatraceConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_VALIDATE_NON_ZERO = DynatraceConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_VALIDATE_NON_NEGATIVE = DynatraceConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_VALIDATE_NUMERIC = DynatraceConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	DynatraceConnectorOperator_NO_OP = DynatraceConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	GoogleAnalyticsConnectorOperator_PROJECTION = GoogleAnalyticsConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	GoogleAnalyticsConnectorOperator_BETWEEN = GoogleAnalyticsConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_PROJECTION = InforNexusConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_BETWEEN = InforNexusConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_EQUAL_TO = InforNexusConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_ADDITION = InforNexusConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_MULTIPLICATION = InforNexusConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_DIVISION = InforNexusConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_SUBTRACTION = InforNexusConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_MASK_ALL = InforNexusConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_MASK_FIRST_N = InforNexusConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_MASK_LAST_N = InforNexusConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_VALIDATE_NON_NULL = InforNexusConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_VALIDATE_NON_ZERO = InforNexusConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_VALIDATE_NON_NEGATIVE = InforNexusConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_VALIDATE_NUMERIC = InforNexusConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	InforNexusConnectorOperator_NO_OP = InforNexusConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	MarketoConnectorOperator_PROJECTION = MarketoConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	MarketoConnectorOperator_LESS_THAN = MarketoConnectorOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	MarketoConnectorOperator_GREATER_THAN = MarketoConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	MarketoConnectorOperator_BETWEEN = MarketoConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	MarketoConnectorOperator_ADDITION = MarketoConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	MarketoConnectorOperator_MULTIPLICATION = MarketoConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	MarketoConnectorOperator_DIVISION = MarketoConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	MarketoConnectorOperator_SUBTRACTION = MarketoConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	MarketoConnectorOperator_MASK_ALL = MarketoConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	MarketoConnectorOperator_MASK_FIRST_N = MarketoConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	MarketoConnectorOperator_MASK_LAST_N = MarketoConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	MarketoConnectorOperator_VALIDATE_NON_NULL = MarketoConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	MarketoConnectorOperator_VALIDATE_NON_ZERO = MarketoConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	MarketoConnectorOperator_VALIDATE_NON_NEGATIVE = MarketoConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	MarketoConnectorOperator_VALIDATE_NUMERIC = MarketoConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	MarketoConnectorOperator_NO_OP = MarketoConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	S3ConnectorOperator_PROJECTION = S3ConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	S3ConnectorOperator_LESS_THAN = S3ConnectorOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	S3ConnectorOperator_GREATER_THAN = S3ConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	S3ConnectorOperator_BETWEEN = S3ConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	S3ConnectorOperator_LESS_THAN_OR_EQUAL_TO = S3ConnectorOperator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	S3ConnectorOperator_GREATER_THAN_OR_EQUAL_TO = S3ConnectorOperator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	S3ConnectorOperator_EQUAL_TO = S3ConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	S3ConnectorOperator_NOT_EQUAL_TO = S3ConnectorOperator.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
-
-	S3ConnectorOperator_ADDITION = S3ConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	S3ConnectorOperator_MULTIPLICATION = S3ConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	S3ConnectorOperator_DIVISION = S3ConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	S3ConnectorOperator_SUBTRACTION = S3ConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	S3ConnectorOperator_MASK_ALL = S3ConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	S3ConnectorOperator_MASK_FIRST_N = S3ConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	S3ConnectorOperator_MASK_LAST_N = S3ConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	S3ConnectorOperator_VALIDATE_NON_NULL = S3ConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	S3ConnectorOperator_VALIDATE_NON_ZERO = S3ConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	S3ConnectorOperator_VALIDATE_NON_NEGATIVE = S3ConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	S3ConnectorOperator_VALIDATE_NUMERIC = S3ConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	S3ConnectorOperator_NO_OP = S3ConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_PROJECTION = SalesforceConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_LESS_THAN = SalesforceConnectorOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_CONTAINS = SalesforceConnectorOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_GREATER_THAN = SalesforceConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_BETWEEN = SalesforceConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_LESS_THAN_OR_EQUAL_TO = SalesforceConnectorOperator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_GREATER_THAN_OR_EQUAL_TO = SalesforceConnectorOperator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_EQUAL_TO = SalesforceConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_NOT_EQUAL_TO = SalesforceConnectorOperator.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_ADDITION = SalesforceConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_MULTIPLICATION = SalesforceConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_DIVISION = SalesforceConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_SUBTRACTION = SalesforceConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_MASK_ALL = SalesforceConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_MASK_FIRST_N = SalesforceConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_MASK_LAST_N = SalesforceConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_VALIDATE_NON_NULL = SalesforceConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_VALIDATE_NON_ZERO = SalesforceConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_VALIDATE_NON_NEGATIVE = SalesforceConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_VALIDATE_NUMERIC = SalesforceConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	SalesforceConnectorOperator_NO_OP = SalesforceConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_PROJECTION = ServiceNowConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_CONTAINS = ServiceNowConnectorOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_LESS_THAN = ServiceNowConnectorOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_GREATER_THAN = ServiceNowConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_BETWEEN = ServiceNowConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_LESS_THAN_OR_EQUAL_TO = ServiceNowConnectorOperator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_GREATER_THAN_OR_EQUAL_TO = ServiceNowConnectorOperator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_EQUAL_TO = ServiceNowConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_NOT_EQUAL_TO = ServiceNowConnectorOperator.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_ADDITION = ServiceNowConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_MULTIPLICATION = ServiceNowConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_DIVISION = ServiceNowConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_SUBTRACTION = ServiceNowConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_MASK_ALL = ServiceNowConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_MASK_FIRST_N = ServiceNowConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_MASK_LAST_N = ServiceNowConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_VALIDATE_NON_NULL = ServiceNowConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_VALIDATE_NON_ZERO = ServiceNowConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_VALIDATE_NON_NEGATIVE = ServiceNowConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_VALIDATE_NUMERIC = ServiceNowConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	ServiceNowConnectorOperator_NO_OP = ServiceNowConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	SingularConnectorOperator_PROJECTION = SingularConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	SingularConnectorOperator_EQUAL_TO = SingularConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	SingularConnectorOperator_ADDITION = SingularConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	SingularConnectorOperator_MULTIPLICATION = SingularConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	SingularConnectorOperator_DIVISION = SingularConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	SingularConnectorOperator_SUBTRACTION = SingularConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	SingularConnectorOperator_MASK_ALL = SingularConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	SingularConnectorOperator_MASK_FIRST_N = SingularConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	SingularConnectorOperator_MASK_LAST_N = SingularConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	SingularConnectorOperator_VALIDATE_NON_NULL = SingularConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	SingularConnectorOperator_VALIDATE_NON_ZERO = SingularConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	SingularConnectorOperator_VALIDATE_NON_NEGATIVE = SingularConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	SingularConnectorOperator_VALIDATE_NUMERIC = SingularConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	SingularConnectorOperator_NO_OP = SingularConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	SlackConnectorOperator_PROJECTION = SlackConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	SlackConnectorOperator_LESS_THAN = SlackConnectorOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	SlackConnectorOperator_GREATER_THAN = SlackConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	SlackConnectorOperator_BETWEEN = SlackConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	SlackConnectorOperator_LESS_THAN_OR_EQUAL_TO = SlackConnectorOperator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	SlackConnectorOperator_GREATER_THAN_OR_EQUAL_TO = SlackConnectorOperator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	SlackConnectorOperator_EQUAL_TO = SlackConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	SlackConnectorOperator_ADDITION = SlackConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	SlackConnectorOperator_MULTIPLICATION = SlackConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	SlackConnectorOperator_DIVISION = SlackConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	SlackConnectorOperator_SUBTRACTION = SlackConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	SlackConnectorOperator_MASK_ALL = SlackConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	SlackConnectorOperator_MASK_FIRST_N = SlackConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	SlackConnectorOperator_MASK_LAST_N = SlackConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	SlackConnectorOperator_VALIDATE_NON_NULL = SlackConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	SlackConnectorOperator_VALIDATE_NON_ZERO = SlackConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	SlackConnectorOperator_VALIDATE_NON_NEGATIVE = SlackConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	SlackConnectorOperator_VALIDATE_NUMERIC = SlackConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	SlackConnectorOperator_NO_OP = SlackConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_PROJECTION = TrendmicroConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_EQUAL_TO = TrendmicroConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_ADDITION = TrendmicroConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_MULTIPLICATION = TrendmicroConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_DIVISION = TrendmicroConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_SUBTRACTION = TrendmicroConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_MASK_ALL = TrendmicroConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_MASK_FIRST_N = TrendmicroConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_MASK_LAST_N = TrendmicroConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_VALIDATE_NON_NULL = TrendmicroConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_VALIDATE_NON_ZERO = TrendmicroConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_VALIDATE_NON_NEGATIVE = TrendmicroConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_VALIDATE_NUMERIC = TrendmicroConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	TrendmicroConnectorOperator_NO_OP = TrendmicroConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	VeevaConnectorOperator_PROJECTION = VeevaConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	VeevaConnectorOperator_LESS_THAN = VeevaConnectorOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	VeevaConnectorOperator_GREATER_THAN = VeevaConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	VeevaConnectorOperator_CONTAINS = VeevaConnectorOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	VeevaConnectorOperator_BETWEEN = VeevaConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	VeevaConnectorOperator_LESS_THAN_OR_EQUAL_TO = VeevaConnectorOperator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	VeevaConnectorOperator_GREATER_THAN_OR_EQUAL_TO = VeevaConnectorOperator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	VeevaConnectorOperator_EQUAL_TO = VeevaConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	VeevaConnectorOperator_NOT_EQUAL_TO = VeevaConnectorOperator.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
-
-	VeevaConnectorOperator_ADDITION = VeevaConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	VeevaConnectorOperator_MULTIPLICATION = VeevaConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	VeevaConnectorOperator_DIVISION = VeevaConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	VeevaConnectorOperator_SUBTRACTION = VeevaConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	VeevaConnectorOperator_MASK_ALL = VeevaConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	VeevaConnectorOperator_MASK_FIRST_N = VeevaConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	VeevaConnectorOperator_MASK_LAST_N = VeevaConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	VeevaConnectorOperator_VALIDATE_NON_NULL = VeevaConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	VeevaConnectorOperator_VALIDATE_NON_ZERO = VeevaConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	VeevaConnectorOperator_VALIDATE_NON_NEGATIVE = VeevaConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	VeevaConnectorOperator_VALIDATE_NUMERIC = VeevaConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	VeevaConnectorOperator_NO_OP = VeevaConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_PROJECTION = ZendeskConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_GREATER_THAN = ZendeskConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_ADDITION = ZendeskConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_MULTIPLICATION = ZendeskConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_DIVISION = ZendeskConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_SUBTRACTION = ZendeskConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_MASK_ALL = ZendeskConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_MASK_FIRST_N = ZendeskConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_MASK_LAST_N = ZendeskConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_VALIDATE_NON_NULL = ZendeskConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_VALIDATE_NON_ZERO = ZendeskConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_VALIDATE_NON_NEGATIVE = ZendeskConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_VALIDATE_NUMERIC = ZendeskConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	ZendeskConnectorOperator_NO_OP = ZendeskConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_PROJECTION = SAPODataConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_LESS_THAN = SAPODataConnectorOperator.AddMember("LESS_THAN", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_CONTAINS = SAPODataConnectorOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_GREATER_THAN = SAPODataConnectorOperator.AddMember("GREATER_THAN", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_BETWEEN = SAPODataConnectorOperator.AddMember("BETWEEN", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_LESS_THAN_OR_EQUAL_TO = SAPODataConnectorOperator.AddMember("LESS_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_GREATER_THAN_OR_EQUAL_TO = SAPODataConnectorOperator.AddMember("GREATER_THAN_OR_EQUAL_TO", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_EQUAL_TO = SAPODataConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_NOT_EQUAL_TO = SAPODataConnectorOperator.AddMember("NOT_EQUAL_TO", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_ADDITION = SAPODataConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_MULTIPLICATION = SAPODataConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_DIVISION = SAPODataConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_SUBTRACTION = SAPODataConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_MASK_ALL = SAPODataConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_MASK_FIRST_N = SAPODataConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_MASK_LAST_N = SAPODataConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_VALIDATE_NON_NULL = SAPODataConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_VALIDATE_NON_ZERO = SAPODataConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_VALIDATE_NON_NEGATIVE = SAPODataConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_VALIDATE_NUMERIC = SAPODataConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	SAPODataConnectorOperator_NO_OP = SAPODataConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	PardotConnectorOperator_PROJECTION = PardotConnectorOperator.AddMember("PROJECTION", smithyprelude.Unit)
-
-	PardotConnectorOperator_EQUAL_TO = PardotConnectorOperator.AddMember("EQUAL_TO", smithyprelude.Unit)
-
-	PardotConnectorOperator_NO_OP = PardotConnectorOperator.AddMember("NO_OP", smithyprelude.Unit)
-
-	PardotConnectorOperator_ADDITION = PardotConnectorOperator.AddMember("ADDITION", smithyprelude.Unit)
-
-	PardotConnectorOperator_MULTIPLICATION = PardotConnectorOperator.AddMember("MULTIPLICATION", smithyprelude.Unit)
-
-	PardotConnectorOperator_DIVISION = PardotConnectorOperator.AddMember("DIVISION", smithyprelude.Unit)
-
-	PardotConnectorOperator_SUBTRACTION = PardotConnectorOperator.AddMember("SUBTRACTION", smithyprelude.Unit)
-
-	PardotConnectorOperator_MASK_ALL = PardotConnectorOperator.AddMember("MASK_ALL", smithyprelude.Unit)
-
-	PardotConnectorOperator_MASK_FIRST_N = PardotConnectorOperator.AddMember("MASK_FIRST_N", smithyprelude.Unit)
-
-	PardotConnectorOperator_MASK_LAST_N = PardotConnectorOperator.AddMember("MASK_LAST_N", smithyprelude.Unit)
-
-	PardotConnectorOperator_VALIDATE_NON_NULL = PardotConnectorOperator.AddMember("VALIDATE_NON_NULL", smithyprelude.Unit)
-
-	PardotConnectorOperator_VALIDATE_NON_ZERO = PardotConnectorOperator.AddMember("VALIDATE_NON_ZERO", smithyprelude.Unit)
-
-	PardotConnectorOperator_VALIDATE_NON_NEGATIVE = PardotConnectorOperator.AddMember("VALIDATE_NON_NEGATIVE", smithyprelude.Unit)
-
-	PardotConnectorOperator_VALIDATE_NUMERIC = PardotConnectorOperator.AddMember("VALIDATE_NUMERIC", smithyprelude.Unit)
-
-	ConnectorOperator_Amplitude = ConnectorOperator.AddMember("Amplitude", AmplitudeConnectorOperator)
-
-	ConnectorOperator_Datadog = ConnectorOperator.AddMember("Datadog", DatadogConnectorOperator)
-
-	ConnectorOperator_Dynatrace = ConnectorOperator.AddMember("Dynatrace", DynatraceConnectorOperator)
-
-	ConnectorOperator_GoogleAnalytics = ConnectorOperator.AddMember("GoogleAnalytics", GoogleAnalyticsConnectorOperator)
-
-	ConnectorOperator_InforNexus = ConnectorOperator.AddMember("InforNexus", InforNexusConnectorOperator)
-
-	ConnectorOperator_Marketo = ConnectorOperator.AddMember("Marketo", MarketoConnectorOperator)
-
-	ConnectorOperator_S3 = ConnectorOperator.AddMember("S3", S3ConnectorOperator)
-
-	ConnectorOperator_Salesforce = ConnectorOperator.AddMember("Salesforce", SalesforceConnectorOperator)
-
-	ConnectorOperator_ServiceNow = ConnectorOperator.AddMember("ServiceNow", ServiceNowConnectorOperator)
-
-	ConnectorOperator_Singular = ConnectorOperator.AddMember("Singular", SingularConnectorOperator)
-
-	ConnectorOperator_Slack = ConnectorOperator.AddMember("Slack", SlackConnectorOperator)
-
-	ConnectorOperator_Trendmicro = ConnectorOperator.AddMember("Trendmicro", TrendmicroConnectorOperator)
-
-	ConnectorOperator_Veeva = ConnectorOperator.AddMember("Veeva", VeevaConnectorOperator)
-
-	ConnectorOperator_Zendesk = ConnectorOperator.AddMember("Zendesk", ZendeskConnectorOperator)
-
-	ConnectorOperator_SAPOData = ConnectorOperator.AddMember("SAPOData", SAPODataConnectorOperator)
-
-	ConnectorOperator_CustomConnector = ConnectorOperator.AddMember("CustomConnector", Operator)
-
-	ConnectorOperator_Pardot = ConnectorOperator.AddMember("Pardot", PardotConnectorOperator)
-
-	DatadogConnectorProfileProperties_instanceUrl = DatadogConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	DynatraceConnectorProfileProperties_instanceUrl = DynatraceConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	InforNexusConnectorProfileProperties_instanceUrl = InforNexusConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	MarketoConnectorProfileProperties_instanceUrl = MarketoConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	RedshiftConnectorProfileProperties_databaseUrl = RedshiftConnectorProfileProperties.AddMember("databaseUrl", _DatabaseUrl)
-
-	RedshiftConnectorProfileProperties_bucketName = RedshiftConnectorProfileProperties.AddMember("bucketName", _BucketName)
-
-	RedshiftConnectorProfileProperties_bucketPrefix = RedshiftConnectorProfileProperties.AddMember("bucketPrefix", _BucketPrefix)
-
-	RedshiftConnectorProfileProperties_roleArn = RedshiftConnectorProfileProperties.AddMember("roleArn", _RoleArn)
-
-	RedshiftConnectorProfileProperties_dataApiRoleArn = RedshiftConnectorProfileProperties.AddMember("dataApiRoleArn", _DataApiRoleArn)
-
-	RedshiftConnectorProfileProperties_isRedshiftServerless = RedshiftConnectorProfileProperties.AddMember("isRedshiftServerless", _Boolean)
-
-	RedshiftConnectorProfileProperties_clusterIdentifier = RedshiftConnectorProfileProperties.AddMember("clusterIdentifier", _ClusterIdentifier)
-
-	RedshiftConnectorProfileProperties_workgroupName = RedshiftConnectorProfileProperties.AddMember("workgroupName", _WorkgroupName)
-
-	RedshiftConnectorProfileProperties_databaseName = RedshiftConnectorProfileProperties.AddMember("databaseName", _DatabaseName)
-
-	SalesforceConnectorProfileProperties_instanceUrl = SalesforceConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	SalesforceConnectorProfileProperties_isSandboxEnvironment = SalesforceConnectorProfileProperties.AddMember("isSandboxEnvironment", _Boolean)
-
-	SalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization = SalesforceConnectorProfileProperties.AddMember("usePrivateLinkForMetadataAndAuthorization", _Boolean)
-
-	ServiceNowConnectorProfileProperties_instanceUrl = ServiceNowConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	SlackConnectorProfileProperties_instanceUrl = SlackConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	SnowflakeConnectorProfileProperties_warehouse = SnowflakeConnectorProfileProperties.AddMember("warehouse", _Warehouse)
-
-	SnowflakeConnectorProfileProperties_stage = SnowflakeConnectorProfileProperties.AddMember("stage", _Stage)
-
-	SnowflakeConnectorProfileProperties_bucketName = SnowflakeConnectorProfileProperties.AddMember("bucketName", _BucketName)
-
-	SnowflakeConnectorProfileProperties_bucketPrefix = SnowflakeConnectorProfileProperties.AddMember("bucketPrefix", _BucketPrefix)
-
-	SnowflakeConnectorProfileProperties_privateLinkServiceName = SnowflakeConnectorProfileProperties.AddMember("privateLinkServiceName", _PrivateLinkServiceName)
-
-	SnowflakeConnectorProfileProperties_accountName = SnowflakeConnectorProfileProperties.AddMember("accountName", _AccountName)
-
-	SnowflakeConnectorProfileProperties_region = SnowflakeConnectorProfileProperties.AddMember("region", _Region)
-
-	VeevaConnectorProfileProperties_instanceUrl = VeevaConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	ZendeskConnectorProfileProperties_instanceUrl = ZendeskConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	OAuthProperties_tokenUrl = OAuthProperties.AddMember("tokenUrl", _TokenUrl)
-
-	OAuthProperties_authCodeUrl = OAuthProperties.AddMember("authCodeUrl", _AuthCodeUrl)
-
-	OAuthProperties_oAuthScopes = OAuthProperties.AddMember("oAuthScopes", _OAuthScopeList)
-
-	SAPODataConnectorProfileProperties_applicationHostUrl = SAPODataConnectorProfileProperties.AddMember("applicationHostUrl", _ApplicationHostUrl)
-
-	SAPODataConnectorProfileProperties_applicationServicePath = SAPODataConnectorProfileProperties.AddMember("applicationServicePath", _ApplicationServicePath)
-
-	SAPODataConnectorProfileProperties_portNumber = SAPODataConnectorProfileProperties.AddMember("portNumber", _PortNumber)
-
-	SAPODataConnectorProfileProperties_clientNumber = SAPODataConnectorProfileProperties.AddMember("clientNumber", _ClientNumber)
-
-	SAPODataConnectorProfileProperties_logonLanguage = SAPODataConnectorProfileProperties.AddMember("logonLanguage", _LogonLanguage)
-
-	SAPODataConnectorProfileProperties_privateLinkServiceName = SAPODataConnectorProfileProperties.AddMember("privateLinkServiceName", _PrivateLinkServiceName)
-
-	SAPODataConnectorProfileProperties_oAuthProperties = SAPODataConnectorProfileProperties.AddMember("oAuthProperties", OAuthProperties)
-
-	SAPODataConnectorProfileProperties_disableSSO = SAPODataConnectorProfileProperties.AddMember("disableSSO", _Boolean)
-
-	_ProfilePropertiesMap_key = _ProfilePropertiesMap.AddMember("key", _ProfilePropertyKey)
-
-	_ProfilePropertiesMap_value = _ProfilePropertiesMap.AddMember("value", _ProfilePropertyValue)
-
-	_TokenUrlCustomProperties_key = _TokenUrlCustomProperties.AddMember("key", _CustomPropertyKey)
-
-	_TokenUrlCustomProperties_value = _TokenUrlCustomProperties.AddMember("value", _CustomPropertyValue)
-
-	OAuth2Properties_tokenUrl = OAuth2Properties.AddMember("tokenUrl", _TokenUrl)
-
-	OAuth2Properties_oAuth2GrantType = OAuth2Properties.AddMember("oAuth2GrantType", OAuth2GrantType)
-
-	OAuth2Properties_tokenUrlCustomProperties = OAuth2Properties.AddMember("tokenUrlCustomProperties", _TokenUrlCustomProperties)
-
-	CustomConnectorProfileProperties_profileProperties = CustomConnectorProfileProperties.AddMember("profileProperties", _ProfilePropertiesMap)
-
-	CustomConnectorProfileProperties_oAuth2Properties = CustomConnectorProfileProperties.AddMember("oAuth2Properties", OAuth2Properties)
-
-	PardotConnectorProfileProperties_instanceUrl = PardotConnectorProfileProperties.AddMember("instanceUrl", _InstanceUrl)
-
-	PardotConnectorProfileProperties_isSandboxEnvironment = PardotConnectorProfileProperties.AddMember("isSandboxEnvironment", _Boolean)
-
-	PardotConnectorProfileProperties_businessUnitId = PardotConnectorProfileProperties.AddMember("businessUnitId", _BusinessUnitId)
-
-	ConnectorProfileProperties_Amplitude = ConnectorProfileProperties.AddMember("Amplitude", AmplitudeConnectorProfileProperties)
-
-	ConnectorProfileProperties_Datadog = ConnectorProfileProperties.AddMember("Datadog", DatadogConnectorProfileProperties)
-
-	ConnectorProfileProperties_Dynatrace = ConnectorProfileProperties.AddMember("Dynatrace", DynatraceConnectorProfileProperties)
-
-	ConnectorProfileProperties_GoogleAnalytics = ConnectorProfileProperties.AddMember("GoogleAnalytics", GoogleAnalyticsConnectorProfileProperties)
-
-	ConnectorProfileProperties_Honeycode = ConnectorProfileProperties.AddMember("Honeycode", HoneycodeConnectorProfileProperties)
-
-	ConnectorProfileProperties_InforNexus = ConnectorProfileProperties.AddMember("InforNexus", InforNexusConnectorProfileProperties)
-
-	ConnectorProfileProperties_Marketo = ConnectorProfileProperties.AddMember("Marketo", MarketoConnectorProfileProperties)
-
-	ConnectorProfileProperties_Redshift = ConnectorProfileProperties.AddMember("Redshift", RedshiftConnectorProfileProperties)
-
-	ConnectorProfileProperties_Salesforce = ConnectorProfileProperties.AddMember("Salesforce", SalesforceConnectorProfileProperties)
-
-	ConnectorProfileProperties_ServiceNow = ConnectorProfileProperties.AddMember("ServiceNow", ServiceNowConnectorProfileProperties)
-
-	ConnectorProfileProperties_Singular = ConnectorProfileProperties.AddMember("Singular", SingularConnectorProfileProperties)
-
-	ConnectorProfileProperties_Slack = ConnectorProfileProperties.AddMember("Slack", SlackConnectorProfileProperties)
-
-	ConnectorProfileProperties_Snowflake = ConnectorProfileProperties.AddMember("Snowflake", SnowflakeConnectorProfileProperties)
-
-	ConnectorProfileProperties_Trendmicro = ConnectorProfileProperties.AddMember("Trendmicro", TrendmicroConnectorProfileProperties)
-
-	ConnectorProfileProperties_Veeva = ConnectorProfileProperties.AddMember("Veeva", VeevaConnectorProfileProperties)
-
-	ConnectorProfileProperties_Zendesk = ConnectorProfileProperties.AddMember("Zendesk", ZendeskConnectorProfileProperties)
-
-	ConnectorProfileProperties_SAPOData = ConnectorProfileProperties.AddMember("SAPOData", SAPODataConnectorProfileProperties)
-
-	ConnectorProfileProperties_CustomConnector = ConnectorProfileProperties.AddMember("CustomConnector", CustomConnectorProfileProperties)
-
-	ConnectorProfileProperties_Pardot = ConnectorProfileProperties.AddMember("Pardot", PardotConnectorProfileProperties)
-
-	PrivateConnectionProvisioningStatus_FAILED = PrivateConnectionProvisioningStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningStatus_PENDING = PrivateConnectionProvisioningStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningStatus_CREATED = PrivateConnectionProvisioningStatus.AddMember("CREATED", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningFailureCause_CONNECTOR_AUTHENTICATION = PrivateConnectionProvisioningFailureCause.AddMember("CONNECTOR_AUTHENTICATION", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningFailureCause_CONNECTOR_SERVER = PrivateConnectionProvisioningFailureCause.AddMember("CONNECTOR_SERVER", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningFailureCause_INTERNAL_SERVER = PrivateConnectionProvisioningFailureCause.AddMember("INTERNAL_SERVER", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningFailureCause_ACCESS_DENIED = PrivateConnectionProvisioningFailureCause.AddMember("ACCESS_DENIED", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningFailureCause_VALIDATION = PrivateConnectionProvisioningFailureCause.AddMember("VALIDATION", smithyprelude.Unit)
-
-	PrivateConnectionProvisioningState_status = PrivateConnectionProvisioningState.AddMember("status", PrivateConnectionProvisioningStatus)
-
-	PrivateConnectionProvisioningState_failureMessage = PrivateConnectionProvisioningState.AddMember("failureMessage", _PrivateConnectionProvisioningFailureMessage)
-
-	PrivateConnectionProvisioningState_failureCause = PrivateConnectionProvisioningState.AddMember("failureCause", PrivateConnectionProvisioningFailureCause)
-
-	ConnectorProfile_connectorProfileArn = ConnectorProfile.AddMember("connectorProfileArn", _ConnectorProfileArn)
-
-	ConnectorProfile_connectorProfileName = ConnectorProfile.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	ConnectorProfile_connectorType = ConnectorProfile.AddMember("connectorType", ConnectorType)
-
-	ConnectorProfile_connectorLabel = ConnectorProfile.AddMember("connectorLabel", _ConnectorLabel)
-
-	ConnectorProfile_connectionMode = ConnectorProfile.AddMember("connectionMode", ConnectionMode)
-
-	ConnectorProfile_credentialsArn = ConnectorProfile.AddMember("credentialsArn", _ARN)
-
-	ConnectorProfile_connectorProfileProperties = ConnectorProfile.AddMember("connectorProfileProperties", ConnectorProfileProperties)
-
-	ConnectorProfile_createdAt = ConnectorProfile.AddMember("createdAt", _Date)
-
-	ConnectorProfile_lastUpdatedAt = ConnectorProfile.AddMember("lastUpdatedAt", _Date)
-
-	ConnectorProfile_privateConnectionProvisioningState = ConnectorProfile.AddMember("privateConnectionProvisioningState", PrivateConnectionProvisioningState)
-
-	DatadogConnectorProfileCredentials_apiKey = DatadogConnectorProfileCredentials.AddMember("apiKey", _ApiKey)
-
-	DatadogConnectorProfileCredentials_applicationKey = DatadogConnectorProfileCredentials.AddMember("applicationKey", _ApplicationKey)
-
-	DynatraceConnectorProfileCredentials_apiToken = DynatraceConnectorProfileCredentials.AddMember("apiToken", _ApiToken)
-
-	GoogleAnalyticsConnectorProfileCredentials_clientId = GoogleAnalyticsConnectorProfileCredentials.AddMember("clientId", _ClientId)
-
-	GoogleAnalyticsConnectorProfileCredentials_clientSecret = GoogleAnalyticsConnectorProfileCredentials.AddMember("clientSecret", _ClientSecret)
-
-	GoogleAnalyticsConnectorProfileCredentials_accessToken = GoogleAnalyticsConnectorProfileCredentials.AddMember("accessToken", _AccessToken)
-
-	GoogleAnalyticsConnectorProfileCredentials_refreshToken = GoogleAnalyticsConnectorProfileCredentials.AddMember("refreshToken", _RefreshToken)
-
-	GoogleAnalyticsConnectorProfileCredentials_oAuthRequest = GoogleAnalyticsConnectorProfileCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	HoneycodeConnectorProfileCredentials_accessToken = HoneycodeConnectorProfileCredentials.AddMember("accessToken", _AccessToken)
-
-	HoneycodeConnectorProfileCredentials_refreshToken = HoneycodeConnectorProfileCredentials.AddMember("refreshToken", _RefreshToken)
-
-	HoneycodeConnectorProfileCredentials_oAuthRequest = HoneycodeConnectorProfileCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	InforNexusConnectorProfileCredentials_accessKeyId = InforNexusConnectorProfileCredentials.AddMember("accessKeyId", _AccessKeyId)
-
-	InforNexusConnectorProfileCredentials_userId = InforNexusConnectorProfileCredentials.AddMember("userId", _Username)
-
-	InforNexusConnectorProfileCredentials_secretAccessKey = InforNexusConnectorProfileCredentials.AddMember("secretAccessKey", _Key)
-
-	InforNexusConnectorProfileCredentials_datakey = InforNexusConnectorProfileCredentials.AddMember("datakey", _Key)
-
-	MarketoConnectorProfileCredentials_clientId = MarketoConnectorProfileCredentials.AddMember("clientId", _ClientId)
-
-	MarketoConnectorProfileCredentials_clientSecret = MarketoConnectorProfileCredentials.AddMember("clientSecret", _ClientSecret)
-
-	MarketoConnectorProfileCredentials_accessToken = MarketoConnectorProfileCredentials.AddMember("accessToken", _AccessToken)
-
-	MarketoConnectorProfileCredentials_oAuthRequest = MarketoConnectorProfileCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	RedshiftConnectorProfileCredentials_username = RedshiftConnectorProfileCredentials.AddMember("username", _String)
-
-	RedshiftConnectorProfileCredentials_password = RedshiftConnectorProfileCredentials.AddMember("password", _Password)
-
-	SalesforceConnectorProfileCredentials_accessToken = SalesforceConnectorProfileCredentials.AddMember("accessToken", _AccessToken)
-
-	SalesforceConnectorProfileCredentials_refreshToken = SalesforceConnectorProfileCredentials.AddMember("refreshToken", _RefreshToken)
-
-	SalesforceConnectorProfileCredentials_oAuthRequest = SalesforceConnectorProfileCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	SalesforceConnectorProfileCredentials_clientCredentialsArn = SalesforceConnectorProfileCredentials.AddMember("clientCredentialsArn", _ClientCredentialsArn)
-
-	SalesforceConnectorProfileCredentials_oAuth2GrantType = SalesforceConnectorProfileCredentials.AddMember("oAuth2GrantType", OAuth2GrantType)
-
-	SalesforceConnectorProfileCredentials_jwtToken = SalesforceConnectorProfileCredentials.AddMember("jwtToken", _JwtToken)
-
-	OAuth2Credentials_clientId = OAuth2Credentials.AddMember("clientId", _ClientId)
-
-	OAuth2Credentials_clientSecret = OAuth2Credentials.AddMember("clientSecret", _ClientSecret)
-
-	OAuth2Credentials_accessToken = OAuth2Credentials.AddMember("accessToken", _AccessToken)
-
-	OAuth2Credentials_refreshToken = OAuth2Credentials.AddMember("refreshToken", _RefreshToken)
-
-	OAuth2Credentials_oAuthRequest = OAuth2Credentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	ServiceNowConnectorProfileCredentials_username = ServiceNowConnectorProfileCredentials.AddMember("username", _Username)
-
-	ServiceNowConnectorProfileCredentials_password = ServiceNowConnectorProfileCredentials.AddMember("password", _Password)
-
-	ServiceNowConnectorProfileCredentials_oAuth2Credentials = ServiceNowConnectorProfileCredentials.AddMember("oAuth2Credentials", OAuth2Credentials)
-
-	SingularConnectorProfileCredentials_apiKey = SingularConnectorProfileCredentials.AddMember("apiKey", _ApiKey)
-
-	SlackConnectorProfileCredentials_clientId = SlackConnectorProfileCredentials.AddMember("clientId", _ClientId)
-
-	SlackConnectorProfileCredentials_clientSecret = SlackConnectorProfileCredentials.AddMember("clientSecret", _ClientSecret)
-
-	SlackConnectorProfileCredentials_accessToken = SlackConnectorProfileCredentials.AddMember("accessToken", _AccessToken)
-
-	SlackConnectorProfileCredentials_oAuthRequest = SlackConnectorProfileCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	SnowflakeConnectorProfileCredentials_username = SnowflakeConnectorProfileCredentials.AddMember("username", _Username)
-
-	SnowflakeConnectorProfileCredentials_password = SnowflakeConnectorProfileCredentials.AddMember("password", _Password)
-
-	SnowflakeConnectorProfileCredentials_privateKey = SnowflakeConnectorProfileCredentials.AddMember("privateKey", _PrivateKey)
-
-	TrendmicroConnectorProfileCredentials_apiSecretKey = TrendmicroConnectorProfileCredentials.AddMember("apiSecretKey", _ApiSecretKey)
-
-	VeevaConnectorProfileCredentials_username = VeevaConnectorProfileCredentials.AddMember("username", _Username)
-
-	VeevaConnectorProfileCredentials_password = VeevaConnectorProfileCredentials.AddMember("password", _Password)
-
-	ZendeskConnectorProfileCredentials_clientId = ZendeskConnectorProfileCredentials.AddMember("clientId", _ClientId)
-
-	ZendeskConnectorProfileCredentials_clientSecret = ZendeskConnectorProfileCredentials.AddMember("clientSecret", _ClientSecret)
-
-	ZendeskConnectorProfileCredentials_accessToken = ZendeskConnectorProfileCredentials.AddMember("accessToken", _AccessToken)
-
-	ZendeskConnectorProfileCredentials_oAuthRequest = ZendeskConnectorProfileCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	OAuthCredentials_clientId = OAuthCredentials.AddMember("clientId", _ClientId)
-
-	OAuthCredentials_clientSecret = OAuthCredentials.AddMember("clientSecret", _ClientSecret)
-
-	OAuthCredentials_accessToken = OAuthCredentials.AddMember("accessToken", _AccessToken)
-
-	OAuthCredentials_refreshToken = OAuthCredentials.AddMember("refreshToken", _RefreshToken)
-
-	OAuthCredentials_oAuthRequest = OAuthCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	SAPODataConnectorProfileCredentials_basicAuthCredentials = SAPODataConnectorProfileCredentials.AddMember("basicAuthCredentials", BasicAuthCredentials)
-
-	SAPODataConnectorProfileCredentials_oAuthCredentials = SAPODataConnectorProfileCredentials.AddMember("oAuthCredentials", OAuthCredentials)
-
-	_CredentialsMap_key = _CredentialsMap.AddMember("key", _CredentialsMapKey)
-
-	_CredentialsMap_value = _CredentialsMap.AddMember("value", _CredentialsMapValue)
-
-	CustomAuthCredentials_customAuthenticationType = CustomAuthCredentials.AddMember("customAuthenticationType", _CustomAuthenticationType)
-
-	CustomAuthCredentials_credentialsMap = CustomAuthCredentials.AddMember("credentialsMap", _CredentialsMap)
-
-	CustomConnectorProfileCredentials_authenticationType = CustomConnectorProfileCredentials.AddMember("authenticationType", AuthenticationType)
-
-	CustomConnectorProfileCredentials_basic = CustomConnectorProfileCredentials.AddMember("basic", BasicAuthCredentials)
-
-	CustomConnectorProfileCredentials_oauth2 = CustomConnectorProfileCredentials.AddMember("oauth2", OAuth2Credentials)
-
-	CustomConnectorProfileCredentials_apiKey = CustomConnectorProfileCredentials.AddMember("apiKey", ApiKeyCredentials)
-
-	CustomConnectorProfileCredentials_custom = CustomConnectorProfileCredentials.AddMember("custom", CustomAuthCredentials)
-
-	PardotConnectorProfileCredentials_accessToken = PardotConnectorProfileCredentials.AddMember("accessToken", _AccessToken)
-
-	PardotConnectorProfileCredentials_refreshToken = PardotConnectorProfileCredentials.AddMember("refreshToken", _RefreshToken)
-
-	PardotConnectorProfileCredentials_oAuthRequest = PardotConnectorProfileCredentials.AddMember("oAuthRequest", ConnectorOAuthRequest)
-
-	PardotConnectorProfileCredentials_clientCredentialsArn = PardotConnectorProfileCredentials.AddMember("clientCredentialsArn", _ClientCredentialsArn)
-
-	ConnectorProfileCredentials_Amplitude = ConnectorProfileCredentials.AddMember("Amplitude", AmplitudeConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Datadog = ConnectorProfileCredentials.AddMember("Datadog", DatadogConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Dynatrace = ConnectorProfileCredentials.AddMember("Dynatrace", DynatraceConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_GoogleAnalytics = ConnectorProfileCredentials.AddMember("GoogleAnalytics", GoogleAnalyticsConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Honeycode = ConnectorProfileCredentials.AddMember("Honeycode", HoneycodeConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_InforNexus = ConnectorProfileCredentials.AddMember("InforNexus", InforNexusConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Marketo = ConnectorProfileCredentials.AddMember("Marketo", MarketoConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Redshift = ConnectorProfileCredentials.AddMember("Redshift", RedshiftConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Salesforce = ConnectorProfileCredentials.AddMember("Salesforce", SalesforceConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_ServiceNow = ConnectorProfileCredentials.AddMember("ServiceNow", ServiceNowConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Singular = ConnectorProfileCredentials.AddMember("Singular", SingularConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Slack = ConnectorProfileCredentials.AddMember("Slack", SlackConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Snowflake = ConnectorProfileCredentials.AddMember("Snowflake", SnowflakeConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Trendmicro = ConnectorProfileCredentials.AddMember("Trendmicro", TrendmicroConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Veeva = ConnectorProfileCredentials.AddMember("Veeva", VeevaConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Zendesk = ConnectorProfileCredentials.AddMember("Zendesk", ZendeskConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_SAPOData = ConnectorProfileCredentials.AddMember("SAPOData", SAPODataConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_CustomConnector = ConnectorProfileCredentials.AddMember("CustomConnector", CustomConnectorProfileCredentials)
-
-	ConnectorProfileCredentials_Pardot = ConnectorProfileCredentials.AddMember("Pardot", PardotConnectorProfileCredentials)
-
-	ConnectorProfileConfig_connectorProfileProperties = ConnectorProfileConfig.AddMember("connectorProfileProperties", ConnectorProfileProperties)
-
-	ConnectorProfileConfig_connectorProfileCredentials = ConnectorProfileConfig.AddMember("connectorProfileCredentials", ConnectorProfileCredentials)
-
-	_ConnectorProfileDetailList_member = _ConnectorProfileDetailList.AddMember("member", ConnectorProfile)
-
-	_ConnectorProfileNameList_member = _ConnectorProfileNameList.AddMember("member", _ConnectorProfileName)
-
-	ConnectorServerException_message = ConnectorServerException.AddMember("message", _ErrorMessage)
-
-	ErrorHandlingConfig_failOnFirstDestinationError = ErrorHandlingConfig.AddMember("failOnFirstDestinationError", _Boolean)
-
-	ErrorHandlingConfig_bucketPrefix = ErrorHandlingConfig.AddMember("bucketPrefix", _BucketPrefix)
-
-	ErrorHandlingConfig_bucketName = ErrorHandlingConfig.AddMember("bucketName", _BucketName)
-
-	_IdFieldNameList_member = _IdFieldNameList.AddMember("member", _Name)
-
-	CustomConnectorDestinationProperties_entityName = CustomConnectorDestinationProperties.AddMember("entityName", _EntityName)
-
-	CustomConnectorDestinationProperties_errorHandlingConfig = CustomConnectorDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	CustomConnectorDestinationProperties_writeOperationType = CustomConnectorDestinationProperties.AddMember("writeOperationType", WriteOperationType)
-
-	CustomConnectorDestinationProperties_idFieldNames = CustomConnectorDestinationProperties.AddMember("idFieldNames", _IdFieldNameList)
-
-	CustomConnectorDestinationProperties_customProperties = CustomConnectorDestinationProperties.AddMember("customProperties", _CustomProperties)
-
-	CustomConnectorSourceProperties_entityName = CustomConnectorSourceProperties.AddMember("entityName", _EntityName)
-
-	CustomConnectorSourceProperties_customProperties = CustomConnectorSourceProperties.AddMember("customProperties", _CustomProperties)
-
-	CustomConnectorSourceProperties_dataTransferApi = CustomConnectorSourceProperties.AddMember("dataTransferApi", DataTransferApi)
-
-	CustomerProfilesDestinationProperties_domainName = CustomerProfilesDestinationProperties.AddMember("domainName", _DomainName)
-
-	CustomerProfilesDestinationProperties_objectTypeName = CustomerProfilesDestinationProperties.AddMember("objectTypeName", _ObjectTypeName)
-
-	DatadogSourceProperties_object = DatadogSourceProperties.AddMember("object", _Object)
-
-	DataPullMode_INCREMENTAL = DataPullMode.AddMember("INCREMENTAL", smithyprelude.Unit)
-
-	DataPullMode_COMPLETE = DataPullMode.AddMember("COMPLETE", smithyprelude.Unit)
-
-	RedshiftDestinationProperties_object = RedshiftDestinationProperties.AddMember("object", _Object)
-
-	RedshiftDestinationProperties_intermediateBucketName = RedshiftDestinationProperties.AddMember("intermediateBucketName", _BucketName)
-
-	RedshiftDestinationProperties_bucketPrefix = RedshiftDestinationProperties.AddMember("bucketPrefix", _BucketPrefix)
-
-	RedshiftDestinationProperties_errorHandlingConfig = RedshiftDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	FileType_CSV = FileType.AddMember("CSV", smithyprelude.Unit)
-
-	FileType_JSON = FileType.AddMember("JSON", smithyprelude.Unit)
-
-	FileType_PARQUET = FileType.AddMember("PARQUET", smithyprelude.Unit)
-
-	PrefixType_FILENAME = PrefixType.AddMember("FILENAME", smithyprelude.Unit)
-
-	PrefixType_PATH = PrefixType.AddMember("PATH", smithyprelude.Unit)
-
-	PrefixType_PATH_AND_FILENAME = PrefixType.AddMember("PATH_AND_FILENAME", smithyprelude.Unit)
-
-	PrefixFormat_YEAR = PrefixFormat.AddMember("YEAR", smithyprelude.Unit)
-
-	PrefixFormat_MONTH = PrefixFormat.AddMember("MONTH", smithyprelude.Unit)
-
-	PrefixFormat_DAY = PrefixFormat.AddMember("DAY", smithyprelude.Unit)
-
-	PrefixFormat_HOUR = PrefixFormat.AddMember("HOUR", smithyprelude.Unit)
-
-	PrefixFormat_MINUTE = PrefixFormat.AddMember("MINUTE", smithyprelude.Unit)
-
-	PathPrefix_EXECUTION_ID = PathPrefix.AddMember("EXECUTION_ID", smithyprelude.Unit)
-
-	PathPrefix_SCHEMA_VERSION = PathPrefix.AddMember("SCHEMA_VERSION", smithyprelude.Unit)
-
-	_PathPrefixHierarchy_member = _PathPrefixHierarchy.AddMember("member", PathPrefix)
-
-	PrefixConfig_prefixType = PrefixConfig.AddMember("prefixType", PrefixType)
-
-	PrefixConfig_prefixFormat = PrefixConfig.AddMember("prefixFormat", PrefixFormat)
-
-	PrefixConfig_pathPrefixHierarchy = PrefixConfig.AddMember("pathPrefixHierarchy", _PathPrefixHierarchy)
-
-	S3OutputFormatConfig_fileType = S3OutputFormatConfig.AddMember("fileType", FileType)
-
-	S3OutputFormatConfig_prefixConfig = S3OutputFormatConfig.AddMember("prefixConfig", PrefixConfig)
-
-	S3OutputFormatConfig_aggregationConfig = S3OutputFormatConfig.AddMember("aggregationConfig", AggregationConfig)
-
-	S3OutputFormatConfig_preserveSourceDataTyping = S3OutputFormatConfig.AddMember("preserveSourceDataTyping", _JavaBoolean)
-
-	S3DestinationProperties_bucketName = S3DestinationProperties.AddMember("bucketName", _BucketName)
-
-	S3DestinationProperties_bucketPrefix = S3DestinationProperties.AddMember("bucketPrefix", _BucketPrefix)
-
-	S3DestinationProperties_s3OutputFormatConfig = S3DestinationProperties.AddMember("s3OutputFormatConfig", S3OutputFormatConfig)
-
-	SalesforceDestinationProperties_object = SalesforceDestinationProperties.AddMember("object", _Object)
-
-	SalesforceDestinationProperties_idFieldNames = SalesforceDestinationProperties.AddMember("idFieldNames", _IdFieldNameList)
-
-	SalesforceDestinationProperties_errorHandlingConfig = SalesforceDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	SalesforceDestinationProperties_writeOperationType = SalesforceDestinationProperties.AddMember("writeOperationType", WriteOperationType)
-
-	SalesforceDestinationProperties_dataTransferApi = SalesforceDestinationProperties.AddMember("dataTransferApi", SalesforceDataTransferApi)
-
-	SnowflakeDestinationProperties_object = SnowflakeDestinationProperties.AddMember("object", _Object)
-
-	SnowflakeDestinationProperties_intermediateBucketName = SnowflakeDestinationProperties.AddMember("intermediateBucketName", _BucketName)
-
-	SnowflakeDestinationProperties_bucketPrefix = SnowflakeDestinationProperties.AddMember("bucketPrefix", _BucketPrefix)
-
-	SnowflakeDestinationProperties_errorHandlingConfig = SnowflakeDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	EventBridgeDestinationProperties_object = EventBridgeDestinationProperties.AddMember("object", _Object)
-
-	EventBridgeDestinationProperties_errorHandlingConfig = EventBridgeDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	UpsolverS3OutputFormatConfig_fileType = UpsolverS3OutputFormatConfig.AddMember("fileType", FileType)
-
-	UpsolverS3OutputFormatConfig_prefixConfig = UpsolverS3OutputFormatConfig.AddMember("prefixConfig", PrefixConfig)
-
-	UpsolverS3OutputFormatConfig_aggregationConfig = UpsolverS3OutputFormatConfig.AddMember("aggregationConfig", AggregationConfig)
-
-	UpsolverDestinationProperties_bucketName = UpsolverDestinationProperties.AddMember("bucketName", _UpsolverBucketName)
-
-	UpsolverDestinationProperties_bucketPrefix = UpsolverDestinationProperties.AddMember("bucketPrefix", _BucketPrefix)
-
-	UpsolverDestinationProperties_s3OutputFormatConfig = UpsolverDestinationProperties.AddMember("s3OutputFormatConfig", UpsolverS3OutputFormatConfig)
-
-	HoneycodeDestinationProperties_object = HoneycodeDestinationProperties.AddMember("object", _Object)
-
-	HoneycodeDestinationProperties_errorHandlingConfig = HoneycodeDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	ZendeskDestinationProperties_object = ZendeskDestinationProperties.AddMember("object", _Object)
-
-	ZendeskDestinationProperties_idFieldNames = ZendeskDestinationProperties.AddMember("idFieldNames", _IdFieldNameList)
-
-	ZendeskDestinationProperties_errorHandlingConfig = ZendeskDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	ZendeskDestinationProperties_writeOperationType = ZendeskDestinationProperties.AddMember("writeOperationType", WriteOperationType)
-
-	MarketoDestinationProperties_object = MarketoDestinationProperties.AddMember("object", _Object)
-
-	MarketoDestinationProperties_errorHandlingConfig = MarketoDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	SuccessResponseHandlingConfig_bucketPrefix = SuccessResponseHandlingConfig.AddMember("bucketPrefix", _BucketPrefix)
-
-	SuccessResponseHandlingConfig_bucketName = SuccessResponseHandlingConfig.AddMember("bucketName", _BucketName)
-
-	SAPODataDestinationProperties_objectPath = SAPODataDestinationProperties.AddMember("objectPath", _Object)
-
-	SAPODataDestinationProperties_successResponseHandlingConfig = SAPODataDestinationProperties.AddMember("successResponseHandlingConfig", SuccessResponseHandlingConfig)
-
-	SAPODataDestinationProperties_idFieldNames = SAPODataDestinationProperties.AddMember("idFieldNames", _IdFieldNameList)
-
-	SAPODataDestinationProperties_errorHandlingConfig = SAPODataDestinationProperties.AddMember("errorHandlingConfig", ErrorHandlingConfig)
-
-	SAPODataDestinationProperties_writeOperationType = SAPODataDestinationProperties.AddMember("writeOperationType", WriteOperationType)
-
-	DestinationConnectorProperties_Redshift = DestinationConnectorProperties.AddMember("Redshift", RedshiftDestinationProperties)
-
-	DestinationConnectorProperties_S3 = DestinationConnectorProperties.AddMember("S3", S3DestinationProperties)
-
-	DestinationConnectorProperties_Salesforce = DestinationConnectorProperties.AddMember("Salesforce", SalesforceDestinationProperties)
-
-	DestinationConnectorProperties_Snowflake = DestinationConnectorProperties.AddMember("Snowflake", SnowflakeDestinationProperties)
-
-	DestinationConnectorProperties_EventBridge = DestinationConnectorProperties.AddMember("EventBridge", EventBridgeDestinationProperties)
-
-	DestinationConnectorProperties_LookoutMetrics = DestinationConnectorProperties.AddMember("LookoutMetrics", LookoutMetricsDestinationProperties)
-
-	DestinationConnectorProperties_Upsolver = DestinationConnectorProperties.AddMember("Upsolver", UpsolverDestinationProperties)
-
-	DestinationConnectorProperties_Honeycode = DestinationConnectorProperties.AddMember("Honeycode", HoneycodeDestinationProperties)
-
-	DestinationConnectorProperties_CustomerProfiles = DestinationConnectorProperties.AddMember("CustomerProfiles", CustomerProfilesDestinationProperties)
-
-	DestinationConnectorProperties_Zendesk = DestinationConnectorProperties.AddMember("Zendesk", ZendeskDestinationProperties)
-
-	DestinationConnectorProperties_Marketo = DestinationConnectorProperties.AddMember("Marketo", MarketoDestinationProperties)
-
-	DestinationConnectorProperties_CustomConnector = DestinationConnectorProperties.AddMember("CustomConnector", CustomConnectorDestinationProperties)
-
-	DestinationConnectorProperties_SAPOData = DestinationConnectorProperties.AddMember("SAPOData", SAPODataDestinationProperties)
-
-	DestinationFlowConfig_connectorType = DestinationFlowConfig.AddMember("connectorType", ConnectorType)
-
-	DestinationFlowConfig_apiVersion = DestinationFlowConfig.AddMember("apiVersion", _ApiVersion)
-
-	DestinationFlowConfig_connectorProfileName = DestinationFlowConfig.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	DestinationFlowConfig_destinationConnectorProperties = DestinationFlowConfig.AddMember("destinationConnectorProperties", DestinationConnectorProperties)
-
-	_DestinationFlowConfigList_member = _DestinationFlowConfigList.AddMember("member", DestinationFlowConfig)
-
-	DynatraceSourceProperties_object = DynatraceSourceProperties.AddMember("object", _Object)
-
-	ErrorInfo_putFailuresCount = ErrorInfo.AddMember("putFailuresCount", _Long)
-
-	ErrorInfo_executionMessage = ErrorInfo.AddMember("executionMessage", _ExecutionMessage)
-
-	ExecutionStatus_INPROGRESS = ExecutionStatus.AddMember("INPROGRESS", smithyprelude.Unit)
-
-	ExecutionStatus_SUCCESSFUL = ExecutionStatus.AddMember("SUCCESSFUL", smithyprelude.Unit)
-
-	ExecutionStatus_ERROR = ExecutionStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	ExecutionStatus_CANCELSTARTED = ExecutionStatus.AddMember("CANCELSTARTED", smithyprelude.Unit)
-
-	ExecutionStatus_CANCELED = ExecutionStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	ExecutionDetails_mostRecentExecutionMessage = ExecutionDetails.AddMember("mostRecentExecutionMessage", _MostRecentExecutionMessage)
-
-	ExecutionDetails_mostRecentExecutionTime = ExecutionDetails.AddMember("mostRecentExecutionTime", _Date)
-
-	ExecutionDetails_mostRecentExecutionStatus = ExecutionDetails.AddMember("mostRecentExecutionStatus", ExecutionStatus)
-
-	_ExecutionIds_member = _ExecutionIds.AddMember("member", _ExecutionId)
-
-	ExecutionResult_errorInfo = ExecutionResult.AddMember("errorInfo", ErrorInfo)
-
-	ExecutionResult_bytesProcessed = ExecutionResult.AddMember("bytesProcessed", _Long)
-
-	ExecutionResult_bytesWritten = ExecutionResult.AddMember("bytesWritten", _Long)
-
-	ExecutionResult_recordsProcessed = ExecutionResult.AddMember("recordsProcessed", _Long)
-
-	ExecutionResult_numParallelProcesses = ExecutionResult.AddMember("numParallelProcesses", _Long)
-
-	ExecutionResult_maxPageSize = ExecutionResult.AddMember("maxPageSize", _Long)
-
-	RegistrationOutput_message = RegistrationOutput.AddMember("message", _String)
-
-	RegistrationOutput_result = RegistrationOutput.AddMember("result", _String)
-
-	RegistrationOutput_status = RegistrationOutput.AddMember("status", ExecutionStatus)
-
-	MetadataCatalogDetail_catalogType = MetadataCatalogDetail.AddMember("catalogType", CatalogType)
-
-	MetadataCatalogDetail_tableName = MetadataCatalogDetail.AddMember("tableName", _String)
-
-	MetadataCatalogDetail_tableRegistrationOutput = MetadataCatalogDetail.AddMember("tableRegistrationOutput", RegistrationOutput)
-
-	MetadataCatalogDetail_partitionRegistrationOutput = MetadataCatalogDetail.AddMember("partitionRegistrationOutput", RegistrationOutput)
-
-	_MetadataCatalogDetails_member = _MetadataCatalogDetails.AddMember("member", MetadataCatalogDetail)
-
-	ExecutionRecord_executionId = ExecutionRecord.AddMember("executionId", _ExecutionId)
-
-	ExecutionRecord_executionStatus = ExecutionRecord.AddMember("executionStatus", ExecutionStatus)
-
-	ExecutionRecord_executionResult = ExecutionRecord.AddMember("executionResult", ExecutionResult)
-
-	ExecutionRecord_startedAt = ExecutionRecord.AddMember("startedAt", _Date)
-
-	ExecutionRecord_lastUpdatedAt = ExecutionRecord.AddMember("lastUpdatedAt", _Date)
-
-	ExecutionRecord_dataPullStartTime = ExecutionRecord.AddMember("dataPullStartTime", _Date)
-
-	ExecutionRecord_dataPullEndTime = ExecutionRecord.AddMember("dataPullEndTime", _Date)
-
-	ExecutionRecord_metadataCatalogDetails = ExecutionRecord.AddMember("metadataCatalogDetails", _MetadataCatalogDetails)
-
-	FlowStatus_ACTIVE = FlowStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	FlowStatus_DEPRECATED = FlowStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	FlowStatus_DELETED = FlowStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	FlowStatus_DRAFT = FlowStatus.AddMember("DRAFT", smithyprelude.Unit)
-
-	FlowStatus_ERRORED = FlowStatus.AddMember("ERRORED", smithyprelude.Unit)
-
-	FlowStatus_SUSPENDED = FlowStatus.AddMember("SUSPENDED", smithyprelude.Unit)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	FlowDefinition_flowArn = FlowDefinition.AddMember("flowArn", _FlowArn)
-
-	FlowDefinition_description = FlowDefinition.AddMember("description", _FlowDescription)
-
-	FlowDefinition_flowName = FlowDefinition.AddMember("flowName", _FlowName)
-
-	FlowDefinition_flowStatus = FlowDefinition.AddMember("flowStatus", FlowStatus)
-
-	FlowDefinition_sourceConnectorType = FlowDefinition.AddMember("sourceConnectorType", ConnectorType)
-
-	FlowDefinition_sourceConnectorLabel = FlowDefinition.AddMember("sourceConnectorLabel", _ConnectorLabel)
-
-	FlowDefinition_destinationConnectorType = FlowDefinition.AddMember("destinationConnectorType", ConnectorType)
-
-	FlowDefinition_destinationConnectorLabel = FlowDefinition.AddMember("destinationConnectorLabel", _ConnectorLabel)
-
-	FlowDefinition_triggerType = FlowDefinition.AddMember("triggerType", TriggerType)
-
-	FlowDefinition_createdAt = FlowDefinition.AddMember("createdAt", _Date)
-
-	FlowDefinition_lastUpdatedAt = FlowDefinition.AddMember("lastUpdatedAt", _Date)
-
-	FlowDefinition_createdBy = FlowDefinition.AddMember("createdBy", _CreatedBy)
-
-	FlowDefinition_lastUpdatedBy = FlowDefinition.AddMember("lastUpdatedBy", _UpdatedBy)
-
-	FlowDefinition_tags = FlowDefinition.AddMember("tags", _TagMap)
-
-	FlowDefinition_lastRunExecutionDetails = FlowDefinition.AddMember("lastRunExecutionDetails", ExecutionDetails)
-
-	_FlowExecutionList_member = _FlowExecutionList.AddMember("member", ExecutionRecord)
-
-	_FlowList_member = _FlowList.AddMember("member", FlowDefinition)
-
-	GlueDataCatalogConfig_roleArn = GlueDataCatalogConfig.AddMember("roleArn", _GlueDataCatalogIAMRole)
-
-	GlueDataCatalogConfig_databaseName = GlueDataCatalogConfig.AddMember("databaseName", _GlueDataCatalogDatabaseName)
-
-	GlueDataCatalogConfig_tablePrefix = GlueDataCatalogConfig.AddMember("tablePrefix", _GlueDataCatalogTablePrefix)
-
-	GoogleAnalyticsSourceProperties_object = GoogleAnalyticsSourceProperties.AddMember("object", _Object)
-
-	IncrementalPullConfig_datetimeTypeFieldName = IncrementalPullConfig.AddMember("datetimeTypeFieldName", _DatetimeTypeFieldName)
-
-	InforNexusSourceProperties_object = InforNexusSourceProperties.AddMember("object", _Object)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	MarketoSourceProperties_object = MarketoSourceProperties.AddMember("object", _Object)
-
-	MetadataCatalogConfig_glueDataCatalog = MetadataCatalogConfig.AddMember("glueDataCatalog", GlueDataCatalogConfig)
-
-	OperatorPropertiesKeys_VALUE = OperatorPropertiesKeys.AddMember("VALUE", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_VALUES = OperatorPropertiesKeys.AddMember("VALUES", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_DATA_TYPE = OperatorPropertiesKeys.AddMember("DATA_TYPE", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_UPPER_BOUND = OperatorPropertiesKeys.AddMember("UPPER_BOUND", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_LOWER_BOUND = OperatorPropertiesKeys.AddMember("LOWER_BOUND", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_SOURCE_DATA_TYPE = OperatorPropertiesKeys.AddMember("SOURCE_DATA_TYPE", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_DESTINATION_DATA_TYPE = OperatorPropertiesKeys.AddMember("DESTINATION_DATA_TYPE", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_VALIDATION_ACTION = OperatorPropertiesKeys.AddMember("VALIDATION_ACTION", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_MASK_VALUE = OperatorPropertiesKeys.AddMember("MASK_VALUE", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_MASK_LENGTH = OperatorPropertiesKeys.AddMember("MASK_LENGTH", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_TRUNCATE_LENGTH = OperatorPropertiesKeys.AddMember("TRUNCATE_LENGTH", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_MATH_OPERATION_FIELDS_ORDER = OperatorPropertiesKeys.AddMember("MATH_OPERATION_FIELDS_ORDER", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_CONCAT_FORMAT = OperatorPropertiesKeys.AddMember("CONCAT_FORMAT", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_SUBFIELD_CATEGORY_MAP = OperatorPropertiesKeys.AddMember("SUBFIELD_CATEGORY_MAP", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_EXCLUDE_SOURCE_FIELDS_LIST = OperatorPropertiesKeys.AddMember("EXCLUDE_SOURCE_FIELDS_LIST", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_INCLUDE_NEW_FIELDS = OperatorPropertiesKeys.AddMember("INCLUDE_NEW_FIELDS", smithyprelude.Unit)
-
-	OperatorPropertiesKeys_ORDERED_PARTITION_KEYS_LIST = OperatorPropertiesKeys.AddMember("ORDERED_PARTITION_KEYS_LIST", smithyprelude.Unit)
-
-	PardotSourceProperties_object = PardotSourceProperties.AddMember("object", _Object)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	S3InputFileType_CSV = S3InputFileType.AddMember("CSV", smithyprelude.Unit)
-
-	S3InputFileType_JSON = S3InputFileType.AddMember("JSON", smithyprelude.Unit)
-
-	S3InputFormatConfig_s3InputFileType = S3InputFormatConfig.AddMember("s3InputFileType", S3InputFileType)
-
-	S3SourceProperties_bucketName = S3SourceProperties.AddMember("bucketName", _BucketName)
-
-	S3SourceProperties_bucketPrefix = S3SourceProperties.AddMember("bucketPrefix", _BucketPrefix)
-
-	S3SourceProperties_s3InputFormatConfig = S3SourceProperties.AddMember("s3InputFormatConfig", S3InputFormatConfig)
-
-	SalesforceSourceProperties_object = SalesforceSourceProperties.AddMember("object", _Object)
-
-	SalesforceSourceProperties_enableDynamicFieldUpdate = SalesforceSourceProperties.AddMember("enableDynamicFieldUpdate", _Boolean)
-
-	SalesforceSourceProperties_includeDeletedRecords = SalesforceSourceProperties.AddMember("includeDeletedRecords", _Boolean)
-
-	SalesforceSourceProperties_dataTransferApi = SalesforceSourceProperties.AddMember("dataTransferApi", SalesforceDataTransferApi)
-
-	SAPODataPaginationConfig_maxPageSize = SAPODataPaginationConfig.AddMember("maxPageSize", _SAPODataMaxPageSize)
-
-	SAPODataParallelismConfig_maxParallelism = SAPODataParallelismConfig.AddMember("maxParallelism", _SAPODataMaxParallelism)
-
-	SAPODataSourceProperties_objectPath = SAPODataSourceProperties.AddMember("objectPath", _Object)
-
-	SAPODataSourceProperties_parallelismConfig = SAPODataSourceProperties.AddMember("parallelismConfig", SAPODataParallelismConfig)
-
-	SAPODataSourceProperties_paginationConfig = SAPODataSourceProperties.AddMember("paginationConfig", SAPODataPaginationConfig)
-
-	ScheduledTriggerProperties_scheduleExpression = ScheduledTriggerProperties.AddMember("scheduleExpression", _ScheduleExpression)
-
-	ScheduledTriggerProperties_dataPullMode = ScheduledTriggerProperties.AddMember("dataPullMode", DataPullMode)
-
-	ScheduledTriggerProperties_scheduleStartTime = ScheduledTriggerProperties.AddMember("scheduleStartTime", _Date)
-
-	ScheduledTriggerProperties_scheduleEndTime = ScheduledTriggerProperties.AddMember("scheduleEndTime", _Date)
-
-	ScheduledTriggerProperties_timezone = ScheduledTriggerProperties.AddMember("timezone", _Timezone)
-
-	ScheduledTriggerProperties_scheduleOffset = ScheduledTriggerProperties.AddMember("scheduleOffset", _ScheduleOffset)
-
-	ScheduledTriggerProperties_firstExecutionFrom = ScheduledTriggerProperties.AddMember("firstExecutionFrom", _Date)
-
-	ScheduledTriggerProperties_flowErrorDeactivationThreshold = ScheduledTriggerProperties.AddMember("flowErrorDeactivationThreshold", _FlowErrorDeactivationThreshold)
-
-	ServiceNowSourceProperties_object = ServiceNowSourceProperties.AddMember("object", _Object)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	SingularSourceProperties_object = SingularSourceProperties.AddMember("object", _Object)
-
-	SlackSourceProperties_object = SlackSourceProperties.AddMember("object", _Object)
-
-	TrendmicroSourceProperties_object = TrendmicroSourceProperties.AddMember("object", _Object)
-
-	VeevaSourceProperties_object = VeevaSourceProperties.AddMember("object", _Object)
-
-	VeevaSourceProperties_documentType = VeevaSourceProperties.AddMember("documentType", _DocumentType)
-
-	VeevaSourceProperties_includeSourceFiles = VeevaSourceProperties.AddMember("includeSourceFiles", _Boolean)
-
-	VeevaSourceProperties_includeRenditions = VeevaSourceProperties.AddMember("includeRenditions", _Boolean)
-
-	VeevaSourceProperties_includeAllVersions = VeevaSourceProperties.AddMember("includeAllVersions", _Boolean)
-
-	ZendeskSourceProperties_object = ZendeskSourceProperties.AddMember("object", _Object)
-
-	SourceConnectorProperties_Amplitude = SourceConnectorProperties.AddMember("Amplitude", AmplitudeSourceProperties)
-
-	SourceConnectorProperties_Datadog = SourceConnectorProperties.AddMember("Datadog", DatadogSourceProperties)
-
-	SourceConnectorProperties_Dynatrace = SourceConnectorProperties.AddMember("Dynatrace", DynatraceSourceProperties)
-
-	SourceConnectorProperties_GoogleAnalytics = SourceConnectorProperties.AddMember("GoogleAnalytics", GoogleAnalyticsSourceProperties)
-
-	SourceConnectorProperties_InforNexus = SourceConnectorProperties.AddMember("InforNexus", InforNexusSourceProperties)
-
-	SourceConnectorProperties_Marketo = SourceConnectorProperties.AddMember("Marketo", MarketoSourceProperties)
-
-	SourceConnectorProperties_S3 = SourceConnectorProperties.AddMember("S3", S3SourceProperties)
-
-	SourceConnectorProperties_Salesforce = SourceConnectorProperties.AddMember("Salesforce", SalesforceSourceProperties)
-
-	SourceConnectorProperties_ServiceNow = SourceConnectorProperties.AddMember("ServiceNow", ServiceNowSourceProperties)
-
-	SourceConnectorProperties_Singular = SourceConnectorProperties.AddMember("Singular", SingularSourceProperties)
-
-	SourceConnectorProperties_Slack = SourceConnectorProperties.AddMember("Slack", SlackSourceProperties)
-
-	SourceConnectorProperties_Trendmicro = SourceConnectorProperties.AddMember("Trendmicro", TrendmicroSourceProperties)
-
-	SourceConnectorProperties_Veeva = SourceConnectorProperties.AddMember("Veeva", VeevaSourceProperties)
-
-	SourceConnectorProperties_Zendesk = SourceConnectorProperties.AddMember("Zendesk", ZendeskSourceProperties)
-
-	SourceConnectorProperties_SAPOData = SourceConnectorProperties.AddMember("SAPOData", SAPODataSourceProperties)
-
-	SourceConnectorProperties_CustomConnector = SourceConnectorProperties.AddMember("CustomConnector", CustomConnectorSourceProperties)
-
-	SourceConnectorProperties_Pardot = SourceConnectorProperties.AddMember("Pardot", PardotSourceProperties)
-
-	_SourceFields_member = _SourceFields.AddMember("member", _String)
-
-	SourceFlowConfig_connectorType = SourceFlowConfig.AddMember("connectorType", ConnectorType)
-
-	SourceFlowConfig_apiVersion = SourceFlowConfig.AddMember("apiVersion", _ApiVersion)
-
-	SourceFlowConfig_connectorProfileName = SourceFlowConfig.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	SourceFlowConfig_sourceConnectorProperties = SourceFlowConfig.AddMember("sourceConnectorProperties", SourceConnectorProperties)
-
-	SourceFlowConfig_incrementalPullConfig = SourceFlowConfig.AddMember("incrementalPullConfig", IncrementalPullConfig)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TaskType_ARITHMETIC = TaskType.AddMember("ARITHMETIC", smithyprelude.Unit)
-
-	TaskType_FILTER = TaskType.AddMember("FILTER", smithyprelude.Unit)
-
-	TaskType_MAP = TaskType.AddMember("MAP", smithyprelude.Unit)
-
-	TaskType_MAP_ALL = TaskType.AddMember("MAP_ALL", smithyprelude.Unit)
-
-	TaskType_MASK = TaskType.AddMember("MASK", smithyprelude.Unit)
-
-	TaskType_MERGE = TaskType.AddMember("MERGE", smithyprelude.Unit)
-
-	TaskType_PASSTHROUGH = TaskType.AddMember("PASSTHROUGH", smithyprelude.Unit)
-
-	TaskType_TRUNCATE = TaskType.AddMember("TRUNCATE", smithyprelude.Unit)
-
-	TaskType_VALIDATE = TaskType.AddMember("VALIDATE", smithyprelude.Unit)
-
-	TaskType_PARTITION = TaskType.AddMember("PARTITION", smithyprelude.Unit)
-
-	_TaskPropertiesMap_key = _TaskPropertiesMap.AddMember("key", OperatorPropertiesKeys)
-
-	_TaskPropertiesMap_value = _TaskPropertiesMap.AddMember("value", _Property)
-
-	Task_sourceFields = Task.AddMember("sourceFields", _SourceFields)
-
-	Task_connectorOperator = Task.AddMember("connectorOperator", ConnectorOperator)
-
-	Task_destinationField = Task.AddMember("destinationField", _DestinationField)
-
-	Task_taskType = Task.AddMember("taskType", TaskType)
-
-	Task_taskProperties = Task.AddMember("taskProperties", _TaskPropertiesMap)
-
-	_Tasks_member = _Tasks.AddMember("member", Task)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	TriggerProperties_Scheduled = TriggerProperties.AddMember("Scheduled", ScheduledTriggerProperties)
-
-	TriggerConfig_triggerType = TriggerConfig.AddMember("triggerType", TriggerType)
-
-	TriggerConfig_triggerProperties = TriggerConfig.AddMember("triggerProperties", TriggerProperties)
-
-	UnsupportedOperationException_message = UnsupportedOperationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	CancelFlowExecutionsRequest_flowName = CancelFlowExecutionsRequest.AddMember("flowName", _FlowName)
-
-	CancelFlowExecutionsRequest_executionIds = CancelFlowExecutionsRequest.AddMember("executionIds", _ExecutionIds)
-
-	CancelFlowExecutionsResponse_invalidExecutions = CancelFlowExecutionsResponse.AddMember("invalidExecutions", _ExecutionIds)
-
-	CreateConnectorProfileRequest_connectorProfileName = CreateConnectorProfileRequest.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	CreateConnectorProfileRequest_kmsArn = CreateConnectorProfileRequest.AddMember("kmsArn", _KMSArn)
-
-	CreateConnectorProfileRequest_connectorType = CreateConnectorProfileRequest.AddMember("connectorType", ConnectorType)
-
-	CreateConnectorProfileRequest_connectorLabel = CreateConnectorProfileRequest.AddMember("connectorLabel", _ConnectorLabel)
-
-	CreateConnectorProfileRequest_connectionMode = CreateConnectorProfileRequest.AddMember("connectionMode", ConnectionMode)
-
-	CreateConnectorProfileRequest_connectorProfileConfig = CreateConnectorProfileRequest.AddMember("connectorProfileConfig", ConnectorProfileConfig)
-
-	CreateConnectorProfileRequest_clientToken = CreateConnectorProfileRequest.AddMember("clientToken", _ClientToken)
-
-	CreateConnectorProfileResponse_connectorProfileArn = CreateConnectorProfileResponse.AddMember("connectorProfileArn", _ConnectorProfileArn)
-
-	CreateFlowRequest_flowName = CreateFlowRequest.AddMember("flowName", _FlowName)
-
-	CreateFlowRequest_description = CreateFlowRequest.AddMember("description", _FlowDescription)
-
-	CreateFlowRequest_kmsArn = CreateFlowRequest.AddMember("kmsArn", _KMSArn)
-
-	CreateFlowRequest_triggerConfig = CreateFlowRequest.AddMember("triggerConfig", TriggerConfig)
-
-	CreateFlowRequest_sourceFlowConfig = CreateFlowRequest.AddMember("sourceFlowConfig", SourceFlowConfig)
-
-	CreateFlowRequest_destinationFlowConfigList = CreateFlowRequest.AddMember("destinationFlowConfigList", _DestinationFlowConfigList)
-
-	CreateFlowRequest_tasks = CreateFlowRequest.AddMember("tasks", _Tasks)
-
-	CreateFlowRequest_tags = CreateFlowRequest.AddMember("tags", _TagMap)
-
-	CreateFlowRequest_metadataCatalogConfig = CreateFlowRequest.AddMember("metadataCatalogConfig", MetadataCatalogConfig)
-
-	CreateFlowRequest_clientToken = CreateFlowRequest.AddMember("clientToken", _ClientToken)
-
-	CreateFlowResponse_flowArn = CreateFlowResponse.AddMember("flowArn", _FlowArn)
-
-	CreateFlowResponse_flowStatus = CreateFlowResponse.AddMember("flowStatus", FlowStatus)
-
-	DeleteConnectorProfileRequest_connectorProfileName = DeleteConnectorProfileRequest.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	DeleteConnectorProfileRequest_forceDelete = DeleteConnectorProfileRequest.AddMember("forceDelete", _Boolean)
-
-	DeleteFlowRequest_flowName = DeleteFlowRequest.AddMember("flowName", _FlowName)
-
-	DeleteFlowRequest_forceDelete = DeleteFlowRequest.AddMember("forceDelete", _Boolean)
-
-	DescribeConnectorEntityRequest_connectorEntityName = DescribeConnectorEntityRequest.AddMember("connectorEntityName", _EntityName)
-
-	DescribeConnectorEntityRequest_connectorType = DescribeConnectorEntityRequest.AddMember("connectorType", ConnectorType)
-
-	DescribeConnectorEntityRequest_connectorProfileName = DescribeConnectorEntityRequest.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	DescribeConnectorEntityRequest_apiVersion = DescribeConnectorEntityRequest.AddMember("apiVersion", _ApiVersion)
-
-	DescribeConnectorEntityResponse_connectorEntityFields = DescribeConnectorEntityResponse.AddMember("connectorEntityFields", _ConnectorEntityFieldList)
-
-	DescribeConnectorRequest_connectorType = DescribeConnectorRequest.AddMember("connectorType", ConnectorType)
-
-	DescribeConnectorRequest_connectorLabel = DescribeConnectorRequest.AddMember("connectorLabel", _ConnectorLabel)
-
-	DescribeConnectorResponse_connectorConfiguration = DescribeConnectorResponse.AddMember("connectorConfiguration", ConnectorConfiguration)
-
-	DescribeConnectorProfilesRequest_connectorProfileNames = DescribeConnectorProfilesRequest.AddMember("connectorProfileNames", _ConnectorProfileNameList)
-
-	DescribeConnectorProfilesRequest_connectorType = DescribeConnectorProfilesRequest.AddMember("connectorType", ConnectorType)
-
-	DescribeConnectorProfilesRequest_connectorLabel = DescribeConnectorProfilesRequest.AddMember("connectorLabel", _ConnectorLabel)
-
-	DescribeConnectorProfilesRequest_maxResults = DescribeConnectorProfilesRequest.AddMember("maxResults", _MaxResults)
-
-	DescribeConnectorProfilesRequest_nextToken = DescribeConnectorProfilesRequest.AddMember("nextToken", _NextToken)
-
-	DescribeConnectorProfilesResponse_connectorProfileDetails = DescribeConnectorProfilesResponse.AddMember("connectorProfileDetails", _ConnectorProfileDetailList)
-
-	DescribeConnectorProfilesResponse_nextToken = DescribeConnectorProfilesResponse.AddMember("nextToken", _NextToken)
-
-	DescribeConnectorsRequest_connectorTypes = DescribeConnectorsRequest.AddMember("connectorTypes", _ConnectorTypeList)
-
-	DescribeConnectorsRequest_maxResults = DescribeConnectorsRequest.AddMember("maxResults", _MaxResults)
-
-	DescribeConnectorsRequest_nextToken = DescribeConnectorsRequest.AddMember("nextToken", _NextToken)
-
-	DescribeConnectorsResponse_connectorConfigurations = DescribeConnectorsResponse.AddMember("connectorConfigurations", _ConnectorConfigurationsMap)
-
-	DescribeConnectorsResponse_connectors = DescribeConnectorsResponse.AddMember("connectors", _ConnectorList)
-
-	DescribeConnectorsResponse_nextToken = DescribeConnectorsResponse.AddMember("nextToken", _NextToken)
-
-	DescribeFlowExecutionRecordsRequest_flowName = DescribeFlowExecutionRecordsRequest.AddMember("flowName", _FlowName)
-
-	DescribeFlowExecutionRecordsRequest_maxResults = DescribeFlowExecutionRecordsRequest.AddMember("maxResults", _MaxResults)
-
-	DescribeFlowExecutionRecordsRequest_nextToken = DescribeFlowExecutionRecordsRequest.AddMember("nextToken", _NextToken)
-
-	DescribeFlowExecutionRecordsResponse_flowExecutions = DescribeFlowExecutionRecordsResponse.AddMember("flowExecutions", _FlowExecutionList)
-
-	DescribeFlowExecutionRecordsResponse_nextToken = DescribeFlowExecutionRecordsResponse.AddMember("nextToken", _NextToken)
-
-	DescribeFlowRequest_flowName = DescribeFlowRequest.AddMember("flowName", _FlowName)
-
-	DescribeFlowResponse_flowArn = DescribeFlowResponse.AddMember("flowArn", _FlowArn)
-
-	DescribeFlowResponse_description = DescribeFlowResponse.AddMember("description", _FlowDescription)
-
-	DescribeFlowResponse_flowName = DescribeFlowResponse.AddMember("flowName", _FlowName)
-
-	DescribeFlowResponse_kmsArn = DescribeFlowResponse.AddMember("kmsArn", _KMSArn)
-
-	DescribeFlowResponse_flowStatus = DescribeFlowResponse.AddMember("flowStatus", FlowStatus)
-
-	DescribeFlowResponse_flowStatusMessage = DescribeFlowResponse.AddMember("flowStatusMessage", _FlowStatusMessage)
-
-	DescribeFlowResponse_sourceFlowConfig = DescribeFlowResponse.AddMember("sourceFlowConfig", SourceFlowConfig)
-
-	DescribeFlowResponse_destinationFlowConfigList = DescribeFlowResponse.AddMember("destinationFlowConfigList", _DestinationFlowConfigList)
-
-	DescribeFlowResponse_lastRunExecutionDetails = DescribeFlowResponse.AddMember("lastRunExecutionDetails", ExecutionDetails)
-
-	DescribeFlowResponse_triggerConfig = DescribeFlowResponse.AddMember("triggerConfig", TriggerConfig)
-
-	DescribeFlowResponse_tasks = DescribeFlowResponse.AddMember("tasks", _Tasks)
-
-	DescribeFlowResponse_createdAt = DescribeFlowResponse.AddMember("createdAt", _Date)
-
-	DescribeFlowResponse_lastUpdatedAt = DescribeFlowResponse.AddMember("lastUpdatedAt", _Date)
-
-	DescribeFlowResponse_createdBy = DescribeFlowResponse.AddMember("createdBy", _CreatedBy)
-
-	DescribeFlowResponse_lastUpdatedBy = DescribeFlowResponse.AddMember("lastUpdatedBy", _UpdatedBy)
-
-	DescribeFlowResponse_tags = DescribeFlowResponse.AddMember("tags", _TagMap)
-
-	DescribeFlowResponse_metadataCatalogConfig = DescribeFlowResponse.AddMember("metadataCatalogConfig", MetadataCatalogConfig)
-
-	DescribeFlowResponse_lastRunMetadataCatalogDetails = DescribeFlowResponse.AddMember("lastRunMetadataCatalogDetails", _MetadataCatalogDetails)
-
-	DescribeFlowResponse_schemaVersion = DescribeFlowResponse.AddMember("schemaVersion", _Long)
-
-	ListConnectorEntitiesRequest_connectorProfileName = ListConnectorEntitiesRequest.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	ListConnectorEntitiesRequest_connectorType = ListConnectorEntitiesRequest.AddMember("connectorType", ConnectorType)
-
-	ListConnectorEntitiesRequest_entitiesPath = ListConnectorEntitiesRequest.AddMember("entitiesPath", _EntitiesPath)
-
-	ListConnectorEntitiesRequest_apiVersion = ListConnectorEntitiesRequest.AddMember("apiVersion", _ApiVersion)
-
-	ListConnectorEntitiesRequest_maxResults = ListConnectorEntitiesRequest.AddMember("maxResults", _ListEntitiesMaxResults)
-
-	ListConnectorEntitiesRequest_nextToken = ListConnectorEntitiesRequest.AddMember("nextToken", _NextToken)
-
-	ListConnectorEntitiesResponse_connectorEntityMap = ListConnectorEntitiesResponse.AddMember("connectorEntityMap", _ConnectorEntityMap)
-
-	ListConnectorEntitiesResponse_nextToken = ListConnectorEntitiesResponse.AddMember("nextToken", _NextToken)
-
-	ListConnectorsRequest_maxResults = ListConnectorsRequest.AddMember("maxResults", _MaxResults)
-
-	ListConnectorsRequest_nextToken = ListConnectorsRequest.AddMember("nextToken", _NextToken)
-
-	ListConnectorsResponse_connectors = ListConnectorsResponse.AddMember("connectors", _ConnectorList)
-
-	ListConnectorsResponse_nextToken = ListConnectorsResponse.AddMember("nextToken", _NextToken)
-
-	ListFlowsRequest_maxResults = ListFlowsRequest.AddMember("maxResults", _MaxResults)
-
-	ListFlowsRequest_nextToken = ListFlowsRequest.AddMember("nextToken", _NextToken)
-
-	ListFlowsResponse_flows = ListFlowsResponse.AddMember("flows", _FlowList)
-
-	ListFlowsResponse_nextToken = ListFlowsResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	RegisterConnectorRequest_connectorLabel = RegisterConnectorRequest.AddMember("connectorLabel", _ConnectorLabel)
-
-	RegisterConnectorRequest_description = RegisterConnectorRequest.AddMember("description", _Description)
-
-	RegisterConnectorRequest_connectorProvisioningType = RegisterConnectorRequest.AddMember("connectorProvisioningType", ConnectorProvisioningType)
-
-	RegisterConnectorRequest_connectorProvisioningConfig = RegisterConnectorRequest.AddMember("connectorProvisioningConfig", ConnectorProvisioningConfig)
-
-	RegisterConnectorRequest_clientToken = RegisterConnectorRequest.AddMember("clientToken", _ClientToken)
-
-	RegisterConnectorResponse_connectorArn = RegisterConnectorResponse.AddMember("connectorArn", _ARN)
-
-	ResetConnectorMetadataCacheRequest_connectorProfileName = ResetConnectorMetadataCacheRequest.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	ResetConnectorMetadataCacheRequest_connectorType = ResetConnectorMetadataCacheRequest.AddMember("connectorType", ConnectorType)
-
-	ResetConnectorMetadataCacheRequest_connectorEntityName = ResetConnectorMetadataCacheRequest.AddMember("connectorEntityName", _EntityName)
-
-	ResetConnectorMetadataCacheRequest_entitiesPath = ResetConnectorMetadataCacheRequest.AddMember("entitiesPath", _EntitiesPath)
-
-	ResetConnectorMetadataCacheRequest_apiVersion = ResetConnectorMetadataCacheRequest.AddMember("apiVersion", _ApiVersion)
-
-	StartFlowRequest_flowName = StartFlowRequest.AddMember("flowName", _FlowName)
-
-	StartFlowRequest_clientToken = StartFlowRequest.AddMember("clientToken", _ClientToken)
-
-	StartFlowResponse_flowArn = StartFlowResponse.AddMember("flowArn", _FlowArn)
-
-	StartFlowResponse_flowStatus = StartFlowResponse.AddMember("flowStatus", FlowStatus)
-
-	StartFlowResponse_executionId = StartFlowResponse.AddMember("executionId", _ExecutionId)
-
-	StopFlowRequest_flowName = StopFlowRequest.AddMember("flowName", _FlowName)
-
-	StopFlowResponse_flowArn = StopFlowResponse.AddMember("flowArn", _FlowArn)
-
-	StopFlowResponse_flowStatus = StopFlowResponse.AddMember("flowStatus", FlowStatus)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UnregisterConnectorRequest_connectorLabel = UnregisterConnectorRequest.AddMember("connectorLabel", _ConnectorLabel)
-
-	UnregisterConnectorRequest_forceDelete = UnregisterConnectorRequest.AddMember("forceDelete", _Boolean)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ARN, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateConnectorProfileRequest_connectorProfileName = UpdateConnectorProfileRequest.AddMember("connectorProfileName", _ConnectorProfileName)
-
-	UpdateConnectorProfileRequest_connectionMode = UpdateConnectorProfileRequest.AddMember("connectionMode", ConnectionMode)
-
-	UpdateConnectorProfileRequest_connectorProfileConfig = UpdateConnectorProfileRequest.AddMember("connectorProfileConfig", ConnectorProfileConfig)
-
-	UpdateConnectorProfileRequest_clientToken = UpdateConnectorProfileRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateConnectorProfileResponse_connectorProfileArn = UpdateConnectorProfileResponse.AddMember("connectorProfileArn", _ConnectorProfileArn)
-
-	UpdateConnectorRegistrationRequest_connectorLabel = UpdateConnectorRegistrationRequest.AddMember("connectorLabel", _ConnectorLabel)
-
-	UpdateConnectorRegistrationRequest_description = UpdateConnectorRegistrationRequest.AddMember("description", _Description)
-
-	UpdateConnectorRegistrationRequest_connectorProvisioningConfig = UpdateConnectorRegistrationRequest.AddMember("connectorProvisioningConfig", ConnectorProvisioningConfig)
-
-	UpdateConnectorRegistrationRequest_clientToken = UpdateConnectorRegistrationRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateConnectorRegistrationResponse_connectorArn = UpdateConnectorRegistrationResponse.AddMember("connectorArn", _ARN)
-
-	UpdateFlowRequest_flowName = UpdateFlowRequest.AddMember("flowName", _FlowName)
-
-	UpdateFlowRequest_description = UpdateFlowRequest.AddMember("description", _FlowDescription)
-
-	UpdateFlowRequest_triggerConfig = UpdateFlowRequest.AddMember("triggerConfig", TriggerConfig)
-
-	UpdateFlowRequest_sourceFlowConfig = UpdateFlowRequest.AddMember("sourceFlowConfig", SourceFlowConfig)
-
-	UpdateFlowRequest_destinationFlowConfigList = UpdateFlowRequest.AddMember("destinationFlowConfigList", _DestinationFlowConfigList)
-
-	UpdateFlowRequest_tasks = UpdateFlowRequest.AddMember("tasks", _Tasks)
-
-	UpdateFlowRequest_metadataCatalogConfig = UpdateFlowRequest.AddMember("metadataCatalogConfig", MetadataCatalogConfig)
-
-	UpdateFlowRequest_clientToken = UpdateFlowRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateFlowResponse_flowStatus = UpdateFlowResponse.AddMember("flowStatus", FlowStatus)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAggregationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregationConfig_aggregationType, &sAggregationConfig_targetFileSize}}
+var mAggregationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregationType_NONE, &sAggregationType_SINGLE_FILE}}
+var mAmplitudeConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sAmplitudeConnectorOperator_BETWEEN}}
+var mAmplitudeConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sAmplitudeConnectorProfileCredentials_apiKey, &sAmplitudeConnectorProfileCredentials_secretKey}}
+var mAmplitudeSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sAmplitudeSourceProperties_object}}
+var mApiKeyCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sApiKeyCredentials_apiKey, &sApiKeyCredentials_apiSecretKey}}
+var m_AuthCodeUrlList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthCodeUrlList_member}}
+var mAuthenticationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationConfig_isBasicAuthSupported, &sAuthenticationConfig_isApiKeyAuthSupported, &sAuthenticationConfig_isOAuth2Supported, &sAuthenticationConfig_isCustomAuthSupported, &sAuthenticationConfig_oAuth2Defaults, &sAuthenticationConfig_customAuthConfigs}}
+var mAuthenticationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationType_OAUTH2, &sAuthenticationType_APIKEY, &sAuthenticationType_BASIC, &sAuthenticationType_CUSTOM}}
+var mAuthParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthParameter_key, &sAuthParameter_isRequired, &sAuthParameter_label, &sAuthParameter_description, &sAuthParameter_isSensitiveField, &sAuthParameter_connectorSuppliedValues}}
+var m_AuthParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthParameterList_member}}
+var mBasicAuthCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sBasicAuthCredentials_username, &sBasicAuthCredentials_password}}
+var mCatalogType = smithy.SchemaMembers{List: []*smithy.Schema{&sCatalogType_GLUE}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mConnectionMode = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionMode_PUBLIC, &sConnectionMode_PRIVATE}}
+var mConnectorAuthenticationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorAuthenticationException_message}}
+var mConnectorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorConfiguration_canUseAsSource, &sConnectorConfiguration_canUseAsDestination, &sConnectorConfiguration_supportedDestinationConnectors, &sConnectorConfiguration_supportedSchedulingFrequencies, &sConnectorConfiguration_isPrivateLinkEnabled, &sConnectorConfiguration_isPrivateLinkEndpointUrlRequired, &sConnectorConfiguration_supportedTriggerTypes, &sConnectorConfiguration_connectorMetadata, &sConnectorConfiguration_connectorType, &sConnectorConfiguration_connectorLabel, &sConnectorConfiguration_connectorDescription, &sConnectorConfiguration_connectorOwner, &sConnectorConfiguration_connectorName, &sConnectorConfiguration_connectorVersion, &sConnectorConfiguration_connectorArn, &sConnectorConfiguration_connectorModes, &sConnectorConfiguration_authenticationConfig, &sConnectorConfiguration_connectorRuntimeSettings, &sConnectorConfiguration_supportedApiVersions, &sConnectorConfiguration_supportedOperators, &sConnectorConfiguration_supportedWriteOperations, &sConnectorConfiguration_connectorProvisioningType, &sConnectorConfiguration_connectorProvisioningConfig, &sConnectorConfiguration_logoURL, &sConnectorConfiguration_registeredAt, &sConnectorConfiguration_registeredBy, &sConnectorConfiguration_supportedDataTransferTypes, &sConnectorConfiguration_supportedDataTransferApis}, Seed: 1786, Slots: []uint16{
+	4, 11, 0, 0, 0, 5, 0, 0, 8, 0, 27, 12, 15, 23, 0, 0, 2, 0, 0, 20, 0, 0, 13, 1,
+	0, 0, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 10, 0, 0, 9, 0, 24, 7, 0, 0, 28, 17, 0,
+	25, 26, 21, 0, 14, 0, 0, 0, 0, 0, 22, 0, 16, 6, 3, 18,
+}}
+var m_ConnectorConfigurationsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorConfigurationsMap_key, &s_ConnectorConfigurationsMap_value}}
+var mConnectorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorDetail_connectorDescription, &sConnectorDetail_connectorName, &sConnectorDetail_connectorOwner, &sConnectorDetail_connectorVersion, &sConnectorDetail_applicationType, &sConnectorDetail_connectorType, &sConnectorDetail_connectorLabel, &sConnectorDetail_registeredAt, &sConnectorDetail_registeredBy, &sConnectorDetail_connectorProvisioningType, &sConnectorDetail_connectorModes, &sConnectorDetail_supportedDataTransferTypes}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 10, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 6, 4,
+	8, 9, 0, 11, 12, 0, 1, 5,
+}}
+var mConnectorEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorEntity_name, &sConnectorEntity_label, &sConnectorEntity_hasNestedEntities}}
+var mConnectorEntityField = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorEntityField_identifier, &sConnectorEntityField_parentIdentifier, &sConnectorEntityField_label, &sConnectorEntityField_isPrimaryKey, &sConnectorEntityField_defaultValue, &sConnectorEntityField_isDeprecated, &sConnectorEntityField_supportedFieldTypeDetails, &sConnectorEntityField_description, &sConnectorEntityField_sourceProperties, &sConnectorEntityField_destinationProperties, &sConnectorEntityField_customProperties}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 2, 0, 10, 0, 0, 0, 0, 11, 0, 1, 0, 0, 0, 4, 5, 7, 9, 0,
+	8, 0, 0, 3, 0, 6, 0, 0,
+}}
+var m_ConnectorEntityFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorEntityFieldList_member}}
+var m_ConnectorEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorEntityList_member}}
+var m_ConnectorEntityMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorEntityMap_key, &s_ConnectorEntityMap_value}}
+var m_ConnectorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorList_member}}
+var mConnectorMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorMetadata_Amplitude, &sConnectorMetadata_Datadog, &sConnectorMetadata_Dynatrace, &sConnectorMetadata_GoogleAnalytics, &sConnectorMetadata_InforNexus, &sConnectorMetadata_Marketo, &sConnectorMetadata_Redshift, &sConnectorMetadata_S3, &sConnectorMetadata_Salesforce, &sConnectorMetadata_ServiceNow, &sConnectorMetadata_Singular, &sConnectorMetadata_Slack, &sConnectorMetadata_Snowflake, &sConnectorMetadata_Trendmicro, &sConnectorMetadata_Veeva, &sConnectorMetadata_Zendesk, &sConnectorMetadata_EventBridge, &sConnectorMetadata_Upsolver, &sConnectorMetadata_CustomerProfiles, &sConnectorMetadata_Honeycode, &sConnectorMetadata_SAPOData, &sConnectorMetadata_Pardot}, Seed: 72, Slots: []uint16{
+	0, 0, 0, 9, 0, 4, 8, 3, 0, 0, 12, 5, 0, 20, 1, 0, 14, 18, 0, 0, 0, 0, 0, 17,
+	0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 7, 21, 0, 0, 0, 6, 13, 0,
+	19, 0, 22, 0, 0, 0, 16, 0, 0, 0, 0, 15, 11, 0, 0, 0,
+}}
+var m_ConnectorModeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorModeList_member}}
+var mConnectorOAuthRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorOAuthRequest_authCode, &sConnectorOAuthRequest_redirectUri, &sConnectorOAuthRequest_codeVerifier}}
+var mConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorOperator_Amplitude, &sConnectorOperator_Datadog, &sConnectorOperator_Dynatrace, &sConnectorOperator_GoogleAnalytics, &sConnectorOperator_InforNexus, &sConnectorOperator_Marketo, &sConnectorOperator_S3, &sConnectorOperator_Salesforce, &sConnectorOperator_ServiceNow, &sConnectorOperator_Singular, &sConnectorOperator_Slack, &sConnectorOperator_Trendmicro, &sConnectorOperator_Veeva, &sConnectorOperator_Zendesk, &sConnectorOperator_SAPOData, &sConnectorOperator_CustomConnector, &sConnectorOperator_Pardot}, Seed: 21, Slots: []uint16{
+	0, 15, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 7, 0, 6, 0, 0, 0, 0, 0, 17, 13, 0, 0,
+	12, 14, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 3, 0, 0, 0,
+	10, 5, 2, 0, 0, 0, 0, 0, 0, 0, 8, 9, 0, 0, 0, 0,
+}}
+var mConnectorProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorProfile_connectorProfileArn, &sConnectorProfile_connectorProfileName, &sConnectorProfile_connectorType, &sConnectorProfile_connectorLabel, &sConnectorProfile_connectionMode, &sConnectorProfile_credentialsArn, &sConnectorProfile_connectorProfileProperties, &sConnectorProfile_createdAt, &sConnectorProfile_lastUpdatedAt, &sConnectorProfile_privateConnectionProvisioningState}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 8, 0, 2, 0, 0, 0, 0, 9, 0, 6, 0, 0, 10, 7, 0, 0, 0, 0, 0, 0, 5,
+	3, 0, 0, 0, 0, 4, 1, 0,
+}}
+var mConnectorProfileConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorProfileConfig_connectorProfileProperties, &sConnectorProfileConfig_connectorProfileCredentials}}
+var mConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorProfileCredentials_Amplitude, &sConnectorProfileCredentials_Datadog, &sConnectorProfileCredentials_Dynatrace, &sConnectorProfileCredentials_GoogleAnalytics, &sConnectorProfileCredentials_Honeycode, &sConnectorProfileCredentials_InforNexus, &sConnectorProfileCredentials_Marketo, &sConnectorProfileCredentials_Redshift, &sConnectorProfileCredentials_Salesforce, &sConnectorProfileCredentials_ServiceNow, &sConnectorProfileCredentials_Singular, &sConnectorProfileCredentials_Slack, &sConnectorProfileCredentials_Snowflake, &sConnectorProfileCredentials_Trendmicro, &sConnectorProfileCredentials_Veeva, &sConnectorProfileCredentials_Zendesk, &sConnectorProfileCredentials_SAPOData, &sConnectorProfileCredentials_CustomConnector, &sConnectorProfileCredentials_Pardot}, Seed: 21, Slots: []uint16{
+	0, 17, 0, 0, 0, 0, 0, 8, 18, 0, 0, 0, 5, 0, 7, 0, 0, 0, 0, 0, 19, 15, 0, 0,
+	14, 16, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 3, 0, 0, 0,
+	11, 6, 2, 0, 13, 0, 0, 0, 0, 0, 9, 10, 0, 0, 0, 0,
+}}
+var m_ConnectorProfileDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorProfileDetailList_member}}
+var m_ConnectorProfileNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorProfileNameList_member}}
+var mConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorProfileProperties_Amplitude, &sConnectorProfileProperties_Datadog, &sConnectorProfileProperties_Dynatrace, &sConnectorProfileProperties_GoogleAnalytics, &sConnectorProfileProperties_Honeycode, &sConnectorProfileProperties_InforNexus, &sConnectorProfileProperties_Marketo, &sConnectorProfileProperties_Redshift, &sConnectorProfileProperties_Salesforce, &sConnectorProfileProperties_ServiceNow, &sConnectorProfileProperties_Singular, &sConnectorProfileProperties_Slack, &sConnectorProfileProperties_Snowflake, &sConnectorProfileProperties_Trendmicro, &sConnectorProfileProperties_Veeva, &sConnectorProfileProperties_Zendesk, &sConnectorProfileProperties_SAPOData, &sConnectorProfileProperties_CustomConnector, &sConnectorProfileProperties_Pardot}, Seed: 21, Slots: []uint16{
+	0, 17, 0, 0, 0, 0, 0, 8, 18, 0, 0, 0, 5, 0, 7, 0, 0, 0, 0, 0, 19, 15, 0, 0,
+	14, 16, 0, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 3, 0, 0, 0,
+	11, 6, 2, 0, 13, 0, 0, 0, 0, 0, 9, 10, 0, 0, 0, 0,
+}}
+var mConnectorProvisioningConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorProvisioningConfig_lambda}}
+var mConnectorProvisioningType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorProvisioningType_LAMBDA}}
+var mConnectorRuntimeSetting = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorRuntimeSetting_key, &sConnectorRuntimeSetting_dataType, &sConnectorRuntimeSetting_isRequired, &sConnectorRuntimeSetting_label, &sConnectorRuntimeSetting_description, &sConnectorRuntimeSetting_scope, &sConnectorRuntimeSetting_connectorSuppliedValueOptions}}
+var m_ConnectorRuntimeSettingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorRuntimeSettingList_member}}
+var mConnectorServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorServerException_message}}
+var m_ConnectorSuppliedValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorSuppliedValueList_member}}
+var m_ConnectorSuppliedValueOptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorSuppliedValueOptionList_member}}
+var mConnectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorType_SALESFORCE, &sConnectorType_SINGULAR, &sConnectorType_SLACK, &sConnectorType_REDSHIFT, &sConnectorType_S3, &sConnectorType_MARKETO, &sConnectorType_GOOGLEANALYTICS, &sConnectorType_ZENDESK, &sConnectorType_SERVICENOW, &sConnectorType_DATADOG, &sConnectorType_TRENDMICRO, &sConnectorType_SNOWFLAKE, &sConnectorType_DYNATRACE, &sConnectorType_INFORNEXUS, &sConnectorType_AMPLITUDE, &sConnectorType_VEEVA, &sConnectorType_EVENTBRIDGE, &sConnectorType_LOOKOUTMETRICS, &sConnectorType_UPSOLVER, &sConnectorType_HONEYCODE, &sConnectorType_CUSTOMERPROFILES, &sConnectorType_SAPODATA, &sConnectorType_CUSTOMCONNECTOR, &sConnectorType_PARDOT}, Seed: 31, Slots: []uint16{
+	20, 0, 0, 0, 3, 0, 0, 0, 21, 0, 0, 10, 0, 14, 0, 0, 0, 0, 0, 17, 0, 0, 13, 0,
+	0, 22, 1, 0, 0, 0, 24, 8, 0, 0, 9, 0, 19, 0, 0, 0, 0, 4, 11, 0, 0, 16, 5, 12,
+	0, 0, 0, 2, 0, 23, 0, 0, 0, 15, 0, 0, 18, 7, 0, 6,
+}}
+var m_ConnectorTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectorTypeList_member}}
+var m_CredentialsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_CredentialsMap_key, &s_CredentialsMap_value}}
+var mCustomAuthConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomAuthConfig_customAuthenticationType, &sCustomAuthConfig_authParameters}}
+var m_CustomAuthConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomAuthConfigList_member}}
+var mCustomAuthCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomAuthCredentials_customAuthenticationType, &sCustomAuthCredentials_credentialsMap}}
+var mCustomConnectorDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomConnectorDestinationProperties_entityName, &sCustomConnectorDestinationProperties_errorHandlingConfig, &sCustomConnectorDestinationProperties_writeOperationType, &sCustomConnectorDestinationProperties_idFieldNames, &sCustomConnectorDestinationProperties_customProperties}}
+var mCustomConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomConnectorProfileCredentials_authenticationType, &sCustomConnectorProfileCredentials_basic, &sCustomConnectorProfileCredentials_oauth2, &sCustomConnectorProfileCredentials_apiKey, &sCustomConnectorProfileCredentials_custom}}
+var mCustomConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomConnectorProfileProperties_profileProperties, &sCustomConnectorProfileProperties_oAuth2Properties}}
+var mCustomConnectorSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomConnectorSourceProperties_entityName, &sCustomConnectorSourceProperties_customProperties, &sCustomConnectorSourceProperties_dataTransferApi}}
+var mCustomerProfilesDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerProfilesDestinationProperties_domainName, &sCustomerProfilesDestinationProperties_objectTypeName}}
+var m_CustomProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomProperties_key, &s_CustomProperties_value}}
+var mDatadogConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sDatadogConnectorOperator_PROJECTION, &sDatadogConnectorOperator_BETWEEN, &sDatadogConnectorOperator_EQUAL_TO, &sDatadogConnectorOperator_ADDITION, &sDatadogConnectorOperator_MULTIPLICATION, &sDatadogConnectorOperator_DIVISION, &sDatadogConnectorOperator_SUBTRACTION, &sDatadogConnectorOperator_MASK_ALL, &sDatadogConnectorOperator_MASK_FIRST_N, &sDatadogConnectorOperator_MASK_LAST_N, &sDatadogConnectorOperator_VALIDATE_NON_NULL, &sDatadogConnectorOperator_VALIDATE_NON_ZERO, &sDatadogConnectorOperator_VALIDATE_NON_NEGATIVE, &sDatadogConnectorOperator_VALIDATE_NUMERIC, &sDatadogConnectorOperator_NO_OP}, Seed: 88, Slots: []uint16{
+	0, 0, 7, 0, 0, 6, 5, 9, 1, 0, 2, 0, 0, 15, 0, 0, 4, 10, 0, 14, 0, 0, 0, 13,
+	0, 8, 12, 0, 0, 11, 3, 0,
+}}
+var mDatadogConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sDatadogConnectorProfileCredentials_apiKey, &sDatadogConnectorProfileCredentials_applicationKey}}
+var mDatadogConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDatadogConnectorProfileProperties_instanceUrl}}
+var mDatadogSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDatadogSourceProperties_object}}
+var mDataPullMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDataPullMode_INCREMENTAL, &sDataPullMode_COMPLETE}}
+var mDataTransferApi = smithy.SchemaMembers{List: []*smithy.Schema{&sDataTransferApi_Name, &sDataTransferApi_Type}}
+var mDataTransferApiType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataTransferApiType_SYNC, &sDataTransferApiType_ASYNC, &sDataTransferApiType_AUTOMATIC}}
+var mDestinationConnectorProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationConnectorProperties_Redshift, &sDestinationConnectorProperties_S3, &sDestinationConnectorProperties_Salesforce, &sDestinationConnectorProperties_Snowflake, &sDestinationConnectorProperties_EventBridge, &sDestinationConnectorProperties_LookoutMetrics, &sDestinationConnectorProperties_Upsolver, &sDestinationConnectorProperties_Honeycode, &sDestinationConnectorProperties_CustomerProfiles, &sDestinationConnectorProperties_Zendesk, &sDestinationConnectorProperties_Marketo, &sDestinationConnectorProperties_CustomConnector, &sDestinationConnectorProperties_SAPOData}, Seed: 51, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 6, 0, 11, 0, 0, 0, 2, 13, 0, 0, 1, 4, 0, 5, 10, 0, 8, 12,
+	0, 3, 9, 0, 0, 0, 0, 0,
+}}
+var mDestinationFieldProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationFieldProperties_isCreatable, &sDestinationFieldProperties_isNullable, &sDestinationFieldProperties_isUpsertable, &sDestinationFieldProperties_isUpdatable, &sDestinationFieldProperties_isDefaultedOnCreate, &sDestinationFieldProperties_supportedWriteOperations}}
+var mDestinationFlowConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationFlowConfig_connectorType, &sDestinationFlowConfig_apiVersion, &sDestinationFlowConfig_connectorProfileName, &sDestinationFlowConfig_destinationConnectorProperties}}
+var m_DestinationFlowConfigList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DestinationFlowConfigList_member}}
+var mDynatraceConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sDynatraceConnectorOperator_PROJECTION, &sDynatraceConnectorOperator_BETWEEN, &sDynatraceConnectorOperator_EQUAL_TO, &sDynatraceConnectorOperator_ADDITION, &sDynatraceConnectorOperator_MULTIPLICATION, &sDynatraceConnectorOperator_DIVISION, &sDynatraceConnectorOperator_SUBTRACTION, &sDynatraceConnectorOperator_MASK_ALL, &sDynatraceConnectorOperator_MASK_FIRST_N, &sDynatraceConnectorOperator_MASK_LAST_N, &sDynatraceConnectorOperator_VALIDATE_NON_NULL, &sDynatraceConnectorOperator_VALIDATE_NON_ZERO, &sDynatraceConnectorOperator_VALIDATE_NON_NEGATIVE, &sDynatraceConnectorOperator_VALIDATE_NUMERIC, &sDynatraceConnectorOperator_NO_OP}, Seed: 88, Slots: []uint16{
+	0, 0, 7, 0, 0, 6, 5, 9, 1, 0, 2, 0, 0, 15, 0, 0, 4, 10, 0, 14, 0, 0, 0, 13,
+	0, 8, 12, 0, 0, 11, 3, 0,
+}}
+var mDynatraceConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sDynatraceConnectorProfileCredentials_apiToken}}
+var mDynatraceConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDynatraceConnectorProfileProperties_instanceUrl}}
+var mDynatraceSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sDynatraceSourceProperties_object}}
+var mErrorHandlingConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorHandlingConfig_failOnFirstDestinationError, &sErrorHandlingConfig_bucketPrefix, &sErrorHandlingConfig_bucketName}}
+var mErrorInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorInfo_putFailuresCount, &sErrorInfo_executionMessage}}
+var mEventBridgeDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBridgeDestinationProperties_object, &sEventBridgeDestinationProperties_errorHandlingConfig}}
+var mExecutionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionDetails_mostRecentExecutionMessage, &sExecutionDetails_mostRecentExecutionTime, &sExecutionDetails_mostRecentExecutionStatus}}
+var m_ExecutionIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExecutionIds_member}}
+var mExecutionRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionRecord_executionId, &sExecutionRecord_executionStatus, &sExecutionRecord_executionResult, &sExecutionRecord_startedAt, &sExecutionRecord_lastUpdatedAt, &sExecutionRecord_dataPullStartTime, &sExecutionRecord_dataPullEndTime, &sExecutionRecord_metadataCatalogDetails}}
+var mExecutionResult = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionResult_errorInfo, &sExecutionResult_bytesProcessed, &sExecutionResult_bytesWritten, &sExecutionResult_recordsProcessed, &sExecutionResult_numParallelProcesses, &sExecutionResult_maxPageSize}}
+var mExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExecutionStatus_INPROGRESS, &sExecutionStatus_SUCCESSFUL, &sExecutionStatus_ERROR, &sExecutionStatus_CANCELSTARTED, &sExecutionStatus_CANCELED}}
+var mFieldTypeDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldTypeDetails_fieldType, &sFieldTypeDetails_filterOperators, &sFieldTypeDetails_supportedValues, &sFieldTypeDetails_valueRegexPattern, &sFieldTypeDetails_supportedDateFormat, &sFieldTypeDetails_fieldValueRange, &sFieldTypeDetails_fieldLengthRange}}
+var mFileType = smithy.SchemaMembers{List: []*smithy.Schema{&sFileType_CSV, &sFileType_JSON, &sFileType_PARQUET}}
+var m_FilterOperatorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterOperatorList_member}}
+var mFlowDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sFlowDefinition_flowArn, &sFlowDefinition_description, &sFlowDefinition_flowName, &sFlowDefinition_flowStatus, &sFlowDefinition_sourceConnectorType, &sFlowDefinition_sourceConnectorLabel, &sFlowDefinition_destinationConnectorType, &sFlowDefinition_destinationConnectorLabel, &sFlowDefinition_triggerType, &sFlowDefinition_createdAt, &sFlowDefinition_lastUpdatedAt, &sFlowDefinition_createdBy, &sFlowDefinition_lastUpdatedBy, &sFlowDefinition_tags, &sFlowDefinition_lastRunExecutionDetails}, Seed: 64, Slots: []uint16{
+	10, 0, 0, 0, 0, 0, 4, 14, 13, 0, 7, 15, 0, 5, 0, 2, 0, 0, 12, 1, 0, 0, 0, 0,
+	8, 11, 0, 3, 0, 9, 0, 6,
+}}
+var m_FlowExecutionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FlowExecutionList_member}}
+var m_FlowList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FlowList_member}}
+var mFlowStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sFlowStatus_ACTIVE, &sFlowStatus_DEPRECATED, &sFlowStatus_DELETED, &sFlowStatus_DRAFT, &sFlowStatus_ERRORED, &sFlowStatus_SUSPENDED}}
+var mGlueDataCatalogConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sGlueDataCatalogConfig_roleArn, &sGlueDataCatalogConfig_databaseName, &sGlueDataCatalogConfig_tablePrefix}}
+var mGoogleAnalyticsConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sGoogleAnalyticsConnectorOperator_PROJECTION, &sGoogleAnalyticsConnectorOperator_BETWEEN}}
+var mGoogleAnalyticsConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sGoogleAnalyticsConnectorProfileCredentials_clientId, &sGoogleAnalyticsConnectorProfileCredentials_clientSecret, &sGoogleAnalyticsConnectorProfileCredentials_accessToken, &sGoogleAnalyticsConnectorProfileCredentials_refreshToken, &sGoogleAnalyticsConnectorProfileCredentials_oAuthRequest}}
+var mGoogleAnalyticsMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sGoogleAnalyticsMetadata_oAuthScopes}}
+var mGoogleAnalyticsSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sGoogleAnalyticsSourceProperties_object}}
+var mHoneycodeConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sHoneycodeConnectorProfileCredentials_accessToken, &sHoneycodeConnectorProfileCredentials_refreshToken, &sHoneycodeConnectorProfileCredentials_oAuthRequest}}
+var mHoneycodeDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sHoneycodeDestinationProperties_object, &sHoneycodeDestinationProperties_errorHandlingConfig}}
+var mHoneycodeMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sHoneycodeMetadata_oAuthScopes}}
+var m_IdFieldNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdFieldNameList_member}}
+var mIncrementalPullConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sIncrementalPullConfig_datetimeTypeFieldName}}
+var mInforNexusConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sInforNexusConnectorOperator_PROJECTION, &sInforNexusConnectorOperator_BETWEEN, &sInforNexusConnectorOperator_EQUAL_TO, &sInforNexusConnectorOperator_ADDITION, &sInforNexusConnectorOperator_MULTIPLICATION, &sInforNexusConnectorOperator_DIVISION, &sInforNexusConnectorOperator_SUBTRACTION, &sInforNexusConnectorOperator_MASK_ALL, &sInforNexusConnectorOperator_MASK_FIRST_N, &sInforNexusConnectorOperator_MASK_LAST_N, &sInforNexusConnectorOperator_VALIDATE_NON_NULL, &sInforNexusConnectorOperator_VALIDATE_NON_ZERO, &sInforNexusConnectorOperator_VALIDATE_NON_NEGATIVE, &sInforNexusConnectorOperator_VALIDATE_NUMERIC, &sInforNexusConnectorOperator_NO_OP}, Seed: 88, Slots: []uint16{
+	0, 0, 7, 0, 0, 6, 5, 9, 1, 0, 2, 0, 0, 15, 0, 0, 4, 10, 0, 14, 0, 0, 0, 13,
+	0, 8, 12, 0, 0, 11, 3, 0,
+}}
+var mInforNexusConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sInforNexusConnectorProfileCredentials_accessKeyId, &sInforNexusConnectorProfileCredentials_userId, &sInforNexusConnectorProfileCredentials_secretAccessKey, &sInforNexusConnectorProfileCredentials_datakey}}
+var mInforNexusConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sInforNexusConnectorProfileProperties_instanceUrl}}
+var mInforNexusSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sInforNexusSourceProperties_object}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLambdaConnectorProvisioningConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaConnectorProvisioningConfig_lambdaArn}}
+var mMarketoConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketoConnectorOperator_PROJECTION, &sMarketoConnectorOperator_LESS_THAN, &sMarketoConnectorOperator_GREATER_THAN, &sMarketoConnectorOperator_BETWEEN, &sMarketoConnectorOperator_ADDITION, &sMarketoConnectorOperator_MULTIPLICATION, &sMarketoConnectorOperator_DIVISION, &sMarketoConnectorOperator_SUBTRACTION, &sMarketoConnectorOperator_MASK_ALL, &sMarketoConnectorOperator_MASK_FIRST_N, &sMarketoConnectorOperator_MASK_LAST_N, &sMarketoConnectorOperator_VALIDATE_NON_NULL, &sMarketoConnectorOperator_VALIDATE_NON_ZERO, &sMarketoConnectorOperator_VALIDATE_NON_NEGATIVE, &sMarketoConnectorOperator_VALIDATE_NUMERIC, &sMarketoConnectorOperator_NO_OP}, Seed: 88, Slots: []uint16{
+	0, 0, 8, 3, 0, 7, 6, 10, 1, 0, 4, 0, 0, 16, 0, 0, 5, 11, 0, 15, 0, 0, 0, 14,
+	0, 9, 13, 0, 0, 12, 0, 2,
+}}
+var mMarketoConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketoConnectorProfileCredentials_clientId, &sMarketoConnectorProfileCredentials_clientSecret, &sMarketoConnectorProfileCredentials_accessToken, &sMarketoConnectorProfileCredentials_oAuthRequest}}
+var mMarketoConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketoConnectorProfileProperties_instanceUrl}}
+var mMarketoDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketoDestinationProperties_object, &sMarketoDestinationProperties_errorHandlingConfig}}
+var mMarketoSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketoSourceProperties_object}}
+var mMetadataCatalogConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataCatalogConfig_glueDataCatalog}}
+var mMetadataCatalogDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataCatalogDetail_catalogType, &sMetadataCatalogDetail_tableName, &sMetadataCatalogDetail_tableRegistrationOutput, &sMetadataCatalogDetail_partitionRegistrationOutput}}
+var m_MetadataCatalogDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetadataCatalogDetails_member}}
+var mOAuth2Credentials = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuth2Credentials_clientId, &sOAuth2Credentials_clientSecret, &sOAuth2Credentials_accessToken, &sOAuth2Credentials_refreshToken, &sOAuth2Credentials_oAuthRequest}}
+var mOAuth2CustomParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuth2CustomParameter_key, &sOAuth2CustomParameter_isRequired, &sOAuth2CustomParameter_label, &sOAuth2CustomParameter_description, &sOAuth2CustomParameter_isSensitiveField, &sOAuth2CustomParameter_connectorSuppliedValues, &sOAuth2CustomParameter_type}}
+var m_OAuth2CustomPropertiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OAuth2CustomPropertiesList_member}}
+var mOAuth2CustomPropType = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuth2CustomPropType_TOKEN_URL, &sOAuth2CustomPropType_AUTH_URL}}
+var mOAuth2Defaults = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuth2Defaults_oauthScopes, &sOAuth2Defaults_tokenUrls, &sOAuth2Defaults_authCodeUrls, &sOAuth2Defaults_oauth2GrantTypesSupported, &sOAuth2Defaults_oauth2CustomProperties}}
+var mOAuth2GrantType = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuth2GrantType_CLIENT_CREDENTIALS, &sOAuth2GrantType_AUTHORIZATION_CODE, &sOAuth2GrantType_JWT_BEARER}}
+var m_OAuth2GrantTypeSupportedList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OAuth2GrantTypeSupportedList_member}}
+var mOAuth2Properties = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuth2Properties_tokenUrl, &sOAuth2Properties_oAuth2GrantType, &sOAuth2Properties_tokenUrlCustomProperties}}
+var mOAuthCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuthCredentials_clientId, &sOAuthCredentials_clientSecret, &sOAuthCredentials_accessToken, &sOAuthCredentials_refreshToken, &sOAuthCredentials_oAuthRequest}}
+var mOAuthProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sOAuthProperties_tokenUrl, &sOAuthProperties_authCodeUrl, &sOAuthProperties_oAuthScopes}}
+var m_OAuthScopeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OAuthScopeList_member}}
+var mOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sOperator_PROJECTION, &sOperator_LESS_THAN, &sOperator_GREATER_THAN, &sOperator_CONTAINS, &sOperator_BETWEEN, &sOperator_LESS_THAN_OR_EQUAL_TO, &sOperator_GREATER_THAN_OR_EQUAL_TO, &sOperator_EQUAL_TO, &sOperator_NOT_EQUAL_TO, &sOperator_ADDITION, &sOperator_MULTIPLICATION, &sOperator_DIVISION, &sOperator_SUBTRACTION, &sOperator_MASK_ALL, &sOperator_MASK_FIRST_N, &sOperator_MASK_LAST_N, &sOperator_VALIDATE_NON_NULL, &sOperator_VALIDATE_NON_ZERO, &sOperator_VALIDATE_NON_NEGATIVE, &sOperator_VALIDATE_NUMERIC, &sOperator_NO_OP}, Seed: 22, Slots: []uint16{
+	0, 0, 5, 0, 12, 20, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0,
+	0, 0, 17, 9, 0, 0, 0, 13, 0, 6, 3, 8, 0, 15, 0, 0, 0, 0, 0, 0, 0, 7, 2, 0,
+	0, 0, 21, 14, 10, 0, 16, 0, 0, 0, 0, 19, 0, 0, 11, 0,
+}}
+var mOperatorPropertiesKeys = smithy.SchemaMembers{List: []*smithy.Schema{&sOperatorPropertiesKeys_VALUE, &sOperatorPropertiesKeys_VALUES, &sOperatorPropertiesKeys_DATA_TYPE, &sOperatorPropertiesKeys_UPPER_BOUND, &sOperatorPropertiesKeys_LOWER_BOUND, &sOperatorPropertiesKeys_SOURCE_DATA_TYPE, &sOperatorPropertiesKeys_DESTINATION_DATA_TYPE, &sOperatorPropertiesKeys_VALIDATION_ACTION, &sOperatorPropertiesKeys_MASK_VALUE, &sOperatorPropertiesKeys_MASK_LENGTH, &sOperatorPropertiesKeys_TRUNCATE_LENGTH, &sOperatorPropertiesKeys_MATH_OPERATION_FIELDS_ORDER, &sOperatorPropertiesKeys_CONCAT_FORMAT, &sOperatorPropertiesKeys_SUBFIELD_CATEGORY_MAP, &sOperatorPropertiesKeys_EXCLUDE_SOURCE_FIELDS_LIST, &sOperatorPropertiesKeys_INCLUDE_NEW_FIELDS, &sOperatorPropertiesKeys_ORDERED_PARTITION_KEYS_LIST}, Seed: 17, Slots: []uint16{
+	5, 2, 0, 3, 0, 11, 0, 0, 0, 0, 12, 17, 0, 16, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0,
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 1, 15, 0, 0, 14, 0, 0, 0, 0, 0, 10, 0, 0, 0, 9,
+	0, 0, 0, 0, 0, 0, 13, 0, 7, 0, 0, 0, 0, 0, 6, 0,
+}}
+var mOperators = smithy.SchemaMembers{List: []*smithy.Schema{&sOperators_PROJECTION, &sOperators_LESS_THAN, &sOperators_GREATER_THAN, &sOperators_CONTAINS, &sOperators_BETWEEN, &sOperators_LESS_THAN_OR_EQUAL_TO, &sOperators_GREATER_THAN_OR_EQUAL_TO, &sOperators_EQUAL_TO, &sOperators_NOT_EQUAL_TO, &sOperators_ADDITION, &sOperators_MULTIPLICATION, &sOperators_DIVISION, &sOperators_SUBTRACTION, &sOperators_MASK_ALL, &sOperators_MASK_FIRST_N, &sOperators_MASK_LAST_N, &sOperators_VALIDATE_NON_NULL, &sOperators_VALIDATE_NON_ZERO, &sOperators_VALIDATE_NON_NEGATIVE, &sOperators_VALIDATE_NUMERIC, &sOperators_NO_OP}, Seed: 22, Slots: []uint16{
+	0, 0, 5, 0, 12, 20, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0,
+	0, 0, 17, 9, 0, 0, 0, 13, 0, 6, 3, 8, 0, 15, 0, 0, 0, 0, 0, 0, 0, 7, 2, 0,
+	0, 0, 21, 14, 10, 0, 16, 0, 0, 0, 0, 19, 0, 0, 11, 0,
+}}
+var mPardotConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sPardotConnectorOperator_PROJECTION, &sPardotConnectorOperator_EQUAL_TO, &sPardotConnectorOperator_NO_OP, &sPardotConnectorOperator_ADDITION, &sPardotConnectorOperator_MULTIPLICATION, &sPardotConnectorOperator_DIVISION, &sPardotConnectorOperator_SUBTRACTION, &sPardotConnectorOperator_MASK_ALL, &sPardotConnectorOperator_MASK_FIRST_N, &sPardotConnectorOperator_MASK_LAST_N, &sPardotConnectorOperator_VALIDATE_NON_NULL, &sPardotConnectorOperator_VALIDATE_NON_ZERO, &sPardotConnectorOperator_VALIDATE_NON_NEGATIVE, &sPardotConnectorOperator_VALIDATE_NUMERIC}, Seed: 27, Slots: []uint16{
+	1, 9, 0, 8, 14, 0, 4, 0, 0, 0, 6, 0, 13, 0, 0, 12, 0, 10, 0, 0, 2, 0, 7, 3,
+	0, 0, 0, 0, 0, 0, 5, 11,
+}}
+var mPardotConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sPardotConnectorProfileCredentials_accessToken, &sPardotConnectorProfileCredentials_refreshToken, &sPardotConnectorProfileCredentials_oAuthRequest, &sPardotConnectorProfileCredentials_clientCredentialsArn}}
+var mPardotConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sPardotConnectorProfileProperties_instanceUrl, &sPardotConnectorProfileProperties_isSandboxEnvironment, &sPardotConnectorProfileProperties_businessUnitId}}
+var mPardotSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sPardotSourceProperties_object}}
+var mPathPrefix = smithy.SchemaMembers{List: []*smithy.Schema{&sPathPrefix_EXECUTION_ID, &sPathPrefix_SCHEMA_VERSION}}
+var m_PathPrefixHierarchy = smithy.SchemaMembers{List: []*smithy.Schema{&s_PathPrefixHierarchy_member}}
+var mPrefixConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefixConfig_prefixType, &sPrefixConfig_prefixFormat, &sPrefixConfig_pathPrefixHierarchy}}
+var mPrefixFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefixFormat_YEAR, &sPrefixFormat_MONTH, &sPrefixFormat_DAY, &sPrefixFormat_HOUR, &sPrefixFormat_MINUTE}}
+var mPrefixType = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefixType_FILENAME, &sPrefixType_PATH, &sPrefixType_PATH_AND_FILENAME}}
+var mPrivateConnectionProvisioningFailureCause = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateConnectionProvisioningFailureCause_CONNECTOR_AUTHENTICATION, &sPrivateConnectionProvisioningFailureCause_CONNECTOR_SERVER, &sPrivateConnectionProvisioningFailureCause_INTERNAL_SERVER, &sPrivateConnectionProvisioningFailureCause_ACCESS_DENIED, &sPrivateConnectionProvisioningFailureCause_VALIDATION}}
+var mPrivateConnectionProvisioningState = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateConnectionProvisioningState_status, &sPrivateConnectionProvisioningState_failureMessage, &sPrivateConnectionProvisioningState_failureCause}}
+var mPrivateConnectionProvisioningStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateConnectionProvisioningStatus_FAILED, &sPrivateConnectionProvisioningStatus_PENDING, &sPrivateConnectionProvisioningStatus_CREATED}}
+var m_ProfilePropertiesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProfilePropertiesMap_key, &s_ProfilePropertiesMap_value}}
+var mRange = smithy.SchemaMembers{List: []*smithy.Schema{&sRange_maximum, &sRange_minimum}}
+var mRedshiftConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftConnectorProfileCredentials_username, &sRedshiftConnectorProfileCredentials_password}}
+var mRedshiftConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftConnectorProfileProperties_databaseUrl, &sRedshiftConnectorProfileProperties_bucketName, &sRedshiftConnectorProfileProperties_bucketPrefix, &sRedshiftConnectorProfileProperties_roleArn, &sRedshiftConnectorProfileProperties_dataApiRoleArn, &sRedshiftConnectorProfileProperties_isRedshiftServerless, &sRedshiftConnectorProfileProperties_clusterIdentifier, &sRedshiftConnectorProfileProperties_workgroupName, &sRedshiftConnectorProfileProperties_databaseName}, Seed: 4, Slots: []uint16{
+	0, 5, 1, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
+	0, 9, 0, 8, 2, 0, 3, 0,
+}}
+var mRedshiftDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDestinationProperties_object, &sRedshiftDestinationProperties_intermediateBucketName, &sRedshiftDestinationProperties_bucketPrefix, &sRedshiftDestinationProperties_errorHandlingConfig}}
+var m_RegionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionList_member}}
+var mRegistrationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrationOutput_message, &sRegistrationOutput_result, &sRegistrationOutput_status}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3ConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ConnectorOperator_PROJECTION, &sS3ConnectorOperator_LESS_THAN, &sS3ConnectorOperator_GREATER_THAN, &sS3ConnectorOperator_BETWEEN, &sS3ConnectorOperator_LESS_THAN_OR_EQUAL_TO, &sS3ConnectorOperator_GREATER_THAN_OR_EQUAL_TO, &sS3ConnectorOperator_EQUAL_TO, &sS3ConnectorOperator_NOT_EQUAL_TO, &sS3ConnectorOperator_ADDITION, &sS3ConnectorOperator_MULTIPLICATION, &sS3ConnectorOperator_DIVISION, &sS3ConnectorOperator_SUBTRACTION, &sS3ConnectorOperator_MASK_ALL, &sS3ConnectorOperator_MASK_FIRST_N, &sS3ConnectorOperator_MASK_LAST_N, &sS3ConnectorOperator_VALIDATE_NON_NULL, &sS3ConnectorOperator_VALIDATE_NON_ZERO, &sS3ConnectorOperator_VALIDATE_NON_NEGATIVE, &sS3ConnectorOperator_VALIDATE_NUMERIC, &sS3ConnectorOperator_NO_OP}, Seed: 12, Slots: []uint16{
+	0, 0, 11, 0, 0, 0, 0, 0, 12, 0, 4, 0, 8, 0, 0, 0, 6, 0, 5, 0, 20, 0, 0, 14,
+	3, 0, 0, 0, 0, 0, 13, 7, 16, 0, 0, 0, 0, 0, 0, 0, 9, 15, 19, 1, 0, 0, 0, 17,
+	0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 18, 10, 0,
+}}
+var mS3DestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationProperties_bucketName, &sS3DestinationProperties_bucketPrefix, &sS3DestinationProperties_s3OutputFormatConfig}}
+var mS3InputFileType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3InputFileType_CSV, &sS3InputFileType_JSON}}
+var mS3InputFormatConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3InputFormatConfig_s3InputFileType}}
+var mS3OutputFormatConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3OutputFormatConfig_fileType, &sS3OutputFormatConfig_prefixConfig, &sS3OutputFormatConfig_aggregationConfig, &sS3OutputFormatConfig_preserveSourceDataTyping}}
+var mS3SourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sS3SourceProperties_bucketName, &sS3SourceProperties_bucketPrefix, &sS3SourceProperties_s3InputFormatConfig}}
+var mSalesforceConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesforceConnectorOperator_PROJECTION, &sSalesforceConnectorOperator_LESS_THAN, &sSalesforceConnectorOperator_CONTAINS, &sSalesforceConnectorOperator_GREATER_THAN, &sSalesforceConnectorOperator_BETWEEN, &sSalesforceConnectorOperator_LESS_THAN_OR_EQUAL_TO, &sSalesforceConnectorOperator_GREATER_THAN_OR_EQUAL_TO, &sSalesforceConnectorOperator_EQUAL_TO, &sSalesforceConnectorOperator_NOT_EQUAL_TO, &sSalesforceConnectorOperator_ADDITION, &sSalesforceConnectorOperator_MULTIPLICATION, &sSalesforceConnectorOperator_DIVISION, &sSalesforceConnectorOperator_SUBTRACTION, &sSalesforceConnectorOperator_MASK_ALL, &sSalesforceConnectorOperator_MASK_FIRST_N, &sSalesforceConnectorOperator_MASK_LAST_N, &sSalesforceConnectorOperator_VALIDATE_NON_NULL, &sSalesforceConnectorOperator_VALIDATE_NON_ZERO, &sSalesforceConnectorOperator_VALIDATE_NON_NEGATIVE, &sSalesforceConnectorOperator_VALIDATE_NUMERIC, &sSalesforceConnectorOperator_NO_OP}, Seed: 22, Slots: []uint16{
+	0, 0, 5, 0, 12, 20, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0,
+	0, 0, 17, 9, 0, 0, 0, 13, 0, 6, 4, 8, 0, 15, 0, 0, 0, 0, 0, 0, 0, 7, 2, 0,
+	0, 0, 21, 14, 10, 0, 16, 0, 0, 0, 0, 19, 0, 0, 11, 0,
+}}
+var mSalesforceConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesforceConnectorProfileCredentials_accessToken, &sSalesforceConnectorProfileCredentials_refreshToken, &sSalesforceConnectorProfileCredentials_oAuthRequest, &sSalesforceConnectorProfileCredentials_clientCredentialsArn, &sSalesforceConnectorProfileCredentials_oAuth2GrantType, &sSalesforceConnectorProfileCredentials_jwtToken}}
+var mSalesforceConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesforceConnectorProfileProperties_instanceUrl, &sSalesforceConnectorProfileProperties_isSandboxEnvironment, &sSalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization}}
+var mSalesforceDataTransferApi = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesforceDataTransferApi_AUTOMATIC, &sSalesforceDataTransferApi_BULKV2, &sSalesforceDataTransferApi_REST_SYNC}}
+var m_SalesforceDataTransferApiList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SalesforceDataTransferApiList_member}}
+var mSalesforceDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesforceDestinationProperties_object, &sSalesforceDestinationProperties_idFieldNames, &sSalesforceDestinationProperties_errorHandlingConfig, &sSalesforceDestinationProperties_writeOperationType, &sSalesforceDestinationProperties_dataTransferApi}}
+var mSalesforceMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesforceMetadata_oAuthScopes, &sSalesforceMetadata_dataTransferApis, &sSalesforceMetadata_oauth2GrantTypesSupported}}
+var mSalesforceSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesforceSourceProperties_object, &sSalesforceSourceProperties_enableDynamicFieldUpdate, &sSalesforceSourceProperties_includeDeletedRecords, &sSalesforceSourceProperties_dataTransferApi}}
+var mSAPODataConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sSAPODataConnectorOperator_PROJECTION, &sSAPODataConnectorOperator_LESS_THAN, &sSAPODataConnectorOperator_CONTAINS, &sSAPODataConnectorOperator_GREATER_THAN, &sSAPODataConnectorOperator_BETWEEN, &sSAPODataConnectorOperator_LESS_THAN_OR_EQUAL_TO, &sSAPODataConnectorOperator_GREATER_THAN_OR_EQUAL_TO, &sSAPODataConnectorOperator_EQUAL_TO, &sSAPODataConnectorOperator_NOT_EQUAL_TO, &sSAPODataConnectorOperator_ADDITION, &sSAPODataConnectorOperator_MULTIPLICATION, &sSAPODataConnectorOperator_DIVISION, &sSAPODataConnectorOperator_SUBTRACTION, &sSAPODataConnectorOperator_MASK_ALL, &sSAPODataConnectorOperator_MASK_FIRST_N, &sSAPODataConnectorOperator_MASK_LAST_N, &sSAPODataConnectorOperator_VALIDATE_NON_NULL, &sSAPODataConnectorOperator_VALIDATE_NON_ZERO, &sSAPODataConnectorOperator_VALIDATE_NON_NEGATIVE, &sSAPODataConnectorOperator_VALIDATE_NUMERIC, &sSAPODataConnectorOperator_NO_OP}, Seed: 22, Slots: []uint16{
+	0, 0, 5, 0, 12, 20, 0, 0, 0, 0, 0, 1, 0, 3, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0,
+	0, 0, 17, 9, 0, 0, 0, 13, 0, 6, 4, 8, 0, 15, 0, 0, 0, 0, 0, 0, 0, 7, 2, 0,
+	0, 0, 21, 14, 10, 0, 16, 0, 0, 0, 0, 19, 0, 0, 11, 0,
+}}
+var mSAPODataConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sSAPODataConnectorProfileCredentials_basicAuthCredentials, &sSAPODataConnectorProfileCredentials_oAuthCredentials}}
+var mSAPODataConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSAPODataConnectorProfileProperties_applicationHostUrl, &sSAPODataConnectorProfileProperties_applicationServicePath, &sSAPODataConnectorProfileProperties_portNumber, &sSAPODataConnectorProfileProperties_clientNumber, &sSAPODataConnectorProfileProperties_logonLanguage, &sSAPODataConnectorProfileProperties_privateLinkServiceName, &sSAPODataConnectorProfileProperties_oAuthProperties, &sSAPODataConnectorProfileProperties_disableSSO}}
+var mSAPODataDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSAPODataDestinationProperties_objectPath, &sSAPODataDestinationProperties_successResponseHandlingConfig, &sSAPODataDestinationProperties_idFieldNames, &sSAPODataDestinationProperties_errorHandlingConfig, &sSAPODataDestinationProperties_writeOperationType}}
+var mSAPODataPaginationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSAPODataPaginationConfig_maxPageSize}}
+var mSAPODataParallelismConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSAPODataParallelismConfig_maxParallelism}}
+var mSAPODataSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSAPODataSourceProperties_objectPath, &sSAPODataSourceProperties_parallelismConfig, &sSAPODataSourceProperties_paginationConfig}}
+var mScheduledTriggerProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledTriggerProperties_scheduleExpression, &sScheduledTriggerProperties_dataPullMode, &sScheduledTriggerProperties_scheduleStartTime, &sScheduledTriggerProperties_scheduleEndTime, &sScheduledTriggerProperties_timezone, &sScheduledTriggerProperties_scheduleOffset, &sScheduledTriggerProperties_firstExecutionFrom, &sScheduledTriggerProperties_flowErrorDeactivationThreshold}}
+var mScheduleFrequencyType = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleFrequencyType_BYMINUTE, &sScheduleFrequencyType_HOURLY, &sScheduleFrequencyType_DAILY, &sScheduleFrequencyType_WEEKLY, &sScheduleFrequencyType_MONTHLY, &sScheduleFrequencyType_ONCE}}
+var m_SchedulingFrequencyTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchedulingFrequencyTypeList_member}}
+var mServiceNowConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceNowConnectorOperator_PROJECTION, &sServiceNowConnectorOperator_CONTAINS, &sServiceNowConnectorOperator_LESS_THAN, &sServiceNowConnectorOperator_GREATER_THAN, &sServiceNowConnectorOperator_BETWEEN, &sServiceNowConnectorOperator_LESS_THAN_OR_EQUAL_TO, &sServiceNowConnectorOperator_GREATER_THAN_OR_EQUAL_TO, &sServiceNowConnectorOperator_EQUAL_TO, &sServiceNowConnectorOperator_NOT_EQUAL_TO, &sServiceNowConnectorOperator_ADDITION, &sServiceNowConnectorOperator_MULTIPLICATION, &sServiceNowConnectorOperator_DIVISION, &sServiceNowConnectorOperator_SUBTRACTION, &sServiceNowConnectorOperator_MASK_ALL, &sServiceNowConnectorOperator_MASK_FIRST_N, &sServiceNowConnectorOperator_MASK_LAST_N, &sServiceNowConnectorOperator_VALIDATE_NON_NULL, &sServiceNowConnectorOperator_VALIDATE_NON_ZERO, &sServiceNowConnectorOperator_VALIDATE_NON_NEGATIVE, &sServiceNowConnectorOperator_VALIDATE_NUMERIC, &sServiceNowConnectorOperator_NO_OP}, Seed: 22, Slots: []uint16{
+	0, 0, 5, 0, 12, 20, 0, 0, 0, 0, 0, 1, 0, 2, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0,
+	0, 0, 17, 9, 0, 0, 0, 13, 0, 6, 4, 8, 0, 15, 0, 0, 0, 0, 0, 0, 0, 7, 3, 0,
+	0, 0, 21, 14, 10, 0, 16, 0, 0, 0, 0, 19, 0, 0, 11, 0,
+}}
+var mServiceNowConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceNowConnectorProfileCredentials_username, &sServiceNowConnectorProfileCredentials_password, &sServiceNowConnectorProfileCredentials_oAuth2Credentials}}
+var mServiceNowConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceNowConnectorProfileProperties_instanceUrl}}
+var mServiceNowSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceNowSourceProperties_object}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSingularConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sSingularConnectorOperator_PROJECTION, &sSingularConnectorOperator_EQUAL_TO, &sSingularConnectorOperator_ADDITION, &sSingularConnectorOperator_MULTIPLICATION, &sSingularConnectorOperator_DIVISION, &sSingularConnectorOperator_SUBTRACTION, &sSingularConnectorOperator_MASK_ALL, &sSingularConnectorOperator_MASK_FIRST_N, &sSingularConnectorOperator_MASK_LAST_N, &sSingularConnectorOperator_VALIDATE_NON_NULL, &sSingularConnectorOperator_VALIDATE_NON_ZERO, &sSingularConnectorOperator_VALIDATE_NON_NEGATIVE, &sSingularConnectorOperator_VALIDATE_NUMERIC, &sSingularConnectorOperator_NO_OP}, Seed: 27, Slots: []uint16{
+	1, 8, 0, 7, 13, 0, 3, 0, 0, 0, 5, 0, 12, 0, 0, 11, 0, 9, 0, 0, 2, 0, 6, 14,
+	0, 0, 0, 0, 0, 0, 4, 10,
+}}
+var mSingularConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sSingularConnectorProfileCredentials_apiKey}}
+var mSingularSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSingularSourceProperties_object}}
+var mSlackConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackConnectorOperator_PROJECTION, &sSlackConnectorOperator_LESS_THAN, &sSlackConnectorOperator_GREATER_THAN, &sSlackConnectorOperator_BETWEEN, &sSlackConnectorOperator_LESS_THAN_OR_EQUAL_TO, &sSlackConnectorOperator_GREATER_THAN_OR_EQUAL_TO, &sSlackConnectorOperator_EQUAL_TO, &sSlackConnectorOperator_ADDITION, &sSlackConnectorOperator_MULTIPLICATION, &sSlackConnectorOperator_DIVISION, &sSlackConnectorOperator_SUBTRACTION, &sSlackConnectorOperator_MASK_ALL, &sSlackConnectorOperator_MASK_FIRST_N, &sSlackConnectorOperator_MASK_LAST_N, &sSlackConnectorOperator_VALIDATE_NON_NULL, &sSlackConnectorOperator_VALIDATE_NON_ZERO, &sSlackConnectorOperator_VALIDATE_NON_NEGATIVE, &sSlackConnectorOperator_VALIDATE_NUMERIC, &sSlackConnectorOperator_NO_OP}, Seed: 12, Slots: []uint16{
+	0, 0, 10, 0, 0, 0, 0, 0, 11, 0, 4, 0, 0, 0, 0, 0, 6, 0, 5, 0, 19, 0, 0, 13,
+	3, 0, 0, 0, 0, 0, 12, 7, 15, 0, 0, 0, 0, 0, 0, 0, 8, 14, 18, 1, 0, 0, 0, 16,
+	0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 17, 9, 0,
+}}
+var mSlackConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackConnectorProfileCredentials_clientId, &sSlackConnectorProfileCredentials_clientSecret, &sSlackConnectorProfileCredentials_accessToken, &sSlackConnectorProfileCredentials_oAuthRequest}}
+var mSlackConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackConnectorProfileProperties_instanceUrl}}
+var mSlackMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackMetadata_oAuthScopes}}
+var mSlackSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSlackSourceProperties_object}}
+var mSnowflakeConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeConnectorProfileCredentials_username, &sSnowflakeConnectorProfileCredentials_password, &sSnowflakeConnectorProfileCredentials_privateKey}}
+var mSnowflakeConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeConnectorProfileProperties_warehouse, &sSnowflakeConnectorProfileProperties_stage, &sSnowflakeConnectorProfileProperties_bucketName, &sSnowflakeConnectorProfileProperties_bucketPrefix, &sSnowflakeConnectorProfileProperties_privateLinkServiceName, &sSnowflakeConnectorProfileProperties_accountName, &sSnowflakeConnectorProfileProperties_region}}
+var mSnowflakeDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeDestinationProperties_object, &sSnowflakeDestinationProperties_intermediateBucketName, &sSnowflakeDestinationProperties_bucketPrefix, &sSnowflakeDestinationProperties_errorHandlingConfig}}
+var mSnowflakeMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sSnowflakeMetadata_supportedRegions}}
+var mSourceConnectorProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceConnectorProperties_Amplitude, &sSourceConnectorProperties_Datadog, &sSourceConnectorProperties_Dynatrace, &sSourceConnectorProperties_GoogleAnalytics, &sSourceConnectorProperties_InforNexus, &sSourceConnectorProperties_Marketo, &sSourceConnectorProperties_S3, &sSourceConnectorProperties_Salesforce, &sSourceConnectorProperties_ServiceNow, &sSourceConnectorProperties_Singular, &sSourceConnectorProperties_Slack, &sSourceConnectorProperties_Trendmicro, &sSourceConnectorProperties_Veeva, &sSourceConnectorProperties_Zendesk, &sSourceConnectorProperties_SAPOData, &sSourceConnectorProperties_CustomConnector, &sSourceConnectorProperties_Pardot}, Seed: 21, Slots: []uint16{
+	0, 15, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 7, 0, 6, 0, 0, 0, 0, 0, 17, 13, 0, 0,
+	12, 14, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 3, 0, 0, 0,
+	10, 5, 2, 0, 0, 0, 0, 0, 0, 0, 8, 9, 0, 0, 0, 0,
+}}
+var mSourceFieldProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceFieldProperties_isRetrievable, &sSourceFieldProperties_isQueryable, &sSourceFieldProperties_isTimestampFieldForIncrementalQueries}}
+var m_SourceFields = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceFields_member}}
+var mSourceFlowConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceFlowConfig_connectorType, &sSourceFlowConfig_apiVersion, &sSourceFlowConfig_connectorProfileName, &sSourceFlowConfig_sourceConnectorProperties, &sSourceFlowConfig_incrementalPullConfig}}
+var mSuccessResponseHandlingConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sSuccessResponseHandlingConfig_bucketPrefix, &sSuccessResponseHandlingConfig_bucketName}}
+var m_SupportedApiVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedApiVersionList_member}}
+var m_SupportedDataTransferApis = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedDataTransferApis_member}}
+var mSupportedDataTransferType = smithy.SchemaMembers{List: []*smithy.Schema{&sSupportedDataTransferType_RECORD, &sSupportedDataTransferType_FILE}}
+var m_SupportedDataTransferTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedDataTransferTypeList_member}}
+var mSupportedFieldTypeDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sSupportedFieldTypeDetails_v1}}
+var m_SupportedOperatorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedOperatorList_member}}
+var m_SupportedValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedValueList_member}}
+var m_SupportedWriteOperationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedWriteOperationList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTask = smithy.SchemaMembers{List: []*smithy.Schema{&sTask_sourceFields, &sTask_connectorOperator, &sTask_destinationField, &sTask_taskType, &sTask_taskProperties}}
+var m_TaskPropertiesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskPropertiesMap_key, &s_TaskPropertiesMap_value}}
+var m_Tasks = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tasks_member}}
+var mTaskType = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskType_ARITHMETIC, &sTaskType_FILTER, &sTaskType_MAP, &sTaskType_MAP_ALL, &sTaskType_MASK, &sTaskType_MERGE, &sTaskType_PASSTHROUGH, &sTaskType_TRUNCATE, &sTaskType_VALIDATE, &sTaskType_PARTITION}, Seed: 10, Slots: []uint16{
+	0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 8, 0, 0, 4, 0, 10, 5, 3, 1,
+	0, 0, 0, 9, 0, 0, 7, 0,
+}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var m_TokenUrlCustomProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_TokenUrlCustomProperties_key, &s_TokenUrlCustomProperties_value}}
+var m_TokenUrlList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TokenUrlList_member}}
+var mTrendmicroConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sTrendmicroConnectorOperator_PROJECTION, &sTrendmicroConnectorOperator_EQUAL_TO, &sTrendmicroConnectorOperator_ADDITION, &sTrendmicroConnectorOperator_MULTIPLICATION, &sTrendmicroConnectorOperator_DIVISION, &sTrendmicroConnectorOperator_SUBTRACTION, &sTrendmicroConnectorOperator_MASK_ALL, &sTrendmicroConnectorOperator_MASK_FIRST_N, &sTrendmicroConnectorOperator_MASK_LAST_N, &sTrendmicroConnectorOperator_VALIDATE_NON_NULL, &sTrendmicroConnectorOperator_VALIDATE_NON_ZERO, &sTrendmicroConnectorOperator_VALIDATE_NON_NEGATIVE, &sTrendmicroConnectorOperator_VALIDATE_NUMERIC, &sTrendmicroConnectorOperator_NO_OP}, Seed: 27, Slots: []uint16{
+	1, 8, 0, 7, 13, 0, 3, 0, 0, 0, 5, 0, 12, 0, 0, 11, 0, 9, 0, 0, 2, 0, 6, 14,
+	0, 0, 0, 0, 0, 0, 4, 10,
+}}
+var mTrendmicroConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sTrendmicroConnectorProfileCredentials_apiSecretKey}}
+var mTrendmicroSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sTrendmicroSourceProperties_object}}
+var mTriggerConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTriggerConfig_triggerType, &sTriggerConfig_triggerProperties}}
+var mTriggerProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sTriggerProperties_Scheduled}}
+var mTriggerType = smithy.SchemaMembers{List: []*smithy.Schema{&sTriggerType_SCHEDULED, &sTriggerType_EVENT, &sTriggerType_ONDEMAND}}
+var m_TriggerTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TriggerTypeList_member}}
+var mUnsupportedOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedOperationException_message}}
+var mUpsolverDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sUpsolverDestinationProperties_bucketName, &sUpsolverDestinationProperties_bucketPrefix, &sUpsolverDestinationProperties_s3OutputFormatConfig}}
+var mUpsolverS3OutputFormatConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sUpsolverS3OutputFormatConfig_fileType, &sUpsolverS3OutputFormatConfig_prefixConfig, &sUpsolverS3OutputFormatConfig_aggregationConfig}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mVeevaConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sVeevaConnectorOperator_PROJECTION, &sVeevaConnectorOperator_LESS_THAN, &sVeevaConnectorOperator_GREATER_THAN, &sVeevaConnectorOperator_CONTAINS, &sVeevaConnectorOperator_BETWEEN, &sVeevaConnectorOperator_LESS_THAN_OR_EQUAL_TO, &sVeevaConnectorOperator_GREATER_THAN_OR_EQUAL_TO, &sVeevaConnectorOperator_EQUAL_TO, &sVeevaConnectorOperator_NOT_EQUAL_TO, &sVeevaConnectorOperator_ADDITION, &sVeevaConnectorOperator_MULTIPLICATION, &sVeevaConnectorOperator_DIVISION, &sVeevaConnectorOperator_SUBTRACTION, &sVeevaConnectorOperator_MASK_ALL, &sVeevaConnectorOperator_MASK_FIRST_N, &sVeevaConnectorOperator_MASK_LAST_N, &sVeevaConnectorOperator_VALIDATE_NON_NULL, &sVeevaConnectorOperator_VALIDATE_NON_ZERO, &sVeevaConnectorOperator_VALIDATE_NON_NEGATIVE, &sVeevaConnectorOperator_VALIDATE_NUMERIC, &sVeevaConnectorOperator_NO_OP}, Seed: 22, Slots: []uint16{
+	0, 0, 5, 0, 12, 20, 0, 0, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 18, 0, 0, 0, 0,
+	0, 0, 17, 9, 0, 0, 0, 13, 0, 6, 3, 8, 0, 15, 0, 0, 0, 0, 0, 0, 0, 7, 2, 0,
+	0, 0, 21, 14, 10, 0, 16, 0, 0, 0, 0, 19, 0, 0, 11, 0,
+}}
+var mVeevaConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sVeevaConnectorProfileCredentials_username, &sVeevaConnectorProfileCredentials_password}}
+var mVeevaConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sVeevaConnectorProfileProperties_instanceUrl}}
+var mVeevaSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sVeevaSourceProperties_object, &sVeevaSourceProperties_documentType, &sVeevaSourceProperties_includeSourceFiles, &sVeevaSourceProperties_includeRenditions, &sVeevaSourceProperties_includeAllVersions}}
+var mWriteOperationType = smithy.SchemaMembers{List: []*smithy.Schema{&sWriteOperationType_INSERT, &sWriteOperationType_UPSERT, &sWriteOperationType_UPDATE, &sWriteOperationType_DELETE}}
+var mZendeskConnectorOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sZendeskConnectorOperator_PROJECTION, &sZendeskConnectorOperator_GREATER_THAN, &sZendeskConnectorOperator_ADDITION, &sZendeskConnectorOperator_MULTIPLICATION, &sZendeskConnectorOperator_DIVISION, &sZendeskConnectorOperator_SUBTRACTION, &sZendeskConnectorOperator_MASK_ALL, &sZendeskConnectorOperator_MASK_FIRST_N, &sZendeskConnectorOperator_MASK_LAST_N, &sZendeskConnectorOperator_VALIDATE_NON_NULL, &sZendeskConnectorOperator_VALIDATE_NON_ZERO, &sZendeskConnectorOperator_VALIDATE_NON_NEGATIVE, &sZendeskConnectorOperator_VALIDATE_NUMERIC, &sZendeskConnectorOperator_NO_OP}, Seed: 61, Slots: []uint16{
+	0, 2, 0, 0, 0, 8, 3, 0, 0, 13, 4, 0, 7, 0, 14, 5, 12, 0, 1, 11, 0, 6, 0, 0,
+	10, 9, 0, 0, 0, 0, 0, 0,
+}}
+var mZendeskConnectorProfileCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sZendeskConnectorProfileCredentials_clientId, &sZendeskConnectorProfileCredentials_clientSecret, &sZendeskConnectorProfileCredentials_accessToken, &sZendeskConnectorProfileCredentials_oAuthRequest}}
+var mZendeskConnectorProfileProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sZendeskConnectorProfileProperties_instanceUrl}}
+var mZendeskDestinationProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sZendeskDestinationProperties_object, &sZendeskDestinationProperties_idFieldNames, &sZendeskDestinationProperties_errorHandlingConfig, &sZendeskDestinationProperties_writeOperationType}}
+var mZendeskMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sZendeskMetadata_oAuthScopes}}
+var mZendeskSourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sZendeskSourceProperties_object}}
+var mCancelFlowExecutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelFlowExecutionsRequest_flowName, &sCancelFlowExecutionsRequest_executionIds}}
+var mCancelFlowExecutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelFlowExecutionsResponse_invalidExecutions}}
+var mCreateConnectorProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorProfileRequest_connectorProfileName, &sCreateConnectorProfileRequest_kmsArn, &sCreateConnectorProfileRequest_connectorType, &sCreateConnectorProfileRequest_connectorLabel, &sCreateConnectorProfileRequest_connectionMode, &sCreateConnectorProfileRequest_connectorProfileConfig, &sCreateConnectorProfileRequest_clientToken}}
+var mCreateConnectorProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectorProfileResponse_connectorProfileArn}}
+var mCreateFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFlowRequest_flowName, &sCreateFlowRequest_description, &sCreateFlowRequest_kmsArn, &sCreateFlowRequest_triggerConfig, &sCreateFlowRequest_sourceFlowConfig, &sCreateFlowRequest_destinationFlowConfigList, &sCreateFlowRequest_tasks, &sCreateFlowRequest_tags, &sCreateFlowRequest_metadataCatalogConfig, &sCreateFlowRequest_clientToken}, Seed: 2, Slots: []uint16{
+	0, 9, 10, 4, 0, 0, 0, 0, 0, 0, 0, 3, 5, 2, 6, 0, 0, 0, 0, 0, 0, 0, 8, 0,
+	1, 0, 0, 0, 7, 0, 0, 0,
+}}
+var mCreateFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFlowResponse_flowArn, &sCreateFlowResponse_flowStatus}}
+var mDeleteConnectorProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectorProfileRequest_connectorProfileName, &sDeleteConnectorProfileRequest_forceDelete}}
+var mDeleteFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFlowRequest_flowName, &sDeleteFlowRequest_forceDelete}}
+var mDescribeConnectorEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorEntityRequest_connectorEntityName, &sDescribeConnectorEntityRequest_connectorType, &sDescribeConnectorEntityRequest_connectorProfileName, &sDescribeConnectorEntityRequest_apiVersion}}
+var mDescribeConnectorEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorEntityResponse_connectorEntityFields}}
+var mDescribeConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorRequest_connectorType, &sDescribeConnectorRequest_connectorLabel}}
+var mDescribeConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorResponse_connectorConfiguration}}
+var mDescribeConnectorProfilesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorProfilesRequest_connectorProfileNames, &sDescribeConnectorProfilesRequest_connectorType, &sDescribeConnectorProfilesRequest_connectorLabel, &sDescribeConnectorProfilesRequest_maxResults, &sDescribeConnectorProfilesRequest_nextToken}}
+var mDescribeConnectorProfilesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorProfilesResponse_connectorProfileDetails, &sDescribeConnectorProfilesResponse_nextToken}}
+var mDescribeConnectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorsRequest_connectorTypes, &sDescribeConnectorsRequest_maxResults, &sDescribeConnectorsRequest_nextToken}}
+var mDescribeConnectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectorsResponse_connectorConfigurations, &sDescribeConnectorsResponse_connectors, &sDescribeConnectorsResponse_nextToken}}
+var mDescribeFlowExecutionRecordsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFlowExecutionRecordsRequest_flowName, &sDescribeFlowExecutionRecordsRequest_maxResults, &sDescribeFlowExecutionRecordsRequest_nextToken}}
+var mDescribeFlowExecutionRecordsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFlowExecutionRecordsResponse_flowExecutions, &sDescribeFlowExecutionRecordsResponse_nextToken}}
+var mDescribeFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFlowRequest_flowName}}
+var mDescribeFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFlowResponse_flowArn, &sDescribeFlowResponse_description, &sDescribeFlowResponse_flowName, &sDescribeFlowResponse_kmsArn, &sDescribeFlowResponse_flowStatus, &sDescribeFlowResponse_flowStatusMessage, &sDescribeFlowResponse_sourceFlowConfig, &sDescribeFlowResponse_destinationFlowConfigList, &sDescribeFlowResponse_lastRunExecutionDetails, &sDescribeFlowResponse_triggerConfig, &sDescribeFlowResponse_tasks, &sDescribeFlowResponse_createdAt, &sDescribeFlowResponse_lastUpdatedAt, &sDescribeFlowResponse_createdBy, &sDescribeFlowResponse_lastUpdatedBy, &sDescribeFlowResponse_tags, &sDescribeFlowResponse_metadataCatalogConfig, &sDescribeFlowResponse_lastRunMetadataCatalogDetails, &sDescribeFlowResponse_schemaVersion}, Seed: 64, Slots: []uint16{
+	17, 11, 0, 0, 0, 0, 0, 8, 0, 0, 4, 9, 0, 0, 0, 2, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 3, 0, 0, 0, 0, 12, 6, 0, 0, 0, 0, 5, 16, 15, 0, 10, 18, 0, 0, 0, 0,
+	0, 0, 14, 1, 0, 0, 0, 0, 0, 13, 0, 0, 0, 0, 19, 0,
+}}
+var mListConnectorEntitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorEntitiesRequest_connectorProfileName, &sListConnectorEntitiesRequest_connectorType, &sListConnectorEntitiesRequest_entitiesPath, &sListConnectorEntitiesRequest_apiVersion, &sListConnectorEntitiesRequest_maxResults, &sListConnectorEntitiesRequest_nextToken}}
+var mListConnectorEntitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorEntitiesResponse_connectorEntityMap, &sListConnectorEntitiesResponse_nextToken}}
+var mListConnectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsRequest_maxResults, &sListConnectorsRequest_nextToken}}
+var mListConnectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectorsResponse_connectors, &sListConnectorsResponse_nextToken}}
+var mListFlowsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFlowsRequest_maxResults, &sListFlowsRequest_nextToken}}
+var mListFlowsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFlowsResponse_flows, &sListFlowsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterConnectorRequest_connectorLabel, &sRegisterConnectorRequest_description, &sRegisterConnectorRequest_connectorProvisioningType, &sRegisterConnectorRequest_connectorProvisioningConfig, &sRegisterConnectorRequest_clientToken}}
+var mRegisterConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterConnectorResponse_connectorArn}}
+var mResetConnectorMetadataCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetConnectorMetadataCacheRequest_connectorProfileName, &sResetConnectorMetadataCacheRequest_connectorType, &sResetConnectorMetadataCacheRequest_connectorEntityName, &sResetConnectorMetadataCacheRequest_entitiesPath, &sResetConnectorMetadataCacheRequest_apiVersion}}
+var mStartFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartFlowRequest_flowName, &sStartFlowRequest_clientToken}}
+var mStartFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartFlowResponse_flowArn, &sStartFlowResponse_flowStatus, &sStartFlowResponse_executionId}}
+var mStopFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopFlowRequest_flowName}}
+var mStopFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopFlowResponse_flowArn, &sStopFlowResponse_flowStatus}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUnregisterConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUnregisterConnectorRequest_connectorLabel, &sUnregisterConnectorRequest_forceDelete}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateConnectorProfileRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorProfileRequest_connectorProfileName, &sUpdateConnectorProfileRequest_connectionMode, &sUpdateConnectorProfileRequest_connectorProfileConfig, &sUpdateConnectorProfileRequest_clientToken}}
+var mUpdateConnectorProfileResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorProfileResponse_connectorProfileArn}}
+var mUpdateConnectorRegistrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorRegistrationRequest_connectorLabel, &sUpdateConnectorRegistrationRequest_description, &sUpdateConnectorRegistrationRequest_connectorProvisioningConfig, &sUpdateConnectorRegistrationRequest_clientToken}}
+var mUpdateConnectorRegistrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectorRegistrationResponse_connectorArn}}
+var mUpdateFlowRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFlowRequest_flowName, &sUpdateFlowRequest_description, &sUpdateFlowRequest_triggerConfig, &sUpdateFlowRequest_sourceFlowConfig, &sUpdateFlowRequest_destinationFlowConfigList, &sUpdateFlowRequest_tasks, &sUpdateFlowRequest_metadataCatalogConfig, &sUpdateFlowRequest_clientToken}}
+var mUpdateFlowResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFlowResponse_flowStatus}}
+
+var sCancelFlowExecutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelFlowExecutions, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateConnectorProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorProfile, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFlow, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteConnectorProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorProfile, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFlow, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDescribeConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnector, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDescribeConnectorEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorEntity, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDescribeConnectorProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorProfiles, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDescribeConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectors, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDescribeFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlow, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDescribeFlowExecutionRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowExecutionRecords, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sListConnectorEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorEntities, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectors, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sListFlows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlows, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sRegisterConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterConnector, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sResetConnectorMetadataCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetConnectorMetadataCache, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sStartFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlow, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sStopFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFlow, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sUnregisterConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnregisterConnector, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sUpdateConnectorProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorProfile, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sUpdateConnectorRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorRegistration, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sUpdateFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFlow, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var s_SandstoneConfigurationServiceLambda = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SandstoneConfigurationServiceLambda, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var s_AccessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessKeyId, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_AccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessToken, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Type: smithy.ShapeTypeString})
+var sAggregationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregationConfig, Members: &mAggregationConfig, Type: smithy.ShapeTypeStructure})
+var sAggregationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregationType, Members: &mAggregationType, Type: smithy.ShapeTypeEnum})
+var sAmplitudeConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmplitudeConnectorOperator, Members: &mAmplitudeConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sAmplitudeConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmplitudeConnectorProfileCredentials, Members: &mAmplitudeConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sAmplitudeConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmplitudeConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sAmplitudeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmplitudeMetadata, Type: smithy.ShapeTypeStructure})
+var sAmplitudeSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmplitudeSourceProperties, Members: &mAmplitudeSourceProperties, Type: smithy.ShapeTypeStructure})
+var s_ApiKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiKey, Traits: &t26, Type: smithy.ShapeTypeString})
+var sApiKeyCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiKeyCredentials, Members: &mApiKeyCredentials, Type: smithy.ShapeTypeStructure})
+var s_ApiSecretKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiSecretKey, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_ApiToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiToken, Type: smithy.ShapeTypeString})
+var s_ApiVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiVersion, Type: smithy.ShapeTypeString})
+var s_ApplicationHostUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationHostUrl, Type: smithy.ShapeTypeString})
+var s_ApplicationKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationKey, Type: smithy.ShapeTypeString})
+var s_ApplicationServicePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationServicePath, Type: smithy.ShapeTypeString})
+var s_ApplicationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationType, Type: smithy.ShapeTypeString})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString})
+var s_AuthCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthCode, Type: smithy.ShapeTypeString})
+var s_AuthCodeUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthCodeUrl, Type: smithy.ShapeTypeString})
+var s_AuthCodeUrlList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthCodeUrlList, Members: &m_AuthCodeUrlList, Type: smithy.ShapeTypeList})
+var sAuthenticationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationConfig, Members: &mAuthenticationConfig, Type: smithy.ShapeTypeStructure})
+var sAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sAuthParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthParameter, Members: &mAuthParameter, Type: smithy.ShapeTypeStructure})
+var s_AuthParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthParameterList, Members: &m_AuthParameterList, Type: smithy.ShapeTypeList})
+var sBasicAuthCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBasicAuthCredentials, Members: &mBasicAuthCredentials, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var s_BucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var s_BusinessUnitId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessUnitId, Type: smithy.ShapeTypeString})
+var sCatalogType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCatalogType, Members: &mCatalogType, Type: smithy.ShapeTypeEnum})
+var s_ClientCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientCredentialsArn, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_ClientId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var s_ClientNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientNumber, Type: smithy.ShapeTypeString})
+var s_ClientSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientSecret, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var s_ClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString})
+var s_CodeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeVerifier, Traits: &t26, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var sConnectionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionMode, Members: &mConnectionMode, Type: smithy.ShapeTypeEnum})
+var sConnectorAuthenticationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorAuthenticationException, Members: &mConnectorAuthenticationException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var sConnectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorConfiguration, Members: &mConnectorConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ConnectorConfigurationsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorConfigurationsMap, Members: &m_ConnectorConfigurationsMap, Type: smithy.ShapeTypeMap})
+var s_ConnectorDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorDescription, Type: smithy.ShapeTypeString})
+var sConnectorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorDetail, Members: &mConnectorDetail, Type: smithy.ShapeTypeStructure})
+var sConnectorEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorEntity, Members: &mConnectorEntity, Type: smithy.ShapeTypeStructure})
+var sConnectorEntityField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorEntityField, Members: &mConnectorEntityField, Type: smithy.ShapeTypeStructure})
+var s_ConnectorEntityFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorEntityFieldList, Members: &m_ConnectorEntityFieldList, Type: smithy.ShapeTypeList})
+var s_ConnectorEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorEntityList, Members: &m_ConnectorEntityList, Type: smithy.ShapeTypeList})
+var s_ConnectorEntityMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorEntityMap, Members: &m_ConnectorEntityMap, Type: smithy.ShapeTypeMap})
+var s_ConnectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var s_ConnectorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList})
+var sConnectorMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorMetadata, Members: &mConnectorMetadata, Type: smithy.ShapeTypeStructure})
+var s_ConnectorMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorMode, Type: smithy.ShapeTypeString})
+var s_ConnectorModeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorModeList, Members: &m_ConnectorModeList, Type: smithy.ShapeTypeList})
+var s_ConnectorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorName, Type: smithy.ShapeTypeString})
+var sConnectorOAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorOperator, Members: &mConnectorOperator, Type: smithy.ShapeTypeStructure})
+var s_ConnectorOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorOwner, Type: smithy.ShapeTypeString})
+var sConnectorProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorProfile, Members: &mConnectorProfile, Type: smithy.ShapeTypeStructure})
+var s_ConnectorProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorProfileArn, Type: smithy.ShapeTypeString})
+var sConnectorProfileConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorProfileConfig, Members: &mConnectorProfileConfig, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorProfileCredentials, Members: &mConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var s_ConnectorProfileDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorProfileDetailList, Members: &m_ConnectorProfileDetailList, Type: smithy.ShapeTypeList})
+var s_ConnectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var s_ConnectorProfileNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorProfileNameList, Members: &m_ConnectorProfileNameList, Type: smithy.ShapeTypeList})
+var sConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorProfileProperties, Members: &mConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProvisioningConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorProvisioningConfig, Members: &mConnectorProvisioningConfig, Type: smithy.ShapeTypeStructure})
+var sConnectorProvisioningType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorProvisioningType, Members: &mConnectorProvisioningType, Type: smithy.ShapeTypeEnum})
+var sConnectorRuntimeSetting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorRuntimeSetting, Members: &mConnectorRuntimeSetting, Type: smithy.ShapeTypeStructure})
+var s_ConnectorRuntimeSettingDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorRuntimeSettingDataType, Type: smithy.ShapeTypeString})
+var s_ConnectorRuntimeSettingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorRuntimeSettingList, Members: &m_ConnectorRuntimeSettingList, Type: smithy.ShapeTypeList})
+var s_ConnectorRuntimeSettingScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorRuntimeSettingScope, Type: smithy.ShapeTypeString})
+var sConnectorServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorServerException, Members: &mConnectorServerException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var s_ConnectorSuppliedValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorSuppliedValue, Type: smithy.ShapeTypeString})
+var s_ConnectorSuppliedValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorSuppliedValueList, Members: &m_ConnectorSuppliedValueList, Type: smithy.ShapeTypeList})
+var s_ConnectorSuppliedValueOptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorSuppliedValueOptionList, Members: &m_ConnectorSuppliedValueOptionList, Type: smithy.ShapeTypeList})
+var sConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var s_ConnectorTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorTypeList, Members: &m_ConnectorTypeList, Type: smithy.ShapeTypeList})
+var s_ConnectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectorVersion, Type: smithy.ShapeTypeString})
+var s_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var s_CredentialsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CredentialsMap, Members: &m_CredentialsMap, Type: smithy.ShapeTypeMap})
+var s_CredentialsMapKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CredentialsMapKey, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_CredentialsMapValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CredentialsMapValue, Traits: &t26, Type: smithy.ShapeTypeString})
+var sCustomAuthConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAuthConfig, Members: &mCustomAuthConfig, Type: smithy.ShapeTypeStructure})
+var s_CustomAuthConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomAuthConfigList, Members: &m_CustomAuthConfigList, Type: smithy.ShapeTypeList})
+var sCustomAuthCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAuthCredentials, Members: &mCustomAuthCredentials, Type: smithy.ShapeTypeStructure})
+var s_CustomAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomAuthenticationType, Type: smithy.ShapeTypeString})
+var sCustomConnectorDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomConnectorDestinationProperties, Members: &mCustomConnectorDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomConnectorProfileCredentials, Members: &mCustomConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomConnectorProfileProperties, Members: &mCustomConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomConnectorSourceProperties, Members: &mCustomConnectorSourceProperties, Type: smithy.ShapeTypeStructure})
+var sCustomerProfilesDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerProfilesDestinationProperties, Members: &mCustomerProfilesDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sCustomerProfilesMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerProfilesMetadata, Type: smithy.ShapeTypeStructure})
+var s_CustomProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomProperties, Members: &m_CustomProperties, Type: smithy.ShapeTypeMap})
+var s_CustomPropertyKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomPropertyKey, Type: smithy.ShapeTypeString})
+var s_CustomPropertyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomPropertyValue, Type: smithy.ShapeTypeString})
+var s_DataApiRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataApiRoleArn, Type: smithy.ShapeTypeString})
+var s_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseName, Type: smithy.ShapeTypeString})
+var s_DatabaseUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseUrl, Type: smithy.ShapeTypeString})
+var sDatadogConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatadogConnectorOperator, Members: &mDatadogConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sDatadogConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatadogConnectorProfileCredentials, Members: &mDatadogConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatadogConnectorProfileProperties, Members: &mDatadogConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sDatadogMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatadogMetadata, Type: smithy.ShapeTypeStructure})
+var sDatadogSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatadogSourceProperties, Members: &mDatadogSourceProperties, Type: smithy.ShapeTypeStructure})
+var sDataPullMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataPullMode, Members: &mDataPullMode, Type: smithy.ShapeTypeEnum})
+var sDataTransferApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataTransferApi, Members: &mDataTransferApi, Type: smithy.ShapeTypeStructure})
+var sDataTransferApiType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataTransferApiType, Members: &mDataTransferApiType, Type: smithy.ShapeTypeEnum})
+var s_DataTransferApiTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataTransferApiTypeName, Type: smithy.ShapeTypeString})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var s_DatetimeTypeFieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatetimeTypeFieldName, Type: smithy.ShapeTypeString})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDestinationConnectorProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConnectorProperties, Members: &mDestinationConnectorProperties, Type: smithy.ShapeTypeStructure})
+var s_DestinationField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationField, Type: smithy.ShapeTypeString})
+var sDestinationFieldProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationFieldProperties, Members: &mDestinationFieldProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationFlowConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationFlowConfig, Members: &mDestinationFlowConfig, Type: smithy.ShapeTypeStructure})
+var s_DestinationFlowConfigList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationFlowConfigList, Members: &m_DestinationFlowConfigList, Type: smithy.ShapeTypeList})
+var s_DocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DocumentType, Type: smithy.ShapeTypeString})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sDynatraceConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynatraceConnectorOperator, Members: &mDynatraceConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sDynatraceConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynatraceConnectorProfileCredentials, Members: &mDynatraceConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynatraceConnectorProfileProperties, Members: &mDynatraceConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sDynatraceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynatraceMetadata, Type: smithy.ShapeTypeStructure})
+var sDynatraceSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDynatraceSourceProperties, Members: &mDynatraceSourceProperties, Type: smithy.ShapeTypeStructure})
+var s_EntitiesPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitiesPath, Type: smithy.ShapeTypeString})
+var s_EntityName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sErrorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorInfo, Members: &mErrorInfo, Type: smithy.ShapeTypeStructure})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventBridgeDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBridgeDestinationProperties, Members: &mEventBridgeDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sEventBridgeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBridgeMetadata, Type: smithy.ShapeTypeStructure})
+var sExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure})
+var s_ExecutionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var s_ExecutionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionIds, Members: &m_ExecutionIds, Type: smithy.ShapeTypeList})
+var s_ExecutionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExecutionMessage, Type: smithy.ShapeTypeString})
+var sExecutionRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionRecord, Members: &mExecutionRecord, Type: smithy.ShapeTypeStructure})
+var sExecutionResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionResult, Members: &mExecutionResult, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var s_FieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldType, Type: smithy.ShapeTypeString})
+var sFieldTypeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldTypeDetails, Members: &mFieldTypeDetails, Type: smithy.ShapeTypeStructure})
+var sFileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileType, Members: &mFileType, Type: smithy.ShapeTypeEnum})
+var s_FilterOperatorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterOperatorList, Members: &m_FilterOperatorList, Type: smithy.ShapeTypeList})
+var s_FlowArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowArn, Type: smithy.ShapeTypeString})
+var sFlowDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowDefinition, Members: &mFlowDefinition, Type: smithy.ShapeTypeStructure})
+var s_FlowDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowDescription, Type: smithy.ShapeTypeString})
+var s_FlowErrorDeactivationThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowErrorDeactivationThreshold, Type: smithy.ShapeTypeInteger})
+var s_FlowExecutionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowExecutionList, Members: &m_FlowExecutionList, Type: smithy.ShapeTypeList})
+var s_FlowList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowList, Members: &m_FlowList, Type: smithy.ShapeTypeList})
+var s_FlowName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sFlowStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlowStatus, Members: &mFlowStatus, Type: smithy.ShapeTypeEnum})
+var s_FlowStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowStatusMessage, Type: smithy.ShapeTypeString})
+var sGlueDataCatalogConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlueDataCatalogConfig, Members: &mGlueDataCatalogConfig, Type: smithy.ShapeTypeStructure})
+var s_GlueDataCatalogDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueDataCatalogDatabaseName, Type: smithy.ShapeTypeString})
+var s_GlueDataCatalogIAMRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueDataCatalogIAMRole, Type: smithy.ShapeTypeString})
+var s_GlueDataCatalogTablePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlueDataCatalogTablePrefix, Type: smithy.ShapeTypeString})
+var sGoogleAnalyticsConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoogleAnalyticsConnectorOperator, Members: &mGoogleAnalyticsConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sGoogleAnalyticsConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoogleAnalyticsConnectorProfileCredentials, Members: &mGoogleAnalyticsConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sGoogleAnalyticsConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoogleAnalyticsConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sGoogleAnalyticsMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoogleAnalyticsMetadata, Members: &mGoogleAnalyticsMetadata, Type: smithy.ShapeTypeStructure})
+var sGoogleAnalyticsSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoogleAnalyticsSourceProperties, Members: &mGoogleAnalyticsSourceProperties, Type: smithy.ShapeTypeStructure})
+var s_Group = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Group, Type: smithy.ShapeTypeString})
+var sHoneycodeConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHoneycodeConnectorProfileCredentials, Members: &mHoneycodeConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sHoneycodeConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHoneycodeConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sHoneycodeDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHoneycodeDestinationProperties, Members: &mHoneycodeDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sHoneycodeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHoneycodeMetadata, Members: &mHoneycodeMetadata, Type: smithy.ShapeTypeStructure})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var s_IdFieldNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdFieldNameList, Members: &m_IdFieldNameList, Type: smithy.ShapeTypeList})
+var sIncrementalPullConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncrementalPullConfig, Members: &mIncrementalPullConfig, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInforNexusConnectorOperator, Members: &mInforNexusConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sInforNexusConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInforNexusConnectorProfileCredentials, Members: &mInforNexusConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInforNexusConnectorProfileProperties, Members: &mInforNexusConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sInforNexusMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInforNexusMetadata, Type: smithy.ShapeTypeStructure})
+var sInforNexusSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInforNexusSourceProperties, Members: &mInforNexusSourceProperties, Type: smithy.ShapeTypeStructure})
+var s_InstanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t31, Type: smithy.ShapeTypeStructure})
+var s_JavaBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JavaBoolean, Type: smithy.ShapeTypeBoolean})
+var s_JwtToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JwtToken, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Key, Type: smithy.ShapeTypeString})
+var s_KMSArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSArn, Type: smithy.ShapeTypeString})
+var s_Label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Label, Type: smithy.ShapeTypeString})
+var sLambdaConnectorProvisioningConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaConnectorProvisioningConfig, Members: &mLambdaConnectorProvisioningConfig, Type: smithy.ShapeTypeStructure})
+var s_ListEntitiesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEntitiesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_LogonLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogonLanguage, Type: smithy.ShapeTypeString})
+var s_LogoURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogoURL, Type: smithy.ShapeTypeString})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sLookoutMetricsDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLookoutMetricsDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketoConnectorOperator, Members: &mMarketoConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sMarketoConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketoConnectorProfileCredentials, Members: &mMarketoConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketoConnectorProfileProperties, Members: &mMarketoConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sMarketoDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketoDestinationProperties, Members: &mMarketoDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sMarketoMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketoMetadata, Type: smithy.ShapeTypeStructure})
+var sMarketoSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketoSourceProperties, Members: &mMarketoSourceProperties, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMetadataCatalogConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataCatalogConfig, Members: &mMetadataCatalogConfig, Type: smithy.ShapeTypeStructure})
+var sMetadataCatalogDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataCatalogDetail, Members: &mMetadataCatalogDetail, Type: smithy.ShapeTypeStructure})
+var s_MetadataCatalogDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataCatalogDetails, Members: &m_MetadataCatalogDetails, Type: smithy.ShapeTypeList})
+var s_MostRecentExecutionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MostRecentExecutionMessage, Type: smithy.ShapeTypeString})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sOAuth2Credentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2Credentials, Members: &mOAuth2Credentials, Type: smithy.ShapeTypeStructure})
+var sOAuth2CustomParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2CustomParameter, Members: &mOAuth2CustomParameter, Type: smithy.ShapeTypeStructure})
+var s_OAuth2CustomPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuth2CustomPropertiesList, Members: &m_OAuth2CustomPropertiesList, Type: smithy.ShapeTypeList})
+var sOAuth2CustomPropType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2CustomPropType, Members: &mOAuth2CustomPropType, Type: smithy.ShapeTypeEnum})
+var sOAuth2Defaults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2Defaults, Members: &mOAuth2Defaults, Type: smithy.ShapeTypeStructure})
+var sOAuth2GrantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2GrantType, Members: &mOAuth2GrantType, Type: smithy.ShapeTypeEnum})
+var s_OAuth2GrantTypeSupportedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuth2GrantTypeSupportedList, Members: &m_OAuth2GrantTypeSupportedList, Type: smithy.ShapeTypeList})
+var sOAuth2Properties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuth2Properties, Members: &mOAuth2Properties, Type: smithy.ShapeTypeStructure})
+var sOAuthCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuthCredentials, Members: &mOAuthCredentials, Type: smithy.ShapeTypeStructure})
+var sOAuthProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOAuthProperties, Members: &mOAuthProperties, Type: smithy.ShapeTypeStructure})
+var s_OAuthScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuthScope, Type: smithy.ShapeTypeString})
+var s_OAuthScopeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var s_Object = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Object, Type: smithy.ShapeTypeString})
+var s_ObjectTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectTypeName, Type: smithy.ShapeTypeString})
+var sOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum})
+var sOperatorPropertiesKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperatorPropertiesKeys, Members: &mOperatorPropertiesKeys, Type: smithy.ShapeTypeEnum})
+var sOperators = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperators, Members: &mOperators, Type: smithy.ShapeTypeEnum})
+var sPardotConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPardotConnectorOperator, Members: &mPardotConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sPardotConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPardotConnectorProfileCredentials, Members: &mPardotConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPardotConnectorProfileProperties, Members: &mPardotConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sPardotMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPardotMetadata, Type: smithy.ShapeTypeStructure})
+var sPardotSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPardotSourceProperties, Members: &mPardotSourceProperties, Type: smithy.ShapeTypeStructure})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t26, Type: smithy.ShapeTypeString})
+var sPathPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathPrefix, Members: &mPathPrefix, Type: smithy.ShapeTypeEnum})
+var s_PathPrefixHierarchy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathPrefixHierarchy, Members: &m_PathPrefixHierarchy, Type: smithy.ShapeTypeList})
+var s_PortNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sPrefixConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefixConfig, Members: &mPrefixConfig, Type: smithy.ShapeTypeStructure})
+var sPrefixFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefixFormat, Members: &mPrefixFormat, Type: smithy.ShapeTypeEnum})
+var sPrefixType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefixType, Members: &mPrefixType, Type: smithy.ShapeTypeEnum})
+var sPrivateConnectionProvisioningFailureCause = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateConnectionProvisioningFailureCause, Members: &mPrivateConnectionProvisioningFailureCause, Type: smithy.ShapeTypeEnum})
+var s_PrivateConnectionProvisioningFailureMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateConnectionProvisioningFailureMessage, Type: smithy.ShapeTypeString})
+var sPrivateConnectionProvisioningState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateConnectionProvisioningState, Members: &mPrivateConnectionProvisioningState, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateConnectionProvisioningStatus, Members: &mPrivateConnectionProvisioningStatus, Type: smithy.ShapeTypeEnum})
+var s_PrivateKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateKey, Traits: &t26, Type: smithy.ShapeTypeString})
+var s_PrivateLinkServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrivateLinkServiceName, Type: smithy.ShapeTypeString})
+var s_ProfilePropertiesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfilePropertiesMap, Members: &m_ProfilePropertiesMap, Type: smithy.ShapeTypeMap})
+var s_ProfilePropertyKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfilePropertyKey, Type: smithy.ShapeTypeString})
+var s_ProfilePropertyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfilePropertyValue, Type: smithy.ShapeTypeString})
+var s_Property = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Property, Type: smithy.ShapeTypeString})
+var sRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRange, Members: &mRange, Type: smithy.ShapeTypeStructure})
+var s_RedirectUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedirectUri, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftConnectorProfileCredentials, Members: &mRedshiftConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sRedshiftConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftConnectorProfileProperties, Members: &mRedshiftConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sRedshiftDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDestinationProperties, Members: &mRedshiftDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sRedshiftMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftMetadata, Type: smithy.ShapeTypeStructure})
+var s_RefreshToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RefreshToken, Type: smithy.ShapeTypeString})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString})
+var s_RegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var s_RegisteredBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegisteredBy, Type: smithy.ShapeTypeString})
+var sRegistrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationOutput, Members: &mRegistrationOutput, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sS3ConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ConnectorOperator, Members: &mS3ConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sS3DestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationProperties, Members: &mS3DestinationProperties, Type: smithy.ShapeTypeStructure})
+var sS3InputFileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3InputFileType, Members: &mS3InputFileType, Type: smithy.ShapeTypeEnum})
+var sS3InputFormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3InputFormatConfig, Members: &mS3InputFormatConfig, Type: smithy.ShapeTypeStructure})
+var sS3Metadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Metadata, Type: smithy.ShapeTypeStructure})
+var sS3OutputFormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3OutputFormatConfig, Members: &mS3OutputFormatConfig, Type: smithy.ShapeTypeStructure})
+var sS3SourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3SourceProperties, Members: &mS3SourceProperties, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesforceConnectorOperator, Members: &mSalesforceConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sSalesforceConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesforceConnectorProfileCredentials, Members: &mSalesforceConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesforceConnectorProfileProperties, Members: &mSalesforceConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sSalesforceDataTransferApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesforceDataTransferApi, Members: &mSalesforceDataTransferApi, Type: smithy.ShapeTypeEnum})
+var s_SalesforceDataTransferApiList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SalesforceDataTransferApiList, Members: &m_SalesforceDataTransferApiList, Type: smithy.ShapeTypeList})
+var sSalesforceDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesforceDestinationProperties, Members: &mSalesforceDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sSalesforceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesforceMetadata, Members: &mSalesforceMetadata, Type: smithy.ShapeTypeStructure})
+var sSalesforceSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesforceSourceProperties, Members: &mSalesforceSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataConnectorOperator, Members: &mSAPODataConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sSAPODataConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataConnectorProfileCredentials, Members: &mSAPODataConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataConnectorProfileProperties, Members: &mSAPODataConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sSAPODataDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataDestinationProperties, Members: &mSAPODataDestinationProperties, Type: smithy.ShapeTypeStructure})
+var s_SAPODataMaxPageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SAPODataMaxPageSize, Type: smithy.ShapeTypeInteger})
+var s_SAPODataMaxParallelism = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SAPODataMaxParallelism, Type: smithy.ShapeTypeInteger})
+var sSAPODataMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataMetadata, Type: smithy.ShapeTypeStructure})
+var sSAPODataPaginationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataPaginationConfig, Members: &mSAPODataPaginationConfig, Type: smithy.ShapeTypeStructure})
+var sSAPODataParallelismConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataParallelismConfig, Members: &mSAPODataParallelismConfig, Type: smithy.ShapeTypeStructure})
+var sSAPODataSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSAPODataSourceProperties, Members: &mSAPODataSourceProperties, Type: smithy.ShapeTypeStructure})
+var sScheduledTriggerProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledTriggerProperties, Members: &mScheduledTriggerProperties, Type: smithy.ShapeTypeStructure})
+var s_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sScheduleFrequencyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleFrequencyType, Members: &mScheduleFrequencyType, Type: smithy.ShapeTypeEnum})
+var s_ScheduleOffset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleOffset, Type: smithy.ShapeTypeLong})
+var s_SchedulingFrequencyTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchedulingFrequencyTypeList, Members: &m_SchedulingFrequencyTypeList, Type: smithy.ShapeTypeList})
+var s_SecretKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretKey, Traits: &t26, Type: smithy.ShapeTypeString})
+var sServiceNowConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNowConnectorOperator, Members: &mServiceNowConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sServiceNowConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNowConnectorProfileCredentials, Members: &mServiceNowConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNowConnectorProfileProperties, Members: &mServiceNowConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sServiceNowMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNowMetadata, Type: smithy.ShapeTypeStructure})
+var sServiceNowSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNowSourceProperties, Members: &mServiceNowSourceProperties, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingularConnectorOperator, Members: &mSingularConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sSingularConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingularConnectorProfileCredentials, Members: &mSingularConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingularConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sSingularMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingularMetadata, Type: smithy.ShapeTypeStructure})
+var sSingularSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingularSourceProperties, Members: &mSingularSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackConnectorOperator, Members: &mSlackConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sSlackConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackConnectorProfileCredentials, Members: &mSlackConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackConnectorProfileProperties, Members: &mSlackConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sSlackMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackMetadata, Members: &mSlackMetadata, Type: smithy.ShapeTypeStructure})
+var sSlackSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlackSourceProperties, Members: &mSlackSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSnowflakeConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeConnectorProfileCredentials, Members: &mSnowflakeConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sSnowflakeConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeConnectorProfileProperties, Members: &mSnowflakeConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sSnowflakeDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeDestinationProperties, Members: &mSnowflakeDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sSnowflakeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnowflakeMetadata, Members: &mSnowflakeMetadata, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceConnectorProperties, Members: &mSourceConnectorProperties, Type: smithy.ShapeTypeStructure})
+var sSourceFieldProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceFieldProperties, Members: &mSourceFieldProperties, Type: smithy.ShapeTypeStructure})
+var s_SourceFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceFields, Members: &m_SourceFields, Type: smithy.ShapeTypeList})
+var sSourceFlowConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceFlowConfig, Members: &mSourceFlowConfig, Type: smithy.ShapeTypeStructure})
+var s_Stage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Stage, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sSuccessResponseHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessResponseHandlingConfig, Members: &mSuccessResponseHandlingConfig, Type: smithy.ShapeTypeStructure})
+var s_SupportedApiVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedApiVersion, Type: smithy.ShapeTypeString})
+var s_SupportedApiVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedApiVersionList, Members: &m_SupportedApiVersionList, Type: smithy.ShapeTypeList})
+var s_SupportedDataTransferApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedDataTransferApis, Members: &m_SupportedDataTransferApis, Type: smithy.ShapeTypeList})
+var sSupportedDataTransferType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedDataTransferType, Members: &mSupportedDataTransferType, Type: smithy.ShapeTypeEnum})
+var s_SupportedDataTransferTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedDataTransferTypeList, Members: &m_SupportedDataTransferTypeList, Type: smithy.ShapeTypeList})
+var sSupportedFieldTypeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedFieldTypeDetails, Members: &mSupportedFieldTypeDetails, Type: smithy.ShapeTypeStructure})
+var s_SupportedOperatorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedOperatorList, Members: &m_SupportedOperatorList, Type: smithy.ShapeTypeList})
+var s_SupportedValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedValueList, Members: &m_SupportedValueList, Type: smithy.ShapeTypeList})
+var s_SupportedWriteOperationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedWriteOperationList, Members: &m_SupportedWriteOperationList, Type: smithy.ShapeTypeList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTask, Members: &mTask, Type: smithy.ShapeTypeStructure})
+var s_TaskPropertiesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskPropertiesMap, Members: &m_TaskPropertiesMap, Type: smithy.ShapeTypeMap})
+var s_Tasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tasks, Members: &m_Tasks, Type: smithy.ShapeTypeList})
+var sTaskType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskType, Members: &mTaskType, Type: smithy.ShapeTypeEnum})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var s_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timezone, Type: smithy.ShapeTypeString})
+var s_TokenUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenUrl, Type: smithy.ShapeTypeString})
+var s_TokenUrlCustomProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenUrlCustomProperties, Members: &m_TokenUrlCustomProperties, Type: smithy.ShapeTypeMap})
+var s_TokenUrlList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TokenUrlList, Members: &m_TokenUrlList, Type: smithy.ShapeTypeList})
+var sTrendmicroConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrendmicroConnectorOperator, Members: &mTrendmicroConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sTrendmicroConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrendmicroConnectorProfileCredentials, Members: &mTrendmicroConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrendmicroConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sTrendmicroMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrendmicroMetadata, Type: smithy.ShapeTypeStructure})
+var sTrendmicroSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrendmicroSourceProperties, Members: &mTrendmicroSourceProperties, Type: smithy.ShapeTypeStructure})
+var sTriggerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerConfig, Members: &mTriggerConfig, Type: smithy.ShapeTypeStructure})
+var sTriggerProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerProperties, Members: &mTriggerProperties, Type: smithy.ShapeTypeStructure})
+var sTriggerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum})
+var s_TriggerTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TriggerTypeList, Members: &m_TriggerTypeList, Type: smithy.ShapeTypeList})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var s_UpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdatedBy, Type: smithy.ShapeTypeString})
+var s_UpsolverBucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpsolverBucketName, Type: smithy.ShapeTypeString})
+var sUpsolverDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpsolverDestinationProperties, Members: &mUpsolverDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sUpsolverMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpsolverMetadata, Type: smithy.ShapeTypeStructure})
+var sUpsolverS3OutputFormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpsolverS3OutputFormatConfig, Members: &mUpsolverS3OutputFormatConfig, Type: smithy.ShapeTypeStructure})
+var s_Username = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Username, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString})
+var sVeevaConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVeevaConnectorOperator, Members: &mVeevaConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sVeevaConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVeevaConnectorProfileCredentials, Members: &mVeevaConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVeevaConnectorProfileProperties, Members: &mVeevaConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sVeevaMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVeevaMetadata, Type: smithy.ShapeTypeStructure})
+var sVeevaSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVeevaSourceProperties, Members: &mVeevaSourceProperties, Type: smithy.ShapeTypeStructure})
+var s_Warehouse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Warehouse, Type: smithy.ShapeTypeString})
+var s_WorkgroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkgroupName, Type: smithy.ShapeTypeString})
+var sWriteOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWriteOperationType, Members: &mWriteOperationType, Type: smithy.ShapeTypeEnum})
+var sZendeskConnectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZendeskConnectorOperator, Members: &mZendeskConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sZendeskConnectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZendeskConnectorProfileCredentials, Members: &mZendeskConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZendeskConnectorProfileProperties, Members: &mZendeskConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sZendeskDestinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZendeskDestinationProperties, Members: &mZendeskDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sZendeskMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZendeskMetadata, Members: &mZendeskMetadata, Type: smithy.ShapeTypeStructure})
+var sZendeskSourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iZendeskSourceProperties, Members: &mZendeskSourceProperties, Type: smithy.ShapeTypeStructure})
+var sCancelFlowExecutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelFlowExecutionsRequest, Members: &mCancelFlowExecutionsRequest, Type: smithy.ShapeTypeStructure})
+var sCancelFlowExecutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelFlowExecutionsResponse, Members: &mCancelFlowExecutionsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorProfileRequest, Members: &mCreateConnectorProfileRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectorProfileResponse, Members: &mCreateConnectorProfileResponse, Type: smithy.ShapeTypeStructure})
+var sCreateFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFlowRequest, Members: &mCreateFlowRequest, Type: smithy.ShapeTypeStructure})
+var sCreateFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFlowResponse, Members: &mCreateFlowResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectorProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorProfileRequest, Members: &mDeleteConnectorProfileRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectorProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectorProfileResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFlowRequest, Members: &mDeleteFlowRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFlowResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorEntityRequest, Members: &mDescribeConnectorEntityRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorEntityResponse, Members: &mDescribeConnectorEntityResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorRequest, Members: &mDescribeConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorResponse, Members: &mDescribeConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorProfilesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorProfilesRequest, Members: &mDescribeConnectorProfilesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorProfilesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorProfilesResponse, Members: &mDescribeConnectorProfilesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorsRequest, Members: &mDescribeConnectorsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectorsResponse, Members: &mDescribeConnectorsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowExecutionRecordsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowExecutionRecordsRequest, Members: &mDescribeFlowExecutionRecordsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowExecutionRecordsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowExecutionRecordsResponse, Members: &mDescribeFlowExecutionRecordsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowRequest, Members: &mDescribeFlowRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFlowResponse, Members: &mDescribeFlowResponse, Type: smithy.ShapeTypeStructure})
+var sListConnectorEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorEntitiesRequest, Members: &mListConnectorEntitiesRequest, Type: smithy.ShapeTypeStructure})
+var sListConnectorEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorEntitiesResponse, Members: &mListConnectorEntitiesResponse, Type: smithy.ShapeTypeStructure})
+var sListConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsRequest, Members: &mListConnectorsRequest, Type: smithy.ShapeTypeStructure})
+var sListConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectorsResponse, Members: &mListConnectorsResponse, Type: smithy.ShapeTypeStructure})
+var sListFlowsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowsRequest, Members: &mListFlowsRequest, Type: smithy.ShapeTypeStructure})
+var sListFlowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFlowsResponse, Members: &mListFlowsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterConnectorRequest, Members: &mRegisterConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterConnectorResponse, Members: &mRegisterConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sResetConnectorMetadataCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetConnectorMetadataCacheRequest, Members: &mResetConnectorMetadataCacheRequest, Type: smithy.ShapeTypeStructure})
+var sResetConnectorMetadataCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetConnectorMetadataCacheResponse, Type: smithy.ShapeTypeStructure})
+var sStartFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowRequest, Members: &mStartFlowRequest, Type: smithy.ShapeTypeStructure})
+var sStartFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartFlowResponse, Members: &mStartFlowResponse, Type: smithy.ShapeTypeStructure})
+var sStopFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFlowRequest, Members: &mStopFlowRequest, Type: smithy.ShapeTypeStructure})
+var sStopFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopFlowResponse, Members: &mStopFlowResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUnregisterConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnregisterConnectorRequest, Members: &mUnregisterConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sUnregisterConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnregisterConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorProfileRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorProfileRequest, Members: &mUpdateConnectorProfileRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorProfileResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorProfileResponse, Members: &mUpdateConnectorProfileResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorRegistrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorRegistrationRequest, Members: &mUpdateConnectorRegistrationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorRegistrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectorRegistrationResponse, Members: &mUpdateConnectorRegistrationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateFlowRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFlowRequest, Members: &mUpdateFlowRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateFlowResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFlowResponse, Members: &mUpdateFlowResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAggregationConfig_aggregationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationType", ID: &iAggregationType, Members: &mAggregationType, Type: smithy.ShapeTypeEnum})
+var sAggregationConfig_targetFileSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetFileSize", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sAggregationType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAggregationType_SINGLE_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmplitudeConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmplitudeConnectorProfileCredentials_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &i_ApiKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var sAmplitudeConnectorProfileCredentials_secretKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretKey", ID: &i_SecretKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var sAmplitudeSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sApiKeyCredentials_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &i_ApiKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var sApiKeyCredentials_apiSecretKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiSecretKey", ID: &i_ApiSecretKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var s_AuthCodeUrlList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AuthCodeUrl, Type: smithy.ShapeTypeString})
+var sAuthenticationConfig_isBasicAuthSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isBasicAuthSupported", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAuthenticationConfig_isApiKeyAuthSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isApiKeyAuthSupported", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAuthenticationConfig_isOAuth2Supported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isOAuth2Supported", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAuthenticationConfig_isCustomAuthSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCustomAuthSupported", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAuthenticationConfig_oAuth2Defaults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuth2Defaults", ID: &iOAuth2Defaults, Members: &mOAuth2Defaults, Type: smithy.ShapeTypeStructure})
+var sAuthenticationConfig_customAuthConfigs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customAuthConfigs", ID: &i_CustomAuthConfigList, Members: &m_CustomAuthConfigList, Type: smithy.ShapeTypeList})
+var sAuthenticationType_OAUTH2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OAUTH2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthenticationType_APIKEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APIKEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthenticationType_BASIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BASIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthenticationType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sAuthParameter_isRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRequired", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAuthParameter_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sAuthParameter_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sAuthParameter_isSensitiveField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSensitiveField", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAuthParameter_connectorSuppliedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorSuppliedValues", ID: &i_ConnectorSuppliedValueList, Members: &m_ConnectorSuppliedValueList, Type: smithy.ShapeTypeList})
+var s_AuthParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuthParameter, Members: &mAuthParameter, Type: smithy.ShapeTypeStructure})
+var sBasicAuthCredentials_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_Username, Type: smithy.ShapeTypeString})
+var sBasicAuthCredentials_password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "password", ID: &i_Password, Traits: &t27, Type: smithy.ShapeTypeString})
+var sCatalogType_GLUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConnectionMode_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionMode_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorAuthenticationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_canUseAsSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canUseAsSource", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorConfiguration_canUseAsDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canUseAsDestination", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorConfiguration_supportedDestinationConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedDestinationConnectors", ID: &i_ConnectorTypeList, Members: &m_ConnectorTypeList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_supportedSchedulingFrequencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedSchedulingFrequencies", ID: &i_SchedulingFrequencyTypeList, Members: &m_SchedulingFrequencyTypeList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_isPrivateLinkEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrivateLinkEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorConfiguration_isPrivateLinkEndpointUrlRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrivateLinkEndpointUrlRequired", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorConfiguration_supportedTriggerTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedTriggerTypes", ID: &i_TriggerTypeList, Members: &m_TriggerTypeList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_connectorMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorMetadata", ID: &iConnectorMetadata, Members: &mConnectorMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorConfiguration_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sConnectorConfiguration_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_connectorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorDescription", ID: &i_ConnectorDescription, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_connectorOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOwner", ID: &i_ConnectorOwner, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_connectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorName", ID: &i_ConnectorName, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_connectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorVersion", ID: &i_ConnectorVersion, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_connectorModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorModes", ID: &i_ConnectorModeList, Members: &m_ConnectorModeList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_authenticationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationConfig", ID: &iAuthenticationConfig, Members: &mAuthenticationConfig, Type: smithy.ShapeTypeStructure})
+var sConnectorConfiguration_connectorRuntimeSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorRuntimeSettings", ID: &i_ConnectorRuntimeSettingList, Members: &m_ConnectorRuntimeSettingList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_supportedApiVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedApiVersions", ID: &i_SupportedApiVersionList, Members: &m_SupportedApiVersionList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_supportedOperators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedOperators", ID: &i_SupportedOperatorList, Members: &m_SupportedOperatorList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_supportedWriteOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedWriteOperations", ID: &i_SupportedWriteOperationList, Members: &m_SupportedWriteOperationList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_connectorProvisioningType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProvisioningType", ID: &iConnectorProvisioningType, Members: &mConnectorProvisioningType, Type: smithy.ShapeTypeEnum})
+var sConnectorConfiguration_connectorProvisioningConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProvisioningConfig", ID: &iConnectorProvisioningConfig, Members: &mConnectorProvisioningConfig, Type: smithy.ShapeTypeStructure})
+var sConnectorConfiguration_logoURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logoURL", ID: &i_LogoURL, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_registeredAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registeredAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sConnectorConfiguration_registeredBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registeredBy", ID: &i_RegisteredBy, Type: smithy.ShapeTypeString})
+var sConnectorConfiguration_supportedDataTransferTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedDataTransferTypes", ID: &i_SupportedDataTransferTypeList, Members: &m_SupportedDataTransferTypeList, Type: smithy.ShapeTypeList})
+var sConnectorConfiguration_supportedDataTransferApis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedDataTransferApis", ID: &i_SupportedDataTransferApis, Members: &m_SupportedDataTransferApis, Type: smithy.ShapeTypeList})
+var s_ConnectorConfigurationsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var s_ConnectorConfigurationsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iConnectorConfiguration, Members: &mConnectorConfiguration, Type: smithy.ShapeTypeStructure})
+var sConnectorDetail_connectorDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorDescription", ID: &i_ConnectorDescription, Type: smithy.ShapeTypeString})
+var sConnectorDetail_connectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorName", ID: &i_ConnectorName, Type: smithy.ShapeTypeString})
+var sConnectorDetail_connectorOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOwner", ID: &i_ConnectorOwner, Type: smithy.ShapeTypeString})
+var sConnectorDetail_connectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorVersion", ID: &i_ConnectorVersion, Type: smithy.ShapeTypeString})
+var sConnectorDetail_applicationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationType", ID: &i_ApplicationType, Type: smithy.ShapeTypeString})
+var sConnectorDetail_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sConnectorDetail_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sConnectorDetail_registeredAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registeredAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sConnectorDetail_registeredBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registeredBy", ID: &i_RegisteredBy, Type: smithy.ShapeTypeString})
+var sConnectorDetail_connectorProvisioningType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProvisioningType", ID: &iConnectorProvisioningType, Members: &mConnectorProvisioningType, Type: smithy.ShapeTypeEnum})
+var sConnectorDetail_connectorModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorModes", ID: &i_ConnectorModeList, Members: &m_ConnectorModeList, Type: smithy.ShapeTypeList})
+var sConnectorDetail_supportedDataTransferTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedDataTransferTypes", ID: &i_SupportedDataTransferTypeList, Members: &m_SupportedDataTransferTypeList, Type: smithy.ShapeTypeList})
+var sConnectorEntity_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sConnectorEntity_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sConnectorEntity_hasNestedEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasNestedEntities", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorEntityField_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sConnectorEntityField_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sConnectorEntityField_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sConnectorEntityField_isPrimaryKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPrimaryKey", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorEntityField_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConnectorEntityField_isDeprecated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isDeprecated", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorEntityField_supportedFieldTypeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedFieldTypeDetails", ID: &iSupportedFieldTypeDetails, Members: &mSupportedFieldTypeDetails, Type: smithy.ShapeTypeStructure})
+var sConnectorEntityField_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sConnectorEntityField_sourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceProperties", ID: &iSourceFieldProperties, Members: &mSourceFieldProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorEntityField_destinationProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationProperties", ID: &iDestinationFieldProperties, Members: &mDestinationFieldProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorEntityField_customProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customProperties", ID: &i_CustomProperties, Members: &m_CustomProperties, Type: smithy.ShapeTypeMap})
+var s_ConnectorEntityFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorEntityField, Members: &mConnectorEntityField, Type: smithy.ShapeTypeStructure})
+var s_ConnectorEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorEntity, Members: &mConnectorEntity, Type: smithy.ShapeTypeStructure})
+var s_ConnectorEntityMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Group, Type: smithy.ShapeTypeString})
+var s_ConnectorEntityMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ConnectorEntityList, Members: &m_ConnectorEntityList, Type: smithy.ShapeTypeList})
+var s_ConnectorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorDetail, Members: &mConnectorDetail, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Amplitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amplitude", ID: &iAmplitudeMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Datadog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datadog", ID: &iDatadogMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Dynatrace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dynatrace", ID: &iDynatraceMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_GoogleAnalytics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GoogleAnalytics", ID: &iGoogleAnalyticsMetadata, Members: &mGoogleAnalyticsMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_InforNexus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InforNexus", ID: &iInforNexusMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Marketo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketo", ID: &iMarketoMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Redshift = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Redshift", ID: &iRedshiftMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3Metadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Salesforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Salesforce", ID: &iSalesforceMetadata, Members: &mSalesforceMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_ServiceNow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNow", ID: &iServiceNowMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Singular = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Singular", ID: &iSingularMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Slack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slack", ID: &iSlackMetadata, Members: &mSlackMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Snowflake = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snowflake", ID: &iSnowflakeMetadata, Members: &mSnowflakeMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Trendmicro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trendmicro", ID: &iTrendmicroMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Veeva = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Veeva", ID: &iVeevaMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Zendesk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zendesk", ID: &iZendeskMetadata, Members: &mZendeskMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_EventBridge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBridge", ID: &iEventBridgeMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Upsolver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Upsolver", ID: &iUpsolverMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_CustomerProfiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerProfiles", ID: &iCustomerProfilesMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Honeycode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Honeycode", ID: &iHoneycodeMetadata, Members: &mHoneycodeMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_SAPOData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPOData", ID: &iSAPODataMetadata, Type: smithy.ShapeTypeStructure})
+var sConnectorMetadata_Pardot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pardot", ID: &iPardotMetadata, Type: smithy.ShapeTypeStructure})
+var s_ConnectorModeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectorMode, Type: smithy.ShapeTypeString})
+var sConnectorOAuthRequest_authCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authCode", ID: &i_AuthCode, Type: smithy.ShapeTypeString})
+var sConnectorOAuthRequest_redirectUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "redirectUri", ID: &i_RedirectUri, Type: smithy.ShapeTypeString})
+var sConnectorOAuthRequest_codeVerifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeVerifier", ID: &i_CodeVerifier, Traits: &t27, Type: smithy.ShapeTypeString})
+var sConnectorOperator_Amplitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amplitude", ID: &iAmplitudeConnectorOperator, Members: &mAmplitudeConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Datadog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datadog", ID: &iDatadogConnectorOperator, Members: &mDatadogConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Dynatrace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dynatrace", ID: &iDynatraceConnectorOperator, Members: &mDynatraceConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_GoogleAnalytics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GoogleAnalytics", ID: &iGoogleAnalyticsConnectorOperator, Members: &mGoogleAnalyticsConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_InforNexus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InforNexus", ID: &iInforNexusConnectorOperator, Members: &mInforNexusConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Marketo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketo", ID: &iMarketoConnectorOperator, Members: &mMarketoConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3ConnectorOperator, Members: &mS3ConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Salesforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Salesforce", ID: &iSalesforceConnectorOperator, Members: &mSalesforceConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_ServiceNow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNow", ID: &iServiceNowConnectorOperator, Members: &mServiceNowConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Singular = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Singular", ID: &iSingularConnectorOperator, Members: &mSingularConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Slack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slack", ID: &iSlackConnectorOperator, Members: &mSlackConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Trendmicro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trendmicro", ID: &iTrendmicroConnectorOperator, Members: &mTrendmicroConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Veeva = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Veeva", ID: &iVeevaConnectorOperator, Members: &mVeevaConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Zendesk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zendesk", ID: &iZendeskConnectorOperator, Members: &mZendeskConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_SAPOData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPOData", ID: &iSAPODataConnectorOperator, Members: &mSAPODataConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_CustomConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomConnector", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorOperator_Pardot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pardot", ID: &iPardotConnectorOperator, Members: &mPardotConnectorOperator, Type: smithy.ShapeTypeEnum})
+var sConnectorProfile_connectorProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileArn", ID: &i_ConnectorProfileArn, Type: smithy.ShapeTypeString})
+var sConnectorProfile_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sConnectorProfile_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sConnectorProfile_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sConnectorProfile_connectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionMode", ID: &iConnectionMode, Members: &mConnectionMode, Type: smithy.ShapeTypeEnum})
+var sConnectorProfile_credentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentialsArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sConnectorProfile_connectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileProperties", ID: &iConnectorProfileProperties, Members: &mConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfile_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sConnectorProfile_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sConnectorProfile_privateConnectionProvisioningState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateConnectionProvisioningState", ID: &iPrivateConnectionProvisioningState, Members: &mPrivateConnectionProvisioningState, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileConfig_connectorProfileProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileProperties", ID: &iConnectorProfileProperties, Members: &mConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileConfig_connectorProfileCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileCredentials", ID: &iConnectorProfileCredentials, Members: &mConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Amplitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amplitude", ID: &iAmplitudeConnectorProfileCredentials, Members: &mAmplitudeConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Datadog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datadog", ID: &iDatadogConnectorProfileCredentials, Members: &mDatadogConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Dynatrace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dynatrace", ID: &iDynatraceConnectorProfileCredentials, Members: &mDynatraceConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_GoogleAnalytics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GoogleAnalytics", ID: &iGoogleAnalyticsConnectorProfileCredentials, Members: &mGoogleAnalyticsConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Honeycode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Honeycode", ID: &iHoneycodeConnectorProfileCredentials, Members: &mHoneycodeConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_InforNexus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InforNexus", ID: &iInforNexusConnectorProfileCredentials, Members: &mInforNexusConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Marketo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketo", ID: &iMarketoConnectorProfileCredentials, Members: &mMarketoConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Redshift = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Redshift", ID: &iRedshiftConnectorProfileCredentials, Members: &mRedshiftConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Salesforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Salesforce", ID: &iSalesforceConnectorProfileCredentials, Members: &mSalesforceConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_ServiceNow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNow", ID: &iServiceNowConnectorProfileCredentials, Members: &mServiceNowConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Singular = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Singular", ID: &iSingularConnectorProfileCredentials, Members: &mSingularConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Slack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slack", ID: &iSlackConnectorProfileCredentials, Members: &mSlackConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Snowflake = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snowflake", ID: &iSnowflakeConnectorProfileCredentials, Members: &mSnowflakeConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Trendmicro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trendmicro", ID: &iTrendmicroConnectorProfileCredentials, Members: &mTrendmicroConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Veeva = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Veeva", ID: &iVeevaConnectorProfileCredentials, Members: &mVeevaConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Zendesk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zendesk", ID: &iZendeskConnectorProfileCredentials, Members: &mZendeskConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_SAPOData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPOData", ID: &iSAPODataConnectorProfileCredentials, Members: &mSAPODataConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_CustomConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomConnector", ID: &iCustomConnectorProfileCredentials, Members: &mCustomConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileCredentials_Pardot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pardot", ID: &iPardotConnectorProfileCredentials, Members: &mPardotConnectorProfileCredentials, Type: smithy.ShapeTypeStructure})
+var s_ConnectorProfileDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorProfile, Members: &mConnectorProfile, Type: smithy.ShapeTypeStructure})
+var s_ConnectorProfileNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sConnectorProfileProperties_Amplitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amplitude", ID: &iAmplitudeConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Datadog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datadog", ID: &iDatadogConnectorProfileProperties, Members: &mDatadogConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Dynatrace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dynatrace", ID: &iDynatraceConnectorProfileProperties, Members: &mDynatraceConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_GoogleAnalytics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GoogleAnalytics", ID: &iGoogleAnalyticsConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Honeycode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Honeycode", ID: &iHoneycodeConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_InforNexus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InforNexus", ID: &iInforNexusConnectorProfileProperties, Members: &mInforNexusConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Marketo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketo", ID: &iMarketoConnectorProfileProperties, Members: &mMarketoConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Redshift = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Redshift", ID: &iRedshiftConnectorProfileProperties, Members: &mRedshiftConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Salesforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Salesforce", ID: &iSalesforceConnectorProfileProperties, Members: &mSalesforceConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_ServiceNow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNow", ID: &iServiceNowConnectorProfileProperties, Members: &mServiceNowConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Singular = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Singular", ID: &iSingularConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Slack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slack", ID: &iSlackConnectorProfileProperties, Members: &mSlackConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Snowflake = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snowflake", ID: &iSnowflakeConnectorProfileProperties, Members: &mSnowflakeConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Trendmicro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trendmicro", ID: &iTrendmicroConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Veeva = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Veeva", ID: &iVeevaConnectorProfileProperties, Members: &mVeevaConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Zendesk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zendesk", ID: &iZendeskConnectorProfileProperties, Members: &mZendeskConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_SAPOData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPOData", ID: &iSAPODataConnectorProfileProperties, Members: &mSAPODataConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_CustomConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomConnector", ID: &iCustomConnectorProfileProperties, Members: &mCustomConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProfileProperties_Pardot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pardot", ID: &iPardotConnectorProfileProperties, Members: &mPardotConnectorProfileProperties, Type: smithy.ShapeTypeStructure})
+var sConnectorProvisioningConfig_lambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambda", ID: &iLambdaConnectorProvisioningConfig, Members: &mLambdaConnectorProvisioningConfig, Type: smithy.ShapeTypeStructure})
+var sConnectorProvisioningType_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorRuntimeSetting_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sConnectorRuntimeSetting_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &i_ConnectorRuntimeSettingDataType, Type: smithy.ShapeTypeString})
+var sConnectorRuntimeSetting_isRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRequired", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConnectorRuntimeSetting_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sConnectorRuntimeSetting_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sConnectorRuntimeSetting_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_ConnectorRuntimeSettingScope, Type: smithy.ShapeTypeString})
+var sConnectorRuntimeSetting_connectorSuppliedValueOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorSuppliedValueOptions", ID: &i_ConnectorSuppliedValueOptionList, Members: &m_ConnectorSuppliedValueOptionList, Type: smithy.ShapeTypeList})
+var s_ConnectorRuntimeSettingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorRuntimeSetting, Members: &mConnectorRuntimeSetting, Type: smithy.ShapeTypeStructure})
+var sConnectorServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ConnectorSuppliedValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectorSuppliedValue, Type: smithy.ShapeTypeString})
+var s_ConnectorSuppliedValueOptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectorSuppliedValue, Type: smithy.ShapeTypeString})
+var sConnectorType_SALESFORCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SALESFORCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_SINGULAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGULAR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_SLACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_REDSHIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDSHIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_MARKETO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MARKETO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_GOOGLEANALYTICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOOGLEANALYTICS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_ZENDESK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZENDESK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_SERVICENOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICENOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_DATADOG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATADOG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_TRENDMICRO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRENDMICRO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_SNOWFLAKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNOWFLAKE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_DYNATRACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNATRACE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_INFORNEXUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFORNEXUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_AMPLITUDE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMPLITUDE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_VEEVA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VEEVA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_EVENTBRIDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENTBRIDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_LOOKOUTMETRICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOOKOUTMETRICS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_UPSOLVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPSOLVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_HONEYCODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HONEYCODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_CUSTOMERPROFILES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMERPROFILES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_SAPODATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPODATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_CUSTOMCONNECTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMCONNECTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectorType_PARDOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARDOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ConnectorTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var s_CredentialsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CredentialsMapKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var s_CredentialsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_CredentialsMapValue, Traits: &t27, Type: smithy.ShapeTypeString})
+var sCustomAuthConfig_customAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customAuthenticationType", ID: &i_CustomAuthenticationType, Type: smithy.ShapeTypeString})
+var sCustomAuthConfig_authParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authParameters", ID: &i_AuthParameterList, Members: &m_AuthParameterList, Type: smithy.ShapeTypeList})
+var s_CustomAuthConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomAuthConfig, Members: &mCustomAuthConfig, Type: smithy.ShapeTypeStructure})
+var sCustomAuthCredentials_customAuthenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customAuthenticationType", ID: &i_CustomAuthenticationType, Type: smithy.ShapeTypeString})
+var sCustomAuthCredentials_credentialsMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentialsMap", ID: &i_CredentialsMap, Members: &m_CredentialsMap, Type: smithy.ShapeTypeMap})
+var sCustomConnectorDestinationProperties_entityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCustomConnectorDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorDestinationProperties_writeOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeOperationType", ID: &iWriteOperationType, Members: &mWriteOperationType, Type: smithy.ShapeTypeEnum})
+var sCustomConnectorDestinationProperties_idFieldNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idFieldNames", ID: &i_IdFieldNameList, Members: &m_IdFieldNameList, Type: smithy.ShapeTypeList})
+var sCustomConnectorDestinationProperties_customProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customProperties", ID: &i_CustomProperties, Members: &m_CustomProperties, Type: smithy.ShapeTypeMap})
+var sCustomConnectorProfileCredentials_authenticationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authenticationType", ID: &iAuthenticationType, Members: &mAuthenticationType, Type: smithy.ShapeTypeEnum})
+var sCustomConnectorProfileCredentials_basic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basic", ID: &iBasicAuthCredentials, Members: &mBasicAuthCredentials, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorProfileCredentials_oauth2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oauth2", ID: &iOAuth2Credentials, Members: &mOAuth2Credentials, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorProfileCredentials_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &iApiKeyCredentials, Members: &mApiKeyCredentials, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorProfileCredentials_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomAuthCredentials, Members: &mCustomAuthCredentials, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorProfileProperties_profileProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "profileProperties", ID: &i_ProfilePropertiesMap, Members: &m_ProfilePropertiesMap, Type: smithy.ShapeTypeMap})
+var sCustomConnectorProfileProperties_oAuth2Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuth2Properties", ID: &iOAuth2Properties, Members: &mOAuth2Properties, Type: smithy.ShapeTypeStructure})
+var sCustomConnectorSourceProperties_entityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCustomConnectorSourceProperties_customProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customProperties", ID: &i_CustomProperties, Members: &m_CustomProperties, Type: smithy.ShapeTypeMap})
+var sCustomConnectorSourceProperties_dataTransferApi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataTransferApi", ID: &iDataTransferApi, Members: &mDataTransferApi, Type: smithy.ShapeTypeStructure})
+var sCustomerProfilesDestinationProperties_domainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCustomerProfilesDestinationProperties_objectTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectTypeName", ID: &i_ObjectTypeName, Type: smithy.ShapeTypeString})
+var s_CustomProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CustomPropertyKey, Type: smithy.ShapeTypeString})
+var s_CustomProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_CustomPropertyValue, Type: smithy.ShapeTypeString})
+var sDatadogConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDatadogConnectorProfileCredentials_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &i_ApiKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var sDatadogConnectorProfileCredentials_applicationKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationKey", ID: &i_ApplicationKey, Type: smithy.ShapeTypeString})
+var sDatadogConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sDatadogSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sDataPullMode_INCREMENTAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCREMENTAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataPullMode_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataTransferApi_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_DataTransferApiTypeName, Type: smithy.ShapeTypeString})
+var sDataTransferApi_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDataTransferApiType, Members: &mDataTransferApiType, Type: smithy.ShapeTypeEnum})
+var sDataTransferApiType_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataTransferApiType_ASYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataTransferApiType_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_Redshift = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Redshift", ID: &iRedshiftDestinationProperties, Members: &mRedshiftDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3DestinationProperties, Members: &mS3DestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_Salesforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Salesforce", ID: &iSalesforceDestinationProperties, Members: &mSalesforceDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_Snowflake = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snowflake", ID: &iSnowflakeDestinationProperties, Members: &mSnowflakeDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_EventBridge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBridge", ID: &iEventBridgeDestinationProperties, Members: &mEventBridgeDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_LookoutMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LookoutMetrics", ID: &iLookoutMetricsDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_Upsolver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Upsolver", ID: &iUpsolverDestinationProperties, Members: &mUpsolverDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_Honeycode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Honeycode", ID: &iHoneycodeDestinationProperties, Members: &mHoneycodeDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_CustomerProfiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerProfiles", ID: &iCustomerProfilesDestinationProperties, Members: &mCustomerProfilesDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_Zendesk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zendesk", ID: &iZendeskDestinationProperties, Members: &mZendeskDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_Marketo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketo", ID: &iMarketoDestinationProperties, Members: &mMarketoDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_CustomConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomConnector", ID: &iCustomConnectorDestinationProperties, Members: &mCustomConnectorDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationConnectorProperties_SAPOData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPOData", ID: &iSAPODataDestinationProperties, Members: &mSAPODataDestinationProperties, Type: smithy.ShapeTypeStructure})
+var sDestinationFieldProperties_isCreatable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCreatable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDestinationFieldProperties_isNullable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isNullable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDestinationFieldProperties_isUpsertable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isUpsertable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDestinationFieldProperties_isUpdatable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isUpdatable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDestinationFieldProperties_isDefaultedOnCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isDefaultedOnCreate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDestinationFieldProperties_supportedWriteOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedWriteOperations", ID: &i_SupportedWriteOperationList, Members: &m_SupportedWriteOperationList, Type: smithy.ShapeTypeList})
+var sDestinationFlowConfig_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sDestinationFlowConfig_apiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiVersion", ID: &i_ApiVersion, Type: smithy.ShapeTypeString})
+var sDestinationFlowConfig_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sDestinationFlowConfig_destinationConnectorProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConnectorProperties", ID: &iDestinationConnectorProperties, Members: &mDestinationConnectorProperties, Type: smithy.ShapeTypeStructure})
+var s_DestinationFlowConfigList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDestinationFlowConfig, Members: &mDestinationFlowConfig, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDynatraceConnectorProfileCredentials_apiToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiToken", ID: &i_ApiToken, Type: smithy.ShapeTypeString})
+var sDynatraceConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sDynatraceSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sErrorHandlingConfig_failOnFirstDestinationError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failOnFirstDestinationError", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sErrorHandlingConfig_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sErrorHandlingConfig_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sErrorInfo_putFailuresCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "putFailuresCount", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sErrorInfo_executionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionMessage", ID: &i_ExecutionMessage, Type: smithy.ShapeTypeString})
+var sEventBridgeDestinationProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sEventBridgeDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sExecutionDetails_mostRecentExecutionMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mostRecentExecutionMessage", ID: &i_MostRecentExecutionMessage, Type: smithy.ShapeTypeString})
+var sExecutionDetails_mostRecentExecutionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mostRecentExecutionTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sExecutionDetails_mostRecentExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mostRecentExecutionStatus", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var s_ExecutionIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sExecutionRecord_executionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sExecutionRecord_executionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionStatus", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sExecutionRecord_executionResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionResult", ID: &iExecutionResult, Members: &mExecutionResult, Type: smithy.ShapeTypeStructure})
+var sExecutionRecord_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sExecutionRecord_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sExecutionRecord_dataPullStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPullStartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sExecutionRecord_dataPullEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPullEndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sExecutionRecord_metadataCatalogDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataCatalogDetails", ID: &i_MetadataCatalogDetails, Members: &m_MetadataCatalogDetails, Type: smithy.ShapeTypeList})
+var sExecutionResult_errorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorInfo", ID: &iErrorInfo, Members: &mErrorInfo, Type: smithy.ShapeTypeStructure})
+var sExecutionResult_bytesProcessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytesProcessed", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sExecutionResult_bytesWritten = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bytesWritten", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sExecutionResult_recordsProcessed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recordsProcessed", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sExecutionResult_numParallelProcesses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numParallelProcesses", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sExecutionResult_maxPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxPageSize", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sExecutionStatus_INPROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INPROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_SUCCESSFUL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESSFUL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_CANCELSTARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELSTARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExecutionStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFieldTypeDetails_fieldType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldType", ID: &i_FieldType, Type: smithy.ShapeTypeString})
+var sFieldTypeDetails_filterOperators = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterOperators", ID: &i_FilterOperatorList, Members: &m_FilterOperatorList, Type: smithy.ShapeTypeList})
+var sFieldTypeDetails_supportedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedValues", ID: &i_SupportedValueList, Members: &m_SupportedValueList, Type: smithy.ShapeTypeList})
+var sFieldTypeDetails_valueRegexPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueRegexPattern", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFieldTypeDetails_supportedDateFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedDateFormat", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFieldTypeDetails_fieldValueRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldValueRange", ID: &iRange, Members: &mRange, Type: smithy.ShapeTypeStructure})
+var sFieldTypeDetails_fieldLengthRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldLengthRange", ID: &iRange, Members: &mRange, Type: smithy.ShapeTypeStructure})
+var sFileType_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileType_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileType_PARQUET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARQUET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FilterOperatorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperator, Members: &mOperator, Type: smithy.ShapeTypeEnum})
+var sFlowDefinition_flowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowArn", ID: &i_FlowArn, Type: smithy.ShapeTypeString})
+var sFlowDefinition_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FlowDescription, Type: smithy.ShapeTypeString})
+var sFlowDefinition_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sFlowDefinition_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &iFlowStatus, Members: &mFlowStatus, Type: smithy.ShapeTypeEnum})
+var sFlowDefinition_sourceConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConnectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sFlowDefinition_sourceConnectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConnectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sFlowDefinition_destinationConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConnectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sFlowDefinition_destinationConnectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationConnectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sFlowDefinition_triggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerType", ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum})
+var sFlowDefinition_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sFlowDefinition_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sFlowDefinition_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sFlowDefinition_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_UpdatedBy, Type: smithy.ShapeTypeString})
+var sFlowDefinition_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sFlowDefinition_lastRunExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRunExecutionDetails", ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure})
+var s_FlowExecutionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExecutionRecord, Members: &mExecutionRecord, Type: smithy.ShapeTypeStructure})
+var s_FlowList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFlowDefinition, Members: &mFlowDefinition, Type: smithy.ShapeTypeStructure})
+var sFlowStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlowStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlowStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlowStatus_DRAFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlowStatus_ERRORED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERRORED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlowStatus_SUSPENDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUSPENDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGlueDataCatalogConfig_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_GlueDataCatalogIAMRole, Type: smithy.ShapeTypeString})
+var sGlueDataCatalogConfig_databaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseName", ID: &i_GlueDataCatalogDatabaseName, Type: smithy.ShapeTypeString})
+var sGlueDataCatalogConfig_tablePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tablePrefix", ID: &i_GlueDataCatalogTablePrefix, Type: smithy.ShapeTypeString})
+var sGoogleAnalyticsConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGoogleAnalyticsConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGoogleAnalyticsConnectorProfileCredentials_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sGoogleAnalyticsConnectorProfileCredentials_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t27, Type: smithy.ShapeTypeString})
+var sGoogleAnalyticsConnectorProfileCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sGoogleAnalyticsConnectorProfileCredentials_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Type: smithy.ShapeTypeString})
+var sGoogleAnalyticsConnectorProfileCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sGoogleAnalyticsMetadata_oAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthScopes", ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var sGoogleAnalyticsSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sHoneycodeConnectorProfileCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sHoneycodeConnectorProfileCredentials_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Type: smithy.ShapeTypeString})
+var sHoneycodeConnectorProfileCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sHoneycodeDestinationProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sHoneycodeDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sHoneycodeMetadata_oAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthScopes", ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var s_IdFieldNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sIncrementalPullConfig_datetimeTypeFieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datetimeTypeFieldName", ID: &i_DatetimeTypeFieldName, Type: smithy.ShapeTypeString})
+var sInforNexusConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInforNexusConnectorProfileCredentials_accessKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessKeyId", ID: &i_AccessKeyId, Traits: &t27, Type: smithy.ShapeTypeString})
+var sInforNexusConnectorProfileCredentials_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_Username, Type: smithy.ShapeTypeString})
+var sInforNexusConnectorProfileCredentials_secretAccessKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretAccessKey", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sInforNexusConnectorProfileCredentials_datakey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datakey", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sInforNexusConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sInforNexusSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLambdaConnectorProvisioningConfig_lambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sMarketoConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorProfileCredentials_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sMarketoConnectorProfileCredentials_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t27, Type: smithy.ShapeTypeString})
+var sMarketoConnectorProfileCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sMarketoConnectorProfileCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sMarketoConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sMarketoDestinationProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sMarketoDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sMarketoSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sMetadataCatalogConfig_glueDataCatalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "glueDataCatalog", ID: &iGlueDataCatalogConfig, Members: &mGlueDataCatalogConfig, Type: smithy.ShapeTypeStructure})
+var sMetadataCatalogDetail_catalogType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "catalogType", ID: &iCatalogType, Members: &mCatalogType, Type: smithy.ShapeTypeEnum})
+var sMetadataCatalogDetail_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sMetadataCatalogDetail_tableRegistrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableRegistrationOutput", ID: &iRegistrationOutput, Members: &mRegistrationOutput, Type: smithy.ShapeTypeStructure})
+var sMetadataCatalogDetail_partitionRegistrationOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partitionRegistrationOutput", ID: &iRegistrationOutput, Members: &mRegistrationOutput, Type: smithy.ShapeTypeStructure})
+var s_MetadataCatalogDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetadataCatalogDetail, Members: &mMetadataCatalogDetail, Type: smithy.ShapeTypeStructure})
+var sOAuth2Credentials_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sOAuth2Credentials_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t27, Type: smithy.ShapeTypeString})
+var sOAuth2Credentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sOAuth2Credentials_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Type: smithy.ShapeTypeString})
+var sOAuth2Credentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sOAuth2CustomParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Key, Type: smithy.ShapeTypeString})
+var sOAuth2CustomParameter_isRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRequired", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sOAuth2CustomParameter_label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "label", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sOAuth2CustomParameter_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sOAuth2CustomParameter_isSensitiveField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSensitiveField", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sOAuth2CustomParameter_connectorSuppliedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorSuppliedValues", ID: &i_ConnectorSuppliedValueList, Members: &m_ConnectorSuppliedValueList, Type: smithy.ShapeTypeList})
+var sOAuth2CustomParameter_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iOAuth2CustomPropType, Members: &mOAuth2CustomPropType, Type: smithy.ShapeTypeEnum})
+var s_OAuth2CustomPropertiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOAuth2CustomParameter, Members: &mOAuth2CustomParameter, Type: smithy.ShapeTypeStructure})
+var sOAuth2CustomPropType_TOKEN_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOKEN_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOAuth2CustomPropType_AUTH_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTH_URL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOAuth2Defaults_oauthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oauthScopes", ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var sOAuth2Defaults_tokenUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUrls", ID: &i_TokenUrlList, Members: &m_TokenUrlList, Type: smithy.ShapeTypeList})
+var sOAuth2Defaults_authCodeUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authCodeUrls", ID: &i_AuthCodeUrlList, Members: &m_AuthCodeUrlList, Type: smithy.ShapeTypeList})
+var sOAuth2Defaults_oauth2GrantTypesSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oauth2GrantTypesSupported", ID: &i_OAuth2GrantTypeSupportedList, Members: &m_OAuth2GrantTypeSupportedList, Type: smithy.ShapeTypeList})
+var sOAuth2Defaults_oauth2CustomProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oauth2CustomProperties", ID: &i_OAuth2CustomPropertiesList, Members: &m_OAuth2CustomPropertiesList, Type: smithy.ShapeTypeList})
+var sOAuth2GrantType_CLIENT_CREDENTIALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIENT_CREDENTIALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOAuth2GrantType_AUTHORIZATION_CODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTHORIZATION_CODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOAuth2GrantType_JWT_BEARER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JWT_BEARER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_OAuth2GrantTypeSupportedList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOAuth2GrantType, Members: &mOAuth2GrantType, Type: smithy.ShapeTypeEnum})
+var sOAuth2Properties_tokenUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUrl", ID: &i_TokenUrl, Type: smithy.ShapeTypeString})
+var sOAuth2Properties_oAuth2GrantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuth2GrantType", ID: &iOAuth2GrantType, Members: &mOAuth2GrantType, Type: smithy.ShapeTypeEnum})
+var sOAuth2Properties_tokenUrlCustomProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUrlCustomProperties", ID: &i_TokenUrlCustomProperties, Members: &m_TokenUrlCustomProperties, Type: smithy.ShapeTypeMap})
+var sOAuthCredentials_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sOAuthCredentials_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t27, Type: smithy.ShapeTypeString})
+var sOAuthCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sOAuthCredentials_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Type: smithy.ShapeTypeString})
+var sOAuthCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sOAuthProperties_tokenUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tokenUrl", ID: &i_TokenUrl, Type: smithy.ShapeTypeString})
+var sOAuthProperties_authCodeUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authCodeUrl", ID: &i_AuthCodeUrl, Type: smithy.ShapeTypeString})
+var sOAuthProperties_oAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthScopes", ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var s_OAuthScopeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OAuthScope, Type: smithy.ShapeTypeString})
+var sOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_NOT_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_DATA_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_UPPER_BOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPPER_BOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_LOWER_BOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOWER_BOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_SOURCE_DATA_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_DATA_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_DESTINATION_DATA_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESTINATION_DATA_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_VALIDATION_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_MASK_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_MASK_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_TRUNCATE_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUNCATE_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_MATH_OPERATION_FIELDS_ORDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MATH_OPERATION_FIELDS_ORDER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_CONCAT_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONCAT_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_SUBFIELD_CATEGORY_MAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBFIELD_CATEGORY_MAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_EXCLUDE_SOURCE_FIELDS_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXCLUDE_SOURCE_FIELDS_LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_INCLUDE_NEW_FIELDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCLUDE_NEW_FIELDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperatorPropertiesKeys_ORDERED_PARTITION_KEYS_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORDERED_PARTITION_KEYS_LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_NOT_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperators_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorProfileCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sPardotConnectorProfileCredentials_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Type: smithy.ShapeTypeString})
+var sPardotConnectorProfileCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sPardotConnectorProfileCredentials_clientCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientCredentialsArn", ID: &i_ClientCredentialsArn, Traits: &t27, Type: smithy.ShapeTypeString})
+var sPardotConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sPardotConnectorProfileProperties_isSandboxEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSandboxEnvironment", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPardotConnectorProfileProperties_businessUnitId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessUnitId", ID: &i_BusinessUnitId, Type: smithy.ShapeTypeString})
+var sPardotSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sPathPrefix_EXECUTION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPathPrefix_SCHEMA_VERSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEMA_VERSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PathPrefixHierarchy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPathPrefix, Members: &mPathPrefix, Type: smithy.ShapeTypeEnum})
+var sPrefixConfig_prefixType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixType", ID: &iPrefixType, Members: &mPrefixType, Type: smithy.ShapeTypeEnum})
+var sPrefixConfig_prefixFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixFormat", ID: &iPrefixFormat, Members: &mPrefixFormat, Type: smithy.ShapeTypeEnum})
+var sPrefixConfig_pathPrefixHierarchy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pathPrefixHierarchy", ID: &i_PathPrefixHierarchy, Members: &m_PathPrefixHierarchy, Type: smithy.ShapeTypeList})
+var sPrefixFormat_YEAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEAR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrefixFormat_MONTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrefixFormat_DAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrefixFormat_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrefixFormat_MINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrefixType_FILENAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILENAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrefixType_PATH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrefixType_PATH_AND_FILENAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATH_AND_FILENAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningFailureCause_CONNECTOR_AUTHENTICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTOR_AUTHENTICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningFailureCause_CONNECTOR_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTOR_SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningFailureCause_INTERNAL_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningFailureCause_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningFailureCause_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningState_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iPrivateConnectionProvisioningStatus, Members: &mPrivateConnectionProvisioningStatus, Type: smithy.ShapeTypeEnum})
+var sPrivateConnectionProvisioningState_failureMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureMessage", ID: &i_PrivateConnectionProvisioningFailureMessage, Type: smithy.ShapeTypeString})
+var sPrivateConnectionProvisioningState_failureCause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureCause", ID: &iPrivateConnectionProvisioningFailureCause, Members: &mPrivateConnectionProvisioningFailureCause, Type: smithy.ShapeTypeEnum})
+var sPrivateConnectionProvisioningStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivateConnectionProvisioningStatus_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ProfilePropertiesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ProfilePropertyKey, Type: smithy.ShapeTypeString})
+var s_ProfilePropertiesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ProfilePropertyValue, Type: smithy.ShapeTypeString})
+var sRange_maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximum", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sRange_minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimum", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sRedshiftConnectorProfileCredentials_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileCredentials_password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "password", ID: &i_Password, Traits: &t27, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_databaseUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseUrl", ID: &i_DatabaseUrl, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_dataApiRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataApiRoleArn", ID: &i_DataApiRoleArn, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_isRedshiftServerless = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRedshiftServerless", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRedshiftConnectorProfileProperties_clusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterIdentifier", ID: &i_ClusterIdentifier, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_workgroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workgroupName", ID: &i_WorkgroupName, Type: smithy.ShapeTypeString})
+var sRedshiftConnectorProfileProperties_databaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseName", ID: &i_DatabaseName, Type: smithy.ShapeTypeString})
+var sRedshiftDestinationProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sRedshiftDestinationProperties_intermediateBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intermediateBucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sRedshiftDestinationProperties_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sRedshiftDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var s_RegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sRegistrationOutput_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRegistrationOutput_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRegistrationOutput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iExecutionStatus, Members: &mExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sS3ConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_NOT_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3ConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3DestinationProperties_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sS3DestinationProperties_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sS3DestinationProperties_s3OutputFormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3OutputFormatConfig", ID: &iS3OutputFormatConfig, Members: &mS3OutputFormatConfig, Type: smithy.ShapeTypeStructure})
+var sS3InputFileType_CSV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CSV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3InputFileType_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3InputFormatConfig_s3InputFileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3InputFileType", ID: &iS3InputFileType, Members: &mS3InputFileType, Type: smithy.ShapeTypeEnum})
+var sS3OutputFormatConfig_fileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileType", ID: &iFileType, Members: &mFileType, Type: smithy.ShapeTypeEnum})
+var sS3OutputFormatConfig_prefixConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixConfig", ID: &iPrefixConfig, Members: &mPrefixConfig, Type: smithy.ShapeTypeStructure})
+var sS3OutputFormatConfig_aggregationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationConfig", ID: &iAggregationConfig, Members: &mAggregationConfig, Type: smithy.ShapeTypeStructure})
+var sS3OutputFormatConfig_preserveSourceDataTyping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preserveSourceDataTyping", ID: &i_JavaBoolean, Type: smithy.ShapeTypeBoolean})
+var sS3SourceProperties_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sS3SourceProperties_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sS3SourceProperties_s3InputFormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3InputFormatConfig", ID: &iS3InputFormatConfig, Members: &mS3InputFormatConfig, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_NOT_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorProfileCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSalesforceConnectorProfileCredentials_refreshToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "refreshToken", ID: &i_RefreshToken, Type: smithy.ShapeTypeString})
+var sSalesforceConnectorProfileCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sSalesforceConnectorProfileCredentials_clientCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientCredentialsArn", ID: &i_ClientCredentialsArn, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSalesforceConnectorProfileCredentials_oAuth2GrantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuth2GrantType", ID: &iOAuth2GrantType, Members: &mOAuth2GrantType, Type: smithy.ShapeTypeEnum})
+var sSalesforceConnectorProfileCredentials_jwtToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jwtToken", ID: &i_JwtToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSalesforceConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sSalesforceConnectorProfileProperties_isSandboxEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSandboxEnvironment", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usePrivateLinkForMetadataAndAuthorization", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSalesforceDataTransferApi_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceDataTransferApi_BULKV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BULKV2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesforceDataTransferApi_REST_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REST_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SalesforceDataTransferApiList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSalesforceDataTransferApi, Members: &mSalesforceDataTransferApi, Type: smithy.ShapeTypeEnum})
+var sSalesforceDestinationProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sSalesforceDestinationProperties_idFieldNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idFieldNames", ID: &i_IdFieldNameList, Members: &m_IdFieldNameList, Type: smithy.ShapeTypeList})
+var sSalesforceDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sSalesforceDestinationProperties_writeOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeOperationType", ID: &iWriteOperationType, Members: &mWriteOperationType, Type: smithy.ShapeTypeEnum})
+var sSalesforceDestinationProperties_dataTransferApi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataTransferApi", ID: &iSalesforceDataTransferApi, Members: &mSalesforceDataTransferApi, Type: smithy.ShapeTypeEnum})
+var sSalesforceMetadata_oAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthScopes", ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var sSalesforceMetadata_dataTransferApis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataTransferApis", ID: &i_SalesforceDataTransferApiList, Members: &m_SalesforceDataTransferApiList, Type: smithy.ShapeTypeList})
+var sSalesforceMetadata_oauth2GrantTypesSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oauth2GrantTypesSupported", ID: &i_OAuth2GrantTypeSupportedList, Members: &m_OAuth2GrantTypeSupportedList, Type: smithy.ShapeTypeList})
+var sSalesforceSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sSalesforceSourceProperties_enableDynamicFieldUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableDynamicFieldUpdate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSalesforceSourceProperties_includeDeletedRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeDeletedRecords", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSalesforceSourceProperties_dataTransferApi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataTransferApi", ID: &iSalesforceDataTransferApi, Members: &mSalesforceDataTransferApi, Type: smithy.ShapeTypeEnum})
+var sSAPODataConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_NOT_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorProfileCredentials_basicAuthCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basicAuthCredentials", ID: &iBasicAuthCredentials, Members: &mBasicAuthCredentials, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorProfileCredentials_oAuthCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthCredentials", ID: &iOAuthCredentials, Members: &mOAuthCredentials, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorProfileProperties_applicationHostUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationHostUrl", ID: &i_ApplicationHostUrl, Type: smithy.ShapeTypeString})
+var sSAPODataConnectorProfileProperties_applicationServicePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationServicePath", ID: &i_ApplicationServicePath, Type: smithy.ShapeTypeString})
+var sSAPODataConnectorProfileProperties_portNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portNumber", ID: &i_PortNumber, Type: smithy.ShapeTypeInteger})
+var sSAPODataConnectorProfileProperties_clientNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientNumber", ID: &i_ClientNumber, Type: smithy.ShapeTypeString})
+var sSAPODataConnectorProfileProperties_logonLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logonLanguage", ID: &i_LogonLanguage, Type: smithy.ShapeTypeString})
+var sSAPODataConnectorProfileProperties_privateLinkServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateLinkServiceName", ID: &i_PrivateLinkServiceName, Type: smithy.ShapeTypeString})
+var sSAPODataConnectorProfileProperties_oAuthProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthProperties", ID: &iOAuthProperties, Members: &mOAuthProperties, Type: smithy.ShapeTypeStructure})
+var sSAPODataConnectorProfileProperties_disableSSO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disableSSO", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSAPODataDestinationProperties_objectPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectPath", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sSAPODataDestinationProperties_successResponseHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successResponseHandlingConfig", ID: &iSuccessResponseHandlingConfig, Members: &mSuccessResponseHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sSAPODataDestinationProperties_idFieldNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idFieldNames", ID: &i_IdFieldNameList, Members: &m_IdFieldNameList, Type: smithy.ShapeTypeList})
+var sSAPODataDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sSAPODataDestinationProperties_writeOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeOperationType", ID: &iWriteOperationType, Members: &mWriteOperationType, Type: smithy.ShapeTypeEnum})
+var sSAPODataPaginationConfig_maxPageSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxPageSize", ID: &i_SAPODataMaxPageSize, Type: smithy.ShapeTypeInteger})
+var sSAPODataParallelismConfig_maxParallelism = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxParallelism", ID: &i_SAPODataMaxParallelism, Type: smithy.ShapeTypeInteger})
+var sSAPODataSourceProperties_objectPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "objectPath", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sSAPODataSourceProperties_parallelismConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parallelismConfig", ID: &iSAPODataParallelismConfig, Members: &mSAPODataParallelismConfig, Type: smithy.ShapeTypeStructure})
+var sSAPODataSourceProperties_paginationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "paginationConfig", ID: &iSAPODataPaginationConfig, Members: &mSAPODataPaginationConfig, Type: smithy.ShapeTypeStructure})
+var sScheduledTriggerProperties_scheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sScheduledTriggerProperties_dataPullMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataPullMode", ID: &iDataPullMode, Members: &mDataPullMode, Type: smithy.ShapeTypeEnum})
+var sScheduledTriggerProperties_scheduleStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleStartTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sScheduledTriggerProperties_scheduleEndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleEndTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sScheduledTriggerProperties_timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timezone", ID: &i_Timezone, Type: smithy.ShapeTypeString})
+var sScheduledTriggerProperties_scheduleOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleOffset", ID: &i_ScheduleOffset, Type: smithy.ShapeTypeLong})
+var sScheduledTriggerProperties_firstExecutionFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firstExecutionFrom", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sScheduledTriggerProperties_flowErrorDeactivationThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowErrorDeactivationThreshold", ID: &i_FlowErrorDeactivationThreshold, Type: smithy.ShapeTypeInteger})
+var sScheduleFrequencyType_BYMINUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYMINUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleFrequencyType_HOURLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleFrequencyType_DAILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleFrequencyType_WEEKLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEEKLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleFrequencyType_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduleFrequencyType_ONCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SchedulingFrequencyTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduleFrequencyType, Members: &mScheduleFrequencyType, Type: smithy.ShapeTypeEnum})
+var sServiceNowConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_NOT_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorProfileCredentials_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_Username, Type: smithy.ShapeTypeString})
+var sServiceNowConnectorProfileCredentials_password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "password", ID: &i_Password, Traits: &t27, Type: smithy.ShapeTypeString})
+var sServiceNowConnectorProfileCredentials_oAuth2Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuth2Credentials", ID: &iOAuth2Credentials, Members: &mOAuth2Credentials, Type: smithy.ShapeTypeStructure})
+var sServiceNowConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sServiceNowSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSingularConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSingularConnectorProfileCredentials_apiKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiKey", ID: &i_ApiKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSingularSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sSlackConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorProfileCredentials_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sSlackConnectorProfileCredentials_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSlackConnectorProfileCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSlackConnectorProfileCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sSlackConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sSlackMetadata_oAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthScopes", ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var sSlackSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileCredentials_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_Username, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileCredentials_password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "password", ID: &i_Password, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileCredentials_privateKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateKey", ID: &i_PrivateKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileProperties_warehouse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warehouse", ID: &i_Warehouse, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileProperties_stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stage", ID: &i_Stage, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileProperties_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileProperties_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileProperties_privateLinkServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateLinkServiceName", ID: &i_PrivateLinkServiceName, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileProperties_accountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountName", ID: &i_AccountName, Type: smithy.ShapeTypeString})
+var sSnowflakeConnectorProfileProperties_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sSnowflakeDestinationProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sSnowflakeDestinationProperties_intermediateBucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intermediateBucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var sSnowflakeDestinationProperties_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sSnowflakeDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sSnowflakeMetadata_supportedRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedRegions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sSourceConnectorProperties_Amplitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amplitude", ID: &iAmplitudeSourceProperties, Members: &mAmplitudeSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Datadog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Datadog", ID: &iDatadogSourceProperties, Members: &mDatadogSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Dynatrace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dynatrace", ID: &iDynatraceSourceProperties, Members: &mDynatraceSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_GoogleAnalytics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GoogleAnalytics", ID: &iGoogleAnalyticsSourceProperties, Members: &mGoogleAnalyticsSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_InforNexus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InforNexus", ID: &iInforNexusSourceProperties, Members: &mInforNexusSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Marketo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketo", ID: &iMarketoSourceProperties, Members: &mMarketoSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3SourceProperties, Members: &mS3SourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Salesforce = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Salesforce", ID: &iSalesforceSourceProperties, Members: &mSalesforceSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_ServiceNow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNow", ID: &iServiceNowSourceProperties, Members: &mServiceNowSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Singular = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Singular", ID: &iSingularSourceProperties, Members: &mSingularSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Slack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Slack", ID: &iSlackSourceProperties, Members: &mSlackSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Trendmicro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trendmicro", ID: &iTrendmicroSourceProperties, Members: &mTrendmicroSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Veeva = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Veeva", ID: &iVeevaSourceProperties, Members: &mVeevaSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Zendesk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zendesk", ID: &iZendeskSourceProperties, Members: &mZendeskSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_SAPOData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAPOData", ID: &iSAPODataSourceProperties, Members: &mSAPODataSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_CustomConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomConnector", ID: &iCustomConnectorSourceProperties, Members: &mCustomConnectorSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceConnectorProperties_Pardot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pardot", ID: &iPardotSourceProperties, Members: &mPardotSourceProperties, Type: smithy.ShapeTypeStructure})
+var sSourceFieldProperties_isRetrievable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRetrievable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSourceFieldProperties_isQueryable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isQueryable", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSourceFieldProperties_isTimestampFieldForIncrementalQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isTimestampFieldForIncrementalQueries", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_SourceFields_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSourceFlowConfig_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sSourceFlowConfig_apiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiVersion", ID: &i_ApiVersion, Type: smithy.ShapeTypeString})
+var sSourceFlowConfig_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sSourceFlowConfig_sourceConnectorProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceConnectorProperties", ID: &iSourceConnectorProperties, Members: &mSourceConnectorProperties, Type: smithy.ShapeTypeStructure})
+var sSourceFlowConfig_incrementalPullConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incrementalPullConfig", ID: &iIncrementalPullConfig, Members: &mIncrementalPullConfig, Type: smithy.ShapeTypeStructure})
+var sSuccessResponseHandlingConfig_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sSuccessResponseHandlingConfig_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_BucketName, Type: smithy.ShapeTypeString})
+var s_SupportedApiVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SupportedApiVersion, Type: smithy.ShapeTypeString})
+var s_SupportedDataTransferApis_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataTransferApi, Members: &mDataTransferApi, Type: smithy.ShapeTypeStructure})
+var sSupportedDataTransferType_RECORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECORD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSupportedDataTransferType_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SupportedDataTransferTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportedDataTransferType, Members: &mSupportedDataTransferType, Type: smithy.ShapeTypeEnum})
+var sSupportedFieldTypeDetails_v1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "v1", ID: &iFieldTypeDetails, Members: &mFieldTypeDetails, Type: smithy.ShapeTypeStructure})
+var s_SupportedOperatorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperators, Members: &mOperators, Type: smithy.ShapeTypeEnum})
+var s_SupportedValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString})
+var s_SupportedWriteOperationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWriteOperationType, Members: &mWriteOperationType, Type: smithy.ShapeTypeEnum})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTask_sourceFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFields", ID: &i_SourceFields, Members: &m_SourceFields, Type: smithy.ShapeTypeList})
+var sTask_connectorOperator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorOperator", ID: &iConnectorOperator, Members: &mConnectorOperator, Type: smithy.ShapeTypeStructure})
+var sTask_destinationField = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationField", ID: &i_DestinationField, Type: smithy.ShapeTypeString})
+var sTask_taskType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskType", ID: &iTaskType, Members: &mTaskType, Type: smithy.ShapeTypeEnum})
+var sTask_taskProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskProperties", ID: &i_TaskPropertiesMap, Members: &m_TaskPropertiesMap, Type: smithy.ShapeTypeMap})
+var s_TaskPropertiesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iOperatorPropertiesKeys, Members: &mOperatorPropertiesKeys, Type: smithy.ShapeTypeEnum})
+var s_TaskPropertiesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Property, Type: smithy.ShapeTypeString})
+var s_Tasks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTask, Members: &mTask, Type: smithy.ShapeTypeStructure})
+var sTaskType_ARITHMETIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARITHMETIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_MAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_MAP_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAP_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_MASK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_MERGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MERGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_PASSTHROUGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSTHROUGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_TRUNCATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRUNCATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_VALIDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskType_PARTITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_TokenUrlCustomProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_CustomPropertyKey, Type: smithy.ShapeTypeString})
+var s_TokenUrlCustomProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_CustomPropertyValue, Type: smithy.ShapeTypeString})
+var s_TokenUrlList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TokenUrl, Type: smithy.ShapeTypeString})
+var sTrendmicroConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTrendmicroConnectorProfileCredentials_apiSecretKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiSecretKey", ID: &i_ApiSecretKey, Traits: &t27, Type: smithy.ShapeTypeString})
+var sTrendmicroSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sTriggerConfig_triggerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerType", ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum})
+var sTriggerConfig_triggerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerProperties", ID: &iTriggerProperties, Members: &mTriggerProperties, Type: smithy.ShapeTypeStructure})
+var sTriggerProperties_Scheduled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scheduled", ID: &iScheduledTriggerProperties, Members: &mScheduledTriggerProperties, Type: smithy.ShapeTypeStructure})
+var sTriggerType_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTriggerType_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTriggerType_ONDEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONDEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TriggerTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTriggerType, Members: &mTriggerType, Type: smithy.ShapeTypeEnum})
+var sUnsupportedOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpsolverDestinationProperties_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &i_UpsolverBucketName, Type: smithy.ShapeTypeString})
+var sUpsolverDestinationProperties_bucketPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketPrefix", ID: &i_BucketPrefix, Type: smithy.ShapeTypeString})
+var sUpsolverDestinationProperties_s3OutputFormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3OutputFormatConfig", ID: &iUpsolverS3OutputFormatConfig, Members: &mUpsolverS3OutputFormatConfig, Type: smithy.ShapeTypeStructure})
+var sUpsolverS3OutputFormatConfig_fileType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileType", ID: &iFileType, Members: &mFileType, Type: smithy.ShapeTypeEnum})
+var sUpsolverS3OutputFormatConfig_prefixConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixConfig", ID: &iPrefixConfig, Members: &mPrefixConfig, Type: smithy.ShapeTypeStructure})
+var sUpsolverS3OutputFormatConfig_aggregationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aggregationConfig", ID: &iAggregationConfig, Members: &mAggregationConfig, Type: smithy.ShapeTypeStructure})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sVeevaConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_BETWEEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BETWEEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_LESS_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_GREATER_THAN_OR_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_OR_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_NOT_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVeevaConnectorProfileCredentials_username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "username", ID: &i_Username, Type: smithy.ShapeTypeString})
+var sVeevaConnectorProfileCredentials_password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "password", ID: &i_Password, Traits: &t27, Type: smithy.ShapeTypeString})
+var sVeevaConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sVeevaSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sVeevaSourceProperties_documentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "documentType", ID: &i_DocumentType, Type: smithy.ShapeTypeString})
+var sVeevaSourceProperties_includeSourceFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeSourceFiles", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sVeevaSourceProperties_includeRenditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeRenditions", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sVeevaSourceProperties_includeAllVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeAllVersions", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sWriteOperationType_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWriteOperationType_UPSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWriteOperationType_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWriteOperationType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_PROJECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROJECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_ADDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_MULTIPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_DIVISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIVISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_SUBTRACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBTRACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_MASK_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_MASK_FIRST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_FIRST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_MASK_LAST_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK_LAST_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_VALIDATE_NON_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_VALIDATE_NON_ZERO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_ZERO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_VALIDATE_NON_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NON_NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_VALIDATE_NUMERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE_NUMERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorOperator_NO_OP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorProfileCredentials_clientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientId", ID: &i_ClientId, Type: smithy.ShapeTypeString})
+var sZendeskConnectorProfileCredentials_clientSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSecret", ID: &i_ClientSecret, Traits: &t27, Type: smithy.ShapeTypeString})
+var sZendeskConnectorProfileCredentials_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &i_AccessToken, Traits: &t27, Type: smithy.ShapeTypeString})
+var sZendeskConnectorProfileCredentials_oAuthRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthRequest", ID: &iConnectorOAuthRequest, Members: &mConnectorOAuthRequest, Type: smithy.ShapeTypeStructure})
+var sZendeskConnectorProfileProperties_instanceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceUrl", ID: &i_InstanceUrl, Type: smithy.ShapeTypeString})
+var sZendeskDestinationProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sZendeskDestinationProperties_idFieldNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idFieldNames", ID: &i_IdFieldNameList, Members: &m_IdFieldNameList, Type: smithy.ShapeTypeList})
+var sZendeskDestinationProperties_errorHandlingConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorHandlingConfig", ID: &iErrorHandlingConfig, Members: &mErrorHandlingConfig, Type: smithy.ShapeTypeStructure})
+var sZendeskDestinationProperties_writeOperationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeOperationType", ID: &iWriteOperationType, Members: &mWriteOperationType, Type: smithy.ShapeTypeEnum})
+var sZendeskMetadata_oAuthScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oAuthScopes", ID: &i_OAuthScopeList, Members: &m_OAuthScopeList, Type: smithy.ShapeTypeList})
+var sZendeskSourceProperties_object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "object", ID: &i_Object, Type: smithy.ShapeTypeString})
+var sCancelFlowExecutionsRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sCancelFlowExecutionsRequest_executionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionIds", ID: &i_ExecutionIds, Members: &m_ExecutionIds, Type: smithy.ShapeTypeList})
+var sCancelFlowExecutionsResponse_invalidExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidExecutions", ID: &i_ExecutionIds, Members: &m_ExecutionIds, Type: smithy.ShapeTypeList})
+var sCreateConnectorProfileRequest_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sCreateConnectorProfileRequest_kmsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsArn", ID: &i_KMSArn, Type: smithy.ShapeTypeString})
+var sCreateConnectorProfileRequest_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sCreateConnectorProfileRequest_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sCreateConnectorProfileRequest_connectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionMode", ID: &iConnectionMode, Members: &mConnectionMode, Type: smithy.ShapeTypeEnum})
+var sCreateConnectorProfileRequest_connectorProfileConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileConfig", ID: &iConnectorProfileConfig, Members: &mConnectorProfileConfig, Type: smithy.ShapeTypeStructure})
+var sCreateConnectorProfileRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateConnectorProfileResponse_connectorProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileArn", ID: &i_ConnectorProfileArn, Type: smithy.ShapeTypeString})
+var sCreateFlowRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sCreateFlowRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FlowDescription, Type: smithy.ShapeTypeString})
+var sCreateFlowRequest_kmsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsArn", ID: &i_KMSArn, Type: smithy.ShapeTypeString})
+var sCreateFlowRequest_triggerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerConfig", ID: &iTriggerConfig, Members: &mTriggerConfig, Type: smithy.ShapeTypeStructure})
+var sCreateFlowRequest_sourceFlowConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFlowConfig", ID: &iSourceFlowConfig, Members: &mSourceFlowConfig, Type: smithy.ShapeTypeStructure})
+var sCreateFlowRequest_destinationFlowConfigList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationFlowConfigList", ID: &i_DestinationFlowConfigList, Members: &m_DestinationFlowConfigList, Type: smithy.ShapeTypeList})
+var sCreateFlowRequest_tasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tasks", ID: &i_Tasks, Members: &m_Tasks, Type: smithy.ShapeTypeList})
+var sCreateFlowRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateFlowRequest_metadataCatalogConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataCatalogConfig", ID: &iMetadataCatalogConfig, Members: &mMetadataCatalogConfig, Type: smithy.ShapeTypeStructure})
+var sCreateFlowRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateFlowResponse_flowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowArn", ID: &i_FlowArn, Type: smithy.ShapeTypeString})
+var sCreateFlowResponse_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &iFlowStatus, Members: &mFlowStatus, Type: smithy.ShapeTypeEnum})
+var sDeleteConnectorProfileRequest_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sDeleteConnectorProfileRequest_forceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceDelete", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteFlowRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sDeleteFlowRequest_forceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceDelete", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeConnectorEntityRequest_connectorEntityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorEntityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sDescribeConnectorEntityRequest_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sDescribeConnectorEntityRequest_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sDescribeConnectorEntityRequest_apiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiVersion", ID: &i_ApiVersion, Type: smithy.ShapeTypeString})
+var sDescribeConnectorEntityResponse_connectorEntityFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorEntityFields", ID: &i_ConnectorEntityFieldList, Members: &m_ConnectorEntityFieldList, Type: smithy.ShapeTypeList})
+var sDescribeConnectorRequest_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sDescribeConnectorRequest_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sDescribeConnectorResponse_connectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorConfiguration", ID: &iConnectorConfiguration, Members: &mConnectorConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectorProfilesRequest_connectorProfileNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileNames", ID: &i_ConnectorProfileNameList, Members: &m_ConnectorProfileNameList, Type: smithy.ShapeTypeList})
+var sDescribeConnectorProfilesRequest_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sDescribeConnectorProfilesRequest_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sDescribeConnectorProfilesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeConnectorProfilesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeConnectorProfilesResponse_connectorProfileDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileDetails", ID: &i_ConnectorProfileDetailList, Members: &m_ConnectorProfileDetailList, Type: smithy.ShapeTypeList})
+var sDescribeConnectorProfilesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeConnectorsRequest_connectorTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorTypes", ID: &i_ConnectorTypeList, Members: &m_ConnectorTypeList, Type: smithy.ShapeTypeList})
+var sDescribeConnectorsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeConnectorsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeConnectorsResponse_connectorConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorConfigurations", ID: &i_ConnectorConfigurationsMap, Members: &m_ConnectorConfigurationsMap, Type: smithy.ShapeTypeMap})
+var sDescribeConnectorsResponse_connectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectors", ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList})
+var sDescribeConnectorsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFlowExecutionRecordsRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sDescribeFlowExecutionRecordsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeFlowExecutionRecordsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFlowExecutionRecordsResponse_flowExecutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowExecutions", ID: &i_FlowExecutionList, Members: &m_FlowExecutionList, Type: smithy.ShapeTypeList})
+var sDescribeFlowExecutionRecordsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFlowRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_flowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowArn", ID: &i_FlowArn, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FlowDescription, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_kmsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsArn", ID: &i_KMSArn, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &iFlowStatus, Members: &mFlowStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeFlowResponse_flowStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatusMessage", ID: &i_FlowStatusMessage, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_sourceFlowConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFlowConfig", ID: &iSourceFlowConfig, Members: &mSourceFlowConfig, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowResponse_destinationFlowConfigList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationFlowConfigList", ID: &i_DestinationFlowConfigList, Members: &m_DestinationFlowConfigList, Type: smithy.ShapeTypeList})
+var sDescribeFlowResponse_lastRunExecutionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRunExecutionDetails", ID: &iExecutionDetails, Members: &mExecutionDetails, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowResponse_triggerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerConfig", ID: &iTriggerConfig, Members: &mTriggerConfig, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowResponse_tasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tasks", ID: &i_Tasks, Members: &m_Tasks, Type: smithy.ShapeTypeList})
+var sDescribeFlowResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeFlowResponse_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sDescribeFlowResponse_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_lastUpdatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedBy", ID: &i_UpdatedBy, Type: smithy.ShapeTypeString})
+var sDescribeFlowResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribeFlowResponse_metadataCatalogConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataCatalogConfig", ID: &iMetadataCatalogConfig, Members: &mMetadataCatalogConfig, Type: smithy.ShapeTypeStructure})
+var sDescribeFlowResponse_lastRunMetadataCatalogDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastRunMetadataCatalogDetails", ID: &i_MetadataCatalogDetails, Members: &m_MetadataCatalogDetails, Type: smithy.ShapeTypeList})
+var sDescribeFlowResponse_schemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaVersion", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sListConnectorEntitiesRequest_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sListConnectorEntitiesRequest_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sListConnectorEntitiesRequest_entitiesPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entitiesPath", ID: &i_EntitiesPath, Type: smithy.ShapeTypeString})
+var sListConnectorEntitiesRequest_apiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiVersion", ID: &i_ApiVersion, Type: smithy.ShapeTypeString})
+var sListConnectorEntitiesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListEntitiesMaxResults, Type: smithy.ShapeTypeInteger})
+var sListConnectorEntitiesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectorEntitiesResponse_connectorEntityMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorEntityMap", ID: &i_ConnectorEntityMap, Members: &m_ConnectorEntityMap, Type: smithy.ShapeTypeMap})
+var sListConnectorEntitiesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectorsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListConnectorsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectorsResponse_connectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectors", ID: &i_ConnectorList, Members: &m_ConnectorList, Type: smithy.ShapeTypeList})
+var sListConnectorsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListFlowsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListFlowsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListFlowsResponse_flows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flows", ID: &i_FlowList, Members: &m_FlowList, Type: smithy.ShapeTypeList})
+var sListFlowsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRegisterConnectorRequest_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sRegisterConnectorRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sRegisterConnectorRequest_connectorProvisioningType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProvisioningType", ID: &iConnectorProvisioningType, Members: &mConnectorProvisioningType, Type: smithy.ShapeTypeEnum})
+var sRegisterConnectorRequest_connectorProvisioningConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProvisioningConfig", ID: &iConnectorProvisioningConfig, Members: &mConnectorProvisioningConfig, Type: smithy.ShapeTypeStructure})
+var sRegisterConnectorRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sRegisterConnectorResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sResetConnectorMetadataCacheRequest_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sResetConnectorMetadataCacheRequest_connectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorType", ID: &iConnectorType, Members: &mConnectorType, Type: smithy.ShapeTypeEnum})
+var sResetConnectorMetadataCacheRequest_connectorEntityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorEntityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sResetConnectorMetadataCacheRequest_entitiesPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entitiesPath", ID: &i_EntitiesPath, Type: smithy.ShapeTypeString})
+var sResetConnectorMetadataCacheRequest_apiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "apiVersion", ID: &i_ApiVersion, Type: smithy.ShapeTypeString})
+var sStartFlowRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sStartFlowRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sStartFlowResponse_flowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowArn", ID: &i_FlowArn, Type: smithy.ShapeTypeString})
+var sStartFlowResponse_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &iFlowStatus, Members: &mFlowStatus, Type: smithy.ShapeTypeEnum})
+var sStartFlowResponse_executionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionId", ID: &i_ExecutionId, Type: smithy.ShapeTypeString})
+var sStopFlowRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sStopFlowResponse_flowArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowArn", ID: &i_FlowArn, Type: smithy.ShapeTypeString})
+var sStopFlowResponse_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &iFlowStatus, Members: &mFlowStatus, Type: smithy.ShapeTypeEnum})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t35, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUnregisterConnectorRequest_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sUnregisterConnectorRequest_forceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forceDelete", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Traits: &t35, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t36, Type: smithy.ShapeTypeList})
+var sUpdateConnectorProfileRequest_connectorProfileName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileName", ID: &i_ConnectorProfileName, Type: smithy.ShapeTypeString})
+var sUpdateConnectorProfileRequest_connectionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionMode", ID: &iConnectionMode, Members: &mConnectionMode, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectorProfileRequest_connectorProfileConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileConfig", ID: &iConnectorProfileConfig, Members: &mConnectorProfileConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorProfileRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateConnectorProfileResponse_connectorProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProfileArn", ID: &i_ConnectorProfileArn, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRegistrationRequest_connectorLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorLabel", ID: &i_ConnectorLabel, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRegistrationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRegistrationRequest_connectorProvisioningConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorProvisioningConfig", ID: &iConnectorProvisioningConfig, Members: &mConnectorProvisioningConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectorRegistrationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateConnectorRegistrationResponse_connectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectorArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUpdateFlowRequest_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_FlowName, Type: smithy.ShapeTypeString})
+var sUpdateFlowRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FlowDescription, Type: smithy.ShapeTypeString})
+var sUpdateFlowRequest_triggerConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "triggerConfig", ID: &iTriggerConfig, Members: &mTriggerConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateFlowRequest_sourceFlowConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceFlowConfig", ID: &iSourceFlowConfig, Members: &mSourceFlowConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateFlowRequest_destinationFlowConfigList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationFlowConfigList", ID: &i_DestinationFlowConfigList, Members: &m_DestinationFlowConfigList, Type: smithy.ShapeTypeList})
+var sUpdateFlowRequest_tasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tasks", ID: &i_Tasks, Members: &m_Tasks, Type: smithy.ShapeTypeList})
+var sUpdateFlowRequest_metadataCatalogConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataCatalogConfig", ID: &iMetadataCatalogConfig, Members: &mMetadataCatalogConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateFlowRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateFlowResponse_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &iFlowStatus, Members: &mFlowStatus, Type: smithy.ShapeTypeEnum})
+
+var CancelFlowExecutions = &sCancelFlowExecutions
+
+var CreateConnectorProfile = &sCreateConnectorProfile
+
+var CreateFlow = &sCreateFlow
+
+var DeleteConnectorProfile = &sDeleteConnectorProfile
+
+var DeleteFlow = &sDeleteFlow
+
+var DescribeConnector = &sDescribeConnector
+
+var DescribeConnectorEntity = &sDescribeConnectorEntity
+
+var DescribeConnectorProfiles = &sDescribeConnectorProfiles
+
+var DescribeConnectors = &sDescribeConnectors
+
+var DescribeFlow = &sDescribeFlow
+
+var DescribeFlowExecutionRecords = &sDescribeFlowExecutionRecords
+
+var ListConnectorEntities = &sListConnectorEntities
+
+var ListConnectors = &sListConnectors
+
+var ListFlows = &sListFlows
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterConnector = &sRegisterConnector
+
+var ResetConnectorMetadataCache = &sResetConnectorMetadataCache
+
+var StartFlow = &sStartFlow
+
+var StopFlow = &sStopFlow
+
+var TagResource = &sTagResource
+
+var UnregisterConnector = &sUnregisterConnector
+
+var UntagResource = &sUntagResource
+
+var UpdateConnectorProfile = &sUpdateConnectorProfile
+
+var UpdateConnectorRegistration = &sUpdateConnectorRegistration
+
+var UpdateFlow = &sUpdateFlow
+
+var _SandstoneConfigurationServiceLambda = &s_SandstoneConfigurationServiceLambda
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccessKeyId = &s_AccessKeyId
+
+var _AccessToken = &s_AccessToken
+
+var _AccountName = &s_AccountName
+
+var AggregationConfig = &sAggregationConfig
+var AggregationConfig_aggregationType = &sAggregationConfig_aggregationType
+var AggregationConfig_targetFileSize = &sAggregationConfig_targetFileSize
+
+var AggregationType = &sAggregationType
+var AggregationType_NONE = &sAggregationType_NONE
+var AggregationType_SINGLE_FILE = &sAggregationType_SINGLE_FILE
+
+var AmplitudeConnectorOperator = &sAmplitudeConnectorOperator
+var AmplitudeConnectorOperator_BETWEEN = &sAmplitudeConnectorOperator_BETWEEN
+
+var AmplitudeConnectorProfileCredentials = &sAmplitudeConnectorProfileCredentials
+var AmplitudeConnectorProfileCredentials_apiKey = &sAmplitudeConnectorProfileCredentials_apiKey
+var AmplitudeConnectorProfileCredentials_secretKey = &sAmplitudeConnectorProfileCredentials_secretKey
+
+var AmplitudeConnectorProfileProperties = &sAmplitudeConnectorProfileProperties
+
+var AmplitudeMetadata = &sAmplitudeMetadata
+
+var AmplitudeSourceProperties = &sAmplitudeSourceProperties
+var AmplitudeSourceProperties_object = &sAmplitudeSourceProperties_object
+
+var _ApiKey = &s_ApiKey
+
+var ApiKeyCredentials = &sApiKeyCredentials
+var ApiKeyCredentials_apiKey = &sApiKeyCredentials_apiKey
+var ApiKeyCredentials_apiSecretKey = &sApiKeyCredentials_apiSecretKey
+
+var _ApiSecretKey = &s_ApiSecretKey
+
+var _ApiToken = &s_ApiToken
+
+var _ApiVersion = &s_ApiVersion
+
+var _ApplicationHostUrl = &s_ApplicationHostUrl
+
+var _ApplicationKey = &s_ApplicationKey
+
+var _ApplicationServicePath = &s_ApplicationServicePath
+
+var _ApplicationType = &s_ApplicationType
+
+var _ARN = &s_ARN
+
+var _AuthCode = &s_AuthCode
+
+var _AuthCodeUrl = &s_AuthCodeUrl
+
+var _AuthCodeUrlList = &s_AuthCodeUrlList
+var _AuthCodeUrlList_member = &s_AuthCodeUrlList_member
+
+var AuthenticationConfig = &sAuthenticationConfig
+var AuthenticationConfig_isBasicAuthSupported = &sAuthenticationConfig_isBasicAuthSupported
+var AuthenticationConfig_isApiKeyAuthSupported = &sAuthenticationConfig_isApiKeyAuthSupported
+var AuthenticationConfig_isOAuth2Supported = &sAuthenticationConfig_isOAuth2Supported
+var AuthenticationConfig_isCustomAuthSupported = &sAuthenticationConfig_isCustomAuthSupported
+var AuthenticationConfig_oAuth2Defaults = &sAuthenticationConfig_oAuth2Defaults
+var AuthenticationConfig_customAuthConfigs = &sAuthenticationConfig_customAuthConfigs
+
+var AuthenticationType = &sAuthenticationType
+var AuthenticationType_OAUTH2 = &sAuthenticationType_OAUTH2
+var AuthenticationType_APIKEY = &sAuthenticationType_APIKEY
+var AuthenticationType_BASIC = &sAuthenticationType_BASIC
+var AuthenticationType_CUSTOM = &sAuthenticationType_CUSTOM
+
+var AuthParameter = &sAuthParameter
+var AuthParameter_key = &sAuthParameter_key
+var AuthParameter_isRequired = &sAuthParameter_isRequired
+var AuthParameter_label = &sAuthParameter_label
+var AuthParameter_description = &sAuthParameter_description
+var AuthParameter_isSensitiveField = &sAuthParameter_isSensitiveField
+var AuthParameter_connectorSuppliedValues = &sAuthParameter_connectorSuppliedValues
+
+var _AuthParameterList = &s_AuthParameterList
+var _AuthParameterList_member = &s_AuthParameterList_member
+
+var BasicAuthCredentials = &sBasicAuthCredentials
+var BasicAuthCredentials_username = &sBasicAuthCredentials_username
+var BasicAuthCredentials_password = &sBasicAuthCredentials_password
+
+var _Boolean = &s_Boolean
+
+var _BucketName = &s_BucketName
+
+var _BucketPrefix = &s_BucketPrefix
+
+var _BusinessUnitId = &s_BusinessUnitId
+
+var CatalogType = &sCatalogType
+var CatalogType_GLUE = &sCatalogType_GLUE
+
+var _ClientCredentialsArn = &s_ClientCredentialsArn
+
+var _ClientId = &s_ClientId
+
+var _ClientNumber = &s_ClientNumber
+
+var _ClientSecret = &s_ClientSecret
+
+var _ClientToken = &s_ClientToken
+
+var _ClusterIdentifier = &s_ClusterIdentifier
+
+var _CodeVerifier = &s_CodeVerifier
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ConnectionMode = &sConnectionMode
+var ConnectionMode_PUBLIC = &sConnectionMode_PUBLIC
+var ConnectionMode_PRIVATE = &sConnectionMode_PRIVATE
+
+var ConnectorAuthenticationException = &sConnectorAuthenticationException
+var ConnectorAuthenticationException_message = &sConnectorAuthenticationException_message
+
+var ConnectorConfiguration = &sConnectorConfiguration
+var ConnectorConfiguration_canUseAsSource = &sConnectorConfiguration_canUseAsSource
+var ConnectorConfiguration_canUseAsDestination = &sConnectorConfiguration_canUseAsDestination
+var ConnectorConfiguration_supportedDestinationConnectors = &sConnectorConfiguration_supportedDestinationConnectors
+var ConnectorConfiguration_supportedSchedulingFrequencies = &sConnectorConfiguration_supportedSchedulingFrequencies
+var ConnectorConfiguration_isPrivateLinkEnabled = &sConnectorConfiguration_isPrivateLinkEnabled
+var ConnectorConfiguration_isPrivateLinkEndpointUrlRequired = &sConnectorConfiguration_isPrivateLinkEndpointUrlRequired
+var ConnectorConfiguration_supportedTriggerTypes = &sConnectorConfiguration_supportedTriggerTypes
+var ConnectorConfiguration_connectorMetadata = &sConnectorConfiguration_connectorMetadata
+var ConnectorConfiguration_connectorType = &sConnectorConfiguration_connectorType
+var ConnectorConfiguration_connectorLabel = &sConnectorConfiguration_connectorLabel
+var ConnectorConfiguration_connectorDescription = &sConnectorConfiguration_connectorDescription
+var ConnectorConfiguration_connectorOwner = &sConnectorConfiguration_connectorOwner
+var ConnectorConfiguration_connectorName = &sConnectorConfiguration_connectorName
+var ConnectorConfiguration_connectorVersion = &sConnectorConfiguration_connectorVersion
+var ConnectorConfiguration_connectorArn = &sConnectorConfiguration_connectorArn
+var ConnectorConfiguration_connectorModes = &sConnectorConfiguration_connectorModes
+var ConnectorConfiguration_authenticationConfig = &sConnectorConfiguration_authenticationConfig
+var ConnectorConfiguration_connectorRuntimeSettings = &sConnectorConfiguration_connectorRuntimeSettings
+var ConnectorConfiguration_supportedApiVersions = &sConnectorConfiguration_supportedApiVersions
+var ConnectorConfiguration_supportedOperators = &sConnectorConfiguration_supportedOperators
+var ConnectorConfiguration_supportedWriteOperations = &sConnectorConfiguration_supportedWriteOperations
+var ConnectorConfiguration_connectorProvisioningType = &sConnectorConfiguration_connectorProvisioningType
+var ConnectorConfiguration_connectorProvisioningConfig = &sConnectorConfiguration_connectorProvisioningConfig
+var ConnectorConfiguration_logoURL = &sConnectorConfiguration_logoURL
+var ConnectorConfiguration_registeredAt = &sConnectorConfiguration_registeredAt
+var ConnectorConfiguration_registeredBy = &sConnectorConfiguration_registeredBy
+var ConnectorConfiguration_supportedDataTransferTypes = &sConnectorConfiguration_supportedDataTransferTypes
+var ConnectorConfiguration_supportedDataTransferApis = &sConnectorConfiguration_supportedDataTransferApis
+
+var _ConnectorConfigurationsMap = &s_ConnectorConfigurationsMap
+var _ConnectorConfigurationsMap_key = &s_ConnectorConfigurationsMap_key
+var _ConnectorConfigurationsMap_value = &s_ConnectorConfigurationsMap_value
+
+var _ConnectorDescription = &s_ConnectorDescription
+
+var ConnectorDetail = &sConnectorDetail
+var ConnectorDetail_connectorDescription = &sConnectorDetail_connectorDescription
+var ConnectorDetail_connectorName = &sConnectorDetail_connectorName
+var ConnectorDetail_connectorOwner = &sConnectorDetail_connectorOwner
+var ConnectorDetail_connectorVersion = &sConnectorDetail_connectorVersion
+var ConnectorDetail_applicationType = &sConnectorDetail_applicationType
+var ConnectorDetail_connectorType = &sConnectorDetail_connectorType
+var ConnectorDetail_connectorLabel = &sConnectorDetail_connectorLabel
+var ConnectorDetail_registeredAt = &sConnectorDetail_registeredAt
+var ConnectorDetail_registeredBy = &sConnectorDetail_registeredBy
+var ConnectorDetail_connectorProvisioningType = &sConnectorDetail_connectorProvisioningType
+var ConnectorDetail_connectorModes = &sConnectorDetail_connectorModes
+var ConnectorDetail_supportedDataTransferTypes = &sConnectorDetail_supportedDataTransferTypes
+
+var ConnectorEntity = &sConnectorEntity
+var ConnectorEntity_name = &sConnectorEntity_name
+var ConnectorEntity_label = &sConnectorEntity_label
+var ConnectorEntity_hasNestedEntities = &sConnectorEntity_hasNestedEntities
+
+var ConnectorEntityField = &sConnectorEntityField
+var ConnectorEntityField_identifier = &sConnectorEntityField_identifier
+var ConnectorEntityField_parentIdentifier = &sConnectorEntityField_parentIdentifier
+var ConnectorEntityField_label = &sConnectorEntityField_label
+var ConnectorEntityField_isPrimaryKey = &sConnectorEntityField_isPrimaryKey
+var ConnectorEntityField_defaultValue = &sConnectorEntityField_defaultValue
+var ConnectorEntityField_isDeprecated = &sConnectorEntityField_isDeprecated
+var ConnectorEntityField_supportedFieldTypeDetails = &sConnectorEntityField_supportedFieldTypeDetails
+var ConnectorEntityField_description = &sConnectorEntityField_description
+var ConnectorEntityField_sourceProperties = &sConnectorEntityField_sourceProperties
+var ConnectorEntityField_destinationProperties = &sConnectorEntityField_destinationProperties
+var ConnectorEntityField_customProperties = &sConnectorEntityField_customProperties
+
+var _ConnectorEntityFieldList = &s_ConnectorEntityFieldList
+var _ConnectorEntityFieldList_member = &s_ConnectorEntityFieldList_member
+
+var _ConnectorEntityList = &s_ConnectorEntityList
+var _ConnectorEntityList_member = &s_ConnectorEntityList_member
+
+var _ConnectorEntityMap = &s_ConnectorEntityMap
+var _ConnectorEntityMap_key = &s_ConnectorEntityMap_key
+var _ConnectorEntityMap_value = &s_ConnectorEntityMap_value
+
+var _ConnectorLabel = &s_ConnectorLabel
+
+var _ConnectorList = &s_ConnectorList
+var _ConnectorList_member = &s_ConnectorList_member
+
+var ConnectorMetadata = &sConnectorMetadata
+var ConnectorMetadata_Amplitude = &sConnectorMetadata_Amplitude
+var ConnectorMetadata_Datadog = &sConnectorMetadata_Datadog
+var ConnectorMetadata_Dynatrace = &sConnectorMetadata_Dynatrace
+var ConnectorMetadata_GoogleAnalytics = &sConnectorMetadata_GoogleAnalytics
+var ConnectorMetadata_InforNexus = &sConnectorMetadata_InforNexus
+var ConnectorMetadata_Marketo = &sConnectorMetadata_Marketo
+var ConnectorMetadata_Redshift = &sConnectorMetadata_Redshift
+var ConnectorMetadata_S3 = &sConnectorMetadata_S3
+var ConnectorMetadata_Salesforce = &sConnectorMetadata_Salesforce
+var ConnectorMetadata_ServiceNow = &sConnectorMetadata_ServiceNow
+var ConnectorMetadata_Singular = &sConnectorMetadata_Singular
+var ConnectorMetadata_Slack = &sConnectorMetadata_Slack
+var ConnectorMetadata_Snowflake = &sConnectorMetadata_Snowflake
+var ConnectorMetadata_Trendmicro = &sConnectorMetadata_Trendmicro
+var ConnectorMetadata_Veeva = &sConnectorMetadata_Veeva
+var ConnectorMetadata_Zendesk = &sConnectorMetadata_Zendesk
+var ConnectorMetadata_EventBridge = &sConnectorMetadata_EventBridge
+var ConnectorMetadata_Upsolver = &sConnectorMetadata_Upsolver
+var ConnectorMetadata_CustomerProfiles = &sConnectorMetadata_CustomerProfiles
+var ConnectorMetadata_Honeycode = &sConnectorMetadata_Honeycode
+var ConnectorMetadata_SAPOData = &sConnectorMetadata_SAPOData
+var ConnectorMetadata_Pardot = &sConnectorMetadata_Pardot
+
+var _ConnectorMode = &s_ConnectorMode
+
+var _ConnectorModeList = &s_ConnectorModeList
+var _ConnectorModeList_member = &s_ConnectorModeList_member
+
+var _ConnectorName = &s_ConnectorName
+
+var ConnectorOAuthRequest = &sConnectorOAuthRequest
+var ConnectorOAuthRequest_authCode = &sConnectorOAuthRequest_authCode
+var ConnectorOAuthRequest_redirectUri = &sConnectorOAuthRequest_redirectUri
+var ConnectorOAuthRequest_codeVerifier = &sConnectorOAuthRequest_codeVerifier
+
+var ConnectorOperator = &sConnectorOperator
+var ConnectorOperator_Amplitude = &sConnectorOperator_Amplitude
+var ConnectorOperator_Datadog = &sConnectorOperator_Datadog
+var ConnectorOperator_Dynatrace = &sConnectorOperator_Dynatrace
+var ConnectorOperator_GoogleAnalytics = &sConnectorOperator_GoogleAnalytics
+var ConnectorOperator_InforNexus = &sConnectorOperator_InforNexus
+var ConnectorOperator_Marketo = &sConnectorOperator_Marketo
+var ConnectorOperator_S3 = &sConnectorOperator_S3
+var ConnectorOperator_Salesforce = &sConnectorOperator_Salesforce
+var ConnectorOperator_ServiceNow = &sConnectorOperator_ServiceNow
+var ConnectorOperator_Singular = &sConnectorOperator_Singular
+var ConnectorOperator_Slack = &sConnectorOperator_Slack
+var ConnectorOperator_Trendmicro = &sConnectorOperator_Trendmicro
+var ConnectorOperator_Veeva = &sConnectorOperator_Veeva
+var ConnectorOperator_Zendesk = &sConnectorOperator_Zendesk
+var ConnectorOperator_SAPOData = &sConnectorOperator_SAPOData
+var ConnectorOperator_CustomConnector = &sConnectorOperator_CustomConnector
+var ConnectorOperator_Pardot = &sConnectorOperator_Pardot
+
+var _ConnectorOwner = &s_ConnectorOwner
+
+var ConnectorProfile = &sConnectorProfile
+var ConnectorProfile_connectorProfileArn = &sConnectorProfile_connectorProfileArn
+var ConnectorProfile_connectorProfileName = &sConnectorProfile_connectorProfileName
+var ConnectorProfile_connectorType = &sConnectorProfile_connectorType
+var ConnectorProfile_connectorLabel = &sConnectorProfile_connectorLabel
+var ConnectorProfile_connectionMode = &sConnectorProfile_connectionMode
+var ConnectorProfile_credentialsArn = &sConnectorProfile_credentialsArn
+var ConnectorProfile_connectorProfileProperties = &sConnectorProfile_connectorProfileProperties
+var ConnectorProfile_createdAt = &sConnectorProfile_createdAt
+var ConnectorProfile_lastUpdatedAt = &sConnectorProfile_lastUpdatedAt
+var ConnectorProfile_privateConnectionProvisioningState = &sConnectorProfile_privateConnectionProvisioningState
+
+var _ConnectorProfileArn = &s_ConnectorProfileArn
+
+var ConnectorProfileConfig = &sConnectorProfileConfig
+var ConnectorProfileConfig_connectorProfileProperties = &sConnectorProfileConfig_connectorProfileProperties
+var ConnectorProfileConfig_connectorProfileCredentials = &sConnectorProfileConfig_connectorProfileCredentials
+
+var ConnectorProfileCredentials = &sConnectorProfileCredentials
+var ConnectorProfileCredentials_Amplitude = &sConnectorProfileCredentials_Amplitude
+var ConnectorProfileCredentials_Datadog = &sConnectorProfileCredentials_Datadog
+var ConnectorProfileCredentials_Dynatrace = &sConnectorProfileCredentials_Dynatrace
+var ConnectorProfileCredentials_GoogleAnalytics = &sConnectorProfileCredentials_GoogleAnalytics
+var ConnectorProfileCredentials_Honeycode = &sConnectorProfileCredentials_Honeycode
+var ConnectorProfileCredentials_InforNexus = &sConnectorProfileCredentials_InforNexus
+var ConnectorProfileCredentials_Marketo = &sConnectorProfileCredentials_Marketo
+var ConnectorProfileCredentials_Redshift = &sConnectorProfileCredentials_Redshift
+var ConnectorProfileCredentials_Salesforce = &sConnectorProfileCredentials_Salesforce
+var ConnectorProfileCredentials_ServiceNow = &sConnectorProfileCredentials_ServiceNow
+var ConnectorProfileCredentials_Singular = &sConnectorProfileCredentials_Singular
+var ConnectorProfileCredentials_Slack = &sConnectorProfileCredentials_Slack
+var ConnectorProfileCredentials_Snowflake = &sConnectorProfileCredentials_Snowflake
+var ConnectorProfileCredentials_Trendmicro = &sConnectorProfileCredentials_Trendmicro
+var ConnectorProfileCredentials_Veeva = &sConnectorProfileCredentials_Veeva
+var ConnectorProfileCredentials_Zendesk = &sConnectorProfileCredentials_Zendesk
+var ConnectorProfileCredentials_SAPOData = &sConnectorProfileCredentials_SAPOData
+var ConnectorProfileCredentials_CustomConnector = &sConnectorProfileCredentials_CustomConnector
+var ConnectorProfileCredentials_Pardot = &sConnectorProfileCredentials_Pardot
+
+var _ConnectorProfileDetailList = &s_ConnectorProfileDetailList
+var _ConnectorProfileDetailList_member = &s_ConnectorProfileDetailList_member
+
+var _ConnectorProfileName = &s_ConnectorProfileName
+
+var _ConnectorProfileNameList = &s_ConnectorProfileNameList
+var _ConnectorProfileNameList_member = &s_ConnectorProfileNameList_member
+
+var ConnectorProfileProperties = &sConnectorProfileProperties
+var ConnectorProfileProperties_Amplitude = &sConnectorProfileProperties_Amplitude
+var ConnectorProfileProperties_Datadog = &sConnectorProfileProperties_Datadog
+var ConnectorProfileProperties_Dynatrace = &sConnectorProfileProperties_Dynatrace
+var ConnectorProfileProperties_GoogleAnalytics = &sConnectorProfileProperties_GoogleAnalytics
+var ConnectorProfileProperties_Honeycode = &sConnectorProfileProperties_Honeycode
+var ConnectorProfileProperties_InforNexus = &sConnectorProfileProperties_InforNexus
+var ConnectorProfileProperties_Marketo = &sConnectorProfileProperties_Marketo
+var ConnectorProfileProperties_Redshift = &sConnectorProfileProperties_Redshift
+var ConnectorProfileProperties_Salesforce = &sConnectorProfileProperties_Salesforce
+var ConnectorProfileProperties_ServiceNow = &sConnectorProfileProperties_ServiceNow
+var ConnectorProfileProperties_Singular = &sConnectorProfileProperties_Singular
+var ConnectorProfileProperties_Slack = &sConnectorProfileProperties_Slack
+var ConnectorProfileProperties_Snowflake = &sConnectorProfileProperties_Snowflake
+var ConnectorProfileProperties_Trendmicro = &sConnectorProfileProperties_Trendmicro
+var ConnectorProfileProperties_Veeva = &sConnectorProfileProperties_Veeva
+var ConnectorProfileProperties_Zendesk = &sConnectorProfileProperties_Zendesk
+var ConnectorProfileProperties_SAPOData = &sConnectorProfileProperties_SAPOData
+var ConnectorProfileProperties_CustomConnector = &sConnectorProfileProperties_CustomConnector
+var ConnectorProfileProperties_Pardot = &sConnectorProfileProperties_Pardot
+
+var ConnectorProvisioningConfig = &sConnectorProvisioningConfig
+var ConnectorProvisioningConfig_lambda = &sConnectorProvisioningConfig_lambda
+
+var ConnectorProvisioningType = &sConnectorProvisioningType
+var ConnectorProvisioningType_LAMBDA = &sConnectorProvisioningType_LAMBDA
+
+var ConnectorRuntimeSetting = &sConnectorRuntimeSetting
+var ConnectorRuntimeSetting_key = &sConnectorRuntimeSetting_key
+var ConnectorRuntimeSetting_dataType = &sConnectorRuntimeSetting_dataType
+var ConnectorRuntimeSetting_isRequired = &sConnectorRuntimeSetting_isRequired
+var ConnectorRuntimeSetting_label = &sConnectorRuntimeSetting_label
+var ConnectorRuntimeSetting_description = &sConnectorRuntimeSetting_description
+var ConnectorRuntimeSetting_scope = &sConnectorRuntimeSetting_scope
+var ConnectorRuntimeSetting_connectorSuppliedValueOptions = &sConnectorRuntimeSetting_connectorSuppliedValueOptions
+
+var _ConnectorRuntimeSettingDataType = &s_ConnectorRuntimeSettingDataType
+
+var _ConnectorRuntimeSettingList = &s_ConnectorRuntimeSettingList
+var _ConnectorRuntimeSettingList_member = &s_ConnectorRuntimeSettingList_member
+
+var _ConnectorRuntimeSettingScope = &s_ConnectorRuntimeSettingScope
+
+var ConnectorServerException = &sConnectorServerException
+var ConnectorServerException_message = &sConnectorServerException_message
+
+var _ConnectorSuppliedValue = &s_ConnectorSuppliedValue
+
+var _ConnectorSuppliedValueList = &s_ConnectorSuppliedValueList
+var _ConnectorSuppliedValueList_member = &s_ConnectorSuppliedValueList_member
+
+var _ConnectorSuppliedValueOptionList = &s_ConnectorSuppliedValueOptionList
+var _ConnectorSuppliedValueOptionList_member = &s_ConnectorSuppliedValueOptionList_member
+
+var ConnectorType = &sConnectorType
+var ConnectorType_SALESFORCE = &sConnectorType_SALESFORCE
+var ConnectorType_SINGULAR = &sConnectorType_SINGULAR
+var ConnectorType_SLACK = &sConnectorType_SLACK
+var ConnectorType_REDSHIFT = &sConnectorType_REDSHIFT
+var ConnectorType_S3 = &sConnectorType_S3
+var ConnectorType_MARKETO = &sConnectorType_MARKETO
+var ConnectorType_GOOGLEANALYTICS = &sConnectorType_GOOGLEANALYTICS
+var ConnectorType_ZENDESK = &sConnectorType_ZENDESK
+var ConnectorType_SERVICENOW = &sConnectorType_SERVICENOW
+var ConnectorType_DATADOG = &sConnectorType_DATADOG
+var ConnectorType_TRENDMICRO = &sConnectorType_TRENDMICRO
+var ConnectorType_SNOWFLAKE = &sConnectorType_SNOWFLAKE
+var ConnectorType_DYNATRACE = &sConnectorType_DYNATRACE
+var ConnectorType_INFORNEXUS = &sConnectorType_INFORNEXUS
+var ConnectorType_AMPLITUDE = &sConnectorType_AMPLITUDE
+var ConnectorType_VEEVA = &sConnectorType_VEEVA
+var ConnectorType_EVENTBRIDGE = &sConnectorType_EVENTBRIDGE
+var ConnectorType_LOOKOUTMETRICS = &sConnectorType_LOOKOUTMETRICS
+var ConnectorType_UPSOLVER = &sConnectorType_UPSOLVER
+var ConnectorType_HONEYCODE = &sConnectorType_HONEYCODE
+var ConnectorType_CUSTOMERPROFILES = &sConnectorType_CUSTOMERPROFILES
+var ConnectorType_SAPODATA = &sConnectorType_SAPODATA
+var ConnectorType_CUSTOMCONNECTOR = &sConnectorType_CUSTOMCONNECTOR
+var ConnectorType_PARDOT = &sConnectorType_PARDOT
+
+var _ConnectorTypeList = &s_ConnectorTypeList
+var _ConnectorTypeList_member = &s_ConnectorTypeList_member
+
+var _ConnectorVersion = &s_ConnectorVersion
+
+var _CreatedBy = &s_CreatedBy
+
+var _CredentialsMap = &s_CredentialsMap
+var _CredentialsMap_key = &s_CredentialsMap_key
+var _CredentialsMap_value = &s_CredentialsMap_value
+
+var _CredentialsMapKey = &s_CredentialsMapKey
+
+var _CredentialsMapValue = &s_CredentialsMapValue
+
+var CustomAuthConfig = &sCustomAuthConfig
+var CustomAuthConfig_customAuthenticationType = &sCustomAuthConfig_customAuthenticationType
+var CustomAuthConfig_authParameters = &sCustomAuthConfig_authParameters
+
+var _CustomAuthConfigList = &s_CustomAuthConfigList
+var _CustomAuthConfigList_member = &s_CustomAuthConfigList_member
+
+var CustomAuthCredentials = &sCustomAuthCredentials
+var CustomAuthCredentials_customAuthenticationType = &sCustomAuthCredentials_customAuthenticationType
+var CustomAuthCredentials_credentialsMap = &sCustomAuthCredentials_credentialsMap
+
+var _CustomAuthenticationType = &s_CustomAuthenticationType
+
+var CustomConnectorDestinationProperties = &sCustomConnectorDestinationProperties
+var CustomConnectorDestinationProperties_entityName = &sCustomConnectorDestinationProperties_entityName
+var CustomConnectorDestinationProperties_errorHandlingConfig = &sCustomConnectorDestinationProperties_errorHandlingConfig
+var CustomConnectorDestinationProperties_writeOperationType = &sCustomConnectorDestinationProperties_writeOperationType
+var CustomConnectorDestinationProperties_idFieldNames = &sCustomConnectorDestinationProperties_idFieldNames
+var CustomConnectorDestinationProperties_customProperties = &sCustomConnectorDestinationProperties_customProperties
+
+var CustomConnectorProfileCredentials = &sCustomConnectorProfileCredentials
+var CustomConnectorProfileCredentials_authenticationType = &sCustomConnectorProfileCredentials_authenticationType
+var CustomConnectorProfileCredentials_basic = &sCustomConnectorProfileCredentials_basic
+var CustomConnectorProfileCredentials_oauth2 = &sCustomConnectorProfileCredentials_oauth2
+var CustomConnectorProfileCredentials_apiKey = &sCustomConnectorProfileCredentials_apiKey
+var CustomConnectorProfileCredentials_custom = &sCustomConnectorProfileCredentials_custom
+
+var CustomConnectorProfileProperties = &sCustomConnectorProfileProperties
+var CustomConnectorProfileProperties_profileProperties = &sCustomConnectorProfileProperties_profileProperties
+var CustomConnectorProfileProperties_oAuth2Properties = &sCustomConnectorProfileProperties_oAuth2Properties
+
+var CustomConnectorSourceProperties = &sCustomConnectorSourceProperties
+var CustomConnectorSourceProperties_entityName = &sCustomConnectorSourceProperties_entityName
+var CustomConnectorSourceProperties_customProperties = &sCustomConnectorSourceProperties_customProperties
+var CustomConnectorSourceProperties_dataTransferApi = &sCustomConnectorSourceProperties_dataTransferApi
+
+var CustomerProfilesDestinationProperties = &sCustomerProfilesDestinationProperties
+var CustomerProfilesDestinationProperties_domainName = &sCustomerProfilesDestinationProperties_domainName
+var CustomerProfilesDestinationProperties_objectTypeName = &sCustomerProfilesDestinationProperties_objectTypeName
+
+var CustomerProfilesMetadata = &sCustomerProfilesMetadata
+
+var _CustomProperties = &s_CustomProperties
+var _CustomProperties_key = &s_CustomProperties_key
+var _CustomProperties_value = &s_CustomProperties_value
+
+var _CustomPropertyKey = &s_CustomPropertyKey
+
+var _CustomPropertyValue = &s_CustomPropertyValue
+
+var _DataApiRoleArn = &s_DataApiRoleArn
+
+var _DatabaseName = &s_DatabaseName
+
+var _DatabaseUrl = &s_DatabaseUrl
+
+var DatadogConnectorOperator = &sDatadogConnectorOperator
+var DatadogConnectorOperator_PROJECTION = &sDatadogConnectorOperator_PROJECTION
+var DatadogConnectorOperator_BETWEEN = &sDatadogConnectorOperator_BETWEEN
+var DatadogConnectorOperator_EQUAL_TO = &sDatadogConnectorOperator_EQUAL_TO
+var DatadogConnectorOperator_ADDITION = &sDatadogConnectorOperator_ADDITION
+var DatadogConnectorOperator_MULTIPLICATION = &sDatadogConnectorOperator_MULTIPLICATION
+var DatadogConnectorOperator_DIVISION = &sDatadogConnectorOperator_DIVISION
+var DatadogConnectorOperator_SUBTRACTION = &sDatadogConnectorOperator_SUBTRACTION
+var DatadogConnectorOperator_MASK_ALL = &sDatadogConnectorOperator_MASK_ALL
+var DatadogConnectorOperator_MASK_FIRST_N = &sDatadogConnectorOperator_MASK_FIRST_N
+var DatadogConnectorOperator_MASK_LAST_N = &sDatadogConnectorOperator_MASK_LAST_N
+var DatadogConnectorOperator_VALIDATE_NON_NULL = &sDatadogConnectorOperator_VALIDATE_NON_NULL
+var DatadogConnectorOperator_VALIDATE_NON_ZERO = &sDatadogConnectorOperator_VALIDATE_NON_ZERO
+var DatadogConnectorOperator_VALIDATE_NON_NEGATIVE = &sDatadogConnectorOperator_VALIDATE_NON_NEGATIVE
+var DatadogConnectorOperator_VALIDATE_NUMERIC = &sDatadogConnectorOperator_VALIDATE_NUMERIC
+var DatadogConnectorOperator_NO_OP = &sDatadogConnectorOperator_NO_OP
+
+var DatadogConnectorProfileCredentials = &sDatadogConnectorProfileCredentials
+var DatadogConnectorProfileCredentials_apiKey = &sDatadogConnectorProfileCredentials_apiKey
+var DatadogConnectorProfileCredentials_applicationKey = &sDatadogConnectorProfileCredentials_applicationKey
+
+var DatadogConnectorProfileProperties = &sDatadogConnectorProfileProperties
+var DatadogConnectorProfileProperties_instanceUrl = &sDatadogConnectorProfileProperties_instanceUrl
+
+var DatadogMetadata = &sDatadogMetadata
+
+var DatadogSourceProperties = &sDatadogSourceProperties
+var DatadogSourceProperties_object = &sDatadogSourceProperties_object
+
+var DataPullMode = &sDataPullMode
+var DataPullMode_INCREMENTAL = &sDataPullMode_INCREMENTAL
+var DataPullMode_COMPLETE = &sDataPullMode_COMPLETE
+
+var DataTransferApi = &sDataTransferApi
+var DataTransferApi_Name = &sDataTransferApi_Name
+var DataTransferApi_Type = &sDataTransferApi_Type
+
+var DataTransferApiType = &sDataTransferApiType
+var DataTransferApiType_SYNC = &sDataTransferApiType_SYNC
+var DataTransferApiType_ASYNC = &sDataTransferApiType_ASYNC
+var DataTransferApiType_AUTOMATIC = &sDataTransferApiType_AUTOMATIC
+
+var _DataTransferApiTypeName = &s_DataTransferApiTypeName
+
+var _Date = &s_Date
+
+var _DatetimeTypeFieldName = &s_DatetimeTypeFieldName
+
+var _Description = &s_Description
+
+var DestinationConnectorProperties = &sDestinationConnectorProperties
+var DestinationConnectorProperties_Redshift = &sDestinationConnectorProperties_Redshift
+var DestinationConnectorProperties_S3 = &sDestinationConnectorProperties_S3
+var DestinationConnectorProperties_Salesforce = &sDestinationConnectorProperties_Salesforce
+var DestinationConnectorProperties_Snowflake = &sDestinationConnectorProperties_Snowflake
+var DestinationConnectorProperties_EventBridge = &sDestinationConnectorProperties_EventBridge
+var DestinationConnectorProperties_LookoutMetrics = &sDestinationConnectorProperties_LookoutMetrics
+var DestinationConnectorProperties_Upsolver = &sDestinationConnectorProperties_Upsolver
+var DestinationConnectorProperties_Honeycode = &sDestinationConnectorProperties_Honeycode
+var DestinationConnectorProperties_CustomerProfiles = &sDestinationConnectorProperties_CustomerProfiles
+var DestinationConnectorProperties_Zendesk = &sDestinationConnectorProperties_Zendesk
+var DestinationConnectorProperties_Marketo = &sDestinationConnectorProperties_Marketo
+var DestinationConnectorProperties_CustomConnector = &sDestinationConnectorProperties_CustomConnector
+var DestinationConnectorProperties_SAPOData = &sDestinationConnectorProperties_SAPOData
+
+var _DestinationField = &s_DestinationField
+
+var DestinationFieldProperties = &sDestinationFieldProperties
+var DestinationFieldProperties_isCreatable = &sDestinationFieldProperties_isCreatable
+var DestinationFieldProperties_isNullable = &sDestinationFieldProperties_isNullable
+var DestinationFieldProperties_isUpsertable = &sDestinationFieldProperties_isUpsertable
+var DestinationFieldProperties_isUpdatable = &sDestinationFieldProperties_isUpdatable
+var DestinationFieldProperties_isDefaultedOnCreate = &sDestinationFieldProperties_isDefaultedOnCreate
+var DestinationFieldProperties_supportedWriteOperations = &sDestinationFieldProperties_supportedWriteOperations
+
+var DestinationFlowConfig = &sDestinationFlowConfig
+var DestinationFlowConfig_connectorType = &sDestinationFlowConfig_connectorType
+var DestinationFlowConfig_apiVersion = &sDestinationFlowConfig_apiVersion
+var DestinationFlowConfig_connectorProfileName = &sDestinationFlowConfig_connectorProfileName
+var DestinationFlowConfig_destinationConnectorProperties = &sDestinationFlowConfig_destinationConnectorProperties
+
+var _DestinationFlowConfigList = &s_DestinationFlowConfigList
+var _DestinationFlowConfigList_member = &s_DestinationFlowConfigList_member
+
+var _DocumentType = &s_DocumentType
+
+var _DomainName = &s_DomainName
+
+var _Double = &s_Double
+
+var DynatraceConnectorOperator = &sDynatraceConnectorOperator
+var DynatraceConnectorOperator_PROJECTION = &sDynatraceConnectorOperator_PROJECTION
+var DynatraceConnectorOperator_BETWEEN = &sDynatraceConnectorOperator_BETWEEN
+var DynatraceConnectorOperator_EQUAL_TO = &sDynatraceConnectorOperator_EQUAL_TO
+var DynatraceConnectorOperator_ADDITION = &sDynatraceConnectorOperator_ADDITION
+var DynatraceConnectorOperator_MULTIPLICATION = &sDynatraceConnectorOperator_MULTIPLICATION
+var DynatraceConnectorOperator_DIVISION = &sDynatraceConnectorOperator_DIVISION
+var DynatraceConnectorOperator_SUBTRACTION = &sDynatraceConnectorOperator_SUBTRACTION
+var DynatraceConnectorOperator_MASK_ALL = &sDynatraceConnectorOperator_MASK_ALL
+var DynatraceConnectorOperator_MASK_FIRST_N = &sDynatraceConnectorOperator_MASK_FIRST_N
+var DynatraceConnectorOperator_MASK_LAST_N = &sDynatraceConnectorOperator_MASK_LAST_N
+var DynatraceConnectorOperator_VALIDATE_NON_NULL = &sDynatraceConnectorOperator_VALIDATE_NON_NULL
+var DynatraceConnectorOperator_VALIDATE_NON_ZERO = &sDynatraceConnectorOperator_VALIDATE_NON_ZERO
+var DynatraceConnectorOperator_VALIDATE_NON_NEGATIVE = &sDynatraceConnectorOperator_VALIDATE_NON_NEGATIVE
+var DynatraceConnectorOperator_VALIDATE_NUMERIC = &sDynatraceConnectorOperator_VALIDATE_NUMERIC
+var DynatraceConnectorOperator_NO_OP = &sDynatraceConnectorOperator_NO_OP
+
+var DynatraceConnectorProfileCredentials = &sDynatraceConnectorProfileCredentials
+var DynatraceConnectorProfileCredentials_apiToken = &sDynatraceConnectorProfileCredentials_apiToken
+
+var DynatraceConnectorProfileProperties = &sDynatraceConnectorProfileProperties
+var DynatraceConnectorProfileProperties_instanceUrl = &sDynatraceConnectorProfileProperties_instanceUrl
+
+var DynatraceMetadata = &sDynatraceMetadata
+
+var DynatraceSourceProperties = &sDynatraceSourceProperties
+var DynatraceSourceProperties_object = &sDynatraceSourceProperties_object
+
+var _EntitiesPath = &s_EntitiesPath
+
+var _EntityName = &s_EntityName
+
+var ErrorHandlingConfig = &sErrorHandlingConfig
+var ErrorHandlingConfig_failOnFirstDestinationError = &sErrorHandlingConfig_failOnFirstDestinationError
+var ErrorHandlingConfig_bucketPrefix = &sErrorHandlingConfig_bucketPrefix
+var ErrorHandlingConfig_bucketName = &sErrorHandlingConfig_bucketName
+
+var ErrorInfo = &sErrorInfo
+var ErrorInfo_putFailuresCount = &sErrorInfo_putFailuresCount
+var ErrorInfo_executionMessage = &sErrorInfo_executionMessage
+
+var _ErrorMessage = &s_ErrorMessage
+
+var EventBridgeDestinationProperties = &sEventBridgeDestinationProperties
+var EventBridgeDestinationProperties_object = &sEventBridgeDestinationProperties_object
+var EventBridgeDestinationProperties_errorHandlingConfig = &sEventBridgeDestinationProperties_errorHandlingConfig
+
+var EventBridgeMetadata = &sEventBridgeMetadata
+
+var ExecutionDetails = &sExecutionDetails
+var ExecutionDetails_mostRecentExecutionMessage = &sExecutionDetails_mostRecentExecutionMessage
+var ExecutionDetails_mostRecentExecutionTime = &sExecutionDetails_mostRecentExecutionTime
+var ExecutionDetails_mostRecentExecutionStatus = &sExecutionDetails_mostRecentExecutionStatus
+
+var _ExecutionId = &s_ExecutionId
+
+var _ExecutionIds = &s_ExecutionIds
+var _ExecutionIds_member = &s_ExecutionIds_member
+
+var _ExecutionMessage = &s_ExecutionMessage
+
+var ExecutionRecord = &sExecutionRecord
+var ExecutionRecord_executionId = &sExecutionRecord_executionId
+var ExecutionRecord_executionStatus = &sExecutionRecord_executionStatus
+var ExecutionRecord_executionResult = &sExecutionRecord_executionResult
+var ExecutionRecord_startedAt = &sExecutionRecord_startedAt
+var ExecutionRecord_lastUpdatedAt = &sExecutionRecord_lastUpdatedAt
+var ExecutionRecord_dataPullStartTime = &sExecutionRecord_dataPullStartTime
+var ExecutionRecord_dataPullEndTime = &sExecutionRecord_dataPullEndTime
+var ExecutionRecord_metadataCatalogDetails = &sExecutionRecord_metadataCatalogDetails
+
+var ExecutionResult = &sExecutionResult
+var ExecutionResult_errorInfo = &sExecutionResult_errorInfo
+var ExecutionResult_bytesProcessed = &sExecutionResult_bytesProcessed
+var ExecutionResult_bytesWritten = &sExecutionResult_bytesWritten
+var ExecutionResult_recordsProcessed = &sExecutionResult_recordsProcessed
+var ExecutionResult_numParallelProcesses = &sExecutionResult_numParallelProcesses
+var ExecutionResult_maxPageSize = &sExecutionResult_maxPageSize
+
+var ExecutionStatus = &sExecutionStatus
+var ExecutionStatus_INPROGRESS = &sExecutionStatus_INPROGRESS
+var ExecutionStatus_SUCCESSFUL = &sExecutionStatus_SUCCESSFUL
+var ExecutionStatus_ERROR = &sExecutionStatus_ERROR
+var ExecutionStatus_CANCELSTARTED = &sExecutionStatus_CANCELSTARTED
+var ExecutionStatus_CANCELED = &sExecutionStatus_CANCELED
+
+var _FieldType = &s_FieldType
+
+var FieldTypeDetails = &sFieldTypeDetails
+var FieldTypeDetails_fieldType = &sFieldTypeDetails_fieldType
+var FieldTypeDetails_filterOperators = &sFieldTypeDetails_filterOperators
+var FieldTypeDetails_supportedValues = &sFieldTypeDetails_supportedValues
+var FieldTypeDetails_valueRegexPattern = &sFieldTypeDetails_valueRegexPattern
+var FieldTypeDetails_supportedDateFormat = &sFieldTypeDetails_supportedDateFormat
+var FieldTypeDetails_fieldValueRange = &sFieldTypeDetails_fieldValueRange
+var FieldTypeDetails_fieldLengthRange = &sFieldTypeDetails_fieldLengthRange
+
+var FileType = &sFileType
+var FileType_CSV = &sFileType_CSV
+var FileType_JSON = &sFileType_JSON
+var FileType_PARQUET = &sFileType_PARQUET
+
+var _FilterOperatorList = &s_FilterOperatorList
+var _FilterOperatorList_member = &s_FilterOperatorList_member
+
+var _FlowArn = &s_FlowArn
+
+var FlowDefinition = &sFlowDefinition
+var FlowDefinition_flowArn = &sFlowDefinition_flowArn
+var FlowDefinition_description = &sFlowDefinition_description
+var FlowDefinition_flowName = &sFlowDefinition_flowName
+var FlowDefinition_flowStatus = &sFlowDefinition_flowStatus
+var FlowDefinition_sourceConnectorType = &sFlowDefinition_sourceConnectorType
+var FlowDefinition_sourceConnectorLabel = &sFlowDefinition_sourceConnectorLabel
+var FlowDefinition_destinationConnectorType = &sFlowDefinition_destinationConnectorType
+var FlowDefinition_destinationConnectorLabel = &sFlowDefinition_destinationConnectorLabel
+var FlowDefinition_triggerType = &sFlowDefinition_triggerType
+var FlowDefinition_createdAt = &sFlowDefinition_createdAt
+var FlowDefinition_lastUpdatedAt = &sFlowDefinition_lastUpdatedAt
+var FlowDefinition_createdBy = &sFlowDefinition_createdBy
+var FlowDefinition_lastUpdatedBy = &sFlowDefinition_lastUpdatedBy
+var FlowDefinition_tags = &sFlowDefinition_tags
+var FlowDefinition_lastRunExecutionDetails = &sFlowDefinition_lastRunExecutionDetails
+
+var _FlowDescription = &s_FlowDescription
+
+var _FlowErrorDeactivationThreshold = &s_FlowErrorDeactivationThreshold
+
+var _FlowExecutionList = &s_FlowExecutionList
+var _FlowExecutionList_member = &s_FlowExecutionList_member
+
+var _FlowList = &s_FlowList
+var _FlowList_member = &s_FlowList_member
+
+var _FlowName = &s_FlowName
+
+var FlowStatus = &sFlowStatus
+var FlowStatus_ACTIVE = &sFlowStatus_ACTIVE
+var FlowStatus_DEPRECATED = &sFlowStatus_DEPRECATED
+var FlowStatus_DELETED = &sFlowStatus_DELETED
+var FlowStatus_DRAFT = &sFlowStatus_DRAFT
+var FlowStatus_ERRORED = &sFlowStatus_ERRORED
+var FlowStatus_SUSPENDED = &sFlowStatus_SUSPENDED
+
+var _FlowStatusMessage = &s_FlowStatusMessage
+
+var GlueDataCatalogConfig = &sGlueDataCatalogConfig
+var GlueDataCatalogConfig_roleArn = &sGlueDataCatalogConfig_roleArn
+var GlueDataCatalogConfig_databaseName = &sGlueDataCatalogConfig_databaseName
+var GlueDataCatalogConfig_tablePrefix = &sGlueDataCatalogConfig_tablePrefix
+
+var _GlueDataCatalogDatabaseName = &s_GlueDataCatalogDatabaseName
+
+var _GlueDataCatalogIAMRole = &s_GlueDataCatalogIAMRole
+
+var _GlueDataCatalogTablePrefix = &s_GlueDataCatalogTablePrefix
+
+var GoogleAnalyticsConnectorOperator = &sGoogleAnalyticsConnectorOperator
+var GoogleAnalyticsConnectorOperator_PROJECTION = &sGoogleAnalyticsConnectorOperator_PROJECTION
+var GoogleAnalyticsConnectorOperator_BETWEEN = &sGoogleAnalyticsConnectorOperator_BETWEEN
+
+var GoogleAnalyticsConnectorProfileCredentials = &sGoogleAnalyticsConnectorProfileCredentials
+var GoogleAnalyticsConnectorProfileCredentials_clientId = &sGoogleAnalyticsConnectorProfileCredentials_clientId
+var GoogleAnalyticsConnectorProfileCredentials_clientSecret = &sGoogleAnalyticsConnectorProfileCredentials_clientSecret
+var GoogleAnalyticsConnectorProfileCredentials_accessToken = &sGoogleAnalyticsConnectorProfileCredentials_accessToken
+var GoogleAnalyticsConnectorProfileCredentials_refreshToken = &sGoogleAnalyticsConnectorProfileCredentials_refreshToken
+var GoogleAnalyticsConnectorProfileCredentials_oAuthRequest = &sGoogleAnalyticsConnectorProfileCredentials_oAuthRequest
+
+var GoogleAnalyticsConnectorProfileProperties = &sGoogleAnalyticsConnectorProfileProperties
+
+var GoogleAnalyticsMetadata = &sGoogleAnalyticsMetadata
+var GoogleAnalyticsMetadata_oAuthScopes = &sGoogleAnalyticsMetadata_oAuthScopes
+
+var GoogleAnalyticsSourceProperties = &sGoogleAnalyticsSourceProperties
+var GoogleAnalyticsSourceProperties_object = &sGoogleAnalyticsSourceProperties_object
+
+var _Group = &s_Group
+
+var HoneycodeConnectorProfileCredentials = &sHoneycodeConnectorProfileCredentials
+var HoneycodeConnectorProfileCredentials_accessToken = &sHoneycodeConnectorProfileCredentials_accessToken
+var HoneycodeConnectorProfileCredentials_refreshToken = &sHoneycodeConnectorProfileCredentials_refreshToken
+var HoneycodeConnectorProfileCredentials_oAuthRequest = &sHoneycodeConnectorProfileCredentials_oAuthRequest
+
+var HoneycodeConnectorProfileProperties = &sHoneycodeConnectorProfileProperties
+
+var HoneycodeDestinationProperties = &sHoneycodeDestinationProperties
+var HoneycodeDestinationProperties_object = &sHoneycodeDestinationProperties_object
+var HoneycodeDestinationProperties_errorHandlingConfig = &sHoneycodeDestinationProperties_errorHandlingConfig
+
+var HoneycodeMetadata = &sHoneycodeMetadata
+var HoneycodeMetadata_oAuthScopes = &sHoneycodeMetadata_oAuthScopes
+
+var _Identifier = &s_Identifier
+
+var _IdFieldNameList = &s_IdFieldNameList
+var _IdFieldNameList_member = &s_IdFieldNameList_member
+
+var IncrementalPullConfig = &sIncrementalPullConfig
+var IncrementalPullConfig_datetimeTypeFieldName = &sIncrementalPullConfig_datetimeTypeFieldName
+
+var InforNexusConnectorOperator = &sInforNexusConnectorOperator
+var InforNexusConnectorOperator_PROJECTION = &sInforNexusConnectorOperator_PROJECTION
+var InforNexusConnectorOperator_BETWEEN = &sInforNexusConnectorOperator_BETWEEN
+var InforNexusConnectorOperator_EQUAL_TO = &sInforNexusConnectorOperator_EQUAL_TO
+var InforNexusConnectorOperator_ADDITION = &sInforNexusConnectorOperator_ADDITION
+var InforNexusConnectorOperator_MULTIPLICATION = &sInforNexusConnectorOperator_MULTIPLICATION
+var InforNexusConnectorOperator_DIVISION = &sInforNexusConnectorOperator_DIVISION
+var InforNexusConnectorOperator_SUBTRACTION = &sInforNexusConnectorOperator_SUBTRACTION
+var InforNexusConnectorOperator_MASK_ALL = &sInforNexusConnectorOperator_MASK_ALL
+var InforNexusConnectorOperator_MASK_FIRST_N = &sInforNexusConnectorOperator_MASK_FIRST_N
+var InforNexusConnectorOperator_MASK_LAST_N = &sInforNexusConnectorOperator_MASK_LAST_N
+var InforNexusConnectorOperator_VALIDATE_NON_NULL = &sInforNexusConnectorOperator_VALIDATE_NON_NULL
+var InforNexusConnectorOperator_VALIDATE_NON_ZERO = &sInforNexusConnectorOperator_VALIDATE_NON_ZERO
+var InforNexusConnectorOperator_VALIDATE_NON_NEGATIVE = &sInforNexusConnectorOperator_VALIDATE_NON_NEGATIVE
+var InforNexusConnectorOperator_VALIDATE_NUMERIC = &sInforNexusConnectorOperator_VALIDATE_NUMERIC
+var InforNexusConnectorOperator_NO_OP = &sInforNexusConnectorOperator_NO_OP
+
+var InforNexusConnectorProfileCredentials = &sInforNexusConnectorProfileCredentials
+var InforNexusConnectorProfileCredentials_accessKeyId = &sInforNexusConnectorProfileCredentials_accessKeyId
+var InforNexusConnectorProfileCredentials_userId = &sInforNexusConnectorProfileCredentials_userId
+var InforNexusConnectorProfileCredentials_secretAccessKey = &sInforNexusConnectorProfileCredentials_secretAccessKey
+var InforNexusConnectorProfileCredentials_datakey = &sInforNexusConnectorProfileCredentials_datakey
+
+var InforNexusConnectorProfileProperties = &sInforNexusConnectorProfileProperties
+var InforNexusConnectorProfileProperties_instanceUrl = &sInforNexusConnectorProfileProperties_instanceUrl
+
+var InforNexusMetadata = &sInforNexusMetadata
+
+var InforNexusSourceProperties = &sInforNexusSourceProperties
+var InforNexusSourceProperties_object = &sInforNexusSourceProperties_object
+
+var _InstanceUrl = &s_InstanceUrl
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _JavaBoolean = &s_JavaBoolean
+
+var _JwtToken = &s_JwtToken
+
+var _Key = &s_Key
+
+var _KMSArn = &s_KMSArn
+
+var _Label = &s_Label
+
+var LambdaConnectorProvisioningConfig = &sLambdaConnectorProvisioningConfig
+var LambdaConnectorProvisioningConfig_lambdaArn = &sLambdaConnectorProvisioningConfig_lambdaArn
+
+var _ListEntitiesMaxResults = &s_ListEntitiesMaxResults
+
+var _LogonLanguage = &s_LogonLanguage
+
+var _LogoURL = &s_LogoURL
+
+var _Long = &s_Long
+
+var LookoutMetricsDestinationProperties = &sLookoutMetricsDestinationProperties
+
+var MarketoConnectorOperator = &sMarketoConnectorOperator
+var MarketoConnectorOperator_PROJECTION = &sMarketoConnectorOperator_PROJECTION
+var MarketoConnectorOperator_LESS_THAN = &sMarketoConnectorOperator_LESS_THAN
+var MarketoConnectorOperator_GREATER_THAN = &sMarketoConnectorOperator_GREATER_THAN
+var MarketoConnectorOperator_BETWEEN = &sMarketoConnectorOperator_BETWEEN
+var MarketoConnectorOperator_ADDITION = &sMarketoConnectorOperator_ADDITION
+var MarketoConnectorOperator_MULTIPLICATION = &sMarketoConnectorOperator_MULTIPLICATION
+var MarketoConnectorOperator_DIVISION = &sMarketoConnectorOperator_DIVISION
+var MarketoConnectorOperator_SUBTRACTION = &sMarketoConnectorOperator_SUBTRACTION
+var MarketoConnectorOperator_MASK_ALL = &sMarketoConnectorOperator_MASK_ALL
+var MarketoConnectorOperator_MASK_FIRST_N = &sMarketoConnectorOperator_MASK_FIRST_N
+var MarketoConnectorOperator_MASK_LAST_N = &sMarketoConnectorOperator_MASK_LAST_N
+var MarketoConnectorOperator_VALIDATE_NON_NULL = &sMarketoConnectorOperator_VALIDATE_NON_NULL
+var MarketoConnectorOperator_VALIDATE_NON_ZERO = &sMarketoConnectorOperator_VALIDATE_NON_ZERO
+var MarketoConnectorOperator_VALIDATE_NON_NEGATIVE = &sMarketoConnectorOperator_VALIDATE_NON_NEGATIVE
+var MarketoConnectorOperator_VALIDATE_NUMERIC = &sMarketoConnectorOperator_VALIDATE_NUMERIC
+var MarketoConnectorOperator_NO_OP = &sMarketoConnectorOperator_NO_OP
+
+var MarketoConnectorProfileCredentials = &sMarketoConnectorProfileCredentials
+var MarketoConnectorProfileCredentials_clientId = &sMarketoConnectorProfileCredentials_clientId
+var MarketoConnectorProfileCredentials_clientSecret = &sMarketoConnectorProfileCredentials_clientSecret
+var MarketoConnectorProfileCredentials_accessToken = &sMarketoConnectorProfileCredentials_accessToken
+var MarketoConnectorProfileCredentials_oAuthRequest = &sMarketoConnectorProfileCredentials_oAuthRequest
+
+var MarketoConnectorProfileProperties = &sMarketoConnectorProfileProperties
+var MarketoConnectorProfileProperties_instanceUrl = &sMarketoConnectorProfileProperties_instanceUrl
+
+var MarketoDestinationProperties = &sMarketoDestinationProperties
+var MarketoDestinationProperties_object = &sMarketoDestinationProperties_object
+var MarketoDestinationProperties_errorHandlingConfig = &sMarketoDestinationProperties_errorHandlingConfig
+
+var MarketoMetadata = &sMarketoMetadata
+
+var MarketoSourceProperties = &sMarketoSourceProperties
+var MarketoSourceProperties_object = &sMarketoSourceProperties_object
+
+var _MaxResults = &s_MaxResults
+
+var MetadataCatalogConfig = &sMetadataCatalogConfig
+var MetadataCatalogConfig_glueDataCatalog = &sMetadataCatalogConfig_glueDataCatalog
+
+var MetadataCatalogDetail = &sMetadataCatalogDetail
+var MetadataCatalogDetail_catalogType = &sMetadataCatalogDetail_catalogType
+var MetadataCatalogDetail_tableName = &sMetadataCatalogDetail_tableName
+var MetadataCatalogDetail_tableRegistrationOutput = &sMetadataCatalogDetail_tableRegistrationOutput
+var MetadataCatalogDetail_partitionRegistrationOutput = &sMetadataCatalogDetail_partitionRegistrationOutput
+
+var _MetadataCatalogDetails = &s_MetadataCatalogDetails
+var _MetadataCatalogDetails_member = &s_MetadataCatalogDetails_member
+
+var _MostRecentExecutionMessage = &s_MostRecentExecutionMessage
+
+var _Name = &s_Name
+
+var _NextToken = &s_NextToken
+
+var OAuth2Credentials = &sOAuth2Credentials
+var OAuth2Credentials_clientId = &sOAuth2Credentials_clientId
+var OAuth2Credentials_clientSecret = &sOAuth2Credentials_clientSecret
+var OAuth2Credentials_accessToken = &sOAuth2Credentials_accessToken
+var OAuth2Credentials_refreshToken = &sOAuth2Credentials_refreshToken
+var OAuth2Credentials_oAuthRequest = &sOAuth2Credentials_oAuthRequest
+
+var OAuth2CustomParameter = &sOAuth2CustomParameter
+var OAuth2CustomParameter_key = &sOAuth2CustomParameter_key
+var OAuth2CustomParameter_isRequired = &sOAuth2CustomParameter_isRequired
+var OAuth2CustomParameter_label = &sOAuth2CustomParameter_label
+var OAuth2CustomParameter_description = &sOAuth2CustomParameter_description
+var OAuth2CustomParameter_isSensitiveField = &sOAuth2CustomParameter_isSensitiveField
+var OAuth2CustomParameter_connectorSuppliedValues = &sOAuth2CustomParameter_connectorSuppliedValues
+var OAuth2CustomParameter_type = &sOAuth2CustomParameter_type
+
+var _OAuth2CustomPropertiesList = &s_OAuth2CustomPropertiesList
+var _OAuth2CustomPropertiesList_member = &s_OAuth2CustomPropertiesList_member
+
+var OAuth2CustomPropType = &sOAuth2CustomPropType
+var OAuth2CustomPropType_TOKEN_URL = &sOAuth2CustomPropType_TOKEN_URL
+var OAuth2CustomPropType_AUTH_URL = &sOAuth2CustomPropType_AUTH_URL
+
+var OAuth2Defaults = &sOAuth2Defaults
+var OAuth2Defaults_oauthScopes = &sOAuth2Defaults_oauthScopes
+var OAuth2Defaults_tokenUrls = &sOAuth2Defaults_tokenUrls
+var OAuth2Defaults_authCodeUrls = &sOAuth2Defaults_authCodeUrls
+var OAuth2Defaults_oauth2GrantTypesSupported = &sOAuth2Defaults_oauth2GrantTypesSupported
+var OAuth2Defaults_oauth2CustomProperties = &sOAuth2Defaults_oauth2CustomProperties
+
+var OAuth2GrantType = &sOAuth2GrantType
+var OAuth2GrantType_CLIENT_CREDENTIALS = &sOAuth2GrantType_CLIENT_CREDENTIALS
+var OAuth2GrantType_AUTHORIZATION_CODE = &sOAuth2GrantType_AUTHORIZATION_CODE
+var OAuth2GrantType_JWT_BEARER = &sOAuth2GrantType_JWT_BEARER
+
+var _OAuth2GrantTypeSupportedList = &s_OAuth2GrantTypeSupportedList
+var _OAuth2GrantTypeSupportedList_member = &s_OAuth2GrantTypeSupportedList_member
+
+var OAuth2Properties = &sOAuth2Properties
+var OAuth2Properties_tokenUrl = &sOAuth2Properties_tokenUrl
+var OAuth2Properties_oAuth2GrantType = &sOAuth2Properties_oAuth2GrantType
+var OAuth2Properties_tokenUrlCustomProperties = &sOAuth2Properties_tokenUrlCustomProperties
+
+var OAuthCredentials = &sOAuthCredentials
+var OAuthCredentials_clientId = &sOAuthCredentials_clientId
+var OAuthCredentials_clientSecret = &sOAuthCredentials_clientSecret
+var OAuthCredentials_accessToken = &sOAuthCredentials_accessToken
+var OAuthCredentials_refreshToken = &sOAuthCredentials_refreshToken
+var OAuthCredentials_oAuthRequest = &sOAuthCredentials_oAuthRequest
+
+var OAuthProperties = &sOAuthProperties
+var OAuthProperties_tokenUrl = &sOAuthProperties_tokenUrl
+var OAuthProperties_authCodeUrl = &sOAuthProperties_authCodeUrl
+var OAuthProperties_oAuthScopes = &sOAuthProperties_oAuthScopes
+
+var _OAuthScope = &s_OAuthScope
+
+var _OAuthScopeList = &s_OAuthScopeList
+var _OAuthScopeList_member = &s_OAuthScopeList_member
+
+var _Object = &s_Object
+
+var _ObjectTypeName = &s_ObjectTypeName
+
+var Operator = &sOperator
+var Operator_PROJECTION = &sOperator_PROJECTION
+var Operator_LESS_THAN = &sOperator_LESS_THAN
+var Operator_GREATER_THAN = &sOperator_GREATER_THAN
+var Operator_CONTAINS = &sOperator_CONTAINS
+var Operator_BETWEEN = &sOperator_BETWEEN
+var Operator_LESS_THAN_OR_EQUAL_TO = &sOperator_LESS_THAN_OR_EQUAL_TO
+var Operator_GREATER_THAN_OR_EQUAL_TO = &sOperator_GREATER_THAN_OR_EQUAL_TO
+var Operator_EQUAL_TO = &sOperator_EQUAL_TO
+var Operator_NOT_EQUAL_TO = &sOperator_NOT_EQUAL_TO
+var Operator_ADDITION = &sOperator_ADDITION
+var Operator_MULTIPLICATION = &sOperator_MULTIPLICATION
+var Operator_DIVISION = &sOperator_DIVISION
+var Operator_SUBTRACTION = &sOperator_SUBTRACTION
+var Operator_MASK_ALL = &sOperator_MASK_ALL
+var Operator_MASK_FIRST_N = &sOperator_MASK_FIRST_N
+var Operator_MASK_LAST_N = &sOperator_MASK_LAST_N
+var Operator_VALIDATE_NON_NULL = &sOperator_VALIDATE_NON_NULL
+var Operator_VALIDATE_NON_ZERO = &sOperator_VALIDATE_NON_ZERO
+var Operator_VALIDATE_NON_NEGATIVE = &sOperator_VALIDATE_NON_NEGATIVE
+var Operator_VALIDATE_NUMERIC = &sOperator_VALIDATE_NUMERIC
+var Operator_NO_OP = &sOperator_NO_OP
+
+var OperatorPropertiesKeys = &sOperatorPropertiesKeys
+var OperatorPropertiesKeys_VALUE = &sOperatorPropertiesKeys_VALUE
+var OperatorPropertiesKeys_VALUES = &sOperatorPropertiesKeys_VALUES
+var OperatorPropertiesKeys_DATA_TYPE = &sOperatorPropertiesKeys_DATA_TYPE
+var OperatorPropertiesKeys_UPPER_BOUND = &sOperatorPropertiesKeys_UPPER_BOUND
+var OperatorPropertiesKeys_LOWER_BOUND = &sOperatorPropertiesKeys_LOWER_BOUND
+var OperatorPropertiesKeys_SOURCE_DATA_TYPE = &sOperatorPropertiesKeys_SOURCE_DATA_TYPE
+var OperatorPropertiesKeys_DESTINATION_DATA_TYPE = &sOperatorPropertiesKeys_DESTINATION_DATA_TYPE
+var OperatorPropertiesKeys_VALIDATION_ACTION = &sOperatorPropertiesKeys_VALIDATION_ACTION
+var OperatorPropertiesKeys_MASK_VALUE = &sOperatorPropertiesKeys_MASK_VALUE
+var OperatorPropertiesKeys_MASK_LENGTH = &sOperatorPropertiesKeys_MASK_LENGTH
+var OperatorPropertiesKeys_TRUNCATE_LENGTH = &sOperatorPropertiesKeys_TRUNCATE_LENGTH
+var OperatorPropertiesKeys_MATH_OPERATION_FIELDS_ORDER = &sOperatorPropertiesKeys_MATH_OPERATION_FIELDS_ORDER
+var OperatorPropertiesKeys_CONCAT_FORMAT = &sOperatorPropertiesKeys_CONCAT_FORMAT
+var OperatorPropertiesKeys_SUBFIELD_CATEGORY_MAP = &sOperatorPropertiesKeys_SUBFIELD_CATEGORY_MAP
+var OperatorPropertiesKeys_EXCLUDE_SOURCE_FIELDS_LIST = &sOperatorPropertiesKeys_EXCLUDE_SOURCE_FIELDS_LIST
+var OperatorPropertiesKeys_INCLUDE_NEW_FIELDS = &sOperatorPropertiesKeys_INCLUDE_NEW_FIELDS
+var OperatorPropertiesKeys_ORDERED_PARTITION_KEYS_LIST = &sOperatorPropertiesKeys_ORDERED_PARTITION_KEYS_LIST
+
+var Operators = &sOperators
+var Operators_PROJECTION = &sOperators_PROJECTION
+var Operators_LESS_THAN = &sOperators_LESS_THAN
+var Operators_GREATER_THAN = &sOperators_GREATER_THAN
+var Operators_CONTAINS = &sOperators_CONTAINS
+var Operators_BETWEEN = &sOperators_BETWEEN
+var Operators_LESS_THAN_OR_EQUAL_TO = &sOperators_LESS_THAN_OR_EQUAL_TO
+var Operators_GREATER_THAN_OR_EQUAL_TO = &sOperators_GREATER_THAN_OR_EQUAL_TO
+var Operators_EQUAL_TO = &sOperators_EQUAL_TO
+var Operators_NOT_EQUAL_TO = &sOperators_NOT_EQUAL_TO
+var Operators_ADDITION = &sOperators_ADDITION
+var Operators_MULTIPLICATION = &sOperators_MULTIPLICATION
+var Operators_DIVISION = &sOperators_DIVISION
+var Operators_SUBTRACTION = &sOperators_SUBTRACTION
+var Operators_MASK_ALL = &sOperators_MASK_ALL
+var Operators_MASK_FIRST_N = &sOperators_MASK_FIRST_N
+var Operators_MASK_LAST_N = &sOperators_MASK_LAST_N
+var Operators_VALIDATE_NON_NULL = &sOperators_VALIDATE_NON_NULL
+var Operators_VALIDATE_NON_ZERO = &sOperators_VALIDATE_NON_ZERO
+var Operators_VALIDATE_NON_NEGATIVE = &sOperators_VALIDATE_NON_NEGATIVE
+var Operators_VALIDATE_NUMERIC = &sOperators_VALIDATE_NUMERIC
+var Operators_NO_OP = &sOperators_NO_OP
+
+var PardotConnectorOperator = &sPardotConnectorOperator
+var PardotConnectorOperator_PROJECTION = &sPardotConnectorOperator_PROJECTION
+var PardotConnectorOperator_EQUAL_TO = &sPardotConnectorOperator_EQUAL_TO
+var PardotConnectorOperator_NO_OP = &sPardotConnectorOperator_NO_OP
+var PardotConnectorOperator_ADDITION = &sPardotConnectorOperator_ADDITION
+var PardotConnectorOperator_MULTIPLICATION = &sPardotConnectorOperator_MULTIPLICATION
+var PardotConnectorOperator_DIVISION = &sPardotConnectorOperator_DIVISION
+var PardotConnectorOperator_SUBTRACTION = &sPardotConnectorOperator_SUBTRACTION
+var PardotConnectorOperator_MASK_ALL = &sPardotConnectorOperator_MASK_ALL
+var PardotConnectorOperator_MASK_FIRST_N = &sPardotConnectorOperator_MASK_FIRST_N
+var PardotConnectorOperator_MASK_LAST_N = &sPardotConnectorOperator_MASK_LAST_N
+var PardotConnectorOperator_VALIDATE_NON_NULL = &sPardotConnectorOperator_VALIDATE_NON_NULL
+var PardotConnectorOperator_VALIDATE_NON_ZERO = &sPardotConnectorOperator_VALIDATE_NON_ZERO
+var PardotConnectorOperator_VALIDATE_NON_NEGATIVE = &sPardotConnectorOperator_VALIDATE_NON_NEGATIVE
+var PardotConnectorOperator_VALIDATE_NUMERIC = &sPardotConnectorOperator_VALIDATE_NUMERIC
+
+var PardotConnectorProfileCredentials = &sPardotConnectorProfileCredentials
+var PardotConnectorProfileCredentials_accessToken = &sPardotConnectorProfileCredentials_accessToken
+var PardotConnectorProfileCredentials_refreshToken = &sPardotConnectorProfileCredentials_refreshToken
+var PardotConnectorProfileCredentials_oAuthRequest = &sPardotConnectorProfileCredentials_oAuthRequest
+var PardotConnectorProfileCredentials_clientCredentialsArn = &sPardotConnectorProfileCredentials_clientCredentialsArn
+
+var PardotConnectorProfileProperties = &sPardotConnectorProfileProperties
+var PardotConnectorProfileProperties_instanceUrl = &sPardotConnectorProfileProperties_instanceUrl
+var PardotConnectorProfileProperties_isSandboxEnvironment = &sPardotConnectorProfileProperties_isSandboxEnvironment
+var PardotConnectorProfileProperties_businessUnitId = &sPardotConnectorProfileProperties_businessUnitId
+
+var PardotMetadata = &sPardotMetadata
+
+var PardotSourceProperties = &sPardotSourceProperties
+var PardotSourceProperties_object = &sPardotSourceProperties_object
+
+var _Password = &s_Password
+
+var PathPrefix = &sPathPrefix
+var PathPrefix_EXECUTION_ID = &sPathPrefix_EXECUTION_ID
+var PathPrefix_SCHEMA_VERSION = &sPathPrefix_SCHEMA_VERSION
+
+var _PathPrefixHierarchy = &s_PathPrefixHierarchy
+var _PathPrefixHierarchy_member = &s_PathPrefixHierarchy_member
+
+var _PortNumber = &s_PortNumber
+
+var PrefixConfig = &sPrefixConfig
+var PrefixConfig_prefixType = &sPrefixConfig_prefixType
+var PrefixConfig_prefixFormat = &sPrefixConfig_prefixFormat
+var PrefixConfig_pathPrefixHierarchy = &sPrefixConfig_pathPrefixHierarchy
+
+var PrefixFormat = &sPrefixFormat
+var PrefixFormat_YEAR = &sPrefixFormat_YEAR
+var PrefixFormat_MONTH = &sPrefixFormat_MONTH
+var PrefixFormat_DAY = &sPrefixFormat_DAY
+var PrefixFormat_HOUR = &sPrefixFormat_HOUR
+var PrefixFormat_MINUTE = &sPrefixFormat_MINUTE
+
+var PrefixType = &sPrefixType
+var PrefixType_FILENAME = &sPrefixType_FILENAME
+var PrefixType_PATH = &sPrefixType_PATH
+var PrefixType_PATH_AND_FILENAME = &sPrefixType_PATH_AND_FILENAME
+
+var PrivateConnectionProvisioningFailureCause = &sPrivateConnectionProvisioningFailureCause
+var PrivateConnectionProvisioningFailureCause_CONNECTOR_AUTHENTICATION = &sPrivateConnectionProvisioningFailureCause_CONNECTOR_AUTHENTICATION
+var PrivateConnectionProvisioningFailureCause_CONNECTOR_SERVER = &sPrivateConnectionProvisioningFailureCause_CONNECTOR_SERVER
+var PrivateConnectionProvisioningFailureCause_INTERNAL_SERVER = &sPrivateConnectionProvisioningFailureCause_INTERNAL_SERVER
+var PrivateConnectionProvisioningFailureCause_ACCESS_DENIED = &sPrivateConnectionProvisioningFailureCause_ACCESS_DENIED
+var PrivateConnectionProvisioningFailureCause_VALIDATION = &sPrivateConnectionProvisioningFailureCause_VALIDATION
+
+var _PrivateConnectionProvisioningFailureMessage = &s_PrivateConnectionProvisioningFailureMessage
+
+var PrivateConnectionProvisioningState = &sPrivateConnectionProvisioningState
+var PrivateConnectionProvisioningState_status = &sPrivateConnectionProvisioningState_status
+var PrivateConnectionProvisioningState_failureMessage = &sPrivateConnectionProvisioningState_failureMessage
+var PrivateConnectionProvisioningState_failureCause = &sPrivateConnectionProvisioningState_failureCause
+
+var PrivateConnectionProvisioningStatus = &sPrivateConnectionProvisioningStatus
+var PrivateConnectionProvisioningStatus_FAILED = &sPrivateConnectionProvisioningStatus_FAILED
+var PrivateConnectionProvisioningStatus_PENDING = &sPrivateConnectionProvisioningStatus_PENDING
+var PrivateConnectionProvisioningStatus_CREATED = &sPrivateConnectionProvisioningStatus_CREATED
+
+var _PrivateKey = &s_PrivateKey
+
+var _PrivateLinkServiceName = &s_PrivateLinkServiceName
+
+var _ProfilePropertiesMap = &s_ProfilePropertiesMap
+var _ProfilePropertiesMap_key = &s_ProfilePropertiesMap_key
+var _ProfilePropertiesMap_value = &s_ProfilePropertiesMap_value
+
+var _ProfilePropertyKey = &s_ProfilePropertyKey
+
+var _ProfilePropertyValue = &s_ProfilePropertyValue
+
+var _Property = &s_Property
+
+var Range = &sRange
+var Range_maximum = &sRange_maximum
+var Range_minimum = &sRange_minimum
+
+var _RedirectUri = &s_RedirectUri
+
+var RedshiftConnectorProfileCredentials = &sRedshiftConnectorProfileCredentials
+var RedshiftConnectorProfileCredentials_username = &sRedshiftConnectorProfileCredentials_username
+var RedshiftConnectorProfileCredentials_password = &sRedshiftConnectorProfileCredentials_password
+
+var RedshiftConnectorProfileProperties = &sRedshiftConnectorProfileProperties
+var RedshiftConnectorProfileProperties_databaseUrl = &sRedshiftConnectorProfileProperties_databaseUrl
+var RedshiftConnectorProfileProperties_bucketName = &sRedshiftConnectorProfileProperties_bucketName
+var RedshiftConnectorProfileProperties_bucketPrefix = &sRedshiftConnectorProfileProperties_bucketPrefix
+var RedshiftConnectorProfileProperties_roleArn = &sRedshiftConnectorProfileProperties_roleArn
+var RedshiftConnectorProfileProperties_dataApiRoleArn = &sRedshiftConnectorProfileProperties_dataApiRoleArn
+var RedshiftConnectorProfileProperties_isRedshiftServerless = &sRedshiftConnectorProfileProperties_isRedshiftServerless
+var RedshiftConnectorProfileProperties_clusterIdentifier = &sRedshiftConnectorProfileProperties_clusterIdentifier
+var RedshiftConnectorProfileProperties_workgroupName = &sRedshiftConnectorProfileProperties_workgroupName
+var RedshiftConnectorProfileProperties_databaseName = &sRedshiftConnectorProfileProperties_databaseName
+
+var RedshiftDestinationProperties = &sRedshiftDestinationProperties
+var RedshiftDestinationProperties_object = &sRedshiftDestinationProperties_object
+var RedshiftDestinationProperties_intermediateBucketName = &sRedshiftDestinationProperties_intermediateBucketName
+var RedshiftDestinationProperties_bucketPrefix = &sRedshiftDestinationProperties_bucketPrefix
+var RedshiftDestinationProperties_errorHandlingConfig = &sRedshiftDestinationProperties_errorHandlingConfig
+
+var RedshiftMetadata = &sRedshiftMetadata
+
+var _RefreshToken = &s_RefreshToken
+
+var _Region = &s_Region
+
+var _RegionList = &s_RegionList
+var _RegionList_member = &s_RegionList_member
+
+var _RegisteredBy = &s_RegisteredBy
+
+var RegistrationOutput = &sRegistrationOutput
+var RegistrationOutput_message = &sRegistrationOutput_message
+var RegistrationOutput_result = &sRegistrationOutput_result
+var RegistrationOutput_status = &sRegistrationOutput_status
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var S3ConnectorOperator = &sS3ConnectorOperator
+var S3ConnectorOperator_PROJECTION = &sS3ConnectorOperator_PROJECTION
+var S3ConnectorOperator_LESS_THAN = &sS3ConnectorOperator_LESS_THAN
+var S3ConnectorOperator_GREATER_THAN = &sS3ConnectorOperator_GREATER_THAN
+var S3ConnectorOperator_BETWEEN = &sS3ConnectorOperator_BETWEEN
+var S3ConnectorOperator_LESS_THAN_OR_EQUAL_TO = &sS3ConnectorOperator_LESS_THAN_OR_EQUAL_TO
+var S3ConnectorOperator_GREATER_THAN_OR_EQUAL_TO = &sS3ConnectorOperator_GREATER_THAN_OR_EQUAL_TO
+var S3ConnectorOperator_EQUAL_TO = &sS3ConnectorOperator_EQUAL_TO
+var S3ConnectorOperator_NOT_EQUAL_TO = &sS3ConnectorOperator_NOT_EQUAL_TO
+var S3ConnectorOperator_ADDITION = &sS3ConnectorOperator_ADDITION
+var S3ConnectorOperator_MULTIPLICATION = &sS3ConnectorOperator_MULTIPLICATION
+var S3ConnectorOperator_DIVISION = &sS3ConnectorOperator_DIVISION
+var S3ConnectorOperator_SUBTRACTION = &sS3ConnectorOperator_SUBTRACTION
+var S3ConnectorOperator_MASK_ALL = &sS3ConnectorOperator_MASK_ALL
+var S3ConnectorOperator_MASK_FIRST_N = &sS3ConnectorOperator_MASK_FIRST_N
+var S3ConnectorOperator_MASK_LAST_N = &sS3ConnectorOperator_MASK_LAST_N
+var S3ConnectorOperator_VALIDATE_NON_NULL = &sS3ConnectorOperator_VALIDATE_NON_NULL
+var S3ConnectorOperator_VALIDATE_NON_ZERO = &sS3ConnectorOperator_VALIDATE_NON_ZERO
+var S3ConnectorOperator_VALIDATE_NON_NEGATIVE = &sS3ConnectorOperator_VALIDATE_NON_NEGATIVE
+var S3ConnectorOperator_VALIDATE_NUMERIC = &sS3ConnectorOperator_VALIDATE_NUMERIC
+var S3ConnectorOperator_NO_OP = &sS3ConnectorOperator_NO_OP
+
+var S3DestinationProperties = &sS3DestinationProperties
+var S3DestinationProperties_bucketName = &sS3DestinationProperties_bucketName
+var S3DestinationProperties_bucketPrefix = &sS3DestinationProperties_bucketPrefix
+var S3DestinationProperties_s3OutputFormatConfig = &sS3DestinationProperties_s3OutputFormatConfig
+
+var S3InputFileType = &sS3InputFileType
+var S3InputFileType_CSV = &sS3InputFileType_CSV
+var S3InputFileType_JSON = &sS3InputFileType_JSON
+
+var S3InputFormatConfig = &sS3InputFormatConfig
+var S3InputFormatConfig_s3InputFileType = &sS3InputFormatConfig_s3InputFileType
+
+var S3Metadata = &sS3Metadata
+
+var S3OutputFormatConfig = &sS3OutputFormatConfig
+var S3OutputFormatConfig_fileType = &sS3OutputFormatConfig_fileType
+var S3OutputFormatConfig_prefixConfig = &sS3OutputFormatConfig_prefixConfig
+var S3OutputFormatConfig_aggregationConfig = &sS3OutputFormatConfig_aggregationConfig
+var S3OutputFormatConfig_preserveSourceDataTyping = &sS3OutputFormatConfig_preserveSourceDataTyping
+
+var S3SourceProperties = &sS3SourceProperties
+var S3SourceProperties_bucketName = &sS3SourceProperties_bucketName
+var S3SourceProperties_bucketPrefix = &sS3SourceProperties_bucketPrefix
+var S3SourceProperties_s3InputFormatConfig = &sS3SourceProperties_s3InputFormatConfig
+
+var SalesforceConnectorOperator = &sSalesforceConnectorOperator
+var SalesforceConnectorOperator_PROJECTION = &sSalesforceConnectorOperator_PROJECTION
+var SalesforceConnectorOperator_LESS_THAN = &sSalesforceConnectorOperator_LESS_THAN
+var SalesforceConnectorOperator_CONTAINS = &sSalesforceConnectorOperator_CONTAINS
+var SalesforceConnectorOperator_GREATER_THAN = &sSalesforceConnectorOperator_GREATER_THAN
+var SalesforceConnectorOperator_BETWEEN = &sSalesforceConnectorOperator_BETWEEN
+var SalesforceConnectorOperator_LESS_THAN_OR_EQUAL_TO = &sSalesforceConnectorOperator_LESS_THAN_OR_EQUAL_TO
+var SalesforceConnectorOperator_GREATER_THAN_OR_EQUAL_TO = &sSalesforceConnectorOperator_GREATER_THAN_OR_EQUAL_TO
+var SalesforceConnectorOperator_EQUAL_TO = &sSalesforceConnectorOperator_EQUAL_TO
+var SalesforceConnectorOperator_NOT_EQUAL_TO = &sSalesforceConnectorOperator_NOT_EQUAL_TO
+var SalesforceConnectorOperator_ADDITION = &sSalesforceConnectorOperator_ADDITION
+var SalesforceConnectorOperator_MULTIPLICATION = &sSalesforceConnectorOperator_MULTIPLICATION
+var SalesforceConnectorOperator_DIVISION = &sSalesforceConnectorOperator_DIVISION
+var SalesforceConnectorOperator_SUBTRACTION = &sSalesforceConnectorOperator_SUBTRACTION
+var SalesforceConnectorOperator_MASK_ALL = &sSalesforceConnectorOperator_MASK_ALL
+var SalesforceConnectorOperator_MASK_FIRST_N = &sSalesforceConnectorOperator_MASK_FIRST_N
+var SalesforceConnectorOperator_MASK_LAST_N = &sSalesforceConnectorOperator_MASK_LAST_N
+var SalesforceConnectorOperator_VALIDATE_NON_NULL = &sSalesforceConnectorOperator_VALIDATE_NON_NULL
+var SalesforceConnectorOperator_VALIDATE_NON_ZERO = &sSalesforceConnectorOperator_VALIDATE_NON_ZERO
+var SalesforceConnectorOperator_VALIDATE_NON_NEGATIVE = &sSalesforceConnectorOperator_VALIDATE_NON_NEGATIVE
+var SalesforceConnectorOperator_VALIDATE_NUMERIC = &sSalesforceConnectorOperator_VALIDATE_NUMERIC
+var SalesforceConnectorOperator_NO_OP = &sSalesforceConnectorOperator_NO_OP
+
+var SalesforceConnectorProfileCredentials = &sSalesforceConnectorProfileCredentials
+var SalesforceConnectorProfileCredentials_accessToken = &sSalesforceConnectorProfileCredentials_accessToken
+var SalesforceConnectorProfileCredentials_refreshToken = &sSalesforceConnectorProfileCredentials_refreshToken
+var SalesforceConnectorProfileCredentials_oAuthRequest = &sSalesforceConnectorProfileCredentials_oAuthRequest
+var SalesforceConnectorProfileCredentials_clientCredentialsArn = &sSalesforceConnectorProfileCredentials_clientCredentialsArn
+var SalesforceConnectorProfileCredentials_oAuth2GrantType = &sSalesforceConnectorProfileCredentials_oAuth2GrantType
+var SalesforceConnectorProfileCredentials_jwtToken = &sSalesforceConnectorProfileCredentials_jwtToken
+
+var SalesforceConnectorProfileProperties = &sSalesforceConnectorProfileProperties
+var SalesforceConnectorProfileProperties_instanceUrl = &sSalesforceConnectorProfileProperties_instanceUrl
+var SalesforceConnectorProfileProperties_isSandboxEnvironment = &sSalesforceConnectorProfileProperties_isSandboxEnvironment
+var SalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization = &sSalesforceConnectorProfileProperties_usePrivateLinkForMetadataAndAuthorization
+
+var SalesforceDataTransferApi = &sSalesforceDataTransferApi
+var SalesforceDataTransferApi_AUTOMATIC = &sSalesforceDataTransferApi_AUTOMATIC
+var SalesforceDataTransferApi_BULKV2 = &sSalesforceDataTransferApi_BULKV2
+var SalesforceDataTransferApi_REST_SYNC = &sSalesforceDataTransferApi_REST_SYNC
+
+var _SalesforceDataTransferApiList = &s_SalesforceDataTransferApiList
+var _SalesforceDataTransferApiList_member = &s_SalesforceDataTransferApiList_member
+
+var SalesforceDestinationProperties = &sSalesforceDestinationProperties
+var SalesforceDestinationProperties_object = &sSalesforceDestinationProperties_object
+var SalesforceDestinationProperties_idFieldNames = &sSalesforceDestinationProperties_idFieldNames
+var SalesforceDestinationProperties_errorHandlingConfig = &sSalesforceDestinationProperties_errorHandlingConfig
+var SalesforceDestinationProperties_writeOperationType = &sSalesforceDestinationProperties_writeOperationType
+var SalesforceDestinationProperties_dataTransferApi = &sSalesforceDestinationProperties_dataTransferApi
+
+var SalesforceMetadata = &sSalesforceMetadata
+var SalesforceMetadata_oAuthScopes = &sSalesforceMetadata_oAuthScopes
+var SalesforceMetadata_dataTransferApis = &sSalesforceMetadata_dataTransferApis
+var SalesforceMetadata_oauth2GrantTypesSupported = &sSalesforceMetadata_oauth2GrantTypesSupported
+
+var SalesforceSourceProperties = &sSalesforceSourceProperties
+var SalesforceSourceProperties_object = &sSalesforceSourceProperties_object
+var SalesforceSourceProperties_enableDynamicFieldUpdate = &sSalesforceSourceProperties_enableDynamicFieldUpdate
+var SalesforceSourceProperties_includeDeletedRecords = &sSalesforceSourceProperties_includeDeletedRecords
+var SalesforceSourceProperties_dataTransferApi = &sSalesforceSourceProperties_dataTransferApi
+
+var SAPODataConnectorOperator = &sSAPODataConnectorOperator
+var SAPODataConnectorOperator_PROJECTION = &sSAPODataConnectorOperator_PROJECTION
+var SAPODataConnectorOperator_LESS_THAN = &sSAPODataConnectorOperator_LESS_THAN
+var SAPODataConnectorOperator_CONTAINS = &sSAPODataConnectorOperator_CONTAINS
+var SAPODataConnectorOperator_GREATER_THAN = &sSAPODataConnectorOperator_GREATER_THAN
+var SAPODataConnectorOperator_BETWEEN = &sSAPODataConnectorOperator_BETWEEN
+var SAPODataConnectorOperator_LESS_THAN_OR_EQUAL_TO = &sSAPODataConnectorOperator_LESS_THAN_OR_EQUAL_TO
+var SAPODataConnectorOperator_GREATER_THAN_OR_EQUAL_TO = &sSAPODataConnectorOperator_GREATER_THAN_OR_EQUAL_TO
+var SAPODataConnectorOperator_EQUAL_TO = &sSAPODataConnectorOperator_EQUAL_TO
+var SAPODataConnectorOperator_NOT_EQUAL_TO = &sSAPODataConnectorOperator_NOT_EQUAL_TO
+var SAPODataConnectorOperator_ADDITION = &sSAPODataConnectorOperator_ADDITION
+var SAPODataConnectorOperator_MULTIPLICATION = &sSAPODataConnectorOperator_MULTIPLICATION
+var SAPODataConnectorOperator_DIVISION = &sSAPODataConnectorOperator_DIVISION
+var SAPODataConnectorOperator_SUBTRACTION = &sSAPODataConnectorOperator_SUBTRACTION
+var SAPODataConnectorOperator_MASK_ALL = &sSAPODataConnectorOperator_MASK_ALL
+var SAPODataConnectorOperator_MASK_FIRST_N = &sSAPODataConnectorOperator_MASK_FIRST_N
+var SAPODataConnectorOperator_MASK_LAST_N = &sSAPODataConnectorOperator_MASK_LAST_N
+var SAPODataConnectorOperator_VALIDATE_NON_NULL = &sSAPODataConnectorOperator_VALIDATE_NON_NULL
+var SAPODataConnectorOperator_VALIDATE_NON_ZERO = &sSAPODataConnectorOperator_VALIDATE_NON_ZERO
+var SAPODataConnectorOperator_VALIDATE_NON_NEGATIVE = &sSAPODataConnectorOperator_VALIDATE_NON_NEGATIVE
+var SAPODataConnectorOperator_VALIDATE_NUMERIC = &sSAPODataConnectorOperator_VALIDATE_NUMERIC
+var SAPODataConnectorOperator_NO_OP = &sSAPODataConnectorOperator_NO_OP
+
+var SAPODataConnectorProfileCredentials = &sSAPODataConnectorProfileCredentials
+var SAPODataConnectorProfileCredentials_basicAuthCredentials = &sSAPODataConnectorProfileCredentials_basicAuthCredentials
+var SAPODataConnectorProfileCredentials_oAuthCredentials = &sSAPODataConnectorProfileCredentials_oAuthCredentials
+
+var SAPODataConnectorProfileProperties = &sSAPODataConnectorProfileProperties
+var SAPODataConnectorProfileProperties_applicationHostUrl = &sSAPODataConnectorProfileProperties_applicationHostUrl
+var SAPODataConnectorProfileProperties_applicationServicePath = &sSAPODataConnectorProfileProperties_applicationServicePath
+var SAPODataConnectorProfileProperties_portNumber = &sSAPODataConnectorProfileProperties_portNumber
+var SAPODataConnectorProfileProperties_clientNumber = &sSAPODataConnectorProfileProperties_clientNumber
+var SAPODataConnectorProfileProperties_logonLanguage = &sSAPODataConnectorProfileProperties_logonLanguage
+var SAPODataConnectorProfileProperties_privateLinkServiceName = &sSAPODataConnectorProfileProperties_privateLinkServiceName
+var SAPODataConnectorProfileProperties_oAuthProperties = &sSAPODataConnectorProfileProperties_oAuthProperties
+var SAPODataConnectorProfileProperties_disableSSO = &sSAPODataConnectorProfileProperties_disableSSO
+
+var SAPODataDestinationProperties = &sSAPODataDestinationProperties
+var SAPODataDestinationProperties_objectPath = &sSAPODataDestinationProperties_objectPath
+var SAPODataDestinationProperties_successResponseHandlingConfig = &sSAPODataDestinationProperties_successResponseHandlingConfig
+var SAPODataDestinationProperties_idFieldNames = &sSAPODataDestinationProperties_idFieldNames
+var SAPODataDestinationProperties_errorHandlingConfig = &sSAPODataDestinationProperties_errorHandlingConfig
+var SAPODataDestinationProperties_writeOperationType = &sSAPODataDestinationProperties_writeOperationType
+
+var _SAPODataMaxPageSize = &s_SAPODataMaxPageSize
+
+var _SAPODataMaxParallelism = &s_SAPODataMaxParallelism
+
+var SAPODataMetadata = &sSAPODataMetadata
+
+var SAPODataPaginationConfig = &sSAPODataPaginationConfig
+var SAPODataPaginationConfig_maxPageSize = &sSAPODataPaginationConfig_maxPageSize
+
+var SAPODataParallelismConfig = &sSAPODataParallelismConfig
+var SAPODataParallelismConfig_maxParallelism = &sSAPODataParallelismConfig_maxParallelism
+
+var SAPODataSourceProperties = &sSAPODataSourceProperties
+var SAPODataSourceProperties_objectPath = &sSAPODataSourceProperties_objectPath
+var SAPODataSourceProperties_parallelismConfig = &sSAPODataSourceProperties_parallelismConfig
+var SAPODataSourceProperties_paginationConfig = &sSAPODataSourceProperties_paginationConfig
+
+var ScheduledTriggerProperties = &sScheduledTriggerProperties
+var ScheduledTriggerProperties_scheduleExpression = &sScheduledTriggerProperties_scheduleExpression
+var ScheduledTriggerProperties_dataPullMode = &sScheduledTriggerProperties_dataPullMode
+var ScheduledTriggerProperties_scheduleStartTime = &sScheduledTriggerProperties_scheduleStartTime
+var ScheduledTriggerProperties_scheduleEndTime = &sScheduledTriggerProperties_scheduleEndTime
+var ScheduledTriggerProperties_timezone = &sScheduledTriggerProperties_timezone
+var ScheduledTriggerProperties_scheduleOffset = &sScheduledTriggerProperties_scheduleOffset
+var ScheduledTriggerProperties_firstExecutionFrom = &sScheduledTriggerProperties_firstExecutionFrom
+var ScheduledTriggerProperties_flowErrorDeactivationThreshold = &sScheduledTriggerProperties_flowErrorDeactivationThreshold
+
+var _ScheduleExpression = &s_ScheduleExpression
+
+var ScheduleFrequencyType = &sScheduleFrequencyType
+var ScheduleFrequencyType_BYMINUTE = &sScheduleFrequencyType_BYMINUTE
+var ScheduleFrequencyType_HOURLY = &sScheduleFrequencyType_HOURLY
+var ScheduleFrequencyType_DAILY = &sScheduleFrequencyType_DAILY
+var ScheduleFrequencyType_WEEKLY = &sScheduleFrequencyType_WEEKLY
+var ScheduleFrequencyType_MONTHLY = &sScheduleFrequencyType_MONTHLY
+var ScheduleFrequencyType_ONCE = &sScheduleFrequencyType_ONCE
+
+var _ScheduleOffset = &s_ScheduleOffset
+
+var _SchedulingFrequencyTypeList = &s_SchedulingFrequencyTypeList
+var _SchedulingFrequencyTypeList_member = &s_SchedulingFrequencyTypeList_member
+
+var _SecretKey = &s_SecretKey
+
+var ServiceNowConnectorOperator = &sServiceNowConnectorOperator
+var ServiceNowConnectorOperator_PROJECTION = &sServiceNowConnectorOperator_PROJECTION
+var ServiceNowConnectorOperator_CONTAINS = &sServiceNowConnectorOperator_CONTAINS
+var ServiceNowConnectorOperator_LESS_THAN = &sServiceNowConnectorOperator_LESS_THAN
+var ServiceNowConnectorOperator_GREATER_THAN = &sServiceNowConnectorOperator_GREATER_THAN
+var ServiceNowConnectorOperator_BETWEEN = &sServiceNowConnectorOperator_BETWEEN
+var ServiceNowConnectorOperator_LESS_THAN_OR_EQUAL_TO = &sServiceNowConnectorOperator_LESS_THAN_OR_EQUAL_TO
+var ServiceNowConnectorOperator_GREATER_THAN_OR_EQUAL_TO = &sServiceNowConnectorOperator_GREATER_THAN_OR_EQUAL_TO
+var ServiceNowConnectorOperator_EQUAL_TO = &sServiceNowConnectorOperator_EQUAL_TO
+var ServiceNowConnectorOperator_NOT_EQUAL_TO = &sServiceNowConnectorOperator_NOT_EQUAL_TO
+var ServiceNowConnectorOperator_ADDITION = &sServiceNowConnectorOperator_ADDITION
+var ServiceNowConnectorOperator_MULTIPLICATION = &sServiceNowConnectorOperator_MULTIPLICATION
+var ServiceNowConnectorOperator_DIVISION = &sServiceNowConnectorOperator_DIVISION
+var ServiceNowConnectorOperator_SUBTRACTION = &sServiceNowConnectorOperator_SUBTRACTION
+var ServiceNowConnectorOperator_MASK_ALL = &sServiceNowConnectorOperator_MASK_ALL
+var ServiceNowConnectorOperator_MASK_FIRST_N = &sServiceNowConnectorOperator_MASK_FIRST_N
+var ServiceNowConnectorOperator_MASK_LAST_N = &sServiceNowConnectorOperator_MASK_LAST_N
+var ServiceNowConnectorOperator_VALIDATE_NON_NULL = &sServiceNowConnectorOperator_VALIDATE_NON_NULL
+var ServiceNowConnectorOperator_VALIDATE_NON_ZERO = &sServiceNowConnectorOperator_VALIDATE_NON_ZERO
+var ServiceNowConnectorOperator_VALIDATE_NON_NEGATIVE = &sServiceNowConnectorOperator_VALIDATE_NON_NEGATIVE
+var ServiceNowConnectorOperator_VALIDATE_NUMERIC = &sServiceNowConnectorOperator_VALIDATE_NUMERIC
+var ServiceNowConnectorOperator_NO_OP = &sServiceNowConnectorOperator_NO_OP
+
+var ServiceNowConnectorProfileCredentials = &sServiceNowConnectorProfileCredentials
+var ServiceNowConnectorProfileCredentials_username = &sServiceNowConnectorProfileCredentials_username
+var ServiceNowConnectorProfileCredentials_password = &sServiceNowConnectorProfileCredentials_password
+var ServiceNowConnectorProfileCredentials_oAuth2Credentials = &sServiceNowConnectorProfileCredentials_oAuth2Credentials
+
+var ServiceNowConnectorProfileProperties = &sServiceNowConnectorProfileProperties
+var ServiceNowConnectorProfileProperties_instanceUrl = &sServiceNowConnectorProfileProperties_instanceUrl
+
+var ServiceNowMetadata = &sServiceNowMetadata
+
+var ServiceNowSourceProperties = &sServiceNowSourceProperties
+var ServiceNowSourceProperties_object = &sServiceNowSourceProperties_object
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var SingularConnectorOperator = &sSingularConnectorOperator
+var SingularConnectorOperator_PROJECTION = &sSingularConnectorOperator_PROJECTION
+var SingularConnectorOperator_EQUAL_TO = &sSingularConnectorOperator_EQUAL_TO
+var SingularConnectorOperator_ADDITION = &sSingularConnectorOperator_ADDITION
+var SingularConnectorOperator_MULTIPLICATION = &sSingularConnectorOperator_MULTIPLICATION
+var SingularConnectorOperator_DIVISION = &sSingularConnectorOperator_DIVISION
+var SingularConnectorOperator_SUBTRACTION = &sSingularConnectorOperator_SUBTRACTION
+var SingularConnectorOperator_MASK_ALL = &sSingularConnectorOperator_MASK_ALL
+var SingularConnectorOperator_MASK_FIRST_N = &sSingularConnectorOperator_MASK_FIRST_N
+var SingularConnectorOperator_MASK_LAST_N = &sSingularConnectorOperator_MASK_LAST_N
+var SingularConnectorOperator_VALIDATE_NON_NULL = &sSingularConnectorOperator_VALIDATE_NON_NULL
+var SingularConnectorOperator_VALIDATE_NON_ZERO = &sSingularConnectorOperator_VALIDATE_NON_ZERO
+var SingularConnectorOperator_VALIDATE_NON_NEGATIVE = &sSingularConnectorOperator_VALIDATE_NON_NEGATIVE
+var SingularConnectorOperator_VALIDATE_NUMERIC = &sSingularConnectorOperator_VALIDATE_NUMERIC
+var SingularConnectorOperator_NO_OP = &sSingularConnectorOperator_NO_OP
+
+var SingularConnectorProfileCredentials = &sSingularConnectorProfileCredentials
+var SingularConnectorProfileCredentials_apiKey = &sSingularConnectorProfileCredentials_apiKey
+
+var SingularConnectorProfileProperties = &sSingularConnectorProfileProperties
+
+var SingularMetadata = &sSingularMetadata
+
+var SingularSourceProperties = &sSingularSourceProperties
+var SingularSourceProperties_object = &sSingularSourceProperties_object
+
+var SlackConnectorOperator = &sSlackConnectorOperator
+var SlackConnectorOperator_PROJECTION = &sSlackConnectorOperator_PROJECTION
+var SlackConnectorOperator_LESS_THAN = &sSlackConnectorOperator_LESS_THAN
+var SlackConnectorOperator_GREATER_THAN = &sSlackConnectorOperator_GREATER_THAN
+var SlackConnectorOperator_BETWEEN = &sSlackConnectorOperator_BETWEEN
+var SlackConnectorOperator_LESS_THAN_OR_EQUAL_TO = &sSlackConnectorOperator_LESS_THAN_OR_EQUAL_TO
+var SlackConnectorOperator_GREATER_THAN_OR_EQUAL_TO = &sSlackConnectorOperator_GREATER_THAN_OR_EQUAL_TO
+var SlackConnectorOperator_EQUAL_TO = &sSlackConnectorOperator_EQUAL_TO
+var SlackConnectorOperator_ADDITION = &sSlackConnectorOperator_ADDITION
+var SlackConnectorOperator_MULTIPLICATION = &sSlackConnectorOperator_MULTIPLICATION
+var SlackConnectorOperator_DIVISION = &sSlackConnectorOperator_DIVISION
+var SlackConnectorOperator_SUBTRACTION = &sSlackConnectorOperator_SUBTRACTION
+var SlackConnectorOperator_MASK_ALL = &sSlackConnectorOperator_MASK_ALL
+var SlackConnectorOperator_MASK_FIRST_N = &sSlackConnectorOperator_MASK_FIRST_N
+var SlackConnectorOperator_MASK_LAST_N = &sSlackConnectorOperator_MASK_LAST_N
+var SlackConnectorOperator_VALIDATE_NON_NULL = &sSlackConnectorOperator_VALIDATE_NON_NULL
+var SlackConnectorOperator_VALIDATE_NON_ZERO = &sSlackConnectorOperator_VALIDATE_NON_ZERO
+var SlackConnectorOperator_VALIDATE_NON_NEGATIVE = &sSlackConnectorOperator_VALIDATE_NON_NEGATIVE
+var SlackConnectorOperator_VALIDATE_NUMERIC = &sSlackConnectorOperator_VALIDATE_NUMERIC
+var SlackConnectorOperator_NO_OP = &sSlackConnectorOperator_NO_OP
+
+var SlackConnectorProfileCredentials = &sSlackConnectorProfileCredentials
+var SlackConnectorProfileCredentials_clientId = &sSlackConnectorProfileCredentials_clientId
+var SlackConnectorProfileCredentials_clientSecret = &sSlackConnectorProfileCredentials_clientSecret
+var SlackConnectorProfileCredentials_accessToken = &sSlackConnectorProfileCredentials_accessToken
+var SlackConnectorProfileCredentials_oAuthRequest = &sSlackConnectorProfileCredentials_oAuthRequest
+
+var SlackConnectorProfileProperties = &sSlackConnectorProfileProperties
+var SlackConnectorProfileProperties_instanceUrl = &sSlackConnectorProfileProperties_instanceUrl
+
+var SlackMetadata = &sSlackMetadata
+var SlackMetadata_oAuthScopes = &sSlackMetadata_oAuthScopes
+
+var SlackSourceProperties = &sSlackSourceProperties
+var SlackSourceProperties_object = &sSlackSourceProperties_object
+
+var SnowflakeConnectorProfileCredentials = &sSnowflakeConnectorProfileCredentials
+var SnowflakeConnectorProfileCredentials_username = &sSnowflakeConnectorProfileCredentials_username
+var SnowflakeConnectorProfileCredentials_password = &sSnowflakeConnectorProfileCredentials_password
+var SnowflakeConnectorProfileCredentials_privateKey = &sSnowflakeConnectorProfileCredentials_privateKey
+
+var SnowflakeConnectorProfileProperties = &sSnowflakeConnectorProfileProperties
+var SnowflakeConnectorProfileProperties_warehouse = &sSnowflakeConnectorProfileProperties_warehouse
+var SnowflakeConnectorProfileProperties_stage = &sSnowflakeConnectorProfileProperties_stage
+var SnowflakeConnectorProfileProperties_bucketName = &sSnowflakeConnectorProfileProperties_bucketName
+var SnowflakeConnectorProfileProperties_bucketPrefix = &sSnowflakeConnectorProfileProperties_bucketPrefix
+var SnowflakeConnectorProfileProperties_privateLinkServiceName = &sSnowflakeConnectorProfileProperties_privateLinkServiceName
+var SnowflakeConnectorProfileProperties_accountName = &sSnowflakeConnectorProfileProperties_accountName
+var SnowflakeConnectorProfileProperties_region = &sSnowflakeConnectorProfileProperties_region
+
+var SnowflakeDestinationProperties = &sSnowflakeDestinationProperties
+var SnowflakeDestinationProperties_object = &sSnowflakeDestinationProperties_object
+var SnowflakeDestinationProperties_intermediateBucketName = &sSnowflakeDestinationProperties_intermediateBucketName
+var SnowflakeDestinationProperties_bucketPrefix = &sSnowflakeDestinationProperties_bucketPrefix
+var SnowflakeDestinationProperties_errorHandlingConfig = &sSnowflakeDestinationProperties_errorHandlingConfig
+
+var SnowflakeMetadata = &sSnowflakeMetadata
+var SnowflakeMetadata_supportedRegions = &sSnowflakeMetadata_supportedRegions
+
+var SourceConnectorProperties = &sSourceConnectorProperties
+var SourceConnectorProperties_Amplitude = &sSourceConnectorProperties_Amplitude
+var SourceConnectorProperties_Datadog = &sSourceConnectorProperties_Datadog
+var SourceConnectorProperties_Dynatrace = &sSourceConnectorProperties_Dynatrace
+var SourceConnectorProperties_GoogleAnalytics = &sSourceConnectorProperties_GoogleAnalytics
+var SourceConnectorProperties_InforNexus = &sSourceConnectorProperties_InforNexus
+var SourceConnectorProperties_Marketo = &sSourceConnectorProperties_Marketo
+var SourceConnectorProperties_S3 = &sSourceConnectorProperties_S3
+var SourceConnectorProperties_Salesforce = &sSourceConnectorProperties_Salesforce
+var SourceConnectorProperties_ServiceNow = &sSourceConnectorProperties_ServiceNow
+var SourceConnectorProperties_Singular = &sSourceConnectorProperties_Singular
+var SourceConnectorProperties_Slack = &sSourceConnectorProperties_Slack
+var SourceConnectorProperties_Trendmicro = &sSourceConnectorProperties_Trendmicro
+var SourceConnectorProperties_Veeva = &sSourceConnectorProperties_Veeva
+var SourceConnectorProperties_Zendesk = &sSourceConnectorProperties_Zendesk
+var SourceConnectorProperties_SAPOData = &sSourceConnectorProperties_SAPOData
+var SourceConnectorProperties_CustomConnector = &sSourceConnectorProperties_CustomConnector
+var SourceConnectorProperties_Pardot = &sSourceConnectorProperties_Pardot
+
+var SourceFieldProperties = &sSourceFieldProperties
+var SourceFieldProperties_isRetrievable = &sSourceFieldProperties_isRetrievable
+var SourceFieldProperties_isQueryable = &sSourceFieldProperties_isQueryable
+var SourceFieldProperties_isTimestampFieldForIncrementalQueries = &sSourceFieldProperties_isTimestampFieldForIncrementalQueries
+
+var _SourceFields = &s_SourceFields
+var _SourceFields_member = &s_SourceFields_member
+
+var SourceFlowConfig = &sSourceFlowConfig
+var SourceFlowConfig_connectorType = &sSourceFlowConfig_connectorType
+var SourceFlowConfig_apiVersion = &sSourceFlowConfig_apiVersion
+var SourceFlowConfig_connectorProfileName = &sSourceFlowConfig_connectorProfileName
+var SourceFlowConfig_sourceConnectorProperties = &sSourceFlowConfig_sourceConnectorProperties
+var SourceFlowConfig_incrementalPullConfig = &sSourceFlowConfig_incrementalPullConfig
+
+var _Stage = &s_Stage
+
+var _String = &s_String
+
+var SuccessResponseHandlingConfig = &sSuccessResponseHandlingConfig
+var SuccessResponseHandlingConfig_bucketPrefix = &sSuccessResponseHandlingConfig_bucketPrefix
+var SuccessResponseHandlingConfig_bucketName = &sSuccessResponseHandlingConfig_bucketName
+
+var _SupportedApiVersion = &s_SupportedApiVersion
+
+var _SupportedApiVersionList = &s_SupportedApiVersionList
+var _SupportedApiVersionList_member = &s_SupportedApiVersionList_member
+
+var _SupportedDataTransferApis = &s_SupportedDataTransferApis
+var _SupportedDataTransferApis_member = &s_SupportedDataTransferApis_member
+
+var SupportedDataTransferType = &sSupportedDataTransferType
+var SupportedDataTransferType_RECORD = &sSupportedDataTransferType_RECORD
+var SupportedDataTransferType_FILE = &sSupportedDataTransferType_FILE
+
+var _SupportedDataTransferTypeList = &s_SupportedDataTransferTypeList
+var _SupportedDataTransferTypeList_member = &s_SupportedDataTransferTypeList_member
+
+var SupportedFieldTypeDetails = &sSupportedFieldTypeDetails
+var SupportedFieldTypeDetails_v1 = &sSupportedFieldTypeDetails_v1
+
+var _SupportedOperatorList = &s_SupportedOperatorList
+var _SupportedOperatorList_member = &s_SupportedOperatorList_member
+
+var _SupportedValueList = &s_SupportedValueList
+var _SupportedValueList_member = &s_SupportedValueList_member
+
+var _SupportedWriteOperationList = &s_SupportedWriteOperationList
+var _SupportedWriteOperationList_member = &s_SupportedWriteOperationList_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var Task = &sTask
+var Task_sourceFields = &sTask_sourceFields
+var Task_connectorOperator = &sTask_connectorOperator
+var Task_destinationField = &sTask_destinationField
+var Task_taskType = &sTask_taskType
+var Task_taskProperties = &sTask_taskProperties
+
+var _TaskPropertiesMap = &s_TaskPropertiesMap
+var _TaskPropertiesMap_key = &s_TaskPropertiesMap_key
+var _TaskPropertiesMap_value = &s_TaskPropertiesMap_value
+
+var _Tasks = &s_Tasks
+var _Tasks_member = &s_Tasks_member
+
+var TaskType = &sTaskType
+var TaskType_ARITHMETIC = &sTaskType_ARITHMETIC
+var TaskType_FILTER = &sTaskType_FILTER
+var TaskType_MAP = &sTaskType_MAP
+var TaskType_MAP_ALL = &sTaskType_MAP_ALL
+var TaskType_MASK = &sTaskType_MASK
+var TaskType_MERGE = &sTaskType_MERGE
+var TaskType_PASSTHROUGH = &sTaskType_PASSTHROUGH
+var TaskType_TRUNCATE = &sTaskType_TRUNCATE
+var TaskType_VALIDATE = &sTaskType_VALIDATE
+var TaskType_PARTITION = &sTaskType_PARTITION
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Timezone = &s_Timezone
+
+var _TokenUrl = &s_TokenUrl
+
+var _TokenUrlCustomProperties = &s_TokenUrlCustomProperties
+var _TokenUrlCustomProperties_key = &s_TokenUrlCustomProperties_key
+var _TokenUrlCustomProperties_value = &s_TokenUrlCustomProperties_value
+
+var _TokenUrlList = &s_TokenUrlList
+var _TokenUrlList_member = &s_TokenUrlList_member
+
+var TrendmicroConnectorOperator = &sTrendmicroConnectorOperator
+var TrendmicroConnectorOperator_PROJECTION = &sTrendmicroConnectorOperator_PROJECTION
+var TrendmicroConnectorOperator_EQUAL_TO = &sTrendmicroConnectorOperator_EQUAL_TO
+var TrendmicroConnectorOperator_ADDITION = &sTrendmicroConnectorOperator_ADDITION
+var TrendmicroConnectorOperator_MULTIPLICATION = &sTrendmicroConnectorOperator_MULTIPLICATION
+var TrendmicroConnectorOperator_DIVISION = &sTrendmicroConnectorOperator_DIVISION
+var TrendmicroConnectorOperator_SUBTRACTION = &sTrendmicroConnectorOperator_SUBTRACTION
+var TrendmicroConnectorOperator_MASK_ALL = &sTrendmicroConnectorOperator_MASK_ALL
+var TrendmicroConnectorOperator_MASK_FIRST_N = &sTrendmicroConnectorOperator_MASK_FIRST_N
+var TrendmicroConnectorOperator_MASK_LAST_N = &sTrendmicroConnectorOperator_MASK_LAST_N
+var TrendmicroConnectorOperator_VALIDATE_NON_NULL = &sTrendmicroConnectorOperator_VALIDATE_NON_NULL
+var TrendmicroConnectorOperator_VALIDATE_NON_ZERO = &sTrendmicroConnectorOperator_VALIDATE_NON_ZERO
+var TrendmicroConnectorOperator_VALIDATE_NON_NEGATIVE = &sTrendmicroConnectorOperator_VALIDATE_NON_NEGATIVE
+var TrendmicroConnectorOperator_VALIDATE_NUMERIC = &sTrendmicroConnectorOperator_VALIDATE_NUMERIC
+var TrendmicroConnectorOperator_NO_OP = &sTrendmicroConnectorOperator_NO_OP
+
+var TrendmicroConnectorProfileCredentials = &sTrendmicroConnectorProfileCredentials
+var TrendmicroConnectorProfileCredentials_apiSecretKey = &sTrendmicroConnectorProfileCredentials_apiSecretKey
+
+var TrendmicroConnectorProfileProperties = &sTrendmicroConnectorProfileProperties
+
+var TrendmicroMetadata = &sTrendmicroMetadata
+
+var TrendmicroSourceProperties = &sTrendmicroSourceProperties
+var TrendmicroSourceProperties_object = &sTrendmicroSourceProperties_object
+
+var TriggerConfig = &sTriggerConfig
+var TriggerConfig_triggerType = &sTriggerConfig_triggerType
+var TriggerConfig_triggerProperties = &sTriggerConfig_triggerProperties
+
+var TriggerProperties = &sTriggerProperties
+var TriggerProperties_Scheduled = &sTriggerProperties_Scheduled
+
+var TriggerType = &sTriggerType
+var TriggerType_SCHEDULED = &sTriggerType_SCHEDULED
+var TriggerType_EVENT = &sTriggerType_EVENT
+var TriggerType_ONDEMAND = &sTriggerType_ONDEMAND
+
+var _TriggerTypeList = &s_TriggerTypeList
+var _TriggerTypeList_member = &s_TriggerTypeList_member
+
+var UnsupportedOperationException = &sUnsupportedOperationException
+var UnsupportedOperationException_message = &sUnsupportedOperationException_message
+
+var _UpdatedBy = &s_UpdatedBy
+
+var _UpsolverBucketName = &s_UpsolverBucketName
+
+var UpsolverDestinationProperties = &sUpsolverDestinationProperties
+var UpsolverDestinationProperties_bucketName = &sUpsolverDestinationProperties_bucketName
+var UpsolverDestinationProperties_bucketPrefix = &sUpsolverDestinationProperties_bucketPrefix
+var UpsolverDestinationProperties_s3OutputFormatConfig = &sUpsolverDestinationProperties_s3OutputFormatConfig
+
+var UpsolverMetadata = &sUpsolverMetadata
+
+var UpsolverS3OutputFormatConfig = &sUpsolverS3OutputFormatConfig
+var UpsolverS3OutputFormatConfig_fileType = &sUpsolverS3OutputFormatConfig_fileType
+var UpsolverS3OutputFormatConfig_prefixConfig = &sUpsolverS3OutputFormatConfig_prefixConfig
+var UpsolverS3OutputFormatConfig_aggregationConfig = &sUpsolverS3OutputFormatConfig_aggregationConfig
+
+var _Username = &s_Username
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _Value = &s_Value
+
+var VeevaConnectorOperator = &sVeevaConnectorOperator
+var VeevaConnectorOperator_PROJECTION = &sVeevaConnectorOperator_PROJECTION
+var VeevaConnectorOperator_LESS_THAN = &sVeevaConnectorOperator_LESS_THAN
+var VeevaConnectorOperator_GREATER_THAN = &sVeevaConnectorOperator_GREATER_THAN
+var VeevaConnectorOperator_CONTAINS = &sVeevaConnectorOperator_CONTAINS
+var VeevaConnectorOperator_BETWEEN = &sVeevaConnectorOperator_BETWEEN
+var VeevaConnectorOperator_LESS_THAN_OR_EQUAL_TO = &sVeevaConnectorOperator_LESS_THAN_OR_EQUAL_TO
+var VeevaConnectorOperator_GREATER_THAN_OR_EQUAL_TO = &sVeevaConnectorOperator_GREATER_THAN_OR_EQUAL_TO
+var VeevaConnectorOperator_EQUAL_TO = &sVeevaConnectorOperator_EQUAL_TO
+var VeevaConnectorOperator_NOT_EQUAL_TO = &sVeevaConnectorOperator_NOT_EQUAL_TO
+var VeevaConnectorOperator_ADDITION = &sVeevaConnectorOperator_ADDITION
+var VeevaConnectorOperator_MULTIPLICATION = &sVeevaConnectorOperator_MULTIPLICATION
+var VeevaConnectorOperator_DIVISION = &sVeevaConnectorOperator_DIVISION
+var VeevaConnectorOperator_SUBTRACTION = &sVeevaConnectorOperator_SUBTRACTION
+var VeevaConnectorOperator_MASK_ALL = &sVeevaConnectorOperator_MASK_ALL
+var VeevaConnectorOperator_MASK_FIRST_N = &sVeevaConnectorOperator_MASK_FIRST_N
+var VeevaConnectorOperator_MASK_LAST_N = &sVeevaConnectorOperator_MASK_LAST_N
+var VeevaConnectorOperator_VALIDATE_NON_NULL = &sVeevaConnectorOperator_VALIDATE_NON_NULL
+var VeevaConnectorOperator_VALIDATE_NON_ZERO = &sVeevaConnectorOperator_VALIDATE_NON_ZERO
+var VeevaConnectorOperator_VALIDATE_NON_NEGATIVE = &sVeevaConnectorOperator_VALIDATE_NON_NEGATIVE
+var VeevaConnectorOperator_VALIDATE_NUMERIC = &sVeevaConnectorOperator_VALIDATE_NUMERIC
+var VeevaConnectorOperator_NO_OP = &sVeevaConnectorOperator_NO_OP
+
+var VeevaConnectorProfileCredentials = &sVeevaConnectorProfileCredentials
+var VeevaConnectorProfileCredentials_username = &sVeevaConnectorProfileCredentials_username
+var VeevaConnectorProfileCredentials_password = &sVeevaConnectorProfileCredentials_password
+
+var VeevaConnectorProfileProperties = &sVeevaConnectorProfileProperties
+var VeevaConnectorProfileProperties_instanceUrl = &sVeevaConnectorProfileProperties_instanceUrl
+
+var VeevaMetadata = &sVeevaMetadata
+
+var VeevaSourceProperties = &sVeevaSourceProperties
+var VeevaSourceProperties_object = &sVeevaSourceProperties_object
+var VeevaSourceProperties_documentType = &sVeevaSourceProperties_documentType
+var VeevaSourceProperties_includeSourceFiles = &sVeevaSourceProperties_includeSourceFiles
+var VeevaSourceProperties_includeRenditions = &sVeevaSourceProperties_includeRenditions
+var VeevaSourceProperties_includeAllVersions = &sVeevaSourceProperties_includeAllVersions
+
+var _Warehouse = &s_Warehouse
+
+var _WorkgroupName = &s_WorkgroupName
+
+var WriteOperationType = &sWriteOperationType
+var WriteOperationType_INSERT = &sWriteOperationType_INSERT
+var WriteOperationType_UPSERT = &sWriteOperationType_UPSERT
+var WriteOperationType_UPDATE = &sWriteOperationType_UPDATE
+var WriteOperationType_DELETE = &sWriteOperationType_DELETE
+
+var ZendeskConnectorOperator = &sZendeskConnectorOperator
+var ZendeskConnectorOperator_PROJECTION = &sZendeskConnectorOperator_PROJECTION
+var ZendeskConnectorOperator_GREATER_THAN = &sZendeskConnectorOperator_GREATER_THAN
+var ZendeskConnectorOperator_ADDITION = &sZendeskConnectorOperator_ADDITION
+var ZendeskConnectorOperator_MULTIPLICATION = &sZendeskConnectorOperator_MULTIPLICATION
+var ZendeskConnectorOperator_DIVISION = &sZendeskConnectorOperator_DIVISION
+var ZendeskConnectorOperator_SUBTRACTION = &sZendeskConnectorOperator_SUBTRACTION
+var ZendeskConnectorOperator_MASK_ALL = &sZendeskConnectorOperator_MASK_ALL
+var ZendeskConnectorOperator_MASK_FIRST_N = &sZendeskConnectorOperator_MASK_FIRST_N
+var ZendeskConnectorOperator_MASK_LAST_N = &sZendeskConnectorOperator_MASK_LAST_N
+var ZendeskConnectorOperator_VALIDATE_NON_NULL = &sZendeskConnectorOperator_VALIDATE_NON_NULL
+var ZendeskConnectorOperator_VALIDATE_NON_ZERO = &sZendeskConnectorOperator_VALIDATE_NON_ZERO
+var ZendeskConnectorOperator_VALIDATE_NON_NEGATIVE = &sZendeskConnectorOperator_VALIDATE_NON_NEGATIVE
+var ZendeskConnectorOperator_VALIDATE_NUMERIC = &sZendeskConnectorOperator_VALIDATE_NUMERIC
+var ZendeskConnectorOperator_NO_OP = &sZendeskConnectorOperator_NO_OP
+
+var ZendeskConnectorProfileCredentials = &sZendeskConnectorProfileCredentials
+var ZendeskConnectorProfileCredentials_clientId = &sZendeskConnectorProfileCredentials_clientId
+var ZendeskConnectorProfileCredentials_clientSecret = &sZendeskConnectorProfileCredentials_clientSecret
+var ZendeskConnectorProfileCredentials_accessToken = &sZendeskConnectorProfileCredentials_accessToken
+var ZendeskConnectorProfileCredentials_oAuthRequest = &sZendeskConnectorProfileCredentials_oAuthRequest
+
+var ZendeskConnectorProfileProperties = &sZendeskConnectorProfileProperties
+var ZendeskConnectorProfileProperties_instanceUrl = &sZendeskConnectorProfileProperties_instanceUrl
+
+var ZendeskDestinationProperties = &sZendeskDestinationProperties
+var ZendeskDestinationProperties_object = &sZendeskDestinationProperties_object
+var ZendeskDestinationProperties_idFieldNames = &sZendeskDestinationProperties_idFieldNames
+var ZendeskDestinationProperties_errorHandlingConfig = &sZendeskDestinationProperties_errorHandlingConfig
+var ZendeskDestinationProperties_writeOperationType = &sZendeskDestinationProperties_writeOperationType
+
+var ZendeskMetadata = &sZendeskMetadata
+var ZendeskMetadata_oAuthScopes = &sZendeskMetadata_oAuthScopes
+
+var ZendeskSourceProperties = &sZendeskSourceProperties
+var ZendeskSourceProperties_object = &sZendeskSourceProperties_object
+
+var CancelFlowExecutionsRequest = &sCancelFlowExecutionsRequest
+var CancelFlowExecutionsRequest_flowName = &sCancelFlowExecutionsRequest_flowName
+var CancelFlowExecutionsRequest_executionIds = &sCancelFlowExecutionsRequest_executionIds
+
+var CancelFlowExecutionsResponse = &sCancelFlowExecutionsResponse
+var CancelFlowExecutionsResponse_invalidExecutions = &sCancelFlowExecutionsResponse_invalidExecutions
+
+var CreateConnectorProfileRequest = &sCreateConnectorProfileRequest
+var CreateConnectorProfileRequest_connectorProfileName = &sCreateConnectorProfileRequest_connectorProfileName
+var CreateConnectorProfileRequest_kmsArn = &sCreateConnectorProfileRequest_kmsArn
+var CreateConnectorProfileRequest_connectorType = &sCreateConnectorProfileRequest_connectorType
+var CreateConnectorProfileRequest_connectorLabel = &sCreateConnectorProfileRequest_connectorLabel
+var CreateConnectorProfileRequest_connectionMode = &sCreateConnectorProfileRequest_connectionMode
+var CreateConnectorProfileRequest_connectorProfileConfig = &sCreateConnectorProfileRequest_connectorProfileConfig
+var CreateConnectorProfileRequest_clientToken = &sCreateConnectorProfileRequest_clientToken
+
+var CreateConnectorProfileResponse = &sCreateConnectorProfileResponse
+var CreateConnectorProfileResponse_connectorProfileArn = &sCreateConnectorProfileResponse_connectorProfileArn
+
+var CreateFlowRequest = &sCreateFlowRequest
+var CreateFlowRequest_flowName = &sCreateFlowRequest_flowName
+var CreateFlowRequest_description = &sCreateFlowRequest_description
+var CreateFlowRequest_kmsArn = &sCreateFlowRequest_kmsArn
+var CreateFlowRequest_triggerConfig = &sCreateFlowRequest_triggerConfig
+var CreateFlowRequest_sourceFlowConfig = &sCreateFlowRequest_sourceFlowConfig
+var CreateFlowRequest_destinationFlowConfigList = &sCreateFlowRequest_destinationFlowConfigList
+var CreateFlowRequest_tasks = &sCreateFlowRequest_tasks
+var CreateFlowRequest_tags = &sCreateFlowRequest_tags
+var CreateFlowRequest_metadataCatalogConfig = &sCreateFlowRequest_metadataCatalogConfig
+var CreateFlowRequest_clientToken = &sCreateFlowRequest_clientToken
+
+var CreateFlowResponse = &sCreateFlowResponse
+var CreateFlowResponse_flowArn = &sCreateFlowResponse_flowArn
+var CreateFlowResponse_flowStatus = &sCreateFlowResponse_flowStatus
+
+var DeleteConnectorProfileRequest = &sDeleteConnectorProfileRequest
+var DeleteConnectorProfileRequest_connectorProfileName = &sDeleteConnectorProfileRequest_connectorProfileName
+var DeleteConnectorProfileRequest_forceDelete = &sDeleteConnectorProfileRequest_forceDelete
+
+var DeleteConnectorProfileResponse = &sDeleteConnectorProfileResponse
+
+var DeleteFlowRequest = &sDeleteFlowRequest
+var DeleteFlowRequest_flowName = &sDeleteFlowRequest_flowName
+var DeleteFlowRequest_forceDelete = &sDeleteFlowRequest_forceDelete
+
+var DeleteFlowResponse = &sDeleteFlowResponse
+
+var DescribeConnectorEntityRequest = &sDescribeConnectorEntityRequest
+var DescribeConnectorEntityRequest_connectorEntityName = &sDescribeConnectorEntityRequest_connectorEntityName
+var DescribeConnectorEntityRequest_connectorType = &sDescribeConnectorEntityRequest_connectorType
+var DescribeConnectorEntityRequest_connectorProfileName = &sDescribeConnectorEntityRequest_connectorProfileName
+var DescribeConnectorEntityRequest_apiVersion = &sDescribeConnectorEntityRequest_apiVersion
+
+var DescribeConnectorEntityResponse = &sDescribeConnectorEntityResponse
+var DescribeConnectorEntityResponse_connectorEntityFields = &sDescribeConnectorEntityResponse_connectorEntityFields
+
+var DescribeConnectorRequest = &sDescribeConnectorRequest
+var DescribeConnectorRequest_connectorType = &sDescribeConnectorRequest_connectorType
+var DescribeConnectorRequest_connectorLabel = &sDescribeConnectorRequest_connectorLabel
+
+var DescribeConnectorResponse = &sDescribeConnectorResponse
+var DescribeConnectorResponse_connectorConfiguration = &sDescribeConnectorResponse_connectorConfiguration
+
+var DescribeConnectorProfilesRequest = &sDescribeConnectorProfilesRequest
+var DescribeConnectorProfilesRequest_connectorProfileNames = &sDescribeConnectorProfilesRequest_connectorProfileNames
+var DescribeConnectorProfilesRequest_connectorType = &sDescribeConnectorProfilesRequest_connectorType
+var DescribeConnectorProfilesRequest_connectorLabel = &sDescribeConnectorProfilesRequest_connectorLabel
+var DescribeConnectorProfilesRequest_maxResults = &sDescribeConnectorProfilesRequest_maxResults
+var DescribeConnectorProfilesRequest_nextToken = &sDescribeConnectorProfilesRequest_nextToken
+
+var DescribeConnectorProfilesResponse = &sDescribeConnectorProfilesResponse
+var DescribeConnectorProfilesResponse_connectorProfileDetails = &sDescribeConnectorProfilesResponse_connectorProfileDetails
+var DescribeConnectorProfilesResponse_nextToken = &sDescribeConnectorProfilesResponse_nextToken
+
+var DescribeConnectorsRequest = &sDescribeConnectorsRequest
+var DescribeConnectorsRequest_connectorTypes = &sDescribeConnectorsRequest_connectorTypes
+var DescribeConnectorsRequest_maxResults = &sDescribeConnectorsRequest_maxResults
+var DescribeConnectorsRequest_nextToken = &sDescribeConnectorsRequest_nextToken
+
+var DescribeConnectorsResponse = &sDescribeConnectorsResponse
+var DescribeConnectorsResponse_connectorConfigurations = &sDescribeConnectorsResponse_connectorConfigurations
+var DescribeConnectorsResponse_connectors = &sDescribeConnectorsResponse_connectors
+var DescribeConnectorsResponse_nextToken = &sDescribeConnectorsResponse_nextToken
+
+var DescribeFlowExecutionRecordsRequest = &sDescribeFlowExecutionRecordsRequest
+var DescribeFlowExecutionRecordsRequest_flowName = &sDescribeFlowExecutionRecordsRequest_flowName
+var DescribeFlowExecutionRecordsRequest_maxResults = &sDescribeFlowExecutionRecordsRequest_maxResults
+var DescribeFlowExecutionRecordsRequest_nextToken = &sDescribeFlowExecutionRecordsRequest_nextToken
+
+var DescribeFlowExecutionRecordsResponse = &sDescribeFlowExecutionRecordsResponse
+var DescribeFlowExecutionRecordsResponse_flowExecutions = &sDescribeFlowExecutionRecordsResponse_flowExecutions
+var DescribeFlowExecutionRecordsResponse_nextToken = &sDescribeFlowExecutionRecordsResponse_nextToken
+
+var DescribeFlowRequest = &sDescribeFlowRequest
+var DescribeFlowRequest_flowName = &sDescribeFlowRequest_flowName
+
+var DescribeFlowResponse = &sDescribeFlowResponse
+var DescribeFlowResponse_flowArn = &sDescribeFlowResponse_flowArn
+var DescribeFlowResponse_description = &sDescribeFlowResponse_description
+var DescribeFlowResponse_flowName = &sDescribeFlowResponse_flowName
+var DescribeFlowResponse_kmsArn = &sDescribeFlowResponse_kmsArn
+var DescribeFlowResponse_flowStatus = &sDescribeFlowResponse_flowStatus
+var DescribeFlowResponse_flowStatusMessage = &sDescribeFlowResponse_flowStatusMessage
+var DescribeFlowResponse_sourceFlowConfig = &sDescribeFlowResponse_sourceFlowConfig
+var DescribeFlowResponse_destinationFlowConfigList = &sDescribeFlowResponse_destinationFlowConfigList
+var DescribeFlowResponse_lastRunExecutionDetails = &sDescribeFlowResponse_lastRunExecutionDetails
+var DescribeFlowResponse_triggerConfig = &sDescribeFlowResponse_triggerConfig
+var DescribeFlowResponse_tasks = &sDescribeFlowResponse_tasks
+var DescribeFlowResponse_createdAt = &sDescribeFlowResponse_createdAt
+var DescribeFlowResponse_lastUpdatedAt = &sDescribeFlowResponse_lastUpdatedAt
+var DescribeFlowResponse_createdBy = &sDescribeFlowResponse_createdBy
+var DescribeFlowResponse_lastUpdatedBy = &sDescribeFlowResponse_lastUpdatedBy
+var DescribeFlowResponse_tags = &sDescribeFlowResponse_tags
+var DescribeFlowResponse_metadataCatalogConfig = &sDescribeFlowResponse_metadataCatalogConfig
+var DescribeFlowResponse_lastRunMetadataCatalogDetails = &sDescribeFlowResponse_lastRunMetadataCatalogDetails
+var DescribeFlowResponse_schemaVersion = &sDescribeFlowResponse_schemaVersion
+
+var ListConnectorEntitiesRequest = &sListConnectorEntitiesRequest
+var ListConnectorEntitiesRequest_connectorProfileName = &sListConnectorEntitiesRequest_connectorProfileName
+var ListConnectorEntitiesRequest_connectorType = &sListConnectorEntitiesRequest_connectorType
+var ListConnectorEntitiesRequest_entitiesPath = &sListConnectorEntitiesRequest_entitiesPath
+var ListConnectorEntitiesRequest_apiVersion = &sListConnectorEntitiesRequest_apiVersion
+var ListConnectorEntitiesRequest_maxResults = &sListConnectorEntitiesRequest_maxResults
+var ListConnectorEntitiesRequest_nextToken = &sListConnectorEntitiesRequest_nextToken
+
+var ListConnectorEntitiesResponse = &sListConnectorEntitiesResponse
+var ListConnectorEntitiesResponse_connectorEntityMap = &sListConnectorEntitiesResponse_connectorEntityMap
+var ListConnectorEntitiesResponse_nextToken = &sListConnectorEntitiesResponse_nextToken
+
+var ListConnectorsRequest = &sListConnectorsRequest
+var ListConnectorsRequest_maxResults = &sListConnectorsRequest_maxResults
+var ListConnectorsRequest_nextToken = &sListConnectorsRequest_nextToken
+
+var ListConnectorsResponse = &sListConnectorsResponse
+var ListConnectorsResponse_connectors = &sListConnectorsResponse_connectors
+var ListConnectorsResponse_nextToken = &sListConnectorsResponse_nextToken
+
+var ListFlowsRequest = &sListFlowsRequest
+var ListFlowsRequest_maxResults = &sListFlowsRequest_maxResults
+var ListFlowsRequest_nextToken = &sListFlowsRequest_nextToken
+
+var ListFlowsResponse = &sListFlowsResponse
+var ListFlowsResponse_flows = &sListFlowsResponse_flows
+var ListFlowsResponse_nextToken = &sListFlowsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterConnectorRequest = &sRegisterConnectorRequest
+var RegisterConnectorRequest_connectorLabel = &sRegisterConnectorRequest_connectorLabel
+var RegisterConnectorRequest_description = &sRegisterConnectorRequest_description
+var RegisterConnectorRequest_connectorProvisioningType = &sRegisterConnectorRequest_connectorProvisioningType
+var RegisterConnectorRequest_connectorProvisioningConfig = &sRegisterConnectorRequest_connectorProvisioningConfig
+var RegisterConnectorRequest_clientToken = &sRegisterConnectorRequest_clientToken
+
+var RegisterConnectorResponse = &sRegisterConnectorResponse
+var RegisterConnectorResponse_connectorArn = &sRegisterConnectorResponse_connectorArn
+
+var ResetConnectorMetadataCacheRequest = &sResetConnectorMetadataCacheRequest
+var ResetConnectorMetadataCacheRequest_connectorProfileName = &sResetConnectorMetadataCacheRequest_connectorProfileName
+var ResetConnectorMetadataCacheRequest_connectorType = &sResetConnectorMetadataCacheRequest_connectorType
+var ResetConnectorMetadataCacheRequest_connectorEntityName = &sResetConnectorMetadataCacheRequest_connectorEntityName
+var ResetConnectorMetadataCacheRequest_entitiesPath = &sResetConnectorMetadataCacheRequest_entitiesPath
+var ResetConnectorMetadataCacheRequest_apiVersion = &sResetConnectorMetadataCacheRequest_apiVersion
+
+var ResetConnectorMetadataCacheResponse = &sResetConnectorMetadataCacheResponse
+
+var StartFlowRequest = &sStartFlowRequest
+var StartFlowRequest_flowName = &sStartFlowRequest_flowName
+var StartFlowRequest_clientToken = &sStartFlowRequest_clientToken
+
+var StartFlowResponse = &sStartFlowResponse
+var StartFlowResponse_flowArn = &sStartFlowResponse_flowArn
+var StartFlowResponse_flowStatus = &sStartFlowResponse_flowStatus
+var StartFlowResponse_executionId = &sStartFlowResponse_executionId
+
+var StopFlowRequest = &sStopFlowRequest
+var StopFlowRequest_flowName = &sStopFlowRequest_flowName
+
+var StopFlowResponse = &sStopFlowResponse
+var StopFlowResponse_flowArn = &sStopFlowResponse_flowArn
+var StopFlowResponse_flowStatus = &sStopFlowResponse_flowStatus
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UnregisterConnectorRequest = &sUnregisterConnectorRequest
+var UnregisterConnectorRequest_connectorLabel = &sUnregisterConnectorRequest_connectorLabel
+var UnregisterConnectorRequest_forceDelete = &sUnregisterConnectorRequest_forceDelete
+
+var UnregisterConnectorResponse = &sUnregisterConnectorResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateConnectorProfileRequest = &sUpdateConnectorProfileRequest
+var UpdateConnectorProfileRequest_connectorProfileName = &sUpdateConnectorProfileRequest_connectorProfileName
+var UpdateConnectorProfileRequest_connectionMode = &sUpdateConnectorProfileRequest_connectionMode
+var UpdateConnectorProfileRequest_connectorProfileConfig = &sUpdateConnectorProfileRequest_connectorProfileConfig
+var UpdateConnectorProfileRequest_clientToken = &sUpdateConnectorProfileRequest_clientToken
+
+var UpdateConnectorProfileResponse = &sUpdateConnectorProfileResponse
+var UpdateConnectorProfileResponse_connectorProfileArn = &sUpdateConnectorProfileResponse_connectorProfileArn
+
+var UpdateConnectorRegistrationRequest = &sUpdateConnectorRegistrationRequest
+var UpdateConnectorRegistrationRequest_connectorLabel = &sUpdateConnectorRegistrationRequest_connectorLabel
+var UpdateConnectorRegistrationRequest_description = &sUpdateConnectorRegistrationRequest_description
+var UpdateConnectorRegistrationRequest_connectorProvisioningConfig = &sUpdateConnectorRegistrationRequest_connectorProvisioningConfig
+var UpdateConnectorRegistrationRequest_clientToken = &sUpdateConnectorRegistrationRequest_clientToken
+
+var UpdateConnectorRegistrationResponse = &sUpdateConnectorRegistrationResponse
+var UpdateConnectorRegistrationResponse_connectorArn = &sUpdateConnectorRegistrationResponse_connectorArn
+
+var UpdateFlowRequest = &sUpdateFlowRequest
+var UpdateFlowRequest_flowName = &sUpdateFlowRequest_flowName
+var UpdateFlowRequest_description = &sUpdateFlowRequest_description
+var UpdateFlowRequest_triggerConfig = &sUpdateFlowRequest_triggerConfig
+var UpdateFlowRequest_sourceFlowConfig = &sUpdateFlowRequest_sourceFlowConfig
+var UpdateFlowRequest_destinationFlowConfigList = &sUpdateFlowRequest_destinationFlowConfigList
+var UpdateFlowRequest_tasks = &sUpdateFlowRequest_tasks
+var UpdateFlowRequest_metadataCatalogConfig = &sUpdateFlowRequest_metadataCatalogConfig
+var UpdateFlowRequest_clientToken = &sUpdateFlowRequest_clientToken
+
+var UpdateFlowResponse = &sUpdateFlowResponse
+var UpdateFlowResponse_flowStatus = &sUpdateFlowResponse_flowStatus
+
+var SandstoneConfigurationServiceLambda = &smithy.ServiceSchema{Schema: &s_SandstoneConfigurationServiceLambda, Version: "2020-08-23"}

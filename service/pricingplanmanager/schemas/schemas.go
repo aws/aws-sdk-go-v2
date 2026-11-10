@@ -4,602 +4,460 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ApprovePaidSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ApprovePaidSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iApprovePaidSubscription                     = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ApprovePaidSubscription"}
+	iAssociateResourcesToSubscription            = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "AssociateResourcesToSubscription"}
+	iCancelSubscription                          = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CancelSubscription"}
+	iCancelSubscriptionChange                    = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CancelSubscriptionChange"}
+	iCreateSubscription                          = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CreateSubscription"}
+	iDisassociateResourcesFromSubscription       = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "DisassociateResourcesFromSubscription"}
+	iGetSubscription                             = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "GetSubscription"}
+	iListSubscriptions                           = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ListSubscriptions"}
+	iUpdateSubscription                          = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "UpdateSubscription"}
+	i_AWSPricingPlanManager                      = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "AWSPricingPlanManager"}
+	iAccessDeniedException                       = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "AccessDeniedException"}
+	iApprovalMode                                = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ApprovalMode"}
+	iConflictException                           = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ConflictException"}
+	i_IdempotencyToken                           = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "IdempotencyToken"}
+	iInternalServerException                     = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "InternalServerException"}
+	i_ResourceArns                               = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ResourceArns"}
+	iResourceNotFoundException                   = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ResourceNotFoundException"}
+	iScheduledChange                             = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ScheduledChange"}
+	iScheduledChangeType                         = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ScheduledChangeType"}
+	iServiceQuotaExceededException               = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ServiceQuotaExceededException"}
+	iStatus                                      = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "Status"}
+	iSubscription                                = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "Subscription"}
+	i_SubscriptionArn                            = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "SubscriptionArn"}
+	iSubscriptionSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "SubscriptionSummary"}
+	i_SubscriptionSummaryList                    = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "SubscriptionSummaryList"}
+	iThrottlingException                         = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ThrottlingException"}
+	iValidationException                         = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ValidationException"}
+	iApprovePaidSubscriptionInput                = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ApprovePaidSubscriptionInput"}
+	iApprovePaidSubscriptionOutput               = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ApprovePaidSubscriptionOutput"}
+	iAssociateResourcesToSubscriptionInput       = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "AssociateResourcesToSubscriptionInput"}
+	iAssociateResourcesToSubscriptionOutput      = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "AssociateResourcesToSubscriptionOutput"}
+	iCancelSubscriptionChangeInput               = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CancelSubscriptionChangeInput"}
+	iCancelSubscriptionChangeOutput              = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CancelSubscriptionChangeOutput"}
+	iCancelSubscriptionInput                     = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CancelSubscriptionInput"}
+	iCancelSubscriptionOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CancelSubscriptionOutput"}
+	iCreateSubscriptionInput                     = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CreateSubscriptionInput"}
+	iCreateSubscriptionOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "CreateSubscriptionOutput"}
+	iDisassociateResourcesFromSubscriptionInput  = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "DisassociateResourcesFromSubscriptionInput"}
+	iDisassociateResourcesFromSubscriptionOutput = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "DisassociateResourcesFromSubscriptionOutput"}
+	iGetSubscriptionInput                        = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "GetSubscriptionInput"}
+	iGetSubscriptionOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "GetSubscriptionOutput"}
+	iListSubscriptionsInput                      = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ListSubscriptionsInput"}
+	iListSubscriptionsOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "ListSubscriptionsOutput"}
+	iUpdateSubscriptionInput                     = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "UpdateSubscriptionInput"}
+	iUpdateSubscriptionOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.pricingplanmanager", Name: "UpdateSubscriptionOutput"}
+	pString                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/ApprovePaidSubscription",
-	Code: 200})
-
-var AssociateResourcesToSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "AssociateResourcesToSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/AssociateResourcesToSubscription",
-	Code: 200})
-
-var CancelSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CancelSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/CancelSubscription",
-	Code: 200})
-
-var CancelSubscriptionChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CancelSubscriptionChange",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/CancelSubscriptionChange",
-	Code: 200})
-
-var CreateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CreateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/CreateSubscription",
-	Code: 200})
-
-var DisassociateResourcesFromSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "DisassociateResourcesFromSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/DisassociateResourcesFromSubscription",
-	Code: 200})
-
-var GetSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "GetSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/GetSubscription",
-	Code: 200})
-
-var ListSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ListSubscriptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/ListSubscriptions",
-	Code: 200})
-
-var UpdateSubscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "UpdateSubscription",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/UpdateSubscription",
-	Code: 200})
-
-var _AWSPricingPlanManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "AWSPricingPlanManager",
-}, smithy.ShapeTypeService, 0)
-
-var AWSPricingPlanManager = smithy.NewServiceSchema(_AWSPricingPlanManager, "2025-08-05")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var ApprovalMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ApprovalMode",
-}, smithy.ShapeTypeEnum, 2)
-var ApprovalMode_MANUAL *smithy.Schema
-
-var ApprovalMode_IMMEDIATE *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _ResourceArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ResourceArns",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArns_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ScheduledChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ScheduledChange",
-}, smithy.ShapeTypeStructure, 4)
-var ScheduledChange_changeType *smithy.Schema
-
-var ScheduledChange_effectiveDate *smithy.Schema
-
-var ScheduledChange_planTier *smithy.Schema
-
-var ScheduledChange_usageLevel *smithy.Schema
-
-var ScheduledChangeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ScheduledChangeType",
-}, smithy.ShapeTypeEnum, 2)
-var ScheduledChangeType_DOWNGRADE *smithy.Schema
-
-var ScheduledChangeType_CANCELLATION *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 4)
-var Status_PENDING_APPROVAL *smithy.Schema
-
-var Status_ACTIVE *smithy.Schema
-
-var Status_SYNC_IN_PROGRESS *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var Subscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "Subscription",
-}, smithy.ShapeTypeStructure, 10)
-var Subscription_arn *smithy.Schema
-
-var Subscription_planFamily *smithy.Schema
-
-var Subscription_planTier *smithy.Schema
-
-var Subscription_usageLevel *smithy.Schema
-
-var Subscription_scheduledChange *smithy.Schema
-
-var Subscription_status *smithy.Schema
-
-var Subscription_statusReason *smithy.Schema
-
-var Subscription_resourceArns *smithy.Schema
-
-var Subscription_createdAt *smithy.Schema
-
-var Subscription_updatedAt *smithy.Schema
-
-var _SubscriptionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "SubscriptionArn",
-}, smithy.ShapeTypeString, 0)
-
-var SubscriptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "SubscriptionSummary",
-}, smithy.ShapeTypeStructure, 11)
-var SubscriptionSummary_arn *smithy.Schema
-
-var SubscriptionSummary_planFamily *smithy.Schema
-
-var SubscriptionSummary_planTier *smithy.Schema
-
-var SubscriptionSummary_usageLevel *smithy.Schema
-
-var SubscriptionSummary_scheduledChange *smithy.Schema
-
-var SubscriptionSummary_status *smithy.Schema
-
-var SubscriptionSummary_statusReason *smithy.Schema
-
-var SubscriptionSummary_resourceArns *smithy.Schema
-
-var SubscriptionSummary_createdAt *smithy.Schema
-
-var SubscriptionSummary_updatedAt *smithy.Schema
-
-var SubscriptionSummary_eTag *smithy.Schema
-
-var _SubscriptionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "SubscriptionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionSummaryList_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_resourceId *smithy.Schema
-
-var ApprovePaidSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ApprovePaidSubscriptionInput",
-}, smithy.ShapeTypeStructure, 3)
-var ApprovePaidSubscriptionInput_arn *smithy.Schema
-
-var ApprovePaidSubscriptionInput_ifMatch *smithy.Schema
-
-var ApprovePaidSubscriptionInput_clientToken *smithy.Schema
-
-var ApprovePaidSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ApprovePaidSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ApprovePaidSubscriptionOutput_subscription *smithy.Schema
-
-var ApprovePaidSubscriptionOutput_eTag *smithy.Schema
-
-var AssociateResourcesToSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "AssociateResourcesToSubscriptionInput",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateResourcesToSubscriptionInput_arn *smithy.Schema
-
-var AssociateResourcesToSubscriptionInput_resourceArns *smithy.Schema
-
-var AssociateResourcesToSubscriptionInput_ifMatch *smithy.Schema
-
-var AssociateResourcesToSubscriptionInput_clientToken *smithy.Schema
-
-var AssociateResourcesToSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "AssociateResourcesToSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateResourcesToSubscriptionOutput_subscription *smithy.Schema
-
-var AssociateResourcesToSubscriptionOutput_eTag *smithy.Schema
-
-var CancelSubscriptionChangeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CancelSubscriptionChangeInput",
-}, smithy.ShapeTypeStructure, 3)
-var CancelSubscriptionChangeInput_arn *smithy.Schema
-
-var CancelSubscriptionChangeInput_ifMatch *smithy.Schema
-
-var CancelSubscriptionChangeInput_clientToken *smithy.Schema
-
-var CancelSubscriptionChangeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CancelSubscriptionChangeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CancelSubscriptionChangeOutput_subscription *smithy.Schema
-
-var CancelSubscriptionChangeOutput_eTag *smithy.Schema
-
-var CancelSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CancelSubscriptionInput",
-}, smithy.ShapeTypeStructure, 3)
-var CancelSubscriptionInput_arn *smithy.Schema
-
-var CancelSubscriptionInput_ifMatch *smithy.Schema
-
-var CancelSubscriptionInput_clientToken *smithy.Schema
-
-var CancelSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CancelSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CancelSubscriptionOutput_subscription *smithy.Schema
-
-var CancelSubscriptionOutput_eTag *smithy.Schema
-
-var CreateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CreateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateSubscriptionInput_planFamily *smithy.Schema
-
-var CreateSubscriptionInput_planTier *smithy.Schema
-
-var CreateSubscriptionInput_usageLevel *smithy.Schema
-
-var CreateSubscriptionInput_resourceArns *smithy.Schema
-
-var CreateSubscriptionInput_approvalMode *smithy.Schema
-
-var CreateSubscriptionInput_clientToken *smithy.Schema
-
-var CreateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "CreateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSubscriptionOutput_subscription *smithy.Schema
-
-var CreateSubscriptionOutput_eTag *smithy.Schema
-
-var DisassociateResourcesFromSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "DisassociateResourcesFromSubscriptionInput",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateResourcesFromSubscriptionInput_arn *smithy.Schema
-
-var DisassociateResourcesFromSubscriptionInput_resourceArns *smithy.Schema
-
-var DisassociateResourcesFromSubscriptionInput_ifMatch *smithy.Schema
-
-var DisassociateResourcesFromSubscriptionInput_clientToken *smithy.Schema
-
-var DisassociateResourcesFromSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "DisassociateResourcesFromSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateResourcesFromSubscriptionOutput_subscription *smithy.Schema
-
-var DisassociateResourcesFromSubscriptionOutput_eTag *smithy.Schema
-
-var GetSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "GetSubscriptionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSubscriptionInput_arn *smithy.Schema
-
-var GetSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "GetSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetSubscriptionOutput_subscription *smithy.Schema
-
-var GetSubscriptionOutput_eTag *smithy.Schema
-
-var ListSubscriptionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ListSubscriptionsInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListSubscriptionsInput_nextToken *smithy.Schema
-
-var ListSubscriptionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "ListSubscriptionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscriptionsOutput_subscriptionSummaries *smithy.Schema
-
-var ListSubscriptionsOutput_nextToken *smithy.Schema
-
-var UpdateSubscriptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "UpdateSubscriptionInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSubscriptionInput_arn *smithy.Schema
-
-var UpdateSubscriptionInput_planTier *smithy.Schema
-
-var UpdateSubscriptionInput_usageLevel *smithy.Schema
-
-var UpdateSubscriptionInput_ifMatch *smithy.Schema
-
-var UpdateSubscriptionInput_clientToken *smithy.Schema
-
-var UpdateSubscriptionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pricingplanmanager",
-	Name:      "UpdateSubscriptionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSubscriptionOutput_subscription *smithy.Schema
-
-var UpdateSubscriptionOutput_eTag *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	ApprovalMode_MANUAL = ApprovalMode.AddMember("MANUAL", smithyprelude.Unit)
-
-	ApprovalMode_IMMEDIATE = ApprovalMode.AddMember("IMMEDIATE", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	_ResourceArns_member = _ResourceArns.AddMember("member", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ScheduledChangeType_DOWNGRADE = ScheduledChangeType.AddMember("DOWNGRADE", smithyprelude.Unit)
-
-	ScheduledChangeType_CANCELLATION = ScheduledChangeType.AddMember("CANCELLATION", smithyprelude.Unit)
-
-	ScheduledChange_changeType = ScheduledChange.AddMember("changeType", ScheduledChangeType)
-
-	ScheduledChange_effectiveDate = ScheduledChange.AddMember("effectiveDate", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ScheduledChange_planTier = ScheduledChange.AddMember("planTier", smithyprelude.String)
-
-	ScheduledChange_usageLevel = ScheduledChange.AddMember("usageLevel", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	Status_PENDING_APPROVAL = Status.AddMember("PENDING_APPROVAL", smithyprelude.Unit)
-
-	Status_ACTIVE = Status.AddMember("ACTIVE", smithyprelude.Unit)
-
-	Status_SYNC_IN_PROGRESS = Status.AddMember("SYNC_IN_PROGRESS", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	Subscription_arn = Subscription.AddMember("arn", _SubscriptionArn)
-
-	Subscription_planFamily = Subscription.AddMember("planFamily", smithyprelude.String)
-
-	Subscription_planTier = Subscription.AddMember("planTier", smithyprelude.String)
-
-	Subscription_usageLevel = Subscription.AddMember("usageLevel", smithyprelude.String)
-
-	Subscription_scheduledChange = Subscription.AddMember("scheduledChange", ScheduledChange)
-
-	Subscription_status = Subscription.AddMember("status", Status)
-
-	Subscription_statusReason = Subscription.AddMember("statusReason", smithyprelude.String)
-
-	Subscription_resourceArns = Subscription.AddMember("resourceArns", _ResourceArns)
-
-	Subscription_createdAt = Subscription.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	Subscription_updatedAt = Subscription.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubscriptionSummary_arn = SubscriptionSummary.AddMember("arn", _SubscriptionArn)
-
-	SubscriptionSummary_planFamily = SubscriptionSummary.AddMember("planFamily", smithyprelude.String)
-
-	SubscriptionSummary_planTier = SubscriptionSummary.AddMember("planTier", smithyprelude.String)
-
-	SubscriptionSummary_usageLevel = SubscriptionSummary.AddMember("usageLevel", smithyprelude.String)
-
-	SubscriptionSummary_scheduledChange = SubscriptionSummary.AddMember("scheduledChange", ScheduledChange)
-
-	SubscriptionSummary_status = SubscriptionSummary.AddMember("status", Status)
-
-	SubscriptionSummary_statusReason = SubscriptionSummary.AddMember("statusReason", smithyprelude.String)
-
-	SubscriptionSummary_resourceArns = SubscriptionSummary.AddMember("resourceArns", _ResourceArns)
-
-	SubscriptionSummary_createdAt = SubscriptionSummary.AddMember("createdAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubscriptionSummary_updatedAt = SubscriptionSummary.AddMember("updatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	SubscriptionSummary_eTag = SubscriptionSummary.AddMember("eTag", smithyprelude.String)
-
-	_SubscriptionSummaryList_member = _SubscriptionSummaryList.AddMember("member", SubscriptionSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_resourceId = ValidationException.AddMember("resourceId", smithyprelude.String)
-
-	ApprovePaidSubscriptionInput_arn = ApprovePaidSubscriptionInput.AddMember("arn", _SubscriptionArn)
-
-	ApprovePaidSubscriptionInput_ifMatch = ApprovePaidSubscriptionInput.AddMember("ifMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	ApprovePaidSubscriptionInput_clientToken = ApprovePaidSubscriptionInput.AddMember("clientToken", _IdempotencyToken)
-
-	ApprovePaidSubscriptionOutput_subscription = ApprovePaidSubscriptionOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	ApprovePaidSubscriptionOutput_eTag = ApprovePaidSubscriptionOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	AssociateResourcesToSubscriptionInput_arn = AssociateResourcesToSubscriptionInput.AddMember("arn", _SubscriptionArn)
-
-	AssociateResourcesToSubscriptionInput_resourceArns = AssociateResourcesToSubscriptionInput.AddMember("resourceArns", _ResourceArns)
-
-	AssociateResourcesToSubscriptionInput_ifMatch = AssociateResourcesToSubscriptionInput.AddMember("ifMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	AssociateResourcesToSubscriptionInput_clientToken = AssociateResourcesToSubscriptionInput.AddMember("clientToken", _IdempotencyToken)
-
-	AssociateResourcesToSubscriptionOutput_subscription = AssociateResourcesToSubscriptionOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	AssociateResourcesToSubscriptionOutput_eTag = AssociateResourcesToSubscriptionOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	CancelSubscriptionChangeInput_arn = CancelSubscriptionChangeInput.AddMember("arn", _SubscriptionArn)
-
-	CancelSubscriptionChangeInput_ifMatch = CancelSubscriptionChangeInput.AddMember("ifMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	CancelSubscriptionChangeInput_clientToken = CancelSubscriptionChangeInput.AddMember("clientToken", _IdempotencyToken)
-
-	CancelSubscriptionChangeOutput_subscription = CancelSubscriptionChangeOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	CancelSubscriptionChangeOutput_eTag = CancelSubscriptionChangeOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	CancelSubscriptionInput_arn = CancelSubscriptionInput.AddMember("arn", _SubscriptionArn)
-
-	CancelSubscriptionInput_ifMatch = CancelSubscriptionInput.AddMember("ifMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	CancelSubscriptionInput_clientToken = CancelSubscriptionInput.AddMember("clientToken", _IdempotencyToken)
-
-	CancelSubscriptionOutput_subscription = CancelSubscriptionOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	CancelSubscriptionOutput_eTag = CancelSubscriptionOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	CreateSubscriptionInput_planFamily = CreateSubscriptionInput.AddMember("planFamily", smithyprelude.String)
-
-	CreateSubscriptionInput_planTier = CreateSubscriptionInput.AddMember("planTier", smithyprelude.String)
-
-	CreateSubscriptionInput_usageLevel = CreateSubscriptionInput.AddMember("usageLevel", smithyprelude.String)
-
-	CreateSubscriptionInput_resourceArns = CreateSubscriptionInput.AddMember("resourceArns", _ResourceArns)
-
-	CreateSubscriptionInput_approvalMode = CreateSubscriptionInput.AddMember("approvalMode", ApprovalMode)
-
-	CreateSubscriptionInput_clientToken = CreateSubscriptionInput.AddMember("clientToken", _IdempotencyToken)
-
-	CreateSubscriptionOutput_subscription = CreateSubscriptionOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	CreateSubscriptionOutput_eTag = CreateSubscriptionOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	DisassociateResourcesFromSubscriptionInput_arn = DisassociateResourcesFromSubscriptionInput.AddMember("arn", _SubscriptionArn)
-
-	DisassociateResourcesFromSubscriptionInput_resourceArns = DisassociateResourcesFromSubscriptionInput.AddMember("resourceArns", _ResourceArns)
-
-	DisassociateResourcesFromSubscriptionInput_ifMatch = DisassociateResourcesFromSubscriptionInput.AddMember("ifMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	DisassociateResourcesFromSubscriptionInput_clientToken = DisassociateResourcesFromSubscriptionInput.AddMember("clientToken", _IdempotencyToken)
-
-	DisassociateResourcesFromSubscriptionOutput_subscription = DisassociateResourcesFromSubscriptionOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	DisassociateResourcesFromSubscriptionOutput_eTag = DisassociateResourcesFromSubscriptionOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	GetSubscriptionInput_arn = GetSubscriptionInput.AddMember("arn", _SubscriptionArn)
-
-	GetSubscriptionOutput_subscription = GetSubscriptionOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	GetSubscriptionOutput_eTag = GetSubscriptionOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-	ListSubscriptionsInput_nextToken = ListSubscriptionsInput.AddMember("nextToken", smithyprelude.String)
-
-	ListSubscriptionsOutput_subscriptionSummaries = ListSubscriptionsOutput.AddMember("subscriptionSummaries", _SubscriptionSummaryList)
-
-	ListSubscriptionsOutput_nextToken = ListSubscriptionsOutput.AddMember("nextToken", smithyprelude.String)
-
-	UpdateSubscriptionInput_arn = UpdateSubscriptionInput.AddMember("arn", _SubscriptionArn)
-
-	UpdateSubscriptionInput_planTier = UpdateSubscriptionInput.AddMember("planTier", smithyprelude.String)
-
-	UpdateSubscriptionInput_usageLevel = UpdateSubscriptionInput.AddMember("usageLevel", smithyprelude.String)
-
-	UpdateSubscriptionInput_ifMatch = UpdateSubscriptionInput.AddMember("ifMatch", smithyprelude.String, &smithytraits.HTTPHeader{Name: "If-Match"})
-
-	UpdateSubscriptionInput_clientToken = UpdateSubscriptionInput.AddMember("clientToken", _IdempotencyToken)
-
-	UpdateSubscriptionOutput_subscription = UpdateSubscriptionOutput.AddMember("subscription", Subscription, &smithytraits.HTTPPayload{})
-
-	UpdateSubscriptionOutput_eTag = UpdateSubscriptionOutput.AddMember("eTag", smithyprelude.String, &smithytraits.HTTPHeader{Name: "ETag"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "If-Match"}}, DirectMask: 0x80}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "ETag"}}, DirectMask: 0x80}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mApprovalMode = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovalMode_MANUAL, &sApprovalMode_IMMEDIATE}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_ResourceArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceArns_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId}}
+var mScheduledChange = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledChange_changeType, &sScheduledChange_effectiveDate, &sScheduledChange_planTier, &sScheduledChange_usageLevel}}
+var mScheduledChangeType = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledChangeType_DOWNGRADE, &sScheduledChangeType_CANCELLATION}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_PENDING_APPROVAL, &sStatus_ACTIVE, &sStatus_SYNC_IN_PROGRESS, &sStatus_FAILED}}
+var mSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscription_arn, &sSubscription_planFamily, &sSubscription_planTier, &sSubscription_usageLevel, &sSubscription_scheduledChange, &sSubscription_status, &sSubscription_statusReason, &sSubscription_resourceArns, &sSubscription_createdAt, &sSubscription_updatedAt}, Seed: 4, Slots: []uint16{
+	5, 0, 0, 0, 10, 0, 0, 1, 0, 6, 8, 0, 0, 9, 3, 0, 4, 2, 0, 0, 0, 0, 0, 7,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mSubscriptionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriptionSummary_arn, &sSubscriptionSummary_planFamily, &sSubscriptionSummary_planTier, &sSubscriptionSummary_usageLevel, &sSubscriptionSummary_scheduledChange, &sSubscriptionSummary_status, &sSubscriptionSummary_statusReason, &sSubscriptionSummary_resourceArns, &sSubscriptionSummary_createdAt, &sSubscriptionSummary_updatedAt, &sSubscriptionSummary_eTag}, Seed: 12, Slots: []uint16{
+	0, 0, 0, 11, 1, 0, 9, 0, 3, 0, 5, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 7, 0, 0, 8, 10, 0, 2,
+}}
+var m_SubscriptionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriptionSummaryList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_resourceId}}
+var mApprovePaidSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovePaidSubscriptionInput_arn, &sApprovePaidSubscriptionInput_ifMatch, &sApprovePaidSubscriptionInput_clientToken}}
+var mApprovePaidSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sApprovePaidSubscriptionOutput_subscription, &sApprovePaidSubscriptionOutput_eTag}}
+var mAssociateResourcesToSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourcesToSubscriptionInput_arn, &sAssociateResourcesToSubscriptionInput_resourceArns, &sAssociateResourcesToSubscriptionInput_ifMatch, &sAssociateResourcesToSubscriptionInput_clientToken}}
+var mAssociateResourcesToSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourcesToSubscriptionOutput_subscription, &sAssociateResourcesToSubscriptionOutput_eTag}}
+var mCancelSubscriptionChangeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelSubscriptionChangeInput_arn, &sCancelSubscriptionChangeInput_ifMatch, &sCancelSubscriptionChangeInput_clientToken}}
+var mCancelSubscriptionChangeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelSubscriptionChangeOutput_subscription, &sCancelSubscriptionChangeOutput_eTag}}
+var mCancelSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelSubscriptionInput_arn, &sCancelSubscriptionInput_ifMatch, &sCancelSubscriptionInput_clientToken}}
+var mCancelSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelSubscriptionOutput_subscription, &sCancelSubscriptionOutput_eTag}}
+var mCreateSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriptionInput_planFamily, &sCreateSubscriptionInput_planTier, &sCreateSubscriptionInput_usageLevel, &sCreateSubscriptionInput_resourceArns, &sCreateSubscriptionInput_approvalMode, &sCreateSubscriptionInput_clientToken}}
+var mCreateSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriptionOutput_subscription, &sCreateSubscriptionOutput_eTag}}
+var mDisassociateResourcesFromSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourcesFromSubscriptionInput_arn, &sDisassociateResourcesFromSubscriptionInput_resourceArns, &sDisassociateResourcesFromSubscriptionInput_ifMatch, &sDisassociateResourcesFromSubscriptionInput_clientToken}}
+var mDisassociateResourcesFromSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourcesFromSubscriptionOutput_subscription, &sDisassociateResourcesFromSubscriptionOutput_eTag}}
+var mGetSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionInput_arn}}
+var mGetSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSubscriptionOutput_subscription, &sGetSubscriptionOutput_eTag}}
+var mListSubscriptionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsInput_nextToken}}
+var mListSubscriptionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscriptionsOutput_subscriptionSummaries, &sListSubscriptionsOutput_nextToken}}
+var mUpdateSubscriptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriptionInput_arn, &sUpdateSubscriptionInput_planTier, &sUpdateSubscriptionInput_usageLevel, &sUpdateSubscriptionInput_ifMatch, &sUpdateSubscriptionInput_clientToken}}
+var mUpdateSubscriptionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriptionOutput_subscription, &sUpdateSubscriptionOutput_eTag}}
+
+var sApprovePaidSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscription, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sAssociateResourcesToSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscription, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCancelSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscription, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCancelSubscriptionChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChange, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscription, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDisassociateResourcesFromSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscription, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscription, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptions, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sUpdateSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscription, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var s_AWSPricingPlanManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSPricingPlanManager, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var sApprovalMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovalMode, Members: &mApprovalMode, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var s_ResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sScheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure})
+var sScheduledChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledChangeType, Members: &mScheduledChangeType, Type: smithy.ShapeTypeEnum})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscription, Members: &mSubscription, Type: smithy.ShapeTypeStructure})
+var s_SubscriptionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sSubscriptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure})
+var s_SubscriptionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionSummaryList, Members: &m_SubscriptionSummaryList, Type: smithy.ShapeTypeList})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sApprovePaidSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscriptionInput, Members: &mApprovePaidSubscriptionInput, Type: smithy.ShapeTypeStructure})
+var sApprovePaidSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApprovePaidSubscriptionOutput, Members: &mApprovePaidSubscriptionOutput, Type: smithy.ShapeTypeStructure})
+var sAssociateResourcesToSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscriptionInput, Members: &mAssociateResourcesToSubscriptionInput, Type: smithy.ShapeTypeStructure})
+var sAssociateResourcesToSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourcesToSubscriptionOutput, Members: &mAssociateResourcesToSubscriptionOutput, Type: smithy.ShapeTypeStructure})
+var sCancelSubscriptionChangeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChangeInput, Members: &mCancelSubscriptionChangeInput, Type: smithy.ShapeTypeStructure})
+var sCancelSubscriptionChangeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionChangeOutput, Members: &mCancelSubscriptionChangeOutput, Type: smithy.ShapeTypeStructure})
+var sCancelSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionInput, Members: &mCancelSubscriptionInput, Type: smithy.ShapeTypeStructure})
+var sCancelSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelSubscriptionOutput, Members: &mCancelSubscriptionOutput, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionInput, Members: &mCreateSubscriptionInput, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriptionOutput, Members: &mCreateSubscriptionOutput, Type: smithy.ShapeTypeStructure})
+var sDisassociateResourcesFromSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscriptionInput, Members: &mDisassociateResourcesFromSubscriptionInput, Type: smithy.ShapeTypeStructure})
+var sDisassociateResourcesFromSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourcesFromSubscriptionOutput, Members: &mDisassociateResourcesFromSubscriptionOutput, Type: smithy.ShapeTypeStructure})
+var sGetSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionInput, Members: &mGetSubscriptionInput, Type: smithy.ShapeTypeStructure})
+var sGetSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSubscriptionOutput, Members: &mGetSubscriptionOutput, Type: smithy.ShapeTypeStructure})
+var sListSubscriptionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsInput, Members: &mListSubscriptionsInput, Type: smithy.ShapeTypeStructure})
+var sListSubscriptionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscriptionsOutput, Members: &mListSubscriptionsOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriptionInput, Members: &mUpdateSubscriptionInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriptionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriptionOutput, Members: &mUpdateSubscriptionOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sApprovalMode_MANUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApprovalMode_IMMEDIATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMMEDIATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ResourceArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sScheduledChange_changeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "changeType", ID: &iScheduledChangeType, Members: &mScheduledChangeType, Type: smithy.ShapeTypeEnum})
+var sScheduledChange_effectiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveDate", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp})
+var sScheduledChange_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString})
+var sScheduledChange_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString})
+var sScheduledChangeType_DOWNGRADE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNGRADE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScheduledChangeType_CANCELLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStatus_PENDING_APPROVAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_APPROVAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_SYNC_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubscription_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sSubscription_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscription_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscription_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscription_scheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledChange", ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure})
+var sSubscription_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sSubscription_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscription_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList})
+var sSubscription_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp})
+var sSubscription_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp})
+var sSubscriptionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sSubscriptionSummary_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscriptionSummary_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscriptionSummary_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscriptionSummary_scheduledChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledChange", ID: &iScheduledChange, Members: &mScheduledChange, Type: smithy.ShapeTypeStructure})
+var sSubscriptionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sSubscriptionSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscriptionSummary_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList})
+var sSubscriptionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp})
+var sSubscriptionSummary_updatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatedAt", ID: &pTimestamp, Traits: &t13, Type: smithy.ShapeTypeTimestamp})
+var sSubscriptionSummary_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SubscriptionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriptionSummary, Members: &mSubscriptionSummary, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sApprovePaidSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sApprovePaidSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sApprovePaidSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sApprovePaidSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sApprovePaidSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sAssociateResourcesToSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sAssociateResourcesToSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList})
+var sAssociateResourcesToSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sAssociateResourcesToSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sAssociateResourcesToSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sAssociateResourcesToSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionChangeInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionChangeInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionChangeInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionChangeOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sCancelSubscriptionChangeOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCancelSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sCancelSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sCreateSubscriptionInput_planFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planFamily", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateSubscriptionInput_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateSubscriptionInput_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList})
+var sCreateSubscriptionInput_approvalMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "approvalMode", ID: &iApprovalMode, Members: &mApprovalMode, Type: smithy.ShapeTypeEnum})
+var sCreateSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sDisassociateResourcesFromSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sDisassociateResourcesFromSubscriptionInput_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArns, Members: &m_ResourceArns, Type: smithy.ShapeTypeList})
+var sDisassociateResourcesFromSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sDisassociateResourcesFromSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sDisassociateResourcesFromSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sDisassociateResourcesFromSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sGetSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sGetSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sListSubscriptionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSubscriptionsOutput_subscriptionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscriptionSummaries", ID: &i_SubscriptionSummaryList, Members: &m_SubscriptionSummaryList, Type: smithy.ShapeTypeList})
+var sListSubscriptionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateSubscriptionInput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_SubscriptionArn, Type: smithy.ShapeTypeString})
+var sUpdateSubscriptionInput_planTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "planTier", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateSubscriptionInput_usageLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "usageLevel", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateSubscriptionInput_ifMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ifMatch", ID: &pString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sUpdateSubscriptionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sUpdateSubscriptionOutput_subscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subscription", ID: &iSubscription, Members: &mSubscription, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriptionOutput_eTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eTag", ID: &pString, Traits: &t19, Type: smithy.ShapeTypeString})
+
+var ApprovePaidSubscription = &sApprovePaidSubscription
+
+var AssociateResourcesToSubscription = &sAssociateResourcesToSubscription
+
+var CancelSubscription = &sCancelSubscription
+
+var CancelSubscriptionChange = &sCancelSubscriptionChange
+
+var CreateSubscription = &sCreateSubscription
+
+var DisassociateResourcesFromSubscription = &sDisassociateResourcesFromSubscription
+
+var GetSubscription = &sGetSubscription
+
+var ListSubscriptions = &sListSubscriptions
+
+var UpdateSubscription = &sUpdateSubscription
+
+var _AWSPricingPlanManager = &s_AWSPricingPlanManager
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var ApprovalMode = &sApprovalMode
+var ApprovalMode_MANUAL = &sApprovalMode_MANUAL
+var ApprovalMode_IMMEDIATE = &sApprovalMode_IMMEDIATE
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _ResourceArns = &s_ResourceArns
+var _ResourceArns_member = &s_ResourceArns_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+
+var ScheduledChange = &sScheduledChange
+var ScheduledChange_changeType = &sScheduledChange_changeType
+var ScheduledChange_effectiveDate = &sScheduledChange_effectiveDate
+var ScheduledChange_planTier = &sScheduledChange_planTier
+var ScheduledChange_usageLevel = &sScheduledChange_usageLevel
+
+var ScheduledChangeType = &sScheduledChangeType
+var ScheduledChangeType_DOWNGRADE = &sScheduledChangeType_DOWNGRADE
+var ScheduledChangeType_CANCELLATION = &sScheduledChangeType_CANCELLATION
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var Status = &sStatus
+var Status_PENDING_APPROVAL = &sStatus_PENDING_APPROVAL
+var Status_ACTIVE = &sStatus_ACTIVE
+var Status_SYNC_IN_PROGRESS = &sStatus_SYNC_IN_PROGRESS
+var Status_FAILED = &sStatus_FAILED
+
+var Subscription = &sSubscription
+var Subscription_arn = &sSubscription_arn
+var Subscription_planFamily = &sSubscription_planFamily
+var Subscription_planTier = &sSubscription_planTier
+var Subscription_usageLevel = &sSubscription_usageLevel
+var Subscription_scheduledChange = &sSubscription_scheduledChange
+var Subscription_status = &sSubscription_status
+var Subscription_statusReason = &sSubscription_statusReason
+var Subscription_resourceArns = &sSubscription_resourceArns
+var Subscription_createdAt = &sSubscription_createdAt
+var Subscription_updatedAt = &sSubscription_updatedAt
+
+var _SubscriptionArn = &s_SubscriptionArn
+
+var SubscriptionSummary = &sSubscriptionSummary
+var SubscriptionSummary_arn = &sSubscriptionSummary_arn
+var SubscriptionSummary_planFamily = &sSubscriptionSummary_planFamily
+var SubscriptionSummary_planTier = &sSubscriptionSummary_planTier
+var SubscriptionSummary_usageLevel = &sSubscriptionSummary_usageLevel
+var SubscriptionSummary_scheduledChange = &sSubscriptionSummary_scheduledChange
+var SubscriptionSummary_status = &sSubscriptionSummary_status
+var SubscriptionSummary_statusReason = &sSubscriptionSummary_statusReason
+var SubscriptionSummary_resourceArns = &sSubscriptionSummary_resourceArns
+var SubscriptionSummary_createdAt = &sSubscriptionSummary_createdAt
+var SubscriptionSummary_updatedAt = &sSubscriptionSummary_updatedAt
+var SubscriptionSummary_eTag = &sSubscriptionSummary_eTag
+
+var _SubscriptionSummaryList = &s_SubscriptionSummaryList
+var _SubscriptionSummaryList_member = &s_SubscriptionSummaryList_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_resourceId = &sValidationException_resourceId
+
+var ApprovePaidSubscriptionInput = &sApprovePaidSubscriptionInput
+var ApprovePaidSubscriptionInput_arn = &sApprovePaidSubscriptionInput_arn
+var ApprovePaidSubscriptionInput_ifMatch = &sApprovePaidSubscriptionInput_ifMatch
+var ApprovePaidSubscriptionInput_clientToken = &sApprovePaidSubscriptionInput_clientToken
+
+var ApprovePaidSubscriptionOutput = &sApprovePaidSubscriptionOutput
+var ApprovePaidSubscriptionOutput_subscription = &sApprovePaidSubscriptionOutput_subscription
+var ApprovePaidSubscriptionOutput_eTag = &sApprovePaidSubscriptionOutput_eTag
+
+var AssociateResourcesToSubscriptionInput = &sAssociateResourcesToSubscriptionInput
+var AssociateResourcesToSubscriptionInput_arn = &sAssociateResourcesToSubscriptionInput_arn
+var AssociateResourcesToSubscriptionInput_resourceArns = &sAssociateResourcesToSubscriptionInput_resourceArns
+var AssociateResourcesToSubscriptionInput_ifMatch = &sAssociateResourcesToSubscriptionInput_ifMatch
+var AssociateResourcesToSubscriptionInput_clientToken = &sAssociateResourcesToSubscriptionInput_clientToken
+
+var AssociateResourcesToSubscriptionOutput = &sAssociateResourcesToSubscriptionOutput
+var AssociateResourcesToSubscriptionOutput_subscription = &sAssociateResourcesToSubscriptionOutput_subscription
+var AssociateResourcesToSubscriptionOutput_eTag = &sAssociateResourcesToSubscriptionOutput_eTag
+
+var CancelSubscriptionChangeInput = &sCancelSubscriptionChangeInput
+var CancelSubscriptionChangeInput_arn = &sCancelSubscriptionChangeInput_arn
+var CancelSubscriptionChangeInput_ifMatch = &sCancelSubscriptionChangeInput_ifMatch
+var CancelSubscriptionChangeInput_clientToken = &sCancelSubscriptionChangeInput_clientToken
+
+var CancelSubscriptionChangeOutput = &sCancelSubscriptionChangeOutput
+var CancelSubscriptionChangeOutput_subscription = &sCancelSubscriptionChangeOutput_subscription
+var CancelSubscriptionChangeOutput_eTag = &sCancelSubscriptionChangeOutput_eTag
+
+var CancelSubscriptionInput = &sCancelSubscriptionInput
+var CancelSubscriptionInput_arn = &sCancelSubscriptionInput_arn
+var CancelSubscriptionInput_ifMatch = &sCancelSubscriptionInput_ifMatch
+var CancelSubscriptionInput_clientToken = &sCancelSubscriptionInput_clientToken
+
+var CancelSubscriptionOutput = &sCancelSubscriptionOutput
+var CancelSubscriptionOutput_subscription = &sCancelSubscriptionOutput_subscription
+var CancelSubscriptionOutput_eTag = &sCancelSubscriptionOutput_eTag
+
+var CreateSubscriptionInput = &sCreateSubscriptionInput
+var CreateSubscriptionInput_planFamily = &sCreateSubscriptionInput_planFamily
+var CreateSubscriptionInput_planTier = &sCreateSubscriptionInput_planTier
+var CreateSubscriptionInput_usageLevel = &sCreateSubscriptionInput_usageLevel
+var CreateSubscriptionInput_resourceArns = &sCreateSubscriptionInput_resourceArns
+var CreateSubscriptionInput_approvalMode = &sCreateSubscriptionInput_approvalMode
+var CreateSubscriptionInput_clientToken = &sCreateSubscriptionInput_clientToken
+
+var CreateSubscriptionOutput = &sCreateSubscriptionOutput
+var CreateSubscriptionOutput_subscription = &sCreateSubscriptionOutput_subscription
+var CreateSubscriptionOutput_eTag = &sCreateSubscriptionOutput_eTag
+
+var DisassociateResourcesFromSubscriptionInput = &sDisassociateResourcesFromSubscriptionInput
+var DisassociateResourcesFromSubscriptionInput_arn = &sDisassociateResourcesFromSubscriptionInput_arn
+var DisassociateResourcesFromSubscriptionInput_resourceArns = &sDisassociateResourcesFromSubscriptionInput_resourceArns
+var DisassociateResourcesFromSubscriptionInput_ifMatch = &sDisassociateResourcesFromSubscriptionInput_ifMatch
+var DisassociateResourcesFromSubscriptionInput_clientToken = &sDisassociateResourcesFromSubscriptionInput_clientToken
+
+var DisassociateResourcesFromSubscriptionOutput = &sDisassociateResourcesFromSubscriptionOutput
+var DisassociateResourcesFromSubscriptionOutput_subscription = &sDisassociateResourcesFromSubscriptionOutput_subscription
+var DisassociateResourcesFromSubscriptionOutput_eTag = &sDisassociateResourcesFromSubscriptionOutput_eTag
+
+var GetSubscriptionInput = &sGetSubscriptionInput
+var GetSubscriptionInput_arn = &sGetSubscriptionInput_arn
+
+var GetSubscriptionOutput = &sGetSubscriptionOutput
+var GetSubscriptionOutput_subscription = &sGetSubscriptionOutput_subscription
+var GetSubscriptionOutput_eTag = &sGetSubscriptionOutput_eTag
+
+var ListSubscriptionsInput = &sListSubscriptionsInput
+var ListSubscriptionsInput_nextToken = &sListSubscriptionsInput_nextToken
+
+var ListSubscriptionsOutput = &sListSubscriptionsOutput
+var ListSubscriptionsOutput_subscriptionSummaries = &sListSubscriptionsOutput_subscriptionSummaries
+var ListSubscriptionsOutput_nextToken = &sListSubscriptionsOutput_nextToken
+
+var UpdateSubscriptionInput = &sUpdateSubscriptionInput
+var UpdateSubscriptionInput_arn = &sUpdateSubscriptionInput_arn
+var UpdateSubscriptionInput_planTier = &sUpdateSubscriptionInput_planTier
+var UpdateSubscriptionInput_usageLevel = &sUpdateSubscriptionInput_usageLevel
+var UpdateSubscriptionInput_ifMatch = &sUpdateSubscriptionInput_ifMatch
+var UpdateSubscriptionInput_clientToken = &sUpdateSubscriptionInput_clientToken
+
+var UpdateSubscriptionOutput = &sUpdateSubscriptionOutput
+var UpdateSubscriptionOutput_subscription = &sUpdateSubscriptionOutput_subscription
+var UpdateSubscriptionOutput_eTag = &sUpdateSubscriptionOutput_eTag
+
+var AWSPricingPlanManager = &smithy.ServiceSchema{Schema: &s_AWSPricingPlanManager, Version: "2025-08-05"}

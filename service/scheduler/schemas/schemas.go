@@ -4,1272 +4,976 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CreateSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateSchedule                      = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CreateSchedule"}
+	iCreateScheduleGroup                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CreateScheduleGroup"}
+	iDeleteSchedule                      = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DeleteSchedule"}
+	iDeleteScheduleGroup                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DeleteScheduleGroup"}
+	iGetSchedule                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "GetSchedule"}
+	iGetScheduleGroup                    = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "GetScheduleGroup"}
+	iListScheduleGroups                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListScheduleGroups"}
+	iListSchedules                       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListSchedules"}
+	iListTagsForResource                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListTagsForResource"}
+	iTagResource                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagResource"}
+	iUntagResource                       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "UntagResource"}
+	iUpdateSchedule                      = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "UpdateSchedule"}
+	i_AWSChronosService                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "AWSChronosService"}
+	i_ActionAfterCompletion              = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ActionAfterCompletion"}
+	i_AssignPublicIp                     = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "AssignPublicIp"}
+	iAwsVpcConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "AwsVpcConfiguration"}
+	i_CapacityProvider                   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CapacityProvider"}
+	i_CapacityProviderStrategy           = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CapacityProviderStrategy"}
+	iCapacityProviderStrategyItem        = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CapacityProviderStrategyItem"}
+	i_CapacityProviderStrategyItemBase   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CapacityProviderStrategyItemBase"}
+	i_CapacityProviderStrategyItemWeight = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CapacityProviderStrategyItemWeight"}
+	i_ClientToken                        = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ClientToken"}
+	iConflictException                   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ConflictException"}
+	i_CreationDate                       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CreationDate"}
+	iDeadLetterConfig                    = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DeadLetterConfig"}
+	i_Description                        = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Description"}
+	i_DetailType                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DetailType"}
+	iEcsParameters                       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "EcsParameters"}
+	i_EnableECSManagedTags               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "EnableECSManagedTags"}
+	i_EnableExecuteCommand               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "EnableExecuteCommand"}
+	i_EndDate                            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "EndDate"}
+	iEventBridgeParameters               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "EventBridgeParameters"}
+	iFlexibleTimeWindow                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "FlexibleTimeWindow"}
+	i_FlexibleTimeWindowMode             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "FlexibleTimeWindowMode"}
+	i_Group                              = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Group"}
+	iInternalServerException             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "InternalServerException"}
+	iKinesisParameters                   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "KinesisParameters"}
+	i_KmsKeyArn                          = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "KmsKeyArn"}
+	i_LastModificationDate               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "LastModificationDate"}
+	i_LaunchType                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "LaunchType"}
+	i_MaximumEventAgeInSeconds           = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "MaximumEventAgeInSeconds"}
+	i_MaximumRetryAttempts               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "MaximumRetryAttempts"}
+	i_MaximumWindowInMinutes             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "MaximumWindowInMinutes"}
+	i_MaxResults                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "MaxResults"}
+	i_MessageGroupId                     = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "MessageGroupId"}
+	i_Name                               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Name"}
+	i_NamePrefix                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "NamePrefix"}
+	iNetworkConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "NetworkConfiguration"}
+	i_NextToken                          = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "NextToken"}
+	iPlacementConstraint                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementConstraint"}
+	i_PlacementConstraintExpression      = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementConstraintExpression"}
+	i_PlacementConstraints               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementConstraints"}
+	i_PlacementConstraintType            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementConstraintType"}
+	i_PlacementStrategies                = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementStrategies"}
+	iPlacementStrategy                   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementStrategy"}
+	i_PlacementStrategyField             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementStrategyField"}
+	i_PlacementStrategyType              = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlacementStrategyType"}
+	i_PlatformVersion                    = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PlatformVersion"}
+	i_PropagateTags                      = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "PropagateTags"}
+	i_ReferenceId                        = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ReferenceId"}
+	i_ResourceArn                        = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ResourceArn"}
+	iResourceNotFoundException           = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ResourceNotFoundException"}
+	iRetryPolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "RetryPolicy"}
+	i_RoleArn                            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "RoleArn"}
+	iSageMakerPipelineParameter          = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SageMakerPipelineParameter"}
+	i_SageMakerPipelineParameterList     = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SageMakerPipelineParameterList"}
+	i_SageMakerPipelineParameterName     = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SageMakerPipelineParameterName"}
+	iSageMakerPipelineParameters         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SageMakerPipelineParameters"}
+	i_SageMakerPipelineParameterValue    = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SageMakerPipelineParameterValue"}
+	i_ScheduleArn                        = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleArn"}
+	i_ScheduleExpression                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleExpression"}
+	i_ScheduleExpressionTimezone         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleExpressionTimezone"}
+	i_ScheduleGroupArn                   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleGroupArn"}
+	i_ScheduleGroupList                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleGroupList"}
+	i_ScheduleGroupName                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleGroupName"}
+	i_ScheduleGroupNamePrefix            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleGroupNamePrefix"}
+	i_ScheduleGroupState                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleGroupState"}
+	iScheduleGroupSummary                = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleGroupSummary"}
+	i_ScheduleList                       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleList"}
+	i_ScheduleState                      = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleState"}
+	iScheduleSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ScheduleSummary"}
+	i_SecurityGroup                      = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SecurityGroup"}
+	i_SecurityGroups                     = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SecurityGroups"}
+	iServiceQuotaExceededException       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ServiceQuotaExceededException"}
+	i_Source                             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Source"}
+	iSqsParameters                       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "SqsParameters"}
+	i_StartDate                          = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "StartDate"}
+	i_Subnet                             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Subnet"}
+	i_Subnets                            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Subnets"}
+	iTag                                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Tag"}
+	i_TagKey                             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagKey"}
+	i_TagKeyList                         = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagKeyList"}
+	i_TagList                            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagList"}
+	i_TagMap                             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagMap"}
+	i_TagResourceArn                     = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagResourceArn"}
+	i_Tags                               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Tags"}
+	i_TagValue                           = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagValue"}
+	iTarget                              = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "Target"}
+	i_TargetArn                          = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TargetArn"}
+	i_TargetInput                        = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TargetInput"}
+	i_TargetPartitionKey                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TargetPartitionKey"}
+	iTargetSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TargetSummary"}
+	i_TaskCount                          = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TaskCount"}
+	i_TaskDefinitionArn                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TaskDefinitionArn"}
+	iThrottlingException                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ThrottlingException"}
+	iValidationException                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ValidationException"}
+	iCreateScheduleGroupInput            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CreateScheduleGroupInput"}
+	iCreateScheduleGroupOutput           = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CreateScheduleGroupOutput"}
+	iCreateScheduleInput                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CreateScheduleInput"}
+	iCreateScheduleOutput                = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "CreateScheduleOutput"}
+	iDeleteScheduleGroupInput            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DeleteScheduleGroupInput"}
+	iDeleteScheduleGroupOutput           = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DeleteScheduleGroupOutput"}
+	iDeleteScheduleInput                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DeleteScheduleInput"}
+	iDeleteScheduleOutput                = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "DeleteScheduleOutput"}
+	iGetScheduleGroupInput               = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "GetScheduleGroupInput"}
+	iGetScheduleGroupOutput              = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "GetScheduleGroupOutput"}
+	iGetScheduleInput                    = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "GetScheduleInput"}
+	iGetScheduleOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "GetScheduleOutput"}
+	iListScheduleGroupsInput             = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListScheduleGroupsInput"}
+	iListScheduleGroupsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListScheduleGroupsOutput"}
+	iListSchedulesInput                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListSchedulesInput"}
+	iListSchedulesOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListSchedulesOutput"}
+	iListTagsForResourceInput            = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput           = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "ListTagsForResourceOutput"}
+	iTagResourceInput                    = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagResourceInput"}
+	iTagResourceOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "TagResourceOutput"}
+	iUntagResourceInput                  = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "UntagResourceInput"}
+	iUntagResourceOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "UntagResourceOutput"}
+	iUpdateScheduleInput                 = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "UpdateScheduleInput"}
+	iUpdateScheduleOutput                = smithy.ShapeID{Namespace: "com.amazonaws.scheduler", Name: "UpdateScheduleOutput"}
+	pString                              = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/schedules/{Name}",
-	Code: 200})
-
-var CreateScheduleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CreateScheduleGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/schedule-groups/{Name}",
-	Code: 200})
-
-var DeleteSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DeleteSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/schedules/{Name}",
-	Code: 200})
-
-var DeleteScheduleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DeleteScheduleGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/schedule-groups/{Name}",
-	Code: 200})
-
-var GetSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "GetSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/schedules/{Name}",
-	Code: 200})
-
-var GetScheduleGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "GetScheduleGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/schedule-groups/{Name}",
-	Code: 200})
-
-var ListScheduleGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListScheduleGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/schedule-groups",
-	Code: 200})
-
-var ListSchedules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListSchedules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/schedules",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateSchedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "UpdateSchedule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/schedules/{Name}",
-	Code: 200})
-
-var _AWSChronosService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "AWSChronosService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSChronosService = smithy.NewServiceSchema(_AWSChronosService, "2021-06-30")
-
-var _ActionAfterCompletion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ActionAfterCompletion",
-}, smithy.ShapeTypeString, 0)
-
-var _AssignPublicIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "AssignPublicIp",
-}, smithy.ShapeTypeString, 0)
-
-var AwsVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "AwsVpcConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var AwsVpcConfiguration_Subnets *smithy.Schema
-
-var AwsVpcConfiguration_SecurityGroups *smithy.Schema
-
-var AwsVpcConfiguration_AssignPublicIp *smithy.Schema
-
-var _CapacityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CapacityProvider",
-}, smithy.ShapeTypeString, 0)
-
-var _CapacityProviderStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CapacityProviderStrategy",
-}, smithy.ShapeTypeList, 1)
-var _CapacityProviderStrategy_member *smithy.Schema
-
-var CapacityProviderStrategyItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CapacityProviderStrategyItem",
-}, smithy.ShapeTypeStructure, 3)
-var CapacityProviderStrategyItem_capacityProvider *smithy.Schema
-
-var CapacityProviderStrategyItem_weight *smithy.Schema
-
-var CapacityProviderStrategyItem_base *smithy.Schema
-
-var _CapacityProviderStrategyItemBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CapacityProviderStrategyItemBase",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CapacityProviderStrategyItemWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CapacityProviderStrategyItemWeight",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var _CreationDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CreationDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var DeadLetterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DeadLetterConfig",
-}, smithy.ShapeTypeStructure, 1)
-var DeadLetterConfig_Arn *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DetailType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DetailType",
-}, smithy.ShapeTypeString, 0)
-
-var EcsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "EcsParameters",
-}, smithy.ShapeTypeStructure, 14)
-var EcsParameters_TaskDefinitionArn *smithy.Schema
-
-var EcsParameters_TaskCount *smithy.Schema
-
-var EcsParameters_LaunchType *smithy.Schema
-
-var EcsParameters_NetworkConfiguration *smithy.Schema
-
-var EcsParameters_PlatformVersion *smithy.Schema
-
-var EcsParameters_Group *smithy.Schema
-
-var EcsParameters_CapacityProviderStrategy *smithy.Schema
-
-var EcsParameters_EnableECSManagedTags *smithy.Schema
-
-var EcsParameters_EnableExecuteCommand *smithy.Schema
-
-var EcsParameters_PlacementConstraints *smithy.Schema
-
-var EcsParameters_PlacementStrategy *smithy.Schema
-
-var EcsParameters_PropagateTags *smithy.Schema
-
-var EcsParameters_ReferenceId *smithy.Schema
-
-var EcsParameters_Tags *smithy.Schema
-
-var _EnableECSManagedTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "EnableECSManagedTags",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _EnableExecuteCommand = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "EnableExecuteCommand",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _EndDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "EndDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var EventBridgeParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "EventBridgeParameters",
-}, smithy.ShapeTypeStructure, 2)
-var EventBridgeParameters_DetailType *smithy.Schema
-
-var EventBridgeParameters_Source *smithy.Schema
-
-var FlexibleTimeWindow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "FlexibleTimeWindow",
-}, smithy.ShapeTypeStructure, 2)
-var FlexibleTimeWindow_Mode *smithy.Schema
-
-var FlexibleTimeWindow_MaximumWindowInMinutes *smithy.Schema
-
-var _FlexibleTimeWindowMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "FlexibleTimeWindowMode",
-}, smithy.ShapeTypeString, 0)
-
-var _Group = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Group",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var KinesisParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "KinesisParameters",
-}, smithy.ShapeTypeStructure, 1)
-var KinesisParameters_PartitionKey *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LastModificationDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "LastModificationDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _LaunchType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "LaunchType",
-}, smithy.ShapeTypeString, 0)
-
-var _MaximumEventAgeInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "MaximumEventAgeInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaximumRetryAttempts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "MaximumRetryAttempts",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaximumWindowInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "MaximumWindowInMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MessageGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "MessageGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "NamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkConfiguration_awsvpcConfiguration *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var PlacementConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementConstraint",
-}, smithy.ShapeTypeStructure, 2)
-var PlacementConstraint_type *smithy.Schema
-
-var PlacementConstraint_expression *smithy.Schema
-
-var _PlacementConstraintExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementConstraintExpression",
-}, smithy.ShapeTypeString, 0)
-
-var _PlacementConstraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementConstraints",
-}, smithy.ShapeTypeList, 1)
-var _PlacementConstraints_member *smithy.Schema
-
-var _PlacementConstraintType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementConstraintType",
-}, smithy.ShapeTypeString, 0)
-
-var _PlacementStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementStrategies",
-}, smithy.ShapeTypeList, 1)
-var _PlacementStrategies_member *smithy.Schema
-
-var PlacementStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementStrategy",
-}, smithy.ShapeTypeStructure, 2)
-var PlacementStrategy_type *smithy.Schema
-
-var PlacementStrategy_field *smithy.Schema
-
-var _PlacementStrategyField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementStrategyField",
-}, smithy.ShapeTypeString, 0)
-
-var _PlacementStrategyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlacementStrategyType",
-}, smithy.ShapeTypeString, 0)
-
-var _PlatformVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PlatformVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _PropagateTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "PropagateTags",
-}, smithy.ShapeTypeString, 0)
-
-var _ReferenceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ReferenceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RetryPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "RetryPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var RetryPolicy_MaximumEventAgeInSeconds *smithy.Schema
-
-var RetryPolicy_MaximumRetryAttempts *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var SageMakerPipelineParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SageMakerPipelineParameter",
-}, smithy.ShapeTypeStructure, 2)
-var SageMakerPipelineParameter_Name *smithy.Schema
-
-var SageMakerPipelineParameter_Value *smithy.Schema
-
-var _SageMakerPipelineParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SageMakerPipelineParameterList",
-}, smithy.ShapeTypeList, 1)
-var _SageMakerPipelineParameterList_member *smithy.Schema
-
-var _SageMakerPipelineParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SageMakerPipelineParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var SageMakerPipelineParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SageMakerPipelineParameters",
-}, smithy.ShapeTypeStructure, 1)
-var SageMakerPipelineParameters_PipelineParameterList *smithy.Schema
-
-var _SageMakerPipelineParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SageMakerPipelineParameterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleExpression",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleExpressionTimezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleExpressionTimezone",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleGroupList",
-}, smithy.ShapeTypeList, 1)
-var _ScheduleGroupList_member *smithy.Schema
-
-var _ScheduleGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleGroupNamePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleGroupNamePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduleGroupState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleGroupState",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduleGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleGroupSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ScheduleGroupSummary_Arn *smithy.Schema
-
-var ScheduleGroupSummary_Name *smithy.Schema
-
-var ScheduleGroupSummary_State *smithy.Schema
-
-var ScheduleGroupSummary_CreationDate *smithy.Schema
-
-var ScheduleGroupSummary_LastModificationDate *smithy.Schema
-
-var _ScheduleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleList",
-}, smithy.ShapeTypeList, 1)
-var _ScheduleList_member *smithy.Schema
-
-var _ScheduleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleState",
-}, smithy.ShapeTypeString, 0)
-
-var ScheduleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ScheduleSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ScheduleSummary_Arn *smithy.Schema
-
-var ScheduleSummary_Name *smithy.Schema
-
-var ScheduleSummary_GroupName *smithy.Schema
-
-var ScheduleSummary_State *smithy.Schema
-
-var ScheduleSummary_CreationDate *smithy.Schema
-
-var ScheduleSummary_LastModificationDate *smithy.Schema
-
-var ScheduleSummary_Target *smithy.Schema
-
-var _SecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SecurityGroup",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SecurityGroups",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroups_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var _Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Source",
-}, smithy.ShapeTypeString, 0)
-
-var SqsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "SqsParameters",
-}, smithy.ShapeTypeStructure, 1)
-var SqsParameters_MessageGroupId *smithy.Schema
-
-var _StartDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "StartDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _Subnet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Subnet",
-}, smithy.ShapeTypeString, 0)
-
-var _Subnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Subnets",
-}, smithy.ShapeTypeList, 1)
-var _Subnets_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "Target",
-}, smithy.ShapeTypeStructure, 10)
-var Target_Arn *smithy.Schema
-
-var Target_RoleArn *smithy.Schema
-
-var Target_DeadLetterConfig *smithy.Schema
-
-var Target_RetryPolicy *smithy.Schema
-
-var Target_Input *smithy.Schema
-
-var Target_EcsParameters *smithy.Schema
-
-var Target_EventBridgeParameters *smithy.Schema
-
-var Target_KinesisParameters *smithy.Schema
-
-var Target_SageMakerPipelineParameters *smithy.Schema
-
-var Target_SqsParameters *smithy.Schema
-
-var _TargetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TargetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TargetInput",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetPartitionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TargetPartitionKey",
-}, smithy.ShapeTypeString, 0)
-
-var TargetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TargetSummary",
-}, smithy.ShapeTypeStructure, 1)
-var TargetSummary_Arn *smithy.Schema
-
-var _TaskCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TaskCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TaskDefinitionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TaskDefinitionArn",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateScheduleGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CreateScheduleGroupInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateScheduleGroupInput_Name *smithy.Schema
-
-var CreateScheduleGroupInput_Tags *smithy.Schema
-
-var CreateScheduleGroupInput_ClientToken *smithy.Schema
-
-var CreateScheduleGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CreateScheduleGroupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateScheduleGroupOutput_ScheduleGroupArn *smithy.Schema
-
-var CreateScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CreateScheduleInput",
-}, smithy.ShapeTypeStructure, 13)
-var CreateScheduleInput_Name *smithy.Schema
-
-var CreateScheduleInput_GroupName *smithy.Schema
-
-var CreateScheduleInput_ScheduleExpression *smithy.Schema
-
-var CreateScheduleInput_StartDate *smithy.Schema
-
-var CreateScheduleInput_EndDate *smithy.Schema
-
-var CreateScheduleInput_Description *smithy.Schema
-
-var CreateScheduleInput_ScheduleExpressionTimezone *smithy.Schema
-
-var CreateScheduleInput_State *smithy.Schema
-
-var CreateScheduleInput_KmsKeyArn *smithy.Schema
-
-var CreateScheduleInput_Target *smithy.Schema
-
-var CreateScheduleInput_FlexibleTimeWindow *smithy.Schema
-
-var CreateScheduleInput_ClientToken *smithy.Schema
-
-var CreateScheduleInput_ActionAfterCompletion *smithy.Schema
-
-var CreateScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "CreateScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateScheduleOutput_ScheduleArn *smithy.Schema
-
-var DeleteScheduleGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DeleteScheduleGroupInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteScheduleGroupInput_Name *smithy.Schema
-
-var DeleteScheduleGroupInput_ClientToken *smithy.Schema
-
-var DeleteScheduleGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DeleteScheduleGroupOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DeleteScheduleInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteScheduleInput_Name *smithy.Schema
-
-var DeleteScheduleInput_GroupName *smithy.Schema
-
-var DeleteScheduleInput_ClientToken *smithy.Schema
-
-var DeleteScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "DeleteScheduleOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetScheduleGroupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "GetScheduleGroupInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetScheduleGroupInput_Name *smithy.Schema
-
-var GetScheduleGroupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "GetScheduleGroupOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetScheduleGroupOutput_Arn *smithy.Schema
-
-var GetScheduleGroupOutput_Name *smithy.Schema
-
-var GetScheduleGroupOutput_State *smithy.Schema
-
-var GetScheduleGroupOutput_CreationDate *smithy.Schema
-
-var GetScheduleGroupOutput_LastModificationDate *smithy.Schema
-
-var GetScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "GetScheduleInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetScheduleInput_Name *smithy.Schema
-
-var GetScheduleInput_GroupName *smithy.Schema
-
-var GetScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "GetScheduleOutput",
-}, smithy.ShapeTypeStructure, 15)
-var GetScheduleOutput_Arn *smithy.Schema
-
-var GetScheduleOutput_GroupName *smithy.Schema
-
-var GetScheduleOutput_Name *smithy.Schema
-
-var GetScheduleOutput_ScheduleExpression *smithy.Schema
-
-var GetScheduleOutput_StartDate *smithy.Schema
-
-var GetScheduleOutput_EndDate *smithy.Schema
-
-var GetScheduleOutput_Description *smithy.Schema
-
-var GetScheduleOutput_ScheduleExpressionTimezone *smithy.Schema
-
-var GetScheduleOutput_State *smithy.Schema
-
-var GetScheduleOutput_CreationDate *smithy.Schema
-
-var GetScheduleOutput_LastModificationDate *smithy.Schema
-
-var GetScheduleOutput_KmsKeyArn *smithy.Schema
-
-var GetScheduleOutput_Target *smithy.Schema
-
-var GetScheduleOutput_FlexibleTimeWindow *smithy.Schema
-
-var GetScheduleOutput_ActionAfterCompletion *smithy.Schema
-
-var ListScheduleGroupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListScheduleGroupsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListScheduleGroupsInput_NamePrefix *smithy.Schema
-
-var ListScheduleGroupsInput_NextToken *smithy.Schema
-
-var ListScheduleGroupsInput_MaxResults *smithy.Schema
-
-var ListScheduleGroupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListScheduleGroupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListScheduleGroupsOutput_NextToken *smithy.Schema
-
-var ListScheduleGroupsOutput_ScheduleGroups *smithy.Schema
-
-var ListSchedulesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListSchedulesInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListSchedulesInput_GroupName *smithy.Schema
-
-var ListSchedulesInput_NamePrefix *smithy.Schema
-
-var ListSchedulesInput_State *smithy.Schema
-
-var ListSchedulesInput_NextToken *smithy.Schema
-
-var ListSchedulesInput_MaxResults *smithy.Schema
-
-var ListSchedulesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListSchedulesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSchedulesOutput_NextToken *smithy.Schema
-
-var ListSchedulesOutput_Schedules *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateScheduleInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "UpdateScheduleInput",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateScheduleInput_Name *smithy.Schema
-
-var UpdateScheduleInput_GroupName *smithy.Schema
-
-var UpdateScheduleInput_ScheduleExpression *smithy.Schema
-
-var UpdateScheduleInput_StartDate *smithy.Schema
-
-var UpdateScheduleInput_EndDate *smithy.Schema
-
-var UpdateScheduleInput_Description *smithy.Schema
-
-var UpdateScheduleInput_ScheduleExpressionTimezone *smithy.Schema
-
-var UpdateScheduleInput_State *smithy.Schema
-
-var UpdateScheduleInput_KmsKeyArn *smithy.Schema
-
-var UpdateScheduleInput_Target *smithy.Schema
-
-var UpdateScheduleInput_FlexibleTimeWindow *smithy.Schema
-
-var UpdateScheduleInput_ClientToken *smithy.Schema
-
-var UpdateScheduleInput_ActionAfterCompletion *smithy.Schema
-
-var UpdateScheduleOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.scheduler",
-	Name:      "UpdateScheduleOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateScheduleOutput_ScheduleArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_Subnets_member = _Subnets.AddMember("member", _Subnet)
-
-	_SecurityGroups_member = _SecurityGroups.AddMember("member", _SecurityGroup)
-
-	AwsVpcConfiguration_Subnets = AwsVpcConfiguration.AddMember("Subnets", _Subnets)
-
-	AwsVpcConfiguration_SecurityGroups = AwsVpcConfiguration.AddMember("SecurityGroups", _SecurityGroups)
-
-	AwsVpcConfiguration_AssignPublicIp = AwsVpcConfiguration.AddMember("AssignPublicIp", _AssignPublicIp)
-
-	CapacityProviderStrategyItem_capacityProvider = CapacityProviderStrategyItem.AddMember("capacityProvider", _CapacityProvider)
-
-	CapacityProviderStrategyItem_weight = CapacityProviderStrategyItem.AddMember("weight", _CapacityProviderStrategyItemWeight)
-
-	CapacityProviderStrategyItem_base = CapacityProviderStrategyItem.AddMember("base", _CapacityProviderStrategyItemBase)
-
-	_CapacityProviderStrategy_member = _CapacityProviderStrategy.AddMember("member", CapacityProviderStrategyItem)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	DeadLetterConfig_Arn = DeadLetterConfig.AddMember("Arn", _ResourceArn)
-
-	NetworkConfiguration_awsvpcConfiguration = NetworkConfiguration.AddMember("awsvpcConfiguration", AwsVpcConfiguration)
-
-	PlacementConstraint_type = PlacementConstraint.AddMember("type", _PlacementConstraintType)
-
-	PlacementConstraint_expression = PlacementConstraint.AddMember("expression", _PlacementConstraintExpression)
-
-	_PlacementConstraints_member = _PlacementConstraints.AddMember("member", PlacementConstraint)
-
-	PlacementStrategy_type = PlacementStrategy.AddMember("type", _PlacementStrategyType)
-
-	PlacementStrategy_field = PlacementStrategy.AddMember("field", _PlacementStrategyField)
-
-	_PlacementStrategies_member = _PlacementStrategies.AddMember("member", PlacementStrategy)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", _TagMap)
-
-	EcsParameters_TaskDefinitionArn = EcsParameters.AddMember("TaskDefinitionArn", _TaskDefinitionArn)
-
-	EcsParameters_TaskCount = EcsParameters.AddMember("TaskCount", _TaskCount)
-
-	EcsParameters_LaunchType = EcsParameters.AddMember("LaunchType", _LaunchType)
-
-	EcsParameters_NetworkConfiguration = EcsParameters.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	EcsParameters_PlatformVersion = EcsParameters.AddMember("PlatformVersion", _PlatformVersion)
-
-	EcsParameters_Group = EcsParameters.AddMember("Group", _Group)
-
-	EcsParameters_CapacityProviderStrategy = EcsParameters.AddMember("CapacityProviderStrategy", _CapacityProviderStrategy)
-
-	EcsParameters_EnableECSManagedTags = EcsParameters.AddMember("EnableECSManagedTags", _EnableECSManagedTags)
-
-	EcsParameters_EnableExecuteCommand = EcsParameters.AddMember("EnableExecuteCommand", _EnableExecuteCommand)
-
-	EcsParameters_PlacementConstraints = EcsParameters.AddMember("PlacementConstraints", _PlacementConstraints)
-
-	EcsParameters_PlacementStrategy = EcsParameters.AddMember("PlacementStrategy", _PlacementStrategies)
-
-	EcsParameters_PropagateTags = EcsParameters.AddMember("PropagateTags", _PropagateTags)
-
-	EcsParameters_ReferenceId = EcsParameters.AddMember("ReferenceId", _ReferenceId)
-
-	EcsParameters_Tags = EcsParameters.AddMember("Tags", _Tags)
-
-	EventBridgeParameters_DetailType = EventBridgeParameters.AddMember("DetailType", _DetailType)
-
-	EventBridgeParameters_Source = EventBridgeParameters.AddMember("Source", _Source)
-
-	FlexibleTimeWindow_Mode = FlexibleTimeWindow.AddMember("Mode", _FlexibleTimeWindowMode)
-
-	FlexibleTimeWindow_MaximumWindowInMinutes = FlexibleTimeWindow.AddMember("MaximumWindowInMinutes", _MaximumWindowInMinutes)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	KinesisParameters_PartitionKey = KinesisParameters.AddMember("PartitionKey", _TargetPartitionKey)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	RetryPolicy_MaximumEventAgeInSeconds = RetryPolicy.AddMember("MaximumEventAgeInSeconds", _MaximumEventAgeInSeconds)
-
-	RetryPolicy_MaximumRetryAttempts = RetryPolicy.AddMember("MaximumRetryAttempts", _MaximumRetryAttempts)
-
-	SageMakerPipelineParameter_Name = SageMakerPipelineParameter.AddMember("Name", _SageMakerPipelineParameterName)
-
-	SageMakerPipelineParameter_Value = SageMakerPipelineParameter.AddMember("Value", _SageMakerPipelineParameterValue)
-
-	_SageMakerPipelineParameterList_member = _SageMakerPipelineParameterList.AddMember("member", SageMakerPipelineParameter)
-
-	SageMakerPipelineParameters_PipelineParameterList = SageMakerPipelineParameters.AddMember("PipelineParameterList", _SageMakerPipelineParameterList)
-
-	ScheduleGroupSummary_Arn = ScheduleGroupSummary.AddMember("Arn", _ScheduleGroupArn)
-
-	ScheduleGroupSummary_Name = ScheduleGroupSummary.AddMember("Name", _ScheduleGroupName)
-
-	ScheduleGroupSummary_State = ScheduleGroupSummary.AddMember("State", _ScheduleGroupState)
-
-	ScheduleGroupSummary_CreationDate = ScheduleGroupSummary.AddMember("CreationDate", _CreationDate)
-
-	ScheduleGroupSummary_LastModificationDate = ScheduleGroupSummary.AddMember("LastModificationDate", _LastModificationDate)
-
-	_ScheduleGroupList_member = _ScheduleGroupList.AddMember("member", ScheduleGroupSummary)
-
-	TargetSummary_Arn = TargetSummary.AddMember("Arn", _TargetArn)
-
-	ScheduleSummary_Arn = ScheduleSummary.AddMember("Arn", _ScheduleArn)
-
-	ScheduleSummary_Name = ScheduleSummary.AddMember("Name", _Name)
-
-	ScheduleSummary_GroupName = ScheduleSummary.AddMember("GroupName", _ScheduleGroupName)
-
-	ScheduleSummary_State = ScheduleSummary.AddMember("State", _ScheduleState)
-
-	ScheduleSummary_CreationDate = ScheduleSummary.AddMember("CreationDate", _CreationDate)
-
-	ScheduleSummary_LastModificationDate = ScheduleSummary.AddMember("LastModificationDate", _LastModificationDate)
-
-	ScheduleSummary_Target = ScheduleSummary.AddMember("Target", TargetSummary)
-
-	_ScheduleList_member = _ScheduleList.AddMember("member", ScheduleSummary)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	SqsParameters_MessageGroupId = SqsParameters.AddMember("MessageGroupId", _MessageGroupId)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	Target_Arn = Target.AddMember("Arn", _TargetArn)
-
-	Target_RoleArn = Target.AddMember("RoleArn", _RoleArn)
-
-	Target_DeadLetterConfig = Target.AddMember("DeadLetterConfig", DeadLetterConfig)
-
-	Target_RetryPolicy = Target.AddMember("RetryPolicy", RetryPolicy)
-
-	Target_Input = Target.AddMember("Input", _TargetInput)
-
-	Target_EcsParameters = Target.AddMember("EcsParameters", EcsParameters)
-
-	Target_EventBridgeParameters = Target.AddMember("EventBridgeParameters", EventBridgeParameters)
-
-	Target_KinesisParameters = Target.AddMember("KinesisParameters", KinesisParameters)
-
-	Target_SageMakerPipelineParameters = Target.AddMember("SageMakerPipelineParameters", SageMakerPipelineParameters)
-
-	Target_SqsParameters = Target.AddMember("SqsParameters", SqsParameters)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	CreateScheduleGroupInput_Name = CreateScheduleGroupInput.AddMember("Name", _ScheduleGroupName, &smithytraits.HTTPLabel{})
-
-	CreateScheduleGroupInput_Tags = CreateScheduleGroupInput.AddMember("Tags", _TagList)
-
-	CreateScheduleGroupInput_ClientToken = CreateScheduleGroupInput.AddMember("ClientToken", _ClientToken)
-
-	CreateScheduleGroupOutput_ScheduleGroupArn = CreateScheduleGroupOutput.AddMember("ScheduleGroupArn", _ScheduleGroupArn)
-
-	CreateScheduleInput_Name = CreateScheduleInput.AddMember("Name", _Name, &smithytraits.HTTPLabel{})
-
-	CreateScheduleInput_GroupName = CreateScheduleInput.AddMember("GroupName", _ScheduleGroupName)
-
-	CreateScheduleInput_ScheduleExpression = CreateScheduleInput.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	CreateScheduleInput_StartDate = CreateScheduleInput.AddMember("StartDate", _StartDate)
-
-	CreateScheduleInput_EndDate = CreateScheduleInput.AddMember("EndDate", _EndDate)
-
-	CreateScheduleInput_Description = CreateScheduleInput.AddMember("Description", _Description)
-
-	CreateScheduleInput_ScheduleExpressionTimezone = CreateScheduleInput.AddMember("ScheduleExpressionTimezone", _ScheduleExpressionTimezone)
-
-	CreateScheduleInput_State = CreateScheduleInput.AddMember("State", _ScheduleState)
-
-	CreateScheduleInput_KmsKeyArn = CreateScheduleInput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	CreateScheduleInput_Target = CreateScheduleInput.AddMember("Target", Target)
-
-	CreateScheduleInput_FlexibleTimeWindow = CreateScheduleInput.AddMember("FlexibleTimeWindow", FlexibleTimeWindow)
-
-	CreateScheduleInput_ClientToken = CreateScheduleInput.AddMember("ClientToken", _ClientToken)
-
-	CreateScheduleInput_ActionAfterCompletion = CreateScheduleInput.AddMember("ActionAfterCompletion", _ActionAfterCompletion)
-
-	CreateScheduleOutput_ScheduleArn = CreateScheduleOutput.AddMember("ScheduleArn", _ScheduleArn)
-
-	DeleteScheduleGroupInput_Name = DeleteScheduleGroupInput.AddMember("Name", _ScheduleGroupName, &smithytraits.HTTPLabel{})
-
-	DeleteScheduleGroupInput_ClientToken = DeleteScheduleGroupInput.AddMember("ClientToken", _ClientToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	DeleteScheduleInput_Name = DeleteScheduleInput.AddMember("Name", _Name, &smithytraits.HTTPLabel{})
-
-	DeleteScheduleInput_GroupName = DeleteScheduleInput.AddMember("GroupName", _ScheduleGroupName, &smithytraits.HTTPQuery{Name: "groupName"})
-
-	DeleteScheduleInput_ClientToken = DeleteScheduleInput.AddMember("ClientToken", _ClientToken, &smithytraits.HTTPQuery{Name: "clientToken"})
-
-	GetScheduleGroupInput_Name = GetScheduleGroupInput.AddMember("Name", _ScheduleGroupName, &smithytraits.HTTPLabel{})
-
-	GetScheduleGroupOutput_Arn = GetScheduleGroupOutput.AddMember("Arn", _ScheduleGroupArn)
-
-	GetScheduleGroupOutput_Name = GetScheduleGroupOutput.AddMember("Name", _ScheduleGroupName)
-
-	GetScheduleGroupOutput_State = GetScheduleGroupOutput.AddMember("State", _ScheduleGroupState)
-
-	GetScheduleGroupOutput_CreationDate = GetScheduleGroupOutput.AddMember("CreationDate", _CreationDate)
-
-	GetScheduleGroupOutput_LastModificationDate = GetScheduleGroupOutput.AddMember("LastModificationDate", _LastModificationDate)
-
-	GetScheduleInput_Name = GetScheduleInput.AddMember("Name", _Name, &smithytraits.HTTPLabel{})
-
-	GetScheduleInput_GroupName = GetScheduleInput.AddMember("GroupName", _ScheduleGroupName, &smithytraits.HTTPQuery{Name: "groupName"})
-
-	GetScheduleOutput_Arn = GetScheduleOutput.AddMember("Arn", _ScheduleArn)
-
-	GetScheduleOutput_GroupName = GetScheduleOutput.AddMember("GroupName", _ScheduleGroupName)
-
-	GetScheduleOutput_Name = GetScheduleOutput.AddMember("Name", _Name)
-
-	GetScheduleOutput_ScheduleExpression = GetScheduleOutput.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	GetScheduleOutput_StartDate = GetScheduleOutput.AddMember("StartDate", _StartDate)
-
-	GetScheduleOutput_EndDate = GetScheduleOutput.AddMember("EndDate", _EndDate)
-
-	GetScheduleOutput_Description = GetScheduleOutput.AddMember("Description", _Description)
-
-	GetScheduleOutput_ScheduleExpressionTimezone = GetScheduleOutput.AddMember("ScheduleExpressionTimezone", _ScheduleExpressionTimezone)
-
-	GetScheduleOutput_State = GetScheduleOutput.AddMember("State", _ScheduleState)
-
-	GetScheduleOutput_CreationDate = GetScheduleOutput.AddMember("CreationDate", _CreationDate)
-
-	GetScheduleOutput_LastModificationDate = GetScheduleOutput.AddMember("LastModificationDate", _LastModificationDate)
-
-	GetScheduleOutput_KmsKeyArn = GetScheduleOutput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	GetScheduleOutput_Target = GetScheduleOutput.AddMember("Target", Target)
-
-	GetScheduleOutput_FlexibleTimeWindow = GetScheduleOutput.AddMember("FlexibleTimeWindow", FlexibleTimeWindow)
-
-	GetScheduleOutput_ActionAfterCompletion = GetScheduleOutput.AddMember("ActionAfterCompletion", _ActionAfterCompletion)
-
-	ListScheduleGroupsInput_NamePrefix = ListScheduleGroupsInput.AddMember("NamePrefix", _ScheduleGroupNamePrefix, &smithytraits.HTTPQuery{Name: "NamePrefix"})
-
-	ListScheduleGroupsInput_NextToken = ListScheduleGroupsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListScheduleGroupsInput_MaxResults = ListScheduleGroupsInput.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListScheduleGroupsOutput_NextToken = ListScheduleGroupsOutput.AddMember("NextToken", _NextToken)
-
-	ListScheduleGroupsOutput_ScheduleGroups = ListScheduleGroupsOutput.AddMember("ScheduleGroups", _ScheduleGroupList)
-
-	ListSchedulesInput_GroupName = ListSchedulesInput.AddMember("GroupName", _ScheduleGroupName, &smithytraits.HTTPQuery{Name: "ScheduleGroup"})
-
-	ListSchedulesInput_NamePrefix = ListSchedulesInput.AddMember("NamePrefix", _NamePrefix, &smithytraits.HTTPQuery{Name: "NamePrefix"})
-
-	ListSchedulesInput_State = ListSchedulesInput.AddMember("State", _ScheduleState, &smithytraits.HTTPQuery{Name: "State"})
-
-	ListSchedulesInput_NextToken = ListSchedulesInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListSchedulesInput_MaxResults = ListSchedulesInput.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListSchedulesOutput_NextToken = ListSchedulesOutput.AddMember("NextToken", _NextToken)
-
-	ListSchedulesOutput_Schedules = ListSchedulesOutput.AddMember("Schedules", _ScheduleList)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _TagResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagList)
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _TagResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagList)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _TagResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "TagKeys"})
-
-	UpdateScheduleInput_Name = UpdateScheduleInput.AddMember("Name", _Name, &smithytraits.HTTPLabel{})
-
-	UpdateScheduleInput_GroupName = UpdateScheduleInput.AddMember("GroupName", _ScheduleGroupName)
-
-	UpdateScheduleInput_ScheduleExpression = UpdateScheduleInput.AddMember("ScheduleExpression", _ScheduleExpression)
-
-	UpdateScheduleInput_StartDate = UpdateScheduleInput.AddMember("StartDate", _StartDate)
-
-	UpdateScheduleInput_EndDate = UpdateScheduleInput.AddMember("EndDate", _EndDate)
-
-	UpdateScheduleInput_Description = UpdateScheduleInput.AddMember("Description", _Description)
-
-	UpdateScheduleInput_ScheduleExpressionTimezone = UpdateScheduleInput.AddMember("ScheduleExpressionTimezone", _ScheduleExpressionTimezone)
-
-	UpdateScheduleInput_State = UpdateScheduleInput.AddMember("State", _ScheduleState)
-
-	UpdateScheduleInput_KmsKeyArn = UpdateScheduleInput.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	UpdateScheduleInput_Target = UpdateScheduleInput.AddMember("Target", Target)
-
-	UpdateScheduleInput_FlexibleTimeWindow = UpdateScheduleInput.AddMember("FlexibleTimeWindow", FlexibleTimeWindow)
-
-	UpdateScheduleInput_ClientToken = UpdateScheduleInput.AddMember("ClientToken", _ClientToken)
-
-	UpdateScheduleInput_ActionAfterCompletion = UpdateScheduleInput.AddMember("ActionAfterCompletion", _ActionAfterCompletion)
-
-	UpdateScheduleOutput_ScheduleArn = UpdateScheduleOutput.AddMember("ScheduleArn", _ScheduleArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clientToken"}}, DirectMask: 0x10}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "groupName"}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NamePrefix"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "ScheduleGroup"}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "State"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "TagKeys"}}, DirectMask: 0x10}
+
+var mAwsVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsVpcConfiguration_Subnets, &sAwsVpcConfiguration_SecurityGroups, &sAwsVpcConfiguration_AssignPublicIp}}
+var m_CapacityProviderStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapacityProviderStrategy_member}}
+var mCapacityProviderStrategyItem = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityProviderStrategyItem_capacityProvider, &sCapacityProviderStrategyItem_weight, &sCapacityProviderStrategyItem_base}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mDeadLetterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDeadLetterConfig_Arn}}
+var mEcsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsParameters_TaskDefinitionArn, &sEcsParameters_TaskCount, &sEcsParameters_LaunchType, &sEcsParameters_NetworkConfiguration, &sEcsParameters_PlatformVersion, &sEcsParameters_Group, &sEcsParameters_CapacityProviderStrategy, &sEcsParameters_EnableECSManagedTags, &sEcsParameters_EnableExecuteCommand, &sEcsParameters_PlacementConstraints, &sEcsParameters_PlacementStrategy, &sEcsParameters_PropagateTags, &sEcsParameters_ReferenceId, &sEcsParameters_Tags}, Seed: 51, Slots: []uint16{
+	0, 12, 9, 6, 0, 7, 3, 0, 0, 5, 1, 0, 0, 0, 0, 13, 0, 0, 0, 0, 0, 11, 0, 0,
+	0, 0, 8, 14, 10, 0, 2, 4,
+}}
+var mEventBridgeParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBridgeParameters_DetailType, &sEventBridgeParameters_Source}}
+var mFlexibleTimeWindow = smithy.SchemaMembers{List: []*smithy.Schema{&sFlexibleTimeWindow_Mode, &sFlexibleTimeWindow_MaximumWindowInMinutes}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mKinesisParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisParameters_PartitionKey}}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_awsvpcConfiguration}}
+var mPlacementConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementConstraint_type, &sPlacementConstraint_expression}}
+var m_PlacementConstraints = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlacementConstraints_member}}
+var m_PlacementStrategies = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlacementStrategies_member}}
+var mPlacementStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementStrategy_type, &sPlacementStrategy_field}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRetryPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryPolicy_MaximumEventAgeInSeconds, &sRetryPolicy_MaximumRetryAttempts}}
+var mSageMakerPipelineParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerPipelineParameter_Name, &sSageMakerPipelineParameter_Value}}
+var m_SageMakerPipelineParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SageMakerPipelineParameterList_member}}
+var mSageMakerPipelineParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerPipelineParameters_PipelineParameterList}}
+var m_ScheduleGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScheduleGroupList_member}}
+var mScheduleGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleGroupSummary_Arn, &sScheduleGroupSummary_Name, &sScheduleGroupSummary_State, &sScheduleGroupSummary_CreationDate, &sScheduleGroupSummary_LastModificationDate}}
+var m_ScheduleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScheduleList_member}}
+var mScheduleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduleSummary_Arn, &sScheduleSummary_Name, &sScheduleSummary_GroupName, &sScheduleSummary_State, &sScheduleSummary_CreationDate, &sScheduleSummary_LastModificationDate, &sScheduleSummary_Target}}
+var m_SecurityGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroups_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSqsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sSqsParameters_MessageGroupId}}
+var m_Subnets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Subnets_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var mTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sTarget_Arn, &sTarget_RoleArn, &sTarget_DeadLetterConfig, &sTarget_RetryPolicy, &sTarget_Input, &sTarget_EcsParameters, &sTarget_EventBridgeParameters, &sTarget_KinesisParameters, &sTarget_SageMakerPipelineParameters, &sTarget_SqsParameters}, Seed: 4, Slots: []uint16{
+	0, 7, 2, 0, 0, 0, 0, 4, 0, 0, 0, 9, 0, 10, 0, 0, 5, 1, 0, 8, 0, 0, 0, 0,
+	0, 0, 0, 6, 0, 3, 0, 0,
+}}
+var mTargetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetSummary_Arn}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateScheduleGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduleGroupInput_Name, &sCreateScheduleGroupInput_Tags, &sCreateScheduleGroupInput_ClientToken}}
+var mCreateScheduleGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduleGroupOutput_ScheduleGroupArn}}
+var mCreateScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduleInput_Name, &sCreateScheduleInput_GroupName, &sCreateScheduleInput_ScheduleExpression, &sCreateScheduleInput_StartDate, &sCreateScheduleInput_EndDate, &sCreateScheduleInput_Description, &sCreateScheduleInput_ScheduleExpressionTimezone, &sCreateScheduleInput_State, &sCreateScheduleInput_KmsKeyArn, &sCreateScheduleInput_Target, &sCreateScheduleInput_FlexibleTimeWindow, &sCreateScheduleInput_ClientToken, &sCreateScheduleInput_ActionAfterCompletion}, Seed: 13, Slots: []uint16{
+	0, 1, 0, 0, 0, 6, 11, 0, 0, 0, 0, 0, 0, 8, 0, 0, 3, 0, 5, 0, 10, 2, 12, 0,
+	0, 9, 4, 0, 7, 13, 0, 0,
+}}
+var mCreateScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateScheduleOutput_ScheduleArn}}
+var mDeleteScheduleGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScheduleGroupInput_Name, &sDeleteScheduleGroupInput_ClientToken}}
+var mDeleteScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScheduleInput_Name, &sDeleteScheduleInput_GroupName, &sDeleteScheduleInput_ClientToken}}
+var mGetScheduleGroupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetScheduleGroupInput_Name}}
+var mGetScheduleGroupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetScheduleGroupOutput_Arn, &sGetScheduleGroupOutput_Name, &sGetScheduleGroupOutput_State, &sGetScheduleGroupOutput_CreationDate, &sGetScheduleGroupOutput_LastModificationDate}}
+var mGetScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetScheduleInput_Name, &sGetScheduleInput_GroupName}}
+var mGetScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetScheduleOutput_Arn, &sGetScheduleOutput_GroupName, &sGetScheduleOutput_Name, &sGetScheduleOutput_ScheduleExpression, &sGetScheduleOutput_StartDate, &sGetScheduleOutput_EndDate, &sGetScheduleOutput_Description, &sGetScheduleOutput_ScheduleExpressionTimezone, &sGetScheduleOutput_State, &sGetScheduleOutput_CreationDate, &sGetScheduleOutput_LastModificationDate, &sGetScheduleOutput_KmsKeyArn, &sGetScheduleOutput_Target, &sGetScheduleOutput_FlexibleTimeWindow, &sGetScheduleOutput_ActionAfterCompletion}, Seed: 79, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 12, 0, 3, 13, 10, 11, 0, 0, 0, 9, 2, 0, 0, 0, 4, 14, 0, 8,
+	0, 0, 15, 1, 6, 0, 0, 5,
+}}
+var mListScheduleGroupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListScheduleGroupsInput_NamePrefix, &sListScheduleGroupsInput_NextToken, &sListScheduleGroupsInput_MaxResults}}
+var mListScheduleGroupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListScheduleGroupsOutput_NextToken, &sListScheduleGroupsOutput_ScheduleGroups}}
+var mListSchedulesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchedulesInput_GroupName, &sListSchedulesInput_NamePrefix, &sListSchedulesInput_State, &sListSchedulesInput_NextToken, &sListSchedulesInput_MaxResults}}
+var mListSchedulesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchedulesOutput_NextToken, &sListSchedulesOutput_Schedules}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_TagKeys}}
+var mUpdateScheduleInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScheduleInput_Name, &sUpdateScheduleInput_GroupName, &sUpdateScheduleInput_ScheduleExpression, &sUpdateScheduleInput_StartDate, &sUpdateScheduleInput_EndDate, &sUpdateScheduleInput_Description, &sUpdateScheduleInput_ScheduleExpressionTimezone, &sUpdateScheduleInput_State, &sUpdateScheduleInput_KmsKeyArn, &sUpdateScheduleInput_Target, &sUpdateScheduleInput_FlexibleTimeWindow, &sUpdateScheduleInput_ClientToken, &sUpdateScheduleInput_ActionAfterCompletion}, Seed: 13, Slots: []uint16{
+	0, 1, 0, 0, 0, 6, 11, 0, 0, 0, 0, 0, 0, 8, 0, 0, 3, 0, 5, 0, 10, 2, 12, 0,
+	0, 9, 4, 0, 7, 13, 0, 0,
+}}
+var mUpdateScheduleOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateScheduleOutput_ScheduleArn}}
+
+var sCreateSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchedule, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateScheduleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduleGroup, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDeleteSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchedule, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteScheduleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduleGroup, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSchedule, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sGetScheduleGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduleGroup, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListScheduleGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScheduleGroups, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListSchedules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedules, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sUpdateSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchedule, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var s_AWSChronosService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSChronosService, Type: smithy.ShapeTypeService})
+var s_ActionAfterCompletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionAfterCompletion, Type: smithy.ShapeTypeString})
+var s_AssignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssignPublicIp, Type: smithy.ShapeTypeString})
+var sAwsVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsVpcConfiguration, Members: &mAwsVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CapacityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProvider, Type: smithy.ShapeTypeString})
+var s_CapacityProviderStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategy, Members: &m_CapacityProviderStrategy, Type: smithy.ShapeTypeList})
+var sCapacityProviderStrategyItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityProviderStrategyItem, Members: &mCapacityProviderStrategyItem, Type: smithy.ShapeTypeStructure})
+var s_CapacityProviderStrategyItemBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategyItemBase, Type: smithy.ShapeTypeInteger})
+var s_CapacityProviderStrategyItemWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategyItemWeight, Type: smithy.ShapeTypeInteger})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var s_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp})
+var sDeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailType, Type: smithy.ShapeTypeString})
+var sEcsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsParameters, Members: &mEcsParameters, Type: smithy.ShapeTypeStructure})
+var s_EnableECSManagedTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableECSManagedTags, Type: smithy.ShapeTypeBoolean})
+var s_EnableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableExecuteCommand, Type: smithy.ShapeTypeBoolean})
+var s_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndDate, Type: smithy.ShapeTypeTimestamp})
+var sEventBridgeParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBridgeParameters, Members: &mEventBridgeParameters, Type: smithy.ShapeTypeStructure})
+var sFlexibleTimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlexibleTimeWindow, Members: &mFlexibleTimeWindow, Type: smithy.ShapeTypeStructure})
+var s_FlexibleTimeWindowMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlexibleTimeWindowMode, Type: smithy.ShapeTypeString})
+var s_Group = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Group, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var sKinesisParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisParameters, Members: &mKinesisParameters, Type: smithy.ShapeTypeStructure})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var s_LastModificationDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModificationDate, Type: smithy.ShapeTypeTimestamp})
+var s_LaunchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchType, Type: smithy.ShapeTypeString})
+var s_MaximumEventAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumEventAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var s_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumRetryAttempts, Type: smithy.ShapeTypeInteger})
+var s_MaximumWindowInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumWindowInMinutes, Type: smithy.ShapeTypeInteger})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageGroupId, Type: smithy.ShapeTypeString})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NamePrefix, Type: smithy.ShapeTypeString})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPlacementConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementConstraint, Members: &mPlacementConstraint, Type: smithy.ShapeTypeStructure})
+var s_PlacementConstraintExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraintExpression, Type: smithy.ShapeTypeString})
+var s_PlacementConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraints, Members: &m_PlacementConstraints, Type: smithy.ShapeTypeList})
+var s_PlacementConstraintType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraintType, Type: smithy.ShapeTypeString})
+var s_PlacementStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategies, Members: &m_PlacementStrategies, Type: smithy.ShapeTypeList})
+var sPlacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementStrategy, Members: &mPlacementStrategy, Type: smithy.ShapeTypeStructure})
+var s_PlacementStrategyField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategyField, Type: smithy.ShapeTypeString})
+var s_PlacementStrategyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategyType, Type: smithy.ShapeTypeString})
+var s_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformVersion, Type: smithy.ShapeTypeString})
+var s_PropagateTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropagateTags, Type: smithy.ShapeTypeString})
+var s_ReferenceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceId, Type: smithy.ShapeTypeString})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var sRetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerPipelineParameter, Members: &mSageMakerPipelineParameter, Type: smithy.ShapeTypeStructure})
+var s_SageMakerPipelineParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterList, Members: &m_SageMakerPipelineParameterList, Type: smithy.ShapeTypeList})
+var s_SageMakerPipelineParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterName, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerPipelineParameters, Members: &mSageMakerPipelineParameters, Type: smithy.ShapeTypeStructure})
+var s_SageMakerPipelineParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterValue, Type: smithy.ShapeTypeString})
+var s_ScheduleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleArn, Type: smithy.ShapeTypeString})
+var s_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var s_ScheduleExpressionTimezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleExpressionTimezone, Type: smithy.ShapeTypeString})
+var s_ScheduleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleGroupArn, Type: smithy.ShapeTypeString})
+var s_ScheduleGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleGroupList, Members: &m_ScheduleGroupList, Type: smithy.ShapeTypeList})
+var s_ScheduleGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleGroupName, Type: smithy.ShapeTypeString})
+var s_ScheduleGroupNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleGroupNamePrefix, Type: smithy.ShapeTypeString})
+var s_ScheduleGroupState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleGroupState, Type: smithy.ShapeTypeString})
+var sScheduleGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleGroupSummary, Members: &mScheduleGroupSummary, Type: smithy.ShapeTypeStructure})
+var s_ScheduleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList})
+var s_ScheduleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduleState, Type: smithy.ShapeTypeString})
+var sScheduleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduleSummary, Members: &mScheduleSummary, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroup, Type: smithy.ShapeTypeString})
+var s_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var s_Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Source, Type: smithy.ShapeTypeString})
+var sSqsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqsParameters, Members: &mSqsParameters, Type: smithy.ShapeTypeStructure})
+var s_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartDate, Type: smithy.ShapeTypeTimestamp})
+var s_Subnet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subnet, Type: smithy.ShapeTypeString})
+var s_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagResourceArn, Type: smithy.ShapeTypeString})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure})
+var s_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetArn, Type: smithy.ShapeTypeString})
+var s_TargetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetInput, Type: smithy.ShapeTypeString})
+var s_TargetPartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetPartitionKey, Type: smithy.ShapeTypeString})
+var sTargetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetSummary, Members: &mTargetSummary, Type: smithy.ShapeTypeStructure})
+var s_TaskCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskCount, Type: smithy.ShapeTypeInteger})
+var s_TaskDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskDefinitionArn, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduleGroupInput, Members: &mCreateScheduleGroupInput, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduleGroupOutput, Members: &mCreateScheduleGroupOutput, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduleInput, Members: &mCreateScheduleInput, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScheduleOutput, Members: &mCreateScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduleGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduleGroupInput, Members: &mDeleteScheduleGroupInput, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduleGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduleGroupOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduleInput, Members: &mDeleteScheduleInput, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sGetScheduleGroupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduleGroupInput, Members: &mGetScheduleGroupInput, Type: smithy.ShapeTypeStructure})
+var sGetScheduleGroupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduleGroupOutput, Members: &mGetScheduleGroupOutput, Type: smithy.ShapeTypeStructure})
+var sGetScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduleInput, Members: &mGetScheduleInput, Type: smithy.ShapeTypeStructure})
+var sGetScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScheduleOutput, Members: &mGetScheduleOutput, Type: smithy.ShapeTypeStructure})
+var sListScheduleGroupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScheduleGroupsInput, Members: &mListScheduleGroupsInput, Type: smithy.ShapeTypeStructure})
+var sListScheduleGroupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScheduleGroupsOutput, Members: &mListScheduleGroupsOutput, Type: smithy.ShapeTypeStructure})
+var sListSchedulesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedulesInput, Members: &mListSchedulesInput, Type: smithy.ShapeTypeStructure})
+var sListSchedulesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedulesOutput, Members: &mListSchedulesOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduleInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScheduleInput, Members: &mUpdateScheduleInput, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduleOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScheduleOutput, Members: &mUpdateScheduleOutput, Type: smithy.ShapeTypeStructure})
+
+var sAwsVpcConfiguration_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList})
+var sAwsVpcConfiguration_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList})
+var sAwsVpcConfiguration_AssignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignPublicIp", ID: &i_AssignPublicIp, Type: smithy.ShapeTypeString})
+var s_CapacityProviderStrategy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapacityProviderStrategyItem, Members: &mCapacityProviderStrategyItem, Type: smithy.ShapeTypeStructure})
+var sCapacityProviderStrategyItem_capacityProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityProvider", ID: &i_CapacityProvider, Type: smithy.ShapeTypeString})
+var sCapacityProviderStrategyItem_weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weight", ID: &i_CapacityProviderStrategyItemWeight, Type: smithy.ShapeTypeInteger})
+var sCapacityProviderStrategyItem_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &i_CapacityProviderStrategyItemBase, Type: smithy.ShapeTypeInteger})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeadLetterConfig_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sEcsParameters_TaskDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskDefinitionArn", ID: &i_TaskDefinitionArn, Type: smithy.ShapeTypeString})
+var sEcsParameters_TaskCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskCount", ID: &i_TaskCount, Type: smithy.ShapeTypeInteger})
+var sEcsParameters_LaunchType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchType", ID: &i_LaunchType, Type: smithy.ShapeTypeString})
+var sEcsParameters_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sEcsParameters_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformVersion", ID: &i_PlatformVersion, Type: smithy.ShapeTypeString})
+var sEcsParameters_Group = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Group", ID: &i_Group, Type: smithy.ShapeTypeString})
+var sEcsParameters_CapacityProviderStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityProviderStrategy", ID: &i_CapacityProviderStrategy, Members: &m_CapacityProviderStrategy, Type: smithy.ShapeTypeList})
+var sEcsParameters_EnableECSManagedTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableECSManagedTags", ID: &i_EnableECSManagedTags, Type: smithy.ShapeTypeBoolean})
+var sEcsParameters_EnableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableExecuteCommand", ID: &i_EnableExecuteCommand, Type: smithy.ShapeTypeBoolean})
+var sEcsParameters_PlacementConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementConstraints", ID: &i_PlacementConstraints, Members: &m_PlacementConstraints, Type: smithy.ShapeTypeList})
+var sEcsParameters_PlacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementStrategy", ID: &i_PlacementStrategies, Members: &m_PlacementStrategies, Type: smithy.ShapeTypeList})
+var sEcsParameters_PropagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropagateTags", ID: &i_PropagateTags, Type: smithy.ShapeTypeString})
+var sEcsParameters_ReferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceId", ID: &i_ReferenceId, Type: smithy.ShapeTypeString})
+var sEcsParameters_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sEventBridgeParameters_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &i_DetailType, Type: smithy.ShapeTypeString})
+var sEventBridgeParameters_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString})
+var sFlexibleTimeWindow_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &i_FlexibleTimeWindowMode, Type: smithy.ShapeTypeString})
+var sFlexibleTimeWindow_MaximumWindowInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumWindowInMinutes", ID: &i_MaximumWindowInMinutes, Type: smithy.ShapeTypeInteger})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sKinesisParameters_PartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKey", ID: &i_TargetPartitionKey, Type: smithy.ShapeTypeString})
+var sNetworkConfiguration_awsvpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsvpcConfiguration", ID: &iAwsVpcConfiguration, Members: &mAwsVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sPlacementConstraint_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_PlacementConstraintType, Type: smithy.ShapeTypeString})
+var sPlacementConstraint_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_PlacementConstraintExpression, Type: smithy.ShapeTypeString})
+var s_PlacementConstraints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlacementConstraint, Members: &mPlacementConstraint, Type: smithy.ShapeTypeStructure})
+var s_PlacementStrategies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlacementStrategy, Members: &mPlacementStrategy, Type: smithy.ShapeTypeStructure})
+var sPlacementStrategy_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_PlacementStrategyType, Type: smithy.ShapeTypeString})
+var sPlacementStrategy_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &i_PlacementStrategyField, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sRetryPolicy_MaximumEventAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumEventAgeInSeconds", ID: &i_MaximumEventAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var sRetryPolicy_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryAttempts", ID: &i_MaximumRetryAttempts, Type: smithy.ShapeTypeInteger})
+var sSageMakerPipelineParameter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SageMakerPipelineParameterName, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SageMakerPipelineParameterValue, Type: smithy.ShapeTypeString})
+var s_SageMakerPipelineParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSageMakerPipelineParameter, Members: &mSageMakerPipelineParameter, Type: smithy.ShapeTypeStructure})
+var sSageMakerPipelineParameters_PipelineParameterList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineParameterList", ID: &i_SageMakerPipelineParameterList, Members: &m_SageMakerPipelineParameterList, Type: smithy.ShapeTypeList})
+var s_ScheduleGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduleGroupSummary, Members: &mScheduleGroupSummary, Type: smithy.ShapeTypeStructure})
+var sScheduleGroupSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ScheduleGroupArn, Type: smithy.ShapeTypeString})
+var sScheduleGroupSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleGroupName, Type: smithy.ShapeTypeString})
+var sScheduleGroupSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ScheduleGroupState, Type: smithy.ShapeTypeString})
+var sScheduleGroupSummary_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp})
+var sScheduleGroupSummary_LastModificationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationDate", ID: &i_LastModificationDate, Type: smithy.ShapeTypeTimestamp})
+var s_ScheduleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduleSummary, Members: &mScheduleSummary, Type: smithy.ShapeTypeStructure})
+var sScheduleSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ScheduleArn, Type: smithy.ShapeTypeString})
+var sScheduleSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sScheduleSummary_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_ScheduleGroupName, Type: smithy.ShapeTypeString})
+var sScheduleSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ScheduleState, Type: smithy.ShapeTypeString})
+var sScheduleSummary_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp})
+var sScheduleSummary_LastModificationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationDate", ID: &i_LastModificationDate, Type: smithy.ShapeTypeTimestamp})
+var sScheduleSummary_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iTargetSummary, Members: &mTargetSummary, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroup, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sSqsParameters_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageGroupId", ID: &i_MessageGroupId, Type: smithy.ShapeTypeString})
+var s_Subnets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Subnet, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sTarget_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_TargetArn, Type: smithy.ShapeTypeString})
+var sTarget_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sTarget_DeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterConfig", ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sTarget_RetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryPolicy", ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var sTarget_Input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Input", ID: &i_TargetInput, Type: smithy.ShapeTypeString})
+var sTarget_EcsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EcsParameters", ID: &iEcsParameters, Members: &mEcsParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_EventBridgeParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBridgeParameters", ID: &iEventBridgeParameters, Members: &mEventBridgeParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_KinesisParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisParameters", ID: &iKinesisParameters, Members: &mKinesisParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_SageMakerPipelineParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerPipelineParameters", ID: &iSageMakerPipelineParameters, Members: &mSageMakerPipelineParameters, Type: smithy.ShapeTypeStructure})
+var sTarget_SqsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsParameters", ID: &iSqsParameters, Members: &mSqsParameters, Type: smithy.ShapeTypeStructure})
+var sTargetSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_TargetArn, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateScheduleGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleGroupName, Traits: &t18, Type: smithy.ShapeTypeString})
+var sCreateScheduleGroupInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateScheduleGroupInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateScheduleGroupOutput_ScheduleGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleGroupArn", ID: &i_ScheduleGroupArn, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t18, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_ScheduleGroupName, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_StartDate, Type: smithy.ShapeTypeTimestamp})
+var sCreateScheduleInput_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_EndDate, Type: smithy.ShapeTypeTimestamp})
+var sCreateScheduleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_ScheduleExpressionTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpressionTimezone", ID: &i_ScheduleExpressionTimezone, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ScheduleState, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleInput_FlexibleTimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlexibleTimeWindow", ID: &iFlexibleTimeWindow, Members: &mFlexibleTimeWindow, Type: smithy.ShapeTypeStructure})
+var sCreateScheduleInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateScheduleInput_ActionAfterCompletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionAfterCompletion", ID: &i_ActionAfterCompletion, Type: smithy.ShapeTypeString})
+var sCreateScheduleOutput_ScheduleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleArn", ID: &i_ScheduleArn, Type: smithy.ShapeTypeString})
+var sDeleteScheduleGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleGroupName, Traits: &t18, Type: smithy.ShapeTypeString})
+var sDeleteScheduleGroupInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t19, Type: smithy.ShapeTypeString})
+var sDeleteScheduleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t18, Type: smithy.ShapeTypeString})
+var sDeleteScheduleInput_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_ScheduleGroupName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sDeleteScheduleInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetScheduleGroupInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleGroupName, Traits: &t18, Type: smithy.ShapeTypeString})
+var sGetScheduleGroupOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ScheduleGroupArn, Type: smithy.ShapeTypeString})
+var sGetScheduleGroupOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScheduleGroupName, Type: smithy.ShapeTypeString})
+var sGetScheduleGroupOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ScheduleGroupState, Type: smithy.ShapeTypeString})
+var sGetScheduleGroupOutput_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp})
+var sGetScheduleGroupOutput_LastModificationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationDate", ID: &i_LastModificationDate, Type: smithy.ShapeTypeTimestamp})
+var sGetScheduleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t18, Type: smithy.ShapeTypeString})
+var sGetScheduleInput_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_ScheduleGroupName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ScheduleArn, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_ScheduleGroupName, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_StartDate, Type: smithy.ShapeTypeTimestamp})
+var sGetScheduleOutput_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_EndDate, Type: smithy.ShapeTypeTimestamp})
+var sGetScheduleOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_ScheduleExpressionTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpressionTimezone", ID: &i_ScheduleExpressionTimezone, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ScheduleState, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i_CreationDate, Type: smithy.ShapeTypeTimestamp})
+var sGetScheduleOutput_LastModificationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationDate", ID: &i_LastModificationDate, Type: smithy.ShapeTypeTimestamp})
+var sGetScheduleOutput_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sGetScheduleOutput_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure})
+var sGetScheduleOutput_FlexibleTimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlexibleTimeWindow", ID: &iFlexibleTimeWindow, Members: &mFlexibleTimeWindow, Type: smithy.ShapeTypeStructure})
+var sGetScheduleOutput_ActionAfterCompletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionAfterCompletion", ID: &i_ActionAfterCompletion, Type: smithy.ShapeTypeString})
+var sListScheduleGroupsInput_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_ScheduleGroupNamePrefix, Traits: &t21, Type: smithy.ShapeTypeString})
+var sListScheduleGroupsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString})
+var sListScheduleGroupsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t23, Type: smithy.ShapeTypeInteger})
+var sListScheduleGroupsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListScheduleGroupsOutput_ScheduleGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleGroups", ID: &i_ScheduleGroupList, Members: &m_ScheduleGroupList, Type: smithy.ShapeTypeList})
+var sListSchedulesInput_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_ScheduleGroupName, Traits: &t24, Type: smithy.ShapeTypeString})
+var sListSchedulesInput_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_NamePrefix, Traits: &t21, Type: smithy.ShapeTypeString})
+var sListSchedulesInput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ScheduleState, Traits: &t25, Type: smithy.ShapeTypeString})
+var sListSchedulesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t22, Type: smithy.ShapeTypeString})
+var sListSchedulesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t23, Type: smithy.ShapeTypeInteger})
+var sListSchedulesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSchedulesOutput_Schedules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedules", ID: &i_ScheduleList, Members: &m_ScheduleList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagResourceArn, Traits: &t18, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagResourceArn, Traits: &t18, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagResourceArn, Traits: &t18, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t26, Type: smithy.ShapeTypeList})
+var sUpdateScheduleInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_Name, Traits: &t18, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_ScheduleGroupName, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_ScheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpression", ID: &i_ScheduleExpression, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_StartDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartDate", ID: &i_StartDate, Type: smithy.ShapeTypeTimestamp})
+var sUpdateScheduleInput_EndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndDate", ID: &i_EndDate, Type: smithy.ShapeTypeTimestamp})
+var sUpdateScheduleInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_ScheduleExpressionTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleExpressionTimezone", ID: &i_ScheduleExpressionTimezone, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_ScheduleState, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &iTarget, Members: &mTarget, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduleInput_FlexibleTimeWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlexibleTimeWindow", ID: &iFlexibleTimeWindow, Members: &mFlexibleTimeWindow, Type: smithy.ShapeTypeStructure})
+var sUpdateScheduleInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateScheduleInput_ActionAfterCompletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActionAfterCompletion", ID: &i_ActionAfterCompletion, Type: smithy.ShapeTypeString})
+var sUpdateScheduleOutput_ScheduleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleArn", ID: &i_ScheduleArn, Type: smithy.ShapeTypeString})
+
+var CreateSchedule = &sCreateSchedule
+
+var CreateScheduleGroup = &sCreateScheduleGroup
+
+var DeleteSchedule = &sDeleteSchedule
+
+var DeleteScheduleGroup = &sDeleteScheduleGroup
+
+var GetSchedule = &sGetSchedule
+
+var GetScheduleGroup = &sGetScheduleGroup
+
+var ListScheduleGroups = &sListScheduleGroups
+
+var ListSchedules = &sListSchedules
+
+var ListTagsForResource = &sListTagsForResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateSchedule = &sUpdateSchedule
+
+var _AWSChronosService = &s_AWSChronosService
+
+var _ActionAfterCompletion = &s_ActionAfterCompletion
+
+var _AssignPublicIp = &s_AssignPublicIp
+
+var AwsVpcConfiguration = &sAwsVpcConfiguration
+var AwsVpcConfiguration_Subnets = &sAwsVpcConfiguration_Subnets
+var AwsVpcConfiguration_SecurityGroups = &sAwsVpcConfiguration_SecurityGroups
+var AwsVpcConfiguration_AssignPublicIp = &sAwsVpcConfiguration_AssignPublicIp
+
+var _CapacityProvider = &s_CapacityProvider
+
+var _CapacityProviderStrategy = &s_CapacityProviderStrategy
+var _CapacityProviderStrategy_member = &s_CapacityProviderStrategy_member
+
+var CapacityProviderStrategyItem = &sCapacityProviderStrategyItem
+var CapacityProviderStrategyItem_capacityProvider = &sCapacityProviderStrategyItem_capacityProvider
+var CapacityProviderStrategyItem_weight = &sCapacityProviderStrategyItem_weight
+var CapacityProviderStrategyItem_base = &sCapacityProviderStrategyItem_base
+
+var _CapacityProviderStrategyItemBase = &s_CapacityProviderStrategyItemBase
+
+var _CapacityProviderStrategyItemWeight = &s_CapacityProviderStrategyItemWeight
+
+var _ClientToken = &s_ClientToken
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var _CreationDate = &s_CreationDate
+
+var DeadLetterConfig = &sDeadLetterConfig
+var DeadLetterConfig_Arn = &sDeadLetterConfig_Arn
+
+var _Description = &s_Description
+
+var _DetailType = &s_DetailType
+
+var EcsParameters = &sEcsParameters
+var EcsParameters_TaskDefinitionArn = &sEcsParameters_TaskDefinitionArn
+var EcsParameters_TaskCount = &sEcsParameters_TaskCount
+var EcsParameters_LaunchType = &sEcsParameters_LaunchType
+var EcsParameters_NetworkConfiguration = &sEcsParameters_NetworkConfiguration
+var EcsParameters_PlatformVersion = &sEcsParameters_PlatformVersion
+var EcsParameters_Group = &sEcsParameters_Group
+var EcsParameters_CapacityProviderStrategy = &sEcsParameters_CapacityProviderStrategy
+var EcsParameters_EnableECSManagedTags = &sEcsParameters_EnableECSManagedTags
+var EcsParameters_EnableExecuteCommand = &sEcsParameters_EnableExecuteCommand
+var EcsParameters_PlacementConstraints = &sEcsParameters_PlacementConstraints
+var EcsParameters_PlacementStrategy = &sEcsParameters_PlacementStrategy
+var EcsParameters_PropagateTags = &sEcsParameters_PropagateTags
+var EcsParameters_ReferenceId = &sEcsParameters_ReferenceId
+var EcsParameters_Tags = &sEcsParameters_Tags
+
+var _EnableECSManagedTags = &s_EnableECSManagedTags
+
+var _EnableExecuteCommand = &s_EnableExecuteCommand
+
+var _EndDate = &s_EndDate
+
+var EventBridgeParameters = &sEventBridgeParameters
+var EventBridgeParameters_DetailType = &sEventBridgeParameters_DetailType
+var EventBridgeParameters_Source = &sEventBridgeParameters_Source
+
+var FlexibleTimeWindow = &sFlexibleTimeWindow
+var FlexibleTimeWindow_Mode = &sFlexibleTimeWindow_Mode
+var FlexibleTimeWindow_MaximumWindowInMinutes = &sFlexibleTimeWindow_MaximumWindowInMinutes
+
+var _FlexibleTimeWindowMode = &s_FlexibleTimeWindowMode
+
+var _Group = &s_Group
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var KinesisParameters = &sKinesisParameters
+var KinesisParameters_PartitionKey = &sKinesisParameters_PartitionKey
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LastModificationDate = &s_LastModificationDate
+
+var _LaunchType = &s_LaunchType
+
+var _MaximumEventAgeInSeconds = &s_MaximumEventAgeInSeconds
+
+var _MaximumRetryAttempts = &s_MaximumRetryAttempts
+
+var _MaximumWindowInMinutes = &s_MaximumWindowInMinutes
+
+var _MaxResults = &s_MaxResults
+
+var _MessageGroupId = &s_MessageGroupId
+
+var _Name = &s_Name
+
+var _NamePrefix = &s_NamePrefix
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_awsvpcConfiguration = &sNetworkConfiguration_awsvpcConfiguration
+
+var _NextToken = &s_NextToken
+
+var PlacementConstraint = &sPlacementConstraint
+var PlacementConstraint_type = &sPlacementConstraint_type
+var PlacementConstraint_expression = &sPlacementConstraint_expression
+
+var _PlacementConstraintExpression = &s_PlacementConstraintExpression
+
+var _PlacementConstraints = &s_PlacementConstraints
+var _PlacementConstraints_member = &s_PlacementConstraints_member
+
+var _PlacementConstraintType = &s_PlacementConstraintType
+
+var _PlacementStrategies = &s_PlacementStrategies
+var _PlacementStrategies_member = &s_PlacementStrategies_member
+
+var PlacementStrategy = &sPlacementStrategy
+var PlacementStrategy_type = &sPlacementStrategy_type
+var PlacementStrategy_field = &sPlacementStrategy_field
+
+var _PlacementStrategyField = &s_PlacementStrategyField
+
+var _PlacementStrategyType = &s_PlacementStrategyType
+
+var _PlatformVersion = &s_PlatformVersion
+
+var _PropagateTags = &s_PropagateTags
+
+var _ReferenceId = &s_ReferenceId
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var RetryPolicy = &sRetryPolicy
+var RetryPolicy_MaximumEventAgeInSeconds = &sRetryPolicy_MaximumEventAgeInSeconds
+var RetryPolicy_MaximumRetryAttempts = &sRetryPolicy_MaximumRetryAttempts
+
+var _RoleArn = &s_RoleArn
+
+var SageMakerPipelineParameter = &sSageMakerPipelineParameter
+var SageMakerPipelineParameter_Name = &sSageMakerPipelineParameter_Name
+var SageMakerPipelineParameter_Value = &sSageMakerPipelineParameter_Value
+
+var _SageMakerPipelineParameterList = &s_SageMakerPipelineParameterList
+var _SageMakerPipelineParameterList_member = &s_SageMakerPipelineParameterList_member
+
+var _SageMakerPipelineParameterName = &s_SageMakerPipelineParameterName
+
+var SageMakerPipelineParameters = &sSageMakerPipelineParameters
+var SageMakerPipelineParameters_PipelineParameterList = &sSageMakerPipelineParameters_PipelineParameterList
+
+var _SageMakerPipelineParameterValue = &s_SageMakerPipelineParameterValue
+
+var _ScheduleArn = &s_ScheduleArn
+
+var _ScheduleExpression = &s_ScheduleExpression
+
+var _ScheduleExpressionTimezone = &s_ScheduleExpressionTimezone
+
+var _ScheduleGroupArn = &s_ScheduleGroupArn
+
+var _ScheduleGroupList = &s_ScheduleGroupList
+var _ScheduleGroupList_member = &s_ScheduleGroupList_member
+
+var _ScheduleGroupName = &s_ScheduleGroupName
+
+var _ScheduleGroupNamePrefix = &s_ScheduleGroupNamePrefix
+
+var _ScheduleGroupState = &s_ScheduleGroupState
+
+var ScheduleGroupSummary = &sScheduleGroupSummary
+var ScheduleGroupSummary_Arn = &sScheduleGroupSummary_Arn
+var ScheduleGroupSummary_Name = &sScheduleGroupSummary_Name
+var ScheduleGroupSummary_State = &sScheduleGroupSummary_State
+var ScheduleGroupSummary_CreationDate = &sScheduleGroupSummary_CreationDate
+var ScheduleGroupSummary_LastModificationDate = &sScheduleGroupSummary_LastModificationDate
+
+var _ScheduleList = &s_ScheduleList
+var _ScheduleList_member = &s_ScheduleList_member
+
+var _ScheduleState = &s_ScheduleState
+
+var ScheduleSummary = &sScheduleSummary
+var ScheduleSummary_Arn = &sScheduleSummary_Arn
+var ScheduleSummary_Name = &sScheduleSummary_Name
+var ScheduleSummary_GroupName = &sScheduleSummary_GroupName
+var ScheduleSummary_State = &sScheduleSummary_State
+var ScheduleSummary_CreationDate = &sScheduleSummary_CreationDate
+var ScheduleSummary_LastModificationDate = &sScheduleSummary_LastModificationDate
+var ScheduleSummary_Target = &sScheduleSummary_Target
+
+var _SecurityGroup = &s_SecurityGroup
+
+var _SecurityGroups = &s_SecurityGroups
+var _SecurityGroups_member = &s_SecurityGroups_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var _Source = &s_Source
+
+var SqsParameters = &sSqsParameters
+var SqsParameters_MessageGroupId = &sSqsParameters_MessageGroupId
+
+var _StartDate = &s_StartDate
+
+var _Subnet = &s_Subnet
+
+var _Subnets = &s_Subnets
+var _Subnets_member = &s_Subnets_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagResourceArn = &s_TagResourceArn
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var Target = &sTarget
+var Target_Arn = &sTarget_Arn
+var Target_RoleArn = &sTarget_RoleArn
+var Target_DeadLetterConfig = &sTarget_DeadLetterConfig
+var Target_RetryPolicy = &sTarget_RetryPolicy
+var Target_Input = &sTarget_Input
+var Target_EcsParameters = &sTarget_EcsParameters
+var Target_EventBridgeParameters = &sTarget_EventBridgeParameters
+var Target_KinesisParameters = &sTarget_KinesisParameters
+var Target_SageMakerPipelineParameters = &sTarget_SageMakerPipelineParameters
+var Target_SqsParameters = &sTarget_SqsParameters
+
+var _TargetArn = &s_TargetArn
+
+var _TargetInput = &s_TargetInput
+
+var _TargetPartitionKey = &s_TargetPartitionKey
+
+var TargetSummary = &sTargetSummary
+var TargetSummary_Arn = &sTargetSummary_Arn
+
+var _TaskCount = &s_TaskCount
+
+var _TaskDefinitionArn = &s_TaskDefinitionArn
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateScheduleGroupInput = &sCreateScheduleGroupInput
+var CreateScheduleGroupInput_Name = &sCreateScheduleGroupInput_Name
+var CreateScheduleGroupInput_Tags = &sCreateScheduleGroupInput_Tags
+var CreateScheduleGroupInput_ClientToken = &sCreateScheduleGroupInput_ClientToken
+
+var CreateScheduleGroupOutput = &sCreateScheduleGroupOutput
+var CreateScheduleGroupOutput_ScheduleGroupArn = &sCreateScheduleGroupOutput_ScheduleGroupArn
+
+var CreateScheduleInput = &sCreateScheduleInput
+var CreateScheduleInput_Name = &sCreateScheduleInput_Name
+var CreateScheduleInput_GroupName = &sCreateScheduleInput_GroupName
+var CreateScheduleInput_ScheduleExpression = &sCreateScheduleInput_ScheduleExpression
+var CreateScheduleInput_StartDate = &sCreateScheduleInput_StartDate
+var CreateScheduleInput_EndDate = &sCreateScheduleInput_EndDate
+var CreateScheduleInput_Description = &sCreateScheduleInput_Description
+var CreateScheduleInput_ScheduleExpressionTimezone = &sCreateScheduleInput_ScheduleExpressionTimezone
+var CreateScheduleInput_State = &sCreateScheduleInput_State
+var CreateScheduleInput_KmsKeyArn = &sCreateScheduleInput_KmsKeyArn
+var CreateScheduleInput_Target = &sCreateScheduleInput_Target
+var CreateScheduleInput_FlexibleTimeWindow = &sCreateScheduleInput_FlexibleTimeWindow
+var CreateScheduleInput_ClientToken = &sCreateScheduleInput_ClientToken
+var CreateScheduleInput_ActionAfterCompletion = &sCreateScheduleInput_ActionAfterCompletion
+
+var CreateScheduleOutput = &sCreateScheduleOutput
+var CreateScheduleOutput_ScheduleArn = &sCreateScheduleOutput_ScheduleArn
+
+var DeleteScheduleGroupInput = &sDeleteScheduleGroupInput
+var DeleteScheduleGroupInput_Name = &sDeleteScheduleGroupInput_Name
+var DeleteScheduleGroupInput_ClientToken = &sDeleteScheduleGroupInput_ClientToken
+
+var DeleteScheduleGroupOutput = &sDeleteScheduleGroupOutput
+
+var DeleteScheduleInput = &sDeleteScheduleInput
+var DeleteScheduleInput_Name = &sDeleteScheduleInput_Name
+var DeleteScheduleInput_GroupName = &sDeleteScheduleInput_GroupName
+var DeleteScheduleInput_ClientToken = &sDeleteScheduleInput_ClientToken
+
+var DeleteScheduleOutput = &sDeleteScheduleOutput
+
+var GetScheduleGroupInput = &sGetScheduleGroupInput
+var GetScheduleGroupInput_Name = &sGetScheduleGroupInput_Name
+
+var GetScheduleGroupOutput = &sGetScheduleGroupOutput
+var GetScheduleGroupOutput_Arn = &sGetScheduleGroupOutput_Arn
+var GetScheduleGroupOutput_Name = &sGetScheduleGroupOutput_Name
+var GetScheduleGroupOutput_State = &sGetScheduleGroupOutput_State
+var GetScheduleGroupOutput_CreationDate = &sGetScheduleGroupOutput_CreationDate
+var GetScheduleGroupOutput_LastModificationDate = &sGetScheduleGroupOutput_LastModificationDate
+
+var GetScheduleInput = &sGetScheduleInput
+var GetScheduleInput_Name = &sGetScheduleInput_Name
+var GetScheduleInput_GroupName = &sGetScheduleInput_GroupName
+
+var GetScheduleOutput = &sGetScheduleOutput
+var GetScheduleOutput_Arn = &sGetScheduleOutput_Arn
+var GetScheduleOutput_GroupName = &sGetScheduleOutput_GroupName
+var GetScheduleOutput_Name = &sGetScheduleOutput_Name
+var GetScheduleOutput_ScheduleExpression = &sGetScheduleOutput_ScheduleExpression
+var GetScheduleOutput_StartDate = &sGetScheduleOutput_StartDate
+var GetScheduleOutput_EndDate = &sGetScheduleOutput_EndDate
+var GetScheduleOutput_Description = &sGetScheduleOutput_Description
+var GetScheduleOutput_ScheduleExpressionTimezone = &sGetScheduleOutput_ScheduleExpressionTimezone
+var GetScheduleOutput_State = &sGetScheduleOutput_State
+var GetScheduleOutput_CreationDate = &sGetScheduleOutput_CreationDate
+var GetScheduleOutput_LastModificationDate = &sGetScheduleOutput_LastModificationDate
+var GetScheduleOutput_KmsKeyArn = &sGetScheduleOutput_KmsKeyArn
+var GetScheduleOutput_Target = &sGetScheduleOutput_Target
+var GetScheduleOutput_FlexibleTimeWindow = &sGetScheduleOutput_FlexibleTimeWindow
+var GetScheduleOutput_ActionAfterCompletion = &sGetScheduleOutput_ActionAfterCompletion
+
+var ListScheduleGroupsInput = &sListScheduleGroupsInput
+var ListScheduleGroupsInput_NamePrefix = &sListScheduleGroupsInput_NamePrefix
+var ListScheduleGroupsInput_NextToken = &sListScheduleGroupsInput_NextToken
+var ListScheduleGroupsInput_MaxResults = &sListScheduleGroupsInput_MaxResults
+
+var ListScheduleGroupsOutput = &sListScheduleGroupsOutput
+var ListScheduleGroupsOutput_NextToken = &sListScheduleGroupsOutput_NextToken
+var ListScheduleGroupsOutput_ScheduleGroups = &sListScheduleGroupsOutput_ScheduleGroups
+
+var ListSchedulesInput = &sListSchedulesInput
+var ListSchedulesInput_GroupName = &sListSchedulesInput_GroupName
+var ListSchedulesInput_NamePrefix = &sListSchedulesInput_NamePrefix
+var ListSchedulesInput_State = &sListSchedulesInput_State
+var ListSchedulesInput_NextToken = &sListSchedulesInput_NextToken
+var ListSchedulesInput_MaxResults = &sListSchedulesInput_MaxResults
+
+var ListSchedulesOutput = &sListSchedulesOutput
+var ListSchedulesOutput_NextToken = &sListSchedulesOutput_NextToken
+var ListSchedulesOutput_Schedules = &sListSchedulesOutput_Schedules
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateScheduleInput = &sUpdateScheduleInput
+var UpdateScheduleInput_Name = &sUpdateScheduleInput_Name
+var UpdateScheduleInput_GroupName = &sUpdateScheduleInput_GroupName
+var UpdateScheduleInput_ScheduleExpression = &sUpdateScheduleInput_ScheduleExpression
+var UpdateScheduleInput_StartDate = &sUpdateScheduleInput_StartDate
+var UpdateScheduleInput_EndDate = &sUpdateScheduleInput_EndDate
+var UpdateScheduleInput_Description = &sUpdateScheduleInput_Description
+var UpdateScheduleInput_ScheduleExpressionTimezone = &sUpdateScheduleInput_ScheduleExpressionTimezone
+var UpdateScheduleInput_State = &sUpdateScheduleInput_State
+var UpdateScheduleInput_KmsKeyArn = &sUpdateScheduleInput_KmsKeyArn
+var UpdateScheduleInput_Target = &sUpdateScheduleInput_Target
+var UpdateScheduleInput_FlexibleTimeWindow = &sUpdateScheduleInput_FlexibleTimeWindow
+var UpdateScheduleInput_ClientToken = &sUpdateScheduleInput_ClientToken
+var UpdateScheduleInput_ActionAfterCompletion = &sUpdateScheduleInput_ActionAfterCompletion
+
+var UpdateScheduleOutput = &sUpdateScheduleOutput
+var UpdateScheduleOutput_ScheduleArn = &sUpdateScheduleOutput_ScheduleArn
+
+var AWSChronosService = &smithy.ServiceSchema{Schema: &s_AWSChronosService, Version: "2021-06-30"}

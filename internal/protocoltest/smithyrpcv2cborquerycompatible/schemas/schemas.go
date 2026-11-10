@@ -7,36 +7,32 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "smithy.protocoltests.rpcv2Cbor",
-	Name:      "GetItem",
-}, smithy.ShapeTypeOperation, 0)
+var (
+	iGetItem                   = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItem"}
+	i_RpcV2CborQueryCompatible = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "RpcV2CborQueryCompatible"}
+	iGetItemInput              = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItemInput"}
+	iGetItemOutput             = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "GetItemOutput"}
+	iItemNotFound              = smithy.ShapeID{Namespace: "smithy.protocoltests.rpcv2Cbor", Name: "ItemNotFound"}
+)
 
-var _RpcV2CborQueryCompatible = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "smithy.protocoltests.rpcv2Cbor",
-	Name:      "RpcV2CborQueryCompatible",
-}, smithy.ShapeTypeService, 0, &smithytraits.AWSQueryCompatible{})
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.AWSQueryCompatible{}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x200}
 
-var RpcV2CborQueryCompatible = smithy.NewServiceSchema(_RpcV2CborQueryCompatible, "2099-01-01")
+var sGetItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItem, Type: smithy.ShapeTypeOperation})
+var s_RpcV2CborQueryCompatible = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RpcV2CborQueryCompatible, Traits: &t0, Type: smithy.ShapeTypeService})
+var sGetItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemInput, Type: smithy.ShapeTypeStructure})
+var sGetItemOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetItemOutput, Type: smithy.ShapeTypeStructure})
+var sItemNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
 
-var GetItemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "smithy.protocoltests.rpcv2Cbor",
-	Name:      "GetItemInput",
-}, smithy.ShapeTypeStructure, 0)
+var GetItem = &sGetItem
 
-var GetItemOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "smithy.protocoltests.rpcv2Cbor",
-	Name:      "GetItemOutput",
-}, smithy.ShapeTypeStructure, 0)
+var _RpcV2CborQueryCompatible = &s_RpcV2CborQueryCompatible
 
-var ItemNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "smithy.protocoltests.rpcv2Cbor",
-	Name:      "ItemNotFound",
-}, smithy.ShapeTypeStructure, 0, &smithytraits.Error{Type: "client"},
-	&smithytraits.AWSQueryError{ErrorCode: "aws.protocolstests.json#ItemNotFound",
-		StatusCode: 404})
+var GetItemInput = &sGetItemInput
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-}
+var GetItemOutput = &sGetItemOutput
+
+var ItemNotFound = &sItemNotFound
+
+var RpcV2CborQueryCompatible = &smithy.ServiceSchema{Schema: &s_RpcV2CborQueryCompatible, Version: "2099-01-01"}

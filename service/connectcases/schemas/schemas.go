@@ -4,3576 +4,2711 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchGetCaseRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetCaseRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iBatchGetCaseRule                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetCaseRule"}
+	iBatchGetField                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetField"}
+	iBatchPutFieldOptions                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchPutFieldOptions"}
+	iCreateCase                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateCase"}
+	iCreateCaseRule                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateCaseRule"}
+	iCreateDomain                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateDomain"}
+	iCreateField                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateField"}
+	iCreateLayout                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateLayout"}
+	iCreateRelatedItem                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateRelatedItem"}
+	iCreateTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateTemplate"}
+	iDeleteCase                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteCase"}
+	iDeleteCaseRule                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteCaseRule"}
+	iDeleteDomain                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteDomain"}
+	iDeleteField                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteField"}
+	iDeleteLayout                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteLayout"}
+	iDeleteRelatedItem                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteRelatedItem"}
+	iDeleteTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteTemplate"}
+	iGetCase                                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCase"}
+	iGetCaseAuditEvents                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseAuditEvents"}
+	iGetCaseEventConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseEventConfiguration"}
+	iGetDomain                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetDomain"}
+	iGetLayout                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetLayout"}
+	iGetTemplate                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetTemplate"}
+	iListCaseRules                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListCaseRules"}
+	iListCasesForContact                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListCasesForContact"}
+	iListDomains                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListDomains"}
+	iListFieldOptions                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListFieldOptions"}
+	iListFields                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListFields"}
+	iListLayouts                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListLayouts"}
+	iListTagsForResource                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListTagsForResource"}
+	iListTemplates                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListTemplates"}
+	iPutCaseEventConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "PutCaseEventConfiguration"}
+	iSearchAllRelatedItems                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItems"}
+	iSearchCases                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchCases"}
+	iSearchRelatedItems                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchRelatedItems"}
+	iTagResource                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagResource"}
+	iUntagResource                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UntagResource"}
+	iUpdateCase                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateCase"}
+	iUpdateCaseRule                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateCaseRule"}
+	iUpdateField                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateField"}
+	iUpdateLayout                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateLayout"}
+	iUpdateRelatedItem                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateRelatedItem"}
+	iUpdateTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateTemplate"}
+	i_AmazonConnectCases                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AmazonConnectCases"}
+	iAccessDeniedException                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AccessDeniedException"}
+	i_Arn                                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Arn"}
+	i_AssociationTime                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AssociationTime"}
+	iAuditEvent                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEvent"}
+	i_AuditEventDateTime                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventDateTime"}
+	iAuditEventField                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventField"}
+	i_AuditEventFieldId                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventFieldId"}
+	i_AuditEventFieldList                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventFieldList"}
+	iAuditEventFieldValueUnion              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventFieldValueUnion"}
+	i_AuditEventId                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventId"}
+	iAuditEventPerformedBy                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventPerformedBy"}
+	i_AuditEventsList                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventsList"}
+	i_AuditEventType                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "AuditEventType"}
+	iBasicLayout                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BasicLayout"}
+	i_BatchGetCaseRuleErrorList             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetCaseRuleErrorList"}
+	i_BatchGetCaseRuleList                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetCaseRuleList"}
+	i_BatchGetCaseRuleUnprocessedList       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetCaseRuleUnprocessedList"}
+	i_BatchGetFieldErrorList                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetFieldErrorList"}
+	i_BatchGetFieldIdentifierList           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetFieldIdentifierList"}
+	i_BatchGetFieldList                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetFieldList"}
+	iBooleanCondition                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BooleanCondition"}
+	i_BooleanConditionList                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BooleanConditionList"}
+	iBooleanOperands                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BooleanOperands"}
+	i_CaseArn                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseArn"}
+	iCaseEventIncludedData                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseEventIncludedData"}
+	iCaseFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseFilter"}
+	i_CaseFilterList                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseFilterList"}
+	i_CaseId                                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseId"}
+	i_CaseRuleArn                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleArn"}
+	i_CaseRuleDescription                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleDescription"}
+	iCaseRuleDetails                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleDetails"}
+	iCaseRuleError                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleError"}
+	i_CaseRuleId                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleId"}
+	iCaseRuleIdentifier                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleIdentifier"}
+	i_CaseRuleIdentifierList                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleIdentifierList"}
+	i_CaseRuleName                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleName"}
+	iCaseRuleSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleSummary"}
+	i_CaseRuleSummaryList                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseRuleSummaryList"}
+	iCaseSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseSummary"}
+	i_CaseSummaryList                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CaseSummaryList"}
+	i_Channel                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Channel"}
+	i_ChannelList                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ChannelList"}
+	i_CommentBody                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CommentBody"}
+	i_CommentBodyTextType                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CommentBodyTextType"}
+	iCommentContent                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CommentContent"}
+	iCommentFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CommentFilter"}
+	iCommentUpdateContent                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CommentUpdateContent"}
+	iCompoundCondition                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CompoundCondition"}
+	iConflictException                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ConflictException"}
+	iConnectCaseContent                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ConnectCaseContent"}
+	iConnectCaseFilter                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ConnectCaseFilter"}
+	iConnectCaseInputContent                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ConnectCaseInputContent"}
+	i_ConnectedToSystemTime                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ConnectedToSystemTime"}
+	iContact                                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Contact"}
+	i_ContactArn                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ContactArn"}
+	iContactContent                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ContactContent"}
+	iContactFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ContactFilter"}
+	i_CreatedTime                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreatedTime"}
+	iCustomContent                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CustomContent"}
+	i_CustomEntity                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CustomEntity"}
+	iCustomFieldsFilter                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CustomFieldsFilter"}
+	i_CustomFieldsFilterList                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CustomFieldsFilterList"}
+	iCustomFilter                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CustomFilter"}
+	iCustomInputContent                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CustomInputContent"}
+	iCustomUpdateContent                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CustomUpdateContent"}
+	i_Deleted                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Deleted"}
+	i_DomainArn                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DomainArn"}
+	i_DomainId                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DomainId"}
+	i_DomainName                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DomainName"}
+	i_DomainStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DomainStatus"}
+	iDomainSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DomainSummary"}
+	i_DomainSummaryList                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DomainSummaryList"}
+	iEmptyFieldValue                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "EmptyFieldValue"}
+	iEmptyOperandValue                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "EmptyOperandValue"}
+	iEventBridgeConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "EventBridgeConfiguration"}
+	iEventIncludedData                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "EventIncludedData"}
+	i_FieldArn                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldArn"}
+	iFieldAttributes                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldAttributes"}
+	i_FieldDescription                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldDescription"}
+	iFieldError                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldError"}
+	iFieldFilter                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldFilter"}
+	iFieldGroup                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldGroup"}
+	i_FieldId                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldId"}
+	iFieldIdentifier                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldIdentifier"}
+	i_FieldIdentifierList                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldIdentifierList"}
+	iFieldItem                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldItem"}
+	i_FieldList                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldList"}
+	i_FieldName                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldName"}
+	i_FieldNamespace                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldNamespace"}
+	iFieldOption                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldOption"}
+	iFieldOptionError                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldOptionError"}
+	i_FieldOptionErrorList                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldOptionErrorList"}
+	i_FieldOptionName                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldOptionName"}
+	iFieldOptionsCaseRule                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldOptionsCaseRule"}
+	i_FieldOptionsList                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldOptionsList"}
+	i_FieldOptionValue                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldOptionValue"}
+	iFieldSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldSummary"}
+	i_FieldSummaryList                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldSummaryList"}
+	i_FieldType                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldType"}
+	iFieldValue                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldValue"}
+	i_FieldValueList                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldValueList"}
+	iFieldValueUnion                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FieldValueUnion"}
+	i_FileArn                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FileArn"}
+	iFileContent                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FileContent"}
+	iFileFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "FileFilter"}
+	iGetCaseRuleResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseRuleResponse"}
+	iGetFieldResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetFieldResponse"}
+	iHiddenCaseRule                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "HiddenCaseRule"}
+	i_IamPrincipalArn                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "IamPrincipalArn"}
+	iInternalServerException                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "InternalServerException"}
+	i_LastModifiedTime                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LastModifiedTime"}
+	i_LayoutArn                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutArn"}
+	iLayoutConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutConfiguration"}
+	iLayoutContent                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutContent"}
+	i_LayoutId                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutId"}
+	i_LayoutName                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutName"}
+	iLayoutSections                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutSections"}
+	iLayoutSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutSummary"}
+	i_LayoutSummaryList                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "LayoutSummaryList"}
+	i_MaxResults                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "MaxResults"}
+	i_MutableTagKey                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "MutableTagKey"}
+	i_MutableTags                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "MutableTags"}
+	i_NextToken                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "NextToken"}
+	iOperandOne                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "OperandOne"}
+	iOperandTwo                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "OperandTwo"}
+	i_Order                                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Order"}
+	iParentChildFieldOptionsMapping         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ParentChildFieldOptionsMapping"}
+	i_ParentChildFieldOptionsMappingList    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ParentChildFieldOptionsMappingList"}
+	i_ParentChildFieldOptionValue           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ParentChildFieldOptionValue"}
+	i_ParentChildFieldOptionValueList       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ParentChildFieldOptionValueList"}
+	i_RelatedItemArn                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemArn"}
+	iRelatedItemContent                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemContent"}
+	iRelatedItemEventIncludedData           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemEventIncludedData"}
+	i_RelatedItemFilterList                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemFilterList"}
+	i_RelatedItemId                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemId"}
+	iRelatedItemInputContent                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemInputContent"}
+	i_RelatedItemType                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemType"}
+	iRelatedItemTypeFilter                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemTypeFilter"}
+	iRelatedItemUpdateContent               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RelatedItemUpdateContent"}
+	iRequiredCaseRule                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RequiredCaseRule"}
+	iRequiredField                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RequiredField"}
+	i_RequiredFieldList                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RequiredFieldList"}
+	iResourceNotFoundException              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ResourceNotFoundException"}
+	i_RuleType                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "RuleType"}
+	iSearchAllRelatedItemsResponseItem      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItemsResponseItem"}
+	i_SearchAllRelatedItemsResponseItemList = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItemsResponseItemList"}
+	iSearchAllRelatedItemsSort              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItemsSort"}
+	i_SearchAllRelatedItemsSortList         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItemsSortList"}
+	i_SearchAllRelatedItemsSortProperty     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItemsSortProperty"}
+	iSearchCasesResponseItem                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchCasesResponseItem"}
+	i_SearchCasesResponseItemList           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchCasesResponseItemList"}
+	iSearchRelatedItemsResponseItem         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchRelatedItemsResponseItem"}
+	i_SearchRelatedItemsResponseItemList    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchRelatedItemsResponseItemList"}
+	i_SearchTagKey                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchTagKey"}
+	iSection                                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Section"}
+	i_SectionsList                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SectionsList"}
+	iServiceQuotaExceededException          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ServiceQuotaExceededException"}
+	i_SlaCompletionTime                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaCompletionTime"}
+	iSlaConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaConfiguration"}
+	iSlaContent                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaContent"}
+	i_SlaFieldValueUnionList                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaFieldValueUnionList"}
+	iSlaFilter                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaFilter"}
+	iSlaInputConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaInputConfiguration"}
+	iSlaInputContent                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaInputContent"}
+	i_SlaName                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaName"}
+	i_SlaStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaStatus"}
+	i_SlaTargetTime                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaTargetTime"}
+	i_SlaType                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SlaType"}
+	iSort                                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Sort"}
+	i_SortList                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SortList"}
+	iTagFilter                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagFilter"}
+	i_TagKey                                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagKey"}
+	i_TagKeyList                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagKeyList"}
+	iTagPropagationConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagPropagationConfiguration"}
+	i_TagPropagationConfigurationList       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagPropagationConfigurationList"}
+	i_TagPropagationResourceType            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagPropagationResourceType"}
+	i_Tags                                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Tags"}
+	iTagValue                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagValue"}
+	i_TagValueString                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagValueString"}
+	i_TargetSlaMinutes                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TargetSlaMinutes"}
+	i_TemplateArn                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateArn"}
+	i_TemplateCaseRuleList                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateCaseRuleList"}
+	i_TemplateDescription                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateDescription"}
+	i_TemplateId                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateId"}
+	i_TemplateName                          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateName"}
+	iTemplateRule                           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateRule"}
+	i_TemplateStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateStatus"}
+	i_TemplateStatusFilters                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateStatusFilters"}
+	iTemplateSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateSummary"}
+	i_TemplateSummaryList                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TemplateSummaryList"}
+	iTextAttributes                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TextAttributes"}
+	iThrottlingException                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ThrottlingException"}
+	i_TotalCount                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TotalCount"}
+	i_UserArn                               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UserArn"}
+	iUserUnion                              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UserUnion"}
+	iValidationException                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ValidationException"}
+	i_Value                                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "Value"}
+	i_ValuesList                            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ValuesList"}
+	iBatchGetCaseRuleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetCaseRuleRequest"}
+	iBatchGetCaseRuleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetCaseRuleResponse"}
+	iBatchGetFieldRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetFieldRequest"}
+	iBatchGetFieldResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchGetFieldResponse"}
+	iBatchPutFieldOptionsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchPutFieldOptionsRequest"}
+	iBatchPutFieldOptionsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "BatchPutFieldOptionsResponse"}
+	iCreateCaseRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateCaseRequest"}
+	iCreateCaseResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateCaseResponse"}
+	iCreateCaseRuleRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateCaseRuleRequest"}
+	iCreateCaseRuleResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateCaseRuleResponse"}
+	iCreateDomainRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateDomainRequest"}
+	iCreateDomainResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateDomainResponse"}
+	iCreateFieldRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateFieldRequest"}
+	iCreateFieldResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateFieldResponse"}
+	iCreateLayoutRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateLayoutRequest"}
+	iCreateLayoutResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateLayoutResponse"}
+	iCreateRelatedItemRequest               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateRelatedItemRequest"}
+	iCreateRelatedItemResponse              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateRelatedItemResponse"}
+	iCreateTemplateRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateTemplateRequest"}
+	iCreateTemplateResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "CreateTemplateResponse"}
+	iDeleteCaseRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteCaseRequest"}
+	iDeleteCaseResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteCaseResponse"}
+	iDeleteCaseRuleRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteCaseRuleRequest"}
+	iDeleteCaseRuleResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteCaseRuleResponse"}
+	iDeleteDomainRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteDomainRequest"}
+	iDeleteDomainResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteDomainResponse"}
+	iDeleteFieldRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteFieldRequest"}
+	iDeleteFieldResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteFieldResponse"}
+	iDeleteLayoutRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteLayoutRequest"}
+	iDeleteLayoutResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteLayoutResponse"}
+	iDeleteRelatedItemRequest               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteRelatedItemRequest"}
+	iDeleteRelatedItemResponse              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteRelatedItemResponse"}
+	iDeleteTemplateRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteTemplateRequest"}
+	iDeleteTemplateResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "DeleteTemplateResponse"}
+	iGetCaseAuditEventsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseAuditEventsRequest"}
+	iGetCaseAuditEventsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseAuditEventsResponse"}
+	iGetCaseEventConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseEventConfigurationRequest"}
+	iGetCaseEventConfigurationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseEventConfigurationResponse"}
+	iGetCaseRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseRequest"}
+	iGetCaseResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetCaseResponse"}
+	iGetDomainRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetDomainRequest"}
+	iGetDomainResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetDomainResponse"}
+	iGetLayoutRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetLayoutRequest"}
+	iGetLayoutResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetLayoutResponse"}
+	iGetTemplateRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetTemplateRequest"}
+	iGetTemplateResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "GetTemplateResponse"}
+	iListCaseRulesRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListCaseRulesRequest"}
+	iListCaseRulesResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListCaseRulesResponse"}
+	iListCasesForContactRequest             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListCasesForContactRequest"}
+	iListCasesForContactResponse            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListCasesForContactResponse"}
+	iListDomainsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListDomainsRequest"}
+	iListDomainsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListDomainsResponse"}
+	iListFieldOptionsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListFieldOptionsRequest"}
+	iListFieldOptionsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListFieldOptionsResponse"}
+	iListFieldsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListFieldsRequest"}
+	iListFieldsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListFieldsResponse"}
+	iListLayoutsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListLayoutsRequest"}
+	iListLayoutsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListLayoutsResponse"}
+	iListTagsForResourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListTagsForResourceResponse"}
+	iListTemplatesRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListTemplatesRequest"}
+	iListTemplatesResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "ListTemplatesResponse"}
+	iPutCaseEventConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "PutCaseEventConfigurationRequest"}
+	iPutCaseEventConfigurationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "PutCaseEventConfigurationResponse"}
+	iSearchAllRelatedItemsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItemsRequest"}
+	iSearchAllRelatedItemsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchAllRelatedItemsResponse"}
+	iSearchCasesRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchCasesRequest"}
+	iSearchCasesResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchCasesResponse"}
+	iSearchRelatedItemsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchRelatedItemsRequest"}
+	iSearchRelatedItemsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "SearchRelatedItemsResponse"}
+	iTagResourceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "TagResourceRequest"}
+	iUntagResourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UntagResourceRequest"}
+	iUpdateCaseRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateCaseRequest"}
+	iUpdateCaseResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateCaseResponse"}
+	iUpdateCaseRuleRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateCaseRuleRequest"}
+	iUpdateCaseRuleResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateCaseRuleResponse"}
+	iUpdateFieldRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateFieldRequest"}
+	iUpdateFieldResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateFieldResponse"}
+	iUpdateLayoutRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateLayoutRequest"}
+	iUpdateLayoutResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateLayoutResponse"}
+	iUpdateRelatedItemRequest               = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateRelatedItemRequest"}
+	iUpdateRelatedItemResponse              = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateRelatedItemResponse"}
+	iUpdateTemplateRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateTemplateRequest"}
+	iUpdateTemplateResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.connectcases", Name: "UpdateTemplateResponse"}
+	pString                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pDouble                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Double"}
+	pBoolean                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/rules-batch",
-	Code: 200})
-
-var BatchGetField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetField",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/fields-batch",
-	Code: 200})
-
-var BatchPutFieldOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchPutFieldOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/fields/{fieldId}/options",
-	Code: 200})
-
-var CreateCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateCase",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/cases",
-	Code: 200})
-
-var CreateCaseRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateCaseRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/case-rules",
-	Code: 200})
-
-var CreateDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains",
-	Code: 200})
-
-var CreateField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateField",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/fields",
-	Code: 200})
-
-var CreateLayout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateLayout",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/layouts",
-	Code: 200})
-
-var CreateRelatedItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateRelatedItem",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/cases/{caseId}/related-items/",
-	Code: 200})
-
-var CreateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/templates",
-	Code: 200})
-
-var DeleteCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteCase",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domains/{domainId}/cases/{caseId}",
-	Code: 200})
-
-var DeleteCaseRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteCaseRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domains/{domainId}/case-rules/{caseRuleId}",
-	Code: 200})
-
-var DeleteDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domains/{domainId}",
-	Code: 200})
-
-var DeleteField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteField",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domains/{domainId}/fields/{fieldId}",
-	Code: 200})
-
-var DeleteLayout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteLayout",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domains/{domainId}/layouts/{layoutId}",
-	Code: 200})
-
-var DeleteRelatedItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteRelatedItem",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}",
-	Code: 200})
-
-var DeleteTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/domains/{domainId}/templates/{templateId}",
-	Code: 200})
-
-var GetCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCase",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/cases/{caseId}",
-	Code: 200})
-
-var GetCaseAuditEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseAuditEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/cases/{caseId}/audit-history",
-	Code: 200})
-
-var GetCaseEventConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseEventConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/case-event-configuration",
-	Code: 200})
-
-var GetDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetDomain",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}",
-	Code: 200})
-
-var GetLayout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetLayout",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/layouts/{layoutId}",
-	Code: 200})
-
-var GetTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/templates/{templateId}",
-	Code: 200})
-
-var ListCaseRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListCaseRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/rules-list/",
-	Code: 200})
-
-var ListCasesForContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListCasesForContact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/list-cases-for-contact",
-	Code: 200})
-
-var ListDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListDomains",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains-list",
-	Code: 200})
-
-var ListFieldOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListFieldOptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/fields/{fieldId}/options-list",
-	Code: 200})
-
-var ListFields = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListFields",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/fields-list",
-	Code: 200})
-
-var ListLayouts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListLayouts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/layouts-list",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{arn}",
-	Code: 200})
-
-var ListTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/templates-list",
-	Code: 200})
-
-var PutCaseEventConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "PutCaseEventConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/case-event-configuration",
-	Code: 200})
-
-var SearchAllRelatedItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/related-items-search",
-	Code: 200})
-
-var SearchCases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchCases",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/cases-search",
-	Code: 200})
-
-var SearchRelatedItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchRelatedItems",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/domains/{domainId}/cases/{caseId}/related-items-search",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{arn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{arn}",
-	Code: 200})
-
-var UpdateCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateCase",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/cases/{caseId}",
-	Code: 200})
-
-var UpdateCaseRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateCaseRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/case-rules/{caseRuleId}",
-	Code: 200})
-
-var UpdateField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateField",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/fields/{fieldId}",
-	Code: 200})
-
-var UpdateLayout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateLayout",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/layouts/{layoutId}",
-	Code: 200})
-
-var UpdateRelatedItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateRelatedItem",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/cases/{caseId}/related-items/{relatedItemId}",
-	Code: 200})
-
-var UpdateTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/domains/{domainId}/templates/{templateId}",
-	Code: 200})
-
-var _AmazonConnectCases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AmazonConnectCases",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonConnectCases = smithy.NewServiceSchema(_AmazonConnectCases, "2022-10-03")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociationTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AssociationTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var AuditEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEvent",
-}, smithy.ShapeTypeStructure, 6)
-var AuditEvent_eventId *smithy.Schema
-
-var AuditEvent_type *smithy.Schema
-
-var AuditEvent_relatedItemType *smithy.Schema
-
-var AuditEvent_performedTime *smithy.Schema
-
-var AuditEvent_fields *smithy.Schema
-
-var AuditEvent_performedBy *smithy.Schema
-
-var _AuditEventDateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventDateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var AuditEventField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventField",
-}, smithy.ShapeTypeStructure, 3)
-var AuditEventField_eventFieldId *smithy.Schema
-
-var AuditEventField_oldValue *smithy.Schema
-
-var AuditEventField_newValue *smithy.Schema
-
-var _AuditEventFieldId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventFieldId",
-}, smithy.ShapeTypeString, 0)
-
-var _AuditEventFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventFieldList",
-}, smithy.ShapeTypeList, 1)
-var _AuditEventFieldList_member *smithy.Schema
-
-var AuditEventFieldValueUnion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventFieldValueUnion",
-}, smithy.ShapeTypeUnion, 5)
-var AuditEventFieldValueUnion_stringValue *smithy.Schema
-
-var AuditEventFieldValueUnion_doubleValue *smithy.Schema
-
-var AuditEventFieldValueUnion_booleanValue *smithy.Schema
-
-var AuditEventFieldValueUnion_emptyValue *smithy.Schema
-
-var AuditEventFieldValueUnion_userArnValue *smithy.Schema
-
-var _AuditEventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventId",
-}, smithy.ShapeTypeString, 0)
-
-var AuditEventPerformedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventPerformedBy",
-}, smithy.ShapeTypeStructure, 2)
-var AuditEventPerformedBy_user *smithy.Schema
-
-var AuditEventPerformedBy_iamPrincipalArn *smithy.Schema
-
-var _AuditEventsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventsList",
-}, smithy.ShapeTypeList, 1)
-var _AuditEventsList_member *smithy.Schema
-
-var _AuditEventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "AuditEventType",
-}, smithy.ShapeTypeString, 0)
-
-var BasicLayout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BasicLayout",
-}, smithy.ShapeTypeStructure, 2)
-var BasicLayout_topPanel *smithy.Schema
-
-var BasicLayout_moreInfo *smithy.Schema
-
-var _BatchGetCaseRuleErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetCaseRuleErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetCaseRuleErrorList_member *smithy.Schema
-
-var _BatchGetCaseRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetCaseRuleList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetCaseRuleList_member *smithy.Schema
-
-var _BatchGetCaseRuleUnprocessedList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetCaseRuleUnprocessedList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetCaseRuleUnprocessedList_member *smithy.Schema
-
-var _BatchGetFieldErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetFieldErrorList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetFieldErrorList_member *smithy.Schema
-
-var _BatchGetFieldIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetFieldIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetFieldIdentifierList_member *smithy.Schema
-
-var _BatchGetFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetFieldList",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetFieldList_member *smithy.Schema
-
-var BooleanCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BooleanCondition",
-}, smithy.ShapeTypeUnion, 4)
-var BooleanCondition_equalTo *smithy.Schema
-
-var BooleanCondition_notEqualTo *smithy.Schema
-
-var BooleanCondition_andAll *smithy.Schema
-
-var BooleanCondition_orAll *smithy.Schema
-
-var _BooleanConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BooleanConditionList",
-}, smithy.ShapeTypeList, 1)
-var _BooleanConditionList_member *smithy.Schema
-
-var BooleanOperands = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BooleanOperands",
-}, smithy.ShapeTypeStructure, 3)
-var BooleanOperands_operandOne *smithy.Schema
-
-var BooleanOperands_operandTwo *smithy.Schema
-
-var BooleanOperands_result *smithy.Schema
-
-var _CaseArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseArn",
-}, smithy.ShapeTypeString, 0)
-
-var CaseEventIncludedData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseEventIncludedData",
-}, smithy.ShapeTypeStructure, 1)
-var CaseEventIncludedData_fields *smithy.Schema
-
-var CaseFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseFilter",
-}, smithy.ShapeTypeUnion, 5)
-var CaseFilter_field *smithy.Schema
-
-var CaseFilter_not *smithy.Schema
-
-var CaseFilter_tag *smithy.Schema
-
-var CaseFilter_andAll *smithy.Schema
-
-var CaseFilter_orAll *smithy.Schema
-
-var _CaseFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseFilterList",
-}, smithy.ShapeTypeList, 1)
-var _CaseFilterList_member *smithy.Schema
-
-var _CaseId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseId",
-}, smithy.ShapeTypeString, 0)
-
-var _CaseRuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CaseRuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleDescription",
-}, smithy.ShapeTypeString, 0)
-
-var CaseRuleDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleDetails",
-}, smithy.ShapeTypeUnion, 3)
-var CaseRuleDetails_required *smithy.Schema
-
-var CaseRuleDetails_fieldOptions *smithy.Schema
-
-var CaseRuleDetails_hidden *smithy.Schema
-
-var CaseRuleError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleError",
-}, smithy.ShapeTypeStructure, 3)
-var CaseRuleError_id *smithy.Schema
-
-var CaseRuleError_errorCode *smithy.Schema
-
-var CaseRuleError_message *smithy.Schema
-
-var _CaseRuleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleId",
-}, smithy.ShapeTypeString, 0)
-
-var CaseRuleIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleIdentifier",
-}, smithy.ShapeTypeStructure, 1)
-var CaseRuleIdentifier_id *smithy.Schema
-
-var _CaseRuleIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _CaseRuleIdentifierList_member *smithy.Schema
-
-var _CaseRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleName",
-}, smithy.ShapeTypeString, 0)
-
-var CaseRuleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleSummary",
-}, smithy.ShapeTypeStructure, 5)
-var CaseRuleSummary_caseRuleId *smithy.Schema
-
-var CaseRuleSummary_name *smithy.Schema
-
-var CaseRuleSummary_caseRuleArn *smithy.Schema
-
-var CaseRuleSummary_ruleType *smithy.Schema
-
-var CaseRuleSummary_description *smithy.Schema
-
-var _CaseRuleSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseRuleSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _CaseRuleSummaryList_member *smithy.Schema
-
-var CaseSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseSummary",
-}, smithy.ShapeTypeStructure, 2)
-var CaseSummary_caseId *smithy.Schema
-
-var CaseSummary_templateId *smithy.Schema
-
-var _CaseSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CaseSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _CaseSummaryList_member *smithy.Schema
-
-var _Channel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Channel",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ChannelList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelList_member *smithy.Schema
-
-var _CommentBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CommentBody",
-}, smithy.ShapeTypeString, 0)
-
-var _CommentBodyTextType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CommentBodyTextType",
-}, smithy.ShapeTypeString, 0)
-
-var CommentContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CommentContent",
-}, smithy.ShapeTypeStructure, 2)
-var CommentContent_body *smithy.Schema
-
-var CommentContent_contentType *smithy.Schema
-
-var CommentFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CommentFilter",
-}, smithy.ShapeTypeStructure, 0)
-
-var CommentUpdateContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CommentUpdateContent",
-}, smithy.ShapeTypeStructure, 2)
-var CommentUpdateContent_body *smithy.Schema
-
-var CommentUpdateContent_contentType *smithy.Schema
-
-var CompoundCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CompoundCondition",
-}, smithy.ShapeTypeStructure, 1)
-var CompoundCondition_conditions *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConnectCaseContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ConnectCaseContent",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectCaseContent_caseId *smithy.Schema
-
-var ConnectCaseFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ConnectCaseFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectCaseFilter_caseId *smithy.Schema
-
-var ConnectCaseInputContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ConnectCaseInputContent",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectCaseInputContent_caseId *smithy.Schema
-
-var _ConnectedToSystemTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ConnectedToSystemTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var Contact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 1)
-var Contact_contactArn *smithy.Schema
-
-var _ContactArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ContactArn",
-}, smithy.ShapeTypeString, 0)
-
-var ContactContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ContactContent",
-}, smithy.ShapeTypeStructure, 3)
-var ContactContent_contactArn *smithy.Schema
-
-var ContactContent_channel *smithy.Schema
-
-var ContactContent_connectedToSystemTime *smithy.Schema
-
-var ContactFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ContactFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ContactFilter_channel *smithy.Schema
-
-var ContactFilter_contactArn *smithy.Schema
-
-var _CreatedTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreatedTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var CustomContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CustomContent",
-}, smithy.ShapeTypeStructure, 1)
-var CustomContent_fields *smithy.Schema
-
-var _CustomEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CustomEntity",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CustomFieldsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CustomFieldsFilter",
-}, smithy.ShapeTypeUnion, 4)
-var CustomFieldsFilter_field *smithy.Schema
-
-var CustomFieldsFilter_not *smithy.Schema
-
-var CustomFieldsFilter_andAll *smithy.Schema
-
-var CustomFieldsFilter_orAll *smithy.Schema
-
-var _CustomFieldsFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CustomFieldsFilterList",
-}, smithy.ShapeTypeList, 1)
-var _CustomFieldsFilterList_member *smithy.Schema
-
-var CustomFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CustomFilter",
-}, smithy.ShapeTypeStructure, 1)
-var CustomFilter_fields *smithy.Schema
-
-var CustomInputContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CustomInputContent",
-}, smithy.ShapeTypeStructure, 1)
-var CustomInputContent_fields *smithy.Schema
-
-var CustomUpdateContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CustomUpdateContent",
-}, smithy.ShapeTypeStructure, 1)
-var CustomUpdateContent_fields *smithy.Schema
-
-var _Deleted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Deleted",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _DomainArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DomainArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DomainId",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _DomainStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DomainStatus",
-}, smithy.ShapeTypeString, 0)
-
-var DomainSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DomainSummary",
-}, smithy.ShapeTypeStructure, 3)
-var DomainSummary_domainId *smithy.Schema
-
-var DomainSummary_domainArn *smithy.Schema
-
-var DomainSummary_name *smithy.Schema
-
-var _DomainSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DomainSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DomainSummaryList_member *smithy.Schema
-
-var EmptyFieldValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "EmptyFieldValue",
-}, smithy.ShapeTypeStructure, 0)
-
-var EmptyOperandValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "EmptyOperandValue",
-}, smithy.ShapeTypeStructure, 0)
-
-var EventBridgeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "EventBridgeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EventBridgeConfiguration_enabled *smithy.Schema
-
-var EventBridgeConfiguration_includedData *smithy.Schema
-
-var EventIncludedData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "EventIncludedData",
-}, smithy.ShapeTypeStructure, 2)
-var EventIncludedData_caseData *smithy.Schema
-
-var EventIncludedData_relatedItemData *smithy.Schema
-
-var _FieldArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldArn",
-}, smithy.ShapeTypeString, 0)
-
-var FieldAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldAttributes",
-}, smithy.ShapeTypeUnion, 1)
-var FieldAttributes_text *smithy.Schema
-
-var _FieldDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldDescription",
-}, smithy.ShapeTypeString, 0)
-
-var FieldError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldError",
-}, smithy.ShapeTypeStructure, 3)
-var FieldError_id *smithy.Schema
-
-var FieldError_errorCode *smithy.Schema
-
-var FieldError_message *smithy.Schema
-
-var FieldFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldFilter",
-}, smithy.ShapeTypeUnion, 6)
-var FieldFilter_equalTo *smithy.Schema
-
-var FieldFilter_contains *smithy.Schema
-
-var FieldFilter_greaterThan *smithy.Schema
-
-var FieldFilter_greaterThanOrEqualTo *smithy.Schema
-
-var FieldFilter_lessThan *smithy.Schema
-
-var FieldFilter_lessThanOrEqualTo *smithy.Schema
-
-var FieldGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldGroup",
-}, smithy.ShapeTypeStructure, 2)
-var FieldGroup_name *smithy.Schema
-
-var FieldGroup_fields *smithy.Schema
-
-var _FieldId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldId",
-}, smithy.ShapeTypeString, 0)
-
-var FieldIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldIdentifier",
-}, smithy.ShapeTypeStructure, 1)
-var FieldIdentifier_id *smithy.Schema
-
-var _FieldIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _FieldIdentifierList_member *smithy.Schema
-
-var FieldItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldItem",
-}, smithy.ShapeTypeStructure, 1)
-var FieldItem_id *smithy.Schema
-
-var _FieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldList",
-}, smithy.ShapeTypeList, 1)
-var _FieldList_member *smithy.Schema
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var _FieldNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var FieldOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldOption",
-}, smithy.ShapeTypeStructure, 3)
-var FieldOption_name *smithy.Schema
-
-var FieldOption_value *smithy.Schema
-
-var FieldOption_active *smithy.Schema
-
-var FieldOptionError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldOptionError",
-}, smithy.ShapeTypeStructure, 3)
-var FieldOptionError_message *smithy.Schema
-
-var FieldOptionError_errorCode *smithy.Schema
-
-var FieldOptionError_value *smithy.Schema
-
-var _FieldOptionErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldOptionErrorList",
-}, smithy.ShapeTypeList, 1)
-var _FieldOptionErrorList_member *smithy.Schema
-
-var _FieldOptionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldOptionName",
-}, smithy.ShapeTypeString, 0)
-
-var FieldOptionsCaseRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldOptionsCaseRule",
-}, smithy.ShapeTypeStructure, 3)
-var FieldOptionsCaseRule_parentFieldId *smithy.Schema
-
-var FieldOptionsCaseRule_childFieldId *smithy.Schema
-
-var FieldOptionsCaseRule_parentChildFieldOptionsMappings *smithy.Schema
-
-var _FieldOptionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldOptionsList",
-}, smithy.ShapeTypeList, 1)
-var _FieldOptionsList_member *smithy.Schema
-
-var _FieldOptionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldOptionValue",
-}, smithy.ShapeTypeString, 0)
-
-var FieldSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldSummary",
-}, smithy.ShapeTypeStructure, 6)
-var FieldSummary_fieldId *smithy.Schema
-
-var FieldSummary_fieldArn *smithy.Schema
-
-var FieldSummary_name *smithy.Schema
-
-var FieldSummary_type *smithy.Schema
-
-var FieldSummary_namespace *smithy.Schema
-
-var FieldSummary_attributes *smithy.Schema
-
-var _FieldSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FieldSummaryList_member *smithy.Schema
-
-var _FieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldType",
-}, smithy.ShapeTypeString, 0)
-
-var FieldValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldValue",
-}, smithy.ShapeTypeStructure, 2)
-var FieldValue_id *smithy.Schema
-
-var FieldValue_value *smithy.Schema
-
-var _FieldValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldValueList",
-}, smithy.ShapeTypeList, 1)
-var _FieldValueList_member *smithy.Schema
-
-var FieldValueUnion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FieldValueUnion",
-}, smithy.ShapeTypeUnion, 5)
-var FieldValueUnion_stringValue *smithy.Schema
-
-var FieldValueUnion_doubleValue *smithy.Schema
-
-var FieldValueUnion_booleanValue *smithy.Schema
-
-var FieldValueUnion_emptyValue *smithy.Schema
-
-var FieldValueUnion_userArnValue *smithy.Schema
-
-var _FileArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FileArn",
-}, smithy.ShapeTypeString, 0)
-
-var FileContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FileContent",
-}, smithy.ShapeTypeStructure, 1)
-var FileContent_fileArn *smithy.Schema
-
-var FileFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "FileFilter",
-}, smithy.ShapeTypeStructure, 1)
-var FileFilter_fileArn *smithy.Schema
-
-var GetCaseRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseRuleResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetCaseRuleResponse_caseRuleId *smithy.Schema
-
-var GetCaseRuleResponse_name *smithy.Schema
-
-var GetCaseRuleResponse_caseRuleArn *smithy.Schema
-
-var GetCaseRuleResponse_rule *smithy.Schema
-
-var GetCaseRuleResponse_description *smithy.Schema
-
-var GetCaseRuleResponse_deleted *smithy.Schema
-
-var GetCaseRuleResponse_createdTime *smithy.Schema
-
-var GetCaseRuleResponse_lastModifiedTime *smithy.Schema
-
-var GetCaseRuleResponse_tags *smithy.Schema
-
-var GetFieldResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetFieldResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetFieldResponse_fieldId *smithy.Schema
-
-var GetFieldResponse_name *smithy.Schema
-
-var GetFieldResponse_fieldArn *smithy.Schema
-
-var GetFieldResponse_description *smithy.Schema
-
-var GetFieldResponse_type *smithy.Schema
-
-var GetFieldResponse_namespace *smithy.Schema
-
-var GetFieldResponse_tags *smithy.Schema
-
-var GetFieldResponse_deleted *smithy.Schema
-
-var GetFieldResponse_createdTime *smithy.Schema
-
-var GetFieldResponse_lastModifiedTime *smithy.Schema
-
-var GetFieldResponse_attributes *smithy.Schema
-
-var HiddenCaseRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "HiddenCaseRule",
-}, smithy.ShapeTypeStructure, 2)
-var HiddenCaseRule_defaultValue *smithy.Schema
-
-var HiddenCaseRule_conditions *smithy.Schema
-
-var _IamPrincipalArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "IamPrincipalArn",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var _LastModifiedTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LastModifiedTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _LayoutArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutArn",
-}, smithy.ShapeTypeString, 0)
-
-var LayoutConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LayoutConfiguration_defaultLayout *smithy.Schema
-
-var LayoutContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutContent",
-}, smithy.ShapeTypeUnion, 1)
-var LayoutContent_basic *smithy.Schema
-
-var _LayoutId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutId",
-}, smithy.ShapeTypeString, 0)
-
-var _LayoutName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutName",
-}, smithy.ShapeTypeString, 0)
-
-var LayoutSections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutSections",
-}, smithy.ShapeTypeStructure, 1)
-var LayoutSections_sections *smithy.Schema
-
-var LayoutSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutSummary",
-}, smithy.ShapeTypeStructure, 3)
-var LayoutSummary_layoutId *smithy.Schema
-
-var LayoutSummary_layoutArn *smithy.Schema
-
-var LayoutSummary_name *smithy.Schema
-
-var _LayoutSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "LayoutSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _LayoutSummaryList_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MutableTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "MutableTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _MutableTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "MutableTags",
-}, smithy.ShapeTypeMap, 2)
-var _MutableTags_key *smithy.Schema
-
-var _MutableTags_value *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OperandOne = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "OperandOne",
-}, smithy.ShapeTypeUnion, 1)
-var OperandOne_fieldId *smithy.Schema
-
-var OperandTwo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "OperandTwo",
-}, smithy.ShapeTypeUnion, 4)
-var OperandTwo_stringValue *smithy.Schema
-
-var OperandTwo_booleanValue *smithy.Schema
-
-var OperandTwo_doubleValue *smithy.Schema
-
-var OperandTwo_emptyValue *smithy.Schema
-
-var _Order = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Order",
-}, smithy.ShapeTypeString, 0)
-
-var ParentChildFieldOptionsMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ParentChildFieldOptionsMapping",
-}, smithy.ShapeTypeStructure, 2)
-var ParentChildFieldOptionsMapping_parentFieldOptionValue *smithy.Schema
-
-var ParentChildFieldOptionsMapping_childFieldOptionValues *smithy.Schema
-
-var _ParentChildFieldOptionsMappingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ParentChildFieldOptionsMappingList",
-}, smithy.ShapeTypeList, 1)
-var _ParentChildFieldOptionsMappingList_member *smithy.Schema
-
-var _ParentChildFieldOptionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ParentChildFieldOptionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ParentChildFieldOptionValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ParentChildFieldOptionValueList",
-}, smithy.ShapeTypeList, 1)
-var _ParentChildFieldOptionValueList_member *smithy.Schema
-
-var _RelatedItemArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemArn",
-}, smithy.ShapeTypeString, 0)
-
-var RelatedItemContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemContent",
-}, smithy.ShapeTypeUnion, 6)
-var RelatedItemContent_contact *smithy.Schema
-
-var RelatedItemContent_comment *smithy.Schema
-
-var RelatedItemContent_file *smithy.Schema
-
-var RelatedItemContent_sla *smithy.Schema
-
-var RelatedItemContent_connectCase *smithy.Schema
-
-var RelatedItemContent_custom *smithy.Schema
-
-var RelatedItemEventIncludedData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemEventIncludedData",
-}, smithy.ShapeTypeStructure, 1)
-var RelatedItemEventIncludedData_includeContent *smithy.Schema
-
-var _RelatedItemFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemFilterList",
-}, smithy.ShapeTypeList, 1)
-var _RelatedItemFilterList_member *smithy.Schema
-
-var _RelatedItemId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemId",
-}, smithy.ShapeTypeString, 0)
-
-var RelatedItemInputContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemInputContent",
-}, smithy.ShapeTypeUnion, 6)
-var RelatedItemInputContent_contact *smithy.Schema
-
-var RelatedItemInputContent_comment *smithy.Schema
-
-var RelatedItemInputContent_file *smithy.Schema
-
-var RelatedItemInputContent_sla *smithy.Schema
-
-var RelatedItemInputContent_connectCase *smithy.Schema
-
-var RelatedItemInputContent_custom *smithy.Schema
-
-var _RelatedItemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemType",
-}, smithy.ShapeTypeString, 0)
-
-var RelatedItemTypeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemTypeFilter",
-}, smithy.ShapeTypeUnion, 6)
-var RelatedItemTypeFilter_contact *smithy.Schema
-
-var RelatedItemTypeFilter_comment *smithy.Schema
-
-var RelatedItemTypeFilter_file *smithy.Schema
-
-var RelatedItemTypeFilter_sla *smithy.Schema
-
-var RelatedItemTypeFilter_connectCase *smithy.Schema
-
-var RelatedItemTypeFilter_custom *smithy.Schema
-
-var RelatedItemUpdateContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RelatedItemUpdateContent",
-}, smithy.ShapeTypeUnion, 2)
-var RelatedItemUpdateContent_comment *smithy.Schema
-
-var RelatedItemUpdateContent_custom *smithy.Schema
-
-var RequiredCaseRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RequiredCaseRule",
-}, smithy.ShapeTypeStructure, 2)
-var RequiredCaseRule_defaultValue *smithy.Schema
-
-var RequiredCaseRule_conditions *smithy.Schema
-
-var RequiredField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RequiredField",
-}, smithy.ShapeTypeStructure, 1)
-var RequiredField_fieldId *smithy.Schema
-
-var _RequiredFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RequiredFieldList",
-}, smithy.ShapeTypeList, 1)
-var _RequiredFieldList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _RuleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "RuleType",
-}, smithy.ShapeTypeString, 0)
-
-var SearchAllRelatedItemsResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItemsResponseItem",
-}, smithy.ShapeTypeStructure, 7)
-var SearchAllRelatedItemsResponseItem_relatedItemId *smithy.Schema
-
-var SearchAllRelatedItemsResponseItem_caseId *smithy.Schema
-
-var SearchAllRelatedItemsResponseItem_type *smithy.Schema
-
-var SearchAllRelatedItemsResponseItem_associationTime *smithy.Schema
-
-var SearchAllRelatedItemsResponseItem_content *smithy.Schema
-
-var SearchAllRelatedItemsResponseItem_performedBy *smithy.Schema
-
-var SearchAllRelatedItemsResponseItem_tags *smithy.Schema
-
-var _SearchAllRelatedItemsResponseItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItemsResponseItemList",
-}, smithy.ShapeTypeList, 1)
-var _SearchAllRelatedItemsResponseItemList_member *smithy.Schema
-
-var SearchAllRelatedItemsSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItemsSort",
-}, smithy.ShapeTypeStructure, 2)
-var SearchAllRelatedItemsSort_sortProperty *smithy.Schema
-
-var SearchAllRelatedItemsSort_sortOrder *smithy.Schema
-
-var _SearchAllRelatedItemsSortList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItemsSortList",
-}, smithy.ShapeTypeList, 1)
-var _SearchAllRelatedItemsSortList_member *smithy.Schema
-
-var _SearchAllRelatedItemsSortProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItemsSortProperty",
-}, smithy.ShapeTypeString, 0)
-
-var SearchCasesResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchCasesResponseItem",
-}, smithy.ShapeTypeStructure, 4)
-var SearchCasesResponseItem_caseId *smithy.Schema
-
-var SearchCasesResponseItem_templateId *smithy.Schema
-
-var SearchCasesResponseItem_fields *smithy.Schema
-
-var SearchCasesResponseItem_tags *smithy.Schema
-
-var _SearchCasesResponseItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchCasesResponseItemList",
-}, smithy.ShapeTypeList, 1)
-var _SearchCasesResponseItemList_member *smithy.Schema
-
-var SearchRelatedItemsResponseItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchRelatedItemsResponseItem",
-}, smithy.ShapeTypeStructure, 6)
-var SearchRelatedItemsResponseItem_relatedItemId *smithy.Schema
-
-var SearchRelatedItemsResponseItem_type *smithy.Schema
-
-var SearchRelatedItemsResponseItem_associationTime *smithy.Schema
-
-var SearchRelatedItemsResponseItem_content *smithy.Schema
-
-var SearchRelatedItemsResponseItem_tags *smithy.Schema
-
-var SearchRelatedItemsResponseItem_performedBy *smithy.Schema
-
-var _SearchRelatedItemsResponseItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchRelatedItemsResponseItemList",
-}, smithy.ShapeTypeList, 1)
-var _SearchRelatedItemsResponseItemList_member *smithy.Schema
-
-var _SearchTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var Section = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Section",
-}, smithy.ShapeTypeUnion, 1)
-var Section_fieldGroup *smithy.Schema
-
-var _SectionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SectionsList",
-}, smithy.ShapeTypeList, 1)
-var _SectionsList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _SlaCompletionTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaCompletionTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var SlaConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var SlaConfiguration_name *smithy.Schema
-
-var SlaConfiguration_type *smithy.Schema
-
-var SlaConfiguration_status *smithy.Schema
-
-var SlaConfiguration_fieldId *smithy.Schema
-
-var SlaConfiguration_targetFieldValues *smithy.Schema
-
-var SlaConfiguration_targetTime *smithy.Schema
-
-var SlaConfiguration_completionTime *smithy.Schema
-
-var SlaContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaContent",
-}, smithy.ShapeTypeStructure, 1)
-var SlaContent_slaConfiguration *smithy.Schema
-
-var _SlaFieldValueUnionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaFieldValueUnionList",
-}, smithy.ShapeTypeList, 1)
-var _SlaFieldValueUnionList_member *smithy.Schema
-
-var SlaFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SlaFilter_name *smithy.Schema
-
-var SlaFilter_status *smithy.Schema
-
-var SlaInputConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaInputConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var SlaInputConfiguration_name *smithy.Schema
-
-var SlaInputConfiguration_type *smithy.Schema
-
-var SlaInputConfiguration_fieldId *smithy.Schema
-
-var SlaInputConfiguration_targetFieldValues *smithy.Schema
-
-var SlaInputConfiguration_targetSlaMinutes *smithy.Schema
-
-var SlaInputContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaInputContent",
-}, smithy.ShapeTypeUnion, 1)
-var SlaInputContent_slaInputConfiguration *smithy.Schema
-
-var _SlaName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SlaStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _SlaTargetTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaTargetTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _SlaType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SlaType",
-}, smithy.ShapeTypeString, 0)
-
-var Sort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Sort",
-}, smithy.ShapeTypeStructure, 2)
-var Sort_fieldId *smithy.Schema
-
-var Sort_sortOrder *smithy.Schema
-
-var _SortList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SortList",
-}, smithy.ShapeTypeList, 1)
-var _SortList_member *smithy.Schema
-
-var TagFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagFilter",
-}, smithy.ShapeTypeUnion, 1)
-var TagFilter_equalTo *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var TagPropagationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagPropagationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var TagPropagationConfiguration_resourceType *smithy.Schema
-
-var TagPropagationConfiguration_tagMap *smithy.Schema
-
-var _TagPropagationConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagPropagationConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _TagPropagationConfigurationList_member *smithy.Schema
-
-var _TagPropagationResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagPropagationResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagValue",
-}, smithy.ShapeTypeStructure, 2)
-var TagValue_key *smithy.Schema
-
-var TagValue_value *smithy.Schema
-
-var _TagValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagValueString",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetSlaMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TargetSlaMinutes",
-}, smithy.ShapeTypeLong, 0)
-
-var _TemplateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateCaseRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateCaseRuleList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateCaseRuleList_member *smithy.Schema
-
-var _TemplateDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateId",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var TemplateRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateRule",
-}, smithy.ShapeTypeStructure, 2)
-var TemplateRule_caseRuleId *smithy.Schema
-
-var TemplateRule_fieldId *smithy.Schema
-
-var _TemplateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateStatusFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateStatusFilters",
-}, smithy.ShapeTypeList, 1)
-var _TemplateStatusFilters_member *smithy.Schema
-
-var TemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateSummary",
-}, smithy.ShapeTypeStructure, 5)
-var TemplateSummary_templateId *smithy.Schema
-
-var TemplateSummary_templateArn *smithy.Schema
-
-var TemplateSummary_name *smithy.Schema
-
-var TemplateSummary_status *smithy.Schema
-
-var TemplateSummary_tagPropagationConfigurations *smithy.Schema
-
-var _TemplateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TemplateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateSummaryList_member *smithy.Schema
-
-var TextAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TextAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var TextAttributes_isMultiline *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _TotalCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TotalCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _UserArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UserArn",
-}, smithy.ShapeTypeString, 0)
-
-var UserUnion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UserUnion",
-}, smithy.ShapeTypeUnion, 2)
-var UserUnion_userArn *smithy.Schema
-
-var UserUnion_customEntity *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var _ValuesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ValuesList",
-}, smithy.ShapeTypeList, 1)
-var _ValuesList_member *smithy.Schema
-
-var BatchGetCaseRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetCaseRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetCaseRuleRequest_domainId *smithy.Schema
-
-var BatchGetCaseRuleRequest_caseRules *smithy.Schema
-
-var BatchGetCaseRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetCaseRuleResponse",
-}, smithy.ShapeTypeStructure, 3)
-var BatchGetCaseRuleResponse_caseRules *smithy.Schema
-
-var BatchGetCaseRuleResponse_errors *smithy.Schema
-
-var BatchGetCaseRuleResponse_unprocessedCaseRules *smithy.Schema
-
-var BatchGetFieldRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetFieldRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetFieldRequest_domainId *smithy.Schema
-
-var BatchGetFieldRequest_fields *smithy.Schema
-
-var BatchGetFieldResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchGetFieldResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetFieldResponse_fields *smithy.Schema
-
-var BatchGetFieldResponse_errors *smithy.Schema
-
-var BatchPutFieldOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchPutFieldOptionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchPutFieldOptionsRequest_domainId *smithy.Schema
-
-var BatchPutFieldOptionsRequest_fieldId *smithy.Schema
-
-var BatchPutFieldOptionsRequest_options *smithy.Schema
-
-var BatchPutFieldOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "BatchPutFieldOptionsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchPutFieldOptionsResponse_errors *smithy.Schema
-
-var CreateCaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateCaseRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateCaseRequest_domainId *smithy.Schema
-
-var CreateCaseRequest_templateId *smithy.Schema
-
-var CreateCaseRequest_fields *smithy.Schema
-
-var CreateCaseRequest_clientToken *smithy.Schema
-
-var CreateCaseRequest_performedBy *smithy.Schema
-
-var CreateCaseRequest_tags *smithy.Schema
-
-var CreateCaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateCaseResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCaseResponse_caseId *smithy.Schema
-
-var CreateCaseResponse_caseArn *smithy.Schema
-
-var CreateCaseRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateCaseRuleRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCaseRuleRequest_domainId *smithy.Schema
-
-var CreateCaseRuleRequest_name *smithy.Schema
-
-var CreateCaseRuleRequest_description *smithy.Schema
-
-var CreateCaseRuleRequest_rule *smithy.Schema
-
-var CreateCaseRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateCaseRuleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCaseRuleResponse_caseRuleId *smithy.Schema
-
-var CreateCaseRuleResponse_caseRuleArn *smithy.Schema
-
-var CreateDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDomainRequest_name *smithy.Schema
-
-var CreateDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateDomainResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDomainResponse_domainId *smithy.Schema
-
-var CreateDomainResponse_domainArn *smithy.Schema
-
-var CreateDomainResponse_domainStatus *smithy.Schema
-
-var CreateFieldRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateFieldRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateFieldRequest_domainId *smithy.Schema
-
-var CreateFieldRequest_name *smithy.Schema
-
-var CreateFieldRequest_type *smithy.Schema
-
-var CreateFieldRequest_description *smithy.Schema
-
-var CreateFieldRequest_attributes *smithy.Schema
-
-var CreateFieldResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateFieldResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateFieldResponse_fieldId *smithy.Schema
-
-var CreateFieldResponse_fieldArn *smithy.Schema
-
-var CreateLayoutRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateLayoutRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateLayoutRequest_domainId *smithy.Schema
-
-var CreateLayoutRequest_name *smithy.Schema
-
-var CreateLayoutRequest_content *smithy.Schema
-
-var CreateLayoutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateLayoutResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateLayoutResponse_layoutId *smithy.Schema
-
-var CreateLayoutResponse_layoutArn *smithy.Schema
-
-var CreateRelatedItemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateRelatedItemRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRelatedItemRequest_domainId *smithy.Schema
-
-var CreateRelatedItemRequest_caseId *smithy.Schema
-
-var CreateRelatedItemRequest_type *smithy.Schema
-
-var CreateRelatedItemRequest_content *smithy.Schema
-
-var CreateRelatedItemRequest_performedBy *smithy.Schema
-
-var CreateRelatedItemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateRelatedItemResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRelatedItemResponse_relatedItemId *smithy.Schema
-
-var CreateRelatedItemResponse_relatedItemArn *smithy.Schema
-
-var CreateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateTemplateRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateTemplateRequest_domainId *smithy.Schema
-
-var CreateTemplateRequest_name *smithy.Schema
-
-var CreateTemplateRequest_description *smithy.Schema
-
-var CreateTemplateRequest_layoutConfiguration *smithy.Schema
-
-var CreateTemplateRequest_requiredFields *smithy.Schema
-
-var CreateTemplateRequest_status *smithy.Schema
-
-var CreateTemplateRequest_rules *smithy.Schema
-
-var CreateTemplateRequest_tagPropagationConfigurations *smithy.Schema
-
-var CreateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "CreateTemplateResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTemplateResponse_templateId *smithy.Schema
-
-var CreateTemplateResponse_templateArn *smithy.Schema
-
-var DeleteCaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteCaseRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCaseRequest_domainId *smithy.Schema
-
-var DeleteCaseRequest_caseId *smithy.Schema
-
-var DeleteCaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteCaseResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteCaseRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteCaseRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCaseRuleRequest_domainId *smithy.Schema
-
-var DeleteCaseRuleRequest_caseRuleId *smithy.Schema
-
-var DeleteCaseRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteCaseRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainRequest_domainId *smithy.Schema
-
-var DeleteDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteDomainResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteFieldRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteFieldRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFieldRequest_domainId *smithy.Schema
-
-var DeleteFieldRequest_fieldId *smithy.Schema
-
-var DeleteFieldResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteFieldResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteLayoutRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteLayoutRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLayoutRequest_domainId *smithy.Schema
-
-var DeleteLayoutRequest_layoutId *smithy.Schema
-
-var DeleteLayoutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteLayoutResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRelatedItemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteRelatedItemRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRelatedItemRequest_domainId *smithy.Schema
-
-var DeleteRelatedItemRequest_caseId *smithy.Schema
-
-var DeleteRelatedItemRequest_relatedItemId *smithy.Schema
-
-var DeleteRelatedItemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteRelatedItemResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteTemplateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTemplateRequest_domainId *smithy.Schema
-
-var DeleteTemplateRequest_templateId *smithy.Schema
-
-var DeleteTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "DeleteTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetCaseAuditEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseAuditEventsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetCaseAuditEventsRequest_caseId *smithy.Schema
-
-var GetCaseAuditEventsRequest_domainId *smithy.Schema
-
-var GetCaseAuditEventsRequest_maxResults *smithy.Schema
-
-var GetCaseAuditEventsRequest_nextToken *smithy.Schema
-
-var GetCaseAuditEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseAuditEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCaseAuditEventsResponse_nextToken *smithy.Schema
-
-var GetCaseAuditEventsResponse_auditEvents *smithy.Schema
-
-var GetCaseEventConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseEventConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCaseEventConfigurationRequest_domainId *smithy.Schema
-
-var GetCaseEventConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseEventConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCaseEventConfigurationResponse_eventBridge *smithy.Schema
-
-var GetCaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetCaseRequest_caseId *smithy.Schema
-
-var GetCaseRequest_domainId *smithy.Schema
-
-var GetCaseRequest_fields *smithy.Schema
-
-var GetCaseRequest_nextToken *smithy.Schema
-
-var GetCaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetCaseResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetCaseResponse_fields *smithy.Schema
-
-var GetCaseResponse_templateId *smithy.Schema
-
-var GetCaseResponse_nextToken *smithy.Schema
-
-var GetCaseResponse_tags *smithy.Schema
-
-var GetDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetDomainRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainRequest_domainId *smithy.Schema
-
-var GetDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetDomainResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetDomainResponse_domainId *smithy.Schema
-
-var GetDomainResponse_domainArn *smithy.Schema
-
-var GetDomainResponse_name *smithy.Schema
-
-var GetDomainResponse_createdTime *smithy.Schema
-
-var GetDomainResponse_domainStatus *smithy.Schema
-
-var GetDomainResponse_tags *smithy.Schema
-
-var GetLayoutRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetLayoutRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetLayoutRequest_domainId *smithy.Schema
-
-var GetLayoutRequest_layoutId *smithy.Schema
-
-var GetLayoutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetLayoutResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetLayoutResponse_layoutId *smithy.Schema
-
-var GetLayoutResponse_layoutArn *smithy.Schema
-
-var GetLayoutResponse_name *smithy.Schema
-
-var GetLayoutResponse_content *smithy.Schema
-
-var GetLayoutResponse_tags *smithy.Schema
-
-var GetLayoutResponse_deleted *smithy.Schema
-
-var GetLayoutResponse_createdTime *smithy.Schema
-
-var GetLayoutResponse_lastModifiedTime *smithy.Schema
-
-var GetTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetTemplateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTemplateRequest_domainId *smithy.Schema
-
-var GetTemplateRequest_templateId *smithy.Schema
-
-var GetTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "GetTemplateResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetTemplateResponse_templateId *smithy.Schema
-
-var GetTemplateResponse_templateArn *smithy.Schema
-
-var GetTemplateResponse_name *smithy.Schema
-
-var GetTemplateResponse_description *smithy.Schema
-
-var GetTemplateResponse_layoutConfiguration *smithy.Schema
-
-var GetTemplateResponse_requiredFields *smithy.Schema
-
-var GetTemplateResponse_tags *smithy.Schema
-
-var GetTemplateResponse_status *smithy.Schema
-
-var GetTemplateResponse_deleted *smithy.Schema
-
-var GetTemplateResponse_createdTime *smithy.Schema
-
-var GetTemplateResponse_lastModifiedTime *smithy.Schema
-
-var GetTemplateResponse_rules *smithy.Schema
-
-var GetTemplateResponse_tagPropagationConfigurations *smithy.Schema
-
-var ListCaseRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListCaseRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCaseRulesRequest_domainId *smithy.Schema
-
-var ListCaseRulesRequest_maxResults *smithy.Schema
-
-var ListCaseRulesRequest_nextToken *smithy.Schema
-
-var ListCaseRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListCaseRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCaseRulesResponse_caseRules *smithy.Schema
-
-var ListCaseRulesResponse_nextToken *smithy.Schema
-
-var ListCasesForContactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListCasesForContactRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCasesForContactRequest_domainId *smithy.Schema
-
-var ListCasesForContactRequest_contactArn *smithy.Schema
-
-var ListCasesForContactRequest_maxResults *smithy.Schema
-
-var ListCasesForContactRequest_nextToken *smithy.Schema
-
-var ListCasesForContactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListCasesForContactResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCasesForContactResponse_cases *smithy.Schema
-
-var ListCasesForContactResponse_nextToken *smithy.Schema
-
-var ListDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListDomainsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsRequest_maxResults *smithy.Schema
-
-var ListDomainsRequest_nextToken *smithy.Schema
-
-var ListDomainsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListDomainsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDomainsResponse_domains *smithy.Schema
-
-var ListDomainsResponse_nextToken *smithy.Schema
-
-var ListFieldOptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListFieldOptionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListFieldOptionsRequest_domainId *smithy.Schema
-
-var ListFieldOptionsRequest_fieldId *smithy.Schema
-
-var ListFieldOptionsRequest_maxResults *smithy.Schema
-
-var ListFieldOptionsRequest_nextToken *smithy.Schema
-
-var ListFieldOptionsRequest_values *smithy.Schema
-
-var ListFieldOptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListFieldOptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFieldOptionsResponse_options *smithy.Schema
-
-var ListFieldOptionsResponse_nextToken *smithy.Schema
-
-var ListFieldsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListFieldsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListFieldsRequest_domainId *smithy.Schema
-
-var ListFieldsRequest_maxResults *smithy.Schema
-
-var ListFieldsRequest_nextToken *smithy.Schema
-
-var ListFieldsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListFieldsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListFieldsResponse_fields *smithy.Schema
-
-var ListFieldsResponse_nextToken *smithy.Schema
-
-var ListLayoutsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListLayoutsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLayoutsRequest_domainId *smithy.Schema
-
-var ListLayoutsRequest_maxResults *smithy.Schema
-
-var ListLayoutsRequest_nextToken *smithy.Schema
-
-var ListLayoutsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListLayoutsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLayoutsResponse_layouts *smithy.Schema
-
-var ListLayoutsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_arn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTemplatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListTemplatesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListTemplatesRequest_domainId *smithy.Schema
-
-var ListTemplatesRequest_maxResults *smithy.Schema
-
-var ListTemplatesRequest_nextToken *smithy.Schema
-
-var ListTemplatesRequest_status *smithy.Schema
-
-var ListTemplatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "ListTemplatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTemplatesResponse_templates *smithy.Schema
-
-var ListTemplatesResponse_nextToken *smithy.Schema
-
-var PutCaseEventConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "PutCaseEventConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutCaseEventConfigurationRequest_domainId *smithy.Schema
-
-var PutCaseEventConfigurationRequest_eventBridge *smithy.Schema
-
-var PutCaseEventConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "PutCaseEventConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var SearchAllRelatedItemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItemsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var SearchAllRelatedItemsRequest_domainId *smithy.Schema
-
-var SearchAllRelatedItemsRequest_maxResults *smithy.Schema
-
-var SearchAllRelatedItemsRequest_nextToken *smithy.Schema
-
-var SearchAllRelatedItemsRequest_filters *smithy.Schema
-
-var SearchAllRelatedItemsRequest_sorts *smithy.Schema
-
-var SearchAllRelatedItemsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchAllRelatedItemsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchAllRelatedItemsResponse_nextToken *smithy.Schema
-
-var SearchAllRelatedItemsResponse_relatedItems *smithy.Schema
-
-var SearchCasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchCasesRequest",
-}, smithy.ShapeTypeStructure, 7)
-var SearchCasesRequest_domainId *smithy.Schema
-
-var SearchCasesRequest_maxResults *smithy.Schema
-
-var SearchCasesRequest_nextToken *smithy.Schema
-
-var SearchCasesRequest_searchTerm *smithy.Schema
-
-var SearchCasesRequest_filter *smithy.Schema
-
-var SearchCasesRequest_sorts *smithy.Schema
-
-var SearchCasesRequest_fields *smithy.Schema
-
-var SearchCasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchCasesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var SearchCasesResponse_nextToken *smithy.Schema
-
-var SearchCasesResponse_cases *smithy.Schema
-
-var SearchCasesResponse_totalCount *smithy.Schema
-
-var SearchRelatedItemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchRelatedItemsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var SearchRelatedItemsRequest_domainId *smithy.Schema
-
-var SearchRelatedItemsRequest_caseId *smithy.Schema
-
-var SearchRelatedItemsRequest_maxResults *smithy.Schema
-
-var SearchRelatedItemsRequest_nextToken *smithy.Schema
-
-var SearchRelatedItemsRequest_filters *smithy.Schema
-
-var SearchRelatedItemsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "SearchRelatedItemsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchRelatedItemsResponse_nextToken *smithy.Schema
-
-var SearchRelatedItemsResponse_relatedItems *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_arn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_arn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UpdateCaseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateCaseRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateCaseRequest_domainId *smithy.Schema
-
-var UpdateCaseRequest_caseId *smithy.Schema
-
-var UpdateCaseRequest_fields *smithy.Schema
-
-var UpdateCaseRequest_performedBy *smithy.Schema
-
-var UpdateCaseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateCaseResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateCaseRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateCaseRuleRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateCaseRuleRequest_domainId *smithy.Schema
-
-var UpdateCaseRuleRequest_caseRuleId *smithy.Schema
-
-var UpdateCaseRuleRequest_name *smithy.Schema
-
-var UpdateCaseRuleRequest_description *smithy.Schema
-
-var UpdateCaseRuleRequest_rule *smithy.Schema
-
-var UpdateCaseRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateCaseRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateFieldRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateFieldRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateFieldRequest_domainId *smithy.Schema
-
-var UpdateFieldRequest_fieldId *smithy.Schema
-
-var UpdateFieldRequest_name *smithy.Schema
-
-var UpdateFieldRequest_description *smithy.Schema
-
-var UpdateFieldRequest_attributes *smithy.Schema
-
-var UpdateFieldResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateFieldResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLayoutRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateLayoutRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateLayoutRequest_domainId *smithy.Schema
-
-var UpdateLayoutRequest_layoutId *smithy.Schema
-
-var UpdateLayoutRequest_name *smithy.Schema
-
-var UpdateLayoutRequest_content *smithy.Schema
-
-var UpdateLayoutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateLayoutResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRelatedItemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateRelatedItemRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRelatedItemRequest_domainId *smithy.Schema
-
-var UpdateRelatedItemRequest_caseId *smithy.Schema
-
-var UpdateRelatedItemRequest_relatedItemId *smithy.Schema
-
-var UpdateRelatedItemRequest_content *smithy.Schema
-
-var UpdateRelatedItemRequest_performedBy *smithy.Schema
-
-var UpdateRelatedItemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateRelatedItemResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateRelatedItemResponse_relatedItemId *smithy.Schema
-
-var UpdateRelatedItemResponse_relatedItemArn *smithy.Schema
-
-var UpdateRelatedItemResponse_type *smithy.Schema
-
-var UpdateRelatedItemResponse_content *smithy.Schema
-
-var UpdateRelatedItemResponse_associationTime *smithy.Schema
-
-var UpdateRelatedItemResponse_tags *smithy.Schema
-
-var UpdateRelatedItemResponse_lastUpdatedUser *smithy.Schema
-
-var UpdateRelatedItemResponse_createdBy *smithy.Schema
-
-var UpdateTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateTemplateRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateTemplateRequest_domainId *smithy.Schema
-
-var UpdateTemplateRequest_templateId *smithy.Schema
-
-var UpdateTemplateRequest_name *smithy.Schema
-
-var UpdateTemplateRequest_description *smithy.Schema
-
-var UpdateTemplateRequest_layoutConfiguration *smithy.Schema
-
-var UpdateTemplateRequest_requiredFields *smithy.Schema
-
-var UpdateTemplateRequest_status *smithy.Schema
-
-var UpdateTemplateRequest_rules *smithy.Schema
-
-var UpdateTemplateRequest_tagPropagationConfigurations *smithy.Schema
-
-var UpdateTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.connectcases",
-	Name:      "UpdateTemplateResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "values"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAuditEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditEvent_eventId, &sAuditEvent_type, &sAuditEvent_relatedItemType, &sAuditEvent_performedTime, &sAuditEvent_fields, &sAuditEvent_performedBy}}
+var mAuditEventField = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditEventField_eventFieldId, &sAuditEventField_oldValue, &sAuditEventField_newValue}}
+var m_AuditEventFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuditEventFieldList_member}}
+var mAuditEventFieldValueUnion = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditEventFieldValueUnion_stringValue, &sAuditEventFieldValueUnion_doubleValue, &sAuditEventFieldValueUnion_booleanValue, &sAuditEventFieldValueUnion_emptyValue, &sAuditEventFieldValueUnion_userArnValue}}
+var mAuditEventPerformedBy = smithy.SchemaMembers{List: []*smithy.Schema{&sAuditEventPerformedBy_user, &sAuditEventPerformedBy_iamPrincipalArn}}
+var m_AuditEventsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuditEventsList_member}}
+var mBasicLayout = smithy.SchemaMembers{List: []*smithy.Schema{&sBasicLayout_topPanel, &sBasicLayout_moreInfo}}
+var m_BatchGetCaseRuleErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetCaseRuleErrorList_member}}
+var m_BatchGetCaseRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetCaseRuleList_member}}
+var m_BatchGetCaseRuleUnprocessedList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetCaseRuleUnprocessedList_member}}
+var m_BatchGetFieldErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetFieldErrorList_member}}
+var m_BatchGetFieldIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetFieldIdentifierList_member}}
+var m_BatchGetFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetFieldList_member}}
+var mBooleanCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sBooleanCondition_equalTo, &sBooleanCondition_notEqualTo, &sBooleanCondition_andAll, &sBooleanCondition_orAll}}
+var m_BooleanConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BooleanConditionList_member}}
+var mBooleanOperands = smithy.SchemaMembers{List: []*smithy.Schema{&sBooleanOperands_operandOne, &sBooleanOperands_operandTwo, &sBooleanOperands_result}}
+var mCaseEventIncludedData = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseEventIncludedData_fields}}
+var mCaseFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseFilter_field, &sCaseFilter_not, &sCaseFilter_tag, &sCaseFilter_andAll, &sCaseFilter_orAll}}
+var m_CaseFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CaseFilterList_member}}
+var mCaseRuleDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseRuleDetails_required, &sCaseRuleDetails_fieldOptions, &sCaseRuleDetails_hidden}}
+var mCaseRuleError = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseRuleError_id, &sCaseRuleError_errorCode, &sCaseRuleError_message}}
+var mCaseRuleIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseRuleIdentifier_id}}
+var m_CaseRuleIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CaseRuleIdentifierList_member}}
+var mCaseRuleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseRuleSummary_caseRuleId, &sCaseRuleSummary_name, &sCaseRuleSummary_caseRuleArn, &sCaseRuleSummary_ruleType, &sCaseRuleSummary_description}}
+var m_CaseRuleSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CaseRuleSummaryList_member}}
+var mCaseSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCaseSummary_caseId, &sCaseSummary_templateId}}
+var m_CaseSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CaseSummaryList_member}}
+var m_ChannelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelList_member}}
+var mCommentContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCommentContent_body, &sCommentContent_contentType}}
+var mCommentUpdateContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCommentUpdateContent_body, &sCommentUpdateContent_contentType}}
+var mCompoundCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sCompoundCondition_conditions}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mConnectCaseContent = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectCaseContent_caseId}}
+var mConnectCaseFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectCaseFilter_caseId}}
+var mConnectCaseInputContent = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectCaseInputContent_caseId}}
+var mContact = smithy.SchemaMembers{List: []*smithy.Schema{&sContact_contactArn}}
+var mContactContent = smithy.SchemaMembers{List: []*smithy.Schema{&sContactContent_contactArn, &sContactContent_channel, &sContactContent_connectedToSystemTime}}
+var mContactFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sContactFilter_channel, &sContactFilter_contactArn}}
+var mCustomContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomContent_fields}}
+var mCustomFieldsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomFieldsFilter_field, &sCustomFieldsFilter_not, &sCustomFieldsFilter_andAll, &sCustomFieldsFilter_orAll}}
+var m_CustomFieldsFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomFieldsFilterList_member}}
+var mCustomFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomFilter_fields}}
+var mCustomInputContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomInputContent_fields}}
+var mCustomUpdateContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomUpdateContent_fields}}
+var mDomainSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainSummary_domainId, &sDomainSummary_domainArn, &sDomainSummary_name}}
+var m_DomainSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainSummaryList_member}}
+var mEventBridgeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBridgeConfiguration_enabled, &sEventBridgeConfiguration_includedData}}
+var mEventIncludedData = smithy.SchemaMembers{List: []*smithy.Schema{&sEventIncludedData_caseData, &sEventIncludedData_relatedItemData}}
+var mFieldAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldAttributes_text}}
+var mFieldError = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldError_id, &sFieldError_errorCode, &sFieldError_message}}
+var mFieldFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldFilter_equalTo, &sFieldFilter_contains, &sFieldFilter_greaterThan, &sFieldFilter_greaterThanOrEqualTo, &sFieldFilter_lessThan, &sFieldFilter_lessThanOrEqualTo}}
+var mFieldGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldGroup_name, &sFieldGroup_fields}}
+var mFieldIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldIdentifier_id}}
+var m_FieldIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldIdentifierList_member}}
+var mFieldItem = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldItem_id}}
+var m_FieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldList_member}}
+var mFieldOption = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldOption_name, &sFieldOption_value, &sFieldOption_active}}
+var mFieldOptionError = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldOptionError_message, &sFieldOptionError_errorCode, &sFieldOptionError_value}}
+var m_FieldOptionErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldOptionErrorList_member}}
+var mFieldOptionsCaseRule = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldOptionsCaseRule_parentFieldId, &sFieldOptionsCaseRule_childFieldId, &sFieldOptionsCaseRule_parentChildFieldOptionsMappings}}
+var m_FieldOptionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldOptionsList_member}}
+var mFieldSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldSummary_fieldId, &sFieldSummary_fieldArn, &sFieldSummary_name, &sFieldSummary_type, &sFieldSummary_namespace, &sFieldSummary_attributes}}
+var m_FieldSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldSummaryList_member}}
+var mFieldValue = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldValue_id, &sFieldValue_value}}
+var m_FieldValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldValueList_member}}
+var mFieldValueUnion = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldValueUnion_stringValue, &sFieldValueUnion_doubleValue, &sFieldValueUnion_booleanValue, &sFieldValueUnion_emptyValue, &sFieldValueUnion_userArnValue}}
+var mFileContent = smithy.SchemaMembers{List: []*smithy.Schema{&sFileContent_fileArn}}
+var mFileFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFileFilter_fileArn}}
+var mGetCaseRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCaseRuleResponse_caseRuleId, &sGetCaseRuleResponse_name, &sGetCaseRuleResponse_caseRuleArn, &sGetCaseRuleResponse_rule, &sGetCaseRuleResponse_description, &sGetCaseRuleResponse_deleted, &sGetCaseRuleResponse_createdTime, &sGetCaseRuleResponse_lastModifiedTime, &sGetCaseRuleResponse_tags}, Seed: 4, Slots: []uint16{
+	0, 2, 0, 6, 0, 0, 1, 0, 0, 0, 5, 0, 8, 9, 4, 0, 7, 0, 0, 0, 0, 0, 0, 3,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mGetFieldResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetFieldResponse_fieldId, &sGetFieldResponse_name, &sGetFieldResponse_fieldArn, &sGetFieldResponse_description, &sGetFieldResponse_type, &sGetFieldResponse_namespace, &sGetFieldResponse_tags, &sGetFieldResponse_deleted, &sGetFieldResponse_createdTime, &sGetFieldResponse_lastModifiedTime, &sGetFieldResponse_attributes}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 7, 1, 2, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 8, 3, 0,
+	4, 9, 5, 10, 0, 0, 0, 0,
+}}
+var mHiddenCaseRule = smithy.SchemaMembers{List: []*smithy.Schema{&sHiddenCaseRule_defaultValue, &sHiddenCaseRule_conditions}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mLayoutConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLayoutConfiguration_defaultLayout}}
+var mLayoutContent = smithy.SchemaMembers{List: []*smithy.Schema{&sLayoutContent_basic}}
+var mLayoutSections = smithy.SchemaMembers{List: []*smithy.Schema{&sLayoutSections_sections}}
+var mLayoutSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLayoutSummary_layoutId, &sLayoutSummary_layoutArn, &sLayoutSummary_name}}
+var m_LayoutSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LayoutSummaryList_member}}
+var m_MutableTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_MutableTags_key, &s_MutableTags_value}}
+var mOperandOne = smithy.SchemaMembers{List: []*smithy.Schema{&sOperandOne_fieldId}}
+var mOperandTwo = smithy.SchemaMembers{List: []*smithy.Schema{&sOperandTwo_stringValue, &sOperandTwo_booleanValue, &sOperandTwo_doubleValue, &sOperandTwo_emptyValue}}
+var mParentChildFieldOptionsMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sParentChildFieldOptionsMapping_parentFieldOptionValue, &sParentChildFieldOptionsMapping_childFieldOptionValues}}
+var m_ParentChildFieldOptionsMappingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParentChildFieldOptionsMappingList_member}}
+var m_ParentChildFieldOptionValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParentChildFieldOptionValueList_member}}
+var mRelatedItemContent = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedItemContent_contact, &sRelatedItemContent_comment, &sRelatedItemContent_file, &sRelatedItemContent_sla, &sRelatedItemContent_connectCase, &sRelatedItemContent_custom}}
+var mRelatedItemEventIncludedData = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedItemEventIncludedData_includeContent}}
+var m_RelatedItemFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RelatedItemFilterList_member}}
+var mRelatedItemInputContent = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedItemInputContent_contact, &sRelatedItemInputContent_comment, &sRelatedItemInputContent_file, &sRelatedItemInputContent_sla, &sRelatedItemInputContent_connectCase, &sRelatedItemInputContent_custom}}
+var mRelatedItemTypeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedItemTypeFilter_contact, &sRelatedItemTypeFilter_comment, &sRelatedItemTypeFilter_file, &sRelatedItemTypeFilter_sla, &sRelatedItemTypeFilter_connectCase, &sRelatedItemTypeFilter_custom}}
+var mRelatedItemUpdateContent = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedItemUpdateContent_comment, &sRelatedItemUpdateContent_custom}}
+var mRequiredCaseRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRequiredCaseRule_defaultValue, &sRequiredCaseRule_conditions}}
+var mRequiredField = smithy.SchemaMembers{List: []*smithy.Schema{&sRequiredField_fieldId}}
+var m_RequiredFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RequiredFieldList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mSearchAllRelatedItemsResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchAllRelatedItemsResponseItem_relatedItemId, &sSearchAllRelatedItemsResponseItem_caseId, &sSearchAllRelatedItemsResponseItem_type, &sSearchAllRelatedItemsResponseItem_associationTime, &sSearchAllRelatedItemsResponseItem_content, &sSearchAllRelatedItemsResponseItem_performedBy, &sSearchAllRelatedItemsResponseItem_tags}}
+var m_SearchAllRelatedItemsResponseItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchAllRelatedItemsResponseItemList_member}}
+var mSearchAllRelatedItemsSort = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchAllRelatedItemsSort_sortProperty, &sSearchAllRelatedItemsSort_sortOrder}}
+var m_SearchAllRelatedItemsSortList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchAllRelatedItemsSortList_member}}
+var mSearchCasesResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCasesResponseItem_caseId, &sSearchCasesResponseItem_templateId, &sSearchCasesResponseItem_fields, &sSearchCasesResponseItem_tags}}
+var m_SearchCasesResponseItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchCasesResponseItemList_member}}
+var mSearchRelatedItemsResponseItem = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchRelatedItemsResponseItem_relatedItemId, &sSearchRelatedItemsResponseItem_type, &sSearchRelatedItemsResponseItem_associationTime, &sSearchRelatedItemsResponseItem_content, &sSearchRelatedItemsResponseItem_tags, &sSearchRelatedItemsResponseItem_performedBy}}
+var m_SearchRelatedItemsResponseItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchRelatedItemsResponseItemList_member}}
+var mSection = smithy.SchemaMembers{List: []*smithy.Schema{&sSection_fieldGroup}}
+var m_SectionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SectionsList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSlaConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSlaConfiguration_name, &sSlaConfiguration_type, &sSlaConfiguration_status, &sSlaConfiguration_fieldId, &sSlaConfiguration_targetFieldValues, &sSlaConfiguration_targetTime, &sSlaConfiguration_completionTime}}
+var mSlaContent = smithy.SchemaMembers{List: []*smithy.Schema{&sSlaContent_slaConfiguration}}
+var m_SlaFieldValueUnionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlaFieldValueUnionList_member}}
+var mSlaFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSlaFilter_name, &sSlaFilter_status}}
+var mSlaInputConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSlaInputConfiguration_name, &sSlaInputConfiguration_type, &sSlaInputConfiguration_fieldId, &sSlaInputConfiguration_targetFieldValues, &sSlaInputConfiguration_targetSlaMinutes}}
+var mSlaInputContent = smithy.SchemaMembers{List: []*smithy.Schema{&sSlaInputContent_slaInputConfiguration}}
+var mSort = smithy.SchemaMembers{List: []*smithy.Schema{&sSort_fieldId, &sSort_sortOrder}}
+var m_SortList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SortList_member}}
+var mTagFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTagFilter_equalTo}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var mTagPropagationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTagPropagationConfiguration_resourceType, &sTagPropagationConfiguration_tagMap}}
+var m_TagPropagationConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagPropagationConfigurationList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTagValue = smithy.SchemaMembers{List: []*smithy.Schema{&sTagValue_key, &sTagValue_value}}
+var m_TemplateCaseRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateCaseRuleList_member}}
+var mTemplateRule = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateRule_caseRuleId, &sTemplateRule_fieldId}}
+var m_TemplateStatusFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateStatusFilters_member}}
+var mTemplateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateSummary_templateId, &sTemplateSummary_templateArn, &sTemplateSummary_name, &sTemplateSummary_status, &sTemplateSummary_tagPropagationConfigurations}}
+var m_TemplateSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateSummaryList_member}}
+var mTextAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sTextAttributes_isMultiline}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mUserUnion = smithy.SchemaMembers{List: []*smithy.Schema{&sUserUnion_userArn, &sUserUnion_customEntity}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var m_ValuesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValuesList_member}}
+var mBatchGetCaseRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCaseRuleRequest_domainId, &sBatchGetCaseRuleRequest_caseRules}}
+var mBatchGetCaseRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetCaseRuleResponse_caseRules, &sBatchGetCaseRuleResponse_errors, &sBatchGetCaseRuleResponse_unprocessedCaseRules}}
+var mBatchGetFieldRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetFieldRequest_domainId, &sBatchGetFieldRequest_fields}}
+var mBatchGetFieldResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetFieldResponse_fields, &sBatchGetFieldResponse_errors}}
+var mBatchPutFieldOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutFieldOptionsRequest_domainId, &sBatchPutFieldOptionsRequest_fieldId, &sBatchPutFieldOptionsRequest_options}}
+var mBatchPutFieldOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutFieldOptionsResponse_errors}}
+var mCreateCaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCaseRequest_domainId, &sCreateCaseRequest_templateId, &sCreateCaseRequest_fields, &sCreateCaseRequest_clientToken, &sCreateCaseRequest_performedBy, &sCreateCaseRequest_tags}}
+var mCreateCaseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCaseResponse_caseId, &sCreateCaseResponse_caseArn}}
+var mCreateCaseRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCaseRuleRequest_domainId, &sCreateCaseRuleRequest_name, &sCreateCaseRuleRequest_description, &sCreateCaseRuleRequest_rule}}
+var mCreateCaseRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCaseRuleResponse_caseRuleId, &sCreateCaseRuleResponse_caseRuleArn}}
+var mCreateDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainRequest_name}}
+var mCreateDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainResponse_domainId, &sCreateDomainResponse_domainArn, &sCreateDomainResponse_domainStatus}}
+var mCreateFieldRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFieldRequest_domainId, &sCreateFieldRequest_name, &sCreateFieldRequest_type, &sCreateFieldRequest_description, &sCreateFieldRequest_attributes}}
+var mCreateFieldResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFieldResponse_fieldId, &sCreateFieldResponse_fieldArn}}
+var mCreateLayoutRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLayoutRequest_domainId, &sCreateLayoutRequest_name, &sCreateLayoutRequest_content}}
+var mCreateLayoutResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLayoutResponse_layoutId, &sCreateLayoutResponse_layoutArn}}
+var mCreateRelatedItemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRelatedItemRequest_domainId, &sCreateRelatedItemRequest_caseId, &sCreateRelatedItemRequest_type, &sCreateRelatedItemRequest_content, &sCreateRelatedItemRequest_performedBy}}
+var mCreateRelatedItemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRelatedItemResponse_relatedItemId, &sCreateRelatedItemResponse_relatedItemArn}}
+var mCreateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTemplateRequest_domainId, &sCreateTemplateRequest_name, &sCreateTemplateRequest_description, &sCreateTemplateRequest_layoutConfiguration, &sCreateTemplateRequest_requiredFields, &sCreateTemplateRequest_status, &sCreateTemplateRequest_rules, &sCreateTemplateRequest_tagPropagationConfigurations}}
+var mCreateTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTemplateResponse_templateId, &sCreateTemplateResponse_templateArn}}
+var mDeleteCaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCaseRequest_domainId, &sDeleteCaseRequest_caseId}}
+var mDeleteCaseRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCaseRuleRequest_domainId, &sDeleteCaseRuleRequest_caseRuleId}}
+var mDeleteDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainRequest_domainId}}
+var mDeleteFieldRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFieldRequest_domainId, &sDeleteFieldRequest_fieldId}}
+var mDeleteLayoutRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLayoutRequest_domainId, &sDeleteLayoutRequest_layoutId}}
+var mDeleteRelatedItemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRelatedItemRequest_domainId, &sDeleteRelatedItemRequest_caseId, &sDeleteRelatedItemRequest_relatedItemId}}
+var mDeleteTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTemplateRequest_domainId, &sDeleteTemplateRequest_templateId}}
+var mGetCaseAuditEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCaseAuditEventsRequest_caseId, &sGetCaseAuditEventsRequest_domainId, &sGetCaseAuditEventsRequest_maxResults, &sGetCaseAuditEventsRequest_nextToken}}
+var mGetCaseAuditEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCaseAuditEventsResponse_nextToken, &sGetCaseAuditEventsResponse_auditEvents}}
+var mGetCaseEventConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCaseEventConfigurationRequest_domainId}}
+var mGetCaseEventConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCaseEventConfigurationResponse_eventBridge}}
+var mGetCaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCaseRequest_caseId, &sGetCaseRequest_domainId, &sGetCaseRequest_fields, &sGetCaseRequest_nextToken}}
+var mGetCaseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCaseResponse_fields, &sGetCaseResponse_templateId, &sGetCaseResponse_nextToken, &sGetCaseResponse_tags}}
+var mGetDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainRequest_domainId}}
+var mGetDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainResponse_domainId, &sGetDomainResponse_domainArn, &sGetDomainResponse_name, &sGetDomainResponse_createdTime, &sGetDomainResponse_domainStatus, &sGetDomainResponse_tags}}
+var mGetLayoutRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLayoutRequest_domainId, &sGetLayoutRequest_layoutId}}
+var mGetLayoutResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLayoutResponse_layoutId, &sGetLayoutResponse_layoutArn, &sGetLayoutResponse_name, &sGetLayoutResponse_content, &sGetLayoutResponse_tags, &sGetLayoutResponse_deleted, &sGetLayoutResponse_createdTime, &sGetLayoutResponse_lastModifiedTime}}
+var mGetTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateRequest_domainId, &sGetTemplateRequest_templateId}}
+var mGetTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateResponse_templateId, &sGetTemplateResponse_templateArn, &sGetTemplateResponse_name, &sGetTemplateResponse_description, &sGetTemplateResponse_layoutConfiguration, &sGetTemplateResponse_requiredFields, &sGetTemplateResponse_tags, &sGetTemplateResponse_status, &sGetTemplateResponse_deleted, &sGetTemplateResponse_createdTime, &sGetTemplateResponse_lastModifiedTime, &sGetTemplateResponse_rules, &sGetTemplateResponse_tagPropagationConfigurations}, Seed: 21, Slots: []uint16{
+	0, 0, 4, 0, 0, 0, 0, 11, 0, 0, 8, 2, 12, 0, 0, 1, 6, 0, 5, 0, 0, 13, 0, 0,
+	0, 3, 9, 7, 10, 0, 0, 0,
+}}
+var mListCaseRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCaseRulesRequest_domainId, &sListCaseRulesRequest_maxResults, &sListCaseRulesRequest_nextToken}}
+var mListCaseRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCaseRulesResponse_caseRules, &sListCaseRulesResponse_nextToken}}
+var mListCasesForContactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCasesForContactRequest_domainId, &sListCasesForContactRequest_contactArn, &sListCasesForContactRequest_maxResults, &sListCasesForContactRequest_nextToken}}
+var mListCasesForContactResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCasesForContactResponse_cases, &sListCasesForContactResponse_nextToken}}
+var mListDomainsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsRequest_maxResults, &sListDomainsRequest_nextToken}}
+var mListDomainsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDomainsResponse_domains, &sListDomainsResponse_nextToken}}
+var mListFieldOptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFieldOptionsRequest_domainId, &sListFieldOptionsRequest_fieldId, &sListFieldOptionsRequest_maxResults, &sListFieldOptionsRequest_nextToken, &sListFieldOptionsRequest_values}}
+var mListFieldOptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFieldOptionsResponse_options, &sListFieldOptionsResponse_nextToken}}
+var mListFieldsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListFieldsRequest_domainId, &sListFieldsRequest_maxResults, &sListFieldsRequest_nextToken}}
+var mListFieldsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListFieldsResponse_fields, &sListFieldsResponse_nextToken}}
+var mListLayoutsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLayoutsRequest_domainId, &sListLayoutsRequest_maxResults, &sListLayoutsRequest_nextToken}}
+var mListLayoutsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLayoutsResponse_layouts, &sListLayoutsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_arn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mListTemplatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTemplatesRequest_domainId, &sListTemplatesRequest_maxResults, &sListTemplatesRequest_nextToken, &sListTemplatesRequest_status}}
+var mListTemplatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTemplatesResponse_templates, &sListTemplatesResponse_nextToken}}
+var mPutCaseEventConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCaseEventConfigurationRequest_domainId, &sPutCaseEventConfigurationRequest_eventBridge}}
+var mSearchAllRelatedItemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchAllRelatedItemsRequest_domainId, &sSearchAllRelatedItemsRequest_maxResults, &sSearchAllRelatedItemsRequest_nextToken, &sSearchAllRelatedItemsRequest_filters, &sSearchAllRelatedItemsRequest_sorts}}
+var mSearchAllRelatedItemsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchAllRelatedItemsResponse_nextToken, &sSearchAllRelatedItemsResponse_relatedItems}}
+var mSearchCasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCasesRequest_domainId, &sSearchCasesRequest_maxResults, &sSearchCasesRequest_nextToken, &sSearchCasesRequest_searchTerm, &sSearchCasesRequest_filter, &sSearchCasesRequest_sorts, &sSearchCasesRequest_fields}}
+var mSearchCasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchCasesResponse_nextToken, &sSearchCasesResponse_cases, &sSearchCasesResponse_totalCount}}
+var mSearchRelatedItemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchRelatedItemsRequest_domainId, &sSearchRelatedItemsRequest_caseId, &sSearchRelatedItemsRequest_maxResults, &sSearchRelatedItemsRequest_nextToken, &sSearchRelatedItemsRequest_filters}}
+var mSearchRelatedItemsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchRelatedItemsResponse_nextToken, &sSearchRelatedItemsResponse_relatedItems}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_arn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_arn, &sUntagResourceRequest_tagKeys}}
+var mUpdateCaseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCaseRequest_domainId, &sUpdateCaseRequest_caseId, &sUpdateCaseRequest_fields, &sUpdateCaseRequest_performedBy}}
+var mUpdateCaseRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCaseRuleRequest_domainId, &sUpdateCaseRuleRequest_caseRuleId, &sUpdateCaseRuleRequest_name, &sUpdateCaseRuleRequest_description, &sUpdateCaseRuleRequest_rule}}
+var mUpdateFieldRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFieldRequest_domainId, &sUpdateFieldRequest_fieldId, &sUpdateFieldRequest_name, &sUpdateFieldRequest_description, &sUpdateFieldRequest_attributes}}
+var mUpdateLayoutRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLayoutRequest_domainId, &sUpdateLayoutRequest_layoutId, &sUpdateLayoutRequest_name, &sUpdateLayoutRequest_content}}
+var mUpdateRelatedItemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRelatedItemRequest_domainId, &sUpdateRelatedItemRequest_caseId, &sUpdateRelatedItemRequest_relatedItemId, &sUpdateRelatedItemRequest_content, &sUpdateRelatedItemRequest_performedBy}}
+var mUpdateRelatedItemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRelatedItemResponse_relatedItemId, &sUpdateRelatedItemResponse_relatedItemArn, &sUpdateRelatedItemResponse_type, &sUpdateRelatedItemResponse_content, &sUpdateRelatedItemResponse_associationTime, &sUpdateRelatedItemResponse_tags, &sUpdateRelatedItemResponse_lastUpdatedUser, &sUpdateRelatedItemResponse_createdBy}}
+var mUpdateTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTemplateRequest_domainId, &sUpdateTemplateRequest_templateId, &sUpdateTemplateRequest_name, &sUpdateTemplateRequest_description, &sUpdateTemplateRequest_layoutConfiguration, &sUpdateTemplateRequest_requiredFields, &sUpdateTemplateRequest_status, &sUpdateTemplateRequest_rules, &sUpdateTemplateRequest_tagPropagationConfigurations}, Seed: 8, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 3, 0, 0, 0, 0, 0, 4, 0, 0, 9, 8, 0, 0, 5,
+	0, 6, 0, 0, 0, 0, 7, 1,
+}}
+
+var sBatchGetCaseRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCaseRule, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBatchGetField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetField, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sBatchPutFieldOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutFieldOptions, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCase, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateCaseRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseRule, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomain, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateField, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLayout, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreateRelatedItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelatedItem, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sCreateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplate, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCase, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteCaseRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCaseRule, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDeleteDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomain, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sDeleteField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteField, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sDeleteLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLayout, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sDeleteRelatedItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelatedItem, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sDeleteTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplate, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCase, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetCaseAuditEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseAuditEvents, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetCaseEventConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseEventConfiguration, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sGetDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomain, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sGetLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLayout, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sGetTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplate, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListCaseRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCaseRules, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListCasesForContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCasesForContact, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomains, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListFieldOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFieldOptions, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListFields = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFields, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListLayouts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLayouts, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sListTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplates, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sPutCaseEventConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCaseEventConfiguration, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sSearchAllRelatedItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAllRelatedItems, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sSearchCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCases, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sSearchRelatedItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRelatedItems, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sUpdateCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCase, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sUpdateCaseRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCaseRule, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sUpdateField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateField, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sUpdateLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLayout, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sUpdateRelatedItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelatedItem, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sUpdateTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplate, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var s_AmazonConnectCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonConnectCases, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AssociationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationTime, Traits: &t44, Type: smithy.ShapeTypeTimestamp})
+var sAuditEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditEvent, Members: &mAuditEvent, Type: smithy.ShapeTypeStructure})
+var s_AuditEventDateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEventDateTime, Traits: &t44, Type: smithy.ShapeTypeTimestamp})
+var sAuditEventField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditEventField, Members: &mAuditEventField, Type: smithy.ShapeTypeStructure})
+var s_AuditEventFieldId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEventFieldId, Type: smithy.ShapeTypeString})
+var s_AuditEventFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEventFieldList, Members: &m_AuditEventFieldList, Type: smithy.ShapeTypeList})
+var sAuditEventFieldValueUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditEventFieldValueUnion, Members: &mAuditEventFieldValueUnion, Type: smithy.ShapeTypeUnion})
+var s_AuditEventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEventId, Type: smithy.ShapeTypeString})
+var sAuditEventPerformedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuditEventPerformedBy, Members: &mAuditEventPerformedBy, Type: smithy.ShapeTypeStructure})
+var s_AuditEventsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEventsList, Members: &m_AuditEventsList, Type: smithy.ShapeTypeList})
+var s_AuditEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuditEventType, Type: smithy.ShapeTypeString})
+var sBasicLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBasicLayout, Members: &mBasicLayout, Type: smithy.ShapeTypeStructure})
+var s_BatchGetCaseRuleErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetCaseRuleErrorList, Members: &m_BatchGetCaseRuleErrorList, Type: smithy.ShapeTypeList})
+var s_BatchGetCaseRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetCaseRuleList, Members: &m_BatchGetCaseRuleList, Type: smithy.ShapeTypeList})
+var s_BatchGetCaseRuleUnprocessedList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetCaseRuleUnprocessedList, Members: &m_BatchGetCaseRuleUnprocessedList, Type: smithy.ShapeTypeList})
+var s_BatchGetFieldErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetFieldErrorList, Members: &m_BatchGetFieldErrorList, Type: smithy.ShapeTypeList})
+var s_BatchGetFieldIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetFieldIdentifierList, Members: &m_BatchGetFieldIdentifierList, Type: smithy.ShapeTypeList})
+var s_BatchGetFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetFieldList, Members: &m_BatchGetFieldList, Type: smithy.ShapeTypeList})
+var sBooleanCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBooleanCondition, Members: &mBooleanCondition, Type: smithy.ShapeTypeUnion})
+var s_BooleanConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanConditionList, Members: &m_BooleanConditionList, Type: smithy.ShapeTypeList})
+var sBooleanOperands = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBooleanOperands, Members: &mBooleanOperands, Type: smithy.ShapeTypeStructure})
+var s_CaseArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseArn, Type: smithy.ShapeTypeString})
+var sCaseEventIncludedData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseEventIncludedData, Members: &mCaseEventIncludedData, Type: smithy.ShapeTypeStructure})
+var sCaseFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseFilter, Members: &mCaseFilter, Type: smithy.ShapeTypeUnion})
+var s_CaseFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseFilterList, Members: &m_CaseFilterList, Type: smithy.ShapeTypeList})
+var s_CaseId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var s_CaseRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseRuleArn, Type: smithy.ShapeTypeString})
+var s_CaseRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseRuleDescription, Type: smithy.ShapeTypeString})
+var sCaseRuleDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseRuleDetails, Members: &mCaseRuleDetails, Type: smithy.ShapeTypeUnion})
+var sCaseRuleError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseRuleError, Members: &mCaseRuleError, Type: smithy.ShapeTypeStructure})
+var s_CaseRuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var sCaseRuleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseRuleIdentifier, Members: &mCaseRuleIdentifier, Type: smithy.ShapeTypeStructure})
+var s_CaseRuleIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseRuleIdentifierList, Members: &m_CaseRuleIdentifierList, Type: smithy.ShapeTypeList})
+var s_CaseRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseRuleName, Type: smithy.ShapeTypeString})
+var sCaseRuleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseRuleSummary, Members: &mCaseRuleSummary, Type: smithy.ShapeTypeStructure})
+var s_CaseRuleSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseRuleSummaryList, Members: &m_CaseRuleSummaryList, Type: smithy.ShapeTypeList})
+var sCaseSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCaseSummary, Members: &mCaseSummary, Type: smithy.ShapeTypeStructure})
+var s_CaseSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CaseSummaryList, Members: &m_CaseSummaryList, Type: smithy.ShapeTypeList})
+var s_Channel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Channel, Type: smithy.ShapeTypeString})
+var s_ChannelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelList, Members: &m_ChannelList, Type: smithy.ShapeTypeList})
+var s_CommentBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentBody, Type: smithy.ShapeTypeString})
+var s_CommentBodyTextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommentBodyTextType, Type: smithy.ShapeTypeString})
+var sCommentContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentContent, Members: &mCommentContent, Type: smithy.ShapeTypeStructure})
+var sCommentFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentFilter, Type: smithy.ShapeTypeStructure})
+var sCommentUpdateContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCommentUpdateContent, Members: &mCommentUpdateContent, Type: smithy.ShapeTypeStructure})
+var sCompoundCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompoundCondition, Members: &mCompoundCondition, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var sConnectCaseContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCaseContent, Members: &mConnectCaseContent, Type: smithy.ShapeTypeStructure})
+var sConnectCaseFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCaseFilter, Members: &mConnectCaseFilter, Type: smithy.ShapeTypeStructure})
+var sConnectCaseInputContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectCaseInputContent, Members: &mConnectCaseInputContent, Type: smithy.ShapeTypeStructure})
+var s_ConnectedToSystemTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectedToSystemTime, Traits: &t44, Type: smithy.ShapeTypeTimestamp})
+var sContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure})
+var s_ContactArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContactArn, Type: smithy.ShapeTypeString})
+var sContactContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactContent, Members: &mContactContent, Type: smithy.ShapeTypeStructure})
+var sContactFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContactFilter, Members: &mContactFilter, Type: smithy.ShapeTypeStructure})
+var s_CreatedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedTime, Traits: &t44, Type: smithy.ShapeTypeTimestamp})
+var sCustomContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomContent, Members: &mCustomContent, Type: smithy.ShapeTypeStructure})
+var s_CustomEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomEntity, Traits: &t47, Type: smithy.ShapeTypeString})
+var sCustomFieldsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomFieldsFilter, Members: &mCustomFieldsFilter, Type: smithy.ShapeTypeUnion})
+var s_CustomFieldsFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomFieldsFilterList, Members: &m_CustomFieldsFilterList, Type: smithy.ShapeTypeList})
+var sCustomFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomFilter, Members: &mCustomFilter, Type: smithy.ShapeTypeStructure})
+var sCustomInputContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomInputContent, Members: &mCustomInputContent, Type: smithy.ShapeTypeStructure})
+var sCustomUpdateContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomUpdateContent, Members: &mCustomUpdateContent, Type: smithy.ShapeTypeStructure})
+var s_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Deleted, Type: smithy.ShapeTypeBoolean})
+var s_DomainArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainArn, Type: smithy.ShapeTypeString})
+var s_DomainId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainId, Type: smithy.ShapeTypeString})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_DomainStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainStatus, Type: smithy.ShapeTypeString})
+var sDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure})
+var s_DomainSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList})
+var sEmptyFieldValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyFieldValue, Type: smithy.ShapeTypeStructure})
+var sEmptyOperandValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmptyOperandValue, Type: smithy.ShapeTypeStructure})
+var sEventBridgeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBridgeConfiguration, Members: &mEventBridgeConfiguration, Type: smithy.ShapeTypeStructure})
+var sEventIncludedData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventIncludedData, Members: &mEventIncludedData, Type: smithy.ShapeTypeStructure})
+var s_FieldArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldArn, Type: smithy.ShapeTypeString})
+var sFieldAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldAttributes, Members: &mFieldAttributes, Type: smithy.ShapeTypeUnion})
+var s_FieldDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldDescription, Type: smithy.ShapeTypeString})
+var sFieldError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldError, Members: &mFieldError, Type: smithy.ShapeTypeStructure})
+var sFieldFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldFilter, Members: &mFieldFilter, Type: smithy.ShapeTypeUnion})
+var sFieldGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldGroup, Members: &mFieldGroup, Type: smithy.ShapeTypeStructure})
+var s_FieldId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sFieldIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldIdentifier, Members: &mFieldIdentifier, Type: smithy.ShapeTypeStructure})
+var s_FieldIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldIdentifierList, Members: &m_FieldIdentifierList, Type: smithy.ShapeTypeList})
+var sFieldItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldItem, Members: &mFieldItem, Type: smithy.ShapeTypeStructure})
+var s_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var s_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var s_FieldNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldNamespace, Type: smithy.ShapeTypeString})
+var sFieldOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldOption, Members: &mFieldOption, Type: smithy.ShapeTypeStructure})
+var sFieldOptionError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldOptionError, Members: &mFieldOptionError, Type: smithy.ShapeTypeStructure})
+var s_FieldOptionErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldOptionErrorList, Members: &m_FieldOptionErrorList, Type: smithy.ShapeTypeList})
+var s_FieldOptionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldOptionName, Type: smithy.ShapeTypeString})
+var sFieldOptionsCaseRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldOptionsCaseRule, Members: &mFieldOptionsCaseRule, Type: smithy.ShapeTypeStructure})
+var s_FieldOptionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldOptionsList, Members: &m_FieldOptionsList, Type: smithy.ShapeTypeList})
+var s_FieldOptionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldOptionValue, Type: smithy.ShapeTypeString})
+var sFieldSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldSummary, Members: &mFieldSummary, Type: smithy.ShapeTypeStructure})
+var s_FieldSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldSummaryList, Members: &m_FieldSummaryList, Type: smithy.ShapeTypeList})
+var s_FieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldType, Type: smithy.ShapeTypeString})
+var sFieldValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var s_FieldValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sFieldValueUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldValueUnion, Members: &mFieldValueUnion, Type: smithy.ShapeTypeUnion})
+var s_FileArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileArn, Type: smithy.ShapeTypeString})
+var sFileContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileContent, Members: &mFileContent, Type: smithy.ShapeTypeStructure})
+var sFileFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileFilter, Members: &mFileFilter, Type: smithy.ShapeTypeStructure})
+var sGetCaseRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseRuleResponse, Members: &mGetCaseRuleResponse, Type: smithy.ShapeTypeStructure})
+var sGetFieldResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetFieldResponse, Members: &mGetFieldResponse, Type: smithy.ShapeTypeStructure})
+var sHiddenCaseRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHiddenCaseRule, Members: &mHiddenCaseRule, Type: smithy.ShapeTypeStructure})
+var s_IamPrincipalArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamPrincipalArn, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t48, Type: smithy.ShapeTypeStructure})
+var s_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastModifiedTime, Traits: &t44, Type: smithy.ShapeTypeTimestamp})
+var s_LayoutArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LayoutArn, Type: smithy.ShapeTypeString})
+var sLayoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLayoutConfiguration, Members: &mLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sLayoutContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLayoutContent, Members: &mLayoutContent, Type: smithy.ShapeTypeUnion})
+var s_LayoutId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LayoutId, Type: smithy.ShapeTypeString})
+var s_LayoutName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LayoutName, Type: smithy.ShapeTypeString})
+var sLayoutSections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLayoutSections, Members: &mLayoutSections, Type: smithy.ShapeTypeStructure})
+var sLayoutSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLayoutSummary, Members: &mLayoutSummary, Type: smithy.ShapeTypeStructure})
+var s_LayoutSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LayoutSummaryList, Members: &m_LayoutSummaryList, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MutableTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MutableTagKey, Type: smithy.ShapeTypeString})
+var s_MutableTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MutableTags, Members: &m_MutableTags, Type: smithy.ShapeTypeMap})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sOperandOne = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperandOne, Members: &mOperandOne, Type: smithy.ShapeTypeUnion})
+var sOperandTwo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperandTwo, Members: &mOperandTwo, Type: smithy.ShapeTypeUnion})
+var s_Order = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Order, Type: smithy.ShapeTypeString})
+var sParentChildFieldOptionsMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentChildFieldOptionsMapping, Members: &mParentChildFieldOptionsMapping, Type: smithy.ShapeTypeStructure})
+var s_ParentChildFieldOptionsMappingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentChildFieldOptionsMappingList, Members: &m_ParentChildFieldOptionsMappingList, Type: smithy.ShapeTypeList})
+var s_ParentChildFieldOptionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentChildFieldOptionValue, Type: smithy.ShapeTypeString})
+var s_ParentChildFieldOptionValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentChildFieldOptionValueList, Members: &m_ParentChildFieldOptionValueList, Type: smithy.ShapeTypeList})
+var s_RelatedItemArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedItemArn, Type: smithy.ShapeTypeString})
+var sRelatedItemContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedItemContent, Members: &mRelatedItemContent, Type: smithy.ShapeTypeUnion})
+var sRelatedItemEventIncludedData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedItemEventIncludedData, Members: &mRelatedItemEventIncludedData, Type: smithy.ShapeTypeStructure})
+var s_RelatedItemFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedItemFilterList, Members: &m_RelatedItemFilterList, Type: smithy.ShapeTypeList})
+var s_RelatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedItemId, Type: smithy.ShapeTypeString})
+var sRelatedItemInputContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedItemInputContent, Members: &mRelatedItemInputContent, Type: smithy.ShapeTypeUnion})
+var s_RelatedItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelatedItemType, Type: smithy.ShapeTypeString})
+var sRelatedItemTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedItemTypeFilter, Members: &mRelatedItemTypeFilter, Type: smithy.ShapeTypeUnion})
+var sRelatedItemUpdateContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedItemUpdateContent, Members: &mRelatedItemUpdateContent, Type: smithy.ShapeTypeUnion})
+var sRequiredCaseRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequiredCaseRule, Members: &mRequiredCaseRule, Type: smithy.ShapeTypeStructure})
+var sRequiredField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequiredField, Members: &mRequiredField, Type: smithy.ShapeTypeStructure})
+var s_RequiredFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequiredFieldList, Members: &m_RequiredFieldList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t50, Type: smithy.ShapeTypeStructure})
+var s_RuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleType, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAllRelatedItemsResponseItem, Members: &mSearchAllRelatedItemsResponseItem, Type: smithy.ShapeTypeStructure})
+var s_SearchAllRelatedItemsResponseItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchAllRelatedItemsResponseItemList, Members: &m_SearchAllRelatedItemsResponseItemList, Type: smithy.ShapeTypeList})
+var sSearchAllRelatedItemsSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAllRelatedItemsSort, Members: &mSearchAllRelatedItemsSort, Type: smithy.ShapeTypeStructure})
+var s_SearchAllRelatedItemsSortList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchAllRelatedItemsSortList, Members: &m_SearchAllRelatedItemsSortList, Type: smithy.ShapeTypeList})
+var s_SearchAllRelatedItemsSortProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchAllRelatedItemsSortProperty, Type: smithy.ShapeTypeString})
+var sSearchCasesResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCasesResponseItem, Members: &mSearchCasesResponseItem, Type: smithy.ShapeTypeStructure})
+var s_SearchCasesResponseItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchCasesResponseItemList, Members: &m_SearchCasesResponseItemList, Type: smithy.ShapeTypeList})
+var sSearchRelatedItemsResponseItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRelatedItemsResponseItem, Members: &mSearchRelatedItemsResponseItem, Type: smithy.ShapeTypeStructure})
+var s_SearchRelatedItemsResponseItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchRelatedItemsResponseItemList, Members: &m_SearchRelatedItemsResponseItemList, Type: smithy.ShapeTypeList})
+var s_SearchTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchTagKey, Type: smithy.ShapeTypeString})
+var sSection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSection, Members: &mSection, Type: smithy.ShapeTypeUnion})
+var s_SectionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SectionsList, Members: &m_SectionsList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t51, Type: smithy.ShapeTypeStructure})
+var s_SlaCompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlaCompletionTime, Traits: &t44, Type: smithy.ShapeTypeTimestamp})
+var sSlaConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlaConfiguration, Members: &mSlaConfiguration, Type: smithy.ShapeTypeStructure})
+var sSlaContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlaContent, Members: &mSlaContent, Type: smithy.ShapeTypeStructure})
+var s_SlaFieldValueUnionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlaFieldValueUnionList, Members: &m_SlaFieldValueUnionList, Type: smithy.ShapeTypeList})
+var sSlaFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlaFilter, Members: &mSlaFilter, Type: smithy.ShapeTypeStructure})
+var sSlaInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlaInputConfiguration, Members: &mSlaInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sSlaInputContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlaInputContent, Members: &mSlaInputContent, Type: smithy.ShapeTypeUnion})
+var s_SlaName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlaName, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_SlaStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlaStatus, Type: smithy.ShapeTypeString})
+var s_SlaTargetTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlaTargetTime, Traits: &t44, Type: smithy.ShapeTypeTimestamp})
+var s_SlaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlaType, Type: smithy.ShapeTypeString})
+var sSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure})
+var s_SortList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortList, Members: &m_SortList, Type: smithy.ShapeTypeList})
+var sTagFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeUnion})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sTagPropagationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagPropagationConfiguration, Members: &mTagPropagationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_TagPropagationConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagPropagationConfigurationList, Members: &m_TagPropagationConfigurationList, Type: smithy.ShapeTypeList})
+var s_TagPropagationResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagPropagationResourceType, Type: smithy.ShapeTypeString})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagValue, Members: &mTagValue, Type: smithy.ShapeTypeStructure})
+var s_TagValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValueString, Type: smithy.ShapeTypeString})
+var s_TargetSlaMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetSlaMinutes, Type: smithy.ShapeTypeLong})
+var s_TemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var s_TemplateCaseRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateCaseRuleList, Members: &m_TemplateCaseRuleList, Type: smithy.ShapeTypeList})
+var s_TemplateDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateDescription, Type: smithy.ShapeTypeString})
+var s_TemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var s_TemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sTemplateRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateRule, Members: &mTemplateRule, Type: smithy.ShapeTypeStructure})
+var s_TemplateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStatus, Type: smithy.ShapeTypeString})
+var s_TemplateStatusFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateStatusFilters, Members: &m_TemplateStatusFilters, Type: smithy.ShapeTypeList})
+var sTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure})
+var s_TemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList})
+var sTextAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextAttributes, Members: &mTextAttributes, Type: smithy.ShapeTypeStructure})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t53, Type: smithy.ShapeTypeStructure})
+var s_TotalCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalCount, Type: smithy.ShapeTypeLong})
+var s_UserArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserArn, Type: smithy.ShapeTypeString})
+var sUserUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t54, Type: smithy.ShapeTypeStructure})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString})
+var s_ValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValuesList, Members: &m_ValuesList, Type: smithy.ShapeTypeList})
+var sBatchGetCaseRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCaseRuleRequest, Members: &mBatchGetCaseRuleRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetCaseRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetCaseRuleResponse, Members: &mBatchGetCaseRuleResponse, Type: smithy.ShapeTypeStructure})
+var sBatchGetFieldRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFieldRequest, Members: &mBatchGetFieldRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetFieldResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetFieldResponse, Members: &mBatchGetFieldResponse, Type: smithy.ShapeTypeStructure})
+var sBatchPutFieldOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutFieldOptionsRequest, Members: &mBatchPutFieldOptionsRequest, Type: smithy.ShapeTypeStructure})
+var sBatchPutFieldOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutFieldOptionsResponse, Members: &mBatchPutFieldOptionsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseRequest, Members: &mCreateCaseRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseResponse, Members: &mCreateCaseResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCaseRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseRuleRequest, Members: &mCreateCaseRuleRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCaseRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCaseRuleResponse, Members: &mCreateCaseRuleResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainRequest, Members: &mCreateDomainRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainResponse, Members: &mCreateDomainResponse, Type: smithy.ShapeTypeStructure})
+var sCreateFieldRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFieldRequest, Members: &mCreateFieldRequest, Type: smithy.ShapeTypeStructure})
+var sCreateFieldResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFieldResponse, Members: &mCreateFieldResponse, Type: smithy.ShapeTypeStructure})
+var sCreateLayoutRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLayoutRequest, Members: &mCreateLayoutRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLayoutResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLayoutResponse, Members: &mCreateLayoutResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRelatedItemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelatedItemRequest, Members: &mCreateRelatedItemRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRelatedItemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRelatedItemResponse, Members: &mCreateRelatedItemResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateRequest, Members: &mCreateTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateResponse, Members: &mCreateTemplateResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCaseRequest, Members: &mDeleteCaseRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCaseResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteCaseRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCaseRuleRequest, Members: &mDeleteCaseRuleRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCaseRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCaseRuleResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainRequest, Members: &mDeleteDomainRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFieldRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFieldRequest, Members: &mDeleteFieldRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteFieldResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFieldResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteLayoutRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLayoutRequest, Members: &mDeleteLayoutRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteLayoutResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLayoutResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteRelatedItemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelatedItemRequest, Members: &mDeleteRelatedItemRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRelatedItemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRelatedItemResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateRequest, Members: &mDeleteTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateResponse, Type: smithy.ShapeTypeStructure})
+var sGetCaseAuditEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseAuditEventsRequest, Members: &mGetCaseAuditEventsRequest, Type: smithy.ShapeTypeStructure})
+var sGetCaseAuditEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseAuditEventsResponse, Members: &mGetCaseAuditEventsResponse, Type: smithy.ShapeTypeStructure})
+var sGetCaseEventConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseEventConfigurationRequest, Members: &mGetCaseEventConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetCaseEventConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseEventConfigurationResponse, Members: &mGetCaseEventConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sGetCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseRequest, Members: &mGetCaseRequest, Type: smithy.ShapeTypeStructure})
+var sGetCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCaseResponse, Members: &mGetCaseResponse, Type: smithy.ShapeTypeStructure})
+var sGetDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainRequest, Members: &mGetDomainRequest, Type: smithy.ShapeTypeStructure})
+var sGetDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainResponse, Members: &mGetDomainResponse, Type: smithy.ShapeTypeStructure})
+var sGetLayoutRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLayoutRequest, Members: &mGetLayoutRequest, Type: smithy.ShapeTypeStructure})
+var sGetLayoutResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLayoutResponse, Members: &mGetLayoutResponse, Type: smithy.ShapeTypeStructure})
+var sGetTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateRequest, Members: &mGetTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sGetTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateResponse, Members: &mGetTemplateResponse, Type: smithy.ShapeTypeStructure})
+var sListCaseRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCaseRulesRequest, Members: &mListCaseRulesRequest, Type: smithy.ShapeTypeStructure})
+var sListCaseRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCaseRulesResponse, Members: &mListCaseRulesResponse, Type: smithy.ShapeTypeStructure})
+var sListCasesForContactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCasesForContactRequest, Members: &mListCasesForContactRequest, Type: smithy.ShapeTypeStructure})
+var sListCasesForContactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCasesForContactResponse, Members: &mListCasesForContactResponse, Type: smithy.ShapeTypeStructure})
+var sListDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsRequest, Members: &mListDomainsRequest, Type: smithy.ShapeTypeStructure})
+var sListDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDomainsResponse, Members: &mListDomainsResponse, Type: smithy.ShapeTypeStructure})
+var sListFieldOptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFieldOptionsRequest, Members: &mListFieldOptionsRequest, Type: smithy.ShapeTypeStructure})
+var sListFieldOptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFieldOptionsResponse, Members: &mListFieldOptionsResponse, Type: smithy.ShapeTypeStructure})
+var sListFieldsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFieldsRequest, Members: &mListFieldsRequest, Type: smithy.ShapeTypeStructure})
+var sListFieldsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFieldsResponse, Members: &mListFieldsResponse, Type: smithy.ShapeTypeStructure})
+var sListLayoutsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLayoutsRequest, Members: &mListLayoutsRequest, Type: smithy.ShapeTypeStructure})
+var sListLayoutsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLayoutsResponse, Members: &mListLayoutsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListTemplatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplatesRequest, Members: &mListTemplatesRequest, Type: smithy.ShapeTypeStructure})
+var sListTemplatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTemplatesResponse, Members: &mListTemplatesResponse, Type: smithy.ShapeTypeStructure})
+var sPutCaseEventConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCaseEventConfigurationRequest, Members: &mPutCaseEventConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sPutCaseEventConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCaseEventConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sSearchAllRelatedItemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAllRelatedItemsRequest, Members: &mSearchAllRelatedItemsRequest, Type: smithy.ShapeTypeStructure})
+var sSearchAllRelatedItemsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAllRelatedItemsResponse, Members: &mSearchAllRelatedItemsResponse, Type: smithy.ShapeTypeStructure})
+var sSearchCasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCasesRequest, Members: &mSearchCasesRequest, Type: smithy.ShapeTypeStructure})
+var sSearchCasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchCasesResponse, Members: &mSearchCasesResponse, Type: smithy.ShapeTypeStructure})
+var sSearchRelatedItemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRelatedItemsRequest, Members: &mSearchRelatedItemsRequest, Type: smithy.ShapeTypeStructure})
+var sSearchRelatedItemsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchRelatedItemsResponse, Members: &mSearchRelatedItemsResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCaseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCaseRequest, Members: &mUpdateCaseRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCaseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCaseResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCaseRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCaseRuleRequest, Members: &mUpdateCaseRuleRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCaseRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCaseRuleResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateFieldRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFieldRequest, Members: &mUpdateFieldRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateFieldResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFieldResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateLayoutRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLayoutRequest, Members: &mUpdateLayoutRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateLayoutResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLayoutResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRelatedItemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelatedItemRequest, Members: &mUpdateRelatedItemRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRelatedItemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRelatedItemResponse, Members: &mUpdateRelatedItemResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateRequest, Members: &mUpdateTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAuditEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_AuditEventId, Type: smithy.ShapeTypeString})
+var sAuditEvent_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_AuditEventType, Type: smithy.ShapeTypeString})
+var sAuditEvent_relatedItemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemType", ID: &i_RelatedItemType, Type: smithy.ShapeTypeString})
+var sAuditEvent_performedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedTime", ID: &i_AuditEventDateTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sAuditEvent_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_AuditEventFieldList, Members: &m_AuditEventFieldList, Type: smithy.ShapeTypeList})
+var sAuditEvent_performedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedBy", ID: &iAuditEventPerformedBy, Members: &mAuditEventPerformedBy, Type: smithy.ShapeTypeStructure})
+var sAuditEventField_eventFieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventFieldId", ID: &i_AuditEventFieldId, Type: smithy.ShapeTypeString})
+var sAuditEventField_oldValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "oldValue", ID: &iAuditEventFieldValueUnion, Members: &mAuditEventFieldValueUnion, Type: smithy.ShapeTypeUnion})
+var sAuditEventField_newValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newValue", ID: &iAuditEventFieldValueUnion, Members: &mAuditEventFieldValueUnion, Type: smithy.ShapeTypeUnion})
+var s_AuditEventFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuditEventField, Members: &mAuditEventField, Type: smithy.ShapeTypeStructure})
+var sAuditEventFieldValueUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString})
+var sAuditEventFieldValueUnion_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sAuditEventFieldValueUnion_booleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sAuditEventFieldValueUnion_emptyValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyValue", ID: &iEmptyFieldValue, Type: smithy.ShapeTypeStructure})
+var sAuditEventFieldValueUnion_userArnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userArnValue", ID: &pString, Type: smithy.ShapeTypeString})
+var sAuditEventPerformedBy_user = smithy.NewStaticSchema(smithy.StaticSchema{Member: "user", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sAuditEventPerformedBy_iamPrincipalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iamPrincipalArn", ID: &i_IamPrincipalArn, Type: smithy.ShapeTypeString})
+var s_AuditEventsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuditEvent, Members: &mAuditEvent, Type: smithy.ShapeTypeStructure})
+var sBasicLayout_topPanel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topPanel", ID: &iLayoutSections, Members: &mLayoutSections, Type: smithy.ShapeTypeStructure})
+var sBasicLayout_moreInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "moreInfo", ID: &iLayoutSections, Members: &mLayoutSections, Type: smithy.ShapeTypeStructure})
+var s_BatchGetCaseRuleErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseRuleError, Members: &mCaseRuleError, Type: smithy.ShapeTypeStructure})
+var s_BatchGetCaseRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetCaseRuleResponse, Members: &mGetCaseRuleResponse, Type: smithy.ShapeTypeStructure})
+var s_BatchGetCaseRuleUnprocessedList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var s_BatchGetFieldErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldError, Members: &mFieldError, Type: smithy.ShapeTypeStructure})
+var s_BatchGetFieldIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldIdentifier, Members: &mFieldIdentifier, Type: smithy.ShapeTypeStructure})
+var s_BatchGetFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetFieldResponse, Members: &mGetFieldResponse, Type: smithy.ShapeTypeStructure})
+var sBooleanCondition_equalTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "equalTo", ID: &iBooleanOperands, Members: &mBooleanOperands, Type: smithy.ShapeTypeStructure})
+var sBooleanCondition_notEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "notEqualTo", ID: &iBooleanOperands, Members: &mBooleanOperands, Type: smithy.ShapeTypeStructure})
+var sBooleanCondition_andAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "andAll", ID: &iCompoundCondition, Members: &mCompoundCondition, Type: smithy.ShapeTypeStructure})
+var sBooleanCondition_orAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orAll", ID: &iCompoundCondition, Members: &mCompoundCondition, Type: smithy.ShapeTypeStructure})
+var s_BooleanConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBooleanCondition, Members: &mBooleanCondition, Type: smithy.ShapeTypeUnion})
+var sBooleanOperands_operandOne = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operandOne", ID: &iOperandOne, Members: &mOperandOne, Type: smithy.ShapeTypeUnion})
+var sBooleanOperands_operandTwo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operandTwo", ID: &iOperandTwo, Members: &mOperandTwo, Type: smithy.ShapeTypeUnion})
+var sBooleanOperands_result = smithy.NewStaticSchema(smithy.StaticSchema{Member: "result", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCaseEventIncludedData_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldIdentifierList, Members: &m_FieldIdentifierList, Type: smithy.ShapeTypeList})
+var sCaseFilter_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &iFieldFilter, Members: &mFieldFilter, Type: smithy.ShapeTypeUnion})
+var sCaseFilter_not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "not", ID: &iCaseFilter, Type: smithy.ShapeTypeUnion})
+var sCaseFilter_tag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tag", ID: &iTagFilter, Members: &mTagFilter, Type: smithy.ShapeTypeUnion})
+var sCaseFilter_andAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "andAll", ID: &i_CaseFilterList, Members: &m_CaseFilterList, Type: smithy.ShapeTypeList})
+var sCaseFilter_orAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orAll", ID: &i_CaseFilterList, Members: &m_CaseFilterList, Type: smithy.ShapeTypeList})
+var s_CaseFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseFilter, Type: smithy.ShapeTypeUnion})
+var sCaseRuleDetails_required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "required", ID: &iRequiredCaseRule, Members: &mRequiredCaseRule, Type: smithy.ShapeTypeStructure})
+var sCaseRuleDetails_fieldOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldOptions", ID: &iFieldOptionsCaseRule, Members: &mFieldOptionsCaseRule, Type: smithy.ShapeTypeStructure})
+var sCaseRuleDetails_hidden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hidden", ID: &iHiddenCaseRule, Members: &mHiddenCaseRule, Type: smithy.ShapeTypeStructure})
+var sCaseRuleError_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var sCaseRuleError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sCaseRuleError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCaseRuleIdentifier_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var s_CaseRuleIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseRuleIdentifier, Members: &mCaseRuleIdentifier, Type: smithy.ShapeTypeStructure})
+var sCaseRuleSummary_caseRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleId", ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var sCaseRuleSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CaseRuleName, Type: smithy.ShapeTypeString})
+var sCaseRuleSummary_caseRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleArn", ID: &i_CaseRuleArn, Type: smithy.ShapeTypeString})
+var sCaseRuleSummary_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &i_RuleType, Type: smithy.ShapeTypeString})
+var sCaseRuleSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_CaseRuleDescription, Type: smithy.ShapeTypeString})
+var s_CaseRuleSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseRuleSummary, Members: &mCaseRuleSummary, Type: smithy.ShapeTypeStructure})
+var sCaseSummary_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var sCaseSummary_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var s_CaseSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseSummary, Members: &mCaseSummary, Type: smithy.ShapeTypeStructure})
+var s_ChannelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Channel, Type: smithy.ShapeTypeString})
+var sCommentContent_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_CommentBody, Type: smithy.ShapeTypeString})
+var sCommentContent_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_CommentBodyTextType, Type: smithy.ShapeTypeString})
+var sCommentUpdateContent_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_CommentBody, Type: smithy.ShapeTypeString})
+var sCommentUpdateContent_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_CommentBodyTextType, Type: smithy.ShapeTypeString})
+var sCompoundCondition_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_BooleanConditionList, Type: smithy.ShapeTypeList})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConnectCaseContent_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var sConnectCaseFilter_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var sConnectCaseInputContent_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var sContact_contactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactArn", ID: &i_ContactArn, Type: smithy.ShapeTypeString})
+var sContactContent_contactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactArn", ID: &i_ContactArn, Type: smithy.ShapeTypeString})
+var sContactContent_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &i_Channel, Type: smithy.ShapeTypeString})
+var sContactContent_connectedToSystemTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectedToSystemTime", ID: &i_ConnectedToSystemTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sContactFilter_channel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "channel", ID: &i_ChannelList, Members: &m_ChannelList, Type: smithy.ShapeTypeList})
+var sContactFilter_contactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactArn", ID: &i_ContactArn, Type: smithy.ShapeTypeString})
+var sCustomContent_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sCustomFieldsFilter_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &iFieldFilter, Members: &mFieldFilter, Type: smithy.ShapeTypeUnion})
+var sCustomFieldsFilter_not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "not", ID: &iCustomFieldsFilter, Type: smithy.ShapeTypeUnion})
+var sCustomFieldsFilter_andAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "andAll", ID: &i_CustomFieldsFilterList, Members: &m_CustomFieldsFilterList, Type: smithy.ShapeTypeList})
+var sCustomFieldsFilter_orAll = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orAll", ID: &i_CustomFieldsFilterList, Members: &m_CustomFieldsFilterList, Type: smithy.ShapeTypeList})
+var s_CustomFieldsFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomFieldsFilter, Type: smithy.ShapeTypeUnion})
+var sCustomFilter_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &iCustomFieldsFilter, Members: &mCustomFieldsFilter, Type: smithy.ShapeTypeUnion})
+var sCustomInputContent_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sCustomUpdateContent_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sDomainSummary_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString})
+var sDomainSummary_domainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainArn", ID: &i_DomainArn, Type: smithy.ShapeTypeString})
+var sDomainSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_DomainSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainSummary, Members: &mDomainSummary, Type: smithy.ShapeTypeStructure})
+var sEventBridgeConfiguration_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEventBridgeConfiguration_includedData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includedData", ID: &iEventIncludedData, Members: &mEventIncludedData, Type: smithy.ShapeTypeStructure})
+var sEventIncludedData_caseData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseData", ID: &iCaseEventIncludedData, Members: &mCaseEventIncludedData, Type: smithy.ShapeTypeStructure})
+var sEventIncludedData_relatedItemData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemData", ID: &iRelatedItemEventIncludedData, Members: &mRelatedItemEventIncludedData, Type: smithy.ShapeTypeStructure})
+var sFieldAttributes_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &iTextAttributes, Members: &mTextAttributes, Type: smithy.ShapeTypeStructure})
+var sFieldError_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sFieldError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldFilter_equalTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "equalTo", ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldFilter_contains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contains", ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldFilter_greaterThan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greaterThan", ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldFilter_greaterThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "greaterThanOrEqualTo", ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldFilter_lessThan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lessThan", ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldFilter_lessThanOrEqualTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lessThanOrEqualTo", ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldGroup_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldGroup_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var sFieldIdentifier_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var s_FieldIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldIdentifier, Members: &mFieldIdentifier, Type: smithy.ShapeTypeStructure})
+var sFieldItem_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var s_FieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldItem, Members: &mFieldItem, Type: smithy.ShapeTypeStructure})
+var sFieldOption_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldOptionName, Type: smithy.ShapeTypeString})
+var sFieldOption_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FieldOptionValue, Type: smithy.ShapeTypeString})
+var sFieldOption_active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "active", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sFieldOptionError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldOptionError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldOptionError_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FieldOptionValue, Type: smithy.ShapeTypeString})
+var s_FieldOptionErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldOptionError, Members: &mFieldOptionError, Type: smithy.ShapeTypeStructure})
+var sFieldOptionsCaseRule_parentFieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentFieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sFieldOptionsCaseRule_childFieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childFieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sFieldOptionsCaseRule_parentChildFieldOptionsMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentChildFieldOptionsMappings", ID: &i_ParentChildFieldOptionsMappingList, Members: &m_ParentChildFieldOptionsMappingList, Type: smithy.ShapeTypeList})
+var s_FieldOptionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldOption, Members: &mFieldOption, Type: smithy.ShapeTypeStructure})
+var sFieldSummary_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sFieldSummary_fieldArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldArn", ID: &i_FieldArn, Type: smithy.ShapeTypeString})
+var sFieldSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sFieldSummary_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_FieldType, Type: smithy.ShapeTypeString})
+var sFieldSummary_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_FieldNamespace, Type: smithy.ShapeTypeString})
+var sFieldSummary_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &iFieldAttributes, Members: &mFieldAttributes, Type: smithy.ShapeTypeUnion})
+var s_FieldSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldSummary, Members: &mFieldSummary, Type: smithy.ShapeTypeStructure})
+var sFieldValue_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sFieldValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFieldValueUnion, Members: &mFieldValueUnion, Type: smithy.ShapeTypeUnion})
+var s_FieldValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldValue, Members: &mFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldValueUnion_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString})
+var sFieldValueUnion_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sFieldValueUnion_booleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sFieldValueUnion_emptyValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyValue", ID: &iEmptyFieldValue, Type: smithy.ShapeTypeStructure})
+var sFieldValueUnion_userArnValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userArnValue", ID: &pString, Type: smithy.ShapeTypeString})
+var sFileContent_fileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileArn", ID: &i_FileArn, Type: smithy.ShapeTypeString})
+var sFileFilter_fileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileArn", ID: &i_FileArn, Type: smithy.ShapeTypeString})
+var sGetCaseRuleResponse_caseRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleId", ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var sGetCaseRuleResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CaseRuleName, Type: smithy.ShapeTypeString})
+var sGetCaseRuleResponse_caseRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleArn", ID: &i_CaseRuleArn, Type: smithy.ShapeTypeString})
+var sGetCaseRuleResponse_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iCaseRuleDetails, Members: &mCaseRuleDetails, Type: smithy.ShapeTypeUnion})
+var sGetCaseRuleResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_CaseRuleDescription, Type: smithy.ShapeTypeString})
+var sGetCaseRuleResponse_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &i_Deleted, Type: smithy.ShapeTypeBoolean})
+var sGetCaseRuleResponse_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_CreatedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetCaseRuleResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_LastModifiedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetCaseRuleResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetFieldResponse_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sGetFieldResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sGetFieldResponse_fieldArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldArn", ID: &i_FieldArn, Type: smithy.ShapeTypeString})
+var sGetFieldResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FieldDescription, Type: smithy.ShapeTypeString})
+var sGetFieldResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_FieldType, Type: smithy.ShapeTypeString})
+var sGetFieldResponse_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_FieldNamespace, Type: smithy.ShapeTypeString})
+var sGetFieldResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetFieldResponse_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &i_Deleted, Type: smithy.ShapeTypeBoolean})
+var sGetFieldResponse_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_CreatedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetFieldResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_LastModifiedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetFieldResponse_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &iFieldAttributes, Members: &mFieldAttributes, Type: smithy.ShapeTypeUnion})
+var sHiddenCaseRule_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sHiddenCaseRule_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_BooleanConditionList, Members: &m_BooleanConditionList, Type: smithy.ShapeTypeList})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t49, Type: smithy.ShapeTypeInteger})
+var sLayoutConfiguration_defaultLayout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultLayout", ID: &i_LayoutId, Type: smithy.ShapeTypeString})
+var sLayoutContent_basic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "basic", ID: &iBasicLayout, Members: &mBasicLayout, Type: smithy.ShapeTypeStructure})
+var sLayoutSections_sections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sections", ID: &i_SectionsList, Members: &m_SectionsList, Type: smithy.ShapeTypeList})
+var sLayoutSummary_layoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutId", ID: &i_LayoutId, Type: smithy.ShapeTypeString})
+var sLayoutSummary_layoutArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutArn", ID: &i_LayoutArn, Type: smithy.ShapeTypeString})
+var sLayoutSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LayoutName, Type: smithy.ShapeTypeString})
+var s_LayoutSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLayoutSummary, Members: &mLayoutSummary, Type: smithy.ShapeTypeStructure})
+var s_MutableTags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_MutableTagKey, Type: smithy.ShapeTypeString})
+var s_MutableTags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValueString, Type: smithy.ShapeTypeString})
+var sOperandOne_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sOperandTwo_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &pString, Type: smithy.ShapeTypeString})
+var sOperandTwo_booleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sOperandTwo_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sOperandTwo_emptyValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyValue", ID: &iEmptyOperandValue, Type: smithy.ShapeTypeStructure})
+var sParentChildFieldOptionsMapping_parentFieldOptionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentFieldOptionValue", ID: &i_ParentChildFieldOptionValue, Type: smithy.ShapeTypeString})
+var sParentChildFieldOptionsMapping_childFieldOptionValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childFieldOptionValues", ID: &i_ParentChildFieldOptionValueList, Members: &m_ParentChildFieldOptionValueList, Type: smithy.ShapeTypeList})
+var s_ParentChildFieldOptionsMappingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iParentChildFieldOptionsMapping, Members: &mParentChildFieldOptionsMapping, Type: smithy.ShapeTypeStructure})
+var s_ParentChildFieldOptionValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ParentChildFieldOptionValue, Type: smithy.ShapeTypeString})
+var sRelatedItemContent_contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contact", ID: &iContactContent, Members: &mContactContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemContent_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iCommentContent, Members: &mCommentContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemContent_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iFileContent, Members: &mFileContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemContent_sla = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sla", ID: &iSlaContent, Members: &mSlaContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemContent_connectCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectCase", ID: &iConnectCaseContent, Members: &mConnectCaseContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemContent_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomContent, Members: &mCustomContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemEventIncludedData_includeContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeContent", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var s_RelatedItemFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelatedItemTypeFilter, Members: &mRelatedItemTypeFilter, Type: smithy.ShapeTypeUnion})
+var sRelatedItemInputContent_contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contact", ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure})
+var sRelatedItemInputContent_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iCommentContent, Members: &mCommentContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemInputContent_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iFileContent, Members: &mFileContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemInputContent_sla = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sla", ID: &iSlaInputContent, Members: &mSlaInputContent, Type: smithy.ShapeTypeUnion})
+var sRelatedItemInputContent_connectCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectCase", ID: &iConnectCaseInputContent, Members: &mConnectCaseInputContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemInputContent_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomInputContent, Members: &mCustomInputContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemTypeFilter_contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contact", ID: &iContactFilter, Members: &mContactFilter, Type: smithy.ShapeTypeStructure})
+var sRelatedItemTypeFilter_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iCommentFilter, Type: smithy.ShapeTypeStructure})
+var sRelatedItemTypeFilter_file = smithy.NewStaticSchema(smithy.StaticSchema{Member: "file", ID: &iFileFilter, Members: &mFileFilter, Type: smithy.ShapeTypeStructure})
+var sRelatedItemTypeFilter_sla = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sla", ID: &iSlaFilter, Members: &mSlaFilter, Type: smithy.ShapeTypeStructure})
+var sRelatedItemTypeFilter_connectCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectCase", ID: &iConnectCaseFilter, Members: &mConnectCaseFilter, Type: smithy.ShapeTypeStructure})
+var sRelatedItemTypeFilter_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomFilter, Members: &mCustomFilter, Type: smithy.ShapeTypeStructure})
+var sRelatedItemUpdateContent_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iCommentUpdateContent, Members: &mCommentUpdateContent, Type: smithy.ShapeTypeStructure})
+var sRelatedItemUpdateContent_custom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "custom", ID: &iCustomUpdateContent, Members: &mCustomUpdateContent, Type: smithy.ShapeTypeStructure})
+var sRequiredCaseRule_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sRequiredCaseRule_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_BooleanConditionList, Members: &m_BooleanConditionList, Type: smithy.ShapeTypeList})
+var sRequiredField_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var s_RequiredFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRequiredField, Members: &mRequiredField, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsResponseItem_relatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemId", ID: &i_RelatedItemId, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsResponseItem_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsResponseItem_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_RelatedItemType, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsResponseItem_associationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationTime", ID: &i_AssociationTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sSearchAllRelatedItemsResponseItem_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iRelatedItemContent, Members: &mRelatedItemContent, Type: smithy.ShapeTypeUnion})
+var sSearchAllRelatedItemsResponseItem_performedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedBy", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sSearchAllRelatedItemsResponseItem_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var s_SearchAllRelatedItemsResponseItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchAllRelatedItemsResponseItem, Members: &mSearchAllRelatedItemsResponseItem, Type: smithy.ShapeTypeStructure})
+var sSearchAllRelatedItemsSort_sortProperty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortProperty", ID: &i_SearchAllRelatedItemsSortProperty, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &i_Order, Type: smithy.ShapeTypeString})
+var s_SearchAllRelatedItemsSortList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchAllRelatedItemsSort, Members: &mSearchAllRelatedItemsSort, Type: smithy.ShapeTypeStructure})
+var sSearchCasesResponseItem_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var sSearchCasesResponseItem_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var sSearchCasesResponseItem_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sSearchCasesResponseItem_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var s_SearchCasesResponseItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchCasesResponseItem, Members: &mSearchCasesResponseItem, Type: smithy.ShapeTypeStructure})
+var sSearchRelatedItemsResponseItem_relatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemId", ID: &i_RelatedItemId, Type: smithy.ShapeTypeString})
+var sSearchRelatedItemsResponseItem_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_RelatedItemType, Type: smithy.ShapeTypeString})
+var sSearchRelatedItemsResponseItem_associationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationTime", ID: &i_AssociationTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sSearchRelatedItemsResponseItem_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iRelatedItemContent, Members: &mRelatedItemContent, Type: smithy.ShapeTypeUnion})
+var sSearchRelatedItemsResponseItem_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sSearchRelatedItemsResponseItem_performedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedBy", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var s_SearchRelatedItemsResponseItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchRelatedItemsResponseItem, Members: &mSearchRelatedItemsResponseItem, Type: smithy.ShapeTypeStructure})
+var sSection_fieldGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldGroup", ID: &iFieldGroup, Members: &mFieldGroup, Type: smithy.ShapeTypeStructure})
+var s_SectionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSection, Members: &mSection, Type: smithy.ShapeTypeUnion})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sSlaConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlaName, Traits: &t52, Type: smithy.ShapeTypeString})
+var sSlaConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SlaType, Type: smithy.ShapeTypeString})
+var sSlaConfiguration_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_SlaStatus, Type: smithy.ShapeTypeString})
+var sSlaConfiguration_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sSlaConfiguration_targetFieldValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetFieldValues", ID: &i_SlaFieldValueUnionList, Members: &m_SlaFieldValueUnionList, Type: smithy.ShapeTypeList})
+var sSlaConfiguration_targetTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetTime", ID: &i_SlaTargetTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sSlaConfiguration_completionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completionTime", ID: &i_SlaCompletionTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sSlaContent_slaConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slaConfiguration", ID: &iSlaConfiguration, Members: &mSlaConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SlaFieldValueUnionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldValueUnion, Members: &mFieldValueUnion, Type: smithy.ShapeTypeUnion})
+var sSlaFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlaName, Traits: &t52, Type: smithy.ShapeTypeString})
+var sSlaFilter_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_SlaStatus, Type: smithy.ShapeTypeString})
+var sSlaInputConfiguration_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_SlaName, Traits: &t52, Type: smithy.ShapeTypeString})
+var sSlaInputConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SlaType, Type: smithy.ShapeTypeString})
+var sSlaInputConfiguration_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sSlaInputConfiguration_targetFieldValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetFieldValues", ID: &i_SlaFieldValueUnionList, Members: &m_SlaFieldValueUnionList, Type: smithy.ShapeTypeList})
+var sSlaInputConfiguration_targetSlaMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetSlaMinutes", ID: &i_TargetSlaMinutes, Type: smithy.ShapeTypeLong})
+var sSlaInputContent_slaInputConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slaInputConfiguration", ID: &iSlaInputConfiguration, Members: &mSlaInputConfiguration, Type: smithy.ShapeTypeStructure})
+var sSort_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sSort_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &i_Order, Type: smithy.ShapeTypeString})
+var s_SortList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure})
+var sTagFilter_equalTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "equalTo", ID: &iTagValue, Members: &mTagValue, Type: smithy.ShapeTypeStructure})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTagPropagationConfiguration_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_TagPropagationResourceType, Type: smithy.ShapeTypeString})
+var sTagPropagationConfiguration_tagMap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagMap", ID: &i_MutableTags, Members: &m_MutableTags, Type: smithy.ShapeTypeMap})
+var s_TagPropagationConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagPropagationConfiguration, Members: &mTagPropagationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagValue_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SearchTagKey, Type: smithy.ShapeTypeString})
+var sTagValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValueString, Type: smithy.ShapeTypeString})
+var s_TemplateCaseRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateRule, Members: &mTemplateRule, Type: smithy.ShapeTypeStructure})
+var sTemplateRule_caseRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleId", ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var sTemplateRule_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var s_TemplateStatusFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TemplateStatus, Type: smithy.ShapeTypeString})
+var sTemplateSummary_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var sTemplateSummary_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sTemplateSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sTemplateSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateStatus, Type: smithy.ShapeTypeString})
+var sTemplateSummary_tagPropagationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagPropagationConfigurations", ID: &i_TagPropagationConfigurationList, Members: &m_TagPropagationConfigurationList, Type: smithy.ShapeTypeList})
+var s_TemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure})
+var sTextAttributes_isMultiline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMultiline", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sUserUnion_userArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userArn", ID: &i_UserArn, Type: smithy.ShapeTypeString})
+var sUserUnion_customEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customEntity", ID: &i_CustomEntity, Traits: &t52, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Value, Type: smithy.ShapeTypeString})
+var sBatchGetCaseRuleRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sBatchGetCaseRuleRequest_caseRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRules", ID: &i_CaseRuleIdentifierList, Members: &m_CaseRuleIdentifierList, Type: smithy.ShapeTypeList})
+var sBatchGetCaseRuleResponse_caseRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRules", ID: &i_BatchGetCaseRuleList, Members: &m_BatchGetCaseRuleList, Type: smithy.ShapeTypeList})
+var sBatchGetCaseRuleResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetCaseRuleErrorList, Members: &m_BatchGetCaseRuleErrorList, Type: smithy.ShapeTypeList})
+var sBatchGetCaseRuleResponse_unprocessedCaseRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unprocessedCaseRules", ID: &i_BatchGetCaseRuleUnprocessedList, Members: &m_BatchGetCaseRuleUnprocessedList, Type: smithy.ShapeTypeList})
+var sBatchGetFieldRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sBatchGetFieldRequest_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_BatchGetFieldIdentifierList, Members: &m_BatchGetFieldIdentifierList, Type: smithy.ShapeTypeList})
+var sBatchGetFieldResponse_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_BatchGetFieldList, Members: &m_BatchGetFieldList, Type: smithy.ShapeTypeList})
+var sBatchGetFieldResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_BatchGetFieldErrorList, Members: &m_BatchGetFieldErrorList, Type: smithy.ShapeTypeList})
+var sBatchPutFieldOptionsRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sBatchPutFieldOptionsRequest_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sBatchPutFieldOptionsRequest_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_FieldOptionsList, Members: &m_FieldOptionsList, Type: smithy.ShapeTypeList})
+var sBatchPutFieldOptionsResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_FieldOptionErrorList, Members: &m_FieldOptionErrorList, Type: smithy.ShapeTypeList})
+var sCreateCaseRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sCreateCaseRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var sCreateCaseRequest_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sCreateCaseRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCaseRequest_performedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedBy", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sCreateCaseRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_MutableTags, Members: &m_MutableTags, Type: smithy.ShapeTypeMap})
+var sCreateCaseResponse_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Type: smithy.ShapeTypeString})
+var sCreateCaseResponse_caseArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseArn", ID: &i_CaseArn, Type: smithy.ShapeTypeString})
+var sCreateCaseRuleRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sCreateCaseRuleRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CaseRuleName, Type: smithy.ShapeTypeString})
+var sCreateCaseRuleRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_CaseRuleDescription, Type: smithy.ShapeTypeString})
+var sCreateCaseRuleRequest_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iCaseRuleDetails, Members: &mCaseRuleDetails, Type: smithy.ShapeTypeUnion})
+var sCreateCaseRuleResponse_caseRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleId", ID: &i_CaseRuleId, Type: smithy.ShapeTypeString})
+var sCreateCaseRuleResponse_caseRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleArn", ID: &i_CaseRuleArn, Type: smithy.ShapeTypeString})
+var sCreateDomainRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCreateDomainResponse_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString})
+var sCreateDomainResponse_domainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainArn", ID: &i_DomainArn, Type: smithy.ShapeTypeString})
+var sCreateDomainResponse_domainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainStatus", ID: &i_DomainStatus, Type: smithy.ShapeTypeString})
+var sCreateFieldRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sCreateFieldRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sCreateFieldRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_FieldType, Type: smithy.ShapeTypeString})
+var sCreateFieldRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FieldDescription, Type: smithy.ShapeTypeString})
+var sCreateFieldRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &iFieldAttributes, Members: &mFieldAttributes, Type: smithy.ShapeTypeUnion})
+var sCreateFieldResponse_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Type: smithy.ShapeTypeString})
+var sCreateFieldResponse_fieldArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldArn", ID: &i_FieldArn, Type: smithy.ShapeTypeString})
+var sCreateLayoutRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sCreateLayoutRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LayoutName, Type: smithy.ShapeTypeString})
+var sCreateLayoutRequest_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iLayoutContent, Members: &mLayoutContent, Type: smithy.ShapeTypeUnion})
+var sCreateLayoutResponse_layoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutId", ID: &i_LayoutId, Type: smithy.ShapeTypeString})
+var sCreateLayoutResponse_layoutArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutArn", ID: &i_LayoutArn, Type: smithy.ShapeTypeString})
+var sCreateRelatedItemRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sCreateRelatedItemRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sCreateRelatedItemRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_RelatedItemType, Type: smithy.ShapeTypeString})
+var sCreateRelatedItemRequest_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iRelatedItemInputContent, Members: &mRelatedItemInputContent, Type: smithy.ShapeTypeUnion})
+var sCreateRelatedItemRequest_performedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedBy", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sCreateRelatedItemResponse_relatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemId", ID: &i_RelatedItemId, Type: smithy.ShapeTypeString})
+var sCreateRelatedItemResponse_relatedItemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemArn", ID: &i_RelatedItemArn, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TemplateDescription, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_layoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutConfiguration", ID: &iLayoutConfiguration, Members: &mLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateRequest_requiredFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requiredFields", ID: &i_RequiredFieldList, Members: &m_RequiredFieldList, Type: smithy.ShapeTypeList})
+var sCreateTemplateRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateStatus, Type: smithy.ShapeTypeString})
+var sCreateTemplateRequest_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_TemplateCaseRuleList, Members: &m_TemplateCaseRuleList, Type: smithy.ShapeTypeList})
+var sCreateTemplateRequest_tagPropagationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagPropagationConfigurations", ID: &i_TagPropagationConfigurationList, Members: &m_TagPropagationConfigurationList, Type: smithy.ShapeTypeList})
+var sCreateTemplateResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var sCreateTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sDeleteCaseRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteCaseRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteCaseRuleRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteCaseRuleRequest_caseRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleId", ID: &i_CaseRuleId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteDomainRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteFieldRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteFieldRequest_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteLayoutRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteLayoutRequest_layoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutId", ID: &i_LayoutId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteRelatedItemRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteRelatedItemRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteRelatedItemRequest_relatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemId", ID: &i_RelatedItemId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteTemplateRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sDeleteTemplateRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetCaseAuditEventsRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetCaseAuditEventsRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetCaseAuditEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetCaseAuditEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetCaseAuditEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetCaseAuditEventsResponse_auditEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "auditEvents", ID: &i_AuditEventsList, Members: &m_AuditEventsList, Type: smithy.ShapeTypeList})
+var sGetCaseEventConfigurationRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetCaseEventConfigurationResponse_eventBridge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridge", ID: &iEventBridgeConfiguration, Members: &mEventBridgeConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetCaseRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetCaseRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetCaseRequest_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldIdentifierList, Members: &m_FieldIdentifierList, Type: smithy.ShapeTypeList})
+var sGetCaseRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetCaseResponse_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sGetCaseResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var sGetCaseResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetCaseResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetDomainRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetDomainResponse_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Type: smithy.ShapeTypeString})
+var sGetDomainResponse_domainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainArn", ID: &i_DomainArn, Type: smithy.ShapeTypeString})
+var sGetDomainResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sGetDomainResponse_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_CreatedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetDomainResponse_domainStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainStatus", ID: &i_DomainStatus, Type: smithy.ShapeTypeString})
+var sGetDomainResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetLayoutRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetLayoutRequest_layoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutId", ID: &i_LayoutId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetLayoutResponse_layoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutId", ID: &i_LayoutId, Type: smithy.ShapeTypeString})
+var sGetLayoutResponse_layoutArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutArn", ID: &i_LayoutArn, Type: smithy.ShapeTypeString})
+var sGetLayoutResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LayoutName, Type: smithy.ShapeTypeString})
+var sGetLayoutResponse_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iLayoutContent, Members: &mLayoutContent, Type: smithy.ShapeTypeUnion})
+var sGetLayoutResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetLayoutResponse_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &i_Deleted, Type: smithy.ShapeTypeBoolean})
+var sGetLayoutResponse_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_CreatedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetLayoutResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_LastModifiedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetTemplateRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetTemplateRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetTemplateResponse_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Type: smithy.ShapeTypeString})
+var sGetTemplateResponse_templateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateArn", ID: &i_TemplateArn, Type: smithy.ShapeTypeString})
+var sGetTemplateResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sGetTemplateResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TemplateDescription, Type: smithy.ShapeTypeString})
+var sGetTemplateResponse_layoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutConfiguration", ID: &iLayoutConfiguration, Members: &mLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetTemplateResponse_requiredFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requiredFields", ID: &i_RequiredFieldList, Members: &m_RequiredFieldList, Type: smithy.ShapeTypeList})
+var sGetTemplateResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetTemplateResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateStatus, Type: smithy.ShapeTypeString})
+var sGetTemplateResponse_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &i_Deleted, Type: smithy.ShapeTypeBoolean})
+var sGetTemplateResponse_createdTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTime", ID: &i_CreatedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetTemplateResponse_lastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTime", ID: &i_LastModifiedTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sGetTemplateResponse_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_TemplateCaseRuleList, Members: &m_TemplateCaseRuleList, Type: smithy.ShapeTypeList})
+var sGetTemplateResponse_tagPropagationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagPropagationConfigurations", ID: &i_TagPropagationConfigurationList, Members: &m_TagPropagationConfigurationList, Type: smithy.ShapeTypeList})
+var sListCaseRulesRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListCaseRulesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t56, Type: smithy.ShapeTypeInteger})
+var sListCaseRulesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListCaseRulesResponse_caseRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRules", ID: &i_CaseRuleSummaryList, Members: &m_CaseRuleSummaryList, Type: smithy.ShapeTypeList})
+var sListCaseRulesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCasesForContactRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListCasesForContactRequest_contactArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contactArn", ID: &i_ContactArn, Type: smithy.ShapeTypeString})
+var sListCasesForContactRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListCasesForContactRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCasesForContactResponse_cases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cases", ID: &i_CaseSummaryList, Members: &m_CaseSummaryList, Type: smithy.ShapeTypeList})
+var sListCasesForContactResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDomainsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t56, Type: smithy.ShapeTypeInteger})
+var sListDomainsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListDomainsResponse_domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domains", ID: &i_DomainSummaryList, Members: &m_DomainSummaryList, Type: smithy.ShapeTypeList})
+var sListDomainsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListFieldOptionsRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListFieldOptionsRequest_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListFieldOptionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t56, Type: smithy.ShapeTypeInteger})
+var sListFieldOptionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListFieldOptionsRequest_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_ValuesList, Members: &m_ValuesList, Traits: &t58, Type: smithy.ShapeTypeList})
+var sListFieldOptionsResponse_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_FieldOptionsList, Members: &m_FieldOptionsList, Type: smithy.ShapeTypeList})
+var sListFieldOptionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListFieldsRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListFieldsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t56, Type: smithy.ShapeTypeInteger})
+var sListFieldsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListFieldsResponse_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldSummaryList, Members: &m_FieldSummaryList, Type: smithy.ShapeTypeList})
+var sListFieldsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLayoutsRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListLayoutsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t56, Type: smithy.ShapeTypeInteger})
+var sListLayoutsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListLayoutsResponse_layouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layouts", ID: &i_LayoutSummaryList, Members: &m_LayoutSummaryList, Type: smithy.ShapeTypeList})
+var sListLayoutsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sListTemplatesRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListTemplatesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t56, Type: smithy.ShapeTypeInteger})
+var sListTemplatesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListTemplatesRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateStatusFilters, Members: &m_TemplateStatusFilters, Traits: &t59, Type: smithy.ShapeTypeList})
+var sListTemplatesResponse_templates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templates", ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList})
+var sListTemplatesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPutCaseEventConfigurationRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sPutCaseEventConfigurationRequest_eventBridge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventBridge", ID: &iEventBridgeConfiguration, Members: &mEventBridgeConfiguration, Type: smithy.ShapeTypeStructure})
+var sSearchAllRelatedItemsRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSearchAllRelatedItemsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_RelatedItemFilterList, Members: &m_RelatedItemFilterList, Type: smithy.ShapeTypeList})
+var sSearchAllRelatedItemsRequest_sorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sorts", ID: &i_SearchAllRelatedItemsSortList, Members: &m_SearchAllRelatedItemsSortList, Type: smithy.ShapeTypeList})
+var sSearchAllRelatedItemsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sSearchAllRelatedItemsResponse_relatedItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItems", ID: &i_SearchAllRelatedItemsResponseItemList, Members: &m_SearchAllRelatedItemsResponseItemList, Type: smithy.ShapeTypeList})
+var sSearchCasesRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sSearchCasesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSearchCasesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sSearchCasesRequest_searchTerm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "searchTerm", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchCasesRequest_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iCaseFilter, Members: &mCaseFilter, Type: smithy.ShapeTypeUnion})
+var sSearchCasesRequest_sorts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sorts", ID: &i_SortList, Members: &m_SortList, Type: smithy.ShapeTypeList})
+var sSearchCasesRequest_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldIdentifierList, Members: &m_FieldIdentifierList, Type: smithy.ShapeTypeList})
+var sSearchCasesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sSearchCasesResponse_cases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cases", ID: &i_SearchCasesResponseItemList, Members: &m_SearchCasesResponseItemList, Type: smithy.ShapeTypeList})
+var sSearchCasesResponse_totalCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalCount", ID: &i_TotalCount, Type: smithy.ShapeTypeLong})
+var sSearchRelatedItemsRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sSearchRelatedItemsRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sSearchRelatedItemsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSearchRelatedItemsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sSearchRelatedItemsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_RelatedItemFilterList, Members: &m_RelatedItemFilterList, Type: smithy.ShapeTypeList})
+var sSearchRelatedItemsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sSearchRelatedItemsResponse_relatedItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItems", ID: &i_SearchRelatedItemsResponseItemList, Members: &m_SearchRelatedItemsResponseItemList, Type: smithy.ShapeTypeList})
+var sTagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t55, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t60, Type: smithy.ShapeTypeList})
+var sUpdateCaseRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateCaseRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateCaseRequest_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_FieldValueList, Members: &m_FieldValueList, Type: smithy.ShapeTypeList})
+var sUpdateCaseRequest_performedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedBy", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sUpdateCaseRuleRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateCaseRuleRequest_caseRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseRuleId", ID: &i_CaseRuleId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateCaseRuleRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_CaseRuleName, Type: smithy.ShapeTypeString})
+var sUpdateCaseRuleRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_CaseRuleDescription, Type: smithy.ShapeTypeString})
+var sUpdateCaseRuleRequest_rule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rule", ID: &iCaseRuleDetails, Members: &mCaseRuleDetails, Type: smithy.ShapeTypeUnion})
+var sUpdateFieldRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateFieldRequest_fieldId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldId", ID: &i_FieldId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateFieldRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sUpdateFieldRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_FieldDescription, Type: smithy.ShapeTypeString})
+var sUpdateFieldRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &iFieldAttributes, Members: &mFieldAttributes, Type: smithy.ShapeTypeUnion})
+var sUpdateLayoutRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateLayoutRequest_layoutId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutId", ID: &i_LayoutId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateLayoutRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_LayoutName, Type: smithy.ShapeTypeString})
+var sUpdateLayoutRequest_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iLayoutContent, Members: &mLayoutContent, Type: smithy.ShapeTypeUnion})
+var sUpdateRelatedItemRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateRelatedItemRequest_caseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "caseId", ID: &i_CaseId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateRelatedItemRequest_relatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemId", ID: &i_RelatedItemId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateRelatedItemRequest_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iRelatedItemUpdateContent, Members: &mRelatedItemUpdateContent, Type: smithy.ShapeTypeUnion})
+var sUpdateRelatedItemRequest_performedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "performedBy", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sUpdateRelatedItemResponse_relatedItemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemId", ID: &i_RelatedItemId, Type: smithy.ShapeTypeString})
+var sUpdateRelatedItemResponse_relatedItemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relatedItemArn", ID: &i_RelatedItemArn, Type: smithy.ShapeTypeString})
+var sUpdateRelatedItemResponse_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_RelatedItemType, Type: smithy.ShapeTypeString})
+var sUpdateRelatedItemResponse_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &iRelatedItemContent, Members: &mRelatedItemContent, Type: smithy.ShapeTypeUnion})
+var sUpdateRelatedItemResponse_associationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationTime", ID: &i_AssociationTime, Traits: &t45, Type: smithy.ShapeTypeTimestamp})
+var sUpdateRelatedItemResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sUpdateRelatedItemResponse_lastUpdatedUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedUser", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sUpdateRelatedItemResponse_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &iUserUnion, Members: &mUserUnion, Type: smithy.ShapeTypeUnion})
+var sUpdateTemplateRequest_domainId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "domainId", ID: &i_DomainId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateTemplateRequest_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_TemplateId, Traits: &t55, Type: smithy.ShapeTypeString})
+var sUpdateTemplateRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TemplateName, Type: smithy.ShapeTypeString})
+var sUpdateTemplateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TemplateDescription, Type: smithy.ShapeTypeString})
+var sUpdateTemplateRequest_layoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "layoutConfiguration", ID: &iLayoutConfiguration, Members: &mLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateRequest_requiredFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requiredFields", ID: &i_RequiredFieldList, Members: &m_RequiredFieldList, Type: smithy.ShapeTypeList})
+var sUpdateTemplateRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateStatus, Type: smithy.ShapeTypeString})
+var sUpdateTemplateRequest_rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rules", ID: &i_TemplateCaseRuleList, Members: &m_TemplateCaseRuleList, Type: smithy.ShapeTypeList})
+var sUpdateTemplateRequest_tagPropagationConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagPropagationConfigurations", ID: &i_TagPropagationConfigurationList, Members: &m_TagPropagationConfigurationList, Type: smithy.ShapeTypeList})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	AuditEventFieldValueUnion_stringValue = AuditEventFieldValueUnion.AddMember("stringValue", smithyprelude.String)
-
-	AuditEventFieldValueUnion_doubleValue = AuditEventFieldValueUnion.AddMember("doubleValue", smithyprelude.Double)
-
-	AuditEventFieldValueUnion_booleanValue = AuditEventFieldValueUnion.AddMember("booleanValue", smithyprelude.Boolean)
-
-	AuditEventFieldValueUnion_emptyValue = AuditEventFieldValueUnion.AddMember("emptyValue", EmptyFieldValue)
-
-	AuditEventFieldValueUnion_userArnValue = AuditEventFieldValueUnion.AddMember("userArnValue", smithyprelude.String)
-
-	AuditEventField_eventFieldId = AuditEventField.AddMember("eventFieldId", _AuditEventFieldId)
-
-	AuditEventField_oldValue = AuditEventField.AddMember("oldValue", AuditEventFieldValueUnion)
-
-	AuditEventField_newValue = AuditEventField.AddMember("newValue", AuditEventFieldValueUnion)
-
-	_AuditEventFieldList_member = _AuditEventFieldList.AddMember("member", AuditEventField)
-
-	UserUnion_userArn = UserUnion.AddMember("userArn", _UserArn)
-
-	UserUnion_customEntity = UserUnion.AddMember("customEntity", _CustomEntity)
-
-	AuditEventPerformedBy_user = AuditEventPerformedBy.AddMember("user", UserUnion)
-
-	AuditEventPerformedBy_iamPrincipalArn = AuditEventPerformedBy.AddMember("iamPrincipalArn", _IamPrincipalArn)
-
-	AuditEvent_eventId = AuditEvent.AddMember("eventId", _AuditEventId)
-
-	AuditEvent_type = AuditEvent.AddMember("type", _AuditEventType)
-
-	AuditEvent_relatedItemType = AuditEvent.AddMember("relatedItemType", _RelatedItemType)
-
-	AuditEvent_performedTime = AuditEvent.AddMember("performedTime", _AuditEventDateTime)
-
-	AuditEvent_fields = AuditEvent.AddMember("fields", _AuditEventFieldList)
-
-	AuditEvent_performedBy = AuditEvent.AddMember("performedBy", AuditEventPerformedBy)
-
-	_AuditEventsList_member = _AuditEventsList.AddMember("member", AuditEvent)
-
-	FieldItem_id = FieldItem.AddMember("id", _FieldId)
-
-	_FieldList_member = _FieldList.AddMember("member", FieldItem)
-
-	FieldGroup_name = FieldGroup.AddMember("name", smithyprelude.String)
-
-	FieldGroup_fields = FieldGroup.AddMember("fields", _FieldList)
-
-	Section_fieldGroup = Section.AddMember("fieldGroup", FieldGroup)
-
-	_SectionsList_member = _SectionsList.AddMember("member", Section)
-
-	LayoutSections_sections = LayoutSections.AddMember("sections", _SectionsList)
-
-	BasicLayout_topPanel = BasicLayout.AddMember("topPanel", LayoutSections)
-
-	BasicLayout_moreInfo = BasicLayout.AddMember("moreInfo", LayoutSections)
-
-	CaseRuleError_id = CaseRuleError.AddMember("id", _CaseRuleId)
-
-	CaseRuleError_errorCode = CaseRuleError.AddMember("errorCode", smithyprelude.String)
-
-	CaseRuleError_message = CaseRuleError.AddMember("message", smithyprelude.String)
-
-	_BatchGetCaseRuleErrorList_member = _BatchGetCaseRuleErrorList.AddMember("member", CaseRuleError)
-
-	OperandOne_fieldId = OperandOne.AddMember("fieldId", _FieldId)
-
-	OperandTwo_stringValue = OperandTwo.AddMember("stringValue", smithyprelude.String)
-
-	OperandTwo_booleanValue = OperandTwo.AddMember("booleanValue", smithyprelude.Boolean)
-
-	OperandTwo_doubleValue = OperandTwo.AddMember("doubleValue", smithyprelude.Double)
-
-	OperandTwo_emptyValue = OperandTwo.AddMember("emptyValue", EmptyOperandValue)
-
-	BooleanOperands_operandOne = BooleanOperands.AddMember("operandOne", OperandOne)
-
-	BooleanOperands_operandTwo = BooleanOperands.AddMember("operandTwo", OperandTwo)
-
-	BooleanOperands_result = BooleanOperands.AddMember("result", smithyprelude.Boolean)
-
-	CompoundCondition_conditions = CompoundCondition.AddMember("conditions", _BooleanConditionList)
-
-	BooleanCondition_equalTo = BooleanCondition.AddMember("equalTo", BooleanOperands)
-
-	BooleanCondition_notEqualTo = BooleanCondition.AddMember("notEqualTo", BooleanOperands)
-
-	BooleanCondition_andAll = BooleanCondition.AddMember("andAll", CompoundCondition)
-
-	BooleanCondition_orAll = BooleanCondition.AddMember("orAll", CompoundCondition)
-
-	_BooleanConditionList_member = _BooleanConditionList.AddMember("member", BooleanCondition)
-
-	RequiredCaseRule_defaultValue = RequiredCaseRule.AddMember("defaultValue", smithyprelude.Boolean)
-
-	RequiredCaseRule_conditions = RequiredCaseRule.AddMember("conditions", _BooleanConditionList)
-
-	_ParentChildFieldOptionValueList_member = _ParentChildFieldOptionValueList.AddMember("member", _ParentChildFieldOptionValue)
-
-	ParentChildFieldOptionsMapping_parentFieldOptionValue = ParentChildFieldOptionsMapping.AddMember("parentFieldOptionValue", _ParentChildFieldOptionValue)
-
-	ParentChildFieldOptionsMapping_childFieldOptionValues = ParentChildFieldOptionsMapping.AddMember("childFieldOptionValues", _ParentChildFieldOptionValueList)
-
-	_ParentChildFieldOptionsMappingList_member = _ParentChildFieldOptionsMappingList.AddMember("member", ParentChildFieldOptionsMapping)
-
-	FieldOptionsCaseRule_parentFieldId = FieldOptionsCaseRule.AddMember("parentFieldId", _FieldId)
-
-	FieldOptionsCaseRule_childFieldId = FieldOptionsCaseRule.AddMember("childFieldId", _FieldId)
-
-	FieldOptionsCaseRule_parentChildFieldOptionsMappings = FieldOptionsCaseRule.AddMember("parentChildFieldOptionsMappings", _ParentChildFieldOptionsMappingList)
-
-	HiddenCaseRule_defaultValue = HiddenCaseRule.AddMember("defaultValue", smithyprelude.Boolean)
-
-	HiddenCaseRule_conditions = HiddenCaseRule.AddMember("conditions", _BooleanConditionList)
-
-	CaseRuleDetails_required = CaseRuleDetails.AddMember("required", RequiredCaseRule)
-
-	CaseRuleDetails_fieldOptions = CaseRuleDetails.AddMember("fieldOptions", FieldOptionsCaseRule)
-
-	CaseRuleDetails_hidden = CaseRuleDetails.AddMember("hidden", HiddenCaseRule)
-
-	_Tags_key = _Tags.AddMember("key", smithyprelude.String)
-
-	_Tags_value = _Tags.AddMember("value", smithyprelude.String)
-
-	GetCaseRuleResponse_caseRuleId = GetCaseRuleResponse.AddMember("caseRuleId", _CaseRuleId)
-
-	GetCaseRuleResponse_name = GetCaseRuleResponse.AddMember("name", _CaseRuleName)
-
-	GetCaseRuleResponse_caseRuleArn = GetCaseRuleResponse.AddMember("caseRuleArn", _CaseRuleArn)
-
-	GetCaseRuleResponse_rule = GetCaseRuleResponse.AddMember("rule", CaseRuleDetails)
-
-	GetCaseRuleResponse_description = GetCaseRuleResponse.AddMember("description", _CaseRuleDescription)
-
-	GetCaseRuleResponse_deleted = GetCaseRuleResponse.AddMember("deleted", _Deleted)
-
-	GetCaseRuleResponse_createdTime = GetCaseRuleResponse.AddMember("createdTime", _CreatedTime)
-
-	GetCaseRuleResponse_lastModifiedTime = GetCaseRuleResponse.AddMember("lastModifiedTime", _LastModifiedTime)
-
-	GetCaseRuleResponse_tags = GetCaseRuleResponse.AddMember("tags", _Tags)
-
-	_BatchGetCaseRuleList_member = _BatchGetCaseRuleList.AddMember("member", GetCaseRuleResponse)
-
-	_BatchGetCaseRuleUnprocessedList_member = _BatchGetCaseRuleUnprocessedList.AddMember("member", _CaseRuleId)
-
-	FieldError_id = FieldError.AddMember("id", _FieldId)
-
-	FieldError_errorCode = FieldError.AddMember("errorCode", smithyprelude.String)
-
-	FieldError_message = FieldError.AddMember("message", smithyprelude.String)
-
-	_BatchGetFieldErrorList_member = _BatchGetFieldErrorList.AddMember("member", FieldError)
-
-	FieldIdentifier_id = FieldIdentifier.AddMember("id", _FieldId)
-
-	_BatchGetFieldIdentifierList_member = _BatchGetFieldIdentifierList.AddMember("member", FieldIdentifier)
-
-	TextAttributes_isMultiline = TextAttributes.AddMember("isMultiline", smithyprelude.Boolean)
-
-	FieldAttributes_text = FieldAttributes.AddMember("text", TextAttributes)
-
-	GetFieldResponse_fieldId = GetFieldResponse.AddMember("fieldId", _FieldId)
-
-	GetFieldResponse_name = GetFieldResponse.AddMember("name", _FieldName)
-
-	GetFieldResponse_fieldArn = GetFieldResponse.AddMember("fieldArn", _FieldArn)
-
-	GetFieldResponse_description = GetFieldResponse.AddMember("description", _FieldDescription)
-
-	GetFieldResponse_type = GetFieldResponse.AddMember("type", _FieldType)
-
-	GetFieldResponse_namespace = GetFieldResponse.AddMember("namespace", _FieldNamespace)
-
-	GetFieldResponse_tags = GetFieldResponse.AddMember("tags", _Tags)
-
-	GetFieldResponse_deleted = GetFieldResponse.AddMember("deleted", _Deleted)
-
-	GetFieldResponse_createdTime = GetFieldResponse.AddMember("createdTime", _CreatedTime)
-
-	GetFieldResponse_lastModifiedTime = GetFieldResponse.AddMember("lastModifiedTime", _LastModifiedTime)
-
-	GetFieldResponse_attributes = GetFieldResponse.AddMember("attributes", FieldAttributes)
-
-	_BatchGetFieldList_member = _BatchGetFieldList.AddMember("member", GetFieldResponse)
-
-	_FieldIdentifierList_member = _FieldIdentifierList.AddMember("member", FieldIdentifier)
-
-	CaseEventIncludedData_fields = CaseEventIncludedData.AddMember("fields", _FieldIdentifierList)
-
-	FieldValueUnion_stringValue = FieldValueUnion.AddMember("stringValue", smithyprelude.String)
-
-	FieldValueUnion_doubleValue = FieldValueUnion.AddMember("doubleValue", smithyprelude.Double)
-
-	FieldValueUnion_booleanValue = FieldValueUnion.AddMember("booleanValue", smithyprelude.Boolean)
-
-	FieldValueUnion_emptyValue = FieldValueUnion.AddMember("emptyValue", EmptyFieldValue)
-
-	FieldValueUnion_userArnValue = FieldValueUnion.AddMember("userArnValue", smithyprelude.String)
-
-	FieldValue_id = FieldValue.AddMember("id", _FieldId)
-
-	FieldValue_value = FieldValue.AddMember("value", FieldValueUnion)
-
-	FieldFilter_equalTo = FieldFilter.AddMember("equalTo", FieldValue)
-
-	FieldFilter_contains = FieldFilter.AddMember("contains", FieldValue)
-
-	FieldFilter_greaterThan = FieldFilter.AddMember("greaterThan", FieldValue)
-
-	FieldFilter_greaterThanOrEqualTo = FieldFilter.AddMember("greaterThanOrEqualTo", FieldValue)
-
-	FieldFilter_lessThan = FieldFilter.AddMember("lessThan", FieldValue)
-
-	FieldFilter_lessThanOrEqualTo = FieldFilter.AddMember("lessThanOrEqualTo", FieldValue)
-
-	TagValue_key = TagValue.AddMember("key", _SearchTagKey)
-
-	TagValue_value = TagValue.AddMember("value", _TagValueString)
-
-	TagFilter_equalTo = TagFilter.AddMember("equalTo", TagValue)
-
-	_CaseFilterList_member = _CaseFilterList.AddMember("member", CaseFilter)
-
-	CaseFilter_field = CaseFilter.AddMember("field", FieldFilter)
-
-	CaseFilter_not = CaseFilter.AddMember("not", CaseFilter)
-
-	CaseFilter_tag = CaseFilter.AddMember("tag", TagFilter)
-
-	CaseFilter_andAll = CaseFilter.AddMember("andAll", _CaseFilterList)
-
-	CaseFilter_orAll = CaseFilter.AddMember("orAll", _CaseFilterList)
-
-	CaseRuleIdentifier_id = CaseRuleIdentifier.AddMember("id", _CaseRuleId)
-
-	_CaseRuleIdentifierList_member = _CaseRuleIdentifierList.AddMember("member", CaseRuleIdentifier)
-
-	CaseRuleSummary_caseRuleId = CaseRuleSummary.AddMember("caseRuleId", _CaseRuleId)
-
-	CaseRuleSummary_name = CaseRuleSummary.AddMember("name", _CaseRuleName)
-
-	CaseRuleSummary_caseRuleArn = CaseRuleSummary.AddMember("caseRuleArn", _CaseRuleArn)
-
-	CaseRuleSummary_ruleType = CaseRuleSummary.AddMember("ruleType", _RuleType)
-
-	CaseRuleSummary_description = CaseRuleSummary.AddMember("description", _CaseRuleDescription)
-
-	_CaseRuleSummaryList_member = _CaseRuleSummaryList.AddMember("member", CaseRuleSummary)
-
-	CaseSummary_caseId = CaseSummary.AddMember("caseId", _CaseId)
-
-	CaseSummary_templateId = CaseSummary.AddMember("templateId", _TemplateId)
-
-	_CaseSummaryList_member = _CaseSummaryList.AddMember("member", CaseSummary)
-
-	_ChannelList_member = _ChannelList.AddMember("member", _Channel)
-
-	CommentContent_body = CommentContent.AddMember("body", _CommentBody)
-
-	CommentContent_contentType = CommentContent.AddMember("contentType", _CommentBodyTextType)
-
-	CommentUpdateContent_body = CommentUpdateContent.AddMember("body", _CommentBody)
-
-	CommentUpdateContent_contentType = CommentUpdateContent.AddMember("contentType", _CommentBodyTextType)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConnectCaseContent_caseId = ConnectCaseContent.AddMember("caseId", _CaseId)
-
-	ConnectCaseFilter_caseId = ConnectCaseFilter.AddMember("caseId", _CaseId)
-
-	ConnectCaseInputContent_caseId = ConnectCaseInputContent.AddMember("caseId", _CaseId)
-
-	Contact_contactArn = Contact.AddMember("contactArn", _ContactArn)
-
-	ContactContent_contactArn = ContactContent.AddMember("contactArn", _ContactArn)
-
-	ContactContent_channel = ContactContent.AddMember("channel", _Channel)
-
-	ContactContent_connectedToSystemTime = ContactContent.AddMember("connectedToSystemTime", _ConnectedToSystemTime)
-
-	ContactFilter_channel = ContactFilter.AddMember("channel", _ChannelList)
-
-	ContactFilter_contactArn = ContactFilter.AddMember("contactArn", _ContactArn)
-
-	_FieldValueList_member = _FieldValueList.AddMember("member", FieldValue)
-
-	CustomContent_fields = CustomContent.AddMember("fields", _FieldValueList)
-
-	_CustomFieldsFilterList_member = _CustomFieldsFilterList.AddMember("member", CustomFieldsFilter)
-
-	CustomFieldsFilter_field = CustomFieldsFilter.AddMember("field", FieldFilter)
-
-	CustomFieldsFilter_not = CustomFieldsFilter.AddMember("not", CustomFieldsFilter)
-
-	CustomFieldsFilter_andAll = CustomFieldsFilter.AddMember("andAll", _CustomFieldsFilterList)
-
-	CustomFieldsFilter_orAll = CustomFieldsFilter.AddMember("orAll", _CustomFieldsFilterList)
-
-	CustomFilter_fields = CustomFilter.AddMember("fields", CustomFieldsFilter)
-
-	CustomInputContent_fields = CustomInputContent.AddMember("fields", _FieldValueList)
-
-	CustomUpdateContent_fields = CustomUpdateContent.AddMember("fields", _FieldValueList)
-
-	DomainSummary_domainId = DomainSummary.AddMember("domainId", _DomainId)
-
-	DomainSummary_domainArn = DomainSummary.AddMember("domainArn", _DomainArn)
-
-	DomainSummary_name = DomainSummary.AddMember("name", _DomainName)
-
-	_DomainSummaryList_member = _DomainSummaryList.AddMember("member", DomainSummary)
-
-	RelatedItemEventIncludedData_includeContent = RelatedItemEventIncludedData.AddMember("includeContent", smithyprelude.Boolean)
-
-	EventIncludedData_caseData = EventIncludedData.AddMember("caseData", CaseEventIncludedData)
-
-	EventIncludedData_relatedItemData = EventIncludedData.AddMember("relatedItemData", RelatedItemEventIncludedData)
-
-	EventBridgeConfiguration_enabled = EventBridgeConfiguration.AddMember("enabled", smithyprelude.Boolean)
-
-	EventBridgeConfiguration_includedData = EventBridgeConfiguration.AddMember("includedData", EventIncludedData)
-
-	FieldOption_name = FieldOption.AddMember("name", _FieldOptionName)
-
-	FieldOption_value = FieldOption.AddMember("value", _FieldOptionValue)
-
-	FieldOption_active = FieldOption.AddMember("active", smithyprelude.Boolean)
-
-	FieldOptionError_message = FieldOptionError.AddMember("message", smithyprelude.String)
-
-	FieldOptionError_errorCode = FieldOptionError.AddMember("errorCode", smithyprelude.String)
-
-	FieldOptionError_value = FieldOptionError.AddMember("value", _FieldOptionValue)
-
-	_FieldOptionErrorList_member = _FieldOptionErrorList.AddMember("member", FieldOptionError)
-
-	_FieldOptionsList_member = _FieldOptionsList.AddMember("member", FieldOption)
-
-	FieldSummary_fieldId = FieldSummary.AddMember("fieldId", _FieldId)
-
-	FieldSummary_fieldArn = FieldSummary.AddMember("fieldArn", _FieldArn)
-
-	FieldSummary_name = FieldSummary.AddMember("name", _FieldName)
-
-	FieldSummary_type = FieldSummary.AddMember("type", _FieldType)
-
-	FieldSummary_namespace = FieldSummary.AddMember("namespace", _FieldNamespace)
-
-	FieldSummary_attributes = FieldSummary.AddMember("attributes", FieldAttributes)
-
-	_FieldSummaryList_member = _FieldSummaryList.AddMember("member", FieldSummary)
-
-	FileContent_fileArn = FileContent.AddMember("fileArn", _FileArn)
-
-	FileFilter_fileArn = FileFilter.AddMember("fileArn", _FileArn)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	LayoutConfiguration_defaultLayout = LayoutConfiguration.AddMember("defaultLayout", _LayoutId)
-
-	LayoutContent_basic = LayoutContent.AddMember("basic", BasicLayout)
-
-	LayoutSummary_layoutId = LayoutSummary.AddMember("layoutId", _LayoutId)
-
-	LayoutSummary_layoutArn = LayoutSummary.AddMember("layoutArn", _LayoutArn)
-
-	LayoutSummary_name = LayoutSummary.AddMember("name", _LayoutName)
-
-	_LayoutSummaryList_member = _LayoutSummaryList.AddMember("member", LayoutSummary)
-
-	_MutableTags_key = _MutableTags.AddMember("key", _MutableTagKey)
-
-	_MutableTags_value = _MutableTags.AddMember("value", _TagValueString)
-
-	_SlaFieldValueUnionList_member = _SlaFieldValueUnionList.AddMember("member", FieldValueUnion)
-
-	SlaConfiguration_name = SlaConfiguration.AddMember("name", _SlaName)
-
-	SlaConfiguration_type = SlaConfiguration.AddMember("type", _SlaType)
-
-	SlaConfiguration_status = SlaConfiguration.AddMember("status", _SlaStatus)
-
-	SlaConfiguration_fieldId = SlaConfiguration.AddMember("fieldId", _FieldId)
-
-	SlaConfiguration_targetFieldValues = SlaConfiguration.AddMember("targetFieldValues", _SlaFieldValueUnionList)
-
-	SlaConfiguration_targetTime = SlaConfiguration.AddMember("targetTime", _SlaTargetTime)
-
-	SlaConfiguration_completionTime = SlaConfiguration.AddMember("completionTime", _SlaCompletionTime)
-
-	SlaContent_slaConfiguration = SlaContent.AddMember("slaConfiguration", SlaConfiguration)
-
-	RelatedItemContent_contact = RelatedItemContent.AddMember("contact", ContactContent)
-
-	RelatedItemContent_comment = RelatedItemContent.AddMember("comment", CommentContent)
-
-	RelatedItemContent_file = RelatedItemContent.AddMember("file", FileContent)
-
-	RelatedItemContent_sla = RelatedItemContent.AddMember("sla", SlaContent)
-
-	RelatedItemContent_connectCase = RelatedItemContent.AddMember("connectCase", ConnectCaseContent)
-
-	RelatedItemContent_custom = RelatedItemContent.AddMember("custom", CustomContent)
-
-	SlaFilter_name = SlaFilter.AddMember("name", _SlaName)
-
-	SlaFilter_status = SlaFilter.AddMember("status", _SlaStatus)
-
-	RelatedItemTypeFilter_contact = RelatedItemTypeFilter.AddMember("contact", ContactFilter)
-
-	RelatedItemTypeFilter_comment = RelatedItemTypeFilter.AddMember("comment", CommentFilter)
-
-	RelatedItemTypeFilter_file = RelatedItemTypeFilter.AddMember("file", FileFilter)
-
-	RelatedItemTypeFilter_sla = RelatedItemTypeFilter.AddMember("sla", SlaFilter)
-
-	RelatedItemTypeFilter_connectCase = RelatedItemTypeFilter.AddMember("connectCase", ConnectCaseFilter)
-
-	RelatedItemTypeFilter_custom = RelatedItemTypeFilter.AddMember("custom", CustomFilter)
-
-	_RelatedItemFilterList_member = _RelatedItemFilterList.AddMember("member", RelatedItemTypeFilter)
-
-	SlaInputConfiguration_name = SlaInputConfiguration.AddMember("name", _SlaName)
-
-	SlaInputConfiguration_type = SlaInputConfiguration.AddMember("type", _SlaType)
-
-	SlaInputConfiguration_fieldId = SlaInputConfiguration.AddMember("fieldId", _FieldId)
-
-	SlaInputConfiguration_targetFieldValues = SlaInputConfiguration.AddMember("targetFieldValues", _SlaFieldValueUnionList)
-
-	SlaInputConfiguration_targetSlaMinutes = SlaInputConfiguration.AddMember("targetSlaMinutes", _TargetSlaMinutes)
-
-	SlaInputContent_slaInputConfiguration = SlaInputContent.AddMember("slaInputConfiguration", SlaInputConfiguration)
-
-	RelatedItemInputContent_contact = RelatedItemInputContent.AddMember("contact", Contact)
-
-	RelatedItemInputContent_comment = RelatedItemInputContent.AddMember("comment", CommentContent)
-
-	RelatedItemInputContent_file = RelatedItemInputContent.AddMember("file", FileContent)
-
-	RelatedItemInputContent_sla = RelatedItemInputContent.AddMember("sla", SlaInputContent)
-
-	RelatedItemInputContent_connectCase = RelatedItemInputContent.AddMember("connectCase", ConnectCaseInputContent)
-
-	RelatedItemInputContent_custom = RelatedItemInputContent.AddMember("custom", CustomInputContent)
-
-	RelatedItemUpdateContent_comment = RelatedItemUpdateContent.AddMember("comment", CommentUpdateContent)
-
-	RelatedItemUpdateContent_custom = RelatedItemUpdateContent.AddMember("custom", CustomUpdateContent)
-
-	RequiredField_fieldId = RequiredField.AddMember("fieldId", _FieldId)
-
-	_RequiredFieldList_member = _RequiredFieldList.AddMember("member", RequiredField)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	SearchAllRelatedItemsResponseItem_relatedItemId = SearchAllRelatedItemsResponseItem.AddMember("relatedItemId", _RelatedItemId)
-
-	SearchAllRelatedItemsResponseItem_caseId = SearchAllRelatedItemsResponseItem.AddMember("caseId", _CaseId)
-
-	SearchAllRelatedItemsResponseItem_type = SearchAllRelatedItemsResponseItem.AddMember("type", _RelatedItemType)
-
-	SearchAllRelatedItemsResponseItem_associationTime = SearchAllRelatedItemsResponseItem.AddMember("associationTime", _AssociationTime)
-
-	SearchAllRelatedItemsResponseItem_content = SearchAllRelatedItemsResponseItem.AddMember("content", RelatedItemContent)
-
-	SearchAllRelatedItemsResponseItem_performedBy = SearchAllRelatedItemsResponseItem.AddMember("performedBy", UserUnion)
-
-	SearchAllRelatedItemsResponseItem_tags = SearchAllRelatedItemsResponseItem.AddMember("tags", _Tags)
-
-	_SearchAllRelatedItemsResponseItemList_member = _SearchAllRelatedItemsResponseItemList.AddMember("member", SearchAllRelatedItemsResponseItem)
-
-	SearchAllRelatedItemsSort_sortProperty = SearchAllRelatedItemsSort.AddMember("sortProperty", _SearchAllRelatedItemsSortProperty)
-
-	SearchAllRelatedItemsSort_sortOrder = SearchAllRelatedItemsSort.AddMember("sortOrder", _Order)
-
-	_SearchAllRelatedItemsSortList_member = _SearchAllRelatedItemsSortList.AddMember("member", SearchAllRelatedItemsSort)
-
-	SearchCasesResponseItem_caseId = SearchCasesResponseItem.AddMember("caseId", _CaseId)
-
-	SearchCasesResponseItem_templateId = SearchCasesResponseItem.AddMember("templateId", _TemplateId)
-
-	SearchCasesResponseItem_fields = SearchCasesResponseItem.AddMember("fields", _FieldValueList)
-
-	SearchCasesResponseItem_tags = SearchCasesResponseItem.AddMember("tags", _Tags)
-
-	_SearchCasesResponseItemList_member = _SearchCasesResponseItemList.AddMember("member", SearchCasesResponseItem)
-
-	SearchRelatedItemsResponseItem_relatedItemId = SearchRelatedItemsResponseItem.AddMember("relatedItemId", _RelatedItemId)
-
-	SearchRelatedItemsResponseItem_type = SearchRelatedItemsResponseItem.AddMember("type", _RelatedItemType)
-
-	SearchRelatedItemsResponseItem_associationTime = SearchRelatedItemsResponseItem.AddMember("associationTime", _AssociationTime)
-
-	SearchRelatedItemsResponseItem_content = SearchRelatedItemsResponseItem.AddMember("content", RelatedItemContent)
-
-	SearchRelatedItemsResponseItem_tags = SearchRelatedItemsResponseItem.AddMember("tags", _Tags)
-
-	SearchRelatedItemsResponseItem_performedBy = SearchRelatedItemsResponseItem.AddMember("performedBy", UserUnion)
-
-	_SearchRelatedItemsResponseItemList_member = _SearchRelatedItemsResponseItemList.AddMember("member", SearchRelatedItemsResponseItem)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	Sort_fieldId = Sort.AddMember("fieldId", _FieldId)
-
-	Sort_sortOrder = Sort.AddMember("sortOrder", _Order)
-
-	_SortList_member = _SortList.AddMember("member", Sort)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TagPropagationConfiguration_resourceType = TagPropagationConfiguration.AddMember("resourceType", _TagPropagationResourceType)
-
-	TagPropagationConfiguration_tagMap = TagPropagationConfiguration.AddMember("tagMap", _MutableTags)
-
-	_TagPropagationConfigurationList_member = _TagPropagationConfigurationList.AddMember("member", TagPropagationConfiguration)
-
-	TemplateRule_caseRuleId = TemplateRule.AddMember("caseRuleId", _CaseRuleId)
-
-	TemplateRule_fieldId = TemplateRule.AddMember("fieldId", _FieldId)
-
-	_TemplateCaseRuleList_member = _TemplateCaseRuleList.AddMember("member", TemplateRule)
-
-	_TemplateStatusFilters_member = _TemplateStatusFilters.AddMember("member", _TemplateStatus)
-
-	TemplateSummary_templateId = TemplateSummary.AddMember("templateId", _TemplateId)
-
-	TemplateSummary_templateArn = TemplateSummary.AddMember("templateArn", _TemplateArn)
-
-	TemplateSummary_name = TemplateSummary.AddMember("name", _TemplateName)
-
-	TemplateSummary_status = TemplateSummary.AddMember("status", _TemplateStatus)
-
-	TemplateSummary_tagPropagationConfigurations = TemplateSummary.AddMember("tagPropagationConfigurations", _TagPropagationConfigurationList)
-
-	_TemplateSummaryList_member = _TemplateSummaryList.AddMember("member", TemplateSummary)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	_ValuesList_member = _ValuesList.AddMember("member", _Value)
-
-	BatchGetCaseRuleRequest_domainId = BatchGetCaseRuleRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	BatchGetCaseRuleRequest_caseRules = BatchGetCaseRuleRequest.AddMember("caseRules", _CaseRuleIdentifierList)
-
-	BatchGetCaseRuleResponse_caseRules = BatchGetCaseRuleResponse.AddMember("caseRules", _BatchGetCaseRuleList)
-
-	BatchGetCaseRuleResponse_errors = BatchGetCaseRuleResponse.AddMember("errors", _BatchGetCaseRuleErrorList)
-
-	BatchGetCaseRuleResponse_unprocessedCaseRules = BatchGetCaseRuleResponse.AddMember("unprocessedCaseRules", _BatchGetCaseRuleUnprocessedList)
-
-	BatchGetFieldRequest_domainId = BatchGetFieldRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	BatchGetFieldRequest_fields = BatchGetFieldRequest.AddMember("fields", _BatchGetFieldIdentifierList)
-
-	BatchGetFieldResponse_fields = BatchGetFieldResponse.AddMember("fields", _BatchGetFieldList)
-
-	BatchGetFieldResponse_errors = BatchGetFieldResponse.AddMember("errors", _BatchGetFieldErrorList)
-
-	BatchPutFieldOptionsRequest_domainId = BatchPutFieldOptionsRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	BatchPutFieldOptionsRequest_fieldId = BatchPutFieldOptionsRequest.AddMember("fieldId", _FieldId, &smithytraits.HTTPLabel{})
-
-	BatchPutFieldOptionsRequest_options = BatchPutFieldOptionsRequest.AddMember("options", _FieldOptionsList)
-
-	BatchPutFieldOptionsResponse_errors = BatchPutFieldOptionsResponse.AddMember("errors", _FieldOptionErrorList)
-
-	CreateCaseRequest_domainId = CreateCaseRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateCaseRequest_templateId = CreateCaseRequest.AddMember("templateId", _TemplateId)
-
-	CreateCaseRequest_fields = CreateCaseRequest.AddMember("fields", _FieldValueList)
-
-	CreateCaseRequest_clientToken = CreateCaseRequest.AddMember("clientToken", smithyprelude.String)
-
-	CreateCaseRequest_performedBy = CreateCaseRequest.AddMember("performedBy", UserUnion)
-
-	CreateCaseRequest_tags = CreateCaseRequest.AddMember("tags", _MutableTags)
-
-	CreateCaseResponse_caseId = CreateCaseResponse.AddMember("caseId", _CaseId)
-
-	CreateCaseResponse_caseArn = CreateCaseResponse.AddMember("caseArn", _CaseArn)
-
-	CreateCaseRuleRequest_domainId = CreateCaseRuleRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateCaseRuleRequest_name = CreateCaseRuleRequest.AddMember("name", _CaseRuleName)
-
-	CreateCaseRuleRequest_description = CreateCaseRuleRequest.AddMember("description", _CaseRuleDescription)
-
-	CreateCaseRuleRequest_rule = CreateCaseRuleRequest.AddMember("rule", CaseRuleDetails)
-
-	CreateCaseRuleResponse_caseRuleId = CreateCaseRuleResponse.AddMember("caseRuleId", _CaseRuleId)
-
-	CreateCaseRuleResponse_caseRuleArn = CreateCaseRuleResponse.AddMember("caseRuleArn", _CaseRuleArn)
-
-	CreateDomainRequest_name = CreateDomainRequest.AddMember("name", _DomainName)
-
-	CreateDomainResponse_domainId = CreateDomainResponse.AddMember("domainId", _DomainId)
-
-	CreateDomainResponse_domainArn = CreateDomainResponse.AddMember("domainArn", _DomainArn)
-
-	CreateDomainResponse_domainStatus = CreateDomainResponse.AddMember("domainStatus", _DomainStatus)
-
-	CreateFieldRequest_domainId = CreateFieldRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateFieldRequest_name = CreateFieldRequest.AddMember("name", _FieldName)
-
-	CreateFieldRequest_type = CreateFieldRequest.AddMember("type", _FieldType)
-
-	CreateFieldRequest_description = CreateFieldRequest.AddMember("description", _FieldDescription)
-
-	CreateFieldRequest_attributes = CreateFieldRequest.AddMember("attributes", FieldAttributes)
-
-	CreateFieldResponse_fieldId = CreateFieldResponse.AddMember("fieldId", _FieldId)
-
-	CreateFieldResponse_fieldArn = CreateFieldResponse.AddMember("fieldArn", _FieldArn)
-
-	CreateLayoutRequest_domainId = CreateLayoutRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateLayoutRequest_name = CreateLayoutRequest.AddMember("name", _LayoutName)
-
-	CreateLayoutRequest_content = CreateLayoutRequest.AddMember("content", LayoutContent)
-
-	CreateLayoutResponse_layoutId = CreateLayoutResponse.AddMember("layoutId", _LayoutId)
-
-	CreateLayoutResponse_layoutArn = CreateLayoutResponse.AddMember("layoutArn", _LayoutArn)
-
-	CreateRelatedItemRequest_domainId = CreateRelatedItemRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateRelatedItemRequest_caseId = CreateRelatedItemRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	CreateRelatedItemRequest_type = CreateRelatedItemRequest.AddMember("type", _RelatedItemType)
-
-	CreateRelatedItemRequest_content = CreateRelatedItemRequest.AddMember("content", RelatedItemInputContent)
-
-	CreateRelatedItemRequest_performedBy = CreateRelatedItemRequest.AddMember("performedBy", UserUnion)
-
-	CreateRelatedItemResponse_relatedItemId = CreateRelatedItemResponse.AddMember("relatedItemId", _RelatedItemId)
-
-	CreateRelatedItemResponse_relatedItemArn = CreateRelatedItemResponse.AddMember("relatedItemArn", _RelatedItemArn)
-
-	CreateTemplateRequest_domainId = CreateTemplateRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	CreateTemplateRequest_name = CreateTemplateRequest.AddMember("name", _TemplateName)
-
-	CreateTemplateRequest_description = CreateTemplateRequest.AddMember("description", _TemplateDescription)
-
-	CreateTemplateRequest_layoutConfiguration = CreateTemplateRequest.AddMember("layoutConfiguration", LayoutConfiguration)
-
-	CreateTemplateRequest_requiredFields = CreateTemplateRequest.AddMember("requiredFields", _RequiredFieldList)
-
-	CreateTemplateRequest_status = CreateTemplateRequest.AddMember("status", _TemplateStatus)
-
-	CreateTemplateRequest_rules = CreateTemplateRequest.AddMember("rules", _TemplateCaseRuleList)
-
-	CreateTemplateRequest_tagPropagationConfigurations = CreateTemplateRequest.AddMember("tagPropagationConfigurations", _TagPropagationConfigurationList)
-
-	CreateTemplateResponse_templateId = CreateTemplateResponse.AddMember("templateId", _TemplateId)
-
-	CreateTemplateResponse_templateArn = CreateTemplateResponse.AddMember("templateArn", _TemplateArn)
-
-	DeleteCaseRequest_domainId = DeleteCaseRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteCaseRequest_caseId = DeleteCaseRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	DeleteCaseRuleRequest_domainId = DeleteCaseRuleRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteCaseRuleRequest_caseRuleId = DeleteCaseRuleRequest.AddMember("caseRuleId", _CaseRuleId, &smithytraits.HTTPLabel{})
-
-	DeleteDomainRequest_domainId = DeleteDomainRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteFieldRequest_domainId = DeleteFieldRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteFieldRequest_fieldId = DeleteFieldRequest.AddMember("fieldId", _FieldId, &smithytraits.HTTPLabel{})
-
-	DeleteLayoutRequest_domainId = DeleteLayoutRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteLayoutRequest_layoutId = DeleteLayoutRequest.AddMember("layoutId", _LayoutId, &smithytraits.HTTPLabel{})
-
-	DeleteRelatedItemRequest_domainId = DeleteRelatedItemRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteRelatedItemRequest_caseId = DeleteRelatedItemRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	DeleteRelatedItemRequest_relatedItemId = DeleteRelatedItemRequest.AddMember("relatedItemId", _RelatedItemId, &smithytraits.HTTPLabel{})
-
-	DeleteTemplateRequest_domainId = DeleteTemplateRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	DeleteTemplateRequest_templateId = DeleteTemplateRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPLabel{})
-
-	GetCaseAuditEventsRequest_caseId = GetCaseAuditEventsRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	GetCaseAuditEventsRequest_domainId = GetCaseAuditEventsRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetCaseAuditEventsRequest_maxResults = GetCaseAuditEventsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	GetCaseAuditEventsRequest_nextToken = GetCaseAuditEventsRequest.AddMember("nextToken", _NextToken)
-
-	GetCaseAuditEventsResponse_nextToken = GetCaseAuditEventsResponse.AddMember("nextToken", _NextToken)
-
-	GetCaseAuditEventsResponse_auditEvents = GetCaseAuditEventsResponse.AddMember("auditEvents", _AuditEventsList)
-
-	GetCaseEventConfigurationRequest_domainId = GetCaseEventConfigurationRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetCaseEventConfigurationResponse_eventBridge = GetCaseEventConfigurationResponse.AddMember("eventBridge", EventBridgeConfiguration)
-
-	GetCaseRequest_caseId = GetCaseRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	GetCaseRequest_domainId = GetCaseRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetCaseRequest_fields = GetCaseRequest.AddMember("fields", _FieldIdentifierList)
-
-	GetCaseRequest_nextToken = GetCaseRequest.AddMember("nextToken", _NextToken)
-
-	GetCaseResponse_fields = GetCaseResponse.AddMember("fields", _FieldValueList)
-
-	GetCaseResponse_templateId = GetCaseResponse.AddMember("templateId", _TemplateId)
-
-	GetCaseResponse_nextToken = GetCaseResponse.AddMember("nextToken", _NextToken)
-
-	GetCaseResponse_tags = GetCaseResponse.AddMember("tags", _Tags)
-
-	GetDomainRequest_domainId = GetDomainRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetDomainResponse_domainId = GetDomainResponse.AddMember("domainId", _DomainId)
-
-	GetDomainResponse_domainArn = GetDomainResponse.AddMember("domainArn", _DomainArn)
-
-	GetDomainResponse_name = GetDomainResponse.AddMember("name", _DomainName)
-
-	GetDomainResponse_createdTime = GetDomainResponse.AddMember("createdTime", _CreatedTime)
-
-	GetDomainResponse_domainStatus = GetDomainResponse.AddMember("domainStatus", _DomainStatus)
-
-	GetDomainResponse_tags = GetDomainResponse.AddMember("tags", _Tags)
-
-	GetLayoutRequest_domainId = GetLayoutRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetLayoutRequest_layoutId = GetLayoutRequest.AddMember("layoutId", _LayoutId, &smithytraits.HTTPLabel{})
-
-	GetLayoutResponse_layoutId = GetLayoutResponse.AddMember("layoutId", _LayoutId)
-
-	GetLayoutResponse_layoutArn = GetLayoutResponse.AddMember("layoutArn", _LayoutArn)
-
-	GetLayoutResponse_name = GetLayoutResponse.AddMember("name", _LayoutName)
-
-	GetLayoutResponse_content = GetLayoutResponse.AddMember("content", LayoutContent)
-
-	GetLayoutResponse_tags = GetLayoutResponse.AddMember("tags", _Tags)
-
-	GetLayoutResponse_deleted = GetLayoutResponse.AddMember("deleted", _Deleted)
-
-	GetLayoutResponse_createdTime = GetLayoutResponse.AddMember("createdTime", _CreatedTime)
-
-	GetLayoutResponse_lastModifiedTime = GetLayoutResponse.AddMember("lastModifiedTime", _LastModifiedTime)
-
-	GetTemplateRequest_domainId = GetTemplateRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	GetTemplateRequest_templateId = GetTemplateRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPLabel{})
-
-	GetTemplateResponse_templateId = GetTemplateResponse.AddMember("templateId", _TemplateId)
-
-	GetTemplateResponse_templateArn = GetTemplateResponse.AddMember("templateArn", _TemplateArn)
-
-	GetTemplateResponse_name = GetTemplateResponse.AddMember("name", _TemplateName)
-
-	GetTemplateResponse_description = GetTemplateResponse.AddMember("description", _TemplateDescription)
-
-	GetTemplateResponse_layoutConfiguration = GetTemplateResponse.AddMember("layoutConfiguration", LayoutConfiguration)
-
-	GetTemplateResponse_requiredFields = GetTemplateResponse.AddMember("requiredFields", _RequiredFieldList)
-
-	GetTemplateResponse_tags = GetTemplateResponse.AddMember("tags", _Tags)
-
-	GetTemplateResponse_status = GetTemplateResponse.AddMember("status", _TemplateStatus)
-
-	GetTemplateResponse_deleted = GetTemplateResponse.AddMember("deleted", _Deleted)
-
-	GetTemplateResponse_createdTime = GetTemplateResponse.AddMember("createdTime", _CreatedTime)
-
-	GetTemplateResponse_lastModifiedTime = GetTemplateResponse.AddMember("lastModifiedTime", _LastModifiedTime)
-
-	GetTemplateResponse_rules = GetTemplateResponse.AddMember("rules", _TemplateCaseRuleList)
-
-	GetTemplateResponse_tagPropagationConfigurations = GetTemplateResponse.AddMember("tagPropagationConfigurations", _TagPropagationConfigurationList)
-
-	ListCaseRulesRequest_domainId = ListCaseRulesRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListCaseRulesRequest_maxResults = ListCaseRulesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCaseRulesRequest_nextToken = ListCaseRulesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCaseRulesResponse_caseRules = ListCaseRulesResponse.AddMember("caseRules", _CaseRuleSummaryList)
-
-	ListCaseRulesResponse_nextToken = ListCaseRulesResponse.AddMember("nextToken", _NextToken)
-
-	ListCasesForContactRequest_domainId = ListCasesForContactRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListCasesForContactRequest_contactArn = ListCasesForContactRequest.AddMember("contactArn", _ContactArn)
-
-	ListCasesForContactRequest_maxResults = ListCasesForContactRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListCasesForContactRequest_nextToken = ListCasesForContactRequest.AddMember("nextToken", _NextToken)
-
-	ListCasesForContactResponse_cases = ListCasesForContactResponse.AddMember("cases", _CaseSummaryList)
-
-	ListCasesForContactResponse_nextToken = ListCasesForContactResponse.AddMember("nextToken", _NextToken)
-
-	ListDomainsRequest_maxResults = ListDomainsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDomainsRequest_nextToken = ListDomainsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDomainsResponse_domains = ListDomainsResponse.AddMember("domains", _DomainSummaryList)
-
-	ListDomainsResponse_nextToken = ListDomainsResponse.AddMember("nextToken", _NextToken)
-
-	ListFieldOptionsRequest_domainId = ListFieldOptionsRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListFieldOptionsRequest_fieldId = ListFieldOptionsRequest.AddMember("fieldId", _FieldId, &smithytraits.HTTPLabel{})
-
-	ListFieldOptionsRequest_maxResults = ListFieldOptionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFieldOptionsRequest_nextToken = ListFieldOptionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFieldOptionsRequest_values = ListFieldOptionsRequest.AddMember("values", _ValuesList, &smithytraits.HTTPQuery{Name: "values"})
-
-	ListFieldOptionsResponse_options = ListFieldOptionsResponse.AddMember("options", _FieldOptionsList)
-
-	ListFieldOptionsResponse_nextToken = ListFieldOptionsResponse.AddMember("nextToken", _NextToken)
-
-	ListFieldsRequest_domainId = ListFieldsRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListFieldsRequest_maxResults = ListFieldsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListFieldsRequest_nextToken = ListFieldsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListFieldsResponse_fields = ListFieldsResponse.AddMember("fields", _FieldSummaryList)
-
-	ListFieldsResponse_nextToken = ListFieldsResponse.AddMember("nextToken", _NextToken)
-
-	ListLayoutsRequest_domainId = ListLayoutsRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListLayoutsRequest_maxResults = ListLayoutsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListLayoutsRequest_nextToken = ListLayoutsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListLayoutsResponse_layouts = ListLayoutsResponse.AddMember("layouts", _LayoutSummaryList)
-
-	ListLayoutsResponse_nextToken = ListLayoutsResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_arn = ListTagsForResourceRequest.AddMember("arn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	ListTemplatesRequest_domainId = ListTemplatesRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	ListTemplatesRequest_maxResults = ListTemplatesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTemplatesRequest_nextToken = ListTemplatesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTemplatesRequest_status = ListTemplatesRequest.AddMember("status", _TemplateStatusFilters, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListTemplatesResponse_templates = ListTemplatesResponse.AddMember("templates", _TemplateSummaryList)
-
-	ListTemplatesResponse_nextToken = ListTemplatesResponse.AddMember("nextToken", _NextToken)
-
-	PutCaseEventConfigurationRequest_domainId = PutCaseEventConfigurationRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	PutCaseEventConfigurationRequest_eventBridge = PutCaseEventConfigurationRequest.AddMember("eventBridge", EventBridgeConfiguration)
-
-	SearchAllRelatedItemsRequest_domainId = SearchAllRelatedItemsRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	SearchAllRelatedItemsRequest_maxResults = SearchAllRelatedItemsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchAllRelatedItemsRequest_nextToken = SearchAllRelatedItemsRequest.AddMember("nextToken", _NextToken)
-
-	SearchAllRelatedItemsRequest_filters = SearchAllRelatedItemsRequest.AddMember("filters", _RelatedItemFilterList)
-
-	SearchAllRelatedItemsRequest_sorts = SearchAllRelatedItemsRequest.AddMember("sorts", _SearchAllRelatedItemsSortList)
-
-	SearchAllRelatedItemsResponse_nextToken = SearchAllRelatedItemsResponse.AddMember("nextToken", _NextToken)
-
-	SearchAllRelatedItemsResponse_relatedItems = SearchAllRelatedItemsResponse.AddMember("relatedItems", _SearchAllRelatedItemsResponseItemList)
-
-	SearchCasesRequest_domainId = SearchCasesRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	SearchCasesRequest_maxResults = SearchCasesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchCasesRequest_nextToken = SearchCasesRequest.AddMember("nextToken", _NextToken)
-
-	SearchCasesRequest_searchTerm = SearchCasesRequest.AddMember("searchTerm", smithyprelude.String)
-
-	SearchCasesRequest_filter = SearchCasesRequest.AddMember("filter", CaseFilter)
-
-	SearchCasesRequest_sorts = SearchCasesRequest.AddMember("sorts", _SortList)
-
-	SearchCasesRequest_fields = SearchCasesRequest.AddMember("fields", _FieldIdentifierList)
-
-	SearchCasesResponse_nextToken = SearchCasesResponse.AddMember("nextToken", _NextToken)
-
-	SearchCasesResponse_cases = SearchCasesResponse.AddMember("cases", _SearchCasesResponseItemList)
-
-	SearchCasesResponse_totalCount = SearchCasesResponse.AddMember("totalCount", _TotalCount)
-
-	SearchRelatedItemsRequest_domainId = SearchRelatedItemsRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	SearchRelatedItemsRequest_caseId = SearchRelatedItemsRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	SearchRelatedItemsRequest_maxResults = SearchRelatedItemsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	SearchRelatedItemsRequest_nextToken = SearchRelatedItemsRequest.AddMember("nextToken", _NextToken)
-
-	SearchRelatedItemsRequest_filters = SearchRelatedItemsRequest.AddMember("filters", _RelatedItemFilterList)
-
-	SearchRelatedItemsResponse_nextToken = SearchRelatedItemsResponse.AddMember("nextToken", _NextToken)
-
-	SearchRelatedItemsResponse_relatedItems = SearchRelatedItemsResponse.AddMember("relatedItems", _SearchRelatedItemsResponseItemList)
-
-	TagResourceRequest_arn = TagResourceRequest.AddMember("arn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_arn = UntagResourceRequest.AddMember("arn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateCaseRequest_domainId = UpdateCaseRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	UpdateCaseRequest_caseId = UpdateCaseRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	UpdateCaseRequest_fields = UpdateCaseRequest.AddMember("fields", _FieldValueList)
-
-	UpdateCaseRequest_performedBy = UpdateCaseRequest.AddMember("performedBy", UserUnion)
-
-	UpdateCaseRuleRequest_domainId = UpdateCaseRuleRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	UpdateCaseRuleRequest_caseRuleId = UpdateCaseRuleRequest.AddMember("caseRuleId", _CaseRuleId, &smithytraits.HTTPLabel{})
-
-	UpdateCaseRuleRequest_name = UpdateCaseRuleRequest.AddMember("name", _CaseRuleName)
-
-	UpdateCaseRuleRequest_description = UpdateCaseRuleRequest.AddMember("description", _CaseRuleDescription)
-
-	UpdateCaseRuleRequest_rule = UpdateCaseRuleRequest.AddMember("rule", CaseRuleDetails)
-
-	UpdateFieldRequest_domainId = UpdateFieldRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	UpdateFieldRequest_fieldId = UpdateFieldRequest.AddMember("fieldId", _FieldId, &smithytraits.HTTPLabel{})
-
-	UpdateFieldRequest_name = UpdateFieldRequest.AddMember("name", _FieldName)
-
-	UpdateFieldRequest_description = UpdateFieldRequest.AddMember("description", _FieldDescription)
-
-	UpdateFieldRequest_attributes = UpdateFieldRequest.AddMember("attributes", FieldAttributes)
-
-	UpdateLayoutRequest_domainId = UpdateLayoutRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	UpdateLayoutRequest_layoutId = UpdateLayoutRequest.AddMember("layoutId", _LayoutId, &smithytraits.HTTPLabel{})
-
-	UpdateLayoutRequest_name = UpdateLayoutRequest.AddMember("name", _LayoutName)
-
-	UpdateLayoutRequest_content = UpdateLayoutRequest.AddMember("content", LayoutContent)
-
-	UpdateRelatedItemRequest_domainId = UpdateRelatedItemRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	UpdateRelatedItemRequest_caseId = UpdateRelatedItemRequest.AddMember("caseId", _CaseId, &smithytraits.HTTPLabel{})
-
-	UpdateRelatedItemRequest_relatedItemId = UpdateRelatedItemRequest.AddMember("relatedItemId", _RelatedItemId, &smithytraits.HTTPLabel{})
-
-	UpdateRelatedItemRequest_content = UpdateRelatedItemRequest.AddMember("content", RelatedItemUpdateContent)
-
-	UpdateRelatedItemRequest_performedBy = UpdateRelatedItemRequest.AddMember("performedBy", UserUnion)
-
-	UpdateRelatedItemResponse_relatedItemId = UpdateRelatedItemResponse.AddMember("relatedItemId", _RelatedItemId)
-
-	UpdateRelatedItemResponse_relatedItemArn = UpdateRelatedItemResponse.AddMember("relatedItemArn", _RelatedItemArn)
-
-	UpdateRelatedItemResponse_type = UpdateRelatedItemResponse.AddMember("type", _RelatedItemType)
-
-	UpdateRelatedItemResponse_content = UpdateRelatedItemResponse.AddMember("content", RelatedItemContent)
-
-	UpdateRelatedItemResponse_associationTime = UpdateRelatedItemResponse.AddMember("associationTime", _AssociationTime)
-
-	UpdateRelatedItemResponse_tags = UpdateRelatedItemResponse.AddMember("tags", _Tags)
-
-	UpdateRelatedItemResponse_lastUpdatedUser = UpdateRelatedItemResponse.AddMember("lastUpdatedUser", UserUnion)
-
-	UpdateRelatedItemResponse_createdBy = UpdateRelatedItemResponse.AddMember("createdBy", UserUnion)
-
-	UpdateTemplateRequest_domainId = UpdateTemplateRequest.AddMember("domainId", _DomainId, &smithytraits.HTTPLabel{})
-
-	UpdateTemplateRequest_templateId = UpdateTemplateRequest.AddMember("templateId", _TemplateId, &smithytraits.HTTPLabel{})
-
-	UpdateTemplateRequest_name = UpdateTemplateRequest.AddMember("name", _TemplateName)
-
-	UpdateTemplateRequest_description = UpdateTemplateRequest.AddMember("description", _TemplateDescription)
-
-	UpdateTemplateRequest_layoutConfiguration = UpdateTemplateRequest.AddMember("layoutConfiguration", LayoutConfiguration)
-
-	UpdateTemplateRequest_requiredFields = UpdateTemplateRequest.AddMember("requiredFields", _RequiredFieldList)
-
-	UpdateTemplateRequest_status = UpdateTemplateRequest.AddMember("status", _TemplateStatus)
-
-	UpdateTemplateRequest_rules = UpdateTemplateRequest.AddMember("rules", _TemplateCaseRuleList)
-
-	UpdateTemplateRequest_tagPropagationConfigurations = UpdateTemplateRequest.AddMember("tagPropagationConfigurations", _TagPropagationConfigurationList)
-
+	sCaseFilter_not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "not", ID: &iCaseFilter, Members: &mCaseFilter, Type: smithy.ShapeTypeUnion})
+	s_CaseFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCaseFilter, Members: &mCaseFilter, Type: smithy.ShapeTypeUnion})
+	sCompoundCondition_conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conditions", ID: &i_BooleanConditionList, Members: &m_BooleanConditionList, Type: smithy.ShapeTypeList})
+	sCustomFieldsFilter_not = smithy.NewStaticSchema(smithy.StaticSchema{Member: "not", ID: &iCustomFieldsFilter, Members: &mCustomFieldsFilter, Type: smithy.ShapeTypeUnion})
+	s_CustomFieldsFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomFieldsFilter, Members: &mCustomFieldsFilter, Type: smithy.ShapeTypeUnion})
 }
+
+var BatchGetCaseRule = &sBatchGetCaseRule
+
+var BatchGetField = &sBatchGetField
+
+var BatchPutFieldOptions = &sBatchPutFieldOptions
+
+var CreateCase = &sCreateCase
+
+var CreateCaseRule = &sCreateCaseRule
+
+var CreateDomain = &sCreateDomain
+
+var CreateField = &sCreateField
+
+var CreateLayout = &sCreateLayout
+
+var CreateRelatedItem = &sCreateRelatedItem
+
+var CreateTemplate = &sCreateTemplate
+
+var DeleteCase = &sDeleteCase
+
+var DeleteCaseRule = &sDeleteCaseRule
+
+var DeleteDomain = &sDeleteDomain
+
+var DeleteField = &sDeleteField
+
+var DeleteLayout = &sDeleteLayout
+
+var DeleteRelatedItem = &sDeleteRelatedItem
+
+var DeleteTemplate = &sDeleteTemplate
+
+var GetCase = &sGetCase
+
+var GetCaseAuditEvents = &sGetCaseAuditEvents
+
+var GetCaseEventConfiguration = &sGetCaseEventConfiguration
+
+var GetDomain = &sGetDomain
+
+var GetLayout = &sGetLayout
+
+var GetTemplate = &sGetTemplate
+
+var ListCaseRules = &sListCaseRules
+
+var ListCasesForContact = &sListCasesForContact
+
+var ListDomains = &sListDomains
+
+var ListFieldOptions = &sListFieldOptions
+
+var ListFields = &sListFields
+
+var ListLayouts = &sListLayouts
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTemplates = &sListTemplates
+
+var PutCaseEventConfiguration = &sPutCaseEventConfiguration
+
+var SearchAllRelatedItems = &sSearchAllRelatedItems
+
+var SearchCases = &sSearchCases
+
+var SearchRelatedItems = &sSearchRelatedItems
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateCase = &sUpdateCase
+
+var UpdateCaseRule = &sUpdateCaseRule
+
+var UpdateField = &sUpdateField
+
+var UpdateLayout = &sUpdateLayout
+
+var UpdateRelatedItem = &sUpdateRelatedItem
+
+var UpdateTemplate = &sUpdateTemplate
+
+var _AmazonConnectCases = &s_AmazonConnectCases
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _Arn = &s_Arn
+
+var _AssociationTime = &s_AssociationTime
+
+var AuditEvent = &sAuditEvent
+var AuditEvent_eventId = &sAuditEvent_eventId
+var AuditEvent_type = &sAuditEvent_type
+var AuditEvent_relatedItemType = &sAuditEvent_relatedItemType
+var AuditEvent_performedTime = &sAuditEvent_performedTime
+var AuditEvent_fields = &sAuditEvent_fields
+var AuditEvent_performedBy = &sAuditEvent_performedBy
+
+var _AuditEventDateTime = &s_AuditEventDateTime
+
+var AuditEventField = &sAuditEventField
+var AuditEventField_eventFieldId = &sAuditEventField_eventFieldId
+var AuditEventField_oldValue = &sAuditEventField_oldValue
+var AuditEventField_newValue = &sAuditEventField_newValue
+
+var _AuditEventFieldId = &s_AuditEventFieldId
+
+var _AuditEventFieldList = &s_AuditEventFieldList
+var _AuditEventFieldList_member = &s_AuditEventFieldList_member
+
+var AuditEventFieldValueUnion = &sAuditEventFieldValueUnion
+var AuditEventFieldValueUnion_stringValue = &sAuditEventFieldValueUnion_stringValue
+var AuditEventFieldValueUnion_doubleValue = &sAuditEventFieldValueUnion_doubleValue
+var AuditEventFieldValueUnion_booleanValue = &sAuditEventFieldValueUnion_booleanValue
+var AuditEventFieldValueUnion_emptyValue = &sAuditEventFieldValueUnion_emptyValue
+var AuditEventFieldValueUnion_userArnValue = &sAuditEventFieldValueUnion_userArnValue
+
+var _AuditEventId = &s_AuditEventId
+
+var AuditEventPerformedBy = &sAuditEventPerformedBy
+var AuditEventPerformedBy_user = &sAuditEventPerformedBy_user
+var AuditEventPerformedBy_iamPrincipalArn = &sAuditEventPerformedBy_iamPrincipalArn
+
+var _AuditEventsList = &s_AuditEventsList
+var _AuditEventsList_member = &s_AuditEventsList_member
+
+var _AuditEventType = &s_AuditEventType
+
+var BasicLayout = &sBasicLayout
+var BasicLayout_topPanel = &sBasicLayout_topPanel
+var BasicLayout_moreInfo = &sBasicLayout_moreInfo
+
+var _BatchGetCaseRuleErrorList = &s_BatchGetCaseRuleErrorList
+var _BatchGetCaseRuleErrorList_member = &s_BatchGetCaseRuleErrorList_member
+
+var _BatchGetCaseRuleList = &s_BatchGetCaseRuleList
+var _BatchGetCaseRuleList_member = &s_BatchGetCaseRuleList_member
+
+var _BatchGetCaseRuleUnprocessedList = &s_BatchGetCaseRuleUnprocessedList
+var _BatchGetCaseRuleUnprocessedList_member = &s_BatchGetCaseRuleUnprocessedList_member
+
+var _BatchGetFieldErrorList = &s_BatchGetFieldErrorList
+var _BatchGetFieldErrorList_member = &s_BatchGetFieldErrorList_member
+
+var _BatchGetFieldIdentifierList = &s_BatchGetFieldIdentifierList
+var _BatchGetFieldIdentifierList_member = &s_BatchGetFieldIdentifierList_member
+
+var _BatchGetFieldList = &s_BatchGetFieldList
+var _BatchGetFieldList_member = &s_BatchGetFieldList_member
+
+var BooleanCondition = &sBooleanCondition
+var BooleanCondition_equalTo = &sBooleanCondition_equalTo
+var BooleanCondition_notEqualTo = &sBooleanCondition_notEqualTo
+var BooleanCondition_andAll = &sBooleanCondition_andAll
+var BooleanCondition_orAll = &sBooleanCondition_orAll
+
+var _BooleanConditionList = &s_BooleanConditionList
+var _BooleanConditionList_member = &s_BooleanConditionList_member
+
+var BooleanOperands = &sBooleanOperands
+var BooleanOperands_operandOne = &sBooleanOperands_operandOne
+var BooleanOperands_operandTwo = &sBooleanOperands_operandTwo
+var BooleanOperands_result = &sBooleanOperands_result
+
+var _CaseArn = &s_CaseArn
+
+var CaseEventIncludedData = &sCaseEventIncludedData
+var CaseEventIncludedData_fields = &sCaseEventIncludedData_fields
+
+var CaseFilter = &sCaseFilter
+var CaseFilter_field = &sCaseFilter_field
+var CaseFilter_not = &sCaseFilter_not
+var CaseFilter_tag = &sCaseFilter_tag
+var CaseFilter_andAll = &sCaseFilter_andAll
+var CaseFilter_orAll = &sCaseFilter_orAll
+
+var _CaseFilterList = &s_CaseFilterList
+var _CaseFilterList_member = &s_CaseFilterList_member
+
+var _CaseId = &s_CaseId
+
+var _CaseRuleArn = &s_CaseRuleArn
+
+var _CaseRuleDescription = &s_CaseRuleDescription
+
+var CaseRuleDetails = &sCaseRuleDetails
+var CaseRuleDetails_required = &sCaseRuleDetails_required
+var CaseRuleDetails_fieldOptions = &sCaseRuleDetails_fieldOptions
+var CaseRuleDetails_hidden = &sCaseRuleDetails_hidden
+
+var CaseRuleError = &sCaseRuleError
+var CaseRuleError_id = &sCaseRuleError_id
+var CaseRuleError_errorCode = &sCaseRuleError_errorCode
+var CaseRuleError_message = &sCaseRuleError_message
+
+var _CaseRuleId = &s_CaseRuleId
+
+var CaseRuleIdentifier = &sCaseRuleIdentifier
+var CaseRuleIdentifier_id = &sCaseRuleIdentifier_id
+
+var _CaseRuleIdentifierList = &s_CaseRuleIdentifierList
+var _CaseRuleIdentifierList_member = &s_CaseRuleIdentifierList_member
+
+var _CaseRuleName = &s_CaseRuleName
+
+var CaseRuleSummary = &sCaseRuleSummary
+var CaseRuleSummary_caseRuleId = &sCaseRuleSummary_caseRuleId
+var CaseRuleSummary_name = &sCaseRuleSummary_name
+var CaseRuleSummary_caseRuleArn = &sCaseRuleSummary_caseRuleArn
+var CaseRuleSummary_ruleType = &sCaseRuleSummary_ruleType
+var CaseRuleSummary_description = &sCaseRuleSummary_description
+
+var _CaseRuleSummaryList = &s_CaseRuleSummaryList
+var _CaseRuleSummaryList_member = &s_CaseRuleSummaryList_member
+
+var CaseSummary = &sCaseSummary
+var CaseSummary_caseId = &sCaseSummary_caseId
+var CaseSummary_templateId = &sCaseSummary_templateId
+
+var _CaseSummaryList = &s_CaseSummaryList
+var _CaseSummaryList_member = &s_CaseSummaryList_member
+
+var _Channel = &s_Channel
+
+var _ChannelList = &s_ChannelList
+var _ChannelList_member = &s_ChannelList_member
+
+var _CommentBody = &s_CommentBody
+
+var _CommentBodyTextType = &s_CommentBodyTextType
+
+var CommentContent = &sCommentContent
+var CommentContent_body = &sCommentContent_body
+var CommentContent_contentType = &sCommentContent_contentType
+
+var CommentFilter = &sCommentFilter
+
+var CommentUpdateContent = &sCommentUpdateContent
+var CommentUpdateContent_body = &sCommentUpdateContent_body
+var CommentUpdateContent_contentType = &sCommentUpdateContent_contentType
+
+var CompoundCondition = &sCompoundCondition
+var CompoundCondition_conditions = &sCompoundCondition_conditions
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ConnectCaseContent = &sConnectCaseContent
+var ConnectCaseContent_caseId = &sConnectCaseContent_caseId
+
+var ConnectCaseFilter = &sConnectCaseFilter
+var ConnectCaseFilter_caseId = &sConnectCaseFilter_caseId
+
+var ConnectCaseInputContent = &sConnectCaseInputContent
+var ConnectCaseInputContent_caseId = &sConnectCaseInputContent_caseId
+
+var _ConnectedToSystemTime = &s_ConnectedToSystemTime
+
+var Contact = &sContact
+var Contact_contactArn = &sContact_contactArn
+
+var _ContactArn = &s_ContactArn
+
+var ContactContent = &sContactContent
+var ContactContent_contactArn = &sContactContent_contactArn
+var ContactContent_channel = &sContactContent_channel
+var ContactContent_connectedToSystemTime = &sContactContent_connectedToSystemTime
+
+var ContactFilter = &sContactFilter
+var ContactFilter_channel = &sContactFilter_channel
+var ContactFilter_contactArn = &sContactFilter_contactArn
+
+var _CreatedTime = &s_CreatedTime
+
+var CustomContent = &sCustomContent
+var CustomContent_fields = &sCustomContent_fields
+
+var _CustomEntity = &s_CustomEntity
+
+var CustomFieldsFilter = &sCustomFieldsFilter
+var CustomFieldsFilter_field = &sCustomFieldsFilter_field
+var CustomFieldsFilter_not = &sCustomFieldsFilter_not
+var CustomFieldsFilter_andAll = &sCustomFieldsFilter_andAll
+var CustomFieldsFilter_orAll = &sCustomFieldsFilter_orAll
+
+var _CustomFieldsFilterList = &s_CustomFieldsFilterList
+var _CustomFieldsFilterList_member = &s_CustomFieldsFilterList_member
+
+var CustomFilter = &sCustomFilter
+var CustomFilter_fields = &sCustomFilter_fields
+
+var CustomInputContent = &sCustomInputContent
+var CustomInputContent_fields = &sCustomInputContent_fields
+
+var CustomUpdateContent = &sCustomUpdateContent
+var CustomUpdateContent_fields = &sCustomUpdateContent_fields
+
+var _Deleted = &s_Deleted
+
+var _DomainArn = &s_DomainArn
+
+var _DomainId = &s_DomainId
+
+var _DomainName = &s_DomainName
+
+var _DomainStatus = &s_DomainStatus
+
+var DomainSummary = &sDomainSummary
+var DomainSummary_domainId = &sDomainSummary_domainId
+var DomainSummary_domainArn = &sDomainSummary_domainArn
+var DomainSummary_name = &sDomainSummary_name
+
+var _DomainSummaryList = &s_DomainSummaryList
+var _DomainSummaryList_member = &s_DomainSummaryList_member
+
+var EmptyFieldValue = &sEmptyFieldValue
+
+var EmptyOperandValue = &sEmptyOperandValue
+
+var EventBridgeConfiguration = &sEventBridgeConfiguration
+var EventBridgeConfiguration_enabled = &sEventBridgeConfiguration_enabled
+var EventBridgeConfiguration_includedData = &sEventBridgeConfiguration_includedData
+
+var EventIncludedData = &sEventIncludedData
+var EventIncludedData_caseData = &sEventIncludedData_caseData
+var EventIncludedData_relatedItemData = &sEventIncludedData_relatedItemData
+
+var _FieldArn = &s_FieldArn
+
+var FieldAttributes = &sFieldAttributes
+var FieldAttributes_text = &sFieldAttributes_text
+
+var _FieldDescription = &s_FieldDescription
+
+var FieldError = &sFieldError
+var FieldError_id = &sFieldError_id
+var FieldError_errorCode = &sFieldError_errorCode
+var FieldError_message = &sFieldError_message
+
+var FieldFilter = &sFieldFilter
+var FieldFilter_equalTo = &sFieldFilter_equalTo
+var FieldFilter_contains = &sFieldFilter_contains
+var FieldFilter_greaterThan = &sFieldFilter_greaterThan
+var FieldFilter_greaterThanOrEqualTo = &sFieldFilter_greaterThanOrEqualTo
+var FieldFilter_lessThan = &sFieldFilter_lessThan
+var FieldFilter_lessThanOrEqualTo = &sFieldFilter_lessThanOrEqualTo
+
+var FieldGroup = &sFieldGroup
+var FieldGroup_name = &sFieldGroup_name
+var FieldGroup_fields = &sFieldGroup_fields
+
+var _FieldId = &s_FieldId
+
+var FieldIdentifier = &sFieldIdentifier
+var FieldIdentifier_id = &sFieldIdentifier_id
+
+var _FieldIdentifierList = &s_FieldIdentifierList
+var _FieldIdentifierList_member = &s_FieldIdentifierList_member
+
+var FieldItem = &sFieldItem
+var FieldItem_id = &sFieldItem_id
+
+var _FieldList = &s_FieldList
+var _FieldList_member = &s_FieldList_member
+
+var _FieldName = &s_FieldName
+
+var _FieldNamespace = &s_FieldNamespace
+
+var FieldOption = &sFieldOption
+var FieldOption_name = &sFieldOption_name
+var FieldOption_value = &sFieldOption_value
+var FieldOption_active = &sFieldOption_active
+
+var FieldOptionError = &sFieldOptionError
+var FieldOptionError_message = &sFieldOptionError_message
+var FieldOptionError_errorCode = &sFieldOptionError_errorCode
+var FieldOptionError_value = &sFieldOptionError_value
+
+var _FieldOptionErrorList = &s_FieldOptionErrorList
+var _FieldOptionErrorList_member = &s_FieldOptionErrorList_member
+
+var _FieldOptionName = &s_FieldOptionName
+
+var FieldOptionsCaseRule = &sFieldOptionsCaseRule
+var FieldOptionsCaseRule_parentFieldId = &sFieldOptionsCaseRule_parentFieldId
+var FieldOptionsCaseRule_childFieldId = &sFieldOptionsCaseRule_childFieldId
+var FieldOptionsCaseRule_parentChildFieldOptionsMappings = &sFieldOptionsCaseRule_parentChildFieldOptionsMappings
+
+var _FieldOptionsList = &s_FieldOptionsList
+var _FieldOptionsList_member = &s_FieldOptionsList_member
+
+var _FieldOptionValue = &s_FieldOptionValue
+
+var FieldSummary = &sFieldSummary
+var FieldSummary_fieldId = &sFieldSummary_fieldId
+var FieldSummary_fieldArn = &sFieldSummary_fieldArn
+var FieldSummary_name = &sFieldSummary_name
+var FieldSummary_type = &sFieldSummary_type
+var FieldSummary_namespace = &sFieldSummary_namespace
+var FieldSummary_attributes = &sFieldSummary_attributes
+
+var _FieldSummaryList = &s_FieldSummaryList
+var _FieldSummaryList_member = &s_FieldSummaryList_member
+
+var _FieldType = &s_FieldType
+
+var FieldValue = &sFieldValue
+var FieldValue_id = &sFieldValue_id
+var FieldValue_value = &sFieldValue_value
+
+var _FieldValueList = &s_FieldValueList
+var _FieldValueList_member = &s_FieldValueList_member
+
+var FieldValueUnion = &sFieldValueUnion
+var FieldValueUnion_stringValue = &sFieldValueUnion_stringValue
+var FieldValueUnion_doubleValue = &sFieldValueUnion_doubleValue
+var FieldValueUnion_booleanValue = &sFieldValueUnion_booleanValue
+var FieldValueUnion_emptyValue = &sFieldValueUnion_emptyValue
+var FieldValueUnion_userArnValue = &sFieldValueUnion_userArnValue
+
+var _FileArn = &s_FileArn
+
+var FileContent = &sFileContent
+var FileContent_fileArn = &sFileContent_fileArn
+
+var FileFilter = &sFileFilter
+var FileFilter_fileArn = &sFileFilter_fileArn
+
+var GetCaseRuleResponse = &sGetCaseRuleResponse
+var GetCaseRuleResponse_caseRuleId = &sGetCaseRuleResponse_caseRuleId
+var GetCaseRuleResponse_name = &sGetCaseRuleResponse_name
+var GetCaseRuleResponse_caseRuleArn = &sGetCaseRuleResponse_caseRuleArn
+var GetCaseRuleResponse_rule = &sGetCaseRuleResponse_rule
+var GetCaseRuleResponse_description = &sGetCaseRuleResponse_description
+var GetCaseRuleResponse_deleted = &sGetCaseRuleResponse_deleted
+var GetCaseRuleResponse_createdTime = &sGetCaseRuleResponse_createdTime
+var GetCaseRuleResponse_lastModifiedTime = &sGetCaseRuleResponse_lastModifiedTime
+var GetCaseRuleResponse_tags = &sGetCaseRuleResponse_tags
+
+var GetFieldResponse = &sGetFieldResponse
+var GetFieldResponse_fieldId = &sGetFieldResponse_fieldId
+var GetFieldResponse_name = &sGetFieldResponse_name
+var GetFieldResponse_fieldArn = &sGetFieldResponse_fieldArn
+var GetFieldResponse_description = &sGetFieldResponse_description
+var GetFieldResponse_type = &sGetFieldResponse_type
+var GetFieldResponse_namespace = &sGetFieldResponse_namespace
+var GetFieldResponse_tags = &sGetFieldResponse_tags
+var GetFieldResponse_deleted = &sGetFieldResponse_deleted
+var GetFieldResponse_createdTime = &sGetFieldResponse_createdTime
+var GetFieldResponse_lastModifiedTime = &sGetFieldResponse_lastModifiedTime
+var GetFieldResponse_attributes = &sGetFieldResponse_attributes
+
+var HiddenCaseRule = &sHiddenCaseRule
+var HiddenCaseRule_defaultValue = &sHiddenCaseRule_defaultValue
+var HiddenCaseRule_conditions = &sHiddenCaseRule_conditions
+
+var _IamPrincipalArn = &s_IamPrincipalArn
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var _LastModifiedTime = &s_LastModifiedTime
+
+var _LayoutArn = &s_LayoutArn
+
+var LayoutConfiguration = &sLayoutConfiguration
+var LayoutConfiguration_defaultLayout = &sLayoutConfiguration_defaultLayout
+
+var LayoutContent = &sLayoutContent
+var LayoutContent_basic = &sLayoutContent_basic
+
+var _LayoutId = &s_LayoutId
+
+var _LayoutName = &s_LayoutName
+
+var LayoutSections = &sLayoutSections
+var LayoutSections_sections = &sLayoutSections_sections
+
+var LayoutSummary = &sLayoutSummary
+var LayoutSummary_layoutId = &sLayoutSummary_layoutId
+var LayoutSummary_layoutArn = &sLayoutSummary_layoutArn
+var LayoutSummary_name = &sLayoutSummary_name
+
+var _LayoutSummaryList = &s_LayoutSummaryList
+var _LayoutSummaryList_member = &s_LayoutSummaryList_member
+
+var _MaxResults = &s_MaxResults
+
+var _MutableTagKey = &s_MutableTagKey
+
+var _MutableTags = &s_MutableTags
+var _MutableTags_key = &s_MutableTags_key
+var _MutableTags_value = &s_MutableTags_value
+
+var _NextToken = &s_NextToken
+
+var OperandOne = &sOperandOne
+var OperandOne_fieldId = &sOperandOne_fieldId
+
+var OperandTwo = &sOperandTwo
+var OperandTwo_stringValue = &sOperandTwo_stringValue
+var OperandTwo_booleanValue = &sOperandTwo_booleanValue
+var OperandTwo_doubleValue = &sOperandTwo_doubleValue
+var OperandTwo_emptyValue = &sOperandTwo_emptyValue
+
+var _Order = &s_Order
+
+var ParentChildFieldOptionsMapping = &sParentChildFieldOptionsMapping
+var ParentChildFieldOptionsMapping_parentFieldOptionValue = &sParentChildFieldOptionsMapping_parentFieldOptionValue
+var ParentChildFieldOptionsMapping_childFieldOptionValues = &sParentChildFieldOptionsMapping_childFieldOptionValues
+
+var _ParentChildFieldOptionsMappingList = &s_ParentChildFieldOptionsMappingList
+var _ParentChildFieldOptionsMappingList_member = &s_ParentChildFieldOptionsMappingList_member
+
+var _ParentChildFieldOptionValue = &s_ParentChildFieldOptionValue
+
+var _ParentChildFieldOptionValueList = &s_ParentChildFieldOptionValueList
+var _ParentChildFieldOptionValueList_member = &s_ParentChildFieldOptionValueList_member
+
+var _RelatedItemArn = &s_RelatedItemArn
+
+var RelatedItemContent = &sRelatedItemContent
+var RelatedItemContent_contact = &sRelatedItemContent_contact
+var RelatedItemContent_comment = &sRelatedItemContent_comment
+var RelatedItemContent_file = &sRelatedItemContent_file
+var RelatedItemContent_sla = &sRelatedItemContent_sla
+var RelatedItemContent_connectCase = &sRelatedItemContent_connectCase
+var RelatedItemContent_custom = &sRelatedItemContent_custom
+
+var RelatedItemEventIncludedData = &sRelatedItemEventIncludedData
+var RelatedItemEventIncludedData_includeContent = &sRelatedItemEventIncludedData_includeContent
+
+var _RelatedItemFilterList = &s_RelatedItemFilterList
+var _RelatedItemFilterList_member = &s_RelatedItemFilterList_member
+
+var _RelatedItemId = &s_RelatedItemId
+
+var RelatedItemInputContent = &sRelatedItemInputContent
+var RelatedItemInputContent_contact = &sRelatedItemInputContent_contact
+var RelatedItemInputContent_comment = &sRelatedItemInputContent_comment
+var RelatedItemInputContent_file = &sRelatedItemInputContent_file
+var RelatedItemInputContent_sla = &sRelatedItemInputContent_sla
+var RelatedItemInputContent_connectCase = &sRelatedItemInputContent_connectCase
+var RelatedItemInputContent_custom = &sRelatedItemInputContent_custom
+
+var _RelatedItemType = &s_RelatedItemType
+
+var RelatedItemTypeFilter = &sRelatedItemTypeFilter
+var RelatedItemTypeFilter_contact = &sRelatedItemTypeFilter_contact
+var RelatedItemTypeFilter_comment = &sRelatedItemTypeFilter_comment
+var RelatedItemTypeFilter_file = &sRelatedItemTypeFilter_file
+var RelatedItemTypeFilter_sla = &sRelatedItemTypeFilter_sla
+var RelatedItemTypeFilter_connectCase = &sRelatedItemTypeFilter_connectCase
+var RelatedItemTypeFilter_custom = &sRelatedItemTypeFilter_custom
+
+var RelatedItemUpdateContent = &sRelatedItemUpdateContent
+var RelatedItemUpdateContent_comment = &sRelatedItemUpdateContent_comment
+var RelatedItemUpdateContent_custom = &sRelatedItemUpdateContent_custom
+
+var RequiredCaseRule = &sRequiredCaseRule
+var RequiredCaseRule_defaultValue = &sRequiredCaseRule_defaultValue
+var RequiredCaseRule_conditions = &sRequiredCaseRule_conditions
+
+var RequiredField = &sRequiredField
+var RequiredField_fieldId = &sRequiredField_fieldId
+
+var _RequiredFieldList = &s_RequiredFieldList
+var _RequiredFieldList_member = &s_RequiredFieldList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _RuleType = &s_RuleType
+
+var SearchAllRelatedItemsResponseItem = &sSearchAllRelatedItemsResponseItem
+var SearchAllRelatedItemsResponseItem_relatedItemId = &sSearchAllRelatedItemsResponseItem_relatedItemId
+var SearchAllRelatedItemsResponseItem_caseId = &sSearchAllRelatedItemsResponseItem_caseId
+var SearchAllRelatedItemsResponseItem_type = &sSearchAllRelatedItemsResponseItem_type
+var SearchAllRelatedItemsResponseItem_associationTime = &sSearchAllRelatedItemsResponseItem_associationTime
+var SearchAllRelatedItemsResponseItem_content = &sSearchAllRelatedItemsResponseItem_content
+var SearchAllRelatedItemsResponseItem_performedBy = &sSearchAllRelatedItemsResponseItem_performedBy
+var SearchAllRelatedItemsResponseItem_tags = &sSearchAllRelatedItemsResponseItem_tags
+
+var _SearchAllRelatedItemsResponseItemList = &s_SearchAllRelatedItemsResponseItemList
+var _SearchAllRelatedItemsResponseItemList_member = &s_SearchAllRelatedItemsResponseItemList_member
+
+var SearchAllRelatedItemsSort = &sSearchAllRelatedItemsSort
+var SearchAllRelatedItemsSort_sortProperty = &sSearchAllRelatedItemsSort_sortProperty
+var SearchAllRelatedItemsSort_sortOrder = &sSearchAllRelatedItemsSort_sortOrder
+
+var _SearchAllRelatedItemsSortList = &s_SearchAllRelatedItemsSortList
+var _SearchAllRelatedItemsSortList_member = &s_SearchAllRelatedItemsSortList_member
+
+var _SearchAllRelatedItemsSortProperty = &s_SearchAllRelatedItemsSortProperty
+
+var SearchCasesResponseItem = &sSearchCasesResponseItem
+var SearchCasesResponseItem_caseId = &sSearchCasesResponseItem_caseId
+var SearchCasesResponseItem_templateId = &sSearchCasesResponseItem_templateId
+var SearchCasesResponseItem_fields = &sSearchCasesResponseItem_fields
+var SearchCasesResponseItem_tags = &sSearchCasesResponseItem_tags
+
+var _SearchCasesResponseItemList = &s_SearchCasesResponseItemList
+var _SearchCasesResponseItemList_member = &s_SearchCasesResponseItemList_member
+
+var SearchRelatedItemsResponseItem = &sSearchRelatedItemsResponseItem
+var SearchRelatedItemsResponseItem_relatedItemId = &sSearchRelatedItemsResponseItem_relatedItemId
+var SearchRelatedItemsResponseItem_type = &sSearchRelatedItemsResponseItem_type
+var SearchRelatedItemsResponseItem_associationTime = &sSearchRelatedItemsResponseItem_associationTime
+var SearchRelatedItemsResponseItem_content = &sSearchRelatedItemsResponseItem_content
+var SearchRelatedItemsResponseItem_tags = &sSearchRelatedItemsResponseItem_tags
+var SearchRelatedItemsResponseItem_performedBy = &sSearchRelatedItemsResponseItem_performedBy
+
+var _SearchRelatedItemsResponseItemList = &s_SearchRelatedItemsResponseItemList
+var _SearchRelatedItemsResponseItemList_member = &s_SearchRelatedItemsResponseItemList_member
+
+var _SearchTagKey = &s_SearchTagKey
+
+var Section = &sSection
+var Section_fieldGroup = &sSection_fieldGroup
+
+var _SectionsList = &s_SectionsList
+var _SectionsList_member = &s_SectionsList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _SlaCompletionTime = &s_SlaCompletionTime
+
+var SlaConfiguration = &sSlaConfiguration
+var SlaConfiguration_name = &sSlaConfiguration_name
+var SlaConfiguration_type = &sSlaConfiguration_type
+var SlaConfiguration_status = &sSlaConfiguration_status
+var SlaConfiguration_fieldId = &sSlaConfiguration_fieldId
+var SlaConfiguration_targetFieldValues = &sSlaConfiguration_targetFieldValues
+var SlaConfiguration_targetTime = &sSlaConfiguration_targetTime
+var SlaConfiguration_completionTime = &sSlaConfiguration_completionTime
+
+var SlaContent = &sSlaContent
+var SlaContent_slaConfiguration = &sSlaContent_slaConfiguration
+
+var _SlaFieldValueUnionList = &s_SlaFieldValueUnionList
+var _SlaFieldValueUnionList_member = &s_SlaFieldValueUnionList_member
+
+var SlaFilter = &sSlaFilter
+var SlaFilter_name = &sSlaFilter_name
+var SlaFilter_status = &sSlaFilter_status
+
+var SlaInputConfiguration = &sSlaInputConfiguration
+var SlaInputConfiguration_name = &sSlaInputConfiguration_name
+var SlaInputConfiguration_type = &sSlaInputConfiguration_type
+var SlaInputConfiguration_fieldId = &sSlaInputConfiguration_fieldId
+var SlaInputConfiguration_targetFieldValues = &sSlaInputConfiguration_targetFieldValues
+var SlaInputConfiguration_targetSlaMinutes = &sSlaInputConfiguration_targetSlaMinutes
+
+var SlaInputContent = &sSlaInputContent
+var SlaInputContent_slaInputConfiguration = &sSlaInputContent_slaInputConfiguration
+
+var _SlaName = &s_SlaName
+
+var _SlaStatus = &s_SlaStatus
+
+var _SlaTargetTime = &s_SlaTargetTime
+
+var _SlaType = &s_SlaType
+
+var Sort = &sSort
+var Sort_fieldId = &sSort_fieldId
+var Sort_sortOrder = &sSort_sortOrder
+
+var _SortList = &s_SortList
+var _SortList_member = &s_SortList_member
+
+var TagFilter = &sTagFilter
+var TagFilter_equalTo = &sTagFilter_equalTo
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var TagPropagationConfiguration = &sTagPropagationConfiguration
+var TagPropagationConfiguration_resourceType = &sTagPropagationConfiguration_resourceType
+var TagPropagationConfiguration_tagMap = &sTagPropagationConfiguration_tagMap
+
+var _TagPropagationConfigurationList = &s_TagPropagationConfigurationList
+var _TagPropagationConfigurationList_member = &s_TagPropagationConfigurationList_member
+
+var _TagPropagationResourceType = &s_TagPropagationResourceType
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var TagValue = &sTagValue
+var TagValue_key = &sTagValue_key
+var TagValue_value = &sTagValue_value
+
+var _TagValueString = &s_TagValueString
+
+var _TargetSlaMinutes = &s_TargetSlaMinutes
+
+var _TemplateArn = &s_TemplateArn
+
+var _TemplateCaseRuleList = &s_TemplateCaseRuleList
+var _TemplateCaseRuleList_member = &s_TemplateCaseRuleList_member
+
+var _TemplateDescription = &s_TemplateDescription
+
+var _TemplateId = &s_TemplateId
+
+var _TemplateName = &s_TemplateName
+
+var TemplateRule = &sTemplateRule
+var TemplateRule_caseRuleId = &sTemplateRule_caseRuleId
+var TemplateRule_fieldId = &sTemplateRule_fieldId
+
+var _TemplateStatus = &s_TemplateStatus
+
+var _TemplateStatusFilters = &s_TemplateStatusFilters
+var _TemplateStatusFilters_member = &s_TemplateStatusFilters_member
+
+var TemplateSummary = &sTemplateSummary
+var TemplateSummary_templateId = &sTemplateSummary_templateId
+var TemplateSummary_templateArn = &sTemplateSummary_templateArn
+var TemplateSummary_name = &sTemplateSummary_name
+var TemplateSummary_status = &sTemplateSummary_status
+var TemplateSummary_tagPropagationConfigurations = &sTemplateSummary_tagPropagationConfigurations
+
+var _TemplateSummaryList = &s_TemplateSummaryList
+var _TemplateSummaryList_member = &s_TemplateSummaryList_member
+
+var TextAttributes = &sTextAttributes
+var TextAttributes_isMultiline = &sTextAttributes_isMultiline
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _TotalCount = &s_TotalCount
+
+var _UserArn = &s_UserArn
+
+var UserUnion = &sUserUnion
+var UserUnion_userArn = &sUserUnion_userArn
+var UserUnion_customEntity = &sUserUnion_customEntity
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _Value = &s_Value
+
+var _ValuesList = &s_ValuesList
+var _ValuesList_member = &s_ValuesList_member
+
+var BatchGetCaseRuleRequest = &sBatchGetCaseRuleRequest
+var BatchGetCaseRuleRequest_domainId = &sBatchGetCaseRuleRequest_domainId
+var BatchGetCaseRuleRequest_caseRules = &sBatchGetCaseRuleRequest_caseRules
+
+var BatchGetCaseRuleResponse = &sBatchGetCaseRuleResponse
+var BatchGetCaseRuleResponse_caseRules = &sBatchGetCaseRuleResponse_caseRules
+var BatchGetCaseRuleResponse_errors = &sBatchGetCaseRuleResponse_errors
+var BatchGetCaseRuleResponse_unprocessedCaseRules = &sBatchGetCaseRuleResponse_unprocessedCaseRules
+
+var BatchGetFieldRequest = &sBatchGetFieldRequest
+var BatchGetFieldRequest_domainId = &sBatchGetFieldRequest_domainId
+var BatchGetFieldRequest_fields = &sBatchGetFieldRequest_fields
+
+var BatchGetFieldResponse = &sBatchGetFieldResponse
+var BatchGetFieldResponse_fields = &sBatchGetFieldResponse_fields
+var BatchGetFieldResponse_errors = &sBatchGetFieldResponse_errors
+
+var BatchPutFieldOptionsRequest = &sBatchPutFieldOptionsRequest
+var BatchPutFieldOptionsRequest_domainId = &sBatchPutFieldOptionsRequest_domainId
+var BatchPutFieldOptionsRequest_fieldId = &sBatchPutFieldOptionsRequest_fieldId
+var BatchPutFieldOptionsRequest_options = &sBatchPutFieldOptionsRequest_options
+
+var BatchPutFieldOptionsResponse = &sBatchPutFieldOptionsResponse
+var BatchPutFieldOptionsResponse_errors = &sBatchPutFieldOptionsResponse_errors
+
+var CreateCaseRequest = &sCreateCaseRequest
+var CreateCaseRequest_domainId = &sCreateCaseRequest_domainId
+var CreateCaseRequest_templateId = &sCreateCaseRequest_templateId
+var CreateCaseRequest_fields = &sCreateCaseRequest_fields
+var CreateCaseRequest_clientToken = &sCreateCaseRequest_clientToken
+var CreateCaseRequest_performedBy = &sCreateCaseRequest_performedBy
+var CreateCaseRequest_tags = &sCreateCaseRequest_tags
+
+var CreateCaseResponse = &sCreateCaseResponse
+var CreateCaseResponse_caseId = &sCreateCaseResponse_caseId
+var CreateCaseResponse_caseArn = &sCreateCaseResponse_caseArn
+
+var CreateCaseRuleRequest = &sCreateCaseRuleRequest
+var CreateCaseRuleRequest_domainId = &sCreateCaseRuleRequest_domainId
+var CreateCaseRuleRequest_name = &sCreateCaseRuleRequest_name
+var CreateCaseRuleRequest_description = &sCreateCaseRuleRequest_description
+var CreateCaseRuleRequest_rule = &sCreateCaseRuleRequest_rule
+
+var CreateCaseRuleResponse = &sCreateCaseRuleResponse
+var CreateCaseRuleResponse_caseRuleId = &sCreateCaseRuleResponse_caseRuleId
+var CreateCaseRuleResponse_caseRuleArn = &sCreateCaseRuleResponse_caseRuleArn
+
+var CreateDomainRequest = &sCreateDomainRequest
+var CreateDomainRequest_name = &sCreateDomainRequest_name
+
+var CreateDomainResponse = &sCreateDomainResponse
+var CreateDomainResponse_domainId = &sCreateDomainResponse_domainId
+var CreateDomainResponse_domainArn = &sCreateDomainResponse_domainArn
+var CreateDomainResponse_domainStatus = &sCreateDomainResponse_domainStatus
+
+var CreateFieldRequest = &sCreateFieldRequest
+var CreateFieldRequest_domainId = &sCreateFieldRequest_domainId
+var CreateFieldRequest_name = &sCreateFieldRequest_name
+var CreateFieldRequest_type = &sCreateFieldRequest_type
+var CreateFieldRequest_description = &sCreateFieldRequest_description
+var CreateFieldRequest_attributes = &sCreateFieldRequest_attributes
+
+var CreateFieldResponse = &sCreateFieldResponse
+var CreateFieldResponse_fieldId = &sCreateFieldResponse_fieldId
+var CreateFieldResponse_fieldArn = &sCreateFieldResponse_fieldArn
+
+var CreateLayoutRequest = &sCreateLayoutRequest
+var CreateLayoutRequest_domainId = &sCreateLayoutRequest_domainId
+var CreateLayoutRequest_name = &sCreateLayoutRequest_name
+var CreateLayoutRequest_content = &sCreateLayoutRequest_content
+
+var CreateLayoutResponse = &sCreateLayoutResponse
+var CreateLayoutResponse_layoutId = &sCreateLayoutResponse_layoutId
+var CreateLayoutResponse_layoutArn = &sCreateLayoutResponse_layoutArn
+
+var CreateRelatedItemRequest = &sCreateRelatedItemRequest
+var CreateRelatedItemRequest_domainId = &sCreateRelatedItemRequest_domainId
+var CreateRelatedItemRequest_caseId = &sCreateRelatedItemRequest_caseId
+var CreateRelatedItemRequest_type = &sCreateRelatedItemRequest_type
+var CreateRelatedItemRequest_content = &sCreateRelatedItemRequest_content
+var CreateRelatedItemRequest_performedBy = &sCreateRelatedItemRequest_performedBy
+
+var CreateRelatedItemResponse = &sCreateRelatedItemResponse
+var CreateRelatedItemResponse_relatedItemId = &sCreateRelatedItemResponse_relatedItemId
+var CreateRelatedItemResponse_relatedItemArn = &sCreateRelatedItemResponse_relatedItemArn
+
+var CreateTemplateRequest = &sCreateTemplateRequest
+var CreateTemplateRequest_domainId = &sCreateTemplateRequest_domainId
+var CreateTemplateRequest_name = &sCreateTemplateRequest_name
+var CreateTemplateRequest_description = &sCreateTemplateRequest_description
+var CreateTemplateRequest_layoutConfiguration = &sCreateTemplateRequest_layoutConfiguration
+var CreateTemplateRequest_requiredFields = &sCreateTemplateRequest_requiredFields
+var CreateTemplateRequest_status = &sCreateTemplateRequest_status
+var CreateTemplateRequest_rules = &sCreateTemplateRequest_rules
+var CreateTemplateRequest_tagPropagationConfigurations = &sCreateTemplateRequest_tagPropagationConfigurations
+
+var CreateTemplateResponse = &sCreateTemplateResponse
+var CreateTemplateResponse_templateId = &sCreateTemplateResponse_templateId
+var CreateTemplateResponse_templateArn = &sCreateTemplateResponse_templateArn
+
+var DeleteCaseRequest = &sDeleteCaseRequest
+var DeleteCaseRequest_domainId = &sDeleteCaseRequest_domainId
+var DeleteCaseRequest_caseId = &sDeleteCaseRequest_caseId
+
+var DeleteCaseResponse = &sDeleteCaseResponse
+
+var DeleteCaseRuleRequest = &sDeleteCaseRuleRequest
+var DeleteCaseRuleRequest_domainId = &sDeleteCaseRuleRequest_domainId
+var DeleteCaseRuleRequest_caseRuleId = &sDeleteCaseRuleRequest_caseRuleId
+
+var DeleteCaseRuleResponse = &sDeleteCaseRuleResponse
+
+var DeleteDomainRequest = &sDeleteDomainRequest
+var DeleteDomainRequest_domainId = &sDeleteDomainRequest_domainId
+
+var DeleteDomainResponse = &sDeleteDomainResponse
+
+var DeleteFieldRequest = &sDeleteFieldRequest
+var DeleteFieldRequest_domainId = &sDeleteFieldRequest_domainId
+var DeleteFieldRequest_fieldId = &sDeleteFieldRequest_fieldId
+
+var DeleteFieldResponse = &sDeleteFieldResponse
+
+var DeleteLayoutRequest = &sDeleteLayoutRequest
+var DeleteLayoutRequest_domainId = &sDeleteLayoutRequest_domainId
+var DeleteLayoutRequest_layoutId = &sDeleteLayoutRequest_layoutId
+
+var DeleteLayoutResponse = &sDeleteLayoutResponse
+
+var DeleteRelatedItemRequest = &sDeleteRelatedItemRequest
+var DeleteRelatedItemRequest_domainId = &sDeleteRelatedItemRequest_domainId
+var DeleteRelatedItemRequest_caseId = &sDeleteRelatedItemRequest_caseId
+var DeleteRelatedItemRequest_relatedItemId = &sDeleteRelatedItemRequest_relatedItemId
+
+var DeleteRelatedItemResponse = &sDeleteRelatedItemResponse
+
+var DeleteTemplateRequest = &sDeleteTemplateRequest
+var DeleteTemplateRequest_domainId = &sDeleteTemplateRequest_domainId
+var DeleteTemplateRequest_templateId = &sDeleteTemplateRequest_templateId
+
+var DeleteTemplateResponse = &sDeleteTemplateResponse
+
+var GetCaseAuditEventsRequest = &sGetCaseAuditEventsRequest
+var GetCaseAuditEventsRequest_caseId = &sGetCaseAuditEventsRequest_caseId
+var GetCaseAuditEventsRequest_domainId = &sGetCaseAuditEventsRequest_domainId
+var GetCaseAuditEventsRequest_maxResults = &sGetCaseAuditEventsRequest_maxResults
+var GetCaseAuditEventsRequest_nextToken = &sGetCaseAuditEventsRequest_nextToken
+
+var GetCaseAuditEventsResponse = &sGetCaseAuditEventsResponse
+var GetCaseAuditEventsResponse_nextToken = &sGetCaseAuditEventsResponse_nextToken
+var GetCaseAuditEventsResponse_auditEvents = &sGetCaseAuditEventsResponse_auditEvents
+
+var GetCaseEventConfigurationRequest = &sGetCaseEventConfigurationRequest
+var GetCaseEventConfigurationRequest_domainId = &sGetCaseEventConfigurationRequest_domainId
+
+var GetCaseEventConfigurationResponse = &sGetCaseEventConfigurationResponse
+var GetCaseEventConfigurationResponse_eventBridge = &sGetCaseEventConfigurationResponse_eventBridge
+
+var GetCaseRequest = &sGetCaseRequest
+var GetCaseRequest_caseId = &sGetCaseRequest_caseId
+var GetCaseRequest_domainId = &sGetCaseRequest_domainId
+var GetCaseRequest_fields = &sGetCaseRequest_fields
+var GetCaseRequest_nextToken = &sGetCaseRequest_nextToken
+
+var GetCaseResponse = &sGetCaseResponse
+var GetCaseResponse_fields = &sGetCaseResponse_fields
+var GetCaseResponse_templateId = &sGetCaseResponse_templateId
+var GetCaseResponse_nextToken = &sGetCaseResponse_nextToken
+var GetCaseResponse_tags = &sGetCaseResponse_tags
+
+var GetDomainRequest = &sGetDomainRequest
+var GetDomainRequest_domainId = &sGetDomainRequest_domainId
+
+var GetDomainResponse = &sGetDomainResponse
+var GetDomainResponse_domainId = &sGetDomainResponse_domainId
+var GetDomainResponse_domainArn = &sGetDomainResponse_domainArn
+var GetDomainResponse_name = &sGetDomainResponse_name
+var GetDomainResponse_createdTime = &sGetDomainResponse_createdTime
+var GetDomainResponse_domainStatus = &sGetDomainResponse_domainStatus
+var GetDomainResponse_tags = &sGetDomainResponse_tags
+
+var GetLayoutRequest = &sGetLayoutRequest
+var GetLayoutRequest_domainId = &sGetLayoutRequest_domainId
+var GetLayoutRequest_layoutId = &sGetLayoutRequest_layoutId
+
+var GetLayoutResponse = &sGetLayoutResponse
+var GetLayoutResponse_layoutId = &sGetLayoutResponse_layoutId
+var GetLayoutResponse_layoutArn = &sGetLayoutResponse_layoutArn
+var GetLayoutResponse_name = &sGetLayoutResponse_name
+var GetLayoutResponse_content = &sGetLayoutResponse_content
+var GetLayoutResponse_tags = &sGetLayoutResponse_tags
+var GetLayoutResponse_deleted = &sGetLayoutResponse_deleted
+var GetLayoutResponse_createdTime = &sGetLayoutResponse_createdTime
+var GetLayoutResponse_lastModifiedTime = &sGetLayoutResponse_lastModifiedTime
+
+var GetTemplateRequest = &sGetTemplateRequest
+var GetTemplateRequest_domainId = &sGetTemplateRequest_domainId
+var GetTemplateRequest_templateId = &sGetTemplateRequest_templateId
+
+var GetTemplateResponse = &sGetTemplateResponse
+var GetTemplateResponse_templateId = &sGetTemplateResponse_templateId
+var GetTemplateResponse_templateArn = &sGetTemplateResponse_templateArn
+var GetTemplateResponse_name = &sGetTemplateResponse_name
+var GetTemplateResponse_description = &sGetTemplateResponse_description
+var GetTemplateResponse_layoutConfiguration = &sGetTemplateResponse_layoutConfiguration
+var GetTemplateResponse_requiredFields = &sGetTemplateResponse_requiredFields
+var GetTemplateResponse_tags = &sGetTemplateResponse_tags
+var GetTemplateResponse_status = &sGetTemplateResponse_status
+var GetTemplateResponse_deleted = &sGetTemplateResponse_deleted
+var GetTemplateResponse_createdTime = &sGetTemplateResponse_createdTime
+var GetTemplateResponse_lastModifiedTime = &sGetTemplateResponse_lastModifiedTime
+var GetTemplateResponse_rules = &sGetTemplateResponse_rules
+var GetTemplateResponse_tagPropagationConfigurations = &sGetTemplateResponse_tagPropagationConfigurations
+
+var ListCaseRulesRequest = &sListCaseRulesRequest
+var ListCaseRulesRequest_domainId = &sListCaseRulesRequest_domainId
+var ListCaseRulesRequest_maxResults = &sListCaseRulesRequest_maxResults
+var ListCaseRulesRequest_nextToken = &sListCaseRulesRequest_nextToken
+
+var ListCaseRulesResponse = &sListCaseRulesResponse
+var ListCaseRulesResponse_caseRules = &sListCaseRulesResponse_caseRules
+var ListCaseRulesResponse_nextToken = &sListCaseRulesResponse_nextToken
+
+var ListCasesForContactRequest = &sListCasesForContactRequest
+var ListCasesForContactRequest_domainId = &sListCasesForContactRequest_domainId
+var ListCasesForContactRequest_contactArn = &sListCasesForContactRequest_contactArn
+var ListCasesForContactRequest_maxResults = &sListCasesForContactRequest_maxResults
+var ListCasesForContactRequest_nextToken = &sListCasesForContactRequest_nextToken
+
+var ListCasesForContactResponse = &sListCasesForContactResponse
+var ListCasesForContactResponse_cases = &sListCasesForContactResponse_cases
+var ListCasesForContactResponse_nextToken = &sListCasesForContactResponse_nextToken
+
+var ListDomainsRequest = &sListDomainsRequest
+var ListDomainsRequest_maxResults = &sListDomainsRequest_maxResults
+var ListDomainsRequest_nextToken = &sListDomainsRequest_nextToken
+
+var ListDomainsResponse = &sListDomainsResponse
+var ListDomainsResponse_domains = &sListDomainsResponse_domains
+var ListDomainsResponse_nextToken = &sListDomainsResponse_nextToken
+
+var ListFieldOptionsRequest = &sListFieldOptionsRequest
+var ListFieldOptionsRequest_domainId = &sListFieldOptionsRequest_domainId
+var ListFieldOptionsRequest_fieldId = &sListFieldOptionsRequest_fieldId
+var ListFieldOptionsRequest_maxResults = &sListFieldOptionsRequest_maxResults
+var ListFieldOptionsRequest_nextToken = &sListFieldOptionsRequest_nextToken
+var ListFieldOptionsRequest_values = &sListFieldOptionsRequest_values
+
+var ListFieldOptionsResponse = &sListFieldOptionsResponse
+var ListFieldOptionsResponse_options = &sListFieldOptionsResponse_options
+var ListFieldOptionsResponse_nextToken = &sListFieldOptionsResponse_nextToken
+
+var ListFieldsRequest = &sListFieldsRequest
+var ListFieldsRequest_domainId = &sListFieldsRequest_domainId
+var ListFieldsRequest_maxResults = &sListFieldsRequest_maxResults
+var ListFieldsRequest_nextToken = &sListFieldsRequest_nextToken
+
+var ListFieldsResponse = &sListFieldsResponse
+var ListFieldsResponse_fields = &sListFieldsResponse_fields
+var ListFieldsResponse_nextToken = &sListFieldsResponse_nextToken
+
+var ListLayoutsRequest = &sListLayoutsRequest
+var ListLayoutsRequest_domainId = &sListLayoutsRequest_domainId
+var ListLayoutsRequest_maxResults = &sListLayoutsRequest_maxResults
+var ListLayoutsRequest_nextToken = &sListLayoutsRequest_nextToken
+
+var ListLayoutsResponse = &sListLayoutsResponse
+var ListLayoutsResponse_layouts = &sListLayoutsResponse_layouts
+var ListLayoutsResponse_nextToken = &sListLayoutsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_arn = &sListTagsForResourceRequest_arn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListTemplatesRequest = &sListTemplatesRequest
+var ListTemplatesRequest_domainId = &sListTemplatesRequest_domainId
+var ListTemplatesRequest_maxResults = &sListTemplatesRequest_maxResults
+var ListTemplatesRequest_nextToken = &sListTemplatesRequest_nextToken
+var ListTemplatesRequest_status = &sListTemplatesRequest_status
+
+var ListTemplatesResponse = &sListTemplatesResponse
+var ListTemplatesResponse_templates = &sListTemplatesResponse_templates
+var ListTemplatesResponse_nextToken = &sListTemplatesResponse_nextToken
+
+var PutCaseEventConfigurationRequest = &sPutCaseEventConfigurationRequest
+var PutCaseEventConfigurationRequest_domainId = &sPutCaseEventConfigurationRequest_domainId
+var PutCaseEventConfigurationRequest_eventBridge = &sPutCaseEventConfigurationRequest_eventBridge
+
+var PutCaseEventConfigurationResponse = &sPutCaseEventConfigurationResponse
+
+var SearchAllRelatedItemsRequest = &sSearchAllRelatedItemsRequest
+var SearchAllRelatedItemsRequest_domainId = &sSearchAllRelatedItemsRequest_domainId
+var SearchAllRelatedItemsRequest_maxResults = &sSearchAllRelatedItemsRequest_maxResults
+var SearchAllRelatedItemsRequest_nextToken = &sSearchAllRelatedItemsRequest_nextToken
+var SearchAllRelatedItemsRequest_filters = &sSearchAllRelatedItemsRequest_filters
+var SearchAllRelatedItemsRequest_sorts = &sSearchAllRelatedItemsRequest_sorts
+
+var SearchAllRelatedItemsResponse = &sSearchAllRelatedItemsResponse
+var SearchAllRelatedItemsResponse_nextToken = &sSearchAllRelatedItemsResponse_nextToken
+var SearchAllRelatedItemsResponse_relatedItems = &sSearchAllRelatedItemsResponse_relatedItems
+
+var SearchCasesRequest = &sSearchCasesRequest
+var SearchCasesRequest_domainId = &sSearchCasesRequest_domainId
+var SearchCasesRequest_maxResults = &sSearchCasesRequest_maxResults
+var SearchCasesRequest_nextToken = &sSearchCasesRequest_nextToken
+var SearchCasesRequest_searchTerm = &sSearchCasesRequest_searchTerm
+var SearchCasesRequest_filter = &sSearchCasesRequest_filter
+var SearchCasesRequest_sorts = &sSearchCasesRequest_sorts
+var SearchCasesRequest_fields = &sSearchCasesRequest_fields
+
+var SearchCasesResponse = &sSearchCasesResponse
+var SearchCasesResponse_nextToken = &sSearchCasesResponse_nextToken
+var SearchCasesResponse_cases = &sSearchCasesResponse_cases
+var SearchCasesResponse_totalCount = &sSearchCasesResponse_totalCount
+
+var SearchRelatedItemsRequest = &sSearchRelatedItemsRequest
+var SearchRelatedItemsRequest_domainId = &sSearchRelatedItemsRequest_domainId
+var SearchRelatedItemsRequest_caseId = &sSearchRelatedItemsRequest_caseId
+var SearchRelatedItemsRequest_maxResults = &sSearchRelatedItemsRequest_maxResults
+var SearchRelatedItemsRequest_nextToken = &sSearchRelatedItemsRequest_nextToken
+var SearchRelatedItemsRequest_filters = &sSearchRelatedItemsRequest_filters
+
+var SearchRelatedItemsResponse = &sSearchRelatedItemsResponse
+var SearchRelatedItemsResponse_nextToken = &sSearchRelatedItemsResponse_nextToken
+var SearchRelatedItemsResponse_relatedItems = &sSearchRelatedItemsResponse_relatedItems
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_arn = &sTagResourceRequest_arn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_arn = &sUntagResourceRequest_arn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UpdateCaseRequest = &sUpdateCaseRequest
+var UpdateCaseRequest_domainId = &sUpdateCaseRequest_domainId
+var UpdateCaseRequest_caseId = &sUpdateCaseRequest_caseId
+var UpdateCaseRequest_fields = &sUpdateCaseRequest_fields
+var UpdateCaseRequest_performedBy = &sUpdateCaseRequest_performedBy
+
+var UpdateCaseResponse = &sUpdateCaseResponse
+
+var UpdateCaseRuleRequest = &sUpdateCaseRuleRequest
+var UpdateCaseRuleRequest_domainId = &sUpdateCaseRuleRequest_domainId
+var UpdateCaseRuleRequest_caseRuleId = &sUpdateCaseRuleRequest_caseRuleId
+var UpdateCaseRuleRequest_name = &sUpdateCaseRuleRequest_name
+var UpdateCaseRuleRequest_description = &sUpdateCaseRuleRequest_description
+var UpdateCaseRuleRequest_rule = &sUpdateCaseRuleRequest_rule
+
+var UpdateCaseRuleResponse = &sUpdateCaseRuleResponse
+
+var UpdateFieldRequest = &sUpdateFieldRequest
+var UpdateFieldRequest_domainId = &sUpdateFieldRequest_domainId
+var UpdateFieldRequest_fieldId = &sUpdateFieldRequest_fieldId
+var UpdateFieldRequest_name = &sUpdateFieldRequest_name
+var UpdateFieldRequest_description = &sUpdateFieldRequest_description
+var UpdateFieldRequest_attributes = &sUpdateFieldRequest_attributes
+
+var UpdateFieldResponse = &sUpdateFieldResponse
+
+var UpdateLayoutRequest = &sUpdateLayoutRequest
+var UpdateLayoutRequest_domainId = &sUpdateLayoutRequest_domainId
+var UpdateLayoutRequest_layoutId = &sUpdateLayoutRequest_layoutId
+var UpdateLayoutRequest_name = &sUpdateLayoutRequest_name
+var UpdateLayoutRequest_content = &sUpdateLayoutRequest_content
+
+var UpdateLayoutResponse = &sUpdateLayoutResponse
+
+var UpdateRelatedItemRequest = &sUpdateRelatedItemRequest
+var UpdateRelatedItemRequest_domainId = &sUpdateRelatedItemRequest_domainId
+var UpdateRelatedItemRequest_caseId = &sUpdateRelatedItemRequest_caseId
+var UpdateRelatedItemRequest_relatedItemId = &sUpdateRelatedItemRequest_relatedItemId
+var UpdateRelatedItemRequest_content = &sUpdateRelatedItemRequest_content
+var UpdateRelatedItemRequest_performedBy = &sUpdateRelatedItemRequest_performedBy
+
+var UpdateRelatedItemResponse = &sUpdateRelatedItemResponse
+var UpdateRelatedItemResponse_relatedItemId = &sUpdateRelatedItemResponse_relatedItemId
+var UpdateRelatedItemResponse_relatedItemArn = &sUpdateRelatedItemResponse_relatedItemArn
+var UpdateRelatedItemResponse_type = &sUpdateRelatedItemResponse_type
+var UpdateRelatedItemResponse_content = &sUpdateRelatedItemResponse_content
+var UpdateRelatedItemResponse_associationTime = &sUpdateRelatedItemResponse_associationTime
+var UpdateRelatedItemResponse_tags = &sUpdateRelatedItemResponse_tags
+var UpdateRelatedItemResponse_lastUpdatedUser = &sUpdateRelatedItemResponse_lastUpdatedUser
+var UpdateRelatedItemResponse_createdBy = &sUpdateRelatedItemResponse_createdBy
+
+var UpdateTemplateRequest = &sUpdateTemplateRequest
+var UpdateTemplateRequest_domainId = &sUpdateTemplateRequest_domainId
+var UpdateTemplateRequest_templateId = &sUpdateTemplateRequest_templateId
+var UpdateTemplateRequest_name = &sUpdateTemplateRequest_name
+var UpdateTemplateRequest_description = &sUpdateTemplateRequest_description
+var UpdateTemplateRequest_layoutConfiguration = &sUpdateTemplateRequest_layoutConfiguration
+var UpdateTemplateRequest_requiredFields = &sUpdateTemplateRequest_requiredFields
+var UpdateTemplateRequest_status = &sUpdateTemplateRequest_status
+var UpdateTemplateRequest_rules = &sUpdateTemplateRequest_rules
+var UpdateTemplateRequest_tagPropagationConfigurations = &sUpdateTemplateRequest_tagPropagationConfigurations
+
+var UpdateTemplateResponse = &sUpdateTemplateResponse
+
+var AmazonConnectCases = &smithy.ServiceSchema{Schema: &s_AmazonConnectCases, Version: "2022-10-03"}

@@ -7,4158 +7,3058 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchPutPropertyValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "BatchPutPropertyValues",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iBatchPutPropertyValues                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "BatchPutPropertyValues"}
+	iCancelMetadataTransferJob               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CancelMetadataTransferJob"}
+	iCreateComponentType                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateComponentType"}
+	iCreateEntity                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateEntity"}
+	iCreateMetadataTransferJob               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateMetadataTransferJob"}
+	iCreateScene                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateScene"}
+	iCreateSyncJob                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateSyncJob"}
+	iCreateWorkspace                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateWorkspace"}
+	iDeleteComponentType                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteComponentType"}
+	iDeleteEntity                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteEntity"}
+	iDeleteScene                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteScene"}
+	iDeleteSyncJob                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteSyncJob"}
+	iDeleteWorkspace                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteWorkspace"}
+	iExecuteQuery                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ExecuteQuery"}
+	iGetComponentType                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetComponentType"}
+	iGetEntity                               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetEntity"}
+	iGetMetadataTransferJob                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetMetadataTransferJob"}
+	iGetPricingPlan                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPricingPlan"}
+	iGetPropertyValue                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPropertyValue"}
+	iGetPropertyValueHistory                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPropertyValueHistory"}
+	iGetScene                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetScene"}
+	iGetSyncJob                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetSyncJob"}
+	iGetWorkspace                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetWorkspace"}
+	iListComponents                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponents"}
+	iListComponentTypes                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponentTypes"}
+	iListEntities                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListEntities"}
+	iListMetadataTransferJobs                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListMetadataTransferJobs"}
+	iListProperties                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListProperties"}
+	iListScenes                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListScenes"}
+	iListSyncJobs                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListSyncJobs"}
+	iListSyncResources                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListSyncResources"}
+	iListTagsForResource                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListTagsForResource"}
+	iListWorkspaces                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListWorkspaces"}
+	iTagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UntagResource"}
+	iUpdateComponentType                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateComponentType"}
+	iUpdateEntity                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateEntity"}
+	iUpdatePricingPlan                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdatePricingPlan"}
+	iUpdateScene                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateScene"}
+	iUpdateWorkspace                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateWorkspace"}
+	i_AWSIoTTwinMaker                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "AWSIoTTwinMaker"}
+	iAccessDeniedException                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "AccessDeniedException"}
+	iBatchPutPropertyError                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "BatchPutPropertyError"}
+	iBatchPutPropertyErrorEntry              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "BatchPutPropertyErrorEntry"}
+	i_Boolean                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Boolean"}
+	iBundleInformation                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "BundleInformation"}
+	i_BundleName                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "BundleName"}
+	iColumnDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ColumnDescription"}
+	i_ColumnDescriptions                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ColumnDescriptions"}
+	i_ColumnName                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ColumnName"}
+	i_ColumnType                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ColumnType"}
+	i_ComponentPath                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentPath"}
+	iComponentPropertyGroupRequest           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentPropertyGroupRequest"}
+	i_ComponentPropertyGroupRequests         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentPropertyGroupRequests"}
+	iComponentPropertyGroupResponse          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentPropertyGroupResponse"}
+	i_ComponentPropertyGroupResponses        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentPropertyGroupResponses"}
+	iComponentRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentRequest"}
+	iComponentResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentResponse"}
+	i_ComponentsMap                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentsMap"}
+	i_ComponentsMapRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentsMapRequest"}
+	i_ComponentSummaries                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentSummaries"}
+	iComponentSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentSummary"}
+	i_ComponentTypeId                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentTypeId"}
+	i_ComponentTypeName                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentTypeName"}
+	i_ComponentTypeSummaries                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentTypeSummaries"}
+	iComponentTypeSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentTypeSummary"}
+	iComponentUpdateRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentUpdateRequest"}
+	i_ComponentUpdatesMapRequest             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentUpdatesMapRequest"}
+	i_ComponentUpdateType                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ComponentUpdateType"}
+	iCompositeComponentRequest               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentRequest"}
+	i_CompositeComponentResponse             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentResponse"}
+	i_CompositeComponentsMapRequest          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentsMapRequest"}
+	iCompositeComponentTypeRequest           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentTypeRequest"}
+	iCompositeComponentTypeResponse          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentTypeResponse"}
+	i_CompositeComponentTypesRequest         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentTypesRequest"}
+	i_CompositeComponentTypesResponse        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentTypesResponse"}
+	iCompositeComponentUpdateRequest         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentUpdateRequest"}
+	i_CompositeComponentUpdatesMapRequest    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CompositeComponentUpdatesMapRequest"}
+	i_Configuration                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Configuration"}
+	iConflictException                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ConflictException"}
+	iConnectorFailureException               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ConnectorFailureException"}
+	iConnectorTimeoutException               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ConnectorTimeoutException"}
+	iDataConnector                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DataConnector"}
+	iDataType                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DataType"}
+	iDataValue                               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DataValue"}
+	i_DataValueList                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DataValueList"}
+	i_DataValueMap                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DataValueMap"}
+	i_Description                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Description"}
+	iDestinationConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DestinationConfiguration"}
+	i_DestinationType                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DestinationType"}
+	i_Double                                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Double"}
+	i_EntityId                               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "EntityId"}
+	i_EntityName                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "EntityName"}
+	iEntityPropertyReference                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "EntityPropertyReference"}
+	i_EntitySummaries                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "EntitySummaries"}
+	iEntitySummary                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "EntitySummary"}
+	i_Entries                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Entries"}
+	i_ErrorCode                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ErrorCode"}
+	iErrorDetails                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ErrorDetails"}
+	i_ErrorEntries                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ErrorEntries"}
+	i_ErrorMessage                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ErrorMessage"}
+	i_Errors                                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Errors"}
+	i_ExceptionMessage                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ExceptionMessage"}
+	i_Expression                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Expression"}
+	i_ExtendsFrom                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ExtendsFrom"}
+	i_ExternalIdProperty                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ExternalIdProperty"}
+	iFilterByAsset                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FilterByAsset"}
+	iFilterByAssetModel                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FilterByAssetModel"}
+	iFilterByComponentType                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FilterByComponentType"}
+	iFilterByEntity                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FilterByEntity"}
+	iFunctionRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FunctionRequest"}
+	iFunctionResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FunctionResponse"}
+	i_FunctionsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FunctionsRequest"}
+	i_FunctionsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "FunctionsResponse"}
+	i_GeneratedSceneMetadataMap              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GeneratedSceneMetadataMap"}
+	i_GroupType                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GroupType"}
+	i_Id                                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Id"}
+	i_IdOrArn                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IdOrArn"}
+	i_Integer                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Integer"}
+	iInternalServerException                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "InternalServerException"}
+	iInterpolationParameters                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "InterpolationParameters"}
+	i_InterpolationType                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "InterpolationType"}
+	i_IntervalInSeconds                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IntervalInSeconds"}
+	iIotSiteWiseSourceConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IotSiteWiseSourceConfiguration"}
+	iIotSiteWiseSourceConfigurationFilter    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IotSiteWiseSourceConfigurationFilter"}
+	i_IotSiteWiseSourceConfigurationFilters  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IotSiteWiseSourceConfigurationFilters"}
+	iIotTwinMakerDestinationConfiguration    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IotTwinMakerDestinationConfiguration"}
+	iIotTwinMakerSourceConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IotTwinMakerSourceConfiguration"}
+	iIotTwinMakerSourceConfigurationFilter   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IotTwinMakerSourceConfigurationFilter"}
+	i_IotTwinMakerSourceConfigurationFilters = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "IotTwinMakerSourceConfigurationFilters"}
+	i_LambdaArn                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "LambdaArn"}
+	iLambdaFunction                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "LambdaFunction"}
+	i_LinkedService                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "LinkedService"}
+	i_LinkedServices                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "LinkedServices"}
+	iListComponentTypesFilter                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponentTypesFilter"}
+	i_ListComponentTypesFilters              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponentTypesFilters"}
+	iListEntitiesFilter                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListEntitiesFilter"}
+	i_ListEntitiesFilters                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListEntitiesFilters"}
+	iListMetadataTransferJobsFilter          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListMetadataTransferJobsFilter"}
+	i_ListMetadataTransferJobsFilters        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListMetadataTransferJobsFilters"}
+	i_Long                                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Long"}
+	i_MaxResults                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "MaxResults"}
+	iMetadataTransferJobProgress             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "MetadataTransferJobProgress"}
+	i_MetadataTransferJobState               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "MetadataTransferJobState"}
+	iMetadataTransferJobStatus               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "MetadataTransferJobStatus"}
+	i_MetadataTransferJobSummaries           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "MetadataTransferJobSummaries"}
+	iMetadataTransferJobSummary              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "MetadataTransferJobSummary"}
+	i_Name                                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Name"}
+	i_NextToken                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "NextToken"}
+	i_Order                                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Order"}
+	iOrderBy                                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "OrderBy"}
+	i_OrderByList                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "OrderByList"}
+	i_OrderByTime                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "OrderByTime"}
+	i_ParentEntityId                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ParentEntityId"}
+	iParentEntityUpdateRequest               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ParentEntityUpdateRequest"}
+	i_ParentEntityUpdateType                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ParentEntityUpdateType"}
+	i_PricingBundles                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PricingBundles"}
+	i_PricingMode                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PricingMode"}
+	iPricingPlan                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PricingPlan"}
+	i_PricingTier                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PricingTier"}
+	iPropertyDefinitionRequest               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyDefinitionRequest"}
+	iPropertyDefinitionResponse              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyDefinitionResponse"}
+	i_PropertyDefinitionsRequest             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyDefinitionsRequest"}
+	i_PropertyDefinitionsResponse            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyDefinitionsResponse"}
+	i_PropertyDisplayName                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyDisplayName"}
+	iPropertyFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyFilter"}
+	i_PropertyFilters                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyFilters"}
+	iPropertyGroupRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyGroupRequest"}
+	iPropertyGroupResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyGroupResponse"}
+	i_PropertyGroupsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyGroupsRequest"}
+	i_PropertyGroupsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyGroupsResponse"}
+	i_PropertyGroupUpdateType                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyGroupUpdateType"}
+	iPropertyLatestValue                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyLatestValue"}
+	i_PropertyLatestValueMap                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyLatestValueMap"}
+	i_PropertyNames                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyNames"}
+	iPropertyRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyRequest"}
+	i_PropertyRequests                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyRequests"}
+	iPropertyResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyResponse"}
+	i_PropertyResponses                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyResponses"}
+	i_PropertySummaries                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertySummaries"}
+	iPropertySummary                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertySummary"}
+	i_PropertyTableValue                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyTableValue"}
+	i_PropertyUpdateType                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyUpdateType"}
+	iPropertyValue                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyValue"}
+	iPropertyValueEntry                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyValueEntry"}
+	iPropertyValueHistory                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyValueHistory"}
+	i_PropertyValueList                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyValueList"}
+	i_PropertyValues                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "PropertyValues"}
+	i_QueryResultValue                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "QueryResultValue"}
+	i_QueryServiceMaxResults                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "QueryServiceMaxResults"}
+	i_QueryStatement                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "QueryStatement"}
+	iQueryTimeoutException                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "QueryTimeoutException"}
+	iRelationship                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Relationship"}
+	iRelationshipValue                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "RelationshipValue"}
+	i_RequiredProperties                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "RequiredProperties"}
+	iResourceNotFoundException               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ResourceNotFoundException"}
+	i_RoleArn                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "RoleArn"}
+	iRow                                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Row"}
+	i_RowData                                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "RowData"}
+	i_Rows                                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Rows"}
+	iS3DestinationConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "S3DestinationConfiguration"}
+	i_S3DestinationLocation                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "S3DestinationLocation"}
+	i_S3Location                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "S3Location"}
+	iS3SourceConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "S3SourceConfiguration"}
+	i_S3SourceLocation                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "S3SourceLocation"}
+	i_S3Url                                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "S3Url"}
+	i_SceneCapabilities                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneCapabilities"}
+	i_SceneCapability                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneCapability"}
+	iSceneError                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneError"}
+	i_SceneErrorCode                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneErrorCode"}
+	i_SceneMetadataMap                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneMetadataMap"}
+	i_SceneMetadataValue                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneMetadataValue"}
+	i_SceneSummaries                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneSummaries"}
+	iSceneSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SceneSummary"}
+	i_Scope                                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Scope"}
+	i_SelectedPropertyList                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SelectedPropertyList"}
+	iServiceQuotaExceededException           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ServiceQuotaExceededException"}
+	i_SiteWiseExternalId                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SiteWiseExternalId"}
+	iSourceConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SourceConfiguration"}
+	i_SourceConfigurations                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SourceConfigurations"}
+	i_SourceType                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SourceType"}
+	i_State                                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "State"}
+	iStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Status"}
+	i_String                                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "String"}
+	i_SyncJobState                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncJobState"}
+	iSyncJobStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncJobStatus"}
+	i_SyncJobSummaries                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncJobSummaries"}
+	iSyncJobSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncJobSummary"}
+	iSyncResourceFilter                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncResourceFilter"}
+	i_SyncResourceFilters                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncResourceFilters"}
+	i_SyncResourceState                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncResourceState"}
+	iSyncResourceStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncResourceStatus"}
+	i_SyncResourceSummaries                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncResourceSummaries"}
+	iSyncResourceSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncResourceSummary"}
+	i_SyncResourceType                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncResourceType"}
+	i_SyncSource                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "SyncSource"}
+	iTabularConditions                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TabularConditions"}
+	i_TabularPropertyValue                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TabularPropertyValue"}
+	i_TabularPropertyValues                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TabularPropertyValues"}
+	i_TagKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TagKey"}
+	i_TagKeyList                             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TagKeyList"}
+	i_TagMap                                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TagMap"}
+	i_TagValue                               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TagValue"}
+	iThrottlingException                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ThrottlingException"}
+	i_Time                                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Time"}
+	i_Timestamp                              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Timestamp"}
+	iTooManyTagsException                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TooManyTagsException"}
+	i_TwinMakerArn                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TwinMakerArn"}
+	i_Type                                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Type"}
+	i_UpdateReason                           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateReason"}
+	i_Uuid                                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Uuid"}
+	iValidationException                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ValidationException"}
+	i_Value                                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Value"}
+	i_Values                                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "Values"}
+	i_WorkspaceDeleteMessage                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "WorkspaceDeleteMessage"}
+	i_WorkspaceSummaries                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "WorkspaceSummaries"}
+	iWorkspaceSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "WorkspaceSummary"}
+	iBatchPutPropertyValuesRequest           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "BatchPutPropertyValuesRequest"}
+	iBatchPutPropertyValuesResponse          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "BatchPutPropertyValuesResponse"}
+	iCancelMetadataTransferJobRequest        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CancelMetadataTransferJobRequest"}
+	iCancelMetadataTransferJobResponse       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CancelMetadataTransferJobResponse"}
+	iCreateComponentTypeRequest              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateComponentTypeRequest"}
+	iCreateComponentTypeResponse             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateComponentTypeResponse"}
+	iCreateEntityRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateEntityRequest"}
+	iCreateEntityResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateEntityResponse"}
+	iCreateMetadataTransferJobRequest        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateMetadataTransferJobRequest"}
+	iCreateMetadataTransferJobResponse       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateMetadataTransferJobResponse"}
+	iCreateSceneRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateSceneRequest"}
+	iCreateSceneResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateSceneResponse"}
+	iCreateSyncJobRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateSyncJobRequest"}
+	iCreateSyncJobResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateSyncJobResponse"}
+	iCreateWorkspaceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateWorkspaceRequest"}
+	iCreateWorkspaceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "CreateWorkspaceResponse"}
+	iDeleteComponentTypeRequest              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteComponentTypeRequest"}
+	iDeleteComponentTypeResponse             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteComponentTypeResponse"}
+	iDeleteEntityRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteEntityRequest"}
+	iDeleteEntityResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteEntityResponse"}
+	iDeleteSceneRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteSceneRequest"}
+	iDeleteSceneResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteSceneResponse"}
+	iDeleteSyncJobRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteSyncJobRequest"}
+	iDeleteSyncJobResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteSyncJobResponse"}
+	iDeleteWorkspaceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteWorkspaceRequest"}
+	iDeleteWorkspaceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "DeleteWorkspaceResponse"}
+	iExecuteQueryRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ExecuteQueryRequest"}
+	iExecuteQueryResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ExecuteQueryResponse"}
+	iGetComponentTypeRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetComponentTypeRequest"}
+	iGetComponentTypeResponse                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetComponentTypeResponse"}
+	iGetEntityRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetEntityRequest"}
+	iGetEntityResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetEntityResponse"}
+	iGetMetadataTransferJobRequest           = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetMetadataTransferJobRequest"}
+	iGetMetadataTransferJobResponse          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetMetadataTransferJobResponse"}
+	iGetPricingPlanRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPricingPlanRequest"}
+	iGetPricingPlanResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPricingPlanResponse"}
+	iGetPropertyValueHistoryRequest          = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPropertyValueHistoryRequest"}
+	iGetPropertyValueHistoryResponse         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPropertyValueHistoryResponse"}
+	iGetPropertyValueRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPropertyValueRequest"}
+	iGetPropertyValueResponse                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetPropertyValueResponse"}
+	iGetSceneRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetSceneRequest"}
+	iGetSceneResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetSceneResponse"}
+	iGetSyncJobRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetSyncJobRequest"}
+	iGetSyncJobResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetSyncJobResponse"}
+	iGetWorkspaceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetWorkspaceRequest"}
+	iGetWorkspaceResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "GetWorkspaceResponse"}
+	iListComponentsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponentsRequest"}
+	iListComponentsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponentsResponse"}
+	iListComponentTypesRequest               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponentTypesRequest"}
+	iListComponentTypesResponse              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListComponentTypesResponse"}
+	iListEntitiesRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListEntitiesRequest"}
+	iListEntitiesResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListEntitiesResponse"}
+	iListMetadataTransferJobsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListMetadataTransferJobsRequest"}
+	iListMetadataTransferJobsResponse        = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListMetadataTransferJobsResponse"}
+	iListPropertiesRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListPropertiesRequest"}
+	iListPropertiesResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListPropertiesResponse"}
+	iListScenesRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListScenesRequest"}
+	iListScenesResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListScenesResponse"}
+	iListSyncJobsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListSyncJobsRequest"}
+	iListSyncJobsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListSyncJobsResponse"}
+	iListSyncResourcesRequest                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListSyncResourcesRequest"}
+	iListSyncResourcesResponse               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListSyncResourcesResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListTagsForResourceResponse"}
+	iListWorkspacesRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListWorkspacesRequest"}
+	iListWorkspacesResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "ListWorkspacesResponse"}
+	iTagResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TagResourceRequest"}
+	iTagResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "TagResourceResponse"}
+	iUntagResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UntagResourceResponse"}
+	iUpdateComponentTypeRequest              = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateComponentTypeRequest"}
+	iUpdateComponentTypeResponse             = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateComponentTypeResponse"}
+	iUpdateEntityRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateEntityRequest"}
+	iUpdateEntityResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateEntityResponse"}
+	iUpdatePricingPlanRequest                = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdatePricingPlanRequest"}
+	iUpdatePricingPlanResponse               = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdatePricingPlanResponse"}
+	iUpdateSceneRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateSceneRequest"}
+	iUpdateSceneResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateSceneResponse"}
+	iUpdateWorkspaceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateWorkspaceRequest"}
+	iUpdateWorkspaceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.iottwinmaker", Name: "UpdateWorkspaceResponse"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/entity-properties",
-	Code: 200})
-
-var CancelMetadataTransferJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CancelMetadataTransferJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/metadata-transfer-jobs/{metadataTransferJobId}/cancel",
-	Code: 200})
-
-var CreateComponentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateComponentType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/component-types/{componentTypeId}",
-	Code: 200})
-
-var CreateEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateEntity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/entities",
-	Code: 200})
-
-var CreateMetadataTransferJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateMetadataTransferJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/metadata-transfer-jobs",
-	Code: 200})
-
-var CreateScene = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateScene",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/scenes",
-	Code: 200})
-
-var CreateSyncJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateSyncJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/sync-jobs/{syncSource}",
-	Code: 200})
-
-var CreateWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateWorkspace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}",
-	Code: 200})
-
-var DeleteComponentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteComponentType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/component-types/{componentTypeId}",
-	Code: 200})
-
-var DeleteEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteEntity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/entities/{entityId}",
-	Code: 200})
-
-var DeleteScene = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteScene",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/scenes/{sceneId}",
-	Code: 200})
-
-var DeleteSyncJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteSyncJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}/sync-jobs/{syncSource}",
-	Code: 200})
-
-var DeleteWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteWorkspace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workspaces/{workspaceId}",
-	Code: 200})
-
-var ExecuteQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ExecuteQuery",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/queries/execution",
-	Code: 200})
-
-var GetComponentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetComponentType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/component-types/{componentTypeId}",
-	Code: 200})
-
-var GetEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetEntity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/entities/{entityId}",
-	Code: 200})
-
-var GetMetadataTransferJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetMetadataTransferJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/metadata-transfer-jobs/{metadataTransferJobId}",
-	Code: 200})
-
-var GetPricingPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPricingPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/pricingplan",
-	Code: 200})
-
-var GetPropertyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPropertyValue",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/entity-properties/value",
-	Code: 200})
-
-var GetPropertyValueHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPropertyValueHistory",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/entity-properties/history",
-	Code: 200})
-
-var GetScene = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetScene",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}/scenes/{sceneId}",
-	Code: 200})
-
-var GetSyncJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetSyncJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sync-jobs/{syncSource}",
-	Code: 200})
-
-var GetWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetWorkspace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workspaces/{workspaceId}",
-	Code: 200})
-
-var ListComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/entities/{entityId}/components-list",
-	Code: 200})
-
-var ListComponentTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponentTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/component-types-list",
-	Code: 200})
-
-var ListEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListEntities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/entities-list",
-	Code: 200})
-
-var ListMetadataTransferJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListMetadataTransferJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/metadata-transfer-jobs-list",
-	Code: 200})
-
-var ListProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListProperties",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/properties-list",
-	Code: 200})
-
-var ListScenes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListScenes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/scenes-list",
-	Code: 200})
-
-var ListSyncJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListSyncJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/sync-jobs-list",
-	Code: 200})
-
-var ListSyncResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListSyncResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces/{workspaceId}/sync-jobs/{syncSource}/resources-list",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags-list",
-	Code: 200})
-
-var ListWorkspaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListWorkspaces",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workspaces-list",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags",
-	Code: 200})
-
-var UpdateComponentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateComponentType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/component-types/{componentTypeId}",
-	Code: 200})
-
-var UpdateEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateEntity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/entities/{entityId}",
-	Code: 200})
-
-var UpdatePricingPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdatePricingPlan",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/pricingplan",
-	Code: 200})
-
-var UpdateScene = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateScene",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}/scenes/{sceneId}",
-	Code: 200})
-
-var UpdateWorkspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateWorkspace",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workspaces/{workspaceId}",
-	Code: 200})
-
-var _AWSIoTTwinMaker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "AWSIoTTwinMaker",
-}, smithy.ShapeTypeService, 0)
-
-var AWSIoTTwinMaker = smithy.NewServiceSchema(_AWSIoTTwinMaker, "2021-11-29")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var BatchPutPropertyError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "BatchPutPropertyError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchPutPropertyError_errorCode *smithy.Schema
-
-var BatchPutPropertyError_errorMessage *smithy.Schema
-
-var BatchPutPropertyError_entry *smithy.Schema
-
-var BatchPutPropertyErrorEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "BatchPutPropertyErrorEntry",
-}, smithy.ShapeTypeStructure, 1)
-var BatchPutPropertyErrorEntry_errors *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BundleInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "BundleInformation",
-}, smithy.ShapeTypeStructure, 2)
-var BundleInformation_bundleNames *smithy.Schema
-
-var BundleInformation_pricingTier *smithy.Schema
-
-var _BundleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "BundleName",
-}, smithy.ShapeTypeString, 0)
-
-var ColumnDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ColumnDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ColumnDescription_name *smithy.Schema
-
-var ColumnDescription_type *smithy.Schema
-
-var _ColumnDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ColumnDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _ColumnDescriptions_member *smithy.Schema
-
-var _ColumnName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ColumnName",
-}, smithy.ShapeTypeString, 0)
-
-var _ColumnType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ColumnType",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentPath",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentPropertyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentPropertyGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentPropertyGroupRequest_groupType *smithy.Schema
-
-var ComponentPropertyGroupRequest_propertyNames *smithy.Schema
-
-var ComponentPropertyGroupRequest_updateType *smithy.Schema
-
-var _ComponentPropertyGroupRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentPropertyGroupRequests",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentPropertyGroupRequests_key *smithy.Schema
-
-var _ComponentPropertyGroupRequests_value *smithy.Schema
-
-var ComponentPropertyGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentPropertyGroupResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentPropertyGroupResponse_groupType *smithy.Schema
-
-var ComponentPropertyGroupResponse_propertyNames *smithy.Schema
-
-var ComponentPropertyGroupResponse_isInherited *smithy.Schema
-
-var _ComponentPropertyGroupResponses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentPropertyGroupResponses",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentPropertyGroupResponses_key *smithy.Schema
-
-var _ComponentPropertyGroupResponses_value *smithy.Schema
-
-var ComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ComponentRequest_description *smithy.Schema
-
-var ComponentRequest_componentTypeId *smithy.Schema
-
-var ComponentRequest_properties *smithy.Schema
-
-var ComponentRequest_propertyGroups *smithy.Schema
-
-var ComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentResponse",
-}, smithy.ShapeTypeStructure, 11)
-var ComponentResponse_componentName *smithy.Schema
-
-var ComponentResponse_description *smithy.Schema
-
-var ComponentResponse_componentTypeId *smithy.Schema
-
-var ComponentResponse_status *smithy.Schema
-
-var ComponentResponse_definedIn *smithy.Schema
-
-var ComponentResponse_properties *smithy.Schema
-
-var ComponentResponse_propertyGroups *smithy.Schema
-
-var ComponentResponse_syncSource *smithy.Schema
-
-var ComponentResponse_areAllPropertiesReturned *smithy.Schema
-
-var ComponentResponse_compositeComponents *smithy.Schema
-
-var ComponentResponse_areAllCompositeComponentsReturned *smithy.Schema
-
-var _ComponentsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentsMap",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentsMap_key *smithy.Schema
-
-var _ComponentsMap_value *smithy.Schema
-
-var _ComponentsMapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentsMapRequest",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentsMapRequest_key *smithy.Schema
-
-var _ComponentsMapRequest_value *smithy.Schema
-
-var _ComponentSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ComponentSummaries_member *smithy.Schema
-
-var ComponentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ComponentSummary_componentName *smithy.Schema
-
-var ComponentSummary_componentTypeId *smithy.Schema
-
-var ComponentSummary_definedIn *smithy.Schema
-
-var ComponentSummary_description *smithy.Schema
-
-var ComponentSummary_propertyGroups *smithy.Schema
-
-var ComponentSummary_status *smithy.Schema
-
-var ComponentSummary_syncSource *smithy.Schema
-
-var ComponentSummary_componentPath *smithy.Schema
-
-var _ComponentTypeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentTypeId",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentTypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentTypeName",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentTypeSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentTypeSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ComponentTypeSummaries_member *smithy.Schema
-
-var ComponentTypeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentTypeSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ComponentTypeSummary_arn *smithy.Schema
-
-var ComponentTypeSummary_componentTypeId *smithy.Schema
-
-var ComponentTypeSummary_creationDateTime *smithy.Schema
-
-var ComponentTypeSummary_updateDateTime *smithy.Schema
-
-var ComponentTypeSummary_description *smithy.Schema
-
-var ComponentTypeSummary_status *smithy.Schema
-
-var ComponentTypeSummary_componentTypeName *smithy.Schema
-
-var ComponentUpdateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentUpdateRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ComponentUpdateRequest_updateType *smithy.Schema
-
-var ComponentUpdateRequest_description *smithy.Schema
-
-var ComponentUpdateRequest_componentTypeId *smithy.Schema
-
-var ComponentUpdateRequest_propertyUpdates *smithy.Schema
-
-var ComponentUpdateRequest_propertyGroupUpdates *smithy.Schema
-
-var _ComponentUpdatesMapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentUpdatesMapRequest",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentUpdatesMapRequest_key *smithy.Schema
-
-var _ComponentUpdatesMapRequest_value *smithy.Schema
-
-var _ComponentUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ComponentUpdateType",
-}, smithy.ShapeTypeString, 0)
-
-var CompositeComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CompositeComponentRequest_description *smithy.Schema
-
-var CompositeComponentRequest_properties *smithy.Schema
-
-var CompositeComponentRequest_propertyGroups *smithy.Schema
-
-var _CompositeComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentResponse",
-}, smithy.ShapeTypeMap, 2)
-var _CompositeComponentResponse_key *smithy.Schema
-
-var _CompositeComponentResponse_value *smithy.Schema
-
-var _CompositeComponentsMapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentsMapRequest",
-}, smithy.ShapeTypeMap, 2)
-var _CompositeComponentsMapRequest_key *smithy.Schema
-
-var _CompositeComponentsMapRequest_value *smithy.Schema
-
-var CompositeComponentTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentTypeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CompositeComponentTypeRequest_componentTypeId *smithy.Schema
-
-var CompositeComponentTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentTypeResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CompositeComponentTypeResponse_componentTypeId *smithy.Schema
-
-var CompositeComponentTypeResponse_isInherited *smithy.Schema
-
-var _CompositeComponentTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentTypesRequest",
-}, smithy.ShapeTypeMap, 2)
-var _CompositeComponentTypesRequest_key *smithy.Schema
-
-var _CompositeComponentTypesRequest_value *smithy.Schema
-
-var _CompositeComponentTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentTypesResponse",
-}, smithy.ShapeTypeMap, 2)
-var _CompositeComponentTypesResponse_key *smithy.Schema
-
-var _CompositeComponentTypesResponse_value *smithy.Schema
-
-var CompositeComponentUpdateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentUpdateRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CompositeComponentUpdateRequest_updateType *smithy.Schema
-
-var CompositeComponentUpdateRequest_description *smithy.Schema
-
-var CompositeComponentUpdateRequest_propertyUpdates *smithy.Schema
-
-var CompositeComponentUpdateRequest_propertyGroupUpdates *smithy.Schema
-
-var _CompositeComponentUpdatesMapRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CompositeComponentUpdatesMapRequest",
-}, smithy.ShapeTypeMap, 2)
-var _CompositeComponentUpdatesMapRequest_key *smithy.Schema
-
-var _CompositeComponentUpdatesMapRequest_value *smithy.Schema
-
-var _Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Configuration",
-}, smithy.ShapeTypeMap, 2)
-var _Configuration_key *smithy.Schema
-
-var _Configuration_value *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConnectorFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ConnectorFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var ConnectorFailureException_message *smithy.Schema
-
-var ConnectorTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ConnectorTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var ConnectorTimeoutException_message *smithy.Schema
-
-var DataConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DataConnector",
-}, smithy.ShapeTypeStructure, 2)
-var DataConnector_lambda *smithy.Schema
-
-var DataConnector_isNative *smithy.Schema
-
-var DataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DataType",
-}, smithy.ShapeTypeStructure, 5)
-var DataType_type *smithy.Schema
-
-var DataType_nestedType *smithy.Schema
-
-var DataType_allowedValues *smithy.Schema
-
-var DataType_unitOfMeasure *smithy.Schema
-
-var DataType_relationship *smithy.Schema
-
-var DataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DataValue",
-}, smithy.ShapeTypeStructure, 9)
-var DataValue_booleanValue *smithy.Schema
-
-var DataValue_doubleValue *smithy.Schema
-
-var DataValue_integerValue *smithy.Schema
-
-var DataValue_longValue *smithy.Schema
-
-var DataValue_stringValue *smithy.Schema
-
-var DataValue_listValue *smithy.Schema
-
-var DataValue_mapValue *smithy.Schema
-
-var DataValue_relationshipValue *smithy.Schema
-
-var DataValue_expression *smithy.Schema
-
-var _DataValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DataValueList",
-}, smithy.ShapeTypeList, 1)
-var _DataValueList_member *smithy.Schema
-
-var _DataValueMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DataValueMap",
-}, smithy.ShapeTypeMap, 2)
-var _DataValueMap_key *smithy.Schema
-
-var _DataValueMap_value *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DestinationConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var DestinationConfiguration_type *smithy.Schema
-
-var DestinationConfiguration_s3Configuration *smithy.Schema
-
-var DestinationConfiguration_iotTwinMakerConfiguration *smithy.Schema
-
-var _DestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DestinationType",
-}, smithy.ShapeTypeString, 0)
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _EntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "EntityId",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "EntityName",
-}, smithy.ShapeTypeString, 0)
-
-var EntityPropertyReference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "EntityPropertyReference",
-}, smithy.ShapeTypeStructure, 5)
-var EntityPropertyReference_componentName *smithy.Schema
-
-var EntityPropertyReference_componentPath *smithy.Schema
-
-var EntityPropertyReference_externalIdProperty *smithy.Schema
-
-var EntityPropertyReference_entityId *smithy.Schema
-
-var EntityPropertyReference_propertyName *smithy.Schema
-
-var _EntitySummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "EntitySummaries",
-}, smithy.ShapeTypeList, 1)
-var _EntitySummaries_member *smithy.Schema
-
-var EntitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "EntitySummary",
-}, smithy.ShapeTypeStructure, 9)
-var EntitySummary_entityId *smithy.Schema
-
-var EntitySummary_entityName *smithy.Schema
-
-var EntitySummary_arn *smithy.Schema
-
-var EntitySummary_parentEntityId *smithy.Schema
-
-var EntitySummary_status *smithy.Schema
-
-var EntitySummary_description *smithy.Schema
-
-var EntitySummary_hasChildEntities *smithy.Schema
-
-var EntitySummary_creationDateTime *smithy.Schema
-
-var EntitySummary_updateDateTime *smithy.Schema
-
-var _Entries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Entries",
-}, smithy.ShapeTypeList, 1)
-var _Entries_member *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetails_code *smithy.Schema
-
-var ErrorDetails_message *smithy.Schema
-
-var _ErrorEntries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ErrorEntries",
-}, smithy.ShapeTypeList, 1)
-var _ErrorEntries_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Errors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Errors",
-}, smithy.ShapeTypeList, 1)
-var _Errors_member *smithy.Schema
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Expression",
-}, smithy.ShapeTypeString, 0)
-
-var _ExtendsFrom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ExtendsFrom",
-}, smithy.ShapeTypeList, 1)
-var _ExtendsFrom_member *smithy.Schema
-
-var _ExternalIdProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ExternalIdProperty",
-}, smithy.ShapeTypeMap, 2)
-var _ExternalIdProperty_key *smithy.Schema
-
-var _ExternalIdProperty_value *smithy.Schema
-
-var FilterByAsset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FilterByAsset",
-}, smithy.ShapeTypeStructure, 4)
-var FilterByAsset_assetId *smithy.Schema
-
-var FilterByAsset_assetExternalId *smithy.Schema
-
-var FilterByAsset_includeOffspring *smithy.Schema
-
-var FilterByAsset_includeAssetModel *smithy.Schema
-
-var FilterByAssetModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FilterByAssetModel",
-}, smithy.ShapeTypeStructure, 4)
-var FilterByAssetModel_assetModelId *smithy.Schema
-
-var FilterByAssetModel_assetModelExternalId *smithy.Schema
-
-var FilterByAssetModel_includeOffspring *smithy.Schema
-
-var FilterByAssetModel_includeAssets *smithy.Schema
-
-var FilterByComponentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FilterByComponentType",
-}, smithy.ShapeTypeStructure, 1)
-var FilterByComponentType_componentTypeId *smithy.Schema
-
-var FilterByEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FilterByEntity",
-}, smithy.ShapeTypeStructure, 1)
-var FilterByEntity_entityId *smithy.Schema
-
-var FunctionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FunctionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var FunctionRequest_requiredProperties *smithy.Schema
-
-var FunctionRequest_scope *smithy.Schema
-
-var FunctionRequest_implementedBy *smithy.Schema
-
-var FunctionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FunctionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var FunctionResponse_requiredProperties *smithy.Schema
-
-var FunctionResponse_scope *smithy.Schema
-
-var FunctionResponse_implementedBy *smithy.Schema
-
-var FunctionResponse_isInherited *smithy.Schema
-
-var _FunctionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FunctionsRequest",
-}, smithy.ShapeTypeMap, 2)
-var _FunctionsRequest_key *smithy.Schema
-
-var _FunctionsRequest_value *smithy.Schema
-
-var _FunctionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "FunctionsResponse",
-}, smithy.ShapeTypeMap, 2)
-var _FunctionsResponse_key *smithy.Schema
-
-var _FunctionsResponse_value *smithy.Schema
-
-var _GeneratedSceneMetadataMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GeneratedSceneMetadataMap",
-}, smithy.ShapeTypeMap, 2)
-var _GeneratedSceneMetadataMap_key *smithy.Schema
-
-var _GeneratedSceneMetadataMap_value *smithy.Schema
-
-var _GroupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GroupType",
-}, smithy.ShapeTypeString, 0)
-
-var _Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Id",
-}, smithy.ShapeTypeString, 0)
-
-var _IdOrArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IdOrArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InterpolationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "InterpolationParameters",
-}, smithy.ShapeTypeStructure, 2)
-var InterpolationParameters_interpolationType *smithy.Schema
-
-var InterpolationParameters_intervalInSeconds *smithy.Schema
-
-var _InterpolationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "InterpolationType",
-}, smithy.ShapeTypeString, 0)
-
-var _IntervalInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IntervalInSeconds",
-}, smithy.ShapeTypeLong, 0)
-
-var IotSiteWiseSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IotSiteWiseSourceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var IotSiteWiseSourceConfiguration_filters *smithy.Schema
-
-var IotSiteWiseSourceConfigurationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IotSiteWiseSourceConfigurationFilter",
-}, smithy.ShapeTypeUnion, 2)
-var IotSiteWiseSourceConfigurationFilter_filterByAssetModel *smithy.Schema
-
-var IotSiteWiseSourceConfigurationFilter_filterByAsset *smithy.Schema
-
-var _IotSiteWiseSourceConfigurationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IotSiteWiseSourceConfigurationFilters",
-}, smithy.ShapeTypeList, 1)
-var _IotSiteWiseSourceConfigurationFilters_member *smithy.Schema
-
-var IotTwinMakerDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IotTwinMakerDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var IotTwinMakerDestinationConfiguration_workspace *smithy.Schema
-
-var IotTwinMakerSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IotTwinMakerSourceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var IotTwinMakerSourceConfiguration_workspace *smithy.Schema
-
-var IotTwinMakerSourceConfiguration_filters *smithy.Schema
-
-var IotTwinMakerSourceConfigurationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IotTwinMakerSourceConfigurationFilter",
-}, smithy.ShapeTypeUnion, 2)
-var IotTwinMakerSourceConfigurationFilter_filterByComponentType *smithy.Schema
-
-var IotTwinMakerSourceConfigurationFilter_filterByEntity *smithy.Schema
-
-var _IotTwinMakerSourceConfigurationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "IotTwinMakerSourceConfigurationFilters",
-}, smithy.ShapeTypeList, 1)
-var _IotTwinMakerSourceConfigurationFilters_member *smithy.Schema
-
-var _LambdaArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "LambdaArn",
-}, smithy.ShapeTypeString, 0)
-
-var LambdaFunction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "LambdaFunction",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaFunction_arn *smithy.Schema
-
-var _LinkedService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "LinkedService",
-}, smithy.ShapeTypeString, 0)
-
-var _LinkedServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "LinkedServices",
-}, smithy.ShapeTypeList, 1)
-var _LinkedServices_member *smithy.Schema
-
-var ListComponentTypesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponentTypesFilter",
-}, smithy.ShapeTypeUnion, 3)
-var ListComponentTypesFilter_extendsFrom *smithy.Schema
-
-var ListComponentTypesFilter_namespace *smithy.Schema
-
-var ListComponentTypesFilter_isAbstract *smithy.Schema
-
-var _ListComponentTypesFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponentTypesFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListComponentTypesFilters_member *smithy.Schema
-
-var ListEntitiesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListEntitiesFilter",
-}, smithy.ShapeTypeUnion, 3)
-var ListEntitiesFilter_parentEntityId *smithy.Schema
-
-var ListEntitiesFilter_componentTypeId *smithy.Schema
-
-var ListEntitiesFilter_externalId *smithy.Schema
-
-var _ListEntitiesFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListEntitiesFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListEntitiesFilters_member *smithy.Schema
-
-var ListMetadataTransferJobsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListMetadataTransferJobsFilter",
-}, smithy.ShapeTypeUnion, 2)
-var ListMetadataTransferJobsFilter_workspaceId *smithy.Schema
-
-var ListMetadataTransferJobsFilter_state *smithy.Schema
-
-var _ListMetadataTransferJobsFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListMetadataTransferJobsFilters",
-}, smithy.ShapeTypeList, 1)
-var _ListMetadataTransferJobsFilters_member *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetadataTransferJobProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "MetadataTransferJobProgress",
-}, smithy.ShapeTypeStructure, 4)
-var MetadataTransferJobProgress_totalCount *smithy.Schema
-
-var MetadataTransferJobProgress_succeededCount *smithy.Schema
-
-var MetadataTransferJobProgress_skippedCount *smithy.Schema
-
-var MetadataTransferJobProgress_failedCount *smithy.Schema
-
-var _MetadataTransferJobState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "MetadataTransferJobState",
-}, smithy.ShapeTypeString, 0)
-
-var MetadataTransferJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "MetadataTransferJobStatus",
-}, smithy.ShapeTypeStructure, 3)
-var MetadataTransferJobStatus_state *smithy.Schema
-
-var MetadataTransferJobStatus_error *smithy.Schema
-
-var MetadataTransferJobStatus_queuedPosition *smithy.Schema
-
-var _MetadataTransferJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "MetadataTransferJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _MetadataTransferJobSummaries_member *smithy.Schema
-
-var MetadataTransferJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "MetadataTransferJobSummary",
-}, smithy.ShapeTypeStructure, 6)
-var MetadataTransferJobSummary_metadataTransferJobId *smithy.Schema
-
-var MetadataTransferJobSummary_arn *smithy.Schema
-
-var MetadataTransferJobSummary_creationDateTime *smithy.Schema
-
-var MetadataTransferJobSummary_updateDateTime *smithy.Schema
-
-var MetadataTransferJobSummary_status *smithy.Schema
-
-var MetadataTransferJobSummary_progress *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Order = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Order",
-}, smithy.ShapeTypeString, 0)
-
-var OrderBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "OrderBy",
-}, smithy.ShapeTypeStructure, 2)
-var OrderBy_order *smithy.Schema
-
-var OrderBy_propertyName *smithy.Schema
-
-var _OrderByList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "OrderByList",
-}, smithy.ShapeTypeList, 1)
-var _OrderByList_member *smithy.Schema
-
-var _OrderByTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "OrderByTime",
-}, smithy.ShapeTypeString, 0)
-
-var _ParentEntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ParentEntityId",
-}, smithy.ShapeTypeString, 0)
-
-var ParentEntityUpdateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ParentEntityUpdateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ParentEntityUpdateRequest_updateType *smithy.Schema
-
-var ParentEntityUpdateRequest_parentEntityId *smithy.Schema
-
-var _ParentEntityUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ParentEntityUpdateType",
-}, smithy.ShapeTypeString, 0)
-
-var _PricingBundles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PricingBundles",
-}, smithy.ShapeTypeList, 1)
-var _PricingBundles_member *smithy.Schema
-
-var _PricingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PricingMode",
-}, smithy.ShapeTypeString, 0)
-
-var PricingPlan = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PricingPlan",
-}, smithy.ShapeTypeStructure, 6)
-var PricingPlan_billableEntityCount *smithy.Schema
-
-var PricingPlan_bundleInformation *smithy.Schema
-
-var PricingPlan_effectiveDateTime *smithy.Schema
-
-var PricingPlan_pricingMode *smithy.Schema
-
-var PricingPlan_updateDateTime *smithy.Schema
-
-var PricingPlan_updateReason *smithy.Schema
-
-var _PricingTier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PricingTier",
-}, smithy.ShapeTypeString, 0)
-
-var PropertyDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyDefinitionRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PropertyDefinitionRequest_dataType *smithy.Schema
-
-var PropertyDefinitionRequest_isRequiredInEntity *smithy.Schema
-
-var PropertyDefinitionRequest_isExternalId *smithy.Schema
-
-var PropertyDefinitionRequest_isStoredExternally *smithy.Schema
-
-var PropertyDefinitionRequest_isTimeSeries *smithy.Schema
-
-var PropertyDefinitionRequest_defaultValue *smithy.Schema
-
-var PropertyDefinitionRequest_configuration *smithy.Schema
-
-var PropertyDefinitionRequest_displayName *smithy.Schema
-
-var PropertyDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyDefinitionResponse",
-}, smithy.ShapeTypeStructure, 11)
-var PropertyDefinitionResponse_dataType *smithy.Schema
-
-var PropertyDefinitionResponse_isTimeSeries *smithy.Schema
-
-var PropertyDefinitionResponse_isRequiredInEntity *smithy.Schema
-
-var PropertyDefinitionResponse_isExternalId *smithy.Schema
-
-var PropertyDefinitionResponse_isStoredExternally *smithy.Schema
-
-var PropertyDefinitionResponse_isImported *smithy.Schema
-
-var PropertyDefinitionResponse_isFinal *smithy.Schema
-
-var PropertyDefinitionResponse_isInherited *smithy.Schema
-
-var PropertyDefinitionResponse_defaultValue *smithy.Schema
-
-var PropertyDefinitionResponse_configuration *smithy.Schema
-
-var PropertyDefinitionResponse_displayName *smithy.Schema
-
-var _PropertyDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyDefinitionsRequest",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyDefinitionsRequest_key *smithy.Schema
-
-var _PropertyDefinitionsRequest_value *smithy.Schema
-
-var _PropertyDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyDefinitionsResponse",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyDefinitionsResponse_key *smithy.Schema
-
-var _PropertyDefinitionsResponse_value *smithy.Schema
-
-var _PropertyDisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyDisplayName",
-}, smithy.ShapeTypeString, 0)
-
-var PropertyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyFilter",
-}, smithy.ShapeTypeStructure, 3)
-var PropertyFilter_propertyName *smithy.Schema
-
-var PropertyFilter_operator *smithy.Schema
-
-var PropertyFilter_value *smithy.Schema
-
-var _PropertyFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyFilters",
-}, smithy.ShapeTypeList, 1)
-var _PropertyFilters_member *smithy.Schema
-
-var PropertyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PropertyGroupRequest_groupType *smithy.Schema
-
-var PropertyGroupRequest_propertyNames *smithy.Schema
-
-var PropertyGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyGroupResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PropertyGroupResponse_groupType *smithy.Schema
-
-var PropertyGroupResponse_propertyNames *smithy.Schema
-
-var PropertyGroupResponse_isInherited *smithy.Schema
-
-var _PropertyGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyGroupsRequest",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyGroupsRequest_key *smithy.Schema
-
-var _PropertyGroupsRequest_value *smithy.Schema
-
-var _PropertyGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyGroupsResponse",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyGroupsResponse_key *smithy.Schema
-
-var _PropertyGroupsResponse_value *smithy.Schema
-
-var _PropertyGroupUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyGroupUpdateType",
-}, smithy.ShapeTypeString, 0)
-
-var PropertyLatestValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyLatestValue",
-}, smithy.ShapeTypeStructure, 2)
-var PropertyLatestValue_propertyReference *smithy.Schema
-
-var PropertyLatestValue_propertyValue *smithy.Schema
-
-var _PropertyLatestValueMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyLatestValueMap",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyLatestValueMap_key *smithy.Schema
-
-var _PropertyLatestValueMap_value *smithy.Schema
-
-var _PropertyNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyNames",
-}, smithy.ShapeTypeList, 1)
-var _PropertyNames_member *smithy.Schema
-
-var PropertyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PropertyRequest_definition *smithy.Schema
-
-var PropertyRequest_value *smithy.Schema
-
-var PropertyRequest_updateType *smithy.Schema
-
-var _PropertyRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyRequests",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyRequests_key *smithy.Schema
-
-var _PropertyRequests_value *smithy.Schema
-
-var PropertyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PropertyResponse_definition *smithy.Schema
-
-var PropertyResponse_value *smithy.Schema
-
-var PropertyResponse_areAllPropertyValuesReturned *smithy.Schema
-
-var _PropertyResponses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyResponses",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyResponses_key *smithy.Schema
-
-var _PropertyResponses_value *smithy.Schema
-
-var _PropertySummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertySummaries",
-}, smithy.ShapeTypeList, 1)
-var _PropertySummaries_member *smithy.Schema
-
-var PropertySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertySummary",
-}, smithy.ShapeTypeStructure, 4)
-var PropertySummary_definition *smithy.Schema
-
-var PropertySummary_propertyName *smithy.Schema
-
-var PropertySummary_value *smithy.Schema
-
-var PropertySummary_areAllPropertyValuesReturned *smithy.Schema
-
-var _PropertyTableValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyTableValue",
-}, smithy.ShapeTypeMap, 2)
-var _PropertyTableValue_key *smithy.Schema
-
-var _PropertyTableValue_value *smithy.Schema
-
-var _PropertyUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyUpdateType",
-}, smithy.ShapeTypeString, 0)
-
-var PropertyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyValue",
-}, smithy.ShapeTypeStructure, 3)
-var PropertyValue_timestamp *smithy.Schema
-
-var PropertyValue_value *smithy.Schema
-
-var PropertyValue_time *smithy.Schema
-
-var PropertyValueEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyValueEntry",
-}, smithy.ShapeTypeStructure, 2)
-var PropertyValueEntry_entityPropertyReference *smithy.Schema
-
-var PropertyValueEntry_propertyValues *smithy.Schema
-
-var PropertyValueHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyValueHistory",
-}, smithy.ShapeTypeStructure, 2)
-var PropertyValueHistory_entityPropertyReference *smithy.Schema
-
-var PropertyValueHistory_values *smithy.Schema
-
-var _PropertyValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyValueList",
-}, smithy.ShapeTypeList, 1)
-var _PropertyValueList_member *smithy.Schema
-
-var _PropertyValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "PropertyValues",
-}, smithy.ShapeTypeList, 1)
-var _PropertyValues_member *smithy.Schema
-
-var _QueryResultValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "QueryResultValue",
-}, smithy.ShapeTypeDocument, 0)
-
-var _QueryServiceMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "QueryServiceMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _QueryStatement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "QueryStatement",
-}, smithy.ShapeTypeString, 0)
-
-var QueryTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "QueryTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var QueryTimeoutException_message *smithy.Schema
-
-var Relationship = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Relationship",
-}, smithy.ShapeTypeStructure, 2)
-var Relationship_targetComponentTypeId *smithy.Schema
-
-var Relationship_relationshipType *smithy.Schema
-
-var RelationshipValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "RelationshipValue",
-}, smithy.ShapeTypeStructure, 2)
-var RelationshipValue_targetEntityId *smithy.Schema
-
-var RelationshipValue_targetComponentName *smithy.Schema
-
-var _RequiredProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "RequiredProperties",
-}, smithy.ShapeTypeList, 1)
-var _RequiredProperties_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var Row = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Row",
-}, smithy.ShapeTypeStructure, 1)
-var Row_rowData *smithy.Schema
-
-var _RowData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "RowData",
-}, smithy.ShapeTypeList, 1)
-var _RowData_member *smithy.Schema
-
-var _Rows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Rows",
-}, smithy.ShapeTypeList, 1)
-var _Rows_member *smithy.Schema
-
-var S3DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "S3DestinationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var S3DestinationConfiguration_location *smithy.Schema
-
-var _S3DestinationLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "S3DestinationLocation",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "S3Location",
-}, smithy.ShapeTypeString, 0)
-
-var S3SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "S3SourceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var S3SourceConfiguration_location *smithy.Schema
-
-var _S3SourceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "S3SourceLocation",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "S3Url",
-}, smithy.ShapeTypeString, 0)
-
-var _SceneCapabilities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneCapabilities",
-}, smithy.ShapeTypeList, 1)
-var _SceneCapabilities_member *smithy.Schema
-
-var _SceneCapability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneCapability",
-}, smithy.ShapeTypeString, 0)
-
-var SceneError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneError",
-}, smithy.ShapeTypeStructure, 2)
-var SceneError_code *smithy.Schema
-
-var SceneError_message *smithy.Schema
-
-var _SceneErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _SceneMetadataMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneMetadataMap",
-}, smithy.ShapeTypeMap, 2)
-var _SceneMetadataMap_key *smithy.Schema
-
-var _SceneMetadataMap_value *smithy.Schema
-
-var _SceneMetadataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneMetadataValue",
-}, smithy.ShapeTypeString, 0)
-
-var _SceneSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SceneSummaries_member *smithy.Schema
-
-var SceneSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SceneSummary",
-}, smithy.ShapeTypeStructure, 6)
-var SceneSummary_sceneId *smithy.Schema
-
-var SceneSummary_contentLocation *smithy.Schema
-
-var SceneSummary_arn *smithy.Schema
-
-var SceneSummary_creationDateTime *smithy.Schema
-
-var SceneSummary_updateDateTime *smithy.Schema
-
-var SceneSummary_description *smithy.Schema
-
-var _Scope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Scope",
-}, smithy.ShapeTypeString, 0)
-
-var _SelectedPropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SelectedPropertyList",
-}, smithy.ShapeTypeList, 1)
-var _SelectedPropertyList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _SiteWiseExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SiteWiseExternalId",
-}, smithy.ShapeTypeString, 0)
-
-var SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SourceConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var SourceConfiguration_type *smithy.Schema
-
-var SourceConfiguration_s3Configuration *smithy.Schema
-
-var SourceConfiguration_iotSiteWiseConfiguration *smithy.Schema
-
-var SourceConfiguration_iotTwinMakerConfiguration *smithy.Schema
-
-var _SourceConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SourceConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _SourceConfigurations_member *smithy.Schema
-
-var _SourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "State",
-}, smithy.ShapeTypeString, 0)
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Status",
-}, smithy.ShapeTypeStructure, 2)
-var Status_state *smithy.Schema
-
-var Status_error *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SyncJobState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncJobState",
-}, smithy.ShapeTypeString, 0)
-
-var SyncJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncJobStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SyncJobStatus_state *smithy.Schema
-
-var SyncJobStatus_error *smithy.Schema
-
-var _SyncJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SyncJobSummaries_member *smithy.Schema
-
-var SyncJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncJobSummary",
-}, smithy.ShapeTypeStructure, 6)
-var SyncJobSummary_arn *smithy.Schema
-
-var SyncJobSummary_workspaceId *smithy.Schema
-
-var SyncJobSummary_syncSource *smithy.Schema
-
-var SyncJobSummary_status *smithy.Schema
-
-var SyncJobSummary_creationDateTime *smithy.Schema
-
-var SyncJobSummary_updateDateTime *smithy.Schema
-
-var SyncResourceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncResourceFilter",
-}, smithy.ShapeTypeUnion, 4)
-var SyncResourceFilter_state *smithy.Schema
-
-var SyncResourceFilter_resourceType *smithy.Schema
-
-var SyncResourceFilter_resourceId *smithy.Schema
-
-var SyncResourceFilter_externalId *smithy.Schema
-
-var _SyncResourceFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncResourceFilters",
-}, smithy.ShapeTypeList, 1)
-var _SyncResourceFilters_member *smithy.Schema
-
-var _SyncResourceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncResourceState",
-}, smithy.ShapeTypeString, 0)
-
-var SyncResourceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncResourceStatus",
-}, smithy.ShapeTypeStructure, 2)
-var SyncResourceStatus_state *smithy.Schema
-
-var SyncResourceStatus_error *smithy.Schema
-
-var _SyncResourceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncResourceSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SyncResourceSummaries_member *smithy.Schema
-
-var SyncResourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncResourceSummary",
-}, smithy.ShapeTypeStructure, 5)
-var SyncResourceSummary_resourceType *smithy.Schema
-
-var SyncResourceSummary_externalId *smithy.Schema
-
-var SyncResourceSummary_resourceId *smithy.Schema
-
-var SyncResourceSummary_status *smithy.Schema
-
-var SyncResourceSummary_updateDateTime *smithy.Schema
-
-var _SyncResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _SyncSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "SyncSource",
-}, smithy.ShapeTypeString, 0)
-
-var TabularConditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TabularConditions",
-}, smithy.ShapeTypeStructure, 2)
-var TabularConditions_orderBy *smithy.Schema
-
-var TabularConditions_propertyFilters *smithy.Schema
-
-var _TabularPropertyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TabularPropertyValue",
-}, smithy.ShapeTypeList, 1)
-var _TabularPropertyValue_member *smithy.Schema
-
-var _TabularPropertyValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TabularPropertyValues",
-}, smithy.ShapeTypeList, 1)
-var _TabularPropertyValues_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _Time = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Time",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_message *smithy.Schema
-
-var _TwinMakerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TwinMakerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Type",
-}, smithy.ShapeTypeString, 0)
-
-var _UpdateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateReason",
-}, smithy.ShapeTypeString, 0)
-
-var _Uuid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Uuid",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Value",
-}, smithy.ShapeTypeString, 0)
-
-var _Values = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "Values",
-}, smithy.ShapeTypeList, 1)
-var _Values_member *smithy.Schema
-
-var _WorkspaceDeleteMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "WorkspaceDeleteMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkspaceSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "WorkspaceSummaries",
-}, smithy.ShapeTypeList, 1)
-var _WorkspaceSummaries_member *smithy.Schema
-
-var WorkspaceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "WorkspaceSummary",
-}, smithy.ShapeTypeStructure, 6)
-var WorkspaceSummary_workspaceId *smithy.Schema
-
-var WorkspaceSummary_arn *smithy.Schema
-
-var WorkspaceSummary_description *smithy.Schema
-
-var WorkspaceSummary_linkedServices *smithy.Schema
-
-var WorkspaceSummary_creationDateTime *smithy.Schema
-
-var WorkspaceSummary_updateDateTime *smithy.Schema
-
-var BatchPutPropertyValuesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "BatchPutPropertyValuesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchPutPropertyValuesRequest_workspaceId *smithy.Schema
-
-var BatchPutPropertyValuesRequest_entries *smithy.Schema
-
-var BatchPutPropertyValuesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "BatchPutPropertyValuesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchPutPropertyValuesResponse_errorEntries *smithy.Schema
-
-var CancelMetadataTransferJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CancelMetadataTransferJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelMetadataTransferJobRequest_metadataTransferJobId *smithy.Schema
-
-var CancelMetadataTransferJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CancelMetadataTransferJobResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CancelMetadataTransferJobResponse_metadataTransferJobId *smithy.Schema
-
-var CancelMetadataTransferJobResponse_arn *smithy.Schema
-
-var CancelMetadataTransferJobResponse_updateDateTime *smithy.Schema
-
-var CancelMetadataTransferJobResponse_status *smithy.Schema
-
-var CancelMetadataTransferJobResponse_progress *smithy.Schema
-
-var CreateComponentTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateComponentTypeRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateComponentTypeRequest_workspaceId *smithy.Schema
-
-var CreateComponentTypeRequest_isSingleton *smithy.Schema
-
-var CreateComponentTypeRequest_componentTypeId *smithy.Schema
-
-var CreateComponentTypeRequest_description *smithy.Schema
-
-var CreateComponentTypeRequest_propertyDefinitions *smithy.Schema
-
-var CreateComponentTypeRequest_extendsFrom *smithy.Schema
-
-var CreateComponentTypeRequest_functions *smithy.Schema
-
-var CreateComponentTypeRequest_tags *smithy.Schema
-
-var CreateComponentTypeRequest_propertyGroups *smithy.Schema
-
-var CreateComponentTypeRequest_componentTypeName *smithy.Schema
-
-var CreateComponentTypeRequest_compositeComponentTypes *smithy.Schema
-
-var CreateComponentTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateComponentTypeResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateComponentTypeResponse_arn *smithy.Schema
-
-var CreateComponentTypeResponse_creationDateTime *smithy.Schema
-
-var CreateComponentTypeResponse_state *smithy.Schema
-
-var CreateEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateEntityRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateEntityRequest_workspaceId *smithy.Schema
-
-var CreateEntityRequest_entityId *smithy.Schema
-
-var CreateEntityRequest_entityName *smithy.Schema
-
-var CreateEntityRequest_description *smithy.Schema
-
-var CreateEntityRequest_components *smithy.Schema
-
-var CreateEntityRequest_compositeComponents *smithy.Schema
-
-var CreateEntityRequest_parentEntityId *smithy.Schema
-
-var CreateEntityRequest_tags *smithy.Schema
-
-var CreateEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateEntityResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateEntityResponse_entityId *smithy.Schema
-
-var CreateEntityResponse_arn *smithy.Schema
-
-var CreateEntityResponse_creationDateTime *smithy.Schema
-
-var CreateEntityResponse_state *smithy.Schema
-
-var CreateMetadataTransferJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateMetadataTransferJobRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMetadataTransferJobRequest_metadataTransferJobId *smithy.Schema
-
-var CreateMetadataTransferJobRequest_description *smithy.Schema
-
-var CreateMetadataTransferJobRequest_sources *smithy.Schema
-
-var CreateMetadataTransferJobRequest_destination *smithy.Schema
-
-var CreateMetadataTransferJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateMetadataTransferJobResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMetadataTransferJobResponse_metadataTransferJobId *smithy.Schema
-
-var CreateMetadataTransferJobResponse_arn *smithy.Schema
-
-var CreateMetadataTransferJobResponse_creationDateTime *smithy.Schema
-
-var CreateMetadataTransferJobResponse_status *smithy.Schema
-
-var CreateSceneRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateSceneRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateSceneRequest_workspaceId *smithy.Schema
-
-var CreateSceneRequest_sceneId *smithy.Schema
-
-var CreateSceneRequest_contentLocation *smithy.Schema
-
-var CreateSceneRequest_description *smithy.Schema
-
-var CreateSceneRequest_capabilities *smithy.Schema
-
-var CreateSceneRequest_tags *smithy.Schema
-
-var CreateSceneRequest_sceneMetadata *smithy.Schema
-
-var CreateSceneResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateSceneResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSceneResponse_arn *smithy.Schema
-
-var CreateSceneResponse_creationDateTime *smithy.Schema
-
-var CreateSyncJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateSyncJobRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSyncJobRequest_workspaceId *smithy.Schema
-
-var CreateSyncJobRequest_syncSource *smithy.Schema
-
-var CreateSyncJobRequest_syncRole *smithy.Schema
-
-var CreateSyncJobRequest_tags *smithy.Schema
-
-var CreateSyncJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateSyncJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSyncJobResponse_arn *smithy.Schema
-
-var CreateSyncJobResponse_creationDateTime *smithy.Schema
-
-var CreateSyncJobResponse_state *smithy.Schema
-
-var CreateWorkspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateWorkspaceRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWorkspaceRequest_workspaceId *smithy.Schema
-
-var CreateWorkspaceRequest_description *smithy.Schema
-
-var CreateWorkspaceRequest_s3Location *smithy.Schema
-
-var CreateWorkspaceRequest_role *smithy.Schema
-
-var CreateWorkspaceRequest_tags *smithy.Schema
-
-var CreateWorkspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "CreateWorkspaceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWorkspaceResponse_arn *smithy.Schema
-
-var CreateWorkspaceResponse_creationDateTime *smithy.Schema
-
-var DeleteComponentTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteComponentTypeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteComponentTypeRequest_workspaceId *smithy.Schema
-
-var DeleteComponentTypeRequest_componentTypeId *smithy.Schema
-
-var DeleteComponentTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteComponentTypeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteComponentTypeResponse_state *smithy.Schema
-
-var DeleteEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteEntityRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteEntityRequest_workspaceId *smithy.Schema
-
-var DeleteEntityRequest_entityId *smithy.Schema
-
-var DeleteEntityRequest_isRecursive *smithy.Schema
-
-var DeleteEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteEntityResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEntityResponse_state *smithy.Schema
-
-var DeleteSceneRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteSceneRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSceneRequest_workspaceId *smithy.Schema
-
-var DeleteSceneRequest_sceneId *smithy.Schema
-
-var DeleteSceneResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteSceneResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSyncJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteSyncJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSyncJobRequest_workspaceId *smithy.Schema
-
-var DeleteSyncJobRequest_syncSource *smithy.Schema
-
-var DeleteSyncJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteSyncJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSyncJobResponse_state *smithy.Schema
-
-var DeleteWorkspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteWorkspaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkspaceRequest_workspaceId *smithy.Schema
-
-var DeleteWorkspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "DeleteWorkspaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkspaceResponse_message *smithy.Schema
-
-var ExecuteQueryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ExecuteQueryRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ExecuteQueryRequest_workspaceId *smithy.Schema
-
-var ExecuteQueryRequest_queryStatement *smithy.Schema
-
-var ExecuteQueryRequest_maxResults *smithy.Schema
-
-var ExecuteQueryRequest_nextToken *smithy.Schema
-
-var ExecuteQueryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ExecuteQueryResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ExecuteQueryResponse_columnDescriptions *smithy.Schema
-
-var ExecuteQueryResponse_rows *smithy.Schema
-
-var ExecuteQueryResponse_nextToken *smithy.Schema
-
-var GetComponentTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetComponentTypeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetComponentTypeRequest_workspaceId *smithy.Schema
-
-var GetComponentTypeRequest_componentTypeId *smithy.Schema
-
-var GetComponentTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetComponentTypeResponse",
-}, smithy.ShapeTypeStructure, 17)
-var GetComponentTypeResponse_workspaceId *smithy.Schema
-
-var GetComponentTypeResponse_isSingleton *smithy.Schema
-
-var GetComponentTypeResponse_componentTypeId *smithy.Schema
-
-var GetComponentTypeResponse_description *smithy.Schema
-
-var GetComponentTypeResponse_propertyDefinitions *smithy.Schema
-
-var GetComponentTypeResponse_extendsFrom *smithy.Schema
-
-var GetComponentTypeResponse_functions *smithy.Schema
-
-var GetComponentTypeResponse_creationDateTime *smithy.Schema
-
-var GetComponentTypeResponse_updateDateTime *smithy.Schema
-
-var GetComponentTypeResponse_arn *smithy.Schema
-
-var GetComponentTypeResponse_isAbstract *smithy.Schema
-
-var GetComponentTypeResponse_isSchemaInitialized *smithy.Schema
-
-var GetComponentTypeResponse_status *smithy.Schema
-
-var GetComponentTypeResponse_propertyGroups *smithy.Schema
-
-var GetComponentTypeResponse_syncSource *smithy.Schema
-
-var GetComponentTypeResponse_componentTypeName *smithy.Schema
-
-var GetComponentTypeResponse_compositeComponentTypes *smithy.Schema
-
-var GetEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetEntityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetEntityRequest_workspaceId *smithy.Schema
-
-var GetEntityRequest_entityId *smithy.Schema
-
-var GetEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetEntityResponse",
-}, smithy.ShapeTypeStructure, 13)
-var GetEntityResponse_entityId *smithy.Schema
-
-var GetEntityResponse_entityName *smithy.Schema
-
-var GetEntityResponse_arn *smithy.Schema
-
-var GetEntityResponse_status *smithy.Schema
-
-var GetEntityResponse_workspaceId *smithy.Schema
-
-var GetEntityResponse_description *smithy.Schema
-
-var GetEntityResponse_components *smithy.Schema
-
-var GetEntityResponse_parentEntityId *smithy.Schema
-
-var GetEntityResponse_hasChildEntities *smithy.Schema
-
-var GetEntityResponse_creationDateTime *smithy.Schema
-
-var GetEntityResponse_updateDateTime *smithy.Schema
-
-var GetEntityResponse_syncSource *smithy.Schema
-
-var GetEntityResponse_areAllComponentsReturned *smithy.Schema
-
-var GetMetadataTransferJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetMetadataTransferJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMetadataTransferJobRequest_metadataTransferJobId *smithy.Schema
-
-var GetMetadataTransferJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetMetadataTransferJobResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetMetadataTransferJobResponse_metadataTransferJobId *smithy.Schema
-
-var GetMetadataTransferJobResponse_arn *smithy.Schema
-
-var GetMetadataTransferJobResponse_description *smithy.Schema
-
-var GetMetadataTransferJobResponse_sources *smithy.Schema
-
-var GetMetadataTransferJobResponse_destination *smithy.Schema
-
-var GetMetadataTransferJobResponse_metadataTransferJobRole *smithy.Schema
-
-var GetMetadataTransferJobResponse_reportUrl *smithy.Schema
-
-var GetMetadataTransferJobResponse_creationDateTime *smithy.Schema
-
-var GetMetadataTransferJobResponse_updateDateTime *smithy.Schema
-
-var GetMetadataTransferJobResponse_status *smithy.Schema
-
-var GetMetadataTransferJobResponse_progress *smithy.Schema
-
-var GetPricingPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPricingPlanRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetPricingPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPricingPlanResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPricingPlanResponse_currentPricingPlan *smithy.Schema
-
-var GetPricingPlanResponse_pendingPricingPlan *smithy.Schema
-
-var GetPropertyValueHistoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPropertyValueHistoryRequest",
-}, smithy.ShapeTypeStructure, 15)
-var GetPropertyValueHistoryRequest_workspaceId *smithy.Schema
-
-var GetPropertyValueHistoryRequest_entityId *smithy.Schema
-
-var GetPropertyValueHistoryRequest_componentName *smithy.Schema
-
-var GetPropertyValueHistoryRequest_componentPath *smithy.Schema
-
-var GetPropertyValueHistoryRequest_componentTypeId *smithy.Schema
-
-var GetPropertyValueHistoryRequest_selectedProperties *smithy.Schema
-
-var GetPropertyValueHistoryRequest_propertyFilters *smithy.Schema
-
-var GetPropertyValueHistoryRequest_startDateTime *smithy.Schema
-
-var GetPropertyValueHistoryRequest_endDateTime *smithy.Schema
-
-var GetPropertyValueHistoryRequest_interpolation *smithy.Schema
-
-var GetPropertyValueHistoryRequest_nextToken *smithy.Schema
-
-var GetPropertyValueHistoryRequest_maxResults *smithy.Schema
-
-var GetPropertyValueHistoryRequest_orderByTime *smithy.Schema
-
-var GetPropertyValueHistoryRequest_startTime *smithy.Schema
-
-var GetPropertyValueHistoryRequest_endTime *smithy.Schema
-
-var GetPropertyValueHistoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPropertyValueHistoryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPropertyValueHistoryResponse_propertyValues *smithy.Schema
-
-var GetPropertyValueHistoryResponse_nextToken *smithy.Schema
-
-var GetPropertyValueRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPropertyValueRequest",
-}, smithy.ShapeTypeStructure, 10)
-var GetPropertyValueRequest_componentName *smithy.Schema
-
-var GetPropertyValueRequest_componentPath *smithy.Schema
-
-var GetPropertyValueRequest_componentTypeId *smithy.Schema
-
-var GetPropertyValueRequest_entityId *smithy.Schema
-
-var GetPropertyValueRequest_selectedProperties *smithy.Schema
-
-var GetPropertyValueRequest_workspaceId *smithy.Schema
-
-var GetPropertyValueRequest_maxResults *smithy.Schema
-
-var GetPropertyValueRequest_nextToken *smithy.Schema
-
-var GetPropertyValueRequest_propertyGroupName *smithy.Schema
-
-var GetPropertyValueRequest_tabularConditions *smithy.Schema
-
-var GetPropertyValueResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetPropertyValueResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetPropertyValueResponse_propertyValues *smithy.Schema
-
-var GetPropertyValueResponse_nextToken *smithy.Schema
-
-var GetPropertyValueResponse_tabularPropertyValues *smithy.Schema
-
-var GetSceneRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetSceneRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSceneRequest_workspaceId *smithy.Schema
-
-var GetSceneRequest_sceneId *smithy.Schema
-
-var GetSceneResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetSceneResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetSceneResponse_workspaceId *smithy.Schema
-
-var GetSceneResponse_sceneId *smithy.Schema
-
-var GetSceneResponse_contentLocation *smithy.Schema
-
-var GetSceneResponse_arn *smithy.Schema
-
-var GetSceneResponse_creationDateTime *smithy.Schema
-
-var GetSceneResponse_updateDateTime *smithy.Schema
-
-var GetSceneResponse_description *smithy.Schema
-
-var GetSceneResponse_capabilities *smithy.Schema
-
-var GetSceneResponse_sceneMetadata *smithy.Schema
-
-var GetSceneResponse_generatedSceneMetadata *smithy.Schema
-
-var GetSceneResponse_error *smithy.Schema
-
-var GetSyncJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetSyncJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSyncJobRequest_syncSource *smithy.Schema
-
-var GetSyncJobRequest_workspaceId *smithy.Schema
-
-var GetSyncJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetSyncJobResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetSyncJobResponse_arn *smithy.Schema
-
-var GetSyncJobResponse_workspaceId *smithy.Schema
-
-var GetSyncJobResponse_syncSource *smithy.Schema
-
-var GetSyncJobResponse_syncRole *smithy.Schema
-
-var GetSyncJobResponse_status *smithy.Schema
-
-var GetSyncJobResponse_creationDateTime *smithy.Schema
-
-var GetSyncJobResponse_updateDateTime *smithy.Schema
-
-var GetWorkspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetWorkspaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetWorkspaceRequest_workspaceId *smithy.Schema
-
-var GetWorkspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "GetWorkspaceResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetWorkspaceResponse_workspaceId *smithy.Schema
-
-var GetWorkspaceResponse_arn *smithy.Schema
-
-var GetWorkspaceResponse_description *smithy.Schema
-
-var GetWorkspaceResponse_linkedServices *smithy.Schema
-
-var GetWorkspaceResponse_s3Location *smithy.Schema
-
-var GetWorkspaceResponse_role *smithy.Schema
-
-var GetWorkspaceResponse_creationDateTime *smithy.Schema
-
-var GetWorkspaceResponse_updateDateTime *smithy.Schema
-
-var ListComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponentsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListComponentsRequest_workspaceId *smithy.Schema
-
-var ListComponentsRequest_entityId *smithy.Schema
-
-var ListComponentsRequest_componentPath *smithy.Schema
-
-var ListComponentsRequest_maxResults *smithy.Schema
-
-var ListComponentsRequest_nextToken *smithy.Schema
-
-var ListComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentsResponse_componentSummaries *smithy.Schema
-
-var ListComponentsResponse_nextToken *smithy.Schema
-
-var ListComponentTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponentTypesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListComponentTypesRequest_workspaceId *smithy.Schema
-
-var ListComponentTypesRequest_filters *smithy.Schema
-
-var ListComponentTypesRequest_nextToken *smithy.Schema
-
-var ListComponentTypesRequest_maxResults *smithy.Schema
-
-var ListComponentTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListComponentTypesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ListComponentTypesResponse_workspaceId *smithy.Schema
-
-var ListComponentTypesResponse_componentTypeSummaries *smithy.Schema
-
-var ListComponentTypesResponse_nextToken *smithy.Schema
-
-var ListComponentTypesResponse_maxResults *smithy.Schema
-
-var ListEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListEntitiesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEntitiesRequest_workspaceId *smithy.Schema
-
-var ListEntitiesRequest_filters *smithy.Schema
-
-var ListEntitiesRequest_maxResults *smithy.Schema
-
-var ListEntitiesRequest_nextToken *smithy.Schema
-
-var ListEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListEntitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEntitiesResponse_entitySummaries *smithy.Schema
-
-var ListEntitiesResponse_nextToken *smithy.Schema
-
-var ListMetadataTransferJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListMetadataTransferJobsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListMetadataTransferJobsRequest_sourceType *smithy.Schema
-
-var ListMetadataTransferJobsRequest_destinationType *smithy.Schema
-
-var ListMetadataTransferJobsRequest_filters *smithy.Schema
-
-var ListMetadataTransferJobsRequest_nextToken *smithy.Schema
-
-var ListMetadataTransferJobsRequest_maxResults *smithy.Schema
-
-var ListMetadataTransferJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListMetadataTransferJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMetadataTransferJobsResponse_metadataTransferJobSummaries *smithy.Schema
-
-var ListMetadataTransferJobsResponse_nextToken *smithy.Schema
-
-var ListPropertiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListPropertiesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListPropertiesRequest_workspaceId *smithy.Schema
-
-var ListPropertiesRequest_componentName *smithy.Schema
-
-var ListPropertiesRequest_componentPath *smithy.Schema
-
-var ListPropertiesRequest_entityId *smithy.Schema
-
-var ListPropertiesRequest_maxResults *smithy.Schema
-
-var ListPropertiesRequest_nextToken *smithy.Schema
-
-var ListPropertiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListPropertiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPropertiesResponse_propertySummaries *smithy.Schema
-
-var ListPropertiesResponse_nextToken *smithy.Schema
-
-var ListScenesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListScenesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListScenesRequest_workspaceId *smithy.Schema
-
-var ListScenesRequest_maxResults *smithy.Schema
-
-var ListScenesRequest_nextToken *smithy.Schema
-
-var ListScenesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListScenesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListScenesResponse_sceneSummaries *smithy.Schema
-
-var ListScenesResponse_nextToken *smithy.Schema
-
-var ListSyncJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListSyncJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSyncJobsRequest_workspaceId *smithy.Schema
-
-var ListSyncJobsRequest_maxResults *smithy.Schema
-
-var ListSyncJobsRequest_nextToken *smithy.Schema
-
-var ListSyncJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListSyncJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSyncJobsResponse_syncJobSummaries *smithy.Schema
-
-var ListSyncJobsResponse_nextToken *smithy.Schema
-
-var ListSyncResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListSyncResourcesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSyncResourcesRequest_workspaceId *smithy.Schema
-
-var ListSyncResourcesRequest_syncSource *smithy.Schema
-
-var ListSyncResourcesRequest_filters *smithy.Schema
-
-var ListSyncResourcesRequest_maxResults *smithy.Schema
-
-var ListSyncResourcesRequest_nextToken *smithy.Schema
-
-var ListSyncResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListSyncResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSyncResourcesResponse_syncResources *smithy.Schema
-
-var ListSyncResourcesResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_resourceARN *smithy.Schema
-
-var ListTagsForResourceRequest_maxResults *smithy.Schema
-
-var ListTagsForResourceRequest_nextToken *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTagsForResourceResponse_nextToken *smithy.Schema
-
-var ListWorkspacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListWorkspacesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkspacesRequest_maxResults *smithy.Schema
-
-var ListWorkspacesRequest_nextToken *smithy.Schema
-
-var ListWorkspacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "ListWorkspacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkspacesResponse_workspaceSummaries *smithy.Schema
-
-var ListWorkspacesResponse_nextToken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceARN *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceARN *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateComponentTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateComponentTypeRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateComponentTypeRequest_workspaceId *smithy.Schema
-
-var UpdateComponentTypeRequest_isSingleton *smithy.Schema
-
-var UpdateComponentTypeRequest_componentTypeId *smithy.Schema
-
-var UpdateComponentTypeRequest_description *smithy.Schema
-
-var UpdateComponentTypeRequest_propertyDefinitions *smithy.Schema
-
-var UpdateComponentTypeRequest_extendsFrom *smithy.Schema
-
-var UpdateComponentTypeRequest_functions *smithy.Schema
-
-var UpdateComponentTypeRequest_propertyGroups *smithy.Schema
-
-var UpdateComponentTypeRequest_componentTypeName *smithy.Schema
-
-var UpdateComponentTypeRequest_compositeComponentTypes *smithy.Schema
-
-var UpdateComponentTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateComponentTypeResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateComponentTypeResponse_workspaceId *smithy.Schema
-
-var UpdateComponentTypeResponse_arn *smithy.Schema
-
-var UpdateComponentTypeResponse_componentTypeId *smithy.Schema
-
-var UpdateComponentTypeResponse_state *smithy.Schema
-
-var UpdateEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateEntityRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateEntityRequest_workspaceId *smithy.Schema
-
-var UpdateEntityRequest_entityId *smithy.Schema
-
-var UpdateEntityRequest_entityName *smithy.Schema
-
-var UpdateEntityRequest_description *smithy.Schema
-
-var UpdateEntityRequest_componentUpdates *smithy.Schema
-
-var UpdateEntityRequest_compositeComponentUpdates *smithy.Schema
-
-var UpdateEntityRequest_parentEntityUpdate *smithy.Schema
-
-var UpdateEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateEntityResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateEntityResponse_updateDateTime *smithy.Schema
-
-var UpdateEntityResponse_state *smithy.Schema
-
-var UpdatePricingPlanRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdatePricingPlanRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdatePricingPlanRequest_pricingMode *smithy.Schema
-
-var UpdatePricingPlanRequest_bundleNames *smithy.Schema
-
-var UpdatePricingPlanResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdatePricingPlanResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdatePricingPlanResponse_currentPricingPlan *smithy.Schema
-
-var UpdatePricingPlanResponse_pendingPricingPlan *smithy.Schema
-
-var UpdateSceneRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateSceneRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateSceneRequest_workspaceId *smithy.Schema
-
-var UpdateSceneRequest_sceneId *smithy.Schema
-
-var UpdateSceneRequest_contentLocation *smithy.Schema
-
-var UpdateSceneRequest_description *smithy.Schema
-
-var UpdateSceneRequest_capabilities *smithy.Schema
-
-var UpdateSceneRequest_sceneMetadata *smithy.Schema
-
-var UpdateSceneResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateSceneResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSceneResponse_updateDateTime *smithy.Schema
-
-var UpdateWorkspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateWorkspaceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateWorkspaceRequest_workspaceId *smithy.Schema
-
-var UpdateWorkspaceRequest_description *smithy.Schema
-
-var UpdateWorkspaceRequest_role *smithy.Schema
-
-var UpdateWorkspaceRequest_s3Location *smithy.Schema
-
-var UpdateWorkspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.iottwinmaker",
-	Name:      "UpdateWorkspaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWorkspaceResponse_updateDateTime *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "isRecursive"}}, DirectMask: 0x10}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "workspace"}}, DirectMask: 0x10}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceARN"}}, DirectMask: 0x10}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBatchPutPropertyError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutPropertyError_errorCode, &sBatchPutPropertyError_errorMessage, &sBatchPutPropertyError_entry}}
+var mBatchPutPropertyErrorEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutPropertyErrorEntry_errors}}
+var mBundleInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sBundleInformation_bundleNames, &sBundleInformation_pricingTier}}
+var mColumnDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnDescription_name, &sColumnDescription_type}}
+var m_ColumnDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnDescriptions_member}}
+var mComponentPropertyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentPropertyGroupRequest_groupType, &sComponentPropertyGroupRequest_propertyNames, &sComponentPropertyGroupRequest_updateType}}
+var m_ComponentPropertyGroupRequests = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentPropertyGroupRequests_key, &s_ComponentPropertyGroupRequests_value}}
+var mComponentPropertyGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentPropertyGroupResponse_groupType, &sComponentPropertyGroupResponse_propertyNames, &sComponentPropertyGroupResponse_isInherited}}
+var m_ComponentPropertyGroupResponses = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentPropertyGroupResponses_key, &s_ComponentPropertyGroupResponses_value}}
+var mComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentRequest_description, &sComponentRequest_componentTypeId, &sComponentRequest_properties, &sComponentRequest_propertyGroups}}
+var mComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentResponse_componentName, &sComponentResponse_description, &sComponentResponse_componentTypeId, &sComponentResponse_status, &sComponentResponse_definedIn, &sComponentResponse_properties, &sComponentResponse_propertyGroups, &sComponentResponse_syncSource, &sComponentResponse_areAllPropertiesReturned, &sComponentResponse_compositeComponents, &sComponentResponse_areAllCompositeComponentsReturned}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 8, 0, 9, 0, 0, 0, 0, 2, 0, 5, 0, 0, 4, 3, 11, 0, 10, 0,
+	6, 0, 0, 0, 7, 0, 1, 0,
+}}
+var m_ComponentsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentsMap_key, &s_ComponentsMap_value}}
+var m_ComponentsMapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentsMapRequest_key, &s_ComponentsMapRequest_value}}
+var m_ComponentSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentSummaries_member}}
+var mComponentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentSummary_componentName, &sComponentSummary_componentTypeId, &sComponentSummary_definedIn, &sComponentSummary_description, &sComponentSummary_propertyGroups, &sComponentSummary_status, &sComponentSummary_syncSource, &sComponentSummary_componentPath}}
+var m_ComponentTypeSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentTypeSummaries_member}}
+var mComponentTypeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentTypeSummary_arn, &sComponentTypeSummary_componentTypeId, &sComponentTypeSummary_creationDateTime, &sComponentTypeSummary_updateDateTime, &sComponentTypeSummary_description, &sComponentTypeSummary_status, &sComponentTypeSummary_componentTypeName}}
+var mComponentUpdateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentUpdateRequest_updateType, &sComponentUpdateRequest_description, &sComponentUpdateRequest_componentTypeId, &sComponentUpdateRequest_propertyUpdates, &sComponentUpdateRequest_propertyGroupUpdates}}
+var m_ComponentUpdatesMapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentUpdatesMapRequest_key, &s_ComponentUpdatesMapRequest_value}}
+var mCompositeComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositeComponentRequest_description, &sCompositeComponentRequest_properties, &sCompositeComponentRequest_propertyGroups}}
+var m_CompositeComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompositeComponentResponse_key, &s_CompositeComponentResponse_value}}
+var m_CompositeComponentsMapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompositeComponentsMapRequest_key, &s_CompositeComponentsMapRequest_value}}
+var mCompositeComponentTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositeComponentTypeRequest_componentTypeId}}
+var mCompositeComponentTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositeComponentTypeResponse_componentTypeId, &sCompositeComponentTypeResponse_isInherited}}
+var m_CompositeComponentTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompositeComponentTypesRequest_key, &s_CompositeComponentTypesRequest_value}}
+var m_CompositeComponentTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompositeComponentTypesResponse_key, &s_CompositeComponentTypesResponse_value}}
+var mCompositeComponentUpdateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositeComponentUpdateRequest_updateType, &sCompositeComponentUpdateRequest_description, &sCompositeComponentUpdateRequest_propertyUpdates, &sCompositeComponentUpdateRequest_propertyGroupUpdates}}
+var m_CompositeComponentUpdatesMapRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompositeComponentUpdatesMapRequest_key, &s_CompositeComponentUpdatesMapRequest_value}}
+var m_Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&s_Configuration_key, &s_Configuration_value}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mConnectorFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorFailureException_message}}
+var mConnectorTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectorTimeoutException_message}}
+var mDataConnector = smithy.SchemaMembers{List: []*smithy.Schema{&sDataConnector_lambda, &sDataConnector_isNative}}
+var mDataType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataType_type, &sDataType_nestedType, &sDataType_allowedValues, &sDataType_unitOfMeasure, &sDataType_relationship}}
+var mDataValue = smithy.SchemaMembers{List: []*smithy.Schema{&sDataValue_booleanValue, &sDataValue_doubleValue, &sDataValue_integerValue, &sDataValue_longValue, &sDataValue_stringValue, &sDataValue_listValue, &sDataValue_mapValue, &sDataValue_relationshipValue, &sDataValue_expression}, Seed: 3, Slots: []uint16{
+	2, 0, 0, 0, 5, 0, 0, 7, 0, 3, 0, 0, 6, 0, 4, 0, 0, 0, 0, 0, 1, 0, 8, 0,
+	0, 0, 0, 0, 9, 0, 0, 0,
+}}
+var m_DataValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataValueList_member}}
+var m_DataValueMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataValueMap_key, &s_DataValueMap_value}}
+var mDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDestinationConfiguration_type, &sDestinationConfiguration_s3Configuration, &sDestinationConfiguration_iotTwinMakerConfiguration}}
+var mEntityPropertyReference = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityPropertyReference_componentName, &sEntityPropertyReference_componentPath, &sEntityPropertyReference_externalIdProperty, &sEntityPropertyReference_entityId, &sEntityPropertyReference_propertyName}}
+var m_EntitySummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntitySummaries_member}}
+var mEntitySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitySummary_entityId, &sEntitySummary_entityName, &sEntitySummary_arn, &sEntitySummary_parentEntityId, &sEntitySummary_status, &sEntitySummary_description, &sEntitySummary_hasChildEntities, &sEntitySummary_creationDateTime, &sEntitySummary_updateDateTime}, Seed: 14, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 3, 4, 0, 5, 1, 0, 0, 0, 7, 0, 0, 0, 0, 8, 0, 0, 0,
+	9, 0, 2, 0, 0, 6, 0, 0,
+}}
+var m_Entries = smithy.SchemaMembers{List: []*smithy.Schema{&s_Entries_member}}
+var mErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetails_code, &sErrorDetails_message}}
+var m_ErrorEntries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ErrorEntries_member}}
+var m_Errors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Errors_member}}
+var m_ExtendsFrom = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExtendsFrom_member}}
+var m_ExternalIdProperty = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExternalIdProperty_key, &s_ExternalIdProperty_value}}
+var mFilterByAsset = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterByAsset_assetId, &sFilterByAsset_assetExternalId, &sFilterByAsset_includeOffspring, &sFilterByAsset_includeAssetModel}}
+var mFilterByAssetModel = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterByAssetModel_assetModelId, &sFilterByAssetModel_assetModelExternalId, &sFilterByAssetModel_includeOffspring, &sFilterByAssetModel_includeAssets}}
+var mFilterByComponentType = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterByComponentType_componentTypeId}}
+var mFilterByEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterByEntity_entityId}}
+var mFunctionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionRequest_requiredProperties, &sFunctionRequest_scope, &sFunctionRequest_implementedBy}}
+var mFunctionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sFunctionResponse_requiredProperties, &sFunctionResponse_scope, &sFunctionResponse_implementedBy, &sFunctionResponse_isInherited}}
+var m_FunctionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_FunctionsRequest_key, &s_FunctionsRequest_value}}
+var m_FunctionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s_FunctionsResponse_key, &s_FunctionsResponse_value}}
+var m_GeneratedSceneMetadataMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_GeneratedSceneMetadataMap_key, &s_GeneratedSceneMetadataMap_value}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mInterpolationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sInterpolationParameters_interpolationType, &sInterpolationParameters_intervalInSeconds}}
+var mIotSiteWiseSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIotSiteWiseSourceConfiguration_filters}}
+var mIotSiteWiseSourceConfigurationFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sIotSiteWiseSourceConfigurationFilter_filterByAssetModel, &sIotSiteWiseSourceConfigurationFilter_filterByAsset}}
+var m_IotSiteWiseSourceConfigurationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_IotSiteWiseSourceConfigurationFilters_member}}
+var mIotTwinMakerDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIotTwinMakerDestinationConfiguration_workspace}}
+var mIotTwinMakerSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIotTwinMakerSourceConfiguration_workspace, &sIotTwinMakerSourceConfiguration_filters}}
+var mIotTwinMakerSourceConfigurationFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sIotTwinMakerSourceConfigurationFilter_filterByComponentType, &sIotTwinMakerSourceConfigurationFilter_filterByEntity}}
+var m_IotTwinMakerSourceConfigurationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_IotTwinMakerSourceConfigurationFilters_member}}
+var mLambdaFunction = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunction_arn}}
+var m_LinkedServices = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkedServices_member}}
+var mListComponentTypesFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentTypesFilter_extendsFrom, &sListComponentTypesFilter_namespace, &sListComponentTypesFilter_isAbstract}}
+var m_ListComponentTypesFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListComponentTypesFilters_member}}
+var mListEntitiesFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitiesFilter_parentEntityId, &sListEntitiesFilter_componentTypeId, &sListEntitiesFilter_externalId}}
+var m_ListEntitiesFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListEntitiesFilters_member}}
+var mListMetadataTransferJobsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListMetadataTransferJobsFilter_workspaceId, &sListMetadataTransferJobsFilter_state}}
+var m_ListMetadataTransferJobsFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListMetadataTransferJobsFilters_member}}
+var mMetadataTransferJobProgress = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataTransferJobProgress_totalCount, &sMetadataTransferJobProgress_succeededCount, &sMetadataTransferJobProgress_skippedCount, &sMetadataTransferJobProgress_failedCount}}
+var mMetadataTransferJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataTransferJobStatus_state, &sMetadataTransferJobStatus_error, &sMetadataTransferJobStatus_queuedPosition}}
+var m_MetadataTransferJobSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetadataTransferJobSummaries_member}}
+var mMetadataTransferJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataTransferJobSummary_metadataTransferJobId, &sMetadataTransferJobSummary_arn, &sMetadataTransferJobSummary_creationDateTime, &sMetadataTransferJobSummary_updateDateTime, &sMetadataTransferJobSummary_status, &sMetadataTransferJobSummary_progress}}
+var mOrderBy = smithy.SchemaMembers{List: []*smithy.Schema{&sOrderBy_order, &sOrderBy_propertyName}}
+var m_OrderByList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrderByList_member}}
+var mParentEntityUpdateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sParentEntityUpdateRequest_updateType, &sParentEntityUpdateRequest_parentEntityId}}
+var m_PricingBundles = smithy.SchemaMembers{List: []*smithy.Schema{&s_PricingBundles_member}}
+var mPricingPlan = smithy.SchemaMembers{List: []*smithy.Schema{&sPricingPlan_billableEntityCount, &sPricingPlan_bundleInformation, &sPricingPlan_effectiveDateTime, &sPricingPlan_pricingMode, &sPricingPlan_updateDateTime, &sPricingPlan_updateReason}}
+var mPropertyDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyDefinitionRequest_dataType, &sPropertyDefinitionRequest_isRequiredInEntity, &sPropertyDefinitionRequest_isExternalId, &sPropertyDefinitionRequest_isStoredExternally, &sPropertyDefinitionRequest_isTimeSeries, &sPropertyDefinitionRequest_defaultValue, &sPropertyDefinitionRequest_configuration, &sPropertyDefinitionRequest_displayName}}
+var mPropertyDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyDefinitionResponse_dataType, &sPropertyDefinitionResponse_isTimeSeries, &sPropertyDefinitionResponse_isRequiredInEntity, &sPropertyDefinitionResponse_isExternalId, &sPropertyDefinitionResponse_isStoredExternally, &sPropertyDefinitionResponse_isImported, &sPropertyDefinitionResponse_isFinal, &sPropertyDefinitionResponse_isInherited, &sPropertyDefinitionResponse_defaultValue, &sPropertyDefinitionResponse_configuration, &sPropertyDefinitionResponse_displayName}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 2, 0, 3, 0, 6, 5, 10, 0, 8, 1, 0, 0, 9, 0,
+	0, 0, 0, 0, 0, 7, 4, 0,
+}}
+var m_PropertyDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyDefinitionsRequest_key, &s_PropertyDefinitionsRequest_value}}
+var m_PropertyDefinitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyDefinitionsResponse_key, &s_PropertyDefinitionsResponse_value}}
+var mPropertyFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyFilter_propertyName, &sPropertyFilter_operator, &sPropertyFilter_value}}
+var m_PropertyFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyFilters_member}}
+var mPropertyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyGroupRequest_groupType, &sPropertyGroupRequest_propertyNames}}
+var mPropertyGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyGroupResponse_groupType, &sPropertyGroupResponse_propertyNames, &sPropertyGroupResponse_isInherited}}
+var m_PropertyGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyGroupsRequest_key, &s_PropertyGroupsRequest_value}}
+var m_PropertyGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyGroupsResponse_key, &s_PropertyGroupsResponse_value}}
+var mPropertyLatestValue = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyLatestValue_propertyReference, &sPropertyLatestValue_propertyValue}}
+var m_PropertyLatestValueMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyLatestValueMap_key, &s_PropertyLatestValueMap_value}}
+var m_PropertyNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyNames_member}}
+var mPropertyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyRequest_definition, &sPropertyRequest_value, &sPropertyRequest_updateType}}
+var m_PropertyRequests = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyRequests_key, &s_PropertyRequests_value}}
+var mPropertyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyResponse_definition, &sPropertyResponse_value, &sPropertyResponse_areAllPropertyValuesReturned}}
+var m_PropertyResponses = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyResponses_key, &s_PropertyResponses_value}}
+var m_PropertySummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertySummaries_member}}
+var mPropertySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertySummary_definition, &sPropertySummary_propertyName, &sPropertySummary_value, &sPropertySummary_areAllPropertyValuesReturned}}
+var m_PropertyTableValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyTableValue_key, &s_PropertyTableValue_value}}
+var mPropertyValue = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyValue_timestamp, &sPropertyValue_value, &sPropertyValue_time}}
+var mPropertyValueEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyValueEntry_entityPropertyReference, &sPropertyValueEntry_propertyValues}}
+var mPropertyValueHistory = smithy.SchemaMembers{List: []*smithy.Schema{&sPropertyValueHistory_entityPropertyReference, &sPropertyValueHistory_values}}
+var m_PropertyValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyValueList_member}}
+var m_PropertyValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_PropertyValues_member}}
+var mQueryTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryTimeoutException_message}}
+var mRelationship = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationship_targetComponentTypeId, &sRelationship_relationshipType}}
+var mRelationshipValue = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationshipValue_targetEntityId, &sRelationshipValue_targetComponentName}}
+var m_RequiredProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_RequiredProperties_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRow = smithy.SchemaMembers{List: []*smithy.Schema{&sRow_rowData}}
+var m_RowData = smithy.SchemaMembers{List: []*smithy.Schema{&s_RowData_member}}
+var m_Rows = smithy.SchemaMembers{List: []*smithy.Schema{&s_Rows_member}}
+var mS3DestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationConfiguration_location}}
+var mS3SourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3SourceConfiguration_location}}
+var m_SceneCapabilities = smithy.SchemaMembers{List: []*smithy.Schema{&s_SceneCapabilities_member}}
+var mSceneError = smithy.SchemaMembers{List: []*smithy.Schema{&sSceneError_code, &sSceneError_message}}
+var m_SceneMetadataMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SceneMetadataMap_key, &s_SceneMetadataMap_value}}
+var m_SceneSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SceneSummaries_member}}
+var mSceneSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSceneSummary_sceneId, &sSceneSummary_contentLocation, &sSceneSummary_arn, &sSceneSummary_creationDateTime, &sSceneSummary_updateDateTime, &sSceneSummary_description}}
+var m_SelectedPropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SelectedPropertyList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceConfiguration_type, &sSourceConfiguration_s3Configuration, &sSourceConfiguration_iotSiteWiseConfiguration, &sSourceConfiguration_iotTwinMakerConfiguration}}
+var m_SourceConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceConfigurations_member}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_state, &sStatus_error}}
+var mSyncJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncJobStatus_state, &sSyncJobStatus_error}}
+var m_SyncJobSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SyncJobSummaries_member}}
+var mSyncJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncJobSummary_arn, &sSyncJobSummary_workspaceId, &sSyncJobSummary_syncSource, &sSyncJobSummary_status, &sSyncJobSummary_creationDateTime, &sSyncJobSummary_updateDateTime}}
+var mSyncResourceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncResourceFilter_state, &sSyncResourceFilter_resourceType, &sSyncResourceFilter_resourceId, &sSyncResourceFilter_externalId}}
+var m_SyncResourceFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_SyncResourceFilters_member}}
+var mSyncResourceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncResourceStatus_state, &sSyncResourceStatus_error}}
+var m_SyncResourceSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SyncResourceSummaries_member}}
+var mSyncResourceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncResourceSummary_resourceType, &sSyncResourceSummary_externalId, &sSyncResourceSummary_resourceId, &sSyncResourceSummary_status, &sSyncResourceSummary_updateDateTime}}
+var mTabularConditions = smithy.SchemaMembers{List: []*smithy.Schema{&sTabularConditions_orderBy, &sTabularConditions_propertyFilters}}
+var m_TabularPropertyValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_TabularPropertyValue_member}}
+var m_TabularPropertyValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_TabularPropertyValues_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var m_Values = smithy.SchemaMembers{List: []*smithy.Schema{&s_Values_member}}
+var m_WorkspaceSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkspaceSummaries_member}}
+var mWorkspaceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkspaceSummary_workspaceId, &sWorkspaceSummary_arn, &sWorkspaceSummary_description, &sWorkspaceSummary_linkedServices, &sWorkspaceSummary_creationDateTime, &sWorkspaceSummary_updateDateTime}}
+var mBatchPutPropertyValuesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutPropertyValuesRequest_workspaceId, &sBatchPutPropertyValuesRequest_entries}}
+var mBatchPutPropertyValuesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPutPropertyValuesResponse_errorEntries}}
+var mCancelMetadataTransferJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelMetadataTransferJobRequest_metadataTransferJobId}}
+var mCancelMetadataTransferJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelMetadataTransferJobResponse_metadataTransferJobId, &sCancelMetadataTransferJobResponse_arn, &sCancelMetadataTransferJobResponse_updateDateTime, &sCancelMetadataTransferJobResponse_status, &sCancelMetadataTransferJobResponse_progress}}
+var mCreateComponentTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentTypeRequest_workspaceId, &sCreateComponentTypeRequest_isSingleton, &sCreateComponentTypeRequest_componentTypeId, &sCreateComponentTypeRequest_description, &sCreateComponentTypeRequest_propertyDefinitions, &sCreateComponentTypeRequest_extendsFrom, &sCreateComponentTypeRequest_functions, &sCreateComponentTypeRequest_tags, &sCreateComponentTypeRequest_propertyGroups, &sCreateComponentTypeRequest_componentTypeName, &sCreateComponentTypeRequest_compositeComponentTypes}, Seed: 12, Slots: []uint16{
+	0, 0, 8, 0, 0, 3, 0, 0, 0, 4, 0, 0, 10, 0, 1, 11, 0, 5, 0, 0, 0, 2, 0, 7,
+	0, 0, 9, 0, 6, 0, 0, 0,
+}}
+var mCreateComponentTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentTypeResponse_arn, &sCreateComponentTypeResponse_creationDateTime, &sCreateComponentTypeResponse_state}}
+var mCreateEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEntityRequest_workspaceId, &sCreateEntityRequest_entityId, &sCreateEntityRequest_entityName, &sCreateEntityRequest_description, &sCreateEntityRequest_components, &sCreateEntityRequest_compositeComponents, &sCreateEntityRequest_parentEntityId, &sCreateEntityRequest_tags}}
+var mCreateEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEntityResponse_entityId, &sCreateEntityResponse_arn, &sCreateEntityResponse_creationDateTime, &sCreateEntityResponse_state}}
+var mCreateMetadataTransferJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMetadataTransferJobRequest_metadataTransferJobId, &sCreateMetadataTransferJobRequest_description, &sCreateMetadataTransferJobRequest_sources, &sCreateMetadataTransferJobRequest_destination}}
+var mCreateMetadataTransferJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMetadataTransferJobResponse_metadataTransferJobId, &sCreateMetadataTransferJobResponse_arn, &sCreateMetadataTransferJobResponse_creationDateTime, &sCreateMetadataTransferJobResponse_status}}
+var mCreateSceneRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSceneRequest_workspaceId, &sCreateSceneRequest_sceneId, &sCreateSceneRequest_contentLocation, &sCreateSceneRequest_description, &sCreateSceneRequest_capabilities, &sCreateSceneRequest_tags, &sCreateSceneRequest_sceneMetadata}}
+var mCreateSceneResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSceneResponse_arn, &sCreateSceneResponse_creationDateTime}}
+var mCreateSyncJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSyncJobRequest_workspaceId, &sCreateSyncJobRequest_syncSource, &sCreateSyncJobRequest_syncRole, &sCreateSyncJobRequest_tags}}
+var mCreateSyncJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSyncJobResponse_arn, &sCreateSyncJobResponse_creationDateTime, &sCreateSyncJobResponse_state}}
+var mCreateWorkspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkspaceRequest_workspaceId, &sCreateWorkspaceRequest_description, &sCreateWorkspaceRequest_s3Location, &sCreateWorkspaceRequest_role, &sCreateWorkspaceRequest_tags}}
+var mCreateWorkspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkspaceResponse_arn, &sCreateWorkspaceResponse_creationDateTime}}
+var mDeleteComponentTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComponentTypeRequest_workspaceId, &sDeleteComponentTypeRequest_componentTypeId}}
+var mDeleteComponentTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComponentTypeResponse_state}}
+var mDeleteEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEntityRequest_workspaceId, &sDeleteEntityRequest_entityId, &sDeleteEntityRequest_isRecursive}}
+var mDeleteEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEntityResponse_state}}
+var mDeleteSceneRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSceneRequest_workspaceId, &sDeleteSceneRequest_sceneId}}
+var mDeleteSyncJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSyncJobRequest_workspaceId, &sDeleteSyncJobRequest_syncSource}}
+var mDeleteSyncJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSyncJobResponse_state}}
+var mDeleteWorkspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkspaceRequest_workspaceId}}
+var mDeleteWorkspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkspaceResponse_message}}
+var mExecuteQueryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteQueryRequest_workspaceId, &sExecuteQueryRequest_queryStatement, &sExecuteQueryRequest_maxResults, &sExecuteQueryRequest_nextToken}}
+var mExecuteQueryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteQueryResponse_columnDescriptions, &sExecuteQueryResponse_rows, &sExecuteQueryResponse_nextToken}}
+var mGetComponentTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentTypeRequest_workspaceId, &sGetComponentTypeRequest_componentTypeId}}
+var mGetComponentTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentTypeResponse_workspaceId, &sGetComponentTypeResponse_isSingleton, &sGetComponentTypeResponse_componentTypeId, &sGetComponentTypeResponse_description, &sGetComponentTypeResponse_propertyDefinitions, &sGetComponentTypeResponse_extendsFrom, &sGetComponentTypeResponse_functions, &sGetComponentTypeResponse_creationDateTime, &sGetComponentTypeResponse_updateDateTime, &sGetComponentTypeResponse_arn, &sGetComponentTypeResponse_isAbstract, &sGetComponentTypeResponse_isSchemaInitialized, &sGetComponentTypeResponse_status, &sGetComponentTypeResponse_propertyGroups, &sGetComponentTypeResponse_syncSource, &sGetComponentTypeResponse_componentTypeName, &sGetComponentTypeResponse_compositeComponentTypes}, Seed: 6, Slots: []uint16{
+	3, 0, 10, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 17, 0, 0, 9, 15, 0, 0, 0, 5,
+	0, 0, 0, 0, 14, 12, 0, 0, 0, 0, 11, 0, 0, 7, 0, 13, 0, 0, 0, 0, 0, 0, 0, 6,
+	0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 8, 0,
+}}
+var mGetEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEntityRequest_workspaceId, &sGetEntityRequest_entityId}}
+var mGetEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEntityResponse_entityId, &sGetEntityResponse_entityName, &sGetEntityResponse_arn, &sGetEntityResponse_status, &sGetEntityResponse_workspaceId, &sGetEntityResponse_description, &sGetEntityResponse_components, &sGetEntityResponse_parentEntityId, &sGetEntityResponse_hasChildEntities, &sGetEntityResponse_creationDateTime, &sGetEntityResponse_updateDateTime, &sGetEntityResponse_syncSource, &sGetEntityResponse_areAllComponentsReturned}, Seed: 18, Slots: []uint16{
+	0, 0, 0, 11, 0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 6, 0, 8, 0, 9, 10, 5, 13, 0,
+	4, 0, 0, 2, 0, 1, 3, 7,
+}}
+var mGetMetadataTransferJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetadataTransferJobRequest_metadataTransferJobId}}
+var mGetMetadataTransferJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMetadataTransferJobResponse_metadataTransferJobId, &sGetMetadataTransferJobResponse_arn, &sGetMetadataTransferJobResponse_description, &sGetMetadataTransferJobResponse_sources, &sGetMetadataTransferJobResponse_destination, &sGetMetadataTransferJobResponse_metadataTransferJobRole, &sGetMetadataTransferJobResponse_reportUrl, &sGetMetadataTransferJobResponse_creationDateTime, &sGetMetadataTransferJobResponse_updateDateTime, &sGetMetadataTransferJobResponse_status, &sGetMetadataTransferJobResponse_progress}, Seed: 9, Slots: []uint16{
+	11, 0, 0, 1, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0, 0, 2, 0, 10, 7, 8, 0, 0, 0, 0,
+	0, 0, 3, 4, 0, 0, 9, 0,
+}}
+var mGetPricingPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPricingPlanResponse_currentPricingPlan, &sGetPricingPlanResponse_pendingPricingPlan}}
+var mGetPropertyValueHistoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPropertyValueHistoryRequest_workspaceId, &sGetPropertyValueHistoryRequest_entityId, &sGetPropertyValueHistoryRequest_componentName, &sGetPropertyValueHistoryRequest_componentPath, &sGetPropertyValueHistoryRequest_componentTypeId, &sGetPropertyValueHistoryRequest_selectedProperties, &sGetPropertyValueHistoryRequest_propertyFilters, &sGetPropertyValueHistoryRequest_startDateTime, &sGetPropertyValueHistoryRequest_endDateTime, &sGetPropertyValueHistoryRequest_interpolation, &sGetPropertyValueHistoryRequest_nextToken, &sGetPropertyValueHistoryRequest_maxResults, &sGetPropertyValueHistoryRequest_orderByTime, &sGetPropertyValueHistoryRequest_startTime, &sGetPropertyValueHistoryRequest_endTime}, Seed: 13, Slots: []uint16{
+	0, 3, 0, 0, 0, 0, 0, 8, 5, 0, 11, 0, 0, 14, 10, 0, 4, 0, 12, 2, 0, 6, 0, 1,
+	0, 0, 7, 9, 13, 0, 0, 15,
+}}
+var mGetPropertyValueHistoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPropertyValueHistoryResponse_propertyValues, &sGetPropertyValueHistoryResponse_nextToken}}
+var mGetPropertyValueRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPropertyValueRequest_componentName, &sGetPropertyValueRequest_componentPath, &sGetPropertyValueRequest_componentTypeId, &sGetPropertyValueRequest_entityId, &sGetPropertyValueRequest_selectedProperties, &sGetPropertyValueRequest_workspaceId, &sGetPropertyValueRequest_maxResults, &sGetPropertyValueRequest_nextToken, &sGetPropertyValueRequest_propertyGroupName, &sGetPropertyValueRequest_tabularConditions}, Seed: 9, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 0, 10, 0, 0, 6, 0, 0, 8, 9, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+	0, 0, 0, 3, 0, 5, 4, 7,
+}}
+var mGetPropertyValueResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPropertyValueResponse_propertyValues, &sGetPropertyValueResponse_nextToken, &sGetPropertyValueResponse_tabularPropertyValues}}
+var mGetSceneRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSceneRequest_workspaceId, &sGetSceneRequest_sceneId}}
+var mGetSceneResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSceneResponse_workspaceId, &sGetSceneResponse_sceneId, &sGetSceneResponse_contentLocation, &sGetSceneResponse_arn, &sGetSceneResponse_creationDateTime, &sGetSceneResponse_updateDateTime, &sGetSceneResponse_description, &sGetSceneResponse_capabilities, &sGetSceneResponse_sceneMetadata, &sGetSceneResponse_generatedSceneMetadata, &sGetSceneResponse_error}, Seed: 3, Slots: []uint16{
+	0, 4, 6, 0, 0, 10, 8, 0, 0, 0, 0, 9, 0, 2, 0, 0, 0, 1, 0, 11, 0, 0, 0, 0,
+	0, 3, 0, 0, 0, 7, 5, 0,
+}}
+var mGetSyncJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSyncJobRequest_syncSource, &sGetSyncJobRequest_workspaceId}}
+var mGetSyncJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSyncJobResponse_arn, &sGetSyncJobResponse_workspaceId, &sGetSyncJobResponse_syncSource, &sGetSyncJobResponse_syncRole, &sGetSyncJobResponse_status, &sGetSyncJobResponse_creationDateTime, &sGetSyncJobResponse_updateDateTime}}
+var mGetWorkspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkspaceRequest_workspaceId}}
+var mGetWorkspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkspaceResponse_workspaceId, &sGetWorkspaceResponse_arn, &sGetWorkspaceResponse_description, &sGetWorkspaceResponse_linkedServices, &sGetWorkspaceResponse_s3Location, &sGetWorkspaceResponse_role, &sGetWorkspaceResponse_creationDateTime, &sGetWorkspaceResponse_updateDateTime}}
+var mListComponentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsRequest_workspaceId, &sListComponentsRequest_entityId, &sListComponentsRequest_componentPath, &sListComponentsRequest_maxResults, &sListComponentsRequest_nextToken}}
+var mListComponentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsResponse_componentSummaries, &sListComponentsResponse_nextToken}}
+var mListComponentTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentTypesRequest_workspaceId, &sListComponentTypesRequest_filters, &sListComponentTypesRequest_nextToken, &sListComponentTypesRequest_maxResults}}
+var mListComponentTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentTypesResponse_workspaceId, &sListComponentTypesResponse_componentTypeSummaries, &sListComponentTypesResponse_nextToken, &sListComponentTypesResponse_maxResults}}
+var mListEntitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitiesRequest_workspaceId, &sListEntitiesRequest_filters, &sListEntitiesRequest_maxResults, &sListEntitiesRequest_nextToken}}
+var mListEntitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitiesResponse_entitySummaries, &sListEntitiesResponse_nextToken}}
+var mListMetadataTransferJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMetadataTransferJobsRequest_sourceType, &sListMetadataTransferJobsRequest_destinationType, &sListMetadataTransferJobsRequest_filters, &sListMetadataTransferJobsRequest_nextToken, &sListMetadataTransferJobsRequest_maxResults}}
+var mListMetadataTransferJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMetadataTransferJobsResponse_metadataTransferJobSummaries, &sListMetadataTransferJobsResponse_nextToken}}
+var mListPropertiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPropertiesRequest_workspaceId, &sListPropertiesRequest_componentName, &sListPropertiesRequest_componentPath, &sListPropertiesRequest_entityId, &sListPropertiesRequest_maxResults, &sListPropertiesRequest_nextToken}}
+var mListPropertiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPropertiesResponse_propertySummaries, &sListPropertiesResponse_nextToken}}
+var mListScenesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListScenesRequest_workspaceId, &sListScenesRequest_maxResults, &sListScenesRequest_nextToken}}
+var mListScenesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListScenesResponse_sceneSummaries, &sListScenesResponse_nextToken}}
+var mListSyncJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSyncJobsRequest_workspaceId, &sListSyncJobsRequest_maxResults, &sListSyncJobsRequest_nextToken}}
+var mListSyncJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSyncJobsResponse_syncJobSummaries, &sListSyncJobsResponse_nextToken}}
+var mListSyncResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSyncResourcesRequest_workspaceId, &sListSyncResourcesRequest_syncSource, &sListSyncResourcesRequest_filters, &sListSyncResourcesRequest_maxResults, &sListSyncResourcesRequest_nextToken}}
+var mListSyncResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSyncResourcesResponse_syncResources, &sListSyncResourcesResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceARN, &sListTagsForResourceRequest_maxResults, &sListTagsForResourceRequest_nextToken}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags, &sListTagsForResourceResponse_nextToken}}
+var mListWorkspacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkspacesRequest_maxResults, &sListWorkspacesRequest_nextToken}}
+var mListWorkspacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkspacesResponse_workspaceSummaries, &sListWorkspacesResponse_nextToken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceARN, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceARN, &sUntagResourceRequest_tagKeys}}
+var mUpdateComponentTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentTypeRequest_workspaceId, &sUpdateComponentTypeRequest_isSingleton, &sUpdateComponentTypeRequest_componentTypeId, &sUpdateComponentTypeRequest_description, &sUpdateComponentTypeRequest_propertyDefinitions, &sUpdateComponentTypeRequest_extendsFrom, &sUpdateComponentTypeRequest_functions, &sUpdateComponentTypeRequest_propertyGroups, &sUpdateComponentTypeRequest_componentTypeName, &sUpdateComponentTypeRequest_compositeComponentTypes}, Seed: 12, Slots: []uint16{
+	0, 0, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 9, 0, 1, 10, 0, 5, 0, 0, 0, 2, 0, 7,
+	0, 0, 8, 0, 6, 0, 0, 0,
+}}
+var mUpdateComponentTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentTypeResponse_workspaceId, &sUpdateComponentTypeResponse_arn, &sUpdateComponentTypeResponse_componentTypeId, &sUpdateComponentTypeResponse_state}}
+var mUpdateEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEntityRequest_workspaceId, &sUpdateEntityRequest_entityId, &sUpdateEntityRequest_entityName, &sUpdateEntityRequest_description, &sUpdateEntityRequest_componentUpdates, &sUpdateEntityRequest_compositeComponentUpdates, &sUpdateEntityRequest_parentEntityUpdate}}
+var mUpdateEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEntityResponse_updateDateTime, &sUpdateEntityResponse_state}}
+var mUpdatePricingPlanRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePricingPlanRequest_pricingMode, &sUpdatePricingPlanRequest_bundleNames}}
+var mUpdatePricingPlanResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePricingPlanResponse_currentPricingPlan, &sUpdatePricingPlanResponse_pendingPricingPlan}}
+var mUpdateSceneRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSceneRequest_workspaceId, &sUpdateSceneRequest_sceneId, &sUpdateSceneRequest_contentLocation, &sUpdateSceneRequest_description, &sUpdateSceneRequest_capabilities, &sUpdateSceneRequest_sceneMetadata}}
+var mUpdateSceneResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSceneResponse_updateDateTime}}
+var mUpdateWorkspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkspaceRequest_workspaceId, &sUpdateWorkspaceRequest_description, &sUpdateWorkspaceRequest_role, &sUpdateWorkspaceRequest_s3Location}}
+var mUpdateWorkspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkspaceResponse_updateDateTime}}
+
+var sBatchPutPropertyValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutPropertyValues, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCancelMetadataTransferJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelMetadataTransferJob, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentType, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEntity, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateMetadataTransferJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMetadataTransferJob, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateScene = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateScene, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateSyncJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSyncJob, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkspace, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentType, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntity, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteScene = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScene, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteSyncJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSyncJob, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDeleteWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkspace, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sExecuteQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteQuery, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentType, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntity, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetMetadataTransferJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetadataTransferJob, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPricingPlan, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetPropertyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPropertyValue, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sGetPropertyValueHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPropertyValueHistory, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sGetScene = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetScene, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sGetSyncJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncJob, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sGetWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkspace, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponents, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListComponentTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentTypes, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntities, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListMetadataTransferJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetadataTransferJobs, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProperties, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListScenes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScenes, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListSyncJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncJobs, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sListSyncResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncResources, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sListWorkspaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkspaces, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sUpdateComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentType, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sUpdateEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEntity, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sUpdatePricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlan, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sUpdateScene = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateScene, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sUpdateWorkspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspace, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var s_AWSIoTTwinMaker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSIoTTwinMaker, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var sBatchPutPropertyError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutPropertyError, Members: &mBatchPutPropertyError, Type: smithy.ShapeTypeStructure})
+var sBatchPutPropertyErrorEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutPropertyErrorEntry, Members: &mBatchPutPropertyErrorEntry, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sBundleInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBundleInformation, Members: &mBundleInformation, Type: smithy.ShapeTypeStructure})
+var s_BundleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BundleName, Type: smithy.ShapeTypeString})
+var sColumnDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnDescription, Members: &mColumnDescription, Type: smithy.ShapeTypeStructure})
+var s_ColumnDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnDescriptions, Members: &m_ColumnDescriptions, Type: smithy.ShapeTypeList})
+var s_ColumnName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var s_ColumnType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnType, Type: smithy.ShapeTypeString})
+var s_ComponentPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var sComponentPropertyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentPropertyGroupRequest, Members: &mComponentPropertyGroupRequest, Type: smithy.ShapeTypeStructure})
+var s_ComponentPropertyGroupRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentPropertyGroupRequests, Members: &m_ComponentPropertyGroupRequests, Type: smithy.ShapeTypeMap})
+var sComponentPropertyGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentPropertyGroupResponse, Members: &mComponentPropertyGroupResponse, Type: smithy.ShapeTypeStructure})
+var s_ComponentPropertyGroupResponses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentPropertyGroupResponses, Members: &m_ComponentPropertyGroupResponses, Type: smithy.ShapeTypeMap})
+var sComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentRequest, Members: &mComponentRequest, Type: smithy.ShapeTypeStructure})
+var sComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentResponse, Members: &mComponentResponse, Type: smithy.ShapeTypeStructure})
+var s_ComponentsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentsMap, Members: &m_ComponentsMap, Type: smithy.ShapeTypeMap})
+var s_ComponentsMapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentsMapRequest, Members: &m_ComponentsMapRequest, Type: smithy.ShapeTypeMap})
+var s_ComponentSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentSummaries, Members: &m_ComponentSummaries, Type: smithy.ShapeTypeList})
+var sComponentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentSummary, Members: &mComponentSummary, Type: smithy.ShapeTypeStructure})
+var s_ComponentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var s_ComponentTypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentTypeName, Type: smithy.ShapeTypeString})
+var s_ComponentTypeSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentTypeSummaries, Members: &m_ComponentTypeSummaries, Type: smithy.ShapeTypeList})
+var sComponentTypeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentTypeSummary, Members: &mComponentTypeSummary, Type: smithy.ShapeTypeStructure})
+var sComponentUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentUpdateRequest, Members: &mComponentUpdateRequest, Type: smithy.ShapeTypeStructure})
+var s_ComponentUpdatesMapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentUpdatesMapRequest, Members: &m_ComponentUpdatesMapRequest, Type: smithy.ShapeTypeMap})
+var s_ComponentUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentUpdateType, Type: smithy.ShapeTypeString})
+var sCompositeComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositeComponentRequest, Members: &mCompositeComponentRequest, Type: smithy.ShapeTypeStructure})
+var s_CompositeComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompositeComponentResponse, Members: &m_CompositeComponentResponse, Type: smithy.ShapeTypeMap})
+var s_CompositeComponentsMapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompositeComponentsMapRequest, Members: &m_CompositeComponentsMapRequest, Type: smithy.ShapeTypeMap})
+var sCompositeComponentTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositeComponentTypeRequest, Members: &mCompositeComponentTypeRequest, Type: smithy.ShapeTypeStructure})
+var sCompositeComponentTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositeComponentTypeResponse, Members: &mCompositeComponentTypeResponse, Type: smithy.ShapeTypeStructure})
+var s_CompositeComponentTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompositeComponentTypesRequest, Members: &m_CompositeComponentTypesRequest, Type: smithy.ShapeTypeMap})
+var s_CompositeComponentTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompositeComponentTypesResponse, Members: &m_CompositeComponentTypesResponse, Type: smithy.ShapeTypeMap})
+var sCompositeComponentUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositeComponentUpdateRequest, Members: &mCompositeComponentUpdateRequest, Type: smithy.ShapeTypeStructure})
+var s_CompositeComponentUpdatesMapRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompositeComponentUpdatesMapRequest, Members: &m_CompositeComponentUpdatesMapRequest, Type: smithy.ShapeTypeMap})
+var s_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Configuration, Members: &m_Configuration, Type: smithy.ShapeTypeMap})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var sConnectorFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorFailureException, Members: &mConnectorFailureException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sConnectorTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectorTimeoutException, Members: &mConnectorTimeoutException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sDataConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataConnector, Members: &mDataConnector, Type: smithy.ShapeTypeStructure})
+var sDataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeStructure})
+var sDataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var s_DataValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataValueList, Members: &m_DataValueList, Type: smithy.ShapeTypeList})
+var s_DataValueMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataValueMap, Members: &m_DataValueMap, Type: smithy.ShapeTypeMap})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_DestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationType, Type: smithy.ShapeTypeString})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var s_EntityName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sEntityPropertyReference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityPropertyReference, Members: &mEntityPropertyReference, Type: smithy.ShapeTypeStructure})
+var s_EntitySummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitySummaries, Members: &m_EntitySummaries, Type: smithy.ShapeTypeList})
+var sEntitySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitySummary, Members: &mEntitySummary, Type: smithy.ShapeTypeStructure})
+var s_Entries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Entries, Members: &m_Entries, Type: smithy.ShapeTypeList})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var s_ErrorEntries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorEntries, Members: &m_ErrorEntries, Type: smithy.ShapeTypeList})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Errors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Errors, Members: &m_Errors, Type: smithy.ShapeTypeList})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var s_Expression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expression, Type: smithy.ShapeTypeString})
+var s_ExtendsFrom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExtendsFrom, Members: &m_ExtendsFrom, Type: smithy.ShapeTypeList})
+var s_ExternalIdProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalIdProperty, Members: &m_ExternalIdProperty, Type: smithy.ShapeTypeMap})
+var sFilterByAsset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterByAsset, Members: &mFilterByAsset, Type: smithy.ShapeTypeStructure})
+var sFilterByAssetModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterByAssetModel, Members: &mFilterByAssetModel, Type: smithy.ShapeTypeStructure})
+var sFilterByComponentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterByComponentType, Members: &mFilterByComponentType, Type: smithy.ShapeTypeStructure})
+var sFilterByEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterByEntity, Members: &mFilterByEntity, Type: smithy.ShapeTypeStructure})
+var sFunctionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionRequest, Members: &mFunctionRequest, Type: smithy.ShapeTypeStructure})
+var sFunctionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFunctionResponse, Members: &mFunctionResponse, Type: smithy.ShapeTypeStructure})
+var s_FunctionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionsRequest, Members: &m_FunctionsRequest, Type: smithy.ShapeTypeMap})
+var s_FunctionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FunctionsResponse, Members: &m_FunctionsResponse, Type: smithy.ShapeTypeMap})
+var s_GeneratedSceneMetadataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneratedSceneMetadataMap, Members: &m_GeneratedSceneMetadataMap, Type: smithy.ShapeTypeMap})
+var s_GroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupType, Type: smithy.ShapeTypeString})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString})
+var s_IdOrArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdOrArn, Type: smithy.ShapeTypeString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var sInterpolationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterpolationParameters, Members: &mInterpolationParameters, Type: smithy.ShapeTypeStructure})
+var s_InterpolationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InterpolationType, Type: smithy.ShapeTypeString})
+var s_IntervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntervalInSeconds, Type: smithy.ShapeTypeLong})
+var sIotSiteWiseSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIotSiteWiseSourceConfiguration, Members: &mIotSiteWiseSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sIotSiteWiseSourceConfigurationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIotSiteWiseSourceConfigurationFilter, Members: &mIotSiteWiseSourceConfigurationFilter, Type: smithy.ShapeTypeUnion})
+var s_IotSiteWiseSourceConfigurationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IotSiteWiseSourceConfigurationFilters, Members: &m_IotSiteWiseSourceConfigurationFilters, Type: smithy.ShapeTypeList})
+var sIotTwinMakerDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIotTwinMakerDestinationConfiguration, Members: &mIotTwinMakerDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sIotTwinMakerSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIotTwinMakerSourceConfiguration, Members: &mIotTwinMakerSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sIotTwinMakerSourceConfigurationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIotTwinMakerSourceConfigurationFilter, Members: &mIotTwinMakerSourceConfigurationFilter, Type: smithy.ShapeTypeUnion})
+var s_IotTwinMakerSourceConfigurationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IotTwinMakerSourceConfigurationFilters, Members: &m_IotTwinMakerSourceConfigurationFilters, Type: smithy.ShapeTypeList})
+var s_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaArn, Type: smithy.ShapeTypeString})
+var sLambdaFunction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunction, Members: &mLambdaFunction, Type: smithy.ShapeTypeStructure})
+var s_LinkedService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkedService, Type: smithy.ShapeTypeString})
+var s_LinkedServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkedServices, Members: &m_LinkedServices, Type: smithy.ShapeTypeList})
+var sListComponentTypesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentTypesFilter, Members: &mListComponentTypesFilter, Type: smithy.ShapeTypeUnion})
+var s_ListComponentTypesFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListComponentTypesFilters, Members: &m_ListComponentTypesFilters, Type: smithy.ShapeTypeList})
+var sListEntitiesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesFilter, Members: &mListEntitiesFilter, Type: smithy.ShapeTypeUnion})
+var s_ListEntitiesFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEntitiesFilters, Members: &m_ListEntitiesFilters, Type: smithy.ShapeTypeList})
+var sListMetadataTransferJobsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetadataTransferJobsFilter, Members: &mListMetadataTransferJobsFilter, Type: smithy.ShapeTypeUnion})
+var s_ListMetadataTransferJobsFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListMetadataTransferJobsFilters, Members: &m_ListMetadataTransferJobsFilters, Type: smithy.ShapeTypeList})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMetadataTransferJobProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataTransferJobProgress, Members: &mMetadataTransferJobProgress, Type: smithy.ShapeTypeStructure})
+var s_MetadataTransferJobState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataTransferJobState, Type: smithy.ShapeTypeString})
+var sMetadataTransferJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataTransferJobStatus, Members: &mMetadataTransferJobStatus, Type: smithy.ShapeTypeStructure})
+var s_MetadataTransferJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataTransferJobSummaries, Members: &m_MetadataTransferJobSummaries, Type: smithy.ShapeTypeList})
+var sMetadataTransferJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataTransferJobSummary, Members: &mMetadataTransferJobSummary, Type: smithy.ShapeTypeStructure})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_Order = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Order, Type: smithy.ShapeTypeString})
+var sOrderBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderBy, Members: &mOrderBy, Type: smithy.ShapeTypeStructure})
+var s_OrderByList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrderByList, Members: &m_OrderByList, Type: smithy.ShapeTypeList})
+var s_OrderByTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrderByTime, Type: smithy.ShapeTypeString})
+var s_ParentEntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentEntityId, Type: smithy.ShapeTypeString})
+var sParentEntityUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParentEntityUpdateRequest, Members: &mParentEntityUpdateRequest, Type: smithy.ShapeTypeStructure})
+var s_ParentEntityUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentEntityUpdateType, Type: smithy.ShapeTypeString})
+var s_PricingBundles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingBundles, Members: &m_PricingBundles, Type: smithy.ShapeTypeList})
+var s_PricingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingMode, Type: smithy.ShapeTypeString})
+var sPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPricingPlan, Members: &mPricingPlan, Type: smithy.ShapeTypeStructure})
+var s_PricingTier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PricingTier, Type: smithy.ShapeTypeString})
+var sPropertyDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyDefinitionRequest, Members: &mPropertyDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sPropertyDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyDefinitionResponse, Members: &mPropertyDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var s_PropertyDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyDefinitionsRequest, Members: &m_PropertyDefinitionsRequest, Type: smithy.ShapeTypeMap})
+var s_PropertyDefinitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyDefinitionsResponse, Members: &m_PropertyDefinitionsResponse, Type: smithy.ShapeTypeMap})
+var s_PropertyDisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyDisplayName, Type: smithy.ShapeTypeString})
+var sPropertyFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyFilter, Members: &mPropertyFilter, Type: smithy.ShapeTypeStructure})
+var s_PropertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyFilters, Members: &m_PropertyFilters, Type: smithy.ShapeTypeList})
+var sPropertyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyGroupRequest, Members: &mPropertyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sPropertyGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyGroupResponse, Members: &mPropertyGroupResponse, Type: smithy.ShapeTypeStructure})
+var s_PropertyGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyGroupsRequest, Members: &m_PropertyGroupsRequest, Type: smithy.ShapeTypeMap})
+var s_PropertyGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyGroupsResponse, Members: &m_PropertyGroupsResponse, Type: smithy.ShapeTypeMap})
+var s_PropertyGroupUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyGroupUpdateType, Type: smithy.ShapeTypeString})
+var sPropertyLatestValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyLatestValue, Members: &mPropertyLatestValue, Type: smithy.ShapeTypeStructure})
+var s_PropertyLatestValueMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyLatestValueMap, Members: &m_PropertyLatestValueMap, Type: smithy.ShapeTypeMap})
+var s_PropertyNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyNames, Members: &m_PropertyNames, Type: smithy.ShapeTypeList})
+var sPropertyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyRequest, Members: &mPropertyRequest, Type: smithy.ShapeTypeStructure})
+var s_PropertyRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyRequests, Members: &m_PropertyRequests, Type: smithy.ShapeTypeMap})
+var sPropertyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyResponse, Members: &mPropertyResponse, Type: smithy.ShapeTypeStructure})
+var s_PropertyResponses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyResponses, Members: &m_PropertyResponses, Type: smithy.ShapeTypeMap})
+var s_PropertySummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertySummaries, Members: &m_PropertySummaries, Type: smithy.ShapeTypeList})
+var sPropertySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertySummary, Members: &mPropertySummary, Type: smithy.ShapeTypeStructure})
+var s_PropertyTableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyTableValue, Members: &m_PropertyTableValue, Type: smithy.ShapeTypeMap})
+var s_PropertyUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyUpdateType, Type: smithy.ShapeTypeString})
+var sPropertyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyValue, Members: &mPropertyValue, Type: smithy.ShapeTypeStructure})
+var sPropertyValueEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyValueEntry, Members: &mPropertyValueEntry, Type: smithy.ShapeTypeStructure})
+var sPropertyValueHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPropertyValueHistory, Members: &mPropertyValueHistory, Type: smithy.ShapeTypeStructure})
+var s_PropertyValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyValueList, Members: &m_PropertyValueList, Type: smithy.ShapeTypeList})
+var s_PropertyValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropertyValues, Members: &m_PropertyValues, Type: smithy.ShapeTypeList})
+var s_QueryResultValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryResultValue, Type: smithy.ShapeTypeDocument})
+var s_QueryServiceMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryServiceMaxResults, Type: smithy.ShapeTypeInteger})
+var s_QueryStatement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sQueryTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryTimeoutException, Members: &mQueryTimeoutException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var sRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationship, Members: &mRelationship, Type: smithy.ShapeTypeStructure})
+var sRelationshipValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationshipValue, Members: &mRelationshipValue, Type: smithy.ShapeTypeStructure})
+var s_RequiredProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequiredProperties, Members: &m_RequiredProperties, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sRow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRow, Members: &mRow, Type: smithy.ShapeTypeStructure})
+var s_RowData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RowData, Members: &m_RowData, Type: smithy.ShapeTypeList})
+var s_Rows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Rows, Members: &m_Rows, Type: smithy.ShapeTypeList})
+var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_S3DestinationLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3DestinationLocation, Type: smithy.ShapeTypeString})
+var s_S3Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Location, Type: smithy.ShapeTypeString})
+var sS3SourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3SourceConfiguration, Members: &mS3SourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_S3SourceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3SourceLocation, Type: smithy.ShapeTypeString})
+var s_S3Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var s_SceneCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SceneCapabilities, Members: &m_SceneCapabilities, Type: smithy.ShapeTypeList})
+var s_SceneCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SceneCapability, Type: smithy.ShapeTypeString})
+var sSceneError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSceneError, Members: &mSceneError, Type: smithy.ShapeTypeStructure})
+var s_SceneErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SceneErrorCode, Type: smithy.ShapeTypeString})
+var s_SceneMetadataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SceneMetadataMap, Members: &m_SceneMetadataMap, Type: smithy.ShapeTypeMap})
+var s_SceneMetadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SceneMetadataValue, Type: smithy.ShapeTypeString})
+var s_SceneSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SceneSummaries, Members: &m_SceneSummaries, Type: smithy.ShapeTypeList})
+var sSceneSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSceneSummary, Members: &mSceneSummary, Type: smithy.ShapeTypeStructure})
+var s_Scope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Scope, Type: smithy.ShapeTypeString})
+var s_SelectedPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectedPropertyList, Members: &m_SelectedPropertyList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var s_SiteWiseExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SiteWiseExternalId, Type: smithy.ShapeTypeString})
+var sSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SourceConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceConfigurations, Members: &m_SourceConfigurations, Type: smithy.ShapeTypeList})
+var s_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceType, Type: smithy.ShapeTypeString})
+var s_State = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_State, Type: smithy.ShapeTypeString})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SyncJobState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncJobState, Type: smithy.ShapeTypeString})
+var sSyncJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncJobStatus, Members: &mSyncJobStatus, Type: smithy.ShapeTypeStructure})
+var s_SyncJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncJobSummaries, Members: &m_SyncJobSummaries, Type: smithy.ShapeTypeList})
+var sSyncJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncJobSummary, Members: &mSyncJobSummary, Type: smithy.ShapeTypeStructure})
+var sSyncResourceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncResourceFilter, Members: &mSyncResourceFilter, Type: smithy.ShapeTypeUnion})
+var s_SyncResourceFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncResourceFilters, Members: &m_SyncResourceFilters, Type: smithy.ShapeTypeList})
+var s_SyncResourceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncResourceState, Type: smithy.ShapeTypeString})
+var sSyncResourceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncResourceStatus, Members: &mSyncResourceStatus, Type: smithy.ShapeTypeStructure})
+var s_SyncResourceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncResourceSummaries, Members: &m_SyncResourceSummaries, Type: smithy.ShapeTypeList})
+var sSyncResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncResourceSummary, Members: &mSyncResourceSummary, Type: smithy.ShapeTypeStructure})
+var s_SyncResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncResourceType, Type: smithy.ShapeTypeString})
+var s_SyncSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncSource, Type: smithy.ShapeTypeString})
+var sTabularConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTabularConditions, Members: &mTabularConditions, Type: smithy.ShapeTypeStructure})
+var s_TabularPropertyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TabularPropertyValue, Members: &m_TabularPropertyValue, Type: smithy.ShapeTypeList})
+var s_TabularPropertyValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TabularPropertyValues, Members: &m_TabularPropertyValues, Type: smithy.ShapeTypeList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t47, Type: smithy.ShapeTypeStructure})
+var s_Time = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Time, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var s_TwinMakerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var s_Type = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Type, Type: smithy.ShapeTypeString})
+var s_UpdateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateReason, Type: smithy.ShapeTypeString})
+var s_Uuid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeString})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList})
+var s_WorkspaceDeleteMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceDeleteMessage, Type: smithy.ShapeTypeString})
+var s_WorkspaceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkspaceSummaries, Members: &m_WorkspaceSummaries, Type: smithy.ShapeTypeList})
+var sWorkspaceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkspaceSummary, Members: &mWorkspaceSummary, Type: smithy.ShapeTypeStructure})
+var sBatchPutPropertyValuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutPropertyValuesRequest, Members: &mBatchPutPropertyValuesRequest, Type: smithy.ShapeTypeStructure})
+var sBatchPutPropertyValuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPutPropertyValuesResponse, Members: &mBatchPutPropertyValuesResponse, Type: smithy.ShapeTypeStructure})
+var sCancelMetadataTransferJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelMetadataTransferJobRequest, Members: &mCancelMetadataTransferJobRequest, Type: smithy.ShapeTypeStructure})
+var sCancelMetadataTransferJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelMetadataTransferJobResponse, Members: &mCancelMetadataTransferJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateComponentTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentTypeRequest, Members: &mCreateComponentTypeRequest, Type: smithy.ShapeTypeStructure})
+var sCreateComponentTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentTypeResponse, Members: &mCreateComponentTypeResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEntityRequest, Members: &mCreateEntityRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEntityResponse, Members: &mCreateEntityResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMetadataTransferJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMetadataTransferJobRequest, Members: &mCreateMetadataTransferJobRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMetadataTransferJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMetadataTransferJobResponse, Members: &mCreateMetadataTransferJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSceneRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSceneRequest, Members: &mCreateSceneRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSceneResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSceneResponse, Members: &mCreateSceneResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSyncJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSyncJobRequest, Members: &mCreateSyncJobRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSyncJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSyncJobResponse, Members: &mCreateSyncJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateWorkspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkspaceRequest, Members: &mCreateWorkspaceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateWorkspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkspaceResponse, Members: &mCreateWorkspaceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteComponentTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentTypeRequest, Members: &mDeleteComponentTypeRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteComponentTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentTypeResponse, Members: &mDeleteComponentTypeResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntityRequest, Members: &mDeleteEntityRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEntityResponse, Members: &mDeleteEntityResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSceneRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSceneRequest, Members: &mDeleteSceneRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSceneResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSceneResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSyncJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSyncJobRequest, Members: &mDeleteSyncJobRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSyncJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSyncJobResponse, Members: &mDeleteSyncJobResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkspaceRequest, Members: &mDeleteWorkspaceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkspaceResponse, Members: &mDeleteWorkspaceResponse, Type: smithy.ShapeTypeStructure})
+var sExecuteQueryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteQueryRequest, Members: &mExecuteQueryRequest, Type: smithy.ShapeTypeStructure})
+var sExecuteQueryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteQueryResponse, Members: &mExecuteQueryResponse, Type: smithy.ShapeTypeStructure})
+var sGetComponentTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentTypeRequest, Members: &mGetComponentTypeRequest, Type: smithy.ShapeTypeStructure})
+var sGetComponentTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentTypeResponse, Members: &mGetComponentTypeResponse, Type: smithy.ShapeTypeStructure})
+var sGetEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntityRequest, Members: &mGetEntityRequest, Type: smithy.ShapeTypeStructure})
+var sGetEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEntityResponse, Members: &mGetEntityResponse, Type: smithy.ShapeTypeStructure})
+var sGetMetadataTransferJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetadataTransferJobRequest, Members: &mGetMetadataTransferJobRequest, Type: smithy.ShapeTypeStructure})
+var sGetMetadataTransferJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMetadataTransferJobResponse, Members: &mGetMetadataTransferJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetPricingPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPricingPlanRequest, Type: smithy.ShapeTypeStructure})
+var sGetPricingPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPricingPlanResponse, Members: &mGetPricingPlanResponse, Type: smithy.ShapeTypeStructure})
+var sGetPropertyValueHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPropertyValueHistoryRequest, Members: &mGetPropertyValueHistoryRequest, Type: smithy.ShapeTypeStructure})
+var sGetPropertyValueHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPropertyValueHistoryResponse, Members: &mGetPropertyValueHistoryResponse, Type: smithy.ShapeTypeStructure})
+var sGetPropertyValueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPropertyValueRequest, Members: &mGetPropertyValueRequest, Type: smithy.ShapeTypeStructure})
+var sGetPropertyValueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPropertyValueResponse, Members: &mGetPropertyValueResponse, Type: smithy.ShapeTypeStructure})
+var sGetSceneRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSceneRequest, Members: &mGetSceneRequest, Type: smithy.ShapeTypeStructure})
+var sGetSceneResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSceneResponse, Members: &mGetSceneResponse, Type: smithy.ShapeTypeStructure})
+var sGetSyncJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncJobRequest, Members: &mGetSyncJobRequest, Type: smithy.ShapeTypeStructure})
+var sGetSyncJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncJobResponse, Members: &mGetSyncJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetWorkspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkspaceRequest, Members: &mGetWorkspaceRequest, Type: smithy.ShapeTypeStructure})
+var sGetWorkspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkspaceResponse, Members: &mGetWorkspaceResponse, Type: smithy.ShapeTypeStructure})
+var sListComponentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsRequest, Members: &mListComponentsRequest, Type: smithy.ShapeTypeStructure})
+var sListComponentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsResponse, Members: &mListComponentsResponse, Type: smithy.ShapeTypeStructure})
+var sListComponentTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentTypesRequest, Members: &mListComponentTypesRequest, Type: smithy.ShapeTypeStructure})
+var sListComponentTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentTypesResponse, Members: &mListComponentTypesResponse, Type: smithy.ShapeTypeStructure})
+var sListEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesRequest, Members: &mListEntitiesRequest, Type: smithy.ShapeTypeStructure})
+var sListEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesResponse, Members: &mListEntitiesResponse, Type: smithy.ShapeTypeStructure})
+var sListMetadataTransferJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetadataTransferJobsRequest, Members: &mListMetadataTransferJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListMetadataTransferJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMetadataTransferJobsResponse, Members: &mListMetadataTransferJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListPropertiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPropertiesRequest, Members: &mListPropertiesRequest, Type: smithy.ShapeTypeStructure})
+var sListPropertiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPropertiesResponse, Members: &mListPropertiesResponse, Type: smithy.ShapeTypeStructure})
+var sListScenesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScenesRequest, Members: &mListScenesRequest, Type: smithy.ShapeTypeStructure})
+var sListScenesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListScenesResponse, Members: &mListScenesResponse, Type: smithy.ShapeTypeStructure})
+var sListSyncJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncJobsRequest, Members: &mListSyncJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListSyncJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncJobsResponse, Members: &mListSyncJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListSyncResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncResourcesRequest, Members: &mListSyncResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListSyncResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncResourcesResponse, Members: &mListSyncResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListWorkspacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkspacesRequest, Members: &mListWorkspacesRequest, Type: smithy.ShapeTypeStructure})
+var sListWorkspacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkspacesResponse, Members: &mListWorkspacesResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateComponentTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentTypeRequest, Members: &mUpdateComponentTypeRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateComponentTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentTypeResponse, Members: &mUpdateComponentTypeResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEntityRequest, Members: &mUpdateEntityRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEntityResponse, Members: &mUpdateEntityResponse, Type: smithy.ShapeTypeStructure})
+var sUpdatePricingPlanRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlanRequest, Members: &mUpdatePricingPlanRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePricingPlanResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePricingPlanResponse, Members: &mUpdatePricingPlanResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSceneRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSceneRequest, Members: &mUpdateSceneRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSceneResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSceneResponse, Members: &mUpdateSceneResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspaceRequest, Members: &mUpdateWorkspaceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkspaceResponse, Members: &mUpdateWorkspaceResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBatchPutPropertyError_errorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBatchPutPropertyError_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBatchPutPropertyError_entry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entry", ID: &iPropertyValueEntry, Members: &mPropertyValueEntry, Type: smithy.ShapeTypeStructure})
+var sBatchPutPropertyErrorEntry_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_Errors, Members: &m_Errors, Type: smithy.ShapeTypeList})
+var sBundleInformation_bundleNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bundleNames", ID: &i_PricingBundles, Members: &m_PricingBundles, Type: smithy.ShapeTypeList})
+var sBundleInformation_pricingTier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingTier", ID: &i_PricingTier, Type: smithy.ShapeTypeString})
+var sColumnDescription_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ColumnName, Type: smithy.ShapeTypeString})
+var sColumnDescription_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ColumnType, Type: smithy.ShapeTypeString})
+var s_ColumnDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnDescription, Members: &mColumnDescription, Type: smithy.ShapeTypeStructure})
+var sComponentPropertyGroupRequest_groupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupType", ID: &i_GroupType, Type: smithy.ShapeTypeString})
+var sComponentPropertyGroupRequest_propertyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyNames", ID: &i_PropertyNames, Members: &m_PropertyNames, Type: smithy.ShapeTypeList})
+var sComponentPropertyGroupRequest_updateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateType", ID: &i_PropertyGroupUpdateType, Type: smithy.ShapeTypeString})
+var s_ComponentPropertyGroupRequests_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_ComponentPropertyGroupRequests_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentPropertyGroupRequest, Members: &mComponentPropertyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sComponentPropertyGroupResponse_groupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupType", ID: &i_GroupType, Type: smithy.ShapeTypeString})
+var sComponentPropertyGroupResponse_propertyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyNames", ID: &i_PropertyNames, Members: &m_PropertyNames, Type: smithy.ShapeTypeList})
+var sComponentPropertyGroupResponse_isInherited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isInherited", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ComponentPropertyGroupResponses_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_ComponentPropertyGroupResponses_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentPropertyGroupResponse, Members: &mComponentPropertyGroupResponse, Type: smithy.ShapeTypeStructure})
+var sComponentRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sComponentRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sComponentRequest_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_PropertyRequests, Members: &m_PropertyRequests, Type: smithy.ShapeTypeMap})
+var sComponentRequest_propertyGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroups", ID: &i_ComponentPropertyGroupRequests, Members: &m_ComponentPropertyGroupRequests, Type: smithy.ShapeTypeMap})
+var sComponentResponse_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sComponentResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sComponentResponse_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sComponentResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeStructure})
+var sComponentResponse_definedIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definedIn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComponentResponse_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_PropertyResponses, Members: &m_PropertyResponses, Type: smithy.ShapeTypeMap})
+var sComponentResponse_propertyGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroups", ID: &i_ComponentPropertyGroupResponses, Members: &m_ComponentPropertyGroupResponses, Type: smithy.ShapeTypeMap})
+var sComponentResponse_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Type: smithy.ShapeTypeString})
+var sComponentResponse_areAllPropertiesReturned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "areAllPropertiesReturned", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sComponentResponse_compositeComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compositeComponents", ID: &i_CompositeComponentResponse, Members: &m_CompositeComponentResponse, Type: smithy.ShapeTypeMap})
+var sComponentResponse_areAllCompositeComponentsReturned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "areAllCompositeComponentsReturned", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ComponentsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_ComponentsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentResponse, Members: &mComponentResponse, Type: smithy.ShapeTypeStructure})
+var s_ComponentsMapRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_ComponentsMapRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentRequest, Members: &mComponentRequest, Type: smithy.ShapeTypeStructure})
+var s_ComponentSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentSummary, Members: &mComponentSummary, Type: smithy.ShapeTypeStructure})
+var sComponentSummary_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sComponentSummary_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sComponentSummary_definedIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definedIn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComponentSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sComponentSummary_propertyGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroups", ID: &i_ComponentPropertyGroupResponses, Members: &m_ComponentPropertyGroupResponses, Type: smithy.ShapeTypeMap})
+var sComponentSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeStructure})
+var sComponentSummary_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Type: smithy.ShapeTypeString})
+var sComponentSummary_componentPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentPath", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var s_ComponentTypeSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentTypeSummary, Members: &mComponentTypeSummary, Type: smithy.ShapeTypeStructure})
+var sComponentTypeSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sComponentTypeSummary_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sComponentTypeSummary_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponentTypeSummary_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponentTypeSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sComponentTypeSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeStructure})
+var sComponentTypeSummary_componentTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeName", ID: &i_ComponentTypeName, Type: smithy.ShapeTypeString})
+var sComponentUpdateRequest_updateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateType", ID: &i_ComponentUpdateType, Type: smithy.ShapeTypeString})
+var sComponentUpdateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sComponentUpdateRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sComponentUpdateRequest_propertyUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyUpdates", ID: &i_PropertyRequests, Members: &m_PropertyRequests, Type: smithy.ShapeTypeMap})
+var sComponentUpdateRequest_propertyGroupUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroupUpdates", ID: &i_ComponentPropertyGroupRequests, Members: &m_ComponentPropertyGroupRequests, Type: smithy.ShapeTypeMap})
+var s_ComponentUpdatesMapRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_ComponentUpdatesMapRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentUpdateRequest, Members: &mComponentUpdateRequest, Type: smithy.ShapeTypeStructure})
+var sCompositeComponentRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCompositeComponentRequest_properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "properties", ID: &i_PropertyRequests, Members: &m_PropertyRequests, Type: smithy.ShapeTypeMap})
+var sCompositeComponentRequest_propertyGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroups", ID: &i_ComponentPropertyGroupRequests, Members: &m_ComponentPropertyGroupRequests, Type: smithy.ShapeTypeMap})
+var s_CompositeComponentResponse_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_CompositeComponentResponse_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentSummary, Members: &mComponentSummary, Type: smithy.ShapeTypeStructure})
+var s_CompositeComponentsMapRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var s_CompositeComponentsMapRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCompositeComponentRequest, Members: &mCompositeComponentRequest, Type: smithy.ShapeTypeStructure})
+var sCompositeComponentTypeRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sCompositeComponentTypeResponse_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sCompositeComponentTypeResponse_isInherited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isInherited", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_CompositeComponentTypesRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_CompositeComponentTypesRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCompositeComponentTypeRequest, Members: &mCompositeComponentTypeRequest, Type: smithy.ShapeTypeStructure})
+var s_CompositeComponentTypesResponse_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_CompositeComponentTypesResponse_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCompositeComponentTypeResponse, Members: &mCompositeComponentTypeResponse, Type: smithy.ShapeTypeStructure})
+var sCompositeComponentUpdateRequest_updateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateType", ID: &i_ComponentUpdateType, Type: smithy.ShapeTypeString})
+var sCompositeComponentUpdateRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCompositeComponentUpdateRequest_propertyUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyUpdates", ID: &i_PropertyRequests, Members: &m_PropertyRequests, Type: smithy.ShapeTypeMap})
+var sCompositeComponentUpdateRequest_propertyGroupUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroupUpdates", ID: &i_ComponentPropertyGroupRequests, Members: &m_ComponentPropertyGroupRequests, Type: smithy.ShapeTypeMap})
+var s_CompositeComponentUpdatesMapRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var s_CompositeComponentUpdatesMapRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iCompositeComponentUpdateRequest, Members: &mCompositeComponentUpdateRequest, Type: smithy.ShapeTypeStructure})
+var s_Configuration_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_Configuration_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Value, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConnectorFailureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConnectorTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDataConnector_lambda = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambda", ID: &iLambdaFunction, Members: &mLambdaFunction, Type: smithy.ShapeTypeStructure})
+var sDataConnector_isNative = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isNative", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDataType_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_Type, Type: smithy.ShapeTypeString})
+var sDataType_nestedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nestedType", ID: &iDataType, Type: smithy.ShapeTypeStructure})
+var sDataType_allowedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedValues", ID: &i_DataValueList, Members: &m_DataValueList, Type: smithy.ShapeTypeList})
+var sDataType_unitOfMeasure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unitOfMeasure", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDataType_relationship = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationship", ID: &iRelationship, Members: &mRelationship, Type: smithy.ShapeTypeStructure})
+var sDataValue_booleanValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "booleanValue", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDataValue_doubleValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "doubleValue", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sDataValue_integerValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integerValue", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDataValue_longValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "longValue", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDataValue_stringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stringValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDataValue_listValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listValue", ID: &i_DataValueList, Members: &m_DataValueList, Type: smithy.ShapeTypeList})
+var sDataValue_mapValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mapValue", ID: &i_DataValueMap, Members: &m_DataValueMap, Type: smithy.ShapeTypeMap})
+var sDataValue_relationshipValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipValue", ID: &iRelationshipValue, Members: &mRelationshipValue, Type: smithy.ShapeTypeStructure})
+var sDataValue_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_Expression, Type: smithy.ShapeTypeString})
+var s_DataValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataValue, Type: smithy.ShapeTypeStructure})
+var s_DataValueMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_DataValueMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Type: smithy.ShapeTypeStructure})
+var sDestinationConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_DestinationType, Type: smithy.ShapeTypeString})
+var sDestinationConfiguration_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sDestinationConfiguration_iotTwinMakerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotTwinMakerConfiguration", ID: &iIotTwinMakerDestinationConfiguration, Members: &mIotTwinMakerDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sEntityPropertyReference_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sEntityPropertyReference_componentPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentPath", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var sEntityPropertyReference_externalIdProperty = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalIdProperty", ID: &i_ExternalIdProperty, Members: &m_ExternalIdProperty, Type: smithy.ShapeTypeMap})
+var sEntityPropertyReference_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sEntityPropertyReference_propertyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_EntitySummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntitySummary, Members: &mEntitySummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sEntitySummary_entityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sEntitySummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sEntitySummary_parentEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentEntityId", ID: &i_ParentEntityId, Type: smithy.ShapeTypeString})
+var sEntitySummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sEntitySummary_hasChildEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasChildEntities", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEntitySummary_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEntitySummary_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_Entries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertyValueEntry, Members: &mPropertyValueEntry, Type: smithy.ShapeTypeStructure})
+var sErrorDetails_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sErrorDetails_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ErrorEntries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchPutPropertyErrorEntry, Members: &mBatchPutPropertyErrorEntry, Type: smithy.ShapeTypeStructure})
+var s_Errors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchPutPropertyError, Members: &mBatchPutPropertyError, Type: smithy.ShapeTypeStructure})
+var s_ExtendsFrom_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var s_ExternalIdProperty_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ExternalIdProperty_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFilterByAsset_assetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetId", ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var sFilterByAsset_assetExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetExternalId", ID: &i_SiteWiseExternalId, Type: smithy.ShapeTypeString})
+var sFilterByAsset_includeOffspring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeOffspring", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sFilterByAsset_includeAssetModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeAssetModel", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sFilterByAssetModel_assetModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetModelId", ID: &i_Uuid, Type: smithy.ShapeTypeString})
+var sFilterByAssetModel_assetModelExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetModelExternalId", ID: &i_SiteWiseExternalId, Type: smithy.ShapeTypeString})
+var sFilterByAssetModel_includeOffspring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeOffspring", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sFilterByAssetModel_includeAssets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeAssets", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sFilterByComponentType_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sFilterByEntity_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sFunctionRequest_requiredProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requiredProperties", ID: &i_RequiredProperties, Members: &m_RequiredProperties, Type: smithy.ShapeTypeList})
+var sFunctionRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_Scope, Type: smithy.ShapeTypeString})
+var sFunctionRequest_implementedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "implementedBy", ID: &iDataConnector, Members: &mDataConnector, Type: smithy.ShapeTypeStructure})
+var sFunctionResponse_requiredProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requiredProperties", ID: &i_RequiredProperties, Members: &m_RequiredProperties, Type: smithy.ShapeTypeList})
+var sFunctionResponse_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &i_Scope, Type: smithy.ShapeTypeString})
+var sFunctionResponse_implementedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "implementedBy", ID: &iDataConnector, Members: &mDataConnector, Type: smithy.ShapeTypeStructure})
+var sFunctionResponse_isInherited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isInherited", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_FunctionsRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_FunctionsRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFunctionRequest, Members: &mFunctionRequest, Type: smithy.ShapeTypeStructure})
+var s_FunctionsResponse_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_FunctionsResponse_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iFunctionResponse, Members: &mFunctionResponse, Type: smithy.ShapeTypeStructure})
+var s_GeneratedSceneMetadataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_GeneratedSceneMetadataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SceneMetadataValue, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInterpolationParameters_interpolationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpolationType", ID: &i_InterpolationType, Type: smithy.ShapeTypeString})
+var sInterpolationParameters_intervalInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intervalInSeconds", ID: &i_IntervalInSeconds, Type: smithy.ShapeTypeLong})
+var sIotSiteWiseSourceConfiguration_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_IotSiteWiseSourceConfigurationFilters, Members: &m_IotSiteWiseSourceConfigurationFilters, Type: smithy.ShapeTypeList})
+var sIotSiteWiseSourceConfigurationFilter_filterByAssetModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByAssetModel", ID: &iFilterByAssetModel, Members: &mFilterByAssetModel, Type: smithy.ShapeTypeStructure})
+var sIotSiteWiseSourceConfigurationFilter_filterByAsset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByAsset", ID: &iFilterByAsset, Members: &mFilterByAsset, Type: smithy.ShapeTypeStructure})
+var s_IotSiteWiseSourceConfigurationFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIotSiteWiseSourceConfigurationFilter, Members: &mIotSiteWiseSourceConfigurationFilter, Type: smithy.ShapeTypeUnion})
+var sIotTwinMakerDestinationConfiguration_workspace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspace", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sIotTwinMakerSourceConfiguration_workspace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspace", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sIotTwinMakerSourceConfiguration_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_IotTwinMakerSourceConfigurationFilters, Members: &m_IotTwinMakerSourceConfigurationFilters, Type: smithy.ShapeTypeList})
+var sIotTwinMakerSourceConfigurationFilter_filterByComponentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByComponentType", ID: &iFilterByComponentType, Members: &mFilterByComponentType, Type: smithy.ShapeTypeStructure})
+var sIotTwinMakerSourceConfigurationFilter_filterByEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterByEntity", ID: &iFilterByEntity, Members: &mFilterByEntity, Type: smithy.ShapeTypeStructure})
+var s_IotTwinMakerSourceConfigurationFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIotTwinMakerSourceConfigurationFilter, Members: &mIotTwinMakerSourceConfigurationFilter, Type: smithy.ShapeTypeUnion})
+var sLambdaFunction_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LambdaArn, Type: smithy.ShapeTypeString})
+var s_LinkedServices_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LinkedService, Type: smithy.ShapeTypeString})
+var sListComponentTypesFilter_extendsFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extendsFrom", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sListComponentTypesFilter_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListComponentTypesFilter_isAbstract = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAbstract", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ListComponentTypesFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListComponentTypesFilter, Members: &mListComponentTypesFilter, Type: smithy.ShapeTypeUnion})
+var sListEntitiesFilter_parentEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentEntityId", ID: &i_ParentEntityId, Type: smithy.ShapeTypeString})
+var sListEntitiesFilter_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sListEntitiesFilter_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ListEntitiesFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListEntitiesFilter, Members: &mListEntitiesFilter, Type: smithy.ShapeTypeUnion})
+var sListMetadataTransferJobsFilter_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sListMetadataTransferJobsFilter_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_MetadataTransferJobState, Type: smithy.ShapeTypeString})
+var s_ListMetadataTransferJobsFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListMetadataTransferJobsFilter, Members: &mListMetadataTransferJobsFilter, Type: smithy.ShapeTypeUnion})
+var sMetadataTransferJobProgress_totalCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sMetadataTransferJobProgress_succeededCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "succeededCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sMetadataTransferJobProgress_skippedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "skippedCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sMetadataTransferJobProgress_failedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failedCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sMetadataTransferJobStatus_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_MetadataTransferJobState, Type: smithy.ShapeTypeString})
+var sMetadataTransferJobStatus_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var sMetadataTransferJobStatus_queuedPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queuedPosition", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_MetadataTransferJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetadataTransferJobSummary, Members: &mMetadataTransferJobSummary, Type: smithy.ShapeTypeStructure})
+var sMetadataTransferJobSummary_metadataTransferJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sMetadataTransferJobSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sMetadataTransferJobSummary_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMetadataTransferJobSummary_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMetadataTransferJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMetadataTransferJobStatus, Members: &mMetadataTransferJobStatus, Type: smithy.ShapeTypeStructure})
+var sMetadataTransferJobSummary_progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "progress", ID: &iMetadataTransferJobProgress, Members: &mMetadataTransferJobProgress, Type: smithy.ShapeTypeStructure})
+var sOrderBy_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &i_Order, Type: smithy.ShapeTypeString})
+var sOrderBy_propertyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyName", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_OrderByList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrderBy, Members: &mOrderBy, Type: smithy.ShapeTypeStructure})
+var sParentEntityUpdateRequest_updateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateType", ID: &i_ParentEntityUpdateType, Type: smithy.ShapeTypeString})
+var sParentEntityUpdateRequest_parentEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentEntityId", ID: &i_ParentEntityId, Type: smithy.ShapeTypeString})
+var s_PricingBundles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BundleName, Type: smithy.ShapeTypeString})
+var sPricingPlan_billableEntityCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billableEntityCount", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sPricingPlan_bundleInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bundleInformation", ID: &iBundleInformation, Members: &mBundleInformation, Type: smithy.ShapeTypeStructure})
+var sPricingPlan_effectiveDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPricingPlan_pricingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingMode", ID: &i_PricingMode, Type: smithy.ShapeTypeString})
+var sPricingPlan_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPricingPlan_updateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateReason", ID: &i_UpdateReason, Type: smithy.ShapeTypeString})
+var sPropertyDefinitionRequest_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeStructure})
+var sPropertyDefinitionRequest_isRequiredInEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRequiredInEntity", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionRequest_isExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isExternalId", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionRequest_isStoredExternally = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isStoredExternally", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionRequest_isTimeSeries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isTimeSeries", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionRequest_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var sPropertyDefinitionRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_Configuration, Members: &m_Configuration, Type: smithy.ShapeTypeMap})
+var sPropertyDefinitionRequest_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_PropertyDisplayName, Type: smithy.ShapeTypeString})
+var sPropertyDefinitionResponse_dataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeStructure})
+var sPropertyDefinitionResponse_isTimeSeries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isTimeSeries", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionResponse_isRequiredInEntity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRequiredInEntity", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionResponse_isExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isExternalId", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionResponse_isStoredExternally = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isStoredExternally", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionResponse_isImported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isImported", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionResponse_isFinal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isFinal", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionResponse_isInherited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isInherited", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPropertyDefinitionResponse_defaultValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultValue", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var sPropertyDefinitionResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &i_Configuration, Members: &m_Configuration, Type: smithy.ShapeTypeMap})
+var sPropertyDefinitionResponse_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_PropertyDisplayName, Type: smithy.ShapeTypeString})
+var s_PropertyDefinitionsRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyDefinitionsRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPropertyDefinitionRequest, Members: &mPropertyDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var s_PropertyDefinitionsResponse_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyDefinitionsResponse_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPropertyDefinitionResponse, Members: &mPropertyDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sPropertyFilter_propertyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPropertyFilter_operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operator", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPropertyFilter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var s_PropertyFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertyFilter, Members: &mPropertyFilter, Type: smithy.ShapeTypeStructure})
+var sPropertyGroupRequest_groupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupType", ID: &i_GroupType, Type: smithy.ShapeTypeString})
+var sPropertyGroupRequest_propertyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyNames", ID: &i_PropertyNames, Members: &m_PropertyNames, Type: smithy.ShapeTypeList})
+var sPropertyGroupResponse_groupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupType", ID: &i_GroupType, Type: smithy.ShapeTypeString})
+var sPropertyGroupResponse_propertyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyNames", ID: &i_PropertyNames, Members: &m_PropertyNames, Type: smithy.ShapeTypeList})
+var sPropertyGroupResponse_isInherited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isInherited", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_PropertyGroupsRequest_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyGroupsRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPropertyGroupRequest, Members: &mPropertyGroupRequest, Type: smithy.ShapeTypeStructure})
+var s_PropertyGroupsResponse_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyGroupsResponse_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPropertyGroupResponse, Members: &mPropertyGroupResponse, Type: smithy.ShapeTypeStructure})
+var sPropertyLatestValue_propertyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyReference", ID: &iEntityPropertyReference, Members: &mEntityPropertyReference, Type: smithy.ShapeTypeStructure})
+var sPropertyLatestValue_propertyValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyValue", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var s_PropertyLatestValueMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyLatestValueMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPropertyLatestValue, Members: &mPropertyLatestValue, Type: smithy.ShapeTypeStructure})
+var s_PropertyNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sPropertyRequest_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iPropertyDefinitionRequest, Members: &mPropertyDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sPropertyRequest_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var sPropertyRequest_updateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateType", ID: &i_PropertyUpdateType, Type: smithy.ShapeTypeString})
+var s_PropertyRequests_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyRequests_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPropertyRequest, Members: &mPropertyRequest, Type: smithy.ShapeTypeStructure})
+var sPropertyResponse_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iPropertyDefinitionResponse, Members: &mPropertyDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sPropertyResponse_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var sPropertyResponse_areAllPropertyValuesReturned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "areAllPropertyValuesReturned", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_PropertyResponses_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyResponses_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iPropertyResponse, Members: &mPropertyResponse, Type: smithy.ShapeTypeStructure})
+var s_PropertySummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertySummary, Members: &mPropertySummary, Type: smithy.ShapeTypeStructure})
+var sPropertySummary_definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "definition", ID: &iPropertyDefinitionResponse, Members: &mPropertyDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sPropertySummary_propertyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sPropertySummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var sPropertySummary_areAllPropertyValuesReturned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "areAllPropertyValuesReturned", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_PropertyTableValue_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_PropertyTableValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var sPropertyValue_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPropertyValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+var sPropertyValue_time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "time", ID: &i_Time, Type: smithy.ShapeTypeString})
+var sPropertyValueEntry_entityPropertyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityPropertyReference", ID: &iEntityPropertyReference, Members: &mEntityPropertyReference, Type: smithy.ShapeTypeStructure})
+var sPropertyValueEntry_propertyValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyValues", ID: &i_PropertyValues, Members: &m_PropertyValues, Type: smithy.ShapeTypeList})
+var sPropertyValueHistory_entityPropertyReference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityPropertyReference", ID: &iEntityPropertyReference, Members: &mEntityPropertyReference, Type: smithy.ShapeTypeStructure})
+var sPropertyValueHistory_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList})
+var s_PropertyValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertyValueHistory, Members: &mPropertyValueHistory, Type: smithy.ShapeTypeStructure})
+var s_PropertyValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertyValue, Members: &mPropertyValue, Type: smithy.ShapeTypeStructure})
+var sQueryTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRelationship_targetComponentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetComponentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sRelationship_relationshipType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "relationshipType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRelationshipValue_targetEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetEntityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sRelationshipValue_targetComponentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetComponentName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_RequiredProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRow_rowData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rowData", ID: &i_RowData, Members: &m_RowData, Type: smithy.ShapeTypeList})
+var s_RowData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryResultValue, Type: smithy.ShapeTypeDocument})
+var s_Rows_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRow, Members: &mRow, Type: smithy.ShapeTypeStructure})
+var sS3DestinationConfiguration_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_S3DestinationLocation, Type: smithy.ShapeTypeString})
+var sS3SourceConfiguration_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_S3SourceLocation, Type: smithy.ShapeTypeString})
+var s_SceneCapabilities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SceneCapability, Type: smithy.ShapeTypeString})
+var sSceneError_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_SceneErrorCode, Type: smithy.ShapeTypeString})
+var sSceneError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_SceneMetadataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_SceneMetadataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SceneMetadataValue, Type: smithy.ShapeTypeString})
+var s_SceneSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSceneSummary, Members: &mSceneSummary, Type: smithy.ShapeTypeStructure})
+var sSceneSummary_sceneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sSceneSummary_contentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentLocation", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sSceneSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sSceneSummary_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSceneSummary_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSceneSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_SelectedPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSourceConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_SourceType, Type: smithy.ShapeTypeString})
+var sSourceConfiguration_s3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Configuration", ID: &iS3SourceConfiguration, Members: &mS3SourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sSourceConfiguration_iotSiteWiseConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotSiteWiseConfiguration", ID: &iIotSiteWiseSourceConfiguration, Members: &mIotSiteWiseSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sSourceConfiguration_iotTwinMakerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotTwinMakerConfiguration", ID: &iIotTwinMakerSourceConfiguration, Members: &mIotTwinMakerSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SourceConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sStatus_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sStatus_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var sSyncJobStatus_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SyncJobState, Type: smithy.ShapeTypeString})
+var sSyncJobStatus_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var s_SyncJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncJobSummary, Members: &mSyncJobSummary, Type: smithy.ShapeTypeStructure})
+var sSyncJobSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sSyncJobSummary_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sSyncJobSummary_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Type: smithy.ShapeTypeString})
+var sSyncJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSyncJobStatus, Members: &mSyncJobStatus, Type: smithy.ShapeTypeStructure})
+var sSyncJobSummary_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSyncJobSummary_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSyncResourceFilter_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SyncResourceState, Type: smithy.ShapeTypeString})
+var sSyncResourceFilter_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_SyncResourceType, Type: smithy.ShapeTypeString})
+var sSyncResourceFilter_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sSyncResourceFilter_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var s_SyncResourceFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncResourceFilter, Members: &mSyncResourceFilter, Type: smithy.ShapeTypeUnion})
+var sSyncResourceStatus_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SyncResourceState, Type: smithy.ShapeTypeString})
+var sSyncResourceStatus_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var s_SyncResourceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncResourceSummary, Members: &mSyncResourceSummary, Type: smithy.ShapeTypeStructure})
+var sSyncResourceSummary_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_SyncResourceType, Type: smithy.ShapeTypeString})
+var sSyncResourceSummary_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sSyncResourceSummary_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sSyncResourceSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSyncResourceStatus, Members: &mSyncResourceStatus, Type: smithy.ShapeTypeStructure})
+var sSyncResourceSummary_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTabularConditions_orderBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orderBy", ID: &i_OrderByList, Members: &m_OrderByList, Type: smithy.ShapeTypeList})
+var sTabularConditions_propertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyFilters", ID: &i_PropertyFilters, Members: &m_PropertyFilters, Type: smithy.ShapeTypeList})
+var s_TabularPropertyValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PropertyTableValue, Members: &m_PropertyTableValue, Type: smithy.ShapeTypeMap})
+var s_TabularPropertyValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TabularPropertyValue, Members: &m_TabularPropertyValue, Type: smithy.ShapeTypeList})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPropertyValue, Members: &mPropertyValue, Type: smithy.ShapeTypeStructure})
+var s_WorkspaceSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkspaceSummary, Members: &mWorkspaceSummary, Type: smithy.ShapeTypeStructure})
+var sWorkspaceSummary_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sWorkspaceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sWorkspaceSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sWorkspaceSummary_linkedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkedServices", ID: &i_LinkedServices, Members: &m_LinkedServices, Type: smithy.ShapeTypeList})
+var sWorkspaceSummary_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sWorkspaceSummary_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sBatchPutPropertyValuesRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sBatchPutPropertyValuesRequest_entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entries", ID: &i_Entries, Members: &m_Entries, Type: smithy.ShapeTypeList})
+var sBatchPutPropertyValuesResponse_errorEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorEntries", ID: &i_ErrorEntries, Members: &m_ErrorEntries, Type: smithy.ShapeTypeList})
+var sCancelMetadataTransferJobRequest_metadataTransferJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCancelMetadataTransferJobResponse_metadataTransferJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sCancelMetadataTransferJobResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sCancelMetadataTransferJobResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCancelMetadataTransferJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMetadataTransferJobStatus, Members: &mMetadataTransferJobStatus, Type: smithy.ShapeTypeStructure})
+var sCancelMetadataTransferJobResponse_progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "progress", ID: &iMetadataTransferJobProgress, Members: &mMetadataTransferJobProgress, Type: smithy.ShapeTypeStructure})
+var sCreateComponentTypeRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCreateComponentTypeRequest_isSingleton = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSingleton", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateComponentTypeRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCreateComponentTypeRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateComponentTypeRequest_propertyDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyDefinitions", ID: &i_PropertyDefinitionsRequest, Members: &m_PropertyDefinitionsRequest, Type: smithy.ShapeTypeMap})
+var sCreateComponentTypeRequest_extendsFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extendsFrom", ID: &i_ExtendsFrom, Members: &m_ExtendsFrom, Type: smithy.ShapeTypeList})
+var sCreateComponentTypeRequest_functions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functions", ID: &i_FunctionsRequest, Members: &m_FunctionsRequest, Type: smithy.ShapeTypeMap})
+var sCreateComponentTypeRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateComponentTypeRequest_propertyGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroups", ID: &i_PropertyGroupsRequest, Members: &m_PropertyGroupsRequest, Type: smithy.ShapeTypeMap})
+var sCreateComponentTypeRequest_componentTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeName", ID: &i_ComponentTypeName, Type: smithy.ShapeTypeString})
+var sCreateComponentTypeRequest_compositeComponentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compositeComponentTypes", ID: &i_CompositeComponentTypesRequest, Members: &m_CompositeComponentTypesRequest, Type: smithy.ShapeTypeMap})
+var sCreateComponentTypeResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sCreateComponentTypeResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateComponentTypeResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sCreateEntityRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCreateEntityRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateEntityRequest_entityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCreateEntityRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateEntityRequest_components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "components", ID: &i_ComponentsMapRequest, Members: &m_ComponentsMapRequest, Type: smithy.ShapeTypeMap})
+var sCreateEntityRequest_compositeComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compositeComponents", ID: &i_CompositeComponentsMapRequest, Members: &m_CompositeComponentsMapRequest, Type: smithy.ShapeTypeMap})
+var sCreateEntityRequest_parentEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentEntityId", ID: &i_ParentEntityId, Type: smithy.ShapeTypeString})
+var sCreateEntityRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateEntityResponse_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateEntityResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sCreateEntityResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateEntityResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sCreateMetadataTransferJobRequest_metadataTransferJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sCreateMetadataTransferJobRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateMetadataTransferJobRequest_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_SourceConfigurations, Members: &m_SourceConfigurations, Type: smithy.ShapeTypeList})
+var sCreateMetadataTransferJobRequest_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMetadataTransferJobResponse_metadataTransferJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sCreateMetadataTransferJobResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sCreateMetadataTransferJobResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateMetadataTransferJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMetadataTransferJobStatus, Members: &mMetadataTransferJobStatus, Type: smithy.ShapeTypeStructure})
+var sCreateSceneRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCreateSceneRequest_sceneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sCreateSceneRequest_contentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentLocation", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sCreateSceneRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateSceneRequest_capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capabilities", ID: &i_SceneCapabilities, Members: &m_SceneCapabilities, Type: smithy.ShapeTypeList})
+var sCreateSceneRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateSceneRequest_sceneMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneMetadata", ID: &i_SceneMetadataMap, Members: &m_SceneMetadataMap, Type: smithy.ShapeTypeMap})
+var sCreateSceneResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sCreateSceneResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateSyncJobRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCreateSyncJobRequest_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCreateSyncJobRequest_syncRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateSyncJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateSyncJobResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sCreateSyncJobResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateSyncJobResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SyncJobState, Type: smithy.ShapeTypeString})
+var sCreateWorkspaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sCreateWorkspaceRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateWorkspaceRequest_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &i_S3Location, Type: smithy.ShapeTypeString})
+var sCreateWorkspaceRequest_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateWorkspaceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateWorkspaceResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sCreateWorkspaceResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeleteComponentTypeRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteComponentTypeRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteComponentTypeResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sDeleteEntityRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteEntityRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteEntityRequest_isRecursive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRecursive", ID: &i_Boolean, Traits: &t49, Type: smithy.ShapeTypeBoolean})
+var sDeleteEntityResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sDeleteSceneRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteSceneRequest_sceneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteSyncJobRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteSyncJobRequest_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteSyncJobResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_SyncJobState, Type: smithy.ShapeTypeString})
+var sDeleteWorkspaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteWorkspaceResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_WorkspaceDeleteMessage, Type: smithy.ShapeTypeString})
+var sExecuteQueryRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sExecuteQueryRequest_queryStatement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queryStatement", ID: &i_QueryStatement, Type: smithy.ShapeTypeString})
+var sExecuteQueryRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_QueryServiceMaxResults, Type: smithy.ShapeTypeInteger})
+var sExecuteQueryRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sExecuteQueryResponse_columnDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "columnDescriptions", ID: &i_ColumnDescriptions, Members: &m_ColumnDescriptions, Type: smithy.ShapeTypeList})
+var sExecuteQueryResponse_rows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rows", ID: &i_Rows, Members: &m_Rows, Type: smithy.ShapeTypeList})
+var sExecuteQueryResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetComponentTypeRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetComponentTypeRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetComponentTypeResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sGetComponentTypeResponse_isSingleton = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSingleton", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetComponentTypeResponse_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sGetComponentTypeResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetComponentTypeResponse_propertyDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyDefinitions", ID: &i_PropertyDefinitionsResponse, Members: &m_PropertyDefinitionsResponse, Type: smithy.ShapeTypeMap})
+var sGetComponentTypeResponse_extendsFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extendsFrom", ID: &i_ExtendsFrom, Members: &m_ExtendsFrom, Type: smithy.ShapeTypeList})
+var sGetComponentTypeResponse_functions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functions", ID: &i_FunctionsResponse, Members: &m_FunctionsResponse, Type: smithy.ShapeTypeMap})
+var sGetComponentTypeResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetComponentTypeResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetComponentTypeResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sGetComponentTypeResponse_isAbstract = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isAbstract", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetComponentTypeResponse_isSchemaInitialized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSchemaInitialized", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetComponentTypeResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeStructure})
+var sGetComponentTypeResponse_propertyGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroups", ID: &i_PropertyGroupsResponse, Members: &m_PropertyGroupsResponse, Type: smithy.ShapeTypeMap})
+var sGetComponentTypeResponse_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Type: smithy.ShapeTypeString})
+var sGetComponentTypeResponse_componentTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeName", ID: &i_ComponentTypeName, Type: smithy.ShapeTypeString})
+var sGetComponentTypeResponse_compositeComponentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compositeComponentTypes", ID: &i_CompositeComponentTypesResponse, Members: &m_CompositeComponentTypesResponse, Type: smithy.ShapeTypeMap})
+var sGetEntityRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetEntityRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_entityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeStructure})
+var sGetEntityResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "components", ID: &i_ComponentsMap, Members: &m_ComponentsMap, Type: smithy.ShapeTypeMap})
+var sGetEntityResponse_parentEntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentEntityId", ID: &i_ParentEntityId, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_hasChildEntities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasChildEntities", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetEntityResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetEntityResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetEntityResponse_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Type: smithy.ShapeTypeString})
+var sGetEntityResponse_areAllComponentsReturned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "areAllComponentsReturned", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetMetadataTransferJobRequest_metadataTransferJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetMetadataTransferJobResponse_metadataTransferJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sGetMetadataTransferJobResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sGetMetadataTransferJobResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetMetadataTransferJobResponse_sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sources", ID: &i_SourceConfigurations, Members: &m_SourceConfigurations, Type: smithy.ShapeTypeList})
+var sGetMetadataTransferJobResponse_destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destination", ID: &iDestinationConfiguration, Members: &mDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMetadataTransferJobResponse_metadataTransferJobRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sGetMetadataTransferJobResponse_reportUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reportUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetMetadataTransferJobResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetMetadataTransferJobResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetMetadataTransferJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iMetadataTransferJobStatus, Members: &mMetadataTransferJobStatus, Type: smithy.ShapeTypeStructure})
+var sGetMetadataTransferJobResponse_progress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "progress", ID: &iMetadataTransferJobProgress, Members: &mMetadataTransferJobProgress, Type: smithy.ShapeTypeStructure})
+var sGetPricingPlanResponse_currentPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentPricingPlan", ID: &iPricingPlan, Members: &mPricingPlan, Type: smithy.ShapeTypeStructure})
+var sGetPricingPlanResponse_pendingPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pendingPricingPlan", ID: &iPricingPlan, Members: &mPricingPlan, Type: smithy.ShapeTypeStructure})
+var sGetPropertyValueHistoryRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_componentPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentPath", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_selectedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectedProperties", ID: &i_SelectedPropertyList, Members: &m_SelectedPropertyList, Type: smithy.ShapeTypeList})
+var sGetPropertyValueHistoryRequest_propertyFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyFilters", ID: &i_PropertyFilters, Members: &m_PropertyFilters, Type: smithy.ShapeTypeList})
+var sGetPropertyValueHistoryRequest_startDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetPropertyValueHistoryRequest_endDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetPropertyValueHistoryRequest_interpolation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpolation", ID: &iInterpolationParameters, Members: &mInterpolationParameters, Type: smithy.ShapeTypeStructure})
+var sGetPropertyValueHistoryRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sGetPropertyValueHistoryRequest_orderByTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orderByTime", ID: &i_OrderByTime, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Time, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryRequest_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Time, Type: smithy.ShapeTypeString})
+var sGetPropertyValueHistoryResponse_propertyValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyValues", ID: &i_PropertyValueList, Members: &m_PropertyValueList, Type: smithy.ShapeTypeList})
+var sGetPropertyValueHistoryResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_componentPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentPath", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_selectedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selectedProperties", ID: &i_SelectedPropertyList, Members: &m_SelectedPropertyList, Type: smithy.ShapeTypeList})
+var sGetPropertyValueRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sGetPropertyValueRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_propertyGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroupName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sGetPropertyValueRequest_tabularConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tabularConditions", ID: &iTabularConditions, Members: &mTabularConditions, Type: smithy.ShapeTypeStructure})
+var sGetPropertyValueResponse_propertyValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyValues", ID: &i_PropertyLatestValueMap, Members: &m_PropertyLatestValueMap, Type: smithy.ShapeTypeMap})
+var sGetPropertyValueResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetPropertyValueResponse_tabularPropertyValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tabularPropertyValues", ID: &i_TabularPropertyValues, Members: &m_TabularPropertyValues, Type: smithy.ShapeTypeList})
+var sGetSceneRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetSceneRequest_sceneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetSceneResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sGetSceneResponse_sceneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sGetSceneResponse_contentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentLocation", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sGetSceneResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sGetSceneResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSceneResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSceneResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetSceneResponse_capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capabilities", ID: &i_SceneCapabilities, Members: &m_SceneCapabilities, Type: smithy.ShapeTypeList})
+var sGetSceneResponse_sceneMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneMetadata", ID: &i_SceneMetadataMap, Members: &m_SceneMetadataMap, Type: smithy.ShapeTypeMap})
+var sGetSceneResponse_generatedSceneMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "generatedSceneMetadata", ID: &i_GeneratedSceneMetadataMap, Members: &m_GeneratedSceneMetadataMap, Type: smithy.ShapeTypeMap})
+var sGetSceneResponse_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iSceneError, Members: &mSceneError, Type: smithy.ShapeTypeStructure})
+var sGetSyncJobRequest_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetSyncJobRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t50, Type: smithy.ShapeTypeString})
+var sGetSyncJobResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sGetSyncJobResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sGetSyncJobResponse_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Type: smithy.ShapeTypeString})
+var sGetSyncJobResponse_syncRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncRole", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sGetSyncJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iSyncJobStatus, Members: &mSyncJobStatus, Type: smithy.ShapeTypeStructure})
+var sGetSyncJobResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSyncJobResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetWorkspaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_IdOrArn, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetWorkspaceResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sGetWorkspaceResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sGetWorkspaceResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetWorkspaceResponse_linkedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkedServices", ID: &i_LinkedServices, Members: &m_LinkedServices, Type: smithy.ShapeTypeList})
+var sGetWorkspaceResponse_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &i_S3Location, Type: smithy.ShapeTypeString})
+var sGetWorkspaceResponse_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sGetWorkspaceResponse_creationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetWorkspaceResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListComponentsRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListComponentsRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListComponentsRequest_componentPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentPath", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var sListComponentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListComponentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListComponentsResponse_componentSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentSummaries", ID: &i_ComponentSummaries, Members: &m_ComponentSummaries, Type: smithy.ShapeTypeList})
+var sListComponentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListComponentTypesRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListComponentTypesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListComponentTypesFilters, Members: &m_ListComponentTypesFilters, Type: smithy.ShapeTypeList})
+var sListComponentTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListComponentTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListComponentTypesResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sListComponentTypesResponse_componentTypeSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeSummaries", ID: &i_ComponentTypeSummaries, Members: &m_ComponentTypeSummaries, Type: smithy.ShapeTypeList})
+var sListComponentTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListComponentTypesResponse_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListEntitiesRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListEntitiesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListEntitiesFilters, Members: &m_ListEntitiesFilters, Type: smithy.ShapeTypeList})
+var sListEntitiesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListEntitiesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEntitiesResponse_entitySummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entitySummaries", ID: &i_EntitySummaries, Members: &m_EntitySummaries, Type: smithy.ShapeTypeList})
+var sListEntitiesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMetadataTransferJobsRequest_sourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceType", ID: &i_SourceType, Type: smithy.ShapeTypeString})
+var sListMetadataTransferJobsRequest_destinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationType", ID: &i_DestinationType, Type: smithy.ShapeTypeString})
+var sListMetadataTransferJobsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListMetadataTransferJobsFilters, Members: &m_ListMetadataTransferJobsFilters, Type: smithy.ShapeTypeList})
+var sListMetadataTransferJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMetadataTransferJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMetadataTransferJobsResponse_metadataTransferJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataTransferJobSummaries", ID: &i_MetadataTransferJobSummaries, Members: &m_MetadataTransferJobSummaries, Type: smithy.ShapeTypeList})
+var sListMetadataTransferJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPropertiesRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListPropertiesRequest_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sListPropertiesRequest_componentPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentPath", ID: &i_ComponentPath, Type: smithy.ShapeTypeString})
+var sListPropertiesRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sListPropertiesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListPropertiesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPropertiesResponse_propertySummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertySummaries", ID: &i_PropertySummaries, Members: &m_PropertySummaries, Type: smithy.ShapeTypeList})
+var sListPropertiesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListScenesRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListScenesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListScenesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListScenesResponse_sceneSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneSummaries", ID: &i_SceneSummaries, Members: &m_SceneSummaries, Type: smithy.ShapeTypeList})
+var sListScenesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSyncJobsRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListSyncJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListSyncJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSyncJobsResponse_syncJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncJobSummaries", ID: &i_SyncJobSummaries, Members: &m_SyncJobSummaries, Type: smithy.ShapeTypeList})
+var sListSyncJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSyncResourcesRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListSyncResourcesRequest_syncSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncSource", ID: &i_SyncSource, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListSyncResourcesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_SyncResourceFilters, Members: &m_SyncResourceFilters, Type: smithy.ShapeTypeList})
+var sListSyncResourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListSyncResourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSyncResourcesResponse_syncResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncResources", ID: &i_SyncResourceSummaries, Members: &m_SyncResourceSummaries, Type: smithy.ShapeTypeList})
+var sListSyncResourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sListTagsForResourceResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWorkspacesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListWorkspacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWorkspacesResponse_workspaceSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceSummaries", ID: &i_WorkspaceSummaries, Members: &m_WorkspaceSummaries, Type: smithy.ShapeTypeList})
+var sListWorkspacesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceARN", ID: &i_TwinMakerArn, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t52, Type: smithy.ShapeTypeList})
+var sUpdateComponentTypeRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sUpdateComponentTypeRequest_isSingleton = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isSingleton", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateComponentTypeRequest_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sUpdateComponentTypeRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateComponentTypeRequest_propertyDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyDefinitions", ID: &i_PropertyDefinitionsRequest, Members: &m_PropertyDefinitionsRequest, Type: smithy.ShapeTypeMap})
+var sUpdateComponentTypeRequest_extendsFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "extendsFrom", ID: &i_ExtendsFrom, Members: &m_ExtendsFrom, Type: smithy.ShapeTypeList})
+var sUpdateComponentTypeRequest_functions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "functions", ID: &i_FunctionsRequest, Members: &m_FunctionsRequest, Type: smithy.ShapeTypeMap})
+var sUpdateComponentTypeRequest_propertyGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propertyGroups", ID: &i_PropertyGroupsRequest, Members: &m_PropertyGroupsRequest, Type: smithy.ShapeTypeMap})
+var sUpdateComponentTypeRequest_componentTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeName", ID: &i_ComponentTypeName, Type: smithy.ShapeTypeString})
+var sUpdateComponentTypeRequest_compositeComponentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compositeComponentTypes", ID: &i_CompositeComponentTypesRequest, Members: &m_CompositeComponentTypesRequest, Type: smithy.ShapeTypeMap})
+var sUpdateComponentTypeResponse_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sUpdateComponentTypeResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_TwinMakerArn, Type: smithy.ShapeTypeString})
+var sUpdateComponentTypeResponse_componentTypeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentTypeId", ID: &i_ComponentTypeId, Type: smithy.ShapeTypeString})
+var sUpdateComponentTypeResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sUpdateEntityRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sUpdateEntityRequest_entityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityId", ID: &i_EntityId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sUpdateEntityRequest_entityName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sUpdateEntityRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateEntityRequest_componentUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentUpdates", ID: &i_ComponentUpdatesMapRequest, Members: &m_ComponentUpdatesMapRequest, Type: smithy.ShapeTypeMap})
+var sUpdateEntityRequest_compositeComponentUpdates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compositeComponentUpdates", ID: &i_CompositeComponentUpdatesMapRequest, Members: &m_CompositeComponentUpdatesMapRequest, Type: smithy.ShapeTypeMap})
+var sUpdateEntityRequest_parentEntityUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentEntityUpdate", ID: &iParentEntityUpdateRequest, Members: &mParentEntityUpdateRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEntityResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEntityResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sUpdatePricingPlanRequest_pricingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pricingMode", ID: &i_PricingMode, Type: smithy.ShapeTypeString})
+var sUpdatePricingPlanRequest_bundleNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bundleNames", ID: &i_PricingBundles, Members: &m_PricingBundles, Type: smithy.ShapeTypeList})
+var sUpdatePricingPlanResponse_currentPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentPricingPlan", ID: &iPricingPlan, Members: &mPricingPlan, Type: smithy.ShapeTypeStructure})
+var sUpdatePricingPlanResponse_pendingPricingPlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pendingPricingPlan", ID: &iPricingPlan, Members: &mPricingPlan, Type: smithy.ShapeTypeStructure})
+var sUpdateSceneRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sUpdateSceneRequest_sceneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sUpdateSceneRequest_contentLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentLocation", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sUpdateSceneRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateSceneRequest_capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capabilities", ID: &i_SceneCapabilities, Members: &m_SceneCapabilities, Type: smithy.ShapeTypeList})
+var sUpdateSceneRequest_sceneMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sceneMetadata", ID: &i_SceneMetadataMap, Members: &m_SceneMetadataMap, Type: smithy.ShapeTypeMap})
+var sUpdateSceneResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateWorkspaceRequest_workspaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workspaceId", ID: &i_Id, Traits: &t48, Type: smithy.ShapeTypeString})
+var sUpdateWorkspaceRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateWorkspaceRequest_role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "role", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateWorkspaceRequest_s3Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Location", ID: &i_S3Location, Type: smithy.ShapeTypeString})
+var sUpdateWorkspaceResponse_updateDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateDateTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	_ExternalIdProperty_key = _ExternalIdProperty.AddMember("key", _String)
-
-	_ExternalIdProperty_value = _ExternalIdProperty.AddMember("value", _String)
-
-	EntityPropertyReference_componentName = EntityPropertyReference.AddMember("componentName", _Name)
-
-	EntityPropertyReference_componentPath = EntityPropertyReference.AddMember("componentPath", _ComponentPath)
-
-	EntityPropertyReference_externalIdProperty = EntityPropertyReference.AddMember("externalIdProperty", _ExternalIdProperty)
-
-	EntityPropertyReference_entityId = EntityPropertyReference.AddMember("entityId", _EntityId)
-
-	EntityPropertyReference_propertyName = EntityPropertyReference.AddMember("propertyName", _Name)
-
-	_DataValueList_member = _DataValueList.AddMember("member", DataValue)
-
-	_DataValueMap_key = _DataValueMap.AddMember("key", _String)
-
-	_DataValueMap_value = _DataValueMap.AddMember("value", DataValue)
-
-	RelationshipValue_targetEntityId = RelationshipValue.AddMember("targetEntityId", _EntityId)
-
-	RelationshipValue_targetComponentName = RelationshipValue.AddMember("targetComponentName", _Name)
-
-	DataValue_booleanValue = DataValue.AddMember("booleanValue", _Boolean)
-
-	DataValue_doubleValue = DataValue.AddMember("doubleValue", _Double)
-
-	DataValue_integerValue = DataValue.AddMember("integerValue", _Integer)
-
-	DataValue_longValue = DataValue.AddMember("longValue", _Long)
-
-	DataValue_stringValue = DataValue.AddMember("stringValue", _String)
-
-	DataValue_listValue = DataValue.AddMember("listValue", _DataValueList)
-
-	DataValue_mapValue = DataValue.AddMember("mapValue", _DataValueMap)
-
-	DataValue_relationshipValue = DataValue.AddMember("relationshipValue", RelationshipValue)
-
-	DataValue_expression = DataValue.AddMember("expression", _Expression)
-
-	PropertyValue_timestamp = PropertyValue.AddMember("timestamp", _Timestamp)
-
-	PropertyValue_value = PropertyValue.AddMember("value", DataValue)
-
-	PropertyValue_time = PropertyValue.AddMember("time", _Time)
-
-	_PropertyValues_member = _PropertyValues.AddMember("member", PropertyValue)
-
-	PropertyValueEntry_entityPropertyReference = PropertyValueEntry.AddMember("entityPropertyReference", EntityPropertyReference)
-
-	PropertyValueEntry_propertyValues = PropertyValueEntry.AddMember("propertyValues", _PropertyValues)
-
-	BatchPutPropertyError_errorCode = BatchPutPropertyError.AddMember("errorCode", _String)
-
-	BatchPutPropertyError_errorMessage = BatchPutPropertyError.AddMember("errorMessage", _String)
-
-	BatchPutPropertyError_entry = BatchPutPropertyError.AddMember("entry", PropertyValueEntry)
-
-	_Errors_member = _Errors.AddMember("member", BatchPutPropertyError)
-
-	BatchPutPropertyErrorEntry_errors = BatchPutPropertyErrorEntry.AddMember("errors", _Errors)
-
-	_PricingBundles_member = _PricingBundles.AddMember("member", _BundleName)
-
-	BundleInformation_bundleNames = BundleInformation.AddMember("bundleNames", _PricingBundles)
-
-	BundleInformation_pricingTier = BundleInformation.AddMember("pricingTier", _PricingTier)
-
-	ColumnDescription_name = ColumnDescription.AddMember("name", _ColumnName)
-
-	ColumnDescription_type = ColumnDescription.AddMember("type", _ColumnType)
-
-	_ColumnDescriptions_member = _ColumnDescriptions.AddMember("member", ColumnDescription)
-
-	_PropertyNames_member = _PropertyNames.AddMember("member", _Name)
-
-	ComponentPropertyGroupRequest_groupType = ComponentPropertyGroupRequest.AddMember("groupType", _GroupType)
-
-	ComponentPropertyGroupRequest_propertyNames = ComponentPropertyGroupRequest.AddMember("propertyNames", _PropertyNames)
-
-	ComponentPropertyGroupRequest_updateType = ComponentPropertyGroupRequest.AddMember("updateType", _PropertyGroupUpdateType)
-
-	_ComponentPropertyGroupRequests_key = _ComponentPropertyGroupRequests.AddMember("key", _Name)
-
-	_ComponentPropertyGroupRequests_value = _ComponentPropertyGroupRequests.AddMember("value", ComponentPropertyGroupRequest)
-
-	ComponentPropertyGroupResponse_groupType = ComponentPropertyGroupResponse.AddMember("groupType", _GroupType)
-
-	ComponentPropertyGroupResponse_propertyNames = ComponentPropertyGroupResponse.AddMember("propertyNames", _PropertyNames)
-
-	ComponentPropertyGroupResponse_isInherited = ComponentPropertyGroupResponse.AddMember("isInherited", _Boolean)
-
-	_ComponentPropertyGroupResponses_key = _ComponentPropertyGroupResponses.AddMember("key", _Name)
-
-	_ComponentPropertyGroupResponses_value = _ComponentPropertyGroupResponses.AddMember("value", ComponentPropertyGroupResponse)
-
-	Relationship_targetComponentTypeId = Relationship.AddMember("targetComponentTypeId", _ComponentTypeId)
-
-	Relationship_relationshipType = Relationship.AddMember("relationshipType", _String)
-
-	DataType_type = DataType.AddMember("type", _Type)
-
-	DataType_nestedType = DataType.AddMember("nestedType", DataType)
-
-	DataType_allowedValues = DataType.AddMember("allowedValues", _DataValueList)
-
-	DataType_unitOfMeasure = DataType.AddMember("unitOfMeasure", _String)
-
-	DataType_relationship = DataType.AddMember("relationship", Relationship)
-
-	_Configuration_key = _Configuration.AddMember("key", _Name)
-
-	_Configuration_value = _Configuration.AddMember("value", _Value)
-
-	PropertyDefinitionRequest_dataType = PropertyDefinitionRequest.AddMember("dataType", DataType)
-
-	PropertyDefinitionRequest_isRequiredInEntity = PropertyDefinitionRequest.AddMember("isRequiredInEntity", _Boolean)
-
-	PropertyDefinitionRequest_isExternalId = PropertyDefinitionRequest.AddMember("isExternalId", _Boolean)
-
-	PropertyDefinitionRequest_isStoredExternally = PropertyDefinitionRequest.AddMember("isStoredExternally", _Boolean)
-
-	PropertyDefinitionRequest_isTimeSeries = PropertyDefinitionRequest.AddMember("isTimeSeries", _Boolean)
-
-	PropertyDefinitionRequest_defaultValue = PropertyDefinitionRequest.AddMember("defaultValue", DataValue)
-
-	PropertyDefinitionRequest_configuration = PropertyDefinitionRequest.AddMember("configuration", _Configuration)
-
-	PropertyDefinitionRequest_displayName = PropertyDefinitionRequest.AddMember("displayName", _PropertyDisplayName)
-
-	PropertyRequest_definition = PropertyRequest.AddMember("definition", PropertyDefinitionRequest)
-
-	PropertyRequest_value = PropertyRequest.AddMember("value", DataValue)
-
-	PropertyRequest_updateType = PropertyRequest.AddMember("updateType", _PropertyUpdateType)
-
-	_PropertyRequests_key = _PropertyRequests.AddMember("key", _Name)
-
-	_PropertyRequests_value = _PropertyRequests.AddMember("value", PropertyRequest)
-
-	ComponentRequest_description = ComponentRequest.AddMember("description", _Description)
-
-	ComponentRequest_componentTypeId = ComponentRequest.AddMember("componentTypeId", _ComponentTypeId)
-
-	ComponentRequest_properties = ComponentRequest.AddMember("properties", _PropertyRequests)
-
-	ComponentRequest_propertyGroups = ComponentRequest.AddMember("propertyGroups", _ComponentPropertyGroupRequests)
-
-	ErrorDetails_code = ErrorDetails.AddMember("code", _ErrorCode)
-
-	ErrorDetails_message = ErrorDetails.AddMember("message", _ErrorMessage)
-
-	Status_state = Status.AddMember("state", _State)
-
-	Status_error = Status.AddMember("error", ErrorDetails)
-
-	PropertyDefinitionResponse_dataType = PropertyDefinitionResponse.AddMember("dataType", DataType)
-
-	PropertyDefinitionResponse_isTimeSeries = PropertyDefinitionResponse.AddMember("isTimeSeries", _Boolean)
-
-	PropertyDefinitionResponse_isRequiredInEntity = PropertyDefinitionResponse.AddMember("isRequiredInEntity", _Boolean)
-
-	PropertyDefinitionResponse_isExternalId = PropertyDefinitionResponse.AddMember("isExternalId", _Boolean)
-
-	PropertyDefinitionResponse_isStoredExternally = PropertyDefinitionResponse.AddMember("isStoredExternally", _Boolean)
-
-	PropertyDefinitionResponse_isImported = PropertyDefinitionResponse.AddMember("isImported", _Boolean)
-
-	PropertyDefinitionResponse_isFinal = PropertyDefinitionResponse.AddMember("isFinal", _Boolean)
-
-	PropertyDefinitionResponse_isInherited = PropertyDefinitionResponse.AddMember("isInherited", _Boolean)
-
-	PropertyDefinitionResponse_defaultValue = PropertyDefinitionResponse.AddMember("defaultValue", DataValue)
-
-	PropertyDefinitionResponse_configuration = PropertyDefinitionResponse.AddMember("configuration", _Configuration)
-
-	PropertyDefinitionResponse_displayName = PropertyDefinitionResponse.AddMember("displayName", _PropertyDisplayName)
-
-	PropertyResponse_definition = PropertyResponse.AddMember("definition", PropertyDefinitionResponse)
-
-	PropertyResponse_value = PropertyResponse.AddMember("value", DataValue)
-
-	PropertyResponse_areAllPropertyValuesReturned = PropertyResponse.AddMember("areAllPropertyValuesReturned", _Boolean)
-
-	_PropertyResponses_key = _PropertyResponses.AddMember("key", _Name)
-
-	_PropertyResponses_value = _PropertyResponses.AddMember("value", PropertyResponse)
-
-	ComponentSummary_componentName = ComponentSummary.AddMember("componentName", _Name)
-
-	ComponentSummary_componentTypeId = ComponentSummary.AddMember("componentTypeId", _ComponentTypeId)
-
-	ComponentSummary_definedIn = ComponentSummary.AddMember("definedIn", _String)
-
-	ComponentSummary_description = ComponentSummary.AddMember("description", _Description)
-
-	ComponentSummary_propertyGroups = ComponentSummary.AddMember("propertyGroups", _ComponentPropertyGroupResponses)
-
-	ComponentSummary_status = ComponentSummary.AddMember("status", Status)
-
-	ComponentSummary_syncSource = ComponentSummary.AddMember("syncSource", _SyncSource)
-
-	ComponentSummary_componentPath = ComponentSummary.AddMember("componentPath", _ComponentPath)
-
-	_CompositeComponentResponse_key = _CompositeComponentResponse.AddMember("key", _Name)
-
-	_CompositeComponentResponse_value = _CompositeComponentResponse.AddMember("value", ComponentSummary)
-
-	ComponentResponse_componentName = ComponentResponse.AddMember("componentName", _Name)
-
-	ComponentResponse_description = ComponentResponse.AddMember("description", _Description)
-
-	ComponentResponse_componentTypeId = ComponentResponse.AddMember("componentTypeId", _ComponentTypeId)
-
-	ComponentResponse_status = ComponentResponse.AddMember("status", Status)
-
-	ComponentResponse_definedIn = ComponentResponse.AddMember("definedIn", _String)
-
-	ComponentResponse_properties = ComponentResponse.AddMember("properties", _PropertyResponses)
-
-	ComponentResponse_propertyGroups = ComponentResponse.AddMember("propertyGroups", _ComponentPropertyGroupResponses)
-
-	ComponentResponse_syncSource = ComponentResponse.AddMember("syncSource", _SyncSource)
-
-	ComponentResponse_areAllPropertiesReturned = ComponentResponse.AddMember("areAllPropertiesReturned", _Boolean)
-
-	ComponentResponse_compositeComponents = ComponentResponse.AddMember("compositeComponents", _CompositeComponentResponse)
-
-	ComponentResponse_areAllCompositeComponentsReturned = ComponentResponse.AddMember("areAllCompositeComponentsReturned", _Boolean)
-
-	_ComponentsMap_key = _ComponentsMap.AddMember("key", _Name)
-
-	_ComponentsMap_value = _ComponentsMap.AddMember("value", ComponentResponse)
-
-	_ComponentsMapRequest_key = _ComponentsMapRequest.AddMember("key", _Name)
-
-	_ComponentsMapRequest_value = _ComponentsMapRequest.AddMember("value", ComponentRequest)
-
-	_ComponentSummaries_member = _ComponentSummaries.AddMember("member", ComponentSummary)
-
-	ComponentTypeSummary_arn = ComponentTypeSummary.AddMember("arn", _TwinMakerArn)
-
-	ComponentTypeSummary_componentTypeId = ComponentTypeSummary.AddMember("componentTypeId", _ComponentTypeId)
-
-	ComponentTypeSummary_creationDateTime = ComponentTypeSummary.AddMember("creationDateTime", _Timestamp)
-
-	ComponentTypeSummary_updateDateTime = ComponentTypeSummary.AddMember("updateDateTime", _Timestamp)
-
-	ComponentTypeSummary_description = ComponentTypeSummary.AddMember("description", _Description)
-
-	ComponentTypeSummary_status = ComponentTypeSummary.AddMember("status", Status)
-
-	ComponentTypeSummary_componentTypeName = ComponentTypeSummary.AddMember("componentTypeName", _ComponentTypeName)
-
-	_ComponentTypeSummaries_member = _ComponentTypeSummaries.AddMember("member", ComponentTypeSummary)
-
-	ComponentUpdateRequest_updateType = ComponentUpdateRequest.AddMember("updateType", _ComponentUpdateType)
-
-	ComponentUpdateRequest_description = ComponentUpdateRequest.AddMember("description", _Description)
-
-	ComponentUpdateRequest_componentTypeId = ComponentUpdateRequest.AddMember("componentTypeId", _ComponentTypeId)
-
-	ComponentUpdateRequest_propertyUpdates = ComponentUpdateRequest.AddMember("propertyUpdates", _PropertyRequests)
-
-	ComponentUpdateRequest_propertyGroupUpdates = ComponentUpdateRequest.AddMember("propertyGroupUpdates", _ComponentPropertyGroupRequests)
-
-	_ComponentUpdatesMapRequest_key = _ComponentUpdatesMapRequest.AddMember("key", _Name)
-
-	_ComponentUpdatesMapRequest_value = _ComponentUpdatesMapRequest.AddMember("value", ComponentUpdateRequest)
-
-	CompositeComponentRequest_description = CompositeComponentRequest.AddMember("description", _Description)
-
-	CompositeComponentRequest_properties = CompositeComponentRequest.AddMember("properties", _PropertyRequests)
-
-	CompositeComponentRequest_propertyGroups = CompositeComponentRequest.AddMember("propertyGroups", _ComponentPropertyGroupRequests)
-
-	_CompositeComponentsMapRequest_key = _CompositeComponentsMapRequest.AddMember("key", _ComponentPath)
-
-	_CompositeComponentsMapRequest_value = _CompositeComponentsMapRequest.AddMember("value", CompositeComponentRequest)
-
-	CompositeComponentTypeRequest_componentTypeId = CompositeComponentTypeRequest.AddMember("componentTypeId", _ComponentTypeId)
-
-	CompositeComponentTypeResponse_componentTypeId = CompositeComponentTypeResponse.AddMember("componentTypeId", _ComponentTypeId)
-
-	CompositeComponentTypeResponse_isInherited = CompositeComponentTypeResponse.AddMember("isInherited", _Boolean)
-
-	_CompositeComponentTypesRequest_key = _CompositeComponentTypesRequest.AddMember("key", _Name)
-
-	_CompositeComponentTypesRequest_value = _CompositeComponentTypesRequest.AddMember("value", CompositeComponentTypeRequest)
-
-	_CompositeComponentTypesResponse_key = _CompositeComponentTypesResponse.AddMember("key", _Name)
-
-	_CompositeComponentTypesResponse_value = _CompositeComponentTypesResponse.AddMember("value", CompositeComponentTypeResponse)
-
-	CompositeComponentUpdateRequest_updateType = CompositeComponentUpdateRequest.AddMember("updateType", _ComponentUpdateType)
-
-	CompositeComponentUpdateRequest_description = CompositeComponentUpdateRequest.AddMember("description", _Description)
-
-	CompositeComponentUpdateRequest_propertyUpdates = CompositeComponentUpdateRequest.AddMember("propertyUpdates", _PropertyRequests)
-
-	CompositeComponentUpdateRequest_propertyGroupUpdates = CompositeComponentUpdateRequest.AddMember("propertyGroupUpdates", _ComponentPropertyGroupRequests)
-
-	_CompositeComponentUpdatesMapRequest_key = _CompositeComponentUpdatesMapRequest.AddMember("key", _ComponentPath)
-
-	_CompositeComponentUpdatesMapRequest_value = _CompositeComponentUpdatesMapRequest.AddMember("value", CompositeComponentUpdateRequest)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ConnectorFailureException_message = ConnectorFailureException.AddMember("message", _ErrorMessage)
-
-	ConnectorTimeoutException_message = ConnectorTimeoutException.AddMember("message", _ErrorMessage)
-
-	LambdaFunction_arn = LambdaFunction.AddMember("arn", _LambdaArn)
-
-	DataConnector_lambda = DataConnector.AddMember("lambda", LambdaFunction)
-
-	DataConnector_isNative = DataConnector.AddMember("isNative", _Boolean)
-
-	S3DestinationConfiguration_location = S3DestinationConfiguration.AddMember("location", _S3DestinationLocation)
-
-	IotTwinMakerDestinationConfiguration_workspace = IotTwinMakerDestinationConfiguration.AddMember("workspace", _TwinMakerArn)
-
-	DestinationConfiguration_type = DestinationConfiguration.AddMember("type", _DestinationType)
-
-	DestinationConfiguration_s3Configuration = DestinationConfiguration.AddMember("s3Configuration", S3DestinationConfiguration)
-
-	DestinationConfiguration_iotTwinMakerConfiguration = DestinationConfiguration.AddMember("iotTwinMakerConfiguration", IotTwinMakerDestinationConfiguration)
-
-	EntitySummary_entityId = EntitySummary.AddMember("entityId", _EntityId)
-
-	EntitySummary_entityName = EntitySummary.AddMember("entityName", _EntityName)
-
-	EntitySummary_arn = EntitySummary.AddMember("arn", _TwinMakerArn)
-
-	EntitySummary_parentEntityId = EntitySummary.AddMember("parentEntityId", _ParentEntityId)
-
-	EntitySummary_status = EntitySummary.AddMember("status", Status)
-
-	EntitySummary_description = EntitySummary.AddMember("description", _Description)
-
-	EntitySummary_hasChildEntities = EntitySummary.AddMember("hasChildEntities", _Boolean)
-
-	EntitySummary_creationDateTime = EntitySummary.AddMember("creationDateTime", _Timestamp)
-
-	EntitySummary_updateDateTime = EntitySummary.AddMember("updateDateTime", _Timestamp)
-
-	_EntitySummaries_member = _EntitySummaries.AddMember("member", EntitySummary)
-
-	_Entries_member = _Entries.AddMember("member", PropertyValueEntry)
-
-	_ErrorEntries_member = _ErrorEntries.AddMember("member", BatchPutPropertyErrorEntry)
-
-	_ExtendsFrom_member = _ExtendsFrom.AddMember("member", _ComponentTypeId)
-
-	FilterByAsset_assetId = FilterByAsset.AddMember("assetId", _Uuid)
-
-	FilterByAsset_assetExternalId = FilterByAsset.AddMember("assetExternalId", _SiteWiseExternalId)
-
-	FilterByAsset_includeOffspring = FilterByAsset.AddMember("includeOffspring", _Boolean)
-
-	FilterByAsset_includeAssetModel = FilterByAsset.AddMember("includeAssetModel", _Boolean)
-
-	FilterByAssetModel_assetModelId = FilterByAssetModel.AddMember("assetModelId", _Uuid)
-
-	FilterByAssetModel_assetModelExternalId = FilterByAssetModel.AddMember("assetModelExternalId", _SiteWiseExternalId)
-
-	FilterByAssetModel_includeOffspring = FilterByAssetModel.AddMember("includeOffspring", _Boolean)
-
-	FilterByAssetModel_includeAssets = FilterByAssetModel.AddMember("includeAssets", _Boolean)
-
-	FilterByComponentType_componentTypeId = FilterByComponentType.AddMember("componentTypeId", _ComponentTypeId)
-
-	FilterByEntity_entityId = FilterByEntity.AddMember("entityId", _EntityId)
-
-	_RequiredProperties_member = _RequiredProperties.AddMember("member", _Name)
-
-	FunctionRequest_requiredProperties = FunctionRequest.AddMember("requiredProperties", _RequiredProperties)
-
-	FunctionRequest_scope = FunctionRequest.AddMember("scope", _Scope)
-
-	FunctionRequest_implementedBy = FunctionRequest.AddMember("implementedBy", DataConnector)
-
-	FunctionResponse_requiredProperties = FunctionResponse.AddMember("requiredProperties", _RequiredProperties)
-
-	FunctionResponse_scope = FunctionResponse.AddMember("scope", _Scope)
-
-	FunctionResponse_implementedBy = FunctionResponse.AddMember("implementedBy", DataConnector)
-
-	FunctionResponse_isInherited = FunctionResponse.AddMember("isInherited", _Boolean)
-
-	_FunctionsRequest_key = _FunctionsRequest.AddMember("key", _Name)
-
-	_FunctionsRequest_value = _FunctionsRequest.AddMember("value", FunctionRequest)
-
-	_FunctionsResponse_key = _FunctionsResponse.AddMember("key", _Name)
-
-	_FunctionsResponse_value = _FunctionsResponse.AddMember("value", FunctionResponse)
-
-	_GeneratedSceneMetadataMap_key = _GeneratedSceneMetadataMap.AddMember("key", _Name)
-
-	_GeneratedSceneMetadataMap_value = _GeneratedSceneMetadataMap.AddMember("value", _SceneMetadataValue)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	InterpolationParameters_interpolationType = InterpolationParameters.AddMember("interpolationType", _InterpolationType)
-
-	InterpolationParameters_intervalInSeconds = InterpolationParameters.AddMember("intervalInSeconds", _IntervalInSeconds)
-
-	IotSiteWiseSourceConfigurationFilter_filterByAssetModel = IotSiteWiseSourceConfigurationFilter.AddMember("filterByAssetModel", FilterByAssetModel)
-
-	IotSiteWiseSourceConfigurationFilter_filterByAsset = IotSiteWiseSourceConfigurationFilter.AddMember("filterByAsset", FilterByAsset)
-
-	_IotSiteWiseSourceConfigurationFilters_member = _IotSiteWiseSourceConfigurationFilters.AddMember("member", IotSiteWiseSourceConfigurationFilter)
-
-	IotSiteWiseSourceConfiguration_filters = IotSiteWiseSourceConfiguration.AddMember("filters", _IotSiteWiseSourceConfigurationFilters)
-
-	IotTwinMakerSourceConfigurationFilter_filterByComponentType = IotTwinMakerSourceConfigurationFilter.AddMember("filterByComponentType", FilterByComponentType)
-
-	IotTwinMakerSourceConfigurationFilter_filterByEntity = IotTwinMakerSourceConfigurationFilter.AddMember("filterByEntity", FilterByEntity)
-
-	_IotTwinMakerSourceConfigurationFilters_member = _IotTwinMakerSourceConfigurationFilters.AddMember("member", IotTwinMakerSourceConfigurationFilter)
-
-	IotTwinMakerSourceConfiguration_workspace = IotTwinMakerSourceConfiguration.AddMember("workspace", _TwinMakerArn)
-
-	IotTwinMakerSourceConfiguration_filters = IotTwinMakerSourceConfiguration.AddMember("filters", _IotTwinMakerSourceConfigurationFilters)
-
-	_LinkedServices_member = _LinkedServices.AddMember("member", _LinkedService)
-
-	ListComponentTypesFilter_extendsFrom = ListComponentTypesFilter.AddMember("extendsFrom", _ComponentTypeId)
-
-	ListComponentTypesFilter_namespace = ListComponentTypesFilter.AddMember("namespace", _String)
-
-	ListComponentTypesFilter_isAbstract = ListComponentTypesFilter.AddMember("isAbstract", _Boolean)
-
-	_ListComponentTypesFilters_member = _ListComponentTypesFilters.AddMember("member", ListComponentTypesFilter)
-
-	ListEntitiesFilter_parentEntityId = ListEntitiesFilter.AddMember("parentEntityId", _ParentEntityId)
-
-	ListEntitiesFilter_componentTypeId = ListEntitiesFilter.AddMember("componentTypeId", _ComponentTypeId)
-
-	ListEntitiesFilter_externalId = ListEntitiesFilter.AddMember("externalId", _String)
-
-	_ListEntitiesFilters_member = _ListEntitiesFilters.AddMember("member", ListEntitiesFilter)
-
-	ListMetadataTransferJobsFilter_workspaceId = ListMetadataTransferJobsFilter.AddMember("workspaceId", _Id)
-
-	ListMetadataTransferJobsFilter_state = ListMetadataTransferJobsFilter.AddMember("state", _MetadataTransferJobState)
-
-	_ListMetadataTransferJobsFilters_member = _ListMetadataTransferJobsFilters.AddMember("member", ListMetadataTransferJobsFilter)
-
-	MetadataTransferJobProgress_totalCount = MetadataTransferJobProgress.AddMember("totalCount", _Integer)
-
-	MetadataTransferJobProgress_succeededCount = MetadataTransferJobProgress.AddMember("succeededCount", _Integer)
-
-	MetadataTransferJobProgress_skippedCount = MetadataTransferJobProgress.AddMember("skippedCount", _Integer)
-
-	MetadataTransferJobProgress_failedCount = MetadataTransferJobProgress.AddMember("failedCount", _Integer)
-
-	MetadataTransferJobStatus_state = MetadataTransferJobStatus.AddMember("state", _MetadataTransferJobState)
-
-	MetadataTransferJobStatus_error = MetadataTransferJobStatus.AddMember("error", ErrorDetails)
-
-	MetadataTransferJobStatus_queuedPosition = MetadataTransferJobStatus.AddMember("queuedPosition", _Integer)
-
-	MetadataTransferJobSummary_metadataTransferJobId = MetadataTransferJobSummary.AddMember("metadataTransferJobId", _Id)
-
-	MetadataTransferJobSummary_arn = MetadataTransferJobSummary.AddMember("arn", _TwinMakerArn)
-
-	MetadataTransferJobSummary_creationDateTime = MetadataTransferJobSummary.AddMember("creationDateTime", _Timestamp)
-
-	MetadataTransferJobSummary_updateDateTime = MetadataTransferJobSummary.AddMember("updateDateTime", _Timestamp)
-
-	MetadataTransferJobSummary_status = MetadataTransferJobSummary.AddMember("status", MetadataTransferJobStatus)
-
-	MetadataTransferJobSummary_progress = MetadataTransferJobSummary.AddMember("progress", MetadataTransferJobProgress)
-
-	_MetadataTransferJobSummaries_member = _MetadataTransferJobSummaries.AddMember("member", MetadataTransferJobSummary)
-
-	OrderBy_order = OrderBy.AddMember("order", _Order)
-
-	OrderBy_propertyName = OrderBy.AddMember("propertyName", _String)
-
-	_OrderByList_member = _OrderByList.AddMember("member", OrderBy)
-
-	ParentEntityUpdateRequest_updateType = ParentEntityUpdateRequest.AddMember("updateType", _ParentEntityUpdateType)
-
-	ParentEntityUpdateRequest_parentEntityId = ParentEntityUpdateRequest.AddMember("parentEntityId", _ParentEntityId)
-
-	PricingPlan_billableEntityCount = PricingPlan.AddMember("billableEntityCount", _Long)
-
-	PricingPlan_bundleInformation = PricingPlan.AddMember("bundleInformation", BundleInformation)
-
-	PricingPlan_effectiveDateTime = PricingPlan.AddMember("effectiveDateTime", _Timestamp)
-
-	PricingPlan_pricingMode = PricingPlan.AddMember("pricingMode", _PricingMode)
-
-	PricingPlan_updateDateTime = PricingPlan.AddMember("updateDateTime", _Timestamp)
-
-	PricingPlan_updateReason = PricingPlan.AddMember("updateReason", _UpdateReason)
-
-	_PropertyDefinitionsRequest_key = _PropertyDefinitionsRequest.AddMember("key", _Name)
-
-	_PropertyDefinitionsRequest_value = _PropertyDefinitionsRequest.AddMember("value", PropertyDefinitionRequest)
-
-	_PropertyDefinitionsResponse_key = _PropertyDefinitionsResponse.AddMember("key", _Name)
-
-	_PropertyDefinitionsResponse_value = _PropertyDefinitionsResponse.AddMember("value", PropertyDefinitionResponse)
-
-	PropertyFilter_propertyName = PropertyFilter.AddMember("propertyName", _String)
-
-	PropertyFilter_operator = PropertyFilter.AddMember("operator", _String)
-
-	PropertyFilter_value = PropertyFilter.AddMember("value", DataValue)
-
-	_PropertyFilters_member = _PropertyFilters.AddMember("member", PropertyFilter)
-
-	PropertyGroupRequest_groupType = PropertyGroupRequest.AddMember("groupType", _GroupType)
-
-	PropertyGroupRequest_propertyNames = PropertyGroupRequest.AddMember("propertyNames", _PropertyNames)
-
-	PropertyGroupResponse_groupType = PropertyGroupResponse.AddMember("groupType", _GroupType)
-
-	PropertyGroupResponse_propertyNames = PropertyGroupResponse.AddMember("propertyNames", _PropertyNames)
-
-	PropertyGroupResponse_isInherited = PropertyGroupResponse.AddMember("isInherited", _Boolean)
-
-	_PropertyGroupsRequest_key = _PropertyGroupsRequest.AddMember("key", _Name)
-
-	_PropertyGroupsRequest_value = _PropertyGroupsRequest.AddMember("value", PropertyGroupRequest)
-
-	_PropertyGroupsResponse_key = _PropertyGroupsResponse.AddMember("key", _Name)
-
-	_PropertyGroupsResponse_value = _PropertyGroupsResponse.AddMember("value", PropertyGroupResponse)
-
-	PropertyLatestValue_propertyReference = PropertyLatestValue.AddMember("propertyReference", EntityPropertyReference)
-
-	PropertyLatestValue_propertyValue = PropertyLatestValue.AddMember("propertyValue", DataValue)
-
-	_PropertyLatestValueMap_key = _PropertyLatestValueMap.AddMember("key", _Name)
-
-	_PropertyLatestValueMap_value = _PropertyLatestValueMap.AddMember("value", PropertyLatestValue)
-
-	PropertySummary_definition = PropertySummary.AddMember("definition", PropertyDefinitionResponse)
-
-	PropertySummary_propertyName = PropertySummary.AddMember("propertyName", _Name)
-
-	PropertySummary_value = PropertySummary.AddMember("value", DataValue)
-
-	PropertySummary_areAllPropertyValuesReturned = PropertySummary.AddMember("areAllPropertyValuesReturned", _Boolean)
-
-	_PropertySummaries_member = _PropertySummaries.AddMember("member", PropertySummary)
-
-	_PropertyTableValue_key = _PropertyTableValue.AddMember("key", _Name)
-
-	_PropertyTableValue_value = _PropertyTableValue.AddMember("value", DataValue)
-
-	_Values_member = _Values.AddMember("member", PropertyValue)
-
-	PropertyValueHistory_entityPropertyReference = PropertyValueHistory.AddMember("entityPropertyReference", EntityPropertyReference)
-
-	PropertyValueHistory_values = PropertyValueHistory.AddMember("values", _Values)
-
-	_PropertyValueList_member = _PropertyValueList.AddMember("member", PropertyValueHistory)
-
-	QueryTimeoutException_message = QueryTimeoutException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	_RowData_member = _RowData.AddMember("member", _QueryResultValue)
-
-	Row_rowData = Row.AddMember("rowData", _RowData)
-
-	_Rows_member = _Rows.AddMember("member", Row)
-
-	S3SourceConfiguration_location = S3SourceConfiguration.AddMember("location", _S3SourceLocation)
-
-	_SceneCapabilities_member = _SceneCapabilities.AddMember("member", _SceneCapability)
-
-	SceneError_code = SceneError.AddMember("code", _SceneErrorCode)
-
-	SceneError_message = SceneError.AddMember("message", _ErrorMessage)
-
-	_SceneMetadataMap_key = _SceneMetadataMap.AddMember("key", _Name)
-
-	_SceneMetadataMap_value = _SceneMetadataMap.AddMember("value", _SceneMetadataValue)
-
-	SceneSummary_sceneId = SceneSummary.AddMember("sceneId", _Id)
-
-	SceneSummary_contentLocation = SceneSummary.AddMember("contentLocation", _S3Url)
-
-	SceneSummary_arn = SceneSummary.AddMember("arn", _TwinMakerArn)
-
-	SceneSummary_creationDateTime = SceneSummary.AddMember("creationDateTime", _Timestamp)
-
-	SceneSummary_updateDateTime = SceneSummary.AddMember("updateDateTime", _Timestamp)
-
-	SceneSummary_description = SceneSummary.AddMember("description", _Description)
-
-	_SceneSummaries_member = _SceneSummaries.AddMember("member", SceneSummary)
-
-	_SelectedPropertyList_member = _SelectedPropertyList.AddMember("member", _String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	SourceConfiguration_type = SourceConfiguration.AddMember("type", _SourceType)
-
-	SourceConfiguration_s3Configuration = SourceConfiguration.AddMember("s3Configuration", S3SourceConfiguration)
-
-	SourceConfiguration_iotSiteWiseConfiguration = SourceConfiguration.AddMember("iotSiteWiseConfiguration", IotSiteWiseSourceConfiguration)
-
-	SourceConfiguration_iotTwinMakerConfiguration = SourceConfiguration.AddMember("iotTwinMakerConfiguration", IotTwinMakerSourceConfiguration)
-
-	_SourceConfigurations_member = _SourceConfigurations.AddMember("member", SourceConfiguration)
-
-	SyncJobStatus_state = SyncJobStatus.AddMember("state", _SyncJobState)
-
-	SyncJobStatus_error = SyncJobStatus.AddMember("error", ErrorDetails)
-
-	SyncJobSummary_arn = SyncJobSummary.AddMember("arn", _TwinMakerArn)
-
-	SyncJobSummary_workspaceId = SyncJobSummary.AddMember("workspaceId", _Id)
-
-	SyncJobSummary_syncSource = SyncJobSummary.AddMember("syncSource", _SyncSource)
-
-	SyncJobSummary_status = SyncJobSummary.AddMember("status", SyncJobStatus)
-
-	SyncJobSummary_creationDateTime = SyncJobSummary.AddMember("creationDateTime", _Timestamp)
-
-	SyncJobSummary_updateDateTime = SyncJobSummary.AddMember("updateDateTime", _Timestamp)
-
-	_SyncJobSummaries_member = _SyncJobSummaries.AddMember("member", SyncJobSummary)
-
-	SyncResourceFilter_state = SyncResourceFilter.AddMember("state", _SyncResourceState)
-
-	SyncResourceFilter_resourceType = SyncResourceFilter.AddMember("resourceType", _SyncResourceType)
-
-	SyncResourceFilter_resourceId = SyncResourceFilter.AddMember("resourceId", _Id)
-
-	SyncResourceFilter_externalId = SyncResourceFilter.AddMember("externalId", _Id)
-
-	_SyncResourceFilters_member = _SyncResourceFilters.AddMember("member", SyncResourceFilter)
-
-	SyncResourceStatus_state = SyncResourceStatus.AddMember("state", _SyncResourceState)
-
-	SyncResourceStatus_error = SyncResourceStatus.AddMember("error", ErrorDetails)
-
-	SyncResourceSummary_resourceType = SyncResourceSummary.AddMember("resourceType", _SyncResourceType)
-
-	SyncResourceSummary_externalId = SyncResourceSummary.AddMember("externalId", _Id)
-
-	SyncResourceSummary_resourceId = SyncResourceSummary.AddMember("resourceId", _Id)
-
-	SyncResourceSummary_status = SyncResourceSummary.AddMember("status", SyncResourceStatus)
-
-	SyncResourceSummary_updateDateTime = SyncResourceSummary.AddMember("updateDateTime", _Timestamp)
-
-	_SyncResourceSummaries_member = _SyncResourceSummaries.AddMember("member", SyncResourceSummary)
-
-	TabularConditions_orderBy = TabularConditions.AddMember("orderBy", _OrderByList)
-
-	TabularConditions_propertyFilters = TabularConditions.AddMember("propertyFilters", _PropertyFilters)
-
-	_TabularPropertyValue_member = _TabularPropertyValue.AddMember("member", _PropertyTableValue)
-
-	_TabularPropertyValues_member = _TabularPropertyValues.AddMember("member", _TabularPropertyValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _ExceptionMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	WorkspaceSummary_workspaceId = WorkspaceSummary.AddMember("workspaceId", _Id)
-
-	WorkspaceSummary_arn = WorkspaceSummary.AddMember("arn", _TwinMakerArn)
-
-	WorkspaceSummary_description = WorkspaceSummary.AddMember("description", _Description)
-
-	WorkspaceSummary_linkedServices = WorkspaceSummary.AddMember("linkedServices", _LinkedServices)
-
-	WorkspaceSummary_creationDateTime = WorkspaceSummary.AddMember("creationDateTime", _Timestamp)
-
-	WorkspaceSummary_updateDateTime = WorkspaceSummary.AddMember("updateDateTime", _Timestamp)
-
-	_WorkspaceSummaries_member = _WorkspaceSummaries.AddMember("member", WorkspaceSummary)
-
-	BatchPutPropertyValuesRequest_workspaceId = BatchPutPropertyValuesRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	BatchPutPropertyValuesRequest_entries = BatchPutPropertyValuesRequest.AddMember("entries", _Entries)
-
-	BatchPutPropertyValuesResponse_errorEntries = BatchPutPropertyValuesResponse.AddMember("errorEntries", _ErrorEntries)
-
-	CancelMetadataTransferJobRequest_metadataTransferJobId = CancelMetadataTransferJobRequest.AddMember("metadataTransferJobId", _Id, &smithytraits.HTTPLabel{})
-
-	CancelMetadataTransferJobResponse_metadataTransferJobId = CancelMetadataTransferJobResponse.AddMember("metadataTransferJobId", _Id)
-
-	CancelMetadataTransferJobResponse_arn = CancelMetadataTransferJobResponse.AddMember("arn", _TwinMakerArn)
-
-	CancelMetadataTransferJobResponse_updateDateTime = CancelMetadataTransferJobResponse.AddMember("updateDateTime", _Timestamp)
-
-	CancelMetadataTransferJobResponse_status = CancelMetadataTransferJobResponse.AddMember("status", MetadataTransferJobStatus)
-
-	CancelMetadataTransferJobResponse_progress = CancelMetadataTransferJobResponse.AddMember("progress", MetadataTransferJobProgress)
-
-	CreateComponentTypeRequest_workspaceId = CreateComponentTypeRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	CreateComponentTypeRequest_isSingleton = CreateComponentTypeRequest.AddMember("isSingleton", _Boolean)
-
-	CreateComponentTypeRequest_componentTypeId = CreateComponentTypeRequest.AddMember("componentTypeId", _ComponentTypeId, &smithytraits.HTTPLabel{})
-
-	CreateComponentTypeRequest_description = CreateComponentTypeRequest.AddMember("description", _Description)
-
-	CreateComponentTypeRequest_propertyDefinitions = CreateComponentTypeRequest.AddMember("propertyDefinitions", _PropertyDefinitionsRequest)
-
-	CreateComponentTypeRequest_extendsFrom = CreateComponentTypeRequest.AddMember("extendsFrom", _ExtendsFrom)
-
-	CreateComponentTypeRequest_functions = CreateComponentTypeRequest.AddMember("functions", _FunctionsRequest)
-
-	CreateComponentTypeRequest_tags = CreateComponentTypeRequest.AddMember("tags", _TagMap)
-
-	CreateComponentTypeRequest_propertyGroups = CreateComponentTypeRequest.AddMember("propertyGroups", _PropertyGroupsRequest)
-
-	CreateComponentTypeRequest_componentTypeName = CreateComponentTypeRequest.AddMember("componentTypeName", _ComponentTypeName)
-
-	CreateComponentTypeRequest_compositeComponentTypes = CreateComponentTypeRequest.AddMember("compositeComponentTypes", _CompositeComponentTypesRequest)
-
-	CreateComponentTypeResponse_arn = CreateComponentTypeResponse.AddMember("arn", _TwinMakerArn)
-
-	CreateComponentTypeResponse_creationDateTime = CreateComponentTypeResponse.AddMember("creationDateTime", _Timestamp)
-
-	CreateComponentTypeResponse_state = CreateComponentTypeResponse.AddMember("state", _State)
-
-	CreateEntityRequest_workspaceId = CreateEntityRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	CreateEntityRequest_entityId = CreateEntityRequest.AddMember("entityId", _EntityId)
-
-	CreateEntityRequest_entityName = CreateEntityRequest.AddMember("entityName", _EntityName)
-
-	CreateEntityRequest_description = CreateEntityRequest.AddMember("description", _Description)
-
-	CreateEntityRequest_components = CreateEntityRequest.AddMember("components", _ComponentsMapRequest)
-
-	CreateEntityRequest_compositeComponents = CreateEntityRequest.AddMember("compositeComponents", _CompositeComponentsMapRequest)
-
-	CreateEntityRequest_parentEntityId = CreateEntityRequest.AddMember("parentEntityId", _ParentEntityId)
-
-	CreateEntityRequest_tags = CreateEntityRequest.AddMember("tags", _TagMap)
-
-	CreateEntityResponse_entityId = CreateEntityResponse.AddMember("entityId", _EntityId)
-
-	CreateEntityResponse_arn = CreateEntityResponse.AddMember("arn", _TwinMakerArn)
-
-	CreateEntityResponse_creationDateTime = CreateEntityResponse.AddMember("creationDateTime", _Timestamp)
-
-	CreateEntityResponse_state = CreateEntityResponse.AddMember("state", _State)
-
-	CreateMetadataTransferJobRequest_metadataTransferJobId = CreateMetadataTransferJobRequest.AddMember("metadataTransferJobId", _Id)
-
-	CreateMetadataTransferJobRequest_description = CreateMetadataTransferJobRequest.AddMember("description", _Description)
-
-	CreateMetadataTransferJobRequest_sources = CreateMetadataTransferJobRequest.AddMember("sources", _SourceConfigurations)
-
-	CreateMetadataTransferJobRequest_destination = CreateMetadataTransferJobRequest.AddMember("destination", DestinationConfiguration)
-
-	CreateMetadataTransferJobResponse_metadataTransferJobId = CreateMetadataTransferJobResponse.AddMember("metadataTransferJobId", _Id)
-
-	CreateMetadataTransferJobResponse_arn = CreateMetadataTransferJobResponse.AddMember("arn", _TwinMakerArn)
-
-	CreateMetadataTransferJobResponse_creationDateTime = CreateMetadataTransferJobResponse.AddMember("creationDateTime", _Timestamp)
-
-	CreateMetadataTransferJobResponse_status = CreateMetadataTransferJobResponse.AddMember("status", MetadataTransferJobStatus)
-
-	CreateSceneRequest_workspaceId = CreateSceneRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	CreateSceneRequest_sceneId = CreateSceneRequest.AddMember("sceneId", _Id)
-
-	CreateSceneRequest_contentLocation = CreateSceneRequest.AddMember("contentLocation", _S3Url)
-
-	CreateSceneRequest_description = CreateSceneRequest.AddMember("description", _Description)
-
-	CreateSceneRequest_capabilities = CreateSceneRequest.AddMember("capabilities", _SceneCapabilities)
-
-	CreateSceneRequest_tags = CreateSceneRequest.AddMember("tags", _TagMap)
-
-	CreateSceneRequest_sceneMetadata = CreateSceneRequest.AddMember("sceneMetadata", _SceneMetadataMap)
-
-	CreateSceneResponse_arn = CreateSceneResponse.AddMember("arn", _TwinMakerArn)
-
-	CreateSceneResponse_creationDateTime = CreateSceneResponse.AddMember("creationDateTime", _Timestamp)
-
-	CreateSyncJobRequest_workspaceId = CreateSyncJobRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	CreateSyncJobRequest_syncSource = CreateSyncJobRequest.AddMember("syncSource", _SyncSource, &smithytraits.HTTPLabel{})
-
-	CreateSyncJobRequest_syncRole = CreateSyncJobRequest.AddMember("syncRole", _RoleArn)
-
-	CreateSyncJobRequest_tags = CreateSyncJobRequest.AddMember("tags", _TagMap)
-
-	CreateSyncJobResponse_arn = CreateSyncJobResponse.AddMember("arn", _TwinMakerArn)
-
-	CreateSyncJobResponse_creationDateTime = CreateSyncJobResponse.AddMember("creationDateTime", _Timestamp)
-
-	CreateSyncJobResponse_state = CreateSyncJobResponse.AddMember("state", _SyncJobState)
-
-	CreateWorkspaceRequest_workspaceId = CreateWorkspaceRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	CreateWorkspaceRequest_description = CreateWorkspaceRequest.AddMember("description", _Description)
-
-	CreateWorkspaceRequest_s3Location = CreateWorkspaceRequest.AddMember("s3Location", _S3Location)
-
-	CreateWorkspaceRequest_role = CreateWorkspaceRequest.AddMember("role", _RoleArn)
-
-	CreateWorkspaceRequest_tags = CreateWorkspaceRequest.AddMember("tags", _TagMap)
-
-	CreateWorkspaceResponse_arn = CreateWorkspaceResponse.AddMember("arn", _TwinMakerArn)
-
-	CreateWorkspaceResponse_creationDateTime = CreateWorkspaceResponse.AddMember("creationDateTime", _Timestamp)
-
-	DeleteComponentTypeRequest_workspaceId = DeleteComponentTypeRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	DeleteComponentTypeRequest_componentTypeId = DeleteComponentTypeRequest.AddMember("componentTypeId", _ComponentTypeId, &smithytraits.HTTPLabel{})
-
-	DeleteComponentTypeResponse_state = DeleteComponentTypeResponse.AddMember("state", _State)
-
-	DeleteEntityRequest_workspaceId = DeleteEntityRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	DeleteEntityRequest_entityId = DeleteEntityRequest.AddMember("entityId", _EntityId, &smithytraits.HTTPLabel{})
-
-	DeleteEntityRequest_isRecursive = DeleteEntityRequest.AddMember("isRecursive", _Boolean, &smithytraits.HTTPQuery{Name: "isRecursive"})
-
-	DeleteEntityResponse_state = DeleteEntityResponse.AddMember("state", _State)
-
-	DeleteSceneRequest_workspaceId = DeleteSceneRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	DeleteSceneRequest_sceneId = DeleteSceneRequest.AddMember("sceneId", _Id, &smithytraits.HTTPLabel{})
-
-	DeleteSyncJobRequest_workspaceId = DeleteSyncJobRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	DeleteSyncJobRequest_syncSource = DeleteSyncJobRequest.AddMember("syncSource", _SyncSource, &smithytraits.HTTPLabel{})
-
-	DeleteSyncJobResponse_state = DeleteSyncJobResponse.AddMember("state", _SyncJobState)
-
-	DeleteWorkspaceRequest_workspaceId = DeleteWorkspaceRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	DeleteWorkspaceResponse_message = DeleteWorkspaceResponse.AddMember("message", _WorkspaceDeleteMessage)
-
-	ExecuteQueryRequest_workspaceId = ExecuteQueryRequest.AddMember("workspaceId", _Id)
-
-	ExecuteQueryRequest_queryStatement = ExecuteQueryRequest.AddMember("queryStatement", _QueryStatement)
-
-	ExecuteQueryRequest_maxResults = ExecuteQueryRequest.AddMember("maxResults", _QueryServiceMaxResults)
-
-	ExecuteQueryRequest_nextToken = ExecuteQueryRequest.AddMember("nextToken", _NextToken)
-
-	ExecuteQueryResponse_columnDescriptions = ExecuteQueryResponse.AddMember("columnDescriptions", _ColumnDescriptions)
-
-	ExecuteQueryResponse_rows = ExecuteQueryResponse.AddMember("rows", _Rows)
-
-	ExecuteQueryResponse_nextToken = ExecuteQueryResponse.AddMember("nextToken", _NextToken)
-
-	GetComponentTypeRequest_workspaceId = GetComponentTypeRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	GetComponentTypeRequest_componentTypeId = GetComponentTypeRequest.AddMember("componentTypeId", _ComponentTypeId, &smithytraits.HTTPLabel{})
-
-	GetComponentTypeResponse_workspaceId = GetComponentTypeResponse.AddMember("workspaceId", _Id)
-
-	GetComponentTypeResponse_isSingleton = GetComponentTypeResponse.AddMember("isSingleton", _Boolean)
-
-	GetComponentTypeResponse_componentTypeId = GetComponentTypeResponse.AddMember("componentTypeId", _ComponentTypeId)
-
-	GetComponentTypeResponse_description = GetComponentTypeResponse.AddMember("description", _Description)
-
-	GetComponentTypeResponse_propertyDefinitions = GetComponentTypeResponse.AddMember("propertyDefinitions", _PropertyDefinitionsResponse)
-
-	GetComponentTypeResponse_extendsFrom = GetComponentTypeResponse.AddMember("extendsFrom", _ExtendsFrom)
-
-	GetComponentTypeResponse_functions = GetComponentTypeResponse.AddMember("functions", _FunctionsResponse)
-
-	GetComponentTypeResponse_creationDateTime = GetComponentTypeResponse.AddMember("creationDateTime", _Timestamp)
-
-	GetComponentTypeResponse_updateDateTime = GetComponentTypeResponse.AddMember("updateDateTime", _Timestamp)
-
-	GetComponentTypeResponse_arn = GetComponentTypeResponse.AddMember("arn", _TwinMakerArn)
-
-	GetComponentTypeResponse_isAbstract = GetComponentTypeResponse.AddMember("isAbstract", _Boolean)
-
-	GetComponentTypeResponse_isSchemaInitialized = GetComponentTypeResponse.AddMember("isSchemaInitialized", _Boolean)
-
-	GetComponentTypeResponse_status = GetComponentTypeResponse.AddMember("status", Status)
-
-	GetComponentTypeResponse_propertyGroups = GetComponentTypeResponse.AddMember("propertyGroups", _PropertyGroupsResponse)
-
-	GetComponentTypeResponse_syncSource = GetComponentTypeResponse.AddMember("syncSource", _SyncSource)
-
-	GetComponentTypeResponse_componentTypeName = GetComponentTypeResponse.AddMember("componentTypeName", _ComponentTypeName)
-
-	GetComponentTypeResponse_compositeComponentTypes = GetComponentTypeResponse.AddMember("compositeComponentTypes", _CompositeComponentTypesResponse)
-
-	GetEntityRequest_workspaceId = GetEntityRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	GetEntityRequest_entityId = GetEntityRequest.AddMember("entityId", _EntityId, &smithytraits.HTTPLabel{})
-
-	GetEntityResponse_entityId = GetEntityResponse.AddMember("entityId", _EntityId)
-
-	GetEntityResponse_entityName = GetEntityResponse.AddMember("entityName", _EntityName)
-
-	GetEntityResponse_arn = GetEntityResponse.AddMember("arn", _TwinMakerArn)
-
-	GetEntityResponse_status = GetEntityResponse.AddMember("status", Status)
-
-	GetEntityResponse_workspaceId = GetEntityResponse.AddMember("workspaceId", _Id)
-
-	GetEntityResponse_description = GetEntityResponse.AddMember("description", _Description)
-
-	GetEntityResponse_components = GetEntityResponse.AddMember("components", _ComponentsMap)
-
-	GetEntityResponse_parentEntityId = GetEntityResponse.AddMember("parentEntityId", _ParentEntityId)
-
-	GetEntityResponse_hasChildEntities = GetEntityResponse.AddMember("hasChildEntities", _Boolean)
-
-	GetEntityResponse_creationDateTime = GetEntityResponse.AddMember("creationDateTime", _Timestamp)
-
-	GetEntityResponse_updateDateTime = GetEntityResponse.AddMember("updateDateTime", _Timestamp)
-
-	GetEntityResponse_syncSource = GetEntityResponse.AddMember("syncSource", _SyncSource)
-
-	GetEntityResponse_areAllComponentsReturned = GetEntityResponse.AddMember("areAllComponentsReturned", _Boolean)
-
-	GetMetadataTransferJobRequest_metadataTransferJobId = GetMetadataTransferJobRequest.AddMember("metadataTransferJobId", _Id, &smithytraits.HTTPLabel{})
-
-	GetMetadataTransferJobResponse_metadataTransferJobId = GetMetadataTransferJobResponse.AddMember("metadataTransferJobId", _Id)
-
-	GetMetadataTransferJobResponse_arn = GetMetadataTransferJobResponse.AddMember("arn", _TwinMakerArn)
-
-	GetMetadataTransferJobResponse_description = GetMetadataTransferJobResponse.AddMember("description", _Description)
-
-	GetMetadataTransferJobResponse_sources = GetMetadataTransferJobResponse.AddMember("sources", _SourceConfigurations)
-
-	GetMetadataTransferJobResponse_destination = GetMetadataTransferJobResponse.AddMember("destination", DestinationConfiguration)
-
-	GetMetadataTransferJobResponse_metadataTransferJobRole = GetMetadataTransferJobResponse.AddMember("metadataTransferJobRole", _RoleArn)
-
-	GetMetadataTransferJobResponse_reportUrl = GetMetadataTransferJobResponse.AddMember("reportUrl", _String)
-
-	GetMetadataTransferJobResponse_creationDateTime = GetMetadataTransferJobResponse.AddMember("creationDateTime", _Timestamp)
-
-	GetMetadataTransferJobResponse_updateDateTime = GetMetadataTransferJobResponse.AddMember("updateDateTime", _Timestamp)
-
-	GetMetadataTransferJobResponse_status = GetMetadataTransferJobResponse.AddMember("status", MetadataTransferJobStatus)
-
-	GetMetadataTransferJobResponse_progress = GetMetadataTransferJobResponse.AddMember("progress", MetadataTransferJobProgress)
-
-	GetPricingPlanResponse_currentPricingPlan = GetPricingPlanResponse.AddMember("currentPricingPlan", PricingPlan)
-
-	GetPricingPlanResponse_pendingPricingPlan = GetPricingPlanResponse.AddMember("pendingPricingPlan", PricingPlan)
-
-	GetPropertyValueHistoryRequest_workspaceId = GetPropertyValueHistoryRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	GetPropertyValueHistoryRequest_entityId = GetPropertyValueHistoryRequest.AddMember("entityId", _EntityId)
-
-	GetPropertyValueHistoryRequest_componentName = GetPropertyValueHistoryRequest.AddMember("componentName", _Name)
-
-	GetPropertyValueHistoryRequest_componentPath = GetPropertyValueHistoryRequest.AddMember("componentPath", _ComponentPath)
-
-	GetPropertyValueHistoryRequest_componentTypeId = GetPropertyValueHistoryRequest.AddMember("componentTypeId", _ComponentTypeId)
-
-	GetPropertyValueHistoryRequest_selectedProperties = GetPropertyValueHistoryRequest.AddMember("selectedProperties", _SelectedPropertyList)
-
-	GetPropertyValueHistoryRequest_propertyFilters = GetPropertyValueHistoryRequest.AddMember("propertyFilters", _PropertyFilters)
-
-	GetPropertyValueHistoryRequest_startDateTime = GetPropertyValueHistoryRequest.AddMember("startDateTime", _Timestamp)
-
-	GetPropertyValueHistoryRequest_endDateTime = GetPropertyValueHistoryRequest.AddMember("endDateTime", _Timestamp)
-
-	GetPropertyValueHistoryRequest_interpolation = GetPropertyValueHistoryRequest.AddMember("interpolation", InterpolationParameters)
-
-	GetPropertyValueHistoryRequest_nextToken = GetPropertyValueHistoryRequest.AddMember("nextToken", _NextToken)
-
-	GetPropertyValueHistoryRequest_maxResults = GetPropertyValueHistoryRequest.AddMember("maxResults", _MaxResults)
-
-	GetPropertyValueHistoryRequest_orderByTime = GetPropertyValueHistoryRequest.AddMember("orderByTime", _OrderByTime)
-
-	GetPropertyValueHistoryRequest_startTime = GetPropertyValueHistoryRequest.AddMember("startTime", _Time)
-
-	GetPropertyValueHistoryRequest_endTime = GetPropertyValueHistoryRequest.AddMember("endTime", _Time)
-
-	GetPropertyValueHistoryResponse_propertyValues = GetPropertyValueHistoryResponse.AddMember("propertyValues", _PropertyValueList)
-
-	GetPropertyValueHistoryResponse_nextToken = GetPropertyValueHistoryResponse.AddMember("nextToken", _NextToken)
-
-	GetPropertyValueRequest_componentName = GetPropertyValueRequest.AddMember("componentName", _Name)
-
-	GetPropertyValueRequest_componentPath = GetPropertyValueRequest.AddMember("componentPath", _ComponentPath)
-
-	GetPropertyValueRequest_componentTypeId = GetPropertyValueRequest.AddMember("componentTypeId", _ComponentTypeId)
-
-	GetPropertyValueRequest_entityId = GetPropertyValueRequest.AddMember("entityId", _EntityId)
-
-	GetPropertyValueRequest_selectedProperties = GetPropertyValueRequest.AddMember("selectedProperties", _SelectedPropertyList)
-
-	GetPropertyValueRequest_workspaceId = GetPropertyValueRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	GetPropertyValueRequest_maxResults = GetPropertyValueRequest.AddMember("maxResults", _MaxResults)
-
-	GetPropertyValueRequest_nextToken = GetPropertyValueRequest.AddMember("nextToken", _NextToken)
-
-	GetPropertyValueRequest_propertyGroupName = GetPropertyValueRequest.AddMember("propertyGroupName", _Name)
-
-	GetPropertyValueRequest_tabularConditions = GetPropertyValueRequest.AddMember("tabularConditions", TabularConditions)
-
-	GetPropertyValueResponse_propertyValues = GetPropertyValueResponse.AddMember("propertyValues", _PropertyLatestValueMap)
-
-	GetPropertyValueResponse_nextToken = GetPropertyValueResponse.AddMember("nextToken", _NextToken)
-
-	GetPropertyValueResponse_tabularPropertyValues = GetPropertyValueResponse.AddMember("tabularPropertyValues", _TabularPropertyValues)
-
-	GetSceneRequest_workspaceId = GetSceneRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	GetSceneRequest_sceneId = GetSceneRequest.AddMember("sceneId", _Id, &smithytraits.HTTPLabel{})
-
-	GetSceneResponse_workspaceId = GetSceneResponse.AddMember("workspaceId", _Id)
-
-	GetSceneResponse_sceneId = GetSceneResponse.AddMember("sceneId", _Id)
-
-	GetSceneResponse_contentLocation = GetSceneResponse.AddMember("contentLocation", _S3Url)
-
-	GetSceneResponse_arn = GetSceneResponse.AddMember("arn", _TwinMakerArn)
-
-	GetSceneResponse_creationDateTime = GetSceneResponse.AddMember("creationDateTime", _Timestamp)
-
-	GetSceneResponse_updateDateTime = GetSceneResponse.AddMember("updateDateTime", _Timestamp)
-
-	GetSceneResponse_description = GetSceneResponse.AddMember("description", _Description)
-
-	GetSceneResponse_capabilities = GetSceneResponse.AddMember("capabilities", _SceneCapabilities)
-
-	GetSceneResponse_sceneMetadata = GetSceneResponse.AddMember("sceneMetadata", _SceneMetadataMap)
-
-	GetSceneResponse_generatedSceneMetadata = GetSceneResponse.AddMember("generatedSceneMetadata", _GeneratedSceneMetadataMap)
-
-	GetSceneResponse_error = GetSceneResponse.AddMember("error", SceneError)
-
-	GetSyncJobRequest_syncSource = GetSyncJobRequest.AddMember("syncSource", _SyncSource, &smithytraits.HTTPLabel{})
-
-	GetSyncJobRequest_workspaceId = GetSyncJobRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPQuery{Name: "workspace"})
-
-	GetSyncJobResponse_arn = GetSyncJobResponse.AddMember("arn", _TwinMakerArn)
-
-	GetSyncJobResponse_workspaceId = GetSyncJobResponse.AddMember("workspaceId", _Id)
-
-	GetSyncJobResponse_syncSource = GetSyncJobResponse.AddMember("syncSource", _SyncSource)
-
-	GetSyncJobResponse_syncRole = GetSyncJobResponse.AddMember("syncRole", _RoleArn)
-
-	GetSyncJobResponse_status = GetSyncJobResponse.AddMember("status", SyncJobStatus)
-
-	GetSyncJobResponse_creationDateTime = GetSyncJobResponse.AddMember("creationDateTime", _Timestamp)
-
-	GetSyncJobResponse_updateDateTime = GetSyncJobResponse.AddMember("updateDateTime", _Timestamp)
-
-	GetWorkspaceRequest_workspaceId = GetWorkspaceRequest.AddMember("workspaceId", _IdOrArn, &smithytraits.HTTPLabel{})
-
-	GetWorkspaceResponse_workspaceId = GetWorkspaceResponse.AddMember("workspaceId", _Id)
-
-	GetWorkspaceResponse_arn = GetWorkspaceResponse.AddMember("arn", _TwinMakerArn)
-
-	GetWorkspaceResponse_description = GetWorkspaceResponse.AddMember("description", _Description)
-
-	GetWorkspaceResponse_linkedServices = GetWorkspaceResponse.AddMember("linkedServices", _LinkedServices)
-
-	GetWorkspaceResponse_s3Location = GetWorkspaceResponse.AddMember("s3Location", _S3Location)
-
-	GetWorkspaceResponse_role = GetWorkspaceResponse.AddMember("role", _RoleArn)
-
-	GetWorkspaceResponse_creationDateTime = GetWorkspaceResponse.AddMember("creationDateTime", _Timestamp)
-
-	GetWorkspaceResponse_updateDateTime = GetWorkspaceResponse.AddMember("updateDateTime", _Timestamp)
-
-	ListComponentsRequest_workspaceId = ListComponentsRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	ListComponentsRequest_entityId = ListComponentsRequest.AddMember("entityId", _EntityId, &smithytraits.HTTPLabel{})
-
-	ListComponentsRequest_componentPath = ListComponentsRequest.AddMember("componentPath", _ComponentPath)
-
-	ListComponentsRequest_maxResults = ListComponentsRequest.AddMember("maxResults", _MaxResults)
-
-	ListComponentsRequest_nextToken = ListComponentsRequest.AddMember("nextToken", _NextToken)
-
-	ListComponentsResponse_componentSummaries = ListComponentsResponse.AddMember("componentSummaries", _ComponentSummaries)
-
-	ListComponentsResponse_nextToken = ListComponentsResponse.AddMember("nextToken", _NextToken)
-
-	ListComponentTypesRequest_workspaceId = ListComponentTypesRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	ListComponentTypesRequest_filters = ListComponentTypesRequest.AddMember("filters", _ListComponentTypesFilters)
-
-	ListComponentTypesRequest_nextToken = ListComponentTypesRequest.AddMember("nextToken", _NextToken)
-
-	ListComponentTypesRequest_maxResults = ListComponentTypesRequest.AddMember("maxResults", _MaxResults)
-
-	ListComponentTypesResponse_workspaceId = ListComponentTypesResponse.AddMember("workspaceId", _Id)
-
-	ListComponentTypesResponse_componentTypeSummaries = ListComponentTypesResponse.AddMember("componentTypeSummaries", _ComponentTypeSummaries)
-
-	ListComponentTypesResponse_nextToken = ListComponentTypesResponse.AddMember("nextToken", _NextToken)
-
-	ListComponentTypesResponse_maxResults = ListComponentTypesResponse.AddMember("maxResults", _MaxResults)
-
-	ListEntitiesRequest_workspaceId = ListEntitiesRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	ListEntitiesRequest_filters = ListEntitiesRequest.AddMember("filters", _ListEntitiesFilters)
-
-	ListEntitiesRequest_maxResults = ListEntitiesRequest.AddMember("maxResults", _MaxResults)
-
-	ListEntitiesRequest_nextToken = ListEntitiesRequest.AddMember("nextToken", _NextToken)
-
-	ListEntitiesResponse_entitySummaries = ListEntitiesResponse.AddMember("entitySummaries", _EntitySummaries)
-
-	ListEntitiesResponse_nextToken = ListEntitiesResponse.AddMember("nextToken", _NextToken)
-
-	ListMetadataTransferJobsRequest_sourceType = ListMetadataTransferJobsRequest.AddMember("sourceType", _SourceType)
-
-	ListMetadataTransferJobsRequest_destinationType = ListMetadataTransferJobsRequest.AddMember("destinationType", _DestinationType)
-
-	ListMetadataTransferJobsRequest_filters = ListMetadataTransferJobsRequest.AddMember("filters", _ListMetadataTransferJobsFilters)
-
-	ListMetadataTransferJobsRequest_nextToken = ListMetadataTransferJobsRequest.AddMember("nextToken", _NextToken)
-
-	ListMetadataTransferJobsRequest_maxResults = ListMetadataTransferJobsRequest.AddMember("maxResults", _MaxResults)
-
-	ListMetadataTransferJobsResponse_metadataTransferJobSummaries = ListMetadataTransferJobsResponse.AddMember("metadataTransferJobSummaries", _MetadataTransferJobSummaries)
-
-	ListMetadataTransferJobsResponse_nextToken = ListMetadataTransferJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListPropertiesRequest_workspaceId = ListPropertiesRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	ListPropertiesRequest_componentName = ListPropertiesRequest.AddMember("componentName", _Name)
-
-	ListPropertiesRequest_componentPath = ListPropertiesRequest.AddMember("componentPath", _ComponentPath)
-
-	ListPropertiesRequest_entityId = ListPropertiesRequest.AddMember("entityId", _EntityId)
-
-	ListPropertiesRequest_maxResults = ListPropertiesRequest.AddMember("maxResults", _MaxResults)
-
-	ListPropertiesRequest_nextToken = ListPropertiesRequest.AddMember("nextToken", _NextToken)
-
-	ListPropertiesResponse_propertySummaries = ListPropertiesResponse.AddMember("propertySummaries", _PropertySummaries)
-
-	ListPropertiesResponse_nextToken = ListPropertiesResponse.AddMember("nextToken", _NextToken)
-
-	ListScenesRequest_workspaceId = ListScenesRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	ListScenesRequest_maxResults = ListScenesRequest.AddMember("maxResults", _MaxResults)
-
-	ListScenesRequest_nextToken = ListScenesRequest.AddMember("nextToken", _NextToken)
-
-	ListScenesResponse_sceneSummaries = ListScenesResponse.AddMember("sceneSummaries", _SceneSummaries)
-
-	ListScenesResponse_nextToken = ListScenesResponse.AddMember("nextToken", _NextToken)
-
-	ListSyncJobsRequest_workspaceId = ListSyncJobsRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	ListSyncJobsRequest_maxResults = ListSyncJobsRequest.AddMember("maxResults", _MaxResults)
-
-	ListSyncJobsRequest_nextToken = ListSyncJobsRequest.AddMember("nextToken", _NextToken)
-
-	ListSyncJobsResponse_syncJobSummaries = ListSyncJobsResponse.AddMember("syncJobSummaries", _SyncJobSummaries)
-
-	ListSyncJobsResponse_nextToken = ListSyncJobsResponse.AddMember("nextToken", _NextToken)
-
-	ListSyncResourcesRequest_workspaceId = ListSyncResourcesRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	ListSyncResourcesRequest_syncSource = ListSyncResourcesRequest.AddMember("syncSource", _SyncSource, &smithytraits.HTTPLabel{})
-
-	ListSyncResourcesRequest_filters = ListSyncResourcesRequest.AddMember("filters", _SyncResourceFilters)
-
-	ListSyncResourcesRequest_maxResults = ListSyncResourcesRequest.AddMember("maxResults", _MaxResults)
-
-	ListSyncResourcesRequest_nextToken = ListSyncResourcesRequest.AddMember("nextToken", _NextToken)
-
-	ListSyncResourcesResponse_syncResources = ListSyncResourcesResponse.AddMember("syncResources", _SyncResourceSummaries)
-
-	ListSyncResourcesResponse_nextToken = ListSyncResourcesResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceARN = ListTagsForResourceRequest.AddMember("resourceARN", _TwinMakerArn)
-
-	ListTagsForResourceRequest_maxResults = ListTagsForResourceRequest.AddMember("maxResults", _MaxResults)
-
-	ListTagsForResourceRequest_nextToken = ListTagsForResourceRequest.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ListTagsForResourceResponse_nextToken = ListTagsForResourceResponse.AddMember("nextToken", _NextToken)
-
-	ListWorkspacesRequest_maxResults = ListWorkspacesRequest.AddMember("maxResults", _MaxResults)
-
-	ListWorkspacesRequest_nextToken = ListWorkspacesRequest.AddMember("nextToken", _NextToken)
-
-	ListWorkspacesResponse_workspaceSummaries = ListWorkspacesResponse.AddMember("workspaceSummaries", _WorkspaceSummaries)
-
-	ListWorkspacesResponse_nextToken = ListWorkspacesResponse.AddMember("nextToken", _NextToken)
-
-	TagResourceRequest_resourceARN = TagResourceRequest.AddMember("resourceARN", _TwinMakerArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceARN = UntagResourceRequest.AddMember("resourceARN", _TwinMakerArn, &smithytraits.HTTPQuery{Name: "resourceARN"})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateComponentTypeRequest_workspaceId = UpdateComponentTypeRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	UpdateComponentTypeRequest_isSingleton = UpdateComponentTypeRequest.AddMember("isSingleton", _Boolean)
-
-	UpdateComponentTypeRequest_componentTypeId = UpdateComponentTypeRequest.AddMember("componentTypeId", _ComponentTypeId, &smithytraits.HTTPLabel{})
-
-	UpdateComponentTypeRequest_description = UpdateComponentTypeRequest.AddMember("description", _Description)
-
-	UpdateComponentTypeRequest_propertyDefinitions = UpdateComponentTypeRequest.AddMember("propertyDefinitions", _PropertyDefinitionsRequest)
-
-	UpdateComponentTypeRequest_extendsFrom = UpdateComponentTypeRequest.AddMember("extendsFrom", _ExtendsFrom)
-
-	UpdateComponentTypeRequest_functions = UpdateComponentTypeRequest.AddMember("functions", _FunctionsRequest)
-
-	UpdateComponentTypeRequest_propertyGroups = UpdateComponentTypeRequest.AddMember("propertyGroups", _PropertyGroupsRequest)
-
-	UpdateComponentTypeRequest_componentTypeName = UpdateComponentTypeRequest.AddMember("componentTypeName", _ComponentTypeName)
-
-	UpdateComponentTypeRequest_compositeComponentTypes = UpdateComponentTypeRequest.AddMember("compositeComponentTypes", _CompositeComponentTypesRequest)
-
-	UpdateComponentTypeResponse_workspaceId = UpdateComponentTypeResponse.AddMember("workspaceId", _Id)
-
-	UpdateComponentTypeResponse_arn = UpdateComponentTypeResponse.AddMember("arn", _TwinMakerArn)
-
-	UpdateComponentTypeResponse_componentTypeId = UpdateComponentTypeResponse.AddMember("componentTypeId", _ComponentTypeId)
-
-	UpdateComponentTypeResponse_state = UpdateComponentTypeResponse.AddMember("state", _State)
-
-	UpdateEntityRequest_workspaceId = UpdateEntityRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	UpdateEntityRequest_entityId = UpdateEntityRequest.AddMember("entityId", _EntityId, &smithytraits.HTTPLabel{})
-
-	UpdateEntityRequest_entityName = UpdateEntityRequest.AddMember("entityName", _EntityName)
-
-	UpdateEntityRequest_description = UpdateEntityRequest.AddMember("description", _Description)
-
-	UpdateEntityRequest_componentUpdates = UpdateEntityRequest.AddMember("componentUpdates", _ComponentUpdatesMapRequest)
-
-	UpdateEntityRequest_compositeComponentUpdates = UpdateEntityRequest.AddMember("compositeComponentUpdates", _CompositeComponentUpdatesMapRequest)
-
-	UpdateEntityRequest_parentEntityUpdate = UpdateEntityRequest.AddMember("parentEntityUpdate", ParentEntityUpdateRequest)
-
-	UpdateEntityResponse_updateDateTime = UpdateEntityResponse.AddMember("updateDateTime", _Timestamp)
-
-	UpdateEntityResponse_state = UpdateEntityResponse.AddMember("state", _State)
-
-	UpdatePricingPlanRequest_pricingMode = UpdatePricingPlanRequest.AddMember("pricingMode", _PricingMode)
-
-	UpdatePricingPlanRequest_bundleNames = UpdatePricingPlanRequest.AddMember("bundleNames", _PricingBundles)
-
-	UpdatePricingPlanResponse_currentPricingPlan = UpdatePricingPlanResponse.AddMember("currentPricingPlan", PricingPlan)
-
-	UpdatePricingPlanResponse_pendingPricingPlan = UpdatePricingPlanResponse.AddMember("pendingPricingPlan", PricingPlan)
-
-	UpdateSceneRequest_workspaceId = UpdateSceneRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	UpdateSceneRequest_sceneId = UpdateSceneRequest.AddMember("sceneId", _Id, &smithytraits.HTTPLabel{})
-
-	UpdateSceneRequest_contentLocation = UpdateSceneRequest.AddMember("contentLocation", _S3Url)
-
-	UpdateSceneRequest_description = UpdateSceneRequest.AddMember("description", _Description)
-
-	UpdateSceneRequest_capabilities = UpdateSceneRequest.AddMember("capabilities", _SceneCapabilities)
-
-	UpdateSceneRequest_sceneMetadata = UpdateSceneRequest.AddMember("sceneMetadata", _SceneMetadataMap)
-
-	UpdateSceneResponse_updateDateTime = UpdateSceneResponse.AddMember("updateDateTime", _Timestamp)
-
-	UpdateWorkspaceRequest_workspaceId = UpdateWorkspaceRequest.AddMember("workspaceId", _Id, &smithytraits.HTTPLabel{})
-
-	UpdateWorkspaceRequest_description = UpdateWorkspaceRequest.AddMember("description", _Description)
-
-	UpdateWorkspaceRequest_role = UpdateWorkspaceRequest.AddMember("role", _RoleArn)
-
-	UpdateWorkspaceRequest_s3Location = UpdateWorkspaceRequest.AddMember("s3Location", _S3Location)
-
-	UpdateWorkspaceResponse_updateDateTime = UpdateWorkspaceResponse.AddMember("updateDateTime", _Timestamp)
-
+	sDataType_nestedType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nestedType", ID: &iDataType, Members: &mDataType, Type: smithy.ShapeTypeStructure})
+	s_DataValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
+	s_DataValueMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iDataValue, Members: &mDataValue, Type: smithy.ShapeTypeStructure})
 }
+
+var BatchPutPropertyValues = &sBatchPutPropertyValues
+
+var CancelMetadataTransferJob = &sCancelMetadataTransferJob
+
+var CreateComponentType = &sCreateComponentType
+
+var CreateEntity = &sCreateEntity
+
+var CreateMetadataTransferJob = &sCreateMetadataTransferJob
+
+var CreateScene = &sCreateScene
+
+var CreateSyncJob = &sCreateSyncJob
+
+var CreateWorkspace = &sCreateWorkspace
+
+var DeleteComponentType = &sDeleteComponentType
+
+var DeleteEntity = &sDeleteEntity
+
+var DeleteScene = &sDeleteScene
+
+var DeleteSyncJob = &sDeleteSyncJob
+
+var DeleteWorkspace = &sDeleteWorkspace
+
+var ExecuteQuery = &sExecuteQuery
+
+var GetComponentType = &sGetComponentType
+
+var GetEntity = &sGetEntity
+
+var GetMetadataTransferJob = &sGetMetadataTransferJob
+
+var GetPricingPlan = &sGetPricingPlan
+
+var GetPropertyValue = &sGetPropertyValue
+
+var GetPropertyValueHistory = &sGetPropertyValueHistory
+
+var GetScene = &sGetScene
+
+var GetSyncJob = &sGetSyncJob
+
+var GetWorkspace = &sGetWorkspace
+
+var ListComponents = &sListComponents
+
+var ListComponentTypes = &sListComponentTypes
+
+var ListEntities = &sListEntities
+
+var ListMetadataTransferJobs = &sListMetadataTransferJobs
+
+var ListProperties = &sListProperties
+
+var ListScenes = &sListScenes
+
+var ListSyncJobs = &sListSyncJobs
+
+var ListSyncResources = &sListSyncResources
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWorkspaces = &sListWorkspaces
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateComponentType = &sUpdateComponentType
+
+var UpdateEntity = &sUpdateEntity
+
+var UpdatePricingPlan = &sUpdatePricingPlan
+
+var UpdateScene = &sUpdateScene
+
+var UpdateWorkspace = &sUpdateWorkspace
+
+var _AWSIoTTwinMaker = &s_AWSIoTTwinMaker
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var BatchPutPropertyError = &sBatchPutPropertyError
+var BatchPutPropertyError_errorCode = &sBatchPutPropertyError_errorCode
+var BatchPutPropertyError_errorMessage = &sBatchPutPropertyError_errorMessage
+var BatchPutPropertyError_entry = &sBatchPutPropertyError_entry
+
+var BatchPutPropertyErrorEntry = &sBatchPutPropertyErrorEntry
+var BatchPutPropertyErrorEntry_errors = &sBatchPutPropertyErrorEntry_errors
+
+var _Boolean = &s_Boolean
+
+var BundleInformation = &sBundleInformation
+var BundleInformation_bundleNames = &sBundleInformation_bundleNames
+var BundleInformation_pricingTier = &sBundleInformation_pricingTier
+
+var _BundleName = &s_BundleName
+
+var ColumnDescription = &sColumnDescription
+var ColumnDescription_name = &sColumnDescription_name
+var ColumnDescription_type = &sColumnDescription_type
+
+var _ColumnDescriptions = &s_ColumnDescriptions
+var _ColumnDescriptions_member = &s_ColumnDescriptions_member
+
+var _ColumnName = &s_ColumnName
+
+var _ColumnType = &s_ColumnType
+
+var _ComponentPath = &s_ComponentPath
+
+var ComponentPropertyGroupRequest = &sComponentPropertyGroupRequest
+var ComponentPropertyGroupRequest_groupType = &sComponentPropertyGroupRequest_groupType
+var ComponentPropertyGroupRequest_propertyNames = &sComponentPropertyGroupRequest_propertyNames
+var ComponentPropertyGroupRequest_updateType = &sComponentPropertyGroupRequest_updateType
+
+var _ComponentPropertyGroupRequests = &s_ComponentPropertyGroupRequests
+var _ComponentPropertyGroupRequests_key = &s_ComponentPropertyGroupRequests_key
+var _ComponentPropertyGroupRequests_value = &s_ComponentPropertyGroupRequests_value
+
+var ComponentPropertyGroupResponse = &sComponentPropertyGroupResponse
+var ComponentPropertyGroupResponse_groupType = &sComponentPropertyGroupResponse_groupType
+var ComponentPropertyGroupResponse_propertyNames = &sComponentPropertyGroupResponse_propertyNames
+var ComponentPropertyGroupResponse_isInherited = &sComponentPropertyGroupResponse_isInherited
+
+var _ComponentPropertyGroupResponses = &s_ComponentPropertyGroupResponses
+var _ComponentPropertyGroupResponses_key = &s_ComponentPropertyGroupResponses_key
+var _ComponentPropertyGroupResponses_value = &s_ComponentPropertyGroupResponses_value
+
+var ComponentRequest = &sComponentRequest
+var ComponentRequest_description = &sComponentRequest_description
+var ComponentRequest_componentTypeId = &sComponentRequest_componentTypeId
+var ComponentRequest_properties = &sComponentRequest_properties
+var ComponentRequest_propertyGroups = &sComponentRequest_propertyGroups
+
+var ComponentResponse = &sComponentResponse
+var ComponentResponse_componentName = &sComponentResponse_componentName
+var ComponentResponse_description = &sComponentResponse_description
+var ComponentResponse_componentTypeId = &sComponentResponse_componentTypeId
+var ComponentResponse_status = &sComponentResponse_status
+var ComponentResponse_definedIn = &sComponentResponse_definedIn
+var ComponentResponse_properties = &sComponentResponse_properties
+var ComponentResponse_propertyGroups = &sComponentResponse_propertyGroups
+var ComponentResponse_syncSource = &sComponentResponse_syncSource
+var ComponentResponse_areAllPropertiesReturned = &sComponentResponse_areAllPropertiesReturned
+var ComponentResponse_compositeComponents = &sComponentResponse_compositeComponents
+var ComponentResponse_areAllCompositeComponentsReturned = &sComponentResponse_areAllCompositeComponentsReturned
+
+var _ComponentsMap = &s_ComponentsMap
+var _ComponentsMap_key = &s_ComponentsMap_key
+var _ComponentsMap_value = &s_ComponentsMap_value
+
+var _ComponentsMapRequest = &s_ComponentsMapRequest
+var _ComponentsMapRequest_key = &s_ComponentsMapRequest_key
+var _ComponentsMapRequest_value = &s_ComponentsMapRequest_value
+
+var _ComponentSummaries = &s_ComponentSummaries
+var _ComponentSummaries_member = &s_ComponentSummaries_member
+
+var ComponentSummary = &sComponentSummary
+var ComponentSummary_componentName = &sComponentSummary_componentName
+var ComponentSummary_componentTypeId = &sComponentSummary_componentTypeId
+var ComponentSummary_definedIn = &sComponentSummary_definedIn
+var ComponentSummary_description = &sComponentSummary_description
+var ComponentSummary_propertyGroups = &sComponentSummary_propertyGroups
+var ComponentSummary_status = &sComponentSummary_status
+var ComponentSummary_syncSource = &sComponentSummary_syncSource
+var ComponentSummary_componentPath = &sComponentSummary_componentPath
+
+var _ComponentTypeId = &s_ComponentTypeId
+
+var _ComponentTypeName = &s_ComponentTypeName
+
+var _ComponentTypeSummaries = &s_ComponentTypeSummaries
+var _ComponentTypeSummaries_member = &s_ComponentTypeSummaries_member
+
+var ComponentTypeSummary = &sComponentTypeSummary
+var ComponentTypeSummary_arn = &sComponentTypeSummary_arn
+var ComponentTypeSummary_componentTypeId = &sComponentTypeSummary_componentTypeId
+var ComponentTypeSummary_creationDateTime = &sComponentTypeSummary_creationDateTime
+var ComponentTypeSummary_updateDateTime = &sComponentTypeSummary_updateDateTime
+var ComponentTypeSummary_description = &sComponentTypeSummary_description
+var ComponentTypeSummary_status = &sComponentTypeSummary_status
+var ComponentTypeSummary_componentTypeName = &sComponentTypeSummary_componentTypeName
+
+var ComponentUpdateRequest = &sComponentUpdateRequest
+var ComponentUpdateRequest_updateType = &sComponentUpdateRequest_updateType
+var ComponentUpdateRequest_description = &sComponentUpdateRequest_description
+var ComponentUpdateRequest_componentTypeId = &sComponentUpdateRequest_componentTypeId
+var ComponentUpdateRequest_propertyUpdates = &sComponentUpdateRequest_propertyUpdates
+var ComponentUpdateRequest_propertyGroupUpdates = &sComponentUpdateRequest_propertyGroupUpdates
+
+var _ComponentUpdatesMapRequest = &s_ComponentUpdatesMapRequest
+var _ComponentUpdatesMapRequest_key = &s_ComponentUpdatesMapRequest_key
+var _ComponentUpdatesMapRequest_value = &s_ComponentUpdatesMapRequest_value
+
+var _ComponentUpdateType = &s_ComponentUpdateType
+
+var CompositeComponentRequest = &sCompositeComponentRequest
+var CompositeComponentRequest_description = &sCompositeComponentRequest_description
+var CompositeComponentRequest_properties = &sCompositeComponentRequest_properties
+var CompositeComponentRequest_propertyGroups = &sCompositeComponentRequest_propertyGroups
+
+var _CompositeComponentResponse = &s_CompositeComponentResponse
+var _CompositeComponentResponse_key = &s_CompositeComponentResponse_key
+var _CompositeComponentResponse_value = &s_CompositeComponentResponse_value
+
+var _CompositeComponentsMapRequest = &s_CompositeComponentsMapRequest
+var _CompositeComponentsMapRequest_key = &s_CompositeComponentsMapRequest_key
+var _CompositeComponentsMapRequest_value = &s_CompositeComponentsMapRequest_value
+
+var CompositeComponentTypeRequest = &sCompositeComponentTypeRequest
+var CompositeComponentTypeRequest_componentTypeId = &sCompositeComponentTypeRequest_componentTypeId
+
+var CompositeComponentTypeResponse = &sCompositeComponentTypeResponse
+var CompositeComponentTypeResponse_componentTypeId = &sCompositeComponentTypeResponse_componentTypeId
+var CompositeComponentTypeResponse_isInherited = &sCompositeComponentTypeResponse_isInherited
+
+var _CompositeComponentTypesRequest = &s_CompositeComponentTypesRequest
+var _CompositeComponentTypesRequest_key = &s_CompositeComponentTypesRequest_key
+var _CompositeComponentTypesRequest_value = &s_CompositeComponentTypesRequest_value
+
+var _CompositeComponentTypesResponse = &s_CompositeComponentTypesResponse
+var _CompositeComponentTypesResponse_key = &s_CompositeComponentTypesResponse_key
+var _CompositeComponentTypesResponse_value = &s_CompositeComponentTypesResponse_value
+
+var CompositeComponentUpdateRequest = &sCompositeComponentUpdateRequest
+var CompositeComponentUpdateRequest_updateType = &sCompositeComponentUpdateRequest_updateType
+var CompositeComponentUpdateRequest_description = &sCompositeComponentUpdateRequest_description
+var CompositeComponentUpdateRequest_propertyUpdates = &sCompositeComponentUpdateRequest_propertyUpdates
+var CompositeComponentUpdateRequest_propertyGroupUpdates = &sCompositeComponentUpdateRequest_propertyGroupUpdates
+
+var _CompositeComponentUpdatesMapRequest = &s_CompositeComponentUpdatesMapRequest
+var _CompositeComponentUpdatesMapRequest_key = &s_CompositeComponentUpdatesMapRequest_key
+var _CompositeComponentUpdatesMapRequest_value = &s_CompositeComponentUpdatesMapRequest_value
+
+var _Configuration = &s_Configuration
+var _Configuration_key = &s_Configuration_key
+var _Configuration_value = &s_Configuration_value
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ConnectorFailureException = &sConnectorFailureException
+var ConnectorFailureException_message = &sConnectorFailureException_message
+
+var ConnectorTimeoutException = &sConnectorTimeoutException
+var ConnectorTimeoutException_message = &sConnectorTimeoutException_message
+
+var DataConnector = &sDataConnector
+var DataConnector_lambda = &sDataConnector_lambda
+var DataConnector_isNative = &sDataConnector_isNative
+
+var DataType = &sDataType
+var DataType_type = &sDataType_type
+var DataType_nestedType = &sDataType_nestedType
+var DataType_allowedValues = &sDataType_allowedValues
+var DataType_unitOfMeasure = &sDataType_unitOfMeasure
+var DataType_relationship = &sDataType_relationship
+
+var DataValue = &sDataValue
+var DataValue_booleanValue = &sDataValue_booleanValue
+var DataValue_doubleValue = &sDataValue_doubleValue
+var DataValue_integerValue = &sDataValue_integerValue
+var DataValue_longValue = &sDataValue_longValue
+var DataValue_stringValue = &sDataValue_stringValue
+var DataValue_listValue = &sDataValue_listValue
+var DataValue_mapValue = &sDataValue_mapValue
+var DataValue_relationshipValue = &sDataValue_relationshipValue
+var DataValue_expression = &sDataValue_expression
+
+var _DataValueList = &s_DataValueList
+var _DataValueList_member = &s_DataValueList_member
+
+var _DataValueMap = &s_DataValueMap
+var _DataValueMap_key = &s_DataValueMap_key
+var _DataValueMap_value = &s_DataValueMap_value
+
+var _Description = &s_Description
+
+var DestinationConfiguration = &sDestinationConfiguration
+var DestinationConfiguration_type = &sDestinationConfiguration_type
+var DestinationConfiguration_s3Configuration = &sDestinationConfiguration_s3Configuration
+var DestinationConfiguration_iotTwinMakerConfiguration = &sDestinationConfiguration_iotTwinMakerConfiguration
+
+var _DestinationType = &s_DestinationType
+
+var _Double = &s_Double
+
+var _EntityId = &s_EntityId
+
+var _EntityName = &s_EntityName
+
+var EntityPropertyReference = &sEntityPropertyReference
+var EntityPropertyReference_componentName = &sEntityPropertyReference_componentName
+var EntityPropertyReference_componentPath = &sEntityPropertyReference_componentPath
+var EntityPropertyReference_externalIdProperty = &sEntityPropertyReference_externalIdProperty
+var EntityPropertyReference_entityId = &sEntityPropertyReference_entityId
+var EntityPropertyReference_propertyName = &sEntityPropertyReference_propertyName
+
+var _EntitySummaries = &s_EntitySummaries
+var _EntitySummaries_member = &s_EntitySummaries_member
+
+var EntitySummary = &sEntitySummary
+var EntitySummary_entityId = &sEntitySummary_entityId
+var EntitySummary_entityName = &sEntitySummary_entityName
+var EntitySummary_arn = &sEntitySummary_arn
+var EntitySummary_parentEntityId = &sEntitySummary_parentEntityId
+var EntitySummary_status = &sEntitySummary_status
+var EntitySummary_description = &sEntitySummary_description
+var EntitySummary_hasChildEntities = &sEntitySummary_hasChildEntities
+var EntitySummary_creationDateTime = &sEntitySummary_creationDateTime
+var EntitySummary_updateDateTime = &sEntitySummary_updateDateTime
+
+var _Entries = &s_Entries
+var _Entries_member = &s_Entries_member
+
+var _ErrorCode = &s_ErrorCode
+
+var ErrorDetails = &sErrorDetails
+var ErrorDetails_code = &sErrorDetails_code
+var ErrorDetails_message = &sErrorDetails_message
+
+var _ErrorEntries = &s_ErrorEntries
+var _ErrorEntries_member = &s_ErrorEntries_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Errors = &s_Errors
+var _Errors_member = &s_Errors_member
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _Expression = &s_Expression
+
+var _ExtendsFrom = &s_ExtendsFrom
+var _ExtendsFrom_member = &s_ExtendsFrom_member
+
+var _ExternalIdProperty = &s_ExternalIdProperty
+var _ExternalIdProperty_key = &s_ExternalIdProperty_key
+var _ExternalIdProperty_value = &s_ExternalIdProperty_value
+
+var FilterByAsset = &sFilterByAsset
+var FilterByAsset_assetId = &sFilterByAsset_assetId
+var FilterByAsset_assetExternalId = &sFilterByAsset_assetExternalId
+var FilterByAsset_includeOffspring = &sFilterByAsset_includeOffspring
+var FilterByAsset_includeAssetModel = &sFilterByAsset_includeAssetModel
+
+var FilterByAssetModel = &sFilterByAssetModel
+var FilterByAssetModel_assetModelId = &sFilterByAssetModel_assetModelId
+var FilterByAssetModel_assetModelExternalId = &sFilterByAssetModel_assetModelExternalId
+var FilterByAssetModel_includeOffspring = &sFilterByAssetModel_includeOffspring
+var FilterByAssetModel_includeAssets = &sFilterByAssetModel_includeAssets
+
+var FilterByComponentType = &sFilterByComponentType
+var FilterByComponentType_componentTypeId = &sFilterByComponentType_componentTypeId
+
+var FilterByEntity = &sFilterByEntity
+var FilterByEntity_entityId = &sFilterByEntity_entityId
+
+var FunctionRequest = &sFunctionRequest
+var FunctionRequest_requiredProperties = &sFunctionRequest_requiredProperties
+var FunctionRequest_scope = &sFunctionRequest_scope
+var FunctionRequest_implementedBy = &sFunctionRequest_implementedBy
+
+var FunctionResponse = &sFunctionResponse
+var FunctionResponse_requiredProperties = &sFunctionResponse_requiredProperties
+var FunctionResponse_scope = &sFunctionResponse_scope
+var FunctionResponse_implementedBy = &sFunctionResponse_implementedBy
+var FunctionResponse_isInherited = &sFunctionResponse_isInherited
+
+var _FunctionsRequest = &s_FunctionsRequest
+var _FunctionsRequest_key = &s_FunctionsRequest_key
+var _FunctionsRequest_value = &s_FunctionsRequest_value
+
+var _FunctionsResponse = &s_FunctionsResponse
+var _FunctionsResponse_key = &s_FunctionsResponse_key
+var _FunctionsResponse_value = &s_FunctionsResponse_value
+
+var _GeneratedSceneMetadataMap = &s_GeneratedSceneMetadataMap
+var _GeneratedSceneMetadataMap_key = &s_GeneratedSceneMetadataMap_key
+var _GeneratedSceneMetadataMap_value = &s_GeneratedSceneMetadataMap_value
+
+var _GroupType = &s_GroupType
+
+var _Id = &s_Id
+
+var _IdOrArn = &s_IdOrArn
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var InterpolationParameters = &sInterpolationParameters
+var InterpolationParameters_interpolationType = &sInterpolationParameters_interpolationType
+var InterpolationParameters_intervalInSeconds = &sInterpolationParameters_intervalInSeconds
+
+var _InterpolationType = &s_InterpolationType
+
+var _IntervalInSeconds = &s_IntervalInSeconds
+
+var IotSiteWiseSourceConfiguration = &sIotSiteWiseSourceConfiguration
+var IotSiteWiseSourceConfiguration_filters = &sIotSiteWiseSourceConfiguration_filters
+
+var IotSiteWiseSourceConfigurationFilter = &sIotSiteWiseSourceConfigurationFilter
+var IotSiteWiseSourceConfigurationFilter_filterByAssetModel = &sIotSiteWiseSourceConfigurationFilter_filterByAssetModel
+var IotSiteWiseSourceConfigurationFilter_filterByAsset = &sIotSiteWiseSourceConfigurationFilter_filterByAsset
+
+var _IotSiteWiseSourceConfigurationFilters = &s_IotSiteWiseSourceConfigurationFilters
+var _IotSiteWiseSourceConfigurationFilters_member = &s_IotSiteWiseSourceConfigurationFilters_member
+
+var IotTwinMakerDestinationConfiguration = &sIotTwinMakerDestinationConfiguration
+var IotTwinMakerDestinationConfiguration_workspace = &sIotTwinMakerDestinationConfiguration_workspace
+
+var IotTwinMakerSourceConfiguration = &sIotTwinMakerSourceConfiguration
+var IotTwinMakerSourceConfiguration_workspace = &sIotTwinMakerSourceConfiguration_workspace
+var IotTwinMakerSourceConfiguration_filters = &sIotTwinMakerSourceConfiguration_filters
+
+var IotTwinMakerSourceConfigurationFilter = &sIotTwinMakerSourceConfigurationFilter
+var IotTwinMakerSourceConfigurationFilter_filterByComponentType = &sIotTwinMakerSourceConfigurationFilter_filterByComponentType
+var IotTwinMakerSourceConfigurationFilter_filterByEntity = &sIotTwinMakerSourceConfigurationFilter_filterByEntity
+
+var _IotTwinMakerSourceConfigurationFilters = &s_IotTwinMakerSourceConfigurationFilters
+var _IotTwinMakerSourceConfigurationFilters_member = &s_IotTwinMakerSourceConfigurationFilters_member
+
+var _LambdaArn = &s_LambdaArn
+
+var LambdaFunction = &sLambdaFunction
+var LambdaFunction_arn = &sLambdaFunction_arn
+
+var _LinkedService = &s_LinkedService
+
+var _LinkedServices = &s_LinkedServices
+var _LinkedServices_member = &s_LinkedServices_member
+
+var ListComponentTypesFilter = &sListComponentTypesFilter
+var ListComponentTypesFilter_extendsFrom = &sListComponentTypesFilter_extendsFrom
+var ListComponentTypesFilter_namespace = &sListComponentTypesFilter_namespace
+var ListComponentTypesFilter_isAbstract = &sListComponentTypesFilter_isAbstract
+
+var _ListComponentTypesFilters = &s_ListComponentTypesFilters
+var _ListComponentTypesFilters_member = &s_ListComponentTypesFilters_member
+
+var ListEntitiesFilter = &sListEntitiesFilter
+var ListEntitiesFilter_parentEntityId = &sListEntitiesFilter_parentEntityId
+var ListEntitiesFilter_componentTypeId = &sListEntitiesFilter_componentTypeId
+var ListEntitiesFilter_externalId = &sListEntitiesFilter_externalId
+
+var _ListEntitiesFilters = &s_ListEntitiesFilters
+var _ListEntitiesFilters_member = &s_ListEntitiesFilters_member
+
+var ListMetadataTransferJobsFilter = &sListMetadataTransferJobsFilter
+var ListMetadataTransferJobsFilter_workspaceId = &sListMetadataTransferJobsFilter_workspaceId
+var ListMetadataTransferJobsFilter_state = &sListMetadataTransferJobsFilter_state
+
+var _ListMetadataTransferJobsFilters = &s_ListMetadataTransferJobsFilters
+var _ListMetadataTransferJobsFilters_member = &s_ListMetadataTransferJobsFilters_member
+
+var _Long = &s_Long
+
+var _MaxResults = &s_MaxResults
+
+var MetadataTransferJobProgress = &sMetadataTransferJobProgress
+var MetadataTransferJobProgress_totalCount = &sMetadataTransferJobProgress_totalCount
+var MetadataTransferJobProgress_succeededCount = &sMetadataTransferJobProgress_succeededCount
+var MetadataTransferJobProgress_skippedCount = &sMetadataTransferJobProgress_skippedCount
+var MetadataTransferJobProgress_failedCount = &sMetadataTransferJobProgress_failedCount
+
+var _MetadataTransferJobState = &s_MetadataTransferJobState
+
+var MetadataTransferJobStatus = &sMetadataTransferJobStatus
+var MetadataTransferJobStatus_state = &sMetadataTransferJobStatus_state
+var MetadataTransferJobStatus_error = &sMetadataTransferJobStatus_error
+var MetadataTransferJobStatus_queuedPosition = &sMetadataTransferJobStatus_queuedPosition
+
+var _MetadataTransferJobSummaries = &s_MetadataTransferJobSummaries
+var _MetadataTransferJobSummaries_member = &s_MetadataTransferJobSummaries_member
+
+var MetadataTransferJobSummary = &sMetadataTransferJobSummary
+var MetadataTransferJobSummary_metadataTransferJobId = &sMetadataTransferJobSummary_metadataTransferJobId
+var MetadataTransferJobSummary_arn = &sMetadataTransferJobSummary_arn
+var MetadataTransferJobSummary_creationDateTime = &sMetadataTransferJobSummary_creationDateTime
+var MetadataTransferJobSummary_updateDateTime = &sMetadataTransferJobSummary_updateDateTime
+var MetadataTransferJobSummary_status = &sMetadataTransferJobSummary_status
+var MetadataTransferJobSummary_progress = &sMetadataTransferJobSummary_progress
+
+var _Name = &s_Name
+
+var _NextToken = &s_NextToken
+
+var _Order = &s_Order
+
+var OrderBy = &sOrderBy
+var OrderBy_order = &sOrderBy_order
+var OrderBy_propertyName = &sOrderBy_propertyName
+
+var _OrderByList = &s_OrderByList
+var _OrderByList_member = &s_OrderByList_member
+
+var _OrderByTime = &s_OrderByTime
+
+var _ParentEntityId = &s_ParentEntityId
+
+var ParentEntityUpdateRequest = &sParentEntityUpdateRequest
+var ParentEntityUpdateRequest_updateType = &sParentEntityUpdateRequest_updateType
+var ParentEntityUpdateRequest_parentEntityId = &sParentEntityUpdateRequest_parentEntityId
+
+var _ParentEntityUpdateType = &s_ParentEntityUpdateType
+
+var _PricingBundles = &s_PricingBundles
+var _PricingBundles_member = &s_PricingBundles_member
+
+var _PricingMode = &s_PricingMode
+
+var PricingPlan = &sPricingPlan
+var PricingPlan_billableEntityCount = &sPricingPlan_billableEntityCount
+var PricingPlan_bundleInformation = &sPricingPlan_bundleInformation
+var PricingPlan_effectiveDateTime = &sPricingPlan_effectiveDateTime
+var PricingPlan_pricingMode = &sPricingPlan_pricingMode
+var PricingPlan_updateDateTime = &sPricingPlan_updateDateTime
+var PricingPlan_updateReason = &sPricingPlan_updateReason
+
+var _PricingTier = &s_PricingTier
+
+var PropertyDefinitionRequest = &sPropertyDefinitionRequest
+var PropertyDefinitionRequest_dataType = &sPropertyDefinitionRequest_dataType
+var PropertyDefinitionRequest_isRequiredInEntity = &sPropertyDefinitionRequest_isRequiredInEntity
+var PropertyDefinitionRequest_isExternalId = &sPropertyDefinitionRequest_isExternalId
+var PropertyDefinitionRequest_isStoredExternally = &sPropertyDefinitionRequest_isStoredExternally
+var PropertyDefinitionRequest_isTimeSeries = &sPropertyDefinitionRequest_isTimeSeries
+var PropertyDefinitionRequest_defaultValue = &sPropertyDefinitionRequest_defaultValue
+var PropertyDefinitionRequest_configuration = &sPropertyDefinitionRequest_configuration
+var PropertyDefinitionRequest_displayName = &sPropertyDefinitionRequest_displayName
+
+var PropertyDefinitionResponse = &sPropertyDefinitionResponse
+var PropertyDefinitionResponse_dataType = &sPropertyDefinitionResponse_dataType
+var PropertyDefinitionResponse_isTimeSeries = &sPropertyDefinitionResponse_isTimeSeries
+var PropertyDefinitionResponse_isRequiredInEntity = &sPropertyDefinitionResponse_isRequiredInEntity
+var PropertyDefinitionResponse_isExternalId = &sPropertyDefinitionResponse_isExternalId
+var PropertyDefinitionResponse_isStoredExternally = &sPropertyDefinitionResponse_isStoredExternally
+var PropertyDefinitionResponse_isImported = &sPropertyDefinitionResponse_isImported
+var PropertyDefinitionResponse_isFinal = &sPropertyDefinitionResponse_isFinal
+var PropertyDefinitionResponse_isInherited = &sPropertyDefinitionResponse_isInherited
+var PropertyDefinitionResponse_defaultValue = &sPropertyDefinitionResponse_defaultValue
+var PropertyDefinitionResponse_configuration = &sPropertyDefinitionResponse_configuration
+var PropertyDefinitionResponse_displayName = &sPropertyDefinitionResponse_displayName
+
+var _PropertyDefinitionsRequest = &s_PropertyDefinitionsRequest
+var _PropertyDefinitionsRequest_key = &s_PropertyDefinitionsRequest_key
+var _PropertyDefinitionsRequest_value = &s_PropertyDefinitionsRequest_value
+
+var _PropertyDefinitionsResponse = &s_PropertyDefinitionsResponse
+var _PropertyDefinitionsResponse_key = &s_PropertyDefinitionsResponse_key
+var _PropertyDefinitionsResponse_value = &s_PropertyDefinitionsResponse_value
+
+var _PropertyDisplayName = &s_PropertyDisplayName
+
+var PropertyFilter = &sPropertyFilter
+var PropertyFilter_propertyName = &sPropertyFilter_propertyName
+var PropertyFilter_operator = &sPropertyFilter_operator
+var PropertyFilter_value = &sPropertyFilter_value
+
+var _PropertyFilters = &s_PropertyFilters
+var _PropertyFilters_member = &s_PropertyFilters_member
+
+var PropertyGroupRequest = &sPropertyGroupRequest
+var PropertyGroupRequest_groupType = &sPropertyGroupRequest_groupType
+var PropertyGroupRequest_propertyNames = &sPropertyGroupRequest_propertyNames
+
+var PropertyGroupResponse = &sPropertyGroupResponse
+var PropertyGroupResponse_groupType = &sPropertyGroupResponse_groupType
+var PropertyGroupResponse_propertyNames = &sPropertyGroupResponse_propertyNames
+var PropertyGroupResponse_isInherited = &sPropertyGroupResponse_isInherited
+
+var _PropertyGroupsRequest = &s_PropertyGroupsRequest
+var _PropertyGroupsRequest_key = &s_PropertyGroupsRequest_key
+var _PropertyGroupsRequest_value = &s_PropertyGroupsRequest_value
+
+var _PropertyGroupsResponse = &s_PropertyGroupsResponse
+var _PropertyGroupsResponse_key = &s_PropertyGroupsResponse_key
+var _PropertyGroupsResponse_value = &s_PropertyGroupsResponse_value
+
+var _PropertyGroupUpdateType = &s_PropertyGroupUpdateType
+
+var PropertyLatestValue = &sPropertyLatestValue
+var PropertyLatestValue_propertyReference = &sPropertyLatestValue_propertyReference
+var PropertyLatestValue_propertyValue = &sPropertyLatestValue_propertyValue
+
+var _PropertyLatestValueMap = &s_PropertyLatestValueMap
+var _PropertyLatestValueMap_key = &s_PropertyLatestValueMap_key
+var _PropertyLatestValueMap_value = &s_PropertyLatestValueMap_value
+
+var _PropertyNames = &s_PropertyNames
+var _PropertyNames_member = &s_PropertyNames_member
+
+var PropertyRequest = &sPropertyRequest
+var PropertyRequest_definition = &sPropertyRequest_definition
+var PropertyRequest_value = &sPropertyRequest_value
+var PropertyRequest_updateType = &sPropertyRequest_updateType
+
+var _PropertyRequests = &s_PropertyRequests
+var _PropertyRequests_key = &s_PropertyRequests_key
+var _PropertyRequests_value = &s_PropertyRequests_value
+
+var PropertyResponse = &sPropertyResponse
+var PropertyResponse_definition = &sPropertyResponse_definition
+var PropertyResponse_value = &sPropertyResponse_value
+var PropertyResponse_areAllPropertyValuesReturned = &sPropertyResponse_areAllPropertyValuesReturned
+
+var _PropertyResponses = &s_PropertyResponses
+var _PropertyResponses_key = &s_PropertyResponses_key
+var _PropertyResponses_value = &s_PropertyResponses_value
+
+var _PropertySummaries = &s_PropertySummaries
+var _PropertySummaries_member = &s_PropertySummaries_member
+
+var PropertySummary = &sPropertySummary
+var PropertySummary_definition = &sPropertySummary_definition
+var PropertySummary_propertyName = &sPropertySummary_propertyName
+var PropertySummary_value = &sPropertySummary_value
+var PropertySummary_areAllPropertyValuesReturned = &sPropertySummary_areAllPropertyValuesReturned
+
+var _PropertyTableValue = &s_PropertyTableValue
+var _PropertyTableValue_key = &s_PropertyTableValue_key
+var _PropertyTableValue_value = &s_PropertyTableValue_value
+
+var _PropertyUpdateType = &s_PropertyUpdateType
+
+var PropertyValue = &sPropertyValue
+var PropertyValue_timestamp = &sPropertyValue_timestamp
+var PropertyValue_value = &sPropertyValue_value
+var PropertyValue_time = &sPropertyValue_time
+
+var PropertyValueEntry = &sPropertyValueEntry
+var PropertyValueEntry_entityPropertyReference = &sPropertyValueEntry_entityPropertyReference
+var PropertyValueEntry_propertyValues = &sPropertyValueEntry_propertyValues
+
+var PropertyValueHistory = &sPropertyValueHistory
+var PropertyValueHistory_entityPropertyReference = &sPropertyValueHistory_entityPropertyReference
+var PropertyValueHistory_values = &sPropertyValueHistory_values
+
+var _PropertyValueList = &s_PropertyValueList
+var _PropertyValueList_member = &s_PropertyValueList_member
+
+var _PropertyValues = &s_PropertyValues
+var _PropertyValues_member = &s_PropertyValues_member
+
+var _QueryResultValue = &s_QueryResultValue
+
+var _QueryServiceMaxResults = &s_QueryServiceMaxResults
+
+var _QueryStatement = &s_QueryStatement
+
+var QueryTimeoutException = &sQueryTimeoutException
+var QueryTimeoutException_message = &sQueryTimeoutException_message
+
+var Relationship = &sRelationship
+var Relationship_targetComponentTypeId = &sRelationship_targetComponentTypeId
+var Relationship_relationshipType = &sRelationship_relationshipType
+
+var RelationshipValue = &sRelationshipValue
+var RelationshipValue_targetEntityId = &sRelationshipValue_targetEntityId
+var RelationshipValue_targetComponentName = &sRelationshipValue_targetComponentName
+
+var _RequiredProperties = &s_RequiredProperties
+var _RequiredProperties_member = &s_RequiredProperties_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var Row = &sRow
+var Row_rowData = &sRow_rowData
+
+var _RowData = &s_RowData
+var _RowData_member = &s_RowData_member
+
+var _Rows = &s_Rows
+var _Rows_member = &s_Rows_member
+
+var S3DestinationConfiguration = &sS3DestinationConfiguration
+var S3DestinationConfiguration_location = &sS3DestinationConfiguration_location
+
+var _S3DestinationLocation = &s_S3DestinationLocation
+
+var _S3Location = &s_S3Location
+
+var S3SourceConfiguration = &sS3SourceConfiguration
+var S3SourceConfiguration_location = &sS3SourceConfiguration_location
+
+var _S3SourceLocation = &s_S3SourceLocation
+
+var _S3Url = &s_S3Url
+
+var _SceneCapabilities = &s_SceneCapabilities
+var _SceneCapabilities_member = &s_SceneCapabilities_member
+
+var _SceneCapability = &s_SceneCapability
+
+var SceneError = &sSceneError
+var SceneError_code = &sSceneError_code
+var SceneError_message = &sSceneError_message
+
+var _SceneErrorCode = &s_SceneErrorCode
+
+var _SceneMetadataMap = &s_SceneMetadataMap
+var _SceneMetadataMap_key = &s_SceneMetadataMap_key
+var _SceneMetadataMap_value = &s_SceneMetadataMap_value
+
+var _SceneMetadataValue = &s_SceneMetadataValue
+
+var _SceneSummaries = &s_SceneSummaries
+var _SceneSummaries_member = &s_SceneSummaries_member
+
+var SceneSummary = &sSceneSummary
+var SceneSummary_sceneId = &sSceneSummary_sceneId
+var SceneSummary_contentLocation = &sSceneSummary_contentLocation
+var SceneSummary_arn = &sSceneSummary_arn
+var SceneSummary_creationDateTime = &sSceneSummary_creationDateTime
+var SceneSummary_updateDateTime = &sSceneSummary_updateDateTime
+var SceneSummary_description = &sSceneSummary_description
+
+var _Scope = &s_Scope
+
+var _SelectedPropertyList = &s_SelectedPropertyList
+var _SelectedPropertyList_member = &s_SelectedPropertyList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _SiteWiseExternalId = &s_SiteWiseExternalId
+
+var SourceConfiguration = &sSourceConfiguration
+var SourceConfiguration_type = &sSourceConfiguration_type
+var SourceConfiguration_s3Configuration = &sSourceConfiguration_s3Configuration
+var SourceConfiguration_iotSiteWiseConfiguration = &sSourceConfiguration_iotSiteWiseConfiguration
+var SourceConfiguration_iotTwinMakerConfiguration = &sSourceConfiguration_iotTwinMakerConfiguration
+
+var _SourceConfigurations = &s_SourceConfigurations
+var _SourceConfigurations_member = &s_SourceConfigurations_member
+
+var _SourceType = &s_SourceType
+
+var _State = &s_State
+
+var Status = &sStatus
+var Status_state = &sStatus_state
+var Status_error = &sStatus_error
+
+var _String = &s_String
+
+var _SyncJobState = &s_SyncJobState
+
+var SyncJobStatus = &sSyncJobStatus
+var SyncJobStatus_state = &sSyncJobStatus_state
+var SyncJobStatus_error = &sSyncJobStatus_error
+
+var _SyncJobSummaries = &s_SyncJobSummaries
+var _SyncJobSummaries_member = &s_SyncJobSummaries_member
+
+var SyncJobSummary = &sSyncJobSummary
+var SyncJobSummary_arn = &sSyncJobSummary_arn
+var SyncJobSummary_workspaceId = &sSyncJobSummary_workspaceId
+var SyncJobSummary_syncSource = &sSyncJobSummary_syncSource
+var SyncJobSummary_status = &sSyncJobSummary_status
+var SyncJobSummary_creationDateTime = &sSyncJobSummary_creationDateTime
+var SyncJobSummary_updateDateTime = &sSyncJobSummary_updateDateTime
+
+var SyncResourceFilter = &sSyncResourceFilter
+var SyncResourceFilter_state = &sSyncResourceFilter_state
+var SyncResourceFilter_resourceType = &sSyncResourceFilter_resourceType
+var SyncResourceFilter_resourceId = &sSyncResourceFilter_resourceId
+var SyncResourceFilter_externalId = &sSyncResourceFilter_externalId
+
+var _SyncResourceFilters = &s_SyncResourceFilters
+var _SyncResourceFilters_member = &s_SyncResourceFilters_member
+
+var _SyncResourceState = &s_SyncResourceState
+
+var SyncResourceStatus = &sSyncResourceStatus
+var SyncResourceStatus_state = &sSyncResourceStatus_state
+var SyncResourceStatus_error = &sSyncResourceStatus_error
+
+var _SyncResourceSummaries = &s_SyncResourceSummaries
+var _SyncResourceSummaries_member = &s_SyncResourceSummaries_member
+
+var SyncResourceSummary = &sSyncResourceSummary
+var SyncResourceSummary_resourceType = &sSyncResourceSummary_resourceType
+var SyncResourceSummary_externalId = &sSyncResourceSummary_externalId
+var SyncResourceSummary_resourceId = &sSyncResourceSummary_resourceId
+var SyncResourceSummary_status = &sSyncResourceSummary_status
+var SyncResourceSummary_updateDateTime = &sSyncResourceSummary_updateDateTime
+
+var _SyncResourceType = &s_SyncResourceType
+
+var _SyncSource = &s_SyncSource
+
+var TabularConditions = &sTabularConditions
+var TabularConditions_orderBy = &sTabularConditions_orderBy
+var TabularConditions_propertyFilters = &sTabularConditions_propertyFilters
+
+var _TabularPropertyValue = &s_TabularPropertyValue
+var _TabularPropertyValue_member = &s_TabularPropertyValue_member
+
+var _TabularPropertyValues = &s_TabularPropertyValues
+var _TabularPropertyValues_member = &s_TabularPropertyValues_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _Time = &s_Time
+
+var _Timestamp = &s_Timestamp
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var _TwinMakerArn = &s_TwinMakerArn
+
+var _Type = &s_Type
+
+var _UpdateReason = &s_UpdateReason
+
+var _Uuid = &s_Uuid
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _Value = &s_Value
+
+var _Values = &s_Values
+var _Values_member = &s_Values_member
+
+var _WorkspaceDeleteMessage = &s_WorkspaceDeleteMessage
+
+var _WorkspaceSummaries = &s_WorkspaceSummaries
+var _WorkspaceSummaries_member = &s_WorkspaceSummaries_member
+
+var WorkspaceSummary = &sWorkspaceSummary
+var WorkspaceSummary_workspaceId = &sWorkspaceSummary_workspaceId
+var WorkspaceSummary_arn = &sWorkspaceSummary_arn
+var WorkspaceSummary_description = &sWorkspaceSummary_description
+var WorkspaceSummary_linkedServices = &sWorkspaceSummary_linkedServices
+var WorkspaceSummary_creationDateTime = &sWorkspaceSummary_creationDateTime
+var WorkspaceSummary_updateDateTime = &sWorkspaceSummary_updateDateTime
+
+var BatchPutPropertyValuesRequest = &sBatchPutPropertyValuesRequest
+var BatchPutPropertyValuesRequest_workspaceId = &sBatchPutPropertyValuesRequest_workspaceId
+var BatchPutPropertyValuesRequest_entries = &sBatchPutPropertyValuesRequest_entries
+
+var BatchPutPropertyValuesResponse = &sBatchPutPropertyValuesResponse
+var BatchPutPropertyValuesResponse_errorEntries = &sBatchPutPropertyValuesResponse_errorEntries
+
+var CancelMetadataTransferJobRequest = &sCancelMetadataTransferJobRequest
+var CancelMetadataTransferJobRequest_metadataTransferJobId = &sCancelMetadataTransferJobRequest_metadataTransferJobId
+
+var CancelMetadataTransferJobResponse = &sCancelMetadataTransferJobResponse
+var CancelMetadataTransferJobResponse_metadataTransferJobId = &sCancelMetadataTransferJobResponse_metadataTransferJobId
+var CancelMetadataTransferJobResponse_arn = &sCancelMetadataTransferJobResponse_arn
+var CancelMetadataTransferJobResponse_updateDateTime = &sCancelMetadataTransferJobResponse_updateDateTime
+var CancelMetadataTransferJobResponse_status = &sCancelMetadataTransferJobResponse_status
+var CancelMetadataTransferJobResponse_progress = &sCancelMetadataTransferJobResponse_progress
+
+var CreateComponentTypeRequest = &sCreateComponentTypeRequest
+var CreateComponentTypeRequest_workspaceId = &sCreateComponentTypeRequest_workspaceId
+var CreateComponentTypeRequest_isSingleton = &sCreateComponentTypeRequest_isSingleton
+var CreateComponentTypeRequest_componentTypeId = &sCreateComponentTypeRequest_componentTypeId
+var CreateComponentTypeRequest_description = &sCreateComponentTypeRequest_description
+var CreateComponentTypeRequest_propertyDefinitions = &sCreateComponentTypeRequest_propertyDefinitions
+var CreateComponentTypeRequest_extendsFrom = &sCreateComponentTypeRequest_extendsFrom
+var CreateComponentTypeRequest_functions = &sCreateComponentTypeRequest_functions
+var CreateComponentTypeRequest_tags = &sCreateComponentTypeRequest_tags
+var CreateComponentTypeRequest_propertyGroups = &sCreateComponentTypeRequest_propertyGroups
+var CreateComponentTypeRequest_componentTypeName = &sCreateComponentTypeRequest_componentTypeName
+var CreateComponentTypeRequest_compositeComponentTypes = &sCreateComponentTypeRequest_compositeComponentTypes
+
+var CreateComponentTypeResponse = &sCreateComponentTypeResponse
+var CreateComponentTypeResponse_arn = &sCreateComponentTypeResponse_arn
+var CreateComponentTypeResponse_creationDateTime = &sCreateComponentTypeResponse_creationDateTime
+var CreateComponentTypeResponse_state = &sCreateComponentTypeResponse_state
+
+var CreateEntityRequest = &sCreateEntityRequest
+var CreateEntityRequest_workspaceId = &sCreateEntityRequest_workspaceId
+var CreateEntityRequest_entityId = &sCreateEntityRequest_entityId
+var CreateEntityRequest_entityName = &sCreateEntityRequest_entityName
+var CreateEntityRequest_description = &sCreateEntityRequest_description
+var CreateEntityRequest_components = &sCreateEntityRequest_components
+var CreateEntityRequest_compositeComponents = &sCreateEntityRequest_compositeComponents
+var CreateEntityRequest_parentEntityId = &sCreateEntityRequest_parentEntityId
+var CreateEntityRequest_tags = &sCreateEntityRequest_tags
+
+var CreateEntityResponse = &sCreateEntityResponse
+var CreateEntityResponse_entityId = &sCreateEntityResponse_entityId
+var CreateEntityResponse_arn = &sCreateEntityResponse_arn
+var CreateEntityResponse_creationDateTime = &sCreateEntityResponse_creationDateTime
+var CreateEntityResponse_state = &sCreateEntityResponse_state
+
+var CreateMetadataTransferJobRequest = &sCreateMetadataTransferJobRequest
+var CreateMetadataTransferJobRequest_metadataTransferJobId = &sCreateMetadataTransferJobRequest_metadataTransferJobId
+var CreateMetadataTransferJobRequest_description = &sCreateMetadataTransferJobRequest_description
+var CreateMetadataTransferJobRequest_sources = &sCreateMetadataTransferJobRequest_sources
+var CreateMetadataTransferJobRequest_destination = &sCreateMetadataTransferJobRequest_destination
+
+var CreateMetadataTransferJobResponse = &sCreateMetadataTransferJobResponse
+var CreateMetadataTransferJobResponse_metadataTransferJobId = &sCreateMetadataTransferJobResponse_metadataTransferJobId
+var CreateMetadataTransferJobResponse_arn = &sCreateMetadataTransferJobResponse_arn
+var CreateMetadataTransferJobResponse_creationDateTime = &sCreateMetadataTransferJobResponse_creationDateTime
+var CreateMetadataTransferJobResponse_status = &sCreateMetadataTransferJobResponse_status
+
+var CreateSceneRequest = &sCreateSceneRequest
+var CreateSceneRequest_workspaceId = &sCreateSceneRequest_workspaceId
+var CreateSceneRequest_sceneId = &sCreateSceneRequest_sceneId
+var CreateSceneRequest_contentLocation = &sCreateSceneRequest_contentLocation
+var CreateSceneRequest_description = &sCreateSceneRequest_description
+var CreateSceneRequest_capabilities = &sCreateSceneRequest_capabilities
+var CreateSceneRequest_tags = &sCreateSceneRequest_tags
+var CreateSceneRequest_sceneMetadata = &sCreateSceneRequest_sceneMetadata
+
+var CreateSceneResponse = &sCreateSceneResponse
+var CreateSceneResponse_arn = &sCreateSceneResponse_arn
+var CreateSceneResponse_creationDateTime = &sCreateSceneResponse_creationDateTime
+
+var CreateSyncJobRequest = &sCreateSyncJobRequest
+var CreateSyncJobRequest_workspaceId = &sCreateSyncJobRequest_workspaceId
+var CreateSyncJobRequest_syncSource = &sCreateSyncJobRequest_syncSource
+var CreateSyncJobRequest_syncRole = &sCreateSyncJobRequest_syncRole
+var CreateSyncJobRequest_tags = &sCreateSyncJobRequest_tags
+
+var CreateSyncJobResponse = &sCreateSyncJobResponse
+var CreateSyncJobResponse_arn = &sCreateSyncJobResponse_arn
+var CreateSyncJobResponse_creationDateTime = &sCreateSyncJobResponse_creationDateTime
+var CreateSyncJobResponse_state = &sCreateSyncJobResponse_state
+
+var CreateWorkspaceRequest = &sCreateWorkspaceRequest
+var CreateWorkspaceRequest_workspaceId = &sCreateWorkspaceRequest_workspaceId
+var CreateWorkspaceRequest_description = &sCreateWorkspaceRequest_description
+var CreateWorkspaceRequest_s3Location = &sCreateWorkspaceRequest_s3Location
+var CreateWorkspaceRequest_role = &sCreateWorkspaceRequest_role
+var CreateWorkspaceRequest_tags = &sCreateWorkspaceRequest_tags
+
+var CreateWorkspaceResponse = &sCreateWorkspaceResponse
+var CreateWorkspaceResponse_arn = &sCreateWorkspaceResponse_arn
+var CreateWorkspaceResponse_creationDateTime = &sCreateWorkspaceResponse_creationDateTime
+
+var DeleteComponentTypeRequest = &sDeleteComponentTypeRequest
+var DeleteComponentTypeRequest_workspaceId = &sDeleteComponentTypeRequest_workspaceId
+var DeleteComponentTypeRequest_componentTypeId = &sDeleteComponentTypeRequest_componentTypeId
+
+var DeleteComponentTypeResponse = &sDeleteComponentTypeResponse
+var DeleteComponentTypeResponse_state = &sDeleteComponentTypeResponse_state
+
+var DeleteEntityRequest = &sDeleteEntityRequest
+var DeleteEntityRequest_workspaceId = &sDeleteEntityRequest_workspaceId
+var DeleteEntityRequest_entityId = &sDeleteEntityRequest_entityId
+var DeleteEntityRequest_isRecursive = &sDeleteEntityRequest_isRecursive
+
+var DeleteEntityResponse = &sDeleteEntityResponse
+var DeleteEntityResponse_state = &sDeleteEntityResponse_state
+
+var DeleteSceneRequest = &sDeleteSceneRequest
+var DeleteSceneRequest_workspaceId = &sDeleteSceneRequest_workspaceId
+var DeleteSceneRequest_sceneId = &sDeleteSceneRequest_sceneId
+
+var DeleteSceneResponse = &sDeleteSceneResponse
+
+var DeleteSyncJobRequest = &sDeleteSyncJobRequest
+var DeleteSyncJobRequest_workspaceId = &sDeleteSyncJobRequest_workspaceId
+var DeleteSyncJobRequest_syncSource = &sDeleteSyncJobRequest_syncSource
+
+var DeleteSyncJobResponse = &sDeleteSyncJobResponse
+var DeleteSyncJobResponse_state = &sDeleteSyncJobResponse_state
+
+var DeleteWorkspaceRequest = &sDeleteWorkspaceRequest
+var DeleteWorkspaceRequest_workspaceId = &sDeleteWorkspaceRequest_workspaceId
+
+var DeleteWorkspaceResponse = &sDeleteWorkspaceResponse
+var DeleteWorkspaceResponse_message = &sDeleteWorkspaceResponse_message
+
+var ExecuteQueryRequest = &sExecuteQueryRequest
+var ExecuteQueryRequest_workspaceId = &sExecuteQueryRequest_workspaceId
+var ExecuteQueryRequest_queryStatement = &sExecuteQueryRequest_queryStatement
+var ExecuteQueryRequest_maxResults = &sExecuteQueryRequest_maxResults
+var ExecuteQueryRequest_nextToken = &sExecuteQueryRequest_nextToken
+
+var ExecuteQueryResponse = &sExecuteQueryResponse
+var ExecuteQueryResponse_columnDescriptions = &sExecuteQueryResponse_columnDescriptions
+var ExecuteQueryResponse_rows = &sExecuteQueryResponse_rows
+var ExecuteQueryResponse_nextToken = &sExecuteQueryResponse_nextToken
+
+var GetComponentTypeRequest = &sGetComponentTypeRequest
+var GetComponentTypeRequest_workspaceId = &sGetComponentTypeRequest_workspaceId
+var GetComponentTypeRequest_componentTypeId = &sGetComponentTypeRequest_componentTypeId
+
+var GetComponentTypeResponse = &sGetComponentTypeResponse
+var GetComponentTypeResponse_workspaceId = &sGetComponentTypeResponse_workspaceId
+var GetComponentTypeResponse_isSingleton = &sGetComponentTypeResponse_isSingleton
+var GetComponentTypeResponse_componentTypeId = &sGetComponentTypeResponse_componentTypeId
+var GetComponentTypeResponse_description = &sGetComponentTypeResponse_description
+var GetComponentTypeResponse_propertyDefinitions = &sGetComponentTypeResponse_propertyDefinitions
+var GetComponentTypeResponse_extendsFrom = &sGetComponentTypeResponse_extendsFrom
+var GetComponentTypeResponse_functions = &sGetComponentTypeResponse_functions
+var GetComponentTypeResponse_creationDateTime = &sGetComponentTypeResponse_creationDateTime
+var GetComponentTypeResponse_updateDateTime = &sGetComponentTypeResponse_updateDateTime
+var GetComponentTypeResponse_arn = &sGetComponentTypeResponse_arn
+var GetComponentTypeResponse_isAbstract = &sGetComponentTypeResponse_isAbstract
+var GetComponentTypeResponse_isSchemaInitialized = &sGetComponentTypeResponse_isSchemaInitialized
+var GetComponentTypeResponse_status = &sGetComponentTypeResponse_status
+var GetComponentTypeResponse_propertyGroups = &sGetComponentTypeResponse_propertyGroups
+var GetComponentTypeResponse_syncSource = &sGetComponentTypeResponse_syncSource
+var GetComponentTypeResponse_componentTypeName = &sGetComponentTypeResponse_componentTypeName
+var GetComponentTypeResponse_compositeComponentTypes = &sGetComponentTypeResponse_compositeComponentTypes
+
+var GetEntityRequest = &sGetEntityRequest
+var GetEntityRequest_workspaceId = &sGetEntityRequest_workspaceId
+var GetEntityRequest_entityId = &sGetEntityRequest_entityId
+
+var GetEntityResponse = &sGetEntityResponse
+var GetEntityResponse_entityId = &sGetEntityResponse_entityId
+var GetEntityResponse_entityName = &sGetEntityResponse_entityName
+var GetEntityResponse_arn = &sGetEntityResponse_arn
+var GetEntityResponse_status = &sGetEntityResponse_status
+var GetEntityResponse_workspaceId = &sGetEntityResponse_workspaceId
+var GetEntityResponse_description = &sGetEntityResponse_description
+var GetEntityResponse_components = &sGetEntityResponse_components
+var GetEntityResponse_parentEntityId = &sGetEntityResponse_parentEntityId
+var GetEntityResponse_hasChildEntities = &sGetEntityResponse_hasChildEntities
+var GetEntityResponse_creationDateTime = &sGetEntityResponse_creationDateTime
+var GetEntityResponse_updateDateTime = &sGetEntityResponse_updateDateTime
+var GetEntityResponse_syncSource = &sGetEntityResponse_syncSource
+var GetEntityResponse_areAllComponentsReturned = &sGetEntityResponse_areAllComponentsReturned
+
+var GetMetadataTransferJobRequest = &sGetMetadataTransferJobRequest
+var GetMetadataTransferJobRequest_metadataTransferJobId = &sGetMetadataTransferJobRequest_metadataTransferJobId
+
+var GetMetadataTransferJobResponse = &sGetMetadataTransferJobResponse
+var GetMetadataTransferJobResponse_metadataTransferJobId = &sGetMetadataTransferJobResponse_metadataTransferJobId
+var GetMetadataTransferJobResponse_arn = &sGetMetadataTransferJobResponse_arn
+var GetMetadataTransferJobResponse_description = &sGetMetadataTransferJobResponse_description
+var GetMetadataTransferJobResponse_sources = &sGetMetadataTransferJobResponse_sources
+var GetMetadataTransferJobResponse_destination = &sGetMetadataTransferJobResponse_destination
+var GetMetadataTransferJobResponse_metadataTransferJobRole = &sGetMetadataTransferJobResponse_metadataTransferJobRole
+var GetMetadataTransferJobResponse_reportUrl = &sGetMetadataTransferJobResponse_reportUrl
+var GetMetadataTransferJobResponse_creationDateTime = &sGetMetadataTransferJobResponse_creationDateTime
+var GetMetadataTransferJobResponse_updateDateTime = &sGetMetadataTransferJobResponse_updateDateTime
+var GetMetadataTransferJobResponse_status = &sGetMetadataTransferJobResponse_status
+var GetMetadataTransferJobResponse_progress = &sGetMetadataTransferJobResponse_progress
+
+var GetPricingPlanRequest = &sGetPricingPlanRequest
+
+var GetPricingPlanResponse = &sGetPricingPlanResponse
+var GetPricingPlanResponse_currentPricingPlan = &sGetPricingPlanResponse_currentPricingPlan
+var GetPricingPlanResponse_pendingPricingPlan = &sGetPricingPlanResponse_pendingPricingPlan
+
+var GetPropertyValueHistoryRequest = &sGetPropertyValueHistoryRequest
+var GetPropertyValueHistoryRequest_workspaceId = &sGetPropertyValueHistoryRequest_workspaceId
+var GetPropertyValueHistoryRequest_entityId = &sGetPropertyValueHistoryRequest_entityId
+var GetPropertyValueHistoryRequest_componentName = &sGetPropertyValueHistoryRequest_componentName
+var GetPropertyValueHistoryRequest_componentPath = &sGetPropertyValueHistoryRequest_componentPath
+var GetPropertyValueHistoryRequest_componentTypeId = &sGetPropertyValueHistoryRequest_componentTypeId
+var GetPropertyValueHistoryRequest_selectedProperties = &sGetPropertyValueHistoryRequest_selectedProperties
+var GetPropertyValueHistoryRequest_propertyFilters = &sGetPropertyValueHistoryRequest_propertyFilters
+var GetPropertyValueHistoryRequest_startDateTime = &sGetPropertyValueHistoryRequest_startDateTime
+var GetPropertyValueHistoryRequest_endDateTime = &sGetPropertyValueHistoryRequest_endDateTime
+var GetPropertyValueHistoryRequest_interpolation = &sGetPropertyValueHistoryRequest_interpolation
+var GetPropertyValueHistoryRequest_nextToken = &sGetPropertyValueHistoryRequest_nextToken
+var GetPropertyValueHistoryRequest_maxResults = &sGetPropertyValueHistoryRequest_maxResults
+var GetPropertyValueHistoryRequest_orderByTime = &sGetPropertyValueHistoryRequest_orderByTime
+var GetPropertyValueHistoryRequest_startTime = &sGetPropertyValueHistoryRequest_startTime
+var GetPropertyValueHistoryRequest_endTime = &sGetPropertyValueHistoryRequest_endTime
+
+var GetPropertyValueHistoryResponse = &sGetPropertyValueHistoryResponse
+var GetPropertyValueHistoryResponse_propertyValues = &sGetPropertyValueHistoryResponse_propertyValues
+var GetPropertyValueHistoryResponse_nextToken = &sGetPropertyValueHistoryResponse_nextToken
+
+var GetPropertyValueRequest = &sGetPropertyValueRequest
+var GetPropertyValueRequest_componentName = &sGetPropertyValueRequest_componentName
+var GetPropertyValueRequest_componentPath = &sGetPropertyValueRequest_componentPath
+var GetPropertyValueRequest_componentTypeId = &sGetPropertyValueRequest_componentTypeId
+var GetPropertyValueRequest_entityId = &sGetPropertyValueRequest_entityId
+var GetPropertyValueRequest_selectedProperties = &sGetPropertyValueRequest_selectedProperties
+var GetPropertyValueRequest_workspaceId = &sGetPropertyValueRequest_workspaceId
+var GetPropertyValueRequest_maxResults = &sGetPropertyValueRequest_maxResults
+var GetPropertyValueRequest_nextToken = &sGetPropertyValueRequest_nextToken
+var GetPropertyValueRequest_propertyGroupName = &sGetPropertyValueRequest_propertyGroupName
+var GetPropertyValueRequest_tabularConditions = &sGetPropertyValueRequest_tabularConditions
+
+var GetPropertyValueResponse = &sGetPropertyValueResponse
+var GetPropertyValueResponse_propertyValues = &sGetPropertyValueResponse_propertyValues
+var GetPropertyValueResponse_nextToken = &sGetPropertyValueResponse_nextToken
+var GetPropertyValueResponse_tabularPropertyValues = &sGetPropertyValueResponse_tabularPropertyValues
+
+var GetSceneRequest = &sGetSceneRequest
+var GetSceneRequest_workspaceId = &sGetSceneRequest_workspaceId
+var GetSceneRequest_sceneId = &sGetSceneRequest_sceneId
+
+var GetSceneResponse = &sGetSceneResponse
+var GetSceneResponse_workspaceId = &sGetSceneResponse_workspaceId
+var GetSceneResponse_sceneId = &sGetSceneResponse_sceneId
+var GetSceneResponse_contentLocation = &sGetSceneResponse_contentLocation
+var GetSceneResponse_arn = &sGetSceneResponse_arn
+var GetSceneResponse_creationDateTime = &sGetSceneResponse_creationDateTime
+var GetSceneResponse_updateDateTime = &sGetSceneResponse_updateDateTime
+var GetSceneResponse_description = &sGetSceneResponse_description
+var GetSceneResponse_capabilities = &sGetSceneResponse_capabilities
+var GetSceneResponse_sceneMetadata = &sGetSceneResponse_sceneMetadata
+var GetSceneResponse_generatedSceneMetadata = &sGetSceneResponse_generatedSceneMetadata
+var GetSceneResponse_error = &sGetSceneResponse_error
+
+var GetSyncJobRequest = &sGetSyncJobRequest
+var GetSyncJobRequest_syncSource = &sGetSyncJobRequest_syncSource
+var GetSyncJobRequest_workspaceId = &sGetSyncJobRequest_workspaceId
+
+var GetSyncJobResponse = &sGetSyncJobResponse
+var GetSyncJobResponse_arn = &sGetSyncJobResponse_arn
+var GetSyncJobResponse_workspaceId = &sGetSyncJobResponse_workspaceId
+var GetSyncJobResponse_syncSource = &sGetSyncJobResponse_syncSource
+var GetSyncJobResponse_syncRole = &sGetSyncJobResponse_syncRole
+var GetSyncJobResponse_status = &sGetSyncJobResponse_status
+var GetSyncJobResponse_creationDateTime = &sGetSyncJobResponse_creationDateTime
+var GetSyncJobResponse_updateDateTime = &sGetSyncJobResponse_updateDateTime
+
+var GetWorkspaceRequest = &sGetWorkspaceRequest
+var GetWorkspaceRequest_workspaceId = &sGetWorkspaceRequest_workspaceId
+
+var GetWorkspaceResponse = &sGetWorkspaceResponse
+var GetWorkspaceResponse_workspaceId = &sGetWorkspaceResponse_workspaceId
+var GetWorkspaceResponse_arn = &sGetWorkspaceResponse_arn
+var GetWorkspaceResponse_description = &sGetWorkspaceResponse_description
+var GetWorkspaceResponse_linkedServices = &sGetWorkspaceResponse_linkedServices
+var GetWorkspaceResponse_s3Location = &sGetWorkspaceResponse_s3Location
+var GetWorkspaceResponse_role = &sGetWorkspaceResponse_role
+var GetWorkspaceResponse_creationDateTime = &sGetWorkspaceResponse_creationDateTime
+var GetWorkspaceResponse_updateDateTime = &sGetWorkspaceResponse_updateDateTime
+
+var ListComponentsRequest = &sListComponentsRequest
+var ListComponentsRequest_workspaceId = &sListComponentsRequest_workspaceId
+var ListComponentsRequest_entityId = &sListComponentsRequest_entityId
+var ListComponentsRequest_componentPath = &sListComponentsRequest_componentPath
+var ListComponentsRequest_maxResults = &sListComponentsRequest_maxResults
+var ListComponentsRequest_nextToken = &sListComponentsRequest_nextToken
+
+var ListComponentsResponse = &sListComponentsResponse
+var ListComponentsResponse_componentSummaries = &sListComponentsResponse_componentSummaries
+var ListComponentsResponse_nextToken = &sListComponentsResponse_nextToken
+
+var ListComponentTypesRequest = &sListComponentTypesRequest
+var ListComponentTypesRequest_workspaceId = &sListComponentTypesRequest_workspaceId
+var ListComponentTypesRequest_filters = &sListComponentTypesRequest_filters
+var ListComponentTypesRequest_nextToken = &sListComponentTypesRequest_nextToken
+var ListComponentTypesRequest_maxResults = &sListComponentTypesRequest_maxResults
+
+var ListComponentTypesResponse = &sListComponentTypesResponse
+var ListComponentTypesResponse_workspaceId = &sListComponentTypesResponse_workspaceId
+var ListComponentTypesResponse_componentTypeSummaries = &sListComponentTypesResponse_componentTypeSummaries
+var ListComponentTypesResponse_nextToken = &sListComponentTypesResponse_nextToken
+var ListComponentTypesResponse_maxResults = &sListComponentTypesResponse_maxResults
+
+var ListEntitiesRequest = &sListEntitiesRequest
+var ListEntitiesRequest_workspaceId = &sListEntitiesRequest_workspaceId
+var ListEntitiesRequest_filters = &sListEntitiesRequest_filters
+var ListEntitiesRequest_maxResults = &sListEntitiesRequest_maxResults
+var ListEntitiesRequest_nextToken = &sListEntitiesRequest_nextToken
+
+var ListEntitiesResponse = &sListEntitiesResponse
+var ListEntitiesResponse_entitySummaries = &sListEntitiesResponse_entitySummaries
+var ListEntitiesResponse_nextToken = &sListEntitiesResponse_nextToken
+
+var ListMetadataTransferJobsRequest = &sListMetadataTransferJobsRequest
+var ListMetadataTransferJobsRequest_sourceType = &sListMetadataTransferJobsRequest_sourceType
+var ListMetadataTransferJobsRequest_destinationType = &sListMetadataTransferJobsRequest_destinationType
+var ListMetadataTransferJobsRequest_filters = &sListMetadataTransferJobsRequest_filters
+var ListMetadataTransferJobsRequest_nextToken = &sListMetadataTransferJobsRequest_nextToken
+var ListMetadataTransferJobsRequest_maxResults = &sListMetadataTransferJobsRequest_maxResults
+
+var ListMetadataTransferJobsResponse = &sListMetadataTransferJobsResponse
+var ListMetadataTransferJobsResponse_metadataTransferJobSummaries = &sListMetadataTransferJobsResponse_metadataTransferJobSummaries
+var ListMetadataTransferJobsResponse_nextToken = &sListMetadataTransferJobsResponse_nextToken
+
+var ListPropertiesRequest = &sListPropertiesRequest
+var ListPropertiesRequest_workspaceId = &sListPropertiesRequest_workspaceId
+var ListPropertiesRequest_componentName = &sListPropertiesRequest_componentName
+var ListPropertiesRequest_componentPath = &sListPropertiesRequest_componentPath
+var ListPropertiesRequest_entityId = &sListPropertiesRequest_entityId
+var ListPropertiesRequest_maxResults = &sListPropertiesRequest_maxResults
+var ListPropertiesRequest_nextToken = &sListPropertiesRequest_nextToken
+
+var ListPropertiesResponse = &sListPropertiesResponse
+var ListPropertiesResponse_propertySummaries = &sListPropertiesResponse_propertySummaries
+var ListPropertiesResponse_nextToken = &sListPropertiesResponse_nextToken
+
+var ListScenesRequest = &sListScenesRequest
+var ListScenesRequest_workspaceId = &sListScenesRequest_workspaceId
+var ListScenesRequest_maxResults = &sListScenesRequest_maxResults
+var ListScenesRequest_nextToken = &sListScenesRequest_nextToken
+
+var ListScenesResponse = &sListScenesResponse
+var ListScenesResponse_sceneSummaries = &sListScenesResponse_sceneSummaries
+var ListScenesResponse_nextToken = &sListScenesResponse_nextToken
+
+var ListSyncJobsRequest = &sListSyncJobsRequest
+var ListSyncJobsRequest_workspaceId = &sListSyncJobsRequest_workspaceId
+var ListSyncJobsRequest_maxResults = &sListSyncJobsRequest_maxResults
+var ListSyncJobsRequest_nextToken = &sListSyncJobsRequest_nextToken
+
+var ListSyncJobsResponse = &sListSyncJobsResponse
+var ListSyncJobsResponse_syncJobSummaries = &sListSyncJobsResponse_syncJobSummaries
+var ListSyncJobsResponse_nextToken = &sListSyncJobsResponse_nextToken
+
+var ListSyncResourcesRequest = &sListSyncResourcesRequest
+var ListSyncResourcesRequest_workspaceId = &sListSyncResourcesRequest_workspaceId
+var ListSyncResourcesRequest_syncSource = &sListSyncResourcesRequest_syncSource
+var ListSyncResourcesRequest_filters = &sListSyncResourcesRequest_filters
+var ListSyncResourcesRequest_maxResults = &sListSyncResourcesRequest_maxResults
+var ListSyncResourcesRequest_nextToken = &sListSyncResourcesRequest_nextToken
+
+var ListSyncResourcesResponse = &sListSyncResourcesResponse
+var ListSyncResourcesResponse_syncResources = &sListSyncResourcesResponse_syncResources
+var ListSyncResourcesResponse_nextToken = &sListSyncResourcesResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceARN = &sListTagsForResourceRequest_resourceARN
+var ListTagsForResourceRequest_maxResults = &sListTagsForResourceRequest_maxResults
+var ListTagsForResourceRequest_nextToken = &sListTagsForResourceRequest_nextToken
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+var ListTagsForResourceResponse_nextToken = &sListTagsForResourceResponse_nextToken
+
+var ListWorkspacesRequest = &sListWorkspacesRequest
+var ListWorkspacesRequest_maxResults = &sListWorkspacesRequest_maxResults
+var ListWorkspacesRequest_nextToken = &sListWorkspacesRequest_nextToken
+
+var ListWorkspacesResponse = &sListWorkspacesResponse
+var ListWorkspacesResponse_workspaceSummaries = &sListWorkspacesResponse_workspaceSummaries
+var ListWorkspacesResponse_nextToken = &sListWorkspacesResponse_nextToken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceARN = &sTagResourceRequest_resourceARN
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceARN = &sUntagResourceRequest_resourceARN
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateComponentTypeRequest = &sUpdateComponentTypeRequest
+var UpdateComponentTypeRequest_workspaceId = &sUpdateComponentTypeRequest_workspaceId
+var UpdateComponentTypeRequest_isSingleton = &sUpdateComponentTypeRequest_isSingleton
+var UpdateComponentTypeRequest_componentTypeId = &sUpdateComponentTypeRequest_componentTypeId
+var UpdateComponentTypeRequest_description = &sUpdateComponentTypeRequest_description
+var UpdateComponentTypeRequest_propertyDefinitions = &sUpdateComponentTypeRequest_propertyDefinitions
+var UpdateComponentTypeRequest_extendsFrom = &sUpdateComponentTypeRequest_extendsFrom
+var UpdateComponentTypeRequest_functions = &sUpdateComponentTypeRequest_functions
+var UpdateComponentTypeRequest_propertyGroups = &sUpdateComponentTypeRequest_propertyGroups
+var UpdateComponentTypeRequest_componentTypeName = &sUpdateComponentTypeRequest_componentTypeName
+var UpdateComponentTypeRequest_compositeComponentTypes = &sUpdateComponentTypeRequest_compositeComponentTypes
+
+var UpdateComponentTypeResponse = &sUpdateComponentTypeResponse
+var UpdateComponentTypeResponse_workspaceId = &sUpdateComponentTypeResponse_workspaceId
+var UpdateComponentTypeResponse_arn = &sUpdateComponentTypeResponse_arn
+var UpdateComponentTypeResponse_componentTypeId = &sUpdateComponentTypeResponse_componentTypeId
+var UpdateComponentTypeResponse_state = &sUpdateComponentTypeResponse_state
+
+var UpdateEntityRequest = &sUpdateEntityRequest
+var UpdateEntityRequest_workspaceId = &sUpdateEntityRequest_workspaceId
+var UpdateEntityRequest_entityId = &sUpdateEntityRequest_entityId
+var UpdateEntityRequest_entityName = &sUpdateEntityRequest_entityName
+var UpdateEntityRequest_description = &sUpdateEntityRequest_description
+var UpdateEntityRequest_componentUpdates = &sUpdateEntityRequest_componentUpdates
+var UpdateEntityRequest_compositeComponentUpdates = &sUpdateEntityRequest_compositeComponentUpdates
+var UpdateEntityRequest_parentEntityUpdate = &sUpdateEntityRequest_parentEntityUpdate
+
+var UpdateEntityResponse = &sUpdateEntityResponse
+var UpdateEntityResponse_updateDateTime = &sUpdateEntityResponse_updateDateTime
+var UpdateEntityResponse_state = &sUpdateEntityResponse_state
+
+var UpdatePricingPlanRequest = &sUpdatePricingPlanRequest
+var UpdatePricingPlanRequest_pricingMode = &sUpdatePricingPlanRequest_pricingMode
+var UpdatePricingPlanRequest_bundleNames = &sUpdatePricingPlanRequest_bundleNames
+
+var UpdatePricingPlanResponse = &sUpdatePricingPlanResponse
+var UpdatePricingPlanResponse_currentPricingPlan = &sUpdatePricingPlanResponse_currentPricingPlan
+var UpdatePricingPlanResponse_pendingPricingPlan = &sUpdatePricingPlanResponse_pendingPricingPlan
+
+var UpdateSceneRequest = &sUpdateSceneRequest
+var UpdateSceneRequest_workspaceId = &sUpdateSceneRequest_workspaceId
+var UpdateSceneRequest_sceneId = &sUpdateSceneRequest_sceneId
+var UpdateSceneRequest_contentLocation = &sUpdateSceneRequest_contentLocation
+var UpdateSceneRequest_description = &sUpdateSceneRequest_description
+var UpdateSceneRequest_capabilities = &sUpdateSceneRequest_capabilities
+var UpdateSceneRequest_sceneMetadata = &sUpdateSceneRequest_sceneMetadata
+
+var UpdateSceneResponse = &sUpdateSceneResponse
+var UpdateSceneResponse_updateDateTime = &sUpdateSceneResponse_updateDateTime
+
+var UpdateWorkspaceRequest = &sUpdateWorkspaceRequest
+var UpdateWorkspaceRequest_workspaceId = &sUpdateWorkspaceRequest_workspaceId
+var UpdateWorkspaceRequest_description = &sUpdateWorkspaceRequest_description
+var UpdateWorkspaceRequest_role = &sUpdateWorkspaceRequest_role
+var UpdateWorkspaceRequest_s3Location = &sUpdateWorkspaceRequest_s3Location
+
+var UpdateWorkspaceResponse = &sUpdateWorkspaceResponse
+var UpdateWorkspaceResponse_updateDateTime = &sUpdateWorkspaceResponse_updateDateTime
+
+var AWSIoTTwinMaker = &smithy.ServiceSchema{Schema: &s_AWSIoTTwinMaker, Version: "2021-11-29"}

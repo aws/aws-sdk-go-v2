@@ -7,2461 +7,1864 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetApplicationComponentDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetApplicationComponentDetails",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	iGetApplicationComponentDetails              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetApplicationComponentDetails"}
+	iGetApplicationComponentStrategies           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetApplicationComponentStrategies"}
+	iGetAssessment                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetAssessment"}
+	iGetImportFileTask                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetImportFileTask"}
+	iGetLatestAssessmentId                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetLatestAssessmentId"}
+	iGetPortfolioPreferences                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetPortfolioPreferences"}
+	iGetPortfolioSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetPortfolioSummary"}
+	iGetRecommendationReportDetails              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetRecommendationReportDetails"}
+	iGetServerDetails                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetServerDetails"}
+	iGetServerStrategies                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetServerStrategies"}
+	iListAnalyzableServers                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListAnalyzableServers"}
+	iListApplicationComponents                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListApplicationComponents"}
+	iListCollectors                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListCollectors"}
+	iListImportFileTask                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListImportFileTask"}
+	iListServers                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListServers"}
+	iPutPortfolioPreferences                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "PutPortfolioPreferences"}
+	iStartAssessment                             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartAssessment"}
+	iStartImportFileTask                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartImportFileTask"}
+	iStartRecommendationReportGeneration         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartRecommendationReportGeneration"}
+	iStopAssessment                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StopAssessment"}
+	iUpdateApplicationComponentConfig            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "UpdateApplicationComponentConfig"}
+	iUpdateServerConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "UpdateServerConfig"}
+	i_AWSMigrationHubStrategyRecommendation      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AWSMigrationHubStrategyRecommendation"}
+	iAccessDeniedException                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AccessDeniedException"}
+	iAnalysisStatusUnion                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AnalysisStatusUnion"}
+	i_AnalysisType                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AnalysisType"}
+	iAnalyzableServerSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AnalyzableServerSummary"}
+	i_AnalyzableServerSummaryList                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AnalyzableServerSummaryList"}
+	iAnalyzerNameUnion                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AnalyzerNameUnion"}
+	iAntipatternReportResult                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AntipatternReportResult"}
+	i_AntipatternReportResultList                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AntipatternReportResultList"}
+	i_AntipatternReportStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AntipatternReportStatus"}
+	iAntipatternSeveritySummary                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AntipatternSeveritySummary"}
+	i_ApplicationComponentCriteria               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentCriteria"}
+	iApplicationComponentDetail                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentDetail"}
+	i_ApplicationComponentDetails                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentDetails"}
+	i_ApplicationComponentId                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentId"}
+	iApplicationComponentStatusSummary           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentStatusSummary"}
+	i_ApplicationComponentStrategies             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentStrategies"}
+	iApplicationComponentStrategy                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentStrategy"}
+	iApplicationComponentSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationComponentSummary"}
+	i_ApplicationMode                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationMode"}
+	iApplicationPreferences                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ApplicationPreferences"}
+	i_AppType                                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AppType"}
+	iAppUnitError                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AppUnitError"}
+	i_AppUnitErrorCategory                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AppUnitErrorCategory"}
+	i_AssessmentDataSourceType                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssessmentDataSourceType"}
+	i_AssessmentStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssessmentStatus"}
+	i_AssessmentStatusMessage                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssessmentStatusMessage"}
+	iAssessmentSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssessmentSummary"}
+	iAssessmentTarget                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssessmentTarget"}
+	i_AssessmentTargets                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssessmentTargets"}
+	i_AssessmentTargetValues                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssessmentTargetValues"}
+	iAssociatedApplication                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssociatedApplication"}
+	i_AssociatedApplications                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssociatedApplications"}
+	i_AssociatedServerIDs                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AssociatedServerIDs"}
+	i_AsyncTaskId                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AsyncTaskId"}
+	i_AuthType                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AuthType"}
+	iAwsManagedResources                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AwsManagedResources"}
+	i_AwsManagedTargetDestination                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AwsManagedTargetDestination"}
+	i_AwsManagedTargetDestinations               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "AwsManagedTargetDestinations"}
+	i_BinaryAnalyzerName                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "BinaryAnalyzerName"}
+	i_Boolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Boolean"}
+	iBusinessGoals                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "BusinessGoals"}
+	i_BusinessGoalsInteger                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "BusinessGoalsInteger"}
+	iCollector                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Collector"}
+	i_CollectorHealth                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "CollectorHealth"}
+	i_Collectors                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Collectors"}
+	i_Condition                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Condition"}
+	iConfigurationSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ConfigurationSummary"}
+	iConflictException                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ConflictException"}
+	iDatabaseConfigDetail                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "DatabaseConfigDetail"}
+	i_DatabaseManagementPreference               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "DatabaseManagementPreference"}
+	iDatabaseMigrationPreference                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "DatabaseMigrationPreference"}
+	iDatabasePreferences                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "DatabasePreferences"}
+	iDataCollectionDetails                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "DataCollectionDetails"}
+	i_DataSourceType                             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "DataSourceType"}
+	iDependencyException                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "DependencyException"}
+	i_errorMessage                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "errorMessage"}
+	iGroup                                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Group"}
+	i_GroupIds                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GroupIds"}
+	i_GroupName                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GroupName"}
+	iHeterogeneous                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Heterogeneous"}
+	i_HeterogeneousTargetDatabaseEngine          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "HeterogeneousTargetDatabaseEngine"}
+	i_HeterogeneousTargetDatabaseEngines         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "HeterogeneousTargetDatabaseEngines"}
+	iHomogeneous                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Homogeneous"}
+	i_HomogeneousTargetDatabaseEngine            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "HomogeneousTargetDatabaseEngine"}
+	i_HomogeneousTargetDatabaseEngines           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "HomogeneousTargetDatabaseEngines"}
+	iImportFileTaskInformation                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ImportFileTaskInformation"}
+	i_ImportFileTaskStatus                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ImportFileTaskStatus"}
+	i_importS3Bucket                             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "importS3Bucket"}
+	i_importS3Key                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "importS3Key"}
+	i_InclusionStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "InclusionStatus"}
+	i_Integer                                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Integer"}
+	i_InterfaceName                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "InterfaceName"}
+	iInternalServerException                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "InternalServerException"}
+	i_IPAddress                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "IPAddress"}
+	iIPAddressBasedRemoteInfo                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "IPAddressBasedRemoteInfo"}
+	i_IPAddressBasedRemoteInfoList               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "IPAddressBasedRemoteInfoList"}
+	i_ListAntipatternSeveritySummary             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListAntipatternSeveritySummary"}
+	i_ListApplicationComponentStatusSummary      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListApplicationComponentStatusSummary"}
+	i_ListApplicationComponentSummary            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListApplicationComponentSummary"}
+	i_ListImportFileTaskInformation              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListImportFileTaskInformation"}
+	i_ListServerStatusSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListServerStatusSummary"}
+	i_ListServerSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListServerSummary"}
+	i_ListStrategySummary                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListStrategySummary"}
+	i_Location                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Location"}
+	i_MacAddress                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "MacAddress"}
+	iManagementPreference                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ManagementPreference"}
+	i_MaxResult                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "MaxResult"}
+	i_NetMask                                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NetMask"}
+	iNetworkInfo                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NetworkInfo"}
+	i_NetworkInfoList                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NetworkInfoList"}
+	i_NextToken                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NextToken"}
+	iNoDatabaseMigrationPreference               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NoDatabaseMigrationPreference"}
+	iNoManagementPreference                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NoManagementPreference"}
+	i_NoPreferenceTargetDestination              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NoPreferenceTargetDestination"}
+	i_NoPreferenceTargetDestinations             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "NoPreferenceTargetDestinations"}
+	iOSInfo                                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "OSInfo"}
+	i_OSType                                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "OSType"}
+	i_OSVersion                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "OSVersion"}
+	i_OutputFormat                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "OutputFormat"}
+	iPipelineInfo                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "PipelineInfo"}
+	i_PipelineInfoList                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "PipelineInfoList"}
+	i_PipelineType                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "PipelineType"}
+	iPrioritizeBusinessGoals                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "PrioritizeBusinessGoals"}
+	i_ProjectName                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ProjectName"}
+	iRecommendationReportDetails                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RecommendationReportDetails"}
+	i_RecommendationReportStatus                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RecommendationReportStatus"}
+	i_RecommendationReportStatusMessage          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RecommendationReportStatusMessage"}
+	i_RecommendationReportTimeStamp              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RecommendationReportTimeStamp"}
+	iRecommendationSet                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RecommendationSet"}
+	i_RecommendationTaskId                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RecommendationTaskId"}
+	iRemoteSourceCodeAnalysisServerInfo          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RemoteSourceCodeAnalysisServerInfo"}
+	i_ResourceId                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ResourceId"}
+	i_ResourceName                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ResourceName"}
+	iResourceNotFoundException                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ResourceNotFoundException"}
+	i_ResourceSubType                            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ResourceSubType"}
+	iResult                                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Result"}
+	i_ResultList                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ResultList"}
+	i_RuntimeAnalysisStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RuntimeAnalysisStatus"}
+	i_RunTimeAnalyzerName                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RunTimeAnalyzerName"}
+	i_RunTimeAssessmentStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "RunTimeAssessmentStatus"}
+	i_S3Bucket                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "S3Bucket"}
+	i_S3Key                                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "S3Key"}
+	i_S3Keys                                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "S3Keys"}
+	iS3Object                                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "S3Object"}
+	i_SecretsManagerKey                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SecretsManagerKey"}
+	iSelfManageResources                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SelfManageResources"}
+	i_SelfManageTargetDestination                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SelfManageTargetDestination"}
+	i_SelfManageTargetDestinations               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SelfManageTargetDestinations"}
+	i_ServerCriteria                             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerCriteria"}
+	iServerDetail                                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerDetail"}
+	i_ServerDetails                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerDetails"}
+	iServerError                                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerError"}
+	i_ServerErrorCategory                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerErrorCategory"}
+	i_ServerId                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerId"}
+	i_ServerOsType                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerOsType"}
+	iServerStatusSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerStatusSummary"}
+	i_ServerStrategies                           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerStrategies"}
+	iServerStrategy                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerStrategy"}
+	iServerSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServerSummary"}
+	iServiceLinkedRoleLockClientException        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServiceLinkedRoleLockClientException"}
+	iServiceQuotaExceededException               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ServiceQuotaExceededException"}
+	i_Severity                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Severity"}
+	i_SortOrder                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SortOrder"}
+	iSourceCode                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SourceCode"}
+	i_SourceCodeAnalyzerName                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SourceCodeAnalyzerName"}
+	i_SourceCodeList                             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SourceCodeList"}
+	i_SourceCodeRepositories                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SourceCodeRepositories"}
+	iSourceCodeRepository                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SourceCodeRepository"}
+	i_SourceVersion                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SourceVersion"}
+	i_SrcCodeOrDbAnalysisStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SrcCodeOrDbAnalysisStatus"}
+	i_StatusMessage                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StatusMessage"}
+	i_Strategy                                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "Strategy"}
+	iStrategyOption                              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StrategyOption"}
+	i_StrategyRecommendation                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StrategyRecommendation"}
+	iStrategySummary                             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StrategySummary"}
+	i_String                                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "String"}
+	iSystemInfo                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "SystemInfo"}
+	i_TargetDatabaseEngine                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TargetDatabaseEngine"}
+	i_TargetDatabaseEngines                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TargetDatabaseEngines"}
+	i_TargetDestination                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TargetDestination"}
+	iThrottlingException                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ThrottlingException"}
+	i_TimeStamp                                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TimeStamp"}
+	i_TranformationToolDescription               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TranformationToolDescription"}
+	i_TranformationToolInstallationLink          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TranformationToolInstallationLink"}
+	iTransformationTool                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TransformationTool"}
+	i_TransformationToolName                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "TransformationToolName"}
+	iValidationException                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ValidationException"}
+	iVcenterBasedRemoteInfo                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "VcenterBasedRemoteInfo"}
+	i_VcenterBasedRemoteInfoList                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "VcenterBasedRemoteInfoList"}
+	i_VersionControl                             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "VersionControl"}
+	iVersionControlInfo                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "VersionControlInfo"}
+	i_VersionControlInfoList                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "VersionControlInfoList"}
+	i_VersionControlType                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "VersionControlType"}
+	iGetApplicationComponentDetailsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetApplicationComponentDetailsRequest"}
+	iGetApplicationComponentDetailsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetApplicationComponentDetailsResponse"}
+	iGetApplicationComponentStrategiesRequest    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetApplicationComponentStrategiesRequest"}
+	iGetApplicationComponentStrategiesResponse   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetApplicationComponentStrategiesResponse"}
+	iGetAssessmentRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetAssessmentRequest"}
+	iGetAssessmentResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetAssessmentResponse"}
+	iGetImportFileTaskRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetImportFileTaskRequest"}
+	iGetImportFileTaskResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetImportFileTaskResponse"}
+	iGetLatestAssessmentIdRequest                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetLatestAssessmentIdRequest"}
+	iGetLatestAssessmentIdResponse               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetLatestAssessmentIdResponse"}
+	iGetPortfolioPreferencesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetPortfolioPreferencesRequest"}
+	iGetPortfolioPreferencesResponse             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetPortfolioPreferencesResponse"}
+	iGetPortfolioSummaryRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetPortfolioSummaryRequest"}
+	iGetPortfolioSummaryResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetPortfolioSummaryResponse"}
+	iGetRecommendationReportDetailsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetRecommendationReportDetailsRequest"}
+	iGetRecommendationReportDetailsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetRecommendationReportDetailsResponse"}
+	iGetServerDetailsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetServerDetailsRequest"}
+	iGetServerDetailsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetServerDetailsResponse"}
+	iGetServerStrategiesRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetServerStrategiesRequest"}
+	iGetServerStrategiesResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "GetServerStrategiesResponse"}
+	iListAnalyzableServersRequest                = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListAnalyzableServersRequest"}
+	iListAnalyzableServersResponse               = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListAnalyzableServersResponse"}
+	iListApplicationComponentsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListApplicationComponentsRequest"}
+	iListApplicationComponentsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListApplicationComponentsResponse"}
+	iListCollectorsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListCollectorsRequest"}
+	iListCollectorsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListCollectorsResponse"}
+	iListImportFileTaskRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListImportFileTaskRequest"}
+	iListImportFileTaskResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListImportFileTaskResponse"}
+	iListServersRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListServersRequest"}
+	iListServersResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "ListServersResponse"}
+	iPutPortfolioPreferencesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "PutPortfolioPreferencesRequest"}
+	iPutPortfolioPreferencesResponse             = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "PutPortfolioPreferencesResponse"}
+	iStartAssessmentRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartAssessmentRequest"}
+	iStartAssessmentResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartAssessmentResponse"}
+	iStartImportFileTaskRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartImportFileTaskRequest"}
+	iStartImportFileTaskResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartImportFileTaskResponse"}
+	iStartRecommendationReportGenerationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartRecommendationReportGenerationRequest"}
+	iStartRecommendationReportGenerationResponse = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StartRecommendationReportGenerationResponse"}
+	iStopAssessmentRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StopAssessmentRequest"}
+	iStopAssessmentResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "StopAssessmentResponse"}
+	iUpdateApplicationComponentConfigRequest     = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "UpdateApplicationComponentConfigRequest"}
+	iUpdateApplicationComponentConfigResponse    = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "UpdateApplicationComponentConfigResponse"}
+	iUpdateServerConfigRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "UpdateServerConfigRequest"}
+	iUpdateServerConfigResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.migrationhubstrategy", Name: "UpdateServerConfigResponse"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-applicationcomponent-details/{applicationComponentId}",
-	Code: 200})
-
-var GetApplicationComponentStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetApplicationComponentStrategies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-applicationcomponent-strategies/{applicationComponentId}",
-	Code: 200})
-
-var GetAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-assessment/{id}",
-	Code: 200})
-
-var GetImportFileTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetImportFileTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-import-file-task/{id}",
-	Code: 200})
-
-var GetLatestAssessmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetLatestAssessmentId",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-latest-assessment-id",
-	Code: 200})
-
-var GetPortfolioPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetPortfolioPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-portfolio-preferences",
-	Code: 200})
-
-var GetPortfolioSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetPortfolioSummary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-portfolio-summary",
-	Code: 200})
-
-var GetRecommendationReportDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetRecommendationReportDetails",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-recommendation-report-details/{id}",
-	Code: 200})
-
-var GetServerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetServerDetails",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-server-details/{serverId}",
-	Code: 200})
-
-var GetServerStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetServerStrategies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/get-server-strategies/{serverId}",
-	Code: 200})
-
-var ListAnalyzableServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListAnalyzableServers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-analyzable-servers",
-	Code: 200})
-
-var ListApplicationComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListApplicationComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-applicationcomponents",
-	Code: 200})
-
-var ListCollectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListCollectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/list-collectors",
-	Code: 200})
-
-var ListImportFileTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListImportFileTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/list-import-file-task",
-	Code: 200})
-
-var ListServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListServers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-servers",
-	Code: 200})
-
-var PutPortfolioPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "PutPortfolioPreferences",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/put-portfolio-preferences",
-	Code: 200})
-
-var StartAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/start-assessment",
-	Code: 200})
-
-var StartImportFileTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartImportFileTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/start-import-file-task",
-	Code: 200})
-
-var StartRecommendationReportGeneration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartRecommendationReportGeneration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/start-recommendation-report-generation",
-	Code: 200})
-
-var StopAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StopAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/stop-assessment",
-	Code: 200})
-
-var UpdateApplicationComponentConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "UpdateApplicationComponentConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-applicationcomponent-config/",
-	Code: 200})
-
-var UpdateServerConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "UpdateServerConfig",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-server-config/",
-	Code: 200})
-
-var _AWSMigrationHubStrategyRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AWSMigrationHubStrategyRecommendation",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMigrationHubStrategyRecommendation = smithy.NewServiceSchema(_AWSMigrationHubStrategyRecommendation, "2020-02-19")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AnalysisStatusUnion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AnalysisStatusUnion",
-}, smithy.ShapeTypeUnion, 2)
-var AnalysisStatusUnion_runtimeAnalysisStatus *smithy.Schema
-
-var AnalysisStatusUnion_srcCodeOrDbAnalysisStatus *smithy.Schema
-
-var _AnalysisType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AnalysisType",
-}, smithy.ShapeTypeString, 0)
-
-var AnalyzableServerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AnalyzableServerSummary",
-}, smithy.ShapeTypeStructure, 4)
-var AnalyzableServerSummary_hostname *smithy.Schema
-
-var AnalyzableServerSummary_ipAddress *smithy.Schema
-
-var AnalyzableServerSummary_source *smithy.Schema
-
-var AnalyzableServerSummary_vmId *smithy.Schema
-
-var _AnalyzableServerSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AnalyzableServerSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AnalyzableServerSummaryList_member *smithy.Schema
-
-var AnalyzerNameUnion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AnalyzerNameUnion",
-}, smithy.ShapeTypeUnion, 3)
-var AnalyzerNameUnion_binaryAnalyzerName *smithy.Schema
-
-var AnalyzerNameUnion_runTimeAnalyzerName *smithy.Schema
-
-var AnalyzerNameUnion_sourceCodeAnalyzerName *smithy.Schema
-
-var AntipatternReportResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AntipatternReportResult",
-}, smithy.ShapeTypeStructure, 4)
-var AntipatternReportResult_analyzerName *smithy.Schema
-
-var AntipatternReportResult_antiPatternReportS3Object *smithy.Schema
-
-var AntipatternReportResult_antipatternReportStatus *smithy.Schema
-
-var AntipatternReportResult_antipatternReportStatusMessage *smithy.Schema
-
-var _AntipatternReportResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AntipatternReportResultList",
-}, smithy.ShapeTypeList, 1)
-var _AntipatternReportResultList_member *smithy.Schema
-
-var _AntipatternReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AntipatternReportStatus",
-}, smithy.ShapeTypeString, 0)
-
-var AntipatternSeveritySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AntipatternSeveritySummary",
-}, smithy.ShapeTypeStructure, 2)
-var AntipatternSeveritySummary_severity *smithy.Schema
-
-var AntipatternSeveritySummary_count *smithy.Schema
-
-var _ApplicationComponentCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentCriteria",
-}, smithy.ShapeTypeString, 0)
-
-var ApplicationComponentDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentDetail",
-}, smithy.ShapeTypeStructure, 23)
-var ApplicationComponentDetail_id *smithy.Schema
-
-var ApplicationComponentDetail_name *smithy.Schema
-
-var ApplicationComponentDetail_recommendationSet *smithy.Schema
-
-var ApplicationComponentDetail_analysisStatus *smithy.Schema
-
-var ApplicationComponentDetail_statusMessage *smithy.Schema
-
-var ApplicationComponentDetail_listAntipatternSeveritySummary *smithy.Schema
-
-var ApplicationComponentDetail_databaseConfigDetail *smithy.Schema
-
-var ApplicationComponentDetail_sourceCodeRepositories *smithy.Schema
-
-var ApplicationComponentDetail_appType *smithy.Schema
-
-var ApplicationComponentDetail_resourceSubType *smithy.Schema
-
-var ApplicationComponentDetail_inclusionStatus *smithy.Schema
-
-var ApplicationComponentDetail_antipatternReportS3Object *smithy.Schema
-
-var ApplicationComponentDetail_antipatternReportStatus *smithy.Schema
-
-var ApplicationComponentDetail_antipatternReportStatusMessage *smithy.Schema
-
-var ApplicationComponentDetail_osVersion *smithy.Schema
-
-var ApplicationComponentDetail_osDriver *smithy.Schema
-
-var ApplicationComponentDetail_lastAnalyzedTimestamp *smithy.Schema
-
-var ApplicationComponentDetail_associatedServerId *smithy.Schema
-
-var ApplicationComponentDetail_moreServerAssociationExists *smithy.Schema
-
-var ApplicationComponentDetail_runtimeStatus *smithy.Schema
-
-var ApplicationComponentDetail_runtimeStatusMessage *smithy.Schema
-
-var ApplicationComponentDetail_appUnitError *smithy.Schema
-
-var ApplicationComponentDetail_resultList *smithy.Schema
-
-var _ApplicationComponentDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentDetails",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationComponentDetails_member *smithy.Schema
-
-var _ApplicationComponentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentId",
-}, smithy.ShapeTypeString, 0)
-
-var ApplicationComponentStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentStatusSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationComponentStatusSummary_srcCodeOrDbAnalysisStatus *smithy.Schema
-
-var ApplicationComponentStatusSummary_count *smithy.Schema
-
-var _ApplicationComponentStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentStrategies",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationComponentStrategies_member *smithy.Schema
-
-var ApplicationComponentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentStrategy",
-}, smithy.ShapeTypeStructure, 3)
-var ApplicationComponentStrategy_recommendation *smithy.Schema
-
-var ApplicationComponentStrategy_status *smithy.Schema
-
-var ApplicationComponentStrategy_isPreferred *smithy.Schema
-
-var ApplicationComponentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationComponentSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ApplicationComponentSummary_appType *smithy.Schema
-
-var ApplicationComponentSummary_count *smithy.Schema
-
-var _ApplicationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationMode",
-}, smithy.ShapeTypeString, 0)
-
-var ApplicationPreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ApplicationPreferences",
-}, smithy.ShapeTypeStructure, 1)
-var ApplicationPreferences_managementPreference *smithy.Schema
-
-var _AppType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AppType",
-}, smithy.ShapeTypeString, 0)
-
-var AppUnitError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AppUnitError",
-}, smithy.ShapeTypeStructure, 1)
-var AppUnitError_appUnitErrorCategory *smithy.Schema
-
-var _AppUnitErrorCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AppUnitErrorCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentDataSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssessmentDataSourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssessmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssessmentStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var AssessmentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssessmentSummary",
-}, smithy.ShapeTypeStructure, 11)
-var AssessmentSummary_listServerStrategySummary *smithy.Schema
-
-var AssessmentSummary_listApplicationComponentStrategySummary *smithy.Schema
-
-var AssessmentSummary_listAntipatternSeveritySummary *smithy.Schema
-
-var AssessmentSummary_listApplicationComponentSummary *smithy.Schema
-
-var AssessmentSummary_listServerSummary *smithy.Schema
-
-var AssessmentSummary_antipatternReportS3Object *smithy.Schema
-
-var AssessmentSummary_antipatternReportStatus *smithy.Schema
-
-var AssessmentSummary_antipatternReportStatusMessage *smithy.Schema
-
-var AssessmentSummary_lastAnalyzedTimestamp *smithy.Schema
-
-var AssessmentSummary_listApplicationComponentStatusSummary *smithy.Schema
-
-var AssessmentSummary_listServerStatusSummary *smithy.Schema
-
-var AssessmentTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssessmentTarget",
-}, smithy.ShapeTypeStructure, 3)
-var AssessmentTarget_condition *smithy.Schema
-
-var AssessmentTarget_name *smithy.Schema
-
-var AssessmentTarget_values *smithy.Schema
-
-var _AssessmentTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssessmentTargets",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentTargets_member *smithy.Schema
-
-var _AssessmentTargetValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssessmentTargetValues",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentTargetValues_member *smithy.Schema
-
-var AssociatedApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssociatedApplication",
-}, smithy.ShapeTypeStructure, 2)
-var AssociatedApplication_name *smithy.Schema
-
-var AssociatedApplication_id *smithy.Schema
-
-var _AssociatedApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssociatedApplications",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedApplications_member *smithy.Schema
-
-var _AssociatedServerIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AssociatedServerIDs",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedServerIDs_member *smithy.Schema
-
-var _AsyncTaskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AsyncTaskId",
-}, smithy.ShapeTypeString, 0)
-
-var _AuthType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AuthType",
-}, smithy.ShapeTypeString, 0)
-
-var AwsManagedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AwsManagedResources",
-}, smithy.ShapeTypeStructure, 1)
-var AwsManagedResources_targetDestination *smithy.Schema
-
-var _AwsManagedTargetDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AwsManagedTargetDestination",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsManagedTargetDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "AwsManagedTargetDestinations",
-}, smithy.ShapeTypeList, 1)
-var _AwsManagedTargetDestinations_member *smithy.Schema
-
-var _BinaryAnalyzerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "BinaryAnalyzerName",
-}, smithy.ShapeTypeString, 0)
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BusinessGoals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "BusinessGoals",
-}, smithy.ShapeTypeStructure, 4)
-var BusinessGoals_speedOfMigration *smithy.Schema
-
-var BusinessGoals_reduceOperationalOverheadWithManagedServices *smithy.Schema
-
-var BusinessGoals_modernizeInfrastructureWithCloudNativeTechnologies *smithy.Schema
-
-var BusinessGoals_licenseCostReduction *smithy.Schema
-
-var _BusinessGoalsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "BusinessGoalsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var Collector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Collector",
-}, smithy.ShapeTypeStructure, 8)
-var Collector_collectorId *smithy.Schema
-
-var Collector_ipAddress *smithy.Schema
-
-var Collector_hostName *smithy.Schema
-
-var Collector_collectorHealth *smithy.Schema
-
-var Collector_collectorVersion *smithy.Schema
-
-var Collector_registeredTimeStamp *smithy.Schema
-
-var Collector_lastActivityTimeStamp *smithy.Schema
-
-var Collector_configurationSummary *smithy.Schema
-
-var _CollectorHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "CollectorHealth",
-}, smithy.ShapeTypeString, 0)
-
-var _Collectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Collectors",
-}, smithy.ShapeTypeList, 1)
-var _Collectors_member *smithy.Schema
-
-var _Condition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Condition",
-}, smithy.ShapeTypeString, 0)
-
-var ConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ConfigurationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConfigurationSummary_vcenterBasedRemoteInfoList *smithy.Schema
-
-var ConfigurationSummary_ipAddressBasedRemoteInfoList *smithy.Schema
-
-var ConfigurationSummary_versionControlInfoList *smithy.Schema
-
-var ConfigurationSummary_pipelineInfoList *smithy.Schema
-
-var ConfigurationSummary_remoteSourceCodeAnalysisServerInfo *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var DatabaseConfigDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "DatabaseConfigDetail",
-}, smithy.ShapeTypeStructure, 1)
-var DatabaseConfigDetail_secretName *smithy.Schema
-
-var _DatabaseManagementPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "DatabaseManagementPreference",
-}, smithy.ShapeTypeString, 0)
-
-var DatabaseMigrationPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "DatabaseMigrationPreference",
-}, smithy.ShapeTypeUnion, 3)
-var DatabaseMigrationPreference_heterogeneous *smithy.Schema
-
-var DatabaseMigrationPreference_homogeneous *smithy.Schema
-
-var DatabaseMigrationPreference_noPreference *smithy.Schema
-
-var DatabasePreferences = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "DatabasePreferences",
-}, smithy.ShapeTypeStructure, 2)
-var DatabasePreferences_databaseManagementPreference *smithy.Schema
-
-var DatabasePreferences_databaseMigrationPreference *smithy.Schema
-
-var DataCollectionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "DataCollectionDetails",
-}, smithy.ShapeTypeStructure, 8)
-var DataCollectionDetails_status *smithy.Schema
-
-var DataCollectionDetails_servers *smithy.Schema
-
-var DataCollectionDetails_failed *smithy.Schema
-
-var DataCollectionDetails_success *smithy.Schema
-
-var DataCollectionDetails_inProgress *smithy.Schema
-
-var DataCollectionDetails_startTime *smithy.Schema
-
-var DataCollectionDetails_completionTime *smithy.Schema
-
-var DataCollectionDetails_statusMessage *smithy.Schema
-
-var _DataSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "DataSourceType",
-}, smithy.ShapeTypeString, 0)
-
-var DependencyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "DependencyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DependencyException_message *smithy.Schema
-
-var _errorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "errorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Group = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Group",
-}, smithy.ShapeTypeStructure, 2)
-var Group_name *smithy.Schema
-
-var Group_value *smithy.Schema
-
-var _GroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GroupIds",
-}, smithy.ShapeTypeList, 1)
-var _GroupIds_member *smithy.Schema
-
-var _GroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GroupName",
-}, smithy.ShapeTypeString, 0)
-
-var Heterogeneous = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Heterogeneous",
-}, smithy.ShapeTypeStructure, 1)
-var Heterogeneous_targetDatabaseEngine *smithy.Schema
-
-var _HeterogeneousTargetDatabaseEngine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "HeterogeneousTargetDatabaseEngine",
-}, smithy.ShapeTypeString, 0)
-
-var _HeterogeneousTargetDatabaseEngines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "HeterogeneousTargetDatabaseEngines",
-}, smithy.ShapeTypeList, 1)
-var _HeterogeneousTargetDatabaseEngines_member *smithy.Schema
-
-var Homogeneous = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Homogeneous",
-}, smithy.ShapeTypeStructure, 1)
-var Homogeneous_targetDatabaseEngine *smithy.Schema
-
-var _HomogeneousTargetDatabaseEngine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "HomogeneousTargetDatabaseEngine",
-}, smithy.ShapeTypeString, 0)
-
-var _HomogeneousTargetDatabaseEngines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "HomogeneousTargetDatabaseEngines",
-}, smithy.ShapeTypeList, 1)
-var _HomogeneousTargetDatabaseEngines_member *smithy.Schema
-
-var ImportFileTaskInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ImportFileTaskInformation",
-}, smithy.ShapeTypeStructure, 11)
-var ImportFileTaskInformation_id *smithy.Schema
-
-var ImportFileTaskInformation_status *smithy.Schema
-
-var ImportFileTaskInformation_startTime *smithy.Schema
-
-var ImportFileTaskInformation_inputS3Bucket *smithy.Schema
-
-var ImportFileTaskInformation_inputS3Key *smithy.Schema
-
-var ImportFileTaskInformation_statusReportS3Bucket *smithy.Schema
-
-var ImportFileTaskInformation_statusReportS3Key *smithy.Schema
-
-var ImportFileTaskInformation_completionTime *smithy.Schema
-
-var ImportFileTaskInformation_numberOfRecordsSuccess *smithy.Schema
-
-var ImportFileTaskInformation_numberOfRecordsFailed *smithy.Schema
-
-var ImportFileTaskInformation_importName *smithy.Schema
-
-var _ImportFileTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ImportFileTaskStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _importS3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "importS3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _importS3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "importS3Key",
-}, smithy.ShapeTypeString, 0)
-
-var _InclusionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "InclusionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var _InterfaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "InterfaceName",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _IPAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "IPAddress",
-}, smithy.ShapeTypeString, 0)
-
-var IPAddressBasedRemoteInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "IPAddressBasedRemoteInfo",
-}, smithy.ShapeTypeStructure, 3)
-var IPAddressBasedRemoteInfo_ipAddressConfigurationTimeStamp *smithy.Schema
-
-var IPAddressBasedRemoteInfo_authType *smithy.Schema
-
-var IPAddressBasedRemoteInfo_osType *smithy.Schema
-
-var _IPAddressBasedRemoteInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "IPAddressBasedRemoteInfoList",
-}, smithy.ShapeTypeList, 1)
-var _IPAddressBasedRemoteInfoList_member *smithy.Schema
-
-var _ListAntipatternSeveritySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListAntipatternSeveritySummary",
-}, smithy.ShapeTypeList, 1)
-var _ListAntipatternSeveritySummary_member *smithy.Schema
-
-var _ListApplicationComponentStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListApplicationComponentStatusSummary",
-}, smithy.ShapeTypeList, 1)
-var _ListApplicationComponentStatusSummary_member *smithy.Schema
-
-var _ListApplicationComponentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListApplicationComponentSummary",
-}, smithy.ShapeTypeList, 1)
-var _ListApplicationComponentSummary_member *smithy.Schema
-
-var _ListImportFileTaskInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListImportFileTaskInformation",
-}, smithy.ShapeTypeList, 1)
-var _ListImportFileTaskInformation_member *smithy.Schema
-
-var _ListServerStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListServerStatusSummary",
-}, smithy.ShapeTypeList, 1)
-var _ListServerStatusSummary_member *smithy.Schema
-
-var _ListServerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListServerSummary",
-}, smithy.ShapeTypeList, 1)
-var _ListServerSummary_member *smithy.Schema
-
-var _ListStrategySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListStrategySummary",
-}, smithy.ShapeTypeList, 1)
-var _ListStrategySummary_member *smithy.Schema
-
-var _Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Location",
-}, smithy.ShapeTypeString, 0)
-
-var _MacAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "MacAddress",
-}, smithy.ShapeTypeString, 0)
-
-var ManagementPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ManagementPreference",
-}, smithy.ShapeTypeUnion, 3)
-var ManagementPreference_awsManagedResources *smithy.Schema
-
-var ManagementPreference_selfManageResources *smithy.Schema
-
-var ManagementPreference_noPreference *smithy.Schema
-
-var _MaxResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "MaxResult",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NetMask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NetMask",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NetworkInfo",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkInfo_interfaceName *smithy.Schema
-
-var NetworkInfo_ipAddress *smithy.Schema
-
-var NetworkInfo_macAddress *smithy.Schema
-
-var NetworkInfo_netMask *smithy.Schema
-
-var _NetworkInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NetworkInfoList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkInfoList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoDatabaseMigrationPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NoDatabaseMigrationPreference",
-}, smithy.ShapeTypeStructure, 1)
-var NoDatabaseMigrationPreference_targetDatabaseEngine *smithy.Schema
-
-var NoManagementPreference = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NoManagementPreference",
-}, smithy.ShapeTypeStructure, 1)
-var NoManagementPreference_targetDestination *smithy.Schema
-
-var _NoPreferenceTargetDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NoPreferenceTargetDestination",
-}, smithy.ShapeTypeString, 0)
-
-var _NoPreferenceTargetDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "NoPreferenceTargetDestinations",
-}, smithy.ShapeTypeList, 1)
-var _NoPreferenceTargetDestinations_member *smithy.Schema
-
-var OSInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "OSInfo",
-}, smithy.ShapeTypeStructure, 2)
-var OSInfo_type *smithy.Schema
-
-var OSInfo_version *smithy.Schema
-
-var _OSType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "OSType",
-}, smithy.ShapeTypeString, 0)
-
-var _OSVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "OSVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "OutputFormat",
-}, smithy.ShapeTypeString, 0)
-
-var PipelineInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "PipelineInfo",
-}, smithy.ShapeTypeStructure, 2)
-var PipelineInfo_pipelineType *smithy.Schema
-
-var PipelineInfo_pipelineConfigurationTimeStamp *smithy.Schema
-
-var _PipelineInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "PipelineInfoList",
-}, smithy.ShapeTypeList, 1)
-var _PipelineInfoList_member *smithy.Schema
-
-var _PipelineType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "PipelineType",
-}, smithy.ShapeTypeString, 0)
-
-var PrioritizeBusinessGoals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "PrioritizeBusinessGoals",
-}, smithy.ShapeTypeStructure, 1)
-var PrioritizeBusinessGoals_businessGoals *smithy.Schema
-
-var _ProjectName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ProjectName",
-}, smithy.ShapeTypeString, 0)
-
-var RecommendationReportDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RecommendationReportDetails",
-}, smithy.ShapeTypeStructure, 6)
-var RecommendationReportDetails_status *smithy.Schema
-
-var RecommendationReportDetails_statusMessage *smithy.Schema
-
-var RecommendationReportDetails_startTime *smithy.Schema
-
-var RecommendationReportDetails_completionTime *smithy.Schema
-
-var RecommendationReportDetails_s3Bucket *smithy.Schema
-
-var RecommendationReportDetails_s3Keys *smithy.Schema
-
-var _RecommendationReportStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RecommendationReportStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _RecommendationReportStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RecommendationReportStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _RecommendationReportTimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RecommendationReportTimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var RecommendationSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RecommendationSet",
-}, smithy.ShapeTypeStructure, 3)
-var RecommendationSet_transformationTool *smithy.Schema
-
-var RecommendationSet_targetDestination *smithy.Schema
-
-var RecommendationSet_strategy *smithy.Schema
-
-var _RecommendationTaskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RecommendationTaskId",
-}, smithy.ShapeTypeString, 0)
-
-var RemoteSourceCodeAnalysisServerInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RemoteSourceCodeAnalysisServerInfo",
-}, smithy.ShapeTypeStructure, 1)
-var RemoteSourceCodeAnalysisServerInfo_remoteSourceCodeAnalysisServerConfigurationTimestamp *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _ResourceSubType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ResourceSubType",
-}, smithy.ShapeTypeString, 0)
-
-var Result = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Result",
-}, smithy.ShapeTypeStructure, 4)
-var Result_analysisType *smithy.Schema
-
-var Result_analysisStatus *smithy.Schema
-
-var Result_statusMessage *smithy.Schema
-
-var Result_antipatternReportResultList *smithy.Schema
-
-var _ResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ResultList",
-}, smithy.ShapeTypeList, 1)
-var _ResultList_member *smithy.Schema
-
-var _RuntimeAnalysisStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RuntimeAnalysisStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _RunTimeAnalyzerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RunTimeAnalyzerName",
-}, smithy.ShapeTypeString, 0)
-
-var _RunTimeAssessmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "RunTimeAssessmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Keys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "S3Keys",
-}, smithy.ShapeTypeList, 1)
-var _S3Keys_member *smithy.Schema
-
-var S3Object = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "S3Object",
-}, smithy.ShapeTypeStructure, 2)
-var S3Object_s3Bucket *smithy.Schema
-
-var S3Object_s3key *smithy.Schema
-
-var _SecretsManagerKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SecretsManagerKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SelfManageResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SelfManageResources",
-}, smithy.ShapeTypeStructure, 1)
-var SelfManageResources_targetDestination *smithy.Schema
-
-var _SelfManageTargetDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SelfManageTargetDestination",
-}, smithy.ShapeTypeString, 0)
-
-var _SelfManageTargetDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SelfManageTargetDestinations",
-}, smithy.ShapeTypeList, 1)
-var _SelfManageTargetDestinations_member *smithy.Schema
-
-var _ServerCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerCriteria",
-}, smithy.ShapeTypeString, 0)
-
-var ServerDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerDetail",
-}, smithy.ShapeTypeStructure, 14)
-var ServerDetail_id *smithy.Schema
-
-var ServerDetail_name *smithy.Schema
-
-var ServerDetail_recommendationSet *smithy.Schema
-
-var ServerDetail_dataCollectionStatus *smithy.Schema
-
-var ServerDetail_statusMessage *smithy.Schema
-
-var ServerDetail_listAntipatternSeveritySummary *smithy.Schema
-
-var ServerDetail_systemInfo *smithy.Schema
-
-var ServerDetail_applicationComponentStrategySummary *smithy.Schema
-
-var ServerDetail_antipatternReportS3Object *smithy.Schema
-
-var ServerDetail_antipatternReportStatus *smithy.Schema
-
-var ServerDetail_antipatternReportStatusMessage *smithy.Schema
-
-var ServerDetail_serverType *smithy.Schema
-
-var ServerDetail_lastAnalyzedTimestamp *smithy.Schema
-
-var ServerDetail_serverError *smithy.Schema
-
-var _ServerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerDetails",
-}, smithy.ShapeTypeList, 1)
-var _ServerDetails_member *smithy.Schema
-
-var ServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerError",
-}, smithy.ShapeTypeStructure, 1)
-var ServerError_serverErrorCategory *smithy.Schema
-
-var _ServerErrorCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerErrorCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _ServerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerId",
-}, smithy.ShapeTypeString, 0)
-
-var _ServerOsType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerOsType",
-}, smithy.ShapeTypeString, 0)
-
-var ServerStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerStatusSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ServerStatusSummary_runTimeAssessmentStatus *smithy.Schema
-
-var ServerStatusSummary_count *smithy.Schema
-
-var _ServerStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerStrategies",
-}, smithy.ShapeTypeList, 1)
-var _ServerStrategies_member *smithy.Schema
-
-var ServerStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerStrategy",
-}, smithy.ShapeTypeStructure, 4)
-var ServerStrategy_recommendation *smithy.Schema
-
-var ServerStrategy_status *smithy.Schema
-
-var ServerStrategy_numberOfApplicationComponents *smithy.Schema
-
-var ServerStrategy_isPreferred *smithy.Schema
-
-var ServerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServerSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ServerSummary_ServerOsType *smithy.Schema
-
-var ServerSummary_count *smithy.Schema
-
-var ServiceLinkedRoleLockClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServiceLinkedRoleLockClientException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ServiceLinkedRoleLockClientException_message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _Severity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Severity",
-}, smithy.ShapeTypeString, 0)
-
-var _SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeString, 0)
-
-var SourceCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SourceCode",
-}, smithy.ShapeTypeStructure, 4)
-var SourceCode_versionControl *smithy.Schema
-
-var SourceCode_sourceVersion *smithy.Schema
-
-var SourceCode_location *smithy.Schema
-
-var SourceCode_projectName *smithy.Schema
-
-var _SourceCodeAnalyzerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SourceCodeAnalyzerName",
-}, smithy.ShapeTypeString, 0)
-
-var _SourceCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SourceCodeList",
-}, smithy.ShapeTypeList, 1)
-var _SourceCodeList_member *smithy.Schema
-
-var _SourceCodeRepositories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SourceCodeRepositories",
-}, smithy.ShapeTypeList, 1)
-var _SourceCodeRepositories_member *smithy.Schema
-
-var SourceCodeRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SourceCodeRepository",
-}, smithy.ShapeTypeStructure, 4)
-var SourceCodeRepository_repository *smithy.Schema
-
-var SourceCodeRepository_branch *smithy.Schema
-
-var SourceCodeRepository_versionControlType *smithy.Schema
-
-var SourceCodeRepository_projectName *smithy.Schema
-
-var _SourceVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SourceVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _SrcCodeOrDbAnalysisStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SrcCodeOrDbAnalysisStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Strategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "Strategy",
-}, smithy.ShapeTypeString, 0)
-
-var StrategyOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StrategyOption",
-}, smithy.ShapeTypeStructure, 4)
-var StrategyOption_strategy *smithy.Schema
-
-var StrategyOption_toolName *smithy.Schema
-
-var StrategyOption_targetDestination *smithy.Schema
-
-var StrategyOption_isPreferred *smithy.Schema
-
-var _StrategyRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StrategyRecommendation",
-}, smithy.ShapeTypeString, 0)
-
-var StrategySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StrategySummary",
-}, smithy.ShapeTypeStructure, 2)
-var StrategySummary_strategy *smithy.Schema
-
-var StrategySummary_count *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var SystemInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "SystemInfo",
-}, smithy.ShapeTypeStructure, 4)
-var SystemInfo_osInfo *smithy.Schema
-
-var SystemInfo_fileSystemType *smithy.Schema
-
-var SystemInfo_networkInfoList *smithy.Schema
-
-var SystemInfo_cpuArchitecture *smithy.Schema
-
-var _TargetDatabaseEngine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TargetDatabaseEngine",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetDatabaseEngines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TargetDatabaseEngines",
-}, smithy.ShapeTypeList, 1)
-var _TargetDatabaseEngines_member *smithy.Schema
-
-var _TargetDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TargetDestination",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var _TimeStamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TimeStamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TranformationToolDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TranformationToolDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _TranformationToolInstallationLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TranformationToolInstallationLink",
-}, smithy.ShapeTypeString, 0)
-
-var TransformationTool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TransformationTool",
-}, smithy.ShapeTypeStructure, 3)
-var TransformationTool_name *smithy.Schema
-
-var TransformationTool_description *smithy.Schema
-
-var TransformationTool_tranformationToolInstallationLink *smithy.Schema
-
-var _TransformationToolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "TransformationToolName",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var VcenterBasedRemoteInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "VcenterBasedRemoteInfo",
-}, smithy.ShapeTypeStructure, 2)
-var VcenterBasedRemoteInfo_vcenterConfigurationTimeStamp *smithy.Schema
-
-var VcenterBasedRemoteInfo_osType *smithy.Schema
-
-var _VcenterBasedRemoteInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "VcenterBasedRemoteInfoList",
-}, smithy.ShapeTypeList, 1)
-var _VcenterBasedRemoteInfoList_member *smithy.Schema
-
-var _VersionControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "VersionControl",
-}, smithy.ShapeTypeString, 0)
-
-var VersionControlInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "VersionControlInfo",
-}, smithy.ShapeTypeStructure, 2)
-var VersionControlInfo_versionControlType *smithy.Schema
-
-var VersionControlInfo_versionControlConfigurationTimeStamp *smithy.Schema
-
-var _VersionControlInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "VersionControlInfoList",
-}, smithy.ShapeTypeList, 1)
-var _VersionControlInfoList_member *smithy.Schema
-
-var _VersionControlType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "VersionControlType",
-}, smithy.ShapeTypeString, 0)
-
-var GetApplicationComponentDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetApplicationComponentDetailsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApplicationComponentDetailsRequest_applicationComponentId *smithy.Schema
-
-var GetApplicationComponentDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetApplicationComponentDetailsResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetApplicationComponentDetailsResponse_applicationComponentDetail *smithy.Schema
-
-var GetApplicationComponentDetailsResponse_associatedApplications *smithy.Schema
-
-var GetApplicationComponentDetailsResponse_moreApplicationResource *smithy.Schema
-
-var GetApplicationComponentDetailsResponse_associatedServerIds *smithy.Schema
-
-var GetApplicationComponentStrategiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetApplicationComponentStrategiesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApplicationComponentStrategiesRequest_applicationComponentId *smithy.Schema
-
-var GetApplicationComponentStrategiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetApplicationComponentStrategiesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetApplicationComponentStrategiesResponse_applicationComponentStrategies *smithy.Schema
-
-var GetAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetAssessmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAssessmentRequest_id *smithy.Schema
-
-var GetAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetAssessmentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetAssessmentResponse_id *smithy.Schema
-
-var GetAssessmentResponse_dataCollectionDetails *smithy.Schema
-
-var GetAssessmentResponse_assessmentTargets *smithy.Schema
-
-var GetImportFileTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetImportFileTaskRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetImportFileTaskRequest_id *smithy.Schema
-
-var GetImportFileTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetImportFileTaskResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetImportFileTaskResponse_id *smithy.Schema
-
-var GetImportFileTaskResponse_status *smithy.Schema
-
-var GetImportFileTaskResponse_startTime *smithy.Schema
-
-var GetImportFileTaskResponse_inputS3Bucket *smithy.Schema
-
-var GetImportFileTaskResponse_inputS3Key *smithy.Schema
-
-var GetImportFileTaskResponse_statusReportS3Bucket *smithy.Schema
-
-var GetImportFileTaskResponse_statusReportS3Key *smithy.Schema
-
-var GetImportFileTaskResponse_completionTime *smithy.Schema
-
-var GetImportFileTaskResponse_numberOfRecordsSuccess *smithy.Schema
-
-var GetImportFileTaskResponse_numberOfRecordsFailed *smithy.Schema
-
-var GetImportFileTaskResponse_importName *smithy.Schema
-
-var GetLatestAssessmentIdRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetLatestAssessmentIdRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetLatestAssessmentIdResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetLatestAssessmentIdResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetLatestAssessmentIdResponse_id *smithy.Schema
-
-var GetPortfolioPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetPortfolioPreferencesRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetPortfolioPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetPortfolioPreferencesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetPortfolioPreferencesResponse_prioritizeBusinessGoals *smithy.Schema
-
-var GetPortfolioPreferencesResponse_applicationPreferences *smithy.Schema
-
-var GetPortfolioPreferencesResponse_databasePreferences *smithy.Schema
-
-var GetPortfolioPreferencesResponse_applicationMode *smithy.Schema
-
-var GetPortfolioSummaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetPortfolioSummaryRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetPortfolioSummaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetPortfolioSummaryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPortfolioSummaryResponse_assessmentSummary *smithy.Schema
-
-var GetRecommendationReportDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetRecommendationReportDetailsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRecommendationReportDetailsRequest_id *smithy.Schema
-
-var GetRecommendationReportDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetRecommendationReportDetailsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecommendationReportDetailsResponse_id *smithy.Schema
-
-var GetRecommendationReportDetailsResponse_recommendationReportDetails *smithy.Schema
-
-var GetServerDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetServerDetailsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetServerDetailsRequest_serverId *smithy.Schema
-
-var GetServerDetailsRequest_nextToken *smithy.Schema
-
-var GetServerDetailsRequest_maxResults *smithy.Schema
-
-var GetServerDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetServerDetailsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetServerDetailsResponse_nextToken *smithy.Schema
-
-var GetServerDetailsResponse_serverDetail *smithy.Schema
-
-var GetServerDetailsResponse_associatedApplications *smithy.Schema
-
-var GetServerStrategiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetServerStrategiesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetServerStrategiesRequest_serverId *smithy.Schema
-
-var GetServerStrategiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "GetServerStrategiesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetServerStrategiesResponse_serverStrategies *smithy.Schema
-
-var ListAnalyzableServersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListAnalyzableServersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAnalyzableServersRequest_sort *smithy.Schema
-
-var ListAnalyzableServersRequest_nextToken *smithy.Schema
-
-var ListAnalyzableServersRequest_maxResults *smithy.Schema
-
-var ListAnalyzableServersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListAnalyzableServersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAnalyzableServersResponse_analyzableServers *smithy.Schema
-
-var ListAnalyzableServersResponse_nextToken *smithy.Schema
-
-var ListApplicationComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListApplicationComponentsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListApplicationComponentsRequest_applicationComponentCriteria *smithy.Schema
-
-var ListApplicationComponentsRequest_filterValue *smithy.Schema
-
-var ListApplicationComponentsRequest_sort *smithy.Schema
-
-var ListApplicationComponentsRequest_groupIdFilter *smithy.Schema
-
-var ListApplicationComponentsRequest_nextToken *smithy.Schema
-
-var ListApplicationComponentsRequest_maxResults *smithy.Schema
-
-var ListApplicationComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListApplicationComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationComponentsResponse_applicationComponentInfos *smithy.Schema
-
-var ListApplicationComponentsResponse_nextToken *smithy.Schema
-
-var ListCollectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListCollectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollectorsRequest_nextToken *smithy.Schema
-
-var ListCollectorsRequest_maxResults *smithy.Schema
-
-var ListCollectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListCollectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCollectorsResponse_Collectors *smithy.Schema
-
-var ListCollectorsResponse_nextToken *smithy.Schema
-
-var ListImportFileTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListImportFileTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListImportFileTaskRequest_nextToken *smithy.Schema
-
-var ListImportFileTaskRequest_maxResults *smithy.Schema
-
-var ListImportFileTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListImportFileTaskResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListImportFileTaskResponse_taskInfos *smithy.Schema
-
-var ListImportFileTaskResponse_nextToken *smithy.Schema
-
-var ListServersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListServersRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListServersRequest_serverCriteria *smithy.Schema
-
-var ListServersRequest_filterValue *smithy.Schema
-
-var ListServersRequest_sort *smithy.Schema
-
-var ListServersRequest_groupIdFilter *smithy.Schema
-
-var ListServersRequest_nextToken *smithy.Schema
-
-var ListServersRequest_maxResults *smithy.Schema
-
-var ListServersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "ListServersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServersResponse_serverInfos *smithy.Schema
-
-var ListServersResponse_nextToken *smithy.Schema
-
-var PutPortfolioPreferencesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "PutPortfolioPreferencesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutPortfolioPreferencesRequest_prioritizeBusinessGoals *smithy.Schema
-
-var PutPortfolioPreferencesRequest_applicationPreferences *smithy.Schema
-
-var PutPortfolioPreferencesRequest_databasePreferences *smithy.Schema
-
-var PutPortfolioPreferencesRequest_applicationMode *smithy.Schema
-
-var PutPortfolioPreferencesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "PutPortfolioPreferencesResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartAssessmentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartAssessmentRequest_s3bucketForAnalysisData *smithy.Schema
-
-var StartAssessmentRequest_s3bucketForReportData *smithy.Schema
-
-var StartAssessmentRequest_assessmentTargets *smithy.Schema
-
-var StartAssessmentRequest_assessmentDataSourceType *smithy.Schema
-
-var StartAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartAssessmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartAssessmentResponse_assessmentId *smithy.Schema
-
-var StartImportFileTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartImportFileTaskRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartImportFileTaskRequest_name *smithy.Schema
-
-var StartImportFileTaskRequest_S3Bucket *smithy.Schema
-
-var StartImportFileTaskRequest_s3key *smithy.Schema
-
-var StartImportFileTaskRequest_dataSourceType *smithy.Schema
-
-var StartImportFileTaskRequest_groupId *smithy.Schema
-
-var StartImportFileTaskRequest_s3bucketForReportData *smithy.Schema
-
-var StartImportFileTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartImportFileTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartImportFileTaskResponse_id *smithy.Schema
-
-var StartRecommendationReportGenerationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartRecommendationReportGenerationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartRecommendationReportGenerationRequest_outputFormat *smithy.Schema
-
-var StartRecommendationReportGenerationRequest_groupIdFilter *smithy.Schema
-
-var StartRecommendationReportGenerationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StartRecommendationReportGenerationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRecommendationReportGenerationResponse_id *smithy.Schema
-
-var StopAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StopAssessmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopAssessmentRequest_assessmentId *smithy.Schema
-
-var StopAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "StopAssessmentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateApplicationComponentConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "UpdateApplicationComponentConfigRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateApplicationComponentConfigRequest_applicationComponentId *smithy.Schema
-
-var UpdateApplicationComponentConfigRequest_inclusionStatus *smithy.Schema
-
-var UpdateApplicationComponentConfigRequest_strategyOption *smithy.Schema
-
-var UpdateApplicationComponentConfigRequest_sourceCodeList *smithy.Schema
-
-var UpdateApplicationComponentConfigRequest_secretsManagerKey *smithy.Schema
-
-var UpdateApplicationComponentConfigRequest_configureOnly *smithy.Schema
-
-var UpdateApplicationComponentConfigRequest_appType *smithy.Schema
-
-var UpdateApplicationComponentConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "UpdateApplicationComponentConfigResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateServerConfigRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "UpdateServerConfigRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServerConfigRequest_serverId *smithy.Schema
-
-var UpdateServerConfigRequest_strategyOption *smithy.Schema
-
-var UpdateServerConfigResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.migrationhubstrategy",
-	Name:      "UpdateServerConfigResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	AnalysisStatusUnion_runtimeAnalysisStatus = AnalysisStatusUnion.AddMember("runtimeAnalysisStatus", _RuntimeAnalysisStatus)
-
-	AnalysisStatusUnion_srcCodeOrDbAnalysisStatus = AnalysisStatusUnion.AddMember("srcCodeOrDbAnalysisStatus", _SrcCodeOrDbAnalysisStatus)
-
-	AnalyzableServerSummary_hostname = AnalyzableServerSummary.AddMember("hostname", _String)
-
-	AnalyzableServerSummary_ipAddress = AnalyzableServerSummary.AddMember("ipAddress", _String)
-
-	AnalyzableServerSummary_source = AnalyzableServerSummary.AddMember("source", _String)
-
-	AnalyzableServerSummary_vmId = AnalyzableServerSummary.AddMember("vmId", _String)
-
-	_AnalyzableServerSummaryList_member = _AnalyzableServerSummaryList.AddMember("member", AnalyzableServerSummary)
-
-	AnalyzerNameUnion_binaryAnalyzerName = AnalyzerNameUnion.AddMember("binaryAnalyzerName", _BinaryAnalyzerName)
-
-	AnalyzerNameUnion_runTimeAnalyzerName = AnalyzerNameUnion.AddMember("runTimeAnalyzerName", _RunTimeAnalyzerName)
-
-	AnalyzerNameUnion_sourceCodeAnalyzerName = AnalyzerNameUnion.AddMember("sourceCodeAnalyzerName", _SourceCodeAnalyzerName)
-
-	S3Object_s3Bucket = S3Object.AddMember("s3Bucket", _S3Bucket)
-
-	S3Object_s3key = S3Object.AddMember("s3key", _S3Key)
-
-	AntipatternReportResult_analyzerName = AntipatternReportResult.AddMember("analyzerName", AnalyzerNameUnion)
-
-	AntipatternReportResult_antiPatternReportS3Object = AntipatternReportResult.AddMember("antiPatternReportS3Object", S3Object)
-
-	AntipatternReportResult_antipatternReportStatus = AntipatternReportResult.AddMember("antipatternReportStatus", _AntipatternReportStatus)
-
-	AntipatternReportResult_antipatternReportStatusMessage = AntipatternReportResult.AddMember("antipatternReportStatusMessage", _StatusMessage)
-
-	_AntipatternReportResultList_member = _AntipatternReportResultList.AddMember("member", AntipatternReportResult)
-
-	AntipatternSeveritySummary_severity = AntipatternSeveritySummary.AddMember("severity", _Severity)
-
-	AntipatternSeveritySummary_count = AntipatternSeveritySummary.AddMember("count", _Integer)
-
-	TransformationTool_name = TransformationTool.AddMember("name", _TransformationToolName)
-
-	TransformationTool_description = TransformationTool.AddMember("description", _TranformationToolDescription)
-
-	TransformationTool_tranformationToolInstallationLink = TransformationTool.AddMember("tranformationToolInstallationLink", _TranformationToolInstallationLink)
-
-	RecommendationSet_transformationTool = RecommendationSet.AddMember("transformationTool", TransformationTool)
-
-	RecommendationSet_targetDestination = RecommendationSet.AddMember("targetDestination", _TargetDestination)
-
-	RecommendationSet_strategy = RecommendationSet.AddMember("strategy", _Strategy)
-
-	_ListAntipatternSeveritySummary_member = _ListAntipatternSeveritySummary.AddMember("member", AntipatternSeveritySummary)
-
-	DatabaseConfigDetail_secretName = DatabaseConfigDetail.AddMember("secretName", _String)
-
-	SourceCodeRepository_repository = SourceCodeRepository.AddMember("repository", _String)
-
-	SourceCodeRepository_branch = SourceCodeRepository.AddMember("branch", _String)
-
-	SourceCodeRepository_versionControlType = SourceCodeRepository.AddMember("versionControlType", _String)
-
-	SourceCodeRepository_projectName = SourceCodeRepository.AddMember("projectName", _String)
-
-	_SourceCodeRepositories_member = _SourceCodeRepositories.AddMember("member", SourceCodeRepository)
-
-	AppUnitError_appUnitErrorCategory = AppUnitError.AddMember("appUnitErrorCategory", _AppUnitErrorCategory)
-
-	Result_analysisType = Result.AddMember("analysisType", _AnalysisType)
-
-	Result_analysisStatus = Result.AddMember("analysisStatus", AnalysisStatusUnion)
-
-	Result_statusMessage = Result.AddMember("statusMessage", _StatusMessage)
-
-	Result_antipatternReportResultList = Result.AddMember("antipatternReportResultList", _AntipatternReportResultList)
-
-	_ResultList_member = _ResultList.AddMember("member", Result)
-
-	ApplicationComponentDetail_id = ApplicationComponentDetail.AddMember("id", _ResourceId)
-
-	ApplicationComponentDetail_name = ApplicationComponentDetail.AddMember("name", _ResourceName)
-
-	ApplicationComponentDetail_recommendationSet = ApplicationComponentDetail.AddMember("recommendationSet", RecommendationSet)
-
-	ApplicationComponentDetail_analysisStatus = ApplicationComponentDetail.AddMember("analysisStatus", _SrcCodeOrDbAnalysisStatus)
-
-	ApplicationComponentDetail_statusMessage = ApplicationComponentDetail.AddMember("statusMessage", _StatusMessage)
-
-	ApplicationComponentDetail_listAntipatternSeveritySummary = ApplicationComponentDetail.AddMember("listAntipatternSeveritySummary", _ListAntipatternSeveritySummary)
-
-	ApplicationComponentDetail_databaseConfigDetail = ApplicationComponentDetail.AddMember("databaseConfigDetail", DatabaseConfigDetail)
-
-	ApplicationComponentDetail_sourceCodeRepositories = ApplicationComponentDetail.AddMember("sourceCodeRepositories", _SourceCodeRepositories)
-
-	ApplicationComponentDetail_appType = ApplicationComponentDetail.AddMember("appType", _AppType)
-
-	ApplicationComponentDetail_resourceSubType = ApplicationComponentDetail.AddMember("resourceSubType", _ResourceSubType)
-
-	ApplicationComponentDetail_inclusionStatus = ApplicationComponentDetail.AddMember("inclusionStatus", _InclusionStatus)
-
-	ApplicationComponentDetail_antipatternReportS3Object = ApplicationComponentDetail.AddMember("antipatternReportS3Object", S3Object)
-
-	ApplicationComponentDetail_antipatternReportStatus = ApplicationComponentDetail.AddMember("antipatternReportStatus", _AntipatternReportStatus)
-
-	ApplicationComponentDetail_antipatternReportStatusMessage = ApplicationComponentDetail.AddMember("antipatternReportStatusMessage", _StatusMessage)
-
-	ApplicationComponentDetail_osVersion = ApplicationComponentDetail.AddMember("osVersion", _String)
-
-	ApplicationComponentDetail_osDriver = ApplicationComponentDetail.AddMember("osDriver", _String)
-
-	ApplicationComponentDetail_lastAnalyzedTimestamp = ApplicationComponentDetail.AddMember("lastAnalyzedTimestamp", _TimeStamp)
-
-	ApplicationComponentDetail_associatedServerId = ApplicationComponentDetail.AddMember("associatedServerId", _ServerId)
-
-	ApplicationComponentDetail_moreServerAssociationExists = ApplicationComponentDetail.AddMember("moreServerAssociationExists", _Boolean)
-
-	ApplicationComponentDetail_runtimeStatus = ApplicationComponentDetail.AddMember("runtimeStatus", _RuntimeAnalysisStatus)
-
-	ApplicationComponentDetail_runtimeStatusMessage = ApplicationComponentDetail.AddMember("runtimeStatusMessage", _StatusMessage)
-
-	ApplicationComponentDetail_appUnitError = ApplicationComponentDetail.AddMember("appUnitError", AppUnitError)
-
-	ApplicationComponentDetail_resultList = ApplicationComponentDetail.AddMember("resultList", _ResultList)
-
-	_ApplicationComponentDetails_member = _ApplicationComponentDetails.AddMember("member", ApplicationComponentDetail)
-
-	ApplicationComponentStatusSummary_srcCodeOrDbAnalysisStatus = ApplicationComponentStatusSummary.AddMember("srcCodeOrDbAnalysisStatus", _SrcCodeOrDbAnalysisStatus)
-
-	ApplicationComponentStatusSummary_count = ApplicationComponentStatusSummary.AddMember("count", _Integer)
-
-	ApplicationComponentStrategy_recommendation = ApplicationComponentStrategy.AddMember("recommendation", RecommendationSet)
-
-	ApplicationComponentStrategy_status = ApplicationComponentStrategy.AddMember("status", _StrategyRecommendation)
-
-	ApplicationComponentStrategy_isPreferred = ApplicationComponentStrategy.AddMember("isPreferred", _Boolean)
-
-	_ApplicationComponentStrategies_member = _ApplicationComponentStrategies.AddMember("member", ApplicationComponentStrategy)
-
-	ApplicationComponentSummary_appType = ApplicationComponentSummary.AddMember("appType", _AppType)
-
-	ApplicationComponentSummary_count = ApplicationComponentSummary.AddMember("count", _Integer)
-
-	_AwsManagedTargetDestinations_member = _AwsManagedTargetDestinations.AddMember("member", _AwsManagedTargetDestination)
-
-	AwsManagedResources_targetDestination = AwsManagedResources.AddMember("targetDestination", _AwsManagedTargetDestinations)
-
-	_SelfManageTargetDestinations_member = _SelfManageTargetDestinations.AddMember("member", _SelfManageTargetDestination)
-
-	SelfManageResources_targetDestination = SelfManageResources.AddMember("targetDestination", _SelfManageTargetDestinations)
-
-	_NoPreferenceTargetDestinations_member = _NoPreferenceTargetDestinations.AddMember("member", _NoPreferenceTargetDestination)
-
-	NoManagementPreference_targetDestination = NoManagementPreference.AddMember("targetDestination", _NoPreferenceTargetDestinations)
-
-	ManagementPreference_awsManagedResources = ManagementPreference.AddMember("awsManagedResources", AwsManagedResources)
-
-	ManagementPreference_selfManageResources = ManagementPreference.AddMember("selfManageResources", SelfManageResources)
-
-	ManagementPreference_noPreference = ManagementPreference.AddMember("noPreference", NoManagementPreference)
-
-	ApplicationPreferences_managementPreference = ApplicationPreferences.AddMember("managementPreference", ManagementPreference)
-
-	StrategySummary_strategy = StrategySummary.AddMember("strategy", _Strategy)
-
-	StrategySummary_count = StrategySummary.AddMember("count", _Integer)
-
-	_ListStrategySummary_member = _ListStrategySummary.AddMember("member", StrategySummary)
-
-	_ListApplicationComponentSummary_member = _ListApplicationComponentSummary.AddMember("member", ApplicationComponentSummary)
-
-	ServerSummary_ServerOsType = ServerSummary.AddMember("ServerOsType", _ServerOsType)
-
-	ServerSummary_count = ServerSummary.AddMember("count", _Integer)
-
-	_ListServerSummary_member = _ListServerSummary.AddMember("member", ServerSummary)
-
-	_ListApplicationComponentStatusSummary_member = _ListApplicationComponentStatusSummary.AddMember("member", ApplicationComponentStatusSummary)
-
-	ServerStatusSummary_runTimeAssessmentStatus = ServerStatusSummary.AddMember("runTimeAssessmentStatus", _RunTimeAssessmentStatus)
-
-	ServerStatusSummary_count = ServerStatusSummary.AddMember("count", _Integer)
-
-	_ListServerStatusSummary_member = _ListServerStatusSummary.AddMember("member", ServerStatusSummary)
-
-	AssessmentSummary_listServerStrategySummary = AssessmentSummary.AddMember("listServerStrategySummary", _ListStrategySummary)
-
-	AssessmentSummary_listApplicationComponentStrategySummary = AssessmentSummary.AddMember("listApplicationComponentStrategySummary", _ListStrategySummary)
-
-	AssessmentSummary_listAntipatternSeveritySummary = AssessmentSummary.AddMember("listAntipatternSeveritySummary", _ListAntipatternSeveritySummary)
-
-	AssessmentSummary_listApplicationComponentSummary = AssessmentSummary.AddMember("listApplicationComponentSummary", _ListApplicationComponentSummary)
-
-	AssessmentSummary_listServerSummary = AssessmentSummary.AddMember("listServerSummary", _ListServerSummary)
-
-	AssessmentSummary_antipatternReportS3Object = AssessmentSummary.AddMember("antipatternReportS3Object", S3Object)
-
-	AssessmentSummary_antipatternReportStatus = AssessmentSummary.AddMember("antipatternReportStatus", _AntipatternReportStatus)
-
-	AssessmentSummary_antipatternReportStatusMessage = AssessmentSummary.AddMember("antipatternReportStatusMessage", _StatusMessage)
-
-	AssessmentSummary_lastAnalyzedTimestamp = AssessmentSummary.AddMember("lastAnalyzedTimestamp", _TimeStamp)
-
-	AssessmentSummary_listApplicationComponentStatusSummary = AssessmentSummary.AddMember("listApplicationComponentStatusSummary", _ListApplicationComponentStatusSummary)
-
-	AssessmentSummary_listServerStatusSummary = AssessmentSummary.AddMember("listServerStatusSummary", _ListServerStatusSummary)
-
-	_AssessmentTargetValues_member = _AssessmentTargetValues.AddMember("member", _String)
-
-	AssessmentTarget_condition = AssessmentTarget.AddMember("condition", _Condition)
-
-	AssessmentTarget_name = AssessmentTarget.AddMember("name", _String)
-
-	AssessmentTarget_values = AssessmentTarget.AddMember("values", _AssessmentTargetValues)
-
-	_AssessmentTargets_member = _AssessmentTargets.AddMember("member", AssessmentTarget)
-
-	AssociatedApplication_name = AssociatedApplication.AddMember("name", _String)
-
-	AssociatedApplication_id = AssociatedApplication.AddMember("id", _String)
-
-	_AssociatedApplications_member = _AssociatedApplications.AddMember("member", AssociatedApplication)
-
-	_AssociatedServerIDs_member = _AssociatedServerIDs.AddMember("member", _String)
-
-	BusinessGoals_speedOfMigration = BusinessGoals.AddMember("speedOfMigration", _BusinessGoalsInteger)
-
-	BusinessGoals_reduceOperationalOverheadWithManagedServices = BusinessGoals.AddMember("reduceOperationalOverheadWithManagedServices", _BusinessGoalsInteger)
-
-	BusinessGoals_modernizeInfrastructureWithCloudNativeTechnologies = BusinessGoals.AddMember("modernizeInfrastructureWithCloudNativeTechnologies", _BusinessGoalsInteger)
-
-	BusinessGoals_licenseCostReduction = BusinessGoals.AddMember("licenseCostReduction", _BusinessGoalsInteger)
-
-	VcenterBasedRemoteInfo_vcenterConfigurationTimeStamp = VcenterBasedRemoteInfo.AddMember("vcenterConfigurationTimeStamp", _String)
-
-	VcenterBasedRemoteInfo_osType = VcenterBasedRemoteInfo.AddMember("osType", _OSType)
-
-	_VcenterBasedRemoteInfoList_member = _VcenterBasedRemoteInfoList.AddMember("member", VcenterBasedRemoteInfo)
-
-	IPAddressBasedRemoteInfo_ipAddressConfigurationTimeStamp = IPAddressBasedRemoteInfo.AddMember("ipAddressConfigurationTimeStamp", _String)
-
-	IPAddressBasedRemoteInfo_authType = IPAddressBasedRemoteInfo.AddMember("authType", _AuthType)
-
-	IPAddressBasedRemoteInfo_osType = IPAddressBasedRemoteInfo.AddMember("osType", _OSType)
-
-	_IPAddressBasedRemoteInfoList_member = _IPAddressBasedRemoteInfoList.AddMember("member", IPAddressBasedRemoteInfo)
-
-	VersionControlInfo_versionControlType = VersionControlInfo.AddMember("versionControlType", _VersionControlType)
-
-	VersionControlInfo_versionControlConfigurationTimeStamp = VersionControlInfo.AddMember("versionControlConfigurationTimeStamp", _String)
-
-	_VersionControlInfoList_member = _VersionControlInfoList.AddMember("member", VersionControlInfo)
-
-	PipelineInfo_pipelineType = PipelineInfo.AddMember("pipelineType", _PipelineType)
-
-	PipelineInfo_pipelineConfigurationTimeStamp = PipelineInfo.AddMember("pipelineConfigurationTimeStamp", _String)
-
-	_PipelineInfoList_member = _PipelineInfoList.AddMember("member", PipelineInfo)
-
-	RemoteSourceCodeAnalysisServerInfo_remoteSourceCodeAnalysisServerConfigurationTimestamp = RemoteSourceCodeAnalysisServerInfo.AddMember("remoteSourceCodeAnalysisServerConfigurationTimestamp", _String)
-
-	ConfigurationSummary_vcenterBasedRemoteInfoList = ConfigurationSummary.AddMember("vcenterBasedRemoteInfoList", _VcenterBasedRemoteInfoList)
-
-	ConfigurationSummary_ipAddressBasedRemoteInfoList = ConfigurationSummary.AddMember("ipAddressBasedRemoteInfoList", _IPAddressBasedRemoteInfoList)
-
-	ConfigurationSummary_versionControlInfoList = ConfigurationSummary.AddMember("versionControlInfoList", _VersionControlInfoList)
-
-	ConfigurationSummary_pipelineInfoList = ConfigurationSummary.AddMember("pipelineInfoList", _PipelineInfoList)
-
-	ConfigurationSummary_remoteSourceCodeAnalysisServerInfo = ConfigurationSummary.AddMember("remoteSourceCodeAnalysisServerInfo", RemoteSourceCodeAnalysisServerInfo)
-
-	Collector_collectorId = Collector.AddMember("collectorId", _String)
-
-	Collector_ipAddress = Collector.AddMember("ipAddress", _String)
-
-	Collector_hostName = Collector.AddMember("hostName", _String)
-
-	Collector_collectorHealth = Collector.AddMember("collectorHealth", _CollectorHealth)
-
-	Collector_collectorVersion = Collector.AddMember("collectorVersion", _String)
-
-	Collector_registeredTimeStamp = Collector.AddMember("registeredTimeStamp", _String)
-
-	Collector_lastActivityTimeStamp = Collector.AddMember("lastActivityTimeStamp", _String)
-
-	Collector_configurationSummary = Collector.AddMember("configurationSummary", ConfigurationSummary)
-
-	_Collectors_member = _Collectors.AddMember("member", Collector)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	_HeterogeneousTargetDatabaseEngines_member = _HeterogeneousTargetDatabaseEngines.AddMember("member", _HeterogeneousTargetDatabaseEngine)
-
-	Heterogeneous_targetDatabaseEngine = Heterogeneous.AddMember("targetDatabaseEngine", _HeterogeneousTargetDatabaseEngines)
-
-	_HomogeneousTargetDatabaseEngines_member = _HomogeneousTargetDatabaseEngines.AddMember("member", _HomogeneousTargetDatabaseEngine)
-
-	Homogeneous_targetDatabaseEngine = Homogeneous.AddMember("targetDatabaseEngine", _HomogeneousTargetDatabaseEngines)
-
-	_TargetDatabaseEngines_member = _TargetDatabaseEngines.AddMember("member", _TargetDatabaseEngine)
-
-	NoDatabaseMigrationPreference_targetDatabaseEngine = NoDatabaseMigrationPreference.AddMember("targetDatabaseEngine", _TargetDatabaseEngines)
-
-	DatabaseMigrationPreference_heterogeneous = DatabaseMigrationPreference.AddMember("heterogeneous", Heterogeneous)
-
-	DatabaseMigrationPreference_homogeneous = DatabaseMigrationPreference.AddMember("homogeneous", Homogeneous)
-
-	DatabaseMigrationPreference_noPreference = DatabaseMigrationPreference.AddMember("noPreference", NoDatabaseMigrationPreference)
-
-	DatabasePreferences_databaseManagementPreference = DatabasePreferences.AddMember("databaseManagementPreference", _DatabaseManagementPreference)
-
-	DatabasePreferences_databaseMigrationPreference = DatabasePreferences.AddMember("databaseMigrationPreference", DatabaseMigrationPreference)
-
-	DataCollectionDetails_status = DataCollectionDetails.AddMember("status", _AssessmentStatus)
-
-	DataCollectionDetails_servers = DataCollectionDetails.AddMember("servers", _Integer)
-
-	DataCollectionDetails_failed = DataCollectionDetails.AddMember("failed", _Integer)
-
-	DataCollectionDetails_success = DataCollectionDetails.AddMember("success", _Integer)
-
-	DataCollectionDetails_inProgress = DataCollectionDetails.AddMember("inProgress", _Integer)
-
-	DataCollectionDetails_startTime = DataCollectionDetails.AddMember("startTime", _TimeStamp)
-
-	DataCollectionDetails_completionTime = DataCollectionDetails.AddMember("completionTime", _TimeStamp)
-
-	DataCollectionDetails_statusMessage = DataCollectionDetails.AddMember("statusMessage", _AssessmentStatusMessage)
-
-	DependencyException_message = DependencyException.AddMember("message", _errorMessage)
-
-	Group_name = Group.AddMember("name", _GroupName)
-
-	Group_value = Group.AddMember("value", _String)
-
-	_GroupIds_member = _GroupIds.AddMember("member", Group)
-
-	ImportFileTaskInformation_id = ImportFileTaskInformation.AddMember("id", _String)
-
-	ImportFileTaskInformation_status = ImportFileTaskInformation.AddMember("status", _ImportFileTaskStatus)
-
-	ImportFileTaskInformation_startTime = ImportFileTaskInformation.AddMember("startTime", _TimeStamp)
-
-	ImportFileTaskInformation_inputS3Bucket = ImportFileTaskInformation.AddMember("inputS3Bucket", _importS3Bucket)
-
-	ImportFileTaskInformation_inputS3Key = ImportFileTaskInformation.AddMember("inputS3Key", _importS3Key)
-
-	ImportFileTaskInformation_statusReportS3Bucket = ImportFileTaskInformation.AddMember("statusReportS3Bucket", _importS3Bucket)
-
-	ImportFileTaskInformation_statusReportS3Key = ImportFileTaskInformation.AddMember("statusReportS3Key", _importS3Key)
-
-	ImportFileTaskInformation_completionTime = ImportFileTaskInformation.AddMember("completionTime", _TimeStamp)
-
-	ImportFileTaskInformation_numberOfRecordsSuccess = ImportFileTaskInformation.AddMember("numberOfRecordsSuccess", _Integer)
-
-	ImportFileTaskInformation_numberOfRecordsFailed = ImportFileTaskInformation.AddMember("numberOfRecordsFailed", _Integer)
-
-	ImportFileTaskInformation_importName = ImportFileTaskInformation.AddMember("importName", _String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _errorMessage)
-
-	_ListImportFileTaskInformation_member = _ListImportFileTaskInformation.AddMember("member", ImportFileTaskInformation)
-
-	NetworkInfo_interfaceName = NetworkInfo.AddMember("interfaceName", _InterfaceName)
-
-	NetworkInfo_ipAddress = NetworkInfo.AddMember("ipAddress", _IPAddress)
-
-	NetworkInfo_macAddress = NetworkInfo.AddMember("macAddress", _MacAddress)
-
-	NetworkInfo_netMask = NetworkInfo.AddMember("netMask", _NetMask)
-
-	_NetworkInfoList_member = _NetworkInfoList.AddMember("member", NetworkInfo)
-
-	OSInfo_type = OSInfo.AddMember("type", _OSType)
-
-	OSInfo_version = OSInfo.AddMember("version", _OSVersion)
-
-	PrioritizeBusinessGoals_businessGoals = PrioritizeBusinessGoals.AddMember("businessGoals", BusinessGoals)
-
-	_S3Keys_member = _S3Keys.AddMember("member", _String)
-
-	RecommendationReportDetails_status = RecommendationReportDetails.AddMember("status", _RecommendationReportStatus)
-
-	RecommendationReportDetails_statusMessage = RecommendationReportDetails.AddMember("statusMessage", _RecommendationReportStatusMessage)
-
-	RecommendationReportDetails_startTime = RecommendationReportDetails.AddMember("startTime", _RecommendationReportTimeStamp)
-
-	RecommendationReportDetails_completionTime = RecommendationReportDetails.AddMember("completionTime", _RecommendationReportTimeStamp)
-
-	RecommendationReportDetails_s3Bucket = RecommendationReportDetails.AddMember("s3Bucket", _String)
-
-	RecommendationReportDetails_s3Keys = RecommendationReportDetails.AddMember("s3Keys", _S3Keys)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _errorMessage)
-
-	SystemInfo_osInfo = SystemInfo.AddMember("osInfo", OSInfo)
-
-	SystemInfo_fileSystemType = SystemInfo.AddMember("fileSystemType", _String)
-
-	SystemInfo_networkInfoList = SystemInfo.AddMember("networkInfoList", _NetworkInfoList)
-
-	SystemInfo_cpuArchitecture = SystemInfo.AddMember("cpuArchitecture", _String)
-
-	ServerError_serverErrorCategory = ServerError.AddMember("serverErrorCategory", _ServerErrorCategory)
-
-	ServerDetail_id = ServerDetail.AddMember("id", _ResourceId)
-
-	ServerDetail_name = ServerDetail.AddMember("name", _ResourceName)
-
-	ServerDetail_recommendationSet = ServerDetail.AddMember("recommendationSet", RecommendationSet)
-
-	ServerDetail_dataCollectionStatus = ServerDetail.AddMember("dataCollectionStatus", _RunTimeAssessmentStatus)
-
-	ServerDetail_statusMessage = ServerDetail.AddMember("statusMessage", _StatusMessage)
-
-	ServerDetail_listAntipatternSeveritySummary = ServerDetail.AddMember("listAntipatternSeveritySummary", _ListAntipatternSeveritySummary)
-
-	ServerDetail_systemInfo = ServerDetail.AddMember("systemInfo", SystemInfo)
-
-	ServerDetail_applicationComponentStrategySummary = ServerDetail.AddMember("applicationComponentStrategySummary", _ListStrategySummary)
-
-	ServerDetail_antipatternReportS3Object = ServerDetail.AddMember("antipatternReportS3Object", S3Object)
-
-	ServerDetail_antipatternReportStatus = ServerDetail.AddMember("antipatternReportStatus", _AntipatternReportStatus)
-
-	ServerDetail_antipatternReportStatusMessage = ServerDetail.AddMember("antipatternReportStatusMessage", _StatusMessage)
-
-	ServerDetail_serverType = ServerDetail.AddMember("serverType", _String)
-
-	ServerDetail_lastAnalyzedTimestamp = ServerDetail.AddMember("lastAnalyzedTimestamp", _TimeStamp)
-
-	ServerDetail_serverError = ServerDetail.AddMember("serverError", ServerError)
-
-	_ServerDetails_member = _ServerDetails.AddMember("member", ServerDetail)
-
-	ServerStrategy_recommendation = ServerStrategy.AddMember("recommendation", RecommendationSet)
-
-	ServerStrategy_status = ServerStrategy.AddMember("status", _StrategyRecommendation)
-
-	ServerStrategy_numberOfApplicationComponents = ServerStrategy.AddMember("numberOfApplicationComponents", _Integer)
-
-	ServerStrategy_isPreferred = ServerStrategy.AddMember("isPreferred", _Boolean)
-
-	_ServerStrategies_member = _ServerStrategies.AddMember("member", ServerStrategy)
-
-	ServiceLinkedRoleLockClientException_message = ServiceLinkedRoleLockClientException.AddMember("message", _errorMessage)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	SourceCode_versionControl = SourceCode.AddMember("versionControl", _VersionControl)
-
-	SourceCode_sourceVersion = SourceCode.AddMember("sourceVersion", _SourceVersion)
-
-	SourceCode_location = SourceCode.AddMember("location", _Location)
-
-	SourceCode_projectName = SourceCode.AddMember("projectName", _ProjectName)
-
-	_SourceCodeList_member = _SourceCodeList.AddMember("member", SourceCode)
-
-	StrategyOption_strategy = StrategyOption.AddMember("strategy", _Strategy)
-
-	StrategyOption_toolName = StrategyOption.AddMember("toolName", _TransformationToolName)
-
-	StrategyOption_targetDestination = StrategyOption.AddMember("targetDestination", _TargetDestination)
-
-	StrategyOption_isPreferred = StrategyOption.AddMember("isPreferred", _Boolean)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _errorMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _errorMessage)
-
-	GetApplicationComponentDetailsRequest_applicationComponentId = GetApplicationComponentDetailsRequest.AddMember("applicationComponentId", _ApplicationComponentId, &smithytraits.HTTPLabel{})
-
-	GetApplicationComponentDetailsResponse_applicationComponentDetail = GetApplicationComponentDetailsResponse.AddMember("applicationComponentDetail", ApplicationComponentDetail)
-
-	GetApplicationComponentDetailsResponse_associatedApplications = GetApplicationComponentDetailsResponse.AddMember("associatedApplications", _AssociatedApplications)
-
-	GetApplicationComponentDetailsResponse_moreApplicationResource = GetApplicationComponentDetailsResponse.AddMember("moreApplicationResource", _Boolean)
-
-	GetApplicationComponentDetailsResponse_associatedServerIds = GetApplicationComponentDetailsResponse.AddMember("associatedServerIds", _AssociatedServerIDs)
-
-	GetApplicationComponentStrategiesRequest_applicationComponentId = GetApplicationComponentStrategiesRequest.AddMember("applicationComponentId", _ApplicationComponentId, &smithytraits.HTTPLabel{})
-
-	GetApplicationComponentStrategiesResponse_applicationComponentStrategies = GetApplicationComponentStrategiesResponse.AddMember("applicationComponentStrategies", _ApplicationComponentStrategies)
-
-	GetAssessmentRequest_id = GetAssessmentRequest.AddMember("id", _AsyncTaskId, &smithytraits.HTTPLabel{})
-
-	GetAssessmentResponse_id = GetAssessmentResponse.AddMember("id", _AsyncTaskId)
-
-	GetAssessmentResponse_dataCollectionDetails = GetAssessmentResponse.AddMember("dataCollectionDetails", DataCollectionDetails)
-
-	GetAssessmentResponse_assessmentTargets = GetAssessmentResponse.AddMember("assessmentTargets", _AssessmentTargets)
-
-	GetImportFileTaskRequest_id = GetImportFileTaskRequest.AddMember("id", _String, &smithytraits.HTTPLabel{})
-
-	GetImportFileTaskResponse_id = GetImportFileTaskResponse.AddMember("id", _String)
-
-	GetImportFileTaskResponse_status = GetImportFileTaskResponse.AddMember("status", _ImportFileTaskStatus)
-
-	GetImportFileTaskResponse_startTime = GetImportFileTaskResponse.AddMember("startTime", _TimeStamp)
-
-	GetImportFileTaskResponse_inputS3Bucket = GetImportFileTaskResponse.AddMember("inputS3Bucket", _importS3Bucket)
-
-	GetImportFileTaskResponse_inputS3Key = GetImportFileTaskResponse.AddMember("inputS3Key", _importS3Key)
-
-	GetImportFileTaskResponse_statusReportS3Bucket = GetImportFileTaskResponse.AddMember("statusReportS3Bucket", _importS3Bucket)
-
-	GetImportFileTaskResponse_statusReportS3Key = GetImportFileTaskResponse.AddMember("statusReportS3Key", _importS3Key)
-
-	GetImportFileTaskResponse_completionTime = GetImportFileTaskResponse.AddMember("completionTime", _TimeStamp)
-
-	GetImportFileTaskResponse_numberOfRecordsSuccess = GetImportFileTaskResponse.AddMember("numberOfRecordsSuccess", _Integer)
-
-	GetImportFileTaskResponse_numberOfRecordsFailed = GetImportFileTaskResponse.AddMember("numberOfRecordsFailed", _Integer)
-
-	GetImportFileTaskResponse_importName = GetImportFileTaskResponse.AddMember("importName", _String)
-
-	GetLatestAssessmentIdResponse_id = GetLatestAssessmentIdResponse.AddMember("id", _AsyncTaskId)
-
-	GetPortfolioPreferencesResponse_prioritizeBusinessGoals = GetPortfolioPreferencesResponse.AddMember("prioritizeBusinessGoals", PrioritizeBusinessGoals)
-
-	GetPortfolioPreferencesResponse_applicationPreferences = GetPortfolioPreferencesResponse.AddMember("applicationPreferences", ApplicationPreferences)
-
-	GetPortfolioPreferencesResponse_databasePreferences = GetPortfolioPreferencesResponse.AddMember("databasePreferences", DatabasePreferences)
-
-	GetPortfolioPreferencesResponse_applicationMode = GetPortfolioPreferencesResponse.AddMember("applicationMode", _ApplicationMode)
-
-	GetPortfolioSummaryResponse_assessmentSummary = GetPortfolioSummaryResponse.AddMember("assessmentSummary", AssessmentSummary)
-
-	GetRecommendationReportDetailsRequest_id = GetRecommendationReportDetailsRequest.AddMember("id", _RecommendationTaskId, &smithytraits.HTTPLabel{})
-
-	GetRecommendationReportDetailsResponse_id = GetRecommendationReportDetailsResponse.AddMember("id", _RecommendationTaskId)
-
-	GetRecommendationReportDetailsResponse_recommendationReportDetails = GetRecommendationReportDetailsResponse.AddMember("recommendationReportDetails", RecommendationReportDetails)
-
-	GetServerDetailsRequest_serverId = GetServerDetailsRequest.AddMember("serverId", _ServerId, &smithytraits.HTTPLabel{})
-
-	GetServerDetailsRequest_nextToken = GetServerDetailsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetServerDetailsRequest_maxResults = GetServerDetailsRequest.AddMember("maxResults", _MaxResult, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetServerDetailsResponse_nextToken = GetServerDetailsResponse.AddMember("nextToken", _String)
-
-	GetServerDetailsResponse_serverDetail = GetServerDetailsResponse.AddMember("serverDetail", ServerDetail)
-
-	GetServerDetailsResponse_associatedApplications = GetServerDetailsResponse.AddMember("associatedApplications", _AssociatedApplications)
-
-	GetServerStrategiesRequest_serverId = GetServerStrategiesRequest.AddMember("serverId", _ServerId, &smithytraits.HTTPLabel{})
-
-	GetServerStrategiesResponse_serverStrategies = GetServerStrategiesResponse.AddMember("serverStrategies", _ServerStrategies)
-
-	ListAnalyzableServersRequest_sort = ListAnalyzableServersRequest.AddMember("sort", _SortOrder)
-
-	ListAnalyzableServersRequest_nextToken = ListAnalyzableServersRequest.AddMember("nextToken", _NextToken)
-
-	ListAnalyzableServersRequest_maxResults = ListAnalyzableServersRequest.AddMember("maxResults", _MaxResult)
-
-	ListAnalyzableServersResponse_analyzableServers = ListAnalyzableServersResponse.AddMember("analyzableServers", _AnalyzableServerSummaryList)
-
-	ListAnalyzableServersResponse_nextToken = ListAnalyzableServersResponse.AddMember("nextToken", _NextToken)
-
-	ListApplicationComponentsRequest_applicationComponentCriteria = ListApplicationComponentsRequest.AddMember("applicationComponentCriteria", _ApplicationComponentCriteria)
-
-	ListApplicationComponentsRequest_filterValue = ListApplicationComponentsRequest.AddMember("filterValue", _String)
-
-	ListApplicationComponentsRequest_sort = ListApplicationComponentsRequest.AddMember("sort", _SortOrder)
-
-	ListApplicationComponentsRequest_groupIdFilter = ListApplicationComponentsRequest.AddMember("groupIdFilter", _GroupIds)
-
-	ListApplicationComponentsRequest_nextToken = ListApplicationComponentsRequest.AddMember("nextToken", _NextToken)
-
-	ListApplicationComponentsRequest_maxResults = ListApplicationComponentsRequest.AddMember("maxResults", _MaxResult)
-
-	ListApplicationComponentsResponse_applicationComponentInfos = ListApplicationComponentsResponse.AddMember("applicationComponentInfos", _ApplicationComponentDetails)
-
-	ListApplicationComponentsResponse_nextToken = ListApplicationComponentsResponse.AddMember("nextToken", _NextToken)
-
-	ListCollectorsRequest_nextToken = ListCollectorsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCollectorsRequest_maxResults = ListCollectorsRequest.AddMember("maxResults", _MaxResult, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCollectorsResponse_Collectors = ListCollectorsResponse.AddMember("Collectors", _Collectors)
-
-	ListCollectorsResponse_nextToken = ListCollectorsResponse.AddMember("nextToken", _NextToken)
-
-	ListImportFileTaskRequest_nextToken = ListImportFileTaskRequest.AddMember("nextToken", _String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListImportFileTaskRequest_maxResults = ListImportFileTaskRequest.AddMember("maxResults", _Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListImportFileTaskResponse_taskInfos = ListImportFileTaskResponse.AddMember("taskInfos", _ListImportFileTaskInformation)
-
-	ListImportFileTaskResponse_nextToken = ListImportFileTaskResponse.AddMember("nextToken", _String)
-
-	ListServersRequest_serverCriteria = ListServersRequest.AddMember("serverCriteria", _ServerCriteria)
-
-	ListServersRequest_filterValue = ListServersRequest.AddMember("filterValue", _String)
-
-	ListServersRequest_sort = ListServersRequest.AddMember("sort", _SortOrder)
-
-	ListServersRequest_groupIdFilter = ListServersRequest.AddMember("groupIdFilter", _GroupIds)
-
-	ListServersRequest_nextToken = ListServersRequest.AddMember("nextToken", _NextToken)
-
-	ListServersRequest_maxResults = ListServersRequest.AddMember("maxResults", _MaxResult)
-
-	ListServersResponse_serverInfos = ListServersResponse.AddMember("serverInfos", _ServerDetails)
-
-	ListServersResponse_nextToken = ListServersResponse.AddMember("nextToken", _NextToken)
-
-	PutPortfolioPreferencesRequest_prioritizeBusinessGoals = PutPortfolioPreferencesRequest.AddMember("prioritizeBusinessGoals", PrioritizeBusinessGoals)
-
-	PutPortfolioPreferencesRequest_applicationPreferences = PutPortfolioPreferencesRequest.AddMember("applicationPreferences", ApplicationPreferences)
-
-	PutPortfolioPreferencesRequest_databasePreferences = PutPortfolioPreferencesRequest.AddMember("databasePreferences", DatabasePreferences)
-
-	PutPortfolioPreferencesRequest_applicationMode = PutPortfolioPreferencesRequest.AddMember("applicationMode", _ApplicationMode)
-
-	StartAssessmentRequest_s3bucketForAnalysisData = StartAssessmentRequest.AddMember("s3bucketForAnalysisData", _String)
-
-	StartAssessmentRequest_s3bucketForReportData = StartAssessmentRequest.AddMember("s3bucketForReportData", _String)
-
-	StartAssessmentRequest_assessmentTargets = StartAssessmentRequest.AddMember("assessmentTargets", _AssessmentTargets)
-
-	StartAssessmentRequest_assessmentDataSourceType = StartAssessmentRequest.AddMember("assessmentDataSourceType", _AssessmentDataSourceType)
-
-	StartAssessmentResponse_assessmentId = StartAssessmentResponse.AddMember("assessmentId", _AsyncTaskId)
-
-	StartImportFileTaskRequest_name = StartImportFileTaskRequest.AddMember("name", _String)
-
-	StartImportFileTaskRequest_S3Bucket = StartImportFileTaskRequest.AddMember("S3Bucket", _importS3Bucket)
-
-	StartImportFileTaskRequest_s3key = StartImportFileTaskRequest.AddMember("s3key", _String)
-
-	StartImportFileTaskRequest_dataSourceType = StartImportFileTaskRequest.AddMember("dataSourceType", _DataSourceType)
-
-	StartImportFileTaskRequest_groupId = StartImportFileTaskRequest.AddMember("groupId", _GroupIds)
-
-	StartImportFileTaskRequest_s3bucketForReportData = StartImportFileTaskRequest.AddMember("s3bucketForReportData", _String)
-
-	StartImportFileTaskResponse_id = StartImportFileTaskResponse.AddMember("id", _String)
-
-	StartRecommendationReportGenerationRequest_outputFormat = StartRecommendationReportGenerationRequest.AddMember("outputFormat", _OutputFormat)
-
-	StartRecommendationReportGenerationRequest_groupIdFilter = StartRecommendationReportGenerationRequest.AddMember("groupIdFilter", _GroupIds)
-
-	StartRecommendationReportGenerationResponse_id = StartRecommendationReportGenerationResponse.AddMember("id", _RecommendationTaskId)
-
-	StopAssessmentRequest_assessmentId = StopAssessmentRequest.AddMember("assessmentId", _AsyncTaskId)
-
-	UpdateApplicationComponentConfigRequest_applicationComponentId = UpdateApplicationComponentConfigRequest.AddMember("applicationComponentId", _ApplicationComponentId)
-
-	UpdateApplicationComponentConfigRequest_inclusionStatus = UpdateApplicationComponentConfigRequest.AddMember("inclusionStatus", _InclusionStatus)
-
-	UpdateApplicationComponentConfigRequest_strategyOption = UpdateApplicationComponentConfigRequest.AddMember("strategyOption", StrategyOption)
-
-	UpdateApplicationComponentConfigRequest_sourceCodeList = UpdateApplicationComponentConfigRequest.AddMember("sourceCodeList", _SourceCodeList)
-
-	UpdateApplicationComponentConfigRequest_secretsManagerKey = UpdateApplicationComponentConfigRequest.AddMember("secretsManagerKey", _SecretsManagerKey)
-
-	UpdateApplicationComponentConfigRequest_configureOnly = UpdateApplicationComponentConfigRequest.AddMember("configureOnly", _Boolean)
-
-	UpdateApplicationComponentConfigRequest_appType = UpdateApplicationComponentConfigRequest.AddMember("appType", _AppType)
-
-	UpdateServerConfigRequest_serverId = UpdateServerConfigRequest.AddMember("serverId", _ServerId)
-
-	UpdateServerConfigRequest_strategyOption = UpdateServerConfigRequest.AddMember("strategyOption", StrategyOption)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAnalysisStatusUnion = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalysisStatusUnion_runtimeAnalysisStatus, &sAnalysisStatusUnion_srcCodeOrDbAnalysisStatus}}
+var mAnalyzableServerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzableServerSummary_hostname, &sAnalyzableServerSummary_ipAddress, &sAnalyzableServerSummary_source, &sAnalyzableServerSummary_vmId}}
+var m_AnalyzableServerSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AnalyzableServerSummaryList_member}}
+var mAnalyzerNameUnion = smithy.SchemaMembers{List: []*smithy.Schema{&sAnalyzerNameUnion_binaryAnalyzerName, &sAnalyzerNameUnion_runTimeAnalyzerName, &sAnalyzerNameUnion_sourceCodeAnalyzerName}}
+var mAntipatternReportResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAntipatternReportResult_analyzerName, &sAntipatternReportResult_antiPatternReportS3Object, &sAntipatternReportResult_antipatternReportStatus, &sAntipatternReportResult_antipatternReportStatusMessage}}
+var m_AntipatternReportResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AntipatternReportResultList_member}}
+var mAntipatternSeveritySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAntipatternSeveritySummary_severity, &sAntipatternSeveritySummary_count}}
+var mApplicationComponentDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationComponentDetail_id, &sApplicationComponentDetail_name, &sApplicationComponentDetail_recommendationSet, &sApplicationComponentDetail_analysisStatus, &sApplicationComponentDetail_statusMessage, &sApplicationComponentDetail_listAntipatternSeveritySummary, &sApplicationComponentDetail_databaseConfigDetail, &sApplicationComponentDetail_sourceCodeRepositories, &sApplicationComponentDetail_appType, &sApplicationComponentDetail_resourceSubType, &sApplicationComponentDetail_inclusionStatus, &sApplicationComponentDetail_antipatternReportS3Object, &sApplicationComponentDetail_antipatternReportStatus, &sApplicationComponentDetail_antipatternReportStatusMessage, &sApplicationComponentDetail_osVersion, &sApplicationComponentDetail_osDriver, &sApplicationComponentDetail_lastAnalyzedTimestamp, &sApplicationComponentDetail_associatedServerId, &sApplicationComponentDetail_moreServerAssociationExists, &sApplicationComponentDetail_runtimeStatus, &sApplicationComponentDetail_runtimeStatusMessage, &sApplicationComponentDetail_appUnitError, &sApplicationComponentDetail_resultList}, Seed: 130, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 4, 18, 0, 0, 21, 0, 0, 13, 0, 12, 19, 0, 23, 0, 0, 0, 0, 0,
+	22, 0, 0, 0, 0, 7, 0, 1, 0, 0, 20, 0, 16, 0, 0, 0, 11, 0, 0, 0, 0, 8, 3, 0,
+	6, 0, 10, 15, 2, 0, 9, 14, 5, 0, 0, 0, 0, 17, 0, 0,
+}}
+var m_ApplicationComponentDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationComponentDetails_member}}
+var mApplicationComponentStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationComponentStatusSummary_srcCodeOrDbAnalysisStatus, &sApplicationComponentStatusSummary_count}}
+var m_ApplicationComponentStrategies = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationComponentStrategies_member}}
+var mApplicationComponentStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationComponentStrategy_recommendation, &sApplicationComponentStrategy_status, &sApplicationComponentStrategy_isPreferred}}
+var mApplicationComponentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationComponentSummary_appType, &sApplicationComponentSummary_count}}
+var mApplicationPreferences = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationPreferences_managementPreference}}
+var mAppUnitError = smithy.SchemaMembers{List: []*smithy.Schema{&sAppUnitError_appUnitErrorCategory}}
+var mAssessmentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentSummary_listServerStrategySummary, &sAssessmentSummary_listApplicationComponentStrategySummary, &sAssessmentSummary_listAntipatternSeveritySummary, &sAssessmentSummary_listApplicationComponentSummary, &sAssessmentSummary_listServerSummary, &sAssessmentSummary_antipatternReportS3Object, &sAssessmentSummary_antipatternReportStatus, &sAssessmentSummary_antipatternReportStatusMessage, &sAssessmentSummary_lastAnalyzedTimestamp, &sAssessmentSummary_listApplicationComponentStatusSummary, &sAssessmentSummary_listServerStatusSummary}, Seed: 2, Slots: []uint16{
+	0, 0, 4, 3, 9, 5, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0,
+	8, 0, 0, 6, 7, 0, 0, 11,
+}}
+var mAssessmentTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentTarget_condition, &sAssessmentTarget_name, &sAssessmentTarget_values}}
+var m_AssessmentTargets = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentTargets_member}}
+var m_AssessmentTargetValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentTargetValues_member}}
+var mAssociatedApplication = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedApplication_name, &sAssociatedApplication_id}}
+var m_AssociatedApplications = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedApplications_member}}
+var m_AssociatedServerIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedServerIDs_member}}
+var mAwsManagedResources = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsManagedResources_targetDestination}}
+var m_AwsManagedTargetDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsManagedTargetDestinations_member}}
+var mBusinessGoals = smithy.SchemaMembers{List: []*smithy.Schema{&sBusinessGoals_speedOfMigration, &sBusinessGoals_reduceOperationalOverheadWithManagedServices, &sBusinessGoals_modernizeInfrastructureWithCloudNativeTechnologies, &sBusinessGoals_licenseCostReduction}}
+var mCollector = smithy.SchemaMembers{List: []*smithy.Schema{&sCollector_collectorId, &sCollector_ipAddress, &sCollector_hostName, &sCollector_collectorHealth, &sCollector_collectorVersion, &sCollector_registeredTimeStamp, &sCollector_lastActivityTimeStamp, &sCollector_configurationSummary}}
+var m_Collectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Collectors_member}}
+var mConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationSummary_vcenterBasedRemoteInfoList, &sConfigurationSummary_ipAddressBasedRemoteInfoList, &sConfigurationSummary_versionControlInfoList, &sConfigurationSummary_pipelineInfoList, &sConfigurationSummary_remoteSourceCodeAnalysisServerInfo}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mDatabaseConfigDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseConfigDetail_secretName}}
+var mDatabaseMigrationPreference = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabaseMigrationPreference_heterogeneous, &sDatabaseMigrationPreference_homogeneous, &sDatabaseMigrationPreference_noPreference}}
+var mDatabasePreferences = smithy.SchemaMembers{List: []*smithy.Schema{&sDatabasePreferences_databaseManagementPreference, &sDatabasePreferences_databaseMigrationPreference}}
+var mDataCollectionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCollectionDetails_status, &sDataCollectionDetails_servers, &sDataCollectionDetails_failed, &sDataCollectionDetails_success, &sDataCollectionDetails_inProgress, &sDataCollectionDetails_startTime, &sDataCollectionDetails_completionTime, &sDataCollectionDetails_statusMessage}}
+var mDependencyException = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyException_message}}
+var mGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sGroup_name, &sGroup_value}}
+var m_GroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupIds_member}}
+var mHeterogeneous = smithy.SchemaMembers{List: []*smithy.Schema{&sHeterogeneous_targetDatabaseEngine}}
+var m_HeterogeneousTargetDatabaseEngines = smithy.SchemaMembers{List: []*smithy.Schema{&s_HeterogeneousTargetDatabaseEngines_member}}
+var mHomogeneous = smithy.SchemaMembers{List: []*smithy.Schema{&sHomogeneous_targetDatabaseEngine}}
+var m_HomogeneousTargetDatabaseEngines = smithy.SchemaMembers{List: []*smithy.Schema{&s_HomogeneousTargetDatabaseEngines_member}}
+var mImportFileTaskInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sImportFileTaskInformation_id, &sImportFileTaskInformation_status, &sImportFileTaskInformation_startTime, &sImportFileTaskInformation_inputS3Bucket, &sImportFileTaskInformation_inputS3Key, &sImportFileTaskInformation_statusReportS3Bucket, &sImportFileTaskInformation_statusReportS3Key, &sImportFileTaskInformation_completionTime, &sImportFileTaskInformation_numberOfRecordsSuccess, &sImportFileTaskInformation_numberOfRecordsFailed, &sImportFileTaskInformation_importName}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 10, 0, 0, 0, 0, 8, 0, 2, 0, 0, 0, 5, 7, 0, 1, 0, 0, 0,
+	9, 11, 3, 0, 0, 4, 0, 0,
+}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mIPAddressBasedRemoteInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sIPAddressBasedRemoteInfo_ipAddressConfigurationTimeStamp, &sIPAddressBasedRemoteInfo_authType, &sIPAddressBasedRemoteInfo_osType}}
+var m_IPAddressBasedRemoteInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IPAddressBasedRemoteInfoList_member}}
+var m_ListAntipatternSeveritySummary = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListAntipatternSeveritySummary_member}}
+var m_ListApplicationComponentStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListApplicationComponentStatusSummary_member}}
+var m_ListApplicationComponentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListApplicationComponentSummary_member}}
+var m_ListImportFileTaskInformation = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListImportFileTaskInformation_member}}
+var m_ListServerStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListServerStatusSummary_member}}
+var m_ListServerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListServerSummary_member}}
+var m_ListStrategySummary = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListStrategySummary_member}}
+var mManagementPreference = smithy.SchemaMembers{List: []*smithy.Schema{&sManagementPreference_awsManagedResources, &sManagementPreference_selfManageResources, &sManagementPreference_noPreference}}
+var mNetworkInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInfo_interfaceName, &sNetworkInfo_ipAddress, &sNetworkInfo_macAddress, &sNetworkInfo_netMask}}
+var m_NetworkInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkInfoList_member}}
+var mNoDatabaseMigrationPreference = smithy.SchemaMembers{List: []*smithy.Schema{&sNoDatabaseMigrationPreference_targetDatabaseEngine}}
+var mNoManagementPreference = smithy.SchemaMembers{List: []*smithy.Schema{&sNoManagementPreference_targetDestination}}
+var m_NoPreferenceTargetDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_NoPreferenceTargetDestinations_member}}
+var mOSInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sOSInfo_type, &sOSInfo_version}}
+var mPipelineInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sPipelineInfo_pipelineType, &sPipelineInfo_pipelineConfigurationTimeStamp}}
+var m_PipelineInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PipelineInfoList_member}}
+var mPrioritizeBusinessGoals = smithy.SchemaMembers{List: []*smithy.Schema{&sPrioritizeBusinessGoals_businessGoals}}
+var mRecommendationReportDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendationReportDetails_status, &sRecommendationReportDetails_statusMessage, &sRecommendationReportDetails_startTime, &sRecommendationReportDetails_completionTime, &sRecommendationReportDetails_s3Bucket, &sRecommendationReportDetails_s3Keys}}
+var mRecommendationSet = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendationSet_transformationTool, &sRecommendationSet_targetDestination, &sRecommendationSet_strategy}}
+var mRemoteSourceCodeAnalysisServerInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoteSourceCodeAnalysisServerInfo_remoteSourceCodeAnalysisServerConfigurationTimestamp}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResult = smithy.SchemaMembers{List: []*smithy.Schema{&sResult_analysisType, &sResult_analysisStatus, &sResult_statusMessage, &sResult_antipatternReportResultList}}
+var m_ResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResultList_member}}
+var m_S3Keys = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3Keys_member}}
+var mS3Object = smithy.SchemaMembers{List: []*smithy.Schema{&sS3Object_s3Bucket, &sS3Object_s3key}}
+var mSelfManageResources = smithy.SchemaMembers{List: []*smithy.Schema{&sSelfManageResources_targetDestination}}
+var m_SelfManageTargetDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_SelfManageTargetDestinations_member}}
+var mServerDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sServerDetail_id, &sServerDetail_name, &sServerDetail_recommendationSet, &sServerDetail_dataCollectionStatus, &sServerDetail_statusMessage, &sServerDetail_listAntipatternSeveritySummary, &sServerDetail_systemInfo, &sServerDetail_applicationComponentStrategySummary, &sServerDetail_antipatternReportS3Object, &sServerDetail_antipatternReportStatus, &sServerDetail_antipatternReportStatusMessage, &sServerDetail_serverType, &sServerDetail_lastAnalyzedTimestamp, &sServerDetail_serverError}, Seed: 15, Slots: []uint16{
+	0, 6, 1, 0, 0, 0, 0, 0, 11, 14, 0, 7, 2, 0, 0, 0, 9, 3, 13, 5, 8, 4, 0, 0,
+	0, 10, 0, 0, 12, 0, 0, 0,
+}}
+var m_ServerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServerDetails_member}}
+var mServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sServerError_serverErrorCategory}}
+var mServerStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServerStatusSummary_runTimeAssessmentStatus, &sServerStatusSummary_count}}
+var m_ServerStrategies = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServerStrategies_member}}
+var mServerStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sServerStrategy_recommendation, &sServerStrategy_status, &sServerStrategy_numberOfApplicationComponents, &sServerStrategy_isPreferred}}
+var mServerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServerSummary_ServerOsType, &sServerSummary_count}}
+var mServiceLinkedRoleLockClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLinkedRoleLockClientException_message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSourceCode = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCode_versionControl, &sSourceCode_sourceVersion, &sSourceCode_location, &sSourceCode_projectName}}
+var m_SourceCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceCodeList_member}}
+var m_SourceCodeRepositories = smithy.SchemaMembers{List: []*smithy.Schema{&s_SourceCodeRepositories_member}}
+var mSourceCodeRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCodeRepository_repository, &sSourceCodeRepository_branch, &sSourceCodeRepository_versionControlType, &sSourceCodeRepository_projectName}}
+var mStrategyOption = smithy.SchemaMembers{List: []*smithy.Schema{&sStrategyOption_strategy, &sStrategyOption_toolName, &sStrategyOption_targetDestination, &sStrategyOption_isPreferred}}
+var mStrategySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStrategySummary_strategy, &sStrategySummary_count}}
+var mSystemInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sSystemInfo_osInfo, &sSystemInfo_fileSystemType, &sSystemInfo_networkInfoList, &sSystemInfo_cpuArchitecture}}
+var m_TargetDatabaseEngines = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetDatabaseEngines_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTransformationTool = smithy.SchemaMembers{List: []*smithy.Schema{&sTransformationTool_name, &sTransformationTool_description, &sTransformationTool_tranformationToolInstallationLink}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mVcenterBasedRemoteInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sVcenterBasedRemoteInfo_vcenterConfigurationTimeStamp, &sVcenterBasedRemoteInfo_osType}}
+var m_VcenterBasedRemoteInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VcenterBasedRemoteInfoList_member}}
+var mVersionControlInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sVersionControlInfo_versionControlType, &sVersionControlInfo_versionControlConfigurationTimeStamp}}
+var m_VersionControlInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VersionControlInfoList_member}}
+var mGetApplicationComponentDetailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApplicationComponentDetailsRequest_applicationComponentId}}
+var mGetApplicationComponentDetailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApplicationComponentDetailsResponse_applicationComponentDetail, &sGetApplicationComponentDetailsResponse_associatedApplications, &sGetApplicationComponentDetailsResponse_moreApplicationResource, &sGetApplicationComponentDetailsResponse_associatedServerIds}}
+var mGetApplicationComponentStrategiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApplicationComponentStrategiesRequest_applicationComponentId}}
+var mGetApplicationComponentStrategiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApplicationComponentStrategiesResponse_applicationComponentStrategies}}
+var mGetAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentRequest_id}}
+var mGetAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssessmentResponse_id, &sGetAssessmentResponse_dataCollectionDetails, &sGetAssessmentResponse_assessmentTargets}}
+var mGetImportFileTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImportFileTaskRequest_id}}
+var mGetImportFileTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImportFileTaskResponse_id, &sGetImportFileTaskResponse_status, &sGetImportFileTaskResponse_startTime, &sGetImportFileTaskResponse_inputS3Bucket, &sGetImportFileTaskResponse_inputS3Key, &sGetImportFileTaskResponse_statusReportS3Bucket, &sGetImportFileTaskResponse_statusReportS3Key, &sGetImportFileTaskResponse_completionTime, &sGetImportFileTaskResponse_numberOfRecordsSuccess, &sGetImportFileTaskResponse_numberOfRecordsFailed, &sGetImportFileTaskResponse_importName}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 6, 0, 10, 0, 0, 0, 0, 8, 0, 2, 0, 0, 0, 5, 7, 0, 1, 0, 0, 0,
+	9, 11, 3, 0, 0, 4, 0, 0,
+}}
+var mGetLatestAssessmentIdResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLatestAssessmentIdResponse_id}}
+var mGetPortfolioPreferencesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortfolioPreferencesResponse_prioritizeBusinessGoals, &sGetPortfolioPreferencesResponse_applicationPreferences, &sGetPortfolioPreferencesResponse_databasePreferences, &sGetPortfolioPreferencesResponse_applicationMode}}
+var mGetPortfolioSummaryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortfolioSummaryResponse_assessmentSummary}}
+var mGetRecommendationReportDetailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecommendationReportDetailsRequest_id}}
+var mGetRecommendationReportDetailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecommendationReportDetailsResponse_id, &sGetRecommendationReportDetailsResponse_recommendationReportDetails}}
+var mGetServerDetailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServerDetailsRequest_serverId, &sGetServerDetailsRequest_nextToken, &sGetServerDetailsRequest_maxResults}}
+var mGetServerDetailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServerDetailsResponse_nextToken, &sGetServerDetailsResponse_serverDetail, &sGetServerDetailsResponse_associatedApplications}}
+var mGetServerStrategiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServerStrategiesRequest_serverId}}
+var mGetServerStrategiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServerStrategiesResponse_serverStrategies}}
+var mListAnalyzableServersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAnalyzableServersRequest_sort, &sListAnalyzableServersRequest_nextToken, &sListAnalyzableServersRequest_maxResults}}
+var mListAnalyzableServersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAnalyzableServersResponse_analyzableServers, &sListAnalyzableServersResponse_nextToken}}
+var mListApplicationComponentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationComponentsRequest_applicationComponentCriteria, &sListApplicationComponentsRequest_filterValue, &sListApplicationComponentsRequest_sort, &sListApplicationComponentsRequest_groupIdFilter, &sListApplicationComponentsRequest_nextToken, &sListApplicationComponentsRequest_maxResults}}
+var mListApplicationComponentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationComponentsResponse_applicationComponentInfos, &sListApplicationComponentsResponse_nextToken}}
+var mListCollectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollectorsRequest_nextToken, &sListCollectorsRequest_maxResults}}
+var mListCollectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCollectorsResponse_Collectors, &sListCollectorsResponse_nextToken}}
+var mListImportFileTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListImportFileTaskRequest_nextToken, &sListImportFileTaskRequest_maxResults}}
+var mListImportFileTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListImportFileTaskResponse_taskInfos, &sListImportFileTaskResponse_nextToken}}
+var mListServersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServersRequest_serverCriteria, &sListServersRequest_filterValue, &sListServersRequest_sort, &sListServersRequest_groupIdFilter, &sListServersRequest_nextToken, &sListServersRequest_maxResults}}
+var mListServersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListServersResponse_serverInfos, &sListServersResponse_nextToken}}
+var mPutPortfolioPreferencesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPortfolioPreferencesRequest_prioritizeBusinessGoals, &sPutPortfolioPreferencesRequest_applicationPreferences, &sPutPortfolioPreferencesRequest_databasePreferences, &sPutPortfolioPreferencesRequest_applicationMode}}
+var mStartAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAssessmentRequest_s3bucketForAnalysisData, &sStartAssessmentRequest_s3bucketForReportData, &sStartAssessmentRequest_assessmentTargets, &sStartAssessmentRequest_assessmentDataSourceType}}
+var mStartAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAssessmentResponse_assessmentId}}
+var mStartImportFileTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImportFileTaskRequest_name, &sStartImportFileTaskRequest_S3Bucket, &sStartImportFileTaskRequest_s3key, &sStartImportFileTaskRequest_dataSourceType, &sStartImportFileTaskRequest_groupId, &sStartImportFileTaskRequest_s3bucketForReportData}}
+var mStartImportFileTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartImportFileTaskResponse_id}}
+var mStartRecommendationReportGenerationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRecommendationReportGenerationRequest_outputFormat, &sStartRecommendationReportGenerationRequest_groupIdFilter}}
+var mStartRecommendationReportGenerationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRecommendationReportGenerationResponse_id}}
+var mStopAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopAssessmentRequest_assessmentId}}
+var mUpdateApplicationComponentConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationComponentConfigRequest_applicationComponentId, &sUpdateApplicationComponentConfigRequest_inclusionStatus, &sUpdateApplicationComponentConfigRequest_strategyOption, &sUpdateApplicationComponentConfigRequest_sourceCodeList, &sUpdateApplicationComponentConfigRequest_secretsManagerKey, &sUpdateApplicationComponentConfigRequest_configureOnly, &sUpdateApplicationComponentConfigRequest_appType}}
+var mUpdateServerConfigRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServerConfigRequest_serverId, &sUpdateServerConfigRequest_strategyOption}}
+
+var sGetApplicationComponentDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationComponentDetails, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetApplicationComponentStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationComponentStrategies, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sGetAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessment, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sGetImportFileTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImportFileTask, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetLatestAssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLatestAssessmentId, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sGetPortfolioPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortfolioPreferences, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetPortfolioSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortfolioSummary, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sGetRecommendationReportDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecommendationReportDetails, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sGetServerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServerDetails, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetServerStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServerStrategies, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListAnalyzableServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalyzableServers, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sListApplicationComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationComponents, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListCollectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectors, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sListImportFileTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportFileTask, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sListServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServers, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sPutPortfolioPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPortfolioPreferences, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sStartAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAssessment, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sStartImportFileTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImportFileTask, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sStartRecommendationReportGeneration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecommendationReportGeneration, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sStopAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAssessment, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sUpdateApplicationComponentConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationComponentConfig, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sUpdateServerConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServerConfig, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var s_AWSMigrationHubStrategyRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMigrationHubStrategyRecommendation, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var sAnalysisStatusUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalysisStatusUnion, Members: &mAnalysisStatusUnion, Type: smithy.ShapeTypeUnion})
+var s_AnalysisType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalysisType, Type: smithy.ShapeTypeString})
+var sAnalyzableServerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzableServerSummary, Members: &mAnalyzableServerSummary, Type: smithy.ShapeTypeStructure})
+var s_AnalyzableServerSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnalyzableServerSummaryList, Members: &m_AnalyzableServerSummaryList, Type: smithy.ShapeTypeList})
+var sAnalyzerNameUnion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAnalyzerNameUnion, Members: &mAnalyzerNameUnion, Type: smithy.ShapeTypeUnion})
+var sAntipatternReportResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAntipatternReportResult, Members: &mAntipatternReportResult, Type: smithy.ShapeTypeStructure})
+var s_AntipatternReportResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AntipatternReportResultList, Members: &m_AntipatternReportResultList, Type: smithy.ShapeTypeList})
+var s_AntipatternReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AntipatternReportStatus, Type: smithy.ShapeTypeString})
+var sAntipatternSeveritySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAntipatternSeveritySummary, Members: &mAntipatternSeveritySummary, Type: smithy.ShapeTypeStructure})
+var s_ApplicationComponentCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationComponentCriteria, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationComponentDetail, Members: &mApplicationComponentDetail, Type: smithy.ShapeTypeStructure})
+var s_ApplicationComponentDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationComponentDetails, Members: &m_ApplicationComponentDetails, Type: smithy.ShapeTypeList})
+var s_ApplicationComponentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationComponentId, Type: smithy.ShapeTypeString})
+var sApplicationComponentStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationComponentStatusSummary, Members: &mApplicationComponentStatusSummary, Type: smithy.ShapeTypeStructure})
+var s_ApplicationComponentStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationComponentStrategies, Members: &m_ApplicationComponentStrategies, Type: smithy.ShapeTypeList})
+var sApplicationComponentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationComponentStrategy, Members: &mApplicationComponentStrategy, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationComponentSummary, Members: &mApplicationComponentSummary, Type: smithy.ShapeTypeStructure})
+var s_ApplicationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationMode, Type: smithy.ShapeTypeString})
+var sApplicationPreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationPreferences, Members: &mApplicationPreferences, Type: smithy.ShapeTypeStructure})
+var s_AppType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppType, Type: smithy.ShapeTypeString})
+var sAppUnitError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppUnitError, Members: &mAppUnitError, Type: smithy.ShapeTypeStructure})
+var s_AppUnitErrorCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppUnitErrorCategory, Type: smithy.ShapeTypeString})
+var s_AssessmentDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentDataSourceType, Type: smithy.ShapeTypeString})
+var s_AssessmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentStatus, Type: smithy.ShapeTypeString})
+var s_AssessmentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentStatusMessage, Type: smithy.ShapeTypeString})
+var sAssessmentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentSummary, Members: &mAssessmentSummary, Type: smithy.ShapeTypeStructure})
+var sAssessmentTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentTarget, Members: &mAssessmentTarget, Type: smithy.ShapeTypeStructure})
+var s_AssessmentTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentTargets, Members: &m_AssessmentTargets, Type: smithy.ShapeTypeList})
+var s_AssessmentTargetValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentTargetValues, Members: &m_AssessmentTargetValues, Type: smithy.ShapeTypeList})
+var sAssociatedApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedApplication, Members: &mAssociatedApplication, Type: smithy.ShapeTypeStructure})
+var s_AssociatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedApplications, Members: &m_AssociatedApplications, Type: smithy.ShapeTypeList})
+var s_AssociatedServerIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedServerIDs, Members: &m_AssociatedServerIDs, Type: smithy.ShapeTypeList})
+var s_AsyncTaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsyncTaskId, Type: smithy.ShapeTypeString})
+var s_AuthType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthType, Type: smithy.ShapeTypeString})
+var sAwsManagedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsManagedResources, Members: &mAwsManagedResources, Type: smithy.ShapeTypeStructure})
+var s_AwsManagedTargetDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsManagedTargetDestination, Type: smithy.ShapeTypeString})
+var s_AwsManagedTargetDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsManagedTargetDestinations, Members: &m_AwsManagedTargetDestinations, Type: smithy.ShapeTypeList})
+var s_BinaryAnalyzerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryAnalyzerName, Type: smithy.ShapeTypeString})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sBusinessGoals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBusinessGoals, Members: &mBusinessGoals, Type: smithy.ShapeTypeStructure})
+var s_BusinessGoalsInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessGoalsInteger, Type: smithy.ShapeTypeInteger})
+var sCollector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCollector, Members: &mCollector, Type: smithy.ShapeTypeStructure})
+var s_CollectorHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CollectorHealth, Type: smithy.ShapeTypeString})
+var s_Collectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Collectors, Members: &m_Collectors, Type: smithy.ShapeTypeList})
+var s_Condition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Condition, Type: smithy.ShapeTypeString})
+var sConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSummary, Members: &mConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var sDatabaseConfigDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseConfigDetail, Members: &mDatabaseConfigDetail, Type: smithy.ShapeTypeStructure})
+var s_DatabaseManagementPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DatabaseManagementPreference, Type: smithy.ShapeTypeString})
+var sDatabaseMigrationPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabaseMigrationPreference, Members: &mDatabaseMigrationPreference, Type: smithy.ShapeTypeUnion})
+var sDatabasePreferences = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDatabasePreferences, Members: &mDatabasePreferences, Type: smithy.ShapeTypeStructure})
+var sDataCollectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCollectionDetails, Members: &mDataCollectionDetails, Type: smithy.ShapeTypeStructure})
+var s_DataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSourceType, Type: smithy.ShapeTypeString})
+var sDependencyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyException, Members: &mDependencyException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_errorMessage, Type: smithy.ShapeTypeString})
+var sGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure})
+var s_GroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupIds, Members: &m_GroupIds, Type: smithy.ShapeTypeList})
+var s_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupName, Type: smithy.ShapeTypeString})
+var sHeterogeneous = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeterogeneous, Members: &mHeterogeneous, Type: smithy.ShapeTypeStructure})
+var s_HeterogeneousTargetDatabaseEngine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeterogeneousTargetDatabaseEngine, Type: smithy.ShapeTypeString})
+var s_HeterogeneousTargetDatabaseEngines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeterogeneousTargetDatabaseEngines, Members: &m_HeterogeneousTargetDatabaseEngines, Type: smithy.ShapeTypeList})
+var sHomogeneous = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHomogeneous, Members: &mHomogeneous, Type: smithy.ShapeTypeStructure})
+var s_HomogeneousTargetDatabaseEngine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HomogeneousTargetDatabaseEngine, Type: smithy.ShapeTypeString})
+var s_HomogeneousTargetDatabaseEngines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HomogeneousTargetDatabaseEngines, Members: &m_HomogeneousTargetDatabaseEngines, Type: smithy.ShapeTypeList})
+var sImportFileTaskInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportFileTaskInformation, Members: &mImportFileTaskInformation, Type: smithy.ShapeTypeStructure})
+var s_ImportFileTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImportFileTaskStatus, Type: smithy.ShapeTypeString})
+var s_importS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_importS3Bucket, Type: smithy.ShapeTypeString})
+var s_importS3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_importS3Key, Type: smithy.ShapeTypeString})
+var s_InclusionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InclusionStatus, Type: smithy.ShapeTypeString})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_InterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InterfaceName, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_IPAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sIPAddressBasedRemoteInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIPAddressBasedRemoteInfo, Members: &mIPAddressBasedRemoteInfo, Type: smithy.ShapeTypeStructure})
+var s_IPAddressBasedRemoteInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPAddressBasedRemoteInfoList, Members: &m_IPAddressBasedRemoteInfoList, Type: smithy.ShapeTypeList})
+var s_ListAntipatternSeveritySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAntipatternSeveritySummary, Members: &m_ListAntipatternSeveritySummary, Type: smithy.ShapeTypeList})
+var s_ListApplicationComponentStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListApplicationComponentStatusSummary, Members: &m_ListApplicationComponentStatusSummary, Type: smithy.ShapeTypeList})
+var s_ListApplicationComponentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListApplicationComponentSummary, Members: &m_ListApplicationComponentSummary, Type: smithy.ShapeTypeList})
+var s_ListImportFileTaskInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListImportFileTaskInformation, Members: &m_ListImportFileTaskInformation, Type: smithy.ShapeTypeList})
+var s_ListServerStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServerStatusSummary, Members: &m_ListServerStatusSummary, Type: smithy.ShapeTypeList})
+var s_ListServerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServerSummary, Members: &m_ListServerSummary, Type: smithy.ShapeTypeList})
+var s_ListStrategySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListStrategySummary, Members: &m_ListStrategySummary, Type: smithy.ShapeTypeList})
+var s_Location = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Location, Type: smithy.ShapeTypeString})
+var s_MacAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MacAddress, Type: smithy.ShapeTypeString})
+var sManagementPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagementPreference, Members: &mManagementPreference, Type: smithy.ShapeTypeUnion})
+var s_MaxResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResult, Type: smithy.ShapeTypeInteger})
+var s_NetMask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetMask, Type: smithy.ShapeTypeString})
+var sNetworkInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInfo, Members: &mNetworkInfo, Type: smithy.ShapeTypeStructure})
+var s_NetworkInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInfoList, Members: &m_NetworkInfoList, Type: smithy.ShapeTypeList})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNoDatabaseMigrationPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoDatabaseMigrationPreference, Members: &mNoDatabaseMigrationPreference, Type: smithy.ShapeTypeStructure})
+var sNoManagementPreference = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoManagementPreference, Members: &mNoManagementPreference, Type: smithy.ShapeTypeStructure})
+var s_NoPreferenceTargetDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NoPreferenceTargetDestination, Type: smithy.ShapeTypeString})
+var s_NoPreferenceTargetDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NoPreferenceTargetDestinations, Members: &m_NoPreferenceTargetDestinations, Type: smithy.ShapeTypeList})
+var sOSInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOSInfo, Members: &mOSInfo, Type: smithy.ShapeTypeStructure})
+var s_OSType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OSType, Type: smithy.ShapeTypeString})
+var s_OSVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OSVersion, Type: smithy.ShapeTypeString})
+var s_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputFormat, Type: smithy.ShapeTypeString})
+var sPipelineInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipelineInfo, Members: &mPipelineInfo, Type: smithy.ShapeTypeStructure})
+var s_PipelineInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineInfoList, Members: &m_PipelineInfoList, Type: smithy.ShapeTypeList})
+var s_PipelineType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipelineType, Type: smithy.ShapeTypeString})
+var sPrioritizeBusinessGoals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrioritizeBusinessGoals, Members: &mPrioritizeBusinessGoals, Type: smithy.ShapeTypeStructure})
+var s_ProjectName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var sRecommendationReportDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendationReportDetails, Members: &mRecommendationReportDetails, Type: smithy.ShapeTypeStructure})
+var s_RecommendationReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationReportStatus, Type: smithy.ShapeTypeString})
+var s_RecommendationReportStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationReportStatusMessage, Type: smithy.ShapeTypeString})
+var s_RecommendationReportTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationReportTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sRecommendationSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendationSet, Members: &mRecommendationSet, Type: smithy.ShapeTypeStructure})
+var s_RecommendationTaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationTaskId, Type: smithy.ShapeTypeString})
+var sRemoteSourceCodeAnalysisServerInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoteSourceCodeAnalysisServerInfo, Members: &mRemoteSourceCodeAnalysisServerInfo, Type: smithy.ShapeTypeStructure})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var s_ResourceSubType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSubType, Type: smithy.ShapeTypeString})
+var sResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeStructure})
+var s_ResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultList, Members: &m_ResultList, Type: smithy.ShapeTypeList})
+var s_RuntimeAnalysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeAnalysisStatus, Type: smithy.ShapeTypeString})
+var s_RunTimeAnalyzerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunTimeAnalyzerName, Type: smithy.ShapeTypeString})
+var s_RunTimeAssessmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RunTimeAssessmentStatus, Type: smithy.ShapeTypeString})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var s_S3Keys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Keys, Members: &m_S3Keys, Type: smithy.ShapeTypeList})
+var sS3Object = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var s_SecretsManagerKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretsManagerKey, Traits: &t26, Type: smithy.ShapeTypeString})
+var sSelfManageResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelfManageResources, Members: &mSelfManageResources, Type: smithy.ShapeTypeStructure})
+var s_SelfManageTargetDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelfManageTargetDestination, Type: smithy.ShapeTypeString})
+var s_SelfManageTargetDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelfManageTargetDestinations, Members: &m_SelfManageTargetDestinations, Type: smithy.ShapeTypeList})
+var s_ServerCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerCriteria, Type: smithy.ShapeTypeString})
+var sServerDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerDetail, Members: &mServerDetail, Type: smithy.ShapeTypeStructure})
+var s_ServerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerDetails, Members: &m_ServerDetails, Type: smithy.ShapeTypeList})
+var sServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerError, Members: &mServerError, Type: smithy.ShapeTypeStructure})
+var s_ServerErrorCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerErrorCategory, Type: smithy.ShapeTypeString})
+var s_ServerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var s_ServerOsType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerOsType, Type: smithy.ShapeTypeString})
+var sServerStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerStatusSummary, Members: &mServerStatusSummary, Type: smithy.ShapeTypeStructure})
+var s_ServerStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerStrategies, Members: &m_ServerStrategies, Type: smithy.ShapeTypeList})
+var sServerStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerStrategy, Members: &mServerStrategy, Type: smithy.ShapeTypeStructure})
+var sServerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerSummary, Members: &mServerSummary, Type: smithy.ShapeTypeStructure})
+var sServiceLinkedRoleLockClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLinkedRoleLockClientException, Members: &mServiceLinkedRoleLockClientException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var s_Severity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Severity, Type: smithy.ShapeTypeString})
+var s_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var sSourceCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCode, Members: &mSourceCode, Type: smithy.ShapeTypeStructure})
+var s_SourceCodeAnalyzerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceCodeAnalyzerName, Type: smithy.ShapeTypeString})
+var s_SourceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceCodeList, Members: &m_SourceCodeList, Type: smithy.ShapeTypeList})
+var s_SourceCodeRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceCodeRepositories, Members: &m_SourceCodeRepositories, Type: smithy.ShapeTypeList})
+var sSourceCodeRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCodeRepository, Members: &mSourceCodeRepository, Type: smithy.ShapeTypeStructure})
+var s_SourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceVersion, Type: smithy.ShapeTypeString})
+var s_SrcCodeOrDbAnalysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SrcCodeOrDbAnalysisStatus, Type: smithy.ShapeTypeString})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var s_Strategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Strategy, Type: smithy.ShapeTypeString})
+var sStrategyOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStrategyOption, Members: &mStrategyOption, Type: smithy.ShapeTypeStructure})
+var s_StrategyRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StrategyRecommendation, Type: smithy.ShapeTypeString})
+var sStrategySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStrategySummary, Members: &mStrategySummary, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sSystemInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSystemInfo, Members: &mSystemInfo, Type: smithy.ShapeTypeStructure})
+var s_TargetDatabaseEngine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetDatabaseEngine, Type: smithy.ShapeTypeString})
+var s_TargetDatabaseEngines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetDatabaseEngines, Members: &m_TargetDatabaseEngines, Type: smithy.ShapeTypeList})
+var s_TargetDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetDestination, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var s_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var s_TranformationToolDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranformationToolDescription, Type: smithy.ShapeTypeString})
+var s_TranformationToolInstallationLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TranformationToolInstallationLink, Type: smithy.ShapeTypeString})
+var sTransformationTool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransformationTool, Members: &mTransformationTool, Type: smithy.ShapeTypeStructure})
+var s_TransformationToolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransformationToolName, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var sVcenterBasedRemoteInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVcenterBasedRemoteInfo, Members: &mVcenterBasedRemoteInfo, Type: smithy.ShapeTypeStructure})
+var s_VcenterBasedRemoteInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VcenterBasedRemoteInfoList, Members: &m_VcenterBasedRemoteInfoList, Type: smithy.ShapeTypeList})
+var s_VersionControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionControl, Type: smithy.ShapeTypeString})
+var sVersionControlInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVersionControlInfo, Members: &mVersionControlInfo, Type: smithy.ShapeTypeStructure})
+var s_VersionControlInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionControlInfoList, Members: &m_VersionControlInfoList, Type: smithy.ShapeTypeList})
+var s_VersionControlType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionControlType, Type: smithy.ShapeTypeString})
+var sGetApplicationComponentDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationComponentDetailsRequest, Members: &mGetApplicationComponentDetailsRequest, Type: smithy.ShapeTypeStructure})
+var sGetApplicationComponentDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationComponentDetailsResponse, Members: &mGetApplicationComponentDetailsResponse, Type: smithy.ShapeTypeStructure})
+var sGetApplicationComponentStrategiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationComponentStrategiesRequest, Members: &mGetApplicationComponentStrategiesRequest, Type: smithy.ShapeTypeStructure})
+var sGetApplicationComponentStrategiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationComponentStrategiesResponse, Members: &mGetApplicationComponentStrategiesResponse, Type: smithy.ShapeTypeStructure})
+var sGetAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentRequest, Members: &mGetAssessmentRequest, Type: smithy.ShapeTypeStructure})
+var sGetAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssessmentResponse, Members: &mGetAssessmentResponse, Type: smithy.ShapeTypeStructure})
+var sGetImportFileTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImportFileTaskRequest, Members: &mGetImportFileTaskRequest, Type: smithy.ShapeTypeStructure})
+var sGetImportFileTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImportFileTaskResponse, Members: &mGetImportFileTaskResponse, Type: smithy.ShapeTypeStructure})
+var sGetLatestAssessmentIdRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLatestAssessmentIdRequest, Type: smithy.ShapeTypeStructure})
+var sGetLatestAssessmentIdResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLatestAssessmentIdResponse, Members: &mGetLatestAssessmentIdResponse, Type: smithy.ShapeTypeStructure})
+var sGetPortfolioPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortfolioPreferencesRequest, Type: smithy.ShapeTypeStructure})
+var sGetPortfolioPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortfolioPreferencesResponse, Members: &mGetPortfolioPreferencesResponse, Type: smithy.ShapeTypeStructure})
+var sGetPortfolioSummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortfolioSummaryRequest, Type: smithy.ShapeTypeStructure})
+var sGetPortfolioSummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortfolioSummaryResponse, Members: &mGetPortfolioSummaryResponse, Type: smithy.ShapeTypeStructure})
+var sGetRecommendationReportDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecommendationReportDetailsRequest, Members: &mGetRecommendationReportDetailsRequest, Type: smithy.ShapeTypeStructure})
+var sGetRecommendationReportDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecommendationReportDetailsResponse, Members: &mGetRecommendationReportDetailsResponse, Type: smithy.ShapeTypeStructure})
+var sGetServerDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServerDetailsRequest, Members: &mGetServerDetailsRequest, Type: smithy.ShapeTypeStructure})
+var sGetServerDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServerDetailsResponse, Members: &mGetServerDetailsResponse, Type: smithy.ShapeTypeStructure})
+var sGetServerStrategiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServerStrategiesRequest, Members: &mGetServerStrategiesRequest, Type: smithy.ShapeTypeStructure})
+var sGetServerStrategiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServerStrategiesResponse, Members: &mGetServerStrategiesResponse, Type: smithy.ShapeTypeStructure})
+var sListAnalyzableServersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalyzableServersRequest, Members: &mListAnalyzableServersRequest, Type: smithy.ShapeTypeStructure})
+var sListAnalyzableServersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAnalyzableServersResponse, Members: &mListAnalyzableServersResponse, Type: smithy.ShapeTypeStructure})
+var sListApplicationComponentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationComponentsRequest, Members: &mListApplicationComponentsRequest, Type: smithy.ShapeTypeStructure})
+var sListApplicationComponentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationComponentsResponse, Members: &mListApplicationComponentsResponse, Type: smithy.ShapeTypeStructure})
+var sListCollectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectorsRequest, Members: &mListCollectorsRequest, Type: smithy.ShapeTypeStructure})
+var sListCollectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCollectorsResponse, Members: &mListCollectorsResponse, Type: smithy.ShapeTypeStructure})
+var sListImportFileTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportFileTaskRequest, Members: &mListImportFileTaskRequest, Type: smithy.ShapeTypeStructure})
+var sListImportFileTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImportFileTaskResponse, Members: &mListImportFileTaskResponse, Type: smithy.ShapeTypeStructure})
+var sListServersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServersRequest, Members: &mListServersRequest, Type: smithy.ShapeTypeStructure})
+var sListServersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServersResponse, Members: &mListServersResponse, Type: smithy.ShapeTypeStructure})
+var sPutPortfolioPreferencesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPortfolioPreferencesRequest, Members: &mPutPortfolioPreferencesRequest, Type: smithy.ShapeTypeStructure})
+var sPutPortfolioPreferencesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPortfolioPreferencesResponse, Type: smithy.ShapeTypeStructure})
+var sStartAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAssessmentRequest, Members: &mStartAssessmentRequest, Type: smithy.ShapeTypeStructure})
+var sStartAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAssessmentResponse, Members: &mStartAssessmentResponse, Type: smithy.ShapeTypeStructure})
+var sStartImportFileTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImportFileTaskRequest, Members: &mStartImportFileTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStartImportFileTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartImportFileTaskResponse, Members: &mStartImportFileTaskResponse, Type: smithy.ShapeTypeStructure})
+var sStartRecommendationReportGenerationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecommendationReportGenerationRequest, Members: &mStartRecommendationReportGenerationRequest, Type: smithy.ShapeTypeStructure})
+var sStartRecommendationReportGenerationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRecommendationReportGenerationResponse, Members: &mStartRecommendationReportGenerationResponse, Type: smithy.ShapeTypeStructure})
+var sStopAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAssessmentRequest, Members: &mStopAssessmentRequest, Type: smithy.ShapeTypeStructure})
+var sStopAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopAssessmentResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateApplicationComponentConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationComponentConfigRequest, Members: &mUpdateApplicationComponentConfigRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateApplicationComponentConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationComponentConfigResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateServerConfigRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServerConfigRequest, Members: &mUpdateServerConfigRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateServerConfigResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServerConfigResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAnalysisStatusUnion_runtimeAnalysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimeAnalysisStatus", ID: &i_RuntimeAnalysisStatus, Type: smithy.ShapeTypeString})
+var sAnalysisStatusUnion_srcCodeOrDbAnalysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "srcCodeOrDbAnalysisStatus", ID: &i_SrcCodeOrDbAnalysisStatus, Type: smithy.ShapeTypeString})
+var sAnalyzableServerSummary_hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostname", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAnalyzableServerSummary_ipAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddress", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAnalyzableServerSummary_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAnalyzableServerSummary_vmId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vmId", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_AnalyzableServerSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAnalyzableServerSummary, Members: &mAnalyzableServerSummary, Type: smithy.ShapeTypeStructure})
+var sAnalyzerNameUnion_binaryAnalyzerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "binaryAnalyzerName", ID: &i_BinaryAnalyzerName, Type: smithy.ShapeTypeString})
+var sAnalyzerNameUnion_runTimeAnalyzerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runTimeAnalyzerName", ID: &i_RunTimeAnalyzerName, Type: smithy.ShapeTypeString})
+var sAnalyzerNameUnion_sourceCodeAnalyzerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCodeAnalyzerName", ID: &i_SourceCodeAnalyzerName, Type: smithy.ShapeTypeString})
+var sAntipatternReportResult_analyzerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analyzerName", ID: &iAnalyzerNameUnion, Members: &mAnalyzerNameUnion, Type: smithy.ShapeTypeUnion})
+var sAntipatternReportResult_antiPatternReportS3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antiPatternReportS3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sAntipatternReportResult_antipatternReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatus", ID: &i_AntipatternReportStatus, Type: smithy.ShapeTypeString})
+var sAntipatternReportResult_antipatternReportStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var s_AntipatternReportResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAntipatternReportResult, Members: &mAntipatternReportResult, Type: smithy.ShapeTypeStructure})
+var sAntipatternSeveritySummary_severity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "severity", ID: &i_Severity, Type: smithy.ShapeTypeString})
+var sAntipatternSeveritySummary_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sApplicationComponentDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_recommendationSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationSet", ID: &iRecommendationSet, Members: &mRecommendationSet, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentDetail_analysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisStatus", ID: &i_SrcCodeOrDbAnalysisStatus, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_listAntipatternSeveritySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listAntipatternSeveritySummary", ID: &i_ListAntipatternSeveritySummary, Members: &m_ListAntipatternSeveritySummary, Type: smithy.ShapeTypeList})
+var sApplicationComponentDetail_databaseConfigDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseConfigDetail", ID: &iDatabaseConfigDetail, Members: &mDatabaseConfigDetail, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentDetail_sourceCodeRepositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCodeRepositories", ID: &i_SourceCodeRepositories, Members: &m_SourceCodeRepositories, Type: smithy.ShapeTypeList})
+var sApplicationComponentDetail_appType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appType", ID: &i_AppType, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_resourceSubType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceSubType", ID: &i_ResourceSubType, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_inclusionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inclusionStatus", ID: &i_InclusionStatus, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_antipatternReportS3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportS3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentDetail_antipatternReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatus", ID: &i_AntipatternReportStatus, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_antipatternReportStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_osVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "osVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_osDriver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "osDriver", ID: &i_String, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_lastAnalyzedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAnalyzedTimestamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sApplicationComponentDetail_associatedServerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedServerId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_moreServerAssociationExists = smithy.NewStaticSchema(smithy.StaticSchema{Member: "moreServerAssociationExists", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sApplicationComponentDetail_runtimeStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimeStatus", ID: &i_RuntimeAnalysisStatus, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_runtimeStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimeStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sApplicationComponentDetail_appUnitError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appUnitError", ID: &iAppUnitError, Members: &mAppUnitError, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentDetail_resultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resultList", ID: &i_ResultList, Members: &m_ResultList, Type: smithy.ShapeTypeList})
+var s_ApplicationComponentDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationComponentDetail, Members: &mApplicationComponentDetail, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentStatusSummary_srcCodeOrDbAnalysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "srcCodeOrDbAnalysisStatus", ID: &i_SrcCodeOrDbAnalysisStatus, Type: smithy.ShapeTypeString})
+var sApplicationComponentStatusSummary_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_ApplicationComponentStrategies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationComponentStrategy, Members: &mApplicationComponentStrategy, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentStrategy_recommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendation", ID: &iRecommendationSet, Members: &mRecommendationSet, Type: smithy.ShapeTypeStructure})
+var sApplicationComponentStrategy_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StrategyRecommendation, Type: smithy.ShapeTypeString})
+var sApplicationComponentStrategy_isPreferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPreferred", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sApplicationComponentSummary_appType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appType", ID: &i_AppType, Type: smithy.ShapeTypeString})
+var sApplicationComponentSummary_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sApplicationPreferences_managementPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managementPreference", ID: &iManagementPreference, Members: &mManagementPreference, Type: smithy.ShapeTypeUnion})
+var sAppUnitError_appUnitErrorCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appUnitErrorCategory", ID: &i_AppUnitErrorCategory, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_listServerStrategySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listServerStrategySummary", ID: &i_ListStrategySummary, Members: &m_ListStrategySummary, Type: smithy.ShapeTypeList})
+var sAssessmentSummary_listApplicationComponentStrategySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listApplicationComponentStrategySummary", ID: &i_ListStrategySummary, Members: &m_ListStrategySummary, Type: smithy.ShapeTypeList})
+var sAssessmentSummary_listAntipatternSeveritySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listAntipatternSeveritySummary", ID: &i_ListAntipatternSeveritySummary, Members: &m_ListAntipatternSeveritySummary, Type: smithy.ShapeTypeList})
+var sAssessmentSummary_listApplicationComponentSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listApplicationComponentSummary", ID: &i_ListApplicationComponentSummary, Members: &m_ListApplicationComponentSummary, Type: smithy.ShapeTypeList})
+var sAssessmentSummary_listServerSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listServerSummary", ID: &i_ListServerSummary, Members: &m_ListServerSummary, Type: smithy.ShapeTypeList})
+var sAssessmentSummary_antipatternReportS3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportS3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sAssessmentSummary_antipatternReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatus", ID: &i_AntipatternReportStatus, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_antipatternReportStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_lastAnalyzedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAnalyzedTimestamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sAssessmentSummary_listApplicationComponentStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listApplicationComponentStatusSummary", ID: &i_ListApplicationComponentStatusSummary, Members: &m_ListApplicationComponentStatusSummary, Type: smithy.ShapeTypeList})
+var sAssessmentSummary_listServerStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listServerStatusSummary", ID: &i_ListServerStatusSummary, Members: &m_ListServerStatusSummary, Type: smithy.ShapeTypeList})
+var sAssessmentTarget_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &i_Condition, Type: smithy.ShapeTypeString})
+var sAssessmentTarget_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAssessmentTarget_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_AssessmentTargetValues, Members: &m_AssessmentTargetValues, Type: smithy.ShapeTypeList})
+var s_AssessmentTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentTarget, Members: &mAssessmentTarget, Type: smithy.ShapeTypeStructure})
+var s_AssessmentTargetValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAssociatedApplication_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAssociatedApplication_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_AssociatedApplications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedApplication, Members: &mAssociatedApplication, Type: smithy.ShapeTypeStructure})
+var s_AssociatedServerIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAwsManagedResources_targetDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDestination", ID: &i_AwsManagedTargetDestinations, Members: &m_AwsManagedTargetDestinations, Type: smithy.ShapeTypeList})
+var s_AwsManagedTargetDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsManagedTargetDestination, Type: smithy.ShapeTypeString})
+var sBusinessGoals_speedOfMigration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "speedOfMigration", ID: &i_BusinessGoalsInteger, Type: smithy.ShapeTypeInteger})
+var sBusinessGoals_reduceOperationalOverheadWithManagedServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reduceOperationalOverheadWithManagedServices", ID: &i_BusinessGoalsInteger, Type: smithy.ShapeTypeInteger})
+var sBusinessGoals_modernizeInfrastructureWithCloudNativeTechnologies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modernizeInfrastructureWithCloudNativeTechnologies", ID: &i_BusinessGoalsInteger, Type: smithy.ShapeTypeInteger})
+var sBusinessGoals_licenseCostReduction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "licenseCostReduction", ID: &i_BusinessGoalsInteger, Type: smithy.ShapeTypeInteger})
+var sCollector_collectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCollector_ipAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddress", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCollector_hostName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCollector_collectorHealth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorHealth", ID: &i_CollectorHealth, Type: smithy.ShapeTypeString})
+var sCollector_collectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "collectorVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCollector_registeredTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registeredTimeStamp", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCollector_lastActivityTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastActivityTimeStamp", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCollector_configurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationSummary", ID: &iConfigurationSummary, Members: &mConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var s_Collectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCollector, Members: &mCollector, Type: smithy.ShapeTypeStructure})
+var sConfigurationSummary_vcenterBasedRemoteInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vcenterBasedRemoteInfoList", ID: &i_VcenterBasedRemoteInfoList, Members: &m_VcenterBasedRemoteInfoList, Type: smithy.ShapeTypeList})
+var sConfigurationSummary_ipAddressBasedRemoteInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressBasedRemoteInfoList", ID: &i_IPAddressBasedRemoteInfoList, Members: &m_IPAddressBasedRemoteInfoList, Type: smithy.ShapeTypeList})
+var sConfigurationSummary_versionControlInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionControlInfoList", ID: &i_VersionControlInfoList, Members: &m_VersionControlInfoList, Type: smithy.ShapeTypeList})
+var sConfigurationSummary_pipelineInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineInfoList", ID: &i_PipelineInfoList, Members: &m_PipelineInfoList, Type: smithy.ShapeTypeList})
+var sConfigurationSummary_remoteSourceCodeAnalysisServerInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteSourceCodeAnalysisServerInfo", ID: &iRemoteSourceCodeAnalysisServerInfo, Members: &mRemoteSourceCodeAnalysisServerInfo, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDatabaseConfigDetail_secretName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDatabaseMigrationPreference_heterogeneous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "heterogeneous", ID: &iHeterogeneous, Members: &mHeterogeneous, Type: smithy.ShapeTypeStructure})
+var sDatabaseMigrationPreference_homogeneous = smithy.NewStaticSchema(smithy.StaticSchema{Member: "homogeneous", ID: &iHomogeneous, Members: &mHomogeneous, Type: smithy.ShapeTypeStructure})
+var sDatabaseMigrationPreference_noPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noPreference", ID: &iNoDatabaseMigrationPreference, Members: &mNoDatabaseMigrationPreference, Type: smithy.ShapeTypeStructure})
+var sDatabasePreferences_databaseManagementPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseManagementPreference", ID: &i_DatabaseManagementPreference, Type: smithy.ShapeTypeString})
+var sDatabasePreferences_databaseMigrationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databaseMigrationPreference", ID: &iDatabaseMigrationPreference, Members: &mDatabaseMigrationPreference, Type: smithy.ShapeTypeUnion})
+var sDataCollectionDetails_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_AssessmentStatus, Type: smithy.ShapeTypeString})
+var sDataCollectionDetails_servers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servers", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDataCollectionDetails_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDataCollectionDetails_success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "success", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDataCollectionDetails_inProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inProgress", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDataCollectionDetails_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sDataCollectionDetails_completionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completionTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sDataCollectionDetails_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_AssessmentStatusMessage, Type: smithy.ShapeTypeString})
+var sDependencyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString})
+var sGroup_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GroupName, Type: smithy.ShapeTypeString})
+var sGroup_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_GroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure})
+var sHeterogeneous_targetDatabaseEngine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDatabaseEngine", ID: &i_HeterogeneousTargetDatabaseEngines, Members: &m_HeterogeneousTargetDatabaseEngines, Type: smithy.ShapeTypeList})
+var s_HeterogeneousTargetDatabaseEngines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HeterogeneousTargetDatabaseEngine, Type: smithy.ShapeTypeString})
+var sHomogeneous_targetDatabaseEngine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDatabaseEngine", ID: &i_HomogeneousTargetDatabaseEngines, Members: &m_HomogeneousTargetDatabaseEngines, Type: smithy.ShapeTypeList})
+var s_HomogeneousTargetDatabaseEngines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_HomogeneousTargetDatabaseEngine, Type: smithy.ShapeTypeString})
+var sImportFileTaskInformation_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString})
+var sImportFileTaskInformation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ImportFileTaskStatus, Type: smithy.ShapeTypeString})
+var sImportFileTaskInformation_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sImportFileTaskInformation_inputS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputS3Bucket", ID: &i_importS3Bucket, Type: smithy.ShapeTypeString})
+var sImportFileTaskInformation_inputS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputS3Key", ID: &i_importS3Key, Type: smithy.ShapeTypeString})
+var sImportFileTaskInformation_statusReportS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReportS3Bucket", ID: &i_importS3Bucket, Type: smithy.ShapeTypeString})
+var sImportFileTaskInformation_statusReportS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReportS3Key", ID: &i_importS3Key, Type: smithy.ShapeTypeString})
+var sImportFileTaskInformation_completionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completionTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sImportFileTaskInformation_numberOfRecordsSuccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecordsSuccess", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sImportFileTaskInformation_numberOfRecordsFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecordsFailed", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sImportFileTaskInformation_importName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString})
+var sIPAddressBasedRemoteInfo_ipAddressConfigurationTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddressConfigurationTimeStamp", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIPAddressBasedRemoteInfo_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &i_AuthType, Type: smithy.ShapeTypeString})
+var sIPAddressBasedRemoteInfo_osType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "osType", ID: &i_OSType, Type: smithy.ShapeTypeString})
+var s_IPAddressBasedRemoteInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIPAddressBasedRemoteInfo, Members: &mIPAddressBasedRemoteInfo, Type: smithy.ShapeTypeStructure})
+var s_ListAntipatternSeveritySummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAntipatternSeveritySummary, Members: &mAntipatternSeveritySummary, Type: smithy.ShapeTypeStructure})
+var s_ListApplicationComponentStatusSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationComponentStatusSummary, Members: &mApplicationComponentStatusSummary, Type: smithy.ShapeTypeStructure})
+var s_ListApplicationComponentSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationComponentSummary, Members: &mApplicationComponentSummary, Type: smithy.ShapeTypeStructure})
+var s_ListImportFileTaskInformation_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImportFileTaskInformation, Members: &mImportFileTaskInformation, Type: smithy.ShapeTypeStructure})
+var s_ListServerStatusSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerStatusSummary, Members: &mServerStatusSummary, Type: smithy.ShapeTypeStructure})
+var s_ListServerSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerSummary, Members: &mServerSummary, Type: smithy.ShapeTypeStructure})
+var s_ListStrategySummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStrategySummary, Members: &mStrategySummary, Type: smithy.ShapeTypeStructure})
+var sManagementPreference_awsManagedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsManagedResources", ID: &iAwsManagedResources, Members: &mAwsManagedResources, Type: smithy.ShapeTypeStructure})
+var sManagementPreference_selfManageResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "selfManageResources", ID: &iSelfManageResources, Members: &mSelfManageResources, Type: smithy.ShapeTypeStructure})
+var sManagementPreference_noPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "noPreference", ID: &iNoManagementPreference, Members: &mNoManagementPreference, Type: smithy.ShapeTypeStructure})
+var sNetworkInfo_interfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interfaceName", ID: &i_InterfaceName, Type: smithy.ShapeTypeString})
+var sNetworkInfo_ipAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sNetworkInfo_macAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macAddress", ID: &i_MacAddress, Type: smithy.ShapeTypeString})
+var sNetworkInfo_netMask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "netMask", ID: &i_NetMask, Type: smithy.ShapeTypeString})
+var s_NetworkInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkInfo, Members: &mNetworkInfo, Type: smithy.ShapeTypeStructure})
+var sNoDatabaseMigrationPreference_targetDatabaseEngine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDatabaseEngine", ID: &i_TargetDatabaseEngines, Members: &m_TargetDatabaseEngines, Type: smithy.ShapeTypeList})
+var sNoManagementPreference_targetDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDestination", ID: &i_NoPreferenceTargetDestinations, Members: &m_NoPreferenceTargetDestinations, Type: smithy.ShapeTypeList})
+var s_NoPreferenceTargetDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NoPreferenceTargetDestination, Type: smithy.ShapeTypeString})
+var sOSInfo_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_OSType, Type: smithy.ShapeTypeString})
+var sOSInfo_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_OSVersion, Type: smithy.ShapeTypeString})
+var sPipelineInfo_pipelineType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineType", ID: &i_PipelineType, Type: smithy.ShapeTypeString})
+var sPipelineInfo_pipelineConfigurationTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineConfigurationTimeStamp", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_PipelineInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipelineInfo, Members: &mPipelineInfo, Type: smithy.ShapeTypeStructure})
+var sPrioritizeBusinessGoals_businessGoals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessGoals", ID: &iBusinessGoals, Members: &mBusinessGoals, Type: smithy.ShapeTypeStructure})
+var sRecommendationReportDetails_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RecommendationReportStatus, Type: smithy.ShapeTypeString})
+var sRecommendationReportDetails_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_RecommendationReportStatusMessage, Type: smithy.ShapeTypeString})
+var sRecommendationReportDetails_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_RecommendationReportTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sRecommendationReportDetails_completionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completionTime", ID: &i_RecommendationReportTimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sRecommendationReportDetails_s3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Bucket", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRecommendationReportDetails_s3Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Keys", ID: &i_S3Keys, Members: &m_S3Keys, Type: smithy.ShapeTypeList})
+var sRecommendationSet_transformationTool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transformationTool", ID: &iTransformationTool, Members: &mTransformationTool, Type: smithy.ShapeTypeStructure})
+var sRecommendationSet_targetDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDestination", ID: &i_TargetDestination, Type: smithy.ShapeTypeString})
+var sRecommendationSet_strategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategy", ID: &i_Strategy, Type: smithy.ShapeTypeString})
+var sRemoteSourceCodeAnalysisServerInfo_remoteSourceCodeAnalysisServerConfigurationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remoteSourceCodeAnalysisServerConfigurationTimestamp", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString})
+var sResult_analysisType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisType", ID: &i_AnalysisType, Type: smithy.ShapeTypeString})
+var sResult_analysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analysisStatus", ID: &iAnalysisStatusUnion, Members: &mAnalysisStatusUnion, Type: smithy.ShapeTypeUnion})
+var sResult_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sResult_antipatternReportResultList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportResultList", ID: &i_AntipatternReportResultList, Members: &m_AntipatternReportResultList, Type: smithy.ShapeTypeList})
+var s_ResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResult, Members: &mResult, Type: smithy.ShapeTypeStructure})
+var s_S3Keys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3Object_s3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sS3Object_s3key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3key", ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sSelfManageResources_targetDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDestination", ID: &i_SelfManageTargetDestinations, Members: &m_SelfManageTargetDestinations, Type: smithy.ShapeTypeList})
+var s_SelfManageTargetDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SelfManageTargetDestination, Type: smithy.ShapeTypeString})
+var sServerDetail_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sServerDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServerDetail_recommendationSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationSet", ID: &iRecommendationSet, Members: &mRecommendationSet, Type: smithy.ShapeTypeStructure})
+var sServerDetail_dataCollectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataCollectionStatus", ID: &i_RunTimeAssessmentStatus, Type: smithy.ShapeTypeString})
+var sServerDetail_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sServerDetail_listAntipatternSeveritySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "listAntipatternSeveritySummary", ID: &i_ListAntipatternSeveritySummary, Members: &m_ListAntipatternSeveritySummary, Type: smithy.ShapeTypeList})
+var sServerDetail_systemInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "systemInfo", ID: &iSystemInfo, Members: &mSystemInfo, Type: smithy.ShapeTypeStructure})
+var sServerDetail_applicationComponentStrategySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentStrategySummary", ID: &i_ListStrategySummary, Members: &m_ListStrategySummary, Type: smithy.ShapeTypeList})
+var sServerDetail_antipatternReportS3Object = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportS3Object", ID: &iS3Object, Members: &mS3Object, Type: smithy.ShapeTypeStructure})
+var sServerDetail_antipatternReportStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatus", ID: &i_AntipatternReportStatus, Type: smithy.ShapeTypeString})
+var sServerDetail_antipatternReportStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "antipatternReportStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sServerDetail_serverType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServerDetail_lastAnalyzedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAnalyzedTimestamp", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sServerDetail_serverError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverError", ID: &iServerError, Members: &mServerError, Type: smithy.ShapeTypeStructure})
+var s_ServerDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerDetail, Members: &mServerDetail, Type: smithy.ShapeTypeStructure})
+var sServerError_serverErrorCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverErrorCategory", ID: &i_ServerErrorCategory, Type: smithy.ShapeTypeString})
+var sServerStatusSummary_runTimeAssessmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runTimeAssessmentStatus", ID: &i_RunTimeAssessmentStatus, Type: smithy.ShapeTypeString})
+var sServerStatusSummary_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_ServerStrategies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServerStrategy, Members: &mServerStrategy, Type: smithy.ShapeTypeStructure})
+var sServerStrategy_recommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendation", ID: &iRecommendationSet, Members: &mRecommendationSet, Type: smithy.ShapeTypeStructure})
+var sServerStrategy_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_StrategyRecommendation, Type: smithy.ShapeTypeString})
+var sServerStrategy_numberOfApplicationComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfApplicationComponents", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServerStrategy_isPreferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPreferred", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sServerSummary_ServerOsType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerOsType", ID: &i_ServerOsType, Type: smithy.ShapeTypeString})
+var sServerSummary_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServiceLinkedRoleLockClientException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSourceCode_versionControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionControl", ID: &i_VersionControl, Type: smithy.ShapeTypeString})
+var sSourceCode_sourceVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVersion", ID: &i_SourceVersion, Type: smithy.ShapeTypeString})
+var sSourceCode_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_Location, Type: smithy.ShapeTypeString})
+var sSourceCode_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_ProjectName, Type: smithy.ShapeTypeString})
+var s_SourceCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceCode, Members: &mSourceCode, Type: smithy.ShapeTypeStructure})
+var s_SourceCodeRepositories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSourceCodeRepository, Members: &mSourceCodeRepository, Type: smithy.ShapeTypeStructure})
+var sSourceCodeRepository_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSourceCodeRepository_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSourceCodeRepository_versionControlType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionControlType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSourceCodeRepository_projectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "projectName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStrategyOption_strategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategy", ID: &i_Strategy, Type: smithy.ShapeTypeString})
+var sStrategyOption_toolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolName", ID: &i_TransformationToolName, Type: smithy.ShapeTypeString})
+var sStrategyOption_targetDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetDestination", ID: &i_TargetDestination, Type: smithy.ShapeTypeString})
+var sStrategyOption_isPreferred = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isPreferred", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sStrategySummary_strategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategy", ID: &i_Strategy, Type: smithy.ShapeTypeString})
+var sStrategySummary_count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSystemInfo_osInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "osInfo", ID: &iOSInfo, Members: &mOSInfo, Type: smithy.ShapeTypeStructure})
+var sSystemInfo_fileSystemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSystemInfo_networkInfoList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInfoList", ID: &i_NetworkInfoList, Members: &m_NetworkInfoList, Type: smithy.ShapeTypeList})
+var sSystemInfo_cpuArchitecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuArchitecture", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TargetDatabaseEngines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetDatabaseEngine, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString})
+var sTransformationTool_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_TransformationToolName, Type: smithy.ShapeTypeString})
+var sTransformationTool_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_TranformationToolDescription, Type: smithy.ShapeTypeString})
+var sTransformationTool_tranformationToolInstallationLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tranformationToolInstallationLink", ID: &i_TranformationToolInstallationLink, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_errorMessage, Type: smithy.ShapeTypeString})
+var sVcenterBasedRemoteInfo_vcenterConfigurationTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vcenterConfigurationTimeStamp", ID: &i_String, Type: smithy.ShapeTypeString})
+var sVcenterBasedRemoteInfo_osType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "osType", ID: &i_OSType, Type: smithy.ShapeTypeString})
+var s_VcenterBasedRemoteInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVcenterBasedRemoteInfo, Members: &mVcenterBasedRemoteInfo, Type: smithy.ShapeTypeStructure})
+var sVersionControlInfo_versionControlType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionControlType", ID: &i_VersionControlType, Type: smithy.ShapeTypeString})
+var sVersionControlInfo_versionControlConfigurationTimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionControlConfigurationTimeStamp", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_VersionControlInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVersionControlInfo, Members: &mVersionControlInfo, Type: smithy.ShapeTypeStructure})
+var sGetApplicationComponentDetailsRequest_applicationComponentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentId", ID: &i_ApplicationComponentId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetApplicationComponentDetailsResponse_applicationComponentDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentDetail", ID: &iApplicationComponentDetail, Members: &mApplicationComponentDetail, Type: smithy.ShapeTypeStructure})
+var sGetApplicationComponentDetailsResponse_associatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedApplications", ID: &i_AssociatedApplications, Members: &m_AssociatedApplications, Type: smithy.ShapeTypeList})
+var sGetApplicationComponentDetailsResponse_moreApplicationResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "moreApplicationResource", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetApplicationComponentDetailsResponse_associatedServerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedServerIds", ID: &i_AssociatedServerIDs, Members: &m_AssociatedServerIDs, Type: smithy.ShapeTypeList})
+var sGetApplicationComponentStrategiesRequest_applicationComponentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentId", ID: &i_ApplicationComponentId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetApplicationComponentStrategiesResponse_applicationComponentStrategies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentStrategies", ID: &i_ApplicationComponentStrategies, Members: &m_ApplicationComponentStrategies, Type: smithy.ShapeTypeList})
+var sGetAssessmentRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AsyncTaskId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetAssessmentResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AsyncTaskId, Type: smithy.ShapeTypeString})
+var sGetAssessmentResponse_dataCollectionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataCollectionDetails", ID: &iDataCollectionDetails, Members: &mDataCollectionDetails, Type: smithy.ShapeTypeStructure})
+var sGetAssessmentResponse_assessmentTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentTargets", ID: &i_AssessmentTargets, Members: &m_AssessmentTargets, Type: smithy.ShapeTypeList})
+var sGetImportFileTaskRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetImportFileTaskResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetImportFileTaskResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ImportFileTaskStatus, Type: smithy.ShapeTypeString})
+var sGetImportFileTaskResponse_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sGetImportFileTaskResponse_inputS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputS3Bucket", ID: &i_importS3Bucket, Type: smithy.ShapeTypeString})
+var sGetImportFileTaskResponse_inputS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputS3Key", ID: &i_importS3Key, Type: smithy.ShapeTypeString})
+var sGetImportFileTaskResponse_statusReportS3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReportS3Bucket", ID: &i_importS3Bucket, Type: smithy.ShapeTypeString})
+var sGetImportFileTaskResponse_statusReportS3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReportS3Key", ID: &i_importS3Key, Type: smithy.ShapeTypeString})
+var sGetImportFileTaskResponse_completionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completionTime", ID: &i_TimeStamp, Type: smithy.ShapeTypeTimestamp})
+var sGetImportFileTaskResponse_numberOfRecordsSuccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecordsSuccess", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sGetImportFileTaskResponse_numberOfRecordsFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfRecordsFailed", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sGetImportFileTaskResponse_importName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "importName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetLatestAssessmentIdResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AsyncTaskId, Type: smithy.ShapeTypeString})
+var sGetPortfolioPreferencesResponse_prioritizeBusinessGoals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prioritizeBusinessGoals", ID: &iPrioritizeBusinessGoals, Members: &mPrioritizeBusinessGoals, Type: smithy.ShapeTypeStructure})
+var sGetPortfolioPreferencesResponse_applicationPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationPreferences", ID: &iApplicationPreferences, Members: &mApplicationPreferences, Type: smithy.ShapeTypeStructure})
+var sGetPortfolioPreferencesResponse_databasePreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databasePreferences", ID: &iDatabasePreferences, Members: &mDatabasePreferences, Type: smithy.ShapeTypeStructure})
+var sGetPortfolioPreferencesResponse_applicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationMode", ID: &i_ApplicationMode, Type: smithy.ShapeTypeString})
+var sGetPortfolioSummaryResponse_assessmentSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentSummary", ID: &iAssessmentSummary, Members: &mAssessmentSummary, Type: smithy.ShapeTypeStructure})
+var sGetRecommendationReportDetailsRequest_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RecommendationTaskId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetRecommendationReportDetailsResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RecommendationTaskId, Type: smithy.ShapeTypeString})
+var sGetRecommendationReportDetailsResponse_recommendationReportDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendationReportDetails", ID: &iRecommendationReportDetails, Members: &mRecommendationReportDetails, Type: smithy.ShapeTypeStructure})
+var sGetServerDetailsRequest_serverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverId", ID: &i_ServerId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetServerDetailsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString})
+var sGetServerDetailsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResult, Traits: &t32, Type: smithy.ShapeTypeInteger})
+var sGetServerDetailsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetServerDetailsResponse_serverDetail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverDetail", ID: &iServerDetail, Members: &mServerDetail, Type: smithy.ShapeTypeStructure})
+var sGetServerDetailsResponse_associatedApplications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedApplications", ID: &i_AssociatedApplications, Members: &m_AssociatedApplications, Type: smithy.ShapeTypeList})
+var sGetServerStrategiesRequest_serverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverId", ID: &i_ServerId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetServerStrategiesResponse_serverStrategies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverStrategies", ID: &i_ServerStrategies, Members: &m_ServerStrategies, Type: smithy.ShapeTypeList})
+var sListAnalyzableServersRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var sListAnalyzableServersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAnalyzableServersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResult, Type: smithy.ShapeTypeInteger})
+var sListAnalyzableServersResponse_analyzableServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "analyzableServers", ID: &i_AnalyzableServerSummaryList, Members: &m_AnalyzableServerSummaryList, Type: smithy.ShapeTypeList})
+var sListAnalyzableServersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListApplicationComponentsRequest_applicationComponentCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentCriteria", ID: &i_ApplicationComponentCriteria, Type: smithy.ShapeTypeString})
+var sListApplicationComponentsRequest_filterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListApplicationComponentsRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var sListApplicationComponentsRequest_groupIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupIdFilter", ID: &i_GroupIds, Members: &m_GroupIds, Type: smithy.ShapeTypeList})
+var sListApplicationComponentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListApplicationComponentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResult, Type: smithy.ShapeTypeInteger})
+var sListApplicationComponentsResponse_applicationComponentInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentInfos", ID: &i_ApplicationComponentDetails, Members: &m_ApplicationComponentDetails, Type: smithy.ShapeTypeList})
+var sListApplicationComponentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCollectorsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t31, Type: smithy.ShapeTypeString})
+var sListCollectorsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResult, Traits: &t32, Type: smithy.ShapeTypeInteger})
+var sListCollectorsResponse_Collectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Collectors", ID: &i_Collectors, Members: &m_Collectors, Type: smithy.ShapeTypeList})
+var sListCollectorsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListImportFileTaskRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Traits: &t31, Type: smithy.ShapeTypeString})
+var sListImportFileTaskRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Traits: &t32, Type: smithy.ShapeTypeInteger})
+var sListImportFileTaskResponse_taskInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskInfos", ID: &i_ListImportFileTaskInformation, Members: &m_ListImportFileTaskInformation, Type: smithy.ShapeTypeList})
+var sListImportFileTaskResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListServersRequest_serverCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverCriteria", ID: &i_ServerCriteria, Type: smithy.ShapeTypeString})
+var sListServersRequest_filterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filterValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListServersRequest_sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sort", ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var sListServersRequest_groupIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupIdFilter", ID: &i_GroupIds, Members: &m_GroupIds, Type: smithy.ShapeTypeList})
+var sListServersRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServersRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResult, Type: smithy.ShapeTypeInteger})
+var sListServersResponse_serverInfos = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverInfos", ID: &i_ServerDetails, Members: &m_ServerDetails, Type: smithy.ShapeTypeList})
+var sListServersResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPutPortfolioPreferencesRequest_prioritizeBusinessGoals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prioritizeBusinessGoals", ID: &iPrioritizeBusinessGoals, Members: &mPrioritizeBusinessGoals, Type: smithy.ShapeTypeStructure})
+var sPutPortfolioPreferencesRequest_applicationPreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationPreferences", ID: &iApplicationPreferences, Members: &mApplicationPreferences, Type: smithy.ShapeTypeStructure})
+var sPutPortfolioPreferencesRequest_databasePreferences = smithy.NewStaticSchema(smithy.StaticSchema{Member: "databasePreferences", ID: &iDatabasePreferences, Members: &mDatabasePreferences, Type: smithy.ShapeTypeStructure})
+var sPutPortfolioPreferencesRequest_applicationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationMode", ID: &i_ApplicationMode, Type: smithy.ShapeTypeString})
+var sStartAssessmentRequest_s3bucketForAnalysisData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3bucketForAnalysisData", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartAssessmentRequest_s3bucketForReportData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3bucketForReportData", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartAssessmentRequest_assessmentTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentTargets", ID: &i_AssessmentTargets, Members: &m_AssessmentTargets, Type: smithy.ShapeTypeList})
+var sStartAssessmentRequest_assessmentDataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentDataSourceType", ID: &i_AssessmentDataSourceType, Type: smithy.ShapeTypeString})
+var sStartAssessmentResponse_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_AsyncTaskId, Type: smithy.ShapeTypeString})
+var sStartImportFileTaskRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartImportFileTaskRequest_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_importS3Bucket, Type: smithy.ShapeTypeString})
+var sStartImportFileTaskRequest_s3key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3key", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartImportFileTaskRequest_dataSourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataSourceType", ID: &i_DataSourceType, Type: smithy.ShapeTypeString})
+var sStartImportFileTaskRequest_groupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupId", ID: &i_GroupIds, Members: &m_GroupIds, Type: smithy.ShapeTypeList})
+var sStartImportFileTaskRequest_s3bucketForReportData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3bucketForReportData", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartImportFileTaskResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartRecommendationReportGenerationRequest_outputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputFormat", ID: &i_OutputFormat, Type: smithy.ShapeTypeString})
+var sStartRecommendationReportGenerationRequest_groupIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "groupIdFilter", ID: &i_GroupIds, Members: &m_GroupIds, Type: smithy.ShapeTypeList})
+var sStartRecommendationReportGenerationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_RecommendationTaskId, Type: smithy.ShapeTypeString})
+var sStopAssessmentRequest_assessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assessmentId", ID: &i_AsyncTaskId, Type: smithy.ShapeTypeString})
+var sUpdateApplicationComponentConfigRequest_applicationComponentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationComponentId", ID: &i_ApplicationComponentId, Type: smithy.ShapeTypeString})
+var sUpdateApplicationComponentConfigRequest_inclusionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inclusionStatus", ID: &i_InclusionStatus, Type: smithy.ShapeTypeString})
+var sUpdateApplicationComponentConfigRequest_strategyOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategyOption", ID: &iStrategyOption, Members: &mStrategyOption, Type: smithy.ShapeTypeStructure})
+var sUpdateApplicationComponentConfigRequest_sourceCodeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceCodeList", ID: &i_SourceCodeList, Members: &m_SourceCodeList, Type: smithy.ShapeTypeList})
+var sUpdateApplicationComponentConfigRequest_secretsManagerKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretsManagerKey", ID: &i_SecretsManagerKey, Traits: &t33, Type: smithy.ShapeTypeString})
+var sUpdateApplicationComponentConfigRequest_configureOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configureOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateApplicationComponentConfigRequest_appType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "appType", ID: &i_AppType, Type: smithy.ShapeTypeString})
+var sUpdateServerConfigRequest_serverId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serverId", ID: &i_ServerId, Type: smithy.ShapeTypeString})
+var sUpdateServerConfigRequest_strategyOption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategyOption", ID: &iStrategyOption, Members: &mStrategyOption, Type: smithy.ShapeTypeStructure})
+
+var GetApplicationComponentDetails = &sGetApplicationComponentDetails
+
+var GetApplicationComponentStrategies = &sGetApplicationComponentStrategies
+
+var GetAssessment = &sGetAssessment
+
+var GetImportFileTask = &sGetImportFileTask
+
+var GetLatestAssessmentId = &sGetLatestAssessmentId
+
+var GetPortfolioPreferences = &sGetPortfolioPreferences
+
+var GetPortfolioSummary = &sGetPortfolioSummary
+
+var GetRecommendationReportDetails = &sGetRecommendationReportDetails
+
+var GetServerDetails = &sGetServerDetails
+
+var GetServerStrategies = &sGetServerStrategies
+
+var ListAnalyzableServers = &sListAnalyzableServers
+
+var ListApplicationComponents = &sListApplicationComponents
+
+var ListCollectors = &sListCollectors
+
+var ListImportFileTask = &sListImportFileTask
+
+var ListServers = &sListServers
+
+var PutPortfolioPreferences = &sPutPortfolioPreferences
+
+var StartAssessment = &sStartAssessment
+
+var StartImportFileTask = &sStartImportFileTask
+
+var StartRecommendationReportGeneration = &sStartRecommendationReportGeneration
+
+var StopAssessment = &sStopAssessment
+
+var UpdateApplicationComponentConfig = &sUpdateApplicationComponentConfig
+
+var UpdateServerConfig = &sUpdateServerConfig
+
+var _AWSMigrationHubStrategyRecommendation = &s_AWSMigrationHubStrategyRecommendation
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AnalysisStatusUnion = &sAnalysisStatusUnion
+var AnalysisStatusUnion_runtimeAnalysisStatus = &sAnalysisStatusUnion_runtimeAnalysisStatus
+var AnalysisStatusUnion_srcCodeOrDbAnalysisStatus = &sAnalysisStatusUnion_srcCodeOrDbAnalysisStatus
+
+var _AnalysisType = &s_AnalysisType
+
+var AnalyzableServerSummary = &sAnalyzableServerSummary
+var AnalyzableServerSummary_hostname = &sAnalyzableServerSummary_hostname
+var AnalyzableServerSummary_ipAddress = &sAnalyzableServerSummary_ipAddress
+var AnalyzableServerSummary_source = &sAnalyzableServerSummary_source
+var AnalyzableServerSummary_vmId = &sAnalyzableServerSummary_vmId
+
+var _AnalyzableServerSummaryList = &s_AnalyzableServerSummaryList
+var _AnalyzableServerSummaryList_member = &s_AnalyzableServerSummaryList_member
+
+var AnalyzerNameUnion = &sAnalyzerNameUnion
+var AnalyzerNameUnion_binaryAnalyzerName = &sAnalyzerNameUnion_binaryAnalyzerName
+var AnalyzerNameUnion_runTimeAnalyzerName = &sAnalyzerNameUnion_runTimeAnalyzerName
+var AnalyzerNameUnion_sourceCodeAnalyzerName = &sAnalyzerNameUnion_sourceCodeAnalyzerName
+
+var AntipatternReportResult = &sAntipatternReportResult
+var AntipatternReportResult_analyzerName = &sAntipatternReportResult_analyzerName
+var AntipatternReportResult_antiPatternReportS3Object = &sAntipatternReportResult_antiPatternReportS3Object
+var AntipatternReportResult_antipatternReportStatus = &sAntipatternReportResult_antipatternReportStatus
+var AntipatternReportResult_antipatternReportStatusMessage = &sAntipatternReportResult_antipatternReportStatusMessage
+
+var _AntipatternReportResultList = &s_AntipatternReportResultList
+var _AntipatternReportResultList_member = &s_AntipatternReportResultList_member
+
+var _AntipatternReportStatus = &s_AntipatternReportStatus
+
+var AntipatternSeveritySummary = &sAntipatternSeveritySummary
+var AntipatternSeveritySummary_severity = &sAntipatternSeveritySummary_severity
+var AntipatternSeveritySummary_count = &sAntipatternSeveritySummary_count
+
+var _ApplicationComponentCriteria = &s_ApplicationComponentCriteria
+
+var ApplicationComponentDetail = &sApplicationComponentDetail
+var ApplicationComponentDetail_id = &sApplicationComponentDetail_id
+var ApplicationComponentDetail_name = &sApplicationComponentDetail_name
+var ApplicationComponentDetail_recommendationSet = &sApplicationComponentDetail_recommendationSet
+var ApplicationComponentDetail_analysisStatus = &sApplicationComponentDetail_analysisStatus
+var ApplicationComponentDetail_statusMessage = &sApplicationComponentDetail_statusMessage
+var ApplicationComponentDetail_listAntipatternSeveritySummary = &sApplicationComponentDetail_listAntipatternSeveritySummary
+var ApplicationComponentDetail_databaseConfigDetail = &sApplicationComponentDetail_databaseConfigDetail
+var ApplicationComponentDetail_sourceCodeRepositories = &sApplicationComponentDetail_sourceCodeRepositories
+var ApplicationComponentDetail_appType = &sApplicationComponentDetail_appType
+var ApplicationComponentDetail_resourceSubType = &sApplicationComponentDetail_resourceSubType
+var ApplicationComponentDetail_inclusionStatus = &sApplicationComponentDetail_inclusionStatus
+var ApplicationComponentDetail_antipatternReportS3Object = &sApplicationComponentDetail_antipatternReportS3Object
+var ApplicationComponentDetail_antipatternReportStatus = &sApplicationComponentDetail_antipatternReportStatus
+var ApplicationComponentDetail_antipatternReportStatusMessage = &sApplicationComponentDetail_antipatternReportStatusMessage
+var ApplicationComponentDetail_osVersion = &sApplicationComponentDetail_osVersion
+var ApplicationComponentDetail_osDriver = &sApplicationComponentDetail_osDriver
+var ApplicationComponentDetail_lastAnalyzedTimestamp = &sApplicationComponentDetail_lastAnalyzedTimestamp
+var ApplicationComponentDetail_associatedServerId = &sApplicationComponentDetail_associatedServerId
+var ApplicationComponentDetail_moreServerAssociationExists = &sApplicationComponentDetail_moreServerAssociationExists
+var ApplicationComponentDetail_runtimeStatus = &sApplicationComponentDetail_runtimeStatus
+var ApplicationComponentDetail_runtimeStatusMessage = &sApplicationComponentDetail_runtimeStatusMessage
+var ApplicationComponentDetail_appUnitError = &sApplicationComponentDetail_appUnitError
+var ApplicationComponentDetail_resultList = &sApplicationComponentDetail_resultList
+
+var _ApplicationComponentDetails = &s_ApplicationComponentDetails
+var _ApplicationComponentDetails_member = &s_ApplicationComponentDetails_member
+
+var _ApplicationComponentId = &s_ApplicationComponentId
+
+var ApplicationComponentStatusSummary = &sApplicationComponentStatusSummary
+var ApplicationComponentStatusSummary_srcCodeOrDbAnalysisStatus = &sApplicationComponentStatusSummary_srcCodeOrDbAnalysisStatus
+var ApplicationComponentStatusSummary_count = &sApplicationComponentStatusSummary_count
+
+var _ApplicationComponentStrategies = &s_ApplicationComponentStrategies
+var _ApplicationComponentStrategies_member = &s_ApplicationComponentStrategies_member
+
+var ApplicationComponentStrategy = &sApplicationComponentStrategy
+var ApplicationComponentStrategy_recommendation = &sApplicationComponentStrategy_recommendation
+var ApplicationComponentStrategy_status = &sApplicationComponentStrategy_status
+var ApplicationComponentStrategy_isPreferred = &sApplicationComponentStrategy_isPreferred
+
+var ApplicationComponentSummary = &sApplicationComponentSummary
+var ApplicationComponentSummary_appType = &sApplicationComponentSummary_appType
+var ApplicationComponentSummary_count = &sApplicationComponentSummary_count
+
+var _ApplicationMode = &s_ApplicationMode
+
+var ApplicationPreferences = &sApplicationPreferences
+var ApplicationPreferences_managementPreference = &sApplicationPreferences_managementPreference
+
+var _AppType = &s_AppType
+
+var AppUnitError = &sAppUnitError
+var AppUnitError_appUnitErrorCategory = &sAppUnitError_appUnitErrorCategory
+
+var _AppUnitErrorCategory = &s_AppUnitErrorCategory
+
+var _AssessmentDataSourceType = &s_AssessmentDataSourceType
+
+var _AssessmentStatus = &s_AssessmentStatus
+
+var _AssessmentStatusMessage = &s_AssessmentStatusMessage
+
+var AssessmentSummary = &sAssessmentSummary
+var AssessmentSummary_listServerStrategySummary = &sAssessmentSummary_listServerStrategySummary
+var AssessmentSummary_listApplicationComponentStrategySummary = &sAssessmentSummary_listApplicationComponentStrategySummary
+var AssessmentSummary_listAntipatternSeveritySummary = &sAssessmentSummary_listAntipatternSeveritySummary
+var AssessmentSummary_listApplicationComponentSummary = &sAssessmentSummary_listApplicationComponentSummary
+var AssessmentSummary_listServerSummary = &sAssessmentSummary_listServerSummary
+var AssessmentSummary_antipatternReportS3Object = &sAssessmentSummary_antipatternReportS3Object
+var AssessmentSummary_antipatternReportStatus = &sAssessmentSummary_antipatternReportStatus
+var AssessmentSummary_antipatternReportStatusMessage = &sAssessmentSummary_antipatternReportStatusMessage
+var AssessmentSummary_lastAnalyzedTimestamp = &sAssessmentSummary_lastAnalyzedTimestamp
+var AssessmentSummary_listApplicationComponentStatusSummary = &sAssessmentSummary_listApplicationComponentStatusSummary
+var AssessmentSummary_listServerStatusSummary = &sAssessmentSummary_listServerStatusSummary
+
+var AssessmentTarget = &sAssessmentTarget
+var AssessmentTarget_condition = &sAssessmentTarget_condition
+var AssessmentTarget_name = &sAssessmentTarget_name
+var AssessmentTarget_values = &sAssessmentTarget_values
+
+var _AssessmentTargets = &s_AssessmentTargets
+var _AssessmentTargets_member = &s_AssessmentTargets_member
+
+var _AssessmentTargetValues = &s_AssessmentTargetValues
+var _AssessmentTargetValues_member = &s_AssessmentTargetValues_member
+
+var AssociatedApplication = &sAssociatedApplication
+var AssociatedApplication_name = &sAssociatedApplication_name
+var AssociatedApplication_id = &sAssociatedApplication_id
+
+var _AssociatedApplications = &s_AssociatedApplications
+var _AssociatedApplications_member = &s_AssociatedApplications_member
+
+var _AssociatedServerIDs = &s_AssociatedServerIDs
+var _AssociatedServerIDs_member = &s_AssociatedServerIDs_member
+
+var _AsyncTaskId = &s_AsyncTaskId
+
+var _AuthType = &s_AuthType
+
+var AwsManagedResources = &sAwsManagedResources
+var AwsManagedResources_targetDestination = &sAwsManagedResources_targetDestination
+
+var _AwsManagedTargetDestination = &s_AwsManagedTargetDestination
+
+var _AwsManagedTargetDestinations = &s_AwsManagedTargetDestinations
+var _AwsManagedTargetDestinations_member = &s_AwsManagedTargetDestinations_member
+
+var _BinaryAnalyzerName = &s_BinaryAnalyzerName
+
+var _Boolean = &s_Boolean
+
+var BusinessGoals = &sBusinessGoals
+var BusinessGoals_speedOfMigration = &sBusinessGoals_speedOfMigration
+var BusinessGoals_reduceOperationalOverheadWithManagedServices = &sBusinessGoals_reduceOperationalOverheadWithManagedServices
+var BusinessGoals_modernizeInfrastructureWithCloudNativeTechnologies = &sBusinessGoals_modernizeInfrastructureWithCloudNativeTechnologies
+var BusinessGoals_licenseCostReduction = &sBusinessGoals_licenseCostReduction
+
+var _BusinessGoalsInteger = &s_BusinessGoalsInteger
+
+var Collector = &sCollector
+var Collector_collectorId = &sCollector_collectorId
+var Collector_ipAddress = &sCollector_ipAddress
+var Collector_hostName = &sCollector_hostName
+var Collector_collectorHealth = &sCollector_collectorHealth
+var Collector_collectorVersion = &sCollector_collectorVersion
+var Collector_registeredTimeStamp = &sCollector_registeredTimeStamp
+var Collector_lastActivityTimeStamp = &sCollector_lastActivityTimeStamp
+var Collector_configurationSummary = &sCollector_configurationSummary
+
+var _CollectorHealth = &s_CollectorHealth
+
+var _Collectors = &s_Collectors
+var _Collectors_member = &s_Collectors_member
+
+var _Condition = &s_Condition
+
+var ConfigurationSummary = &sConfigurationSummary
+var ConfigurationSummary_vcenterBasedRemoteInfoList = &sConfigurationSummary_vcenterBasedRemoteInfoList
+var ConfigurationSummary_ipAddressBasedRemoteInfoList = &sConfigurationSummary_ipAddressBasedRemoteInfoList
+var ConfigurationSummary_versionControlInfoList = &sConfigurationSummary_versionControlInfoList
+var ConfigurationSummary_pipelineInfoList = &sConfigurationSummary_pipelineInfoList
+var ConfigurationSummary_remoteSourceCodeAnalysisServerInfo = &sConfigurationSummary_remoteSourceCodeAnalysisServerInfo
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var DatabaseConfigDetail = &sDatabaseConfigDetail
+var DatabaseConfigDetail_secretName = &sDatabaseConfigDetail_secretName
+
+var _DatabaseManagementPreference = &s_DatabaseManagementPreference
+
+var DatabaseMigrationPreference = &sDatabaseMigrationPreference
+var DatabaseMigrationPreference_heterogeneous = &sDatabaseMigrationPreference_heterogeneous
+var DatabaseMigrationPreference_homogeneous = &sDatabaseMigrationPreference_homogeneous
+var DatabaseMigrationPreference_noPreference = &sDatabaseMigrationPreference_noPreference
+
+var DatabasePreferences = &sDatabasePreferences
+var DatabasePreferences_databaseManagementPreference = &sDatabasePreferences_databaseManagementPreference
+var DatabasePreferences_databaseMigrationPreference = &sDatabasePreferences_databaseMigrationPreference
+
+var DataCollectionDetails = &sDataCollectionDetails
+var DataCollectionDetails_status = &sDataCollectionDetails_status
+var DataCollectionDetails_servers = &sDataCollectionDetails_servers
+var DataCollectionDetails_failed = &sDataCollectionDetails_failed
+var DataCollectionDetails_success = &sDataCollectionDetails_success
+var DataCollectionDetails_inProgress = &sDataCollectionDetails_inProgress
+var DataCollectionDetails_startTime = &sDataCollectionDetails_startTime
+var DataCollectionDetails_completionTime = &sDataCollectionDetails_completionTime
+var DataCollectionDetails_statusMessage = &sDataCollectionDetails_statusMessage
+
+var _DataSourceType = &s_DataSourceType
+
+var DependencyException = &sDependencyException
+var DependencyException_message = &sDependencyException_message
+
+var _errorMessage = &s_errorMessage
+
+var Group = &sGroup
+var Group_name = &sGroup_name
+var Group_value = &sGroup_value
+
+var _GroupIds = &s_GroupIds
+var _GroupIds_member = &s_GroupIds_member
+
+var _GroupName = &s_GroupName
+
+var Heterogeneous = &sHeterogeneous
+var Heterogeneous_targetDatabaseEngine = &sHeterogeneous_targetDatabaseEngine
+
+var _HeterogeneousTargetDatabaseEngine = &s_HeterogeneousTargetDatabaseEngine
+
+var _HeterogeneousTargetDatabaseEngines = &s_HeterogeneousTargetDatabaseEngines
+var _HeterogeneousTargetDatabaseEngines_member = &s_HeterogeneousTargetDatabaseEngines_member
+
+var Homogeneous = &sHomogeneous
+var Homogeneous_targetDatabaseEngine = &sHomogeneous_targetDatabaseEngine
+
+var _HomogeneousTargetDatabaseEngine = &s_HomogeneousTargetDatabaseEngine
+
+var _HomogeneousTargetDatabaseEngines = &s_HomogeneousTargetDatabaseEngines
+var _HomogeneousTargetDatabaseEngines_member = &s_HomogeneousTargetDatabaseEngines_member
+
+var ImportFileTaskInformation = &sImportFileTaskInformation
+var ImportFileTaskInformation_id = &sImportFileTaskInformation_id
+var ImportFileTaskInformation_status = &sImportFileTaskInformation_status
+var ImportFileTaskInformation_startTime = &sImportFileTaskInformation_startTime
+var ImportFileTaskInformation_inputS3Bucket = &sImportFileTaskInformation_inputS3Bucket
+var ImportFileTaskInformation_inputS3Key = &sImportFileTaskInformation_inputS3Key
+var ImportFileTaskInformation_statusReportS3Bucket = &sImportFileTaskInformation_statusReportS3Bucket
+var ImportFileTaskInformation_statusReportS3Key = &sImportFileTaskInformation_statusReportS3Key
+var ImportFileTaskInformation_completionTime = &sImportFileTaskInformation_completionTime
+var ImportFileTaskInformation_numberOfRecordsSuccess = &sImportFileTaskInformation_numberOfRecordsSuccess
+var ImportFileTaskInformation_numberOfRecordsFailed = &sImportFileTaskInformation_numberOfRecordsFailed
+var ImportFileTaskInformation_importName = &sImportFileTaskInformation_importName
+
+var _ImportFileTaskStatus = &s_ImportFileTaskStatus
+
+var _importS3Bucket = &s_importS3Bucket
+
+var _importS3Key = &s_importS3Key
+
+var _InclusionStatus = &s_InclusionStatus
+
+var _Integer = &s_Integer
+
+var _InterfaceName = &s_InterfaceName
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _IPAddress = &s_IPAddress
+
+var IPAddressBasedRemoteInfo = &sIPAddressBasedRemoteInfo
+var IPAddressBasedRemoteInfo_ipAddressConfigurationTimeStamp = &sIPAddressBasedRemoteInfo_ipAddressConfigurationTimeStamp
+var IPAddressBasedRemoteInfo_authType = &sIPAddressBasedRemoteInfo_authType
+var IPAddressBasedRemoteInfo_osType = &sIPAddressBasedRemoteInfo_osType
+
+var _IPAddressBasedRemoteInfoList = &s_IPAddressBasedRemoteInfoList
+var _IPAddressBasedRemoteInfoList_member = &s_IPAddressBasedRemoteInfoList_member
+
+var _ListAntipatternSeveritySummary = &s_ListAntipatternSeveritySummary
+var _ListAntipatternSeveritySummary_member = &s_ListAntipatternSeveritySummary_member
+
+var _ListApplicationComponentStatusSummary = &s_ListApplicationComponentStatusSummary
+var _ListApplicationComponentStatusSummary_member = &s_ListApplicationComponentStatusSummary_member
+
+var _ListApplicationComponentSummary = &s_ListApplicationComponentSummary
+var _ListApplicationComponentSummary_member = &s_ListApplicationComponentSummary_member
+
+var _ListImportFileTaskInformation = &s_ListImportFileTaskInformation
+var _ListImportFileTaskInformation_member = &s_ListImportFileTaskInformation_member
+
+var _ListServerStatusSummary = &s_ListServerStatusSummary
+var _ListServerStatusSummary_member = &s_ListServerStatusSummary_member
+
+var _ListServerSummary = &s_ListServerSummary
+var _ListServerSummary_member = &s_ListServerSummary_member
+
+var _ListStrategySummary = &s_ListStrategySummary
+var _ListStrategySummary_member = &s_ListStrategySummary_member
+
+var _Location = &s_Location
+
+var _MacAddress = &s_MacAddress
+
+var ManagementPreference = &sManagementPreference
+var ManagementPreference_awsManagedResources = &sManagementPreference_awsManagedResources
+var ManagementPreference_selfManageResources = &sManagementPreference_selfManageResources
+var ManagementPreference_noPreference = &sManagementPreference_noPreference
+
+var _MaxResult = &s_MaxResult
+
+var _NetMask = &s_NetMask
+
+var NetworkInfo = &sNetworkInfo
+var NetworkInfo_interfaceName = &sNetworkInfo_interfaceName
+var NetworkInfo_ipAddress = &sNetworkInfo_ipAddress
+var NetworkInfo_macAddress = &sNetworkInfo_macAddress
+var NetworkInfo_netMask = &sNetworkInfo_netMask
+
+var _NetworkInfoList = &s_NetworkInfoList
+var _NetworkInfoList_member = &s_NetworkInfoList_member
+
+var _NextToken = &s_NextToken
+
+var NoDatabaseMigrationPreference = &sNoDatabaseMigrationPreference
+var NoDatabaseMigrationPreference_targetDatabaseEngine = &sNoDatabaseMigrationPreference_targetDatabaseEngine
+
+var NoManagementPreference = &sNoManagementPreference
+var NoManagementPreference_targetDestination = &sNoManagementPreference_targetDestination
+
+var _NoPreferenceTargetDestination = &s_NoPreferenceTargetDestination
+
+var _NoPreferenceTargetDestinations = &s_NoPreferenceTargetDestinations
+var _NoPreferenceTargetDestinations_member = &s_NoPreferenceTargetDestinations_member
+
+var OSInfo = &sOSInfo
+var OSInfo_type = &sOSInfo_type
+var OSInfo_version = &sOSInfo_version
+
+var _OSType = &s_OSType
+
+var _OSVersion = &s_OSVersion
+
+var _OutputFormat = &s_OutputFormat
+
+var PipelineInfo = &sPipelineInfo
+var PipelineInfo_pipelineType = &sPipelineInfo_pipelineType
+var PipelineInfo_pipelineConfigurationTimeStamp = &sPipelineInfo_pipelineConfigurationTimeStamp
+
+var _PipelineInfoList = &s_PipelineInfoList
+var _PipelineInfoList_member = &s_PipelineInfoList_member
+
+var _PipelineType = &s_PipelineType
+
+var PrioritizeBusinessGoals = &sPrioritizeBusinessGoals
+var PrioritizeBusinessGoals_businessGoals = &sPrioritizeBusinessGoals_businessGoals
+
+var _ProjectName = &s_ProjectName
+
+var RecommendationReportDetails = &sRecommendationReportDetails
+var RecommendationReportDetails_status = &sRecommendationReportDetails_status
+var RecommendationReportDetails_statusMessage = &sRecommendationReportDetails_statusMessage
+var RecommendationReportDetails_startTime = &sRecommendationReportDetails_startTime
+var RecommendationReportDetails_completionTime = &sRecommendationReportDetails_completionTime
+var RecommendationReportDetails_s3Bucket = &sRecommendationReportDetails_s3Bucket
+var RecommendationReportDetails_s3Keys = &sRecommendationReportDetails_s3Keys
+
+var _RecommendationReportStatus = &s_RecommendationReportStatus
+
+var _RecommendationReportStatusMessage = &s_RecommendationReportStatusMessage
+
+var _RecommendationReportTimeStamp = &s_RecommendationReportTimeStamp
+
+var RecommendationSet = &sRecommendationSet
+var RecommendationSet_transformationTool = &sRecommendationSet_transformationTool
+var RecommendationSet_targetDestination = &sRecommendationSet_targetDestination
+var RecommendationSet_strategy = &sRecommendationSet_strategy
+
+var _RecommendationTaskId = &s_RecommendationTaskId
+
+var RemoteSourceCodeAnalysisServerInfo = &sRemoteSourceCodeAnalysisServerInfo
+var RemoteSourceCodeAnalysisServerInfo_remoteSourceCodeAnalysisServerConfigurationTimestamp = &sRemoteSourceCodeAnalysisServerInfo_remoteSourceCodeAnalysisServerConfigurationTimestamp
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _ResourceSubType = &s_ResourceSubType
+
+var Result = &sResult
+var Result_analysisType = &sResult_analysisType
+var Result_analysisStatus = &sResult_analysisStatus
+var Result_statusMessage = &sResult_statusMessage
+var Result_antipatternReportResultList = &sResult_antipatternReportResultList
+
+var _ResultList = &s_ResultList
+var _ResultList_member = &s_ResultList_member
+
+var _RuntimeAnalysisStatus = &s_RuntimeAnalysisStatus
+
+var _RunTimeAnalyzerName = &s_RunTimeAnalyzerName
+
+var _RunTimeAssessmentStatus = &s_RunTimeAssessmentStatus
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Key = &s_S3Key
+
+var _S3Keys = &s_S3Keys
+var _S3Keys_member = &s_S3Keys_member
+
+var S3Object = &sS3Object
+var S3Object_s3Bucket = &sS3Object_s3Bucket
+var S3Object_s3key = &sS3Object_s3key
+
+var _SecretsManagerKey = &s_SecretsManagerKey
+
+var SelfManageResources = &sSelfManageResources
+var SelfManageResources_targetDestination = &sSelfManageResources_targetDestination
+
+var _SelfManageTargetDestination = &s_SelfManageTargetDestination
+
+var _SelfManageTargetDestinations = &s_SelfManageTargetDestinations
+var _SelfManageTargetDestinations_member = &s_SelfManageTargetDestinations_member
+
+var _ServerCriteria = &s_ServerCriteria
+
+var ServerDetail = &sServerDetail
+var ServerDetail_id = &sServerDetail_id
+var ServerDetail_name = &sServerDetail_name
+var ServerDetail_recommendationSet = &sServerDetail_recommendationSet
+var ServerDetail_dataCollectionStatus = &sServerDetail_dataCollectionStatus
+var ServerDetail_statusMessage = &sServerDetail_statusMessage
+var ServerDetail_listAntipatternSeveritySummary = &sServerDetail_listAntipatternSeveritySummary
+var ServerDetail_systemInfo = &sServerDetail_systemInfo
+var ServerDetail_applicationComponentStrategySummary = &sServerDetail_applicationComponentStrategySummary
+var ServerDetail_antipatternReportS3Object = &sServerDetail_antipatternReportS3Object
+var ServerDetail_antipatternReportStatus = &sServerDetail_antipatternReportStatus
+var ServerDetail_antipatternReportStatusMessage = &sServerDetail_antipatternReportStatusMessage
+var ServerDetail_serverType = &sServerDetail_serverType
+var ServerDetail_lastAnalyzedTimestamp = &sServerDetail_lastAnalyzedTimestamp
+var ServerDetail_serverError = &sServerDetail_serverError
+
+var _ServerDetails = &s_ServerDetails
+var _ServerDetails_member = &s_ServerDetails_member
+
+var ServerError = &sServerError
+var ServerError_serverErrorCategory = &sServerError_serverErrorCategory
+
+var _ServerErrorCategory = &s_ServerErrorCategory
+
+var _ServerId = &s_ServerId
+
+var _ServerOsType = &s_ServerOsType
+
+var ServerStatusSummary = &sServerStatusSummary
+var ServerStatusSummary_runTimeAssessmentStatus = &sServerStatusSummary_runTimeAssessmentStatus
+var ServerStatusSummary_count = &sServerStatusSummary_count
+
+var _ServerStrategies = &s_ServerStrategies
+var _ServerStrategies_member = &s_ServerStrategies_member
+
+var ServerStrategy = &sServerStrategy
+var ServerStrategy_recommendation = &sServerStrategy_recommendation
+var ServerStrategy_status = &sServerStrategy_status
+var ServerStrategy_numberOfApplicationComponents = &sServerStrategy_numberOfApplicationComponents
+var ServerStrategy_isPreferred = &sServerStrategy_isPreferred
+
+var ServerSummary = &sServerSummary
+var ServerSummary_ServerOsType = &sServerSummary_ServerOsType
+var ServerSummary_count = &sServerSummary_count
+
+var ServiceLinkedRoleLockClientException = &sServiceLinkedRoleLockClientException
+var ServiceLinkedRoleLockClientException_message = &sServiceLinkedRoleLockClientException_message
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _Severity = &s_Severity
+
+var _SortOrder = &s_SortOrder
+
+var SourceCode = &sSourceCode
+var SourceCode_versionControl = &sSourceCode_versionControl
+var SourceCode_sourceVersion = &sSourceCode_sourceVersion
+var SourceCode_location = &sSourceCode_location
+var SourceCode_projectName = &sSourceCode_projectName
+
+var _SourceCodeAnalyzerName = &s_SourceCodeAnalyzerName
+
+var _SourceCodeList = &s_SourceCodeList
+var _SourceCodeList_member = &s_SourceCodeList_member
+
+var _SourceCodeRepositories = &s_SourceCodeRepositories
+var _SourceCodeRepositories_member = &s_SourceCodeRepositories_member
+
+var SourceCodeRepository = &sSourceCodeRepository
+var SourceCodeRepository_repository = &sSourceCodeRepository_repository
+var SourceCodeRepository_branch = &sSourceCodeRepository_branch
+var SourceCodeRepository_versionControlType = &sSourceCodeRepository_versionControlType
+var SourceCodeRepository_projectName = &sSourceCodeRepository_projectName
+
+var _SourceVersion = &s_SourceVersion
+
+var _SrcCodeOrDbAnalysisStatus = &s_SrcCodeOrDbAnalysisStatus
+
+var _StatusMessage = &s_StatusMessage
+
+var _Strategy = &s_Strategy
+
+var StrategyOption = &sStrategyOption
+var StrategyOption_strategy = &sStrategyOption_strategy
+var StrategyOption_toolName = &sStrategyOption_toolName
+var StrategyOption_targetDestination = &sStrategyOption_targetDestination
+var StrategyOption_isPreferred = &sStrategyOption_isPreferred
+
+var _StrategyRecommendation = &s_StrategyRecommendation
+
+var StrategySummary = &sStrategySummary
+var StrategySummary_strategy = &sStrategySummary_strategy
+var StrategySummary_count = &sStrategySummary_count
+
+var _String = &s_String
+
+var SystemInfo = &sSystemInfo
+var SystemInfo_osInfo = &sSystemInfo_osInfo
+var SystemInfo_fileSystemType = &sSystemInfo_fileSystemType
+var SystemInfo_networkInfoList = &sSystemInfo_networkInfoList
+var SystemInfo_cpuArchitecture = &sSystemInfo_cpuArchitecture
+
+var _TargetDatabaseEngine = &s_TargetDatabaseEngine
+
+var _TargetDatabaseEngines = &s_TargetDatabaseEngines
+var _TargetDatabaseEngines_member = &s_TargetDatabaseEngines_member
+
+var _TargetDestination = &s_TargetDestination
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var _TimeStamp = &s_TimeStamp
+
+var _TranformationToolDescription = &s_TranformationToolDescription
+
+var _TranformationToolInstallationLink = &s_TranformationToolInstallationLink
+
+var TransformationTool = &sTransformationTool
+var TransformationTool_name = &sTransformationTool_name
+var TransformationTool_description = &sTransformationTool_description
+var TransformationTool_tranformationToolInstallationLink = &sTransformationTool_tranformationToolInstallationLink
+
+var _TransformationToolName = &s_TransformationToolName
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var VcenterBasedRemoteInfo = &sVcenterBasedRemoteInfo
+var VcenterBasedRemoteInfo_vcenterConfigurationTimeStamp = &sVcenterBasedRemoteInfo_vcenterConfigurationTimeStamp
+var VcenterBasedRemoteInfo_osType = &sVcenterBasedRemoteInfo_osType
+
+var _VcenterBasedRemoteInfoList = &s_VcenterBasedRemoteInfoList
+var _VcenterBasedRemoteInfoList_member = &s_VcenterBasedRemoteInfoList_member
+
+var _VersionControl = &s_VersionControl
+
+var VersionControlInfo = &sVersionControlInfo
+var VersionControlInfo_versionControlType = &sVersionControlInfo_versionControlType
+var VersionControlInfo_versionControlConfigurationTimeStamp = &sVersionControlInfo_versionControlConfigurationTimeStamp
+
+var _VersionControlInfoList = &s_VersionControlInfoList
+var _VersionControlInfoList_member = &s_VersionControlInfoList_member
+
+var _VersionControlType = &s_VersionControlType
+
+var GetApplicationComponentDetailsRequest = &sGetApplicationComponentDetailsRequest
+var GetApplicationComponentDetailsRequest_applicationComponentId = &sGetApplicationComponentDetailsRequest_applicationComponentId
+
+var GetApplicationComponentDetailsResponse = &sGetApplicationComponentDetailsResponse
+var GetApplicationComponentDetailsResponse_applicationComponentDetail = &sGetApplicationComponentDetailsResponse_applicationComponentDetail
+var GetApplicationComponentDetailsResponse_associatedApplications = &sGetApplicationComponentDetailsResponse_associatedApplications
+var GetApplicationComponentDetailsResponse_moreApplicationResource = &sGetApplicationComponentDetailsResponse_moreApplicationResource
+var GetApplicationComponentDetailsResponse_associatedServerIds = &sGetApplicationComponentDetailsResponse_associatedServerIds
+
+var GetApplicationComponentStrategiesRequest = &sGetApplicationComponentStrategiesRequest
+var GetApplicationComponentStrategiesRequest_applicationComponentId = &sGetApplicationComponentStrategiesRequest_applicationComponentId
+
+var GetApplicationComponentStrategiesResponse = &sGetApplicationComponentStrategiesResponse
+var GetApplicationComponentStrategiesResponse_applicationComponentStrategies = &sGetApplicationComponentStrategiesResponse_applicationComponentStrategies
+
+var GetAssessmentRequest = &sGetAssessmentRequest
+var GetAssessmentRequest_id = &sGetAssessmentRequest_id
+
+var GetAssessmentResponse = &sGetAssessmentResponse
+var GetAssessmentResponse_id = &sGetAssessmentResponse_id
+var GetAssessmentResponse_dataCollectionDetails = &sGetAssessmentResponse_dataCollectionDetails
+var GetAssessmentResponse_assessmentTargets = &sGetAssessmentResponse_assessmentTargets
+
+var GetImportFileTaskRequest = &sGetImportFileTaskRequest
+var GetImportFileTaskRequest_id = &sGetImportFileTaskRequest_id
+
+var GetImportFileTaskResponse = &sGetImportFileTaskResponse
+var GetImportFileTaskResponse_id = &sGetImportFileTaskResponse_id
+var GetImportFileTaskResponse_status = &sGetImportFileTaskResponse_status
+var GetImportFileTaskResponse_startTime = &sGetImportFileTaskResponse_startTime
+var GetImportFileTaskResponse_inputS3Bucket = &sGetImportFileTaskResponse_inputS3Bucket
+var GetImportFileTaskResponse_inputS3Key = &sGetImportFileTaskResponse_inputS3Key
+var GetImportFileTaskResponse_statusReportS3Bucket = &sGetImportFileTaskResponse_statusReportS3Bucket
+var GetImportFileTaskResponse_statusReportS3Key = &sGetImportFileTaskResponse_statusReportS3Key
+var GetImportFileTaskResponse_completionTime = &sGetImportFileTaskResponse_completionTime
+var GetImportFileTaskResponse_numberOfRecordsSuccess = &sGetImportFileTaskResponse_numberOfRecordsSuccess
+var GetImportFileTaskResponse_numberOfRecordsFailed = &sGetImportFileTaskResponse_numberOfRecordsFailed
+var GetImportFileTaskResponse_importName = &sGetImportFileTaskResponse_importName
+
+var GetLatestAssessmentIdRequest = &sGetLatestAssessmentIdRequest
+
+var GetLatestAssessmentIdResponse = &sGetLatestAssessmentIdResponse
+var GetLatestAssessmentIdResponse_id = &sGetLatestAssessmentIdResponse_id
+
+var GetPortfolioPreferencesRequest = &sGetPortfolioPreferencesRequest
+
+var GetPortfolioPreferencesResponse = &sGetPortfolioPreferencesResponse
+var GetPortfolioPreferencesResponse_prioritizeBusinessGoals = &sGetPortfolioPreferencesResponse_prioritizeBusinessGoals
+var GetPortfolioPreferencesResponse_applicationPreferences = &sGetPortfolioPreferencesResponse_applicationPreferences
+var GetPortfolioPreferencesResponse_databasePreferences = &sGetPortfolioPreferencesResponse_databasePreferences
+var GetPortfolioPreferencesResponse_applicationMode = &sGetPortfolioPreferencesResponse_applicationMode
+
+var GetPortfolioSummaryRequest = &sGetPortfolioSummaryRequest
+
+var GetPortfolioSummaryResponse = &sGetPortfolioSummaryResponse
+var GetPortfolioSummaryResponse_assessmentSummary = &sGetPortfolioSummaryResponse_assessmentSummary
+
+var GetRecommendationReportDetailsRequest = &sGetRecommendationReportDetailsRequest
+var GetRecommendationReportDetailsRequest_id = &sGetRecommendationReportDetailsRequest_id
+
+var GetRecommendationReportDetailsResponse = &sGetRecommendationReportDetailsResponse
+var GetRecommendationReportDetailsResponse_id = &sGetRecommendationReportDetailsResponse_id
+var GetRecommendationReportDetailsResponse_recommendationReportDetails = &sGetRecommendationReportDetailsResponse_recommendationReportDetails
+
+var GetServerDetailsRequest = &sGetServerDetailsRequest
+var GetServerDetailsRequest_serverId = &sGetServerDetailsRequest_serverId
+var GetServerDetailsRequest_nextToken = &sGetServerDetailsRequest_nextToken
+var GetServerDetailsRequest_maxResults = &sGetServerDetailsRequest_maxResults
+
+var GetServerDetailsResponse = &sGetServerDetailsResponse
+var GetServerDetailsResponse_nextToken = &sGetServerDetailsResponse_nextToken
+var GetServerDetailsResponse_serverDetail = &sGetServerDetailsResponse_serverDetail
+var GetServerDetailsResponse_associatedApplications = &sGetServerDetailsResponse_associatedApplications
+
+var GetServerStrategiesRequest = &sGetServerStrategiesRequest
+var GetServerStrategiesRequest_serverId = &sGetServerStrategiesRequest_serverId
+
+var GetServerStrategiesResponse = &sGetServerStrategiesResponse
+var GetServerStrategiesResponse_serverStrategies = &sGetServerStrategiesResponse_serverStrategies
+
+var ListAnalyzableServersRequest = &sListAnalyzableServersRequest
+var ListAnalyzableServersRequest_sort = &sListAnalyzableServersRequest_sort
+var ListAnalyzableServersRequest_nextToken = &sListAnalyzableServersRequest_nextToken
+var ListAnalyzableServersRequest_maxResults = &sListAnalyzableServersRequest_maxResults
+
+var ListAnalyzableServersResponse = &sListAnalyzableServersResponse
+var ListAnalyzableServersResponse_analyzableServers = &sListAnalyzableServersResponse_analyzableServers
+var ListAnalyzableServersResponse_nextToken = &sListAnalyzableServersResponse_nextToken
+
+var ListApplicationComponentsRequest = &sListApplicationComponentsRequest
+var ListApplicationComponentsRequest_applicationComponentCriteria = &sListApplicationComponentsRequest_applicationComponentCriteria
+var ListApplicationComponentsRequest_filterValue = &sListApplicationComponentsRequest_filterValue
+var ListApplicationComponentsRequest_sort = &sListApplicationComponentsRequest_sort
+var ListApplicationComponentsRequest_groupIdFilter = &sListApplicationComponentsRequest_groupIdFilter
+var ListApplicationComponentsRequest_nextToken = &sListApplicationComponentsRequest_nextToken
+var ListApplicationComponentsRequest_maxResults = &sListApplicationComponentsRequest_maxResults
+
+var ListApplicationComponentsResponse = &sListApplicationComponentsResponse
+var ListApplicationComponentsResponse_applicationComponentInfos = &sListApplicationComponentsResponse_applicationComponentInfos
+var ListApplicationComponentsResponse_nextToken = &sListApplicationComponentsResponse_nextToken
+
+var ListCollectorsRequest = &sListCollectorsRequest
+var ListCollectorsRequest_nextToken = &sListCollectorsRequest_nextToken
+var ListCollectorsRequest_maxResults = &sListCollectorsRequest_maxResults
+
+var ListCollectorsResponse = &sListCollectorsResponse
+var ListCollectorsResponse_Collectors = &sListCollectorsResponse_Collectors
+var ListCollectorsResponse_nextToken = &sListCollectorsResponse_nextToken
+
+var ListImportFileTaskRequest = &sListImportFileTaskRequest
+var ListImportFileTaskRequest_nextToken = &sListImportFileTaskRequest_nextToken
+var ListImportFileTaskRequest_maxResults = &sListImportFileTaskRequest_maxResults
+
+var ListImportFileTaskResponse = &sListImportFileTaskResponse
+var ListImportFileTaskResponse_taskInfos = &sListImportFileTaskResponse_taskInfos
+var ListImportFileTaskResponse_nextToken = &sListImportFileTaskResponse_nextToken
+
+var ListServersRequest = &sListServersRequest
+var ListServersRequest_serverCriteria = &sListServersRequest_serverCriteria
+var ListServersRequest_filterValue = &sListServersRequest_filterValue
+var ListServersRequest_sort = &sListServersRequest_sort
+var ListServersRequest_groupIdFilter = &sListServersRequest_groupIdFilter
+var ListServersRequest_nextToken = &sListServersRequest_nextToken
+var ListServersRequest_maxResults = &sListServersRequest_maxResults
+
+var ListServersResponse = &sListServersResponse
+var ListServersResponse_serverInfos = &sListServersResponse_serverInfos
+var ListServersResponse_nextToken = &sListServersResponse_nextToken
+
+var PutPortfolioPreferencesRequest = &sPutPortfolioPreferencesRequest
+var PutPortfolioPreferencesRequest_prioritizeBusinessGoals = &sPutPortfolioPreferencesRequest_prioritizeBusinessGoals
+var PutPortfolioPreferencesRequest_applicationPreferences = &sPutPortfolioPreferencesRequest_applicationPreferences
+var PutPortfolioPreferencesRequest_databasePreferences = &sPutPortfolioPreferencesRequest_databasePreferences
+var PutPortfolioPreferencesRequest_applicationMode = &sPutPortfolioPreferencesRequest_applicationMode
+
+var PutPortfolioPreferencesResponse = &sPutPortfolioPreferencesResponse
+
+var StartAssessmentRequest = &sStartAssessmentRequest
+var StartAssessmentRequest_s3bucketForAnalysisData = &sStartAssessmentRequest_s3bucketForAnalysisData
+var StartAssessmentRequest_s3bucketForReportData = &sStartAssessmentRequest_s3bucketForReportData
+var StartAssessmentRequest_assessmentTargets = &sStartAssessmentRequest_assessmentTargets
+var StartAssessmentRequest_assessmentDataSourceType = &sStartAssessmentRequest_assessmentDataSourceType
+
+var StartAssessmentResponse = &sStartAssessmentResponse
+var StartAssessmentResponse_assessmentId = &sStartAssessmentResponse_assessmentId
+
+var StartImportFileTaskRequest = &sStartImportFileTaskRequest
+var StartImportFileTaskRequest_name = &sStartImportFileTaskRequest_name
+var StartImportFileTaskRequest_S3Bucket = &sStartImportFileTaskRequest_S3Bucket
+var StartImportFileTaskRequest_s3key = &sStartImportFileTaskRequest_s3key
+var StartImportFileTaskRequest_dataSourceType = &sStartImportFileTaskRequest_dataSourceType
+var StartImportFileTaskRequest_groupId = &sStartImportFileTaskRequest_groupId
+var StartImportFileTaskRequest_s3bucketForReportData = &sStartImportFileTaskRequest_s3bucketForReportData
+
+var StartImportFileTaskResponse = &sStartImportFileTaskResponse
+var StartImportFileTaskResponse_id = &sStartImportFileTaskResponse_id
+
+var StartRecommendationReportGenerationRequest = &sStartRecommendationReportGenerationRequest
+var StartRecommendationReportGenerationRequest_outputFormat = &sStartRecommendationReportGenerationRequest_outputFormat
+var StartRecommendationReportGenerationRequest_groupIdFilter = &sStartRecommendationReportGenerationRequest_groupIdFilter
+
+var StartRecommendationReportGenerationResponse = &sStartRecommendationReportGenerationResponse
+var StartRecommendationReportGenerationResponse_id = &sStartRecommendationReportGenerationResponse_id
+
+var StopAssessmentRequest = &sStopAssessmentRequest
+var StopAssessmentRequest_assessmentId = &sStopAssessmentRequest_assessmentId
+
+var StopAssessmentResponse = &sStopAssessmentResponse
+
+var UpdateApplicationComponentConfigRequest = &sUpdateApplicationComponentConfigRequest
+var UpdateApplicationComponentConfigRequest_applicationComponentId = &sUpdateApplicationComponentConfigRequest_applicationComponentId
+var UpdateApplicationComponentConfigRequest_inclusionStatus = &sUpdateApplicationComponentConfigRequest_inclusionStatus
+var UpdateApplicationComponentConfigRequest_strategyOption = &sUpdateApplicationComponentConfigRequest_strategyOption
+var UpdateApplicationComponentConfigRequest_sourceCodeList = &sUpdateApplicationComponentConfigRequest_sourceCodeList
+var UpdateApplicationComponentConfigRequest_secretsManagerKey = &sUpdateApplicationComponentConfigRequest_secretsManagerKey
+var UpdateApplicationComponentConfigRequest_configureOnly = &sUpdateApplicationComponentConfigRequest_configureOnly
+var UpdateApplicationComponentConfigRequest_appType = &sUpdateApplicationComponentConfigRequest_appType
+
+var UpdateApplicationComponentConfigResponse = &sUpdateApplicationComponentConfigResponse
+
+var UpdateServerConfigRequest = &sUpdateServerConfigRequest
+var UpdateServerConfigRequest_serverId = &sUpdateServerConfigRequest_serverId
+var UpdateServerConfigRequest_strategyOption = &sUpdateServerConfigRequest_strategyOption
+
+var UpdateServerConfigResponse = &sUpdateServerConfigResponse
+
+var AWSMigrationHubStrategyRecommendation = &smithy.ServiceSchema{Schema: &s_AWSMigrationHubStrategyRecommendation, Version: "2020-02-19"}

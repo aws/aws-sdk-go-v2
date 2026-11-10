@@ -4,3196 +4,2293 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddTagsToStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "AddTagsToStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CreateStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var DecreaseStreamRetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DecreaseStreamRetentionPeriod",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeleteChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeleteStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterStreamConsumer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeregisterStreamConsumer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeAccountSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeLimits",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeStreamConsumer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamConsumer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeStreamSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamSummary",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisableEnhancedMonitoring = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DisableEnhancedMonitoring",
-}, smithy.ShapeTypeOperation, 0)
-
-var EnableEnhancedMonitoring = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "EnableEnhancedMonitoring",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetRecords",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetShardIterator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetShardIterator",
-}, smithy.ShapeTypeOperation, 0)
-
-var IncreaseStreamRetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "IncreaseStreamRetentionPeriod",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListShards = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListShards",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListStreamConsumers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreamConsumers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListTagsForStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var MergeShards = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MergeShards",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecord",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecords",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterStreamConsumer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RegisterStreamConsumer",
-}, smithy.ShapeTypeOperation, 0)
-
-var RemoveTagsFromStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RemoveTagsFromStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var SplitShard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SplitShard",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartStreamEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StartStreamEncryption",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopStreamEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StopStreamEncryption",
-}, smithy.ShapeTypeOperation, 0)
-
-var SubscribeToShard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SubscribeToShard",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateAccountSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateMaxRecordSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateMaxRecordSize",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateShardCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateShardCount",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateStreamMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateStreamMode",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateStreamRecordDistributionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateStreamRecordDistributionStrategy",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateStreamWarmThroughput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateStreamWarmThroughput",
-}, smithy.ShapeTypeOperation, 0)
-
-var _Kinesis_20131202 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Kinesis_20131202",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://kinesis.amazonaws.com/doc/2013-12-02"})
-
-var Kinesis_20131202 = smithy.NewServiceSchema(_Kinesis_20131202, "2013-12-02")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var AccessDeniedException_message *smithy.Schema
-
-var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "BooleanObject",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BucketARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "BucketARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ChannelCountObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelCountObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var ChannelDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelDescription",
-}, smithy.ShapeTypeStructure, 12)
-var ChannelDescription_ChannelName *smithy.Schema
-
-var ChannelDescription_ChannelARN *smithy.Schema
-
-var ChannelDescription_ChannelId *smithy.Schema
-
-var ChannelDescription_ChannelStatus *smithy.Schema
-
-var ChannelDescription_ChannelStatusReason *smithy.Schema
-
-var ChannelDescription_ChannelCreationTimestamp *smithy.Schema
-
-var ChannelDescription_ServiceExecutionRoleARN *smithy.Schema
-
-var ChannelDescription_StreamConfigurationList *smithy.Schema
-
-var ChannelDescription_S3DestinationConfiguration *smithy.Schema
-
-var ChannelDescription_S3TablesDestinationConfiguration *smithy.Schema
-
-var ChannelDescription_EncryptionConfiguration *smithy.Schema
-
-var ChannelDescription_LoggingConfiguration *smithy.Schema
-
-var ChannelDestinationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelDestinationType",
-}, smithy.ShapeTypeEnum, 2)
-var ChannelDestinationType_S3 *smithy.Schema
-
-var ChannelDestinationType_S3_TABLES *smithy.Schema
-
-var ChannelEncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelEncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelEncryptionConfiguration_EncryptionType *smithy.Schema
-
-var ChannelEncryptionConfiguration_KeyId *smithy.Schema
-
-var ChannelEncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelEncryptionType",
-}, smithy.ShapeTypeEnum, 1)
-var ChannelEncryptionType_KMS *smithy.Schema
-
-var _ChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelId",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelLoggingConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ChannelLoggingConfiguration_CloudWatchLogs *smithy.Schema
-
-var ChannelLoggingUpdateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelLoggingUpdateInput",
-}, smithy.ShapeTypeStructure, 1)
-var ChannelLoggingUpdateInput_CloudWatchLogs *smithy.Schema
-
-var _ChannelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelName",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ChannelStatus_CREATING *smithy.Schema
-
-var ChannelStatus_ACTIVE *smithy.Schema
-
-var ChannelStatus_UPDATING *smithy.Schema
-
-var ChannelStatus_DELETING *smithy.Schema
-
-var ChannelStatus_FAILED *smithy.Schema
-
-var _ChannelStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var ChannelStreamConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStreamConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelStreamConfiguration_StreamARN *smithy.Schema
-
-var ChannelStreamConfiguration_RecordConfiguration *smithy.Schema
-
-var _ChannelStreamConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStreamConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelStreamConfigurationList_member *smithy.Schema
-
-var ChannelStreamDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStreamDescription",
-}, smithy.ShapeTypeStructure, 3)
-var ChannelStreamDescription_StreamARN *smithy.Schema
-
-var ChannelStreamDescription_StreamCreationTimestamp *smithy.Schema
-
-var ChannelStreamDescription_RecordConfiguration *smithy.Schema
-
-var _ChannelStreamDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStreamDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelStreamDescriptionList_member *smithy.Schema
-
-var ChannelStreamIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStreamIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelStreamIdentifier_StreamARN *smithy.Schema
-
-var ChannelStreamIdentifier_StreamCreationTimestamp *smithy.Schema
-
-var _ChannelStreamIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelStreamIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelStreamIdentifierList_member *smithy.Schema
-
-var ChannelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ChannelSummary_ChannelName *smithy.Schema
-
-var ChannelSummary_ChannelARN *smithy.Schema
-
-var ChannelSummary_ChannelId *smithy.Schema
-
-var ChannelSummary_ChannelStatus *smithy.Schema
-
-var ChannelSummary_ChannelStatusReason *smithy.Schema
-
-var ChannelSummary_ChannelCreationTimestamp *smithy.Schema
-
-var ChannelSummary_ChannelDestinationType *smithy.Schema
-
-var ChannelSummary_Streams *smithy.Schema
-
-var _ChannelSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChannelSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelSummaryList_member *smithy.Schema
-
-var ChildShard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChildShard",
-}, smithy.ShapeTypeStructure, 3)
-var ChildShard_ShardId *smithy.Schema
-
-var ChildShard_ParentShards *smithy.Schema
-
-var ChildShard_HashKeyRange *smithy.Schema
-
-var _ChildShardList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ChildShardList",
-}, smithy.ShapeTypeList, 1)
-var _ChildShardList_member *smithy.Schema
-
-var _CloudWatchLogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CloudWatchLogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchLogs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CloudWatchLogs",
-}, smithy.ShapeTypeStructure, 3)
-var CloudWatchLogs_Enabled *smithy.Schema
-
-var CloudWatchLogs_LogGroupName *smithy.Schema
-
-var CloudWatchLogs_LogStreamName *smithy.Schema
-
-var _CloudWatchLogStreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CloudWatchLogStreamName",
-}, smithy.ShapeTypeString, 0)
-
-var CloudWatchLogsUpdateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CloudWatchLogsUpdateInput",
-}, smithy.ShapeTypeStructure, 3)
-var CloudWatchLogsUpdateInput_Enabled *smithy.Schema
-
-var CloudWatchLogsUpdateInput_LogGroupName *smithy.Schema
-
-var CloudWatchLogsUpdateInput_LogStreamName *smithy.Schema
-
-var Consumer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Consumer",
-}, smithy.ShapeTypeStructure, 4)
-var Consumer_ConsumerName *smithy.Schema
-
-var Consumer_ConsumerARN *smithy.Schema
-
-var Consumer_ConsumerStatus *smithy.Schema
-
-var Consumer_ConsumerCreationTimestamp *smithy.Schema
-
-var _ConsumerARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ConsumerARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ConsumerCountObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ConsumerCountObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConsumerDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ConsumerDescription",
-}, smithy.ShapeTypeStructure, 5)
-var ConsumerDescription_ConsumerName *smithy.Schema
-
-var ConsumerDescription_ConsumerARN *smithy.Schema
-
-var ConsumerDescription_ConsumerStatus *smithy.Schema
-
-var ConsumerDescription_ConsumerCreationTimestamp *smithy.Schema
-
-var ConsumerDescription_StreamARN *smithy.Schema
-
-var _ConsumerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ConsumerList",
-}, smithy.ShapeTypeList, 1)
-var _ConsumerList_member *smithy.Schema
-
-var _ConsumerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ConsumerName",
-}, smithy.ShapeTypeString, 0)
-
-var ConsumerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ConsumerStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ConsumerStatus_CREATING *smithy.Schema
-
-var ConsumerStatus_DELETING *smithy.Schema
-
-var ConsumerStatus_ACTIVE *smithy.Schema
-
-var _Data = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Data",
-}, smithy.ShapeTypeBlob, 0)
-
-var _DataFreshnessInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DataFreshnessInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var DeadLetterQueueS3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeadLetterQueueS3Configuration",
-}, smithy.ShapeTypeStructure, 3)
-var DeadLetterQueueS3Configuration_BucketARN *smithy.Schema
-
-var DeadLetterQueueS3Configuration_ExpectedBucketOwner *smithy.Schema
-
-var DeadLetterQueueS3Configuration_ErrorOutputPrefix *smithy.Schema
-
-var _DescribeStreamInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var DryRunOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DryRunOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DryRunOperationException_message *smithy.Schema
-
-var EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeEnum, 2)
-var EncryptionType_NONE *smithy.Schema
-
-var EncryptionType_KMS *smithy.Schema
-
-var EnhancedMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "EnhancedMetrics",
-}, smithy.ShapeTypeStructure, 1)
-var EnhancedMetrics_ShardLevelMetrics *smithy.Schema
-
-var _EnhancedMonitoringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "EnhancedMonitoringList",
-}, smithy.ShapeTypeList, 1)
-var _EnhancedMonitoringList_member *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExpectedBucketOwner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ExpectedBucketOwner",
-}, smithy.ShapeTypeString, 0)
-
-var ExpiredIteratorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ExpiredIteratorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ExpiredIteratorException_message *smithy.Schema
-
-var ExpiredNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ExpiredNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ExpiredNextTokenException_message *smithy.Schema
-
-var _GetRecordsInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetRecordsInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _GSRSchemaARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GSRSchemaARN",
-}, smithy.ShapeTypeString, 0)
-
-var _HashKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "HashKey",
-}, smithy.ShapeTypeString, 0)
-
-var HashKeyRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "HashKeyRange",
-}, smithy.ShapeTypeStructure, 2)
-var HashKeyRange_StartingHashKey *smithy.Schema
-
-var HashKeyRange_EndingHashKey *smithy.Schema
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalFailureException_message *smithy.Schema
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidArgumentException_message *smithy.Schema
-
-var _KeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "KeyId",
-}, smithy.ShapeTypeString, 0)
-
-var KMSAccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "KMSAccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KMSAccessDeniedException_message *smithy.Schema
-
-var KMSDisabledException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "KMSDisabledException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KMSDisabledException_message *smithy.Schema
-
-var KMSInvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "KMSInvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KMSInvalidStateException_message *smithy.Schema
-
-var KMSNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "KMSNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KMSNotFoundException_message *smithy.Schema
-
-var KMSOptInRequired = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "KMSOptInRequired",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KMSOptInRequired_message *smithy.Schema
-
-var KMSThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "KMSThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var KMSThrottlingException_message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var LimitExceededException_message *smithy.Schema
-
-var _ListChannelsInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListChannelsInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListShardsInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListShardsInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListStreamConsumersInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreamConsumersInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListStreamsInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreamsInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListTagsForStreamInputLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListTagsForStreamInputLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxRecordSizeInKiB = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MaxRecordSizeInKiB",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetricsName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MetricsName",
-}, smithy.ShapeTypeEnum, 8)
-var MetricsName_INCOMING_BYTES *smithy.Schema
-
-var MetricsName_INCOMING_RECORDS *smithy.Schema
-
-var MetricsName_OUTGOING_BYTES *smithy.Schema
-
-var MetricsName_OUTGOING_RECORDS *smithy.Schema
-
-var MetricsName_WRITE_PROVISIONED_THROUGHPUT_EXCEEDED *smithy.Schema
-
-var MetricsName_READ_PROVISIONED_THROUGHPUT_EXCEEDED *smithy.Schema
-
-var MetricsName_ITERATOR_AGE_MILLISECONDS *smithy.Schema
-
-var MetricsName_ALL *smithy.Schema
-
-var _MetricsNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MetricsNameList",
-}, smithy.ShapeTypeList, 1)
-var _MetricsNameList_member *smithy.Schema
-
-var _MillisBehindLatest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MillisBehindLatest",
-}, smithy.ShapeTypeLong, 0)
-
-var MinimumThroughputBillingCommitmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MinimumThroughputBillingCommitmentInput",
-}, smithy.ShapeTypeStructure, 1)
-var MinimumThroughputBillingCommitmentInput_Status *smithy.Schema
-
-var MinimumThroughputBillingCommitmentInputStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MinimumThroughputBillingCommitmentInputStatus",
-}, smithy.ShapeTypeEnum, 2)
-var MinimumThroughputBillingCommitmentInputStatus_ENABLED *smithy.Schema
-
-var MinimumThroughputBillingCommitmentInputStatus_DISABLED *smithy.Schema
-
-var MinimumThroughputBillingCommitmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MinimumThroughputBillingCommitmentOutput",
-}, smithy.ShapeTypeStructure, 4)
-var MinimumThroughputBillingCommitmentOutput_Status *smithy.Schema
-
-var MinimumThroughputBillingCommitmentOutput_StartedAt *smithy.Schema
-
-var MinimumThroughputBillingCommitmentOutput_EndedAt *smithy.Schema
-
-var MinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt *smithy.Schema
-
-var MinimumThroughputBillingCommitmentOutputStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MinimumThroughputBillingCommitmentOutputStatus",
-}, smithy.ShapeTypeEnum, 3)
-var MinimumThroughputBillingCommitmentOutputStatus_ENABLED *smithy.Schema
-
-var MinimumThroughputBillingCommitmentOutputStatus_DISABLED *smithy.Schema
-
-var MinimumThroughputBillingCommitmentOutputStatus_ENABLED_UNTIL_EARLIEST_ALLOWED_END *smithy.Schema
-
-var _NaturalIntegerObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "NaturalIntegerObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OnDemandStreamCountLimitObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "OnDemandStreamCountLimitObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var _OnDemandStreamCountObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "OnDemandStreamCountObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var PartitionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PartitionField",
-}, smithy.ShapeTypeStructure, 2)
-var PartitionField_Transform *smithy.Schema
-
-var PartitionField_SourceName *smithy.Schema
-
-var _PartitionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PartitionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _PartitionFieldList_member *smithy.Schema
-
-var _PartitionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PartitionKey",
-}, smithy.ShapeTypeString, 0)
-
-var _PartitionSourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PartitionSourceName",
-}, smithy.ShapeTypeString, 0)
-
-var PartitionSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PartitionSpec",
-}, smithy.ShapeTypeStructure, 1)
-var PartitionSpec_PartitionFields *smithy.Schema
-
-var PartitionTransform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PartitionTransform",
-}, smithy.ShapeTypeEnum, 1)
-var PartitionTransform_TIME_HOUR *smithy.Schema
-
-var _Policy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Policy",
-}, smithy.ShapeTypeString, 0)
-
-var _PositiveIntegerObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PositiveIntegerObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var ProvisionedThroughputExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ProvisionedThroughputExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ProvisionedThroughputExceededException_message *smithy.Schema
-
-var PutRecordsRequestEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordsRequestEntry",
-}, smithy.ShapeTypeStructure, 3)
-var PutRecordsRequestEntry_Data *smithy.Schema
-
-var PutRecordsRequestEntry_ExplicitHashKey *smithy.Schema
-
-var PutRecordsRequestEntry_PartitionKey *smithy.Schema
-
-var _PutRecordsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordsRequestEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutRecordsRequestEntryList_member *smithy.Schema
-
-var PutRecordsResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordsResultEntry",
-}, smithy.ShapeTypeStructure, 4)
-var PutRecordsResultEntry_SequenceNumber *smithy.Schema
-
-var PutRecordsResultEntry_ShardId *smithy.Schema
-
-var PutRecordsResultEntry_ErrorCode *smithy.Schema
-
-var PutRecordsResultEntry_ErrorMessage *smithy.Schema
-
-var _PutRecordsResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordsResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutRecordsResultEntryList_member *smithy.Schema
-
-var Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Record",
-}, smithy.ShapeTypeStructure, 5)
-var Record_SequenceNumber *smithy.Schema
-
-var Record_ApproximateArrivalTimestamp *smithy.Schema
-
-var Record_Data *smithy.Schema
-
-var Record_PartitionKey *smithy.Schema
-
-var Record_EncryptionType *smithy.Schema
-
-var RecordConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RecordConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var RecordConfiguration_RecordFormatType *smithy.Schema
-
-var RecordConfiguration_GSRSchemaARN *smithy.Schema
-
-var RecordDistributionStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RecordDistributionStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var RecordDistributionStrategy_AUTO *smithy.Schema
-
-var RecordDistributionStrategy_USER_PARTITION_KEY *smithy.Schema
-
-var RecordFormatType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RecordFormatType",
-}, smithy.ShapeTypeEnum, 4)
-var RecordFormatType_GSR_JSON *smithy.Schema
-
-var RecordFormatType_JSON *smithy.Schema
-
-var RecordFormatType_STRING *smithy.Schema
-
-var RecordFormatType_BYTE_ARRAY *smithy.Schema
-
-var _RecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RecordList",
-}, smithy.ShapeTypeList, 1)
-var _RecordList_member *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceInUseException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RetentionPeriodHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RetentionPeriodHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RoleARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RoleARN",
-}, smithy.ShapeTypeString, 0)
-
-var S3CompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3CompressionType",
-}, smithy.ShapeTypeEnum, 3)
-var S3CompressionType_NONE *smithy.Schema
-
-var S3CompressionType_GZIP *smithy.Schema
-
-var S3CompressionType_ZSTD *smithy.Schema
-
-var S3DestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3DestinationConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var S3DestinationConfiguration_DataFreshnessInSeconds *smithy.Schema
-
-var S3DestinationConfiguration_DeadLetterQueueS3Configuration *smithy.Schema
-
-var S3DestinationConfiguration_StorageConfiguration *smithy.Schema
-
-var S3DestinationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3DestinationDescription",
-}, smithy.ShapeTypeStructure, 3)
-var S3DestinationDescription_DataFreshnessInSeconds *smithy.Schema
-
-var S3DestinationDescription_DeadLetterQueueS3Configuration *smithy.Schema
-
-var S3DestinationDescription_StorageConfiguration *smithy.Schema
-
-var S3DestinationUpdateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3DestinationUpdateInput",
-}, smithy.ShapeTypeStructure, 1)
-var S3DestinationUpdateInput_DataFreshnessInSeconds *smithy.Schema
-
-var _S3ErrorOutputPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3ErrorOutputPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _S3OutputKeyTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3OutputKeyTemplate",
-}, smithy.ShapeTypeString, 0)
-
-var S3StorageClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3StorageClass",
-}, smithy.ShapeTypeEnum, 3)
-var S3StorageClass_STANDARD *smithy.Schema
-
-var S3StorageClass_INTELLIGENT_TIERING *smithy.Schema
-
-var S3StorageClass_GLACIER_IR *smithy.Schema
-
-var S3StorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3StorageConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var S3StorageConfiguration_BucketARN *smithy.Schema
-
-var S3StorageConfiguration_ExpectedBucketOwner *smithy.Schema
-
-var S3StorageConfiguration_OutputKeyTemplate *smithy.Schema
-
-var S3StorageConfiguration_StorageClass *smithy.Schema
-
-var S3StorageConfiguration_CompressionType *smithy.Schema
-
-var S3TablesCompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesCompressionType",
-}, smithy.ShapeTypeEnum, 3)
-var S3TablesCompressionType_NONE *smithy.Schema
-
-var S3TablesCompressionType_ZSTD *smithy.Schema
-
-var S3TablesCompressionType_SNAPPY *smithy.Schema
-
-var S3TablesConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var S3TablesConfiguration_TableBucketARN *smithy.Schema
-
-var S3TablesConfiguration_Namespace *smithy.Schema
-
-var S3TablesConfiguration_TableName *smithy.Schema
-
-var S3TablesConfiguration_CompressionType *smithy.Schema
-
-var S3TablesConfiguration_PartitionSpec *smithy.Schema
-
-var _S3TablesConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _S3TablesConfigurationList_member *smithy.Schema
-
-var S3TablesDestinationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesDestinationConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var S3TablesDestinationConfiguration_DataFreshnessInSeconds *smithy.Schema
-
-var S3TablesDestinationConfiguration_DeadLetterQueueS3Configuration *smithy.Schema
-
-var S3TablesDestinationConfiguration_S3TablesConfigurationList *smithy.Schema
-
-var S3TablesDestinationDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesDestinationDescription",
-}, smithy.ShapeTypeStructure, 3)
-var S3TablesDestinationDescription_DataFreshnessInSeconds *smithy.Schema
-
-var S3TablesDestinationDescription_DeadLetterQueueS3Configuration *smithy.Schema
-
-var S3TablesDestinationDescription_S3TablesConfigurationList *smithy.Schema
-
-var S3TablesDestinationUpdateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesDestinationUpdateInput",
-}, smithy.ShapeTypeStructure, 1)
-var S3TablesDestinationUpdateInput_DataFreshnessInSeconds *smithy.Schema
-
-var _S3TablesNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _S3TablesTableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "S3TablesTableName",
-}, smithy.ShapeTypeString, 0)
-
-var ScalingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ScalingType",
-}, smithy.ShapeTypeEnum, 1)
-var ScalingType_UNIFORM_SCALING *smithy.Schema
-
-var _SequenceNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SequenceNumber",
-}, smithy.ShapeTypeString, 0)
-
-var SequenceNumberRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SequenceNumberRange",
-}, smithy.ShapeTypeStructure, 2)
-var SequenceNumberRange_StartingSequenceNumber *smithy.Schema
-
-var SequenceNumberRange_EndingSequenceNumber *smithy.Schema
-
-var Shard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Shard",
-}, smithy.ShapeTypeStructure, 5)
-var Shard_ShardId *smithy.Schema
-
-var Shard_ParentShardId *smithy.Schema
-
-var Shard_AdjacentParentShardId *smithy.Schema
-
-var Shard_HashKeyRange *smithy.Schema
-
-var Shard_SequenceNumberRange *smithy.Schema
-
-var _ShardCountObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardCountObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var ShardFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardFilter",
-}, smithy.ShapeTypeStructure, 3)
-var ShardFilter_Type *smithy.Schema
-
-var ShardFilter_ShardId *smithy.Schema
-
-var ShardFilter_Timestamp *smithy.Schema
-
-var ShardFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardFilterType",
-}, smithy.ShapeTypeEnum, 6)
-var ShardFilterType_AFTER_SHARD_ID *smithy.Schema
-
-var ShardFilterType_AT_TRIM_HORIZON *smithy.Schema
-
-var ShardFilterType_FROM_TRIM_HORIZON *smithy.Schema
-
-var ShardFilterType_AT_LATEST *smithy.Schema
-
-var ShardFilterType_AT_TIMESTAMP *smithy.Schema
-
-var ShardFilterType_FROM_TIMESTAMP *smithy.Schema
-
-var _ShardId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardId",
-}, smithy.ShapeTypeString, 0)
-
-var _ShardIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardIdList",
-}, smithy.ShapeTypeList, 1)
-var _ShardIdList_member *smithy.Schema
-
-var _ShardIterator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardIterator",
-}, smithy.ShapeTypeString, 0)
-
-var ShardIteratorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardIteratorType",
-}, smithy.ShapeTypeEnum, 5)
-var ShardIteratorType_AT_SEQUENCE_NUMBER *smithy.Schema
-
-var ShardIteratorType_AFTER_SEQUENCE_NUMBER *smithy.Schema
-
-var ShardIteratorType_TRIM_HORIZON *smithy.Schema
-
-var ShardIteratorType_LATEST *smithy.Schema
-
-var ShardIteratorType_AT_TIMESTAMP *smithy.Schema
-
-var _ShardList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ShardList",
-}, smithy.ShapeTypeList, 1)
-var _ShardList_member *smithy.Schema
-
-var StartingPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StartingPosition",
-}, smithy.ShapeTypeStructure, 3)
-var StartingPosition_Type *smithy.Schema
-
-var StartingPosition_SequenceNumber *smithy.Schema
-
-var StartingPosition_Timestamp *smithy.Schema
-
-var _StreamARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamARN",
-}, smithy.ShapeTypeString, 0)
-
-var StreamDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamDescription",
-}, smithy.ShapeTypeStructure, 11)
-var StreamDescription_StreamName *smithy.Schema
-
-var StreamDescription_StreamARN *smithy.Schema
-
-var StreamDescription_StreamStatus *smithy.Schema
-
-var StreamDescription_StreamModeDetails *smithy.Schema
-
-var StreamDescription_Shards *smithy.Schema
-
-var StreamDescription_HasMoreShards *smithy.Schema
-
-var StreamDescription_RetentionPeriodHours *smithy.Schema
-
-var StreamDescription_StreamCreationTimestamp *smithy.Schema
-
-var StreamDescription_EnhancedMonitoring *smithy.Schema
-
-var StreamDescription_EncryptionType *smithy.Schema
-
-var StreamDescription_KeyId *smithy.Schema
-
-var StreamDescriptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamDescriptionSummary",
-}, smithy.ShapeTypeStructure, 16)
-var StreamDescriptionSummary_StreamName *smithy.Schema
-
-var StreamDescriptionSummary_StreamARN *smithy.Schema
-
-var StreamDescriptionSummary_StreamId *smithy.Schema
-
-var StreamDescriptionSummary_StreamStatus *smithy.Schema
-
-var StreamDescriptionSummary_StreamModeDetails *smithy.Schema
-
-var StreamDescriptionSummary_RetentionPeriodHours *smithy.Schema
-
-var StreamDescriptionSummary_StreamCreationTimestamp *smithy.Schema
-
-var StreamDescriptionSummary_EnhancedMonitoring *smithy.Schema
-
-var StreamDescriptionSummary_EncryptionType *smithy.Schema
-
-var StreamDescriptionSummary_KeyId *smithy.Schema
-
-var StreamDescriptionSummary_OpenShardCount *smithy.Schema
-
-var StreamDescriptionSummary_ConsumerCount *smithy.Schema
-
-var StreamDescriptionSummary_WarmThroughput *smithy.Schema
-
-var StreamDescriptionSummary_MaxRecordSizeInKiB *smithy.Schema
-
-var StreamDescriptionSummary_ChannelCount *smithy.Schema
-
-var StreamDescriptionSummary_RecordDistributionStrategy *smithy.Schema
-
-var StreamFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamFilter",
-}, smithy.ShapeTypeStructure, 2)
-var StreamFilter_StreamARN *smithy.Schema
-
-var StreamFilter_StreamCreationTimestamp *smithy.Schema
-
-var _StreamFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamFilterList",
-}, smithy.ShapeTypeList, 1)
-var _StreamFilterList_member *smithy.Schema
-
-var _StreamId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamId",
-}, smithy.ShapeTypeString, 0)
-
-var StreamMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamMode",
-}, smithy.ShapeTypeEnum, 2)
-var StreamMode_PROVISIONED *smithy.Schema
-
-var StreamMode_ON_DEMAND *smithy.Schema
-
-var StreamModeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamModeDetails",
-}, smithy.ShapeTypeStructure, 1)
-var StreamModeDetails_StreamMode *smithy.Schema
-
-var _StreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _StreamNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamNameList",
-}, smithy.ShapeTypeList, 1)
-var _StreamNameList_member *smithy.Schema
-
-var StreamStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamStatus",
-}, smithy.ShapeTypeEnum, 4)
-var StreamStatus_CREATING *smithy.Schema
-
-var StreamStatus_DELETING *smithy.Schema
-
-var StreamStatus_ACTIVE *smithy.Schema
-
-var StreamStatus_UPDATING *smithy.Schema
-
-var StreamSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamSummary",
-}, smithy.ShapeTypeStructure, 5)
-var StreamSummary_StreamName *smithy.Schema
-
-var StreamSummary_StreamARN *smithy.Schema
-
-var StreamSummary_StreamStatus *smithy.Schema
-
-var StreamSummary_StreamModeDetails *smithy.Schema
-
-var StreamSummary_StreamCreationTimestamp *smithy.Schema
-
-var _StreamSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StreamSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _StreamSummaryList_member *smithy.Schema
-
-var SubscribeToShardEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SubscribeToShardEvent",
-}, smithy.ShapeTypeStructure, 4)
-var SubscribeToShardEvent_Records *smithy.Schema
-
-var SubscribeToShardEvent_ContinuationSequenceNumber *smithy.Schema
-
-var SubscribeToShardEvent_MillisBehindLatest *smithy.Schema
-
-var SubscribeToShardEvent_ChildShards *smithy.Schema
-
-var SubscribeToShardEventStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SubscribeToShardEventStream",
-}, smithy.ShapeTypeUnion, 10, &smithytraits.Streaming{})
-var SubscribeToShardEventStream_SubscribeToShardEvent *smithy.Schema
-
-var SubscribeToShardEventStream_ResourceNotFoundException *smithy.Schema
-
-var SubscribeToShardEventStream_ResourceInUseException *smithy.Schema
-
-var SubscribeToShardEventStream_KMSDisabledException *smithy.Schema
-
-var SubscribeToShardEventStream_KMSInvalidStateException *smithy.Schema
-
-var SubscribeToShardEventStream_KMSAccessDeniedException *smithy.Schema
-
-var SubscribeToShardEventStream_KMSNotFoundException *smithy.Schema
-
-var SubscribeToShardEventStream_KMSOptInRequired *smithy.Schema
-
-var SubscribeToShardEventStream_KMSThrottlingException *smithy.Schema
-
-var SubscribeToShardEventStream_InternalFailureException *smithy.Schema
-
-var _TableBucketARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TableBucketARN",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var WarmThroughputObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "WarmThroughputObject",
-}, smithy.ShapeTypeStructure, 2)
-var WarmThroughputObject_TargetMiBps *smithy.Schema
-
-var WarmThroughputObject_CurrentMiBps *smithy.Schema
-
-var AddTagsToStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "AddTagsToStreamInput",
-}, smithy.ShapeTypeStructure, 4)
-var AddTagsToStreamInput_StreamName *smithy.Schema
-
-var AddTagsToStreamInput_Tags *smithy.Schema
-
-var AddTagsToStreamInput_StreamARN *smithy.Schema
-
-var AddTagsToStreamInput_StreamId *smithy.Schema
-
-var CreateChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CreateChannelInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateChannelInput_ChannelName *smithy.Schema
-
-var CreateChannelInput_ServiceExecutionRoleARN *smithy.Schema
-
-var CreateChannelInput_StreamConfigurationList *smithy.Schema
-
-var CreateChannelInput_S3DestinationConfiguration *smithy.Schema
-
-var CreateChannelInput_S3TablesDestinationConfiguration *smithy.Schema
-
-var CreateChannelInput_EncryptionConfiguration *smithy.Schema
-
-var CreateChannelInput_Tags *smithy.Schema
-
-var CreateChannelInput_LoggingConfiguration *smithy.Schema
-
-var CreateChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CreateChannelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateChannelOutput_ChannelDescription *smithy.Schema
-
-var CreateStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "CreateStreamInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateStreamInput_StreamName *smithy.Schema
-
-var CreateStreamInput_ShardCount *smithy.Schema
-
-var CreateStreamInput_StreamModeDetails *smithy.Schema
-
-var CreateStreamInput_Tags *smithy.Schema
-
-var CreateStreamInput_WarmThroughputMiBps *smithy.Schema
-
-var CreateStreamInput_MaxRecordSizeInKiB *smithy.Schema
-
-var CreateStreamInput_RecordDistributionStrategy *smithy.Schema
-
-var DecreaseStreamRetentionPeriodInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DecreaseStreamRetentionPeriodInput",
-}, smithy.ShapeTypeStructure, 4)
-var DecreaseStreamRetentionPeriodInput_StreamName *smithy.Schema
-
-var DecreaseStreamRetentionPeriodInput_RetentionPeriodHours *smithy.Schema
-
-var DecreaseStreamRetentionPeriodInput_StreamARN *smithy.Schema
-
-var DecreaseStreamRetentionPeriodInput_StreamId *smithy.Schema
-
-var DeleteChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeleteChannelInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChannelInput_ChannelARN *smithy.Schema
-
-var DeleteResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeleteResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourcePolicyInput_ResourceARN *smithy.Schema
-
-var DeleteResourcePolicyInput_StreamId *smithy.Schema
-
-var DeleteStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeleteStreamInput",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteStreamInput_StreamName *smithy.Schema
-
-var DeleteStreamInput_EnforceConsumerDeletion *smithy.Schema
-
-var DeleteStreamInput_StreamARN *smithy.Schema
-
-var DeleteStreamInput_StreamId *smithy.Schema
-
-var DeregisterStreamConsumerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DeregisterStreamConsumerInput",
-}, smithy.ShapeTypeStructure, 4)
-var DeregisterStreamConsumerInput_StreamARN *smithy.Schema
-
-var DeregisterStreamConsumerInput_ConsumerName *smithy.Schema
-
-var DeregisterStreamConsumerInput_ConsumerARN *smithy.Schema
-
-var DeregisterStreamConsumerInput_StreamId *smithy.Schema
-
-var DescribeAccountSettingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeAccountSettingsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeAccountSettingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeAccountSettingsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAccountSettingsOutput_MinimumThroughputBillingCommitment *smithy.Schema
-
-var DescribeChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeChannelInput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelInput_ChannelARN *smithy.Schema
-
-var DescribeChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeChannelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeChannelOutput_ChannelDescription *smithy.Schema
-
-var DescribeLimitsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeLimitsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeLimitsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeLimitsOutput",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeLimitsOutput_ShardLimit *smithy.Schema
-
-var DescribeLimitsOutput_OpenShardCount *smithy.Schema
-
-var DescribeLimitsOutput_OnDemandStreamCount *smithy.Schema
-
-var DescribeLimitsOutput_OnDemandStreamCountLimit *smithy.Schema
-
-var DescribeLimitsOutput_ChannelCount *smithy.Schema
-
-var DescribeLimitsOutput_ChannelCountLimit *smithy.Schema
-
-var DescribeStreamConsumerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamConsumerInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeStreamConsumerInput_StreamARN *smithy.Schema
-
-var DescribeStreamConsumerInput_ConsumerName *smithy.Schema
-
-var DescribeStreamConsumerInput_ConsumerARN *smithy.Schema
-
-var DescribeStreamConsumerInput_StreamId *smithy.Schema
-
-var DescribeStreamConsumerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamConsumerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStreamConsumerOutput_ConsumerDescription *smithy.Schema
-
-var DescribeStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamInput",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeStreamInput_StreamName *smithy.Schema
-
-var DescribeStreamInput_Limit *smithy.Schema
-
-var DescribeStreamInput_ExclusiveStartShardId *smithy.Schema
-
-var DescribeStreamInput_StreamARN *smithy.Schema
-
-var DescribeStreamInput_StreamId *smithy.Schema
-
-var DescribeStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStreamOutput_StreamDescription *smithy.Schema
-
-var DescribeStreamSummaryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamSummaryInput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeStreamSummaryInput_StreamName *smithy.Schema
-
-var DescribeStreamSummaryInput_StreamARN *smithy.Schema
-
-var DescribeStreamSummaryInput_StreamId *smithy.Schema
-
-var DescribeStreamSummaryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DescribeStreamSummaryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStreamSummaryOutput_StreamDescriptionSummary *smithy.Schema
-
-var DisableEnhancedMonitoringInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "DisableEnhancedMonitoringInput",
-}, smithy.ShapeTypeStructure, 4)
-var DisableEnhancedMonitoringInput_StreamName *smithy.Schema
-
-var DisableEnhancedMonitoringInput_ShardLevelMetrics *smithy.Schema
-
-var DisableEnhancedMonitoringInput_StreamARN *smithy.Schema
-
-var DisableEnhancedMonitoringInput_StreamId *smithy.Schema
-
-var EnhancedMonitoringOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "EnhancedMonitoringOutput",
-}, smithy.ShapeTypeStructure, 4)
-var EnhancedMonitoringOutput_StreamName *smithy.Schema
-
-var EnhancedMonitoringOutput_CurrentShardLevelMetrics *smithy.Schema
-
-var EnhancedMonitoringOutput_DesiredShardLevelMetrics *smithy.Schema
-
-var EnhancedMonitoringOutput_StreamARN *smithy.Schema
-
-var EnableEnhancedMonitoringInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "EnableEnhancedMonitoringInput",
-}, smithy.ShapeTypeStructure, 4)
-var EnableEnhancedMonitoringInput_StreamName *smithy.Schema
-
-var EnableEnhancedMonitoringInput_ShardLevelMetrics *smithy.Schema
-
-var EnableEnhancedMonitoringInput_StreamARN *smithy.Schema
-
-var EnableEnhancedMonitoringInput_StreamId *smithy.Schema
-
-var GetRecordsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetRecordsInput",
-}, smithy.ShapeTypeStructure, 5)
-var GetRecordsInput_ShardIterator *smithy.Schema
-
-var GetRecordsInput_Limit *smithy.Schema
-
-var GetRecordsInput_StreamARN *smithy.Schema
-
-var GetRecordsInput_StreamId *smithy.Schema
-
-var GetRecordsInput_DryRun *smithy.Schema
-
-var GetRecordsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetRecordsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetRecordsOutput_Records *smithy.Schema
-
-var GetRecordsOutput_NextShardIterator *smithy.Schema
-
-var GetRecordsOutput_MillisBehindLatest *smithy.Schema
-
-var GetRecordsOutput_ChildShards *smithy.Schema
-
-var GetResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyInput_ResourceARN *smithy.Schema
-
-var GetResourcePolicyInput_StreamId *smithy.Schema
-
-var GetResourcePolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetResourcePolicyOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyOutput_Policy *smithy.Schema
-
-var GetShardIteratorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetShardIteratorInput",
-}, smithy.ShapeTypeStructure, 8)
-var GetShardIteratorInput_StreamName *smithy.Schema
-
-var GetShardIteratorInput_ShardId *smithy.Schema
-
-var GetShardIteratorInput_ShardIteratorType *smithy.Schema
-
-var GetShardIteratorInput_StartingSequenceNumber *smithy.Schema
-
-var GetShardIteratorInput_Timestamp *smithy.Schema
-
-var GetShardIteratorInput_StreamARN *smithy.Schema
-
-var GetShardIteratorInput_StreamId *smithy.Schema
-
-var GetShardIteratorInput_DryRun *smithy.Schema
-
-var GetShardIteratorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "GetShardIteratorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetShardIteratorOutput_ShardIterator *smithy.Schema
-
-var IncreaseStreamRetentionPeriodInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "IncreaseStreamRetentionPeriodInput",
-}, smithy.ShapeTypeStructure, 4)
-var IncreaseStreamRetentionPeriodInput_StreamName *smithy.Schema
-
-var IncreaseStreamRetentionPeriodInput_RetentionPeriodHours *smithy.Schema
-
-var IncreaseStreamRetentionPeriodInput_StreamARN *smithy.Schema
-
-var IncreaseStreamRetentionPeriodInput_StreamId *smithy.Schema
-
-var ListChannelsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListChannelsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelsInput_StreamFilter *smithy.Schema
-
-var ListChannelsInput_MaxResults *smithy.Schema
-
-var ListChannelsInput_NextToken *smithy.Schema
-
-var ListChannelsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListChannelsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsOutput_ChannelSummaries *smithy.Schema
-
-var ListChannelsOutput_NextToken *smithy.Schema
-
-var ListShardsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListShardsInput",
-}, smithy.ShapeTypeStructure, 8)
-var ListShardsInput_StreamName *smithy.Schema
-
-var ListShardsInput_NextToken *smithy.Schema
-
-var ListShardsInput_ExclusiveStartShardId *smithy.Schema
-
-var ListShardsInput_MaxResults *smithy.Schema
-
-var ListShardsInput_StreamCreationTimestamp *smithy.Schema
-
-var ListShardsInput_ShardFilter *smithy.Schema
-
-var ListShardsInput_StreamARN *smithy.Schema
-
-var ListShardsInput_StreamId *smithy.Schema
-
-var ListShardsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListShardsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListShardsOutput_Shards *smithy.Schema
-
-var ListShardsOutput_NextToken *smithy.Schema
-
-var ListStreamConsumersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreamConsumersInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListStreamConsumersInput_StreamARN *smithy.Schema
-
-var ListStreamConsumersInput_NextToken *smithy.Schema
-
-var ListStreamConsumersInput_MaxResults *smithy.Schema
-
-var ListStreamConsumersInput_StreamCreationTimestamp *smithy.Schema
-
-var ListStreamConsumersInput_StreamId *smithy.Schema
-
-var ListStreamConsumersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreamConsumersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamConsumersOutput_Consumers *smithy.Schema
-
-var ListStreamConsumersOutput_NextToken *smithy.Schema
-
-var ListStreamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreamsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListStreamsInput_Limit *smithy.Schema
-
-var ListStreamsInput_ExclusiveStartStreamName *smithy.Schema
-
-var ListStreamsInput_NextToken *smithy.Schema
-
-var ListStreamsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListStreamsOutput",
-}, smithy.ShapeTypeStructure, 4)
-var ListStreamsOutput_StreamNames *smithy.Schema
-
-var ListStreamsOutput_HasMoreStreams *smithy.Schema
-
-var ListStreamsOutput_NextToken *smithy.Schema
-
-var ListStreamsOutput_StreamSummaries *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceInput_ResourceARN *smithy.Schema
-
-var ListTagsForResourceInput_StreamId *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListTagsForStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListTagsForStreamInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListTagsForStreamInput_StreamName *smithy.Schema
-
-var ListTagsForStreamInput_ExclusiveStartTagKey *smithy.Schema
-
-var ListTagsForStreamInput_Limit *smithy.Schema
-
-var ListTagsForStreamInput_StreamARN *smithy.Schema
-
-var ListTagsForStreamInput_StreamId *smithy.Schema
-
-var ListTagsForStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "ListTagsForStreamOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForStreamOutput_Tags *smithy.Schema
-
-var ListTagsForStreamOutput_HasMoreTags *smithy.Schema
-
-var MergeShardsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "MergeShardsInput",
-}, smithy.ShapeTypeStructure, 5)
-var MergeShardsInput_StreamName *smithy.Schema
-
-var MergeShardsInput_ShardToMerge *smithy.Schema
-
-var MergeShardsInput_AdjacentShardToMerge *smithy.Schema
-
-var MergeShardsInput_StreamARN *smithy.Schema
-
-var MergeShardsInput_StreamId *smithy.Schema
-
-var PutRecordInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordInput",
-}, smithy.ShapeTypeStructure, 8)
-var PutRecordInput_StreamName *smithy.Schema
-
-var PutRecordInput_Data *smithy.Schema
-
-var PutRecordInput_PartitionKey *smithy.Schema
-
-var PutRecordInput_ExplicitHashKey *smithy.Schema
-
-var PutRecordInput_SequenceNumberForOrdering *smithy.Schema
-
-var PutRecordInput_StreamARN *smithy.Schema
-
-var PutRecordInput_StreamId *smithy.Schema
-
-var PutRecordInput_DryRun *smithy.Schema
-
-var PutRecordOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordOutput",
-}, smithy.ShapeTypeStructure, 3)
-var PutRecordOutput_ShardId *smithy.Schema
-
-var PutRecordOutput_SequenceNumber *smithy.Schema
-
-var PutRecordOutput_EncryptionType *smithy.Schema
-
-var PutRecordsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordsInput",
-}, smithy.ShapeTypeStructure, 5)
-var PutRecordsInput_Records *smithy.Schema
-
-var PutRecordsInput_StreamName *smithy.Schema
-
-var PutRecordsInput_StreamARN *smithy.Schema
-
-var PutRecordsInput_StreamId *smithy.Schema
-
-var PutRecordsInput_DryRun *smithy.Schema
-
-var PutRecordsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutRecordsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var PutRecordsOutput_FailedRecordCount *smithy.Schema
-
-var PutRecordsOutput_Records *smithy.Schema
-
-var PutRecordsOutput_EncryptionType *smithy.Schema
-
-var PutResourcePolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "PutResourcePolicyInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyInput_ResourceARN *smithy.Schema
-
-var PutResourcePolicyInput_StreamId *smithy.Schema
-
-var PutResourcePolicyInput_Policy *smithy.Schema
-
-var RegisterStreamConsumerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RegisterStreamConsumerInput",
-}, smithy.ShapeTypeStructure, 4)
-var RegisterStreamConsumerInput_StreamARN *smithy.Schema
-
-var RegisterStreamConsumerInput_ConsumerName *smithy.Schema
-
-var RegisterStreamConsumerInput_StreamId *smithy.Schema
-
-var RegisterStreamConsumerInput_Tags *smithy.Schema
-
-var RegisterStreamConsumerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RegisterStreamConsumerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterStreamConsumerOutput_Consumer *smithy.Schema
-
-var RemoveTagsFromStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "RemoveTagsFromStreamInput",
-}, smithy.ShapeTypeStructure, 4)
-var RemoveTagsFromStreamInput_StreamName *smithy.Schema
-
-var RemoveTagsFromStreamInput_TagKeys *smithy.Schema
-
-var RemoveTagsFromStreamInput_StreamARN *smithy.Schema
-
-var RemoveTagsFromStreamInput_StreamId *smithy.Schema
-
-var SplitShardInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SplitShardInput",
-}, smithy.ShapeTypeStructure, 5)
-var SplitShardInput_StreamName *smithy.Schema
-
-var SplitShardInput_ShardToSplit *smithy.Schema
-
-var SplitShardInput_NewStartingHashKey *smithy.Schema
-
-var SplitShardInput_StreamARN *smithy.Schema
-
-var SplitShardInput_StreamId *smithy.Schema
-
-var StartStreamEncryptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StartStreamEncryptionInput",
-}, smithy.ShapeTypeStructure, 5)
-var StartStreamEncryptionInput_StreamName *smithy.Schema
-
-var StartStreamEncryptionInput_EncryptionType *smithy.Schema
-
-var StartStreamEncryptionInput_KeyId *smithy.Schema
-
-var StartStreamEncryptionInput_StreamARN *smithy.Schema
-
-var StartStreamEncryptionInput_StreamId *smithy.Schema
-
-var StopStreamEncryptionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "StopStreamEncryptionInput",
-}, smithy.ShapeTypeStructure, 5)
-var StopStreamEncryptionInput_StreamName *smithy.Schema
-
-var StopStreamEncryptionInput_EncryptionType *smithy.Schema
-
-var StopStreamEncryptionInput_KeyId *smithy.Schema
-
-var StopStreamEncryptionInput_StreamARN *smithy.Schema
-
-var StopStreamEncryptionInput_StreamId *smithy.Schema
-
-var SubscribeToShardInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SubscribeToShardInput",
-}, smithy.ShapeTypeStructure, 5)
-var SubscribeToShardInput_ConsumerARN *smithy.Schema
-
-var SubscribeToShardInput_StreamId *smithy.Schema
-
-var SubscribeToShardInput_ShardId *smithy.Schema
-
-var SubscribeToShardInput_StartingPosition *smithy.Schema
-
-var SubscribeToShardInput_DryRun *smithy.Schema
-
-var SubscribeToShardOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "SubscribeToShardOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SubscribeToShardOutput_EventStream *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceInput_ResourceARN *smithy.Schema
-
-var TagResourceInput_StreamId *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceInput_ResourceARN *smithy.Schema
-
-var UntagResourceInput_StreamId *smithy.Schema
-
-var UpdateAccountSettingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateAccountSettingsInput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccountSettingsInput_MinimumThroughputBillingCommitment *smithy.Schema
-
-var UpdateAccountSettingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateAccountSettingsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccountSettingsOutput_MinimumThroughputBillingCommitment *smithy.Schema
-
-var UpdateChannelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateChannelInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateChannelInput_ChannelARN *smithy.Schema
-
-var UpdateChannelInput_S3DestinationConfiguration *smithy.Schema
-
-var UpdateChannelInput_S3TablesDestinationConfiguration *smithy.Schema
-
-var UpdateChannelInput_LoggingConfiguration *smithy.Schema
-
-var UpdateChannelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateChannelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateChannelOutput_ChannelDescription *smithy.Schema
-
-var UpdateMaxRecordSizeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateMaxRecordSizeInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateMaxRecordSizeInput_StreamARN *smithy.Schema
-
-var UpdateMaxRecordSizeInput_StreamId *smithy.Schema
-
-var UpdateMaxRecordSizeInput_MaxRecordSizeInKiB *smithy.Schema
-
-var UpdateShardCountInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateShardCountInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateShardCountInput_StreamName *smithy.Schema
-
-var UpdateShardCountInput_TargetShardCount *smithy.Schema
-
-var UpdateShardCountInput_ScalingType *smithy.Schema
-
-var UpdateShardCountInput_StreamARN *smithy.Schema
-
-var UpdateShardCountInput_StreamId *smithy.Schema
-
-var UpdateShardCountOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateShardCountOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateShardCountOutput_StreamName *smithy.Schema
-
-var UpdateShardCountOutput_CurrentShardCount *smithy.Schema
-
-var UpdateShardCountOutput_TargetShardCount *smithy.Schema
-
-var UpdateShardCountOutput_StreamARN *smithy.Schema
-
-var UpdateStreamModeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateStreamModeInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateStreamModeInput_StreamARN *smithy.Schema
-
-var UpdateStreamModeInput_StreamId *smithy.Schema
-
-var UpdateStreamModeInput_StreamModeDetails *smithy.Schema
-
-var UpdateStreamModeInput_WarmThroughputMiBps *smithy.Schema
-
-var UpdateStreamRecordDistributionStrategyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateStreamRecordDistributionStrategyInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateStreamRecordDistributionStrategyInput_StreamARN *smithy.Schema
-
-var UpdateStreamRecordDistributionStrategyInput_StreamId *smithy.Schema
-
-var UpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy *smithy.Schema
-
-var UpdateStreamWarmThroughputInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateStreamWarmThroughputInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateStreamWarmThroughputInput_StreamARN *smithy.Schema
-
-var UpdateStreamWarmThroughputInput_StreamName *smithy.Schema
-
-var UpdateStreamWarmThroughputInput_StreamId *smithy.Schema
-
-var UpdateStreamWarmThroughputInput_WarmThroughputMiBps *smithy.Schema
-
-var UpdateStreamWarmThroughputOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesis",
-	Name:      "UpdateStreamWarmThroughputOutput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateStreamWarmThroughputOutput_StreamARN *smithy.Schema
-
-var UpdateStreamWarmThroughputOutput_StreamName *smithy.Schema
-
-var UpdateStreamWarmThroughputOutput_WarmThroughput *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	ChannelStatus_CREATING = ChannelStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ChannelStatus_ACTIVE = ChannelStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ChannelStatus_UPDATING = ChannelStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ChannelStatus_DELETING = ChannelStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ChannelStatus_FAILED = ChannelStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	RecordFormatType_GSR_JSON = RecordFormatType.AddMember("GSR_JSON", smithyprelude.Unit)
-
-	RecordFormatType_JSON = RecordFormatType.AddMember("JSON", smithyprelude.Unit)
-
-	RecordFormatType_STRING = RecordFormatType.AddMember("STRING", smithyprelude.Unit)
-
-	RecordFormatType_BYTE_ARRAY = RecordFormatType.AddMember("BYTE_ARRAY", smithyprelude.Unit)
-
-	RecordConfiguration_RecordFormatType = RecordConfiguration.AddMember("RecordFormatType", RecordFormatType)
-
-	RecordConfiguration_GSRSchemaARN = RecordConfiguration.AddMember("GSRSchemaARN", _GSRSchemaARN)
-
-	ChannelStreamDescription_StreamARN = ChannelStreamDescription.AddMember("StreamARN", _StreamARN)
-
-	ChannelStreamDescription_StreamCreationTimestamp = ChannelStreamDescription.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	ChannelStreamDescription_RecordConfiguration = ChannelStreamDescription.AddMember("RecordConfiguration", RecordConfiguration)
-
-	_ChannelStreamDescriptionList_member = _ChannelStreamDescriptionList.AddMember("member", ChannelStreamDescription)
-
-	DeadLetterQueueS3Configuration_BucketARN = DeadLetterQueueS3Configuration.AddMember("BucketARN", _BucketARN)
-
-	DeadLetterQueueS3Configuration_ExpectedBucketOwner = DeadLetterQueueS3Configuration.AddMember("ExpectedBucketOwner", _ExpectedBucketOwner)
-
-	DeadLetterQueueS3Configuration_ErrorOutputPrefix = DeadLetterQueueS3Configuration.AddMember("ErrorOutputPrefix", _S3ErrorOutputPrefix)
-
-	S3StorageClass_STANDARD = S3StorageClass.AddMember("STANDARD", smithyprelude.Unit)
-
-	S3StorageClass_INTELLIGENT_TIERING = S3StorageClass.AddMember("INTELLIGENT_TIERING", smithyprelude.Unit)
-
-	S3StorageClass_GLACIER_IR = S3StorageClass.AddMember("GLACIER_IR", smithyprelude.Unit)
-
-	S3CompressionType_NONE = S3CompressionType.AddMember("NONE", smithyprelude.Unit)
-
-	S3CompressionType_GZIP = S3CompressionType.AddMember("GZIP", smithyprelude.Unit)
-
-	S3CompressionType_ZSTD = S3CompressionType.AddMember("ZSTD", smithyprelude.Unit)
-
-	S3StorageConfiguration_BucketARN = S3StorageConfiguration.AddMember("BucketARN", _BucketARN)
-
-	S3StorageConfiguration_ExpectedBucketOwner = S3StorageConfiguration.AddMember("ExpectedBucketOwner", _ExpectedBucketOwner)
-
-	S3StorageConfiguration_OutputKeyTemplate = S3StorageConfiguration.AddMember("OutputKeyTemplate", _S3OutputKeyTemplate)
-
-	S3StorageConfiguration_StorageClass = S3StorageConfiguration.AddMember("StorageClass", S3StorageClass)
-
-	S3StorageConfiguration_CompressionType = S3StorageConfiguration.AddMember("CompressionType", S3CompressionType)
-
-	S3DestinationDescription_DataFreshnessInSeconds = S3DestinationDescription.AddMember("DataFreshnessInSeconds", _DataFreshnessInSeconds)
-
-	S3DestinationDescription_DeadLetterQueueS3Configuration = S3DestinationDescription.AddMember("DeadLetterQueueS3Configuration", DeadLetterQueueS3Configuration)
-
-	S3DestinationDescription_StorageConfiguration = S3DestinationDescription.AddMember("StorageConfiguration", S3StorageConfiguration)
-
-	S3TablesCompressionType_NONE = S3TablesCompressionType.AddMember("NONE", smithyprelude.Unit)
-
-	S3TablesCompressionType_ZSTD = S3TablesCompressionType.AddMember("ZSTD", smithyprelude.Unit)
-
-	S3TablesCompressionType_SNAPPY = S3TablesCompressionType.AddMember("SNAPPY", smithyprelude.Unit)
-
-	PartitionTransform_TIME_HOUR = PartitionTransform.AddMember("TIME_HOUR", smithyprelude.Unit)
-
-	PartitionField_Transform = PartitionField.AddMember("Transform", PartitionTransform)
-
-	PartitionField_SourceName = PartitionField.AddMember("SourceName", _PartitionSourceName)
-
-	_PartitionFieldList_member = _PartitionFieldList.AddMember("member", PartitionField)
-
-	PartitionSpec_PartitionFields = PartitionSpec.AddMember("PartitionFields", _PartitionFieldList)
-
-	S3TablesConfiguration_TableBucketARN = S3TablesConfiguration.AddMember("TableBucketARN", _TableBucketARN)
-
-	S3TablesConfiguration_Namespace = S3TablesConfiguration.AddMember("Namespace", _S3TablesNamespace)
-
-	S3TablesConfiguration_TableName = S3TablesConfiguration.AddMember("TableName", _S3TablesTableName)
-
-	S3TablesConfiguration_CompressionType = S3TablesConfiguration.AddMember("CompressionType", S3TablesCompressionType)
-
-	S3TablesConfiguration_PartitionSpec = S3TablesConfiguration.AddMember("PartitionSpec", PartitionSpec)
-
-	_S3TablesConfigurationList_member = _S3TablesConfigurationList.AddMember("member", S3TablesConfiguration)
-
-	S3TablesDestinationDescription_DataFreshnessInSeconds = S3TablesDestinationDescription.AddMember("DataFreshnessInSeconds", _DataFreshnessInSeconds)
-
-	S3TablesDestinationDescription_DeadLetterQueueS3Configuration = S3TablesDestinationDescription.AddMember("DeadLetterQueueS3Configuration", DeadLetterQueueS3Configuration)
-
-	S3TablesDestinationDescription_S3TablesConfigurationList = S3TablesDestinationDescription.AddMember("S3TablesConfigurationList", _S3TablesConfigurationList)
-
-	ChannelEncryptionType_KMS = ChannelEncryptionType.AddMember("KMS", smithyprelude.Unit)
-
-	ChannelEncryptionConfiguration_EncryptionType = ChannelEncryptionConfiguration.AddMember("EncryptionType", ChannelEncryptionType)
-
-	ChannelEncryptionConfiguration_KeyId = ChannelEncryptionConfiguration.AddMember("KeyId", _KeyId)
-
-	CloudWatchLogs_Enabled = CloudWatchLogs.AddMember("Enabled", _BooleanObject)
-
-	CloudWatchLogs_LogGroupName = CloudWatchLogs.AddMember("LogGroupName", _CloudWatchLogGroupName)
-
-	CloudWatchLogs_LogStreamName = CloudWatchLogs.AddMember("LogStreamName", _CloudWatchLogStreamName)
-
-	ChannelLoggingConfiguration_CloudWatchLogs = ChannelLoggingConfiguration.AddMember("CloudWatchLogs", CloudWatchLogs)
-
-	ChannelDescription_ChannelName = ChannelDescription.AddMember("ChannelName", _ChannelName)
-
-	ChannelDescription_ChannelARN = ChannelDescription.AddMember("ChannelARN", _ChannelARN)
-
-	ChannelDescription_ChannelId = ChannelDescription.AddMember("ChannelId", _ChannelId)
-
-	ChannelDescription_ChannelStatus = ChannelDescription.AddMember("ChannelStatus", ChannelStatus)
-
-	ChannelDescription_ChannelStatusReason = ChannelDescription.AddMember("ChannelStatusReason", _ChannelStatusReason)
-
-	ChannelDescription_ChannelCreationTimestamp = ChannelDescription.AddMember("ChannelCreationTimestamp", _Timestamp)
-
-	ChannelDescription_ServiceExecutionRoleARN = ChannelDescription.AddMember("ServiceExecutionRoleARN", _RoleARN)
-
-	ChannelDescription_StreamConfigurationList = ChannelDescription.AddMember("StreamConfigurationList", _ChannelStreamDescriptionList)
-
-	ChannelDescription_S3DestinationConfiguration = ChannelDescription.AddMember("S3DestinationConfiguration", S3DestinationDescription)
-
-	ChannelDescription_S3TablesDestinationConfiguration = ChannelDescription.AddMember("S3TablesDestinationConfiguration", S3TablesDestinationDescription)
-
-	ChannelDescription_EncryptionConfiguration = ChannelDescription.AddMember("EncryptionConfiguration", ChannelEncryptionConfiguration)
-
-	ChannelDescription_LoggingConfiguration = ChannelDescription.AddMember("LoggingConfiguration", ChannelLoggingConfiguration)
-
-	ChannelDestinationType_S3 = ChannelDestinationType.AddMember("S3", smithyprelude.Unit)
-
-	ChannelDestinationType_S3_TABLES = ChannelDestinationType.AddMember("S3_TABLES", smithyprelude.Unit)
-
-	CloudWatchLogsUpdateInput_Enabled = CloudWatchLogsUpdateInput.AddMember("Enabled", _BooleanObject)
-
-	CloudWatchLogsUpdateInput_LogGroupName = CloudWatchLogsUpdateInput.AddMember("LogGroupName", _CloudWatchLogGroupName)
-
-	CloudWatchLogsUpdateInput_LogStreamName = CloudWatchLogsUpdateInput.AddMember("LogStreamName", _CloudWatchLogStreamName)
-
-	ChannelLoggingUpdateInput_CloudWatchLogs = ChannelLoggingUpdateInput.AddMember("CloudWatchLogs", CloudWatchLogsUpdateInput)
-
-	ChannelStreamConfiguration_StreamARN = ChannelStreamConfiguration.AddMember("StreamARN", _StreamARN)
-
-	ChannelStreamConfiguration_RecordConfiguration = ChannelStreamConfiguration.AddMember("RecordConfiguration", RecordConfiguration)
-
-	_ChannelStreamConfigurationList_member = _ChannelStreamConfigurationList.AddMember("member", ChannelStreamConfiguration)
-
-	ChannelStreamIdentifier_StreamARN = ChannelStreamIdentifier.AddMember("StreamARN", _StreamARN)
-
-	ChannelStreamIdentifier_StreamCreationTimestamp = ChannelStreamIdentifier.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	_ChannelStreamIdentifierList_member = _ChannelStreamIdentifierList.AddMember("member", ChannelStreamIdentifier)
-
-	ChannelSummary_ChannelName = ChannelSummary.AddMember("ChannelName", _ChannelName)
-
-	ChannelSummary_ChannelARN = ChannelSummary.AddMember("ChannelARN", _ChannelARN)
-
-	ChannelSummary_ChannelId = ChannelSummary.AddMember("ChannelId", _ChannelId)
-
-	ChannelSummary_ChannelStatus = ChannelSummary.AddMember("ChannelStatus", ChannelStatus)
-
-	ChannelSummary_ChannelStatusReason = ChannelSummary.AddMember("ChannelStatusReason", _ChannelStatusReason)
-
-	ChannelSummary_ChannelCreationTimestamp = ChannelSummary.AddMember("ChannelCreationTimestamp", _Timestamp)
-
-	ChannelSummary_ChannelDestinationType = ChannelSummary.AddMember("ChannelDestinationType", ChannelDestinationType)
-
-	ChannelSummary_Streams = ChannelSummary.AddMember("Streams", _ChannelStreamIdentifierList)
-
-	_ChannelSummaryList_member = _ChannelSummaryList.AddMember("member", ChannelSummary)
-
-	_ShardIdList_member = _ShardIdList.AddMember("member", _ShardId)
-
-	HashKeyRange_StartingHashKey = HashKeyRange.AddMember("StartingHashKey", _HashKey)
-
-	HashKeyRange_EndingHashKey = HashKeyRange.AddMember("EndingHashKey", _HashKey)
-
-	ChildShard_ShardId = ChildShard.AddMember("ShardId", _ShardId)
-
-	ChildShard_ParentShards = ChildShard.AddMember("ParentShards", _ShardIdList)
-
-	ChildShard_HashKeyRange = ChildShard.AddMember("HashKeyRange", HashKeyRange)
-
-	_ChildShardList_member = _ChildShardList.AddMember("member", ChildShard)
-
-	ConsumerStatus_CREATING = ConsumerStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ConsumerStatus_DELETING = ConsumerStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ConsumerStatus_ACTIVE = ConsumerStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	Consumer_ConsumerName = Consumer.AddMember("ConsumerName", _ConsumerName)
-
-	Consumer_ConsumerARN = Consumer.AddMember("ConsumerARN", _ConsumerARN)
-
-	Consumer_ConsumerStatus = Consumer.AddMember("ConsumerStatus", ConsumerStatus)
-
-	Consumer_ConsumerCreationTimestamp = Consumer.AddMember("ConsumerCreationTimestamp", _Timestamp)
-
-	ConsumerDescription_ConsumerName = ConsumerDescription.AddMember("ConsumerName", _ConsumerName)
-
-	ConsumerDescription_ConsumerARN = ConsumerDescription.AddMember("ConsumerARN", _ConsumerARN)
-
-	ConsumerDescription_ConsumerStatus = ConsumerDescription.AddMember("ConsumerStatus", ConsumerStatus)
-
-	ConsumerDescription_ConsumerCreationTimestamp = ConsumerDescription.AddMember("ConsumerCreationTimestamp", _Timestamp)
-
-	ConsumerDescription_StreamARN = ConsumerDescription.AddMember("StreamARN", _StreamARN)
-
-	_ConsumerList_member = _ConsumerList.AddMember("member", Consumer)
-
-	DryRunOperationException_message = DryRunOperationException.AddMember("message", _ErrorMessage)
-
-	EncryptionType_NONE = EncryptionType.AddMember("NONE", smithyprelude.Unit)
-
-	EncryptionType_KMS = EncryptionType.AddMember("KMS", smithyprelude.Unit)
-
-	MetricsName_INCOMING_BYTES = MetricsName.AddMember("INCOMING_BYTES", smithyprelude.Unit)
-
-	MetricsName_INCOMING_RECORDS = MetricsName.AddMember("INCOMING_RECORDS", smithyprelude.Unit)
-
-	MetricsName_OUTGOING_BYTES = MetricsName.AddMember("OUTGOING_BYTES", smithyprelude.Unit)
-
-	MetricsName_OUTGOING_RECORDS = MetricsName.AddMember("OUTGOING_RECORDS", smithyprelude.Unit)
-
-	MetricsName_WRITE_PROVISIONED_THROUGHPUT_EXCEEDED = MetricsName.AddMember("WRITE_PROVISIONED_THROUGHPUT_EXCEEDED", smithyprelude.Unit)
-
-	MetricsName_READ_PROVISIONED_THROUGHPUT_EXCEEDED = MetricsName.AddMember("READ_PROVISIONED_THROUGHPUT_EXCEEDED", smithyprelude.Unit)
-
-	MetricsName_ITERATOR_AGE_MILLISECONDS = MetricsName.AddMember("ITERATOR_AGE_MILLISECONDS", smithyprelude.Unit)
-
-	MetricsName_ALL = MetricsName.AddMember("ALL", smithyprelude.Unit)
-
-	_MetricsNameList_member = _MetricsNameList.AddMember("member", MetricsName)
-
-	EnhancedMetrics_ShardLevelMetrics = EnhancedMetrics.AddMember("ShardLevelMetrics", _MetricsNameList)
-
-	_EnhancedMonitoringList_member = _EnhancedMonitoringList.AddMember("member", EnhancedMetrics)
-
-	ExpiredIteratorException_message = ExpiredIteratorException.AddMember("message", _ErrorMessage)
-
-	ExpiredNextTokenException_message = ExpiredNextTokenException.AddMember("message", _ErrorMessage)
-
-	InternalFailureException_message = InternalFailureException.AddMember("message", _ErrorMessage)
-
-	InvalidArgumentException_message = InvalidArgumentException.AddMember("message", _ErrorMessage)
-
-	KMSAccessDeniedException_message = KMSAccessDeniedException.AddMember("message", _ErrorMessage)
-
-	KMSDisabledException_message = KMSDisabledException.AddMember("message", _ErrorMessage)
-
-	KMSInvalidStateException_message = KMSInvalidStateException.AddMember("message", _ErrorMessage)
-
-	KMSNotFoundException_message = KMSNotFoundException.AddMember("message", _ErrorMessage)
-
-	KMSOptInRequired_message = KMSOptInRequired.AddMember("message", _ErrorMessage)
-
-	KMSThrottlingException_message = KMSThrottlingException.AddMember("message", _ErrorMessage)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	MinimumThroughputBillingCommitmentInputStatus_ENABLED = MinimumThroughputBillingCommitmentInputStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	MinimumThroughputBillingCommitmentInputStatus_DISABLED = MinimumThroughputBillingCommitmentInputStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	MinimumThroughputBillingCommitmentInput_Status = MinimumThroughputBillingCommitmentInput.AddMember("Status", MinimumThroughputBillingCommitmentInputStatus)
-
-	MinimumThroughputBillingCommitmentOutputStatus_ENABLED = MinimumThroughputBillingCommitmentOutputStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	MinimumThroughputBillingCommitmentOutputStatus_DISABLED = MinimumThroughputBillingCommitmentOutputStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	MinimumThroughputBillingCommitmentOutputStatus_ENABLED_UNTIL_EARLIEST_ALLOWED_END = MinimumThroughputBillingCommitmentOutputStatus.AddMember("ENABLED_UNTIL_EARLIEST_ALLOWED_END", smithyprelude.Unit)
-
-	MinimumThroughputBillingCommitmentOutput_Status = MinimumThroughputBillingCommitmentOutput.AddMember("Status", MinimumThroughputBillingCommitmentOutputStatus)
-
-	MinimumThroughputBillingCommitmentOutput_StartedAt = MinimumThroughputBillingCommitmentOutput.AddMember("StartedAt", _Timestamp)
-
-	MinimumThroughputBillingCommitmentOutput_EndedAt = MinimumThroughputBillingCommitmentOutput.AddMember("EndedAt", _Timestamp)
-
-	MinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt = MinimumThroughputBillingCommitmentOutput.AddMember("EarliestAllowedEndAt", _Timestamp)
-
-	ProvisionedThroughputExceededException_message = ProvisionedThroughputExceededException.AddMember("message", _ErrorMessage)
-
-	PutRecordsRequestEntry_Data = PutRecordsRequestEntry.AddMember("Data", _Data)
-
-	PutRecordsRequestEntry_ExplicitHashKey = PutRecordsRequestEntry.AddMember("ExplicitHashKey", _HashKey)
-
-	PutRecordsRequestEntry_PartitionKey = PutRecordsRequestEntry.AddMember("PartitionKey", _PartitionKey)
-
-	_PutRecordsRequestEntryList_member = _PutRecordsRequestEntryList.AddMember("member", PutRecordsRequestEntry)
-
-	PutRecordsResultEntry_SequenceNumber = PutRecordsResultEntry.AddMember("SequenceNumber", _SequenceNumber)
-
-	PutRecordsResultEntry_ShardId = PutRecordsResultEntry.AddMember("ShardId", _ShardId)
-
-	PutRecordsResultEntry_ErrorCode = PutRecordsResultEntry.AddMember("ErrorCode", _ErrorCode)
-
-	PutRecordsResultEntry_ErrorMessage = PutRecordsResultEntry.AddMember("ErrorMessage", _ErrorMessage)
-
-	_PutRecordsResultEntryList_member = _PutRecordsResultEntryList.AddMember("member", PutRecordsResultEntry)
-
-	Record_SequenceNumber = Record.AddMember("SequenceNumber", _SequenceNumber)
-
-	Record_ApproximateArrivalTimestamp = Record.AddMember("ApproximateArrivalTimestamp", _Timestamp)
-
-	Record_Data = Record.AddMember("Data", _Data)
-
-	Record_PartitionKey = Record.AddMember("PartitionKey", _PartitionKey)
-
-	Record_EncryptionType = Record.AddMember("EncryptionType", EncryptionType)
-
-	RecordDistributionStrategy_AUTO = RecordDistributionStrategy.AddMember("AUTO", smithyprelude.Unit)
-
-	RecordDistributionStrategy_USER_PARTITION_KEY = RecordDistributionStrategy.AddMember("USER_PARTITION_KEY", smithyprelude.Unit)
-
-	_RecordList_member = _RecordList.AddMember("member", Record)
-
-	ResourceInUseException_message = ResourceInUseException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	S3DestinationConfiguration_DataFreshnessInSeconds = S3DestinationConfiguration.AddMember("DataFreshnessInSeconds", _DataFreshnessInSeconds)
-
-	S3DestinationConfiguration_DeadLetterQueueS3Configuration = S3DestinationConfiguration.AddMember("DeadLetterQueueS3Configuration", DeadLetterQueueS3Configuration)
-
-	S3DestinationConfiguration_StorageConfiguration = S3DestinationConfiguration.AddMember("StorageConfiguration", S3StorageConfiguration)
-
-	S3DestinationUpdateInput_DataFreshnessInSeconds = S3DestinationUpdateInput.AddMember("DataFreshnessInSeconds", _DataFreshnessInSeconds)
-
-	S3TablesDestinationConfiguration_DataFreshnessInSeconds = S3TablesDestinationConfiguration.AddMember("DataFreshnessInSeconds", _DataFreshnessInSeconds)
-
-	S3TablesDestinationConfiguration_DeadLetterQueueS3Configuration = S3TablesDestinationConfiguration.AddMember("DeadLetterQueueS3Configuration", DeadLetterQueueS3Configuration)
-
-	S3TablesDestinationConfiguration_S3TablesConfigurationList = S3TablesDestinationConfiguration.AddMember("S3TablesConfigurationList", _S3TablesConfigurationList)
-
-	S3TablesDestinationUpdateInput_DataFreshnessInSeconds = S3TablesDestinationUpdateInput.AddMember("DataFreshnessInSeconds", _DataFreshnessInSeconds)
-
-	ScalingType_UNIFORM_SCALING = ScalingType.AddMember("UNIFORM_SCALING", smithyprelude.Unit)
-
-	SequenceNumberRange_StartingSequenceNumber = SequenceNumberRange.AddMember("StartingSequenceNumber", _SequenceNumber)
-
-	SequenceNumberRange_EndingSequenceNumber = SequenceNumberRange.AddMember("EndingSequenceNumber", _SequenceNumber)
-
-	Shard_ShardId = Shard.AddMember("ShardId", _ShardId)
-
-	Shard_ParentShardId = Shard.AddMember("ParentShardId", _ShardId)
-
-	Shard_AdjacentParentShardId = Shard.AddMember("AdjacentParentShardId", _ShardId)
-
-	Shard_HashKeyRange = Shard.AddMember("HashKeyRange", HashKeyRange)
-
-	Shard_SequenceNumberRange = Shard.AddMember("SequenceNumberRange", SequenceNumberRange)
-
-	ShardFilterType_AFTER_SHARD_ID = ShardFilterType.AddMember("AFTER_SHARD_ID", smithyprelude.Unit)
-
-	ShardFilterType_AT_TRIM_HORIZON = ShardFilterType.AddMember("AT_TRIM_HORIZON", smithyprelude.Unit)
-
-	ShardFilterType_FROM_TRIM_HORIZON = ShardFilterType.AddMember("FROM_TRIM_HORIZON", smithyprelude.Unit)
-
-	ShardFilterType_AT_LATEST = ShardFilterType.AddMember("AT_LATEST", smithyprelude.Unit)
-
-	ShardFilterType_AT_TIMESTAMP = ShardFilterType.AddMember("AT_TIMESTAMP", smithyprelude.Unit)
-
-	ShardFilterType_FROM_TIMESTAMP = ShardFilterType.AddMember("FROM_TIMESTAMP", smithyprelude.Unit)
-
-	ShardFilter_Type = ShardFilter.AddMember("Type", ShardFilterType)
-
-	ShardFilter_ShardId = ShardFilter.AddMember("ShardId", _ShardId)
-
-	ShardFilter_Timestamp = ShardFilter.AddMember("Timestamp", _Timestamp)
-
-	ShardIteratorType_AT_SEQUENCE_NUMBER = ShardIteratorType.AddMember("AT_SEQUENCE_NUMBER", smithyprelude.Unit)
-
-	ShardIteratorType_AFTER_SEQUENCE_NUMBER = ShardIteratorType.AddMember("AFTER_SEQUENCE_NUMBER", smithyprelude.Unit)
-
-	ShardIteratorType_TRIM_HORIZON = ShardIteratorType.AddMember("TRIM_HORIZON", smithyprelude.Unit)
-
-	ShardIteratorType_LATEST = ShardIteratorType.AddMember("LATEST", smithyprelude.Unit)
-
-	ShardIteratorType_AT_TIMESTAMP = ShardIteratorType.AddMember("AT_TIMESTAMP", smithyprelude.Unit)
-
-	_ShardList_member = _ShardList.AddMember("member", Shard)
-
-	StartingPosition_Type = StartingPosition.AddMember("Type", ShardIteratorType)
-
-	StartingPosition_SequenceNumber = StartingPosition.AddMember("SequenceNumber", _SequenceNumber)
-
-	StartingPosition_Timestamp = StartingPosition.AddMember("Timestamp", _Timestamp)
-
-	StreamStatus_CREATING = StreamStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	StreamStatus_DELETING = StreamStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	StreamStatus_ACTIVE = StreamStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	StreamStatus_UPDATING = StreamStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	StreamMode_PROVISIONED = StreamMode.AddMember("PROVISIONED", smithyprelude.Unit)
-
-	StreamMode_ON_DEMAND = StreamMode.AddMember("ON_DEMAND", smithyprelude.Unit)
-
-	StreamModeDetails_StreamMode = StreamModeDetails.AddMember("StreamMode", StreamMode)
-
-	StreamDescription_StreamName = StreamDescription.AddMember("StreamName", _StreamName)
-
-	StreamDescription_StreamARN = StreamDescription.AddMember("StreamARN", _StreamARN)
-
-	StreamDescription_StreamStatus = StreamDescription.AddMember("StreamStatus", StreamStatus)
-
-	StreamDescription_StreamModeDetails = StreamDescription.AddMember("StreamModeDetails", StreamModeDetails)
-
-	StreamDescription_Shards = StreamDescription.AddMember("Shards", _ShardList)
-
-	StreamDescription_HasMoreShards = StreamDescription.AddMember("HasMoreShards", _BooleanObject)
-
-	StreamDescription_RetentionPeriodHours = StreamDescription.AddMember("RetentionPeriodHours", _RetentionPeriodHours)
-
-	StreamDescription_StreamCreationTimestamp = StreamDescription.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	StreamDescription_EnhancedMonitoring = StreamDescription.AddMember("EnhancedMonitoring", _EnhancedMonitoringList)
-
-	StreamDescription_EncryptionType = StreamDescription.AddMember("EncryptionType", EncryptionType)
-
-	StreamDescription_KeyId = StreamDescription.AddMember("KeyId", _KeyId)
-
-	WarmThroughputObject_TargetMiBps = WarmThroughputObject.AddMember("TargetMiBps", _NaturalIntegerObject)
-
-	WarmThroughputObject_CurrentMiBps = WarmThroughputObject.AddMember("CurrentMiBps", _NaturalIntegerObject)
-
-	StreamDescriptionSummary_StreamName = StreamDescriptionSummary.AddMember("StreamName", _StreamName)
-
-	StreamDescriptionSummary_StreamARN = StreamDescriptionSummary.AddMember("StreamARN", _StreamARN)
-
-	StreamDescriptionSummary_StreamId = StreamDescriptionSummary.AddMember("StreamId", _StreamId)
-
-	StreamDescriptionSummary_StreamStatus = StreamDescriptionSummary.AddMember("StreamStatus", StreamStatus)
-
-	StreamDescriptionSummary_StreamModeDetails = StreamDescriptionSummary.AddMember("StreamModeDetails", StreamModeDetails)
-
-	StreamDescriptionSummary_RetentionPeriodHours = StreamDescriptionSummary.AddMember("RetentionPeriodHours", _RetentionPeriodHours)
-
-	StreamDescriptionSummary_StreamCreationTimestamp = StreamDescriptionSummary.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	StreamDescriptionSummary_EnhancedMonitoring = StreamDescriptionSummary.AddMember("EnhancedMonitoring", _EnhancedMonitoringList)
-
-	StreamDescriptionSummary_EncryptionType = StreamDescriptionSummary.AddMember("EncryptionType", EncryptionType)
-
-	StreamDescriptionSummary_KeyId = StreamDescriptionSummary.AddMember("KeyId", _KeyId)
-
-	StreamDescriptionSummary_OpenShardCount = StreamDescriptionSummary.AddMember("OpenShardCount", _ShardCountObject)
-
-	StreamDescriptionSummary_ConsumerCount = StreamDescriptionSummary.AddMember("ConsumerCount", _ConsumerCountObject)
-
-	StreamDescriptionSummary_WarmThroughput = StreamDescriptionSummary.AddMember("WarmThroughput", WarmThroughputObject)
-
-	StreamDescriptionSummary_MaxRecordSizeInKiB = StreamDescriptionSummary.AddMember("MaxRecordSizeInKiB", _MaxRecordSizeInKiB)
-
-	StreamDescriptionSummary_ChannelCount = StreamDescriptionSummary.AddMember("ChannelCount", _ChannelCountObject)
-
-	StreamDescriptionSummary_RecordDistributionStrategy = StreamDescriptionSummary.AddMember("RecordDistributionStrategy", RecordDistributionStrategy)
-
-	StreamFilter_StreamARN = StreamFilter.AddMember("StreamARN", _StreamARN)
-
-	StreamFilter_StreamCreationTimestamp = StreamFilter.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	_StreamFilterList_member = _StreamFilterList.AddMember("member", StreamFilter)
-
-	_StreamNameList_member = _StreamNameList.AddMember("member", _StreamName)
-
-	StreamSummary_StreamName = StreamSummary.AddMember("StreamName", _StreamName)
-
-	StreamSummary_StreamARN = StreamSummary.AddMember("StreamARN", _StreamARN)
-
-	StreamSummary_StreamStatus = StreamSummary.AddMember("StreamStatus", StreamStatus)
-
-	StreamSummary_StreamModeDetails = StreamSummary.AddMember("StreamModeDetails", StreamModeDetails)
-
-	StreamSummary_StreamCreationTimestamp = StreamSummary.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	_StreamSummaryList_member = _StreamSummaryList.AddMember("member", StreamSummary)
-
-	SubscribeToShardEvent_Records = SubscribeToShardEvent.AddMember("Records", _RecordList)
-
-	SubscribeToShardEvent_ContinuationSequenceNumber = SubscribeToShardEvent.AddMember("ContinuationSequenceNumber", _SequenceNumber)
-
-	SubscribeToShardEvent_MillisBehindLatest = SubscribeToShardEvent.AddMember("MillisBehindLatest", _MillisBehindLatest)
-
-	SubscribeToShardEvent_ChildShards = SubscribeToShardEvent.AddMember("ChildShards", _ChildShardList)
-
-	SubscribeToShardEventStream_SubscribeToShardEvent = SubscribeToShardEventStream.AddMember("SubscribeToShardEvent", SubscribeToShardEvent)
-
-	SubscribeToShardEventStream_ResourceNotFoundException = SubscribeToShardEventStream.AddMember("ResourceNotFoundException", ResourceNotFoundException)
-
-	SubscribeToShardEventStream_ResourceInUseException = SubscribeToShardEventStream.AddMember("ResourceInUseException", ResourceInUseException)
-
-	SubscribeToShardEventStream_KMSDisabledException = SubscribeToShardEventStream.AddMember("KMSDisabledException", KMSDisabledException)
-
-	SubscribeToShardEventStream_KMSInvalidStateException = SubscribeToShardEventStream.AddMember("KMSInvalidStateException", KMSInvalidStateException)
-
-	SubscribeToShardEventStream_KMSAccessDeniedException = SubscribeToShardEventStream.AddMember("KMSAccessDeniedException", KMSAccessDeniedException)
-
-	SubscribeToShardEventStream_KMSNotFoundException = SubscribeToShardEventStream.AddMember("KMSNotFoundException", KMSNotFoundException)
-
-	SubscribeToShardEventStream_KMSOptInRequired = SubscribeToShardEventStream.AddMember("KMSOptInRequired", KMSOptInRequired)
-
-	SubscribeToShardEventStream_KMSThrottlingException = SubscribeToShardEventStream.AddMember("KMSThrottlingException", KMSThrottlingException)
-
-	SubscribeToShardEventStream_InternalFailureException = SubscribeToShardEventStream.AddMember("InternalFailureException", InternalFailureException)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	AddTagsToStreamInput_StreamName = AddTagsToStreamInput.AddMember("StreamName", _StreamName)
-
-	AddTagsToStreamInput_Tags = AddTagsToStreamInput.AddMember("Tags", _TagMap)
-
-	AddTagsToStreamInput_StreamARN = AddTagsToStreamInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	AddTagsToStreamInput_StreamId = AddTagsToStreamInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	CreateChannelInput_ChannelName = CreateChannelInput.AddMember("ChannelName", _ChannelName)
-
-	CreateChannelInput_ServiceExecutionRoleARN = CreateChannelInput.AddMember("ServiceExecutionRoleARN", _RoleARN)
-
-	CreateChannelInput_StreamConfigurationList = CreateChannelInput.AddMember("StreamConfigurationList", _ChannelStreamConfigurationList)
-
-	CreateChannelInput_S3DestinationConfiguration = CreateChannelInput.AddMember("S3DestinationConfiguration", S3DestinationConfiguration)
-
-	CreateChannelInput_S3TablesDestinationConfiguration = CreateChannelInput.AddMember("S3TablesDestinationConfiguration", S3TablesDestinationConfiguration)
-
-	CreateChannelInput_EncryptionConfiguration = CreateChannelInput.AddMember("EncryptionConfiguration", ChannelEncryptionConfiguration)
-
-	CreateChannelInput_Tags = CreateChannelInput.AddMember("Tags", _TagMap)
-
-	CreateChannelInput_LoggingConfiguration = CreateChannelInput.AddMember("LoggingConfiguration", ChannelLoggingConfiguration)
-
-	CreateChannelOutput_ChannelDescription = CreateChannelOutput.AddMember("ChannelDescription", ChannelDescription)
-
-	CreateStreamInput_StreamName = CreateStreamInput.AddMember("StreamName", _StreamName)
-
-	CreateStreamInput_ShardCount = CreateStreamInput.AddMember("ShardCount", _PositiveIntegerObject)
-
-	CreateStreamInput_StreamModeDetails = CreateStreamInput.AddMember("StreamModeDetails", StreamModeDetails)
-
-	CreateStreamInput_Tags = CreateStreamInput.AddMember("Tags", _TagMap)
-
-	CreateStreamInput_WarmThroughputMiBps = CreateStreamInput.AddMember("WarmThroughputMiBps", _NaturalIntegerObject)
-
-	CreateStreamInput_MaxRecordSizeInKiB = CreateStreamInput.AddMember("MaxRecordSizeInKiB", _MaxRecordSizeInKiB)
-
-	CreateStreamInput_RecordDistributionStrategy = CreateStreamInput.AddMember("RecordDistributionStrategy", RecordDistributionStrategy)
-
-	DecreaseStreamRetentionPeriodInput_StreamName = DecreaseStreamRetentionPeriodInput.AddMember("StreamName", _StreamName)
-
-	DecreaseStreamRetentionPeriodInput_RetentionPeriodHours = DecreaseStreamRetentionPeriodInput.AddMember("RetentionPeriodHours", _RetentionPeriodHours)
-
-	DecreaseStreamRetentionPeriodInput_StreamARN = DecreaseStreamRetentionPeriodInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	DecreaseStreamRetentionPeriodInput_StreamId = DecreaseStreamRetentionPeriodInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	DeleteChannelInput_ChannelARN = DeleteChannelInput.AddMember("ChannelARN", _ChannelARN, &smithytraits.ContextParam{})
-
-	DeleteResourcePolicyInput_ResourceARN = DeleteResourcePolicyInput.AddMember("ResourceARN", _ResourceARN, &smithytraits.ContextParam{})
-
-	DeleteResourcePolicyInput_StreamId = DeleteResourcePolicyInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	DeleteStreamInput_StreamName = DeleteStreamInput.AddMember("StreamName", _StreamName)
-
-	DeleteStreamInput_EnforceConsumerDeletion = DeleteStreamInput.AddMember("EnforceConsumerDeletion", _BooleanObject)
-
-	DeleteStreamInput_StreamARN = DeleteStreamInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	DeleteStreamInput_StreamId = DeleteStreamInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	DeregisterStreamConsumerInput_StreamARN = DeregisterStreamConsumerInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	DeregisterStreamConsumerInput_ConsumerName = DeregisterStreamConsumerInput.AddMember("ConsumerName", _ConsumerName)
-
-	DeregisterStreamConsumerInput_ConsumerARN = DeregisterStreamConsumerInput.AddMember("ConsumerARN", _ConsumerARN, &smithytraits.ContextParam{})
-
-	DeregisterStreamConsumerInput_StreamId = DeregisterStreamConsumerInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	DescribeAccountSettingsOutput_MinimumThroughputBillingCommitment = DescribeAccountSettingsOutput.AddMember("MinimumThroughputBillingCommitment", MinimumThroughputBillingCommitmentOutput)
-
-	DescribeChannelInput_ChannelARN = DescribeChannelInput.AddMember("ChannelARN", _ChannelARN, &smithytraits.ContextParam{})
-
-	DescribeChannelOutput_ChannelDescription = DescribeChannelOutput.AddMember("ChannelDescription", ChannelDescription)
-
-	DescribeLimitsOutput_ShardLimit = DescribeLimitsOutput.AddMember("ShardLimit", _ShardCountObject)
-
-	DescribeLimitsOutput_OpenShardCount = DescribeLimitsOutput.AddMember("OpenShardCount", _ShardCountObject)
-
-	DescribeLimitsOutput_OnDemandStreamCount = DescribeLimitsOutput.AddMember("OnDemandStreamCount", _OnDemandStreamCountObject)
-
-	DescribeLimitsOutput_OnDemandStreamCountLimit = DescribeLimitsOutput.AddMember("OnDemandStreamCountLimit", _OnDemandStreamCountLimitObject)
-
-	DescribeLimitsOutput_ChannelCount = DescribeLimitsOutput.AddMember("ChannelCount", _ChannelCountObject)
-
-	DescribeLimitsOutput_ChannelCountLimit = DescribeLimitsOutput.AddMember("ChannelCountLimit", _ChannelCountObject)
-
-	DescribeStreamConsumerInput_StreamARN = DescribeStreamConsumerInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	DescribeStreamConsumerInput_ConsumerName = DescribeStreamConsumerInput.AddMember("ConsumerName", _ConsumerName)
-
-	DescribeStreamConsumerInput_ConsumerARN = DescribeStreamConsumerInput.AddMember("ConsumerARN", _ConsumerARN, &smithytraits.ContextParam{})
-
-	DescribeStreamConsumerInput_StreamId = DescribeStreamConsumerInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	DescribeStreamConsumerOutput_ConsumerDescription = DescribeStreamConsumerOutput.AddMember("ConsumerDescription", ConsumerDescription)
-
-	DescribeStreamInput_StreamName = DescribeStreamInput.AddMember("StreamName", _StreamName)
-
-	DescribeStreamInput_Limit = DescribeStreamInput.AddMember("Limit", _DescribeStreamInputLimit)
-
-	DescribeStreamInput_ExclusiveStartShardId = DescribeStreamInput.AddMember("ExclusiveStartShardId", _ShardId)
-
-	DescribeStreamInput_StreamARN = DescribeStreamInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	DescribeStreamInput_StreamId = DescribeStreamInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	DescribeStreamOutput_StreamDescription = DescribeStreamOutput.AddMember("StreamDescription", StreamDescription)
-
-	DescribeStreamSummaryInput_StreamName = DescribeStreamSummaryInput.AddMember("StreamName", _StreamName)
-
-	DescribeStreamSummaryInput_StreamARN = DescribeStreamSummaryInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	DescribeStreamSummaryInput_StreamId = DescribeStreamSummaryInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	DescribeStreamSummaryOutput_StreamDescriptionSummary = DescribeStreamSummaryOutput.AddMember("StreamDescriptionSummary", StreamDescriptionSummary)
-
-	DisableEnhancedMonitoringInput_StreamName = DisableEnhancedMonitoringInput.AddMember("StreamName", _StreamName)
-
-	DisableEnhancedMonitoringInput_ShardLevelMetrics = DisableEnhancedMonitoringInput.AddMember("ShardLevelMetrics", _MetricsNameList)
-
-	DisableEnhancedMonitoringInput_StreamARN = DisableEnhancedMonitoringInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	DisableEnhancedMonitoringInput_StreamId = DisableEnhancedMonitoringInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	EnhancedMonitoringOutput_StreamName = EnhancedMonitoringOutput.AddMember("StreamName", _StreamName)
-
-	EnhancedMonitoringOutput_CurrentShardLevelMetrics = EnhancedMonitoringOutput.AddMember("CurrentShardLevelMetrics", _MetricsNameList)
-
-	EnhancedMonitoringOutput_DesiredShardLevelMetrics = EnhancedMonitoringOutput.AddMember("DesiredShardLevelMetrics", _MetricsNameList)
-
-	EnhancedMonitoringOutput_StreamARN = EnhancedMonitoringOutput.AddMember("StreamARN", _StreamARN)
-
-	EnableEnhancedMonitoringInput_StreamName = EnableEnhancedMonitoringInput.AddMember("StreamName", _StreamName)
-
-	EnableEnhancedMonitoringInput_ShardLevelMetrics = EnableEnhancedMonitoringInput.AddMember("ShardLevelMetrics", _MetricsNameList)
-
-	EnableEnhancedMonitoringInput_StreamARN = EnableEnhancedMonitoringInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	EnableEnhancedMonitoringInput_StreamId = EnableEnhancedMonitoringInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	GetRecordsInput_ShardIterator = GetRecordsInput.AddMember("ShardIterator", _ShardIterator)
-
-	GetRecordsInput_Limit = GetRecordsInput.AddMember("Limit", _GetRecordsInputLimit)
-
-	GetRecordsInput_StreamARN = GetRecordsInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	GetRecordsInput_StreamId = GetRecordsInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	GetRecordsInput_DryRun = GetRecordsInput.AddMember("DryRun", _BooleanObject)
-
-	GetRecordsOutput_Records = GetRecordsOutput.AddMember("Records", _RecordList)
-
-	GetRecordsOutput_NextShardIterator = GetRecordsOutput.AddMember("NextShardIterator", _ShardIterator)
-
-	GetRecordsOutput_MillisBehindLatest = GetRecordsOutput.AddMember("MillisBehindLatest", _MillisBehindLatest)
-
-	GetRecordsOutput_ChildShards = GetRecordsOutput.AddMember("ChildShards", _ChildShardList)
-
-	GetResourcePolicyInput_ResourceARN = GetResourcePolicyInput.AddMember("ResourceARN", _ResourceARN, &smithytraits.ContextParam{})
-
-	GetResourcePolicyInput_StreamId = GetResourcePolicyInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	GetResourcePolicyOutput_Policy = GetResourcePolicyOutput.AddMember("Policy", _Policy)
-
-	GetShardIteratorInput_StreamName = GetShardIteratorInput.AddMember("StreamName", _StreamName)
-
-	GetShardIteratorInput_ShardId = GetShardIteratorInput.AddMember("ShardId", _ShardId)
-
-	GetShardIteratorInput_ShardIteratorType = GetShardIteratorInput.AddMember("ShardIteratorType", ShardIteratorType)
-
-	GetShardIteratorInput_StartingSequenceNumber = GetShardIteratorInput.AddMember("StartingSequenceNumber", _SequenceNumber)
-
-	GetShardIteratorInput_Timestamp = GetShardIteratorInput.AddMember("Timestamp", _Timestamp)
-
-	GetShardIteratorInput_StreamARN = GetShardIteratorInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	GetShardIteratorInput_StreamId = GetShardIteratorInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	GetShardIteratorInput_DryRun = GetShardIteratorInput.AddMember("DryRun", _BooleanObject)
-
-	GetShardIteratorOutput_ShardIterator = GetShardIteratorOutput.AddMember("ShardIterator", _ShardIterator)
-
-	IncreaseStreamRetentionPeriodInput_StreamName = IncreaseStreamRetentionPeriodInput.AddMember("StreamName", _StreamName)
-
-	IncreaseStreamRetentionPeriodInput_RetentionPeriodHours = IncreaseStreamRetentionPeriodInput.AddMember("RetentionPeriodHours", _RetentionPeriodHours)
-
-	IncreaseStreamRetentionPeriodInput_StreamARN = IncreaseStreamRetentionPeriodInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	IncreaseStreamRetentionPeriodInput_StreamId = IncreaseStreamRetentionPeriodInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	ListChannelsInput_StreamFilter = ListChannelsInput.AddMember("StreamFilter", _StreamFilterList)
-
-	ListChannelsInput_MaxResults = ListChannelsInput.AddMember("MaxResults", _ListChannelsInputLimit)
-
-	ListChannelsInput_NextToken = ListChannelsInput.AddMember("NextToken", _NextToken)
-
-	ListChannelsOutput_ChannelSummaries = ListChannelsOutput.AddMember("ChannelSummaries", _ChannelSummaryList)
-
-	ListChannelsOutput_NextToken = ListChannelsOutput.AddMember("NextToken", _NextToken)
-
-	ListShardsInput_StreamName = ListShardsInput.AddMember("StreamName", _StreamName)
-
-	ListShardsInput_NextToken = ListShardsInput.AddMember("NextToken", _NextToken)
-
-	ListShardsInput_ExclusiveStartShardId = ListShardsInput.AddMember("ExclusiveStartShardId", _ShardId)
-
-	ListShardsInput_MaxResults = ListShardsInput.AddMember("MaxResults", _ListShardsInputLimit)
-
-	ListShardsInput_StreamCreationTimestamp = ListShardsInput.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	ListShardsInput_ShardFilter = ListShardsInput.AddMember("ShardFilter", ShardFilter)
-
-	ListShardsInput_StreamARN = ListShardsInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	ListShardsInput_StreamId = ListShardsInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	ListShardsOutput_Shards = ListShardsOutput.AddMember("Shards", _ShardList)
-
-	ListShardsOutput_NextToken = ListShardsOutput.AddMember("NextToken", _NextToken)
-
-	ListStreamConsumersInput_StreamARN = ListStreamConsumersInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	ListStreamConsumersInput_NextToken = ListStreamConsumersInput.AddMember("NextToken", _NextToken)
-
-	ListStreamConsumersInput_MaxResults = ListStreamConsumersInput.AddMember("MaxResults", _ListStreamConsumersInputLimit)
-
-	ListStreamConsumersInput_StreamCreationTimestamp = ListStreamConsumersInput.AddMember("StreamCreationTimestamp", _Timestamp)
-
-	ListStreamConsumersInput_StreamId = ListStreamConsumersInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	ListStreamConsumersOutput_Consumers = ListStreamConsumersOutput.AddMember("Consumers", _ConsumerList)
-
-	ListStreamConsumersOutput_NextToken = ListStreamConsumersOutput.AddMember("NextToken", _NextToken)
-
-	ListStreamsInput_Limit = ListStreamsInput.AddMember("Limit", _ListStreamsInputLimit)
-
-	ListStreamsInput_ExclusiveStartStreamName = ListStreamsInput.AddMember("ExclusiveStartStreamName", _StreamName)
-
-	ListStreamsInput_NextToken = ListStreamsInput.AddMember("NextToken", _NextToken)
-
-	ListStreamsOutput_StreamNames = ListStreamsOutput.AddMember("StreamNames", _StreamNameList)
-
-	ListStreamsOutput_HasMoreStreams = ListStreamsOutput.AddMember("HasMoreStreams", _BooleanObject)
-
-	ListStreamsOutput_NextToken = ListStreamsOutput.AddMember("NextToken", _NextToken)
-
-	ListStreamsOutput_StreamSummaries = ListStreamsOutput.AddMember("StreamSummaries", _StreamSummaryList)
-
-	ListTagsForResourceInput_ResourceARN = ListTagsForResourceInput.AddMember("ResourceARN", _ResourceARN, &smithytraits.ContextParam{})
-
-	ListTagsForResourceInput_StreamId = ListTagsForResourceInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagList)
-
-	ListTagsForStreamInput_StreamName = ListTagsForStreamInput.AddMember("StreamName", _StreamName)
-
-	ListTagsForStreamInput_ExclusiveStartTagKey = ListTagsForStreamInput.AddMember("ExclusiveStartTagKey", _TagKey)
-
-	ListTagsForStreamInput_Limit = ListTagsForStreamInput.AddMember("Limit", _ListTagsForStreamInputLimit)
-
-	ListTagsForStreamInput_StreamARN = ListTagsForStreamInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	ListTagsForStreamInput_StreamId = ListTagsForStreamInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	ListTagsForStreamOutput_Tags = ListTagsForStreamOutput.AddMember("Tags", _TagList)
-
-	ListTagsForStreamOutput_HasMoreTags = ListTagsForStreamOutput.AddMember("HasMoreTags", _BooleanObject)
-
-	MergeShardsInput_StreamName = MergeShardsInput.AddMember("StreamName", _StreamName)
-
-	MergeShardsInput_ShardToMerge = MergeShardsInput.AddMember("ShardToMerge", _ShardId)
-
-	MergeShardsInput_AdjacentShardToMerge = MergeShardsInput.AddMember("AdjacentShardToMerge", _ShardId)
-
-	MergeShardsInput_StreamARN = MergeShardsInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	MergeShardsInput_StreamId = MergeShardsInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	PutRecordInput_StreamName = PutRecordInput.AddMember("StreamName", _StreamName)
-
-	PutRecordInput_Data = PutRecordInput.AddMember("Data", _Data)
-
-	PutRecordInput_PartitionKey = PutRecordInput.AddMember("PartitionKey", _PartitionKey)
-
-	PutRecordInput_ExplicitHashKey = PutRecordInput.AddMember("ExplicitHashKey", _HashKey)
-
-	PutRecordInput_SequenceNumberForOrdering = PutRecordInput.AddMember("SequenceNumberForOrdering", _SequenceNumber)
-
-	PutRecordInput_StreamARN = PutRecordInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	PutRecordInput_StreamId = PutRecordInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	PutRecordInput_DryRun = PutRecordInput.AddMember("DryRun", _BooleanObject)
-
-	PutRecordOutput_ShardId = PutRecordOutput.AddMember("ShardId", _ShardId)
-
-	PutRecordOutput_SequenceNumber = PutRecordOutput.AddMember("SequenceNumber", _SequenceNumber)
-
-	PutRecordOutput_EncryptionType = PutRecordOutput.AddMember("EncryptionType", EncryptionType)
-
-	PutRecordsInput_Records = PutRecordsInput.AddMember("Records", _PutRecordsRequestEntryList)
-
-	PutRecordsInput_StreamName = PutRecordsInput.AddMember("StreamName", _StreamName)
-
-	PutRecordsInput_StreamARN = PutRecordsInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	PutRecordsInput_StreamId = PutRecordsInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	PutRecordsInput_DryRun = PutRecordsInput.AddMember("DryRun", _BooleanObject)
-
-	PutRecordsOutput_FailedRecordCount = PutRecordsOutput.AddMember("FailedRecordCount", _PositiveIntegerObject)
-
-	PutRecordsOutput_Records = PutRecordsOutput.AddMember("Records", _PutRecordsResultEntryList)
-
-	PutRecordsOutput_EncryptionType = PutRecordsOutput.AddMember("EncryptionType", EncryptionType)
-
-	PutResourcePolicyInput_ResourceARN = PutResourcePolicyInput.AddMember("ResourceARN", _ResourceARN, &smithytraits.ContextParam{})
-
-	PutResourcePolicyInput_StreamId = PutResourcePolicyInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	PutResourcePolicyInput_Policy = PutResourcePolicyInput.AddMember("Policy", _Policy)
-
-	RegisterStreamConsumerInput_StreamARN = RegisterStreamConsumerInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	RegisterStreamConsumerInput_ConsumerName = RegisterStreamConsumerInput.AddMember("ConsumerName", _ConsumerName)
-
-	RegisterStreamConsumerInput_StreamId = RegisterStreamConsumerInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	RegisterStreamConsumerInput_Tags = RegisterStreamConsumerInput.AddMember("Tags", _TagMap)
-
-	RegisterStreamConsumerOutput_Consumer = RegisterStreamConsumerOutput.AddMember("Consumer", Consumer)
-
-	RemoveTagsFromStreamInput_StreamName = RemoveTagsFromStreamInput.AddMember("StreamName", _StreamName)
-
-	RemoveTagsFromStreamInput_TagKeys = RemoveTagsFromStreamInput.AddMember("TagKeys", _TagKeyList)
-
-	RemoveTagsFromStreamInput_StreamARN = RemoveTagsFromStreamInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	RemoveTagsFromStreamInput_StreamId = RemoveTagsFromStreamInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	SplitShardInput_StreamName = SplitShardInput.AddMember("StreamName", _StreamName)
-
-	SplitShardInput_ShardToSplit = SplitShardInput.AddMember("ShardToSplit", _ShardId)
-
-	SplitShardInput_NewStartingHashKey = SplitShardInput.AddMember("NewStartingHashKey", _HashKey)
-
-	SplitShardInput_StreamARN = SplitShardInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	SplitShardInput_StreamId = SplitShardInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	StartStreamEncryptionInput_StreamName = StartStreamEncryptionInput.AddMember("StreamName", _StreamName)
-
-	StartStreamEncryptionInput_EncryptionType = StartStreamEncryptionInput.AddMember("EncryptionType", EncryptionType)
-
-	StartStreamEncryptionInput_KeyId = StartStreamEncryptionInput.AddMember("KeyId", _KeyId)
-
-	StartStreamEncryptionInput_StreamARN = StartStreamEncryptionInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	StartStreamEncryptionInput_StreamId = StartStreamEncryptionInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	StopStreamEncryptionInput_StreamName = StopStreamEncryptionInput.AddMember("StreamName", _StreamName)
-
-	StopStreamEncryptionInput_EncryptionType = StopStreamEncryptionInput.AddMember("EncryptionType", EncryptionType)
-
-	StopStreamEncryptionInput_KeyId = StopStreamEncryptionInput.AddMember("KeyId", _KeyId)
-
-	StopStreamEncryptionInput_StreamARN = StopStreamEncryptionInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	StopStreamEncryptionInput_StreamId = StopStreamEncryptionInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	SubscribeToShardInput_ConsumerARN = SubscribeToShardInput.AddMember("ConsumerARN", _ConsumerARN, &smithytraits.ContextParam{})
-
-	SubscribeToShardInput_StreamId = SubscribeToShardInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	SubscribeToShardInput_ShardId = SubscribeToShardInput.AddMember("ShardId", _ShardId)
-
-	SubscribeToShardInput_StartingPosition = SubscribeToShardInput.AddMember("StartingPosition", StartingPosition)
-
-	SubscribeToShardInput_DryRun = SubscribeToShardInput.AddMember("DryRun", _BooleanObject)
-
-	SubscribeToShardOutput_EventStream = SubscribeToShardOutput.AddMember("EventStream", SubscribeToShardEventStream)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMap)
-
-	TagResourceInput_ResourceARN = TagResourceInput.AddMember("ResourceARN", _ResourceARN, &smithytraits.ContextParam{})
-
-	TagResourceInput_StreamId = TagResourceInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
-
-	UntagResourceInput_ResourceARN = UntagResourceInput.AddMember("ResourceARN", _ResourceARN, &smithytraits.ContextParam{})
-
-	UntagResourceInput_StreamId = UntagResourceInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	UpdateAccountSettingsInput_MinimumThroughputBillingCommitment = UpdateAccountSettingsInput.AddMember("MinimumThroughputBillingCommitment", MinimumThroughputBillingCommitmentInput)
-
-	UpdateAccountSettingsOutput_MinimumThroughputBillingCommitment = UpdateAccountSettingsOutput.AddMember("MinimumThroughputBillingCommitment", MinimumThroughputBillingCommitmentOutput)
-
-	UpdateChannelInput_ChannelARN = UpdateChannelInput.AddMember("ChannelARN", _ChannelARN, &smithytraits.ContextParam{})
-
-	UpdateChannelInput_S3DestinationConfiguration = UpdateChannelInput.AddMember("S3DestinationConfiguration", S3DestinationUpdateInput)
-
-	UpdateChannelInput_S3TablesDestinationConfiguration = UpdateChannelInput.AddMember("S3TablesDestinationConfiguration", S3TablesDestinationUpdateInput)
-
-	UpdateChannelInput_LoggingConfiguration = UpdateChannelInput.AddMember("LoggingConfiguration", ChannelLoggingUpdateInput)
-
-	UpdateChannelOutput_ChannelDescription = UpdateChannelOutput.AddMember("ChannelDescription", ChannelDescription)
-
-	UpdateMaxRecordSizeInput_StreamARN = UpdateMaxRecordSizeInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	UpdateMaxRecordSizeInput_StreamId = UpdateMaxRecordSizeInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	UpdateMaxRecordSizeInput_MaxRecordSizeInKiB = UpdateMaxRecordSizeInput.AddMember("MaxRecordSizeInKiB", _MaxRecordSizeInKiB)
-
-	UpdateShardCountInput_StreamName = UpdateShardCountInput.AddMember("StreamName", _StreamName)
-
-	UpdateShardCountInput_TargetShardCount = UpdateShardCountInput.AddMember("TargetShardCount", _PositiveIntegerObject)
-
-	UpdateShardCountInput_ScalingType = UpdateShardCountInput.AddMember("ScalingType", ScalingType)
-
-	UpdateShardCountInput_StreamARN = UpdateShardCountInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	UpdateShardCountInput_StreamId = UpdateShardCountInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	UpdateShardCountOutput_StreamName = UpdateShardCountOutput.AddMember("StreamName", _StreamName)
-
-	UpdateShardCountOutput_CurrentShardCount = UpdateShardCountOutput.AddMember("CurrentShardCount", _PositiveIntegerObject)
-
-	UpdateShardCountOutput_TargetShardCount = UpdateShardCountOutput.AddMember("TargetShardCount", _PositiveIntegerObject)
-
-	UpdateShardCountOutput_StreamARN = UpdateShardCountOutput.AddMember("StreamARN", _StreamARN)
-
-	UpdateStreamModeInput_StreamARN = UpdateStreamModeInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	UpdateStreamModeInput_StreamId = UpdateStreamModeInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	UpdateStreamModeInput_StreamModeDetails = UpdateStreamModeInput.AddMember("StreamModeDetails", StreamModeDetails)
-
-	UpdateStreamModeInput_WarmThroughputMiBps = UpdateStreamModeInput.AddMember("WarmThroughputMiBps", _NaturalIntegerObject)
-
-	UpdateStreamRecordDistributionStrategyInput_StreamARN = UpdateStreamRecordDistributionStrategyInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	UpdateStreamRecordDistributionStrategyInput_StreamId = UpdateStreamRecordDistributionStrategyInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	UpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy = UpdateStreamRecordDistributionStrategyInput.AddMember("RecordDistributionStrategy", RecordDistributionStrategy)
-
-	UpdateStreamWarmThroughputInput_StreamARN = UpdateStreamWarmThroughputInput.AddMember("StreamARN", _StreamARN, &smithytraits.ContextParam{})
-
-	UpdateStreamWarmThroughputInput_StreamName = UpdateStreamWarmThroughputInput.AddMember("StreamName", _StreamName)
-
-	UpdateStreamWarmThroughputInput_StreamId = UpdateStreamWarmThroughputInput.AddMember("StreamId", _StreamId, &smithytraits.ContextParam{})
-
-	UpdateStreamWarmThroughputInput_WarmThroughputMiBps = UpdateStreamWarmThroughputInput.AddMember("WarmThroughputMiBps", _NaturalIntegerObject)
-
-	UpdateStreamWarmThroughputOutput_StreamARN = UpdateStreamWarmThroughputOutput.AddMember("StreamARN", _StreamARN)
-
-	UpdateStreamWarmThroughputOutput_StreamName = UpdateStreamWarmThroughputOutput.AddMember("StreamName", _StreamName)
-
-	UpdateStreamWarmThroughputOutput_WarmThroughput = UpdateStreamWarmThroughputOutput.AddMember("WarmThroughput", WarmThroughputObject)
-
-}
+var (
+	iAddTagsToStream                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "AddTagsToStream"}
+	iCreateChannel                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CreateChannel"}
+	iCreateStream                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CreateStream"}
+	iDecreaseStreamRetentionPeriod                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DecreaseStreamRetentionPeriod"}
+	iDeleteChannel                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeleteChannel"}
+	iDeleteResourcePolicy                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeleteResourcePolicy"}
+	iDeleteStream                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeleteStream"}
+	iDeregisterStreamConsumer                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeregisterStreamConsumer"}
+	iDescribeAccountSettings                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeAccountSettings"}
+	iDescribeChannel                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeChannel"}
+	iDescribeLimits                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeLimits"}
+	iDescribeStream                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStream"}
+	iDescribeStreamConsumer                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamConsumer"}
+	iDescribeStreamSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamSummary"}
+	iDisableEnhancedMonitoring                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DisableEnhancedMonitoring"}
+	iEnableEnhancedMonitoring                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "EnableEnhancedMonitoring"}
+	iGetRecords                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetRecords"}
+	iGetResourcePolicy                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetResourcePolicy"}
+	iGetShardIterator                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetShardIterator"}
+	iIncreaseStreamRetentionPeriod                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "IncreaseStreamRetentionPeriod"}
+	iListChannels                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListChannels"}
+	iListShards                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListShards"}
+	iListStreamConsumers                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreamConsumers"}
+	iListStreams                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreams"}
+	iListTagsForResource                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListTagsForResource"}
+	iListTagsForStream                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListTagsForStream"}
+	iMergeShards                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MergeShards"}
+	iPutRecord                                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecord"}
+	iPutRecords                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecords"}
+	iPutResourcePolicy                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutResourcePolicy"}
+	iRegisterStreamConsumer                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RegisterStreamConsumer"}
+	iRemoveTagsFromStream                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RemoveTagsFromStream"}
+	iSplitShard                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SplitShard"}
+	iStartStreamEncryption                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StartStreamEncryption"}
+	iStopStreamEncryption                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StopStreamEncryption"}
+	iSubscribeToShard                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SubscribeToShard"}
+	iTagResource                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TagResource"}
+	iUntagResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UntagResource"}
+	iUpdateAccountSettings                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateAccountSettings"}
+	iUpdateChannel                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateChannel"}
+	iUpdateMaxRecordSize                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateMaxRecordSize"}
+	iUpdateShardCount                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateShardCount"}
+	iUpdateStreamMode                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateStreamMode"}
+	iUpdateStreamRecordDistributionStrategy         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateStreamRecordDistributionStrategy"}
+	iUpdateStreamWarmThroughput                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateStreamWarmThroughput"}
+	i_Kinesis_20131202                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Kinesis_20131202"}
+	iAccessDeniedException                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "AccessDeniedException"}
+	i_BooleanObject                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "BooleanObject"}
+	i_BucketARN                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "BucketARN"}
+	i_ChannelARN                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelARN"}
+	i_ChannelCountObject                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelCountObject"}
+	iChannelDescription                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelDescription"}
+	iChannelDestinationType                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelDestinationType"}
+	iChannelEncryptionConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelEncryptionConfiguration"}
+	iChannelEncryptionType                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelEncryptionType"}
+	i_ChannelId                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelId"}
+	iChannelLoggingConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelLoggingConfiguration"}
+	iChannelLoggingUpdateInput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelLoggingUpdateInput"}
+	i_ChannelName                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelName"}
+	iChannelStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStatus"}
+	i_ChannelStatusReason                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStatusReason"}
+	iChannelStreamConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStreamConfiguration"}
+	i_ChannelStreamConfigurationList                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStreamConfigurationList"}
+	iChannelStreamDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStreamDescription"}
+	i_ChannelStreamDescriptionList                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStreamDescriptionList"}
+	iChannelStreamIdentifier                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStreamIdentifier"}
+	i_ChannelStreamIdentifierList                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelStreamIdentifierList"}
+	iChannelSummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelSummary"}
+	i_ChannelSummaryList                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChannelSummaryList"}
+	iChildShard                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChildShard"}
+	i_ChildShardList                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ChildShardList"}
+	i_CloudWatchLogGroupName                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CloudWatchLogGroupName"}
+	iCloudWatchLogs                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CloudWatchLogs"}
+	i_CloudWatchLogStreamName                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CloudWatchLogStreamName"}
+	iCloudWatchLogsUpdateInput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CloudWatchLogsUpdateInput"}
+	iConsumer                                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Consumer"}
+	i_ConsumerARN                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ConsumerARN"}
+	i_ConsumerCountObject                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ConsumerCountObject"}
+	iConsumerDescription                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ConsumerDescription"}
+	i_ConsumerList                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ConsumerList"}
+	i_ConsumerName                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ConsumerName"}
+	iConsumerStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ConsumerStatus"}
+	i_Data                                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Data"}
+	i_DataFreshnessInSeconds                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DataFreshnessInSeconds"}
+	iDeadLetterQueueS3Configuration                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeadLetterQueueS3Configuration"}
+	i_DescribeStreamInputLimit                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamInputLimit"}
+	iDryRunOperationException                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DryRunOperationException"}
+	iEncryptionType                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "EncryptionType"}
+	iEnhancedMetrics                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "EnhancedMetrics"}
+	i_EnhancedMonitoringList                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "EnhancedMonitoringList"}
+	i_ErrorCode                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ErrorCode"}
+	i_ErrorMessage                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ErrorMessage"}
+	i_ExpectedBucketOwner                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ExpectedBucketOwner"}
+	iExpiredIteratorException                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ExpiredIteratorException"}
+	iExpiredNextTokenException                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ExpiredNextTokenException"}
+	i_GetRecordsInputLimit                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetRecordsInputLimit"}
+	i_GSRSchemaARN                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GSRSchemaARN"}
+	i_HashKey                                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "HashKey"}
+	iHashKeyRange                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "HashKeyRange"}
+	iInternalFailureException                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "InternalFailureException"}
+	iInvalidArgumentException                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "InvalidArgumentException"}
+	i_KeyId                                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "KeyId"}
+	iKMSAccessDeniedException                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "KMSAccessDeniedException"}
+	iKMSDisabledException                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "KMSDisabledException"}
+	iKMSInvalidStateException                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "KMSInvalidStateException"}
+	iKMSNotFoundException                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "KMSNotFoundException"}
+	iKMSOptInRequired                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "KMSOptInRequired"}
+	iKMSThrottlingException                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "KMSThrottlingException"}
+	iLimitExceededException                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "LimitExceededException"}
+	i_ListChannelsInputLimit                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListChannelsInputLimit"}
+	i_ListShardsInputLimit                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListShardsInputLimit"}
+	i_ListStreamConsumersInputLimit                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreamConsumersInputLimit"}
+	i_ListStreamsInputLimit                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreamsInputLimit"}
+	i_ListTagsForStreamInputLimit                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListTagsForStreamInputLimit"}
+	i_MaxRecordSizeInKiB                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MaxRecordSizeInKiB"}
+	iMetricsName                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MetricsName"}
+	i_MetricsNameList                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MetricsNameList"}
+	i_MillisBehindLatest                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MillisBehindLatest"}
+	iMinimumThroughputBillingCommitmentInput        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MinimumThroughputBillingCommitmentInput"}
+	iMinimumThroughputBillingCommitmentInputStatus  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MinimumThroughputBillingCommitmentInputStatus"}
+	iMinimumThroughputBillingCommitmentOutput       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MinimumThroughputBillingCommitmentOutput"}
+	iMinimumThroughputBillingCommitmentOutputStatus = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MinimumThroughputBillingCommitmentOutputStatus"}
+	i_NaturalIntegerObject                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "NaturalIntegerObject"}
+	i_NextToken                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "NextToken"}
+	i_OnDemandStreamCountLimitObject                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "OnDemandStreamCountLimitObject"}
+	i_OnDemandStreamCountObject                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "OnDemandStreamCountObject"}
+	iPartitionField                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PartitionField"}
+	i_PartitionFieldList                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PartitionFieldList"}
+	i_PartitionKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PartitionKey"}
+	i_PartitionSourceName                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PartitionSourceName"}
+	iPartitionSpec                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PartitionSpec"}
+	iPartitionTransform                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PartitionTransform"}
+	i_Policy                                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Policy"}
+	i_PositiveIntegerObject                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PositiveIntegerObject"}
+	iProvisionedThroughputExceededException         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ProvisionedThroughputExceededException"}
+	iPutRecordsRequestEntry                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordsRequestEntry"}
+	i_PutRecordsRequestEntryList                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordsRequestEntryList"}
+	iPutRecordsResultEntry                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordsResultEntry"}
+	i_PutRecordsResultEntryList                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordsResultEntryList"}
+	iRecord                                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Record"}
+	iRecordConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RecordConfiguration"}
+	iRecordDistributionStrategy                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RecordDistributionStrategy"}
+	iRecordFormatType                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RecordFormatType"}
+	i_RecordList                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RecordList"}
+	i_ResourceARN                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ResourceARN"}
+	iResourceInUseException                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ResourceInUseException"}
+	iResourceNotFoundException                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ResourceNotFoundException"}
+	i_RetentionPeriodHours                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RetentionPeriodHours"}
+	i_RoleARN                                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RoleARN"}
+	iS3CompressionType                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3CompressionType"}
+	iS3DestinationConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3DestinationConfiguration"}
+	iS3DestinationDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3DestinationDescription"}
+	iS3DestinationUpdateInput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3DestinationUpdateInput"}
+	i_S3ErrorOutputPrefix                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3ErrorOutputPrefix"}
+	i_S3OutputKeyTemplate                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3OutputKeyTemplate"}
+	iS3StorageClass                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3StorageClass"}
+	iS3StorageConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3StorageConfiguration"}
+	iS3TablesCompressionType                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesCompressionType"}
+	iS3TablesConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesConfiguration"}
+	i_S3TablesConfigurationList                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesConfigurationList"}
+	iS3TablesDestinationConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesDestinationConfiguration"}
+	iS3TablesDestinationDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesDestinationDescription"}
+	iS3TablesDestinationUpdateInput                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesDestinationUpdateInput"}
+	i_S3TablesNamespace                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesNamespace"}
+	i_S3TablesTableName                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "S3TablesTableName"}
+	iScalingType                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ScalingType"}
+	i_SequenceNumber                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SequenceNumber"}
+	iSequenceNumberRange                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SequenceNumberRange"}
+	iShard                                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Shard"}
+	i_ShardCountObject                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardCountObject"}
+	iShardFilter                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardFilter"}
+	iShardFilterType                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardFilterType"}
+	i_ShardId                                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardId"}
+	i_ShardIdList                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardIdList"}
+	i_ShardIterator                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardIterator"}
+	iShardIteratorType                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardIteratorType"}
+	i_ShardList                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ShardList"}
+	iStartingPosition                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StartingPosition"}
+	i_StreamARN                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamARN"}
+	iStreamDescription                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamDescription"}
+	iStreamDescriptionSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamDescriptionSummary"}
+	iStreamFilter                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamFilter"}
+	i_StreamFilterList                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamFilterList"}
+	i_StreamId                                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamId"}
+	iStreamMode                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamMode"}
+	iStreamModeDetails                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamModeDetails"}
+	i_StreamName                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamName"}
+	i_StreamNameList                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamNameList"}
+	iStreamStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamStatus"}
+	iStreamSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamSummary"}
+	i_StreamSummaryList                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StreamSummaryList"}
+	iSubscribeToShardEvent                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SubscribeToShardEvent"}
+	iSubscribeToShardEventStream                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SubscribeToShardEventStream"}
+	i_TableBucketARN                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TableBucketARN"}
+	iTag                                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Tag"}
+	i_TagKey                                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TagKey"}
+	i_TagKeyList                                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TagKeyList"}
+	i_TagList                                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TagList"}
+	i_TagMap                                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TagMap"}
+	i_TagValue                                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TagValue"}
+	i_Timestamp                                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "Timestamp"}
+	iValidationException                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ValidationException"}
+	iWarmThroughputObject                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "WarmThroughputObject"}
+	iAddTagsToStreamInput                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "AddTagsToStreamInput"}
+	iCreateChannelInput                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CreateChannelInput"}
+	iCreateChannelOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CreateChannelOutput"}
+	iCreateStreamInput                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "CreateStreamInput"}
+	iDecreaseStreamRetentionPeriodInput             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DecreaseStreamRetentionPeriodInput"}
+	iDeleteChannelInput                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeleteChannelInput"}
+	iDeleteResourcePolicyInput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeleteResourcePolicyInput"}
+	iDeleteStreamInput                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeleteStreamInput"}
+	iDeregisterStreamConsumerInput                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DeregisterStreamConsumerInput"}
+	iDescribeAccountSettingsInput                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeAccountSettingsInput"}
+	iDescribeAccountSettingsOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeAccountSettingsOutput"}
+	iDescribeChannelInput                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeChannelInput"}
+	iDescribeChannelOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeChannelOutput"}
+	iDescribeLimitsInput                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeLimitsInput"}
+	iDescribeLimitsOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeLimitsOutput"}
+	iDescribeStreamConsumerInput                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamConsumerInput"}
+	iDescribeStreamConsumerOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamConsumerOutput"}
+	iDescribeStreamInput                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamInput"}
+	iDescribeStreamOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamOutput"}
+	iDescribeStreamSummaryInput                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamSummaryInput"}
+	iDescribeStreamSummaryOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DescribeStreamSummaryOutput"}
+	iDisableEnhancedMonitoringInput                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "DisableEnhancedMonitoringInput"}
+	iEnhancedMonitoringOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "EnhancedMonitoringOutput"}
+	iEnableEnhancedMonitoringInput                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "EnableEnhancedMonitoringInput"}
+	iGetRecordsInput                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetRecordsInput"}
+	iGetRecordsOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetRecordsOutput"}
+	iGetResourcePolicyInput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetResourcePolicyInput"}
+	iGetResourcePolicyOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetResourcePolicyOutput"}
+	iGetShardIteratorInput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetShardIteratorInput"}
+	iGetShardIteratorOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "GetShardIteratorOutput"}
+	iIncreaseStreamRetentionPeriodInput             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "IncreaseStreamRetentionPeriodInput"}
+	iListChannelsInput                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListChannelsInput"}
+	iListChannelsOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListChannelsOutput"}
+	iListShardsInput                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListShardsInput"}
+	iListShardsOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListShardsOutput"}
+	iListStreamConsumersInput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreamConsumersInput"}
+	iListStreamConsumersOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreamConsumersOutput"}
+	iListStreamsInput                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreamsInput"}
+	iListStreamsOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListStreamsOutput"}
+	iListTagsForResourceInput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListTagsForResourceOutput"}
+	iListTagsForStreamInput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListTagsForStreamInput"}
+	iListTagsForStreamOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "ListTagsForStreamOutput"}
+	iMergeShardsInput                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "MergeShardsInput"}
+	iPutRecordInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordInput"}
+	iPutRecordOutput                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordOutput"}
+	iPutRecordsInput                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordsInput"}
+	iPutRecordsOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutRecordsOutput"}
+	iPutResourcePolicyInput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "PutResourcePolicyInput"}
+	iRegisterStreamConsumerInput                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RegisterStreamConsumerInput"}
+	iRegisterStreamConsumerOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RegisterStreamConsumerOutput"}
+	iRemoveTagsFromStreamInput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "RemoveTagsFromStreamInput"}
+	iSplitShardInput                                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SplitShardInput"}
+	iStartStreamEncryptionInput                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StartStreamEncryptionInput"}
+	iStopStreamEncryptionInput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "StopStreamEncryptionInput"}
+	iSubscribeToShardInput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SubscribeToShardInput"}
+	iSubscribeToShardOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "SubscribeToShardOutput"}
+	iTagResourceInput                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "TagResourceInput"}
+	iUntagResourceInput                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UntagResourceInput"}
+	iUpdateAccountSettingsInput                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateAccountSettingsInput"}
+	iUpdateAccountSettingsOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateAccountSettingsOutput"}
+	iUpdateChannelInput                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateChannelInput"}
+	iUpdateChannelOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateChannelOutput"}
+	iUpdateMaxRecordSizeInput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateMaxRecordSizeInput"}
+	iUpdateShardCountInput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateShardCountInput"}
+	iUpdateShardCountOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateShardCountOutput"}
+	iUpdateStreamModeInput                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateStreamModeInput"}
+	iUpdateStreamRecordDistributionStrategyInput    = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateStreamRecordDistributionStrategyInput"}
+	iUpdateStreamWarmThroughputInput                = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateStreamWarmThroughputInput"}
+	iUpdateStreamWarmThroughputOutput               = smithy.ShapeID{Namespace: "com.amazonaws.kinesis", Name: "UpdateStreamWarmThroughputOutput"}
+	pUnit                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://kinesis.amazonaws.com/doc/2013-12-02"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.ContextParam{}}, DirectMask: 0x1000}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.ContextParam{}}, DirectMask: 0x1000}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.ContextParam{}}, DirectMask: 0x1000}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.ContextParam{}}, DirectMask: 0x1000}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.ContextParam{}}, DirectMask: 0x1000}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mChannelDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelDescription_ChannelName, &sChannelDescription_ChannelARN, &sChannelDescription_ChannelId, &sChannelDescription_ChannelStatus, &sChannelDescription_ChannelStatusReason, &sChannelDescription_ChannelCreationTimestamp, &sChannelDescription_ServiceExecutionRoleARN, &sChannelDescription_StreamConfigurationList, &sChannelDescription_S3DestinationConfiguration, &sChannelDescription_S3TablesDestinationConfiguration, &sChannelDescription_EncryptionConfiguration, &sChannelDescription_LoggingConfiguration}, Seed: 15, Slots: []uint16{
+	7, 0, 0, 0, 4, 9, 3, 0, 0, 0, 0, 6, 0, 0, 2, 12, 1, 0, 8, 0, 0, 10, 0, 0,
+	0, 0, 0, 11, 0, 0, 0, 5,
+}}
+var mChannelDestinationType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelDestinationType_S3, &sChannelDestinationType_S3_TABLES}}
+var mChannelEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelEncryptionConfiguration_EncryptionType, &sChannelEncryptionConfiguration_KeyId}}
+var mChannelEncryptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelEncryptionType_KMS}}
+var mChannelLoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelLoggingConfiguration_CloudWatchLogs}}
+var mChannelLoggingUpdateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelLoggingUpdateInput_CloudWatchLogs}}
+var mChannelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStatus_CREATING, &sChannelStatus_ACTIVE, &sChannelStatus_UPDATING, &sChannelStatus_DELETING, &sChannelStatus_FAILED}}
+var mChannelStreamConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStreamConfiguration_StreamARN, &sChannelStreamConfiguration_RecordConfiguration}}
+var m_ChannelStreamConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelStreamConfigurationList_member}}
+var mChannelStreamDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStreamDescription_StreamARN, &sChannelStreamDescription_StreamCreationTimestamp, &sChannelStreamDescription_RecordConfiguration}}
+var m_ChannelStreamDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelStreamDescriptionList_member}}
+var mChannelStreamIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelStreamIdentifier_StreamARN, &sChannelStreamIdentifier_StreamCreationTimestamp}}
+var m_ChannelStreamIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelStreamIdentifierList_member}}
+var mChannelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelSummary_ChannelName, &sChannelSummary_ChannelARN, &sChannelSummary_ChannelId, &sChannelSummary_ChannelStatus, &sChannelSummary_ChannelStatusReason, &sChannelSummary_ChannelCreationTimestamp, &sChannelSummary_ChannelDestinationType, &sChannelSummary_Streams}}
+var m_ChannelSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelSummaryList_member}}
+var mChildShard = smithy.SchemaMembers{List: []*smithy.Schema{&sChildShard_ShardId, &sChildShard_ParentShards, &sChildShard_HashKeyRange}}
+var m_ChildShardList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChildShardList_member}}
+var mCloudWatchLogs = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogs_Enabled, &sCloudWatchLogs_LogGroupName, &sCloudWatchLogs_LogStreamName}}
+var mCloudWatchLogsUpdateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudWatchLogsUpdateInput_Enabled, &sCloudWatchLogsUpdateInput_LogGroupName, &sCloudWatchLogsUpdateInput_LogStreamName}}
+var mConsumer = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumer_ConsumerName, &sConsumer_ConsumerARN, &sConsumer_ConsumerStatus, &sConsumer_ConsumerCreationTimestamp}}
+var mConsumerDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumerDescription_ConsumerName, &sConsumerDescription_ConsumerARN, &sConsumerDescription_ConsumerStatus, &sConsumerDescription_ConsumerCreationTimestamp, &sConsumerDescription_StreamARN}}
+var m_ConsumerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConsumerList_member}}
+var mConsumerStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumerStatus_CREATING, &sConsumerStatus_DELETING, &sConsumerStatus_ACTIVE}}
+var mDeadLetterQueueS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeadLetterQueueS3Configuration_BucketARN, &sDeadLetterQueueS3Configuration_ExpectedBucketOwner, &sDeadLetterQueueS3Configuration_ErrorOutputPrefix}}
+var mDryRunOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sDryRunOperationException_message}}
+var mEncryptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionType_NONE, &sEncryptionType_KMS}}
+var mEnhancedMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sEnhancedMetrics_ShardLevelMetrics}}
+var m_EnhancedMonitoringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnhancedMonitoringList_member}}
+var mExpiredIteratorException = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiredIteratorException_message}}
+var mExpiredNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiredNextTokenException_message}}
+var mHashKeyRange = smithy.SchemaMembers{List: []*smithy.Schema{&sHashKeyRange_StartingHashKey, &sHashKeyRange_EndingHashKey}}
+var mInternalFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalFailureException_message}}
+var mInvalidArgumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArgumentException_message}}
+var mKMSAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSAccessDeniedException_message}}
+var mKMSDisabledException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSDisabledException_message}}
+var mKMSInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSInvalidStateException_message}}
+var mKMSNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSNotFoundException_message}}
+var mKMSOptInRequired = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSOptInRequired_message}}
+var mKMSThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sKMSThrottlingException_message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mMetricsName = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricsName_INCOMING_BYTES, &sMetricsName_INCOMING_RECORDS, &sMetricsName_OUTGOING_BYTES, &sMetricsName_OUTGOING_RECORDS, &sMetricsName_WRITE_PROVISIONED_THROUGHPUT_EXCEEDED, &sMetricsName_READ_PROVISIONED_THROUGHPUT_EXCEEDED, &sMetricsName_ITERATOR_AGE_MILLISECONDS, &sMetricsName_ALL}}
+var m_MetricsNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricsNameList_member}}
+var mMinimumThroughputBillingCommitmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sMinimumThroughputBillingCommitmentInput_Status}}
+var mMinimumThroughputBillingCommitmentInputStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMinimumThroughputBillingCommitmentInputStatus_ENABLED, &sMinimumThroughputBillingCommitmentInputStatus_DISABLED}}
+var mMinimumThroughputBillingCommitmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sMinimumThroughputBillingCommitmentOutput_Status, &sMinimumThroughputBillingCommitmentOutput_StartedAt, &sMinimumThroughputBillingCommitmentOutput_EndedAt, &sMinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt}}
+var mMinimumThroughputBillingCommitmentOutputStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMinimumThroughputBillingCommitmentOutputStatus_ENABLED, &sMinimumThroughputBillingCommitmentOutputStatus_DISABLED, &sMinimumThroughputBillingCommitmentOutputStatus_ENABLED_UNTIL_EARLIEST_ALLOWED_END}}
+var mPartitionField = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionField_Transform, &sPartitionField_SourceName}}
+var m_PartitionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartitionFieldList_member}}
+var mPartitionSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionSpec_PartitionFields}}
+var mPartitionTransform = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionTransform_TIME_HOUR}}
+var mProvisionedThroughputExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedThroughputExceededException_message}}
+var mPutRecordsRequestEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordsRequestEntry_Data, &sPutRecordsRequestEntry_ExplicitHashKey, &sPutRecordsRequestEntry_PartitionKey}}
+var m_PutRecordsRequestEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutRecordsRequestEntryList_member}}
+var mPutRecordsResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordsResultEntry_SequenceNumber, &sPutRecordsResultEntry_ShardId, &sPutRecordsResultEntry_ErrorCode, &sPutRecordsResultEntry_ErrorMessage}}
+var m_PutRecordsResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutRecordsResultEntryList_member}}
+var mRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRecord_SequenceNumber, &sRecord_ApproximateArrivalTimestamp, &sRecord_Data, &sRecord_PartitionKey, &sRecord_EncryptionType}}
+var mRecordConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordConfiguration_RecordFormatType, &sRecordConfiguration_GSRSchemaARN}}
+var mRecordDistributionStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordDistributionStrategy_AUTO, &sRecordDistributionStrategy_USER_PARTITION_KEY}}
+var mRecordFormatType = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordFormatType_GSR_JSON, &sRecordFormatType_JSON, &sRecordFormatType_STRING, &sRecordFormatType_BYTE_ARRAY}}
+var m_RecordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecordList_member}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3CompressionType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3CompressionType_NONE, &sS3CompressionType_GZIP, &sS3CompressionType_ZSTD}}
+var mS3DestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationConfiguration_DataFreshnessInSeconds, &sS3DestinationConfiguration_DeadLetterQueueS3Configuration, &sS3DestinationConfiguration_StorageConfiguration}}
+var mS3DestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationDescription_DataFreshnessInSeconds, &sS3DestinationDescription_DeadLetterQueueS3Configuration, &sS3DestinationDescription_StorageConfiguration}}
+var mS3DestinationUpdateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationUpdateInput_DataFreshnessInSeconds}}
+var mS3StorageClass = smithy.SchemaMembers{List: []*smithy.Schema{&sS3StorageClass_STANDARD, &sS3StorageClass_INTELLIGENT_TIERING, &sS3StorageClass_GLACIER_IR}}
+var mS3StorageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3StorageConfiguration_BucketARN, &sS3StorageConfiguration_ExpectedBucketOwner, &sS3StorageConfiguration_OutputKeyTemplate, &sS3StorageConfiguration_StorageClass, &sS3StorageConfiguration_CompressionType}}
+var mS3TablesCompressionType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3TablesCompressionType_NONE, &sS3TablesCompressionType_ZSTD, &sS3TablesCompressionType_SNAPPY}}
+var mS3TablesConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3TablesConfiguration_TableBucketARN, &sS3TablesConfiguration_Namespace, &sS3TablesConfiguration_TableName, &sS3TablesConfiguration_CompressionType, &sS3TablesConfiguration_PartitionSpec}}
+var m_S3TablesConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3TablesConfigurationList_member}}
+var mS3TablesDestinationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3TablesDestinationConfiguration_DataFreshnessInSeconds, &sS3TablesDestinationConfiguration_DeadLetterQueueS3Configuration, &sS3TablesDestinationConfiguration_S3TablesConfigurationList}}
+var mS3TablesDestinationDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sS3TablesDestinationDescription_DataFreshnessInSeconds, &sS3TablesDestinationDescription_DeadLetterQueueS3Configuration, &sS3TablesDestinationDescription_S3TablesConfigurationList}}
+var mS3TablesDestinationUpdateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sS3TablesDestinationUpdateInput_DataFreshnessInSeconds}}
+var mScalingType = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingType_UNIFORM_SCALING}}
+var mSequenceNumberRange = smithy.SchemaMembers{List: []*smithy.Schema{&sSequenceNumberRange_StartingSequenceNumber, &sSequenceNumberRange_EndingSequenceNumber}}
+var mShard = smithy.SchemaMembers{List: []*smithy.Schema{&sShard_ShardId, &sShard_ParentShardId, &sShard_AdjacentParentShardId, &sShard_HashKeyRange, &sShard_SequenceNumberRange}}
+var mShardFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sShardFilter_Type, &sShardFilter_ShardId, &sShardFilter_Timestamp}}
+var mShardFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sShardFilterType_AFTER_SHARD_ID, &sShardFilterType_AT_TRIM_HORIZON, &sShardFilterType_FROM_TRIM_HORIZON, &sShardFilterType_AT_LATEST, &sShardFilterType_AT_TIMESTAMP, &sShardFilterType_FROM_TIMESTAMP}}
+var m_ShardIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShardIdList_member}}
+var mShardIteratorType = smithy.SchemaMembers{List: []*smithy.Schema{&sShardIteratorType_AT_SEQUENCE_NUMBER, &sShardIteratorType_AFTER_SEQUENCE_NUMBER, &sShardIteratorType_TRIM_HORIZON, &sShardIteratorType_LATEST, &sShardIteratorType_AT_TIMESTAMP}}
+var m_ShardList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShardList_member}}
+var mStartingPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sStartingPosition_Type, &sStartingPosition_SequenceNumber, &sStartingPosition_Timestamp}}
+var mStreamDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamDescription_StreamName, &sStreamDescription_StreamARN, &sStreamDescription_StreamStatus, &sStreamDescription_StreamModeDetails, &sStreamDescription_Shards, &sStreamDescription_HasMoreShards, &sStreamDescription_RetentionPeriodHours, &sStreamDescription_StreamCreationTimestamp, &sStreamDescription_EnhancedMonitoring, &sStreamDescription_EncryptionType, &sStreamDescription_KeyId}, Seed: 6, Slots: []uint16{
+	0, 10, 0, 1, 0, 2, 11, 0, 0, 6, 0, 0, 0, 4, 0, 5, 0, 9, 0, 0, 7, 0, 0, 0,
+	0, 8, 0, 3, 0, 0, 0, 0,
+}}
+var mStreamDescriptionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamDescriptionSummary_StreamName, &sStreamDescriptionSummary_StreamARN, &sStreamDescriptionSummary_StreamId, &sStreamDescriptionSummary_StreamStatus, &sStreamDescriptionSummary_StreamModeDetails, &sStreamDescriptionSummary_RetentionPeriodHours, &sStreamDescriptionSummary_StreamCreationTimestamp, &sStreamDescriptionSummary_EnhancedMonitoring, &sStreamDescriptionSummary_EncryptionType, &sStreamDescriptionSummary_KeyId, &sStreamDescriptionSummary_OpenShardCount, &sStreamDescriptionSummary_ConsumerCount, &sStreamDescriptionSummary_WarmThroughput, &sStreamDescriptionSummary_MaxRecordSizeInKiB, &sStreamDescriptionSummary_ChannelCount, &sStreamDescriptionSummary_RecordDistributionStrategy}, Seed: 11, Slots: []uint16{
+	16, 5, 0, 4, 11, 0, 0, 0, 8, 12, 3, 7, 0, 2, 15, 6, 10, 13, 0, 0, 0, 0, 0, 9,
+	0, 0, 0, 1, 0, 0, 14, 0,
+}}
+var mStreamFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamFilter_StreamARN, &sStreamFilter_StreamCreationTimestamp}}
+var m_StreamFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamFilterList_member}}
+var mStreamMode = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamMode_PROVISIONED, &sStreamMode_ON_DEMAND}}
+var mStreamModeDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamModeDetails_StreamMode}}
+var m_StreamNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamNameList_member}}
+var mStreamStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamStatus_CREATING, &sStreamStatus_DELETING, &sStreamStatus_ACTIVE, &sStreamStatus_UPDATING}}
+var mStreamSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamSummary_StreamName, &sStreamSummary_StreamARN, &sStreamSummary_StreamStatus, &sStreamSummary_StreamModeDetails, &sStreamSummary_StreamCreationTimestamp}}
+var m_StreamSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamSummaryList_member}}
+var mSubscribeToShardEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeToShardEvent_Records, &sSubscribeToShardEvent_ContinuationSequenceNumber, &sSubscribeToShardEvent_MillisBehindLatest, &sSubscribeToShardEvent_ChildShards}}
+var mSubscribeToShardEventStream = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeToShardEventStream_SubscribeToShardEvent, &sSubscribeToShardEventStream_ResourceNotFoundException, &sSubscribeToShardEventStream_ResourceInUseException, &sSubscribeToShardEventStream_KMSDisabledException, &sSubscribeToShardEventStream_KMSInvalidStateException, &sSubscribeToShardEventStream_KMSAccessDeniedException, &sSubscribeToShardEventStream_KMSNotFoundException, &sSubscribeToShardEventStream_KMSOptInRequired, &sSubscribeToShardEventStream_KMSThrottlingException, &sSubscribeToShardEventStream_InternalFailureException}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 10, 4, 0, 7, 0, 6, 2, 9, 0, 0, 5, 0, 1, 0, 0, 3, 0, 0,
+	0, 8, 0, 0, 0, 0, 0, 0,
+}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWarmThroughputObject = smithy.SchemaMembers{List: []*smithy.Schema{&sWarmThroughputObject_TargetMiBps, &sWarmThroughputObject_CurrentMiBps}}
+var mAddTagsToStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsToStreamInput_StreamName, &sAddTagsToStreamInput_Tags, &sAddTagsToStreamInput_StreamARN, &sAddTagsToStreamInput_StreamId}}
+var mCreateChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelInput_ChannelName, &sCreateChannelInput_ServiceExecutionRoleARN, &sCreateChannelInput_StreamConfigurationList, &sCreateChannelInput_S3DestinationConfiguration, &sCreateChannelInput_S3TablesDestinationConfiguration, &sCreateChannelInput_EncryptionConfiguration, &sCreateChannelInput_Tags, &sCreateChannelInput_LoggingConfiguration}}
+var mCreateChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelOutput_ChannelDescription}}
+var mCreateStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStreamInput_StreamName, &sCreateStreamInput_ShardCount, &sCreateStreamInput_StreamModeDetails, &sCreateStreamInput_Tags, &sCreateStreamInput_WarmThroughputMiBps, &sCreateStreamInput_MaxRecordSizeInKiB, &sCreateStreamInput_RecordDistributionStrategy}}
+var mDecreaseStreamRetentionPeriodInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDecreaseStreamRetentionPeriodInput_StreamName, &sDecreaseStreamRetentionPeriodInput_RetentionPeriodHours, &sDecreaseStreamRetentionPeriodInput_StreamARN, &sDecreaseStreamRetentionPeriodInput_StreamId}}
+var mDeleteChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelInput_ChannelARN}}
+var mDeleteResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyInput_ResourceARN, &sDeleteResourcePolicyInput_StreamId}}
+var mDeleteStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStreamInput_StreamName, &sDeleteStreamInput_EnforceConsumerDeletion, &sDeleteStreamInput_StreamARN, &sDeleteStreamInput_StreamId}}
+var mDeregisterStreamConsumerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterStreamConsumerInput_StreamARN, &sDeregisterStreamConsumerInput_ConsumerName, &sDeregisterStreamConsumerInput_ConsumerARN, &sDeregisterStreamConsumerInput_StreamId}}
+var mDescribeAccountSettingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAccountSettingsOutput_MinimumThroughputBillingCommitment}}
+var mDescribeChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelInput_ChannelARN}}
+var mDescribeChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChannelOutput_ChannelDescription}}
+var mDescribeLimitsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLimitsOutput_ShardLimit, &sDescribeLimitsOutput_OpenShardCount, &sDescribeLimitsOutput_OnDemandStreamCount, &sDescribeLimitsOutput_OnDemandStreamCountLimit, &sDescribeLimitsOutput_ChannelCount, &sDescribeLimitsOutput_ChannelCountLimit}}
+var mDescribeStreamConsumerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamConsumerInput_StreamARN, &sDescribeStreamConsumerInput_ConsumerName, &sDescribeStreamConsumerInput_ConsumerARN, &sDescribeStreamConsumerInput_StreamId}}
+var mDescribeStreamConsumerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamConsumerOutput_ConsumerDescription}}
+var mDescribeStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamInput_StreamName, &sDescribeStreamInput_Limit, &sDescribeStreamInput_ExclusiveStartShardId, &sDescribeStreamInput_StreamARN, &sDescribeStreamInput_StreamId}}
+var mDescribeStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamOutput_StreamDescription}}
+var mDescribeStreamSummaryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamSummaryInput_StreamName, &sDescribeStreamSummaryInput_StreamARN, &sDescribeStreamSummaryInput_StreamId}}
+var mDescribeStreamSummaryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamSummaryOutput_StreamDescriptionSummary}}
+var mDisableEnhancedMonitoringInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableEnhancedMonitoringInput_StreamName, &sDisableEnhancedMonitoringInput_ShardLevelMetrics, &sDisableEnhancedMonitoringInput_StreamARN, &sDisableEnhancedMonitoringInput_StreamId}}
+var mEnhancedMonitoringOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnhancedMonitoringOutput_StreamName, &sEnhancedMonitoringOutput_CurrentShardLevelMetrics, &sEnhancedMonitoringOutput_DesiredShardLevelMetrics, &sEnhancedMonitoringOutput_StreamARN}}
+var mEnableEnhancedMonitoringInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableEnhancedMonitoringInput_StreamName, &sEnableEnhancedMonitoringInput_ShardLevelMetrics, &sEnableEnhancedMonitoringInput_StreamARN, &sEnableEnhancedMonitoringInput_StreamId}}
+var mGetRecordsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordsInput_ShardIterator, &sGetRecordsInput_Limit, &sGetRecordsInput_StreamARN, &sGetRecordsInput_StreamId, &sGetRecordsInput_DryRun}}
+var mGetRecordsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordsOutput_Records, &sGetRecordsOutput_NextShardIterator, &sGetRecordsOutput_MillisBehindLatest, &sGetRecordsOutput_ChildShards}}
+var mGetResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyInput_ResourceARN, &sGetResourcePolicyInput_StreamId}}
+var mGetResourcePolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyOutput_Policy}}
+var mGetShardIteratorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetShardIteratorInput_StreamName, &sGetShardIteratorInput_ShardId, &sGetShardIteratorInput_ShardIteratorType, &sGetShardIteratorInput_StartingSequenceNumber, &sGetShardIteratorInput_Timestamp, &sGetShardIteratorInput_StreamARN, &sGetShardIteratorInput_StreamId, &sGetShardIteratorInput_DryRun}}
+var mGetShardIteratorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetShardIteratorOutput_ShardIterator}}
+var mIncreaseStreamRetentionPeriodInput = smithy.SchemaMembers{List: []*smithy.Schema{&sIncreaseStreamRetentionPeriodInput_StreamName, &sIncreaseStreamRetentionPeriodInput_RetentionPeriodHours, &sIncreaseStreamRetentionPeriodInput_StreamARN, &sIncreaseStreamRetentionPeriodInput_StreamId}}
+var mListChannelsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsInput_StreamFilter, &sListChannelsInput_MaxResults, &sListChannelsInput_NextToken}}
+var mListChannelsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsOutput_ChannelSummaries, &sListChannelsOutput_NextToken}}
+var mListShardsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListShardsInput_StreamName, &sListShardsInput_NextToken, &sListShardsInput_ExclusiveStartShardId, &sListShardsInput_MaxResults, &sListShardsInput_StreamCreationTimestamp, &sListShardsInput_ShardFilter, &sListShardsInput_StreamARN, &sListShardsInput_StreamId}}
+var mListShardsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListShardsOutput_Shards, &sListShardsOutput_NextToken}}
+var mListStreamConsumersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamConsumersInput_StreamARN, &sListStreamConsumersInput_NextToken, &sListStreamConsumersInput_MaxResults, &sListStreamConsumersInput_StreamCreationTimestamp, &sListStreamConsumersInput_StreamId}}
+var mListStreamConsumersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamConsumersOutput_Consumers, &sListStreamConsumersOutput_NextToken}}
+var mListStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsInput_Limit, &sListStreamsInput_ExclusiveStartStreamName, &sListStreamsInput_NextToken}}
+var mListStreamsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsOutput_StreamNames, &sListStreamsOutput_HasMoreStreams, &sListStreamsOutput_NextToken, &sListStreamsOutput_StreamSummaries}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceARN, &sListTagsForResourceInput_StreamId}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mListTagsForStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForStreamInput_StreamName, &sListTagsForStreamInput_ExclusiveStartTagKey, &sListTagsForStreamInput_Limit, &sListTagsForStreamInput_StreamARN, &sListTagsForStreamInput_StreamId}}
+var mListTagsForStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForStreamOutput_Tags, &sListTagsForStreamOutput_HasMoreTags}}
+var mMergeShardsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sMergeShardsInput_StreamName, &sMergeShardsInput_ShardToMerge, &sMergeShardsInput_AdjacentShardToMerge, &sMergeShardsInput_StreamARN, &sMergeShardsInput_StreamId}}
+var mPutRecordInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordInput_StreamName, &sPutRecordInput_Data, &sPutRecordInput_PartitionKey, &sPutRecordInput_ExplicitHashKey, &sPutRecordInput_SequenceNumberForOrdering, &sPutRecordInput_StreamARN, &sPutRecordInput_StreamId, &sPutRecordInput_DryRun}}
+var mPutRecordOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordOutput_ShardId, &sPutRecordOutput_SequenceNumber, &sPutRecordOutput_EncryptionType}}
+var mPutRecordsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordsInput_Records, &sPutRecordsInput_StreamName, &sPutRecordsInput_StreamARN, &sPutRecordsInput_StreamId, &sPutRecordsInput_DryRun}}
+var mPutRecordsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRecordsOutput_FailedRecordCount, &sPutRecordsOutput_Records, &sPutRecordsOutput_EncryptionType}}
+var mPutResourcePolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyInput_ResourceARN, &sPutResourcePolicyInput_StreamId, &sPutResourcePolicyInput_Policy}}
+var mRegisterStreamConsumerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterStreamConsumerInput_StreamARN, &sRegisterStreamConsumerInput_ConsumerName, &sRegisterStreamConsumerInput_StreamId, &sRegisterStreamConsumerInput_Tags}}
+var mRegisterStreamConsumerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterStreamConsumerOutput_Consumer}}
+var mRemoveTagsFromStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveTagsFromStreamInput_StreamName, &sRemoveTagsFromStreamInput_TagKeys, &sRemoveTagsFromStreamInput_StreamARN, &sRemoveTagsFromStreamInput_StreamId}}
+var mSplitShardInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSplitShardInput_StreamName, &sSplitShardInput_ShardToSplit, &sSplitShardInput_NewStartingHashKey, &sSplitShardInput_StreamARN, &sSplitShardInput_StreamId}}
+var mStartStreamEncryptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartStreamEncryptionInput_StreamName, &sStartStreamEncryptionInput_EncryptionType, &sStartStreamEncryptionInput_KeyId, &sStartStreamEncryptionInput_StreamARN, &sStartStreamEncryptionInput_StreamId}}
+var mStopStreamEncryptionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopStreamEncryptionInput_StreamName, &sStopStreamEncryptionInput_EncryptionType, &sStopStreamEncryptionInput_KeyId, &sStopStreamEncryptionInput_StreamARN, &sStopStreamEncryptionInput_StreamId}}
+var mSubscribeToShardInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeToShardInput_ConsumerARN, &sSubscribeToShardInput_StreamId, &sSubscribeToShardInput_ShardId, &sSubscribeToShardInput_StartingPosition, &sSubscribeToShardInput_DryRun}}
+var mSubscribeToShardOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeToShardOutput_EventStream}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_Tags, &sTagResourceInput_ResourceARN, &sTagResourceInput_StreamId}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_TagKeys, &sUntagResourceInput_ResourceARN, &sUntagResourceInput_StreamId}}
+var mUpdateAccountSettingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsInput_MinimumThroughputBillingCommitment}}
+var mUpdateAccountSettingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsOutput_MinimumThroughputBillingCommitment}}
+var mUpdateChannelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelInput_ChannelARN, &sUpdateChannelInput_S3DestinationConfiguration, &sUpdateChannelInput_S3TablesDestinationConfiguration, &sUpdateChannelInput_LoggingConfiguration}}
+var mUpdateChannelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelOutput_ChannelDescription}}
+var mUpdateMaxRecordSizeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMaxRecordSizeInput_StreamARN, &sUpdateMaxRecordSizeInput_StreamId, &sUpdateMaxRecordSizeInput_MaxRecordSizeInKiB}}
+var mUpdateShardCountInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateShardCountInput_StreamName, &sUpdateShardCountInput_TargetShardCount, &sUpdateShardCountInput_ScalingType, &sUpdateShardCountInput_StreamARN, &sUpdateShardCountInput_StreamId}}
+var mUpdateShardCountOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateShardCountOutput_StreamName, &sUpdateShardCountOutput_CurrentShardCount, &sUpdateShardCountOutput_TargetShardCount, &sUpdateShardCountOutput_StreamARN}}
+var mUpdateStreamModeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStreamModeInput_StreamARN, &sUpdateStreamModeInput_StreamId, &sUpdateStreamModeInput_StreamModeDetails, &sUpdateStreamModeInput_WarmThroughputMiBps}}
+var mUpdateStreamRecordDistributionStrategyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStreamRecordDistributionStrategyInput_StreamARN, &sUpdateStreamRecordDistributionStrategyInput_StreamId, &sUpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy}}
+var mUpdateStreamWarmThroughputInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStreamWarmThroughputInput_StreamARN, &sUpdateStreamWarmThroughputInput_StreamName, &sUpdateStreamWarmThroughputInput_StreamId, &sUpdateStreamWarmThroughputInput_WarmThroughputMiBps}}
+var mUpdateStreamWarmThroughputOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStreamWarmThroughputOutput_StreamARN, &sUpdateStreamWarmThroughputOutput_StreamName, &sUpdateStreamWarmThroughputOutput_WarmThroughput}}
+
+var sAddTagsToStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToStream, Type: smithy.ShapeTypeOperation})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Type: smithy.ShapeTypeOperation})
+var sCreateStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStream, Type: smithy.ShapeTypeOperation})
+var sDecreaseStreamRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecreaseStreamRetentionPeriod, Type: smithy.ShapeTypeOperation})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStream, Type: smithy.ShapeTypeOperation})
+var sDeregisterStreamConsumer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterStreamConsumer, Type: smithy.ShapeTypeOperation})
+var sDescribeAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountSettings, Type: smithy.ShapeTypeOperation})
+var sDescribeChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannel, Type: smithy.ShapeTypeOperation})
+var sDescribeLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLimits, Type: smithy.ShapeTypeOperation})
+var sDescribeStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStream, Type: smithy.ShapeTypeOperation})
+var sDescribeStreamConsumer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamConsumer, Type: smithy.ShapeTypeOperation})
+var sDescribeStreamSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamSummary, Type: smithy.ShapeTypeOperation})
+var sDisableEnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableEnhancedMonitoring, Type: smithy.ShapeTypeOperation})
+var sEnableEnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableEnhancedMonitoring, Type: smithy.ShapeTypeOperation})
+var sGetRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecords, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sGetShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIterator, Type: smithy.ShapeTypeOperation})
+var sIncreaseStreamRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncreaseStreamRetentionPeriod, Type: smithy.ShapeTypeOperation})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Type: smithy.ShapeTypeOperation})
+var sListShards = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListShards, Type: smithy.ShapeTypeOperation})
+var sListStreamConsumers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamConsumers, Type: smithy.ShapeTypeOperation})
+var sListStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreams, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListTagsForStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForStream, Type: smithy.ShapeTypeOperation})
+var sMergeShards = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeShards, Type: smithy.ShapeTypeOperation})
+var sPutRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecord, Type: smithy.ShapeTypeOperation})
+var sPutRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecords, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sRegisterStreamConsumer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterStreamConsumer, Type: smithy.ShapeTypeOperation})
+var sRemoveTagsFromStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromStream, Type: smithy.ShapeTypeOperation})
+var sSplitShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplitShard, Type: smithy.ShapeTypeOperation})
+var sStartStreamEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamEncryption, Type: smithy.ShapeTypeOperation})
+var sStopStreamEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopStreamEncryption, Type: smithy.ShapeTypeOperation})
+var sSubscribeToShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToShard, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettings, Type: smithy.ShapeTypeOperation})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Type: smithy.ShapeTypeOperation})
+var sUpdateMaxRecordSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMaxRecordSize, Type: smithy.ShapeTypeOperation})
+var sUpdateShardCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateShardCount, Type: smithy.ShapeTypeOperation})
+var sUpdateStreamMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamMode, Type: smithy.ShapeTypeOperation})
+var sUpdateStreamRecordDistributionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamRecordDistributionStrategy, Type: smithy.ShapeTypeOperation})
+var sUpdateStreamWarmThroughput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamWarmThroughput, Type: smithy.ShapeTypeOperation})
+var s_Kinesis_20131202 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Kinesis_20131202, Traits: &t0, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_BooleanObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var s_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BucketARN, Type: smithy.ShapeTypeString})
+var s_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelARN, Type: smithy.ShapeTypeString})
+var s_ChannelCountObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelCountObject, Type: smithy.ShapeTypeInteger})
+var sChannelDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelDescription, Members: &mChannelDescription, Type: smithy.ShapeTypeStructure})
+var sChannelDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelDestinationType, Members: &mChannelDestinationType, Type: smithy.ShapeTypeEnum})
+var sChannelEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelEncryptionConfiguration, Members: &mChannelEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelEncryptionType, Members: &mChannelEncryptionType, Type: smithy.ShapeTypeEnum})
+var s_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelId, Type: smithy.ShapeTypeString})
+var sChannelLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelLoggingConfiguration, Members: &mChannelLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelLoggingUpdateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelLoggingUpdateInput, Members: &mChannelLoggingUpdateInput, Type: smithy.ShapeTypeStructure})
+var s_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum})
+var s_ChannelStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelStatusReason, Type: smithy.ShapeTypeString})
+var sChannelStreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStreamConfiguration, Members: &mChannelStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ChannelStreamConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelStreamConfigurationList, Members: &m_ChannelStreamConfigurationList, Type: smithy.ShapeTypeList})
+var sChannelStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStreamDescription, Members: &mChannelStreamDescription, Type: smithy.ShapeTypeStructure})
+var s_ChannelStreamDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelStreamDescriptionList, Members: &m_ChannelStreamDescriptionList, Type: smithy.ShapeTypeList})
+var sChannelStreamIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelStreamIdentifier, Members: &mChannelStreamIdentifier, Type: smithy.ShapeTypeStructure})
+var s_ChannelStreamIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelStreamIdentifierList, Members: &m_ChannelStreamIdentifierList, Type: smithy.ShapeTypeList})
+var sChannelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure})
+var s_ChannelSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelSummaryList, Members: &m_ChannelSummaryList, Type: smithy.ShapeTypeList})
+var sChildShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChildShard, Members: &mChildShard, Type: smithy.ShapeTypeStructure})
+var s_ChildShardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChildShardList, Members: &m_ChildShardList, Type: smithy.ShapeTypeList})
+var s_CloudWatchLogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString})
+var sCloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogs, Members: &mCloudWatchLogs, Type: smithy.ShapeTypeStructure})
+var s_CloudWatchLogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogStreamName, Type: smithy.ShapeTypeString})
+var sCloudWatchLogsUpdateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudWatchLogsUpdateInput, Members: &mCloudWatchLogsUpdateInput, Type: smithy.ShapeTypeStructure})
+var sConsumer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumer, Members: &mConsumer, Type: smithy.ShapeTypeStructure})
+var s_ConsumerARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsumerARN, Type: smithy.ShapeTypeString})
+var s_ConsumerCountObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsumerCountObject, Type: smithy.ShapeTypeInteger})
+var sConsumerDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumerDescription, Members: &mConsumerDescription, Type: smithy.ShapeTypeStructure})
+var s_ConsumerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsumerList, Members: &m_ConsumerList, Type: smithy.ShapeTypeList})
+var s_ConsumerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsumerName, Type: smithy.ShapeTypeString})
+var sConsumerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumerStatus, Members: &mConsumerStatus, Type: smithy.ShapeTypeEnum})
+var s_Data = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Data, Type: smithy.ShapeTypeBlob})
+var s_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataFreshnessInSeconds, Type: smithy.ShapeTypeInteger})
+var sDeadLetterQueueS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeadLetterQueueS3Configuration, Members: &mDeadLetterQueueS3Configuration, Type: smithy.ShapeTypeStructure})
+var s_DescribeStreamInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeStreamInputLimit, Type: smithy.ShapeTypeInteger})
+var sDryRunOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDryRunOperationException, Members: &mDryRunOperationException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sEncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sEnhancedMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnhancedMetrics, Members: &mEnhancedMetrics, Type: smithy.ShapeTypeStructure})
+var s_EnhancedMonitoringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnhancedMonitoringList, Members: &m_EnhancedMonitoringList, Type: smithy.ShapeTypeList})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpectedBucketOwner, Type: smithy.ShapeTypeString})
+var sExpiredIteratorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredIteratorException, Members: &mExpiredIteratorException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sExpiredNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredNextTokenException, Members: &mExpiredNextTokenException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_GetRecordsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetRecordsInputLimit, Type: smithy.ShapeTypeInteger})
+var s_GSRSchemaARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GSRSchemaARN, Type: smithy.ShapeTypeString})
+var s_HashKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HashKey, Type: smithy.ShapeTypeString})
+var sHashKeyRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHashKeyRange, Members: &mHashKeyRange, Type: smithy.ShapeTypeStructure})
+var sInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailureException, Members: &mInternalFailureException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyId, Type: smithy.ShapeTypeString})
+var sKMSAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSAccessDeniedException, Members: &mKMSAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sKMSDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSDisabledException, Members: &mKMSDisabledException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sKMSInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSInvalidStateException, Members: &mKMSInvalidStateException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sKMSNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSNotFoundException, Members: &mKMSNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sKMSOptInRequired = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSOptInRequired, Members: &mKMSOptInRequired, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sKMSThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKMSThrottlingException, Members: &mKMSThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_ListChannelsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListChannelsInputLimit, Type: smithy.ShapeTypeInteger})
+var s_ListShardsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListShardsInputLimit, Type: smithy.ShapeTypeInteger})
+var s_ListStreamConsumersInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListStreamConsumersInputLimit, Type: smithy.ShapeTypeInteger})
+var s_ListStreamsInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListStreamsInputLimit, Type: smithy.ShapeTypeInteger})
+var s_ListTagsForStreamInputLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTagsForStreamInputLimit, Type: smithy.ShapeTypeInteger})
+var s_MaxRecordSizeInKiB = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxRecordSizeInKiB, Type: smithy.ShapeTypeInteger})
+var sMetricsName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricsName, Members: &mMetricsName, Type: smithy.ShapeTypeEnum})
+var s_MetricsNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricsNameList, Members: &m_MetricsNameList, Type: smithy.ShapeTypeList})
+var s_MillisBehindLatest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MillisBehindLatest, Type: smithy.ShapeTypeLong})
+var sMinimumThroughputBillingCommitmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMinimumThroughputBillingCommitmentInput, Members: &mMinimumThroughputBillingCommitmentInput, Type: smithy.ShapeTypeStructure})
+var sMinimumThroughputBillingCommitmentInputStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMinimumThroughputBillingCommitmentInputStatus, Members: &mMinimumThroughputBillingCommitmentInputStatus, Type: smithy.ShapeTypeEnum})
+var sMinimumThroughputBillingCommitmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMinimumThroughputBillingCommitmentOutput, Members: &mMinimumThroughputBillingCommitmentOutput, Type: smithy.ShapeTypeStructure})
+var sMinimumThroughputBillingCommitmentOutputStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMinimumThroughputBillingCommitmentOutputStatus, Members: &mMinimumThroughputBillingCommitmentOutputStatus, Type: smithy.ShapeTypeEnum})
+var s_NaturalIntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NaturalIntegerObject, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OnDemandStreamCountLimitObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnDemandStreamCountLimitObject, Type: smithy.ShapeTypeInteger})
+var s_OnDemandStreamCountObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnDemandStreamCountObject, Type: smithy.ShapeTypeInteger})
+var sPartitionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionField, Members: &mPartitionField, Type: smithy.ShapeTypeStructure})
+var s_PartitionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionFieldList, Members: &m_PartitionFieldList, Type: smithy.ShapeTypeList})
+var s_PartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionKey, Type: smithy.ShapeTypeString})
+var s_PartitionSourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionSourceName, Type: smithy.ShapeTypeString})
+var sPartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionSpec, Members: &mPartitionSpec, Type: smithy.ShapeTypeStructure})
+var sPartitionTransform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionTransform, Members: &mPartitionTransform, Type: smithy.ShapeTypeEnum})
+var s_Policy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Policy, Type: smithy.ShapeTypeString})
+var s_PositiveIntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sProvisionedThroughputExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedThroughputExceededException, Members: &mProvisionedThroughputExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sPutRecordsRequestEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordsRequestEntry, Members: &mPutRecordsRequestEntry, Type: smithy.ShapeTypeStructure})
+var s_PutRecordsRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRecordsRequestEntryList, Members: &m_PutRecordsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutRecordsResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordsResultEntry, Members: &mPutRecordsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_PutRecordsResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRecordsResultEntryList, Members: &m_PutRecordsResultEntryList, Type: smithy.ShapeTypeList})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var sRecordConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordConfiguration, Members: &mRecordConfiguration, Type: smithy.ShapeTypeStructure})
+var sRecordDistributionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordDistributionStrategy, Members: &mRecordDistributionStrategy, Type: smithy.ShapeTypeEnum})
+var sRecordFormatType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordFormatType, Members: &mRecordFormatType, Type: smithy.ShapeTypeEnum})
+var s_RecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_RetentionPeriodHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionPeriodHours, Type: smithy.ShapeTypeInteger})
+var s_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sS3CompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3CompressionType, Members: &mS3CompressionType, Type: smithy.ShapeTypeEnum})
+var sS3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3DestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure})
+var sS3DestinationUpdateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationUpdateInput, Members: &mS3DestinationUpdateInput, Type: smithy.ShapeTypeStructure})
+var s_S3ErrorOutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ErrorOutputPrefix, Type: smithy.ShapeTypeString})
+var s_S3OutputKeyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3OutputKeyTemplate, Type: smithy.ShapeTypeString})
+var sS3StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3StorageClass, Members: &mS3StorageClass, Type: smithy.ShapeTypeEnum})
+var sS3StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3StorageConfiguration, Members: &mS3StorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3TablesCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3TablesCompressionType, Members: &mS3TablesCompressionType, Type: smithy.ShapeTypeEnum})
+var sS3TablesConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3TablesConfiguration, Members: &mS3TablesConfiguration, Type: smithy.ShapeTypeStructure})
+var s_S3TablesConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3TablesConfigurationList, Members: &m_S3TablesConfigurationList, Type: smithy.ShapeTypeList})
+var sS3TablesDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3TablesDestinationConfiguration, Members: &mS3TablesDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3TablesDestinationDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3TablesDestinationDescription, Members: &mS3TablesDestinationDescription, Type: smithy.ShapeTypeStructure})
+var sS3TablesDestinationUpdateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3TablesDestinationUpdateInput, Members: &mS3TablesDestinationUpdateInput, Type: smithy.ShapeTypeStructure})
+var s_S3TablesNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3TablesNamespace, Type: smithy.ShapeTypeString})
+var s_S3TablesTableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3TablesTableName, Type: smithy.ShapeTypeString})
+var sScalingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingType, Members: &mScalingType, Type: smithy.ShapeTypeEnum})
+var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sSequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure})
+var sShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure})
+var s_ShardCountObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardCountObject, Type: smithy.ShapeTypeInteger})
+var sShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure})
+var sShardFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum})
+var s_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var s_ShardIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIdList, Members: &m_ShardIdList, Type: smithy.ShapeTypeList})
+var s_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum})
+var s_ShardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardList, Members: &m_ShardList, Type: smithy.ShapeTypeList})
+var sStartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartingPosition, Members: &mStartingPosition, Type: smithy.ShapeTypeStructure})
+var s_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure})
+var sStreamDescriptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamDescriptionSummary, Members: &mStreamDescriptionSummary, Type: smithy.ShapeTypeStructure})
+var sStreamFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamFilter, Members: &mStreamFilter, Type: smithy.ShapeTypeStructure})
+var s_StreamFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamFilterList, Members: &m_StreamFilterList, Type: smithy.ShapeTypeList})
+var s_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamId, Type: smithy.ShapeTypeString})
+var sStreamMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamMode, Members: &mStreamMode, Type: smithy.ShapeTypeEnum})
+var sStreamModeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamModeDetails, Members: &mStreamModeDetails, Type: smithy.ShapeTypeStructure})
+var s_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var s_StreamNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamNameList, Members: &m_StreamNameList, Type: smithy.ShapeTypeList})
+var sStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum})
+var sStreamSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamSummary, Members: &mStreamSummary, Type: smithy.ShapeTypeStructure})
+var s_StreamSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamSummaryList, Members: &m_StreamSummaryList, Type: smithy.ShapeTypeList})
+var sSubscribeToShardEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToShardEvent, Members: &mSubscribeToShardEvent, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToShardEventStream, Members: &mSubscribeToShardEventStream, Traits: &t3, Type: smithy.ShapeTypeUnion})
+var s_TableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableBucketARN, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sWarmThroughputObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarmThroughputObject, Members: &mWarmThroughputObject, Type: smithy.ShapeTypeStructure})
+var sAddTagsToStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsToStreamInput, Members: &mAddTagsToStreamInput, Type: smithy.ShapeTypeStructure})
+var sCreateChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelInput, Members: &mCreateChannelInput, Type: smithy.ShapeTypeStructure})
+var sCreateChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelOutput, Members: &mCreateChannelOutput, Type: smithy.ShapeTypeStructure})
+var sCreateStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStreamInput, Members: &mCreateStreamInput, Type: smithy.ShapeTypeStructure})
+var sDecreaseStreamRetentionPeriodInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDecreaseStreamRetentionPeriodInput, Members: &mDecreaseStreamRetentionPeriodInput, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelInput, Members: &mDeleteChannelInput, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyInput, Members: &mDeleteResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sDeleteStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStreamInput, Members: &mDeleteStreamInput, Type: smithy.ShapeTypeStructure})
+var sDeregisterStreamConsumerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterStreamConsumerInput, Members: &mDeregisterStreamConsumerInput, Type: smithy.ShapeTypeStructure})
+var sDescribeAccountSettingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountSettingsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeAccountSettingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAccountSettingsOutput, Members: &mDescribeAccountSettingsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelInput, Members: &mDescribeChannelInput, Type: smithy.ShapeTypeStructure})
+var sDescribeChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChannelOutput, Members: &mDescribeChannelOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeLimitsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLimitsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeLimitsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLimitsOutput, Members: &mDescribeLimitsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamConsumerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamConsumerInput, Members: &mDescribeStreamConsumerInput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamConsumerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamConsumerOutput, Members: &mDescribeStreamConsumerOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamInput, Members: &mDescribeStreamInput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamOutput, Members: &mDescribeStreamOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamSummaryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamSummaryInput, Members: &mDescribeStreamSummaryInput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamSummaryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamSummaryOutput, Members: &mDescribeStreamSummaryOutput, Type: smithy.ShapeTypeStructure})
+var sDisableEnhancedMonitoringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableEnhancedMonitoringInput, Members: &mDisableEnhancedMonitoringInput, Type: smithy.ShapeTypeStructure})
+var sEnhancedMonitoringOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnhancedMonitoringOutput, Members: &mEnhancedMonitoringOutput, Type: smithy.ShapeTypeStructure})
+var sEnableEnhancedMonitoringInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableEnhancedMonitoringInput, Members: &mEnableEnhancedMonitoringInput, Type: smithy.ShapeTypeStructure})
+var sGetRecordsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsInput, Members: &mGetRecordsInput, Type: smithy.ShapeTypeStructure})
+var sGetRecordsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsOutput, Members: &mGetRecordsOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyInput, Members: &mGetResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyOutput, Members: &mGetResourcePolicyOutput, Type: smithy.ShapeTypeStructure})
+var sGetShardIteratorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorInput, Members: &mGetShardIteratorInput, Type: smithy.ShapeTypeStructure})
+var sGetShardIteratorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorOutput, Members: &mGetShardIteratorOutput, Type: smithy.ShapeTypeStructure})
+var sIncreaseStreamRetentionPeriodInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncreaseStreamRetentionPeriodInput, Members: &mIncreaseStreamRetentionPeriodInput, Type: smithy.ShapeTypeStructure})
+var sListChannelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsInput, Members: &mListChannelsInput, Type: smithy.ShapeTypeStructure})
+var sListChannelsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsOutput, Members: &mListChannelsOutput, Type: smithy.ShapeTypeStructure})
+var sListShardsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListShardsInput, Members: &mListShardsInput, Type: smithy.ShapeTypeStructure})
+var sListShardsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListShardsOutput, Members: &mListShardsOutput, Type: smithy.ShapeTypeStructure})
+var sListStreamConsumersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamConsumersInput, Members: &mListStreamConsumersInput, Type: smithy.ShapeTypeStructure})
+var sListStreamConsumersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamConsumersOutput, Members: &mListStreamConsumersOutput, Type: smithy.ShapeTypeStructure})
+var sListStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsInput, Members: &mListStreamsInput, Type: smithy.ShapeTypeStructure})
+var sListStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsOutput, Members: &mListStreamsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForStreamInput, Members: &mListTagsForStreamInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForStreamOutput, Members: &mListTagsForStreamOutput, Type: smithy.ShapeTypeStructure})
+var sMergeShardsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMergeShardsInput, Members: &mMergeShardsInput, Type: smithy.ShapeTypeStructure})
+var sPutRecordInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordInput, Members: &mPutRecordInput, Type: smithy.ShapeTypeStructure})
+var sPutRecordOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordOutput, Members: &mPutRecordOutput, Type: smithy.ShapeTypeStructure})
+var sPutRecordsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordsInput, Members: &mPutRecordsInput, Type: smithy.ShapeTypeStructure})
+var sPutRecordsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRecordsOutput, Members: &mPutRecordsOutput, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyInput, Members: &mPutResourcePolicyInput, Type: smithy.ShapeTypeStructure})
+var sRegisterStreamConsumerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterStreamConsumerInput, Members: &mRegisterStreamConsumerInput, Type: smithy.ShapeTypeStructure})
+var sRegisterStreamConsumerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterStreamConsumerOutput, Members: &mRegisterStreamConsumerOutput, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveTagsFromStreamInput, Members: &mRemoveTagsFromStreamInput, Type: smithy.ShapeTypeStructure})
+var sSplitShardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSplitShardInput, Members: &mSplitShardInput, Type: smithy.ShapeTypeStructure})
+var sStartStreamEncryptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartStreamEncryptionInput, Members: &mStartStreamEncryptionInput, Type: smithy.ShapeTypeStructure})
+var sStopStreamEncryptionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopStreamEncryptionInput, Members: &mStopStreamEncryptionInput, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToShardInput, Members: &mSubscribeToShardInput, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeToShardOutput, Members: &mSubscribeToShardOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsInput, Members: &mUpdateAccountSettingsInput, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsOutput, Members: &mUpdateAccountSettingsOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelInput, Members: &mUpdateChannelInput, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelOutput, Members: &mUpdateChannelOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateMaxRecordSizeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMaxRecordSizeInput, Members: &mUpdateMaxRecordSizeInput, Type: smithy.ShapeTypeStructure})
+var sUpdateShardCountInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateShardCountInput, Members: &mUpdateShardCountInput, Type: smithy.ShapeTypeStructure})
+var sUpdateShardCountOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateShardCountOutput, Members: &mUpdateShardCountOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamModeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamModeInput, Members: &mUpdateStreamModeInput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamRecordDistributionStrategyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamRecordDistributionStrategyInput, Members: &mUpdateStreamRecordDistributionStrategyInput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamWarmThroughputInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamWarmThroughputInput, Members: &mUpdateStreamWarmThroughputInput, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamWarmThroughputOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStreamWarmThroughputOutput, Members: &mUpdateStreamWarmThroughputOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sChannelDescription_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelDescription_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ChannelARN, Type: smithy.ShapeTypeString})
+var sChannelDescription_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_ChannelId, Type: smithy.ShapeTypeString})
+var sChannelDescription_ChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelStatus", ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum})
+var sChannelDescription_ChannelStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelStatusReason", ID: &i_ChannelStatusReason, Type: smithy.ShapeTypeString})
+var sChannelDescription_ChannelCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelDescription_ServiceExecutionRoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceExecutionRoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sChannelDescription_StreamConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamConfigurationList", ID: &i_ChannelStreamDescriptionList, Members: &m_ChannelStreamDescriptionList, Type: smithy.ShapeTypeList})
+var sChannelDescription_S3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationConfiguration", ID: &iS3DestinationDescription, Members: &mS3DestinationDescription, Type: smithy.ShapeTypeStructure})
+var sChannelDescription_S3TablesDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3TablesDestinationConfiguration", ID: &iS3TablesDestinationDescription, Members: &mS3TablesDestinationDescription, Type: smithy.ShapeTypeStructure})
+var sChannelDescription_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iChannelEncryptionConfiguration, Members: &mChannelEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelDescription_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iChannelLoggingConfiguration, Members: &mChannelLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelDestinationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelDestinationType_S3_TABLES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_TABLES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelEncryptionConfiguration_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iChannelEncryptionType, Members: &mChannelEncryptionType, Type: smithy.ShapeTypeEnum})
+var sChannelEncryptionConfiguration_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyId, Type: smithy.ShapeTypeString})
+var sChannelEncryptionType_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelLoggingConfiguration_CloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogs", ID: &iCloudWatchLogs, Members: &mCloudWatchLogs, Type: smithy.ShapeTypeStructure})
+var sChannelLoggingUpdateInput_CloudWatchLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogs", ID: &iCloudWatchLogsUpdateInput, Members: &mCloudWatchLogsUpdateInput, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannelStreamConfiguration_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sChannelStreamConfiguration_RecordConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordConfiguration", ID: &iRecordConfiguration, Members: &mRecordConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ChannelStreamConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelStreamConfiguration, Members: &mChannelStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelStreamDescription_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sChannelStreamDescription_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelStreamDescription_RecordConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordConfiguration", ID: &iRecordConfiguration, Members: &mRecordConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ChannelStreamDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelStreamDescription, Members: &mChannelStreamDescription, Type: smithy.ShapeTypeStructure})
+var sChannelStreamIdentifier_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sChannelStreamIdentifier_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ChannelStreamIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelStreamIdentifier, Members: &mChannelStreamIdentifier, Type: smithy.ShapeTypeStructure})
+var sChannelSummary_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sChannelSummary_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ChannelARN, Type: smithy.ShapeTypeString})
+var sChannelSummary_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_ChannelId, Type: smithy.ShapeTypeString})
+var sChannelSummary_ChannelStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelStatus", ID: &iChannelStatus, Members: &mChannelStatus, Type: smithy.ShapeTypeEnum})
+var sChannelSummary_ChannelStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelStatusReason", ID: &i_ChannelStatusReason, Type: smithy.ShapeTypeString})
+var sChannelSummary_ChannelCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelSummary_ChannelDestinationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelDestinationType", ID: &iChannelDestinationType, Members: &mChannelDestinationType, Type: smithy.ShapeTypeEnum})
+var sChannelSummary_Streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Streams", ID: &i_ChannelStreamIdentifierList, Members: &m_ChannelStreamIdentifierList, Type: smithy.ShapeTypeList})
+var s_ChannelSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelSummary, Members: &mChannelSummary, Type: smithy.ShapeTypeStructure})
+var sChildShard_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sChildShard_ParentShards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentShards", ID: &i_ShardIdList, Members: &m_ShardIdList, Type: smithy.ShapeTypeList})
+var sChildShard_HashKeyRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HashKeyRange", ID: &iHashKeyRange, Members: &mHashKeyRange, Type: smithy.ShapeTypeStructure})
+var s_ChildShardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChildShard, Members: &mChildShard, Type: smithy.ShapeTypeStructure})
+var sCloudWatchLogs_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sCloudWatchLogs_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString})
+var sCloudWatchLogs_LogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamName", ID: &i_CloudWatchLogStreamName, Type: smithy.ShapeTypeString})
+var sCloudWatchLogsUpdateInput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sCloudWatchLogsUpdateInput_LogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupName", ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString})
+var sCloudWatchLogsUpdateInput_LogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamName", ID: &i_CloudWatchLogStreamName, Type: smithy.ShapeTypeString})
+var sConsumer_ConsumerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerName", ID: &i_ConsumerName, Type: smithy.ShapeTypeString})
+var sConsumer_ConsumerARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerARN", ID: &i_ConsumerARN, Type: smithy.ShapeTypeString})
+var sConsumer_ConsumerStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerStatus", ID: &iConsumerStatus, Members: &mConsumerStatus, Type: smithy.ShapeTypeEnum})
+var sConsumer_ConsumerCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sConsumerDescription_ConsumerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerName", ID: &i_ConsumerName, Type: smithy.ShapeTypeString})
+var sConsumerDescription_ConsumerARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerARN", ID: &i_ConsumerARN, Type: smithy.ShapeTypeString})
+var sConsumerDescription_ConsumerStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerStatus", ID: &iConsumerStatus, Members: &mConsumerStatus, Type: smithy.ShapeTypeEnum})
+var sConsumerDescription_ConsumerCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sConsumerDescription_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var s_ConsumerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConsumer, Members: &mConsumer, Type: smithy.ShapeTypeStructure})
+var sConsumerStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConsumerStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConsumerStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeadLetterQueueS3Configuration_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString})
+var sDeadLetterQueueS3Configuration_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &i_ExpectedBucketOwner, Type: smithy.ShapeTypeString})
+var sDeadLetterQueueS3Configuration_ErrorOutputPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorOutputPrefix", ID: &i_S3ErrorOutputPrefix, Type: smithy.ShapeTypeString})
+var sDryRunOperationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEncryptionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionType_KMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnhancedMetrics_ShardLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardLevelMetrics", ID: &i_MetricsNameList, Members: &m_MetricsNameList, Type: smithy.ShapeTypeList})
+var s_EnhancedMonitoringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnhancedMetrics, Members: &mEnhancedMetrics, Type: smithy.ShapeTypeStructure})
+var sExpiredIteratorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sExpiredNextTokenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHashKeyRange_StartingHashKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingHashKey", ID: &i_HashKey, Type: smithy.ShapeTypeString})
+var sHashKeyRange_EndingHashKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndingHashKey", ID: &i_HashKey, Type: smithy.ShapeTypeString})
+var sInternalFailureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidArgumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKMSAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKMSDisabledException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKMSInvalidStateException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKMSNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKMSOptInRequired_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sKMSThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMetricsName_INCOMING_BYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMING_BYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsName_INCOMING_RECORDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMING_RECORDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsName_OUTGOING_BYTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTGOING_BYTES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsName_OUTGOING_RECORDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTGOING_RECORDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsName_WRITE_PROVISIONED_THROUGHPUT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE_PROVISIONED_THROUGHPUT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsName_READ_PROVISIONED_THROUGHPUT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ_PROVISIONED_THROUGHPUT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsName_ITERATOR_AGE_MILLISECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ITERATOR_AGE_MILLISECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricsName_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MetricsNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricsName, Members: &mMetricsName, Type: smithy.ShapeTypeEnum})
+var sMinimumThroughputBillingCommitmentInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMinimumThroughputBillingCommitmentInputStatus, Members: &mMinimumThroughputBillingCommitmentInputStatus, Type: smithy.ShapeTypeEnum})
+var sMinimumThroughputBillingCommitmentInputStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMinimumThroughputBillingCommitmentInputStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMinimumThroughputBillingCommitmentOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMinimumThroughputBillingCommitmentOutputStatus, Members: &mMinimumThroughputBillingCommitmentOutputStatus, Type: smithy.ShapeTypeEnum})
+var sMinimumThroughputBillingCommitmentOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMinimumThroughputBillingCommitmentOutput_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EarliestAllowedEndAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMinimumThroughputBillingCommitmentOutputStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMinimumThroughputBillingCommitmentOutputStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMinimumThroughputBillingCommitmentOutputStatus_ENABLED_UNTIL_EARLIEST_ALLOWED_END = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED_UNTIL_EARLIEST_ALLOWED_END", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPartitionField_Transform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transform", ID: &iPartitionTransform, Members: &mPartitionTransform, Type: smithy.ShapeTypeEnum})
+var sPartitionField_SourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceName", ID: &i_PartitionSourceName, Type: smithy.ShapeTypeString})
+var s_PartitionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartitionField, Members: &mPartitionField, Type: smithy.ShapeTypeStructure})
+var sPartitionSpec_PartitionFields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionFields", ID: &i_PartitionFieldList, Members: &m_PartitionFieldList, Type: smithy.ShapeTypeList})
+var sPartitionTransform_TIME_HOUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_HOUR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProvisionedThroughputExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sPutRecordsRequestEntry_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_Data, Type: smithy.ShapeTypeBlob})
+var sPutRecordsRequestEntry_ExplicitHashKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplicitHashKey", ID: &i_HashKey, Type: smithy.ShapeTypeString})
+var sPutRecordsRequestEntry_PartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKey", ID: &i_PartitionKey, Type: smithy.ShapeTypeString})
+var s_PutRecordsRequestEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutRecordsRequestEntry, Members: &mPutRecordsRequestEntry, Type: smithy.ShapeTypeStructure})
+var sPutRecordsResultEntry_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sPutRecordsResultEntry_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sPutRecordsResultEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sPutRecordsResultEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_PutRecordsResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutRecordsResultEntry, Members: &mPutRecordsResultEntry, Type: smithy.ShapeTypeStructure})
+var sRecord_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sRecord_ApproximateArrivalTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateArrivalTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRecord_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_Data, Type: smithy.ShapeTypeBlob})
+var sRecord_PartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKey", ID: &i_PartitionKey, Type: smithy.ShapeTypeString})
+var sRecord_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sRecordConfiguration_RecordFormatType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordFormatType", ID: &iRecordFormatType, Members: &mRecordFormatType, Type: smithy.ShapeTypeEnum})
+var sRecordConfiguration_GSRSchemaARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GSRSchemaARN", ID: &i_GSRSchemaARN, Type: smithy.ShapeTypeString})
+var sRecordDistributionStrategy_AUTO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordDistributionStrategy_USER_PARTITION_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_PARTITION_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordFormatType_GSR_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GSR_JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordFormatType_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordFormatType_STRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordFormatType_BYTE_ARRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYTE_ARRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var sResourceInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sS3CompressionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3CompressionType_GZIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GZIP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3CompressionType_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3DestinationConfiguration_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i_DataFreshnessInSeconds, Type: smithy.ShapeTypeInteger})
+var sS3DestinationConfiguration_DeadLetterQueueS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterQueueS3Configuration", ID: &iDeadLetterQueueS3Configuration, Members: &mDeadLetterQueueS3Configuration, Type: smithy.ShapeTypeStructure})
+var sS3DestinationConfiguration_StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConfiguration", ID: &iS3StorageConfiguration, Members: &mS3StorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3DestinationDescription_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i_DataFreshnessInSeconds, Type: smithy.ShapeTypeInteger})
+var sS3DestinationDescription_DeadLetterQueueS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterQueueS3Configuration", ID: &iDeadLetterQueueS3Configuration, Members: &mDeadLetterQueueS3Configuration, Type: smithy.ShapeTypeStructure})
+var sS3DestinationDescription_StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConfiguration", ID: &iS3StorageConfiguration, Members: &mS3StorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3DestinationUpdateInput_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i_DataFreshnessInSeconds, Type: smithy.ShapeTypeInteger})
+var sS3StorageClass_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3StorageClass_INTELLIGENT_TIERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTELLIGENT_TIERING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3StorageClass_GLACIER_IR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLACIER_IR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3StorageConfiguration_BucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketARN", ID: &i_BucketARN, Type: smithy.ShapeTypeString})
+var sS3StorageConfiguration_ExpectedBucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedBucketOwner", ID: &i_ExpectedBucketOwner, Type: smithy.ShapeTypeString})
+var sS3StorageConfiguration_OutputKeyTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputKeyTemplate", ID: &i_S3OutputKeyTemplate, Type: smithy.ShapeTypeString})
+var sS3StorageConfiguration_StorageClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageClass", ID: &iS3StorageClass, Members: &mS3StorageClass, Type: smithy.ShapeTypeEnum})
+var sS3StorageConfiguration_CompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionType", ID: &iS3CompressionType, Members: &mS3CompressionType, Type: smithy.ShapeTypeEnum})
+var sS3TablesCompressionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3TablesCompressionType_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3TablesCompressionType_SNAPPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPPY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3TablesConfiguration_TableBucketARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableBucketARN", ID: &i_TableBucketARN, Type: smithy.ShapeTypeString})
+var sS3TablesConfiguration_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_S3TablesNamespace, Type: smithy.ShapeTypeString})
+var sS3TablesConfiguration_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_S3TablesTableName, Type: smithy.ShapeTypeString})
+var sS3TablesConfiguration_CompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompressionType", ID: &iS3TablesCompressionType, Members: &mS3TablesCompressionType, Type: smithy.ShapeTypeEnum})
+var sS3TablesConfiguration_PartitionSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionSpec", ID: &iPartitionSpec, Members: &mPartitionSpec, Type: smithy.ShapeTypeStructure})
+var s_S3TablesConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3TablesConfiguration, Members: &mS3TablesConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3TablesDestinationConfiguration_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i_DataFreshnessInSeconds, Type: smithy.ShapeTypeInteger})
+var sS3TablesDestinationConfiguration_DeadLetterQueueS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterQueueS3Configuration", ID: &iDeadLetterQueueS3Configuration, Members: &mDeadLetterQueueS3Configuration, Type: smithy.ShapeTypeStructure})
+var sS3TablesDestinationConfiguration_S3TablesConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3TablesConfigurationList", ID: &i_S3TablesConfigurationList, Members: &m_S3TablesConfigurationList, Type: smithy.ShapeTypeList})
+var sS3TablesDestinationDescription_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i_DataFreshnessInSeconds, Type: smithy.ShapeTypeInteger})
+var sS3TablesDestinationDescription_DeadLetterQueueS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterQueueS3Configuration", ID: &iDeadLetterQueueS3Configuration, Members: &mDeadLetterQueueS3Configuration, Type: smithy.ShapeTypeStructure})
+var sS3TablesDestinationDescription_S3TablesConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3TablesConfigurationList", ID: &i_S3TablesConfigurationList, Members: &m_S3TablesConfigurationList, Type: smithy.ShapeTypeList})
+var sS3TablesDestinationUpdateInput_DataFreshnessInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataFreshnessInSeconds", ID: &i_DataFreshnessInSeconds, Type: smithy.ShapeTypeInteger})
+var sScalingType_UNIFORM_SCALING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIFORM_SCALING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSequenceNumberRange_StartingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sSequenceNumberRange_EndingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sShard_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sShard_ParentShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sShard_AdjacentParentShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdjacentParentShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sShard_HashKeyRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HashKeyRange", ID: &iHashKeyRange, Members: &mHashKeyRange, Type: smithy.ShapeTypeStructure})
+var sShard_SequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumberRange", ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure})
+var sShardFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum})
+var sShardFilter_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sShardFilter_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sShardFilterType_AFTER_SHARD_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_SHARD_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardFilterType_AT_TRIM_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_TRIM_HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardFilterType_FROM_TRIM_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FROM_TRIM_HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardFilterType_AT_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardFilterType_AT_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardFilterType_FROM_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FROM_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ShardIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sShardIteratorType_AT_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_AFTER_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_TRIM_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRIM_HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_AT_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ShardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure})
+var sStartingPosition_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum})
+var sStartingPosition_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sStartingPosition_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStreamDescription_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStreamDescription_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sStreamDescription_StreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStatus", ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum})
+var sStreamDescription_StreamModeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamModeDetails", ID: &iStreamModeDetails, Members: &mStreamModeDetails, Type: smithy.ShapeTypeStructure})
+var sStreamDescription_Shards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Shards", ID: &i_ShardList, Members: &m_ShardList, Type: smithy.ShapeTypeList})
+var sStreamDescription_HasMoreShards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasMoreShards", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sStreamDescription_RetentionPeriodHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodHours", ID: &i_RetentionPeriodHours, Type: smithy.ShapeTypeInteger})
+var sStreamDescription_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStreamDescription_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &i_EnhancedMonitoringList, Members: &m_EnhancedMonitoringList, Type: smithy.ShapeTypeList})
+var sStreamDescription_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sStreamDescription_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyId, Type: smithy.ShapeTypeString})
+var sStreamDescriptionSummary_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStreamDescriptionSummary_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sStreamDescriptionSummary_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Type: smithy.ShapeTypeString})
+var sStreamDescriptionSummary_StreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStatus", ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum})
+var sStreamDescriptionSummary_StreamModeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamModeDetails", ID: &iStreamModeDetails, Members: &mStreamModeDetails, Type: smithy.ShapeTypeStructure})
+var sStreamDescriptionSummary_RetentionPeriodHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodHours", ID: &i_RetentionPeriodHours, Type: smithy.ShapeTypeInteger})
+var sStreamDescriptionSummary_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStreamDescriptionSummary_EnhancedMonitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnhancedMonitoring", ID: &i_EnhancedMonitoringList, Members: &m_EnhancedMonitoringList, Type: smithy.ShapeTypeList})
+var sStreamDescriptionSummary_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sStreamDescriptionSummary_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyId, Type: smithy.ShapeTypeString})
+var sStreamDescriptionSummary_OpenShardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenShardCount", ID: &i_ShardCountObject, Type: smithy.ShapeTypeInteger})
+var sStreamDescriptionSummary_ConsumerCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerCount", ID: &i_ConsumerCountObject, Type: smithy.ShapeTypeInteger})
+var sStreamDescriptionSummary_WarmThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmThroughput", ID: &iWarmThroughputObject, Members: &mWarmThroughputObject, Type: smithy.ShapeTypeStructure})
+var sStreamDescriptionSummary_MaxRecordSizeInKiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecordSizeInKiB", ID: &i_MaxRecordSizeInKiB, Type: smithy.ShapeTypeInteger})
+var sStreamDescriptionSummary_ChannelCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelCount", ID: &i_ChannelCountObject, Type: smithy.ShapeTypeInteger})
+var sStreamDescriptionSummary_RecordDistributionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordDistributionStrategy", ID: &iRecordDistributionStrategy, Members: &mRecordDistributionStrategy, Type: smithy.ShapeTypeEnum})
+var sStreamFilter_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sStreamFilter_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_StreamFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamFilter, Members: &mStreamFilter, Type: smithy.ShapeTypeStructure})
+var sStreamMode_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamMode_ON_DEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamModeDetails_StreamMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamMode", ID: &iStreamMode, Members: &mStreamMode, Type: smithy.ShapeTypeEnum})
+var s_StreamNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStreamStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamSummary_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStreamSummary_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sStreamSummary_StreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStatus", ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum})
+var sStreamSummary_StreamModeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamModeDetails", ID: &iStreamModeDetails, Members: &mStreamModeDetails, Type: smithy.ShapeTypeStructure})
+var sStreamSummary_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_StreamSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamSummary, Members: &mStreamSummary, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEvent_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList})
+var sSubscribeToShardEvent_ContinuationSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContinuationSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sSubscribeToShardEvent_MillisBehindLatest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MillisBehindLatest", ID: &i_MillisBehindLatest, Type: smithy.ShapeTypeLong})
+var sSubscribeToShardEvent_ChildShards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildShards", ID: &i_ChildShardList, Members: &m_ChildShardList, Type: smithy.ShapeTypeList})
+var sSubscribeToShardEventStream_SubscribeToShardEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscribeToShardEvent", ID: &iSubscribeToShardEvent, Members: &mSubscribeToShardEvent, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_ResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceNotFoundException", ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_ResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceInUseException", ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_KMSDisabledException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSDisabledException", ID: &iKMSDisabledException, Members: &mKMSDisabledException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_KMSInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSInvalidStateException", ID: &iKMSInvalidStateException, Members: &mKMSInvalidStateException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_KMSAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSAccessDeniedException", ID: &iKMSAccessDeniedException, Members: &mKMSAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_KMSNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSNotFoundException", ID: &iKMSNotFoundException, Members: &mKMSNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_KMSOptInRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSOptInRequired", ID: &iKMSOptInRequired, Members: &mKMSOptInRequired, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_KMSThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSThrottlingException", ID: &iKMSThrottlingException, Members: &mKMSThrottlingException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardEventStream_InternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalFailureException", ID: &iInternalFailureException, Members: &mInternalFailureException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sWarmThroughputObject_TargetMiBps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetMiBps", ID: &i_NaturalIntegerObject, Type: smithy.ShapeTypeInteger})
+var sWarmThroughputObject_CurrentMiBps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentMiBps", ID: &i_NaturalIntegerObject, Type: smithy.ShapeTypeInteger})
+var sAddTagsToStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sAddTagsToStreamInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sAddTagsToStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sAddTagsToStreamInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sCreateChannelInput_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ChannelName, Type: smithy.ShapeTypeString})
+var sCreateChannelInput_ServiceExecutionRoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceExecutionRoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sCreateChannelInput_StreamConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamConfigurationList", ID: &i_ChannelStreamConfigurationList, Members: &m_ChannelStreamConfigurationList, Type: smithy.ShapeTypeList})
+var sCreateChannelInput_S3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationConfiguration", ID: &iS3DestinationConfiguration, Members: &mS3DestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelInput_S3TablesDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3TablesDestinationConfiguration", ID: &iS3TablesDestinationConfiguration, Members: &mS3TablesDestinationConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelInput_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iChannelEncryptionConfiguration, Members: &mChannelEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateChannelInput_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iChannelLoggingConfiguration, Members: &mChannelLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelOutput_ChannelDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelDescription", ID: &iChannelDescription, Members: &mChannelDescription, Type: smithy.ShapeTypeStructure})
+var sCreateStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sCreateStreamInput_ShardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardCount", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sCreateStreamInput_StreamModeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamModeDetails", ID: &iStreamModeDetails, Members: &mStreamModeDetails, Type: smithy.ShapeTypeStructure})
+var sCreateStreamInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateStreamInput_WarmThroughputMiBps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmThroughputMiBps", ID: &i_NaturalIntegerObject, Type: smithy.ShapeTypeInteger})
+var sCreateStreamInput_MaxRecordSizeInKiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecordSizeInKiB", ID: &i_MaxRecordSizeInKiB, Type: smithy.ShapeTypeInteger})
+var sCreateStreamInput_RecordDistributionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordDistributionStrategy", ID: &iRecordDistributionStrategy, Members: &mRecordDistributionStrategy, Type: smithy.ShapeTypeEnum})
+var sDecreaseStreamRetentionPeriodInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDecreaseStreamRetentionPeriodInput_RetentionPeriodHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodHours", ID: &i_RetentionPeriodHours, Type: smithy.ShapeTypeInteger})
+var sDecreaseStreamRetentionPeriodInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sDecreaseStreamRetentionPeriodInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDeleteChannelInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ChannelARN, Traits: &t6, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Traits: &t7, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDeleteStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDeleteStreamInput_EnforceConsumerDeletion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnforceConsumerDeletion", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sDeleteStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sDeleteStreamInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDeregisterStreamConsumerInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sDeregisterStreamConsumerInput_ConsumerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerName", ID: &i_ConsumerName, Type: smithy.ShapeTypeString})
+var sDeregisterStreamConsumerInput_ConsumerARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerARN", ID: &i_ConsumerARN, Traits: &t8, Type: smithy.ShapeTypeString})
+var sDeregisterStreamConsumerInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDescribeAccountSettingsOutput_MinimumThroughputBillingCommitment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumThroughputBillingCommitment", ID: &iMinimumThroughputBillingCommitmentOutput, Members: &mMinimumThroughputBillingCommitmentOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeChannelInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ChannelARN, Traits: &t6, Type: smithy.ShapeTypeString})
+var sDescribeChannelOutput_ChannelDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelDescription", ID: &iChannelDescription, Members: &mChannelDescription, Type: smithy.ShapeTypeStructure})
+var sDescribeLimitsOutput_ShardLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardLimit", ID: &i_ShardCountObject, Type: smithy.ShapeTypeInteger})
+var sDescribeLimitsOutput_OpenShardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenShardCount", ID: &i_ShardCountObject, Type: smithy.ShapeTypeInteger})
+var sDescribeLimitsOutput_OnDemandStreamCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandStreamCount", ID: &i_OnDemandStreamCountObject, Type: smithy.ShapeTypeInteger})
+var sDescribeLimitsOutput_OnDemandStreamCountLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnDemandStreamCountLimit", ID: &i_OnDemandStreamCountLimitObject, Type: smithy.ShapeTypeInteger})
+var sDescribeLimitsOutput_ChannelCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelCount", ID: &i_ChannelCountObject, Type: smithy.ShapeTypeInteger})
+var sDescribeLimitsOutput_ChannelCountLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelCountLimit", ID: &i_ChannelCountObject, Type: smithy.ShapeTypeInteger})
+var sDescribeStreamConsumerInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sDescribeStreamConsumerInput_ConsumerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerName", ID: &i_ConsumerName, Type: smithy.ShapeTypeString})
+var sDescribeStreamConsumerInput_ConsumerARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerARN", ID: &i_ConsumerARN, Traits: &t8, Type: smithy.ShapeTypeString})
+var sDescribeStreamConsumerInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDescribeStreamConsumerOutput_ConsumerDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerDescription", ID: &iConsumerDescription, Members: &mConsumerDescription, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeStreamInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_DescribeStreamInputLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeStreamInput_ExclusiveStartShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sDescribeStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sDescribeStreamInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDescribeStreamOutput_StreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamDescription", ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamSummaryInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDescribeStreamSummaryInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sDescribeStreamSummaryInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDescribeStreamSummaryOutput_StreamDescriptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamDescriptionSummary", ID: &iStreamDescriptionSummary, Members: &mStreamDescriptionSummary, Type: smithy.ShapeTypeStructure})
+var sDisableEnhancedMonitoringInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sDisableEnhancedMonitoringInput_ShardLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardLevelMetrics", ID: &i_MetricsNameList, Members: &m_MetricsNameList, Type: smithy.ShapeTypeList})
+var sDisableEnhancedMonitoringInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sDisableEnhancedMonitoringInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sEnhancedMonitoringOutput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sEnhancedMonitoringOutput_CurrentShardLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentShardLevelMetrics", ID: &i_MetricsNameList, Members: &m_MetricsNameList, Type: smithy.ShapeTypeList})
+var sEnhancedMonitoringOutput_DesiredShardLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredShardLevelMetrics", ID: &i_MetricsNameList, Members: &m_MetricsNameList, Type: smithy.ShapeTypeList})
+var sEnhancedMonitoringOutput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sEnableEnhancedMonitoringInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sEnableEnhancedMonitoringInput_ShardLevelMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardLevelMetrics", ID: &i_MetricsNameList, Members: &m_MetricsNameList, Type: smithy.ShapeTypeList})
+var sEnableEnhancedMonitoringInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sEnableEnhancedMonitoringInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sGetRecordsInput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sGetRecordsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_GetRecordsInputLimit, Type: smithy.ShapeTypeInteger})
+var sGetRecordsInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sGetRecordsInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sGetRecordsInput_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sGetRecordsOutput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList})
+var sGetRecordsOutput_NextShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sGetRecordsOutput_MillisBehindLatest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MillisBehindLatest", ID: &i_MillisBehindLatest, Type: smithy.ShapeTypeLong})
+var sGetRecordsOutput_ChildShards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildShards", ID: &i_ChildShardList, Members: &m_ChildShardList, Type: smithy.ShapeTypeList})
+var sGetResourcePolicyInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Traits: &t7, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_ShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIteratorType", ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum})
+var sGetShardIteratorInput_StartingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetShardIteratorInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sGetShardIteratorOutput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sIncreaseStreamRetentionPeriodInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sIncreaseStreamRetentionPeriodInput_RetentionPeriodHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodHours", ID: &i_RetentionPeriodHours, Type: smithy.ShapeTypeInteger})
+var sIncreaseStreamRetentionPeriodInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sIncreaseStreamRetentionPeriodInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sListChannelsInput_StreamFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamFilter", ID: &i_StreamFilterList, Members: &m_StreamFilterList, Type: smithy.ShapeTypeList})
+var sListChannelsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListChannelsInputLimit, Type: smithy.ShapeTypeInteger})
+var sListChannelsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListChannelsOutput_ChannelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelSummaries", ID: &i_ChannelSummaryList, Members: &m_ChannelSummaryList, Type: smithy.ShapeTypeList})
+var sListChannelsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListShardsInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sListShardsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListShardsInput_ExclusiveStartShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sListShardsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListShardsInputLimit, Type: smithy.ShapeTypeInteger})
+var sListShardsInput_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListShardsInput_ShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardFilter", ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure})
+var sListShardsInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sListShardsInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sListShardsOutput_Shards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Shards", ID: &i_ShardList, Members: &m_ShardList, Type: smithy.ShapeTypeList})
+var sListShardsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListStreamConsumersInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sListStreamConsumersInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListStreamConsumersInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListStreamConsumersInputLimit, Type: smithy.ShapeTypeInteger})
+var sListStreamConsumersInput_StreamCreationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamCreationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sListStreamConsumersInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sListStreamConsumersOutput_Consumers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consumers", ID: &i_ConsumerList, Members: &m_ConsumerList, Type: smithy.ShapeTypeList})
+var sListStreamConsumersOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListStreamsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_ListStreamsInputLimit, Type: smithy.ShapeTypeInteger})
+var sListStreamsInput_ExclusiveStartStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartStreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sListStreamsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListStreamsOutput_StreamNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNames", ID: &i_StreamNameList, Members: &m_StreamNameList, Type: smithy.ShapeTypeList})
+var sListStreamsOutput_HasMoreStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasMoreStreams", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sListStreamsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListStreamsOutput_StreamSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamSummaries", ID: &i_StreamSummaryList, Members: &m_StreamSummaryList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Traits: &t7, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListTagsForStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sListTagsForStreamInput_ExclusiveStartTagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartTagKey", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sListTagsForStreamInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_ListTagsForStreamInputLimit, Type: smithy.ShapeTypeInteger})
+var sListTagsForStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sListTagsForStreamInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sListTagsForStreamOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListTagsForStreamOutput_HasMoreTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasMoreTags", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sMergeShardsInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sMergeShardsInput_ShardToMerge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardToMerge", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sMergeShardsInput_AdjacentShardToMerge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdjacentShardToMerge", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sMergeShardsInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sMergeShardsInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sPutRecordInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sPutRecordInput_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_Data, Type: smithy.ShapeTypeBlob})
+var sPutRecordInput_PartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKey", ID: &i_PartitionKey, Type: smithy.ShapeTypeString})
+var sPutRecordInput_ExplicitHashKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplicitHashKey", ID: &i_HashKey, Type: smithy.ShapeTypeString})
+var sPutRecordInput_SequenceNumberForOrdering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumberForOrdering", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sPutRecordInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sPutRecordInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sPutRecordInput_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sPutRecordOutput_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sPutRecordOutput_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sPutRecordOutput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sPutRecordsInput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_PutRecordsRequestEntryList, Members: &m_PutRecordsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutRecordsInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sPutRecordsInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sPutRecordsInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sPutRecordsInput_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sPutRecordsOutput_FailedRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedRecordCount", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sPutRecordsOutput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_PutRecordsResultEntryList, Members: &m_PutRecordsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutRecordsOutput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sPutResourcePolicyInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Traits: &t7, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyInput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_Policy, Type: smithy.ShapeTypeString})
+var sRegisterStreamConsumerInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sRegisterStreamConsumerInput_ConsumerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerName", ID: &i_ConsumerName, Type: smithy.ShapeTypeString})
+var sRegisterStreamConsumerInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sRegisterStreamConsumerInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRegisterStreamConsumerOutput_Consumer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Consumer", ID: &iConsumer, Members: &mConsumer, Type: smithy.ShapeTypeStructure})
+var sRemoveTagsFromStreamInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromStreamInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sRemoveTagsFromStreamInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sRemoveTagsFromStreamInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sSplitShardInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sSplitShardInput_ShardToSplit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardToSplit", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sSplitShardInput_NewStartingHashKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewStartingHashKey", ID: &i_HashKey, Type: smithy.ShapeTypeString})
+var sSplitShardInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sSplitShardInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sStartStreamEncryptionInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStartStreamEncryptionInput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sStartStreamEncryptionInput_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyId, Type: smithy.ShapeTypeString})
+var sStartStreamEncryptionInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sStartStreamEncryptionInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sStopStreamEncryptionInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sStopStreamEncryptionInput_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionType", ID: &iEncryptionType, Members: &mEncryptionType, Type: smithy.ShapeTypeEnum})
+var sStopStreamEncryptionInput_KeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyId", ID: &i_KeyId, Type: smithy.ShapeTypeString})
+var sStopStreamEncryptionInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sStopStreamEncryptionInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sSubscribeToShardInput_ConsumerARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerARN", ID: &i_ConsumerARN, Traits: &t8, Type: smithy.ShapeTypeString})
+var sSubscribeToShardInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sSubscribeToShardInput_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sSubscribeToShardInput_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &iStartingPosition, Members: &mStartingPosition, Type: smithy.ShapeTypeStructure})
+var sSubscribeToShardInput_DryRun = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DryRun", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sSubscribeToShardOutput_EventStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventStream", ID: &iSubscribeToShardEventStream, Members: &mSubscribeToShardEventStream, Traits: &t9, Type: smithy.ShapeTypeUnion})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sTagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Traits: &t7, Type: smithy.ShapeTypeString})
+var sTagResourceInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUntagResourceInput_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Traits: &t7, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sUpdateAccountSettingsInput_MinimumThroughputBillingCommitment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumThroughputBillingCommitment", ID: &iMinimumThroughputBillingCommitmentInput, Members: &mMinimumThroughputBillingCommitmentInput, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsOutput_MinimumThroughputBillingCommitment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumThroughputBillingCommitment", ID: &iMinimumThroughputBillingCommitmentOutput, Members: &mMinimumThroughputBillingCommitmentOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelInput_ChannelARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelARN", ID: &i_ChannelARN, Traits: &t6, Type: smithy.ShapeTypeString})
+var sUpdateChannelInput_S3DestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3DestinationConfiguration", ID: &iS3DestinationUpdateInput, Members: &mS3DestinationUpdateInput, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelInput_S3TablesDestinationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3TablesDestinationConfiguration", ID: &iS3TablesDestinationUpdateInput, Members: &mS3TablesDestinationUpdateInput, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelInput_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iChannelLoggingUpdateInput, Members: &mChannelLoggingUpdateInput, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelOutput_ChannelDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelDescription", ID: &iChannelDescription, Members: &mChannelDescription, Type: smithy.ShapeTypeStructure})
+var sUpdateMaxRecordSizeInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sUpdateMaxRecordSizeInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sUpdateMaxRecordSizeInput_MaxRecordSizeInKiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRecordSizeInKiB", ID: &i_MaxRecordSizeInKiB, Type: smithy.ShapeTypeInteger})
+var sUpdateShardCountInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateShardCountInput_TargetShardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetShardCount", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sUpdateShardCountInput_ScalingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingType", ID: &iScalingType, Members: &mScalingType, Type: smithy.ShapeTypeEnum})
+var sUpdateShardCountInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sUpdateShardCountInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sUpdateShardCountOutput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateShardCountOutput_CurrentShardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentShardCount", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sUpdateShardCountOutput_TargetShardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetShardCount", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sUpdateShardCountOutput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sUpdateStreamModeInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sUpdateStreamModeInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sUpdateStreamModeInput_StreamModeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamModeDetails", ID: &iStreamModeDetails, Members: &mStreamModeDetails, Type: smithy.ShapeTypeStructure})
+var sUpdateStreamModeInput_WarmThroughputMiBps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmThroughputMiBps", ID: &i_NaturalIntegerObject, Type: smithy.ShapeTypeInteger})
+var sUpdateStreamRecordDistributionStrategyInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sUpdateStreamRecordDistributionStrategyInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sUpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordDistributionStrategy", ID: &iRecordDistributionStrategy, Members: &mRecordDistributionStrategy, Type: smithy.ShapeTypeEnum})
+var sUpdateStreamWarmThroughputInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Traits: &t4, Type: smithy.ShapeTypeString})
+var sUpdateStreamWarmThroughputInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateStreamWarmThroughputInput_StreamId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamId", ID: &i_StreamId, Traits: &t5, Type: smithy.ShapeTypeString})
+var sUpdateStreamWarmThroughputInput_WarmThroughputMiBps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmThroughputMiBps", ID: &i_NaturalIntegerObject, Type: smithy.ShapeTypeInteger})
+var sUpdateStreamWarmThroughputOutput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_StreamARN, Type: smithy.ShapeTypeString})
+var sUpdateStreamWarmThroughputOutput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sUpdateStreamWarmThroughputOutput_WarmThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WarmThroughput", ID: &iWarmThroughputObject, Members: &mWarmThroughputObject, Type: smithy.ShapeTypeStructure})
+
+var AddTagsToStream = &sAddTagsToStream
+
+var CreateChannel = &sCreateChannel
+
+var CreateStream = &sCreateStream
+
+var DecreaseStreamRetentionPeriod = &sDecreaseStreamRetentionPeriod
+
+var DeleteChannel = &sDeleteChannel
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteStream = &sDeleteStream
+
+var DeregisterStreamConsumer = &sDeregisterStreamConsumer
+
+var DescribeAccountSettings = &sDescribeAccountSettings
+
+var DescribeChannel = &sDescribeChannel
+
+var DescribeLimits = &sDescribeLimits
+
+var DescribeStream = &sDescribeStream
+
+var DescribeStreamConsumer = &sDescribeStreamConsumer
+
+var DescribeStreamSummary = &sDescribeStreamSummary
+
+var DisableEnhancedMonitoring = &sDisableEnhancedMonitoring
+
+var EnableEnhancedMonitoring = &sEnableEnhancedMonitoring
+
+var GetRecords = &sGetRecords
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var GetShardIterator = &sGetShardIterator
+
+var IncreaseStreamRetentionPeriod = &sIncreaseStreamRetentionPeriod
+
+var ListChannels = &sListChannels
+
+var ListShards = &sListShards
+
+var ListStreamConsumers = &sListStreamConsumers
+
+var ListStreams = &sListStreams
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTagsForStream = &sListTagsForStream
+
+var MergeShards = &sMergeShards
+
+var PutRecord = &sPutRecord
+
+var PutRecords = &sPutRecords
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var RegisterStreamConsumer = &sRegisterStreamConsumer
+
+var RemoveTagsFromStream = &sRemoveTagsFromStream
+
+var SplitShard = &sSplitShard
+
+var StartStreamEncryption = &sStartStreamEncryption
+
+var StopStreamEncryption = &sStopStreamEncryption
+
+var SubscribeToShard = &sSubscribeToShard
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAccountSettings = &sUpdateAccountSettings
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateMaxRecordSize = &sUpdateMaxRecordSize
+
+var UpdateShardCount = &sUpdateShardCount
+
+var UpdateStreamMode = &sUpdateStreamMode
+
+var UpdateStreamRecordDistributionStrategy = &sUpdateStreamRecordDistributionStrategy
+
+var UpdateStreamWarmThroughput = &sUpdateStreamWarmThroughput
+
+var _Kinesis_20131202 = &s_Kinesis_20131202
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _BooleanObject = &s_BooleanObject
+
+var _BucketARN = &s_BucketARN
+
+var _ChannelARN = &s_ChannelARN
+
+var _ChannelCountObject = &s_ChannelCountObject
+
+var ChannelDescription = &sChannelDescription
+var ChannelDescription_ChannelName = &sChannelDescription_ChannelName
+var ChannelDescription_ChannelARN = &sChannelDescription_ChannelARN
+var ChannelDescription_ChannelId = &sChannelDescription_ChannelId
+var ChannelDescription_ChannelStatus = &sChannelDescription_ChannelStatus
+var ChannelDescription_ChannelStatusReason = &sChannelDescription_ChannelStatusReason
+var ChannelDescription_ChannelCreationTimestamp = &sChannelDescription_ChannelCreationTimestamp
+var ChannelDescription_ServiceExecutionRoleARN = &sChannelDescription_ServiceExecutionRoleARN
+var ChannelDescription_StreamConfigurationList = &sChannelDescription_StreamConfigurationList
+var ChannelDescription_S3DestinationConfiguration = &sChannelDescription_S3DestinationConfiguration
+var ChannelDescription_S3TablesDestinationConfiguration = &sChannelDescription_S3TablesDestinationConfiguration
+var ChannelDescription_EncryptionConfiguration = &sChannelDescription_EncryptionConfiguration
+var ChannelDescription_LoggingConfiguration = &sChannelDescription_LoggingConfiguration
+
+var ChannelDestinationType = &sChannelDestinationType
+var ChannelDestinationType_S3 = &sChannelDestinationType_S3
+var ChannelDestinationType_S3_TABLES = &sChannelDestinationType_S3_TABLES
+
+var ChannelEncryptionConfiguration = &sChannelEncryptionConfiguration
+var ChannelEncryptionConfiguration_EncryptionType = &sChannelEncryptionConfiguration_EncryptionType
+var ChannelEncryptionConfiguration_KeyId = &sChannelEncryptionConfiguration_KeyId
+
+var ChannelEncryptionType = &sChannelEncryptionType
+var ChannelEncryptionType_KMS = &sChannelEncryptionType_KMS
+
+var _ChannelId = &s_ChannelId
+
+var ChannelLoggingConfiguration = &sChannelLoggingConfiguration
+var ChannelLoggingConfiguration_CloudWatchLogs = &sChannelLoggingConfiguration_CloudWatchLogs
+
+var ChannelLoggingUpdateInput = &sChannelLoggingUpdateInput
+var ChannelLoggingUpdateInput_CloudWatchLogs = &sChannelLoggingUpdateInput_CloudWatchLogs
+
+var _ChannelName = &s_ChannelName
+
+var ChannelStatus = &sChannelStatus
+var ChannelStatus_CREATING = &sChannelStatus_CREATING
+var ChannelStatus_ACTIVE = &sChannelStatus_ACTIVE
+var ChannelStatus_UPDATING = &sChannelStatus_UPDATING
+var ChannelStatus_DELETING = &sChannelStatus_DELETING
+var ChannelStatus_FAILED = &sChannelStatus_FAILED
+
+var _ChannelStatusReason = &s_ChannelStatusReason
+
+var ChannelStreamConfiguration = &sChannelStreamConfiguration
+var ChannelStreamConfiguration_StreamARN = &sChannelStreamConfiguration_StreamARN
+var ChannelStreamConfiguration_RecordConfiguration = &sChannelStreamConfiguration_RecordConfiguration
+
+var _ChannelStreamConfigurationList = &s_ChannelStreamConfigurationList
+var _ChannelStreamConfigurationList_member = &s_ChannelStreamConfigurationList_member
+
+var ChannelStreamDescription = &sChannelStreamDescription
+var ChannelStreamDescription_StreamARN = &sChannelStreamDescription_StreamARN
+var ChannelStreamDescription_StreamCreationTimestamp = &sChannelStreamDescription_StreamCreationTimestamp
+var ChannelStreamDescription_RecordConfiguration = &sChannelStreamDescription_RecordConfiguration
+
+var _ChannelStreamDescriptionList = &s_ChannelStreamDescriptionList
+var _ChannelStreamDescriptionList_member = &s_ChannelStreamDescriptionList_member
+
+var ChannelStreamIdentifier = &sChannelStreamIdentifier
+var ChannelStreamIdentifier_StreamARN = &sChannelStreamIdentifier_StreamARN
+var ChannelStreamIdentifier_StreamCreationTimestamp = &sChannelStreamIdentifier_StreamCreationTimestamp
+
+var _ChannelStreamIdentifierList = &s_ChannelStreamIdentifierList
+var _ChannelStreamIdentifierList_member = &s_ChannelStreamIdentifierList_member
+
+var ChannelSummary = &sChannelSummary
+var ChannelSummary_ChannelName = &sChannelSummary_ChannelName
+var ChannelSummary_ChannelARN = &sChannelSummary_ChannelARN
+var ChannelSummary_ChannelId = &sChannelSummary_ChannelId
+var ChannelSummary_ChannelStatus = &sChannelSummary_ChannelStatus
+var ChannelSummary_ChannelStatusReason = &sChannelSummary_ChannelStatusReason
+var ChannelSummary_ChannelCreationTimestamp = &sChannelSummary_ChannelCreationTimestamp
+var ChannelSummary_ChannelDestinationType = &sChannelSummary_ChannelDestinationType
+var ChannelSummary_Streams = &sChannelSummary_Streams
+
+var _ChannelSummaryList = &s_ChannelSummaryList
+var _ChannelSummaryList_member = &s_ChannelSummaryList_member
+
+var ChildShard = &sChildShard
+var ChildShard_ShardId = &sChildShard_ShardId
+var ChildShard_ParentShards = &sChildShard_ParentShards
+var ChildShard_HashKeyRange = &sChildShard_HashKeyRange
+
+var _ChildShardList = &s_ChildShardList
+var _ChildShardList_member = &s_ChildShardList_member
+
+var _CloudWatchLogGroupName = &s_CloudWatchLogGroupName
+
+var CloudWatchLogs = &sCloudWatchLogs
+var CloudWatchLogs_Enabled = &sCloudWatchLogs_Enabled
+var CloudWatchLogs_LogGroupName = &sCloudWatchLogs_LogGroupName
+var CloudWatchLogs_LogStreamName = &sCloudWatchLogs_LogStreamName
+
+var _CloudWatchLogStreamName = &s_CloudWatchLogStreamName
+
+var CloudWatchLogsUpdateInput = &sCloudWatchLogsUpdateInput
+var CloudWatchLogsUpdateInput_Enabled = &sCloudWatchLogsUpdateInput_Enabled
+var CloudWatchLogsUpdateInput_LogGroupName = &sCloudWatchLogsUpdateInput_LogGroupName
+var CloudWatchLogsUpdateInput_LogStreamName = &sCloudWatchLogsUpdateInput_LogStreamName
+
+var Consumer = &sConsumer
+var Consumer_ConsumerName = &sConsumer_ConsumerName
+var Consumer_ConsumerARN = &sConsumer_ConsumerARN
+var Consumer_ConsumerStatus = &sConsumer_ConsumerStatus
+var Consumer_ConsumerCreationTimestamp = &sConsumer_ConsumerCreationTimestamp
+
+var _ConsumerARN = &s_ConsumerARN
+
+var _ConsumerCountObject = &s_ConsumerCountObject
+
+var ConsumerDescription = &sConsumerDescription
+var ConsumerDescription_ConsumerName = &sConsumerDescription_ConsumerName
+var ConsumerDescription_ConsumerARN = &sConsumerDescription_ConsumerARN
+var ConsumerDescription_ConsumerStatus = &sConsumerDescription_ConsumerStatus
+var ConsumerDescription_ConsumerCreationTimestamp = &sConsumerDescription_ConsumerCreationTimestamp
+var ConsumerDescription_StreamARN = &sConsumerDescription_StreamARN
+
+var _ConsumerList = &s_ConsumerList
+var _ConsumerList_member = &s_ConsumerList_member
+
+var _ConsumerName = &s_ConsumerName
+
+var ConsumerStatus = &sConsumerStatus
+var ConsumerStatus_CREATING = &sConsumerStatus_CREATING
+var ConsumerStatus_DELETING = &sConsumerStatus_DELETING
+var ConsumerStatus_ACTIVE = &sConsumerStatus_ACTIVE
+
+var _Data = &s_Data
+
+var _DataFreshnessInSeconds = &s_DataFreshnessInSeconds
+
+var DeadLetterQueueS3Configuration = &sDeadLetterQueueS3Configuration
+var DeadLetterQueueS3Configuration_BucketARN = &sDeadLetterQueueS3Configuration_BucketARN
+var DeadLetterQueueS3Configuration_ExpectedBucketOwner = &sDeadLetterQueueS3Configuration_ExpectedBucketOwner
+var DeadLetterQueueS3Configuration_ErrorOutputPrefix = &sDeadLetterQueueS3Configuration_ErrorOutputPrefix
+
+var _DescribeStreamInputLimit = &s_DescribeStreamInputLimit
+
+var DryRunOperationException = &sDryRunOperationException
+var DryRunOperationException_message = &sDryRunOperationException_message
+
+var EncryptionType = &sEncryptionType
+var EncryptionType_NONE = &sEncryptionType_NONE
+var EncryptionType_KMS = &sEncryptionType_KMS
+
+var EnhancedMetrics = &sEnhancedMetrics
+var EnhancedMetrics_ShardLevelMetrics = &sEnhancedMetrics_ShardLevelMetrics
+
+var _EnhancedMonitoringList = &s_EnhancedMonitoringList
+var _EnhancedMonitoringList_member = &s_EnhancedMonitoringList_member
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ExpectedBucketOwner = &s_ExpectedBucketOwner
+
+var ExpiredIteratorException = &sExpiredIteratorException
+var ExpiredIteratorException_message = &sExpiredIteratorException_message
+
+var ExpiredNextTokenException = &sExpiredNextTokenException
+var ExpiredNextTokenException_message = &sExpiredNextTokenException_message
+
+var _GetRecordsInputLimit = &s_GetRecordsInputLimit
+
+var _GSRSchemaARN = &s_GSRSchemaARN
+
+var _HashKey = &s_HashKey
+
+var HashKeyRange = &sHashKeyRange
+var HashKeyRange_StartingHashKey = &sHashKeyRange_StartingHashKey
+var HashKeyRange_EndingHashKey = &sHashKeyRange_EndingHashKey
+
+var InternalFailureException = &sInternalFailureException
+var InternalFailureException_message = &sInternalFailureException_message
+
+var InvalidArgumentException = &sInvalidArgumentException
+var InvalidArgumentException_message = &sInvalidArgumentException_message
+
+var _KeyId = &s_KeyId
+
+var KMSAccessDeniedException = &sKMSAccessDeniedException
+var KMSAccessDeniedException_message = &sKMSAccessDeniedException_message
+
+var KMSDisabledException = &sKMSDisabledException
+var KMSDisabledException_message = &sKMSDisabledException_message
+
+var KMSInvalidStateException = &sKMSInvalidStateException
+var KMSInvalidStateException_message = &sKMSInvalidStateException_message
+
+var KMSNotFoundException = &sKMSNotFoundException
+var KMSNotFoundException_message = &sKMSNotFoundException_message
+
+var KMSOptInRequired = &sKMSOptInRequired
+var KMSOptInRequired_message = &sKMSOptInRequired_message
+
+var KMSThrottlingException = &sKMSThrottlingException
+var KMSThrottlingException_message = &sKMSThrottlingException_message
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _ListChannelsInputLimit = &s_ListChannelsInputLimit
+
+var _ListShardsInputLimit = &s_ListShardsInputLimit
+
+var _ListStreamConsumersInputLimit = &s_ListStreamConsumersInputLimit
+
+var _ListStreamsInputLimit = &s_ListStreamsInputLimit
+
+var _ListTagsForStreamInputLimit = &s_ListTagsForStreamInputLimit
+
+var _MaxRecordSizeInKiB = &s_MaxRecordSizeInKiB
+
+var MetricsName = &sMetricsName
+var MetricsName_INCOMING_BYTES = &sMetricsName_INCOMING_BYTES
+var MetricsName_INCOMING_RECORDS = &sMetricsName_INCOMING_RECORDS
+var MetricsName_OUTGOING_BYTES = &sMetricsName_OUTGOING_BYTES
+var MetricsName_OUTGOING_RECORDS = &sMetricsName_OUTGOING_RECORDS
+var MetricsName_WRITE_PROVISIONED_THROUGHPUT_EXCEEDED = &sMetricsName_WRITE_PROVISIONED_THROUGHPUT_EXCEEDED
+var MetricsName_READ_PROVISIONED_THROUGHPUT_EXCEEDED = &sMetricsName_READ_PROVISIONED_THROUGHPUT_EXCEEDED
+var MetricsName_ITERATOR_AGE_MILLISECONDS = &sMetricsName_ITERATOR_AGE_MILLISECONDS
+var MetricsName_ALL = &sMetricsName_ALL
+
+var _MetricsNameList = &s_MetricsNameList
+var _MetricsNameList_member = &s_MetricsNameList_member
+
+var _MillisBehindLatest = &s_MillisBehindLatest
+
+var MinimumThroughputBillingCommitmentInput = &sMinimumThroughputBillingCommitmentInput
+var MinimumThroughputBillingCommitmentInput_Status = &sMinimumThroughputBillingCommitmentInput_Status
+
+var MinimumThroughputBillingCommitmentInputStatus = &sMinimumThroughputBillingCommitmentInputStatus
+var MinimumThroughputBillingCommitmentInputStatus_ENABLED = &sMinimumThroughputBillingCommitmentInputStatus_ENABLED
+var MinimumThroughputBillingCommitmentInputStatus_DISABLED = &sMinimumThroughputBillingCommitmentInputStatus_DISABLED
+
+var MinimumThroughputBillingCommitmentOutput = &sMinimumThroughputBillingCommitmentOutput
+var MinimumThroughputBillingCommitmentOutput_Status = &sMinimumThroughputBillingCommitmentOutput_Status
+var MinimumThroughputBillingCommitmentOutput_StartedAt = &sMinimumThroughputBillingCommitmentOutput_StartedAt
+var MinimumThroughputBillingCommitmentOutput_EndedAt = &sMinimumThroughputBillingCommitmentOutput_EndedAt
+var MinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt = &sMinimumThroughputBillingCommitmentOutput_EarliestAllowedEndAt
+
+var MinimumThroughputBillingCommitmentOutputStatus = &sMinimumThroughputBillingCommitmentOutputStatus
+var MinimumThroughputBillingCommitmentOutputStatus_ENABLED = &sMinimumThroughputBillingCommitmentOutputStatus_ENABLED
+var MinimumThroughputBillingCommitmentOutputStatus_DISABLED = &sMinimumThroughputBillingCommitmentOutputStatus_DISABLED
+var MinimumThroughputBillingCommitmentOutputStatus_ENABLED_UNTIL_EARLIEST_ALLOWED_END = &sMinimumThroughputBillingCommitmentOutputStatus_ENABLED_UNTIL_EARLIEST_ALLOWED_END
+
+var _NaturalIntegerObject = &s_NaturalIntegerObject
+
+var _NextToken = &s_NextToken
+
+var _OnDemandStreamCountLimitObject = &s_OnDemandStreamCountLimitObject
+
+var _OnDemandStreamCountObject = &s_OnDemandStreamCountObject
+
+var PartitionField = &sPartitionField
+var PartitionField_Transform = &sPartitionField_Transform
+var PartitionField_SourceName = &sPartitionField_SourceName
+
+var _PartitionFieldList = &s_PartitionFieldList
+var _PartitionFieldList_member = &s_PartitionFieldList_member
+
+var _PartitionKey = &s_PartitionKey
+
+var _PartitionSourceName = &s_PartitionSourceName
+
+var PartitionSpec = &sPartitionSpec
+var PartitionSpec_PartitionFields = &sPartitionSpec_PartitionFields
+
+var PartitionTransform = &sPartitionTransform
+var PartitionTransform_TIME_HOUR = &sPartitionTransform_TIME_HOUR
+
+var _Policy = &s_Policy
+
+var _PositiveIntegerObject = &s_PositiveIntegerObject
+
+var ProvisionedThroughputExceededException = &sProvisionedThroughputExceededException
+var ProvisionedThroughputExceededException_message = &sProvisionedThroughputExceededException_message
+
+var PutRecordsRequestEntry = &sPutRecordsRequestEntry
+var PutRecordsRequestEntry_Data = &sPutRecordsRequestEntry_Data
+var PutRecordsRequestEntry_ExplicitHashKey = &sPutRecordsRequestEntry_ExplicitHashKey
+var PutRecordsRequestEntry_PartitionKey = &sPutRecordsRequestEntry_PartitionKey
+
+var _PutRecordsRequestEntryList = &s_PutRecordsRequestEntryList
+var _PutRecordsRequestEntryList_member = &s_PutRecordsRequestEntryList_member
+
+var PutRecordsResultEntry = &sPutRecordsResultEntry
+var PutRecordsResultEntry_SequenceNumber = &sPutRecordsResultEntry_SequenceNumber
+var PutRecordsResultEntry_ShardId = &sPutRecordsResultEntry_ShardId
+var PutRecordsResultEntry_ErrorCode = &sPutRecordsResultEntry_ErrorCode
+var PutRecordsResultEntry_ErrorMessage = &sPutRecordsResultEntry_ErrorMessage
+
+var _PutRecordsResultEntryList = &s_PutRecordsResultEntryList
+var _PutRecordsResultEntryList_member = &s_PutRecordsResultEntryList_member
+
+var Record = &sRecord
+var Record_SequenceNumber = &sRecord_SequenceNumber
+var Record_ApproximateArrivalTimestamp = &sRecord_ApproximateArrivalTimestamp
+var Record_Data = &sRecord_Data
+var Record_PartitionKey = &sRecord_PartitionKey
+var Record_EncryptionType = &sRecord_EncryptionType
+
+var RecordConfiguration = &sRecordConfiguration
+var RecordConfiguration_RecordFormatType = &sRecordConfiguration_RecordFormatType
+var RecordConfiguration_GSRSchemaARN = &sRecordConfiguration_GSRSchemaARN
+
+var RecordDistributionStrategy = &sRecordDistributionStrategy
+var RecordDistributionStrategy_AUTO = &sRecordDistributionStrategy_AUTO
+var RecordDistributionStrategy_USER_PARTITION_KEY = &sRecordDistributionStrategy_USER_PARTITION_KEY
+
+var RecordFormatType = &sRecordFormatType
+var RecordFormatType_GSR_JSON = &sRecordFormatType_GSR_JSON
+var RecordFormatType_JSON = &sRecordFormatType_JSON
+var RecordFormatType_STRING = &sRecordFormatType_STRING
+var RecordFormatType_BYTE_ARRAY = &sRecordFormatType_BYTE_ARRAY
+
+var _RecordList = &s_RecordList
+var _RecordList_member = &s_RecordList_member
+
+var _ResourceARN = &s_ResourceARN
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_message = &sResourceInUseException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RetentionPeriodHours = &s_RetentionPeriodHours
+
+var _RoleARN = &s_RoleARN
+
+var S3CompressionType = &sS3CompressionType
+var S3CompressionType_NONE = &sS3CompressionType_NONE
+var S3CompressionType_GZIP = &sS3CompressionType_GZIP
+var S3CompressionType_ZSTD = &sS3CompressionType_ZSTD
+
+var S3DestinationConfiguration = &sS3DestinationConfiguration
+var S3DestinationConfiguration_DataFreshnessInSeconds = &sS3DestinationConfiguration_DataFreshnessInSeconds
+var S3DestinationConfiguration_DeadLetterQueueS3Configuration = &sS3DestinationConfiguration_DeadLetterQueueS3Configuration
+var S3DestinationConfiguration_StorageConfiguration = &sS3DestinationConfiguration_StorageConfiguration
+
+var S3DestinationDescription = &sS3DestinationDescription
+var S3DestinationDescription_DataFreshnessInSeconds = &sS3DestinationDescription_DataFreshnessInSeconds
+var S3DestinationDescription_DeadLetterQueueS3Configuration = &sS3DestinationDescription_DeadLetterQueueS3Configuration
+var S3DestinationDescription_StorageConfiguration = &sS3DestinationDescription_StorageConfiguration
+
+var S3DestinationUpdateInput = &sS3DestinationUpdateInput
+var S3DestinationUpdateInput_DataFreshnessInSeconds = &sS3DestinationUpdateInput_DataFreshnessInSeconds
+
+var _S3ErrorOutputPrefix = &s_S3ErrorOutputPrefix
+
+var _S3OutputKeyTemplate = &s_S3OutputKeyTemplate
+
+var S3StorageClass = &sS3StorageClass
+var S3StorageClass_STANDARD = &sS3StorageClass_STANDARD
+var S3StorageClass_INTELLIGENT_TIERING = &sS3StorageClass_INTELLIGENT_TIERING
+var S3StorageClass_GLACIER_IR = &sS3StorageClass_GLACIER_IR
+
+var S3StorageConfiguration = &sS3StorageConfiguration
+var S3StorageConfiguration_BucketARN = &sS3StorageConfiguration_BucketARN
+var S3StorageConfiguration_ExpectedBucketOwner = &sS3StorageConfiguration_ExpectedBucketOwner
+var S3StorageConfiguration_OutputKeyTemplate = &sS3StorageConfiguration_OutputKeyTemplate
+var S3StorageConfiguration_StorageClass = &sS3StorageConfiguration_StorageClass
+var S3StorageConfiguration_CompressionType = &sS3StorageConfiguration_CompressionType
+
+var S3TablesCompressionType = &sS3TablesCompressionType
+var S3TablesCompressionType_NONE = &sS3TablesCompressionType_NONE
+var S3TablesCompressionType_ZSTD = &sS3TablesCompressionType_ZSTD
+var S3TablesCompressionType_SNAPPY = &sS3TablesCompressionType_SNAPPY
+
+var S3TablesConfiguration = &sS3TablesConfiguration
+var S3TablesConfiguration_TableBucketARN = &sS3TablesConfiguration_TableBucketARN
+var S3TablesConfiguration_Namespace = &sS3TablesConfiguration_Namespace
+var S3TablesConfiguration_TableName = &sS3TablesConfiguration_TableName
+var S3TablesConfiguration_CompressionType = &sS3TablesConfiguration_CompressionType
+var S3TablesConfiguration_PartitionSpec = &sS3TablesConfiguration_PartitionSpec
+
+var _S3TablesConfigurationList = &s_S3TablesConfigurationList
+var _S3TablesConfigurationList_member = &s_S3TablesConfigurationList_member
+
+var S3TablesDestinationConfiguration = &sS3TablesDestinationConfiguration
+var S3TablesDestinationConfiguration_DataFreshnessInSeconds = &sS3TablesDestinationConfiguration_DataFreshnessInSeconds
+var S3TablesDestinationConfiguration_DeadLetterQueueS3Configuration = &sS3TablesDestinationConfiguration_DeadLetterQueueS3Configuration
+var S3TablesDestinationConfiguration_S3TablesConfigurationList = &sS3TablesDestinationConfiguration_S3TablesConfigurationList
+
+var S3TablesDestinationDescription = &sS3TablesDestinationDescription
+var S3TablesDestinationDescription_DataFreshnessInSeconds = &sS3TablesDestinationDescription_DataFreshnessInSeconds
+var S3TablesDestinationDescription_DeadLetterQueueS3Configuration = &sS3TablesDestinationDescription_DeadLetterQueueS3Configuration
+var S3TablesDestinationDescription_S3TablesConfigurationList = &sS3TablesDestinationDescription_S3TablesConfigurationList
+
+var S3TablesDestinationUpdateInput = &sS3TablesDestinationUpdateInput
+var S3TablesDestinationUpdateInput_DataFreshnessInSeconds = &sS3TablesDestinationUpdateInput_DataFreshnessInSeconds
+
+var _S3TablesNamespace = &s_S3TablesNamespace
+
+var _S3TablesTableName = &s_S3TablesTableName
+
+var ScalingType = &sScalingType
+var ScalingType_UNIFORM_SCALING = &sScalingType_UNIFORM_SCALING
+
+var _SequenceNumber = &s_SequenceNumber
+
+var SequenceNumberRange = &sSequenceNumberRange
+var SequenceNumberRange_StartingSequenceNumber = &sSequenceNumberRange_StartingSequenceNumber
+var SequenceNumberRange_EndingSequenceNumber = &sSequenceNumberRange_EndingSequenceNumber
+
+var Shard = &sShard
+var Shard_ShardId = &sShard_ShardId
+var Shard_ParentShardId = &sShard_ParentShardId
+var Shard_AdjacentParentShardId = &sShard_AdjacentParentShardId
+var Shard_HashKeyRange = &sShard_HashKeyRange
+var Shard_SequenceNumberRange = &sShard_SequenceNumberRange
+
+var _ShardCountObject = &s_ShardCountObject
+
+var ShardFilter = &sShardFilter
+var ShardFilter_Type = &sShardFilter_Type
+var ShardFilter_ShardId = &sShardFilter_ShardId
+var ShardFilter_Timestamp = &sShardFilter_Timestamp
+
+var ShardFilterType = &sShardFilterType
+var ShardFilterType_AFTER_SHARD_ID = &sShardFilterType_AFTER_SHARD_ID
+var ShardFilterType_AT_TRIM_HORIZON = &sShardFilterType_AT_TRIM_HORIZON
+var ShardFilterType_FROM_TRIM_HORIZON = &sShardFilterType_FROM_TRIM_HORIZON
+var ShardFilterType_AT_LATEST = &sShardFilterType_AT_LATEST
+var ShardFilterType_AT_TIMESTAMP = &sShardFilterType_AT_TIMESTAMP
+var ShardFilterType_FROM_TIMESTAMP = &sShardFilterType_FROM_TIMESTAMP
+
+var _ShardId = &s_ShardId
+
+var _ShardIdList = &s_ShardIdList
+var _ShardIdList_member = &s_ShardIdList_member
+
+var _ShardIterator = &s_ShardIterator
+
+var ShardIteratorType = &sShardIteratorType
+var ShardIteratorType_AT_SEQUENCE_NUMBER = &sShardIteratorType_AT_SEQUENCE_NUMBER
+var ShardIteratorType_AFTER_SEQUENCE_NUMBER = &sShardIteratorType_AFTER_SEQUENCE_NUMBER
+var ShardIteratorType_TRIM_HORIZON = &sShardIteratorType_TRIM_HORIZON
+var ShardIteratorType_LATEST = &sShardIteratorType_LATEST
+var ShardIteratorType_AT_TIMESTAMP = &sShardIteratorType_AT_TIMESTAMP
+
+var _ShardList = &s_ShardList
+var _ShardList_member = &s_ShardList_member
+
+var StartingPosition = &sStartingPosition
+var StartingPosition_Type = &sStartingPosition_Type
+var StartingPosition_SequenceNumber = &sStartingPosition_SequenceNumber
+var StartingPosition_Timestamp = &sStartingPosition_Timestamp
+
+var _StreamARN = &s_StreamARN
+
+var StreamDescription = &sStreamDescription
+var StreamDescription_StreamName = &sStreamDescription_StreamName
+var StreamDescription_StreamARN = &sStreamDescription_StreamARN
+var StreamDescription_StreamStatus = &sStreamDescription_StreamStatus
+var StreamDescription_StreamModeDetails = &sStreamDescription_StreamModeDetails
+var StreamDescription_Shards = &sStreamDescription_Shards
+var StreamDescription_HasMoreShards = &sStreamDescription_HasMoreShards
+var StreamDescription_RetentionPeriodHours = &sStreamDescription_RetentionPeriodHours
+var StreamDescription_StreamCreationTimestamp = &sStreamDescription_StreamCreationTimestamp
+var StreamDescription_EnhancedMonitoring = &sStreamDescription_EnhancedMonitoring
+var StreamDescription_EncryptionType = &sStreamDescription_EncryptionType
+var StreamDescription_KeyId = &sStreamDescription_KeyId
+
+var StreamDescriptionSummary = &sStreamDescriptionSummary
+var StreamDescriptionSummary_StreamName = &sStreamDescriptionSummary_StreamName
+var StreamDescriptionSummary_StreamARN = &sStreamDescriptionSummary_StreamARN
+var StreamDescriptionSummary_StreamId = &sStreamDescriptionSummary_StreamId
+var StreamDescriptionSummary_StreamStatus = &sStreamDescriptionSummary_StreamStatus
+var StreamDescriptionSummary_StreamModeDetails = &sStreamDescriptionSummary_StreamModeDetails
+var StreamDescriptionSummary_RetentionPeriodHours = &sStreamDescriptionSummary_RetentionPeriodHours
+var StreamDescriptionSummary_StreamCreationTimestamp = &sStreamDescriptionSummary_StreamCreationTimestamp
+var StreamDescriptionSummary_EnhancedMonitoring = &sStreamDescriptionSummary_EnhancedMonitoring
+var StreamDescriptionSummary_EncryptionType = &sStreamDescriptionSummary_EncryptionType
+var StreamDescriptionSummary_KeyId = &sStreamDescriptionSummary_KeyId
+var StreamDescriptionSummary_OpenShardCount = &sStreamDescriptionSummary_OpenShardCount
+var StreamDescriptionSummary_ConsumerCount = &sStreamDescriptionSummary_ConsumerCount
+var StreamDescriptionSummary_WarmThroughput = &sStreamDescriptionSummary_WarmThroughput
+var StreamDescriptionSummary_MaxRecordSizeInKiB = &sStreamDescriptionSummary_MaxRecordSizeInKiB
+var StreamDescriptionSummary_ChannelCount = &sStreamDescriptionSummary_ChannelCount
+var StreamDescriptionSummary_RecordDistributionStrategy = &sStreamDescriptionSummary_RecordDistributionStrategy
+
+var StreamFilter = &sStreamFilter
+var StreamFilter_StreamARN = &sStreamFilter_StreamARN
+var StreamFilter_StreamCreationTimestamp = &sStreamFilter_StreamCreationTimestamp
+
+var _StreamFilterList = &s_StreamFilterList
+var _StreamFilterList_member = &s_StreamFilterList_member
+
+var _StreamId = &s_StreamId
+
+var StreamMode = &sStreamMode
+var StreamMode_PROVISIONED = &sStreamMode_PROVISIONED
+var StreamMode_ON_DEMAND = &sStreamMode_ON_DEMAND
+
+var StreamModeDetails = &sStreamModeDetails
+var StreamModeDetails_StreamMode = &sStreamModeDetails_StreamMode
+
+var _StreamName = &s_StreamName
+
+var _StreamNameList = &s_StreamNameList
+var _StreamNameList_member = &s_StreamNameList_member
+
+var StreamStatus = &sStreamStatus
+var StreamStatus_CREATING = &sStreamStatus_CREATING
+var StreamStatus_DELETING = &sStreamStatus_DELETING
+var StreamStatus_ACTIVE = &sStreamStatus_ACTIVE
+var StreamStatus_UPDATING = &sStreamStatus_UPDATING
+
+var StreamSummary = &sStreamSummary
+var StreamSummary_StreamName = &sStreamSummary_StreamName
+var StreamSummary_StreamARN = &sStreamSummary_StreamARN
+var StreamSummary_StreamStatus = &sStreamSummary_StreamStatus
+var StreamSummary_StreamModeDetails = &sStreamSummary_StreamModeDetails
+var StreamSummary_StreamCreationTimestamp = &sStreamSummary_StreamCreationTimestamp
+
+var _StreamSummaryList = &s_StreamSummaryList
+var _StreamSummaryList_member = &s_StreamSummaryList_member
+
+var SubscribeToShardEvent = &sSubscribeToShardEvent
+var SubscribeToShardEvent_Records = &sSubscribeToShardEvent_Records
+var SubscribeToShardEvent_ContinuationSequenceNumber = &sSubscribeToShardEvent_ContinuationSequenceNumber
+var SubscribeToShardEvent_MillisBehindLatest = &sSubscribeToShardEvent_MillisBehindLatest
+var SubscribeToShardEvent_ChildShards = &sSubscribeToShardEvent_ChildShards
+
+var SubscribeToShardEventStream = &sSubscribeToShardEventStream
+var SubscribeToShardEventStream_SubscribeToShardEvent = &sSubscribeToShardEventStream_SubscribeToShardEvent
+var SubscribeToShardEventStream_ResourceNotFoundException = &sSubscribeToShardEventStream_ResourceNotFoundException
+var SubscribeToShardEventStream_ResourceInUseException = &sSubscribeToShardEventStream_ResourceInUseException
+var SubscribeToShardEventStream_KMSDisabledException = &sSubscribeToShardEventStream_KMSDisabledException
+var SubscribeToShardEventStream_KMSInvalidStateException = &sSubscribeToShardEventStream_KMSInvalidStateException
+var SubscribeToShardEventStream_KMSAccessDeniedException = &sSubscribeToShardEventStream_KMSAccessDeniedException
+var SubscribeToShardEventStream_KMSNotFoundException = &sSubscribeToShardEventStream_KMSNotFoundException
+var SubscribeToShardEventStream_KMSOptInRequired = &sSubscribeToShardEventStream_KMSOptInRequired
+var SubscribeToShardEventStream_KMSThrottlingException = &sSubscribeToShardEventStream_KMSThrottlingException
+var SubscribeToShardEventStream_InternalFailureException = &sSubscribeToShardEventStream_InternalFailureException
+
+var _TableBucketARN = &s_TableBucketARN
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _Timestamp = &s_Timestamp
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var WarmThroughputObject = &sWarmThroughputObject
+var WarmThroughputObject_TargetMiBps = &sWarmThroughputObject_TargetMiBps
+var WarmThroughputObject_CurrentMiBps = &sWarmThroughputObject_CurrentMiBps
+
+var AddTagsToStreamInput = &sAddTagsToStreamInput
+var AddTagsToStreamInput_StreamName = &sAddTagsToStreamInput_StreamName
+var AddTagsToStreamInput_Tags = &sAddTagsToStreamInput_Tags
+var AddTagsToStreamInput_StreamARN = &sAddTagsToStreamInput_StreamARN
+var AddTagsToStreamInput_StreamId = &sAddTagsToStreamInput_StreamId
+
+var CreateChannelInput = &sCreateChannelInput
+var CreateChannelInput_ChannelName = &sCreateChannelInput_ChannelName
+var CreateChannelInput_ServiceExecutionRoleARN = &sCreateChannelInput_ServiceExecutionRoleARN
+var CreateChannelInput_StreamConfigurationList = &sCreateChannelInput_StreamConfigurationList
+var CreateChannelInput_S3DestinationConfiguration = &sCreateChannelInput_S3DestinationConfiguration
+var CreateChannelInput_S3TablesDestinationConfiguration = &sCreateChannelInput_S3TablesDestinationConfiguration
+var CreateChannelInput_EncryptionConfiguration = &sCreateChannelInput_EncryptionConfiguration
+var CreateChannelInput_Tags = &sCreateChannelInput_Tags
+var CreateChannelInput_LoggingConfiguration = &sCreateChannelInput_LoggingConfiguration
+
+var CreateChannelOutput = &sCreateChannelOutput
+var CreateChannelOutput_ChannelDescription = &sCreateChannelOutput_ChannelDescription
+
+var CreateStreamInput = &sCreateStreamInput
+var CreateStreamInput_StreamName = &sCreateStreamInput_StreamName
+var CreateStreamInput_ShardCount = &sCreateStreamInput_ShardCount
+var CreateStreamInput_StreamModeDetails = &sCreateStreamInput_StreamModeDetails
+var CreateStreamInput_Tags = &sCreateStreamInput_Tags
+var CreateStreamInput_WarmThroughputMiBps = &sCreateStreamInput_WarmThroughputMiBps
+var CreateStreamInput_MaxRecordSizeInKiB = &sCreateStreamInput_MaxRecordSizeInKiB
+var CreateStreamInput_RecordDistributionStrategy = &sCreateStreamInput_RecordDistributionStrategy
+
+var DecreaseStreamRetentionPeriodInput = &sDecreaseStreamRetentionPeriodInput
+var DecreaseStreamRetentionPeriodInput_StreamName = &sDecreaseStreamRetentionPeriodInput_StreamName
+var DecreaseStreamRetentionPeriodInput_RetentionPeriodHours = &sDecreaseStreamRetentionPeriodInput_RetentionPeriodHours
+var DecreaseStreamRetentionPeriodInput_StreamARN = &sDecreaseStreamRetentionPeriodInput_StreamARN
+var DecreaseStreamRetentionPeriodInput_StreamId = &sDecreaseStreamRetentionPeriodInput_StreamId
+
+var DeleteChannelInput = &sDeleteChannelInput
+var DeleteChannelInput_ChannelARN = &sDeleteChannelInput_ChannelARN
+
+var DeleteResourcePolicyInput = &sDeleteResourcePolicyInput
+var DeleteResourcePolicyInput_ResourceARN = &sDeleteResourcePolicyInput_ResourceARN
+var DeleteResourcePolicyInput_StreamId = &sDeleteResourcePolicyInput_StreamId
+
+var DeleteStreamInput = &sDeleteStreamInput
+var DeleteStreamInput_StreamName = &sDeleteStreamInput_StreamName
+var DeleteStreamInput_EnforceConsumerDeletion = &sDeleteStreamInput_EnforceConsumerDeletion
+var DeleteStreamInput_StreamARN = &sDeleteStreamInput_StreamARN
+var DeleteStreamInput_StreamId = &sDeleteStreamInput_StreamId
+
+var DeregisterStreamConsumerInput = &sDeregisterStreamConsumerInput
+var DeregisterStreamConsumerInput_StreamARN = &sDeregisterStreamConsumerInput_StreamARN
+var DeregisterStreamConsumerInput_ConsumerName = &sDeregisterStreamConsumerInput_ConsumerName
+var DeregisterStreamConsumerInput_ConsumerARN = &sDeregisterStreamConsumerInput_ConsumerARN
+var DeregisterStreamConsumerInput_StreamId = &sDeregisterStreamConsumerInput_StreamId
+
+var DescribeAccountSettingsInput = &sDescribeAccountSettingsInput
+
+var DescribeAccountSettingsOutput = &sDescribeAccountSettingsOutput
+var DescribeAccountSettingsOutput_MinimumThroughputBillingCommitment = &sDescribeAccountSettingsOutput_MinimumThroughputBillingCommitment
+
+var DescribeChannelInput = &sDescribeChannelInput
+var DescribeChannelInput_ChannelARN = &sDescribeChannelInput_ChannelARN
+
+var DescribeChannelOutput = &sDescribeChannelOutput
+var DescribeChannelOutput_ChannelDescription = &sDescribeChannelOutput_ChannelDescription
+
+var DescribeLimitsInput = &sDescribeLimitsInput
+
+var DescribeLimitsOutput = &sDescribeLimitsOutput
+var DescribeLimitsOutput_ShardLimit = &sDescribeLimitsOutput_ShardLimit
+var DescribeLimitsOutput_OpenShardCount = &sDescribeLimitsOutput_OpenShardCount
+var DescribeLimitsOutput_OnDemandStreamCount = &sDescribeLimitsOutput_OnDemandStreamCount
+var DescribeLimitsOutput_OnDemandStreamCountLimit = &sDescribeLimitsOutput_OnDemandStreamCountLimit
+var DescribeLimitsOutput_ChannelCount = &sDescribeLimitsOutput_ChannelCount
+var DescribeLimitsOutput_ChannelCountLimit = &sDescribeLimitsOutput_ChannelCountLimit
+
+var DescribeStreamConsumerInput = &sDescribeStreamConsumerInput
+var DescribeStreamConsumerInput_StreamARN = &sDescribeStreamConsumerInput_StreamARN
+var DescribeStreamConsumerInput_ConsumerName = &sDescribeStreamConsumerInput_ConsumerName
+var DescribeStreamConsumerInput_ConsumerARN = &sDescribeStreamConsumerInput_ConsumerARN
+var DescribeStreamConsumerInput_StreamId = &sDescribeStreamConsumerInput_StreamId
+
+var DescribeStreamConsumerOutput = &sDescribeStreamConsumerOutput
+var DescribeStreamConsumerOutput_ConsumerDescription = &sDescribeStreamConsumerOutput_ConsumerDescription
+
+var DescribeStreamInput = &sDescribeStreamInput
+var DescribeStreamInput_StreamName = &sDescribeStreamInput_StreamName
+var DescribeStreamInput_Limit = &sDescribeStreamInput_Limit
+var DescribeStreamInput_ExclusiveStartShardId = &sDescribeStreamInput_ExclusiveStartShardId
+var DescribeStreamInput_StreamARN = &sDescribeStreamInput_StreamARN
+var DescribeStreamInput_StreamId = &sDescribeStreamInput_StreamId
+
+var DescribeStreamOutput = &sDescribeStreamOutput
+var DescribeStreamOutput_StreamDescription = &sDescribeStreamOutput_StreamDescription
+
+var DescribeStreamSummaryInput = &sDescribeStreamSummaryInput
+var DescribeStreamSummaryInput_StreamName = &sDescribeStreamSummaryInput_StreamName
+var DescribeStreamSummaryInput_StreamARN = &sDescribeStreamSummaryInput_StreamARN
+var DescribeStreamSummaryInput_StreamId = &sDescribeStreamSummaryInput_StreamId
+
+var DescribeStreamSummaryOutput = &sDescribeStreamSummaryOutput
+var DescribeStreamSummaryOutput_StreamDescriptionSummary = &sDescribeStreamSummaryOutput_StreamDescriptionSummary
+
+var DisableEnhancedMonitoringInput = &sDisableEnhancedMonitoringInput
+var DisableEnhancedMonitoringInput_StreamName = &sDisableEnhancedMonitoringInput_StreamName
+var DisableEnhancedMonitoringInput_ShardLevelMetrics = &sDisableEnhancedMonitoringInput_ShardLevelMetrics
+var DisableEnhancedMonitoringInput_StreamARN = &sDisableEnhancedMonitoringInput_StreamARN
+var DisableEnhancedMonitoringInput_StreamId = &sDisableEnhancedMonitoringInput_StreamId
+
+var EnhancedMonitoringOutput = &sEnhancedMonitoringOutput
+var EnhancedMonitoringOutput_StreamName = &sEnhancedMonitoringOutput_StreamName
+var EnhancedMonitoringOutput_CurrentShardLevelMetrics = &sEnhancedMonitoringOutput_CurrentShardLevelMetrics
+var EnhancedMonitoringOutput_DesiredShardLevelMetrics = &sEnhancedMonitoringOutput_DesiredShardLevelMetrics
+var EnhancedMonitoringOutput_StreamARN = &sEnhancedMonitoringOutput_StreamARN
+
+var EnableEnhancedMonitoringInput = &sEnableEnhancedMonitoringInput
+var EnableEnhancedMonitoringInput_StreamName = &sEnableEnhancedMonitoringInput_StreamName
+var EnableEnhancedMonitoringInput_ShardLevelMetrics = &sEnableEnhancedMonitoringInput_ShardLevelMetrics
+var EnableEnhancedMonitoringInput_StreamARN = &sEnableEnhancedMonitoringInput_StreamARN
+var EnableEnhancedMonitoringInput_StreamId = &sEnableEnhancedMonitoringInput_StreamId
+
+var GetRecordsInput = &sGetRecordsInput
+var GetRecordsInput_ShardIterator = &sGetRecordsInput_ShardIterator
+var GetRecordsInput_Limit = &sGetRecordsInput_Limit
+var GetRecordsInput_StreamARN = &sGetRecordsInput_StreamARN
+var GetRecordsInput_StreamId = &sGetRecordsInput_StreamId
+var GetRecordsInput_DryRun = &sGetRecordsInput_DryRun
+
+var GetRecordsOutput = &sGetRecordsOutput
+var GetRecordsOutput_Records = &sGetRecordsOutput_Records
+var GetRecordsOutput_NextShardIterator = &sGetRecordsOutput_NextShardIterator
+var GetRecordsOutput_MillisBehindLatest = &sGetRecordsOutput_MillisBehindLatest
+var GetRecordsOutput_ChildShards = &sGetRecordsOutput_ChildShards
+
+var GetResourcePolicyInput = &sGetResourcePolicyInput
+var GetResourcePolicyInput_ResourceARN = &sGetResourcePolicyInput_ResourceARN
+var GetResourcePolicyInput_StreamId = &sGetResourcePolicyInput_StreamId
+
+var GetResourcePolicyOutput = &sGetResourcePolicyOutput
+var GetResourcePolicyOutput_Policy = &sGetResourcePolicyOutput_Policy
+
+var GetShardIteratorInput = &sGetShardIteratorInput
+var GetShardIteratorInput_StreamName = &sGetShardIteratorInput_StreamName
+var GetShardIteratorInput_ShardId = &sGetShardIteratorInput_ShardId
+var GetShardIteratorInput_ShardIteratorType = &sGetShardIteratorInput_ShardIteratorType
+var GetShardIteratorInput_StartingSequenceNumber = &sGetShardIteratorInput_StartingSequenceNumber
+var GetShardIteratorInput_Timestamp = &sGetShardIteratorInput_Timestamp
+var GetShardIteratorInput_StreamARN = &sGetShardIteratorInput_StreamARN
+var GetShardIteratorInput_StreamId = &sGetShardIteratorInput_StreamId
+var GetShardIteratorInput_DryRun = &sGetShardIteratorInput_DryRun
+
+var GetShardIteratorOutput = &sGetShardIteratorOutput
+var GetShardIteratorOutput_ShardIterator = &sGetShardIteratorOutput_ShardIterator
+
+var IncreaseStreamRetentionPeriodInput = &sIncreaseStreamRetentionPeriodInput
+var IncreaseStreamRetentionPeriodInput_StreamName = &sIncreaseStreamRetentionPeriodInput_StreamName
+var IncreaseStreamRetentionPeriodInput_RetentionPeriodHours = &sIncreaseStreamRetentionPeriodInput_RetentionPeriodHours
+var IncreaseStreamRetentionPeriodInput_StreamARN = &sIncreaseStreamRetentionPeriodInput_StreamARN
+var IncreaseStreamRetentionPeriodInput_StreamId = &sIncreaseStreamRetentionPeriodInput_StreamId
+
+var ListChannelsInput = &sListChannelsInput
+var ListChannelsInput_StreamFilter = &sListChannelsInput_StreamFilter
+var ListChannelsInput_MaxResults = &sListChannelsInput_MaxResults
+var ListChannelsInput_NextToken = &sListChannelsInput_NextToken
+
+var ListChannelsOutput = &sListChannelsOutput
+var ListChannelsOutput_ChannelSummaries = &sListChannelsOutput_ChannelSummaries
+var ListChannelsOutput_NextToken = &sListChannelsOutput_NextToken
+
+var ListShardsInput = &sListShardsInput
+var ListShardsInput_StreamName = &sListShardsInput_StreamName
+var ListShardsInput_NextToken = &sListShardsInput_NextToken
+var ListShardsInput_ExclusiveStartShardId = &sListShardsInput_ExclusiveStartShardId
+var ListShardsInput_MaxResults = &sListShardsInput_MaxResults
+var ListShardsInput_StreamCreationTimestamp = &sListShardsInput_StreamCreationTimestamp
+var ListShardsInput_ShardFilter = &sListShardsInput_ShardFilter
+var ListShardsInput_StreamARN = &sListShardsInput_StreamARN
+var ListShardsInput_StreamId = &sListShardsInput_StreamId
+
+var ListShardsOutput = &sListShardsOutput
+var ListShardsOutput_Shards = &sListShardsOutput_Shards
+var ListShardsOutput_NextToken = &sListShardsOutput_NextToken
+
+var ListStreamConsumersInput = &sListStreamConsumersInput
+var ListStreamConsumersInput_StreamARN = &sListStreamConsumersInput_StreamARN
+var ListStreamConsumersInput_NextToken = &sListStreamConsumersInput_NextToken
+var ListStreamConsumersInput_MaxResults = &sListStreamConsumersInput_MaxResults
+var ListStreamConsumersInput_StreamCreationTimestamp = &sListStreamConsumersInput_StreamCreationTimestamp
+var ListStreamConsumersInput_StreamId = &sListStreamConsumersInput_StreamId
+
+var ListStreamConsumersOutput = &sListStreamConsumersOutput
+var ListStreamConsumersOutput_Consumers = &sListStreamConsumersOutput_Consumers
+var ListStreamConsumersOutput_NextToken = &sListStreamConsumersOutput_NextToken
+
+var ListStreamsInput = &sListStreamsInput
+var ListStreamsInput_Limit = &sListStreamsInput_Limit
+var ListStreamsInput_ExclusiveStartStreamName = &sListStreamsInput_ExclusiveStartStreamName
+var ListStreamsInput_NextToken = &sListStreamsInput_NextToken
+
+var ListStreamsOutput = &sListStreamsOutput
+var ListStreamsOutput_StreamNames = &sListStreamsOutput_StreamNames
+var ListStreamsOutput_HasMoreStreams = &sListStreamsOutput_HasMoreStreams
+var ListStreamsOutput_NextToken = &sListStreamsOutput_NextToken
+var ListStreamsOutput_StreamSummaries = &sListStreamsOutput_StreamSummaries
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceARN = &sListTagsForResourceInput_ResourceARN
+var ListTagsForResourceInput_StreamId = &sListTagsForResourceInput_StreamId
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var ListTagsForStreamInput = &sListTagsForStreamInput
+var ListTagsForStreamInput_StreamName = &sListTagsForStreamInput_StreamName
+var ListTagsForStreamInput_ExclusiveStartTagKey = &sListTagsForStreamInput_ExclusiveStartTagKey
+var ListTagsForStreamInput_Limit = &sListTagsForStreamInput_Limit
+var ListTagsForStreamInput_StreamARN = &sListTagsForStreamInput_StreamARN
+var ListTagsForStreamInput_StreamId = &sListTagsForStreamInput_StreamId
+
+var ListTagsForStreamOutput = &sListTagsForStreamOutput
+var ListTagsForStreamOutput_Tags = &sListTagsForStreamOutput_Tags
+var ListTagsForStreamOutput_HasMoreTags = &sListTagsForStreamOutput_HasMoreTags
+
+var MergeShardsInput = &sMergeShardsInput
+var MergeShardsInput_StreamName = &sMergeShardsInput_StreamName
+var MergeShardsInput_ShardToMerge = &sMergeShardsInput_ShardToMerge
+var MergeShardsInput_AdjacentShardToMerge = &sMergeShardsInput_AdjacentShardToMerge
+var MergeShardsInput_StreamARN = &sMergeShardsInput_StreamARN
+var MergeShardsInput_StreamId = &sMergeShardsInput_StreamId
+
+var PutRecordInput = &sPutRecordInput
+var PutRecordInput_StreamName = &sPutRecordInput_StreamName
+var PutRecordInput_Data = &sPutRecordInput_Data
+var PutRecordInput_PartitionKey = &sPutRecordInput_PartitionKey
+var PutRecordInput_ExplicitHashKey = &sPutRecordInput_ExplicitHashKey
+var PutRecordInput_SequenceNumberForOrdering = &sPutRecordInput_SequenceNumberForOrdering
+var PutRecordInput_StreamARN = &sPutRecordInput_StreamARN
+var PutRecordInput_StreamId = &sPutRecordInput_StreamId
+var PutRecordInput_DryRun = &sPutRecordInput_DryRun
+
+var PutRecordOutput = &sPutRecordOutput
+var PutRecordOutput_ShardId = &sPutRecordOutput_ShardId
+var PutRecordOutput_SequenceNumber = &sPutRecordOutput_SequenceNumber
+var PutRecordOutput_EncryptionType = &sPutRecordOutput_EncryptionType
+
+var PutRecordsInput = &sPutRecordsInput
+var PutRecordsInput_Records = &sPutRecordsInput_Records
+var PutRecordsInput_StreamName = &sPutRecordsInput_StreamName
+var PutRecordsInput_StreamARN = &sPutRecordsInput_StreamARN
+var PutRecordsInput_StreamId = &sPutRecordsInput_StreamId
+var PutRecordsInput_DryRun = &sPutRecordsInput_DryRun
+
+var PutRecordsOutput = &sPutRecordsOutput
+var PutRecordsOutput_FailedRecordCount = &sPutRecordsOutput_FailedRecordCount
+var PutRecordsOutput_Records = &sPutRecordsOutput_Records
+var PutRecordsOutput_EncryptionType = &sPutRecordsOutput_EncryptionType
+
+var PutResourcePolicyInput = &sPutResourcePolicyInput
+var PutResourcePolicyInput_ResourceARN = &sPutResourcePolicyInput_ResourceARN
+var PutResourcePolicyInput_StreamId = &sPutResourcePolicyInput_StreamId
+var PutResourcePolicyInput_Policy = &sPutResourcePolicyInput_Policy
+
+var RegisterStreamConsumerInput = &sRegisterStreamConsumerInput
+var RegisterStreamConsumerInput_StreamARN = &sRegisterStreamConsumerInput_StreamARN
+var RegisterStreamConsumerInput_ConsumerName = &sRegisterStreamConsumerInput_ConsumerName
+var RegisterStreamConsumerInput_StreamId = &sRegisterStreamConsumerInput_StreamId
+var RegisterStreamConsumerInput_Tags = &sRegisterStreamConsumerInput_Tags
+
+var RegisterStreamConsumerOutput = &sRegisterStreamConsumerOutput
+var RegisterStreamConsumerOutput_Consumer = &sRegisterStreamConsumerOutput_Consumer
+
+var RemoveTagsFromStreamInput = &sRemoveTagsFromStreamInput
+var RemoveTagsFromStreamInput_StreamName = &sRemoveTagsFromStreamInput_StreamName
+var RemoveTagsFromStreamInput_TagKeys = &sRemoveTagsFromStreamInput_TagKeys
+var RemoveTagsFromStreamInput_StreamARN = &sRemoveTagsFromStreamInput_StreamARN
+var RemoveTagsFromStreamInput_StreamId = &sRemoveTagsFromStreamInput_StreamId
+
+var SplitShardInput = &sSplitShardInput
+var SplitShardInput_StreamName = &sSplitShardInput_StreamName
+var SplitShardInput_ShardToSplit = &sSplitShardInput_ShardToSplit
+var SplitShardInput_NewStartingHashKey = &sSplitShardInput_NewStartingHashKey
+var SplitShardInput_StreamARN = &sSplitShardInput_StreamARN
+var SplitShardInput_StreamId = &sSplitShardInput_StreamId
+
+var StartStreamEncryptionInput = &sStartStreamEncryptionInput
+var StartStreamEncryptionInput_StreamName = &sStartStreamEncryptionInput_StreamName
+var StartStreamEncryptionInput_EncryptionType = &sStartStreamEncryptionInput_EncryptionType
+var StartStreamEncryptionInput_KeyId = &sStartStreamEncryptionInput_KeyId
+var StartStreamEncryptionInput_StreamARN = &sStartStreamEncryptionInput_StreamARN
+var StartStreamEncryptionInput_StreamId = &sStartStreamEncryptionInput_StreamId
+
+var StopStreamEncryptionInput = &sStopStreamEncryptionInput
+var StopStreamEncryptionInput_StreamName = &sStopStreamEncryptionInput_StreamName
+var StopStreamEncryptionInput_EncryptionType = &sStopStreamEncryptionInput_EncryptionType
+var StopStreamEncryptionInput_KeyId = &sStopStreamEncryptionInput_KeyId
+var StopStreamEncryptionInput_StreamARN = &sStopStreamEncryptionInput_StreamARN
+var StopStreamEncryptionInput_StreamId = &sStopStreamEncryptionInput_StreamId
+
+var SubscribeToShardInput = &sSubscribeToShardInput
+var SubscribeToShardInput_ConsumerARN = &sSubscribeToShardInput_ConsumerARN
+var SubscribeToShardInput_StreamId = &sSubscribeToShardInput_StreamId
+var SubscribeToShardInput_ShardId = &sSubscribeToShardInput_ShardId
+var SubscribeToShardInput_StartingPosition = &sSubscribeToShardInput_StartingPosition
+var SubscribeToShardInput_DryRun = &sSubscribeToShardInput_DryRun
+
+var SubscribeToShardOutput = &sSubscribeToShardOutput
+var SubscribeToShardOutput_EventStream = &sSubscribeToShardOutput_EventStream
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+var TagResourceInput_ResourceARN = &sTagResourceInput_ResourceARN
+var TagResourceInput_StreamId = &sTagResourceInput_StreamId
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+var UntagResourceInput_ResourceARN = &sUntagResourceInput_ResourceARN
+var UntagResourceInput_StreamId = &sUntagResourceInput_StreamId
+
+var UpdateAccountSettingsInput = &sUpdateAccountSettingsInput
+var UpdateAccountSettingsInput_MinimumThroughputBillingCommitment = &sUpdateAccountSettingsInput_MinimumThroughputBillingCommitment
+
+var UpdateAccountSettingsOutput = &sUpdateAccountSettingsOutput
+var UpdateAccountSettingsOutput_MinimumThroughputBillingCommitment = &sUpdateAccountSettingsOutput_MinimumThroughputBillingCommitment
+
+var UpdateChannelInput = &sUpdateChannelInput
+var UpdateChannelInput_ChannelARN = &sUpdateChannelInput_ChannelARN
+var UpdateChannelInput_S3DestinationConfiguration = &sUpdateChannelInput_S3DestinationConfiguration
+var UpdateChannelInput_S3TablesDestinationConfiguration = &sUpdateChannelInput_S3TablesDestinationConfiguration
+var UpdateChannelInput_LoggingConfiguration = &sUpdateChannelInput_LoggingConfiguration
+
+var UpdateChannelOutput = &sUpdateChannelOutput
+var UpdateChannelOutput_ChannelDescription = &sUpdateChannelOutput_ChannelDescription
+
+var UpdateMaxRecordSizeInput = &sUpdateMaxRecordSizeInput
+var UpdateMaxRecordSizeInput_StreamARN = &sUpdateMaxRecordSizeInput_StreamARN
+var UpdateMaxRecordSizeInput_StreamId = &sUpdateMaxRecordSizeInput_StreamId
+var UpdateMaxRecordSizeInput_MaxRecordSizeInKiB = &sUpdateMaxRecordSizeInput_MaxRecordSizeInKiB
+
+var UpdateShardCountInput = &sUpdateShardCountInput
+var UpdateShardCountInput_StreamName = &sUpdateShardCountInput_StreamName
+var UpdateShardCountInput_TargetShardCount = &sUpdateShardCountInput_TargetShardCount
+var UpdateShardCountInput_ScalingType = &sUpdateShardCountInput_ScalingType
+var UpdateShardCountInput_StreamARN = &sUpdateShardCountInput_StreamARN
+var UpdateShardCountInput_StreamId = &sUpdateShardCountInput_StreamId
+
+var UpdateShardCountOutput = &sUpdateShardCountOutput
+var UpdateShardCountOutput_StreamName = &sUpdateShardCountOutput_StreamName
+var UpdateShardCountOutput_CurrentShardCount = &sUpdateShardCountOutput_CurrentShardCount
+var UpdateShardCountOutput_TargetShardCount = &sUpdateShardCountOutput_TargetShardCount
+var UpdateShardCountOutput_StreamARN = &sUpdateShardCountOutput_StreamARN
+
+var UpdateStreamModeInput = &sUpdateStreamModeInput
+var UpdateStreamModeInput_StreamARN = &sUpdateStreamModeInput_StreamARN
+var UpdateStreamModeInput_StreamId = &sUpdateStreamModeInput_StreamId
+var UpdateStreamModeInput_StreamModeDetails = &sUpdateStreamModeInput_StreamModeDetails
+var UpdateStreamModeInput_WarmThroughputMiBps = &sUpdateStreamModeInput_WarmThroughputMiBps
+
+var UpdateStreamRecordDistributionStrategyInput = &sUpdateStreamRecordDistributionStrategyInput
+var UpdateStreamRecordDistributionStrategyInput_StreamARN = &sUpdateStreamRecordDistributionStrategyInput_StreamARN
+var UpdateStreamRecordDistributionStrategyInput_StreamId = &sUpdateStreamRecordDistributionStrategyInput_StreamId
+var UpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy = &sUpdateStreamRecordDistributionStrategyInput_RecordDistributionStrategy
+
+var UpdateStreamWarmThroughputInput = &sUpdateStreamWarmThroughputInput
+var UpdateStreamWarmThroughputInput_StreamARN = &sUpdateStreamWarmThroughputInput_StreamARN
+var UpdateStreamWarmThroughputInput_StreamName = &sUpdateStreamWarmThroughputInput_StreamName
+var UpdateStreamWarmThroughputInput_StreamId = &sUpdateStreamWarmThroughputInput_StreamId
+var UpdateStreamWarmThroughputInput_WarmThroughputMiBps = &sUpdateStreamWarmThroughputInput_WarmThroughputMiBps
+
+var UpdateStreamWarmThroughputOutput = &sUpdateStreamWarmThroughputOutput
+var UpdateStreamWarmThroughputOutput_StreamARN = &sUpdateStreamWarmThroughputOutput_StreamARN
+var UpdateStreamWarmThroughputOutput_StreamName = &sUpdateStreamWarmThroughputOutput_StreamName
+var UpdateStreamWarmThroughputOutput_WarmThroughput = &sUpdateStreamWarmThroughputOutput_WarmThroughput
+
+var Kinesis_20131202 = &smithy.ServiceSchema{Schema: &s_Kinesis_20131202, Version: "2013-12-02"}

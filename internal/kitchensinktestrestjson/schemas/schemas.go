@@ -4,137 +4,129 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "GetResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	iGetResource                = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "GetResource"}
+	iGetStreamingResource       = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "GetStreamingResource"}
+	iPutCompressedData          = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "PutCompressedData"}
+	iSubscribeEvents            = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "SubscribeEvents"}
+	i_RestJson1KitchenSink      = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "RestJson1KitchenSink"}
+	iEvents                     = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "Events"}
+	iMessageEvent               = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "MessageEvent"}
+	iResourceNotFound           = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "ResourceNotFound"}
+	i_StreamingPayload          = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "StreamingPayload"}
+	iGetResourceInput           = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "GetResourceInput"}
+	iGetResourceOutput          = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "GetResourceOutput"}
+	iGetStreamingResourceInput  = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "GetStreamingResourceInput"}
+	iGetStreamingResourceOutput = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "GetStreamingResourceOutput"}
+	iPutCompressedDataInput     = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "PutCompressedDataInput"}
+	iPutCompressedDataOutput    = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "PutCompressedDataOutput"}
+	iSubscribeEventsInput       = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "SubscribeEventsInput"}
+	iSubscribeEventsOutput      = smithy.ShapeID{Namespace: "aws.kitchensinktestrestjson", Name: "SubscribeEventsOutput"}
+	pString                     = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resource/{id}",
-	Code: 200})
-
-var GetStreamingResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "GetStreamingResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resource/{id}/stream",
-	Code: 200})
-
-var PutCompressedData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "PutCompressedData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/compressed",
-	Code: 200})
-
-var SubscribeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "SubscribeEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resource/{id}/events",
-	Code: 200})
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
 
-var _RestJson1KitchenSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "RestJson1KitchenSink",
-}, smithy.ShapeTypeService, 0)
+var mEvents = smithy.SchemaMembers{List: []*smithy.Schema{&sEvents_message}}
+var mMessageEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageEvent_body}}
+var mResourceNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFound_message}}
+var mGetResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceInput_id}}
+var mGetResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceOutput_name}}
+var mGetStreamingResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamingResourceInput_id}}
+var mGetStreamingResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStreamingResourceOutput_body}}
+var mPutCompressedDataInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCompressedDataInput_data}}
+var mSubscribeEventsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeEventsInput_id}}
+var mSubscribeEventsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscribeEventsOutput_events}}
 
-var RestJson1KitchenSink = smithy.NewServiceSchema(_RestJson1KitchenSink, "2025-03-01")
+var sGetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResource, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetStreamingResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamingResource, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sPutCompressedData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedData, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sSubscribeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEvents, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var s_RestJson1KitchenSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestJson1KitchenSink, Type: smithy.ShapeTypeService})
+var sEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvents, Members: &mEvents, Traits: &t4, Type: smithy.ShapeTypeUnion})
+var sMessageEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageEvent, Members: &mMessageEvent, Type: smithy.ShapeTypeStructure})
+var sResourceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFound, Members: &mResourceNotFound, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_StreamingPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingPayload, Traits: &t4, Type: smithy.ShapeTypeBlob})
+var sGetResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceInput, Members: &mGetResourceInput, Type: smithy.ShapeTypeStructure})
+var sGetResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceOutput, Members: &mGetResourceOutput, Type: smithy.ShapeTypeStructure})
+var sGetStreamingResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamingResourceInput, Members: &mGetStreamingResourceInput, Type: smithy.ShapeTypeStructure})
+var sGetStreamingResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStreamingResourceOutput, Members: &mGetStreamingResourceOutput, Type: smithy.ShapeTypeStructure})
+var sPutCompressedDataInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedDataInput, Members: &mPutCompressedDataInput, Type: smithy.ShapeTypeStructure})
+var sPutCompressedDataOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCompressedDataOutput, Type: smithy.ShapeTypeStructure})
+var sSubscribeEventsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEventsInput, Members: &mSubscribeEventsInput, Type: smithy.ShapeTypeStructure})
+var sSubscribeEventsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscribeEventsOutput, Members: &mSubscribeEventsOutput, Type: smithy.ShapeTypeStructure})
 
-var Events = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "Events",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Streaming{})
-var Events_message *smithy.Schema
+var sEvents_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &iMessageEvent, Members: &mMessageEvent, Type: smithy.ShapeTypeStructure})
+var sMessageEvent_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFound_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetResourceInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sGetResourceOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetStreamingResourceInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sGetStreamingResourceOutput_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_StreamingPayload, Traits: &t7, Type: smithy.ShapeTypeBlob})
+var sPutCompressedDataInput_data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "data", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscribeEventsInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Traits: &t6, Type: smithy.ShapeTypeString})
+var sSubscribeEventsOutput_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &iEvents, Members: &mEvents, Traits: &t7, Type: smithy.ShapeTypeUnion})
 
-var MessageEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "MessageEvent",
-}, smithy.ShapeTypeStructure, 1)
-var MessageEvent_body *smithy.Schema
+var GetResource = &sGetResource
 
-var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFound_message *smithy.Schema
+var GetStreamingResource = &sGetStreamingResource
 
-var _StreamingPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "StreamingPayload",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
+var PutCompressedData = &sPutCompressedData
 
-var GetResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "GetResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceInput_id *smithy.Schema
+var SubscribeEvents = &sSubscribeEvents
 
-var GetResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "GetResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceOutput_name *smithy.Schema
+var _RestJson1KitchenSink = &s_RestJson1KitchenSink
 
-var GetStreamingResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "GetStreamingResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetStreamingResourceInput_id *smithy.Schema
+var Events = &sEvents
+var Events_message = &sEvents_message
 
-var GetStreamingResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "GetStreamingResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetStreamingResourceOutput_body *smithy.Schema
+var MessageEvent = &sMessageEvent
+var MessageEvent_body = &sMessageEvent_body
 
-var PutCompressedDataInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "PutCompressedDataInput",
-}, smithy.ShapeTypeStructure, 1)
-var PutCompressedDataInput_data *smithy.Schema
+var ResourceNotFound = &sResourceNotFound
+var ResourceNotFound_message = &sResourceNotFound_message
 
-var PutCompressedDataOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "PutCompressedDataOutput",
-}, smithy.ShapeTypeStructure, 0)
+var _StreamingPayload = &s_StreamingPayload
 
-var SubscribeEventsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "SubscribeEventsInput",
-}, smithy.ShapeTypeStructure, 1)
-var SubscribeEventsInput_id *smithy.Schema
+var GetResourceInput = &sGetResourceInput
+var GetResourceInput_id = &sGetResourceInput_id
 
-var SubscribeEventsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.kitchensinktestrestjson",
-	Name:      "SubscribeEventsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SubscribeEventsOutput_events *smithy.Schema
+var GetResourceOutput = &sGetResourceOutput
+var GetResourceOutput_name = &sGetResourceOutput_name
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	MessageEvent_body = MessageEvent.AddMember("body", smithyprelude.String)
+var GetStreamingResourceInput = &sGetStreamingResourceInput
+var GetStreamingResourceInput_id = &sGetStreamingResourceInput_id
 
-	Events_message = Events.AddMember("message", MessageEvent)
+var GetStreamingResourceOutput = &sGetStreamingResourceOutput
+var GetStreamingResourceOutput_body = &sGetStreamingResourceOutput_body
 
-	ResourceNotFound_message = ResourceNotFound.AddMember("message", smithyprelude.String)
+var PutCompressedDataInput = &sPutCompressedDataInput
+var PutCompressedDataInput_data = &sPutCompressedDataInput_data
 
-	GetResourceInput_id = GetResourceInput.AddMember("id", smithyprelude.String, &smithytraits.HTTPLabel{})
+var PutCompressedDataOutput = &sPutCompressedDataOutput
 
-	GetResourceOutput_name = GetResourceOutput.AddMember("name", smithyprelude.String)
+var SubscribeEventsInput = &sSubscribeEventsInput
+var SubscribeEventsInput_id = &sSubscribeEventsInput_id
 
-	GetStreamingResourceInput_id = GetStreamingResourceInput.AddMember("id", smithyprelude.String, &smithytraits.HTTPLabel{})
+var SubscribeEventsOutput = &sSubscribeEventsOutput
+var SubscribeEventsOutput_events = &sSubscribeEventsOutput_events
 
-	GetStreamingResourceOutput_body = GetStreamingResourceOutput.AddMember("body", _StreamingPayload, &smithytraits.HTTPPayload{})
-
-	PutCompressedDataInput_data = PutCompressedDataInput.AddMember("data", smithyprelude.String)
-
-	SubscribeEventsInput_id = SubscribeEventsInput.AddMember("id", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	SubscribeEventsOutput_events = SubscribeEventsOutput.AddMember("events", Events, &smithytraits.HTTPPayload{})
-
-}
+var RestJson1KitchenSink = &smithy.ServiceSchema{Schema: &s_RestJson1KitchenSink, Version: "2025-03-01"}

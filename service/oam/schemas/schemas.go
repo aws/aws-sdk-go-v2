@@ -4,909 +4,696 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "CreateLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateLink                        = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "CreateLink"}
+	iCreateSink                        = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "CreateSink"}
+	iDeleteLink                        = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "DeleteLink"}
+	iDeleteSink                        = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "DeleteSink"}
+	iGetLink                           = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetLink"}
+	iGetSink                           = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetSink"}
+	iGetSinkPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetSinkPolicy"}
+	iListAttachedLinks                 = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListAttachedLinks"}
+	iListLinks                         = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListLinks"}
+	iListSinks                         = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListSinks"}
+	iListTagsForResource               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListTagsForResource"}
+	iPutSinkPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "PutSinkPolicy"}
+	iTagResource                       = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagResource"}
+	iUntagResource                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "UntagResource"}
+	iUpdateLink                        = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "UpdateLink"}
+	i_oamservice                       = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "oamservice"}
+	i_Arn                              = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "Arn"}
+	iConflictException                 = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ConflictException"}
+	i_IncludeTags                      = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "IncludeTags"}
+	iInternalServiceFault              = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "InternalServiceFault"}
+	iInvalidParameterException         = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "InvalidParameterException"}
+	i_LabelTemplate                    = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "LabelTemplate"}
+	iLinkConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "LinkConfiguration"}
+	iListAttachedLinksItem             = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListAttachedLinksItem"}
+	i_ListAttachedLinksItems           = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListAttachedLinksItems"}
+	i_ListAttachedLinksMaxResults      = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListAttachedLinksMaxResults"}
+	iListLinksItem                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListLinksItem"}
+	i_ListLinksItems                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListLinksItems"}
+	i_ListLinksMaxResults              = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListLinksMaxResults"}
+	iListSinksItem                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListSinksItem"}
+	i_ListSinksItems                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListSinksItems"}
+	i_ListSinksMaxResults              = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListSinksMaxResults"}
+	iLogGroupConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "LogGroupConfiguration"}
+	i_LogsFilter                       = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "LogsFilter"}
+	iMetricConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "MetricConfiguration"}
+	i_MetricsFilter                    = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "MetricsFilter"}
+	iMissingRequiredParameterException = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "MissingRequiredParameterException"}
+	i_NextToken                        = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "NextToken"}
+	i_ResourceIdentifier               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ResourceIdentifier"}
+	iResourceNotFoundException         = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ResourceNotFoundException"}
+	iResourceType                      = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ResourceType"}
+	i_ResourceTypesInput               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ResourceTypesInput"}
+	i_ResourceTypesOutput              = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ResourceTypesOutput"}
+	iServiceQuotaExceededException     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ServiceQuotaExceededException"}
+	i_SinkName                         = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "SinkName"}
+	i_SinkPolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "SinkPolicy"}
+	i_TagKey                           = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagKey"}
+	i_TagKeys                          = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagKeys"}
+	i_TagMapInput                      = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagMapInput"}
+	i_TagMapOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagMapOutput"}
+	i_TagValue                         = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagValue"}
+	iTooManyTagsException              = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TooManyTagsException"}
+	iValidationException               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ValidationException"}
+	iCreateLinkInput                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "CreateLinkInput"}
+	iCreateLinkOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "CreateLinkOutput"}
+	iCreateSinkInput                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "CreateSinkInput"}
+	iCreateSinkOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "CreateSinkOutput"}
+	iDeleteLinkInput                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "DeleteLinkInput"}
+	iDeleteLinkOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "DeleteLinkOutput"}
+	iDeleteSinkInput                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "DeleteSinkInput"}
+	iDeleteSinkOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "DeleteSinkOutput"}
+	iGetLinkInput                      = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetLinkInput"}
+	iGetLinkOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetLinkOutput"}
+	iGetSinkInput                      = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetSinkInput"}
+	iGetSinkOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetSinkOutput"}
+	iGetSinkPolicyInput                = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetSinkPolicyInput"}
+	iGetSinkPolicyOutput               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "GetSinkPolicyOutput"}
+	iListAttachedLinksInput            = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListAttachedLinksInput"}
+	iListAttachedLinksOutput           = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListAttachedLinksOutput"}
+	iListLinksInput                    = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListLinksInput"}
+	iListLinksOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListLinksOutput"}
+	iListSinksInput                    = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListSinksInput"}
+	iListSinksOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListSinksOutput"}
+	iListTagsForResourceInput          = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput         = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "ListTagsForResourceOutput"}
+	iPutSinkPolicyInput                = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "PutSinkPolicyInput"}
+	iPutSinkPolicyOutput               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "PutSinkPolicyOutput"}
+	iTagResourceInput                  = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagResourceInput"}
+	iTagResourceOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "TagResourceOutput"}
+	iUntagResourceInput                = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "UntagResourceInput"}
+	iUntagResourceOutput               = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "UntagResourceOutput"}
+	iUpdateLinkInput                   = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "UpdateLinkInput"}
+	iUpdateLinkOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.oam", Name: "UpdateLinkOutput"}
+	pString                            = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateLink",
-	Code: 200})
-
-var CreateSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "CreateSink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateSink",
-	Code: 200})
-
-var DeleteLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "DeleteLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteLink",
-	Code: 200})
-
-var DeleteSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "DeleteSink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteSink",
-	Code: 200})
-
-var GetLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetLink",
-	Code: 200})
-
-var GetSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetSink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetSink",
-	Code: 200})
-
-var GetSinkPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetSinkPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetSinkPolicy",
-	Code: 200})
-
-var ListAttachedLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListAttachedLinks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListAttachedLinks",
-	Code: 200})
-
-var ListLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListLinks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListLinks",
-	Code: 200})
-
-var ListSinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListSinks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListSinks",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PutSinkPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "PutSinkPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutSinkPolicy",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "UpdateLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateLink",
-	Code: 200})
-
-var _oamservice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "oamservice",
-}, smithy.ShapeTypeService, 0)
-
-var Oamservice = smithy.NewServiceSchema(_oamservice, "2022-06-10")
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_amznErrorType *smithy.Schema
-
-var _IncludeTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "IncludeTags",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InternalServiceFault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "InternalServiceFault",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceFault_Message *smithy.Schema
-
-var InternalServiceFault_amznErrorType *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterException_message *smithy.Schema
-
-var InvalidParameterException_amznErrorType *smithy.Schema
-
-var _LabelTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "LabelTemplate",
-}, smithy.ShapeTypeString, 0)
-
-var LinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "LinkConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LinkConfiguration_LogGroupConfiguration *smithy.Schema
-
-var LinkConfiguration_MetricConfiguration *smithy.Schema
-
-var ListAttachedLinksItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListAttachedLinksItem",
-}, smithy.ShapeTypeStructure, 3)
-var ListAttachedLinksItem_Label *smithy.Schema
-
-var ListAttachedLinksItem_LinkArn *smithy.Schema
-
-var ListAttachedLinksItem_ResourceTypes *smithy.Schema
-
-var _ListAttachedLinksItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListAttachedLinksItems",
-}, smithy.ShapeTypeList, 1)
-var _ListAttachedLinksItems_member *smithy.Schema
-
-var _ListAttachedLinksMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListAttachedLinksMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ListLinksItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListLinksItem",
-}, smithy.ShapeTypeStructure, 5)
-var ListLinksItem_Arn *smithy.Schema
-
-var ListLinksItem_Id *smithy.Schema
-
-var ListLinksItem_Label *smithy.Schema
-
-var ListLinksItem_ResourceTypes *smithy.Schema
-
-var ListLinksItem_SinkArn *smithy.Schema
-
-var _ListLinksItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListLinksItems",
-}, smithy.ShapeTypeList, 1)
-var _ListLinksItems_member *smithy.Schema
-
-var _ListLinksMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListLinksMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ListSinksItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListSinksItem",
-}, smithy.ShapeTypeStructure, 3)
-var ListSinksItem_Arn *smithy.Schema
-
-var ListSinksItem_Id *smithy.Schema
-
-var ListSinksItem_Name *smithy.Schema
-
-var _ListSinksItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListSinksItems",
-}, smithy.ShapeTypeList, 1)
-var _ListSinksItems_member *smithy.Schema
-
-var _ListSinksMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListSinksMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var LogGroupConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "LogGroupConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LogGroupConfiguration_Filter *smithy.Schema
-
-var _LogsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "LogsFilter",
-}, smithy.ShapeTypeString, 0)
-
-var MetricConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "MetricConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MetricConfiguration_Filter *smithy.Schema
-
-var _MetricsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "MetricsFilter",
-}, smithy.ShapeTypeString, 0)
-
-var MissingRequiredParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "MissingRequiredParameterException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MissingRequiredParameterException_message *smithy.Schema
-
-var MissingRequiredParameterException_amznErrorType *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_amznErrorType *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 7)
-var ResourceType_AWS_CLOUDWATCH_METRIC *smithy.Schema
-
-var ResourceType_AWS_LOGS_LOGGROUP *smithy.Schema
-
-var ResourceType_AWS_XRAY_TRACE *smithy.Schema
-
-var ResourceType_AWS_APPLICATIONINSIGHTS_APPLICATION *smithy.Schema
-
-var ResourceType_AWS_INTERNETMONITOR_MONITOR *smithy.Schema
-
-var ResourceType_AWS_APPLICATION_SIGNALS_SERVICE *smithy.Schema
-
-var ResourceType_AWS_APPLICATION_SIGNALS_SLO *smithy.Schema
-
-var _ResourceTypesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ResourceTypesInput",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypesInput_member *smithy.Schema
-
-var _ResourceTypesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ResourceTypesOutput",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypesOutput_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_amznErrorType *smithy.Schema
-
-var _SinkName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "SinkName",
-}, smithy.ShapeTypeString, 0)
-
-var _SinkPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "SinkPolicy",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMapInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagMapInput",
-}, smithy.ShapeTypeMap, 2)
-var _TagMapInput_key *smithy.Schema
-
-var _TagMapInput_value *smithy.Schema
-
-var _TagMapOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagMapOutput",
-}, smithy.ShapeTypeMap, 2)
-var _TagMapOutput_key *smithy.Schema
-
-var _TagMapOutput_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "CreateLinkInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateLinkInput_LabelTemplate *smithy.Schema
-
-var CreateLinkInput_ResourceTypes *smithy.Schema
-
-var CreateLinkInput_SinkIdentifier *smithy.Schema
-
-var CreateLinkInput_Tags *smithy.Schema
-
-var CreateLinkInput_LinkConfiguration *smithy.Schema
-
-var CreateLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "CreateLinkOutput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateLinkOutput_Arn *smithy.Schema
-
-var CreateLinkOutput_Id *smithy.Schema
-
-var CreateLinkOutput_Label *smithy.Schema
-
-var CreateLinkOutput_LabelTemplate *smithy.Schema
-
-var CreateLinkOutput_ResourceTypes *smithy.Schema
-
-var CreateLinkOutput_SinkArn *smithy.Schema
-
-var CreateLinkOutput_Tags *smithy.Schema
-
-var CreateLinkOutput_LinkConfiguration *smithy.Schema
-
-var CreateSinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "CreateSinkInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSinkInput_Name *smithy.Schema
-
-var CreateSinkInput_Tags *smithy.Schema
-
-var CreateSinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "CreateSinkOutput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSinkOutput_Arn *smithy.Schema
-
-var CreateSinkOutput_Id *smithy.Schema
-
-var CreateSinkOutput_Name *smithy.Schema
-
-var CreateSinkOutput_Tags *smithy.Schema
-
-var DeleteLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "DeleteLinkInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLinkInput_Identifier *smithy.Schema
-
-var DeleteLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "DeleteLinkOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "DeleteSinkInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSinkInput_Identifier *smithy.Schema
-
-var DeleteSinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "DeleteSinkOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetLinkInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetLinkInput_Identifier *smithy.Schema
-
-var GetLinkInput_IncludeTags *smithy.Schema
-
-var GetLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetLinkOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetLinkOutput_Arn *smithy.Schema
-
-var GetLinkOutput_Id *smithy.Schema
-
-var GetLinkOutput_Label *smithy.Schema
-
-var GetLinkOutput_LabelTemplate *smithy.Schema
-
-var GetLinkOutput_ResourceTypes *smithy.Schema
-
-var GetLinkOutput_SinkArn *smithy.Schema
-
-var GetLinkOutput_Tags *smithy.Schema
-
-var GetLinkOutput_LinkConfiguration *smithy.Schema
-
-var GetSinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetSinkInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetSinkInput_Identifier *smithy.Schema
-
-var GetSinkInput_IncludeTags *smithy.Schema
-
-var GetSinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetSinkOutput",
-}, smithy.ShapeTypeStructure, 4)
-var GetSinkOutput_Arn *smithy.Schema
-
-var GetSinkOutput_Id *smithy.Schema
-
-var GetSinkOutput_Name *smithy.Schema
-
-var GetSinkOutput_Tags *smithy.Schema
-
-var GetSinkPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetSinkPolicyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSinkPolicyInput_SinkIdentifier *smithy.Schema
-
-var GetSinkPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "GetSinkPolicyOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetSinkPolicyOutput_SinkArn *smithy.Schema
-
-var GetSinkPolicyOutput_SinkId *smithy.Schema
-
-var GetSinkPolicyOutput_Policy *smithy.Schema
-
-var ListAttachedLinksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListAttachedLinksInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListAttachedLinksInput_MaxResults *smithy.Schema
-
-var ListAttachedLinksInput_NextToken *smithy.Schema
-
-var ListAttachedLinksInput_SinkIdentifier *smithy.Schema
-
-var ListAttachedLinksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListAttachedLinksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttachedLinksOutput_Items *smithy.Schema
-
-var ListAttachedLinksOutput_NextToken *smithy.Schema
-
-var ListLinksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListLinksInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinksInput_MaxResults *smithy.Schema
-
-var ListLinksInput_NextToken *smithy.Schema
-
-var ListLinksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListLinksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinksOutput_Items *smithy.Schema
-
-var ListLinksOutput_NextToken *smithy.Schema
-
-var ListSinksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListSinksInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSinksInput_MaxResults *smithy.Schema
-
-var ListSinksInput_NextToken *smithy.Schema
-
-var ListSinksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListSinksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSinksOutput_Items *smithy.Schema
-
-var ListSinksOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var PutSinkPolicyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "PutSinkPolicyInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutSinkPolicyInput_SinkIdentifier *smithy.Schema
-
-var PutSinkPolicyInput_Policy *smithy.Schema
-
-var PutSinkPolicyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "PutSinkPolicyOutput",
-}, smithy.ShapeTypeStructure, 3)
-var PutSinkPolicyOutput_SinkArn *smithy.Schema
-
-var PutSinkPolicyOutput_SinkId *smithy.Schema
-
-var PutSinkPolicyOutput_Policy *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "UpdateLinkInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateLinkInput_Identifier *smithy.Schema
-
-var UpdateLinkInput_ResourceTypes *smithy.Schema
-
-var UpdateLinkInput_LinkConfiguration *smithy.Schema
-
-var UpdateLinkInput_IncludeTags *smithy.Schema
-
-var UpdateLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.oam",
-	Name:      "UpdateLinkOutput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateLinkOutput_Arn *smithy.Schema
-
-var UpdateLinkOutput_Id *smithy.Schema
-
-var UpdateLinkOutput_Label *smithy.Schema
-
-var UpdateLinkOutput_LabelTemplate *smithy.Schema
-
-var UpdateLinkOutput_ResourceTypes *smithy.Schema
-
-var UpdateLinkOutput_SinkArn *smithy.Schema
-
-var UpdateLinkOutput_Tags *smithy.Schema
-
-var UpdateLinkOutput_LinkConfiguration *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_amznErrorType = ConflictException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	InternalServiceFault_Message = InternalServiceFault.AddMember("Message", smithyprelude.String)
-
-	InternalServiceFault_amznErrorType = InternalServiceFault.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	InvalidParameterException_message = InvalidParameterException.AddMember("message", smithyprelude.String)
-
-	InvalidParameterException_amznErrorType = InvalidParameterException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	LogGroupConfiguration_Filter = LogGroupConfiguration.AddMember("Filter", _LogsFilter)
-
-	MetricConfiguration_Filter = MetricConfiguration.AddMember("Filter", _MetricsFilter)
-
-	LinkConfiguration_LogGroupConfiguration = LinkConfiguration.AddMember("LogGroupConfiguration", LogGroupConfiguration)
-
-	LinkConfiguration_MetricConfiguration = LinkConfiguration.AddMember("MetricConfiguration", MetricConfiguration)
-
-	_ResourceTypesOutput_member = _ResourceTypesOutput.AddMember("member", smithyprelude.String)
-
-	ListAttachedLinksItem_Label = ListAttachedLinksItem.AddMember("Label", smithyprelude.String)
-
-	ListAttachedLinksItem_LinkArn = ListAttachedLinksItem.AddMember("LinkArn", smithyprelude.String)
-
-	ListAttachedLinksItem_ResourceTypes = ListAttachedLinksItem.AddMember("ResourceTypes", _ResourceTypesOutput)
-
-	_ListAttachedLinksItems_member = _ListAttachedLinksItems.AddMember("member", ListAttachedLinksItem)
-
-	ListLinksItem_Arn = ListLinksItem.AddMember("Arn", smithyprelude.String)
-
-	ListLinksItem_Id = ListLinksItem.AddMember("Id", smithyprelude.String)
-
-	ListLinksItem_Label = ListLinksItem.AddMember("Label", smithyprelude.String)
-
-	ListLinksItem_ResourceTypes = ListLinksItem.AddMember("ResourceTypes", _ResourceTypesOutput)
-
-	ListLinksItem_SinkArn = ListLinksItem.AddMember("SinkArn", smithyprelude.String)
-
-	_ListLinksItems_member = _ListLinksItems.AddMember("member", ListLinksItem)
-
-	ListSinksItem_Arn = ListSinksItem.AddMember("Arn", smithyprelude.String)
-
-	ListSinksItem_Id = ListSinksItem.AddMember("Id", smithyprelude.String)
-
-	ListSinksItem_Name = ListSinksItem.AddMember("Name", smithyprelude.String)
-
-	_ListSinksItems_member = _ListSinksItems.AddMember("member", ListSinksItem)
-
-	MissingRequiredParameterException_message = MissingRequiredParameterException.AddMember("message", smithyprelude.String)
-
-	MissingRequiredParameterException_amznErrorType = MissingRequiredParameterException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_amznErrorType = ResourceNotFoundException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	ResourceType_AWS_CLOUDWATCH_METRIC = ResourceType.AddMember("AWS_CLOUDWATCH_METRIC", smithyprelude.Unit)
-
-	ResourceType_AWS_LOGS_LOGGROUP = ResourceType.AddMember("AWS_LOGS_LOGGROUP", smithyprelude.Unit)
-
-	ResourceType_AWS_XRAY_TRACE = ResourceType.AddMember("AWS_XRAY_TRACE", smithyprelude.Unit)
-
-	ResourceType_AWS_APPLICATIONINSIGHTS_APPLICATION = ResourceType.AddMember("AWS_APPLICATIONINSIGHTS_APPLICATION", smithyprelude.Unit)
-
-	ResourceType_AWS_INTERNETMONITOR_MONITOR = ResourceType.AddMember("AWS_INTERNETMONITOR_MONITOR", smithyprelude.Unit)
-
-	ResourceType_AWS_APPLICATION_SIGNALS_SERVICE = ResourceType.AddMember("AWS_APPLICATION_SIGNALS_SERVICE", smithyprelude.Unit)
-
-	ResourceType_AWS_APPLICATION_SIGNALS_SLO = ResourceType.AddMember("AWS_APPLICATION_SIGNALS_SLO", smithyprelude.Unit)
-
-	_ResourceTypesInput_member = _ResourceTypesInput.AddMember("member", ResourceType)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_amznErrorType = ServiceQuotaExceededException.AddMember("amznErrorType", smithyprelude.String, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"})
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TagMapInput_key = _TagMapInput.AddMember("key", _TagKey)
-
-	_TagMapInput_value = _TagMapInput.AddMember("value", _TagValue)
-
-	_TagMapOutput_key = _TagMapOutput.AddMember("key", smithyprelude.String)
-
-	_TagMapOutput_value = _TagMapOutput.AddMember("value", smithyprelude.String)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	CreateLinkInput_LabelTemplate = CreateLinkInput.AddMember("LabelTemplate", _LabelTemplate)
-
-	CreateLinkInput_ResourceTypes = CreateLinkInput.AddMember("ResourceTypes", _ResourceTypesInput)
-
-	CreateLinkInput_SinkIdentifier = CreateLinkInput.AddMember("SinkIdentifier", _ResourceIdentifier)
-
-	CreateLinkInput_Tags = CreateLinkInput.AddMember("Tags", _TagMapInput)
-
-	CreateLinkInput_LinkConfiguration = CreateLinkInput.AddMember("LinkConfiguration", LinkConfiguration)
-
-	CreateLinkOutput_Arn = CreateLinkOutput.AddMember("Arn", smithyprelude.String)
-
-	CreateLinkOutput_Id = CreateLinkOutput.AddMember("Id", smithyprelude.String)
-
-	CreateLinkOutput_Label = CreateLinkOutput.AddMember("Label", smithyprelude.String)
-
-	CreateLinkOutput_LabelTemplate = CreateLinkOutput.AddMember("LabelTemplate", smithyprelude.String)
-
-	CreateLinkOutput_ResourceTypes = CreateLinkOutput.AddMember("ResourceTypes", _ResourceTypesOutput)
-
-	CreateLinkOutput_SinkArn = CreateLinkOutput.AddMember("SinkArn", smithyprelude.String)
-
-	CreateLinkOutput_Tags = CreateLinkOutput.AddMember("Tags", _TagMapOutput)
-
-	CreateLinkOutput_LinkConfiguration = CreateLinkOutput.AddMember("LinkConfiguration", LinkConfiguration)
-
-	CreateSinkInput_Name = CreateSinkInput.AddMember("Name", _SinkName)
-
-	CreateSinkInput_Tags = CreateSinkInput.AddMember("Tags", _TagMapInput)
-
-	CreateSinkOutput_Arn = CreateSinkOutput.AddMember("Arn", smithyprelude.String)
-
-	CreateSinkOutput_Id = CreateSinkOutput.AddMember("Id", smithyprelude.String)
-
-	CreateSinkOutput_Name = CreateSinkOutput.AddMember("Name", smithyprelude.String)
-
-	CreateSinkOutput_Tags = CreateSinkOutput.AddMember("Tags", _TagMapOutput)
-
-	DeleteLinkInput_Identifier = DeleteLinkInput.AddMember("Identifier", _ResourceIdentifier)
-
-	DeleteSinkInput_Identifier = DeleteSinkInput.AddMember("Identifier", _ResourceIdentifier)
-
-	GetLinkInput_Identifier = GetLinkInput.AddMember("Identifier", _ResourceIdentifier)
-
-	GetLinkInput_IncludeTags = GetLinkInput.AddMember("IncludeTags", _IncludeTags)
-
-	GetLinkOutput_Arn = GetLinkOutput.AddMember("Arn", smithyprelude.String)
-
-	GetLinkOutput_Id = GetLinkOutput.AddMember("Id", smithyprelude.String)
-
-	GetLinkOutput_Label = GetLinkOutput.AddMember("Label", smithyprelude.String)
-
-	GetLinkOutput_LabelTemplate = GetLinkOutput.AddMember("LabelTemplate", smithyprelude.String)
-
-	GetLinkOutput_ResourceTypes = GetLinkOutput.AddMember("ResourceTypes", _ResourceTypesOutput)
-
-	GetLinkOutput_SinkArn = GetLinkOutput.AddMember("SinkArn", smithyprelude.String)
-
-	GetLinkOutput_Tags = GetLinkOutput.AddMember("Tags", _TagMapOutput)
-
-	GetLinkOutput_LinkConfiguration = GetLinkOutput.AddMember("LinkConfiguration", LinkConfiguration)
-
-	GetSinkInput_Identifier = GetSinkInput.AddMember("Identifier", _ResourceIdentifier)
-
-	GetSinkInput_IncludeTags = GetSinkInput.AddMember("IncludeTags", _IncludeTags)
-
-	GetSinkOutput_Arn = GetSinkOutput.AddMember("Arn", smithyprelude.String)
-
-	GetSinkOutput_Id = GetSinkOutput.AddMember("Id", smithyprelude.String)
-
-	GetSinkOutput_Name = GetSinkOutput.AddMember("Name", smithyprelude.String)
-
-	GetSinkOutput_Tags = GetSinkOutput.AddMember("Tags", _TagMapOutput)
-
-	GetSinkPolicyInput_SinkIdentifier = GetSinkPolicyInput.AddMember("SinkIdentifier", _ResourceIdentifier)
-
-	GetSinkPolicyOutput_SinkArn = GetSinkPolicyOutput.AddMember("SinkArn", smithyprelude.String)
-
-	GetSinkPolicyOutput_SinkId = GetSinkPolicyOutput.AddMember("SinkId", smithyprelude.String)
-
-	GetSinkPolicyOutput_Policy = GetSinkPolicyOutput.AddMember("Policy", smithyprelude.String)
-
-	ListAttachedLinksInput_MaxResults = ListAttachedLinksInput.AddMember("MaxResults", _ListAttachedLinksMaxResults)
-
-	ListAttachedLinksInput_NextToken = ListAttachedLinksInput.AddMember("NextToken", _NextToken)
-
-	ListAttachedLinksInput_SinkIdentifier = ListAttachedLinksInput.AddMember("SinkIdentifier", _ResourceIdentifier)
-
-	ListAttachedLinksOutput_Items = ListAttachedLinksOutput.AddMember("Items", _ListAttachedLinksItems)
-
-	ListAttachedLinksOutput_NextToken = ListAttachedLinksOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListLinksInput_MaxResults = ListLinksInput.AddMember("MaxResults", _ListLinksMaxResults)
-
-	ListLinksInput_NextToken = ListLinksInput.AddMember("NextToken", _NextToken)
-
-	ListLinksOutput_Items = ListLinksOutput.AddMember("Items", _ListLinksItems)
-
-	ListLinksOutput_NextToken = ListLinksOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListSinksInput_MaxResults = ListSinksInput.AddMember("MaxResults", _ListSinksMaxResults)
-
-	ListSinksInput_NextToken = ListSinksInput.AddMember("NextToken", _NextToken)
-
-	ListSinksOutput_Items = ListSinksOutput.AddMember("Items", _ListSinksItems)
-
-	ListSinksOutput_NextToken = ListSinksOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagMapOutput)
-
-	PutSinkPolicyInput_SinkIdentifier = PutSinkPolicyInput.AddMember("SinkIdentifier", _ResourceIdentifier)
-
-	PutSinkPolicyInput_Policy = PutSinkPolicyInput.AddMember("Policy", _SinkPolicy)
-
-	PutSinkPolicyOutput_SinkArn = PutSinkPolicyOutput.AddMember("SinkArn", smithyprelude.String)
-
-	PutSinkPolicyOutput_SinkId = PutSinkPolicyOutput.AddMember("SinkId", smithyprelude.String)
-
-	PutSinkPolicyOutput_Policy = PutSinkPolicyOutput.AddMember("Policy", smithyprelude.String)
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMapInput)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateLinkInput_Identifier = UpdateLinkInput.AddMember("Identifier", _ResourceIdentifier)
-
-	UpdateLinkInput_ResourceTypes = UpdateLinkInput.AddMember("ResourceTypes", _ResourceTypesInput)
-
-	UpdateLinkInput_LinkConfiguration = UpdateLinkInput.AddMember("LinkConfiguration", LinkConfiguration)
-
-	UpdateLinkInput_IncludeTags = UpdateLinkInput.AddMember("IncludeTags", _IncludeTags)
-
-	UpdateLinkOutput_Arn = UpdateLinkOutput.AddMember("Arn", smithyprelude.String)
-
-	UpdateLinkOutput_Id = UpdateLinkOutput.AddMember("Id", smithyprelude.String)
-
-	UpdateLinkOutput_Label = UpdateLinkOutput.AddMember("Label", smithyprelude.String)
-
-	UpdateLinkOutput_LabelTemplate = UpdateLinkOutput.AddMember("LabelTemplate", _LabelTemplate)
-
-	UpdateLinkOutput_ResourceTypes = UpdateLinkOutput.AddMember("ResourceTypes", _ResourceTypesOutput)
-
-	UpdateLinkOutput_SinkArn = UpdateLinkOutput.AddMember("SinkArn", smithyprelude.String)
-
-	UpdateLinkOutput_Tags = UpdateLinkOutput.AddMember("Tags", _TagMapOutput)
-
-	UpdateLinkOutput_LinkConfiguration = UpdateLinkOutput.AddMember("LinkConfiguration", LinkConfiguration)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-ErrorType"}}, DirectMask: 0x80}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_amznErrorType}}
+var mInternalServiceFault = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceFault_Message, &sInternalServiceFault_amznErrorType}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_message, &sInvalidParameterException_amznErrorType}}
+var mLinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkConfiguration_LogGroupConfiguration, &sLinkConfiguration_MetricConfiguration}}
+var mListAttachedLinksItem = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachedLinksItem_Label, &sListAttachedLinksItem_LinkArn, &sListAttachedLinksItem_ResourceTypes}}
+var m_ListAttachedLinksItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListAttachedLinksItems_member}}
+var mListLinksItem = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinksItem_Arn, &sListLinksItem_Id, &sListLinksItem_Label, &sListLinksItem_ResourceTypes, &sListLinksItem_SinkArn}}
+var m_ListLinksItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListLinksItems_member}}
+var mListSinksItem = smithy.SchemaMembers{List: []*smithy.Schema{&sListSinksItem_Arn, &sListSinksItem_Id, &sListSinksItem_Name}}
+var m_ListSinksItems = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListSinksItems_member}}
+var mLogGroupConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogGroupConfiguration_Filter}}
+var mMetricConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricConfiguration_Filter}}
+var mMissingRequiredParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingRequiredParameterException_message, &sMissingRequiredParameterException_amznErrorType}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_amznErrorType}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_AWS_CLOUDWATCH_METRIC, &sResourceType_AWS_LOGS_LOGGROUP, &sResourceType_AWS_XRAY_TRACE, &sResourceType_AWS_APPLICATIONINSIGHTS_APPLICATION, &sResourceType_AWS_INTERNETMONITOR_MONITOR, &sResourceType_AWS_APPLICATION_SIGNALS_SERVICE, &sResourceType_AWS_APPLICATION_SIGNALS_SLO}}
+var m_ResourceTypesInput = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTypesInput_member}}
+var m_ResourceTypesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTypesOutput_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_amznErrorType}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMapInput = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMapInput_key, &s_TagMapInput_value}}
+var m_TagMapOutput = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMapOutput_key, &s_TagMapOutput_value}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLinkInput_LabelTemplate, &sCreateLinkInput_ResourceTypes, &sCreateLinkInput_SinkIdentifier, &sCreateLinkInput_Tags, &sCreateLinkInput_LinkConfiguration}}
+var mCreateLinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLinkOutput_Arn, &sCreateLinkOutput_Id, &sCreateLinkOutput_Label, &sCreateLinkOutput_LabelTemplate, &sCreateLinkOutput_ResourceTypes, &sCreateLinkOutput_SinkArn, &sCreateLinkOutput_Tags, &sCreateLinkOutput_LinkConfiguration}}
+var mCreateSinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSinkInput_Name, &sCreateSinkInput_Tags}}
+var mCreateSinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSinkOutput_Arn, &sCreateSinkOutput_Id, &sCreateSinkOutput_Name, &sCreateSinkOutput_Tags}}
+var mDeleteLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLinkInput_Identifier}}
+var mDeleteSinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSinkInput_Identifier}}
+var mGetLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkInput_Identifier, &sGetLinkInput_IncludeTags}}
+var mGetLinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkOutput_Arn, &sGetLinkOutput_Id, &sGetLinkOutput_Label, &sGetLinkOutput_LabelTemplate, &sGetLinkOutput_ResourceTypes, &sGetLinkOutput_SinkArn, &sGetLinkOutput_Tags, &sGetLinkOutput_LinkConfiguration}}
+var mGetSinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSinkInput_Identifier, &sGetSinkInput_IncludeTags}}
+var mGetSinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSinkOutput_Arn, &sGetSinkOutput_Id, &sGetSinkOutput_Name, &sGetSinkOutput_Tags}}
+var mGetSinkPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSinkPolicyInput_SinkIdentifier}}
+var mGetSinkPolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSinkPolicyOutput_SinkArn, &sGetSinkPolicyOutput_SinkId, &sGetSinkPolicyOutput_Policy}}
+var mListAttachedLinksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachedLinksInput_MaxResults, &sListAttachedLinksInput_NextToken, &sListAttachedLinksInput_SinkIdentifier}}
+var mListAttachedLinksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachedLinksOutput_Items, &sListAttachedLinksOutput_NextToken}}
+var mListLinksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinksInput_MaxResults, &sListLinksInput_NextToken}}
+var mListLinksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinksOutput_Items, &sListLinksOutput_NextToken}}
+var mListSinksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSinksInput_MaxResults, &sListSinksInput_NextToken}}
+var mListSinksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSinksOutput_Items, &sListSinksOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mPutSinkPolicyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSinkPolicyInput_SinkIdentifier, &sPutSinkPolicyInput_Policy}}
+var mPutSinkPolicyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSinkPolicyOutput_SinkArn, &sPutSinkPolicyOutput_SinkId, &sPutSinkPolicyOutput_Policy}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_TagKeys}}
+var mUpdateLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLinkInput_Identifier, &sUpdateLinkInput_ResourceTypes, &sUpdateLinkInput_LinkConfiguration, &sUpdateLinkInput_IncludeTags}}
+var mUpdateLinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLinkOutput_Arn, &sUpdateLinkOutput_Id, &sUpdateLinkOutput_Label, &sUpdateLinkOutput_LabelTemplate, &sUpdateLinkOutput_ResourceTypes, &sUpdateLinkOutput_SinkArn, &sUpdateLinkOutput_Tags, &sUpdateLinkOutput_LinkConfiguration}}
+
+var sCreateLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLink, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSink, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDeleteLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLink, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSink, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLink, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sGetSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSink, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetSinkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSinkPolicy, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListAttachedLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachedLinks, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sListLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinks, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sListSinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSinks, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sPutSinkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSinkPolicy, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sUpdateLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLink, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var s_oamservice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_oamservice, Type: smithy.ShapeTypeService})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var s_IncludeTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeTags, Type: smithy.ShapeTypeBoolean})
+var sInternalServiceFault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceFault, Members: &mInternalServiceFault, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var s_LabelTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LabelTemplate, Type: smithy.ShapeTypeString})
+var sLinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkConfiguration, Members: &mLinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sListAttachedLinksItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachedLinksItem, Members: &mListAttachedLinksItem, Type: smithy.ShapeTypeStructure})
+var s_ListAttachedLinksItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAttachedLinksItems, Members: &m_ListAttachedLinksItems, Type: smithy.ShapeTypeList})
+var s_ListAttachedLinksMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAttachedLinksMaxResults, Type: smithy.ShapeTypeInteger})
+var sListLinksItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinksItem, Members: &mListLinksItem, Type: smithy.ShapeTypeStructure})
+var s_ListLinksItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLinksItems, Members: &m_ListLinksItems, Type: smithy.ShapeTypeList})
+var s_ListLinksMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLinksMaxResults, Type: smithy.ShapeTypeInteger})
+var sListSinksItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSinksItem, Members: &mListSinksItem, Type: smithy.ShapeTypeStructure})
+var s_ListSinksItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListSinksItems, Members: &m_ListSinksItems, Type: smithy.ShapeTypeList})
+var s_ListSinksMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListSinksMaxResults, Type: smithy.ShapeTypeInteger})
+var sLogGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogGroupConfiguration, Members: &mLogGroupConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LogsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogsFilter, Type: smithy.ShapeTypeString})
+var sMetricConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricConfiguration, Members: &mMetricConfiguration, Type: smithy.ShapeTypeStructure})
+var s_MetricsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricsFilter, Type: smithy.ShapeTypeString})
+var sMissingRequiredParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingRequiredParameterException, Members: &mMissingRequiredParameterException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var s_ResourceTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypesInput, Members: &m_ResourceTypesInput, Type: smithy.ShapeTypeList})
+var s_ResourceTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypesOutput, Members: &m_ResourceTypesOutput, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var s_SinkName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SinkName, Type: smithy.ShapeTypeString})
+var s_SinkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SinkPolicy, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_TagMapInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var s_TagMapOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sCreateLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLinkInput, Members: &mCreateLinkInput, Type: smithy.ShapeTypeStructure})
+var sCreateLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLinkOutput, Members: &mCreateLinkOutput, Type: smithy.ShapeTypeStructure})
+var sCreateSinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSinkInput, Members: &mCreateSinkInput, Type: smithy.ShapeTypeStructure})
+var sCreateSinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSinkOutput, Members: &mCreateSinkOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLinkInput, Members: &mDeleteLinkInput, Type: smithy.ShapeTypeStructure})
+var sDeleteLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLinkOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteSinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSinkInput, Members: &mDeleteSinkInput, Type: smithy.ShapeTypeStructure})
+var sDeleteSinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSinkOutput, Type: smithy.ShapeTypeStructure})
+var sGetLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkInput, Members: &mGetLinkInput, Type: smithy.ShapeTypeStructure})
+var sGetLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkOutput, Members: &mGetLinkOutput, Type: smithy.ShapeTypeStructure})
+var sGetSinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSinkInput, Members: &mGetSinkInput, Type: smithy.ShapeTypeStructure})
+var sGetSinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSinkOutput, Members: &mGetSinkOutput, Type: smithy.ShapeTypeStructure})
+var sGetSinkPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSinkPolicyInput, Members: &mGetSinkPolicyInput, Type: smithy.ShapeTypeStructure})
+var sGetSinkPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSinkPolicyOutput, Members: &mGetSinkPolicyOutput, Type: smithy.ShapeTypeStructure})
+var sListAttachedLinksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachedLinksInput, Members: &mListAttachedLinksInput, Type: smithy.ShapeTypeStructure})
+var sListAttachedLinksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachedLinksOutput, Members: &mListAttachedLinksOutput, Type: smithy.ShapeTypeStructure})
+var sListLinksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinksInput, Members: &mListLinksInput, Type: smithy.ShapeTypeStructure})
+var sListLinksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinksOutput, Members: &mListLinksOutput, Type: smithy.ShapeTypeStructure})
+var sListSinksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSinksInput, Members: &mListSinksInput, Type: smithy.ShapeTypeStructure})
+var sListSinksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSinksOutput, Members: &mListSinksOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sPutSinkPolicyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSinkPolicyInput, Members: &mPutSinkPolicyInput, Type: smithy.ShapeTypeStructure})
+var sPutSinkPolicyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSinkPolicyOutput, Members: &mPutSinkPolicyOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkInput, Members: &mUpdateLinkInput, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkOutput, Members: &mUpdateLinkOutput, Type: smithy.ShapeTypeStructure})
+
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString})
+var sInternalServiceFault_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServiceFault_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString})
+var sLinkConfiguration_LogGroupConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupConfiguration", ID: &iLogGroupConfiguration, Members: &mLogGroupConfiguration, Type: smithy.ShapeTypeStructure})
+var sLinkConfiguration_MetricConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricConfiguration", ID: &iMetricConfiguration, Members: &mMetricConfiguration, Type: smithy.ShapeTypeStructure})
+var sListAttachedLinksItem_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &pString, Type: smithy.ShapeTypeString})
+var sListAttachedLinksItem_LinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sListAttachedLinksItem_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypesOutput, Members: &m_ResourceTypesOutput, Type: smithy.ShapeTypeList})
+var s_ListAttachedLinksItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListAttachedLinksItem, Members: &mListAttachedLinksItem, Type: smithy.ShapeTypeStructure})
+var sListLinksItem_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLinksItem_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLinksItem_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLinksItem_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypesOutput, Members: &m_ResourceTypesOutput, Type: smithy.ShapeTypeList})
+var sListLinksItem_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ListLinksItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListLinksItem, Members: &mListLinksItem, Type: smithy.ShapeTypeStructure})
+var sListSinksItem_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSinksItem_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSinksItem_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ListSinksItems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListSinksItem, Members: &mListSinksItem, Type: smithy.ShapeTypeStructure})
+var sLogGroupConfiguration_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &i_LogsFilter, Type: smithy.ShapeTypeString})
+var sMetricConfiguration_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &i_MetricsFilter, Type: smithy.ShapeTypeString})
+var sMissingRequiredParameterException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sMissingRequiredParameterException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString})
+var sResourceType_AWS_CLOUDWATCH_METRIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_CLOUDWATCH_METRIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_LOGS_LOGGROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_LOGS_LOGGROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_XRAY_TRACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_XRAY_TRACE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_APPLICATIONINSIGHTS_APPLICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_APPLICATIONINSIGHTS_APPLICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_INTERNETMONITOR_MONITOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_INTERNETMONITOR_MONITOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_APPLICATION_SIGNALS_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_APPLICATION_SIGNALS_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_AWS_APPLICATION_SIGNALS_SLO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_APPLICATION_SIGNALS_SLO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ResourceTypesInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var s_ResourceTypesOutput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_amznErrorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amznErrorType", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMapInput_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMapInput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagMapOutput_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagMapOutput_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateLinkInput_LabelTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelTemplate", ID: &i_LabelTemplate, Type: smithy.ShapeTypeString})
+var sCreateLinkInput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypesInput, Members: &m_ResourceTypesInput, Type: smithy.ShapeTypeList})
+var sCreateLinkInput_SinkIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sCreateLinkInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateLinkInput_LinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkConfiguration", ID: &iLinkConfiguration, Members: &mLinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateLinkOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateLinkOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateLinkOutput_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateLinkOutput_LabelTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelTemplate", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateLinkOutput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypesOutput, Members: &m_ResourceTypesOutput, Type: smithy.ShapeTypeList})
+var sCreateLinkOutput_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateLinkOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sCreateLinkOutput_LinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkConfiguration", ID: &iLinkConfiguration, Members: &mLinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSinkInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SinkName, Type: smithy.ShapeTypeString})
+var sCreateSinkInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sCreateSinkOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateSinkOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateSinkOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateSinkOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sDeleteLinkInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteSinkInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sGetLinkInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sGetLinkInput_IncludeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeTags", ID: &i_IncludeTags, Type: smithy.ShapeTypeBoolean})
+var sGetLinkOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetLinkOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetLinkOutput_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetLinkOutput_LabelTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelTemplate", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetLinkOutput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypesOutput, Members: &m_ResourceTypesOutput, Type: smithy.ShapeTypeList})
+var sGetLinkOutput_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetLinkOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sGetLinkOutput_LinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkConfiguration", ID: &iLinkConfiguration, Members: &mLinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetSinkInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sGetSinkInput_IncludeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeTags", ID: &i_IncludeTags, Type: smithy.ShapeTypeBoolean})
+var sGetSinkOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSinkOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSinkOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSinkOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sGetSinkPolicyInput_SinkIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sGetSinkPolicyOutput_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSinkPolicyOutput_SinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkId", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSinkPolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &pString, Type: smithy.ShapeTypeString})
+var sListAttachedLinksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListAttachedLinksMaxResults, Type: smithy.ShapeTypeInteger})
+var sListAttachedLinksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAttachedLinksInput_SinkIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sListAttachedLinksOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ListAttachedLinksItems, Members: &m_ListAttachedLinksItems, Type: smithy.ShapeTypeList})
+var sListAttachedLinksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLinksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListLinksMaxResults, Type: smithy.ShapeTypeInteger})
+var sListLinksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListLinksOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ListLinksItems, Members: &m_ListLinksItems, Type: smithy.ShapeTypeList})
+var sListLinksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSinksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListSinksMaxResults, Type: smithy.ShapeTypeInteger})
+var sListSinksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSinksOutput_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ListSinksItems, Members: &m_ListSinksItems, Type: smithy.ShapeTypeList})
+var sListSinksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t21, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sPutSinkPolicyInput_SinkIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sPutSinkPolicyInput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_SinkPolicy, Type: smithy.ShapeTypeString})
+var sPutSinkPolicyOutput_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sPutSinkPolicyOutput_SinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkId", ID: &pString, Type: smithy.ShapeTypeString})
+var sPutSinkPolicyOutput_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t21, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapInput, Members: &m_TagMapInput, Type: smithy.ShapeTypeMap})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t21, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t22, Type: smithy.ShapeTypeList})
+var sUpdateLinkInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateLinkInput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypesInput, Members: &m_ResourceTypesInput, Type: smithy.ShapeTypeList})
+var sUpdateLinkInput_LinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkConfiguration", ID: &iLinkConfiguration, Members: &mLinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkInput_IncludeTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeTags", ID: &i_IncludeTags, Type: smithy.ShapeTypeBoolean})
+var sUpdateLinkOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateLinkOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateLinkOutput_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateLinkOutput_LabelTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LabelTemplate", ID: &i_LabelTemplate, Type: smithy.ShapeTypeString})
+var sUpdateLinkOutput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypesOutput, Members: &m_ResourceTypesOutput, Type: smithy.ShapeTypeList})
+var sUpdateLinkOutput_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateLinkOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMapOutput, Members: &m_TagMapOutput, Type: smithy.ShapeTypeMap})
+var sUpdateLinkOutput_LinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkConfiguration", ID: &iLinkConfiguration, Members: &mLinkConfiguration, Type: smithy.ShapeTypeStructure})
+
+var CreateLink = &sCreateLink
+
+var CreateSink = &sCreateSink
+
+var DeleteLink = &sDeleteLink
+
+var DeleteSink = &sDeleteSink
+
+var GetLink = &sGetLink
+
+var GetSink = &sGetSink
+
+var GetSinkPolicy = &sGetSinkPolicy
+
+var ListAttachedLinks = &sListAttachedLinks
+
+var ListLinks = &sListLinks
+
+var ListSinks = &sListSinks
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutSinkPolicy = &sPutSinkPolicy
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateLink = &sUpdateLink
+
+var _oamservice = &s_oamservice
+
+var _Arn = &s_Arn
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_amznErrorType = &sConflictException_amznErrorType
+
+var _IncludeTags = &s_IncludeTags
+
+var InternalServiceFault = &sInternalServiceFault
+var InternalServiceFault_Message = &sInternalServiceFault_Message
+var InternalServiceFault_amznErrorType = &sInternalServiceFault_amznErrorType
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_message = &sInvalidParameterException_message
+var InvalidParameterException_amznErrorType = &sInvalidParameterException_amznErrorType
+
+var _LabelTemplate = &s_LabelTemplate
+
+var LinkConfiguration = &sLinkConfiguration
+var LinkConfiguration_LogGroupConfiguration = &sLinkConfiguration_LogGroupConfiguration
+var LinkConfiguration_MetricConfiguration = &sLinkConfiguration_MetricConfiguration
+
+var ListAttachedLinksItem = &sListAttachedLinksItem
+var ListAttachedLinksItem_Label = &sListAttachedLinksItem_Label
+var ListAttachedLinksItem_LinkArn = &sListAttachedLinksItem_LinkArn
+var ListAttachedLinksItem_ResourceTypes = &sListAttachedLinksItem_ResourceTypes
+
+var _ListAttachedLinksItems = &s_ListAttachedLinksItems
+var _ListAttachedLinksItems_member = &s_ListAttachedLinksItems_member
+
+var _ListAttachedLinksMaxResults = &s_ListAttachedLinksMaxResults
+
+var ListLinksItem = &sListLinksItem
+var ListLinksItem_Arn = &sListLinksItem_Arn
+var ListLinksItem_Id = &sListLinksItem_Id
+var ListLinksItem_Label = &sListLinksItem_Label
+var ListLinksItem_ResourceTypes = &sListLinksItem_ResourceTypes
+var ListLinksItem_SinkArn = &sListLinksItem_SinkArn
+
+var _ListLinksItems = &s_ListLinksItems
+var _ListLinksItems_member = &s_ListLinksItems_member
+
+var _ListLinksMaxResults = &s_ListLinksMaxResults
+
+var ListSinksItem = &sListSinksItem
+var ListSinksItem_Arn = &sListSinksItem_Arn
+var ListSinksItem_Id = &sListSinksItem_Id
+var ListSinksItem_Name = &sListSinksItem_Name
+
+var _ListSinksItems = &s_ListSinksItems
+var _ListSinksItems_member = &s_ListSinksItems_member
+
+var _ListSinksMaxResults = &s_ListSinksMaxResults
+
+var LogGroupConfiguration = &sLogGroupConfiguration
+var LogGroupConfiguration_Filter = &sLogGroupConfiguration_Filter
+
+var _LogsFilter = &s_LogsFilter
+
+var MetricConfiguration = &sMetricConfiguration
+var MetricConfiguration_Filter = &sMetricConfiguration_Filter
+
+var _MetricsFilter = &s_MetricsFilter
+
+var MissingRequiredParameterException = &sMissingRequiredParameterException
+var MissingRequiredParameterException_message = &sMissingRequiredParameterException_message
+var MissingRequiredParameterException_amznErrorType = &sMissingRequiredParameterException_amznErrorType
+
+var _NextToken = &s_NextToken
+
+var _ResourceIdentifier = &s_ResourceIdentifier
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_amznErrorType = &sResourceNotFoundException_amznErrorType
+
+var ResourceType = &sResourceType
+var ResourceType_AWS_CLOUDWATCH_METRIC = &sResourceType_AWS_CLOUDWATCH_METRIC
+var ResourceType_AWS_LOGS_LOGGROUP = &sResourceType_AWS_LOGS_LOGGROUP
+var ResourceType_AWS_XRAY_TRACE = &sResourceType_AWS_XRAY_TRACE
+var ResourceType_AWS_APPLICATIONINSIGHTS_APPLICATION = &sResourceType_AWS_APPLICATIONINSIGHTS_APPLICATION
+var ResourceType_AWS_INTERNETMONITOR_MONITOR = &sResourceType_AWS_INTERNETMONITOR_MONITOR
+var ResourceType_AWS_APPLICATION_SIGNALS_SERVICE = &sResourceType_AWS_APPLICATION_SIGNALS_SERVICE
+var ResourceType_AWS_APPLICATION_SIGNALS_SLO = &sResourceType_AWS_APPLICATION_SIGNALS_SLO
+
+var _ResourceTypesInput = &s_ResourceTypesInput
+var _ResourceTypesInput_member = &s_ResourceTypesInput_member
+
+var _ResourceTypesOutput = &s_ResourceTypesOutput
+var _ResourceTypesOutput_member = &s_ResourceTypesOutput_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_amznErrorType = &sServiceQuotaExceededException_amznErrorType
+
+var _SinkName = &s_SinkName
+
+var _SinkPolicy = &s_SinkPolicy
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMapInput = &s_TagMapInput
+var _TagMapInput_key = &s_TagMapInput_key
+var _TagMapInput_value = &s_TagMapInput_value
+
+var _TagMapOutput = &s_TagMapOutput
+var _TagMapOutput_key = &s_TagMapOutput_key
+var _TagMapOutput_value = &s_TagMapOutput_value
+
+var _TagValue = &s_TagValue
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateLinkInput = &sCreateLinkInput
+var CreateLinkInput_LabelTemplate = &sCreateLinkInput_LabelTemplate
+var CreateLinkInput_ResourceTypes = &sCreateLinkInput_ResourceTypes
+var CreateLinkInput_SinkIdentifier = &sCreateLinkInput_SinkIdentifier
+var CreateLinkInput_Tags = &sCreateLinkInput_Tags
+var CreateLinkInput_LinkConfiguration = &sCreateLinkInput_LinkConfiguration
+
+var CreateLinkOutput = &sCreateLinkOutput
+var CreateLinkOutput_Arn = &sCreateLinkOutput_Arn
+var CreateLinkOutput_Id = &sCreateLinkOutput_Id
+var CreateLinkOutput_Label = &sCreateLinkOutput_Label
+var CreateLinkOutput_LabelTemplate = &sCreateLinkOutput_LabelTemplate
+var CreateLinkOutput_ResourceTypes = &sCreateLinkOutput_ResourceTypes
+var CreateLinkOutput_SinkArn = &sCreateLinkOutput_SinkArn
+var CreateLinkOutput_Tags = &sCreateLinkOutput_Tags
+var CreateLinkOutput_LinkConfiguration = &sCreateLinkOutput_LinkConfiguration
+
+var CreateSinkInput = &sCreateSinkInput
+var CreateSinkInput_Name = &sCreateSinkInput_Name
+var CreateSinkInput_Tags = &sCreateSinkInput_Tags
+
+var CreateSinkOutput = &sCreateSinkOutput
+var CreateSinkOutput_Arn = &sCreateSinkOutput_Arn
+var CreateSinkOutput_Id = &sCreateSinkOutput_Id
+var CreateSinkOutput_Name = &sCreateSinkOutput_Name
+var CreateSinkOutput_Tags = &sCreateSinkOutput_Tags
+
+var DeleteLinkInput = &sDeleteLinkInput
+var DeleteLinkInput_Identifier = &sDeleteLinkInput_Identifier
+
+var DeleteLinkOutput = &sDeleteLinkOutput
+
+var DeleteSinkInput = &sDeleteSinkInput
+var DeleteSinkInput_Identifier = &sDeleteSinkInput_Identifier
+
+var DeleteSinkOutput = &sDeleteSinkOutput
+
+var GetLinkInput = &sGetLinkInput
+var GetLinkInput_Identifier = &sGetLinkInput_Identifier
+var GetLinkInput_IncludeTags = &sGetLinkInput_IncludeTags
+
+var GetLinkOutput = &sGetLinkOutput
+var GetLinkOutput_Arn = &sGetLinkOutput_Arn
+var GetLinkOutput_Id = &sGetLinkOutput_Id
+var GetLinkOutput_Label = &sGetLinkOutput_Label
+var GetLinkOutput_LabelTemplate = &sGetLinkOutput_LabelTemplate
+var GetLinkOutput_ResourceTypes = &sGetLinkOutput_ResourceTypes
+var GetLinkOutput_SinkArn = &sGetLinkOutput_SinkArn
+var GetLinkOutput_Tags = &sGetLinkOutput_Tags
+var GetLinkOutput_LinkConfiguration = &sGetLinkOutput_LinkConfiguration
+
+var GetSinkInput = &sGetSinkInput
+var GetSinkInput_Identifier = &sGetSinkInput_Identifier
+var GetSinkInput_IncludeTags = &sGetSinkInput_IncludeTags
+
+var GetSinkOutput = &sGetSinkOutput
+var GetSinkOutput_Arn = &sGetSinkOutput_Arn
+var GetSinkOutput_Id = &sGetSinkOutput_Id
+var GetSinkOutput_Name = &sGetSinkOutput_Name
+var GetSinkOutput_Tags = &sGetSinkOutput_Tags
+
+var GetSinkPolicyInput = &sGetSinkPolicyInput
+var GetSinkPolicyInput_SinkIdentifier = &sGetSinkPolicyInput_SinkIdentifier
+
+var GetSinkPolicyOutput = &sGetSinkPolicyOutput
+var GetSinkPolicyOutput_SinkArn = &sGetSinkPolicyOutput_SinkArn
+var GetSinkPolicyOutput_SinkId = &sGetSinkPolicyOutput_SinkId
+var GetSinkPolicyOutput_Policy = &sGetSinkPolicyOutput_Policy
+
+var ListAttachedLinksInput = &sListAttachedLinksInput
+var ListAttachedLinksInput_MaxResults = &sListAttachedLinksInput_MaxResults
+var ListAttachedLinksInput_NextToken = &sListAttachedLinksInput_NextToken
+var ListAttachedLinksInput_SinkIdentifier = &sListAttachedLinksInput_SinkIdentifier
+
+var ListAttachedLinksOutput = &sListAttachedLinksOutput
+var ListAttachedLinksOutput_Items = &sListAttachedLinksOutput_Items
+var ListAttachedLinksOutput_NextToken = &sListAttachedLinksOutput_NextToken
+
+var ListLinksInput = &sListLinksInput
+var ListLinksInput_MaxResults = &sListLinksInput_MaxResults
+var ListLinksInput_NextToken = &sListLinksInput_NextToken
+
+var ListLinksOutput = &sListLinksOutput
+var ListLinksOutput_Items = &sListLinksOutput_Items
+var ListLinksOutput_NextToken = &sListLinksOutput_NextToken
+
+var ListSinksInput = &sListSinksInput
+var ListSinksInput_MaxResults = &sListSinksInput_MaxResults
+var ListSinksInput_NextToken = &sListSinksInput_NextToken
+
+var ListSinksOutput = &sListSinksOutput
+var ListSinksOutput_Items = &sListSinksOutput_Items
+var ListSinksOutput_NextToken = &sListSinksOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var PutSinkPolicyInput = &sPutSinkPolicyInput
+var PutSinkPolicyInput_SinkIdentifier = &sPutSinkPolicyInput_SinkIdentifier
+var PutSinkPolicyInput_Policy = &sPutSinkPolicyInput_Policy
+
+var PutSinkPolicyOutput = &sPutSinkPolicyOutput
+var PutSinkPolicyOutput_SinkArn = &sPutSinkPolicyOutput_SinkArn
+var PutSinkPolicyOutput_SinkId = &sPutSinkPolicyOutput_SinkId
+var PutSinkPolicyOutput_Policy = &sPutSinkPolicyOutput_Policy
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateLinkInput = &sUpdateLinkInput
+var UpdateLinkInput_Identifier = &sUpdateLinkInput_Identifier
+var UpdateLinkInput_ResourceTypes = &sUpdateLinkInput_ResourceTypes
+var UpdateLinkInput_LinkConfiguration = &sUpdateLinkInput_LinkConfiguration
+var UpdateLinkInput_IncludeTags = &sUpdateLinkInput_IncludeTags
+
+var UpdateLinkOutput = &sUpdateLinkOutput
+var UpdateLinkOutput_Arn = &sUpdateLinkOutput_Arn
+var UpdateLinkOutput_Id = &sUpdateLinkOutput_Id
+var UpdateLinkOutput_Label = &sUpdateLinkOutput_Label
+var UpdateLinkOutput_LabelTemplate = &sUpdateLinkOutput_LabelTemplate
+var UpdateLinkOutput_ResourceTypes = &sUpdateLinkOutput_ResourceTypes
+var UpdateLinkOutput_SinkArn = &sUpdateLinkOutput_SinkArn
+var UpdateLinkOutput_Tags = &sUpdateLinkOutput_Tags
+var UpdateLinkOutput_LinkConfiguration = &sUpdateLinkOutput_LinkConfiguration
+
+var Oamservice = &smithy.ServiceSchema{Schema: &s_oamservice, Version: "2022-06-10"}

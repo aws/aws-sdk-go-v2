@@ -4,1473 +4,1130 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateAttributeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociateAttributeGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	iAssociateAttributeGroup                   = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociateAttributeGroup"}
+	iAssociateResource                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociateResource"}
+	iCreateApplication                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "CreateApplication"}
+	iCreateAttributeGroup                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "CreateAttributeGroup"}
+	iDeleteApplication                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DeleteApplication"}
+	iDeleteAttributeGroup                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DeleteAttributeGroup"}
+	iDisassociateAttributeGroup                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DisassociateAttributeGroup"}
+	iDisassociateResource                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DisassociateResource"}
+	iGetApplication                            = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetApplication"}
+	iGetAssociatedResource                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetAssociatedResource"}
+	iGetAttributeGroup                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetAttributeGroup"}
+	iGetConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetConfiguration"}
+	iListApplications                          = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListApplications"}
+	iListAssociatedAttributeGroups             = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAssociatedAttributeGroups"}
+	iListAssociatedResources                   = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAssociatedResources"}
+	iListAttributeGroups                       = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAttributeGroups"}
+	iListAttributeGroupsForApplication         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAttributeGroupsForApplication"}
+	iListTagsForResource                       = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListTagsForResource"}
+	iPutConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "PutConfiguration"}
+	iSyncResource                              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "SyncResource"}
+	iTagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UntagResource"}
+	iUpdateApplication                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UpdateApplication"}
+	iUpdateAttributeGroup                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UpdateAttributeGroup"}
+	i_AWS242AppRegistry                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AWS242AppRegistry"}
+	iApplication                               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Application"}
+	i_ApplicationArn                           = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationArn"}
+	i_ApplicationId                            = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationId"}
+	i_ApplicationSpecifier                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationSpecifier"}
+	i_ApplicationSummaries                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationSummaries"}
+	iApplicationSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationSummary"}
+	i_ApplicationTagDefinition                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationTagDefinition"}
+	iApplicationTagResult                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationTagResult"}
+	iApplicationTagStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ApplicationTagStatus"}
+	iAppRegistryConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AppRegistryConfiguration"}
+	i_Arn                                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Arn"}
+	i_AssociationCount                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociationCount"}
+	iAssociationOption                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociationOption"}
+	iAttributeGroup                            = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroup"}
+	i_AttributeGroupArn                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupArn"}
+	iAttributeGroupDetails                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupDetails"}
+	i_AttributeGroupDetailsList                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupDetailsList"}
+	i_AttributeGroupId                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupId"}
+	i_AttributeGroupIds                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupIds"}
+	i_AttributeGroupSpecifier                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupSpecifier"}
+	i_AttributeGroupSummaries                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupSummaries"}
+	iAttributeGroupSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AttributeGroupSummary"}
+	i_Attributes                               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Attributes"}
+	i_ClientToken                              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ClientToken"}
+	iConflictException                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ConflictException"}
+	i_CreatedBy                                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "CreatedBy"}
+	i_Description                              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Description"}
+	i_GetAssociatedResourceFilter              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetAssociatedResourceFilter"}
+	iIntegrations                              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Integrations"}
+	iInternalServerException                   = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "InternalServerException"}
+	i_MaxResults                               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "MaxResults"}
+	i_Name                                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Name"}
+	i_NextToken                                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "NextToken"}
+	i_Options                                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Options"}
+	iResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Resource"}
+	iResourceDetails                           = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceDetails"}
+	iResourceGroup                             = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceGroup"}
+	iResourceGroupState                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceGroupState"}
+	iResourceInfo                              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceInfo"}
+	iResourceIntegrations                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceIntegrations"}
+	iResourceItemStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceItemStatus"}
+	i_ResourceItemType                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceItemType"}
+	iResourceNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceNotFoundException"}
+	i_Resources                                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Resources"}
+	i_ResourcesList                            = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourcesList"}
+	iResourcesListItem                         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourcesListItem"}
+	i_ResourcesListItemErrorMessage            = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourcesListItemErrorMessage"}
+	i_ResourceSpecifier                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceSpecifier"}
+	iResourceType                              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ResourceType"}
+	iServiceQuotaExceededException             = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ServiceQuotaExceededException"}
+	i_String                                   = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "String"}
+	iSyncAction                                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "SyncAction"}
+	i_TagKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagKey"}
+	i_TagKeyConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagKeyConfig"}
+	i_TagKeys                                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagKeys"}
+	iTagQueryConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagQueryConfiguration"}
+	i_Tags                                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Tags"}
+	i_TagValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagValue"}
+	iThrottlingException                       = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ThrottlingException"}
+	i_Timestamp                                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "Timestamp"}
+	iValidationException                       = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ValidationException"}
+	iAssociateAttributeGroupRequest            = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociateAttributeGroupRequest"}
+	iAssociateAttributeGroupResponse           = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociateAttributeGroupResponse"}
+	iAssociateResourceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociateResourceRequest"}
+	iAssociateResourceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "AssociateResourceResponse"}
+	iCreateApplicationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "CreateApplicationRequest"}
+	iCreateApplicationResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "CreateApplicationResponse"}
+	iCreateAttributeGroupRequest               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "CreateAttributeGroupRequest"}
+	iCreateAttributeGroupResponse              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "CreateAttributeGroupResponse"}
+	iDeleteApplicationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DeleteApplicationRequest"}
+	iDeleteApplicationResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DeleteApplicationResponse"}
+	iDeleteAttributeGroupRequest               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DeleteAttributeGroupRequest"}
+	iDeleteAttributeGroupResponse              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DeleteAttributeGroupResponse"}
+	iDisassociateAttributeGroupRequest         = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DisassociateAttributeGroupRequest"}
+	iDisassociateAttributeGroupResponse        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DisassociateAttributeGroupResponse"}
+	iDisassociateResourceRequest               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DisassociateResourceRequest"}
+	iDisassociateResourceResponse              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "DisassociateResourceResponse"}
+	iGetApplicationRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetApplicationRequest"}
+	iGetApplicationResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetApplicationResponse"}
+	iGetAssociatedResourceRequest              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetAssociatedResourceRequest"}
+	iGetAssociatedResourceResponse             = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetAssociatedResourceResponse"}
+	iGetAttributeGroupRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetAttributeGroupRequest"}
+	iGetAttributeGroupResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetAttributeGroupResponse"}
+	iGetConfigurationResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "GetConfigurationResponse"}
+	iListApplicationsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListApplicationsRequest"}
+	iListApplicationsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListApplicationsResponse"}
+	iListAssociatedAttributeGroupsRequest      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAssociatedAttributeGroupsRequest"}
+	iListAssociatedAttributeGroupsResponse     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAssociatedAttributeGroupsResponse"}
+	iListAssociatedResourcesRequest            = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAssociatedResourcesRequest"}
+	iListAssociatedResourcesResponse           = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAssociatedResourcesResponse"}
+	iListAttributeGroupsForApplicationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAttributeGroupsForApplicationRequest"}
+	iListAttributeGroupsForApplicationResponse = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAttributeGroupsForApplicationResponse"}
+	iListAttributeGroupsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAttributeGroupsRequest"}
+	iListAttributeGroupsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListAttributeGroupsResponse"}
+	iListTagsForResourceRequest                = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "ListTagsForResourceResponse"}
+	iPutConfigurationRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "PutConfigurationRequest"}
+	iSyncResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "SyncResourceRequest"}
+	iSyncResourceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "SyncResourceResponse"}
+	iTagResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagResourceRequest"}
+	iTagResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "TagResourceResponse"}
+	iUntagResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UntagResourceResponse"}
+	iUpdateApplicationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UpdateApplicationRequest"}
+	iUpdateApplicationResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UpdateApplicationResponse"}
+	iUpdateAttributeGroupRequest               = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UpdateAttributeGroupRequest"}
+	iUpdateAttributeGroupResponse              = smithy.ShapeID{Namespace: "com.amazonaws.servicecatalogappregistry", Name: "UpdateAttributeGroupResponse"}
+	pUnit                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/applications/{application}/attribute-groups/{attributeGroup}",
-	Code: 200})
-
-var AssociateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociateResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/applications/{application}/resources/{resourceType}/{resource}",
-	Code: 200})
-
-var CreateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "CreateApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/applications",
-	Code: 201})
-
-var CreateAttributeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "CreateAttributeGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/attribute-groups",
-	Code: 201})
-
-var DeleteApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DeleteApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{application}",
-	Code: 200})
-
-var DeleteAttributeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DeleteAttributeGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/attribute-groups/{attributeGroup}",
-	Code: 200})
-
-var DisassociateAttributeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DisassociateAttributeGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{application}/attribute-groups/{attributeGroup}",
-	Code: 200})
-
-var DisassociateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DisassociateResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/applications/{application}/resources/{resourceType}/{resource}",
-	Code: 200})
-
-var GetApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{application}",
-	Code: 200})
-
-var GetAssociatedResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetAssociatedResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{application}/resources/{resourceType}/{resource}",
-	Code: 200})
-
-var GetAttributeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetAttributeGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/attribute-groups/{attributeGroup}",
-	Code: 200})
-
-var GetConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configuration",
-	Code: 200})
-
-var ListApplications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListApplications",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications",
-	Code: 200})
-
-var ListAssociatedAttributeGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAssociatedAttributeGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{application}/attribute-groups",
-	Code: 200})
-
-var ListAssociatedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAssociatedResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{application}/resources",
-	Code: 200})
-
-var ListAttributeGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAttributeGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/attribute-groups",
-	Code: 200})
-
-var ListAttributeGroupsForApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAttributeGroupsForApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/applications/{application}/attribute-group-details",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var PutConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "PutConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/configuration",
-	Code: 200})
-
-var SyncResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "SyncResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sync/{resourceType}/{resource}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UpdateApplication",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/applications/{application}",
-	Code: 200})
-
-var UpdateAttributeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UpdateAttributeGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/attribute-groups/{attributeGroup}",
-	Code: 200})
-
-var _AWS242AppRegistry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AWS242AppRegistry",
-}, smithy.ShapeTypeService, 0)
-
-var AWS242AppRegistry = smithy.NewServiceSchema(_AWS242AppRegistry, "2020-06-24")
-
-var Application = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Application",
-}, smithy.ShapeTypeStructure, 8)
-var Application_id *smithy.Schema
-
-var Application_arn *smithy.Schema
-
-var Application_name *smithy.Schema
-
-var Application_description *smithy.Schema
-
-var Application_creationTime *smithy.Schema
-
-var Application_lastUpdateTime *smithy.Schema
-
-var Application_tags *smithy.Schema
-
-var Application_applicationTag *smithy.Schema
-
-var _ApplicationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationSpecifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationSpecifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ApplicationSummaries_member *smithy.Schema
-
-var ApplicationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ApplicationSummary_id *smithy.Schema
-
-var ApplicationSummary_arn *smithy.Schema
-
-var ApplicationSummary_name *smithy.Schema
-
-var ApplicationSummary_description *smithy.Schema
-
-var ApplicationSummary_creationTime *smithy.Schema
-
-var ApplicationSummary_lastUpdateTime *smithy.Schema
-
-var _ApplicationTagDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationTagDefinition",
-}, smithy.ShapeTypeMap, 2)
-var _ApplicationTagDefinition_key *smithy.Schema
-
-var _ApplicationTagDefinition_value *smithy.Schema
-
-var ApplicationTagResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationTagResult",
-}, smithy.ShapeTypeStructure, 4)
-var ApplicationTagResult_applicationTagStatus *smithy.Schema
-
-var ApplicationTagResult_errorMessage *smithy.Schema
-
-var ApplicationTagResult_resources *smithy.Schema
-
-var ApplicationTagResult_nextToken *smithy.Schema
-
-var ApplicationTagStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ApplicationTagStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ApplicationTagStatus_IN_PROGRESS *smithy.Schema
-
-var ApplicationTagStatus_SUCCESS *smithy.Schema
-
-var ApplicationTagStatus_FAILURE *smithy.Schema
-
-var AppRegistryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AppRegistryConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AppRegistryConfiguration_tagQueryConfiguration *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociationCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociationCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var AssociationOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociationOption",
-}, smithy.ShapeTypeEnum, 2)
-var AssociationOption_APPLY_APPLICATION_TAG *smithy.Schema
-
-var AssociationOption_SKIP_APPLICATION_TAG *smithy.Schema
-
-var AttributeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroup",
-}, smithy.ShapeTypeStructure, 7)
-var AttributeGroup_id *smithy.Schema
-
-var AttributeGroup_arn *smithy.Schema
-
-var AttributeGroup_name *smithy.Schema
-
-var AttributeGroup_description *smithy.Schema
-
-var AttributeGroup_creationTime *smithy.Schema
-
-var AttributeGroup_lastUpdateTime *smithy.Schema
-
-var AttributeGroup_tags *smithy.Schema
-
-var _AttributeGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var AttributeGroupDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupDetails",
-}, smithy.ShapeTypeStructure, 4)
-var AttributeGroupDetails_id *smithy.Schema
-
-var AttributeGroupDetails_arn *smithy.Schema
-
-var AttributeGroupDetails_name *smithy.Schema
-
-var AttributeGroupDetails_createdBy *smithy.Schema
-
-var _AttributeGroupDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeGroupDetailsList_member *smithy.Schema
-
-var _AttributeGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _AttributeGroupIds_member *smithy.Schema
-
-var _AttributeGroupSpecifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupSpecifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AttributeGroupSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupSummaries",
-}, smithy.ShapeTypeList, 1)
-var _AttributeGroupSummaries_member *smithy.Schema
-
-var AttributeGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AttributeGroupSummary",
-}, smithy.ShapeTypeStructure, 7)
-var AttributeGroupSummary_id *smithy.Schema
-
-var AttributeGroupSummary_arn *smithy.Schema
-
-var AttributeGroupSummary_name *smithy.Schema
-
-var AttributeGroupSummary_description *smithy.Schema
-
-var AttributeGroupSummary_creationTime *smithy.Schema
-
-var AttributeGroupSummary_lastUpdateTime *smithy.Schema
-
-var AttributeGroupSummary_createdBy *smithy.Schema
-
-var _Attributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Attributes",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _CreatedBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "CreatedBy",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _GetAssociatedResourceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetAssociatedResourceFilter",
-}, smithy.ShapeTypeList, 1)
-var _GetAssociatedResourceFilter_member *smithy.Schema
-
-var Integrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Integrations",
-}, smithy.ShapeTypeStructure, 2)
-var Integrations_resourceGroup *smithy.Schema
-
-var Integrations_applicationTagResourceGroup *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Options = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Options",
-}, smithy.ShapeTypeList, 1)
-var _Options_member *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 4)
-var Resource_name *smithy.Schema
-
-var Resource_arn *smithy.Schema
-
-var Resource_associationTime *smithy.Schema
-
-var Resource_integrations *smithy.Schema
-
-var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceDetails",
-}, smithy.ShapeTypeStructure, 1)
-var ResourceDetails_tagValue *smithy.Schema
-
-var ResourceGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceGroup",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceGroup_state *smithy.Schema
-
-var ResourceGroup_arn *smithy.Schema
-
-var ResourceGroup_errorMessage *smithy.Schema
-
-var ResourceGroupState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceGroupState",
-}, smithy.ShapeTypeEnum, 6)
-var ResourceGroupState_CREATING *smithy.Schema
-
-var ResourceGroupState_CREATE_COMPLETE *smithy.Schema
-
-var ResourceGroupState_CREATE_FAILED *smithy.Schema
-
-var ResourceGroupState_UPDATING *smithy.Schema
-
-var ResourceGroupState_UPDATE_COMPLETE *smithy.Schema
-
-var ResourceGroupState_UPDATE_FAILED *smithy.Schema
-
-var ResourceInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceInfo",
-}, smithy.ShapeTypeStructure, 5)
-var ResourceInfo_name *smithy.Schema
-
-var ResourceInfo_arn *smithy.Schema
-
-var ResourceInfo_resourceType *smithy.Schema
-
-var ResourceInfo_resourceDetails *smithy.Schema
-
-var ResourceInfo_options *smithy.Schema
-
-var ResourceIntegrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceIntegrations",
-}, smithy.ShapeTypeStructure, 1)
-var ResourceIntegrations_resourceGroup *smithy.Schema
-
-var ResourceItemStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceItemStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ResourceItemStatus_SUCCESS *smithy.Schema
-
-var ResourceItemStatus_FAILED *smithy.Schema
-
-var ResourceItemStatus_IN_PROGRESS *smithy.Schema
-
-var ResourceItemStatus_SKIPPED *smithy.Schema
-
-var _ResourceItemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceItemType",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _Resources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Resources",
-}, smithy.ShapeTypeList, 1)
-var _Resources_member *smithy.Schema
-
-var _ResourcesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourcesList",
-}, smithy.ShapeTypeList, 1)
-var _ResourcesList_member *smithy.Schema
-
-var ResourcesListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourcesListItem",
-}, smithy.ShapeTypeStructure, 4)
-var ResourcesListItem_resourceArn *smithy.Schema
-
-var ResourcesListItem_errorMessage *smithy.Schema
-
-var ResourcesListItem_status *smithy.Schema
-
-var ResourcesListItem_resourceType *smithy.Schema
-
-var _ResourcesListItemErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourcesListItemErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceSpecifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceSpecifier",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceType_CFN_STACK *smithy.Schema
-
-var ResourceType_RESOURCE_TAG_VALUE *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var SyncAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "SyncAction",
-}, smithy.ShapeTypeEnum, 2)
-var SyncAction_START_SYNC *smithy.Schema
-
-var SyncAction_NO_ACTION *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagKeyConfig",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var TagQueryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagQueryConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var TagQueryConfiguration_tagKey *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var AssociateAttributeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociateAttributeGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateAttributeGroupRequest_application *smithy.Schema
-
-var AssociateAttributeGroupRequest_attributeGroup *smithy.Schema
-
-var AssociateAttributeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociateAttributeGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateAttributeGroupResponse_applicationArn *smithy.Schema
-
-var AssociateAttributeGroupResponse_attributeGroupArn *smithy.Schema
-
-var AssociateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociateResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateResourceRequest_application *smithy.Schema
-
-var AssociateResourceRequest_resourceType *smithy.Schema
-
-var AssociateResourceRequest_resource *smithy.Schema
-
-var AssociateResourceRequest_options *smithy.Schema
-
-var AssociateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "AssociateResourceResponse",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateResourceResponse_applicationArn *smithy.Schema
-
-var AssociateResourceResponse_resourceArn *smithy.Schema
-
-var AssociateResourceResponse_options *smithy.Schema
-
-var CreateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "CreateApplicationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateApplicationRequest_name *smithy.Schema
-
-var CreateApplicationRequest_description *smithy.Schema
-
-var CreateApplicationRequest_tags *smithy.Schema
-
-var CreateApplicationRequest_clientToken *smithy.Schema
-
-var CreateApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "CreateApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateApplicationResponse_application *smithy.Schema
-
-var CreateAttributeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "CreateAttributeGroupRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAttributeGroupRequest_name *smithy.Schema
-
-var CreateAttributeGroupRequest_description *smithy.Schema
-
-var CreateAttributeGroupRequest_attributes *smithy.Schema
-
-var CreateAttributeGroupRequest_tags *smithy.Schema
-
-var CreateAttributeGroupRequest_clientToken *smithy.Schema
-
-var CreateAttributeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "CreateAttributeGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAttributeGroupResponse_attributeGroup *smithy.Schema
-
-var DeleteApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DeleteApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApplicationRequest_application *smithy.Schema
-
-var DeleteApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DeleteApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApplicationResponse_application *smithy.Schema
-
-var DeleteAttributeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DeleteAttributeGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAttributeGroupRequest_attributeGroup *smithy.Schema
-
-var DeleteAttributeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DeleteAttributeGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAttributeGroupResponse_attributeGroup *smithy.Schema
-
-var DisassociateAttributeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DisassociateAttributeGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateAttributeGroupRequest_application *smithy.Schema
-
-var DisassociateAttributeGroupRequest_attributeGroup *smithy.Schema
-
-var DisassociateAttributeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DisassociateAttributeGroupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateAttributeGroupResponse_applicationArn *smithy.Schema
-
-var DisassociateAttributeGroupResponse_attributeGroupArn *smithy.Schema
-
-var DisassociateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DisassociateResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateResourceRequest_application *smithy.Schema
-
-var DisassociateResourceRequest_resourceType *smithy.Schema
-
-var DisassociateResourceRequest_resource *smithy.Schema
-
-var DisassociateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "DisassociateResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateResourceResponse_applicationArn *smithy.Schema
-
-var DisassociateResourceResponse_resourceArn *smithy.Schema
-
-var GetApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApplicationRequest_application *smithy.Schema
-
-var GetApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetApplicationResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetApplicationResponse_id *smithy.Schema
-
-var GetApplicationResponse_arn *smithy.Schema
-
-var GetApplicationResponse_name *smithy.Schema
-
-var GetApplicationResponse_description *smithy.Schema
-
-var GetApplicationResponse_creationTime *smithy.Schema
-
-var GetApplicationResponse_lastUpdateTime *smithy.Schema
-
-var GetApplicationResponse_associatedResourceCount *smithy.Schema
-
-var GetApplicationResponse_tags *smithy.Schema
-
-var GetApplicationResponse_integrations *smithy.Schema
-
-var GetApplicationResponse_applicationTag *smithy.Schema
-
-var GetAssociatedResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetAssociatedResourceRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetAssociatedResourceRequest_application *smithy.Schema
-
-var GetAssociatedResourceRequest_resourceType *smithy.Schema
-
-var GetAssociatedResourceRequest_resource *smithy.Schema
-
-var GetAssociatedResourceRequest_nextToken *smithy.Schema
-
-var GetAssociatedResourceRequest_resourceTagStatus *smithy.Schema
-
-var GetAssociatedResourceRequest_maxResults *smithy.Schema
-
-var GetAssociatedResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetAssociatedResourceResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetAssociatedResourceResponse_resource *smithy.Schema
-
-var GetAssociatedResourceResponse_options *smithy.Schema
-
-var GetAssociatedResourceResponse_applicationTagResult *smithy.Schema
-
-var GetAttributeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetAttributeGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAttributeGroupRequest_attributeGroup *smithy.Schema
-
-var GetAttributeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetAttributeGroupResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetAttributeGroupResponse_id *smithy.Schema
-
-var GetAttributeGroupResponse_arn *smithy.Schema
-
-var GetAttributeGroupResponse_name *smithy.Schema
-
-var GetAttributeGroupResponse_description *smithy.Schema
-
-var GetAttributeGroupResponse_attributes *smithy.Schema
-
-var GetAttributeGroupResponse_creationTime *smithy.Schema
-
-var GetAttributeGroupResponse_lastUpdateTime *smithy.Schema
-
-var GetAttributeGroupResponse_tags *smithy.Schema
-
-var GetAttributeGroupResponse_createdBy *smithy.Schema
-
-var GetConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "GetConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationResponse_configuration *smithy.Schema
-
-var ListApplicationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListApplicationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationsRequest_nextToken *smithy.Schema
-
-var ListApplicationsRequest_maxResults *smithy.Schema
-
-var ListApplicationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListApplicationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListApplicationsResponse_applications *smithy.Schema
-
-var ListApplicationsResponse_nextToken *smithy.Schema
-
-var ListAssociatedAttributeGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAssociatedAttributeGroupsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssociatedAttributeGroupsRequest_application *smithy.Schema
-
-var ListAssociatedAttributeGroupsRequest_nextToken *smithy.Schema
-
-var ListAssociatedAttributeGroupsRequest_maxResults *smithy.Schema
-
-var ListAssociatedAttributeGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAssociatedAttributeGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedAttributeGroupsResponse_attributeGroups *smithy.Schema
-
-var ListAssociatedAttributeGroupsResponse_nextToken *smithy.Schema
-
-var ListAssociatedResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAssociatedResourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAssociatedResourcesRequest_application *smithy.Schema
-
-var ListAssociatedResourcesRequest_nextToken *smithy.Schema
-
-var ListAssociatedResourcesRequest_maxResults *smithy.Schema
-
-var ListAssociatedResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAssociatedResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssociatedResourcesResponse_resources *smithy.Schema
-
-var ListAssociatedResourcesResponse_nextToken *smithy.Schema
-
-var ListAttributeGroupsForApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAttributeGroupsForApplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAttributeGroupsForApplicationRequest_application *smithy.Schema
-
-var ListAttributeGroupsForApplicationRequest_nextToken *smithy.Schema
-
-var ListAttributeGroupsForApplicationRequest_maxResults *smithy.Schema
-
-var ListAttributeGroupsForApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAttributeGroupsForApplicationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttributeGroupsForApplicationResponse_attributeGroupsDetails *smithy.Schema
-
-var ListAttributeGroupsForApplicationResponse_nextToken *smithy.Schema
-
-var ListAttributeGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAttributeGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttributeGroupsRequest_nextToken *smithy.Schema
-
-var ListAttributeGroupsRequest_maxResults *smithy.Schema
-
-var ListAttributeGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListAttributeGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttributeGroupsResponse_attributeGroups *smithy.Schema
-
-var ListAttributeGroupsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var PutConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "PutConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PutConfigurationRequest_configuration *smithy.Schema
-
-var SyncResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "SyncResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var SyncResourceRequest_resourceType *smithy.Schema
-
-var SyncResourceRequest_resource *smithy.Schema
-
-var SyncResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "SyncResourceResponse",
-}, smithy.ShapeTypeStructure, 3)
-var SyncResourceResponse_applicationArn *smithy.Schema
-
-var SyncResourceResponse_resourceArn *smithy.Schema
-
-var SyncResourceResponse_actionTaken *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UpdateApplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateApplicationRequest_application *smithy.Schema
-
-var UpdateApplicationRequest_name *smithy.Schema
-
-var UpdateApplicationRequest_description *smithy.Schema
-
-var UpdateApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UpdateApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateApplicationResponse_application *smithy.Schema
-
-var UpdateAttributeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UpdateAttributeGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAttributeGroupRequest_attributeGroup *smithy.Schema
-
-var UpdateAttributeGroupRequest_name *smithy.Schema
-
-var UpdateAttributeGroupRequest_description *smithy.Schema
-
-var UpdateAttributeGroupRequest_attributes *smithy.Schema
-
-var UpdateAttributeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.servicecatalogappregistry",
-	Name:      "UpdateAttributeGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAttributeGroupResponse_attributeGroup *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_Tags_key = _Tags.AddMember("key", _TagKey)
-
-	_Tags_value = _Tags.AddMember("value", _TagValue)
-
-	_ApplicationTagDefinition_key = _ApplicationTagDefinition.AddMember("key", _TagKey)
-
-	_ApplicationTagDefinition_value = _ApplicationTagDefinition.AddMember("value", _TagValue)
-
-	Application_id = Application.AddMember("id", _ApplicationId)
-
-	Application_arn = Application.AddMember("arn", _ApplicationArn)
-
-	Application_name = Application.AddMember("name", _Name)
-
-	Application_description = Application.AddMember("description", _Description)
-
-	Application_creationTime = Application.AddMember("creationTime", _Timestamp)
-
-	Application_lastUpdateTime = Application.AddMember("lastUpdateTime", _Timestamp)
-
-	Application_tags = Application.AddMember("tags", _Tags)
-
-	Application_applicationTag = Application.AddMember("applicationTag", _ApplicationTagDefinition)
-
-	ApplicationSummary_id = ApplicationSummary.AddMember("id", _ApplicationId)
-
-	ApplicationSummary_arn = ApplicationSummary.AddMember("arn", _ApplicationArn)
-
-	ApplicationSummary_name = ApplicationSummary.AddMember("name", _Name)
-
-	ApplicationSummary_description = ApplicationSummary.AddMember("description", _Description)
-
-	ApplicationSummary_creationTime = ApplicationSummary.AddMember("creationTime", _Timestamp)
-
-	ApplicationSummary_lastUpdateTime = ApplicationSummary.AddMember("lastUpdateTime", _Timestamp)
-
-	_ApplicationSummaries_member = _ApplicationSummaries.AddMember("member", ApplicationSummary)
-
-	ApplicationTagStatus_IN_PROGRESS = ApplicationTagStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ApplicationTagStatus_SUCCESS = ApplicationTagStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	ApplicationTagStatus_FAILURE = ApplicationTagStatus.AddMember("FAILURE", smithyprelude.Unit)
-
-	ResourcesListItem_resourceArn = ResourcesListItem.AddMember("resourceArn", _Arn)
-
-	ResourcesListItem_errorMessage = ResourcesListItem.AddMember("errorMessage", _ResourcesListItemErrorMessage)
-
-	ResourcesListItem_status = ResourcesListItem.AddMember("status", _String)
-
-	ResourcesListItem_resourceType = ResourcesListItem.AddMember("resourceType", _ResourceItemType)
-
-	_ResourcesList_member = _ResourcesList.AddMember("member", ResourcesListItem)
-
-	ApplicationTagResult_applicationTagStatus = ApplicationTagResult.AddMember("applicationTagStatus", ApplicationTagStatus)
-
-	ApplicationTagResult_errorMessage = ApplicationTagResult.AddMember("errorMessage", _String)
-
-	ApplicationTagResult_resources = ApplicationTagResult.AddMember("resources", _ResourcesList)
-
-	ApplicationTagResult_nextToken = ApplicationTagResult.AddMember("nextToken", _NextToken)
-
-	TagQueryConfiguration_tagKey = TagQueryConfiguration.AddMember("tagKey", _TagKeyConfig)
-
-	AppRegistryConfiguration_tagQueryConfiguration = AppRegistryConfiguration.AddMember("tagQueryConfiguration", TagQueryConfiguration)
-
-	AssociationOption_APPLY_APPLICATION_TAG = AssociationOption.AddMember("APPLY_APPLICATION_TAG", smithyprelude.Unit)
-
-	AssociationOption_SKIP_APPLICATION_TAG = AssociationOption.AddMember("SKIP_APPLICATION_TAG", smithyprelude.Unit)
-
-	AttributeGroup_id = AttributeGroup.AddMember("id", _AttributeGroupId)
-
-	AttributeGroup_arn = AttributeGroup.AddMember("arn", _AttributeGroupArn)
-
-	AttributeGroup_name = AttributeGroup.AddMember("name", _Name)
-
-	AttributeGroup_description = AttributeGroup.AddMember("description", _Description)
-
-	AttributeGroup_creationTime = AttributeGroup.AddMember("creationTime", _Timestamp)
-
-	AttributeGroup_lastUpdateTime = AttributeGroup.AddMember("lastUpdateTime", _Timestamp)
-
-	AttributeGroup_tags = AttributeGroup.AddMember("tags", _Tags)
-
-	AttributeGroupDetails_id = AttributeGroupDetails.AddMember("id", _AttributeGroupId)
-
-	AttributeGroupDetails_arn = AttributeGroupDetails.AddMember("arn", _AttributeGroupArn)
-
-	AttributeGroupDetails_name = AttributeGroupDetails.AddMember("name", _Name)
-
-	AttributeGroupDetails_createdBy = AttributeGroupDetails.AddMember("createdBy", _CreatedBy)
-
-	_AttributeGroupDetailsList_member = _AttributeGroupDetailsList.AddMember("member", AttributeGroupDetails)
-
-	_AttributeGroupIds_member = _AttributeGroupIds.AddMember("member", _AttributeGroupId)
-
-	AttributeGroupSummary_id = AttributeGroupSummary.AddMember("id", _AttributeGroupId)
-
-	AttributeGroupSummary_arn = AttributeGroupSummary.AddMember("arn", _AttributeGroupArn)
-
-	AttributeGroupSummary_name = AttributeGroupSummary.AddMember("name", _Name)
-
-	AttributeGroupSummary_description = AttributeGroupSummary.AddMember("description", _Description)
-
-	AttributeGroupSummary_creationTime = AttributeGroupSummary.AddMember("creationTime", _Timestamp)
-
-	AttributeGroupSummary_lastUpdateTime = AttributeGroupSummary.AddMember("lastUpdateTime", _Timestamp)
-
-	AttributeGroupSummary_createdBy = AttributeGroupSummary.AddMember("createdBy", _CreatedBy)
-
-	_AttributeGroupSummaries_member = _AttributeGroupSummaries.AddMember("member", AttributeGroupSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ResourceItemStatus_SUCCESS = ResourceItemStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	ResourceItemStatus_FAILED = ResourceItemStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ResourceItemStatus_IN_PROGRESS = ResourceItemStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ResourceItemStatus_SKIPPED = ResourceItemStatus.AddMember("SKIPPED", smithyprelude.Unit)
-
-	_GetAssociatedResourceFilter_member = _GetAssociatedResourceFilter.AddMember("member", ResourceItemStatus)
-
-	ResourceGroupState_CREATING = ResourceGroupState.AddMember("CREATING", smithyprelude.Unit)
-
-	ResourceGroupState_CREATE_COMPLETE = ResourceGroupState.AddMember("CREATE_COMPLETE", smithyprelude.Unit)
-
-	ResourceGroupState_CREATE_FAILED = ResourceGroupState.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	ResourceGroupState_UPDATING = ResourceGroupState.AddMember("UPDATING", smithyprelude.Unit)
-
-	ResourceGroupState_UPDATE_COMPLETE = ResourceGroupState.AddMember("UPDATE_COMPLETE", smithyprelude.Unit)
-
-	ResourceGroupState_UPDATE_FAILED = ResourceGroupState.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	ResourceGroup_state = ResourceGroup.AddMember("state", ResourceGroupState)
-
-	ResourceGroup_arn = ResourceGroup.AddMember("arn", _Arn)
-
-	ResourceGroup_errorMessage = ResourceGroup.AddMember("errorMessage", _String)
-
-	Integrations_resourceGroup = Integrations.AddMember("resourceGroup", ResourceGroup)
-
-	Integrations_applicationTagResourceGroup = Integrations.AddMember("applicationTagResourceGroup", ResourceGroup)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	_Options_member = _Options.AddMember("member", AssociationOption)
-
-	ResourceIntegrations_resourceGroup = ResourceIntegrations.AddMember("resourceGroup", ResourceGroup)
-
-	Resource_name = Resource.AddMember("name", _ResourceSpecifier)
-
-	Resource_arn = Resource.AddMember("arn", _Arn)
-
-	Resource_associationTime = Resource.AddMember("associationTime", _Timestamp)
-
-	Resource_integrations = Resource.AddMember("integrations", ResourceIntegrations)
-
-	ResourceDetails_tagValue = ResourceDetails.AddMember("tagValue", _TagValue)
-
-	ResourceType_CFN_STACK = ResourceType.AddMember("CFN_STACK", smithyprelude.Unit)
-
-	ResourceType_RESOURCE_TAG_VALUE = ResourceType.AddMember("RESOURCE_TAG_VALUE", smithyprelude.Unit)
-
-	ResourceInfo_name = ResourceInfo.AddMember("name", _ResourceSpecifier)
-
-	ResourceInfo_arn = ResourceInfo.AddMember("arn", _Arn)
-
-	ResourceInfo_resourceType = ResourceInfo.AddMember("resourceType", ResourceType)
-
-	ResourceInfo_resourceDetails = ResourceInfo.AddMember("resourceDetails", ResourceDetails)
-
-	ResourceInfo_options = ResourceInfo.AddMember("options", _Options)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	_Resources_member = _Resources.AddMember("member", ResourceInfo)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	SyncAction_START_SYNC = SyncAction.AddMember("START_SYNC", smithyprelude.Unit)
-
-	SyncAction_NO_ACTION = SyncAction.AddMember("NO_ACTION", smithyprelude.Unit)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _String)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	AssociateAttributeGroupRequest_application = AssociateAttributeGroupRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	AssociateAttributeGroupRequest_attributeGroup = AssociateAttributeGroupRequest.AddMember("attributeGroup", _AttributeGroupSpecifier, &smithytraits.HTTPLabel{})
-
-	AssociateAttributeGroupResponse_applicationArn = AssociateAttributeGroupResponse.AddMember("applicationArn", _ApplicationArn)
-
-	AssociateAttributeGroupResponse_attributeGroupArn = AssociateAttributeGroupResponse.AddMember("attributeGroupArn", _AttributeGroupArn)
-
-	AssociateResourceRequest_application = AssociateResourceRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	AssociateResourceRequest_resourceType = AssociateResourceRequest.AddMember("resourceType", ResourceType, &smithytraits.HTTPLabel{})
-
-	AssociateResourceRequest_resource = AssociateResourceRequest.AddMember("resource", _ResourceSpecifier, &smithytraits.HTTPLabel{})
-
-	AssociateResourceRequest_options = AssociateResourceRequest.AddMember("options", _Options)
-
-	AssociateResourceResponse_applicationArn = AssociateResourceResponse.AddMember("applicationArn", _ApplicationArn)
-
-	AssociateResourceResponse_resourceArn = AssociateResourceResponse.AddMember("resourceArn", _Arn)
-
-	AssociateResourceResponse_options = AssociateResourceResponse.AddMember("options", _Options)
-
-	CreateApplicationRequest_name = CreateApplicationRequest.AddMember("name", _Name)
-
-	CreateApplicationRequest_description = CreateApplicationRequest.AddMember("description", _Description)
-
-	CreateApplicationRequest_tags = CreateApplicationRequest.AddMember("tags", _Tags)
-
-	CreateApplicationRequest_clientToken = CreateApplicationRequest.AddMember("clientToken", _ClientToken)
-
-	CreateApplicationResponse_application = CreateApplicationResponse.AddMember("application", Application)
-
-	CreateAttributeGroupRequest_name = CreateAttributeGroupRequest.AddMember("name", _Name)
-
-	CreateAttributeGroupRequest_description = CreateAttributeGroupRequest.AddMember("description", _Description)
-
-	CreateAttributeGroupRequest_attributes = CreateAttributeGroupRequest.AddMember("attributes", _Attributes)
-
-	CreateAttributeGroupRequest_tags = CreateAttributeGroupRequest.AddMember("tags", _Tags)
-
-	CreateAttributeGroupRequest_clientToken = CreateAttributeGroupRequest.AddMember("clientToken", _ClientToken)
-
-	CreateAttributeGroupResponse_attributeGroup = CreateAttributeGroupResponse.AddMember("attributeGroup", AttributeGroup)
-
-	DeleteApplicationRequest_application = DeleteApplicationRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	DeleteApplicationResponse_application = DeleteApplicationResponse.AddMember("application", ApplicationSummary)
-
-	DeleteAttributeGroupRequest_attributeGroup = DeleteAttributeGroupRequest.AddMember("attributeGroup", _AttributeGroupSpecifier, &smithytraits.HTTPLabel{})
-
-	DeleteAttributeGroupResponse_attributeGroup = DeleteAttributeGroupResponse.AddMember("attributeGroup", AttributeGroupSummary)
-
-	DisassociateAttributeGroupRequest_application = DisassociateAttributeGroupRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	DisassociateAttributeGroupRequest_attributeGroup = DisassociateAttributeGroupRequest.AddMember("attributeGroup", _AttributeGroupSpecifier, &smithytraits.HTTPLabel{})
-
-	DisassociateAttributeGroupResponse_applicationArn = DisassociateAttributeGroupResponse.AddMember("applicationArn", _ApplicationArn)
-
-	DisassociateAttributeGroupResponse_attributeGroupArn = DisassociateAttributeGroupResponse.AddMember("attributeGroupArn", _AttributeGroupArn)
-
-	DisassociateResourceRequest_application = DisassociateResourceRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	DisassociateResourceRequest_resourceType = DisassociateResourceRequest.AddMember("resourceType", ResourceType, &smithytraits.HTTPLabel{})
-
-	DisassociateResourceRequest_resource = DisassociateResourceRequest.AddMember("resource", _ResourceSpecifier, &smithytraits.HTTPLabel{})
-
-	DisassociateResourceResponse_applicationArn = DisassociateResourceResponse.AddMember("applicationArn", _ApplicationArn)
-
-	DisassociateResourceResponse_resourceArn = DisassociateResourceResponse.AddMember("resourceArn", _Arn)
-
-	GetApplicationRequest_application = GetApplicationRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	GetApplicationResponse_id = GetApplicationResponse.AddMember("id", _ApplicationId)
-
-	GetApplicationResponse_arn = GetApplicationResponse.AddMember("arn", _ApplicationArn)
-
-	GetApplicationResponse_name = GetApplicationResponse.AddMember("name", _Name)
-
-	GetApplicationResponse_description = GetApplicationResponse.AddMember("description", _Description)
-
-	GetApplicationResponse_creationTime = GetApplicationResponse.AddMember("creationTime", _Timestamp)
-
-	GetApplicationResponse_lastUpdateTime = GetApplicationResponse.AddMember("lastUpdateTime", _Timestamp)
-
-	GetApplicationResponse_associatedResourceCount = GetApplicationResponse.AddMember("associatedResourceCount", _AssociationCount)
-
-	GetApplicationResponse_tags = GetApplicationResponse.AddMember("tags", _Tags)
-
-	GetApplicationResponse_integrations = GetApplicationResponse.AddMember("integrations", Integrations)
-
-	GetApplicationResponse_applicationTag = GetApplicationResponse.AddMember("applicationTag", _ApplicationTagDefinition)
-
-	GetAssociatedResourceRequest_application = GetAssociatedResourceRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	GetAssociatedResourceRequest_resourceType = GetAssociatedResourceRequest.AddMember("resourceType", ResourceType, &smithytraits.HTTPLabel{})
-
-	GetAssociatedResourceRequest_resource = GetAssociatedResourceRequest.AddMember("resource", _ResourceSpecifier, &smithytraits.HTTPLabel{})
-
-	GetAssociatedResourceRequest_nextToken = GetAssociatedResourceRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetAssociatedResourceRequest_resourceTagStatus = GetAssociatedResourceRequest.AddMember("resourceTagStatus", _GetAssociatedResourceFilter, &smithytraits.HTTPQuery{Name: "resourceTagStatus"})
-
-	GetAssociatedResourceRequest_maxResults = GetAssociatedResourceRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetAssociatedResourceResponse_resource = GetAssociatedResourceResponse.AddMember("resource", Resource)
-
-	GetAssociatedResourceResponse_options = GetAssociatedResourceResponse.AddMember("options", _Options)
-
-	GetAssociatedResourceResponse_applicationTagResult = GetAssociatedResourceResponse.AddMember("applicationTagResult", ApplicationTagResult)
-
-	GetAttributeGroupRequest_attributeGroup = GetAttributeGroupRequest.AddMember("attributeGroup", _AttributeGroupSpecifier, &smithytraits.HTTPLabel{})
-
-	GetAttributeGroupResponse_id = GetAttributeGroupResponse.AddMember("id", _AttributeGroupId)
-
-	GetAttributeGroupResponse_arn = GetAttributeGroupResponse.AddMember("arn", _AttributeGroupArn)
-
-	GetAttributeGroupResponse_name = GetAttributeGroupResponse.AddMember("name", _Name)
-
-	GetAttributeGroupResponse_description = GetAttributeGroupResponse.AddMember("description", _Description)
-
-	GetAttributeGroupResponse_attributes = GetAttributeGroupResponse.AddMember("attributes", _Attributes)
-
-	GetAttributeGroupResponse_creationTime = GetAttributeGroupResponse.AddMember("creationTime", _Timestamp)
-
-	GetAttributeGroupResponse_lastUpdateTime = GetAttributeGroupResponse.AddMember("lastUpdateTime", _Timestamp)
-
-	GetAttributeGroupResponse_tags = GetAttributeGroupResponse.AddMember("tags", _Tags)
-
-	GetAttributeGroupResponse_createdBy = GetAttributeGroupResponse.AddMember("createdBy", _CreatedBy)
-
-	GetConfigurationResponse_configuration = GetConfigurationResponse.AddMember("configuration", AppRegistryConfiguration)
-
-	ListApplicationsRequest_nextToken = ListApplicationsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListApplicationsRequest_maxResults = ListApplicationsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListApplicationsResponse_applications = ListApplicationsResponse.AddMember("applications", _ApplicationSummaries)
-
-	ListApplicationsResponse_nextToken = ListApplicationsResponse.AddMember("nextToken", _NextToken)
-
-	ListAssociatedAttributeGroupsRequest_application = ListAssociatedAttributeGroupsRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	ListAssociatedAttributeGroupsRequest_nextToken = ListAssociatedAttributeGroupsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssociatedAttributeGroupsRequest_maxResults = ListAssociatedAttributeGroupsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssociatedAttributeGroupsResponse_attributeGroups = ListAssociatedAttributeGroupsResponse.AddMember("attributeGroups", _AttributeGroupIds)
-
-	ListAssociatedAttributeGroupsResponse_nextToken = ListAssociatedAttributeGroupsResponse.AddMember("nextToken", _NextToken)
-
-	ListAssociatedResourcesRequest_application = ListAssociatedResourcesRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	ListAssociatedResourcesRequest_nextToken = ListAssociatedResourcesRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAssociatedResourcesRequest_maxResults = ListAssociatedResourcesRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAssociatedResourcesResponse_resources = ListAssociatedResourcesResponse.AddMember("resources", _Resources)
-
-	ListAssociatedResourcesResponse_nextToken = ListAssociatedResourcesResponse.AddMember("nextToken", _NextToken)
-
-	ListAttributeGroupsForApplicationRequest_application = ListAttributeGroupsForApplicationRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	ListAttributeGroupsForApplicationRequest_nextToken = ListAttributeGroupsForApplicationRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAttributeGroupsForApplicationRequest_maxResults = ListAttributeGroupsForApplicationRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAttributeGroupsForApplicationResponse_attributeGroupsDetails = ListAttributeGroupsForApplicationResponse.AddMember("attributeGroupsDetails", _AttributeGroupDetailsList)
-
-	ListAttributeGroupsForApplicationResponse_nextToken = ListAttributeGroupsForApplicationResponse.AddMember("nextToken", _NextToken)
-
-	ListAttributeGroupsRequest_nextToken = ListAttributeGroupsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAttributeGroupsRequest_maxResults = ListAttributeGroupsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAttributeGroupsResponse_attributeGroups = ListAttributeGroupsResponse.AddMember("attributeGroups", _AttributeGroupSummaries)
-
-	ListAttributeGroupsResponse_nextToken = ListAttributeGroupsResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	PutConfigurationRequest_configuration = PutConfigurationRequest.AddMember("configuration", AppRegistryConfiguration)
-
-	SyncResourceRequest_resourceType = SyncResourceRequest.AddMember("resourceType", ResourceType, &smithytraits.HTTPLabel{})
-
-	SyncResourceRequest_resource = SyncResourceRequest.AddMember("resource", _ResourceSpecifier, &smithytraits.HTTPLabel{})
-
-	SyncResourceResponse_applicationArn = SyncResourceResponse.AddMember("applicationArn", _ApplicationArn)
-
-	SyncResourceResponse_resourceArn = SyncResourceResponse.AddMember("resourceArn", _Arn)
-
-	SyncResourceResponse_actionTaken = SyncResourceResponse.AddMember("actionTaken", SyncAction)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateApplicationRequest_application = UpdateApplicationRequest.AddMember("application", _ApplicationSpecifier, &smithytraits.HTTPLabel{})
-
-	UpdateApplicationRequest_name = UpdateApplicationRequest.AddMember("name", _Name)
-
-	UpdateApplicationRequest_description = UpdateApplicationRequest.AddMember("description", _Description)
-
-	UpdateApplicationResponse_application = UpdateApplicationResponse.AddMember("application", Application)
-
-	UpdateAttributeGroupRequest_attributeGroup = UpdateAttributeGroupRequest.AddMember("attributeGroup", _AttributeGroupSpecifier, &smithytraits.HTTPLabel{})
-
-	UpdateAttributeGroupRequest_name = UpdateAttributeGroupRequest.AddMember("name", _Name)
-
-	UpdateAttributeGroupRequest_description = UpdateAttributeGroupRequest.AddMember("description", _Description)
-
-	UpdateAttributeGroupRequest_attributes = UpdateAttributeGroupRequest.AddMember("attributes", _Attributes)
-
-	UpdateAttributeGroupResponse_attributeGroup = UpdateAttributeGroupResponse.AddMember("attributeGroup", AttributeGroup)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceTagStatus"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mApplication = smithy.SchemaMembers{List: []*smithy.Schema{&sApplication_id, &sApplication_arn, &sApplication_name, &sApplication_description, &sApplication_creationTime, &sApplication_lastUpdateTime, &sApplication_tags, &sApplication_applicationTag}}
+var m_ApplicationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationSummaries_member}}
+var mApplicationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationSummary_id, &sApplicationSummary_arn, &sApplicationSummary_name, &sApplicationSummary_description, &sApplicationSummary_creationTime, &sApplicationSummary_lastUpdateTime}}
+var m_ApplicationTagDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApplicationTagDefinition_key, &s_ApplicationTagDefinition_value}}
+var mApplicationTagResult = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationTagResult_applicationTagStatus, &sApplicationTagResult_errorMessage, &sApplicationTagResult_resources, &sApplicationTagResult_nextToken}}
+var mApplicationTagStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sApplicationTagStatus_IN_PROGRESS, &sApplicationTagStatus_SUCCESS, &sApplicationTagStatus_FAILURE}}
+var mAppRegistryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAppRegistryConfiguration_tagQueryConfiguration}}
+var mAssociationOption = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociationOption_APPLY_APPLICATION_TAG, &sAssociationOption_SKIP_APPLICATION_TAG}}
+var mAttributeGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeGroup_id, &sAttributeGroup_arn, &sAttributeGroup_name, &sAttributeGroup_description, &sAttributeGroup_creationTime, &sAttributeGroup_lastUpdateTime, &sAttributeGroup_tags}}
+var mAttributeGroupDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeGroupDetails_id, &sAttributeGroupDetails_arn, &sAttributeGroupDetails_name, &sAttributeGroupDetails_createdBy}}
+var m_AttributeGroupDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeGroupDetailsList_member}}
+var m_AttributeGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeGroupIds_member}}
+var m_AttributeGroupSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeGroupSummaries_member}}
+var mAttributeGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeGroupSummary_id, &sAttributeGroupSummary_arn, &sAttributeGroupSummary_name, &sAttributeGroupSummary_description, &sAttributeGroupSummary_creationTime, &sAttributeGroupSummary_lastUpdateTime, &sAttributeGroupSummary_createdBy}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var m_GetAssociatedResourceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetAssociatedResourceFilter_member}}
+var mIntegrations = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrations_resourceGroup, &sIntegrations_applicationTagResourceGroup}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_Options = smithy.SchemaMembers{List: []*smithy.Schema{&s_Options_member}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_name, &sResource_arn, &sResource_associationTime, &sResource_integrations}}
+var mResourceDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceDetails_tagValue}}
+var mResourceGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceGroup_state, &sResourceGroup_arn, &sResourceGroup_errorMessage}}
+var mResourceGroupState = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceGroupState_CREATING, &sResourceGroupState_CREATE_COMPLETE, &sResourceGroupState_CREATE_FAILED, &sResourceGroupState_UPDATING, &sResourceGroupState_UPDATE_COMPLETE, &sResourceGroupState_UPDATE_FAILED}}
+var mResourceInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInfo_name, &sResourceInfo_arn, &sResourceInfo_resourceType, &sResourceInfo_resourceDetails, &sResourceInfo_options}}
+var mResourceIntegrations = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceIntegrations_resourceGroup}}
+var mResourceItemStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceItemStatus_SUCCESS, &sResourceItemStatus_FAILED, &sResourceItemStatus_IN_PROGRESS, &sResourceItemStatus_SKIPPED}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var m_Resources = smithy.SchemaMembers{List: []*smithy.Schema{&s_Resources_member}}
+var m_ResourcesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourcesList_member}}
+var mResourcesListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcesListItem_resourceArn, &sResourcesListItem_errorMessage, &sResourcesListItem_status, &sResourcesListItem_resourceType}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_CFN_STACK, &sResourceType_RESOURCE_TAG_VALUE}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mSyncAction = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncAction_START_SYNC, &sSyncAction_NO_ACTION}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var mTagQueryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTagQueryConfiguration_tagKey}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mAssociateAttributeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAttributeGroupRequest_application, &sAssociateAttributeGroupRequest_attributeGroup}}
+var mAssociateAttributeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAttributeGroupResponse_applicationArn, &sAssociateAttributeGroupResponse_attributeGroupArn}}
+var mAssociateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourceRequest_application, &sAssociateResourceRequest_resourceType, &sAssociateResourceRequest_resource, &sAssociateResourceRequest_options}}
+var mAssociateResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateResourceResponse_applicationArn, &sAssociateResourceResponse_resourceArn, &sAssociateResourceResponse_options}}
+var mCreateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationRequest_name, &sCreateApplicationRequest_description, &sCreateApplicationRequest_tags, &sCreateApplicationRequest_clientToken}}
+var mCreateApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApplicationResponse_application}}
+var mCreateAttributeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAttributeGroupRequest_name, &sCreateAttributeGroupRequest_description, &sCreateAttributeGroupRequest_attributes, &sCreateAttributeGroupRequest_tags, &sCreateAttributeGroupRequest_clientToken}}
+var mCreateAttributeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAttributeGroupResponse_attributeGroup}}
+var mDeleteApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApplicationRequest_application}}
+var mDeleteApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApplicationResponse_application}}
+var mDeleteAttributeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAttributeGroupRequest_attributeGroup}}
+var mDeleteAttributeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAttributeGroupResponse_attributeGroup}}
+var mDisassociateAttributeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateAttributeGroupRequest_application, &sDisassociateAttributeGroupRequest_attributeGroup}}
+var mDisassociateAttributeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateAttributeGroupResponse_applicationArn, &sDisassociateAttributeGroupResponse_attributeGroupArn}}
+var mDisassociateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourceRequest_application, &sDisassociateResourceRequest_resourceType, &sDisassociateResourceRequest_resource}}
+var mDisassociateResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateResourceResponse_applicationArn, &sDisassociateResourceResponse_resourceArn}}
+var mGetApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApplicationRequest_application}}
+var mGetApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApplicationResponse_id, &sGetApplicationResponse_arn, &sGetApplicationResponse_name, &sGetApplicationResponse_description, &sGetApplicationResponse_creationTime, &sGetApplicationResponse_lastUpdateTime, &sGetApplicationResponse_associatedResourceCount, &sGetApplicationResponse_tags, &sGetApplicationResponse_integrations, &sGetApplicationResponse_applicationTag}, Seed: 1, Slots: []uint16{
+	2, 1, 0, 0, 8, 0, 3, 7, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
+	4, 0, 6, 0, 10, 0, 0, 0,
+}}
+var mGetAssociatedResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssociatedResourceRequest_application, &sGetAssociatedResourceRequest_resourceType, &sGetAssociatedResourceRequest_resource, &sGetAssociatedResourceRequest_nextToken, &sGetAssociatedResourceRequest_resourceTagStatus, &sGetAssociatedResourceRequest_maxResults}}
+var mGetAssociatedResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAssociatedResourceResponse_resource, &sGetAssociatedResourceResponse_options, &sGetAssociatedResourceResponse_applicationTagResult}}
+var mGetAttributeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAttributeGroupRequest_attributeGroup}}
+var mGetAttributeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAttributeGroupResponse_id, &sGetAttributeGroupResponse_arn, &sGetAttributeGroupResponse_name, &sGetAttributeGroupResponse_description, &sGetAttributeGroupResponse_attributes, &sGetAttributeGroupResponse_creationTime, &sGetAttributeGroupResponse_lastUpdateTime, &sGetAttributeGroupResponse_tags, &sGetAttributeGroupResponse_createdBy}, Seed: 1, Slots: []uint16{
+	2, 1, 0, 0, 8, 0, 3, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 0, 0, 0, 9, 0,
+	4, 0, 7, 0, 0, 0, 0, 0,
+}}
+var mGetConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationResponse_configuration}}
+var mListApplicationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationsRequest_nextToken, &sListApplicationsRequest_maxResults}}
+var mListApplicationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListApplicationsResponse_applications, &sListApplicationsResponse_nextToken}}
+var mListAssociatedAttributeGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedAttributeGroupsRequest_application, &sListAssociatedAttributeGroupsRequest_nextToken, &sListAssociatedAttributeGroupsRequest_maxResults}}
+var mListAssociatedAttributeGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedAttributeGroupsResponse_attributeGroups, &sListAssociatedAttributeGroupsResponse_nextToken}}
+var mListAssociatedResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedResourcesRequest_application, &sListAssociatedResourcesRequest_nextToken, &sListAssociatedResourcesRequest_maxResults}}
+var mListAssociatedResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssociatedResourcesResponse_resources, &sListAssociatedResourcesResponse_nextToken}}
+var mListAttributeGroupsForApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttributeGroupsForApplicationRequest_application, &sListAttributeGroupsForApplicationRequest_nextToken, &sListAttributeGroupsForApplicationRequest_maxResults}}
+var mListAttributeGroupsForApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttributeGroupsForApplicationResponse_attributeGroupsDetails, &sListAttributeGroupsForApplicationResponse_nextToken}}
+var mListAttributeGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttributeGroupsRequest_nextToken, &sListAttributeGroupsRequest_maxResults}}
+var mListAttributeGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttributeGroupsResponse_attributeGroups, &sListAttributeGroupsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mPutConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutConfigurationRequest_configuration}}
+var mSyncResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncResourceRequest_resourceType, &sSyncResourceRequest_resource}}
+var mSyncResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncResourceResponse_applicationArn, &sSyncResourceResponse_resourceArn, &sSyncResourceResponse_actionTaken}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationRequest_application, &sUpdateApplicationRequest_name, &sUpdateApplicationRequest_description}}
+var mUpdateApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApplicationResponse_application}}
+var mUpdateAttributeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAttributeGroupRequest_attributeGroup, &sUpdateAttributeGroupRequest_name, &sUpdateAttributeGroupRequest_description, &sUpdateAttributeGroupRequest_attributes}}
+var mUpdateAttributeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAttributeGroupResponse_attributeGroup}}
+
+var sAssociateAttributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAttributeGroup, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sAssociateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResource, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplication, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateAttributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAttributeGroup, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplication, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteAttributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttributeGroup, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDisassociateAttributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAttributeGroup, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDisassociateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResource, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sGetApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplication, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetAssociatedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociatedResource, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sGetAttributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttributeGroup, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguration, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListApplications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplications, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sListAssociatedAttributeGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedAttributeGroups, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sListAssociatedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedResources, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sListAttributeGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttributeGroups, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListAttributeGroupsForApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttributeGroupsForApplication, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sPutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfiguration, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sSyncResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncResource, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sUpdateApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplication, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sUpdateAttributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAttributeGroup, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var s_AWS242AppRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWS242AppRegistry, Type: smithy.ShapeTypeService})
+var sApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure})
+var s_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var s_ApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var s_ApplicationSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationSpecifier, Type: smithy.ShapeTypeString})
+var s_ApplicationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationSummaries, Members: &m_ApplicationSummaries, Type: smithy.ShapeTypeList})
+var sApplicationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationSummary, Members: &mApplicationSummary, Type: smithy.ShapeTypeStructure})
+var s_ApplicationTagDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationTagDefinition, Members: &m_ApplicationTagDefinition, Type: smithy.ShapeTypeMap})
+var sApplicationTagResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationTagResult, Members: &mApplicationTagResult, Type: smithy.ShapeTypeStructure})
+var sApplicationTagStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplicationTagStatus, Members: &mApplicationTagStatus, Type: smithy.ShapeTypeEnum})
+var sAppRegistryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppRegistryConfiguration, Members: &mAppRegistryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AssociationCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociationCount, Type: smithy.ShapeTypeInteger})
+var sAssociationOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociationOption, Members: &mAssociationOption, Type: smithy.ShapeTypeEnum})
+var sAttributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeGroup, Members: &mAttributeGroup, Type: smithy.ShapeTypeStructure})
+var s_AttributeGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeGroupArn, Type: smithy.ShapeTypeString})
+var sAttributeGroupDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeGroupDetails, Members: &mAttributeGroupDetails, Type: smithy.ShapeTypeStructure})
+var s_AttributeGroupDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeGroupDetailsList, Members: &m_AttributeGroupDetailsList, Type: smithy.ShapeTypeList})
+var s_AttributeGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeGroupId, Type: smithy.ShapeTypeString})
+var s_AttributeGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeGroupIds, Members: &m_AttributeGroupIds, Type: smithy.ShapeTypeList})
+var s_AttributeGroupSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeGroupSpecifier, Type: smithy.ShapeTypeString})
+var s_AttributeGroupSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeGroupSummaries, Members: &m_AttributeGroupSummaries, Type: smithy.ShapeTypeList})
+var sAttributeGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeGroupSummary, Members: &mAttributeGroupSummary, Type: smithy.ShapeTypeStructure})
+var s_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Attributes, Type: smithy.ShapeTypeString})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var s_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_GetAssociatedResourceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetAssociatedResourceFilter, Members: &m_GetAssociatedResourceFilter, Type: smithy.ShapeTypeList})
+var sIntegrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrations, Members: &mIntegrations, Type: smithy.ShapeTypeStructure})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_Options = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Options, Members: &m_Options, Type: smithy.ShapeTypeList})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sResourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceDetails, Members: &mResourceDetails, Type: smithy.ShapeTypeStructure})
+var sResourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceGroup, Members: &mResourceGroup, Type: smithy.ShapeTypeStructure})
+var sResourceGroupState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceGroupState, Members: &mResourceGroupState, Type: smithy.ShapeTypeEnum})
+var sResourceInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInfo, Members: &mResourceInfo, Type: smithy.ShapeTypeStructure})
+var sResourceIntegrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceIntegrations, Members: &mResourceIntegrations, Type: smithy.ShapeTypeStructure})
+var sResourceItemStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceItemStatus, Members: &mResourceItemStatus, Type: smithy.ShapeTypeEnum})
+var s_ResourceItemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceItemType, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var s_Resources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var s_ResourcesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList})
+var sResourcesListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcesListItem, Members: &mResourcesListItem, Type: smithy.ShapeTypeStructure})
+var s_ResourcesListItemErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcesListItemErrorMessage, Type: smithy.ShapeTypeString})
+var s_ResourceSpecifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSpecifier, Type: smithy.ShapeTypeString})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sSyncAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncAction, Members: &mSyncAction, Type: smithy.ShapeTypeEnum})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyConfig, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sTagQueryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagQueryConfiguration, Members: &mTagQueryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t30, Type: smithy.ShapeTypeTimestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t31, Type: smithy.ShapeTypeStructure})
+var sAssociateAttributeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAttributeGroupRequest, Members: &mAssociateAttributeGroupRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateAttributeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAttributeGroupResponse, Members: &mAssociateAttributeGroupResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceRequest, Members: &mAssociateResourceRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateResourceResponse, Members: &mAssociateResourceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationRequest, Members: &mCreateApplicationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApplicationResponse, Members: &mCreateApplicationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAttributeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAttributeGroupRequest, Members: &mCreateAttributeGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAttributeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAttributeGroupResponse, Members: &mCreateAttributeGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationRequest, Members: &mDeleteApplicationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApplicationResponse, Members: &mDeleteApplicationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAttributeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttributeGroupRequest, Members: &mDeleteAttributeGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAttributeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttributeGroupResponse, Members: &mDeleteAttributeGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateAttributeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAttributeGroupRequest, Members: &mDisassociateAttributeGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateAttributeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAttributeGroupResponse, Members: &mDisassociateAttributeGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceRequest, Members: &mDisassociateResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateResourceResponse, Members: &mDisassociateResourceResponse, Type: smithy.ShapeTypeStructure})
+var sGetApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationRequest, Members: &mGetApplicationRequest, Type: smithy.ShapeTypeStructure})
+var sGetApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApplicationResponse, Members: &mGetApplicationResponse, Type: smithy.ShapeTypeStructure})
+var sGetAssociatedResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociatedResourceRequest, Members: &mGetAssociatedResourceRequest, Type: smithy.ShapeTypeStructure})
+var sGetAssociatedResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAssociatedResourceResponse, Members: &mGetAssociatedResourceResponse, Type: smithy.ShapeTypeStructure})
+var sGetAttributeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttributeGroupRequest, Members: &mGetAttributeGroupRequest, Type: smithy.ShapeTypeStructure})
+var sGetAttributeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAttributeGroupResponse, Members: &mGetAttributeGroupResponse, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationResponse, Members: &mGetConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sListApplicationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsRequest, Members: &mListApplicationsRequest, Type: smithy.ShapeTypeStructure})
+var sListApplicationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListApplicationsResponse, Members: &mListApplicationsResponse, Type: smithy.ShapeTypeStructure})
+var sListAssociatedAttributeGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedAttributeGroupsRequest, Members: &mListAssociatedAttributeGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListAssociatedAttributeGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedAttributeGroupsResponse, Members: &mListAssociatedAttributeGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListAssociatedResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedResourcesRequest, Members: &mListAssociatedResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListAssociatedResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssociatedResourcesResponse, Members: &mListAssociatedResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListAttributeGroupsForApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttributeGroupsForApplicationRequest, Members: &mListAttributeGroupsForApplicationRequest, Type: smithy.ShapeTypeStructure})
+var sListAttributeGroupsForApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttributeGroupsForApplicationResponse, Members: &mListAttributeGroupsForApplicationResponse, Type: smithy.ShapeTypeStructure})
+var sListAttributeGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttributeGroupsRequest, Members: &mListAttributeGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListAttributeGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttributeGroupsResponse, Members: &mListAttributeGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutConfigurationRequest, Members: &mPutConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sSyncResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncResourceRequest, Members: &mSyncResourceRequest, Type: smithy.ShapeTypeStructure})
+var sSyncResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncResourceResponse, Members: &mSyncResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationRequest, Members: &mUpdateApplicationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApplicationResponse, Members: &mUpdateApplicationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAttributeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAttributeGroupRequest, Members: &mUpdateAttributeGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAttributeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAttributeGroupResponse, Members: &mUpdateAttributeGroupResponse, Type: smithy.ShapeTypeStructure})
+
+var sApplication_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var sApplication_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sApplication_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sApplication_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sApplication_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sApplication_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sApplication_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sApplication_applicationTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationTag", ID: &i_ApplicationTagDefinition, Members: &m_ApplicationTagDefinition, Type: smithy.ShapeTypeMap})
+var s_ApplicationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApplicationSummary, Members: &mApplicationSummary, Type: smithy.ShapeTypeStructure})
+var sApplicationSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var sApplicationSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sApplicationSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sApplicationSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sApplicationSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sApplicationSummary_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var s_ApplicationTagDefinition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_ApplicationTagDefinition_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sApplicationTagResult_applicationTagStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationTagStatus", ID: &iApplicationTagStatus, Members: &mApplicationTagStatus, Type: smithy.ShapeTypeEnum})
+var sApplicationTagResult_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sApplicationTagResult_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_ResourcesList, Members: &m_ResourcesList, Type: smithy.ShapeTypeList})
+var sApplicationTagResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sApplicationTagStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationTagStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sApplicationTagStatus_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAppRegistryConfiguration_tagQueryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagQueryConfiguration", ID: &iTagQueryConfiguration, Members: &mTagQueryConfiguration, Type: smithy.ShapeTypeStructure})
+var sAssociationOption_APPLY_APPLICATION_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLY_APPLICATION_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssociationOption_SKIP_APPLICATION_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP_APPLICATION_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeGroup_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AttributeGroupId, Type: smithy.ShapeTypeString})
+var sAttributeGroup_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AttributeGroupArn, Type: smithy.ShapeTypeString})
+var sAttributeGroup_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sAttributeGroup_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sAttributeGroup_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sAttributeGroup_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sAttributeGroup_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sAttributeGroupDetails_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AttributeGroupId, Type: smithy.ShapeTypeString})
+var sAttributeGroupDetails_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AttributeGroupArn, Type: smithy.ShapeTypeString})
+var sAttributeGroupDetails_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sAttributeGroupDetails_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var s_AttributeGroupDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeGroupDetails, Members: &mAttributeGroupDetails, Type: smithy.ShapeTypeStructure})
+var s_AttributeGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AttributeGroupId, Type: smithy.ShapeTypeString})
+var s_AttributeGroupSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeGroupSummary, Members: &mAttributeGroupSummary, Type: smithy.ShapeTypeStructure})
+var sAttributeGroupSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AttributeGroupId, Type: smithy.ShapeTypeString})
+var sAttributeGroupSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AttributeGroupArn, Type: smithy.ShapeTypeString})
+var sAttributeGroupSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sAttributeGroupSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sAttributeGroupSummary_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sAttributeGroupSummary_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sAttributeGroupSummary_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_GetAssociatedResourceFilter_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceItemStatus, Members: &mResourceItemStatus, Type: smithy.ShapeTypeEnum})
+var sIntegrations_resourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceGroup", ID: &iResourceGroup, Members: &mResourceGroup, Type: smithy.ShapeTypeStructure})
+var sIntegrations_applicationTagResourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationTagResourceGroup", ID: &iResourceGroup, Members: &mResourceGroup, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_Options_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociationOption, Members: &mAssociationOption, Type: smithy.ShapeTypeEnum})
+var sResource_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceSpecifier, Type: smithy.ShapeTypeString})
+var sResource_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sResource_associationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sResource_integrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrations", ID: &iResourceIntegrations, Members: &mResourceIntegrations, Type: smithy.ShapeTypeStructure})
+var sResourceDetails_tagValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagValue", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sResourceGroup_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iResourceGroupState, Members: &mResourceGroupState, Type: smithy.ShapeTypeEnum})
+var sResourceGroup_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sResourceGroup_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceGroupState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceGroupState_CREATE_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceGroupState_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceGroupState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceGroupState_UPDATE_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceGroupState_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceInfo_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceSpecifier, Type: smithy.ShapeTypeString})
+var sResourceInfo_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sResourceInfo_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sResourceInfo_resourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceDetails", ID: &iResourceDetails, Members: &mResourceDetails, Type: smithy.ShapeTypeStructure})
+var sResourceInfo_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_Options, Members: &m_Options, Type: smithy.ShapeTypeList})
+var sResourceIntegrations_resourceGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceGroup", ID: &iResourceGroup, Members: &mResourceGroup, Type: smithy.ShapeTypeStructure})
+var sResourceItemStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceItemStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceItemStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceItemStatus_SKIPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_Resources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceInfo, Members: &mResourceInfo, Type: smithy.ShapeTypeStructure})
+var s_ResourcesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourcesListItem, Members: &mResourcesListItem, Type: smithy.ShapeTypeStructure})
+var sResourcesListItem_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sResourcesListItem_errorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorMessage", ID: &i_ResourcesListItemErrorMessage, Type: smithy.ShapeTypeString})
+var sResourcesListItem_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourcesListItem_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_ResourceItemType, Type: smithy.ShapeTypeString})
+var sResourceType_CFN_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CFN_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_RESOURCE_TAG_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_TAG_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSyncAction_START_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSyncAction_NO_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTagQueryConfiguration_tagKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKey", ID: &i_TagKeyConfig, Type: smithy.ShapeTypeString})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAssociateAttributeGroupRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sAssociateAttributeGroupRequest_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &i_AttributeGroupSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sAssociateAttributeGroupResponse_applicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sAssociateAttributeGroupResponse_attributeGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroupArn", ID: &i_AttributeGroupArn, Type: smithy.ShapeTypeString})
+var sAssociateResourceRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sAssociateResourceRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Traits: &t32, Type: smithy.ShapeTypeEnum})
+var sAssociateResourceRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sAssociateResourceRequest_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_Options, Members: &m_Options, Type: smithy.ShapeTypeList})
+var sAssociateResourceResponse_applicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sAssociateResourceResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sAssociateResourceResponse_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_Options, Members: &m_Options, Type: smithy.ShapeTypeList})
+var sCreateApplicationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sCreateApplicationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateApplicationRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sCreateApplicationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateApplicationResponse_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure})
+var sCreateAttributeGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sCreateAttributeGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateAttributeGroupRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_Attributes, Type: smithy.ShapeTypeString})
+var sCreateAttributeGroupRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sCreateAttributeGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateAttributeGroupResponse_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &iAttributeGroup, Members: &mAttributeGroup, Type: smithy.ShapeTypeStructure})
+var sDeleteApplicationRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteApplicationResponse_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &iApplicationSummary, Members: &mApplicationSummary, Type: smithy.ShapeTypeStructure})
+var sDeleteAttributeGroupRequest_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &i_AttributeGroupSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDeleteAttributeGroupResponse_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &iAttributeGroupSummary, Members: &mAttributeGroupSummary, Type: smithy.ShapeTypeStructure})
+var sDisassociateAttributeGroupRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDisassociateAttributeGroupRequest_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &i_AttributeGroupSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDisassociateAttributeGroupResponse_applicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sDisassociateAttributeGroupResponse_attributeGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroupArn", ID: &i_AttributeGroupArn, Type: smithy.ShapeTypeString})
+var sDisassociateResourceRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDisassociateResourceRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Traits: &t32, Type: smithy.ShapeTypeEnum})
+var sDisassociateResourceRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sDisassociateResourceResponse_applicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sDisassociateResourceResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetApplicationRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetApplicationResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_ApplicationId, Type: smithy.ShapeTypeString})
+var sGetApplicationResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sGetApplicationResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sGetApplicationResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetApplicationResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sGetApplicationResponse_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sGetApplicationResponse_associatedResourceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedResourceCount", ID: &i_AssociationCount, Type: smithy.ShapeTypeInteger})
+var sGetApplicationResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetApplicationResponse_integrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "integrations", ID: &iIntegrations, Members: &mIntegrations, Type: smithy.ShapeTypeStructure})
+var sGetApplicationResponse_applicationTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationTag", ID: &i_ApplicationTagDefinition, Members: &m_ApplicationTagDefinition, Type: smithy.ShapeTypeMap})
+var sGetAssociatedResourceRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetAssociatedResourceRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Traits: &t32, Type: smithy.ShapeTypeEnum})
+var sGetAssociatedResourceRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetAssociatedResourceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sGetAssociatedResourceRequest_resourceTagStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTagStatus", ID: &i_GetAssociatedResourceFilter, Members: &m_GetAssociatedResourceFilter, Traits: &t34, Type: smithy.ShapeTypeList})
+var sGetAssociatedResourceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger})
+var sGetAssociatedResourceResponse_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sGetAssociatedResourceResponse_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_Options, Members: &m_Options, Type: smithy.ShapeTypeList})
+var sGetAssociatedResourceResponse_applicationTagResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationTagResult", ID: &iApplicationTagResult, Members: &mApplicationTagResult, Type: smithy.ShapeTypeStructure})
+var sGetAttributeGroupRequest_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &i_AttributeGroupSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetAttributeGroupResponse_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_AttributeGroupId, Type: smithy.ShapeTypeString})
+var sGetAttributeGroupResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_AttributeGroupArn, Type: smithy.ShapeTypeString})
+var sGetAttributeGroupResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sGetAttributeGroupResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sGetAttributeGroupResponse_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_Attributes, Type: smithy.ShapeTypeString})
+var sGetAttributeGroupResponse_creationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sGetAttributeGroupResponse_lastUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateTime", ID: &i_Timestamp, Traits: &t24, Type: smithy.ShapeTypeTimestamp})
+var sGetAttributeGroupResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sGetAttributeGroupResponse_createdBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdBy", ID: &i_CreatedBy, Type: smithy.ShapeTypeString})
+var sGetConfigurationResponse_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iAppRegistryConfiguration, Members: &mAppRegistryConfiguration, Type: smithy.ShapeTypeStructure})
+var sListApplicationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListApplicationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger})
+var sListApplicationsResponse_applications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applications", ID: &i_ApplicationSummaries, Members: &m_ApplicationSummaries, Type: smithy.ShapeTypeList})
+var sListApplicationsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAssociatedAttributeGroupsRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListAssociatedAttributeGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListAssociatedAttributeGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger})
+var sListAssociatedAttributeGroupsResponse_attributeGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroups", ID: &i_AttributeGroupIds, Members: &m_AttributeGroupIds, Type: smithy.ShapeTypeList})
+var sListAssociatedAttributeGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAssociatedResourcesRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListAssociatedResourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListAssociatedResourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger})
+var sListAssociatedResourcesResponse_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sListAssociatedResourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAttributeGroupsForApplicationRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListAttributeGroupsForApplicationRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListAttributeGroupsForApplicationRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger})
+var sListAttributeGroupsForApplicationResponse_attributeGroupsDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroupsDetails", ID: &i_AttributeGroupDetailsList, Members: &m_AttributeGroupDetailsList, Type: smithy.ShapeTypeList})
+var sListAttributeGroupsForApplicationResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAttributeGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListAttributeGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t35, Type: smithy.ShapeTypeInteger})
+var sListAttributeGroupsResponse_attributeGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroups", ID: &i_AttributeGroupSummaries, Members: &m_AttributeGroupSummaries, Type: smithy.ShapeTypeList})
+var sListAttributeGroupsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sPutConfigurationRequest_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iAppRegistryConfiguration, Members: &mAppRegistryConfiguration, Type: smithy.ShapeTypeStructure})
+var sSyncResourceRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Traits: &t32, Type: smithy.ShapeTypeEnum})
+var sSyncResourceRequest_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &i_ResourceSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sSyncResourceResponse_applicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sSyncResourceResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sSyncResourceResponse_actionTaken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionTaken", ID: &iSyncAction, Members: &mSyncAction, Type: smithy.ShapeTypeEnum})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t36, Type: smithy.ShapeTypeList})
+var sUpdateApplicationRequest_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &i_ApplicationSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sUpdateApplicationRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sUpdateApplicationRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateApplicationResponse_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &iApplication, Members: &mApplication, Type: smithy.ShapeTypeStructure})
+var sUpdateAttributeGroupRequest_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &i_AttributeGroupSpecifier, Traits: &t32, Type: smithy.ShapeTypeString})
+var sUpdateAttributeGroupRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sUpdateAttributeGroupRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateAttributeGroupRequest_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_Attributes, Type: smithy.ShapeTypeString})
+var sUpdateAttributeGroupResponse_attributeGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributeGroup", ID: &iAttributeGroup, Members: &mAttributeGroup, Type: smithy.ShapeTypeStructure})
+
+var AssociateAttributeGroup = &sAssociateAttributeGroup
+
+var AssociateResource = &sAssociateResource
+
+var CreateApplication = &sCreateApplication
+
+var CreateAttributeGroup = &sCreateAttributeGroup
+
+var DeleteApplication = &sDeleteApplication
+
+var DeleteAttributeGroup = &sDeleteAttributeGroup
+
+var DisassociateAttributeGroup = &sDisassociateAttributeGroup
+
+var DisassociateResource = &sDisassociateResource
+
+var GetApplication = &sGetApplication
+
+var GetAssociatedResource = &sGetAssociatedResource
+
+var GetAttributeGroup = &sGetAttributeGroup
+
+var GetConfiguration = &sGetConfiguration
+
+var ListApplications = &sListApplications
+
+var ListAssociatedAttributeGroups = &sListAssociatedAttributeGroups
+
+var ListAssociatedResources = &sListAssociatedResources
+
+var ListAttributeGroups = &sListAttributeGroups
+
+var ListAttributeGroupsForApplication = &sListAttributeGroupsForApplication
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutConfiguration = &sPutConfiguration
+
+var SyncResource = &sSyncResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateApplication = &sUpdateApplication
+
+var UpdateAttributeGroup = &sUpdateAttributeGroup
+
+var _AWS242AppRegistry = &s_AWS242AppRegistry
+
+var Application = &sApplication
+var Application_id = &sApplication_id
+var Application_arn = &sApplication_arn
+var Application_name = &sApplication_name
+var Application_description = &sApplication_description
+var Application_creationTime = &sApplication_creationTime
+var Application_lastUpdateTime = &sApplication_lastUpdateTime
+var Application_tags = &sApplication_tags
+var Application_applicationTag = &sApplication_applicationTag
+
+var _ApplicationArn = &s_ApplicationArn
+
+var _ApplicationId = &s_ApplicationId
+
+var _ApplicationSpecifier = &s_ApplicationSpecifier
+
+var _ApplicationSummaries = &s_ApplicationSummaries
+var _ApplicationSummaries_member = &s_ApplicationSummaries_member
+
+var ApplicationSummary = &sApplicationSummary
+var ApplicationSummary_id = &sApplicationSummary_id
+var ApplicationSummary_arn = &sApplicationSummary_arn
+var ApplicationSummary_name = &sApplicationSummary_name
+var ApplicationSummary_description = &sApplicationSummary_description
+var ApplicationSummary_creationTime = &sApplicationSummary_creationTime
+var ApplicationSummary_lastUpdateTime = &sApplicationSummary_lastUpdateTime
+
+var _ApplicationTagDefinition = &s_ApplicationTagDefinition
+var _ApplicationTagDefinition_key = &s_ApplicationTagDefinition_key
+var _ApplicationTagDefinition_value = &s_ApplicationTagDefinition_value
+
+var ApplicationTagResult = &sApplicationTagResult
+var ApplicationTagResult_applicationTagStatus = &sApplicationTagResult_applicationTagStatus
+var ApplicationTagResult_errorMessage = &sApplicationTagResult_errorMessage
+var ApplicationTagResult_resources = &sApplicationTagResult_resources
+var ApplicationTagResult_nextToken = &sApplicationTagResult_nextToken
+
+var ApplicationTagStatus = &sApplicationTagStatus
+var ApplicationTagStatus_IN_PROGRESS = &sApplicationTagStatus_IN_PROGRESS
+var ApplicationTagStatus_SUCCESS = &sApplicationTagStatus_SUCCESS
+var ApplicationTagStatus_FAILURE = &sApplicationTagStatus_FAILURE
+
+var AppRegistryConfiguration = &sAppRegistryConfiguration
+var AppRegistryConfiguration_tagQueryConfiguration = &sAppRegistryConfiguration_tagQueryConfiguration
+
+var _Arn = &s_Arn
+
+var _AssociationCount = &s_AssociationCount
+
+var AssociationOption = &sAssociationOption
+var AssociationOption_APPLY_APPLICATION_TAG = &sAssociationOption_APPLY_APPLICATION_TAG
+var AssociationOption_SKIP_APPLICATION_TAG = &sAssociationOption_SKIP_APPLICATION_TAG
+
+var AttributeGroup = &sAttributeGroup
+var AttributeGroup_id = &sAttributeGroup_id
+var AttributeGroup_arn = &sAttributeGroup_arn
+var AttributeGroup_name = &sAttributeGroup_name
+var AttributeGroup_description = &sAttributeGroup_description
+var AttributeGroup_creationTime = &sAttributeGroup_creationTime
+var AttributeGroup_lastUpdateTime = &sAttributeGroup_lastUpdateTime
+var AttributeGroup_tags = &sAttributeGroup_tags
+
+var _AttributeGroupArn = &s_AttributeGroupArn
+
+var AttributeGroupDetails = &sAttributeGroupDetails
+var AttributeGroupDetails_id = &sAttributeGroupDetails_id
+var AttributeGroupDetails_arn = &sAttributeGroupDetails_arn
+var AttributeGroupDetails_name = &sAttributeGroupDetails_name
+var AttributeGroupDetails_createdBy = &sAttributeGroupDetails_createdBy
+
+var _AttributeGroupDetailsList = &s_AttributeGroupDetailsList
+var _AttributeGroupDetailsList_member = &s_AttributeGroupDetailsList_member
+
+var _AttributeGroupId = &s_AttributeGroupId
+
+var _AttributeGroupIds = &s_AttributeGroupIds
+var _AttributeGroupIds_member = &s_AttributeGroupIds_member
+
+var _AttributeGroupSpecifier = &s_AttributeGroupSpecifier
+
+var _AttributeGroupSummaries = &s_AttributeGroupSummaries
+var _AttributeGroupSummaries_member = &s_AttributeGroupSummaries_member
+
+var AttributeGroupSummary = &sAttributeGroupSummary
+var AttributeGroupSummary_id = &sAttributeGroupSummary_id
+var AttributeGroupSummary_arn = &sAttributeGroupSummary_arn
+var AttributeGroupSummary_name = &sAttributeGroupSummary_name
+var AttributeGroupSummary_description = &sAttributeGroupSummary_description
+var AttributeGroupSummary_creationTime = &sAttributeGroupSummary_creationTime
+var AttributeGroupSummary_lastUpdateTime = &sAttributeGroupSummary_lastUpdateTime
+var AttributeGroupSummary_createdBy = &sAttributeGroupSummary_createdBy
+
+var _Attributes = &s_Attributes
+
+var _ClientToken = &s_ClientToken
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _CreatedBy = &s_CreatedBy
+
+var _Description = &s_Description
+
+var _GetAssociatedResourceFilter = &s_GetAssociatedResourceFilter
+var _GetAssociatedResourceFilter_member = &s_GetAssociatedResourceFilter_member
+
+var Integrations = &sIntegrations
+var Integrations_resourceGroup = &sIntegrations_resourceGroup
+var Integrations_applicationTagResourceGroup = &sIntegrations_applicationTagResourceGroup
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _MaxResults = &s_MaxResults
+
+var _Name = &s_Name
+
+var _NextToken = &s_NextToken
+
+var _Options = &s_Options
+var _Options_member = &s_Options_member
+
+var Resource = &sResource
+var Resource_name = &sResource_name
+var Resource_arn = &sResource_arn
+var Resource_associationTime = &sResource_associationTime
+var Resource_integrations = &sResource_integrations
+
+var ResourceDetails = &sResourceDetails
+var ResourceDetails_tagValue = &sResourceDetails_tagValue
+
+var ResourceGroup = &sResourceGroup
+var ResourceGroup_state = &sResourceGroup_state
+var ResourceGroup_arn = &sResourceGroup_arn
+var ResourceGroup_errorMessage = &sResourceGroup_errorMessage
+
+var ResourceGroupState = &sResourceGroupState
+var ResourceGroupState_CREATING = &sResourceGroupState_CREATING
+var ResourceGroupState_CREATE_COMPLETE = &sResourceGroupState_CREATE_COMPLETE
+var ResourceGroupState_CREATE_FAILED = &sResourceGroupState_CREATE_FAILED
+var ResourceGroupState_UPDATING = &sResourceGroupState_UPDATING
+var ResourceGroupState_UPDATE_COMPLETE = &sResourceGroupState_UPDATE_COMPLETE
+var ResourceGroupState_UPDATE_FAILED = &sResourceGroupState_UPDATE_FAILED
+
+var ResourceInfo = &sResourceInfo
+var ResourceInfo_name = &sResourceInfo_name
+var ResourceInfo_arn = &sResourceInfo_arn
+var ResourceInfo_resourceType = &sResourceInfo_resourceType
+var ResourceInfo_resourceDetails = &sResourceInfo_resourceDetails
+var ResourceInfo_options = &sResourceInfo_options
+
+var ResourceIntegrations = &sResourceIntegrations
+var ResourceIntegrations_resourceGroup = &sResourceIntegrations_resourceGroup
+
+var ResourceItemStatus = &sResourceItemStatus
+var ResourceItemStatus_SUCCESS = &sResourceItemStatus_SUCCESS
+var ResourceItemStatus_FAILED = &sResourceItemStatus_FAILED
+var ResourceItemStatus_IN_PROGRESS = &sResourceItemStatus_IN_PROGRESS
+var ResourceItemStatus_SKIPPED = &sResourceItemStatus_SKIPPED
+
+var _ResourceItemType = &s_ResourceItemType
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _Resources = &s_Resources
+var _Resources_member = &s_Resources_member
+
+var _ResourcesList = &s_ResourcesList
+var _ResourcesList_member = &s_ResourcesList_member
+
+var ResourcesListItem = &sResourcesListItem
+var ResourcesListItem_resourceArn = &sResourcesListItem_resourceArn
+var ResourcesListItem_errorMessage = &sResourcesListItem_errorMessage
+var ResourcesListItem_status = &sResourcesListItem_status
+var ResourcesListItem_resourceType = &sResourcesListItem_resourceType
+
+var _ResourcesListItemErrorMessage = &s_ResourcesListItemErrorMessage
+
+var _ResourceSpecifier = &s_ResourceSpecifier
+
+var ResourceType = &sResourceType
+var ResourceType_CFN_STACK = &sResourceType_CFN_STACK
+var ResourceType_RESOURCE_TAG_VALUE = &sResourceType_RESOURCE_TAG_VALUE
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _String = &s_String
+
+var SyncAction = &sSyncAction
+var SyncAction_START_SYNC = &sSyncAction_START_SYNC
+var SyncAction_NO_ACTION = &sSyncAction_NO_ACTION
+
+var _TagKey = &s_TagKey
+
+var _TagKeyConfig = &s_TagKeyConfig
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var TagQueryConfiguration = &sTagQueryConfiguration
+var TagQueryConfiguration_tagKey = &sTagQueryConfiguration_tagKey
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+
+var _Timestamp = &s_Timestamp
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var AssociateAttributeGroupRequest = &sAssociateAttributeGroupRequest
+var AssociateAttributeGroupRequest_application = &sAssociateAttributeGroupRequest_application
+var AssociateAttributeGroupRequest_attributeGroup = &sAssociateAttributeGroupRequest_attributeGroup
+
+var AssociateAttributeGroupResponse = &sAssociateAttributeGroupResponse
+var AssociateAttributeGroupResponse_applicationArn = &sAssociateAttributeGroupResponse_applicationArn
+var AssociateAttributeGroupResponse_attributeGroupArn = &sAssociateAttributeGroupResponse_attributeGroupArn
+
+var AssociateResourceRequest = &sAssociateResourceRequest
+var AssociateResourceRequest_application = &sAssociateResourceRequest_application
+var AssociateResourceRequest_resourceType = &sAssociateResourceRequest_resourceType
+var AssociateResourceRequest_resource = &sAssociateResourceRequest_resource
+var AssociateResourceRequest_options = &sAssociateResourceRequest_options
+
+var AssociateResourceResponse = &sAssociateResourceResponse
+var AssociateResourceResponse_applicationArn = &sAssociateResourceResponse_applicationArn
+var AssociateResourceResponse_resourceArn = &sAssociateResourceResponse_resourceArn
+var AssociateResourceResponse_options = &sAssociateResourceResponse_options
+
+var CreateApplicationRequest = &sCreateApplicationRequest
+var CreateApplicationRequest_name = &sCreateApplicationRequest_name
+var CreateApplicationRequest_description = &sCreateApplicationRequest_description
+var CreateApplicationRequest_tags = &sCreateApplicationRequest_tags
+var CreateApplicationRequest_clientToken = &sCreateApplicationRequest_clientToken
+
+var CreateApplicationResponse = &sCreateApplicationResponse
+var CreateApplicationResponse_application = &sCreateApplicationResponse_application
+
+var CreateAttributeGroupRequest = &sCreateAttributeGroupRequest
+var CreateAttributeGroupRequest_name = &sCreateAttributeGroupRequest_name
+var CreateAttributeGroupRequest_description = &sCreateAttributeGroupRequest_description
+var CreateAttributeGroupRequest_attributes = &sCreateAttributeGroupRequest_attributes
+var CreateAttributeGroupRequest_tags = &sCreateAttributeGroupRequest_tags
+var CreateAttributeGroupRequest_clientToken = &sCreateAttributeGroupRequest_clientToken
+
+var CreateAttributeGroupResponse = &sCreateAttributeGroupResponse
+var CreateAttributeGroupResponse_attributeGroup = &sCreateAttributeGroupResponse_attributeGroup
+
+var DeleteApplicationRequest = &sDeleteApplicationRequest
+var DeleteApplicationRequest_application = &sDeleteApplicationRequest_application
+
+var DeleteApplicationResponse = &sDeleteApplicationResponse
+var DeleteApplicationResponse_application = &sDeleteApplicationResponse_application
+
+var DeleteAttributeGroupRequest = &sDeleteAttributeGroupRequest
+var DeleteAttributeGroupRequest_attributeGroup = &sDeleteAttributeGroupRequest_attributeGroup
+
+var DeleteAttributeGroupResponse = &sDeleteAttributeGroupResponse
+var DeleteAttributeGroupResponse_attributeGroup = &sDeleteAttributeGroupResponse_attributeGroup
+
+var DisassociateAttributeGroupRequest = &sDisassociateAttributeGroupRequest
+var DisassociateAttributeGroupRequest_application = &sDisassociateAttributeGroupRequest_application
+var DisassociateAttributeGroupRequest_attributeGroup = &sDisassociateAttributeGroupRequest_attributeGroup
+
+var DisassociateAttributeGroupResponse = &sDisassociateAttributeGroupResponse
+var DisassociateAttributeGroupResponse_applicationArn = &sDisassociateAttributeGroupResponse_applicationArn
+var DisassociateAttributeGroupResponse_attributeGroupArn = &sDisassociateAttributeGroupResponse_attributeGroupArn
+
+var DisassociateResourceRequest = &sDisassociateResourceRequest
+var DisassociateResourceRequest_application = &sDisassociateResourceRequest_application
+var DisassociateResourceRequest_resourceType = &sDisassociateResourceRequest_resourceType
+var DisassociateResourceRequest_resource = &sDisassociateResourceRequest_resource
+
+var DisassociateResourceResponse = &sDisassociateResourceResponse
+var DisassociateResourceResponse_applicationArn = &sDisassociateResourceResponse_applicationArn
+var DisassociateResourceResponse_resourceArn = &sDisassociateResourceResponse_resourceArn
+
+var GetApplicationRequest = &sGetApplicationRequest
+var GetApplicationRequest_application = &sGetApplicationRequest_application
+
+var GetApplicationResponse = &sGetApplicationResponse
+var GetApplicationResponse_id = &sGetApplicationResponse_id
+var GetApplicationResponse_arn = &sGetApplicationResponse_arn
+var GetApplicationResponse_name = &sGetApplicationResponse_name
+var GetApplicationResponse_description = &sGetApplicationResponse_description
+var GetApplicationResponse_creationTime = &sGetApplicationResponse_creationTime
+var GetApplicationResponse_lastUpdateTime = &sGetApplicationResponse_lastUpdateTime
+var GetApplicationResponse_associatedResourceCount = &sGetApplicationResponse_associatedResourceCount
+var GetApplicationResponse_tags = &sGetApplicationResponse_tags
+var GetApplicationResponse_integrations = &sGetApplicationResponse_integrations
+var GetApplicationResponse_applicationTag = &sGetApplicationResponse_applicationTag
+
+var GetAssociatedResourceRequest = &sGetAssociatedResourceRequest
+var GetAssociatedResourceRequest_application = &sGetAssociatedResourceRequest_application
+var GetAssociatedResourceRequest_resourceType = &sGetAssociatedResourceRequest_resourceType
+var GetAssociatedResourceRequest_resource = &sGetAssociatedResourceRequest_resource
+var GetAssociatedResourceRequest_nextToken = &sGetAssociatedResourceRequest_nextToken
+var GetAssociatedResourceRequest_resourceTagStatus = &sGetAssociatedResourceRequest_resourceTagStatus
+var GetAssociatedResourceRequest_maxResults = &sGetAssociatedResourceRequest_maxResults
+
+var GetAssociatedResourceResponse = &sGetAssociatedResourceResponse
+var GetAssociatedResourceResponse_resource = &sGetAssociatedResourceResponse_resource
+var GetAssociatedResourceResponse_options = &sGetAssociatedResourceResponse_options
+var GetAssociatedResourceResponse_applicationTagResult = &sGetAssociatedResourceResponse_applicationTagResult
+
+var GetAttributeGroupRequest = &sGetAttributeGroupRequest
+var GetAttributeGroupRequest_attributeGroup = &sGetAttributeGroupRequest_attributeGroup
+
+var GetAttributeGroupResponse = &sGetAttributeGroupResponse
+var GetAttributeGroupResponse_id = &sGetAttributeGroupResponse_id
+var GetAttributeGroupResponse_arn = &sGetAttributeGroupResponse_arn
+var GetAttributeGroupResponse_name = &sGetAttributeGroupResponse_name
+var GetAttributeGroupResponse_description = &sGetAttributeGroupResponse_description
+var GetAttributeGroupResponse_attributes = &sGetAttributeGroupResponse_attributes
+var GetAttributeGroupResponse_creationTime = &sGetAttributeGroupResponse_creationTime
+var GetAttributeGroupResponse_lastUpdateTime = &sGetAttributeGroupResponse_lastUpdateTime
+var GetAttributeGroupResponse_tags = &sGetAttributeGroupResponse_tags
+var GetAttributeGroupResponse_createdBy = &sGetAttributeGroupResponse_createdBy
+
+var GetConfigurationResponse = &sGetConfigurationResponse
+var GetConfigurationResponse_configuration = &sGetConfigurationResponse_configuration
+
+var ListApplicationsRequest = &sListApplicationsRequest
+var ListApplicationsRequest_nextToken = &sListApplicationsRequest_nextToken
+var ListApplicationsRequest_maxResults = &sListApplicationsRequest_maxResults
+
+var ListApplicationsResponse = &sListApplicationsResponse
+var ListApplicationsResponse_applications = &sListApplicationsResponse_applications
+var ListApplicationsResponse_nextToken = &sListApplicationsResponse_nextToken
+
+var ListAssociatedAttributeGroupsRequest = &sListAssociatedAttributeGroupsRequest
+var ListAssociatedAttributeGroupsRequest_application = &sListAssociatedAttributeGroupsRequest_application
+var ListAssociatedAttributeGroupsRequest_nextToken = &sListAssociatedAttributeGroupsRequest_nextToken
+var ListAssociatedAttributeGroupsRequest_maxResults = &sListAssociatedAttributeGroupsRequest_maxResults
+
+var ListAssociatedAttributeGroupsResponse = &sListAssociatedAttributeGroupsResponse
+var ListAssociatedAttributeGroupsResponse_attributeGroups = &sListAssociatedAttributeGroupsResponse_attributeGroups
+var ListAssociatedAttributeGroupsResponse_nextToken = &sListAssociatedAttributeGroupsResponse_nextToken
+
+var ListAssociatedResourcesRequest = &sListAssociatedResourcesRequest
+var ListAssociatedResourcesRequest_application = &sListAssociatedResourcesRequest_application
+var ListAssociatedResourcesRequest_nextToken = &sListAssociatedResourcesRequest_nextToken
+var ListAssociatedResourcesRequest_maxResults = &sListAssociatedResourcesRequest_maxResults
+
+var ListAssociatedResourcesResponse = &sListAssociatedResourcesResponse
+var ListAssociatedResourcesResponse_resources = &sListAssociatedResourcesResponse_resources
+var ListAssociatedResourcesResponse_nextToken = &sListAssociatedResourcesResponse_nextToken
+
+var ListAttributeGroupsForApplicationRequest = &sListAttributeGroupsForApplicationRequest
+var ListAttributeGroupsForApplicationRequest_application = &sListAttributeGroupsForApplicationRequest_application
+var ListAttributeGroupsForApplicationRequest_nextToken = &sListAttributeGroupsForApplicationRequest_nextToken
+var ListAttributeGroupsForApplicationRequest_maxResults = &sListAttributeGroupsForApplicationRequest_maxResults
+
+var ListAttributeGroupsForApplicationResponse = &sListAttributeGroupsForApplicationResponse
+var ListAttributeGroupsForApplicationResponse_attributeGroupsDetails = &sListAttributeGroupsForApplicationResponse_attributeGroupsDetails
+var ListAttributeGroupsForApplicationResponse_nextToken = &sListAttributeGroupsForApplicationResponse_nextToken
+
+var ListAttributeGroupsRequest = &sListAttributeGroupsRequest
+var ListAttributeGroupsRequest_nextToken = &sListAttributeGroupsRequest_nextToken
+var ListAttributeGroupsRequest_maxResults = &sListAttributeGroupsRequest_maxResults
+
+var ListAttributeGroupsResponse = &sListAttributeGroupsResponse
+var ListAttributeGroupsResponse_attributeGroups = &sListAttributeGroupsResponse_attributeGroups
+var ListAttributeGroupsResponse_nextToken = &sListAttributeGroupsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var PutConfigurationRequest = &sPutConfigurationRequest
+var PutConfigurationRequest_configuration = &sPutConfigurationRequest_configuration
+
+var SyncResourceRequest = &sSyncResourceRequest
+var SyncResourceRequest_resourceType = &sSyncResourceRequest_resourceType
+var SyncResourceRequest_resource = &sSyncResourceRequest_resource
+
+var SyncResourceResponse = &sSyncResourceResponse
+var SyncResourceResponse_applicationArn = &sSyncResourceResponse_applicationArn
+var SyncResourceResponse_resourceArn = &sSyncResourceResponse_resourceArn
+var SyncResourceResponse_actionTaken = &sSyncResourceResponse_actionTaken
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateApplicationRequest = &sUpdateApplicationRequest
+var UpdateApplicationRequest_application = &sUpdateApplicationRequest_application
+var UpdateApplicationRequest_name = &sUpdateApplicationRequest_name
+var UpdateApplicationRequest_description = &sUpdateApplicationRequest_description
+
+var UpdateApplicationResponse = &sUpdateApplicationResponse
+var UpdateApplicationResponse_application = &sUpdateApplicationResponse_application
+
+var UpdateAttributeGroupRequest = &sUpdateAttributeGroupRequest
+var UpdateAttributeGroupRequest_attributeGroup = &sUpdateAttributeGroupRequest_attributeGroup
+var UpdateAttributeGroupRequest_name = &sUpdateAttributeGroupRequest_name
+var UpdateAttributeGroupRequest_description = &sUpdateAttributeGroupRequest_description
+var UpdateAttributeGroupRequest_attributes = &sUpdateAttributeGroupRequest_attributes
+
+var UpdateAttributeGroupResponse = &sUpdateAttributeGroupResponse
+var UpdateAttributeGroupResponse_attributeGroup = &sUpdateAttributeGroupResponse_attributeGroup
+
+var AWS242AppRegistry = &smithy.ServiceSchema{Schema: &s_AWS242AppRegistry, Version: "2020-06-24"}

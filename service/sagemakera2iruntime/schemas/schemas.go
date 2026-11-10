@@ -4,402 +4,326 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteHumanLoop = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "DeleteHumanLoop",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+var (
+	iDeleteHumanLoop               = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "DeleteHumanLoop"}
+	iDescribeHumanLoop             = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "DescribeHumanLoop"}
+	iListHumanLoops                = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ListHumanLoops"}
+	iStartHumanLoop                = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "StartHumanLoop"}
+	iStopHumanLoop                 = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "StopHumanLoop"}
+	i_AmazonSageMakerA2IRuntime    = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "AmazonSageMakerA2IRuntime"}
+	iConflictException             = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ConflictException"}
+	iContentClassifier             = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ContentClassifier"}
+	i_ContentClassifiers           = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ContentClassifiers"}
+	i_FailureReason                = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "FailureReason"}
+	i_FlowDefinitionArn            = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "FlowDefinitionArn"}
+	i_HumanLoopArn                 = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopArn"}
+	iHumanLoopDataAttributes       = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopDataAttributes"}
+	iHumanLoopInput                = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopInput"}
+	i_HumanLoopName                = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopName"}
+	iHumanLoopOutput               = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopOutput"}
+	iHumanLoopStatus               = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopStatus"}
+	i_HumanLoopSummaries           = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopSummaries"}
+	iHumanLoopSummary              = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "HumanLoopSummary"}
+	i_InputContent                 = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "InputContent"}
+	iInternalServerException       = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "InternalServerException"}
+	i_MaxResults                   = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "MaxResults"}
+	i_NextToken                    = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "NextToken"}
+	iResourceNotFoundException     = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ResourceNotFoundException"}
+	iServiceQuotaExceededException = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ServiceQuotaExceededException"}
+	iSortOrder                     = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "SortOrder"}
+	i_String                       = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "String"}
+	iThrottlingException           = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ThrottlingException"}
+	i_Timestamp                    = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "Timestamp"}
+	iValidationException           = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ValidationException"}
+	iDeleteHumanLoopRequest        = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "DeleteHumanLoopRequest"}
+	iDeleteHumanLoopResponse       = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "DeleteHumanLoopResponse"}
+	iDescribeHumanLoopRequest      = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "DescribeHumanLoopRequest"}
+	iDescribeHumanLoopResponse     = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "DescribeHumanLoopResponse"}
+	iListHumanLoopsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ListHumanLoopsRequest"}
+	iListHumanLoopsResponse        = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "ListHumanLoopsResponse"}
+	iStartHumanLoopRequest         = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "StartHumanLoopRequest"}
+	iStartHumanLoopResponse        = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "StartHumanLoopResponse"}
+	iStopHumanLoopRequest          = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "StopHumanLoopRequest"}
+	iStopHumanLoopResponse         = smithy.ShapeID{Namespace: "com.amazonaws.sagemakera2iruntime", Name: "StopHumanLoopResponse"}
+	pUnit                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/human-loops/{HumanLoopName}",
-	Code: 200})
-
-var DescribeHumanLoop = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "DescribeHumanLoop",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/human-loops/{HumanLoopName}",
-	Code: 200})
-
-var ListHumanLoops = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ListHumanLoops",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/human-loops",
-	Code: 200})
-
-var StartHumanLoop = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "StartHumanLoop",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/human-loops",
-	Code: 200})
-
-var StopHumanLoop = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "StopHumanLoop",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/human-loops/stop",
-	Code: 200})
-
-var _AmazonSageMakerA2IRuntime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "AmazonSageMakerA2IRuntime",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonSageMakerA2IRuntime = smithy.NewServiceSchema(_AmazonSageMakerA2IRuntime, "2019-11-07")
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ContentClassifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ContentClassifier",
-}, smithy.ShapeTypeEnum, 2)
-var ContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION *smithy.Schema
-
-var ContentClassifier_FREE_OF_ADULT_CONTENT *smithy.Schema
-
-var _ContentClassifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ContentClassifiers",
-}, smithy.ShapeTypeList, 1)
-var _ContentClassifiers_member *smithy.Schema
-
-var _FailureReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "FailureReason",
-}, smithy.ShapeTypeString, 0)
-
-var _FlowDefinitionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "FlowDefinitionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _HumanLoopArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopArn",
-}, smithy.ShapeTypeString, 0)
-
-var HumanLoopDataAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopDataAttributes",
-}, smithy.ShapeTypeStructure, 1)
-var HumanLoopDataAttributes_ContentClassifiers *smithy.Schema
-
-var HumanLoopInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopInput",
-}, smithy.ShapeTypeStructure, 1)
-var HumanLoopInput_InputContent *smithy.Schema
-
-var _HumanLoopName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopName",
-}, smithy.ShapeTypeString, 0)
-
-var HumanLoopOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopOutput",
-}, smithy.ShapeTypeStructure, 1)
-var HumanLoopOutput_OutputS3Uri *smithy.Schema
-
-var HumanLoopStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopStatus",
-}, smithy.ShapeTypeEnum, 5)
-var HumanLoopStatus_IN_PROGRESS *smithy.Schema
-
-var HumanLoopStatus_FAILED *smithy.Schema
-
-var HumanLoopStatus_COMPLETED *smithy.Schema
-
-var HumanLoopStatus_STOPPED *smithy.Schema
-
-var HumanLoopStatus_STOPPING *smithy.Schema
-
-var _HumanLoopSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopSummaries",
-}, smithy.ShapeTypeList, 1)
-var _HumanLoopSummaries_member *smithy.Schema
-
-var HumanLoopSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "HumanLoopSummary",
-}, smithy.ShapeTypeStructure, 5)
-var HumanLoopSummary_HumanLoopName *smithy.Schema
-
-var HumanLoopSummary_HumanLoopStatus *smithy.Schema
-
-var HumanLoopSummary_CreationTime *smithy.Schema
-
-var HumanLoopSummary_FailureReason *smithy.Schema
-
-var HumanLoopSummary_FlowDefinitionArn *smithy.Schema
-
-var _InputContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "InputContent",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "CreationTimeAfter"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x10}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "CreationTimeBefore"}, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x10}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "FlowDefinitionArn"}}, DirectMask: 0x10}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "SortOrder"}}, DirectMask: 0x10}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mContentClassifier = smithy.SchemaMembers{List: []*smithy.Schema{&sContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION, &sContentClassifier_FREE_OF_ADULT_CONTENT}}
+var m_ContentClassifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContentClassifiers_member}}
+var mHumanLoopDataAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopDataAttributes_ContentClassifiers}}
+var mHumanLoopInput = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopInput_InputContent}}
+var mHumanLoopOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopOutput_OutputS3Uri}}
+var mHumanLoopStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopStatus_IN_PROGRESS, &sHumanLoopStatus_FAILED, &sHumanLoopStatus_COMPLETED, &sHumanLoopStatus_STOPPED, &sHumanLoopStatus_STOPPING}}
+var m_HumanLoopSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_HumanLoopSummaries_member}}
+var mHumanLoopSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sHumanLoopSummary_HumanLoopName, &sHumanLoopSummary_HumanLoopStatus, &sHumanLoopSummary_CreationTime, &sHumanLoopSummary_FailureReason, &sHumanLoopSummary_FlowDefinitionArn}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASCENDING, &sSortOrder_DESCENDING}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mDeleteHumanLoopRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHumanLoopRequest_HumanLoopName}}
+var mDescribeHumanLoopRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHumanLoopRequest_HumanLoopName}}
+var mDescribeHumanLoopResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHumanLoopResponse_CreationTime, &sDescribeHumanLoopResponse_FailureReason, &sDescribeHumanLoopResponse_FailureCode, &sDescribeHumanLoopResponse_HumanLoopStatus, &sDescribeHumanLoopResponse_HumanLoopName, &sDescribeHumanLoopResponse_HumanLoopArn, &sDescribeHumanLoopResponse_FlowDefinitionArn, &sDescribeHumanLoopResponse_HumanLoopOutput}}
+var mListHumanLoopsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListHumanLoopsRequest_CreationTimeAfter, &sListHumanLoopsRequest_CreationTimeBefore, &sListHumanLoopsRequest_FlowDefinitionArn, &sListHumanLoopsRequest_SortOrder, &sListHumanLoopsRequest_NextToken, &sListHumanLoopsRequest_MaxResults}}
+var mListHumanLoopsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListHumanLoopsResponse_HumanLoopSummaries, &sListHumanLoopsResponse_NextToken}}
+var mStartHumanLoopRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartHumanLoopRequest_HumanLoopName, &sStartHumanLoopRequest_FlowDefinitionArn, &sStartHumanLoopRequest_HumanLoopInput, &sStartHumanLoopRequest_DataAttributes}}
+var mStartHumanLoopResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartHumanLoopResponse_HumanLoopArn}}
+var mStopHumanLoopRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopHumanLoopRequest_HumanLoopName}}
+
+var sDeleteHumanLoop = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHumanLoop, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sDescribeHumanLoop = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHumanLoop, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sListHumanLoops = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHumanLoops, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sStartHumanLoop = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartHumanLoop, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sStopHumanLoop = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopHumanLoop, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var s_AmazonSageMakerA2IRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonSageMakerA2IRuntime, Type: smithy.ShapeTypeService})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sContentClassifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentClassifier, Members: &mContentClassifier, Type: smithy.ShapeTypeEnum})
+var s_ContentClassifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentClassifiers, Members: &m_ContentClassifiers, Type: smithy.ShapeTypeList})
+var s_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var s_FlowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FlowDefinitionArn, Type: smithy.ShapeTypeString})
+var s_HumanLoopArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HumanLoopArn, Type: smithy.ShapeTypeString})
+var sHumanLoopDataAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopDataAttributes, Members: &mHumanLoopDataAttributes, Type: smithy.ShapeTypeStructure})
+var sHumanLoopInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopInput, Members: &mHumanLoopInput, Type: smithy.ShapeTypeStructure})
+var s_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HumanLoopName, Type: smithy.ShapeTypeString})
+var sHumanLoopOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopOutput, Members: &mHumanLoopOutput, Type: smithy.ShapeTypeStructure})
+var sHumanLoopStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopStatus, Members: &mHumanLoopStatus, Type: smithy.ShapeTypeEnum})
+var s_HumanLoopSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HumanLoopSummaries, Members: &m_HumanLoopSummaries, Type: smithy.ShapeTypeList})
+var sHumanLoopSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHumanLoopSummary, Members: &mHumanLoopSummary, Type: smithy.ShapeTypeStructure})
+var s_InputContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputContent, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t11, Type: smithy.ShapeTypeTimestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sDeleteHumanLoopRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHumanLoopRequest, Members: &mDeleteHumanLoopRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteHumanLoopResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHumanLoopResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeHumanLoopRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHumanLoopRequest, Members: &mDescribeHumanLoopRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeHumanLoopResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHumanLoopResponse, Members: &mDescribeHumanLoopResponse, Type: smithy.ShapeTypeStructure})
+var sListHumanLoopsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHumanLoopsRequest, Members: &mListHumanLoopsRequest, Type: smithy.ShapeTypeStructure})
+var sListHumanLoopsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHumanLoopsResponse, Members: &mListHumanLoopsResponse, Type: smithy.ShapeTypeStructure})
+var sStartHumanLoopRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartHumanLoopRequest, Members: &mStartHumanLoopRequest, Type: smithy.ShapeTypeStructure})
+var sStartHumanLoopResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartHumanLoopResponse, Members: &mStartHumanLoopResponse, Type: smithy.ShapeTypeStructure})
+var sStopHumanLoopRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopHumanLoopRequest, Members: &mStopHumanLoopRequest, Type: smithy.ShapeTypeStructure})
+var sStopHumanLoopResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopHumanLoopResponse, Type: smithy.ShapeTypeStructure})
+
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentClassifier_FREE_OF_ADULT_CONTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREE_OF_ADULT_CONTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ContentClassifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContentClassifier, Members: &mContentClassifier, Type: smithy.ShapeTypeEnum})
+var sHumanLoopDataAttributes_ContentClassifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentClassifiers", ID: &i_ContentClassifiers, Members: &m_ContentClassifiers, Type: smithy.ShapeTypeList})
+var sHumanLoopInput_InputContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputContent", ID: &i_InputContent, Type: smithy.ShapeTypeString})
+var sHumanLoopOutput_OutputS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputS3Uri", ID: &i_String, Type: smithy.ShapeTypeString})
+var sHumanLoopStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHumanLoopStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHumanLoopStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHumanLoopStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHumanLoopStatus_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_HumanLoopSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHumanLoopSummary, Members: &mHumanLoopSummary, Type: smithy.ShapeTypeStructure})
+var sHumanLoopSummary_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopName", ID: &i_HumanLoopName, Type: smithy.ShapeTypeString})
+var sHumanLoopSummary_HumanLoopStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopStatus", ID: &iHumanLoopStatus, Members: &mHumanLoopStatus, Type: smithy.ShapeTypeEnum})
+var sHumanLoopSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Traits: &t6, Type: smithy.ShapeTypeTimestamp})
+var sHumanLoopSummary_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sHumanLoopSummary_FlowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowDefinitionArn", ID: &i_FlowDefinitionArn, Type: smithy.ShapeTypeString})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_FailureReason, Type: smithy.ShapeTypeString})
+var sDeleteHumanLoopRequest_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopName", ID: &i_HumanLoopName, Traits: &t13, Type: smithy.ShapeTypeString})
+var sDescribeHumanLoopRequest_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopName", ID: &i_HumanLoopName, Traits: &t13, Type: smithy.ShapeTypeString})
+var sDescribeHumanLoopResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Traits: &t6, Type: smithy.ShapeTypeTimestamp})
+var sDescribeHumanLoopResponse_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHumanLoopResponse_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeHumanLoopResponse_HumanLoopStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopStatus", ID: &iHumanLoopStatus, Members: &mHumanLoopStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeHumanLoopResponse_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopName", ID: &i_HumanLoopName, Type: smithy.ShapeTypeString})
+var sDescribeHumanLoopResponse_HumanLoopArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopArn", ID: &i_HumanLoopArn, Type: smithy.ShapeTypeString})
+var sDescribeHumanLoopResponse_FlowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowDefinitionArn", ID: &i_FlowDefinitionArn, Type: smithy.ShapeTypeString})
+var sDescribeHumanLoopResponse_HumanLoopOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopOutput", ID: &iHumanLoopOutput, Members: &mHumanLoopOutput, Type: smithy.ShapeTypeStructure})
+var sListHumanLoopsRequest_CreationTimeAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTimeAfter", ID: &i_Timestamp, Traits: &t14, Type: smithy.ShapeTypeTimestamp})
+var sListHumanLoopsRequest_CreationTimeBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTimeBefore", ID: &i_Timestamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp})
+var sListHumanLoopsRequest_FlowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowDefinitionArn", ID: &i_FlowDefinitionArn, Traits: &t16, Type: smithy.ShapeTypeString})
+var sListHumanLoopsRequest_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Traits: &t17, Type: smithy.ShapeTypeEnum})
+var sListHumanLoopsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t18, Type: smithy.ShapeTypeString})
+var sListHumanLoopsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t19, Type: smithy.ShapeTypeInteger})
+var sListHumanLoopsResponse_HumanLoopSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopSummaries", ID: &i_HumanLoopSummaries, Members: &m_HumanLoopSummaries, Type: smithy.ShapeTypeList})
+var sListHumanLoopsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sStartHumanLoopRequest_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopName", ID: &i_HumanLoopName, Type: smithy.ShapeTypeString})
+var sStartHumanLoopRequest_FlowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlowDefinitionArn", ID: &i_FlowDefinitionArn, Type: smithy.ShapeTypeString})
+var sStartHumanLoopRequest_HumanLoopInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopInput", ID: &iHumanLoopInput, Members: &mHumanLoopInput, Type: smithy.ShapeTypeStructure})
+var sStartHumanLoopRequest_DataAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAttributes", ID: &iHumanLoopDataAttributes, Members: &mHumanLoopDataAttributes, Type: smithy.ShapeTypeStructure})
+var sStartHumanLoopResponse_HumanLoopArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopArn", ID: &i_HumanLoopArn, Type: smithy.ShapeTypeString})
+var sStopHumanLoopRequest_HumanLoopName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HumanLoopName", ID: &i_HumanLoopName, Type: smithy.ShapeTypeString})
 
-var SortOrder_DESCENDING *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var DeleteHumanLoopRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "DeleteHumanLoopRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHumanLoopRequest_HumanLoopName *smithy.Schema
+var DeleteHumanLoop = &sDeleteHumanLoop
 
-var DeleteHumanLoopResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "DeleteHumanLoopResponse",
-}, smithy.ShapeTypeStructure, 0)
+var DescribeHumanLoop = &sDescribeHumanLoop
 
-var DescribeHumanLoopRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "DescribeHumanLoopRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeHumanLoopRequest_HumanLoopName *smithy.Schema
+var ListHumanLoops = &sListHumanLoops
 
-var DescribeHumanLoopResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "DescribeHumanLoopResponse",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeHumanLoopResponse_CreationTime *smithy.Schema
+var StartHumanLoop = &sStartHumanLoop
 
-var DescribeHumanLoopResponse_FailureReason *smithy.Schema
+var StopHumanLoop = &sStopHumanLoop
+
+var _AmazonSageMakerA2IRuntime = &s_AmazonSageMakerA2IRuntime
 
-var DescribeHumanLoopResponse_FailureCode *smithy.Schema
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var ContentClassifier = &sContentClassifier
+var ContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = &sContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION
+var ContentClassifier_FREE_OF_ADULT_CONTENT = &sContentClassifier_FREE_OF_ADULT_CONTENT
+
+var _ContentClassifiers = &s_ContentClassifiers
+var _ContentClassifiers_member = &s_ContentClassifiers_member
+
+var _FailureReason = &s_FailureReason
+
+var _FlowDefinitionArn = &s_FlowDefinitionArn
+
+var _HumanLoopArn = &s_HumanLoopArn
 
-var DescribeHumanLoopResponse_HumanLoopStatus *smithy.Schema
+var HumanLoopDataAttributes = &sHumanLoopDataAttributes
+var HumanLoopDataAttributes_ContentClassifiers = &sHumanLoopDataAttributes_ContentClassifiers
 
-var DescribeHumanLoopResponse_HumanLoopName *smithy.Schema
+var HumanLoopInput = &sHumanLoopInput
+var HumanLoopInput_InputContent = &sHumanLoopInput_InputContent
 
-var DescribeHumanLoopResponse_HumanLoopArn *smithy.Schema
+var _HumanLoopName = &s_HumanLoopName
 
-var DescribeHumanLoopResponse_FlowDefinitionArn *smithy.Schema
+var HumanLoopOutput = &sHumanLoopOutput
+var HumanLoopOutput_OutputS3Uri = &sHumanLoopOutput_OutputS3Uri
 
-var DescribeHumanLoopResponse_HumanLoopOutput *smithy.Schema
+var HumanLoopStatus = &sHumanLoopStatus
+var HumanLoopStatus_IN_PROGRESS = &sHumanLoopStatus_IN_PROGRESS
+var HumanLoopStatus_FAILED = &sHumanLoopStatus_FAILED
+var HumanLoopStatus_COMPLETED = &sHumanLoopStatus_COMPLETED
+var HumanLoopStatus_STOPPED = &sHumanLoopStatus_STOPPED
+var HumanLoopStatus_STOPPING = &sHumanLoopStatus_STOPPING
 
-var ListHumanLoopsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ListHumanLoopsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListHumanLoopsRequest_CreationTimeAfter *smithy.Schema
+var _HumanLoopSummaries = &s_HumanLoopSummaries
+var _HumanLoopSummaries_member = &s_HumanLoopSummaries_member
 
-var ListHumanLoopsRequest_CreationTimeBefore *smithy.Schema
+var HumanLoopSummary = &sHumanLoopSummary
+var HumanLoopSummary_HumanLoopName = &sHumanLoopSummary_HumanLoopName
+var HumanLoopSummary_HumanLoopStatus = &sHumanLoopSummary_HumanLoopStatus
+var HumanLoopSummary_CreationTime = &sHumanLoopSummary_CreationTime
+var HumanLoopSummary_FailureReason = &sHumanLoopSummary_FailureReason
+var HumanLoopSummary_FlowDefinitionArn = &sHumanLoopSummary_FlowDefinitionArn
 
-var ListHumanLoopsRequest_FlowDefinitionArn *smithy.Schema
+var _InputContent = &s_InputContent
 
-var ListHumanLoopsRequest_SortOrder *smithy.Schema
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
 
-var ListHumanLoopsRequest_NextToken *smithy.Schema
+var _MaxResults = &s_MaxResults
 
-var ListHumanLoopsRequest_MaxResults *smithy.Schema
+var _NextToken = &s_NextToken
 
-var ListHumanLoopsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "ListHumanLoopsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListHumanLoopsResponse_HumanLoopSummaries *smithy.Schema
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
 
-var ListHumanLoopsResponse_NextToken *smithy.Schema
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
 
-var StartHumanLoopRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "StartHumanLoopRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartHumanLoopRequest_HumanLoopName *smithy.Schema
+var SortOrder = &sSortOrder
+var SortOrder_ASCENDING = &sSortOrder_ASCENDING
+var SortOrder_DESCENDING = &sSortOrder_DESCENDING
 
-var StartHumanLoopRequest_FlowDefinitionArn *smithy.Schema
+var _String = &s_String
 
-var StartHumanLoopRequest_HumanLoopInput *smithy.Schema
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
 
-var StartHumanLoopRequest_DataAttributes *smithy.Schema
+var _Timestamp = &s_Timestamp
 
-var StartHumanLoopResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "StartHumanLoopResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartHumanLoopResponse_HumanLoopArn *smithy.Schema
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
 
-var StopHumanLoopRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "StopHumanLoopRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopHumanLoopRequest_HumanLoopName *smithy.Schema
+var DeleteHumanLoopRequest = &sDeleteHumanLoopRequest
+var DeleteHumanLoopRequest_HumanLoopName = &sDeleteHumanLoopRequest_HumanLoopName
 
-var StopHumanLoopResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakera2iruntime",
-	Name:      "StopHumanLoopResponse",
-}, smithy.ShapeTypeStructure, 0)
+var DeleteHumanLoopResponse = &sDeleteHumanLoopResponse
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ConflictException_Message = ConflictException.AddMember("Message", _FailureReason)
+var DescribeHumanLoopRequest = &sDescribeHumanLoopRequest
+var DescribeHumanLoopRequest_HumanLoopName = &sDescribeHumanLoopRequest_HumanLoopName
 
-	ContentClassifier_FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION = ContentClassifier.AddMember("FREE_OF_PERSONALLY_IDENTIFIABLE_INFORMATION", smithyprelude.Unit)
+var DescribeHumanLoopResponse = &sDescribeHumanLoopResponse
+var DescribeHumanLoopResponse_CreationTime = &sDescribeHumanLoopResponse_CreationTime
+var DescribeHumanLoopResponse_FailureReason = &sDescribeHumanLoopResponse_FailureReason
+var DescribeHumanLoopResponse_FailureCode = &sDescribeHumanLoopResponse_FailureCode
+var DescribeHumanLoopResponse_HumanLoopStatus = &sDescribeHumanLoopResponse_HumanLoopStatus
+var DescribeHumanLoopResponse_HumanLoopName = &sDescribeHumanLoopResponse_HumanLoopName
+var DescribeHumanLoopResponse_HumanLoopArn = &sDescribeHumanLoopResponse_HumanLoopArn
+var DescribeHumanLoopResponse_FlowDefinitionArn = &sDescribeHumanLoopResponse_FlowDefinitionArn
+var DescribeHumanLoopResponse_HumanLoopOutput = &sDescribeHumanLoopResponse_HumanLoopOutput
 
-	ContentClassifier_FREE_OF_ADULT_CONTENT = ContentClassifier.AddMember("FREE_OF_ADULT_CONTENT", smithyprelude.Unit)
+var ListHumanLoopsRequest = &sListHumanLoopsRequest
+var ListHumanLoopsRequest_CreationTimeAfter = &sListHumanLoopsRequest_CreationTimeAfter
+var ListHumanLoopsRequest_CreationTimeBefore = &sListHumanLoopsRequest_CreationTimeBefore
+var ListHumanLoopsRequest_FlowDefinitionArn = &sListHumanLoopsRequest_FlowDefinitionArn
+var ListHumanLoopsRequest_SortOrder = &sListHumanLoopsRequest_SortOrder
+var ListHumanLoopsRequest_NextToken = &sListHumanLoopsRequest_NextToken
+var ListHumanLoopsRequest_MaxResults = &sListHumanLoopsRequest_MaxResults
 
-	_ContentClassifiers_member = _ContentClassifiers.AddMember("member", ContentClassifier)
+var ListHumanLoopsResponse = &sListHumanLoopsResponse
+var ListHumanLoopsResponse_HumanLoopSummaries = &sListHumanLoopsResponse_HumanLoopSummaries
+var ListHumanLoopsResponse_NextToken = &sListHumanLoopsResponse_NextToken
 
-	HumanLoopDataAttributes_ContentClassifiers = HumanLoopDataAttributes.AddMember("ContentClassifiers", _ContentClassifiers)
+var StartHumanLoopRequest = &sStartHumanLoopRequest
+var StartHumanLoopRequest_HumanLoopName = &sStartHumanLoopRequest_HumanLoopName
+var StartHumanLoopRequest_FlowDefinitionArn = &sStartHumanLoopRequest_FlowDefinitionArn
+var StartHumanLoopRequest_HumanLoopInput = &sStartHumanLoopRequest_HumanLoopInput
+var StartHumanLoopRequest_DataAttributes = &sStartHumanLoopRequest_DataAttributes
 
-	HumanLoopInput_InputContent = HumanLoopInput.AddMember("InputContent", _InputContent)
+var StartHumanLoopResponse = &sStartHumanLoopResponse
+var StartHumanLoopResponse_HumanLoopArn = &sStartHumanLoopResponse_HumanLoopArn
 
-	HumanLoopOutput_OutputS3Uri = HumanLoopOutput.AddMember("OutputS3Uri", _String)
+var StopHumanLoopRequest = &sStopHumanLoopRequest
+var StopHumanLoopRequest_HumanLoopName = &sStopHumanLoopRequest_HumanLoopName
 
-	HumanLoopStatus_IN_PROGRESS = HumanLoopStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
+var StopHumanLoopResponse = &sStopHumanLoopResponse
 
-	HumanLoopStatus_FAILED = HumanLoopStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	HumanLoopStatus_COMPLETED = HumanLoopStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	HumanLoopStatus_STOPPED = HumanLoopStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	HumanLoopStatus_STOPPING = HumanLoopStatus.AddMember("STOPPING", smithyprelude.Unit)
-
-	HumanLoopSummary_HumanLoopName = HumanLoopSummary.AddMember("HumanLoopName", _HumanLoopName)
-
-	HumanLoopSummary_HumanLoopStatus = HumanLoopSummary.AddMember("HumanLoopStatus", HumanLoopStatus)
-
-	HumanLoopSummary_CreationTime = HumanLoopSummary.AddMember("CreationTime", _Timestamp)
-
-	HumanLoopSummary_FailureReason = HumanLoopSummary.AddMember("FailureReason", _FailureReason)
-
-	HumanLoopSummary_FlowDefinitionArn = HumanLoopSummary.AddMember("FlowDefinitionArn", _FlowDefinitionArn)
-
-	_HumanLoopSummaries_member = _HumanLoopSummaries.AddMember("member", HumanLoopSummary)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _FailureReason)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _FailureReason)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _FailureReason)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _FailureReason)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _FailureReason)
-
-	DeleteHumanLoopRequest_HumanLoopName = DeleteHumanLoopRequest.AddMember("HumanLoopName", _HumanLoopName, &smithytraits.HTTPLabel{})
-
-	DescribeHumanLoopRequest_HumanLoopName = DescribeHumanLoopRequest.AddMember("HumanLoopName", _HumanLoopName, &smithytraits.HTTPLabel{})
-
-	DescribeHumanLoopResponse_CreationTime = DescribeHumanLoopResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeHumanLoopResponse_FailureReason = DescribeHumanLoopResponse.AddMember("FailureReason", _String)
-
-	DescribeHumanLoopResponse_FailureCode = DescribeHumanLoopResponse.AddMember("FailureCode", _String)
-
-	DescribeHumanLoopResponse_HumanLoopStatus = DescribeHumanLoopResponse.AddMember("HumanLoopStatus", HumanLoopStatus)
-
-	DescribeHumanLoopResponse_HumanLoopName = DescribeHumanLoopResponse.AddMember("HumanLoopName", _HumanLoopName)
-
-	DescribeHumanLoopResponse_HumanLoopArn = DescribeHumanLoopResponse.AddMember("HumanLoopArn", _HumanLoopArn)
-
-	DescribeHumanLoopResponse_FlowDefinitionArn = DescribeHumanLoopResponse.AddMember("FlowDefinitionArn", _FlowDefinitionArn)
-
-	DescribeHumanLoopResponse_HumanLoopOutput = DescribeHumanLoopResponse.AddMember("HumanLoopOutput", HumanLoopOutput)
-
-	ListHumanLoopsRequest_CreationTimeAfter = ListHumanLoopsRequest.AddMember("CreationTimeAfter", _Timestamp, &smithytraits.HTTPQuery{Name: "CreationTimeAfter"})
-
-	ListHumanLoopsRequest_CreationTimeBefore = ListHumanLoopsRequest.AddMember("CreationTimeBefore", _Timestamp, &smithytraits.HTTPQuery{Name: "CreationTimeBefore"})
-
-	ListHumanLoopsRequest_FlowDefinitionArn = ListHumanLoopsRequest.AddMember("FlowDefinitionArn", _FlowDefinitionArn, &smithytraits.HTTPQuery{Name: "FlowDefinitionArn"})
-
-	ListHumanLoopsRequest_SortOrder = ListHumanLoopsRequest.AddMember("SortOrder", SortOrder, &smithytraits.HTTPQuery{Name: "SortOrder"})
-
-	ListHumanLoopsRequest_NextToken = ListHumanLoopsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListHumanLoopsRequest_MaxResults = ListHumanLoopsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListHumanLoopsResponse_HumanLoopSummaries = ListHumanLoopsResponse.AddMember("HumanLoopSummaries", _HumanLoopSummaries)
-
-	ListHumanLoopsResponse_NextToken = ListHumanLoopsResponse.AddMember("NextToken", _NextToken)
-
-	StartHumanLoopRequest_HumanLoopName = StartHumanLoopRequest.AddMember("HumanLoopName", _HumanLoopName)
-
-	StartHumanLoopRequest_FlowDefinitionArn = StartHumanLoopRequest.AddMember("FlowDefinitionArn", _FlowDefinitionArn)
-
-	StartHumanLoopRequest_HumanLoopInput = StartHumanLoopRequest.AddMember("HumanLoopInput", HumanLoopInput)
-
-	StartHumanLoopRequest_DataAttributes = StartHumanLoopRequest.AddMember("DataAttributes", HumanLoopDataAttributes)
-
-	StartHumanLoopResponse_HumanLoopArn = StartHumanLoopResponse.AddMember("HumanLoopArn", _HumanLoopArn)
-
-	StopHumanLoopRequest_HumanLoopName = StopHumanLoopRequest.AddMember("HumanLoopName", _HumanLoopName)
-
-}
+var AmazonSageMakerA2IRuntime = &smithy.ServiceSchema{Schema: &s_AmazonSageMakerA2IRuntime, Version: "2019-11-07"}

@@ -7,778 +7,594 @@ import (
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CancelResourceRequest",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CreateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "DeleteResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourceRequestStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceRequestStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResourceRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourceRequests",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UpdateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CloudApiService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CloudApiService",
-}, smithy.ShapeTypeService, 0)
-
-var CloudApiService = smithy.NewServiceSchema(_CloudApiService, "2021-09-30")
-
-var AlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "AlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "AlreadyExistsException",
-		StatusCode: 400})
-var AlreadyExistsException_Message *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ClientTokenConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ClientTokenConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ClientTokenConflictException",
-		StatusCode: 409})
-var ClientTokenConflictException_Message *smithy.Schema
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
-		StatusCode: 500})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConcurrentOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ConcurrentOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentOperationException",
-		StatusCode: 409})
-var ConcurrentOperationException_Message *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var GeneralServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GeneralServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "GeneralServiceException",
-		StatusCode: 400})
-var GeneralServiceException_Message *smithy.Schema
-
-var _HandlerErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var HandlerFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "HandlerFailureException",
-		StatusCode: 502})
-var HandlerFailureException_Message *smithy.Schema
-
-var HandlerInternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerInternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "HandlerInternalFailureException",
-		StatusCode: 502})
-var HandlerInternalFailureException_Message *smithy.Schema
-
-var _HandlerNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HandlerNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _HookFailureMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookFailureMode",
-}, smithy.ShapeTypeString, 0)
-
-var _HookInvocationPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookInvocationPoint",
-}, smithy.ShapeTypeString, 0)
-
-var HookProgressEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookProgressEvent",
-}, smithy.ShapeTypeStructure, 8)
-var HookProgressEvent_HookTypeName *smithy.Schema
-
-var HookProgressEvent_HookTypeVersionId *smithy.Schema
-
-var HookProgressEvent_HookTypeArn *smithy.Schema
-
-var HookProgressEvent_InvocationPoint *smithy.Schema
-
-var HookProgressEvent_HookStatus *smithy.Schema
-
-var HookProgressEvent_HookEventTime *smithy.Schema
-
-var HookProgressEvent_HookStatusMessage *smithy.Schema
-
-var HookProgressEvent_FailureMode *smithy.Schema
-
-var _HooksProgressEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HooksProgressEvent",
-}, smithy.ShapeTypeList, 1)
-var _HooksProgressEvent_member *smithy.Schema
-
-var _HookStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _HookTypeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "HookTypeArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var InvalidCredentialsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "InvalidCredentialsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidCredentialsException",
-		StatusCode: 401})
-var InvalidCredentialsException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidRequestException",
-		StatusCode: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NetworkFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "NetworkFailureException",
-		StatusCode: 502})
-var NetworkFailureException_Message *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotStabilizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NotStabilizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "NotStabilizedException",
-		StatusCode: 400})
-var NotStabilizedException_Message *smithy.Schema
-
-var NotUpdatableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "NotUpdatableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "NotUpdatableException",
-		StatusCode: 400})
-var NotUpdatableException_Message *smithy.Schema
-
-var _Operation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Operation",
-}, smithy.ShapeTypeString, 0)
-
-var _Operations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Operations",
-}, smithy.ShapeTypeList, 1)
-var _Operations_member *smithy.Schema
-
-var _OperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "OperationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _OperationStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "OperationStatuses",
-}, smithy.ShapeTypeList, 1)
-var _OperationStatuses_member *smithy.Schema
-
-var _PatchDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "PatchDocument",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PrivateTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "PrivateTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "PrivateTypeException",
-		StatusCode: 400})
-var PrivateTypeException_Message *smithy.Schema
-
-var ProgressEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ProgressEvent",
-}, smithy.ShapeTypeStructure, 11)
-var ProgressEvent_TypeName *smithy.Schema
-
-var ProgressEvent_Identifier *smithy.Schema
-
-var ProgressEvent_RequestToken *smithy.Schema
-
-var ProgressEvent_HooksRequestToken *smithy.Schema
-
-var ProgressEvent_Operation *smithy.Schema
-
-var ProgressEvent_OperationStatus *smithy.Schema
-
-var ProgressEvent_EventTime *smithy.Schema
-
-var ProgressEvent_ResourceModel *smithy.Schema
-
-var ProgressEvent_StatusMessage *smithy.Schema
-
-var ProgressEvent_ErrorCode *smithy.Schema
-
-var ProgressEvent_RetryAfter *smithy.Schema
-
-var _Properties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Properties",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "RequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var RequestTokenNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "RequestTokenNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "RequestTokenNotFoundException",
-		StatusCode: 404})
-var RequestTokenNotFoundException_Message *smithy.Schema
-
-var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceConflictException",
-		StatusCode: 409})
-var ResourceConflictException_Message *smithy.Schema
-
-var ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceDescription_Identifier *smithy.Schema
-
-var ResourceDescription_Properties *smithy.Schema
-
-var _ResourceDescriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceDescriptions",
-}, smithy.ShapeTypeList, 1)
-var _ResourceDescriptions_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceRequestStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceRequestStatusFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceRequestStatusFilter_Operations *smithy.Schema
-
-var ResourceRequestStatusFilter_OperationStatuses *smithy.Schema
-
-var _ResourceRequestStatusSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ResourceRequestStatusSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ResourceRequestStatusSummaries_member *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceInternalErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ServiceInternalErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceInternalErrorException",
-		StatusCode: 502})
-var ServiceInternalErrorException_Message *smithy.Schema
-
-var ServiceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ServiceLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceLimitExceededException",
-		StatusCode: 400})
-var ServiceLimitExceededException_Message *smithy.Schema
-
-var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "StatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429},
-	&smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
-		StatusCode: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "TypeName",
-}, smithy.ShapeTypeString, 0)
-
-var TypeNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "TypeNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "TypeNotFoundException",
-		StatusCode: 404})
-var TypeNotFoundException_Message *smithy.Schema
-
-var _TypeVersionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "TypeVersionId",
-}, smithy.ShapeTypeString, 0)
-
-var UnsupportedActionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UnsupportedActionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 405},
-	&smithytraits.AWSQueryError{ErrorCode: "UnsupportedActionException",
-		StatusCode: 405})
-var UnsupportedActionException_Message *smithy.Schema
-
-var CancelResourceRequestInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CancelResourceRequestInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelResourceRequestInput_RequestToken *smithy.Schema
-
-var CancelResourceRequestOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CancelResourceRequestOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelResourceRequestOutput_ProgressEvent *smithy.Schema
-
-var CreateResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CreateResourceInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateResourceInput_TypeName *smithy.Schema
-
-var CreateResourceInput_TypeVersionId *smithy.Schema
-
-var CreateResourceInput_RoleArn *smithy.Schema
-
-var CreateResourceInput_ClientToken *smithy.Schema
-
-var CreateResourceInput_DesiredState *smithy.Schema
-
-var CreateResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "CreateResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResourceOutput_ProgressEvent *smithy.Schema
-
-var DeleteResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "DeleteResourceInput",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteResourceInput_TypeName *smithy.Schema
-
-var DeleteResourceInput_TypeVersionId *smithy.Schema
-
-var DeleteResourceInput_RoleArn *smithy.Schema
-
-var DeleteResourceInput_ClientToken *smithy.Schema
-
-var DeleteResourceInput_Identifier *smithy.Schema
-
-var DeleteResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "DeleteResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourceOutput_ProgressEvent *smithy.Schema
-
-var GetResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetResourceInput_TypeName *smithy.Schema
-
-var GetResourceInput_TypeVersionId *smithy.Schema
-
-var GetResourceInput_RoleArn *smithy.Schema
-
-var GetResourceInput_Identifier *smithy.Schema
-
-var GetResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceOutput_TypeName *smithy.Schema
-
-var GetResourceOutput_ResourceDescription *smithy.Schema
-
-var GetResourceRequestStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceRequestStatusInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourceRequestStatusInput_RequestToken *smithy.Schema
-
-var GetResourceRequestStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "GetResourceRequestStatusOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceRequestStatusOutput_ProgressEvent *smithy.Schema
-
-var GetResourceRequestStatusOutput_HooksProgressEvent *smithy.Schema
-
-var ListResourceRequestsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourceRequestsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourceRequestsInput_MaxResults *smithy.Schema
-
-var ListResourceRequestsInput_NextToken *smithy.Schema
-
-var ListResourceRequestsInput_ResourceRequestStatusFilter *smithy.Schema
-
-var ListResourceRequestsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourceRequestsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceRequestsOutput_ResourceRequestStatusSummaries *smithy.Schema
-
-var ListResourceRequestsOutput_NextToken *smithy.Schema
-
-var ListResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourcesInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListResourcesInput_TypeName *smithy.Schema
-
-var ListResourcesInput_TypeVersionId *smithy.Schema
-
-var ListResourcesInput_RoleArn *smithy.Schema
-
-var ListResourcesInput_NextToken *smithy.Schema
-
-var ListResourcesInput_MaxResults *smithy.Schema
-
-var ListResourcesInput_ResourceModel *smithy.Schema
-
-var ListResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "ListResourcesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourcesOutput_TypeName *smithy.Schema
-
-var ListResourcesOutput_ResourceDescriptions *smithy.Schema
-
-var ListResourcesOutput_NextToken *smithy.Schema
-
-var UpdateResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UpdateResourceInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateResourceInput_TypeName *smithy.Schema
-
-var UpdateResourceInput_TypeVersionId *smithy.Schema
-
-var UpdateResourceInput_RoleArn *smithy.Schema
-
-var UpdateResourceInput_ClientToken *smithy.Schema
-
-var UpdateResourceInput_Identifier *smithy.Schema
-
-var UpdateResourceInput_PatchDocument *smithy.Schema
-
-var UpdateResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.cloudcontrol",
-	Name:      "UpdateResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateResourceOutput_ProgressEvent *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AlreadyExistsException_Message = AlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	ClientTokenConflictException_Message = ClientTokenConflictException.AddMember("Message", _ErrorMessage)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _ErrorMessage)
-
-	ConcurrentOperationException_Message = ConcurrentOperationException.AddMember("Message", _ErrorMessage)
-
-	GeneralServiceException_Message = GeneralServiceException.AddMember("Message", _ErrorMessage)
-
-	HandlerFailureException_Message = HandlerFailureException.AddMember("Message", _ErrorMessage)
-
-	HandlerInternalFailureException_Message = HandlerInternalFailureException.AddMember("Message", _ErrorMessage)
-
-	HookProgressEvent_HookTypeName = HookProgressEvent.AddMember("HookTypeName", _TypeName)
-
-	HookProgressEvent_HookTypeVersionId = HookProgressEvent.AddMember("HookTypeVersionId", _TypeVersionId)
-
-	HookProgressEvent_HookTypeArn = HookProgressEvent.AddMember("HookTypeArn", _HookTypeArn)
-
-	HookProgressEvent_InvocationPoint = HookProgressEvent.AddMember("InvocationPoint", _HookInvocationPoint)
-
-	HookProgressEvent_HookStatus = HookProgressEvent.AddMember("HookStatus", _HookStatus)
-
-	HookProgressEvent_HookEventTime = HookProgressEvent.AddMember("HookEventTime", _Timestamp)
-
-	HookProgressEvent_HookStatusMessage = HookProgressEvent.AddMember("HookStatusMessage", _StatusMessage)
-
-	HookProgressEvent_FailureMode = HookProgressEvent.AddMember("FailureMode", _HookFailureMode)
-
-	_HooksProgressEvent_member = _HooksProgressEvent.AddMember("member", HookProgressEvent)
-
-	InvalidCredentialsException_Message = InvalidCredentialsException.AddMember("Message", _ErrorMessage)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _ErrorMessage)
-
-	NetworkFailureException_Message = NetworkFailureException.AddMember("Message", _ErrorMessage)
-
-	NotStabilizedException_Message = NotStabilizedException.AddMember("Message", _ErrorMessage)
-
-	NotUpdatableException_Message = NotUpdatableException.AddMember("Message", _ErrorMessage)
-
-	_Operations_member = _Operations.AddMember("member", _Operation)
-
-	_OperationStatuses_member = _OperationStatuses.AddMember("member", _OperationStatus)
-
-	PrivateTypeException_Message = PrivateTypeException.AddMember("Message", _ErrorMessage)
-
-	ProgressEvent_TypeName = ProgressEvent.AddMember("TypeName", _TypeName)
-
-	ProgressEvent_Identifier = ProgressEvent.AddMember("Identifier", _Identifier)
-
-	ProgressEvent_RequestToken = ProgressEvent.AddMember("RequestToken", _RequestToken)
-
-	ProgressEvent_HooksRequestToken = ProgressEvent.AddMember("HooksRequestToken", _RequestToken)
-
-	ProgressEvent_Operation = ProgressEvent.AddMember("Operation", _Operation)
-
-	ProgressEvent_OperationStatus = ProgressEvent.AddMember("OperationStatus", _OperationStatus)
-
-	ProgressEvent_EventTime = ProgressEvent.AddMember("EventTime", _Timestamp)
-
-	ProgressEvent_ResourceModel = ProgressEvent.AddMember("ResourceModel", _Properties)
-
-	ProgressEvent_StatusMessage = ProgressEvent.AddMember("StatusMessage", _StatusMessage)
-
-	ProgressEvent_ErrorCode = ProgressEvent.AddMember("ErrorCode", _HandlerErrorCode)
-
-	ProgressEvent_RetryAfter = ProgressEvent.AddMember("RetryAfter", _Timestamp)
-
-	RequestTokenNotFoundException_Message = RequestTokenNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceConflictException_Message = ResourceConflictException.AddMember("Message", _ErrorMessage)
-
-	ResourceDescription_Identifier = ResourceDescription.AddMember("Identifier", _Identifier)
-
-	ResourceDescription_Properties = ResourceDescription.AddMember("Properties", _Properties)
-
-	_ResourceDescriptions_member = _ResourceDescriptions.AddMember("member", ResourceDescription)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceRequestStatusFilter_Operations = ResourceRequestStatusFilter.AddMember("Operations", _Operations)
-
-	ResourceRequestStatusFilter_OperationStatuses = ResourceRequestStatusFilter.AddMember("OperationStatuses", _OperationStatuses)
-
-	_ResourceRequestStatusSummaries_member = _ResourceRequestStatusSummaries.AddMember("member", ProgressEvent)
-
-	ServiceInternalErrorException_Message = ServiceInternalErrorException.AddMember("Message", _ErrorMessage)
-
-	ServiceLimitExceededException_Message = ServiceLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	TypeNotFoundException_Message = TypeNotFoundException.AddMember("Message", _ErrorMessage)
-
-	UnsupportedActionException_Message = UnsupportedActionException.AddMember("Message", _ErrorMessage)
-
-	CancelResourceRequestInput_RequestToken = CancelResourceRequestInput.AddMember("RequestToken", _RequestToken)
-
-	CancelResourceRequestOutput_ProgressEvent = CancelResourceRequestOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	CreateResourceInput_TypeName = CreateResourceInput.AddMember("TypeName", _TypeName)
-
-	CreateResourceInput_TypeVersionId = CreateResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	CreateResourceInput_RoleArn = CreateResourceInput.AddMember("RoleArn", _RoleArn)
-
-	CreateResourceInput_ClientToken = CreateResourceInput.AddMember("ClientToken", _ClientToken)
-
-	CreateResourceInput_DesiredState = CreateResourceInput.AddMember("DesiredState", _Properties)
-
-	CreateResourceOutput_ProgressEvent = CreateResourceOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	DeleteResourceInput_TypeName = DeleteResourceInput.AddMember("TypeName", _TypeName)
-
-	DeleteResourceInput_TypeVersionId = DeleteResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	DeleteResourceInput_RoleArn = DeleteResourceInput.AddMember("RoleArn", _RoleArn)
-
-	DeleteResourceInput_ClientToken = DeleteResourceInput.AddMember("ClientToken", _ClientToken)
-
-	DeleteResourceInput_Identifier = DeleteResourceInput.AddMember("Identifier", _Identifier)
-
-	DeleteResourceOutput_ProgressEvent = DeleteResourceOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	GetResourceInput_TypeName = GetResourceInput.AddMember("TypeName", _TypeName)
-
-	GetResourceInput_TypeVersionId = GetResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	GetResourceInput_RoleArn = GetResourceInput.AddMember("RoleArn", _RoleArn)
-
-	GetResourceInput_Identifier = GetResourceInput.AddMember("Identifier", _Identifier)
-
-	GetResourceOutput_TypeName = GetResourceOutput.AddMember("TypeName", _TypeName)
-
-	GetResourceOutput_ResourceDescription = GetResourceOutput.AddMember("ResourceDescription", ResourceDescription)
-
-	GetResourceRequestStatusInput_RequestToken = GetResourceRequestStatusInput.AddMember("RequestToken", _RequestToken)
-
-	GetResourceRequestStatusOutput_ProgressEvent = GetResourceRequestStatusOutput.AddMember("ProgressEvent", ProgressEvent)
-
-	GetResourceRequestStatusOutput_HooksProgressEvent = GetResourceRequestStatusOutput.AddMember("HooksProgressEvent", _HooksProgressEvent)
-
-	ListResourceRequestsInput_MaxResults = ListResourceRequestsInput.AddMember("MaxResults", _MaxResults)
-
-	ListResourceRequestsInput_NextToken = ListResourceRequestsInput.AddMember("NextToken", _NextToken)
-
-	ListResourceRequestsInput_ResourceRequestStatusFilter = ListResourceRequestsInput.AddMember("ResourceRequestStatusFilter", ResourceRequestStatusFilter)
-
-	ListResourceRequestsOutput_ResourceRequestStatusSummaries = ListResourceRequestsOutput.AddMember("ResourceRequestStatusSummaries", _ResourceRequestStatusSummaries)
-
-	ListResourceRequestsOutput_NextToken = ListResourceRequestsOutput.AddMember("NextToken", _NextToken)
-
-	ListResourcesInput_TypeName = ListResourcesInput.AddMember("TypeName", _TypeName)
-
-	ListResourcesInput_TypeVersionId = ListResourcesInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	ListResourcesInput_RoleArn = ListResourcesInput.AddMember("RoleArn", _RoleArn)
-
-	ListResourcesInput_NextToken = ListResourcesInput.AddMember("NextToken", _HandlerNextToken)
-
-	ListResourcesInput_MaxResults = ListResourcesInput.AddMember("MaxResults", _MaxResults)
-
-	ListResourcesInput_ResourceModel = ListResourcesInput.AddMember("ResourceModel", _Properties)
-
-	ListResourcesOutput_TypeName = ListResourcesOutput.AddMember("TypeName", _TypeName)
-
-	ListResourcesOutput_ResourceDescriptions = ListResourcesOutput.AddMember("ResourceDescriptions", _ResourceDescriptions)
-
-	ListResourcesOutput_NextToken = ListResourcesOutput.AddMember("NextToken", _HandlerNextToken)
-
-	UpdateResourceInput_TypeName = UpdateResourceInput.AddMember("TypeName", _TypeName)
-
-	UpdateResourceInput_TypeVersionId = UpdateResourceInput.AddMember("TypeVersionId", _TypeVersionId)
-
-	UpdateResourceInput_RoleArn = UpdateResourceInput.AddMember("RoleArn", _RoleArn)
-
-	UpdateResourceInput_ClientToken = UpdateResourceInput.AddMember("ClientToken", _ClientToken)
-
-	UpdateResourceInput_Identifier = UpdateResourceInput.AddMember("Identifier", _Identifier)
-
-	UpdateResourceInput_PatchDocument = UpdateResourceInput.AddMember("PatchDocument", _PatchDocument)
-
-	UpdateResourceOutput_ProgressEvent = UpdateResourceOutput.AddMember("ProgressEvent", ProgressEvent)
-
-}
+var (
+	iCancelResourceRequest           = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CancelResourceRequest"}
+	iCreateResource                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CreateResource"}
+	iDeleteResource                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "DeleteResource"}
+	iGetResource                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "GetResource"}
+	iGetResourceRequestStatus        = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "GetResourceRequestStatus"}
+	iListResourceRequests            = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ListResourceRequests"}
+	iListResources                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ListResources"}
+	iUpdateResource                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "UpdateResource"}
+	i_CloudApiService                = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CloudApiService"}
+	iAlreadyExistsException          = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "AlreadyExistsException"}
+	i_ClientToken                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ClientToken"}
+	iClientTokenConflictException    = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ClientTokenConflictException"}
+	iConcurrentModificationException = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ConcurrentModificationException"}
+	iConcurrentOperationException    = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ConcurrentOperationException"}
+	i_ErrorMessage                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ErrorMessage"}
+	iGeneralServiceException         = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "GeneralServiceException"}
+	i_HandlerErrorCode               = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HandlerErrorCode"}
+	iHandlerFailureException         = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HandlerFailureException"}
+	iHandlerInternalFailureException = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HandlerInternalFailureException"}
+	i_HandlerNextToken               = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HandlerNextToken"}
+	i_HookFailureMode                = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HookFailureMode"}
+	i_HookInvocationPoint            = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HookInvocationPoint"}
+	iHookProgressEvent               = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HookProgressEvent"}
+	i_HooksProgressEvent             = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HooksProgressEvent"}
+	i_HookStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HookStatus"}
+	i_HookTypeArn                    = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "HookTypeArn"}
+	i_Identifier                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "Identifier"}
+	iInvalidCredentialsException     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "InvalidCredentialsException"}
+	iInvalidRequestException         = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "InvalidRequestException"}
+	i_MaxResults                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "MaxResults"}
+	iNetworkFailureException         = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "NetworkFailureException"}
+	i_NextToken                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "NextToken"}
+	iNotStabilizedException          = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "NotStabilizedException"}
+	iNotUpdatableException           = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "NotUpdatableException"}
+	i_Operation                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "Operation"}
+	i_Operations                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "Operations"}
+	i_OperationStatus                = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "OperationStatus"}
+	i_OperationStatuses              = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "OperationStatuses"}
+	i_PatchDocument                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "PatchDocument"}
+	iPrivateTypeException            = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "PrivateTypeException"}
+	iProgressEvent                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ProgressEvent"}
+	i_Properties                     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "Properties"}
+	i_RequestToken                   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "RequestToken"}
+	iRequestTokenNotFoundException   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "RequestTokenNotFoundException"}
+	iResourceConflictException       = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ResourceConflictException"}
+	iResourceDescription             = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ResourceDescription"}
+	i_ResourceDescriptions           = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ResourceDescriptions"}
+	iResourceNotFoundException       = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ResourceNotFoundException"}
+	iResourceRequestStatusFilter     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ResourceRequestStatusFilter"}
+	i_ResourceRequestStatusSummaries = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ResourceRequestStatusSummaries"}
+	i_RoleArn                        = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "RoleArn"}
+	iServiceInternalErrorException   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ServiceInternalErrorException"}
+	iServiceLimitExceededException   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ServiceLimitExceededException"}
+	i_StatusMessage                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "StatusMessage"}
+	iThrottlingException             = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ThrottlingException"}
+	i_Timestamp                      = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "Timestamp"}
+	i_TypeName                       = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "TypeName"}
+	iTypeNotFoundException           = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "TypeNotFoundException"}
+	i_TypeVersionId                  = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "TypeVersionId"}
+	iUnsupportedActionException      = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "UnsupportedActionException"}
+	iCancelResourceRequestInput      = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CancelResourceRequestInput"}
+	iCancelResourceRequestOutput     = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CancelResourceRequestOutput"}
+	iCreateResourceInput             = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CreateResourceInput"}
+	iCreateResourceOutput            = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "CreateResourceOutput"}
+	iDeleteResourceInput             = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "DeleteResourceInput"}
+	iDeleteResourceOutput            = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "DeleteResourceOutput"}
+	iGetResourceInput                = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "GetResourceInput"}
+	iGetResourceOutput               = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "GetResourceOutput"}
+	iGetResourceRequestStatusInput   = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "GetResourceRequestStatusInput"}
+	iGetResourceRequestStatusOutput  = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "GetResourceRequestStatusOutput"}
+	iListResourceRequestsInput       = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ListResourceRequestsInput"}
+	iListResourceRequestsOutput      = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ListResourceRequestsOutput"}
+	iListResourcesInput              = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ListResourcesInput"}
+	iListResourcesOutput             = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "ListResourcesOutput"}
+	iUpdateResourceInput             = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "UpdateResourceInput"}
+	iUpdateResourceOutput            = smithy.ShapeID{Namespace: "com.amazonaws.cloudcontrol", Name: "UpdateResourceOutput"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AlreadyExistsException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ClientTokenConflictException",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentModificationException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentOperationException",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "GeneralServiceException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "HandlerFailureException",
+	StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "HandlerInternalFailureException",
+	StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidCredentialsException",
+	StatusCode: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidRequestException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NetworkFailureException",
+	StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotStabilizedException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "NotUpdatableException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "PrivateTypeException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "RequestTokenNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceConflictException",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceInternalErrorException",
+	StatusCode: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceLimitExceededException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ThrottlingException",
+	StatusCode: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "TypeNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 405}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "UnsupportedActionException",
+	StatusCode: 405}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sAlreadyExistsException_Message}}
+var mClientTokenConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sClientTokenConflictException_Message}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConcurrentOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentOperationException_Message}}
+var mGeneralServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sGeneralServiceException_Message}}
+var mHandlerFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sHandlerFailureException_Message}}
+var mHandlerInternalFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sHandlerInternalFailureException_Message}}
+var mHookProgressEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sHookProgressEvent_HookTypeName, &sHookProgressEvent_HookTypeVersionId, &sHookProgressEvent_HookTypeArn, &sHookProgressEvent_InvocationPoint, &sHookProgressEvent_HookStatus, &sHookProgressEvent_HookEventTime, &sHookProgressEvent_HookStatusMessage, &sHookProgressEvent_FailureMode}}
+var m_HooksProgressEvent = smithy.SchemaMembers{List: []*smithy.Schema{&s_HooksProgressEvent_member}}
+var mInvalidCredentialsException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCredentialsException_Message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_Message}}
+var mNetworkFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFailureException_Message}}
+var mNotStabilizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotStabilizedException_Message}}
+var mNotUpdatableException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotUpdatableException_Message}}
+var m_Operations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Operations_member}}
+var m_OperationStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_OperationStatuses_member}}
+var mPrivateTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivateTypeException_Message}}
+var mProgressEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sProgressEvent_TypeName, &sProgressEvent_Identifier, &sProgressEvent_RequestToken, &sProgressEvent_HooksRequestToken, &sProgressEvent_Operation, &sProgressEvent_OperationStatus, &sProgressEvent_EventTime, &sProgressEvent_ResourceModel, &sProgressEvent_StatusMessage, &sProgressEvent_ErrorCode, &sProgressEvent_RetryAfter}, Seed: 4, Slots: []uint16{
+	11, 0, 0, 0, 0, 0, 2, 0, 0, 0, 8, 0, 4, 0, 0, 9, 3, 6, 0, 0, 5, 0, 0, 0,
+	10, 0, 0, 0, 0, 1, 0, 7,
+}}
+var mRequestTokenNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestTokenNotFoundException_Message}}
+var mResourceConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceConflictException_Message}}
+var mResourceDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceDescription_Identifier, &sResourceDescription_Properties}}
+var m_ResourceDescriptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceDescriptions_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceRequestStatusFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceRequestStatusFilter_Operations, &sResourceRequestStatusFilter_OperationStatuses}}
+var m_ResourceRequestStatusSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceRequestStatusSummaries_member}}
+var mServiceInternalErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceInternalErrorException_Message}}
+var mServiceLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLimitExceededException_Message}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTypeNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sTypeNotFoundException_Message}}
+var mUnsupportedActionException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedActionException_Message}}
+var mCancelResourceRequestInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelResourceRequestInput_RequestToken}}
+var mCancelResourceRequestOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelResourceRequestOutput_ProgressEvent}}
+var mCreateResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceInput_TypeName, &sCreateResourceInput_TypeVersionId, &sCreateResourceInput_RoleArn, &sCreateResourceInput_ClientToken, &sCreateResourceInput_DesiredState}}
+var mCreateResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceOutput_ProgressEvent}}
+var mDeleteResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceInput_TypeName, &sDeleteResourceInput_TypeVersionId, &sDeleteResourceInput_RoleArn, &sDeleteResourceInput_ClientToken, &sDeleteResourceInput_Identifier}}
+var mDeleteResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceOutput_ProgressEvent}}
+var mGetResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceInput_TypeName, &sGetResourceInput_TypeVersionId, &sGetResourceInput_RoleArn, &sGetResourceInput_Identifier}}
+var mGetResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceOutput_TypeName, &sGetResourceOutput_ResourceDescription}}
+var mGetResourceRequestStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceRequestStatusInput_RequestToken}}
+var mGetResourceRequestStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceRequestStatusOutput_ProgressEvent, &sGetResourceRequestStatusOutput_HooksProgressEvent}}
+var mListResourceRequestsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceRequestsInput_MaxResults, &sListResourceRequestsInput_NextToken, &sListResourceRequestsInput_ResourceRequestStatusFilter}}
+var mListResourceRequestsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceRequestsOutput_ResourceRequestStatusSummaries, &sListResourceRequestsOutput_NextToken}}
+var mListResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesInput_TypeName, &sListResourcesInput_TypeVersionId, &sListResourcesInput_RoleArn, &sListResourcesInput_NextToken, &sListResourcesInput_MaxResults, &sListResourcesInput_ResourceModel}}
+var mListResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesOutput_TypeName, &sListResourcesOutput_ResourceDescriptions, &sListResourcesOutput_NextToken}}
+var mUpdateResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceInput_TypeName, &sUpdateResourceInput_TypeVersionId, &sUpdateResourceInput_RoleArn, &sUpdateResourceInput_ClientToken, &sUpdateResourceInput_Identifier, &sUpdateResourceInput_PatchDocument}}
+var mUpdateResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceOutput_ProgressEvent}}
+
+var sCancelResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequest, Type: smithy.ShapeTypeOperation})
+var sCreateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResource, Type: smithy.ShapeTypeOperation})
+var sDeleteResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResource, Type: smithy.ShapeTypeOperation})
+var sGetResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResource, Type: smithy.ShapeTypeOperation})
+var sGetResourceRequestStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatus, Type: smithy.ShapeTypeOperation})
+var sListResourceRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequests, Type: smithy.ShapeTypeOperation})
+var sListResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResources, Type: smithy.ShapeTypeOperation})
+var sUpdateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResource, Type: smithy.ShapeTypeOperation})
+var s_CloudApiService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudApiService, Type: smithy.ShapeTypeService})
+var sAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlreadyExistsException, Members: &mAlreadyExistsException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sClientTokenConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientTokenConflictException, Members: &mClientTokenConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sConcurrentOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentOperationException, Members: &mConcurrentOperationException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGeneralServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGeneralServiceException, Members: &mGeneralServiceException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_HandlerErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandlerErrorCode, Type: smithy.ShapeTypeString})
+var sHandlerFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerFailureException, Members: &mHandlerFailureException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sHandlerInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHandlerInternalFailureException, Members: &mHandlerInternalFailureException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_HandlerNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString})
+var s_HookFailureMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookFailureMode, Type: smithy.ShapeTypeString})
+var s_HookInvocationPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookInvocationPoint, Type: smithy.ShapeTypeString})
+var sHookProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHookProgressEvent, Members: &mHookProgressEvent, Type: smithy.ShapeTypeStructure})
+var s_HooksProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HooksProgressEvent, Members: &m_HooksProgressEvent, Type: smithy.ShapeTypeList})
+var s_HookStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookStatus, Type: smithy.ShapeTypeString})
+var s_HookTypeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HookTypeArn, Type: smithy.ShapeTypeString})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sInvalidCredentialsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCredentialsException, Members: &mInvalidCredentialsException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sNetworkFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFailureException, Members: &mNetworkFailureException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNotStabilizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotStabilizedException, Members: &mNotStabilizedException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sNotUpdatableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotUpdatableException, Members: &mNotUpdatableException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var s_Operation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operation, Type: smithy.ShapeTypeString})
+var s_Operations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operations, Members: &m_Operations, Type: smithy.ShapeTypeList})
+var s_OperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatus, Type: smithy.ShapeTypeString})
+var s_OperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatuses, Members: &m_OperationStatuses, Type: smithy.ShapeTypeList})
+var s_PatchDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PatchDocument, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPrivateTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivateTypeException, Members: &mPrivateTypeException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var sProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure})
+var s_Properties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Properties, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestToken, Type: smithy.ShapeTypeString})
+var sRequestTokenNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestTokenNotFoundException, Members: &mRequestTokenNotFoundException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure})
+var s_ResourceDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescriptions, Members: &m_ResourceDescriptions, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var sResourceRequestStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceRequestStatusFilter, Members: &mResourceRequestStatusFilter, Type: smithy.ShapeTypeStructure})
+var s_ResourceRequestStatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceRequestStatusSummaries, Members: &m_ResourceRequestStatusSummaries, Type: smithy.ShapeTypeList})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sServiceInternalErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInternalErrorException, Members: &mServiceInternalErrorException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sServiceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceededException, Members: &mServiceLimitExceededException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sTypeNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTypeNotFoundException, Members: &mTypeNotFoundException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var s_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeVersionId, Type: smithy.ShapeTypeString})
+var sUnsupportedActionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedActionException, Members: &mUnsupportedActionException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var sCancelResourceRequestInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequestInput, Members: &mCancelResourceRequestInput, Type: smithy.ShapeTypeStructure})
+var sCancelResourceRequestOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelResourceRequestOutput, Members: &mCancelResourceRequestOutput, Type: smithy.ShapeTypeStructure})
+var sCreateResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceInput, Members: &mCreateResourceInput, Type: smithy.ShapeTypeStructure})
+var sCreateResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceOutput, Members: &mCreateResourceOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceInput, Members: &mDeleteResourceInput, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceOutput, Members: &mDeleteResourceOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceInput, Members: &mGetResourceInput, Type: smithy.ShapeTypeStructure})
+var sGetResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceOutput, Members: &mGetResourceOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourceRequestStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatusInput, Members: &mGetResourceRequestStatusInput, Type: smithy.ShapeTypeStructure})
+var sGetResourceRequestStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceRequestStatusOutput, Members: &mGetResourceRequestStatusOutput, Type: smithy.ShapeTypeStructure})
+var sListResourceRequestsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequestsInput, Members: &mListResourceRequestsInput, Type: smithy.ShapeTypeStructure})
+var sListResourceRequestsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceRequestsOutput, Members: &mListResourceRequestsOutput, Type: smithy.ShapeTypeStructure})
+var sListResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesInput, Members: &mListResourcesInput, Type: smithy.ShapeTypeStructure})
+var sListResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesOutput, Members: &mListResourcesOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceInput, Members: &mUpdateResourceInput, Type: smithy.ShapeTypeStructure})
+var sUpdateResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceOutput, Members: &mUpdateResourceOutput, Type: smithy.ShapeTypeStructure})
+
+var sAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sClientTokenConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConcurrentOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGeneralServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHandlerFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHandlerInternalFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sHookProgressEvent_HookTypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sHookProgressEvent_HookTypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString})
+var sHookProgressEvent_HookTypeArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookTypeArn", ID: &i_HookTypeArn, Type: smithy.ShapeTypeString})
+var sHookProgressEvent_InvocationPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationPoint", ID: &i_HookInvocationPoint, Type: smithy.ShapeTypeString})
+var sHookProgressEvent_HookStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookStatus", ID: &i_HookStatus, Type: smithy.ShapeTypeString})
+var sHookProgressEvent_HookEventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookEventTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sHookProgressEvent_HookStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HookStatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sHookProgressEvent_FailureMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureMode", ID: &i_HookFailureMode, Type: smithy.ShapeTypeString})
+var s_HooksProgressEvent_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHookProgressEvent, Members: &mHookProgressEvent, Type: smithy.ShapeTypeStructure})
+var sInvalidCredentialsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNetworkFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotStabilizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotUpdatableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Operations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Operation, Type: smithy.ShapeTypeString})
+var s_OperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OperationStatus, Type: smithy.ShapeTypeString})
+var sPrivateTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sProgressEvent_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sProgressEvent_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sProgressEvent_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString})
+var sProgressEvent_HooksRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HooksRequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString})
+var sProgressEvent_Operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operation", ID: &i_Operation, Type: smithy.ShapeTypeString})
+var sProgressEvent_OperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationStatus", ID: &i_OperationStatus, Type: smithy.ShapeTypeString})
+var sProgressEvent_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sProgressEvent_ResourceModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceModel", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString})
+var sProgressEvent_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StatusMessage, Type: smithy.ShapeTypeString})
+var sProgressEvent_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_HandlerErrorCode, Type: smithy.ShapeTypeString})
+var sProgressEvent_RetryAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfter", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRequestTokenNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceDescription_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sResourceDescription_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString})
+var s_ResourceDescriptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceRequestStatusFilter_Operations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operations", ID: &i_Operations, Members: &m_Operations, Type: smithy.ShapeTypeList})
+var sResourceRequestStatusFilter_OperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationStatuses", ID: &i_OperationStatuses, Members: &m_OperationStatuses, Type: smithy.ShapeTypeList})
+var s_ResourceRequestStatusSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure})
+var sServiceInternalErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTypeNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUnsupportedActionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCancelResourceRequestInput_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString})
+var sCancelResourceRequestOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure})
+var sCreateResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sCreateResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString})
+var sCreateResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateResourceInput_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString})
+var sCreateResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sDeleteResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString})
+var sDeleteResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sDeleteResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDeleteResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sDeleteResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure})
+var sGetResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sGetResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString})
+var sGetResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sGetResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sGetResourceOutput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sGetResourceOutput_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceDescription", ID: &iResourceDescription, Members: &mResourceDescription, Type: smithy.ShapeTypeStructure})
+var sGetResourceRequestStatusInput_RequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestToken", ID: &i_RequestToken, Type: smithy.ShapeTypeString})
+var sGetResourceRequestStatusOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure})
+var sGetResourceRequestStatusOutput_HooksProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HooksProgressEvent", ID: &i_HooksProgressEvent, Members: &m_HooksProgressEvent, Type: smithy.ShapeTypeList})
+var sListResourceRequestsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourceRequestsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourceRequestsInput_ResourceRequestStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequestStatusFilter", ID: &iResourceRequestStatusFilter, Members: &mResourceRequestStatusFilter, Type: smithy.ShapeTypeStructure})
+var sListResourceRequestsOutput_ResourceRequestStatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequestStatusSummaries", ID: &i_ResourceRequestStatusSummaries, Members: &m_ResourceRequestStatusSummaries, Type: smithy.ShapeTypeList})
+var sListResourceRequestsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourcesInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sListResourcesInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString})
+var sListResourcesInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sListResourcesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString})
+var sListResourcesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourcesInput_ResourceModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceModel", ID: &i_Properties, Traits: &t14, Type: smithy.ShapeTypeString})
+var sListResourcesOutput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sListResourcesOutput_ResourceDescriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceDescriptions", ID: &i_ResourceDescriptions, Members: &m_ResourceDescriptions, Type: smithy.ShapeTypeList})
+var sListResourcesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_HandlerNextToken, Type: smithy.ShapeTypeString})
+var sUpdateResourceInput_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sUpdateResourceInput_TypeVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersionId", ID: &i_TypeVersionId, Type: smithy.ShapeTypeString})
+var sUpdateResourceInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateResourceInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateResourceInput_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sUpdateResourceInput_PatchDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PatchDocument", ID: &i_PatchDocument, Traits: &t14, Type: smithy.ShapeTypeString})
+var sUpdateResourceOutput_ProgressEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressEvent", ID: &iProgressEvent, Members: &mProgressEvent, Type: smithy.ShapeTypeStructure})
+
+var CancelResourceRequest = &sCancelResourceRequest
+
+var CreateResource = &sCreateResource
+
+var DeleteResource = &sDeleteResource
+
+var GetResource = &sGetResource
+
+var GetResourceRequestStatus = &sGetResourceRequestStatus
+
+var ListResourceRequests = &sListResourceRequests
+
+var ListResources = &sListResources
+
+var UpdateResource = &sUpdateResource
+
+var _CloudApiService = &s_CloudApiService
+
+var AlreadyExistsException = &sAlreadyExistsException
+var AlreadyExistsException_Message = &sAlreadyExistsException_Message
+
+var _ClientToken = &s_ClientToken
+
+var ClientTokenConflictException = &sClientTokenConflictException
+var ClientTokenConflictException_Message = &sClientTokenConflictException_Message
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConcurrentOperationException = &sConcurrentOperationException
+var ConcurrentOperationException_Message = &sConcurrentOperationException_Message
+
+var _ErrorMessage = &s_ErrorMessage
+
+var GeneralServiceException = &sGeneralServiceException
+var GeneralServiceException_Message = &sGeneralServiceException_Message
+
+var _HandlerErrorCode = &s_HandlerErrorCode
+
+var HandlerFailureException = &sHandlerFailureException
+var HandlerFailureException_Message = &sHandlerFailureException_Message
+
+var HandlerInternalFailureException = &sHandlerInternalFailureException
+var HandlerInternalFailureException_Message = &sHandlerInternalFailureException_Message
+
+var _HandlerNextToken = &s_HandlerNextToken
+
+var _HookFailureMode = &s_HookFailureMode
+
+var _HookInvocationPoint = &s_HookInvocationPoint
+
+var HookProgressEvent = &sHookProgressEvent
+var HookProgressEvent_HookTypeName = &sHookProgressEvent_HookTypeName
+var HookProgressEvent_HookTypeVersionId = &sHookProgressEvent_HookTypeVersionId
+var HookProgressEvent_HookTypeArn = &sHookProgressEvent_HookTypeArn
+var HookProgressEvent_InvocationPoint = &sHookProgressEvent_InvocationPoint
+var HookProgressEvent_HookStatus = &sHookProgressEvent_HookStatus
+var HookProgressEvent_HookEventTime = &sHookProgressEvent_HookEventTime
+var HookProgressEvent_HookStatusMessage = &sHookProgressEvent_HookStatusMessage
+var HookProgressEvent_FailureMode = &sHookProgressEvent_FailureMode
+
+var _HooksProgressEvent = &s_HooksProgressEvent
+var _HooksProgressEvent_member = &s_HooksProgressEvent_member
+
+var _HookStatus = &s_HookStatus
+
+var _HookTypeArn = &s_HookTypeArn
+
+var _Identifier = &s_Identifier
+
+var InvalidCredentialsException = &sInvalidCredentialsException
+var InvalidCredentialsException_Message = &sInvalidCredentialsException_Message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_Message = &sInvalidRequestException_Message
+
+var _MaxResults = &s_MaxResults
+
+var NetworkFailureException = &sNetworkFailureException
+var NetworkFailureException_Message = &sNetworkFailureException_Message
+
+var _NextToken = &s_NextToken
+
+var NotStabilizedException = &sNotStabilizedException
+var NotStabilizedException_Message = &sNotStabilizedException_Message
+
+var NotUpdatableException = &sNotUpdatableException
+var NotUpdatableException_Message = &sNotUpdatableException_Message
+
+var _Operation = &s_Operation
+
+var _Operations = &s_Operations
+var _Operations_member = &s_Operations_member
+
+var _OperationStatus = &s_OperationStatus
+
+var _OperationStatuses = &s_OperationStatuses
+var _OperationStatuses_member = &s_OperationStatuses_member
+
+var _PatchDocument = &s_PatchDocument
+
+var PrivateTypeException = &sPrivateTypeException
+var PrivateTypeException_Message = &sPrivateTypeException_Message
+
+var ProgressEvent = &sProgressEvent
+var ProgressEvent_TypeName = &sProgressEvent_TypeName
+var ProgressEvent_Identifier = &sProgressEvent_Identifier
+var ProgressEvent_RequestToken = &sProgressEvent_RequestToken
+var ProgressEvent_HooksRequestToken = &sProgressEvent_HooksRequestToken
+var ProgressEvent_Operation = &sProgressEvent_Operation
+var ProgressEvent_OperationStatus = &sProgressEvent_OperationStatus
+var ProgressEvent_EventTime = &sProgressEvent_EventTime
+var ProgressEvent_ResourceModel = &sProgressEvent_ResourceModel
+var ProgressEvent_StatusMessage = &sProgressEvent_StatusMessage
+var ProgressEvent_ErrorCode = &sProgressEvent_ErrorCode
+var ProgressEvent_RetryAfter = &sProgressEvent_RetryAfter
+
+var _Properties = &s_Properties
+
+var _RequestToken = &s_RequestToken
+
+var RequestTokenNotFoundException = &sRequestTokenNotFoundException
+var RequestTokenNotFoundException_Message = &sRequestTokenNotFoundException_Message
+
+var ResourceConflictException = &sResourceConflictException
+var ResourceConflictException_Message = &sResourceConflictException_Message
+
+var ResourceDescription = &sResourceDescription
+var ResourceDescription_Identifier = &sResourceDescription_Identifier
+var ResourceDescription_Properties = &sResourceDescription_Properties
+
+var _ResourceDescriptions = &s_ResourceDescriptions
+var _ResourceDescriptions_member = &s_ResourceDescriptions_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceRequestStatusFilter = &sResourceRequestStatusFilter
+var ResourceRequestStatusFilter_Operations = &sResourceRequestStatusFilter_Operations
+var ResourceRequestStatusFilter_OperationStatuses = &sResourceRequestStatusFilter_OperationStatuses
+
+var _ResourceRequestStatusSummaries = &s_ResourceRequestStatusSummaries
+var _ResourceRequestStatusSummaries_member = &s_ResourceRequestStatusSummaries_member
+
+var _RoleArn = &s_RoleArn
+
+var ServiceInternalErrorException = &sServiceInternalErrorException
+var ServiceInternalErrorException_Message = &sServiceInternalErrorException_Message
+
+var ServiceLimitExceededException = &sServiceLimitExceededException
+var ServiceLimitExceededException_Message = &sServiceLimitExceededException_Message
+
+var _StatusMessage = &s_StatusMessage
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Timestamp = &s_Timestamp
+
+var _TypeName = &s_TypeName
+
+var TypeNotFoundException = &sTypeNotFoundException
+var TypeNotFoundException_Message = &sTypeNotFoundException_Message
+
+var _TypeVersionId = &s_TypeVersionId
+
+var UnsupportedActionException = &sUnsupportedActionException
+var UnsupportedActionException_Message = &sUnsupportedActionException_Message
+
+var CancelResourceRequestInput = &sCancelResourceRequestInput
+var CancelResourceRequestInput_RequestToken = &sCancelResourceRequestInput_RequestToken
+
+var CancelResourceRequestOutput = &sCancelResourceRequestOutput
+var CancelResourceRequestOutput_ProgressEvent = &sCancelResourceRequestOutput_ProgressEvent
+
+var CreateResourceInput = &sCreateResourceInput
+var CreateResourceInput_TypeName = &sCreateResourceInput_TypeName
+var CreateResourceInput_TypeVersionId = &sCreateResourceInput_TypeVersionId
+var CreateResourceInput_RoleArn = &sCreateResourceInput_RoleArn
+var CreateResourceInput_ClientToken = &sCreateResourceInput_ClientToken
+var CreateResourceInput_DesiredState = &sCreateResourceInput_DesiredState
+
+var CreateResourceOutput = &sCreateResourceOutput
+var CreateResourceOutput_ProgressEvent = &sCreateResourceOutput_ProgressEvent
+
+var DeleteResourceInput = &sDeleteResourceInput
+var DeleteResourceInput_TypeName = &sDeleteResourceInput_TypeName
+var DeleteResourceInput_TypeVersionId = &sDeleteResourceInput_TypeVersionId
+var DeleteResourceInput_RoleArn = &sDeleteResourceInput_RoleArn
+var DeleteResourceInput_ClientToken = &sDeleteResourceInput_ClientToken
+var DeleteResourceInput_Identifier = &sDeleteResourceInput_Identifier
+
+var DeleteResourceOutput = &sDeleteResourceOutput
+var DeleteResourceOutput_ProgressEvent = &sDeleteResourceOutput_ProgressEvent
+
+var GetResourceInput = &sGetResourceInput
+var GetResourceInput_TypeName = &sGetResourceInput_TypeName
+var GetResourceInput_TypeVersionId = &sGetResourceInput_TypeVersionId
+var GetResourceInput_RoleArn = &sGetResourceInput_RoleArn
+var GetResourceInput_Identifier = &sGetResourceInput_Identifier
+
+var GetResourceOutput = &sGetResourceOutput
+var GetResourceOutput_TypeName = &sGetResourceOutput_TypeName
+var GetResourceOutput_ResourceDescription = &sGetResourceOutput_ResourceDescription
+
+var GetResourceRequestStatusInput = &sGetResourceRequestStatusInput
+var GetResourceRequestStatusInput_RequestToken = &sGetResourceRequestStatusInput_RequestToken
+
+var GetResourceRequestStatusOutput = &sGetResourceRequestStatusOutput
+var GetResourceRequestStatusOutput_ProgressEvent = &sGetResourceRequestStatusOutput_ProgressEvent
+var GetResourceRequestStatusOutput_HooksProgressEvent = &sGetResourceRequestStatusOutput_HooksProgressEvent
+
+var ListResourceRequestsInput = &sListResourceRequestsInput
+var ListResourceRequestsInput_MaxResults = &sListResourceRequestsInput_MaxResults
+var ListResourceRequestsInput_NextToken = &sListResourceRequestsInput_NextToken
+var ListResourceRequestsInput_ResourceRequestStatusFilter = &sListResourceRequestsInput_ResourceRequestStatusFilter
+
+var ListResourceRequestsOutput = &sListResourceRequestsOutput
+var ListResourceRequestsOutput_ResourceRequestStatusSummaries = &sListResourceRequestsOutput_ResourceRequestStatusSummaries
+var ListResourceRequestsOutput_NextToken = &sListResourceRequestsOutput_NextToken
+
+var ListResourcesInput = &sListResourcesInput
+var ListResourcesInput_TypeName = &sListResourcesInput_TypeName
+var ListResourcesInput_TypeVersionId = &sListResourcesInput_TypeVersionId
+var ListResourcesInput_RoleArn = &sListResourcesInput_RoleArn
+var ListResourcesInput_NextToken = &sListResourcesInput_NextToken
+var ListResourcesInput_MaxResults = &sListResourcesInput_MaxResults
+var ListResourcesInput_ResourceModel = &sListResourcesInput_ResourceModel
+
+var ListResourcesOutput = &sListResourcesOutput
+var ListResourcesOutput_TypeName = &sListResourcesOutput_TypeName
+var ListResourcesOutput_ResourceDescriptions = &sListResourcesOutput_ResourceDescriptions
+var ListResourcesOutput_NextToken = &sListResourcesOutput_NextToken
+
+var UpdateResourceInput = &sUpdateResourceInput
+var UpdateResourceInput_TypeName = &sUpdateResourceInput_TypeName
+var UpdateResourceInput_TypeVersionId = &sUpdateResourceInput_TypeVersionId
+var UpdateResourceInput_RoleArn = &sUpdateResourceInput_RoleArn
+var UpdateResourceInput_ClientToken = &sUpdateResourceInput_ClientToken
+var UpdateResourceInput_Identifier = &sUpdateResourceInput_Identifier
+var UpdateResourceInput_PatchDocument = &sUpdateResourceInput_PatchDocument
+
+var UpdateResourceOutput = &sUpdateResourceOutput
+var UpdateResourceOutput_ProgressEvent = &sUpdateResourceOutput_ProgressEvent
+
+var CloudApiService = &smithy.ServiceSchema{Schema: &s_CloudApiService, Version: "2021-09-30"}

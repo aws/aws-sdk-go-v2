@@ -4,2067 +4,1437 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteScalingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeleteScalingPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteScheduledAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeleteScheduledAction",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterScalableTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeregisterScalableTarget",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeScalableTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalableTargets",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeScalingActivities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalingActivities",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeScalingPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalingPolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeScheduledActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScheduledActions",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPredictiveScalingForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "GetPredictiveScalingForecast",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutScalingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PutScalingPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutScheduledAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PutScheduledAction",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterScalableTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "RegisterScalableTarget",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AnyScaleFrontendService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "AnyScaleFrontendService",
-}, smithy.ShapeTypeService, 0)
-
-var AnyScaleFrontendService = smithy.NewServiceSchema(_AnyScaleFrontendService, "2016-02-06")
-
-var AdjustmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "AdjustmentType",
-}, smithy.ShapeTypeEnum, 3)
-var AdjustmentType_ChangeInCapacity *smithy.Schema
-
-var AdjustmentType_PercentChangeInCapacity *smithy.Schema
-
-var AdjustmentType_ExactCapacity *smithy.Schema
-
-var Alarm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "Alarm",
-}, smithy.ShapeTypeStructure, 2)
-var Alarm_AlarmName *smithy.Schema
-
-var Alarm_AlarmARN *smithy.Schema
-
-var _Alarms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "Alarms",
-}, smithy.ShapeTypeList, 1)
-var _Alarms_member *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var CapacityForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "CapacityForecast",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityForecast_Timestamps *smithy.Schema
-
-var CapacityForecast_Values *smithy.Schema
-
-var ConcurrentUpdateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ConcurrentUpdateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "ConcurrentUpdateException",
-		StatusCode: 500})
-var ConcurrentUpdateException_Message *smithy.Schema
-
-var _Cooldown = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "Cooldown",
-}, smithy.ShapeTypeInteger, 0)
-
-var CustomizedMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "CustomizedMetricSpecification",
-}, smithy.ShapeTypeStructure, 6)
-var CustomizedMetricSpecification_MetricName *smithy.Schema
-
-var CustomizedMetricSpecification_Namespace *smithy.Schema
-
-var CustomizedMetricSpecification_Dimensions *smithy.Schema
-
-var CustomizedMetricSpecification_Statistic *smithy.Schema
-
-var CustomizedMetricSpecification_Unit *smithy.Schema
-
-var CustomizedMetricSpecification_Metrics *smithy.Schema
-
-var _DisableScaleIn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DisableScaleIn",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ExceptionMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Expression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "Expression",
-}, smithy.ShapeTypeString, 0)
-
-var FailedResourceAccessException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "FailedResourceAccessException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "FailedResourceAccessException",
-		StatusCode: 400})
-var FailedResourceAccessException_Message *smithy.Schema
-
-var _Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "Id",
-}, smithy.ShapeTypeString, 0)
-
-var _IncludeNotScaledActivities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "IncludeNotScaledActivities",
-}, smithy.ShapeTypeBoolean, 0)
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceException",
-		StatusCode: 500})
-var InternalServiceException_Message *smithy.Schema
-
-var InvalidNextTokenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "InvalidNextTokenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidNextTokenException",
-		StatusCode: 400})
-var InvalidNextTokenException_Message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
-		StatusCode: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var LoadForecast = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "LoadForecast",
-}, smithy.ShapeTypeStructure, 3)
-var LoadForecast_Timestamps *smithy.Schema
-
-var LoadForecast_Values *smithy.Schema
-
-var LoadForecast_MetricSpecification *smithy.Schema
-
-var _LoadForecasts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "LoadForecasts",
-}, smithy.ShapeTypeList, 1)
-var _LoadForecasts_member *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetricAggregationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricAggregationType",
-}, smithy.ShapeTypeEnum, 3)
-var MetricAggregationType_Average *smithy.Schema
-
-var MetricAggregationType_Minimum *smithy.Schema
-
-var MetricAggregationType_Maximum *smithy.Schema
-
-var MetricDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricDimension",
-}, smithy.ShapeTypeStructure, 2)
-var MetricDimension_Name *smithy.Schema
-
-var MetricDimension_Value *smithy.Schema
-
-var _MetricDimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricDimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricDimensions",
-}, smithy.ShapeTypeList, 1)
-var _MetricDimensions_member *smithy.Schema
-
-var _MetricDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricScale = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricScale",
-}, smithy.ShapeTypeDouble, 0)
-
-var MetricStatistic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricStatistic",
-}, smithy.ShapeTypeEnum, 5)
-var MetricStatistic_Average *smithy.Schema
-
-var MetricStatistic_Minimum *smithy.Schema
-
-var MetricStatistic_Maximum *smithy.Schema
-
-var MetricStatistic_SampleCount *smithy.Schema
-
-var MetricStatistic_Sum *smithy.Schema
-
-var MetricType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricType",
-}, smithy.ShapeTypeEnum, 31)
-var MetricType_DynamoDBReadCapacityUtilization *smithy.Schema
-
-var MetricType_DynamoDBWriteCapacityUtilization *smithy.Schema
-
-var MetricType_ALBRequestCountPerTarget *smithy.Schema
-
-var MetricType_RDSReaderAverageCPUUtilization *smithy.Schema
-
-var MetricType_RDSReaderAverageDatabaseConnections *smithy.Schema
-
-var MetricType_EC2SpotFleetRequestAverageCPUUtilization *smithy.Schema
-
-var MetricType_EC2SpotFleetRequestAverageNetworkIn *smithy.Schema
-
-var MetricType_EC2SpotFleetRequestAverageNetworkOut *smithy.Schema
-
-var MetricType_SageMakerVariantInvocationsPerInstance *smithy.Schema
-
-var MetricType_ECSServiceAverageCPUUtilization *smithy.Schema
-
-var MetricType_ECSServiceAverageMemoryUtilization *smithy.Schema
-
-var MetricType_AppStreamAverageCapacityUtilization *smithy.Schema
-
-var MetricType_ComprehendInferenceUtilization *smithy.Schema
-
-var MetricType_LambdaProvisionedConcurrencyUtilization *smithy.Schema
-
-var MetricType_CassandraReadCapacityUtilization *smithy.Schema
-
-var MetricType_CassandraWriteCapacityUtilization *smithy.Schema
-
-var MetricType_KafkaBrokerStorageUtilization *smithy.Schema
-
-var MetricType_ElastiCacheEngineCPUUtilization *smithy.Schema
-
-var MetricType_ElastiCacheDatabaseMemoryUsagePercentage *smithy.Schema
-
-var MetricType_ElastiCachePrimaryEngineCPUUtilization *smithy.Schema
-
-var MetricType_ElastiCacheReplicaEngineCPUUtilization *smithy.Schema
-
-var MetricType_ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage *smithy.Schema
-
-var MetricType_NeptuneReaderAverageCPUUtilization *smithy.Schema
-
-var MetricType_SageMakerVariantProvisionedConcurrencyUtilization *smithy.Schema
-
-var MetricType_ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage *smithy.Schema
-
-var MetricType_SageMakerInferenceComponentInvocationsPerCopy *smithy.Schema
-
-var MetricType_WorkSpacesAverageUserSessionsCapacityUtilization *smithy.Schema
-
-var MetricType_SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution *smithy.Schema
-
-var MetricType_SageMakerVariantConcurrentRequestsPerModelHighResolution *smithy.Schema
-
-var MetricType_ECSServiceAverageCPUUtilizationHighResolution *smithy.Schema
-
-var MetricType_ECSServiceAverageMemoryUtilizationHighResolution *smithy.Schema
-
-var _MetricUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MetricUnit",
-}, smithy.ShapeTypeString, 0)
-
-var _MinAdjustmentMagnitude = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "MinAdjustmentMagnitude",
-}, smithy.ShapeTypeInteger, 0)
-
-var NotScaledReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "NotScaledReason",
-}, smithy.ShapeTypeStructure, 4)
-var NotScaledReason_Code *smithy.Schema
-
-var NotScaledReason_MaxCapacity *smithy.Schema
-
-var NotScaledReason_MinCapacity *smithy.Schema
-
-var NotScaledReason_CurrentCapacity *smithy.Schema
-
-var _NotScaledReasons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "NotScaledReasons",
-}, smithy.ShapeTypeList, 1)
-var _NotScaledReasons_member *smithy.Schema
-
-var ObjectNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ObjectNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ObjectNotFoundException",
-		StatusCode: 400})
-var ObjectNotFoundException_Message *smithy.Schema
-
-var _PolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PolicyType",
-}, smithy.ShapeTypeEnum, 3)
-var PolicyType_StepScaling *smithy.Schema
-
-var PolicyType_TargetTrackingScaling *smithy.Schema
-
-var PolicyType_PredictiveScaling *smithy.Schema
-
-var PredefinedMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredefinedMetricSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var PredefinedMetricSpecification_PredefinedMetricType *smithy.Schema
-
-var PredefinedMetricSpecification_ResourceLabel *smithy.Schema
-
-var PredictiveScalingCustomizedMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingCustomizedMetricSpecification",
-}, smithy.ShapeTypeStructure, 1)
-var PredictiveScalingCustomizedMetricSpecification_MetricDataQueries *smithy.Schema
-
-var _PredictiveScalingForecastTimestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingForecastTimestamps",
-}, smithy.ShapeTypeList, 1)
-var _PredictiveScalingForecastTimestamps_member *smithy.Schema
-
-var _PredictiveScalingForecastValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingForecastValues",
-}, smithy.ShapeTypeList, 1)
-var _PredictiveScalingForecastValues_member *smithy.Schema
-
-var PredictiveScalingMaxCapacityBreachBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMaxCapacityBreachBehavior",
-}, smithy.ShapeTypeEnum, 2)
-var PredictiveScalingMaxCapacityBreachBehavior_HonorMaxCapacity *smithy.Schema
-
-var PredictiveScalingMaxCapacityBreachBehavior_IncreaseMaxCapacity *smithy.Schema
-
-var _PredictiveScalingMaxCapacityBuffer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMaxCapacityBuffer",
-}, smithy.ShapeTypeInteger, 0)
-
-var PredictiveScalingMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetric",
-}, smithy.ShapeTypeStructure, 3)
-var PredictiveScalingMetric_Dimensions *smithy.Schema
-
-var PredictiveScalingMetric_MetricName *smithy.Schema
-
-var PredictiveScalingMetric_Namespace *smithy.Schema
-
-var _PredictiveScalingMetricDataQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricDataQueries",
-}, smithy.ShapeTypeList, 1)
-var _PredictiveScalingMetricDataQueries_member *smithy.Schema
-
-var PredictiveScalingMetricDataQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricDataQuery",
-}, smithy.ShapeTypeStructure, 5)
-var PredictiveScalingMetricDataQuery_Id *smithy.Schema
-
-var PredictiveScalingMetricDataQuery_Expression *smithy.Schema
-
-var PredictiveScalingMetricDataQuery_MetricStat *smithy.Schema
-
-var PredictiveScalingMetricDataQuery_Label *smithy.Schema
-
-var PredictiveScalingMetricDataQuery_ReturnData *smithy.Schema
-
-var PredictiveScalingMetricDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricDimension",
-}, smithy.ShapeTypeStructure, 2)
-var PredictiveScalingMetricDimension_Name *smithy.Schema
-
-var PredictiveScalingMetricDimension_Value *smithy.Schema
-
-var _PredictiveScalingMetricDimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricDimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _PredictiveScalingMetricDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricDimensions",
-}, smithy.ShapeTypeList, 1)
-var _PredictiveScalingMetricDimensions_member *smithy.Schema
-
-var _PredictiveScalingMetricDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _PredictiveScalingMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _PredictiveScalingMetricNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var PredictiveScalingMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricSpecification",
-}, smithy.ShapeTypeStructure, 7)
-var PredictiveScalingMetricSpecification_TargetValue *smithy.Schema
-
-var PredictiveScalingMetricSpecification_PredefinedMetricPairSpecification *smithy.Schema
-
-var PredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification *smithy.Schema
-
-var PredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification *smithy.Schema
-
-var PredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification *smithy.Schema
-
-var PredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification *smithy.Schema
-
-var PredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification *smithy.Schema
-
-var _PredictiveScalingMetricSpecifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricSpecifications",
-}, smithy.ShapeTypeList, 1)
-var _PredictiveScalingMetricSpecifications_member *smithy.Schema
-
-var PredictiveScalingMetricStat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricStat",
-}, smithy.ShapeTypeStructure, 3)
-var PredictiveScalingMetricStat_Metric *smithy.Schema
-
-var PredictiveScalingMetricStat_Stat *smithy.Schema
-
-var PredictiveScalingMetricStat_Unit *smithy.Schema
-
-var _PredictiveScalingMetricType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricType",
-}, smithy.ShapeTypeString, 0)
-
-var _PredictiveScalingMetricUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMetricUnit",
-}, smithy.ShapeTypeString, 0)
-
-var PredictiveScalingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingMode",
-}, smithy.ShapeTypeEnum, 2)
-var PredictiveScalingMode_ForecastOnly *smithy.Schema
-
-var PredictiveScalingMode_ForecastAndScale *smithy.Schema
-
-var PredictiveScalingPolicyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingPolicyConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var PredictiveScalingPolicyConfiguration_MetricSpecifications *smithy.Schema
-
-var PredictiveScalingPolicyConfiguration_Mode *smithy.Schema
-
-var PredictiveScalingPolicyConfiguration_SchedulingBufferTime *smithy.Schema
-
-var PredictiveScalingPolicyConfiguration_MaxCapacityBreachBehavior *smithy.Schema
-
-var PredictiveScalingPolicyConfiguration_MaxCapacityBuffer *smithy.Schema
-
-var PredictiveScalingPredefinedLoadMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingPredefinedLoadMetricSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var PredictiveScalingPredefinedLoadMetricSpecification_PredefinedMetricType *smithy.Schema
-
-var PredictiveScalingPredefinedLoadMetricSpecification_ResourceLabel *smithy.Schema
-
-var PredictiveScalingPredefinedMetricPairSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingPredefinedMetricPairSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var PredictiveScalingPredefinedMetricPairSpecification_PredefinedMetricType *smithy.Schema
-
-var PredictiveScalingPredefinedMetricPairSpecification_ResourceLabel *smithy.Schema
-
-var PredictiveScalingPredefinedScalingMetricSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingPredefinedScalingMetricSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var PredictiveScalingPredefinedScalingMetricSpecification_PredefinedMetricType *smithy.Schema
-
-var PredictiveScalingPredefinedScalingMetricSpecification_ResourceLabel *smithy.Schema
-
-var _PredictiveScalingSchedulingBufferTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PredictiveScalingSchedulingBufferTime",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ResourceCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdMaxLen1600 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ResourceIdMaxLen1600",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdsMaxLen1600 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ResourceIdsMaxLen1600",
-}, smithy.ShapeTypeList, 1)
-var _ResourceIdsMaxLen1600_member *smithy.Schema
-
-var _ResourceLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ResourceLabel",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceName *smithy.Schema
-
-var _ReturnData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ReturnData",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ScalableDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalableDimension",
-}, smithy.ShapeTypeEnum, 24)
-var ScalableDimension_ECSServiceDesiredCount *smithy.Schema
-
-var ScalableDimension_EC2SpotFleetRequestTargetCapacity *smithy.Schema
-
-var ScalableDimension_EMRInstanceGroupInstanceCount *smithy.Schema
-
-var ScalableDimension_AppstreamFleetDesiredCapacity *smithy.Schema
-
-var ScalableDimension_DynamoDBTableReadCapacityUnits *smithy.Schema
-
-var ScalableDimension_DynamoDBTableWriteCapacityUnits *smithy.Schema
-
-var ScalableDimension_DynamoDBIndexReadCapacityUnits *smithy.Schema
-
-var ScalableDimension_DynamoDBIndexWriteCapacityUnits *smithy.Schema
-
-var ScalableDimension_RDSClusterReadReplicaCount *smithy.Schema
-
-var ScalableDimension_SageMakerVariantDesiredInstanceCount *smithy.Schema
-
-var ScalableDimension_CustomResourceScalableDimension *smithy.Schema
-
-var ScalableDimension_ComprehendDocClassifierEndpointInferenceUnits *smithy.Schema
-
-var ScalableDimension_ComprehendEntityRecognizerEndpointInferenceUnits *smithy.Schema
-
-var ScalableDimension_LambdaFunctionProvisionedConcurrency *smithy.Schema
-
-var ScalableDimension_CassandraTableReadCapacityUnits *smithy.Schema
-
-var ScalableDimension_CassandraTableWriteCapacityUnits *smithy.Schema
-
-var ScalableDimension_KafkaBrokerStorageVolumeSize *smithy.Schema
-
-var ScalableDimension_ElastiCacheCacheClusterNodes *smithy.Schema
-
-var ScalableDimension_ElastiCacheReplicationGroupNodeGroups *smithy.Schema
-
-var ScalableDimension_ElastiCacheReplicationGroupReplicas *smithy.Schema
-
-var ScalableDimension_NeptuneClusterReadReplicaCount *smithy.Schema
-
-var ScalableDimension_SageMakerVariantDesiredProvisionedConcurrency *smithy.Schema
-
-var ScalableDimension_SageMakerInferenceComponentDesiredCopyCount *smithy.Schema
-
-var ScalableDimension_WorkSpacesWorkSpacesPoolDesiredUserSessions *smithy.Schema
-
-var ScalableTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalableTarget",
-}, smithy.ShapeTypeStructure, 10)
-var ScalableTarget_ServiceNamespace *smithy.Schema
-
-var ScalableTarget_ResourceId *smithy.Schema
-
-var ScalableTarget_ScalableDimension *smithy.Schema
-
-var ScalableTarget_MinCapacity *smithy.Schema
-
-var ScalableTarget_MaxCapacity *smithy.Schema
-
-var ScalableTarget_PredictedCapacity *smithy.Schema
-
-var ScalableTarget_RoleARN *smithy.Schema
-
-var ScalableTarget_CreationTime *smithy.Schema
-
-var ScalableTarget_SuspendedState *smithy.Schema
-
-var ScalableTarget_ScalableTargetARN *smithy.Schema
-
-var ScalableTargetAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalableTargetAction",
-}, smithy.ShapeTypeStructure, 2)
-var ScalableTargetAction_MinCapacity *smithy.Schema
-
-var ScalableTargetAction_MaxCapacity *smithy.Schema
-
-var _ScalableTargets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalableTargets",
-}, smithy.ShapeTypeList, 1)
-var _ScalableTargets_member *smithy.Schema
-
-var _ScalingActivities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalingActivities",
-}, smithy.ShapeTypeList, 1)
-var _ScalingActivities_member *smithy.Schema
-
-var ScalingActivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalingActivity",
-}, smithy.ShapeTypeStructure, 12)
-var ScalingActivity_ActivityId *smithy.Schema
-
-var ScalingActivity_ServiceNamespace *smithy.Schema
-
-var ScalingActivity_ResourceId *smithy.Schema
-
-var ScalingActivity_ScalableDimension *smithy.Schema
-
-var ScalingActivity_Description *smithy.Schema
-
-var ScalingActivity_Cause *smithy.Schema
-
-var ScalingActivity_StartTime *smithy.Schema
-
-var ScalingActivity_EndTime *smithy.Schema
-
-var ScalingActivity_StatusCode *smithy.Schema
-
-var ScalingActivity_StatusMessage *smithy.Schema
-
-var ScalingActivity_Details *smithy.Schema
-
-var ScalingActivity_NotScaledReasons *smithy.Schema
-
-var ScalingActivityStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalingActivityStatusCode",
-}, smithy.ShapeTypeEnum, 6)
-var ScalingActivityStatusCode_Pending *smithy.Schema
-
-var ScalingActivityStatusCode_InProgress *smithy.Schema
-
-var ScalingActivityStatusCode_Successful *smithy.Schema
-
-var ScalingActivityStatusCode_Overridden *smithy.Schema
-
-var ScalingActivityStatusCode_Unfulfilled *smithy.Schema
-
-var ScalingActivityStatusCode_Failed *smithy.Schema
-
-var _ScalingAdjustment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalingAdjustment",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ScalingPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalingPolicies",
-}, smithy.ShapeTypeList, 1)
-var _ScalingPolicies_member *smithy.Schema
-
-var ScalingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalingPolicy",
-}, smithy.ShapeTypeStructure, 11)
-var ScalingPolicy_PolicyARN *smithy.Schema
-
-var ScalingPolicy_PolicyName *smithy.Schema
-
-var ScalingPolicy_ServiceNamespace *smithy.Schema
-
-var ScalingPolicy_ResourceId *smithy.Schema
-
-var ScalingPolicy_ScalableDimension *smithy.Schema
-
-var ScalingPolicy_PolicyType *smithy.Schema
-
-var ScalingPolicy_StepScalingPolicyConfiguration *smithy.Schema
-
-var ScalingPolicy_TargetTrackingScalingPolicyConfiguration *smithy.Schema
-
-var ScalingPolicy_PredictiveScalingPolicyConfiguration *smithy.Schema
-
-var ScalingPolicy_Alarms *smithy.Schema
-
-var ScalingPolicy_CreationTime *smithy.Schema
-
-var _ScalingSuspended = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScalingSuspended",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ScheduledAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScheduledAction",
-}, smithy.ShapeTypeStructure, 11)
-var ScheduledAction_ScheduledActionName *smithy.Schema
-
-var ScheduledAction_ScheduledActionARN *smithy.Schema
-
-var ScheduledAction_ServiceNamespace *smithy.Schema
-
-var ScheduledAction_Schedule *smithy.Schema
-
-var ScheduledAction_Timezone *smithy.Schema
-
-var ScheduledAction_ResourceId *smithy.Schema
-
-var ScheduledAction_ScalableDimension *smithy.Schema
-
-var ScheduledAction_StartTime *smithy.Schema
-
-var ScheduledAction_EndTime *smithy.Schema
-
-var ScheduledAction_ScalableTargetAction *smithy.Schema
-
-var ScheduledAction_CreationTime *smithy.Schema
-
-var _ScheduledActionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScheduledActionName",
-}, smithy.ShapeTypeString, 0)
-
-var _ScheduledActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ScheduledActions",
-}, smithy.ShapeTypeList, 1)
-var _ScheduledActions_member *smithy.Schema
-
-var ServiceNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ServiceNamespace",
-}, smithy.ShapeTypeEnum, 15)
-var ServiceNamespace_ECS *smithy.Schema
-
-var ServiceNamespace_EMR *smithy.Schema
-
-var ServiceNamespace_EC2 *smithy.Schema
-
-var ServiceNamespace_APPSTREAM *smithy.Schema
-
-var ServiceNamespace_DYNAMODB *smithy.Schema
-
-var ServiceNamespace_RDS *smithy.Schema
-
-var ServiceNamespace_SAGEMAKER *smithy.Schema
-
-var ServiceNamespace_CUSTOM_RESOURCE *smithy.Schema
-
-var ServiceNamespace_COMPREHEND *smithy.Schema
-
-var ServiceNamespace_LAMBDA *smithy.Schema
-
-var ServiceNamespace_CASSANDRA *smithy.Schema
-
-var ServiceNamespace_KAFKA *smithy.Schema
-
-var ServiceNamespace_ELASTICACHE *smithy.Schema
-
-var ServiceNamespace_NEPTUNE *smithy.Schema
-
-var ServiceNamespace_WORKSPACES *smithy.Schema
-
-var StepAdjustment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "StepAdjustment",
-}, smithy.ShapeTypeStructure, 3)
-var StepAdjustment_MetricIntervalLowerBound *smithy.Schema
-
-var StepAdjustment_MetricIntervalUpperBound *smithy.Schema
-
-var StepAdjustment_ScalingAdjustment *smithy.Schema
-
-var _StepAdjustments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "StepAdjustments",
-}, smithy.ShapeTypeList, 1)
-var _StepAdjustments_member *smithy.Schema
-
-var StepScalingPolicyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "StepScalingPolicyConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var StepScalingPolicyConfiguration_AdjustmentType *smithy.Schema
-
-var StepScalingPolicyConfiguration_StepAdjustments *smithy.Schema
-
-var StepScalingPolicyConfiguration_MinAdjustmentMagnitude *smithy.Schema
-
-var StepScalingPolicyConfiguration_Cooldown *smithy.Schema
-
-var StepScalingPolicyConfiguration_MetricAggregationType *smithy.Schema
-
-var SuspendedState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "SuspendedState",
-}, smithy.ShapeTypeStructure, 3)
-var SuspendedState_DynamicScalingInSuspended *smithy.Schema
-
-var SuspendedState_DynamicScalingOutSuspended *smithy.Schema
-
-var SuspendedState_ScheduledScalingSuspended *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetTrackingMetric = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetric",
-}, smithy.ShapeTypeStructure, 3)
-var TargetTrackingMetric_Dimensions *smithy.Schema
-
-var TargetTrackingMetric_MetricName *smithy.Schema
-
-var TargetTrackingMetric_Namespace *smithy.Schema
-
-var _TargetTrackingMetricDataQueries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricDataQueries",
-}, smithy.ShapeTypeList, 1)
-var _TargetTrackingMetricDataQueries_member *smithy.Schema
-
-var TargetTrackingMetricDataQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricDataQuery",
-}, smithy.ShapeTypeStructure, 5)
-var TargetTrackingMetricDataQuery_Expression *smithy.Schema
-
-var TargetTrackingMetricDataQuery_Id *smithy.Schema
-
-var TargetTrackingMetricDataQuery_Label *smithy.Schema
-
-var TargetTrackingMetricDataQuery_MetricStat *smithy.Schema
-
-var TargetTrackingMetricDataQuery_ReturnData *smithy.Schema
-
-var TargetTrackingMetricDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricDimension",
-}, smithy.ShapeTypeStructure, 2)
-var TargetTrackingMetricDimension_Name *smithy.Schema
-
-var TargetTrackingMetricDimension_Value *smithy.Schema
-
-var _TargetTrackingMetricDimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricDimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetTrackingMetricDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricDimensions",
-}, smithy.ShapeTypeList, 1)
-var _TargetTrackingMetricDimensions_member *smithy.Schema
-
-var _TargetTrackingMetricDimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricDimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetTrackingMetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetTrackingMetricNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var TargetTrackingMetricStat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricStat",
-}, smithy.ShapeTypeStructure, 3)
-var TargetTrackingMetricStat_Metric *smithy.Schema
-
-var TargetTrackingMetricStat_Stat *smithy.Schema
-
-var TargetTrackingMetricStat_Unit *smithy.Schema
-
-var _TargetTrackingMetricUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingMetricUnit",
-}, smithy.ShapeTypeString, 0)
-
-var TargetTrackingScalingPolicyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TargetTrackingScalingPolicyConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var TargetTrackingScalingPolicyConfiguration_TargetValue *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_PredefinedMetricSpecification *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_CustomizedMetricSpecification *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_ScaleOutCooldown *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_ScaleInCooldown *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_DisableScaleIn *smithy.Schema
-
-var _TimestampType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TimestampType",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var TooManyTagsException_ResourceName *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-		StatusCode: 400})
-var ValidationException_Message *smithy.Schema
-
-var _XmlString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "XmlString",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteScalingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeleteScalingPolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteScalingPolicyRequest_PolicyName *smithy.Schema
-
-var DeleteScalingPolicyRequest_ServiceNamespace *smithy.Schema
-
-var DeleteScalingPolicyRequest_ResourceId *smithy.Schema
-
-var DeleteScalingPolicyRequest_ScalableDimension *smithy.Schema
-
-var DeleteScalingPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeleteScalingPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteScheduledActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeleteScheduledActionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteScheduledActionRequest_ServiceNamespace *smithy.Schema
-
-var DeleteScheduledActionRequest_ScheduledActionName *smithy.Schema
-
-var DeleteScheduledActionRequest_ResourceId *smithy.Schema
-
-var DeleteScheduledActionRequest_ScalableDimension *smithy.Schema
-
-var DeleteScheduledActionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeleteScheduledActionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterScalableTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeregisterScalableTargetRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeregisterScalableTargetRequest_ServiceNamespace *smithy.Schema
-
-var DeregisterScalableTargetRequest_ResourceId *smithy.Schema
-
-var DeregisterScalableTargetRequest_ScalableDimension *smithy.Schema
-
-var DeregisterScalableTargetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DeregisterScalableTargetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeScalableTargetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalableTargetsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeScalableTargetsRequest_ServiceNamespace *smithy.Schema
-
-var DescribeScalableTargetsRequest_ResourceIds *smithy.Schema
-
-var DescribeScalableTargetsRequest_ScalableDimension *smithy.Schema
-
-var DescribeScalableTargetsRequest_MaxResults *smithy.Schema
-
-var DescribeScalableTargetsRequest_NextToken *smithy.Schema
-
-var DescribeScalableTargetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalableTargetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeScalableTargetsResponse_ScalableTargets *smithy.Schema
-
-var DescribeScalableTargetsResponse_NextToken *smithy.Schema
-
-var DescribeScalingActivitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalingActivitiesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeScalingActivitiesRequest_ServiceNamespace *smithy.Schema
-
-var DescribeScalingActivitiesRequest_ResourceId *smithy.Schema
-
-var DescribeScalingActivitiesRequest_ScalableDimension *smithy.Schema
-
-var DescribeScalingActivitiesRequest_MaxResults *smithy.Schema
-
-var DescribeScalingActivitiesRequest_NextToken *smithy.Schema
-
-var DescribeScalingActivitiesRequest_IncludeNotScaledActivities *smithy.Schema
-
-var DescribeScalingActivitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalingActivitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeScalingActivitiesResponse_ScalingActivities *smithy.Schema
-
-var DescribeScalingActivitiesResponse_NextToken *smithy.Schema
-
-var DescribeScalingPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalingPoliciesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeScalingPoliciesRequest_PolicyNames *smithy.Schema
-
-var DescribeScalingPoliciesRequest_ServiceNamespace *smithy.Schema
-
-var DescribeScalingPoliciesRequest_ResourceId *smithy.Schema
-
-var DescribeScalingPoliciesRequest_ScalableDimension *smithy.Schema
-
-var DescribeScalingPoliciesRequest_MaxResults *smithy.Schema
-
-var DescribeScalingPoliciesRequest_NextToken *smithy.Schema
-
-var DescribeScalingPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScalingPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeScalingPoliciesResponse_ScalingPolicies *smithy.Schema
-
-var DescribeScalingPoliciesResponse_NextToken *smithy.Schema
-
-var DescribeScheduledActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScheduledActionsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeScheduledActionsRequest_ScheduledActionNames *smithy.Schema
-
-var DescribeScheduledActionsRequest_ServiceNamespace *smithy.Schema
-
-var DescribeScheduledActionsRequest_ResourceId *smithy.Schema
-
-var DescribeScheduledActionsRequest_ScalableDimension *smithy.Schema
-
-var DescribeScheduledActionsRequest_MaxResults *smithy.Schema
-
-var DescribeScheduledActionsRequest_NextToken *smithy.Schema
-
-var DescribeScheduledActionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "DescribeScheduledActionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeScheduledActionsResponse_ScheduledActions *smithy.Schema
-
-var DescribeScheduledActionsResponse_NextToken *smithy.Schema
-
-var GetPredictiveScalingForecastRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "GetPredictiveScalingForecastRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetPredictiveScalingForecastRequest_ServiceNamespace *smithy.Schema
-
-var GetPredictiveScalingForecastRequest_ResourceId *smithy.Schema
-
-var GetPredictiveScalingForecastRequest_ScalableDimension *smithy.Schema
-
-var GetPredictiveScalingForecastRequest_PolicyName *smithy.Schema
-
-var GetPredictiveScalingForecastRequest_StartTime *smithy.Schema
-
-var GetPredictiveScalingForecastRequest_EndTime *smithy.Schema
-
-var GetPredictiveScalingForecastResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "GetPredictiveScalingForecastResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetPredictiveScalingForecastResponse_LoadForecast *smithy.Schema
-
-var GetPredictiveScalingForecastResponse_CapacityForecast *smithy.Schema
-
-var GetPredictiveScalingForecastResponse_UpdateTime *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutScalingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PutScalingPolicyRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PutScalingPolicyRequest_PolicyName *smithy.Schema
-
-var PutScalingPolicyRequest_ServiceNamespace *smithy.Schema
-
-var PutScalingPolicyRequest_ResourceId *smithy.Schema
-
-var PutScalingPolicyRequest_ScalableDimension *smithy.Schema
-
-var PutScalingPolicyRequest_PolicyType *smithy.Schema
-
-var PutScalingPolicyRequest_StepScalingPolicyConfiguration *smithy.Schema
-
-var PutScalingPolicyRequest_TargetTrackingScalingPolicyConfiguration *smithy.Schema
-
-var PutScalingPolicyRequest_PredictiveScalingPolicyConfiguration *smithy.Schema
-
-var PutScalingPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PutScalingPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutScalingPolicyResponse_PolicyARN *smithy.Schema
-
-var PutScalingPolicyResponse_Alarms *smithy.Schema
-
-var PutScheduledActionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PutScheduledActionRequest",
-}, smithy.ShapeTypeStructure, 9)
-var PutScheduledActionRequest_ServiceNamespace *smithy.Schema
-
-var PutScheduledActionRequest_Schedule *smithy.Schema
-
-var PutScheduledActionRequest_Timezone *smithy.Schema
-
-var PutScheduledActionRequest_ScheduledActionName *smithy.Schema
-
-var PutScheduledActionRequest_ResourceId *smithy.Schema
-
-var PutScheduledActionRequest_ScalableDimension *smithy.Schema
-
-var PutScheduledActionRequest_StartTime *smithy.Schema
-
-var PutScheduledActionRequest_EndTime *smithy.Schema
-
-var PutScheduledActionRequest_ScalableTargetAction *smithy.Schema
-
-var PutScheduledActionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "PutScheduledActionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RegisterScalableTargetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "RegisterScalableTargetRequest",
-}, smithy.ShapeTypeStructure, 8)
-var RegisterScalableTargetRequest_ServiceNamespace *smithy.Schema
-
-var RegisterScalableTargetRequest_ResourceId *smithy.Schema
-
-var RegisterScalableTargetRequest_ScalableDimension *smithy.Schema
-
-var RegisterScalableTargetRequest_MinCapacity *smithy.Schema
-
-var RegisterScalableTargetRequest_MaxCapacity *smithy.Schema
-
-var RegisterScalableTargetRequest_RoleARN *smithy.Schema
-
-var RegisterScalableTargetRequest_SuspendedState *smithy.Schema
-
-var RegisterScalableTargetRequest_Tags *smithy.Schema
-
-var RegisterScalableTargetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "RegisterScalableTargetResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterScalableTargetResponse_ScalableTargetARN *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.applicationautoscaling",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AdjustmentType_ChangeInCapacity = AdjustmentType.AddMember("ChangeInCapacity", smithyprelude.Unit)
-
-	AdjustmentType_PercentChangeInCapacity = AdjustmentType.AddMember("PercentChangeInCapacity", smithyprelude.Unit)
-
-	AdjustmentType_ExactCapacity = AdjustmentType.AddMember("ExactCapacity", smithyprelude.Unit)
-
-	Alarm_AlarmName = Alarm.AddMember("AlarmName", _ResourceId)
-
-	Alarm_AlarmARN = Alarm.AddMember("AlarmARN", _ResourceId)
-
-	_Alarms_member = _Alarms.AddMember("member", Alarm)
-
-	_PredictiveScalingForecastTimestamps_member = _PredictiveScalingForecastTimestamps.AddMember("member", _TimestampType)
-
-	_PredictiveScalingForecastValues_member = _PredictiveScalingForecastValues.AddMember("member", _MetricScale)
-
-	CapacityForecast_Timestamps = CapacityForecast.AddMember("Timestamps", _PredictiveScalingForecastTimestamps)
-
-	CapacityForecast_Values = CapacityForecast.AddMember("Values", _PredictiveScalingForecastValues)
-
-	ConcurrentUpdateException_Message = ConcurrentUpdateException.AddMember("Message", _ErrorMessage)
-
-	MetricDimension_Name = MetricDimension.AddMember("Name", _MetricDimensionName)
-
-	MetricDimension_Value = MetricDimension.AddMember("Value", _MetricDimensionValue)
-
-	_MetricDimensions_member = _MetricDimensions.AddMember("member", MetricDimension)
-
-	MetricStatistic_Average = MetricStatistic.AddMember("Average", smithyprelude.Unit)
-
-	MetricStatistic_Minimum = MetricStatistic.AddMember("Minimum", smithyprelude.Unit)
-
-	MetricStatistic_Maximum = MetricStatistic.AddMember("Maximum", smithyprelude.Unit)
-
-	MetricStatistic_SampleCount = MetricStatistic.AddMember("SampleCount", smithyprelude.Unit)
-
-	MetricStatistic_Sum = MetricStatistic.AddMember("Sum", smithyprelude.Unit)
-
-	TargetTrackingMetricDimension_Name = TargetTrackingMetricDimension.AddMember("Name", _TargetTrackingMetricDimensionName)
-
-	TargetTrackingMetricDimension_Value = TargetTrackingMetricDimension.AddMember("Value", _TargetTrackingMetricDimensionValue)
-
-	_TargetTrackingMetricDimensions_member = _TargetTrackingMetricDimensions.AddMember("member", TargetTrackingMetricDimension)
-
-	TargetTrackingMetric_Dimensions = TargetTrackingMetric.AddMember("Dimensions", _TargetTrackingMetricDimensions)
-
-	TargetTrackingMetric_MetricName = TargetTrackingMetric.AddMember("MetricName", _TargetTrackingMetricName)
-
-	TargetTrackingMetric_Namespace = TargetTrackingMetric.AddMember("Namespace", _TargetTrackingMetricNamespace)
-
-	TargetTrackingMetricStat_Metric = TargetTrackingMetricStat.AddMember("Metric", TargetTrackingMetric)
-
-	TargetTrackingMetricStat_Stat = TargetTrackingMetricStat.AddMember("Stat", _XmlString)
-
-	TargetTrackingMetricStat_Unit = TargetTrackingMetricStat.AddMember("Unit", _TargetTrackingMetricUnit)
-
-	TargetTrackingMetricDataQuery_Expression = TargetTrackingMetricDataQuery.AddMember("Expression", _Expression)
-
-	TargetTrackingMetricDataQuery_Id = TargetTrackingMetricDataQuery.AddMember("Id", _Id)
-
-	TargetTrackingMetricDataQuery_Label = TargetTrackingMetricDataQuery.AddMember("Label", _XmlString)
-
-	TargetTrackingMetricDataQuery_MetricStat = TargetTrackingMetricDataQuery.AddMember("MetricStat", TargetTrackingMetricStat)
-
-	TargetTrackingMetricDataQuery_ReturnData = TargetTrackingMetricDataQuery.AddMember("ReturnData", _ReturnData)
-
-	_TargetTrackingMetricDataQueries_member = _TargetTrackingMetricDataQueries.AddMember("member", TargetTrackingMetricDataQuery)
-
-	CustomizedMetricSpecification_MetricName = CustomizedMetricSpecification.AddMember("MetricName", _MetricName)
-
-	CustomizedMetricSpecification_Namespace = CustomizedMetricSpecification.AddMember("Namespace", _MetricNamespace)
-
-	CustomizedMetricSpecification_Dimensions = CustomizedMetricSpecification.AddMember("Dimensions", _MetricDimensions)
-
-	CustomizedMetricSpecification_Statistic = CustomizedMetricSpecification.AddMember("Statistic", MetricStatistic)
-
-	CustomizedMetricSpecification_Unit = CustomizedMetricSpecification.AddMember("Unit", _MetricUnit)
-
-	CustomizedMetricSpecification_Metrics = CustomizedMetricSpecification.AddMember("Metrics", _TargetTrackingMetricDataQueries)
-
-	FailedResourceAccessException_Message = FailedResourceAccessException.AddMember("Message", _ErrorMessage)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _ErrorMessage)
-
-	InvalidNextTokenException_Message = InvalidNextTokenException.AddMember("Message", _ErrorMessage)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	PredictiveScalingPredefinedMetricPairSpecification_PredefinedMetricType = PredictiveScalingPredefinedMetricPairSpecification.AddMember("PredefinedMetricType", _PredictiveScalingMetricType)
-
-	PredictiveScalingPredefinedMetricPairSpecification_ResourceLabel = PredictiveScalingPredefinedMetricPairSpecification.AddMember("ResourceLabel", _ResourceLabel)
-
-	PredictiveScalingPredefinedScalingMetricSpecification_PredefinedMetricType = PredictiveScalingPredefinedScalingMetricSpecification.AddMember("PredefinedMetricType", _PredictiveScalingMetricType)
-
-	PredictiveScalingPredefinedScalingMetricSpecification_ResourceLabel = PredictiveScalingPredefinedScalingMetricSpecification.AddMember("ResourceLabel", _ResourceLabel)
-
-	PredictiveScalingPredefinedLoadMetricSpecification_PredefinedMetricType = PredictiveScalingPredefinedLoadMetricSpecification.AddMember("PredefinedMetricType", _PredictiveScalingMetricType)
-
-	PredictiveScalingPredefinedLoadMetricSpecification_ResourceLabel = PredictiveScalingPredefinedLoadMetricSpecification.AddMember("ResourceLabel", _ResourceLabel)
-
-	PredictiveScalingMetricDimension_Name = PredictiveScalingMetricDimension.AddMember("Name", _PredictiveScalingMetricDimensionName)
-
-	PredictiveScalingMetricDimension_Value = PredictiveScalingMetricDimension.AddMember("Value", _PredictiveScalingMetricDimensionValue)
-
-	_PredictiveScalingMetricDimensions_member = _PredictiveScalingMetricDimensions.AddMember("member", PredictiveScalingMetricDimension)
-
-	PredictiveScalingMetric_Dimensions = PredictiveScalingMetric.AddMember("Dimensions", _PredictiveScalingMetricDimensions)
-
-	PredictiveScalingMetric_MetricName = PredictiveScalingMetric.AddMember("MetricName", _PredictiveScalingMetricName)
-
-	PredictiveScalingMetric_Namespace = PredictiveScalingMetric.AddMember("Namespace", _PredictiveScalingMetricNamespace)
-
-	PredictiveScalingMetricStat_Metric = PredictiveScalingMetricStat.AddMember("Metric", PredictiveScalingMetric)
-
-	PredictiveScalingMetricStat_Stat = PredictiveScalingMetricStat.AddMember("Stat", _XmlString)
-
-	PredictiveScalingMetricStat_Unit = PredictiveScalingMetricStat.AddMember("Unit", _PredictiveScalingMetricUnit)
-
-	PredictiveScalingMetricDataQuery_Id = PredictiveScalingMetricDataQuery.AddMember("Id", _Id)
-
-	PredictiveScalingMetricDataQuery_Expression = PredictiveScalingMetricDataQuery.AddMember("Expression", _Expression)
-
-	PredictiveScalingMetricDataQuery_MetricStat = PredictiveScalingMetricDataQuery.AddMember("MetricStat", PredictiveScalingMetricStat)
-
-	PredictiveScalingMetricDataQuery_Label = PredictiveScalingMetricDataQuery.AddMember("Label", _XmlString)
-
-	PredictiveScalingMetricDataQuery_ReturnData = PredictiveScalingMetricDataQuery.AddMember("ReturnData", _ReturnData)
-
-	_PredictiveScalingMetricDataQueries_member = _PredictiveScalingMetricDataQueries.AddMember("member", PredictiveScalingMetricDataQuery)
-
-	PredictiveScalingCustomizedMetricSpecification_MetricDataQueries = PredictiveScalingCustomizedMetricSpecification.AddMember("MetricDataQueries", _PredictiveScalingMetricDataQueries)
-
-	PredictiveScalingMetricSpecification_TargetValue = PredictiveScalingMetricSpecification.AddMember("TargetValue", _MetricScale)
-
-	PredictiveScalingMetricSpecification_PredefinedMetricPairSpecification = PredictiveScalingMetricSpecification.AddMember("PredefinedMetricPairSpecification", PredictiveScalingPredefinedMetricPairSpecification)
-
-	PredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification = PredictiveScalingMetricSpecification.AddMember("PredefinedScalingMetricSpecification", PredictiveScalingPredefinedScalingMetricSpecification)
-
-	PredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification = PredictiveScalingMetricSpecification.AddMember("PredefinedLoadMetricSpecification", PredictiveScalingPredefinedLoadMetricSpecification)
-
-	PredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification = PredictiveScalingMetricSpecification.AddMember("CustomizedScalingMetricSpecification", PredictiveScalingCustomizedMetricSpecification)
-
-	PredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification = PredictiveScalingMetricSpecification.AddMember("CustomizedLoadMetricSpecification", PredictiveScalingCustomizedMetricSpecification)
-
-	PredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification = PredictiveScalingMetricSpecification.AddMember("CustomizedCapacityMetricSpecification", PredictiveScalingCustomizedMetricSpecification)
-
-	LoadForecast_Timestamps = LoadForecast.AddMember("Timestamps", _PredictiveScalingForecastTimestamps)
-
-	LoadForecast_Values = LoadForecast.AddMember("Values", _PredictiveScalingForecastValues)
-
-	LoadForecast_MetricSpecification = LoadForecast.AddMember("MetricSpecification", PredictiveScalingMetricSpecification)
-
-	_LoadForecasts_member = _LoadForecasts.AddMember("member", LoadForecast)
-
-	MetricAggregationType_Average = MetricAggregationType.AddMember("Average", smithyprelude.Unit)
-
-	MetricAggregationType_Minimum = MetricAggregationType.AddMember("Minimum", smithyprelude.Unit)
-
-	MetricAggregationType_Maximum = MetricAggregationType.AddMember("Maximum", smithyprelude.Unit)
-
-	MetricType_DynamoDBReadCapacityUtilization = MetricType.AddMember("DynamoDBReadCapacityUtilization", smithyprelude.Unit)
-
-	MetricType_DynamoDBWriteCapacityUtilization = MetricType.AddMember("DynamoDBWriteCapacityUtilization", smithyprelude.Unit)
-
-	MetricType_ALBRequestCountPerTarget = MetricType.AddMember("ALBRequestCountPerTarget", smithyprelude.Unit)
-
-	MetricType_RDSReaderAverageCPUUtilization = MetricType.AddMember("RDSReaderAverageCPUUtilization", smithyprelude.Unit)
-
-	MetricType_RDSReaderAverageDatabaseConnections = MetricType.AddMember("RDSReaderAverageDatabaseConnections", smithyprelude.Unit)
-
-	MetricType_EC2SpotFleetRequestAverageCPUUtilization = MetricType.AddMember("EC2SpotFleetRequestAverageCPUUtilization", smithyprelude.Unit)
-
-	MetricType_EC2SpotFleetRequestAverageNetworkIn = MetricType.AddMember("EC2SpotFleetRequestAverageNetworkIn", smithyprelude.Unit)
-
-	MetricType_EC2SpotFleetRequestAverageNetworkOut = MetricType.AddMember("EC2SpotFleetRequestAverageNetworkOut", smithyprelude.Unit)
-
-	MetricType_SageMakerVariantInvocationsPerInstance = MetricType.AddMember("SageMakerVariantInvocationsPerInstance", smithyprelude.Unit)
-
-	MetricType_ECSServiceAverageCPUUtilization = MetricType.AddMember("ECSServiceAverageCPUUtilization", smithyprelude.Unit)
-
-	MetricType_ECSServiceAverageMemoryUtilization = MetricType.AddMember("ECSServiceAverageMemoryUtilization", smithyprelude.Unit)
-
-	MetricType_AppStreamAverageCapacityUtilization = MetricType.AddMember("AppStreamAverageCapacityUtilization", smithyprelude.Unit)
-
-	MetricType_ComprehendInferenceUtilization = MetricType.AddMember("ComprehendInferenceUtilization", smithyprelude.Unit)
-
-	MetricType_LambdaProvisionedConcurrencyUtilization = MetricType.AddMember("LambdaProvisionedConcurrencyUtilization", smithyprelude.Unit)
-
-	MetricType_CassandraReadCapacityUtilization = MetricType.AddMember("CassandraReadCapacityUtilization", smithyprelude.Unit)
-
-	MetricType_CassandraWriteCapacityUtilization = MetricType.AddMember("CassandraWriteCapacityUtilization", smithyprelude.Unit)
-
-	MetricType_KafkaBrokerStorageUtilization = MetricType.AddMember("KafkaBrokerStorageUtilization", smithyprelude.Unit)
-
-	MetricType_ElastiCacheEngineCPUUtilization = MetricType.AddMember("ElastiCacheEngineCPUUtilization", smithyprelude.Unit)
-
-	MetricType_ElastiCacheDatabaseMemoryUsagePercentage = MetricType.AddMember("ElastiCacheDatabaseMemoryUsagePercentage", smithyprelude.Unit)
-
-	MetricType_ElastiCachePrimaryEngineCPUUtilization = MetricType.AddMember("ElastiCachePrimaryEngineCPUUtilization", smithyprelude.Unit)
-
-	MetricType_ElastiCacheReplicaEngineCPUUtilization = MetricType.AddMember("ElastiCacheReplicaEngineCPUUtilization", smithyprelude.Unit)
-
-	MetricType_ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage = MetricType.AddMember("ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage", smithyprelude.Unit)
-
-	MetricType_NeptuneReaderAverageCPUUtilization = MetricType.AddMember("NeptuneReaderAverageCPUUtilization", smithyprelude.Unit)
-
-	MetricType_SageMakerVariantProvisionedConcurrencyUtilization = MetricType.AddMember("SageMakerVariantProvisionedConcurrencyUtilization", smithyprelude.Unit)
-
-	MetricType_ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage = MetricType.AddMember("ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage", smithyprelude.Unit)
-
-	MetricType_SageMakerInferenceComponentInvocationsPerCopy = MetricType.AddMember("SageMakerInferenceComponentInvocationsPerCopy", smithyprelude.Unit)
-
-	MetricType_WorkSpacesAverageUserSessionsCapacityUtilization = MetricType.AddMember("WorkSpacesAverageUserSessionsCapacityUtilization", smithyprelude.Unit)
-
-	MetricType_SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution = MetricType.AddMember("SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution", smithyprelude.Unit)
-
-	MetricType_SageMakerVariantConcurrentRequestsPerModelHighResolution = MetricType.AddMember("SageMakerVariantConcurrentRequestsPerModelHighResolution", smithyprelude.Unit)
-
-	MetricType_ECSServiceAverageCPUUtilizationHighResolution = MetricType.AddMember("ECSServiceAverageCPUUtilizationHighResolution", smithyprelude.Unit)
-
-	MetricType_ECSServiceAverageMemoryUtilizationHighResolution = MetricType.AddMember("ECSServiceAverageMemoryUtilizationHighResolution", smithyprelude.Unit)
-
-	NotScaledReason_Code = NotScaledReason.AddMember("Code", _XmlString)
-
-	NotScaledReason_MaxCapacity = NotScaledReason.AddMember("MaxCapacity", _ResourceCapacity)
-
-	NotScaledReason_MinCapacity = NotScaledReason.AddMember("MinCapacity", _ResourceCapacity)
-
-	NotScaledReason_CurrentCapacity = NotScaledReason.AddMember("CurrentCapacity", _ResourceCapacity)
-
-	_NotScaledReasons_member = _NotScaledReasons.AddMember("member", NotScaledReason)
-
-	ObjectNotFoundException_Message = ObjectNotFoundException.AddMember("Message", _ErrorMessage)
-
-	PolicyType_StepScaling = PolicyType.AddMember("StepScaling", smithyprelude.Unit)
-
-	PolicyType_TargetTrackingScaling = PolicyType.AddMember("TargetTrackingScaling", smithyprelude.Unit)
-
-	PolicyType_PredictiveScaling = PolicyType.AddMember("PredictiveScaling", smithyprelude.Unit)
-
-	PredefinedMetricSpecification_PredefinedMetricType = PredefinedMetricSpecification.AddMember("PredefinedMetricType", MetricType)
-
-	PredefinedMetricSpecification_ResourceLabel = PredefinedMetricSpecification.AddMember("ResourceLabel", _ResourceLabel)
-
-	PredictiveScalingMaxCapacityBreachBehavior_HonorMaxCapacity = PredictiveScalingMaxCapacityBreachBehavior.AddMember("HonorMaxCapacity", smithyprelude.Unit)
-
-	PredictiveScalingMaxCapacityBreachBehavior_IncreaseMaxCapacity = PredictiveScalingMaxCapacityBreachBehavior.AddMember("IncreaseMaxCapacity", smithyprelude.Unit)
-
-	_PredictiveScalingMetricSpecifications_member = _PredictiveScalingMetricSpecifications.AddMember("member", PredictiveScalingMetricSpecification)
-
-	PredictiveScalingMode_ForecastOnly = PredictiveScalingMode.AddMember("ForecastOnly", smithyprelude.Unit)
-
-	PredictiveScalingMode_ForecastAndScale = PredictiveScalingMode.AddMember("ForecastAndScale", smithyprelude.Unit)
-
-	PredictiveScalingPolicyConfiguration_MetricSpecifications = PredictiveScalingPolicyConfiguration.AddMember("MetricSpecifications", _PredictiveScalingMetricSpecifications)
-
-	PredictiveScalingPolicyConfiguration_Mode = PredictiveScalingPolicyConfiguration.AddMember("Mode", PredictiveScalingMode)
-
-	PredictiveScalingPolicyConfiguration_SchedulingBufferTime = PredictiveScalingPolicyConfiguration.AddMember("SchedulingBufferTime", _PredictiveScalingSchedulingBufferTime)
-
-	PredictiveScalingPolicyConfiguration_MaxCapacityBreachBehavior = PredictiveScalingPolicyConfiguration.AddMember("MaxCapacityBreachBehavior", PredictiveScalingMaxCapacityBreachBehavior)
-
-	PredictiveScalingPolicyConfiguration_MaxCapacityBuffer = PredictiveScalingPolicyConfiguration.AddMember("MaxCapacityBuffer", _PredictiveScalingMaxCapacityBuffer)
-
-	_ResourceIdsMaxLen1600_member = _ResourceIdsMaxLen1600.AddMember("member", _ResourceIdMaxLen1600)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ExceptionMessage)
-
-	ResourceNotFoundException_ResourceName = ResourceNotFoundException.AddMember("ResourceName", _AmazonResourceName)
-
-	ScalableDimension_ECSServiceDesiredCount = ScalableDimension.AddMember("ECSServiceDesiredCount", smithyprelude.Unit)
-
-	ScalableDimension_EC2SpotFleetRequestTargetCapacity = ScalableDimension.AddMember("EC2SpotFleetRequestTargetCapacity", smithyprelude.Unit)
-
-	ScalableDimension_EMRInstanceGroupInstanceCount = ScalableDimension.AddMember("EMRInstanceGroupInstanceCount", smithyprelude.Unit)
-
-	ScalableDimension_AppstreamFleetDesiredCapacity = ScalableDimension.AddMember("AppstreamFleetDesiredCapacity", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBTableReadCapacityUnits = ScalableDimension.AddMember("DynamoDBTableReadCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBTableWriteCapacityUnits = ScalableDimension.AddMember("DynamoDBTableWriteCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBIndexReadCapacityUnits = ScalableDimension.AddMember("DynamoDBIndexReadCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_DynamoDBIndexWriteCapacityUnits = ScalableDimension.AddMember("DynamoDBIndexWriteCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_RDSClusterReadReplicaCount = ScalableDimension.AddMember("RDSClusterReadReplicaCount", smithyprelude.Unit)
-
-	ScalableDimension_SageMakerVariantDesiredInstanceCount = ScalableDimension.AddMember("SageMakerVariantDesiredInstanceCount", smithyprelude.Unit)
-
-	ScalableDimension_CustomResourceScalableDimension = ScalableDimension.AddMember("CustomResourceScalableDimension", smithyprelude.Unit)
-
-	ScalableDimension_ComprehendDocClassifierEndpointInferenceUnits = ScalableDimension.AddMember("ComprehendDocClassifierEndpointInferenceUnits", smithyprelude.Unit)
-
-	ScalableDimension_ComprehendEntityRecognizerEndpointInferenceUnits = ScalableDimension.AddMember("ComprehendEntityRecognizerEndpointInferenceUnits", smithyprelude.Unit)
-
-	ScalableDimension_LambdaFunctionProvisionedConcurrency = ScalableDimension.AddMember("LambdaFunctionProvisionedConcurrency", smithyprelude.Unit)
-
-	ScalableDimension_CassandraTableReadCapacityUnits = ScalableDimension.AddMember("CassandraTableReadCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_CassandraTableWriteCapacityUnits = ScalableDimension.AddMember("CassandraTableWriteCapacityUnits", smithyprelude.Unit)
-
-	ScalableDimension_KafkaBrokerStorageVolumeSize = ScalableDimension.AddMember("KafkaBrokerStorageVolumeSize", smithyprelude.Unit)
-
-	ScalableDimension_ElastiCacheCacheClusterNodes = ScalableDimension.AddMember("ElastiCacheCacheClusterNodes", smithyprelude.Unit)
-
-	ScalableDimension_ElastiCacheReplicationGroupNodeGroups = ScalableDimension.AddMember("ElastiCacheReplicationGroupNodeGroups", smithyprelude.Unit)
-
-	ScalableDimension_ElastiCacheReplicationGroupReplicas = ScalableDimension.AddMember("ElastiCacheReplicationGroupReplicas", smithyprelude.Unit)
-
-	ScalableDimension_NeptuneClusterReadReplicaCount = ScalableDimension.AddMember("NeptuneClusterReadReplicaCount", smithyprelude.Unit)
-
-	ScalableDimension_SageMakerVariantDesiredProvisionedConcurrency = ScalableDimension.AddMember("SageMakerVariantDesiredProvisionedConcurrency", smithyprelude.Unit)
-
-	ScalableDimension_SageMakerInferenceComponentDesiredCopyCount = ScalableDimension.AddMember("SageMakerInferenceComponentDesiredCopyCount", smithyprelude.Unit)
-
-	ScalableDimension_WorkSpacesWorkSpacesPoolDesiredUserSessions = ScalableDimension.AddMember("WorkSpacesWorkSpacesPoolDesiredUserSessions", smithyprelude.Unit)
-
-	ServiceNamespace_ECS = ServiceNamespace.AddMember("ECS", smithyprelude.Unit)
-
-	ServiceNamespace_EMR = ServiceNamespace.AddMember("EMR", smithyprelude.Unit)
-
-	ServiceNamespace_EC2 = ServiceNamespace.AddMember("EC2", smithyprelude.Unit)
-
-	ServiceNamespace_APPSTREAM = ServiceNamespace.AddMember("APPSTREAM", smithyprelude.Unit)
-
-	ServiceNamespace_DYNAMODB = ServiceNamespace.AddMember("DYNAMODB", smithyprelude.Unit)
-
-	ServiceNamespace_RDS = ServiceNamespace.AddMember("RDS", smithyprelude.Unit)
-
-	ServiceNamespace_SAGEMAKER = ServiceNamespace.AddMember("SAGEMAKER", smithyprelude.Unit)
-
-	ServiceNamespace_CUSTOM_RESOURCE = ServiceNamespace.AddMember("CUSTOM_RESOURCE", smithyprelude.Unit)
-
-	ServiceNamespace_COMPREHEND = ServiceNamespace.AddMember("COMPREHEND", smithyprelude.Unit)
-
-	ServiceNamespace_LAMBDA = ServiceNamespace.AddMember("LAMBDA", smithyprelude.Unit)
-
-	ServiceNamespace_CASSANDRA = ServiceNamespace.AddMember("CASSANDRA", smithyprelude.Unit)
-
-	ServiceNamespace_KAFKA = ServiceNamespace.AddMember("KAFKA", smithyprelude.Unit)
-
-	ServiceNamespace_ELASTICACHE = ServiceNamespace.AddMember("ELASTICACHE", smithyprelude.Unit)
-
-	ServiceNamespace_NEPTUNE = ServiceNamespace.AddMember("NEPTUNE", smithyprelude.Unit)
-
-	ServiceNamespace_WORKSPACES = ServiceNamespace.AddMember("WORKSPACES", smithyprelude.Unit)
-
-	SuspendedState_DynamicScalingInSuspended = SuspendedState.AddMember("DynamicScalingInSuspended", _ScalingSuspended)
-
-	SuspendedState_DynamicScalingOutSuspended = SuspendedState.AddMember("DynamicScalingOutSuspended", _ScalingSuspended)
-
-	SuspendedState_ScheduledScalingSuspended = SuspendedState.AddMember("ScheduledScalingSuspended", _ScalingSuspended)
-
-	ScalableTarget_ServiceNamespace = ScalableTarget.AddMember("ServiceNamespace", ServiceNamespace)
-
-	ScalableTarget_ResourceId = ScalableTarget.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	ScalableTarget_ScalableDimension = ScalableTarget.AddMember("ScalableDimension", ScalableDimension)
-
-	ScalableTarget_MinCapacity = ScalableTarget.AddMember("MinCapacity", _ResourceCapacity)
-
-	ScalableTarget_MaxCapacity = ScalableTarget.AddMember("MaxCapacity", _ResourceCapacity)
-
-	ScalableTarget_PredictedCapacity = ScalableTarget.AddMember("PredictedCapacity", _ResourceCapacity)
-
-	ScalableTarget_RoleARN = ScalableTarget.AddMember("RoleARN", _ResourceIdMaxLen1600)
-
-	ScalableTarget_CreationTime = ScalableTarget.AddMember("CreationTime", _TimestampType)
-
-	ScalableTarget_SuspendedState = ScalableTarget.AddMember("SuspendedState", SuspendedState)
-
-	ScalableTarget_ScalableTargetARN = ScalableTarget.AddMember("ScalableTargetARN", _XmlString)
-
-	ScalableTargetAction_MinCapacity = ScalableTargetAction.AddMember("MinCapacity", _ResourceCapacity)
-
-	ScalableTargetAction_MaxCapacity = ScalableTargetAction.AddMember("MaxCapacity", _ResourceCapacity)
-
-	_ScalableTargets_member = _ScalableTargets.AddMember("member", ScalableTarget)
-
-	ScalingActivityStatusCode_Pending = ScalingActivityStatusCode.AddMember("Pending", smithyprelude.Unit)
-
-	ScalingActivityStatusCode_InProgress = ScalingActivityStatusCode.AddMember("InProgress", smithyprelude.Unit)
-
-	ScalingActivityStatusCode_Successful = ScalingActivityStatusCode.AddMember("Successful", smithyprelude.Unit)
-
-	ScalingActivityStatusCode_Overridden = ScalingActivityStatusCode.AddMember("Overridden", smithyprelude.Unit)
-
-	ScalingActivityStatusCode_Unfulfilled = ScalingActivityStatusCode.AddMember("Unfulfilled", smithyprelude.Unit)
-
-	ScalingActivityStatusCode_Failed = ScalingActivityStatusCode.AddMember("Failed", smithyprelude.Unit)
-
-	ScalingActivity_ActivityId = ScalingActivity.AddMember("ActivityId", _ResourceId)
-
-	ScalingActivity_ServiceNamespace = ScalingActivity.AddMember("ServiceNamespace", ServiceNamespace)
-
-	ScalingActivity_ResourceId = ScalingActivity.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	ScalingActivity_ScalableDimension = ScalingActivity.AddMember("ScalableDimension", ScalableDimension)
-
-	ScalingActivity_Description = ScalingActivity.AddMember("Description", _XmlString)
-
-	ScalingActivity_Cause = ScalingActivity.AddMember("Cause", _XmlString)
-
-	ScalingActivity_StartTime = ScalingActivity.AddMember("StartTime", _TimestampType)
-
-	ScalingActivity_EndTime = ScalingActivity.AddMember("EndTime", _TimestampType)
-
-	ScalingActivity_StatusCode = ScalingActivity.AddMember("StatusCode", ScalingActivityStatusCode)
-
-	ScalingActivity_StatusMessage = ScalingActivity.AddMember("StatusMessage", _XmlString)
-
-	ScalingActivity_Details = ScalingActivity.AddMember("Details", _XmlString)
-
-	ScalingActivity_NotScaledReasons = ScalingActivity.AddMember("NotScaledReasons", _NotScaledReasons)
-
-	_ScalingActivities_member = _ScalingActivities.AddMember("member", ScalingActivity)
-
-	StepAdjustment_MetricIntervalLowerBound = StepAdjustment.AddMember("MetricIntervalLowerBound", _MetricScale)
-
-	StepAdjustment_MetricIntervalUpperBound = StepAdjustment.AddMember("MetricIntervalUpperBound", _MetricScale)
-
-	StepAdjustment_ScalingAdjustment = StepAdjustment.AddMember("ScalingAdjustment", _ScalingAdjustment)
-
-	_StepAdjustments_member = _StepAdjustments.AddMember("member", StepAdjustment)
-
-	StepScalingPolicyConfiguration_AdjustmentType = StepScalingPolicyConfiguration.AddMember("AdjustmentType", AdjustmentType)
-
-	StepScalingPolicyConfiguration_StepAdjustments = StepScalingPolicyConfiguration.AddMember("StepAdjustments", _StepAdjustments)
-
-	StepScalingPolicyConfiguration_MinAdjustmentMagnitude = StepScalingPolicyConfiguration.AddMember("MinAdjustmentMagnitude", _MinAdjustmentMagnitude)
-
-	StepScalingPolicyConfiguration_Cooldown = StepScalingPolicyConfiguration.AddMember("Cooldown", _Cooldown)
-
-	StepScalingPolicyConfiguration_MetricAggregationType = StepScalingPolicyConfiguration.AddMember("MetricAggregationType", MetricAggregationType)
-
-	TargetTrackingScalingPolicyConfiguration_TargetValue = TargetTrackingScalingPolicyConfiguration.AddMember("TargetValue", _MetricScale)
-
-	TargetTrackingScalingPolicyConfiguration_PredefinedMetricSpecification = TargetTrackingScalingPolicyConfiguration.AddMember("PredefinedMetricSpecification", PredefinedMetricSpecification)
-
-	TargetTrackingScalingPolicyConfiguration_CustomizedMetricSpecification = TargetTrackingScalingPolicyConfiguration.AddMember("CustomizedMetricSpecification", CustomizedMetricSpecification)
-
-	TargetTrackingScalingPolicyConfiguration_ScaleOutCooldown = TargetTrackingScalingPolicyConfiguration.AddMember("ScaleOutCooldown", _Cooldown)
-
-	TargetTrackingScalingPolicyConfiguration_ScaleInCooldown = TargetTrackingScalingPolicyConfiguration.AddMember("ScaleInCooldown", _Cooldown)
-
-	TargetTrackingScalingPolicyConfiguration_DisableScaleIn = TargetTrackingScalingPolicyConfiguration.AddMember("DisableScaleIn", _DisableScaleIn)
-
-	ScalingPolicy_PolicyARN = ScalingPolicy.AddMember("PolicyARN", _ResourceIdMaxLen1600)
-
-	ScalingPolicy_PolicyName = ScalingPolicy.AddMember("PolicyName", _PolicyName)
-
-	ScalingPolicy_ServiceNamespace = ScalingPolicy.AddMember("ServiceNamespace", ServiceNamespace)
-
-	ScalingPolicy_ResourceId = ScalingPolicy.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	ScalingPolicy_ScalableDimension = ScalingPolicy.AddMember("ScalableDimension", ScalableDimension)
-
-	ScalingPolicy_PolicyType = ScalingPolicy.AddMember("PolicyType", PolicyType)
-
-	ScalingPolicy_StepScalingPolicyConfiguration = ScalingPolicy.AddMember("StepScalingPolicyConfiguration", StepScalingPolicyConfiguration)
-
-	ScalingPolicy_TargetTrackingScalingPolicyConfiguration = ScalingPolicy.AddMember("TargetTrackingScalingPolicyConfiguration", TargetTrackingScalingPolicyConfiguration)
-
-	ScalingPolicy_PredictiveScalingPolicyConfiguration = ScalingPolicy.AddMember("PredictiveScalingPolicyConfiguration", PredictiveScalingPolicyConfiguration)
-
-	ScalingPolicy_Alarms = ScalingPolicy.AddMember("Alarms", _Alarms)
-
-	ScalingPolicy_CreationTime = ScalingPolicy.AddMember("CreationTime", _TimestampType)
-
-	_ScalingPolicies_member = _ScalingPolicies.AddMember("member", ScalingPolicy)
-
-	ScheduledAction_ScheduledActionName = ScheduledAction.AddMember("ScheduledActionName", _ScheduledActionName)
-
-	ScheduledAction_ScheduledActionARN = ScheduledAction.AddMember("ScheduledActionARN", _ResourceIdMaxLen1600)
-
-	ScheduledAction_ServiceNamespace = ScheduledAction.AddMember("ServiceNamespace", ServiceNamespace)
-
-	ScheduledAction_Schedule = ScheduledAction.AddMember("Schedule", _ResourceIdMaxLen1600)
-
-	ScheduledAction_Timezone = ScheduledAction.AddMember("Timezone", _ResourceIdMaxLen1600)
-
-	ScheduledAction_ResourceId = ScheduledAction.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	ScheduledAction_ScalableDimension = ScheduledAction.AddMember("ScalableDimension", ScalableDimension)
-
-	ScheduledAction_StartTime = ScheduledAction.AddMember("StartTime", _TimestampType)
-
-	ScheduledAction_EndTime = ScheduledAction.AddMember("EndTime", _TimestampType)
-
-	ScheduledAction_ScalableTargetAction = ScheduledAction.AddMember("ScalableTargetAction", ScalableTargetAction)
-
-	ScheduledAction_CreationTime = ScheduledAction.AddMember("CreationTime", _TimestampType)
-
-	_ScheduledActions_member = _ScheduledActions.AddMember("member", ScheduledAction)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _ExceptionMessage)
-
-	TooManyTagsException_ResourceName = TooManyTagsException.AddMember("ResourceName", _AmazonResourceName)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ErrorMessage)
-
-	DeleteScalingPolicyRequest_PolicyName = DeleteScalingPolicyRequest.AddMember("PolicyName", _ResourceIdMaxLen1600)
-
-	DeleteScalingPolicyRequest_ServiceNamespace = DeleteScalingPolicyRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	DeleteScalingPolicyRequest_ResourceId = DeleteScalingPolicyRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	DeleteScalingPolicyRequest_ScalableDimension = DeleteScalingPolicyRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	DeleteScheduledActionRequest_ServiceNamespace = DeleteScheduledActionRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	DeleteScheduledActionRequest_ScheduledActionName = DeleteScheduledActionRequest.AddMember("ScheduledActionName", _ResourceIdMaxLen1600)
-
-	DeleteScheduledActionRequest_ResourceId = DeleteScheduledActionRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	DeleteScheduledActionRequest_ScalableDimension = DeleteScheduledActionRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	DeregisterScalableTargetRequest_ServiceNamespace = DeregisterScalableTargetRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	DeregisterScalableTargetRequest_ResourceId = DeregisterScalableTargetRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	DeregisterScalableTargetRequest_ScalableDimension = DeregisterScalableTargetRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	DescribeScalableTargetsRequest_ServiceNamespace = DescribeScalableTargetsRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	DescribeScalableTargetsRequest_ResourceIds = DescribeScalableTargetsRequest.AddMember("ResourceIds", _ResourceIdsMaxLen1600)
-
-	DescribeScalableTargetsRequest_ScalableDimension = DescribeScalableTargetsRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	DescribeScalableTargetsRequest_MaxResults = DescribeScalableTargetsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeScalableTargetsRequest_NextToken = DescribeScalableTargetsRequest.AddMember("NextToken", _XmlString)
-
-	DescribeScalableTargetsResponse_ScalableTargets = DescribeScalableTargetsResponse.AddMember("ScalableTargets", _ScalableTargets)
-
-	DescribeScalableTargetsResponse_NextToken = DescribeScalableTargetsResponse.AddMember("NextToken", _XmlString)
-
-	DescribeScalingActivitiesRequest_ServiceNamespace = DescribeScalingActivitiesRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	DescribeScalingActivitiesRequest_ResourceId = DescribeScalingActivitiesRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	DescribeScalingActivitiesRequest_ScalableDimension = DescribeScalingActivitiesRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	DescribeScalingActivitiesRequest_MaxResults = DescribeScalingActivitiesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeScalingActivitiesRequest_NextToken = DescribeScalingActivitiesRequest.AddMember("NextToken", _XmlString)
-
-	DescribeScalingActivitiesRequest_IncludeNotScaledActivities = DescribeScalingActivitiesRequest.AddMember("IncludeNotScaledActivities", _IncludeNotScaledActivities)
-
-	DescribeScalingActivitiesResponse_ScalingActivities = DescribeScalingActivitiesResponse.AddMember("ScalingActivities", _ScalingActivities)
-
-	DescribeScalingActivitiesResponse_NextToken = DescribeScalingActivitiesResponse.AddMember("NextToken", _XmlString)
-
-	DescribeScalingPoliciesRequest_PolicyNames = DescribeScalingPoliciesRequest.AddMember("PolicyNames", _ResourceIdsMaxLen1600)
-
-	DescribeScalingPoliciesRequest_ServiceNamespace = DescribeScalingPoliciesRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	DescribeScalingPoliciesRequest_ResourceId = DescribeScalingPoliciesRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	DescribeScalingPoliciesRequest_ScalableDimension = DescribeScalingPoliciesRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	DescribeScalingPoliciesRequest_MaxResults = DescribeScalingPoliciesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeScalingPoliciesRequest_NextToken = DescribeScalingPoliciesRequest.AddMember("NextToken", _XmlString)
-
-	DescribeScalingPoliciesResponse_ScalingPolicies = DescribeScalingPoliciesResponse.AddMember("ScalingPolicies", _ScalingPolicies)
-
-	DescribeScalingPoliciesResponse_NextToken = DescribeScalingPoliciesResponse.AddMember("NextToken", _XmlString)
-
-	DescribeScheduledActionsRequest_ScheduledActionNames = DescribeScheduledActionsRequest.AddMember("ScheduledActionNames", _ResourceIdsMaxLen1600)
-
-	DescribeScheduledActionsRequest_ServiceNamespace = DescribeScheduledActionsRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	DescribeScheduledActionsRequest_ResourceId = DescribeScheduledActionsRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	DescribeScheduledActionsRequest_ScalableDimension = DescribeScheduledActionsRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	DescribeScheduledActionsRequest_MaxResults = DescribeScheduledActionsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeScheduledActionsRequest_NextToken = DescribeScheduledActionsRequest.AddMember("NextToken", _XmlString)
-
-	DescribeScheduledActionsResponse_ScheduledActions = DescribeScheduledActionsResponse.AddMember("ScheduledActions", _ScheduledActions)
-
-	DescribeScheduledActionsResponse_NextToken = DescribeScheduledActionsResponse.AddMember("NextToken", _XmlString)
-
-	GetPredictiveScalingForecastRequest_ServiceNamespace = GetPredictiveScalingForecastRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	GetPredictiveScalingForecastRequest_ResourceId = GetPredictiveScalingForecastRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	GetPredictiveScalingForecastRequest_ScalableDimension = GetPredictiveScalingForecastRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	GetPredictiveScalingForecastRequest_PolicyName = GetPredictiveScalingForecastRequest.AddMember("PolicyName", _PolicyName)
-
-	GetPredictiveScalingForecastRequest_StartTime = GetPredictiveScalingForecastRequest.AddMember("StartTime", _TimestampType)
-
-	GetPredictiveScalingForecastRequest_EndTime = GetPredictiveScalingForecastRequest.AddMember("EndTime", _TimestampType)
-
-	GetPredictiveScalingForecastResponse_LoadForecast = GetPredictiveScalingForecastResponse.AddMember("LoadForecast", _LoadForecasts)
-
-	GetPredictiveScalingForecastResponse_CapacityForecast = GetPredictiveScalingForecastResponse.AddMember("CapacityForecast", CapacityForecast)
-
-	GetPredictiveScalingForecastResponse_UpdateTime = GetPredictiveScalingForecastResponse.AddMember("UpdateTime", _TimestampType)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	PutScalingPolicyRequest_PolicyName = PutScalingPolicyRequest.AddMember("PolicyName", _PolicyName)
-
-	PutScalingPolicyRequest_ServiceNamespace = PutScalingPolicyRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	PutScalingPolicyRequest_ResourceId = PutScalingPolicyRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	PutScalingPolicyRequest_ScalableDimension = PutScalingPolicyRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	PutScalingPolicyRequest_PolicyType = PutScalingPolicyRequest.AddMember("PolicyType", PolicyType)
-
-	PutScalingPolicyRequest_StepScalingPolicyConfiguration = PutScalingPolicyRequest.AddMember("StepScalingPolicyConfiguration", StepScalingPolicyConfiguration)
-
-	PutScalingPolicyRequest_TargetTrackingScalingPolicyConfiguration = PutScalingPolicyRequest.AddMember("TargetTrackingScalingPolicyConfiguration", TargetTrackingScalingPolicyConfiguration)
-
-	PutScalingPolicyRequest_PredictiveScalingPolicyConfiguration = PutScalingPolicyRequest.AddMember("PredictiveScalingPolicyConfiguration", PredictiveScalingPolicyConfiguration)
-
-	PutScalingPolicyResponse_PolicyARN = PutScalingPolicyResponse.AddMember("PolicyARN", _ResourceIdMaxLen1600)
-
-	PutScalingPolicyResponse_Alarms = PutScalingPolicyResponse.AddMember("Alarms", _Alarms)
-
-	PutScheduledActionRequest_ServiceNamespace = PutScheduledActionRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	PutScheduledActionRequest_Schedule = PutScheduledActionRequest.AddMember("Schedule", _ResourceIdMaxLen1600)
-
-	PutScheduledActionRequest_Timezone = PutScheduledActionRequest.AddMember("Timezone", _ResourceIdMaxLen1600)
-
-	PutScheduledActionRequest_ScheduledActionName = PutScheduledActionRequest.AddMember("ScheduledActionName", _ScheduledActionName)
-
-	PutScheduledActionRequest_ResourceId = PutScheduledActionRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	PutScheduledActionRequest_ScalableDimension = PutScheduledActionRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	PutScheduledActionRequest_StartTime = PutScheduledActionRequest.AddMember("StartTime", _TimestampType)
-
-	PutScheduledActionRequest_EndTime = PutScheduledActionRequest.AddMember("EndTime", _TimestampType)
-
-	PutScheduledActionRequest_ScalableTargetAction = PutScheduledActionRequest.AddMember("ScalableTargetAction", ScalableTargetAction)
-
-	RegisterScalableTargetRequest_ServiceNamespace = RegisterScalableTargetRequest.AddMember("ServiceNamespace", ServiceNamespace)
-
-	RegisterScalableTargetRequest_ResourceId = RegisterScalableTargetRequest.AddMember("ResourceId", _ResourceIdMaxLen1600)
-
-	RegisterScalableTargetRequest_ScalableDimension = RegisterScalableTargetRequest.AddMember("ScalableDimension", ScalableDimension)
-
-	RegisterScalableTargetRequest_MinCapacity = RegisterScalableTargetRequest.AddMember("MinCapacity", _ResourceCapacity)
-
-	RegisterScalableTargetRequest_MaxCapacity = RegisterScalableTargetRequest.AddMember("MaxCapacity", _ResourceCapacity)
-
-	RegisterScalableTargetRequest_RoleARN = RegisterScalableTargetRequest.AddMember("RoleARN", _ResourceIdMaxLen1600)
-
-	RegisterScalableTargetRequest_SuspendedState = RegisterScalableTargetRequest.AddMember("SuspendedState", SuspendedState)
-
-	RegisterScalableTargetRequest_Tags = RegisterScalableTargetRequest.AddMember("Tags", _TagMap)
-
-	RegisterScalableTargetResponse_ScalableTargetARN = RegisterScalableTargetResponse.AddMember("ScalableTargetARN", _XmlString)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-}
+var (
+	iDeleteScalingPolicy                                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeleteScalingPolicy"}
+	iDeleteScheduledAction                                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeleteScheduledAction"}
+	iDeregisterScalableTarget                              = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeregisterScalableTarget"}
+	iDescribeScalableTargets                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalableTargets"}
+	iDescribeScalingActivities                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalingActivities"}
+	iDescribeScalingPolicies                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalingPolicies"}
+	iDescribeScheduledActions                              = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScheduledActions"}
+	iGetPredictiveScalingForecast                          = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "GetPredictiveScalingForecast"}
+	iListTagsForResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ListTagsForResource"}
+	iPutScalingPolicy                                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PutScalingPolicy"}
+	iPutScheduledAction                                    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PutScheduledAction"}
+	iRegisterScalableTarget                                = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "RegisterScalableTarget"}
+	iTagResource                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TagResource"}
+	iUntagResource                                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "UntagResource"}
+	i_AnyScaleFrontendService                              = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "AnyScaleFrontendService"}
+	iAdjustmentType                                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "AdjustmentType"}
+	iAlarm                                                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "Alarm"}
+	i_Alarms                                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "Alarms"}
+	i_AmazonResourceName                                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "AmazonResourceName"}
+	iCapacityForecast                                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "CapacityForecast"}
+	iConcurrentUpdateException                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ConcurrentUpdateException"}
+	i_Cooldown                                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "Cooldown"}
+	iCustomizedMetricSpecification                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "CustomizedMetricSpecification"}
+	i_DisableScaleIn                                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DisableScaleIn"}
+	i_ErrorMessage                                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ErrorMessage"}
+	i_ExceptionMessage                                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ExceptionMessage"}
+	i_Expression                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "Expression"}
+	iFailedResourceAccessException                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "FailedResourceAccessException"}
+	i_Id                                                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "Id"}
+	i_IncludeNotScaledActivities                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "IncludeNotScaledActivities"}
+	iInternalServiceException                              = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "InternalServiceException"}
+	iInvalidNextTokenException                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "InvalidNextTokenException"}
+	iLimitExceededException                                = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "LimitExceededException"}
+	iLoadForecast                                          = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "LoadForecast"}
+	i_LoadForecasts                                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "LoadForecasts"}
+	i_MaxResults                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MaxResults"}
+	iMetricAggregationType                                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricAggregationType"}
+	iMetricDimension                                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricDimension"}
+	i_MetricDimensionName                                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricDimensionName"}
+	i_MetricDimensions                                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricDimensions"}
+	i_MetricDimensionValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricDimensionValue"}
+	i_MetricName                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricName"}
+	i_MetricNamespace                                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricNamespace"}
+	i_MetricScale                                          = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricScale"}
+	iMetricStatistic                                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricStatistic"}
+	iMetricType                                            = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricType"}
+	i_MetricUnit                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MetricUnit"}
+	i_MinAdjustmentMagnitude                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "MinAdjustmentMagnitude"}
+	iNotScaledReason                                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "NotScaledReason"}
+	i_NotScaledReasons                                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "NotScaledReasons"}
+	iObjectNotFoundException                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ObjectNotFoundException"}
+	i_PolicyName                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PolicyName"}
+	iPolicyType                                            = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PolicyType"}
+	iPredefinedMetricSpecification                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredefinedMetricSpecification"}
+	iPredictiveScalingCustomizedMetricSpecification        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingCustomizedMetricSpecification"}
+	i_PredictiveScalingForecastTimestamps                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingForecastTimestamps"}
+	i_PredictiveScalingForecastValues                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingForecastValues"}
+	iPredictiveScalingMaxCapacityBreachBehavior            = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMaxCapacityBreachBehavior"}
+	i_PredictiveScalingMaxCapacityBuffer                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMaxCapacityBuffer"}
+	iPredictiveScalingMetric                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetric"}
+	i_PredictiveScalingMetricDataQueries                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricDataQueries"}
+	iPredictiveScalingMetricDataQuery                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricDataQuery"}
+	iPredictiveScalingMetricDimension                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricDimension"}
+	i_PredictiveScalingMetricDimensionName                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricDimensionName"}
+	i_PredictiveScalingMetricDimensions                    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricDimensions"}
+	i_PredictiveScalingMetricDimensionValue                = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricDimensionValue"}
+	i_PredictiveScalingMetricName                          = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricName"}
+	i_PredictiveScalingMetricNamespace                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricNamespace"}
+	iPredictiveScalingMetricSpecification                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricSpecification"}
+	i_PredictiveScalingMetricSpecifications                = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricSpecifications"}
+	iPredictiveScalingMetricStat                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricStat"}
+	i_PredictiveScalingMetricType                          = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricType"}
+	i_PredictiveScalingMetricUnit                          = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMetricUnit"}
+	iPredictiveScalingMode                                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingMode"}
+	iPredictiveScalingPolicyConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingPolicyConfiguration"}
+	iPredictiveScalingPredefinedLoadMetricSpecification    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingPredefinedLoadMetricSpecification"}
+	iPredictiveScalingPredefinedMetricPairSpecification    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingPredefinedMetricPairSpecification"}
+	iPredictiveScalingPredefinedScalingMetricSpecification = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingPredefinedScalingMetricSpecification"}
+	i_PredictiveScalingSchedulingBufferTime                = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PredictiveScalingSchedulingBufferTime"}
+	i_ResourceCapacity                                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ResourceCapacity"}
+	i_ResourceId                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ResourceId"}
+	i_ResourceIdMaxLen1600                                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ResourceIdMaxLen1600"}
+	i_ResourceIdsMaxLen1600                                = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ResourceIdsMaxLen1600"}
+	i_ResourceLabel                                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ResourceLabel"}
+	iResourceNotFoundException                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ResourceNotFoundException"}
+	i_ReturnData                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ReturnData"}
+	iScalableDimension                                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalableDimension"}
+	iScalableTarget                                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalableTarget"}
+	iScalableTargetAction                                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalableTargetAction"}
+	i_ScalableTargets                                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalableTargets"}
+	i_ScalingActivities                                    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalingActivities"}
+	iScalingActivity                                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalingActivity"}
+	iScalingActivityStatusCode                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalingActivityStatusCode"}
+	i_ScalingAdjustment                                    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalingAdjustment"}
+	i_ScalingPolicies                                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalingPolicies"}
+	iScalingPolicy                                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalingPolicy"}
+	i_ScalingSuspended                                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScalingSuspended"}
+	iScheduledAction                                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScheduledAction"}
+	i_ScheduledActionName                                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScheduledActionName"}
+	i_ScheduledActions                                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ScheduledActions"}
+	iServiceNamespace                                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ServiceNamespace"}
+	iStepAdjustment                                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "StepAdjustment"}
+	i_StepAdjustments                                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "StepAdjustments"}
+	iStepScalingPolicyConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "StepScalingPolicyConfiguration"}
+	iSuspendedState                                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "SuspendedState"}
+	i_TagKey                                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TagKey"}
+	i_TagKeyList                                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TagKeyList"}
+	i_TagMap                                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TagMap"}
+	i_TagValue                                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TagValue"}
+	iTargetTrackingMetric                                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetric"}
+	i_TargetTrackingMetricDataQueries                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricDataQueries"}
+	iTargetTrackingMetricDataQuery                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricDataQuery"}
+	iTargetTrackingMetricDimension                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricDimension"}
+	i_TargetTrackingMetricDimensionName                    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricDimensionName"}
+	i_TargetTrackingMetricDimensions                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricDimensions"}
+	i_TargetTrackingMetricDimensionValue                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricDimensionValue"}
+	i_TargetTrackingMetricName                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricName"}
+	i_TargetTrackingMetricNamespace                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricNamespace"}
+	iTargetTrackingMetricStat                              = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricStat"}
+	i_TargetTrackingMetricUnit                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingMetricUnit"}
+	iTargetTrackingScalingPolicyConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TargetTrackingScalingPolicyConfiguration"}
+	i_TimestampType                                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TimestampType"}
+	iTooManyTagsException                                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TooManyTagsException"}
+	iValidationException                                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ValidationException"}
+	i_XmlString                                            = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "XmlString"}
+	iDeleteScalingPolicyRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeleteScalingPolicyRequest"}
+	iDeleteScalingPolicyResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeleteScalingPolicyResponse"}
+	iDeleteScheduledActionRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeleteScheduledActionRequest"}
+	iDeleteScheduledActionResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeleteScheduledActionResponse"}
+	iDeregisterScalableTargetRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeregisterScalableTargetRequest"}
+	iDeregisterScalableTargetResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DeregisterScalableTargetResponse"}
+	iDescribeScalableTargetsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalableTargetsRequest"}
+	iDescribeScalableTargetsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalableTargetsResponse"}
+	iDescribeScalingActivitiesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalingActivitiesRequest"}
+	iDescribeScalingActivitiesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalingActivitiesResponse"}
+	iDescribeScalingPoliciesRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalingPoliciesRequest"}
+	iDescribeScalingPoliciesResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScalingPoliciesResponse"}
+	iDescribeScheduledActionsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScheduledActionsRequest"}
+	iDescribeScheduledActionsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "DescribeScheduledActionsResponse"}
+	iGetPredictiveScalingForecastRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "GetPredictiveScalingForecastRequest"}
+	iGetPredictiveScalingForecastResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "GetPredictiveScalingForecastResponse"}
+	iListTagsForResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "ListTagsForResourceResponse"}
+	iPutScalingPolicyRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PutScalingPolicyRequest"}
+	iPutScalingPolicyResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PutScalingPolicyResponse"}
+	iPutScheduledActionRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PutScheduledActionRequest"}
+	iPutScheduledActionResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "PutScheduledActionResponse"}
+	iRegisterScalableTargetRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "RegisterScalableTargetRequest"}
+	iRegisterScalableTargetResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "RegisterScalableTargetResponse"}
+	iTagResourceRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TagResourceRequest"}
+	iTagResourceResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.applicationautoscaling", Name: "UntagResourceResponse"}
+	pUnit                                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConcurrentUpdateException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "FailedResourceAccessException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServiceException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidNextTokenException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "LimitExceededException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ObjectNotFoundException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAdjustmentType = smithy.SchemaMembers{List: []*smithy.Schema{&sAdjustmentType_ChangeInCapacity, &sAdjustmentType_PercentChangeInCapacity, &sAdjustmentType_ExactCapacity}}
+var mAlarm = smithy.SchemaMembers{List: []*smithy.Schema{&sAlarm_AlarmName, &sAlarm_AlarmARN}}
+var m_Alarms = smithy.SchemaMembers{List: []*smithy.Schema{&s_Alarms_member}}
+var mCapacityForecast = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityForecast_Timestamps, &sCapacityForecast_Values}}
+var mConcurrentUpdateException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentUpdateException_Message}}
+var mCustomizedMetricSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomizedMetricSpecification_MetricName, &sCustomizedMetricSpecification_Namespace, &sCustomizedMetricSpecification_Dimensions, &sCustomizedMetricSpecification_Statistic, &sCustomizedMetricSpecification_Unit, &sCustomizedMetricSpecification_Metrics}}
+var mFailedResourceAccessException = smithy.SchemaMembers{List: []*smithy.Schema{&sFailedResourceAccessException_Message}}
+var mInternalServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceException_Message}}
+var mInvalidNextTokenException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNextTokenException_Message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mLoadForecast = smithy.SchemaMembers{List: []*smithy.Schema{&sLoadForecast_Timestamps, &sLoadForecast_Values, &sLoadForecast_MetricSpecification}}
+var m_LoadForecasts = smithy.SchemaMembers{List: []*smithy.Schema{&s_LoadForecasts_member}}
+var mMetricAggregationType = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricAggregationType_Average, &sMetricAggregationType_Minimum, &sMetricAggregationType_Maximum}}
+var mMetricDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDimension_Name, &sMetricDimension_Value}}
+var m_MetricDimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDimensions_member}}
+var mMetricStatistic = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricStatistic_Average, &sMetricStatistic_Minimum, &sMetricStatistic_Maximum, &sMetricStatistic_SampleCount, &sMetricStatistic_Sum}}
+var mMetricType = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricType_DynamoDBReadCapacityUtilization, &sMetricType_DynamoDBWriteCapacityUtilization, &sMetricType_ALBRequestCountPerTarget, &sMetricType_RDSReaderAverageCPUUtilization, &sMetricType_RDSReaderAverageDatabaseConnections, &sMetricType_EC2SpotFleetRequestAverageCPUUtilization, &sMetricType_EC2SpotFleetRequestAverageNetworkIn, &sMetricType_EC2SpotFleetRequestAverageNetworkOut, &sMetricType_SageMakerVariantInvocationsPerInstance, &sMetricType_ECSServiceAverageCPUUtilization, &sMetricType_ECSServiceAverageMemoryUtilization, &sMetricType_AppStreamAverageCapacityUtilization, &sMetricType_ComprehendInferenceUtilization, &sMetricType_LambdaProvisionedConcurrencyUtilization, &sMetricType_CassandraReadCapacityUtilization, &sMetricType_CassandraWriteCapacityUtilization, &sMetricType_KafkaBrokerStorageUtilization, &sMetricType_ElastiCacheEngineCPUUtilization, &sMetricType_ElastiCacheDatabaseMemoryUsagePercentage, &sMetricType_ElastiCachePrimaryEngineCPUUtilization, &sMetricType_ElastiCacheReplicaEngineCPUUtilization, &sMetricType_ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage, &sMetricType_NeptuneReaderAverageCPUUtilization, &sMetricType_SageMakerVariantProvisionedConcurrencyUtilization, &sMetricType_ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage, &sMetricType_SageMakerInferenceComponentInvocationsPerCopy, &sMetricType_WorkSpacesAverageUserSessionsCapacityUtilization, &sMetricType_SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution, &sMetricType_SageMakerVariantConcurrentRequestsPerModelHighResolution, &sMetricType_ECSServiceAverageCPUUtilizationHighResolution, &sMetricType_ECSServiceAverageMemoryUtilizationHighResolution}, Seed: 28794, Slots: []uint16{
+	0, 6, 27, 0, 28, 0, 0, 0, 0, 17, 31, 0, 13, 0, 0, 0, 10, 0, 12, 30, 0, 5, 23, 0,
+	0, 22, 4, 9, 0, 0, 0, 11, 1, 0, 0, 0, 19, 24, 0, 25, 21, 18, 29, 0, 15, 0, 0, 8,
+	0, 2, 0, 0, 7, 14, 0, 16, 0, 20, 0, 0, 26, 0, 3, 0,
+}}
+var mNotScaledReason = smithy.SchemaMembers{List: []*smithy.Schema{&sNotScaledReason_Code, &sNotScaledReason_MaxCapacity, &sNotScaledReason_MinCapacity, &sNotScaledReason_CurrentCapacity}}
+var m_NotScaledReasons = smithy.SchemaMembers{List: []*smithy.Schema{&s_NotScaledReasons_member}}
+var mObjectNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sObjectNotFoundException_Message}}
+var mPolicyType = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyType_StepScaling, &sPolicyType_TargetTrackingScaling, &sPolicyType_PredictiveScaling}}
+var mPredefinedMetricSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sPredefinedMetricSpecification_PredefinedMetricType, &sPredefinedMetricSpecification_ResourceLabel}}
+var mPredictiveScalingCustomizedMetricSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingCustomizedMetricSpecification_MetricDataQueries}}
+var m_PredictiveScalingForecastTimestamps = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictiveScalingForecastTimestamps_member}}
+var m_PredictiveScalingForecastValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictiveScalingForecastValues_member}}
+var mPredictiveScalingMaxCapacityBreachBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingMaxCapacityBreachBehavior_HonorMaxCapacity, &sPredictiveScalingMaxCapacityBreachBehavior_IncreaseMaxCapacity}}
+var mPredictiveScalingMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingMetric_Dimensions, &sPredictiveScalingMetric_MetricName, &sPredictiveScalingMetric_Namespace}}
+var m_PredictiveScalingMetricDataQueries = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictiveScalingMetricDataQueries_member}}
+var mPredictiveScalingMetricDataQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingMetricDataQuery_Id, &sPredictiveScalingMetricDataQuery_Expression, &sPredictiveScalingMetricDataQuery_MetricStat, &sPredictiveScalingMetricDataQuery_Label, &sPredictiveScalingMetricDataQuery_ReturnData}}
+var mPredictiveScalingMetricDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingMetricDimension_Name, &sPredictiveScalingMetricDimension_Value}}
+var m_PredictiveScalingMetricDimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictiveScalingMetricDimensions_member}}
+var mPredictiveScalingMetricSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingMetricSpecification_TargetValue, &sPredictiveScalingMetricSpecification_PredefinedMetricPairSpecification, &sPredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification, &sPredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification, &sPredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification, &sPredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification, &sPredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification}}
+var m_PredictiveScalingMetricSpecifications = smithy.SchemaMembers{List: []*smithy.Schema{&s_PredictiveScalingMetricSpecifications_member}}
+var mPredictiveScalingMetricStat = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingMetricStat_Metric, &sPredictiveScalingMetricStat_Stat, &sPredictiveScalingMetricStat_Unit}}
+var mPredictiveScalingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingMode_ForecastOnly, &sPredictiveScalingMode_ForecastAndScale}}
+var mPredictiveScalingPolicyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingPolicyConfiguration_MetricSpecifications, &sPredictiveScalingPolicyConfiguration_Mode, &sPredictiveScalingPolicyConfiguration_SchedulingBufferTime, &sPredictiveScalingPolicyConfiguration_MaxCapacityBreachBehavior, &sPredictiveScalingPolicyConfiguration_MaxCapacityBuffer}}
+var mPredictiveScalingPredefinedLoadMetricSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingPredefinedLoadMetricSpecification_PredefinedMetricType, &sPredictiveScalingPredefinedLoadMetricSpecification_ResourceLabel}}
+var mPredictiveScalingPredefinedMetricPairSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingPredefinedMetricPairSpecification_PredefinedMetricType, &sPredictiveScalingPredefinedMetricPairSpecification_ResourceLabel}}
+var mPredictiveScalingPredefinedScalingMetricSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictiveScalingPredefinedScalingMetricSpecification_PredefinedMetricType, &sPredictiveScalingPredefinedScalingMetricSpecification_ResourceLabel}}
+var m_ResourceIdsMaxLen1600 = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceIdsMaxLen1600_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceName}}
+var mScalableDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sScalableDimension_ECSServiceDesiredCount, &sScalableDimension_EC2SpotFleetRequestTargetCapacity, &sScalableDimension_EMRInstanceGroupInstanceCount, &sScalableDimension_AppstreamFleetDesiredCapacity, &sScalableDimension_DynamoDBTableReadCapacityUnits, &sScalableDimension_DynamoDBTableWriteCapacityUnits, &sScalableDimension_DynamoDBIndexReadCapacityUnits, &sScalableDimension_DynamoDBIndexWriteCapacityUnits, &sScalableDimension_RDSClusterReadReplicaCount, &sScalableDimension_SageMakerVariantDesiredInstanceCount, &sScalableDimension_CustomResourceScalableDimension, &sScalableDimension_ComprehendDocClassifierEndpointInferenceUnits, &sScalableDimension_ComprehendEntityRecognizerEndpointInferenceUnits, &sScalableDimension_LambdaFunctionProvisionedConcurrency, &sScalableDimension_CassandraTableReadCapacityUnits, &sScalableDimension_CassandraTableWriteCapacityUnits, &sScalableDimension_KafkaBrokerStorageVolumeSize, &sScalableDimension_ElastiCacheCacheClusterNodes, &sScalableDimension_ElastiCacheReplicationGroupNodeGroups, &sScalableDimension_ElastiCacheReplicationGroupReplicas, &sScalableDimension_NeptuneClusterReadReplicaCount, &sScalableDimension_SageMakerVariantDesiredProvisionedConcurrency, &sScalableDimension_SageMakerInferenceComponentDesiredCopyCount, &sScalableDimension_WorkSpacesWorkSpacesPoolDesiredUserSessions}, Seed: 607, Slots: []uint16{
+	22, 13, 0, 0, 23, 0, 0, 0, 0, 21, 0, 10, 0, 0, 0, 3, 2, 0, 6, 0, 0, 0, 0, 0,
+	1, 12, 19, 16, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 15, 9, 0, 7, 0, 0, 0, 4, 0, 0,
+	20, 24, 8, 11, 5, 0, 0, 17, 0, 18, 0, 0, 0, 0, 0, 0,
+}}
+var mScalableTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sScalableTarget_ServiceNamespace, &sScalableTarget_ResourceId, &sScalableTarget_ScalableDimension, &sScalableTarget_MinCapacity, &sScalableTarget_MaxCapacity, &sScalableTarget_PredictedCapacity, &sScalableTarget_RoleARN, &sScalableTarget_CreationTime, &sScalableTarget_SuspendedState, &sScalableTarget_ScalableTargetARN}, Seed: 1, Slots: []uint16{
+	0, 0, 6, 0, 10, 0, 0, 0, 3, 0, 0, 0, 0, 0, 8, 7, 2, 1, 0, 0, 0, 0, 0, 0,
+	4, 0, 0, 5, 0, 9, 0, 0,
+}}
+var mScalableTargetAction = smithy.SchemaMembers{List: []*smithy.Schema{&sScalableTargetAction_MinCapacity, &sScalableTargetAction_MaxCapacity}}
+var m_ScalableTargets = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScalableTargets_member}}
+var m_ScalingActivities = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScalingActivities_member}}
+var mScalingActivity = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingActivity_ActivityId, &sScalingActivity_ServiceNamespace, &sScalingActivity_ResourceId, &sScalingActivity_ScalableDimension, &sScalingActivity_Description, &sScalingActivity_Cause, &sScalingActivity_StartTime, &sScalingActivity_EndTime, &sScalingActivity_StatusCode, &sScalingActivity_StatusMessage, &sScalingActivity_Details, &sScalingActivity_NotScaledReasons}, Seed: 14, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 9, 0, 3, 5, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 6, 4, 11, 0,
+	0, 7, 0, 2, 10, 0, 12, 8,
+}}
+var mScalingActivityStatusCode = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingActivityStatusCode_Pending, &sScalingActivityStatusCode_InProgress, &sScalingActivityStatusCode_Successful, &sScalingActivityStatusCode_Overridden, &sScalingActivityStatusCode_Unfulfilled, &sScalingActivityStatusCode_Failed}}
+var m_ScalingPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScalingPolicies_member}}
+var mScalingPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sScalingPolicy_PolicyARN, &sScalingPolicy_PolicyName, &sScalingPolicy_ServiceNamespace, &sScalingPolicy_ResourceId, &sScalingPolicy_ScalableDimension, &sScalingPolicy_PolicyType, &sScalingPolicy_StepScalingPolicyConfiguration, &sScalingPolicy_TargetTrackingScalingPolicyConfiguration, &sScalingPolicy_PredictiveScalingPolicyConfiguration, &sScalingPolicy_Alarms, &sScalingPolicy_CreationTime}, Seed: 17, Slots: []uint16{
+	0, 0, 3, 11, 8, 2, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 6, 0, 0, 0, 5, 10, 0,
+	0, 0, 7, 0, 9, 1, 0, 0,
+}}
+var mScheduledAction = smithy.SchemaMembers{List: []*smithy.Schema{&sScheduledAction_ScheduledActionName, &sScheduledAction_ScheduledActionARN, &sScheduledAction_ServiceNamespace, &sScheduledAction_Schedule, &sScheduledAction_Timezone, &sScheduledAction_ResourceId, &sScheduledAction_ScalableDimension, &sScheduledAction_StartTime, &sScheduledAction_EndTime, &sScheduledAction_ScalableTargetAction, &sScheduledAction_CreationTime}, Seed: 11, Slots: []uint16{
+	8, 0, 3, 0, 0, 4, 0, 0, 10, 0, 0, 0, 0, 0, 7, 1, 0, 0, 0, 0, 0, 6, 5, 0,
+	0, 0, 11, 0, 0, 2, 0, 9,
+}}
+var m_ScheduledActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScheduledActions_member}}
+var mServiceNamespace = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceNamespace_ECS, &sServiceNamespace_EMR, &sServiceNamespace_EC2, &sServiceNamespace_APPSTREAM, &sServiceNamespace_DYNAMODB, &sServiceNamespace_RDS, &sServiceNamespace_SAGEMAKER, &sServiceNamespace_CUSTOM_RESOURCE, &sServiceNamespace_COMPREHEND, &sServiceNamespace_LAMBDA, &sServiceNamespace_CASSANDRA, &sServiceNamespace_KAFKA, &sServiceNamespace_ELASTICACHE, &sServiceNamespace_NEPTUNE, &sServiceNamespace_WORKSPACES}, Seed: 67, Slots: []uint16{
+	1, 0, 0, 5, 0, 13, 8, 0, 9, 0, 2, 0, 6, 0, 14, 15, 0, 0, 0, 3, 0, 12, 11, 10,
+	7, 0, 0, 4, 0, 0, 0, 0,
+}}
+var mStepAdjustment = smithy.SchemaMembers{List: []*smithy.Schema{&sStepAdjustment_MetricIntervalLowerBound, &sStepAdjustment_MetricIntervalUpperBound, &sStepAdjustment_ScalingAdjustment}}
+var m_StepAdjustments = smithy.SchemaMembers{List: []*smithy.Schema{&s_StepAdjustments_member}}
+var mStepScalingPolicyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sStepScalingPolicyConfiguration_AdjustmentType, &sStepScalingPolicyConfiguration_StepAdjustments, &sStepScalingPolicyConfiguration_MinAdjustmentMagnitude, &sStepScalingPolicyConfiguration_Cooldown, &sStepScalingPolicyConfiguration_MetricAggregationType}}
+var mSuspendedState = smithy.SchemaMembers{List: []*smithy.Schema{&sSuspendedState_DynamicScalingInSuspended, &sSuspendedState_DynamicScalingOutSuspended, &sSuspendedState_ScheduledScalingSuspended}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mTargetTrackingMetric = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTrackingMetric_Dimensions, &sTargetTrackingMetric_MetricName, &sTargetTrackingMetric_Namespace}}
+var m_TargetTrackingMetricDataQueries = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetTrackingMetricDataQueries_member}}
+var mTargetTrackingMetricDataQuery = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTrackingMetricDataQuery_Expression, &sTargetTrackingMetricDataQuery_Id, &sTargetTrackingMetricDataQuery_Label, &sTargetTrackingMetricDataQuery_MetricStat, &sTargetTrackingMetricDataQuery_ReturnData}}
+var mTargetTrackingMetricDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTrackingMetricDimension_Name, &sTargetTrackingMetricDimension_Value}}
+var m_TargetTrackingMetricDimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetTrackingMetricDimensions_member}}
+var mTargetTrackingMetricStat = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTrackingMetricStat_Metric, &sTargetTrackingMetricStat_Stat, &sTargetTrackingMetricStat_Unit}}
+var mTargetTrackingScalingPolicyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTrackingScalingPolicyConfiguration_TargetValue, &sTargetTrackingScalingPolicyConfiguration_PredefinedMetricSpecification, &sTargetTrackingScalingPolicyConfiguration_CustomizedMetricSpecification, &sTargetTrackingScalingPolicyConfiguration_ScaleOutCooldown, &sTargetTrackingScalingPolicyConfiguration_ScaleInCooldown, &sTargetTrackingScalingPolicyConfiguration_DisableScaleIn}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message, &sTooManyTagsException_ResourceName}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mDeleteScalingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScalingPolicyRequest_PolicyName, &sDeleteScalingPolicyRequest_ServiceNamespace, &sDeleteScalingPolicyRequest_ResourceId, &sDeleteScalingPolicyRequest_ScalableDimension}}
+var mDeleteScheduledActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteScheduledActionRequest_ServiceNamespace, &sDeleteScheduledActionRequest_ScheduledActionName, &sDeleteScheduledActionRequest_ResourceId, &sDeleteScheduledActionRequest_ScalableDimension}}
+var mDeregisterScalableTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterScalableTargetRequest_ServiceNamespace, &sDeregisterScalableTargetRequest_ResourceId, &sDeregisterScalableTargetRequest_ScalableDimension}}
+var mDescribeScalableTargetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalableTargetsRequest_ServiceNamespace, &sDescribeScalableTargetsRequest_ResourceIds, &sDescribeScalableTargetsRequest_ScalableDimension, &sDescribeScalableTargetsRequest_MaxResults, &sDescribeScalableTargetsRequest_NextToken}}
+var mDescribeScalableTargetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalableTargetsResponse_ScalableTargets, &sDescribeScalableTargetsResponse_NextToken}}
+var mDescribeScalingActivitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalingActivitiesRequest_ServiceNamespace, &sDescribeScalingActivitiesRequest_ResourceId, &sDescribeScalingActivitiesRequest_ScalableDimension, &sDescribeScalingActivitiesRequest_MaxResults, &sDescribeScalingActivitiesRequest_NextToken, &sDescribeScalingActivitiesRequest_IncludeNotScaledActivities}}
+var mDescribeScalingActivitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalingActivitiesResponse_ScalingActivities, &sDescribeScalingActivitiesResponse_NextToken}}
+var mDescribeScalingPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalingPoliciesRequest_PolicyNames, &sDescribeScalingPoliciesRequest_ServiceNamespace, &sDescribeScalingPoliciesRequest_ResourceId, &sDescribeScalingPoliciesRequest_ScalableDimension, &sDescribeScalingPoliciesRequest_MaxResults, &sDescribeScalingPoliciesRequest_NextToken}}
+var mDescribeScalingPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScalingPoliciesResponse_ScalingPolicies, &sDescribeScalingPoliciesResponse_NextToken}}
+var mDescribeScheduledActionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScheduledActionsRequest_ScheduledActionNames, &sDescribeScheduledActionsRequest_ServiceNamespace, &sDescribeScheduledActionsRequest_ResourceId, &sDescribeScheduledActionsRequest_ScalableDimension, &sDescribeScheduledActionsRequest_MaxResults, &sDescribeScheduledActionsRequest_NextToken}}
+var mDescribeScheduledActionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeScheduledActionsResponse_ScheduledActions, &sDescribeScheduledActionsResponse_NextToken}}
+var mGetPredictiveScalingForecastRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPredictiveScalingForecastRequest_ServiceNamespace, &sGetPredictiveScalingForecastRequest_ResourceId, &sGetPredictiveScalingForecastRequest_ScalableDimension, &sGetPredictiveScalingForecastRequest_PolicyName, &sGetPredictiveScalingForecastRequest_StartTime, &sGetPredictiveScalingForecastRequest_EndTime}}
+var mGetPredictiveScalingForecastResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPredictiveScalingForecastResponse_LoadForecast, &sGetPredictiveScalingForecastResponse_CapacityForecast, &sGetPredictiveScalingForecastResponse_UpdateTime}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutScalingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutScalingPolicyRequest_PolicyName, &sPutScalingPolicyRequest_ServiceNamespace, &sPutScalingPolicyRequest_ResourceId, &sPutScalingPolicyRequest_ScalableDimension, &sPutScalingPolicyRequest_PolicyType, &sPutScalingPolicyRequest_StepScalingPolicyConfiguration, &sPutScalingPolicyRequest_TargetTrackingScalingPolicyConfiguration, &sPutScalingPolicyRequest_PredictiveScalingPolicyConfiguration}}
+var mPutScalingPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutScalingPolicyResponse_PolicyARN, &sPutScalingPolicyResponse_Alarms}}
+var mPutScheduledActionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutScheduledActionRequest_ServiceNamespace, &sPutScheduledActionRequest_Schedule, &sPutScheduledActionRequest_Timezone, &sPutScheduledActionRequest_ScheduledActionName, &sPutScheduledActionRequest_ResourceId, &sPutScheduledActionRequest_ScalableDimension, &sPutScheduledActionRequest_StartTime, &sPutScheduledActionRequest_EndTime, &sPutScheduledActionRequest_ScalableTargetAction}, Seed: 4, Slots: []uint16{
+	0, 9, 0, 0, 0, 5, 0, 0, 0, 0, 6, 0, 0, 7, 0, 0, 0, 0, 0, 3, 0, 2, 4, 0,
+	0, 0, 1, 0, 0, 0, 0, 8,
+}}
+var mRegisterScalableTargetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterScalableTargetRequest_ServiceNamespace, &sRegisterScalableTargetRequest_ResourceId, &sRegisterScalableTargetRequest_ScalableDimension, &sRegisterScalableTargetRequest_MinCapacity, &sRegisterScalableTargetRequest_MaxCapacity, &sRegisterScalableTargetRequest_RoleARN, &sRegisterScalableTargetRequest_SuspendedState, &sRegisterScalableTargetRequest_Tags}}
+var mRegisterScalableTargetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterScalableTargetResponse_ScalableTargetARN}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+
+var sDeleteScalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScalingPolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteScheduledAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduledAction, Type: smithy.ShapeTypeOperation})
+var sDeregisterScalableTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterScalableTarget, Type: smithy.ShapeTypeOperation})
+var sDescribeScalableTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalableTargets, Type: smithy.ShapeTypeOperation})
+var sDescribeScalingActivities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingActivities, Type: smithy.ShapeTypeOperation})
+var sDescribeScalingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingPolicies, Type: smithy.ShapeTypeOperation})
+var sDescribeScheduledActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScheduledActions, Type: smithy.ShapeTypeOperation})
+var sGetPredictiveScalingForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPredictiveScalingForecast, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sPutScalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutScalingPolicy, Type: smithy.ShapeTypeOperation})
+var sPutScheduledAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutScheduledAction, Type: smithy.ShapeTypeOperation})
+var sRegisterScalableTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterScalableTarget, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var s_AnyScaleFrontendService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnyScaleFrontendService, Type: smithy.ShapeTypeService})
+var sAdjustmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdjustmentType, Members: &mAdjustmentType, Type: smithy.ShapeTypeEnum})
+var sAlarm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlarm, Members: &mAlarm, Type: smithy.ShapeTypeStructure})
+var s_Alarms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alarms, Members: &m_Alarms, Type: smithy.ShapeTypeList})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sCapacityForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityForecast, Members: &mCapacityForecast, Type: smithy.ShapeTypeStructure})
+var sConcurrentUpdateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentUpdateException, Members: &mConcurrentUpdateException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_Cooldown = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cooldown, Type: smithy.ShapeTypeInteger})
+var sCustomizedMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomizedMetricSpecification, Members: &mCustomizedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var s_DisableScaleIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisableScaleIn, Type: smithy.ShapeTypeBoolean})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ExceptionMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var s_Expression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expression, Type: smithy.ShapeTypeString})
+var sFailedResourceAccessException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailedResourceAccessException, Members: &mFailedResourceAccessException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString})
+var s_IncludeNotScaledActivities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeNotScaledActivities, Type: smithy.ShapeTypeBoolean})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvalidNextTokenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNextTokenException, Members: &mInvalidNextTokenException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sLoadForecast = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoadForecast, Members: &mLoadForecast, Type: smithy.ShapeTypeStructure})
+var s_LoadForecasts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoadForecasts, Members: &m_LoadForecasts, Type: smithy.ShapeTypeList})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMetricAggregationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricAggregationType, Members: &mMetricAggregationType, Type: smithy.ShapeTypeEnum})
+var sMetricDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDimension, Members: &mMetricDimension, Type: smithy.ShapeTypeStructure})
+var s_MetricDimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionName, Type: smithy.ShapeTypeString})
+var s_MetricDimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensions, Members: &m_MetricDimensions, Type: smithy.ShapeTypeList})
+var s_MetricDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDimensionValue, Type: smithy.ShapeTypeString})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString})
+var s_MetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricNamespace, Type: smithy.ShapeTypeString})
+var s_MetricScale = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricScale, Type: smithy.ShapeTypeDouble})
+var sMetricStatistic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricStatistic, Members: &mMetricStatistic, Type: smithy.ShapeTypeEnum})
+var sMetricType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricType, Members: &mMetricType, Type: smithy.ShapeTypeEnum})
+var s_MetricUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricUnit, Type: smithy.ShapeTypeString})
+var s_MinAdjustmentMagnitude = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinAdjustmentMagnitude, Type: smithy.ShapeTypeInteger})
+var sNotScaledReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotScaledReason, Members: &mNotScaledReason, Type: smithy.ShapeTypeStructure})
+var s_NotScaledReasons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NotScaledReasons, Members: &m_NotScaledReasons, Type: smithy.ShapeTypeList})
+var sObjectNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObjectNotFoundException, Members: &mObjectNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sPredefinedMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredefinedMetricSpecification, Members: &mPredefinedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingCustomizedMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingCustomizedMetricSpecification, Members: &mPredictiveScalingCustomizedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var s_PredictiveScalingForecastTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingForecastTimestamps, Members: &m_PredictiveScalingForecastTimestamps, Type: smithy.ShapeTypeList})
+var s_PredictiveScalingForecastValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingForecastValues, Members: &m_PredictiveScalingForecastValues, Type: smithy.ShapeTypeList})
+var sPredictiveScalingMaxCapacityBreachBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingMaxCapacityBreachBehavior, Members: &mPredictiveScalingMaxCapacityBreachBehavior, Type: smithy.ShapeTypeEnum})
+var s_PredictiveScalingMaxCapacityBuffer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMaxCapacityBuffer, Type: smithy.ShapeTypeInteger})
+var sPredictiveScalingMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingMetric, Members: &mPredictiveScalingMetric, Type: smithy.ShapeTypeStructure})
+var s_PredictiveScalingMetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricDataQueries, Members: &m_PredictiveScalingMetricDataQueries, Type: smithy.ShapeTypeList})
+var sPredictiveScalingMetricDataQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingMetricDataQuery, Members: &mPredictiveScalingMetricDataQuery, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingMetricDimension, Members: &mPredictiveScalingMetricDimension, Type: smithy.ShapeTypeStructure})
+var s_PredictiveScalingMetricDimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricDimensionName, Type: smithy.ShapeTypeString})
+var s_PredictiveScalingMetricDimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricDimensions, Members: &m_PredictiveScalingMetricDimensions, Type: smithy.ShapeTypeList})
+var s_PredictiveScalingMetricDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricDimensionValue, Type: smithy.ShapeTypeString})
+var s_PredictiveScalingMetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricName, Type: smithy.ShapeTypeString})
+var s_PredictiveScalingMetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricNamespace, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingMetricSpecification, Members: &mPredictiveScalingMetricSpecification, Type: smithy.ShapeTypeStructure})
+var s_PredictiveScalingMetricSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricSpecifications, Members: &m_PredictiveScalingMetricSpecifications, Type: smithy.ShapeTypeList})
+var sPredictiveScalingMetricStat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingMetricStat, Members: &mPredictiveScalingMetricStat, Type: smithy.ShapeTypeStructure})
+var s_PredictiveScalingMetricType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricType, Type: smithy.ShapeTypeString})
+var s_PredictiveScalingMetricUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingMetricUnit, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingMode, Members: &mPredictiveScalingMode, Type: smithy.ShapeTypeEnum})
+var sPredictiveScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingPolicyConfiguration, Members: &mPredictiveScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingPredefinedLoadMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingPredefinedLoadMetricSpecification, Members: &mPredictiveScalingPredefinedLoadMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingPredefinedMetricPairSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingPredefinedMetricPairSpecification, Members: &mPredictiveScalingPredefinedMetricPairSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingPredefinedScalingMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictiveScalingPredefinedScalingMetricSpecification, Members: &mPredictiveScalingPredefinedScalingMetricSpecification, Type: smithy.ShapeTypeStructure})
+var s_PredictiveScalingSchedulingBufferTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PredictiveScalingSchedulingBufferTime, Type: smithy.ShapeTypeInteger})
+var s_ResourceCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_ResourceIdMaxLen1600 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var s_ResourceIdsMaxLen1600 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdsMaxLen1600, Members: &m_ResourceIdsMaxLen1600, Type: smithy.ShapeTypeList})
+var s_ResourceLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceLabel, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReturnData, Type: smithy.ShapeTypeBoolean})
+var sScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sScalableTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalableTarget, Members: &mScalableTarget, Type: smithy.ShapeTypeStructure})
+var sScalableTargetAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalableTargetAction, Members: &mScalableTargetAction, Type: smithy.ShapeTypeStructure})
+var s_ScalableTargets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScalableTargets, Members: &m_ScalableTargets, Type: smithy.ShapeTypeList})
+var s_ScalingActivities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScalingActivities, Members: &m_ScalingActivities, Type: smithy.ShapeTypeList})
+var sScalingActivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingActivity, Members: &mScalingActivity, Type: smithy.ShapeTypeStructure})
+var sScalingActivityStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingActivityStatusCode, Members: &mScalingActivityStatusCode, Type: smithy.ShapeTypeEnum})
+var s_ScalingAdjustment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScalingAdjustment, Type: smithy.ShapeTypeInteger})
+var s_ScalingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScalingPolicies, Members: &m_ScalingPolicies, Type: smithy.ShapeTypeList})
+var sScalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScalingPolicy, Members: &mScalingPolicy, Type: smithy.ShapeTypeStructure})
+var s_ScalingSuspended = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScalingSuspended, Type: smithy.ShapeTypeBoolean})
+var sScheduledAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScheduledAction, Members: &mScheduledAction, Type: smithy.ShapeTypeStructure})
+var s_ScheduledActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduledActionName, Type: smithy.ShapeTypeString})
+var s_ScheduledActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScheduledActions, Members: &m_ScheduledActions, Type: smithy.ShapeTypeList})
+var sServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sStepAdjustment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepAdjustment, Members: &mStepAdjustment, Type: smithy.ShapeTypeStructure})
+var s_StepAdjustments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepAdjustments, Members: &m_StepAdjustments, Type: smithy.ShapeTypeList})
+var sStepScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepScalingPolicyConfiguration, Members: &mStepScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sSuspendedState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuspendedState, Members: &mSuspendedState, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetric = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTrackingMetric, Members: &mTargetTrackingMetric, Type: smithy.ShapeTypeStructure})
+var s_TargetTrackingMetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingMetricDataQueries, Members: &m_TargetTrackingMetricDataQueries, Type: smithy.ShapeTypeList})
+var sTargetTrackingMetricDataQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTrackingMetricDataQuery, Members: &mTargetTrackingMetricDataQuery, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingMetricDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTrackingMetricDimension, Members: &mTargetTrackingMetricDimension, Type: smithy.ShapeTypeStructure})
+var s_TargetTrackingMetricDimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingMetricDimensionName, Type: smithy.ShapeTypeString})
+var s_TargetTrackingMetricDimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingMetricDimensions, Members: &m_TargetTrackingMetricDimensions, Type: smithy.ShapeTypeList})
+var s_TargetTrackingMetricDimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingMetricDimensionValue, Type: smithy.ShapeTypeString})
+var s_TargetTrackingMetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingMetricName, Type: smithy.ShapeTypeString})
+var s_TargetTrackingMetricNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingMetricNamespace, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetricStat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTrackingMetricStat, Members: &mTargetTrackingMetricStat, Type: smithy.ShapeTypeStructure})
+var s_TargetTrackingMetricUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetTrackingMetricUnit, Type: smithy.ShapeTypeString})
+var sTargetTrackingScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTrackingScalingPolicyConfiguration, Members: &mTargetTrackingScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var s_TimestampType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_XmlString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDeleteScalingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScalingPolicyRequest, Members: &mDeleteScalingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteScalingPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScalingPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduledActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduledActionRequest, Members: &mDeleteScheduledActionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteScheduledActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteScheduledActionResponse, Type: smithy.ShapeTypeStructure})
+var sDeregisterScalableTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterScalableTargetRequest, Members: &mDeregisterScalableTargetRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterScalableTargetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterScalableTargetResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeScalableTargetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalableTargetsRequest, Members: &mDescribeScalableTargetsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeScalableTargetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalableTargetsResponse, Members: &mDescribeScalableTargetsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeScalingActivitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingActivitiesRequest, Members: &mDescribeScalingActivitiesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeScalingActivitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingActivitiesResponse, Members: &mDescribeScalingActivitiesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeScalingPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingPoliciesRequest, Members: &mDescribeScalingPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeScalingPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScalingPoliciesResponse, Members: &mDescribeScalingPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeScheduledActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScheduledActionsRequest, Members: &mDescribeScheduledActionsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeScheduledActionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeScheduledActionsResponse, Members: &mDescribeScheduledActionsResponse, Type: smithy.ShapeTypeStructure})
+var sGetPredictiveScalingForecastRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPredictiveScalingForecastRequest, Members: &mGetPredictiveScalingForecastRequest, Type: smithy.ShapeTypeStructure})
+var sGetPredictiveScalingForecastResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPredictiveScalingForecastResponse, Members: &mGetPredictiveScalingForecastResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutScalingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutScalingPolicyRequest, Members: &mPutScalingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutScalingPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutScalingPolicyResponse, Members: &mPutScalingPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sPutScheduledActionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutScheduledActionRequest, Members: &mPutScheduledActionRequest, Type: smithy.ShapeTypeStructure})
+var sPutScheduledActionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutScheduledActionResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterScalableTargetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterScalableTargetRequest, Members: &mRegisterScalableTargetRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterScalableTargetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterScalableTargetResponse, Members: &mRegisterScalableTargetResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+
+var sAdjustmentType_ChangeInCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeInCapacity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdjustmentType_PercentChangeInCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PercentChangeInCapacity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdjustmentType_ExactCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExactCapacity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAlarm_AlarmName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmName", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAlarm_AlarmARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlarmARN", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_Alarms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlarm, Members: &mAlarm, Type: smithy.ShapeTypeStructure})
+var sCapacityForecast_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamps", ID: &i_PredictiveScalingForecastTimestamps, Members: &m_PredictiveScalingForecastTimestamps, Type: smithy.ShapeTypeList})
+var sCapacityForecast_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_PredictiveScalingForecastValues, Members: &m_PredictiveScalingForecastValues, Type: smithy.ShapeTypeList})
+var sConcurrentUpdateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCustomizedMetricSpecification_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_MetricName, Type: smithy.ShapeTypeString})
+var sCustomizedMetricSpecification_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_MetricNamespace, Type: smithy.ShapeTypeString})
+var sCustomizedMetricSpecification_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_MetricDimensions, Members: &m_MetricDimensions, Type: smithy.ShapeTypeList})
+var sCustomizedMetricSpecification_Statistic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Statistic", ID: &iMetricStatistic, Members: &mMetricStatistic, Type: smithy.ShapeTypeEnum})
+var sCustomizedMetricSpecification_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_MetricUnit, Type: smithy.ShapeTypeString})
+var sCustomizedMetricSpecification_Metrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metrics", ID: &i_TargetTrackingMetricDataQueries, Members: &m_TargetTrackingMetricDataQueries, Type: smithy.ShapeTypeList})
+var sFailedResourceAccessException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInternalServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidNextTokenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLoadForecast_Timestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamps", ID: &i_PredictiveScalingForecastTimestamps, Members: &m_PredictiveScalingForecastTimestamps, Type: smithy.ShapeTypeList})
+var sLoadForecast_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_PredictiveScalingForecastValues, Members: &m_PredictiveScalingForecastValues, Type: smithy.ShapeTypeList})
+var sLoadForecast_MetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSpecification", ID: &iPredictiveScalingMetricSpecification, Members: &mPredictiveScalingMetricSpecification, Type: smithy.ShapeTypeStructure})
+var s_LoadForecasts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLoadForecast, Members: &mLoadForecast, Type: smithy.ShapeTypeStructure})
+var sMetricAggregationType_Average = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Average", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricAggregationType_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricAggregationType_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricDimensionName, Type: smithy.ShapeTypeString})
+var sMetricDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_MetricDimensionValue, Type: smithy.ShapeTypeString})
+var s_MetricDimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDimension, Members: &mMetricDimension, Type: smithy.ShapeTypeStructure})
+var sMetricStatistic_Average = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Average", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricStatistic_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricStatistic_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricStatistic_SampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricStatistic_Sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sum", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_DynamoDBReadCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBReadCapacityUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_DynamoDBWriteCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBWriteCapacityUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ALBRequestCountPerTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALBRequestCountPerTarget", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_RDSReaderAverageCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDSReaderAverageCPUUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_RDSReaderAverageDatabaseConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDSReaderAverageDatabaseConnections", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_EC2SpotFleetRequestAverageCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2SpotFleetRequestAverageCPUUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_EC2SpotFleetRequestAverageNetworkIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2SpotFleetRequestAverageNetworkIn", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_EC2SpotFleetRequestAverageNetworkOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2SpotFleetRequestAverageNetworkOut", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_SageMakerVariantInvocationsPerInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerVariantInvocationsPerInstance", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ECSServiceAverageCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECSServiceAverageCPUUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ECSServiceAverageMemoryUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECSServiceAverageMemoryUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_AppStreamAverageCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppStreamAverageCapacityUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ComprehendInferenceUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendInferenceUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_LambdaProvisionedConcurrencyUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaProvisionedConcurrencyUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_CassandraReadCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CassandraReadCapacityUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_CassandraWriteCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CassandraWriteCapacityUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_KafkaBrokerStorageUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaBrokerStorageUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ElastiCacheEngineCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheEngineCPUUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ElastiCacheDatabaseMemoryUsagePercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheDatabaseMemoryUsagePercentage", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ElastiCachePrimaryEngineCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCachePrimaryEngineCPUUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ElastiCacheReplicaEngineCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheReplicaEngineCPUUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_NeptuneReaderAverageCPUUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NeptuneReaderAverageCPUUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_SageMakerVariantProvisionedConcurrencyUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerVariantProvisionedConcurrencyUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_SageMakerInferenceComponentInvocationsPerCopy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerInferenceComponentInvocationsPerCopy", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_WorkSpacesAverageUserSessionsCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkSpacesAverageUserSessionsCapacityUtilization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_SageMakerVariantConcurrentRequestsPerModelHighResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerVariantConcurrentRequestsPerModelHighResolution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ECSServiceAverageCPUUtilizationHighResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECSServiceAverageCPUUtilizationHighResolution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetricType_ECSServiceAverageMemoryUtilizationHighResolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECSServiceAverageMemoryUtilizationHighResolution", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNotScaledReason_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sNotScaledReason_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sNotScaledReason_MinCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sNotScaledReason_CurrentCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var s_NotScaledReasons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNotScaledReason, Members: &mNotScaledReason, Type: smithy.ShapeTypeStructure})
+var sObjectNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sPolicyType_StepScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepScaling", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyType_TargetTrackingScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTrackingScaling", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyType_PredictiveScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictiveScaling", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPredefinedMetricSpecification_PredefinedMetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedMetricType", ID: &iMetricType, Members: &mMetricType, Type: smithy.ShapeTypeEnum})
+var sPredefinedMetricSpecification_ResourceLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLabel", ID: &i_ResourceLabel, Type: smithy.ShapeTypeString})
+var sPredictiveScalingCustomizedMetricSpecification_MetricDataQueries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDataQueries", ID: &i_PredictiveScalingMetricDataQueries, Members: &m_PredictiveScalingMetricDataQueries, Type: smithy.ShapeTypeList})
+var s_PredictiveScalingForecastTimestamps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var s_PredictiveScalingForecastValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetricScale, Type: smithy.ShapeTypeDouble})
+var sPredictiveScalingMaxCapacityBreachBehavior_HonorMaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HonorMaxCapacity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMaxCapacityBreachBehavior_IncreaseMaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncreaseMaxCapacity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetric_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_PredictiveScalingMetricDimensions, Members: &m_PredictiveScalingMetricDimensions, Type: smithy.ShapeTypeList})
+var sPredictiveScalingMetric_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_PredictiveScalingMetricName, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMetric_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_PredictiveScalingMetricNamespace, Type: smithy.ShapeTypeString})
+var s_PredictiveScalingMetricDataQueries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictiveScalingMetricDataQuery, Members: &mPredictiveScalingMetricDataQuery, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricDataQuery_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMetricDataQuery_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_Expression, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMetricDataQuery_MetricStat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStat", ID: &iPredictiveScalingMetricStat, Members: &mPredictiveScalingMetricStat, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricDataQuery_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMetricDataQuery_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnData", ID: &i_ReturnData, Type: smithy.ShapeTypeBoolean})
+var sPredictiveScalingMetricDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PredictiveScalingMetricDimensionName, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMetricDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_PredictiveScalingMetricDimensionValue, Type: smithy.ShapeTypeString})
+var s_PredictiveScalingMetricDimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictiveScalingMetricDimension, Members: &mPredictiveScalingMetricDimension, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricSpecification_TargetValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetValue", ID: &i_MetricScale, Type: smithy.ShapeTypeDouble})
+var sPredictiveScalingMetricSpecification_PredefinedMetricPairSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedMetricPairSpecification", ID: &iPredictiveScalingPredefinedMetricPairSpecification, Members: &mPredictiveScalingPredefinedMetricPairSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedScalingMetricSpecification", ID: &iPredictiveScalingPredefinedScalingMetricSpecification, Members: &mPredictiveScalingPredefinedScalingMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedLoadMetricSpecification", ID: &iPredictiveScalingPredefinedLoadMetricSpecification, Members: &mPredictiveScalingPredefinedLoadMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomizedScalingMetricSpecification", ID: &iPredictiveScalingCustomizedMetricSpecification, Members: &mPredictiveScalingCustomizedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomizedLoadMetricSpecification", ID: &iPredictiveScalingCustomizedMetricSpecification, Members: &mPredictiveScalingCustomizedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomizedCapacityMetricSpecification", ID: &iPredictiveScalingCustomizedMetricSpecification, Members: &mPredictiveScalingCustomizedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var s_PredictiveScalingMetricSpecifications_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictiveScalingMetricSpecification, Members: &mPredictiveScalingMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricStat_Metric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metric", ID: &iPredictiveScalingMetric, Members: &mPredictiveScalingMetric, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMetricStat_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMetricStat_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_PredictiveScalingMetricUnit, Type: smithy.ShapeTypeString})
+var sPredictiveScalingMode_ForecastOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingMode_ForecastAndScale = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForecastAndScale", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPredictiveScalingPolicyConfiguration_MetricSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricSpecifications", ID: &i_PredictiveScalingMetricSpecifications, Members: &m_PredictiveScalingMetricSpecifications, Type: smithy.ShapeTypeList})
+var sPredictiveScalingPolicyConfiguration_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iPredictiveScalingMode, Members: &mPredictiveScalingMode, Type: smithy.ShapeTypeEnum})
+var sPredictiveScalingPolicyConfiguration_SchedulingBufferTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchedulingBufferTime", ID: &i_PredictiveScalingSchedulingBufferTime, Type: smithy.ShapeTypeInteger})
+var sPredictiveScalingPolicyConfiguration_MaxCapacityBreachBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacityBreachBehavior", ID: &iPredictiveScalingMaxCapacityBreachBehavior, Members: &mPredictiveScalingMaxCapacityBreachBehavior, Type: smithy.ShapeTypeEnum})
+var sPredictiveScalingPolicyConfiguration_MaxCapacityBuffer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacityBuffer", ID: &i_PredictiveScalingMaxCapacityBuffer, Type: smithy.ShapeTypeInteger})
+var sPredictiveScalingPredefinedLoadMetricSpecification_PredefinedMetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedMetricType", ID: &i_PredictiveScalingMetricType, Type: smithy.ShapeTypeString})
+var sPredictiveScalingPredefinedLoadMetricSpecification_ResourceLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLabel", ID: &i_ResourceLabel, Type: smithy.ShapeTypeString})
+var sPredictiveScalingPredefinedMetricPairSpecification_PredefinedMetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedMetricType", ID: &i_PredictiveScalingMetricType, Type: smithy.ShapeTypeString})
+var sPredictiveScalingPredefinedMetricPairSpecification_ResourceLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLabel", ID: &i_ResourceLabel, Type: smithy.ShapeTypeString})
+var sPredictiveScalingPredefinedScalingMetricSpecification_PredefinedMetricType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedMetricType", ID: &i_PredictiveScalingMetricType, Type: smithy.ShapeTypeString})
+var sPredictiveScalingPredefinedScalingMetricSpecification_ResourceLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLabel", ID: &i_ResourceLabel, Type: smithy.ShapeTypeString})
+var s_ResourceIdsMaxLen1600_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sScalableDimension_ECSServiceDesiredCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECSServiceDesiredCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_EC2SpotFleetRequestTargetCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2SpotFleetRequestTargetCapacity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_EMRInstanceGroupInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMRInstanceGroupInstanceCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_AppstreamFleetDesiredCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppstreamFleetDesiredCapacity", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_DynamoDBTableReadCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBTableReadCapacityUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_DynamoDBTableWriteCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBTableWriteCapacityUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_DynamoDBIndexReadCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBIndexReadCapacityUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_DynamoDBIndexWriteCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBIndexWriteCapacityUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_RDSClusterReadReplicaCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDSClusterReadReplicaCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_SageMakerVariantDesiredInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerVariantDesiredInstanceCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_CustomResourceScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomResourceScalableDimension", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_ComprehendDocClassifierEndpointInferenceUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendDocClassifierEndpointInferenceUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_ComprehendEntityRecognizerEndpointInferenceUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendEntityRecognizerEndpointInferenceUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_LambdaFunctionProvisionedConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionProvisionedConcurrency", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_CassandraTableReadCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CassandraTableReadCapacityUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_CassandraTableWriteCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CassandraTableWriteCapacityUnits", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_KafkaBrokerStorageVolumeSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KafkaBrokerStorageVolumeSize", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_ElastiCacheCacheClusterNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheCacheClusterNodes", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_ElastiCacheReplicationGroupNodeGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheReplicationGroupNodeGroups", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_ElastiCacheReplicationGroupReplicas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElastiCacheReplicationGroupReplicas", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_NeptuneClusterReadReplicaCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NeptuneClusterReadReplicaCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_SageMakerVariantDesiredProvisionedConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerVariantDesiredProvisionedConcurrency", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_SageMakerInferenceComponentDesiredCopyCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerInferenceComponentDesiredCopyCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableDimension_WorkSpacesWorkSpacesPoolDesiredUserSessions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkSpacesWorkSpacesPoolDesiredUserSessions", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalableTarget_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sScalableTarget_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScalableTarget_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sScalableTarget_MinCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sScalableTarget_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sScalableTarget_PredictedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictedCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sScalableTarget_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScalableTarget_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sScalableTarget_SuspendedState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuspendedState", ID: &iSuspendedState, Members: &mSuspendedState, Type: smithy.ShapeTypeStructure})
+var sScalableTarget_ScalableTargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableTargetARN", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sScalableTargetAction_MinCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sScalableTargetAction_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var s_ScalableTargets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScalableTarget, Members: &mScalableTarget, Type: smithy.ShapeTypeStructure})
+var s_ScalingActivities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScalingActivity, Members: &mScalingActivity, Type: smithy.ShapeTypeStructure})
+var sScalingActivity_ActivityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActivityId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sScalingActivity_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sScalingActivity_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScalingActivity_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sScalingActivity_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sScalingActivity_Cause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cause", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sScalingActivity_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sScalingActivity_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sScalingActivity_StatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusCode", ID: &iScalingActivityStatusCode, Members: &mScalingActivityStatusCode, Type: smithy.ShapeTypeEnum})
+var sScalingActivity_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sScalingActivity_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sScalingActivity_NotScaledReasons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotScaledReasons", ID: &i_NotScaledReasons, Members: &m_NotScaledReasons, Type: smithy.ShapeTypeList})
+var sScalingActivityStatusCode_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalingActivityStatusCode_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalingActivityStatusCode_Successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Successful", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalingActivityStatusCode_Overridden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overridden", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalingActivityStatusCode_Unfulfilled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unfulfilled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScalingActivityStatusCode_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ScalingPolicies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScalingPolicy, Members: &mScalingPolicy, Type: smithy.ShapeTypeStructure})
+var sScalingPolicy_PolicyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyARN", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScalingPolicy_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sScalingPolicy_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sScalingPolicy_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScalingPolicy_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sScalingPolicy_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sScalingPolicy_StepScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepScalingPolicyConfiguration", ID: &iStepScalingPolicyConfiguration, Members: &mStepScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sScalingPolicy_TargetTrackingScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTrackingScalingPolicyConfiguration", ID: &iTargetTrackingScalingPolicyConfiguration, Members: &mTargetTrackingScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sScalingPolicy_PredictiveScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictiveScalingPolicyConfiguration", ID: &iPredictiveScalingPolicyConfiguration, Members: &mPredictiveScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sScalingPolicy_Alarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alarms", ID: &i_Alarms, Members: &m_Alarms, Type: smithy.ShapeTypeList})
+var sScalingPolicy_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sScheduledAction_ScheduledActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledActionName", ID: &i_ScheduledActionName, Type: smithy.ShapeTypeString})
+var sScheduledAction_ScheduledActionARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledActionARN", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScheduledAction_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sScheduledAction_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScheduledAction_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScheduledAction_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sScheduledAction_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sScheduledAction_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sScheduledAction_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sScheduledAction_ScalableTargetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableTargetAction", ID: &iScalableTargetAction, Members: &mScalableTargetAction, Type: smithy.ShapeTypeStructure})
+var sScheduledAction_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var s_ScheduledActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScheduledAction, Members: &mScheduledAction, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_ECS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_EMR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_APPSTREAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPSTREAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_DYNAMODB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DYNAMODB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_RDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_SAGEMAKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_CUSTOM_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_COMPREHEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPREHEND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_CASSANDRA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CASSANDRA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_KAFKA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KAFKA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_ELASTICACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELASTICACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_NEPTUNE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEPTUNE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceNamespace_WORKSPACES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WORKSPACES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepAdjustment_MetricIntervalLowerBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricIntervalLowerBound", ID: &i_MetricScale, Type: smithy.ShapeTypeDouble})
+var sStepAdjustment_MetricIntervalUpperBound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricIntervalUpperBound", ID: &i_MetricScale, Type: smithy.ShapeTypeDouble})
+var sStepAdjustment_ScalingAdjustment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingAdjustment", ID: &i_ScalingAdjustment, Type: smithy.ShapeTypeInteger})
+var s_StepAdjustments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStepAdjustment, Members: &mStepAdjustment, Type: smithy.ShapeTypeStructure})
+var sStepScalingPolicyConfiguration_AdjustmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdjustmentType", ID: &iAdjustmentType, Members: &mAdjustmentType, Type: smithy.ShapeTypeEnum})
+var sStepScalingPolicyConfiguration_StepAdjustments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepAdjustments", ID: &i_StepAdjustments, Members: &m_StepAdjustments, Type: smithy.ShapeTypeList})
+var sStepScalingPolicyConfiguration_MinAdjustmentMagnitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinAdjustmentMagnitude", ID: &i_MinAdjustmentMagnitude, Type: smithy.ShapeTypeInteger})
+var sStepScalingPolicyConfiguration_Cooldown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cooldown", ID: &i_Cooldown, Type: smithy.ShapeTypeInteger})
+var sStepScalingPolicyConfiguration_MetricAggregationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricAggregationType", ID: &iMetricAggregationType, Members: &mMetricAggregationType, Type: smithy.ShapeTypeEnum})
+var sSuspendedState_DynamicScalingInSuspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicScalingInSuspended", ID: &i_ScalingSuspended, Type: smithy.ShapeTypeBoolean})
+var sSuspendedState_DynamicScalingOutSuspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamicScalingOutSuspended", ID: &i_ScalingSuspended, Type: smithy.ShapeTypeBoolean})
+var sSuspendedState_ScheduledScalingSuspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledScalingSuspended", ID: &i_ScalingSuspended, Type: smithy.ShapeTypeBoolean})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetric_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_TargetTrackingMetricDimensions, Members: &m_TargetTrackingMetricDimensions, Type: smithy.ShapeTypeList})
+var sTargetTrackingMetric_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &i_TargetTrackingMetricName, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetric_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_TargetTrackingMetricNamespace, Type: smithy.ShapeTypeString})
+var s_TargetTrackingMetricDataQueries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetTrackingMetricDataQuery, Members: &mTargetTrackingMetricDataQuery, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingMetricDataQuery_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_Expression, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetricDataQuery_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetricDataQuery_Label = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Label", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetricDataQuery_MetricStat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricStat", ID: &iTargetTrackingMetricStat, Members: &mTargetTrackingMetricStat, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingMetricDataQuery_ReturnData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnData", ID: &i_ReturnData, Type: smithy.ShapeTypeBoolean})
+var sTargetTrackingMetricDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_TargetTrackingMetricDimensionName, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetricDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TargetTrackingMetricDimensionValue, Type: smithy.ShapeTypeString})
+var s_TargetTrackingMetricDimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTargetTrackingMetricDimension, Members: &mTargetTrackingMetricDimension, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingMetricStat_Metric = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metric", ID: &iTargetTrackingMetric, Members: &mTargetTrackingMetric, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingMetricStat_Stat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stat", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sTargetTrackingMetricStat_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_TargetTrackingMetricUnit, Type: smithy.ShapeTypeString})
+var sTargetTrackingScalingPolicyConfiguration_TargetValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetValue", ID: &i_MetricScale, Type: smithy.ShapeTypeDouble})
+var sTargetTrackingScalingPolicyConfiguration_PredefinedMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredefinedMetricSpecification", ID: &iPredefinedMetricSpecification, Members: &mPredefinedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingScalingPolicyConfiguration_CustomizedMetricSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomizedMetricSpecification", ID: &iCustomizedMetricSpecification, Members: &mCustomizedMetricSpecification, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingScalingPolicyConfiguration_ScaleOutCooldown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScaleOutCooldown", ID: &i_Cooldown, Type: smithy.ShapeTypeInteger})
+var sTargetTrackingScalingPolicyConfiguration_ScaleInCooldown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScaleInCooldown", ID: &i_Cooldown, Type: smithy.ShapeTypeInteger})
+var sTargetTrackingScalingPolicyConfiguration_DisableScaleIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableScaleIn", ID: &i_DisableScaleIn, Type: smithy.ShapeTypeBoolean})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessage, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDeleteScalingPolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDeleteScalingPolicyRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sDeleteScalingPolicyRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDeleteScalingPolicyRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sDeleteScheduledActionRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sDeleteScheduledActionRequest_ScheduledActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledActionName", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDeleteScheduledActionRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDeleteScheduledActionRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sDeregisterScalableTargetRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sDeregisterScalableTargetRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDeregisterScalableTargetRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sDescribeScalableTargetsRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sDescribeScalableTargetsRequest_ResourceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIds", ID: &i_ResourceIdsMaxLen1600, Members: &m_ResourceIdsMaxLen1600, Type: smithy.ShapeTypeList})
+var sDescribeScalableTargetsRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sDescribeScalableTargetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeScalableTargetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDescribeScalableTargetsResponse_ScalableTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableTargets", ID: &i_ScalableTargets, Members: &m_ScalableTargets, Type: smithy.ShapeTypeList})
+var sDescribeScalableTargetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDescribeScalingActivitiesRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sDescribeScalingActivitiesRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDescribeScalingActivitiesRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sDescribeScalingActivitiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeScalingActivitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDescribeScalingActivitiesRequest_IncludeNotScaledActivities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeNotScaledActivities", ID: &i_IncludeNotScaledActivities, Type: smithy.ShapeTypeBoolean})
+var sDescribeScalingActivitiesResponse_ScalingActivities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingActivities", ID: &i_ScalingActivities, Members: &m_ScalingActivities, Type: smithy.ShapeTypeList})
+var sDescribeScalingActivitiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDescribeScalingPoliciesRequest_PolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyNames", ID: &i_ResourceIdsMaxLen1600, Members: &m_ResourceIdsMaxLen1600, Type: smithy.ShapeTypeList})
+var sDescribeScalingPoliciesRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sDescribeScalingPoliciesRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDescribeScalingPoliciesRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sDescribeScalingPoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeScalingPoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDescribeScalingPoliciesResponse_ScalingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalingPolicies", ID: &i_ScalingPolicies, Members: &m_ScalingPolicies, Type: smithy.ShapeTypeList})
+var sDescribeScalingPoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDescribeScheduledActionsRequest_ScheduledActionNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledActionNames", ID: &i_ResourceIdsMaxLen1600, Members: &m_ResourceIdsMaxLen1600, Type: smithy.ShapeTypeList})
+var sDescribeScheduledActionsRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sDescribeScheduledActionsRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sDescribeScheduledActionsRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sDescribeScheduledActionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeScheduledActionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sDescribeScheduledActionsResponse_ScheduledActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledActions", ID: &i_ScheduledActions, Members: &m_ScheduledActions, Type: smithy.ShapeTypeList})
+var sDescribeScheduledActionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sGetPredictiveScalingForecastRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sGetPredictiveScalingForecastRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sGetPredictiveScalingForecastRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sGetPredictiveScalingForecastRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sGetPredictiveScalingForecastRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sGetPredictiveScalingForecastRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sGetPredictiveScalingForecastResponse_LoadForecast = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoadForecast", ID: &i_LoadForecasts, Members: &m_LoadForecasts, Type: smithy.ShapeTypeList})
+var sGetPredictiveScalingForecastResponse_CapacityForecast = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityForecast", ID: &iCapacityForecast, Members: &mCapacityForecast, Type: smithy.ShapeTypeStructure})
+var sGetPredictiveScalingForecastResponse_UpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sPutScalingPolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPutScalingPolicyRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sPutScalingPolicyRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sPutScalingPolicyRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sPutScalingPolicyRequest_PolicyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyType", ID: &iPolicyType, Members: &mPolicyType, Type: smithy.ShapeTypeEnum})
+var sPutScalingPolicyRequest_StepScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepScalingPolicyConfiguration", ID: &iStepScalingPolicyConfiguration, Members: &mStepScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutScalingPolicyRequest_TargetTrackingScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetTrackingScalingPolicyConfiguration", ID: &iTargetTrackingScalingPolicyConfiguration, Members: &mTargetTrackingScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutScalingPolicyRequest_PredictiveScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictiveScalingPolicyConfiguration", ID: &iPredictiveScalingPolicyConfiguration, Members: &mPredictiveScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutScalingPolicyResponse_PolicyARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyARN", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sPutScalingPolicyResponse_Alarms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alarms", ID: &i_Alarms, Members: &m_Alarms, Type: smithy.ShapeTypeList})
+var sPutScheduledActionRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sPutScheduledActionRequest_Schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedule", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sPutScheduledActionRequest_Timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timezone", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sPutScheduledActionRequest_ScheduledActionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduledActionName", ID: &i_ScheduledActionName, Type: smithy.ShapeTypeString})
+var sPutScheduledActionRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sPutScheduledActionRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sPutScheduledActionRequest_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sPutScheduledActionRequest_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_TimestampType, Type: smithy.ShapeTypeTimestamp})
+var sPutScheduledActionRequest_ScalableTargetAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableTargetAction", ID: &iScalableTargetAction, Members: &mScalableTargetAction, Type: smithy.ShapeTypeStructure})
+var sRegisterScalableTargetRequest_ServiceNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceNamespace", ID: &iServiceNamespace, Members: &mServiceNamespace, Type: smithy.ShapeTypeEnum})
+var sRegisterScalableTargetRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sRegisterScalableTargetRequest_ScalableDimension = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableDimension", ID: &iScalableDimension, Members: &mScalableDimension, Type: smithy.ShapeTypeEnum})
+var sRegisterScalableTargetRequest_MinCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sRegisterScalableTargetRequest_MaxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxCapacity", ID: &i_ResourceCapacity, Type: smithy.ShapeTypeInteger})
+var sRegisterScalableTargetRequest_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_ResourceIdMaxLen1600, Type: smithy.ShapeTypeString})
+var sRegisterScalableTargetRequest_SuspendedState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuspendedState", ID: &iSuspendedState, Members: &mSuspendedState, Type: smithy.ShapeTypeStructure})
+var sRegisterScalableTargetRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRegisterScalableTargetResponse_ScalableTargetARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScalableTargetARN", ID: &i_XmlString, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+
+var DeleteScalingPolicy = &sDeleteScalingPolicy
+
+var DeleteScheduledAction = &sDeleteScheduledAction
+
+var DeregisterScalableTarget = &sDeregisterScalableTarget
+
+var DescribeScalableTargets = &sDescribeScalableTargets
+
+var DescribeScalingActivities = &sDescribeScalingActivities
+
+var DescribeScalingPolicies = &sDescribeScalingPolicies
+
+var DescribeScheduledActions = &sDescribeScheduledActions
+
+var GetPredictiveScalingForecast = &sGetPredictiveScalingForecast
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutScalingPolicy = &sPutScalingPolicy
+
+var PutScheduledAction = &sPutScheduledAction
+
+var RegisterScalableTarget = &sRegisterScalableTarget
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _AnyScaleFrontendService = &s_AnyScaleFrontendService
+
+var AdjustmentType = &sAdjustmentType
+var AdjustmentType_ChangeInCapacity = &sAdjustmentType_ChangeInCapacity
+var AdjustmentType_PercentChangeInCapacity = &sAdjustmentType_PercentChangeInCapacity
+var AdjustmentType_ExactCapacity = &sAdjustmentType_ExactCapacity
+
+var Alarm = &sAlarm
+var Alarm_AlarmName = &sAlarm_AlarmName
+var Alarm_AlarmARN = &sAlarm_AlarmARN
+
+var _Alarms = &s_Alarms
+var _Alarms_member = &s_Alarms_member
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var CapacityForecast = &sCapacityForecast
+var CapacityForecast_Timestamps = &sCapacityForecast_Timestamps
+var CapacityForecast_Values = &sCapacityForecast_Values
+
+var ConcurrentUpdateException = &sConcurrentUpdateException
+var ConcurrentUpdateException_Message = &sConcurrentUpdateException_Message
+
+var _Cooldown = &s_Cooldown
+
+var CustomizedMetricSpecification = &sCustomizedMetricSpecification
+var CustomizedMetricSpecification_MetricName = &sCustomizedMetricSpecification_MetricName
+var CustomizedMetricSpecification_Namespace = &sCustomizedMetricSpecification_Namespace
+var CustomizedMetricSpecification_Dimensions = &sCustomizedMetricSpecification_Dimensions
+var CustomizedMetricSpecification_Statistic = &sCustomizedMetricSpecification_Statistic
+var CustomizedMetricSpecification_Unit = &sCustomizedMetricSpecification_Unit
+var CustomizedMetricSpecification_Metrics = &sCustomizedMetricSpecification_Metrics
+
+var _DisableScaleIn = &s_DisableScaleIn
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _ExceptionMessage = &s_ExceptionMessage
+
+var _Expression = &s_Expression
+
+var FailedResourceAccessException = &sFailedResourceAccessException
+var FailedResourceAccessException_Message = &sFailedResourceAccessException_Message
+
+var _Id = &s_Id
+
+var _IncludeNotScaledActivities = &s_IncludeNotScaledActivities
+
+var InternalServiceException = &sInternalServiceException
+var InternalServiceException_Message = &sInternalServiceException_Message
+
+var InvalidNextTokenException = &sInvalidNextTokenException
+var InvalidNextTokenException_Message = &sInvalidNextTokenException_Message
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var LoadForecast = &sLoadForecast
+var LoadForecast_Timestamps = &sLoadForecast_Timestamps
+var LoadForecast_Values = &sLoadForecast_Values
+var LoadForecast_MetricSpecification = &sLoadForecast_MetricSpecification
+
+var _LoadForecasts = &s_LoadForecasts
+var _LoadForecasts_member = &s_LoadForecasts_member
+
+var _MaxResults = &s_MaxResults
+
+var MetricAggregationType = &sMetricAggregationType
+var MetricAggregationType_Average = &sMetricAggregationType_Average
+var MetricAggregationType_Minimum = &sMetricAggregationType_Minimum
+var MetricAggregationType_Maximum = &sMetricAggregationType_Maximum
+
+var MetricDimension = &sMetricDimension
+var MetricDimension_Name = &sMetricDimension_Name
+var MetricDimension_Value = &sMetricDimension_Value
+
+var _MetricDimensionName = &s_MetricDimensionName
+
+var _MetricDimensions = &s_MetricDimensions
+var _MetricDimensions_member = &s_MetricDimensions_member
+
+var _MetricDimensionValue = &s_MetricDimensionValue
+
+var _MetricName = &s_MetricName
+
+var _MetricNamespace = &s_MetricNamespace
+
+var _MetricScale = &s_MetricScale
+
+var MetricStatistic = &sMetricStatistic
+var MetricStatistic_Average = &sMetricStatistic_Average
+var MetricStatistic_Minimum = &sMetricStatistic_Minimum
+var MetricStatistic_Maximum = &sMetricStatistic_Maximum
+var MetricStatistic_SampleCount = &sMetricStatistic_SampleCount
+var MetricStatistic_Sum = &sMetricStatistic_Sum
+
+var MetricType = &sMetricType
+var MetricType_DynamoDBReadCapacityUtilization = &sMetricType_DynamoDBReadCapacityUtilization
+var MetricType_DynamoDBWriteCapacityUtilization = &sMetricType_DynamoDBWriteCapacityUtilization
+var MetricType_ALBRequestCountPerTarget = &sMetricType_ALBRequestCountPerTarget
+var MetricType_RDSReaderAverageCPUUtilization = &sMetricType_RDSReaderAverageCPUUtilization
+var MetricType_RDSReaderAverageDatabaseConnections = &sMetricType_RDSReaderAverageDatabaseConnections
+var MetricType_EC2SpotFleetRequestAverageCPUUtilization = &sMetricType_EC2SpotFleetRequestAverageCPUUtilization
+var MetricType_EC2SpotFleetRequestAverageNetworkIn = &sMetricType_EC2SpotFleetRequestAverageNetworkIn
+var MetricType_EC2SpotFleetRequestAverageNetworkOut = &sMetricType_EC2SpotFleetRequestAverageNetworkOut
+var MetricType_SageMakerVariantInvocationsPerInstance = &sMetricType_SageMakerVariantInvocationsPerInstance
+var MetricType_ECSServiceAverageCPUUtilization = &sMetricType_ECSServiceAverageCPUUtilization
+var MetricType_ECSServiceAverageMemoryUtilization = &sMetricType_ECSServiceAverageMemoryUtilization
+var MetricType_AppStreamAverageCapacityUtilization = &sMetricType_AppStreamAverageCapacityUtilization
+var MetricType_ComprehendInferenceUtilization = &sMetricType_ComprehendInferenceUtilization
+var MetricType_LambdaProvisionedConcurrencyUtilization = &sMetricType_LambdaProvisionedConcurrencyUtilization
+var MetricType_CassandraReadCapacityUtilization = &sMetricType_CassandraReadCapacityUtilization
+var MetricType_CassandraWriteCapacityUtilization = &sMetricType_CassandraWriteCapacityUtilization
+var MetricType_KafkaBrokerStorageUtilization = &sMetricType_KafkaBrokerStorageUtilization
+var MetricType_ElastiCacheEngineCPUUtilization = &sMetricType_ElastiCacheEngineCPUUtilization
+var MetricType_ElastiCacheDatabaseMemoryUsagePercentage = &sMetricType_ElastiCacheDatabaseMemoryUsagePercentage
+var MetricType_ElastiCachePrimaryEngineCPUUtilization = &sMetricType_ElastiCachePrimaryEngineCPUUtilization
+var MetricType_ElastiCacheReplicaEngineCPUUtilization = &sMetricType_ElastiCacheReplicaEngineCPUUtilization
+var MetricType_ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage = &sMetricType_ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage
+var MetricType_NeptuneReaderAverageCPUUtilization = &sMetricType_NeptuneReaderAverageCPUUtilization
+var MetricType_SageMakerVariantProvisionedConcurrencyUtilization = &sMetricType_SageMakerVariantProvisionedConcurrencyUtilization
+var MetricType_ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage = &sMetricType_ElastiCacheDatabaseCapacityUsageCountedForEvictPercentage
+var MetricType_SageMakerInferenceComponentInvocationsPerCopy = &sMetricType_SageMakerInferenceComponentInvocationsPerCopy
+var MetricType_WorkSpacesAverageUserSessionsCapacityUtilization = &sMetricType_WorkSpacesAverageUserSessionsCapacityUtilization
+var MetricType_SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution = &sMetricType_SageMakerInferenceComponentConcurrentRequestsPerCopyHighResolution
+var MetricType_SageMakerVariantConcurrentRequestsPerModelHighResolution = &sMetricType_SageMakerVariantConcurrentRequestsPerModelHighResolution
+var MetricType_ECSServiceAverageCPUUtilizationHighResolution = &sMetricType_ECSServiceAverageCPUUtilizationHighResolution
+var MetricType_ECSServiceAverageMemoryUtilizationHighResolution = &sMetricType_ECSServiceAverageMemoryUtilizationHighResolution
+
+var _MetricUnit = &s_MetricUnit
+
+var _MinAdjustmentMagnitude = &s_MinAdjustmentMagnitude
+
+var NotScaledReason = &sNotScaledReason
+var NotScaledReason_Code = &sNotScaledReason_Code
+var NotScaledReason_MaxCapacity = &sNotScaledReason_MaxCapacity
+var NotScaledReason_MinCapacity = &sNotScaledReason_MinCapacity
+var NotScaledReason_CurrentCapacity = &sNotScaledReason_CurrentCapacity
+
+var _NotScaledReasons = &s_NotScaledReasons
+var _NotScaledReasons_member = &s_NotScaledReasons_member
+
+var ObjectNotFoundException = &sObjectNotFoundException
+var ObjectNotFoundException_Message = &sObjectNotFoundException_Message
+
+var _PolicyName = &s_PolicyName
+
+var PolicyType = &sPolicyType
+var PolicyType_StepScaling = &sPolicyType_StepScaling
+var PolicyType_TargetTrackingScaling = &sPolicyType_TargetTrackingScaling
+var PolicyType_PredictiveScaling = &sPolicyType_PredictiveScaling
+
+var PredefinedMetricSpecification = &sPredefinedMetricSpecification
+var PredefinedMetricSpecification_PredefinedMetricType = &sPredefinedMetricSpecification_PredefinedMetricType
+var PredefinedMetricSpecification_ResourceLabel = &sPredefinedMetricSpecification_ResourceLabel
+
+var PredictiveScalingCustomizedMetricSpecification = &sPredictiveScalingCustomizedMetricSpecification
+var PredictiveScalingCustomizedMetricSpecification_MetricDataQueries = &sPredictiveScalingCustomizedMetricSpecification_MetricDataQueries
+
+var _PredictiveScalingForecastTimestamps = &s_PredictiveScalingForecastTimestamps
+var _PredictiveScalingForecastTimestamps_member = &s_PredictiveScalingForecastTimestamps_member
+
+var _PredictiveScalingForecastValues = &s_PredictiveScalingForecastValues
+var _PredictiveScalingForecastValues_member = &s_PredictiveScalingForecastValues_member
+
+var PredictiveScalingMaxCapacityBreachBehavior = &sPredictiveScalingMaxCapacityBreachBehavior
+var PredictiveScalingMaxCapacityBreachBehavior_HonorMaxCapacity = &sPredictiveScalingMaxCapacityBreachBehavior_HonorMaxCapacity
+var PredictiveScalingMaxCapacityBreachBehavior_IncreaseMaxCapacity = &sPredictiveScalingMaxCapacityBreachBehavior_IncreaseMaxCapacity
+
+var _PredictiveScalingMaxCapacityBuffer = &s_PredictiveScalingMaxCapacityBuffer
+
+var PredictiveScalingMetric = &sPredictiveScalingMetric
+var PredictiveScalingMetric_Dimensions = &sPredictiveScalingMetric_Dimensions
+var PredictiveScalingMetric_MetricName = &sPredictiveScalingMetric_MetricName
+var PredictiveScalingMetric_Namespace = &sPredictiveScalingMetric_Namespace
+
+var _PredictiveScalingMetricDataQueries = &s_PredictiveScalingMetricDataQueries
+var _PredictiveScalingMetricDataQueries_member = &s_PredictiveScalingMetricDataQueries_member
+
+var PredictiveScalingMetricDataQuery = &sPredictiveScalingMetricDataQuery
+var PredictiveScalingMetricDataQuery_Id = &sPredictiveScalingMetricDataQuery_Id
+var PredictiveScalingMetricDataQuery_Expression = &sPredictiveScalingMetricDataQuery_Expression
+var PredictiveScalingMetricDataQuery_MetricStat = &sPredictiveScalingMetricDataQuery_MetricStat
+var PredictiveScalingMetricDataQuery_Label = &sPredictiveScalingMetricDataQuery_Label
+var PredictiveScalingMetricDataQuery_ReturnData = &sPredictiveScalingMetricDataQuery_ReturnData
+
+var PredictiveScalingMetricDimension = &sPredictiveScalingMetricDimension
+var PredictiveScalingMetricDimension_Name = &sPredictiveScalingMetricDimension_Name
+var PredictiveScalingMetricDimension_Value = &sPredictiveScalingMetricDimension_Value
+
+var _PredictiveScalingMetricDimensionName = &s_PredictiveScalingMetricDimensionName
+
+var _PredictiveScalingMetricDimensions = &s_PredictiveScalingMetricDimensions
+var _PredictiveScalingMetricDimensions_member = &s_PredictiveScalingMetricDimensions_member
+
+var _PredictiveScalingMetricDimensionValue = &s_PredictiveScalingMetricDimensionValue
+
+var _PredictiveScalingMetricName = &s_PredictiveScalingMetricName
+
+var _PredictiveScalingMetricNamespace = &s_PredictiveScalingMetricNamespace
+
+var PredictiveScalingMetricSpecification = &sPredictiveScalingMetricSpecification
+var PredictiveScalingMetricSpecification_TargetValue = &sPredictiveScalingMetricSpecification_TargetValue
+var PredictiveScalingMetricSpecification_PredefinedMetricPairSpecification = &sPredictiveScalingMetricSpecification_PredefinedMetricPairSpecification
+var PredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification = &sPredictiveScalingMetricSpecification_PredefinedScalingMetricSpecification
+var PredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification = &sPredictiveScalingMetricSpecification_PredefinedLoadMetricSpecification
+var PredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification = &sPredictiveScalingMetricSpecification_CustomizedScalingMetricSpecification
+var PredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification = &sPredictiveScalingMetricSpecification_CustomizedLoadMetricSpecification
+var PredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification = &sPredictiveScalingMetricSpecification_CustomizedCapacityMetricSpecification
+
+var _PredictiveScalingMetricSpecifications = &s_PredictiveScalingMetricSpecifications
+var _PredictiveScalingMetricSpecifications_member = &s_PredictiveScalingMetricSpecifications_member
+
+var PredictiveScalingMetricStat = &sPredictiveScalingMetricStat
+var PredictiveScalingMetricStat_Metric = &sPredictiveScalingMetricStat_Metric
+var PredictiveScalingMetricStat_Stat = &sPredictiveScalingMetricStat_Stat
+var PredictiveScalingMetricStat_Unit = &sPredictiveScalingMetricStat_Unit
+
+var _PredictiveScalingMetricType = &s_PredictiveScalingMetricType
+
+var _PredictiveScalingMetricUnit = &s_PredictiveScalingMetricUnit
+
+var PredictiveScalingMode = &sPredictiveScalingMode
+var PredictiveScalingMode_ForecastOnly = &sPredictiveScalingMode_ForecastOnly
+var PredictiveScalingMode_ForecastAndScale = &sPredictiveScalingMode_ForecastAndScale
+
+var PredictiveScalingPolicyConfiguration = &sPredictiveScalingPolicyConfiguration
+var PredictiveScalingPolicyConfiguration_MetricSpecifications = &sPredictiveScalingPolicyConfiguration_MetricSpecifications
+var PredictiveScalingPolicyConfiguration_Mode = &sPredictiveScalingPolicyConfiguration_Mode
+var PredictiveScalingPolicyConfiguration_SchedulingBufferTime = &sPredictiveScalingPolicyConfiguration_SchedulingBufferTime
+var PredictiveScalingPolicyConfiguration_MaxCapacityBreachBehavior = &sPredictiveScalingPolicyConfiguration_MaxCapacityBreachBehavior
+var PredictiveScalingPolicyConfiguration_MaxCapacityBuffer = &sPredictiveScalingPolicyConfiguration_MaxCapacityBuffer
+
+var PredictiveScalingPredefinedLoadMetricSpecification = &sPredictiveScalingPredefinedLoadMetricSpecification
+var PredictiveScalingPredefinedLoadMetricSpecification_PredefinedMetricType = &sPredictiveScalingPredefinedLoadMetricSpecification_PredefinedMetricType
+var PredictiveScalingPredefinedLoadMetricSpecification_ResourceLabel = &sPredictiveScalingPredefinedLoadMetricSpecification_ResourceLabel
+
+var PredictiveScalingPredefinedMetricPairSpecification = &sPredictiveScalingPredefinedMetricPairSpecification
+var PredictiveScalingPredefinedMetricPairSpecification_PredefinedMetricType = &sPredictiveScalingPredefinedMetricPairSpecification_PredefinedMetricType
+var PredictiveScalingPredefinedMetricPairSpecification_ResourceLabel = &sPredictiveScalingPredefinedMetricPairSpecification_ResourceLabel
+
+var PredictiveScalingPredefinedScalingMetricSpecification = &sPredictiveScalingPredefinedScalingMetricSpecification
+var PredictiveScalingPredefinedScalingMetricSpecification_PredefinedMetricType = &sPredictiveScalingPredefinedScalingMetricSpecification_PredefinedMetricType
+var PredictiveScalingPredefinedScalingMetricSpecification_ResourceLabel = &sPredictiveScalingPredefinedScalingMetricSpecification_ResourceLabel
+
+var _PredictiveScalingSchedulingBufferTime = &s_PredictiveScalingSchedulingBufferTime
+
+var _ResourceCapacity = &s_ResourceCapacity
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceIdMaxLen1600 = &s_ResourceIdMaxLen1600
+
+var _ResourceIdsMaxLen1600 = &s_ResourceIdsMaxLen1600
+var _ResourceIdsMaxLen1600_member = &s_ResourceIdsMaxLen1600_member
+
+var _ResourceLabel = &s_ResourceLabel
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceName = &sResourceNotFoundException_ResourceName
+
+var _ReturnData = &s_ReturnData
+
+var ScalableDimension = &sScalableDimension
+var ScalableDimension_ECSServiceDesiredCount = &sScalableDimension_ECSServiceDesiredCount
+var ScalableDimension_EC2SpotFleetRequestTargetCapacity = &sScalableDimension_EC2SpotFleetRequestTargetCapacity
+var ScalableDimension_EMRInstanceGroupInstanceCount = &sScalableDimension_EMRInstanceGroupInstanceCount
+var ScalableDimension_AppstreamFleetDesiredCapacity = &sScalableDimension_AppstreamFleetDesiredCapacity
+var ScalableDimension_DynamoDBTableReadCapacityUnits = &sScalableDimension_DynamoDBTableReadCapacityUnits
+var ScalableDimension_DynamoDBTableWriteCapacityUnits = &sScalableDimension_DynamoDBTableWriteCapacityUnits
+var ScalableDimension_DynamoDBIndexReadCapacityUnits = &sScalableDimension_DynamoDBIndexReadCapacityUnits
+var ScalableDimension_DynamoDBIndexWriteCapacityUnits = &sScalableDimension_DynamoDBIndexWriteCapacityUnits
+var ScalableDimension_RDSClusterReadReplicaCount = &sScalableDimension_RDSClusterReadReplicaCount
+var ScalableDimension_SageMakerVariantDesiredInstanceCount = &sScalableDimension_SageMakerVariantDesiredInstanceCount
+var ScalableDimension_CustomResourceScalableDimension = &sScalableDimension_CustomResourceScalableDimension
+var ScalableDimension_ComprehendDocClassifierEndpointInferenceUnits = &sScalableDimension_ComprehendDocClassifierEndpointInferenceUnits
+var ScalableDimension_ComprehendEntityRecognizerEndpointInferenceUnits = &sScalableDimension_ComprehendEntityRecognizerEndpointInferenceUnits
+var ScalableDimension_LambdaFunctionProvisionedConcurrency = &sScalableDimension_LambdaFunctionProvisionedConcurrency
+var ScalableDimension_CassandraTableReadCapacityUnits = &sScalableDimension_CassandraTableReadCapacityUnits
+var ScalableDimension_CassandraTableWriteCapacityUnits = &sScalableDimension_CassandraTableWriteCapacityUnits
+var ScalableDimension_KafkaBrokerStorageVolumeSize = &sScalableDimension_KafkaBrokerStorageVolumeSize
+var ScalableDimension_ElastiCacheCacheClusterNodes = &sScalableDimension_ElastiCacheCacheClusterNodes
+var ScalableDimension_ElastiCacheReplicationGroupNodeGroups = &sScalableDimension_ElastiCacheReplicationGroupNodeGroups
+var ScalableDimension_ElastiCacheReplicationGroupReplicas = &sScalableDimension_ElastiCacheReplicationGroupReplicas
+var ScalableDimension_NeptuneClusterReadReplicaCount = &sScalableDimension_NeptuneClusterReadReplicaCount
+var ScalableDimension_SageMakerVariantDesiredProvisionedConcurrency = &sScalableDimension_SageMakerVariantDesiredProvisionedConcurrency
+var ScalableDimension_SageMakerInferenceComponentDesiredCopyCount = &sScalableDimension_SageMakerInferenceComponentDesiredCopyCount
+var ScalableDimension_WorkSpacesWorkSpacesPoolDesiredUserSessions = &sScalableDimension_WorkSpacesWorkSpacesPoolDesiredUserSessions
+
+var ScalableTarget = &sScalableTarget
+var ScalableTarget_ServiceNamespace = &sScalableTarget_ServiceNamespace
+var ScalableTarget_ResourceId = &sScalableTarget_ResourceId
+var ScalableTarget_ScalableDimension = &sScalableTarget_ScalableDimension
+var ScalableTarget_MinCapacity = &sScalableTarget_MinCapacity
+var ScalableTarget_MaxCapacity = &sScalableTarget_MaxCapacity
+var ScalableTarget_PredictedCapacity = &sScalableTarget_PredictedCapacity
+var ScalableTarget_RoleARN = &sScalableTarget_RoleARN
+var ScalableTarget_CreationTime = &sScalableTarget_CreationTime
+var ScalableTarget_SuspendedState = &sScalableTarget_SuspendedState
+var ScalableTarget_ScalableTargetARN = &sScalableTarget_ScalableTargetARN
+
+var ScalableTargetAction = &sScalableTargetAction
+var ScalableTargetAction_MinCapacity = &sScalableTargetAction_MinCapacity
+var ScalableTargetAction_MaxCapacity = &sScalableTargetAction_MaxCapacity
+
+var _ScalableTargets = &s_ScalableTargets
+var _ScalableTargets_member = &s_ScalableTargets_member
+
+var _ScalingActivities = &s_ScalingActivities
+var _ScalingActivities_member = &s_ScalingActivities_member
+
+var ScalingActivity = &sScalingActivity
+var ScalingActivity_ActivityId = &sScalingActivity_ActivityId
+var ScalingActivity_ServiceNamespace = &sScalingActivity_ServiceNamespace
+var ScalingActivity_ResourceId = &sScalingActivity_ResourceId
+var ScalingActivity_ScalableDimension = &sScalingActivity_ScalableDimension
+var ScalingActivity_Description = &sScalingActivity_Description
+var ScalingActivity_Cause = &sScalingActivity_Cause
+var ScalingActivity_StartTime = &sScalingActivity_StartTime
+var ScalingActivity_EndTime = &sScalingActivity_EndTime
+var ScalingActivity_StatusCode = &sScalingActivity_StatusCode
+var ScalingActivity_StatusMessage = &sScalingActivity_StatusMessage
+var ScalingActivity_Details = &sScalingActivity_Details
+var ScalingActivity_NotScaledReasons = &sScalingActivity_NotScaledReasons
+
+var ScalingActivityStatusCode = &sScalingActivityStatusCode
+var ScalingActivityStatusCode_Pending = &sScalingActivityStatusCode_Pending
+var ScalingActivityStatusCode_InProgress = &sScalingActivityStatusCode_InProgress
+var ScalingActivityStatusCode_Successful = &sScalingActivityStatusCode_Successful
+var ScalingActivityStatusCode_Overridden = &sScalingActivityStatusCode_Overridden
+var ScalingActivityStatusCode_Unfulfilled = &sScalingActivityStatusCode_Unfulfilled
+var ScalingActivityStatusCode_Failed = &sScalingActivityStatusCode_Failed
+
+var _ScalingAdjustment = &s_ScalingAdjustment
+
+var _ScalingPolicies = &s_ScalingPolicies
+var _ScalingPolicies_member = &s_ScalingPolicies_member
+
+var ScalingPolicy = &sScalingPolicy
+var ScalingPolicy_PolicyARN = &sScalingPolicy_PolicyARN
+var ScalingPolicy_PolicyName = &sScalingPolicy_PolicyName
+var ScalingPolicy_ServiceNamespace = &sScalingPolicy_ServiceNamespace
+var ScalingPolicy_ResourceId = &sScalingPolicy_ResourceId
+var ScalingPolicy_ScalableDimension = &sScalingPolicy_ScalableDimension
+var ScalingPolicy_PolicyType = &sScalingPolicy_PolicyType
+var ScalingPolicy_StepScalingPolicyConfiguration = &sScalingPolicy_StepScalingPolicyConfiguration
+var ScalingPolicy_TargetTrackingScalingPolicyConfiguration = &sScalingPolicy_TargetTrackingScalingPolicyConfiguration
+var ScalingPolicy_PredictiveScalingPolicyConfiguration = &sScalingPolicy_PredictiveScalingPolicyConfiguration
+var ScalingPolicy_Alarms = &sScalingPolicy_Alarms
+var ScalingPolicy_CreationTime = &sScalingPolicy_CreationTime
+
+var _ScalingSuspended = &s_ScalingSuspended
+
+var ScheduledAction = &sScheduledAction
+var ScheduledAction_ScheduledActionName = &sScheduledAction_ScheduledActionName
+var ScheduledAction_ScheduledActionARN = &sScheduledAction_ScheduledActionARN
+var ScheduledAction_ServiceNamespace = &sScheduledAction_ServiceNamespace
+var ScheduledAction_Schedule = &sScheduledAction_Schedule
+var ScheduledAction_Timezone = &sScheduledAction_Timezone
+var ScheduledAction_ResourceId = &sScheduledAction_ResourceId
+var ScheduledAction_ScalableDimension = &sScheduledAction_ScalableDimension
+var ScheduledAction_StartTime = &sScheduledAction_StartTime
+var ScheduledAction_EndTime = &sScheduledAction_EndTime
+var ScheduledAction_ScalableTargetAction = &sScheduledAction_ScalableTargetAction
+var ScheduledAction_CreationTime = &sScheduledAction_CreationTime
+
+var _ScheduledActionName = &s_ScheduledActionName
+
+var _ScheduledActions = &s_ScheduledActions
+var _ScheduledActions_member = &s_ScheduledActions_member
+
+var ServiceNamespace = &sServiceNamespace
+var ServiceNamespace_ECS = &sServiceNamespace_ECS
+var ServiceNamespace_EMR = &sServiceNamespace_EMR
+var ServiceNamespace_EC2 = &sServiceNamespace_EC2
+var ServiceNamespace_APPSTREAM = &sServiceNamespace_APPSTREAM
+var ServiceNamespace_DYNAMODB = &sServiceNamespace_DYNAMODB
+var ServiceNamespace_RDS = &sServiceNamespace_RDS
+var ServiceNamespace_SAGEMAKER = &sServiceNamespace_SAGEMAKER
+var ServiceNamespace_CUSTOM_RESOURCE = &sServiceNamespace_CUSTOM_RESOURCE
+var ServiceNamespace_COMPREHEND = &sServiceNamespace_COMPREHEND
+var ServiceNamespace_LAMBDA = &sServiceNamespace_LAMBDA
+var ServiceNamespace_CASSANDRA = &sServiceNamespace_CASSANDRA
+var ServiceNamespace_KAFKA = &sServiceNamespace_KAFKA
+var ServiceNamespace_ELASTICACHE = &sServiceNamespace_ELASTICACHE
+var ServiceNamespace_NEPTUNE = &sServiceNamespace_NEPTUNE
+var ServiceNamespace_WORKSPACES = &sServiceNamespace_WORKSPACES
+
+var StepAdjustment = &sStepAdjustment
+var StepAdjustment_MetricIntervalLowerBound = &sStepAdjustment_MetricIntervalLowerBound
+var StepAdjustment_MetricIntervalUpperBound = &sStepAdjustment_MetricIntervalUpperBound
+var StepAdjustment_ScalingAdjustment = &sStepAdjustment_ScalingAdjustment
+
+var _StepAdjustments = &s_StepAdjustments
+var _StepAdjustments_member = &s_StepAdjustments_member
+
+var StepScalingPolicyConfiguration = &sStepScalingPolicyConfiguration
+var StepScalingPolicyConfiguration_AdjustmentType = &sStepScalingPolicyConfiguration_AdjustmentType
+var StepScalingPolicyConfiguration_StepAdjustments = &sStepScalingPolicyConfiguration_StepAdjustments
+var StepScalingPolicyConfiguration_MinAdjustmentMagnitude = &sStepScalingPolicyConfiguration_MinAdjustmentMagnitude
+var StepScalingPolicyConfiguration_Cooldown = &sStepScalingPolicyConfiguration_Cooldown
+var StepScalingPolicyConfiguration_MetricAggregationType = &sStepScalingPolicyConfiguration_MetricAggregationType
+
+var SuspendedState = &sSuspendedState
+var SuspendedState_DynamicScalingInSuspended = &sSuspendedState_DynamicScalingInSuspended
+var SuspendedState_DynamicScalingOutSuspended = &sSuspendedState_DynamicScalingOutSuspended
+var SuspendedState_ScheduledScalingSuspended = &sSuspendedState_ScheduledScalingSuspended
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var TargetTrackingMetric = &sTargetTrackingMetric
+var TargetTrackingMetric_Dimensions = &sTargetTrackingMetric_Dimensions
+var TargetTrackingMetric_MetricName = &sTargetTrackingMetric_MetricName
+var TargetTrackingMetric_Namespace = &sTargetTrackingMetric_Namespace
+
+var _TargetTrackingMetricDataQueries = &s_TargetTrackingMetricDataQueries
+var _TargetTrackingMetricDataQueries_member = &s_TargetTrackingMetricDataQueries_member
+
+var TargetTrackingMetricDataQuery = &sTargetTrackingMetricDataQuery
+var TargetTrackingMetricDataQuery_Expression = &sTargetTrackingMetricDataQuery_Expression
+var TargetTrackingMetricDataQuery_Id = &sTargetTrackingMetricDataQuery_Id
+var TargetTrackingMetricDataQuery_Label = &sTargetTrackingMetricDataQuery_Label
+var TargetTrackingMetricDataQuery_MetricStat = &sTargetTrackingMetricDataQuery_MetricStat
+var TargetTrackingMetricDataQuery_ReturnData = &sTargetTrackingMetricDataQuery_ReturnData
+
+var TargetTrackingMetricDimension = &sTargetTrackingMetricDimension
+var TargetTrackingMetricDimension_Name = &sTargetTrackingMetricDimension_Name
+var TargetTrackingMetricDimension_Value = &sTargetTrackingMetricDimension_Value
+
+var _TargetTrackingMetricDimensionName = &s_TargetTrackingMetricDimensionName
+
+var _TargetTrackingMetricDimensions = &s_TargetTrackingMetricDimensions
+var _TargetTrackingMetricDimensions_member = &s_TargetTrackingMetricDimensions_member
+
+var _TargetTrackingMetricDimensionValue = &s_TargetTrackingMetricDimensionValue
+
+var _TargetTrackingMetricName = &s_TargetTrackingMetricName
+
+var _TargetTrackingMetricNamespace = &s_TargetTrackingMetricNamespace
+
+var TargetTrackingMetricStat = &sTargetTrackingMetricStat
+var TargetTrackingMetricStat_Metric = &sTargetTrackingMetricStat_Metric
+var TargetTrackingMetricStat_Stat = &sTargetTrackingMetricStat_Stat
+var TargetTrackingMetricStat_Unit = &sTargetTrackingMetricStat_Unit
+
+var _TargetTrackingMetricUnit = &s_TargetTrackingMetricUnit
+
+var TargetTrackingScalingPolicyConfiguration = &sTargetTrackingScalingPolicyConfiguration
+var TargetTrackingScalingPolicyConfiguration_TargetValue = &sTargetTrackingScalingPolicyConfiguration_TargetValue
+var TargetTrackingScalingPolicyConfiguration_PredefinedMetricSpecification = &sTargetTrackingScalingPolicyConfiguration_PredefinedMetricSpecification
+var TargetTrackingScalingPolicyConfiguration_CustomizedMetricSpecification = &sTargetTrackingScalingPolicyConfiguration_CustomizedMetricSpecification
+var TargetTrackingScalingPolicyConfiguration_ScaleOutCooldown = &sTargetTrackingScalingPolicyConfiguration_ScaleOutCooldown
+var TargetTrackingScalingPolicyConfiguration_ScaleInCooldown = &sTargetTrackingScalingPolicyConfiguration_ScaleInCooldown
+var TargetTrackingScalingPolicyConfiguration_DisableScaleIn = &sTargetTrackingScalingPolicyConfiguration_DisableScaleIn
+
+var _TimestampType = &s_TimestampType
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+var TooManyTagsException_ResourceName = &sTooManyTagsException_ResourceName
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var _XmlString = &s_XmlString
+
+var DeleteScalingPolicyRequest = &sDeleteScalingPolicyRequest
+var DeleteScalingPolicyRequest_PolicyName = &sDeleteScalingPolicyRequest_PolicyName
+var DeleteScalingPolicyRequest_ServiceNamespace = &sDeleteScalingPolicyRequest_ServiceNamespace
+var DeleteScalingPolicyRequest_ResourceId = &sDeleteScalingPolicyRequest_ResourceId
+var DeleteScalingPolicyRequest_ScalableDimension = &sDeleteScalingPolicyRequest_ScalableDimension
+
+var DeleteScalingPolicyResponse = &sDeleteScalingPolicyResponse
+
+var DeleteScheduledActionRequest = &sDeleteScheduledActionRequest
+var DeleteScheduledActionRequest_ServiceNamespace = &sDeleteScheduledActionRequest_ServiceNamespace
+var DeleteScheduledActionRequest_ScheduledActionName = &sDeleteScheduledActionRequest_ScheduledActionName
+var DeleteScheduledActionRequest_ResourceId = &sDeleteScheduledActionRequest_ResourceId
+var DeleteScheduledActionRequest_ScalableDimension = &sDeleteScheduledActionRequest_ScalableDimension
+
+var DeleteScheduledActionResponse = &sDeleteScheduledActionResponse
+
+var DeregisterScalableTargetRequest = &sDeregisterScalableTargetRequest
+var DeregisterScalableTargetRequest_ServiceNamespace = &sDeregisterScalableTargetRequest_ServiceNamespace
+var DeregisterScalableTargetRequest_ResourceId = &sDeregisterScalableTargetRequest_ResourceId
+var DeregisterScalableTargetRequest_ScalableDimension = &sDeregisterScalableTargetRequest_ScalableDimension
+
+var DeregisterScalableTargetResponse = &sDeregisterScalableTargetResponse
+
+var DescribeScalableTargetsRequest = &sDescribeScalableTargetsRequest
+var DescribeScalableTargetsRequest_ServiceNamespace = &sDescribeScalableTargetsRequest_ServiceNamespace
+var DescribeScalableTargetsRequest_ResourceIds = &sDescribeScalableTargetsRequest_ResourceIds
+var DescribeScalableTargetsRequest_ScalableDimension = &sDescribeScalableTargetsRequest_ScalableDimension
+var DescribeScalableTargetsRequest_MaxResults = &sDescribeScalableTargetsRequest_MaxResults
+var DescribeScalableTargetsRequest_NextToken = &sDescribeScalableTargetsRequest_NextToken
+
+var DescribeScalableTargetsResponse = &sDescribeScalableTargetsResponse
+var DescribeScalableTargetsResponse_ScalableTargets = &sDescribeScalableTargetsResponse_ScalableTargets
+var DescribeScalableTargetsResponse_NextToken = &sDescribeScalableTargetsResponse_NextToken
+
+var DescribeScalingActivitiesRequest = &sDescribeScalingActivitiesRequest
+var DescribeScalingActivitiesRequest_ServiceNamespace = &sDescribeScalingActivitiesRequest_ServiceNamespace
+var DescribeScalingActivitiesRequest_ResourceId = &sDescribeScalingActivitiesRequest_ResourceId
+var DescribeScalingActivitiesRequest_ScalableDimension = &sDescribeScalingActivitiesRequest_ScalableDimension
+var DescribeScalingActivitiesRequest_MaxResults = &sDescribeScalingActivitiesRequest_MaxResults
+var DescribeScalingActivitiesRequest_NextToken = &sDescribeScalingActivitiesRequest_NextToken
+var DescribeScalingActivitiesRequest_IncludeNotScaledActivities = &sDescribeScalingActivitiesRequest_IncludeNotScaledActivities
+
+var DescribeScalingActivitiesResponse = &sDescribeScalingActivitiesResponse
+var DescribeScalingActivitiesResponse_ScalingActivities = &sDescribeScalingActivitiesResponse_ScalingActivities
+var DescribeScalingActivitiesResponse_NextToken = &sDescribeScalingActivitiesResponse_NextToken
+
+var DescribeScalingPoliciesRequest = &sDescribeScalingPoliciesRequest
+var DescribeScalingPoliciesRequest_PolicyNames = &sDescribeScalingPoliciesRequest_PolicyNames
+var DescribeScalingPoliciesRequest_ServiceNamespace = &sDescribeScalingPoliciesRequest_ServiceNamespace
+var DescribeScalingPoliciesRequest_ResourceId = &sDescribeScalingPoliciesRequest_ResourceId
+var DescribeScalingPoliciesRequest_ScalableDimension = &sDescribeScalingPoliciesRequest_ScalableDimension
+var DescribeScalingPoliciesRequest_MaxResults = &sDescribeScalingPoliciesRequest_MaxResults
+var DescribeScalingPoliciesRequest_NextToken = &sDescribeScalingPoliciesRequest_NextToken
+
+var DescribeScalingPoliciesResponse = &sDescribeScalingPoliciesResponse
+var DescribeScalingPoliciesResponse_ScalingPolicies = &sDescribeScalingPoliciesResponse_ScalingPolicies
+var DescribeScalingPoliciesResponse_NextToken = &sDescribeScalingPoliciesResponse_NextToken
+
+var DescribeScheduledActionsRequest = &sDescribeScheduledActionsRequest
+var DescribeScheduledActionsRequest_ScheduledActionNames = &sDescribeScheduledActionsRequest_ScheduledActionNames
+var DescribeScheduledActionsRequest_ServiceNamespace = &sDescribeScheduledActionsRequest_ServiceNamespace
+var DescribeScheduledActionsRequest_ResourceId = &sDescribeScheduledActionsRequest_ResourceId
+var DescribeScheduledActionsRequest_ScalableDimension = &sDescribeScheduledActionsRequest_ScalableDimension
+var DescribeScheduledActionsRequest_MaxResults = &sDescribeScheduledActionsRequest_MaxResults
+var DescribeScheduledActionsRequest_NextToken = &sDescribeScheduledActionsRequest_NextToken
+
+var DescribeScheduledActionsResponse = &sDescribeScheduledActionsResponse
+var DescribeScheduledActionsResponse_ScheduledActions = &sDescribeScheduledActionsResponse_ScheduledActions
+var DescribeScheduledActionsResponse_NextToken = &sDescribeScheduledActionsResponse_NextToken
+
+var GetPredictiveScalingForecastRequest = &sGetPredictiveScalingForecastRequest
+var GetPredictiveScalingForecastRequest_ServiceNamespace = &sGetPredictiveScalingForecastRequest_ServiceNamespace
+var GetPredictiveScalingForecastRequest_ResourceId = &sGetPredictiveScalingForecastRequest_ResourceId
+var GetPredictiveScalingForecastRequest_ScalableDimension = &sGetPredictiveScalingForecastRequest_ScalableDimension
+var GetPredictiveScalingForecastRequest_PolicyName = &sGetPredictiveScalingForecastRequest_PolicyName
+var GetPredictiveScalingForecastRequest_StartTime = &sGetPredictiveScalingForecastRequest_StartTime
+var GetPredictiveScalingForecastRequest_EndTime = &sGetPredictiveScalingForecastRequest_EndTime
+
+var GetPredictiveScalingForecastResponse = &sGetPredictiveScalingForecastResponse
+var GetPredictiveScalingForecastResponse_LoadForecast = &sGetPredictiveScalingForecastResponse_LoadForecast
+var GetPredictiveScalingForecastResponse_CapacityForecast = &sGetPredictiveScalingForecastResponse_CapacityForecast
+var GetPredictiveScalingForecastResponse_UpdateTime = &sGetPredictiveScalingForecastResponse_UpdateTime
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutScalingPolicyRequest = &sPutScalingPolicyRequest
+var PutScalingPolicyRequest_PolicyName = &sPutScalingPolicyRequest_PolicyName
+var PutScalingPolicyRequest_ServiceNamespace = &sPutScalingPolicyRequest_ServiceNamespace
+var PutScalingPolicyRequest_ResourceId = &sPutScalingPolicyRequest_ResourceId
+var PutScalingPolicyRequest_ScalableDimension = &sPutScalingPolicyRequest_ScalableDimension
+var PutScalingPolicyRequest_PolicyType = &sPutScalingPolicyRequest_PolicyType
+var PutScalingPolicyRequest_StepScalingPolicyConfiguration = &sPutScalingPolicyRequest_StepScalingPolicyConfiguration
+var PutScalingPolicyRequest_TargetTrackingScalingPolicyConfiguration = &sPutScalingPolicyRequest_TargetTrackingScalingPolicyConfiguration
+var PutScalingPolicyRequest_PredictiveScalingPolicyConfiguration = &sPutScalingPolicyRequest_PredictiveScalingPolicyConfiguration
+
+var PutScalingPolicyResponse = &sPutScalingPolicyResponse
+var PutScalingPolicyResponse_PolicyARN = &sPutScalingPolicyResponse_PolicyARN
+var PutScalingPolicyResponse_Alarms = &sPutScalingPolicyResponse_Alarms
+
+var PutScheduledActionRequest = &sPutScheduledActionRequest
+var PutScheduledActionRequest_ServiceNamespace = &sPutScheduledActionRequest_ServiceNamespace
+var PutScheduledActionRequest_Schedule = &sPutScheduledActionRequest_Schedule
+var PutScheduledActionRequest_Timezone = &sPutScheduledActionRequest_Timezone
+var PutScheduledActionRequest_ScheduledActionName = &sPutScheduledActionRequest_ScheduledActionName
+var PutScheduledActionRequest_ResourceId = &sPutScheduledActionRequest_ResourceId
+var PutScheduledActionRequest_ScalableDimension = &sPutScheduledActionRequest_ScalableDimension
+var PutScheduledActionRequest_StartTime = &sPutScheduledActionRequest_StartTime
+var PutScheduledActionRequest_EndTime = &sPutScheduledActionRequest_EndTime
+var PutScheduledActionRequest_ScalableTargetAction = &sPutScheduledActionRequest_ScalableTargetAction
+
+var PutScheduledActionResponse = &sPutScheduledActionResponse
+
+var RegisterScalableTargetRequest = &sRegisterScalableTargetRequest
+var RegisterScalableTargetRequest_ServiceNamespace = &sRegisterScalableTargetRequest_ServiceNamespace
+var RegisterScalableTargetRequest_ResourceId = &sRegisterScalableTargetRequest_ResourceId
+var RegisterScalableTargetRequest_ScalableDimension = &sRegisterScalableTargetRequest_ScalableDimension
+var RegisterScalableTargetRequest_MinCapacity = &sRegisterScalableTargetRequest_MinCapacity
+var RegisterScalableTargetRequest_MaxCapacity = &sRegisterScalableTargetRequest_MaxCapacity
+var RegisterScalableTargetRequest_RoleARN = &sRegisterScalableTargetRequest_RoleARN
+var RegisterScalableTargetRequest_SuspendedState = &sRegisterScalableTargetRequest_SuspendedState
+var RegisterScalableTargetRequest_Tags = &sRegisterScalableTargetRequest_Tags
+
+var RegisterScalableTargetResponse = &sRegisterScalableTargetResponse
+var RegisterScalableTargetResponse_ScalableTargetARN = &sRegisterScalableTargetResponse_ScalableTargetARN
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var AnyScaleFrontendService = &smithy.ServiceSchema{Schema: &s_AnyScaleFrontendService, Version: "2016-02-06"}

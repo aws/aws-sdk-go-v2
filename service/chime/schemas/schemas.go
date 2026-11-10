@@ -4,3147 +4,2449 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociatePhoneNumberWithUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AssociatePhoneNumberWithUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAssociatePhoneNumberWithUser                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AssociatePhoneNumberWithUser"}
+	iAssociateSigninDelegateGroupsWithAccount            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AssociateSigninDelegateGroupsWithAccount"}
+	iBatchCreateRoomMembership                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchCreateRoomMembership"}
+	iBatchDeletePhoneNumber                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchDeletePhoneNumber"}
+	iBatchSuspendUser                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchSuspendUser"}
+	iBatchUnsuspendUser                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUnsuspendUser"}
+	iBatchUpdatePhoneNumber                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUpdatePhoneNumber"}
+	iBatchUpdateUser                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUpdateUser"}
+	iCreateAccount                                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateAccount"}
+	iCreateBot                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateBot"}
+	iCreateMeetingDialOut                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateMeetingDialOut"}
+	iCreatePhoneNumberOrder                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreatePhoneNumberOrder"}
+	iCreateRoom                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateRoom"}
+	iCreateRoomMembership                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateRoomMembership"}
+	iCreateUser                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateUser"}
+	iDeleteAccount                                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteAccount"}
+	iDeleteEventsConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteEventsConfiguration"}
+	iDeletePhoneNumber                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeletePhoneNumber"}
+	iDeleteRoom                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteRoom"}
+	iDeleteRoomMembership                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteRoomMembership"}
+	iDisassociatePhoneNumberFromUser                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DisassociatePhoneNumberFromUser"}
+	iDisassociateSigninDelegateGroupsFromAccount         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DisassociateSigninDelegateGroupsFromAccount"}
+	iGetAccount                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetAccount"}
+	iGetAccountSettings                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetAccountSettings"}
+	iGetBot                                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetBot"}
+	iGetEventsConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetEventsConfiguration"}
+	iGetGlobalSettings                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetGlobalSettings"}
+	iGetPhoneNumber                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumber"}
+	iGetPhoneNumberOrder                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumberOrder"}
+	iGetPhoneNumberSettings                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumberSettings"}
+	iGetRetentionSettings                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetRetentionSettings"}
+	iGetRoom                                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetRoom"}
+	iGetUser                                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetUser"}
+	iGetUserSettings                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetUserSettings"}
+	iInviteUsers                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "InviteUsers"}
+	iListAccounts                                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListAccounts"}
+	iListBots                                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListBots"}
+	iListPhoneNumberOrders                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListPhoneNumberOrders"}
+	iListPhoneNumbers                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListPhoneNumbers"}
+	iListRoomMemberships                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListRoomMemberships"}
+	iListRooms                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListRooms"}
+	iListSupportedPhoneNumberCountries                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListSupportedPhoneNumberCountries"}
+	iListUsers                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListUsers"}
+	iLogoutUser                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "LogoutUser"}
+	iPutEventsConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PutEventsConfiguration"}
+	iPutRetentionSettings                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PutRetentionSettings"}
+	iRedactConversationMessage                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RedactConversationMessage"}
+	iRedactRoomMessage                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RedactRoomMessage"}
+	iRegenerateSecurityToken                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RegenerateSecurityToken"}
+	iResetPersonalPIN                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ResetPersonalPIN"}
+	iRestorePhoneNumber                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RestorePhoneNumber"}
+	iSearchAvailablePhoneNumbers                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "SearchAvailablePhoneNumbers"}
+	iUpdateAccount                                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateAccount"}
+	iUpdateAccountSettings                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateAccountSettings"}
+	iUpdateBot                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateBot"}
+	iUpdateGlobalSettings                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateGlobalSettings"}
+	iUpdatePhoneNumber                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdatePhoneNumber"}
+	iUpdatePhoneNumberSettings                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdatePhoneNumberSettings"}
+	iUpdateRoom                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateRoom"}
+	iUpdateRoomMembership                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateRoomMembership"}
+	iUpdateUser                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateUser"}
+	iUpdateUserSettings                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateUserSettings"}
+	i_UCBuzzConsoleService                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UCBuzzConsoleService"}
+	iAccessDeniedException                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AccessDeniedException"}
+	iAccount                                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Account"}
+	i_AccountList                                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AccountList"}
+	i_AccountName                                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AccountName"}
+	iAccountSettings                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AccountSettings"}
+	iAccountStatus                                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AccountStatus"}
+	iAccountType                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AccountType"}
+	iAlexaForBusinessMetadata                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AlexaForBusinessMetadata"}
+	i_Alpha2CountryCode                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Alpha2CountryCode"}
+	iBadRequestException                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BadRequestException"}
+	i_Boolean                                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Boolean"}
+	iBot                                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Bot"}
+	i_BotList                                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BotList"}
+	iBotType                                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BotType"}
+	iBusinessCallingSettings                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BusinessCallingSettings"}
+	i_CallingName                                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CallingName"}
+	iCallingNameStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CallingNameStatus"}
+	i_ClientRequestToken                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ClientRequestToken"}
+	iConflictException                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ConflictException"}
+	iConversationRetentionSettings                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ConversationRetentionSettings"}
+	i_E164PhoneNumber                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "E164PhoneNumber"}
+	i_E164PhoneNumberList                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "E164PhoneNumberList"}
+	i_EmailAddress                                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "EmailAddress"}
+	iEmailStatus                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "EmailStatus"}
+	iErrorCode                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ErrorCode"}
+	iEventsConfiguration                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "EventsConfiguration"}
+	iForbiddenException                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ForbiddenException"}
+	i_GuidString                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GuidString"}
+	iInvite                                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Invite"}
+	i_InviteList                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "InviteList"}
+	iInviteStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "InviteStatus"}
+	i_Iso8601Timestamp                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Iso8601Timestamp"}
+	i_JoinTokenString                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "JoinTokenString"}
+	iLicense                                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "License"}
+	i_LicenseList                                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "LicenseList"}
+	iMember                                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Member"}
+	iMemberError                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "MemberError"}
+	i_MemberErrorList                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "MemberErrorList"}
+	iMembershipItem                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "MembershipItem"}
+	i_MembershipItemList                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "MembershipItemList"}
+	iMemberType                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "MemberType"}
+	i_NonEmptyString                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "NonEmptyString"}
+	i_NonEmptyStringList                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "NonEmptyStringList"}
+	iNotFoundException                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "NotFoundException"}
+	i_NullableBoolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "NullableBoolean"}
+	iOrderedPhoneNumber                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "OrderedPhoneNumber"}
+	i_OrderedPhoneNumberList                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "OrderedPhoneNumberList"}
+	iOrderedPhoneNumberStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "OrderedPhoneNumberStatus"}
+	iPhoneNumber                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumber"}
+	iPhoneNumberAssociation                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberAssociation"}
+	i_PhoneNumberAssociationList                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberAssociationList"}
+	iPhoneNumberAssociationName                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberAssociationName"}
+	iPhoneNumberCapabilities                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberCapabilities"}
+	i_PhoneNumberCountriesList                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberCountriesList"}
+	iPhoneNumberCountry                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberCountry"}
+	iPhoneNumberError                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberError"}
+	i_PhoneNumberErrorList                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberErrorList"}
+	i_PhoneNumberList                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberList"}
+	i_PhoneNumberMaxResults                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberMaxResults"}
+	iPhoneNumberOrder                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberOrder"}
+	i_PhoneNumberOrderList                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberOrderList"}
+	iPhoneNumberOrderStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberOrderStatus"}
+	iPhoneNumberProductType                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberProductType"}
+	iPhoneNumberStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberStatus"}
+	iPhoneNumberType                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberType"}
+	i_PhoneNumberTypeList                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PhoneNumberTypeList"}
+	i_ProfileServiceMaxResults                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ProfileServiceMaxResults"}
+	iRegistrationStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RegistrationStatus"}
+	iResourceLimitExceededException                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ResourceLimitExceededException"}
+	i_ResultMax                                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ResultMax"}
+	i_RetentionDays                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RetentionDays"}
+	iRetentionSettings                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RetentionSettings"}
+	iRoom                                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "Room"}
+	i_RoomList                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RoomList"}
+	iRoomMembership                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RoomMembership"}
+	i_RoomMembershipList                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RoomMembershipList"}
+	iRoomMembershipRole                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RoomMembershipRole"}
+	iRoomRetentionSettings                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RoomRetentionSettings"}
+	i_SensitiveString                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "SensitiveString"}
+	iServiceFailureException                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ServiceFailureException"}
+	iServiceUnavailableException                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ServiceUnavailableException"}
+	iSigninDelegateGroup                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "SigninDelegateGroup"}
+	i_SigninDelegateGroupList                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "SigninDelegateGroupList"}
+	i_String                                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "String"}
+	iTelephonySettings                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "TelephonySettings"}
+	iThrottledClientException                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ThrottledClientException"}
+	i_TollFreePrefix                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "TollFreePrefix"}
+	iUnauthorizedClientException                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UnauthorizedClientException"}
+	iUnprocessableEntityException                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UnprocessableEntityException"}
+	iUpdatePhoneNumberRequestItem                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdatePhoneNumberRequestItem"}
+	i_UpdatePhoneNumberRequestItemList                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdatePhoneNumberRequestItemList"}
+	iUpdateUserRequestItem                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateUserRequestItem"}
+	i_UpdateUserRequestItemList                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateUserRequestItemList"}
+	iUser                                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "User"}
+	i_UserEmailList                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UserEmailList"}
+	iUserError                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UserError"}
+	i_UserErrorList                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UserErrorList"}
+	i_UserIdList                                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UserIdList"}
+	i_UserList                                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UserList"}
+	iUserSettings                                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UserSettings"}
+	iUserType                                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UserType"}
+	iVoiceConnectorSettings                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "VoiceConnectorSettings"}
+	iAssociatePhoneNumberWithUserRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AssociatePhoneNumberWithUserRequest"}
+	iAssociatePhoneNumberWithUserResponse                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AssociatePhoneNumberWithUserResponse"}
+	iAssociateSigninDelegateGroupsWithAccountRequest     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AssociateSigninDelegateGroupsWithAccountRequest"}
+	iAssociateSigninDelegateGroupsWithAccountResponse    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "AssociateSigninDelegateGroupsWithAccountResponse"}
+	iBatchCreateRoomMembershipRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchCreateRoomMembershipRequest"}
+	iBatchCreateRoomMembershipResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchCreateRoomMembershipResponse"}
+	iBatchDeletePhoneNumberRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchDeletePhoneNumberRequest"}
+	iBatchDeletePhoneNumberResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchDeletePhoneNumberResponse"}
+	iBatchSuspendUserRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchSuspendUserRequest"}
+	iBatchSuspendUserResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchSuspendUserResponse"}
+	iBatchUnsuspendUserRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUnsuspendUserRequest"}
+	iBatchUnsuspendUserResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUnsuspendUserResponse"}
+	iBatchUpdatePhoneNumberRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUpdatePhoneNumberRequest"}
+	iBatchUpdatePhoneNumberResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUpdatePhoneNumberResponse"}
+	iBatchUpdateUserRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUpdateUserRequest"}
+	iBatchUpdateUserResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "BatchUpdateUserResponse"}
+	iCreateAccountRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateAccountRequest"}
+	iCreateAccountResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateAccountResponse"}
+	iCreateBotRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateBotRequest"}
+	iCreateBotResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateBotResponse"}
+	iCreateMeetingDialOutRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateMeetingDialOutRequest"}
+	iCreateMeetingDialOutResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateMeetingDialOutResponse"}
+	iCreatePhoneNumberOrderRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreatePhoneNumberOrderRequest"}
+	iCreatePhoneNumberOrderResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreatePhoneNumberOrderResponse"}
+	iCreateRoomRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateRoomRequest"}
+	iCreateRoomMembershipRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateRoomMembershipRequest"}
+	iCreateRoomMembershipResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateRoomMembershipResponse"}
+	iCreateRoomResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateRoomResponse"}
+	iCreateUserRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateUserRequest"}
+	iCreateUserResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "CreateUserResponse"}
+	iDeleteAccountRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteAccountRequest"}
+	iDeleteAccountResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteAccountResponse"}
+	iDeleteEventsConfigurationRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteEventsConfigurationRequest"}
+	iDeletePhoneNumberRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeletePhoneNumberRequest"}
+	iDeleteRoomRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteRoomRequest"}
+	iDeleteRoomMembershipRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DeleteRoomMembershipRequest"}
+	iDisassociatePhoneNumberFromUserRequest              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DisassociatePhoneNumberFromUserRequest"}
+	iDisassociatePhoneNumberFromUserResponse             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DisassociatePhoneNumberFromUserResponse"}
+	iDisassociateSigninDelegateGroupsFromAccountRequest  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DisassociateSigninDelegateGroupsFromAccountRequest"}
+	iDisassociateSigninDelegateGroupsFromAccountResponse = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "DisassociateSigninDelegateGroupsFromAccountResponse"}
+	iGetAccountRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetAccountRequest"}
+	iGetAccountResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetAccountResponse"}
+	iGetAccountSettingsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetAccountSettingsRequest"}
+	iGetAccountSettingsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetAccountSettingsResponse"}
+	iGetBotRequest                                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetBotRequest"}
+	iGetBotResponse                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetBotResponse"}
+	iGetEventsConfigurationRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetEventsConfigurationRequest"}
+	iGetEventsConfigurationResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetEventsConfigurationResponse"}
+	iGetGlobalSettingsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetGlobalSettingsResponse"}
+	iGetPhoneNumberRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumberRequest"}
+	iGetPhoneNumberOrderRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumberOrderRequest"}
+	iGetPhoneNumberOrderResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumberOrderResponse"}
+	iGetPhoneNumberResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumberResponse"}
+	iGetPhoneNumberSettingsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetPhoneNumberSettingsResponse"}
+	iGetRetentionSettingsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetRetentionSettingsRequest"}
+	iGetRetentionSettingsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetRetentionSettingsResponse"}
+	iGetRoomRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetRoomRequest"}
+	iGetRoomResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetRoomResponse"}
+	iGetUserRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetUserRequest"}
+	iGetUserResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetUserResponse"}
+	iGetUserSettingsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetUserSettingsRequest"}
+	iGetUserSettingsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "GetUserSettingsResponse"}
+	iInviteUsersRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "InviteUsersRequest"}
+	iInviteUsersResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "InviteUsersResponse"}
+	iListAccountsRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListAccountsRequest"}
+	iListAccountsResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListAccountsResponse"}
+	iListBotsRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListBotsRequest"}
+	iListBotsResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListBotsResponse"}
+	iListPhoneNumberOrdersRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListPhoneNumberOrdersRequest"}
+	iListPhoneNumberOrdersResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListPhoneNumberOrdersResponse"}
+	iListPhoneNumbersRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListPhoneNumbersRequest"}
+	iListPhoneNumbersResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListPhoneNumbersResponse"}
+	iListRoomMembershipsRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListRoomMembershipsRequest"}
+	iListRoomMembershipsResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListRoomMembershipsResponse"}
+	iListRoomsRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListRoomsRequest"}
+	iListRoomsResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListRoomsResponse"}
+	iListSupportedPhoneNumberCountriesRequest            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListSupportedPhoneNumberCountriesRequest"}
+	iListSupportedPhoneNumberCountriesResponse           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListSupportedPhoneNumberCountriesResponse"}
+	iListUsersRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListUsersRequest"}
+	iListUsersResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ListUsersResponse"}
+	iLogoutUserRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "LogoutUserRequest"}
+	iLogoutUserResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "LogoutUserResponse"}
+	iPutEventsConfigurationRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PutEventsConfigurationRequest"}
+	iPutEventsConfigurationResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PutEventsConfigurationResponse"}
+	iPutRetentionSettingsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PutRetentionSettingsRequest"}
+	iPutRetentionSettingsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "PutRetentionSettingsResponse"}
+	iRedactConversationMessageRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RedactConversationMessageRequest"}
+	iRedactConversationMessageResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RedactConversationMessageResponse"}
+	iRedactRoomMessageRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RedactRoomMessageRequest"}
+	iRedactRoomMessageResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RedactRoomMessageResponse"}
+	iRegenerateSecurityTokenRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RegenerateSecurityTokenRequest"}
+	iRegenerateSecurityTokenResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RegenerateSecurityTokenResponse"}
+	iResetPersonalPINRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ResetPersonalPINRequest"}
+	iResetPersonalPINResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "ResetPersonalPINResponse"}
+	iRestorePhoneNumberRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RestorePhoneNumberRequest"}
+	iRestorePhoneNumberResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "RestorePhoneNumberResponse"}
+	iSearchAvailablePhoneNumbersRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "SearchAvailablePhoneNumbersRequest"}
+	iSearchAvailablePhoneNumbersResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "SearchAvailablePhoneNumbersResponse"}
+	iUpdateAccountRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateAccountRequest"}
+	iUpdateAccountResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateAccountResponse"}
+	iUpdateAccountSettingsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateAccountSettingsRequest"}
+	iUpdateAccountSettingsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateAccountSettingsResponse"}
+	iUpdateBotRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateBotRequest"}
+	iUpdateBotResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateBotResponse"}
+	iUpdateGlobalSettingsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateGlobalSettingsRequest"}
+	iUpdatePhoneNumberRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdatePhoneNumberRequest"}
+	iUpdatePhoneNumberResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdatePhoneNumberResponse"}
+	iUpdatePhoneNumberSettingsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdatePhoneNumberSettingsRequest"}
+	iUpdateRoomRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateRoomRequest"}
+	iUpdateRoomMembershipRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateRoomMembershipRequest"}
+	iUpdateRoomMembershipResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateRoomMembershipResponse"}
+	iUpdateRoomResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateRoomResponse"}
+	iUpdateUserRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateUserRequest"}
+	iUpdateUserResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateUserResponse"}
+	iUpdateUserSettingsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.chime", Name: "UpdateUserSettingsRequest"}
+	pUnit                                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users/{UserId}?operation=associate-phone-number",
-	Code: 200})
-
-var AssociateSigninDelegateGroupsWithAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AssociateSigninDelegateGroupsWithAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}?operation=associate-signin-delegate-groups",
-	Code: 200})
-
-var BatchCreateRoomMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchCreateRoomMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}/memberships?operation=batch-create",
-	Code: 201})
-
-var BatchDeletePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchDeletePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/phone-numbers?operation=batch-delete",
-	Code: 200})
-
-var BatchSuspendUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchSuspendUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users?operation=suspend",
-	Code: 200})
-
-var BatchUnsuspendUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUnsuspendUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users?operation=unsuspend",
-	Code: 200})
-
-var BatchUpdatePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUpdatePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/phone-numbers?operation=batch-update",
-	Code: 200})
-
-var BatchUpdateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUpdateUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users",
-	Code: 200})
-
-var CreateAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts",
-	Code: 201})
-
-var CreateBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/bots",
-	Code: 201})
-
-var CreateMeetingDialOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateMeetingDialOut",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/meetings/{MeetingId}/dial-outs",
-	Code: 201})
-
-var CreatePhoneNumberOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreatePhoneNumberOrder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/phone-number-orders",
-	Code: 201})
-
-var CreateRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/rooms",
-	Code: 201})
-
-var CreateRoomMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateRoomMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}/memberships",
-	Code: 201})
-
-var CreateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users?operation=create",
-	Code: 201})
-
-var DeleteAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accounts/{AccountId}",
-	Code: 204})
-
-var DeleteEventsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteEventsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accounts/{AccountId}/bots/{BotId}/events-configuration",
-	Code: 204})
-
-var DeletePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeletePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/phone-numbers/{PhoneNumberId}",
-	Code: 204})
-
-var DeleteRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}",
-	Code: 204})
-
-var DeleteRoomMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteRoomMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}/memberships/{MemberId}",
-	Code: 204})
-
-var DisassociatePhoneNumberFromUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DisassociatePhoneNumberFromUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users/{UserId}?operation=disassociate-phone-number",
-	Code: 200})
-
-var DisassociateSigninDelegateGroupsFromAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DisassociateSigninDelegateGroupsFromAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}?operation=disassociate-signin-delegate-groups",
-	Code: 200})
-
-var GetAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}",
-	Code: 200})
-
-var GetAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetAccountSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/settings",
-	Code: 200})
-
-var GetBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/bots/{BotId}",
-	Code: 200})
-
-var GetEventsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetEventsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/bots/{BotId}/events-configuration",
-	Code: 200})
-
-var GetGlobalSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetGlobalSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/settings",
-	Code: 200})
-
-var GetPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/phone-numbers/{PhoneNumberId}",
-	Code: 200})
-
-var GetPhoneNumberOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumberOrder",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/phone-number-orders/{PhoneNumberOrderId}",
-	Code: 200})
-
-var GetPhoneNumberSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumberSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/settings/phone-number",
-	Code: 200})
-
-var GetRetentionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetRetentionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/retention-settings",
-	Code: 200})
-
-var GetRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}",
-	Code: 200})
-
-var GetUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/users/{UserId}",
-	Code: 200})
-
-var GetUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/users/{UserId}/settings",
-	Code: 200})
-
-var InviteUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "InviteUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users?operation=add",
-	Code: 201})
-
-var ListAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 201}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts",
-	Code: 200})
-
-var ListBots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListBots",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/bots",
-	Code: 200})
-
-var ListPhoneNumberOrders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListPhoneNumberOrders",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/phone-number-orders",
-	Code: 200})
-
-var ListPhoneNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListPhoneNumbers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/phone-numbers",
-	Code: 200})
-
-var ListRoomMemberships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListRoomMemberships",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}/memberships",
-	Code: 200})
-
-var ListRooms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListRooms",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/rooms",
-	Code: 200})
-
-var ListSupportedPhoneNumberCountries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListSupportedPhoneNumberCountries",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/phone-number-countries",
-	Code: 200})
-
-var ListUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListUsers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/accounts/{AccountId}/users",
-	Code: 200})
-
-var LogoutUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "LogoutUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users/{UserId}?operation=logout",
-	Code: 204})
-
-var PutEventsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PutEventsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/accounts/{AccountId}/bots/{BotId}/events-configuration",
-	Code: 201})
-
-var PutRetentionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PutRetentionSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/accounts/{AccountId}/retention-settings",
-	Code: 204})
-
-var RedactConversationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RedactConversationMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/conversations/{ConversationId}/messages/{MessageId}?operation=redact",
-	Code: 200})
-
-var RedactRoomMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RedactRoomMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}/messages/{MessageId}?operation=redact",
-	Code: 200})
-
-var RegenerateSecurityToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RegenerateSecurityToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/bots/{BotId}?operation=regenerate-security-token",
-	Code: 200})
-
-var ResetPersonalPIN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ResetPersonalPIN",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users/{UserId}?operation=reset-personal-pin",
-	Code: 200})
-
-var RestorePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RestorePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/phone-numbers/{PhoneNumberId}?operation=restore",
-	Code: 200})
-
-var SearchAvailablePhoneNumbers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "SearchAvailablePhoneNumbers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/search?type=phone-numbers",
-	Code: 200})
-
-var UpdateAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}",
-	Code: 200})
-
-var UpdateAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateAccountSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/accounts/{AccountId}/settings",
-	Code: 204})
-
-var UpdateBot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateBot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/bots/{BotId}",
-	Code: 200})
-
-var UpdateGlobalSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateGlobalSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/settings",
-	Code: 204})
-
-var UpdatePhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdatePhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/phone-numbers/{PhoneNumberId}",
-	Code: 200})
-
-var UpdatePhoneNumberSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdatePhoneNumberSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/settings/phone-number",
-	Code: 204})
-
-var UpdateRoom = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateRoom",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}",
-	Code: 200})
-
-var UpdateRoomMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateRoomMembership",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/rooms/{RoomId}/memberships/{MemberId}",
-	Code: 200})
-
-var UpdateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateUser",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/accounts/{AccountId}/users/{UserId}",
-	Code: 200})
-
-var UpdateUserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateUserSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/accounts/{AccountId}/users/{UserId}/settings",
-	Code: 204})
-
-var _UCBuzzConsoleService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UCBuzzConsoleService",
-}, smithy.ShapeTypeService, 0)
-
-var UCBuzzConsoleService = smithy.NewServiceSchema(_UCBuzzConsoleService, "2018-05-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Code *smithy.Schema
-
-var AccessDeniedException_Message *smithy.Schema
-
-var Account = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Account",
-}, smithy.ShapeTypeStructure, 9)
-var Account_AwsAccountId *smithy.Schema
-
-var Account_AccountId *smithy.Schema
-
-var Account_Name *smithy.Schema
-
-var Account_AccountType *smithy.Schema
-
-var Account_CreatedTimestamp *smithy.Schema
-
-var Account_DefaultLicense *smithy.Schema
-
-var Account_SupportedLicenses *smithy.Schema
-
-var Account_AccountStatus *smithy.Schema
-
-var Account_SigninDelegateGroups *smithy.Schema
-
-var _AccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AccountList",
-}, smithy.ShapeTypeList, 1)
-var _AccountList_member *smithy.Schema
-
-var _AccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AccountName",
-}, smithy.ShapeTypeString, 0)
-
-var AccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AccountSettings",
-}, smithy.ShapeTypeStructure, 2)
-var AccountSettings_DisableRemoteControl *smithy.Schema
-
-var AccountSettings_EnableDialOut *smithy.Schema
-
-var AccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AccountStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AccountStatus_Suspended *smithy.Schema
-
-var AccountStatus_Active *smithy.Schema
-
-var AccountType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AccountType",
-}, smithy.ShapeTypeEnum, 4)
-var AccountType_Team *smithy.Schema
-
-var AccountType_EnterpriseDirectory *smithy.Schema
-
-var AccountType_EnterpriseLWA *smithy.Schema
-
-var AccountType_EnterpriseOIDC *smithy.Schema
-
-var AlexaForBusinessMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AlexaForBusinessMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var AlexaForBusinessMetadata_IsAlexaForBusinessEnabled *smithy.Schema
-
-var AlexaForBusinessMetadata_AlexaForBusinessRoomArn *smithy.Schema
-
-var _Alpha2CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Alpha2CountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Code *smithy.Schema
-
-var BadRequestException_Message *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Bot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Bot",
-}, smithy.ShapeTypeStructure, 9)
-var Bot_BotId *smithy.Schema
-
-var Bot_UserId *smithy.Schema
-
-var Bot_DisplayName *smithy.Schema
-
-var Bot_BotType *smithy.Schema
-
-var Bot_Disabled *smithy.Schema
-
-var Bot_CreatedTimestamp *smithy.Schema
-
-var Bot_UpdatedTimestamp *smithy.Schema
-
-var Bot_BotEmail *smithy.Schema
-
-var Bot_SecurityToken *smithy.Schema
-
-var _BotList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BotList",
-}, smithy.ShapeTypeList, 1)
-var _BotList_member *smithy.Schema
-
-var BotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BotType",
-}, smithy.ShapeTypeEnum, 1)
-var BotType_ChatBot *smithy.Schema
-
-var BusinessCallingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BusinessCallingSettings",
-}, smithy.ShapeTypeStructure, 1)
-var BusinessCallingSettings_CdrBucket *smithy.Schema
-
-var _CallingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CallingName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CallingNameStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CallingNameStatus",
-}, smithy.ShapeTypeEnum, 4)
-var CallingNameStatus_Unassigned *smithy.Schema
-
-var CallingNameStatus_UpdateInProgress *smithy.Schema
-
-var CallingNameStatus_UpdateSucceeded *smithy.Schema
-
-var CallingNameStatus_UpdateFailed *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Code *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var ConversationRetentionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ConversationRetentionSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ConversationRetentionSettings_RetentionDays *smithy.Schema
-
-var _E164PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "E164PhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _E164PhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "E164PhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _E164PhoneNumberList_member *smithy.Schema
-
-var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "EmailAddress",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EmailStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "EmailStatus",
-}, smithy.ShapeTypeEnum, 3)
-var EmailStatus_NotSent *smithy.Schema
-
-var EmailStatus_Sent *smithy.Schema
-
-var EmailStatus_Failed *smithy.Schema
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 15)
-var ErrorCode_BadRequest *smithy.Schema
-
-var ErrorCode_Conflict *smithy.Schema
-
-var ErrorCode_Forbidden *smithy.Schema
-
-var ErrorCode_NotFound *smithy.Schema
-
-var ErrorCode_PreconditionFailed *smithy.Schema
-
-var ErrorCode_ResourceLimitExceeded *smithy.Schema
-
-var ErrorCode_ServiceFailure *smithy.Schema
-
-var ErrorCode_AccessDenied *smithy.Schema
-
-var ErrorCode_ServiceUnavailable *smithy.Schema
-
-var ErrorCode_Throttled *smithy.Schema
-
-var ErrorCode_Throttling *smithy.Schema
-
-var ErrorCode_Unauthorized *smithy.Schema
-
-var ErrorCode_Unprocessable *smithy.Schema
-
-var ErrorCode_VoiceConnectorGroupAssociationsExist *smithy.Schema
-
-var ErrorCode_PhoneNumberAssociationsExist *smithy.Schema
-
-var EventsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "EventsConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var EventsConfiguration_BotId *smithy.Schema
-
-var EventsConfiguration_OutboundEventsHTTPSEndpoint *smithy.Schema
-
-var EventsConfiguration_LambdaFunctionArn *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_Code *smithy.Schema
-
-var ForbiddenException_Message *smithy.Schema
-
-var _GuidString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GuidString",
-}, smithy.ShapeTypeString, 0)
-
-var Invite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Invite",
-}, smithy.ShapeTypeStructure, 4)
-var Invite_InviteId *smithy.Schema
-
-var Invite_Status *smithy.Schema
-
-var Invite_EmailAddress *smithy.Schema
-
-var Invite_EmailStatus *smithy.Schema
-
-var _InviteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "InviteList",
-}, smithy.ShapeTypeList, 1)
-var _InviteList_member *smithy.Schema
-
-var InviteStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "InviteStatus",
-}, smithy.ShapeTypeEnum, 3)
-var InviteStatus_Pending *smithy.Schema
-
-var InviteStatus_Accepted *smithy.Schema
-
-var InviteStatus_Failed *smithy.Schema
-
-var _Iso8601Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Iso8601Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var _JoinTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "JoinTokenString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var License = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "License",
-}, smithy.ShapeTypeEnum, 4)
-var License_Basic *smithy.Schema
-
-var License_Plus *smithy.Schema
-
-var License_Pro *smithy.Schema
-
-var License_ProTrial *smithy.Schema
-
-var _LicenseList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "LicenseList",
-}, smithy.ShapeTypeList, 1)
-var _LicenseList_member *smithy.Schema
-
-var Member = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Member",
-}, smithy.ShapeTypeStructure, 5)
-var Member_MemberId *smithy.Schema
-
-var Member_MemberType *smithy.Schema
-
-var Member_Email *smithy.Schema
-
-var Member_FullName *smithy.Schema
-
-var Member_AccountId *smithy.Schema
-
-var MemberError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "MemberError",
-}, smithy.ShapeTypeStructure, 3)
-var MemberError_MemberId *smithy.Schema
-
-var MemberError_ErrorCode *smithy.Schema
-
-var MemberError_ErrorMessage *smithy.Schema
-
-var _MemberErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "MemberErrorList",
-}, smithy.ShapeTypeList, 1)
-var _MemberErrorList_member *smithy.Schema
-
-var MembershipItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "MembershipItem",
-}, smithy.ShapeTypeStructure, 2)
-var MembershipItem_MemberId *smithy.Schema
-
-var MembershipItem_Role *smithy.Schema
-
-var _MembershipItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "MembershipItemList",
-}, smithy.ShapeTypeList, 1)
-var _MembershipItemList_member *smithy.Schema
-
-var MemberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "MemberType",
-}, smithy.ShapeTypeEnum, 3)
-var MemberType_User *smithy.Schema
-
-var MemberType_Bot *smithy.Schema
-
-var MemberType_Webhook *smithy.Schema
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "NonEmptyStringList",
-}, smithy.ShapeTypeList, 1)
-var _NonEmptyStringList_member *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Code *smithy.Schema
-
-var NotFoundException_Message *smithy.Schema
-
-var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "NullableBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var OrderedPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "OrderedPhoneNumber",
-}, smithy.ShapeTypeStructure, 2)
-var OrderedPhoneNumber_E164PhoneNumber *smithy.Schema
-
-var OrderedPhoneNumber_Status *smithy.Schema
-
-var _OrderedPhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "OrderedPhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _OrderedPhoneNumberList_member *smithy.Schema
-
-var OrderedPhoneNumberStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "OrderedPhoneNumberStatus",
-}, smithy.ShapeTypeEnum, 3)
-var OrderedPhoneNumberStatus_Processing *smithy.Schema
-
-var OrderedPhoneNumberStatus_Acquired *smithy.Schema
-
-var OrderedPhoneNumberStatus_Failed *smithy.Schema
-
-var PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeStructure, 13)
-var PhoneNumber_PhoneNumberId *smithy.Schema
-
-var PhoneNumber_E164PhoneNumber *smithy.Schema
-
-var PhoneNumber_Country *smithy.Schema
-
-var PhoneNumber_Type *smithy.Schema
-
-var PhoneNumber_ProductType *smithy.Schema
-
-var PhoneNumber_Status *smithy.Schema
-
-var PhoneNumber_Capabilities *smithy.Schema
-
-var PhoneNumber_Associations *smithy.Schema
-
-var PhoneNumber_CallingName *smithy.Schema
-
-var PhoneNumber_CallingNameStatus *smithy.Schema
-
-var PhoneNumber_CreatedTimestamp *smithy.Schema
-
-var PhoneNumber_UpdatedTimestamp *smithy.Schema
-
-var PhoneNumber_DeletionTimestamp *smithy.Schema
-
-var PhoneNumberAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberAssociation",
-}, smithy.ShapeTypeStructure, 3)
-var PhoneNumberAssociation_Value *smithy.Schema
-
-var PhoneNumberAssociation_Name *smithy.Schema
-
-var PhoneNumberAssociation_AssociatedTimestamp *smithy.Schema
-
-var _PhoneNumberAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberAssociationList_member *smithy.Schema
-
-var PhoneNumberAssociationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberAssociationName",
-}, smithy.ShapeTypeEnum, 5)
-var PhoneNumberAssociationName_AccountId *smithy.Schema
-
-var PhoneNumberAssociationName_UserId *smithy.Schema
-
-var PhoneNumberAssociationName_VoiceConnectorId *smithy.Schema
-
-var PhoneNumberAssociationName_VoiceConnectorGroupId *smithy.Schema
-
-var PhoneNumberAssociationName_SipRuleId *smithy.Schema
-
-var PhoneNumberCapabilities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberCapabilities",
-}, smithy.ShapeTypeStructure, 6)
-var PhoneNumberCapabilities_InboundCall *smithy.Schema
-
-var PhoneNumberCapabilities_OutboundCall *smithy.Schema
-
-var PhoneNumberCapabilities_InboundSMS *smithy.Schema
-
-var PhoneNumberCapabilities_OutboundSMS *smithy.Schema
-
-var PhoneNumberCapabilities_InboundMMS *smithy.Schema
-
-var PhoneNumberCapabilities_OutboundMMS *smithy.Schema
-
-var _PhoneNumberCountriesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberCountriesList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberCountriesList_member *smithy.Schema
-
-var PhoneNumberCountry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberCountry",
-}, smithy.ShapeTypeStructure, 2)
-var PhoneNumberCountry_CountryCode *smithy.Schema
-
-var PhoneNumberCountry_SupportedPhoneNumberTypes *smithy.Schema
-
-var PhoneNumberError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberError",
-}, smithy.ShapeTypeStructure, 3)
-var PhoneNumberError_PhoneNumberId *smithy.Schema
-
-var PhoneNumberError_ErrorCode *smithy.Schema
-
-var PhoneNumberError_ErrorMessage *smithy.Schema
-
-var _PhoneNumberErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberErrorList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberErrorList_member *smithy.Schema
-
-var _PhoneNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberList_member *smithy.Schema
-
-var _PhoneNumberMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var PhoneNumberOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberOrder",
-}, smithy.ShapeTypeStructure, 6)
-var PhoneNumberOrder_PhoneNumberOrderId *smithy.Schema
-
-var PhoneNumberOrder_ProductType *smithy.Schema
-
-var PhoneNumberOrder_Status *smithy.Schema
-
-var PhoneNumberOrder_OrderedPhoneNumbers *smithy.Schema
-
-var PhoneNumberOrder_CreatedTimestamp *smithy.Schema
-
-var PhoneNumberOrder_UpdatedTimestamp *smithy.Schema
-
-var _PhoneNumberOrderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberOrderList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberOrderList_member *smithy.Schema
-
-var PhoneNumberOrderStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberOrderStatus",
-}, smithy.ShapeTypeEnum, 4)
-var PhoneNumberOrderStatus_Processing *smithy.Schema
-
-var PhoneNumberOrderStatus_Successful *smithy.Schema
-
-var PhoneNumberOrderStatus_Failed *smithy.Schema
-
-var PhoneNumberOrderStatus_Partial *smithy.Schema
-
-var PhoneNumberProductType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberProductType",
-}, smithy.ShapeTypeEnum, 3)
-var PhoneNumberProductType_BusinessCalling *smithy.Schema
-
-var PhoneNumberProductType_VoiceConnector *smithy.Schema
-
-var PhoneNumberProductType_SipMediaApplicationDialIn *smithy.Schema
-
-var PhoneNumberStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberStatus",
-}, smithy.ShapeTypeEnum, 8)
-var PhoneNumberStatus_AcquireInProgress *smithy.Schema
-
-var PhoneNumberStatus_AcquireFailed *smithy.Schema
-
-var PhoneNumberStatus_Unassigned *smithy.Schema
-
-var PhoneNumberStatus_Assigned *smithy.Schema
-
-var PhoneNumberStatus_ReleaseInProgress *smithy.Schema
-
-var PhoneNumberStatus_DeleteInProgress *smithy.Schema
-
-var PhoneNumberStatus_ReleaseFailed *smithy.Schema
-
-var PhoneNumberStatus_DeleteFailed *smithy.Schema
-
-var PhoneNumberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberType",
-}, smithy.ShapeTypeEnum, 2)
-var PhoneNumberType_Local *smithy.Schema
-
-var PhoneNumberType_TollFree *smithy.Schema
-
-var _PhoneNumberTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PhoneNumberTypeList",
-}, smithy.ShapeTypeList, 1)
-var _PhoneNumberTypeList_member *smithy.Schema
-
-var _ProfileServiceMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ProfileServiceMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var RegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RegistrationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var RegistrationStatus_Unregistered *smithy.Schema
-
-var RegistrationStatus_Registered *smithy.Schema
-
-var RegistrationStatus_Suspended *smithy.Schema
-
-var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceLimitExceededException_Code *smithy.Schema
-
-var ResourceLimitExceededException_Message *smithy.Schema
-
-var _ResultMax = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ResultMax",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RetentionDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RetentionDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var RetentionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RetentionSettings",
-}, smithy.ShapeTypeStructure, 2)
-var RetentionSettings_RoomRetentionSettings *smithy.Schema
-
-var RetentionSettings_ConversationRetentionSettings *smithy.Schema
-
-var Room = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "Room",
-}, smithy.ShapeTypeStructure, 6)
-var Room_RoomId *smithy.Schema
-
-var Room_Name *smithy.Schema
-
-var Room_AccountId *smithy.Schema
-
-var Room_CreatedBy *smithy.Schema
-
-var Room_CreatedTimestamp *smithy.Schema
-
-var Room_UpdatedTimestamp *smithy.Schema
-
-var _RoomList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RoomList",
-}, smithy.ShapeTypeList, 1)
-var _RoomList_member *smithy.Schema
-
-var RoomMembership = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RoomMembership",
-}, smithy.ShapeTypeStructure, 5)
-var RoomMembership_RoomId *smithy.Schema
-
-var RoomMembership_Member *smithy.Schema
-
-var RoomMembership_Role *smithy.Schema
-
-var RoomMembership_InvitedBy *smithy.Schema
-
-var RoomMembership_UpdatedTimestamp *smithy.Schema
-
-var _RoomMembershipList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RoomMembershipList",
-}, smithy.ShapeTypeList, 1)
-var _RoomMembershipList_member *smithy.Schema
-
-var RoomMembershipRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RoomMembershipRole",
-}, smithy.ShapeTypeEnum, 2)
-var RoomMembershipRole_Administrator *smithy.Schema
-
-var RoomMembershipRole_Member *smithy.Schema
-
-var RoomRetentionSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RoomRetentionSettings",
-}, smithy.ShapeTypeStructure, 1)
-var RoomRetentionSettings_RetentionDays *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceFailureException_Code *smithy.Schema
-
-var ServiceFailureException_Message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Code *smithy.Schema
-
-var ServiceUnavailableException_Message *smithy.Schema
-
-var SigninDelegateGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "SigninDelegateGroup",
-}, smithy.ShapeTypeStructure, 1)
-var SigninDelegateGroup_GroupName *smithy.Schema
-
-var _SigninDelegateGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "SigninDelegateGroupList",
-}, smithy.ShapeTypeList, 1)
-var _SigninDelegateGroupList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var TelephonySettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "TelephonySettings",
-}, smithy.ShapeTypeStructure, 3)
-var TelephonySettings_InboundCalling *smithy.Schema
-
-var TelephonySettings_OutboundCalling *smithy.Schema
-
-var TelephonySettings_SMS *smithy.Schema
-
-var ThrottledClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ThrottledClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottledClientException_Code *smithy.Schema
-
-var ThrottledClientException_Message *smithy.Schema
-
-var _TollFreePrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "TollFreePrefix",
-}, smithy.ShapeTypeString, 0)
-
-var UnauthorizedClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UnauthorizedClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedClientException_Code *smithy.Schema
-
-var UnauthorizedClientException_Message *smithy.Schema
-
-var UnprocessableEntityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UnprocessableEntityException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 422})
-var UnprocessableEntityException_Code *smithy.Schema
-
-var UnprocessableEntityException_Message *smithy.Schema
-
-var UpdatePhoneNumberRequestItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdatePhoneNumberRequestItem",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePhoneNumberRequestItem_PhoneNumberId *smithy.Schema
-
-var UpdatePhoneNumberRequestItem_ProductType *smithy.Schema
-
-var UpdatePhoneNumberRequestItem_CallingName *smithy.Schema
-
-var _UpdatePhoneNumberRequestItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdatePhoneNumberRequestItemList",
-}, smithy.ShapeTypeList, 1)
-var _UpdatePhoneNumberRequestItemList_member *smithy.Schema
-
-var UpdateUserRequestItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateUserRequestItem",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateUserRequestItem_UserId *smithy.Schema
-
-var UpdateUserRequestItem_LicenseType *smithy.Schema
-
-var UpdateUserRequestItem_UserType *smithy.Schema
-
-var UpdateUserRequestItem_AlexaForBusinessMetadata *smithy.Schema
-
-var _UpdateUserRequestItemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateUserRequestItemList",
-}, smithy.ShapeTypeList, 1)
-var _UpdateUserRequestItemList_member *smithy.Schema
-
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 13)
-var User_UserId *smithy.Schema
-
-var User_AccountId *smithy.Schema
-
-var User_PrimaryEmail *smithy.Schema
-
-var User_PrimaryProvisionedNumber *smithy.Schema
-
-var User_DisplayName *smithy.Schema
-
-var User_LicenseType *smithy.Schema
-
-var User_UserType *smithy.Schema
-
-var User_UserRegistrationStatus *smithy.Schema
-
-var User_UserInvitationStatus *smithy.Schema
-
-var User_RegisteredOn *smithy.Schema
-
-var User_InvitedOn *smithy.Schema
-
-var User_AlexaForBusinessMetadata *smithy.Schema
-
-var User_PersonalPIN *smithy.Schema
-
-var _UserEmailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UserEmailList",
-}, smithy.ShapeTypeList, 1)
-var _UserEmailList_member *smithy.Schema
-
-var UserError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UserError",
-}, smithy.ShapeTypeStructure, 3)
-var UserError_UserId *smithy.Schema
-
-var UserError_ErrorCode *smithy.Schema
-
-var UserError_ErrorMessage *smithy.Schema
-
-var _UserErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UserErrorList",
-}, smithy.ShapeTypeList, 1)
-var _UserErrorList_member *smithy.Schema
-
-var _UserIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UserIdList",
-}, smithy.ShapeTypeList, 1)
-var _UserIdList_member *smithy.Schema
-
-var _UserList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UserList",
-}, smithy.ShapeTypeList, 1)
-var _UserList_member *smithy.Schema
-
-var UserSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UserSettings",
-}, smithy.ShapeTypeStructure, 1)
-var UserSettings_Telephony *smithy.Schema
-
-var UserType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UserType",
-}, smithy.ShapeTypeEnum, 2)
-var UserType_PrivateUser *smithy.Schema
-
-var UserType_SharedDevice *smithy.Schema
-
-var VoiceConnectorSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "VoiceConnectorSettings",
-}, smithy.ShapeTypeStructure, 1)
-var VoiceConnectorSettings_CdrBucket *smithy.Schema
-
-var AssociatePhoneNumberWithUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AssociatePhoneNumberWithUserRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociatePhoneNumberWithUserRequest_AccountId *smithy.Schema
-
-var AssociatePhoneNumberWithUserRequest_UserId *smithy.Schema
-
-var AssociatePhoneNumberWithUserRequest_E164PhoneNumber *smithy.Schema
-
-var AssociatePhoneNumberWithUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AssociatePhoneNumberWithUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateSigninDelegateGroupsWithAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AssociateSigninDelegateGroupsWithAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateSigninDelegateGroupsWithAccountRequest_AccountId *smithy.Schema
-
-var AssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups *smithy.Schema
-
-var AssociateSigninDelegateGroupsWithAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "AssociateSigninDelegateGroupsWithAccountResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var BatchCreateRoomMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchCreateRoomMembershipRequest",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateRoomMembershipRequest_AccountId *smithy.Schema
-
-var BatchCreateRoomMembershipRequest_RoomId *smithy.Schema
-
-var BatchCreateRoomMembershipRequest_MembershipItemList *smithy.Schema
-
-var BatchCreateRoomMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchCreateRoomMembershipResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchCreateRoomMembershipResponse_Errors *smithy.Schema
-
-var BatchDeletePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchDeletePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeletePhoneNumberRequest_PhoneNumberIds *smithy.Schema
-
-var BatchDeletePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchDeletePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDeletePhoneNumberResponse_PhoneNumberErrors *smithy.Schema
-
-var BatchSuspendUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchSuspendUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchSuspendUserRequest_AccountId *smithy.Schema
-
-var BatchSuspendUserRequest_UserIdList *smithy.Schema
-
-var BatchSuspendUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchSuspendUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchSuspendUserResponse_UserErrors *smithy.Schema
-
-var BatchUnsuspendUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUnsuspendUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUnsuspendUserRequest_AccountId *smithy.Schema
-
-var BatchUnsuspendUserRequest_UserIdList *smithy.Schema
-
-var BatchUnsuspendUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUnsuspendUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUnsuspendUserResponse_UserErrors *smithy.Schema
-
-var BatchUpdatePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUpdatePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems *smithy.Schema
-
-var BatchUpdatePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUpdatePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdatePhoneNumberResponse_PhoneNumberErrors *smithy.Schema
-
-var BatchUpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUpdateUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchUpdateUserRequest_AccountId *smithy.Schema
-
-var BatchUpdateUserRequest_UpdateUserRequestItems *smithy.Schema
-
-var BatchUpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "BatchUpdateUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchUpdateUserResponse_UserErrors *smithy.Schema
-
-var CreateAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAccountRequest_Name *smithy.Schema
-
-var CreateAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAccountResponse_Account *smithy.Schema
-
-var CreateBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateBotRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateBotRequest_AccountId *smithy.Schema
-
-var CreateBotRequest_DisplayName *smithy.Schema
-
-var CreateBotRequest_Domain *smithy.Schema
-
-var CreateBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateBotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBotResponse_Bot *smithy.Schema
-
-var CreateMeetingDialOutRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateMeetingDialOutRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMeetingDialOutRequest_MeetingId *smithy.Schema
-
-var CreateMeetingDialOutRequest_FromPhoneNumber *smithy.Schema
-
-var CreateMeetingDialOutRequest_ToPhoneNumber *smithy.Schema
-
-var CreateMeetingDialOutRequest_JoinToken *smithy.Schema
-
-var CreateMeetingDialOutResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateMeetingDialOutResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMeetingDialOutResponse_TransactionId *smithy.Schema
-
-var CreatePhoneNumberOrderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreatePhoneNumberOrderRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePhoneNumberOrderRequest_ProductType *smithy.Schema
-
-var CreatePhoneNumberOrderRequest_E164PhoneNumbers *smithy.Schema
-
-var CreatePhoneNumberOrderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreatePhoneNumberOrderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreatePhoneNumberOrderResponse_PhoneNumberOrder *smithy.Schema
-
-var CreateRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateRoomRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateRoomRequest_AccountId *smithy.Schema
-
-var CreateRoomRequest_Name *smithy.Schema
-
-var CreateRoomRequest_ClientRequestToken *smithy.Schema
-
-var CreateRoomMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateRoomMembershipRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRoomMembershipRequest_AccountId *smithy.Schema
-
-var CreateRoomMembershipRequest_RoomId *smithy.Schema
-
-var CreateRoomMembershipRequest_MemberId *smithy.Schema
-
-var CreateRoomMembershipRequest_Role *smithy.Schema
-
-var CreateRoomMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateRoomMembershipResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRoomMembershipResponse_RoomMembership *smithy.Schema
-
-var CreateRoomResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateRoomResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRoomResponse_Room *smithy.Schema
-
-var CreateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateUserRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateUserRequest_AccountId *smithy.Schema
-
-var CreateUserRequest_Username *smithy.Schema
-
-var CreateUserRequest_Email *smithy.Schema
-
-var CreateUserRequest_UserType *smithy.Schema
-
-var CreateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "CreateUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateUserResponse_User *smithy.Schema
-
-var DeleteAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAccountRequest_AccountId *smithy.Schema
-
-var DeleteAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteAccountResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEventsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteEventsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteEventsConfigurationRequest_AccountId *smithy.Schema
-
-var DeleteEventsConfigurationRequest_BotId *smithy.Schema
-
-var DeletePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeletePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var DeleteRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteRoomRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRoomRequest_AccountId *smithy.Schema
-
-var DeleteRoomRequest_RoomId *smithy.Schema
-
-var DeleteRoomMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DeleteRoomMembershipRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRoomMembershipRequest_AccountId *smithy.Schema
-
-var DeleteRoomMembershipRequest_RoomId *smithy.Schema
-
-var DeleteRoomMembershipRequest_MemberId *smithy.Schema
-
-var DisassociatePhoneNumberFromUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DisassociatePhoneNumberFromUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociatePhoneNumberFromUserRequest_AccountId *smithy.Schema
-
-var DisassociatePhoneNumberFromUserRequest_UserId *smithy.Schema
-
-var DisassociatePhoneNumberFromUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DisassociatePhoneNumberFromUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateSigninDelegateGroupsFromAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DisassociateSigninDelegateGroupsFromAccountRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateSigninDelegateGroupsFromAccountRequest_AccountId *smithy.Schema
-
-var DisassociateSigninDelegateGroupsFromAccountRequest_GroupNames *smithy.Schema
-
-var DisassociateSigninDelegateGroupsFromAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "DisassociateSigninDelegateGroupsFromAccountResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountRequest_AccountId *smithy.Schema
-
-var GetAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountResponse_Account *smithy.Schema
-
-var GetAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetAccountSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountSettingsRequest_AccountId *smithy.Schema
-
-var GetAccountSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetAccountSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountSettingsResponse_AccountSettings *smithy.Schema
-
-var GetBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetBotRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetBotRequest_AccountId *smithy.Schema
-
-var GetBotRequest_BotId *smithy.Schema
-
-var GetBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetBotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetBotResponse_Bot *smithy.Schema
-
-var GetEventsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetEventsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetEventsConfigurationRequest_AccountId *smithy.Schema
-
-var GetEventsConfigurationRequest_BotId *smithy.Schema
-
-var GetEventsConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetEventsConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetEventsConfigurationResponse_EventsConfiguration *smithy.Schema
-
-var GetGlobalSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetGlobalSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetGlobalSettingsResponse_BusinessCalling *smithy.Schema
-
-var GetGlobalSettingsResponse_VoiceConnector *smithy.Schema
-
-var GetPhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var GetPhoneNumberOrderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumberOrderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberOrderRequest_PhoneNumberOrderId *smithy.Schema
-
-var GetPhoneNumberOrderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumberOrderResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberOrderResponse_PhoneNumberOrder *smithy.Schema
-
-var GetPhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetPhoneNumberResponse_PhoneNumber *smithy.Schema
-
-var GetPhoneNumberSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetPhoneNumberSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPhoneNumberSettingsResponse_CallingName *smithy.Schema
-
-var GetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp *smithy.Schema
-
-var GetRetentionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetRetentionSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRetentionSettingsRequest_AccountId *smithy.Schema
-
-var GetRetentionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetRetentionSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRetentionSettingsResponse_RetentionSettings *smithy.Schema
-
-var GetRetentionSettingsResponse_InitiateDeletionTimestamp *smithy.Schema
-
-var GetRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetRoomRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetRoomRequest_AccountId *smithy.Schema
-
-var GetRoomRequest_RoomId *smithy.Schema
-
-var GetRoomResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetRoomResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRoomResponse_Room *smithy.Schema
-
-var GetUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetUserRequest_AccountId *smithy.Schema
-
-var GetUserRequest_UserId *smithy.Schema
-
-var GetUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetUserResponse_User *smithy.Schema
-
-var GetUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetUserSettingsRequest_AccountId *smithy.Schema
-
-var GetUserSettingsRequest_UserId *smithy.Schema
-
-var GetUserSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "GetUserSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetUserSettingsResponse_UserSettings *smithy.Schema
-
-var InviteUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "InviteUsersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var InviteUsersRequest_AccountId *smithy.Schema
-
-var InviteUsersRequest_UserEmailList *smithy.Schema
-
-var InviteUsersRequest_UserType *smithy.Schema
-
-var InviteUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "InviteUsersResponse",
-}, smithy.ShapeTypeStructure, 1)
-var InviteUsersResponse_Invites *smithy.Schema
-
-var ListAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListAccountsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAccountsRequest_Name *smithy.Schema
-
-var ListAccountsRequest_UserEmail *smithy.Schema
-
-var ListAccountsRequest_NextToken *smithy.Schema
-
-var ListAccountsRequest_MaxResults *smithy.Schema
-
-var ListAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccountsResponse_Accounts *smithy.Schema
-
-var ListAccountsResponse_NextToken *smithy.Schema
-
-var ListBotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListBotsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListBotsRequest_AccountId *smithy.Schema
-
-var ListBotsRequest_MaxResults *smithy.Schema
-
-var ListBotsRequest_NextToken *smithy.Schema
-
-var ListBotsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListBotsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListBotsResponse_Bots *smithy.Schema
-
-var ListBotsResponse_NextToken *smithy.Schema
-
-var ListPhoneNumberOrdersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListPhoneNumberOrdersRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPhoneNumberOrdersRequest_NextToken *smithy.Schema
-
-var ListPhoneNumberOrdersRequest_MaxResults *smithy.Schema
-
-var ListPhoneNumberOrdersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListPhoneNumberOrdersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPhoneNumberOrdersResponse_PhoneNumberOrders *smithy.Schema
-
-var ListPhoneNumberOrdersResponse_NextToken *smithy.Schema
-
-var ListPhoneNumbersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListPhoneNumbersRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListPhoneNumbersRequest_Status *smithy.Schema
-
-var ListPhoneNumbersRequest_ProductType *smithy.Schema
-
-var ListPhoneNumbersRequest_FilterName *smithy.Schema
-
-var ListPhoneNumbersRequest_FilterValue *smithy.Schema
-
-var ListPhoneNumbersRequest_MaxResults *smithy.Schema
-
-var ListPhoneNumbersRequest_NextToken *smithy.Schema
-
-var ListPhoneNumbersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListPhoneNumbersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPhoneNumbersResponse_PhoneNumbers *smithy.Schema
-
-var ListPhoneNumbersResponse_NextToken *smithy.Schema
-
-var ListRoomMembershipsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListRoomMembershipsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRoomMembershipsRequest_AccountId *smithy.Schema
-
-var ListRoomMembershipsRequest_RoomId *smithy.Schema
-
-var ListRoomMembershipsRequest_MaxResults *smithy.Schema
-
-var ListRoomMembershipsRequest_NextToken *smithy.Schema
-
-var ListRoomMembershipsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListRoomMembershipsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRoomMembershipsResponse_RoomMemberships *smithy.Schema
-
-var ListRoomMembershipsResponse_NextToken *smithy.Schema
-
-var ListRoomsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListRoomsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRoomsRequest_AccountId *smithy.Schema
-
-var ListRoomsRequest_MemberId *smithy.Schema
-
-var ListRoomsRequest_MaxResults *smithy.Schema
-
-var ListRoomsRequest_NextToken *smithy.Schema
-
-var ListRoomsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListRoomsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRoomsResponse_Rooms *smithy.Schema
-
-var ListRoomsResponse_NextToken *smithy.Schema
-
-var ListSupportedPhoneNumberCountriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListSupportedPhoneNumberCountriesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListSupportedPhoneNumberCountriesRequest_ProductType *smithy.Schema
-
-var ListSupportedPhoneNumberCountriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListSupportedPhoneNumberCountriesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries *smithy.Schema
-
-var ListUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListUsersRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListUsersRequest_AccountId *smithy.Schema
-
-var ListUsersRequest_UserEmail *smithy.Schema
-
-var ListUsersRequest_UserType *smithy.Schema
-
-var ListUsersRequest_MaxResults *smithy.Schema
-
-var ListUsersRequest_NextToken *smithy.Schema
-
-var ListUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ListUsersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListUsersResponse_Users *smithy.Schema
-
-var ListUsersResponse_NextToken *smithy.Schema
-
-var LogoutUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "LogoutUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var LogoutUserRequest_AccountId *smithy.Schema
-
-var LogoutUserRequest_UserId *smithy.Schema
-
-var LogoutUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "LogoutUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutEventsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PutEventsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutEventsConfigurationRequest_AccountId *smithy.Schema
-
-var PutEventsConfigurationRequest_BotId *smithy.Schema
-
-var PutEventsConfigurationRequest_OutboundEventsHTTPSEndpoint *smithy.Schema
-
-var PutEventsConfigurationRequest_LambdaFunctionArn *smithy.Schema
-
-var PutEventsConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PutEventsConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutEventsConfigurationResponse_EventsConfiguration *smithy.Schema
-
-var PutRetentionSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PutRetentionSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutRetentionSettingsRequest_AccountId *smithy.Schema
-
-var PutRetentionSettingsRequest_RetentionSettings *smithy.Schema
-
-var PutRetentionSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "PutRetentionSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutRetentionSettingsResponse_RetentionSettings *smithy.Schema
-
-var PutRetentionSettingsResponse_InitiateDeletionTimestamp *smithy.Schema
-
-var RedactConversationMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RedactConversationMessageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RedactConversationMessageRequest_AccountId *smithy.Schema
-
-var RedactConversationMessageRequest_ConversationId *smithy.Schema
-
-var RedactConversationMessageRequest_MessageId *smithy.Schema
-
-var RedactConversationMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RedactConversationMessageResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RedactRoomMessageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RedactRoomMessageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RedactRoomMessageRequest_AccountId *smithy.Schema
-
-var RedactRoomMessageRequest_RoomId *smithy.Schema
-
-var RedactRoomMessageRequest_MessageId *smithy.Schema
-
-var RedactRoomMessageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RedactRoomMessageResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RegenerateSecurityTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RegenerateSecurityTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RegenerateSecurityTokenRequest_AccountId *smithy.Schema
-
-var RegenerateSecurityTokenRequest_BotId *smithy.Schema
-
-var RegenerateSecurityTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RegenerateSecurityTokenResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegenerateSecurityTokenResponse_Bot *smithy.Schema
-
-var ResetPersonalPINRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ResetPersonalPINRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ResetPersonalPINRequest_AccountId *smithy.Schema
-
-var ResetPersonalPINRequest_UserId *smithy.Schema
-
-var ResetPersonalPINResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "ResetPersonalPINResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ResetPersonalPINResponse_User *smithy.Schema
-
-var RestorePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RestorePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RestorePhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var RestorePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "RestorePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RestorePhoneNumberResponse_PhoneNumber *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "SearchAvailablePhoneNumbersRequest",
-}, smithy.ShapeTypeStructure, 8)
-var SearchAvailablePhoneNumbersRequest_AreaCode *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_City *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_Country *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_State *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_TollFreePrefix *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_PhoneNumberType *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_MaxResults *smithy.Schema
-
-var SearchAvailablePhoneNumbersRequest_NextToken *smithy.Schema
-
-var SearchAvailablePhoneNumbersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "SearchAvailablePhoneNumbersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchAvailablePhoneNumbersResponse_E164PhoneNumbers *smithy.Schema
-
-var SearchAvailablePhoneNumbersResponse_NextToken *smithy.Schema
-
-var UpdateAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateAccountRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateAccountRequest_AccountId *smithy.Schema
-
-var UpdateAccountRequest_Name *smithy.Schema
-
-var UpdateAccountRequest_DefaultLicense *smithy.Schema
-
-var UpdateAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccountResponse_Account *smithy.Schema
-
-var UpdateAccountSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateAccountSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateAccountSettingsRequest_AccountId *smithy.Schema
-
-var UpdateAccountSettingsRequest_AccountSettings *smithy.Schema
-
-var UpdateAccountSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateAccountSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateBotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateBotRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateBotRequest_AccountId *smithy.Schema
-
-var UpdateBotRequest_BotId *smithy.Schema
-
-var UpdateBotRequest_Disabled *smithy.Schema
-
-var UpdateBotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateBotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBotResponse_Bot *smithy.Schema
-
-var UpdateGlobalSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateGlobalSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateGlobalSettingsRequest_BusinessCalling *smithy.Schema
-
-var UpdateGlobalSettingsRequest_VoiceConnector *smithy.Schema
-
-var UpdatePhoneNumberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdatePhoneNumberRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePhoneNumberRequest_PhoneNumberId *smithy.Schema
-
-var UpdatePhoneNumberRequest_ProductType *smithy.Schema
-
-var UpdatePhoneNumberRequest_CallingName *smithy.Schema
-
-var UpdatePhoneNumberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdatePhoneNumberResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePhoneNumberResponse_PhoneNumber *smithy.Schema
-
-var UpdatePhoneNumberSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdatePhoneNumberSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UpdatePhoneNumberSettingsRequest_CallingName *smithy.Schema
-
-var UpdateRoomRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateRoomRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRoomRequest_AccountId *smithy.Schema
-
-var UpdateRoomRequest_RoomId *smithy.Schema
-
-var UpdateRoomRequest_Name *smithy.Schema
-
-var UpdateRoomMembershipRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateRoomMembershipRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRoomMembershipRequest_AccountId *smithy.Schema
-
-var UpdateRoomMembershipRequest_RoomId *smithy.Schema
-
-var UpdateRoomMembershipRequest_MemberId *smithy.Schema
-
-var UpdateRoomMembershipRequest_Role *smithy.Schema
-
-var UpdateRoomMembershipResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateRoomMembershipResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRoomMembershipResponse_RoomMembership *smithy.Schema
-
-var UpdateRoomResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateRoomResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRoomResponse_Room *smithy.Schema
-
-var UpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateUserRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateUserRequest_AccountId *smithy.Schema
-
-var UpdateUserRequest_UserId *smithy.Schema
-
-var UpdateUserRequest_LicenseType *smithy.Schema
-
-var UpdateUserRequest_UserType *smithy.Schema
-
-var UpdateUserRequest_AlexaForBusinessMetadata *smithy.Schema
-
-var UpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateUserResponse_User *smithy.Schema
-
-var UpdateUserSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chime",
-	Name:      "UpdateUserSettingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateUserSettingsRequest_AccountId *smithy.Schema
-
-var UpdateUserSettingsRequest_UserId *smithy.Schema
-
-var UpdateUserSettingsRequest_UserSettings *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ErrorCode_BadRequest = ErrorCode.AddMember("BadRequest", smithyprelude.Unit)
-
-	ErrorCode_Conflict = ErrorCode.AddMember("Conflict", smithyprelude.Unit)
-
-	ErrorCode_Forbidden = ErrorCode.AddMember("Forbidden", smithyprelude.Unit)
-
-	ErrorCode_NotFound = ErrorCode.AddMember("NotFound", smithyprelude.Unit)
-
-	ErrorCode_PreconditionFailed = ErrorCode.AddMember("PreconditionFailed", smithyprelude.Unit)
-
-	ErrorCode_ResourceLimitExceeded = ErrorCode.AddMember("ResourceLimitExceeded", smithyprelude.Unit)
-
-	ErrorCode_ServiceFailure = ErrorCode.AddMember("ServiceFailure", smithyprelude.Unit)
-
-	ErrorCode_AccessDenied = ErrorCode.AddMember("AccessDenied", smithyprelude.Unit)
-
-	ErrorCode_ServiceUnavailable = ErrorCode.AddMember("ServiceUnavailable", smithyprelude.Unit)
-
-	ErrorCode_Throttled = ErrorCode.AddMember("Throttled", smithyprelude.Unit)
-
-	ErrorCode_Throttling = ErrorCode.AddMember("Throttling", smithyprelude.Unit)
-
-	ErrorCode_Unauthorized = ErrorCode.AddMember("Unauthorized", smithyprelude.Unit)
-
-	ErrorCode_Unprocessable = ErrorCode.AddMember("Unprocessable", smithyprelude.Unit)
-
-	ErrorCode_VoiceConnectorGroupAssociationsExist = ErrorCode.AddMember("VoiceConnectorGroupAssociationsExist", smithyprelude.Unit)
-
-	ErrorCode_PhoneNumberAssociationsExist = ErrorCode.AddMember("PhoneNumberAssociationsExist", smithyprelude.Unit)
-
-	AccessDeniedException_Code = AccessDeniedException.AddMember("Code", ErrorCode)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _String)
-
-	AccountType_Team = AccountType.AddMember("Team", smithyprelude.Unit)
-
-	AccountType_EnterpriseDirectory = AccountType.AddMember("EnterpriseDirectory", smithyprelude.Unit)
-
-	AccountType_EnterpriseLWA = AccountType.AddMember("EnterpriseLWA", smithyprelude.Unit)
-
-	AccountType_EnterpriseOIDC = AccountType.AddMember("EnterpriseOIDC", smithyprelude.Unit)
-
-	License_Basic = License.AddMember("Basic", smithyprelude.Unit)
-
-	License_Plus = License.AddMember("Plus", smithyprelude.Unit)
-
-	License_Pro = License.AddMember("Pro", smithyprelude.Unit)
-
-	License_ProTrial = License.AddMember("ProTrial", smithyprelude.Unit)
-
-	_LicenseList_member = _LicenseList.AddMember("member", License)
-
-	AccountStatus_Suspended = AccountStatus.AddMember("Suspended", smithyprelude.Unit)
-
-	AccountStatus_Active = AccountStatus.AddMember("Active", smithyprelude.Unit)
-
-	SigninDelegateGroup_GroupName = SigninDelegateGroup.AddMember("GroupName", _NonEmptyString)
-
-	_SigninDelegateGroupList_member = _SigninDelegateGroupList.AddMember("member", SigninDelegateGroup)
-
-	Account_AwsAccountId = Account.AddMember("AwsAccountId", _String)
-
-	Account_AccountId = Account.AddMember("AccountId", _String)
-
-	Account_Name = Account.AddMember("Name", _String)
-
-	Account_AccountType = Account.AddMember("AccountType", AccountType)
-
-	Account_CreatedTimestamp = Account.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	Account_DefaultLicense = Account.AddMember("DefaultLicense", License)
-
-	Account_SupportedLicenses = Account.AddMember("SupportedLicenses", _LicenseList)
-
-	Account_AccountStatus = Account.AddMember("AccountStatus", AccountStatus)
-
-	Account_SigninDelegateGroups = Account.AddMember("SigninDelegateGroups", _SigninDelegateGroupList)
-
-	_AccountList_member = _AccountList.AddMember("member", Account)
-
-	AccountSettings_DisableRemoteControl = AccountSettings.AddMember("DisableRemoteControl", _Boolean)
-
-	AccountSettings_EnableDialOut = AccountSettings.AddMember("EnableDialOut", _Boolean)
-
-	AlexaForBusinessMetadata_IsAlexaForBusinessEnabled = AlexaForBusinessMetadata.AddMember("IsAlexaForBusinessEnabled", _Boolean)
-
-	AlexaForBusinessMetadata_AlexaForBusinessRoomArn = AlexaForBusinessMetadata.AddMember("AlexaForBusinessRoomArn", _SensitiveString)
-
-	BadRequestException_Code = BadRequestException.AddMember("Code", ErrorCode)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
-
-	BotType_ChatBot = BotType.AddMember("ChatBot", smithyprelude.Unit)
-
-	Bot_BotId = Bot.AddMember("BotId", _String)
-
-	Bot_UserId = Bot.AddMember("UserId", _String)
-
-	Bot_DisplayName = Bot.AddMember("DisplayName", _SensitiveString)
-
-	Bot_BotType = Bot.AddMember("BotType", BotType)
-
-	Bot_Disabled = Bot.AddMember("Disabled", _NullableBoolean)
-
-	Bot_CreatedTimestamp = Bot.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	Bot_UpdatedTimestamp = Bot.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	Bot_BotEmail = Bot.AddMember("BotEmail", _SensitiveString)
-
-	Bot_SecurityToken = Bot.AddMember("SecurityToken", _SensitiveString)
-
-	_BotList_member = _BotList.AddMember("member", Bot)
-
-	BusinessCallingSettings_CdrBucket = BusinessCallingSettings.AddMember("CdrBucket", _String)
-
-	CallingNameStatus_Unassigned = CallingNameStatus.AddMember("Unassigned", smithyprelude.Unit)
-
-	CallingNameStatus_UpdateInProgress = CallingNameStatus.AddMember("UpdateInProgress", smithyprelude.Unit)
-
-	CallingNameStatus_UpdateSucceeded = CallingNameStatus.AddMember("UpdateSucceeded", smithyprelude.Unit)
-
-	CallingNameStatus_UpdateFailed = CallingNameStatus.AddMember("UpdateFailed", smithyprelude.Unit)
-
-	ConflictException_Code = ConflictException.AddMember("Code", ErrorCode)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	ConversationRetentionSettings_RetentionDays = ConversationRetentionSettings.AddMember("RetentionDays", _RetentionDays)
-
-	_E164PhoneNumberList_member = _E164PhoneNumberList.AddMember("member", _E164PhoneNumber)
-
-	EmailStatus_NotSent = EmailStatus.AddMember("NotSent", smithyprelude.Unit)
-
-	EmailStatus_Sent = EmailStatus.AddMember("Sent", smithyprelude.Unit)
-
-	EmailStatus_Failed = EmailStatus.AddMember("Failed", smithyprelude.Unit)
-
-	EventsConfiguration_BotId = EventsConfiguration.AddMember("BotId", _String)
-
-	EventsConfiguration_OutboundEventsHTTPSEndpoint = EventsConfiguration.AddMember("OutboundEventsHTTPSEndpoint", _SensitiveString)
-
-	EventsConfiguration_LambdaFunctionArn = EventsConfiguration.AddMember("LambdaFunctionArn", _SensitiveString)
-
-	ForbiddenException_Code = ForbiddenException.AddMember("Code", ErrorCode)
-
-	ForbiddenException_Message = ForbiddenException.AddMember("Message", _String)
-
-	InviteStatus_Pending = InviteStatus.AddMember("Pending", smithyprelude.Unit)
-
-	InviteStatus_Accepted = InviteStatus.AddMember("Accepted", smithyprelude.Unit)
-
-	InviteStatus_Failed = InviteStatus.AddMember("Failed", smithyprelude.Unit)
-
-	Invite_InviteId = Invite.AddMember("InviteId", _String)
-
-	Invite_Status = Invite.AddMember("Status", InviteStatus)
-
-	Invite_EmailAddress = Invite.AddMember("EmailAddress", _EmailAddress)
-
-	Invite_EmailStatus = Invite.AddMember("EmailStatus", EmailStatus)
-
-	_InviteList_member = _InviteList.AddMember("member", Invite)
-
-	MemberType_User = MemberType.AddMember("User", smithyprelude.Unit)
-
-	MemberType_Bot = MemberType.AddMember("Bot", smithyprelude.Unit)
-
-	MemberType_Webhook = MemberType.AddMember("Webhook", smithyprelude.Unit)
-
-	Member_MemberId = Member.AddMember("MemberId", _NonEmptyString)
-
-	Member_MemberType = Member.AddMember("MemberType", MemberType)
-
-	Member_Email = Member.AddMember("Email", _SensitiveString)
-
-	Member_FullName = Member.AddMember("FullName", _SensitiveString)
-
-	Member_AccountId = Member.AddMember("AccountId", _NonEmptyString)
-
-	MemberError_MemberId = MemberError.AddMember("MemberId", _NonEmptyString)
-
-	MemberError_ErrorCode = MemberError.AddMember("ErrorCode", ErrorCode)
-
-	MemberError_ErrorMessage = MemberError.AddMember("ErrorMessage", _String)
-
-	_MemberErrorList_member = _MemberErrorList.AddMember("member", MemberError)
-
-	RoomMembershipRole_Administrator = RoomMembershipRole.AddMember("Administrator", smithyprelude.Unit)
-
-	RoomMembershipRole_Member = RoomMembershipRole.AddMember("Member", smithyprelude.Unit)
-
-	MembershipItem_MemberId = MembershipItem.AddMember("MemberId", _NonEmptyString)
-
-	MembershipItem_Role = MembershipItem.AddMember("Role", RoomMembershipRole)
-
-	_MembershipItemList_member = _MembershipItemList.AddMember("member", MembershipItem)
-
-	_NonEmptyStringList_member = _NonEmptyStringList.AddMember("member", _String)
-
-	NotFoundException_Code = NotFoundException.AddMember("Code", ErrorCode)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _String)
-
-	OrderedPhoneNumberStatus_Processing = OrderedPhoneNumberStatus.AddMember("Processing", smithyprelude.Unit)
-
-	OrderedPhoneNumberStatus_Acquired = OrderedPhoneNumberStatus.AddMember("Acquired", smithyprelude.Unit)
-
-	OrderedPhoneNumberStatus_Failed = OrderedPhoneNumberStatus.AddMember("Failed", smithyprelude.Unit)
-
-	OrderedPhoneNumber_E164PhoneNumber = OrderedPhoneNumber.AddMember("E164PhoneNumber", _E164PhoneNumber)
-
-	OrderedPhoneNumber_Status = OrderedPhoneNumber.AddMember("Status", OrderedPhoneNumberStatus)
-
-	_OrderedPhoneNumberList_member = _OrderedPhoneNumberList.AddMember("member", OrderedPhoneNumber)
-
-	PhoneNumberType_Local = PhoneNumberType.AddMember("Local", smithyprelude.Unit)
-
-	PhoneNumberType_TollFree = PhoneNumberType.AddMember("TollFree", smithyprelude.Unit)
-
-	PhoneNumberProductType_BusinessCalling = PhoneNumberProductType.AddMember("BusinessCalling", smithyprelude.Unit)
-
-	PhoneNumberProductType_VoiceConnector = PhoneNumberProductType.AddMember("VoiceConnector", smithyprelude.Unit)
-
-	PhoneNumberProductType_SipMediaApplicationDialIn = PhoneNumberProductType.AddMember("SipMediaApplicationDialIn", smithyprelude.Unit)
-
-	PhoneNumberStatus_AcquireInProgress = PhoneNumberStatus.AddMember("AcquireInProgress", smithyprelude.Unit)
-
-	PhoneNumberStatus_AcquireFailed = PhoneNumberStatus.AddMember("AcquireFailed", smithyprelude.Unit)
-
-	PhoneNumberStatus_Unassigned = PhoneNumberStatus.AddMember("Unassigned", smithyprelude.Unit)
-
-	PhoneNumberStatus_Assigned = PhoneNumberStatus.AddMember("Assigned", smithyprelude.Unit)
-
-	PhoneNumberStatus_ReleaseInProgress = PhoneNumberStatus.AddMember("ReleaseInProgress", smithyprelude.Unit)
-
-	PhoneNumberStatus_DeleteInProgress = PhoneNumberStatus.AddMember("DeleteInProgress", smithyprelude.Unit)
-
-	PhoneNumberStatus_ReleaseFailed = PhoneNumberStatus.AddMember("ReleaseFailed", smithyprelude.Unit)
-
-	PhoneNumberStatus_DeleteFailed = PhoneNumberStatus.AddMember("DeleteFailed", smithyprelude.Unit)
-
-	PhoneNumberCapabilities_InboundCall = PhoneNumberCapabilities.AddMember("InboundCall", _NullableBoolean)
-
-	PhoneNumberCapabilities_OutboundCall = PhoneNumberCapabilities.AddMember("OutboundCall", _NullableBoolean)
-
-	PhoneNumberCapabilities_InboundSMS = PhoneNumberCapabilities.AddMember("InboundSMS", _NullableBoolean)
-
-	PhoneNumberCapabilities_OutboundSMS = PhoneNumberCapabilities.AddMember("OutboundSMS", _NullableBoolean)
-
-	PhoneNumberCapabilities_InboundMMS = PhoneNumberCapabilities.AddMember("InboundMMS", _NullableBoolean)
-
-	PhoneNumberCapabilities_OutboundMMS = PhoneNumberCapabilities.AddMember("OutboundMMS", _NullableBoolean)
-
-	PhoneNumberAssociationName_AccountId = PhoneNumberAssociationName.AddMember("AccountId", smithyprelude.Unit)
-
-	PhoneNumberAssociationName_UserId = PhoneNumberAssociationName.AddMember("UserId", smithyprelude.Unit)
-
-	PhoneNumberAssociationName_VoiceConnectorId = PhoneNumberAssociationName.AddMember("VoiceConnectorId", smithyprelude.Unit)
-
-	PhoneNumberAssociationName_VoiceConnectorGroupId = PhoneNumberAssociationName.AddMember("VoiceConnectorGroupId", smithyprelude.Unit)
-
-	PhoneNumberAssociationName_SipRuleId = PhoneNumberAssociationName.AddMember("SipRuleId", smithyprelude.Unit)
-
-	PhoneNumberAssociation_Value = PhoneNumberAssociation.AddMember("Value", _String)
-
-	PhoneNumberAssociation_Name = PhoneNumberAssociation.AddMember("Name", PhoneNumberAssociationName)
-
-	PhoneNumberAssociation_AssociatedTimestamp = PhoneNumberAssociation.AddMember("AssociatedTimestamp", _Iso8601Timestamp)
-
-	_PhoneNumberAssociationList_member = _PhoneNumberAssociationList.AddMember("member", PhoneNumberAssociation)
-
-	PhoneNumber_PhoneNumberId = PhoneNumber.AddMember("PhoneNumberId", _String)
-
-	PhoneNumber_E164PhoneNumber = PhoneNumber.AddMember("E164PhoneNumber", _E164PhoneNumber)
-
-	PhoneNumber_Country = PhoneNumber.AddMember("Country", _Alpha2CountryCode)
-
-	PhoneNumber_Type = PhoneNumber.AddMember("Type", PhoneNumberType)
-
-	PhoneNumber_ProductType = PhoneNumber.AddMember("ProductType", PhoneNumberProductType)
-
-	PhoneNumber_Status = PhoneNumber.AddMember("Status", PhoneNumberStatus)
-
-	PhoneNumber_Capabilities = PhoneNumber.AddMember("Capabilities", PhoneNumberCapabilities)
-
-	PhoneNumber_Associations = PhoneNumber.AddMember("Associations", _PhoneNumberAssociationList)
-
-	PhoneNumber_CallingName = PhoneNumber.AddMember("CallingName", _CallingName)
-
-	PhoneNumber_CallingNameStatus = PhoneNumber.AddMember("CallingNameStatus", CallingNameStatus)
-
-	PhoneNumber_CreatedTimestamp = PhoneNumber.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	PhoneNumber_UpdatedTimestamp = PhoneNumber.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	PhoneNumber_DeletionTimestamp = PhoneNumber.AddMember("DeletionTimestamp", _Iso8601Timestamp)
-
-	_PhoneNumberTypeList_member = _PhoneNumberTypeList.AddMember("member", PhoneNumberType)
-
-	PhoneNumberCountry_CountryCode = PhoneNumberCountry.AddMember("CountryCode", _Alpha2CountryCode)
-
-	PhoneNumberCountry_SupportedPhoneNumberTypes = PhoneNumberCountry.AddMember("SupportedPhoneNumberTypes", _PhoneNumberTypeList)
-
-	_PhoneNumberCountriesList_member = _PhoneNumberCountriesList.AddMember("member", PhoneNumberCountry)
-
-	PhoneNumberError_PhoneNumberId = PhoneNumberError.AddMember("PhoneNumberId", _NonEmptyString)
-
-	PhoneNumberError_ErrorCode = PhoneNumberError.AddMember("ErrorCode", ErrorCode)
-
-	PhoneNumberError_ErrorMessage = PhoneNumberError.AddMember("ErrorMessage", _String)
-
-	_PhoneNumberErrorList_member = _PhoneNumberErrorList.AddMember("member", PhoneNumberError)
-
-	_PhoneNumberList_member = _PhoneNumberList.AddMember("member", PhoneNumber)
-
-	PhoneNumberOrderStatus_Processing = PhoneNumberOrderStatus.AddMember("Processing", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Successful = PhoneNumberOrderStatus.AddMember("Successful", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Failed = PhoneNumberOrderStatus.AddMember("Failed", smithyprelude.Unit)
-
-	PhoneNumberOrderStatus_Partial = PhoneNumberOrderStatus.AddMember("Partial", smithyprelude.Unit)
-
-	PhoneNumberOrder_PhoneNumberOrderId = PhoneNumberOrder.AddMember("PhoneNumberOrderId", _GuidString)
-
-	PhoneNumberOrder_ProductType = PhoneNumberOrder.AddMember("ProductType", PhoneNumberProductType)
-
-	PhoneNumberOrder_Status = PhoneNumberOrder.AddMember("Status", PhoneNumberOrderStatus)
-
-	PhoneNumberOrder_OrderedPhoneNumbers = PhoneNumberOrder.AddMember("OrderedPhoneNumbers", _OrderedPhoneNumberList)
-
-	PhoneNumberOrder_CreatedTimestamp = PhoneNumberOrder.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	PhoneNumberOrder_UpdatedTimestamp = PhoneNumberOrder.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	_PhoneNumberOrderList_member = _PhoneNumberOrderList.AddMember("member", PhoneNumberOrder)
-
-	RegistrationStatus_Unregistered = RegistrationStatus.AddMember("Unregistered", smithyprelude.Unit)
-
-	RegistrationStatus_Registered = RegistrationStatus.AddMember("Registered", smithyprelude.Unit)
-
-	RegistrationStatus_Suspended = RegistrationStatus.AddMember("Suspended", smithyprelude.Unit)
-
-	ResourceLimitExceededException_Code = ResourceLimitExceededException.AddMember("Code", ErrorCode)
-
-	ResourceLimitExceededException_Message = ResourceLimitExceededException.AddMember("Message", _String)
-
-	RoomRetentionSettings_RetentionDays = RoomRetentionSettings.AddMember("RetentionDays", _RetentionDays)
-
-	RetentionSettings_RoomRetentionSettings = RetentionSettings.AddMember("RoomRetentionSettings", RoomRetentionSettings)
-
-	RetentionSettings_ConversationRetentionSettings = RetentionSettings.AddMember("ConversationRetentionSettings", ConversationRetentionSettings)
-
-	Room_RoomId = Room.AddMember("RoomId", _NonEmptyString)
-
-	Room_Name = Room.AddMember("Name", _SensitiveString)
-
-	Room_AccountId = Room.AddMember("AccountId", _NonEmptyString)
-
-	Room_CreatedBy = Room.AddMember("CreatedBy", _NonEmptyString)
-
-	Room_CreatedTimestamp = Room.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	Room_UpdatedTimestamp = Room.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	_RoomList_member = _RoomList.AddMember("member", Room)
-
-	RoomMembership_RoomId = RoomMembership.AddMember("RoomId", _NonEmptyString)
-
-	RoomMembership_Member = RoomMembership.AddMember("Member", Member)
-
-	RoomMembership_Role = RoomMembership.AddMember("Role", RoomMembershipRole)
-
-	RoomMembership_InvitedBy = RoomMembership.AddMember("InvitedBy", _NonEmptyString)
-
-	RoomMembership_UpdatedTimestamp = RoomMembership.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	_RoomMembershipList_member = _RoomMembershipList.AddMember("member", RoomMembership)
-
-	ServiceFailureException_Code = ServiceFailureException.AddMember("Code", ErrorCode)
-
-	ServiceFailureException_Message = ServiceFailureException.AddMember("Message", _String)
-
-	ServiceUnavailableException_Code = ServiceUnavailableException.AddMember("Code", ErrorCode)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	TelephonySettings_InboundCalling = TelephonySettings.AddMember("InboundCalling", _Boolean)
-
-	TelephonySettings_OutboundCalling = TelephonySettings.AddMember("OutboundCalling", _Boolean)
-
-	TelephonySettings_SMS = TelephonySettings.AddMember("SMS", _Boolean)
-
-	ThrottledClientException_Code = ThrottledClientException.AddMember("Code", ErrorCode)
-
-	ThrottledClientException_Message = ThrottledClientException.AddMember("Message", _String)
-
-	UnauthorizedClientException_Code = UnauthorizedClientException.AddMember("Code", ErrorCode)
-
-	UnauthorizedClientException_Message = UnauthorizedClientException.AddMember("Message", _String)
-
-	UnprocessableEntityException_Code = UnprocessableEntityException.AddMember("Code", ErrorCode)
-
-	UnprocessableEntityException_Message = UnprocessableEntityException.AddMember("Message", _String)
-
-	UpdatePhoneNumberRequestItem_PhoneNumberId = UpdatePhoneNumberRequestItem.AddMember("PhoneNumberId", _NonEmptyString)
-
-	UpdatePhoneNumberRequestItem_ProductType = UpdatePhoneNumberRequestItem.AddMember("ProductType", PhoneNumberProductType)
-
-	UpdatePhoneNumberRequestItem_CallingName = UpdatePhoneNumberRequestItem.AddMember("CallingName", _CallingName)
-
-	_UpdatePhoneNumberRequestItemList_member = _UpdatePhoneNumberRequestItemList.AddMember("member", UpdatePhoneNumberRequestItem)
-
-	UserType_PrivateUser = UserType.AddMember("PrivateUser", smithyprelude.Unit)
-
-	UserType_SharedDevice = UserType.AddMember("SharedDevice", smithyprelude.Unit)
-
-	UpdateUserRequestItem_UserId = UpdateUserRequestItem.AddMember("UserId", _NonEmptyString)
-
-	UpdateUserRequestItem_LicenseType = UpdateUserRequestItem.AddMember("LicenseType", License)
-
-	UpdateUserRequestItem_UserType = UpdateUserRequestItem.AddMember("UserType", UserType)
-
-	UpdateUserRequestItem_AlexaForBusinessMetadata = UpdateUserRequestItem.AddMember("AlexaForBusinessMetadata", AlexaForBusinessMetadata)
-
-	_UpdateUserRequestItemList_member = _UpdateUserRequestItemList.AddMember("member", UpdateUserRequestItem)
-
-	User_UserId = User.AddMember("UserId", _String)
-
-	User_AccountId = User.AddMember("AccountId", _String)
-
-	User_PrimaryEmail = User.AddMember("PrimaryEmail", _EmailAddress)
-
-	User_PrimaryProvisionedNumber = User.AddMember("PrimaryProvisionedNumber", _SensitiveString)
-
-	User_DisplayName = User.AddMember("DisplayName", _SensitiveString)
-
-	User_LicenseType = User.AddMember("LicenseType", License)
-
-	User_UserType = User.AddMember("UserType", UserType)
-
-	User_UserRegistrationStatus = User.AddMember("UserRegistrationStatus", RegistrationStatus)
-
-	User_UserInvitationStatus = User.AddMember("UserInvitationStatus", InviteStatus)
-
-	User_RegisteredOn = User.AddMember("RegisteredOn", _Iso8601Timestamp)
-
-	User_InvitedOn = User.AddMember("InvitedOn", _Iso8601Timestamp)
-
-	User_AlexaForBusinessMetadata = User.AddMember("AlexaForBusinessMetadata", AlexaForBusinessMetadata)
-
-	User_PersonalPIN = User.AddMember("PersonalPIN", _String)
-
-	_UserEmailList_member = _UserEmailList.AddMember("member", _EmailAddress)
-
-	UserError_UserId = UserError.AddMember("UserId", _NonEmptyString)
-
-	UserError_ErrorCode = UserError.AddMember("ErrorCode", ErrorCode)
-
-	UserError_ErrorMessage = UserError.AddMember("ErrorMessage", _String)
-
-	_UserErrorList_member = _UserErrorList.AddMember("member", UserError)
-
-	_UserIdList_member = _UserIdList.AddMember("member", _NonEmptyString)
-
-	_UserList_member = _UserList.AddMember("member", User)
-
-	UserSettings_Telephony = UserSettings.AddMember("Telephony", TelephonySettings)
-
-	VoiceConnectorSettings_CdrBucket = VoiceConnectorSettings.AddMember("CdrBucket", _String)
-
-	AssociatePhoneNumberWithUserRequest_AccountId = AssociatePhoneNumberWithUserRequest.AddMember("AccountId", _String, &smithytraits.HTTPLabel{})
-
-	AssociatePhoneNumberWithUserRequest_UserId = AssociatePhoneNumberWithUserRequest.AddMember("UserId", _String, &smithytraits.HTTPLabel{})
-
-	AssociatePhoneNumberWithUserRequest_E164PhoneNumber = AssociatePhoneNumberWithUserRequest.AddMember("E164PhoneNumber", _E164PhoneNumber)
-
-	AssociateSigninDelegateGroupsWithAccountRequest_AccountId = AssociateSigninDelegateGroupsWithAccountRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	AssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups = AssociateSigninDelegateGroupsWithAccountRequest.AddMember("SigninDelegateGroups", _SigninDelegateGroupList)
-
-	BatchCreateRoomMembershipRequest_AccountId = BatchCreateRoomMembershipRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	BatchCreateRoomMembershipRequest_RoomId = BatchCreateRoomMembershipRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	BatchCreateRoomMembershipRequest_MembershipItemList = BatchCreateRoomMembershipRequest.AddMember("MembershipItemList", _MembershipItemList)
-
-	BatchCreateRoomMembershipResponse_Errors = BatchCreateRoomMembershipResponse.AddMember("Errors", _MemberErrorList)
-
-	BatchDeletePhoneNumberRequest_PhoneNumberIds = BatchDeletePhoneNumberRequest.AddMember("PhoneNumberIds", _NonEmptyStringList)
-
-	BatchDeletePhoneNumberResponse_PhoneNumberErrors = BatchDeletePhoneNumberResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	BatchSuspendUserRequest_AccountId = BatchSuspendUserRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	BatchSuspendUserRequest_UserIdList = BatchSuspendUserRequest.AddMember("UserIdList", _UserIdList)
-
-	BatchSuspendUserResponse_UserErrors = BatchSuspendUserResponse.AddMember("UserErrors", _UserErrorList)
-
-	BatchUnsuspendUserRequest_AccountId = BatchUnsuspendUserRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	BatchUnsuspendUserRequest_UserIdList = BatchUnsuspendUserRequest.AddMember("UserIdList", _UserIdList)
-
-	BatchUnsuspendUserResponse_UserErrors = BatchUnsuspendUserResponse.AddMember("UserErrors", _UserErrorList)
-
-	BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems = BatchUpdatePhoneNumberRequest.AddMember("UpdatePhoneNumberRequestItems", _UpdatePhoneNumberRequestItemList)
-
-	BatchUpdatePhoneNumberResponse_PhoneNumberErrors = BatchUpdatePhoneNumberResponse.AddMember("PhoneNumberErrors", _PhoneNumberErrorList)
-
-	BatchUpdateUserRequest_AccountId = BatchUpdateUserRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	BatchUpdateUserRequest_UpdateUserRequestItems = BatchUpdateUserRequest.AddMember("UpdateUserRequestItems", _UpdateUserRequestItemList)
-
-	BatchUpdateUserResponse_UserErrors = BatchUpdateUserResponse.AddMember("UserErrors", _UserErrorList)
-
-	CreateAccountRequest_Name = CreateAccountRequest.AddMember("Name", _AccountName)
-
-	CreateAccountResponse_Account = CreateAccountResponse.AddMember("Account", Account)
-
-	CreateBotRequest_AccountId = CreateBotRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CreateBotRequest_DisplayName = CreateBotRequest.AddMember("DisplayName", _SensitiveString)
-
-	CreateBotRequest_Domain = CreateBotRequest.AddMember("Domain", _NonEmptyString)
-
-	CreateBotResponse_Bot = CreateBotResponse.AddMember("Bot", Bot)
-
-	CreateMeetingDialOutRequest_MeetingId = CreateMeetingDialOutRequest.AddMember("MeetingId", _GuidString, &smithytraits.HTTPLabel{})
-
-	CreateMeetingDialOutRequest_FromPhoneNumber = CreateMeetingDialOutRequest.AddMember("FromPhoneNumber", _E164PhoneNumber)
-
-	CreateMeetingDialOutRequest_ToPhoneNumber = CreateMeetingDialOutRequest.AddMember("ToPhoneNumber", _E164PhoneNumber)
-
-	CreateMeetingDialOutRequest_JoinToken = CreateMeetingDialOutRequest.AddMember("JoinToken", _JoinTokenString)
-
-	CreateMeetingDialOutResponse_TransactionId = CreateMeetingDialOutResponse.AddMember("TransactionId", _GuidString)
-
-	CreatePhoneNumberOrderRequest_ProductType = CreatePhoneNumberOrderRequest.AddMember("ProductType", PhoneNumberProductType)
-
-	CreatePhoneNumberOrderRequest_E164PhoneNumbers = CreatePhoneNumberOrderRequest.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	CreatePhoneNumberOrderResponse_PhoneNumberOrder = CreatePhoneNumberOrderResponse.AddMember("PhoneNumberOrder", PhoneNumberOrder)
-
-	CreateRoomRequest_AccountId = CreateRoomRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CreateRoomRequest_Name = CreateRoomRequest.AddMember("Name", _SensitiveString)
-
-	CreateRoomRequest_ClientRequestToken = CreateRoomRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateRoomMembershipRequest_AccountId = CreateRoomMembershipRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CreateRoomMembershipRequest_RoomId = CreateRoomMembershipRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CreateRoomMembershipRequest_MemberId = CreateRoomMembershipRequest.AddMember("MemberId", _NonEmptyString)
-
-	CreateRoomMembershipRequest_Role = CreateRoomMembershipRequest.AddMember("Role", RoomMembershipRole)
-
-	CreateRoomMembershipResponse_RoomMembership = CreateRoomMembershipResponse.AddMember("RoomMembership", RoomMembership)
-
-	CreateRoomResponse_Room = CreateRoomResponse.AddMember("Room", Room)
-
-	CreateUserRequest_AccountId = CreateUserRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CreateUserRequest_Username = CreateUserRequest.AddMember("Username", _String)
-
-	CreateUserRequest_Email = CreateUserRequest.AddMember("Email", _EmailAddress)
-
-	CreateUserRequest_UserType = CreateUserRequest.AddMember("UserType", UserType)
-
-	CreateUserResponse_User = CreateUserResponse.AddMember("User", User)
-
-	DeleteAccountRequest_AccountId = DeleteAccountRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteEventsConfigurationRequest_AccountId = DeleteEventsConfigurationRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteEventsConfigurationRequest_BotId = DeleteEventsConfigurationRequest.AddMember("BotId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeletePhoneNumberRequest_PhoneNumberId = DeletePhoneNumberRequest.AddMember("PhoneNumberId", _String, &smithytraits.HTTPLabel{})
-
-	DeleteRoomRequest_AccountId = DeleteRoomRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteRoomRequest_RoomId = DeleteRoomRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteRoomMembershipRequest_AccountId = DeleteRoomMembershipRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteRoomMembershipRequest_RoomId = DeleteRoomMembershipRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteRoomMembershipRequest_MemberId = DeleteRoomMembershipRequest.AddMember("MemberId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DisassociatePhoneNumberFromUserRequest_AccountId = DisassociatePhoneNumberFromUserRequest.AddMember("AccountId", _String, &smithytraits.HTTPLabel{})
-
-	DisassociatePhoneNumberFromUserRequest_UserId = DisassociatePhoneNumberFromUserRequest.AddMember("UserId", _String, &smithytraits.HTTPLabel{})
-
-	DisassociateSigninDelegateGroupsFromAccountRequest_AccountId = DisassociateSigninDelegateGroupsFromAccountRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DisassociateSigninDelegateGroupsFromAccountRequest_GroupNames = DisassociateSigninDelegateGroupsFromAccountRequest.AddMember("GroupNames", _NonEmptyStringList)
-
-	GetAccountRequest_AccountId = GetAccountRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetAccountResponse_Account = GetAccountResponse.AddMember("Account", Account)
-
-	GetAccountSettingsRequest_AccountId = GetAccountSettingsRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetAccountSettingsResponse_AccountSettings = GetAccountSettingsResponse.AddMember("AccountSettings", AccountSettings)
-
-	GetBotRequest_AccountId = GetBotRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetBotRequest_BotId = GetBotRequest.AddMember("BotId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetBotResponse_Bot = GetBotResponse.AddMember("Bot", Bot)
-
-	GetEventsConfigurationRequest_AccountId = GetEventsConfigurationRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetEventsConfigurationRequest_BotId = GetEventsConfigurationRequest.AddMember("BotId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetEventsConfigurationResponse_EventsConfiguration = GetEventsConfigurationResponse.AddMember("EventsConfiguration", EventsConfiguration)
-
-	GetGlobalSettingsResponse_BusinessCalling = GetGlobalSettingsResponse.AddMember("BusinessCalling", BusinessCallingSettings)
-
-	GetGlobalSettingsResponse_VoiceConnector = GetGlobalSettingsResponse.AddMember("VoiceConnector", VoiceConnectorSettings)
-
-	GetPhoneNumberRequest_PhoneNumberId = GetPhoneNumberRequest.AddMember("PhoneNumberId", _String, &smithytraits.HTTPLabel{})
-
-	GetPhoneNumberOrderRequest_PhoneNumberOrderId = GetPhoneNumberOrderRequest.AddMember("PhoneNumberOrderId", _GuidString, &smithytraits.HTTPLabel{})
-
-	GetPhoneNumberOrderResponse_PhoneNumberOrder = GetPhoneNumberOrderResponse.AddMember("PhoneNumberOrder", PhoneNumberOrder)
-
-	GetPhoneNumberResponse_PhoneNumber = GetPhoneNumberResponse.AddMember("PhoneNumber", PhoneNumber)
-
-	GetPhoneNumberSettingsResponse_CallingName = GetPhoneNumberSettingsResponse.AddMember("CallingName", _CallingName)
-
-	GetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = GetPhoneNumberSettingsResponse.AddMember("CallingNameUpdatedTimestamp", _Iso8601Timestamp)
-
-	GetRetentionSettingsRequest_AccountId = GetRetentionSettingsRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetRetentionSettingsResponse_RetentionSettings = GetRetentionSettingsResponse.AddMember("RetentionSettings", RetentionSettings)
-
-	GetRetentionSettingsResponse_InitiateDeletionTimestamp = GetRetentionSettingsResponse.AddMember("InitiateDeletionTimestamp", _Iso8601Timestamp)
-
-	GetRoomRequest_AccountId = GetRoomRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetRoomRequest_RoomId = GetRoomRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetRoomResponse_Room = GetRoomResponse.AddMember("Room", Room)
-
-	GetUserRequest_AccountId = GetUserRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetUserRequest_UserId = GetUserRequest.AddMember("UserId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetUserResponse_User = GetUserResponse.AddMember("User", User)
-
-	GetUserSettingsRequest_AccountId = GetUserSettingsRequest.AddMember("AccountId", _String, &smithytraits.HTTPLabel{})
-
-	GetUserSettingsRequest_UserId = GetUserSettingsRequest.AddMember("UserId", _String, &smithytraits.HTTPLabel{})
-
-	GetUserSettingsResponse_UserSettings = GetUserSettingsResponse.AddMember("UserSettings", UserSettings)
-
-	InviteUsersRequest_AccountId = InviteUsersRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	InviteUsersRequest_UserEmailList = InviteUsersRequest.AddMember("UserEmailList", _UserEmailList)
-
-	InviteUsersRequest_UserType = InviteUsersRequest.AddMember("UserType", UserType)
-
-	InviteUsersResponse_Invites = InviteUsersResponse.AddMember("Invites", _InviteList)
-
-	ListAccountsRequest_Name = ListAccountsRequest.AddMember("Name", _AccountName, &smithytraits.HTTPQuery{Name: "name"})
-
-	ListAccountsRequest_UserEmail = ListAccountsRequest.AddMember("UserEmail", _EmailAddress, &smithytraits.HTTPQuery{Name: "user-email"})
-
-	ListAccountsRequest_NextToken = ListAccountsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListAccountsRequest_MaxResults = ListAccountsRequest.AddMember("MaxResults", _ProfileServiceMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListAccountsResponse_Accounts = ListAccountsResponse.AddMember("Accounts", _AccountList)
-
-	ListAccountsResponse_NextToken = ListAccountsResponse.AddMember("NextToken", _String)
-
-	ListBotsRequest_AccountId = ListBotsRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	ListBotsRequest_MaxResults = ListBotsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListBotsRequest_NextToken = ListBotsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListBotsResponse_Bots = ListBotsResponse.AddMember("Bots", _BotList)
-
-	ListBotsResponse_NextToken = ListBotsResponse.AddMember("NextToken", _String)
-
-	ListPhoneNumberOrdersRequest_NextToken = ListPhoneNumberOrdersRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPhoneNumberOrdersRequest_MaxResults = ListPhoneNumberOrdersRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPhoneNumberOrdersResponse_PhoneNumberOrders = ListPhoneNumberOrdersResponse.AddMember("PhoneNumberOrders", _PhoneNumberOrderList)
-
-	ListPhoneNumberOrdersResponse_NextToken = ListPhoneNumberOrdersResponse.AddMember("NextToken", _String)
-
-	ListPhoneNumbersRequest_Status = ListPhoneNumbersRequest.AddMember("Status", PhoneNumberStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListPhoneNumbersRequest_ProductType = ListPhoneNumbersRequest.AddMember("ProductType", PhoneNumberProductType, &smithytraits.HTTPQuery{Name: "product-type"})
-
-	ListPhoneNumbersRequest_FilterName = ListPhoneNumbersRequest.AddMember("FilterName", PhoneNumberAssociationName, &smithytraits.HTTPQuery{Name: "filter-name"})
-
-	ListPhoneNumbersRequest_FilterValue = ListPhoneNumbersRequest.AddMember("FilterValue", _String, &smithytraits.HTTPQuery{Name: "filter-value"})
-
-	ListPhoneNumbersRequest_MaxResults = ListPhoneNumbersRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListPhoneNumbersRequest_NextToken = ListPhoneNumbersRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListPhoneNumbersResponse_PhoneNumbers = ListPhoneNumbersResponse.AddMember("PhoneNumbers", _PhoneNumberList)
-
-	ListPhoneNumbersResponse_NextToken = ListPhoneNumbersResponse.AddMember("NextToken", _String)
-
-	ListRoomMembershipsRequest_AccountId = ListRoomMembershipsRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	ListRoomMembershipsRequest_RoomId = ListRoomMembershipsRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	ListRoomMembershipsRequest_MaxResults = ListRoomMembershipsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListRoomMembershipsRequest_NextToken = ListRoomMembershipsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListRoomMembershipsResponse_RoomMemberships = ListRoomMembershipsResponse.AddMember("RoomMemberships", _RoomMembershipList)
-
-	ListRoomMembershipsResponse_NextToken = ListRoomMembershipsResponse.AddMember("NextToken", _String)
-
-	ListRoomsRequest_AccountId = ListRoomsRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	ListRoomsRequest_MemberId = ListRoomsRequest.AddMember("MemberId", _String, &smithytraits.HTTPQuery{Name: "member-id"})
-
-	ListRoomsRequest_MaxResults = ListRoomsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListRoomsRequest_NextToken = ListRoomsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListRoomsResponse_Rooms = ListRoomsResponse.AddMember("Rooms", _RoomList)
-
-	ListRoomsResponse_NextToken = ListRoomsResponse.AddMember("NextToken", _String)
-
-	ListSupportedPhoneNumberCountriesRequest_ProductType = ListSupportedPhoneNumberCountriesRequest.AddMember("ProductType", PhoneNumberProductType, &smithytraits.HTTPQuery{Name: "product-type"})
-
-	ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries = ListSupportedPhoneNumberCountriesResponse.AddMember("PhoneNumberCountries", _PhoneNumberCountriesList)
-
-	ListUsersRequest_AccountId = ListUsersRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	ListUsersRequest_UserEmail = ListUsersRequest.AddMember("UserEmail", _EmailAddress, &smithytraits.HTTPQuery{Name: "user-email"})
-
-	ListUsersRequest_UserType = ListUsersRequest.AddMember("UserType", UserType, &smithytraits.HTTPQuery{Name: "user-type"})
-
-	ListUsersRequest_MaxResults = ListUsersRequest.AddMember("MaxResults", _ProfileServiceMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListUsersRequest_NextToken = ListUsersRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListUsersResponse_Users = ListUsersResponse.AddMember("Users", _UserList)
-
-	ListUsersResponse_NextToken = ListUsersResponse.AddMember("NextToken", _String)
-
-	LogoutUserRequest_AccountId = LogoutUserRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	LogoutUserRequest_UserId = LogoutUserRequest.AddMember("UserId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	PutEventsConfigurationRequest_AccountId = PutEventsConfigurationRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	PutEventsConfigurationRequest_BotId = PutEventsConfigurationRequest.AddMember("BotId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	PutEventsConfigurationRequest_OutboundEventsHTTPSEndpoint = PutEventsConfigurationRequest.AddMember("OutboundEventsHTTPSEndpoint", _SensitiveString)
-
-	PutEventsConfigurationRequest_LambdaFunctionArn = PutEventsConfigurationRequest.AddMember("LambdaFunctionArn", _SensitiveString)
-
-	PutEventsConfigurationResponse_EventsConfiguration = PutEventsConfigurationResponse.AddMember("EventsConfiguration", EventsConfiguration)
-
-	PutRetentionSettingsRequest_AccountId = PutRetentionSettingsRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	PutRetentionSettingsRequest_RetentionSettings = PutRetentionSettingsRequest.AddMember("RetentionSettings", RetentionSettings)
-
-	PutRetentionSettingsResponse_RetentionSettings = PutRetentionSettingsResponse.AddMember("RetentionSettings", RetentionSettings)
-
-	PutRetentionSettingsResponse_InitiateDeletionTimestamp = PutRetentionSettingsResponse.AddMember("InitiateDeletionTimestamp", _Iso8601Timestamp)
-
-	RedactConversationMessageRequest_AccountId = RedactConversationMessageRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RedactConversationMessageRequest_ConversationId = RedactConversationMessageRequest.AddMember("ConversationId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RedactConversationMessageRequest_MessageId = RedactConversationMessageRequest.AddMember("MessageId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RedactRoomMessageRequest_AccountId = RedactRoomMessageRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RedactRoomMessageRequest_RoomId = RedactRoomMessageRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RedactRoomMessageRequest_MessageId = RedactRoomMessageRequest.AddMember("MessageId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RegenerateSecurityTokenRequest_AccountId = RegenerateSecurityTokenRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RegenerateSecurityTokenRequest_BotId = RegenerateSecurityTokenRequest.AddMember("BotId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RegenerateSecurityTokenResponse_Bot = RegenerateSecurityTokenResponse.AddMember("Bot", Bot)
-
-	ResetPersonalPINRequest_AccountId = ResetPersonalPINRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	ResetPersonalPINRequest_UserId = ResetPersonalPINRequest.AddMember("UserId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	ResetPersonalPINResponse_User = ResetPersonalPINResponse.AddMember("User", User)
-
-	RestorePhoneNumberRequest_PhoneNumberId = RestorePhoneNumberRequest.AddMember("PhoneNumberId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	RestorePhoneNumberResponse_PhoneNumber = RestorePhoneNumberResponse.AddMember("PhoneNumber", PhoneNumber)
-
-	SearchAvailablePhoneNumbersRequest_AreaCode = SearchAvailablePhoneNumbersRequest.AddMember("AreaCode", _String, &smithytraits.HTTPQuery{Name: "area-code"})
-
-	SearchAvailablePhoneNumbersRequest_City = SearchAvailablePhoneNumbersRequest.AddMember("City", _String, &smithytraits.HTTPQuery{Name: "city"})
-
-	SearchAvailablePhoneNumbersRequest_Country = SearchAvailablePhoneNumbersRequest.AddMember("Country", _Alpha2CountryCode, &smithytraits.HTTPQuery{Name: "country"})
-
-	SearchAvailablePhoneNumbersRequest_State = SearchAvailablePhoneNumbersRequest.AddMember("State", _String, &smithytraits.HTTPQuery{Name: "state"})
-
-	SearchAvailablePhoneNumbersRequest_TollFreePrefix = SearchAvailablePhoneNumbersRequest.AddMember("TollFreePrefix", _TollFreePrefix, &smithytraits.HTTPQuery{Name: "toll-free-prefix"})
-
-	SearchAvailablePhoneNumbersRequest_PhoneNumberType = SearchAvailablePhoneNumbersRequest.AddMember("PhoneNumberType", PhoneNumberType, &smithytraits.HTTPQuery{Name: "phone-number-type"})
-
-	SearchAvailablePhoneNumbersRequest_MaxResults = SearchAvailablePhoneNumbersRequest.AddMember("MaxResults", _PhoneNumberMaxResults, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	SearchAvailablePhoneNumbersRequest_NextToken = SearchAvailablePhoneNumbersRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	SearchAvailablePhoneNumbersResponse_E164PhoneNumbers = SearchAvailablePhoneNumbersResponse.AddMember("E164PhoneNumbers", _E164PhoneNumberList)
-
-	SearchAvailablePhoneNumbersResponse_NextToken = SearchAvailablePhoneNumbersResponse.AddMember("NextToken", _String)
-
-	UpdateAccountRequest_AccountId = UpdateAccountRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateAccountRequest_Name = UpdateAccountRequest.AddMember("Name", _AccountName)
-
-	UpdateAccountRequest_DefaultLicense = UpdateAccountRequest.AddMember("DefaultLicense", License)
-
-	UpdateAccountResponse_Account = UpdateAccountResponse.AddMember("Account", Account)
-
-	UpdateAccountSettingsRequest_AccountId = UpdateAccountSettingsRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateAccountSettingsRequest_AccountSettings = UpdateAccountSettingsRequest.AddMember("AccountSettings", AccountSettings)
-
-	UpdateBotRequest_AccountId = UpdateBotRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateBotRequest_BotId = UpdateBotRequest.AddMember("BotId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateBotRequest_Disabled = UpdateBotRequest.AddMember("Disabled", _NullableBoolean)
-
-	UpdateBotResponse_Bot = UpdateBotResponse.AddMember("Bot", Bot)
-
-	UpdateGlobalSettingsRequest_BusinessCalling = UpdateGlobalSettingsRequest.AddMember("BusinessCalling", BusinessCallingSettings)
-
-	UpdateGlobalSettingsRequest_VoiceConnector = UpdateGlobalSettingsRequest.AddMember("VoiceConnector", VoiceConnectorSettings)
-
-	UpdatePhoneNumberRequest_PhoneNumberId = UpdatePhoneNumberRequest.AddMember("PhoneNumberId", _String, &smithytraits.HTTPLabel{})
-
-	UpdatePhoneNumberRequest_ProductType = UpdatePhoneNumberRequest.AddMember("ProductType", PhoneNumberProductType)
-
-	UpdatePhoneNumberRequest_CallingName = UpdatePhoneNumberRequest.AddMember("CallingName", _CallingName)
-
-	UpdatePhoneNumberResponse_PhoneNumber = UpdatePhoneNumberResponse.AddMember("PhoneNumber", PhoneNumber)
-
-	UpdatePhoneNumberSettingsRequest_CallingName = UpdatePhoneNumberSettingsRequest.AddMember("CallingName", _CallingName)
-
-	UpdateRoomRequest_AccountId = UpdateRoomRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateRoomRequest_RoomId = UpdateRoomRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateRoomRequest_Name = UpdateRoomRequest.AddMember("Name", _SensitiveString)
-
-	UpdateRoomMembershipRequest_AccountId = UpdateRoomMembershipRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateRoomMembershipRequest_RoomId = UpdateRoomMembershipRequest.AddMember("RoomId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateRoomMembershipRequest_MemberId = UpdateRoomMembershipRequest.AddMember("MemberId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateRoomMembershipRequest_Role = UpdateRoomMembershipRequest.AddMember("Role", RoomMembershipRole)
-
-	UpdateRoomMembershipResponse_RoomMembership = UpdateRoomMembershipResponse.AddMember("RoomMembership", RoomMembership)
-
-	UpdateRoomResponse_Room = UpdateRoomResponse.AddMember("Room", Room)
-
-	UpdateUserRequest_AccountId = UpdateUserRequest.AddMember("AccountId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateUserRequest_UserId = UpdateUserRequest.AddMember("UserId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateUserRequest_LicenseType = UpdateUserRequest.AddMember("LicenseType", License)
-
-	UpdateUserRequest_UserType = UpdateUserRequest.AddMember("UserType", UserType)
-
-	UpdateUserRequest_AlexaForBusinessMetadata = UpdateUserRequest.AddMember("AlexaForBusinessMetadata", AlexaForBusinessMetadata)
-
-	UpdateUserResponse_User = UpdateUserResponse.AddMember("User", User)
-
-	UpdateUserSettingsRequest_AccountId = UpdateUserSettingsRequest.AddMember("AccountId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateUserSettingsRequest_UserId = UpdateUserSettingsRequest.AddMember("UserId", _String, &smithytraits.HTTPLabel{})
-
-	UpdateUserSettingsRequest_UserSettings = UpdateUserSettingsRequest.AddMember("UserSettings", UserSettings)
-
-}
+	Code: 204}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 422}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "name"}}, DirectMask: 0x10}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "user-email"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next-token"}}, DirectMask: 0x10}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max-results"}}, DirectMask: 0x10}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "product-type"}}, DirectMask: 0x10}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "filter-name"}}, DirectMask: 0x10}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "filter-value"}}, DirectMask: 0x10}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "member-id"}}, DirectMask: 0x10}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "user-type"}}, DirectMask: 0x10}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "area-code"}}, DirectMask: 0x10}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "city"}}, DirectMask: 0x10}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "country"}}, DirectMask: 0x10}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "state"}}, DirectMask: 0x10}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "toll-free-prefix"}}, DirectMask: 0x10}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "phone-number-type"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Code, &sAccessDeniedException_Message}}
+var mAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sAccount_AwsAccountId, &sAccount_AccountId, &sAccount_Name, &sAccount_AccountType, &sAccount_CreatedTimestamp, &sAccount_DefaultLicense, &sAccount_SupportedLicenses, &sAccount_AccountStatus, &sAccount_SigninDelegateGroups}, Seed: 4, Slots: []uint16{
+	5, 0, 0, 0, 3, 0, 0, 0, 1, 4, 2, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 8, 0, 0,
+	7, 6, 0, 0, 0, 0, 0, 0,
+}}
+var m_AccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountList_member}}
+var mAccountSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountSettings_DisableRemoteControl, &sAccountSettings_EnableDialOut}}
+var mAccountStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountStatus_Suspended, &sAccountStatus_Active}}
+var mAccountType = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountType_Team, &sAccountType_EnterpriseDirectory, &sAccountType_EnterpriseLWA, &sAccountType_EnterpriseOIDC}}
+var mAlexaForBusinessMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sAlexaForBusinessMetadata_IsAlexaForBusinessEnabled, &sAlexaForBusinessMetadata_AlexaForBusinessRoomArn}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Code, &sBadRequestException_Message}}
+var mBot = smithy.SchemaMembers{List: []*smithy.Schema{&sBot_BotId, &sBot_UserId, &sBot_DisplayName, &sBot_BotType, &sBot_Disabled, &sBot_CreatedTimestamp, &sBot_UpdatedTimestamp, &sBot_BotEmail, &sBot_SecurityToken}, Seed: 4, Slots: []uint16{
+	6, 0, 3, 0, 0, 5, 0, 1, 0, 0, 0, 7, 0, 9, 0, 4, 0, 0, 0, 0, 0, 0, 0, 2,
+	0, 0, 0, 0, 0, 0, 8, 0,
+}}
+var m_BotList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BotList_member}}
+var mBotType = smithy.SchemaMembers{List: []*smithy.Schema{&sBotType_ChatBot}}
+var mBusinessCallingSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sBusinessCallingSettings_CdrBucket}}
+var mCallingNameStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCallingNameStatus_Unassigned, &sCallingNameStatus_UpdateInProgress, &sCallingNameStatus_UpdateSucceeded, &sCallingNameStatus_UpdateFailed}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Code, &sConflictException_Message}}
+var mConversationRetentionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sConversationRetentionSettings_RetentionDays}}
+var m_E164PhoneNumberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_E164PhoneNumberList_member}}
+var mEmailStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEmailStatus_NotSent, &sEmailStatus_Sent, &sEmailStatus_Failed}}
+var mErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorCode_BadRequest, &sErrorCode_Conflict, &sErrorCode_Forbidden, &sErrorCode_NotFound, &sErrorCode_PreconditionFailed, &sErrorCode_ResourceLimitExceeded, &sErrorCode_ServiceFailure, &sErrorCode_AccessDenied, &sErrorCode_ServiceUnavailable, &sErrorCode_Throttled, &sErrorCode_Throttling, &sErrorCode_Unauthorized, &sErrorCode_Unprocessable, &sErrorCode_VoiceConnectorGroupAssociationsExist, &sErrorCode_PhoneNumberAssociationsExist}, Seed: 35, Slots: []uint16{
+	6, 0, 7, 0, 0, 0, 5, 0, 0, 0, 1, 0, 0, 0, 14, 15, 3, 13, 8, 0, 9, 10, 0, 12,
+	0, 0, 11, 2, 0, 0, 4, 0,
+}}
+var mEventsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEventsConfiguration_BotId, &sEventsConfiguration_OutboundEventsHTTPSEndpoint, &sEventsConfiguration_LambdaFunctionArn}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_Code, &sForbiddenException_Message}}
+var mInvite = smithy.SchemaMembers{List: []*smithy.Schema{&sInvite_InviteId, &sInvite_Status, &sInvite_EmailAddress, &sInvite_EmailStatus}}
+var m_InviteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InviteList_member}}
+var mInviteStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInviteStatus_Pending, &sInviteStatus_Accepted, &sInviteStatus_Failed}}
+var mLicense = smithy.SchemaMembers{List: []*smithy.Schema{&sLicense_Basic, &sLicense_Plus, &sLicense_Pro, &sLicense_ProTrial}}
+var m_LicenseList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LicenseList_member}}
+var mMember = smithy.SchemaMembers{List: []*smithy.Schema{&sMember_MemberId, &sMember_MemberType, &sMember_Email, &sMember_FullName, &sMember_AccountId}}
+var mMemberError = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberError_MemberId, &sMemberError_ErrorCode, &sMemberError_ErrorMessage}}
+var m_MemberErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MemberErrorList_member}}
+var mMembershipItem = smithy.SchemaMembers{List: []*smithy.Schema{&sMembershipItem_MemberId, &sMembershipItem_Role}}
+var m_MembershipItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MembershipItemList_member}}
+var mMemberType = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberType_User, &sMemberType_Bot, &sMemberType_Webhook}}
+var m_NonEmptyStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NonEmptyStringList_member}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Code, &sNotFoundException_Message}}
+var mOrderedPhoneNumber = smithy.SchemaMembers{List: []*smithy.Schema{&sOrderedPhoneNumber_E164PhoneNumber, &sOrderedPhoneNumber_Status}}
+var m_OrderedPhoneNumberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrderedPhoneNumberList_member}}
+var mOrderedPhoneNumberStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOrderedPhoneNumberStatus_Processing, &sOrderedPhoneNumberStatus_Acquired, &sOrderedPhoneNumberStatus_Failed}}
+var mPhoneNumber = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumber_PhoneNumberId, &sPhoneNumber_E164PhoneNumber, &sPhoneNumber_Country, &sPhoneNumber_Type, &sPhoneNumber_ProductType, &sPhoneNumber_Status, &sPhoneNumber_Capabilities, &sPhoneNumber_Associations, &sPhoneNumber_CallingName, &sPhoneNumber_CallingNameStatus, &sPhoneNumber_CreatedTimestamp, &sPhoneNumber_UpdatedTimestamp, &sPhoneNumber_DeletionTimestamp}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 11, 0, 0, 0, 6, 0, 0, 8, 0, 0, 13, 9, 5, 0,
+	3, 7, 10, 0, 12, 4, 2, 0,
+}}
+var mPhoneNumberAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberAssociation_Value, &sPhoneNumberAssociation_Name, &sPhoneNumberAssociation_AssociatedTimestamp}}
+var m_PhoneNumberAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberAssociationList_member}}
+var mPhoneNumberAssociationName = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberAssociationName_AccountId, &sPhoneNumberAssociationName_UserId, &sPhoneNumberAssociationName_VoiceConnectorId, &sPhoneNumberAssociationName_VoiceConnectorGroupId, &sPhoneNumberAssociationName_SipRuleId}}
+var mPhoneNumberCapabilities = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberCapabilities_InboundCall, &sPhoneNumberCapabilities_OutboundCall, &sPhoneNumberCapabilities_InboundSMS, &sPhoneNumberCapabilities_OutboundSMS, &sPhoneNumberCapabilities_InboundMMS, &sPhoneNumberCapabilities_OutboundMMS}}
+var m_PhoneNumberCountriesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberCountriesList_member}}
+var mPhoneNumberCountry = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberCountry_CountryCode, &sPhoneNumberCountry_SupportedPhoneNumberTypes}}
+var mPhoneNumberError = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberError_PhoneNumberId, &sPhoneNumberError_ErrorCode, &sPhoneNumberError_ErrorMessage}}
+var m_PhoneNumberErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberErrorList_member}}
+var m_PhoneNumberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberList_member}}
+var mPhoneNumberOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberOrder_PhoneNumberOrderId, &sPhoneNumberOrder_ProductType, &sPhoneNumberOrder_Status, &sPhoneNumberOrder_OrderedPhoneNumbers, &sPhoneNumberOrder_CreatedTimestamp, &sPhoneNumberOrder_UpdatedTimestamp}}
+var m_PhoneNumberOrderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberOrderList_member}}
+var mPhoneNumberOrderStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberOrderStatus_Processing, &sPhoneNumberOrderStatus_Successful, &sPhoneNumberOrderStatus_Failed, &sPhoneNumberOrderStatus_Partial}}
+var mPhoneNumberProductType = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberProductType_BusinessCalling, &sPhoneNumberProductType_VoiceConnector, &sPhoneNumberProductType_SipMediaApplicationDialIn}}
+var mPhoneNumberStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberStatus_AcquireInProgress, &sPhoneNumberStatus_AcquireFailed, &sPhoneNumberStatus_Unassigned, &sPhoneNumberStatus_Assigned, &sPhoneNumberStatus_ReleaseInProgress, &sPhoneNumberStatus_DeleteInProgress, &sPhoneNumberStatus_ReleaseFailed, &sPhoneNumberStatus_DeleteFailed}}
+var mPhoneNumberType = smithy.SchemaMembers{List: []*smithy.Schema{&sPhoneNumberType_Local, &sPhoneNumberType_TollFree}}
+var m_PhoneNumberTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PhoneNumberTypeList_member}}
+var mRegistrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrationStatus_Unregistered, &sRegistrationStatus_Registered, &sRegistrationStatus_Suspended}}
+var mResourceLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceLimitExceededException_Code, &sResourceLimitExceededException_Message}}
+var mRetentionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionSettings_RoomRetentionSettings, &sRetentionSettings_ConversationRetentionSettings}}
+var mRoom = smithy.SchemaMembers{List: []*smithy.Schema{&sRoom_RoomId, &sRoom_Name, &sRoom_AccountId, &sRoom_CreatedBy, &sRoom_CreatedTimestamp, &sRoom_UpdatedTimestamp}}
+var m_RoomList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RoomList_member}}
+var mRoomMembership = smithy.SchemaMembers{List: []*smithy.Schema{&sRoomMembership_RoomId, &sRoomMembership_Member, &sRoomMembership_Role, &sRoomMembership_InvitedBy, &sRoomMembership_UpdatedTimestamp}}
+var m_RoomMembershipList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RoomMembershipList_member}}
+var mRoomMembershipRole = smithy.SchemaMembers{List: []*smithy.Schema{&sRoomMembershipRole_Administrator, &sRoomMembershipRole_Member}}
+var mRoomRetentionSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sRoomRetentionSettings_RetentionDays}}
+var mServiceFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceFailureException_Code, &sServiceFailureException_Message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Code, &sServiceUnavailableException_Message}}
+var mSigninDelegateGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sSigninDelegateGroup_GroupName}}
+var m_SigninDelegateGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SigninDelegateGroupList_member}}
+var mTelephonySettings = smithy.SchemaMembers{List: []*smithy.Schema{&sTelephonySettings_InboundCalling, &sTelephonySettings_OutboundCalling, &sTelephonySettings_SMS}}
+var mThrottledClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottledClientException_Code, &sThrottledClientException_Message}}
+var mUnauthorizedClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedClientException_Code, &sUnauthorizedClientException_Message}}
+var mUnprocessableEntityException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnprocessableEntityException_Code, &sUnprocessableEntityException_Message}}
+var mUpdatePhoneNumberRequestItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePhoneNumberRequestItem_PhoneNumberId, &sUpdatePhoneNumberRequestItem_ProductType, &sUpdatePhoneNumberRequestItem_CallingName}}
+var m_UpdatePhoneNumberRequestItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdatePhoneNumberRequestItemList_member}}
+var mUpdateUserRequestItem = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequestItem_UserId, &sUpdateUserRequestItem_LicenseType, &sUpdateUserRequestItem_UserType, &sUpdateUserRequestItem_AlexaForBusinessMetadata}}
+var m_UpdateUserRequestItemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateUserRequestItemList_member}}
+var mUser = smithy.SchemaMembers{List: []*smithy.Schema{&sUser_UserId, &sUser_AccountId, &sUser_PrimaryEmail, &sUser_PrimaryProvisionedNumber, &sUser_DisplayName, &sUser_LicenseType, &sUser_UserType, &sUser_UserRegistrationStatus, &sUser_UserInvitationStatus, &sUser_RegisteredOn, &sUser_InvitedOn, &sUser_AlexaForBusinessMetadata, &sUser_PersonalPIN}, Seed: 17, Slots: []uint16{
+	1, 0, 6, 0, 0, 5, 10, 0, 0, 0, 0, 0, 0, 0, 2, 0, 3, 12, 0, 4, 0, 0, 7, 9,
+	0, 13, 11, 0, 0, 8, 0, 0,
+}}
+var m_UserEmailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserEmailList_member}}
+var mUserError = smithy.SchemaMembers{List: []*smithy.Schema{&sUserError_UserId, &sUserError_ErrorCode, &sUserError_ErrorMessage}}
+var m_UserErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserErrorList_member}}
+var m_UserIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserIdList_member}}
+var m_UserList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserList_member}}
+var mUserSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sUserSettings_Telephony}}
+var mUserType = smithy.SchemaMembers{List: []*smithy.Schema{&sUserType_PrivateUser, &sUserType_SharedDevice}}
+var mVoiceConnectorSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceConnectorSettings_CdrBucket}}
+var mAssociatePhoneNumberWithUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatePhoneNumberWithUserRequest_AccountId, &sAssociatePhoneNumberWithUserRequest_UserId, &sAssociatePhoneNumberWithUserRequest_E164PhoneNumber}}
+var mAssociateSigninDelegateGroupsWithAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateSigninDelegateGroupsWithAccountRequest_AccountId, &sAssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups}}
+var mBatchCreateRoomMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateRoomMembershipRequest_AccountId, &sBatchCreateRoomMembershipRequest_RoomId, &sBatchCreateRoomMembershipRequest_MembershipItemList}}
+var mBatchCreateRoomMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateRoomMembershipResponse_Errors}}
+var mBatchDeletePhoneNumberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeletePhoneNumberRequest_PhoneNumberIds}}
+var mBatchDeletePhoneNumberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeletePhoneNumberResponse_PhoneNumberErrors}}
+var mBatchSuspendUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchSuspendUserRequest_AccountId, &sBatchSuspendUserRequest_UserIdList}}
+var mBatchSuspendUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchSuspendUserResponse_UserErrors}}
+var mBatchUnsuspendUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUnsuspendUserRequest_AccountId, &sBatchUnsuspendUserRequest_UserIdList}}
+var mBatchUnsuspendUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUnsuspendUserResponse_UserErrors}}
+var mBatchUpdatePhoneNumberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems}}
+var mBatchUpdatePhoneNumberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdatePhoneNumberResponse_PhoneNumberErrors}}
+var mBatchUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateUserRequest_AccountId, &sBatchUpdateUserRequest_UpdateUserRequestItems}}
+var mBatchUpdateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchUpdateUserResponse_UserErrors}}
+var mCreateAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccountRequest_Name}}
+var mCreateAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAccountResponse_Account}}
+var mCreateBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBotRequest_AccountId, &sCreateBotRequest_DisplayName, &sCreateBotRequest_Domain}}
+var mCreateBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBotResponse_Bot}}
+var mCreateMeetingDialOutRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMeetingDialOutRequest_MeetingId, &sCreateMeetingDialOutRequest_FromPhoneNumber, &sCreateMeetingDialOutRequest_ToPhoneNumber, &sCreateMeetingDialOutRequest_JoinToken}}
+var mCreateMeetingDialOutResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMeetingDialOutResponse_TransactionId}}
+var mCreatePhoneNumberOrderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePhoneNumberOrderRequest_ProductType, &sCreatePhoneNumberOrderRequest_E164PhoneNumbers}}
+var mCreatePhoneNumberOrderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePhoneNumberOrderResponse_PhoneNumberOrder}}
+var mCreateRoomRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRoomRequest_AccountId, &sCreateRoomRequest_Name, &sCreateRoomRequest_ClientRequestToken}}
+var mCreateRoomMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRoomMembershipRequest_AccountId, &sCreateRoomMembershipRequest_RoomId, &sCreateRoomMembershipRequest_MemberId, &sCreateRoomMembershipRequest_Role}}
+var mCreateRoomMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRoomMembershipResponse_RoomMembership}}
+var mCreateRoomResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRoomResponse_Room}}
+var mCreateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserRequest_AccountId, &sCreateUserRequest_Username, &sCreateUserRequest_Email, &sCreateUserRequest_UserType}}
+var mCreateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserResponse_User}}
+var mDeleteAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccountRequest_AccountId}}
+var mDeleteEventsConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventsConfigurationRequest_AccountId, &sDeleteEventsConfigurationRequest_BotId}}
+var mDeletePhoneNumberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePhoneNumberRequest_PhoneNumberId}}
+var mDeleteRoomRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRoomRequest_AccountId, &sDeleteRoomRequest_RoomId}}
+var mDeleteRoomMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRoomMembershipRequest_AccountId, &sDeleteRoomMembershipRequest_RoomId, &sDeleteRoomMembershipRequest_MemberId}}
+var mDisassociatePhoneNumberFromUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociatePhoneNumberFromUserRequest_AccountId, &sDisassociatePhoneNumberFromUserRequest_UserId}}
+var mDisassociateSigninDelegateGroupsFromAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateSigninDelegateGroupsFromAccountRequest_AccountId, &sDisassociateSigninDelegateGroupsFromAccountRequest_GroupNames}}
+var mGetAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountRequest_AccountId}}
+var mGetAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountResponse_Account}}
+var mGetAccountSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountSettingsRequest_AccountId}}
+var mGetAccountSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountSettingsResponse_AccountSettings}}
+var mGetBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotRequest_AccountId, &sGetBotRequest_BotId}}
+var mGetBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBotResponse_Bot}}
+var mGetEventsConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventsConfigurationRequest_AccountId, &sGetEventsConfigurationRequest_BotId}}
+var mGetEventsConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEventsConfigurationResponse_EventsConfiguration}}
+var mGetGlobalSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetGlobalSettingsResponse_BusinessCalling, &sGetGlobalSettingsResponse_VoiceConnector}}
+var mGetPhoneNumberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPhoneNumberRequest_PhoneNumberId}}
+var mGetPhoneNumberOrderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPhoneNumberOrderRequest_PhoneNumberOrderId}}
+var mGetPhoneNumberOrderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPhoneNumberOrderResponse_PhoneNumberOrder}}
+var mGetPhoneNumberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPhoneNumberResponse_PhoneNumber}}
+var mGetPhoneNumberSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPhoneNumberSettingsResponse_CallingName, &sGetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp}}
+var mGetRetentionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRetentionSettingsRequest_AccountId}}
+var mGetRetentionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRetentionSettingsResponse_RetentionSettings, &sGetRetentionSettingsResponse_InitiateDeletionTimestamp}}
+var mGetRoomRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoomRequest_AccountId, &sGetRoomRequest_RoomId}}
+var mGetRoomResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoomResponse_Room}}
+var mGetUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserRequest_AccountId, &sGetUserRequest_UserId}}
+var mGetUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserResponse_User}}
+var mGetUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserSettingsRequest_AccountId, &sGetUserSettingsRequest_UserId}}
+var mGetUserSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetUserSettingsResponse_UserSettings}}
+var mInviteUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInviteUsersRequest_AccountId, &sInviteUsersRequest_UserEmailList, &sInviteUsersRequest_UserType}}
+var mInviteUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInviteUsersResponse_Invites}}
+var mListAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccountsRequest_Name, &sListAccountsRequest_UserEmail, &sListAccountsRequest_NextToken, &sListAccountsRequest_MaxResults}}
+var mListAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccountsResponse_Accounts, &sListAccountsResponse_NextToken}}
+var mListBotsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListBotsRequest_AccountId, &sListBotsRequest_MaxResults, &sListBotsRequest_NextToken}}
+var mListBotsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListBotsResponse_Bots, &sListBotsResponse_NextToken}}
+var mListPhoneNumberOrdersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPhoneNumberOrdersRequest_NextToken, &sListPhoneNumberOrdersRequest_MaxResults}}
+var mListPhoneNumberOrdersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPhoneNumberOrdersResponse_PhoneNumberOrders, &sListPhoneNumberOrdersResponse_NextToken}}
+var mListPhoneNumbersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPhoneNumbersRequest_Status, &sListPhoneNumbersRequest_ProductType, &sListPhoneNumbersRequest_FilterName, &sListPhoneNumbersRequest_FilterValue, &sListPhoneNumbersRequest_MaxResults, &sListPhoneNumbersRequest_NextToken}}
+var mListPhoneNumbersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPhoneNumbersResponse_PhoneNumbers, &sListPhoneNumbersResponse_NextToken}}
+var mListRoomMembershipsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoomMembershipsRequest_AccountId, &sListRoomMembershipsRequest_RoomId, &sListRoomMembershipsRequest_MaxResults, &sListRoomMembershipsRequest_NextToken}}
+var mListRoomMembershipsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoomMembershipsResponse_RoomMemberships, &sListRoomMembershipsResponse_NextToken}}
+var mListRoomsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoomsRequest_AccountId, &sListRoomsRequest_MemberId, &sListRoomsRequest_MaxResults, &sListRoomsRequest_NextToken}}
+var mListRoomsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoomsResponse_Rooms, &sListRoomsResponse_NextToken}}
+var mListSupportedPhoneNumberCountriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSupportedPhoneNumberCountriesRequest_ProductType}}
+var mListSupportedPhoneNumberCountriesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries}}
+var mListUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersRequest_AccountId, &sListUsersRequest_UserEmail, &sListUsersRequest_UserType, &sListUsersRequest_MaxResults, &sListUsersRequest_NextToken}}
+var mListUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersResponse_Users, &sListUsersResponse_NextToken}}
+var mLogoutUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sLogoutUserRequest_AccountId, &sLogoutUserRequest_UserId}}
+var mPutEventsConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsConfigurationRequest_AccountId, &sPutEventsConfigurationRequest_BotId, &sPutEventsConfigurationRequest_OutboundEventsHTTPSEndpoint, &sPutEventsConfigurationRequest_LambdaFunctionArn}}
+var mPutEventsConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsConfigurationResponse_EventsConfiguration}}
+var mPutRetentionSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRetentionSettingsRequest_AccountId, &sPutRetentionSettingsRequest_RetentionSettings}}
+var mPutRetentionSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRetentionSettingsResponse_RetentionSettings, &sPutRetentionSettingsResponse_InitiateDeletionTimestamp}}
+var mRedactConversationMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRedactConversationMessageRequest_AccountId, &sRedactConversationMessageRequest_ConversationId, &sRedactConversationMessageRequest_MessageId}}
+var mRedactRoomMessageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRedactRoomMessageRequest_AccountId, &sRedactRoomMessageRequest_RoomId, &sRedactRoomMessageRequest_MessageId}}
+var mRegenerateSecurityTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegenerateSecurityTokenRequest_AccountId, &sRegenerateSecurityTokenRequest_BotId}}
+var mRegenerateSecurityTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegenerateSecurityTokenResponse_Bot}}
+var mResetPersonalPINRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetPersonalPINRequest_AccountId, &sResetPersonalPINRequest_UserId}}
+var mResetPersonalPINResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResetPersonalPINResponse_User}}
+var mRestorePhoneNumberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRestorePhoneNumberRequest_PhoneNumberId}}
+var mRestorePhoneNumberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRestorePhoneNumberResponse_PhoneNumber}}
+var mSearchAvailablePhoneNumbersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchAvailablePhoneNumbersRequest_AreaCode, &sSearchAvailablePhoneNumbersRequest_City, &sSearchAvailablePhoneNumbersRequest_Country, &sSearchAvailablePhoneNumbersRequest_State, &sSearchAvailablePhoneNumbersRequest_TollFreePrefix, &sSearchAvailablePhoneNumbersRequest_PhoneNumberType, &sSearchAvailablePhoneNumbersRequest_MaxResults, &sSearchAvailablePhoneNumbersRequest_NextToken}}
+var mSearchAvailablePhoneNumbersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchAvailablePhoneNumbersResponse_E164PhoneNumbers, &sSearchAvailablePhoneNumbersResponse_NextToken}}
+var mUpdateAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountRequest_AccountId, &sUpdateAccountRequest_Name, &sUpdateAccountRequest_DefaultLicense}}
+var mUpdateAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountResponse_Account}}
+var mUpdateAccountSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsRequest_AccountId, &sUpdateAccountSettingsRequest_AccountSettings}}
+var mUpdateBotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBotRequest_AccountId, &sUpdateBotRequest_BotId, &sUpdateBotRequest_Disabled}}
+var mUpdateBotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBotResponse_Bot}}
+var mUpdateGlobalSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGlobalSettingsRequest_BusinessCalling, &sUpdateGlobalSettingsRequest_VoiceConnector}}
+var mUpdatePhoneNumberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePhoneNumberRequest_PhoneNumberId, &sUpdatePhoneNumberRequest_ProductType, &sUpdatePhoneNumberRequest_CallingName}}
+var mUpdatePhoneNumberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePhoneNumberResponse_PhoneNumber}}
+var mUpdatePhoneNumberSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePhoneNumberSettingsRequest_CallingName}}
+var mUpdateRoomRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRoomRequest_AccountId, &sUpdateRoomRequest_RoomId, &sUpdateRoomRequest_Name}}
+var mUpdateRoomMembershipRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRoomMembershipRequest_AccountId, &sUpdateRoomMembershipRequest_RoomId, &sUpdateRoomMembershipRequest_MemberId, &sUpdateRoomMembershipRequest_Role}}
+var mUpdateRoomMembershipResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRoomMembershipResponse_RoomMembership}}
+var mUpdateRoomResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRoomResponse_Room}}
+var mUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequest_AccountId, &sUpdateUserRequest_UserId, &sUpdateUserRequest_LicenseType, &sUpdateUserRequest_UserType, &sUpdateUserRequest_AlexaForBusinessMetadata}}
+var mUpdateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserResponse_User}}
+var mUpdateUserSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserSettingsRequest_AccountId, &sUpdateUserSettingsRequest_UserId, &sUpdateUserSettingsRequest_UserSettings}}
+
+var sAssociatePhoneNumberWithUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumberWithUser, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sAssociateSigninDelegateGroupsWithAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSigninDelegateGroupsWithAccount, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sBatchCreateRoomMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateRoomMembership, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sBatchDeletePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumber, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sBatchSuspendUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchSuspendUser, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sBatchUnsuspendUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUnsuspendUser, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sBatchUpdatePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumber, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sBatchUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateUser, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreateAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccount, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sCreateBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBot, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sCreateMeetingDialOut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMeetingDialOut, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sCreatePhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrder, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sCreateRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoom, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sCreateRoomMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomMembership, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sDeleteAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccount, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sDeleteEventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventsConfiguration, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sDeletePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePhoneNumber, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sDeleteRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoom, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sDeleteRoomMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoomMembership, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sDisassociatePhoneNumberFromUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumberFromUser, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sDisassociateSigninDelegateGroupsFromAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSigninDelegateGroupsFromAccount, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sGetAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccount, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sGetAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettings, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sGetBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBot, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sGetEventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventsConfiguration, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sGetGlobalSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalSettings, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sGetPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumber, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sGetPhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrder, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sGetPhoneNumberSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberSettings, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sGetRetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRetentionSettings, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sGetRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoom, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sGetUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUser, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sGetUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserSettings, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sInviteUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInviteUsers, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sListAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccounts, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sListBots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBots, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sListPhoneNumberOrders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrders, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sListPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbers, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sListRoomMemberships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomMemberships, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sListRooms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRooms, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sListSupportedPhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountries, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sLogoutUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogoutUser, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sPutEventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsConfiguration, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var sPutRetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRetentionSettings, Traits: &t45, Type: smithy.ShapeTypeOperation})
+var sRedactConversationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactConversationMessage, Traits: &t46, Type: smithy.ShapeTypeOperation})
+var sRedactRoomMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactRoomMessage, Traits: &t47, Type: smithy.ShapeTypeOperation})
+var sRegenerateSecurityToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegenerateSecurityToken, Traits: &t48, Type: smithy.ShapeTypeOperation})
+var sResetPersonalPIN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetPersonalPIN, Traits: &t49, Type: smithy.ShapeTypeOperation})
+var sRestorePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumber, Traits: &t50, Type: smithy.ShapeTypeOperation})
+var sSearchAvailablePhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbers, Traits: &t51, Type: smithy.ShapeTypeOperation})
+var sUpdateAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccount, Traits: &t52, Type: smithy.ShapeTypeOperation})
+var sUpdateAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettings, Traits: &t53, Type: smithy.ShapeTypeOperation})
+var sUpdateBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBot, Traits: &t54, Type: smithy.ShapeTypeOperation})
+var sUpdateGlobalSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalSettings, Traits: &t55, Type: smithy.ShapeTypeOperation})
+var sUpdatePhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumber, Traits: &t56, Type: smithy.ShapeTypeOperation})
+var sUpdatePhoneNumberSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberSettings, Traits: &t57, Type: smithy.ShapeTypeOperation})
+var sUpdateRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoom, Traits: &t58, Type: smithy.ShapeTypeOperation})
+var sUpdateRoomMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomMembership, Traits: &t59, Type: smithy.ShapeTypeOperation})
+var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Traits: &t60, Type: smithy.ShapeTypeOperation})
+var sUpdateUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserSettings, Traits: &t61, Type: smithy.ShapeTypeOperation})
+var s_UCBuzzConsoleService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UCBuzzConsoleService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t62, Type: smithy.ShapeTypeStructure})
+var sAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var s_AccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList})
+var s_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountName, Type: smithy.ShapeTypeString})
+var sAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSettings, Members: &mAccountSettings, Type: smithy.ShapeTypeStructure})
+var sAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeEnum})
+var sAccountType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountType, Members: &mAccountType, Type: smithy.ShapeTypeEnum})
+var sAlexaForBusinessMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlexaForBusinessMetadata, Members: &mAlexaForBusinessMetadata, Type: smithy.ShapeTypeStructure})
+var s_Alpha2CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t65, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sBot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var s_BotList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotList, Members: &m_BotList, Type: smithy.ShapeTypeList})
+var sBotType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBotType, Members: &mBotType, Type: smithy.ShapeTypeEnum})
+var sBusinessCallingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBusinessCallingSettings, Members: &mBusinessCallingSettings, Type: smithy.ShapeTypeStructure})
+var s_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallingName, Traits: &t66, Type: smithy.ShapeTypeString})
+var sCallingNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallingNameStatus, Members: &mCallingNameStatus, Type: smithy.ShapeTypeEnum})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Traits: &t66, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t67, Type: smithy.ShapeTypeStructure})
+var sConversationRetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConversationRetentionSettings, Members: &mConversationRetentionSettings, Type: smithy.ShapeTypeStructure})
+var s_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_E164PhoneNumber, Traits: &t66, Type: smithy.ShapeTypeString})
+var s_E164PhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Traits: &t66, Type: smithy.ShapeTypeString})
+var sEmailStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailStatus, Members: &mEmailStatus, Type: smithy.ShapeTypeEnum})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sEventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventsConfiguration, Members: &mEventsConfiguration, Type: smithy.ShapeTypeStructure})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t62, Type: smithy.ShapeTypeStructure})
+var s_GuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sInvite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvite, Members: &mInvite, Type: smithy.ShapeTypeStructure})
+var s_InviteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InviteList, Members: &m_InviteList, Type: smithy.ShapeTypeList})
+var sInviteStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInviteStatus, Members: &mInviteStatus, Type: smithy.ShapeTypeEnum})
+var s_Iso8601Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Timestamp, Traits: &t68, Type: smithy.ShapeTypeTimestamp})
+var s_JoinTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JoinTokenString, Traits: &t66, Type: smithy.ShapeTypeString})
+var sLicense = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLicense, Members: &mLicense, Type: smithy.ShapeTypeEnum})
+var s_LicenseList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LicenseList, Members: &m_LicenseList, Type: smithy.ShapeTypeList})
+var sMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure})
+var sMemberError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberError, Members: &mMemberError, Type: smithy.ShapeTypeStructure})
+var s_MemberErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberErrorList, Members: &m_MemberErrorList, Type: smithy.ShapeTypeList})
+var sMembershipItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMembershipItem, Members: &mMembershipItem, Type: smithy.ShapeTypeStructure})
+var s_MembershipItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MembershipItemList, Members: &m_MembershipItemList, Type: smithy.ShapeTypeList})
+var sMemberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_NonEmptyStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t69, Type: smithy.ShapeTypeStructure})
+var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sOrderedPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderedPhoneNumber, Members: &mOrderedPhoneNumber, Type: smithy.ShapeTypeStructure})
+var s_OrderedPhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrderedPhoneNumberList, Members: &m_OrderedPhoneNumberList, Type: smithy.ShapeTypeList})
+var sOrderedPhoneNumberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderedPhoneNumberStatus, Members: &mOrderedPhoneNumberStatus, Type: smithy.ShapeTypeEnum})
+var sPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberAssociation, Members: &mPhoneNumberAssociation, Type: smithy.ShapeTypeStructure})
+var s_PhoneNumberAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberAssociationList, Members: &m_PhoneNumberAssociationList, Type: smithy.ShapeTypeList})
+var sPhoneNumberAssociationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberCapabilities, Members: &mPhoneNumberCapabilities, Type: smithy.ShapeTypeStructure})
+var s_PhoneNumberCountriesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberCountriesList, Members: &m_PhoneNumberCountriesList, Type: smithy.ShapeTypeList})
+var sPhoneNumberCountry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberCountry, Members: &mPhoneNumberCountry, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberError, Members: &mPhoneNumberError, Type: smithy.ShapeTypeStructure})
+var s_PhoneNumberErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList})
+var s_PhoneNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList})
+var s_PhoneNumberMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberMaxResults, Type: smithy.ShapeTypeInteger})
+var sPhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure})
+var s_PhoneNumberOrderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberOrderList, Members: &m_PhoneNumberOrderList, Type: smithy.ShapeTypeList})
+var sPhoneNumberOrderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberOrderStatus, Members: &mPhoneNumberOrderStatus, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberProductType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberStatus, Members: &mPhoneNumberStatus, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum})
+var s_PhoneNumberTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumberTypeList, Members: &m_PhoneNumberTypeList, Type: smithy.ShapeTypeList})
+var s_ProfileServiceMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileServiceMaxResults, Type: smithy.ShapeTypeInteger})
+var sRegistrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sResourceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceededException, Members: &mResourceLimitExceededException, Traits: &t65, Type: smithy.ShapeTypeStructure})
+var s_ResultMax = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultMax, Type: smithy.ShapeTypeInteger})
+var s_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var sRetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionSettings, Members: &mRetentionSettings, Type: smithy.ShapeTypeStructure})
+var sRoom = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoom, Members: &mRoom, Type: smithy.ShapeTypeStructure})
+var s_RoomList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomList, Members: &m_RoomList, Type: smithy.ShapeTypeList})
+var sRoomMembership = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoomMembership, Members: &mRoomMembership, Type: smithy.ShapeTypeStructure})
+var s_RoomMembershipList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoomMembershipList, Members: &m_RoomMembershipList, Type: smithy.ShapeTypeList})
+var sRoomMembershipRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoomMembershipRole, Members: &mRoomMembershipRole, Type: smithy.ShapeTypeEnum})
+var sRoomRetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoomRetentionSettings, Members: &mRoomRetentionSettings, Type: smithy.ShapeTypeStructure})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t66, Type: smithy.ShapeTypeString})
+var sServiceFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFailureException, Members: &mServiceFailureException, Traits: &t70, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t71, Type: smithy.ShapeTypeStructure})
+var sSigninDelegateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSigninDelegateGroup, Members: &mSigninDelegateGroup, Type: smithy.ShapeTypeStructure})
+var s_SigninDelegateGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SigninDelegateGroupList, Members: &m_SigninDelegateGroupList, Type: smithy.ShapeTypeList})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sTelephonySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTelephonySettings, Members: &mTelephonySettings, Type: smithy.ShapeTypeStructure})
+var sThrottledClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledClientException, Members: &mThrottledClientException, Traits: &t72, Type: smithy.ShapeTypeStructure})
+var s_TollFreePrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TollFreePrefix, Type: smithy.ShapeTypeString})
+var sUnauthorizedClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedClientException, Members: &mUnauthorizedClientException, Traits: &t73, Type: smithy.ShapeTypeStructure})
+var sUnprocessableEntityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnprocessableEntityException, Members: &mUnprocessableEntityException, Traits: &t74, Type: smithy.ShapeTypeStructure})
+var sUpdatePhoneNumberRequestItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberRequestItem, Members: &mUpdatePhoneNumberRequestItem, Type: smithy.ShapeTypeStructure})
+var s_UpdatePhoneNumberRequestItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdatePhoneNumberRequestItemList, Members: &m_UpdatePhoneNumberRequestItemList, Type: smithy.ShapeTypeList})
+var sUpdateUserRequestItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequestItem, Members: &mUpdateUserRequestItem, Type: smithy.ShapeTypeStructure})
+var s_UpdateUserRequestItemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateUserRequestItemList, Members: &m_UpdateUserRequestItemList, Type: smithy.ShapeTypeList})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var s_UserEmailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserEmailList, Members: &m_UserEmailList, Type: smithy.ShapeTypeList})
+var sUserError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserError, Members: &mUserError, Type: smithy.ShapeTypeStructure})
+var s_UserErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserErrorList, Members: &m_UserErrorList, Type: smithy.ShapeTypeList})
+var s_UserIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var s_UserList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sUserSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserSettings, Members: &mUserSettings, Type: smithy.ShapeTypeStructure})
+var sUserType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserType, Members: &mUserType, Type: smithy.ShapeTypeEnum})
+var sVoiceConnectorSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure})
+var sAssociatePhoneNumberWithUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumberWithUserRequest, Members: &mAssociatePhoneNumberWithUserRequest, Type: smithy.ShapeTypeStructure})
+var sAssociatePhoneNumberWithUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatePhoneNumberWithUserResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateSigninDelegateGroupsWithAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSigninDelegateGroupsWithAccountRequest, Members: &mAssociateSigninDelegateGroupsWithAccountRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateSigninDelegateGroupsWithAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateSigninDelegateGroupsWithAccountResponse, Type: smithy.ShapeTypeStructure})
+var sBatchCreateRoomMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateRoomMembershipRequest, Members: &mBatchCreateRoomMembershipRequest, Type: smithy.ShapeTypeStructure})
+var sBatchCreateRoomMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateRoomMembershipResponse, Members: &mBatchCreateRoomMembershipResponse, Type: smithy.ShapeTypeStructure})
+var sBatchDeletePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumberRequest, Members: &mBatchDeletePhoneNumberRequest, Type: smithy.ShapeTypeStructure})
+var sBatchDeletePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeletePhoneNumberResponse, Members: &mBatchDeletePhoneNumberResponse, Type: smithy.ShapeTypeStructure})
+var sBatchSuspendUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchSuspendUserRequest, Members: &mBatchSuspendUserRequest, Type: smithy.ShapeTypeStructure})
+var sBatchSuspendUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchSuspendUserResponse, Members: &mBatchSuspendUserResponse, Type: smithy.ShapeTypeStructure})
+var sBatchUnsuspendUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUnsuspendUserRequest, Members: &mBatchUnsuspendUserRequest, Type: smithy.ShapeTypeStructure})
+var sBatchUnsuspendUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUnsuspendUserResponse, Members: &mBatchUnsuspendUserResponse, Type: smithy.ShapeTypeStructure})
+var sBatchUpdatePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumberRequest, Members: &mBatchUpdatePhoneNumberRequest, Type: smithy.ShapeTypeStructure})
+var sBatchUpdatePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdatePhoneNumberResponse, Members: &mBatchUpdatePhoneNumberResponse, Type: smithy.ShapeTypeStructure})
+var sBatchUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateUserRequest, Members: &mBatchUpdateUserRequest, Type: smithy.ShapeTypeStructure})
+var sBatchUpdateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchUpdateUserResponse, Members: &mBatchUpdateUserResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccountRequest, Members: &mCreateAccountRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAccountResponse, Members: &mCreateAccountResponse, Type: smithy.ShapeTypeStructure})
+var sCreateBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBotRequest, Members: &mCreateBotRequest, Type: smithy.ShapeTypeStructure})
+var sCreateBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBotResponse, Members: &mCreateBotResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMeetingDialOutRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMeetingDialOutRequest, Members: &mCreateMeetingDialOutRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMeetingDialOutResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMeetingDialOutResponse, Members: &mCreateMeetingDialOutResponse, Type: smithy.ShapeTypeStructure})
+var sCreatePhoneNumberOrderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrderRequest, Members: &mCreatePhoneNumberOrderRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePhoneNumberOrderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePhoneNumberOrderResponse, Members: &mCreatePhoneNumberOrderResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomRequest, Members: &mCreateRoomRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRoomMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomMembershipRequest, Members: &mCreateRoomMembershipRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRoomMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomMembershipResponse, Members: &mCreateRoomMembershipResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoomResponse, Members: &mCreateRoomResponse, Type: smithy.ShapeTypeStructure})
+var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure})
+var sCreateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResponse, Members: &mCreateUserResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccountRequest, Members: &mDeleteAccountRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccountResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEventsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventsConfigurationRequest, Members: &mDeleteEventsConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePhoneNumberRequest, Members: &mDeletePhoneNumberRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoomRequest, Members: &mDeleteRoomRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRoomMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoomMembershipRequest, Members: &mDeleteRoomMembershipRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociatePhoneNumberFromUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumberFromUserRequest, Members: &mDisassociatePhoneNumberFromUserRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociatePhoneNumberFromUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociatePhoneNumberFromUserResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateSigninDelegateGroupsFromAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSigninDelegateGroupsFromAccountRequest, Members: &mDisassociateSigninDelegateGroupsFromAccountRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateSigninDelegateGroupsFromAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateSigninDelegateGroupsFromAccountResponse, Type: smithy.ShapeTypeStructure})
+var sGetAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountRequest, Members: &mGetAccountRequest, Type: smithy.ShapeTypeStructure})
+var sGetAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountResponse, Members: &mGetAccountResponse, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettingsRequest, Members: &mGetAccountSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettingsResponse, Members: &mGetAccountSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotRequest, Members: &mGetBotRequest, Type: smithy.ShapeTypeStructure})
+var sGetBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBotResponse, Members: &mGetBotResponse, Type: smithy.ShapeTypeStructure})
+var sGetEventsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventsConfigurationRequest, Members: &mGetEventsConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetEventsConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEventsConfigurationResponse, Members: &mGetEventsConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sGetGlobalSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetGlobalSettingsResponse, Members: &mGetGlobalSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberRequest, Members: &mGetPhoneNumberRequest, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberOrderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrderRequest, Members: &mGetPhoneNumberOrderRequest, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberOrderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberOrderResponse, Members: &mGetPhoneNumberOrderResponse, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberResponse, Members: &mGetPhoneNumberResponse, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPhoneNumberSettingsResponse, Members: &mGetPhoneNumberSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetRetentionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRetentionSettingsRequest, Members: &mGetRetentionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetRetentionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRetentionSettingsResponse, Members: &mGetRetentionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoomRequest, Members: &mGetRoomRequest, Type: smithy.ShapeTypeStructure})
+var sGetRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoomResponse, Members: &mGetRoomResponse, Type: smithy.ShapeTypeStructure})
+var sGetUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserRequest, Members: &mGetUserRequest, Type: smithy.ShapeTypeStructure})
+var sGetUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserResponse, Members: &mGetUserResponse, Type: smithy.ShapeTypeStructure})
+var sGetUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserSettingsRequest, Members: &mGetUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetUserSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetUserSettingsResponse, Members: &mGetUserSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sInviteUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInviteUsersRequest, Members: &mInviteUsersRequest, Type: smithy.ShapeTypeStructure})
+var sInviteUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInviteUsersResponse, Members: &mInviteUsersResponse, Type: smithy.ShapeTypeStructure})
+var sListAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsRequest, Members: &mListAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sListAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsResponse, Members: &mListAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sListBotsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBotsRequest, Members: &mListBotsRequest, Type: smithy.ShapeTypeStructure})
+var sListBotsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBotsResponse, Members: &mListBotsResponse, Type: smithy.ShapeTypeStructure})
+var sListPhoneNumberOrdersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrdersRequest, Members: &mListPhoneNumberOrdersRequest, Type: smithy.ShapeTypeStructure})
+var sListPhoneNumberOrdersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumberOrdersResponse, Members: &mListPhoneNumberOrdersResponse, Type: smithy.ShapeTypeStructure})
+var sListPhoneNumbersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersRequest, Members: &mListPhoneNumbersRequest, Type: smithy.ShapeTypeStructure})
+var sListPhoneNumbersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPhoneNumbersResponse, Members: &mListPhoneNumbersResponse, Type: smithy.ShapeTypeStructure})
+var sListRoomMembershipsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomMembershipsRequest, Members: &mListRoomMembershipsRequest, Type: smithy.ShapeTypeStructure})
+var sListRoomMembershipsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomMembershipsResponse, Members: &mListRoomMembershipsResponse, Type: smithy.ShapeTypeStructure})
+var sListRoomsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomsRequest, Members: &mListRoomsRequest, Type: smithy.ShapeTypeStructure})
+var sListRoomsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoomsResponse, Members: &mListRoomsResponse, Type: smithy.ShapeTypeStructure})
+var sListSupportedPhoneNumberCountriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountriesRequest, Members: &mListSupportedPhoneNumberCountriesRequest, Type: smithy.ShapeTypeStructure})
+var sListSupportedPhoneNumberCountriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedPhoneNumberCountriesResponse, Members: &mListSupportedPhoneNumberCountriesResponse, Type: smithy.ShapeTypeStructure})
+var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure})
+var sListUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResponse, Members: &mListUsersResponse, Type: smithy.ShapeTypeStructure})
+var sLogoutUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogoutUserRequest, Members: &mLogoutUserRequest, Type: smithy.ShapeTypeStructure})
+var sLogoutUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogoutUserResponse, Type: smithy.ShapeTypeStructure})
+var sPutEventsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsConfigurationRequest, Members: &mPutEventsConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sPutEventsConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsConfigurationResponse, Members: &mPutEventsConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sPutRetentionSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRetentionSettingsRequest, Members: &mPutRetentionSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sPutRetentionSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRetentionSettingsResponse, Members: &mPutRetentionSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sRedactConversationMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactConversationMessageRequest, Members: &mRedactConversationMessageRequest, Type: smithy.ShapeTypeStructure})
+var sRedactConversationMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactConversationMessageResponse, Type: smithy.ShapeTypeStructure})
+var sRedactRoomMessageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactRoomMessageRequest, Members: &mRedactRoomMessageRequest, Type: smithy.ShapeTypeStructure})
+var sRedactRoomMessageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactRoomMessageResponse, Type: smithy.ShapeTypeStructure})
+var sRegenerateSecurityTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegenerateSecurityTokenRequest, Members: &mRegenerateSecurityTokenRequest, Type: smithy.ShapeTypeStructure})
+var sRegenerateSecurityTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegenerateSecurityTokenResponse, Members: &mRegenerateSecurityTokenResponse, Type: smithy.ShapeTypeStructure})
+var sResetPersonalPINRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetPersonalPINRequest, Members: &mResetPersonalPINRequest, Type: smithy.ShapeTypeStructure})
+var sResetPersonalPINResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetPersonalPINResponse, Members: &mResetPersonalPINResponse, Type: smithy.ShapeTypeStructure})
+var sRestorePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumberRequest, Members: &mRestorePhoneNumberRequest, Type: smithy.ShapeTypeStructure})
+var sRestorePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestorePhoneNumberResponse, Members: &mRestorePhoneNumberResponse, Type: smithy.ShapeTypeStructure})
+var sSearchAvailablePhoneNumbersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbersRequest, Members: &mSearchAvailablePhoneNumbersRequest, Type: smithy.ShapeTypeStructure})
+var sSearchAvailablePhoneNumbersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchAvailablePhoneNumbersResponse, Members: &mSearchAvailablePhoneNumbersResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountRequest, Members: &mUpdateAccountRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountResponse, Members: &mUpdateAccountResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsRequest, Members: &mUpdateAccountSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateBotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBotRequest, Members: &mUpdateBotRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateBotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBotResponse, Members: &mUpdateBotResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateGlobalSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalSettingsRequest, Members: &mUpdateGlobalSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePhoneNumberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberRequest, Members: &mUpdatePhoneNumberRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePhoneNumberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberResponse, Members: &mUpdatePhoneNumberResponse, Type: smithy.ShapeTypeStructure})
+var sUpdatePhoneNumberSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePhoneNumberSettingsRequest, Members: &mUpdatePhoneNumberSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRoomRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomRequest, Members: &mUpdateRoomRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRoomMembershipRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomMembershipRequest, Members: &mUpdateRoomMembershipRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRoomMembershipResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomMembershipResponse, Members: &mUpdateRoomMembershipResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRoomResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoomResponse, Members: &mUpdateRoomResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResponse, Members: &mUpdateUserResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserSettingsRequest, Members: &mUpdateUserSettingsRequest, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAccount_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAccount_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAccount_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAccount_AccountType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountType", ID: &iAccountType, Members: &mAccountType, Type: smithy.ShapeTypeEnum})
+var sAccount_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sAccount_DefaultLicense = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultLicense", ID: &iLicense, Members: &mLicense, Type: smithy.ShapeTypeEnum})
+var sAccount_SupportedLicenses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedLicenses", ID: &i_LicenseList, Members: &m_LicenseList, Type: smithy.ShapeTypeList})
+var sAccount_AccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountStatus", ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeEnum})
+var sAccount_SigninDelegateGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigninDelegateGroups", ID: &i_SigninDelegateGroupList, Members: &m_SigninDelegateGroupList, Type: smithy.ShapeTypeList})
+var s_AccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var sAccountSettings_DisableRemoteControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableRemoteControl", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAccountSettings_EnableDialOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableDialOut", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAccountStatus_Suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suspended", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountStatus_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountType_Team = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Team", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountType_EnterpriseDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnterpriseDirectory", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountType_EnterpriseLWA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnterpriseLWA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccountType_EnterpriseOIDC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnterpriseOIDC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAlexaForBusinessMetadata_IsAlexaForBusinessEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsAlexaForBusinessEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAlexaForBusinessMetadata_AlexaForBusinessRoomArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaForBusinessRoomArn", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sBadRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBot_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBot_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBot_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sBot_BotType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotType", ID: &iBotType, Members: &mBotType, Type: smithy.ShapeTypeEnum})
+var sBot_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sBot_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sBot_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sBot_BotEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotEmail", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sBot_SecurityToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityToken", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var s_BotList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var sBotType_ChatBot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChatBot", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBusinessCallingSettings_CdrBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdrBucket", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCallingNameStatus_Unassigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassigned", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallingNameStatus_UpdateInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallingNameStatus_UpdateSucceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateSucceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallingNameStatus_UpdateFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConversationRetentionSettings_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionDays", ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var s_E164PhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_E164PhoneNumber, Traits: &t64, Type: smithy.ShapeTypeString})
+var sEmailStatus_NotSent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotSent", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEmailStatus_Sent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sent", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEmailStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_BadRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BadRequest", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Conflict = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conflict", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Forbidden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forbidden", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_NotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_PreconditionFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreconditionFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ResourceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ServiceFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_AccessDenied = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDenied", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Throttled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Throttling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttling", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Unauthorized = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unauthorized", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Unprocessable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unprocessable", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_VoiceConnectorGroupAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_PhoneNumberAssociationsExist = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberAssociationsExist", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventsConfiguration_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventsConfiguration_OutboundEventsHTTPSEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundEventsHTTPSEndpoint", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sEventsConfiguration_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionArn", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sForbiddenException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvite_InviteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InviteId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvite_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInviteStatus, Members: &mInviteStatus, Type: smithy.ShapeTypeEnum})
+var sInvite_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailAddress", ID: &i_EmailAddress, Traits: &t64, Type: smithy.ShapeTypeString})
+var sInvite_EmailStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EmailStatus", ID: &iEmailStatus, Members: &mEmailStatus, Type: smithy.ShapeTypeEnum})
+var s_InviteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvite, Members: &mInvite, Type: smithy.ShapeTypeStructure})
+var sInviteStatus_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInviteStatus_Accepted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accepted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInviteStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLicense_Basic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Basic", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLicense_Plus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Plus", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLicense_Pro = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pro", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLicense_ProTrial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProTrial", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LicenseList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLicense, Members: &mLicense, Type: smithy.ShapeTypeEnum})
+var sMember_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sMember_MemberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberType", ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum})
+var sMember_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sMember_FullName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FullName", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sMember_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sMemberError_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sMemberError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sMemberError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_MemberErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMemberError, Members: &mMemberError, Type: smithy.ShapeTypeStructure})
+var sMembershipItem_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sMembershipItem_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &iRoomMembershipRole, Members: &mRoomMembershipRole, Type: smithy.ShapeTypeEnum})
+var s_MembershipItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMembershipItem, Members: &mMembershipItem, Type: smithy.ShapeTypeStructure})
+var sMemberType_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberType_Bot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bot", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberType_Webhook = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Webhook", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_NonEmptyStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sOrderedPhoneNumber_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t64, Type: smithy.ShapeTypeString})
+var sOrderedPhoneNumber_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOrderedPhoneNumberStatus, Members: &mOrderedPhoneNumberStatus, Type: smithy.ShapeTypeEnum})
+var s_OrderedPhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrderedPhoneNumber, Members: &mOrderedPhoneNumber, Type: smithy.ShapeTypeStructure})
+var sOrderedPhoneNumberStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrderedPhoneNumberStatus_Acquired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Acquired", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrderedPhoneNumberStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumber_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPhoneNumber_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t64, Type: smithy.ShapeTypeString})
+var sPhoneNumber_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString})
+var sPhoneNumber_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum})
+var sPhoneNumber_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum})
+var sPhoneNumber_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhoneNumberStatus, Members: &mPhoneNumberStatus, Type: smithy.ShapeTypeEnum})
+var sPhoneNumber_Capabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Capabilities", ID: &iPhoneNumberCapabilities, Members: &mPhoneNumberCapabilities, Type: smithy.ShapeTypeStructure})
+var sPhoneNumber_Associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Associations", ID: &i_PhoneNumberAssociationList, Members: &m_PhoneNumberAssociationList, Type: smithy.ShapeTypeList})
+var sPhoneNumber_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t64, Type: smithy.ShapeTypeString})
+var sPhoneNumber_CallingNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingNameStatus", ID: &iCallingNameStatus, Members: &mCallingNameStatus, Type: smithy.ShapeTypeEnum})
+var sPhoneNumber_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sPhoneNumber_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sPhoneNumber_DeletionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletionTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sPhoneNumberAssociation_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPhoneNumberAssociation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberAssociation_AssociatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var s_PhoneNumberAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberAssociation, Members: &mPhoneNumberAssociation, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberAssociationName_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberAssociationName_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberAssociationName_VoiceConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberAssociationName_VoiceConnectorGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnectorGroupId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberAssociationName_SipRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipRuleId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberCapabilities_InboundCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundCall", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sPhoneNumberCapabilities_OutboundCall = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundCall", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sPhoneNumberCapabilities_InboundSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundSMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sPhoneNumberCapabilities_OutboundSMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundSMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sPhoneNumberCapabilities_InboundMMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundMMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sPhoneNumberCapabilities_OutboundMMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundMMS", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var s_PhoneNumberCountriesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberCountry, Members: &mPhoneNumberCountry, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberCountry_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_Alpha2CountryCode, Type: smithy.ShapeTypeString})
+var sPhoneNumberCountry_SupportedPhoneNumberTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupportedPhoneNumberTypes", ID: &i_PhoneNumberTypeList, Members: &m_PhoneNumberTypeList, Type: smithy.ShapeTypeList})
+var sPhoneNumberError_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sPhoneNumberError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_PhoneNumberErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberError, Members: &mPhoneNumberError, Type: smithy.ShapeTypeStructure})
+var s_PhoneNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberOrder_PhoneNumberOrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrderId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sPhoneNumberOrder_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberOrder_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhoneNumberOrderStatus, Members: &mPhoneNumberOrderStatus, Type: smithy.ShapeTypeEnum})
+var sPhoneNumberOrder_OrderedPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrderedPhoneNumbers", ID: &i_OrderedPhoneNumberList, Members: &m_OrderedPhoneNumberList, Type: smithy.ShapeTypeList})
+var sPhoneNumberOrder_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sPhoneNumberOrder_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var s_PhoneNumberOrderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberOrderStatus_Processing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Processing", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberOrderStatus_Successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Successful", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberOrderStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberOrderStatus_Partial = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partial", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberProductType_BusinessCalling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessCalling", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberProductType_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberProductType_SipMediaApplicationDialIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SipMediaApplicationDialIn", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_AcquireInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcquireInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_AcquireFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcquireFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_Unassigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unassigned", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_Assigned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assigned", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_ReleaseInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_DeleteInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteInProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_ReleaseFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberStatus_DeleteFailed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteFailed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberType_Local = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Local", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPhoneNumberType_TollFree = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TollFree", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PhoneNumberTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Type: smithy.ShapeTypeEnum})
+var sRegistrationStatus_Unregistered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unregistered", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistrationStatus_Registered = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Registered", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistrationStatus_Suspended = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Suspended", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sResourceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRetentionSettings_RoomRetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomRetentionSettings", ID: &iRoomRetentionSettings, Members: &mRoomRetentionSettings, Type: smithy.ShapeTypeStructure})
+var sRetentionSettings_ConversationRetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConversationRetentionSettings", ID: &iConversationRetentionSettings, Members: &mConversationRetentionSettings, Type: smithy.ShapeTypeStructure})
+var sRoom_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sRoom_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sRoom_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sRoom_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sRoom_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sRoom_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var s_RoomList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoom, Members: &mRoom, Type: smithy.ShapeTypeStructure})
+var sRoomMembership_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sRoomMembership_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure})
+var sRoomMembership_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &iRoomMembershipRole, Members: &mRoomMembershipRole, Type: smithy.ShapeTypeEnum})
+var sRoomMembership_InvitedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitedBy", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sRoomMembership_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var s_RoomMembershipList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoomMembership, Members: &mRoomMembership, Type: smithy.ShapeTypeStructure})
+var sRoomMembershipRole_Administrator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Administrator", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRoomMembershipRole_Member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Member", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRoomRetentionSettings_RetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionDays", ID: &i_RetentionDays, Type: smithy.ShapeTypeInteger})
+var sServiceFailureException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sServiceFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSigninDelegateGroup_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_SigninDelegateGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSigninDelegateGroup, Members: &mSigninDelegateGroup, Type: smithy.ShapeTypeStructure})
+var sTelephonySettings_InboundCalling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InboundCalling", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTelephonySettings_OutboundCalling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundCalling", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTelephonySettings_SMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SMS", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sThrottledClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sThrottledClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUnauthorizedClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sUnauthorizedClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUnprocessableEntityException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sUnprocessableEntityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdatePhoneNumberRequestItem_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sUpdatePhoneNumberRequestItem_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum})
+var sUpdatePhoneNumberRequestItem_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t64, Type: smithy.ShapeTypeString})
+var s_UpdatePhoneNumberRequestItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdatePhoneNumberRequestItem, Members: &mUpdatePhoneNumberRequestItem, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequestItem_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sUpdateUserRequestItem_LicenseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseType", ID: &iLicense, Members: &mLicense, Type: smithy.ShapeTypeEnum})
+var sUpdateUserRequestItem_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &iUserType, Members: &mUserType, Type: smithy.ShapeTypeEnum})
+var sUpdateUserRequestItem_AlexaForBusinessMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaForBusinessMetadata", ID: &iAlexaForBusinessMetadata, Members: &mAlexaForBusinessMetadata, Type: smithy.ShapeTypeStructure})
+var s_UpdateUserRequestItemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateUserRequestItem, Members: &mUpdateUserRequestItem, Type: smithy.ShapeTypeStructure})
+var sUser_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUser_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUser_PrimaryEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmail", ID: &i_EmailAddress, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUser_PrimaryProvisionedNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryProvisionedNumber", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUser_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUser_LicenseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseType", ID: &iLicense, Members: &mLicense, Type: smithy.ShapeTypeEnum})
+var sUser_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &iUserType, Members: &mUserType, Type: smithy.ShapeTypeEnum})
+var sUser_UserRegistrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserRegistrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sUser_UserInvitationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserInvitationStatus", ID: &iInviteStatus, Members: &mInviteStatus, Type: smithy.ShapeTypeEnum})
+var sUser_RegisteredOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredOn", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sUser_InvitedOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitedOn", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sUser_AlexaForBusinessMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaForBusinessMetadata", ID: &iAlexaForBusinessMetadata, Members: &mAlexaForBusinessMetadata, Type: smithy.ShapeTypeStructure})
+var sUser_PersonalPIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalPIN", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_UserEmailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmailAddress, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUserError_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sUserError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sUserError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_UserErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUserError, Members: &mUserError, Type: smithy.ShapeTypeStructure})
+var s_UserIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_UserList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var sUserSettings_Telephony = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Telephony", ID: &iTelephonySettings, Members: &mTelephonySettings, Type: smithy.ShapeTypeStructure})
+var sUserType_PrivateUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateUser", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUserType_SharedDevice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedDevice", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVoiceConnectorSettings_CdrBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdrBucket", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAssociatePhoneNumberWithUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sAssociatePhoneNumberWithUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sAssociatePhoneNumberWithUserRequest_E164PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumber", ID: &i_E164PhoneNumber, Traits: &t64, Type: smithy.ShapeTypeString})
+var sAssociateSigninDelegateGroupsWithAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sAssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SigninDelegateGroups", ID: &i_SigninDelegateGroupList, Members: &m_SigninDelegateGroupList, Type: smithy.ShapeTypeList})
+var sBatchCreateRoomMembershipRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sBatchCreateRoomMembershipRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sBatchCreateRoomMembershipRequest_MembershipItemList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MembershipItemList", ID: &i_MembershipItemList, Members: &m_MembershipItemList, Type: smithy.ShapeTypeList})
+var sBatchCreateRoomMembershipResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_MemberErrorList, Members: &m_MemberErrorList, Type: smithy.ShapeTypeList})
+var sBatchDeletePhoneNumberRequest_PhoneNumberIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberIds", ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList})
+var sBatchDeletePhoneNumberResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList})
+var sBatchSuspendUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sBatchSuspendUserRequest_UserIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserIdList", ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var sBatchSuspendUserResponse_UserErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserErrors", ID: &i_UserErrorList, Members: &m_UserErrorList, Type: smithy.ShapeTypeList})
+var sBatchUnsuspendUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sBatchUnsuspendUserRequest_UserIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserIdList", ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var sBatchUnsuspendUserResponse_UserErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserErrors", ID: &i_UserErrorList, Members: &m_UserErrorList, Type: smithy.ShapeTypeList})
+var sBatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatePhoneNumberRequestItems", ID: &i_UpdatePhoneNumberRequestItemList, Members: &m_UpdatePhoneNumberRequestItemList, Type: smithy.ShapeTypeList})
+var sBatchUpdatePhoneNumberResponse_PhoneNumberErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberErrors", ID: &i_PhoneNumberErrorList, Members: &m_PhoneNumberErrorList, Type: smithy.ShapeTypeList})
+var sBatchUpdateUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sBatchUpdateUserRequest_UpdateUserRequestItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateUserRequestItems", ID: &i_UpdateUserRequestItemList, Members: &m_UpdateUserRequestItemList, Type: smithy.ShapeTypeList})
+var sBatchUpdateUserResponse_UserErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserErrors", ID: &i_UserErrorList, Members: &m_UserErrorList, Type: smithy.ShapeTypeList})
+var sCreateAccountRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AccountName, Type: smithy.ShapeTypeString})
+var sCreateAccountResponse_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var sCreateBotRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sCreateBotRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCreateBotRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sCreateBotResponse_Bot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bot", ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var sCreateMeetingDialOutRequest_MeetingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeetingId", ID: &i_GuidString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sCreateMeetingDialOutRequest_FromPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FromPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCreateMeetingDialOutRequest_ToPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ToPhoneNumber", ID: &i_E164PhoneNumber, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCreateMeetingDialOutRequest_JoinToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JoinToken", ID: &i_JoinTokenString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCreateMeetingDialOutResponse_TransactionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransactionId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sCreatePhoneNumberOrderRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum})
+var sCreatePhoneNumberOrderRequest_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList})
+var sCreatePhoneNumberOrderResponse_PhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrder", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure})
+var sCreateRoomRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sCreateRoomRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCreateRoomRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCreateRoomMembershipRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sCreateRoomMembershipRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sCreateRoomMembershipRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sCreateRoomMembershipRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &iRoomMembershipRole, Members: &mRoomMembershipRole, Type: smithy.ShapeTypeEnum})
+var sCreateRoomMembershipResponse_RoomMembership = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomMembership", ID: &iRoomMembership, Members: &mRoomMembership, Type: smithy.ShapeTypeStructure})
+var sCreateRoomResponse_Room = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Room", ID: &iRoom, Members: &mRoom, Type: smithy.ShapeTypeStructure})
+var sCreateUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Traits: &t64, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &iUserType, Members: &mUserType, Type: smithy.ShapeTypeEnum})
+var sCreateUserResponse_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var sDeleteAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeleteEventsConfigurationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeleteEventsConfigurationRequest_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeletePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeleteRoomRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeleteRoomRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeleteRoomMembershipRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeleteRoomMembershipRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDeleteRoomMembershipRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDisassociatePhoneNumberFromUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDisassociatePhoneNumberFromUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDisassociateSigninDelegateGroupsFromAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sDisassociateSigninDelegateGroupsFromAccountRequest_GroupNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupNames", ID: &i_NonEmptyStringList, Members: &m_NonEmptyStringList, Type: smithy.ShapeTypeList})
+var sGetAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetAccountResponse_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetAccountSettingsResponse_AccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountSettings", ID: &iAccountSettings, Members: &mAccountSettings, Type: smithy.ShapeTypeStructure})
+var sGetBotRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetBotRequest_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetBotResponse_Bot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bot", ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var sGetEventsConfigurationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetEventsConfigurationRequest_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetEventsConfigurationResponse_EventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventsConfiguration", ID: &iEventsConfiguration, Members: &mEventsConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetGlobalSettingsResponse_BusinessCalling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessCalling", ID: &iBusinessCallingSettings, Members: &mBusinessCallingSettings, Type: smithy.ShapeTypeStructure})
+var sGetGlobalSettingsResponse_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetPhoneNumberOrderRequest_PhoneNumberOrderId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrderId", ID: &i_GuidString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetPhoneNumberOrderResponse_PhoneNumberOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrder", ID: &iPhoneNumberOrder, Members: &mPhoneNumberOrder, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure})
+var sGetPhoneNumberSettingsResponse_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t64, Type: smithy.ShapeTypeString})
+var sGetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingNameUpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sGetRetentionSettingsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetRetentionSettingsResponse_RetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionSettings", ID: &iRetentionSettings, Members: &mRetentionSettings, Type: smithy.ShapeTypeStructure})
+var sGetRetentionSettingsResponse_InitiateDeletionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiateDeletionTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sGetRoomRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetRoomRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetRoomResponse_Room = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Room", ID: &iRoom, Members: &mRoom, Type: smithy.ShapeTypeStructure})
+var sGetUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetUserResponse_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var sGetUserSettingsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetUserSettingsRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sGetUserSettingsResponse_UserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSettings", ID: &iUserSettings, Members: &mUserSettings, Type: smithy.ShapeTypeStructure})
+var sInviteUsersRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sInviteUsersRequest_UserEmailList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserEmailList", ID: &i_UserEmailList, Members: &m_UserEmailList, Type: smithy.ShapeTypeList})
+var sInviteUsersRequest_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &iUserType, Members: &mUserType, Type: smithy.ShapeTypeEnum})
+var sInviteUsersResponse_Invites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Invites", ID: &i_InviteList, Members: &m_InviteList, Type: smithy.ShapeTypeList})
+var sListAccountsRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AccountName, Traits: &t76, Type: smithy.ShapeTypeString})
+var sListAccountsRequest_UserEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserEmail", ID: &i_EmailAddress, Traits: &t77, Type: smithy.ShapeTypeString})
+var sListAccountsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sListAccountsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ProfileServiceMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListAccountsResponse_Accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accounts", ID: &i_AccountList, Members: &m_AccountList, Type: smithy.ShapeTypeList})
+var sListAccountsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListBotsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sListBotsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListBotsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sListBotsResponse_Bots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bots", ID: &i_BotList, Members: &m_BotList, Type: smithy.ShapeTypeList})
+var sListBotsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListPhoneNumberOrdersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sListPhoneNumberOrdersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListPhoneNumberOrdersResponse_PhoneNumberOrders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberOrders", ID: &i_PhoneNumberOrderList, Members: &m_PhoneNumberOrderList, Type: smithy.ShapeTypeList})
+var sListPhoneNumberOrdersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListPhoneNumbersRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPhoneNumberStatus, Members: &mPhoneNumberStatus, Traits: &t80, Type: smithy.ShapeTypeEnum})
+var sListPhoneNumbersRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Traits: &t81, Type: smithy.ShapeTypeEnum})
+var sListPhoneNumbersRequest_FilterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterName", ID: &iPhoneNumberAssociationName, Members: &mPhoneNumberAssociationName, Traits: &t82, Type: smithy.ShapeTypeEnum})
+var sListPhoneNumbersRequest_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterValue", ID: &i_String, Traits: &t83, Type: smithy.ShapeTypeString})
+var sListPhoneNumbersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListPhoneNumbersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sListPhoneNumbersResponse_PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumbers", ID: &i_PhoneNumberList, Members: &m_PhoneNumberList, Type: smithy.ShapeTypeList})
+var sListPhoneNumbersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListRoomMembershipsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sListRoomMembershipsRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sListRoomMembershipsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListRoomMembershipsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sListRoomMembershipsResponse_RoomMemberships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomMemberships", ID: &i_RoomMembershipList, Members: &m_RoomMembershipList, Type: smithy.ShapeTypeList})
+var sListRoomMembershipsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListRoomsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sListRoomsRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_String, Traits: &t84, Type: smithy.ShapeTypeString})
+var sListRoomsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListRoomsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sListRoomsResponse_Rooms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rooms", ID: &i_RoomList, Members: &m_RoomList, Type: smithy.ShapeTypeList})
+var sListRoomsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSupportedPhoneNumberCountriesRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Traits: &t81, Type: smithy.ShapeTypeEnum})
+var sListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberCountries", ID: &i_PhoneNumberCountriesList, Members: &m_PhoneNumberCountriesList, Type: smithy.ShapeTypeList})
+var sListUsersRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sListUsersRequest_UserEmail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserEmail", ID: &i_EmailAddress, Traits: &t77, Type: smithy.ShapeTypeString})
+var sListUsersRequest_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &iUserType, Members: &mUserType, Traits: &t85, Type: smithy.ShapeTypeEnum})
+var sListUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ProfileServiceMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sListUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sListUsersResponse_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_UserList, Members: &m_UserList, Type: smithy.ShapeTypeList})
+var sListUsersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLogoutUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sLogoutUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sPutEventsConfigurationRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sPutEventsConfigurationRequest_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sPutEventsConfigurationRequest_OutboundEventsHTTPSEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutboundEventsHTTPSEndpoint", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sPutEventsConfigurationRequest_LambdaFunctionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionArn", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sPutEventsConfigurationResponse_EventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventsConfiguration", ID: &iEventsConfiguration, Members: &mEventsConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutRetentionSettingsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sPutRetentionSettingsRequest_RetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionSettings", ID: &iRetentionSettings, Members: &mRetentionSettings, Type: smithy.ShapeTypeStructure})
+var sPutRetentionSettingsResponse_RetentionSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionSettings", ID: &iRetentionSettings, Members: &mRetentionSettings, Type: smithy.ShapeTypeStructure})
+var sPutRetentionSettingsResponse_InitiateDeletionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitiateDeletionTimestamp", ID: &i_Iso8601Timestamp, Traits: &t63, Type: smithy.ShapeTypeTimestamp})
+var sRedactConversationMessageRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRedactConversationMessageRequest_ConversationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConversationId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRedactConversationMessageRequest_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRedactRoomMessageRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRedactRoomMessageRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRedactRoomMessageRequest_MessageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRegenerateSecurityTokenRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRegenerateSecurityTokenRequest_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRegenerateSecurityTokenResponse_Bot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bot", ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var sResetPersonalPINRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sResetPersonalPINRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sResetPersonalPINResponse_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var sRestorePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sRestorePhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure})
+var sSearchAvailablePhoneNumbersRequest_AreaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AreaCode", ID: &i_String, Traits: &t86, Type: smithy.ShapeTypeString})
+var sSearchAvailablePhoneNumbersRequest_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_String, Traits: &t87, Type: smithy.ShapeTypeString})
+var sSearchAvailablePhoneNumbersRequest_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_Alpha2CountryCode, Traits: &t88, Type: smithy.ShapeTypeString})
+var sSearchAvailablePhoneNumbersRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Traits: &t89, Type: smithy.ShapeTypeString})
+var sSearchAvailablePhoneNumbersRequest_TollFreePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TollFreePrefix", ID: &i_TollFreePrefix, Traits: &t90, Type: smithy.ShapeTypeString})
+var sSearchAvailablePhoneNumbersRequest_PhoneNumberType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberType", ID: &iPhoneNumberType, Members: &mPhoneNumberType, Traits: &t91, Type: smithy.ShapeTypeEnum})
+var sSearchAvailablePhoneNumbersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PhoneNumberMaxResults, Traits: &t79, Type: smithy.ShapeTypeInteger})
+var sSearchAvailablePhoneNumbersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t78, Type: smithy.ShapeTypeString})
+var sSearchAvailablePhoneNumbersResponse_E164PhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "E164PhoneNumbers", ID: &i_E164PhoneNumberList, Members: &m_E164PhoneNumberList, Type: smithy.ShapeTypeList})
+var sSearchAvailablePhoneNumbersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateAccountRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateAccountRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AccountName, Type: smithy.ShapeTypeString})
+var sUpdateAccountRequest_DefaultLicense = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultLicense", ID: &iLicense, Members: &mLicense, Type: smithy.ShapeTypeEnum})
+var sUpdateAccountResponse_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateAccountSettingsRequest_AccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountSettings", ID: &iAccountSettings, Members: &mAccountSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateBotRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_BotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BotId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateBotRequest_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateBotResponse_Bot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bot", ID: &iBot, Members: &mBot, Type: smithy.ShapeTypeStructure})
+var sUpdateGlobalSettingsRequest_BusinessCalling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessCalling", ID: &iBusinessCallingSettings, Members: &mBusinessCallingSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateGlobalSettingsRequest_VoiceConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceConnector", ID: &iVoiceConnectorSettings, Members: &mVoiceConnectorSettings, Type: smithy.ShapeTypeStructure})
+var sUpdatePhoneNumberRequest_PhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumberId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdatePhoneNumberRequest_ProductType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductType", ID: &iPhoneNumberProductType, Members: &mPhoneNumberProductType, Type: smithy.ShapeTypeEnum})
+var sUpdatePhoneNumberRequest_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUpdatePhoneNumberResponse_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PhoneNumber", ID: &iPhoneNumber, Members: &mPhoneNumber, Type: smithy.ShapeTypeStructure})
+var sUpdatePhoneNumberSettingsRequest_CallingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallingName", ID: &i_CallingName, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUpdateRoomRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateRoomRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateRoomRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SensitiveString, Traits: &t64, Type: smithy.ShapeTypeString})
+var sUpdateRoomMembershipRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateRoomMembershipRequest_RoomId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateRoomMembershipRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateRoomMembershipRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &iRoomMembershipRole, Members: &mRoomMembershipRole, Type: smithy.ShapeTypeEnum})
+var sUpdateRoomMembershipResponse_RoomMembership = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoomMembership", ID: &iRoomMembership, Members: &mRoomMembership, Type: smithy.ShapeTypeStructure})
+var sUpdateRoomResponse_Room = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Room", ID: &iRoom, Members: &mRoom, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_NonEmptyString, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_LicenseType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LicenseType", ID: &iLicense, Members: &mLicense, Type: smithy.ShapeTypeEnum})
+var sUpdateUserRequest_UserType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserType", ID: &iUserType, Members: &mUserType, Type: smithy.ShapeTypeEnum})
+var sUpdateUserRequest_AlexaForBusinessMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AlexaForBusinessMetadata", ID: &iAlexaForBusinessMetadata, Members: &mAlexaForBusinessMetadata, Type: smithy.ShapeTypeStructure})
+var sUpdateUserResponse_User = smithy.NewStaticSchema(smithy.StaticSchema{Member: "User", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var sUpdateUserSettingsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_String, Traits: &t75, Type: smithy.ShapeTypeString})
+var sUpdateUserSettingsRequest_UserSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserSettings", ID: &iUserSettings, Members: &mUserSettings, Type: smithy.ShapeTypeStructure})
+
+var AssociatePhoneNumberWithUser = &sAssociatePhoneNumberWithUser
+
+var AssociateSigninDelegateGroupsWithAccount = &sAssociateSigninDelegateGroupsWithAccount
+
+var BatchCreateRoomMembership = &sBatchCreateRoomMembership
+
+var BatchDeletePhoneNumber = &sBatchDeletePhoneNumber
+
+var BatchSuspendUser = &sBatchSuspendUser
+
+var BatchUnsuspendUser = &sBatchUnsuspendUser
+
+var BatchUpdatePhoneNumber = &sBatchUpdatePhoneNumber
+
+var BatchUpdateUser = &sBatchUpdateUser
+
+var CreateAccount = &sCreateAccount
+
+var CreateBot = &sCreateBot
+
+var CreateMeetingDialOut = &sCreateMeetingDialOut
+
+var CreatePhoneNumberOrder = &sCreatePhoneNumberOrder
+
+var CreateRoom = &sCreateRoom
+
+var CreateRoomMembership = &sCreateRoomMembership
+
+var CreateUser = &sCreateUser
+
+var DeleteAccount = &sDeleteAccount
+
+var DeleteEventsConfiguration = &sDeleteEventsConfiguration
+
+var DeletePhoneNumber = &sDeletePhoneNumber
+
+var DeleteRoom = &sDeleteRoom
+
+var DeleteRoomMembership = &sDeleteRoomMembership
+
+var DisassociatePhoneNumberFromUser = &sDisassociatePhoneNumberFromUser
+
+var DisassociateSigninDelegateGroupsFromAccount = &sDisassociateSigninDelegateGroupsFromAccount
+
+var GetAccount = &sGetAccount
+
+var GetAccountSettings = &sGetAccountSettings
+
+var GetBot = &sGetBot
+
+var GetEventsConfiguration = &sGetEventsConfiguration
+
+var GetGlobalSettings = &sGetGlobalSettings
+
+var GetPhoneNumber = &sGetPhoneNumber
+
+var GetPhoneNumberOrder = &sGetPhoneNumberOrder
+
+var GetPhoneNumberSettings = &sGetPhoneNumberSettings
+
+var GetRetentionSettings = &sGetRetentionSettings
+
+var GetRoom = &sGetRoom
+
+var GetUser = &sGetUser
+
+var GetUserSettings = &sGetUserSettings
+
+var InviteUsers = &sInviteUsers
+
+var ListAccounts = &sListAccounts
+
+var ListBots = &sListBots
+
+var ListPhoneNumberOrders = &sListPhoneNumberOrders
+
+var ListPhoneNumbers = &sListPhoneNumbers
+
+var ListRoomMemberships = &sListRoomMemberships
+
+var ListRooms = &sListRooms
+
+var ListSupportedPhoneNumberCountries = &sListSupportedPhoneNumberCountries
+
+var ListUsers = &sListUsers
+
+var LogoutUser = &sLogoutUser
+
+var PutEventsConfiguration = &sPutEventsConfiguration
+
+var PutRetentionSettings = &sPutRetentionSettings
+
+var RedactConversationMessage = &sRedactConversationMessage
+
+var RedactRoomMessage = &sRedactRoomMessage
+
+var RegenerateSecurityToken = &sRegenerateSecurityToken
+
+var ResetPersonalPIN = &sResetPersonalPIN
+
+var RestorePhoneNumber = &sRestorePhoneNumber
+
+var SearchAvailablePhoneNumbers = &sSearchAvailablePhoneNumbers
+
+var UpdateAccount = &sUpdateAccount
+
+var UpdateAccountSettings = &sUpdateAccountSettings
+
+var UpdateBot = &sUpdateBot
+
+var UpdateGlobalSettings = &sUpdateGlobalSettings
+
+var UpdatePhoneNumber = &sUpdatePhoneNumber
+
+var UpdatePhoneNumberSettings = &sUpdatePhoneNumberSettings
+
+var UpdateRoom = &sUpdateRoom
+
+var UpdateRoomMembership = &sUpdateRoomMembership
+
+var UpdateUser = &sUpdateUser
+
+var UpdateUserSettings = &sUpdateUserSettings
+
+var _UCBuzzConsoleService = &s_UCBuzzConsoleService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Code = &sAccessDeniedException_Code
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var Account = &sAccount
+var Account_AwsAccountId = &sAccount_AwsAccountId
+var Account_AccountId = &sAccount_AccountId
+var Account_Name = &sAccount_Name
+var Account_AccountType = &sAccount_AccountType
+var Account_CreatedTimestamp = &sAccount_CreatedTimestamp
+var Account_DefaultLicense = &sAccount_DefaultLicense
+var Account_SupportedLicenses = &sAccount_SupportedLicenses
+var Account_AccountStatus = &sAccount_AccountStatus
+var Account_SigninDelegateGroups = &sAccount_SigninDelegateGroups
+
+var _AccountList = &s_AccountList
+var _AccountList_member = &s_AccountList_member
+
+var _AccountName = &s_AccountName
+
+var AccountSettings = &sAccountSettings
+var AccountSettings_DisableRemoteControl = &sAccountSettings_DisableRemoteControl
+var AccountSettings_EnableDialOut = &sAccountSettings_EnableDialOut
+
+var AccountStatus = &sAccountStatus
+var AccountStatus_Suspended = &sAccountStatus_Suspended
+var AccountStatus_Active = &sAccountStatus_Active
+
+var AccountType = &sAccountType
+var AccountType_Team = &sAccountType_Team
+var AccountType_EnterpriseDirectory = &sAccountType_EnterpriseDirectory
+var AccountType_EnterpriseLWA = &sAccountType_EnterpriseLWA
+var AccountType_EnterpriseOIDC = &sAccountType_EnterpriseOIDC
+
+var AlexaForBusinessMetadata = &sAlexaForBusinessMetadata
+var AlexaForBusinessMetadata_IsAlexaForBusinessEnabled = &sAlexaForBusinessMetadata_IsAlexaForBusinessEnabled
+var AlexaForBusinessMetadata_AlexaForBusinessRoomArn = &sAlexaForBusinessMetadata_AlexaForBusinessRoomArn
+
+var _Alpha2CountryCode = &s_Alpha2CountryCode
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Code = &sBadRequestException_Code
+var BadRequestException_Message = &sBadRequestException_Message
+
+var _Boolean = &s_Boolean
+
+var Bot = &sBot
+var Bot_BotId = &sBot_BotId
+var Bot_UserId = &sBot_UserId
+var Bot_DisplayName = &sBot_DisplayName
+var Bot_BotType = &sBot_BotType
+var Bot_Disabled = &sBot_Disabled
+var Bot_CreatedTimestamp = &sBot_CreatedTimestamp
+var Bot_UpdatedTimestamp = &sBot_UpdatedTimestamp
+var Bot_BotEmail = &sBot_BotEmail
+var Bot_SecurityToken = &sBot_SecurityToken
+
+var _BotList = &s_BotList
+var _BotList_member = &s_BotList_member
+
+var BotType = &sBotType
+var BotType_ChatBot = &sBotType_ChatBot
+
+var BusinessCallingSettings = &sBusinessCallingSettings
+var BusinessCallingSettings_CdrBucket = &sBusinessCallingSettings_CdrBucket
+
+var _CallingName = &s_CallingName
+
+var CallingNameStatus = &sCallingNameStatus
+var CallingNameStatus_Unassigned = &sCallingNameStatus_Unassigned
+var CallingNameStatus_UpdateInProgress = &sCallingNameStatus_UpdateInProgress
+var CallingNameStatus_UpdateSucceeded = &sCallingNameStatus_UpdateSucceeded
+var CallingNameStatus_UpdateFailed = &sCallingNameStatus_UpdateFailed
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ConflictException = &sConflictException
+var ConflictException_Code = &sConflictException_Code
+var ConflictException_Message = &sConflictException_Message
+
+var ConversationRetentionSettings = &sConversationRetentionSettings
+var ConversationRetentionSettings_RetentionDays = &sConversationRetentionSettings_RetentionDays
+
+var _E164PhoneNumber = &s_E164PhoneNumber
+
+var _E164PhoneNumberList = &s_E164PhoneNumberList
+var _E164PhoneNumberList_member = &s_E164PhoneNumberList_member
+
+var _EmailAddress = &s_EmailAddress
+
+var EmailStatus = &sEmailStatus
+var EmailStatus_NotSent = &sEmailStatus_NotSent
+var EmailStatus_Sent = &sEmailStatus_Sent
+var EmailStatus_Failed = &sEmailStatus_Failed
+
+var ErrorCode = &sErrorCode
+var ErrorCode_BadRequest = &sErrorCode_BadRequest
+var ErrorCode_Conflict = &sErrorCode_Conflict
+var ErrorCode_Forbidden = &sErrorCode_Forbidden
+var ErrorCode_NotFound = &sErrorCode_NotFound
+var ErrorCode_PreconditionFailed = &sErrorCode_PreconditionFailed
+var ErrorCode_ResourceLimitExceeded = &sErrorCode_ResourceLimitExceeded
+var ErrorCode_ServiceFailure = &sErrorCode_ServiceFailure
+var ErrorCode_AccessDenied = &sErrorCode_AccessDenied
+var ErrorCode_ServiceUnavailable = &sErrorCode_ServiceUnavailable
+var ErrorCode_Throttled = &sErrorCode_Throttled
+var ErrorCode_Throttling = &sErrorCode_Throttling
+var ErrorCode_Unauthorized = &sErrorCode_Unauthorized
+var ErrorCode_Unprocessable = &sErrorCode_Unprocessable
+var ErrorCode_VoiceConnectorGroupAssociationsExist = &sErrorCode_VoiceConnectorGroupAssociationsExist
+var ErrorCode_PhoneNumberAssociationsExist = &sErrorCode_PhoneNumberAssociationsExist
+
+var EventsConfiguration = &sEventsConfiguration
+var EventsConfiguration_BotId = &sEventsConfiguration_BotId
+var EventsConfiguration_OutboundEventsHTTPSEndpoint = &sEventsConfiguration_OutboundEventsHTTPSEndpoint
+var EventsConfiguration_LambdaFunctionArn = &sEventsConfiguration_LambdaFunctionArn
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_Code = &sForbiddenException_Code
+var ForbiddenException_Message = &sForbiddenException_Message
+
+var _GuidString = &s_GuidString
+
+var Invite = &sInvite
+var Invite_InviteId = &sInvite_InviteId
+var Invite_Status = &sInvite_Status
+var Invite_EmailAddress = &sInvite_EmailAddress
+var Invite_EmailStatus = &sInvite_EmailStatus
+
+var _InviteList = &s_InviteList
+var _InviteList_member = &s_InviteList_member
+
+var InviteStatus = &sInviteStatus
+var InviteStatus_Pending = &sInviteStatus_Pending
+var InviteStatus_Accepted = &sInviteStatus_Accepted
+var InviteStatus_Failed = &sInviteStatus_Failed
+
+var _Iso8601Timestamp = &s_Iso8601Timestamp
+
+var _JoinTokenString = &s_JoinTokenString
+
+var License = &sLicense
+var License_Basic = &sLicense_Basic
+var License_Plus = &sLicense_Plus
+var License_Pro = &sLicense_Pro
+var License_ProTrial = &sLicense_ProTrial
+
+var _LicenseList = &s_LicenseList
+var _LicenseList_member = &s_LicenseList_member
+
+var Member = &sMember
+var Member_MemberId = &sMember_MemberId
+var Member_MemberType = &sMember_MemberType
+var Member_Email = &sMember_Email
+var Member_FullName = &sMember_FullName
+var Member_AccountId = &sMember_AccountId
+
+var MemberError = &sMemberError
+var MemberError_MemberId = &sMemberError_MemberId
+var MemberError_ErrorCode = &sMemberError_ErrorCode
+var MemberError_ErrorMessage = &sMemberError_ErrorMessage
+
+var _MemberErrorList = &s_MemberErrorList
+var _MemberErrorList_member = &s_MemberErrorList_member
+
+var MembershipItem = &sMembershipItem
+var MembershipItem_MemberId = &sMembershipItem_MemberId
+var MembershipItem_Role = &sMembershipItem_Role
+
+var _MembershipItemList = &s_MembershipItemList
+var _MembershipItemList_member = &s_MembershipItemList_member
+
+var MemberType = &sMemberType
+var MemberType_User = &sMemberType_User
+var MemberType_Bot = &sMemberType_Bot
+var MemberType_Webhook = &sMemberType_Webhook
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _NonEmptyStringList = &s_NonEmptyStringList
+var _NonEmptyStringList_member = &s_NonEmptyStringList_member
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Code = &sNotFoundException_Code
+var NotFoundException_Message = &sNotFoundException_Message
+
+var _NullableBoolean = &s_NullableBoolean
+
+var OrderedPhoneNumber = &sOrderedPhoneNumber
+var OrderedPhoneNumber_E164PhoneNumber = &sOrderedPhoneNumber_E164PhoneNumber
+var OrderedPhoneNumber_Status = &sOrderedPhoneNumber_Status
+
+var _OrderedPhoneNumberList = &s_OrderedPhoneNumberList
+var _OrderedPhoneNumberList_member = &s_OrderedPhoneNumberList_member
+
+var OrderedPhoneNumberStatus = &sOrderedPhoneNumberStatus
+var OrderedPhoneNumberStatus_Processing = &sOrderedPhoneNumberStatus_Processing
+var OrderedPhoneNumberStatus_Acquired = &sOrderedPhoneNumberStatus_Acquired
+var OrderedPhoneNumberStatus_Failed = &sOrderedPhoneNumberStatus_Failed
+
+var PhoneNumber = &sPhoneNumber
+var PhoneNumber_PhoneNumberId = &sPhoneNumber_PhoneNumberId
+var PhoneNumber_E164PhoneNumber = &sPhoneNumber_E164PhoneNumber
+var PhoneNumber_Country = &sPhoneNumber_Country
+var PhoneNumber_Type = &sPhoneNumber_Type
+var PhoneNumber_ProductType = &sPhoneNumber_ProductType
+var PhoneNumber_Status = &sPhoneNumber_Status
+var PhoneNumber_Capabilities = &sPhoneNumber_Capabilities
+var PhoneNumber_Associations = &sPhoneNumber_Associations
+var PhoneNumber_CallingName = &sPhoneNumber_CallingName
+var PhoneNumber_CallingNameStatus = &sPhoneNumber_CallingNameStatus
+var PhoneNumber_CreatedTimestamp = &sPhoneNumber_CreatedTimestamp
+var PhoneNumber_UpdatedTimestamp = &sPhoneNumber_UpdatedTimestamp
+var PhoneNumber_DeletionTimestamp = &sPhoneNumber_DeletionTimestamp
+
+var PhoneNumberAssociation = &sPhoneNumberAssociation
+var PhoneNumberAssociation_Value = &sPhoneNumberAssociation_Value
+var PhoneNumberAssociation_Name = &sPhoneNumberAssociation_Name
+var PhoneNumberAssociation_AssociatedTimestamp = &sPhoneNumberAssociation_AssociatedTimestamp
+
+var _PhoneNumberAssociationList = &s_PhoneNumberAssociationList
+var _PhoneNumberAssociationList_member = &s_PhoneNumberAssociationList_member
+
+var PhoneNumberAssociationName = &sPhoneNumberAssociationName
+var PhoneNumberAssociationName_AccountId = &sPhoneNumberAssociationName_AccountId
+var PhoneNumberAssociationName_UserId = &sPhoneNumberAssociationName_UserId
+var PhoneNumberAssociationName_VoiceConnectorId = &sPhoneNumberAssociationName_VoiceConnectorId
+var PhoneNumberAssociationName_VoiceConnectorGroupId = &sPhoneNumberAssociationName_VoiceConnectorGroupId
+var PhoneNumberAssociationName_SipRuleId = &sPhoneNumberAssociationName_SipRuleId
+
+var PhoneNumberCapabilities = &sPhoneNumberCapabilities
+var PhoneNumberCapabilities_InboundCall = &sPhoneNumberCapabilities_InboundCall
+var PhoneNumberCapabilities_OutboundCall = &sPhoneNumberCapabilities_OutboundCall
+var PhoneNumberCapabilities_InboundSMS = &sPhoneNumberCapabilities_InboundSMS
+var PhoneNumberCapabilities_OutboundSMS = &sPhoneNumberCapabilities_OutboundSMS
+var PhoneNumberCapabilities_InboundMMS = &sPhoneNumberCapabilities_InboundMMS
+var PhoneNumberCapabilities_OutboundMMS = &sPhoneNumberCapabilities_OutboundMMS
+
+var _PhoneNumberCountriesList = &s_PhoneNumberCountriesList
+var _PhoneNumberCountriesList_member = &s_PhoneNumberCountriesList_member
+
+var PhoneNumberCountry = &sPhoneNumberCountry
+var PhoneNumberCountry_CountryCode = &sPhoneNumberCountry_CountryCode
+var PhoneNumberCountry_SupportedPhoneNumberTypes = &sPhoneNumberCountry_SupportedPhoneNumberTypes
+
+var PhoneNumberError = &sPhoneNumberError
+var PhoneNumberError_PhoneNumberId = &sPhoneNumberError_PhoneNumberId
+var PhoneNumberError_ErrorCode = &sPhoneNumberError_ErrorCode
+var PhoneNumberError_ErrorMessage = &sPhoneNumberError_ErrorMessage
+
+var _PhoneNumberErrorList = &s_PhoneNumberErrorList
+var _PhoneNumberErrorList_member = &s_PhoneNumberErrorList_member
+
+var _PhoneNumberList = &s_PhoneNumberList
+var _PhoneNumberList_member = &s_PhoneNumberList_member
+
+var _PhoneNumberMaxResults = &s_PhoneNumberMaxResults
+
+var PhoneNumberOrder = &sPhoneNumberOrder
+var PhoneNumberOrder_PhoneNumberOrderId = &sPhoneNumberOrder_PhoneNumberOrderId
+var PhoneNumberOrder_ProductType = &sPhoneNumberOrder_ProductType
+var PhoneNumberOrder_Status = &sPhoneNumberOrder_Status
+var PhoneNumberOrder_OrderedPhoneNumbers = &sPhoneNumberOrder_OrderedPhoneNumbers
+var PhoneNumberOrder_CreatedTimestamp = &sPhoneNumberOrder_CreatedTimestamp
+var PhoneNumberOrder_UpdatedTimestamp = &sPhoneNumberOrder_UpdatedTimestamp
+
+var _PhoneNumberOrderList = &s_PhoneNumberOrderList
+var _PhoneNumberOrderList_member = &s_PhoneNumberOrderList_member
+
+var PhoneNumberOrderStatus = &sPhoneNumberOrderStatus
+var PhoneNumberOrderStatus_Processing = &sPhoneNumberOrderStatus_Processing
+var PhoneNumberOrderStatus_Successful = &sPhoneNumberOrderStatus_Successful
+var PhoneNumberOrderStatus_Failed = &sPhoneNumberOrderStatus_Failed
+var PhoneNumberOrderStatus_Partial = &sPhoneNumberOrderStatus_Partial
+
+var PhoneNumberProductType = &sPhoneNumberProductType
+var PhoneNumberProductType_BusinessCalling = &sPhoneNumberProductType_BusinessCalling
+var PhoneNumberProductType_VoiceConnector = &sPhoneNumberProductType_VoiceConnector
+var PhoneNumberProductType_SipMediaApplicationDialIn = &sPhoneNumberProductType_SipMediaApplicationDialIn
+
+var PhoneNumberStatus = &sPhoneNumberStatus
+var PhoneNumberStatus_AcquireInProgress = &sPhoneNumberStatus_AcquireInProgress
+var PhoneNumberStatus_AcquireFailed = &sPhoneNumberStatus_AcquireFailed
+var PhoneNumberStatus_Unassigned = &sPhoneNumberStatus_Unassigned
+var PhoneNumberStatus_Assigned = &sPhoneNumberStatus_Assigned
+var PhoneNumberStatus_ReleaseInProgress = &sPhoneNumberStatus_ReleaseInProgress
+var PhoneNumberStatus_DeleteInProgress = &sPhoneNumberStatus_DeleteInProgress
+var PhoneNumberStatus_ReleaseFailed = &sPhoneNumberStatus_ReleaseFailed
+var PhoneNumberStatus_DeleteFailed = &sPhoneNumberStatus_DeleteFailed
+
+var PhoneNumberType = &sPhoneNumberType
+var PhoneNumberType_Local = &sPhoneNumberType_Local
+var PhoneNumberType_TollFree = &sPhoneNumberType_TollFree
+
+var _PhoneNumberTypeList = &s_PhoneNumberTypeList
+var _PhoneNumberTypeList_member = &s_PhoneNumberTypeList_member
+
+var _ProfileServiceMaxResults = &s_ProfileServiceMaxResults
+
+var RegistrationStatus = &sRegistrationStatus
+var RegistrationStatus_Unregistered = &sRegistrationStatus_Unregistered
+var RegistrationStatus_Registered = &sRegistrationStatus_Registered
+var RegistrationStatus_Suspended = &sRegistrationStatus_Suspended
+
+var ResourceLimitExceededException = &sResourceLimitExceededException
+var ResourceLimitExceededException_Code = &sResourceLimitExceededException_Code
+var ResourceLimitExceededException_Message = &sResourceLimitExceededException_Message
+
+var _ResultMax = &s_ResultMax
+
+var _RetentionDays = &s_RetentionDays
+
+var RetentionSettings = &sRetentionSettings
+var RetentionSettings_RoomRetentionSettings = &sRetentionSettings_RoomRetentionSettings
+var RetentionSettings_ConversationRetentionSettings = &sRetentionSettings_ConversationRetentionSettings
+
+var Room = &sRoom
+var Room_RoomId = &sRoom_RoomId
+var Room_Name = &sRoom_Name
+var Room_AccountId = &sRoom_AccountId
+var Room_CreatedBy = &sRoom_CreatedBy
+var Room_CreatedTimestamp = &sRoom_CreatedTimestamp
+var Room_UpdatedTimestamp = &sRoom_UpdatedTimestamp
+
+var _RoomList = &s_RoomList
+var _RoomList_member = &s_RoomList_member
+
+var RoomMembership = &sRoomMembership
+var RoomMembership_RoomId = &sRoomMembership_RoomId
+var RoomMembership_Member = &sRoomMembership_Member
+var RoomMembership_Role = &sRoomMembership_Role
+var RoomMembership_InvitedBy = &sRoomMembership_InvitedBy
+var RoomMembership_UpdatedTimestamp = &sRoomMembership_UpdatedTimestamp
+
+var _RoomMembershipList = &s_RoomMembershipList
+var _RoomMembershipList_member = &s_RoomMembershipList_member
+
+var RoomMembershipRole = &sRoomMembershipRole
+var RoomMembershipRole_Administrator = &sRoomMembershipRole_Administrator
+var RoomMembershipRole_Member = &sRoomMembershipRole_Member
+
+var RoomRetentionSettings = &sRoomRetentionSettings
+var RoomRetentionSettings_RetentionDays = &sRoomRetentionSettings_RetentionDays
+
+var _SensitiveString = &s_SensitiveString
+
+var ServiceFailureException = &sServiceFailureException
+var ServiceFailureException_Code = &sServiceFailureException_Code
+var ServiceFailureException_Message = &sServiceFailureException_Message
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Code = &sServiceUnavailableException_Code
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var SigninDelegateGroup = &sSigninDelegateGroup
+var SigninDelegateGroup_GroupName = &sSigninDelegateGroup_GroupName
+
+var _SigninDelegateGroupList = &s_SigninDelegateGroupList
+var _SigninDelegateGroupList_member = &s_SigninDelegateGroupList_member
+
+var _String = &s_String
+
+var TelephonySettings = &sTelephonySettings
+var TelephonySettings_InboundCalling = &sTelephonySettings_InboundCalling
+var TelephonySettings_OutboundCalling = &sTelephonySettings_OutboundCalling
+var TelephonySettings_SMS = &sTelephonySettings_SMS
+
+var ThrottledClientException = &sThrottledClientException
+var ThrottledClientException_Code = &sThrottledClientException_Code
+var ThrottledClientException_Message = &sThrottledClientException_Message
+
+var _TollFreePrefix = &s_TollFreePrefix
+
+var UnauthorizedClientException = &sUnauthorizedClientException
+var UnauthorizedClientException_Code = &sUnauthorizedClientException_Code
+var UnauthorizedClientException_Message = &sUnauthorizedClientException_Message
+
+var UnprocessableEntityException = &sUnprocessableEntityException
+var UnprocessableEntityException_Code = &sUnprocessableEntityException_Code
+var UnprocessableEntityException_Message = &sUnprocessableEntityException_Message
+
+var UpdatePhoneNumberRequestItem = &sUpdatePhoneNumberRequestItem
+var UpdatePhoneNumberRequestItem_PhoneNumberId = &sUpdatePhoneNumberRequestItem_PhoneNumberId
+var UpdatePhoneNumberRequestItem_ProductType = &sUpdatePhoneNumberRequestItem_ProductType
+var UpdatePhoneNumberRequestItem_CallingName = &sUpdatePhoneNumberRequestItem_CallingName
+
+var _UpdatePhoneNumberRequestItemList = &s_UpdatePhoneNumberRequestItemList
+var _UpdatePhoneNumberRequestItemList_member = &s_UpdatePhoneNumberRequestItemList_member
+
+var UpdateUserRequestItem = &sUpdateUserRequestItem
+var UpdateUserRequestItem_UserId = &sUpdateUserRequestItem_UserId
+var UpdateUserRequestItem_LicenseType = &sUpdateUserRequestItem_LicenseType
+var UpdateUserRequestItem_UserType = &sUpdateUserRequestItem_UserType
+var UpdateUserRequestItem_AlexaForBusinessMetadata = &sUpdateUserRequestItem_AlexaForBusinessMetadata
+
+var _UpdateUserRequestItemList = &s_UpdateUserRequestItemList
+var _UpdateUserRequestItemList_member = &s_UpdateUserRequestItemList_member
+
+var User = &sUser
+var User_UserId = &sUser_UserId
+var User_AccountId = &sUser_AccountId
+var User_PrimaryEmail = &sUser_PrimaryEmail
+var User_PrimaryProvisionedNumber = &sUser_PrimaryProvisionedNumber
+var User_DisplayName = &sUser_DisplayName
+var User_LicenseType = &sUser_LicenseType
+var User_UserType = &sUser_UserType
+var User_UserRegistrationStatus = &sUser_UserRegistrationStatus
+var User_UserInvitationStatus = &sUser_UserInvitationStatus
+var User_RegisteredOn = &sUser_RegisteredOn
+var User_InvitedOn = &sUser_InvitedOn
+var User_AlexaForBusinessMetadata = &sUser_AlexaForBusinessMetadata
+var User_PersonalPIN = &sUser_PersonalPIN
+
+var _UserEmailList = &s_UserEmailList
+var _UserEmailList_member = &s_UserEmailList_member
+
+var UserError = &sUserError
+var UserError_UserId = &sUserError_UserId
+var UserError_ErrorCode = &sUserError_ErrorCode
+var UserError_ErrorMessage = &sUserError_ErrorMessage
+
+var _UserErrorList = &s_UserErrorList
+var _UserErrorList_member = &s_UserErrorList_member
+
+var _UserIdList = &s_UserIdList
+var _UserIdList_member = &s_UserIdList_member
+
+var _UserList = &s_UserList
+var _UserList_member = &s_UserList_member
+
+var UserSettings = &sUserSettings
+var UserSettings_Telephony = &sUserSettings_Telephony
+
+var UserType = &sUserType
+var UserType_PrivateUser = &sUserType_PrivateUser
+var UserType_SharedDevice = &sUserType_SharedDevice
+
+var VoiceConnectorSettings = &sVoiceConnectorSettings
+var VoiceConnectorSettings_CdrBucket = &sVoiceConnectorSettings_CdrBucket
+
+var AssociatePhoneNumberWithUserRequest = &sAssociatePhoneNumberWithUserRequest
+var AssociatePhoneNumberWithUserRequest_AccountId = &sAssociatePhoneNumberWithUserRequest_AccountId
+var AssociatePhoneNumberWithUserRequest_UserId = &sAssociatePhoneNumberWithUserRequest_UserId
+var AssociatePhoneNumberWithUserRequest_E164PhoneNumber = &sAssociatePhoneNumberWithUserRequest_E164PhoneNumber
+
+var AssociatePhoneNumberWithUserResponse = &sAssociatePhoneNumberWithUserResponse
+
+var AssociateSigninDelegateGroupsWithAccountRequest = &sAssociateSigninDelegateGroupsWithAccountRequest
+var AssociateSigninDelegateGroupsWithAccountRequest_AccountId = &sAssociateSigninDelegateGroupsWithAccountRequest_AccountId
+var AssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups = &sAssociateSigninDelegateGroupsWithAccountRequest_SigninDelegateGroups
+
+var AssociateSigninDelegateGroupsWithAccountResponse = &sAssociateSigninDelegateGroupsWithAccountResponse
+
+var BatchCreateRoomMembershipRequest = &sBatchCreateRoomMembershipRequest
+var BatchCreateRoomMembershipRequest_AccountId = &sBatchCreateRoomMembershipRequest_AccountId
+var BatchCreateRoomMembershipRequest_RoomId = &sBatchCreateRoomMembershipRequest_RoomId
+var BatchCreateRoomMembershipRequest_MembershipItemList = &sBatchCreateRoomMembershipRequest_MembershipItemList
+
+var BatchCreateRoomMembershipResponse = &sBatchCreateRoomMembershipResponse
+var BatchCreateRoomMembershipResponse_Errors = &sBatchCreateRoomMembershipResponse_Errors
+
+var BatchDeletePhoneNumberRequest = &sBatchDeletePhoneNumberRequest
+var BatchDeletePhoneNumberRequest_PhoneNumberIds = &sBatchDeletePhoneNumberRequest_PhoneNumberIds
+
+var BatchDeletePhoneNumberResponse = &sBatchDeletePhoneNumberResponse
+var BatchDeletePhoneNumberResponse_PhoneNumberErrors = &sBatchDeletePhoneNumberResponse_PhoneNumberErrors
+
+var BatchSuspendUserRequest = &sBatchSuspendUserRequest
+var BatchSuspendUserRequest_AccountId = &sBatchSuspendUserRequest_AccountId
+var BatchSuspendUserRequest_UserIdList = &sBatchSuspendUserRequest_UserIdList
+
+var BatchSuspendUserResponse = &sBatchSuspendUserResponse
+var BatchSuspendUserResponse_UserErrors = &sBatchSuspendUserResponse_UserErrors
+
+var BatchUnsuspendUserRequest = &sBatchUnsuspendUserRequest
+var BatchUnsuspendUserRequest_AccountId = &sBatchUnsuspendUserRequest_AccountId
+var BatchUnsuspendUserRequest_UserIdList = &sBatchUnsuspendUserRequest_UserIdList
+
+var BatchUnsuspendUserResponse = &sBatchUnsuspendUserResponse
+var BatchUnsuspendUserResponse_UserErrors = &sBatchUnsuspendUserResponse_UserErrors
+
+var BatchUpdatePhoneNumberRequest = &sBatchUpdatePhoneNumberRequest
+var BatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems = &sBatchUpdatePhoneNumberRequest_UpdatePhoneNumberRequestItems
+
+var BatchUpdatePhoneNumberResponse = &sBatchUpdatePhoneNumberResponse
+var BatchUpdatePhoneNumberResponse_PhoneNumberErrors = &sBatchUpdatePhoneNumberResponse_PhoneNumberErrors
+
+var BatchUpdateUserRequest = &sBatchUpdateUserRequest
+var BatchUpdateUserRequest_AccountId = &sBatchUpdateUserRequest_AccountId
+var BatchUpdateUserRequest_UpdateUserRequestItems = &sBatchUpdateUserRequest_UpdateUserRequestItems
+
+var BatchUpdateUserResponse = &sBatchUpdateUserResponse
+var BatchUpdateUserResponse_UserErrors = &sBatchUpdateUserResponse_UserErrors
+
+var CreateAccountRequest = &sCreateAccountRequest
+var CreateAccountRequest_Name = &sCreateAccountRequest_Name
+
+var CreateAccountResponse = &sCreateAccountResponse
+var CreateAccountResponse_Account = &sCreateAccountResponse_Account
+
+var CreateBotRequest = &sCreateBotRequest
+var CreateBotRequest_AccountId = &sCreateBotRequest_AccountId
+var CreateBotRequest_DisplayName = &sCreateBotRequest_DisplayName
+var CreateBotRequest_Domain = &sCreateBotRequest_Domain
+
+var CreateBotResponse = &sCreateBotResponse
+var CreateBotResponse_Bot = &sCreateBotResponse_Bot
+
+var CreateMeetingDialOutRequest = &sCreateMeetingDialOutRequest
+var CreateMeetingDialOutRequest_MeetingId = &sCreateMeetingDialOutRequest_MeetingId
+var CreateMeetingDialOutRequest_FromPhoneNumber = &sCreateMeetingDialOutRequest_FromPhoneNumber
+var CreateMeetingDialOutRequest_ToPhoneNumber = &sCreateMeetingDialOutRequest_ToPhoneNumber
+var CreateMeetingDialOutRequest_JoinToken = &sCreateMeetingDialOutRequest_JoinToken
+
+var CreateMeetingDialOutResponse = &sCreateMeetingDialOutResponse
+var CreateMeetingDialOutResponse_TransactionId = &sCreateMeetingDialOutResponse_TransactionId
+
+var CreatePhoneNumberOrderRequest = &sCreatePhoneNumberOrderRequest
+var CreatePhoneNumberOrderRequest_ProductType = &sCreatePhoneNumberOrderRequest_ProductType
+var CreatePhoneNumberOrderRequest_E164PhoneNumbers = &sCreatePhoneNumberOrderRequest_E164PhoneNumbers
+
+var CreatePhoneNumberOrderResponse = &sCreatePhoneNumberOrderResponse
+var CreatePhoneNumberOrderResponse_PhoneNumberOrder = &sCreatePhoneNumberOrderResponse_PhoneNumberOrder
+
+var CreateRoomRequest = &sCreateRoomRequest
+var CreateRoomRequest_AccountId = &sCreateRoomRequest_AccountId
+var CreateRoomRequest_Name = &sCreateRoomRequest_Name
+var CreateRoomRequest_ClientRequestToken = &sCreateRoomRequest_ClientRequestToken
+
+var CreateRoomMembershipRequest = &sCreateRoomMembershipRequest
+var CreateRoomMembershipRequest_AccountId = &sCreateRoomMembershipRequest_AccountId
+var CreateRoomMembershipRequest_RoomId = &sCreateRoomMembershipRequest_RoomId
+var CreateRoomMembershipRequest_MemberId = &sCreateRoomMembershipRequest_MemberId
+var CreateRoomMembershipRequest_Role = &sCreateRoomMembershipRequest_Role
+
+var CreateRoomMembershipResponse = &sCreateRoomMembershipResponse
+var CreateRoomMembershipResponse_RoomMembership = &sCreateRoomMembershipResponse_RoomMembership
+
+var CreateRoomResponse = &sCreateRoomResponse
+var CreateRoomResponse_Room = &sCreateRoomResponse_Room
+
+var CreateUserRequest = &sCreateUserRequest
+var CreateUserRequest_AccountId = &sCreateUserRequest_AccountId
+var CreateUserRequest_Username = &sCreateUserRequest_Username
+var CreateUserRequest_Email = &sCreateUserRequest_Email
+var CreateUserRequest_UserType = &sCreateUserRequest_UserType
+
+var CreateUserResponse = &sCreateUserResponse
+var CreateUserResponse_User = &sCreateUserResponse_User
+
+var DeleteAccountRequest = &sDeleteAccountRequest
+var DeleteAccountRequest_AccountId = &sDeleteAccountRequest_AccountId
+
+var DeleteAccountResponse = &sDeleteAccountResponse
+
+var DeleteEventsConfigurationRequest = &sDeleteEventsConfigurationRequest
+var DeleteEventsConfigurationRequest_AccountId = &sDeleteEventsConfigurationRequest_AccountId
+var DeleteEventsConfigurationRequest_BotId = &sDeleteEventsConfigurationRequest_BotId
+
+var DeletePhoneNumberRequest = &sDeletePhoneNumberRequest
+var DeletePhoneNumberRequest_PhoneNumberId = &sDeletePhoneNumberRequest_PhoneNumberId
+
+var DeleteRoomRequest = &sDeleteRoomRequest
+var DeleteRoomRequest_AccountId = &sDeleteRoomRequest_AccountId
+var DeleteRoomRequest_RoomId = &sDeleteRoomRequest_RoomId
+
+var DeleteRoomMembershipRequest = &sDeleteRoomMembershipRequest
+var DeleteRoomMembershipRequest_AccountId = &sDeleteRoomMembershipRequest_AccountId
+var DeleteRoomMembershipRequest_RoomId = &sDeleteRoomMembershipRequest_RoomId
+var DeleteRoomMembershipRequest_MemberId = &sDeleteRoomMembershipRequest_MemberId
+
+var DisassociatePhoneNumberFromUserRequest = &sDisassociatePhoneNumberFromUserRequest
+var DisassociatePhoneNumberFromUserRequest_AccountId = &sDisassociatePhoneNumberFromUserRequest_AccountId
+var DisassociatePhoneNumberFromUserRequest_UserId = &sDisassociatePhoneNumberFromUserRequest_UserId
+
+var DisassociatePhoneNumberFromUserResponse = &sDisassociatePhoneNumberFromUserResponse
+
+var DisassociateSigninDelegateGroupsFromAccountRequest = &sDisassociateSigninDelegateGroupsFromAccountRequest
+var DisassociateSigninDelegateGroupsFromAccountRequest_AccountId = &sDisassociateSigninDelegateGroupsFromAccountRequest_AccountId
+var DisassociateSigninDelegateGroupsFromAccountRequest_GroupNames = &sDisassociateSigninDelegateGroupsFromAccountRequest_GroupNames
+
+var DisassociateSigninDelegateGroupsFromAccountResponse = &sDisassociateSigninDelegateGroupsFromAccountResponse
+
+var GetAccountRequest = &sGetAccountRequest
+var GetAccountRequest_AccountId = &sGetAccountRequest_AccountId
+
+var GetAccountResponse = &sGetAccountResponse
+var GetAccountResponse_Account = &sGetAccountResponse_Account
+
+var GetAccountSettingsRequest = &sGetAccountSettingsRequest
+var GetAccountSettingsRequest_AccountId = &sGetAccountSettingsRequest_AccountId
+
+var GetAccountSettingsResponse = &sGetAccountSettingsResponse
+var GetAccountSettingsResponse_AccountSettings = &sGetAccountSettingsResponse_AccountSettings
+
+var GetBotRequest = &sGetBotRequest
+var GetBotRequest_AccountId = &sGetBotRequest_AccountId
+var GetBotRequest_BotId = &sGetBotRequest_BotId
+
+var GetBotResponse = &sGetBotResponse
+var GetBotResponse_Bot = &sGetBotResponse_Bot
+
+var GetEventsConfigurationRequest = &sGetEventsConfigurationRequest
+var GetEventsConfigurationRequest_AccountId = &sGetEventsConfigurationRequest_AccountId
+var GetEventsConfigurationRequest_BotId = &sGetEventsConfigurationRequest_BotId
+
+var GetEventsConfigurationResponse = &sGetEventsConfigurationResponse
+var GetEventsConfigurationResponse_EventsConfiguration = &sGetEventsConfigurationResponse_EventsConfiguration
+
+var GetGlobalSettingsResponse = &sGetGlobalSettingsResponse
+var GetGlobalSettingsResponse_BusinessCalling = &sGetGlobalSettingsResponse_BusinessCalling
+var GetGlobalSettingsResponse_VoiceConnector = &sGetGlobalSettingsResponse_VoiceConnector
+
+var GetPhoneNumberRequest = &sGetPhoneNumberRequest
+var GetPhoneNumberRequest_PhoneNumberId = &sGetPhoneNumberRequest_PhoneNumberId
+
+var GetPhoneNumberOrderRequest = &sGetPhoneNumberOrderRequest
+var GetPhoneNumberOrderRequest_PhoneNumberOrderId = &sGetPhoneNumberOrderRequest_PhoneNumberOrderId
+
+var GetPhoneNumberOrderResponse = &sGetPhoneNumberOrderResponse
+var GetPhoneNumberOrderResponse_PhoneNumberOrder = &sGetPhoneNumberOrderResponse_PhoneNumberOrder
+
+var GetPhoneNumberResponse = &sGetPhoneNumberResponse
+var GetPhoneNumberResponse_PhoneNumber = &sGetPhoneNumberResponse_PhoneNumber
+
+var GetPhoneNumberSettingsResponse = &sGetPhoneNumberSettingsResponse
+var GetPhoneNumberSettingsResponse_CallingName = &sGetPhoneNumberSettingsResponse_CallingName
+var GetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp = &sGetPhoneNumberSettingsResponse_CallingNameUpdatedTimestamp
+
+var GetRetentionSettingsRequest = &sGetRetentionSettingsRequest
+var GetRetentionSettingsRequest_AccountId = &sGetRetentionSettingsRequest_AccountId
+
+var GetRetentionSettingsResponse = &sGetRetentionSettingsResponse
+var GetRetentionSettingsResponse_RetentionSettings = &sGetRetentionSettingsResponse_RetentionSettings
+var GetRetentionSettingsResponse_InitiateDeletionTimestamp = &sGetRetentionSettingsResponse_InitiateDeletionTimestamp
+
+var GetRoomRequest = &sGetRoomRequest
+var GetRoomRequest_AccountId = &sGetRoomRequest_AccountId
+var GetRoomRequest_RoomId = &sGetRoomRequest_RoomId
+
+var GetRoomResponse = &sGetRoomResponse
+var GetRoomResponse_Room = &sGetRoomResponse_Room
+
+var GetUserRequest = &sGetUserRequest
+var GetUserRequest_AccountId = &sGetUserRequest_AccountId
+var GetUserRequest_UserId = &sGetUserRequest_UserId
+
+var GetUserResponse = &sGetUserResponse
+var GetUserResponse_User = &sGetUserResponse_User
+
+var GetUserSettingsRequest = &sGetUserSettingsRequest
+var GetUserSettingsRequest_AccountId = &sGetUserSettingsRequest_AccountId
+var GetUserSettingsRequest_UserId = &sGetUserSettingsRequest_UserId
+
+var GetUserSettingsResponse = &sGetUserSettingsResponse
+var GetUserSettingsResponse_UserSettings = &sGetUserSettingsResponse_UserSettings
+
+var InviteUsersRequest = &sInviteUsersRequest
+var InviteUsersRequest_AccountId = &sInviteUsersRequest_AccountId
+var InviteUsersRequest_UserEmailList = &sInviteUsersRequest_UserEmailList
+var InviteUsersRequest_UserType = &sInviteUsersRequest_UserType
+
+var InviteUsersResponse = &sInviteUsersResponse
+var InviteUsersResponse_Invites = &sInviteUsersResponse_Invites
+
+var ListAccountsRequest = &sListAccountsRequest
+var ListAccountsRequest_Name = &sListAccountsRequest_Name
+var ListAccountsRequest_UserEmail = &sListAccountsRequest_UserEmail
+var ListAccountsRequest_NextToken = &sListAccountsRequest_NextToken
+var ListAccountsRequest_MaxResults = &sListAccountsRequest_MaxResults
+
+var ListAccountsResponse = &sListAccountsResponse
+var ListAccountsResponse_Accounts = &sListAccountsResponse_Accounts
+var ListAccountsResponse_NextToken = &sListAccountsResponse_NextToken
+
+var ListBotsRequest = &sListBotsRequest
+var ListBotsRequest_AccountId = &sListBotsRequest_AccountId
+var ListBotsRequest_MaxResults = &sListBotsRequest_MaxResults
+var ListBotsRequest_NextToken = &sListBotsRequest_NextToken
+
+var ListBotsResponse = &sListBotsResponse
+var ListBotsResponse_Bots = &sListBotsResponse_Bots
+var ListBotsResponse_NextToken = &sListBotsResponse_NextToken
+
+var ListPhoneNumberOrdersRequest = &sListPhoneNumberOrdersRequest
+var ListPhoneNumberOrdersRequest_NextToken = &sListPhoneNumberOrdersRequest_NextToken
+var ListPhoneNumberOrdersRequest_MaxResults = &sListPhoneNumberOrdersRequest_MaxResults
+
+var ListPhoneNumberOrdersResponse = &sListPhoneNumberOrdersResponse
+var ListPhoneNumberOrdersResponse_PhoneNumberOrders = &sListPhoneNumberOrdersResponse_PhoneNumberOrders
+var ListPhoneNumberOrdersResponse_NextToken = &sListPhoneNumberOrdersResponse_NextToken
+
+var ListPhoneNumbersRequest = &sListPhoneNumbersRequest
+var ListPhoneNumbersRequest_Status = &sListPhoneNumbersRequest_Status
+var ListPhoneNumbersRequest_ProductType = &sListPhoneNumbersRequest_ProductType
+var ListPhoneNumbersRequest_FilterName = &sListPhoneNumbersRequest_FilterName
+var ListPhoneNumbersRequest_FilterValue = &sListPhoneNumbersRequest_FilterValue
+var ListPhoneNumbersRequest_MaxResults = &sListPhoneNumbersRequest_MaxResults
+var ListPhoneNumbersRequest_NextToken = &sListPhoneNumbersRequest_NextToken
+
+var ListPhoneNumbersResponse = &sListPhoneNumbersResponse
+var ListPhoneNumbersResponse_PhoneNumbers = &sListPhoneNumbersResponse_PhoneNumbers
+var ListPhoneNumbersResponse_NextToken = &sListPhoneNumbersResponse_NextToken
+
+var ListRoomMembershipsRequest = &sListRoomMembershipsRequest
+var ListRoomMembershipsRequest_AccountId = &sListRoomMembershipsRequest_AccountId
+var ListRoomMembershipsRequest_RoomId = &sListRoomMembershipsRequest_RoomId
+var ListRoomMembershipsRequest_MaxResults = &sListRoomMembershipsRequest_MaxResults
+var ListRoomMembershipsRequest_NextToken = &sListRoomMembershipsRequest_NextToken
+
+var ListRoomMembershipsResponse = &sListRoomMembershipsResponse
+var ListRoomMembershipsResponse_RoomMemberships = &sListRoomMembershipsResponse_RoomMemberships
+var ListRoomMembershipsResponse_NextToken = &sListRoomMembershipsResponse_NextToken
+
+var ListRoomsRequest = &sListRoomsRequest
+var ListRoomsRequest_AccountId = &sListRoomsRequest_AccountId
+var ListRoomsRequest_MemberId = &sListRoomsRequest_MemberId
+var ListRoomsRequest_MaxResults = &sListRoomsRequest_MaxResults
+var ListRoomsRequest_NextToken = &sListRoomsRequest_NextToken
+
+var ListRoomsResponse = &sListRoomsResponse
+var ListRoomsResponse_Rooms = &sListRoomsResponse_Rooms
+var ListRoomsResponse_NextToken = &sListRoomsResponse_NextToken
+
+var ListSupportedPhoneNumberCountriesRequest = &sListSupportedPhoneNumberCountriesRequest
+var ListSupportedPhoneNumberCountriesRequest_ProductType = &sListSupportedPhoneNumberCountriesRequest_ProductType
+
+var ListSupportedPhoneNumberCountriesResponse = &sListSupportedPhoneNumberCountriesResponse
+var ListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries = &sListSupportedPhoneNumberCountriesResponse_PhoneNumberCountries
+
+var ListUsersRequest = &sListUsersRequest
+var ListUsersRequest_AccountId = &sListUsersRequest_AccountId
+var ListUsersRequest_UserEmail = &sListUsersRequest_UserEmail
+var ListUsersRequest_UserType = &sListUsersRequest_UserType
+var ListUsersRequest_MaxResults = &sListUsersRequest_MaxResults
+var ListUsersRequest_NextToken = &sListUsersRequest_NextToken
+
+var ListUsersResponse = &sListUsersResponse
+var ListUsersResponse_Users = &sListUsersResponse_Users
+var ListUsersResponse_NextToken = &sListUsersResponse_NextToken
+
+var LogoutUserRequest = &sLogoutUserRequest
+var LogoutUserRequest_AccountId = &sLogoutUserRequest_AccountId
+var LogoutUserRequest_UserId = &sLogoutUserRequest_UserId
+
+var LogoutUserResponse = &sLogoutUserResponse
+
+var PutEventsConfigurationRequest = &sPutEventsConfigurationRequest
+var PutEventsConfigurationRequest_AccountId = &sPutEventsConfigurationRequest_AccountId
+var PutEventsConfigurationRequest_BotId = &sPutEventsConfigurationRequest_BotId
+var PutEventsConfigurationRequest_OutboundEventsHTTPSEndpoint = &sPutEventsConfigurationRequest_OutboundEventsHTTPSEndpoint
+var PutEventsConfigurationRequest_LambdaFunctionArn = &sPutEventsConfigurationRequest_LambdaFunctionArn
+
+var PutEventsConfigurationResponse = &sPutEventsConfigurationResponse
+var PutEventsConfigurationResponse_EventsConfiguration = &sPutEventsConfigurationResponse_EventsConfiguration
+
+var PutRetentionSettingsRequest = &sPutRetentionSettingsRequest
+var PutRetentionSettingsRequest_AccountId = &sPutRetentionSettingsRequest_AccountId
+var PutRetentionSettingsRequest_RetentionSettings = &sPutRetentionSettingsRequest_RetentionSettings
+
+var PutRetentionSettingsResponse = &sPutRetentionSettingsResponse
+var PutRetentionSettingsResponse_RetentionSettings = &sPutRetentionSettingsResponse_RetentionSettings
+var PutRetentionSettingsResponse_InitiateDeletionTimestamp = &sPutRetentionSettingsResponse_InitiateDeletionTimestamp
+
+var RedactConversationMessageRequest = &sRedactConversationMessageRequest
+var RedactConversationMessageRequest_AccountId = &sRedactConversationMessageRequest_AccountId
+var RedactConversationMessageRequest_ConversationId = &sRedactConversationMessageRequest_ConversationId
+var RedactConversationMessageRequest_MessageId = &sRedactConversationMessageRequest_MessageId
+
+var RedactConversationMessageResponse = &sRedactConversationMessageResponse
+
+var RedactRoomMessageRequest = &sRedactRoomMessageRequest
+var RedactRoomMessageRequest_AccountId = &sRedactRoomMessageRequest_AccountId
+var RedactRoomMessageRequest_RoomId = &sRedactRoomMessageRequest_RoomId
+var RedactRoomMessageRequest_MessageId = &sRedactRoomMessageRequest_MessageId
+
+var RedactRoomMessageResponse = &sRedactRoomMessageResponse
+
+var RegenerateSecurityTokenRequest = &sRegenerateSecurityTokenRequest
+var RegenerateSecurityTokenRequest_AccountId = &sRegenerateSecurityTokenRequest_AccountId
+var RegenerateSecurityTokenRequest_BotId = &sRegenerateSecurityTokenRequest_BotId
+
+var RegenerateSecurityTokenResponse = &sRegenerateSecurityTokenResponse
+var RegenerateSecurityTokenResponse_Bot = &sRegenerateSecurityTokenResponse_Bot
+
+var ResetPersonalPINRequest = &sResetPersonalPINRequest
+var ResetPersonalPINRequest_AccountId = &sResetPersonalPINRequest_AccountId
+var ResetPersonalPINRequest_UserId = &sResetPersonalPINRequest_UserId
+
+var ResetPersonalPINResponse = &sResetPersonalPINResponse
+var ResetPersonalPINResponse_User = &sResetPersonalPINResponse_User
+
+var RestorePhoneNumberRequest = &sRestorePhoneNumberRequest
+var RestorePhoneNumberRequest_PhoneNumberId = &sRestorePhoneNumberRequest_PhoneNumberId
+
+var RestorePhoneNumberResponse = &sRestorePhoneNumberResponse
+var RestorePhoneNumberResponse_PhoneNumber = &sRestorePhoneNumberResponse_PhoneNumber
+
+var SearchAvailablePhoneNumbersRequest = &sSearchAvailablePhoneNumbersRequest
+var SearchAvailablePhoneNumbersRequest_AreaCode = &sSearchAvailablePhoneNumbersRequest_AreaCode
+var SearchAvailablePhoneNumbersRequest_City = &sSearchAvailablePhoneNumbersRequest_City
+var SearchAvailablePhoneNumbersRequest_Country = &sSearchAvailablePhoneNumbersRequest_Country
+var SearchAvailablePhoneNumbersRequest_State = &sSearchAvailablePhoneNumbersRequest_State
+var SearchAvailablePhoneNumbersRequest_TollFreePrefix = &sSearchAvailablePhoneNumbersRequest_TollFreePrefix
+var SearchAvailablePhoneNumbersRequest_PhoneNumberType = &sSearchAvailablePhoneNumbersRequest_PhoneNumberType
+var SearchAvailablePhoneNumbersRequest_MaxResults = &sSearchAvailablePhoneNumbersRequest_MaxResults
+var SearchAvailablePhoneNumbersRequest_NextToken = &sSearchAvailablePhoneNumbersRequest_NextToken
+
+var SearchAvailablePhoneNumbersResponse = &sSearchAvailablePhoneNumbersResponse
+var SearchAvailablePhoneNumbersResponse_E164PhoneNumbers = &sSearchAvailablePhoneNumbersResponse_E164PhoneNumbers
+var SearchAvailablePhoneNumbersResponse_NextToken = &sSearchAvailablePhoneNumbersResponse_NextToken
+
+var UpdateAccountRequest = &sUpdateAccountRequest
+var UpdateAccountRequest_AccountId = &sUpdateAccountRequest_AccountId
+var UpdateAccountRequest_Name = &sUpdateAccountRequest_Name
+var UpdateAccountRequest_DefaultLicense = &sUpdateAccountRequest_DefaultLicense
+
+var UpdateAccountResponse = &sUpdateAccountResponse
+var UpdateAccountResponse_Account = &sUpdateAccountResponse_Account
+
+var UpdateAccountSettingsRequest = &sUpdateAccountSettingsRequest
+var UpdateAccountSettingsRequest_AccountId = &sUpdateAccountSettingsRequest_AccountId
+var UpdateAccountSettingsRequest_AccountSettings = &sUpdateAccountSettingsRequest_AccountSettings
+
+var UpdateAccountSettingsResponse = &sUpdateAccountSettingsResponse
+
+var UpdateBotRequest = &sUpdateBotRequest
+var UpdateBotRequest_AccountId = &sUpdateBotRequest_AccountId
+var UpdateBotRequest_BotId = &sUpdateBotRequest_BotId
+var UpdateBotRequest_Disabled = &sUpdateBotRequest_Disabled
+
+var UpdateBotResponse = &sUpdateBotResponse
+var UpdateBotResponse_Bot = &sUpdateBotResponse_Bot
+
+var UpdateGlobalSettingsRequest = &sUpdateGlobalSettingsRequest
+var UpdateGlobalSettingsRequest_BusinessCalling = &sUpdateGlobalSettingsRequest_BusinessCalling
+var UpdateGlobalSettingsRequest_VoiceConnector = &sUpdateGlobalSettingsRequest_VoiceConnector
+
+var UpdatePhoneNumberRequest = &sUpdatePhoneNumberRequest
+var UpdatePhoneNumberRequest_PhoneNumberId = &sUpdatePhoneNumberRequest_PhoneNumberId
+var UpdatePhoneNumberRequest_ProductType = &sUpdatePhoneNumberRequest_ProductType
+var UpdatePhoneNumberRequest_CallingName = &sUpdatePhoneNumberRequest_CallingName
+
+var UpdatePhoneNumberResponse = &sUpdatePhoneNumberResponse
+var UpdatePhoneNumberResponse_PhoneNumber = &sUpdatePhoneNumberResponse_PhoneNumber
+
+var UpdatePhoneNumberSettingsRequest = &sUpdatePhoneNumberSettingsRequest
+var UpdatePhoneNumberSettingsRequest_CallingName = &sUpdatePhoneNumberSettingsRequest_CallingName
+
+var UpdateRoomRequest = &sUpdateRoomRequest
+var UpdateRoomRequest_AccountId = &sUpdateRoomRequest_AccountId
+var UpdateRoomRequest_RoomId = &sUpdateRoomRequest_RoomId
+var UpdateRoomRequest_Name = &sUpdateRoomRequest_Name
+
+var UpdateRoomMembershipRequest = &sUpdateRoomMembershipRequest
+var UpdateRoomMembershipRequest_AccountId = &sUpdateRoomMembershipRequest_AccountId
+var UpdateRoomMembershipRequest_RoomId = &sUpdateRoomMembershipRequest_RoomId
+var UpdateRoomMembershipRequest_MemberId = &sUpdateRoomMembershipRequest_MemberId
+var UpdateRoomMembershipRequest_Role = &sUpdateRoomMembershipRequest_Role
+
+var UpdateRoomMembershipResponse = &sUpdateRoomMembershipResponse
+var UpdateRoomMembershipResponse_RoomMembership = &sUpdateRoomMembershipResponse_RoomMembership
+
+var UpdateRoomResponse = &sUpdateRoomResponse
+var UpdateRoomResponse_Room = &sUpdateRoomResponse_Room
+
+var UpdateUserRequest = &sUpdateUserRequest
+var UpdateUserRequest_AccountId = &sUpdateUserRequest_AccountId
+var UpdateUserRequest_UserId = &sUpdateUserRequest_UserId
+var UpdateUserRequest_LicenseType = &sUpdateUserRequest_LicenseType
+var UpdateUserRequest_UserType = &sUpdateUserRequest_UserType
+var UpdateUserRequest_AlexaForBusinessMetadata = &sUpdateUserRequest_AlexaForBusinessMetadata
+
+var UpdateUserResponse = &sUpdateUserResponse
+var UpdateUserResponse_User = &sUpdateUserResponse_User
+
+var UpdateUserSettingsRequest = &sUpdateUserSettingsRequest
+var UpdateUserSettingsRequest_AccountId = &sUpdateUserSettingsRequest_AccountId
+var UpdateUserSettingsRequest_UserId = &sUpdateUserSettingsRequest_UserId
+var UpdateUserSettingsRequest_UserSettings = &sUpdateUserSettingsRequest_UserSettings
+
+var UCBuzzConsoleService = &smithy.ServiceSchema{Schema: &s_UCBuzzConsoleService, Version: "2018-05-01"}

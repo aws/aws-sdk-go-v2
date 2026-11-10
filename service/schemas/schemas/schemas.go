@@ -4,1597 +4,1211 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateDiscoverer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateDiscoverer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateDiscoverer                             = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateDiscoverer"}
+	iCreateRegistry                               = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateRegistry"}
+	iCreateSchema                                 = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateSchema"}
+	iDeleteDiscoverer                             = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteDiscoverer"}
+	iDeleteRegistry                               = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteRegistry"}
+	iDeleteResourcePolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteResourcePolicy"}
+	iDeleteSchema                                 = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteSchema"}
+	iDeleteSchemaVersion                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteSchemaVersion"}
+	iDescribeCodeBinding                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeCodeBinding"}
+	iDescribeDiscoverer                           = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeDiscoverer"}
+	iDescribeRegistry                             = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeRegistry"}
+	iDescribeSchema                               = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeSchema"}
+	iExportSchema                                 = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ExportSchema"}
+	iGetCodeBindingSource                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetCodeBindingSource"}
+	iGetDiscoveredSchema                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetDiscoveredSchema"}
+	iGetResourcePolicy                            = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetResourcePolicy"}
+	iListDiscoverers                              = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListDiscoverers"}
+	iListRegistries                               = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListRegistries"}
+	iListSchemas                                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListSchemas"}
+	iListSchemaVersions                           = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListSchemaVersions"}
+	iListTagsForResource                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListTagsForResource"}
+	iPutCodeBinding                               = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "PutCodeBinding"}
+	iPutResourcePolicy                            = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "PutResourcePolicy"}
+	iSearchSchemas                                = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SearchSchemas"}
+	iStartDiscoverer                              = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "StartDiscoverer"}
+	iStopDiscoverer                               = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "StopDiscoverer"}
+	iTagResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "TagResource"}
+	iUntagResource                                = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UntagResource"}
+	iUpdateDiscoverer                             = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateDiscoverer"}
+	iUpdateRegistry                               = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateRegistry"}
+	iUpdateSchema                                 = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateSchema"}
+	i_schemas                                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "schemas"}
+	i___boolean                                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__boolean"}
+	i___integer                                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__integer"}
+	i___listOf__string                            = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOf__string"}
+	i___listOfDiscovererSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOfDiscovererSummary"}
+	i___listOfGetDiscoveredSchemaVersionItemInput = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOfGetDiscoveredSchemaVersionItemInput"}
+	i___listOfRegistrySummary                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOfRegistrySummary"}
+	i___listOfSchemaSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOfSchemaSummary"}
+	i___listOfSchemaVersionSummary                = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOfSchemaVersionSummary"}
+	i___listOfSearchSchemaSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOfSearchSchemaSummary"}
+	i___listOfSearchSchemaVersionSummary          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__listOfSearchSchemaVersionSummary"}
+	i___long                                      = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__long"}
+	i___string                                    = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__string"}
+	i___stringMin0Max256                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__stringMin0Max256"}
+	i___stringMin0Max36                           = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__stringMin0Max36"}
+	i___stringMin1Max100000                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__stringMin1Max100000"}
+	i___stringMin20Max1600                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__stringMin20Max1600"}
+	i___timestampIso8601                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "__timestampIso8601"}
+	iBadRequestException                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "BadRequestException"}
+	i_Body                                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "Body"}
+	iCodeGenerationStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CodeGenerationStatus"}
+	iConflictException                            = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ConflictException"}
+	iDiscovererState                              = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DiscovererState"}
+	iDiscovererSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DiscovererSummary"}
+	iForbiddenException                           = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ForbiddenException"}
+	i_GetDiscoveredSchemaVersionItemInput         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetDiscoveredSchemaVersionItemInput"}
+	iGoneException                                = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GoneException"}
+	iInternalServerErrorException                 = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "InternalServerErrorException"}
+	iNotFoundException                            = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "NotFoundException"}
+	iPreconditionFailedException                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "PreconditionFailedException"}
+	iRegistrySummary                              = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "RegistrySummary"}
+	iSchemaSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SchemaSummary"}
+	iSchemaVersionSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SchemaVersionSummary"}
+	iSearchSchemaSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SearchSchemaSummary"}
+	iSearchSchemaVersionSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SearchSchemaVersionSummary"}
+	iServiceUnavailableException                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ServiceUnavailableException"}
+	i_SynthesizedJson__string                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SynthesizedJson__string"}
+	i_Tags                                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "Tags"}
+	iTooManyRequestsException                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "TooManyRequestsException"}
+	iType                                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "Type"}
+	iUnauthorizedException                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UnauthorizedException"}
+	iCreateDiscovererRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateDiscovererRequest"}
+	iCreateDiscovererResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateDiscovererResponse"}
+	iCreateRegistryRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateRegistryRequest"}
+	iCreateRegistryResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateRegistryResponse"}
+	iCreateSchemaRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateSchemaRequest"}
+	iCreateSchemaResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "CreateSchemaResponse"}
+	iDeleteDiscovererRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteDiscovererRequest"}
+	iDeleteRegistryRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteRegistryRequest"}
+	iDeleteResourcePolicyRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteResourcePolicyRequest"}
+	iDeleteSchemaRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteSchemaRequest"}
+	iDeleteSchemaVersionRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DeleteSchemaVersionRequest"}
+	iDescribeCodeBindingRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeCodeBindingRequest"}
+	iDescribeCodeBindingResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeCodeBindingResponse"}
+	iDescribeDiscovererRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeDiscovererRequest"}
+	iDescribeDiscovererResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeDiscovererResponse"}
+	iDescribeRegistryRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeRegistryRequest"}
+	iDescribeRegistryResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeRegistryResponse"}
+	iDescribeSchemaRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeSchemaRequest"}
+	iDescribeSchemaResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "DescribeSchemaResponse"}
+	iExportSchemaRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ExportSchemaRequest"}
+	iExportSchemaResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ExportSchemaResponse"}
+	iGetCodeBindingSourceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetCodeBindingSourceRequest"}
+	iGetCodeBindingSourceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetCodeBindingSourceResponse"}
+	iGetDiscoveredSchemaRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetDiscoveredSchemaRequest"}
+	iGetDiscoveredSchemaResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetDiscoveredSchemaResponse"}
+	iGetResourcePolicyRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "GetResourcePolicyResponse"}
+	iListDiscoverersRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListDiscoverersRequest"}
+	iListDiscoverersResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListDiscoverersResponse"}
+	iListRegistriesRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListRegistriesRequest"}
+	iListRegistriesResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListRegistriesResponse"}
+	iListSchemasRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListSchemasRequest"}
+	iListSchemasResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListSchemasResponse"}
+	iListSchemaVersionsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListSchemaVersionsRequest"}
+	iListSchemaVersionsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListSchemaVersionsResponse"}
+	iListTagsForResourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "ListTagsForResourceResponse"}
+	iPutCodeBindingRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "PutCodeBindingRequest"}
+	iPutCodeBindingResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "PutCodeBindingResponse"}
+	iPutResourcePolicyRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "PutResourcePolicyResponse"}
+	iSearchSchemasRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SearchSchemasRequest"}
+	iSearchSchemasResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "SearchSchemasResponse"}
+	iStartDiscovererRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "StartDiscovererRequest"}
+	iStartDiscovererResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "StartDiscovererResponse"}
+	iStopDiscovererRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "StopDiscovererRequest"}
+	iStopDiscovererResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "StopDiscovererResponse"}
+	iTagResourceRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "TagResourceRequest"}
+	iUntagResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UntagResourceRequest"}
+	iUpdateDiscovererRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateDiscovererRequest"}
+	iUpdateDiscovererResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateDiscovererResponse"}
+	iUpdateRegistryRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateRegistryRequest"}
+	iUpdateRegistryResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateRegistryResponse"}
+	iUpdateSchemaRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateSchemaRequest"}
+	iUpdateSchemaResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.schemas", Name: "UpdateSchemaResponse"}
+	pUnit                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/discoverers",
-	Code: 201})
-
-var CreateRegistry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateRegistry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/registries/name/{RegistryName}",
-	Code: 201})
-
-var CreateSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}",
-	Code: 201})
-
-var DeleteDiscoverer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteDiscoverer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/discoverers/id/{DiscovererId}",
-	Code: 204})
-
-var DeleteRegistry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteRegistry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/registries/name/{RegistryName}",
-	Code: 204})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/policy",
-	Code: 204})
-
-var DeleteSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}",
-	Code: 204})
-
-var DeleteSchemaVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteSchemaVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/version/{SchemaVersion}",
-	Code: 204})
-
-var DescribeCodeBinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeCodeBinding",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/language/{Language}",
-	Code: 200})
-
-var DescribeDiscoverer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeDiscoverer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/discoverers/id/{DiscovererId}",
-	Code: 200})
-
-var DescribeRegistry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeRegistry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}",
-	Code: 200})
-
-var DescribeSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}",
-	Code: 200})
-
-var ExportSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ExportSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/export",
-	Code: 200})
-
-var GetCodeBindingSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetCodeBindingSource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/language/{Language}/source",
-	Code: 200})
-
-var GetDiscoveredSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetDiscoveredSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/discover",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/policy",
-	Code: 200})
-
-var ListDiscoverers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListDiscoverers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/discoverers",
-	Code: 200})
-
-var ListRegistries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListRegistries",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries",
-	Code: 200})
-
-var ListSchemas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListSchemas",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}/schemas",
-	Code: 200})
-
-var ListSchemaVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListSchemaVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/versions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PutCodeBinding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "PutCodeBinding",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/language/{Language}",
-	Code: 202})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/policy",
-	Code: 200})
-
-var SearchSchemas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SearchSchemas",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/search",
-	Code: 200})
-
-var StartDiscoverer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "StartDiscoverer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/discoverers/id/{DiscovererId}/start",
-	Code: 200})
-
-var StopDiscoverer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "StopDiscoverer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/discoverers/id/{DiscovererId}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateDiscoverer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateDiscoverer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/discoverers/id/{DiscovererId}",
-	Code: 200})
-
-var UpdateRegistry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateRegistry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/registries/name/{RegistryName}",
-	Code: 200})
-
-var UpdateSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateSchema",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}",
-	Code: 200})
-
-var _schemas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "schemas",
-}, smithy.ShapeTypeService, 0)
-
-var Schemas = smithy.NewServiceSchema(_schemas, "2019-12-02")
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOfDiscovererSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOfDiscovererSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfDiscovererSummary_member *smithy.Schema
-
-var ___listOfGetDiscoveredSchemaVersionItemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOfGetDiscoveredSchemaVersionItemInput",
-}, smithy.ShapeTypeList, 1)
-var ___listOfGetDiscoveredSchemaVersionItemInput_member *smithy.Schema
-
-var ___listOfRegistrySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOfRegistrySummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRegistrySummary_member *smithy.Schema
-
-var ___listOfSchemaSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOfSchemaSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSchemaSummary_member *smithy.Schema
-
-var ___listOfSchemaVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOfSchemaVersionSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSchemaVersionSummary_member *smithy.Schema
-
-var ___listOfSearchSchemaSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOfSearchSchemaSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSearchSchemaSummary_member *smithy.Schema
-
-var ___listOfSearchSchemaVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__listOfSearchSchemaVersionSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSearchSchemaVersionSummary_member *smithy.Schema
-
-var ___long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__long",
-}, smithy.ShapeTypeLong, 0)
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin0Max256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__stringMin0Max256",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin0Max36 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__stringMin0Max36",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max100000 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__stringMin1Max100000",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin20Max1600 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__stringMin20Max1600",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "__timestampIso8601",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Code *smithy.Schema
-
-var BadRequestException_Message *smithy.Schema
-
-var _Body = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "Body",
-}, smithy.ShapeTypeBlob, 0)
-
-var CodeGenerationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CodeGenerationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var CodeGenerationStatus_CREATE_IN_PROGRESS *smithy.Schema
-
-var CodeGenerationStatus_CREATE_COMPLETE *smithy.Schema
-
-var CodeGenerationStatus_CREATE_FAILED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Code *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var DiscovererState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DiscovererState",
-}, smithy.ShapeTypeEnum, 2)
-var DiscovererState_STARTED *smithy.Schema
-
-var DiscovererState_STOPPED *smithy.Schema
-
-var DiscovererSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DiscovererSummary",
-}, smithy.ShapeTypeStructure, 6)
-var DiscovererSummary_DiscovererArn *smithy.Schema
-
-var DiscovererSummary_DiscovererId *smithy.Schema
-
-var DiscovererSummary_SourceArn *smithy.Schema
-
-var DiscovererSummary_State *smithy.Schema
-
-var DiscovererSummary_CrossAccount *smithy.Schema
-
-var DiscovererSummary_Tags *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_Code *smithy.Schema
-
-var ForbiddenException_Message *smithy.Schema
-
-var _GetDiscoveredSchemaVersionItemInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetDiscoveredSchemaVersionItemInput",
-}, smithy.ShapeTypeString, 0)
-
-var GoneException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GoneException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 410})
-var GoneException_Code *smithy.Schema
-
-var GoneException_Message *smithy.Schema
-
-var InternalServerErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "InternalServerErrorException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerErrorException_Code *smithy.Schema
-
-var InternalServerErrorException_Message *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Code *smithy.Schema
-
-var NotFoundException_Message *smithy.Schema
-
-var PreconditionFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "PreconditionFailedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 412})
-var PreconditionFailedException_Code *smithy.Schema
-
-var PreconditionFailedException_Message *smithy.Schema
-
-var RegistrySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "RegistrySummary",
-}, smithy.ShapeTypeStructure, 3)
-var RegistrySummary_RegistryArn *smithy.Schema
-
-var RegistrySummary_RegistryName *smithy.Schema
-
-var RegistrySummary_Tags *smithy.Schema
-
-var SchemaSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SchemaSummary",
-}, smithy.ShapeTypeStructure, 5)
-var SchemaSummary_LastModified *smithy.Schema
-
-var SchemaSummary_SchemaArn *smithy.Schema
-
-var SchemaSummary_SchemaName *smithy.Schema
-
-var SchemaSummary_Tags *smithy.Schema
-
-var SchemaSummary_VersionCount *smithy.Schema
-
-var SchemaVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SchemaVersionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var SchemaVersionSummary_SchemaArn *smithy.Schema
-
-var SchemaVersionSummary_SchemaName *smithy.Schema
-
-var SchemaVersionSummary_SchemaVersion *smithy.Schema
-
-var SchemaVersionSummary_Type *smithy.Schema
-
-var SearchSchemaSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SearchSchemaSummary",
-}, smithy.ShapeTypeStructure, 4)
-var SearchSchemaSummary_RegistryName *smithy.Schema
-
-var SearchSchemaSummary_SchemaArn *smithy.Schema
-
-var SearchSchemaSummary_SchemaName *smithy.Schema
-
-var SearchSchemaSummary_SchemaVersions *smithy.Schema
-
-var SearchSchemaVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SearchSchemaVersionSummary",
-}, smithy.ShapeTypeStructure, 3)
-var SearchSchemaVersionSummary_CreatedDate *smithy.Schema
-
-var SearchSchemaVersionSummary_SchemaVersion *smithy.Schema
-
-var SearchSchemaVersionSummary_Type *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Code *smithy.Schema
-
-var ServiceUnavailableException_Message *smithy.Schema
-
-var _SynthesizedJson__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SynthesizedJson__string",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Code *smithy.Schema
-
-var TooManyRequestsException_Message *smithy.Schema
-
-var Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "Type",
-}, smithy.ShapeTypeEnum, 2)
-var Type_OpenApi3 *smithy.Schema
-
-var Type_JSONSchemaDraft4 *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_Code *smithy.Schema
-
-var UnauthorizedException_Message *smithy.Schema
-
-var CreateDiscovererRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateDiscovererRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDiscovererRequest_Description *smithy.Schema
-
-var CreateDiscovererRequest_SourceArn *smithy.Schema
-
-var CreateDiscovererRequest_CrossAccount *smithy.Schema
-
-var CreateDiscovererRequest_Tags *smithy.Schema
-
-var CreateDiscovererResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateDiscovererResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDiscovererResponse_Description *smithy.Schema
-
-var CreateDiscovererResponse_DiscovererArn *smithy.Schema
-
-var CreateDiscovererResponse_DiscovererId *smithy.Schema
-
-var CreateDiscovererResponse_SourceArn *smithy.Schema
-
-var CreateDiscovererResponse_State *smithy.Schema
-
-var CreateDiscovererResponse_CrossAccount *smithy.Schema
-
-var CreateDiscovererResponse_Tags *smithy.Schema
-
-var CreateRegistryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateRegistryRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateRegistryRequest_Description *smithy.Schema
-
-var CreateRegistryRequest_RegistryName *smithy.Schema
-
-var CreateRegistryRequest_Tags *smithy.Schema
-
-var CreateRegistryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateRegistryResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateRegistryResponse_Description *smithy.Schema
-
-var CreateRegistryResponse_RegistryArn *smithy.Schema
-
-var CreateRegistryResponse_RegistryName *smithy.Schema
-
-var CreateRegistryResponse_Tags *smithy.Schema
-
-var CreateSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateSchemaRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateSchemaRequest_Content *smithy.Schema
-
-var CreateSchemaRequest_Description *smithy.Schema
-
-var CreateSchemaRequest_RegistryName *smithy.Schema
-
-var CreateSchemaRequest_SchemaName *smithy.Schema
-
-var CreateSchemaRequest_Tags *smithy.Schema
-
-var CreateSchemaRequest_Type *smithy.Schema
-
-var CreateSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "CreateSchemaResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSchemaResponse_Description *smithy.Schema
-
-var CreateSchemaResponse_LastModified *smithy.Schema
-
-var CreateSchemaResponse_SchemaArn *smithy.Schema
-
-var CreateSchemaResponse_SchemaName *smithy.Schema
-
-var CreateSchemaResponse_SchemaVersion *smithy.Schema
-
-var CreateSchemaResponse_Tags *smithy.Schema
-
-var CreateSchemaResponse_Type *smithy.Schema
-
-var CreateSchemaResponse_VersionCreatedDate *smithy.Schema
-
-var DeleteDiscovererRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteDiscovererRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDiscovererRequest_DiscovererId *smithy.Schema
-
-var DeleteRegistryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteRegistryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRegistryRequest_RegistryName *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyRequest_RegistryName *smithy.Schema
-
-var DeleteSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteSchemaRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSchemaRequest_RegistryName *smithy.Schema
-
-var DeleteSchemaRequest_SchemaName *smithy.Schema
-
-var DeleteSchemaVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DeleteSchemaVersionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSchemaVersionRequest_RegistryName *smithy.Schema
-
-var DeleteSchemaVersionRequest_SchemaName *smithy.Schema
-
-var DeleteSchemaVersionRequest_SchemaVersion *smithy.Schema
-
-var DescribeCodeBindingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeCodeBindingRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeCodeBindingRequest_Language *smithy.Schema
-
-var DescribeCodeBindingRequest_RegistryName *smithy.Schema
-
-var DescribeCodeBindingRequest_SchemaName *smithy.Schema
-
-var DescribeCodeBindingRequest_SchemaVersion *smithy.Schema
-
-var DescribeCodeBindingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeCodeBindingResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeCodeBindingResponse_CreationDate *smithy.Schema
-
-var DescribeCodeBindingResponse_LastModified *smithy.Schema
-
-var DescribeCodeBindingResponse_SchemaVersion *smithy.Schema
-
-var DescribeCodeBindingResponse_Status *smithy.Schema
-
-var DescribeDiscovererRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeDiscovererRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeDiscovererRequest_DiscovererId *smithy.Schema
-
-var DescribeDiscovererResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeDiscovererResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeDiscovererResponse_Description *smithy.Schema
-
-var DescribeDiscovererResponse_DiscovererArn *smithy.Schema
-
-var DescribeDiscovererResponse_DiscovererId *smithy.Schema
-
-var DescribeDiscovererResponse_SourceArn *smithy.Schema
-
-var DescribeDiscovererResponse_State *smithy.Schema
-
-var DescribeDiscovererResponse_CrossAccount *smithy.Schema
-
-var DescribeDiscovererResponse_Tags *smithy.Schema
-
-var DescribeRegistryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeRegistryRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRegistryRequest_RegistryName *smithy.Schema
-
-var DescribeRegistryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeRegistryResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeRegistryResponse_Description *smithy.Schema
-
-var DescribeRegistryResponse_RegistryArn *smithy.Schema
-
-var DescribeRegistryResponse_RegistryName *smithy.Schema
-
-var DescribeRegistryResponse_Tags *smithy.Schema
-
-var DescribeSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeSchemaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeSchemaRequest_RegistryName *smithy.Schema
-
-var DescribeSchemaRequest_SchemaName *smithy.Schema
-
-var DescribeSchemaRequest_SchemaVersion *smithy.Schema
-
-var DescribeSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "DescribeSchemaResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeSchemaResponse_Content *smithy.Schema
-
-var DescribeSchemaResponse_Description *smithy.Schema
-
-var DescribeSchemaResponse_LastModified *smithy.Schema
-
-var DescribeSchemaResponse_SchemaArn *smithy.Schema
-
-var DescribeSchemaResponse_SchemaName *smithy.Schema
-
-var DescribeSchemaResponse_SchemaVersion *smithy.Schema
-
-var DescribeSchemaResponse_Tags *smithy.Schema
-
-var DescribeSchemaResponse_Type *smithy.Schema
-
-var DescribeSchemaResponse_VersionCreatedDate *smithy.Schema
-
-var ExportSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ExportSchemaRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ExportSchemaRequest_RegistryName *smithy.Schema
-
-var ExportSchemaRequest_SchemaName *smithy.Schema
-
-var ExportSchemaRequest_SchemaVersion *smithy.Schema
-
-var ExportSchemaRequest_Type *smithy.Schema
-
-var ExportSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ExportSchemaResponse",
-}, smithy.ShapeTypeStructure, 5)
-var ExportSchemaResponse_Content *smithy.Schema
-
-var ExportSchemaResponse_SchemaArn *smithy.Schema
-
-var ExportSchemaResponse_SchemaName *smithy.Schema
-
-var ExportSchemaResponse_SchemaVersion *smithy.Schema
-
-var ExportSchemaResponse_Type *smithy.Schema
-
-var GetCodeBindingSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetCodeBindingSourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetCodeBindingSourceRequest_Language *smithy.Schema
-
-var GetCodeBindingSourceRequest_RegistryName *smithy.Schema
-
-var GetCodeBindingSourceRequest_SchemaName *smithy.Schema
-
-var GetCodeBindingSourceRequest_SchemaVersion *smithy.Schema
-
-var GetCodeBindingSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetCodeBindingSourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCodeBindingSourceResponse_Body *smithy.Schema
-
-var GetDiscoveredSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetDiscoveredSchemaRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDiscoveredSchemaRequest_Events *smithy.Schema
-
-var GetDiscoveredSchemaRequest_Type *smithy.Schema
-
-var GetDiscoveredSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetDiscoveredSchemaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDiscoveredSchemaResponse_Content *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_RegistryName *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyResponse_Policy *smithy.Schema
-
-var GetResourcePolicyResponse_RevisionId *smithy.Schema
-
-var ListDiscoverersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListDiscoverersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListDiscoverersRequest_DiscovererIdPrefix *smithy.Schema
-
-var ListDiscoverersRequest_Limit *smithy.Schema
-
-var ListDiscoverersRequest_NextToken *smithy.Schema
-
-var ListDiscoverersRequest_SourceArnPrefix *smithy.Schema
-
-var ListDiscoverersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListDiscoverersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDiscoverersResponse_Discoverers *smithy.Schema
-
-var ListDiscoverersResponse_NextToken *smithy.Schema
-
-var ListRegistriesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListRegistriesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRegistriesRequest_Limit *smithy.Schema
-
-var ListRegistriesRequest_NextToken *smithy.Schema
-
-var ListRegistriesRequest_RegistryNamePrefix *smithy.Schema
-
-var ListRegistriesRequest_Scope *smithy.Schema
-
-var ListRegistriesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListRegistriesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRegistriesResponse_NextToken *smithy.Schema
-
-var ListRegistriesResponse_Registries *smithy.Schema
-
-var ListSchemasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListSchemasRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSchemasRequest_Limit *smithy.Schema
-
-var ListSchemasRequest_NextToken *smithy.Schema
-
-var ListSchemasRequest_RegistryName *smithy.Schema
-
-var ListSchemasRequest_SchemaNamePrefix *smithy.Schema
-
-var ListSchemasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListSchemasResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSchemasResponse_NextToken *smithy.Schema
-
-var ListSchemasResponse_Schemas *smithy.Schema
-
-var ListSchemaVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListSchemaVersionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSchemaVersionsRequest_Limit *smithy.Schema
-
-var ListSchemaVersionsRequest_NextToken *smithy.Schema
-
-var ListSchemaVersionsRequest_RegistryName *smithy.Schema
-
-var ListSchemaVersionsRequest_SchemaName *smithy.Schema
-
-var ListSchemaVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListSchemaVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSchemaVersionsResponse_NextToken *smithy.Schema
-
-var ListSchemaVersionsResponse_SchemaVersions *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutCodeBindingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "PutCodeBindingRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutCodeBindingRequest_Language *smithy.Schema
-
-var PutCodeBindingRequest_RegistryName *smithy.Schema
-
-var PutCodeBindingRequest_SchemaName *smithy.Schema
-
-var PutCodeBindingRequest_SchemaVersion *smithy.Schema
-
-var PutCodeBindingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "PutCodeBindingResponse",
-}, smithy.ShapeTypeStructure, 4)
-var PutCodeBindingResponse_CreationDate *smithy.Schema
-
-var PutCodeBindingResponse_LastModified *smithy.Schema
-
-var PutCodeBindingResponse_SchemaVersion *smithy.Schema
-
-var PutCodeBindingResponse_Status *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyRequest_Policy *smithy.Schema
-
-var PutResourcePolicyRequest_RegistryName *smithy.Schema
-
-var PutResourcePolicyRequest_RevisionId *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyResponse_Policy *smithy.Schema
-
-var PutResourcePolicyResponse_RevisionId *smithy.Schema
-
-var SearchSchemasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SearchSchemasRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SearchSchemasRequest_Keywords *smithy.Schema
-
-var SearchSchemasRequest_Limit *smithy.Schema
-
-var SearchSchemasRequest_NextToken *smithy.Schema
-
-var SearchSchemasRequest_RegistryName *smithy.Schema
-
-var SearchSchemasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "SearchSchemasResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SearchSchemasResponse_NextToken *smithy.Schema
-
-var SearchSchemasResponse_Schemas *smithy.Schema
-
-var StartDiscovererRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "StartDiscovererRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartDiscovererRequest_DiscovererId *smithy.Schema
-
-var StartDiscovererResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "StartDiscovererResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartDiscovererResponse_DiscovererId *smithy.Schema
-
-var StartDiscovererResponse_State *smithy.Schema
-
-var StopDiscovererRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "StopDiscovererRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopDiscovererRequest_DiscovererId *smithy.Schema
-
-var StopDiscovererResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "StopDiscovererResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StopDiscovererResponse_DiscovererId *smithy.Schema
-
-var StopDiscovererResponse_State *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateDiscovererRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateDiscovererRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDiscovererRequest_Description *smithy.Schema
-
-var UpdateDiscovererRequest_DiscovererId *smithy.Schema
-
-var UpdateDiscovererRequest_CrossAccount *smithy.Schema
-
-var UpdateDiscovererResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateDiscovererResponse",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateDiscovererResponse_Description *smithy.Schema
-
-var UpdateDiscovererResponse_DiscovererArn *smithy.Schema
-
-var UpdateDiscovererResponse_DiscovererId *smithy.Schema
-
-var UpdateDiscovererResponse_SourceArn *smithy.Schema
-
-var UpdateDiscovererResponse_State *smithy.Schema
-
-var UpdateDiscovererResponse_CrossAccount *smithy.Schema
-
-var UpdateDiscovererResponse_Tags *smithy.Schema
-
-var UpdateRegistryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateRegistryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateRegistryRequest_Description *smithy.Schema
-
-var UpdateRegistryRequest_RegistryName *smithy.Schema
-
-var UpdateRegistryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateRegistryResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateRegistryResponse_Description *smithy.Schema
-
-var UpdateRegistryResponse_RegistryArn *smithy.Schema
-
-var UpdateRegistryResponse_RegistryName *smithy.Schema
-
-var UpdateRegistryResponse_Tags *smithy.Schema
-
-var UpdateSchemaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateSchemaRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateSchemaRequest_ClientTokenId *smithy.Schema
-
-var UpdateSchemaRequest_Content *smithy.Schema
-
-var UpdateSchemaRequest_Description *smithy.Schema
-
-var UpdateSchemaRequest_RegistryName *smithy.Schema
-
-var UpdateSchemaRequest_SchemaName *smithy.Schema
-
-var UpdateSchemaRequest_Type *smithy.Schema
-
-var UpdateSchemaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.schemas",
-	Name:      "UpdateSchemaResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateSchemaResponse_Description *smithy.Schema
-
-var UpdateSchemaResponse_LastModified *smithy.Schema
-
-var UpdateSchemaResponse_SchemaArn *smithy.Schema
-
-var UpdateSchemaResponse_SchemaName *smithy.Schema
-
-var UpdateSchemaResponse_SchemaVersion *smithy.Schema
-
-var UpdateSchemaResponse_Tags *smithy.Schema
-
-var UpdateSchemaResponse_Type *smithy.Schema
-
-var UpdateSchemaResponse_VersionCreatedDate *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	DiscovererState_STARTED = DiscovererState.AddMember("STARTED", smithyprelude.Unit)
-
-	DiscovererState_STOPPED = DiscovererState.AddMember("STOPPED", smithyprelude.Unit)
-
-	_Tags_key = _Tags.AddMember("key", ___string)
-
-	_Tags_value = _Tags.AddMember("value", ___string)
-
-	DiscovererSummary_DiscovererArn = DiscovererSummary.AddMember("DiscovererArn", ___string)
-
-	DiscovererSummary_DiscovererId = DiscovererSummary.AddMember("DiscovererId", ___string)
-
-	DiscovererSummary_SourceArn = DiscovererSummary.AddMember("SourceArn", ___string)
-
-	DiscovererSummary_State = DiscovererSummary.AddMember("State", DiscovererState)
-
-	DiscovererSummary_CrossAccount = DiscovererSummary.AddMember("CrossAccount", ___boolean)
-
-	DiscovererSummary_Tags = DiscovererSummary.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfDiscovererSummary_member = ___listOfDiscovererSummary.AddMember("member", DiscovererSummary)
-
-	___listOfGetDiscoveredSchemaVersionItemInput_member = ___listOfGetDiscoveredSchemaVersionItemInput.AddMember("member", _GetDiscoveredSchemaVersionItemInput)
-
-	RegistrySummary_RegistryArn = RegistrySummary.AddMember("RegistryArn", ___string)
-
-	RegistrySummary_RegistryName = RegistrySummary.AddMember("RegistryName", ___string)
-
-	RegistrySummary_Tags = RegistrySummary.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfRegistrySummary_member = ___listOfRegistrySummary.AddMember("member", RegistrySummary)
-
-	SchemaSummary_LastModified = SchemaSummary.AddMember("LastModified", ___timestampIso8601)
-
-	SchemaSummary_SchemaArn = SchemaSummary.AddMember("SchemaArn", ___string)
-
-	SchemaSummary_SchemaName = SchemaSummary.AddMember("SchemaName", ___string)
-
-	SchemaSummary_Tags = SchemaSummary.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	SchemaSummary_VersionCount = SchemaSummary.AddMember("VersionCount", ___long)
-
-	___listOfSchemaSummary_member = ___listOfSchemaSummary.AddMember("member", SchemaSummary)
-
-	Type_OpenApi3 = Type.AddMember("OpenApi3", smithyprelude.Unit)
-
-	Type_JSONSchemaDraft4 = Type.AddMember("JSONSchemaDraft4", smithyprelude.Unit)
-
-	SchemaVersionSummary_SchemaArn = SchemaVersionSummary.AddMember("SchemaArn", ___string)
-
-	SchemaVersionSummary_SchemaName = SchemaVersionSummary.AddMember("SchemaName", ___string)
-
-	SchemaVersionSummary_SchemaVersion = SchemaVersionSummary.AddMember("SchemaVersion", ___string)
-
-	SchemaVersionSummary_Type = SchemaVersionSummary.AddMember("Type", Type)
-
-	___listOfSchemaVersionSummary_member = ___listOfSchemaVersionSummary.AddMember("member", SchemaVersionSummary)
-
-	SearchSchemaVersionSummary_CreatedDate = SearchSchemaVersionSummary.AddMember("CreatedDate", ___timestampIso8601)
-
-	SearchSchemaVersionSummary_SchemaVersion = SearchSchemaVersionSummary.AddMember("SchemaVersion", ___string)
-
-	SearchSchemaVersionSummary_Type = SearchSchemaVersionSummary.AddMember("Type", Type)
-
-	___listOfSearchSchemaVersionSummary_member = ___listOfSearchSchemaVersionSummary.AddMember("member", SearchSchemaVersionSummary)
-
-	SearchSchemaSummary_RegistryName = SearchSchemaSummary.AddMember("RegistryName", ___string)
-
-	SearchSchemaSummary_SchemaArn = SearchSchemaSummary.AddMember("SchemaArn", ___string)
-
-	SearchSchemaSummary_SchemaName = SearchSchemaSummary.AddMember("SchemaName", ___string)
-
-	SearchSchemaSummary_SchemaVersions = SearchSchemaSummary.AddMember("SchemaVersions", ___listOfSearchSchemaVersionSummary)
-
-	___listOfSearchSchemaSummary_member = ___listOfSearchSchemaSummary.AddMember("member", SearchSchemaSummary)
-
-	BadRequestException_Code = BadRequestException.AddMember("Code", ___string)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", ___string)
-
-	CodeGenerationStatus_CREATE_IN_PROGRESS = CodeGenerationStatus.AddMember("CREATE_IN_PROGRESS", smithyprelude.Unit)
-
-	CodeGenerationStatus_CREATE_COMPLETE = CodeGenerationStatus.AddMember("CREATE_COMPLETE", smithyprelude.Unit)
-
-	CodeGenerationStatus_CREATE_FAILED = CodeGenerationStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	ConflictException_Code = ConflictException.AddMember("Code", ___string)
-
-	ConflictException_Message = ConflictException.AddMember("Message", ___string)
-
-	ForbiddenException_Code = ForbiddenException.AddMember("Code", ___string)
-
-	ForbiddenException_Message = ForbiddenException.AddMember("Message", ___string)
-
-	GoneException_Code = GoneException.AddMember("Code", ___string)
-
-	GoneException_Message = GoneException.AddMember("Message", ___string)
-
-	InternalServerErrorException_Code = InternalServerErrorException.AddMember("Code", ___string)
-
-	InternalServerErrorException_Message = InternalServerErrorException.AddMember("Message", ___string)
-
-	NotFoundException_Code = NotFoundException.AddMember("Code", ___string)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", ___string)
-
-	PreconditionFailedException_Code = PreconditionFailedException.AddMember("Code", ___string)
-
-	PreconditionFailedException_Message = PreconditionFailedException.AddMember("Message", ___string)
-
-	ServiceUnavailableException_Code = ServiceUnavailableException.AddMember("Code", ___string)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", ___string)
-
-	TooManyRequestsException_Code = TooManyRequestsException.AddMember("Code", ___string)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", ___string)
-
-	UnauthorizedException_Code = UnauthorizedException.AddMember("Code", ___string)
-
-	UnauthorizedException_Message = UnauthorizedException.AddMember("Message", ___string)
-
-	CreateDiscovererRequest_Description = CreateDiscovererRequest.AddMember("Description", ___stringMin0Max256)
-
-	CreateDiscovererRequest_SourceArn = CreateDiscovererRequest.AddMember("SourceArn", ___stringMin20Max1600)
-
-	CreateDiscovererRequest_CrossAccount = CreateDiscovererRequest.AddMember("CrossAccount", ___boolean)
-
-	CreateDiscovererRequest_Tags = CreateDiscovererRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateDiscovererResponse_Description = CreateDiscovererResponse.AddMember("Description", ___string)
-
-	CreateDiscovererResponse_DiscovererArn = CreateDiscovererResponse.AddMember("DiscovererArn", ___string)
-
-	CreateDiscovererResponse_DiscovererId = CreateDiscovererResponse.AddMember("DiscovererId", ___string)
-
-	CreateDiscovererResponse_SourceArn = CreateDiscovererResponse.AddMember("SourceArn", ___string)
-
-	CreateDiscovererResponse_State = CreateDiscovererResponse.AddMember("State", DiscovererState)
-
-	CreateDiscovererResponse_CrossAccount = CreateDiscovererResponse.AddMember("CrossAccount", ___boolean)
-
-	CreateDiscovererResponse_Tags = CreateDiscovererResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateRegistryRequest_Description = CreateRegistryRequest.AddMember("Description", ___stringMin0Max256)
-
-	CreateRegistryRequest_RegistryName = CreateRegistryRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateRegistryRequest_Tags = CreateRegistryRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateRegistryResponse_Description = CreateRegistryResponse.AddMember("Description", ___string)
-
-	CreateRegistryResponse_RegistryArn = CreateRegistryResponse.AddMember("RegistryArn", ___string)
-
-	CreateRegistryResponse_RegistryName = CreateRegistryResponse.AddMember("RegistryName", ___string)
-
-	CreateRegistryResponse_Tags = CreateRegistryResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateSchemaRequest_Content = CreateSchemaRequest.AddMember("Content", ___stringMin1Max100000)
-
-	CreateSchemaRequest_Description = CreateSchemaRequest.AddMember("Description", ___stringMin0Max256)
-
-	CreateSchemaRequest_RegistryName = CreateSchemaRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateSchemaRequest_SchemaName = CreateSchemaRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateSchemaRequest_Tags = CreateSchemaRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateSchemaRequest_Type = CreateSchemaRequest.AddMember("Type", Type)
-
-	CreateSchemaResponse_Description = CreateSchemaResponse.AddMember("Description", ___string)
-
-	CreateSchemaResponse_LastModified = CreateSchemaResponse.AddMember("LastModified", ___timestampIso8601)
-
-	CreateSchemaResponse_SchemaArn = CreateSchemaResponse.AddMember("SchemaArn", ___string)
-
-	CreateSchemaResponse_SchemaName = CreateSchemaResponse.AddMember("SchemaName", ___string)
-
-	CreateSchemaResponse_SchemaVersion = CreateSchemaResponse.AddMember("SchemaVersion", ___string)
-
-	CreateSchemaResponse_Tags = CreateSchemaResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateSchemaResponse_Type = CreateSchemaResponse.AddMember("Type", ___string)
-
-	CreateSchemaResponse_VersionCreatedDate = CreateSchemaResponse.AddMember("VersionCreatedDate", ___timestampIso8601)
-
-	DeleteDiscovererRequest_DiscovererId = DeleteDiscovererRequest.AddMember("DiscovererId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRegistryRequest_RegistryName = DeleteRegistryRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteResourcePolicyRequest_RegistryName = DeleteResourcePolicyRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPQuery{Name: "registryName"})
-
-	DeleteSchemaRequest_RegistryName = DeleteSchemaRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteSchemaRequest_SchemaName = DeleteSchemaRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteSchemaVersionRequest_RegistryName = DeleteSchemaVersionRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteSchemaVersionRequest_SchemaName = DeleteSchemaVersionRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteSchemaVersionRequest_SchemaVersion = DeleteSchemaVersionRequest.AddMember("SchemaVersion", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeCodeBindingRequest_Language = DescribeCodeBindingRequest.AddMember("Language", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeCodeBindingRequest_RegistryName = DescribeCodeBindingRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeCodeBindingRequest_SchemaName = DescribeCodeBindingRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeCodeBindingRequest_SchemaVersion = DescribeCodeBindingRequest.AddMember("SchemaVersion", ___string, &smithytraits.HTTPQuery{Name: "schemaVersion"})
-
-	DescribeCodeBindingResponse_CreationDate = DescribeCodeBindingResponse.AddMember("CreationDate", ___timestampIso8601)
-
-	DescribeCodeBindingResponse_LastModified = DescribeCodeBindingResponse.AddMember("LastModified", ___timestampIso8601)
-
-	DescribeCodeBindingResponse_SchemaVersion = DescribeCodeBindingResponse.AddMember("SchemaVersion", ___string)
-
-	DescribeCodeBindingResponse_Status = DescribeCodeBindingResponse.AddMember("Status", CodeGenerationStatus)
-
-	DescribeDiscovererRequest_DiscovererId = DescribeDiscovererRequest.AddMember("DiscovererId", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeDiscovererResponse_Description = DescribeDiscovererResponse.AddMember("Description", ___string)
-
-	DescribeDiscovererResponse_DiscovererArn = DescribeDiscovererResponse.AddMember("DiscovererArn", ___string)
-
-	DescribeDiscovererResponse_DiscovererId = DescribeDiscovererResponse.AddMember("DiscovererId", ___string)
-
-	DescribeDiscovererResponse_SourceArn = DescribeDiscovererResponse.AddMember("SourceArn", ___string)
-
-	DescribeDiscovererResponse_State = DescribeDiscovererResponse.AddMember("State", DiscovererState)
-
-	DescribeDiscovererResponse_CrossAccount = DescribeDiscovererResponse.AddMember("CrossAccount", ___boolean)
-
-	DescribeDiscovererResponse_Tags = DescribeDiscovererResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeRegistryRequest_RegistryName = DescribeRegistryRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeRegistryResponse_Description = DescribeRegistryResponse.AddMember("Description", ___string)
-
-	DescribeRegistryResponse_RegistryArn = DescribeRegistryResponse.AddMember("RegistryArn", ___string)
-
-	DescribeRegistryResponse_RegistryName = DescribeRegistryResponse.AddMember("RegistryName", ___string)
-
-	DescribeRegistryResponse_Tags = DescribeRegistryResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeSchemaRequest_RegistryName = DescribeSchemaRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeSchemaRequest_SchemaName = DescribeSchemaRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	DescribeSchemaRequest_SchemaVersion = DescribeSchemaRequest.AddMember("SchemaVersion", ___string, &smithytraits.HTTPQuery{Name: "schemaVersion"})
-
-	DescribeSchemaResponse_Content = DescribeSchemaResponse.AddMember("Content", ___string)
-
-	DescribeSchemaResponse_Description = DescribeSchemaResponse.AddMember("Description", ___string)
-
-	DescribeSchemaResponse_LastModified = DescribeSchemaResponse.AddMember("LastModified", ___timestampIso8601)
-
-	DescribeSchemaResponse_SchemaArn = DescribeSchemaResponse.AddMember("SchemaArn", ___string)
-
-	DescribeSchemaResponse_SchemaName = DescribeSchemaResponse.AddMember("SchemaName", ___string)
-
-	DescribeSchemaResponse_SchemaVersion = DescribeSchemaResponse.AddMember("SchemaVersion", ___string)
-
-	DescribeSchemaResponse_Tags = DescribeSchemaResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	DescribeSchemaResponse_Type = DescribeSchemaResponse.AddMember("Type", ___string)
-
-	DescribeSchemaResponse_VersionCreatedDate = DescribeSchemaResponse.AddMember("VersionCreatedDate", ___timestampIso8601)
-
-	ExportSchemaRequest_RegistryName = ExportSchemaRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	ExportSchemaRequest_SchemaName = ExportSchemaRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	ExportSchemaRequest_SchemaVersion = ExportSchemaRequest.AddMember("SchemaVersion", ___string, &smithytraits.HTTPQuery{Name: "schemaVersion"})
-
-	ExportSchemaRequest_Type = ExportSchemaRequest.AddMember("Type", ___string, &smithytraits.HTTPQuery{Name: "type"})
-
-	ExportSchemaResponse_Content = ExportSchemaResponse.AddMember("Content", ___string)
-
-	ExportSchemaResponse_SchemaArn = ExportSchemaResponse.AddMember("SchemaArn", ___string)
-
-	ExportSchemaResponse_SchemaName = ExportSchemaResponse.AddMember("SchemaName", ___string)
-
-	ExportSchemaResponse_SchemaVersion = ExportSchemaResponse.AddMember("SchemaVersion", ___string)
-
-	ExportSchemaResponse_Type = ExportSchemaResponse.AddMember("Type", ___string)
-
-	GetCodeBindingSourceRequest_Language = GetCodeBindingSourceRequest.AddMember("Language", ___string, &smithytraits.HTTPLabel{})
-
-	GetCodeBindingSourceRequest_RegistryName = GetCodeBindingSourceRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	GetCodeBindingSourceRequest_SchemaName = GetCodeBindingSourceRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	GetCodeBindingSourceRequest_SchemaVersion = GetCodeBindingSourceRequest.AddMember("SchemaVersion", ___string, &smithytraits.HTTPQuery{Name: "schemaVersion"})
-
-	GetCodeBindingSourceResponse_Body = GetCodeBindingSourceResponse.AddMember("Body", _Body, &smithytraits.HTTPPayload{})
-
-	GetDiscoveredSchemaRequest_Events = GetDiscoveredSchemaRequest.AddMember("Events", ___listOfGetDiscoveredSchemaVersionItemInput)
-
-	GetDiscoveredSchemaRequest_Type = GetDiscoveredSchemaRequest.AddMember("Type", Type)
-
-	GetDiscoveredSchemaResponse_Content = GetDiscoveredSchemaResponse.AddMember("Content", ___string)
-
-	GetResourcePolicyRequest_RegistryName = GetResourcePolicyRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPQuery{Name: "registryName"})
-
-	GetResourcePolicyResponse_Policy = GetResourcePolicyResponse.AddMember("Policy", _SynthesizedJson__string)
-
-	GetResourcePolicyResponse_RevisionId = GetResourcePolicyResponse.AddMember("RevisionId", ___string)
-
-	ListDiscoverersRequest_DiscovererIdPrefix = ListDiscoverersRequest.AddMember("DiscovererIdPrefix", ___string, &smithytraits.HTTPQuery{Name: "discovererIdPrefix"})
-
-	ListDiscoverersRequest_Limit = ListDiscoverersRequest.AddMember("Limit", ___integer, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListDiscoverersRequest_NextToken = ListDiscoverersRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDiscoverersRequest_SourceArnPrefix = ListDiscoverersRequest.AddMember("SourceArnPrefix", ___string, &smithytraits.HTTPQuery{Name: "sourceArnPrefix"})
-
-	ListDiscoverersResponse_Discoverers = ListDiscoverersResponse.AddMember("Discoverers", ___listOfDiscovererSummary)
-
-	ListDiscoverersResponse_NextToken = ListDiscoverersResponse.AddMember("NextToken", ___string)
-
-	ListRegistriesRequest_Limit = ListRegistriesRequest.AddMember("Limit", ___integer, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListRegistriesRequest_NextToken = ListRegistriesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRegistriesRequest_RegistryNamePrefix = ListRegistriesRequest.AddMember("RegistryNamePrefix", ___string, &smithytraits.HTTPQuery{Name: "registryNamePrefix"})
-
-	ListRegistriesRequest_Scope = ListRegistriesRequest.AddMember("Scope", ___string, &smithytraits.HTTPQuery{Name: "scope"})
-
-	ListRegistriesResponse_NextToken = ListRegistriesResponse.AddMember("NextToken", ___string)
-
-	ListRegistriesResponse_Registries = ListRegistriesResponse.AddMember("Registries", ___listOfRegistrySummary)
-
-	ListSchemasRequest_Limit = ListSchemasRequest.AddMember("Limit", ___integer, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListSchemasRequest_NextToken = ListSchemasRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSchemasRequest_RegistryName = ListSchemasRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	ListSchemasRequest_SchemaNamePrefix = ListSchemasRequest.AddMember("SchemaNamePrefix", ___string, &smithytraits.HTTPQuery{Name: "schemaNamePrefix"})
-
-	ListSchemasResponse_NextToken = ListSchemasResponse.AddMember("NextToken", ___string)
-
-	ListSchemasResponse_Schemas = ListSchemasResponse.AddMember("Schemas", ___listOfSchemaSummary)
-
-	ListSchemaVersionsRequest_Limit = ListSchemaVersionsRequest.AddMember("Limit", ___integer, &smithytraits.HTTPQuery{Name: "limit"})
-
-	ListSchemaVersionsRequest_NextToken = ListSchemaVersionsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSchemaVersionsRequest_RegistryName = ListSchemaVersionsRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	ListSchemaVersionsRequest_SchemaName = ListSchemaVersionsRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	ListSchemaVersionsResponse_NextToken = ListSchemaVersionsResponse.AddMember("NextToken", ___string)
-
-	ListSchemaVersionsResponse_SchemaVersions = ListSchemaVersionsResponse.AddMember("SchemaVersions", ___listOfSchemaVersionSummary)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	PutCodeBindingRequest_Language = PutCodeBindingRequest.AddMember("Language", ___string, &smithytraits.HTTPLabel{})
-
-	PutCodeBindingRequest_RegistryName = PutCodeBindingRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	PutCodeBindingRequest_SchemaName = PutCodeBindingRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	PutCodeBindingRequest_SchemaVersion = PutCodeBindingRequest.AddMember("SchemaVersion", ___string, &smithytraits.HTTPQuery{Name: "schemaVersion"})
-
-	PutCodeBindingResponse_CreationDate = PutCodeBindingResponse.AddMember("CreationDate", ___timestampIso8601)
-
-	PutCodeBindingResponse_LastModified = PutCodeBindingResponse.AddMember("LastModified", ___timestampIso8601)
-
-	PutCodeBindingResponse_SchemaVersion = PutCodeBindingResponse.AddMember("SchemaVersion", ___string)
-
-	PutCodeBindingResponse_Status = PutCodeBindingResponse.AddMember("Status", CodeGenerationStatus)
-
-	PutResourcePolicyRequest_Policy = PutResourcePolicyRequest.AddMember("Policy", _SynthesizedJson__string)
-
-	PutResourcePolicyRequest_RegistryName = PutResourcePolicyRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPQuery{Name: "registryName"})
-
-	PutResourcePolicyRequest_RevisionId = PutResourcePolicyRequest.AddMember("RevisionId", ___string)
-
-	PutResourcePolicyResponse_Policy = PutResourcePolicyResponse.AddMember("Policy", _SynthesizedJson__string)
-
-	PutResourcePolicyResponse_RevisionId = PutResourcePolicyResponse.AddMember("RevisionId", ___string)
-
-	SearchSchemasRequest_Keywords = SearchSchemasRequest.AddMember("Keywords", ___string, &smithytraits.HTTPQuery{Name: "keywords"})
-
-	SearchSchemasRequest_Limit = SearchSchemasRequest.AddMember("Limit", ___integer, &smithytraits.HTTPQuery{Name: "limit"})
-
-	SearchSchemasRequest_NextToken = SearchSchemasRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	SearchSchemasRequest_RegistryName = SearchSchemasRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	SearchSchemasResponse_NextToken = SearchSchemasResponse.AddMember("NextToken", ___string)
-
-	SearchSchemasResponse_Schemas = SearchSchemasResponse.AddMember("Schemas", ___listOfSearchSchemaSummary)
-
-	StartDiscovererRequest_DiscovererId = StartDiscovererRequest.AddMember("DiscovererId", ___string, &smithytraits.HTTPLabel{})
-
-	StartDiscovererResponse_DiscovererId = StartDiscovererResponse.AddMember("DiscovererId", ___string)
-
-	StartDiscovererResponse_State = StartDiscovererResponse.AddMember("State", DiscovererState)
-
-	StopDiscovererRequest_DiscovererId = StopDiscovererRequest.AddMember("DiscovererId", ___string, &smithytraits.HTTPLabel{})
-
-	StopDiscovererResponse_DiscovererId = StopDiscovererResponse.AddMember("DiscovererId", ___string)
-
-	StopDiscovererResponse_State = StopDiscovererResponse.AddMember("State", DiscovererState)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", ___listOf__string, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateDiscovererRequest_Description = UpdateDiscovererRequest.AddMember("Description", ___stringMin0Max256)
-
-	UpdateDiscovererRequest_DiscovererId = UpdateDiscovererRequest.AddMember("DiscovererId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateDiscovererRequest_CrossAccount = UpdateDiscovererRequest.AddMember("CrossAccount", ___boolean)
-
-	UpdateDiscovererResponse_Description = UpdateDiscovererResponse.AddMember("Description", ___string)
-
-	UpdateDiscovererResponse_DiscovererArn = UpdateDiscovererResponse.AddMember("DiscovererArn", ___string)
-
-	UpdateDiscovererResponse_DiscovererId = UpdateDiscovererResponse.AddMember("DiscovererId", ___string)
-
-	UpdateDiscovererResponse_SourceArn = UpdateDiscovererResponse.AddMember("SourceArn", ___string)
-
-	UpdateDiscovererResponse_State = UpdateDiscovererResponse.AddMember("State", DiscovererState)
-
-	UpdateDiscovererResponse_CrossAccount = UpdateDiscovererResponse.AddMember("CrossAccount", ___boolean)
-
-	UpdateDiscovererResponse_Tags = UpdateDiscovererResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateRegistryRequest_Description = UpdateRegistryRequest.AddMember("Description", ___stringMin0Max256)
-
-	UpdateRegistryRequest_RegistryName = UpdateRegistryRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRegistryResponse_Description = UpdateRegistryResponse.AddMember("Description", ___string)
-
-	UpdateRegistryResponse_RegistryArn = UpdateRegistryResponse.AddMember("RegistryArn", ___string)
-
-	UpdateRegistryResponse_RegistryName = UpdateRegistryResponse.AddMember("RegistryName", ___string)
-
-	UpdateRegistryResponse_Tags = UpdateRegistryResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateSchemaRequest_ClientTokenId = UpdateSchemaRequest.AddMember("ClientTokenId", ___stringMin0Max36)
-
-	UpdateSchemaRequest_Content = UpdateSchemaRequest.AddMember("Content", ___stringMin1Max100000)
-
-	UpdateSchemaRequest_Description = UpdateSchemaRequest.AddMember("Description", ___stringMin0Max256)
-
-	UpdateSchemaRequest_RegistryName = UpdateSchemaRequest.AddMember("RegistryName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateSchemaRequest_SchemaName = UpdateSchemaRequest.AddMember("SchemaName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateSchemaRequest_Type = UpdateSchemaRequest.AddMember("Type", Type)
-
-	UpdateSchemaResponse_Description = UpdateSchemaResponse.AddMember("Description", ___string)
-
-	UpdateSchemaResponse_LastModified = UpdateSchemaResponse.AddMember("LastModified", ___timestampIso8601)
-
-	UpdateSchemaResponse_SchemaArn = UpdateSchemaResponse.AddMember("SchemaArn", ___string)
-
-	UpdateSchemaResponse_SchemaName = UpdateSchemaResponse.AddMember("SchemaName", ___string)
-
-	UpdateSchemaResponse_SchemaVersion = UpdateSchemaResponse.AddMember("SchemaVersion", ___string)
-
-	UpdateSchemaResponse_Tags = UpdateSchemaResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateSchemaResponse_Type = UpdateSchemaResponse.AddMember("Type", ___string)
-
-	UpdateSchemaResponse_VersionCreatedDate = UpdateSchemaResponse.AddMember("VersionCreatedDate", ___timestampIso8601)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tags"}}, DirectMask: 0x1}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 410}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 412}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "registryName"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "schemaVersion"}}, DirectMask: 0x10}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "type"}}, DirectMask: 0x10}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "discovererIdPrefix"}}, DirectMask: 0x10}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "limit"}}, DirectMask: 0x10}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sourceArnPrefix"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "registryNamePrefix"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "scope"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "schemaNamePrefix"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "keywords"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var m___listOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__string_member}}
+var m___listOfDiscovererSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfDiscovererSummary_member}}
+var m___listOfGetDiscoveredSchemaVersionItemInput = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfGetDiscoveredSchemaVersionItemInput_member}}
+var m___listOfRegistrySummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRegistrySummary_member}}
+var m___listOfSchemaSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSchemaSummary_member}}
+var m___listOfSchemaVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSchemaVersionSummary_member}}
+var m___listOfSearchSchemaSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSearchSchemaSummary_member}}
+var m___listOfSearchSchemaVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSearchSchemaVersionSummary_member}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Code, &sBadRequestException_Message}}
+var mCodeGenerationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeGenerationStatus_CREATE_IN_PROGRESS, &sCodeGenerationStatus_CREATE_COMPLETE, &sCodeGenerationStatus_CREATE_FAILED}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Code, &sConflictException_Message}}
+var mDiscovererState = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscovererState_STARTED, &sDiscovererState_STOPPED}}
+var mDiscovererSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDiscovererSummary_DiscovererArn, &sDiscovererSummary_DiscovererId, &sDiscovererSummary_SourceArn, &sDiscovererSummary_State, &sDiscovererSummary_CrossAccount, &sDiscovererSummary_Tags}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_Code, &sForbiddenException_Message}}
+var mGoneException = smithy.SchemaMembers{List: []*smithy.Schema{&sGoneException_Code, &sGoneException_Message}}
+var mInternalServerErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerErrorException_Code, &sInternalServerErrorException_Message}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Code, &sNotFoundException_Message}}
+var mPreconditionFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sPreconditionFailedException_Code, &sPreconditionFailedException_Message}}
+var mRegistrySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrySummary_RegistryArn, &sRegistrySummary_RegistryName, &sRegistrySummary_Tags}}
+var mSchemaSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaSummary_LastModified, &sSchemaSummary_SchemaArn, &sSchemaSummary_SchemaName, &sSchemaSummary_Tags, &sSchemaSummary_VersionCount}}
+var mSchemaVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaVersionSummary_SchemaArn, &sSchemaVersionSummary_SchemaName, &sSchemaVersionSummary_SchemaVersion, &sSchemaVersionSummary_Type}}
+var mSearchSchemaSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSchemaSummary_RegistryName, &sSearchSchemaSummary_SchemaArn, &sSearchSchemaSummary_SchemaName, &sSearchSchemaSummary_SchemaVersions}}
+var mSearchSchemaVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSchemaVersionSummary_CreatedDate, &sSearchSchemaVersionSummary_SchemaVersion, &sSearchSchemaVersionSummary_Type}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Code, &sServiceUnavailableException_Message}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_Code, &sTooManyRequestsException_Message}}
+var mType = smithy.SchemaMembers{List: []*smithy.Schema{&sType_OpenApi3, &sType_JSONSchemaDraft4}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_Code, &sUnauthorizedException_Message}}
+var mCreateDiscovererRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDiscovererRequest_Description, &sCreateDiscovererRequest_SourceArn, &sCreateDiscovererRequest_CrossAccount, &sCreateDiscovererRequest_Tags}}
+var mCreateDiscovererResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDiscovererResponse_Description, &sCreateDiscovererResponse_DiscovererArn, &sCreateDiscovererResponse_DiscovererId, &sCreateDiscovererResponse_SourceArn, &sCreateDiscovererResponse_State, &sCreateDiscovererResponse_CrossAccount, &sCreateDiscovererResponse_Tags}}
+var mCreateRegistryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegistryRequest_Description, &sCreateRegistryRequest_RegistryName, &sCreateRegistryRequest_Tags}}
+var mCreateRegistryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRegistryResponse_Description, &sCreateRegistryResponse_RegistryArn, &sCreateRegistryResponse_RegistryName, &sCreateRegistryResponse_Tags}}
+var mCreateSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSchemaRequest_Content, &sCreateSchemaRequest_Description, &sCreateSchemaRequest_RegistryName, &sCreateSchemaRequest_SchemaName, &sCreateSchemaRequest_Tags, &sCreateSchemaRequest_Type}}
+var mCreateSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSchemaResponse_Description, &sCreateSchemaResponse_LastModified, &sCreateSchemaResponse_SchemaArn, &sCreateSchemaResponse_SchemaName, &sCreateSchemaResponse_SchemaVersion, &sCreateSchemaResponse_Tags, &sCreateSchemaResponse_Type, &sCreateSchemaResponse_VersionCreatedDate}}
+var mDeleteDiscovererRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDiscovererRequest_DiscovererId}}
+var mDeleteRegistryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRegistryRequest_RegistryName}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_RegistryName}}
+var mDeleteSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSchemaRequest_RegistryName, &sDeleteSchemaRequest_SchemaName}}
+var mDeleteSchemaVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSchemaVersionRequest_RegistryName, &sDeleteSchemaVersionRequest_SchemaName, &sDeleteSchemaVersionRequest_SchemaVersion}}
+var mDescribeCodeBindingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCodeBindingRequest_Language, &sDescribeCodeBindingRequest_RegistryName, &sDescribeCodeBindingRequest_SchemaName, &sDescribeCodeBindingRequest_SchemaVersion}}
+var mDescribeCodeBindingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCodeBindingResponse_CreationDate, &sDescribeCodeBindingResponse_LastModified, &sDescribeCodeBindingResponse_SchemaVersion, &sDescribeCodeBindingResponse_Status}}
+var mDescribeDiscovererRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDiscovererRequest_DiscovererId}}
+var mDescribeDiscovererResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDiscovererResponse_Description, &sDescribeDiscovererResponse_DiscovererArn, &sDescribeDiscovererResponse_DiscovererId, &sDescribeDiscovererResponse_SourceArn, &sDescribeDiscovererResponse_State, &sDescribeDiscovererResponse_CrossAccount, &sDescribeDiscovererResponse_Tags}}
+var mDescribeRegistryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRegistryRequest_RegistryName}}
+var mDescribeRegistryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRegistryResponse_Description, &sDescribeRegistryResponse_RegistryArn, &sDescribeRegistryResponse_RegistryName, &sDescribeRegistryResponse_Tags}}
+var mDescribeSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSchemaRequest_RegistryName, &sDescribeSchemaRequest_SchemaName, &sDescribeSchemaRequest_SchemaVersion}}
+var mDescribeSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSchemaResponse_Content, &sDescribeSchemaResponse_Description, &sDescribeSchemaResponse_LastModified, &sDescribeSchemaResponse_SchemaArn, &sDescribeSchemaResponse_SchemaName, &sDescribeSchemaResponse_SchemaVersion, &sDescribeSchemaResponse_Tags, &sDescribeSchemaResponse_Type, &sDescribeSchemaResponse_VersionCreatedDate}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 9, 0, 0, 5, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 2, 0,
+	0, 0, 4, 0, 1, 8, 0, 7,
+}}
+var mExportSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExportSchemaRequest_RegistryName, &sExportSchemaRequest_SchemaName, &sExportSchemaRequest_SchemaVersion, &sExportSchemaRequest_Type}}
+var mExportSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExportSchemaResponse_Content, &sExportSchemaResponse_SchemaArn, &sExportSchemaResponse_SchemaName, &sExportSchemaResponse_SchemaVersion, &sExportSchemaResponse_Type}}
+var mGetCodeBindingSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeBindingSourceRequest_Language, &sGetCodeBindingSourceRequest_RegistryName, &sGetCodeBindingSourceRequest_SchemaName, &sGetCodeBindingSourceRequest_SchemaVersion}}
+var mGetCodeBindingSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCodeBindingSourceResponse_Body}}
+var mGetDiscoveredSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDiscoveredSchemaRequest_Events, &sGetDiscoveredSchemaRequest_Type}}
+var mGetDiscoveredSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDiscoveredSchemaResponse_Content}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_RegistryName}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_Policy, &sGetResourcePolicyResponse_RevisionId}}
+var mListDiscoverersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoverersRequest_DiscovererIdPrefix, &sListDiscoverersRequest_Limit, &sListDiscoverersRequest_NextToken, &sListDiscoverersRequest_SourceArnPrefix}}
+var mListDiscoverersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDiscoverersResponse_Discoverers, &sListDiscoverersResponse_NextToken}}
+var mListRegistriesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegistriesRequest_Limit, &sListRegistriesRequest_NextToken, &sListRegistriesRequest_RegistryNamePrefix, &sListRegistriesRequest_Scope}}
+var mListRegistriesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegistriesResponse_NextToken, &sListRegistriesResponse_Registries}}
+var mListSchemasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchemasRequest_Limit, &sListSchemasRequest_NextToken, &sListSchemasRequest_RegistryName, &sListSchemasRequest_SchemaNamePrefix}}
+var mListSchemasResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchemasResponse_NextToken, &sListSchemasResponse_Schemas}}
+var mListSchemaVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchemaVersionsRequest_Limit, &sListSchemaVersionsRequest_NextToken, &sListSchemaVersionsRequest_RegistryName, &sListSchemaVersionsRequest_SchemaName}}
+var mListSchemaVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchemaVersionsResponse_NextToken, &sListSchemaVersionsResponse_SchemaVersions}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutCodeBindingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCodeBindingRequest_Language, &sPutCodeBindingRequest_RegistryName, &sPutCodeBindingRequest_SchemaName, &sPutCodeBindingRequest_SchemaVersion}}
+var mPutCodeBindingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCodeBindingResponse_CreationDate, &sPutCodeBindingResponse_LastModified, &sPutCodeBindingResponse_SchemaVersion, &sPutCodeBindingResponse_Status}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_Policy, &sPutResourcePolicyRequest_RegistryName, &sPutResourcePolicyRequest_RevisionId}}
+var mPutResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyResponse_Policy, &sPutResourcePolicyResponse_RevisionId}}
+var mSearchSchemasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSchemasRequest_Keywords, &sSearchSchemasRequest_Limit, &sSearchSchemasRequest_NextToken, &sSearchSchemasRequest_RegistryName}}
+var mSearchSchemasResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchSchemasResponse_NextToken, &sSearchSchemasResponse_Schemas}}
+var mStartDiscovererRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDiscovererRequest_DiscovererId}}
+var mStartDiscovererResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDiscovererResponse_DiscovererId, &sStartDiscovererResponse_State}}
+var mStopDiscovererRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDiscovererRequest_DiscovererId}}
+var mStopDiscovererResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopDiscovererResponse_DiscovererId, &sStopDiscovererResponse_State}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateDiscovererRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDiscovererRequest_Description, &sUpdateDiscovererRequest_DiscovererId, &sUpdateDiscovererRequest_CrossAccount}}
+var mUpdateDiscovererResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDiscovererResponse_Description, &sUpdateDiscovererResponse_DiscovererArn, &sUpdateDiscovererResponse_DiscovererId, &sUpdateDiscovererResponse_SourceArn, &sUpdateDiscovererResponse_State, &sUpdateDiscovererResponse_CrossAccount, &sUpdateDiscovererResponse_Tags}}
+var mUpdateRegistryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegistryRequest_Description, &sUpdateRegistryRequest_RegistryName}}
+var mUpdateRegistryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRegistryResponse_Description, &sUpdateRegistryResponse_RegistryArn, &sUpdateRegistryResponse_RegistryName, &sUpdateRegistryResponse_Tags}}
+var mUpdateSchemaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSchemaRequest_ClientTokenId, &sUpdateSchemaRequest_Content, &sUpdateSchemaRequest_Description, &sUpdateSchemaRequest_RegistryName, &sUpdateSchemaRequest_SchemaName, &sUpdateSchemaRequest_Type}}
+var mUpdateSchemaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSchemaResponse_Description, &sUpdateSchemaResponse_LastModified, &sUpdateSchemaResponse_SchemaArn, &sUpdateSchemaResponse_SchemaName, &sUpdateSchemaResponse_SchemaVersion, &sUpdateSchemaResponse_Tags, &sUpdateSchemaResponse_Type, &sUpdateSchemaResponse_VersionCreatedDate}}
+
+var sCreateDiscoverer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDiscoverer, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegistry, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchema, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteDiscoverer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDiscoverer, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegistry, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchema, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteSchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchemaVersion, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDescribeCodeBinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeBinding, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDescribeDiscoverer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDiscoverer, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDescribeRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRegistry, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDescribeSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSchema, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sExportSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSchema, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetCodeBindingSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeBindingSource, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetDiscoveredSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDiscoveredSchema, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListDiscoverers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverers, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListRegistries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegistries, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListSchemas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemas, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListSchemaVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemaVersions, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sPutCodeBinding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCodeBinding, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sSearchSchemas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSchemas, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sStartDiscoverer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDiscoverer, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sStopDiscoverer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDiscoverer, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sUpdateDiscoverer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDiscoverer, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sUpdateRegistry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegistry, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sUpdateSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchema, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var s_schemas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_schemas, Type: smithy.ShapeTypeService})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList})
+var s___listOfDiscovererSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfDiscovererSummary, Members: &m___listOfDiscovererSummary, Type: smithy.ShapeTypeList})
+var s___listOfGetDiscoveredSchemaVersionItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfGetDiscoveredSchemaVersionItemInput, Members: &m___listOfGetDiscoveredSchemaVersionItemInput, Type: smithy.ShapeTypeList})
+var s___listOfRegistrySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRegistrySummary, Members: &m___listOfRegistrySummary, Type: smithy.ShapeTypeList})
+var s___listOfSchemaSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSchemaSummary, Members: &m___listOfSchemaSummary, Type: smithy.ShapeTypeList})
+var s___listOfSchemaVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSchemaVersionSummary, Members: &m___listOfSchemaVersionSummary, Type: smithy.ShapeTypeList})
+var s___listOfSearchSchemaSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSearchSchemaSummary, Members: &m___listOfSearchSchemaSummary, Type: smithy.ShapeTypeList})
+var s___listOfSearchSchemaVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSearchSchemaVersionSummary, Members: &m___listOfSearchSchemaVersionSummary, Type: smithy.ShapeTypeList})
+var s___long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___long, Type: smithy.ShapeTypeLong})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString})
+var s___stringMin0Max256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin0Max256, Type: smithy.ShapeTypeString})
+var s___stringMin0Max36 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin0Max36, Type: smithy.ShapeTypeString})
+var s___stringMin1Max100000 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max100000, Type: smithy.ShapeTypeString})
+var s___stringMin20Max1600 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin20Max1600, Type: smithy.ShapeTypeString})
+var s___timestampIso8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampIso8601, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var s_Body = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Body, Type: smithy.ShapeTypeBlob})
+var sCodeGenerationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeGenerationStatus, Members: &mCodeGenerationStatus, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sDiscovererState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscovererState, Members: &mDiscovererState, Type: smithy.ShapeTypeEnum})
+var sDiscovererSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiscovererSummary, Members: &mDiscovererSummary, Type: smithy.ShapeTypeStructure})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t35, Type: smithy.ShapeTypeStructure})
+var s_GetDiscoveredSchemaVersionItemInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetDiscoveredSchemaVersionItemInput, Type: smithy.ShapeTypeString})
+var sGoneException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGoneException, Members: &mGoneException, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sInternalServerErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerErrorException, Members: &mInternalServerErrorException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sPreconditionFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreconditionFailedException, Members: &mPreconditionFailedException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sRegistrySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrySummary, Members: &mRegistrySummary, Type: smithy.ShapeTypeStructure})
+var sSchemaSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaSummary, Members: &mSchemaSummary, Type: smithy.ShapeTypeStructure})
+var sSchemaVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaVersionSummary, Members: &mSchemaVersionSummary, Type: smithy.ShapeTypeStructure})
+var sSearchSchemaSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSchemaSummary, Members: &mSearchSchemaSummary, Type: smithy.ShapeTypeStructure})
+var sSearchSchemaVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSchemaVersionSummary, Members: &mSearchSchemaVersionSummary, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var s_SynthesizedJson__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJson__string, Traits: &t42, Type: smithy.ShapeTypeString})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var sType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var sCreateDiscovererRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDiscovererRequest, Members: &mCreateDiscovererRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDiscovererResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDiscovererResponse, Members: &mCreateDiscovererResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRegistryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegistryRequest, Members: &mCreateRegistryRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRegistryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRegistryResponse, Members: &mCreateRegistryResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchemaRequest, Members: &mCreateSchemaRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchemaResponse, Members: &mCreateSchemaResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDiscovererRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDiscovererRequest, Members: &mDeleteDiscovererRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRegistryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRegistryRequest, Members: &mDeleteRegistryRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchemaRequest, Members: &mDeleteSchemaRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSchemaVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchemaVersionRequest, Members: &mDeleteSchemaVersionRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCodeBindingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeBindingRequest, Members: &mDescribeCodeBindingRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCodeBindingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCodeBindingResponse, Members: &mDescribeCodeBindingResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeDiscovererRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDiscovererRequest, Members: &mDescribeDiscovererRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDiscovererResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDiscovererResponse, Members: &mDescribeDiscovererResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeRegistryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRegistryRequest, Members: &mDescribeRegistryRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRegistryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRegistryResponse, Members: &mDescribeRegistryResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSchemaRequest, Members: &mDescribeSchemaRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSchemaResponse, Members: &mDescribeSchemaResponse, Type: smithy.ShapeTypeStructure})
+var sExportSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSchemaRequest, Members: &mExportSchemaRequest, Type: smithy.ShapeTypeStructure})
+var sExportSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSchemaResponse, Members: &mExportSchemaResponse, Type: smithy.ShapeTypeStructure})
+var sGetCodeBindingSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeBindingSourceRequest, Members: &mGetCodeBindingSourceRequest, Type: smithy.ShapeTypeStructure})
+var sGetCodeBindingSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCodeBindingSourceResponse, Members: &mGetCodeBindingSourceResponse, Type: smithy.ShapeTypeStructure})
+var sGetDiscoveredSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDiscoveredSchemaRequest, Members: &mGetDiscoveredSchemaRequest, Type: smithy.ShapeTypeStructure})
+var sGetDiscoveredSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDiscoveredSchemaResponse, Members: &mGetDiscoveredSchemaResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sListDiscoverersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverersRequest, Members: &mListDiscoverersRequest, Type: smithy.ShapeTypeStructure})
+var sListDiscoverersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDiscoverersResponse, Members: &mListDiscoverersResponse, Type: smithy.ShapeTypeStructure})
+var sListRegistriesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegistriesRequest, Members: &mListRegistriesRequest, Type: smithy.ShapeTypeStructure})
+var sListRegistriesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegistriesResponse, Members: &mListRegistriesResponse, Type: smithy.ShapeTypeStructure})
+var sListSchemasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemasRequest, Members: &mListSchemasRequest, Type: smithy.ShapeTypeStructure})
+var sListSchemasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemasResponse, Members: &mListSchemasResponse, Type: smithy.ShapeTypeStructure})
+var sListSchemaVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemaVersionsRequest, Members: &mListSchemaVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListSchemaVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchemaVersionsResponse, Members: &mListSchemaVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutCodeBindingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCodeBindingRequest, Members: &mPutCodeBindingRequest, Type: smithy.ShapeTypeStructure})
+var sPutCodeBindingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCodeBindingResponse, Members: &mPutCodeBindingResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sSearchSchemasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSchemasRequest, Members: &mSearchSchemasRequest, Type: smithy.ShapeTypeStructure})
+var sSearchSchemasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchSchemasResponse, Members: &mSearchSchemasResponse, Type: smithy.ShapeTypeStructure})
+var sStartDiscovererRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDiscovererRequest, Members: &mStartDiscovererRequest, Type: smithy.ShapeTypeStructure})
+var sStartDiscovererResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDiscovererResponse, Members: &mStartDiscovererResponse, Type: smithy.ShapeTypeStructure})
+var sStopDiscovererRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDiscovererRequest, Members: &mStopDiscovererRequest, Type: smithy.ShapeTypeStructure})
+var sStopDiscovererResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopDiscovererResponse, Members: &mStopDiscovererResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDiscovererRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDiscovererRequest, Members: &mUpdateDiscovererRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDiscovererResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDiscovererResponse, Members: &mUpdateDiscovererResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRegistryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegistryRequest, Members: &mUpdateRegistryRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRegistryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRegistryResponse, Members: &mUpdateRegistryResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSchemaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchemaRequest, Members: &mUpdateSchemaRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSchemaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchemaResponse, Members: &mUpdateSchemaResponse, Type: smithy.ShapeTypeStructure})
+
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString})
+var s___listOfDiscovererSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDiscovererSummary, Members: &mDiscovererSummary, Type: smithy.ShapeTypeStructure})
+var s___listOfGetDiscoveredSchemaVersionItemInput_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GetDiscoveredSchemaVersionItemInput, Type: smithy.ShapeTypeString})
+var s___listOfRegistrySummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegistrySummary, Members: &mRegistrySummary, Type: smithy.ShapeTypeStructure})
+var s___listOfSchemaSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaSummary, Members: &mSchemaSummary, Type: smithy.ShapeTypeStructure})
+var s___listOfSchemaVersionSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchemaVersionSummary, Members: &mSchemaVersionSummary, Type: smithy.ShapeTypeStructure})
+var s___listOfSearchSchemaSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchSchemaSummary, Members: &mSearchSchemaSummary, Type: smithy.ShapeTypeStructure})
+var s___listOfSearchSchemaVersionSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchSchemaVersionSummary, Members: &mSearchSchemaVersionSummary, Type: smithy.ShapeTypeStructure})
+var sBadRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCodeGenerationStatus_CREATE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCodeGenerationStatus_CREATE_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCodeGenerationStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDiscovererState_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDiscovererState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDiscovererSummary_DiscovererArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDiscovererSummary_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDiscovererSummary_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDiscovererSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDiscovererState, Members: &mDiscovererState, Type: smithy.ShapeTypeEnum})
+var sDiscovererSummary_CrossAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccount", ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var sDiscovererSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sForbiddenException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sGoneException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sGoneException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sInternalServerErrorException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sInternalServerErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sPreconditionFailedException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sPreconditionFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sRegistrySummary_RegistryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sRegistrySummary_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sRegistrySummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sSchemaSummary_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sSchemaSummary_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSchemaSummary_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSchemaSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sSchemaSummary_VersionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionCount", ID: &i___long, Type: smithy.ShapeTypeLong})
+var sSchemaVersionSummary_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSchemaVersionSummary_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSchemaVersionSummary_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSchemaVersionSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sSearchSchemaSummary_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSearchSchemaSummary_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSearchSchemaSummary_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSearchSchemaSummary_SchemaVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersions", ID: &i___listOfSearchSchemaVersionSummary, Members: &m___listOfSearchSchemaVersionSummary, Type: smithy.ShapeTypeList})
+var sSearchSchemaVersionSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sSearchSchemaVersionSummary_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSearchSchemaVersionSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sServiceUnavailableException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i___string, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sType_OpenApi3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenApi3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sType_JSONSchemaDraft4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSONSchemaDraft4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUnauthorizedException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUnauthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateDiscovererRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max256, Type: smithy.ShapeTypeString})
+var sCreateDiscovererRequest_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i___stringMin20Max1600, Type: smithy.ShapeTypeString})
+var sCreateDiscovererRequest_CrossAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccount", ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateDiscovererRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sCreateDiscovererResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateDiscovererResponse_DiscovererArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateDiscovererResponse_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateDiscovererResponse_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateDiscovererResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDiscovererState, Members: &mDiscovererState, Type: smithy.ShapeTypeEnum})
+var sCreateDiscovererResponse_CrossAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccount", ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateDiscovererResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sCreateRegistryRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max256, Type: smithy.ShapeTypeString})
+var sCreateRegistryRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sCreateRegistryRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sCreateRegistryResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateRegistryResponse_RegistryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateRegistryResponse_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateRegistryResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sCreateSchemaRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i___stringMin1Max100000, Type: smithy.ShapeTypeString})
+var sCreateSchemaRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max256, Type: smithy.ShapeTypeString})
+var sCreateSchemaRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sCreateSchemaRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sCreateSchemaRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sCreateSchemaRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sCreateSchemaResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateSchemaResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sCreateSchemaResponse_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateSchemaResponse_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateSchemaResponse_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateSchemaResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sCreateSchemaResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCreateSchemaResponse_VersionCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionCreatedDate", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sDeleteDiscovererRequest_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDeleteRegistryRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t46, Type: smithy.ShapeTypeString})
+var sDeleteSchemaRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDeleteSchemaRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDeleteSchemaVersionRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDeleteSchemaVersionRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDeleteSchemaVersionRequest_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeCodeBindingRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeCodeBindingRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeCodeBindingRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeCodeBindingRequest_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Traits: &t47, Type: smithy.ShapeTypeString})
+var sDescribeCodeBindingResponse_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sDescribeCodeBindingResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sDescribeCodeBindingResponse_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeCodeBindingResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCodeGenerationStatus, Members: &mCodeGenerationStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeDiscovererRequest_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeDiscovererResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeDiscovererResponse_DiscovererArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeDiscovererResponse_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeDiscovererResponse_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeDiscovererResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDiscovererState, Members: &mDiscovererState, Type: smithy.ShapeTypeEnum})
+var sDescribeDiscovererResponse_CrossAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccount", ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeDiscovererResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sDescribeRegistryRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeRegistryResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeRegistryResponse_RegistryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeRegistryResponse_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeRegistryResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sDescribeSchemaRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeSchemaRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sDescribeSchemaRequest_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Traits: &t47, Type: smithy.ShapeTypeString})
+var sDescribeSchemaResponse_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeSchemaResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeSchemaResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sDescribeSchemaResponse_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeSchemaResponse_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeSchemaResponse_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeSchemaResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sDescribeSchemaResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i___string, Type: smithy.ShapeTypeString})
+var sDescribeSchemaResponse_VersionCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionCreatedDate", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sExportSchemaRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sExportSchemaRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sExportSchemaRequest_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Traits: &t47, Type: smithy.ShapeTypeString})
+var sExportSchemaRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i___string, Traits: &t48, Type: smithy.ShapeTypeString})
+var sExportSchemaResponse_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i___string, Type: smithy.ShapeTypeString})
+var sExportSchemaResponse_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sExportSchemaResponse_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sExportSchemaResponse_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sExportSchemaResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i___string, Type: smithy.ShapeTypeString})
+var sGetCodeBindingSourceRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sGetCodeBindingSourceRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sGetCodeBindingSourceRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sGetCodeBindingSourceRequest_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetCodeBindingSourceResponse_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_Body, Traits: &t49, Type: smithy.ShapeTypeBlob})
+var sGetDiscoveredSchemaRequest_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i___listOfGetDiscoveredSchemaVersionItemInput, Members: &m___listOfGetDiscoveredSchemaVersionItemInput, Type: smithy.ShapeTypeList})
+var sGetDiscoveredSchemaRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sGetDiscoveredSchemaResponse_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i___string, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_SynthesizedJson__string, Traits: &t50, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sListDiscoverersRequest_DiscovererIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererIdPrefix", ID: &i___string, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListDiscoverersRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i___integer, Traits: &t52, Type: smithy.ShapeTypeInteger})
+var sListDiscoverersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListDiscoverersRequest_SourceArnPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArnPrefix", ID: &i___string, Traits: &t54, Type: smithy.ShapeTypeString})
+var sListDiscoverersResponse_Discoverers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Discoverers", ID: &i___listOfDiscovererSummary, Members: &m___listOfDiscovererSummary, Type: smithy.ShapeTypeList})
+var sListDiscoverersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString})
+var sListRegistriesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i___integer, Traits: &t52, Type: smithy.ShapeTypeInteger})
+var sListRegistriesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListRegistriesRequest_RegistryNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryNamePrefix", ID: &i___string, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListRegistriesRequest_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &i___string, Traits: &t56, Type: smithy.ShapeTypeString})
+var sListRegistriesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString})
+var sListRegistriesResponse_Registries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Registries", ID: &i___listOfRegistrySummary, Members: &m___listOfRegistrySummary, Type: smithy.ShapeTypeList})
+var sListSchemasRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i___integer, Traits: &t52, Type: smithy.ShapeTypeInteger})
+var sListSchemasRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListSchemasRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sListSchemasRequest_SchemaNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaNamePrefix", ID: &i___string, Traits: &t57, Type: smithy.ShapeTypeString})
+var sListSchemasResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString})
+var sListSchemasResponse_Schemas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schemas", ID: &i___listOfSchemaSummary, Members: &m___listOfSchemaSummary, Type: smithy.ShapeTypeList})
+var sListSchemaVersionsRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i___integer, Traits: &t52, Type: smithy.ShapeTypeInteger})
+var sListSchemaVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListSchemaVersionsRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sListSchemaVersionsRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sListSchemaVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString})
+var sListSchemaVersionsResponse_SchemaVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersions", ID: &i___listOfSchemaVersionSummary, Members: &m___listOfSchemaVersionSummary, Type: smithy.ShapeTypeList})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sPutCodeBindingRequest_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sPutCodeBindingRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sPutCodeBindingRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sPutCodeBindingRequest_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Traits: &t47, Type: smithy.ShapeTypeString})
+var sPutCodeBindingResponse_CreationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationDate", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sPutCodeBindingResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sPutCodeBindingResponse_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sPutCodeBindingResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCodeGenerationStatus, Members: &mCodeGenerationStatus, Type: smithy.ShapeTypeEnum})
+var sPutResourcePolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_SynthesizedJson__string, Traits: &t50, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t46, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_SynthesizedJson__string, Traits: &t50, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSearchSchemasRequest_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i___string, Traits: &t58, Type: smithy.ShapeTypeString})
+var sSearchSchemasRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i___integer, Traits: &t52, Type: smithy.ShapeTypeInteger})
+var sSearchSchemasRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t53, Type: smithy.ShapeTypeString})
+var sSearchSchemasRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sSearchSchemasResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSearchSchemasResponse_Schemas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schemas", ID: &i___listOfSearchSchemaSummary, Members: &m___listOfSearchSchemaSummary, Type: smithy.ShapeTypeList})
+var sStartDiscovererRequest_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sStartDiscovererResponse_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sStartDiscovererResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDiscovererState, Members: &mDiscovererState, Type: smithy.ShapeTypeEnum})
+var sStopDiscovererRequest_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sStopDiscovererResponse_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sStopDiscovererResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDiscovererState, Members: &mDiscovererState, Type: smithy.ShapeTypeEnum})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t59, Type: smithy.ShapeTypeList})
+var sUpdateDiscovererRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max256, Type: smithy.ShapeTypeString})
+var sUpdateDiscovererRequest_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateDiscovererRequest_CrossAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccount", ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateDiscovererResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateDiscovererResponse_DiscovererArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateDiscovererResponse_DiscovererId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscovererId", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateDiscovererResponse_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateDiscovererResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDiscovererState, Members: &mDiscovererState, Type: smithy.ShapeTypeEnum})
+var sUpdateDiscovererResponse_CrossAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CrossAccount", ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateDiscovererResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sUpdateRegistryRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max256, Type: smithy.ShapeTypeString})
+var sUpdateRegistryRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateRegistryResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateRegistryResponse_RegistryArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateRegistryResponse_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateRegistryResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sUpdateSchemaRequest_ClientTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientTokenId", ID: &i___stringMin0Max36, Type: smithy.ShapeTypeString})
+var sUpdateSchemaRequest_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &i___stringMin1Max100000, Type: smithy.ShapeTypeString})
+var sUpdateSchemaRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max256, Type: smithy.ShapeTypeString})
+var sUpdateSchemaRequest_RegistryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateSchemaRequest_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Traits: &t45, Type: smithy.ShapeTypeString})
+var sUpdateSchemaRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iType, Members: &mType, Type: smithy.ShapeTypeEnum})
+var sUpdateSchemaResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateSchemaResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+var sUpdateSchemaResponse_SchemaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaArn", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateSchemaResponse_SchemaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaName", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateSchemaResponse_SchemaVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaVersion", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateSchemaResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t34, Type: smithy.ShapeTypeMap})
+var sUpdateSchemaResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i___string, Type: smithy.ShapeTypeString})
+var sUpdateSchemaResponse_VersionCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionCreatedDate", ID: &i___timestampIso8601, Traits: &t40, Type: smithy.ShapeTypeTimestamp})
+
+var CreateDiscoverer = &sCreateDiscoverer
+
+var CreateRegistry = &sCreateRegistry
+
+var CreateSchema = &sCreateSchema
+
+var DeleteDiscoverer = &sDeleteDiscoverer
+
+var DeleteRegistry = &sDeleteRegistry
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteSchema = &sDeleteSchema
+
+var DeleteSchemaVersion = &sDeleteSchemaVersion
+
+var DescribeCodeBinding = &sDescribeCodeBinding
+
+var DescribeDiscoverer = &sDescribeDiscoverer
+
+var DescribeRegistry = &sDescribeRegistry
+
+var DescribeSchema = &sDescribeSchema
+
+var ExportSchema = &sExportSchema
+
+var GetCodeBindingSource = &sGetCodeBindingSource
+
+var GetDiscoveredSchema = &sGetDiscoveredSchema
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var ListDiscoverers = &sListDiscoverers
+
+var ListRegistries = &sListRegistries
+
+var ListSchemas = &sListSchemas
+
+var ListSchemaVersions = &sListSchemaVersions
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutCodeBinding = &sPutCodeBinding
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var SearchSchemas = &sSearchSchemas
+
+var StartDiscoverer = &sStartDiscoverer
+
+var StopDiscoverer = &sStopDiscoverer
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDiscoverer = &sUpdateDiscoverer
+
+var UpdateRegistry = &sUpdateRegistry
+
+var UpdateSchema = &sUpdateSchema
+
+var _schemas = &s_schemas
+
+var ___boolean = &s___boolean
+
+var ___integer = &s___integer
+
+var ___listOf__string = &s___listOf__string
+var ___listOf__string_member = &s___listOf__string_member
+
+var ___listOfDiscovererSummary = &s___listOfDiscovererSummary
+var ___listOfDiscovererSummary_member = &s___listOfDiscovererSummary_member
+
+var ___listOfGetDiscoveredSchemaVersionItemInput = &s___listOfGetDiscoveredSchemaVersionItemInput
+var ___listOfGetDiscoveredSchemaVersionItemInput_member = &s___listOfGetDiscoveredSchemaVersionItemInput_member
+
+var ___listOfRegistrySummary = &s___listOfRegistrySummary
+var ___listOfRegistrySummary_member = &s___listOfRegistrySummary_member
+
+var ___listOfSchemaSummary = &s___listOfSchemaSummary
+var ___listOfSchemaSummary_member = &s___listOfSchemaSummary_member
+
+var ___listOfSchemaVersionSummary = &s___listOfSchemaVersionSummary
+var ___listOfSchemaVersionSummary_member = &s___listOfSchemaVersionSummary_member
+
+var ___listOfSearchSchemaSummary = &s___listOfSearchSchemaSummary
+var ___listOfSearchSchemaSummary_member = &s___listOfSearchSchemaSummary_member
+
+var ___listOfSearchSchemaVersionSummary = &s___listOfSearchSchemaVersionSummary
+var ___listOfSearchSchemaVersionSummary_member = &s___listOfSearchSchemaVersionSummary_member
+
+var ___long = &s___long
+
+var ___string = &s___string
+
+var ___stringMin0Max256 = &s___stringMin0Max256
+
+var ___stringMin0Max36 = &s___stringMin0Max36
+
+var ___stringMin1Max100000 = &s___stringMin1Max100000
+
+var ___stringMin20Max1600 = &s___stringMin20Max1600
+
+var ___timestampIso8601 = &s___timestampIso8601
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Code = &sBadRequestException_Code
+var BadRequestException_Message = &sBadRequestException_Message
+
+var _Body = &s_Body
+
+var CodeGenerationStatus = &sCodeGenerationStatus
+var CodeGenerationStatus_CREATE_IN_PROGRESS = &sCodeGenerationStatus_CREATE_IN_PROGRESS
+var CodeGenerationStatus_CREATE_COMPLETE = &sCodeGenerationStatus_CREATE_COMPLETE
+var CodeGenerationStatus_CREATE_FAILED = &sCodeGenerationStatus_CREATE_FAILED
+
+var ConflictException = &sConflictException
+var ConflictException_Code = &sConflictException_Code
+var ConflictException_Message = &sConflictException_Message
+
+var DiscovererState = &sDiscovererState
+var DiscovererState_STARTED = &sDiscovererState_STARTED
+var DiscovererState_STOPPED = &sDiscovererState_STOPPED
+
+var DiscovererSummary = &sDiscovererSummary
+var DiscovererSummary_DiscovererArn = &sDiscovererSummary_DiscovererArn
+var DiscovererSummary_DiscovererId = &sDiscovererSummary_DiscovererId
+var DiscovererSummary_SourceArn = &sDiscovererSummary_SourceArn
+var DiscovererSummary_State = &sDiscovererSummary_State
+var DiscovererSummary_CrossAccount = &sDiscovererSummary_CrossAccount
+var DiscovererSummary_Tags = &sDiscovererSummary_Tags
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_Code = &sForbiddenException_Code
+var ForbiddenException_Message = &sForbiddenException_Message
+
+var _GetDiscoveredSchemaVersionItemInput = &s_GetDiscoveredSchemaVersionItemInput
+
+var GoneException = &sGoneException
+var GoneException_Code = &sGoneException_Code
+var GoneException_Message = &sGoneException_Message
+
+var InternalServerErrorException = &sInternalServerErrorException
+var InternalServerErrorException_Code = &sInternalServerErrorException_Code
+var InternalServerErrorException_Message = &sInternalServerErrorException_Message
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Code = &sNotFoundException_Code
+var NotFoundException_Message = &sNotFoundException_Message
+
+var PreconditionFailedException = &sPreconditionFailedException
+var PreconditionFailedException_Code = &sPreconditionFailedException_Code
+var PreconditionFailedException_Message = &sPreconditionFailedException_Message
+
+var RegistrySummary = &sRegistrySummary
+var RegistrySummary_RegistryArn = &sRegistrySummary_RegistryArn
+var RegistrySummary_RegistryName = &sRegistrySummary_RegistryName
+var RegistrySummary_Tags = &sRegistrySummary_Tags
+
+var SchemaSummary = &sSchemaSummary
+var SchemaSummary_LastModified = &sSchemaSummary_LastModified
+var SchemaSummary_SchemaArn = &sSchemaSummary_SchemaArn
+var SchemaSummary_SchemaName = &sSchemaSummary_SchemaName
+var SchemaSummary_Tags = &sSchemaSummary_Tags
+var SchemaSummary_VersionCount = &sSchemaSummary_VersionCount
+
+var SchemaVersionSummary = &sSchemaVersionSummary
+var SchemaVersionSummary_SchemaArn = &sSchemaVersionSummary_SchemaArn
+var SchemaVersionSummary_SchemaName = &sSchemaVersionSummary_SchemaName
+var SchemaVersionSummary_SchemaVersion = &sSchemaVersionSummary_SchemaVersion
+var SchemaVersionSummary_Type = &sSchemaVersionSummary_Type
+
+var SearchSchemaSummary = &sSearchSchemaSummary
+var SearchSchemaSummary_RegistryName = &sSearchSchemaSummary_RegistryName
+var SearchSchemaSummary_SchemaArn = &sSearchSchemaSummary_SchemaArn
+var SearchSchemaSummary_SchemaName = &sSearchSchemaSummary_SchemaName
+var SearchSchemaSummary_SchemaVersions = &sSearchSchemaSummary_SchemaVersions
+
+var SearchSchemaVersionSummary = &sSearchSchemaVersionSummary
+var SearchSchemaVersionSummary_CreatedDate = &sSearchSchemaVersionSummary_CreatedDate
+var SearchSchemaVersionSummary_SchemaVersion = &sSearchSchemaVersionSummary_SchemaVersion
+var SearchSchemaVersionSummary_Type = &sSearchSchemaVersionSummary_Type
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Code = &sServiceUnavailableException_Code
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var _SynthesizedJson__string = &s_SynthesizedJson__string
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_Code = &sTooManyRequestsException_Code
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var Type = &sType
+var Type_OpenApi3 = &sType_OpenApi3
+var Type_JSONSchemaDraft4 = &sType_JSONSchemaDraft4
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_Code = &sUnauthorizedException_Code
+var UnauthorizedException_Message = &sUnauthorizedException_Message
+
+var CreateDiscovererRequest = &sCreateDiscovererRequest
+var CreateDiscovererRequest_Description = &sCreateDiscovererRequest_Description
+var CreateDiscovererRequest_SourceArn = &sCreateDiscovererRequest_SourceArn
+var CreateDiscovererRequest_CrossAccount = &sCreateDiscovererRequest_CrossAccount
+var CreateDiscovererRequest_Tags = &sCreateDiscovererRequest_Tags
+
+var CreateDiscovererResponse = &sCreateDiscovererResponse
+var CreateDiscovererResponse_Description = &sCreateDiscovererResponse_Description
+var CreateDiscovererResponse_DiscovererArn = &sCreateDiscovererResponse_DiscovererArn
+var CreateDiscovererResponse_DiscovererId = &sCreateDiscovererResponse_DiscovererId
+var CreateDiscovererResponse_SourceArn = &sCreateDiscovererResponse_SourceArn
+var CreateDiscovererResponse_State = &sCreateDiscovererResponse_State
+var CreateDiscovererResponse_CrossAccount = &sCreateDiscovererResponse_CrossAccount
+var CreateDiscovererResponse_Tags = &sCreateDiscovererResponse_Tags
+
+var CreateRegistryRequest = &sCreateRegistryRequest
+var CreateRegistryRequest_Description = &sCreateRegistryRequest_Description
+var CreateRegistryRequest_RegistryName = &sCreateRegistryRequest_RegistryName
+var CreateRegistryRequest_Tags = &sCreateRegistryRequest_Tags
+
+var CreateRegistryResponse = &sCreateRegistryResponse
+var CreateRegistryResponse_Description = &sCreateRegistryResponse_Description
+var CreateRegistryResponse_RegistryArn = &sCreateRegistryResponse_RegistryArn
+var CreateRegistryResponse_RegistryName = &sCreateRegistryResponse_RegistryName
+var CreateRegistryResponse_Tags = &sCreateRegistryResponse_Tags
+
+var CreateSchemaRequest = &sCreateSchemaRequest
+var CreateSchemaRequest_Content = &sCreateSchemaRequest_Content
+var CreateSchemaRequest_Description = &sCreateSchemaRequest_Description
+var CreateSchemaRequest_RegistryName = &sCreateSchemaRequest_RegistryName
+var CreateSchemaRequest_SchemaName = &sCreateSchemaRequest_SchemaName
+var CreateSchemaRequest_Tags = &sCreateSchemaRequest_Tags
+var CreateSchemaRequest_Type = &sCreateSchemaRequest_Type
+
+var CreateSchemaResponse = &sCreateSchemaResponse
+var CreateSchemaResponse_Description = &sCreateSchemaResponse_Description
+var CreateSchemaResponse_LastModified = &sCreateSchemaResponse_LastModified
+var CreateSchemaResponse_SchemaArn = &sCreateSchemaResponse_SchemaArn
+var CreateSchemaResponse_SchemaName = &sCreateSchemaResponse_SchemaName
+var CreateSchemaResponse_SchemaVersion = &sCreateSchemaResponse_SchemaVersion
+var CreateSchemaResponse_Tags = &sCreateSchemaResponse_Tags
+var CreateSchemaResponse_Type = &sCreateSchemaResponse_Type
+var CreateSchemaResponse_VersionCreatedDate = &sCreateSchemaResponse_VersionCreatedDate
+
+var DeleteDiscovererRequest = &sDeleteDiscovererRequest
+var DeleteDiscovererRequest_DiscovererId = &sDeleteDiscovererRequest_DiscovererId
+
+var DeleteRegistryRequest = &sDeleteRegistryRequest
+var DeleteRegistryRequest_RegistryName = &sDeleteRegistryRequest_RegistryName
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_RegistryName = &sDeleteResourcePolicyRequest_RegistryName
+
+var DeleteSchemaRequest = &sDeleteSchemaRequest
+var DeleteSchemaRequest_RegistryName = &sDeleteSchemaRequest_RegistryName
+var DeleteSchemaRequest_SchemaName = &sDeleteSchemaRequest_SchemaName
+
+var DeleteSchemaVersionRequest = &sDeleteSchemaVersionRequest
+var DeleteSchemaVersionRequest_RegistryName = &sDeleteSchemaVersionRequest_RegistryName
+var DeleteSchemaVersionRequest_SchemaName = &sDeleteSchemaVersionRequest_SchemaName
+var DeleteSchemaVersionRequest_SchemaVersion = &sDeleteSchemaVersionRequest_SchemaVersion
+
+var DescribeCodeBindingRequest = &sDescribeCodeBindingRequest
+var DescribeCodeBindingRequest_Language = &sDescribeCodeBindingRequest_Language
+var DescribeCodeBindingRequest_RegistryName = &sDescribeCodeBindingRequest_RegistryName
+var DescribeCodeBindingRequest_SchemaName = &sDescribeCodeBindingRequest_SchemaName
+var DescribeCodeBindingRequest_SchemaVersion = &sDescribeCodeBindingRequest_SchemaVersion
+
+var DescribeCodeBindingResponse = &sDescribeCodeBindingResponse
+var DescribeCodeBindingResponse_CreationDate = &sDescribeCodeBindingResponse_CreationDate
+var DescribeCodeBindingResponse_LastModified = &sDescribeCodeBindingResponse_LastModified
+var DescribeCodeBindingResponse_SchemaVersion = &sDescribeCodeBindingResponse_SchemaVersion
+var DescribeCodeBindingResponse_Status = &sDescribeCodeBindingResponse_Status
+
+var DescribeDiscovererRequest = &sDescribeDiscovererRequest
+var DescribeDiscovererRequest_DiscovererId = &sDescribeDiscovererRequest_DiscovererId
+
+var DescribeDiscovererResponse = &sDescribeDiscovererResponse
+var DescribeDiscovererResponse_Description = &sDescribeDiscovererResponse_Description
+var DescribeDiscovererResponse_DiscovererArn = &sDescribeDiscovererResponse_DiscovererArn
+var DescribeDiscovererResponse_DiscovererId = &sDescribeDiscovererResponse_DiscovererId
+var DescribeDiscovererResponse_SourceArn = &sDescribeDiscovererResponse_SourceArn
+var DescribeDiscovererResponse_State = &sDescribeDiscovererResponse_State
+var DescribeDiscovererResponse_CrossAccount = &sDescribeDiscovererResponse_CrossAccount
+var DescribeDiscovererResponse_Tags = &sDescribeDiscovererResponse_Tags
+
+var DescribeRegistryRequest = &sDescribeRegistryRequest
+var DescribeRegistryRequest_RegistryName = &sDescribeRegistryRequest_RegistryName
+
+var DescribeRegistryResponse = &sDescribeRegistryResponse
+var DescribeRegistryResponse_Description = &sDescribeRegistryResponse_Description
+var DescribeRegistryResponse_RegistryArn = &sDescribeRegistryResponse_RegistryArn
+var DescribeRegistryResponse_RegistryName = &sDescribeRegistryResponse_RegistryName
+var DescribeRegistryResponse_Tags = &sDescribeRegistryResponse_Tags
+
+var DescribeSchemaRequest = &sDescribeSchemaRequest
+var DescribeSchemaRequest_RegistryName = &sDescribeSchemaRequest_RegistryName
+var DescribeSchemaRequest_SchemaName = &sDescribeSchemaRequest_SchemaName
+var DescribeSchemaRequest_SchemaVersion = &sDescribeSchemaRequest_SchemaVersion
+
+var DescribeSchemaResponse = &sDescribeSchemaResponse
+var DescribeSchemaResponse_Content = &sDescribeSchemaResponse_Content
+var DescribeSchemaResponse_Description = &sDescribeSchemaResponse_Description
+var DescribeSchemaResponse_LastModified = &sDescribeSchemaResponse_LastModified
+var DescribeSchemaResponse_SchemaArn = &sDescribeSchemaResponse_SchemaArn
+var DescribeSchemaResponse_SchemaName = &sDescribeSchemaResponse_SchemaName
+var DescribeSchemaResponse_SchemaVersion = &sDescribeSchemaResponse_SchemaVersion
+var DescribeSchemaResponse_Tags = &sDescribeSchemaResponse_Tags
+var DescribeSchemaResponse_Type = &sDescribeSchemaResponse_Type
+var DescribeSchemaResponse_VersionCreatedDate = &sDescribeSchemaResponse_VersionCreatedDate
+
+var ExportSchemaRequest = &sExportSchemaRequest
+var ExportSchemaRequest_RegistryName = &sExportSchemaRequest_RegistryName
+var ExportSchemaRequest_SchemaName = &sExportSchemaRequest_SchemaName
+var ExportSchemaRequest_SchemaVersion = &sExportSchemaRequest_SchemaVersion
+var ExportSchemaRequest_Type = &sExportSchemaRequest_Type
+
+var ExportSchemaResponse = &sExportSchemaResponse
+var ExportSchemaResponse_Content = &sExportSchemaResponse_Content
+var ExportSchemaResponse_SchemaArn = &sExportSchemaResponse_SchemaArn
+var ExportSchemaResponse_SchemaName = &sExportSchemaResponse_SchemaName
+var ExportSchemaResponse_SchemaVersion = &sExportSchemaResponse_SchemaVersion
+var ExportSchemaResponse_Type = &sExportSchemaResponse_Type
+
+var GetCodeBindingSourceRequest = &sGetCodeBindingSourceRequest
+var GetCodeBindingSourceRequest_Language = &sGetCodeBindingSourceRequest_Language
+var GetCodeBindingSourceRequest_RegistryName = &sGetCodeBindingSourceRequest_RegistryName
+var GetCodeBindingSourceRequest_SchemaName = &sGetCodeBindingSourceRequest_SchemaName
+var GetCodeBindingSourceRequest_SchemaVersion = &sGetCodeBindingSourceRequest_SchemaVersion
+
+var GetCodeBindingSourceResponse = &sGetCodeBindingSourceResponse
+var GetCodeBindingSourceResponse_Body = &sGetCodeBindingSourceResponse_Body
+
+var GetDiscoveredSchemaRequest = &sGetDiscoveredSchemaRequest
+var GetDiscoveredSchemaRequest_Events = &sGetDiscoveredSchemaRequest_Events
+var GetDiscoveredSchemaRequest_Type = &sGetDiscoveredSchemaRequest_Type
+
+var GetDiscoveredSchemaResponse = &sGetDiscoveredSchemaResponse
+var GetDiscoveredSchemaResponse_Content = &sGetDiscoveredSchemaResponse_Content
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_RegistryName = &sGetResourcePolicyRequest_RegistryName
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_Policy = &sGetResourcePolicyResponse_Policy
+var GetResourcePolicyResponse_RevisionId = &sGetResourcePolicyResponse_RevisionId
+
+var ListDiscoverersRequest = &sListDiscoverersRequest
+var ListDiscoverersRequest_DiscovererIdPrefix = &sListDiscoverersRequest_DiscovererIdPrefix
+var ListDiscoverersRequest_Limit = &sListDiscoverersRequest_Limit
+var ListDiscoverersRequest_NextToken = &sListDiscoverersRequest_NextToken
+var ListDiscoverersRequest_SourceArnPrefix = &sListDiscoverersRequest_SourceArnPrefix
+
+var ListDiscoverersResponse = &sListDiscoverersResponse
+var ListDiscoverersResponse_Discoverers = &sListDiscoverersResponse_Discoverers
+var ListDiscoverersResponse_NextToken = &sListDiscoverersResponse_NextToken
+
+var ListRegistriesRequest = &sListRegistriesRequest
+var ListRegistriesRequest_Limit = &sListRegistriesRequest_Limit
+var ListRegistriesRequest_NextToken = &sListRegistriesRequest_NextToken
+var ListRegistriesRequest_RegistryNamePrefix = &sListRegistriesRequest_RegistryNamePrefix
+var ListRegistriesRequest_Scope = &sListRegistriesRequest_Scope
+
+var ListRegistriesResponse = &sListRegistriesResponse
+var ListRegistriesResponse_NextToken = &sListRegistriesResponse_NextToken
+var ListRegistriesResponse_Registries = &sListRegistriesResponse_Registries
+
+var ListSchemasRequest = &sListSchemasRequest
+var ListSchemasRequest_Limit = &sListSchemasRequest_Limit
+var ListSchemasRequest_NextToken = &sListSchemasRequest_NextToken
+var ListSchemasRequest_RegistryName = &sListSchemasRequest_RegistryName
+var ListSchemasRequest_SchemaNamePrefix = &sListSchemasRequest_SchemaNamePrefix
+
+var ListSchemasResponse = &sListSchemasResponse
+var ListSchemasResponse_NextToken = &sListSchemasResponse_NextToken
+var ListSchemasResponse_Schemas = &sListSchemasResponse_Schemas
+
+var ListSchemaVersionsRequest = &sListSchemaVersionsRequest
+var ListSchemaVersionsRequest_Limit = &sListSchemaVersionsRequest_Limit
+var ListSchemaVersionsRequest_NextToken = &sListSchemaVersionsRequest_NextToken
+var ListSchemaVersionsRequest_RegistryName = &sListSchemaVersionsRequest_RegistryName
+var ListSchemaVersionsRequest_SchemaName = &sListSchemaVersionsRequest_SchemaName
+
+var ListSchemaVersionsResponse = &sListSchemaVersionsResponse
+var ListSchemaVersionsResponse_NextToken = &sListSchemaVersionsResponse_NextToken
+var ListSchemaVersionsResponse_SchemaVersions = &sListSchemaVersionsResponse_SchemaVersions
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutCodeBindingRequest = &sPutCodeBindingRequest
+var PutCodeBindingRequest_Language = &sPutCodeBindingRequest_Language
+var PutCodeBindingRequest_RegistryName = &sPutCodeBindingRequest_RegistryName
+var PutCodeBindingRequest_SchemaName = &sPutCodeBindingRequest_SchemaName
+var PutCodeBindingRequest_SchemaVersion = &sPutCodeBindingRequest_SchemaVersion
+
+var PutCodeBindingResponse = &sPutCodeBindingResponse
+var PutCodeBindingResponse_CreationDate = &sPutCodeBindingResponse_CreationDate
+var PutCodeBindingResponse_LastModified = &sPutCodeBindingResponse_LastModified
+var PutCodeBindingResponse_SchemaVersion = &sPutCodeBindingResponse_SchemaVersion
+var PutCodeBindingResponse_Status = &sPutCodeBindingResponse_Status
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_Policy = &sPutResourcePolicyRequest_Policy
+var PutResourcePolicyRequest_RegistryName = &sPutResourcePolicyRequest_RegistryName
+var PutResourcePolicyRequest_RevisionId = &sPutResourcePolicyRequest_RevisionId
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+var PutResourcePolicyResponse_Policy = &sPutResourcePolicyResponse_Policy
+var PutResourcePolicyResponse_RevisionId = &sPutResourcePolicyResponse_RevisionId
+
+var SearchSchemasRequest = &sSearchSchemasRequest
+var SearchSchemasRequest_Keywords = &sSearchSchemasRequest_Keywords
+var SearchSchemasRequest_Limit = &sSearchSchemasRequest_Limit
+var SearchSchemasRequest_NextToken = &sSearchSchemasRequest_NextToken
+var SearchSchemasRequest_RegistryName = &sSearchSchemasRequest_RegistryName
+
+var SearchSchemasResponse = &sSearchSchemasResponse
+var SearchSchemasResponse_NextToken = &sSearchSchemasResponse_NextToken
+var SearchSchemasResponse_Schemas = &sSearchSchemasResponse_Schemas
+
+var StartDiscovererRequest = &sStartDiscovererRequest
+var StartDiscovererRequest_DiscovererId = &sStartDiscovererRequest_DiscovererId
+
+var StartDiscovererResponse = &sStartDiscovererResponse
+var StartDiscovererResponse_DiscovererId = &sStartDiscovererResponse_DiscovererId
+var StartDiscovererResponse_State = &sStartDiscovererResponse_State
+
+var StopDiscovererRequest = &sStopDiscovererRequest
+var StopDiscovererRequest_DiscovererId = &sStopDiscovererRequest_DiscovererId
+
+var StopDiscovererResponse = &sStopDiscovererResponse
+var StopDiscovererResponse_DiscovererId = &sStopDiscovererResponse_DiscovererId
+var StopDiscovererResponse_State = &sStopDiscovererResponse_State
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateDiscovererRequest = &sUpdateDiscovererRequest
+var UpdateDiscovererRequest_Description = &sUpdateDiscovererRequest_Description
+var UpdateDiscovererRequest_DiscovererId = &sUpdateDiscovererRequest_DiscovererId
+var UpdateDiscovererRequest_CrossAccount = &sUpdateDiscovererRequest_CrossAccount
+
+var UpdateDiscovererResponse = &sUpdateDiscovererResponse
+var UpdateDiscovererResponse_Description = &sUpdateDiscovererResponse_Description
+var UpdateDiscovererResponse_DiscovererArn = &sUpdateDiscovererResponse_DiscovererArn
+var UpdateDiscovererResponse_DiscovererId = &sUpdateDiscovererResponse_DiscovererId
+var UpdateDiscovererResponse_SourceArn = &sUpdateDiscovererResponse_SourceArn
+var UpdateDiscovererResponse_State = &sUpdateDiscovererResponse_State
+var UpdateDiscovererResponse_CrossAccount = &sUpdateDiscovererResponse_CrossAccount
+var UpdateDiscovererResponse_Tags = &sUpdateDiscovererResponse_Tags
+
+var UpdateRegistryRequest = &sUpdateRegistryRequest
+var UpdateRegistryRequest_Description = &sUpdateRegistryRequest_Description
+var UpdateRegistryRequest_RegistryName = &sUpdateRegistryRequest_RegistryName
+
+var UpdateRegistryResponse = &sUpdateRegistryResponse
+var UpdateRegistryResponse_Description = &sUpdateRegistryResponse_Description
+var UpdateRegistryResponse_RegistryArn = &sUpdateRegistryResponse_RegistryArn
+var UpdateRegistryResponse_RegistryName = &sUpdateRegistryResponse_RegistryName
+var UpdateRegistryResponse_Tags = &sUpdateRegistryResponse_Tags
+
+var UpdateSchemaRequest = &sUpdateSchemaRequest
+var UpdateSchemaRequest_ClientTokenId = &sUpdateSchemaRequest_ClientTokenId
+var UpdateSchemaRequest_Content = &sUpdateSchemaRequest_Content
+var UpdateSchemaRequest_Description = &sUpdateSchemaRequest_Description
+var UpdateSchemaRequest_RegistryName = &sUpdateSchemaRequest_RegistryName
+var UpdateSchemaRequest_SchemaName = &sUpdateSchemaRequest_SchemaName
+var UpdateSchemaRequest_Type = &sUpdateSchemaRequest_Type
+
+var UpdateSchemaResponse = &sUpdateSchemaResponse
+var UpdateSchemaResponse_Description = &sUpdateSchemaResponse_Description
+var UpdateSchemaResponse_LastModified = &sUpdateSchemaResponse_LastModified
+var UpdateSchemaResponse_SchemaArn = &sUpdateSchemaResponse_SchemaArn
+var UpdateSchemaResponse_SchemaName = &sUpdateSchemaResponse_SchemaName
+var UpdateSchemaResponse_SchemaVersion = &sUpdateSchemaResponse_SchemaVersion
+var UpdateSchemaResponse_Tags = &sUpdateSchemaResponse_Tags
+var UpdateSchemaResponse_Type = &sUpdateSchemaResponse_Type
+var UpdateSchemaResponse_VersionCreatedDate = &sUpdateSchemaResponse_VersionCreatedDate
+
+var Schemas = &smithy.ServiceSchema{Schema: &s_schemas, Version: "2019-12-02"}

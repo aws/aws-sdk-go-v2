@@ -4,2789 +4,2029 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreatePipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CreatePipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/v1/pipes/{Name}",
-	Code: 200})
+var (
+	iCreatePipe                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CreatePipe"}
+	iDeletePipe                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DeletePipe"}
+	iDescribePipe                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DescribePipe"}
+	iListPipes                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ListPipes"}
+	iListTagsForResource                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ListTagsForResource"}
+	iStartPipe                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StartPipe"}
+	iStopPipe                                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StopPipe"}
+	iTagResource                                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagResource"}
+	iUntagResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UntagResource"}
+	iUpdatePipe                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipe"}
+	i_Pipes                                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Pipes"}
+	i_Arn                                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Arn"}
+	i_ArnOrJsonPath                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ArnOrJsonPath"}
+	i_ArnOrUrl                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ArnOrUrl"}
+	i_AssignPublicIp                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "AssignPublicIp"}
+	iAwsVpcConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "AwsVpcConfiguration"}
+	iBatchArrayProperties                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchArrayProperties"}
+	i_BatchArraySize                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchArraySize"}
+	iBatchContainerOverrides                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchContainerOverrides"}
+	i_BatchDependsOn                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchDependsOn"}
+	iBatchEnvironmentVariable                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchEnvironmentVariable"}
+	i_BatchEnvironmentVariableList                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchEnvironmentVariableList"}
+	iBatchJobDependency                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchJobDependency"}
+	i_BatchJobDependencyType                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchJobDependencyType"}
+	i_BatchParametersMap                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchParametersMap"}
+	iBatchResourceRequirement                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchResourceRequirement"}
+	i_BatchResourceRequirementsList                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchResourceRequirementsList"}
+	i_BatchResourceRequirementType                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchResourceRequirementType"}
+	i_BatchRetryAttempts                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchRetryAttempts"}
+	iBatchRetryStrategy                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "BatchRetryStrategy"}
+	i_Boolean                                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Boolean"}
+	i_CapacityProvider                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CapacityProvider"}
+	i_CapacityProviderStrategy                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CapacityProviderStrategy"}
+	iCapacityProviderStrategyItem                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CapacityProviderStrategyItem"}
+	i_CapacityProviderStrategyItemBase               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CapacityProviderStrategyItemBase"}
+	i_CapacityProviderStrategyItemWeight             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CapacityProviderStrategyItemWeight"}
+	i_CloudwatchLogGroupArn                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CloudwatchLogGroupArn"}
+	iCloudwatchLogsLogDestination                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CloudwatchLogsLogDestination"}
+	iCloudwatchLogsLogDestinationParameters          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CloudwatchLogsLogDestinationParameters"}
+	iConflictException                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ConflictException"}
+	i_Database                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Database"}
+	i_DbUser                                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DbUser"}
+	iDeadLetterConfig                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DeadLetterConfig"}
+	iDimensionMapping                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DimensionMapping"}
+	i_DimensionMappings                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DimensionMappings"}
+	i_DimensionName                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DimensionName"}
+	i_DimensionValue                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DimensionValue"}
+	i_DimensionValueType                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DimensionValueType"}
+	i_DynamoDBStreamStartPosition                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DynamoDBStreamStartPosition"}
+	iEcsContainerOverride                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsContainerOverride"}
+	i_EcsContainerOverrideList                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsContainerOverrideList"}
+	iEcsEnvironmentFile                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsEnvironmentFile"}
+	i_EcsEnvironmentFileList                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsEnvironmentFileList"}
+	i_EcsEnvironmentFileType                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsEnvironmentFileType"}
+	iEcsEnvironmentVariable                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsEnvironmentVariable"}
+	i_EcsEnvironmentVariableList                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsEnvironmentVariableList"}
+	iEcsEphemeralStorage                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsEphemeralStorage"}
+	iEcsInferenceAcceleratorOverride                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsInferenceAcceleratorOverride"}
+	i_EcsInferenceAcceleratorOverrideList            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsInferenceAcceleratorOverrideList"}
+	iEcsResourceRequirement                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsResourceRequirement"}
+	i_EcsResourceRequirementsList                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsResourceRequirementsList"}
+	i_EcsResourceRequirementType                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsResourceRequirementType"}
+	iEcsTaskOverride                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EcsTaskOverride"}
+	i_EndpointString                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EndpointString"}
+	i_EphemeralStorageSize                           = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EphemeralStorageSize"}
+	i_EpochTimeUnit                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EpochTimeUnit"}
+	i_ErrorMessage                                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ErrorMessage"}
+	i_EventBridgeDetailType                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EventBridgeDetailType"}
+	i_EventBridgeEndpointId                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EventBridgeEndpointId"}
+	i_EventBridgeEventResourceList                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EventBridgeEventResourceList"}
+	i_EventBridgeEventSource                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EventBridgeEventSource"}
+	i_EventPattern                                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "EventPattern"}
+	iFilter                                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Filter"}
+	iFilterCriteria                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "FilterCriteria"}
+	i_FilterList                                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "FilterList"}
+	i_FirehoseArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "FirehoseArn"}
+	iFirehoseLogDestination                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "FirehoseLogDestination"}
+	iFirehoseLogDestinationParameters                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "FirehoseLogDestinationParameters"}
+	i_HeaderKey                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "HeaderKey"}
+	i_HeaderParametersMap                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "HeaderParametersMap"}
+	i_HeaderValue                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "HeaderValue"}
+	i_IncludeExecutionData                           = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "IncludeExecutionData"}
+	i_IncludeExecutionDataOption                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "IncludeExecutionDataOption"}
+	i_InputTemplate                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "InputTemplate"}
+	iInternalException                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "InternalException"}
+	i_JsonPath                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "JsonPath"}
+	i_KafkaBootstrapServers                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "KafkaBootstrapServers"}
+	i_KafkaTopicName                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "KafkaTopicName"}
+	i_KinesisPartitionKey                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "KinesisPartitionKey"}
+	i_KinesisStreamStartPosition                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "KinesisStreamStartPosition"}
+	i_KmsKeyIdentifier                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "KmsKeyIdentifier"}
+	i_LaunchType                                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "LaunchType"}
+	i_LimitMax10                                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "LimitMax10"}
+	i_LimitMax100                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "LimitMax100"}
+	i_LimitMax10000                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "LimitMax10000"}
+	i_LimitMin1                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "LimitMin1"}
+	i_LogLevel                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "LogLevel"}
+	i_LogStreamName                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "LogStreamName"}
+	i_MaximumBatchingWindowInSeconds                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MaximumBatchingWindowInSeconds"}
+	i_MaximumRecordAgeInSeconds                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MaximumRecordAgeInSeconds"}
+	i_MaximumRetryAttemptsESM                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MaximumRetryAttemptsESM"}
+	i_MeasureName                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MeasureName"}
+	i_MeasureValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MeasureValue"}
+	i_MeasureValueType                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MeasureValueType"}
+	i_MessageDeduplicationId                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MessageDeduplicationId"}
+	i_MessageGroupId                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MessageGroupId"}
+	iMQBrokerAccessCredentials                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MQBrokerAccessCredentials"}
+	i_MQBrokerQueueName                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MQBrokerQueueName"}
+	iMSKAccessCredentials                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MSKAccessCredentials"}
+	i_MSKStartPosition                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MSKStartPosition"}
+	iMultiMeasureAttributeMapping                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MultiMeasureAttributeMapping"}
+	i_MultiMeasureAttributeMappings                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MultiMeasureAttributeMappings"}
+	i_MultiMeasureAttributeName                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MultiMeasureAttributeName"}
+	iMultiMeasureMapping                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MultiMeasureMapping"}
+	i_MultiMeasureMappings                           = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MultiMeasureMappings"}
+	i_MultiMeasureName                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "MultiMeasureName"}
+	iNetworkConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "NetworkConfiguration"}
+	i_NextToken                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "NextToken"}
+	iNotFoundException                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "NotFoundException"}
+	i_OnPartialBatchItemFailureStreams               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "OnPartialBatchItemFailureStreams"}
+	i_OptionalArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "OptionalArn"}
+	i_PathParameter                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PathParameter"}
+	i_PathParameterList                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PathParameterList"}
+	iPipe                                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Pipe"}
+	i_PipeArn                                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeArn"}
+	i_PipeDescription                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeDescription"}
+	iPipeEnrichmentHttpParameters                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeEnrichmentHttpParameters"}
+	iPipeEnrichmentParameters                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeEnrichmentParameters"}
+	i_PipeList                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeList"}
+	iPipeLogConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeLogConfiguration"}
+	iPipeLogConfigurationParameters                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeLogConfigurationParameters"}
+	i_PipeName                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeName"}
+	iPipeSourceActiveMQBrokerParameters              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceActiveMQBrokerParameters"}
+	iPipeSourceDynamoDBStreamParameters              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceDynamoDBStreamParameters"}
+	iPipeSourceKinesisStreamParameters               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceKinesisStreamParameters"}
+	iPipeSourceManagedStreamingKafkaParameters       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceManagedStreamingKafkaParameters"}
+	iPipeSourceParameters                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceParameters"}
+	iPipeSourceRabbitMQBrokerParameters              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceRabbitMQBrokerParameters"}
+	iPipeSourceSelfManagedKafkaParameters            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceSelfManagedKafkaParameters"}
+	iPipeSourceSqsQueueParameters                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeSourceSqsQueueParameters"}
+	i_PipeState                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeState"}
+	i_PipeStateReason                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeStateReason"}
+	iPipeTargetBatchJobParameters                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetBatchJobParameters"}
+	iPipeTargetCloudWatchLogsParameters              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetCloudWatchLogsParameters"}
+	iPipeTargetEcsTaskParameters                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetEcsTaskParameters"}
+	iPipeTargetEventBridgeEventBusParameters         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetEventBridgeEventBusParameters"}
+	iPipeTargetHttpParameters                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetHttpParameters"}
+	i_PipeTargetInvocationType                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetInvocationType"}
+	iPipeTargetKinesisStreamParameters               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetKinesisStreamParameters"}
+	iPipeTargetLambdaFunctionParameters              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetLambdaFunctionParameters"}
+	iPipeTargetParameters                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetParameters"}
+	iPipeTargetRedshiftDataParameters                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetRedshiftDataParameters"}
+	iPipeTargetSageMakerPipelineParameters           = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetSageMakerPipelineParameters"}
+	iPipeTargetSqsQueueParameters                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetSqsQueueParameters"}
+	iPipeTargetStateMachineParameters                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetStateMachineParameters"}
+	iPipeTargetTimestreamParameters                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PipeTargetTimestreamParameters"}
+	iPlacementConstraint                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementConstraint"}
+	i_PlacementConstraintExpression                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementConstraintExpression"}
+	i_PlacementConstraints                           = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementConstraints"}
+	i_PlacementConstraintType                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementConstraintType"}
+	i_PlacementStrategies                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementStrategies"}
+	iPlacementStrategy                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementStrategy"}
+	i_PlacementStrategyField                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementStrategyField"}
+	i_PlacementStrategyType                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PlacementStrategyType"}
+	i_PropagateTags                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "PropagateTags"}
+	i_QueryStringKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "QueryStringKey"}
+	i_QueryStringParametersMap                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "QueryStringParametersMap"}
+	i_QueryStringValue                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "QueryStringValue"}
+	i_ReferenceId                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ReferenceId"}
+	i_RequestedPipeState                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "RequestedPipeState"}
+	i_RequestedPipeStateDescribeResponse             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "RequestedPipeStateDescribeResponse"}
+	i_ResourceArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ResourceArn"}
+	i_RoleArn                                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "RoleArn"}
+	iS3LogDestination                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "S3LogDestination"}
+	iS3LogDestinationParameters                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "S3LogDestinationParameters"}
+	i_S3OutputFormat                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "S3OutputFormat"}
+	iSageMakerPipelineParameter                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SageMakerPipelineParameter"}
+	i_SageMakerPipelineParameterList                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SageMakerPipelineParameterList"}
+	i_SageMakerPipelineParameterName                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SageMakerPipelineParameterName"}
+	i_SageMakerPipelineParameterValue                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SageMakerPipelineParameterValue"}
+	i_SecretManagerArn                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SecretManagerArn"}
+	i_SecretManagerArnOrJsonPath                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SecretManagerArnOrJsonPath"}
+	i_SecurityGroup                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SecurityGroup"}
+	i_SecurityGroupId                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SecurityGroupIds"}
+	i_SecurityGroups                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SecurityGroups"}
+	iSelfManagedKafkaAccessConfigurationCredentials  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SelfManagedKafkaAccessConfigurationCredentials"}
+	iSelfManagedKafkaAccessConfigurationVpc          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SelfManagedKafkaAccessConfigurationVpc"}
+	i_SelfManagedKafkaStartPosition                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SelfManagedKafkaStartPosition"}
+	iServiceQuotaExceededException                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ServiceQuotaExceededException"}
+	iSingleMeasureMapping                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SingleMeasureMapping"}
+	i_SingleMeasureMappings                          = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SingleMeasureMappings"}
+	i_Sql                                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Sql"}
+	i_Sqls                                           = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Sqls"}
+	i_StatementName                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StatementName"}
+	i_String                                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "String"}
+	i_StringList                                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StringList"}
+	i_Subnet                                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Subnet"}
+	i_SubnetId                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SubnetId"}
+	i_SubnetIds                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "SubnetIds"}
+	i_Subnets                                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Subnets"}
+	iTag                                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Tag"}
+	i_TagKey                                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagKey"}
+	i_TagKeyList                                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagKeyList"}
+	i_TagList                                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagList"}
+	i_TagMap                                         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagMap"}
+	i_TagValue                                       = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagValue"}
+	iThrottlingException                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ThrottlingException"}
+	i_TimeFieldType                                  = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TimeFieldType"}
+	i_Timestamp                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "Timestamp"}
+	i_TimestampFormat                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TimestampFormat"}
+	i_TimeValue                                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TimeValue"}
+	iUpdatePipeSourceActiveMQBrokerParameters        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceActiveMQBrokerParameters"}
+	iUpdatePipeSourceDynamoDBStreamParameters        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceDynamoDBStreamParameters"}
+	iUpdatePipeSourceKinesisStreamParameters         = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceKinesisStreamParameters"}
+	iUpdatePipeSourceManagedStreamingKafkaParameters = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceManagedStreamingKafkaParameters"}
+	iUpdatePipeSourceParameters                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceParameters"}
+	iUpdatePipeSourceRabbitMQBrokerParameters        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceRabbitMQBrokerParameters"}
+	iUpdatePipeSourceSelfManagedKafkaParameters      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceSelfManagedKafkaParameters"}
+	iUpdatePipeSourceSqsQueueParameters              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeSourceSqsQueueParameters"}
+	i_URI                                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "URI"}
+	iValidationException                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ValidationException"}
+	iValidationExceptionField                        = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ValidationExceptionFieldList"}
+	i_VersionValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "VersionValue"}
+	iCreatePipeRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CreatePipeRequest"}
+	iCreatePipeResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "CreatePipeResponse"}
+	iDeletePipeRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DeletePipeRequest"}
+	iDeletePipeResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DeletePipeResponse"}
+	iDescribePipeRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DescribePipeRequest"}
+	iDescribePipeResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "DescribePipeResponse"}
+	iListPipesRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ListPipesRequest"}
+	iListPipesResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ListPipesResponse"}
+	iListTagsForResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "ListTagsForResourceResponse"}
+	iStartPipeRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StartPipeRequest"}
+	iStartPipeResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StartPipeResponse"}
+	iStopPipeRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StopPipeRequest"}
+	iStopPipeResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "StopPipeResponse"}
+	iTagResourceRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagResourceRequest"}
+	iTagResourceResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "TagResourceResponse"}
+	iUntagResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UntagResourceResponse"}
+	iUpdatePipeRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeRequest"}
+	iUpdatePipeResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.pipes", Name: "UpdatePipeResponse"}
+	pString                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pInteger                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
 
-var DeletePipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DeletePipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/pipes/{Name}",
-	Code: 200})
-
-var DescribePipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DescribePipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/pipes/{Name}",
-	Code: 200})
-
-var ListPipes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ListPipes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+	URI:  "/v1/pipes/{Name}",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/pipes",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var StartPipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StartPipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/pipes/{Name}/start",
-	Code: 200})
-
-var StopPipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StopPipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/pipes/{Name}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdatePipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipe",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/pipes/{Name}",
-	Code: 200})
-
-var _Pipes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Pipes",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://events.amazonaws.com/doc/2015-10-07"})
-
-var Pipes = smithy.NewServiceSchema(_Pipes, "2015-10-07")
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _ArnOrJsonPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ArnOrJsonPath",
-}, smithy.ShapeTypeString, 0)
-
-var _ArnOrUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ArnOrUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _AssignPublicIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "AssignPublicIp",
-}, smithy.ShapeTypeString, 0)
-
-var AwsVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "AwsVpcConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var AwsVpcConfiguration_Subnets *smithy.Schema
-
-var AwsVpcConfiguration_SecurityGroups *smithy.Schema
-
-var AwsVpcConfiguration_AssignPublicIp *smithy.Schema
-
-var BatchArrayProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchArrayProperties",
-}, smithy.ShapeTypeStructure, 1)
-var BatchArrayProperties_Size *smithy.Schema
-
-var _BatchArraySize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchArraySize",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchContainerOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchContainerOverrides",
-}, smithy.ShapeTypeStructure, 4)
-var BatchContainerOverrides_Command *smithy.Schema
-
-var BatchContainerOverrides_Environment *smithy.Schema
-
-var BatchContainerOverrides_InstanceType *smithy.Schema
-
-var BatchContainerOverrides_ResourceRequirements *smithy.Schema
-
-var _BatchDependsOn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchDependsOn",
-}, smithy.ShapeTypeList, 1)
-var _BatchDependsOn_member *smithy.Schema
-
-var BatchEnvironmentVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchEnvironmentVariable",
-}, smithy.ShapeTypeStructure, 2)
-var BatchEnvironmentVariable_Name *smithy.Schema
-
-var BatchEnvironmentVariable_Value *smithy.Schema
-
-var _BatchEnvironmentVariableList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchEnvironmentVariableList",
-}, smithy.ShapeTypeList, 1)
-var _BatchEnvironmentVariableList_member *smithy.Schema
-
-var BatchJobDependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchJobDependency",
-}, smithy.ShapeTypeStructure, 2)
-var BatchJobDependency_JobId *smithy.Schema
-
-var BatchJobDependency_Type *smithy.Schema
-
-var _BatchJobDependencyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchJobDependencyType",
-}, smithy.ShapeTypeString, 0)
-
-var _BatchParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _BatchParametersMap_key *smithy.Schema
-
-var _BatchParametersMap_value *smithy.Schema
-
-var BatchResourceRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchResourceRequirement",
-}, smithy.ShapeTypeStructure, 2)
-var BatchResourceRequirement_Type *smithy.Schema
-
-var BatchResourceRequirement_Value *smithy.Schema
-
-var _BatchResourceRequirementsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchResourceRequirementsList",
-}, smithy.ShapeTypeList, 1)
-var _BatchResourceRequirementsList_member *smithy.Schema
-
-var _BatchResourceRequirementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchResourceRequirementType",
-}, smithy.ShapeTypeString, 0)
-
-var _BatchRetryAttempts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchRetryAttempts",
-}, smithy.ShapeTypeInteger, 0)
-
-var BatchRetryStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "BatchRetryStrategy",
-}, smithy.ShapeTypeStructure, 1)
-var BatchRetryStrategy_Attempts *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _CapacityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CapacityProvider",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CapacityProviderStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CapacityProviderStrategy",
-}, smithy.ShapeTypeList, 1)
-var _CapacityProviderStrategy_member *smithy.Schema
-
-var CapacityProviderStrategyItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CapacityProviderStrategyItem",
-}, smithy.ShapeTypeStructure, 3)
-var CapacityProviderStrategyItem_capacityProvider *smithy.Schema
-
-var CapacityProviderStrategyItem_weight *smithy.Schema
-
-var CapacityProviderStrategyItem_base *smithy.Schema
-
-var _CapacityProviderStrategyItemBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CapacityProviderStrategyItemBase",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CapacityProviderStrategyItemWeight = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CapacityProviderStrategyItemWeight",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CloudwatchLogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CloudwatchLogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var CloudwatchLogsLogDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CloudwatchLogsLogDestination",
-}, smithy.ShapeTypeStructure, 1)
-var CloudwatchLogsLogDestination_LogGroupArn *smithy.Schema
-
-var CloudwatchLogsLogDestinationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CloudwatchLogsLogDestinationParameters",
-}, smithy.ShapeTypeStructure, 1)
-var CloudwatchLogsLogDestinationParameters_LogGroupArn *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _Database = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Database",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DbUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DbUser",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var DeadLetterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DeadLetterConfig",
-}, smithy.ShapeTypeStructure, 1)
-var DeadLetterConfig_Arn *smithy.Schema
-
-var DimensionMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DimensionMapping",
-}, smithy.ShapeTypeStructure, 3)
-var DimensionMapping_DimensionValue *smithy.Schema
-
-var DimensionMapping_DimensionValueType *smithy.Schema
-
-var DimensionMapping_DimensionName *smithy.Schema
-
-var _DimensionMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DimensionMappings",
-}, smithy.ShapeTypeList, 1)
-var _DimensionMappings_member *smithy.Schema
-
-var _DimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _DimensionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DimensionValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DimensionValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DimensionValueType",
-}, smithy.ShapeTypeString, 0)
-
-var _DynamoDBStreamStartPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DynamoDBStreamStartPosition",
-}, smithy.ShapeTypeString, 0)
-
-var EcsContainerOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsContainerOverride",
-}, smithy.ShapeTypeStructure, 8)
-var EcsContainerOverride_Command *smithy.Schema
-
-var EcsContainerOverride_Cpu *smithy.Schema
-
-var EcsContainerOverride_Environment *smithy.Schema
-
-var EcsContainerOverride_EnvironmentFiles *smithy.Schema
-
-var EcsContainerOverride_Memory *smithy.Schema
-
-var EcsContainerOverride_MemoryReservation *smithy.Schema
-
-var EcsContainerOverride_Name *smithy.Schema
-
-var EcsContainerOverride_ResourceRequirements *smithy.Schema
-
-var _EcsContainerOverrideList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsContainerOverrideList",
-}, smithy.ShapeTypeList, 1)
-var _EcsContainerOverrideList_member *smithy.Schema
-
-var EcsEnvironmentFile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsEnvironmentFile",
-}, smithy.ShapeTypeStructure, 2)
-var EcsEnvironmentFile_type *smithy.Schema
-
-var EcsEnvironmentFile_value *smithy.Schema
-
-var _EcsEnvironmentFileList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsEnvironmentFileList",
-}, smithy.ShapeTypeList, 1)
-var _EcsEnvironmentFileList_member *smithy.Schema
-
-var _EcsEnvironmentFileType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsEnvironmentFileType",
-}, smithy.ShapeTypeString, 0)
-
-var EcsEnvironmentVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsEnvironmentVariable",
-}, smithy.ShapeTypeStructure, 2)
-var EcsEnvironmentVariable_name *smithy.Schema
-
-var EcsEnvironmentVariable_value *smithy.Schema
-
-var _EcsEnvironmentVariableList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsEnvironmentVariableList",
-}, smithy.ShapeTypeList, 1)
-var _EcsEnvironmentVariableList_member *smithy.Schema
-
-var EcsEphemeralStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsEphemeralStorage",
-}, smithy.ShapeTypeStructure, 1)
-var EcsEphemeralStorage_sizeInGiB *smithy.Schema
-
-var EcsInferenceAcceleratorOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsInferenceAcceleratorOverride",
-}, smithy.ShapeTypeStructure, 2)
-var EcsInferenceAcceleratorOverride_deviceName *smithy.Schema
-
-var EcsInferenceAcceleratorOverride_deviceType *smithy.Schema
-
-var _EcsInferenceAcceleratorOverrideList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsInferenceAcceleratorOverrideList",
-}, smithy.ShapeTypeList, 1)
-var _EcsInferenceAcceleratorOverrideList_member *smithy.Schema
-
-var EcsResourceRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsResourceRequirement",
-}, smithy.ShapeTypeStructure, 2)
-var EcsResourceRequirement_type *smithy.Schema
-
-var EcsResourceRequirement_value *smithy.Schema
-
-var _EcsResourceRequirementsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsResourceRequirementsList",
-}, smithy.ShapeTypeList, 1)
-var _EcsResourceRequirementsList_member *smithy.Schema
-
-var _EcsResourceRequirementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsResourceRequirementType",
-}, smithy.ShapeTypeString, 0)
-
-var EcsTaskOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EcsTaskOverride",
-}, smithy.ShapeTypeStructure, 7)
-var EcsTaskOverride_ContainerOverrides *smithy.Schema
-
-var EcsTaskOverride_Cpu *smithy.Schema
-
-var EcsTaskOverride_EphemeralStorage *smithy.Schema
-
-var EcsTaskOverride_ExecutionRoleArn *smithy.Schema
-
-var EcsTaskOverride_InferenceAcceleratorOverrides *smithy.Schema
-
-var EcsTaskOverride_Memory *smithy.Schema
-
-var EcsTaskOverride_TaskRoleArn *smithy.Schema
-
-var _EndpointString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EndpointString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EphemeralStorageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EphemeralStorageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _EpochTimeUnit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EpochTimeUnit",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventBridgeDetailType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EventBridgeDetailType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EventBridgeEndpointId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EventBridgeEndpointId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EventBridgeEventResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EventBridgeEventResourceList",
-}, smithy.ShapeTypeList, 1)
-var _EventBridgeEventResourceList_member *smithy.Schema
-
-var _EventBridgeEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EventBridgeEventSource",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EventPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "EventPattern",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 1)
-var Filter_Pattern *smithy.Schema
-
-var FilterCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "FilterCriteria",
-}, smithy.ShapeTypeStructure, 1)
-var FilterCriteria_Filters *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var _FirehoseArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "FirehoseArn",
-}, smithy.ShapeTypeString, 0)
-
-var FirehoseLogDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "FirehoseLogDestination",
-}, smithy.ShapeTypeStructure, 1)
-var FirehoseLogDestination_DeliveryStreamArn *smithy.Schema
-
-var FirehoseLogDestinationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "FirehoseLogDestinationParameters",
-}, smithy.ShapeTypeStructure, 1)
-var FirehoseLogDestinationParameters_DeliveryStreamArn *smithy.Schema
-
-var _HeaderKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "HeaderKey",
-}, smithy.ShapeTypeString, 0)
-
-var _HeaderParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "HeaderParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _HeaderParametersMap_key *smithy.Schema
-
-var _HeaderParametersMap_value *smithy.Schema
-
-var _HeaderValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "HeaderValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _IncludeExecutionData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "IncludeExecutionData",
-}, smithy.ShapeTypeList, 1)
-var _IncludeExecutionData_member *smithy.Schema
-
-var _IncludeExecutionDataOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "IncludeExecutionDataOption",
-}, smithy.ShapeTypeString, 0)
-
-var _InputTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "InputTemplate",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var InternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalException_message *smithy.Schema
-
-var InternalException_retryAfterSeconds *smithy.Schema
-
-var _JsonPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "JsonPath",
-}, smithy.ShapeTypeString, 0)
-
-var _KafkaBootstrapServers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "KafkaBootstrapServers",
-}, smithy.ShapeTypeList, 1)
-var _KafkaBootstrapServers_member *smithy.Schema
-
-var _KafkaTopicName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "KafkaTopicName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _KinesisPartitionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "KinesisPartitionKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _KinesisStreamStartPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "KinesisStreamStartPosition",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "KmsKeyIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _LaunchType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "LaunchType",
-}, smithy.ShapeTypeString, 0)
-
-var _LimitMax10 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "LimitMax10",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LimitMax100 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "LimitMax100",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LimitMax10000 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "LimitMax10000",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LimitMin1 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "LimitMin1",
-}, smithy.ShapeTypeInteger, 0)
-
-var _LogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "LogLevel",
-}, smithy.ShapeTypeString, 0)
-
-var _LogStreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "LogStreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _MaximumBatchingWindowInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MaximumBatchingWindowInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaximumRecordAgeInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MaximumRecordAgeInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaximumRetryAttemptsESM = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MaximumRetryAttemptsESM",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MeasureName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MeasureName",
-}, smithy.ShapeTypeString, 0)
-
-var _MeasureValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MeasureValue",
-}, smithy.ShapeTypeString, 0)
-
-var _MeasureValueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MeasureValueType",
-}, smithy.ShapeTypeString, 0)
-
-var _MessageDeduplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MessageDeduplicationId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MessageGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MessageGroupId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var MQBrokerAccessCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MQBrokerAccessCredentials",
-}, smithy.ShapeTypeUnion, 1)
-var MQBrokerAccessCredentials_BasicAuth *smithy.Schema
-
-var _MQBrokerQueueName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MQBrokerQueueName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var MSKAccessCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MSKAccessCredentials",
-}, smithy.ShapeTypeUnion, 2)
-var MSKAccessCredentials_SaslScram512Auth *smithy.Schema
-
-var MSKAccessCredentials_ClientCertificateTlsAuth *smithy.Schema
-
-var _MSKStartPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MSKStartPosition",
-}, smithy.ShapeTypeString, 0)
-
-var MultiMeasureAttributeMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MultiMeasureAttributeMapping",
-}, smithy.ShapeTypeStructure, 3)
-var MultiMeasureAttributeMapping_MeasureValue *smithy.Schema
-
-var MultiMeasureAttributeMapping_MeasureValueType *smithy.Schema
-
-var MultiMeasureAttributeMapping_MultiMeasureAttributeName *smithy.Schema
-
-var _MultiMeasureAttributeMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MultiMeasureAttributeMappings",
-}, smithy.ShapeTypeList, 1)
-var _MultiMeasureAttributeMappings_member *smithy.Schema
-
-var _MultiMeasureAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MultiMeasureAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var MultiMeasureMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MultiMeasureMapping",
-}, smithy.ShapeTypeStructure, 2)
-var MultiMeasureMapping_MultiMeasureName *smithy.Schema
-
-var MultiMeasureMapping_MultiMeasureAttributeMappings *smithy.Schema
-
-var _MultiMeasureMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MultiMeasureMappings",
-}, smithy.ShapeTypeList, 1)
-var _MultiMeasureMappings_member *smithy.Schema
-
-var _MultiMeasureName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "MultiMeasureName",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkConfiguration_awsvpcConfiguration *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var _OnPartialBatchItemFailureStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "OnPartialBatchItemFailureStreams",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionalArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "OptionalArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PathParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PathParameter",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PathParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PathParameterList",
-}, smithy.ShapeTypeList, 1)
-var _PathParameterList_member *smithy.Schema
-
-var Pipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Pipe",
-}, smithy.ShapeTypeStructure, 10)
-var Pipe_Name *smithy.Schema
-
-var Pipe_Arn *smithy.Schema
-
-var Pipe_DesiredState *smithy.Schema
-
-var Pipe_CurrentState *smithy.Schema
-
-var Pipe_StateReason *smithy.Schema
-
-var Pipe_CreationTime *smithy.Schema
-
-var Pipe_LastModifiedTime *smithy.Schema
-
-var Pipe_Source *smithy.Schema
-
-var Pipe_Target *smithy.Schema
-
-var Pipe_Enrichment *smithy.Schema
-
-var _PipeArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeArn",
-}, smithy.ShapeTypeString, 0)
-
-var _PipeDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PipeEnrichmentHttpParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeEnrichmentHttpParameters",
-}, smithy.ShapeTypeStructure, 3)
-var PipeEnrichmentHttpParameters_PathParameterValues *smithy.Schema
-
-var PipeEnrichmentHttpParameters_HeaderParameters *smithy.Schema
-
-var PipeEnrichmentHttpParameters_QueryStringParameters *smithy.Schema
-
-var PipeEnrichmentParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeEnrichmentParameters",
-}, smithy.ShapeTypeStructure, 2)
-var PipeEnrichmentParameters_InputTemplate *smithy.Schema
-
-var PipeEnrichmentParameters_HttpParameters *smithy.Schema
-
-var _PipeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeList",
-}, smithy.ShapeTypeList, 1)
-var _PipeList_member *smithy.Schema
-
-var PipeLogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeLogConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var PipeLogConfiguration_S3LogDestination *smithy.Schema
-
-var PipeLogConfiguration_FirehoseLogDestination *smithy.Schema
-
-var PipeLogConfiguration_CloudwatchLogsLogDestination *smithy.Schema
-
-var PipeLogConfiguration_Level *smithy.Schema
-
-var PipeLogConfiguration_IncludeExecutionData *smithy.Schema
-
-var PipeLogConfigurationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeLogConfigurationParameters",
-}, smithy.ShapeTypeStructure, 5)
-var PipeLogConfigurationParameters_S3LogDestination *smithy.Schema
-
-var PipeLogConfigurationParameters_FirehoseLogDestination *smithy.Schema
-
-var PipeLogConfigurationParameters_CloudwatchLogsLogDestination *smithy.Schema
-
-var PipeLogConfigurationParameters_Level *smithy.Schema
-
-var PipeLogConfigurationParameters_IncludeExecutionData *smithy.Schema
-
-var _PipeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeName",
-}, smithy.ShapeTypeString, 0)
-
-var PipeSourceActiveMQBrokerParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceActiveMQBrokerParameters",
-}, smithy.ShapeTypeStructure, 4)
-var PipeSourceActiveMQBrokerParameters_Credentials *smithy.Schema
-
-var PipeSourceActiveMQBrokerParameters_QueueName *smithy.Schema
-
-var PipeSourceActiveMQBrokerParameters_BatchSize *smithy.Schema
-
-var PipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceDynamoDBStreamParameters",
-}, smithy.ShapeTypeStructure, 8)
-var PipeSourceDynamoDBStreamParameters_BatchSize *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters_DeadLetterConfig *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters_MaximumRetryAttempts *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters_ParallelizationFactor *smithy.Schema
-
-var PipeSourceDynamoDBStreamParameters_StartingPosition *smithy.Schema
-
-var PipeSourceKinesisStreamParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceKinesisStreamParameters",
-}, smithy.ShapeTypeStructure, 9)
-var PipeSourceKinesisStreamParameters_BatchSize *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_DeadLetterConfig *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_OnPartialBatchItemFailure *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_MaximumRetryAttempts *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_ParallelizationFactor *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_StartingPosition *smithy.Schema
-
-var PipeSourceKinesisStreamParameters_StartingPositionTimestamp *smithy.Schema
-
-var PipeSourceManagedStreamingKafkaParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceManagedStreamingKafkaParameters",
-}, smithy.ShapeTypeStructure, 6)
-var PipeSourceManagedStreamingKafkaParameters_TopicName *smithy.Schema
-
-var PipeSourceManagedStreamingKafkaParameters_StartingPosition *smithy.Schema
-
-var PipeSourceManagedStreamingKafkaParameters_BatchSize *smithy.Schema
-
-var PipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var PipeSourceManagedStreamingKafkaParameters_ConsumerGroupID *smithy.Schema
-
-var PipeSourceManagedStreamingKafkaParameters_Credentials *smithy.Schema
-
-var PipeSourceParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceParameters",
-}, smithy.ShapeTypeStructure, 8)
-var PipeSourceParameters_FilterCriteria *smithy.Schema
-
-var PipeSourceParameters_KinesisStreamParameters *smithy.Schema
-
-var PipeSourceParameters_DynamoDBStreamParameters *smithy.Schema
-
-var PipeSourceParameters_SqsQueueParameters *smithy.Schema
-
-var PipeSourceParameters_ActiveMQBrokerParameters *smithy.Schema
-
-var PipeSourceParameters_RabbitMQBrokerParameters *smithy.Schema
-
-var PipeSourceParameters_ManagedStreamingKafkaParameters *smithy.Schema
-
-var PipeSourceParameters_SelfManagedKafkaParameters *smithy.Schema
-
-var PipeSourceRabbitMQBrokerParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceRabbitMQBrokerParameters",
-}, smithy.ShapeTypeStructure, 5)
-var PipeSourceRabbitMQBrokerParameters_Credentials *smithy.Schema
-
-var PipeSourceRabbitMQBrokerParameters_QueueName *smithy.Schema
-
-var PipeSourceRabbitMQBrokerParameters_VirtualHost *smithy.Schema
-
-var PipeSourceRabbitMQBrokerParameters_BatchSize *smithy.Schema
-
-var PipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceSelfManagedKafkaParameters",
-}, smithy.ShapeTypeStructure, 9)
-var PipeSourceSelfManagedKafkaParameters_TopicName *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_StartingPosition *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_BatchSize *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_ConsumerGroupID *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_Credentials *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate *smithy.Schema
-
-var PipeSourceSelfManagedKafkaParameters_Vpc *smithy.Schema
-
-var PipeSourceSqsQueueParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeSourceSqsQueueParameters",
-}, smithy.ShapeTypeStructure, 2)
-var PipeSourceSqsQueueParameters_BatchSize *smithy.Schema
-
-var PipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var _PipeState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeState",
-}, smithy.ShapeTypeString, 0)
-
-var _PipeStateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeStateReason",
-}, smithy.ShapeTypeString, 0)
-
-var PipeTargetBatchJobParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetBatchJobParameters",
-}, smithy.ShapeTypeStructure, 7)
-var PipeTargetBatchJobParameters_JobDefinition *smithy.Schema
-
-var PipeTargetBatchJobParameters_JobName *smithy.Schema
-
-var PipeTargetBatchJobParameters_ArrayProperties *smithy.Schema
-
-var PipeTargetBatchJobParameters_RetryStrategy *smithy.Schema
-
-var PipeTargetBatchJobParameters_ContainerOverrides *smithy.Schema
-
-var PipeTargetBatchJobParameters_DependsOn *smithy.Schema
-
-var PipeTargetBatchJobParameters_Parameters *smithy.Schema
-
-var PipeTargetCloudWatchLogsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetCloudWatchLogsParameters",
-}, smithy.ShapeTypeStructure, 2)
-var PipeTargetCloudWatchLogsParameters_LogStreamName *smithy.Schema
-
-var PipeTargetCloudWatchLogsParameters_Timestamp *smithy.Schema
-
-var PipeTargetEcsTaskParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetEcsTaskParameters",
-}, smithy.ShapeTypeStructure, 15)
-var PipeTargetEcsTaskParameters_TaskDefinitionArn *smithy.Schema
-
-var PipeTargetEcsTaskParameters_TaskCount *smithy.Schema
-
-var PipeTargetEcsTaskParameters_LaunchType *smithy.Schema
-
-var PipeTargetEcsTaskParameters_NetworkConfiguration *smithy.Schema
-
-var PipeTargetEcsTaskParameters_PlatformVersion *smithy.Schema
-
-var PipeTargetEcsTaskParameters_Group *smithy.Schema
-
-var PipeTargetEcsTaskParameters_CapacityProviderStrategy *smithy.Schema
-
-var PipeTargetEcsTaskParameters_EnableECSManagedTags *smithy.Schema
-
-var PipeTargetEcsTaskParameters_EnableExecuteCommand *smithy.Schema
-
-var PipeTargetEcsTaskParameters_PlacementConstraints *smithy.Schema
-
-var PipeTargetEcsTaskParameters_PlacementStrategy *smithy.Schema
-
-var PipeTargetEcsTaskParameters_PropagateTags *smithy.Schema
-
-var PipeTargetEcsTaskParameters_ReferenceId *smithy.Schema
-
-var PipeTargetEcsTaskParameters_Overrides *smithy.Schema
-
-var PipeTargetEcsTaskParameters_Tags *smithy.Schema
-
-var PipeTargetEventBridgeEventBusParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetEventBridgeEventBusParameters",
-}, smithy.ShapeTypeStructure, 5)
-var PipeTargetEventBridgeEventBusParameters_EndpointId *smithy.Schema
-
-var PipeTargetEventBridgeEventBusParameters_DetailType *smithy.Schema
-
-var PipeTargetEventBridgeEventBusParameters_Source *smithy.Schema
-
-var PipeTargetEventBridgeEventBusParameters_Resources *smithy.Schema
-
-var PipeTargetEventBridgeEventBusParameters_Time *smithy.Schema
-
-var PipeTargetHttpParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetHttpParameters",
-}, smithy.ShapeTypeStructure, 3)
-var PipeTargetHttpParameters_PathParameterValues *smithy.Schema
-
-var PipeTargetHttpParameters_HeaderParameters *smithy.Schema
-
-var PipeTargetHttpParameters_QueryStringParameters *smithy.Schema
-
-var _PipeTargetInvocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetInvocationType",
-}, smithy.ShapeTypeString, 0)
-
-var PipeTargetKinesisStreamParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetKinesisStreamParameters",
-}, smithy.ShapeTypeStructure, 1)
-var PipeTargetKinesisStreamParameters_PartitionKey *smithy.Schema
-
-var PipeTargetLambdaFunctionParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetLambdaFunctionParameters",
-}, smithy.ShapeTypeStructure, 1)
-var PipeTargetLambdaFunctionParameters_InvocationType *smithy.Schema
-
-var PipeTargetParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetParameters",
-}, smithy.ShapeTypeStructure, 13)
-var PipeTargetParameters_InputTemplate *smithy.Schema
-
-var PipeTargetParameters_LambdaFunctionParameters *smithy.Schema
-
-var PipeTargetParameters_StepFunctionStateMachineParameters *smithy.Schema
-
-var PipeTargetParameters_KinesisStreamParameters *smithy.Schema
-
-var PipeTargetParameters_EcsTaskParameters *smithy.Schema
-
-var PipeTargetParameters_BatchJobParameters *smithy.Schema
-
-var PipeTargetParameters_SqsQueueParameters *smithy.Schema
-
-var PipeTargetParameters_HttpParameters *smithy.Schema
-
-var PipeTargetParameters_RedshiftDataParameters *smithy.Schema
-
-var PipeTargetParameters_SageMakerPipelineParameters *smithy.Schema
-
-var PipeTargetParameters_EventBridgeEventBusParameters *smithy.Schema
-
-var PipeTargetParameters_CloudWatchLogsParameters *smithy.Schema
-
-var PipeTargetParameters_TimestreamParameters *smithy.Schema
-
-var PipeTargetRedshiftDataParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetRedshiftDataParameters",
-}, smithy.ShapeTypeStructure, 6)
-var PipeTargetRedshiftDataParameters_SecretManagerArn *smithy.Schema
-
-var PipeTargetRedshiftDataParameters_Database *smithy.Schema
-
-var PipeTargetRedshiftDataParameters_DbUser *smithy.Schema
-
-var PipeTargetRedshiftDataParameters_StatementName *smithy.Schema
-
-var PipeTargetRedshiftDataParameters_WithEvent *smithy.Schema
-
-var PipeTargetRedshiftDataParameters_Sqls *smithy.Schema
-
-var PipeTargetSageMakerPipelineParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetSageMakerPipelineParameters",
-}, smithy.ShapeTypeStructure, 1)
-var PipeTargetSageMakerPipelineParameters_PipelineParameterList *smithy.Schema
-
-var PipeTargetSqsQueueParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetSqsQueueParameters",
-}, smithy.ShapeTypeStructure, 2)
-var PipeTargetSqsQueueParameters_MessageGroupId *smithy.Schema
-
-var PipeTargetSqsQueueParameters_MessageDeduplicationId *smithy.Schema
-
-var PipeTargetStateMachineParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetStateMachineParameters",
-}, smithy.ShapeTypeStructure, 1)
-var PipeTargetStateMachineParameters_InvocationType *smithy.Schema
-
-var PipeTargetTimestreamParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PipeTargetTimestreamParameters",
-}, smithy.ShapeTypeStructure, 8)
-var PipeTargetTimestreamParameters_TimeValue *smithy.Schema
-
-var PipeTargetTimestreamParameters_EpochTimeUnit *smithy.Schema
-
-var PipeTargetTimestreamParameters_TimeFieldType *smithy.Schema
-
-var PipeTargetTimestreamParameters_TimestampFormat *smithy.Schema
-
-var PipeTargetTimestreamParameters_VersionValue *smithy.Schema
-
-var PipeTargetTimestreamParameters_DimensionMappings *smithy.Schema
-
-var PipeTargetTimestreamParameters_SingleMeasureMappings *smithy.Schema
-
-var PipeTargetTimestreamParameters_MultiMeasureMappings *smithy.Schema
-
-var PlacementConstraint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementConstraint",
-}, smithy.ShapeTypeStructure, 2)
-var PlacementConstraint_type *smithy.Schema
-
-var PlacementConstraint_expression *smithy.Schema
-
-var _PlacementConstraintExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementConstraintExpression",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PlacementConstraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementConstraints",
-}, smithy.ShapeTypeList, 1)
-var _PlacementConstraints_member *smithy.Schema
-
-var _PlacementConstraintType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementConstraintType",
-}, smithy.ShapeTypeString, 0)
-
-var _PlacementStrategies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementStrategies",
-}, smithy.ShapeTypeList, 1)
-var _PlacementStrategies_member *smithy.Schema
-
-var PlacementStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementStrategy",
-}, smithy.ShapeTypeStructure, 2)
-var PlacementStrategy_type *smithy.Schema
-
-var PlacementStrategy_field *smithy.Schema
-
-var _PlacementStrategyField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementStrategyField",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PlacementStrategyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PlacementStrategyType",
-}, smithy.ShapeTypeString, 0)
-
-var _PropagateTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "PropagateTags",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryStringKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "QueryStringKey",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryStringParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "QueryStringParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _QueryStringParametersMap_key *smithy.Schema
-
-var _QueryStringParametersMap_value *smithy.Schema
-
-var _QueryStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "QueryStringValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ReferenceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ReferenceId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RequestedPipeState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "RequestedPipeState",
-}, smithy.ShapeTypeString, 0)
-
-var _RequestedPipeStateDescribeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "RequestedPipeStateDescribeResponse",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3LogDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "S3LogDestination",
-}, smithy.ShapeTypeStructure, 4)
-var S3LogDestination_BucketName *smithy.Schema
-
-var S3LogDestination_Prefix *smithy.Schema
-
-var S3LogDestination_BucketOwner *smithy.Schema
-
-var S3LogDestination_OutputFormat *smithy.Schema
-
-var S3LogDestinationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "S3LogDestinationParameters",
-}, smithy.ShapeTypeStructure, 4)
-var S3LogDestinationParameters_BucketName *smithy.Schema
-
-var S3LogDestinationParameters_BucketOwner *smithy.Schema
-
-var S3LogDestinationParameters_OutputFormat *smithy.Schema
-
-var S3LogDestinationParameters_Prefix *smithy.Schema
-
-var _S3OutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "S3OutputFormat",
-}, smithy.ShapeTypeString, 0)
-
-var SageMakerPipelineParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SageMakerPipelineParameter",
-}, smithy.ShapeTypeStructure, 2)
-var SageMakerPipelineParameter_Name *smithy.Schema
-
-var SageMakerPipelineParameter_Value *smithy.Schema
-
-var _SageMakerPipelineParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SageMakerPipelineParameterList",
-}, smithy.ShapeTypeList, 1)
-var _SageMakerPipelineParameterList_member *smithy.Schema
-
-var _SageMakerPipelineParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SageMakerPipelineParameterName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SageMakerPipelineParameterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SageMakerPipelineParameterValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SecretManagerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SecretManagerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SecretManagerArnOrJsonPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SecretManagerArnOrJsonPath",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SecurityGroup",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var _SecurityGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SecurityGroups",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroups_member *smithy.Schema
-
-var SelfManagedKafkaAccessConfigurationCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SelfManagedKafkaAccessConfigurationCredentials",
-}, smithy.ShapeTypeUnion, 4)
-var SelfManagedKafkaAccessConfigurationCredentials_BasicAuth *smithy.Schema
-
-var SelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth *smithy.Schema
-
-var SelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth *smithy.Schema
-
-var SelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth *smithy.Schema
-
-var SelfManagedKafkaAccessConfigurationVpc = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SelfManagedKafkaAccessConfigurationVpc",
-}, smithy.ShapeTypeStructure, 2)
-var SelfManagedKafkaAccessConfigurationVpc_Subnets *smithy.Schema
-
-var SelfManagedKafkaAccessConfigurationVpc_SecurityGroup *smithy.Schema
-
-var _SelfManagedKafkaStartPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SelfManagedKafkaStartPosition",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var SingleMeasureMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SingleMeasureMapping",
-}, smithy.ShapeTypeStructure, 3)
-var SingleMeasureMapping_MeasureValue *smithy.Schema
-
-var SingleMeasureMapping_MeasureValueType *smithy.Schema
-
-var SingleMeasureMapping_MeasureName *smithy.Schema
-
-var _SingleMeasureMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SingleMeasureMappings",
-}, smithy.ShapeTypeList, 1)
-var _SingleMeasureMappings_member *smithy.Schema
-
-var _Sql = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Sql",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Sqls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Sqls",
-}, smithy.ShapeTypeList, 1)
-var _Sqls_member *smithy.Schema
-
-var _StatementName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StatementName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _Subnet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Subnet",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var _Subnets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Subnets",
-}, smithy.ShapeTypeList, 1)
-var _Subnets_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _TimeFieldType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TimeFieldType",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TimestampFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TimestampFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _TimeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TimeValue",
-}, smithy.ShapeTypeString, 0)
-
-var UpdatePipeSourceActiveMQBrokerParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceActiveMQBrokerParameters",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePipeSourceActiveMQBrokerParameters_Credentials *smithy.Schema
-
-var UpdatePipeSourceActiveMQBrokerParameters_BatchSize *smithy.Schema
-
-var UpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var UpdatePipeSourceDynamoDBStreamParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceDynamoDBStreamParameters",
-}, smithy.ShapeTypeStructure, 7)
-var UpdatePipeSourceDynamoDBStreamParameters_BatchSize *smithy.Schema
-
-var UpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig *smithy.Schema
-
-var UpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure *smithy.Schema
-
-var UpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var UpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds *smithy.Schema
-
-var UpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts *smithy.Schema
-
-var UpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor *smithy.Schema
-
-var UpdatePipeSourceKinesisStreamParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceKinesisStreamParameters",
-}, smithy.ShapeTypeStructure, 7)
-var UpdatePipeSourceKinesisStreamParameters_BatchSize *smithy.Schema
-
-var UpdatePipeSourceKinesisStreamParameters_DeadLetterConfig *smithy.Schema
-
-var UpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure *smithy.Schema
-
-var UpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var UpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds *smithy.Schema
-
-var UpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts *smithy.Schema
-
-var UpdatePipeSourceKinesisStreamParameters_ParallelizationFactor *smithy.Schema
-
-var UpdatePipeSourceManagedStreamingKafkaParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceManagedStreamingKafkaParameters",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePipeSourceManagedStreamingKafkaParameters_BatchSize *smithy.Schema
-
-var UpdatePipeSourceManagedStreamingKafkaParameters_Credentials *smithy.Schema
-
-var UpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var UpdatePipeSourceParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceParameters",
-}, smithy.ShapeTypeStructure, 8)
-var UpdatePipeSourceParameters_FilterCriteria *smithy.Schema
-
-var UpdatePipeSourceParameters_KinesisStreamParameters *smithy.Schema
-
-var UpdatePipeSourceParameters_DynamoDBStreamParameters *smithy.Schema
-
-var UpdatePipeSourceParameters_SqsQueueParameters *smithy.Schema
-
-var UpdatePipeSourceParameters_ActiveMQBrokerParameters *smithy.Schema
-
-var UpdatePipeSourceParameters_RabbitMQBrokerParameters *smithy.Schema
-
-var UpdatePipeSourceParameters_ManagedStreamingKafkaParameters *smithy.Schema
-
-var UpdatePipeSourceParameters_SelfManagedKafkaParameters *smithy.Schema
-
-var UpdatePipeSourceRabbitMQBrokerParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceRabbitMQBrokerParameters",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePipeSourceRabbitMQBrokerParameters_Credentials *smithy.Schema
-
-var UpdatePipeSourceRabbitMQBrokerParameters_BatchSize *smithy.Schema
-
-var UpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var UpdatePipeSourceSelfManagedKafkaParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceSelfManagedKafkaParameters",
-}, smithy.ShapeTypeStructure, 5)
-var UpdatePipeSourceSelfManagedKafkaParameters_BatchSize *smithy.Schema
-
-var UpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var UpdatePipeSourceSelfManagedKafkaParameters_Credentials *smithy.Schema
-
-var UpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate *smithy.Schema
-
-var UpdatePipeSourceSelfManagedKafkaParameters_Vpc *smithy.Schema
-
-var UpdatePipeSourceSqsQueueParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeSourceSqsQueueParameters",
-}, smithy.ShapeTypeStructure, 2)
-var UpdatePipeSourceSqsQueueParameters_BatchSize *smithy.Schema
-
-var UpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds *smithy.Schema
-
-var _URI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "URI",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _VersionValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "VersionValue",
-}, smithy.ShapeTypeString, 0)
-
-var CreatePipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CreatePipeRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreatePipeRequest_Name *smithy.Schema
-
-var CreatePipeRequest_Description *smithy.Schema
-
-var CreatePipeRequest_DesiredState *smithy.Schema
-
-var CreatePipeRequest_Source *smithy.Schema
-
-var CreatePipeRequest_SourceParameters *smithy.Schema
-
-var CreatePipeRequest_Enrichment *smithy.Schema
-
-var CreatePipeRequest_EnrichmentParameters *smithy.Schema
-
-var CreatePipeRequest_Target *smithy.Schema
-
-var CreatePipeRequest_TargetParameters *smithy.Schema
-
-var CreatePipeRequest_RoleArn *smithy.Schema
-
-var CreatePipeRequest_Tags *smithy.Schema
-
-var CreatePipeRequest_LogConfiguration *smithy.Schema
-
-var CreatePipeRequest_KmsKeyIdentifier *smithy.Schema
-
-var CreatePipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "CreatePipeResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreatePipeResponse_Arn *smithy.Schema
-
-var CreatePipeResponse_Name *smithy.Schema
-
-var CreatePipeResponse_DesiredState *smithy.Schema
-
-var CreatePipeResponse_CurrentState *smithy.Schema
-
-var CreatePipeResponse_CreationTime *smithy.Schema
-
-var CreatePipeResponse_LastModifiedTime *smithy.Schema
-
-var DeletePipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DeletePipeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePipeRequest_Name *smithy.Schema
-
-var DeletePipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DeletePipeResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DeletePipeResponse_Arn *smithy.Schema
-
-var DeletePipeResponse_Name *smithy.Schema
-
-var DeletePipeResponse_DesiredState *smithy.Schema
-
-var DeletePipeResponse_CurrentState *smithy.Schema
-
-var DeletePipeResponse_CreationTime *smithy.Schema
-
-var DeletePipeResponse_LastModifiedTime *smithy.Schema
-
-var DescribePipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DescribePipeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePipeRequest_Name *smithy.Schema
-
-var DescribePipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "DescribePipeResponse",
-}, smithy.ShapeTypeStructure, 18)
-var DescribePipeResponse_Arn *smithy.Schema
-
-var DescribePipeResponse_Name *smithy.Schema
-
-var DescribePipeResponse_Description *smithy.Schema
-
-var DescribePipeResponse_DesiredState *smithy.Schema
-
-var DescribePipeResponse_CurrentState *smithy.Schema
-
-var DescribePipeResponse_StateReason *smithy.Schema
-
-var DescribePipeResponse_Source *smithy.Schema
-
-var DescribePipeResponse_SourceParameters *smithy.Schema
-
-var DescribePipeResponse_Enrichment *smithy.Schema
-
-var DescribePipeResponse_EnrichmentParameters *smithy.Schema
-
-var DescribePipeResponse_Target *smithy.Schema
-
-var DescribePipeResponse_TargetParameters *smithy.Schema
-
-var DescribePipeResponse_RoleArn *smithy.Schema
-
-var DescribePipeResponse_Tags *smithy.Schema
-
-var DescribePipeResponse_CreationTime *smithy.Schema
-
-var DescribePipeResponse_LastModifiedTime *smithy.Schema
-
-var DescribePipeResponse_LogConfiguration *smithy.Schema
-
-var DescribePipeResponse_KmsKeyIdentifier *smithy.Schema
-
-var ListPipesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ListPipesRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListPipesRequest_NamePrefix *smithy.Schema
-
-var ListPipesRequest_DesiredState *smithy.Schema
-
-var ListPipesRequest_CurrentState *smithy.Schema
-
-var ListPipesRequest_SourcePrefix *smithy.Schema
-
-var ListPipesRequest_TargetPrefix *smithy.Schema
-
-var ListPipesRequest_NextToken *smithy.Schema
-
-var ListPipesRequest_Limit *smithy.Schema
-
-var ListPipesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ListPipesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPipesResponse_Pipes *smithy.Schema
-
-var ListPipesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var StartPipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StartPipeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartPipeRequest_Name *smithy.Schema
-
-var StartPipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StartPipeResponse",
-}, smithy.ShapeTypeStructure, 6)
-var StartPipeResponse_Arn *smithy.Schema
-
-var StartPipeResponse_Name *smithy.Schema
-
-var StartPipeResponse_DesiredState *smithy.Schema
-
-var StartPipeResponse_CurrentState *smithy.Schema
-
-var StartPipeResponse_CreationTime *smithy.Schema
-
-var StartPipeResponse_LastModifiedTime *smithy.Schema
-
-var StopPipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StopPipeRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopPipeRequest_Name *smithy.Schema
-
-var StopPipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "StopPipeResponse",
-}, smithy.ShapeTypeStructure, 6)
-var StopPipeResponse_Arn *smithy.Schema
-
-var StopPipeResponse_Name *smithy.Schema
-
-var StopPipeResponse_DesiredState *smithy.Schema
-
-var StopPipeResponse_CurrentState *smithy.Schema
-
-var StopPipeResponse_CreationTime *smithy.Schema
-
-var StopPipeResponse_LastModifiedTime *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdatePipeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeRequest",
-}, smithy.ShapeTypeStructure, 11)
-var UpdatePipeRequest_Name *smithy.Schema
-
-var UpdatePipeRequest_Description *smithy.Schema
-
-var UpdatePipeRequest_DesiredState *smithy.Schema
-
-var UpdatePipeRequest_SourceParameters *smithy.Schema
-
-var UpdatePipeRequest_Enrichment *smithy.Schema
-
-var UpdatePipeRequest_EnrichmentParameters *smithy.Schema
-
-var UpdatePipeRequest_Target *smithy.Schema
-
-var UpdatePipeRequest_TargetParameters *smithy.Schema
-
-var UpdatePipeRequest_RoleArn *smithy.Schema
-
-var UpdatePipeRequest_LogConfiguration *smithy.Schema
-
-var UpdatePipeRequest_KmsKeyIdentifier *smithy.Schema
-
-var UpdatePipeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.pipes",
-	Name:      "UpdatePipeResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdatePipeResponse_Arn *smithy.Schema
-
-var UpdatePipeResponse_Name *smithy.Schema
-
-var UpdatePipeResponse_DesiredState *smithy.Schema
-
-var UpdatePipeResponse_CurrentState *smithy.Schema
-
-var UpdatePipeResponse_CreationTime *smithy.Schema
-
-var UpdatePipeResponse_LastModifiedTime *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_Subnets_member = _Subnets.AddMember("member", _Subnet)
-
-	_SecurityGroups_member = _SecurityGroups.AddMember("member", _SecurityGroup)
-
-	AwsVpcConfiguration_Subnets = AwsVpcConfiguration.AddMember("Subnets", _Subnets)
-
-	AwsVpcConfiguration_SecurityGroups = AwsVpcConfiguration.AddMember("SecurityGroups", _SecurityGroups)
-
-	AwsVpcConfiguration_AssignPublicIp = AwsVpcConfiguration.AddMember("AssignPublicIp", _AssignPublicIp)
-
-	BatchArrayProperties_Size = BatchArrayProperties.AddMember("Size", _BatchArraySize)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	BatchEnvironmentVariable_Name = BatchEnvironmentVariable.AddMember("Name", smithyprelude.String)
-
-	BatchEnvironmentVariable_Value = BatchEnvironmentVariable.AddMember("Value", smithyprelude.String)
-
-	_BatchEnvironmentVariableList_member = _BatchEnvironmentVariableList.AddMember("member", BatchEnvironmentVariable)
-
-	BatchResourceRequirement_Type = BatchResourceRequirement.AddMember("Type", _BatchResourceRequirementType)
-
-	BatchResourceRequirement_Value = BatchResourceRequirement.AddMember("Value", smithyprelude.String)
-
-	_BatchResourceRequirementsList_member = _BatchResourceRequirementsList.AddMember("member", BatchResourceRequirement)
-
-	BatchContainerOverrides_Command = BatchContainerOverrides.AddMember("Command", _StringList)
-
-	BatchContainerOverrides_Environment = BatchContainerOverrides.AddMember("Environment", _BatchEnvironmentVariableList)
-
-	BatchContainerOverrides_InstanceType = BatchContainerOverrides.AddMember("InstanceType", smithyprelude.String)
-
-	BatchContainerOverrides_ResourceRequirements = BatchContainerOverrides.AddMember("ResourceRequirements", _BatchResourceRequirementsList)
-
-	BatchJobDependency_JobId = BatchJobDependency.AddMember("JobId", smithyprelude.String)
-
-	BatchJobDependency_Type = BatchJobDependency.AddMember("Type", _BatchJobDependencyType)
-
-	_BatchDependsOn_member = _BatchDependsOn.AddMember("member", BatchJobDependency)
-
-	_BatchParametersMap_key = _BatchParametersMap.AddMember("key", smithyprelude.String)
-
-	_BatchParametersMap_value = _BatchParametersMap.AddMember("value", smithyprelude.String)
-
-	BatchRetryStrategy_Attempts = BatchRetryStrategy.AddMember("Attempts", _BatchRetryAttempts)
-
-	CapacityProviderStrategyItem_capacityProvider = CapacityProviderStrategyItem.AddMember("capacityProvider", _CapacityProvider)
-
-	CapacityProviderStrategyItem_weight = CapacityProviderStrategyItem.AddMember("weight", _CapacityProviderStrategyItemWeight)
-
-	CapacityProviderStrategyItem_base = CapacityProviderStrategyItem.AddMember("base", _CapacityProviderStrategyItemBase)
-
-	_CapacityProviderStrategy_member = _CapacityProviderStrategy.AddMember("member", CapacityProviderStrategyItem)
-
-	CloudwatchLogsLogDestination_LogGroupArn = CloudwatchLogsLogDestination.AddMember("LogGroupArn", _CloudwatchLogGroupArn)
-
-	CloudwatchLogsLogDestinationParameters_LogGroupArn = CloudwatchLogsLogDestinationParameters.AddMember("LogGroupArn", _CloudwatchLogGroupArn)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	DeadLetterConfig_Arn = DeadLetterConfig.AddMember("Arn", _Arn)
-
-	DimensionMapping_DimensionValue = DimensionMapping.AddMember("DimensionValue", _DimensionValue)
-
-	DimensionMapping_DimensionValueType = DimensionMapping.AddMember("DimensionValueType", _DimensionValueType)
-
-	DimensionMapping_DimensionName = DimensionMapping.AddMember("DimensionName", _DimensionName)
-
-	_DimensionMappings_member = _DimensionMappings.AddMember("member", DimensionMapping)
-
-	EcsEnvironmentVariable_name = EcsEnvironmentVariable.AddMember("name", _String)
-
-	EcsEnvironmentVariable_value = EcsEnvironmentVariable.AddMember("value", _String)
-
-	_EcsEnvironmentVariableList_member = _EcsEnvironmentVariableList.AddMember("member", EcsEnvironmentVariable)
-
-	EcsEnvironmentFile_type = EcsEnvironmentFile.AddMember("type", _EcsEnvironmentFileType)
-
-	EcsEnvironmentFile_value = EcsEnvironmentFile.AddMember("value", _String)
-
-	_EcsEnvironmentFileList_member = _EcsEnvironmentFileList.AddMember("member", EcsEnvironmentFile)
-
-	EcsResourceRequirement_type = EcsResourceRequirement.AddMember("type", _EcsResourceRequirementType)
-
-	EcsResourceRequirement_value = EcsResourceRequirement.AddMember("value", _String)
-
-	_EcsResourceRequirementsList_member = _EcsResourceRequirementsList.AddMember("member", EcsResourceRequirement)
-
-	EcsContainerOverride_Command = EcsContainerOverride.AddMember("Command", _StringList)
-
-	EcsContainerOverride_Cpu = EcsContainerOverride.AddMember("Cpu", smithyprelude.Integer)
-
-	EcsContainerOverride_Environment = EcsContainerOverride.AddMember("Environment", _EcsEnvironmentVariableList)
-
-	EcsContainerOverride_EnvironmentFiles = EcsContainerOverride.AddMember("EnvironmentFiles", _EcsEnvironmentFileList)
-
-	EcsContainerOverride_Memory = EcsContainerOverride.AddMember("Memory", smithyprelude.Integer)
-
-	EcsContainerOverride_MemoryReservation = EcsContainerOverride.AddMember("MemoryReservation", smithyprelude.Integer)
-
-	EcsContainerOverride_Name = EcsContainerOverride.AddMember("Name", _String)
-
-	EcsContainerOverride_ResourceRequirements = EcsContainerOverride.AddMember("ResourceRequirements", _EcsResourceRequirementsList)
-
-	_EcsContainerOverrideList_member = _EcsContainerOverrideList.AddMember("member", EcsContainerOverride)
-
-	EcsEphemeralStorage_sizeInGiB = EcsEphemeralStorage.AddMember("sizeInGiB", _EphemeralStorageSize)
-
-	EcsInferenceAcceleratorOverride_deviceName = EcsInferenceAcceleratorOverride.AddMember("deviceName", _String)
-
-	EcsInferenceAcceleratorOverride_deviceType = EcsInferenceAcceleratorOverride.AddMember("deviceType", _String)
-
-	_EcsInferenceAcceleratorOverrideList_member = _EcsInferenceAcceleratorOverrideList.AddMember("member", EcsInferenceAcceleratorOverride)
-
-	EcsTaskOverride_ContainerOverrides = EcsTaskOverride.AddMember("ContainerOverrides", _EcsContainerOverrideList)
-
-	EcsTaskOverride_Cpu = EcsTaskOverride.AddMember("Cpu", _String)
-
-	EcsTaskOverride_EphemeralStorage = EcsTaskOverride.AddMember("EphemeralStorage", EcsEphemeralStorage)
-
-	EcsTaskOverride_ExecutionRoleArn = EcsTaskOverride.AddMember("ExecutionRoleArn", _ArnOrJsonPath)
-
-	EcsTaskOverride_InferenceAcceleratorOverrides = EcsTaskOverride.AddMember("InferenceAcceleratorOverrides", _EcsInferenceAcceleratorOverrideList)
-
-	EcsTaskOverride_Memory = EcsTaskOverride.AddMember("Memory", _String)
-
-	EcsTaskOverride_TaskRoleArn = EcsTaskOverride.AddMember("TaskRoleArn", _ArnOrJsonPath)
-
-	_EventBridgeEventResourceList_member = _EventBridgeEventResourceList.AddMember("member", _ArnOrJsonPath)
-
-	Filter_Pattern = Filter.AddMember("Pattern", _EventPattern)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	FilterCriteria_Filters = FilterCriteria.AddMember("Filters", _FilterList)
-
-	FirehoseLogDestination_DeliveryStreamArn = FirehoseLogDestination.AddMember("DeliveryStreamArn", _FirehoseArn)
-
-	FirehoseLogDestinationParameters_DeliveryStreamArn = FirehoseLogDestinationParameters.AddMember("DeliveryStreamArn", _FirehoseArn)
-
-	_HeaderParametersMap_key = _HeaderParametersMap.AddMember("key", _HeaderKey)
-
-	_HeaderParametersMap_value = _HeaderParametersMap.AddMember("value", _HeaderValue)
-
-	_IncludeExecutionData_member = _IncludeExecutionData.AddMember("member", _IncludeExecutionDataOption)
-
-	InternalException_message = InternalException.AddMember("message", smithyprelude.String)
-
-	InternalException_retryAfterSeconds = InternalException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_KafkaBootstrapServers_member = _KafkaBootstrapServers.AddMember("member", _EndpointString)
-
-	MQBrokerAccessCredentials_BasicAuth = MQBrokerAccessCredentials.AddMember("BasicAuth", _SecretManagerArn)
-
-	MSKAccessCredentials_SaslScram512Auth = MSKAccessCredentials.AddMember("SaslScram512Auth", _SecretManagerArn)
-
-	MSKAccessCredentials_ClientCertificateTlsAuth = MSKAccessCredentials.AddMember("ClientCertificateTlsAuth", _SecretManagerArn)
-
-	MultiMeasureAttributeMapping_MeasureValue = MultiMeasureAttributeMapping.AddMember("MeasureValue", _MeasureValue)
-
-	MultiMeasureAttributeMapping_MeasureValueType = MultiMeasureAttributeMapping.AddMember("MeasureValueType", _MeasureValueType)
-
-	MultiMeasureAttributeMapping_MultiMeasureAttributeName = MultiMeasureAttributeMapping.AddMember("MultiMeasureAttributeName", _MultiMeasureAttributeName)
-
-	_MultiMeasureAttributeMappings_member = _MultiMeasureAttributeMappings.AddMember("member", MultiMeasureAttributeMapping)
-
-	MultiMeasureMapping_MultiMeasureName = MultiMeasureMapping.AddMember("MultiMeasureName", _MultiMeasureName)
-
-	MultiMeasureMapping_MultiMeasureAttributeMappings = MultiMeasureMapping.AddMember("MultiMeasureAttributeMappings", _MultiMeasureAttributeMappings)
-
-	_MultiMeasureMappings_member = _MultiMeasureMappings.AddMember("member", MultiMeasureMapping)
-
-	NetworkConfiguration_awsvpcConfiguration = NetworkConfiguration.AddMember("awsvpcConfiguration", AwsVpcConfiguration)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _ErrorMessage)
-
-	_PathParameterList_member = _PathParameterList.AddMember("member", _PathParameter)
-
-	Pipe_Name = Pipe.AddMember("Name", _PipeName)
-
-	Pipe_Arn = Pipe.AddMember("Arn", _PipeArn)
-
-	Pipe_DesiredState = Pipe.AddMember("DesiredState", _RequestedPipeState)
-
-	Pipe_CurrentState = Pipe.AddMember("CurrentState", _PipeState)
-
-	Pipe_StateReason = Pipe.AddMember("StateReason", _PipeStateReason)
-
-	Pipe_CreationTime = Pipe.AddMember("CreationTime", _Timestamp)
-
-	Pipe_LastModifiedTime = Pipe.AddMember("LastModifiedTime", _Timestamp)
-
-	Pipe_Source = Pipe.AddMember("Source", _ArnOrUrl)
-
-	Pipe_Target = Pipe.AddMember("Target", _Arn)
-
-	Pipe_Enrichment = Pipe.AddMember("Enrichment", _OptionalArn)
-
-	_QueryStringParametersMap_key = _QueryStringParametersMap.AddMember("key", _QueryStringKey)
-
-	_QueryStringParametersMap_value = _QueryStringParametersMap.AddMember("value", _QueryStringValue)
-
-	PipeEnrichmentHttpParameters_PathParameterValues = PipeEnrichmentHttpParameters.AddMember("PathParameterValues", _PathParameterList)
-
-	PipeEnrichmentHttpParameters_HeaderParameters = PipeEnrichmentHttpParameters.AddMember("HeaderParameters", _HeaderParametersMap)
-
-	PipeEnrichmentHttpParameters_QueryStringParameters = PipeEnrichmentHttpParameters.AddMember("QueryStringParameters", _QueryStringParametersMap)
-
-	PipeEnrichmentParameters_InputTemplate = PipeEnrichmentParameters.AddMember("InputTemplate", _InputTemplate)
-
-	PipeEnrichmentParameters_HttpParameters = PipeEnrichmentParameters.AddMember("HttpParameters", PipeEnrichmentHttpParameters)
-
-	_PipeList_member = _PipeList.AddMember("member", Pipe)
-
-	S3LogDestination_BucketName = S3LogDestination.AddMember("BucketName", _String)
-
-	S3LogDestination_Prefix = S3LogDestination.AddMember("Prefix", _String)
-
-	S3LogDestination_BucketOwner = S3LogDestination.AddMember("BucketOwner", _String)
-
-	S3LogDestination_OutputFormat = S3LogDestination.AddMember("OutputFormat", _S3OutputFormat)
-
-	PipeLogConfiguration_S3LogDestination = PipeLogConfiguration.AddMember("S3LogDestination", S3LogDestination)
-
-	PipeLogConfiguration_FirehoseLogDestination = PipeLogConfiguration.AddMember("FirehoseLogDestination", FirehoseLogDestination)
-
-	PipeLogConfiguration_CloudwatchLogsLogDestination = PipeLogConfiguration.AddMember("CloudwatchLogsLogDestination", CloudwatchLogsLogDestination)
-
-	PipeLogConfiguration_Level = PipeLogConfiguration.AddMember("Level", _LogLevel)
-
-	PipeLogConfiguration_IncludeExecutionData = PipeLogConfiguration.AddMember("IncludeExecutionData", _IncludeExecutionData)
-
-	S3LogDestinationParameters_BucketName = S3LogDestinationParameters.AddMember("BucketName", _String)
-
-	S3LogDestinationParameters_BucketOwner = S3LogDestinationParameters.AddMember("BucketOwner", _String)
-
-	S3LogDestinationParameters_OutputFormat = S3LogDestinationParameters.AddMember("OutputFormat", _S3OutputFormat)
-
-	S3LogDestinationParameters_Prefix = S3LogDestinationParameters.AddMember("Prefix", _String)
-
-	PipeLogConfigurationParameters_S3LogDestination = PipeLogConfigurationParameters.AddMember("S3LogDestination", S3LogDestinationParameters)
-
-	PipeLogConfigurationParameters_FirehoseLogDestination = PipeLogConfigurationParameters.AddMember("FirehoseLogDestination", FirehoseLogDestinationParameters)
-
-	PipeLogConfigurationParameters_CloudwatchLogsLogDestination = PipeLogConfigurationParameters.AddMember("CloudwatchLogsLogDestination", CloudwatchLogsLogDestinationParameters)
-
-	PipeLogConfigurationParameters_Level = PipeLogConfigurationParameters.AddMember("Level", _LogLevel)
-
-	PipeLogConfigurationParameters_IncludeExecutionData = PipeLogConfigurationParameters.AddMember("IncludeExecutionData", _IncludeExecutionData)
-
-	PipeSourceActiveMQBrokerParameters_Credentials = PipeSourceActiveMQBrokerParameters.AddMember("Credentials", MQBrokerAccessCredentials)
-
-	PipeSourceActiveMQBrokerParameters_QueueName = PipeSourceActiveMQBrokerParameters.AddMember("QueueName", _MQBrokerQueueName)
-
-	PipeSourceActiveMQBrokerParameters_BatchSize = PipeSourceActiveMQBrokerParameters.AddMember("BatchSize", _LimitMax10000)
-
-	PipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds = PipeSourceActiveMQBrokerParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	PipeSourceDynamoDBStreamParameters_BatchSize = PipeSourceDynamoDBStreamParameters.AddMember("BatchSize", _LimitMax10000)
-
-	PipeSourceDynamoDBStreamParameters_DeadLetterConfig = PipeSourceDynamoDBStreamParameters.AddMember("DeadLetterConfig", DeadLetterConfig)
-
-	PipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure = PipeSourceDynamoDBStreamParameters.AddMember("OnPartialBatchItemFailure", _OnPartialBatchItemFailureStreams)
-
-	PipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds = PipeSourceDynamoDBStreamParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	PipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds = PipeSourceDynamoDBStreamParameters.AddMember("MaximumRecordAgeInSeconds", _MaximumRecordAgeInSeconds)
-
-	PipeSourceDynamoDBStreamParameters_MaximumRetryAttempts = PipeSourceDynamoDBStreamParameters.AddMember("MaximumRetryAttempts", _MaximumRetryAttemptsESM)
-
-	PipeSourceDynamoDBStreamParameters_ParallelizationFactor = PipeSourceDynamoDBStreamParameters.AddMember("ParallelizationFactor", _LimitMax10)
-
-	PipeSourceDynamoDBStreamParameters_StartingPosition = PipeSourceDynamoDBStreamParameters.AddMember("StartingPosition", _DynamoDBStreamStartPosition)
-
-	PipeSourceKinesisStreamParameters_BatchSize = PipeSourceKinesisStreamParameters.AddMember("BatchSize", _LimitMax10000)
-
-	PipeSourceKinesisStreamParameters_DeadLetterConfig = PipeSourceKinesisStreamParameters.AddMember("DeadLetterConfig", DeadLetterConfig)
-
-	PipeSourceKinesisStreamParameters_OnPartialBatchItemFailure = PipeSourceKinesisStreamParameters.AddMember("OnPartialBatchItemFailure", _OnPartialBatchItemFailureStreams)
-
-	PipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds = PipeSourceKinesisStreamParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	PipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds = PipeSourceKinesisStreamParameters.AddMember("MaximumRecordAgeInSeconds", _MaximumRecordAgeInSeconds)
-
-	PipeSourceKinesisStreamParameters_MaximumRetryAttempts = PipeSourceKinesisStreamParameters.AddMember("MaximumRetryAttempts", _MaximumRetryAttemptsESM)
-
-	PipeSourceKinesisStreamParameters_ParallelizationFactor = PipeSourceKinesisStreamParameters.AddMember("ParallelizationFactor", _LimitMax10)
-
-	PipeSourceKinesisStreamParameters_StartingPosition = PipeSourceKinesisStreamParameters.AddMember("StartingPosition", _KinesisStreamStartPosition)
-
-	PipeSourceKinesisStreamParameters_StartingPositionTimestamp = PipeSourceKinesisStreamParameters.AddMember("StartingPositionTimestamp", _Timestamp)
-
-	PipeSourceManagedStreamingKafkaParameters_TopicName = PipeSourceManagedStreamingKafkaParameters.AddMember("TopicName", _KafkaTopicName)
-
-	PipeSourceManagedStreamingKafkaParameters_StartingPosition = PipeSourceManagedStreamingKafkaParameters.AddMember("StartingPosition", _MSKStartPosition)
-
-	PipeSourceManagedStreamingKafkaParameters_BatchSize = PipeSourceManagedStreamingKafkaParameters.AddMember("BatchSize", _LimitMax10000)
-
-	PipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds = PipeSourceManagedStreamingKafkaParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	PipeSourceManagedStreamingKafkaParameters_ConsumerGroupID = PipeSourceManagedStreamingKafkaParameters.AddMember("ConsumerGroupID", _URI)
-
-	PipeSourceManagedStreamingKafkaParameters_Credentials = PipeSourceManagedStreamingKafkaParameters.AddMember("Credentials", MSKAccessCredentials)
-
-	PipeSourceSqsQueueParameters_BatchSize = PipeSourceSqsQueueParameters.AddMember("BatchSize", _LimitMax10000)
-
-	PipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds = PipeSourceSqsQueueParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	PipeSourceRabbitMQBrokerParameters_Credentials = PipeSourceRabbitMQBrokerParameters.AddMember("Credentials", MQBrokerAccessCredentials)
-
-	PipeSourceRabbitMQBrokerParameters_QueueName = PipeSourceRabbitMQBrokerParameters.AddMember("QueueName", _MQBrokerQueueName)
-
-	PipeSourceRabbitMQBrokerParameters_VirtualHost = PipeSourceRabbitMQBrokerParameters.AddMember("VirtualHost", _URI)
-
-	PipeSourceRabbitMQBrokerParameters_BatchSize = PipeSourceRabbitMQBrokerParameters.AddMember("BatchSize", _LimitMax10000)
-
-	PipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds = PipeSourceRabbitMQBrokerParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	SelfManagedKafkaAccessConfigurationCredentials_BasicAuth = SelfManagedKafkaAccessConfigurationCredentials.AddMember("BasicAuth", _SecretManagerArn)
-
-	SelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth = SelfManagedKafkaAccessConfigurationCredentials.AddMember("SaslScram512Auth", _SecretManagerArn)
-
-	SelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth = SelfManagedKafkaAccessConfigurationCredentials.AddMember("SaslScram256Auth", _SecretManagerArn)
-
-	SelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth = SelfManagedKafkaAccessConfigurationCredentials.AddMember("ClientCertificateTlsAuth", _SecretManagerArn)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	SelfManagedKafkaAccessConfigurationVpc_Subnets = SelfManagedKafkaAccessConfigurationVpc.AddMember("Subnets", _SubnetIds)
-
-	SelfManagedKafkaAccessConfigurationVpc_SecurityGroup = SelfManagedKafkaAccessConfigurationVpc.AddMember("SecurityGroup", _SecurityGroupIds)
-
-	PipeSourceSelfManagedKafkaParameters_TopicName = PipeSourceSelfManagedKafkaParameters.AddMember("TopicName", _KafkaTopicName)
-
-	PipeSourceSelfManagedKafkaParameters_StartingPosition = PipeSourceSelfManagedKafkaParameters.AddMember("StartingPosition", _SelfManagedKafkaStartPosition)
-
-	PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers = PipeSourceSelfManagedKafkaParameters.AddMember("AdditionalBootstrapServers", _KafkaBootstrapServers)
-
-	PipeSourceSelfManagedKafkaParameters_BatchSize = PipeSourceSelfManagedKafkaParameters.AddMember("BatchSize", _LimitMax10000)
-
-	PipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds = PipeSourceSelfManagedKafkaParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	PipeSourceSelfManagedKafkaParameters_ConsumerGroupID = PipeSourceSelfManagedKafkaParameters.AddMember("ConsumerGroupID", _URI)
-
-	PipeSourceSelfManagedKafkaParameters_Credentials = PipeSourceSelfManagedKafkaParameters.AddMember("Credentials", SelfManagedKafkaAccessConfigurationCredentials)
-
-	PipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate = PipeSourceSelfManagedKafkaParameters.AddMember("ServerRootCaCertificate", _SecretManagerArn)
-
-	PipeSourceSelfManagedKafkaParameters_Vpc = PipeSourceSelfManagedKafkaParameters.AddMember("Vpc", SelfManagedKafkaAccessConfigurationVpc)
-
-	PipeSourceParameters_FilterCriteria = PipeSourceParameters.AddMember("FilterCriteria", FilterCriteria)
-
-	PipeSourceParameters_KinesisStreamParameters = PipeSourceParameters.AddMember("KinesisStreamParameters", PipeSourceKinesisStreamParameters)
-
-	PipeSourceParameters_DynamoDBStreamParameters = PipeSourceParameters.AddMember("DynamoDBStreamParameters", PipeSourceDynamoDBStreamParameters)
-
-	PipeSourceParameters_SqsQueueParameters = PipeSourceParameters.AddMember("SqsQueueParameters", PipeSourceSqsQueueParameters)
-
-	PipeSourceParameters_ActiveMQBrokerParameters = PipeSourceParameters.AddMember("ActiveMQBrokerParameters", PipeSourceActiveMQBrokerParameters)
-
-	PipeSourceParameters_RabbitMQBrokerParameters = PipeSourceParameters.AddMember("RabbitMQBrokerParameters", PipeSourceRabbitMQBrokerParameters)
-
-	PipeSourceParameters_ManagedStreamingKafkaParameters = PipeSourceParameters.AddMember("ManagedStreamingKafkaParameters", PipeSourceManagedStreamingKafkaParameters)
-
-	PipeSourceParameters_SelfManagedKafkaParameters = PipeSourceParameters.AddMember("SelfManagedKafkaParameters", PipeSourceSelfManagedKafkaParameters)
-
-	PipeTargetBatchJobParameters_JobDefinition = PipeTargetBatchJobParameters.AddMember("JobDefinition", smithyprelude.String)
-
-	PipeTargetBatchJobParameters_JobName = PipeTargetBatchJobParameters.AddMember("JobName", smithyprelude.String)
-
-	PipeTargetBatchJobParameters_ArrayProperties = PipeTargetBatchJobParameters.AddMember("ArrayProperties", BatchArrayProperties)
-
-	PipeTargetBatchJobParameters_RetryStrategy = PipeTargetBatchJobParameters.AddMember("RetryStrategy", BatchRetryStrategy)
-
-	PipeTargetBatchJobParameters_ContainerOverrides = PipeTargetBatchJobParameters.AddMember("ContainerOverrides", BatchContainerOverrides)
-
-	PipeTargetBatchJobParameters_DependsOn = PipeTargetBatchJobParameters.AddMember("DependsOn", _BatchDependsOn)
-
-	PipeTargetBatchJobParameters_Parameters = PipeTargetBatchJobParameters.AddMember("Parameters", _BatchParametersMap)
-
-	PipeTargetCloudWatchLogsParameters_LogStreamName = PipeTargetCloudWatchLogsParameters.AddMember("LogStreamName", _LogStreamName)
-
-	PipeTargetCloudWatchLogsParameters_Timestamp = PipeTargetCloudWatchLogsParameters.AddMember("Timestamp", _JsonPath)
-
-	PlacementConstraint_type = PlacementConstraint.AddMember("type", _PlacementConstraintType)
-
-	PlacementConstraint_expression = PlacementConstraint.AddMember("expression", _PlacementConstraintExpression)
-
-	_PlacementConstraints_member = _PlacementConstraints.AddMember("member", PlacementConstraint)
-
-	PlacementStrategy_type = PlacementStrategy.AddMember("type", _PlacementStrategyType)
-
-	PlacementStrategy_field = PlacementStrategy.AddMember("field", _PlacementStrategyField)
-
-	_PlacementStrategies_member = _PlacementStrategies.AddMember("member", PlacementStrategy)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	PipeTargetEcsTaskParameters_TaskDefinitionArn = PipeTargetEcsTaskParameters.AddMember("TaskDefinitionArn", _ArnOrJsonPath)
-
-	PipeTargetEcsTaskParameters_TaskCount = PipeTargetEcsTaskParameters.AddMember("TaskCount", _LimitMin1)
-
-	PipeTargetEcsTaskParameters_LaunchType = PipeTargetEcsTaskParameters.AddMember("LaunchType", _LaunchType)
-
-	PipeTargetEcsTaskParameters_NetworkConfiguration = PipeTargetEcsTaskParameters.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	PipeTargetEcsTaskParameters_PlatformVersion = PipeTargetEcsTaskParameters.AddMember("PlatformVersion", _String)
-
-	PipeTargetEcsTaskParameters_Group = PipeTargetEcsTaskParameters.AddMember("Group", _String)
-
-	PipeTargetEcsTaskParameters_CapacityProviderStrategy = PipeTargetEcsTaskParameters.AddMember("CapacityProviderStrategy", _CapacityProviderStrategy)
-
-	PipeTargetEcsTaskParameters_EnableECSManagedTags = PipeTargetEcsTaskParameters.AddMember("EnableECSManagedTags", _Boolean)
-
-	PipeTargetEcsTaskParameters_EnableExecuteCommand = PipeTargetEcsTaskParameters.AddMember("EnableExecuteCommand", _Boolean)
-
-	PipeTargetEcsTaskParameters_PlacementConstraints = PipeTargetEcsTaskParameters.AddMember("PlacementConstraints", _PlacementConstraints)
-
-	PipeTargetEcsTaskParameters_PlacementStrategy = PipeTargetEcsTaskParameters.AddMember("PlacementStrategy", _PlacementStrategies)
-
-	PipeTargetEcsTaskParameters_PropagateTags = PipeTargetEcsTaskParameters.AddMember("PropagateTags", _PropagateTags)
-
-	PipeTargetEcsTaskParameters_ReferenceId = PipeTargetEcsTaskParameters.AddMember("ReferenceId", _ReferenceId)
-
-	PipeTargetEcsTaskParameters_Overrides = PipeTargetEcsTaskParameters.AddMember("Overrides", EcsTaskOverride)
-
-	PipeTargetEcsTaskParameters_Tags = PipeTargetEcsTaskParameters.AddMember("Tags", _TagList)
-
-	PipeTargetEventBridgeEventBusParameters_EndpointId = PipeTargetEventBridgeEventBusParameters.AddMember("EndpointId", _EventBridgeEndpointId)
-
-	PipeTargetEventBridgeEventBusParameters_DetailType = PipeTargetEventBridgeEventBusParameters.AddMember("DetailType", _EventBridgeDetailType)
-
-	PipeTargetEventBridgeEventBusParameters_Source = PipeTargetEventBridgeEventBusParameters.AddMember("Source", _EventBridgeEventSource)
-
-	PipeTargetEventBridgeEventBusParameters_Resources = PipeTargetEventBridgeEventBusParameters.AddMember("Resources", _EventBridgeEventResourceList)
-
-	PipeTargetEventBridgeEventBusParameters_Time = PipeTargetEventBridgeEventBusParameters.AddMember("Time", _JsonPath)
-
-	PipeTargetHttpParameters_PathParameterValues = PipeTargetHttpParameters.AddMember("PathParameterValues", _PathParameterList)
-
-	PipeTargetHttpParameters_HeaderParameters = PipeTargetHttpParameters.AddMember("HeaderParameters", _HeaderParametersMap)
-
-	PipeTargetHttpParameters_QueryStringParameters = PipeTargetHttpParameters.AddMember("QueryStringParameters", _QueryStringParametersMap)
-
-	PipeTargetKinesisStreamParameters_PartitionKey = PipeTargetKinesisStreamParameters.AddMember("PartitionKey", _KinesisPartitionKey)
-
-	PipeTargetLambdaFunctionParameters_InvocationType = PipeTargetLambdaFunctionParameters.AddMember("InvocationType", _PipeTargetInvocationType)
-
-	PipeTargetStateMachineParameters_InvocationType = PipeTargetStateMachineParameters.AddMember("InvocationType", _PipeTargetInvocationType)
-
-	PipeTargetSqsQueueParameters_MessageGroupId = PipeTargetSqsQueueParameters.AddMember("MessageGroupId", _MessageGroupId)
-
-	PipeTargetSqsQueueParameters_MessageDeduplicationId = PipeTargetSqsQueueParameters.AddMember("MessageDeduplicationId", _MessageDeduplicationId)
-
-	_Sqls_member = _Sqls.AddMember("member", _Sql)
-
-	PipeTargetRedshiftDataParameters_SecretManagerArn = PipeTargetRedshiftDataParameters.AddMember("SecretManagerArn", _SecretManagerArnOrJsonPath)
-
-	PipeTargetRedshiftDataParameters_Database = PipeTargetRedshiftDataParameters.AddMember("Database", _Database)
-
-	PipeTargetRedshiftDataParameters_DbUser = PipeTargetRedshiftDataParameters.AddMember("DbUser", _DbUser)
-
-	PipeTargetRedshiftDataParameters_StatementName = PipeTargetRedshiftDataParameters.AddMember("StatementName", _StatementName)
-
-	PipeTargetRedshiftDataParameters_WithEvent = PipeTargetRedshiftDataParameters.AddMember("WithEvent", _Boolean)
-
-	PipeTargetRedshiftDataParameters_Sqls = PipeTargetRedshiftDataParameters.AddMember("Sqls", _Sqls)
-
-	SageMakerPipelineParameter_Name = SageMakerPipelineParameter.AddMember("Name", _SageMakerPipelineParameterName)
-
-	SageMakerPipelineParameter_Value = SageMakerPipelineParameter.AddMember("Value", _SageMakerPipelineParameterValue)
-
-	_SageMakerPipelineParameterList_member = _SageMakerPipelineParameterList.AddMember("member", SageMakerPipelineParameter)
-
-	PipeTargetSageMakerPipelineParameters_PipelineParameterList = PipeTargetSageMakerPipelineParameters.AddMember("PipelineParameterList", _SageMakerPipelineParameterList)
-
-	SingleMeasureMapping_MeasureValue = SingleMeasureMapping.AddMember("MeasureValue", _MeasureValue)
-
-	SingleMeasureMapping_MeasureValueType = SingleMeasureMapping.AddMember("MeasureValueType", _MeasureValueType)
-
-	SingleMeasureMapping_MeasureName = SingleMeasureMapping.AddMember("MeasureName", _MeasureName)
-
-	_SingleMeasureMappings_member = _SingleMeasureMappings.AddMember("member", SingleMeasureMapping)
-
-	PipeTargetTimestreamParameters_TimeValue = PipeTargetTimestreamParameters.AddMember("TimeValue", _TimeValue)
-
-	PipeTargetTimestreamParameters_EpochTimeUnit = PipeTargetTimestreamParameters.AddMember("EpochTimeUnit", _EpochTimeUnit)
-
-	PipeTargetTimestreamParameters_TimeFieldType = PipeTargetTimestreamParameters.AddMember("TimeFieldType", _TimeFieldType)
-
-	PipeTargetTimestreamParameters_TimestampFormat = PipeTargetTimestreamParameters.AddMember("TimestampFormat", _TimestampFormat)
-
-	PipeTargetTimestreamParameters_VersionValue = PipeTargetTimestreamParameters.AddMember("VersionValue", _VersionValue)
-
-	PipeTargetTimestreamParameters_DimensionMappings = PipeTargetTimestreamParameters.AddMember("DimensionMappings", _DimensionMappings)
-
-	PipeTargetTimestreamParameters_SingleMeasureMappings = PipeTargetTimestreamParameters.AddMember("SingleMeasureMappings", _SingleMeasureMappings)
-
-	PipeTargetTimestreamParameters_MultiMeasureMappings = PipeTargetTimestreamParameters.AddMember("MultiMeasureMappings", _MultiMeasureMappings)
-
-	PipeTargetParameters_InputTemplate = PipeTargetParameters.AddMember("InputTemplate", _InputTemplate)
-
-	PipeTargetParameters_LambdaFunctionParameters = PipeTargetParameters.AddMember("LambdaFunctionParameters", PipeTargetLambdaFunctionParameters)
-
-	PipeTargetParameters_StepFunctionStateMachineParameters = PipeTargetParameters.AddMember("StepFunctionStateMachineParameters", PipeTargetStateMachineParameters)
-
-	PipeTargetParameters_KinesisStreamParameters = PipeTargetParameters.AddMember("KinesisStreamParameters", PipeTargetKinesisStreamParameters)
-
-	PipeTargetParameters_EcsTaskParameters = PipeTargetParameters.AddMember("EcsTaskParameters", PipeTargetEcsTaskParameters)
-
-	PipeTargetParameters_BatchJobParameters = PipeTargetParameters.AddMember("BatchJobParameters", PipeTargetBatchJobParameters)
-
-	PipeTargetParameters_SqsQueueParameters = PipeTargetParameters.AddMember("SqsQueueParameters", PipeTargetSqsQueueParameters)
-
-	PipeTargetParameters_HttpParameters = PipeTargetParameters.AddMember("HttpParameters", PipeTargetHttpParameters)
-
-	PipeTargetParameters_RedshiftDataParameters = PipeTargetParameters.AddMember("RedshiftDataParameters", PipeTargetRedshiftDataParameters)
-
-	PipeTargetParameters_SageMakerPipelineParameters = PipeTargetParameters.AddMember("SageMakerPipelineParameters", PipeTargetSageMakerPipelineParameters)
-
-	PipeTargetParameters_EventBridgeEventBusParameters = PipeTargetParameters.AddMember("EventBridgeEventBusParameters", PipeTargetEventBridgeEventBusParameters)
-
-	PipeTargetParameters_CloudWatchLogsParameters = PipeTargetParameters.AddMember("CloudWatchLogsParameters", PipeTargetCloudWatchLogsParameters)
-
-	PipeTargetParameters_TimestreamParameters = PipeTargetParameters.AddMember("TimestreamParameters", PipeTargetTimestreamParameters)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	UpdatePipeSourceActiveMQBrokerParameters_Credentials = UpdatePipeSourceActiveMQBrokerParameters.AddMember("Credentials", MQBrokerAccessCredentials)
-
-	UpdatePipeSourceActiveMQBrokerParameters_BatchSize = UpdatePipeSourceActiveMQBrokerParameters.AddMember("BatchSize", _LimitMax10000)
-
-	UpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds = UpdatePipeSourceActiveMQBrokerParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	UpdatePipeSourceDynamoDBStreamParameters_BatchSize = UpdatePipeSourceDynamoDBStreamParameters.AddMember("BatchSize", _LimitMax10000)
-
-	UpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig = UpdatePipeSourceDynamoDBStreamParameters.AddMember("DeadLetterConfig", DeadLetterConfig)
-
-	UpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure = UpdatePipeSourceDynamoDBStreamParameters.AddMember("OnPartialBatchItemFailure", _OnPartialBatchItemFailureStreams)
-
-	UpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds = UpdatePipeSourceDynamoDBStreamParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	UpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds = UpdatePipeSourceDynamoDBStreamParameters.AddMember("MaximumRecordAgeInSeconds", _MaximumRecordAgeInSeconds)
-
-	UpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts = UpdatePipeSourceDynamoDBStreamParameters.AddMember("MaximumRetryAttempts", _MaximumRetryAttemptsESM)
-
-	UpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor = UpdatePipeSourceDynamoDBStreamParameters.AddMember("ParallelizationFactor", _LimitMax10)
-
-	UpdatePipeSourceKinesisStreamParameters_BatchSize = UpdatePipeSourceKinesisStreamParameters.AddMember("BatchSize", _LimitMax10000)
-
-	UpdatePipeSourceKinesisStreamParameters_DeadLetterConfig = UpdatePipeSourceKinesisStreamParameters.AddMember("DeadLetterConfig", DeadLetterConfig)
-
-	UpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure = UpdatePipeSourceKinesisStreamParameters.AddMember("OnPartialBatchItemFailure", _OnPartialBatchItemFailureStreams)
-
-	UpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds = UpdatePipeSourceKinesisStreamParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	UpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds = UpdatePipeSourceKinesisStreamParameters.AddMember("MaximumRecordAgeInSeconds", _MaximumRecordAgeInSeconds)
-
-	UpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts = UpdatePipeSourceKinesisStreamParameters.AddMember("MaximumRetryAttempts", _MaximumRetryAttemptsESM)
-
-	UpdatePipeSourceKinesisStreamParameters_ParallelizationFactor = UpdatePipeSourceKinesisStreamParameters.AddMember("ParallelizationFactor", _LimitMax10)
-
-	UpdatePipeSourceManagedStreamingKafkaParameters_BatchSize = UpdatePipeSourceManagedStreamingKafkaParameters.AddMember("BatchSize", _LimitMax10000)
-
-	UpdatePipeSourceManagedStreamingKafkaParameters_Credentials = UpdatePipeSourceManagedStreamingKafkaParameters.AddMember("Credentials", MSKAccessCredentials)
-
-	UpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds = UpdatePipeSourceManagedStreamingKafkaParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	UpdatePipeSourceSqsQueueParameters_BatchSize = UpdatePipeSourceSqsQueueParameters.AddMember("BatchSize", _LimitMax10000)
-
-	UpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds = UpdatePipeSourceSqsQueueParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	UpdatePipeSourceRabbitMQBrokerParameters_Credentials = UpdatePipeSourceRabbitMQBrokerParameters.AddMember("Credentials", MQBrokerAccessCredentials)
-
-	UpdatePipeSourceRabbitMQBrokerParameters_BatchSize = UpdatePipeSourceRabbitMQBrokerParameters.AddMember("BatchSize", _LimitMax10000)
-
-	UpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds = UpdatePipeSourceRabbitMQBrokerParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	UpdatePipeSourceSelfManagedKafkaParameters_BatchSize = UpdatePipeSourceSelfManagedKafkaParameters.AddMember("BatchSize", _LimitMax10000)
-
-	UpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds = UpdatePipeSourceSelfManagedKafkaParameters.AddMember("MaximumBatchingWindowInSeconds", _MaximumBatchingWindowInSeconds)
-
-	UpdatePipeSourceSelfManagedKafkaParameters_Credentials = UpdatePipeSourceSelfManagedKafkaParameters.AddMember("Credentials", SelfManagedKafkaAccessConfigurationCredentials)
-
-	UpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate = UpdatePipeSourceSelfManagedKafkaParameters.AddMember("ServerRootCaCertificate", _SecretManagerArn)
-
-	UpdatePipeSourceSelfManagedKafkaParameters_Vpc = UpdatePipeSourceSelfManagedKafkaParameters.AddMember("Vpc", SelfManagedKafkaAccessConfigurationVpc)
-
-	UpdatePipeSourceParameters_FilterCriteria = UpdatePipeSourceParameters.AddMember("FilterCriteria", FilterCriteria)
-
-	UpdatePipeSourceParameters_KinesisStreamParameters = UpdatePipeSourceParameters.AddMember("KinesisStreamParameters", UpdatePipeSourceKinesisStreamParameters)
-
-	UpdatePipeSourceParameters_DynamoDBStreamParameters = UpdatePipeSourceParameters.AddMember("DynamoDBStreamParameters", UpdatePipeSourceDynamoDBStreamParameters)
-
-	UpdatePipeSourceParameters_SqsQueueParameters = UpdatePipeSourceParameters.AddMember("SqsQueueParameters", UpdatePipeSourceSqsQueueParameters)
-
-	UpdatePipeSourceParameters_ActiveMQBrokerParameters = UpdatePipeSourceParameters.AddMember("ActiveMQBrokerParameters", UpdatePipeSourceActiveMQBrokerParameters)
-
-	UpdatePipeSourceParameters_RabbitMQBrokerParameters = UpdatePipeSourceParameters.AddMember("RabbitMQBrokerParameters", UpdatePipeSourceRabbitMQBrokerParameters)
-
-	UpdatePipeSourceParameters_ManagedStreamingKafkaParameters = UpdatePipeSourceParameters.AddMember("ManagedStreamingKafkaParameters", UpdatePipeSourceManagedStreamingKafkaParameters)
-
-	UpdatePipeSourceParameters_SelfManagedKafkaParameters = UpdatePipeSourceParameters.AddMember("SelfManagedKafkaParameters", UpdatePipeSourceSelfManagedKafkaParameters)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _ErrorMessage)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	CreatePipeRequest_Name = CreatePipeRequest.AddMember("Name", _PipeName, &smithytraits.HTTPLabel{})
-
-	CreatePipeRequest_Description = CreatePipeRequest.AddMember("Description", _PipeDescription)
-
-	CreatePipeRequest_DesiredState = CreatePipeRequest.AddMember("DesiredState", _RequestedPipeState)
-
-	CreatePipeRequest_Source = CreatePipeRequest.AddMember("Source", _ArnOrUrl)
-
-	CreatePipeRequest_SourceParameters = CreatePipeRequest.AddMember("SourceParameters", PipeSourceParameters)
-
-	CreatePipeRequest_Enrichment = CreatePipeRequest.AddMember("Enrichment", _OptionalArn)
-
-	CreatePipeRequest_EnrichmentParameters = CreatePipeRequest.AddMember("EnrichmentParameters", PipeEnrichmentParameters)
-
-	CreatePipeRequest_Target = CreatePipeRequest.AddMember("Target", _Arn)
-
-	CreatePipeRequest_TargetParameters = CreatePipeRequest.AddMember("TargetParameters", PipeTargetParameters)
-
-	CreatePipeRequest_RoleArn = CreatePipeRequest.AddMember("RoleArn", _RoleArn)
-
-	CreatePipeRequest_Tags = CreatePipeRequest.AddMember("Tags", _TagMap)
-
-	CreatePipeRequest_LogConfiguration = CreatePipeRequest.AddMember("LogConfiguration", PipeLogConfigurationParameters)
-
-	CreatePipeRequest_KmsKeyIdentifier = CreatePipeRequest.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	CreatePipeResponse_Arn = CreatePipeResponse.AddMember("Arn", _PipeArn)
-
-	CreatePipeResponse_Name = CreatePipeResponse.AddMember("Name", _PipeName)
-
-	CreatePipeResponse_DesiredState = CreatePipeResponse.AddMember("DesiredState", _RequestedPipeState)
-
-	CreatePipeResponse_CurrentState = CreatePipeResponse.AddMember("CurrentState", _PipeState)
-
-	CreatePipeResponse_CreationTime = CreatePipeResponse.AddMember("CreationTime", _Timestamp)
-
-	CreatePipeResponse_LastModifiedTime = CreatePipeResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DeletePipeRequest_Name = DeletePipeRequest.AddMember("Name", _PipeName, &smithytraits.HTTPLabel{})
-
-	DeletePipeResponse_Arn = DeletePipeResponse.AddMember("Arn", _PipeArn)
-
-	DeletePipeResponse_Name = DeletePipeResponse.AddMember("Name", _PipeName)
-
-	DeletePipeResponse_DesiredState = DeletePipeResponse.AddMember("DesiredState", _RequestedPipeStateDescribeResponse)
-
-	DeletePipeResponse_CurrentState = DeletePipeResponse.AddMember("CurrentState", _PipeState)
-
-	DeletePipeResponse_CreationTime = DeletePipeResponse.AddMember("CreationTime", _Timestamp)
-
-	DeletePipeResponse_LastModifiedTime = DeletePipeResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DescribePipeRequest_Name = DescribePipeRequest.AddMember("Name", _PipeName, &smithytraits.HTTPLabel{})
-
-	DescribePipeResponse_Arn = DescribePipeResponse.AddMember("Arn", _PipeArn)
-
-	DescribePipeResponse_Name = DescribePipeResponse.AddMember("Name", _PipeName)
-
-	DescribePipeResponse_Description = DescribePipeResponse.AddMember("Description", _PipeDescription)
-
-	DescribePipeResponse_DesiredState = DescribePipeResponse.AddMember("DesiredState", _RequestedPipeStateDescribeResponse)
-
-	DescribePipeResponse_CurrentState = DescribePipeResponse.AddMember("CurrentState", _PipeState)
-
-	DescribePipeResponse_StateReason = DescribePipeResponse.AddMember("StateReason", _PipeStateReason)
-
-	DescribePipeResponse_Source = DescribePipeResponse.AddMember("Source", _ArnOrUrl)
-
-	DescribePipeResponse_SourceParameters = DescribePipeResponse.AddMember("SourceParameters", PipeSourceParameters)
-
-	DescribePipeResponse_Enrichment = DescribePipeResponse.AddMember("Enrichment", _OptionalArn)
-
-	DescribePipeResponse_EnrichmentParameters = DescribePipeResponse.AddMember("EnrichmentParameters", PipeEnrichmentParameters)
-
-	DescribePipeResponse_Target = DescribePipeResponse.AddMember("Target", _Arn)
-
-	DescribePipeResponse_TargetParameters = DescribePipeResponse.AddMember("TargetParameters", PipeTargetParameters)
-
-	DescribePipeResponse_RoleArn = DescribePipeResponse.AddMember("RoleArn", _RoleArn)
-
-	DescribePipeResponse_Tags = DescribePipeResponse.AddMember("Tags", _TagMap)
-
-	DescribePipeResponse_CreationTime = DescribePipeResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribePipeResponse_LastModifiedTime = DescribePipeResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DescribePipeResponse_LogConfiguration = DescribePipeResponse.AddMember("LogConfiguration", PipeLogConfiguration)
-
-	DescribePipeResponse_KmsKeyIdentifier = DescribePipeResponse.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	ListPipesRequest_NamePrefix = ListPipesRequest.AddMember("NamePrefix", _PipeName, &smithytraits.HTTPQuery{Name: "NamePrefix"})
-
-	ListPipesRequest_DesiredState = ListPipesRequest.AddMember("DesiredState", _RequestedPipeState, &smithytraits.HTTPQuery{Name: "DesiredState"})
-
-	ListPipesRequest_CurrentState = ListPipesRequest.AddMember("CurrentState", _PipeState, &smithytraits.HTTPQuery{Name: "CurrentState"})
-
-	ListPipesRequest_SourcePrefix = ListPipesRequest.AddMember("SourcePrefix", _ResourceArn, &smithytraits.HTTPQuery{Name: "SourcePrefix"})
-
-	ListPipesRequest_TargetPrefix = ListPipesRequest.AddMember("TargetPrefix", _ResourceArn, &smithytraits.HTTPQuery{Name: "TargetPrefix"})
-
-	ListPipesRequest_NextToken = ListPipesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListPipesRequest_Limit = ListPipesRequest.AddMember("Limit", _LimitMax100, &smithytraits.HTTPQuery{Name: "Limit"})
-
-	ListPipesResponse_Pipes = ListPipesResponse.AddMember("Pipes", _PipeList)
-
-	ListPipesResponse_NextToken = ListPipesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _PipeArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	StartPipeRequest_Name = StartPipeRequest.AddMember("Name", _PipeName, &smithytraits.HTTPLabel{})
-
-	StartPipeResponse_Arn = StartPipeResponse.AddMember("Arn", _PipeArn)
-
-	StartPipeResponse_Name = StartPipeResponse.AddMember("Name", _PipeName)
-
-	StartPipeResponse_DesiredState = StartPipeResponse.AddMember("DesiredState", _RequestedPipeState)
-
-	StartPipeResponse_CurrentState = StartPipeResponse.AddMember("CurrentState", _PipeState)
-
-	StartPipeResponse_CreationTime = StartPipeResponse.AddMember("CreationTime", _Timestamp)
-
-	StartPipeResponse_LastModifiedTime = StartPipeResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	StopPipeRequest_Name = StopPipeRequest.AddMember("Name", _PipeName, &smithytraits.HTTPLabel{})
-
-	StopPipeResponse_Arn = StopPipeResponse.AddMember("Arn", _PipeArn)
-
-	StopPipeResponse_Name = StopPipeResponse.AddMember("Name", _PipeName)
-
-	StopPipeResponse_DesiredState = StopPipeResponse.AddMember("DesiredState", _RequestedPipeState)
-
-	StopPipeResponse_CurrentState = StopPipeResponse.AddMember("CurrentState", _PipeState)
-
-	StopPipeResponse_CreationTime = StopPipeResponse.AddMember("CreationTime", _Timestamp)
-
-	StopPipeResponse_LastModifiedTime = StopPipeResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _PipeArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _PipeArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdatePipeRequest_Name = UpdatePipeRequest.AddMember("Name", _PipeName, &smithytraits.HTTPLabel{})
-
-	UpdatePipeRequest_Description = UpdatePipeRequest.AddMember("Description", _PipeDescription)
-
-	UpdatePipeRequest_DesiredState = UpdatePipeRequest.AddMember("DesiredState", _RequestedPipeState)
-
-	UpdatePipeRequest_SourceParameters = UpdatePipeRequest.AddMember("SourceParameters", UpdatePipeSourceParameters)
-
-	UpdatePipeRequest_Enrichment = UpdatePipeRequest.AddMember("Enrichment", _OptionalArn)
-
-	UpdatePipeRequest_EnrichmentParameters = UpdatePipeRequest.AddMember("EnrichmentParameters", PipeEnrichmentParameters)
-
-	UpdatePipeRequest_Target = UpdatePipeRequest.AddMember("Target", _Arn)
-
-	UpdatePipeRequest_TargetParameters = UpdatePipeRequest.AddMember("TargetParameters", PipeTargetParameters)
-
-	UpdatePipeRequest_RoleArn = UpdatePipeRequest.AddMember("RoleArn", _RoleArn)
-
-	UpdatePipeRequest_LogConfiguration = UpdatePipeRequest.AddMember("LogConfiguration", PipeLogConfigurationParameters)
-
-	UpdatePipeRequest_KmsKeyIdentifier = UpdatePipeRequest.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	UpdatePipeResponse_Arn = UpdatePipeResponse.AddMember("Arn", _PipeArn)
-
-	UpdatePipeResponse_Name = UpdatePipeResponse.AddMember("Name", _PipeName)
-
-	UpdatePipeResponse_DesiredState = UpdatePipeResponse.AddMember("DesiredState", _RequestedPipeState)
-
-	UpdatePipeResponse_CurrentState = UpdatePipeResponse.AddMember("CurrentState", _PipeState)
-
-	UpdatePipeResponse_CreationTime = UpdatePipeResponse.AddMember("CreationTime", _Timestamp)
-
-	UpdatePipeResponse_LastModifiedTime = UpdatePipeResponse.AddMember("LastModifiedTime", _Timestamp)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://events.amazonaws.com/doc/2015-10-07"}}, DirectMask: 0x8000}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NamePrefix"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "DesiredState"}}, DirectMask: 0x10}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "CurrentState"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "SourcePrefix"}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "TargetPrefix"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Limit"}}, DirectMask: 0x10}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAwsVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsVpcConfiguration_Subnets, &sAwsVpcConfiguration_SecurityGroups, &sAwsVpcConfiguration_AssignPublicIp}}
+var mBatchArrayProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchArrayProperties_Size}}
+var mBatchContainerOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchContainerOverrides_Command, &sBatchContainerOverrides_Environment, &sBatchContainerOverrides_InstanceType, &sBatchContainerOverrides_ResourceRequirements}}
+var m_BatchDependsOn = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDependsOn_member}}
+var mBatchEnvironmentVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchEnvironmentVariable_Name, &sBatchEnvironmentVariable_Value}}
+var m_BatchEnvironmentVariableList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchEnvironmentVariableList_member}}
+var mBatchJobDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchJobDependency_JobId, &sBatchJobDependency_Type}}
+var m_BatchParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchParametersMap_key, &s_BatchParametersMap_value}}
+var mBatchResourceRequirement = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchResourceRequirement_Type, &sBatchResourceRequirement_Value}}
+var m_BatchResourceRequirementsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchResourceRequirementsList_member}}
+var mBatchRetryStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchRetryStrategy_Attempts}}
+var m_CapacityProviderStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapacityProviderStrategy_member}}
+var mCapacityProviderStrategyItem = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityProviderStrategyItem_capacityProvider, &sCapacityProviderStrategyItem_weight, &sCapacityProviderStrategyItem_base}}
+var mCloudwatchLogsLogDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudwatchLogsLogDestination_LogGroupArn}}
+var mCloudwatchLogsLogDestinationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudwatchLogsLogDestinationParameters_LogGroupArn}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mDeadLetterConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sDeadLetterConfig_Arn}}
+var mDimensionMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sDimensionMapping_DimensionValue, &sDimensionMapping_DimensionValueType, &sDimensionMapping_DimensionName}}
+var m_DimensionMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_DimensionMappings_member}}
+var mEcsContainerOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsContainerOverride_Command, &sEcsContainerOverride_Cpu, &sEcsContainerOverride_Environment, &sEcsContainerOverride_EnvironmentFiles, &sEcsContainerOverride_Memory, &sEcsContainerOverride_MemoryReservation, &sEcsContainerOverride_Name, &sEcsContainerOverride_ResourceRequirements}}
+var m_EcsContainerOverrideList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EcsContainerOverrideList_member}}
+var mEcsEnvironmentFile = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsEnvironmentFile_type, &sEcsEnvironmentFile_value}}
+var m_EcsEnvironmentFileList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EcsEnvironmentFileList_member}}
+var mEcsEnvironmentVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsEnvironmentVariable_name, &sEcsEnvironmentVariable_value}}
+var m_EcsEnvironmentVariableList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EcsEnvironmentVariableList_member}}
+var mEcsEphemeralStorage = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsEphemeralStorage_sizeInGiB}}
+var mEcsInferenceAcceleratorOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsInferenceAcceleratorOverride_deviceName, &sEcsInferenceAcceleratorOverride_deviceType}}
+var m_EcsInferenceAcceleratorOverrideList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EcsInferenceAcceleratorOverrideList_member}}
+var mEcsResourceRequirement = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsResourceRequirement_type, &sEcsResourceRequirement_value}}
+var m_EcsResourceRequirementsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EcsResourceRequirementsList_member}}
+var mEcsTaskOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsTaskOverride_ContainerOverrides, &sEcsTaskOverride_Cpu, &sEcsTaskOverride_EphemeralStorage, &sEcsTaskOverride_ExecutionRoleArn, &sEcsTaskOverride_InferenceAcceleratorOverrides, &sEcsTaskOverride_Memory, &sEcsTaskOverride_TaskRoleArn}}
+var m_EventBridgeEventResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventBridgeEventResourceList_member}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Pattern}}
+var mFilterCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterCriteria_Filters}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mFirehoseLogDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sFirehoseLogDestination_DeliveryStreamArn}}
+var mFirehoseLogDestinationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sFirehoseLogDestinationParameters_DeliveryStreamArn}}
+var m_HeaderParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_HeaderParametersMap_key, &s_HeaderParametersMap_value}}
+var m_IncludeExecutionData = smithy.SchemaMembers{List: []*smithy.Schema{&s_IncludeExecutionData_member}}
+var mInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalException_message, &sInternalException_retryAfterSeconds}}
+var m_KafkaBootstrapServers = smithy.SchemaMembers{List: []*smithy.Schema{&s_KafkaBootstrapServers_member}}
+var mMQBrokerAccessCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sMQBrokerAccessCredentials_BasicAuth}}
+var mMSKAccessCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sMSKAccessCredentials_SaslScram512Auth, &sMSKAccessCredentials_ClientCertificateTlsAuth}}
+var mMultiMeasureAttributeMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiMeasureAttributeMapping_MeasureValue, &sMultiMeasureAttributeMapping_MeasureValueType, &sMultiMeasureAttributeMapping_MultiMeasureAttributeName}}
+var m_MultiMeasureAttributeMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_MultiMeasureAttributeMappings_member}}
+var mMultiMeasureMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiMeasureMapping_MultiMeasureName, &sMultiMeasureMapping_MultiMeasureAttributeMappings}}
+var m_MultiMeasureMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_MultiMeasureMappings_member}}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_awsvpcConfiguration}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var m_PathParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PathParameterList_member}}
+var mPipe = smithy.SchemaMembers{List: []*smithy.Schema{&sPipe_Name, &sPipe_Arn, &sPipe_DesiredState, &sPipe_CurrentState, &sPipe_StateReason, &sPipe_CreationTime, &sPipe_LastModifiedTime, &sPipe_Source, &sPipe_Target, &sPipe_Enrichment}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 1, 0, 4, 9, 0, 0, 0, 0, 10, 3, 0, 0, 0, 0, 7, 2, 0, 0, 0, 8,
+	5, 0, 6, 0, 0, 0, 0, 0,
+}}
+var mPipeEnrichmentHttpParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeEnrichmentHttpParameters_PathParameterValues, &sPipeEnrichmentHttpParameters_HeaderParameters, &sPipeEnrichmentHttpParameters_QueryStringParameters}}
+var mPipeEnrichmentParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeEnrichmentParameters_InputTemplate, &sPipeEnrichmentParameters_HttpParameters}}
+var m_PipeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PipeList_member}}
+var mPipeLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeLogConfiguration_S3LogDestination, &sPipeLogConfiguration_FirehoseLogDestination, &sPipeLogConfiguration_CloudwatchLogsLogDestination, &sPipeLogConfiguration_Level, &sPipeLogConfiguration_IncludeExecutionData}}
+var mPipeLogConfigurationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeLogConfigurationParameters_S3LogDestination, &sPipeLogConfigurationParameters_FirehoseLogDestination, &sPipeLogConfigurationParameters_CloudwatchLogsLogDestination, &sPipeLogConfigurationParameters_Level, &sPipeLogConfigurationParameters_IncludeExecutionData}}
+var mPipeSourceActiveMQBrokerParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceActiveMQBrokerParameters_Credentials, &sPipeSourceActiveMQBrokerParameters_QueueName, &sPipeSourceActiveMQBrokerParameters_BatchSize, &sPipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds}}
+var mPipeSourceDynamoDBStreamParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceDynamoDBStreamParameters_BatchSize, &sPipeSourceDynamoDBStreamParameters_DeadLetterConfig, &sPipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure, &sPipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds, &sPipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds, &sPipeSourceDynamoDBStreamParameters_MaximumRetryAttempts, &sPipeSourceDynamoDBStreamParameters_ParallelizationFactor, &sPipeSourceDynamoDBStreamParameters_StartingPosition}}
+var mPipeSourceKinesisStreamParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceKinesisStreamParameters_BatchSize, &sPipeSourceKinesisStreamParameters_DeadLetterConfig, &sPipeSourceKinesisStreamParameters_OnPartialBatchItemFailure, &sPipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds, &sPipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds, &sPipeSourceKinesisStreamParameters_MaximumRetryAttempts, &sPipeSourceKinesisStreamParameters_ParallelizationFactor, &sPipeSourceKinesisStreamParameters_StartingPosition, &sPipeSourceKinesisStreamParameters_StartingPositionTimestamp}, Seed: 15, Slots: []uint16{
+	0, 0, 4, 0, 0, 9, 0, 0, 5, 0, 0, 0, 0, 0, 0, 7, 3, 0, 6, 2, 0, 0, 0, 0,
+	0, 1, 0, 8, 0, 0, 0, 0,
+}}
+var mPipeSourceManagedStreamingKafkaParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceManagedStreamingKafkaParameters_TopicName, &sPipeSourceManagedStreamingKafkaParameters_StartingPosition, &sPipeSourceManagedStreamingKafkaParameters_BatchSize, &sPipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds, &sPipeSourceManagedStreamingKafkaParameters_ConsumerGroupID, &sPipeSourceManagedStreamingKafkaParameters_Credentials}}
+var mPipeSourceParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceParameters_FilterCriteria, &sPipeSourceParameters_KinesisStreamParameters, &sPipeSourceParameters_DynamoDBStreamParameters, &sPipeSourceParameters_SqsQueueParameters, &sPipeSourceParameters_ActiveMQBrokerParameters, &sPipeSourceParameters_RabbitMQBrokerParameters, &sPipeSourceParameters_ManagedStreamingKafkaParameters, &sPipeSourceParameters_SelfManagedKafkaParameters}}
+var mPipeSourceRabbitMQBrokerParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceRabbitMQBrokerParameters_Credentials, &sPipeSourceRabbitMQBrokerParameters_QueueName, &sPipeSourceRabbitMQBrokerParameters_VirtualHost, &sPipeSourceRabbitMQBrokerParameters_BatchSize, &sPipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds}}
+var mPipeSourceSelfManagedKafkaParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceSelfManagedKafkaParameters_TopicName, &sPipeSourceSelfManagedKafkaParameters_StartingPosition, &sPipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers, &sPipeSourceSelfManagedKafkaParameters_BatchSize, &sPipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, &sPipeSourceSelfManagedKafkaParameters_ConsumerGroupID, &sPipeSourceSelfManagedKafkaParameters_Credentials, &sPipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate, &sPipeSourceSelfManagedKafkaParameters_Vpc}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 3, 9, 0, 1, 8, 0, 0, 0, 0, 7, 0, 0, 0, 5, 0, 4, 0,
+	0, 0, 0, 2, 0, 6, 0, 0,
+}}
+var mPipeSourceSqsQueueParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeSourceSqsQueueParameters_BatchSize, &sPipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds}}
+var mPipeTargetBatchJobParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetBatchJobParameters_JobDefinition, &sPipeTargetBatchJobParameters_JobName, &sPipeTargetBatchJobParameters_ArrayProperties, &sPipeTargetBatchJobParameters_RetryStrategy, &sPipeTargetBatchJobParameters_ContainerOverrides, &sPipeTargetBatchJobParameters_DependsOn, &sPipeTargetBatchJobParameters_Parameters}}
+var mPipeTargetCloudWatchLogsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetCloudWatchLogsParameters_LogStreamName, &sPipeTargetCloudWatchLogsParameters_Timestamp}}
+var mPipeTargetEcsTaskParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetEcsTaskParameters_TaskDefinitionArn, &sPipeTargetEcsTaskParameters_TaskCount, &sPipeTargetEcsTaskParameters_LaunchType, &sPipeTargetEcsTaskParameters_NetworkConfiguration, &sPipeTargetEcsTaskParameters_PlatformVersion, &sPipeTargetEcsTaskParameters_Group, &sPipeTargetEcsTaskParameters_CapacityProviderStrategy, &sPipeTargetEcsTaskParameters_EnableECSManagedTags, &sPipeTargetEcsTaskParameters_EnableExecuteCommand, &sPipeTargetEcsTaskParameters_PlacementConstraints, &sPipeTargetEcsTaskParameters_PlacementStrategy, &sPipeTargetEcsTaskParameters_PropagateTags, &sPipeTargetEcsTaskParameters_ReferenceId, &sPipeTargetEcsTaskParameters_Overrides, &sPipeTargetEcsTaskParameters_Tags}, Seed: 135, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 5, 12, 0, 0, 0, 10, 6, 2, 13, 1, 0, 0, 7, 15, 8, 4, 0, 11,
+	3, 0, 14, 9, 0, 0, 0, 0,
+}}
+var mPipeTargetEventBridgeEventBusParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetEventBridgeEventBusParameters_EndpointId, &sPipeTargetEventBridgeEventBusParameters_DetailType, &sPipeTargetEventBridgeEventBusParameters_Source, &sPipeTargetEventBridgeEventBusParameters_Resources, &sPipeTargetEventBridgeEventBusParameters_Time}}
+var mPipeTargetHttpParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetHttpParameters_PathParameterValues, &sPipeTargetHttpParameters_HeaderParameters, &sPipeTargetHttpParameters_QueryStringParameters}}
+var mPipeTargetKinesisStreamParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetKinesisStreamParameters_PartitionKey}}
+var mPipeTargetLambdaFunctionParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetLambdaFunctionParameters_InvocationType}}
+var mPipeTargetParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetParameters_InputTemplate, &sPipeTargetParameters_LambdaFunctionParameters, &sPipeTargetParameters_StepFunctionStateMachineParameters, &sPipeTargetParameters_KinesisStreamParameters, &sPipeTargetParameters_EcsTaskParameters, &sPipeTargetParameters_BatchJobParameters, &sPipeTargetParameters_SqsQueueParameters, &sPipeTargetParameters_HttpParameters, &sPipeTargetParameters_RedshiftDataParameters, &sPipeTargetParameters_SageMakerPipelineParameters, &sPipeTargetParameters_EventBridgeEventBusParameters, &sPipeTargetParameters_CloudWatchLogsParameters, &sPipeTargetParameters_TimestreamParameters}, Seed: 7, Slots: []uint16{
+	1, 0, 8, 0, 0, 10, 0, 6, 0, 0, 9, 7, 13, 11, 5, 0, 0, 2, 0, 0, 0, 0, 0, 3,
+	0, 0, 0, 0, 0, 0, 12, 4,
+}}
+var mPipeTargetRedshiftDataParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetRedshiftDataParameters_SecretManagerArn, &sPipeTargetRedshiftDataParameters_Database, &sPipeTargetRedshiftDataParameters_DbUser, &sPipeTargetRedshiftDataParameters_StatementName, &sPipeTargetRedshiftDataParameters_WithEvent, &sPipeTargetRedshiftDataParameters_Sqls}}
+var mPipeTargetSageMakerPipelineParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetSageMakerPipelineParameters_PipelineParameterList}}
+var mPipeTargetSqsQueueParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetSqsQueueParameters_MessageGroupId, &sPipeTargetSqsQueueParameters_MessageDeduplicationId}}
+var mPipeTargetStateMachineParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetStateMachineParameters_InvocationType}}
+var mPipeTargetTimestreamParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sPipeTargetTimestreamParameters_TimeValue, &sPipeTargetTimestreamParameters_EpochTimeUnit, &sPipeTargetTimestreamParameters_TimeFieldType, &sPipeTargetTimestreamParameters_TimestampFormat, &sPipeTargetTimestreamParameters_VersionValue, &sPipeTargetTimestreamParameters_DimensionMappings, &sPipeTargetTimestreamParameters_SingleMeasureMappings, &sPipeTargetTimestreamParameters_MultiMeasureMappings}}
+var mPlacementConstraint = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementConstraint_type, &sPlacementConstraint_expression}}
+var m_PlacementConstraints = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlacementConstraints_member}}
+var m_PlacementStrategies = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlacementStrategies_member}}
+var mPlacementStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sPlacementStrategy_type, &sPlacementStrategy_field}}
+var m_QueryStringParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryStringParametersMap_key, &s_QueryStringParametersMap_value}}
+var mS3LogDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LogDestination_BucketName, &sS3LogDestination_Prefix, &sS3LogDestination_BucketOwner, &sS3LogDestination_OutputFormat}}
+var mS3LogDestinationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sS3LogDestinationParameters_BucketName, &sS3LogDestinationParameters_BucketOwner, &sS3LogDestinationParameters_OutputFormat, &sS3LogDestinationParameters_Prefix}}
+var mSageMakerPipelineParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sSageMakerPipelineParameter_Name, &sSageMakerPipelineParameter_Value}}
+var m_SageMakerPipelineParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SageMakerPipelineParameterList_member}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var m_SecurityGroups = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroups_member}}
+var mSelfManagedKafkaAccessConfigurationCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sSelfManagedKafkaAccessConfigurationCredentials_BasicAuth, &sSelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth, &sSelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth, &sSelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth}}
+var mSelfManagedKafkaAccessConfigurationVpc = smithy.SchemaMembers{List: []*smithy.Schema{&sSelfManagedKafkaAccessConfigurationVpc_Subnets, &sSelfManagedKafkaAccessConfigurationVpc_SecurityGroup}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mSingleMeasureMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sSingleMeasureMapping_MeasureValue, &sSingleMeasureMapping_MeasureValueType, &sSingleMeasureMapping_MeasureName}}
+var m_SingleMeasureMappings = smithy.SchemaMembers{List: []*smithy.Schema{&s_SingleMeasureMappings_member}}
+var m_Sqls = smithy.SchemaMembers{List: []*smithy.Schema{&s_Sqls_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var m_Subnets = smithy.SchemaMembers{List: []*smithy.Schema{&s_Subnets_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mUpdatePipeSourceActiveMQBrokerParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceActiveMQBrokerParameters_Credentials, &sUpdatePipeSourceActiveMQBrokerParameters_BatchSize, &sUpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds}}
+var mUpdatePipeSourceDynamoDBStreamParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceDynamoDBStreamParameters_BatchSize, &sUpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig, &sUpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure, &sUpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds, &sUpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds, &sUpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts, &sUpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor}}
+var mUpdatePipeSourceKinesisStreamParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceKinesisStreamParameters_BatchSize, &sUpdatePipeSourceKinesisStreamParameters_DeadLetterConfig, &sUpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure, &sUpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds, &sUpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds, &sUpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts, &sUpdatePipeSourceKinesisStreamParameters_ParallelizationFactor}}
+var mUpdatePipeSourceManagedStreamingKafkaParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceManagedStreamingKafkaParameters_BatchSize, &sUpdatePipeSourceManagedStreamingKafkaParameters_Credentials, &sUpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds}}
+var mUpdatePipeSourceParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceParameters_FilterCriteria, &sUpdatePipeSourceParameters_KinesisStreamParameters, &sUpdatePipeSourceParameters_DynamoDBStreamParameters, &sUpdatePipeSourceParameters_SqsQueueParameters, &sUpdatePipeSourceParameters_ActiveMQBrokerParameters, &sUpdatePipeSourceParameters_RabbitMQBrokerParameters, &sUpdatePipeSourceParameters_ManagedStreamingKafkaParameters, &sUpdatePipeSourceParameters_SelfManagedKafkaParameters}}
+var mUpdatePipeSourceRabbitMQBrokerParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceRabbitMQBrokerParameters_Credentials, &sUpdatePipeSourceRabbitMQBrokerParameters_BatchSize, &sUpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds}}
+var mUpdatePipeSourceSelfManagedKafkaParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceSelfManagedKafkaParameters_BatchSize, &sUpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds, &sUpdatePipeSourceSelfManagedKafkaParameters_Credentials, &sUpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate, &sUpdatePipeSourceSelfManagedKafkaParameters_Vpc}}
+var mUpdatePipeSourceSqsQueueParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeSourceSqsQueueParameters_BatchSize, &sUpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mCreatePipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePipeRequest_Name, &sCreatePipeRequest_Description, &sCreatePipeRequest_DesiredState, &sCreatePipeRequest_Source, &sCreatePipeRequest_SourceParameters, &sCreatePipeRequest_Enrichment, &sCreatePipeRequest_EnrichmentParameters, &sCreatePipeRequest_Target, &sCreatePipeRequest_TargetParameters, &sCreatePipeRequest_RoleArn, &sCreatePipeRequest_Tags, &sCreatePipeRequest_LogConfiguration, &sCreatePipeRequest_KmsKeyIdentifier}, Seed: 1, Slots: []uint16{
+	0, 11, 0, 1, 4, 0, 0, 0, 8, 0, 7, 0, 5, 0, 0, 0, 10, 6, 12, 0, 2, 0, 0, 0,
+	9, 0, 0, 0, 13, 3, 0, 0,
+}}
+var mCreatePipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePipeResponse_Arn, &sCreatePipeResponse_Name, &sCreatePipeResponse_DesiredState, &sCreatePipeResponse_CurrentState, &sCreatePipeResponse_CreationTime, &sCreatePipeResponse_LastModifiedTime}}
+var mDeletePipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePipeRequest_Name}}
+var mDeletePipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePipeResponse_Arn, &sDeletePipeResponse_Name, &sDeletePipeResponse_DesiredState, &sDeletePipeResponse_CurrentState, &sDeletePipeResponse_CreationTime, &sDeletePipeResponse_LastModifiedTime}}
+var mDescribePipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePipeRequest_Name}}
+var mDescribePipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePipeResponse_Arn, &sDescribePipeResponse_Name, &sDescribePipeResponse_Description, &sDescribePipeResponse_DesiredState, &sDescribePipeResponse_CurrentState, &sDescribePipeResponse_StateReason, &sDescribePipeResponse_Source, &sDescribePipeResponse_SourceParameters, &sDescribePipeResponse_Enrichment, &sDescribePipeResponse_EnrichmentParameters, &sDescribePipeResponse_Target, &sDescribePipeResponse_TargetParameters, &sDescribePipeResponse_RoleArn, &sDescribePipeResponse_Tags, &sDescribePipeResponse_CreationTime, &sDescribePipeResponse_LastModifiedTime, &sDescribePipeResponse_LogConfiguration, &sDescribePipeResponse_KmsKeyIdentifier}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 5, 0, 0, 12, 0, 0, 0, 8, 0, 17, 15, 0, 0,
+	0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 13, 0, 2, 0, 0, 0, 0, 0, 0, 11, 0, 18, 0, 0,
+	14, 1, 0, 0, 0, 6, 9, 0, 0, 0, 0, 7, 16, 0, 0, 3,
+}}
+var mListPipesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPipesRequest_NamePrefix, &sListPipesRequest_DesiredState, &sListPipesRequest_CurrentState, &sListPipesRequest_SourcePrefix, &sListPipesRequest_TargetPrefix, &sListPipesRequest_NextToken, &sListPipesRequest_Limit}}
+var mListPipesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPipesResponse_Pipes, &sListPipesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mStartPipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartPipeRequest_Name}}
+var mStartPipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartPipeResponse_Arn, &sStartPipeResponse_Name, &sStartPipeResponse_DesiredState, &sStartPipeResponse_CurrentState, &sStartPipeResponse_CreationTime, &sStartPipeResponse_LastModifiedTime}}
+var mStopPipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopPipeRequest_Name}}
+var mStopPipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopPipeResponse_Arn, &sStopPipeResponse_Name, &sStopPipeResponse_DesiredState, &sStopPipeResponse_CurrentState, &sStopPipeResponse_CreationTime, &sStopPipeResponse_LastModifiedTime}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdatePipeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeRequest_Name, &sUpdatePipeRequest_Description, &sUpdatePipeRequest_DesiredState, &sUpdatePipeRequest_SourceParameters, &sUpdatePipeRequest_Enrichment, &sUpdatePipeRequest_EnrichmentParameters, &sUpdatePipeRequest_Target, &sUpdatePipeRequest_TargetParameters, &sUpdatePipeRequest_RoleArn, &sUpdatePipeRequest_LogConfiguration, &sUpdatePipeRequest_KmsKeyIdentifier}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 0, 0, 7, 0, 6, 0, 4, 0, 0, 0, 9, 5, 10, 0, 2, 0, 0, 0,
+	8, 0, 0, 0, 11, 3, 0, 0,
+}}
+var mUpdatePipeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePipeResponse_Arn, &sUpdatePipeResponse_Name, &sUpdatePipeResponse_DesiredState, &sUpdatePipeResponse_CurrentState, &sUpdatePipeResponse_CreationTime, &sUpdatePipeResponse_LastModifiedTime}}
+
+var sCreatePipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipe, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sDeletePipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipe, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDescribePipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePipe, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sListPipes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipes, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sStartPipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipe, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sStopPipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipe, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sUpdatePipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipe, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var s_Pipes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Pipes, Traits: &t10, Type: smithy.ShapeTypeService})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_ArnOrJsonPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnOrJsonPath, Type: smithy.ShapeTypeString})
+var s_ArnOrUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArnOrUrl, Type: smithy.ShapeTypeString})
+var s_AssignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssignPublicIp, Type: smithy.ShapeTypeString})
+var sAwsVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsVpcConfiguration, Members: &mAwsVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sBatchArrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchArrayProperties, Members: &mBatchArrayProperties, Type: smithy.ShapeTypeStructure})
+var s_BatchArraySize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchArraySize, Type: smithy.ShapeTypeInteger})
+var sBatchContainerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchContainerOverrides, Members: &mBatchContainerOverrides, Type: smithy.ShapeTypeStructure})
+var s_BatchDependsOn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDependsOn, Members: &m_BatchDependsOn, Type: smithy.ShapeTypeList})
+var sBatchEnvironmentVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchEnvironmentVariable, Members: &mBatchEnvironmentVariable, Type: smithy.ShapeTypeStructure})
+var s_BatchEnvironmentVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchEnvironmentVariableList, Members: &m_BatchEnvironmentVariableList, Type: smithy.ShapeTypeList})
+var sBatchJobDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchJobDependency, Members: &mBatchJobDependency, Type: smithy.ShapeTypeStructure})
+var s_BatchJobDependencyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchJobDependencyType, Type: smithy.ShapeTypeString})
+var s_BatchParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchParametersMap, Members: &m_BatchParametersMap, Type: smithy.ShapeTypeMap})
+var sBatchResourceRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchResourceRequirement, Members: &mBatchResourceRequirement, Type: smithy.ShapeTypeStructure})
+var s_BatchResourceRequirementsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchResourceRequirementsList, Members: &m_BatchResourceRequirementsList, Type: smithy.ShapeTypeList})
+var s_BatchResourceRequirementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchResourceRequirementType, Type: smithy.ShapeTypeString})
+var s_BatchRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchRetryAttempts, Type: smithy.ShapeTypeInteger})
+var sBatchRetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchRetryStrategy, Members: &mBatchRetryStrategy, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_CapacityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProvider, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_CapacityProviderStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategy, Members: &m_CapacityProviderStrategy, Type: smithy.ShapeTypeList})
+var sCapacityProviderStrategyItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityProviderStrategyItem, Members: &mCapacityProviderStrategyItem, Type: smithy.ShapeTypeStructure})
+var s_CapacityProviderStrategyItemBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategyItemBase, Type: smithy.ShapeTypeInteger})
+var s_CapacityProviderStrategyItemWeight = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityProviderStrategyItemWeight, Type: smithy.ShapeTypeInteger})
+var s_CloudwatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudwatchLogGroupArn, Type: smithy.ShapeTypeString})
+var sCloudwatchLogsLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudwatchLogsLogDestination, Members: &mCloudwatchLogsLogDestination, Type: smithy.ShapeTypeStructure})
+var sCloudwatchLogsLogDestinationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudwatchLogsLogDestinationParameters, Members: &mCloudwatchLogsLogDestinationParameters, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var s_Database = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Database, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_DbUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DbUser, Traits: &t11, Type: smithy.ShapeTypeString})
+var sDeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sDimensionMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimensionMapping, Members: &mDimensionMapping, Type: smithy.ShapeTypeStructure})
+var s_DimensionMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionMappings, Members: &m_DimensionMappings, Type: smithy.ShapeTypeList})
+var s_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionName, Type: smithy.ShapeTypeString})
+var s_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValue, Type: smithy.ShapeTypeString})
+var s_DimensionValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionValueType, Type: smithy.ShapeTypeString})
+var s_DynamoDBStreamStartPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamoDBStreamStartPosition, Type: smithy.ShapeTypeString})
+var sEcsContainerOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsContainerOverride, Members: &mEcsContainerOverride, Type: smithy.ShapeTypeStructure})
+var s_EcsContainerOverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EcsContainerOverrideList, Members: &m_EcsContainerOverrideList, Type: smithy.ShapeTypeList})
+var sEcsEnvironmentFile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsEnvironmentFile, Members: &mEcsEnvironmentFile, Type: smithy.ShapeTypeStructure})
+var s_EcsEnvironmentFileList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EcsEnvironmentFileList, Members: &m_EcsEnvironmentFileList, Type: smithy.ShapeTypeList})
+var s_EcsEnvironmentFileType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EcsEnvironmentFileType, Type: smithy.ShapeTypeString})
+var sEcsEnvironmentVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsEnvironmentVariable, Members: &mEcsEnvironmentVariable, Type: smithy.ShapeTypeStructure})
+var s_EcsEnvironmentVariableList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EcsEnvironmentVariableList, Members: &m_EcsEnvironmentVariableList, Type: smithy.ShapeTypeList})
+var sEcsEphemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsEphemeralStorage, Members: &mEcsEphemeralStorage, Type: smithy.ShapeTypeStructure})
+var sEcsInferenceAcceleratorOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsInferenceAcceleratorOverride, Members: &mEcsInferenceAcceleratorOverride, Type: smithy.ShapeTypeStructure})
+var s_EcsInferenceAcceleratorOverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EcsInferenceAcceleratorOverrideList, Members: &m_EcsInferenceAcceleratorOverrideList, Type: smithy.ShapeTypeList})
+var sEcsResourceRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsResourceRequirement, Members: &mEcsResourceRequirement, Type: smithy.ShapeTypeStructure})
+var s_EcsResourceRequirementsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EcsResourceRequirementsList, Members: &m_EcsResourceRequirementsList, Type: smithy.ShapeTypeList})
+var s_EcsResourceRequirementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EcsResourceRequirementType, Type: smithy.ShapeTypeString})
+var sEcsTaskOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsTaskOverride, Members: &mEcsTaskOverride, Type: smithy.ShapeTypeStructure})
+var s_EndpointString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointString, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_EphemeralStorageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EphemeralStorageSize, Type: smithy.ShapeTypeInteger})
+var s_EpochTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EpochTimeUnit, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_EventBridgeDetailType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBridgeDetailType, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_EventBridgeEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBridgeEndpointId, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_EventBridgeEventResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBridgeEventResourceList, Members: &m_EventBridgeEventResourceList, Type: smithy.ShapeTypeList})
+var s_EventBridgeEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBridgeEventSource, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPattern, Traits: &t11, Type: smithy.ShapeTypeString})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterCriteria, Members: &mFilterCriteria, Type: smithy.ShapeTypeStructure})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var s_FirehoseArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirehoseArn, Type: smithy.ShapeTypeString})
+var sFirehoseLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehoseLogDestination, Members: &mFirehoseLogDestination, Type: smithy.ShapeTypeStructure})
+var sFirehoseLogDestinationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirehoseLogDestinationParameters, Members: &mFirehoseLogDestinationParameters, Type: smithy.ShapeTypeStructure})
+var s_HeaderKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderKey, Type: smithy.ShapeTypeString})
+var s_HeaderParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderParametersMap, Members: &m_HeaderParametersMap, Type: smithy.ShapeTypeMap})
+var s_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValue, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_IncludeExecutionData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeExecutionData, Members: &m_IncludeExecutionData, Type: smithy.ShapeTypeList})
+var s_IncludeExecutionDataOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeExecutionDataOption, Type: smithy.ShapeTypeString})
+var s_InputTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputTemplate, Traits: &t11, Type: smithy.ShapeTypeString})
+var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var s_JsonPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonPath, Type: smithy.ShapeTypeString})
+var s_KafkaBootstrapServers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KafkaBootstrapServers, Members: &m_KafkaBootstrapServers, Type: smithy.ShapeTypeList})
+var s_KafkaTopicName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KafkaTopicName, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_KinesisPartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisPartitionKey, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_KinesisStreamStartPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisStreamStartPosition, Type: smithy.ShapeTypeString})
+var s_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString})
+var s_LaunchType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchType, Type: smithy.ShapeTypeString})
+var s_LimitMax10 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitMax10, Type: smithy.ShapeTypeInteger})
+var s_LimitMax100 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitMax100, Type: smithy.ShapeTypeInteger})
+var s_LimitMax10000 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var s_LimitMin1 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitMin1, Type: smithy.ShapeTypeInteger})
+var s_LogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogLevel, Type: smithy.ShapeTypeString})
+var s_LogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogStreamName, Type: smithy.ShapeTypeString})
+var s_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var s_MaximumRecordAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumRecordAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var s_MaximumRetryAttemptsESM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaximumRetryAttemptsESM, Type: smithy.ShapeTypeInteger})
+var s_MeasureName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MeasureName, Type: smithy.ShapeTypeString})
+var s_MeasureValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MeasureValue, Type: smithy.ShapeTypeString})
+var s_MeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MeasureValueType, Type: smithy.ShapeTypeString})
+var s_MessageDeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageDeduplicationId, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageGroupId, Traits: &t11, Type: smithy.ShapeTypeString})
+var sMQBrokerAccessCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMQBrokerAccessCredentials, Members: &mMQBrokerAccessCredentials, Type: smithy.ShapeTypeUnion})
+var s_MQBrokerQueueName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MQBrokerQueueName, Traits: &t11, Type: smithy.ShapeTypeString})
+var sMSKAccessCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMSKAccessCredentials, Members: &mMSKAccessCredentials, Type: smithy.ShapeTypeUnion})
+var s_MSKStartPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MSKStartPosition, Type: smithy.ShapeTypeString})
+var sMultiMeasureAttributeMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiMeasureAttributeMapping, Members: &mMultiMeasureAttributeMapping, Type: smithy.ShapeTypeStructure})
+var s_MultiMeasureAttributeMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiMeasureAttributeMappings, Members: &m_MultiMeasureAttributeMappings, Type: smithy.ShapeTypeList})
+var s_MultiMeasureAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiMeasureAttributeName, Type: smithy.ShapeTypeString})
+var sMultiMeasureMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiMeasureMapping, Members: &mMultiMeasureMapping, Type: smithy.ShapeTypeStructure})
+var s_MultiMeasureMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiMeasureMappings, Members: &m_MultiMeasureMappings, Type: smithy.ShapeTypeList})
+var s_MultiMeasureName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiMeasureName, Type: smithy.ShapeTypeString})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Traits: &t11, Type: smithy.ShapeTypeString})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var s_OnPartialBatchItemFailureStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OnPartialBatchItemFailureStreams, Type: smithy.ShapeTypeString})
+var s_OptionalArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalArn, Type: smithy.ShapeTypeString})
+var s_PathParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParameter, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_PathParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParameterList, Members: &m_PathParameterList, Type: smithy.ShapeTypeList})
+var sPipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipe, Members: &mPipe, Type: smithy.ShapeTypeStructure})
+var s_PipeArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var s_PipeDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipeDescription, Traits: &t11, Type: smithy.ShapeTypeString})
+var sPipeEnrichmentHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeEnrichmentHttpParameters, Members: &mPipeEnrichmentHttpParameters, Type: smithy.ShapeTypeStructure})
+var sPipeEnrichmentParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeEnrichmentParameters, Members: &mPipeEnrichmentParameters, Type: smithy.ShapeTypeStructure})
+var s_PipeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipeList, Members: &m_PipeList, Type: smithy.ShapeTypeList})
+var sPipeLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeLogConfiguration, Members: &mPipeLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfigurationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeLogConfigurationParameters, Members: &mPipeLogConfigurationParameters, Type: smithy.ShapeTypeStructure})
+var s_PipeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sPipeSourceActiveMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceActiveMQBrokerParameters, Members: &mPipeSourceActiveMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceDynamoDBStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceDynamoDBStreamParameters, Members: &mPipeSourceDynamoDBStreamParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceKinesisStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceKinesisStreamParameters, Members: &mPipeSourceKinesisStreamParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceManagedStreamingKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceManagedStreamingKafkaParameters, Members: &mPipeSourceManagedStreamingKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceParameters, Members: &mPipeSourceParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceRabbitMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceRabbitMQBrokerParameters, Members: &mPipeSourceRabbitMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceSelfManagedKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceSelfManagedKafkaParameters, Members: &mPipeSourceSelfManagedKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceSqsQueueParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeSourceSqsQueueParameters, Members: &mPipeSourceSqsQueueParameters, Type: smithy.ShapeTypeStructure})
+var s_PipeState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var s_PipeStateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipeStateReason, Type: smithy.ShapeTypeString})
+var sPipeTargetBatchJobParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetBatchJobParameters, Members: &mPipeTargetBatchJobParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetCloudWatchLogsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetCloudWatchLogsParameters, Members: &mPipeTargetCloudWatchLogsParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetEcsTaskParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetEcsTaskParameters, Members: &mPipeTargetEcsTaskParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetEventBridgeEventBusParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetEventBridgeEventBusParameters, Members: &mPipeTargetEventBridgeEventBusParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetHttpParameters, Members: &mPipeTargetHttpParameters, Type: smithy.ShapeTypeStructure})
+var s_PipeTargetInvocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PipeTargetInvocationType, Type: smithy.ShapeTypeString})
+var sPipeTargetKinesisStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetKinesisStreamParameters, Members: &mPipeTargetKinesisStreamParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetLambdaFunctionParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetLambdaFunctionParameters, Members: &mPipeTargetLambdaFunctionParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetParameters, Members: &mPipeTargetParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetRedshiftDataParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetRedshiftDataParameters, Members: &mPipeTargetRedshiftDataParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetSageMakerPipelineParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetSageMakerPipelineParameters, Members: &mPipeTargetSageMakerPipelineParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetSqsQueueParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetSqsQueueParameters, Members: &mPipeTargetSqsQueueParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetStateMachineParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetStateMachineParameters, Members: &mPipeTargetStateMachineParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetTimestreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPipeTargetTimestreamParameters, Members: &mPipeTargetTimestreamParameters, Type: smithy.ShapeTypeStructure})
+var sPlacementConstraint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementConstraint, Members: &mPlacementConstraint, Type: smithy.ShapeTypeStructure})
+var s_PlacementConstraintExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraintExpression, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_PlacementConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraints, Members: &m_PlacementConstraints, Type: smithy.ShapeTypeList})
+var s_PlacementConstraintType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementConstraintType, Type: smithy.ShapeTypeString})
+var s_PlacementStrategies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategies, Members: &m_PlacementStrategies, Type: smithy.ShapeTypeList})
+var sPlacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlacementStrategy, Members: &mPlacementStrategy, Type: smithy.ShapeTypeStructure})
+var s_PlacementStrategyField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategyField, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_PlacementStrategyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlacementStrategyType, Type: smithy.ShapeTypeString})
+var s_PropagateTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PropagateTags, Type: smithy.ShapeTypeString})
+var s_QueryStringKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringKey, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringParametersMap, Members: &m_QueryStringParametersMap, Type: smithy.ShapeTypeMap})
+var s_QueryStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringValue, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_ReferenceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReferenceId, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_RequestedPipeState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var s_RequestedPipeStateDescribeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedPipeStateDescribeResponse, Type: smithy.ShapeTypeString})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sS3LogDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LogDestination, Members: &mS3LogDestination, Type: smithy.ShapeTypeStructure})
+var sS3LogDestinationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3LogDestinationParameters, Members: &mS3LogDestinationParameters, Type: smithy.ShapeTypeStructure})
+var s_S3OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3OutputFormat, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSageMakerPipelineParameter, Members: &mSageMakerPipelineParameter, Type: smithy.ShapeTypeStructure})
+var s_SageMakerPipelineParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterList, Members: &m_SageMakerPipelineParameterList, Type: smithy.ShapeTypeList})
+var s_SageMakerPipelineParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterName, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_SageMakerPipelineParameterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SageMakerPipelineParameterValue, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_SecretManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var s_SecretManagerArnOrJsonPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretManagerArnOrJsonPath, Type: smithy.ShapeTypeString})
+var s_SecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroup, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var s_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList})
+var sSelfManagedKafkaAccessConfigurationCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelfManagedKafkaAccessConfigurationCredentials, Members: &mSelfManagedKafkaAccessConfigurationCredentials, Type: smithy.ShapeTypeUnion})
+var sSelfManagedKafkaAccessConfigurationVpc = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelfManagedKafkaAccessConfigurationVpc, Members: &mSelfManagedKafkaAccessConfigurationVpc, Type: smithy.ShapeTypeStructure})
+var s_SelfManagedKafkaStartPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelfManagedKafkaStartPosition, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var sSingleMeasureMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSingleMeasureMapping, Members: &mSingleMeasureMapping, Type: smithy.ShapeTypeStructure})
+var s_SingleMeasureMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SingleMeasureMappings, Members: &m_SingleMeasureMappings, Type: smithy.ShapeTypeList})
+var s_Sql = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sql, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_Sqls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Sqls, Members: &m_Sqls, Type: smithy.ShapeTypeList})
+var s_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatementName, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_Subnet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subnet, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Traits: &t11, Type: smithy.ShapeTypeString})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var s_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Traits: &t11, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var s_TimeFieldType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeFieldType, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimestampFormat, Type: smithy.ShapeTypeString})
+var s_TimeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeValue, Type: smithy.ShapeTypeString})
+var sUpdatePipeSourceActiveMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceActiveMQBrokerParameters, Members: &mUpdatePipeSourceActiveMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceDynamoDBStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceDynamoDBStreamParameters, Members: &mUpdatePipeSourceDynamoDBStreamParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceKinesisStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceKinesisStreamParameters, Members: &mUpdatePipeSourceKinesisStreamParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceManagedStreamingKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceManagedStreamingKafkaParameters, Members: &mUpdatePipeSourceManagedStreamingKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceParameters, Members: &mUpdatePipeSourceParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceRabbitMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceRabbitMQBrokerParameters, Members: &mUpdatePipeSourceRabbitMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceSelfManagedKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceSelfManagedKafkaParameters, Members: &mUpdatePipeSourceSelfManagedKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceSqsQueueParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeSourceSqsQueueParameters, Members: &mUpdatePipeSourceSqsQueueParameters, Type: smithy.ShapeTypeStructure})
+var s_URI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_URI, Traits: &t11, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var s_VersionValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionValue, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipeRequest, Members: &mCreatePipeRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePipeResponse, Members: &mCreatePipeResponse, Type: smithy.ShapeTypeStructure})
+var sDeletePipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipeRequest, Members: &mDeletePipeRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePipeResponse, Members: &mDeletePipeResponse, Type: smithy.ShapeTypeStructure})
+var sDescribePipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePipeRequest, Members: &mDescribePipeRequest, Type: smithy.ShapeTypeStructure})
+var sDescribePipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePipeResponse, Members: &mDescribePipeResponse, Type: smithy.ShapeTypeStructure})
+var sListPipesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipesRequest, Members: &mListPipesRequest, Type: smithy.ShapeTypeStructure})
+var sListPipesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPipesResponse, Members: &mListPipesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sStartPipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipeRequest, Members: &mStartPipeRequest, Type: smithy.ShapeTypeStructure})
+var sStartPipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPipeResponse, Members: &mStartPipeResponse, Type: smithy.ShapeTypeStructure})
+var sStopPipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipeRequest, Members: &mStopPipeRequest, Type: smithy.ShapeTypeStructure})
+var sStopPipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPipeResponse, Members: &mStopPipeResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeRequest, Members: &mUpdatePipeRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePipeResponse, Members: &mUpdatePipeResponse, Type: smithy.ShapeTypeStructure})
+
+var sAwsVpcConfiguration_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_Subnets, Members: &m_Subnets, Type: smithy.ShapeTypeList})
+var sAwsVpcConfiguration_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_SecurityGroups, Members: &m_SecurityGroups, Type: smithy.ShapeTypeList})
+var sAwsVpcConfiguration_AssignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssignPublicIp", ID: &i_AssignPublicIp, Type: smithy.ShapeTypeString})
+var sBatchArrayProperties_Size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Size", ID: &i_BatchArraySize, Type: smithy.ShapeTypeInteger})
+var sBatchContainerOverrides_Command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sBatchContainerOverrides_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &i_BatchEnvironmentVariableList, Members: &m_BatchEnvironmentVariableList, Type: smithy.ShapeTypeList})
+var sBatchContainerOverrides_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchContainerOverrides_ResourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequirements", ID: &i_BatchResourceRequirementsList, Members: &m_BatchResourceRequirementsList, Type: smithy.ShapeTypeList})
+var s_BatchDependsOn_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchJobDependency, Members: &mBatchJobDependency, Type: smithy.ShapeTypeStructure})
+var sBatchEnvironmentVariable_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchEnvironmentVariable_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_BatchEnvironmentVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchEnvironmentVariable, Members: &mBatchEnvironmentVariable, Type: smithy.ShapeTypeStructure})
+var sBatchJobDependency_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchJobDependency_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_BatchJobDependencyType, Type: smithy.ShapeTypeString})
+var s_BatchParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_BatchParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchResourceRequirement_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_BatchResourceRequirementType, Type: smithy.ShapeTypeString})
+var sBatchResourceRequirement_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_BatchResourceRequirementsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchResourceRequirement, Members: &mBatchResourceRequirement, Type: smithy.ShapeTypeStructure})
+var sBatchRetryStrategy_Attempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attempts", ID: &i_BatchRetryAttempts, Type: smithy.ShapeTypeInteger})
+var s_CapacityProviderStrategy_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapacityProviderStrategyItem, Members: &mCapacityProviderStrategyItem, Type: smithy.ShapeTypeStructure})
+var sCapacityProviderStrategyItem_capacityProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityProvider", ID: &i_CapacityProvider, Traits: &t12, Type: smithy.ShapeTypeString})
+var sCapacityProviderStrategyItem_weight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weight", ID: &i_CapacityProviderStrategyItemWeight, Type: smithy.ShapeTypeInteger})
+var sCapacityProviderStrategyItem_base = smithy.NewStaticSchema(smithy.StaticSchema{Member: "base", ID: &i_CapacityProviderStrategyItemBase, Type: smithy.ShapeTypeInteger})
+var sCloudwatchLogsLogDestination_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupArn", ID: &i_CloudwatchLogGroupArn, Type: smithy.ShapeTypeString})
+var sCloudwatchLogsLogDestinationParameters_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupArn", ID: &i_CloudwatchLogGroupArn, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeadLetterConfig_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDimensionMapping_DimensionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionValue", ID: &i_DimensionValue, Type: smithy.ShapeTypeString})
+var sDimensionMapping_DimensionValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionValueType", ID: &i_DimensionValueType, Type: smithy.ShapeTypeString})
+var sDimensionMapping_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionName", ID: &i_DimensionName, Type: smithy.ShapeTypeString})
+var s_DimensionMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimensionMapping, Members: &mDimensionMapping, Type: smithy.ShapeTypeStructure})
+var sEcsContainerOverride_Command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sEcsContainerOverride_Cpu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cpu", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEcsContainerOverride_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &i_EcsEnvironmentVariableList, Members: &m_EcsEnvironmentVariableList, Type: smithy.ShapeTypeList})
+var sEcsContainerOverride_EnvironmentFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentFiles", ID: &i_EcsEnvironmentFileList, Members: &m_EcsEnvironmentFileList, Type: smithy.ShapeTypeList})
+var sEcsContainerOverride_Memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Memory", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEcsContainerOverride_MemoryReservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemoryReservation", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEcsContainerOverride_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsContainerOverride_ResourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRequirements", ID: &i_EcsResourceRequirementsList, Members: &m_EcsResourceRequirementsList, Type: smithy.ShapeTypeList})
+var s_EcsContainerOverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEcsContainerOverride, Members: &mEcsContainerOverride, Type: smithy.ShapeTypeStructure})
+var sEcsEnvironmentFile_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_EcsEnvironmentFileType, Type: smithy.ShapeTypeString})
+var sEcsEnvironmentFile_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EcsEnvironmentFileList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEcsEnvironmentFile, Members: &mEcsEnvironmentFile, Type: smithy.ShapeTypeStructure})
+var sEcsEnvironmentVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsEnvironmentVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EcsEnvironmentVariableList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEcsEnvironmentVariable, Members: &mEcsEnvironmentVariable, Type: smithy.ShapeTypeStructure})
+var sEcsEphemeralStorage_sizeInGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeInGiB", ID: &i_EphemeralStorageSize, Type: smithy.ShapeTypeInteger})
+var sEcsInferenceAcceleratorOverride_deviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsInferenceAcceleratorOverride_deviceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deviceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EcsInferenceAcceleratorOverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEcsInferenceAcceleratorOverride, Members: &mEcsInferenceAcceleratorOverride, Type: smithy.ShapeTypeStructure})
+var sEcsResourceRequirement_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_EcsResourceRequirementType, Type: smithy.ShapeTypeString})
+var sEcsResourceRequirement_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EcsResourceRequirementsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEcsResourceRequirement, Members: &mEcsResourceRequirement, Type: smithy.ShapeTypeStructure})
+var sEcsTaskOverride_ContainerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerOverrides", ID: &i_EcsContainerOverrideList, Members: &m_EcsContainerOverrideList, Type: smithy.ShapeTypeList})
+var sEcsTaskOverride_Cpu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cpu", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskOverride_EphemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EphemeralStorage", ID: &iEcsEphemeralStorage, Members: &mEcsEphemeralStorage, Type: smithy.ShapeTypeStructure})
+var sEcsTaskOverride_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_ArnOrJsonPath, Type: smithy.ShapeTypeString})
+var sEcsTaskOverride_InferenceAcceleratorOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InferenceAcceleratorOverrides", ID: &i_EcsInferenceAcceleratorOverrideList, Members: &m_EcsInferenceAcceleratorOverrideList, Type: smithy.ShapeTypeList})
+var sEcsTaskOverride_Memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Memory", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskOverride_TaskRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskRoleArn", ID: &i_ArnOrJsonPath, Type: smithy.ShapeTypeString})
+var s_EventBridgeEventResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ArnOrJsonPath, Type: smithy.ShapeTypeString})
+var sFilter_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_EventPattern, Traits: &t12, Type: smithy.ShapeTypeString})
+var sFilterCriteria_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFirehoseLogDestination_DeliveryStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamArn", ID: &i_FirehoseArn, Type: smithy.ShapeTypeString})
+var sFirehoseLogDestinationParameters_DeliveryStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryStreamArn", ID: &i_FirehoseArn, Type: smithy.ShapeTypeString})
+var s_HeaderParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_HeaderKey, Type: smithy.ShapeTypeString})
+var s_HeaderParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HeaderValue, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_IncludeExecutionData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IncludeExecutionDataOption, Type: smithy.ShapeTypeString})
+var sInternalException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t15, Type: smithy.ShapeTypeInteger})
+var s_KafkaBootstrapServers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EndpointString, Traits: &t12, Type: smithy.ShapeTypeString})
+var sMQBrokerAccessCredentials_BasicAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicAuth", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sMSKAccessCredentials_SaslScram512Auth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaslScram512Auth", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sMSKAccessCredentials_ClientCertificateTlsAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateTlsAuth", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sMultiMeasureAttributeMapping_MeasureValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValue", ID: &i_MeasureValue, Type: smithy.ShapeTypeString})
+var sMultiMeasureAttributeMapping_MeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValueType", ID: &i_MeasureValueType, Type: smithy.ShapeTypeString})
+var sMultiMeasureAttributeMapping_MultiMeasureAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiMeasureAttributeName", ID: &i_MultiMeasureAttributeName, Type: smithy.ShapeTypeString})
+var s_MultiMeasureAttributeMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMultiMeasureAttributeMapping, Members: &mMultiMeasureAttributeMapping, Type: smithy.ShapeTypeStructure})
+var sMultiMeasureMapping_MultiMeasureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiMeasureName", ID: &i_MultiMeasureName, Type: smithy.ShapeTypeString})
+var sMultiMeasureMapping_MultiMeasureAttributeMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiMeasureAttributeMappings", ID: &i_MultiMeasureAttributeMappings, Members: &m_MultiMeasureAttributeMappings, Type: smithy.ShapeTypeList})
+var s_MultiMeasureMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMultiMeasureMapping, Members: &mMultiMeasureMapping, Type: smithy.ShapeTypeStructure})
+var sNetworkConfiguration_awsvpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsvpcConfiguration", ID: &iAwsVpcConfiguration, Members: &mAwsVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_PathParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PathParameter, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipe_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sPipe_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var sPipe_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var sPipe_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var sPipe_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_PipeStateReason, Type: smithy.ShapeTypeString})
+var sPipe_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPipe_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPipe_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_ArnOrUrl, Type: smithy.ShapeTypeString})
+var sPipe_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sPipe_Enrichment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enrichment", ID: &i_OptionalArn, Type: smithy.ShapeTypeString})
+var sPipeEnrichmentHttpParameters_PathParameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathParameterValues", ID: &i_PathParameterList, Members: &m_PathParameterList, Type: smithy.ShapeTypeList})
+var sPipeEnrichmentHttpParameters_HeaderParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderParameters", ID: &i_HeaderParametersMap, Members: &m_HeaderParametersMap, Type: smithy.ShapeTypeMap})
+var sPipeEnrichmentHttpParameters_QueryStringParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStringParameters", ID: &i_QueryStringParametersMap, Members: &m_QueryStringParametersMap, Type: smithy.ShapeTypeMap})
+var sPipeEnrichmentParameters_InputTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputTemplate", ID: &i_InputTemplate, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeEnrichmentParameters_HttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpParameters", ID: &iPipeEnrichmentHttpParameters, Members: &mPipeEnrichmentHttpParameters, Type: smithy.ShapeTypeStructure})
+var s_PipeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPipe, Members: &mPipe, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfiguration_S3LogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3LogDestination", ID: &iS3LogDestination, Members: &mS3LogDestination, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfiguration_FirehoseLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirehoseLogDestination", ID: &iFirehoseLogDestination, Members: &mFirehoseLogDestination, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfiguration_CloudwatchLogsLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudwatchLogsLogDestination", ID: &iCloudwatchLogsLogDestination, Members: &mCloudwatchLogsLogDestination, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfiguration_Level = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Level", ID: &i_LogLevel, Type: smithy.ShapeTypeString})
+var sPipeLogConfiguration_IncludeExecutionData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeExecutionData", ID: &i_IncludeExecutionData, Members: &m_IncludeExecutionData, Type: smithy.ShapeTypeList})
+var sPipeLogConfigurationParameters_S3LogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3LogDestination", ID: &iS3LogDestinationParameters, Members: &mS3LogDestinationParameters, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfigurationParameters_FirehoseLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirehoseLogDestination", ID: &iFirehoseLogDestinationParameters, Members: &mFirehoseLogDestinationParameters, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfigurationParameters_CloudwatchLogsLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudwatchLogsLogDestination", ID: &iCloudwatchLogsLogDestinationParameters, Members: &mCloudwatchLogsLogDestinationParameters, Type: smithy.ShapeTypeStructure})
+var sPipeLogConfigurationParameters_Level = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Level", ID: &i_LogLevel, Type: smithy.ShapeTypeString})
+var sPipeLogConfigurationParameters_IncludeExecutionData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeExecutionData", ID: &i_IncludeExecutionData, Members: &m_IncludeExecutionData, Type: smithy.ShapeTypeList})
+var sPipeSourceActiveMQBrokerParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iMQBrokerAccessCredentials, Members: &mMQBrokerAccessCredentials, Type: smithy.ShapeTypeUnion})
+var sPipeSourceActiveMQBrokerParameters_QueueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueueName", ID: &i_MQBrokerQueueName, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeSourceActiveMQBrokerParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sPipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceDynamoDBStreamParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sPipeSourceDynamoDBStreamParameters_DeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterConfig", ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sPipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPartialBatchItemFailure", ID: &i_OnPartialBatchItemFailureStreams, Type: smithy.ShapeTypeString})
+var sPipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRecordAgeInSeconds", ID: &i_MaximumRecordAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceDynamoDBStreamParameters_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryAttempts", ID: &i_MaximumRetryAttemptsESM, Type: smithy.ShapeTypeInteger})
+var sPipeSourceDynamoDBStreamParameters_ParallelizationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelizationFactor", ID: &i_LimitMax10, Type: smithy.ShapeTypeInteger})
+var sPipeSourceDynamoDBStreamParameters_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &i_DynamoDBStreamStartPosition, Type: smithy.ShapeTypeString})
+var sPipeSourceKinesisStreamParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sPipeSourceKinesisStreamParameters_DeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterConfig", ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sPipeSourceKinesisStreamParameters_OnPartialBatchItemFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPartialBatchItemFailure", ID: &i_OnPartialBatchItemFailureStreams, Type: smithy.ShapeTypeString})
+var sPipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRecordAgeInSeconds", ID: &i_MaximumRecordAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceKinesisStreamParameters_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryAttempts", ID: &i_MaximumRetryAttemptsESM, Type: smithy.ShapeTypeInteger})
+var sPipeSourceKinesisStreamParameters_ParallelizationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelizationFactor", ID: &i_LimitMax10, Type: smithy.ShapeTypeInteger})
+var sPipeSourceKinesisStreamParameters_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &i_KinesisStreamStartPosition, Type: smithy.ShapeTypeString})
+var sPipeSourceKinesisStreamParameters_StartingPositionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPositionTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPipeSourceManagedStreamingKafkaParameters_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i_KafkaTopicName, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeSourceManagedStreamingKafkaParameters_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &i_MSKStartPosition, Type: smithy.ShapeTypeString})
+var sPipeSourceManagedStreamingKafkaParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sPipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceManagedStreamingKafkaParameters_ConsumerGroupID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupID", ID: &i_URI, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeSourceManagedStreamingKafkaParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iMSKAccessCredentials, Members: &mMSKAccessCredentials, Type: smithy.ShapeTypeUnion})
+var sPipeSourceParameters_FilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterCriteria", ID: &iFilterCriteria, Members: &mFilterCriteria, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters_KinesisStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisStreamParameters", ID: &iPipeSourceKinesisStreamParameters, Members: &mPipeSourceKinesisStreamParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters_DynamoDBStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBStreamParameters", ID: &iPipeSourceDynamoDBStreamParameters, Members: &mPipeSourceDynamoDBStreamParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters_SqsQueueParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsQueueParameters", ID: &iPipeSourceSqsQueueParameters, Members: &mPipeSourceSqsQueueParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters_ActiveMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveMQBrokerParameters", ID: &iPipeSourceActiveMQBrokerParameters, Members: &mPipeSourceActiveMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters_RabbitMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RabbitMQBrokerParameters", ID: &iPipeSourceRabbitMQBrokerParameters, Members: &mPipeSourceRabbitMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters_ManagedStreamingKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedStreamingKafkaParameters", ID: &iPipeSourceManagedStreamingKafkaParameters, Members: &mPipeSourceManagedStreamingKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceParameters_SelfManagedKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedKafkaParameters", ID: &iPipeSourceSelfManagedKafkaParameters, Members: &mPipeSourceSelfManagedKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sPipeSourceRabbitMQBrokerParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iMQBrokerAccessCredentials, Members: &mMQBrokerAccessCredentials, Type: smithy.ShapeTypeUnion})
+var sPipeSourceRabbitMQBrokerParameters_QueueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueueName", ID: &i_MQBrokerQueueName, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeSourceRabbitMQBrokerParameters_VirtualHost = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VirtualHost", ID: &i_URI, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeSourceRabbitMQBrokerParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sPipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceSelfManagedKafkaParameters_TopicName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopicName", ID: &i_KafkaTopicName, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeSourceSelfManagedKafkaParameters_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &i_SelfManagedKafkaStartPosition, Type: smithy.ShapeTypeString})
+var sPipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalBootstrapServers", ID: &i_KafkaBootstrapServers, Members: &m_KafkaBootstrapServers, Type: smithy.ShapeTypeList})
+var sPipeSourceSelfManagedKafkaParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sPipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeSourceSelfManagedKafkaParameters_ConsumerGroupID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConsumerGroupID", ID: &i_URI, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeSourceSelfManagedKafkaParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iSelfManagedKafkaAccessConfigurationCredentials, Members: &mSelfManagedKafkaAccessConfigurationCredentials, Type: smithy.ShapeTypeUnion})
+var sPipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerRootCaCertificate", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sPipeSourceSelfManagedKafkaParameters_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &iSelfManagedKafkaAccessConfigurationVpc, Members: &mSelfManagedKafkaAccessConfigurationVpc, Type: smithy.ShapeTypeStructure})
+var sPipeSourceSqsQueueParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sPipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sPipeTargetBatchJobParameters_JobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobDefinition", ID: &pString, Type: smithy.ShapeTypeString})
+var sPipeTargetBatchJobParameters_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &pString, Type: smithy.ShapeTypeString})
+var sPipeTargetBatchJobParameters_ArrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArrayProperties", ID: &iBatchArrayProperties, Members: &mBatchArrayProperties, Type: smithy.ShapeTypeStructure})
+var sPipeTargetBatchJobParameters_RetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryStrategy", ID: &iBatchRetryStrategy, Members: &mBatchRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sPipeTargetBatchJobParameters_ContainerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerOverrides", ID: &iBatchContainerOverrides, Members: &mBatchContainerOverrides, Type: smithy.ShapeTypeStructure})
+var sPipeTargetBatchJobParameters_DependsOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependsOn", ID: &i_BatchDependsOn, Members: &m_BatchDependsOn, Type: smithy.ShapeTypeList})
+var sPipeTargetBatchJobParameters_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_BatchParametersMap, Members: &m_BatchParametersMap, Type: smithy.ShapeTypeMap})
+var sPipeTargetCloudWatchLogsParameters_LogStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamName", ID: &i_LogStreamName, Type: smithy.ShapeTypeString})
+var sPipeTargetCloudWatchLogsParameters_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_JsonPath, Type: smithy.ShapeTypeString})
+var sPipeTargetEcsTaskParameters_TaskDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskDefinitionArn", ID: &i_ArnOrJsonPath, Type: smithy.ShapeTypeString})
+var sPipeTargetEcsTaskParameters_TaskCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskCount", ID: &i_LimitMin1, Type: smithy.ShapeTypeInteger})
+var sPipeTargetEcsTaskParameters_LaunchType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LaunchType", ID: &i_LaunchType, Type: smithy.ShapeTypeString})
+var sPipeTargetEcsTaskParameters_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sPipeTargetEcsTaskParameters_PlatformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlatformVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPipeTargetEcsTaskParameters_Group = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Group", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPipeTargetEcsTaskParameters_CapacityProviderStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityProviderStrategy", ID: &i_CapacityProviderStrategy, Members: &m_CapacityProviderStrategy, Type: smithy.ShapeTypeList})
+var sPipeTargetEcsTaskParameters_EnableECSManagedTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableECSManagedTags", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPipeTargetEcsTaskParameters_EnableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableExecuteCommand", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPipeTargetEcsTaskParameters_PlacementConstraints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementConstraints", ID: &i_PlacementConstraints, Members: &m_PlacementConstraints, Type: smithy.ShapeTypeList})
+var sPipeTargetEcsTaskParameters_PlacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlacementStrategy", ID: &i_PlacementStrategies, Members: &m_PlacementStrategies, Type: smithy.ShapeTypeList})
+var sPipeTargetEcsTaskParameters_PropagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PropagateTags", ID: &i_PropagateTags, Type: smithy.ShapeTypeString})
+var sPipeTargetEcsTaskParameters_ReferenceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReferenceId", ID: &i_ReferenceId, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetEcsTaskParameters_Overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overrides", ID: &iEcsTaskOverride, Members: &mEcsTaskOverride, Type: smithy.ShapeTypeStructure})
+var sPipeTargetEcsTaskParameters_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPipeTargetEventBridgeEventBusParameters_EndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointId", ID: &i_EventBridgeEndpointId, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetEventBridgeEventBusParameters_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &i_EventBridgeDetailType, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetEventBridgeEventBusParameters_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_EventBridgeEventSource, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetEventBridgeEventBusParameters_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_EventBridgeEventResourceList, Members: &m_EventBridgeEventResourceList, Type: smithy.ShapeTypeList})
+var sPipeTargetEventBridgeEventBusParameters_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_JsonPath, Type: smithy.ShapeTypeString})
+var sPipeTargetHttpParameters_PathParameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathParameterValues", ID: &i_PathParameterList, Members: &m_PathParameterList, Type: smithy.ShapeTypeList})
+var sPipeTargetHttpParameters_HeaderParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderParameters", ID: &i_HeaderParametersMap, Members: &m_HeaderParametersMap, Type: smithy.ShapeTypeMap})
+var sPipeTargetHttpParameters_QueryStringParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStringParameters", ID: &i_QueryStringParametersMap, Members: &m_QueryStringParametersMap, Type: smithy.ShapeTypeMap})
+var sPipeTargetKinesisStreamParameters_PartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKey", ID: &i_KinesisPartitionKey, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetLambdaFunctionParameters_InvocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationType", ID: &i_PipeTargetInvocationType, Type: smithy.ShapeTypeString})
+var sPipeTargetParameters_InputTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputTemplate", ID: &i_InputTemplate, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetParameters_LambdaFunctionParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionParameters", ID: &iPipeTargetLambdaFunctionParameters, Members: &mPipeTargetLambdaFunctionParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_StepFunctionStateMachineParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepFunctionStateMachineParameters", ID: &iPipeTargetStateMachineParameters, Members: &mPipeTargetStateMachineParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_KinesisStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisStreamParameters", ID: &iPipeTargetKinesisStreamParameters, Members: &mPipeTargetKinesisStreamParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_EcsTaskParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EcsTaskParameters", ID: &iPipeTargetEcsTaskParameters, Members: &mPipeTargetEcsTaskParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_BatchJobParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchJobParameters", ID: &iPipeTargetBatchJobParameters, Members: &mPipeTargetBatchJobParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_SqsQueueParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsQueueParameters", ID: &iPipeTargetSqsQueueParameters, Members: &mPipeTargetSqsQueueParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_HttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpParameters", ID: &iPipeTargetHttpParameters, Members: &mPipeTargetHttpParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_RedshiftDataParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedshiftDataParameters", ID: &iPipeTargetRedshiftDataParameters, Members: &mPipeTargetRedshiftDataParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_SageMakerPipelineParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SageMakerPipelineParameters", ID: &iPipeTargetSageMakerPipelineParameters, Members: &mPipeTargetSageMakerPipelineParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_EventBridgeEventBusParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBridgeEventBusParameters", ID: &iPipeTargetEventBridgeEventBusParameters, Members: &mPipeTargetEventBridgeEventBusParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_CloudWatchLogsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogsParameters", ID: &iPipeTargetCloudWatchLogsParameters, Members: &mPipeTargetCloudWatchLogsParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetParameters_TimestreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestreamParameters", ID: &iPipeTargetTimestreamParameters, Members: &mPipeTargetTimestreamParameters, Type: smithy.ShapeTypeStructure})
+var sPipeTargetRedshiftDataParameters_SecretManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretManagerArn", ID: &i_SecretManagerArnOrJsonPath, Type: smithy.ShapeTypeString})
+var sPipeTargetRedshiftDataParameters_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &i_Database, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetRedshiftDataParameters_DbUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DbUser", ID: &i_DbUser, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetRedshiftDataParameters_StatementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatementName", ID: &i_StatementName, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetRedshiftDataParameters_WithEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WithEvent", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sPipeTargetRedshiftDataParameters_Sqls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sqls", ID: &i_Sqls, Members: &m_Sqls, Type: smithy.ShapeTypeList})
+var sPipeTargetSageMakerPipelineParameters_PipelineParameterList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PipelineParameterList", ID: &i_SageMakerPipelineParameterList, Members: &m_SageMakerPipelineParameterList, Type: smithy.ShapeTypeList})
+var sPipeTargetSqsQueueParameters_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageGroupId", ID: &i_MessageGroupId, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetSqsQueueParameters_MessageDeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageDeduplicationId", ID: &i_MessageDeduplicationId, Traits: &t12, Type: smithy.ShapeTypeString})
+var sPipeTargetStateMachineParameters_InvocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationType", ID: &i_PipeTargetInvocationType, Type: smithy.ShapeTypeString})
+var sPipeTargetTimestreamParameters_TimeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeValue", ID: &i_TimeValue, Type: smithy.ShapeTypeString})
+var sPipeTargetTimestreamParameters_EpochTimeUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EpochTimeUnit", ID: &i_EpochTimeUnit, Type: smithy.ShapeTypeString})
+var sPipeTargetTimestreamParameters_TimeFieldType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeFieldType", ID: &i_TimeFieldType, Type: smithy.ShapeTypeString})
+var sPipeTargetTimestreamParameters_TimestampFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampFormat", ID: &i_TimestampFormat, Type: smithy.ShapeTypeString})
+var sPipeTargetTimestreamParameters_VersionValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionValue", ID: &i_VersionValue, Type: smithy.ShapeTypeString})
+var sPipeTargetTimestreamParameters_DimensionMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionMappings", ID: &i_DimensionMappings, Members: &m_DimensionMappings, Type: smithy.ShapeTypeList})
+var sPipeTargetTimestreamParameters_SingleMeasureMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SingleMeasureMappings", ID: &i_SingleMeasureMappings, Members: &m_SingleMeasureMappings, Type: smithy.ShapeTypeList})
+var sPipeTargetTimestreamParameters_MultiMeasureMappings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiMeasureMappings", ID: &i_MultiMeasureMappings, Members: &m_MultiMeasureMappings, Type: smithy.ShapeTypeList})
+var sPlacementConstraint_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_PlacementConstraintType, Type: smithy.ShapeTypeString})
+var sPlacementConstraint_expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expression", ID: &i_PlacementConstraintExpression, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_PlacementConstraints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlacementConstraint, Members: &mPlacementConstraint, Type: smithy.ShapeTypeStructure})
+var s_PlacementStrategies_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlacementStrategy, Members: &mPlacementStrategy, Type: smithy.ShapeTypeStructure})
+var sPlacementStrategy_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_PlacementStrategyType, Type: smithy.ShapeTypeString})
+var sPlacementStrategy_field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "field", ID: &i_PlacementStrategyField, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_QueryStringKey, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_QueryStringValue, Traits: &t12, Type: smithy.ShapeTypeString})
+var sS3LogDestination_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3LogDestination_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3LogDestination_BucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketOwner", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3LogDestination_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &i_S3OutputFormat, Type: smithy.ShapeTypeString})
+var sS3LogDestinationParameters_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3LogDestinationParameters_BucketOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketOwner", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3LogDestinationParameters_OutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputFormat", ID: &i_S3OutputFormat, Type: smithy.ShapeTypeString})
+var sS3LogDestinationParameters_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SageMakerPipelineParameterName, Traits: &t12, Type: smithy.ShapeTypeString})
+var sSageMakerPipelineParameter_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SageMakerPipelineParameterValue, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_SageMakerPipelineParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSageMakerPipelineParameter, Members: &mSageMakerPipelineParameter, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_SecurityGroups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroup, Traits: &t12, Type: smithy.ShapeTypeString})
+var sSelfManagedKafkaAccessConfigurationCredentials_BasicAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicAuth", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sSelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaslScram512Auth", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sSelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaslScram256Auth", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sSelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateTlsAuth", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sSelfManagedKafkaAccessConfigurationVpc_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sSelfManagedKafkaAccessConfigurationVpc_SecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroup", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sSingleMeasureMapping_MeasureValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValue", ID: &i_MeasureValue, Type: smithy.ShapeTypeString})
+var sSingleMeasureMapping_MeasureValueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureValueType", ID: &i_MeasureValueType, Type: smithy.ShapeTypeString})
+var sSingleMeasureMapping_MeasureName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeasureName", ID: &i_MeasureName, Type: smithy.ShapeTypeString})
+var s_SingleMeasureMappings_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSingleMeasureMapping, Members: &mSingleMeasureMapping, Type: smithy.ShapeTypeStructure})
+var s_Sqls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Sql, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_Subnets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Subnet, Traits: &t12, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Traits: &t12, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Traits: &t12, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t15, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceActiveMQBrokerParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iMQBrokerAccessCredentials, Members: &mMQBrokerAccessCredentials, Type: smithy.ShapeTypeUnion})
+var sUpdatePipeSourceActiveMQBrokerParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceDynamoDBStreamParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterConfig", ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPartialBatchItemFailure", ID: &i_OnPartialBatchItemFailureStreams, Type: smithy.ShapeTypeString})
+var sUpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRecordAgeInSeconds", ID: &i_MaximumRecordAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryAttempts", ID: &i_MaximumRetryAttemptsESM, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelizationFactor", ID: &i_LimitMax10, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceKinesisStreamParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceKinesisStreamParameters_DeadLetterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeadLetterConfig", ID: &iDeadLetterConfig, Members: &mDeadLetterConfig, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnPartialBatchItemFailure", ID: &i_OnPartialBatchItemFailureStreams, Type: smithy.ShapeTypeString})
+var sUpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRecordAgeInSeconds", ID: &i_MaximumRecordAgeInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetryAttempts", ID: &i_MaximumRetryAttemptsESM, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceKinesisStreamParameters_ParallelizationFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParallelizationFactor", ID: &i_LimitMax10, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceManagedStreamingKafkaParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceManagedStreamingKafkaParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iMSKAccessCredentials, Members: &mMSKAccessCredentials, Type: smithy.ShapeTypeUnion})
+var sUpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceParameters_FilterCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterCriteria", ID: &iFilterCriteria, Members: &mFilterCriteria, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters_KinesisStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisStreamParameters", ID: &iUpdatePipeSourceKinesisStreamParameters, Members: &mUpdatePipeSourceKinesisStreamParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters_DynamoDBStreamParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DynamoDBStreamParameters", ID: &iUpdatePipeSourceDynamoDBStreamParameters, Members: &mUpdatePipeSourceDynamoDBStreamParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters_SqsQueueParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsQueueParameters", ID: &iUpdatePipeSourceSqsQueueParameters, Members: &mUpdatePipeSourceSqsQueueParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters_ActiveMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveMQBrokerParameters", ID: &iUpdatePipeSourceActiveMQBrokerParameters, Members: &mUpdatePipeSourceActiveMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters_RabbitMQBrokerParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RabbitMQBrokerParameters", ID: &iUpdatePipeSourceRabbitMQBrokerParameters, Members: &mUpdatePipeSourceRabbitMQBrokerParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters_ManagedStreamingKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedStreamingKafkaParameters", ID: &iUpdatePipeSourceManagedStreamingKafkaParameters, Members: &mUpdatePipeSourceManagedStreamingKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceParameters_SelfManagedKafkaParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedKafkaParameters", ID: &iUpdatePipeSourceSelfManagedKafkaParameters, Members: &mUpdatePipeSourceSelfManagedKafkaParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceRabbitMQBrokerParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iMQBrokerAccessCredentials, Members: &mMQBrokerAccessCredentials, Type: smithy.ShapeTypeUnion})
+var sUpdatePipeSourceRabbitMQBrokerParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceSelfManagedKafkaParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceSelfManagedKafkaParameters_Credentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Credentials", ID: &iSelfManagedKafkaAccessConfigurationCredentials, Members: &mSelfManagedKafkaAccessConfigurationCredentials, Type: smithy.ShapeTypeUnion})
+var sUpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerRootCaCertificate", ID: &i_SecretManagerArn, Type: smithy.ShapeTypeString})
+var sUpdatePipeSourceSelfManagedKafkaParameters_Vpc = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vpc", ID: &iSelfManagedKafkaAccessConfigurationVpc, Members: &mSelfManagedKafkaAccessConfigurationVpc, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeSourceSqsQueueParameters_BatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchSize", ID: &i_LimitMax10000, Type: smithy.ShapeTypeInteger})
+var sUpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumBatchingWindowInSeconds", ID: &i_MaximumBatchingWindowInSeconds, Type: smithy.ShapeTypeInteger})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sCreatePipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PipeDescription, Traits: &t12, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_ArnOrUrl, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest_SourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceParameters", ID: &iPipeSourceParameters, Members: &mPipeSourceParameters, Type: smithy.ShapeTypeStructure})
+var sCreatePipeRequest_Enrichment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enrichment", ID: &i_OptionalArn, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest_EnrichmentParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrichmentParameters", ID: &iPipeEnrichmentParameters, Members: &mPipeEnrichmentParameters, Type: smithy.ShapeTypeStructure})
+var sCreatePipeRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest_TargetParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetParameters", ID: &iPipeTargetParameters, Members: &mPipeTargetParameters, Type: smithy.ShapeTypeStructure})
+var sCreatePipeRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreatePipeRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreatePipeRequest_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iPipeLogConfigurationParameters, Members: &mPipeLogConfigurationParameters, Type: smithy.ShapeTypeStructure})
+var sCreatePipeRequest_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString})
+var sCreatePipeResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var sCreatePipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sCreatePipeResponse_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var sCreatePipeResponse_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var sCreatePipeResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreatePipeResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeletePipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sDeletePipeResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var sDeletePipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sDeletePipeResponse_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeStateDescribeResponse, Type: smithy.ShapeTypeString})
+var sDeletePipeResponse_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var sDeletePipeResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeletePipeResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribePipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PipeDescription, Traits: &t12, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeStateDescribeResponse, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_PipeStateReason, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_ArnOrUrl, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_SourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceParameters", ID: &iPipeSourceParameters, Members: &mPipeSourceParameters, Type: smithy.ShapeTypeStructure})
+var sDescribePipeResponse_Enrichment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enrichment", ID: &i_OptionalArn, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_EnrichmentParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrichmentParameters", ID: &iPipeEnrichmentParameters, Members: &mPipeEnrichmentParameters, Type: smithy.ShapeTypeStructure})
+var sDescribePipeResponse_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_TargetParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetParameters", ID: &iPipeTargetParameters, Members: &mPipeTargetParameters, Type: smithy.ShapeTypeStructure})
+var sDescribePipeResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sDescribePipeResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDescribePipeResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribePipeResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribePipeResponse_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iPipeLogConfiguration, Members: &mPipeLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribePipeResponse_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString})
+var sListPipesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_PipeName, Traits: &t21, Type: smithy.ShapeTypeString})
+var sListPipesRequest_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Traits: &t22, Type: smithy.ShapeTypeString})
+var sListPipesRequest_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Traits: &t23, Type: smithy.ShapeTypeString})
+var sListPipesRequest_SourcePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourcePrefix", ID: &i_ResourceArn, Traits: &t24, Type: smithy.ShapeTypeString})
+var sListPipesRequest_TargetPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetPrefix", ID: &i_ResourceArn, Traits: &t25, Type: smithy.ShapeTypeString})
+var sListPipesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t26, Type: smithy.ShapeTypeString})
+var sListPipesRequest_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_LimitMax100, Traits: &t27, Type: smithy.ShapeTypeInteger})
+var sListPipesResponse_Pipes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pipes", ID: &i_PipeList, Members: &m_PipeList, Type: smithy.ShapeTypeList})
+var sListPipesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t12, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_PipeArn, Traits: &t20, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sStartPipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sStartPipeResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var sStartPipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sStartPipeResponse_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var sStartPipeResponse_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var sStartPipeResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStartPipeResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStopPipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sStopPipeResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var sStopPipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sStopPipeResponse_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var sStopPipeResponse_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var sStopPipeResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sStopPipeResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_PipeArn, Traits: &t20, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_PipeArn, Traits: &t20, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t28, Type: smithy.ShapeTypeList})
+var sUpdatePipeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Traits: &t20, Type: smithy.ShapeTypeString})
+var sUpdatePipeRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PipeDescription, Traits: &t12, Type: smithy.ShapeTypeString})
+var sUpdatePipeRequest_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var sUpdatePipeRequest_SourceParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceParameters", ID: &iUpdatePipeSourceParameters, Members: &mUpdatePipeSourceParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeRequest_Enrichment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enrichment", ID: &i_OptionalArn, Type: smithy.ShapeTypeString})
+var sUpdatePipeRequest_EnrichmentParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrichmentParameters", ID: &iPipeEnrichmentParameters, Members: &mPipeEnrichmentParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdatePipeRequest_TargetParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetParameters", ID: &iPipeTargetParameters, Members: &mPipeTargetParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdatePipeRequest_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iPipeLogConfigurationParameters, Members: &mPipeLogConfigurationParameters, Type: smithy.ShapeTypeStructure})
+var sUpdatePipeRequest_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString})
+var sUpdatePipeResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_PipeArn, Type: smithy.ShapeTypeString})
+var sUpdatePipeResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PipeName, Type: smithy.ShapeTypeString})
+var sUpdatePipeResponse_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &i_RequestedPipeState, Type: smithy.ShapeTypeString})
+var sUpdatePipeResponse_CurrentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentState", ID: &i_PipeState, Type: smithy.ShapeTypeString})
+var sUpdatePipeResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdatePipeResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+
+var CreatePipe = &sCreatePipe
+
+var DeletePipe = &sDeletePipe
+
+var DescribePipe = &sDescribePipe
+
+var ListPipes = &sListPipes
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartPipe = &sStartPipe
+
+var StopPipe = &sStopPipe
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdatePipe = &sUpdatePipe
+
+var _Pipes = &s_Pipes
+
+var _Arn = &s_Arn
+
+var _ArnOrJsonPath = &s_ArnOrJsonPath
+
+var _ArnOrUrl = &s_ArnOrUrl
+
+var _AssignPublicIp = &s_AssignPublicIp
+
+var AwsVpcConfiguration = &sAwsVpcConfiguration
+var AwsVpcConfiguration_Subnets = &sAwsVpcConfiguration_Subnets
+var AwsVpcConfiguration_SecurityGroups = &sAwsVpcConfiguration_SecurityGroups
+var AwsVpcConfiguration_AssignPublicIp = &sAwsVpcConfiguration_AssignPublicIp
+
+var BatchArrayProperties = &sBatchArrayProperties
+var BatchArrayProperties_Size = &sBatchArrayProperties_Size
+
+var _BatchArraySize = &s_BatchArraySize
+
+var BatchContainerOverrides = &sBatchContainerOverrides
+var BatchContainerOverrides_Command = &sBatchContainerOverrides_Command
+var BatchContainerOverrides_Environment = &sBatchContainerOverrides_Environment
+var BatchContainerOverrides_InstanceType = &sBatchContainerOverrides_InstanceType
+var BatchContainerOverrides_ResourceRequirements = &sBatchContainerOverrides_ResourceRequirements
+
+var _BatchDependsOn = &s_BatchDependsOn
+var _BatchDependsOn_member = &s_BatchDependsOn_member
+
+var BatchEnvironmentVariable = &sBatchEnvironmentVariable
+var BatchEnvironmentVariable_Name = &sBatchEnvironmentVariable_Name
+var BatchEnvironmentVariable_Value = &sBatchEnvironmentVariable_Value
+
+var _BatchEnvironmentVariableList = &s_BatchEnvironmentVariableList
+var _BatchEnvironmentVariableList_member = &s_BatchEnvironmentVariableList_member
+
+var BatchJobDependency = &sBatchJobDependency
+var BatchJobDependency_JobId = &sBatchJobDependency_JobId
+var BatchJobDependency_Type = &sBatchJobDependency_Type
+
+var _BatchJobDependencyType = &s_BatchJobDependencyType
+
+var _BatchParametersMap = &s_BatchParametersMap
+var _BatchParametersMap_key = &s_BatchParametersMap_key
+var _BatchParametersMap_value = &s_BatchParametersMap_value
+
+var BatchResourceRequirement = &sBatchResourceRequirement
+var BatchResourceRequirement_Type = &sBatchResourceRequirement_Type
+var BatchResourceRequirement_Value = &sBatchResourceRequirement_Value
+
+var _BatchResourceRequirementsList = &s_BatchResourceRequirementsList
+var _BatchResourceRequirementsList_member = &s_BatchResourceRequirementsList_member
+
+var _BatchResourceRequirementType = &s_BatchResourceRequirementType
+
+var _BatchRetryAttempts = &s_BatchRetryAttempts
+
+var BatchRetryStrategy = &sBatchRetryStrategy
+var BatchRetryStrategy_Attempts = &sBatchRetryStrategy_Attempts
+
+var _Boolean = &s_Boolean
+
+var _CapacityProvider = &s_CapacityProvider
+
+var _CapacityProviderStrategy = &s_CapacityProviderStrategy
+var _CapacityProviderStrategy_member = &s_CapacityProviderStrategy_member
+
+var CapacityProviderStrategyItem = &sCapacityProviderStrategyItem
+var CapacityProviderStrategyItem_capacityProvider = &sCapacityProviderStrategyItem_capacityProvider
+var CapacityProviderStrategyItem_weight = &sCapacityProviderStrategyItem_weight
+var CapacityProviderStrategyItem_base = &sCapacityProviderStrategyItem_base
+
+var _CapacityProviderStrategyItemBase = &s_CapacityProviderStrategyItemBase
+
+var _CapacityProviderStrategyItemWeight = &s_CapacityProviderStrategyItemWeight
+
+var _CloudwatchLogGroupArn = &s_CloudwatchLogGroupArn
+
+var CloudwatchLogsLogDestination = &sCloudwatchLogsLogDestination
+var CloudwatchLogsLogDestination_LogGroupArn = &sCloudwatchLogsLogDestination_LogGroupArn
+
+var CloudwatchLogsLogDestinationParameters = &sCloudwatchLogsLogDestinationParameters
+var CloudwatchLogsLogDestinationParameters_LogGroupArn = &sCloudwatchLogsLogDestinationParameters_LogGroupArn
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _Database = &s_Database
+
+var _DbUser = &s_DbUser
+
+var DeadLetterConfig = &sDeadLetterConfig
+var DeadLetterConfig_Arn = &sDeadLetterConfig_Arn
+
+var DimensionMapping = &sDimensionMapping
+var DimensionMapping_DimensionValue = &sDimensionMapping_DimensionValue
+var DimensionMapping_DimensionValueType = &sDimensionMapping_DimensionValueType
+var DimensionMapping_DimensionName = &sDimensionMapping_DimensionName
+
+var _DimensionMappings = &s_DimensionMappings
+var _DimensionMappings_member = &s_DimensionMappings_member
+
+var _DimensionName = &s_DimensionName
+
+var _DimensionValue = &s_DimensionValue
+
+var _DimensionValueType = &s_DimensionValueType
+
+var _DynamoDBStreamStartPosition = &s_DynamoDBStreamStartPosition
+
+var EcsContainerOverride = &sEcsContainerOverride
+var EcsContainerOverride_Command = &sEcsContainerOverride_Command
+var EcsContainerOverride_Cpu = &sEcsContainerOverride_Cpu
+var EcsContainerOverride_Environment = &sEcsContainerOverride_Environment
+var EcsContainerOverride_EnvironmentFiles = &sEcsContainerOverride_EnvironmentFiles
+var EcsContainerOverride_Memory = &sEcsContainerOverride_Memory
+var EcsContainerOverride_MemoryReservation = &sEcsContainerOverride_MemoryReservation
+var EcsContainerOverride_Name = &sEcsContainerOverride_Name
+var EcsContainerOverride_ResourceRequirements = &sEcsContainerOverride_ResourceRequirements
+
+var _EcsContainerOverrideList = &s_EcsContainerOverrideList
+var _EcsContainerOverrideList_member = &s_EcsContainerOverrideList_member
+
+var EcsEnvironmentFile = &sEcsEnvironmentFile
+var EcsEnvironmentFile_type = &sEcsEnvironmentFile_type
+var EcsEnvironmentFile_value = &sEcsEnvironmentFile_value
+
+var _EcsEnvironmentFileList = &s_EcsEnvironmentFileList
+var _EcsEnvironmentFileList_member = &s_EcsEnvironmentFileList_member
+
+var _EcsEnvironmentFileType = &s_EcsEnvironmentFileType
+
+var EcsEnvironmentVariable = &sEcsEnvironmentVariable
+var EcsEnvironmentVariable_name = &sEcsEnvironmentVariable_name
+var EcsEnvironmentVariable_value = &sEcsEnvironmentVariable_value
+
+var _EcsEnvironmentVariableList = &s_EcsEnvironmentVariableList
+var _EcsEnvironmentVariableList_member = &s_EcsEnvironmentVariableList_member
+
+var EcsEphemeralStorage = &sEcsEphemeralStorage
+var EcsEphemeralStorage_sizeInGiB = &sEcsEphemeralStorage_sizeInGiB
+
+var EcsInferenceAcceleratorOverride = &sEcsInferenceAcceleratorOverride
+var EcsInferenceAcceleratorOverride_deviceName = &sEcsInferenceAcceleratorOverride_deviceName
+var EcsInferenceAcceleratorOverride_deviceType = &sEcsInferenceAcceleratorOverride_deviceType
+
+var _EcsInferenceAcceleratorOverrideList = &s_EcsInferenceAcceleratorOverrideList
+var _EcsInferenceAcceleratorOverrideList_member = &s_EcsInferenceAcceleratorOverrideList_member
+
+var EcsResourceRequirement = &sEcsResourceRequirement
+var EcsResourceRequirement_type = &sEcsResourceRequirement_type
+var EcsResourceRequirement_value = &sEcsResourceRequirement_value
+
+var _EcsResourceRequirementsList = &s_EcsResourceRequirementsList
+var _EcsResourceRequirementsList_member = &s_EcsResourceRequirementsList_member
+
+var _EcsResourceRequirementType = &s_EcsResourceRequirementType
+
+var EcsTaskOverride = &sEcsTaskOverride
+var EcsTaskOverride_ContainerOverrides = &sEcsTaskOverride_ContainerOverrides
+var EcsTaskOverride_Cpu = &sEcsTaskOverride_Cpu
+var EcsTaskOverride_EphemeralStorage = &sEcsTaskOverride_EphemeralStorage
+var EcsTaskOverride_ExecutionRoleArn = &sEcsTaskOverride_ExecutionRoleArn
+var EcsTaskOverride_InferenceAcceleratorOverrides = &sEcsTaskOverride_InferenceAcceleratorOverrides
+var EcsTaskOverride_Memory = &sEcsTaskOverride_Memory
+var EcsTaskOverride_TaskRoleArn = &sEcsTaskOverride_TaskRoleArn
+
+var _EndpointString = &s_EndpointString
+
+var _EphemeralStorageSize = &s_EphemeralStorageSize
+
+var _EpochTimeUnit = &s_EpochTimeUnit
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _EventBridgeDetailType = &s_EventBridgeDetailType
+
+var _EventBridgeEndpointId = &s_EventBridgeEndpointId
+
+var _EventBridgeEventResourceList = &s_EventBridgeEventResourceList
+var _EventBridgeEventResourceList_member = &s_EventBridgeEventResourceList_member
+
+var _EventBridgeEventSource = &s_EventBridgeEventSource
+
+var _EventPattern = &s_EventPattern
+
+var Filter = &sFilter
+var Filter_Pattern = &sFilter_Pattern
+
+var FilterCriteria = &sFilterCriteria
+var FilterCriteria_Filters = &sFilterCriteria_Filters
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var _FirehoseArn = &s_FirehoseArn
+
+var FirehoseLogDestination = &sFirehoseLogDestination
+var FirehoseLogDestination_DeliveryStreamArn = &sFirehoseLogDestination_DeliveryStreamArn
+
+var FirehoseLogDestinationParameters = &sFirehoseLogDestinationParameters
+var FirehoseLogDestinationParameters_DeliveryStreamArn = &sFirehoseLogDestinationParameters_DeliveryStreamArn
+
+var _HeaderKey = &s_HeaderKey
+
+var _HeaderParametersMap = &s_HeaderParametersMap
+var _HeaderParametersMap_key = &s_HeaderParametersMap_key
+var _HeaderParametersMap_value = &s_HeaderParametersMap_value
+
+var _HeaderValue = &s_HeaderValue
+
+var _IncludeExecutionData = &s_IncludeExecutionData
+var _IncludeExecutionData_member = &s_IncludeExecutionData_member
+
+var _IncludeExecutionDataOption = &s_IncludeExecutionDataOption
+
+var _InputTemplate = &s_InputTemplate
+
+var InternalException = &sInternalException
+var InternalException_message = &sInternalException_message
+var InternalException_retryAfterSeconds = &sInternalException_retryAfterSeconds
+
+var _JsonPath = &s_JsonPath
+
+var _KafkaBootstrapServers = &s_KafkaBootstrapServers
+var _KafkaBootstrapServers_member = &s_KafkaBootstrapServers_member
+
+var _KafkaTopicName = &s_KafkaTopicName
+
+var _KinesisPartitionKey = &s_KinesisPartitionKey
+
+var _KinesisStreamStartPosition = &s_KinesisStreamStartPosition
+
+var _KmsKeyIdentifier = &s_KmsKeyIdentifier
+
+var _LaunchType = &s_LaunchType
+
+var _LimitMax10 = &s_LimitMax10
+
+var _LimitMax100 = &s_LimitMax100
+
+var _LimitMax10000 = &s_LimitMax10000
+
+var _LimitMin1 = &s_LimitMin1
+
+var _LogLevel = &s_LogLevel
+
+var _LogStreamName = &s_LogStreamName
+
+var _MaximumBatchingWindowInSeconds = &s_MaximumBatchingWindowInSeconds
+
+var _MaximumRecordAgeInSeconds = &s_MaximumRecordAgeInSeconds
+
+var _MaximumRetryAttemptsESM = &s_MaximumRetryAttemptsESM
+
+var _MeasureName = &s_MeasureName
+
+var _MeasureValue = &s_MeasureValue
+
+var _MeasureValueType = &s_MeasureValueType
+
+var _MessageDeduplicationId = &s_MessageDeduplicationId
+
+var _MessageGroupId = &s_MessageGroupId
+
+var MQBrokerAccessCredentials = &sMQBrokerAccessCredentials
+var MQBrokerAccessCredentials_BasicAuth = &sMQBrokerAccessCredentials_BasicAuth
+
+var _MQBrokerQueueName = &s_MQBrokerQueueName
+
+var MSKAccessCredentials = &sMSKAccessCredentials
+var MSKAccessCredentials_SaslScram512Auth = &sMSKAccessCredentials_SaslScram512Auth
+var MSKAccessCredentials_ClientCertificateTlsAuth = &sMSKAccessCredentials_ClientCertificateTlsAuth
+
+var _MSKStartPosition = &s_MSKStartPosition
+
+var MultiMeasureAttributeMapping = &sMultiMeasureAttributeMapping
+var MultiMeasureAttributeMapping_MeasureValue = &sMultiMeasureAttributeMapping_MeasureValue
+var MultiMeasureAttributeMapping_MeasureValueType = &sMultiMeasureAttributeMapping_MeasureValueType
+var MultiMeasureAttributeMapping_MultiMeasureAttributeName = &sMultiMeasureAttributeMapping_MultiMeasureAttributeName
+
+var _MultiMeasureAttributeMappings = &s_MultiMeasureAttributeMappings
+var _MultiMeasureAttributeMappings_member = &s_MultiMeasureAttributeMappings_member
+
+var _MultiMeasureAttributeName = &s_MultiMeasureAttributeName
+
+var MultiMeasureMapping = &sMultiMeasureMapping
+var MultiMeasureMapping_MultiMeasureName = &sMultiMeasureMapping_MultiMeasureName
+var MultiMeasureMapping_MultiMeasureAttributeMappings = &sMultiMeasureMapping_MultiMeasureAttributeMappings
+
+var _MultiMeasureMappings = &s_MultiMeasureMappings
+var _MultiMeasureMappings_member = &s_MultiMeasureMappings_member
+
+var _MultiMeasureName = &s_MultiMeasureName
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_awsvpcConfiguration = &sNetworkConfiguration_awsvpcConfiguration
+
+var _NextToken = &s_NextToken
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var _OnPartialBatchItemFailureStreams = &s_OnPartialBatchItemFailureStreams
+
+var _OptionalArn = &s_OptionalArn
+
+var _PathParameter = &s_PathParameter
+
+var _PathParameterList = &s_PathParameterList
+var _PathParameterList_member = &s_PathParameterList_member
+
+var Pipe = &sPipe
+var Pipe_Name = &sPipe_Name
+var Pipe_Arn = &sPipe_Arn
+var Pipe_DesiredState = &sPipe_DesiredState
+var Pipe_CurrentState = &sPipe_CurrentState
+var Pipe_StateReason = &sPipe_StateReason
+var Pipe_CreationTime = &sPipe_CreationTime
+var Pipe_LastModifiedTime = &sPipe_LastModifiedTime
+var Pipe_Source = &sPipe_Source
+var Pipe_Target = &sPipe_Target
+var Pipe_Enrichment = &sPipe_Enrichment
+
+var _PipeArn = &s_PipeArn
+
+var _PipeDescription = &s_PipeDescription
+
+var PipeEnrichmentHttpParameters = &sPipeEnrichmentHttpParameters
+var PipeEnrichmentHttpParameters_PathParameterValues = &sPipeEnrichmentHttpParameters_PathParameterValues
+var PipeEnrichmentHttpParameters_HeaderParameters = &sPipeEnrichmentHttpParameters_HeaderParameters
+var PipeEnrichmentHttpParameters_QueryStringParameters = &sPipeEnrichmentHttpParameters_QueryStringParameters
+
+var PipeEnrichmentParameters = &sPipeEnrichmentParameters
+var PipeEnrichmentParameters_InputTemplate = &sPipeEnrichmentParameters_InputTemplate
+var PipeEnrichmentParameters_HttpParameters = &sPipeEnrichmentParameters_HttpParameters
+
+var _PipeList = &s_PipeList
+var _PipeList_member = &s_PipeList_member
+
+var PipeLogConfiguration = &sPipeLogConfiguration
+var PipeLogConfiguration_S3LogDestination = &sPipeLogConfiguration_S3LogDestination
+var PipeLogConfiguration_FirehoseLogDestination = &sPipeLogConfiguration_FirehoseLogDestination
+var PipeLogConfiguration_CloudwatchLogsLogDestination = &sPipeLogConfiguration_CloudwatchLogsLogDestination
+var PipeLogConfiguration_Level = &sPipeLogConfiguration_Level
+var PipeLogConfiguration_IncludeExecutionData = &sPipeLogConfiguration_IncludeExecutionData
+
+var PipeLogConfigurationParameters = &sPipeLogConfigurationParameters
+var PipeLogConfigurationParameters_S3LogDestination = &sPipeLogConfigurationParameters_S3LogDestination
+var PipeLogConfigurationParameters_FirehoseLogDestination = &sPipeLogConfigurationParameters_FirehoseLogDestination
+var PipeLogConfigurationParameters_CloudwatchLogsLogDestination = &sPipeLogConfigurationParameters_CloudwatchLogsLogDestination
+var PipeLogConfigurationParameters_Level = &sPipeLogConfigurationParameters_Level
+var PipeLogConfigurationParameters_IncludeExecutionData = &sPipeLogConfigurationParameters_IncludeExecutionData
+
+var _PipeName = &s_PipeName
+
+var PipeSourceActiveMQBrokerParameters = &sPipeSourceActiveMQBrokerParameters
+var PipeSourceActiveMQBrokerParameters_Credentials = &sPipeSourceActiveMQBrokerParameters_Credentials
+var PipeSourceActiveMQBrokerParameters_QueueName = &sPipeSourceActiveMQBrokerParameters_QueueName
+var PipeSourceActiveMQBrokerParameters_BatchSize = &sPipeSourceActiveMQBrokerParameters_BatchSize
+var PipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds = &sPipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds
+
+var PipeSourceDynamoDBStreamParameters = &sPipeSourceDynamoDBStreamParameters
+var PipeSourceDynamoDBStreamParameters_BatchSize = &sPipeSourceDynamoDBStreamParameters_BatchSize
+var PipeSourceDynamoDBStreamParameters_DeadLetterConfig = &sPipeSourceDynamoDBStreamParameters_DeadLetterConfig
+var PipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure = &sPipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure
+var PipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds = &sPipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds
+var PipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds = &sPipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds
+var PipeSourceDynamoDBStreamParameters_MaximumRetryAttempts = &sPipeSourceDynamoDBStreamParameters_MaximumRetryAttempts
+var PipeSourceDynamoDBStreamParameters_ParallelizationFactor = &sPipeSourceDynamoDBStreamParameters_ParallelizationFactor
+var PipeSourceDynamoDBStreamParameters_StartingPosition = &sPipeSourceDynamoDBStreamParameters_StartingPosition
+
+var PipeSourceKinesisStreamParameters = &sPipeSourceKinesisStreamParameters
+var PipeSourceKinesisStreamParameters_BatchSize = &sPipeSourceKinesisStreamParameters_BatchSize
+var PipeSourceKinesisStreamParameters_DeadLetterConfig = &sPipeSourceKinesisStreamParameters_DeadLetterConfig
+var PipeSourceKinesisStreamParameters_OnPartialBatchItemFailure = &sPipeSourceKinesisStreamParameters_OnPartialBatchItemFailure
+var PipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds = &sPipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds
+var PipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds = &sPipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds
+var PipeSourceKinesisStreamParameters_MaximumRetryAttempts = &sPipeSourceKinesisStreamParameters_MaximumRetryAttempts
+var PipeSourceKinesisStreamParameters_ParallelizationFactor = &sPipeSourceKinesisStreamParameters_ParallelizationFactor
+var PipeSourceKinesisStreamParameters_StartingPosition = &sPipeSourceKinesisStreamParameters_StartingPosition
+var PipeSourceKinesisStreamParameters_StartingPositionTimestamp = &sPipeSourceKinesisStreamParameters_StartingPositionTimestamp
+
+var PipeSourceManagedStreamingKafkaParameters = &sPipeSourceManagedStreamingKafkaParameters
+var PipeSourceManagedStreamingKafkaParameters_TopicName = &sPipeSourceManagedStreamingKafkaParameters_TopicName
+var PipeSourceManagedStreamingKafkaParameters_StartingPosition = &sPipeSourceManagedStreamingKafkaParameters_StartingPosition
+var PipeSourceManagedStreamingKafkaParameters_BatchSize = &sPipeSourceManagedStreamingKafkaParameters_BatchSize
+var PipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds = &sPipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds
+var PipeSourceManagedStreamingKafkaParameters_ConsumerGroupID = &sPipeSourceManagedStreamingKafkaParameters_ConsumerGroupID
+var PipeSourceManagedStreamingKafkaParameters_Credentials = &sPipeSourceManagedStreamingKafkaParameters_Credentials
+
+var PipeSourceParameters = &sPipeSourceParameters
+var PipeSourceParameters_FilterCriteria = &sPipeSourceParameters_FilterCriteria
+var PipeSourceParameters_KinesisStreamParameters = &sPipeSourceParameters_KinesisStreamParameters
+var PipeSourceParameters_DynamoDBStreamParameters = &sPipeSourceParameters_DynamoDBStreamParameters
+var PipeSourceParameters_SqsQueueParameters = &sPipeSourceParameters_SqsQueueParameters
+var PipeSourceParameters_ActiveMQBrokerParameters = &sPipeSourceParameters_ActiveMQBrokerParameters
+var PipeSourceParameters_RabbitMQBrokerParameters = &sPipeSourceParameters_RabbitMQBrokerParameters
+var PipeSourceParameters_ManagedStreamingKafkaParameters = &sPipeSourceParameters_ManagedStreamingKafkaParameters
+var PipeSourceParameters_SelfManagedKafkaParameters = &sPipeSourceParameters_SelfManagedKafkaParameters
+
+var PipeSourceRabbitMQBrokerParameters = &sPipeSourceRabbitMQBrokerParameters
+var PipeSourceRabbitMQBrokerParameters_Credentials = &sPipeSourceRabbitMQBrokerParameters_Credentials
+var PipeSourceRabbitMQBrokerParameters_QueueName = &sPipeSourceRabbitMQBrokerParameters_QueueName
+var PipeSourceRabbitMQBrokerParameters_VirtualHost = &sPipeSourceRabbitMQBrokerParameters_VirtualHost
+var PipeSourceRabbitMQBrokerParameters_BatchSize = &sPipeSourceRabbitMQBrokerParameters_BatchSize
+var PipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds = &sPipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds
+
+var PipeSourceSelfManagedKafkaParameters = &sPipeSourceSelfManagedKafkaParameters
+var PipeSourceSelfManagedKafkaParameters_TopicName = &sPipeSourceSelfManagedKafkaParameters_TopicName
+var PipeSourceSelfManagedKafkaParameters_StartingPosition = &sPipeSourceSelfManagedKafkaParameters_StartingPosition
+var PipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers = &sPipeSourceSelfManagedKafkaParameters_AdditionalBootstrapServers
+var PipeSourceSelfManagedKafkaParameters_BatchSize = &sPipeSourceSelfManagedKafkaParameters_BatchSize
+var PipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds = &sPipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds
+var PipeSourceSelfManagedKafkaParameters_ConsumerGroupID = &sPipeSourceSelfManagedKafkaParameters_ConsumerGroupID
+var PipeSourceSelfManagedKafkaParameters_Credentials = &sPipeSourceSelfManagedKafkaParameters_Credentials
+var PipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate = &sPipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate
+var PipeSourceSelfManagedKafkaParameters_Vpc = &sPipeSourceSelfManagedKafkaParameters_Vpc
+
+var PipeSourceSqsQueueParameters = &sPipeSourceSqsQueueParameters
+var PipeSourceSqsQueueParameters_BatchSize = &sPipeSourceSqsQueueParameters_BatchSize
+var PipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds = &sPipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds
+
+var _PipeState = &s_PipeState
+
+var _PipeStateReason = &s_PipeStateReason
+
+var PipeTargetBatchJobParameters = &sPipeTargetBatchJobParameters
+var PipeTargetBatchJobParameters_JobDefinition = &sPipeTargetBatchJobParameters_JobDefinition
+var PipeTargetBatchJobParameters_JobName = &sPipeTargetBatchJobParameters_JobName
+var PipeTargetBatchJobParameters_ArrayProperties = &sPipeTargetBatchJobParameters_ArrayProperties
+var PipeTargetBatchJobParameters_RetryStrategy = &sPipeTargetBatchJobParameters_RetryStrategy
+var PipeTargetBatchJobParameters_ContainerOverrides = &sPipeTargetBatchJobParameters_ContainerOverrides
+var PipeTargetBatchJobParameters_DependsOn = &sPipeTargetBatchJobParameters_DependsOn
+var PipeTargetBatchJobParameters_Parameters = &sPipeTargetBatchJobParameters_Parameters
+
+var PipeTargetCloudWatchLogsParameters = &sPipeTargetCloudWatchLogsParameters
+var PipeTargetCloudWatchLogsParameters_LogStreamName = &sPipeTargetCloudWatchLogsParameters_LogStreamName
+var PipeTargetCloudWatchLogsParameters_Timestamp = &sPipeTargetCloudWatchLogsParameters_Timestamp
+
+var PipeTargetEcsTaskParameters = &sPipeTargetEcsTaskParameters
+var PipeTargetEcsTaskParameters_TaskDefinitionArn = &sPipeTargetEcsTaskParameters_TaskDefinitionArn
+var PipeTargetEcsTaskParameters_TaskCount = &sPipeTargetEcsTaskParameters_TaskCount
+var PipeTargetEcsTaskParameters_LaunchType = &sPipeTargetEcsTaskParameters_LaunchType
+var PipeTargetEcsTaskParameters_NetworkConfiguration = &sPipeTargetEcsTaskParameters_NetworkConfiguration
+var PipeTargetEcsTaskParameters_PlatformVersion = &sPipeTargetEcsTaskParameters_PlatformVersion
+var PipeTargetEcsTaskParameters_Group = &sPipeTargetEcsTaskParameters_Group
+var PipeTargetEcsTaskParameters_CapacityProviderStrategy = &sPipeTargetEcsTaskParameters_CapacityProviderStrategy
+var PipeTargetEcsTaskParameters_EnableECSManagedTags = &sPipeTargetEcsTaskParameters_EnableECSManagedTags
+var PipeTargetEcsTaskParameters_EnableExecuteCommand = &sPipeTargetEcsTaskParameters_EnableExecuteCommand
+var PipeTargetEcsTaskParameters_PlacementConstraints = &sPipeTargetEcsTaskParameters_PlacementConstraints
+var PipeTargetEcsTaskParameters_PlacementStrategy = &sPipeTargetEcsTaskParameters_PlacementStrategy
+var PipeTargetEcsTaskParameters_PropagateTags = &sPipeTargetEcsTaskParameters_PropagateTags
+var PipeTargetEcsTaskParameters_ReferenceId = &sPipeTargetEcsTaskParameters_ReferenceId
+var PipeTargetEcsTaskParameters_Overrides = &sPipeTargetEcsTaskParameters_Overrides
+var PipeTargetEcsTaskParameters_Tags = &sPipeTargetEcsTaskParameters_Tags
+
+var PipeTargetEventBridgeEventBusParameters = &sPipeTargetEventBridgeEventBusParameters
+var PipeTargetEventBridgeEventBusParameters_EndpointId = &sPipeTargetEventBridgeEventBusParameters_EndpointId
+var PipeTargetEventBridgeEventBusParameters_DetailType = &sPipeTargetEventBridgeEventBusParameters_DetailType
+var PipeTargetEventBridgeEventBusParameters_Source = &sPipeTargetEventBridgeEventBusParameters_Source
+var PipeTargetEventBridgeEventBusParameters_Resources = &sPipeTargetEventBridgeEventBusParameters_Resources
+var PipeTargetEventBridgeEventBusParameters_Time = &sPipeTargetEventBridgeEventBusParameters_Time
+
+var PipeTargetHttpParameters = &sPipeTargetHttpParameters
+var PipeTargetHttpParameters_PathParameterValues = &sPipeTargetHttpParameters_PathParameterValues
+var PipeTargetHttpParameters_HeaderParameters = &sPipeTargetHttpParameters_HeaderParameters
+var PipeTargetHttpParameters_QueryStringParameters = &sPipeTargetHttpParameters_QueryStringParameters
+
+var _PipeTargetInvocationType = &s_PipeTargetInvocationType
+
+var PipeTargetKinesisStreamParameters = &sPipeTargetKinesisStreamParameters
+var PipeTargetKinesisStreamParameters_PartitionKey = &sPipeTargetKinesisStreamParameters_PartitionKey
+
+var PipeTargetLambdaFunctionParameters = &sPipeTargetLambdaFunctionParameters
+var PipeTargetLambdaFunctionParameters_InvocationType = &sPipeTargetLambdaFunctionParameters_InvocationType
+
+var PipeTargetParameters = &sPipeTargetParameters
+var PipeTargetParameters_InputTemplate = &sPipeTargetParameters_InputTemplate
+var PipeTargetParameters_LambdaFunctionParameters = &sPipeTargetParameters_LambdaFunctionParameters
+var PipeTargetParameters_StepFunctionStateMachineParameters = &sPipeTargetParameters_StepFunctionStateMachineParameters
+var PipeTargetParameters_KinesisStreamParameters = &sPipeTargetParameters_KinesisStreamParameters
+var PipeTargetParameters_EcsTaskParameters = &sPipeTargetParameters_EcsTaskParameters
+var PipeTargetParameters_BatchJobParameters = &sPipeTargetParameters_BatchJobParameters
+var PipeTargetParameters_SqsQueueParameters = &sPipeTargetParameters_SqsQueueParameters
+var PipeTargetParameters_HttpParameters = &sPipeTargetParameters_HttpParameters
+var PipeTargetParameters_RedshiftDataParameters = &sPipeTargetParameters_RedshiftDataParameters
+var PipeTargetParameters_SageMakerPipelineParameters = &sPipeTargetParameters_SageMakerPipelineParameters
+var PipeTargetParameters_EventBridgeEventBusParameters = &sPipeTargetParameters_EventBridgeEventBusParameters
+var PipeTargetParameters_CloudWatchLogsParameters = &sPipeTargetParameters_CloudWatchLogsParameters
+var PipeTargetParameters_TimestreamParameters = &sPipeTargetParameters_TimestreamParameters
+
+var PipeTargetRedshiftDataParameters = &sPipeTargetRedshiftDataParameters
+var PipeTargetRedshiftDataParameters_SecretManagerArn = &sPipeTargetRedshiftDataParameters_SecretManagerArn
+var PipeTargetRedshiftDataParameters_Database = &sPipeTargetRedshiftDataParameters_Database
+var PipeTargetRedshiftDataParameters_DbUser = &sPipeTargetRedshiftDataParameters_DbUser
+var PipeTargetRedshiftDataParameters_StatementName = &sPipeTargetRedshiftDataParameters_StatementName
+var PipeTargetRedshiftDataParameters_WithEvent = &sPipeTargetRedshiftDataParameters_WithEvent
+var PipeTargetRedshiftDataParameters_Sqls = &sPipeTargetRedshiftDataParameters_Sqls
+
+var PipeTargetSageMakerPipelineParameters = &sPipeTargetSageMakerPipelineParameters
+var PipeTargetSageMakerPipelineParameters_PipelineParameterList = &sPipeTargetSageMakerPipelineParameters_PipelineParameterList
+
+var PipeTargetSqsQueueParameters = &sPipeTargetSqsQueueParameters
+var PipeTargetSqsQueueParameters_MessageGroupId = &sPipeTargetSqsQueueParameters_MessageGroupId
+var PipeTargetSqsQueueParameters_MessageDeduplicationId = &sPipeTargetSqsQueueParameters_MessageDeduplicationId
+
+var PipeTargetStateMachineParameters = &sPipeTargetStateMachineParameters
+var PipeTargetStateMachineParameters_InvocationType = &sPipeTargetStateMachineParameters_InvocationType
+
+var PipeTargetTimestreamParameters = &sPipeTargetTimestreamParameters
+var PipeTargetTimestreamParameters_TimeValue = &sPipeTargetTimestreamParameters_TimeValue
+var PipeTargetTimestreamParameters_EpochTimeUnit = &sPipeTargetTimestreamParameters_EpochTimeUnit
+var PipeTargetTimestreamParameters_TimeFieldType = &sPipeTargetTimestreamParameters_TimeFieldType
+var PipeTargetTimestreamParameters_TimestampFormat = &sPipeTargetTimestreamParameters_TimestampFormat
+var PipeTargetTimestreamParameters_VersionValue = &sPipeTargetTimestreamParameters_VersionValue
+var PipeTargetTimestreamParameters_DimensionMappings = &sPipeTargetTimestreamParameters_DimensionMappings
+var PipeTargetTimestreamParameters_SingleMeasureMappings = &sPipeTargetTimestreamParameters_SingleMeasureMappings
+var PipeTargetTimestreamParameters_MultiMeasureMappings = &sPipeTargetTimestreamParameters_MultiMeasureMappings
+
+var PlacementConstraint = &sPlacementConstraint
+var PlacementConstraint_type = &sPlacementConstraint_type
+var PlacementConstraint_expression = &sPlacementConstraint_expression
+
+var _PlacementConstraintExpression = &s_PlacementConstraintExpression
+
+var _PlacementConstraints = &s_PlacementConstraints
+var _PlacementConstraints_member = &s_PlacementConstraints_member
+
+var _PlacementConstraintType = &s_PlacementConstraintType
+
+var _PlacementStrategies = &s_PlacementStrategies
+var _PlacementStrategies_member = &s_PlacementStrategies_member
+
+var PlacementStrategy = &sPlacementStrategy
+var PlacementStrategy_type = &sPlacementStrategy_type
+var PlacementStrategy_field = &sPlacementStrategy_field
+
+var _PlacementStrategyField = &s_PlacementStrategyField
+
+var _PlacementStrategyType = &s_PlacementStrategyType
+
+var _PropagateTags = &s_PropagateTags
+
+var _QueryStringKey = &s_QueryStringKey
+
+var _QueryStringParametersMap = &s_QueryStringParametersMap
+var _QueryStringParametersMap_key = &s_QueryStringParametersMap_key
+var _QueryStringParametersMap_value = &s_QueryStringParametersMap_value
+
+var _QueryStringValue = &s_QueryStringValue
+
+var _ReferenceId = &s_ReferenceId
+
+var _RequestedPipeState = &s_RequestedPipeState
+
+var _RequestedPipeStateDescribeResponse = &s_RequestedPipeStateDescribeResponse
+
+var _ResourceArn = &s_ResourceArn
+
+var _RoleArn = &s_RoleArn
+
+var S3LogDestination = &sS3LogDestination
+var S3LogDestination_BucketName = &sS3LogDestination_BucketName
+var S3LogDestination_Prefix = &sS3LogDestination_Prefix
+var S3LogDestination_BucketOwner = &sS3LogDestination_BucketOwner
+var S3LogDestination_OutputFormat = &sS3LogDestination_OutputFormat
+
+var S3LogDestinationParameters = &sS3LogDestinationParameters
+var S3LogDestinationParameters_BucketName = &sS3LogDestinationParameters_BucketName
+var S3LogDestinationParameters_BucketOwner = &sS3LogDestinationParameters_BucketOwner
+var S3LogDestinationParameters_OutputFormat = &sS3LogDestinationParameters_OutputFormat
+var S3LogDestinationParameters_Prefix = &sS3LogDestinationParameters_Prefix
+
+var _S3OutputFormat = &s_S3OutputFormat
+
+var SageMakerPipelineParameter = &sSageMakerPipelineParameter
+var SageMakerPipelineParameter_Name = &sSageMakerPipelineParameter_Name
+var SageMakerPipelineParameter_Value = &sSageMakerPipelineParameter_Value
+
+var _SageMakerPipelineParameterList = &s_SageMakerPipelineParameterList
+var _SageMakerPipelineParameterList_member = &s_SageMakerPipelineParameterList_member
+
+var _SageMakerPipelineParameterName = &s_SageMakerPipelineParameterName
+
+var _SageMakerPipelineParameterValue = &s_SageMakerPipelineParameterValue
+
+var _SecretManagerArn = &s_SecretManagerArn
+
+var _SecretManagerArnOrJsonPath = &s_SecretManagerArnOrJsonPath
+
+var _SecurityGroup = &s_SecurityGroup
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var _SecurityGroups = &s_SecurityGroups
+var _SecurityGroups_member = &s_SecurityGroups_member
+
+var SelfManagedKafkaAccessConfigurationCredentials = &sSelfManagedKafkaAccessConfigurationCredentials
+var SelfManagedKafkaAccessConfigurationCredentials_BasicAuth = &sSelfManagedKafkaAccessConfigurationCredentials_BasicAuth
+var SelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth = &sSelfManagedKafkaAccessConfigurationCredentials_SaslScram512Auth
+var SelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth = &sSelfManagedKafkaAccessConfigurationCredentials_SaslScram256Auth
+var SelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth = &sSelfManagedKafkaAccessConfigurationCredentials_ClientCertificateTlsAuth
+
+var SelfManagedKafkaAccessConfigurationVpc = &sSelfManagedKafkaAccessConfigurationVpc
+var SelfManagedKafkaAccessConfigurationVpc_Subnets = &sSelfManagedKafkaAccessConfigurationVpc_Subnets
+var SelfManagedKafkaAccessConfigurationVpc_SecurityGroup = &sSelfManagedKafkaAccessConfigurationVpc_SecurityGroup
+
+var _SelfManagedKafkaStartPosition = &s_SelfManagedKafkaStartPosition
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var SingleMeasureMapping = &sSingleMeasureMapping
+var SingleMeasureMapping_MeasureValue = &sSingleMeasureMapping_MeasureValue
+var SingleMeasureMapping_MeasureValueType = &sSingleMeasureMapping_MeasureValueType
+var SingleMeasureMapping_MeasureName = &sSingleMeasureMapping_MeasureName
+
+var _SingleMeasureMappings = &s_SingleMeasureMappings
+var _SingleMeasureMappings_member = &s_SingleMeasureMappings_member
+
+var _Sql = &s_Sql
+
+var _Sqls = &s_Sqls
+var _Sqls_member = &s_Sqls_member
+
+var _StatementName = &s_StatementName
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _Subnet = &s_Subnet
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var _Subnets = &s_Subnets
+var _Subnets_member = &s_Subnets_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _TimeFieldType = &s_TimeFieldType
+
+var _Timestamp = &s_Timestamp
+
+var _TimestampFormat = &s_TimestampFormat
+
+var _TimeValue = &s_TimeValue
+
+var UpdatePipeSourceActiveMQBrokerParameters = &sUpdatePipeSourceActiveMQBrokerParameters
+var UpdatePipeSourceActiveMQBrokerParameters_Credentials = &sUpdatePipeSourceActiveMQBrokerParameters_Credentials
+var UpdatePipeSourceActiveMQBrokerParameters_BatchSize = &sUpdatePipeSourceActiveMQBrokerParameters_BatchSize
+var UpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds = &sUpdatePipeSourceActiveMQBrokerParameters_MaximumBatchingWindowInSeconds
+
+var UpdatePipeSourceDynamoDBStreamParameters = &sUpdatePipeSourceDynamoDBStreamParameters
+var UpdatePipeSourceDynamoDBStreamParameters_BatchSize = &sUpdatePipeSourceDynamoDBStreamParameters_BatchSize
+var UpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig = &sUpdatePipeSourceDynamoDBStreamParameters_DeadLetterConfig
+var UpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure = &sUpdatePipeSourceDynamoDBStreamParameters_OnPartialBatchItemFailure
+var UpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds = &sUpdatePipeSourceDynamoDBStreamParameters_MaximumBatchingWindowInSeconds
+var UpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds = &sUpdatePipeSourceDynamoDBStreamParameters_MaximumRecordAgeInSeconds
+var UpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts = &sUpdatePipeSourceDynamoDBStreamParameters_MaximumRetryAttempts
+var UpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor = &sUpdatePipeSourceDynamoDBStreamParameters_ParallelizationFactor
+
+var UpdatePipeSourceKinesisStreamParameters = &sUpdatePipeSourceKinesisStreamParameters
+var UpdatePipeSourceKinesisStreamParameters_BatchSize = &sUpdatePipeSourceKinesisStreamParameters_BatchSize
+var UpdatePipeSourceKinesisStreamParameters_DeadLetterConfig = &sUpdatePipeSourceKinesisStreamParameters_DeadLetterConfig
+var UpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure = &sUpdatePipeSourceKinesisStreamParameters_OnPartialBatchItemFailure
+var UpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds = &sUpdatePipeSourceKinesisStreamParameters_MaximumBatchingWindowInSeconds
+var UpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds = &sUpdatePipeSourceKinesisStreamParameters_MaximumRecordAgeInSeconds
+var UpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts = &sUpdatePipeSourceKinesisStreamParameters_MaximumRetryAttempts
+var UpdatePipeSourceKinesisStreamParameters_ParallelizationFactor = &sUpdatePipeSourceKinesisStreamParameters_ParallelizationFactor
+
+var UpdatePipeSourceManagedStreamingKafkaParameters = &sUpdatePipeSourceManagedStreamingKafkaParameters
+var UpdatePipeSourceManagedStreamingKafkaParameters_BatchSize = &sUpdatePipeSourceManagedStreamingKafkaParameters_BatchSize
+var UpdatePipeSourceManagedStreamingKafkaParameters_Credentials = &sUpdatePipeSourceManagedStreamingKafkaParameters_Credentials
+var UpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds = &sUpdatePipeSourceManagedStreamingKafkaParameters_MaximumBatchingWindowInSeconds
+
+var UpdatePipeSourceParameters = &sUpdatePipeSourceParameters
+var UpdatePipeSourceParameters_FilterCriteria = &sUpdatePipeSourceParameters_FilterCriteria
+var UpdatePipeSourceParameters_KinesisStreamParameters = &sUpdatePipeSourceParameters_KinesisStreamParameters
+var UpdatePipeSourceParameters_DynamoDBStreamParameters = &sUpdatePipeSourceParameters_DynamoDBStreamParameters
+var UpdatePipeSourceParameters_SqsQueueParameters = &sUpdatePipeSourceParameters_SqsQueueParameters
+var UpdatePipeSourceParameters_ActiveMQBrokerParameters = &sUpdatePipeSourceParameters_ActiveMQBrokerParameters
+var UpdatePipeSourceParameters_RabbitMQBrokerParameters = &sUpdatePipeSourceParameters_RabbitMQBrokerParameters
+var UpdatePipeSourceParameters_ManagedStreamingKafkaParameters = &sUpdatePipeSourceParameters_ManagedStreamingKafkaParameters
+var UpdatePipeSourceParameters_SelfManagedKafkaParameters = &sUpdatePipeSourceParameters_SelfManagedKafkaParameters
+
+var UpdatePipeSourceRabbitMQBrokerParameters = &sUpdatePipeSourceRabbitMQBrokerParameters
+var UpdatePipeSourceRabbitMQBrokerParameters_Credentials = &sUpdatePipeSourceRabbitMQBrokerParameters_Credentials
+var UpdatePipeSourceRabbitMQBrokerParameters_BatchSize = &sUpdatePipeSourceRabbitMQBrokerParameters_BatchSize
+var UpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds = &sUpdatePipeSourceRabbitMQBrokerParameters_MaximumBatchingWindowInSeconds
+
+var UpdatePipeSourceSelfManagedKafkaParameters = &sUpdatePipeSourceSelfManagedKafkaParameters
+var UpdatePipeSourceSelfManagedKafkaParameters_BatchSize = &sUpdatePipeSourceSelfManagedKafkaParameters_BatchSize
+var UpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds = &sUpdatePipeSourceSelfManagedKafkaParameters_MaximumBatchingWindowInSeconds
+var UpdatePipeSourceSelfManagedKafkaParameters_Credentials = &sUpdatePipeSourceSelfManagedKafkaParameters_Credentials
+var UpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate = &sUpdatePipeSourceSelfManagedKafkaParameters_ServerRootCaCertificate
+var UpdatePipeSourceSelfManagedKafkaParameters_Vpc = &sUpdatePipeSourceSelfManagedKafkaParameters_Vpc
+
+var UpdatePipeSourceSqsQueueParameters = &sUpdatePipeSourceSqsQueueParameters
+var UpdatePipeSourceSqsQueueParameters_BatchSize = &sUpdatePipeSourceSqsQueueParameters_BatchSize
+var UpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds = &sUpdatePipeSourceSqsQueueParameters_MaximumBatchingWindowInSeconds
+
+var _URI = &s_URI
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _VersionValue = &s_VersionValue
+
+var CreatePipeRequest = &sCreatePipeRequest
+var CreatePipeRequest_Name = &sCreatePipeRequest_Name
+var CreatePipeRequest_Description = &sCreatePipeRequest_Description
+var CreatePipeRequest_DesiredState = &sCreatePipeRequest_DesiredState
+var CreatePipeRequest_Source = &sCreatePipeRequest_Source
+var CreatePipeRequest_SourceParameters = &sCreatePipeRequest_SourceParameters
+var CreatePipeRequest_Enrichment = &sCreatePipeRequest_Enrichment
+var CreatePipeRequest_EnrichmentParameters = &sCreatePipeRequest_EnrichmentParameters
+var CreatePipeRequest_Target = &sCreatePipeRequest_Target
+var CreatePipeRequest_TargetParameters = &sCreatePipeRequest_TargetParameters
+var CreatePipeRequest_RoleArn = &sCreatePipeRequest_RoleArn
+var CreatePipeRequest_Tags = &sCreatePipeRequest_Tags
+var CreatePipeRequest_LogConfiguration = &sCreatePipeRequest_LogConfiguration
+var CreatePipeRequest_KmsKeyIdentifier = &sCreatePipeRequest_KmsKeyIdentifier
+
+var CreatePipeResponse = &sCreatePipeResponse
+var CreatePipeResponse_Arn = &sCreatePipeResponse_Arn
+var CreatePipeResponse_Name = &sCreatePipeResponse_Name
+var CreatePipeResponse_DesiredState = &sCreatePipeResponse_DesiredState
+var CreatePipeResponse_CurrentState = &sCreatePipeResponse_CurrentState
+var CreatePipeResponse_CreationTime = &sCreatePipeResponse_CreationTime
+var CreatePipeResponse_LastModifiedTime = &sCreatePipeResponse_LastModifiedTime
+
+var DeletePipeRequest = &sDeletePipeRequest
+var DeletePipeRequest_Name = &sDeletePipeRequest_Name
+
+var DeletePipeResponse = &sDeletePipeResponse
+var DeletePipeResponse_Arn = &sDeletePipeResponse_Arn
+var DeletePipeResponse_Name = &sDeletePipeResponse_Name
+var DeletePipeResponse_DesiredState = &sDeletePipeResponse_DesiredState
+var DeletePipeResponse_CurrentState = &sDeletePipeResponse_CurrentState
+var DeletePipeResponse_CreationTime = &sDeletePipeResponse_CreationTime
+var DeletePipeResponse_LastModifiedTime = &sDeletePipeResponse_LastModifiedTime
+
+var DescribePipeRequest = &sDescribePipeRequest
+var DescribePipeRequest_Name = &sDescribePipeRequest_Name
+
+var DescribePipeResponse = &sDescribePipeResponse
+var DescribePipeResponse_Arn = &sDescribePipeResponse_Arn
+var DescribePipeResponse_Name = &sDescribePipeResponse_Name
+var DescribePipeResponse_Description = &sDescribePipeResponse_Description
+var DescribePipeResponse_DesiredState = &sDescribePipeResponse_DesiredState
+var DescribePipeResponse_CurrentState = &sDescribePipeResponse_CurrentState
+var DescribePipeResponse_StateReason = &sDescribePipeResponse_StateReason
+var DescribePipeResponse_Source = &sDescribePipeResponse_Source
+var DescribePipeResponse_SourceParameters = &sDescribePipeResponse_SourceParameters
+var DescribePipeResponse_Enrichment = &sDescribePipeResponse_Enrichment
+var DescribePipeResponse_EnrichmentParameters = &sDescribePipeResponse_EnrichmentParameters
+var DescribePipeResponse_Target = &sDescribePipeResponse_Target
+var DescribePipeResponse_TargetParameters = &sDescribePipeResponse_TargetParameters
+var DescribePipeResponse_RoleArn = &sDescribePipeResponse_RoleArn
+var DescribePipeResponse_Tags = &sDescribePipeResponse_Tags
+var DescribePipeResponse_CreationTime = &sDescribePipeResponse_CreationTime
+var DescribePipeResponse_LastModifiedTime = &sDescribePipeResponse_LastModifiedTime
+var DescribePipeResponse_LogConfiguration = &sDescribePipeResponse_LogConfiguration
+var DescribePipeResponse_KmsKeyIdentifier = &sDescribePipeResponse_KmsKeyIdentifier
+
+var ListPipesRequest = &sListPipesRequest
+var ListPipesRequest_NamePrefix = &sListPipesRequest_NamePrefix
+var ListPipesRequest_DesiredState = &sListPipesRequest_DesiredState
+var ListPipesRequest_CurrentState = &sListPipesRequest_CurrentState
+var ListPipesRequest_SourcePrefix = &sListPipesRequest_SourcePrefix
+var ListPipesRequest_TargetPrefix = &sListPipesRequest_TargetPrefix
+var ListPipesRequest_NextToken = &sListPipesRequest_NextToken
+var ListPipesRequest_Limit = &sListPipesRequest_Limit
+
+var ListPipesResponse = &sListPipesResponse
+var ListPipesResponse_Pipes = &sListPipesResponse_Pipes
+var ListPipesResponse_NextToken = &sListPipesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var StartPipeRequest = &sStartPipeRequest
+var StartPipeRequest_Name = &sStartPipeRequest_Name
+
+var StartPipeResponse = &sStartPipeResponse
+var StartPipeResponse_Arn = &sStartPipeResponse_Arn
+var StartPipeResponse_Name = &sStartPipeResponse_Name
+var StartPipeResponse_DesiredState = &sStartPipeResponse_DesiredState
+var StartPipeResponse_CurrentState = &sStartPipeResponse_CurrentState
+var StartPipeResponse_CreationTime = &sStartPipeResponse_CreationTime
+var StartPipeResponse_LastModifiedTime = &sStartPipeResponse_LastModifiedTime
+
+var StopPipeRequest = &sStopPipeRequest
+var StopPipeRequest_Name = &sStopPipeRequest_Name
+
+var StopPipeResponse = &sStopPipeResponse
+var StopPipeResponse_Arn = &sStopPipeResponse_Arn
+var StopPipeResponse_Name = &sStopPipeResponse_Name
+var StopPipeResponse_DesiredState = &sStopPipeResponse_DesiredState
+var StopPipeResponse_CurrentState = &sStopPipeResponse_CurrentState
+var StopPipeResponse_CreationTime = &sStopPipeResponse_CreationTime
+var StopPipeResponse_LastModifiedTime = &sStopPipeResponse_LastModifiedTime
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdatePipeRequest = &sUpdatePipeRequest
+var UpdatePipeRequest_Name = &sUpdatePipeRequest_Name
+var UpdatePipeRequest_Description = &sUpdatePipeRequest_Description
+var UpdatePipeRequest_DesiredState = &sUpdatePipeRequest_DesiredState
+var UpdatePipeRequest_SourceParameters = &sUpdatePipeRequest_SourceParameters
+var UpdatePipeRequest_Enrichment = &sUpdatePipeRequest_Enrichment
+var UpdatePipeRequest_EnrichmentParameters = &sUpdatePipeRequest_EnrichmentParameters
+var UpdatePipeRequest_Target = &sUpdatePipeRequest_Target
+var UpdatePipeRequest_TargetParameters = &sUpdatePipeRequest_TargetParameters
+var UpdatePipeRequest_RoleArn = &sUpdatePipeRequest_RoleArn
+var UpdatePipeRequest_LogConfiguration = &sUpdatePipeRequest_LogConfiguration
+var UpdatePipeRequest_KmsKeyIdentifier = &sUpdatePipeRequest_KmsKeyIdentifier
+
+var UpdatePipeResponse = &sUpdatePipeResponse
+var UpdatePipeResponse_Arn = &sUpdatePipeResponse_Arn
+var UpdatePipeResponse_Name = &sUpdatePipeResponse_Name
+var UpdatePipeResponse_DesiredState = &sUpdatePipeResponse_DesiredState
+var UpdatePipeResponse_CurrentState = &sUpdatePipeResponse_CurrentState
+var UpdatePipeResponse_CreationTime = &sUpdatePipeResponse_CreationTime
+var UpdatePipeResponse_LastModifiedTime = &sUpdatePipeResponse_LastModifiedTime
+
+var Pipes = &smithy.ServiceSchema{Schema: &s_Pipes, Version: "2015-10-07"}

@@ -4,1514 +4,1166 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchCreateRumMetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
+var (
+	iBatchCreateRumMetricDefinitions         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchCreateRumMetricDefinitions"}
+	iBatchDeleteRumMetricDefinitions         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchDeleteRumMetricDefinitions"}
+	iBatchGetRumMetricDefinitions            = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchGetRumMetricDefinitions"}
+	iCreateAppMonitor                        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "CreateAppMonitor"}
+	iDeleteAppMonitor                        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteAppMonitor"}
+	iDeleteResourcePolicy                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteResourcePolicy"}
+	iDeleteRumMetricsDestination             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteRumMetricsDestination"}
+	iGetAppMonitor                           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetAppMonitor"}
+	iGetAppMonitorData                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetAppMonitorData"}
+	iGetResourcePolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetResourcePolicy"}
+	iListAppMonitors                         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListAppMonitors"}
+	iListRumMetricsDestinations              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListRumMetricsDestinations"}
+	iListTagsForResource                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListTagsForResource"}
+	iPutResourcePolicy                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutResourcePolicy"}
+	iPutRumEvents                            = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutRumEvents"}
+	iPutRumMetricsDestination                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutRumMetricsDestination"}
+	iTagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TagResource"}
+	iUntagResource                           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UntagResource"}
+	iUpdateAppMonitor                        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UpdateAppMonitor"}
+	iUpdateRumMetricDefinition               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UpdateRumMetricDefinition"}
+	i_RUM                                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "RUM"}
+	iAccessDeniedException                   = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AccessDeniedException"}
+	i_Alias                                  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Alias"}
+	iAppMonitor                              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitor"}
+	iAppMonitorConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorConfiguration"}
+	iAppMonitorDetails                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorDetails"}
+	i_AppMonitorDomain                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorDomain"}
+	i_AppMonitorDomainList                   = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorDomainList"}
+	i_AppMonitorId                           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorId"}
+	i_AppMonitorName                         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorName"}
+	i_AppMonitorPlatform                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorPlatform"}
+	iAppMonitorSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorSummary"}
+	i_AppMonitorSummaryList                  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "AppMonitorSummaryList"}
+	i_Arn                                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Arn"}
+	iBatchCreateRumMetricDefinitionsError    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchCreateRumMetricDefinitionsError"}
+	i_BatchCreateRumMetricDefinitionsErrors  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchCreateRumMetricDefinitionsErrors"}
+	iBatchDeleteRumMetricDefinitionsError    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchDeleteRumMetricDefinitionsError"}
+	i_BatchDeleteRumMetricDefinitionsErrors  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchDeleteRumMetricDefinitionsErrors"}
+	iConflictException                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ConflictException"}
+	iCustomEvents                            = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "CustomEvents"}
+	i_CustomEventsStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "CustomEventsStatus"}
+	iCwLog                                   = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "CwLog"}
+	iDataStorage                             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DataStorage"}
+	iDeobfuscationConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeobfuscationConfiguration"}
+	i_DeobfuscationS3Uri                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeobfuscationS3Uri"}
+	i_DeobfuscationStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeobfuscationStatus"}
+	i_DestinationArn                         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DestinationArn"}
+	i_DimensionKey                           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DimensionKey"}
+	i_DimensionKeysMap                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DimensionKeysMap"}
+	i_DimensionName                          = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DimensionName"}
+	i_EventData                              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "EventData"}
+	i_EventDataList                          = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "EventDataList"}
+	i_EventPattern                           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "EventPattern"}
+	i_FavoritePages                          = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "FavoritePages"}
+	i_IamRoleArn                             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "IamRoleArn"}
+	i_IdentityPoolId                         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "IdentityPoolId"}
+	iInternalServerException                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "InternalServerException"}
+	iInvalidPolicyRevisionIdException        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "InvalidPolicyRevisionIdException"}
+	i_ISOTimestampString                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ISOTimestampString"}
+	iJavaScriptSourceMaps                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "JavaScriptSourceMaps"}
+	i_JsonValue                              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "JsonValue"}
+	iMalformedPolicyDocumentException        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MalformedPolicyDocumentException"}
+	i_MaxQueryResults                        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MaxQueryResults"}
+	i_MaxResultsInteger                      = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MaxResultsInteger"}
+	iMetricDefinition                        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDefinition"}
+	i_MetricDefinitionId                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDefinitionId"}
+	i_MetricDefinitionIds                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDefinitionIds"}
+	iMetricDefinitionRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDefinitionRequest"}
+	i_MetricDefinitions                      = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDefinitions"}
+	i_MetricDefinitionsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDefinitionsRequest"}
+	i_MetricDestination                      = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDestination"}
+	iMetricDestinationSummary                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDestinationSummary"}
+	i_MetricDestinationSummaryList           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricDestinationSummaryList"}
+	i_MetricName                             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "MetricName"}
+	i_Namespace                              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Namespace"}
+	i_Pages                                  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Pages"}
+	iPolicyNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PolicyNotFoundException"}
+	i_PolicyRevisionId                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PolicyRevisionId"}
+	iPolicySizeLimitExceededException        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PolicySizeLimitExceededException"}
+	iQueryFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "QueryFilter"}
+	i_QueryFilterKey                         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "QueryFilterKey"}
+	i_QueryFilters                           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "QueryFilters"}
+	i_QueryFilterValue                       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "QueryFilterValue"}
+	i_QueryFilterValueList                   = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "QueryFilterValueList"}
+	i_QueryTimestamp                         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "QueryTimestamp"}
+	iResourceNotFoundException               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ResourceNotFoundException"}
+	iRumEvent                                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "RumEvent"}
+	i_RumEventList                           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "RumEventList"}
+	iServiceQuotaExceededException           = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ServiceQuotaExceededException"}
+	i_SessionSampleRate                      = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "SessionSampleRate"}
+	i_StateEnum                              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "StateEnum"}
+	i_TagKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TagKey"}
+	i_TagKeyList                             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TagKeyList"}
+	i_TagMap                                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TagMap"}
+	i_TagValue                               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TagValue"}
+	i_Telemetries                            = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Telemetries"}
+	i_Telemetry                              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Telemetry"}
+	iThrottlingException                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ThrottlingException"}
+	iTimeRange                               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TimeRange"}
+	i_Token                                  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Token"}
+	i_UnitLabel                              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UnitLabel"}
+	i_Url                                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "Url"}
+	iUserDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UserDetails"}
+	iValidationException                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ValidationException"}
+	i_ValueKey                               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ValueKey"}
+	iBatchCreateRumMetricDefinitionsRequest  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchCreateRumMetricDefinitionsRequest"}
+	iBatchCreateRumMetricDefinitionsResponse = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchCreateRumMetricDefinitionsResponse"}
+	iBatchDeleteRumMetricDefinitionsRequest  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchDeleteRumMetricDefinitionsRequest"}
+	iBatchDeleteRumMetricDefinitionsResponse = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchDeleteRumMetricDefinitionsResponse"}
+	iBatchGetRumMetricDefinitionsRequest     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchGetRumMetricDefinitionsRequest"}
+	iBatchGetRumMetricDefinitionsResponse    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "BatchGetRumMetricDefinitionsResponse"}
+	iCreateAppMonitorRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "CreateAppMonitorRequest"}
+	iCreateAppMonitorResponse                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "CreateAppMonitorResponse"}
+	iDeleteAppMonitorRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteAppMonitorRequest"}
+	iDeleteAppMonitorResponse                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteAppMonitorResponse"}
+	iDeleteResourcePolicyRequest             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteResourcePolicyRequest"}
+	iDeleteResourcePolicyResponse            = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteResourcePolicyResponse"}
+	iDeleteRumMetricsDestinationRequest      = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteRumMetricsDestinationRequest"}
+	iDeleteRumMetricsDestinationResponse     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "DeleteRumMetricsDestinationResponse"}
+	iGetAppMonitorDataRequest                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetAppMonitorDataRequest"}
+	iGetAppMonitorDataResponse               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetAppMonitorDataResponse"}
+	iGetAppMonitorRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetAppMonitorRequest"}
+	iGetAppMonitorResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetAppMonitorResponse"}
+	iGetResourcePolicyRequest                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "GetResourcePolicyResponse"}
+	iListAppMonitorsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListAppMonitorsRequest"}
+	iListAppMonitorsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListAppMonitorsResponse"}
+	iListRumMetricsDestinationsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListRumMetricsDestinationsRequest"}
+	iListRumMetricsDestinationsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListRumMetricsDestinationsResponse"}
+	iListTagsForResourceRequest              = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse             = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "ListTagsForResourceResponse"}
+	iPutResourcePolicyRequest                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse               = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutResourcePolicyResponse"}
+	iPutRumEventsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutRumEventsRequest"}
+	iPutRumEventsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutRumEventsResponse"}
+	iPutRumMetricsDestinationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutRumMetricsDestinationRequest"}
+	iPutRumMetricsDestinationResponse        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "PutRumMetricsDestinationResponse"}
+	iTagResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TagResourceRequest"}
+	iTagResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "TagResourceResponse"}
+	iUntagResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UntagResourceResponse"}
+	iUpdateAppMonitorRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UpdateAppMonitorRequest"}
+	iUpdateAppMonitorResponse                = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UpdateAppMonitorResponse"}
+	iUpdateRumMetricDefinitionRequest        = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UpdateRumMetricDefinitionRequest"}
+	iUpdateRumMetricDefinitionResponse       = smithy.ShapeID{Namespace: "com.amazonaws.rum", Name: "UpdateRumMetricDefinitionResponse"}
+	pString                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pBoolean                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pInteger                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pTimestamp                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+)
 
-var BatchDeleteRumMetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
-
-var BatchGetRumMetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchGetRumMetricDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
-
-var CreateAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CreateAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+	URI:  "/rummetrics/{AppMonitorName}/metrics",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appmonitor",
-	Code: 200})
-
-var DeleteAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/appmonitor/{Name}",
-	Code: 200})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/appmonitor/{Name}/policy",
-	Code: 200})
-
-var DeleteRumMetricsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteRumMetricsDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
-	Code: 200})
-
-var GetAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appmonitor/{Name}",
-	Code: 200})
-
-var GetAppMonitorData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorData",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appmonitor/{Name}/data",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/appmonitor/{Name}/policy",
-	Code: 200})
-
-var ListAppMonitors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListAppMonitors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appmonitors",
-	Code: 200})
-
-var ListRumMetricsDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListRumMetricsDestinations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/appmonitor/{Name}/policy",
-	Code: 200})
-
-var PutRumEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/appmonitors/{Id}/",
-	Code: 200})
-
-var PutRumMetricsDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumMetricsDestination",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/rummetrics/{AppMonitorName}/metricsdestination",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateAppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateAppMonitor",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/appmonitor/{Name}",
-	Code: 200})
-
-var UpdateRumMetricDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateRumMetricDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/rummetrics/{AppMonitorName}/metrics",
-	Code: 200})
-
-var _RUM = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "RUM",
-}, smithy.ShapeTypeService, 0)
-
-var RUM = smithy.NewServiceSchema(_RUM, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Alias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Alias",
-}, smithy.ShapeTypeString, 0)
-
-var AppMonitor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitor",
-}, smithy.ShapeTypeStructure, 13)
-var AppMonitor_Name *smithy.Schema
-
-var AppMonitor_Domain *smithy.Schema
-
-var AppMonitor_DomainList *smithy.Schema
-
-var AppMonitor_Id *smithy.Schema
-
-var AppMonitor_Created *smithy.Schema
-
-var AppMonitor_LastModified *smithy.Schema
-
-var AppMonitor_Tags *smithy.Schema
-
-var AppMonitor_State *smithy.Schema
-
-var AppMonitor_AppMonitorConfiguration *smithy.Schema
-
-var AppMonitor_DataStorage *smithy.Schema
-
-var AppMonitor_CustomEvents *smithy.Schema
-
-var AppMonitor_DeobfuscationConfiguration *smithy.Schema
-
-var AppMonitor_Platform *smithy.Schema
-
-var AppMonitorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var AppMonitorConfiguration_IdentityPoolId *smithy.Schema
-
-var AppMonitorConfiguration_ExcludedPages *smithy.Schema
-
-var AppMonitorConfiguration_IncludedPages *smithy.Schema
-
-var AppMonitorConfiguration_FavoritePages *smithy.Schema
-
-var AppMonitorConfiguration_SessionSampleRate *smithy.Schema
-
-var AppMonitorConfiguration_GuestRoleArn *smithy.Schema
-
-var AppMonitorConfiguration_AllowCookies *smithy.Schema
-
-var AppMonitorConfiguration_Telemetries *smithy.Schema
-
-var AppMonitorConfiguration_EnableXRay *smithy.Schema
-
-var AppMonitorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorDetails",
-}, smithy.ShapeTypeStructure, 3)
-var AppMonitorDetails_name *smithy.Schema
-
-var AppMonitorDetails_id *smithy.Schema
-
-var AppMonitorDetails_version *smithy.Schema
-
-var _AppMonitorDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorDomain",
-}, smithy.ShapeTypeString, 0)
-
-var _AppMonitorDomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorDomainList",
-}, smithy.ShapeTypeList, 1)
-var _AppMonitorDomainList_member *smithy.Schema
-
-var _AppMonitorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorId",
-}, smithy.ShapeTypeString, 0)
-
-var _AppMonitorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorName",
-}, smithy.ShapeTypeString, 0)
-
-var _AppMonitorPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorPlatform",
-}, smithy.ShapeTypeString, 0)
-
-var AppMonitorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorSummary",
-}, smithy.ShapeTypeStructure, 6)
-var AppMonitorSummary_Name *smithy.Schema
-
-var AppMonitorSummary_Id *smithy.Schema
-
-var AppMonitorSummary_Created *smithy.Schema
-
-var AppMonitorSummary_LastModified *smithy.Schema
-
-var AppMonitorSummary_State *smithy.Schema
-
-var AppMonitorSummary_Platform *smithy.Schema
-
-var _AppMonitorSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "AppMonitorSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AppMonitorSummaryList_member *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var BatchCreateRumMetricDefinitionsError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchCreateRumMetricDefinitionsError_MetricDefinition *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsError_ErrorCode *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsError_ErrorMessage *smithy.Schema
-
-var _BatchCreateRumMetricDefinitionsErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchCreateRumMetricDefinitionsErrors_member *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsError",
-}, smithy.ShapeTypeStructure, 3)
-var BatchDeleteRumMetricDefinitionsError_MetricDefinitionId *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsError_ErrorCode *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsError_ErrorMessage *smithy.Schema
-
-var _BatchDeleteRumMetricDefinitionsErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchDeleteRumMetricDefinitionsErrors_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceName *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CustomEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CustomEvents",
-}, smithy.ShapeTypeStructure, 1)
-var CustomEvents_Status *smithy.Schema
-
-var _CustomEventsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CustomEventsStatus",
-}, smithy.ShapeTypeString, 0)
-
-var CwLog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CwLog",
-}, smithy.ShapeTypeStructure, 2)
-var CwLog_CwLogEnabled *smithy.Schema
-
-var CwLog_CwLogGroup *smithy.Schema
-
-var DataStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DataStorage",
-}, smithy.ShapeTypeStructure, 1)
-var DataStorage_CwLog *smithy.Schema
-
-var DeobfuscationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeobfuscationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DeobfuscationConfiguration_JavaScriptSourceMaps *smithy.Schema
-
-var _DeobfuscationS3Uri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeobfuscationS3Uri",
-}, smithy.ShapeTypeString, 0)
-
-var _DeobfuscationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeobfuscationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _DestinationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DestinationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DimensionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DimensionKey",
-}, smithy.ShapeTypeString, 0)
-
-var _DimensionKeysMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DimensionKeysMap",
-}, smithy.ShapeTypeMap, 2)
-var _DimensionKeysMap_key *smithy.Schema
-
-var _DimensionKeysMap_value *smithy.Schema
-
-var _DimensionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DimensionName",
-}, smithy.ShapeTypeString, 0)
-
-var _EventData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "EventData",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDataList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "EventDataList",
-}, smithy.ShapeTypeList, 1)
-var _EventDataList_member *smithy.Schema
-
-var _EventPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "EventPattern",
-}, smithy.ShapeTypeString, 0)
-
-var _FavoritePages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "FavoritePages",
-}, smithy.ShapeTypeList, 1)
-var _FavoritePages_member *smithy.Schema
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityPoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "IdentityPoolId",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var InvalidPolicyRevisionIdException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "InvalidPolicyRevisionIdException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidPolicyRevisionIdException_message *smithy.Schema
-
-var _ISOTimestampString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ISOTimestampString",
-}, smithy.ShapeTypeString, 0)
-
-var JavaScriptSourceMaps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "JavaScriptSourceMaps",
-}, smithy.ShapeTypeStructure, 2)
-var JavaScriptSourceMaps_Status *smithy.Schema
-
-var JavaScriptSourceMaps_S3Uri *smithy.Schema
-
-var _JsonValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "JsonValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var MalformedPolicyDocumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MalformedPolicyDocumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MalformedPolicyDocumentException_message *smithy.Schema
-
-var _MaxQueryResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MaxQueryResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetricDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinition",
-}, smithy.ShapeTypeStructure, 7)
-var MetricDefinition_MetricDefinitionId *smithy.Schema
-
-var MetricDefinition_Name *smithy.Schema
-
-var MetricDefinition_ValueKey *smithy.Schema
-
-var MetricDefinition_UnitLabel *smithy.Schema
-
-var MetricDefinition_DimensionKeys *smithy.Schema
-
-var MetricDefinition_EventPattern *smithy.Schema
-
-var MetricDefinition_Namespace *smithy.Schema
-
-var _MetricDefinitionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetricDefinitionIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionIds",
-}, smithy.ShapeTypeList, 1)
-var _MetricDefinitionIds_member *smithy.Schema
-
-var MetricDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var MetricDefinitionRequest_Name *smithy.Schema
-
-var MetricDefinitionRequest_ValueKey *smithy.Schema
-
-var MetricDefinitionRequest_UnitLabel *smithy.Schema
-
-var MetricDefinitionRequest_DimensionKeys *smithy.Schema
-
-var MetricDefinitionRequest_EventPattern *smithy.Schema
-
-var MetricDefinitionRequest_Namespace *smithy.Schema
-
-var _MetricDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _MetricDefinitions_member *smithy.Schema
-
-var _MetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDefinitionsRequest",
-}, smithy.ShapeTypeList, 1)
-var _MetricDefinitionsRequest_member *smithy.Schema
-
-var _MetricDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDestination",
-}, smithy.ShapeTypeString, 0)
-
-var MetricDestinationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDestinationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var MetricDestinationSummary_Destination *smithy.Schema
-
-var MetricDestinationSummary_DestinationArn *smithy.Schema
-
-var MetricDestinationSummary_IamRoleArn *smithy.Schema
-
-var _MetricDestinationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricDestinationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MetricDestinationSummaryList_member *smithy.Schema
-
-var _MetricName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "MetricName",
-}, smithy.ShapeTypeString, 0)
-
-var _Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Namespace",
-}, smithy.ShapeTypeString, 0)
-
-var _Pages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Pages",
-}, smithy.ShapeTypeList, 1)
-var _Pages_member *smithy.Schema
-
-var PolicyNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PolicyNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var PolicyNotFoundException_message *smithy.Schema
-
-var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PolicyRevisionId",
-}, smithy.ShapeTypeString, 0)
-
-var PolicySizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PolicySizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var PolicySizeLimitExceededException_message *smithy.Schema
-
-var QueryFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilter",
-}, smithy.ShapeTypeStructure, 2)
-var QueryFilter_Name *smithy.Schema
-
-var QueryFilter_Values *smithy.Schema
-
-var _QueryFilterKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilterKey",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilters",
-}, smithy.ShapeTypeList, 1)
-var _QueryFilters_member *smithy.Schema
-
-var _QueryFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _QueryFilterValueList_member *smithy.Schema
-
-var _QueryTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "QueryTimestamp",
-}, smithy.ShapeTypeLong, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceName *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var RumEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "RumEvent",
-}, smithy.ShapeTypeStructure, 5)
-var RumEvent_id *smithy.Schema
-
-var RumEvent_timestamp *smithy.Schema
-
-var RumEvent_type *smithy.Schema
-
-var RumEvent_metadata *smithy.Schema
-
-var RumEvent_details *smithy.Schema
-
-var _RumEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "RumEventList",
-}, smithy.ShapeTypeList, 1)
-var _RumEventList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _SessionSampleRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "SessionSampleRate",
-}, smithy.ShapeTypeDouble, 0)
-
-var _StateEnum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "StateEnum",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Telemetries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Telemetries",
-}, smithy.ShapeTypeList, 1)
-var _Telemetries_member *smithy.Schema
-
-var _Telemetry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Telemetry",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TimeRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TimeRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimeRange_After *smithy.Schema
-
-var TimeRange_Before *smithy.Schema
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0)
-
-var _UnitLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UnitLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var UserDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UserDetails",
-}, smithy.ShapeTypeStructure, 2)
-var UserDetails_userId *smithy.Schema
-
-var UserDetails_sessionId *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _ValueKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ValueKey",
-}, smithy.ShapeTypeString, 0)
-
-var BatchCreateRumMetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BatchCreateRumMetricDefinitionsRequest_AppMonitorName *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsRequest_Destination *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsRequest_DestinationArn *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsRequest_MetricDefinitions *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchCreateRumMetricDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchCreateRumMetricDefinitionsResponse_Errors *smithy.Schema
-
-var BatchCreateRumMetricDefinitionsResponse_MetricDefinitions *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var BatchDeleteRumMetricDefinitionsRequest_AppMonitorName *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest_Destination *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest_DestinationArn *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchDeleteRumMetricDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDeleteRumMetricDefinitionsResponse_Errors *smithy.Schema
-
-var BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchGetRumMetricDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var BatchGetRumMetricDefinitionsRequest_AppMonitorName *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_Destination *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_DestinationArn *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_MaxResults *smithy.Schema
-
-var BatchGetRumMetricDefinitionsRequest_NextToken *smithy.Schema
-
-var BatchGetRumMetricDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "BatchGetRumMetricDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetRumMetricDefinitionsResponse_MetricDefinitions *smithy.Schema
-
-var BatchGetRumMetricDefinitionsResponse_NextToken *smithy.Schema
-
-var CreateAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CreateAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateAppMonitorRequest_Name *smithy.Schema
-
-var CreateAppMonitorRequest_Domain *smithy.Schema
-
-var CreateAppMonitorRequest_DomainList *smithy.Schema
-
-var CreateAppMonitorRequest_Tags *smithy.Schema
-
-var CreateAppMonitorRequest_AppMonitorConfiguration *smithy.Schema
-
-var CreateAppMonitorRequest_CwLogEnabled *smithy.Schema
-
-var CreateAppMonitorRequest_CustomEvents *smithy.Schema
-
-var CreateAppMonitorRequest_DeobfuscationConfiguration *smithy.Schema
-
-var CreateAppMonitorRequest_Platform *smithy.Schema
-
-var CreateAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "CreateAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAppMonitorResponse_Id *smithy.Schema
-
-var DeleteAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAppMonitorRequest_Name *smithy.Schema
-
-var DeleteAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourcePolicyRequest_Name *smithy.Schema
-
-var DeleteResourcePolicyRequest_PolicyRevisionId *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var DeleteRumMetricsDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteRumMetricsDestinationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRumMetricsDestinationRequest_AppMonitorName *smithy.Schema
-
-var DeleteRumMetricsDestinationRequest_Destination *smithy.Schema
-
-var DeleteRumMetricsDestinationRequest_DestinationArn *smithy.Schema
-
-var DeleteRumMetricsDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "DeleteRumMetricsDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAppMonitorDataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorDataRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetAppMonitorDataRequest_Name *smithy.Schema
-
-var GetAppMonitorDataRequest_TimeRange *smithy.Schema
-
-var GetAppMonitorDataRequest_Filters *smithy.Schema
-
-var GetAppMonitorDataRequest_MaxResults *smithy.Schema
-
-var GetAppMonitorDataRequest_NextToken *smithy.Schema
-
-var GetAppMonitorDataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorDataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAppMonitorDataResponse_Events *smithy.Schema
-
-var GetAppMonitorDataResponse_NextToken *smithy.Schema
-
-var GetAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppMonitorRequest_Name *smithy.Schema
-
-var GetAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetAppMonitorResponse_AppMonitor *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_Name *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyResponse_PolicyDocument *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var ListAppMonitorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListAppMonitorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppMonitorsRequest_MaxResults *smithy.Schema
-
-var ListAppMonitorsRequest_NextToken *smithy.Schema
-
-var ListAppMonitorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListAppMonitorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAppMonitorsResponse_NextToken *smithy.Schema
-
-var ListAppMonitorsResponse_AppMonitorSummaries *smithy.Schema
-
-var ListRumMetricsDestinationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListRumMetricsDestinationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRumMetricsDestinationsRequest_AppMonitorName *smithy.Schema
-
-var ListRumMetricsDestinationsRequest_MaxResults *smithy.Schema
-
-var ListRumMetricsDestinationsRequest_NextToken *smithy.Schema
-
-var ListRumMetricsDestinationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListRumMetricsDestinationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRumMetricsDestinationsResponse_Destinations *smithy.Schema
-
-var ListRumMetricsDestinationsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyRequest_Name *smithy.Schema
-
-var PutResourcePolicyRequest_PolicyDocument *smithy.Schema
-
-var PutResourcePolicyRequest_PolicyRevisionId *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyResponse_PolicyDocument *smithy.Schema
-
-var PutResourcePolicyResponse_PolicyRevisionId *smithy.Schema
-
-var PutRumEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumEventsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var PutRumEventsRequest_Id *smithy.Schema
-
-var PutRumEventsRequest_BatchId *smithy.Schema
-
-var PutRumEventsRequest_AppMonitorDetails *smithy.Schema
-
-var PutRumEventsRequest_UserDetails *smithy.Schema
-
-var PutRumEventsRequest_RumEvents *smithy.Schema
-
-var PutRumEventsRequest_Alias *smithy.Schema
-
-var PutRumEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumEventsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutRumMetricsDestinationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumMetricsDestinationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutRumMetricsDestinationRequest_AppMonitorName *smithy.Schema
-
-var PutRumMetricsDestinationRequest_Destination *smithy.Schema
-
-var PutRumMetricsDestinationRequest_DestinationArn *smithy.Schema
-
-var PutRumMetricsDestinationRequest_IamRoleArn *smithy.Schema
-
-var PutRumMetricsDestinationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "PutRumMetricsDestinationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAppMonitorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateAppMonitorRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateAppMonitorRequest_Name *smithy.Schema
-
-var UpdateAppMonitorRequest_Domain *smithy.Schema
-
-var UpdateAppMonitorRequest_DomainList *smithy.Schema
-
-var UpdateAppMonitorRequest_AppMonitorConfiguration *smithy.Schema
-
-var UpdateAppMonitorRequest_CwLogEnabled *smithy.Schema
-
-var UpdateAppMonitorRequest_CustomEvents *smithy.Schema
-
-var UpdateAppMonitorRequest_DeobfuscationConfiguration *smithy.Schema
-
-var UpdateAppMonitorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateAppMonitorResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRumMetricDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateRumMetricDefinitionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRumMetricDefinitionRequest_AppMonitorName *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_Destination *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_DestinationArn *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_MetricDefinition *smithy.Schema
-
-var UpdateRumMetricDefinitionRequest_MetricDefinitionId *smithy.Schema
-
-var UpdateRumMetricDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.rum",
-	Name:      "UpdateRumMetricDefinitionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_AppMonitorDomainList_member = _AppMonitorDomainList.AddMember("member", _AppMonitorDomain)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	_Pages_member = _Pages.AddMember("member", _Url)
-
-	_FavoritePages_member = _FavoritePages.AddMember("member", smithyprelude.String)
-
-	_Telemetries_member = _Telemetries.AddMember("member", _Telemetry)
-
-	AppMonitorConfiguration_IdentityPoolId = AppMonitorConfiguration.AddMember("IdentityPoolId", _IdentityPoolId)
-
-	AppMonitorConfiguration_ExcludedPages = AppMonitorConfiguration.AddMember("ExcludedPages", _Pages)
-
-	AppMonitorConfiguration_IncludedPages = AppMonitorConfiguration.AddMember("IncludedPages", _Pages)
-
-	AppMonitorConfiguration_FavoritePages = AppMonitorConfiguration.AddMember("FavoritePages", _FavoritePages)
-
-	AppMonitorConfiguration_SessionSampleRate = AppMonitorConfiguration.AddMember("SessionSampleRate", _SessionSampleRate)
-
-	AppMonitorConfiguration_GuestRoleArn = AppMonitorConfiguration.AddMember("GuestRoleArn", _Arn)
-
-	AppMonitorConfiguration_AllowCookies = AppMonitorConfiguration.AddMember("AllowCookies", smithyprelude.Boolean)
-
-	AppMonitorConfiguration_Telemetries = AppMonitorConfiguration.AddMember("Telemetries", _Telemetries)
-
-	AppMonitorConfiguration_EnableXRay = AppMonitorConfiguration.AddMember("EnableXRay", smithyprelude.Boolean)
-
-	CwLog_CwLogEnabled = CwLog.AddMember("CwLogEnabled", smithyprelude.Boolean)
-
-	CwLog_CwLogGroup = CwLog.AddMember("CwLogGroup", smithyprelude.String)
-
-	DataStorage_CwLog = DataStorage.AddMember("CwLog", CwLog)
-
-	CustomEvents_Status = CustomEvents.AddMember("Status", _CustomEventsStatus)
-
-	JavaScriptSourceMaps_Status = JavaScriptSourceMaps.AddMember("Status", _DeobfuscationStatus)
-
-	JavaScriptSourceMaps_S3Uri = JavaScriptSourceMaps.AddMember("S3Uri", _DeobfuscationS3Uri)
-
-	DeobfuscationConfiguration_JavaScriptSourceMaps = DeobfuscationConfiguration.AddMember("JavaScriptSourceMaps", JavaScriptSourceMaps)
-
-	AppMonitor_Name = AppMonitor.AddMember("Name", _AppMonitorName)
-
-	AppMonitor_Domain = AppMonitor.AddMember("Domain", _AppMonitorDomain)
-
-	AppMonitor_DomainList = AppMonitor.AddMember("DomainList", _AppMonitorDomainList)
-
-	AppMonitor_Id = AppMonitor.AddMember("Id", _AppMonitorId)
-
-	AppMonitor_Created = AppMonitor.AddMember("Created", _ISOTimestampString)
-
-	AppMonitor_LastModified = AppMonitor.AddMember("LastModified", _ISOTimestampString)
-
-	AppMonitor_Tags = AppMonitor.AddMember("Tags", _TagMap)
-
-	AppMonitor_State = AppMonitor.AddMember("State", _StateEnum)
-
-	AppMonitor_AppMonitorConfiguration = AppMonitor.AddMember("AppMonitorConfiguration", AppMonitorConfiguration)
-
-	AppMonitor_DataStorage = AppMonitor.AddMember("DataStorage", DataStorage)
-
-	AppMonitor_CustomEvents = AppMonitor.AddMember("CustomEvents", CustomEvents)
-
-	AppMonitor_DeobfuscationConfiguration = AppMonitor.AddMember("DeobfuscationConfiguration", DeobfuscationConfiguration)
-
-	AppMonitor_Platform = AppMonitor.AddMember("Platform", _AppMonitorPlatform)
-
-	AppMonitorDetails_name = AppMonitorDetails.AddMember("name", smithyprelude.String)
-
-	AppMonitorDetails_id = AppMonitorDetails.AddMember("id", smithyprelude.String)
-
-	AppMonitorDetails_version = AppMonitorDetails.AddMember("version", smithyprelude.String)
-
-	AppMonitorSummary_Name = AppMonitorSummary.AddMember("Name", _AppMonitorName)
-
-	AppMonitorSummary_Id = AppMonitorSummary.AddMember("Id", _AppMonitorId)
-
-	AppMonitorSummary_Created = AppMonitorSummary.AddMember("Created", _ISOTimestampString)
-
-	AppMonitorSummary_LastModified = AppMonitorSummary.AddMember("LastModified", _ISOTimestampString)
-
-	AppMonitorSummary_State = AppMonitorSummary.AddMember("State", _StateEnum)
-
-	AppMonitorSummary_Platform = AppMonitorSummary.AddMember("Platform", _AppMonitorPlatform)
-
-	_AppMonitorSummaryList_member = _AppMonitorSummaryList.AddMember("member", AppMonitorSummary)
-
-	_DimensionKeysMap_key = _DimensionKeysMap.AddMember("key", _DimensionKey)
-
-	_DimensionKeysMap_value = _DimensionKeysMap.AddMember("value", _DimensionName)
-
-	MetricDefinitionRequest_Name = MetricDefinitionRequest.AddMember("Name", _MetricName)
-
-	MetricDefinitionRequest_ValueKey = MetricDefinitionRequest.AddMember("ValueKey", _ValueKey)
-
-	MetricDefinitionRequest_UnitLabel = MetricDefinitionRequest.AddMember("UnitLabel", _UnitLabel)
-
-	MetricDefinitionRequest_DimensionKeys = MetricDefinitionRequest.AddMember("DimensionKeys", _DimensionKeysMap)
-
-	MetricDefinitionRequest_EventPattern = MetricDefinitionRequest.AddMember("EventPattern", _EventPattern)
-
-	MetricDefinitionRequest_Namespace = MetricDefinitionRequest.AddMember("Namespace", _Namespace)
-
-	BatchCreateRumMetricDefinitionsError_MetricDefinition = BatchCreateRumMetricDefinitionsError.AddMember("MetricDefinition", MetricDefinitionRequest)
-
-	BatchCreateRumMetricDefinitionsError_ErrorCode = BatchCreateRumMetricDefinitionsError.AddMember("ErrorCode", smithyprelude.String)
-
-	BatchCreateRumMetricDefinitionsError_ErrorMessage = BatchCreateRumMetricDefinitionsError.AddMember("ErrorMessage", smithyprelude.String)
-
-	_BatchCreateRumMetricDefinitionsErrors_member = _BatchCreateRumMetricDefinitionsErrors.AddMember("member", BatchCreateRumMetricDefinitionsError)
-
-	BatchDeleteRumMetricDefinitionsError_MetricDefinitionId = BatchDeleteRumMetricDefinitionsError.AddMember("MetricDefinitionId", _MetricDefinitionId)
-
-	BatchDeleteRumMetricDefinitionsError_ErrorCode = BatchDeleteRumMetricDefinitionsError.AddMember("ErrorCode", smithyprelude.String)
-
-	BatchDeleteRumMetricDefinitionsError_ErrorMessage = BatchDeleteRumMetricDefinitionsError.AddMember("ErrorMessage", smithyprelude.String)
-
-	_BatchDeleteRumMetricDefinitionsErrors_member = _BatchDeleteRumMetricDefinitionsErrors.AddMember("member", BatchDeleteRumMetricDefinitionsError)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceName = ConflictException.AddMember("resourceName", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	_EventDataList_member = _EventDataList.AddMember("member", _EventData)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	InvalidPolicyRevisionIdException_message = InvalidPolicyRevisionIdException.AddMember("message", smithyprelude.String)
-
-	MalformedPolicyDocumentException_message = MalformedPolicyDocumentException.AddMember("message", smithyprelude.String)
-
-	MetricDefinition_MetricDefinitionId = MetricDefinition.AddMember("MetricDefinitionId", _MetricDefinitionId)
-
-	MetricDefinition_Name = MetricDefinition.AddMember("Name", _MetricName)
-
-	MetricDefinition_ValueKey = MetricDefinition.AddMember("ValueKey", _ValueKey)
-
-	MetricDefinition_UnitLabel = MetricDefinition.AddMember("UnitLabel", _UnitLabel)
-
-	MetricDefinition_DimensionKeys = MetricDefinition.AddMember("DimensionKeys", _DimensionKeysMap)
-
-	MetricDefinition_EventPattern = MetricDefinition.AddMember("EventPattern", _EventPattern)
-
-	MetricDefinition_Namespace = MetricDefinition.AddMember("Namespace", _Namespace)
-
-	_MetricDefinitionIds_member = _MetricDefinitionIds.AddMember("member", _MetricDefinitionId)
-
-	_MetricDefinitions_member = _MetricDefinitions.AddMember("member", MetricDefinition)
-
-	_MetricDefinitionsRequest_member = _MetricDefinitionsRequest.AddMember("member", MetricDefinitionRequest)
-
-	MetricDestinationSummary_Destination = MetricDestinationSummary.AddMember("Destination", _MetricDestination)
-
-	MetricDestinationSummary_DestinationArn = MetricDestinationSummary.AddMember("DestinationArn", _DestinationArn)
-
-	MetricDestinationSummary_IamRoleArn = MetricDestinationSummary.AddMember("IamRoleArn", _IamRoleArn)
-
-	_MetricDestinationSummaryList_member = _MetricDestinationSummaryList.AddMember("member", MetricDestinationSummary)
-
-	PolicyNotFoundException_message = PolicyNotFoundException.AddMember("message", smithyprelude.String)
-
-	PolicySizeLimitExceededException_message = PolicySizeLimitExceededException.AddMember("message", smithyprelude.String)
-
-	_QueryFilterValueList_member = _QueryFilterValueList.AddMember("member", _QueryFilterValue)
-
-	QueryFilter_Name = QueryFilter.AddMember("Name", _QueryFilterKey)
-
-	QueryFilter_Values = QueryFilter.AddMember("Values", _QueryFilterValueList)
-
-	_QueryFilters_member = _QueryFilters.AddMember("member", QueryFilter)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceName = ResourceNotFoundException.AddMember("resourceName", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	RumEvent_id = RumEvent.AddMember("id", smithyprelude.String)
-
-	RumEvent_timestamp = RumEvent.AddMember("timestamp", smithyprelude.Timestamp)
-
-	RumEvent_type = RumEvent.AddMember("type", smithyprelude.String)
-
-	RumEvent_metadata = RumEvent.AddMember("metadata", _JsonValue)
-
-	RumEvent_details = RumEvent.AddMember("details", _JsonValue)
-
-	_RumEventList_member = _RumEventList.AddMember("member", RumEvent)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TimeRange_After = TimeRange.AddMember("After", _QueryTimestamp)
-
-	TimeRange_Before = TimeRange.AddMember("Before", _QueryTimestamp)
-
-	UserDetails_userId = UserDetails.AddMember("userId", smithyprelude.String)
-
-	UserDetails_sessionId = UserDetails.AddMember("sessionId", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	BatchCreateRumMetricDefinitionsRequest_AppMonitorName = BatchCreateRumMetricDefinitionsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	BatchCreateRumMetricDefinitionsRequest_Destination = BatchCreateRumMetricDefinitionsRequest.AddMember("Destination", _MetricDestination)
-
-	BatchCreateRumMetricDefinitionsRequest_DestinationArn = BatchCreateRumMetricDefinitionsRequest.AddMember("DestinationArn", _DestinationArn)
-
-	BatchCreateRumMetricDefinitionsRequest_MetricDefinitions = BatchCreateRumMetricDefinitionsRequest.AddMember("MetricDefinitions", _MetricDefinitionsRequest)
-
-	BatchCreateRumMetricDefinitionsResponse_Errors = BatchCreateRumMetricDefinitionsResponse.AddMember("Errors", _BatchCreateRumMetricDefinitionsErrors)
-
-	BatchCreateRumMetricDefinitionsResponse_MetricDefinitions = BatchCreateRumMetricDefinitionsResponse.AddMember("MetricDefinitions", _MetricDefinitions)
-
-	BatchDeleteRumMetricDefinitionsRequest_AppMonitorName = BatchDeleteRumMetricDefinitionsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	BatchDeleteRumMetricDefinitionsRequest_Destination = BatchDeleteRumMetricDefinitionsRequest.AddMember("Destination", _MetricDestination, &smithytraits.HTTPQuery{Name: "destination"})
-
-	BatchDeleteRumMetricDefinitionsRequest_DestinationArn = BatchDeleteRumMetricDefinitionsRequest.AddMember("DestinationArn", _DestinationArn, &smithytraits.HTTPQuery{Name: "destinationArn"})
-
-	BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds = BatchDeleteRumMetricDefinitionsRequest.AddMember("MetricDefinitionIds", _MetricDefinitionIds, &smithytraits.HTTPQuery{Name: "metricDefinitionIds"})
-
-	BatchDeleteRumMetricDefinitionsResponse_Errors = BatchDeleteRumMetricDefinitionsResponse.AddMember("Errors", _BatchDeleteRumMetricDefinitionsErrors)
-
-	BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds = BatchDeleteRumMetricDefinitionsResponse.AddMember("MetricDefinitionIds", _MetricDefinitionIds)
-
-	BatchGetRumMetricDefinitionsRequest_AppMonitorName = BatchGetRumMetricDefinitionsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	BatchGetRumMetricDefinitionsRequest_Destination = BatchGetRumMetricDefinitionsRequest.AddMember("Destination", _MetricDestination, &smithytraits.HTTPQuery{Name: "destination"})
-
-	BatchGetRumMetricDefinitionsRequest_DestinationArn = BatchGetRumMetricDefinitionsRequest.AddMember("DestinationArn", _DestinationArn, &smithytraits.HTTPQuery{Name: "destinationArn"})
-
-	BatchGetRumMetricDefinitionsRequest_MaxResults = BatchGetRumMetricDefinitionsRequest.AddMember("MaxResults", _MaxResultsInteger, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	BatchGetRumMetricDefinitionsRequest_NextToken = BatchGetRumMetricDefinitionsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	BatchGetRumMetricDefinitionsResponse_MetricDefinitions = BatchGetRumMetricDefinitionsResponse.AddMember("MetricDefinitions", _MetricDefinitions)
-
-	BatchGetRumMetricDefinitionsResponse_NextToken = BatchGetRumMetricDefinitionsResponse.AddMember("NextToken", smithyprelude.String)
-
-	CreateAppMonitorRequest_Name = CreateAppMonitorRequest.AddMember("Name", _AppMonitorName)
-
-	CreateAppMonitorRequest_Domain = CreateAppMonitorRequest.AddMember("Domain", _AppMonitorDomain)
-
-	CreateAppMonitorRequest_DomainList = CreateAppMonitorRequest.AddMember("DomainList", _AppMonitorDomainList)
-
-	CreateAppMonitorRequest_Tags = CreateAppMonitorRequest.AddMember("Tags", _TagMap)
-
-	CreateAppMonitorRequest_AppMonitorConfiguration = CreateAppMonitorRequest.AddMember("AppMonitorConfiguration", AppMonitorConfiguration)
-
-	CreateAppMonitorRequest_CwLogEnabled = CreateAppMonitorRequest.AddMember("CwLogEnabled", smithyprelude.Boolean)
-
-	CreateAppMonitorRequest_CustomEvents = CreateAppMonitorRequest.AddMember("CustomEvents", CustomEvents)
-
-	CreateAppMonitorRequest_DeobfuscationConfiguration = CreateAppMonitorRequest.AddMember("DeobfuscationConfiguration", DeobfuscationConfiguration)
-
-	CreateAppMonitorRequest_Platform = CreateAppMonitorRequest.AddMember("Platform", _AppMonitorPlatform)
-
-	CreateAppMonitorResponse_Id = CreateAppMonitorResponse.AddMember("Id", _AppMonitorId)
-
-	DeleteAppMonitorRequest_Name = DeleteAppMonitorRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	DeleteResourcePolicyRequest_Name = DeleteResourcePolicyRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	DeleteResourcePolicyRequest_PolicyRevisionId = DeleteResourcePolicyRequest.AddMember("PolicyRevisionId", _PolicyRevisionId, &smithytraits.HTTPQuery{Name: "policyRevisionId"})
-
-	DeleteResourcePolicyResponse_PolicyRevisionId = DeleteResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	DeleteRumMetricsDestinationRequest_AppMonitorName = DeleteRumMetricsDestinationRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	DeleteRumMetricsDestinationRequest_Destination = DeleteRumMetricsDestinationRequest.AddMember("Destination", _MetricDestination, &smithytraits.HTTPQuery{Name: "destination"})
-
-	DeleteRumMetricsDestinationRequest_DestinationArn = DeleteRumMetricsDestinationRequest.AddMember("DestinationArn", _DestinationArn, &smithytraits.HTTPQuery{Name: "destinationArn"})
-
-	GetAppMonitorDataRequest_Name = GetAppMonitorDataRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	GetAppMonitorDataRequest_TimeRange = GetAppMonitorDataRequest.AddMember("TimeRange", TimeRange)
-
-	GetAppMonitorDataRequest_Filters = GetAppMonitorDataRequest.AddMember("Filters", _QueryFilters)
-
-	GetAppMonitorDataRequest_MaxResults = GetAppMonitorDataRequest.AddMember("MaxResults", _MaxQueryResults)
-
-	GetAppMonitorDataRequest_NextToken = GetAppMonitorDataRequest.AddMember("NextToken", _Token)
-
-	GetAppMonitorDataResponse_Events = GetAppMonitorDataResponse.AddMember("Events", _EventDataList)
-
-	GetAppMonitorDataResponse_NextToken = GetAppMonitorDataResponse.AddMember("NextToken", _Token)
-
-	GetAppMonitorRequest_Name = GetAppMonitorRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	GetAppMonitorResponse_AppMonitor = GetAppMonitorResponse.AddMember("AppMonitor", AppMonitor)
-
-	GetResourcePolicyRequest_Name = GetResourcePolicyRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	GetResourcePolicyResponse_PolicyDocument = GetResourcePolicyResponse.AddMember("PolicyDocument", smithyprelude.String)
-
-	GetResourcePolicyResponse_PolicyRevisionId = GetResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	ListAppMonitorsRequest_MaxResults = ListAppMonitorsRequest.AddMember("MaxResults", _MaxResultsInteger, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAppMonitorsRequest_NextToken = ListAppMonitorsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAppMonitorsResponse_NextToken = ListAppMonitorsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListAppMonitorsResponse_AppMonitorSummaries = ListAppMonitorsResponse.AddMember("AppMonitorSummaries", _AppMonitorSummaryList)
-
-	ListRumMetricsDestinationsRequest_AppMonitorName = ListRumMetricsDestinationsRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	ListRumMetricsDestinationsRequest_MaxResults = ListRumMetricsDestinationsRequest.AddMember("MaxResults", _MaxResultsInteger, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRumMetricsDestinationsRequest_NextToken = ListRumMetricsDestinationsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRumMetricsDestinationsResponse_Destinations = ListRumMetricsDestinationsResponse.AddMember("Destinations", _MetricDestinationSummaryList)
-
-	ListRumMetricsDestinationsResponse_NextToken = ListRumMetricsDestinationsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_ResourceArn = ListTagsForResourceResponse.AddMember("ResourceArn", _Arn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	PutResourcePolicyRequest_Name = PutResourcePolicyRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	PutResourcePolicyRequest_PolicyDocument = PutResourcePolicyRequest.AddMember("PolicyDocument", smithyprelude.String)
-
-	PutResourcePolicyRequest_PolicyRevisionId = PutResourcePolicyRequest.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	PutResourcePolicyResponse_PolicyDocument = PutResourcePolicyResponse.AddMember("PolicyDocument", smithyprelude.String)
-
-	PutResourcePolicyResponse_PolicyRevisionId = PutResourcePolicyResponse.AddMember("PolicyRevisionId", _PolicyRevisionId)
-
-	PutRumEventsRequest_Id = PutRumEventsRequest.AddMember("Id", _AppMonitorId, &smithytraits.HTTPLabel{})
-
-	PutRumEventsRequest_BatchId = PutRumEventsRequest.AddMember("BatchId", smithyprelude.String)
-
-	PutRumEventsRequest_AppMonitorDetails = PutRumEventsRequest.AddMember("AppMonitorDetails", AppMonitorDetails)
-
-	PutRumEventsRequest_UserDetails = PutRumEventsRequest.AddMember("UserDetails", UserDetails)
-
-	PutRumEventsRequest_RumEvents = PutRumEventsRequest.AddMember("RumEvents", _RumEventList)
-
-	PutRumEventsRequest_Alias = PutRumEventsRequest.AddMember("Alias", _Alias)
-
-	PutRumMetricsDestinationRequest_AppMonitorName = PutRumMetricsDestinationRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	PutRumMetricsDestinationRequest_Destination = PutRumMetricsDestinationRequest.AddMember("Destination", _MetricDestination)
-
-	PutRumMetricsDestinationRequest_DestinationArn = PutRumMetricsDestinationRequest.AddMember("DestinationArn", _DestinationArn)
-
-	PutRumMetricsDestinationRequest_IamRoleArn = PutRumMetricsDestinationRequest.AddMember("IamRoleArn", _IamRoleArn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAppMonitorRequest_Name = UpdateAppMonitorRequest.AddMember("Name", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	UpdateAppMonitorRequest_Domain = UpdateAppMonitorRequest.AddMember("Domain", _AppMonitorDomain)
-
-	UpdateAppMonitorRequest_DomainList = UpdateAppMonitorRequest.AddMember("DomainList", _AppMonitorDomainList)
-
-	UpdateAppMonitorRequest_AppMonitorConfiguration = UpdateAppMonitorRequest.AddMember("AppMonitorConfiguration", AppMonitorConfiguration)
-
-	UpdateAppMonitorRequest_CwLogEnabled = UpdateAppMonitorRequest.AddMember("CwLogEnabled", smithyprelude.Boolean)
-
-	UpdateAppMonitorRequest_CustomEvents = UpdateAppMonitorRequest.AddMember("CustomEvents", CustomEvents)
-
-	UpdateAppMonitorRequest_DeobfuscationConfiguration = UpdateAppMonitorRequest.AddMember("DeobfuscationConfiguration", DeobfuscationConfiguration)
-
-	UpdateRumMetricDefinitionRequest_AppMonitorName = UpdateRumMetricDefinitionRequest.AddMember("AppMonitorName", _AppMonitorName, &smithytraits.HTTPLabel{})
-
-	UpdateRumMetricDefinitionRequest_Destination = UpdateRumMetricDefinitionRequest.AddMember("Destination", _MetricDestination)
-
-	UpdateRumMetricDefinitionRequest_DestinationArn = UpdateRumMetricDefinitionRequest.AddMember("DestinationArn", _DestinationArn)
-
-	UpdateRumMetricDefinitionRequest_MetricDefinition = UpdateRumMetricDefinitionRequest.AddMember("MetricDefinition", MetricDefinitionRequest)
-
-	UpdateRumMetricDefinitionRequest_MetricDefinitionId = UpdateRumMetricDefinitionRequest.AddMember("MetricDefinitionId", _MetricDefinitionId)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "destination"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "destinationArn"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "metricDefinitionIds"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "policyRevisionId"}}, DirectMask: 0x10}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAppMonitor = smithy.SchemaMembers{List: []*smithy.Schema{&sAppMonitor_Name, &sAppMonitor_Domain, &sAppMonitor_DomainList, &sAppMonitor_Id, &sAppMonitor_Created, &sAppMonitor_LastModified, &sAppMonitor_Tags, &sAppMonitor_State, &sAppMonitor_AppMonitorConfiguration, &sAppMonitor_DataStorage, &sAppMonitor_CustomEvents, &sAppMonitor_DeobfuscationConfiguration, &sAppMonitor_Platform}, Seed: 15, Slots: []uint16{
+	3, 1, 5, 0, 4, 0, 6, 12, 0, 0, 0, 0, 2, 10, 0, 0, 0, 9, 0, 0, 11, 0, 7, 8,
+	0, 0, 0, 0, 13, 0, 0, 0,
+}}
+var mAppMonitorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAppMonitorConfiguration_IdentityPoolId, &sAppMonitorConfiguration_ExcludedPages, &sAppMonitorConfiguration_IncludedPages, &sAppMonitorConfiguration_FavoritePages, &sAppMonitorConfiguration_SessionSampleRate, &sAppMonitorConfiguration_GuestRoleArn, &sAppMonitorConfiguration_AllowCookies, &sAppMonitorConfiguration_Telemetries, &sAppMonitorConfiguration_EnableXRay}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 0, 0, 0, 5, 0, 7, 0, 9, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0,
+	8, 0, 0, 0, 4, 6, 3, 0,
+}}
+var mAppMonitorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAppMonitorDetails_name, &sAppMonitorDetails_id, &sAppMonitorDetails_version}}
+var m_AppMonitorDomainList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppMonitorDomainList_member}}
+var mAppMonitorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAppMonitorSummary_Name, &sAppMonitorSummary_Id, &sAppMonitorSummary_Created, &sAppMonitorSummary_LastModified, &sAppMonitorSummary_State, &sAppMonitorSummary_Platform}}
+var m_AppMonitorSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AppMonitorSummaryList_member}}
+var mBatchCreateRumMetricDefinitionsError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateRumMetricDefinitionsError_MetricDefinition, &sBatchCreateRumMetricDefinitionsError_ErrorCode, &sBatchCreateRumMetricDefinitionsError_ErrorMessage}}
+var m_BatchCreateRumMetricDefinitionsErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchCreateRumMetricDefinitionsErrors_member}}
+var mBatchDeleteRumMetricDefinitionsError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteRumMetricDefinitionsError_MetricDefinitionId, &sBatchDeleteRumMetricDefinitionsError_ErrorCode, &sBatchDeleteRumMetricDefinitionsError_ErrorMessage}}
+var m_BatchDeleteRumMetricDefinitionsErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchDeleteRumMetricDefinitionsErrors_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceName, &sConflictException_resourceType}}
+var mCustomEvents = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomEvents_Status}}
+var mCwLog = smithy.SchemaMembers{List: []*smithy.Schema{&sCwLog_CwLogEnabled, &sCwLog_CwLogGroup}}
+var mDataStorage = smithy.SchemaMembers{List: []*smithy.Schema{&sDataStorage_CwLog}}
+var mDeobfuscationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeobfuscationConfiguration_JavaScriptSourceMaps}}
+var m_DimensionKeysMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DimensionKeysMap_key, &s_DimensionKeysMap_value}}
+var m_EventDataList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventDataList_member}}
+var m_FavoritePages = smithy.SchemaMembers{List: []*smithy.Schema{&s_FavoritePages_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mInvalidPolicyRevisionIdException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPolicyRevisionIdException_message}}
+var mJavaScriptSourceMaps = smithy.SchemaMembers{List: []*smithy.Schema{&sJavaScriptSourceMaps_Status, &sJavaScriptSourceMaps_S3Uri}}
+var mMalformedPolicyDocumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sMalformedPolicyDocumentException_message}}
+var mMetricDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDefinition_MetricDefinitionId, &sMetricDefinition_Name, &sMetricDefinition_ValueKey, &sMetricDefinition_UnitLabel, &sMetricDefinition_DimensionKeys, &sMetricDefinition_EventPattern, &sMetricDefinition_Namespace}}
+var m_MetricDefinitionIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDefinitionIds_member}}
+var mMetricDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDefinitionRequest_Name, &sMetricDefinitionRequest_ValueKey, &sMetricDefinitionRequest_UnitLabel, &sMetricDefinitionRequest_DimensionKeys, &sMetricDefinitionRequest_EventPattern, &sMetricDefinitionRequest_Namespace}}
+var m_MetricDefinitions = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDefinitions_member}}
+var m_MetricDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDefinitionsRequest_member}}
+var mMetricDestinationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDestinationSummary_Destination, &sMetricDestinationSummary_DestinationArn, &sMetricDestinationSummary_IamRoleArn}}
+var m_MetricDestinationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricDestinationSummaryList_member}}
+var m_Pages = smithy.SchemaMembers{List: []*smithy.Schema{&s_Pages_member}}
+var mPolicyNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyNotFoundException_message}}
+var mPolicySizeLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicySizeLimitExceededException_message}}
+var mQueryFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sQueryFilter_Name, &sQueryFilter_Values}}
+var m_QueryFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryFilters_member}}
+var m_QueryFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryFilterValueList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceName, &sResourceNotFoundException_resourceType}}
+var mRumEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sRumEvent_id, &sRumEvent_timestamp, &sRumEvent_type, &sRumEvent_metadata, &sRumEvent_details}}
+var m_RumEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RumEventList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_Telemetries = smithy.SchemaMembers{List: []*smithy.Schema{&s_Telemetries_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mTimeRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeRange_After, &sTimeRange_Before}}
+var mUserDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sUserDetails_userId, &sUserDetails_sessionId}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mBatchCreateRumMetricDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateRumMetricDefinitionsRequest_AppMonitorName, &sBatchCreateRumMetricDefinitionsRequest_Destination, &sBatchCreateRumMetricDefinitionsRequest_DestinationArn, &sBatchCreateRumMetricDefinitionsRequest_MetricDefinitions}}
+var mBatchCreateRumMetricDefinitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchCreateRumMetricDefinitionsResponse_Errors, &sBatchCreateRumMetricDefinitionsResponse_MetricDefinitions}}
+var mBatchDeleteRumMetricDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteRumMetricDefinitionsRequest_AppMonitorName, &sBatchDeleteRumMetricDefinitionsRequest_Destination, &sBatchDeleteRumMetricDefinitionsRequest_DestinationArn, &sBatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds}}
+var mBatchDeleteRumMetricDefinitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDeleteRumMetricDefinitionsResponse_Errors, &sBatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds}}
+var mBatchGetRumMetricDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetRumMetricDefinitionsRequest_AppMonitorName, &sBatchGetRumMetricDefinitionsRequest_Destination, &sBatchGetRumMetricDefinitionsRequest_DestinationArn, &sBatchGetRumMetricDefinitionsRequest_MaxResults, &sBatchGetRumMetricDefinitionsRequest_NextToken}}
+var mBatchGetRumMetricDefinitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetRumMetricDefinitionsResponse_MetricDefinitions, &sBatchGetRumMetricDefinitionsResponse_NextToken}}
+var mCreateAppMonitorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppMonitorRequest_Name, &sCreateAppMonitorRequest_Domain, &sCreateAppMonitorRequest_DomainList, &sCreateAppMonitorRequest_Tags, &sCreateAppMonitorRequest_AppMonitorConfiguration, &sCreateAppMonitorRequest_CwLogEnabled, &sCreateAppMonitorRequest_CustomEvents, &sCreateAppMonitorRequest_DeobfuscationConfiguration, &sCreateAppMonitorRequest_Platform}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 2, 0, 8, 4, 1, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+	0, 0, 6, 0, 0, 0, 9, 0,
+}}
+var mCreateAppMonitorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAppMonitorResponse_Id}}
+var mDeleteAppMonitorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAppMonitorRequest_Name}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_Name, &sDeleteResourcePolicyRequest_PolicyRevisionId}}
+var mDeleteResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyResponse_PolicyRevisionId}}
+var mDeleteRumMetricsDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRumMetricsDestinationRequest_AppMonitorName, &sDeleteRumMetricsDestinationRequest_Destination, &sDeleteRumMetricsDestinationRequest_DestinationArn}}
+var mGetAppMonitorDataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppMonitorDataRequest_Name, &sGetAppMonitorDataRequest_TimeRange, &sGetAppMonitorDataRequest_Filters, &sGetAppMonitorDataRequest_MaxResults, &sGetAppMonitorDataRequest_NextToken}}
+var mGetAppMonitorDataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppMonitorDataResponse_Events, &sGetAppMonitorDataResponse_NextToken}}
+var mGetAppMonitorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppMonitorRequest_Name}}
+var mGetAppMonitorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAppMonitorResponse_AppMonitor}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_Name}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_PolicyDocument, &sGetResourcePolicyResponse_PolicyRevisionId}}
+var mListAppMonitorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppMonitorsRequest_MaxResults, &sListAppMonitorsRequest_NextToken}}
+var mListAppMonitorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAppMonitorsResponse_NextToken, &sListAppMonitorsResponse_AppMonitorSummaries}}
+var mListRumMetricsDestinationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRumMetricsDestinationsRequest_AppMonitorName, &sListRumMetricsDestinationsRequest_MaxResults, &sListRumMetricsDestinationsRequest_NextToken}}
+var mListRumMetricsDestinationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRumMetricsDestinationsResponse_Destinations, &sListRumMetricsDestinationsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_ResourceArn, &sListTagsForResourceResponse_Tags}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_Name, &sPutResourcePolicyRequest_PolicyDocument, &sPutResourcePolicyRequest_PolicyRevisionId}}
+var mPutResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyResponse_PolicyDocument, &sPutResourcePolicyResponse_PolicyRevisionId}}
+var mPutRumEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRumEventsRequest_Id, &sPutRumEventsRequest_BatchId, &sPutRumEventsRequest_AppMonitorDetails, &sPutRumEventsRequest_UserDetails, &sPutRumEventsRequest_RumEvents, &sPutRumEventsRequest_Alias}}
+var mPutRumMetricsDestinationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRumMetricsDestinationRequest_AppMonitorName, &sPutRumMetricsDestinationRequest_Destination, &sPutRumMetricsDestinationRequest_DestinationArn, &sPutRumMetricsDestinationRequest_IamRoleArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateAppMonitorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAppMonitorRequest_Name, &sUpdateAppMonitorRequest_Domain, &sUpdateAppMonitorRequest_DomainList, &sUpdateAppMonitorRequest_AppMonitorConfiguration, &sUpdateAppMonitorRequest_CwLogEnabled, &sUpdateAppMonitorRequest_CustomEvents, &sUpdateAppMonitorRequest_DeobfuscationConfiguration}}
+var mUpdateRumMetricDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRumMetricDefinitionRequest_AppMonitorName, &sUpdateRumMetricDefinitionRequest_Destination, &sUpdateRumMetricDefinitionRequest_DestinationArn, &sUpdateRumMetricDefinitionRequest_MetricDefinition, &sUpdateRumMetricDefinitionRequest_MetricDefinitionId}}
+
+var sBatchCreateRumMetricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateRumMetricDefinitions, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBatchDeleteRumMetricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteRumMetricDefinitions, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sBatchGetRumMetricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRumMetricDefinitions, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateAppMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppMonitor, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteAppMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppMonitor, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteRumMetricsDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRumMetricsDestination, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sGetAppMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppMonitor, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sGetAppMonitorData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppMonitorData, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListAppMonitors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppMonitors, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sListRumMetricsDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRumMetricsDestinations, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sPutRumEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRumEvents, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sPutRumMetricsDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRumMetricsDestination, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sUpdateAppMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppMonitor, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sUpdateRumMetricDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRumMetricDefinition, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var s_RUM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RUM, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var s_Alias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alias, Type: smithy.ShapeTypeString})
+var sAppMonitor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppMonitor, Members: &mAppMonitor, Type: smithy.ShapeTypeStructure})
+var sAppMonitorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppMonitorConfiguration, Members: &mAppMonitorConfiguration, Type: smithy.ShapeTypeStructure})
+var sAppMonitorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppMonitorDetails, Members: &mAppMonitorDetails, Type: smithy.ShapeTypeStructure})
+var s_AppMonitorDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppMonitorDomain, Type: smithy.ShapeTypeString})
+var s_AppMonitorDomainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppMonitorDomainList, Members: &m_AppMonitorDomainList, Type: smithy.ShapeTypeList})
+var s_AppMonitorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppMonitorId, Type: smithy.ShapeTypeString})
+var s_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppMonitorName, Type: smithy.ShapeTypeString})
+var s_AppMonitorPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppMonitorPlatform, Type: smithy.ShapeTypeString})
+var sAppMonitorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAppMonitorSummary, Members: &mAppMonitorSummary, Type: smithy.ShapeTypeStructure})
+var s_AppMonitorSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppMonitorSummaryList, Members: &m_AppMonitorSummaryList, Type: smithy.ShapeTypeList})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sBatchCreateRumMetricDefinitionsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateRumMetricDefinitionsError, Members: &mBatchCreateRumMetricDefinitionsError, Type: smithy.ShapeTypeStructure})
+var s_BatchCreateRumMetricDefinitionsErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchCreateRumMetricDefinitionsErrors, Members: &m_BatchCreateRumMetricDefinitionsErrors, Type: smithy.ShapeTypeList})
+var sBatchDeleteRumMetricDefinitionsError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteRumMetricDefinitionsError, Members: &mBatchDeleteRumMetricDefinitionsError, Type: smithy.ShapeTypeStructure})
+var s_BatchDeleteRumMetricDefinitionsErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDeleteRumMetricDefinitionsErrors, Members: &m_BatchDeleteRumMetricDefinitionsErrors, Type: smithy.ShapeTypeList})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var sCustomEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomEvents, Members: &mCustomEvents, Type: smithy.ShapeTypeStructure})
+var s_CustomEventsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomEventsStatus, Type: smithy.ShapeTypeString})
+var sCwLog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCwLog, Members: &mCwLog, Type: smithy.ShapeTypeStructure})
+var sDataStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataStorage, Members: &mDataStorage, Type: smithy.ShapeTypeStructure})
+var sDeobfuscationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeobfuscationConfiguration, Members: &mDeobfuscationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_DeobfuscationS3Uri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeobfuscationS3Uri, Type: smithy.ShapeTypeString})
+var s_DeobfuscationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeobfuscationStatus, Type: smithy.ShapeTypeString})
+var s_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DestinationArn, Type: smithy.ShapeTypeString})
+var s_DimensionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionKey, Type: smithy.ShapeTypeString})
+var s_DimensionKeysMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionKeysMap, Members: &m_DimensionKeysMap, Type: smithy.ShapeTypeMap})
+var s_DimensionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DimensionName, Type: smithy.ShapeTypeString})
+var s_EventData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventData, Type: smithy.ShapeTypeString})
+var s_EventDataList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDataList, Members: &m_EventDataList, Type: smithy.ShapeTypeList})
+var s_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var s_FavoritePages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FavoritePages, Members: &m_FavoritePages, Type: smithy.ShapeTypeList})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var s_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var sInvalidPolicyRevisionIdException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPolicyRevisionIdException, Members: &mInvalidPolicyRevisionIdException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_ISOTimestampString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ISOTimestampString, Type: smithy.ShapeTypeString})
+var sJavaScriptSourceMaps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJavaScriptSourceMaps, Members: &mJavaScriptSourceMaps, Type: smithy.ShapeTypeStructure})
+var s_JsonValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonValue, Traits: &t25, Type: smithy.ShapeTypeString})
+var sMalformedPolicyDocumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMalformedPolicyDocumentException, Members: &mMalformedPolicyDocumentException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_MaxQueryResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxQueryResults, Type: smithy.ShapeTypeInteger})
+var s_MaxResultsInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger})
+var sMetricDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDefinition, Members: &mMetricDefinition, Type: smithy.ShapeTypeStructure})
+var s_MetricDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDefinitionId, Type: smithy.ShapeTypeString})
+var s_MetricDefinitionIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDefinitionIds, Members: &m_MetricDefinitionIds, Type: smithy.ShapeTypeList})
+var sMetricDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDefinitionRequest, Members: &mMetricDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var s_MetricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDefinitions, Members: &m_MetricDefinitions, Type: smithy.ShapeTypeList})
+var s_MetricDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDefinitionsRequest, Members: &m_MetricDefinitionsRequest, Type: smithy.ShapeTypeList})
+var s_MetricDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDestination, Type: smithy.ShapeTypeString})
+var sMetricDestinationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDestinationSummary, Members: &mMetricDestinationSummary, Type: smithy.ShapeTypeStructure})
+var s_MetricDestinationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricDestinationSummaryList, Members: &m_MetricDestinationSummaryList, Type: smithy.ShapeTypeList})
+var s_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricName, Type: smithy.ShapeTypeString})
+var s_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var s_Pages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Pages, Members: &m_Pages, Type: smithy.ShapeTypeList})
+var sPolicyNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyNotFoundException, Members: &mPolicyNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var s_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sPolicySizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicySizeLimitExceededException, Members: &mPolicySizeLimitExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var sQueryFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueryFilter, Members: &mQueryFilter, Type: smithy.ShapeTypeStructure})
+var s_QueryFilterKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFilterKey, Type: smithy.ShapeTypeString})
+var s_QueryFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFilters, Members: &m_QueryFilters, Type: smithy.ShapeTypeList})
+var s_QueryFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFilterValue, Type: smithy.ShapeTypeString})
+var s_QueryFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryFilterValueList, Members: &m_QueryFilterValueList, Type: smithy.ShapeTypeList})
+var s_QueryTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryTimestamp, Type: smithy.ShapeTypeLong})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var sRumEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRumEvent, Members: &mRumEvent, Type: smithy.ShapeTypeStructure})
+var s_RumEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RumEventList, Members: &m_RumEventList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var s_SessionSampleRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionSampleRate, Type: smithy.ShapeTypeDouble})
+var s_StateEnum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateEnum, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Telemetries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Telemetries, Members: &m_Telemetries, Type: smithy.ShapeTypeList})
+var s_Telemetry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Telemetry, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var sTimeRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeRange, Members: &mTimeRange, Type: smithy.ShapeTypeStructure})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Type: smithy.ShapeTypeString})
+var s_UnitLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnitLabel, Type: smithy.ShapeTypeString})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString})
+var sUserDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserDetails, Members: &mUserDetails, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_ValueKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueKey, Type: smithy.ShapeTypeString})
+var sBatchCreateRumMetricDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateRumMetricDefinitionsRequest, Members: &mBatchCreateRumMetricDefinitionsRequest, Type: smithy.ShapeTypeStructure})
+var sBatchCreateRumMetricDefinitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchCreateRumMetricDefinitionsResponse, Members: &mBatchCreateRumMetricDefinitionsResponse, Type: smithy.ShapeTypeStructure})
+var sBatchDeleteRumMetricDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteRumMetricDefinitionsRequest, Members: &mBatchDeleteRumMetricDefinitionsRequest, Type: smithy.ShapeTypeStructure})
+var sBatchDeleteRumMetricDefinitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDeleteRumMetricDefinitionsResponse, Members: &mBatchDeleteRumMetricDefinitionsResponse, Type: smithy.ShapeTypeStructure})
+var sBatchGetRumMetricDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRumMetricDefinitionsRequest, Members: &mBatchGetRumMetricDefinitionsRequest, Type: smithy.ShapeTypeStructure})
+var sBatchGetRumMetricDefinitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetRumMetricDefinitionsResponse, Members: &mBatchGetRumMetricDefinitionsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAppMonitorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppMonitorRequest, Members: &mCreateAppMonitorRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAppMonitorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAppMonitorResponse, Members: &mCreateAppMonitorResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAppMonitorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppMonitorRequest, Members: &mDeleteAppMonitorRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAppMonitorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAppMonitorResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Members: &mDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteRumMetricsDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRumMetricsDestinationRequest, Members: &mDeleteRumMetricsDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRumMetricsDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRumMetricsDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sGetAppMonitorDataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppMonitorDataRequest, Members: &mGetAppMonitorDataRequest, Type: smithy.ShapeTypeStructure})
+var sGetAppMonitorDataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppMonitorDataResponse, Members: &mGetAppMonitorDataResponse, Type: smithy.ShapeTypeStructure})
+var sGetAppMonitorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppMonitorRequest, Members: &mGetAppMonitorRequest, Type: smithy.ShapeTypeStructure})
+var sGetAppMonitorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAppMonitorResponse, Members: &mGetAppMonitorResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sListAppMonitorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppMonitorsRequest, Members: &mListAppMonitorsRequest, Type: smithy.ShapeTypeStructure})
+var sListAppMonitorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAppMonitorsResponse, Members: &mListAppMonitorsResponse, Type: smithy.ShapeTypeStructure})
+var sListRumMetricsDestinationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRumMetricsDestinationsRequest, Members: &mListRumMetricsDestinationsRequest, Type: smithy.ShapeTypeStructure})
+var sListRumMetricsDestinationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRumMetricsDestinationsResponse, Members: &mListRumMetricsDestinationsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sPutRumEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRumEventsRequest, Members: &mPutRumEventsRequest, Type: smithy.ShapeTypeStructure})
+var sPutRumEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRumEventsResponse, Type: smithy.ShapeTypeStructure})
+var sPutRumMetricsDestinationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRumMetricsDestinationRequest, Members: &mPutRumMetricsDestinationRequest, Type: smithy.ShapeTypeStructure})
+var sPutRumMetricsDestinationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRumMetricsDestinationResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAppMonitorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppMonitorRequest, Members: &mUpdateAppMonitorRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAppMonitorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAppMonitorResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRumMetricDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRumMetricDefinitionRequest, Members: &mUpdateRumMetricDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRumMetricDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRumMetricDefinitionResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAppMonitor_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Type: smithy.ShapeTypeString})
+var sAppMonitor_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_AppMonitorDomain, Type: smithy.ShapeTypeString})
+var sAppMonitor_DomainList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainList", ID: &i_AppMonitorDomainList, Members: &m_AppMonitorDomainList, Type: smithy.ShapeTypeList})
+var sAppMonitor_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_AppMonitorId, Type: smithy.ShapeTypeString})
+var sAppMonitor_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i_ISOTimestampString, Type: smithy.ShapeTypeString})
+var sAppMonitor_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_ISOTimestampString, Type: smithy.ShapeTypeString})
+var sAppMonitor_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sAppMonitor_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_StateEnum, Type: smithy.ShapeTypeString})
+var sAppMonitor_AppMonitorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorConfiguration", ID: &iAppMonitorConfiguration, Members: &mAppMonitorConfiguration, Type: smithy.ShapeTypeStructure})
+var sAppMonitor_DataStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataStorage", ID: &iDataStorage, Members: &mDataStorage, Type: smithy.ShapeTypeStructure})
+var sAppMonitor_CustomEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEvents", ID: &iCustomEvents, Members: &mCustomEvents, Type: smithy.ShapeTypeStructure})
+var sAppMonitor_DeobfuscationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeobfuscationConfiguration", ID: &iDeobfuscationConfiguration, Members: &mDeobfuscationConfiguration, Type: smithy.ShapeTypeStructure})
+var sAppMonitor_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &i_AppMonitorPlatform, Type: smithy.ShapeTypeString})
+var sAppMonitorConfiguration_IdentityPoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityPoolId", ID: &i_IdentityPoolId, Type: smithy.ShapeTypeString})
+var sAppMonitorConfiguration_ExcludedPages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludedPages", ID: &i_Pages, Members: &m_Pages, Type: smithy.ShapeTypeList})
+var sAppMonitorConfiguration_IncludedPages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedPages", ID: &i_Pages, Members: &m_Pages, Type: smithy.ShapeTypeList})
+var sAppMonitorConfiguration_FavoritePages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FavoritePages", ID: &i_FavoritePages, Members: &m_FavoritePages, Type: smithy.ShapeTypeList})
+var sAppMonitorConfiguration_SessionSampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SessionSampleRate", ID: &i_SessionSampleRate, Type: smithy.ShapeTypeDouble})
+var sAppMonitorConfiguration_GuestRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GuestRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sAppMonitorConfiguration_AllowCookies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowCookies", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sAppMonitorConfiguration_Telemetries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Telemetries", ID: &i_Telemetries, Members: &m_Telemetries, Type: smithy.ShapeTypeList})
+var sAppMonitorConfiguration_EnableXRay = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableXRay", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sAppMonitorDetails_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sAppMonitorDetails_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString})
+var sAppMonitorDetails_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AppMonitorDomainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AppMonitorDomain, Type: smithy.ShapeTypeString})
+var sAppMonitorSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Type: smithy.ShapeTypeString})
+var sAppMonitorSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_AppMonitorId, Type: smithy.ShapeTypeString})
+var sAppMonitorSummary_Created = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Created", ID: &i_ISOTimestampString, Type: smithy.ShapeTypeString})
+var sAppMonitorSummary_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_ISOTimestampString, Type: smithy.ShapeTypeString})
+var sAppMonitorSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_StateEnum, Type: smithy.ShapeTypeString})
+var sAppMonitorSummary_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &i_AppMonitorPlatform, Type: smithy.ShapeTypeString})
+var s_AppMonitorSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAppMonitorSummary, Members: &mAppMonitorSummary, Type: smithy.ShapeTypeStructure})
+var sBatchCreateRumMetricDefinitionsError_MetricDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinition", ID: &iMetricDefinitionRequest, Members: &mMetricDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sBatchCreateRumMetricDefinitionsError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchCreateRumMetricDefinitionsError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var s_BatchCreateRumMetricDefinitionsErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchCreateRumMetricDefinitionsError, Members: &mBatchCreateRumMetricDefinitionsError, Type: smithy.ShapeTypeStructure})
+var sBatchDeleteRumMetricDefinitionsError_MetricDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitionId", ID: &i_MetricDefinitionId, Type: smithy.ShapeTypeString})
+var sBatchDeleteRumMetricDefinitionsError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchDeleteRumMetricDefinitionsError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var s_BatchDeleteRumMetricDefinitionsErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchDeleteRumMetricDefinitionsError, Members: &mBatchDeleteRumMetricDefinitionsError, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sCustomEvents_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_CustomEventsStatus, Type: smithy.ShapeTypeString})
+var sCwLog_CwLogEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CwLogEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCwLog_CwLogGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CwLogGroup", ID: &pString, Type: smithy.ShapeTypeString})
+var sDataStorage_CwLog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CwLog", ID: &iCwLog, Members: &mCwLog, Type: smithy.ShapeTypeStructure})
+var sDeobfuscationConfiguration_JavaScriptSourceMaps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JavaScriptSourceMaps", ID: &iJavaScriptSourceMaps, Members: &mJavaScriptSourceMaps, Type: smithy.ShapeTypeStructure})
+var s_DimensionKeysMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_DimensionKey, Type: smithy.ShapeTypeString})
+var s_DimensionKeysMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DimensionName, Type: smithy.ShapeTypeString})
+var s_EventDataList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventData, Type: smithy.ShapeTypeString})
+var s_FavoritePages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger})
+var sInvalidPolicyRevisionIdException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sJavaScriptSourceMaps_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_DeobfuscationStatus, Type: smithy.ShapeTypeString})
+var sJavaScriptSourceMaps_S3Uri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Uri", ID: &i_DeobfuscationS3Uri, Type: smithy.ShapeTypeString})
+var sMalformedPolicyDocumentException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sMetricDefinition_MetricDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitionId", ID: &i_MetricDefinitionId, Type: smithy.ShapeTypeString})
+var sMetricDefinition_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricName, Type: smithy.ShapeTypeString})
+var sMetricDefinition_ValueKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueKey", ID: &i_ValueKey, Type: smithy.ShapeTypeString})
+var sMetricDefinition_UnitLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnitLabel", ID: &i_UnitLabel, Type: smithy.ShapeTypeString})
+var sMetricDefinition_DimensionKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionKeys", ID: &i_DimensionKeysMap, Members: &m_DimensionKeysMap, Type: smithy.ShapeTypeMap})
+var sMetricDefinition_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sMetricDefinition_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var s_MetricDefinitionIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetricDefinitionId, Type: smithy.ShapeTypeString})
+var sMetricDefinitionRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MetricName, Type: smithy.ShapeTypeString})
+var sMetricDefinitionRequest_ValueKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueKey", ID: &i_ValueKey, Type: smithy.ShapeTypeString})
+var sMetricDefinitionRequest_UnitLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnitLabel", ID: &i_UnitLabel, Type: smithy.ShapeTypeString})
+var sMetricDefinitionRequest_DimensionKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DimensionKeys", ID: &i_DimensionKeysMap, Members: &m_DimensionKeysMap, Type: smithy.ShapeTypeMap})
+var sMetricDefinitionRequest_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventPattern", ID: &i_EventPattern, Type: smithy.ShapeTypeString})
+var sMetricDefinitionRequest_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Namespace", ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var s_MetricDefinitions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDefinition, Members: &mMetricDefinition, Type: smithy.ShapeTypeStructure})
+var s_MetricDefinitionsRequest_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDefinitionRequest, Members: &mMetricDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sMetricDestinationSummary_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_MetricDestination, Type: smithy.ShapeTypeString})
+var sMetricDestinationSummary_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_DestinationArn, Type: smithy.ShapeTypeString})
+var sMetricDestinationSummary_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var s_MetricDestinationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDestinationSummary, Members: &mMetricDestinationSummary, Type: smithy.ShapeTypeStructure})
+var s_Pages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sPolicyNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sPolicySizeLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sQueryFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_QueryFilterKey, Type: smithy.ShapeTypeString})
+var sQueryFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_QueryFilterValueList, Members: &m_QueryFilterValueList, Type: smithy.ShapeTypeList})
+var s_QueryFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueryFilter, Members: &mQueryFilter, Type: smithy.ShapeTypeStructure})
+var s_QueryFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_QueryFilterValue, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceName", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sRumEvent_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString})
+var sRumEvent_timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sRumEvent_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString})
+var sRumEvent_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_JsonValue, Traits: &t27, Type: smithy.ShapeTypeString})
+var sRumEvent_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_JsonValue, Traits: &t27, Type: smithy.ShapeTypeString})
+var s_RumEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRumEvent, Members: &mRumEvent, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Telemetries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Telemetry, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger})
+var sTimeRange_After = smithy.NewStaticSchema(smithy.StaticSchema{Member: "After", ID: &i_QueryTimestamp, Type: smithy.ShapeTypeLong})
+var sTimeRange_Before = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Before", ID: &i_QueryTimestamp, Type: smithy.ShapeTypeLong})
+var sUserDetails_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &pString, Type: smithy.ShapeTypeString})
+var sUserDetails_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchCreateRumMetricDefinitionsRequest_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorName", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchCreateRumMetricDefinitionsRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_MetricDestination, Type: smithy.ShapeTypeString})
+var sBatchCreateRumMetricDefinitionsRequest_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_DestinationArn, Type: smithy.ShapeTypeString})
+var sBatchCreateRumMetricDefinitionsRequest_MetricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitions", ID: &i_MetricDefinitionsRequest, Members: &m_MetricDefinitionsRequest, Type: smithy.ShapeTypeList})
+var sBatchCreateRumMetricDefinitionsResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchCreateRumMetricDefinitionsErrors, Members: &m_BatchCreateRumMetricDefinitionsErrors, Type: smithy.ShapeTypeList})
+var sBatchCreateRumMetricDefinitionsResponse_MetricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitions", ID: &i_MetricDefinitions, Members: &m_MetricDefinitions, Type: smithy.ShapeTypeList})
+var sBatchDeleteRumMetricDefinitionsRequest_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorName", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchDeleteRumMetricDefinitionsRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_MetricDestination, Traits: &t31, Type: smithy.ShapeTypeString})
+var sBatchDeleteRumMetricDefinitionsRequest_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_DestinationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sBatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitionIds", ID: &i_MetricDefinitionIds, Members: &m_MetricDefinitionIds, Traits: &t33, Type: smithy.ShapeTypeList})
+var sBatchDeleteRumMetricDefinitionsResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchDeleteRumMetricDefinitionsErrors, Members: &m_BatchDeleteRumMetricDefinitionsErrors, Type: smithy.ShapeTypeList})
+var sBatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitionIds", ID: &i_MetricDefinitionIds, Members: &m_MetricDefinitionIds, Type: smithy.ShapeTypeList})
+var sBatchGetRumMetricDefinitionsRequest_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorName", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sBatchGetRumMetricDefinitionsRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_MetricDestination, Traits: &t31, Type: smithy.ShapeTypeString})
+var sBatchGetRumMetricDefinitionsRequest_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_DestinationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sBatchGetRumMetricDefinitionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sBatchGetRumMetricDefinitionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString})
+var sBatchGetRumMetricDefinitionsResponse_MetricDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitions", ID: &i_MetricDefinitions, Members: &m_MetricDefinitions, Type: smithy.ShapeTypeList})
+var sBatchGetRumMetricDefinitionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateAppMonitorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Type: smithy.ShapeTypeString})
+var sCreateAppMonitorRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_AppMonitorDomain, Type: smithy.ShapeTypeString})
+var sCreateAppMonitorRequest_DomainList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainList", ID: &i_AppMonitorDomainList, Members: &m_AppMonitorDomainList, Type: smithy.ShapeTypeList})
+var sCreateAppMonitorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateAppMonitorRequest_AppMonitorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorConfiguration", ID: &iAppMonitorConfiguration, Members: &mAppMonitorConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAppMonitorRequest_CwLogEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CwLogEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateAppMonitorRequest_CustomEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEvents", ID: &iCustomEvents, Members: &mCustomEvents, Type: smithy.ShapeTypeStructure})
+var sCreateAppMonitorRequest_DeobfuscationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeobfuscationConfiguration", ID: &iDeobfuscationConfiguration, Members: &mDeobfuscationConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAppMonitorRequest_Platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Platform", ID: &i_AppMonitorPlatform, Type: smithy.ShapeTypeString})
+var sCreateAppMonitorResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_AppMonitorId, Type: smithy.ShapeTypeString})
+var sDeleteAppMonitorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Traits: &t36, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyResponse_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sDeleteRumMetricsDestinationRequest_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorName", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sDeleteRumMetricsDestinationRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_MetricDestination, Traits: &t31, Type: smithy.ShapeTypeString})
+var sDeleteRumMetricsDestinationRequest_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_DestinationArn, Traits: &t32, Type: smithy.ShapeTypeString})
+var sGetAppMonitorDataRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetAppMonitorDataRequest_TimeRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeRange", ID: &iTimeRange, Members: &mTimeRange, Type: smithy.ShapeTypeStructure})
+var sGetAppMonitorDataRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_QueryFilters, Members: &m_QueryFilters, Type: smithy.ShapeTypeList})
+var sGetAppMonitorDataRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxQueryResults, Type: smithy.ShapeTypeInteger})
+var sGetAppMonitorDataRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sGetAppMonitorDataResponse_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_EventDataList, Members: &m_EventDataList, Type: smithy.ShapeTypeList})
+var sGetAppMonitorDataResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_Token, Type: smithy.ShapeTypeString})
+var sGetAppMonitorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetAppMonitorResponse_AppMonitor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitor", ID: &iAppMonitor, Members: &mAppMonitor, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sListAppMonitorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sListAppMonitorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListAppMonitorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListAppMonitorsResponse_AppMonitorSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorSummaries", ID: &i_AppMonitorSummaryList, Members: &m_AppMonitorSummaryList, Type: smithy.ShapeTypeList})
+var sListRumMetricsDestinationsRequest_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorName", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListRumMetricsDestinationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Traits: &t34, Type: smithy.ShapeTypeInteger})
+var sListRumMetricsDestinationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t35, Type: smithy.ShapeTypeString})
+var sListRumMetricsDestinationsResponse_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_MetricDestinationSummaryList, Members: &m_MetricDestinationSummaryList, Type: smithy.ShapeTypeList})
+var sListRumMetricsDestinationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sPutResourcePolicyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &pString, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &pString, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sPutRumEventsRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_AppMonitorId, Traits: &t30, Type: smithy.ShapeTypeString})
+var sPutRumEventsRequest_BatchId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchId", ID: &pString, Type: smithy.ShapeTypeString})
+var sPutRumEventsRequest_AppMonitorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorDetails", ID: &iAppMonitorDetails, Members: &mAppMonitorDetails, Type: smithy.ShapeTypeStructure})
+var sPutRumEventsRequest_UserDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserDetails", ID: &iUserDetails, Members: &mUserDetails, Type: smithy.ShapeTypeStructure})
+var sPutRumEventsRequest_RumEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RumEvents", ID: &i_RumEventList, Members: &m_RumEventList, Type: smithy.ShapeTypeList})
+var sPutRumEventsRequest_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_Alias, Type: smithy.ShapeTypeString})
+var sPutRumMetricsDestinationRequest_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorName", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sPutRumMetricsDestinationRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_MetricDestination, Type: smithy.ShapeTypeString})
+var sPutRumMetricsDestinationRequest_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_DestinationArn, Type: smithy.ShapeTypeString})
+var sPutRumMetricsDestinationRequest_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_Arn, Traits: &t30, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t37, Type: smithy.ShapeTypeList})
+var sUpdateAppMonitorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sUpdateAppMonitorRequest_Domain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domain", ID: &i_AppMonitorDomain, Type: smithy.ShapeTypeString})
+var sUpdateAppMonitorRequest_DomainList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainList", ID: &i_AppMonitorDomainList, Members: &m_AppMonitorDomainList, Type: smithy.ShapeTypeList})
+var sUpdateAppMonitorRequest_AppMonitorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorConfiguration", ID: &iAppMonitorConfiguration, Members: &mAppMonitorConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateAppMonitorRequest_CwLogEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CwLogEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateAppMonitorRequest_CustomEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomEvents", ID: &iCustomEvents, Members: &mCustomEvents, Type: smithy.ShapeTypeStructure})
+var sUpdateAppMonitorRequest_DeobfuscationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeobfuscationConfiguration", ID: &iDeobfuscationConfiguration, Members: &mDeobfuscationConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateRumMetricDefinitionRequest_AppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppMonitorName", ID: &i_AppMonitorName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sUpdateRumMetricDefinitionRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_MetricDestination, Type: smithy.ShapeTypeString})
+var sUpdateRumMetricDefinitionRequest_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_DestinationArn, Type: smithy.ShapeTypeString})
+var sUpdateRumMetricDefinitionRequest_MetricDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinition", ID: &iMetricDefinitionRequest, Members: &mMetricDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRumMetricDefinitionRequest_MetricDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricDefinitionId", ID: &i_MetricDefinitionId, Type: smithy.ShapeTypeString})
+
+var BatchCreateRumMetricDefinitions = &sBatchCreateRumMetricDefinitions
+
+var BatchDeleteRumMetricDefinitions = &sBatchDeleteRumMetricDefinitions
+
+var BatchGetRumMetricDefinitions = &sBatchGetRumMetricDefinitions
+
+var CreateAppMonitor = &sCreateAppMonitor
+
+var DeleteAppMonitor = &sDeleteAppMonitor
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteRumMetricsDestination = &sDeleteRumMetricsDestination
+
+var GetAppMonitor = &sGetAppMonitor
+
+var GetAppMonitorData = &sGetAppMonitorData
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var ListAppMonitors = &sListAppMonitors
+
+var ListRumMetricsDestinations = &sListRumMetricsDestinations
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var PutRumEvents = &sPutRumEvents
+
+var PutRumMetricsDestination = &sPutRumMetricsDestination
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAppMonitor = &sUpdateAppMonitor
+
+var UpdateRumMetricDefinition = &sUpdateRumMetricDefinition
+
+var _RUM = &s_RUM
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _Alias = &s_Alias
+
+var AppMonitor = &sAppMonitor
+var AppMonitor_Name = &sAppMonitor_Name
+var AppMonitor_Domain = &sAppMonitor_Domain
+var AppMonitor_DomainList = &sAppMonitor_DomainList
+var AppMonitor_Id = &sAppMonitor_Id
+var AppMonitor_Created = &sAppMonitor_Created
+var AppMonitor_LastModified = &sAppMonitor_LastModified
+var AppMonitor_Tags = &sAppMonitor_Tags
+var AppMonitor_State = &sAppMonitor_State
+var AppMonitor_AppMonitorConfiguration = &sAppMonitor_AppMonitorConfiguration
+var AppMonitor_DataStorage = &sAppMonitor_DataStorage
+var AppMonitor_CustomEvents = &sAppMonitor_CustomEvents
+var AppMonitor_DeobfuscationConfiguration = &sAppMonitor_DeobfuscationConfiguration
+var AppMonitor_Platform = &sAppMonitor_Platform
+
+var AppMonitorConfiguration = &sAppMonitorConfiguration
+var AppMonitorConfiguration_IdentityPoolId = &sAppMonitorConfiguration_IdentityPoolId
+var AppMonitorConfiguration_ExcludedPages = &sAppMonitorConfiguration_ExcludedPages
+var AppMonitorConfiguration_IncludedPages = &sAppMonitorConfiguration_IncludedPages
+var AppMonitorConfiguration_FavoritePages = &sAppMonitorConfiguration_FavoritePages
+var AppMonitorConfiguration_SessionSampleRate = &sAppMonitorConfiguration_SessionSampleRate
+var AppMonitorConfiguration_GuestRoleArn = &sAppMonitorConfiguration_GuestRoleArn
+var AppMonitorConfiguration_AllowCookies = &sAppMonitorConfiguration_AllowCookies
+var AppMonitorConfiguration_Telemetries = &sAppMonitorConfiguration_Telemetries
+var AppMonitorConfiguration_EnableXRay = &sAppMonitorConfiguration_EnableXRay
+
+var AppMonitorDetails = &sAppMonitorDetails
+var AppMonitorDetails_name = &sAppMonitorDetails_name
+var AppMonitorDetails_id = &sAppMonitorDetails_id
+var AppMonitorDetails_version = &sAppMonitorDetails_version
+
+var _AppMonitorDomain = &s_AppMonitorDomain
+
+var _AppMonitorDomainList = &s_AppMonitorDomainList
+var _AppMonitorDomainList_member = &s_AppMonitorDomainList_member
+
+var _AppMonitorId = &s_AppMonitorId
+
+var _AppMonitorName = &s_AppMonitorName
+
+var _AppMonitorPlatform = &s_AppMonitorPlatform
+
+var AppMonitorSummary = &sAppMonitorSummary
+var AppMonitorSummary_Name = &sAppMonitorSummary_Name
+var AppMonitorSummary_Id = &sAppMonitorSummary_Id
+var AppMonitorSummary_Created = &sAppMonitorSummary_Created
+var AppMonitorSummary_LastModified = &sAppMonitorSummary_LastModified
+var AppMonitorSummary_State = &sAppMonitorSummary_State
+var AppMonitorSummary_Platform = &sAppMonitorSummary_Platform
+
+var _AppMonitorSummaryList = &s_AppMonitorSummaryList
+var _AppMonitorSummaryList_member = &s_AppMonitorSummaryList_member
+
+var _Arn = &s_Arn
+
+var BatchCreateRumMetricDefinitionsError = &sBatchCreateRumMetricDefinitionsError
+var BatchCreateRumMetricDefinitionsError_MetricDefinition = &sBatchCreateRumMetricDefinitionsError_MetricDefinition
+var BatchCreateRumMetricDefinitionsError_ErrorCode = &sBatchCreateRumMetricDefinitionsError_ErrorCode
+var BatchCreateRumMetricDefinitionsError_ErrorMessage = &sBatchCreateRumMetricDefinitionsError_ErrorMessage
+
+var _BatchCreateRumMetricDefinitionsErrors = &s_BatchCreateRumMetricDefinitionsErrors
+var _BatchCreateRumMetricDefinitionsErrors_member = &s_BatchCreateRumMetricDefinitionsErrors_member
+
+var BatchDeleteRumMetricDefinitionsError = &sBatchDeleteRumMetricDefinitionsError
+var BatchDeleteRumMetricDefinitionsError_MetricDefinitionId = &sBatchDeleteRumMetricDefinitionsError_MetricDefinitionId
+var BatchDeleteRumMetricDefinitionsError_ErrorCode = &sBatchDeleteRumMetricDefinitionsError_ErrorCode
+var BatchDeleteRumMetricDefinitionsError_ErrorMessage = &sBatchDeleteRumMetricDefinitionsError_ErrorMessage
+
+var _BatchDeleteRumMetricDefinitionsErrors = &s_BatchDeleteRumMetricDefinitionsErrors
+var _BatchDeleteRumMetricDefinitionsErrors_member = &s_BatchDeleteRumMetricDefinitionsErrors_member
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceName = &sConflictException_resourceName
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var CustomEvents = &sCustomEvents
+var CustomEvents_Status = &sCustomEvents_Status
+
+var _CustomEventsStatus = &s_CustomEventsStatus
+
+var CwLog = &sCwLog
+var CwLog_CwLogEnabled = &sCwLog_CwLogEnabled
+var CwLog_CwLogGroup = &sCwLog_CwLogGroup
+
+var DataStorage = &sDataStorage
+var DataStorage_CwLog = &sDataStorage_CwLog
+
+var DeobfuscationConfiguration = &sDeobfuscationConfiguration
+var DeobfuscationConfiguration_JavaScriptSourceMaps = &sDeobfuscationConfiguration_JavaScriptSourceMaps
+
+var _DeobfuscationS3Uri = &s_DeobfuscationS3Uri
+
+var _DeobfuscationStatus = &s_DeobfuscationStatus
+
+var _DestinationArn = &s_DestinationArn
+
+var _DimensionKey = &s_DimensionKey
+
+var _DimensionKeysMap = &s_DimensionKeysMap
+var _DimensionKeysMap_key = &s_DimensionKeysMap_key
+var _DimensionKeysMap_value = &s_DimensionKeysMap_value
+
+var _DimensionName = &s_DimensionName
+
+var _EventData = &s_EventData
+
+var _EventDataList = &s_EventDataList
+var _EventDataList_member = &s_EventDataList_member
+
+var _EventPattern = &s_EventPattern
+
+var _FavoritePages = &s_FavoritePages
+var _FavoritePages_member = &s_FavoritePages_member
+
+var _IamRoleArn = &s_IamRoleArn
+
+var _IdentityPoolId = &s_IdentityPoolId
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var InvalidPolicyRevisionIdException = &sInvalidPolicyRevisionIdException
+var InvalidPolicyRevisionIdException_message = &sInvalidPolicyRevisionIdException_message
+
+var _ISOTimestampString = &s_ISOTimestampString
+
+var JavaScriptSourceMaps = &sJavaScriptSourceMaps
+var JavaScriptSourceMaps_Status = &sJavaScriptSourceMaps_Status
+var JavaScriptSourceMaps_S3Uri = &sJavaScriptSourceMaps_S3Uri
+
+var _JsonValue = &s_JsonValue
+
+var MalformedPolicyDocumentException = &sMalformedPolicyDocumentException
+var MalformedPolicyDocumentException_message = &sMalformedPolicyDocumentException_message
+
+var _MaxQueryResults = &s_MaxQueryResults
+
+var _MaxResultsInteger = &s_MaxResultsInteger
+
+var MetricDefinition = &sMetricDefinition
+var MetricDefinition_MetricDefinitionId = &sMetricDefinition_MetricDefinitionId
+var MetricDefinition_Name = &sMetricDefinition_Name
+var MetricDefinition_ValueKey = &sMetricDefinition_ValueKey
+var MetricDefinition_UnitLabel = &sMetricDefinition_UnitLabel
+var MetricDefinition_DimensionKeys = &sMetricDefinition_DimensionKeys
+var MetricDefinition_EventPattern = &sMetricDefinition_EventPattern
+var MetricDefinition_Namespace = &sMetricDefinition_Namespace
+
+var _MetricDefinitionId = &s_MetricDefinitionId
+
+var _MetricDefinitionIds = &s_MetricDefinitionIds
+var _MetricDefinitionIds_member = &s_MetricDefinitionIds_member
+
+var MetricDefinitionRequest = &sMetricDefinitionRequest
+var MetricDefinitionRequest_Name = &sMetricDefinitionRequest_Name
+var MetricDefinitionRequest_ValueKey = &sMetricDefinitionRequest_ValueKey
+var MetricDefinitionRequest_UnitLabel = &sMetricDefinitionRequest_UnitLabel
+var MetricDefinitionRequest_DimensionKeys = &sMetricDefinitionRequest_DimensionKeys
+var MetricDefinitionRequest_EventPattern = &sMetricDefinitionRequest_EventPattern
+var MetricDefinitionRequest_Namespace = &sMetricDefinitionRequest_Namespace
+
+var _MetricDefinitions = &s_MetricDefinitions
+var _MetricDefinitions_member = &s_MetricDefinitions_member
+
+var _MetricDefinitionsRequest = &s_MetricDefinitionsRequest
+var _MetricDefinitionsRequest_member = &s_MetricDefinitionsRequest_member
+
+var _MetricDestination = &s_MetricDestination
+
+var MetricDestinationSummary = &sMetricDestinationSummary
+var MetricDestinationSummary_Destination = &sMetricDestinationSummary_Destination
+var MetricDestinationSummary_DestinationArn = &sMetricDestinationSummary_DestinationArn
+var MetricDestinationSummary_IamRoleArn = &sMetricDestinationSummary_IamRoleArn
+
+var _MetricDestinationSummaryList = &s_MetricDestinationSummaryList
+var _MetricDestinationSummaryList_member = &s_MetricDestinationSummaryList_member
+
+var _MetricName = &s_MetricName
+
+var _Namespace = &s_Namespace
+
+var _Pages = &s_Pages
+var _Pages_member = &s_Pages_member
+
+var PolicyNotFoundException = &sPolicyNotFoundException
+var PolicyNotFoundException_message = &sPolicyNotFoundException_message
+
+var _PolicyRevisionId = &s_PolicyRevisionId
+
+var PolicySizeLimitExceededException = &sPolicySizeLimitExceededException
+var PolicySizeLimitExceededException_message = &sPolicySizeLimitExceededException_message
+
+var QueryFilter = &sQueryFilter
+var QueryFilter_Name = &sQueryFilter_Name
+var QueryFilter_Values = &sQueryFilter_Values
+
+var _QueryFilterKey = &s_QueryFilterKey
+
+var _QueryFilters = &s_QueryFilters
+var _QueryFilters_member = &s_QueryFilters_member
+
+var _QueryFilterValue = &s_QueryFilterValue
+
+var _QueryFilterValueList = &s_QueryFilterValueList
+var _QueryFilterValueList_member = &s_QueryFilterValueList_member
+
+var _QueryTimestamp = &s_QueryTimestamp
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceName = &sResourceNotFoundException_resourceName
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var RumEvent = &sRumEvent
+var RumEvent_id = &sRumEvent_id
+var RumEvent_timestamp = &sRumEvent_timestamp
+var RumEvent_type = &sRumEvent_type
+var RumEvent_metadata = &sRumEvent_metadata
+var RumEvent_details = &sRumEvent_details
+
+var _RumEventList = &s_RumEventList
+var _RumEventList_member = &s_RumEventList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _SessionSampleRate = &s_SessionSampleRate
+
+var _StateEnum = &s_StateEnum
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _Telemetries = &s_Telemetries
+var _Telemetries_member = &s_Telemetries_member
+
+var _Telemetry = &s_Telemetry
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var TimeRange = &sTimeRange
+var TimeRange_After = &sTimeRange_After
+var TimeRange_Before = &sTimeRange_Before
+
+var _Token = &s_Token
+
+var _UnitLabel = &s_UnitLabel
+
+var _Url = &s_Url
+
+var UserDetails = &sUserDetails
+var UserDetails_userId = &sUserDetails_userId
+var UserDetails_sessionId = &sUserDetails_sessionId
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _ValueKey = &s_ValueKey
+
+var BatchCreateRumMetricDefinitionsRequest = &sBatchCreateRumMetricDefinitionsRequest
+var BatchCreateRumMetricDefinitionsRequest_AppMonitorName = &sBatchCreateRumMetricDefinitionsRequest_AppMonitorName
+var BatchCreateRumMetricDefinitionsRequest_Destination = &sBatchCreateRumMetricDefinitionsRequest_Destination
+var BatchCreateRumMetricDefinitionsRequest_DestinationArn = &sBatchCreateRumMetricDefinitionsRequest_DestinationArn
+var BatchCreateRumMetricDefinitionsRequest_MetricDefinitions = &sBatchCreateRumMetricDefinitionsRequest_MetricDefinitions
+
+var BatchCreateRumMetricDefinitionsResponse = &sBatchCreateRumMetricDefinitionsResponse
+var BatchCreateRumMetricDefinitionsResponse_Errors = &sBatchCreateRumMetricDefinitionsResponse_Errors
+var BatchCreateRumMetricDefinitionsResponse_MetricDefinitions = &sBatchCreateRumMetricDefinitionsResponse_MetricDefinitions
+
+var BatchDeleteRumMetricDefinitionsRequest = &sBatchDeleteRumMetricDefinitionsRequest
+var BatchDeleteRumMetricDefinitionsRequest_AppMonitorName = &sBatchDeleteRumMetricDefinitionsRequest_AppMonitorName
+var BatchDeleteRumMetricDefinitionsRequest_Destination = &sBatchDeleteRumMetricDefinitionsRequest_Destination
+var BatchDeleteRumMetricDefinitionsRequest_DestinationArn = &sBatchDeleteRumMetricDefinitionsRequest_DestinationArn
+var BatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds = &sBatchDeleteRumMetricDefinitionsRequest_MetricDefinitionIds
+
+var BatchDeleteRumMetricDefinitionsResponse = &sBatchDeleteRumMetricDefinitionsResponse
+var BatchDeleteRumMetricDefinitionsResponse_Errors = &sBatchDeleteRumMetricDefinitionsResponse_Errors
+var BatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds = &sBatchDeleteRumMetricDefinitionsResponse_MetricDefinitionIds
+
+var BatchGetRumMetricDefinitionsRequest = &sBatchGetRumMetricDefinitionsRequest
+var BatchGetRumMetricDefinitionsRequest_AppMonitorName = &sBatchGetRumMetricDefinitionsRequest_AppMonitorName
+var BatchGetRumMetricDefinitionsRequest_Destination = &sBatchGetRumMetricDefinitionsRequest_Destination
+var BatchGetRumMetricDefinitionsRequest_DestinationArn = &sBatchGetRumMetricDefinitionsRequest_DestinationArn
+var BatchGetRumMetricDefinitionsRequest_MaxResults = &sBatchGetRumMetricDefinitionsRequest_MaxResults
+var BatchGetRumMetricDefinitionsRequest_NextToken = &sBatchGetRumMetricDefinitionsRequest_NextToken
+
+var BatchGetRumMetricDefinitionsResponse = &sBatchGetRumMetricDefinitionsResponse
+var BatchGetRumMetricDefinitionsResponse_MetricDefinitions = &sBatchGetRumMetricDefinitionsResponse_MetricDefinitions
+var BatchGetRumMetricDefinitionsResponse_NextToken = &sBatchGetRumMetricDefinitionsResponse_NextToken
+
+var CreateAppMonitorRequest = &sCreateAppMonitorRequest
+var CreateAppMonitorRequest_Name = &sCreateAppMonitorRequest_Name
+var CreateAppMonitorRequest_Domain = &sCreateAppMonitorRequest_Domain
+var CreateAppMonitorRequest_DomainList = &sCreateAppMonitorRequest_DomainList
+var CreateAppMonitorRequest_Tags = &sCreateAppMonitorRequest_Tags
+var CreateAppMonitorRequest_AppMonitorConfiguration = &sCreateAppMonitorRequest_AppMonitorConfiguration
+var CreateAppMonitorRequest_CwLogEnabled = &sCreateAppMonitorRequest_CwLogEnabled
+var CreateAppMonitorRequest_CustomEvents = &sCreateAppMonitorRequest_CustomEvents
+var CreateAppMonitorRequest_DeobfuscationConfiguration = &sCreateAppMonitorRequest_DeobfuscationConfiguration
+var CreateAppMonitorRequest_Platform = &sCreateAppMonitorRequest_Platform
+
+var CreateAppMonitorResponse = &sCreateAppMonitorResponse
+var CreateAppMonitorResponse_Id = &sCreateAppMonitorResponse_Id
+
+var DeleteAppMonitorRequest = &sDeleteAppMonitorRequest
+var DeleteAppMonitorRequest_Name = &sDeleteAppMonitorRequest_Name
+
+var DeleteAppMonitorResponse = &sDeleteAppMonitorResponse
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_Name = &sDeleteResourcePolicyRequest_Name
+var DeleteResourcePolicyRequest_PolicyRevisionId = &sDeleteResourcePolicyRequest_PolicyRevisionId
+
+var DeleteResourcePolicyResponse = &sDeleteResourcePolicyResponse
+var DeleteResourcePolicyResponse_PolicyRevisionId = &sDeleteResourcePolicyResponse_PolicyRevisionId
+
+var DeleteRumMetricsDestinationRequest = &sDeleteRumMetricsDestinationRequest
+var DeleteRumMetricsDestinationRequest_AppMonitorName = &sDeleteRumMetricsDestinationRequest_AppMonitorName
+var DeleteRumMetricsDestinationRequest_Destination = &sDeleteRumMetricsDestinationRequest_Destination
+var DeleteRumMetricsDestinationRequest_DestinationArn = &sDeleteRumMetricsDestinationRequest_DestinationArn
+
+var DeleteRumMetricsDestinationResponse = &sDeleteRumMetricsDestinationResponse
+
+var GetAppMonitorDataRequest = &sGetAppMonitorDataRequest
+var GetAppMonitorDataRequest_Name = &sGetAppMonitorDataRequest_Name
+var GetAppMonitorDataRequest_TimeRange = &sGetAppMonitorDataRequest_TimeRange
+var GetAppMonitorDataRequest_Filters = &sGetAppMonitorDataRequest_Filters
+var GetAppMonitorDataRequest_MaxResults = &sGetAppMonitorDataRequest_MaxResults
+var GetAppMonitorDataRequest_NextToken = &sGetAppMonitorDataRequest_NextToken
+
+var GetAppMonitorDataResponse = &sGetAppMonitorDataResponse
+var GetAppMonitorDataResponse_Events = &sGetAppMonitorDataResponse_Events
+var GetAppMonitorDataResponse_NextToken = &sGetAppMonitorDataResponse_NextToken
+
+var GetAppMonitorRequest = &sGetAppMonitorRequest
+var GetAppMonitorRequest_Name = &sGetAppMonitorRequest_Name
+
+var GetAppMonitorResponse = &sGetAppMonitorResponse
+var GetAppMonitorResponse_AppMonitor = &sGetAppMonitorResponse_AppMonitor
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_Name = &sGetResourcePolicyRequest_Name
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_PolicyDocument = &sGetResourcePolicyResponse_PolicyDocument
+var GetResourcePolicyResponse_PolicyRevisionId = &sGetResourcePolicyResponse_PolicyRevisionId
+
+var ListAppMonitorsRequest = &sListAppMonitorsRequest
+var ListAppMonitorsRequest_MaxResults = &sListAppMonitorsRequest_MaxResults
+var ListAppMonitorsRequest_NextToken = &sListAppMonitorsRequest_NextToken
+
+var ListAppMonitorsResponse = &sListAppMonitorsResponse
+var ListAppMonitorsResponse_NextToken = &sListAppMonitorsResponse_NextToken
+var ListAppMonitorsResponse_AppMonitorSummaries = &sListAppMonitorsResponse_AppMonitorSummaries
+
+var ListRumMetricsDestinationsRequest = &sListRumMetricsDestinationsRequest
+var ListRumMetricsDestinationsRequest_AppMonitorName = &sListRumMetricsDestinationsRequest_AppMonitorName
+var ListRumMetricsDestinationsRequest_MaxResults = &sListRumMetricsDestinationsRequest_MaxResults
+var ListRumMetricsDestinationsRequest_NextToken = &sListRumMetricsDestinationsRequest_NextToken
+
+var ListRumMetricsDestinationsResponse = &sListRumMetricsDestinationsResponse
+var ListRumMetricsDestinationsResponse_Destinations = &sListRumMetricsDestinationsResponse_Destinations
+var ListRumMetricsDestinationsResponse_NextToken = &sListRumMetricsDestinationsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_ResourceArn = &sListTagsForResourceResponse_ResourceArn
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_Name = &sPutResourcePolicyRequest_Name
+var PutResourcePolicyRequest_PolicyDocument = &sPutResourcePolicyRequest_PolicyDocument
+var PutResourcePolicyRequest_PolicyRevisionId = &sPutResourcePolicyRequest_PolicyRevisionId
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+var PutResourcePolicyResponse_PolicyDocument = &sPutResourcePolicyResponse_PolicyDocument
+var PutResourcePolicyResponse_PolicyRevisionId = &sPutResourcePolicyResponse_PolicyRevisionId
+
+var PutRumEventsRequest = &sPutRumEventsRequest
+var PutRumEventsRequest_Id = &sPutRumEventsRequest_Id
+var PutRumEventsRequest_BatchId = &sPutRumEventsRequest_BatchId
+var PutRumEventsRequest_AppMonitorDetails = &sPutRumEventsRequest_AppMonitorDetails
+var PutRumEventsRequest_UserDetails = &sPutRumEventsRequest_UserDetails
+var PutRumEventsRequest_RumEvents = &sPutRumEventsRequest_RumEvents
+var PutRumEventsRequest_Alias = &sPutRumEventsRequest_Alias
+
+var PutRumEventsResponse = &sPutRumEventsResponse
+
+var PutRumMetricsDestinationRequest = &sPutRumMetricsDestinationRequest
+var PutRumMetricsDestinationRequest_AppMonitorName = &sPutRumMetricsDestinationRequest_AppMonitorName
+var PutRumMetricsDestinationRequest_Destination = &sPutRumMetricsDestinationRequest_Destination
+var PutRumMetricsDestinationRequest_DestinationArn = &sPutRumMetricsDestinationRequest_DestinationArn
+var PutRumMetricsDestinationRequest_IamRoleArn = &sPutRumMetricsDestinationRequest_IamRoleArn
+
+var PutRumMetricsDestinationResponse = &sPutRumMetricsDestinationResponse
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAppMonitorRequest = &sUpdateAppMonitorRequest
+var UpdateAppMonitorRequest_Name = &sUpdateAppMonitorRequest_Name
+var UpdateAppMonitorRequest_Domain = &sUpdateAppMonitorRequest_Domain
+var UpdateAppMonitorRequest_DomainList = &sUpdateAppMonitorRequest_DomainList
+var UpdateAppMonitorRequest_AppMonitorConfiguration = &sUpdateAppMonitorRequest_AppMonitorConfiguration
+var UpdateAppMonitorRequest_CwLogEnabled = &sUpdateAppMonitorRequest_CwLogEnabled
+var UpdateAppMonitorRequest_CustomEvents = &sUpdateAppMonitorRequest_CustomEvents
+var UpdateAppMonitorRequest_DeobfuscationConfiguration = &sUpdateAppMonitorRequest_DeobfuscationConfiguration
+
+var UpdateAppMonitorResponse = &sUpdateAppMonitorResponse
+
+var UpdateRumMetricDefinitionRequest = &sUpdateRumMetricDefinitionRequest
+var UpdateRumMetricDefinitionRequest_AppMonitorName = &sUpdateRumMetricDefinitionRequest_AppMonitorName
+var UpdateRumMetricDefinitionRequest_Destination = &sUpdateRumMetricDefinitionRequest_Destination
+var UpdateRumMetricDefinitionRequest_DestinationArn = &sUpdateRumMetricDefinitionRequest_DestinationArn
+var UpdateRumMetricDefinitionRequest_MetricDefinition = &sUpdateRumMetricDefinitionRequest_MetricDefinition
+var UpdateRumMetricDefinitionRequest_MetricDefinitionId = &sUpdateRumMetricDefinitionRequest_MetricDefinitionId
+
+var UpdateRumMetricDefinitionResponse = &sUpdateRumMetricDefinitionResponse
+
+var RUM = &smithy.ServiceSchema{Schema: &s_RUM, Version: "2018-05-10"}

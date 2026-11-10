@@ -4,2651 +4,1929 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateCustomDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AssociateCustomDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateAutoScalingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateObservabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateObservabilityConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateService",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateVpcConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateVpcConnector",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateVpcIngressConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateVpcIngressConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteAutoScalingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteObservabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteObservabilityConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteService",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVpcConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteVpcConnector",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVpcIngressConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteVpcIngressConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeAutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeAutoScalingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCustomDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeCustomDomains",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeObservabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeObservabilityConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeService",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeVpcConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeVpcConnector",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeVpcIngressConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeVpcIngressConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateCustomDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DisassociateCustomDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutoScalingConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListAutoScalingConfigurations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListObservabilityConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListObservabilityConfigurations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListOperations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListServices",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServicesForAutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListServicesForAutoScalingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVpcConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListVpcConnectors",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVpcIngressConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListVpcIngressConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var PauseService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "PauseService",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResumeService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ResumeService",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "StartDeployment",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDefaultAutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateDefaultAutoScalingConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateService",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateVpcIngressConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateVpcIngressConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AppRunner = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AppRunner",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://apprunner.amazonaws.com/doc/2020-05-15/"})
-
-var AppRunner = smithy.NewServiceSchema(_AppRunner, "2020-05-15")
-
-var _AppRunnerResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AppRunnerResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ASConfigMaxConcurrency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ASConfigMaxConcurrency",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ASConfigMaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ASConfigMaxSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ASConfigMinSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ASConfigMinSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var AuthenticationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AuthenticationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var AuthenticationConfiguration_ConnectionArn *smithy.Schema
-
-var AuthenticationConfiguration_AccessRoleArn *smithy.Schema
-
-var AutoScalingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AutoScalingConfiguration",
-}, smithy.ShapeTypeStructure, 12)
-var AutoScalingConfiguration_AutoScalingConfigurationArn *smithy.Schema
-
-var AutoScalingConfiguration_AutoScalingConfigurationName *smithy.Schema
-
-var AutoScalingConfiguration_AutoScalingConfigurationRevision *smithy.Schema
-
-var AutoScalingConfiguration_Latest *smithy.Schema
-
-var AutoScalingConfiguration_Status *smithy.Schema
-
-var AutoScalingConfiguration_MaxConcurrency *smithy.Schema
-
-var AutoScalingConfiguration_MinSize *smithy.Schema
-
-var AutoScalingConfiguration_MaxSize *smithy.Schema
-
-var AutoScalingConfiguration_CreatedAt *smithy.Schema
-
-var AutoScalingConfiguration_DeletedAt *smithy.Schema
-
-var AutoScalingConfiguration_HasAssociatedService *smithy.Schema
-
-var AutoScalingConfiguration_IsDefault *smithy.Schema
-
-var _AutoScalingConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AutoScalingConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var _AutoScalingConfigurationRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AutoScalingConfigurationRevision",
-}, smithy.ShapeTypeInteger, 0)
-
-var AutoScalingConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AutoScalingConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var AutoScalingConfigurationStatus_ACTIVE *smithy.Schema
-
-var AutoScalingConfigurationStatus_INACTIVE *smithy.Schema
-
-var AutoScalingConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AutoScalingConfigurationSummary",
-}, smithy.ShapeTypeStructure, 7)
-var AutoScalingConfigurationSummary_AutoScalingConfigurationArn *smithy.Schema
-
-var AutoScalingConfigurationSummary_AutoScalingConfigurationName *smithy.Schema
-
-var AutoScalingConfigurationSummary_AutoScalingConfigurationRevision *smithy.Schema
-
-var AutoScalingConfigurationSummary_Status *smithy.Schema
-
-var AutoScalingConfigurationSummary_CreatedAt *smithy.Schema
-
-var AutoScalingConfigurationSummary_HasAssociatedService *smithy.Schema
-
-var AutoScalingConfigurationSummary_IsDefault *smithy.Schema
-
-var _AutoScalingConfigurationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AutoScalingConfigurationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AutoScalingConfigurationSummaryList_member *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BuildCommand = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "BuildCommand",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CertificateValidationRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CertificateValidationRecord",
-}, smithy.ShapeTypeStructure, 4)
-var CertificateValidationRecord_Name *smithy.Schema
-
-var CertificateValidationRecord_Type *smithy.Schema
-
-var CertificateValidationRecord_Value *smithy.Schema
-
-var CertificateValidationRecord_Status *smithy.Schema
-
-var _CertificateValidationRecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CertificateValidationRecordList",
-}, smithy.ShapeTypeList, 1)
-var _CertificateValidationRecordList_member *smithy.Schema
-
-var CertificateValidationRecordStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CertificateValidationRecordStatus",
-}, smithy.ShapeTypeEnum, 3)
-var CertificateValidationRecordStatus_PENDING_VALIDATION *smithy.Schema
-
-var CertificateValidationRecordStatus_SUCCESS *smithy.Schema
-
-var CertificateValidationRecordStatus_FAILED *smithy.Schema
-
-var CodeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CodeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CodeConfiguration_ConfigurationSource *smithy.Schema
-
-var CodeConfiguration_CodeConfigurationValues *smithy.Schema
-
-var CodeConfigurationValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CodeConfigurationValues",
-}, smithy.ShapeTypeStructure, 6)
-var CodeConfigurationValues_Runtime *smithy.Schema
-
-var CodeConfigurationValues_BuildCommand *smithy.Schema
-
-var CodeConfigurationValues_StartCommand *smithy.Schema
-
-var CodeConfigurationValues_Port *smithy.Schema
-
-var CodeConfigurationValues_RuntimeEnvironmentVariables *smithy.Schema
-
-var CodeConfigurationValues_RuntimeEnvironmentSecrets *smithy.Schema
-
-var CodeRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CodeRepository",
-}, smithy.ShapeTypeStructure, 4)
-var CodeRepository_RepositoryUrl *smithy.Schema
-
-var CodeRepository_SourceCodeVersion *smithy.Schema
-
-var CodeRepository_CodeConfiguration *smithy.Schema
-
-var CodeRepository_SourceDirectory *smithy.Schema
-
-var ConfigurationSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ConfigurationSource",
-}, smithy.ShapeTypeEnum, 2)
-var ConfigurationSource_REPOSITORY *smithy.Schema
-
-var ConfigurationSource_API *smithy.Schema
-
-var Connection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Connection",
-}, smithy.ShapeTypeStructure, 5)
-var Connection_ConnectionName *smithy.Schema
-
-var Connection_ConnectionArn *smithy.Schema
-
-var Connection_ProviderType *smithy.Schema
-
-var Connection_Status *smithy.Schema
-
-var Connection_CreatedAt *smithy.Schema
-
-var _ConnectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ConnectionName",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ConnectionStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ConnectionStatus_PENDING_HANDSHAKE *smithy.Schema
-
-var ConnectionStatus_AVAILABLE *smithy.Schema
-
-var ConnectionStatus_ERROR *smithy.Schema
-
-var ConnectionStatus_DELETED *smithy.Schema
-
-var ConnectionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ConnectionSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConnectionSummary_ConnectionName *smithy.Schema
-
-var ConnectionSummary_ConnectionArn *smithy.Schema
-
-var ConnectionSummary_ProviderType *smithy.Schema
-
-var ConnectionSummary_Status *smithy.Schema
-
-var ConnectionSummary_CreatedAt *smithy.Schema
-
-var _ConnectionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ConnectionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionSummaryList_member *smithy.Schema
-
-var _Cpu = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Cpu",
-}, smithy.ShapeTypeString, 0)
-
-var CustomDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CustomDomain",
-}, smithy.ShapeTypeStructure, 4)
-var CustomDomain_DomainName *smithy.Schema
-
-var CustomDomain_EnableWWWSubdomain *smithy.Schema
-
-var CustomDomain_CertificateValidationRecords *smithy.Schema
-
-var CustomDomain_Status *smithy.Schema
-
-var CustomDomainAssociationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CustomDomainAssociationStatus",
-}, smithy.ShapeTypeEnum, 7)
-var CustomDomainAssociationStatus_CREATING *smithy.Schema
-
-var CustomDomainAssociationStatus_CREATE_FAILED *smithy.Schema
-
-var CustomDomainAssociationStatus_ACTIVE *smithy.Schema
-
-var CustomDomainAssociationStatus_DELETING *smithy.Schema
-
-var CustomDomainAssociationStatus_DELETE_FAILED *smithy.Schema
-
-var CustomDomainAssociationStatus_PENDING_CERTIFICATE_DNS_VALIDATION *smithy.Schema
-
-var CustomDomainAssociationStatus_BINDING_CERTIFICATE *smithy.Schema
-
-var _CustomDomainList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CustomDomainList",
-}, smithy.ShapeTypeList, 1)
-var _CustomDomainList_member *smithy.Schema
-
-var _CustomerAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CustomerAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _DescribeCustomDomainsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeCustomDomainsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var EgressConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "EgressConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EgressConfiguration_EgressType *smithy.Schema
-
-var EgressConfiguration_VpcConnectorArn *smithy.Schema
-
-var EgressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "EgressType",
-}, smithy.ShapeTypeEnum, 2)
-var EgressType_DEFAULT *smithy.Schema
-
-var EgressType_VPC *smithy.Schema
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EncryptionConfiguration_KmsKey *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _HasAssociatedService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HasAssociatedService",
-}, smithy.ShapeTypeBoolean, 0)
-
-var HealthCheckConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HealthCheckConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var HealthCheckConfiguration_Protocol *smithy.Schema
-
-var HealthCheckConfiguration_Path *smithy.Schema
-
-var HealthCheckConfiguration_Interval *smithy.Schema
-
-var HealthCheckConfiguration_Timeout *smithy.Schema
-
-var HealthCheckConfiguration_HealthyThreshold *smithy.Schema
-
-var HealthCheckConfiguration_UnhealthyThreshold *smithy.Schema
-
-var _HealthCheckHealthyThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HealthCheckHealthyThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HealthCheckInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HealthCheckPath",
-}, smithy.ShapeTypeString, 0)
-
-var HealthCheckProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HealthCheckProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var HealthCheckProtocol_TCP *smithy.Schema
-
-var HealthCheckProtocol_HTTP *smithy.Schema
-
-var _HealthCheckTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HealthCheckTimeout",
-}, smithy.ShapeTypeInteger, 0)
-
-var _HealthCheckUnhealthyThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "HealthCheckUnhealthyThreshold",
-}, smithy.ShapeTypeInteger, 0)
-
-var ImageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ImageConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ImageConfiguration_RuntimeEnvironmentVariables *smithy.Schema
-
-var ImageConfiguration_StartCommand *smithy.Schema
-
-var ImageConfiguration_Port *smithy.Schema
-
-var ImageConfiguration_RuntimeEnvironmentSecrets *smithy.Schema
-
-var _ImageIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ImageIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ImageRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ImageRepository",
-}, smithy.ShapeTypeStructure, 3)
-var ImageRepository_ImageIdentifier *smithy.Schema
-
-var ImageRepository_ImageConfiguration *smithy.Schema
-
-var ImageRepository_ImageRepositoryType *smithy.Schema
-
-var ImageRepositoryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ImageRepositoryType",
-}, smithy.ShapeTypeEnum, 2)
-var ImageRepositoryType_ECR *smithy.Schema
-
-var ImageRepositoryType_ECR_PUBLIC *smithy.Schema
-
-var IngressConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "IngressConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var IngressConfiguration_IsPubliclyAccessible *smithy.Schema
-
-var IngressVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "IngressVpcConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var IngressVpcConfiguration_VpcId *smithy.Schema
-
-var IngressVpcConfiguration_VpcEndpointId *smithy.Schema
-
-var InstanceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "InstanceConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var InstanceConfiguration_Cpu *smithy.Schema
-
-var InstanceConfiguration_Memory *smithy.Schema
-
-var InstanceConfiguration_InstanceRoleArn *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServiceErrorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "InternalServiceErrorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServiceError",
-		StatusCode: 500})
-var InternalServiceErrorException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidRequest",
-		StatusCode: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "InvalidState",
-		StatusCode: 400})
-var InvalidStateException_Message *smithy.Schema
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var IpAddressType_IPV4 *smithy.Schema
-
-var IpAddressType_DUAL_STACK *smithy.Schema
-
-var _IsDefault = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "IsDefault",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Latest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Latest",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _ListOperationsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListOperationsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ListVpcIngressConnectionsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListVpcIngressConnectionsFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcIngressConnectionsFilter_ServiceArn *smithy.Schema
-
-var ListVpcIngressConnectionsFilter_VpcEndpointId *smithy.Schema
-
-var _MaxConcurrency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "MaxConcurrency",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "MaxSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Memory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Memory",
-}, smithy.ShapeTypeString, 0)
-
-var _MinSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "MinSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var NetworkConfiguration_EgressConfiguration *smithy.Schema
-
-var NetworkConfiguration_IngressConfiguration *smithy.Schema
-
-var NetworkConfiguration_IpAddressType *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "NullableBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ObservabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ObservabilityConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var ObservabilityConfiguration_ObservabilityConfigurationArn *smithy.Schema
-
-var ObservabilityConfiguration_ObservabilityConfigurationName *smithy.Schema
-
-var ObservabilityConfiguration_TraceConfiguration *smithy.Schema
-
-var ObservabilityConfiguration_ObservabilityConfigurationRevision *smithy.Schema
-
-var ObservabilityConfiguration_Latest *smithy.Schema
-
-var ObservabilityConfiguration_Status *smithy.Schema
-
-var ObservabilityConfiguration_CreatedAt *smithy.Schema
-
-var ObservabilityConfiguration_DeletedAt *smithy.Schema
-
-var _ObservabilityConfigurationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ObservabilityConfigurationName",
-}, smithy.ShapeTypeString, 0)
-
-var ObservabilityConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ObservabilityConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ObservabilityConfigurationStatus_ACTIVE *smithy.Schema
-
-var ObservabilityConfigurationStatus_INACTIVE *smithy.Schema
-
-var ObservabilityConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ObservabilityConfigurationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ObservabilityConfigurationSummary_ObservabilityConfigurationArn *smithy.Schema
-
-var ObservabilityConfigurationSummary_ObservabilityConfigurationName *smithy.Schema
-
-var ObservabilityConfigurationSummary_ObservabilityConfigurationRevision *smithy.Schema
-
-var _ObservabilityConfigurationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ObservabilityConfigurationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ObservabilityConfigurationSummaryList_member *smithy.Schema
-
-var OperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "OperationStatus",
-}, smithy.ShapeTypeEnum, 7)
-var OperationStatus_PENDING *smithy.Schema
-
-var OperationStatus_IN_PROGRESS *smithy.Schema
-
-var OperationStatus_FAILED *smithy.Schema
-
-var OperationStatus_SUCCEEDED *smithy.Schema
-
-var OperationStatus_ROLLBACK_IN_PROGRESS *smithy.Schema
-
-var OperationStatus_ROLLBACK_FAILED *smithy.Schema
-
-var OperationStatus_ROLLBACK_SUCCEEDED *smithy.Schema
-
-var OperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "OperationSummary",
-}, smithy.ShapeTypeStructure, 7)
-var OperationSummary_Id *smithy.Schema
-
-var OperationSummary_Type *smithy.Schema
-
-var OperationSummary_Status *smithy.Schema
-
-var OperationSummary_TargetArn *smithy.Schema
-
-var OperationSummary_StartedAt *smithy.Schema
-
-var OperationSummary_EndedAt *smithy.Schema
-
-var OperationSummary_UpdatedAt *smithy.Schema
-
-var _OperationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "OperationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _OperationSummaryList_member *smithy.Schema
-
-var OperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "OperationType",
-}, smithy.ShapeTypeEnum, 6)
-var OperationType_START_DEPLOYMENT *smithy.Schema
-
-var OperationType_CREATE_SERVICE *smithy.Schema
-
-var OperationType_PAUSE_SERVICE *smithy.Schema
-
-var OperationType_RESUME_SERVICE *smithy.Schema
-
-var OperationType_DELETE_SERVICE *smithy.Schema
-
-var OperationType_UPDATE_SERVICE *smithy.Schema
-
-var ProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ProviderType",
-}, smithy.ShapeTypeEnum, 2)
-var ProviderType_GITHUB *smithy.Schema
-
-var ProviderType_BITBUCKET *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotfound",
-		StatusCode: 400})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var Runtime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Runtime",
-}, smithy.ShapeTypeEnum, 13)
-var Runtime_PYTHON_3 *smithy.Schema
-
-var Runtime_NODEJS_12 *smithy.Schema
-
-var Runtime_NODEJS_14 *smithy.Schema
-
-var Runtime_CORRETTO_8 *smithy.Schema
-
-var Runtime_CORRETTO_11 *smithy.Schema
-
-var Runtime_NODEJS_16 *smithy.Schema
-
-var Runtime_GO_1 *smithy.Schema
-
-var Runtime_DOTNET_6 *smithy.Schema
-
-var Runtime_PHP_81 *smithy.Schema
-
-var Runtime_RUBY_31 *smithy.Schema
-
-var Runtime_PYTHON_311 *smithy.Schema
-
-var Runtime_NODEJS_18 *smithy.Schema
-
-var Runtime_NODEJS_22 *smithy.Schema
-
-var _RuntimeEnvironmentSecrets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "RuntimeEnvironmentSecrets",
-}, smithy.ShapeTypeMap, 2)
-var _RuntimeEnvironmentSecrets_key *smithy.Schema
-
-var _RuntimeEnvironmentSecrets_value *smithy.Schema
-
-var _RuntimeEnvironmentSecretsName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "RuntimeEnvironmentSecretsName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RuntimeEnvironmentSecretsValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "RuntimeEnvironmentSecretsValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RuntimeEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "RuntimeEnvironmentVariables",
-}, smithy.ShapeTypeMap, 2)
-var _RuntimeEnvironmentVariables_key *smithy.Schema
-
-var _RuntimeEnvironmentVariables_value *smithy.Schema
-
-var _RuntimeEnvironmentVariablesKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "RuntimeEnvironmentVariablesKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RuntimeEnvironmentVariablesValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "RuntimeEnvironmentVariablesValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Service",
-}, smithy.ShapeTypeStructure, 15)
-var Service_ServiceName *smithy.Schema
-
-var Service_ServiceId *smithy.Schema
-
-var Service_ServiceArn *smithy.Schema
-
-var Service_ServiceUrl *smithy.Schema
-
-var Service_CreatedAt *smithy.Schema
-
-var Service_UpdatedAt *smithy.Schema
-
-var Service_DeletedAt *smithy.Schema
-
-var Service_Status *smithy.Schema
-
-var Service_SourceConfiguration *smithy.Schema
-
-var Service_InstanceConfiguration *smithy.Schema
-
-var Service_EncryptionConfiguration *smithy.Schema
-
-var Service_HealthCheckConfiguration *smithy.Schema
-
-var Service_AutoScalingConfigurationSummary *smithy.Schema
-
-var Service_NetworkConfiguration *smithy.Schema
-
-var Service_ObservabilityConfiguration *smithy.Schema
-
-var _ServiceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceArnList_member *smithy.Schema
-
-var _ServiceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ServiceMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceObservabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceObservabilityConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceObservabilityConfiguration_ObservabilityEnabled *smithy.Schema
-
-var ServiceObservabilityConfiguration_ObservabilityConfigurationArn *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceeded",
-		StatusCode: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceStatus",
-}, smithy.ShapeTypeEnum, 6)
-var ServiceStatus_CREATE_FAILED *smithy.Schema
-
-var ServiceStatus_RUNNING *smithy.Schema
-
-var ServiceStatus_DELETED *smithy.Schema
-
-var ServiceStatus_DELETE_FAILED *smithy.Schema
-
-var ServiceStatus_PAUSED *smithy.Schema
-
-var ServiceStatus_OPERATION_IN_PROGRESS *smithy.Schema
-
-var ServiceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ServiceSummary_ServiceName *smithy.Schema
-
-var ServiceSummary_ServiceId *smithy.Schema
-
-var ServiceSummary_ServiceArn *smithy.Schema
-
-var ServiceSummary_ServiceUrl *smithy.Schema
-
-var ServiceSummary_CreatedAt *smithy.Schema
-
-var ServiceSummary_UpdatedAt *smithy.Schema
-
-var ServiceSummary_Status *smithy.Schema
-
-var _ServiceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ServiceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceSummaryList_member *smithy.Schema
-
-var SourceCodeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "SourceCodeVersion",
-}, smithy.ShapeTypeStructure, 2)
-var SourceCodeVersion_Type *smithy.Schema
-
-var SourceCodeVersion_Value *smithy.Schema
-
-var SourceCodeVersionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "SourceCodeVersionType",
-}, smithy.ShapeTypeEnum, 1)
-var SourceCodeVersionType_BRANCH *smithy.Schema
-
-var SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "SourceConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var SourceConfiguration_CodeRepository *smithy.Schema
-
-var SourceConfiguration_ImageRepository *smithy.Schema
-
-var SourceConfiguration_AutoDeploymentsEnabled *smithy.Schema
-
-var SourceConfiguration_AuthenticationConfiguration *smithy.Schema
-
-var _SourceDirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "SourceDirectory",
-}, smithy.ShapeTypeString, 0)
-
-var _StartCommand = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "StartCommand",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TraceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TraceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var TraceConfiguration_Vendor *smithy.Schema
-
-var TracingVendor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TracingVendor",
-}, smithy.ShapeTypeEnum, 1)
-var TracingVendor_AWSXRAY *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var VpcConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcConnector",
-}, smithy.ShapeTypeStructure, 8)
-var VpcConnector_VpcConnectorName *smithy.Schema
-
-var VpcConnector_VpcConnectorArn *smithy.Schema
-
-var VpcConnector_VpcConnectorRevision *smithy.Schema
-
-var VpcConnector_Subnets *smithy.Schema
-
-var VpcConnector_SecurityGroups *smithy.Schema
-
-var VpcConnector_Status *smithy.Schema
-
-var VpcConnector_CreatedAt *smithy.Schema
-
-var VpcConnector_DeletedAt *smithy.Schema
-
-var _VpcConnectorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcConnectorName",
-}, smithy.ShapeTypeString, 0)
-
-var _VpcConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcConnectors",
-}, smithy.ShapeTypeList, 1)
-var _VpcConnectors_member *smithy.Schema
-
-var VpcConnectorStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcConnectorStatus",
-}, smithy.ShapeTypeEnum, 2)
-var VpcConnectorStatus_ACTIVE *smithy.Schema
-
-var VpcConnectorStatus_INACTIVE *smithy.Schema
-
-var VpcDNSTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcDNSTarget",
-}, smithy.ShapeTypeStructure, 3)
-var VpcDNSTarget_VpcIngressConnectionArn *smithy.Schema
-
-var VpcDNSTarget_VpcId *smithy.Schema
-
-var VpcDNSTarget_DomainName *smithy.Schema
-
-var _VpcDNSTargetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcDNSTargetList",
-}, smithy.ShapeTypeList, 1)
-var _VpcDNSTargetList_member *smithy.Schema
-
-var VpcIngressConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcIngressConnection",
-}, smithy.ShapeTypeStructure, 9)
-var VpcIngressConnection_VpcIngressConnectionArn *smithy.Schema
-
-var VpcIngressConnection_VpcIngressConnectionName *smithy.Schema
-
-var VpcIngressConnection_ServiceArn *smithy.Schema
-
-var VpcIngressConnection_Status *smithy.Schema
-
-var VpcIngressConnection_AccountId *smithy.Schema
-
-var VpcIngressConnection_DomainName *smithy.Schema
-
-var VpcIngressConnection_IngressVpcConfiguration *smithy.Schema
-
-var VpcIngressConnection_CreatedAt *smithy.Schema
-
-var VpcIngressConnection_DeletedAt *smithy.Schema
-
-var _VpcIngressConnectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcIngressConnectionName",
-}, smithy.ShapeTypeString, 0)
-
-var VpcIngressConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcIngressConnectionStatus",
-}, smithy.ShapeTypeEnum, 8)
-var VpcIngressConnectionStatus_AVAILABLE *smithy.Schema
-
-var VpcIngressConnectionStatus_PENDING_CREATION *smithy.Schema
-
-var VpcIngressConnectionStatus_PENDING_UPDATE *smithy.Schema
-
-var VpcIngressConnectionStatus_PENDING_DELETION *smithy.Schema
-
-var VpcIngressConnectionStatus_FAILED_CREATION *smithy.Schema
-
-var VpcIngressConnectionStatus_FAILED_UPDATE *smithy.Schema
-
-var VpcIngressConnectionStatus_FAILED_DELETION *smithy.Schema
-
-var VpcIngressConnectionStatus_DELETED *smithy.Schema
-
-var VpcIngressConnectionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcIngressConnectionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var VpcIngressConnectionSummary_VpcIngressConnectionArn *smithy.Schema
-
-var VpcIngressConnectionSummary_ServiceArn *smithy.Schema
-
-var _VpcIngressConnectionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "VpcIngressConnectionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _VpcIngressConnectionSummaryList_member *smithy.Schema
-
-var AssociateCustomDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AssociateCustomDomainRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateCustomDomainRequest_ServiceArn *smithy.Schema
-
-var AssociateCustomDomainRequest_DomainName *smithy.Schema
-
-var AssociateCustomDomainRequest_EnableWWWSubdomain *smithy.Schema
-
-var AssociateCustomDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "AssociateCustomDomainResponse",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateCustomDomainResponse_DNSTarget *smithy.Schema
-
-var AssociateCustomDomainResponse_ServiceArn *smithy.Schema
-
-var AssociateCustomDomainResponse_CustomDomain *smithy.Schema
-
-var AssociateCustomDomainResponse_VpcDNSTargets *smithy.Schema
-
-var CreateAutoScalingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateAutoScalingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAutoScalingConfigurationRequest_AutoScalingConfigurationName *smithy.Schema
-
-var CreateAutoScalingConfigurationRequest_MaxConcurrency *smithy.Schema
-
-var CreateAutoScalingConfigurationRequest_MinSize *smithy.Schema
-
-var CreateAutoScalingConfigurationRequest_MaxSize *smithy.Schema
-
-var CreateAutoScalingConfigurationRequest_Tags *smithy.Schema
-
-var CreateAutoScalingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateAutoScalingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAutoScalingConfigurationResponse_AutoScalingConfiguration *smithy.Schema
-
-var CreateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateConnectionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateConnectionRequest_ConnectionName *smithy.Schema
-
-var CreateConnectionRequest_ProviderType *smithy.Schema
-
-var CreateConnectionRequest_Tags *smithy.Schema
-
-var CreateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectionResponse_Connection *smithy.Schema
-
-var CreateObservabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateObservabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateObservabilityConfigurationRequest_ObservabilityConfigurationName *smithy.Schema
-
-var CreateObservabilityConfigurationRequest_TraceConfiguration *smithy.Schema
-
-var CreateObservabilityConfigurationRequest_Tags *smithy.Schema
-
-var CreateObservabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateObservabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateObservabilityConfigurationResponse_ObservabilityConfiguration *smithy.Schema
-
-var CreateServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateServiceRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateServiceRequest_ServiceName *smithy.Schema
-
-var CreateServiceRequest_SourceConfiguration *smithy.Schema
-
-var CreateServiceRequest_InstanceConfiguration *smithy.Schema
-
-var CreateServiceRequest_Tags *smithy.Schema
-
-var CreateServiceRequest_EncryptionConfiguration *smithy.Schema
-
-var CreateServiceRequest_HealthCheckConfiguration *smithy.Schema
-
-var CreateServiceRequest_AutoScalingConfigurationArn *smithy.Schema
-
-var CreateServiceRequest_NetworkConfiguration *smithy.Schema
-
-var CreateServiceRequest_ObservabilityConfiguration *smithy.Schema
-
-var CreateServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateServiceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateServiceResponse_Service *smithy.Schema
-
-var CreateServiceResponse_OperationId *smithy.Schema
-
-var CreateVpcConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateVpcConnectorRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateVpcConnectorRequest_VpcConnectorName *smithy.Schema
-
-var CreateVpcConnectorRequest_Subnets *smithy.Schema
-
-var CreateVpcConnectorRequest_SecurityGroups *smithy.Schema
-
-var CreateVpcConnectorRequest_Tags *smithy.Schema
-
-var CreateVpcConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateVpcConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVpcConnectorResponse_VpcConnector *smithy.Schema
-
-var CreateVpcIngressConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateVpcIngressConnectionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateVpcIngressConnectionRequest_ServiceArn *smithy.Schema
-
-var CreateVpcIngressConnectionRequest_VpcIngressConnectionName *smithy.Schema
-
-var CreateVpcIngressConnectionRequest_IngressVpcConfiguration *smithy.Schema
-
-var CreateVpcIngressConnectionRequest_Tags *smithy.Schema
-
-var CreateVpcIngressConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "CreateVpcIngressConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVpcIngressConnectionResponse_VpcIngressConnection *smithy.Schema
-
-var DeleteAutoScalingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteAutoScalingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAutoScalingConfigurationRequest_AutoScalingConfigurationArn *smithy.Schema
-
-var DeleteAutoScalingConfigurationRequest_DeleteAllRevisions *smithy.Schema
-
-var DeleteAutoScalingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteAutoScalingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAutoScalingConfigurationResponse_AutoScalingConfiguration *smithy.Schema
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionRequest_ConnectionArn *smithy.Schema
-
-var DeleteConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionResponse_Connection *smithy.Schema
-
-var DeleteObservabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteObservabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteObservabilityConfigurationRequest_ObservabilityConfigurationArn *smithy.Schema
-
-var DeleteObservabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteObservabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteObservabilityConfigurationResponse_ObservabilityConfiguration *smithy.Schema
-
-var DeleteServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteServiceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceRequest_ServiceArn *smithy.Schema
-
-var DeleteServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteServiceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteServiceResponse_Service *smithy.Schema
-
-var DeleteServiceResponse_OperationId *smithy.Schema
-
-var DeleteVpcConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteVpcConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcConnectorRequest_VpcConnectorArn *smithy.Schema
-
-var DeleteVpcConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteVpcConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcConnectorResponse_VpcConnector *smithy.Schema
-
-var DeleteVpcIngressConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteVpcIngressConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcIngressConnectionRequest_VpcIngressConnectionArn *smithy.Schema
-
-var DeleteVpcIngressConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DeleteVpcIngressConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcIngressConnectionResponse_VpcIngressConnection *smithy.Schema
-
-var DescribeAutoScalingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeAutoScalingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAutoScalingConfigurationRequest_AutoScalingConfigurationArn *smithy.Schema
-
-var DescribeAutoScalingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeAutoScalingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeAutoScalingConfigurationResponse_AutoScalingConfiguration *smithy.Schema
-
-var DescribeCustomDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeCustomDomainsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeCustomDomainsRequest_ServiceArn *smithy.Schema
-
-var DescribeCustomDomainsRequest_NextToken *smithy.Schema
-
-var DescribeCustomDomainsRequest_MaxResults *smithy.Schema
-
-var DescribeCustomDomainsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeCustomDomainsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeCustomDomainsResponse_DNSTarget *smithy.Schema
-
-var DescribeCustomDomainsResponse_ServiceArn *smithy.Schema
-
-var DescribeCustomDomainsResponse_CustomDomains *smithy.Schema
-
-var DescribeCustomDomainsResponse_VpcDNSTargets *smithy.Schema
-
-var DescribeCustomDomainsResponse_NextToken *smithy.Schema
-
-var DescribeObservabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeObservabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeObservabilityConfigurationRequest_ObservabilityConfigurationArn *smithy.Schema
-
-var DescribeObservabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeObservabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeObservabilityConfigurationResponse_ObservabilityConfiguration *smithy.Schema
-
-var DescribeServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeServiceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeServiceRequest_ServiceArn *smithy.Schema
-
-var DescribeServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeServiceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeServiceResponse_Service *smithy.Schema
-
-var DescribeVpcConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeVpcConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVpcConnectorRequest_VpcConnectorArn *smithy.Schema
-
-var DescribeVpcConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeVpcConnectorResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVpcConnectorResponse_VpcConnector *smithy.Schema
-
-var DescribeVpcIngressConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeVpcIngressConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVpcIngressConnectionRequest_VpcIngressConnectionArn *smithy.Schema
-
-var DescribeVpcIngressConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DescribeVpcIngressConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeVpcIngressConnectionResponse_VpcIngressConnection *smithy.Schema
-
-var DisassociateCustomDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DisassociateCustomDomainRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateCustomDomainRequest_ServiceArn *smithy.Schema
-
-var DisassociateCustomDomainRequest_DomainName *smithy.Schema
-
-var DisassociateCustomDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "DisassociateCustomDomainResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateCustomDomainResponse_DNSTarget *smithy.Schema
-
-var DisassociateCustomDomainResponse_ServiceArn *smithy.Schema
-
-var DisassociateCustomDomainResponse_CustomDomain *smithy.Schema
-
-var DisassociateCustomDomainResponse_VpcDNSTargets *smithy.Schema
-
-var ListAutoScalingConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListAutoScalingConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAutoScalingConfigurationsRequest_AutoScalingConfigurationName *smithy.Schema
-
-var ListAutoScalingConfigurationsRequest_LatestOnly *smithy.Schema
-
-var ListAutoScalingConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListAutoScalingConfigurationsRequest_NextToken *smithy.Schema
-
-var ListAutoScalingConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListAutoScalingConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList *smithy.Schema
-
-var ListAutoScalingConfigurationsResponse_NextToken *smithy.Schema
-
-var ListConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListConnectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConnectionsRequest_ConnectionName *smithy.Schema
-
-var ListConnectionsRequest_MaxResults *smithy.Schema
-
-var ListConnectionsRequest_NextToken *smithy.Schema
-
-var ListConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectionsResponse_ConnectionSummaryList *smithy.Schema
-
-var ListConnectionsResponse_NextToken *smithy.Schema
-
-var ListObservabilityConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListObservabilityConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListObservabilityConfigurationsRequest_ObservabilityConfigurationName *smithy.Schema
-
-var ListObservabilityConfigurationsRequest_LatestOnly *smithy.Schema
-
-var ListObservabilityConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListObservabilityConfigurationsRequest_NextToken *smithy.Schema
-
-var ListObservabilityConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListObservabilityConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList *smithy.Schema
-
-var ListObservabilityConfigurationsResponse_NextToken *smithy.Schema
-
-var ListOperationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListOperationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListOperationsRequest_ServiceArn *smithy.Schema
-
-var ListOperationsRequest_NextToken *smithy.Schema
-
-var ListOperationsRequest_MaxResults *smithy.Schema
-
-var ListOperationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListOperationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOperationsResponse_OperationSummaryList *smithy.Schema
-
-var ListOperationsResponse_NextToken *smithy.Schema
-
-var ListServicesForAutoScalingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListServicesForAutoScalingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListServicesForAutoScalingConfigurationRequest_AutoScalingConfigurationArn *smithy.Schema
-
-var ListServicesForAutoScalingConfigurationRequest_MaxResults *smithy.Schema
-
-var ListServicesForAutoScalingConfigurationRequest_NextToken *smithy.Schema
-
-var ListServicesForAutoScalingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListServicesForAutoScalingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesForAutoScalingConfigurationResponse_ServiceArnList *smithy.Schema
-
-var ListServicesForAutoScalingConfigurationResponse_NextToken *smithy.Schema
-
-var ListServicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListServicesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesRequest_NextToken *smithy.Schema
-
-var ListServicesRequest_MaxResults *smithy.Schema
-
-var ListServicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListServicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesResponse_ServiceSummaryList *smithy.Schema
-
-var ListServicesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListVpcConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListVpcConnectorsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcConnectorsRequest_MaxResults *smithy.Schema
-
-var ListVpcConnectorsRequest_NextToken *smithy.Schema
-
-var ListVpcConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListVpcConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcConnectorsResponse_VpcConnectors *smithy.Schema
-
-var ListVpcConnectorsResponse_NextToken *smithy.Schema
-
-var ListVpcIngressConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListVpcIngressConnectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListVpcIngressConnectionsRequest_Filter *smithy.Schema
-
-var ListVpcIngressConnectionsRequest_MaxResults *smithy.Schema
-
-var ListVpcIngressConnectionsRequest_NextToken *smithy.Schema
-
-var ListVpcIngressConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ListVpcIngressConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList *smithy.Schema
-
-var ListVpcIngressConnectionsResponse_NextToken *smithy.Schema
-
-var PauseServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "PauseServiceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PauseServiceRequest_ServiceArn *smithy.Schema
-
-var PauseServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "PauseServiceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PauseServiceResponse_Service *smithy.Schema
-
-var PauseServiceResponse_OperationId *smithy.Schema
-
-var ResumeServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ResumeServiceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ResumeServiceRequest_ServiceArn *smithy.Schema
-
-var ResumeServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "ResumeServiceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ResumeServiceResponse_Service *smithy.Schema
-
-var ResumeServiceResponse_OperationId *smithy.Schema
-
-var StartDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "StartDeploymentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartDeploymentRequest_ServiceArn *smithy.Schema
-
-var StartDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "StartDeploymentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartDeploymentResponse_OperationId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDefaultAutoScalingConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateDefaultAutoScalingConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDefaultAutoScalingConfigurationRequest_AutoScalingConfigurationArn *smithy.Schema
-
-var UpdateDefaultAutoScalingConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateDefaultAutoScalingConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDefaultAutoScalingConfigurationResponse_AutoScalingConfiguration *smithy.Schema
-
-var UpdateServiceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateServiceRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateServiceRequest_ServiceArn *smithy.Schema
-
-var UpdateServiceRequest_SourceConfiguration *smithy.Schema
-
-var UpdateServiceRequest_InstanceConfiguration *smithy.Schema
-
-var UpdateServiceRequest_AutoScalingConfigurationArn *smithy.Schema
-
-var UpdateServiceRequest_HealthCheckConfiguration *smithy.Schema
-
-var UpdateServiceRequest_NetworkConfiguration *smithy.Schema
-
-var UpdateServiceRequest_ObservabilityConfiguration *smithy.Schema
-
-var UpdateServiceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateServiceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServiceResponse_Service *smithy.Schema
-
-var UpdateServiceResponse_OperationId *smithy.Schema
-
-var UpdateVpcIngressConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateVpcIngressConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVpcIngressConnectionRequest_VpcIngressConnectionArn *smithy.Schema
-
-var UpdateVpcIngressConnectionRequest_IngressVpcConfiguration *smithy.Schema
-
-var UpdateVpcIngressConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apprunner",
-	Name:      "UpdateVpcIngressConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVpcIngressConnectionResponse_VpcIngressConnection *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AuthenticationConfiguration_ConnectionArn = AuthenticationConfiguration.AddMember("ConnectionArn", _AppRunnerResourceArn)
-
-	AuthenticationConfiguration_AccessRoleArn = AuthenticationConfiguration.AddMember("AccessRoleArn", _RoleArn)
-
-	AutoScalingConfigurationStatus_ACTIVE = AutoScalingConfigurationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	AutoScalingConfigurationStatus_INACTIVE = AutoScalingConfigurationStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	AutoScalingConfiguration_AutoScalingConfigurationArn = AutoScalingConfiguration.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	AutoScalingConfiguration_AutoScalingConfigurationName = AutoScalingConfiguration.AddMember("AutoScalingConfigurationName", _AutoScalingConfigurationName)
-
-	AutoScalingConfiguration_AutoScalingConfigurationRevision = AutoScalingConfiguration.AddMember("AutoScalingConfigurationRevision", _AutoScalingConfigurationRevision)
-
-	AutoScalingConfiguration_Latest = AutoScalingConfiguration.AddMember("Latest", _Latest)
-
-	AutoScalingConfiguration_Status = AutoScalingConfiguration.AddMember("Status", AutoScalingConfigurationStatus)
-
-	AutoScalingConfiguration_MaxConcurrency = AutoScalingConfiguration.AddMember("MaxConcurrency", _MaxConcurrency)
-
-	AutoScalingConfiguration_MinSize = AutoScalingConfiguration.AddMember("MinSize", _MinSize)
-
-	AutoScalingConfiguration_MaxSize = AutoScalingConfiguration.AddMember("MaxSize", _MaxSize)
-
-	AutoScalingConfiguration_CreatedAt = AutoScalingConfiguration.AddMember("CreatedAt", _Timestamp)
-
-	AutoScalingConfiguration_DeletedAt = AutoScalingConfiguration.AddMember("DeletedAt", _Timestamp)
-
-	AutoScalingConfiguration_HasAssociatedService = AutoScalingConfiguration.AddMember("HasAssociatedService", _HasAssociatedService)
-
-	AutoScalingConfiguration_IsDefault = AutoScalingConfiguration.AddMember("IsDefault", _IsDefault)
-
-	AutoScalingConfigurationSummary_AutoScalingConfigurationArn = AutoScalingConfigurationSummary.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	AutoScalingConfigurationSummary_AutoScalingConfigurationName = AutoScalingConfigurationSummary.AddMember("AutoScalingConfigurationName", _AutoScalingConfigurationName)
-
-	AutoScalingConfigurationSummary_AutoScalingConfigurationRevision = AutoScalingConfigurationSummary.AddMember("AutoScalingConfigurationRevision", _Integer)
-
-	AutoScalingConfigurationSummary_Status = AutoScalingConfigurationSummary.AddMember("Status", AutoScalingConfigurationStatus)
-
-	AutoScalingConfigurationSummary_CreatedAt = AutoScalingConfigurationSummary.AddMember("CreatedAt", _Timestamp)
-
-	AutoScalingConfigurationSummary_HasAssociatedService = AutoScalingConfigurationSummary.AddMember("HasAssociatedService", _HasAssociatedService)
-
-	AutoScalingConfigurationSummary_IsDefault = AutoScalingConfigurationSummary.AddMember("IsDefault", _IsDefault)
-
-	_AutoScalingConfigurationSummaryList_member = _AutoScalingConfigurationSummaryList.AddMember("member", AutoScalingConfigurationSummary)
-
-	CertificateValidationRecordStatus_PENDING_VALIDATION = CertificateValidationRecordStatus.AddMember("PENDING_VALIDATION", smithyprelude.Unit)
-
-	CertificateValidationRecordStatus_SUCCESS = CertificateValidationRecordStatus.AddMember("SUCCESS", smithyprelude.Unit)
-
-	CertificateValidationRecordStatus_FAILED = CertificateValidationRecordStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	CertificateValidationRecord_Name = CertificateValidationRecord.AddMember("Name", _String)
-
-	CertificateValidationRecord_Type = CertificateValidationRecord.AddMember("Type", _String)
-
-	CertificateValidationRecord_Value = CertificateValidationRecord.AddMember("Value", _String)
-
-	CertificateValidationRecord_Status = CertificateValidationRecord.AddMember("Status", CertificateValidationRecordStatus)
-
-	_CertificateValidationRecordList_member = _CertificateValidationRecordList.AddMember("member", CertificateValidationRecord)
-
-	ConfigurationSource_REPOSITORY = ConfigurationSource.AddMember("REPOSITORY", smithyprelude.Unit)
-
-	ConfigurationSource_API = ConfigurationSource.AddMember("API", smithyprelude.Unit)
-
-	Runtime_PYTHON_3 = Runtime.AddMember("PYTHON_3", smithyprelude.Unit)
-
-	Runtime_NODEJS_12 = Runtime.AddMember("NODEJS_12", smithyprelude.Unit)
-
-	Runtime_NODEJS_14 = Runtime.AddMember("NODEJS_14", smithyprelude.Unit)
-
-	Runtime_CORRETTO_8 = Runtime.AddMember("CORRETTO_8", smithyprelude.Unit)
-
-	Runtime_CORRETTO_11 = Runtime.AddMember("CORRETTO_11", smithyprelude.Unit)
-
-	Runtime_NODEJS_16 = Runtime.AddMember("NODEJS_16", smithyprelude.Unit)
-
-	Runtime_GO_1 = Runtime.AddMember("GO_1", smithyprelude.Unit)
-
-	Runtime_DOTNET_6 = Runtime.AddMember("DOTNET_6", smithyprelude.Unit)
-
-	Runtime_PHP_81 = Runtime.AddMember("PHP_81", smithyprelude.Unit)
-
-	Runtime_RUBY_31 = Runtime.AddMember("RUBY_31", smithyprelude.Unit)
-
-	Runtime_PYTHON_311 = Runtime.AddMember("PYTHON_311", smithyprelude.Unit)
-
-	Runtime_NODEJS_18 = Runtime.AddMember("NODEJS_18", smithyprelude.Unit)
-
-	Runtime_NODEJS_22 = Runtime.AddMember("NODEJS_22", smithyprelude.Unit)
-
-	_RuntimeEnvironmentVariables_key = _RuntimeEnvironmentVariables.AddMember("key", _RuntimeEnvironmentVariablesKey)
-
-	_RuntimeEnvironmentVariables_value = _RuntimeEnvironmentVariables.AddMember("value", _RuntimeEnvironmentVariablesValue)
-
-	_RuntimeEnvironmentSecrets_key = _RuntimeEnvironmentSecrets.AddMember("key", _RuntimeEnvironmentSecretsName)
-
-	_RuntimeEnvironmentSecrets_value = _RuntimeEnvironmentSecrets.AddMember("value", _RuntimeEnvironmentSecretsValue)
-
-	CodeConfigurationValues_Runtime = CodeConfigurationValues.AddMember("Runtime", Runtime)
-
-	CodeConfigurationValues_BuildCommand = CodeConfigurationValues.AddMember("BuildCommand", _BuildCommand)
-
-	CodeConfigurationValues_StartCommand = CodeConfigurationValues.AddMember("StartCommand", _StartCommand)
-
-	CodeConfigurationValues_Port = CodeConfigurationValues.AddMember("Port", _String)
-
-	CodeConfigurationValues_RuntimeEnvironmentVariables = CodeConfigurationValues.AddMember("RuntimeEnvironmentVariables", _RuntimeEnvironmentVariables)
-
-	CodeConfigurationValues_RuntimeEnvironmentSecrets = CodeConfigurationValues.AddMember("RuntimeEnvironmentSecrets", _RuntimeEnvironmentSecrets)
-
-	CodeConfiguration_ConfigurationSource = CodeConfiguration.AddMember("ConfigurationSource", ConfigurationSource)
-
-	CodeConfiguration_CodeConfigurationValues = CodeConfiguration.AddMember("CodeConfigurationValues", CodeConfigurationValues)
-
-	SourceCodeVersionType_BRANCH = SourceCodeVersionType.AddMember("BRANCH", smithyprelude.Unit)
-
-	SourceCodeVersion_Type = SourceCodeVersion.AddMember("Type", SourceCodeVersionType)
-
-	SourceCodeVersion_Value = SourceCodeVersion.AddMember("Value", _String)
-
-	CodeRepository_RepositoryUrl = CodeRepository.AddMember("RepositoryUrl", _String)
-
-	CodeRepository_SourceCodeVersion = CodeRepository.AddMember("SourceCodeVersion", SourceCodeVersion)
-
-	CodeRepository_CodeConfiguration = CodeRepository.AddMember("CodeConfiguration", CodeConfiguration)
-
-	CodeRepository_SourceDirectory = CodeRepository.AddMember("SourceDirectory", _SourceDirectory)
-
-	ProviderType_GITHUB = ProviderType.AddMember("GITHUB", smithyprelude.Unit)
-
-	ProviderType_BITBUCKET = ProviderType.AddMember("BITBUCKET", smithyprelude.Unit)
-
-	ConnectionStatus_PENDING_HANDSHAKE = ConnectionStatus.AddMember("PENDING_HANDSHAKE", smithyprelude.Unit)
-
-	ConnectionStatus_AVAILABLE = ConnectionStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ConnectionStatus_ERROR = ConnectionStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	ConnectionStatus_DELETED = ConnectionStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	Connection_ConnectionName = Connection.AddMember("ConnectionName", _ConnectionName)
-
-	Connection_ConnectionArn = Connection.AddMember("ConnectionArn", _AppRunnerResourceArn)
-
-	Connection_ProviderType = Connection.AddMember("ProviderType", ProviderType)
-
-	Connection_Status = Connection.AddMember("Status", ConnectionStatus)
-
-	Connection_CreatedAt = Connection.AddMember("CreatedAt", _Timestamp)
-
-	ConnectionSummary_ConnectionName = ConnectionSummary.AddMember("ConnectionName", _ConnectionName)
-
-	ConnectionSummary_ConnectionArn = ConnectionSummary.AddMember("ConnectionArn", _AppRunnerResourceArn)
-
-	ConnectionSummary_ProviderType = ConnectionSummary.AddMember("ProviderType", ProviderType)
-
-	ConnectionSummary_Status = ConnectionSummary.AddMember("Status", ConnectionStatus)
-
-	ConnectionSummary_CreatedAt = ConnectionSummary.AddMember("CreatedAt", _Timestamp)
-
-	_ConnectionSummaryList_member = _ConnectionSummaryList.AddMember("member", ConnectionSummary)
-
-	CustomDomainAssociationStatus_CREATING = CustomDomainAssociationStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	CustomDomainAssociationStatus_CREATE_FAILED = CustomDomainAssociationStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	CustomDomainAssociationStatus_ACTIVE = CustomDomainAssociationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	CustomDomainAssociationStatus_DELETING = CustomDomainAssociationStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	CustomDomainAssociationStatus_DELETE_FAILED = CustomDomainAssociationStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	CustomDomainAssociationStatus_PENDING_CERTIFICATE_DNS_VALIDATION = CustomDomainAssociationStatus.AddMember("PENDING_CERTIFICATE_DNS_VALIDATION", smithyprelude.Unit)
-
-	CustomDomainAssociationStatus_BINDING_CERTIFICATE = CustomDomainAssociationStatus.AddMember("BINDING_CERTIFICATE", smithyprelude.Unit)
-
-	CustomDomain_DomainName = CustomDomain.AddMember("DomainName", _DomainName)
-
-	CustomDomain_EnableWWWSubdomain = CustomDomain.AddMember("EnableWWWSubdomain", _NullableBoolean)
-
-	CustomDomain_CertificateValidationRecords = CustomDomain.AddMember("CertificateValidationRecords", _CertificateValidationRecordList)
-
-	CustomDomain_Status = CustomDomain.AddMember("Status", CustomDomainAssociationStatus)
-
-	_CustomDomainList_member = _CustomDomainList.AddMember("member", CustomDomain)
-
-	EgressType_DEFAULT = EgressType.AddMember("DEFAULT", smithyprelude.Unit)
-
-	EgressType_VPC = EgressType.AddMember("VPC", smithyprelude.Unit)
-
-	EgressConfiguration_EgressType = EgressConfiguration.AddMember("EgressType", EgressType)
-
-	EgressConfiguration_VpcConnectorArn = EgressConfiguration.AddMember("VpcConnectorArn", _AppRunnerResourceArn)
-
-	EncryptionConfiguration_KmsKey = EncryptionConfiguration.AddMember("KmsKey", _KmsKeyArn)
-
-	HealthCheckProtocol_TCP = HealthCheckProtocol.AddMember("TCP", smithyprelude.Unit)
-
-	HealthCheckProtocol_HTTP = HealthCheckProtocol.AddMember("HTTP", smithyprelude.Unit)
-
-	HealthCheckConfiguration_Protocol = HealthCheckConfiguration.AddMember("Protocol", HealthCheckProtocol)
-
-	HealthCheckConfiguration_Path = HealthCheckConfiguration.AddMember("Path", _HealthCheckPath)
-
-	HealthCheckConfiguration_Interval = HealthCheckConfiguration.AddMember("Interval", _HealthCheckInterval)
-
-	HealthCheckConfiguration_Timeout = HealthCheckConfiguration.AddMember("Timeout", _HealthCheckTimeout)
-
-	HealthCheckConfiguration_HealthyThreshold = HealthCheckConfiguration.AddMember("HealthyThreshold", _HealthCheckHealthyThreshold)
-
-	HealthCheckConfiguration_UnhealthyThreshold = HealthCheckConfiguration.AddMember("UnhealthyThreshold", _HealthCheckUnhealthyThreshold)
-
-	ImageConfiguration_RuntimeEnvironmentVariables = ImageConfiguration.AddMember("RuntimeEnvironmentVariables", _RuntimeEnvironmentVariables)
-
-	ImageConfiguration_StartCommand = ImageConfiguration.AddMember("StartCommand", _StartCommand)
-
-	ImageConfiguration_Port = ImageConfiguration.AddMember("Port", _String)
-
-	ImageConfiguration_RuntimeEnvironmentSecrets = ImageConfiguration.AddMember("RuntimeEnvironmentSecrets", _RuntimeEnvironmentSecrets)
-
-	ImageRepositoryType_ECR = ImageRepositoryType.AddMember("ECR", smithyprelude.Unit)
-
-	ImageRepositoryType_ECR_PUBLIC = ImageRepositoryType.AddMember("ECR_PUBLIC", smithyprelude.Unit)
-
-	ImageRepository_ImageIdentifier = ImageRepository.AddMember("ImageIdentifier", _ImageIdentifier)
-
-	ImageRepository_ImageConfiguration = ImageRepository.AddMember("ImageConfiguration", ImageConfiguration)
-
-	ImageRepository_ImageRepositoryType = ImageRepository.AddMember("ImageRepositoryType", ImageRepositoryType)
-
-	IngressConfiguration_IsPubliclyAccessible = IngressConfiguration.AddMember("IsPubliclyAccessible", _Boolean)
-
-	IngressVpcConfiguration_VpcId = IngressVpcConfiguration.AddMember("VpcId", _String)
-
-	IngressVpcConfiguration_VpcEndpointId = IngressVpcConfiguration.AddMember("VpcEndpointId", _String)
-
-	InstanceConfiguration_Cpu = InstanceConfiguration.AddMember("Cpu", _Cpu)
-
-	InstanceConfiguration_Memory = InstanceConfiguration.AddMember("Memory", _Memory)
-
-	InstanceConfiguration_InstanceRoleArn = InstanceConfiguration.AddMember("InstanceRoleArn", _RoleArn)
-
-	InternalServiceErrorException_Message = InternalServiceErrorException.AddMember("Message", _ErrorMessage)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _ErrorMessage)
-
-	InvalidStateException_Message = InvalidStateException.AddMember("Message", _ErrorMessage)
-
-	IpAddressType_IPV4 = IpAddressType.AddMember("IPV4", smithyprelude.Unit)
-
-	IpAddressType_DUAL_STACK = IpAddressType.AddMember("DUAL_STACK", smithyprelude.Unit)
-
-	ListVpcIngressConnectionsFilter_ServiceArn = ListVpcIngressConnectionsFilter.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	ListVpcIngressConnectionsFilter_VpcEndpointId = ListVpcIngressConnectionsFilter.AddMember("VpcEndpointId", _String)
-
-	NetworkConfiguration_EgressConfiguration = NetworkConfiguration.AddMember("EgressConfiguration", EgressConfiguration)
-
-	NetworkConfiguration_IngressConfiguration = NetworkConfiguration.AddMember("IngressConfiguration", IngressConfiguration)
-
-	NetworkConfiguration_IpAddressType = NetworkConfiguration.AddMember("IpAddressType", IpAddressType)
-
-	TracingVendor_AWSXRAY = TracingVendor.AddMember("AWSXRAY", smithyprelude.Unit)
-
-	TraceConfiguration_Vendor = TraceConfiguration.AddMember("Vendor", TracingVendor)
-
-	ObservabilityConfigurationStatus_ACTIVE = ObservabilityConfigurationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ObservabilityConfigurationStatus_INACTIVE = ObservabilityConfigurationStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ObservabilityConfiguration_ObservabilityConfigurationArn = ObservabilityConfiguration.AddMember("ObservabilityConfigurationArn", _AppRunnerResourceArn)
-
-	ObservabilityConfiguration_ObservabilityConfigurationName = ObservabilityConfiguration.AddMember("ObservabilityConfigurationName", _ObservabilityConfigurationName)
-
-	ObservabilityConfiguration_TraceConfiguration = ObservabilityConfiguration.AddMember("TraceConfiguration", TraceConfiguration)
-
-	ObservabilityConfiguration_ObservabilityConfigurationRevision = ObservabilityConfiguration.AddMember("ObservabilityConfigurationRevision", _Integer)
-
-	ObservabilityConfiguration_Latest = ObservabilityConfiguration.AddMember("Latest", _Boolean)
-
-	ObservabilityConfiguration_Status = ObservabilityConfiguration.AddMember("Status", ObservabilityConfigurationStatus)
-
-	ObservabilityConfiguration_CreatedAt = ObservabilityConfiguration.AddMember("CreatedAt", _Timestamp)
-
-	ObservabilityConfiguration_DeletedAt = ObservabilityConfiguration.AddMember("DeletedAt", _Timestamp)
-
-	ObservabilityConfigurationSummary_ObservabilityConfigurationArn = ObservabilityConfigurationSummary.AddMember("ObservabilityConfigurationArn", _AppRunnerResourceArn)
-
-	ObservabilityConfigurationSummary_ObservabilityConfigurationName = ObservabilityConfigurationSummary.AddMember("ObservabilityConfigurationName", _ObservabilityConfigurationName)
-
-	ObservabilityConfigurationSummary_ObservabilityConfigurationRevision = ObservabilityConfigurationSummary.AddMember("ObservabilityConfigurationRevision", _Integer)
-
-	_ObservabilityConfigurationSummaryList_member = _ObservabilityConfigurationSummaryList.AddMember("member", ObservabilityConfigurationSummary)
-
-	OperationStatus_PENDING = OperationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	OperationStatus_IN_PROGRESS = OperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	OperationStatus_FAILED = OperationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	OperationStatus_SUCCEEDED = OperationStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	OperationStatus_ROLLBACK_IN_PROGRESS = OperationStatus.AddMember("ROLLBACK_IN_PROGRESS", smithyprelude.Unit)
-
-	OperationStatus_ROLLBACK_FAILED = OperationStatus.AddMember("ROLLBACK_FAILED", smithyprelude.Unit)
-
-	OperationStatus_ROLLBACK_SUCCEEDED = OperationStatus.AddMember("ROLLBACK_SUCCEEDED", smithyprelude.Unit)
-
-	OperationType_START_DEPLOYMENT = OperationType.AddMember("START_DEPLOYMENT", smithyprelude.Unit)
-
-	OperationType_CREATE_SERVICE = OperationType.AddMember("CREATE_SERVICE", smithyprelude.Unit)
-
-	OperationType_PAUSE_SERVICE = OperationType.AddMember("PAUSE_SERVICE", smithyprelude.Unit)
-
-	OperationType_RESUME_SERVICE = OperationType.AddMember("RESUME_SERVICE", smithyprelude.Unit)
-
-	OperationType_DELETE_SERVICE = OperationType.AddMember("DELETE_SERVICE", smithyprelude.Unit)
-
-	OperationType_UPDATE_SERVICE = OperationType.AddMember("UPDATE_SERVICE", smithyprelude.Unit)
-
-	OperationSummary_Id = OperationSummary.AddMember("Id", _UUID)
-
-	OperationSummary_Type = OperationSummary.AddMember("Type", OperationType)
-
-	OperationSummary_Status = OperationSummary.AddMember("Status", OperationStatus)
-
-	OperationSummary_TargetArn = OperationSummary.AddMember("TargetArn", _AppRunnerResourceArn)
-
-	OperationSummary_StartedAt = OperationSummary.AddMember("StartedAt", _Timestamp)
-
-	OperationSummary_EndedAt = OperationSummary.AddMember("EndedAt", _Timestamp)
-
-	OperationSummary_UpdatedAt = OperationSummary.AddMember("UpdatedAt", _Timestamp)
-
-	_OperationSummaryList_member = _OperationSummaryList.AddMember("member", OperationSummary)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ServiceStatus_CREATE_FAILED = ServiceStatus.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	ServiceStatus_RUNNING = ServiceStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	ServiceStatus_DELETED = ServiceStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	ServiceStatus_DELETE_FAILED = ServiceStatus.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	ServiceStatus_PAUSED = ServiceStatus.AddMember("PAUSED", smithyprelude.Unit)
-
-	ServiceStatus_OPERATION_IN_PROGRESS = ServiceStatus.AddMember("OPERATION_IN_PROGRESS", smithyprelude.Unit)
-
-	SourceConfiguration_CodeRepository = SourceConfiguration.AddMember("CodeRepository", CodeRepository)
-
-	SourceConfiguration_ImageRepository = SourceConfiguration.AddMember("ImageRepository", ImageRepository)
-
-	SourceConfiguration_AutoDeploymentsEnabled = SourceConfiguration.AddMember("AutoDeploymentsEnabled", _NullableBoolean)
-
-	SourceConfiguration_AuthenticationConfiguration = SourceConfiguration.AddMember("AuthenticationConfiguration", AuthenticationConfiguration)
-
-	ServiceObservabilityConfiguration_ObservabilityEnabled = ServiceObservabilityConfiguration.AddMember("ObservabilityEnabled", _Boolean)
-
-	ServiceObservabilityConfiguration_ObservabilityConfigurationArn = ServiceObservabilityConfiguration.AddMember("ObservabilityConfigurationArn", _AppRunnerResourceArn)
-
-	Service_ServiceName = Service.AddMember("ServiceName", _ServiceName)
-
-	Service_ServiceId = Service.AddMember("ServiceId", _ServiceId)
-
-	Service_ServiceArn = Service.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	Service_ServiceUrl = Service.AddMember("ServiceUrl", _String)
-
-	Service_CreatedAt = Service.AddMember("CreatedAt", _Timestamp)
-
-	Service_UpdatedAt = Service.AddMember("UpdatedAt", _Timestamp)
-
-	Service_DeletedAt = Service.AddMember("DeletedAt", _Timestamp)
-
-	Service_Status = Service.AddMember("Status", ServiceStatus)
-
-	Service_SourceConfiguration = Service.AddMember("SourceConfiguration", SourceConfiguration)
-
-	Service_InstanceConfiguration = Service.AddMember("InstanceConfiguration", InstanceConfiguration)
-
-	Service_EncryptionConfiguration = Service.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	Service_HealthCheckConfiguration = Service.AddMember("HealthCheckConfiguration", HealthCheckConfiguration)
-
-	Service_AutoScalingConfigurationSummary = Service.AddMember("AutoScalingConfigurationSummary", AutoScalingConfigurationSummary)
-
-	Service_NetworkConfiguration = Service.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	Service_ObservabilityConfiguration = Service.AddMember("ObservabilityConfiguration", ServiceObservabilityConfiguration)
-
-	_ServiceArnList_member = _ServiceArnList.AddMember("member", _AppRunnerResourceArn)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ErrorMessage)
-
-	ServiceSummary_ServiceName = ServiceSummary.AddMember("ServiceName", _ServiceName)
-
-	ServiceSummary_ServiceId = ServiceSummary.AddMember("ServiceId", _ServiceId)
-
-	ServiceSummary_ServiceArn = ServiceSummary.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	ServiceSummary_ServiceUrl = ServiceSummary.AddMember("ServiceUrl", _String)
-
-	ServiceSummary_CreatedAt = ServiceSummary.AddMember("CreatedAt", _Timestamp)
-
-	ServiceSummary_UpdatedAt = ServiceSummary.AddMember("UpdatedAt", _Timestamp)
-
-	ServiceSummary_Status = ServiceSummary.AddMember("Status", ServiceStatus)
-
-	_ServiceSummaryList_member = _ServiceSummaryList.AddMember("member", ServiceSummary)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	VpcConnectorStatus_ACTIVE = VpcConnectorStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	VpcConnectorStatus_INACTIVE = VpcConnectorStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	VpcConnector_VpcConnectorName = VpcConnector.AddMember("VpcConnectorName", _VpcConnectorName)
-
-	VpcConnector_VpcConnectorArn = VpcConnector.AddMember("VpcConnectorArn", _AppRunnerResourceArn)
-
-	VpcConnector_VpcConnectorRevision = VpcConnector.AddMember("VpcConnectorRevision", _Integer)
-
-	VpcConnector_Subnets = VpcConnector.AddMember("Subnets", _StringList)
-
-	VpcConnector_SecurityGroups = VpcConnector.AddMember("SecurityGroups", _StringList)
-
-	VpcConnector_Status = VpcConnector.AddMember("Status", VpcConnectorStatus)
-
-	VpcConnector_CreatedAt = VpcConnector.AddMember("CreatedAt", _Timestamp)
-
-	VpcConnector_DeletedAt = VpcConnector.AddMember("DeletedAt", _Timestamp)
-
-	_VpcConnectors_member = _VpcConnectors.AddMember("member", VpcConnector)
-
-	VpcDNSTarget_VpcIngressConnectionArn = VpcDNSTarget.AddMember("VpcIngressConnectionArn", _AppRunnerResourceArn)
-
-	VpcDNSTarget_VpcId = VpcDNSTarget.AddMember("VpcId", _String)
-
-	VpcDNSTarget_DomainName = VpcDNSTarget.AddMember("DomainName", _DomainName)
-
-	_VpcDNSTargetList_member = _VpcDNSTargetList.AddMember("member", VpcDNSTarget)
-
-	VpcIngressConnectionStatus_AVAILABLE = VpcIngressConnectionStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	VpcIngressConnectionStatus_PENDING_CREATION = VpcIngressConnectionStatus.AddMember("PENDING_CREATION", smithyprelude.Unit)
-
-	VpcIngressConnectionStatus_PENDING_UPDATE = VpcIngressConnectionStatus.AddMember("PENDING_UPDATE", smithyprelude.Unit)
-
-	VpcIngressConnectionStatus_PENDING_DELETION = VpcIngressConnectionStatus.AddMember("PENDING_DELETION", smithyprelude.Unit)
-
-	VpcIngressConnectionStatus_FAILED_CREATION = VpcIngressConnectionStatus.AddMember("FAILED_CREATION", smithyprelude.Unit)
-
-	VpcIngressConnectionStatus_FAILED_UPDATE = VpcIngressConnectionStatus.AddMember("FAILED_UPDATE", smithyprelude.Unit)
-
-	VpcIngressConnectionStatus_FAILED_DELETION = VpcIngressConnectionStatus.AddMember("FAILED_DELETION", smithyprelude.Unit)
-
-	VpcIngressConnectionStatus_DELETED = VpcIngressConnectionStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	VpcIngressConnection_VpcIngressConnectionArn = VpcIngressConnection.AddMember("VpcIngressConnectionArn", _AppRunnerResourceArn)
-
-	VpcIngressConnection_VpcIngressConnectionName = VpcIngressConnection.AddMember("VpcIngressConnectionName", _VpcIngressConnectionName)
-
-	VpcIngressConnection_ServiceArn = VpcIngressConnection.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	VpcIngressConnection_Status = VpcIngressConnection.AddMember("Status", VpcIngressConnectionStatus)
-
-	VpcIngressConnection_AccountId = VpcIngressConnection.AddMember("AccountId", _CustomerAccountId)
-
-	VpcIngressConnection_DomainName = VpcIngressConnection.AddMember("DomainName", _DomainName)
-
-	VpcIngressConnection_IngressVpcConfiguration = VpcIngressConnection.AddMember("IngressVpcConfiguration", IngressVpcConfiguration)
-
-	VpcIngressConnection_CreatedAt = VpcIngressConnection.AddMember("CreatedAt", _Timestamp)
-
-	VpcIngressConnection_DeletedAt = VpcIngressConnection.AddMember("DeletedAt", _Timestamp)
-
-	VpcIngressConnectionSummary_VpcIngressConnectionArn = VpcIngressConnectionSummary.AddMember("VpcIngressConnectionArn", _AppRunnerResourceArn)
-
-	VpcIngressConnectionSummary_ServiceArn = VpcIngressConnectionSummary.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	_VpcIngressConnectionSummaryList_member = _VpcIngressConnectionSummaryList.AddMember("member", VpcIngressConnectionSummary)
-
-	AssociateCustomDomainRequest_ServiceArn = AssociateCustomDomainRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	AssociateCustomDomainRequest_DomainName = AssociateCustomDomainRequest.AddMember("DomainName", _DomainName)
-
-	AssociateCustomDomainRequest_EnableWWWSubdomain = AssociateCustomDomainRequest.AddMember("EnableWWWSubdomain", _NullableBoolean)
-
-	AssociateCustomDomainResponse_DNSTarget = AssociateCustomDomainResponse.AddMember("DNSTarget", _String)
-
-	AssociateCustomDomainResponse_ServiceArn = AssociateCustomDomainResponse.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	AssociateCustomDomainResponse_CustomDomain = AssociateCustomDomainResponse.AddMember("CustomDomain", CustomDomain)
-
-	AssociateCustomDomainResponse_VpcDNSTargets = AssociateCustomDomainResponse.AddMember("VpcDNSTargets", _VpcDNSTargetList)
-
-	CreateAutoScalingConfigurationRequest_AutoScalingConfigurationName = CreateAutoScalingConfigurationRequest.AddMember("AutoScalingConfigurationName", _AutoScalingConfigurationName)
-
-	CreateAutoScalingConfigurationRequest_MaxConcurrency = CreateAutoScalingConfigurationRequest.AddMember("MaxConcurrency", _ASConfigMaxConcurrency)
-
-	CreateAutoScalingConfigurationRequest_MinSize = CreateAutoScalingConfigurationRequest.AddMember("MinSize", _ASConfigMinSize)
-
-	CreateAutoScalingConfigurationRequest_MaxSize = CreateAutoScalingConfigurationRequest.AddMember("MaxSize", _ASConfigMaxSize)
-
-	CreateAutoScalingConfigurationRequest_Tags = CreateAutoScalingConfigurationRequest.AddMember("Tags", _TagList)
-
-	CreateAutoScalingConfigurationResponse_AutoScalingConfiguration = CreateAutoScalingConfigurationResponse.AddMember("AutoScalingConfiguration", AutoScalingConfiguration)
-
-	CreateConnectionRequest_ConnectionName = CreateConnectionRequest.AddMember("ConnectionName", _ConnectionName)
-
-	CreateConnectionRequest_ProviderType = CreateConnectionRequest.AddMember("ProviderType", ProviderType)
-
-	CreateConnectionRequest_Tags = CreateConnectionRequest.AddMember("Tags", _TagList)
-
-	CreateConnectionResponse_Connection = CreateConnectionResponse.AddMember("Connection", Connection)
-
-	CreateObservabilityConfigurationRequest_ObservabilityConfigurationName = CreateObservabilityConfigurationRequest.AddMember("ObservabilityConfigurationName", _ObservabilityConfigurationName)
-
-	CreateObservabilityConfigurationRequest_TraceConfiguration = CreateObservabilityConfigurationRequest.AddMember("TraceConfiguration", TraceConfiguration)
-
-	CreateObservabilityConfigurationRequest_Tags = CreateObservabilityConfigurationRequest.AddMember("Tags", _TagList)
-
-	CreateObservabilityConfigurationResponse_ObservabilityConfiguration = CreateObservabilityConfigurationResponse.AddMember("ObservabilityConfiguration", ObservabilityConfiguration)
-
-	CreateServiceRequest_ServiceName = CreateServiceRequest.AddMember("ServiceName", _ServiceName)
-
-	CreateServiceRequest_SourceConfiguration = CreateServiceRequest.AddMember("SourceConfiguration", SourceConfiguration)
-
-	CreateServiceRequest_InstanceConfiguration = CreateServiceRequest.AddMember("InstanceConfiguration", InstanceConfiguration)
-
-	CreateServiceRequest_Tags = CreateServiceRequest.AddMember("Tags", _TagList)
-
-	CreateServiceRequest_EncryptionConfiguration = CreateServiceRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	CreateServiceRequest_HealthCheckConfiguration = CreateServiceRequest.AddMember("HealthCheckConfiguration", HealthCheckConfiguration)
-
-	CreateServiceRequest_AutoScalingConfigurationArn = CreateServiceRequest.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	CreateServiceRequest_NetworkConfiguration = CreateServiceRequest.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	CreateServiceRequest_ObservabilityConfiguration = CreateServiceRequest.AddMember("ObservabilityConfiguration", ServiceObservabilityConfiguration)
-
-	CreateServiceResponse_Service = CreateServiceResponse.AddMember("Service", Service)
-
-	CreateServiceResponse_OperationId = CreateServiceResponse.AddMember("OperationId", _UUID)
-
-	CreateVpcConnectorRequest_VpcConnectorName = CreateVpcConnectorRequest.AddMember("VpcConnectorName", _VpcConnectorName)
-
-	CreateVpcConnectorRequest_Subnets = CreateVpcConnectorRequest.AddMember("Subnets", _StringList)
-
-	CreateVpcConnectorRequest_SecurityGroups = CreateVpcConnectorRequest.AddMember("SecurityGroups", _StringList)
-
-	CreateVpcConnectorRequest_Tags = CreateVpcConnectorRequest.AddMember("Tags", _TagList)
-
-	CreateVpcConnectorResponse_VpcConnector = CreateVpcConnectorResponse.AddMember("VpcConnector", VpcConnector)
-
-	CreateVpcIngressConnectionRequest_ServiceArn = CreateVpcIngressConnectionRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	CreateVpcIngressConnectionRequest_VpcIngressConnectionName = CreateVpcIngressConnectionRequest.AddMember("VpcIngressConnectionName", _VpcIngressConnectionName)
-
-	CreateVpcIngressConnectionRequest_IngressVpcConfiguration = CreateVpcIngressConnectionRequest.AddMember("IngressVpcConfiguration", IngressVpcConfiguration)
-
-	CreateVpcIngressConnectionRequest_Tags = CreateVpcIngressConnectionRequest.AddMember("Tags", _TagList)
-
-	CreateVpcIngressConnectionResponse_VpcIngressConnection = CreateVpcIngressConnectionResponse.AddMember("VpcIngressConnection", VpcIngressConnection)
-
-	DeleteAutoScalingConfigurationRequest_AutoScalingConfigurationArn = DeleteAutoScalingConfigurationRequest.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	DeleteAutoScalingConfigurationRequest_DeleteAllRevisions = DeleteAutoScalingConfigurationRequest.AddMember("DeleteAllRevisions", _Boolean)
-
-	DeleteAutoScalingConfigurationResponse_AutoScalingConfiguration = DeleteAutoScalingConfigurationResponse.AddMember("AutoScalingConfiguration", AutoScalingConfiguration)
-
-	DeleteConnectionRequest_ConnectionArn = DeleteConnectionRequest.AddMember("ConnectionArn", _AppRunnerResourceArn)
-
-	DeleteConnectionResponse_Connection = DeleteConnectionResponse.AddMember("Connection", Connection)
-
-	DeleteObservabilityConfigurationRequest_ObservabilityConfigurationArn = DeleteObservabilityConfigurationRequest.AddMember("ObservabilityConfigurationArn", _AppRunnerResourceArn)
-
-	DeleteObservabilityConfigurationResponse_ObservabilityConfiguration = DeleteObservabilityConfigurationResponse.AddMember("ObservabilityConfiguration", ObservabilityConfiguration)
-
-	DeleteServiceRequest_ServiceArn = DeleteServiceRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	DeleteServiceResponse_Service = DeleteServiceResponse.AddMember("Service", Service)
-
-	DeleteServiceResponse_OperationId = DeleteServiceResponse.AddMember("OperationId", _UUID)
-
-	DeleteVpcConnectorRequest_VpcConnectorArn = DeleteVpcConnectorRequest.AddMember("VpcConnectorArn", _AppRunnerResourceArn)
-
-	DeleteVpcConnectorResponse_VpcConnector = DeleteVpcConnectorResponse.AddMember("VpcConnector", VpcConnector)
-
-	DeleteVpcIngressConnectionRequest_VpcIngressConnectionArn = DeleteVpcIngressConnectionRequest.AddMember("VpcIngressConnectionArn", _AppRunnerResourceArn)
-
-	DeleteVpcIngressConnectionResponse_VpcIngressConnection = DeleteVpcIngressConnectionResponse.AddMember("VpcIngressConnection", VpcIngressConnection)
-
-	DescribeAutoScalingConfigurationRequest_AutoScalingConfigurationArn = DescribeAutoScalingConfigurationRequest.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	DescribeAutoScalingConfigurationResponse_AutoScalingConfiguration = DescribeAutoScalingConfigurationResponse.AddMember("AutoScalingConfiguration", AutoScalingConfiguration)
-
-	DescribeCustomDomainsRequest_ServiceArn = DescribeCustomDomainsRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	DescribeCustomDomainsRequest_NextToken = DescribeCustomDomainsRequest.AddMember("NextToken", _String)
-
-	DescribeCustomDomainsRequest_MaxResults = DescribeCustomDomainsRequest.AddMember("MaxResults", _DescribeCustomDomainsMaxResults)
-
-	DescribeCustomDomainsResponse_DNSTarget = DescribeCustomDomainsResponse.AddMember("DNSTarget", _String)
-
-	DescribeCustomDomainsResponse_ServiceArn = DescribeCustomDomainsResponse.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	DescribeCustomDomainsResponse_CustomDomains = DescribeCustomDomainsResponse.AddMember("CustomDomains", _CustomDomainList)
-
-	DescribeCustomDomainsResponse_VpcDNSTargets = DescribeCustomDomainsResponse.AddMember("VpcDNSTargets", _VpcDNSTargetList)
-
-	DescribeCustomDomainsResponse_NextToken = DescribeCustomDomainsResponse.AddMember("NextToken", _String)
-
-	DescribeObservabilityConfigurationRequest_ObservabilityConfigurationArn = DescribeObservabilityConfigurationRequest.AddMember("ObservabilityConfigurationArn", _AppRunnerResourceArn)
-
-	DescribeObservabilityConfigurationResponse_ObservabilityConfiguration = DescribeObservabilityConfigurationResponse.AddMember("ObservabilityConfiguration", ObservabilityConfiguration)
-
-	DescribeServiceRequest_ServiceArn = DescribeServiceRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	DescribeServiceResponse_Service = DescribeServiceResponse.AddMember("Service", Service)
-
-	DescribeVpcConnectorRequest_VpcConnectorArn = DescribeVpcConnectorRequest.AddMember("VpcConnectorArn", _AppRunnerResourceArn)
-
-	DescribeVpcConnectorResponse_VpcConnector = DescribeVpcConnectorResponse.AddMember("VpcConnector", VpcConnector)
-
-	DescribeVpcIngressConnectionRequest_VpcIngressConnectionArn = DescribeVpcIngressConnectionRequest.AddMember("VpcIngressConnectionArn", _AppRunnerResourceArn)
-
-	DescribeVpcIngressConnectionResponse_VpcIngressConnection = DescribeVpcIngressConnectionResponse.AddMember("VpcIngressConnection", VpcIngressConnection)
-
-	DisassociateCustomDomainRequest_ServiceArn = DisassociateCustomDomainRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	DisassociateCustomDomainRequest_DomainName = DisassociateCustomDomainRequest.AddMember("DomainName", _DomainName)
-
-	DisassociateCustomDomainResponse_DNSTarget = DisassociateCustomDomainResponse.AddMember("DNSTarget", _String)
-
-	DisassociateCustomDomainResponse_ServiceArn = DisassociateCustomDomainResponse.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	DisassociateCustomDomainResponse_CustomDomain = DisassociateCustomDomainResponse.AddMember("CustomDomain", CustomDomain)
-
-	DisassociateCustomDomainResponse_VpcDNSTargets = DisassociateCustomDomainResponse.AddMember("VpcDNSTargets", _VpcDNSTargetList)
-
-	ListAutoScalingConfigurationsRequest_AutoScalingConfigurationName = ListAutoScalingConfigurationsRequest.AddMember("AutoScalingConfigurationName", _AutoScalingConfigurationName)
-
-	ListAutoScalingConfigurationsRequest_LatestOnly = ListAutoScalingConfigurationsRequest.AddMember("LatestOnly", _Boolean)
-
-	ListAutoScalingConfigurationsRequest_MaxResults = ListAutoScalingConfigurationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAutoScalingConfigurationsRequest_NextToken = ListAutoScalingConfigurationsRequest.AddMember("NextToken", _NextToken)
-
-	ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList = ListAutoScalingConfigurationsResponse.AddMember("AutoScalingConfigurationSummaryList", _AutoScalingConfigurationSummaryList)
-
-	ListAutoScalingConfigurationsResponse_NextToken = ListAutoScalingConfigurationsResponse.AddMember("NextToken", _NextToken)
-
-	ListConnectionsRequest_ConnectionName = ListConnectionsRequest.AddMember("ConnectionName", _ConnectionName)
-
-	ListConnectionsRequest_MaxResults = ListConnectionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListConnectionsRequest_NextToken = ListConnectionsRequest.AddMember("NextToken", _NextToken)
-
-	ListConnectionsResponse_ConnectionSummaryList = ListConnectionsResponse.AddMember("ConnectionSummaryList", _ConnectionSummaryList)
-
-	ListConnectionsResponse_NextToken = ListConnectionsResponse.AddMember("NextToken", _NextToken)
-
-	ListObservabilityConfigurationsRequest_ObservabilityConfigurationName = ListObservabilityConfigurationsRequest.AddMember("ObservabilityConfigurationName", _ObservabilityConfigurationName)
-
-	ListObservabilityConfigurationsRequest_LatestOnly = ListObservabilityConfigurationsRequest.AddMember("LatestOnly", _Boolean)
-
-	ListObservabilityConfigurationsRequest_MaxResults = ListObservabilityConfigurationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListObservabilityConfigurationsRequest_NextToken = ListObservabilityConfigurationsRequest.AddMember("NextToken", _NextToken)
-
-	ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList = ListObservabilityConfigurationsResponse.AddMember("ObservabilityConfigurationSummaryList", _ObservabilityConfigurationSummaryList)
-
-	ListObservabilityConfigurationsResponse_NextToken = ListObservabilityConfigurationsResponse.AddMember("NextToken", _NextToken)
-
-	ListOperationsRequest_ServiceArn = ListOperationsRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	ListOperationsRequest_NextToken = ListOperationsRequest.AddMember("NextToken", _String)
-
-	ListOperationsRequest_MaxResults = ListOperationsRequest.AddMember("MaxResults", _ListOperationsMaxResults)
-
-	ListOperationsResponse_OperationSummaryList = ListOperationsResponse.AddMember("OperationSummaryList", _OperationSummaryList)
-
-	ListOperationsResponse_NextToken = ListOperationsResponse.AddMember("NextToken", _String)
-
-	ListServicesForAutoScalingConfigurationRequest_AutoScalingConfigurationArn = ListServicesForAutoScalingConfigurationRequest.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	ListServicesForAutoScalingConfigurationRequest_MaxResults = ListServicesForAutoScalingConfigurationRequest.AddMember("MaxResults", _MaxResults)
-
-	ListServicesForAutoScalingConfigurationRequest_NextToken = ListServicesForAutoScalingConfigurationRequest.AddMember("NextToken", _NextToken)
-
-	ListServicesForAutoScalingConfigurationResponse_ServiceArnList = ListServicesForAutoScalingConfigurationResponse.AddMember("ServiceArnList", _ServiceArnList)
-
-	ListServicesForAutoScalingConfigurationResponse_NextToken = ListServicesForAutoScalingConfigurationResponse.AddMember("NextToken", _NextToken)
-
-	ListServicesRequest_NextToken = ListServicesRequest.AddMember("NextToken", _String)
-
-	ListServicesRequest_MaxResults = ListServicesRequest.AddMember("MaxResults", _ServiceMaxResults)
-
-	ListServicesResponse_ServiceSummaryList = ListServicesResponse.AddMember("ServiceSummaryList", _ServiceSummaryList)
-
-	ListServicesResponse_NextToken = ListServicesResponse.AddMember("NextToken", _String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _AppRunnerResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListVpcConnectorsRequest_MaxResults = ListVpcConnectorsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListVpcConnectorsRequest_NextToken = ListVpcConnectorsRequest.AddMember("NextToken", _NextToken)
-
-	ListVpcConnectorsResponse_VpcConnectors = ListVpcConnectorsResponse.AddMember("VpcConnectors", _VpcConnectors)
-
-	ListVpcConnectorsResponse_NextToken = ListVpcConnectorsResponse.AddMember("NextToken", _NextToken)
-
-	ListVpcIngressConnectionsRequest_Filter = ListVpcIngressConnectionsRequest.AddMember("Filter", ListVpcIngressConnectionsFilter)
-
-	ListVpcIngressConnectionsRequest_MaxResults = ListVpcIngressConnectionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListVpcIngressConnectionsRequest_NextToken = ListVpcIngressConnectionsRequest.AddMember("NextToken", _NextToken)
-
-	ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList = ListVpcIngressConnectionsResponse.AddMember("VpcIngressConnectionSummaryList", _VpcIngressConnectionSummaryList)
-
-	ListVpcIngressConnectionsResponse_NextToken = ListVpcIngressConnectionsResponse.AddMember("NextToken", _NextToken)
-
-	PauseServiceRequest_ServiceArn = PauseServiceRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	PauseServiceResponse_Service = PauseServiceResponse.AddMember("Service", Service)
-
-	PauseServiceResponse_OperationId = PauseServiceResponse.AddMember("OperationId", _UUID)
-
-	ResumeServiceRequest_ServiceArn = ResumeServiceRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	ResumeServiceResponse_Service = ResumeServiceResponse.AddMember("Service", Service)
-
-	ResumeServiceResponse_OperationId = ResumeServiceResponse.AddMember("OperationId", _UUID)
-
-	StartDeploymentRequest_ServiceArn = StartDeploymentRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	StartDeploymentResponse_OperationId = StartDeploymentResponse.AddMember("OperationId", _UUID)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _AppRunnerResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _AppRunnerResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateDefaultAutoScalingConfigurationRequest_AutoScalingConfigurationArn = UpdateDefaultAutoScalingConfigurationRequest.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	UpdateDefaultAutoScalingConfigurationResponse_AutoScalingConfiguration = UpdateDefaultAutoScalingConfigurationResponse.AddMember("AutoScalingConfiguration", AutoScalingConfiguration)
-
-	UpdateServiceRequest_ServiceArn = UpdateServiceRequest.AddMember("ServiceArn", _AppRunnerResourceArn)
-
-	UpdateServiceRequest_SourceConfiguration = UpdateServiceRequest.AddMember("SourceConfiguration", SourceConfiguration)
-
-	UpdateServiceRequest_InstanceConfiguration = UpdateServiceRequest.AddMember("InstanceConfiguration", InstanceConfiguration)
-
-	UpdateServiceRequest_AutoScalingConfigurationArn = UpdateServiceRequest.AddMember("AutoScalingConfigurationArn", _AppRunnerResourceArn)
-
-	UpdateServiceRequest_HealthCheckConfiguration = UpdateServiceRequest.AddMember("HealthCheckConfiguration", HealthCheckConfiguration)
-
-	UpdateServiceRequest_NetworkConfiguration = UpdateServiceRequest.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	UpdateServiceRequest_ObservabilityConfiguration = UpdateServiceRequest.AddMember("ObservabilityConfiguration", ServiceObservabilityConfiguration)
-
-	UpdateServiceResponse_Service = UpdateServiceResponse.AddMember("Service", Service)
-
-	UpdateServiceResponse_OperationId = UpdateServiceResponse.AddMember("OperationId", _UUID)
-
-	UpdateVpcIngressConnectionRequest_VpcIngressConnectionArn = UpdateVpcIngressConnectionRequest.AddMember("VpcIngressConnectionArn", _AppRunnerResourceArn)
-
-	UpdateVpcIngressConnectionRequest_IngressVpcConfiguration = UpdateVpcIngressConnectionRequest.AddMember("IngressVpcConfiguration", IngressVpcConfiguration)
-
-	UpdateVpcIngressConnectionResponse_VpcIngressConnection = UpdateVpcIngressConnectionResponse.AddMember("VpcIngressConnection", VpcIngressConnection)
-
-}
+var (
+	iAssociateCustomDomain                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AssociateCustomDomain"}
+	iCreateAutoScalingConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateAutoScalingConfiguration"}
+	iCreateConnection                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateConnection"}
+	iCreateObservabilityConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateObservabilityConfiguration"}
+	iCreateService                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateService"}
+	iCreateVpcConnector                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateVpcConnector"}
+	iCreateVpcIngressConnection                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateVpcIngressConnection"}
+	iDeleteAutoScalingConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteAutoScalingConfiguration"}
+	iDeleteConnection                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteConnection"}
+	iDeleteObservabilityConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteObservabilityConfiguration"}
+	iDeleteService                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteService"}
+	iDeleteVpcConnector                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteVpcConnector"}
+	iDeleteVpcIngressConnection                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteVpcIngressConnection"}
+	iDescribeAutoScalingConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeAutoScalingConfiguration"}
+	iDescribeCustomDomains                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeCustomDomains"}
+	iDescribeObservabilityConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeObservabilityConfiguration"}
+	iDescribeService                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeService"}
+	iDescribeVpcConnector                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeVpcConnector"}
+	iDescribeVpcIngressConnection                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeVpcIngressConnection"}
+	iDisassociateCustomDomain                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DisassociateCustomDomain"}
+	iListAutoScalingConfigurations                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListAutoScalingConfigurations"}
+	iListConnections                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListConnections"}
+	iListObservabilityConfigurations                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListObservabilityConfigurations"}
+	iListOperations                                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListOperations"}
+	iListServices                                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListServices"}
+	iListServicesForAutoScalingConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListServicesForAutoScalingConfiguration"}
+	iListTagsForResource                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListTagsForResource"}
+	iListVpcConnectors                               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListVpcConnectors"}
+	iListVpcIngressConnections                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListVpcIngressConnections"}
+	iPauseService                                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "PauseService"}
+	iResumeService                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ResumeService"}
+	iStartDeployment                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "StartDeployment"}
+	iTagResource                                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TagResource"}
+	iUntagResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UntagResource"}
+	iUpdateDefaultAutoScalingConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateDefaultAutoScalingConfiguration"}
+	iUpdateService                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateService"}
+	iUpdateVpcIngressConnection                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateVpcIngressConnection"}
+	i_AppRunner                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AppRunner"}
+	i_AppRunnerResourceArn                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AppRunnerResourceArn"}
+	i_ASConfigMaxConcurrency                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ASConfigMaxConcurrency"}
+	i_ASConfigMaxSize                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ASConfigMaxSize"}
+	i_ASConfigMinSize                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ASConfigMinSize"}
+	iAuthenticationConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AuthenticationConfiguration"}
+	iAutoScalingConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AutoScalingConfiguration"}
+	i_AutoScalingConfigurationName                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AutoScalingConfigurationName"}
+	i_AutoScalingConfigurationRevision               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AutoScalingConfigurationRevision"}
+	iAutoScalingConfigurationStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AutoScalingConfigurationStatus"}
+	iAutoScalingConfigurationSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AutoScalingConfigurationSummary"}
+	i_AutoScalingConfigurationSummaryList            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AutoScalingConfigurationSummaryList"}
+	i_Boolean                                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Boolean"}
+	i_BuildCommand                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "BuildCommand"}
+	iCertificateValidationRecord                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CertificateValidationRecord"}
+	i_CertificateValidationRecordList                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CertificateValidationRecordList"}
+	iCertificateValidationRecordStatus               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CertificateValidationRecordStatus"}
+	iCodeConfiguration                               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CodeConfiguration"}
+	iCodeConfigurationValues                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CodeConfigurationValues"}
+	iCodeRepository                                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CodeRepository"}
+	iConfigurationSource                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ConfigurationSource"}
+	iConnection                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Connection"}
+	i_ConnectionName                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ConnectionName"}
+	iConnectionStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ConnectionStatus"}
+	iConnectionSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ConnectionSummary"}
+	i_ConnectionSummaryList                          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ConnectionSummaryList"}
+	i_Cpu                                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Cpu"}
+	iCustomDomain                                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CustomDomain"}
+	iCustomDomainAssociationStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CustomDomainAssociationStatus"}
+	i_CustomDomainList                               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CustomDomainList"}
+	i_CustomerAccountId                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CustomerAccountId"}
+	i_DescribeCustomDomainsMaxResults                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeCustomDomainsMaxResults"}
+	i_DomainName                                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DomainName"}
+	iEgressConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "EgressConfiguration"}
+	iEgressType                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "EgressType"}
+	iEncryptionConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "EncryptionConfiguration"}
+	i_ErrorMessage                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ErrorMessage"}
+	i_HasAssociatedService                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HasAssociatedService"}
+	iHealthCheckConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HealthCheckConfiguration"}
+	i_HealthCheckHealthyThreshold                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HealthCheckHealthyThreshold"}
+	i_HealthCheckInterval                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HealthCheckInterval"}
+	i_HealthCheckPath                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HealthCheckPath"}
+	iHealthCheckProtocol                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HealthCheckProtocol"}
+	i_HealthCheckTimeout                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HealthCheckTimeout"}
+	i_HealthCheckUnhealthyThreshold                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "HealthCheckUnhealthyThreshold"}
+	iImageConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ImageConfiguration"}
+	i_ImageIdentifier                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ImageIdentifier"}
+	iImageRepository                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ImageRepository"}
+	iImageRepositoryType                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ImageRepositoryType"}
+	iIngressConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "IngressConfiguration"}
+	iIngressVpcConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "IngressVpcConfiguration"}
+	iInstanceConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "InstanceConfiguration"}
+	i_Integer                                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Integer"}
+	iInternalServiceErrorException                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "InternalServiceErrorException"}
+	iInvalidRequestException                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "InvalidRequestException"}
+	iInvalidStateException                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "InvalidStateException"}
+	iIpAddressType                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "IpAddressType"}
+	i_IsDefault                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "IsDefault"}
+	i_KmsKeyArn                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "KmsKeyArn"}
+	i_Latest                                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Latest"}
+	i_ListOperationsMaxResults                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListOperationsMaxResults"}
+	iListVpcIngressConnectionsFilter                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListVpcIngressConnectionsFilter"}
+	i_MaxConcurrency                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "MaxConcurrency"}
+	i_MaxResults                                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "MaxResults"}
+	i_MaxSize                                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "MaxSize"}
+	i_Memory                                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Memory"}
+	i_MinSize                                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "MinSize"}
+	iNetworkConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "NetworkConfiguration"}
+	i_NextToken                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "NextToken"}
+	i_NullableBoolean                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "NullableBoolean"}
+	iObservabilityConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ObservabilityConfiguration"}
+	i_ObservabilityConfigurationName                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ObservabilityConfigurationName"}
+	iObservabilityConfigurationStatus                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ObservabilityConfigurationStatus"}
+	iObservabilityConfigurationSummary               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ObservabilityConfigurationSummary"}
+	i_ObservabilityConfigurationSummaryList          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ObservabilityConfigurationSummaryList"}
+	iOperationStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "OperationStatus"}
+	iOperationSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "OperationSummary"}
+	i_OperationSummaryList                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "OperationSummaryList"}
+	iOperationType                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "OperationType"}
+	iProviderType                                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ProviderType"}
+	iResourceNotFoundException                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ResourceNotFoundException"}
+	i_RoleArn                                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "RoleArn"}
+	iRuntime                                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Runtime"}
+	i_RuntimeEnvironmentSecrets                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "RuntimeEnvironmentSecrets"}
+	i_RuntimeEnvironmentSecretsName                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "RuntimeEnvironmentSecretsName"}
+	i_RuntimeEnvironmentSecretsValue                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "RuntimeEnvironmentSecretsValue"}
+	i_RuntimeEnvironmentVariables                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "RuntimeEnvironmentVariables"}
+	i_RuntimeEnvironmentVariablesKey                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "RuntimeEnvironmentVariablesKey"}
+	i_RuntimeEnvironmentVariablesValue               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "RuntimeEnvironmentVariablesValue"}
+	iService                                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Service"}
+	i_ServiceArnList                                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceArnList"}
+	i_ServiceId                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceId"}
+	i_ServiceMaxResults                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceMaxResults"}
+	i_ServiceName                                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceName"}
+	iServiceObservabilityConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceObservabilityConfiguration"}
+	iServiceQuotaExceededException                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceQuotaExceededException"}
+	iServiceStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceStatus"}
+	iServiceSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceSummary"}
+	i_ServiceSummaryList                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ServiceSummaryList"}
+	iSourceCodeVersion                               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "SourceCodeVersion"}
+	iSourceCodeVersionType                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "SourceCodeVersionType"}
+	iSourceConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "SourceConfiguration"}
+	i_SourceDirectory                                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "SourceDirectory"}
+	i_StartCommand                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "StartCommand"}
+	i_String                                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "String"}
+	i_StringList                                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "StringList"}
+	iTag                                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Tag"}
+	i_TagKey                                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TagKey"}
+	i_TagKeyList                                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TagKeyList"}
+	i_TagList                                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TagList"}
+	i_TagValue                                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TagValue"}
+	i_Timestamp                                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "Timestamp"}
+	iTraceConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TraceConfiguration"}
+	iTracingVendor                                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TracingVendor"}
+	i_UUID                                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UUID"}
+	iVpcConnector                                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcConnector"}
+	i_VpcConnectorName                               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcConnectorName"}
+	i_VpcConnectors                                  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcConnectors"}
+	iVpcConnectorStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcConnectorStatus"}
+	iVpcDNSTarget                                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcDNSTarget"}
+	i_VpcDNSTargetList                               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcDNSTargetList"}
+	iVpcIngressConnection                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcIngressConnection"}
+	i_VpcIngressConnectionName                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcIngressConnectionName"}
+	iVpcIngressConnectionStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcIngressConnectionStatus"}
+	iVpcIngressConnectionSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcIngressConnectionSummary"}
+	i_VpcIngressConnectionSummaryList                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "VpcIngressConnectionSummaryList"}
+	iAssociateCustomDomainRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AssociateCustomDomainRequest"}
+	iAssociateCustomDomainResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "AssociateCustomDomainResponse"}
+	iCreateAutoScalingConfigurationRequest           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateAutoScalingConfigurationRequest"}
+	iCreateAutoScalingConfigurationResponse          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateAutoScalingConfigurationResponse"}
+	iCreateConnectionRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateConnectionRequest"}
+	iCreateConnectionResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateConnectionResponse"}
+	iCreateObservabilityConfigurationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateObservabilityConfigurationRequest"}
+	iCreateObservabilityConfigurationResponse        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateObservabilityConfigurationResponse"}
+	iCreateServiceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateServiceRequest"}
+	iCreateServiceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateServiceResponse"}
+	iCreateVpcConnectorRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateVpcConnectorRequest"}
+	iCreateVpcConnectorResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateVpcConnectorResponse"}
+	iCreateVpcIngressConnectionRequest               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateVpcIngressConnectionRequest"}
+	iCreateVpcIngressConnectionResponse              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "CreateVpcIngressConnectionResponse"}
+	iDeleteAutoScalingConfigurationRequest           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteAutoScalingConfigurationRequest"}
+	iDeleteAutoScalingConfigurationResponse          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteAutoScalingConfigurationResponse"}
+	iDeleteConnectionRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteConnectionRequest"}
+	iDeleteConnectionResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteConnectionResponse"}
+	iDeleteObservabilityConfigurationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteObservabilityConfigurationRequest"}
+	iDeleteObservabilityConfigurationResponse        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteObservabilityConfigurationResponse"}
+	iDeleteServiceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteServiceRequest"}
+	iDeleteServiceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteServiceResponse"}
+	iDeleteVpcConnectorRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteVpcConnectorRequest"}
+	iDeleteVpcConnectorResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteVpcConnectorResponse"}
+	iDeleteVpcIngressConnectionRequest               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteVpcIngressConnectionRequest"}
+	iDeleteVpcIngressConnectionResponse              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DeleteVpcIngressConnectionResponse"}
+	iDescribeAutoScalingConfigurationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeAutoScalingConfigurationRequest"}
+	iDescribeAutoScalingConfigurationResponse        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeAutoScalingConfigurationResponse"}
+	iDescribeCustomDomainsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeCustomDomainsRequest"}
+	iDescribeCustomDomainsResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeCustomDomainsResponse"}
+	iDescribeObservabilityConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeObservabilityConfigurationRequest"}
+	iDescribeObservabilityConfigurationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeObservabilityConfigurationResponse"}
+	iDescribeServiceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeServiceRequest"}
+	iDescribeServiceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeServiceResponse"}
+	iDescribeVpcConnectorRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeVpcConnectorRequest"}
+	iDescribeVpcConnectorResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeVpcConnectorResponse"}
+	iDescribeVpcIngressConnectionRequest             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeVpcIngressConnectionRequest"}
+	iDescribeVpcIngressConnectionResponse            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DescribeVpcIngressConnectionResponse"}
+	iDisassociateCustomDomainRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DisassociateCustomDomainRequest"}
+	iDisassociateCustomDomainResponse                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "DisassociateCustomDomainResponse"}
+	iListAutoScalingConfigurationsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListAutoScalingConfigurationsRequest"}
+	iListAutoScalingConfigurationsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListAutoScalingConfigurationsResponse"}
+	iListConnectionsRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListConnectionsRequest"}
+	iListConnectionsResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListConnectionsResponse"}
+	iListObservabilityConfigurationsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListObservabilityConfigurationsRequest"}
+	iListObservabilityConfigurationsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListObservabilityConfigurationsResponse"}
+	iListOperationsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListOperationsRequest"}
+	iListOperationsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListOperationsResponse"}
+	iListServicesForAutoScalingConfigurationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListServicesForAutoScalingConfigurationRequest"}
+	iListServicesForAutoScalingConfigurationResponse = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListServicesForAutoScalingConfigurationResponse"}
+	iListServicesRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListServicesRequest"}
+	iListServicesResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListServicesResponse"}
+	iListTagsForResourceRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListTagsForResourceResponse"}
+	iListVpcConnectorsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListVpcConnectorsRequest"}
+	iListVpcConnectorsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListVpcConnectorsResponse"}
+	iListVpcIngressConnectionsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListVpcIngressConnectionsRequest"}
+	iListVpcIngressConnectionsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ListVpcIngressConnectionsResponse"}
+	iPauseServiceRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "PauseServiceRequest"}
+	iPauseServiceResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "PauseServiceResponse"}
+	iResumeServiceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ResumeServiceRequest"}
+	iResumeServiceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "ResumeServiceResponse"}
+	iStartDeploymentRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "StartDeploymentRequest"}
+	iStartDeploymentResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "StartDeploymentResponse"}
+	iTagResourceRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TagResourceRequest"}
+	iTagResourceResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "TagResourceResponse"}
+	iUntagResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UntagResourceResponse"}
+	iUpdateDefaultAutoScalingConfigurationRequest    = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateDefaultAutoScalingConfigurationRequest"}
+	iUpdateDefaultAutoScalingConfigurationResponse   = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateDefaultAutoScalingConfigurationResponse"}
+	iUpdateServiceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateServiceRequest"}
+	iUpdateServiceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateServiceResponse"}
+	iUpdateVpcIngressConnectionRequest               = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateVpcIngressConnectionRequest"}
+	iUpdateVpcIngressConnectionResponse              = smithy.ShapeID{Namespace: "com.amazonaws.apprunner", Name: "UpdateVpcIngressConnectionResponse"}
+	pUnit                                            = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://apprunner.amazonaws.com/doc/2020-05-15/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServiceError",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidRequest",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InvalidState",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotfound",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceeded",
+	StatusCode: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+
+var mAuthenticationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthenticationConfiguration_ConnectionArn, &sAuthenticationConfiguration_AccessRoleArn}}
+var mAutoScalingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingConfiguration_AutoScalingConfigurationArn, &sAutoScalingConfiguration_AutoScalingConfigurationName, &sAutoScalingConfiguration_AutoScalingConfigurationRevision, &sAutoScalingConfiguration_Latest, &sAutoScalingConfiguration_Status, &sAutoScalingConfiguration_MaxConcurrency, &sAutoScalingConfiguration_MinSize, &sAutoScalingConfiguration_MaxSize, &sAutoScalingConfiguration_CreatedAt, &sAutoScalingConfiguration_DeletedAt, &sAutoScalingConfiguration_HasAssociatedService, &sAutoScalingConfiguration_IsDefault}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 4, 0, 0, 6, 0, 0, 3, 0, 5, 0, 1, 0, 11, 0, 10, 7, 0, 2, 8, 12, 0,
+	0, 0, 0, 0, 0, 0, 0, 9,
+}}
+var mAutoScalingConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingConfigurationStatus_ACTIVE, &sAutoScalingConfigurationStatus_INACTIVE}}
+var mAutoScalingConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingConfigurationSummary_AutoScalingConfigurationArn, &sAutoScalingConfigurationSummary_AutoScalingConfigurationName, &sAutoScalingConfigurationSummary_AutoScalingConfigurationRevision, &sAutoScalingConfigurationSummary_Status, &sAutoScalingConfigurationSummary_CreatedAt, &sAutoScalingConfigurationSummary_HasAssociatedService, &sAutoScalingConfigurationSummary_IsDefault}}
+var m_AutoScalingConfigurationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutoScalingConfigurationSummaryList_member}}
+var mCertificateValidationRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateValidationRecord_Name, &sCertificateValidationRecord_Type, &sCertificateValidationRecord_Value, &sCertificateValidationRecord_Status}}
+var m_CertificateValidationRecordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CertificateValidationRecordList_member}}
+var mCertificateValidationRecordStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCertificateValidationRecordStatus_PENDING_VALIDATION, &sCertificateValidationRecordStatus_SUCCESS, &sCertificateValidationRecordStatus_FAILED}}
+var mCodeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeConfiguration_ConfigurationSource, &sCodeConfiguration_CodeConfigurationValues}}
+var mCodeConfigurationValues = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeConfigurationValues_Runtime, &sCodeConfigurationValues_BuildCommand, &sCodeConfigurationValues_StartCommand, &sCodeConfigurationValues_Port, &sCodeConfigurationValues_RuntimeEnvironmentVariables, &sCodeConfigurationValues_RuntimeEnvironmentSecrets}}
+var mCodeRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sCodeRepository_RepositoryUrl, &sCodeRepository_SourceCodeVersion, &sCodeRepository_CodeConfiguration, &sCodeRepository_SourceDirectory}}
+var mConfigurationSource = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationSource_REPOSITORY, &sConfigurationSource_API}}
+var mConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sConnection_ConnectionName, &sConnection_ConnectionArn, &sConnection_ProviderType, &sConnection_Status, &sConnection_CreatedAt}}
+var mConnectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionStatus_PENDING_HANDSHAKE, &sConnectionStatus_AVAILABLE, &sConnectionStatus_ERROR, &sConnectionStatus_DELETED}}
+var mConnectionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionSummary_ConnectionName, &sConnectionSummary_ConnectionArn, &sConnectionSummary_ProviderType, &sConnectionSummary_Status, &sConnectionSummary_CreatedAt}}
+var m_ConnectionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionSummaryList_member}}
+var mCustomDomain = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomDomain_DomainName, &sCustomDomain_EnableWWWSubdomain, &sCustomDomain_CertificateValidationRecords, &sCustomDomain_Status}}
+var mCustomDomainAssociationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomDomainAssociationStatus_CREATING, &sCustomDomainAssociationStatus_CREATE_FAILED, &sCustomDomainAssociationStatus_ACTIVE, &sCustomDomainAssociationStatus_DELETING, &sCustomDomainAssociationStatus_DELETE_FAILED, &sCustomDomainAssociationStatus_PENDING_CERTIFICATE_DNS_VALIDATION, &sCustomDomainAssociationStatus_BINDING_CERTIFICATE}}
+var m_CustomDomainList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomDomainList_member}}
+var mEgressConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEgressConfiguration_EgressType, &sEgressConfiguration_VpcConnectorArn}}
+var mEgressType = smithy.SchemaMembers{List: []*smithy.Schema{&sEgressType_DEFAULT, &sEgressType_VPC}}
+var mEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfiguration_KmsKey}}
+var mHealthCheckConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheckConfiguration_Protocol, &sHealthCheckConfiguration_Path, &sHealthCheckConfiguration_Interval, &sHealthCheckConfiguration_Timeout, &sHealthCheckConfiguration_HealthyThreshold, &sHealthCheckConfiguration_UnhealthyThreshold}}
+var mHealthCheckProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sHealthCheckProtocol_TCP, &sHealthCheckProtocol_HTTP}}
+var mImageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sImageConfiguration_RuntimeEnvironmentVariables, &sImageConfiguration_StartCommand, &sImageConfiguration_Port, &sImageConfiguration_RuntimeEnvironmentSecrets}}
+var mImageRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sImageRepository_ImageIdentifier, &sImageRepository_ImageConfiguration, &sImageRepository_ImageRepositoryType}}
+var mImageRepositoryType = smithy.SchemaMembers{List: []*smithy.Schema{&sImageRepositoryType_ECR, &sImageRepositoryType_ECR_PUBLIC}}
+var mIngressConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressConfiguration_IsPubliclyAccessible}}
+var mIngressVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIngressVpcConfiguration_VpcId, &sIngressVpcConfiguration_VpcEndpointId}}
+var mInstanceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceConfiguration_Cpu, &sInstanceConfiguration_Memory, &sInstanceConfiguration_InstanceRoleArn}}
+var mInternalServiceErrorException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceErrorException_Message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_Message}}
+var mInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateException_Message}}
+var mIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressType_IPV4, &sIpAddressType_DUAL_STACK}}
+var mListVpcIngressConnectionsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcIngressConnectionsFilter_ServiceArn, &sListVpcIngressConnectionsFilter_VpcEndpointId}}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_EgressConfiguration, &sNetworkConfiguration_IngressConfiguration, &sNetworkConfiguration_IpAddressType}}
+var mObservabilityConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sObservabilityConfiguration_ObservabilityConfigurationArn, &sObservabilityConfiguration_ObservabilityConfigurationName, &sObservabilityConfiguration_TraceConfiguration, &sObservabilityConfiguration_ObservabilityConfigurationRevision, &sObservabilityConfiguration_Latest, &sObservabilityConfiguration_Status, &sObservabilityConfiguration_CreatedAt, &sObservabilityConfiguration_DeletedAt}}
+var mObservabilityConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sObservabilityConfigurationStatus_ACTIVE, &sObservabilityConfigurationStatus_INACTIVE}}
+var mObservabilityConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sObservabilityConfigurationSummary_ObservabilityConfigurationArn, &sObservabilityConfigurationSummary_ObservabilityConfigurationName, &sObservabilityConfigurationSummary_ObservabilityConfigurationRevision}}
+var m_ObservabilityConfigurationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ObservabilityConfigurationSummaryList_member}}
+var mOperationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationStatus_PENDING, &sOperationStatus_IN_PROGRESS, &sOperationStatus_FAILED, &sOperationStatus_SUCCEEDED, &sOperationStatus_ROLLBACK_IN_PROGRESS, &sOperationStatus_ROLLBACK_FAILED, &sOperationStatus_ROLLBACK_SUCCEEDED}}
+var mOperationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationSummary_Id, &sOperationSummary_Type, &sOperationSummary_Status, &sOperationSummary_TargetArn, &sOperationSummary_StartedAt, &sOperationSummary_EndedAt, &sOperationSummary_UpdatedAt}}
+var m_OperationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OperationSummaryList_member}}
+var mOperationType = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationType_START_DEPLOYMENT, &sOperationType_CREATE_SERVICE, &sOperationType_PAUSE_SERVICE, &sOperationType_RESUME_SERVICE, &sOperationType_DELETE_SERVICE, &sOperationType_UPDATE_SERVICE}}
+var mProviderType = smithy.SchemaMembers{List: []*smithy.Schema{&sProviderType_GITHUB, &sProviderType_BITBUCKET}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRuntime = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntime_PYTHON_3, &sRuntime_NODEJS_12, &sRuntime_NODEJS_14, &sRuntime_CORRETTO_8, &sRuntime_CORRETTO_11, &sRuntime_NODEJS_16, &sRuntime_GO_1, &sRuntime_DOTNET_6, &sRuntime_PHP_81, &sRuntime_RUBY_31, &sRuntime_PYTHON_311, &sRuntime_NODEJS_18, &sRuntime_NODEJS_22}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 1, 6, 0, 10, 0, 9, 12, 7, 0, 0, 0, 0, 0, 0, 5, 11, 0, 0, 13, 2,
+	4, 0, 0, 8, 3, 0, 0, 0,
+}}
+var m_RuntimeEnvironmentSecrets = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuntimeEnvironmentSecrets_key, &s_RuntimeEnvironmentSecrets_value}}
+var m_RuntimeEnvironmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuntimeEnvironmentVariables_key, &s_RuntimeEnvironmentVariables_value}}
+var mService = smithy.SchemaMembers{List: []*smithy.Schema{&sService_ServiceName, &sService_ServiceId, &sService_ServiceArn, &sService_ServiceUrl, &sService_CreatedAt, &sService_UpdatedAt, &sService_DeletedAt, &sService_Status, &sService_SourceConfiguration, &sService_InstanceConfiguration, &sService_EncryptionConfiguration, &sService_HealthCheckConfiguration, &sService_AutoScalingConfigurationSummary, &sService_NetworkConfiguration, &sService_ObservabilityConfiguration}, Seed: 49, Slots: []uint16{
+	0, 0, 0, 6, 0, 9, 14, 0, 0, 0, 11, 2, 0, 0, 3, 15, 0, 12, 0, 10, 0, 0, 1, 8,
+	0, 0, 7, 0, 4, 5, 0, 13,
+}}
+var m_ServiceArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceArnList_member}}
+var mServiceObservabilityConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceObservabilityConfiguration_ObservabilityEnabled, &sServiceObservabilityConfiguration_ObservabilityConfigurationArn}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mServiceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceStatus_CREATE_FAILED, &sServiceStatus_RUNNING, &sServiceStatus_DELETED, &sServiceStatus_DELETE_FAILED, &sServiceStatus_PAUSED, &sServiceStatus_OPERATION_IN_PROGRESS}}
+var mServiceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSummary_ServiceName, &sServiceSummary_ServiceId, &sServiceSummary_ServiceArn, &sServiceSummary_ServiceUrl, &sServiceSummary_CreatedAt, &sServiceSummary_UpdatedAt, &sServiceSummary_Status}}
+var m_ServiceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceSummaryList_member}}
+var mSourceCodeVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCodeVersion_Type, &sSourceCodeVersion_Value}}
+var mSourceCodeVersionType = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceCodeVersionType_BRANCH}}
+var mSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceConfiguration_CodeRepository, &sSourceConfiguration_ImageRepository, &sSourceConfiguration_AutoDeploymentsEnabled, &sSourceConfiguration_AuthenticationConfiguration}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTraceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTraceConfiguration_Vendor}}
+var mTracingVendor = smithy.SchemaMembers{List: []*smithy.Schema{&sTracingVendor_AWSXRAY}}
+var mVpcConnector = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnector_VpcConnectorName, &sVpcConnector_VpcConnectorArn, &sVpcConnector_VpcConnectorRevision, &sVpcConnector_Subnets, &sVpcConnector_SecurityGroups, &sVpcConnector_Status, &sVpcConnector_CreatedAt, &sVpcConnector_DeletedAt}}
+var m_VpcConnectors = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcConnectors_member}}
+var mVpcConnectorStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConnectorStatus_ACTIVE, &sVpcConnectorStatus_INACTIVE}}
+var mVpcDNSTarget = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcDNSTarget_VpcIngressConnectionArn, &sVpcDNSTarget_VpcId, &sVpcDNSTarget_DomainName}}
+var m_VpcDNSTargetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcDNSTargetList_member}}
+var mVpcIngressConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcIngressConnection_VpcIngressConnectionArn, &sVpcIngressConnection_VpcIngressConnectionName, &sVpcIngressConnection_ServiceArn, &sVpcIngressConnection_Status, &sVpcIngressConnection_AccountId, &sVpcIngressConnection_DomainName, &sVpcIngressConnection_IngressVpcConfiguration, &sVpcIngressConnection_CreatedAt, &sVpcIngressConnection_DeletedAt}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 8, 0, 1, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7,
+	9, 5, 0, 0, 3, 4, 0, 6,
+}}
+var mVpcIngressConnectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcIngressConnectionStatus_AVAILABLE, &sVpcIngressConnectionStatus_PENDING_CREATION, &sVpcIngressConnectionStatus_PENDING_UPDATE, &sVpcIngressConnectionStatus_PENDING_DELETION, &sVpcIngressConnectionStatus_FAILED_CREATION, &sVpcIngressConnectionStatus_FAILED_UPDATE, &sVpcIngressConnectionStatus_FAILED_DELETION, &sVpcIngressConnectionStatus_DELETED}}
+var mVpcIngressConnectionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcIngressConnectionSummary_VpcIngressConnectionArn, &sVpcIngressConnectionSummary_ServiceArn}}
+var m_VpcIngressConnectionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VpcIngressConnectionSummaryList_member}}
+var mAssociateCustomDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateCustomDomainRequest_ServiceArn, &sAssociateCustomDomainRequest_DomainName, &sAssociateCustomDomainRequest_EnableWWWSubdomain}}
+var mAssociateCustomDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateCustomDomainResponse_DNSTarget, &sAssociateCustomDomainResponse_ServiceArn, &sAssociateCustomDomainResponse_CustomDomain, &sAssociateCustomDomainResponse_VpcDNSTargets}}
+var mCreateAutoScalingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAutoScalingConfigurationRequest_AutoScalingConfigurationName, &sCreateAutoScalingConfigurationRequest_MaxConcurrency, &sCreateAutoScalingConfigurationRequest_MinSize, &sCreateAutoScalingConfigurationRequest_MaxSize, &sCreateAutoScalingConfigurationRequest_Tags}}
+var mCreateAutoScalingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAutoScalingConfigurationResponse_AutoScalingConfiguration}}
+var mCreateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionRequest_ConnectionName, &sCreateConnectionRequest_ProviderType, &sCreateConnectionRequest_Tags}}
+var mCreateConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionResponse_Connection}}
+var mCreateObservabilityConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateObservabilityConfigurationRequest_ObservabilityConfigurationName, &sCreateObservabilityConfigurationRequest_TraceConfiguration, &sCreateObservabilityConfigurationRequest_Tags}}
+var mCreateObservabilityConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateObservabilityConfigurationResponse_ObservabilityConfiguration}}
+var mCreateServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceRequest_ServiceName, &sCreateServiceRequest_SourceConfiguration, &sCreateServiceRequest_InstanceConfiguration, &sCreateServiceRequest_Tags, &sCreateServiceRequest_EncryptionConfiguration, &sCreateServiceRequest_HealthCheckConfiguration, &sCreateServiceRequest_AutoScalingConfigurationArn, &sCreateServiceRequest_NetworkConfiguration, &sCreateServiceRequest_ObservabilityConfiguration}, Seed: 1, Slots: []uint16{
+	0, 4, 7, 0, 0, 0, 0, 1, 0, 2, 9, 0, 0, 5, 6, 0, 0, 0, 3, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 8, 0, 0,
+}}
+var mCreateServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceResponse_Service, &sCreateServiceResponse_OperationId}}
+var mCreateVpcConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcConnectorRequest_VpcConnectorName, &sCreateVpcConnectorRequest_Subnets, &sCreateVpcConnectorRequest_SecurityGroups, &sCreateVpcConnectorRequest_Tags}}
+var mCreateVpcConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcConnectorResponse_VpcConnector}}
+var mCreateVpcIngressConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcIngressConnectionRequest_ServiceArn, &sCreateVpcIngressConnectionRequest_VpcIngressConnectionName, &sCreateVpcIngressConnectionRequest_IngressVpcConfiguration, &sCreateVpcIngressConnectionRequest_Tags}}
+var mCreateVpcIngressConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcIngressConnectionResponse_VpcIngressConnection}}
+var mDeleteAutoScalingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAutoScalingConfigurationRequest_AutoScalingConfigurationArn, &sDeleteAutoScalingConfigurationRequest_DeleteAllRevisions}}
+var mDeleteAutoScalingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAutoScalingConfigurationResponse_AutoScalingConfiguration}}
+var mDeleteConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionRequest_ConnectionArn}}
+var mDeleteConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionResponse_Connection}}
+var mDeleteObservabilityConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteObservabilityConfigurationRequest_ObservabilityConfigurationArn}}
+var mDeleteObservabilityConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteObservabilityConfigurationResponse_ObservabilityConfiguration}}
+var mDeleteServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceRequest_ServiceArn}}
+var mDeleteServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceResponse_Service, &sDeleteServiceResponse_OperationId}}
+var mDeleteVpcConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcConnectorRequest_VpcConnectorArn}}
+var mDeleteVpcConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcConnectorResponse_VpcConnector}}
+var mDeleteVpcIngressConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcIngressConnectionRequest_VpcIngressConnectionArn}}
+var mDeleteVpcIngressConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcIngressConnectionResponse_VpcIngressConnection}}
+var mDescribeAutoScalingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAutoScalingConfigurationRequest_AutoScalingConfigurationArn}}
+var mDescribeAutoScalingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAutoScalingConfigurationResponse_AutoScalingConfiguration}}
+var mDescribeCustomDomainsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomDomainsRequest_ServiceArn, &sDescribeCustomDomainsRequest_NextToken, &sDescribeCustomDomainsRequest_MaxResults}}
+var mDescribeCustomDomainsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomDomainsResponse_DNSTarget, &sDescribeCustomDomainsResponse_ServiceArn, &sDescribeCustomDomainsResponse_CustomDomains, &sDescribeCustomDomainsResponse_VpcDNSTargets, &sDescribeCustomDomainsResponse_NextToken}}
+var mDescribeObservabilityConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObservabilityConfigurationRequest_ObservabilityConfigurationArn}}
+var mDescribeObservabilityConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeObservabilityConfigurationResponse_ObservabilityConfiguration}}
+var mDescribeServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceRequest_ServiceArn}}
+var mDescribeServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceResponse_Service}}
+var mDescribeVpcConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcConnectorRequest_VpcConnectorArn}}
+var mDescribeVpcConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcConnectorResponse_VpcConnector}}
+var mDescribeVpcIngressConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcIngressConnectionRequest_VpcIngressConnectionArn}}
+var mDescribeVpcIngressConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVpcIngressConnectionResponse_VpcIngressConnection}}
+var mDisassociateCustomDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateCustomDomainRequest_ServiceArn, &sDisassociateCustomDomainRequest_DomainName}}
+var mDisassociateCustomDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateCustomDomainResponse_DNSTarget, &sDisassociateCustomDomainResponse_ServiceArn, &sDisassociateCustomDomainResponse_CustomDomain, &sDisassociateCustomDomainResponse_VpcDNSTargets}}
+var mListAutoScalingConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutoScalingConfigurationsRequest_AutoScalingConfigurationName, &sListAutoScalingConfigurationsRequest_LatestOnly, &sListAutoScalingConfigurationsRequest_MaxResults, &sListAutoScalingConfigurationsRequest_NextToken}}
+var mListAutoScalingConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList, &sListAutoScalingConfigurationsResponse_NextToken}}
+var mListConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectionsRequest_ConnectionName, &sListConnectionsRequest_MaxResults, &sListConnectionsRequest_NextToken}}
+var mListConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectionsResponse_ConnectionSummaryList, &sListConnectionsResponse_NextToken}}
+var mListObservabilityConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListObservabilityConfigurationsRequest_ObservabilityConfigurationName, &sListObservabilityConfigurationsRequest_LatestOnly, &sListObservabilityConfigurationsRequest_MaxResults, &sListObservabilityConfigurationsRequest_NextToken}}
+var mListObservabilityConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList, &sListObservabilityConfigurationsResponse_NextToken}}
+var mListOperationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOperationsRequest_ServiceArn, &sListOperationsRequest_NextToken, &sListOperationsRequest_MaxResults}}
+var mListOperationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOperationsResponse_OperationSummaryList, &sListOperationsResponse_NextToken}}
+var mListServicesForAutoScalingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesForAutoScalingConfigurationRequest_AutoScalingConfigurationArn, &sListServicesForAutoScalingConfigurationRequest_MaxResults, &sListServicesForAutoScalingConfigurationRequest_NextToken}}
+var mListServicesForAutoScalingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesForAutoScalingConfigurationResponse_ServiceArnList, &sListServicesForAutoScalingConfigurationResponse_NextToken}}
+var mListServicesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesRequest_NextToken, &sListServicesRequest_MaxResults}}
+var mListServicesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesResponse_ServiceSummaryList, &sListServicesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListVpcConnectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcConnectorsRequest_MaxResults, &sListVpcConnectorsRequest_NextToken}}
+var mListVpcConnectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcConnectorsResponse_VpcConnectors, &sListVpcConnectorsResponse_NextToken}}
+var mListVpcIngressConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcIngressConnectionsRequest_Filter, &sListVpcIngressConnectionsRequest_MaxResults, &sListVpcIngressConnectionsRequest_NextToken}}
+var mListVpcIngressConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList, &sListVpcIngressConnectionsResponse_NextToken}}
+var mPauseServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPauseServiceRequest_ServiceArn}}
+var mPauseServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPauseServiceResponse_Service, &sPauseServiceResponse_OperationId}}
+var mResumeServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResumeServiceRequest_ServiceArn}}
+var mResumeServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResumeServiceResponse_Service, &sResumeServiceResponse_OperationId}}
+var mStartDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDeploymentRequest_ServiceArn}}
+var mStartDeploymentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartDeploymentResponse_OperationId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateDefaultAutoScalingConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDefaultAutoScalingConfigurationRequest_AutoScalingConfigurationArn}}
+var mUpdateDefaultAutoScalingConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDefaultAutoScalingConfigurationResponse_AutoScalingConfiguration}}
+var mUpdateServiceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceRequest_ServiceArn, &sUpdateServiceRequest_SourceConfiguration, &sUpdateServiceRequest_InstanceConfiguration, &sUpdateServiceRequest_AutoScalingConfigurationArn, &sUpdateServiceRequest_HealthCheckConfiguration, &sUpdateServiceRequest_NetworkConfiguration, &sUpdateServiceRequest_ObservabilityConfiguration}}
+var mUpdateServiceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceResponse_Service, &sUpdateServiceResponse_OperationId}}
+var mUpdateVpcIngressConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcIngressConnectionRequest_VpcIngressConnectionArn, &sUpdateVpcIngressConnectionRequest_IngressVpcConfiguration}}
+var mUpdateVpcIngressConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcIngressConnectionResponse_VpcIngressConnection}}
+
+var sAssociateCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCustomDomain, Type: smithy.ShapeTypeOperation})
+var sCreateAutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutoScalingConfiguration, Type: smithy.ShapeTypeOperation})
+var sCreateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnection, Type: smithy.ShapeTypeOperation})
+var sCreateObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateObservabilityConfiguration, Type: smithy.ShapeTypeOperation})
+var sCreateService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateService, Type: smithy.ShapeTypeOperation})
+var sCreateVpcConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcConnector, Type: smithy.ShapeTypeOperation})
+var sCreateVpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcIngressConnection, Type: smithy.ShapeTypeOperation})
+var sDeleteAutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutoScalingConfiguration, Type: smithy.ShapeTypeOperation})
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Type: smithy.ShapeTypeOperation})
+var sDeleteObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObservabilityConfiguration, Type: smithy.ShapeTypeOperation})
+var sDeleteService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteService, Type: smithy.ShapeTypeOperation})
+var sDeleteVpcConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcConnector, Type: smithy.ShapeTypeOperation})
+var sDeleteVpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcIngressConnection, Type: smithy.ShapeTypeOperation})
+var sDescribeAutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAutoScalingConfiguration, Type: smithy.ShapeTypeOperation})
+var sDescribeCustomDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomDomains, Type: smithy.ShapeTypeOperation})
+var sDescribeObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObservabilityConfiguration, Type: smithy.ShapeTypeOperation})
+var sDescribeService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeService, Type: smithy.ShapeTypeOperation})
+var sDescribeVpcConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcConnector, Type: smithy.ShapeTypeOperation})
+var sDescribeVpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcIngressConnection, Type: smithy.ShapeTypeOperation})
+var sDisassociateCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCustomDomain, Type: smithy.ShapeTypeOperation})
+var sListAutoScalingConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoScalingConfigurations, Type: smithy.ShapeTypeOperation})
+var sListConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnections, Type: smithy.ShapeTypeOperation})
+var sListObservabilityConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObservabilityConfigurations, Type: smithy.ShapeTypeOperation})
+var sListOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperations, Type: smithy.ShapeTypeOperation})
+var sListServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServices, Type: smithy.ShapeTypeOperation})
+var sListServicesForAutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesForAutoScalingConfiguration, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListVpcConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcConnectors, Type: smithy.ShapeTypeOperation})
+var sListVpcIngressConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcIngressConnections, Type: smithy.ShapeTypeOperation})
+var sPauseService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseService, Type: smithy.ShapeTypeOperation})
+var sResumeService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeService, Type: smithy.ShapeTypeOperation})
+var sStartDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeployment, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateDefaultAutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultAutoScalingConfiguration, Type: smithy.ShapeTypeOperation})
+var sUpdateService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateService, Type: smithy.ShapeTypeOperation})
+var sUpdateVpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcIngressConnection, Type: smithy.ShapeTypeOperation})
+var s_AppRunner = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppRunner, Traits: &t0, Type: smithy.ShapeTypeService})
+var s_AppRunnerResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var s_ASConfigMaxConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ASConfigMaxConcurrency, Type: smithy.ShapeTypeInteger})
+var s_ASConfigMaxSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ASConfigMaxSize, Type: smithy.ShapeTypeInteger})
+var s_ASConfigMinSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ASConfigMinSize, Type: smithy.ShapeTypeInteger})
+var sAuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure})
+var sAutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingConfiguration, Members: &mAutoScalingConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AutoScalingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoScalingConfigurationName, Type: smithy.ShapeTypeString})
+var s_AutoScalingConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoScalingConfigurationRevision, Type: smithy.ShapeTypeInteger})
+var sAutoScalingConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingConfigurationStatus, Members: &mAutoScalingConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sAutoScalingConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingConfigurationSummary, Members: &mAutoScalingConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var s_AutoScalingConfigurationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutoScalingConfigurationSummaryList, Members: &m_AutoScalingConfigurationSummaryList, Type: smithy.ShapeTypeList})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BuildCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BuildCommand, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCertificateValidationRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateValidationRecord, Members: &mCertificateValidationRecord, Type: smithy.ShapeTypeStructure})
+var s_CertificateValidationRecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CertificateValidationRecordList, Members: &m_CertificateValidationRecordList, Type: smithy.ShapeTypeList})
+var sCertificateValidationRecordStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCertificateValidationRecordStatus, Members: &mCertificateValidationRecordStatus, Type: smithy.ShapeTypeEnum})
+var sCodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeConfiguration, Members: &mCodeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCodeConfigurationValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeConfigurationValues, Members: &mCodeConfigurationValues, Type: smithy.ShapeTypeStructure})
+var sCodeRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCodeRepository, Members: &mCodeRepository, Type: smithy.ShapeTypeStructure})
+var sConfigurationSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSource, Members: &mConfigurationSource, Type: smithy.ShapeTypeEnum})
+var sConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var s_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sConnectionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionSummary, Members: &mConnectionSummary, Type: smithy.ShapeTypeStructure})
+var s_ConnectionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionSummaryList, Members: &m_ConnectionSummaryList, Type: smithy.ShapeTypeList})
+var s_Cpu = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cpu, Type: smithy.ShapeTypeString})
+var sCustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDomain, Members: &mCustomDomain, Type: smithy.ShapeTypeStructure})
+var sCustomDomainAssociationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomDomainAssociationStatus, Members: &mCustomDomainAssociationStatus, Type: smithy.ShapeTypeEnum})
+var s_CustomDomainList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomDomainList, Members: &m_CustomDomainList, Type: smithy.ShapeTypeList})
+var s_CustomerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAccountId, Type: smithy.ShapeTypeString})
+var s_DescribeCustomDomainsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeCustomDomainsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sEgressConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEgressConfiguration, Members: &mEgressConfiguration, Type: smithy.ShapeTypeStructure})
+var sEgressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEgressType, Members: &mEgressType, Type: smithy.ShapeTypeEnum})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_HasAssociatedService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HasAssociatedService, Type: smithy.ShapeTypeBoolean})
+var sHealthCheckConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheckConfiguration, Members: &mHealthCheckConfiguration, Type: smithy.ShapeTypeStructure})
+var s_HealthCheckHealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckHealthyThreshold, Type: smithy.ShapeTypeInteger})
+var s_HealthCheckInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckInterval, Type: smithy.ShapeTypeInteger})
+var s_HealthCheckPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckPath, Type: smithy.ShapeTypeString})
+var sHealthCheckProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHealthCheckProtocol, Members: &mHealthCheckProtocol, Type: smithy.ShapeTypeEnum})
+var s_HealthCheckTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckTimeout, Type: smithy.ShapeTypeInteger})
+var s_HealthCheckUnhealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HealthCheckUnhealthyThreshold, Type: smithy.ShapeTypeInteger})
+var sImageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageConfiguration, Members: &mImageConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ImageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageIdentifier, Type: smithy.ShapeTypeString})
+var sImageRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageRepository, Members: &mImageRepository, Type: smithy.ShapeTypeStructure})
+var sImageRepositoryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageRepositoryType, Members: &mImageRepositoryType, Type: smithy.ShapeTypeEnum})
+var sIngressConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressConfiguration, Members: &mIngressConfiguration, Type: smithy.ShapeTypeStructure})
+var sIngressVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngressVpcConfiguration, Members: &mIngressVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sInstanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceConfiguration, Members: &mInstanceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServiceErrorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceErrorException, Members: &mInternalServiceErrorException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var s_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsDefault, Type: smithy.ShapeTypeBoolean})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var s_Latest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Latest, Type: smithy.ShapeTypeBoolean})
+var s_ListOperationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOperationsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListVpcIngressConnectionsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcIngressConnectionsFilter, Members: &mListVpcIngressConnectionsFilter, Type: smithy.ShapeTypeStructure})
+var s_MaxConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxConcurrency, Type: smithy.ShapeTypeInteger})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MaxSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxSize, Type: smithy.ShapeTypeInteger})
+var s_Memory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Memory, Type: smithy.ShapeTypeString})
+var s_MinSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinSize, Type: smithy.ShapeTypeInteger})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_NullableBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObservabilityConfiguration, Members: &mObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ObservabilityConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObservabilityConfigurationName, Type: smithy.ShapeTypeString})
+var sObservabilityConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObservabilityConfigurationStatus, Members: &mObservabilityConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sObservabilityConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iObservabilityConfigurationSummary, Members: &mObservabilityConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var s_ObservabilityConfigurationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObservabilityConfigurationSummaryList, Members: &m_ObservabilityConfigurationSummaryList, Type: smithy.ShapeTypeList})
+var sOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum})
+var sOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationSummary, Members: &mOperationSummary, Type: smithy.ShapeTypeStructure})
+var s_OperationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList})
+var sOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum})
+var sProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sRuntime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntime, Members: &mRuntime, Type: smithy.ShapeTypeEnum})
+var s_RuntimeEnvironmentSecrets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentSecrets, Members: &m_RuntimeEnvironmentSecrets, Type: smithy.ShapeTypeMap})
+var s_RuntimeEnvironmentSecretsName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentSecretsName, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_RuntimeEnvironmentSecretsValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentSecretsValue, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_RuntimeEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentVariables, Members: &m_RuntimeEnvironmentVariables, Type: smithy.ShapeTypeMap})
+var s_RuntimeEnvironmentVariablesKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentVariablesKey, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_RuntimeEnvironmentVariablesValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeEnvironmentVariablesValue, Traits: &t1, Type: smithy.ShapeTypeString})
+var sService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var s_ServiceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceArnList, Members: &m_ServiceArnList, Type: smithy.ShapeTypeList})
+var s_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceId, Type: smithy.ShapeTypeString})
+var s_ServiceMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceName, Type: smithy.ShapeTypeString})
+var sServiceObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceObservabilityConfiguration, Members: &mServiceObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sServiceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceStatus, Members: &mServiceStatus, Type: smithy.ShapeTypeEnum})
+var sServiceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceSummaryList, Members: &m_ServiceSummaryList, Type: smithy.ShapeTypeList})
+var sSourceCodeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCodeVersion, Members: &mSourceCodeVersion, Type: smithy.ShapeTypeStructure})
+var sSourceCodeVersionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceCodeVersionType, Members: &mSourceCodeVersionType, Type: smithy.ShapeTypeEnum})
+var sSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SourceDirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceDirectory, Type: smithy.ShapeTypeString})
+var s_StartCommand = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartCommand, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTraceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTraceConfiguration, Members: &mTraceConfiguration, Type: smithy.ShapeTypeStructure})
+var sTracingVendor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTracingVendor, Members: &mTracingVendor, Type: smithy.ShapeTypeEnum})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sVpcConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnector, Members: &mVpcConnector, Type: smithy.ShapeTypeStructure})
+var s_VpcConnectorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcConnectorName, Type: smithy.ShapeTypeString})
+var s_VpcConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcConnectors, Members: &m_VpcConnectors, Type: smithy.ShapeTypeList})
+var sVpcConnectorStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConnectorStatus, Members: &mVpcConnectorStatus, Type: smithy.ShapeTypeEnum})
+var sVpcDNSTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcDNSTarget, Members: &mVpcDNSTarget, Type: smithy.ShapeTypeStructure})
+var s_VpcDNSTargetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcDNSTargetList, Members: &m_VpcDNSTargetList, Type: smithy.ShapeTypeList})
+var sVpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcIngressConnection, Members: &mVpcIngressConnection, Type: smithy.ShapeTypeStructure})
+var s_VpcIngressConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcIngressConnectionName, Type: smithy.ShapeTypeString})
+var sVpcIngressConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcIngressConnectionStatus, Members: &mVpcIngressConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sVpcIngressConnectionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcIngressConnectionSummary, Members: &mVpcIngressConnectionSummary, Type: smithy.ShapeTypeStructure})
+var s_VpcIngressConnectionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcIngressConnectionSummaryList, Members: &m_VpcIngressConnectionSummaryList, Type: smithy.ShapeTypeList})
+var sAssociateCustomDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCustomDomainRequest, Members: &mAssociateCustomDomainRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateCustomDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCustomDomainResponse, Members: &mAssociateCustomDomainResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAutoScalingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutoScalingConfigurationRequest, Members: &mCreateAutoScalingConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAutoScalingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutoScalingConfigurationResponse, Members: &mCreateAutoScalingConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionRequest, Members: &mCreateConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionResponse, Members: &mCreateConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateObservabilityConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateObservabilityConfigurationRequest, Members: &mCreateObservabilityConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateObservabilityConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateObservabilityConfigurationResponse, Members: &mCreateObservabilityConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceRequest, Members: &mCreateServiceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceResponse, Members: &mCreateServiceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateVpcConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcConnectorRequest, Members: &mCreateVpcConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sCreateVpcConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcConnectorResponse, Members: &mCreateVpcConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sCreateVpcIngressConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcIngressConnectionRequest, Members: &mCreateVpcIngressConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateVpcIngressConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcIngressConnectionResponse, Members: &mCreateVpcIngressConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAutoScalingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutoScalingConfigurationRequest, Members: &mDeleteAutoScalingConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAutoScalingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutoScalingConfigurationResponse, Members: &mDeleteAutoScalingConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionResponse, Members: &mDeleteConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteObservabilityConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObservabilityConfigurationRequest, Members: &mDeleteObservabilityConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteObservabilityConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteObservabilityConfigurationResponse, Members: &mDeleteObservabilityConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceRequest, Members: &mDeleteServiceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceResponse, Members: &mDeleteServiceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcConnectorRequest, Members: &mDeleteVpcConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcConnectorResponse, Members: &mDeleteVpcConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcIngressConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcIngressConnectionRequest, Members: &mDeleteVpcIngressConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcIngressConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcIngressConnectionResponse, Members: &mDeleteVpcIngressConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeAutoScalingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAutoScalingConfigurationRequest, Members: &mDescribeAutoScalingConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAutoScalingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAutoScalingConfigurationResponse, Members: &mDescribeAutoScalingConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomDomainsRequest, Members: &mDescribeCustomDomainsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomDomainsResponse, Members: &mDescribeCustomDomainsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeObservabilityConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObservabilityConfigurationRequest, Members: &mDescribeObservabilityConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeObservabilityConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeObservabilityConfigurationResponse, Members: &mDescribeObservabilityConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceRequest, Members: &mDescribeServiceRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceResponse, Members: &mDescribeServiceResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeVpcConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcConnectorRequest, Members: &mDescribeVpcConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeVpcConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcConnectorResponse, Members: &mDescribeVpcConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeVpcIngressConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcIngressConnectionRequest, Members: &mDescribeVpcIngressConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeVpcIngressConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVpcIngressConnectionResponse, Members: &mDescribeVpcIngressConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateCustomDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCustomDomainRequest, Members: &mDisassociateCustomDomainRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateCustomDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCustomDomainResponse, Members: &mDisassociateCustomDomainResponse, Type: smithy.ShapeTypeStructure})
+var sListAutoScalingConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoScalingConfigurationsRequest, Members: &mListAutoScalingConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sListAutoScalingConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutoScalingConfigurationsResponse, Members: &mListAutoScalingConfigurationsResponse, Type: smithy.ShapeTypeStructure})
+var sListConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsRequest, Members: &mListConnectionsRequest, Type: smithy.ShapeTypeStructure})
+var sListConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsResponse, Members: &mListConnectionsResponse, Type: smithy.ShapeTypeStructure})
+var sListObservabilityConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObservabilityConfigurationsRequest, Members: &mListObservabilityConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sListObservabilityConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListObservabilityConfigurationsResponse, Members: &mListObservabilityConfigurationsResponse, Type: smithy.ShapeTypeStructure})
+var sListOperationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsRequest, Members: &mListOperationsRequest, Type: smithy.ShapeTypeStructure})
+var sListOperationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOperationsResponse, Members: &mListOperationsResponse, Type: smithy.ShapeTypeStructure})
+var sListServicesForAutoScalingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesForAutoScalingConfigurationRequest, Members: &mListServicesForAutoScalingConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sListServicesForAutoScalingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesForAutoScalingConfigurationResponse, Members: &mListServicesForAutoScalingConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sListServicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesRequest, Members: &mListServicesRequest, Type: smithy.ShapeTypeStructure})
+var sListServicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesResponse, Members: &mListServicesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListVpcConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcConnectorsRequest, Members: &mListVpcConnectorsRequest, Type: smithy.ShapeTypeStructure})
+var sListVpcConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcConnectorsResponse, Members: &mListVpcConnectorsResponse, Type: smithy.ShapeTypeStructure})
+var sListVpcIngressConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcIngressConnectionsRequest, Members: &mListVpcIngressConnectionsRequest, Type: smithy.ShapeTypeStructure})
+var sListVpcIngressConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVpcIngressConnectionsResponse, Members: &mListVpcIngressConnectionsResponse, Type: smithy.ShapeTypeStructure})
+var sPauseServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseServiceRequest, Members: &mPauseServiceRequest, Type: smithy.ShapeTypeStructure})
+var sPauseServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPauseServiceResponse, Members: &mPauseServiceResponse, Type: smithy.ShapeTypeStructure})
+var sResumeServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeServiceRequest, Members: &mResumeServiceRequest, Type: smithy.ShapeTypeStructure})
+var sResumeServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumeServiceResponse, Members: &mResumeServiceResponse, Type: smithy.ShapeTypeStructure})
+var sStartDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeploymentRequest, Members: &mStartDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sStartDeploymentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartDeploymentResponse, Members: &mStartDeploymentResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDefaultAutoScalingConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultAutoScalingConfigurationRequest, Members: &mUpdateDefaultAutoScalingConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDefaultAutoScalingConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultAutoScalingConfigurationResponse, Members: &mUpdateDefaultAutoScalingConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceRequest, Members: &mUpdateServiceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceResponse, Members: &mUpdateServiceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcIngressConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcIngressConnectionRequest, Members: &mUpdateVpcIngressConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcIngressConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcIngressConnectionResponse, Members: &mUpdateVpcIngressConnectionResponse, Type: smithy.ShapeTypeStructure})
+
+var sAuthenticationConfiguration_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sAuthenticationConfiguration_AccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sAutoScalingConfiguration_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sAutoScalingConfiguration_AutoScalingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationName", ID: &i_AutoScalingConfigurationName, Type: smithy.ShapeTypeString})
+var sAutoScalingConfiguration_AutoScalingConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationRevision", ID: &i_AutoScalingConfigurationRevision, Type: smithy.ShapeTypeInteger})
+var sAutoScalingConfiguration_Latest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latest", ID: &i_Latest, Type: smithy.ShapeTypeBoolean})
+var sAutoScalingConfiguration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAutoScalingConfigurationStatus, Members: &mAutoScalingConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sAutoScalingConfiguration_MaxConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrency", ID: &i_MaxConcurrency, Type: smithy.ShapeTypeInteger})
+var sAutoScalingConfiguration_MinSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinSize", ID: &i_MinSize, Type: smithy.ShapeTypeInteger})
+var sAutoScalingConfiguration_MaxSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSize", ID: &i_MaxSize, Type: smithy.ShapeTypeInteger})
+var sAutoScalingConfiguration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutoScalingConfiguration_DeletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutoScalingConfiguration_HasAssociatedService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasAssociatedService", ID: &i_HasAssociatedService, Type: smithy.ShapeTypeBoolean})
+var sAutoScalingConfiguration_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefault", ID: &i_IsDefault, Type: smithy.ShapeTypeBoolean})
+var sAutoScalingConfigurationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoScalingConfigurationStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoScalingConfigurationSummary_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sAutoScalingConfigurationSummary_AutoScalingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationName", ID: &i_AutoScalingConfigurationName, Type: smithy.ShapeTypeString})
+var sAutoScalingConfigurationSummary_AutoScalingConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationRevision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sAutoScalingConfigurationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iAutoScalingConfigurationStatus, Members: &mAutoScalingConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sAutoScalingConfigurationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutoScalingConfigurationSummary_HasAssociatedService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HasAssociatedService", ID: &i_HasAssociatedService, Type: smithy.ShapeTypeBoolean})
+var sAutoScalingConfigurationSummary_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefault", ID: &i_IsDefault, Type: smithy.ShapeTypeBoolean})
+var s_AutoScalingConfigurationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutoScalingConfigurationSummary, Members: &mAutoScalingConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sCertificateValidationRecord_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCertificateValidationRecord_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCertificateValidationRecord_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCertificateValidationRecord_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCertificateValidationRecordStatus, Members: &mCertificateValidationRecordStatus, Type: smithy.ShapeTypeEnum})
+var s_CertificateValidationRecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCertificateValidationRecord, Members: &mCertificateValidationRecord, Type: smithy.ShapeTypeStructure})
+var sCertificateValidationRecordStatus_PENDING_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateValidationRecordStatus_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCertificateValidationRecordStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCodeConfiguration_ConfigurationSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationSource", ID: &iConfigurationSource, Members: &mConfigurationSource, Type: smithy.ShapeTypeEnum})
+var sCodeConfiguration_CodeConfigurationValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeConfigurationValues", ID: &iCodeConfigurationValues, Members: &mCodeConfigurationValues, Type: smithy.ShapeTypeStructure})
+var sCodeConfigurationValues_Runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Runtime", ID: &iRuntime, Members: &mRuntime, Type: smithy.ShapeTypeEnum})
+var sCodeConfigurationValues_BuildCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuildCommand", ID: &i_BuildCommand, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCodeConfigurationValues_StartCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartCommand", ID: &i_StartCommand, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCodeConfigurationValues_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCodeConfigurationValues_RuntimeEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironmentVariables", ID: &i_RuntimeEnvironmentVariables, Members: &m_RuntimeEnvironmentVariables, Type: smithy.ShapeTypeMap})
+var sCodeConfigurationValues_RuntimeEnvironmentSecrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironmentSecrets", ID: &i_RuntimeEnvironmentSecrets, Members: &m_RuntimeEnvironmentSecrets, Type: smithy.ShapeTypeMap})
+var sCodeRepository_RepositoryUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCodeRepository_SourceCodeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceCodeVersion", ID: &iSourceCodeVersion, Members: &mSourceCodeVersion, Type: smithy.ShapeTypeStructure})
+var sCodeRepository_CodeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeConfiguration", ID: &iCodeConfiguration, Members: &mCodeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCodeRepository_SourceDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceDirectory", ID: &i_SourceDirectory, Type: smithy.ShapeTypeString})
+var sConfigurationSource_REPOSITORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPOSITORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfigurationSource_API = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnection_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnection_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sConnection_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sConnection_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sConnection_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sConnectionStatus_PENDING_HANDSHAKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_HANDSHAKE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionSummary_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnectionSummary_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sConnectionSummary_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sConnectionSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sConnectionSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ConnectionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectionSummary, Members: &mConnectionSummary, Type: smithy.ShapeTypeStructure})
+var sCustomDomain_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCustomDomain_EnableWWWSubdomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableWWWSubdomain", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sCustomDomain_CertificateValidationRecords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateValidationRecords", ID: &i_CertificateValidationRecordList, Members: &m_CertificateValidationRecordList, Type: smithy.ShapeTypeList})
+var sCustomDomain_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iCustomDomainAssociationStatus, Members: &mCustomDomainAssociationStatus, Type: smithy.ShapeTypeEnum})
+var sCustomDomainAssociationStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomDomainAssociationStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomDomainAssociationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomDomainAssociationStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomDomainAssociationStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomDomainAssociationStatus_PENDING_CERTIFICATE_DNS_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CERTIFICATE_DNS_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomDomainAssociationStatus_BINDING_CERTIFICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINDING_CERTIFICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CustomDomainList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomDomain, Members: &mCustomDomain, Type: smithy.ShapeTypeStructure})
+var sEgressConfiguration_EgressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressType", ID: &iEgressType, Members: &mEgressType, Type: smithy.ShapeTypeEnum})
+var sEgressConfiguration_VpcConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectorArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sEgressType_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEgressType_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionConfiguration_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sHealthCheckConfiguration_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iHealthCheckProtocol, Members: &mHealthCheckProtocol, Type: smithy.ShapeTypeEnum})
+var sHealthCheckConfiguration_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_HealthCheckPath, Type: smithy.ShapeTypeString})
+var sHealthCheckConfiguration_Interval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interval", ID: &i_HealthCheckInterval, Type: smithy.ShapeTypeInteger})
+var sHealthCheckConfiguration_Timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timeout", ID: &i_HealthCheckTimeout, Type: smithy.ShapeTypeInteger})
+var sHealthCheckConfiguration_HealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthyThreshold", ID: &i_HealthCheckHealthyThreshold, Type: smithy.ShapeTypeInteger})
+var sHealthCheckConfiguration_UnhealthyThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnhealthyThreshold", ID: &i_HealthCheckUnhealthyThreshold, Type: smithy.ShapeTypeInteger})
+var sHealthCheckProtocol_TCP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TCP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHealthCheckProtocol_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageConfiguration_RuntimeEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironmentVariables", ID: &i_RuntimeEnvironmentVariables, Members: &m_RuntimeEnvironmentVariables, Type: smithy.ShapeTypeMap})
+var sImageConfiguration_StartCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartCommand", ID: &i_StartCommand, Traits: &t2, Type: smithy.ShapeTypeString})
+var sImageConfiguration_Port = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Port", ID: &i_String, Type: smithy.ShapeTypeString})
+var sImageConfiguration_RuntimeEnvironmentSecrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuntimeEnvironmentSecrets", ID: &i_RuntimeEnvironmentSecrets, Members: &m_RuntimeEnvironmentSecrets, Type: smithy.ShapeTypeMap})
+var sImageRepository_ImageIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageIdentifier", ID: &i_ImageIdentifier, Type: smithy.ShapeTypeString})
+var sImageRepository_ImageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageConfiguration", ID: &iImageConfiguration, Members: &mImageConfiguration, Type: smithy.ShapeTypeStructure})
+var sImageRepository_ImageRepositoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageRepositoryType", ID: &iImageRepositoryType, Members: &mImageRepositoryType, Type: smithy.ShapeTypeEnum})
+var sImageRepositoryType_ECR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageRepositoryType_ECR_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECR_PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIngressConfiguration_IsPubliclyAccessible = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsPubliclyAccessible", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sIngressVpcConfiguration_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIngressVpcConfiguration_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInstanceConfiguration_Cpu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cpu", ID: &i_Cpu, Type: smithy.ShapeTypeString})
+var sInstanceConfiguration_Memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Memory", ID: &i_Memory, Type: smithy.ShapeTypeString})
+var sInstanceConfiguration_InstanceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sInternalServiceErrorException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sIpAddressType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressType_DUAL_STACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_STACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sListVpcIngressConnectionsFilter_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sListVpcIngressConnectionsFilter_VpcEndpointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEndpointId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNetworkConfiguration_EgressConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressConfiguration", ID: &iEgressConfiguration, Members: &mEgressConfiguration, Type: smithy.ShapeTypeStructure})
+var sNetworkConfiguration_IngressConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressConfiguration", ID: &iIngressConfiguration, Members: &mIngressConfiguration, Type: smithy.ShapeTypeStructure})
+var sNetworkConfiguration_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sObservabilityConfiguration_ObservabilityConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sObservabilityConfiguration_ObservabilityConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationName", ID: &i_ObservabilityConfigurationName, Type: smithy.ShapeTypeString})
+var sObservabilityConfiguration_TraceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TraceConfiguration", ID: &iTraceConfiguration, Members: &mTraceConfiguration, Type: smithy.ShapeTypeStructure})
+var sObservabilityConfiguration_ObservabilityConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationRevision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sObservabilityConfiguration_Latest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latest", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sObservabilityConfiguration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iObservabilityConfigurationStatus, Members: &mObservabilityConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sObservabilityConfiguration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sObservabilityConfiguration_DeletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sObservabilityConfigurationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObservabilityConfigurationStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sObservabilityConfigurationSummary_ObservabilityConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sObservabilityConfigurationSummary_ObservabilityConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationName", ID: &i_ObservabilityConfigurationName, Type: smithy.ShapeTypeString})
+var sObservabilityConfigurationSummary_ObservabilityConfigurationRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationRevision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_ObservabilityConfigurationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iObservabilityConfigurationSummary, Members: &mObservabilityConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sOperationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationStatus_ROLLBACK_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationStatus_ROLLBACK_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationStatus_ROLLBACK_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sOperationSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum})
+var sOperationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iOperationStatus, Members: &mOperationStatus, Type: smithy.ShapeTypeEnum})
+var sOperationSummary_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sOperationSummary_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sOperationSummary_EndedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sOperationSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_OperationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOperationSummary, Members: &mOperationSummary, Type: smithy.ShapeTypeStructure})
+var sOperationType_START_DEPLOYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_DEPLOYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationType_CREATE_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationType_PAUSE_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAUSE_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationType_RESUME_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESUME_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationType_DELETE_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationType_UPDATE_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProviderType_GITHUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProviderType_BITBUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRuntime_PYTHON_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYTHON_3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_NODEJS_12 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODEJS_12", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_NODEJS_14 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODEJS_14", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_CORRETTO_8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORRETTO_8", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_CORRETTO_11 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORRETTO_11", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_NODEJS_16 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODEJS_16", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_GO_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GO_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_DOTNET_6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOTNET_6", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_PHP_81 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHP_81", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_RUBY_31 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUBY_31", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_PYTHON_311 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYTHON_311", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_NODEJS_18 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODEJS_18", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuntime_NODEJS_22 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NODEJS_22", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RuntimeEnvironmentSecrets_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuntimeEnvironmentSecretsName, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_RuntimeEnvironmentSecrets_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_RuntimeEnvironmentSecretsValue, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_RuntimeEnvironmentVariables_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_RuntimeEnvironmentVariablesKey, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_RuntimeEnvironmentVariables_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_RuntimeEnvironmentVariablesValue, Traits: &t2, Type: smithy.ShapeTypeString})
+var sService_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString})
+var sService_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_ServiceId, Type: smithy.ShapeTypeString})
+var sService_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sService_ServiceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sService_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sService_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sService_DeletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sService_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iServiceStatus, Members: &mServiceStatus, Type: smithy.ShapeTypeEnum})
+var sService_SourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceConfiguration", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sService_InstanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceConfiguration", ID: &iInstanceConfiguration, Members: &mInstanceConfiguration, Type: smithy.ShapeTypeStructure})
+var sService_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sService_HealthCheckConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckConfiguration", ID: &iHealthCheckConfiguration, Members: &mHealthCheckConfiguration, Type: smithy.ShapeTypeStructure})
+var sService_AutoScalingConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationSummary", ID: &iAutoScalingConfigurationSummary, Members: &mAutoScalingConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sService_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sService_ObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfiguration", ID: &iServiceObservabilityConfiguration, Members: &mServiceObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ServiceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sServiceObservabilityConfiguration_ObservabilityEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sServiceObservabilityConfiguration_ObservabilityConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sServiceStatus_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceStatus_PAUSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAUSED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceStatus_OPERATION_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPERATION_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceSummary_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString})
+var sServiceSummary_ServiceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceId", ID: &i_ServiceId, Type: smithy.ShapeTypeString})
+var sServiceSummary_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sServiceSummary_ServiceUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUrl", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceSummary_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iServiceStatus, Members: &mServiceStatus, Type: smithy.ShapeTypeEnum})
+var s_ServiceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure})
+var sSourceCodeVersion_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSourceCodeVersionType, Members: &mSourceCodeVersionType, Type: smithy.ShapeTypeEnum})
+var sSourceCodeVersion_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSourceCodeVersionType_BRANCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRANCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSourceConfiguration_CodeRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CodeRepository", ID: &iCodeRepository, Members: &mCodeRepository, Type: smithy.ShapeTypeStructure})
+var sSourceConfiguration_ImageRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageRepository", ID: &iImageRepository, Members: &mImageRepository, Type: smithy.ShapeTypeStructure})
+var sSourceConfiguration_AutoDeploymentsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeploymentsEnabled", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sSourceConfiguration_AuthenticationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationConfiguration", ID: &iAuthenticationConfiguration, Members: &mAuthenticationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTraceConfiguration_Vendor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vendor", ID: &iTracingVendor, Members: &mTracingVendor, Type: smithy.ShapeTypeEnum})
+var sTracingVendor_AWSXRAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSXRAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcConnector_VpcConnectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectorName", ID: &i_VpcConnectorName, Type: smithy.ShapeTypeString})
+var sVpcConnector_VpcConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectorArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sVpcConnector_VpcConnectorRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectorRevision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sVpcConnector_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sVpcConnector_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sVpcConnector_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iVpcConnectorStatus, Members: &mVpcConnectorStatus, Type: smithy.ShapeTypeEnum})
+var sVpcConnector_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sVpcConnector_DeletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_VpcConnectors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcConnector, Members: &mVpcConnector, Type: smithy.ShapeTypeStructure})
+var sVpcConnectorStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcConnectorStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcDNSTarget_VpcIngressConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sVpcDNSTarget_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sVpcDNSTarget_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_VpcDNSTargetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcDNSTarget, Members: &mVpcDNSTarget, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnection_VpcIngressConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sVpcIngressConnection_VpcIngressConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionName", ID: &i_VpcIngressConnectionName, Type: smithy.ShapeTypeString})
+var sVpcIngressConnection_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sVpcIngressConnection_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iVpcIngressConnectionStatus, Members: &mVpcIngressConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sVpcIngressConnection_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_CustomerAccountId, Type: smithy.ShapeTypeString})
+var sVpcIngressConnection_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sVpcIngressConnection_IngressVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressVpcConfiguration", ID: &iIngressVpcConfiguration, Members: &mIngressVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnection_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sVpcIngressConnection_DeletedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeletedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sVpcIngressConnectionStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionStatus_PENDING_CREATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CREATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionStatus_PENDING_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionStatus_PENDING_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionStatus_FAILED_CREATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_CREATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionStatus_FAILED_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionStatus_FAILED_DELETION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_DELETION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcIngressConnectionSummary_VpcIngressConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sVpcIngressConnectionSummary_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var s_VpcIngressConnectionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcIngressConnectionSummary, Members: &mVpcIngressConnectionSummary, Type: smithy.ShapeTypeStructure})
+var sAssociateCustomDomainRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sAssociateCustomDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sAssociateCustomDomainRequest_EnableWWWSubdomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableWWWSubdomain", ID: &i_NullableBoolean, Type: smithy.ShapeTypeBoolean})
+var sAssociateCustomDomainResponse_DNSTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSTarget", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAssociateCustomDomainResponse_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sAssociateCustomDomainResponse_CustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomDomain", ID: &iCustomDomain, Members: &mCustomDomain, Type: smithy.ShapeTypeStructure})
+var sAssociateCustomDomainResponse_VpcDNSTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcDNSTargets", ID: &i_VpcDNSTargetList, Members: &m_VpcDNSTargetList, Type: smithy.ShapeTypeList})
+var sCreateAutoScalingConfigurationRequest_AutoScalingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationName", ID: &i_AutoScalingConfigurationName, Type: smithy.ShapeTypeString})
+var sCreateAutoScalingConfigurationRequest_MaxConcurrency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxConcurrency", ID: &i_ASConfigMaxConcurrency, Type: smithy.ShapeTypeInteger})
+var sCreateAutoScalingConfigurationRequest_MinSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinSize", ID: &i_ASConfigMinSize, Type: smithy.ShapeTypeInteger})
+var sCreateAutoScalingConfigurationRequest_MaxSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxSize", ID: &i_ASConfigMaxSize, Type: smithy.ShapeTypeInteger})
+var sCreateAutoScalingConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateAutoScalingConfigurationResponse_AutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfiguration", ID: &iAutoScalingConfiguration, Members: &mAutoScalingConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionRequest_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sCreateConnectionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateConnectionResponse_Connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sCreateObservabilityConfigurationRequest_ObservabilityConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationName", ID: &i_ObservabilityConfigurationName, Type: smithy.ShapeTypeString})
+var sCreateObservabilityConfigurationRequest_TraceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TraceConfiguration", ID: &iTraceConfiguration, Members: &mTraceConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateObservabilityConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateObservabilityConfigurationResponse_ObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfiguration", ID: &iObservabilityConfiguration, Members: &mObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateServiceRequest_ServiceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceName", ID: &i_ServiceName, Type: smithy.ShapeTypeString})
+var sCreateServiceRequest_SourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceConfiguration", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateServiceRequest_InstanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceConfiguration", ID: &iInstanceConfiguration, Members: &mInstanceConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateServiceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateServiceRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateServiceRequest_HealthCheckConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckConfiguration", ID: &iHealthCheckConfiguration, Members: &mHealthCheckConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateServiceRequest_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sCreateServiceRequest_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateServiceRequest_ObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfiguration", ID: &iServiceObservabilityConfiguration, Members: &mServiceObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sCreateServiceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sCreateVpcConnectorRequest_VpcConnectorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectorName", ID: &i_VpcConnectorName, Type: smithy.ShapeTypeString})
+var sCreateVpcConnectorRequest_Subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subnets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCreateVpcConnectorRequest_SecurityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroups", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCreateVpcConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateVpcConnectorResponse_VpcConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnector", ID: &iVpcConnector, Members: &mVpcConnector, Type: smithy.ShapeTypeStructure})
+var sCreateVpcIngressConnectionRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sCreateVpcIngressConnectionRequest_VpcIngressConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionName", ID: &i_VpcIngressConnectionName, Type: smithy.ShapeTypeString})
+var sCreateVpcIngressConnectionRequest_IngressVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressVpcConfiguration", ID: &iIngressVpcConfiguration, Members: &mIngressVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateVpcIngressConnectionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateVpcIngressConnectionResponse_VpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnection", ID: &iVpcIngressConnection, Members: &mVpcIngressConnection, Type: smithy.ShapeTypeStructure})
+var sDeleteAutoScalingConfigurationRequest_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteAutoScalingConfigurationRequest_DeleteAllRevisions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteAllRevisions", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteAutoScalingConfigurationResponse_AutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfiguration", ID: &iAutoScalingConfiguration, Members: &mAutoScalingConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionRequest_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteConnectionResponse_Connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sDeleteObservabilityConfigurationRequest_ObservabilityConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteObservabilityConfigurationResponse_ObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfiguration", ID: &iObservabilityConfiguration, Members: &mObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sDeleteVpcConnectorRequest_VpcConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectorArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteVpcConnectorResponse_VpcConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnector", ID: &iVpcConnector, Members: &mVpcConnector, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcIngressConnectionRequest_VpcIngressConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDeleteVpcIngressConnectionResponse_VpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnection", ID: &iVpcIngressConnection, Members: &mVpcIngressConnection, Type: smithy.ShapeTypeStructure})
+var sDescribeAutoScalingConfigurationRequest_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeAutoScalingConfigurationResponse_AutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfiguration", ID: &iAutoScalingConfiguration, Members: &mAutoScalingConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomDomainsRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeCustomDomainsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeCustomDomainsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_DescribeCustomDomainsMaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeCustomDomainsResponse_DNSTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSTarget", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeCustomDomainsResponse_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeCustomDomainsResponse_CustomDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomDomains", ID: &i_CustomDomainList, Members: &m_CustomDomainList, Type: smithy.ShapeTypeList})
+var sDescribeCustomDomainsResponse_VpcDNSTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcDNSTargets", ID: &i_VpcDNSTargetList, Members: &m_VpcDNSTargetList, Type: smithy.ShapeTypeList})
+var sDescribeCustomDomainsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeObservabilityConfigurationRequest_ObservabilityConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeObservabilityConfigurationResponse_ObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfiguration", ID: &iObservabilityConfiguration, Members: &mObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sDescribeVpcConnectorRequest_VpcConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectorArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeVpcConnectorResponse_VpcConnector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnector", ID: &iVpcConnector, Members: &mVpcConnector, Type: smithy.ShapeTypeStructure})
+var sDescribeVpcIngressConnectionRequest_VpcIngressConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDescribeVpcIngressConnectionResponse_VpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnection", ID: &iVpcIngressConnection, Members: &mVpcIngressConnection, Type: smithy.ShapeTypeStructure})
+var sDisassociateCustomDomainRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDisassociateCustomDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDisassociateCustomDomainResponse_DNSTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSTarget", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDisassociateCustomDomainResponse_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sDisassociateCustomDomainResponse_CustomDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomDomain", ID: &iCustomDomain, Members: &mCustomDomain, Type: smithy.ShapeTypeStructure})
+var sDisassociateCustomDomainResponse_VpcDNSTargets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcDNSTargets", ID: &i_VpcDNSTargetList, Members: &m_VpcDNSTargetList, Type: smithy.ShapeTypeList})
+var sListAutoScalingConfigurationsRequest_AutoScalingConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationName", ID: &i_AutoScalingConfigurationName, Type: smithy.ShapeTypeString})
+var sListAutoScalingConfigurationsRequest_LatestOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sListAutoScalingConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAutoScalingConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationSummaryList", ID: &i_AutoScalingConfigurationSummaryList, Members: &m_AutoScalingConfigurationSummaryList, Type: smithy.ShapeTypeList})
+var sListAutoScalingConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectionsRequest_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sListConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectionsResponse_ConnectionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionSummaryList", ID: &i_ConnectionSummaryList, Members: &m_ConnectionSummaryList, Type: smithy.ShapeTypeList})
+var sListConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListObservabilityConfigurationsRequest_ObservabilityConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationName", ID: &i_ObservabilityConfigurationName, Type: smithy.ShapeTypeString})
+var sListObservabilityConfigurationsRequest_LatestOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sListObservabilityConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListObservabilityConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfigurationSummaryList", ID: &i_ObservabilityConfigurationSummaryList, Members: &m_ObservabilityConfigurationSummaryList, Type: smithy.ShapeTypeList})
+var sListObservabilityConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListOperationsRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sListOperationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListOperationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListOperationsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListOperationsResponse_OperationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationSummaryList", ID: &i_OperationSummaryList, Members: &m_OperationSummaryList, Type: smithy.ShapeTypeList})
+var sListOperationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListServicesForAutoScalingConfigurationRequest_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sListServicesForAutoScalingConfigurationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListServicesForAutoScalingConfigurationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServicesForAutoScalingConfigurationResponse_ServiceArnList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArnList", ID: &i_ServiceArnList, Members: &m_ServiceArnList, Type: smithy.ShapeTypeList})
+var sListServicesForAutoScalingConfigurationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServicesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListServicesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ServiceMaxResults, Type: smithy.ShapeTypeInteger})
+var sListServicesResponse_ServiceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceSummaryList", ID: &i_ServiceSummaryList, Members: &m_ServiceSummaryList, Type: smithy.ShapeTypeList})
+var sListServicesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListVpcConnectorsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListVpcConnectorsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListVpcConnectorsResponse_VpcConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConnectors", ID: &i_VpcConnectors, Members: &m_VpcConnectors, Type: smithy.ShapeTypeList})
+var sListVpcConnectorsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListVpcIngressConnectionsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iListVpcIngressConnectionsFilter, Members: &mListVpcIngressConnectionsFilter, Type: smithy.ShapeTypeStructure})
+var sListVpcIngressConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListVpcIngressConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionSummaryList", ID: &i_VpcIngressConnectionSummaryList, Members: &m_VpcIngressConnectionSummaryList, Type: smithy.ShapeTypeList})
+var sListVpcIngressConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPauseServiceRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sPauseServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sPauseServiceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sResumeServiceRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sResumeServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sResumeServiceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStartDeploymentRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sStartDeploymentResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateDefaultAutoScalingConfigurationRequest_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateDefaultAutoScalingConfigurationResponse_AutoScalingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfiguration", ID: &iAutoScalingConfiguration, Members: &mAutoScalingConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceRequest_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateServiceRequest_SourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceConfiguration", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceRequest_InstanceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceConfiguration", ID: &iInstanceConfiguration, Members: &mInstanceConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceRequest_AutoScalingConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoScalingConfigurationArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateServiceRequest_HealthCheckConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HealthCheckConfiguration", ID: &iHealthCheckConfiguration, Members: &mHealthCheckConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceRequest_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceRequest_ObservabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObservabilityConfiguration", ID: &iServiceObservabilityConfiguration, Members: &mServiceObservabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceResponse_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceResponse_OperationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationId", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sUpdateVpcIngressConnectionRequest_VpcIngressConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnectionArn", ID: &i_AppRunnerResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateVpcIngressConnectionRequest_IngressVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngressVpcConfiguration", ID: &iIngressVpcConfiguration, Members: &mIngressVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcIngressConnectionResponse_VpcIngressConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcIngressConnection", ID: &iVpcIngressConnection, Members: &mVpcIngressConnection, Type: smithy.ShapeTypeStructure})
+
+var AssociateCustomDomain = &sAssociateCustomDomain
+
+var CreateAutoScalingConfiguration = &sCreateAutoScalingConfiguration
+
+var CreateConnection = &sCreateConnection
+
+var CreateObservabilityConfiguration = &sCreateObservabilityConfiguration
+
+var CreateService = &sCreateService
+
+var CreateVpcConnector = &sCreateVpcConnector
+
+var CreateVpcIngressConnection = &sCreateVpcIngressConnection
+
+var DeleteAutoScalingConfiguration = &sDeleteAutoScalingConfiguration
+
+var DeleteConnection = &sDeleteConnection
+
+var DeleteObservabilityConfiguration = &sDeleteObservabilityConfiguration
+
+var DeleteService = &sDeleteService
+
+var DeleteVpcConnector = &sDeleteVpcConnector
+
+var DeleteVpcIngressConnection = &sDeleteVpcIngressConnection
+
+var DescribeAutoScalingConfiguration = &sDescribeAutoScalingConfiguration
+
+var DescribeCustomDomains = &sDescribeCustomDomains
+
+var DescribeObservabilityConfiguration = &sDescribeObservabilityConfiguration
+
+var DescribeService = &sDescribeService
+
+var DescribeVpcConnector = &sDescribeVpcConnector
+
+var DescribeVpcIngressConnection = &sDescribeVpcIngressConnection
+
+var DisassociateCustomDomain = &sDisassociateCustomDomain
+
+var ListAutoScalingConfigurations = &sListAutoScalingConfigurations
+
+var ListConnections = &sListConnections
+
+var ListObservabilityConfigurations = &sListObservabilityConfigurations
+
+var ListOperations = &sListOperations
+
+var ListServices = &sListServices
+
+var ListServicesForAutoScalingConfiguration = &sListServicesForAutoScalingConfiguration
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListVpcConnectors = &sListVpcConnectors
+
+var ListVpcIngressConnections = &sListVpcIngressConnections
+
+var PauseService = &sPauseService
+
+var ResumeService = &sResumeService
+
+var StartDeployment = &sStartDeployment
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDefaultAutoScalingConfiguration = &sUpdateDefaultAutoScalingConfiguration
+
+var UpdateService = &sUpdateService
+
+var UpdateVpcIngressConnection = &sUpdateVpcIngressConnection
+
+var _AppRunner = &s_AppRunner
+
+var _AppRunnerResourceArn = &s_AppRunnerResourceArn
+
+var _ASConfigMaxConcurrency = &s_ASConfigMaxConcurrency
+
+var _ASConfigMaxSize = &s_ASConfigMaxSize
+
+var _ASConfigMinSize = &s_ASConfigMinSize
+
+var AuthenticationConfiguration = &sAuthenticationConfiguration
+var AuthenticationConfiguration_ConnectionArn = &sAuthenticationConfiguration_ConnectionArn
+var AuthenticationConfiguration_AccessRoleArn = &sAuthenticationConfiguration_AccessRoleArn
+
+var AutoScalingConfiguration = &sAutoScalingConfiguration
+var AutoScalingConfiguration_AutoScalingConfigurationArn = &sAutoScalingConfiguration_AutoScalingConfigurationArn
+var AutoScalingConfiguration_AutoScalingConfigurationName = &sAutoScalingConfiguration_AutoScalingConfigurationName
+var AutoScalingConfiguration_AutoScalingConfigurationRevision = &sAutoScalingConfiguration_AutoScalingConfigurationRevision
+var AutoScalingConfiguration_Latest = &sAutoScalingConfiguration_Latest
+var AutoScalingConfiguration_Status = &sAutoScalingConfiguration_Status
+var AutoScalingConfiguration_MaxConcurrency = &sAutoScalingConfiguration_MaxConcurrency
+var AutoScalingConfiguration_MinSize = &sAutoScalingConfiguration_MinSize
+var AutoScalingConfiguration_MaxSize = &sAutoScalingConfiguration_MaxSize
+var AutoScalingConfiguration_CreatedAt = &sAutoScalingConfiguration_CreatedAt
+var AutoScalingConfiguration_DeletedAt = &sAutoScalingConfiguration_DeletedAt
+var AutoScalingConfiguration_HasAssociatedService = &sAutoScalingConfiguration_HasAssociatedService
+var AutoScalingConfiguration_IsDefault = &sAutoScalingConfiguration_IsDefault
+
+var _AutoScalingConfigurationName = &s_AutoScalingConfigurationName
+
+var _AutoScalingConfigurationRevision = &s_AutoScalingConfigurationRevision
+
+var AutoScalingConfigurationStatus = &sAutoScalingConfigurationStatus
+var AutoScalingConfigurationStatus_ACTIVE = &sAutoScalingConfigurationStatus_ACTIVE
+var AutoScalingConfigurationStatus_INACTIVE = &sAutoScalingConfigurationStatus_INACTIVE
+
+var AutoScalingConfigurationSummary = &sAutoScalingConfigurationSummary
+var AutoScalingConfigurationSummary_AutoScalingConfigurationArn = &sAutoScalingConfigurationSummary_AutoScalingConfigurationArn
+var AutoScalingConfigurationSummary_AutoScalingConfigurationName = &sAutoScalingConfigurationSummary_AutoScalingConfigurationName
+var AutoScalingConfigurationSummary_AutoScalingConfigurationRevision = &sAutoScalingConfigurationSummary_AutoScalingConfigurationRevision
+var AutoScalingConfigurationSummary_Status = &sAutoScalingConfigurationSummary_Status
+var AutoScalingConfigurationSummary_CreatedAt = &sAutoScalingConfigurationSummary_CreatedAt
+var AutoScalingConfigurationSummary_HasAssociatedService = &sAutoScalingConfigurationSummary_HasAssociatedService
+var AutoScalingConfigurationSummary_IsDefault = &sAutoScalingConfigurationSummary_IsDefault
+
+var _AutoScalingConfigurationSummaryList = &s_AutoScalingConfigurationSummaryList
+var _AutoScalingConfigurationSummaryList_member = &s_AutoScalingConfigurationSummaryList_member
+
+var _Boolean = &s_Boolean
+
+var _BuildCommand = &s_BuildCommand
+
+var CertificateValidationRecord = &sCertificateValidationRecord
+var CertificateValidationRecord_Name = &sCertificateValidationRecord_Name
+var CertificateValidationRecord_Type = &sCertificateValidationRecord_Type
+var CertificateValidationRecord_Value = &sCertificateValidationRecord_Value
+var CertificateValidationRecord_Status = &sCertificateValidationRecord_Status
+
+var _CertificateValidationRecordList = &s_CertificateValidationRecordList
+var _CertificateValidationRecordList_member = &s_CertificateValidationRecordList_member
+
+var CertificateValidationRecordStatus = &sCertificateValidationRecordStatus
+var CertificateValidationRecordStatus_PENDING_VALIDATION = &sCertificateValidationRecordStatus_PENDING_VALIDATION
+var CertificateValidationRecordStatus_SUCCESS = &sCertificateValidationRecordStatus_SUCCESS
+var CertificateValidationRecordStatus_FAILED = &sCertificateValidationRecordStatus_FAILED
+
+var CodeConfiguration = &sCodeConfiguration
+var CodeConfiguration_ConfigurationSource = &sCodeConfiguration_ConfigurationSource
+var CodeConfiguration_CodeConfigurationValues = &sCodeConfiguration_CodeConfigurationValues
+
+var CodeConfigurationValues = &sCodeConfigurationValues
+var CodeConfigurationValues_Runtime = &sCodeConfigurationValues_Runtime
+var CodeConfigurationValues_BuildCommand = &sCodeConfigurationValues_BuildCommand
+var CodeConfigurationValues_StartCommand = &sCodeConfigurationValues_StartCommand
+var CodeConfigurationValues_Port = &sCodeConfigurationValues_Port
+var CodeConfigurationValues_RuntimeEnvironmentVariables = &sCodeConfigurationValues_RuntimeEnvironmentVariables
+var CodeConfigurationValues_RuntimeEnvironmentSecrets = &sCodeConfigurationValues_RuntimeEnvironmentSecrets
+
+var CodeRepository = &sCodeRepository
+var CodeRepository_RepositoryUrl = &sCodeRepository_RepositoryUrl
+var CodeRepository_SourceCodeVersion = &sCodeRepository_SourceCodeVersion
+var CodeRepository_CodeConfiguration = &sCodeRepository_CodeConfiguration
+var CodeRepository_SourceDirectory = &sCodeRepository_SourceDirectory
+
+var ConfigurationSource = &sConfigurationSource
+var ConfigurationSource_REPOSITORY = &sConfigurationSource_REPOSITORY
+var ConfigurationSource_API = &sConfigurationSource_API
+
+var Connection = &sConnection
+var Connection_ConnectionName = &sConnection_ConnectionName
+var Connection_ConnectionArn = &sConnection_ConnectionArn
+var Connection_ProviderType = &sConnection_ProviderType
+var Connection_Status = &sConnection_Status
+var Connection_CreatedAt = &sConnection_CreatedAt
+
+var _ConnectionName = &s_ConnectionName
+
+var ConnectionStatus = &sConnectionStatus
+var ConnectionStatus_PENDING_HANDSHAKE = &sConnectionStatus_PENDING_HANDSHAKE
+var ConnectionStatus_AVAILABLE = &sConnectionStatus_AVAILABLE
+var ConnectionStatus_ERROR = &sConnectionStatus_ERROR
+var ConnectionStatus_DELETED = &sConnectionStatus_DELETED
+
+var ConnectionSummary = &sConnectionSummary
+var ConnectionSummary_ConnectionName = &sConnectionSummary_ConnectionName
+var ConnectionSummary_ConnectionArn = &sConnectionSummary_ConnectionArn
+var ConnectionSummary_ProviderType = &sConnectionSummary_ProviderType
+var ConnectionSummary_Status = &sConnectionSummary_Status
+var ConnectionSummary_CreatedAt = &sConnectionSummary_CreatedAt
+
+var _ConnectionSummaryList = &s_ConnectionSummaryList
+var _ConnectionSummaryList_member = &s_ConnectionSummaryList_member
+
+var _Cpu = &s_Cpu
+
+var CustomDomain = &sCustomDomain
+var CustomDomain_DomainName = &sCustomDomain_DomainName
+var CustomDomain_EnableWWWSubdomain = &sCustomDomain_EnableWWWSubdomain
+var CustomDomain_CertificateValidationRecords = &sCustomDomain_CertificateValidationRecords
+var CustomDomain_Status = &sCustomDomain_Status
+
+var CustomDomainAssociationStatus = &sCustomDomainAssociationStatus
+var CustomDomainAssociationStatus_CREATING = &sCustomDomainAssociationStatus_CREATING
+var CustomDomainAssociationStatus_CREATE_FAILED = &sCustomDomainAssociationStatus_CREATE_FAILED
+var CustomDomainAssociationStatus_ACTIVE = &sCustomDomainAssociationStatus_ACTIVE
+var CustomDomainAssociationStatus_DELETING = &sCustomDomainAssociationStatus_DELETING
+var CustomDomainAssociationStatus_DELETE_FAILED = &sCustomDomainAssociationStatus_DELETE_FAILED
+var CustomDomainAssociationStatus_PENDING_CERTIFICATE_DNS_VALIDATION = &sCustomDomainAssociationStatus_PENDING_CERTIFICATE_DNS_VALIDATION
+var CustomDomainAssociationStatus_BINDING_CERTIFICATE = &sCustomDomainAssociationStatus_BINDING_CERTIFICATE
+
+var _CustomDomainList = &s_CustomDomainList
+var _CustomDomainList_member = &s_CustomDomainList_member
+
+var _CustomerAccountId = &s_CustomerAccountId
+
+var _DescribeCustomDomainsMaxResults = &s_DescribeCustomDomainsMaxResults
+
+var _DomainName = &s_DomainName
+
+var EgressConfiguration = &sEgressConfiguration
+var EgressConfiguration_EgressType = &sEgressConfiguration_EgressType
+var EgressConfiguration_VpcConnectorArn = &sEgressConfiguration_VpcConnectorArn
+
+var EgressType = &sEgressType
+var EgressType_DEFAULT = &sEgressType_DEFAULT
+var EgressType_VPC = &sEgressType_VPC
+
+var EncryptionConfiguration = &sEncryptionConfiguration
+var EncryptionConfiguration_KmsKey = &sEncryptionConfiguration_KmsKey
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _HasAssociatedService = &s_HasAssociatedService
+
+var HealthCheckConfiguration = &sHealthCheckConfiguration
+var HealthCheckConfiguration_Protocol = &sHealthCheckConfiguration_Protocol
+var HealthCheckConfiguration_Path = &sHealthCheckConfiguration_Path
+var HealthCheckConfiguration_Interval = &sHealthCheckConfiguration_Interval
+var HealthCheckConfiguration_Timeout = &sHealthCheckConfiguration_Timeout
+var HealthCheckConfiguration_HealthyThreshold = &sHealthCheckConfiguration_HealthyThreshold
+var HealthCheckConfiguration_UnhealthyThreshold = &sHealthCheckConfiguration_UnhealthyThreshold
+
+var _HealthCheckHealthyThreshold = &s_HealthCheckHealthyThreshold
+
+var _HealthCheckInterval = &s_HealthCheckInterval
+
+var _HealthCheckPath = &s_HealthCheckPath
+
+var HealthCheckProtocol = &sHealthCheckProtocol
+var HealthCheckProtocol_TCP = &sHealthCheckProtocol_TCP
+var HealthCheckProtocol_HTTP = &sHealthCheckProtocol_HTTP
+
+var _HealthCheckTimeout = &s_HealthCheckTimeout
+
+var _HealthCheckUnhealthyThreshold = &s_HealthCheckUnhealthyThreshold
+
+var ImageConfiguration = &sImageConfiguration
+var ImageConfiguration_RuntimeEnvironmentVariables = &sImageConfiguration_RuntimeEnvironmentVariables
+var ImageConfiguration_StartCommand = &sImageConfiguration_StartCommand
+var ImageConfiguration_Port = &sImageConfiguration_Port
+var ImageConfiguration_RuntimeEnvironmentSecrets = &sImageConfiguration_RuntimeEnvironmentSecrets
+
+var _ImageIdentifier = &s_ImageIdentifier
+
+var ImageRepository = &sImageRepository
+var ImageRepository_ImageIdentifier = &sImageRepository_ImageIdentifier
+var ImageRepository_ImageConfiguration = &sImageRepository_ImageConfiguration
+var ImageRepository_ImageRepositoryType = &sImageRepository_ImageRepositoryType
+
+var ImageRepositoryType = &sImageRepositoryType
+var ImageRepositoryType_ECR = &sImageRepositoryType_ECR
+var ImageRepositoryType_ECR_PUBLIC = &sImageRepositoryType_ECR_PUBLIC
+
+var IngressConfiguration = &sIngressConfiguration
+var IngressConfiguration_IsPubliclyAccessible = &sIngressConfiguration_IsPubliclyAccessible
+
+var IngressVpcConfiguration = &sIngressVpcConfiguration
+var IngressVpcConfiguration_VpcId = &sIngressVpcConfiguration_VpcId
+var IngressVpcConfiguration_VpcEndpointId = &sIngressVpcConfiguration_VpcEndpointId
+
+var InstanceConfiguration = &sInstanceConfiguration
+var InstanceConfiguration_Cpu = &sInstanceConfiguration_Cpu
+var InstanceConfiguration_Memory = &sInstanceConfiguration_Memory
+var InstanceConfiguration_InstanceRoleArn = &sInstanceConfiguration_InstanceRoleArn
+
+var _Integer = &s_Integer
+
+var InternalServiceErrorException = &sInternalServiceErrorException
+var InternalServiceErrorException_Message = &sInternalServiceErrorException_Message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_Message = &sInvalidRequestException_Message
+
+var InvalidStateException = &sInvalidStateException
+var InvalidStateException_Message = &sInvalidStateException_Message
+
+var IpAddressType = &sIpAddressType
+var IpAddressType_IPV4 = &sIpAddressType_IPV4
+var IpAddressType_DUAL_STACK = &sIpAddressType_DUAL_STACK
+
+var _IsDefault = &s_IsDefault
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _Latest = &s_Latest
+
+var _ListOperationsMaxResults = &s_ListOperationsMaxResults
+
+var ListVpcIngressConnectionsFilter = &sListVpcIngressConnectionsFilter
+var ListVpcIngressConnectionsFilter_ServiceArn = &sListVpcIngressConnectionsFilter_ServiceArn
+var ListVpcIngressConnectionsFilter_VpcEndpointId = &sListVpcIngressConnectionsFilter_VpcEndpointId
+
+var _MaxConcurrency = &s_MaxConcurrency
+
+var _MaxResults = &s_MaxResults
+
+var _MaxSize = &s_MaxSize
+
+var _Memory = &s_Memory
+
+var _MinSize = &s_MinSize
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_EgressConfiguration = &sNetworkConfiguration_EgressConfiguration
+var NetworkConfiguration_IngressConfiguration = &sNetworkConfiguration_IngressConfiguration
+var NetworkConfiguration_IpAddressType = &sNetworkConfiguration_IpAddressType
+
+var _NextToken = &s_NextToken
+
+var _NullableBoolean = &s_NullableBoolean
+
+var ObservabilityConfiguration = &sObservabilityConfiguration
+var ObservabilityConfiguration_ObservabilityConfigurationArn = &sObservabilityConfiguration_ObservabilityConfigurationArn
+var ObservabilityConfiguration_ObservabilityConfigurationName = &sObservabilityConfiguration_ObservabilityConfigurationName
+var ObservabilityConfiguration_TraceConfiguration = &sObservabilityConfiguration_TraceConfiguration
+var ObservabilityConfiguration_ObservabilityConfigurationRevision = &sObservabilityConfiguration_ObservabilityConfigurationRevision
+var ObservabilityConfiguration_Latest = &sObservabilityConfiguration_Latest
+var ObservabilityConfiguration_Status = &sObservabilityConfiguration_Status
+var ObservabilityConfiguration_CreatedAt = &sObservabilityConfiguration_CreatedAt
+var ObservabilityConfiguration_DeletedAt = &sObservabilityConfiguration_DeletedAt
+
+var _ObservabilityConfigurationName = &s_ObservabilityConfigurationName
+
+var ObservabilityConfigurationStatus = &sObservabilityConfigurationStatus
+var ObservabilityConfigurationStatus_ACTIVE = &sObservabilityConfigurationStatus_ACTIVE
+var ObservabilityConfigurationStatus_INACTIVE = &sObservabilityConfigurationStatus_INACTIVE
+
+var ObservabilityConfigurationSummary = &sObservabilityConfigurationSummary
+var ObservabilityConfigurationSummary_ObservabilityConfigurationArn = &sObservabilityConfigurationSummary_ObservabilityConfigurationArn
+var ObservabilityConfigurationSummary_ObservabilityConfigurationName = &sObservabilityConfigurationSummary_ObservabilityConfigurationName
+var ObservabilityConfigurationSummary_ObservabilityConfigurationRevision = &sObservabilityConfigurationSummary_ObservabilityConfigurationRevision
+
+var _ObservabilityConfigurationSummaryList = &s_ObservabilityConfigurationSummaryList
+var _ObservabilityConfigurationSummaryList_member = &s_ObservabilityConfigurationSummaryList_member
+
+var OperationStatus = &sOperationStatus
+var OperationStatus_PENDING = &sOperationStatus_PENDING
+var OperationStatus_IN_PROGRESS = &sOperationStatus_IN_PROGRESS
+var OperationStatus_FAILED = &sOperationStatus_FAILED
+var OperationStatus_SUCCEEDED = &sOperationStatus_SUCCEEDED
+var OperationStatus_ROLLBACK_IN_PROGRESS = &sOperationStatus_ROLLBACK_IN_PROGRESS
+var OperationStatus_ROLLBACK_FAILED = &sOperationStatus_ROLLBACK_FAILED
+var OperationStatus_ROLLBACK_SUCCEEDED = &sOperationStatus_ROLLBACK_SUCCEEDED
+
+var OperationSummary = &sOperationSummary
+var OperationSummary_Id = &sOperationSummary_Id
+var OperationSummary_Type = &sOperationSummary_Type
+var OperationSummary_Status = &sOperationSummary_Status
+var OperationSummary_TargetArn = &sOperationSummary_TargetArn
+var OperationSummary_StartedAt = &sOperationSummary_StartedAt
+var OperationSummary_EndedAt = &sOperationSummary_EndedAt
+var OperationSummary_UpdatedAt = &sOperationSummary_UpdatedAt
+
+var _OperationSummaryList = &s_OperationSummaryList
+var _OperationSummaryList_member = &s_OperationSummaryList_member
+
+var OperationType = &sOperationType
+var OperationType_START_DEPLOYMENT = &sOperationType_START_DEPLOYMENT
+var OperationType_CREATE_SERVICE = &sOperationType_CREATE_SERVICE
+var OperationType_PAUSE_SERVICE = &sOperationType_PAUSE_SERVICE
+var OperationType_RESUME_SERVICE = &sOperationType_RESUME_SERVICE
+var OperationType_DELETE_SERVICE = &sOperationType_DELETE_SERVICE
+var OperationType_UPDATE_SERVICE = &sOperationType_UPDATE_SERVICE
+
+var ProviderType = &sProviderType
+var ProviderType_GITHUB = &sProviderType_GITHUB
+var ProviderType_BITBUCKET = &sProviderType_BITBUCKET
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _RoleArn = &s_RoleArn
+
+var Runtime = &sRuntime
+var Runtime_PYTHON_3 = &sRuntime_PYTHON_3
+var Runtime_NODEJS_12 = &sRuntime_NODEJS_12
+var Runtime_NODEJS_14 = &sRuntime_NODEJS_14
+var Runtime_CORRETTO_8 = &sRuntime_CORRETTO_8
+var Runtime_CORRETTO_11 = &sRuntime_CORRETTO_11
+var Runtime_NODEJS_16 = &sRuntime_NODEJS_16
+var Runtime_GO_1 = &sRuntime_GO_1
+var Runtime_DOTNET_6 = &sRuntime_DOTNET_6
+var Runtime_PHP_81 = &sRuntime_PHP_81
+var Runtime_RUBY_31 = &sRuntime_RUBY_31
+var Runtime_PYTHON_311 = &sRuntime_PYTHON_311
+var Runtime_NODEJS_18 = &sRuntime_NODEJS_18
+var Runtime_NODEJS_22 = &sRuntime_NODEJS_22
+
+var _RuntimeEnvironmentSecrets = &s_RuntimeEnvironmentSecrets
+var _RuntimeEnvironmentSecrets_key = &s_RuntimeEnvironmentSecrets_key
+var _RuntimeEnvironmentSecrets_value = &s_RuntimeEnvironmentSecrets_value
+
+var _RuntimeEnvironmentSecretsName = &s_RuntimeEnvironmentSecretsName
+
+var _RuntimeEnvironmentSecretsValue = &s_RuntimeEnvironmentSecretsValue
+
+var _RuntimeEnvironmentVariables = &s_RuntimeEnvironmentVariables
+var _RuntimeEnvironmentVariables_key = &s_RuntimeEnvironmentVariables_key
+var _RuntimeEnvironmentVariables_value = &s_RuntimeEnvironmentVariables_value
+
+var _RuntimeEnvironmentVariablesKey = &s_RuntimeEnvironmentVariablesKey
+
+var _RuntimeEnvironmentVariablesValue = &s_RuntimeEnvironmentVariablesValue
+
+var Service = &sService
+var Service_ServiceName = &sService_ServiceName
+var Service_ServiceId = &sService_ServiceId
+var Service_ServiceArn = &sService_ServiceArn
+var Service_ServiceUrl = &sService_ServiceUrl
+var Service_CreatedAt = &sService_CreatedAt
+var Service_UpdatedAt = &sService_UpdatedAt
+var Service_DeletedAt = &sService_DeletedAt
+var Service_Status = &sService_Status
+var Service_SourceConfiguration = &sService_SourceConfiguration
+var Service_InstanceConfiguration = &sService_InstanceConfiguration
+var Service_EncryptionConfiguration = &sService_EncryptionConfiguration
+var Service_HealthCheckConfiguration = &sService_HealthCheckConfiguration
+var Service_AutoScalingConfigurationSummary = &sService_AutoScalingConfigurationSummary
+var Service_NetworkConfiguration = &sService_NetworkConfiguration
+var Service_ObservabilityConfiguration = &sService_ObservabilityConfiguration
+
+var _ServiceArnList = &s_ServiceArnList
+var _ServiceArnList_member = &s_ServiceArnList_member
+
+var _ServiceId = &s_ServiceId
+
+var _ServiceMaxResults = &s_ServiceMaxResults
+
+var _ServiceName = &s_ServiceName
+
+var ServiceObservabilityConfiguration = &sServiceObservabilityConfiguration
+var ServiceObservabilityConfiguration_ObservabilityEnabled = &sServiceObservabilityConfiguration_ObservabilityEnabled
+var ServiceObservabilityConfiguration_ObservabilityConfigurationArn = &sServiceObservabilityConfiguration_ObservabilityConfigurationArn
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var ServiceStatus = &sServiceStatus
+var ServiceStatus_CREATE_FAILED = &sServiceStatus_CREATE_FAILED
+var ServiceStatus_RUNNING = &sServiceStatus_RUNNING
+var ServiceStatus_DELETED = &sServiceStatus_DELETED
+var ServiceStatus_DELETE_FAILED = &sServiceStatus_DELETE_FAILED
+var ServiceStatus_PAUSED = &sServiceStatus_PAUSED
+var ServiceStatus_OPERATION_IN_PROGRESS = &sServiceStatus_OPERATION_IN_PROGRESS
+
+var ServiceSummary = &sServiceSummary
+var ServiceSummary_ServiceName = &sServiceSummary_ServiceName
+var ServiceSummary_ServiceId = &sServiceSummary_ServiceId
+var ServiceSummary_ServiceArn = &sServiceSummary_ServiceArn
+var ServiceSummary_ServiceUrl = &sServiceSummary_ServiceUrl
+var ServiceSummary_CreatedAt = &sServiceSummary_CreatedAt
+var ServiceSummary_UpdatedAt = &sServiceSummary_UpdatedAt
+var ServiceSummary_Status = &sServiceSummary_Status
+
+var _ServiceSummaryList = &s_ServiceSummaryList
+var _ServiceSummaryList_member = &s_ServiceSummaryList_member
+
+var SourceCodeVersion = &sSourceCodeVersion
+var SourceCodeVersion_Type = &sSourceCodeVersion_Type
+var SourceCodeVersion_Value = &sSourceCodeVersion_Value
+
+var SourceCodeVersionType = &sSourceCodeVersionType
+var SourceCodeVersionType_BRANCH = &sSourceCodeVersionType_BRANCH
+
+var SourceConfiguration = &sSourceConfiguration
+var SourceConfiguration_CodeRepository = &sSourceConfiguration_CodeRepository
+var SourceConfiguration_ImageRepository = &sSourceConfiguration_ImageRepository
+var SourceConfiguration_AutoDeploymentsEnabled = &sSourceConfiguration_AutoDeploymentsEnabled
+var SourceConfiguration_AuthenticationConfiguration = &sSourceConfiguration_AuthenticationConfiguration
+
+var _SourceDirectory = &s_SourceDirectory
+
+var _StartCommand = &s_StartCommand
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _Timestamp = &s_Timestamp
+
+var TraceConfiguration = &sTraceConfiguration
+var TraceConfiguration_Vendor = &sTraceConfiguration_Vendor
+
+var TracingVendor = &sTracingVendor
+var TracingVendor_AWSXRAY = &sTracingVendor_AWSXRAY
+
+var _UUID = &s_UUID
+
+var VpcConnector = &sVpcConnector
+var VpcConnector_VpcConnectorName = &sVpcConnector_VpcConnectorName
+var VpcConnector_VpcConnectorArn = &sVpcConnector_VpcConnectorArn
+var VpcConnector_VpcConnectorRevision = &sVpcConnector_VpcConnectorRevision
+var VpcConnector_Subnets = &sVpcConnector_Subnets
+var VpcConnector_SecurityGroups = &sVpcConnector_SecurityGroups
+var VpcConnector_Status = &sVpcConnector_Status
+var VpcConnector_CreatedAt = &sVpcConnector_CreatedAt
+var VpcConnector_DeletedAt = &sVpcConnector_DeletedAt
+
+var _VpcConnectorName = &s_VpcConnectorName
+
+var _VpcConnectors = &s_VpcConnectors
+var _VpcConnectors_member = &s_VpcConnectors_member
+
+var VpcConnectorStatus = &sVpcConnectorStatus
+var VpcConnectorStatus_ACTIVE = &sVpcConnectorStatus_ACTIVE
+var VpcConnectorStatus_INACTIVE = &sVpcConnectorStatus_INACTIVE
+
+var VpcDNSTarget = &sVpcDNSTarget
+var VpcDNSTarget_VpcIngressConnectionArn = &sVpcDNSTarget_VpcIngressConnectionArn
+var VpcDNSTarget_VpcId = &sVpcDNSTarget_VpcId
+var VpcDNSTarget_DomainName = &sVpcDNSTarget_DomainName
+
+var _VpcDNSTargetList = &s_VpcDNSTargetList
+var _VpcDNSTargetList_member = &s_VpcDNSTargetList_member
+
+var VpcIngressConnection = &sVpcIngressConnection
+var VpcIngressConnection_VpcIngressConnectionArn = &sVpcIngressConnection_VpcIngressConnectionArn
+var VpcIngressConnection_VpcIngressConnectionName = &sVpcIngressConnection_VpcIngressConnectionName
+var VpcIngressConnection_ServiceArn = &sVpcIngressConnection_ServiceArn
+var VpcIngressConnection_Status = &sVpcIngressConnection_Status
+var VpcIngressConnection_AccountId = &sVpcIngressConnection_AccountId
+var VpcIngressConnection_DomainName = &sVpcIngressConnection_DomainName
+var VpcIngressConnection_IngressVpcConfiguration = &sVpcIngressConnection_IngressVpcConfiguration
+var VpcIngressConnection_CreatedAt = &sVpcIngressConnection_CreatedAt
+var VpcIngressConnection_DeletedAt = &sVpcIngressConnection_DeletedAt
+
+var _VpcIngressConnectionName = &s_VpcIngressConnectionName
+
+var VpcIngressConnectionStatus = &sVpcIngressConnectionStatus
+var VpcIngressConnectionStatus_AVAILABLE = &sVpcIngressConnectionStatus_AVAILABLE
+var VpcIngressConnectionStatus_PENDING_CREATION = &sVpcIngressConnectionStatus_PENDING_CREATION
+var VpcIngressConnectionStatus_PENDING_UPDATE = &sVpcIngressConnectionStatus_PENDING_UPDATE
+var VpcIngressConnectionStatus_PENDING_DELETION = &sVpcIngressConnectionStatus_PENDING_DELETION
+var VpcIngressConnectionStatus_FAILED_CREATION = &sVpcIngressConnectionStatus_FAILED_CREATION
+var VpcIngressConnectionStatus_FAILED_UPDATE = &sVpcIngressConnectionStatus_FAILED_UPDATE
+var VpcIngressConnectionStatus_FAILED_DELETION = &sVpcIngressConnectionStatus_FAILED_DELETION
+var VpcIngressConnectionStatus_DELETED = &sVpcIngressConnectionStatus_DELETED
+
+var VpcIngressConnectionSummary = &sVpcIngressConnectionSummary
+var VpcIngressConnectionSummary_VpcIngressConnectionArn = &sVpcIngressConnectionSummary_VpcIngressConnectionArn
+var VpcIngressConnectionSummary_ServiceArn = &sVpcIngressConnectionSummary_ServiceArn
+
+var _VpcIngressConnectionSummaryList = &s_VpcIngressConnectionSummaryList
+var _VpcIngressConnectionSummaryList_member = &s_VpcIngressConnectionSummaryList_member
+
+var AssociateCustomDomainRequest = &sAssociateCustomDomainRequest
+var AssociateCustomDomainRequest_ServiceArn = &sAssociateCustomDomainRequest_ServiceArn
+var AssociateCustomDomainRequest_DomainName = &sAssociateCustomDomainRequest_DomainName
+var AssociateCustomDomainRequest_EnableWWWSubdomain = &sAssociateCustomDomainRequest_EnableWWWSubdomain
+
+var AssociateCustomDomainResponse = &sAssociateCustomDomainResponse
+var AssociateCustomDomainResponse_DNSTarget = &sAssociateCustomDomainResponse_DNSTarget
+var AssociateCustomDomainResponse_ServiceArn = &sAssociateCustomDomainResponse_ServiceArn
+var AssociateCustomDomainResponse_CustomDomain = &sAssociateCustomDomainResponse_CustomDomain
+var AssociateCustomDomainResponse_VpcDNSTargets = &sAssociateCustomDomainResponse_VpcDNSTargets
+
+var CreateAutoScalingConfigurationRequest = &sCreateAutoScalingConfigurationRequest
+var CreateAutoScalingConfigurationRequest_AutoScalingConfigurationName = &sCreateAutoScalingConfigurationRequest_AutoScalingConfigurationName
+var CreateAutoScalingConfigurationRequest_MaxConcurrency = &sCreateAutoScalingConfigurationRequest_MaxConcurrency
+var CreateAutoScalingConfigurationRequest_MinSize = &sCreateAutoScalingConfigurationRequest_MinSize
+var CreateAutoScalingConfigurationRequest_MaxSize = &sCreateAutoScalingConfigurationRequest_MaxSize
+var CreateAutoScalingConfigurationRequest_Tags = &sCreateAutoScalingConfigurationRequest_Tags
+
+var CreateAutoScalingConfigurationResponse = &sCreateAutoScalingConfigurationResponse
+var CreateAutoScalingConfigurationResponse_AutoScalingConfiguration = &sCreateAutoScalingConfigurationResponse_AutoScalingConfiguration
+
+var CreateConnectionRequest = &sCreateConnectionRequest
+var CreateConnectionRequest_ConnectionName = &sCreateConnectionRequest_ConnectionName
+var CreateConnectionRequest_ProviderType = &sCreateConnectionRequest_ProviderType
+var CreateConnectionRequest_Tags = &sCreateConnectionRequest_Tags
+
+var CreateConnectionResponse = &sCreateConnectionResponse
+var CreateConnectionResponse_Connection = &sCreateConnectionResponse_Connection
+
+var CreateObservabilityConfigurationRequest = &sCreateObservabilityConfigurationRequest
+var CreateObservabilityConfigurationRequest_ObservabilityConfigurationName = &sCreateObservabilityConfigurationRequest_ObservabilityConfigurationName
+var CreateObservabilityConfigurationRequest_TraceConfiguration = &sCreateObservabilityConfigurationRequest_TraceConfiguration
+var CreateObservabilityConfigurationRequest_Tags = &sCreateObservabilityConfigurationRequest_Tags
+
+var CreateObservabilityConfigurationResponse = &sCreateObservabilityConfigurationResponse
+var CreateObservabilityConfigurationResponse_ObservabilityConfiguration = &sCreateObservabilityConfigurationResponse_ObservabilityConfiguration
+
+var CreateServiceRequest = &sCreateServiceRequest
+var CreateServiceRequest_ServiceName = &sCreateServiceRequest_ServiceName
+var CreateServiceRequest_SourceConfiguration = &sCreateServiceRequest_SourceConfiguration
+var CreateServiceRequest_InstanceConfiguration = &sCreateServiceRequest_InstanceConfiguration
+var CreateServiceRequest_Tags = &sCreateServiceRequest_Tags
+var CreateServiceRequest_EncryptionConfiguration = &sCreateServiceRequest_EncryptionConfiguration
+var CreateServiceRequest_HealthCheckConfiguration = &sCreateServiceRequest_HealthCheckConfiguration
+var CreateServiceRequest_AutoScalingConfigurationArn = &sCreateServiceRequest_AutoScalingConfigurationArn
+var CreateServiceRequest_NetworkConfiguration = &sCreateServiceRequest_NetworkConfiguration
+var CreateServiceRequest_ObservabilityConfiguration = &sCreateServiceRequest_ObservabilityConfiguration
+
+var CreateServiceResponse = &sCreateServiceResponse
+var CreateServiceResponse_Service = &sCreateServiceResponse_Service
+var CreateServiceResponse_OperationId = &sCreateServiceResponse_OperationId
+
+var CreateVpcConnectorRequest = &sCreateVpcConnectorRequest
+var CreateVpcConnectorRequest_VpcConnectorName = &sCreateVpcConnectorRequest_VpcConnectorName
+var CreateVpcConnectorRequest_Subnets = &sCreateVpcConnectorRequest_Subnets
+var CreateVpcConnectorRequest_SecurityGroups = &sCreateVpcConnectorRequest_SecurityGroups
+var CreateVpcConnectorRequest_Tags = &sCreateVpcConnectorRequest_Tags
+
+var CreateVpcConnectorResponse = &sCreateVpcConnectorResponse
+var CreateVpcConnectorResponse_VpcConnector = &sCreateVpcConnectorResponse_VpcConnector
+
+var CreateVpcIngressConnectionRequest = &sCreateVpcIngressConnectionRequest
+var CreateVpcIngressConnectionRequest_ServiceArn = &sCreateVpcIngressConnectionRequest_ServiceArn
+var CreateVpcIngressConnectionRequest_VpcIngressConnectionName = &sCreateVpcIngressConnectionRequest_VpcIngressConnectionName
+var CreateVpcIngressConnectionRequest_IngressVpcConfiguration = &sCreateVpcIngressConnectionRequest_IngressVpcConfiguration
+var CreateVpcIngressConnectionRequest_Tags = &sCreateVpcIngressConnectionRequest_Tags
+
+var CreateVpcIngressConnectionResponse = &sCreateVpcIngressConnectionResponse
+var CreateVpcIngressConnectionResponse_VpcIngressConnection = &sCreateVpcIngressConnectionResponse_VpcIngressConnection
+
+var DeleteAutoScalingConfigurationRequest = &sDeleteAutoScalingConfigurationRequest
+var DeleteAutoScalingConfigurationRequest_AutoScalingConfigurationArn = &sDeleteAutoScalingConfigurationRequest_AutoScalingConfigurationArn
+var DeleteAutoScalingConfigurationRequest_DeleteAllRevisions = &sDeleteAutoScalingConfigurationRequest_DeleteAllRevisions
+
+var DeleteAutoScalingConfigurationResponse = &sDeleteAutoScalingConfigurationResponse
+var DeleteAutoScalingConfigurationResponse_AutoScalingConfiguration = &sDeleteAutoScalingConfigurationResponse_AutoScalingConfiguration
+
+var DeleteConnectionRequest = &sDeleteConnectionRequest
+var DeleteConnectionRequest_ConnectionArn = &sDeleteConnectionRequest_ConnectionArn
+
+var DeleteConnectionResponse = &sDeleteConnectionResponse
+var DeleteConnectionResponse_Connection = &sDeleteConnectionResponse_Connection
+
+var DeleteObservabilityConfigurationRequest = &sDeleteObservabilityConfigurationRequest
+var DeleteObservabilityConfigurationRequest_ObservabilityConfigurationArn = &sDeleteObservabilityConfigurationRequest_ObservabilityConfigurationArn
+
+var DeleteObservabilityConfigurationResponse = &sDeleteObservabilityConfigurationResponse
+var DeleteObservabilityConfigurationResponse_ObservabilityConfiguration = &sDeleteObservabilityConfigurationResponse_ObservabilityConfiguration
+
+var DeleteServiceRequest = &sDeleteServiceRequest
+var DeleteServiceRequest_ServiceArn = &sDeleteServiceRequest_ServiceArn
+
+var DeleteServiceResponse = &sDeleteServiceResponse
+var DeleteServiceResponse_Service = &sDeleteServiceResponse_Service
+var DeleteServiceResponse_OperationId = &sDeleteServiceResponse_OperationId
+
+var DeleteVpcConnectorRequest = &sDeleteVpcConnectorRequest
+var DeleteVpcConnectorRequest_VpcConnectorArn = &sDeleteVpcConnectorRequest_VpcConnectorArn
+
+var DeleteVpcConnectorResponse = &sDeleteVpcConnectorResponse
+var DeleteVpcConnectorResponse_VpcConnector = &sDeleteVpcConnectorResponse_VpcConnector
+
+var DeleteVpcIngressConnectionRequest = &sDeleteVpcIngressConnectionRequest
+var DeleteVpcIngressConnectionRequest_VpcIngressConnectionArn = &sDeleteVpcIngressConnectionRequest_VpcIngressConnectionArn
+
+var DeleteVpcIngressConnectionResponse = &sDeleteVpcIngressConnectionResponse
+var DeleteVpcIngressConnectionResponse_VpcIngressConnection = &sDeleteVpcIngressConnectionResponse_VpcIngressConnection
+
+var DescribeAutoScalingConfigurationRequest = &sDescribeAutoScalingConfigurationRequest
+var DescribeAutoScalingConfigurationRequest_AutoScalingConfigurationArn = &sDescribeAutoScalingConfigurationRequest_AutoScalingConfigurationArn
+
+var DescribeAutoScalingConfigurationResponse = &sDescribeAutoScalingConfigurationResponse
+var DescribeAutoScalingConfigurationResponse_AutoScalingConfiguration = &sDescribeAutoScalingConfigurationResponse_AutoScalingConfiguration
+
+var DescribeCustomDomainsRequest = &sDescribeCustomDomainsRequest
+var DescribeCustomDomainsRequest_ServiceArn = &sDescribeCustomDomainsRequest_ServiceArn
+var DescribeCustomDomainsRequest_NextToken = &sDescribeCustomDomainsRequest_NextToken
+var DescribeCustomDomainsRequest_MaxResults = &sDescribeCustomDomainsRequest_MaxResults
+
+var DescribeCustomDomainsResponse = &sDescribeCustomDomainsResponse
+var DescribeCustomDomainsResponse_DNSTarget = &sDescribeCustomDomainsResponse_DNSTarget
+var DescribeCustomDomainsResponse_ServiceArn = &sDescribeCustomDomainsResponse_ServiceArn
+var DescribeCustomDomainsResponse_CustomDomains = &sDescribeCustomDomainsResponse_CustomDomains
+var DescribeCustomDomainsResponse_VpcDNSTargets = &sDescribeCustomDomainsResponse_VpcDNSTargets
+var DescribeCustomDomainsResponse_NextToken = &sDescribeCustomDomainsResponse_NextToken
+
+var DescribeObservabilityConfigurationRequest = &sDescribeObservabilityConfigurationRequest
+var DescribeObservabilityConfigurationRequest_ObservabilityConfigurationArn = &sDescribeObservabilityConfigurationRequest_ObservabilityConfigurationArn
+
+var DescribeObservabilityConfigurationResponse = &sDescribeObservabilityConfigurationResponse
+var DescribeObservabilityConfigurationResponse_ObservabilityConfiguration = &sDescribeObservabilityConfigurationResponse_ObservabilityConfiguration
+
+var DescribeServiceRequest = &sDescribeServiceRequest
+var DescribeServiceRequest_ServiceArn = &sDescribeServiceRequest_ServiceArn
+
+var DescribeServiceResponse = &sDescribeServiceResponse
+var DescribeServiceResponse_Service = &sDescribeServiceResponse_Service
+
+var DescribeVpcConnectorRequest = &sDescribeVpcConnectorRequest
+var DescribeVpcConnectorRequest_VpcConnectorArn = &sDescribeVpcConnectorRequest_VpcConnectorArn
+
+var DescribeVpcConnectorResponse = &sDescribeVpcConnectorResponse
+var DescribeVpcConnectorResponse_VpcConnector = &sDescribeVpcConnectorResponse_VpcConnector
+
+var DescribeVpcIngressConnectionRequest = &sDescribeVpcIngressConnectionRequest
+var DescribeVpcIngressConnectionRequest_VpcIngressConnectionArn = &sDescribeVpcIngressConnectionRequest_VpcIngressConnectionArn
+
+var DescribeVpcIngressConnectionResponse = &sDescribeVpcIngressConnectionResponse
+var DescribeVpcIngressConnectionResponse_VpcIngressConnection = &sDescribeVpcIngressConnectionResponse_VpcIngressConnection
+
+var DisassociateCustomDomainRequest = &sDisassociateCustomDomainRequest
+var DisassociateCustomDomainRequest_ServiceArn = &sDisassociateCustomDomainRequest_ServiceArn
+var DisassociateCustomDomainRequest_DomainName = &sDisassociateCustomDomainRequest_DomainName
+
+var DisassociateCustomDomainResponse = &sDisassociateCustomDomainResponse
+var DisassociateCustomDomainResponse_DNSTarget = &sDisassociateCustomDomainResponse_DNSTarget
+var DisassociateCustomDomainResponse_ServiceArn = &sDisassociateCustomDomainResponse_ServiceArn
+var DisassociateCustomDomainResponse_CustomDomain = &sDisassociateCustomDomainResponse_CustomDomain
+var DisassociateCustomDomainResponse_VpcDNSTargets = &sDisassociateCustomDomainResponse_VpcDNSTargets
+
+var ListAutoScalingConfigurationsRequest = &sListAutoScalingConfigurationsRequest
+var ListAutoScalingConfigurationsRequest_AutoScalingConfigurationName = &sListAutoScalingConfigurationsRequest_AutoScalingConfigurationName
+var ListAutoScalingConfigurationsRequest_LatestOnly = &sListAutoScalingConfigurationsRequest_LatestOnly
+var ListAutoScalingConfigurationsRequest_MaxResults = &sListAutoScalingConfigurationsRequest_MaxResults
+var ListAutoScalingConfigurationsRequest_NextToken = &sListAutoScalingConfigurationsRequest_NextToken
+
+var ListAutoScalingConfigurationsResponse = &sListAutoScalingConfigurationsResponse
+var ListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList = &sListAutoScalingConfigurationsResponse_AutoScalingConfigurationSummaryList
+var ListAutoScalingConfigurationsResponse_NextToken = &sListAutoScalingConfigurationsResponse_NextToken
+
+var ListConnectionsRequest = &sListConnectionsRequest
+var ListConnectionsRequest_ConnectionName = &sListConnectionsRequest_ConnectionName
+var ListConnectionsRequest_MaxResults = &sListConnectionsRequest_MaxResults
+var ListConnectionsRequest_NextToken = &sListConnectionsRequest_NextToken
+
+var ListConnectionsResponse = &sListConnectionsResponse
+var ListConnectionsResponse_ConnectionSummaryList = &sListConnectionsResponse_ConnectionSummaryList
+var ListConnectionsResponse_NextToken = &sListConnectionsResponse_NextToken
+
+var ListObservabilityConfigurationsRequest = &sListObservabilityConfigurationsRequest
+var ListObservabilityConfigurationsRequest_ObservabilityConfigurationName = &sListObservabilityConfigurationsRequest_ObservabilityConfigurationName
+var ListObservabilityConfigurationsRequest_LatestOnly = &sListObservabilityConfigurationsRequest_LatestOnly
+var ListObservabilityConfigurationsRequest_MaxResults = &sListObservabilityConfigurationsRequest_MaxResults
+var ListObservabilityConfigurationsRequest_NextToken = &sListObservabilityConfigurationsRequest_NextToken
+
+var ListObservabilityConfigurationsResponse = &sListObservabilityConfigurationsResponse
+var ListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList = &sListObservabilityConfigurationsResponse_ObservabilityConfigurationSummaryList
+var ListObservabilityConfigurationsResponse_NextToken = &sListObservabilityConfigurationsResponse_NextToken
+
+var ListOperationsRequest = &sListOperationsRequest
+var ListOperationsRequest_ServiceArn = &sListOperationsRequest_ServiceArn
+var ListOperationsRequest_NextToken = &sListOperationsRequest_NextToken
+var ListOperationsRequest_MaxResults = &sListOperationsRequest_MaxResults
+
+var ListOperationsResponse = &sListOperationsResponse
+var ListOperationsResponse_OperationSummaryList = &sListOperationsResponse_OperationSummaryList
+var ListOperationsResponse_NextToken = &sListOperationsResponse_NextToken
+
+var ListServicesForAutoScalingConfigurationRequest = &sListServicesForAutoScalingConfigurationRequest
+var ListServicesForAutoScalingConfigurationRequest_AutoScalingConfigurationArn = &sListServicesForAutoScalingConfigurationRequest_AutoScalingConfigurationArn
+var ListServicesForAutoScalingConfigurationRequest_MaxResults = &sListServicesForAutoScalingConfigurationRequest_MaxResults
+var ListServicesForAutoScalingConfigurationRequest_NextToken = &sListServicesForAutoScalingConfigurationRequest_NextToken
+
+var ListServicesForAutoScalingConfigurationResponse = &sListServicesForAutoScalingConfigurationResponse
+var ListServicesForAutoScalingConfigurationResponse_ServiceArnList = &sListServicesForAutoScalingConfigurationResponse_ServiceArnList
+var ListServicesForAutoScalingConfigurationResponse_NextToken = &sListServicesForAutoScalingConfigurationResponse_NextToken
+
+var ListServicesRequest = &sListServicesRequest
+var ListServicesRequest_NextToken = &sListServicesRequest_NextToken
+var ListServicesRequest_MaxResults = &sListServicesRequest_MaxResults
+
+var ListServicesResponse = &sListServicesResponse
+var ListServicesResponse_ServiceSummaryList = &sListServicesResponse_ServiceSummaryList
+var ListServicesResponse_NextToken = &sListServicesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListVpcConnectorsRequest = &sListVpcConnectorsRequest
+var ListVpcConnectorsRequest_MaxResults = &sListVpcConnectorsRequest_MaxResults
+var ListVpcConnectorsRequest_NextToken = &sListVpcConnectorsRequest_NextToken
+
+var ListVpcConnectorsResponse = &sListVpcConnectorsResponse
+var ListVpcConnectorsResponse_VpcConnectors = &sListVpcConnectorsResponse_VpcConnectors
+var ListVpcConnectorsResponse_NextToken = &sListVpcConnectorsResponse_NextToken
+
+var ListVpcIngressConnectionsRequest = &sListVpcIngressConnectionsRequest
+var ListVpcIngressConnectionsRequest_Filter = &sListVpcIngressConnectionsRequest_Filter
+var ListVpcIngressConnectionsRequest_MaxResults = &sListVpcIngressConnectionsRequest_MaxResults
+var ListVpcIngressConnectionsRequest_NextToken = &sListVpcIngressConnectionsRequest_NextToken
+
+var ListVpcIngressConnectionsResponse = &sListVpcIngressConnectionsResponse
+var ListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList = &sListVpcIngressConnectionsResponse_VpcIngressConnectionSummaryList
+var ListVpcIngressConnectionsResponse_NextToken = &sListVpcIngressConnectionsResponse_NextToken
+
+var PauseServiceRequest = &sPauseServiceRequest
+var PauseServiceRequest_ServiceArn = &sPauseServiceRequest_ServiceArn
+
+var PauseServiceResponse = &sPauseServiceResponse
+var PauseServiceResponse_Service = &sPauseServiceResponse_Service
+var PauseServiceResponse_OperationId = &sPauseServiceResponse_OperationId
+
+var ResumeServiceRequest = &sResumeServiceRequest
+var ResumeServiceRequest_ServiceArn = &sResumeServiceRequest_ServiceArn
+
+var ResumeServiceResponse = &sResumeServiceResponse
+var ResumeServiceResponse_Service = &sResumeServiceResponse_Service
+var ResumeServiceResponse_OperationId = &sResumeServiceResponse_OperationId
+
+var StartDeploymentRequest = &sStartDeploymentRequest
+var StartDeploymentRequest_ServiceArn = &sStartDeploymentRequest_ServiceArn
+
+var StartDeploymentResponse = &sStartDeploymentResponse
+var StartDeploymentResponse_OperationId = &sStartDeploymentResponse_OperationId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDefaultAutoScalingConfigurationRequest = &sUpdateDefaultAutoScalingConfigurationRequest
+var UpdateDefaultAutoScalingConfigurationRequest_AutoScalingConfigurationArn = &sUpdateDefaultAutoScalingConfigurationRequest_AutoScalingConfigurationArn
+
+var UpdateDefaultAutoScalingConfigurationResponse = &sUpdateDefaultAutoScalingConfigurationResponse
+var UpdateDefaultAutoScalingConfigurationResponse_AutoScalingConfiguration = &sUpdateDefaultAutoScalingConfigurationResponse_AutoScalingConfiguration
+
+var UpdateServiceRequest = &sUpdateServiceRequest
+var UpdateServiceRequest_ServiceArn = &sUpdateServiceRequest_ServiceArn
+var UpdateServiceRequest_SourceConfiguration = &sUpdateServiceRequest_SourceConfiguration
+var UpdateServiceRequest_InstanceConfiguration = &sUpdateServiceRequest_InstanceConfiguration
+var UpdateServiceRequest_AutoScalingConfigurationArn = &sUpdateServiceRequest_AutoScalingConfigurationArn
+var UpdateServiceRequest_HealthCheckConfiguration = &sUpdateServiceRequest_HealthCheckConfiguration
+var UpdateServiceRequest_NetworkConfiguration = &sUpdateServiceRequest_NetworkConfiguration
+var UpdateServiceRequest_ObservabilityConfiguration = &sUpdateServiceRequest_ObservabilityConfiguration
+
+var UpdateServiceResponse = &sUpdateServiceResponse
+var UpdateServiceResponse_Service = &sUpdateServiceResponse_Service
+var UpdateServiceResponse_OperationId = &sUpdateServiceResponse_OperationId
+
+var UpdateVpcIngressConnectionRequest = &sUpdateVpcIngressConnectionRequest
+var UpdateVpcIngressConnectionRequest_VpcIngressConnectionArn = &sUpdateVpcIngressConnectionRequest_VpcIngressConnectionArn
+var UpdateVpcIngressConnectionRequest_IngressVpcConfiguration = &sUpdateVpcIngressConnectionRequest_IngressVpcConfiguration
+
+var UpdateVpcIngressConnectionResponse = &sUpdateVpcIngressConnectionResponse
+var UpdateVpcIngressConnectionResponse_VpcIngressConnection = &sUpdateVpcIngressConnectionResponse_VpcIngressConnection
+
+var AppRunner = &smithy.ServiceSchema{Schema: &s_AppRunner, Version: "2020-05-15"}

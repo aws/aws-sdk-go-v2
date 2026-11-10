@@ -4,1548 +4,1145 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateKeyspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateKeyspace",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateType",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteKeyspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteKeyspace",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteType",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetKeyspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetKeyspace",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTableAutoScalingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTableAutoScalingSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetType",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListKeyspaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListKeyspaces",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTables",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTypes",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "RestoreTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateKeyspace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UpdateKeyspace",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UpdateTable",
-}, smithy.ShapeTypeOperation, 0)
-
-var _KeyspacesService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "KeyspacesService",
-}, smithy.ShapeTypeService, 0)
-
-var KeyspacesService = smithy.NewServiceSchema(_KeyspacesService, "2022-02-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403},
-	&smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
-		StatusCode: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var AutoScalingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "AutoScalingPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var AutoScalingPolicy_targetTrackingScalingPolicyConfiguration *smithy.Schema
-
-var AutoScalingSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "AutoScalingSettings",
-}, smithy.ShapeTypeStructure, 4)
-var AutoScalingSettings_autoScalingDisabled *smithy.Schema
-
-var AutoScalingSettings_minimumUnits *smithy.Schema
-
-var AutoScalingSettings_maximumUnits *smithy.Schema
-
-var AutoScalingSettings_scalingPolicy *smithy.Schema
-
-var AutoScalingSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "AutoScalingSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var AutoScalingSpecification_writeCapacityAutoScaling *smithy.Schema
-
-var AutoScalingSpecification_readCapacityAutoScaling *smithy.Schema
-
-var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "BooleanObject",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CapacitySpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CapacitySpecification",
-}, smithy.ShapeTypeStructure, 3)
-var CapacitySpecification_throughputMode *smithy.Schema
-
-var CapacitySpecification_readCapacityUnits *smithy.Schema
-
-var CapacitySpecification_writeCapacityUnits *smithy.Schema
-
-var CapacitySpecificationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CapacitySpecificationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var CapacitySpecificationSummary_throughputMode *smithy.Schema
-
-var CapacitySpecificationSummary_readCapacityUnits *smithy.Schema
-
-var CapacitySpecificationSummary_writeCapacityUnits *smithy.Schema
-
-var CapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp *smithy.Schema
-
-var _CapacityUnits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CapacityUnits",
-}, smithy.ShapeTypeLong, 0)
-
-var _CdcPropagateTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CdcPropagateTags",
-}, smithy.ShapeTypeString, 0)
-
-var CdcSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CdcSpecification",
-}, smithy.ShapeTypeStructure, 4)
-var CdcSpecification_status *smithy.Schema
-
-var CdcSpecification_viewType *smithy.Schema
-
-var CdcSpecification_tags *smithy.Schema
-
-var CdcSpecification_propagateTags *smithy.Schema
-
-var CdcSpecificationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CdcSpecificationSummary",
-}, smithy.ShapeTypeStructure, 2)
-var CdcSpecificationSummary_status *smithy.Schema
-
-var CdcSpecificationSummary_viewType *smithy.Schema
-
-var _CdcStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CdcStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ClientSideTimestamps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ClientSideTimestamps",
-}, smithy.ShapeTypeStructure, 1)
-var ClientSideTimestamps_status *smithy.Schema
-
-var _ClientSideTimestampsStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ClientSideTimestampsStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ClusteringKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ClusteringKey",
-}, smithy.ShapeTypeStructure, 2)
-var ClusteringKey_name *smithy.Schema
-
-var ClusteringKey_orderBy *smithy.Schema
-
-var _ClusteringKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ClusteringKeyList",
-}, smithy.ShapeTypeList, 1)
-var _ClusteringKeyList_member *smithy.Schema
-
-var ColumnDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ColumnDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var ColumnDefinition_name *smithy.Schema
-
-var ColumnDefinition_type *smithy.Schema
-
-var _ColumnDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ColumnDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _ColumnDefinitionList_member *smithy.Schema
-
-var Comment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "Comment",
-}, smithy.ShapeTypeStructure, 1)
-var Comment_message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409},
-	&smithytraits.AWSQueryError{ErrorCode: "ConflictException",
-		StatusCode: 409})
-var ConflictException_message *smithy.Schema
-
-var _DefaultTimeToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DefaultTimeToLive",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Depth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "Depth",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DoubleObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DoubleObject",
-}, smithy.ShapeTypeDouble, 0)
-
-var EncryptionSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "EncryptionSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionSpecification_type *smithy.Schema
-
-var EncryptionSpecification_kmsKeyIdentifier *smithy.Schema
-
-var _EncryptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "EncryptionType",
-}, smithy.ShapeTypeString, 0)
-
-var FieldDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "FieldDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var FieldDefinition_name *smithy.Schema
-
-var FieldDefinition_type *smithy.Schema
-
-var _FieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "FieldList",
-}, smithy.ShapeTypeList, 1)
-var _FieldList_member *smithy.Schema
-
-var _GenericString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GenericString",
-}, smithy.ShapeTypeString, 0)
-
-var _IntegerObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "IntegerObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500},
-	&smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
-		StatusCode: 500})
-var InternalServerException_message *smithy.Schema
-
-var _KeyspaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "KeyspaceName",
-}, smithy.ShapeTypeString, 0)
-
-var _KeyspaceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "KeyspaceStatus",
-}, smithy.ShapeTypeString, 0)
-
-var KeyspaceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "KeyspaceSummary",
-}, smithy.ShapeTypeStructure, 4)
-var KeyspaceSummary_keyspaceName *smithy.Schema
-
-var KeyspaceSummary_resourceArn *smithy.Schema
-
-var KeyspaceSummary_replicationStrategy *smithy.Schema
-
-var KeyspaceSummary_replicationRegions *smithy.Schema
-
-var _KeyspaceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "KeyspaceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _KeyspaceSummaryList_member *smithy.Schema
-
-var _kmsKeyARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "kmsKeyARN",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var PartitionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "PartitionKey",
-}, smithy.ShapeTypeStructure, 1)
-var PartitionKey_name *smithy.Schema
-
-var _PartitionKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "PartitionKeyList",
-}, smithy.ShapeTypeList, 1)
-var _PartitionKeyList_member *smithy.Schema
-
-var PointInTimeRecovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "PointInTimeRecovery",
-}, smithy.ShapeTypeStructure, 1)
-var PointInTimeRecovery_status *smithy.Schema
-
-var _PointInTimeRecoveryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "PointInTimeRecoveryStatus",
-}, smithy.ShapeTypeString, 0)
-
-var PointInTimeRecoverySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "PointInTimeRecoverySummary",
-}, smithy.ShapeTypeStructure, 2)
-var PointInTimeRecoverySummary_status *smithy.Schema
-
-var PointInTimeRecoverySummary_earliestRestorableTimestamp *smithy.Schema
-
-var _region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "region",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "RegionList",
-}, smithy.ShapeTypeList, 1)
-var _RegionList_member *smithy.Schema
-
-var ReplicaAutoScalingSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicaAutoScalingSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicaAutoScalingSpecification_region *smithy.Schema
-
-var ReplicaAutoScalingSpecification_autoScalingSpecification *smithy.Schema
-
-var _ReplicaAutoScalingSpecificationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicaAutoScalingSpecificationList",
-}, smithy.ShapeTypeList, 1)
-var _ReplicaAutoScalingSpecificationList_member *smithy.Schema
-
-var ReplicaSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicaSpecification",
-}, smithy.ShapeTypeStructure, 3)
-var ReplicaSpecification_region *smithy.Schema
-
-var ReplicaSpecification_readCapacityUnits *smithy.Schema
-
-var ReplicaSpecification_readCapacityAutoScaling *smithy.Schema
-
-var _ReplicaSpecificationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicaSpecificationList",
-}, smithy.ShapeTypeList, 1)
-var _ReplicaSpecificationList_member *smithy.Schema
-
-var ReplicaSpecificationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicaSpecificationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ReplicaSpecificationSummary_region *smithy.Schema
-
-var ReplicaSpecificationSummary_status *smithy.Schema
-
-var ReplicaSpecificationSummary_capacitySpecification *smithy.Schema
-
-var ReplicaSpecificationSummary_warmThroughputSpecification *smithy.Schema
-
-var _ReplicaSpecificationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicaSpecificationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ReplicaSpecificationSummaryList_member *smithy.Schema
-
-var ReplicationGroupStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicationGroupStatus",
-}, smithy.ShapeTypeStructure, 3)
-var ReplicationGroupStatus_region *smithy.Schema
-
-var ReplicationGroupStatus_keyspaceStatus *smithy.Schema
-
-var ReplicationGroupStatus_tablesReplicationProgress *smithy.Schema
-
-var _ReplicationGroupStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicationGroupStatusList",
-}, smithy.ShapeTypeList, 1)
-var _ReplicationGroupStatusList_member *smithy.Schema
-
-var ReplicationSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ReplicationSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var ReplicationSpecification_replicationStrategy *smithy.Schema
-
-var ReplicationSpecification_regionList *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404},
-	&smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
-		StatusCode: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceArn *smithy.Schema
-
-var _rs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "rs",
-}, smithy.ShapeTypeString, 0)
-
-var SchemaDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "SchemaDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var SchemaDefinition_allColumns *smithy.Schema
-
-var SchemaDefinition_partitionKeys *smithy.Schema
-
-var SchemaDefinition_clusteringKeys *smithy.Schema
-
-var SchemaDefinition_staticColumns *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402},
-	&smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceededException",
-		StatusCode: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeString, 0)
-
-var StaticColumn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "StaticColumn",
-}, smithy.ShapeTypeStructure, 1)
-var StaticColumn_name *smithy.Schema
-
-var _StaticColumnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "StaticColumnList",
-}, smithy.ShapeTypeList, 1)
-var _StaticColumnList_member *smithy.Schema
-
-var _StreamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "StreamArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TableName",
-}, smithy.ShapeTypeString, 0)
-
-var _TableNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TableNameList",
-}, smithy.ShapeTypeList, 1)
-var _TableNameList_member *smithy.Schema
-
-var _TablesReplicationProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TablesReplicationProgress",
-}, smithy.ShapeTypeString, 0)
-
-var _TableStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TableStatus",
-}, smithy.ShapeTypeString, 0)
-
-var TableSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TableSummary",
-}, smithy.ShapeTypeStructure, 3)
-var TableSummary_keyspaceName *smithy.Schema
-
-var TableSummary_tableName *smithy.Schema
-
-var TableSummary_resourceArn *smithy.Schema
-
-var _TableSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TableSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TableSummaryList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetTrackingScalingPolicyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TargetTrackingScalingPolicyConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var TargetTrackingScalingPolicyConfiguration_disableScaleIn *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_scaleInCooldown *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_scaleOutCooldown *smithy.Schema
-
-var TargetTrackingScalingPolicyConfiguration_targetValue *smithy.Schema
-
-var _ThroughputMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ThroughputMode",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimeToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TimeToLive",
-}, smithy.ShapeTypeStructure, 1)
-var TimeToLive_status *smithy.Schema
-
-var _TimeToLiveStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TimeToLiveStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _TypeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TypeName",
-}, smithy.ShapeTypeString, 0)
-
-var _TypeNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TypeNameList",
-}, smithy.ShapeTypeList, 1)
-var _TypeNameList_member *smithy.Schema
-
-var _TypeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TypeStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.AWSQueryError{ErrorCode: "ValidationException",
-		StatusCode: 400})
-var ValidationException_message *smithy.Schema
-
-var _ViewType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ViewType",
-}, smithy.ShapeTypeString, 0)
-
-var WarmThroughputSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "WarmThroughputSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var WarmThroughputSpecification_readUnitsPerSecond *smithy.Schema
-
-var WarmThroughputSpecification_writeUnitsPerSecond *smithy.Schema
-
-var WarmThroughputSpecificationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "WarmThroughputSpecificationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var WarmThroughputSpecificationSummary_readUnitsPerSecond *smithy.Schema
-
-var WarmThroughputSpecificationSummary_writeUnitsPerSecond *smithy.Schema
-
-var WarmThroughputSpecificationSummary_status *smithy.Schema
-
-var _WarmThroughputStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "WarmThroughputStatus",
-}, smithy.ShapeTypeString, 0)
-
-var CreateKeyspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateKeyspaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateKeyspaceRequest_keyspaceName *smithy.Schema
-
-var CreateKeyspaceRequest_tags *smithy.Schema
-
-var CreateKeyspaceRequest_replicationSpecification *smithy.Schema
-
-var CreateKeyspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateKeyspaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateKeyspaceResponse_resourceArn *smithy.Schema
-
-var CreateTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateTableRequest",
-}, smithy.ShapeTypeStructure, 15)
-var CreateTableRequest_keyspaceName *smithy.Schema
-
-var CreateTableRequest_tableName *smithy.Schema
-
-var CreateTableRequest_schemaDefinition *smithy.Schema
-
-var CreateTableRequest_comment *smithy.Schema
-
-var CreateTableRequest_capacitySpecification *smithy.Schema
-
-var CreateTableRequest_encryptionSpecification *smithy.Schema
-
-var CreateTableRequest_pointInTimeRecovery *smithy.Schema
-
-var CreateTableRequest_ttl *smithy.Schema
-
-var CreateTableRequest_defaultTimeToLive *smithy.Schema
-
-var CreateTableRequest_tags *smithy.Schema
-
-var CreateTableRequest_clientSideTimestamps *smithy.Schema
-
-var CreateTableRequest_autoScalingSpecification *smithy.Schema
-
-var CreateTableRequest_replicaSpecifications *smithy.Schema
-
-var CreateTableRequest_cdcSpecification *smithy.Schema
-
-var CreateTableRequest_warmThroughputSpecification *smithy.Schema
-
-var CreateTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateTableResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTableResponse_resourceArn *smithy.Schema
-
-var CreateTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateTypeRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateTypeRequest_keyspaceName *smithy.Schema
-
-var CreateTypeRequest_typeName *smithy.Schema
-
-var CreateTypeRequest_fieldDefinitions *smithy.Schema
-
-var CreateTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "CreateTypeResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTypeResponse_keyspaceArn *smithy.Schema
-
-var CreateTypeResponse_typeName *smithy.Schema
-
-var DeleteKeyspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteKeyspaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteKeyspaceRequest_keyspaceName *smithy.Schema
-
-var DeleteKeyspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteKeyspaceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteTableRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTableRequest_keyspaceName *smithy.Schema
-
-var DeleteTableRequest_tableName *smithy.Schema
-
-var DeleteTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteTableResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteTypeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTypeRequest_keyspaceName *smithy.Schema
-
-var DeleteTypeRequest_typeName *smithy.Schema
-
-var DeleteTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "DeleteTypeResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTypeResponse_keyspaceArn *smithy.Schema
-
-var DeleteTypeResponse_typeName *smithy.Schema
-
-var GetKeyspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetKeyspaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetKeyspaceRequest_keyspaceName *smithy.Schema
-
-var GetKeyspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetKeyspaceResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetKeyspaceResponse_keyspaceName *smithy.Schema
-
-var GetKeyspaceResponse_resourceArn *smithy.Schema
-
-var GetKeyspaceResponse_replicationStrategy *smithy.Schema
-
-var GetKeyspaceResponse_replicationRegions *smithy.Schema
-
-var GetKeyspaceResponse_replicationGroupStatuses *smithy.Schema
-
-var GetTableAutoScalingSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTableAutoScalingSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableAutoScalingSettingsRequest_keyspaceName *smithy.Schema
-
-var GetTableAutoScalingSettingsRequest_tableName *smithy.Schema
-
-var GetTableAutoScalingSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTableAutoScalingSettingsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetTableAutoScalingSettingsResponse_keyspaceName *smithy.Schema
-
-var GetTableAutoScalingSettingsResponse_tableName *smithy.Schema
-
-var GetTableAutoScalingSettingsResponse_resourceArn *smithy.Schema
-
-var GetTableAutoScalingSettingsResponse_autoScalingSpecification *smithy.Schema
-
-var GetTableAutoScalingSettingsResponse_replicaSpecifications *smithy.Schema
-
-var GetTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTableRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTableRequest_keyspaceName *smithy.Schema
-
-var GetTableRequest_tableName *smithy.Schema
-
-var GetTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTableResponse",
-}, smithy.ShapeTypeStructure, 17)
-var GetTableResponse_keyspaceName *smithy.Schema
-
-var GetTableResponse_tableName *smithy.Schema
-
-var GetTableResponse_resourceArn *smithy.Schema
-
-var GetTableResponse_creationTimestamp *smithy.Schema
-
-var GetTableResponse_status *smithy.Schema
-
-var GetTableResponse_schemaDefinition *smithy.Schema
-
-var GetTableResponse_capacitySpecification *smithy.Schema
-
-var GetTableResponse_encryptionSpecification *smithy.Schema
-
-var GetTableResponse_pointInTimeRecovery *smithy.Schema
-
-var GetTableResponse_ttl *smithy.Schema
-
-var GetTableResponse_defaultTimeToLive *smithy.Schema
-
-var GetTableResponse_comment *smithy.Schema
-
-var GetTableResponse_clientSideTimestamps *smithy.Schema
-
-var GetTableResponse_replicaSpecifications *smithy.Schema
-
-var GetTableResponse_latestStreamArn *smithy.Schema
-
-var GetTableResponse_cdcSpecification *smithy.Schema
-
-var GetTableResponse_warmThroughputSpecification *smithy.Schema
-
-var GetTypeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTypeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetTypeRequest_keyspaceName *smithy.Schema
-
-var GetTypeRequest_typeName *smithy.Schema
-
-var GetTypeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "GetTypeResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetTypeResponse_keyspaceName *smithy.Schema
-
-var GetTypeResponse_typeName *smithy.Schema
-
-var GetTypeResponse_fieldDefinitions *smithy.Schema
-
-var GetTypeResponse_lastModifiedTimestamp *smithy.Schema
-
-var GetTypeResponse_status *smithy.Schema
-
-var GetTypeResponse_directReferringTables *smithy.Schema
-
-var GetTypeResponse_directParentTypes *smithy.Schema
-
-var GetTypeResponse_maxNestingDepth *smithy.Schema
-
-var GetTypeResponse_keyspaceArn *smithy.Schema
-
-var ListKeyspacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListKeyspacesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListKeyspacesRequest_nextToken *smithy.Schema
-
-var ListKeyspacesRequest_maxResults *smithy.Schema
-
-var ListKeyspacesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListKeyspacesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListKeyspacesResponse_nextToken *smithy.Schema
-
-var ListKeyspacesResponse_keyspaces *smithy.Schema
-
-var ListTablesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTablesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTablesRequest_nextToken *smithy.Schema
-
-var ListTablesRequest_maxResults *smithy.Schema
-
-var ListTablesRequest_keyspaceName *smithy.Schema
-
-var ListTablesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTablesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTablesResponse_nextToken *smithy.Schema
-
-var ListTablesResponse_tables *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceRequest_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest_maxResults *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ListTypesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTypesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTypesRequest_nextToken *smithy.Schema
-
-var ListTypesRequest_maxResults *smithy.Schema
-
-var ListTypesRequest_keyspaceName *smithy.Schema
-
-var ListTypesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "ListTypesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTypesResponse_nextToken *smithy.Schema
-
-var ListTypesResponse_types *smithy.Schema
-
-var RestoreTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "RestoreTableRequest",
-}, smithy.ShapeTypeStructure, 11)
-var RestoreTableRequest_sourceKeyspaceName *smithy.Schema
-
-var RestoreTableRequest_sourceTableName *smithy.Schema
-
-var RestoreTableRequest_targetKeyspaceName *smithy.Schema
-
-var RestoreTableRequest_targetTableName *smithy.Schema
-
-var RestoreTableRequest_restoreTimestamp *smithy.Schema
-
-var RestoreTableRequest_capacitySpecificationOverride *smithy.Schema
-
-var RestoreTableRequest_encryptionSpecificationOverride *smithy.Schema
-
-var RestoreTableRequest_pointInTimeRecoveryOverride *smithy.Schema
-
-var RestoreTableRequest_tagsOverride *smithy.Schema
-
-var RestoreTableRequest_autoScalingSpecification *smithy.Schema
-
-var RestoreTableRequest_replicaSpecifications *smithy.Schema
-
-var RestoreTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "RestoreTableResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreTableResponse_restoredTableARN *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tags *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateKeyspaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UpdateKeyspaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateKeyspaceRequest_keyspaceName *smithy.Schema
-
-var UpdateKeyspaceRequest_replicationSpecification *smithy.Schema
-
-var UpdateKeyspaceRequest_clientSideTimestamps *smithy.Schema
-
-var UpdateKeyspaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UpdateKeyspaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateKeyspaceResponse_resourceArn *smithy.Schema
-
-var UpdateTableRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UpdateTableRequest",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateTableRequest_keyspaceName *smithy.Schema
-
-var UpdateTableRequest_tableName *smithy.Schema
-
-var UpdateTableRequest_addColumns *smithy.Schema
-
-var UpdateTableRequest_capacitySpecification *smithy.Schema
-
-var UpdateTableRequest_encryptionSpecification *smithy.Schema
-
-var UpdateTableRequest_pointInTimeRecovery *smithy.Schema
-
-var UpdateTableRequest_ttl *smithy.Schema
-
-var UpdateTableRequest_defaultTimeToLive *smithy.Schema
-
-var UpdateTableRequest_clientSideTimestamps *smithy.Schema
-
-var UpdateTableRequest_autoScalingSpecification *smithy.Schema
-
-var UpdateTableRequest_replicaSpecifications *smithy.Schema
-
-var UpdateTableRequest_cdcSpecification *smithy.Schema
-
-var UpdateTableRequest_warmThroughputSpecification *smithy.Schema
-
-var UpdateTableResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.keyspaces",
-	Name:      "UpdateTableResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTableResponse_resourceArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	TargetTrackingScalingPolicyConfiguration_disableScaleIn = TargetTrackingScalingPolicyConfiguration.AddMember("disableScaleIn", _BooleanObject)
-
-	TargetTrackingScalingPolicyConfiguration_scaleInCooldown = TargetTrackingScalingPolicyConfiguration.AddMember("scaleInCooldown", _IntegerObject)
-
-	TargetTrackingScalingPolicyConfiguration_scaleOutCooldown = TargetTrackingScalingPolicyConfiguration.AddMember("scaleOutCooldown", _IntegerObject)
-
-	TargetTrackingScalingPolicyConfiguration_targetValue = TargetTrackingScalingPolicyConfiguration.AddMember("targetValue", _DoubleObject)
-
-	AutoScalingPolicy_targetTrackingScalingPolicyConfiguration = AutoScalingPolicy.AddMember("targetTrackingScalingPolicyConfiguration", TargetTrackingScalingPolicyConfiguration)
-
-	AutoScalingSettings_autoScalingDisabled = AutoScalingSettings.AddMember("autoScalingDisabled", _BooleanObject)
-
-	AutoScalingSettings_minimumUnits = AutoScalingSettings.AddMember("minimumUnits", _CapacityUnits)
-
-	AutoScalingSettings_maximumUnits = AutoScalingSettings.AddMember("maximumUnits", _CapacityUnits)
-
-	AutoScalingSettings_scalingPolicy = AutoScalingSettings.AddMember("scalingPolicy", AutoScalingPolicy)
-
-	AutoScalingSpecification_writeCapacityAutoScaling = AutoScalingSpecification.AddMember("writeCapacityAutoScaling", AutoScalingSettings)
-
-	AutoScalingSpecification_readCapacityAutoScaling = AutoScalingSpecification.AddMember("readCapacityAutoScaling", AutoScalingSettings)
-
-	CapacitySpecification_throughputMode = CapacitySpecification.AddMember("throughputMode", _ThroughputMode)
-
-	CapacitySpecification_readCapacityUnits = CapacitySpecification.AddMember("readCapacityUnits", _CapacityUnits)
-
-	CapacitySpecification_writeCapacityUnits = CapacitySpecification.AddMember("writeCapacityUnits", _CapacityUnits)
-
-	CapacitySpecificationSummary_throughputMode = CapacitySpecificationSummary.AddMember("throughputMode", _ThroughputMode)
-
-	CapacitySpecificationSummary_readCapacityUnits = CapacitySpecificationSummary.AddMember("readCapacityUnits", _CapacityUnits)
-
-	CapacitySpecificationSummary_writeCapacityUnits = CapacitySpecificationSummary.AddMember("writeCapacityUnits", _CapacityUnits)
-
-	CapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp = CapacitySpecificationSummary.AddMember("lastUpdateToPayPerRequestTimestamp", _Timestamp)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	CdcSpecification_status = CdcSpecification.AddMember("status", _CdcStatus)
-
-	CdcSpecification_viewType = CdcSpecification.AddMember("viewType", _ViewType)
-
-	CdcSpecification_tags = CdcSpecification.AddMember("tags", _TagList)
-
-	CdcSpecification_propagateTags = CdcSpecification.AddMember("propagateTags", _CdcPropagateTags)
-
-	CdcSpecificationSummary_status = CdcSpecificationSummary.AddMember("status", _CdcStatus)
-
-	CdcSpecificationSummary_viewType = CdcSpecificationSummary.AddMember("viewType", _ViewType)
-
-	ClientSideTimestamps_status = ClientSideTimestamps.AddMember("status", _ClientSideTimestampsStatus)
-
-	ClusteringKey_name = ClusteringKey.AddMember("name", _GenericString)
-
-	ClusteringKey_orderBy = ClusteringKey.AddMember("orderBy", _SortOrder)
-
-	_ClusteringKeyList_member = _ClusteringKeyList.AddMember("member", ClusteringKey)
-
-	ColumnDefinition_name = ColumnDefinition.AddMember("name", _GenericString)
-
-	ColumnDefinition_type = ColumnDefinition.AddMember("type", _GenericString)
-
-	_ColumnDefinitionList_member = _ColumnDefinitionList.AddMember("member", ColumnDefinition)
-
-	Comment_message = Comment.AddMember("message", smithyprelude.String)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	EncryptionSpecification_type = EncryptionSpecification.AddMember("type", _EncryptionType)
-
-	EncryptionSpecification_kmsKeyIdentifier = EncryptionSpecification.AddMember("kmsKeyIdentifier", _kmsKeyARN)
-
-	FieldDefinition_name = FieldDefinition.AddMember("name", _GenericString)
-
-	FieldDefinition_type = FieldDefinition.AddMember("type", _GenericString)
-
-	_FieldList_member = _FieldList.AddMember("member", FieldDefinition)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	_RegionList_member = _RegionList.AddMember("member", _region)
-
-	KeyspaceSummary_keyspaceName = KeyspaceSummary.AddMember("keyspaceName", _KeyspaceName)
-
-	KeyspaceSummary_resourceArn = KeyspaceSummary.AddMember("resourceArn", _ARN)
-
-	KeyspaceSummary_replicationStrategy = KeyspaceSummary.AddMember("replicationStrategy", _rs)
-
-	KeyspaceSummary_replicationRegions = KeyspaceSummary.AddMember("replicationRegions", _RegionList)
-
-	_KeyspaceSummaryList_member = _KeyspaceSummaryList.AddMember("member", KeyspaceSummary)
-
-	PartitionKey_name = PartitionKey.AddMember("name", _GenericString)
-
-	_PartitionKeyList_member = _PartitionKeyList.AddMember("member", PartitionKey)
-
-	PointInTimeRecovery_status = PointInTimeRecovery.AddMember("status", _PointInTimeRecoveryStatus)
-
-	PointInTimeRecoverySummary_status = PointInTimeRecoverySummary.AddMember("status", _PointInTimeRecoveryStatus)
-
-	PointInTimeRecoverySummary_earliestRestorableTimestamp = PointInTimeRecoverySummary.AddMember("earliestRestorableTimestamp", _Timestamp)
-
-	ReplicaAutoScalingSpecification_region = ReplicaAutoScalingSpecification.AddMember("region", _region)
-
-	ReplicaAutoScalingSpecification_autoScalingSpecification = ReplicaAutoScalingSpecification.AddMember("autoScalingSpecification", AutoScalingSpecification)
-
-	_ReplicaAutoScalingSpecificationList_member = _ReplicaAutoScalingSpecificationList.AddMember("member", ReplicaAutoScalingSpecification)
-
-	ReplicaSpecification_region = ReplicaSpecification.AddMember("region", _region)
-
-	ReplicaSpecification_readCapacityUnits = ReplicaSpecification.AddMember("readCapacityUnits", _CapacityUnits)
-
-	ReplicaSpecification_readCapacityAutoScaling = ReplicaSpecification.AddMember("readCapacityAutoScaling", AutoScalingSettings)
-
-	_ReplicaSpecificationList_member = _ReplicaSpecificationList.AddMember("member", ReplicaSpecification)
-
-	WarmThroughputSpecificationSummary_readUnitsPerSecond = WarmThroughputSpecificationSummary.AddMember("readUnitsPerSecond", smithyprelude.Long)
-
-	WarmThroughputSpecificationSummary_writeUnitsPerSecond = WarmThroughputSpecificationSummary.AddMember("writeUnitsPerSecond", smithyprelude.Long)
-
-	WarmThroughputSpecificationSummary_status = WarmThroughputSpecificationSummary.AddMember("status", _WarmThroughputStatus)
-
-	ReplicaSpecificationSummary_region = ReplicaSpecificationSummary.AddMember("region", _region)
-
-	ReplicaSpecificationSummary_status = ReplicaSpecificationSummary.AddMember("status", _TableStatus)
-
-	ReplicaSpecificationSummary_capacitySpecification = ReplicaSpecificationSummary.AddMember("capacitySpecification", CapacitySpecificationSummary)
-
-	ReplicaSpecificationSummary_warmThroughputSpecification = ReplicaSpecificationSummary.AddMember("warmThroughputSpecification", WarmThroughputSpecificationSummary)
-
-	_ReplicaSpecificationSummaryList_member = _ReplicaSpecificationSummaryList.AddMember("member", ReplicaSpecificationSummary)
-
-	ReplicationGroupStatus_region = ReplicationGroupStatus.AddMember("region", _region)
-
-	ReplicationGroupStatus_keyspaceStatus = ReplicationGroupStatus.AddMember("keyspaceStatus", _KeyspaceStatus)
-
-	ReplicationGroupStatus_tablesReplicationProgress = ReplicationGroupStatus.AddMember("tablesReplicationProgress", _TablesReplicationProgress)
-
-	_ReplicationGroupStatusList_member = _ReplicationGroupStatusList.AddMember("member", ReplicationGroupStatus)
-
-	ReplicationSpecification_replicationStrategy = ReplicationSpecification.AddMember("replicationStrategy", _rs)
-
-	ReplicationSpecification_regionList = ReplicationSpecification.AddMember("regionList", _RegionList)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceArn = ResourceNotFoundException.AddMember("resourceArn", _ARN)
-
-	StaticColumn_name = StaticColumn.AddMember("name", _GenericString)
-
-	_StaticColumnList_member = _StaticColumnList.AddMember("member", StaticColumn)
-
-	SchemaDefinition_allColumns = SchemaDefinition.AddMember("allColumns", _ColumnDefinitionList)
-
-	SchemaDefinition_partitionKeys = SchemaDefinition.AddMember("partitionKeys", _PartitionKeyList)
-
-	SchemaDefinition_clusteringKeys = SchemaDefinition.AddMember("clusteringKeys", _ClusteringKeyList)
-
-	SchemaDefinition_staticColumns = SchemaDefinition.AddMember("staticColumns", _StaticColumnList)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TableNameList_member = _TableNameList.AddMember("member", _TableName)
-
-	TableSummary_keyspaceName = TableSummary.AddMember("keyspaceName", _KeyspaceName)
-
-	TableSummary_tableName = TableSummary.AddMember("tableName", _TableName)
-
-	TableSummary_resourceArn = TableSummary.AddMember("resourceArn", _ARN)
-
-	_TableSummaryList_member = _TableSummaryList.AddMember("member", TableSummary)
-
-	TimeToLive_status = TimeToLive.AddMember("status", _TimeToLiveStatus)
-
-	_TypeNameList_member = _TypeNameList.AddMember("member", _TypeName)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	WarmThroughputSpecification_readUnitsPerSecond = WarmThroughputSpecification.AddMember("readUnitsPerSecond", smithyprelude.Long)
-
-	WarmThroughputSpecification_writeUnitsPerSecond = WarmThroughputSpecification.AddMember("writeUnitsPerSecond", smithyprelude.Long)
-
-	CreateKeyspaceRequest_keyspaceName = CreateKeyspaceRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	CreateKeyspaceRequest_tags = CreateKeyspaceRequest.AddMember("tags", _TagList)
-
-	CreateKeyspaceRequest_replicationSpecification = CreateKeyspaceRequest.AddMember("replicationSpecification", ReplicationSpecification)
-
-	CreateKeyspaceResponse_resourceArn = CreateKeyspaceResponse.AddMember("resourceArn", _ARN)
-
-	CreateTableRequest_keyspaceName = CreateTableRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	CreateTableRequest_tableName = CreateTableRequest.AddMember("tableName", _TableName)
-
-	CreateTableRequest_schemaDefinition = CreateTableRequest.AddMember("schemaDefinition", SchemaDefinition)
-
-	CreateTableRequest_comment = CreateTableRequest.AddMember("comment", Comment)
-
-	CreateTableRequest_capacitySpecification = CreateTableRequest.AddMember("capacitySpecification", CapacitySpecification)
-
-	CreateTableRequest_encryptionSpecification = CreateTableRequest.AddMember("encryptionSpecification", EncryptionSpecification)
-
-	CreateTableRequest_pointInTimeRecovery = CreateTableRequest.AddMember("pointInTimeRecovery", PointInTimeRecovery)
-
-	CreateTableRequest_ttl = CreateTableRequest.AddMember("ttl", TimeToLive)
-
-	CreateTableRequest_defaultTimeToLive = CreateTableRequest.AddMember("defaultTimeToLive", _DefaultTimeToLive)
-
-	CreateTableRequest_tags = CreateTableRequest.AddMember("tags", _TagList)
-
-	CreateTableRequest_clientSideTimestamps = CreateTableRequest.AddMember("clientSideTimestamps", ClientSideTimestamps)
-
-	CreateTableRequest_autoScalingSpecification = CreateTableRequest.AddMember("autoScalingSpecification", AutoScalingSpecification)
-
-	CreateTableRequest_replicaSpecifications = CreateTableRequest.AddMember("replicaSpecifications", _ReplicaSpecificationList)
-
-	CreateTableRequest_cdcSpecification = CreateTableRequest.AddMember("cdcSpecification", CdcSpecification)
-
-	CreateTableRequest_warmThroughputSpecification = CreateTableRequest.AddMember("warmThroughputSpecification", WarmThroughputSpecification)
-
-	CreateTableResponse_resourceArn = CreateTableResponse.AddMember("resourceArn", _ARN)
-
-	CreateTypeRequest_keyspaceName = CreateTypeRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	CreateTypeRequest_typeName = CreateTypeRequest.AddMember("typeName", _TypeName)
-
-	CreateTypeRequest_fieldDefinitions = CreateTypeRequest.AddMember("fieldDefinitions", _FieldList)
-
-	CreateTypeResponse_keyspaceArn = CreateTypeResponse.AddMember("keyspaceArn", _ARN)
-
-	CreateTypeResponse_typeName = CreateTypeResponse.AddMember("typeName", _TypeName)
-
-	DeleteKeyspaceRequest_keyspaceName = DeleteKeyspaceRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	DeleteTableRequest_keyspaceName = DeleteTableRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	DeleteTableRequest_tableName = DeleteTableRequest.AddMember("tableName", _TableName)
-
-	DeleteTypeRequest_keyspaceName = DeleteTypeRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	DeleteTypeRequest_typeName = DeleteTypeRequest.AddMember("typeName", _TypeName)
-
-	DeleteTypeResponse_keyspaceArn = DeleteTypeResponse.AddMember("keyspaceArn", _ARN)
-
-	DeleteTypeResponse_typeName = DeleteTypeResponse.AddMember("typeName", _TypeName)
-
-	GetKeyspaceRequest_keyspaceName = GetKeyspaceRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	GetKeyspaceResponse_keyspaceName = GetKeyspaceResponse.AddMember("keyspaceName", _KeyspaceName)
-
-	GetKeyspaceResponse_resourceArn = GetKeyspaceResponse.AddMember("resourceArn", _ARN)
-
-	GetKeyspaceResponse_replicationStrategy = GetKeyspaceResponse.AddMember("replicationStrategy", _rs)
-
-	GetKeyspaceResponse_replicationRegions = GetKeyspaceResponse.AddMember("replicationRegions", _RegionList)
-
-	GetKeyspaceResponse_replicationGroupStatuses = GetKeyspaceResponse.AddMember("replicationGroupStatuses", _ReplicationGroupStatusList)
-
-	GetTableAutoScalingSettingsRequest_keyspaceName = GetTableAutoScalingSettingsRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	GetTableAutoScalingSettingsRequest_tableName = GetTableAutoScalingSettingsRequest.AddMember("tableName", _TableName)
-
-	GetTableAutoScalingSettingsResponse_keyspaceName = GetTableAutoScalingSettingsResponse.AddMember("keyspaceName", _KeyspaceName)
-
-	GetTableAutoScalingSettingsResponse_tableName = GetTableAutoScalingSettingsResponse.AddMember("tableName", _TableName)
-
-	GetTableAutoScalingSettingsResponse_resourceArn = GetTableAutoScalingSettingsResponse.AddMember("resourceArn", _ARN)
-
-	GetTableAutoScalingSettingsResponse_autoScalingSpecification = GetTableAutoScalingSettingsResponse.AddMember("autoScalingSpecification", AutoScalingSpecification)
-
-	GetTableAutoScalingSettingsResponse_replicaSpecifications = GetTableAutoScalingSettingsResponse.AddMember("replicaSpecifications", _ReplicaAutoScalingSpecificationList)
-
-	GetTableRequest_keyspaceName = GetTableRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	GetTableRequest_tableName = GetTableRequest.AddMember("tableName", _TableName)
-
-	GetTableResponse_keyspaceName = GetTableResponse.AddMember("keyspaceName", _KeyspaceName)
-
-	GetTableResponse_tableName = GetTableResponse.AddMember("tableName", _TableName)
-
-	GetTableResponse_resourceArn = GetTableResponse.AddMember("resourceArn", _ARN)
-
-	GetTableResponse_creationTimestamp = GetTableResponse.AddMember("creationTimestamp", _Timestamp)
-
-	GetTableResponse_status = GetTableResponse.AddMember("status", _TableStatus)
-
-	GetTableResponse_schemaDefinition = GetTableResponse.AddMember("schemaDefinition", SchemaDefinition)
-
-	GetTableResponse_capacitySpecification = GetTableResponse.AddMember("capacitySpecification", CapacitySpecificationSummary)
-
-	GetTableResponse_encryptionSpecification = GetTableResponse.AddMember("encryptionSpecification", EncryptionSpecification)
-
-	GetTableResponse_pointInTimeRecovery = GetTableResponse.AddMember("pointInTimeRecovery", PointInTimeRecoverySummary)
-
-	GetTableResponse_ttl = GetTableResponse.AddMember("ttl", TimeToLive)
-
-	GetTableResponse_defaultTimeToLive = GetTableResponse.AddMember("defaultTimeToLive", _DefaultTimeToLive)
-
-	GetTableResponse_comment = GetTableResponse.AddMember("comment", Comment)
-
-	GetTableResponse_clientSideTimestamps = GetTableResponse.AddMember("clientSideTimestamps", ClientSideTimestamps)
-
-	GetTableResponse_replicaSpecifications = GetTableResponse.AddMember("replicaSpecifications", _ReplicaSpecificationSummaryList)
-
-	GetTableResponse_latestStreamArn = GetTableResponse.AddMember("latestStreamArn", _StreamArn)
-
-	GetTableResponse_cdcSpecification = GetTableResponse.AddMember("cdcSpecification", CdcSpecificationSummary)
-
-	GetTableResponse_warmThroughputSpecification = GetTableResponse.AddMember("warmThroughputSpecification", WarmThroughputSpecificationSummary)
-
-	GetTypeRequest_keyspaceName = GetTypeRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	GetTypeRequest_typeName = GetTypeRequest.AddMember("typeName", _TypeName)
-
-	GetTypeResponse_keyspaceName = GetTypeResponse.AddMember("keyspaceName", _KeyspaceName)
-
-	GetTypeResponse_typeName = GetTypeResponse.AddMember("typeName", _TypeName)
-
-	GetTypeResponse_fieldDefinitions = GetTypeResponse.AddMember("fieldDefinitions", _FieldList)
-
-	GetTypeResponse_lastModifiedTimestamp = GetTypeResponse.AddMember("lastModifiedTimestamp", _Timestamp)
-
-	GetTypeResponse_status = GetTypeResponse.AddMember("status", _TypeStatus)
-
-	GetTypeResponse_directReferringTables = GetTypeResponse.AddMember("directReferringTables", _TableNameList)
-
-	GetTypeResponse_directParentTypes = GetTypeResponse.AddMember("directParentTypes", _TypeNameList)
-
-	GetTypeResponse_maxNestingDepth = GetTypeResponse.AddMember("maxNestingDepth", _Depth)
-
-	GetTypeResponse_keyspaceArn = GetTypeResponse.AddMember("keyspaceArn", _ARN)
-
-	ListKeyspacesRequest_nextToken = ListKeyspacesRequest.AddMember("nextToken", _NextToken)
-
-	ListKeyspacesRequest_maxResults = ListKeyspacesRequest.AddMember("maxResults", _MaxResults)
-
-	ListKeyspacesResponse_nextToken = ListKeyspacesResponse.AddMember("nextToken", _NextToken)
-
-	ListKeyspacesResponse_keyspaces = ListKeyspacesResponse.AddMember("keyspaces", _KeyspaceSummaryList)
-
-	ListTablesRequest_nextToken = ListTablesRequest.AddMember("nextToken", _NextToken)
-
-	ListTablesRequest_maxResults = ListTablesRequest.AddMember("maxResults", _MaxResults)
-
-	ListTablesRequest_keyspaceName = ListTablesRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	ListTablesResponse_nextToken = ListTablesResponse.AddMember("nextToken", _NextToken)
-
-	ListTablesResponse_tables = ListTablesResponse.AddMember("tables", _TableSummaryList)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _ARN)
-
-	ListTagsForResourceRequest_nextToken = ListTagsForResourceRequest.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_maxResults = ListTagsForResourceRequest.AddMember("maxResults", _MaxResults)
-
-	ListTagsForResourceResponse_nextToken = ListTagsForResourceResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	ListTypesRequest_nextToken = ListTypesRequest.AddMember("nextToken", _NextToken)
-
-	ListTypesRequest_maxResults = ListTypesRequest.AddMember("maxResults", _MaxResults)
-
-	ListTypesRequest_keyspaceName = ListTypesRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	ListTypesResponse_nextToken = ListTypesResponse.AddMember("nextToken", _NextToken)
-
-	ListTypesResponse_types = ListTypesResponse.AddMember("types", _TypeNameList)
-
-	RestoreTableRequest_sourceKeyspaceName = RestoreTableRequest.AddMember("sourceKeyspaceName", _KeyspaceName)
-
-	RestoreTableRequest_sourceTableName = RestoreTableRequest.AddMember("sourceTableName", _TableName)
-
-	RestoreTableRequest_targetKeyspaceName = RestoreTableRequest.AddMember("targetKeyspaceName", _KeyspaceName)
-
-	RestoreTableRequest_targetTableName = RestoreTableRequest.AddMember("targetTableName", _TableName)
-
-	RestoreTableRequest_restoreTimestamp = RestoreTableRequest.AddMember("restoreTimestamp", _Timestamp)
-
-	RestoreTableRequest_capacitySpecificationOverride = RestoreTableRequest.AddMember("capacitySpecificationOverride", CapacitySpecification)
-
-	RestoreTableRequest_encryptionSpecificationOverride = RestoreTableRequest.AddMember("encryptionSpecificationOverride", EncryptionSpecification)
-
-	RestoreTableRequest_pointInTimeRecoveryOverride = RestoreTableRequest.AddMember("pointInTimeRecoveryOverride", PointInTimeRecovery)
-
-	RestoreTableRequest_tagsOverride = RestoreTableRequest.AddMember("tagsOverride", _TagList)
-
-	RestoreTableRequest_autoScalingSpecification = RestoreTableRequest.AddMember("autoScalingSpecification", AutoScalingSpecification)
-
-	RestoreTableRequest_replicaSpecifications = RestoreTableRequest.AddMember("replicaSpecifications", _ReplicaSpecificationList)
-
-	RestoreTableResponse_restoredTableARN = RestoreTableResponse.AddMember("restoredTableARN", _ARN)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ARN)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ARN)
-
-	UntagResourceRequest_tags = UntagResourceRequest.AddMember("tags", _TagList)
-
-	UpdateKeyspaceRequest_keyspaceName = UpdateKeyspaceRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	UpdateKeyspaceRequest_replicationSpecification = UpdateKeyspaceRequest.AddMember("replicationSpecification", ReplicationSpecification)
-
-	UpdateKeyspaceRequest_clientSideTimestamps = UpdateKeyspaceRequest.AddMember("clientSideTimestamps", ClientSideTimestamps)
-
-	UpdateKeyspaceResponse_resourceArn = UpdateKeyspaceResponse.AddMember("resourceArn", _ARN)
-
-	UpdateTableRequest_keyspaceName = UpdateTableRequest.AddMember("keyspaceName", _KeyspaceName)
-
-	UpdateTableRequest_tableName = UpdateTableRequest.AddMember("tableName", _TableName)
-
-	UpdateTableRequest_addColumns = UpdateTableRequest.AddMember("addColumns", _ColumnDefinitionList)
-
-	UpdateTableRequest_capacitySpecification = UpdateTableRequest.AddMember("capacitySpecification", CapacitySpecification)
-
-	UpdateTableRequest_encryptionSpecification = UpdateTableRequest.AddMember("encryptionSpecification", EncryptionSpecification)
-
-	UpdateTableRequest_pointInTimeRecovery = UpdateTableRequest.AddMember("pointInTimeRecovery", PointInTimeRecovery)
-
-	UpdateTableRequest_ttl = UpdateTableRequest.AddMember("ttl", TimeToLive)
-
-	UpdateTableRequest_defaultTimeToLive = UpdateTableRequest.AddMember("defaultTimeToLive", _DefaultTimeToLive)
-
-	UpdateTableRequest_clientSideTimestamps = UpdateTableRequest.AddMember("clientSideTimestamps", ClientSideTimestamps)
-
-	UpdateTableRequest_autoScalingSpecification = UpdateTableRequest.AddMember("autoScalingSpecification", AutoScalingSpecification)
-
-	UpdateTableRequest_replicaSpecifications = UpdateTableRequest.AddMember("replicaSpecifications", _ReplicaSpecificationList)
-
-	UpdateTableRequest_cdcSpecification = UpdateTableRequest.AddMember("cdcSpecification", CdcSpecification)
-
-	UpdateTableRequest_warmThroughputSpecification = UpdateTableRequest.AddMember("warmThroughputSpecification", WarmThroughputSpecification)
-
-	UpdateTableResponse_resourceArn = UpdateTableResponse.AddMember("resourceArn", _ARN)
-
-}
+var (
+	iCreateKeyspace                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateKeyspace"}
+	iCreateTable                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateTable"}
+	iCreateType                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateType"}
+	iDeleteKeyspace                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteKeyspace"}
+	iDeleteTable                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteTable"}
+	iDeleteType                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteType"}
+	iGetKeyspace                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetKeyspace"}
+	iGetTable                                 = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTable"}
+	iGetTableAutoScalingSettings              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTableAutoScalingSettings"}
+	iGetType                                  = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetType"}
+	iListKeyspaces                            = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListKeyspaces"}
+	iListTables                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTables"}
+	iListTagsForResource                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTagsForResource"}
+	iListTypes                                = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTypes"}
+	iRestoreTable                             = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "RestoreTable"}
+	iTagResource                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TagResource"}
+	iUntagResource                            = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UntagResource"}
+	iUpdateKeyspace                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UpdateKeyspace"}
+	iUpdateTable                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UpdateTable"}
+	i_KeyspacesService                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "KeyspacesService"}
+	iAccessDeniedException                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "AccessDeniedException"}
+	i_ARN                                     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ARN"}
+	iAutoScalingPolicy                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "AutoScalingPolicy"}
+	iAutoScalingSettings                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "AutoScalingSettings"}
+	iAutoScalingSpecification                 = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "AutoScalingSpecification"}
+	i_BooleanObject                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "BooleanObject"}
+	iCapacitySpecification                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CapacitySpecification"}
+	iCapacitySpecificationSummary             = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CapacitySpecificationSummary"}
+	i_CapacityUnits                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CapacityUnits"}
+	i_CdcPropagateTags                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CdcPropagateTags"}
+	iCdcSpecification                         = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CdcSpecification"}
+	iCdcSpecificationSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CdcSpecificationSummary"}
+	i_CdcStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CdcStatus"}
+	iClientSideTimestamps                     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ClientSideTimestamps"}
+	i_ClientSideTimestampsStatus              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ClientSideTimestampsStatus"}
+	iClusteringKey                            = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ClusteringKey"}
+	i_ClusteringKeyList                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ClusteringKeyList"}
+	iColumnDefinition                         = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ColumnDefinition"}
+	i_ColumnDefinitionList                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ColumnDefinitionList"}
+	iComment                                  = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "Comment"}
+	iConflictException                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ConflictException"}
+	i_DefaultTimeToLive                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DefaultTimeToLive"}
+	i_Depth                                   = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "Depth"}
+	i_DoubleObject                            = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DoubleObject"}
+	iEncryptionSpecification                  = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "EncryptionSpecification"}
+	i_EncryptionType                          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "EncryptionType"}
+	iFieldDefinition                          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "FieldDefinition"}
+	i_FieldList                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "FieldList"}
+	i_GenericString                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GenericString"}
+	i_IntegerObject                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "IntegerObject"}
+	iInternalServerException                  = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "InternalServerException"}
+	i_KeyspaceName                            = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "KeyspaceName"}
+	i_KeyspaceStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "KeyspaceStatus"}
+	iKeyspaceSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "KeyspaceSummary"}
+	i_KeyspaceSummaryList                     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "KeyspaceSummaryList"}
+	i_kmsKeyARN                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "kmsKeyARN"}
+	i_MaxResults                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "MaxResults"}
+	i_NextToken                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "NextToken"}
+	iPartitionKey                             = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "PartitionKey"}
+	i_PartitionKeyList                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "PartitionKeyList"}
+	iPointInTimeRecovery                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "PointInTimeRecovery"}
+	i_PointInTimeRecoveryStatus               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "PointInTimeRecoveryStatus"}
+	iPointInTimeRecoverySummary               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "PointInTimeRecoverySummary"}
+	i_region                                  = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "region"}
+	i_RegionList                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "RegionList"}
+	iReplicaAutoScalingSpecification          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicaAutoScalingSpecification"}
+	i_ReplicaAutoScalingSpecificationList     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicaAutoScalingSpecificationList"}
+	iReplicaSpecification                     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicaSpecification"}
+	i_ReplicaSpecificationList                = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicaSpecificationList"}
+	iReplicaSpecificationSummary              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicaSpecificationSummary"}
+	i_ReplicaSpecificationSummaryList         = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicaSpecificationSummaryList"}
+	iReplicationGroupStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicationGroupStatus"}
+	i_ReplicationGroupStatusList              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicationGroupStatusList"}
+	iReplicationSpecification                 = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ReplicationSpecification"}
+	iResourceNotFoundException                = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ResourceNotFoundException"}
+	i_rs                                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "rs"}
+	iSchemaDefinition                         = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "SchemaDefinition"}
+	iServiceQuotaExceededException            = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ServiceQuotaExceededException"}
+	i_SortOrder                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "SortOrder"}
+	iStaticColumn                             = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "StaticColumn"}
+	i_StaticColumnList                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "StaticColumnList"}
+	i_StreamArn                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "StreamArn"}
+	i_TableName                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TableName"}
+	i_TableNameList                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TableNameList"}
+	i_TablesReplicationProgress               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TablesReplicationProgress"}
+	i_TableStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TableStatus"}
+	iTableSummary                             = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TableSummary"}
+	i_TableSummaryList                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TableSummaryList"}
+	iTag                                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "Tag"}
+	i_TagKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TagKey"}
+	i_TagList                                 = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TagList"}
+	i_TagValue                                = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TagValue"}
+	iTargetTrackingScalingPolicyConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TargetTrackingScalingPolicyConfiguration"}
+	i_ThroughputMode                          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ThroughputMode"}
+	i_Timestamp                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "Timestamp"}
+	iTimeToLive                               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TimeToLive"}
+	i_TimeToLiveStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TimeToLiveStatus"}
+	i_TypeName                                = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TypeName"}
+	i_TypeNameList                            = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TypeNameList"}
+	i_TypeStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TypeStatus"}
+	iValidationException                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ValidationException"}
+	i_ViewType                                = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ViewType"}
+	iWarmThroughputSpecification              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "WarmThroughputSpecification"}
+	iWarmThroughputSpecificationSummary       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "WarmThroughputSpecificationSummary"}
+	i_WarmThroughputStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "WarmThroughputStatus"}
+	iCreateKeyspaceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateKeyspaceRequest"}
+	iCreateKeyspaceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateKeyspaceResponse"}
+	iCreateTableRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateTableRequest"}
+	iCreateTableResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateTableResponse"}
+	iCreateTypeRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateTypeRequest"}
+	iCreateTypeResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "CreateTypeResponse"}
+	iDeleteKeyspaceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteKeyspaceRequest"}
+	iDeleteKeyspaceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteKeyspaceResponse"}
+	iDeleteTableRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteTableRequest"}
+	iDeleteTableResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteTableResponse"}
+	iDeleteTypeRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteTypeRequest"}
+	iDeleteTypeResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "DeleteTypeResponse"}
+	iGetKeyspaceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetKeyspaceRequest"}
+	iGetKeyspaceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetKeyspaceResponse"}
+	iGetTableAutoScalingSettingsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTableAutoScalingSettingsRequest"}
+	iGetTableAutoScalingSettingsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTableAutoScalingSettingsResponse"}
+	iGetTableRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTableRequest"}
+	iGetTableResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTableResponse"}
+	iGetTypeRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTypeRequest"}
+	iGetTypeResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "GetTypeResponse"}
+	iListKeyspacesRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListKeyspacesRequest"}
+	iListKeyspacesResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListKeyspacesResponse"}
+	iListTablesRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTablesRequest"}
+	iListTablesResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTablesResponse"}
+	iListTagsForResourceRequest               = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse              = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTagsForResourceResponse"}
+	iListTypesRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTypesRequest"}
+	iListTypesResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "ListTypesResponse"}
+	iRestoreTableRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "RestoreTableRequest"}
+	iRestoreTableResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "RestoreTableResponse"}
+	iTagResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TagResourceRequest"}
+	iTagResourceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "TagResourceResponse"}
+	iUntagResourceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UntagResourceResponse"}
+	iUpdateKeyspaceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UpdateKeyspaceRequest"}
+	iUpdateKeyspaceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UpdateKeyspaceResponse"}
+	iUpdateTableRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UpdateTableRequest"}
+	iUpdateTableResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.keyspaces", Name: "UpdateTableResponse"}
+	pString                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pLong                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "AccessDeniedException",
+	StatusCode: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ConflictException",
+	StatusCode: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "InternalServerException",
+	StatusCode: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x240}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ResourceNotFoundException",
+	StatusCode: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ServiceQuotaExceededException",
+	StatusCode: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x240}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.AWSQueryError{ErrorCode: "ValidationException",
+	StatusCode: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x200}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAutoScalingPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingPolicy_targetTrackingScalingPolicyConfiguration}}
+var mAutoScalingSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingSettings_autoScalingDisabled, &sAutoScalingSettings_minimumUnits, &sAutoScalingSettings_maximumUnits, &sAutoScalingSettings_scalingPolicy}}
+var mAutoScalingSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoScalingSpecification_writeCapacityAutoScaling, &sAutoScalingSpecification_readCapacityAutoScaling}}
+var mCapacitySpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacitySpecification_throughputMode, &sCapacitySpecification_readCapacityUnits, &sCapacitySpecification_writeCapacityUnits}}
+var mCapacitySpecificationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacitySpecificationSummary_throughputMode, &sCapacitySpecificationSummary_readCapacityUnits, &sCapacitySpecificationSummary_writeCapacityUnits, &sCapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp}}
+var mCdcSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sCdcSpecification_status, &sCdcSpecification_viewType, &sCdcSpecification_tags, &sCdcSpecification_propagateTags}}
+var mCdcSpecificationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCdcSpecificationSummary_status, &sCdcSpecificationSummary_viewType}}
+var mClientSideTimestamps = smithy.SchemaMembers{List: []*smithy.Schema{&sClientSideTimestamps_status}}
+var mClusteringKey = smithy.SchemaMembers{List: []*smithy.Schema{&sClusteringKey_name, &sClusteringKey_orderBy}}
+var m_ClusteringKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClusteringKeyList_member}}
+var mColumnDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sColumnDefinition_name, &sColumnDefinition_type}}
+var m_ColumnDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ColumnDefinitionList_member}}
+var mComment = smithy.SchemaMembers{List: []*smithy.Schema{&sComment_message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mEncryptionSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionSpecification_type, &sEncryptionSpecification_kmsKeyIdentifier}}
+var mFieldDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sFieldDefinition_name, &sFieldDefinition_type}}
+var m_FieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FieldList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mKeyspaceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyspaceSummary_keyspaceName, &sKeyspaceSummary_resourceArn, &sKeyspaceSummary_replicationStrategy, &sKeyspaceSummary_replicationRegions}}
+var m_KeyspaceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeyspaceSummaryList_member}}
+var mPartitionKey = smithy.SchemaMembers{List: []*smithy.Schema{&sPartitionKey_name}}
+var m_PartitionKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartitionKeyList_member}}
+var mPointInTimeRecovery = smithy.SchemaMembers{List: []*smithy.Schema{&sPointInTimeRecovery_status}}
+var mPointInTimeRecoverySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPointInTimeRecoverySummary_status, &sPointInTimeRecoverySummary_earliestRestorableTimestamp}}
+var m_RegionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionList_member}}
+var mReplicaAutoScalingSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicaAutoScalingSpecification_region, &sReplicaAutoScalingSpecification_autoScalingSpecification}}
+var m_ReplicaAutoScalingSpecificationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicaAutoScalingSpecificationList_member}}
+var mReplicaSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicaSpecification_region, &sReplicaSpecification_readCapacityUnits, &sReplicaSpecification_readCapacityAutoScaling}}
+var m_ReplicaSpecificationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicaSpecificationList_member}}
+var mReplicaSpecificationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicaSpecificationSummary_region, &sReplicaSpecificationSummary_status, &sReplicaSpecificationSummary_capacitySpecification, &sReplicaSpecificationSummary_warmThroughputSpecification}}
+var m_ReplicaSpecificationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicaSpecificationSummaryList_member}}
+var mReplicationGroupStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationGroupStatus_region, &sReplicationGroupStatus_keyspaceStatus, &sReplicationGroupStatus_tablesReplicationProgress}}
+var m_ReplicationGroupStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReplicationGroupStatusList_member}}
+var mReplicationSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sReplicationSpecification_replicationStrategy, &sReplicationSpecification_regionList}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceArn}}
+var mSchemaDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaDefinition_allColumns, &sSchemaDefinition_partitionKeys, &sSchemaDefinition_clusteringKeys, &sSchemaDefinition_staticColumns}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mStaticColumn = smithy.SchemaMembers{List: []*smithy.Schema{&sStaticColumn_name}}
+var m_StaticColumnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StaticColumnList_member}}
+var m_TableNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableNameList_member}}
+var mTableSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTableSummary_keyspaceName, &sTableSummary_tableName, &sTableSummary_resourceArn}}
+var m_TableSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TableSummaryList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTargetTrackingScalingPolicyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetTrackingScalingPolicyConfiguration_disableScaleIn, &sTargetTrackingScalingPolicyConfiguration_scaleInCooldown, &sTargetTrackingScalingPolicyConfiguration_scaleOutCooldown, &sTargetTrackingScalingPolicyConfiguration_targetValue}}
+var mTimeToLive = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeToLive_status}}
+var m_TypeNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TypeNameList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWarmThroughputSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sWarmThroughputSpecification_readUnitsPerSecond, &sWarmThroughputSpecification_writeUnitsPerSecond}}
+var mWarmThroughputSpecificationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWarmThroughputSpecificationSummary_readUnitsPerSecond, &sWarmThroughputSpecificationSummary_writeUnitsPerSecond, &sWarmThroughputSpecificationSummary_status}}
+var mCreateKeyspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateKeyspaceRequest_keyspaceName, &sCreateKeyspaceRequest_tags, &sCreateKeyspaceRequest_replicationSpecification}}
+var mCreateKeyspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateKeyspaceResponse_resourceArn}}
+var mCreateTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableRequest_keyspaceName, &sCreateTableRequest_tableName, &sCreateTableRequest_schemaDefinition, &sCreateTableRequest_comment, &sCreateTableRequest_capacitySpecification, &sCreateTableRequest_encryptionSpecification, &sCreateTableRequest_pointInTimeRecovery, &sCreateTableRequest_ttl, &sCreateTableRequest_defaultTimeToLive, &sCreateTableRequest_tags, &sCreateTableRequest_clientSideTimestamps, &sCreateTableRequest_autoScalingSpecification, &sCreateTableRequest_replicaSpecifications, &sCreateTableRequest_cdcSpecification, &sCreateTableRequest_warmThroughputSpecification}, Seed: 74, Slots: []uint16{
+	15, 4, 0, 10, 0, 7, 0, 0, 6, 0, 0, 0, 0, 0, 0, 14, 0, 2, 1, 0, 13, 5, 12, 8,
+	0, 0, 9, 0, 3, 0, 0, 11,
+}}
+var mCreateTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTableResponse_resourceArn}}
+var mCreateTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTypeRequest_keyspaceName, &sCreateTypeRequest_typeName, &sCreateTypeRequest_fieldDefinitions}}
+var mCreateTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTypeResponse_keyspaceArn, &sCreateTypeResponse_typeName}}
+var mDeleteKeyspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteKeyspaceRequest_keyspaceName}}
+var mDeleteTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTableRequest_keyspaceName, &sDeleteTableRequest_tableName}}
+var mDeleteTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTypeRequest_keyspaceName, &sDeleteTypeRequest_typeName}}
+var mDeleteTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTypeResponse_keyspaceArn, &sDeleteTypeResponse_typeName}}
+var mGetKeyspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetKeyspaceRequest_keyspaceName}}
+var mGetKeyspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetKeyspaceResponse_keyspaceName, &sGetKeyspaceResponse_resourceArn, &sGetKeyspaceResponse_replicationStrategy, &sGetKeyspaceResponse_replicationRegions, &sGetKeyspaceResponse_replicationGroupStatuses}}
+var mGetTableAutoScalingSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableAutoScalingSettingsRequest_keyspaceName, &sGetTableAutoScalingSettingsRequest_tableName}}
+var mGetTableAutoScalingSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableAutoScalingSettingsResponse_keyspaceName, &sGetTableAutoScalingSettingsResponse_tableName, &sGetTableAutoScalingSettingsResponse_resourceArn, &sGetTableAutoScalingSettingsResponse_autoScalingSpecification, &sGetTableAutoScalingSettingsResponse_replicaSpecifications}}
+var mGetTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableRequest_keyspaceName, &sGetTableRequest_tableName}}
+var mGetTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTableResponse_keyspaceName, &sGetTableResponse_tableName, &sGetTableResponse_resourceArn, &sGetTableResponse_creationTimestamp, &sGetTableResponse_status, &sGetTableResponse_schemaDefinition, &sGetTableResponse_capacitySpecification, &sGetTableResponse_encryptionSpecification, &sGetTableResponse_pointInTimeRecovery, &sGetTableResponse_ttl, &sGetTableResponse_defaultTimeToLive, &sGetTableResponse_comment, &sGetTableResponse_clientSideTimestamps, &sGetTableResponse_replicaSpecifications, &sGetTableResponse_latestStreamArn, &sGetTableResponse_cdcSpecification, &sGetTableResponse_warmThroughputSpecification}, Seed: 13, Slots: []uint16{
+	13, 0, 9, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 3, 0, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 15, 0, 6, 5,
+	0, 14, 0, 17, 0, 0, 7, 0, 0, 2, 8, 0, 12, 0, 0, 11,
+}}
+var mGetTypeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTypeRequest_keyspaceName, &sGetTypeRequest_typeName}}
+var mGetTypeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTypeResponse_keyspaceName, &sGetTypeResponse_typeName, &sGetTypeResponse_fieldDefinitions, &sGetTypeResponse_lastModifiedTimestamp, &sGetTypeResponse_status, &sGetTypeResponse_directReferringTables, &sGetTypeResponse_directParentTypes, &sGetTypeResponse_maxNestingDepth, &sGetTypeResponse_keyspaceArn}, Seed: 1, Slots: []uint16{
+	0, 2, 7, 4, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 8, 0, 0, 3, 0, 0, 0, 9, 5, 0,
+	0, 0, 0, 0, 0, 6, 0, 0,
+}}
+var mListKeyspacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListKeyspacesRequest_nextToken, &sListKeyspacesRequest_maxResults}}
+var mListKeyspacesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListKeyspacesResponse_nextToken, &sListKeyspacesResponse_keyspaces}}
+var mListTablesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesRequest_nextToken, &sListTablesRequest_maxResults, &sListTablesRequest_keyspaceName}}
+var mListTablesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTablesResponse_nextToken, &sListTablesResponse_tables}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn, &sListTagsForResourceRequest_nextToken, &sListTagsForResourceRequest_maxResults}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_nextToken, &sListTagsForResourceResponse_tags}}
+var mListTypesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypesRequest_nextToken, &sListTypesRequest_maxResults, &sListTypesRequest_keyspaceName}}
+var mListTypesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTypesResponse_nextToken, &sListTypesResponse_types}}
+var mRestoreTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreTableRequest_sourceKeyspaceName, &sRestoreTableRequest_sourceTableName, &sRestoreTableRequest_targetKeyspaceName, &sRestoreTableRequest_targetTableName, &sRestoreTableRequest_restoreTimestamp, &sRestoreTableRequest_capacitySpecificationOverride, &sRestoreTableRequest_encryptionSpecificationOverride, &sRestoreTableRequest_pointInTimeRecoveryOverride, &sRestoreTableRequest_tagsOverride, &sRestoreTableRequest_autoScalingSpecification, &sRestoreTableRequest_replicaSpecifications}, Seed: 3, Slots: []uint16{
+	10, 0, 0, 1, 11, 9, 3, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0,
+	0, 4, 2, 0, 0, 6, 0, 8,
+}}
+var mRestoreTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreTableResponse_restoredTableARN}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tags}}
+var mUpdateKeyspaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateKeyspaceRequest_keyspaceName, &sUpdateKeyspaceRequest_replicationSpecification, &sUpdateKeyspaceRequest_clientSideTimestamps}}
+var mUpdateKeyspaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateKeyspaceResponse_resourceArn}}
+var mUpdateTableRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableRequest_keyspaceName, &sUpdateTableRequest_tableName, &sUpdateTableRequest_addColumns, &sUpdateTableRequest_capacitySpecification, &sUpdateTableRequest_encryptionSpecification, &sUpdateTableRequest_pointInTimeRecovery, &sUpdateTableRequest_ttl, &sUpdateTableRequest_defaultTimeToLive, &sUpdateTableRequest_clientSideTimestamps, &sUpdateTableRequest_autoScalingSpecification, &sUpdateTableRequest_replicaSpecifications, &sUpdateTableRequest_cdcSpecification, &sUpdateTableRequest_warmThroughputSpecification}, Seed: 65, Slots: []uint16{
+	8, 0, 0, 4, 0, 9, 2, 13, 0, 0, 0, 5, 0, 11, 0, 12, 3, 0, 0, 0, 7, 0, 0, 0,
+	6, 0, 0, 1, 0, 10, 0, 0,
+}}
+var mUpdateTableResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTableResponse_resourceArn}}
+
+var sCreateKeyspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyspace, Type: smithy.ShapeTypeOperation})
+var sCreateTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTable, Type: smithy.ShapeTypeOperation})
+var sCreateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateType, Type: smithy.ShapeTypeOperation})
+var sDeleteKeyspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyspace, Type: smithy.ShapeTypeOperation})
+var sDeleteTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTable, Type: smithy.ShapeTypeOperation})
+var sDeleteType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteType, Type: smithy.ShapeTypeOperation})
+var sGetKeyspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyspace, Type: smithy.ShapeTypeOperation})
+var sGetTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTable, Type: smithy.ShapeTypeOperation})
+var sGetTableAutoScalingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableAutoScalingSettings, Type: smithy.ShapeTypeOperation})
+var sGetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetType, Type: smithy.ShapeTypeOperation})
+var sListKeyspaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyspaces, Type: smithy.ShapeTypeOperation})
+var sListTables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTables, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypes, Type: smithy.ShapeTypeOperation})
+var sRestoreTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreTable, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateKeyspace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeyspace, Type: smithy.ShapeTypeOperation})
+var sUpdateTable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTable, Type: smithy.ShapeTypeOperation})
+var s_KeyspacesService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspacesService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAutoScalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingPolicy, Members: &mAutoScalingPolicy, Type: smithy.ShapeTypeStructure})
+var sAutoScalingSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingSettings, Members: &mAutoScalingSettings, Type: smithy.ShapeTypeStructure})
+var sAutoScalingSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoScalingSpecification, Members: &mAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var s_BooleanObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sCapacitySpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacitySpecification, Members: &mCapacitySpecification, Type: smithy.ShapeTypeStructure})
+var sCapacitySpecificationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacitySpecificationSummary, Members: &mCapacitySpecificationSummary, Type: smithy.ShapeTypeStructure})
+var s_CapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var s_CdcPropagateTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CdcPropagateTags, Type: smithy.ShapeTypeString})
+var sCdcSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCdcSpecification, Members: &mCdcSpecification, Type: smithy.ShapeTypeStructure})
+var sCdcSpecificationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCdcSpecificationSummary, Members: &mCdcSpecificationSummary, Type: smithy.ShapeTypeStructure})
+var s_CdcStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CdcStatus, Type: smithy.ShapeTypeString})
+var sClientSideTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientSideTimestamps, Members: &mClientSideTimestamps, Type: smithy.ShapeTypeStructure})
+var s_ClientSideTimestampsStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientSideTimestampsStatus, Type: smithy.ShapeTypeString})
+var sClusteringKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusteringKey, Members: &mClusteringKey, Type: smithy.ShapeTypeStructure})
+var s_ClusteringKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusteringKeyList, Members: &m_ClusteringKeyList, Type: smithy.ShapeTypeList})
+var sColumnDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iColumnDefinition, Members: &mColumnDefinition, Type: smithy.ShapeTypeStructure})
+var s_ColumnDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ColumnDefinitionList, Members: &m_ColumnDefinitionList, Type: smithy.ShapeTypeList})
+var sComment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_DefaultTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultTimeToLive, Type: smithy.ShapeTypeInteger})
+var s_Depth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Depth, Type: smithy.ShapeTypeInteger})
+var s_DoubleObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleObject, Type: smithy.ShapeTypeDouble})
+var sEncryptionSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionSpecification, Members: &mEncryptionSpecification, Type: smithy.ShapeTypeStructure})
+var s_EncryptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionType, Type: smithy.ShapeTypeString})
+var sFieldDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFieldDefinition, Members: &mFieldDefinition, Type: smithy.ShapeTypeStructure})
+var s_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var s_GenericString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_IntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerObject, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_KeyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var s_KeyspaceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspaceStatus, Type: smithy.ShapeTypeString})
+var sKeyspaceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyspaceSummary, Members: &mKeyspaceSummary, Type: smithy.ShapeTypeStructure})
+var s_KeyspaceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeyspaceSummaryList, Members: &m_KeyspaceSummaryList, Type: smithy.ShapeTypeList})
+var s_kmsKeyARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_kmsKeyARN, Type: smithy.ShapeTypeString})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartitionKey, Members: &mPartitionKey, Type: smithy.ShapeTypeStructure})
+var s_PartitionKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartitionKeyList, Members: &m_PartitionKeyList, Type: smithy.ShapeTypeList})
+var sPointInTimeRecovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPointInTimeRecovery, Members: &mPointInTimeRecovery, Type: smithy.ShapeTypeStructure})
+var s_PointInTimeRecoveryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PointInTimeRecoveryStatus, Type: smithy.ShapeTypeString})
+var sPointInTimeRecoverySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPointInTimeRecoverySummary, Members: &mPointInTimeRecoverySummary, Type: smithy.ShapeTypeStructure})
+var s_region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_region, Type: smithy.ShapeTypeString})
+var s_RegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sReplicaAutoScalingSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicaAutoScalingSpecification, Members: &mReplicaAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var s_ReplicaAutoScalingSpecificationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicaAutoScalingSpecificationList, Members: &m_ReplicaAutoScalingSpecificationList, Type: smithy.ShapeTypeList})
+var sReplicaSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicaSpecification, Members: &mReplicaSpecification, Type: smithy.ShapeTypeStructure})
+var s_ReplicaSpecificationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicaSpecificationList, Members: &m_ReplicaSpecificationList, Type: smithy.ShapeTypeList})
+var sReplicaSpecificationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicaSpecificationSummary, Members: &mReplicaSpecificationSummary, Type: smithy.ShapeTypeStructure})
+var s_ReplicaSpecificationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicaSpecificationSummaryList, Members: &m_ReplicaSpecificationSummaryList, Type: smithy.ShapeTypeList})
+var sReplicationGroupStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationGroupStatus, Members: &mReplicationGroupStatus, Type: smithy.ShapeTypeStructure})
+var s_ReplicationGroupStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReplicationGroupStatusList, Members: &m_ReplicationGroupStatusList, Type: smithy.ShapeTypeList})
+var sReplicationSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReplicationSpecification, Members: &mReplicationSpecification, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_rs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_rs, Type: smithy.ShapeTypeString})
+var sSchemaDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaDefinition, Members: &mSchemaDefinition, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var sStaticColumn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStaticColumn, Members: &mStaticColumn, Type: smithy.ShapeTypeStructure})
+var s_StaticColumnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StaticColumnList, Members: &m_StaticColumnList, Type: smithy.ShapeTypeList})
+var s_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString})
+var s_TableNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableNameList, Members: &m_TableNameList, Type: smithy.ShapeTypeList})
+var s_TablesReplicationProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TablesReplicationProgress, Type: smithy.ShapeTypeString})
+var s_TableStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableStatus, Type: smithy.ShapeTypeString})
+var sTableSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTableSummary, Members: &mTableSummary, Type: smithy.ShapeTypeStructure})
+var s_TableSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableSummaryList, Members: &m_TableSummaryList, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTargetTrackingScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetTrackingScalingPolicyConfiguration, Members: &mTargetTrackingScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ThroughputMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThroughputMode, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeToLive, Members: &mTimeToLive, Type: smithy.ShapeTypeStructure})
+var s_TimeToLiveStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeToLiveStatus, Type: smithy.ShapeTypeString})
+var s_TypeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var s_TypeNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeNameList, Members: &m_TypeNameList, Type: smithy.ShapeTypeList})
+var s_TypeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TypeStatus, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_ViewType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewType, Type: smithy.ShapeTypeString})
+var sWarmThroughputSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarmThroughputSpecification, Members: &mWarmThroughputSpecification, Type: smithy.ShapeTypeStructure})
+var sWarmThroughputSpecificationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWarmThroughputSpecificationSummary, Members: &mWarmThroughputSpecificationSummary, Type: smithy.ShapeTypeStructure})
+var s_WarmThroughputStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WarmThroughputStatus, Type: smithy.ShapeTypeString})
+var sCreateKeyspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyspaceRequest, Members: &mCreateKeyspaceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateKeyspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateKeyspaceResponse, Members: &mCreateKeyspaceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableRequest, Members: &mCreateTableRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTableResponse, Members: &mCreateTableResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTypeRequest, Members: &mCreateTypeRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTypeResponse, Members: &mCreateTypeResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteKeyspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyspaceRequest, Members: &mDeleteKeyspaceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteKeyspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteKeyspaceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableRequest, Members: &mDeleteTableRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTableResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTypeRequest, Members: &mDeleteTypeRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTypeResponse, Members: &mDeleteTypeResponse, Type: smithy.ShapeTypeStructure})
+var sGetKeyspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyspaceRequest, Members: &mGetKeyspaceRequest, Type: smithy.ShapeTypeStructure})
+var sGetKeyspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetKeyspaceResponse, Members: &mGetKeyspaceResponse, Type: smithy.ShapeTypeStructure})
+var sGetTableAutoScalingSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableAutoScalingSettingsRequest, Members: &mGetTableAutoScalingSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetTableAutoScalingSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableAutoScalingSettingsResponse, Members: &mGetTableAutoScalingSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableRequest, Members: &mGetTableRequest, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTableResponse, Members: &mGetTableResponse, Type: smithy.ShapeTypeStructure})
+var sGetTypeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTypeRequest, Members: &mGetTypeRequest, Type: smithy.ShapeTypeStructure})
+var sGetTypeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTypeResponse, Members: &mGetTypeResponse, Type: smithy.ShapeTypeStructure})
+var sListKeyspacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyspacesRequest, Members: &mListKeyspacesRequest, Type: smithy.ShapeTypeStructure})
+var sListKeyspacesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListKeyspacesResponse, Members: &mListKeyspacesResponse, Type: smithy.ShapeTypeStructure})
+var sListTablesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesRequest, Members: &mListTablesRequest, Type: smithy.ShapeTypeStructure})
+var sListTablesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTablesResponse, Members: &mListTablesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListTypesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypesRequest, Members: &mListTypesRequest, Type: smithy.ShapeTypeStructure})
+var sListTypesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTypesResponse, Members: &mListTypesResponse, Type: smithy.ShapeTypeStructure})
+var sRestoreTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreTableRequest, Members: &mRestoreTableRequest, Type: smithy.ShapeTypeStructure})
+var sRestoreTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreTableResponse, Members: &mRestoreTableResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateKeyspaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeyspaceRequest, Members: &mUpdateKeyspaceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateKeyspaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateKeyspaceResponse, Members: &mUpdateKeyspaceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableRequest, Members: &mUpdateTableRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateTableResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTableResponse, Members: &mUpdateTableResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAutoScalingPolicy_targetTrackingScalingPolicyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetTrackingScalingPolicyConfiguration", ID: &iTargetTrackingScalingPolicyConfiguration, Members: &mTargetTrackingScalingPolicyConfiguration, Type: smithy.ShapeTypeStructure})
+var sAutoScalingSettings_autoScalingDisabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScalingDisabled", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sAutoScalingSettings_minimumUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var sAutoScalingSettings_maximumUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var sAutoScalingSettings_scalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingPolicy", ID: &iAutoScalingPolicy, Members: &mAutoScalingPolicy, Type: smithy.ShapeTypeStructure})
+var sAutoScalingSpecification_writeCapacityAutoScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeCapacityAutoScaling", ID: &iAutoScalingSettings, Members: &mAutoScalingSettings, Type: smithy.ShapeTypeStructure})
+var sAutoScalingSpecification_readCapacityAutoScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readCapacityAutoScaling", ID: &iAutoScalingSettings, Members: &mAutoScalingSettings, Type: smithy.ShapeTypeStructure})
+var sCapacitySpecification_throughputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throughputMode", ID: &i_ThroughputMode, Type: smithy.ShapeTypeString})
+var sCapacitySpecification_readCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readCapacityUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var sCapacitySpecification_writeCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeCapacityUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var sCapacitySpecificationSummary_throughputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throughputMode", ID: &i_ThroughputMode, Type: smithy.ShapeTypeString})
+var sCapacitySpecificationSummary_readCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readCapacityUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var sCapacitySpecificationSummary_writeCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeCapacityUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var sCapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdateToPayPerRequestTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCdcSpecification_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CdcStatus, Type: smithy.ShapeTypeString})
+var sCdcSpecification_viewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewType", ID: &i_ViewType, Type: smithy.ShapeTypeString})
+var sCdcSpecification_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCdcSpecification_propagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propagateTags", ID: &i_CdcPropagateTags, Type: smithy.ShapeTypeString})
+var sCdcSpecificationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_CdcStatus, Type: smithy.ShapeTypeString})
+var sCdcSpecificationSummary_viewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "viewType", ID: &i_ViewType, Type: smithy.ShapeTypeString})
+var sClientSideTimestamps_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ClientSideTimestampsStatus, Type: smithy.ShapeTypeString})
+var sClusteringKey_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sClusteringKey_orderBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "orderBy", ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var s_ClusteringKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusteringKey, Members: &mClusteringKey, Type: smithy.ShapeTypeStructure})
+var sColumnDefinition_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sColumnDefinition_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_ColumnDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iColumnDefinition, Members: &mColumnDefinition, Type: smithy.ShapeTypeStructure})
+var sComment_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sEncryptionSpecification_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_EncryptionType, Type: smithy.ShapeTypeString})
+var sEncryptionSpecification_kmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyIdentifier", ID: &i_kmsKeyARN, Type: smithy.ShapeTypeString})
+var sFieldDefinition_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var sFieldDefinition_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_FieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFieldDefinition, Members: &mFieldDefinition, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sKeyspaceSummary_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sKeyspaceSummary_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sKeyspaceSummary_replicationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationStrategy", ID: &i_rs, Type: smithy.ShapeTypeString})
+var sKeyspaceSummary_replicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationRegions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var s_KeyspaceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyspaceSummary, Members: &mKeyspaceSummary, Type: smithy.ShapeTypeStructure})
+var sPartitionKey_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_PartitionKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPartitionKey, Members: &mPartitionKey, Type: smithy.ShapeTypeStructure})
+var sPointInTimeRecovery_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_PointInTimeRecoveryStatus, Type: smithy.ShapeTypeString})
+var sPointInTimeRecoverySummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_PointInTimeRecoveryStatus, Type: smithy.ShapeTypeString})
+var sPointInTimeRecoverySummary_earliestRestorableTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "earliestRestorableTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_RegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_region, Type: smithy.ShapeTypeString})
+var sReplicaAutoScalingSpecification_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString})
+var sReplicaAutoScalingSpecification_autoScalingSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScalingSpecification", ID: &iAutoScalingSpecification, Members: &mAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var s_ReplicaAutoScalingSpecificationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicaAutoScalingSpecification, Members: &mReplicaAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var sReplicaSpecification_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString})
+var sReplicaSpecification_readCapacityUnits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readCapacityUnits", ID: &i_CapacityUnits, Type: smithy.ShapeTypeLong})
+var sReplicaSpecification_readCapacityAutoScaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readCapacityAutoScaling", ID: &iAutoScalingSettings, Members: &mAutoScalingSettings, Type: smithy.ShapeTypeStructure})
+var s_ReplicaSpecificationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicaSpecification, Members: &mReplicaSpecification, Type: smithy.ShapeTypeStructure})
+var sReplicaSpecificationSummary_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString})
+var sReplicaSpecificationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TableStatus, Type: smithy.ShapeTypeString})
+var sReplicaSpecificationSummary_capacitySpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacitySpecification", ID: &iCapacitySpecificationSummary, Members: &mCapacitySpecificationSummary, Type: smithy.ShapeTypeStructure})
+var sReplicaSpecificationSummary_warmThroughputSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warmThroughputSpecification", ID: &iWarmThroughputSpecificationSummary, Members: &mWarmThroughputSpecificationSummary, Type: smithy.ShapeTypeStructure})
+var s_ReplicaSpecificationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicaSpecificationSummary, Members: &mReplicaSpecificationSummary, Type: smithy.ShapeTypeStructure})
+var sReplicationGroupStatus_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_region, Type: smithy.ShapeTypeString})
+var sReplicationGroupStatus_keyspaceStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceStatus", ID: &i_KeyspaceStatus, Type: smithy.ShapeTypeString})
+var sReplicationGroupStatus_tablesReplicationProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tablesReplicationProgress", ID: &i_TablesReplicationProgress, Type: smithy.ShapeTypeString})
+var s_ReplicationGroupStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReplicationGroupStatus, Members: &mReplicationGroupStatus, Type: smithy.ShapeTypeStructure})
+var sReplicationSpecification_replicationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationStrategy", ID: &i_rs, Type: smithy.ShapeTypeString})
+var sReplicationSpecification_regionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "regionList", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sSchemaDefinition_allColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allColumns", ID: &i_ColumnDefinitionList, Members: &m_ColumnDefinitionList, Type: smithy.ShapeTypeList})
+var sSchemaDefinition_partitionKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partitionKeys", ID: &i_PartitionKeyList, Members: &m_PartitionKeyList, Type: smithy.ShapeTypeList})
+var sSchemaDefinition_clusteringKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusteringKeys", ID: &i_ClusteringKeyList, Members: &m_ClusteringKeyList, Type: smithy.ShapeTypeList})
+var sSchemaDefinition_staticColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "staticColumns", ID: &i_StaticColumnList, Members: &m_StaticColumnList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStaticColumn_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_GenericString, Type: smithy.ShapeTypeString})
+var s_StaticColumnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStaticColumn, Members: &mStaticColumn, Type: smithy.ShapeTypeStructure})
+var s_TableNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sTableSummary_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sTableSummary_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sTableSummary_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var s_TableSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTableSummary, Members: &mTableSummary, Type: smithy.ShapeTypeStructure})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTargetTrackingScalingPolicyConfiguration_disableScaleIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disableScaleIn", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sTargetTrackingScalingPolicyConfiguration_scaleInCooldown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleInCooldown", ID: &i_IntegerObject, Type: smithy.ShapeTypeInteger})
+var sTargetTrackingScalingPolicyConfiguration_scaleOutCooldown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleOutCooldown", ID: &i_IntegerObject, Type: smithy.ShapeTypeInteger})
+var sTargetTrackingScalingPolicyConfiguration_targetValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetValue", ID: &i_DoubleObject, Type: smithy.ShapeTypeDouble})
+var sTimeToLive_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TimeToLiveStatus, Type: smithy.ShapeTypeString})
+var s_TypeNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sWarmThroughputSpecification_readUnitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readUnitsPerSecond", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sWarmThroughputSpecification_writeUnitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeUnitsPerSecond", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sWarmThroughputSpecificationSummary_readUnitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readUnitsPerSecond", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sWarmThroughputSpecificationSummary_writeUnitsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "writeUnitsPerSecond", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sWarmThroughputSpecificationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_WarmThroughputStatus, Type: smithy.ShapeTypeString})
+var sCreateKeyspaceRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sCreateKeyspaceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateKeyspaceRequest_replicationSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationSpecification", ID: &iReplicationSpecification, Members: &mReplicationSpecification, Type: smithy.ShapeTypeStructure})
+var sCreateKeyspaceResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateTableRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sCreateTableRequest_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sCreateTableRequest_schemaDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaDefinition", ID: &iSchemaDefinition, Members: &mSchemaDefinition, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_capacitySpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacitySpecification", ID: &iCapacitySpecification, Members: &mCapacitySpecification, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_encryptionSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionSpecification", ID: &iEncryptionSpecification, Members: &mEncryptionSpecification, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_pointInTimeRecovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pointInTimeRecovery", ID: &iPointInTimeRecovery, Members: &mPointInTimeRecovery, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &iTimeToLive, Members: &mTimeToLive, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_defaultTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTimeToLive", ID: &i_DefaultTimeToLive, Type: smithy.ShapeTypeInteger})
+var sCreateTableRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateTableRequest_clientSideTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSideTimestamps", ID: &iClientSideTimestamps, Members: &mClientSideTimestamps, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_autoScalingSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScalingSpecification", ID: &iAutoScalingSpecification, Members: &mAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_replicaSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicaSpecifications", ID: &i_ReplicaSpecificationList, Members: &m_ReplicaSpecificationList, Type: smithy.ShapeTypeList})
+var sCreateTableRequest_cdcSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cdcSpecification", ID: &iCdcSpecification, Members: &mCdcSpecification, Type: smithy.ShapeTypeStructure})
+var sCreateTableRequest_warmThroughputSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warmThroughputSpecification", ID: &iWarmThroughputSpecification, Members: &mWarmThroughputSpecification, Type: smithy.ShapeTypeStructure})
+var sCreateTableResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateTypeRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sCreateTypeRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sCreateTypeRequest_fieldDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldDefinitions", ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var sCreateTypeResponse_keyspaceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sCreateTypeResponse_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sDeleteKeyspaceRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sDeleteTableRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sDeleteTableRequest_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sDeleteTypeRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sDeleteTypeRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sDeleteTypeResponse_keyspaceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDeleteTypeResponse_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sGetKeyspaceRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetKeyspaceResponse_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetKeyspaceResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sGetKeyspaceResponse_replicationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationStrategy", ID: &i_rs, Type: smithy.ShapeTypeString})
+var sGetKeyspaceResponse_replicationRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationRegions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sGetKeyspaceResponse_replicationGroupStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationGroupStatuses", ID: &i_ReplicationGroupStatusList, Members: &m_ReplicationGroupStatusList, Type: smithy.ShapeTypeList})
+var sGetTableAutoScalingSettingsRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetTableAutoScalingSettingsRequest_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sGetTableAutoScalingSettingsResponse_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetTableAutoScalingSettingsResponse_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sGetTableAutoScalingSettingsResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sGetTableAutoScalingSettingsResponse_autoScalingSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScalingSpecification", ID: &iAutoScalingSpecification, Members: &mAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var sGetTableAutoScalingSettingsResponse_replicaSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicaSpecifications", ID: &i_ReplicaAutoScalingSpecificationList, Members: &m_ReplicaAutoScalingSpecificationList, Type: smithy.ShapeTypeList})
+var sGetTableRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetTableRequest_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sGetTableResponse_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetTableResponse_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sGetTableResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sGetTableResponse_creationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetTableResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TableStatus, Type: smithy.ShapeTypeString})
+var sGetTableResponse_schemaDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schemaDefinition", ID: &iSchemaDefinition, Members: &mSchemaDefinition, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_capacitySpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacitySpecification", ID: &iCapacitySpecificationSummary, Members: &mCapacitySpecificationSummary, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_encryptionSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionSpecification", ID: &iEncryptionSpecification, Members: &mEncryptionSpecification, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_pointInTimeRecovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pointInTimeRecovery", ID: &iPointInTimeRecoverySummary, Members: &mPointInTimeRecoverySummary, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &iTimeToLive, Members: &mTimeToLive, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_defaultTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTimeToLive", ID: &i_DefaultTimeToLive, Type: smithy.ShapeTypeInteger})
+var sGetTableResponse_comment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comment", ID: &iComment, Members: &mComment, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_clientSideTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSideTimestamps", ID: &iClientSideTimestamps, Members: &mClientSideTimestamps, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_replicaSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicaSpecifications", ID: &i_ReplicaSpecificationSummaryList, Members: &m_ReplicaSpecificationSummaryList, Type: smithy.ShapeTypeList})
+var sGetTableResponse_latestStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestStreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var sGetTableResponse_cdcSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cdcSpecification", ID: &iCdcSpecificationSummary, Members: &mCdcSpecificationSummary, Type: smithy.ShapeTypeStructure})
+var sGetTableResponse_warmThroughputSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warmThroughputSpecification", ID: &iWarmThroughputSpecificationSummary, Members: &mWarmThroughputSpecificationSummary, Type: smithy.ShapeTypeStructure})
+var sGetTypeRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetTypeRequest_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sGetTypeResponse_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sGetTypeResponse_typeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "typeName", ID: &i_TypeName, Type: smithy.ShapeTypeString})
+var sGetTypeResponse_fieldDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldDefinitions", ID: &i_FieldList, Members: &m_FieldList, Type: smithy.ShapeTypeList})
+var sGetTypeResponse_lastModifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetTypeResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TypeStatus, Type: smithy.ShapeTypeString})
+var sGetTypeResponse_directReferringTables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directReferringTables", ID: &i_TableNameList, Members: &m_TableNameList, Type: smithy.ShapeTypeList})
+var sGetTypeResponse_directParentTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directParentTypes", ID: &i_TypeNameList, Members: &m_TypeNameList, Type: smithy.ShapeTypeList})
+var sGetTypeResponse_maxNestingDepth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxNestingDepth", ID: &i_Depth, Type: smithy.ShapeTypeInteger})
+var sGetTypeResponse_keyspaceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sListKeyspacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListKeyspacesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListKeyspacesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListKeyspacesResponse_keyspaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaces", ID: &i_KeyspaceSummaryList, Members: &m_KeyspaceSummaryList, Type: smithy.ShapeTypeList})
+var sListTablesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTablesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTablesRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sListTablesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTablesResponse_tables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tables", ID: &i_TableSummaryList, Members: &m_TableSummaryList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListTypesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTypesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTypesRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sListTypesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTypesResponse_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &i_TypeNameList, Members: &m_TypeNameList, Type: smithy.ShapeTypeList})
+var sRestoreTableRequest_sourceKeyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceKeyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sRestoreTableRequest_sourceTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceTableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sRestoreTableRequest_targetKeyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetKeyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sRestoreTableRequest_targetTableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetTableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sRestoreTableRequest_restoreTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restoreTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRestoreTableRequest_capacitySpecificationOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacitySpecificationOverride", ID: &iCapacitySpecification, Members: &mCapacitySpecification, Type: smithy.ShapeTypeStructure})
+var sRestoreTableRequest_encryptionSpecificationOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionSpecificationOverride", ID: &iEncryptionSpecification, Members: &mEncryptionSpecification, Type: smithy.ShapeTypeStructure})
+var sRestoreTableRequest_pointInTimeRecoveryOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pointInTimeRecoveryOverride", ID: &iPointInTimeRecovery, Members: &mPointInTimeRecovery, Type: smithy.ShapeTypeStructure})
+var sRestoreTableRequest_tagsOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagsOverride", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sRestoreTableRequest_autoScalingSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScalingSpecification", ID: &iAutoScalingSpecification, Members: &mAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var sRestoreTableRequest_replicaSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicaSpecifications", ID: &i_ReplicaSpecificationList, Members: &m_ReplicaSpecificationList, Type: smithy.ShapeTypeList})
+var sRestoreTableResponse_restoredTableARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restoredTableARN", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUpdateKeyspaceRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sUpdateKeyspaceRequest_replicationSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicationSpecification", ID: &iReplicationSpecification, Members: &mReplicationSpecification, Type: smithy.ShapeTypeStructure})
+var sUpdateKeyspaceRequest_clientSideTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSideTimestamps", ID: &iClientSideTimestamps, Members: &mClientSideTimestamps, Type: smithy.ShapeTypeStructure})
+var sUpdateKeyspaceResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sUpdateTableRequest_keyspaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "keyspaceName", ID: &i_KeyspaceName, Type: smithy.ShapeTypeString})
+var sUpdateTableRequest_tableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sUpdateTableRequest_addColumns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addColumns", ID: &i_ColumnDefinitionList, Members: &m_ColumnDefinitionList, Type: smithy.ShapeTypeList})
+var sUpdateTableRequest_capacitySpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacitySpecification", ID: &iCapacitySpecification, Members: &mCapacitySpecification, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest_encryptionSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionSpecification", ID: &iEncryptionSpecification, Members: &mEncryptionSpecification, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest_pointInTimeRecovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pointInTimeRecovery", ID: &iPointInTimeRecovery, Members: &mPointInTimeRecovery, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest_ttl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ttl", ID: &iTimeToLive, Members: &mTimeToLive, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest_defaultTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "defaultTimeToLive", ID: &i_DefaultTimeToLive, Type: smithy.ShapeTypeInteger})
+var sUpdateTableRequest_clientSideTimestamps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientSideTimestamps", ID: &iClientSideTimestamps, Members: &mClientSideTimestamps, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest_autoScalingSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoScalingSpecification", ID: &iAutoScalingSpecification, Members: &mAutoScalingSpecification, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest_replicaSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{Member: "replicaSpecifications", ID: &i_ReplicaSpecificationList, Members: &m_ReplicaSpecificationList, Type: smithy.ShapeTypeList})
+var sUpdateTableRequest_cdcSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cdcSpecification", ID: &iCdcSpecification, Members: &mCdcSpecification, Type: smithy.ShapeTypeStructure})
+var sUpdateTableRequest_warmThroughputSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "warmThroughputSpecification", ID: &iWarmThroughputSpecification, Members: &mWarmThroughputSpecification, Type: smithy.ShapeTypeStructure})
+var sUpdateTableResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+
+var CreateKeyspace = &sCreateKeyspace
+
+var CreateTable = &sCreateTable
+
+var CreateType = &sCreateType
+
+var DeleteKeyspace = &sDeleteKeyspace
+
+var DeleteTable = &sDeleteTable
+
+var DeleteType = &sDeleteType
+
+var GetKeyspace = &sGetKeyspace
+
+var GetTable = &sGetTable
+
+var GetTableAutoScalingSettings = &sGetTableAutoScalingSettings
+
+var GetType = &sGetType
+
+var ListKeyspaces = &sListKeyspaces
+
+var ListTables = &sListTables
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListTypes = &sListTypes
+
+var RestoreTable = &sRestoreTable
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateKeyspace = &sUpdateKeyspace
+
+var UpdateTable = &sUpdateTable
+
+var _KeyspacesService = &s_KeyspacesService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _ARN = &s_ARN
+
+var AutoScalingPolicy = &sAutoScalingPolicy
+var AutoScalingPolicy_targetTrackingScalingPolicyConfiguration = &sAutoScalingPolicy_targetTrackingScalingPolicyConfiguration
+
+var AutoScalingSettings = &sAutoScalingSettings
+var AutoScalingSettings_autoScalingDisabled = &sAutoScalingSettings_autoScalingDisabled
+var AutoScalingSettings_minimumUnits = &sAutoScalingSettings_minimumUnits
+var AutoScalingSettings_maximumUnits = &sAutoScalingSettings_maximumUnits
+var AutoScalingSettings_scalingPolicy = &sAutoScalingSettings_scalingPolicy
+
+var AutoScalingSpecification = &sAutoScalingSpecification
+var AutoScalingSpecification_writeCapacityAutoScaling = &sAutoScalingSpecification_writeCapacityAutoScaling
+var AutoScalingSpecification_readCapacityAutoScaling = &sAutoScalingSpecification_readCapacityAutoScaling
+
+var _BooleanObject = &s_BooleanObject
+
+var CapacitySpecification = &sCapacitySpecification
+var CapacitySpecification_throughputMode = &sCapacitySpecification_throughputMode
+var CapacitySpecification_readCapacityUnits = &sCapacitySpecification_readCapacityUnits
+var CapacitySpecification_writeCapacityUnits = &sCapacitySpecification_writeCapacityUnits
+
+var CapacitySpecificationSummary = &sCapacitySpecificationSummary
+var CapacitySpecificationSummary_throughputMode = &sCapacitySpecificationSummary_throughputMode
+var CapacitySpecificationSummary_readCapacityUnits = &sCapacitySpecificationSummary_readCapacityUnits
+var CapacitySpecificationSummary_writeCapacityUnits = &sCapacitySpecificationSummary_writeCapacityUnits
+var CapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp = &sCapacitySpecificationSummary_lastUpdateToPayPerRequestTimestamp
+
+var _CapacityUnits = &s_CapacityUnits
+
+var _CdcPropagateTags = &s_CdcPropagateTags
+
+var CdcSpecification = &sCdcSpecification
+var CdcSpecification_status = &sCdcSpecification_status
+var CdcSpecification_viewType = &sCdcSpecification_viewType
+var CdcSpecification_tags = &sCdcSpecification_tags
+var CdcSpecification_propagateTags = &sCdcSpecification_propagateTags
+
+var CdcSpecificationSummary = &sCdcSpecificationSummary
+var CdcSpecificationSummary_status = &sCdcSpecificationSummary_status
+var CdcSpecificationSummary_viewType = &sCdcSpecificationSummary_viewType
+
+var _CdcStatus = &s_CdcStatus
+
+var ClientSideTimestamps = &sClientSideTimestamps
+var ClientSideTimestamps_status = &sClientSideTimestamps_status
+
+var _ClientSideTimestampsStatus = &s_ClientSideTimestampsStatus
+
+var ClusteringKey = &sClusteringKey
+var ClusteringKey_name = &sClusteringKey_name
+var ClusteringKey_orderBy = &sClusteringKey_orderBy
+
+var _ClusteringKeyList = &s_ClusteringKeyList
+var _ClusteringKeyList_member = &s_ClusteringKeyList_member
+
+var ColumnDefinition = &sColumnDefinition
+var ColumnDefinition_name = &sColumnDefinition_name
+var ColumnDefinition_type = &sColumnDefinition_type
+
+var _ColumnDefinitionList = &s_ColumnDefinitionList
+var _ColumnDefinitionList_member = &s_ColumnDefinitionList_member
+
+var Comment = &sComment
+var Comment_message = &sComment_message
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _DefaultTimeToLive = &s_DefaultTimeToLive
+
+var _Depth = &s_Depth
+
+var _DoubleObject = &s_DoubleObject
+
+var EncryptionSpecification = &sEncryptionSpecification
+var EncryptionSpecification_type = &sEncryptionSpecification_type
+var EncryptionSpecification_kmsKeyIdentifier = &sEncryptionSpecification_kmsKeyIdentifier
+
+var _EncryptionType = &s_EncryptionType
+
+var FieldDefinition = &sFieldDefinition
+var FieldDefinition_name = &sFieldDefinition_name
+var FieldDefinition_type = &sFieldDefinition_type
+
+var _FieldList = &s_FieldList
+var _FieldList_member = &s_FieldList_member
+
+var _GenericString = &s_GenericString
+
+var _IntegerObject = &s_IntegerObject
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _KeyspaceName = &s_KeyspaceName
+
+var _KeyspaceStatus = &s_KeyspaceStatus
+
+var KeyspaceSummary = &sKeyspaceSummary
+var KeyspaceSummary_keyspaceName = &sKeyspaceSummary_keyspaceName
+var KeyspaceSummary_resourceArn = &sKeyspaceSummary_resourceArn
+var KeyspaceSummary_replicationStrategy = &sKeyspaceSummary_replicationStrategy
+var KeyspaceSummary_replicationRegions = &sKeyspaceSummary_replicationRegions
+
+var _KeyspaceSummaryList = &s_KeyspaceSummaryList
+var _KeyspaceSummaryList_member = &s_KeyspaceSummaryList_member
+
+var _kmsKeyARN = &s_kmsKeyARN
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var PartitionKey = &sPartitionKey
+var PartitionKey_name = &sPartitionKey_name
+
+var _PartitionKeyList = &s_PartitionKeyList
+var _PartitionKeyList_member = &s_PartitionKeyList_member
+
+var PointInTimeRecovery = &sPointInTimeRecovery
+var PointInTimeRecovery_status = &sPointInTimeRecovery_status
+
+var _PointInTimeRecoveryStatus = &s_PointInTimeRecoveryStatus
+
+var PointInTimeRecoverySummary = &sPointInTimeRecoverySummary
+var PointInTimeRecoverySummary_status = &sPointInTimeRecoverySummary_status
+var PointInTimeRecoverySummary_earliestRestorableTimestamp = &sPointInTimeRecoverySummary_earliestRestorableTimestamp
+
+var _region = &s_region
+
+var _RegionList = &s_RegionList
+var _RegionList_member = &s_RegionList_member
+
+var ReplicaAutoScalingSpecification = &sReplicaAutoScalingSpecification
+var ReplicaAutoScalingSpecification_region = &sReplicaAutoScalingSpecification_region
+var ReplicaAutoScalingSpecification_autoScalingSpecification = &sReplicaAutoScalingSpecification_autoScalingSpecification
+
+var _ReplicaAutoScalingSpecificationList = &s_ReplicaAutoScalingSpecificationList
+var _ReplicaAutoScalingSpecificationList_member = &s_ReplicaAutoScalingSpecificationList_member
+
+var ReplicaSpecification = &sReplicaSpecification
+var ReplicaSpecification_region = &sReplicaSpecification_region
+var ReplicaSpecification_readCapacityUnits = &sReplicaSpecification_readCapacityUnits
+var ReplicaSpecification_readCapacityAutoScaling = &sReplicaSpecification_readCapacityAutoScaling
+
+var _ReplicaSpecificationList = &s_ReplicaSpecificationList
+var _ReplicaSpecificationList_member = &s_ReplicaSpecificationList_member
+
+var ReplicaSpecificationSummary = &sReplicaSpecificationSummary
+var ReplicaSpecificationSummary_region = &sReplicaSpecificationSummary_region
+var ReplicaSpecificationSummary_status = &sReplicaSpecificationSummary_status
+var ReplicaSpecificationSummary_capacitySpecification = &sReplicaSpecificationSummary_capacitySpecification
+var ReplicaSpecificationSummary_warmThroughputSpecification = &sReplicaSpecificationSummary_warmThroughputSpecification
+
+var _ReplicaSpecificationSummaryList = &s_ReplicaSpecificationSummaryList
+var _ReplicaSpecificationSummaryList_member = &s_ReplicaSpecificationSummaryList_member
+
+var ReplicationGroupStatus = &sReplicationGroupStatus
+var ReplicationGroupStatus_region = &sReplicationGroupStatus_region
+var ReplicationGroupStatus_keyspaceStatus = &sReplicationGroupStatus_keyspaceStatus
+var ReplicationGroupStatus_tablesReplicationProgress = &sReplicationGroupStatus_tablesReplicationProgress
+
+var _ReplicationGroupStatusList = &s_ReplicationGroupStatusList
+var _ReplicationGroupStatusList_member = &s_ReplicationGroupStatusList_member
+
+var ReplicationSpecification = &sReplicationSpecification
+var ReplicationSpecification_replicationStrategy = &sReplicationSpecification_replicationStrategy
+var ReplicationSpecification_regionList = &sReplicationSpecification_regionList
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceArn = &sResourceNotFoundException_resourceArn
+
+var _rs = &s_rs
+
+var SchemaDefinition = &sSchemaDefinition
+var SchemaDefinition_allColumns = &sSchemaDefinition_allColumns
+var SchemaDefinition_partitionKeys = &sSchemaDefinition_partitionKeys
+var SchemaDefinition_clusteringKeys = &sSchemaDefinition_clusteringKeys
+var SchemaDefinition_staticColumns = &sSchemaDefinition_staticColumns
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _SortOrder = &s_SortOrder
+
+var StaticColumn = &sStaticColumn
+var StaticColumn_name = &sStaticColumn_name
+
+var _StaticColumnList = &s_StaticColumnList
+var _StaticColumnList_member = &s_StaticColumnList_member
+
+var _StreamArn = &s_StreamArn
+
+var _TableName = &s_TableName
+
+var _TableNameList = &s_TableNameList
+var _TableNameList_member = &s_TableNameList_member
+
+var _TablesReplicationProgress = &s_TablesReplicationProgress
+
+var _TableStatus = &s_TableStatus
+
+var TableSummary = &sTableSummary
+var TableSummary_keyspaceName = &sTableSummary_keyspaceName
+var TableSummary_tableName = &sTableSummary_tableName
+var TableSummary_resourceArn = &sTableSummary_resourceArn
+
+var _TableSummaryList = &s_TableSummaryList
+var _TableSummaryList_member = &s_TableSummaryList_member
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TargetTrackingScalingPolicyConfiguration = &sTargetTrackingScalingPolicyConfiguration
+var TargetTrackingScalingPolicyConfiguration_disableScaleIn = &sTargetTrackingScalingPolicyConfiguration_disableScaleIn
+var TargetTrackingScalingPolicyConfiguration_scaleInCooldown = &sTargetTrackingScalingPolicyConfiguration_scaleInCooldown
+var TargetTrackingScalingPolicyConfiguration_scaleOutCooldown = &sTargetTrackingScalingPolicyConfiguration_scaleOutCooldown
+var TargetTrackingScalingPolicyConfiguration_targetValue = &sTargetTrackingScalingPolicyConfiguration_targetValue
+
+var _ThroughputMode = &s_ThroughputMode
+
+var _Timestamp = &s_Timestamp
+
+var TimeToLive = &sTimeToLive
+var TimeToLive_status = &sTimeToLive_status
+
+var _TimeToLiveStatus = &s_TimeToLiveStatus
+
+var _TypeName = &s_TypeName
+
+var _TypeNameList = &s_TypeNameList
+var _TypeNameList_member = &s_TypeNameList_member
+
+var _TypeStatus = &s_TypeStatus
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _ViewType = &s_ViewType
+
+var WarmThroughputSpecification = &sWarmThroughputSpecification
+var WarmThroughputSpecification_readUnitsPerSecond = &sWarmThroughputSpecification_readUnitsPerSecond
+var WarmThroughputSpecification_writeUnitsPerSecond = &sWarmThroughputSpecification_writeUnitsPerSecond
+
+var WarmThroughputSpecificationSummary = &sWarmThroughputSpecificationSummary
+var WarmThroughputSpecificationSummary_readUnitsPerSecond = &sWarmThroughputSpecificationSummary_readUnitsPerSecond
+var WarmThroughputSpecificationSummary_writeUnitsPerSecond = &sWarmThroughputSpecificationSummary_writeUnitsPerSecond
+var WarmThroughputSpecificationSummary_status = &sWarmThroughputSpecificationSummary_status
+
+var _WarmThroughputStatus = &s_WarmThroughputStatus
+
+var CreateKeyspaceRequest = &sCreateKeyspaceRequest
+var CreateKeyspaceRequest_keyspaceName = &sCreateKeyspaceRequest_keyspaceName
+var CreateKeyspaceRequest_tags = &sCreateKeyspaceRequest_tags
+var CreateKeyspaceRequest_replicationSpecification = &sCreateKeyspaceRequest_replicationSpecification
+
+var CreateKeyspaceResponse = &sCreateKeyspaceResponse
+var CreateKeyspaceResponse_resourceArn = &sCreateKeyspaceResponse_resourceArn
+
+var CreateTableRequest = &sCreateTableRequest
+var CreateTableRequest_keyspaceName = &sCreateTableRequest_keyspaceName
+var CreateTableRequest_tableName = &sCreateTableRequest_tableName
+var CreateTableRequest_schemaDefinition = &sCreateTableRequest_schemaDefinition
+var CreateTableRequest_comment = &sCreateTableRequest_comment
+var CreateTableRequest_capacitySpecification = &sCreateTableRequest_capacitySpecification
+var CreateTableRequest_encryptionSpecification = &sCreateTableRequest_encryptionSpecification
+var CreateTableRequest_pointInTimeRecovery = &sCreateTableRequest_pointInTimeRecovery
+var CreateTableRequest_ttl = &sCreateTableRequest_ttl
+var CreateTableRequest_defaultTimeToLive = &sCreateTableRequest_defaultTimeToLive
+var CreateTableRequest_tags = &sCreateTableRequest_tags
+var CreateTableRequest_clientSideTimestamps = &sCreateTableRequest_clientSideTimestamps
+var CreateTableRequest_autoScalingSpecification = &sCreateTableRequest_autoScalingSpecification
+var CreateTableRequest_replicaSpecifications = &sCreateTableRequest_replicaSpecifications
+var CreateTableRequest_cdcSpecification = &sCreateTableRequest_cdcSpecification
+var CreateTableRequest_warmThroughputSpecification = &sCreateTableRequest_warmThroughputSpecification
+
+var CreateTableResponse = &sCreateTableResponse
+var CreateTableResponse_resourceArn = &sCreateTableResponse_resourceArn
+
+var CreateTypeRequest = &sCreateTypeRequest
+var CreateTypeRequest_keyspaceName = &sCreateTypeRequest_keyspaceName
+var CreateTypeRequest_typeName = &sCreateTypeRequest_typeName
+var CreateTypeRequest_fieldDefinitions = &sCreateTypeRequest_fieldDefinitions
+
+var CreateTypeResponse = &sCreateTypeResponse
+var CreateTypeResponse_keyspaceArn = &sCreateTypeResponse_keyspaceArn
+var CreateTypeResponse_typeName = &sCreateTypeResponse_typeName
+
+var DeleteKeyspaceRequest = &sDeleteKeyspaceRequest
+var DeleteKeyspaceRequest_keyspaceName = &sDeleteKeyspaceRequest_keyspaceName
+
+var DeleteKeyspaceResponse = &sDeleteKeyspaceResponse
+
+var DeleteTableRequest = &sDeleteTableRequest
+var DeleteTableRequest_keyspaceName = &sDeleteTableRequest_keyspaceName
+var DeleteTableRequest_tableName = &sDeleteTableRequest_tableName
+
+var DeleteTableResponse = &sDeleteTableResponse
+
+var DeleteTypeRequest = &sDeleteTypeRequest
+var DeleteTypeRequest_keyspaceName = &sDeleteTypeRequest_keyspaceName
+var DeleteTypeRequest_typeName = &sDeleteTypeRequest_typeName
+
+var DeleteTypeResponse = &sDeleteTypeResponse
+var DeleteTypeResponse_keyspaceArn = &sDeleteTypeResponse_keyspaceArn
+var DeleteTypeResponse_typeName = &sDeleteTypeResponse_typeName
+
+var GetKeyspaceRequest = &sGetKeyspaceRequest
+var GetKeyspaceRequest_keyspaceName = &sGetKeyspaceRequest_keyspaceName
+
+var GetKeyspaceResponse = &sGetKeyspaceResponse
+var GetKeyspaceResponse_keyspaceName = &sGetKeyspaceResponse_keyspaceName
+var GetKeyspaceResponse_resourceArn = &sGetKeyspaceResponse_resourceArn
+var GetKeyspaceResponse_replicationStrategy = &sGetKeyspaceResponse_replicationStrategy
+var GetKeyspaceResponse_replicationRegions = &sGetKeyspaceResponse_replicationRegions
+var GetKeyspaceResponse_replicationGroupStatuses = &sGetKeyspaceResponse_replicationGroupStatuses
+
+var GetTableAutoScalingSettingsRequest = &sGetTableAutoScalingSettingsRequest
+var GetTableAutoScalingSettingsRequest_keyspaceName = &sGetTableAutoScalingSettingsRequest_keyspaceName
+var GetTableAutoScalingSettingsRequest_tableName = &sGetTableAutoScalingSettingsRequest_tableName
+
+var GetTableAutoScalingSettingsResponse = &sGetTableAutoScalingSettingsResponse
+var GetTableAutoScalingSettingsResponse_keyspaceName = &sGetTableAutoScalingSettingsResponse_keyspaceName
+var GetTableAutoScalingSettingsResponse_tableName = &sGetTableAutoScalingSettingsResponse_tableName
+var GetTableAutoScalingSettingsResponse_resourceArn = &sGetTableAutoScalingSettingsResponse_resourceArn
+var GetTableAutoScalingSettingsResponse_autoScalingSpecification = &sGetTableAutoScalingSettingsResponse_autoScalingSpecification
+var GetTableAutoScalingSettingsResponse_replicaSpecifications = &sGetTableAutoScalingSettingsResponse_replicaSpecifications
+
+var GetTableRequest = &sGetTableRequest
+var GetTableRequest_keyspaceName = &sGetTableRequest_keyspaceName
+var GetTableRequest_tableName = &sGetTableRequest_tableName
+
+var GetTableResponse = &sGetTableResponse
+var GetTableResponse_keyspaceName = &sGetTableResponse_keyspaceName
+var GetTableResponse_tableName = &sGetTableResponse_tableName
+var GetTableResponse_resourceArn = &sGetTableResponse_resourceArn
+var GetTableResponse_creationTimestamp = &sGetTableResponse_creationTimestamp
+var GetTableResponse_status = &sGetTableResponse_status
+var GetTableResponse_schemaDefinition = &sGetTableResponse_schemaDefinition
+var GetTableResponse_capacitySpecification = &sGetTableResponse_capacitySpecification
+var GetTableResponse_encryptionSpecification = &sGetTableResponse_encryptionSpecification
+var GetTableResponse_pointInTimeRecovery = &sGetTableResponse_pointInTimeRecovery
+var GetTableResponse_ttl = &sGetTableResponse_ttl
+var GetTableResponse_defaultTimeToLive = &sGetTableResponse_defaultTimeToLive
+var GetTableResponse_comment = &sGetTableResponse_comment
+var GetTableResponse_clientSideTimestamps = &sGetTableResponse_clientSideTimestamps
+var GetTableResponse_replicaSpecifications = &sGetTableResponse_replicaSpecifications
+var GetTableResponse_latestStreamArn = &sGetTableResponse_latestStreamArn
+var GetTableResponse_cdcSpecification = &sGetTableResponse_cdcSpecification
+var GetTableResponse_warmThroughputSpecification = &sGetTableResponse_warmThroughputSpecification
+
+var GetTypeRequest = &sGetTypeRequest
+var GetTypeRequest_keyspaceName = &sGetTypeRequest_keyspaceName
+var GetTypeRequest_typeName = &sGetTypeRequest_typeName
+
+var GetTypeResponse = &sGetTypeResponse
+var GetTypeResponse_keyspaceName = &sGetTypeResponse_keyspaceName
+var GetTypeResponse_typeName = &sGetTypeResponse_typeName
+var GetTypeResponse_fieldDefinitions = &sGetTypeResponse_fieldDefinitions
+var GetTypeResponse_lastModifiedTimestamp = &sGetTypeResponse_lastModifiedTimestamp
+var GetTypeResponse_status = &sGetTypeResponse_status
+var GetTypeResponse_directReferringTables = &sGetTypeResponse_directReferringTables
+var GetTypeResponse_directParentTypes = &sGetTypeResponse_directParentTypes
+var GetTypeResponse_maxNestingDepth = &sGetTypeResponse_maxNestingDepth
+var GetTypeResponse_keyspaceArn = &sGetTypeResponse_keyspaceArn
+
+var ListKeyspacesRequest = &sListKeyspacesRequest
+var ListKeyspacesRequest_nextToken = &sListKeyspacesRequest_nextToken
+var ListKeyspacesRequest_maxResults = &sListKeyspacesRequest_maxResults
+
+var ListKeyspacesResponse = &sListKeyspacesResponse
+var ListKeyspacesResponse_nextToken = &sListKeyspacesResponse_nextToken
+var ListKeyspacesResponse_keyspaces = &sListKeyspacesResponse_keyspaces
+
+var ListTablesRequest = &sListTablesRequest
+var ListTablesRequest_nextToken = &sListTablesRequest_nextToken
+var ListTablesRequest_maxResults = &sListTablesRequest_maxResults
+var ListTablesRequest_keyspaceName = &sListTablesRequest_keyspaceName
+
+var ListTablesResponse = &sListTablesResponse
+var ListTablesResponse_nextToken = &sListTablesResponse_nextToken
+var ListTablesResponse_tables = &sListTablesResponse_tables
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+var ListTagsForResourceRequest_nextToken = &sListTagsForResourceRequest_nextToken
+var ListTagsForResourceRequest_maxResults = &sListTagsForResourceRequest_maxResults
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_nextToken = &sListTagsForResourceResponse_nextToken
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ListTypesRequest = &sListTypesRequest
+var ListTypesRequest_nextToken = &sListTypesRequest_nextToken
+var ListTypesRequest_maxResults = &sListTypesRequest_maxResults
+var ListTypesRequest_keyspaceName = &sListTypesRequest_keyspaceName
+
+var ListTypesResponse = &sListTypesResponse
+var ListTypesResponse_nextToken = &sListTypesResponse_nextToken
+var ListTypesResponse_types = &sListTypesResponse_types
+
+var RestoreTableRequest = &sRestoreTableRequest
+var RestoreTableRequest_sourceKeyspaceName = &sRestoreTableRequest_sourceKeyspaceName
+var RestoreTableRequest_sourceTableName = &sRestoreTableRequest_sourceTableName
+var RestoreTableRequest_targetKeyspaceName = &sRestoreTableRequest_targetKeyspaceName
+var RestoreTableRequest_targetTableName = &sRestoreTableRequest_targetTableName
+var RestoreTableRequest_restoreTimestamp = &sRestoreTableRequest_restoreTimestamp
+var RestoreTableRequest_capacitySpecificationOverride = &sRestoreTableRequest_capacitySpecificationOverride
+var RestoreTableRequest_encryptionSpecificationOverride = &sRestoreTableRequest_encryptionSpecificationOverride
+var RestoreTableRequest_pointInTimeRecoveryOverride = &sRestoreTableRequest_pointInTimeRecoveryOverride
+var RestoreTableRequest_tagsOverride = &sRestoreTableRequest_tagsOverride
+var RestoreTableRequest_autoScalingSpecification = &sRestoreTableRequest_autoScalingSpecification
+var RestoreTableRequest_replicaSpecifications = &sRestoreTableRequest_replicaSpecifications
+
+var RestoreTableResponse = &sRestoreTableResponse
+var RestoreTableResponse_restoredTableARN = &sRestoreTableResponse_restoredTableARN
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tags = &sUntagResourceRequest_tags
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateKeyspaceRequest = &sUpdateKeyspaceRequest
+var UpdateKeyspaceRequest_keyspaceName = &sUpdateKeyspaceRequest_keyspaceName
+var UpdateKeyspaceRequest_replicationSpecification = &sUpdateKeyspaceRequest_replicationSpecification
+var UpdateKeyspaceRequest_clientSideTimestamps = &sUpdateKeyspaceRequest_clientSideTimestamps
+
+var UpdateKeyspaceResponse = &sUpdateKeyspaceResponse
+var UpdateKeyspaceResponse_resourceArn = &sUpdateKeyspaceResponse_resourceArn
+
+var UpdateTableRequest = &sUpdateTableRequest
+var UpdateTableRequest_keyspaceName = &sUpdateTableRequest_keyspaceName
+var UpdateTableRequest_tableName = &sUpdateTableRequest_tableName
+var UpdateTableRequest_addColumns = &sUpdateTableRequest_addColumns
+var UpdateTableRequest_capacitySpecification = &sUpdateTableRequest_capacitySpecification
+var UpdateTableRequest_encryptionSpecification = &sUpdateTableRequest_encryptionSpecification
+var UpdateTableRequest_pointInTimeRecovery = &sUpdateTableRequest_pointInTimeRecovery
+var UpdateTableRequest_ttl = &sUpdateTableRequest_ttl
+var UpdateTableRequest_defaultTimeToLive = &sUpdateTableRequest_defaultTimeToLive
+var UpdateTableRequest_clientSideTimestamps = &sUpdateTableRequest_clientSideTimestamps
+var UpdateTableRequest_autoScalingSpecification = &sUpdateTableRequest_autoScalingSpecification
+var UpdateTableRequest_replicaSpecifications = &sUpdateTableRequest_replicaSpecifications
+var UpdateTableRequest_cdcSpecification = &sUpdateTableRequest_cdcSpecification
+var UpdateTableRequest_warmThroughputSpecification = &sUpdateTableRequest_warmThroughputSpecification
+
+var UpdateTableResponse = &sUpdateTableResponse
+var UpdateTableResponse_resourceArn = &sUpdateTableResponse_resourceArn
+
+var KeyspacesService = &smithy.ServiceSchema{Schema: &s_KeyspacesService, Version: "2022-02-10"}

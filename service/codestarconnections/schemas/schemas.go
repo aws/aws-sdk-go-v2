@@ -4,1786 +4,1319 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateHost = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateHost",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRepositoryLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateRepositoryLink",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSyncConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateSyncConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteHost = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteHost",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRepositoryLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteRepositoryLink",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSyncConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteSyncConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetHost = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetHost",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRepositoryLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetRepositoryLink",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRepositorySyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetRepositorySyncStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourceSyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetResourceSyncStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSyncBlockerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetSyncBlockerSummary",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetSyncConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetSyncConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListHosts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListHosts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRepositoryLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListRepositoryLinks",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRepositorySyncDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListRepositorySyncDefinitions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSyncConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListSyncConfigurations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateHost = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateHost",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateRepositoryLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateRepositoryLink",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSyncBlocker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateSyncBlocker",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSyncConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateSyncConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var _CodeStar_connections_20191201 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CodeStar_connections_20191201",
-}, smithy.ShapeTypeService, 0)
-
-var CodeStar_connections_20191201 = smithy.NewServiceSchema(_CodeStar_connections_20191201, "2019-12-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var BlockerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "BlockerStatus",
-}, smithy.ShapeTypeEnum, 2)
-var BlockerStatus_ACTIVE *smithy.Schema
-
-var BlockerStatus_RESOLVED *smithy.Schema
-
-var BlockerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "BlockerType",
-}, smithy.ShapeTypeEnum, 1)
-var BlockerType_AUTOMATED *smithy.Schema
-
-var _BranchName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "BranchName",
-}, smithy.ShapeTypeString, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConditionalCheckFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ConditionalCheckFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConditionalCheckFailedException_Message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var Connection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Connection",
-}, smithy.ShapeTypeStructure, 6)
-var Connection_ConnectionName *smithy.Schema
-
-var Connection_ConnectionArn *smithy.Schema
-
-var Connection_ProviderType *smithy.Schema
-
-var Connection_OwnerAccountId *smithy.Schema
-
-var Connection_ConnectionStatus *smithy.Schema
-
-var Connection_HostArn *smithy.Schema
-
-var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ConnectionList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionList_member *smithy.Schema
-
-var _ConnectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ConnectionName",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ConnectionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ConnectionStatus_PENDING *smithy.Schema
-
-var ConnectionStatus_AVAILABLE *smithy.Schema
-
-var ConnectionStatus_ERROR *smithy.Schema
-
-var _CreatedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreatedReason",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeploymentFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var _Directory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Directory",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Event = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Event",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ExternalId",
-}, smithy.ShapeTypeString, 0)
-
-var Host = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Host",
-}, smithy.ShapeTypeStructure, 7)
-var Host_Name *smithy.Schema
-
-var Host_HostArn *smithy.Schema
-
-var Host_ProviderType *smithy.Schema
-
-var Host_ProviderEndpoint *smithy.Schema
-
-var Host_VpcConfiguration *smithy.Schema
-
-var Host_Status *smithy.Schema
-
-var Host_StatusMessage *smithy.Schema
-
-var _HostArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "HostArn",
-}, smithy.ShapeTypeString, 0)
-
-var _HostList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "HostList",
-}, smithy.ShapeTypeList, 1)
-var _HostList_member *smithy.Schema
-
-var _HostName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "HostName",
-}, smithy.ShapeTypeString, 0)
-
-var _HostStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "HostStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _HostStatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "HostStatusMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Id",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_Message *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LatestSyncBlockerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "LatestSyncBlockerList",
-}, smithy.ShapeTypeList, 1)
-var _LatestSyncBlockerList_member *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var LimitExceededException_Message *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OwnerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "OwnerId",
-}, smithy.ShapeTypeString, 0)
-
-var _Parent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Parent",
-}, smithy.ShapeTypeString, 0)
-
-var ProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ProviderType",
-}, smithy.ShapeTypeEnum, 5)
-var ProviderType_BITBUCKET *smithy.Schema
-
-var ProviderType_GITHUB *smithy.Schema
-
-var ProviderType_GITHUB_ENTERPRISE_SERVER *smithy.Schema
-
-var ProviderType_GITLAB *smithy.Schema
-
-var ProviderType_GITLAB_SELF_MANAGED *smithy.Schema
-
-var PublishDeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "PublishDeploymentStatus",
-}, smithy.ShapeTypeEnum, 2)
-var PublishDeploymentStatus_ENABLED *smithy.Schema
-
-var PublishDeploymentStatus_DISABLED *smithy.Schema
-
-var _RepositoryLinkArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositoryLinkArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RepositoryLinkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositoryLinkId",
-}, smithy.ShapeTypeString, 0)
-
-var RepositoryLinkInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositoryLinkInfo",
-}, smithy.ShapeTypeStructure, 7)
-var RepositoryLinkInfo_ConnectionArn *smithy.Schema
-
-var RepositoryLinkInfo_EncryptionKeyArn *smithy.Schema
-
-var RepositoryLinkInfo_OwnerId *smithy.Schema
-
-var RepositoryLinkInfo_ProviderType *smithy.Schema
-
-var RepositoryLinkInfo_RepositoryLinkArn *smithy.Schema
-
-var RepositoryLinkInfo_RepositoryLinkId *smithy.Schema
-
-var RepositoryLinkInfo_RepositoryName *smithy.Schema
-
-var _RepositoryLinkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositoryLinkList",
-}, smithy.ShapeTypeList, 1)
-var _RepositoryLinkList_member *smithy.Schema
-
-var _RepositoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositoryName",
-}, smithy.ShapeTypeString, 0)
-
-var RepositorySyncAttempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositorySyncAttempt",
-}, smithy.ShapeTypeStructure, 3)
-var RepositorySyncAttempt_StartedAt *smithy.Schema
-
-var RepositorySyncAttempt_Status *smithy.Schema
-
-var RepositorySyncAttempt_Events *smithy.Schema
-
-var RepositorySyncDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositorySyncDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var RepositorySyncDefinition_Branch *smithy.Schema
-
-var RepositorySyncDefinition_Directory *smithy.Schema
-
-var RepositorySyncDefinition_Parent *smithy.Schema
-
-var RepositorySyncDefinition_Target *smithy.Schema
-
-var _RepositorySyncDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositorySyncDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _RepositorySyncDefinitionList_member *smithy.Schema
-
-var RepositorySyncEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositorySyncEvent",
-}, smithy.ShapeTypeStructure, 4)
-var RepositorySyncEvent_Event *smithy.Schema
-
-var RepositorySyncEvent_ExternalId *smithy.Schema
-
-var RepositorySyncEvent_Time *smithy.Schema
-
-var RepositorySyncEvent_Type *smithy.Schema
-
-var _RepositorySyncEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositorySyncEventList",
-}, smithy.ShapeTypeList, 1)
-var _RepositorySyncEventList_member *smithy.Schema
-
-var RepositorySyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RepositorySyncStatus",
-}, smithy.ShapeTypeEnum, 5)
-var RepositorySyncStatus_FAILED *smithy.Schema
-
-var RepositorySyncStatus_INITIATED *smithy.Schema
-
-var RepositorySyncStatus_IN_PROGRESS *smithy.Schema
-
-var RepositorySyncStatus_SUCCEEDED *smithy.Schema
-
-var RepositorySyncStatus_QUEUED *smithy.Schema
-
-var _ResolvedReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResolvedReason",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceSyncAttempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceSyncAttempt",
-}, smithy.ShapeTypeStructure, 6)
-var ResourceSyncAttempt_Events *smithy.Schema
-
-var ResourceSyncAttempt_InitialRevision *smithy.Schema
-
-var ResourceSyncAttempt_StartedAt *smithy.Schema
-
-var ResourceSyncAttempt_Status *smithy.Schema
-
-var ResourceSyncAttempt_TargetRevision *smithy.Schema
-
-var ResourceSyncAttempt_Target *smithy.Schema
-
-var ResourceSyncEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceSyncEvent",
-}, smithy.ShapeTypeStructure, 4)
-var ResourceSyncEvent_Event *smithy.Schema
-
-var ResourceSyncEvent_ExternalId *smithy.Schema
-
-var ResourceSyncEvent_Time *smithy.Schema
-
-var ResourceSyncEvent_Type *smithy.Schema
-
-var _ResourceSyncEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceSyncEventList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSyncEventList_member *smithy.Schema
-
-var ResourceSyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceSyncStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ResourceSyncStatus_FAILED *smithy.Schema
-
-var ResourceSyncStatus_INITIATED *smithy.Schema
-
-var ResourceSyncStatus_IN_PROGRESS *smithy.Schema
-
-var ResourceSyncStatus_SUCCEEDED *smithy.Schema
-
-var ResourceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ResourceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceUnavailableException_Message *smithy.Schema
-
-var RetryLatestCommitFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "RetryLatestCommitFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var RetryLatestCommitFailedException_Message *smithy.Schema
-
-var Revision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Revision",
-}, smithy.ShapeTypeStructure, 6)
-var Revision_Branch *smithy.Schema
-
-var Revision_Directory *smithy.Schema
-
-var Revision_OwnerId *smithy.Schema
-
-var Revision_RepositoryName *smithy.Schema
-
-var Revision_ProviderType *smithy.Schema
-
-var Revision_Sha *smithy.Schema
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var _SHA = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SHA",
-}, smithy.ShapeTypeString, 0)
-
-var _SharpNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SharpNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var SyncBlocker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncBlocker",
-}, smithy.ShapeTypeStructure, 8)
-var SyncBlocker_Id *smithy.Schema
-
-var SyncBlocker_Type *smithy.Schema
-
-var SyncBlocker_Status *smithy.Schema
-
-var SyncBlocker_CreatedReason *smithy.Schema
-
-var SyncBlocker_CreatedAt *smithy.Schema
-
-var SyncBlocker_Contexts *smithy.Schema
-
-var SyncBlocker_ResolvedReason *smithy.Schema
-
-var SyncBlocker_ResolvedAt *smithy.Schema
-
-var SyncBlockerContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncBlockerContext",
-}, smithy.ShapeTypeStructure, 2)
-var SyncBlockerContext_Key *smithy.Schema
-
-var SyncBlockerContext_Value *smithy.Schema
-
-var _SyncBlockerContextKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncBlockerContextKey",
-}, smithy.ShapeTypeString, 0)
-
-var _SyncBlockerContextList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncBlockerContextList",
-}, smithy.ShapeTypeList, 1)
-var _SyncBlockerContextList_member *smithy.Schema
-
-var _SyncBlockerContextValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncBlockerContextValue",
-}, smithy.ShapeTypeString, 0)
-
-var SyncBlockerDoesNotExistException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncBlockerDoesNotExistException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var SyncBlockerDoesNotExistException_Message *smithy.Schema
-
-var SyncBlockerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncBlockerSummary",
-}, smithy.ShapeTypeStructure, 3)
-var SyncBlockerSummary_ResourceName *smithy.Schema
-
-var SyncBlockerSummary_ParentResourceName *smithy.Schema
-
-var SyncBlockerSummary_LatestBlockers *smithy.Schema
-
-var SyncConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncConfiguration",
-}, smithy.ShapeTypeStructure, 11)
-var SyncConfiguration_Branch *smithy.Schema
-
-var SyncConfiguration_ConfigFile *smithy.Schema
-
-var SyncConfiguration_OwnerId *smithy.Schema
-
-var SyncConfiguration_ProviderType *smithy.Schema
-
-var SyncConfiguration_RepositoryLinkId *smithy.Schema
-
-var SyncConfiguration_RepositoryName *smithy.Schema
-
-var SyncConfiguration_ResourceName *smithy.Schema
-
-var SyncConfiguration_RoleArn *smithy.Schema
-
-var SyncConfiguration_SyncType *smithy.Schema
-
-var SyncConfiguration_PublishDeploymentStatus *smithy.Schema
-
-var SyncConfiguration_TriggerResourceUpdateOn *smithy.Schema
-
-var _SyncConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _SyncConfigurationList_member *smithy.Schema
-
-var SyncConfigurationStillExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncConfigurationStillExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var SyncConfigurationStillExistsException_Message *smithy.Schema
-
-var SyncConfigurationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "SyncConfigurationType",
-}, smithy.ShapeTypeEnum, 1)
-var SyncConfigurationType_CFN_STACK_SYNC *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Target = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Target",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TlsCertificate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TlsCertificate",
-}, smithy.ShapeTypeString, 0)
-
-var TriggerResourceUpdateOn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TriggerResourceUpdateOn",
-}, smithy.ShapeTypeEnum, 2)
-var TriggerResourceUpdateOn_ANY_CHANGE *smithy.Schema
-
-var TriggerResourceUpdateOn_FILE_CHANGE *smithy.Schema
-
-var _Type = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Type",
-}, smithy.ShapeTypeString, 0)
-
-var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedOperationException_Message *smithy.Schema
-
-var UnsupportedProviderTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UnsupportedProviderTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedProviderTypeException_Message *smithy.Schema
-
-var UpdateOutOfSyncException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateOutOfSyncException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var UpdateOutOfSyncException_Message *smithy.Schema
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var VpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "VpcConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var VpcConfiguration_VpcId *smithy.Schema
-
-var VpcConfiguration_SubnetIds *smithy.Schema
-
-var VpcConfiguration_SecurityGroupIds *smithy.Schema
-
-var VpcConfiguration_TlsCertificate *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var CreateConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateConnectionInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConnectionInput_ProviderType *smithy.Schema
-
-var CreateConnectionInput_ConnectionName *smithy.Schema
-
-var CreateConnectionInput_Tags *smithy.Schema
-
-var CreateConnectionInput_HostArn *smithy.Schema
-
-var CreateConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateConnectionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateConnectionOutput_ConnectionArn *smithy.Schema
-
-var CreateConnectionOutput_Tags *smithy.Schema
-
-var CreateHostInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateHostInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateHostInput_Name *smithy.Schema
-
-var CreateHostInput_ProviderType *smithy.Schema
-
-var CreateHostInput_ProviderEndpoint *smithy.Schema
-
-var CreateHostInput_VpcConfiguration *smithy.Schema
-
-var CreateHostInput_Tags *smithy.Schema
-
-var CreateHostOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateHostOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateHostOutput_HostArn *smithy.Schema
-
-var CreateHostOutput_Tags *smithy.Schema
-
-var CreateRepositoryLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateRepositoryLinkInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRepositoryLinkInput_ConnectionArn *smithy.Schema
-
-var CreateRepositoryLinkInput_OwnerId *smithy.Schema
-
-var CreateRepositoryLinkInput_RepositoryName *smithy.Schema
-
-var CreateRepositoryLinkInput_EncryptionKeyArn *smithy.Schema
-
-var CreateRepositoryLinkInput_Tags *smithy.Schema
-
-var CreateRepositoryLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateRepositoryLinkOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRepositoryLinkOutput_RepositoryLinkInfo *smithy.Schema
-
-var CreateSyncConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateSyncConfigurationInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSyncConfigurationInput_Branch *smithy.Schema
-
-var CreateSyncConfigurationInput_ConfigFile *smithy.Schema
-
-var CreateSyncConfigurationInput_RepositoryLinkId *smithy.Schema
-
-var CreateSyncConfigurationInput_ResourceName *smithy.Schema
-
-var CreateSyncConfigurationInput_RoleArn *smithy.Schema
-
-var CreateSyncConfigurationInput_SyncType *smithy.Schema
-
-var CreateSyncConfigurationInput_PublishDeploymentStatus *smithy.Schema
-
-var CreateSyncConfigurationInput_TriggerResourceUpdateOn *smithy.Schema
-
-var CreateSyncConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "CreateSyncConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSyncConfigurationOutput_SyncConfiguration *smithy.Schema
-
-var DeleteConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionInput_ConnectionArn *smithy.Schema
-
-var DeleteConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteConnectionOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteHostInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteHostInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteHostInput_HostArn *smithy.Schema
-
-var DeleteHostOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteHostOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRepositoryLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteRepositoryLinkInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRepositoryLinkInput_RepositoryLinkId *smithy.Schema
-
-var DeleteRepositoryLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteRepositoryLinkOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSyncConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteSyncConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSyncConfigurationInput_SyncType *smithy.Schema
-
-var DeleteSyncConfigurationInput_ResourceName *smithy.Schema
-
-var DeleteSyncConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "DeleteSyncConfigurationOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectionInput_ConnectionArn *smithy.Schema
-
-var GetConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectionOutput_Connection *smithy.Schema
-
-var GetHostInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetHostInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHostInput_HostArn *smithy.Schema
-
-var GetHostOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetHostOutput",
-}, smithy.ShapeTypeStructure, 5)
-var GetHostOutput_Name *smithy.Schema
-
-var GetHostOutput_Status *smithy.Schema
-
-var GetHostOutput_ProviderType *smithy.Schema
-
-var GetHostOutput_ProviderEndpoint *smithy.Schema
-
-var GetHostOutput_VpcConfiguration *smithy.Schema
-
-var GetRepositoryLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetRepositoryLinkInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetRepositoryLinkInput_RepositoryLinkId *smithy.Schema
-
-var GetRepositoryLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetRepositoryLinkOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetRepositoryLinkOutput_RepositoryLinkInfo *smithy.Schema
-
-var GetRepositorySyncStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetRepositorySyncStatusInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetRepositorySyncStatusInput_Branch *smithy.Schema
-
-var GetRepositorySyncStatusInput_RepositoryLinkId *smithy.Schema
-
-var GetRepositorySyncStatusInput_SyncType *smithy.Schema
-
-var GetRepositorySyncStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetRepositorySyncStatusOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetRepositorySyncStatusOutput_LatestSync *smithy.Schema
-
-var GetResourceSyncStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetResourceSyncStatusInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceSyncStatusInput_ResourceName *smithy.Schema
-
-var GetResourceSyncStatusInput_SyncType *smithy.Schema
-
-var GetResourceSyncStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetResourceSyncStatusOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetResourceSyncStatusOutput_DesiredState *smithy.Schema
-
-var GetResourceSyncStatusOutput_LatestSuccessfulSync *smithy.Schema
-
-var GetResourceSyncStatusOutput_LatestSync *smithy.Schema
-
-var GetSyncBlockerSummaryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetSyncBlockerSummaryInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetSyncBlockerSummaryInput_SyncType *smithy.Schema
-
-var GetSyncBlockerSummaryInput_ResourceName *smithy.Schema
-
-var GetSyncBlockerSummaryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetSyncBlockerSummaryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSyncBlockerSummaryOutput_SyncBlockerSummary *smithy.Schema
-
-var GetSyncConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetSyncConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetSyncConfigurationInput_SyncType *smithy.Schema
-
-var GetSyncConfigurationInput_ResourceName *smithy.Schema
-
-var GetSyncConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "GetSyncConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSyncConfigurationOutput_SyncConfiguration *smithy.Schema
-
-var ListConnectionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListConnectionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListConnectionsInput_ProviderTypeFilter *smithy.Schema
-
-var ListConnectionsInput_HostArnFilter *smithy.Schema
-
-var ListConnectionsInput_MaxResults *smithy.Schema
-
-var ListConnectionsInput_NextToken *smithy.Schema
-
-var ListConnectionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListConnectionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectionsOutput_Connections *smithy.Schema
-
-var ListConnectionsOutput_NextToken *smithy.Schema
-
-var ListHostsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListHostsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHostsInput_MaxResults *smithy.Schema
-
-var ListHostsInput_NextToken *smithy.Schema
-
-var ListHostsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListHostsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListHostsOutput_Hosts *smithy.Schema
-
-var ListHostsOutput_NextToken *smithy.Schema
-
-var ListRepositoryLinksInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListRepositoryLinksInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositoryLinksInput_MaxResults *smithy.Schema
-
-var ListRepositoryLinksInput_NextToken *smithy.Schema
-
-var ListRepositoryLinksOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListRepositoryLinksOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositoryLinksOutput_RepositoryLinks *smithy.Schema
-
-var ListRepositoryLinksOutput_NextToken *smithy.Schema
-
-var ListRepositorySyncDefinitionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListRepositorySyncDefinitionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositorySyncDefinitionsInput_RepositoryLinkId *smithy.Schema
-
-var ListRepositorySyncDefinitionsInput_SyncType *smithy.Schema
-
-var ListRepositorySyncDefinitionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListRepositorySyncDefinitionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions *smithy.Schema
-
-var ListRepositorySyncDefinitionsOutput_NextToken *smithy.Schema
-
-var ListSyncConfigurationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListSyncConfigurationsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListSyncConfigurationsInput_MaxResults *smithy.Schema
-
-var ListSyncConfigurationsInput_NextToken *smithy.Schema
-
-var ListSyncConfigurationsInput_RepositoryLinkId *smithy.Schema
-
-var ListSyncConfigurationsInput_SyncType *smithy.Schema
-
-var ListSyncConfigurationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListSyncConfigurationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSyncConfigurationsOutput_SyncConfigurations *smithy.Schema
-
-var ListSyncConfigurationsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateHostInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateHostInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateHostInput_HostArn *smithy.Schema
-
-var UpdateHostInput_ProviderEndpoint *smithy.Schema
-
-var UpdateHostInput_VpcConfiguration *smithy.Schema
-
-var UpdateHostOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateHostOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateRepositoryLinkInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateRepositoryLinkInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateRepositoryLinkInput_ConnectionArn *smithy.Schema
-
-var UpdateRepositoryLinkInput_EncryptionKeyArn *smithy.Schema
-
-var UpdateRepositoryLinkInput_RepositoryLinkId *smithy.Schema
-
-var UpdateRepositoryLinkOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateRepositoryLinkOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateRepositoryLinkOutput_RepositoryLinkInfo *smithy.Schema
-
-var UpdateSyncBlockerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateSyncBlockerInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSyncBlockerInput_Id *smithy.Schema
-
-var UpdateSyncBlockerInput_SyncType *smithy.Schema
-
-var UpdateSyncBlockerInput_ResourceName *smithy.Schema
-
-var UpdateSyncBlockerInput_ResolvedReason *smithy.Schema
-
-var UpdateSyncBlockerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateSyncBlockerOutput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSyncBlockerOutput_ResourceName *smithy.Schema
-
-var UpdateSyncBlockerOutput_ParentResourceName *smithy.Schema
-
-var UpdateSyncBlockerOutput_SyncBlocker *smithy.Schema
-
-var UpdateSyncConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateSyncConfigurationInput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateSyncConfigurationInput_Branch *smithy.Schema
-
-var UpdateSyncConfigurationInput_ConfigFile *smithy.Schema
-
-var UpdateSyncConfigurationInput_RepositoryLinkId *smithy.Schema
-
-var UpdateSyncConfigurationInput_ResourceName *smithy.Schema
-
-var UpdateSyncConfigurationInput_RoleArn *smithy.Schema
-
-var UpdateSyncConfigurationInput_SyncType *smithy.Schema
-
-var UpdateSyncConfigurationInput_PublishDeploymentStatus *smithy.Schema
-
-var UpdateSyncConfigurationInput_TriggerResourceUpdateOn *smithy.Schema
-
-var UpdateSyncConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.codestarconnections",
-	Name:      "UpdateSyncConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSyncConfigurationOutput_SyncConfiguration *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ErrorMessage)
-
-	BlockerStatus_ACTIVE = BlockerStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	BlockerStatus_RESOLVED = BlockerStatus.AddMember("RESOLVED", smithyprelude.Unit)
-
-	BlockerType_AUTOMATED = BlockerType.AddMember("AUTOMATED", smithyprelude.Unit)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", _ErrorMessage)
-
-	ConditionalCheckFailedException_Message = ConditionalCheckFailedException.AddMember("Message", _ErrorMessage)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ErrorMessage)
-
-	ProviderType_BITBUCKET = ProviderType.AddMember("BITBUCKET", smithyprelude.Unit)
-
-	ProviderType_GITHUB = ProviderType.AddMember("GITHUB", smithyprelude.Unit)
-
-	ProviderType_GITHUB_ENTERPRISE_SERVER = ProviderType.AddMember("GITHUB_ENTERPRISE_SERVER", smithyprelude.Unit)
-
-	ProviderType_GITLAB = ProviderType.AddMember("GITLAB", smithyprelude.Unit)
-
-	ProviderType_GITLAB_SELF_MANAGED = ProviderType.AddMember("GITLAB_SELF_MANAGED", smithyprelude.Unit)
-
-	ConnectionStatus_PENDING = ConnectionStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ConnectionStatus_AVAILABLE = ConnectionStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ConnectionStatus_ERROR = ConnectionStatus.AddMember("ERROR", smithyprelude.Unit)
-
-	Connection_ConnectionName = Connection.AddMember("ConnectionName", _ConnectionName)
-
-	Connection_ConnectionArn = Connection.AddMember("ConnectionArn", _ConnectionArn)
-
-	Connection_ProviderType = Connection.AddMember("ProviderType", ProviderType)
-
-	Connection_OwnerAccountId = Connection.AddMember("OwnerAccountId", _AccountId)
-
-	Connection_ConnectionStatus = Connection.AddMember("ConnectionStatus", ConnectionStatus)
-
-	Connection_HostArn = Connection.AddMember("HostArn", _HostArn)
-
-	_ConnectionList_member = _ConnectionList.AddMember("member", Connection)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	VpcConfiguration_VpcId = VpcConfiguration.AddMember("VpcId", _VpcId)
-
-	VpcConfiguration_SubnetIds = VpcConfiguration.AddMember("SubnetIds", _SubnetIds)
-
-	VpcConfiguration_SecurityGroupIds = VpcConfiguration.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	VpcConfiguration_TlsCertificate = VpcConfiguration.AddMember("TlsCertificate", _TlsCertificate)
-
-	Host_Name = Host.AddMember("Name", _HostName)
-
-	Host_HostArn = Host.AddMember("HostArn", _HostArn)
-
-	Host_ProviderType = Host.AddMember("ProviderType", ProviderType)
-
-	Host_ProviderEndpoint = Host.AddMember("ProviderEndpoint", _Url)
-
-	Host_VpcConfiguration = Host.AddMember("VpcConfiguration", VpcConfiguration)
-
-	Host_Status = Host.AddMember("Status", _HostStatus)
-
-	Host_StatusMessage = Host.AddMember("StatusMessage", _HostStatusMessage)
-
-	_HostList_member = _HostList.AddMember("member", Host)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ErrorMessage)
-
-	InvalidInputException_Message = InvalidInputException.AddMember("Message", _ErrorMessage)
-
-	SyncBlockerContext_Key = SyncBlockerContext.AddMember("Key", _SyncBlockerContextKey)
-
-	SyncBlockerContext_Value = SyncBlockerContext.AddMember("Value", _SyncBlockerContextValue)
-
-	_SyncBlockerContextList_member = _SyncBlockerContextList.AddMember("member", SyncBlockerContext)
-
-	SyncBlocker_Id = SyncBlocker.AddMember("Id", _Id)
-
-	SyncBlocker_Type = SyncBlocker.AddMember("Type", BlockerType)
-
-	SyncBlocker_Status = SyncBlocker.AddMember("Status", BlockerStatus)
-
-	SyncBlocker_CreatedReason = SyncBlocker.AddMember("CreatedReason", _CreatedReason)
-
-	SyncBlocker_CreatedAt = SyncBlocker.AddMember("CreatedAt", _Timestamp)
-
-	SyncBlocker_Contexts = SyncBlocker.AddMember("Contexts", _SyncBlockerContextList)
-
-	SyncBlocker_ResolvedReason = SyncBlocker.AddMember("ResolvedReason", _ResolvedReason)
-
-	SyncBlocker_ResolvedAt = SyncBlocker.AddMember("ResolvedAt", _Timestamp)
-
-	_LatestSyncBlockerList_member = _LatestSyncBlockerList.AddMember("member", SyncBlocker)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _ErrorMessage)
-
-	PublishDeploymentStatus_ENABLED = PublishDeploymentStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	PublishDeploymentStatus_DISABLED = PublishDeploymentStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	RepositoryLinkInfo_ConnectionArn = RepositoryLinkInfo.AddMember("ConnectionArn", _ConnectionArn)
-
-	RepositoryLinkInfo_EncryptionKeyArn = RepositoryLinkInfo.AddMember("EncryptionKeyArn", _KmsKeyArn)
-
-	RepositoryLinkInfo_OwnerId = RepositoryLinkInfo.AddMember("OwnerId", _OwnerId)
-
-	RepositoryLinkInfo_ProviderType = RepositoryLinkInfo.AddMember("ProviderType", ProviderType)
-
-	RepositoryLinkInfo_RepositoryLinkArn = RepositoryLinkInfo.AddMember("RepositoryLinkArn", _RepositoryLinkArn)
-
-	RepositoryLinkInfo_RepositoryLinkId = RepositoryLinkInfo.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	RepositoryLinkInfo_RepositoryName = RepositoryLinkInfo.AddMember("RepositoryName", _RepositoryName)
-
-	_RepositoryLinkList_member = _RepositoryLinkList.AddMember("member", RepositoryLinkInfo)
-
-	RepositorySyncStatus_FAILED = RepositorySyncStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	RepositorySyncStatus_INITIATED = RepositorySyncStatus.AddMember("INITIATED", smithyprelude.Unit)
-
-	RepositorySyncStatus_IN_PROGRESS = RepositorySyncStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	RepositorySyncStatus_SUCCEEDED = RepositorySyncStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	RepositorySyncStatus_QUEUED = RepositorySyncStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	RepositorySyncEvent_Event = RepositorySyncEvent.AddMember("Event", _Event)
-
-	RepositorySyncEvent_ExternalId = RepositorySyncEvent.AddMember("ExternalId", _ExternalId)
-
-	RepositorySyncEvent_Time = RepositorySyncEvent.AddMember("Time", _Timestamp)
-
-	RepositorySyncEvent_Type = RepositorySyncEvent.AddMember("Type", _Type)
-
-	_RepositorySyncEventList_member = _RepositorySyncEventList.AddMember("member", RepositorySyncEvent)
-
-	RepositorySyncAttempt_StartedAt = RepositorySyncAttempt.AddMember("StartedAt", _Timestamp)
-
-	RepositorySyncAttempt_Status = RepositorySyncAttempt.AddMember("Status", RepositorySyncStatus)
-
-	RepositorySyncAttempt_Events = RepositorySyncAttempt.AddMember("Events", _RepositorySyncEventList)
-
-	RepositorySyncDefinition_Branch = RepositorySyncDefinition.AddMember("Branch", _BranchName)
-
-	RepositorySyncDefinition_Directory = RepositorySyncDefinition.AddMember("Directory", _Directory)
-
-	RepositorySyncDefinition_Parent = RepositorySyncDefinition.AddMember("Parent", _Parent)
-
-	RepositorySyncDefinition_Target = RepositorySyncDefinition.AddMember("Target", _Target)
-
-	_RepositorySyncDefinitionList_member = _RepositorySyncDefinitionList.AddMember("member", RepositorySyncDefinition)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	ResourceSyncEvent_Event = ResourceSyncEvent.AddMember("Event", _Event)
-
-	ResourceSyncEvent_ExternalId = ResourceSyncEvent.AddMember("ExternalId", _ExternalId)
-
-	ResourceSyncEvent_Time = ResourceSyncEvent.AddMember("Time", _Timestamp)
-
-	ResourceSyncEvent_Type = ResourceSyncEvent.AddMember("Type", _Type)
-
-	_ResourceSyncEventList_member = _ResourceSyncEventList.AddMember("member", ResourceSyncEvent)
-
-	Revision_Branch = Revision.AddMember("Branch", _BranchName)
-
-	Revision_Directory = Revision.AddMember("Directory", _Directory)
-
-	Revision_OwnerId = Revision.AddMember("OwnerId", _OwnerId)
-
-	Revision_RepositoryName = Revision.AddMember("RepositoryName", _RepositoryName)
-
-	Revision_ProviderType = Revision.AddMember("ProviderType", ProviderType)
-
-	Revision_Sha = Revision.AddMember("Sha", _SHA)
-
-	ResourceSyncStatus_FAILED = ResourceSyncStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ResourceSyncStatus_INITIATED = ResourceSyncStatus.AddMember("INITIATED", smithyprelude.Unit)
-
-	ResourceSyncStatus_IN_PROGRESS = ResourceSyncStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ResourceSyncStatus_SUCCEEDED = ResourceSyncStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ResourceSyncAttempt_Events = ResourceSyncAttempt.AddMember("Events", _ResourceSyncEventList)
-
-	ResourceSyncAttempt_InitialRevision = ResourceSyncAttempt.AddMember("InitialRevision", Revision)
-
-	ResourceSyncAttempt_StartedAt = ResourceSyncAttempt.AddMember("StartedAt", _Timestamp)
-
-	ResourceSyncAttempt_Status = ResourceSyncAttempt.AddMember("Status", ResourceSyncStatus)
-
-	ResourceSyncAttempt_TargetRevision = ResourceSyncAttempt.AddMember("TargetRevision", Revision)
-
-	ResourceSyncAttempt_Target = ResourceSyncAttempt.AddMember("Target", _Target)
-
-	ResourceUnavailableException_Message = ResourceUnavailableException.AddMember("Message", _ErrorMessage)
-
-	RetryLatestCommitFailedException_Message = RetryLatestCommitFailedException.AddMember("Message", _ErrorMessage)
-
-	SyncBlockerDoesNotExistException_Message = SyncBlockerDoesNotExistException.AddMember("Message", _ErrorMessage)
-
-	SyncBlockerSummary_ResourceName = SyncBlockerSummary.AddMember("ResourceName", _ResourceName)
-
-	SyncBlockerSummary_ParentResourceName = SyncBlockerSummary.AddMember("ParentResourceName", _ResourceName)
-
-	SyncBlockerSummary_LatestBlockers = SyncBlockerSummary.AddMember("LatestBlockers", _LatestSyncBlockerList)
-
-	SyncConfigurationType_CFN_STACK_SYNC = SyncConfigurationType.AddMember("CFN_STACK_SYNC", smithyprelude.Unit)
-
-	TriggerResourceUpdateOn_ANY_CHANGE = TriggerResourceUpdateOn.AddMember("ANY_CHANGE", smithyprelude.Unit)
-
-	TriggerResourceUpdateOn_FILE_CHANGE = TriggerResourceUpdateOn.AddMember("FILE_CHANGE", smithyprelude.Unit)
-
-	SyncConfiguration_Branch = SyncConfiguration.AddMember("Branch", _BranchName)
-
-	SyncConfiguration_ConfigFile = SyncConfiguration.AddMember("ConfigFile", _DeploymentFilePath)
-
-	SyncConfiguration_OwnerId = SyncConfiguration.AddMember("OwnerId", _OwnerId)
-
-	SyncConfiguration_ProviderType = SyncConfiguration.AddMember("ProviderType", ProviderType)
-
-	SyncConfiguration_RepositoryLinkId = SyncConfiguration.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	SyncConfiguration_RepositoryName = SyncConfiguration.AddMember("RepositoryName", _RepositoryName)
-
-	SyncConfiguration_ResourceName = SyncConfiguration.AddMember("ResourceName", _ResourceName)
-
-	SyncConfiguration_RoleArn = SyncConfiguration.AddMember("RoleArn", _IamRoleArn)
-
-	SyncConfiguration_SyncType = SyncConfiguration.AddMember("SyncType", SyncConfigurationType)
-
-	SyncConfiguration_PublishDeploymentStatus = SyncConfiguration.AddMember("PublishDeploymentStatus", PublishDeploymentStatus)
-
-	SyncConfiguration_TriggerResourceUpdateOn = SyncConfiguration.AddMember("TriggerResourceUpdateOn", TriggerResourceUpdateOn)
-
-	_SyncConfigurationList_member = _SyncConfigurationList.AddMember("member", SyncConfiguration)
-
-	SyncConfigurationStillExistsException_Message = SyncConfigurationStillExistsException.AddMember("Message", _ErrorMessage)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ErrorMessage)
-
-	UnsupportedOperationException_Message = UnsupportedOperationException.AddMember("Message", _ErrorMessage)
-
-	UnsupportedProviderTypeException_Message = UnsupportedProviderTypeException.AddMember("Message", _ErrorMessage)
-
-	UpdateOutOfSyncException_Message = UpdateOutOfSyncException.AddMember("Message", _ErrorMessage)
-
-	CreateConnectionInput_ProviderType = CreateConnectionInput.AddMember("ProviderType", ProviderType)
-
-	CreateConnectionInput_ConnectionName = CreateConnectionInput.AddMember("ConnectionName", _ConnectionName)
-
-	CreateConnectionInput_Tags = CreateConnectionInput.AddMember("Tags", _TagList)
-
-	CreateConnectionInput_HostArn = CreateConnectionInput.AddMember("HostArn", _HostArn)
-
-	CreateConnectionOutput_ConnectionArn = CreateConnectionOutput.AddMember("ConnectionArn", _ConnectionArn)
-
-	CreateConnectionOutput_Tags = CreateConnectionOutput.AddMember("Tags", _TagList)
-
-	CreateHostInput_Name = CreateHostInput.AddMember("Name", _HostName)
-
-	CreateHostInput_ProviderType = CreateHostInput.AddMember("ProviderType", ProviderType)
-
-	CreateHostInput_ProviderEndpoint = CreateHostInput.AddMember("ProviderEndpoint", _Url)
-
-	CreateHostInput_VpcConfiguration = CreateHostInput.AddMember("VpcConfiguration", VpcConfiguration)
-
-	CreateHostInput_Tags = CreateHostInput.AddMember("Tags", _TagList)
-
-	CreateHostOutput_HostArn = CreateHostOutput.AddMember("HostArn", _HostArn)
-
-	CreateHostOutput_Tags = CreateHostOutput.AddMember("Tags", _TagList)
-
-	CreateRepositoryLinkInput_ConnectionArn = CreateRepositoryLinkInput.AddMember("ConnectionArn", _ConnectionArn)
-
-	CreateRepositoryLinkInput_OwnerId = CreateRepositoryLinkInput.AddMember("OwnerId", _OwnerId)
-
-	CreateRepositoryLinkInput_RepositoryName = CreateRepositoryLinkInput.AddMember("RepositoryName", _RepositoryName)
-
-	CreateRepositoryLinkInput_EncryptionKeyArn = CreateRepositoryLinkInput.AddMember("EncryptionKeyArn", _KmsKeyArn)
-
-	CreateRepositoryLinkInput_Tags = CreateRepositoryLinkInput.AddMember("Tags", _TagList)
-
-	CreateRepositoryLinkOutput_RepositoryLinkInfo = CreateRepositoryLinkOutput.AddMember("RepositoryLinkInfo", RepositoryLinkInfo)
-
-	CreateSyncConfigurationInput_Branch = CreateSyncConfigurationInput.AddMember("Branch", _BranchName)
-
-	CreateSyncConfigurationInput_ConfigFile = CreateSyncConfigurationInput.AddMember("ConfigFile", _DeploymentFilePath)
-
-	CreateSyncConfigurationInput_RepositoryLinkId = CreateSyncConfigurationInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	CreateSyncConfigurationInput_ResourceName = CreateSyncConfigurationInput.AddMember("ResourceName", _ResourceName)
-
-	CreateSyncConfigurationInput_RoleArn = CreateSyncConfigurationInput.AddMember("RoleArn", _IamRoleArn)
-
-	CreateSyncConfigurationInput_SyncType = CreateSyncConfigurationInput.AddMember("SyncType", SyncConfigurationType)
-
-	CreateSyncConfigurationInput_PublishDeploymentStatus = CreateSyncConfigurationInput.AddMember("PublishDeploymentStatus", PublishDeploymentStatus)
-
-	CreateSyncConfigurationInput_TriggerResourceUpdateOn = CreateSyncConfigurationInput.AddMember("TriggerResourceUpdateOn", TriggerResourceUpdateOn)
-
-	CreateSyncConfigurationOutput_SyncConfiguration = CreateSyncConfigurationOutput.AddMember("SyncConfiguration", SyncConfiguration)
-
-	DeleteConnectionInput_ConnectionArn = DeleteConnectionInput.AddMember("ConnectionArn", _ConnectionArn)
-
-	DeleteHostInput_HostArn = DeleteHostInput.AddMember("HostArn", _HostArn)
-
-	DeleteRepositoryLinkInput_RepositoryLinkId = DeleteRepositoryLinkInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	DeleteSyncConfigurationInput_SyncType = DeleteSyncConfigurationInput.AddMember("SyncType", SyncConfigurationType)
-
-	DeleteSyncConfigurationInput_ResourceName = DeleteSyncConfigurationInput.AddMember("ResourceName", _ResourceName)
-
-	GetConnectionInput_ConnectionArn = GetConnectionInput.AddMember("ConnectionArn", _ConnectionArn)
-
-	GetConnectionOutput_Connection = GetConnectionOutput.AddMember("Connection", Connection)
-
-	GetHostInput_HostArn = GetHostInput.AddMember("HostArn", _HostArn)
-
-	GetHostOutput_Name = GetHostOutput.AddMember("Name", _HostName)
-
-	GetHostOutput_Status = GetHostOutput.AddMember("Status", _HostStatus)
-
-	GetHostOutput_ProviderType = GetHostOutput.AddMember("ProviderType", ProviderType)
-
-	GetHostOutput_ProviderEndpoint = GetHostOutput.AddMember("ProviderEndpoint", _Url)
-
-	GetHostOutput_VpcConfiguration = GetHostOutput.AddMember("VpcConfiguration", VpcConfiguration)
-
-	GetRepositoryLinkInput_RepositoryLinkId = GetRepositoryLinkInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	GetRepositoryLinkOutput_RepositoryLinkInfo = GetRepositoryLinkOutput.AddMember("RepositoryLinkInfo", RepositoryLinkInfo)
-
-	GetRepositorySyncStatusInput_Branch = GetRepositorySyncStatusInput.AddMember("Branch", _BranchName)
-
-	GetRepositorySyncStatusInput_RepositoryLinkId = GetRepositorySyncStatusInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	GetRepositorySyncStatusInput_SyncType = GetRepositorySyncStatusInput.AddMember("SyncType", SyncConfigurationType)
-
-	GetRepositorySyncStatusOutput_LatestSync = GetRepositorySyncStatusOutput.AddMember("LatestSync", RepositorySyncAttempt)
-
-	GetResourceSyncStatusInput_ResourceName = GetResourceSyncStatusInput.AddMember("ResourceName", _ResourceName)
-
-	GetResourceSyncStatusInput_SyncType = GetResourceSyncStatusInput.AddMember("SyncType", SyncConfigurationType)
-
-	GetResourceSyncStatusOutput_DesiredState = GetResourceSyncStatusOutput.AddMember("DesiredState", Revision)
-
-	GetResourceSyncStatusOutput_LatestSuccessfulSync = GetResourceSyncStatusOutput.AddMember("LatestSuccessfulSync", ResourceSyncAttempt)
-
-	GetResourceSyncStatusOutput_LatestSync = GetResourceSyncStatusOutput.AddMember("LatestSync", ResourceSyncAttempt)
-
-	GetSyncBlockerSummaryInput_SyncType = GetSyncBlockerSummaryInput.AddMember("SyncType", SyncConfigurationType)
-
-	GetSyncBlockerSummaryInput_ResourceName = GetSyncBlockerSummaryInput.AddMember("ResourceName", _ResourceName)
-
-	GetSyncBlockerSummaryOutput_SyncBlockerSummary = GetSyncBlockerSummaryOutput.AddMember("SyncBlockerSummary", SyncBlockerSummary)
-
-	GetSyncConfigurationInput_SyncType = GetSyncConfigurationInput.AddMember("SyncType", SyncConfigurationType)
-
-	GetSyncConfigurationInput_ResourceName = GetSyncConfigurationInput.AddMember("ResourceName", _ResourceName)
-
-	GetSyncConfigurationOutput_SyncConfiguration = GetSyncConfigurationOutput.AddMember("SyncConfiguration", SyncConfiguration)
-
-	ListConnectionsInput_ProviderTypeFilter = ListConnectionsInput.AddMember("ProviderTypeFilter", ProviderType)
-
-	ListConnectionsInput_HostArnFilter = ListConnectionsInput.AddMember("HostArnFilter", _HostArn)
-
-	ListConnectionsInput_MaxResults = ListConnectionsInput.AddMember("MaxResults", _MaxResults)
-
-	ListConnectionsInput_NextToken = ListConnectionsInput.AddMember("NextToken", _NextToken)
-
-	ListConnectionsOutput_Connections = ListConnectionsOutput.AddMember("Connections", _ConnectionList)
-
-	ListConnectionsOutput_NextToken = ListConnectionsOutput.AddMember("NextToken", _NextToken)
-
-	ListHostsInput_MaxResults = ListHostsInput.AddMember("MaxResults", _MaxResults)
-
-	ListHostsInput_NextToken = ListHostsInput.AddMember("NextToken", _NextToken)
-
-	ListHostsOutput_Hosts = ListHostsOutput.AddMember("Hosts", _HostList)
-
-	ListHostsOutput_NextToken = ListHostsOutput.AddMember("NextToken", _NextToken)
-
-	ListRepositoryLinksInput_MaxResults = ListRepositoryLinksInput.AddMember("MaxResults", _MaxResults)
-
-	ListRepositoryLinksInput_NextToken = ListRepositoryLinksInput.AddMember("NextToken", _SharpNextToken)
-
-	ListRepositoryLinksOutput_RepositoryLinks = ListRepositoryLinksOutput.AddMember("RepositoryLinks", _RepositoryLinkList)
-
-	ListRepositoryLinksOutput_NextToken = ListRepositoryLinksOutput.AddMember("NextToken", _SharpNextToken)
-
-	ListRepositorySyncDefinitionsInput_RepositoryLinkId = ListRepositorySyncDefinitionsInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	ListRepositorySyncDefinitionsInput_SyncType = ListRepositorySyncDefinitionsInput.AddMember("SyncType", SyncConfigurationType)
-
-	ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions = ListRepositorySyncDefinitionsOutput.AddMember("RepositorySyncDefinitions", _RepositorySyncDefinitionList)
-
-	ListRepositorySyncDefinitionsOutput_NextToken = ListRepositorySyncDefinitionsOutput.AddMember("NextToken", _SharpNextToken)
-
-	ListSyncConfigurationsInput_MaxResults = ListSyncConfigurationsInput.AddMember("MaxResults", _MaxResults)
-
-	ListSyncConfigurationsInput_NextToken = ListSyncConfigurationsInput.AddMember("NextToken", _SharpNextToken)
-
-	ListSyncConfigurationsInput_RepositoryLinkId = ListSyncConfigurationsInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	ListSyncConfigurationsInput_SyncType = ListSyncConfigurationsInput.AddMember("SyncType", SyncConfigurationType)
-
-	ListSyncConfigurationsOutput_SyncConfigurations = ListSyncConfigurationsOutput.AddMember("SyncConfigurations", _SyncConfigurationList)
-
-	ListSyncConfigurationsOutput_NextToken = ListSyncConfigurationsOutput.AddMember("NextToken", _SharpNextToken)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _AmazonResourceName)
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagList)
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _AmazonResourceName)
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagList)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _AmazonResourceName)
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeyList)
-
-	UpdateHostInput_HostArn = UpdateHostInput.AddMember("HostArn", _HostArn)
-
-	UpdateHostInput_ProviderEndpoint = UpdateHostInput.AddMember("ProviderEndpoint", _Url)
-
-	UpdateHostInput_VpcConfiguration = UpdateHostInput.AddMember("VpcConfiguration", VpcConfiguration)
-
-	UpdateRepositoryLinkInput_ConnectionArn = UpdateRepositoryLinkInput.AddMember("ConnectionArn", _ConnectionArn)
-
-	UpdateRepositoryLinkInput_EncryptionKeyArn = UpdateRepositoryLinkInput.AddMember("EncryptionKeyArn", _KmsKeyArn)
-
-	UpdateRepositoryLinkInput_RepositoryLinkId = UpdateRepositoryLinkInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	UpdateRepositoryLinkOutput_RepositoryLinkInfo = UpdateRepositoryLinkOutput.AddMember("RepositoryLinkInfo", RepositoryLinkInfo)
-
-	UpdateSyncBlockerInput_Id = UpdateSyncBlockerInput.AddMember("Id", _Id)
-
-	UpdateSyncBlockerInput_SyncType = UpdateSyncBlockerInput.AddMember("SyncType", SyncConfigurationType)
-
-	UpdateSyncBlockerInput_ResourceName = UpdateSyncBlockerInput.AddMember("ResourceName", _ResourceName)
-
-	UpdateSyncBlockerInput_ResolvedReason = UpdateSyncBlockerInput.AddMember("ResolvedReason", _ResolvedReason)
-
-	UpdateSyncBlockerOutput_ResourceName = UpdateSyncBlockerOutput.AddMember("ResourceName", _ResourceName)
-
-	UpdateSyncBlockerOutput_ParentResourceName = UpdateSyncBlockerOutput.AddMember("ParentResourceName", _ResourceName)
-
-	UpdateSyncBlockerOutput_SyncBlocker = UpdateSyncBlockerOutput.AddMember("SyncBlocker", SyncBlocker)
-
-	UpdateSyncConfigurationInput_Branch = UpdateSyncConfigurationInput.AddMember("Branch", _BranchName)
-
-	UpdateSyncConfigurationInput_ConfigFile = UpdateSyncConfigurationInput.AddMember("ConfigFile", _DeploymentFilePath)
-
-	UpdateSyncConfigurationInput_RepositoryLinkId = UpdateSyncConfigurationInput.AddMember("RepositoryLinkId", _RepositoryLinkId)
-
-	UpdateSyncConfigurationInput_ResourceName = UpdateSyncConfigurationInput.AddMember("ResourceName", _ResourceName)
-
-	UpdateSyncConfigurationInput_RoleArn = UpdateSyncConfigurationInput.AddMember("RoleArn", _IamRoleArn)
-
-	UpdateSyncConfigurationInput_SyncType = UpdateSyncConfigurationInput.AddMember("SyncType", SyncConfigurationType)
-
-	UpdateSyncConfigurationInput_PublishDeploymentStatus = UpdateSyncConfigurationInput.AddMember("PublishDeploymentStatus", PublishDeploymentStatus)
-
-	UpdateSyncConfigurationInput_TriggerResourceUpdateOn = UpdateSyncConfigurationInput.AddMember("TriggerResourceUpdateOn", TriggerResourceUpdateOn)
-
-	UpdateSyncConfigurationOutput_SyncConfiguration = UpdateSyncConfigurationOutput.AddMember("SyncConfiguration", SyncConfiguration)
-
-}
+var (
+	iCreateConnection                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateConnection"}
+	iCreateHost                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateHost"}
+	iCreateRepositoryLink                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateRepositoryLink"}
+	iCreateSyncConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateSyncConfiguration"}
+	iDeleteConnection                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteConnection"}
+	iDeleteHost                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteHost"}
+	iDeleteRepositoryLink                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteRepositoryLink"}
+	iDeleteSyncConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteSyncConfiguration"}
+	iGetConnection                         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetConnection"}
+	iGetHost                               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetHost"}
+	iGetRepositoryLink                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetRepositoryLink"}
+	iGetRepositorySyncStatus               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetRepositorySyncStatus"}
+	iGetResourceSyncStatus                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetResourceSyncStatus"}
+	iGetSyncBlockerSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetSyncBlockerSummary"}
+	iGetSyncConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetSyncConfiguration"}
+	iListConnections                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListConnections"}
+	iListHosts                             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListHosts"}
+	iListRepositoryLinks                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListRepositoryLinks"}
+	iListRepositorySyncDefinitions         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListRepositorySyncDefinitions"}
+	iListSyncConfigurations                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListSyncConfigurations"}
+	iListTagsForResource                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListTagsForResource"}
+	iTagResource                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TagResource"}
+	iUntagResource                         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UntagResource"}
+	iUpdateHost                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateHost"}
+	iUpdateRepositoryLink                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateRepositoryLink"}
+	iUpdateSyncBlocker                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateSyncBlocker"}
+	iUpdateSyncConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateSyncConfiguration"}
+	i_CodeStar_connections_20191201        = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CodeStar_connections_20191201"}
+	iAccessDeniedException                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "AccessDeniedException"}
+	i_AccountId                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "AccountId"}
+	i_AmazonResourceName                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "AmazonResourceName"}
+	iBlockerStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "BlockerStatus"}
+	iBlockerType                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "BlockerType"}
+	i_BranchName                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "BranchName"}
+	iConcurrentModificationException       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ConcurrentModificationException"}
+	iConditionalCheckFailedException       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ConditionalCheckFailedException"}
+	iConflictException                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ConflictException"}
+	iConnection                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Connection"}
+	i_ConnectionArn                        = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ConnectionArn"}
+	i_ConnectionList                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ConnectionList"}
+	i_ConnectionName                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ConnectionName"}
+	iConnectionStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ConnectionStatus"}
+	i_CreatedReason                        = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreatedReason"}
+	i_DeploymentFilePath                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeploymentFilePath"}
+	i_Directory                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Directory"}
+	i_ErrorMessage                         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ErrorMessage"}
+	i_Event                                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Event"}
+	i_ExternalId                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ExternalId"}
+	iHost                                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Host"}
+	i_HostArn                              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "HostArn"}
+	i_HostList                             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "HostList"}
+	i_HostName                             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "HostName"}
+	i_HostStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "HostStatus"}
+	i_HostStatusMessage                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "HostStatusMessage"}
+	i_IamRoleArn                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "IamRoleArn"}
+	i_Id                                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Id"}
+	iInternalServerException               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "InternalServerException"}
+	iInvalidInputException                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "InvalidInputException"}
+	i_KmsKeyArn                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "KmsKeyArn"}
+	i_LatestSyncBlockerList                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "LatestSyncBlockerList"}
+	iLimitExceededException                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "LimitExceededException"}
+	i_MaxResults                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "MaxResults"}
+	i_NextToken                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "NextToken"}
+	i_OwnerId                              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "OwnerId"}
+	i_Parent                               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Parent"}
+	iProviderType                          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ProviderType"}
+	iPublishDeploymentStatus               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "PublishDeploymentStatus"}
+	i_RepositoryLinkArn                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositoryLinkArn"}
+	i_RepositoryLinkId                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositoryLinkId"}
+	iRepositoryLinkInfo                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositoryLinkInfo"}
+	i_RepositoryLinkList                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositoryLinkList"}
+	i_RepositoryName                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositoryName"}
+	iRepositorySyncAttempt                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositorySyncAttempt"}
+	iRepositorySyncDefinition              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositorySyncDefinition"}
+	i_RepositorySyncDefinitionList         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositorySyncDefinitionList"}
+	iRepositorySyncEvent                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositorySyncEvent"}
+	i_RepositorySyncEventList              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositorySyncEventList"}
+	iRepositorySyncStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RepositorySyncStatus"}
+	i_ResolvedReason                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResolvedReason"}
+	iResourceAlreadyExistsException        = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceAlreadyExistsException"}
+	i_ResourceName                         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceName"}
+	iResourceNotFoundException             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceNotFoundException"}
+	iResourceSyncAttempt                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceSyncAttempt"}
+	iResourceSyncEvent                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceSyncEvent"}
+	i_ResourceSyncEventList                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceSyncEventList"}
+	iResourceSyncStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceSyncStatus"}
+	iResourceUnavailableException          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ResourceUnavailableException"}
+	iRetryLatestCommitFailedException      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "RetryLatestCommitFailedException"}
+	iRevision                              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Revision"}
+	i_SecurityGroupId                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SecurityGroupIds"}
+	i_SHA                                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SHA"}
+	i_SharpNextToken                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SharpNextToken"}
+	i_SubnetId                             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SubnetId"}
+	i_SubnetIds                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SubnetIds"}
+	iSyncBlocker                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncBlocker"}
+	iSyncBlockerContext                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncBlockerContext"}
+	i_SyncBlockerContextKey                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncBlockerContextKey"}
+	i_SyncBlockerContextList               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncBlockerContextList"}
+	i_SyncBlockerContextValue              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncBlockerContextValue"}
+	iSyncBlockerDoesNotExistException      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncBlockerDoesNotExistException"}
+	iSyncBlockerSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncBlockerSummary"}
+	iSyncConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncConfiguration"}
+	i_SyncConfigurationList                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncConfigurationList"}
+	iSyncConfigurationStillExistsException = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncConfigurationStillExistsException"}
+	iSyncConfigurationType                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "SyncConfigurationType"}
+	iTag                                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Tag"}
+	i_TagKey                               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TagKey"}
+	i_TagKeyList                           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TagKeyList"}
+	i_TagList                              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TagList"}
+	i_TagValue                             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TagValue"}
+	i_Target                               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Target"}
+	iThrottlingException                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ThrottlingException"}
+	i_Timestamp                            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Timestamp"}
+	i_TlsCertificate                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TlsCertificate"}
+	iTriggerResourceUpdateOn               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TriggerResourceUpdateOn"}
+	i_Type                                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Type"}
+	iUnsupportedOperationException         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UnsupportedOperationException"}
+	iUnsupportedProviderTypeException      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UnsupportedProviderTypeException"}
+	iUpdateOutOfSyncException              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateOutOfSyncException"}
+	i_Url                                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "Url"}
+	iVpcConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "VpcConfiguration"}
+	i_VpcId                                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "VpcId"}
+	iCreateConnectionInput                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateConnectionInput"}
+	iCreateConnectionOutput                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateConnectionOutput"}
+	iCreateHostInput                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateHostInput"}
+	iCreateHostOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateHostOutput"}
+	iCreateRepositoryLinkInput             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateRepositoryLinkInput"}
+	iCreateRepositoryLinkOutput            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateRepositoryLinkOutput"}
+	iCreateSyncConfigurationInput          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateSyncConfigurationInput"}
+	iCreateSyncConfigurationOutput         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "CreateSyncConfigurationOutput"}
+	iDeleteConnectionInput                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteConnectionInput"}
+	iDeleteConnectionOutput                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteConnectionOutput"}
+	iDeleteHostInput                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteHostInput"}
+	iDeleteHostOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteHostOutput"}
+	iDeleteRepositoryLinkInput             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteRepositoryLinkInput"}
+	iDeleteRepositoryLinkOutput            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteRepositoryLinkOutput"}
+	iDeleteSyncConfigurationInput          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteSyncConfigurationInput"}
+	iDeleteSyncConfigurationOutput         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "DeleteSyncConfigurationOutput"}
+	iGetConnectionInput                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetConnectionInput"}
+	iGetConnectionOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetConnectionOutput"}
+	iGetHostInput                          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetHostInput"}
+	iGetHostOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetHostOutput"}
+	iGetRepositoryLinkInput                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetRepositoryLinkInput"}
+	iGetRepositoryLinkOutput               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetRepositoryLinkOutput"}
+	iGetRepositorySyncStatusInput          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetRepositorySyncStatusInput"}
+	iGetRepositorySyncStatusOutput         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetRepositorySyncStatusOutput"}
+	iGetResourceSyncStatusInput            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetResourceSyncStatusInput"}
+	iGetResourceSyncStatusOutput           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetResourceSyncStatusOutput"}
+	iGetSyncBlockerSummaryInput            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetSyncBlockerSummaryInput"}
+	iGetSyncBlockerSummaryOutput           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetSyncBlockerSummaryOutput"}
+	iGetSyncConfigurationInput             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetSyncConfigurationInput"}
+	iGetSyncConfigurationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "GetSyncConfigurationOutput"}
+	iListConnectionsInput                  = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListConnectionsInput"}
+	iListConnectionsOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListConnectionsOutput"}
+	iListHostsInput                        = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListHostsInput"}
+	iListHostsOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListHostsOutput"}
+	iListRepositoryLinksInput              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListRepositoryLinksInput"}
+	iListRepositoryLinksOutput             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListRepositoryLinksOutput"}
+	iListRepositorySyncDefinitionsInput    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListRepositorySyncDefinitionsInput"}
+	iListRepositorySyncDefinitionsOutput   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListRepositorySyncDefinitionsOutput"}
+	iListSyncConfigurationsInput           = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListSyncConfigurationsInput"}
+	iListSyncConfigurationsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListSyncConfigurationsOutput"}
+	iListTagsForResourceInput              = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "ListTagsForResourceOutput"}
+	iTagResourceInput                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TagResourceInput"}
+	iTagResourceOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "TagResourceOutput"}
+	iUntagResourceInput                    = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UntagResourceInput"}
+	iUntagResourceOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UntagResourceOutput"}
+	iUpdateHostInput                       = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateHostInput"}
+	iUpdateHostOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateHostOutput"}
+	iUpdateRepositoryLinkInput             = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateRepositoryLinkInput"}
+	iUpdateRepositoryLinkOutput            = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateRepositoryLinkOutput"}
+	iUpdateSyncBlockerInput                = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateSyncBlockerInput"}
+	iUpdateSyncBlockerOutput               = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateSyncBlockerOutput"}
+	iUpdateSyncConfigurationInput          = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateSyncConfigurationInput"}
+	iUpdateSyncConfigurationOutput         = smithy.ShapeID{Namespace: "com.amazonaws.codestarconnections", Name: "UpdateSyncConfigurationOutput"}
+	pUnit                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mBlockerStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sBlockerStatus_ACTIVE, &sBlockerStatus_RESOLVED}}
+var mBlockerType = smithy.SchemaMembers{List: []*smithy.Schema{&sBlockerType_AUTOMATED}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConditionalCheckFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sConditionalCheckFailedException_Message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sConnection_ConnectionName, &sConnection_ConnectionArn, &sConnection_ProviderType, &sConnection_OwnerAccountId, &sConnection_ConnectionStatus, &sConnection_HostArn}}
+var m_ConnectionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionList_member}}
+var mConnectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionStatus_PENDING, &sConnectionStatus_AVAILABLE, &sConnectionStatus_ERROR}}
+var mHost = smithy.SchemaMembers{List: []*smithy.Schema{&sHost_Name, &sHost_HostArn, &sHost_ProviderType, &sHost_ProviderEndpoint, &sHost_VpcConfiguration, &sHost_Status, &sHost_StatusMessage}}
+var m_HostList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HostList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_Message}}
+var m_LatestSyncBlockerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LatestSyncBlockerList_member}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mProviderType = smithy.SchemaMembers{List: []*smithy.Schema{&sProviderType_BITBUCKET, &sProviderType_GITHUB, &sProviderType_GITHUB_ENTERPRISE_SERVER, &sProviderType_GITLAB, &sProviderType_GITLAB_SELF_MANAGED}}
+var mPublishDeploymentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishDeploymentStatus_ENABLED, &sPublishDeploymentStatus_DISABLED}}
+var mRepositoryLinkInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryLinkInfo_ConnectionArn, &sRepositoryLinkInfo_EncryptionKeyArn, &sRepositoryLinkInfo_OwnerId, &sRepositoryLinkInfo_ProviderType, &sRepositoryLinkInfo_RepositoryLinkArn, &sRepositoryLinkInfo_RepositoryLinkId, &sRepositoryLinkInfo_RepositoryName}}
+var m_RepositoryLinkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoryLinkList_member}}
+var mRepositorySyncAttempt = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySyncAttempt_StartedAt, &sRepositorySyncAttempt_Status, &sRepositorySyncAttempt_Events}}
+var mRepositorySyncDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySyncDefinition_Branch, &sRepositorySyncDefinition_Directory, &sRepositorySyncDefinition_Parent, &sRepositorySyncDefinition_Target}}
+var m_RepositorySyncDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositorySyncDefinitionList_member}}
+var mRepositorySyncEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySyncEvent_Event, &sRepositorySyncEvent_ExternalId, &sRepositorySyncEvent_Time, &sRepositorySyncEvent_Type}}
+var m_RepositorySyncEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositorySyncEventList_member}}
+var mRepositorySyncStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySyncStatus_FAILED, &sRepositorySyncStatus_INITIATED, &sRepositorySyncStatus_IN_PROGRESS, &sRepositorySyncStatus_SUCCEEDED, &sRepositorySyncStatus_QUEUED}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceSyncAttempt = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSyncAttempt_Events, &sResourceSyncAttempt_InitialRevision, &sResourceSyncAttempt_StartedAt, &sResourceSyncAttempt_Status, &sResourceSyncAttempt_TargetRevision, &sResourceSyncAttempt_Target}}
+var mResourceSyncEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSyncEvent_Event, &sResourceSyncEvent_ExternalId, &sResourceSyncEvent_Time, &sResourceSyncEvent_Type}}
+var m_ResourceSyncEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSyncEventList_member}}
+var mResourceSyncStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSyncStatus_FAILED, &sResourceSyncStatus_INITIATED, &sResourceSyncStatus_IN_PROGRESS, &sResourceSyncStatus_SUCCEEDED}}
+var mResourceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceUnavailableException_Message}}
+var mRetryLatestCommitFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryLatestCommitFailedException_Message}}
+var mRevision = smithy.SchemaMembers{List: []*smithy.Schema{&sRevision_Branch, &sRevision_Directory, &sRevision_OwnerId, &sRevision_RepositoryName, &sRevision_ProviderType, &sRevision_Sha}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var mSyncBlocker = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncBlocker_Id, &sSyncBlocker_Type, &sSyncBlocker_Status, &sSyncBlocker_CreatedReason, &sSyncBlocker_CreatedAt, &sSyncBlocker_Contexts, &sSyncBlocker_ResolvedReason, &sSyncBlocker_ResolvedAt}}
+var mSyncBlockerContext = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncBlockerContext_Key, &sSyncBlockerContext_Value}}
+var m_SyncBlockerContextList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SyncBlockerContextList_member}}
+var mSyncBlockerDoesNotExistException = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncBlockerDoesNotExistException_Message}}
+var mSyncBlockerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncBlockerSummary_ResourceName, &sSyncBlockerSummary_ParentResourceName, &sSyncBlockerSummary_LatestBlockers}}
+var mSyncConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncConfiguration_Branch, &sSyncConfiguration_ConfigFile, &sSyncConfiguration_OwnerId, &sSyncConfiguration_ProviderType, &sSyncConfiguration_RepositoryLinkId, &sSyncConfiguration_RepositoryName, &sSyncConfiguration_ResourceName, &sSyncConfiguration_RoleArn, &sSyncConfiguration_SyncType, &sSyncConfiguration_PublishDeploymentStatus, &sSyncConfiguration_TriggerResourceUpdateOn}, Seed: 9, Slots: []uint16{
+	0, 0, 0, 11, 6, 4, 0, 0, 0, 10, 1, 5, 0, 0, 0, 0, 0, 3, 0, 8, 0, 0, 2, 0,
+	0, 7, 0, 0, 0, 0, 0, 9,
+}}
+var m_SyncConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SyncConfigurationList_member}}
+var mSyncConfigurationStillExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncConfigurationStillExistsException_Message}}
+var mSyncConfigurationType = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncConfigurationType_CFN_STACK_SYNC}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTriggerResourceUpdateOn = smithy.SchemaMembers{List: []*smithy.Schema{&sTriggerResourceUpdateOn_ANY_CHANGE, &sTriggerResourceUpdateOn_FILE_CHANGE}}
+var mUnsupportedOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedOperationException_Message}}
+var mUnsupportedProviderTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedProviderTypeException_Message}}
+var mUpdateOutOfSyncException = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOutOfSyncException_Message}}
+var mVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcConfiguration_VpcId, &sVpcConfiguration_SubnetIds, &sVpcConfiguration_SecurityGroupIds, &sVpcConfiguration_TlsCertificate}}
+var mCreateConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionInput_ProviderType, &sCreateConnectionInput_ConnectionName, &sCreateConnectionInput_Tags, &sCreateConnectionInput_HostArn}}
+var mCreateConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionOutput_ConnectionArn, &sCreateConnectionOutput_Tags}}
+var mCreateHostInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHostInput_Name, &sCreateHostInput_ProviderType, &sCreateHostInput_ProviderEndpoint, &sCreateHostInput_VpcConfiguration, &sCreateHostInput_Tags}}
+var mCreateHostOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHostOutput_HostArn, &sCreateHostOutput_Tags}}
+var mCreateRepositoryLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRepositoryLinkInput_ConnectionArn, &sCreateRepositoryLinkInput_OwnerId, &sCreateRepositoryLinkInput_RepositoryName, &sCreateRepositoryLinkInput_EncryptionKeyArn, &sCreateRepositoryLinkInput_Tags}}
+var mCreateRepositoryLinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRepositoryLinkOutput_RepositoryLinkInfo}}
+var mCreateSyncConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSyncConfigurationInput_Branch, &sCreateSyncConfigurationInput_ConfigFile, &sCreateSyncConfigurationInput_RepositoryLinkId, &sCreateSyncConfigurationInput_ResourceName, &sCreateSyncConfigurationInput_RoleArn, &sCreateSyncConfigurationInput_SyncType, &sCreateSyncConfigurationInput_PublishDeploymentStatus, &sCreateSyncConfigurationInput_TriggerResourceUpdateOn}}
+var mCreateSyncConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSyncConfigurationOutput_SyncConfiguration}}
+var mDeleteConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionInput_ConnectionArn}}
+var mDeleteHostInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteHostInput_HostArn}}
+var mDeleteRepositoryLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRepositoryLinkInput_RepositoryLinkId}}
+var mDeleteSyncConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSyncConfigurationInput_SyncType, &sDeleteSyncConfigurationInput_ResourceName}}
+var mGetConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionInput_ConnectionArn}}
+var mGetConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionOutput_Connection}}
+var mGetHostInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHostInput_HostArn}}
+var mGetHostOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHostOutput_Name, &sGetHostOutput_Status, &sGetHostOutput_ProviderType, &sGetHostOutput_ProviderEndpoint, &sGetHostOutput_VpcConfiguration}}
+var mGetRepositoryLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryLinkInput_RepositoryLinkId}}
+var mGetRepositoryLinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryLinkOutput_RepositoryLinkInfo}}
+var mGetRepositorySyncStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositorySyncStatusInput_Branch, &sGetRepositorySyncStatusInput_RepositoryLinkId, &sGetRepositorySyncStatusInput_SyncType}}
+var mGetRepositorySyncStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositorySyncStatusOutput_LatestSync}}
+var mGetResourceSyncStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSyncStatusInput_ResourceName, &sGetResourceSyncStatusInput_SyncType}}
+var mGetResourceSyncStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSyncStatusOutput_DesiredState, &sGetResourceSyncStatusOutput_LatestSuccessfulSync, &sGetResourceSyncStatusOutput_LatestSync}}
+var mGetSyncBlockerSummaryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSyncBlockerSummaryInput_SyncType, &sGetSyncBlockerSummaryInput_ResourceName}}
+var mGetSyncBlockerSummaryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSyncBlockerSummaryOutput_SyncBlockerSummary}}
+var mGetSyncConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSyncConfigurationInput_SyncType, &sGetSyncConfigurationInput_ResourceName}}
+var mGetSyncConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSyncConfigurationOutput_SyncConfiguration}}
+var mListConnectionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectionsInput_ProviderTypeFilter, &sListConnectionsInput_HostArnFilter, &sListConnectionsInput_MaxResults, &sListConnectionsInput_NextToken}}
+var mListConnectionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectionsOutput_Connections, &sListConnectionsOutput_NextToken}}
+var mListHostsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListHostsInput_MaxResults, &sListHostsInput_NextToken}}
+var mListHostsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListHostsOutput_Hosts, &sListHostsOutput_NextToken}}
+var mListRepositoryLinksInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoryLinksInput_MaxResults, &sListRepositoryLinksInput_NextToken}}
+var mListRepositoryLinksOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoryLinksOutput_RepositoryLinks, &sListRepositoryLinksOutput_NextToken}}
+var mListRepositorySyncDefinitionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositorySyncDefinitionsInput_RepositoryLinkId, &sListRepositorySyncDefinitionsInput_SyncType}}
+var mListRepositorySyncDefinitionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions, &sListRepositorySyncDefinitionsOutput_NextToken}}
+var mListSyncConfigurationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSyncConfigurationsInput_MaxResults, &sListSyncConfigurationsInput_NextToken, &sListSyncConfigurationsInput_RepositoryLinkId, &sListSyncConfigurationsInput_SyncType}}
+var mListSyncConfigurationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSyncConfigurationsOutput_SyncConfigurations, &sListSyncConfigurationsOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_TagKeys}}
+var mUpdateHostInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateHostInput_HostArn, &sUpdateHostInput_ProviderEndpoint, &sUpdateHostInput_VpcConfiguration}}
+var mUpdateRepositoryLinkInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRepositoryLinkInput_ConnectionArn, &sUpdateRepositoryLinkInput_EncryptionKeyArn, &sUpdateRepositoryLinkInput_RepositoryLinkId}}
+var mUpdateRepositoryLinkOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRepositoryLinkOutput_RepositoryLinkInfo}}
+var mUpdateSyncBlockerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSyncBlockerInput_Id, &sUpdateSyncBlockerInput_SyncType, &sUpdateSyncBlockerInput_ResourceName, &sUpdateSyncBlockerInput_ResolvedReason}}
+var mUpdateSyncBlockerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSyncBlockerOutput_ResourceName, &sUpdateSyncBlockerOutput_ParentResourceName, &sUpdateSyncBlockerOutput_SyncBlocker}}
+var mUpdateSyncConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSyncConfigurationInput_Branch, &sUpdateSyncConfigurationInput_ConfigFile, &sUpdateSyncConfigurationInput_RepositoryLinkId, &sUpdateSyncConfigurationInput_ResourceName, &sUpdateSyncConfigurationInput_RoleArn, &sUpdateSyncConfigurationInput_SyncType, &sUpdateSyncConfigurationInput_PublishDeploymentStatus, &sUpdateSyncConfigurationInput_TriggerResourceUpdateOn}}
+var mUpdateSyncConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSyncConfigurationOutput_SyncConfiguration}}
+
+var sCreateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnection, Type: smithy.ShapeTypeOperation})
+var sCreateHost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHost, Type: smithy.ShapeTypeOperation})
+var sCreateRepositoryLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryLink, Type: smithy.ShapeTypeOperation})
+var sCreateSyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSyncConfiguration, Type: smithy.ShapeTypeOperation})
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Type: smithy.ShapeTypeOperation})
+var sDeleteHost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHost, Type: smithy.ShapeTypeOperation})
+var sDeleteRepositoryLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryLink, Type: smithy.ShapeTypeOperation})
+var sDeleteSyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSyncConfiguration, Type: smithy.ShapeTypeOperation})
+var sGetConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnection, Type: smithy.ShapeTypeOperation})
+var sGetHost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHost, Type: smithy.ShapeTypeOperation})
+var sGetRepositoryLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryLink, Type: smithy.ShapeTypeOperation})
+var sGetRepositorySyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositorySyncStatus, Type: smithy.ShapeTypeOperation})
+var sGetResourceSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSyncStatus, Type: smithy.ShapeTypeOperation})
+var sGetSyncBlockerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncBlockerSummary, Type: smithy.ShapeTypeOperation})
+var sGetSyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncConfiguration, Type: smithy.ShapeTypeOperation})
+var sListConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnections, Type: smithy.ShapeTypeOperation})
+var sListHosts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHosts, Type: smithy.ShapeTypeOperation})
+var sListRepositoryLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoryLinks, Type: smithy.ShapeTypeOperation})
+var sListRepositorySyncDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositorySyncDefinitions, Type: smithy.ShapeTypeOperation})
+var sListSyncConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncConfigurations, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateHost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHost, Type: smithy.ShapeTypeOperation})
+var sUpdateRepositoryLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryLink, Type: smithy.ShapeTypeOperation})
+var sUpdateSyncBlocker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSyncBlocker, Type: smithy.ShapeTypeOperation})
+var sUpdateSyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSyncConfiguration, Type: smithy.ShapeTypeOperation})
+var s_CodeStar_connections_20191201 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeStar_connections_20191201, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sBlockerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockerStatus, Members: &mBlockerStatus, Type: smithy.ShapeTypeEnum})
+var sBlockerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBlockerType, Members: &mBlockerType, Type: smithy.ShapeTypeEnum})
+var s_BranchName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BranchName, Type: smithy.ShapeTypeString})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sConditionalCheckFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConditionalCheckFailedException, Members: &mConditionalCheckFailedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var s_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var s_ConnectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var s_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum})
+var s_CreatedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedReason, Type: smithy.ShapeTypeString})
+var s_DeploymentFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentFilePath, Type: smithy.ShapeTypeString})
+var s_Directory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Directory, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Event = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Event, Type: smithy.ShapeTypeString})
+var s_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sHost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHost, Members: &mHost, Type: smithy.ShapeTypeStructure})
+var s_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var s_HostList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostList, Members: &m_HostList, Type: smithy.ShapeTypeList})
+var s_HostName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostName, Type: smithy.ShapeTypeString})
+var s_HostStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostStatus, Type: smithy.ShapeTypeString})
+var s_HostStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostStatusMessage, Type: smithy.ShapeTypeString})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var s_LatestSyncBlockerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LatestSyncBlockerList, Members: &m_LatestSyncBlockerList, Type: smithy.ShapeTypeList})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerId, Type: smithy.ShapeTypeString})
+var s_Parent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Parent, Type: smithy.ShapeTypeString})
+var sProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sPublishDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishDeploymentStatus, Members: &mPublishDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var s_RepositoryLinkArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryLinkArn, Type: smithy.ShapeTypeString})
+var s_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sRepositoryLinkInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryLinkInfo, Members: &mRepositoryLinkInfo, Type: smithy.ShapeTypeStructure})
+var s_RepositoryLinkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryLinkList, Members: &m_RepositoryLinkList, Type: smithy.ShapeTypeList})
+var s_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepositorySyncAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySyncAttempt, Members: &mRepositorySyncAttempt, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySyncDefinition, Members: &mRepositorySyncDefinition, Type: smithy.ShapeTypeStructure})
+var s_RepositorySyncDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositorySyncDefinitionList, Members: &m_RepositorySyncDefinitionList, Type: smithy.ShapeTypeList})
+var sRepositorySyncEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySyncEvent, Members: &mRepositorySyncEvent, Type: smithy.ShapeTypeStructure})
+var s_RepositorySyncEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositorySyncEventList, Members: &m_RepositorySyncEventList, Type: smithy.ShapeTypeList})
+var sRepositorySyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySyncStatus, Members: &mRepositorySyncStatus, Type: smithy.ShapeTypeEnum})
+var s_ResolvedReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedReason, Type: smithy.ShapeTypeString})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sResourceSyncAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sResourceSyncEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSyncEvent, Members: &mResourceSyncEvent, Type: smithy.ShapeTypeStructure})
+var s_ResourceSyncEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSyncEventList, Members: &m_ResourceSyncEventList, Type: smithy.ShapeTypeList})
+var sResourceSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSyncStatus, Members: &mResourceSyncStatus, Type: smithy.ShapeTypeEnum})
+var sResourceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceUnavailableException, Members: &mResourceUnavailableException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sRetryLatestCommitFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryLatestCommitFailedException, Members: &mRetryLatestCommitFailedException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var s_SHA = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SHA, Type: smithy.ShapeTypeString})
+var s_SharpNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SharpNextToken, Type: smithy.ShapeTypeString})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sSyncBlocker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncBlocker, Members: &mSyncBlocker, Type: smithy.ShapeTypeStructure})
+var sSyncBlockerContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncBlockerContext, Members: &mSyncBlockerContext, Type: smithy.ShapeTypeStructure})
+var s_SyncBlockerContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncBlockerContextKey, Type: smithy.ShapeTypeString})
+var s_SyncBlockerContextList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncBlockerContextList, Members: &m_SyncBlockerContextList, Type: smithy.ShapeTypeList})
+var s_SyncBlockerContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncBlockerContextValue, Type: smithy.ShapeTypeString})
+var sSyncBlockerDoesNotExistException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncBlockerDoesNotExistException, Members: &mSyncBlockerDoesNotExistException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sSyncBlockerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncBlockerSummary, Members: &mSyncBlockerSummary, Type: smithy.ShapeTypeStructure})
+var sSyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncConfiguration, Members: &mSyncConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SyncConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncConfigurationList, Members: &m_SyncConfigurationList, Type: smithy.ShapeTypeList})
+var sSyncConfigurationStillExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncConfigurationStillExistsException, Members: &mSyncConfigurationStillExistsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sSyncConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Target = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Target, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TlsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TlsCertificate, Type: smithy.ShapeTypeString})
+var sTriggerResourceUpdateOn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTriggerResourceUpdateOn, Members: &mTriggerResourceUpdateOn, Type: smithy.ShapeTypeEnum})
+var s_Type = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Type, Type: smithy.ShapeTypeString})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sUnsupportedProviderTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedProviderTypeException, Members: &mUnsupportedProviderTypeException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sUpdateOutOfSyncException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOutOfSyncException, Members: &mUpdateOutOfSyncException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString})
+var sVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sCreateConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionInput, Members: &mCreateConnectionInput, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionOutput, Members: &mCreateConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sCreateHostInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHostInput, Members: &mCreateHostInput, Type: smithy.ShapeTypeStructure})
+var sCreateHostOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHostOutput, Members: &mCreateHostOutput, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryLinkInput, Members: &mCreateRepositoryLinkInput, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryLinkOutput, Members: &mCreateRepositoryLinkOutput, Type: smithy.ShapeTypeStructure})
+var sCreateSyncConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSyncConfigurationInput, Members: &mCreateSyncConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sCreateSyncConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSyncConfigurationOutput, Members: &mCreateSyncConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionInput, Members: &mDeleteConnectionInput, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteHostInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHostInput, Members: &mDeleteHostInput, Type: smithy.ShapeTypeStructure})
+var sDeleteHostOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteHostOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryLinkInput, Members: &mDeleteRepositoryLinkInput, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryLinkOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteSyncConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSyncConfigurationInput, Members: &mDeleteSyncConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteSyncConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSyncConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sGetConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionInput, Members: &mGetConnectionInput, Type: smithy.ShapeTypeStructure})
+var sGetConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionOutput, Members: &mGetConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sGetHostInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostInput, Members: &mGetHostInput, Type: smithy.ShapeTypeStructure})
+var sGetHostOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHostOutput, Members: &mGetHostOutput, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryLinkInput, Members: &mGetRepositoryLinkInput, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryLinkOutput, Members: &mGetRepositoryLinkOutput, Type: smithy.ShapeTypeStructure})
+var sGetRepositorySyncStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositorySyncStatusInput, Members: &mGetRepositorySyncStatusInput, Type: smithy.ShapeTypeStructure})
+var sGetRepositorySyncStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositorySyncStatusOutput, Members: &mGetRepositorySyncStatusOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourceSyncStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSyncStatusInput, Members: &mGetResourceSyncStatusInput, Type: smithy.ShapeTypeStructure})
+var sGetResourceSyncStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSyncStatusOutput, Members: &mGetResourceSyncStatusOutput, Type: smithy.ShapeTypeStructure})
+var sGetSyncBlockerSummaryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncBlockerSummaryInput, Members: &mGetSyncBlockerSummaryInput, Type: smithy.ShapeTypeStructure})
+var sGetSyncBlockerSummaryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncBlockerSummaryOutput, Members: &mGetSyncBlockerSummaryOutput, Type: smithy.ShapeTypeStructure})
+var sGetSyncConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncConfigurationInput, Members: &mGetSyncConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sGetSyncConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSyncConfigurationOutput, Members: &mGetSyncConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sListConnectionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsInput, Members: &mListConnectionsInput, Type: smithy.ShapeTypeStructure})
+var sListConnectionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectionsOutput, Members: &mListConnectionsOutput, Type: smithy.ShapeTypeStructure})
+var sListHostsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostsInput, Members: &mListHostsInput, Type: smithy.ShapeTypeStructure})
+var sListHostsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHostsOutput, Members: &mListHostsOutput, Type: smithy.ShapeTypeStructure})
+var sListRepositoryLinksInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoryLinksInput, Members: &mListRepositoryLinksInput, Type: smithy.ShapeTypeStructure})
+var sListRepositoryLinksOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoryLinksOutput, Members: &mListRepositoryLinksOutput, Type: smithy.ShapeTypeStructure})
+var sListRepositorySyncDefinitionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositorySyncDefinitionsInput, Members: &mListRepositorySyncDefinitionsInput, Type: smithy.ShapeTypeStructure})
+var sListRepositorySyncDefinitionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositorySyncDefinitionsOutput, Members: &mListRepositorySyncDefinitionsOutput, Type: smithy.ShapeTypeStructure})
+var sListSyncConfigurationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncConfigurationsInput, Members: &mListSyncConfigurationsInput, Type: smithy.ShapeTypeStructure})
+var sListSyncConfigurationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSyncConfigurationsOutput, Members: &mListSyncConfigurationsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateHostInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostInput, Members: &mUpdateHostInput, Type: smithy.ShapeTypeStructure})
+var sUpdateHostOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateHostOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateRepositoryLinkInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryLinkInput, Members: &mUpdateRepositoryLinkInput, Type: smithy.ShapeTypeStructure})
+var sUpdateRepositoryLinkOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRepositoryLinkOutput, Members: &mUpdateRepositoryLinkOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSyncBlockerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSyncBlockerInput, Members: &mUpdateSyncBlockerInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSyncBlockerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSyncBlockerOutput, Members: &mUpdateSyncBlockerOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateSyncConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSyncConfigurationInput, Members: &mUpdateSyncConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateSyncConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSyncConfigurationOutput, Members: &mUpdateSyncConfigurationOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBlockerStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockerStatus_RESOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBlockerType_AUTOMATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConditionalCheckFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConnection_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnection_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sConnection_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sConnection_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sConnection_ConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionStatus", ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sConnection_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArn", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var s_ConnectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHost_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HostName, Type: smithy.ShapeTypeString})
+var sHost_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArn", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var sHost_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sHost_ProviderEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderEndpoint", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sHost_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sHost_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HostStatus, Type: smithy.ShapeTypeString})
+var sHost_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_HostStatusMessage, Type: smithy.ShapeTypeString})
+var s_HostList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHost, Members: &mHost, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidInputException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_LatestSyncBlockerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncBlocker, Members: &mSyncBlocker, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sProviderType_BITBUCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BITBUCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProviderType_GITHUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProviderType_GITHUB_ENTERPRISE_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITHUB_ENTERPRISE_SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProviderType_GITLAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProviderType_GITLAB_SELF_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GITLAB_SELF_MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishDeploymentStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishDeploymentStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRepositoryLinkInfo_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sRepositoryLinkInfo_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sRepositoryLinkInfo_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_OwnerId, Type: smithy.ShapeTypeString})
+var sRepositoryLinkInfo_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sRepositoryLinkInfo_RepositoryLinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkArn", ID: &i_RepositoryLinkArn, Type: smithy.ShapeTypeString})
+var sRepositoryLinkInfo_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sRepositoryLinkInfo_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var s_RepositoryLinkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositoryLinkInfo, Members: &mRepositoryLinkInfo, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncAttempt_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRepositorySyncAttempt_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRepositorySyncStatus, Members: &mRepositorySyncStatus, Type: smithy.ShapeTypeEnum})
+var sRepositorySyncAttempt_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_RepositorySyncEventList, Members: &m_RepositorySyncEventList, Type: smithy.ShapeTypeList})
+var sRepositorySyncDefinition_Branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Branch", ID: &i_BranchName, Type: smithy.ShapeTypeString})
+var sRepositorySyncDefinition_Directory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Directory", ID: &i_Directory, Type: smithy.ShapeTypeString})
+var sRepositorySyncDefinition_Parent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parent", ID: &i_Parent, Type: smithy.ShapeTypeString})
+var sRepositorySyncDefinition_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Target, Type: smithy.ShapeTypeString})
+var s_RepositorySyncDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositorySyncDefinition, Members: &mRepositorySyncDefinition, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncEvent_Event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Event", ID: &i_Event, Type: smithy.ShapeTypeString})
+var sRepositorySyncEvent_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sRepositorySyncEvent_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sRepositorySyncEvent_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_Type, Type: smithy.ShapeTypeString})
+var s_RepositorySyncEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositorySyncEvent, Members: &mRepositorySyncEvent, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncStatus_INITIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceSyncAttempt_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_ResourceSyncEventList, Members: &m_ResourceSyncEventList, Type: smithy.ShapeTypeList})
+var sResourceSyncAttempt_InitialRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InitialRevision", ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var sResourceSyncAttempt_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sResourceSyncAttempt_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iResourceSyncStatus, Members: &mResourceSyncStatus, Type: smithy.ShapeTypeEnum})
+var sResourceSyncAttempt_TargetRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetRevision", ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var sResourceSyncAttempt_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_Target, Type: smithy.ShapeTypeString})
+var sResourceSyncEvent_Event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Event", ID: &i_Event, Type: smithy.ShapeTypeString})
+var sResourceSyncEvent_ExternalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalId", ID: &i_ExternalId, Type: smithy.ShapeTypeString})
+var sResourceSyncEvent_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sResourceSyncEvent_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_Type, Type: smithy.ShapeTypeString})
+var s_ResourceSyncEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSyncEvent, Members: &mResourceSyncEvent, Type: smithy.ShapeTypeStructure})
+var sResourceSyncStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceSyncStatus_INITIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceSyncStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceSyncStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRetryLatestCommitFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRevision_Branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Branch", ID: &i_BranchName, Type: smithy.ShapeTypeString})
+var sRevision_Directory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Directory", ID: &i_Directory, Type: smithy.ShapeTypeString})
+var sRevision_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_OwnerId, Type: smithy.ShapeTypeString})
+var sRevision_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRevision_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sRevision_Sha = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sha", ID: &i_SHA, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sSyncBlocker_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sSyncBlocker_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iBlockerType, Members: &mBlockerType, Type: smithy.ShapeTypeEnum})
+var sSyncBlocker_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iBlockerStatus, Members: &mBlockerStatus, Type: smithy.ShapeTypeEnum})
+var sSyncBlocker_CreatedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedReason", ID: &i_CreatedReason, Type: smithy.ShapeTypeString})
+var sSyncBlocker_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSyncBlocker_Contexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contexts", ID: &i_SyncBlockerContextList, Members: &m_SyncBlockerContextList, Type: smithy.ShapeTypeList})
+var sSyncBlocker_ResolvedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolvedReason", ID: &i_ResolvedReason, Type: smithy.ShapeTypeString})
+var sSyncBlocker_ResolvedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolvedAt", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSyncBlockerContext_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_SyncBlockerContextKey, Type: smithy.ShapeTypeString})
+var sSyncBlockerContext_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_SyncBlockerContextValue, Type: smithy.ShapeTypeString})
+var s_SyncBlockerContextList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncBlockerContext, Members: &mSyncBlockerContext, Type: smithy.ShapeTypeStructure})
+var sSyncBlockerDoesNotExistException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSyncBlockerSummary_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sSyncBlockerSummary_ParentResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sSyncBlockerSummary_LatestBlockers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestBlockers", ID: &i_LatestSyncBlockerList, Members: &m_LatestSyncBlockerList, Type: smithy.ShapeTypeList})
+var sSyncConfiguration_Branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Branch", ID: &i_BranchName, Type: smithy.ShapeTypeString})
+var sSyncConfiguration_ConfigFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigFile", ID: &i_DeploymentFilePath, Type: smithy.ShapeTypeString})
+var sSyncConfiguration_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_OwnerId, Type: smithy.ShapeTypeString})
+var sSyncConfiguration_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sSyncConfiguration_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sSyncConfiguration_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sSyncConfiguration_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sSyncConfiguration_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sSyncConfiguration_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sSyncConfiguration_PublishDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishDeploymentStatus", ID: &iPublishDeploymentStatus, Members: &mPublishDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var sSyncConfiguration_TriggerResourceUpdateOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerResourceUpdateOn", ID: &iTriggerResourceUpdateOn, Members: &mTriggerResourceUpdateOn, Type: smithy.ShapeTypeEnum})
+var s_SyncConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncConfiguration, Members: &mSyncConfiguration, Type: smithy.ShapeTypeStructure})
+var sSyncConfigurationStillExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSyncConfigurationType_CFN_STACK_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CFN_STACK_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTriggerResourceUpdateOn_ANY_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTriggerResourceUpdateOn_FILE_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUnsupportedOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUnsupportedProviderTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateOutOfSyncException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sVpcConfiguration_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sVpcConfiguration_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sVpcConfiguration_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sVpcConfiguration_TlsCertificate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsCertificate", ID: &i_TlsCertificate, Type: smithy.ShapeTypeString})
+var sCreateConnectionInput_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sCreateConnectionInput_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sCreateConnectionInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateConnectionInput_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArn", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var sCreateConnectionOutput_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sCreateConnectionOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateHostInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HostName, Type: smithy.ShapeTypeString})
+var sCreateHostInput_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sCreateHostInput_ProviderEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderEndpoint", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sCreateHostInput_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateHostInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateHostOutput_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArn", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var sCreateHostOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateRepositoryLinkInput_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sCreateRepositoryLinkInput_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_OwnerId, Type: smithy.ShapeTypeString})
+var sCreateRepositoryLinkInput_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sCreateRepositoryLinkInput_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sCreateRepositoryLinkInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateRepositoryLinkOutput_RepositoryLinkInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkInfo", ID: &iRepositoryLinkInfo, Members: &mRepositoryLinkInfo, Type: smithy.ShapeTypeStructure})
+var sCreateSyncConfigurationInput_Branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Branch", ID: &i_BranchName, Type: smithy.ShapeTypeString})
+var sCreateSyncConfigurationInput_ConfigFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigFile", ID: &i_DeploymentFilePath, Type: smithy.ShapeTypeString})
+var sCreateSyncConfigurationInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sCreateSyncConfigurationInput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateSyncConfigurationInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sCreateSyncConfigurationInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sCreateSyncConfigurationInput_PublishDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishDeploymentStatus", ID: &iPublishDeploymentStatus, Members: &mPublishDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var sCreateSyncConfigurationInput_TriggerResourceUpdateOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerResourceUpdateOn", ID: &iTriggerResourceUpdateOn, Members: &mTriggerResourceUpdateOn, Type: smithy.ShapeTypeEnum})
+var sCreateSyncConfigurationOutput_SyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncConfiguration", ID: &iSyncConfiguration, Members: &mSyncConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionInput_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sDeleteHostInput_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArn", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryLinkInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sDeleteSyncConfigurationInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sDeleteSyncConfigurationInput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetConnectionInput_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sGetConnectionOutput_Connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sGetHostInput_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArn", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var sGetHostOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_HostName, Type: smithy.ShapeTypeString})
+var sGetHostOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_HostStatus, Type: smithy.ShapeTypeString})
+var sGetHostOutput_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sGetHostOutput_ProviderEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderEndpoint", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sGetHostOutput_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryLinkInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sGetRepositoryLinkOutput_RepositoryLinkInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkInfo", ID: &iRepositoryLinkInfo, Members: &mRepositoryLinkInfo, Type: smithy.ShapeTypeStructure})
+var sGetRepositorySyncStatusInput_Branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Branch", ID: &i_BranchName, Type: smithy.ShapeTypeString})
+var sGetRepositorySyncStatusInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sGetRepositorySyncStatusInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sGetRepositorySyncStatusOutput_LatestSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestSync", ID: &iRepositorySyncAttempt, Members: &mRepositorySyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetResourceSyncStatusInput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetResourceSyncStatusInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sGetResourceSyncStatusOutput_DesiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DesiredState", ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var sGetResourceSyncStatusOutput_LatestSuccessfulSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestSuccessfulSync", ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetResourceSyncStatusOutput_LatestSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestSync", ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetSyncBlockerSummaryInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sGetSyncBlockerSummaryInput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetSyncBlockerSummaryOutput_SyncBlockerSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncBlockerSummary", ID: &iSyncBlockerSummary, Members: &mSyncBlockerSummary, Type: smithy.ShapeTypeStructure})
+var sGetSyncConfigurationInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sGetSyncConfigurationInput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetSyncConfigurationOutput_SyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncConfiguration", ID: &iSyncConfiguration, Members: &mSyncConfiguration, Type: smithy.ShapeTypeStructure})
+var sListConnectionsInput_ProviderTypeFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderTypeFilter", ID: &iProviderType, Members: &mProviderType, Type: smithy.ShapeTypeEnum})
+var sListConnectionsInput_HostArnFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArnFilter", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var sListConnectionsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListConnectionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectionsOutput_Connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connections", ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var sListConnectionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListHostsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListHostsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListHostsOutput_Hosts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hosts", ID: &i_HostList, Members: &m_HostList, Type: smithy.ShapeTypeList})
+var sListHostsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRepositoryLinksInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListRepositoryLinksInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SharpNextToken, Type: smithy.ShapeTypeString})
+var sListRepositoryLinksOutput_RepositoryLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinks", ID: &i_RepositoryLinkList, Members: &m_RepositoryLinkList, Type: smithy.ShapeTypeList})
+var sListRepositoryLinksOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SharpNextToken, Type: smithy.ShapeTypeString})
+var sListRepositorySyncDefinitionsInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sListRepositorySyncDefinitionsInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositorySyncDefinitions", ID: &i_RepositorySyncDefinitionList, Members: &m_RepositorySyncDefinitionList, Type: smithy.ShapeTypeList})
+var sListRepositorySyncDefinitionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SharpNextToken, Type: smithy.ShapeTypeString})
+var sListSyncConfigurationsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListSyncConfigurationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SharpNextToken, Type: smithy.ShapeTypeString})
+var sListSyncConfigurationsInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sListSyncConfigurationsInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sListSyncConfigurationsOutput_SyncConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncConfigurations", ID: &i_SyncConfigurationList, Members: &m_SyncConfigurationList, Type: smithy.ShapeTypeList})
+var sListSyncConfigurationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_SharpNextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateHostInput_HostArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostArn", ID: &i_HostArn, Type: smithy.ShapeTypeString})
+var sUpdateHostInput_ProviderEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderEndpoint", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sUpdateHostInput_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iVpcConfiguration, Members: &mVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateRepositoryLinkInput_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sUpdateRepositoryLinkInput_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sUpdateRepositoryLinkInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sUpdateRepositoryLinkOutput_RepositoryLinkInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkInfo", ID: &iRepositoryLinkInfo, Members: &mRepositoryLinkInfo, Type: smithy.ShapeTypeStructure})
+var sUpdateSyncBlockerInput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Id, Type: smithy.ShapeTypeString})
+var sUpdateSyncBlockerInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sUpdateSyncBlockerInput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateSyncBlockerInput_ResolvedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResolvedReason", ID: &i_ResolvedReason, Type: smithy.ShapeTypeString})
+var sUpdateSyncBlockerOutput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateSyncBlockerOutput_ParentResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateSyncBlockerOutput_SyncBlocker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncBlocker", ID: &iSyncBlocker, Members: &mSyncBlocker, Type: smithy.ShapeTypeStructure})
+var sUpdateSyncConfigurationInput_Branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Branch", ID: &i_BranchName, Type: smithy.ShapeTypeString})
+var sUpdateSyncConfigurationInput_ConfigFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigFile", ID: &i_DeploymentFilePath, Type: smithy.ShapeTypeString})
+var sUpdateSyncConfigurationInput_RepositoryLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RepositoryLinkId", ID: &i_RepositoryLinkId, Type: smithy.ShapeTypeString})
+var sUpdateSyncConfigurationInput_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateSyncConfigurationInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateSyncConfigurationInput_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncType", ID: &iSyncConfigurationType, Members: &mSyncConfigurationType, Type: smithy.ShapeTypeEnum})
+var sUpdateSyncConfigurationInput_PublishDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishDeploymentStatus", ID: &iPublishDeploymentStatus, Members: &mPublishDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateSyncConfigurationInput_TriggerResourceUpdateOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TriggerResourceUpdateOn", ID: &iTriggerResourceUpdateOn, Members: &mTriggerResourceUpdateOn, Type: smithy.ShapeTypeEnum})
+var sUpdateSyncConfigurationOutput_SyncConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SyncConfiguration", ID: &iSyncConfiguration, Members: &mSyncConfiguration, Type: smithy.ShapeTypeStructure})
+
+var CreateConnection = &sCreateConnection
+
+var CreateHost = &sCreateHost
+
+var CreateRepositoryLink = &sCreateRepositoryLink
+
+var CreateSyncConfiguration = &sCreateSyncConfiguration
+
+var DeleteConnection = &sDeleteConnection
+
+var DeleteHost = &sDeleteHost
+
+var DeleteRepositoryLink = &sDeleteRepositoryLink
+
+var DeleteSyncConfiguration = &sDeleteSyncConfiguration
+
+var GetConnection = &sGetConnection
+
+var GetHost = &sGetHost
+
+var GetRepositoryLink = &sGetRepositoryLink
+
+var GetRepositorySyncStatus = &sGetRepositorySyncStatus
+
+var GetResourceSyncStatus = &sGetResourceSyncStatus
+
+var GetSyncBlockerSummary = &sGetSyncBlockerSummary
+
+var GetSyncConfiguration = &sGetSyncConfiguration
+
+var ListConnections = &sListConnections
+
+var ListHosts = &sListHosts
+
+var ListRepositoryLinks = &sListRepositoryLinks
+
+var ListRepositorySyncDefinitions = &sListRepositorySyncDefinitions
+
+var ListSyncConfigurations = &sListSyncConfigurations
+
+var ListTagsForResource = &sListTagsForResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateHost = &sUpdateHost
+
+var UpdateRepositoryLink = &sUpdateRepositoryLink
+
+var UpdateSyncBlocker = &sUpdateSyncBlocker
+
+var UpdateSyncConfiguration = &sUpdateSyncConfiguration
+
+var _CodeStar_connections_20191201 = &s_CodeStar_connections_20191201
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var BlockerStatus = &sBlockerStatus
+var BlockerStatus_ACTIVE = &sBlockerStatus_ACTIVE
+var BlockerStatus_RESOLVED = &sBlockerStatus_RESOLVED
+
+var BlockerType = &sBlockerType
+var BlockerType_AUTOMATED = &sBlockerType_AUTOMATED
+
+var _BranchName = &s_BranchName
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConditionalCheckFailedException = &sConditionalCheckFailedException
+var ConditionalCheckFailedException_Message = &sConditionalCheckFailedException_Message
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var Connection = &sConnection
+var Connection_ConnectionName = &sConnection_ConnectionName
+var Connection_ConnectionArn = &sConnection_ConnectionArn
+var Connection_ProviderType = &sConnection_ProviderType
+var Connection_OwnerAccountId = &sConnection_OwnerAccountId
+var Connection_ConnectionStatus = &sConnection_ConnectionStatus
+var Connection_HostArn = &sConnection_HostArn
+
+var _ConnectionArn = &s_ConnectionArn
+
+var _ConnectionList = &s_ConnectionList
+var _ConnectionList_member = &s_ConnectionList_member
+
+var _ConnectionName = &s_ConnectionName
+
+var ConnectionStatus = &sConnectionStatus
+var ConnectionStatus_PENDING = &sConnectionStatus_PENDING
+var ConnectionStatus_AVAILABLE = &sConnectionStatus_AVAILABLE
+var ConnectionStatus_ERROR = &sConnectionStatus_ERROR
+
+var _CreatedReason = &s_CreatedReason
+
+var _DeploymentFilePath = &s_DeploymentFilePath
+
+var _Directory = &s_Directory
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Event = &s_Event
+
+var _ExternalId = &s_ExternalId
+
+var Host = &sHost
+var Host_Name = &sHost_Name
+var Host_HostArn = &sHost_HostArn
+var Host_ProviderType = &sHost_ProviderType
+var Host_ProviderEndpoint = &sHost_ProviderEndpoint
+var Host_VpcConfiguration = &sHost_VpcConfiguration
+var Host_Status = &sHost_Status
+var Host_StatusMessage = &sHost_StatusMessage
+
+var _HostArn = &s_HostArn
+
+var _HostList = &s_HostList
+var _HostList_member = &s_HostList_member
+
+var _HostName = &s_HostName
+
+var _HostStatus = &s_HostStatus
+
+var _HostStatusMessage = &s_HostStatusMessage
+
+var _IamRoleArn = &s_IamRoleArn
+
+var _Id = &s_Id
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_Message = &sInvalidInputException_Message
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LatestSyncBlockerList = &s_LatestSyncBlockerList
+var _LatestSyncBlockerList_member = &s_LatestSyncBlockerList_member
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var _MaxResults = &s_MaxResults
+
+var _NextToken = &s_NextToken
+
+var _OwnerId = &s_OwnerId
+
+var _Parent = &s_Parent
+
+var ProviderType = &sProviderType
+var ProviderType_BITBUCKET = &sProviderType_BITBUCKET
+var ProviderType_GITHUB = &sProviderType_GITHUB
+var ProviderType_GITHUB_ENTERPRISE_SERVER = &sProviderType_GITHUB_ENTERPRISE_SERVER
+var ProviderType_GITLAB = &sProviderType_GITLAB
+var ProviderType_GITLAB_SELF_MANAGED = &sProviderType_GITLAB_SELF_MANAGED
+
+var PublishDeploymentStatus = &sPublishDeploymentStatus
+var PublishDeploymentStatus_ENABLED = &sPublishDeploymentStatus_ENABLED
+var PublishDeploymentStatus_DISABLED = &sPublishDeploymentStatus_DISABLED
+
+var _RepositoryLinkArn = &s_RepositoryLinkArn
+
+var _RepositoryLinkId = &s_RepositoryLinkId
+
+var RepositoryLinkInfo = &sRepositoryLinkInfo
+var RepositoryLinkInfo_ConnectionArn = &sRepositoryLinkInfo_ConnectionArn
+var RepositoryLinkInfo_EncryptionKeyArn = &sRepositoryLinkInfo_EncryptionKeyArn
+var RepositoryLinkInfo_OwnerId = &sRepositoryLinkInfo_OwnerId
+var RepositoryLinkInfo_ProviderType = &sRepositoryLinkInfo_ProviderType
+var RepositoryLinkInfo_RepositoryLinkArn = &sRepositoryLinkInfo_RepositoryLinkArn
+var RepositoryLinkInfo_RepositoryLinkId = &sRepositoryLinkInfo_RepositoryLinkId
+var RepositoryLinkInfo_RepositoryName = &sRepositoryLinkInfo_RepositoryName
+
+var _RepositoryLinkList = &s_RepositoryLinkList
+var _RepositoryLinkList_member = &s_RepositoryLinkList_member
+
+var _RepositoryName = &s_RepositoryName
+
+var RepositorySyncAttempt = &sRepositorySyncAttempt
+var RepositorySyncAttempt_StartedAt = &sRepositorySyncAttempt_StartedAt
+var RepositorySyncAttempt_Status = &sRepositorySyncAttempt_Status
+var RepositorySyncAttempt_Events = &sRepositorySyncAttempt_Events
+
+var RepositorySyncDefinition = &sRepositorySyncDefinition
+var RepositorySyncDefinition_Branch = &sRepositorySyncDefinition_Branch
+var RepositorySyncDefinition_Directory = &sRepositorySyncDefinition_Directory
+var RepositorySyncDefinition_Parent = &sRepositorySyncDefinition_Parent
+var RepositorySyncDefinition_Target = &sRepositorySyncDefinition_Target
+
+var _RepositorySyncDefinitionList = &s_RepositorySyncDefinitionList
+var _RepositorySyncDefinitionList_member = &s_RepositorySyncDefinitionList_member
+
+var RepositorySyncEvent = &sRepositorySyncEvent
+var RepositorySyncEvent_Event = &sRepositorySyncEvent_Event
+var RepositorySyncEvent_ExternalId = &sRepositorySyncEvent_ExternalId
+var RepositorySyncEvent_Time = &sRepositorySyncEvent_Time
+var RepositorySyncEvent_Type = &sRepositorySyncEvent_Type
+
+var _RepositorySyncEventList = &s_RepositorySyncEventList
+var _RepositorySyncEventList_member = &s_RepositorySyncEventList_member
+
+var RepositorySyncStatus = &sRepositorySyncStatus
+var RepositorySyncStatus_FAILED = &sRepositorySyncStatus_FAILED
+var RepositorySyncStatus_INITIATED = &sRepositorySyncStatus_INITIATED
+var RepositorySyncStatus_IN_PROGRESS = &sRepositorySyncStatus_IN_PROGRESS
+var RepositorySyncStatus_SUCCEEDED = &sRepositorySyncStatus_SUCCEEDED
+var RepositorySyncStatus_QUEUED = &sRepositorySyncStatus_QUEUED
+
+var _ResolvedReason = &s_ResolvedReason
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_Message = &sResourceAlreadyExistsException_Message
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceSyncAttempt = &sResourceSyncAttempt
+var ResourceSyncAttempt_Events = &sResourceSyncAttempt_Events
+var ResourceSyncAttempt_InitialRevision = &sResourceSyncAttempt_InitialRevision
+var ResourceSyncAttempt_StartedAt = &sResourceSyncAttempt_StartedAt
+var ResourceSyncAttempt_Status = &sResourceSyncAttempt_Status
+var ResourceSyncAttempt_TargetRevision = &sResourceSyncAttempt_TargetRevision
+var ResourceSyncAttempt_Target = &sResourceSyncAttempt_Target
+
+var ResourceSyncEvent = &sResourceSyncEvent
+var ResourceSyncEvent_Event = &sResourceSyncEvent_Event
+var ResourceSyncEvent_ExternalId = &sResourceSyncEvent_ExternalId
+var ResourceSyncEvent_Time = &sResourceSyncEvent_Time
+var ResourceSyncEvent_Type = &sResourceSyncEvent_Type
+
+var _ResourceSyncEventList = &s_ResourceSyncEventList
+var _ResourceSyncEventList_member = &s_ResourceSyncEventList_member
+
+var ResourceSyncStatus = &sResourceSyncStatus
+var ResourceSyncStatus_FAILED = &sResourceSyncStatus_FAILED
+var ResourceSyncStatus_INITIATED = &sResourceSyncStatus_INITIATED
+var ResourceSyncStatus_IN_PROGRESS = &sResourceSyncStatus_IN_PROGRESS
+var ResourceSyncStatus_SUCCEEDED = &sResourceSyncStatus_SUCCEEDED
+
+var ResourceUnavailableException = &sResourceUnavailableException
+var ResourceUnavailableException_Message = &sResourceUnavailableException_Message
+
+var RetryLatestCommitFailedException = &sRetryLatestCommitFailedException
+var RetryLatestCommitFailedException_Message = &sRetryLatestCommitFailedException_Message
+
+var Revision = &sRevision
+var Revision_Branch = &sRevision_Branch
+var Revision_Directory = &sRevision_Directory
+var Revision_OwnerId = &sRevision_OwnerId
+var Revision_RepositoryName = &sRevision_RepositoryName
+var Revision_ProviderType = &sRevision_ProviderType
+var Revision_Sha = &sRevision_Sha
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var _SHA = &s_SHA
+
+var _SharpNextToken = &s_SharpNextToken
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var SyncBlocker = &sSyncBlocker
+var SyncBlocker_Id = &sSyncBlocker_Id
+var SyncBlocker_Type = &sSyncBlocker_Type
+var SyncBlocker_Status = &sSyncBlocker_Status
+var SyncBlocker_CreatedReason = &sSyncBlocker_CreatedReason
+var SyncBlocker_CreatedAt = &sSyncBlocker_CreatedAt
+var SyncBlocker_Contexts = &sSyncBlocker_Contexts
+var SyncBlocker_ResolvedReason = &sSyncBlocker_ResolvedReason
+var SyncBlocker_ResolvedAt = &sSyncBlocker_ResolvedAt
+
+var SyncBlockerContext = &sSyncBlockerContext
+var SyncBlockerContext_Key = &sSyncBlockerContext_Key
+var SyncBlockerContext_Value = &sSyncBlockerContext_Value
+
+var _SyncBlockerContextKey = &s_SyncBlockerContextKey
+
+var _SyncBlockerContextList = &s_SyncBlockerContextList
+var _SyncBlockerContextList_member = &s_SyncBlockerContextList_member
+
+var _SyncBlockerContextValue = &s_SyncBlockerContextValue
+
+var SyncBlockerDoesNotExistException = &sSyncBlockerDoesNotExistException
+var SyncBlockerDoesNotExistException_Message = &sSyncBlockerDoesNotExistException_Message
+
+var SyncBlockerSummary = &sSyncBlockerSummary
+var SyncBlockerSummary_ResourceName = &sSyncBlockerSummary_ResourceName
+var SyncBlockerSummary_ParentResourceName = &sSyncBlockerSummary_ParentResourceName
+var SyncBlockerSummary_LatestBlockers = &sSyncBlockerSummary_LatestBlockers
+
+var SyncConfiguration = &sSyncConfiguration
+var SyncConfiguration_Branch = &sSyncConfiguration_Branch
+var SyncConfiguration_ConfigFile = &sSyncConfiguration_ConfigFile
+var SyncConfiguration_OwnerId = &sSyncConfiguration_OwnerId
+var SyncConfiguration_ProviderType = &sSyncConfiguration_ProviderType
+var SyncConfiguration_RepositoryLinkId = &sSyncConfiguration_RepositoryLinkId
+var SyncConfiguration_RepositoryName = &sSyncConfiguration_RepositoryName
+var SyncConfiguration_ResourceName = &sSyncConfiguration_ResourceName
+var SyncConfiguration_RoleArn = &sSyncConfiguration_RoleArn
+var SyncConfiguration_SyncType = &sSyncConfiguration_SyncType
+var SyncConfiguration_PublishDeploymentStatus = &sSyncConfiguration_PublishDeploymentStatus
+var SyncConfiguration_TriggerResourceUpdateOn = &sSyncConfiguration_TriggerResourceUpdateOn
+
+var _SyncConfigurationList = &s_SyncConfigurationList
+var _SyncConfigurationList_member = &s_SyncConfigurationList_member
+
+var SyncConfigurationStillExistsException = &sSyncConfigurationStillExistsException
+var SyncConfigurationStillExistsException_Message = &sSyncConfigurationStillExistsException_Message
+
+var SyncConfigurationType = &sSyncConfigurationType
+var SyncConfigurationType_CFN_STACK_SYNC = &sSyncConfigurationType_CFN_STACK_SYNC
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _Target = &s_Target
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Timestamp = &s_Timestamp
+
+var _TlsCertificate = &s_TlsCertificate
+
+var TriggerResourceUpdateOn = &sTriggerResourceUpdateOn
+var TriggerResourceUpdateOn_ANY_CHANGE = &sTriggerResourceUpdateOn_ANY_CHANGE
+var TriggerResourceUpdateOn_FILE_CHANGE = &sTriggerResourceUpdateOn_FILE_CHANGE
+
+var _Type = &s_Type
+
+var UnsupportedOperationException = &sUnsupportedOperationException
+var UnsupportedOperationException_Message = &sUnsupportedOperationException_Message
+
+var UnsupportedProviderTypeException = &sUnsupportedProviderTypeException
+var UnsupportedProviderTypeException_Message = &sUnsupportedProviderTypeException_Message
+
+var UpdateOutOfSyncException = &sUpdateOutOfSyncException
+var UpdateOutOfSyncException_Message = &sUpdateOutOfSyncException_Message
+
+var _Url = &s_Url
+
+var VpcConfiguration = &sVpcConfiguration
+var VpcConfiguration_VpcId = &sVpcConfiguration_VpcId
+var VpcConfiguration_SubnetIds = &sVpcConfiguration_SubnetIds
+var VpcConfiguration_SecurityGroupIds = &sVpcConfiguration_SecurityGroupIds
+var VpcConfiguration_TlsCertificate = &sVpcConfiguration_TlsCertificate
+
+var _VpcId = &s_VpcId
+
+var CreateConnectionInput = &sCreateConnectionInput
+var CreateConnectionInput_ProviderType = &sCreateConnectionInput_ProviderType
+var CreateConnectionInput_ConnectionName = &sCreateConnectionInput_ConnectionName
+var CreateConnectionInput_Tags = &sCreateConnectionInput_Tags
+var CreateConnectionInput_HostArn = &sCreateConnectionInput_HostArn
+
+var CreateConnectionOutput = &sCreateConnectionOutput
+var CreateConnectionOutput_ConnectionArn = &sCreateConnectionOutput_ConnectionArn
+var CreateConnectionOutput_Tags = &sCreateConnectionOutput_Tags
+
+var CreateHostInput = &sCreateHostInput
+var CreateHostInput_Name = &sCreateHostInput_Name
+var CreateHostInput_ProviderType = &sCreateHostInput_ProviderType
+var CreateHostInput_ProviderEndpoint = &sCreateHostInput_ProviderEndpoint
+var CreateHostInput_VpcConfiguration = &sCreateHostInput_VpcConfiguration
+var CreateHostInput_Tags = &sCreateHostInput_Tags
+
+var CreateHostOutput = &sCreateHostOutput
+var CreateHostOutput_HostArn = &sCreateHostOutput_HostArn
+var CreateHostOutput_Tags = &sCreateHostOutput_Tags
+
+var CreateRepositoryLinkInput = &sCreateRepositoryLinkInput
+var CreateRepositoryLinkInput_ConnectionArn = &sCreateRepositoryLinkInput_ConnectionArn
+var CreateRepositoryLinkInput_OwnerId = &sCreateRepositoryLinkInput_OwnerId
+var CreateRepositoryLinkInput_RepositoryName = &sCreateRepositoryLinkInput_RepositoryName
+var CreateRepositoryLinkInput_EncryptionKeyArn = &sCreateRepositoryLinkInput_EncryptionKeyArn
+var CreateRepositoryLinkInput_Tags = &sCreateRepositoryLinkInput_Tags
+
+var CreateRepositoryLinkOutput = &sCreateRepositoryLinkOutput
+var CreateRepositoryLinkOutput_RepositoryLinkInfo = &sCreateRepositoryLinkOutput_RepositoryLinkInfo
+
+var CreateSyncConfigurationInput = &sCreateSyncConfigurationInput
+var CreateSyncConfigurationInput_Branch = &sCreateSyncConfigurationInput_Branch
+var CreateSyncConfigurationInput_ConfigFile = &sCreateSyncConfigurationInput_ConfigFile
+var CreateSyncConfigurationInput_RepositoryLinkId = &sCreateSyncConfigurationInput_RepositoryLinkId
+var CreateSyncConfigurationInput_ResourceName = &sCreateSyncConfigurationInput_ResourceName
+var CreateSyncConfigurationInput_RoleArn = &sCreateSyncConfigurationInput_RoleArn
+var CreateSyncConfigurationInput_SyncType = &sCreateSyncConfigurationInput_SyncType
+var CreateSyncConfigurationInput_PublishDeploymentStatus = &sCreateSyncConfigurationInput_PublishDeploymentStatus
+var CreateSyncConfigurationInput_TriggerResourceUpdateOn = &sCreateSyncConfigurationInput_TriggerResourceUpdateOn
+
+var CreateSyncConfigurationOutput = &sCreateSyncConfigurationOutput
+var CreateSyncConfigurationOutput_SyncConfiguration = &sCreateSyncConfigurationOutput_SyncConfiguration
+
+var DeleteConnectionInput = &sDeleteConnectionInput
+var DeleteConnectionInput_ConnectionArn = &sDeleteConnectionInput_ConnectionArn
+
+var DeleteConnectionOutput = &sDeleteConnectionOutput
+
+var DeleteHostInput = &sDeleteHostInput
+var DeleteHostInput_HostArn = &sDeleteHostInput_HostArn
+
+var DeleteHostOutput = &sDeleteHostOutput
+
+var DeleteRepositoryLinkInput = &sDeleteRepositoryLinkInput
+var DeleteRepositoryLinkInput_RepositoryLinkId = &sDeleteRepositoryLinkInput_RepositoryLinkId
+
+var DeleteRepositoryLinkOutput = &sDeleteRepositoryLinkOutput
+
+var DeleteSyncConfigurationInput = &sDeleteSyncConfigurationInput
+var DeleteSyncConfigurationInput_SyncType = &sDeleteSyncConfigurationInput_SyncType
+var DeleteSyncConfigurationInput_ResourceName = &sDeleteSyncConfigurationInput_ResourceName
+
+var DeleteSyncConfigurationOutput = &sDeleteSyncConfigurationOutput
+
+var GetConnectionInput = &sGetConnectionInput
+var GetConnectionInput_ConnectionArn = &sGetConnectionInput_ConnectionArn
+
+var GetConnectionOutput = &sGetConnectionOutput
+var GetConnectionOutput_Connection = &sGetConnectionOutput_Connection
+
+var GetHostInput = &sGetHostInput
+var GetHostInput_HostArn = &sGetHostInput_HostArn
+
+var GetHostOutput = &sGetHostOutput
+var GetHostOutput_Name = &sGetHostOutput_Name
+var GetHostOutput_Status = &sGetHostOutput_Status
+var GetHostOutput_ProviderType = &sGetHostOutput_ProviderType
+var GetHostOutput_ProviderEndpoint = &sGetHostOutput_ProviderEndpoint
+var GetHostOutput_VpcConfiguration = &sGetHostOutput_VpcConfiguration
+
+var GetRepositoryLinkInput = &sGetRepositoryLinkInput
+var GetRepositoryLinkInput_RepositoryLinkId = &sGetRepositoryLinkInput_RepositoryLinkId
+
+var GetRepositoryLinkOutput = &sGetRepositoryLinkOutput
+var GetRepositoryLinkOutput_RepositoryLinkInfo = &sGetRepositoryLinkOutput_RepositoryLinkInfo
+
+var GetRepositorySyncStatusInput = &sGetRepositorySyncStatusInput
+var GetRepositorySyncStatusInput_Branch = &sGetRepositorySyncStatusInput_Branch
+var GetRepositorySyncStatusInput_RepositoryLinkId = &sGetRepositorySyncStatusInput_RepositoryLinkId
+var GetRepositorySyncStatusInput_SyncType = &sGetRepositorySyncStatusInput_SyncType
+
+var GetRepositorySyncStatusOutput = &sGetRepositorySyncStatusOutput
+var GetRepositorySyncStatusOutput_LatestSync = &sGetRepositorySyncStatusOutput_LatestSync
+
+var GetResourceSyncStatusInput = &sGetResourceSyncStatusInput
+var GetResourceSyncStatusInput_ResourceName = &sGetResourceSyncStatusInput_ResourceName
+var GetResourceSyncStatusInput_SyncType = &sGetResourceSyncStatusInput_SyncType
+
+var GetResourceSyncStatusOutput = &sGetResourceSyncStatusOutput
+var GetResourceSyncStatusOutput_DesiredState = &sGetResourceSyncStatusOutput_DesiredState
+var GetResourceSyncStatusOutput_LatestSuccessfulSync = &sGetResourceSyncStatusOutput_LatestSuccessfulSync
+var GetResourceSyncStatusOutput_LatestSync = &sGetResourceSyncStatusOutput_LatestSync
+
+var GetSyncBlockerSummaryInput = &sGetSyncBlockerSummaryInput
+var GetSyncBlockerSummaryInput_SyncType = &sGetSyncBlockerSummaryInput_SyncType
+var GetSyncBlockerSummaryInput_ResourceName = &sGetSyncBlockerSummaryInput_ResourceName
+
+var GetSyncBlockerSummaryOutput = &sGetSyncBlockerSummaryOutput
+var GetSyncBlockerSummaryOutput_SyncBlockerSummary = &sGetSyncBlockerSummaryOutput_SyncBlockerSummary
+
+var GetSyncConfigurationInput = &sGetSyncConfigurationInput
+var GetSyncConfigurationInput_SyncType = &sGetSyncConfigurationInput_SyncType
+var GetSyncConfigurationInput_ResourceName = &sGetSyncConfigurationInput_ResourceName
+
+var GetSyncConfigurationOutput = &sGetSyncConfigurationOutput
+var GetSyncConfigurationOutput_SyncConfiguration = &sGetSyncConfigurationOutput_SyncConfiguration
+
+var ListConnectionsInput = &sListConnectionsInput
+var ListConnectionsInput_ProviderTypeFilter = &sListConnectionsInput_ProviderTypeFilter
+var ListConnectionsInput_HostArnFilter = &sListConnectionsInput_HostArnFilter
+var ListConnectionsInput_MaxResults = &sListConnectionsInput_MaxResults
+var ListConnectionsInput_NextToken = &sListConnectionsInput_NextToken
+
+var ListConnectionsOutput = &sListConnectionsOutput
+var ListConnectionsOutput_Connections = &sListConnectionsOutput_Connections
+var ListConnectionsOutput_NextToken = &sListConnectionsOutput_NextToken
+
+var ListHostsInput = &sListHostsInput
+var ListHostsInput_MaxResults = &sListHostsInput_MaxResults
+var ListHostsInput_NextToken = &sListHostsInput_NextToken
+
+var ListHostsOutput = &sListHostsOutput
+var ListHostsOutput_Hosts = &sListHostsOutput_Hosts
+var ListHostsOutput_NextToken = &sListHostsOutput_NextToken
+
+var ListRepositoryLinksInput = &sListRepositoryLinksInput
+var ListRepositoryLinksInput_MaxResults = &sListRepositoryLinksInput_MaxResults
+var ListRepositoryLinksInput_NextToken = &sListRepositoryLinksInput_NextToken
+
+var ListRepositoryLinksOutput = &sListRepositoryLinksOutput
+var ListRepositoryLinksOutput_RepositoryLinks = &sListRepositoryLinksOutput_RepositoryLinks
+var ListRepositoryLinksOutput_NextToken = &sListRepositoryLinksOutput_NextToken
+
+var ListRepositorySyncDefinitionsInput = &sListRepositorySyncDefinitionsInput
+var ListRepositorySyncDefinitionsInput_RepositoryLinkId = &sListRepositorySyncDefinitionsInput_RepositoryLinkId
+var ListRepositorySyncDefinitionsInput_SyncType = &sListRepositorySyncDefinitionsInput_SyncType
+
+var ListRepositorySyncDefinitionsOutput = &sListRepositorySyncDefinitionsOutput
+var ListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions = &sListRepositorySyncDefinitionsOutput_RepositorySyncDefinitions
+var ListRepositorySyncDefinitionsOutput_NextToken = &sListRepositorySyncDefinitionsOutput_NextToken
+
+var ListSyncConfigurationsInput = &sListSyncConfigurationsInput
+var ListSyncConfigurationsInput_MaxResults = &sListSyncConfigurationsInput_MaxResults
+var ListSyncConfigurationsInput_NextToken = &sListSyncConfigurationsInput_NextToken
+var ListSyncConfigurationsInput_RepositoryLinkId = &sListSyncConfigurationsInput_RepositoryLinkId
+var ListSyncConfigurationsInput_SyncType = &sListSyncConfigurationsInput_SyncType
+
+var ListSyncConfigurationsOutput = &sListSyncConfigurationsOutput
+var ListSyncConfigurationsOutput_SyncConfigurations = &sListSyncConfigurationsOutput_SyncConfigurations
+var ListSyncConfigurationsOutput_NextToken = &sListSyncConfigurationsOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateHostInput = &sUpdateHostInput
+var UpdateHostInput_HostArn = &sUpdateHostInput_HostArn
+var UpdateHostInput_ProviderEndpoint = &sUpdateHostInput_ProviderEndpoint
+var UpdateHostInput_VpcConfiguration = &sUpdateHostInput_VpcConfiguration
+
+var UpdateHostOutput = &sUpdateHostOutput
+
+var UpdateRepositoryLinkInput = &sUpdateRepositoryLinkInput
+var UpdateRepositoryLinkInput_ConnectionArn = &sUpdateRepositoryLinkInput_ConnectionArn
+var UpdateRepositoryLinkInput_EncryptionKeyArn = &sUpdateRepositoryLinkInput_EncryptionKeyArn
+var UpdateRepositoryLinkInput_RepositoryLinkId = &sUpdateRepositoryLinkInput_RepositoryLinkId
+
+var UpdateRepositoryLinkOutput = &sUpdateRepositoryLinkOutput
+var UpdateRepositoryLinkOutput_RepositoryLinkInfo = &sUpdateRepositoryLinkOutput_RepositoryLinkInfo
+
+var UpdateSyncBlockerInput = &sUpdateSyncBlockerInput
+var UpdateSyncBlockerInput_Id = &sUpdateSyncBlockerInput_Id
+var UpdateSyncBlockerInput_SyncType = &sUpdateSyncBlockerInput_SyncType
+var UpdateSyncBlockerInput_ResourceName = &sUpdateSyncBlockerInput_ResourceName
+var UpdateSyncBlockerInput_ResolvedReason = &sUpdateSyncBlockerInput_ResolvedReason
+
+var UpdateSyncBlockerOutput = &sUpdateSyncBlockerOutput
+var UpdateSyncBlockerOutput_ResourceName = &sUpdateSyncBlockerOutput_ResourceName
+var UpdateSyncBlockerOutput_ParentResourceName = &sUpdateSyncBlockerOutput_ParentResourceName
+var UpdateSyncBlockerOutput_SyncBlocker = &sUpdateSyncBlockerOutput_SyncBlocker
+
+var UpdateSyncConfigurationInput = &sUpdateSyncConfigurationInput
+var UpdateSyncConfigurationInput_Branch = &sUpdateSyncConfigurationInput_Branch
+var UpdateSyncConfigurationInput_ConfigFile = &sUpdateSyncConfigurationInput_ConfigFile
+var UpdateSyncConfigurationInput_RepositoryLinkId = &sUpdateSyncConfigurationInput_RepositoryLinkId
+var UpdateSyncConfigurationInput_ResourceName = &sUpdateSyncConfigurationInput_ResourceName
+var UpdateSyncConfigurationInput_RoleArn = &sUpdateSyncConfigurationInput_RoleArn
+var UpdateSyncConfigurationInput_SyncType = &sUpdateSyncConfigurationInput_SyncType
+var UpdateSyncConfigurationInput_PublishDeploymentStatus = &sUpdateSyncConfigurationInput_PublishDeploymentStatus
+var UpdateSyncConfigurationInput_TriggerResourceUpdateOn = &sUpdateSyncConfigurationInput_TriggerResourceUpdateOn
+
+var UpdateSyncConfigurationOutput = &sUpdateSyncConfigurationOutput
+var UpdateSyncConfigurationOutput_SyncConfiguration = &sUpdateSyncConfigurationOutput_SyncConfiguration
+
+var CodeStar_connections_20191201 = &smithy.ServiceSchema{Schema: &s_CodeStar_connections_20191201, Version: "2019-12-01"}

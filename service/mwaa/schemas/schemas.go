@@ -4,1232 +4,912 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateCliToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateCliToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateCliToken                  = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateCliToken"}
+	iCreateEnvironment               = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateEnvironment"}
+	iCreateWebLoginToken             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateWebLoginToken"}
+	iDeleteEnvironment               = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "DeleteEnvironment"}
+	iGetEnvironment                  = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "GetEnvironment"}
+	iInvokeRestApi                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "InvokeRestApi"}
+	iListEnvironments                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ListEnvironments"}
+	iListTagsForResource             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ListTagsForResource"}
+	iPublishMetrics                  = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "PublishMetrics"}
+	iTagResource                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "TagResource"}
+	iUntagResource                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UntagResource"}
+	iUpdateEnvironment               = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateEnvironment"}
+	i_AmazonMWAA                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "AmazonMWAA"}
+	iAccessDeniedException           = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "AccessDeniedException"}
+	i_AirflowConfigurationOptions    = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "AirflowConfigurationOptions"}
+	i_AirflowIdentity                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "AirflowIdentity"}
+	i_AirflowVersion                 = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "AirflowVersion"}
+	i_CeleryExecutorQueue            = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CeleryExecutorQueue"}
+	i_CloudWatchLogGroupArn          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CloudWatchLogGroupArn"}
+	i_ConfigKey                      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ConfigKey"}
+	i_ConfigValue                    = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ConfigValue"}
+	i_CreatedAt                      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreatedAt"}
+	iDimension                       = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "Dimension"}
+	i_Dimensions                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "Dimensions"}
+	i_EndpointManagement             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "EndpointManagement"}
+	iEnvironment                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "Environment"}
+	i_EnvironmentArn                 = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "EnvironmentArn"}
+	i_EnvironmentClass               = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "EnvironmentClass"}
+	i_EnvironmentList                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "EnvironmentList"}
+	i_EnvironmentName                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "EnvironmentName"}
+	i_EnvironmentStatus              = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "EnvironmentStatus"}
+	i_ErrorCode                      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ErrorCode"}
+	i_ErrorMessage                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ErrorMessage"}
+	i_Hostname                       = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "Hostname"}
+	i_IamIdentity                    = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "IamIdentity"}
+	i_IamRoleArn                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "IamRoleArn"}
+	iInternalServerException         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "InternalServerException"}
+	i_KmsKey                         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "KmsKey"}
+	iLastUpdate                      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "LastUpdate"}
+	iLoggingConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "LoggingConfiguration"}
+	iLoggingConfigurationInput       = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "LoggingConfigurationInput"}
+	i_LoggingEnabled                 = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "LoggingEnabled"}
+	i_LoggingLevel                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "LoggingLevel"}
+	i_MaxWebservers                  = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "MaxWebservers"}
+	i_MaxWorkers                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "MaxWorkers"}
+	i_MetricData                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "MetricData"}
+	iMetricDatum                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "MetricDatum"}
+	i_MinWebservers                  = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "MinWebservers"}
+	i_MinWorkers                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "MinWorkers"}
+	iModuleLoggingConfiguration      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ModuleLoggingConfiguration"}
+	iModuleLoggingConfigurationInput = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ModuleLoggingConfigurationInput"}
+	iNetworkConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "NetworkConfiguration"}
+	i_NextToken                      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "NextToken"}
+	i_RelativePath                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "RelativePath"}
+	iResourceNotFoundException       = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ResourceNotFoundException"}
+	iRestApiClientException          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "RestApiClientException"}
+	i_RestApiMethod                  = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "RestApiMethod"}
+	i_RestApiPath                    = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "RestApiPath"}
+	i_RestApiRequestBody             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "RestApiRequestBody"}
+	i_RestApiResponse                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "RestApiResponse"}
+	iRestApiServerException          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "RestApiServerException"}
+	i_S3BucketArn                    = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "S3BucketArn"}
+	i_S3ObjectVersion                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "S3ObjectVersion"}
+	i_Schedulers                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "Schedulers"}
+	i_SecurityGroupId                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "SecurityGroupId"}
+	i_SecurityGroupList              = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "SecurityGroupList"}
+	iServiceUnavailableException     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ServiceUnavailableException"}
+	iStatisticSet                    = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "StatisticSet"}
+	i_SubnetId                       = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "SubnetId"}
+	i_SubnetList                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "SubnetList"}
+	i_TagKey                         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "TagKey"}
+	i_TagKeyList                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "TagKeyList"}
+	i_TagMap                         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "TagMap"}
+	i_TagValue                       = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "TagValue"}
+	i_Token                          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "Token"}
+	i_Unit                           = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "Unit"}
+	i_UpdateCreatedAt                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateCreatedAt"}
+	iUpdateError                     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateError"}
+	iUpdateNetworkConfigurationInput = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateNetworkConfigurationInput"}
+	i_UpdateSource                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateSource"}
+	i_UpdateStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateStatus"}
+	iValidationException             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ValidationException"}
+	i_VpcEndpointServiceName         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "VpcEndpointServiceName"}
+	i_WebserverAccessMode            = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "WebserverAccessMode"}
+	i_WebserverUrl                   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "WebserverUrl"}
+	i_WeeklyMaintenanceWindowStart   = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "WeeklyMaintenanceWindowStart"}
+	i_WorkerReplacementStrategy      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "WorkerReplacementStrategy"}
+	iCreateCliTokenRequest           = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateCliTokenRequest"}
+	iCreateCliTokenResponse          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateCliTokenResponse"}
+	iCreateEnvironmentInput          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateEnvironmentInput"}
+	iCreateEnvironmentOutput         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateEnvironmentOutput"}
+	iCreateWebLoginTokenRequest      = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateWebLoginTokenRequest"}
+	iCreateWebLoginTokenResponse     = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "CreateWebLoginTokenResponse"}
+	iDeleteEnvironmentInput          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "DeleteEnvironmentInput"}
+	iDeleteEnvironmentOutput         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "DeleteEnvironmentOutput"}
+	iGetEnvironmentInput             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "GetEnvironmentInput"}
+	iGetEnvironmentOutput            = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "GetEnvironmentOutput"}
+	iInvokeRestApiRequest            = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "InvokeRestApiRequest"}
+	iInvokeRestApiResponse           = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "InvokeRestApiResponse"}
+	iListEnvironmentsInput           = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ListEnvironmentsInput"}
+	iListEnvironmentsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ListEnvironmentsOutput"}
+	iListTagsForResourceInput        = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput       = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "ListTagsForResourceOutput"}
+	iPublishMetricsInput             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "PublishMetricsInput"}
+	iPublishMetricsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "PublishMetricsOutput"}
+	iTagResourceInput                = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "TagResourceInput"}
+	iTagResourceOutput               = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "TagResourceOutput"}
+	iUntagResourceInput              = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UntagResourceInput"}
+	iUntagResourceOutput             = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UntagResourceOutput"}
+	iUpdateEnvironmentInput          = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateEnvironmentInput"}
+	iUpdateEnvironmentOutput         = smithy.ShapeID{Namespace: "com.amazonaws.mwaa", Name: "UpdateEnvironmentOutput"}
+	pString                          = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pDouble                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Double"}
+	pInteger                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pDocument                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Document"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/clitoken/{Name}",
-	Code: 200})
-
-var CreateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/environments/{Name}",
-	Code: 200})
-
-var CreateWebLoginToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateWebLoginToken",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/webtoken/{Name}",
-	Code: 200})
-
-var DeleteEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "DeleteEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/environments/{Name}",
-	Code: 200})
-
-var GetEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "GetEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments/{Name}",
-	Code: 200})
-
-var InvokeRestApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "InvokeRestApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/restapi/{Name}",
-	Code: 200})
-
-var ListEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ListEnvironments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/environments",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PublishMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "PublishMetrics",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/metrics/environments/{EnvironmentName}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/environments/{Name}",
-	Code: 200})
-
-var _AmazonMWAA = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "AmazonMWAA",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonMWAA = smithy.NewServiceSchema(_AmazonMWAA, "2020-07-01")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AirflowConfigurationOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "AirflowConfigurationOptions",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _AirflowConfigurationOptions_key *smithy.Schema
-
-var _AirflowConfigurationOptions_value *smithy.Schema
-
-var _AirflowIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "AirflowIdentity",
-}, smithy.ShapeTypeString, 0)
-
-var _AirflowVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "AirflowVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _CeleryExecutorQueue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CeleryExecutorQueue",
-}, smithy.ShapeTypeString, 0)
-
-var _CloudWatchLogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CloudWatchLogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ConfigKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ConfigValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ConfigValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CreatedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreatedAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Dimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "Dimension",
-}, smithy.ShapeTypeStructure, 2)
-var Dimension_Name *smithy.Schema
-
-var Dimension_Value *smithy.Schema
-
-var _Dimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "Dimensions",
-}, smithy.ShapeTypeList, 1)
-var _Dimensions_member *smithy.Schema
-
-var _EndpointManagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "EndpointManagement",
-}, smithy.ShapeTypeString, 0)
-
-var Environment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "Environment",
-}, smithy.ShapeTypeStructure, 34)
-var Environment_Name *smithy.Schema
-
-var Environment_Status *smithy.Schema
-
-var Environment_Arn *smithy.Schema
-
-var Environment_CreatedAt *smithy.Schema
-
-var Environment_WebserverUrl *smithy.Schema
-
-var Environment_ExecutionRoleArn *smithy.Schema
-
-var Environment_ServiceRoleArn *smithy.Schema
-
-var Environment_KmsKey *smithy.Schema
-
-var Environment_AirflowVersion *smithy.Schema
-
-var Environment_SourceBucketArn *smithy.Schema
-
-var Environment_DagS3Path *smithy.Schema
-
-var Environment_PluginsS3Path *smithy.Schema
-
-var Environment_PluginsS3ObjectVersion *smithy.Schema
-
-var Environment_RequirementsS3Path *smithy.Schema
-
-var Environment_RequirementsS3ObjectVersion *smithy.Schema
-
-var Environment_StartupScriptS3Path *smithy.Schema
-
-var Environment_StartupScriptS3ObjectVersion *smithy.Schema
-
-var Environment_AirflowConfigurationOptions *smithy.Schema
-
-var Environment_EnvironmentClass *smithy.Schema
-
-var Environment_MaxWorkers *smithy.Schema
-
-var Environment_NetworkConfiguration *smithy.Schema
-
-var Environment_LoggingConfiguration *smithy.Schema
-
-var Environment_LastUpdate *smithy.Schema
-
-var Environment_WeeklyMaintenanceWindowStart *smithy.Schema
-
-var Environment_Tags *smithy.Schema
-
-var Environment_WebserverAccessMode *smithy.Schema
-
-var Environment_MinWorkers *smithy.Schema
-
-var Environment_Schedulers *smithy.Schema
-
-var Environment_WebserverVpcEndpointService *smithy.Schema
-
-var Environment_DatabaseVpcEndpointService *smithy.Schema
-
-var Environment_CeleryExecutorQueue *smithy.Schema
-
-var Environment_EndpointManagement *smithy.Schema
-
-var Environment_MinWebservers *smithy.Schema
-
-var Environment_MaxWebservers *smithy.Schema
-
-var _EnvironmentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "EnvironmentArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentClass = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "EnvironmentClass",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "EnvironmentList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentList_member *smithy.Schema
-
-var _EnvironmentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "EnvironmentName",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "EnvironmentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Hostname = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "Hostname",
-}, smithy.ShapeTypeString, 0)
-
-var _IamIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "IamIdentity",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _KmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "KmsKey",
-}, smithy.ShapeTypeString, 0)
-
-var LastUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "LastUpdate",
-}, smithy.ShapeTypeStructure, 5)
-var LastUpdate_Status *smithy.Schema
-
-var LastUpdate_CreatedAt *smithy.Schema
-
-var LastUpdate_Error *smithy.Schema
-
-var LastUpdate_Source *smithy.Schema
-
-var LastUpdate_WorkerReplacementStrategy *smithy.Schema
-
-var LoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "LoggingConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var LoggingConfiguration_DagProcessingLogs *smithy.Schema
-
-var LoggingConfiguration_SchedulerLogs *smithy.Schema
-
-var LoggingConfiguration_WebserverLogs *smithy.Schema
-
-var LoggingConfiguration_WorkerLogs *smithy.Schema
-
-var LoggingConfiguration_TaskLogs *smithy.Schema
-
-var LoggingConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "LoggingConfigurationInput",
-}, smithy.ShapeTypeStructure, 5)
-var LoggingConfigurationInput_DagProcessingLogs *smithy.Schema
-
-var LoggingConfigurationInput_SchedulerLogs *smithy.Schema
-
-var LoggingConfigurationInput_WebserverLogs *smithy.Schema
-
-var LoggingConfigurationInput_WorkerLogs *smithy.Schema
-
-var LoggingConfigurationInput_TaskLogs *smithy.Schema
-
-var _LoggingEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "LoggingEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _LoggingLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "LoggingLevel",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxWebservers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "MaxWebservers",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MaxWorkers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "MaxWorkers",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetricData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "MetricData",
-}, smithy.ShapeTypeList, 1)
-var _MetricData_member *smithy.Schema
-
-var MetricDatum = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "MetricDatum",
-}, smithy.ShapeTypeStructure, 6)
-var MetricDatum_MetricName *smithy.Schema
-
-var MetricDatum_Timestamp *smithy.Schema
-
-var MetricDatum_Dimensions *smithy.Schema
-
-var MetricDatum_Value *smithy.Schema
-
-var MetricDatum_Unit *smithy.Schema
-
-var MetricDatum_StatisticValues *smithy.Schema
-
-var _MinWebservers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "MinWebservers",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MinWorkers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "MinWorkers",
-}, smithy.ShapeTypeInteger, 0)
-
-var ModuleLoggingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ModuleLoggingConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ModuleLoggingConfiguration_Enabled *smithy.Schema
-
-var ModuleLoggingConfiguration_LogLevel *smithy.Schema
-
-var ModuleLoggingConfiguration_CloudWatchLogGroupArn *smithy.Schema
-
-var ModuleLoggingConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ModuleLoggingConfigurationInput",
-}, smithy.ShapeTypeStructure, 2)
-var ModuleLoggingConfigurationInput_Enabled *smithy.Schema
-
-var ModuleLoggingConfigurationInput_LogLevel *smithy.Schema
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkConfiguration_SubnetIds *smithy.Schema
-
-var NetworkConfiguration_SecurityGroupIds *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _RelativePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "RelativePath",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var RestApiClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "RestApiClientException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var RestApiClientException_RestApiStatusCode *smithy.Schema
-
-var RestApiClientException_RestApiResponse *smithy.Schema
-
-var _RestApiMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "RestApiMethod",
-}, smithy.ShapeTypeString, 0)
-
-var _RestApiPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "RestApiPath",
-}, smithy.ShapeTypeString, 0)
-
-var _RestApiRequestBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "RestApiRequestBody",
-}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
-
-var _RestApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "RestApiResponse",
-}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
-
-var RestApiServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "RestApiServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var RestApiServerException_RestApiStatusCode *smithy.Schema
-
-var RestApiServerException_RestApiResponse *smithy.Schema
-
-var _S3BucketArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "S3BucketArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3ObjectVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "S3ObjectVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _Schedulers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "Schedulers",
-}, smithy.ShapeTypeInteger, 0)
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "SecurityGroupList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupList_member *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var StatisticSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "StatisticSet",
-}, smithy.ShapeTypeStructure, 4)
-var StatisticSet_SampleCount *smithy.Schema
-
-var StatisticSet_Sum *smithy.Schema
-
-var StatisticSet_Minimum *smithy.Schema
-
-var StatisticSet_Maximum *smithy.Schema
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "SubnetList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Token = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "Token",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Unit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "Unit",
-}, smithy.ShapeTypeString, 0)
-
-var _UpdateCreatedAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateCreatedAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var UpdateError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateError",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateError_ErrorCode *smithy.Schema
-
-var UpdateError_ErrorMessage *smithy.Schema
-
-var UpdateNetworkConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateNetworkConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateNetworkConfigurationInput_SecurityGroupIds *smithy.Schema
-
-var _UpdateSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateSource",
-}, smithy.ShapeTypeString, 0)
-
-var _UpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var _VpcEndpointServiceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "VpcEndpointServiceName",
-}, smithy.ShapeTypeString, 0)
-
-var _WebserverAccessMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "WebserverAccessMode",
-}, smithy.ShapeTypeString, 0)
-
-var _WebserverUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "WebserverUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _WeeklyMaintenanceWindowStart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "WeeklyMaintenanceWindowStart",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkerReplacementStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "WorkerReplacementStrategy",
-}, smithy.ShapeTypeString, 0)
-
-var CreateCliTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateCliTokenRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCliTokenRequest_Name *smithy.Schema
-
-var CreateCliTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateCliTokenResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateCliTokenResponse_CliToken *smithy.Schema
-
-var CreateCliTokenResponse_WebServerHostname *smithy.Schema
-
-var CreateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 25)
-var CreateEnvironmentInput_Name *smithy.Schema
-
-var CreateEnvironmentInput_ExecutionRoleArn *smithy.Schema
-
-var CreateEnvironmentInput_SourceBucketArn *smithy.Schema
-
-var CreateEnvironmentInput_DagS3Path *smithy.Schema
-
-var CreateEnvironmentInput_NetworkConfiguration *smithy.Schema
-
-var CreateEnvironmentInput_PluginsS3Path *smithy.Schema
-
-var CreateEnvironmentInput_PluginsS3ObjectVersion *smithy.Schema
-
-var CreateEnvironmentInput_RequirementsS3Path *smithy.Schema
-
-var CreateEnvironmentInput_RequirementsS3ObjectVersion *smithy.Schema
-
-var CreateEnvironmentInput_StartupScriptS3Path *smithy.Schema
-
-var CreateEnvironmentInput_StartupScriptS3ObjectVersion *smithy.Schema
-
-var CreateEnvironmentInput_AirflowConfigurationOptions *smithy.Schema
-
-var CreateEnvironmentInput_EnvironmentClass *smithy.Schema
-
-var CreateEnvironmentInput_MaxWorkers *smithy.Schema
-
-var CreateEnvironmentInput_KmsKey *smithy.Schema
-
-var CreateEnvironmentInput_AirflowVersion *smithy.Schema
-
-var CreateEnvironmentInput_LoggingConfiguration *smithy.Schema
-
-var CreateEnvironmentInput_WeeklyMaintenanceWindowStart *smithy.Schema
-
-var CreateEnvironmentInput_Tags *smithy.Schema
-
-var CreateEnvironmentInput_WebserverAccessMode *smithy.Schema
-
-var CreateEnvironmentInput_MinWorkers *smithy.Schema
-
-var CreateEnvironmentInput_Schedulers *smithy.Schema
-
-var CreateEnvironmentInput_EndpointManagement *smithy.Schema
-
-var CreateEnvironmentInput_MinWebservers *smithy.Schema
-
-var CreateEnvironmentInput_MaxWebservers *smithy.Schema
-
-var CreateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEnvironmentOutput_Arn *smithy.Schema
-
-var CreateWebLoginTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateWebLoginTokenRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWebLoginTokenRequest_Name *smithy.Schema
-
-var CreateWebLoginTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "CreateWebLoginTokenResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWebLoginTokenResponse_WebToken *smithy.Schema
-
-var CreateWebLoginTokenResponse_WebServerHostname *smithy.Schema
-
-var CreateWebLoginTokenResponse_IamIdentity *smithy.Schema
-
-var CreateWebLoginTokenResponse_AirflowIdentity *smithy.Schema
-
-var DeleteEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "DeleteEnvironmentInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentInput_Name *smithy.Schema
-
-var DeleteEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "DeleteEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "GetEnvironmentInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentInput_Name *smithy.Schema
-
-var GetEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "GetEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentOutput_Environment *smithy.Schema
-
-var InvokeRestApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "InvokeRestApiRequest",
-}, smithy.ShapeTypeStructure, 5)
-var InvokeRestApiRequest_Name *smithy.Schema
-
-var InvokeRestApiRequest_Path *smithy.Schema
-
-var InvokeRestApiRequest_Method *smithy.Schema
-
-var InvokeRestApiRequest_QueryParameters *smithy.Schema
-
-var InvokeRestApiRequest_Body *smithy.Schema
-
-var InvokeRestApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "InvokeRestApiResponse",
-}, smithy.ShapeTypeStructure, 2)
-var InvokeRestApiResponse_RestApiStatusCode *smithy.Schema
-
-var InvokeRestApiResponse_RestApiResponse *smithy.Schema
-
-var ListEnvironmentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ListEnvironmentsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentsInput_NextToken *smithy.Schema
-
-var ListEnvironmentsInput_MaxResults *smithy.Schema
-
-var ListEnvironmentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ListEnvironmentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentsOutput_Environments *smithy.Schema
-
-var ListEnvironmentsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_ResourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var PublishMetricsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "PublishMetricsInput",
-}, smithy.ShapeTypeStructure, 2)
-var PublishMetricsInput_EnvironmentName *smithy.Schema
-
-var PublishMetricsInput_MetricData *smithy.Schema
-
-var PublishMetricsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "PublishMetricsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 23)
-var UpdateEnvironmentInput_Name *smithy.Schema
-
-var UpdateEnvironmentInput_ExecutionRoleArn *smithy.Schema
-
-var UpdateEnvironmentInput_AirflowConfigurationOptions *smithy.Schema
-
-var UpdateEnvironmentInput_AirflowVersion *smithy.Schema
-
-var UpdateEnvironmentInput_DagS3Path *smithy.Schema
-
-var UpdateEnvironmentInput_EnvironmentClass *smithy.Schema
-
-var UpdateEnvironmentInput_LoggingConfiguration *smithy.Schema
-
-var UpdateEnvironmentInput_MaxWorkers *smithy.Schema
-
-var UpdateEnvironmentInput_MinWorkers *smithy.Schema
-
-var UpdateEnvironmentInput_MaxWebservers *smithy.Schema
-
-var UpdateEnvironmentInput_MinWebservers *smithy.Schema
-
-var UpdateEnvironmentInput_WorkerReplacementStrategy *smithy.Schema
-
-var UpdateEnvironmentInput_NetworkConfiguration *smithy.Schema
-
-var UpdateEnvironmentInput_PluginsS3Path *smithy.Schema
-
-var UpdateEnvironmentInput_PluginsS3ObjectVersion *smithy.Schema
-
-var UpdateEnvironmentInput_RequirementsS3Path *smithy.Schema
-
-var UpdateEnvironmentInput_RequirementsS3ObjectVersion *smithy.Schema
-
-var UpdateEnvironmentInput_Schedulers *smithy.Schema
-
-var UpdateEnvironmentInput_SourceBucketArn *smithy.Schema
-
-var UpdateEnvironmentInput_StartupScriptS3Path *smithy.Schema
-
-var UpdateEnvironmentInput_StartupScriptS3ObjectVersion *smithy.Schema
-
-var UpdateEnvironmentInput_WebserverAccessMode *smithy.Schema
-
-var UpdateEnvironmentInput_WeeklyMaintenanceWindowStart *smithy.Schema
-
-var UpdateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mwaa",
-	Name:      "UpdateEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnvironmentOutput_Arn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	_AirflowConfigurationOptions_key = _AirflowConfigurationOptions.AddMember("key", _ConfigKey)
-
-	_AirflowConfigurationOptions_value = _AirflowConfigurationOptions.AddMember("value", _ConfigValue)
-
-	Dimension_Name = Dimension.AddMember("Name", smithyprelude.String)
-
-	Dimension_Value = Dimension.AddMember("Value", smithyprelude.String)
-
-	_Dimensions_member = _Dimensions.AddMember("member", Dimension)
-
-	_SubnetList_member = _SubnetList.AddMember("member", _SubnetId)
-
-	_SecurityGroupList_member = _SecurityGroupList.AddMember("member", _SecurityGroupId)
-
-	NetworkConfiguration_SubnetIds = NetworkConfiguration.AddMember("SubnetIds", _SubnetList)
-
-	NetworkConfiguration_SecurityGroupIds = NetworkConfiguration.AddMember("SecurityGroupIds", _SecurityGroupList)
-
-	ModuleLoggingConfiguration_Enabled = ModuleLoggingConfiguration.AddMember("Enabled", _LoggingEnabled)
-
-	ModuleLoggingConfiguration_LogLevel = ModuleLoggingConfiguration.AddMember("LogLevel", _LoggingLevel)
-
-	ModuleLoggingConfiguration_CloudWatchLogGroupArn = ModuleLoggingConfiguration.AddMember("CloudWatchLogGroupArn", _CloudWatchLogGroupArn)
-
-	LoggingConfiguration_DagProcessingLogs = LoggingConfiguration.AddMember("DagProcessingLogs", ModuleLoggingConfiguration)
-
-	LoggingConfiguration_SchedulerLogs = LoggingConfiguration.AddMember("SchedulerLogs", ModuleLoggingConfiguration)
-
-	LoggingConfiguration_WebserverLogs = LoggingConfiguration.AddMember("WebserverLogs", ModuleLoggingConfiguration)
-
-	LoggingConfiguration_WorkerLogs = LoggingConfiguration.AddMember("WorkerLogs", ModuleLoggingConfiguration)
-
-	LoggingConfiguration_TaskLogs = LoggingConfiguration.AddMember("TaskLogs", ModuleLoggingConfiguration)
-
-	UpdateError_ErrorCode = UpdateError.AddMember("ErrorCode", _ErrorCode)
-
-	UpdateError_ErrorMessage = UpdateError.AddMember("ErrorMessage", _ErrorMessage)
-
-	LastUpdate_Status = LastUpdate.AddMember("Status", _UpdateStatus)
-
-	LastUpdate_CreatedAt = LastUpdate.AddMember("CreatedAt", _UpdateCreatedAt)
-
-	LastUpdate_Error = LastUpdate.AddMember("Error", UpdateError)
-
-	LastUpdate_Source = LastUpdate.AddMember("Source", _UpdateSource)
-
-	LastUpdate_WorkerReplacementStrategy = LastUpdate.AddMember("WorkerReplacementStrategy", _WorkerReplacementStrategy)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	Environment_Name = Environment.AddMember("Name", _EnvironmentName)
-
-	Environment_Status = Environment.AddMember("Status", _EnvironmentStatus)
-
-	Environment_Arn = Environment.AddMember("Arn", _EnvironmentArn)
-
-	Environment_CreatedAt = Environment.AddMember("CreatedAt", _CreatedAt)
-
-	Environment_WebserverUrl = Environment.AddMember("WebserverUrl", _WebserverUrl)
-
-	Environment_ExecutionRoleArn = Environment.AddMember("ExecutionRoleArn", _IamRoleArn)
-
-	Environment_ServiceRoleArn = Environment.AddMember("ServiceRoleArn", _IamRoleArn)
-
-	Environment_KmsKey = Environment.AddMember("KmsKey", _KmsKey)
-
-	Environment_AirflowVersion = Environment.AddMember("AirflowVersion", _AirflowVersion)
-
-	Environment_SourceBucketArn = Environment.AddMember("SourceBucketArn", _S3BucketArn)
-
-	Environment_DagS3Path = Environment.AddMember("DagS3Path", _RelativePath)
-
-	Environment_PluginsS3Path = Environment.AddMember("PluginsS3Path", _RelativePath)
-
-	Environment_PluginsS3ObjectVersion = Environment.AddMember("PluginsS3ObjectVersion", _S3ObjectVersion)
-
-	Environment_RequirementsS3Path = Environment.AddMember("RequirementsS3Path", _RelativePath)
-
-	Environment_RequirementsS3ObjectVersion = Environment.AddMember("RequirementsS3ObjectVersion", _S3ObjectVersion)
-
-	Environment_StartupScriptS3Path = Environment.AddMember("StartupScriptS3Path", smithyprelude.String)
-
-	Environment_StartupScriptS3ObjectVersion = Environment.AddMember("StartupScriptS3ObjectVersion", smithyprelude.String)
-
-	Environment_AirflowConfigurationOptions = Environment.AddMember("AirflowConfigurationOptions", _AirflowConfigurationOptions)
-
-	Environment_EnvironmentClass = Environment.AddMember("EnvironmentClass", _EnvironmentClass)
-
-	Environment_MaxWorkers = Environment.AddMember("MaxWorkers", _MaxWorkers)
-
-	Environment_NetworkConfiguration = Environment.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	Environment_LoggingConfiguration = Environment.AddMember("LoggingConfiguration", LoggingConfiguration)
-
-	Environment_LastUpdate = Environment.AddMember("LastUpdate", LastUpdate)
-
-	Environment_WeeklyMaintenanceWindowStart = Environment.AddMember("WeeklyMaintenanceWindowStart", _WeeklyMaintenanceWindowStart)
-
-	Environment_Tags = Environment.AddMember("Tags", _TagMap)
-
-	Environment_WebserverAccessMode = Environment.AddMember("WebserverAccessMode", _WebserverAccessMode)
-
-	Environment_MinWorkers = Environment.AddMember("MinWorkers", _MinWorkers)
-
-	Environment_Schedulers = Environment.AddMember("Schedulers", _Schedulers)
-
-	Environment_WebserverVpcEndpointService = Environment.AddMember("WebserverVpcEndpointService", _VpcEndpointServiceName)
-
-	Environment_DatabaseVpcEndpointService = Environment.AddMember("DatabaseVpcEndpointService", _VpcEndpointServiceName)
-
-	Environment_CeleryExecutorQueue = Environment.AddMember("CeleryExecutorQueue", _CeleryExecutorQueue)
-
-	Environment_EndpointManagement = Environment.AddMember("EndpointManagement", _EndpointManagement)
-
-	Environment_MinWebservers = Environment.AddMember("MinWebservers", _MinWebservers)
-
-	Environment_MaxWebservers = Environment.AddMember("MaxWebservers", _MaxWebservers)
-
-	_EnvironmentList_member = _EnvironmentList.AddMember("member", _EnvironmentName)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	ModuleLoggingConfigurationInput_Enabled = ModuleLoggingConfigurationInput.AddMember("Enabled", _LoggingEnabled)
-
-	ModuleLoggingConfigurationInput_LogLevel = ModuleLoggingConfigurationInput.AddMember("LogLevel", _LoggingLevel)
-
-	LoggingConfigurationInput_DagProcessingLogs = LoggingConfigurationInput.AddMember("DagProcessingLogs", ModuleLoggingConfigurationInput)
-
-	LoggingConfigurationInput_SchedulerLogs = LoggingConfigurationInput.AddMember("SchedulerLogs", ModuleLoggingConfigurationInput)
-
-	LoggingConfigurationInput_WebserverLogs = LoggingConfigurationInput.AddMember("WebserverLogs", ModuleLoggingConfigurationInput)
-
-	LoggingConfigurationInput_WorkerLogs = LoggingConfigurationInput.AddMember("WorkerLogs", ModuleLoggingConfigurationInput)
-
-	LoggingConfigurationInput_TaskLogs = LoggingConfigurationInput.AddMember("TaskLogs", ModuleLoggingConfigurationInput)
-
-	StatisticSet_SampleCount = StatisticSet.AddMember("SampleCount", smithyprelude.Integer)
-
-	StatisticSet_Sum = StatisticSet.AddMember("Sum", smithyprelude.Double)
-
-	StatisticSet_Minimum = StatisticSet.AddMember("Minimum", smithyprelude.Double)
-
-	StatisticSet_Maximum = StatisticSet.AddMember("Maximum", smithyprelude.Double)
-
-	MetricDatum_MetricName = MetricDatum.AddMember("MetricName", smithyprelude.String)
-
-	MetricDatum_Timestamp = MetricDatum.AddMember("Timestamp", smithyprelude.Timestamp)
-
-	MetricDatum_Dimensions = MetricDatum.AddMember("Dimensions", _Dimensions)
-
-	MetricDatum_Value = MetricDatum.AddMember("Value", smithyprelude.Double)
-
-	MetricDatum_Unit = MetricDatum.AddMember("Unit", _Unit)
-
-	MetricDatum_StatisticValues = MetricDatum.AddMember("StatisticValues", StatisticSet)
-
-	_MetricData_member = _MetricData.AddMember("member", MetricDatum)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	RestApiClientException_RestApiStatusCode = RestApiClientException.AddMember("RestApiStatusCode", smithyprelude.Integer)
-
-	RestApiClientException_RestApiResponse = RestApiClientException.AddMember("RestApiResponse", _RestApiResponse)
-
-	RestApiServerException_RestApiStatusCode = RestApiServerException.AddMember("RestApiStatusCode", smithyprelude.Integer)
-
-	RestApiServerException_RestApiResponse = RestApiServerException.AddMember("RestApiResponse", _RestApiResponse)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	UpdateNetworkConfigurationInput_SecurityGroupIds = UpdateNetworkConfigurationInput.AddMember("SecurityGroupIds", _SecurityGroupList)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateCliTokenRequest_Name = CreateCliTokenRequest.AddMember("Name", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	CreateCliTokenResponse_CliToken = CreateCliTokenResponse.AddMember("CliToken", _Token)
-
-	CreateCliTokenResponse_WebServerHostname = CreateCliTokenResponse.AddMember("WebServerHostname", _Hostname)
-
-	CreateEnvironmentInput_Name = CreateEnvironmentInput.AddMember("Name", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	CreateEnvironmentInput_ExecutionRoleArn = CreateEnvironmentInput.AddMember("ExecutionRoleArn", _IamRoleArn)
-
-	CreateEnvironmentInput_SourceBucketArn = CreateEnvironmentInput.AddMember("SourceBucketArn", _S3BucketArn)
-
-	CreateEnvironmentInput_DagS3Path = CreateEnvironmentInput.AddMember("DagS3Path", _RelativePath)
-
-	CreateEnvironmentInput_NetworkConfiguration = CreateEnvironmentInput.AddMember("NetworkConfiguration", NetworkConfiguration)
-
-	CreateEnvironmentInput_PluginsS3Path = CreateEnvironmentInput.AddMember("PluginsS3Path", _RelativePath)
-
-	CreateEnvironmentInput_PluginsS3ObjectVersion = CreateEnvironmentInput.AddMember("PluginsS3ObjectVersion", _S3ObjectVersion)
-
-	CreateEnvironmentInput_RequirementsS3Path = CreateEnvironmentInput.AddMember("RequirementsS3Path", _RelativePath)
-
-	CreateEnvironmentInput_RequirementsS3ObjectVersion = CreateEnvironmentInput.AddMember("RequirementsS3ObjectVersion", _S3ObjectVersion)
-
-	CreateEnvironmentInput_StartupScriptS3Path = CreateEnvironmentInput.AddMember("StartupScriptS3Path", _RelativePath)
-
-	CreateEnvironmentInput_StartupScriptS3ObjectVersion = CreateEnvironmentInput.AddMember("StartupScriptS3ObjectVersion", _S3ObjectVersion)
-
-	CreateEnvironmentInput_AirflowConfigurationOptions = CreateEnvironmentInput.AddMember("AirflowConfigurationOptions", _AirflowConfigurationOptions)
-
-	CreateEnvironmentInput_EnvironmentClass = CreateEnvironmentInput.AddMember("EnvironmentClass", _EnvironmentClass)
-
-	CreateEnvironmentInput_MaxWorkers = CreateEnvironmentInput.AddMember("MaxWorkers", _MaxWorkers)
-
-	CreateEnvironmentInput_KmsKey = CreateEnvironmentInput.AddMember("KmsKey", _KmsKey)
-
-	CreateEnvironmentInput_AirflowVersion = CreateEnvironmentInput.AddMember("AirflowVersion", _AirflowVersion)
-
-	CreateEnvironmentInput_LoggingConfiguration = CreateEnvironmentInput.AddMember("LoggingConfiguration", LoggingConfigurationInput)
-
-	CreateEnvironmentInput_WeeklyMaintenanceWindowStart = CreateEnvironmentInput.AddMember("WeeklyMaintenanceWindowStart", _WeeklyMaintenanceWindowStart)
-
-	CreateEnvironmentInput_Tags = CreateEnvironmentInput.AddMember("Tags", _TagMap)
-
-	CreateEnvironmentInput_WebserverAccessMode = CreateEnvironmentInput.AddMember("WebserverAccessMode", _WebserverAccessMode)
-
-	CreateEnvironmentInput_MinWorkers = CreateEnvironmentInput.AddMember("MinWorkers", _MinWorkers)
-
-	CreateEnvironmentInput_Schedulers = CreateEnvironmentInput.AddMember("Schedulers", _Schedulers)
-
-	CreateEnvironmentInput_EndpointManagement = CreateEnvironmentInput.AddMember("EndpointManagement", _EndpointManagement)
-
-	CreateEnvironmentInput_MinWebservers = CreateEnvironmentInput.AddMember("MinWebservers", _MinWebservers)
-
-	CreateEnvironmentInput_MaxWebservers = CreateEnvironmentInput.AddMember("MaxWebservers", _MaxWebservers)
-
-	CreateEnvironmentOutput_Arn = CreateEnvironmentOutput.AddMember("Arn", _EnvironmentArn)
-
-	CreateWebLoginTokenRequest_Name = CreateWebLoginTokenRequest.AddMember("Name", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	CreateWebLoginTokenResponse_WebToken = CreateWebLoginTokenResponse.AddMember("WebToken", _Token)
-
-	CreateWebLoginTokenResponse_WebServerHostname = CreateWebLoginTokenResponse.AddMember("WebServerHostname", _Hostname)
-
-	CreateWebLoginTokenResponse_IamIdentity = CreateWebLoginTokenResponse.AddMember("IamIdentity", _IamIdentity)
-
-	CreateWebLoginTokenResponse_AirflowIdentity = CreateWebLoginTokenResponse.AddMember("AirflowIdentity", _AirflowIdentity)
-
-	DeleteEnvironmentInput_Name = DeleteEnvironmentInput.AddMember("Name", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	GetEnvironmentInput_Name = GetEnvironmentInput.AddMember("Name", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	GetEnvironmentOutput_Environment = GetEnvironmentOutput.AddMember("Environment", Environment)
-
-	InvokeRestApiRequest_Name = InvokeRestApiRequest.AddMember("Name", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	InvokeRestApiRequest_Path = InvokeRestApiRequest.AddMember("Path", _RestApiPath)
-
-	InvokeRestApiRequest_Method = InvokeRestApiRequest.AddMember("Method", _RestApiMethod)
-
-	InvokeRestApiRequest_QueryParameters = InvokeRestApiRequest.AddMember("QueryParameters", smithyprelude.Document)
-
-	InvokeRestApiRequest_Body = InvokeRestApiRequest.AddMember("Body", _RestApiRequestBody)
-
-	InvokeRestApiResponse_RestApiStatusCode = InvokeRestApiResponse.AddMember("RestApiStatusCode", smithyprelude.Integer)
-
-	InvokeRestApiResponse_RestApiResponse = InvokeRestApiResponse.AddMember("RestApiResponse", _RestApiResponse)
-
-	ListEnvironmentsInput_NextToken = ListEnvironmentsInput.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListEnvironmentsInput_MaxResults = ListEnvironmentsInput.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListEnvironmentsOutput_Environments = ListEnvironmentsOutput.AddMember("Environments", _EnvironmentList)
-
-	ListEnvironmentsOutput_NextToken = ListEnvironmentsOutput.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceInput_ResourceArn = ListTagsForResourceInput.AddMember("ResourceArn", _EnvironmentArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagMap)
-
-	PublishMetricsInput_EnvironmentName = PublishMetricsInput.AddMember("EnvironmentName", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	PublishMetricsInput_MetricData = PublishMetricsInput.AddMember("MetricData", _MetricData)
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", _EnvironmentArn, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMap)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", _EnvironmentArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateEnvironmentInput_Name = UpdateEnvironmentInput.AddMember("Name", _EnvironmentName, &smithytraits.HTTPLabel{})
-
-	UpdateEnvironmentInput_ExecutionRoleArn = UpdateEnvironmentInput.AddMember("ExecutionRoleArn", _IamRoleArn)
-
-	UpdateEnvironmentInput_AirflowConfigurationOptions = UpdateEnvironmentInput.AddMember("AirflowConfigurationOptions", _AirflowConfigurationOptions)
-
-	UpdateEnvironmentInput_AirflowVersion = UpdateEnvironmentInput.AddMember("AirflowVersion", _AirflowVersion)
-
-	UpdateEnvironmentInput_DagS3Path = UpdateEnvironmentInput.AddMember("DagS3Path", _RelativePath)
-
-	UpdateEnvironmentInput_EnvironmentClass = UpdateEnvironmentInput.AddMember("EnvironmentClass", _EnvironmentClass)
-
-	UpdateEnvironmentInput_LoggingConfiguration = UpdateEnvironmentInput.AddMember("LoggingConfiguration", LoggingConfigurationInput)
-
-	UpdateEnvironmentInput_MaxWorkers = UpdateEnvironmentInput.AddMember("MaxWorkers", _MaxWorkers)
-
-	UpdateEnvironmentInput_MinWorkers = UpdateEnvironmentInput.AddMember("MinWorkers", _MinWorkers)
-
-	UpdateEnvironmentInput_MaxWebservers = UpdateEnvironmentInput.AddMember("MaxWebservers", _MaxWebservers)
-
-	UpdateEnvironmentInput_MinWebservers = UpdateEnvironmentInput.AddMember("MinWebservers", _MinWebservers)
-
-	UpdateEnvironmentInput_WorkerReplacementStrategy = UpdateEnvironmentInput.AddMember("WorkerReplacementStrategy", _WorkerReplacementStrategy)
-
-	UpdateEnvironmentInput_NetworkConfiguration = UpdateEnvironmentInput.AddMember("NetworkConfiguration", UpdateNetworkConfigurationInput)
-
-	UpdateEnvironmentInput_PluginsS3Path = UpdateEnvironmentInput.AddMember("PluginsS3Path", _RelativePath)
-
-	UpdateEnvironmentInput_PluginsS3ObjectVersion = UpdateEnvironmentInput.AddMember("PluginsS3ObjectVersion", _S3ObjectVersion)
-
-	UpdateEnvironmentInput_RequirementsS3Path = UpdateEnvironmentInput.AddMember("RequirementsS3Path", _RelativePath)
-
-	UpdateEnvironmentInput_RequirementsS3ObjectVersion = UpdateEnvironmentInput.AddMember("RequirementsS3ObjectVersion", _S3ObjectVersion)
-
-	UpdateEnvironmentInput_Schedulers = UpdateEnvironmentInput.AddMember("Schedulers", _Schedulers)
-
-	UpdateEnvironmentInput_SourceBucketArn = UpdateEnvironmentInput.AddMember("SourceBucketArn", _S3BucketArn)
-
-	UpdateEnvironmentInput_StartupScriptS3Path = UpdateEnvironmentInput.AddMember("StartupScriptS3Path", _RelativePath)
-
-	UpdateEnvironmentInput_StartupScriptS3ObjectVersion = UpdateEnvironmentInput.AddMember("StartupScriptS3ObjectVersion", _S3ObjectVersion)
-
-	UpdateEnvironmentInput_WebserverAccessMode = UpdateEnvironmentInput.AddMember("WebserverAccessMode", _WebserverAccessMode)
-
-	UpdateEnvironmentInput_WeeklyMaintenanceWindowStart = UpdateEnvironmentInput.AddMember("WeeklyMaintenanceWindowStart", _WeeklyMaintenanceWindowStart)
-
-	UpdateEnvironmentOutput_Arn = UpdateEnvironmentOutput.AddMember("Arn", _EnvironmentArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var m_AirflowConfigurationOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_AirflowConfigurationOptions_key, &s_AirflowConfigurationOptions_value}}
+var mDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sDimension_Name, &sDimension_Value}}
+var m_Dimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Dimensions_member}}
+var mEnvironment = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironment_Name, &sEnvironment_Status, &sEnvironment_Arn, &sEnvironment_CreatedAt, &sEnvironment_WebserverUrl, &sEnvironment_ExecutionRoleArn, &sEnvironment_ServiceRoleArn, &sEnvironment_KmsKey, &sEnvironment_AirflowVersion, &sEnvironment_SourceBucketArn, &sEnvironment_DagS3Path, &sEnvironment_PluginsS3Path, &sEnvironment_PluginsS3ObjectVersion, &sEnvironment_RequirementsS3Path, &sEnvironment_RequirementsS3ObjectVersion, &sEnvironment_StartupScriptS3Path, &sEnvironment_StartupScriptS3ObjectVersion, &sEnvironment_AirflowConfigurationOptions, &sEnvironment_EnvironmentClass, &sEnvironment_MaxWorkers, &sEnvironment_NetworkConfiguration, &sEnvironment_LoggingConfiguration, &sEnvironment_LastUpdate, &sEnvironment_WeeklyMaintenanceWindowStart, &sEnvironment_Tags, &sEnvironment_WebserverAccessMode, &sEnvironment_MinWorkers, &sEnvironment_Schedulers, &sEnvironment_WebserverVpcEndpointService, &sEnvironment_DatabaseVpcEndpointService, &sEnvironment_CeleryExecutorQueue, &sEnvironment_EndpointManagement, &sEnvironment_MinWebservers, &sEnvironment_MaxWebservers}, Seed: 29, Slots: []uint16{
+	10, 31, 0, 19, 0, 0, 0, 20, 0, 0, 0, 1, 32, 0, 0, 0, 0, 0, 0, 0, 16, 24, 18, 0,
+	3, 0, 15, 0, 2, 0, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33,
+	0, 0, 28, 0, 0, 0, 4, 0, 0, 30, 0, 22, 0, 5, 0, 0, 11, 17, 13, 25, 0, 0, 6, 0,
+	0, 0, 9, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 7, 0, 0, 0, 0, 0, 0, 0, 21,
+	0, 0, 0, 0, 0, 0, 0, 12, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 34, 0, 0, 26,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var m_EnvironmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLastUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sLastUpdate_Status, &sLastUpdate_CreatedAt, &sLastUpdate_Error, &sLastUpdate_Source, &sLastUpdate_WorkerReplacementStrategy}}
+var mLoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingConfiguration_DagProcessingLogs, &sLoggingConfiguration_SchedulerLogs, &sLoggingConfiguration_WebserverLogs, &sLoggingConfiguration_WorkerLogs, &sLoggingConfiguration_TaskLogs}}
+var mLoggingConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingConfigurationInput_DagProcessingLogs, &sLoggingConfigurationInput_SchedulerLogs, &sLoggingConfigurationInput_WebserverLogs, &sLoggingConfigurationInput_WorkerLogs, &sLoggingConfigurationInput_TaskLogs}}
+var m_MetricData = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetricData_member}}
+var mMetricDatum = smithy.SchemaMembers{List: []*smithy.Schema{&sMetricDatum_MetricName, &sMetricDatum_Timestamp, &sMetricDatum_Dimensions, &sMetricDatum_Value, &sMetricDatum_Unit, &sMetricDatum_StatisticValues}}
+var mModuleLoggingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sModuleLoggingConfiguration_Enabled, &sModuleLoggingConfiguration_LogLevel, &sModuleLoggingConfiguration_CloudWatchLogGroupArn}}
+var mModuleLoggingConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sModuleLoggingConfigurationInput_Enabled, &sModuleLoggingConfigurationInput_LogLevel}}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_SubnetIds, &sNetworkConfiguration_SecurityGroupIds}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRestApiClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sRestApiClientException_RestApiStatusCode, &sRestApiClientException_RestApiResponse}}
+var mRestApiServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sRestApiServerException_RestApiStatusCode, &sRestApiServerException_RestApiResponse}}
+var m_SecurityGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupList_member}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var mStatisticSet = smithy.SchemaMembers{List: []*smithy.Schema{&sStatisticSet_SampleCount, &sStatisticSet_Sum, &sStatisticSet_Minimum, &sStatisticSet_Maximum}}
+var m_SubnetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mUpdateError = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateError_ErrorCode, &sUpdateError_ErrorMessage}}
+var mUpdateNetworkConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkConfigurationInput_SecurityGroupIds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateCliTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCliTokenRequest_Name}}
+var mCreateCliTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCliTokenResponse_CliToken, &sCreateCliTokenResponse_WebServerHostname}}
+var mCreateEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentInput_Name, &sCreateEnvironmentInput_ExecutionRoleArn, &sCreateEnvironmentInput_SourceBucketArn, &sCreateEnvironmentInput_DagS3Path, &sCreateEnvironmentInput_NetworkConfiguration, &sCreateEnvironmentInput_PluginsS3Path, &sCreateEnvironmentInput_PluginsS3ObjectVersion, &sCreateEnvironmentInput_RequirementsS3Path, &sCreateEnvironmentInput_RequirementsS3ObjectVersion, &sCreateEnvironmentInput_StartupScriptS3Path, &sCreateEnvironmentInput_StartupScriptS3ObjectVersion, &sCreateEnvironmentInput_AirflowConfigurationOptions, &sCreateEnvironmentInput_EnvironmentClass, &sCreateEnvironmentInput_MaxWorkers, &sCreateEnvironmentInput_KmsKey, &sCreateEnvironmentInput_AirflowVersion, &sCreateEnvironmentInput_LoggingConfiguration, &sCreateEnvironmentInput_WeeklyMaintenanceWindowStart, &sCreateEnvironmentInput_Tags, &sCreateEnvironmentInput_WebserverAccessMode, &sCreateEnvironmentInput_MinWorkers, &sCreateEnvironmentInput_Schedulers, &sCreateEnvironmentInput_EndpointManagement, &sCreateEnvironmentInput_MinWebservers, &sCreateEnvironmentInput_MaxWebservers}, Seed: 331, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 1, 0, 6, 0, 17, 16, 0, 0, 11, 15, 0, 0, 5,
+	0, 0, 0, 0, 8, 0, 2, 0, 0, 19, 0, 9, 0, 3, 13, 0, 0, 4, 0, 0, 18, 20, 0, 0,
+	0, 12, 0, 25, 0, 0, 22, 21, 0, 0, 23, 0, 0, 7, 10, 24,
+}}
+var mCreateEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentOutput_Arn}}
+var mCreateWebLoginTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebLoginTokenRequest_Name}}
+var mCreateWebLoginTokenResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWebLoginTokenResponse_WebToken, &sCreateWebLoginTokenResponse_WebServerHostname, &sCreateWebLoginTokenResponse_IamIdentity, &sCreateWebLoginTokenResponse_AirflowIdentity}}
+var mDeleteEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentInput_Name}}
+var mGetEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentInput_Name}}
+var mGetEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentOutput_Environment}}
+var mInvokeRestApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeRestApiRequest_Name, &sInvokeRestApiRequest_Path, &sInvokeRestApiRequest_Method, &sInvokeRestApiRequest_QueryParameters, &sInvokeRestApiRequest_Body}}
+var mInvokeRestApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeRestApiResponse_RestApiStatusCode, &sInvokeRestApiResponse_RestApiResponse}}
+var mListEnvironmentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentsInput_NextToken, &sListEnvironmentsInput_MaxResults}}
+var mListEnvironmentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentsOutput_Environments, &sListEnvironmentsOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_ResourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mPublishMetricsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishMetricsInput_EnvironmentName, &sPublishMetricsInput_MetricData}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentInput_Name, &sUpdateEnvironmentInput_ExecutionRoleArn, &sUpdateEnvironmentInput_AirflowConfigurationOptions, &sUpdateEnvironmentInput_AirflowVersion, &sUpdateEnvironmentInput_DagS3Path, &sUpdateEnvironmentInput_EnvironmentClass, &sUpdateEnvironmentInput_LoggingConfiguration, &sUpdateEnvironmentInput_MaxWorkers, &sUpdateEnvironmentInput_MinWorkers, &sUpdateEnvironmentInput_MaxWebservers, &sUpdateEnvironmentInput_MinWebservers, &sUpdateEnvironmentInput_WorkerReplacementStrategy, &sUpdateEnvironmentInput_NetworkConfiguration, &sUpdateEnvironmentInput_PluginsS3Path, &sUpdateEnvironmentInput_PluginsS3ObjectVersion, &sUpdateEnvironmentInput_RequirementsS3Path, &sUpdateEnvironmentInput_RequirementsS3ObjectVersion, &sUpdateEnvironmentInput_Schedulers, &sUpdateEnvironmentInput_SourceBucketArn, &sUpdateEnvironmentInput_StartupScriptS3Path, &sUpdateEnvironmentInput_StartupScriptS3ObjectVersion, &sUpdateEnvironmentInput_WebserverAccessMode, &sUpdateEnvironmentInput_WeeklyMaintenanceWindowStart}, Seed: 97, Slots: []uint16{
+	12, 0, 17, 0, 0, 10, 0, 0, 11, 0, 0, 0, 0, 3, 0, 0, 0, 7, 19, 0, 0, 0, 0, 5,
+	0, 16, 0, 14, 0, 0, 0, 0, 0, 13, 0, 15, 0, 0, 0, 4, 0, 0, 18, 20, 0, 0, 8, 1,
+	9, 0, 23, 0, 0, 0, 0, 22, 0, 0, 0, 0, 21, 0, 6, 2,
+}}
+var mUpdateEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentOutput_Arn}}
+
+var sCreateCliToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCliToken, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironment, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateWebLoginToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebLoginToken, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDeleteEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironment, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironment, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sInvokeRestApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeRestApi, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironments, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sPublishMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishMetrics, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sUpdateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironment, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var s_AmazonMWAA = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonMWAA, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var s_AirflowConfigurationOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AirflowConfigurationOptions, Members: &m_AirflowConfigurationOptions, Traits: &t13, Type: smithy.ShapeTypeMap})
+var s_AirflowIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AirflowIdentity, Type: smithy.ShapeTypeString})
+var s_AirflowVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AirflowVersion, Type: smithy.ShapeTypeString})
+var s_CeleryExecutorQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CeleryExecutorQueue, Type: smithy.ShapeTypeString})
+var s_CloudWatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString})
+var s_ConfigKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigKey, Type: smithy.ShapeTypeString})
+var s_ConfigValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigValue, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreatedAt, Type: smithy.ShapeTypeTimestamp})
+var sDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure})
+var s_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList})
+var s_EndpointManagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointManagement, Type: smithy.ShapeTypeString})
+var sEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var s_EnvironmentClass = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentClass, Type: smithy.ShapeTypeString})
+var s_EnvironmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList})
+var s_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var s_EnvironmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentStatus, Type: smithy.ShapeTypeString})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Hostname = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Hostname, Type: smithy.ShapeTypeString})
+var s_IamIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamIdentity, Type: smithy.ShapeTypeString})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var s_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sLastUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLastUpdate, Members: &mLastUpdate, Type: smithy.ShapeTypeStructure})
+var sLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sLoggingConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingConfigurationInput, Members: &mLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var s_LoggingEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingEnabled, Type: smithy.ShapeTypeBoolean})
+var s_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoggingLevel, Type: smithy.ShapeTypeString})
+var s_MaxWebservers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxWebservers, Type: smithy.ShapeTypeInteger})
+var s_MaxWorkers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxWorkers, Type: smithy.ShapeTypeInteger})
+var s_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList})
+var sMetricDatum = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetricDatum, Members: &mMetricDatum, Type: smithy.ShapeTypeStructure})
+var s_MinWebservers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinWebservers, Type: smithy.ShapeTypeInteger})
+var s_MinWorkers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MinWorkers, Type: smithy.ShapeTypeInteger})
+var sModuleLoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModuleLoggingConfiguration, Members: &mModuleLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sModuleLoggingConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModuleLoggingConfigurationInput, Members: &mModuleLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_RelativePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sRestApiClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestApiClientException, Members: &mRestApiClientException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var s_RestApiMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestApiMethod, Type: smithy.ShapeTypeString})
+var s_RestApiPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestApiPath, Type: smithy.ShapeTypeString})
+var s_RestApiRequestBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestApiRequestBody, Traits: &t13, Type: smithy.ShapeTypeDocument})
+var s_RestApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestApiResponse, Traits: &t13, Type: smithy.ShapeTypeDocument})
+var sRestApiServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestApiServerException, Members: &mRestApiServerException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var s_S3BucketArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketArn, Type: smithy.ShapeTypeString})
+var s_S3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var s_Schedulers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Schedulers, Type: smithy.ShapeTypeInteger})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupList, Members: &m_SecurityGroupList, Type: smithy.ShapeTypeList})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sStatisticSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatisticSet, Members: &mStatisticSet, Type: smithy.ShapeTypeStructure})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_SubnetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetList, Members: &m_SubnetList, Type: smithy.ShapeTypeList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_Token = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Token, Traits: &t13, Type: smithy.ShapeTypeString})
+var s_Unit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Unit, Type: smithy.ShapeTypeString})
+var s_UpdateCreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateCreatedAt, Type: smithy.ShapeTypeTimestamp})
+var sUpdateError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateError, Members: &mUpdateError, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkConfigurationInput, Members: &mUpdateNetworkConfigurationInput, Type: smithy.ShapeTypeStructure})
+var s_UpdateSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateSource, Type: smithy.ShapeTypeString})
+var s_UpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateStatus, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var s_VpcEndpointServiceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString})
+var s_WebserverAccessMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebserverAccessMode, Type: smithy.ShapeTypeString})
+var s_WebserverUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebserverUrl, Type: smithy.ShapeTypeString})
+var s_WeeklyMaintenanceWindowStart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WeeklyMaintenanceWindowStart, Type: smithy.ShapeTypeString})
+var s_WorkerReplacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkerReplacementStrategy, Type: smithy.ShapeTypeString})
+var sCreateCliTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCliTokenRequest, Members: &mCreateCliTokenRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCliTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCliTokenResponse, Members: &mCreateCliTokenResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentInput, Members: &mCreateEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentOutput, Members: &mCreateEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sCreateWebLoginTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebLoginTokenRequest, Members: &mCreateWebLoginTokenRequest, Type: smithy.ShapeTypeStructure})
+var sCreateWebLoginTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWebLoginTokenResponse, Members: &mCreateWebLoginTokenResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentInput, Members: &mDeleteEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentInput, Members: &mGetEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentOutput, Members: &mGetEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sInvokeRestApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeRestApiRequest, Members: &mInvokeRestApiRequest, Type: smithy.ShapeTypeStructure})
+var sInvokeRestApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeRestApiResponse, Members: &mInvokeRestApiResponse, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsInput, Members: &mListEnvironmentsInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsOutput, Members: &mListEnvironmentsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sPublishMetricsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishMetricsInput, Members: &mPublishMetricsInput, Type: smithy.ShapeTypeStructure})
+var sPublishMetricsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishMetricsOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentInput, Members: &mUpdateEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentOutput, Members: &mUpdateEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AirflowConfigurationOptions_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ConfigKey, Type: smithy.ShapeTypeString})
+var s_AirflowConfigurationOptions_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ConfigValue, Traits: &t14, Type: smithy.ShapeTypeString})
+var sDimension_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sDimension_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Dimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDimension, Members: &mDimension, Type: smithy.ShapeTypeStructure})
+var sEnvironment_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sEnvironment_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_EnvironmentStatus, Type: smithy.ShapeTypeString})
+var sEnvironment_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sEnvironment_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_CreatedAt, Type: smithy.ShapeTypeTimestamp})
+var sEnvironment_WebserverUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebserverUrl", ID: &i_WebserverUrl, Type: smithy.ShapeTypeString})
+var sEnvironment_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sEnvironment_ServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sEnvironment_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sEnvironment_AirflowVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AirflowVersion", ID: &i_AirflowVersion, Type: smithy.ShapeTypeString})
+var sEnvironment_SourceBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString})
+var sEnvironment_DagS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DagS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sEnvironment_PluginsS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PluginsS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sEnvironment_PluginsS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PluginsS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sEnvironment_RequirementsS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequirementsS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sEnvironment_RequirementsS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequirementsS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sEnvironment_StartupScriptS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartupScriptS3Path", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnvironment_StartupScriptS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartupScriptS3ObjectVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnvironment_AirflowConfigurationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AirflowConfigurationOptions", ID: &i_AirflowConfigurationOptions, Members: &m_AirflowConfigurationOptions, Traits: &t14, Type: smithy.ShapeTypeMap})
+var sEnvironment_EnvironmentClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentClass", ID: &i_EnvironmentClass, Type: smithy.ShapeTypeString})
+var sEnvironment_MaxWorkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxWorkers", ID: &i_MaxWorkers, Type: smithy.ShapeTypeInteger})
+var sEnvironment_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sEnvironment_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfiguration, Members: &mLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sEnvironment_LastUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdate", ID: &iLastUpdate, Members: &mLastUpdate, Type: smithy.ShapeTypeStructure})
+var sEnvironment_WeeklyMaintenanceWindowStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceWindowStart", ID: &i_WeeklyMaintenanceWindowStart, Type: smithy.ShapeTypeString})
+var sEnvironment_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sEnvironment_WebserverAccessMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebserverAccessMode", ID: &i_WebserverAccessMode, Type: smithy.ShapeTypeString})
+var sEnvironment_MinWorkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinWorkers", ID: &i_MinWorkers, Type: smithy.ShapeTypeInteger})
+var sEnvironment_Schedulers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedulers", ID: &i_Schedulers, Type: smithy.ShapeTypeInteger})
+var sEnvironment_WebserverVpcEndpointService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebserverVpcEndpointService", ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString})
+var sEnvironment_DatabaseVpcEndpointService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseVpcEndpointService", ID: &i_VpcEndpointServiceName, Type: smithy.ShapeTypeString})
+var sEnvironment_CeleryExecutorQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CeleryExecutorQueue", ID: &i_CeleryExecutorQueue, Type: smithy.ShapeTypeString})
+var sEnvironment_EndpointManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointManagement", ID: &i_EndpointManagement, Type: smithy.ShapeTypeString})
+var sEnvironment_MinWebservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinWebservers", ID: &i_MinWebservers, Type: smithy.ShapeTypeInteger})
+var sEnvironment_MaxWebservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxWebservers", ID: &i_MaxWebservers, Type: smithy.ShapeTypeInteger})
+var s_EnvironmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EnvironmentName, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sLastUpdate_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_UpdateStatus, Type: smithy.ShapeTypeString})
+var sLastUpdate_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_UpdateCreatedAt, Type: smithy.ShapeTypeTimestamp})
+var sLastUpdate_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iUpdateError, Members: &mUpdateError, Type: smithy.ShapeTypeStructure})
+var sLastUpdate_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_UpdateSource, Type: smithy.ShapeTypeString})
+var sLastUpdate_WorkerReplacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerReplacementStrategy", ID: &i_WorkerReplacementStrategy, Type: smithy.ShapeTypeString})
+var sLoggingConfiguration_DagProcessingLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DagProcessingLogs", ID: &iModuleLoggingConfiguration, Members: &mModuleLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sLoggingConfiguration_SchedulerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchedulerLogs", ID: &iModuleLoggingConfiguration, Members: &mModuleLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sLoggingConfiguration_WebserverLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebserverLogs", ID: &iModuleLoggingConfiguration, Members: &mModuleLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sLoggingConfiguration_WorkerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerLogs", ID: &iModuleLoggingConfiguration, Members: &mModuleLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sLoggingConfiguration_TaskLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskLogs", ID: &iModuleLoggingConfiguration, Members: &mModuleLoggingConfiguration, Type: smithy.ShapeTypeStructure})
+var sLoggingConfigurationInput_DagProcessingLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DagProcessingLogs", ID: &iModuleLoggingConfigurationInput, Members: &mModuleLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sLoggingConfigurationInput_SchedulerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchedulerLogs", ID: &iModuleLoggingConfigurationInput, Members: &mModuleLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sLoggingConfigurationInput_WebserverLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebserverLogs", ID: &iModuleLoggingConfigurationInput, Members: &mModuleLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sLoggingConfigurationInput_WorkerLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerLogs", ID: &iModuleLoggingConfigurationInput, Members: &mModuleLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sLoggingConfigurationInput_TaskLogs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskLogs", ID: &iModuleLoggingConfigurationInput, Members: &mModuleLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var s_MetricData_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetricDatum, Members: &mMetricDatum, Type: smithy.ShapeTypeStructure})
+var sMetricDatum_MetricName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricName", ID: &pString, Type: smithy.ShapeTypeString})
+var sMetricDatum_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sMetricDatum_Dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Dimensions", ID: &i_Dimensions, Members: &m_Dimensions, Type: smithy.ShapeTypeList})
+var sMetricDatum_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sMetricDatum_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &i_Unit, Type: smithy.ShapeTypeString})
+var sMetricDatum_StatisticValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatisticValues", ID: &iStatisticSet, Members: &mStatisticSet, Type: smithy.ShapeTypeStructure})
+var sModuleLoggingConfiguration_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_LoggingEnabled, Type: smithy.ShapeTypeBoolean})
+var sModuleLoggingConfiguration_LogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogLevel", ID: &i_LoggingLevel, Type: smithy.ShapeTypeString})
+var sModuleLoggingConfiguration_CloudWatchLogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CloudWatchLogGroupArn", ID: &i_CloudWatchLogGroupArn, Type: smithy.ShapeTypeString})
+var sModuleLoggingConfigurationInput_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_LoggingEnabled, Type: smithy.ShapeTypeBoolean})
+var sModuleLoggingConfigurationInput_LogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogLevel", ID: &i_LoggingLevel, Type: smithy.ShapeTypeString})
+var sNetworkConfiguration_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetList, Members: &m_SubnetList, Type: smithy.ShapeTypeList})
+var sNetworkConfiguration_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupList, Members: &m_SecurityGroupList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sRestApiClientException_RestApiStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestApiStatusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRestApiClientException_RestApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestApiResponse", ID: &i_RestApiResponse, Traits: &t14, Type: smithy.ShapeTypeDocument})
+var sRestApiServerException_RestApiStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestApiStatusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRestApiServerException_RestApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestApiResponse", ID: &i_RestApiResponse, Traits: &t14, Type: smithy.ShapeTypeDocument})
+var s_SecurityGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStatisticSet_SampleCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SampleCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sStatisticSet_Sum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sum", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sStatisticSet_Minimum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Minimum", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sStatisticSet_Maximum = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Maximum", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var s_SubnetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sUpdateError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sUpdateError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConfigurationInput_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupList, Members: &m_SecurityGroupList, Type: smithy.ShapeTypeList})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateCliTokenRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sCreateCliTokenResponse_CliToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CliToken", ID: &i_Token, Traits: &t14, Type: smithy.ShapeTypeString})
+var sCreateCliTokenResponse_WebServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebServerHostname", ID: &i_Hostname, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_SourceBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_DagS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DagS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentInput_PluginsS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PluginsS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_PluginsS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PluginsS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_RequirementsS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequirementsS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_RequirementsS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequirementsS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_StartupScriptS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartupScriptS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_StartupScriptS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartupScriptS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_AirflowConfigurationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AirflowConfigurationOptions", ID: &i_AirflowConfigurationOptions, Members: &m_AirflowConfigurationOptions, Traits: &t14, Type: smithy.ShapeTypeMap})
+var sCreateEnvironmentInput_EnvironmentClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentClass", ID: &i_EnvironmentClass, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_MaxWorkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxWorkers", ID: &i_MaxWorkers, Type: smithy.ShapeTypeInteger})
+var sCreateEnvironmentInput_KmsKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKey", ID: &i_KmsKey, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_AirflowVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AirflowVersion", ID: &i_AirflowVersion, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfigurationInput, Members: &mLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentInput_WeeklyMaintenanceWindowStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceWindowStart", ID: &i_WeeklyMaintenanceWindowStart, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateEnvironmentInput_WebserverAccessMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebserverAccessMode", ID: &i_WebserverAccessMode, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_MinWorkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinWorkers", ID: &i_MinWorkers, Type: smithy.ShapeTypeInteger})
+var sCreateEnvironmentInput_Schedulers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedulers", ID: &i_Schedulers, Type: smithy.ShapeTypeInteger})
+var sCreateEnvironmentInput_EndpointManagement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointManagement", ID: &i_EndpointManagement, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_MinWebservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinWebservers", ID: &i_MinWebservers, Type: smithy.ShapeTypeInteger})
+var sCreateEnvironmentInput_MaxWebservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxWebservers", ID: &i_MaxWebservers, Type: smithy.ShapeTypeInteger})
+var sCreateEnvironmentOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sCreateWebLoginTokenRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sCreateWebLoginTokenResponse_WebToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebToken", ID: &i_Token, Traits: &t14, Type: smithy.ShapeTypeString})
+var sCreateWebLoginTokenResponse_WebServerHostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebServerHostname", ID: &i_Hostname, Type: smithy.ShapeTypeString})
+var sCreateWebLoginTokenResponse_IamIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IamIdentity", ID: &i_IamIdentity, Type: smithy.ShapeTypeString})
+var sCreateWebLoginTokenResponse_AirflowIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AirflowIdentity", ID: &i_AirflowIdentity, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetEnvironmentInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sGetEnvironmentOutput_Environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var sInvokeRestApiRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sInvokeRestApiRequest_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_RestApiPath, Type: smithy.ShapeTypeString})
+var sInvokeRestApiRequest_Method = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Method", ID: &i_RestApiMethod, Type: smithy.ShapeTypeString})
+var sInvokeRestApiRequest_QueryParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryParameters", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var sInvokeRestApiRequest_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i_RestApiRequestBody, Traits: &t14, Type: smithy.ShapeTypeDocument})
+var sInvokeRestApiResponse_RestApiStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestApiStatusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sInvokeRestApiResponse_RestApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestApiResponse", ID: &i_RestApiResponse, Traits: &t14, Type: smithy.ShapeTypeDocument})
+var sListEnvironmentsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t20, Type: smithy.ShapeTypeString})
+var sListEnvironmentsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t21, Type: smithy.ShapeTypeInteger})
+var sListEnvironmentsOutput_Environments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Environments", ID: &i_EnvironmentList, Members: &m_EnvironmentList, Type: smithy.ShapeTypeList})
+var sListEnvironmentsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EnvironmentArn, Traits: &t19, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sPublishMetricsInput_EnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentName", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sPublishMetricsInput_MetricData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetricData", ID: &i_MetricData, Members: &m_MetricData, Type: smithy.ShapeTypeList})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EnvironmentArn, Traits: &t19, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EnvironmentArn, Traits: &t19, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t22, Type: smithy.ShapeTypeList})
+var sUpdateEnvironmentInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EnvironmentName, Traits: &t19, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_ExecutionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExecutionRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_AirflowConfigurationOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AirflowConfigurationOptions", ID: &i_AirflowConfigurationOptions, Members: &m_AirflowConfigurationOptions, Traits: &t14, Type: smithy.ShapeTypeMap})
+var sUpdateEnvironmentInput_AirflowVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AirflowVersion", ID: &i_AirflowVersion, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_DagS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DagS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_EnvironmentClass = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnvironmentClass", ID: &i_EnvironmentClass, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_LoggingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingConfiguration", ID: &iLoggingConfigurationInput, Members: &mLoggingConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentInput_MaxWorkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxWorkers", ID: &i_MaxWorkers, Type: smithy.ShapeTypeInteger})
+var sUpdateEnvironmentInput_MinWorkers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinWorkers", ID: &i_MinWorkers, Type: smithy.ShapeTypeInteger})
+var sUpdateEnvironmentInput_MaxWebservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxWebservers", ID: &i_MaxWebservers, Type: smithy.ShapeTypeInteger})
+var sUpdateEnvironmentInput_MinWebservers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinWebservers", ID: &i_MinWebservers, Type: smithy.ShapeTypeInteger})
+var sUpdateEnvironmentInput_WorkerReplacementStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WorkerReplacementStrategy", ID: &i_WorkerReplacementStrategy, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_NetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConfiguration", ID: &iUpdateNetworkConfigurationInput, Members: &mUpdateNetworkConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentInput_PluginsS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PluginsS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_PluginsS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PluginsS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_RequirementsS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequirementsS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_RequirementsS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequirementsS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_Schedulers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schedulers", ID: &i_Schedulers, Type: smithy.ShapeTypeInteger})
+var sUpdateEnvironmentInput_SourceBucketArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBucketArn", ID: &i_S3BucketArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_StartupScriptS3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartupScriptS3Path", ID: &i_RelativePath, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_StartupScriptS3ObjectVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartupScriptS3ObjectVersion", ID: &i_S3ObjectVersion, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_WebserverAccessMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebserverAccessMode", ID: &i_WebserverAccessMode, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_WeeklyMaintenanceWindowStart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceWindowStart", ID: &i_WeeklyMaintenanceWindowStart, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+
+var CreateCliToken = &sCreateCliToken
+
+var CreateEnvironment = &sCreateEnvironment
+
+var CreateWebLoginToken = &sCreateWebLoginToken
+
+var DeleteEnvironment = &sDeleteEnvironment
+
+var GetEnvironment = &sGetEnvironment
+
+var InvokeRestApi = &sInvokeRestApi
+
+var ListEnvironments = &sListEnvironments
+
+var ListTagsForResource = &sListTagsForResource
+
+var PublishMetrics = &sPublishMetrics
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateEnvironment = &sUpdateEnvironment
+
+var _AmazonMWAA = &s_AmazonMWAA
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AirflowConfigurationOptions = &s_AirflowConfigurationOptions
+var _AirflowConfigurationOptions_key = &s_AirflowConfigurationOptions_key
+var _AirflowConfigurationOptions_value = &s_AirflowConfigurationOptions_value
+
+var _AirflowIdentity = &s_AirflowIdentity
+
+var _AirflowVersion = &s_AirflowVersion
+
+var _CeleryExecutorQueue = &s_CeleryExecutorQueue
+
+var _CloudWatchLogGroupArn = &s_CloudWatchLogGroupArn
+
+var _ConfigKey = &s_ConfigKey
+
+var _ConfigValue = &s_ConfigValue
+
+var _CreatedAt = &s_CreatedAt
+
+var Dimension = &sDimension
+var Dimension_Name = &sDimension_Name
+var Dimension_Value = &sDimension_Value
+
+var _Dimensions = &s_Dimensions
+var _Dimensions_member = &s_Dimensions_member
+
+var _EndpointManagement = &s_EndpointManagement
+
+var Environment = &sEnvironment
+var Environment_Name = &sEnvironment_Name
+var Environment_Status = &sEnvironment_Status
+var Environment_Arn = &sEnvironment_Arn
+var Environment_CreatedAt = &sEnvironment_CreatedAt
+var Environment_WebserverUrl = &sEnvironment_WebserverUrl
+var Environment_ExecutionRoleArn = &sEnvironment_ExecutionRoleArn
+var Environment_ServiceRoleArn = &sEnvironment_ServiceRoleArn
+var Environment_KmsKey = &sEnvironment_KmsKey
+var Environment_AirflowVersion = &sEnvironment_AirflowVersion
+var Environment_SourceBucketArn = &sEnvironment_SourceBucketArn
+var Environment_DagS3Path = &sEnvironment_DagS3Path
+var Environment_PluginsS3Path = &sEnvironment_PluginsS3Path
+var Environment_PluginsS3ObjectVersion = &sEnvironment_PluginsS3ObjectVersion
+var Environment_RequirementsS3Path = &sEnvironment_RequirementsS3Path
+var Environment_RequirementsS3ObjectVersion = &sEnvironment_RequirementsS3ObjectVersion
+var Environment_StartupScriptS3Path = &sEnvironment_StartupScriptS3Path
+var Environment_StartupScriptS3ObjectVersion = &sEnvironment_StartupScriptS3ObjectVersion
+var Environment_AirflowConfigurationOptions = &sEnvironment_AirflowConfigurationOptions
+var Environment_EnvironmentClass = &sEnvironment_EnvironmentClass
+var Environment_MaxWorkers = &sEnvironment_MaxWorkers
+var Environment_NetworkConfiguration = &sEnvironment_NetworkConfiguration
+var Environment_LoggingConfiguration = &sEnvironment_LoggingConfiguration
+var Environment_LastUpdate = &sEnvironment_LastUpdate
+var Environment_WeeklyMaintenanceWindowStart = &sEnvironment_WeeklyMaintenanceWindowStart
+var Environment_Tags = &sEnvironment_Tags
+var Environment_WebserverAccessMode = &sEnvironment_WebserverAccessMode
+var Environment_MinWorkers = &sEnvironment_MinWorkers
+var Environment_Schedulers = &sEnvironment_Schedulers
+var Environment_WebserverVpcEndpointService = &sEnvironment_WebserverVpcEndpointService
+var Environment_DatabaseVpcEndpointService = &sEnvironment_DatabaseVpcEndpointService
+var Environment_CeleryExecutorQueue = &sEnvironment_CeleryExecutorQueue
+var Environment_EndpointManagement = &sEnvironment_EndpointManagement
+var Environment_MinWebservers = &sEnvironment_MinWebservers
+var Environment_MaxWebservers = &sEnvironment_MaxWebservers
+
+var _EnvironmentArn = &s_EnvironmentArn
+
+var _EnvironmentClass = &s_EnvironmentClass
+
+var _EnvironmentList = &s_EnvironmentList
+var _EnvironmentList_member = &s_EnvironmentList_member
+
+var _EnvironmentName = &s_EnvironmentName
+
+var _EnvironmentStatus = &s_EnvironmentStatus
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Hostname = &s_Hostname
+
+var _IamIdentity = &s_IamIdentity
+
+var _IamRoleArn = &s_IamRoleArn
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _KmsKey = &s_KmsKey
+
+var LastUpdate = &sLastUpdate
+var LastUpdate_Status = &sLastUpdate_Status
+var LastUpdate_CreatedAt = &sLastUpdate_CreatedAt
+var LastUpdate_Error = &sLastUpdate_Error
+var LastUpdate_Source = &sLastUpdate_Source
+var LastUpdate_WorkerReplacementStrategy = &sLastUpdate_WorkerReplacementStrategy
+
+var LoggingConfiguration = &sLoggingConfiguration
+var LoggingConfiguration_DagProcessingLogs = &sLoggingConfiguration_DagProcessingLogs
+var LoggingConfiguration_SchedulerLogs = &sLoggingConfiguration_SchedulerLogs
+var LoggingConfiguration_WebserverLogs = &sLoggingConfiguration_WebserverLogs
+var LoggingConfiguration_WorkerLogs = &sLoggingConfiguration_WorkerLogs
+var LoggingConfiguration_TaskLogs = &sLoggingConfiguration_TaskLogs
+
+var LoggingConfigurationInput = &sLoggingConfigurationInput
+var LoggingConfigurationInput_DagProcessingLogs = &sLoggingConfigurationInput_DagProcessingLogs
+var LoggingConfigurationInput_SchedulerLogs = &sLoggingConfigurationInput_SchedulerLogs
+var LoggingConfigurationInput_WebserverLogs = &sLoggingConfigurationInput_WebserverLogs
+var LoggingConfigurationInput_WorkerLogs = &sLoggingConfigurationInput_WorkerLogs
+var LoggingConfigurationInput_TaskLogs = &sLoggingConfigurationInput_TaskLogs
+
+var _LoggingEnabled = &s_LoggingEnabled
+
+var _LoggingLevel = &s_LoggingLevel
+
+var _MaxWebservers = &s_MaxWebservers
+
+var _MaxWorkers = &s_MaxWorkers
+
+var _MetricData = &s_MetricData
+var _MetricData_member = &s_MetricData_member
+
+var MetricDatum = &sMetricDatum
+var MetricDatum_MetricName = &sMetricDatum_MetricName
+var MetricDatum_Timestamp = &sMetricDatum_Timestamp
+var MetricDatum_Dimensions = &sMetricDatum_Dimensions
+var MetricDatum_Value = &sMetricDatum_Value
+var MetricDatum_Unit = &sMetricDatum_Unit
+var MetricDatum_StatisticValues = &sMetricDatum_StatisticValues
+
+var _MinWebservers = &s_MinWebservers
+
+var _MinWorkers = &s_MinWorkers
+
+var ModuleLoggingConfiguration = &sModuleLoggingConfiguration
+var ModuleLoggingConfiguration_Enabled = &sModuleLoggingConfiguration_Enabled
+var ModuleLoggingConfiguration_LogLevel = &sModuleLoggingConfiguration_LogLevel
+var ModuleLoggingConfiguration_CloudWatchLogGroupArn = &sModuleLoggingConfiguration_CloudWatchLogGroupArn
+
+var ModuleLoggingConfigurationInput = &sModuleLoggingConfigurationInput
+var ModuleLoggingConfigurationInput_Enabled = &sModuleLoggingConfigurationInput_Enabled
+var ModuleLoggingConfigurationInput_LogLevel = &sModuleLoggingConfigurationInput_LogLevel
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_SubnetIds = &sNetworkConfiguration_SubnetIds
+var NetworkConfiguration_SecurityGroupIds = &sNetworkConfiguration_SecurityGroupIds
+
+var _NextToken = &s_NextToken
+
+var _RelativePath = &s_RelativePath
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var RestApiClientException = &sRestApiClientException
+var RestApiClientException_RestApiStatusCode = &sRestApiClientException_RestApiStatusCode
+var RestApiClientException_RestApiResponse = &sRestApiClientException_RestApiResponse
+
+var _RestApiMethod = &s_RestApiMethod
+
+var _RestApiPath = &s_RestApiPath
+
+var _RestApiRequestBody = &s_RestApiRequestBody
+
+var _RestApiResponse = &s_RestApiResponse
+
+var RestApiServerException = &sRestApiServerException
+var RestApiServerException_RestApiStatusCode = &sRestApiServerException_RestApiStatusCode
+var RestApiServerException_RestApiResponse = &sRestApiServerException_RestApiResponse
+
+var _S3BucketArn = &s_S3BucketArn
+
+var _S3ObjectVersion = &s_S3ObjectVersion
+
+var _Schedulers = &s_Schedulers
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupList = &s_SecurityGroupList
+var _SecurityGroupList_member = &s_SecurityGroupList_member
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var StatisticSet = &sStatisticSet
+var StatisticSet_SampleCount = &sStatisticSet_SampleCount
+var StatisticSet_Sum = &sStatisticSet_Sum
+var StatisticSet_Minimum = &sStatisticSet_Minimum
+var StatisticSet_Maximum = &sStatisticSet_Maximum
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetList = &s_SubnetList
+var _SubnetList_member = &s_SubnetList_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _Token = &s_Token
+
+var _Unit = &s_Unit
+
+var _UpdateCreatedAt = &s_UpdateCreatedAt
+
+var UpdateError = &sUpdateError
+var UpdateError_ErrorCode = &sUpdateError_ErrorCode
+var UpdateError_ErrorMessage = &sUpdateError_ErrorMessage
+
+var UpdateNetworkConfigurationInput = &sUpdateNetworkConfigurationInput
+var UpdateNetworkConfigurationInput_SecurityGroupIds = &sUpdateNetworkConfigurationInput_SecurityGroupIds
+
+var _UpdateSource = &s_UpdateSource
+
+var _UpdateStatus = &s_UpdateStatus
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var _VpcEndpointServiceName = &s_VpcEndpointServiceName
+
+var _WebserverAccessMode = &s_WebserverAccessMode
+
+var _WebserverUrl = &s_WebserverUrl
+
+var _WeeklyMaintenanceWindowStart = &s_WeeklyMaintenanceWindowStart
+
+var _WorkerReplacementStrategy = &s_WorkerReplacementStrategy
+
+var CreateCliTokenRequest = &sCreateCliTokenRequest
+var CreateCliTokenRequest_Name = &sCreateCliTokenRequest_Name
+
+var CreateCliTokenResponse = &sCreateCliTokenResponse
+var CreateCliTokenResponse_CliToken = &sCreateCliTokenResponse_CliToken
+var CreateCliTokenResponse_WebServerHostname = &sCreateCliTokenResponse_WebServerHostname
+
+var CreateEnvironmentInput = &sCreateEnvironmentInput
+var CreateEnvironmentInput_Name = &sCreateEnvironmentInput_Name
+var CreateEnvironmentInput_ExecutionRoleArn = &sCreateEnvironmentInput_ExecutionRoleArn
+var CreateEnvironmentInput_SourceBucketArn = &sCreateEnvironmentInput_SourceBucketArn
+var CreateEnvironmentInput_DagS3Path = &sCreateEnvironmentInput_DagS3Path
+var CreateEnvironmentInput_NetworkConfiguration = &sCreateEnvironmentInput_NetworkConfiguration
+var CreateEnvironmentInput_PluginsS3Path = &sCreateEnvironmentInput_PluginsS3Path
+var CreateEnvironmentInput_PluginsS3ObjectVersion = &sCreateEnvironmentInput_PluginsS3ObjectVersion
+var CreateEnvironmentInput_RequirementsS3Path = &sCreateEnvironmentInput_RequirementsS3Path
+var CreateEnvironmentInput_RequirementsS3ObjectVersion = &sCreateEnvironmentInput_RequirementsS3ObjectVersion
+var CreateEnvironmentInput_StartupScriptS3Path = &sCreateEnvironmentInput_StartupScriptS3Path
+var CreateEnvironmentInput_StartupScriptS3ObjectVersion = &sCreateEnvironmentInput_StartupScriptS3ObjectVersion
+var CreateEnvironmentInput_AirflowConfigurationOptions = &sCreateEnvironmentInput_AirflowConfigurationOptions
+var CreateEnvironmentInput_EnvironmentClass = &sCreateEnvironmentInput_EnvironmentClass
+var CreateEnvironmentInput_MaxWorkers = &sCreateEnvironmentInput_MaxWorkers
+var CreateEnvironmentInput_KmsKey = &sCreateEnvironmentInput_KmsKey
+var CreateEnvironmentInput_AirflowVersion = &sCreateEnvironmentInput_AirflowVersion
+var CreateEnvironmentInput_LoggingConfiguration = &sCreateEnvironmentInput_LoggingConfiguration
+var CreateEnvironmentInput_WeeklyMaintenanceWindowStart = &sCreateEnvironmentInput_WeeklyMaintenanceWindowStart
+var CreateEnvironmentInput_Tags = &sCreateEnvironmentInput_Tags
+var CreateEnvironmentInput_WebserverAccessMode = &sCreateEnvironmentInput_WebserverAccessMode
+var CreateEnvironmentInput_MinWorkers = &sCreateEnvironmentInput_MinWorkers
+var CreateEnvironmentInput_Schedulers = &sCreateEnvironmentInput_Schedulers
+var CreateEnvironmentInput_EndpointManagement = &sCreateEnvironmentInput_EndpointManagement
+var CreateEnvironmentInput_MinWebservers = &sCreateEnvironmentInput_MinWebservers
+var CreateEnvironmentInput_MaxWebservers = &sCreateEnvironmentInput_MaxWebservers
+
+var CreateEnvironmentOutput = &sCreateEnvironmentOutput
+var CreateEnvironmentOutput_Arn = &sCreateEnvironmentOutput_Arn
+
+var CreateWebLoginTokenRequest = &sCreateWebLoginTokenRequest
+var CreateWebLoginTokenRequest_Name = &sCreateWebLoginTokenRequest_Name
+
+var CreateWebLoginTokenResponse = &sCreateWebLoginTokenResponse
+var CreateWebLoginTokenResponse_WebToken = &sCreateWebLoginTokenResponse_WebToken
+var CreateWebLoginTokenResponse_WebServerHostname = &sCreateWebLoginTokenResponse_WebServerHostname
+var CreateWebLoginTokenResponse_IamIdentity = &sCreateWebLoginTokenResponse_IamIdentity
+var CreateWebLoginTokenResponse_AirflowIdentity = &sCreateWebLoginTokenResponse_AirflowIdentity
+
+var DeleteEnvironmentInput = &sDeleteEnvironmentInput
+var DeleteEnvironmentInput_Name = &sDeleteEnvironmentInput_Name
+
+var DeleteEnvironmentOutput = &sDeleteEnvironmentOutput
+
+var GetEnvironmentInput = &sGetEnvironmentInput
+var GetEnvironmentInput_Name = &sGetEnvironmentInput_Name
+
+var GetEnvironmentOutput = &sGetEnvironmentOutput
+var GetEnvironmentOutput_Environment = &sGetEnvironmentOutput_Environment
+
+var InvokeRestApiRequest = &sInvokeRestApiRequest
+var InvokeRestApiRequest_Name = &sInvokeRestApiRequest_Name
+var InvokeRestApiRequest_Path = &sInvokeRestApiRequest_Path
+var InvokeRestApiRequest_Method = &sInvokeRestApiRequest_Method
+var InvokeRestApiRequest_QueryParameters = &sInvokeRestApiRequest_QueryParameters
+var InvokeRestApiRequest_Body = &sInvokeRestApiRequest_Body
+
+var InvokeRestApiResponse = &sInvokeRestApiResponse
+var InvokeRestApiResponse_RestApiStatusCode = &sInvokeRestApiResponse_RestApiStatusCode
+var InvokeRestApiResponse_RestApiResponse = &sInvokeRestApiResponse_RestApiResponse
+
+var ListEnvironmentsInput = &sListEnvironmentsInput
+var ListEnvironmentsInput_NextToken = &sListEnvironmentsInput_NextToken
+var ListEnvironmentsInput_MaxResults = &sListEnvironmentsInput_MaxResults
+
+var ListEnvironmentsOutput = &sListEnvironmentsOutput
+var ListEnvironmentsOutput_Environments = &sListEnvironmentsOutput_Environments
+var ListEnvironmentsOutput_NextToken = &sListEnvironmentsOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_ResourceArn = &sListTagsForResourceInput_ResourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var PublishMetricsInput = &sPublishMetricsInput
+var PublishMetricsInput_EnvironmentName = &sPublishMetricsInput_EnvironmentName
+var PublishMetricsInput_MetricData = &sPublishMetricsInput_MetricData
+
+var PublishMetricsOutput = &sPublishMetricsOutput
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateEnvironmentInput = &sUpdateEnvironmentInput
+var UpdateEnvironmentInput_Name = &sUpdateEnvironmentInput_Name
+var UpdateEnvironmentInput_ExecutionRoleArn = &sUpdateEnvironmentInput_ExecutionRoleArn
+var UpdateEnvironmentInput_AirflowConfigurationOptions = &sUpdateEnvironmentInput_AirflowConfigurationOptions
+var UpdateEnvironmentInput_AirflowVersion = &sUpdateEnvironmentInput_AirflowVersion
+var UpdateEnvironmentInput_DagS3Path = &sUpdateEnvironmentInput_DagS3Path
+var UpdateEnvironmentInput_EnvironmentClass = &sUpdateEnvironmentInput_EnvironmentClass
+var UpdateEnvironmentInput_LoggingConfiguration = &sUpdateEnvironmentInput_LoggingConfiguration
+var UpdateEnvironmentInput_MaxWorkers = &sUpdateEnvironmentInput_MaxWorkers
+var UpdateEnvironmentInput_MinWorkers = &sUpdateEnvironmentInput_MinWorkers
+var UpdateEnvironmentInput_MaxWebservers = &sUpdateEnvironmentInput_MaxWebservers
+var UpdateEnvironmentInput_MinWebservers = &sUpdateEnvironmentInput_MinWebservers
+var UpdateEnvironmentInput_WorkerReplacementStrategy = &sUpdateEnvironmentInput_WorkerReplacementStrategy
+var UpdateEnvironmentInput_NetworkConfiguration = &sUpdateEnvironmentInput_NetworkConfiguration
+var UpdateEnvironmentInput_PluginsS3Path = &sUpdateEnvironmentInput_PluginsS3Path
+var UpdateEnvironmentInput_PluginsS3ObjectVersion = &sUpdateEnvironmentInput_PluginsS3ObjectVersion
+var UpdateEnvironmentInput_RequirementsS3Path = &sUpdateEnvironmentInput_RequirementsS3Path
+var UpdateEnvironmentInput_RequirementsS3ObjectVersion = &sUpdateEnvironmentInput_RequirementsS3ObjectVersion
+var UpdateEnvironmentInput_Schedulers = &sUpdateEnvironmentInput_Schedulers
+var UpdateEnvironmentInput_SourceBucketArn = &sUpdateEnvironmentInput_SourceBucketArn
+var UpdateEnvironmentInput_StartupScriptS3Path = &sUpdateEnvironmentInput_StartupScriptS3Path
+var UpdateEnvironmentInput_StartupScriptS3ObjectVersion = &sUpdateEnvironmentInput_StartupScriptS3ObjectVersion
+var UpdateEnvironmentInput_WebserverAccessMode = &sUpdateEnvironmentInput_WebserverAccessMode
+var UpdateEnvironmentInput_WeeklyMaintenanceWindowStart = &sUpdateEnvironmentInput_WeeklyMaintenanceWindowStart
+
+var UpdateEnvironmentOutput = &sUpdateEnvironmentOutput
+var UpdateEnvironmentOutput_Arn = &sUpdateEnvironmentOutput_Arn
+
+var AmazonMWAA = &smithy.ServiceSchema{Schema: &s_AmazonMWAA, Version: "2020-07-01"}

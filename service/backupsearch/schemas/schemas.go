@@ -4,1220 +4,898 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetSearchJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "GetSearchJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var (
+	iGetSearchJob                     = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "GetSearchJob"}
+	iGetSearchResultExportJob         = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "GetSearchResultExportJob"}
+	iListSearchJobBackups             = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobBackups"}
+	iListSearchJobResults             = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobResults"}
+	iListSearchJobs                   = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobs"}
+	iListSearchResultExportJobs       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchResultExportJobs"}
+	iListTagsForResource              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListTagsForResource"}
+	iStartSearchJob                   = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StartSearchJob"}
+	iStartSearchResultExportJob       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StartSearchResultExportJob"}
+	iStopSearchJob                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StopSearchJob"}
+	iTagResource                      = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TagResource"}
+	iUntagResource                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "UntagResource"}
+	i_CryoBackupSearchService         = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "CryoBackupSearchService"}
+	iAccessDeniedException            = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "AccessDeniedException"}
+	iBackupCreationTimeFilter         = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "BackupCreationTimeFilter"}
+	iConflictException                = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ConflictException"}
+	iCurrentSearchProgress            = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "CurrentSearchProgress"}
+	iEBSItemFilter                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "EBSItemFilter"}
+	i_EBSItemFilters                  = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "EBSItemFilters"}
+	iEBSResultItem                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "EBSResultItem"}
+	i_EncryptionKeyArn                = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "EncryptionKeyArn"}
+	i_ExportJobArn                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ExportJobArn"}
+	iExportJobStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ExportJobStatus"}
+	i_ExportJobSummaries              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ExportJobSummaries"}
+	iExportJobSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ExportJobSummary"}
+	iExportSpecification              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ExportSpecification"}
+	i_FilePath                        = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "FilePath"}
+	i_GenericId                       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "GenericId"}
+	i_IamRoleArn                      = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "IamRoleArn"}
+	iInternalServerException          = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "InternalServerException"}
+	iItemFilters                      = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ItemFilters"}
+	iLongCondition                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "LongCondition"}
+	i_LongConditionList               = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "LongConditionList"}
+	iLongConditionOperator            = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "LongConditionOperator"}
+	i_ObjectKey                       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ObjectKey"}
+	i_RecoveryPoint                   = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "RecoveryPoint"}
+	i_RecoveryPointArnList            = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "RecoveryPointArnList"}
+	i_ResourceArnList                 = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ResourceArnList"}
+	iResourceNotFoundException        = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ResourceNotFoundException"}
+	iResourceType                     = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ResourceType"}
+	i_ResourceTypeList                = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ResourceTypeList"}
+	iResultItem                       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ResultItem"}
+	i_Results                         = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "Results"}
+	iS3ExportSpecification            = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "S3ExportSpecification"}
+	iS3ItemFilter                     = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "S3ItemFilter"}
+	i_S3ItemFilters                   = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "S3ItemFilters"}
+	iS3ResultItem                     = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "S3ResultItem"}
+	i_SearchJobArn                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchJobArn"}
+	iSearchJobBackupsResult           = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchJobBackupsResult"}
+	i_SearchJobBackupsResults         = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchJobBackupsResults"}
+	i_SearchJobs                      = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchJobs"}
+	iSearchJobState                   = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchJobState"}
+	iSearchJobSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchJobSummary"}
+	iSearchScope                      = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchScope"}
+	iSearchScopeSummary               = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "SearchScopeSummary"}
+	iServiceQuotaExceededException    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ServiceQuotaExceededException"}
+	iStringCondition                  = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StringCondition"}
+	i_StringConditionList             = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StringConditionList"}
+	iStringConditionOperator          = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StringConditionOperator"}
+	i_TagKeys                         = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TagKeys"}
+	i_TagMap                          = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TagMap"}
+	iThrottlingException              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ThrottlingException"}
+	iTimeCondition                    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TimeCondition"}
+	i_TimeConditionList               = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TimeConditionList"}
+	iTimeConditionOperator            = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TimeConditionOperator"}
+	iValidationException              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ValidationException"}
+	iGetSearchJobInput                = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "GetSearchJobInput"}
+	iGetSearchJobOutput               = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "GetSearchJobOutput"}
+	iGetSearchResultExportJobInput    = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "GetSearchResultExportJobInput"}
+	iGetSearchResultExportJobOutput   = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "GetSearchResultExportJobOutput"}
+	iListSearchJobBackupsInput        = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobBackupsInput"}
+	iListSearchJobBackupsOutput       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobBackupsOutput"}
+	iListSearchJobResultsInput        = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobResultsInput"}
+	iListSearchJobResultsOutput       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobResultsOutput"}
+	iListSearchJobsInput              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobsInput"}
+	iListSearchJobsOutput             = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchJobsOutput"}
+	iListSearchResultExportJobsInput  = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchResultExportJobsInput"}
+	iListSearchResultExportJobsOutput = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListSearchResultExportJobsOutput"}
+	iListTagsForResourceRequest       = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse      = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "ListTagsForResourceResponse"}
+	iStartSearchJobInput              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StartSearchJobInput"}
+	iStartSearchJobOutput             = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StartSearchJobOutput"}
+	iStartSearchResultExportJobInput  = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StartSearchResultExportJobInput"}
+	iStartSearchResultExportJobOutput = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StartSearchResultExportJobOutput"}
+	iStopSearchJobInput               = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StopSearchJobInput"}
+	iStopSearchJobOutput              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "StopSearchJobOutput"}
+	iTagResourceRequest               = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TagResourceRequest"}
+	iTagResourceResponse              = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "TagResourceResponse"}
+	iUntagResourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "UntagResourceRequest"}
+	iUntagResourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.backupsearch", Name: "UntagResourceResponse"}
+	pString                           = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pLong                             = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+	pUnit                             = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/search-jobs/{SearchJobIdentifier}",
-	Code: 200})
-
-var GetSearchResultExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "GetSearchResultExportJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/export-search-jobs/{ExportJobIdentifier}",
-	Code: 200})
-
-var ListSearchJobBackups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobBackups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/search-jobs/{SearchJobIdentifier}/backups",
-	Code: 200})
-
-var ListSearchJobResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobResults",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/search-jobs/{SearchJobIdentifier}/search-results",
-	Code: 200})
-
-var ListSearchJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/search-jobs",
-	Code: 200})
-
-var ListSearchResultExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchResultExportJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/export-search-jobs",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var StartSearchJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StartSearchJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/search-jobs",
-	Code: 200})
-
-var StartSearchResultExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StartSearchResultExportJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/export-search-jobs",
-	Code: 200})
-
-var StopSearchJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StopSearchJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/search-jobs/{SearchJobIdentifier}/actions/cancel",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var _CryoBackupSearchService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "CryoBackupSearchService",
-}, smithy.ShapeTypeService, 0)
-
-var CryoBackupSearchService = smithy.NewServiceSchema(_CryoBackupSearchService, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var BackupCreationTimeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "BackupCreationTimeFilter",
-}, smithy.ShapeTypeStructure, 2)
-var BackupCreationTimeFilter_CreatedAfter *smithy.Schema
-
-var BackupCreationTimeFilter_CreatedBefore *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var CurrentSearchProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "CurrentSearchProgress",
-}, smithy.ShapeTypeStructure, 3)
-var CurrentSearchProgress_RecoveryPointsScannedCount *smithy.Schema
-
-var CurrentSearchProgress_ItemsScannedCount *smithy.Schema
-
-var CurrentSearchProgress_ItemsMatchedCount *smithy.Schema
-
-var EBSItemFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "EBSItemFilter",
-}, smithy.ShapeTypeStructure, 4)
-var EBSItemFilter_FilePaths *smithy.Schema
-
-var EBSItemFilter_Sizes *smithy.Schema
-
-var EBSItemFilter_CreationTimes *smithy.Schema
-
-var EBSItemFilter_LastModificationTimes *smithy.Schema
-
-var _EBSItemFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "EBSItemFilters",
-}, smithy.ShapeTypeList, 1)
-var _EBSItemFilters_member *smithy.Schema
-
-var EBSResultItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "EBSResultItem",
-}, smithy.ShapeTypeStructure, 8)
-var EBSResultItem_BackupResourceArn *smithy.Schema
-
-var EBSResultItem_SourceResourceArn *smithy.Schema
-
-var EBSResultItem_BackupVaultName *smithy.Schema
-
-var EBSResultItem_FileSystemIdentifier *smithy.Schema
-
-var EBSResultItem_FilePath *smithy.Schema
-
-var EBSResultItem_FileSize *smithy.Schema
-
-var EBSResultItem_CreationTime *smithy.Schema
-
-var EBSResultItem_LastModifiedTime *smithy.Schema
-
-var _EncryptionKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "EncryptionKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ExportJobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ExportJobArn",
-}, smithy.ShapeTypeString, 0)
-
-var ExportJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ExportJobStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ExportJobStatus_RUNNING *smithy.Schema
-
-var ExportJobStatus_FAILED *smithy.Schema
-
-var ExportJobStatus_COMPLETED *smithy.Schema
-
-var _ExportJobSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ExportJobSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ExportJobSummaries_member *smithy.Schema
-
-var ExportJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ExportJobSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ExportJobSummary_ExportJobIdentifier *smithy.Schema
-
-var ExportJobSummary_ExportJobArn *smithy.Schema
-
-var ExportJobSummary_Status *smithy.Schema
-
-var ExportJobSummary_CreationTime *smithy.Schema
-
-var ExportJobSummary_CompletionTime *smithy.Schema
-
-var ExportJobSummary_StatusMessage *smithy.Schema
-
-var ExportJobSummary_SearchJobArn *smithy.Schema
-
-var ExportSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ExportSpecification",
-}, smithy.ShapeTypeUnion, 1)
-var ExportSpecification_s3ExportSpecification *smithy.Schema
-
-var _FilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "FilePath",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _GenericId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "GenericId",
-}, smithy.ShapeTypeString, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var ItemFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ItemFilters",
-}, smithy.ShapeTypeStructure, 2)
-var ItemFilters_S3ItemFilters *smithy.Schema
-
-var ItemFilters_EBSItemFilters *smithy.Schema
-
-var LongCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "LongCondition",
-}, smithy.ShapeTypeStructure, 2)
-var LongCondition_Value *smithy.Schema
-
-var LongCondition_Operator *smithy.Schema
-
-var _LongConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "LongConditionList",
-}, smithy.ShapeTypeList, 1)
-var _LongConditionList_member *smithy.Schema
-
-var LongConditionOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "LongConditionOperator",
-}, smithy.ShapeTypeEnum, 4)
-var LongConditionOperator_EQUALS_TO *smithy.Schema
-
-var LongConditionOperator_NOT_EQUALS_TO *smithy.Schema
-
-var LongConditionOperator_LESS_THAN_EQUAL_TO *smithy.Schema
-
-var LongConditionOperator_GREATER_THAN_EQUAL_TO *smithy.Schema
-
-var _ObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ObjectKey",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RecoveryPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "RecoveryPoint",
-}, smithy.ShapeTypeString, 0)
-
-var _RecoveryPointArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "RecoveryPointArnList",
-}, smithy.ShapeTypeList, 1)
-var _RecoveryPointArnList_member *smithy.Schema
-
-var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArnList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceType_S3 *smithy.Schema
-
-var ResourceType_EBS *smithy.Schema
-
-var _ResourceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ResourceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypeList_member *smithy.Schema
-
-var ResultItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ResultItem",
-}, smithy.ShapeTypeUnion, 2)
-var ResultItem_S3ResultItem *smithy.Schema
-
-var ResultItem_EBSResultItem *smithy.Schema
-
-var _Results = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "Results",
-}, smithy.ShapeTypeList, 1)
-var _Results_member *smithy.Schema
-
-var S3ExportSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "S3ExportSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var S3ExportSpecification_DestinationBucket *smithy.Schema
-
-var S3ExportSpecification_DestinationPrefix *smithy.Schema
-
-var S3ItemFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "S3ItemFilter",
-}, smithy.ShapeTypeStructure, 5)
-var S3ItemFilter_ObjectKeys *smithy.Schema
-
-var S3ItemFilter_Sizes *smithy.Schema
-
-var S3ItemFilter_CreationTimes *smithy.Schema
-
-var S3ItemFilter_VersionIds *smithy.Schema
-
-var S3ItemFilter_ETags *smithy.Schema
-
-var _S3ItemFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "S3ItemFilters",
-}, smithy.ShapeTypeList, 1)
-var _S3ItemFilters_member *smithy.Schema
-
-var S3ResultItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "S3ResultItem",
-}, smithy.ShapeTypeStructure, 8)
-var S3ResultItem_BackupResourceArn *smithy.Schema
-
-var S3ResultItem_SourceResourceArn *smithy.Schema
-
-var S3ResultItem_BackupVaultName *smithy.Schema
-
-var S3ResultItem_ObjectKey *smithy.Schema
-
-var S3ResultItem_ObjectSize *smithy.Schema
-
-var S3ResultItem_CreationTime *smithy.Schema
-
-var S3ResultItem_ETag *smithy.Schema
-
-var S3ResultItem_VersionId *smithy.Schema
-
-var _SearchJobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchJobArn",
-}, smithy.ShapeTypeString, 0)
-
-var SearchJobBackupsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchJobBackupsResult",
-}, smithy.ShapeTypeStructure, 7)
-var SearchJobBackupsResult_Status *smithy.Schema
-
-var SearchJobBackupsResult_StatusMessage *smithy.Schema
-
-var SearchJobBackupsResult_ResourceType *smithy.Schema
-
-var SearchJobBackupsResult_BackupResourceArn *smithy.Schema
-
-var SearchJobBackupsResult_SourceResourceArn *smithy.Schema
-
-var SearchJobBackupsResult_IndexCreationTime *smithy.Schema
-
-var SearchJobBackupsResult_BackupCreationTime *smithy.Schema
-
-var _SearchJobBackupsResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchJobBackupsResults",
-}, smithy.ShapeTypeList, 1)
-var _SearchJobBackupsResults_member *smithy.Schema
-
-var _SearchJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchJobs",
-}, smithy.ShapeTypeList, 1)
-var _SearchJobs_member *smithy.Schema
-
-var SearchJobState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchJobState",
-}, smithy.ShapeTypeEnum, 5)
-var SearchJobState_RUNNING *smithy.Schema
-
-var SearchJobState_COMPLETED *smithy.Schema
-
-var SearchJobState_STOPPING *smithy.Schema
-
-var SearchJobState_STOPPED *smithy.Schema
-
-var SearchJobState_FAILED *smithy.Schema
-
-var SearchJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchJobSummary",
-}, smithy.ShapeTypeStructure, 8)
-var SearchJobSummary_SearchJobIdentifier *smithy.Schema
-
-var SearchJobSummary_SearchJobArn *smithy.Schema
-
-var SearchJobSummary_Name *smithy.Schema
-
-var SearchJobSummary_Status *smithy.Schema
-
-var SearchJobSummary_CreationTime *smithy.Schema
-
-var SearchJobSummary_CompletionTime *smithy.Schema
-
-var SearchJobSummary_SearchScopeSummary *smithy.Schema
-
-var SearchJobSummary_StatusMessage *smithy.Schema
-
-var SearchScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchScope",
-}, smithy.ShapeTypeStructure, 5)
-var SearchScope_BackupResourceTypes *smithy.Schema
-
-var SearchScope_BackupResourceCreationTime *smithy.Schema
-
-var SearchScope_SourceResourceArns *smithy.Schema
-
-var SearchScope_BackupResourceArns *smithy.Schema
-
-var SearchScope_BackupResourceTags *smithy.Schema
-
-var SearchScopeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "SearchScopeSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SearchScopeSummary_TotalRecoveryPointsToScanCount *smithy.Schema
-
-var SearchScopeSummary_TotalItemsToScanCount *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var StringCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StringCondition",
-}, smithy.ShapeTypeStructure, 2)
-var StringCondition_Value *smithy.Schema
-
-var StringCondition_Operator *smithy.Schema
-
-var _StringConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StringConditionList",
-}, smithy.ShapeTypeList, 1)
-var _StringConditionList_member *smithy.Schema
-
-var StringConditionOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StringConditionOperator",
-}, smithy.ShapeTypeEnum, 8)
-var StringConditionOperator_EQUALS_TO *smithy.Schema
-
-var StringConditionOperator_NOT_EQUALS_TO *smithy.Schema
-
-var StringConditionOperator_CONTAINS *smithy.Schema
-
-var StringConditionOperator_DOES_NOT_CONTAIN *smithy.Schema
-
-var StringConditionOperator_BEGINS_WITH *smithy.Schema
-
-var StringConditionOperator_ENDS_WITH *smithy.Schema
-
-var StringConditionOperator_DOES_NOT_BEGIN_WITH *smithy.Schema
-
-var StringConditionOperator_DOES_NOT_END_WITH *smithy.Schema
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var TimeCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TimeCondition",
-}, smithy.ShapeTypeStructure, 2)
-var TimeCondition_Value *smithy.Schema
-
-var TimeCondition_Operator *smithy.Schema
-
-var _TimeConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TimeConditionList",
-}, smithy.ShapeTypeList, 1)
-var _TimeConditionList_member *smithy.Schema
-
-var TimeConditionOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TimeConditionOperator",
-}, smithy.ShapeTypeEnum, 4)
-var TimeConditionOperator_EQUALS_TO *smithy.Schema
-
-var TimeConditionOperator_NOT_EQUALS_TO *smithy.Schema
-
-var TimeConditionOperator_LESS_THAN_EQUAL_TO *smithy.Schema
-
-var TimeConditionOperator_GREATER_THAN_EQUAL_TO *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var GetSearchJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "GetSearchJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSearchJobInput_SearchJobIdentifier *smithy.Schema
-
-var GetSearchJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "GetSearchJobOutput",
-}, smithy.ShapeTypeStructure, 12)
-var GetSearchJobOutput_Name *smithy.Schema
-
-var GetSearchJobOutput_SearchScopeSummary *smithy.Schema
-
-var GetSearchJobOutput_CurrentSearchProgress *smithy.Schema
-
-var GetSearchJobOutput_StatusMessage *smithy.Schema
-
-var GetSearchJobOutput_EncryptionKeyArn *smithy.Schema
-
-var GetSearchJobOutput_CompletionTime *smithy.Schema
-
-var GetSearchJobOutput_Status *smithy.Schema
-
-var GetSearchJobOutput_SearchScope *smithy.Schema
-
-var GetSearchJobOutput_ItemFilters *smithy.Schema
-
-var GetSearchJobOutput_CreationTime *smithy.Schema
-
-var GetSearchJobOutput_SearchJobIdentifier *smithy.Schema
-
-var GetSearchJobOutput_SearchJobArn *smithy.Schema
-
-var GetSearchResultExportJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "GetSearchResultExportJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetSearchResultExportJobInput_ExportJobIdentifier *smithy.Schema
-
-var GetSearchResultExportJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "GetSearchResultExportJobOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetSearchResultExportJobOutput_ExportJobIdentifier *smithy.Schema
-
-var GetSearchResultExportJobOutput_ExportJobArn *smithy.Schema
-
-var GetSearchResultExportJobOutput_Status *smithy.Schema
-
-var GetSearchResultExportJobOutput_CreationTime *smithy.Schema
-
-var GetSearchResultExportJobOutput_CompletionTime *smithy.Schema
-
-var GetSearchResultExportJobOutput_StatusMessage *smithy.Schema
-
-var GetSearchResultExportJobOutput_ExportSpecification *smithy.Schema
-
-var GetSearchResultExportJobOutput_SearchJobArn *smithy.Schema
-
-var ListSearchJobBackupsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobBackupsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSearchJobBackupsInput_SearchJobIdentifier *smithy.Schema
-
-var ListSearchJobBackupsInput_NextToken *smithy.Schema
-
-var ListSearchJobBackupsInput_MaxResults *smithy.Schema
-
-var ListSearchJobBackupsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobBackupsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSearchJobBackupsOutput_Results *smithy.Schema
-
-var ListSearchJobBackupsOutput_NextToken *smithy.Schema
-
-var ListSearchJobResultsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobResultsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSearchJobResultsInput_SearchJobIdentifier *smithy.Schema
-
-var ListSearchJobResultsInput_NextToken *smithy.Schema
-
-var ListSearchJobResultsInput_MaxResults *smithy.Schema
-
-var ListSearchJobResultsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobResultsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSearchJobResultsOutput_Results *smithy.Schema
-
-var ListSearchJobResultsOutput_NextToken *smithy.Schema
-
-var ListSearchJobsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListSearchJobsInput_ByStatus *smithy.Schema
-
-var ListSearchJobsInput_NextToken *smithy.Schema
-
-var ListSearchJobsInput_MaxResults *smithy.Schema
-
-var ListSearchJobsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchJobsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSearchJobsOutput_SearchJobs *smithy.Schema
-
-var ListSearchJobsOutput_NextToken *smithy.Schema
-
-var ListSearchResultExportJobsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchResultExportJobsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListSearchResultExportJobsInput_Status *smithy.Schema
-
-var ListSearchResultExportJobsInput_SearchJobIdentifier *smithy.Schema
-
-var ListSearchResultExportJobsInput_NextToken *smithy.Schema
-
-var ListSearchResultExportJobsInput_MaxResults *smithy.Schema
-
-var ListSearchResultExportJobsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListSearchResultExportJobsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSearchResultExportJobsOutput_ExportJobs *smithy.Schema
-
-var ListSearchResultExportJobsOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var StartSearchJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StartSearchJobInput",
-}, smithy.ShapeTypeStructure, 6)
-var StartSearchJobInput_Tags *smithy.Schema
-
-var StartSearchJobInput_Name *smithy.Schema
-
-var StartSearchJobInput_EncryptionKeyArn *smithy.Schema
-
-var StartSearchJobInput_ClientToken *smithy.Schema
-
-var StartSearchJobInput_SearchScope *smithy.Schema
-
-var StartSearchJobInput_ItemFilters *smithy.Schema
-
-var StartSearchJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StartSearchJobOutput",
-}, smithy.ShapeTypeStructure, 3)
-var StartSearchJobOutput_SearchJobArn *smithy.Schema
-
-var StartSearchJobOutput_CreationTime *smithy.Schema
-
-var StartSearchJobOutput_SearchJobIdentifier *smithy.Schema
-
-var StartSearchResultExportJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StartSearchResultExportJobInput",
-}, smithy.ShapeTypeStructure, 5)
-var StartSearchResultExportJobInput_SearchJobIdentifier *smithy.Schema
-
-var StartSearchResultExportJobInput_ExportSpecification *smithy.Schema
-
-var StartSearchResultExportJobInput_ClientToken *smithy.Schema
-
-var StartSearchResultExportJobInput_Tags *smithy.Schema
-
-var StartSearchResultExportJobInput_RoleArn *smithy.Schema
-
-var StartSearchResultExportJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StartSearchResultExportJobOutput",
-}, smithy.ShapeTypeStructure, 2)
-var StartSearchResultExportJobOutput_ExportJobArn *smithy.Schema
-
-var StartSearchResultExportJobOutput_ExportJobIdentifier *smithy.Schema
-
-var StopSearchJobInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StopSearchJobInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopSearchJobInput_SearchJobIdentifier *smithy.Schema
-
-var StopSearchJobOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "StopSearchJobOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.backupsearch",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	BackupCreationTimeFilter_CreatedAfter = BackupCreationTimeFilter.AddMember("CreatedAfter", smithyprelude.Timestamp)
-
-	BackupCreationTimeFilter_CreatedBefore = BackupCreationTimeFilter.AddMember("CreatedBefore", smithyprelude.Timestamp)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	CurrentSearchProgress_RecoveryPointsScannedCount = CurrentSearchProgress.AddMember("RecoveryPointsScannedCount", smithyprelude.Integer)
-
-	CurrentSearchProgress_ItemsScannedCount = CurrentSearchProgress.AddMember("ItemsScannedCount", smithyprelude.Long)
-
-	CurrentSearchProgress_ItemsMatchedCount = CurrentSearchProgress.AddMember("ItemsMatchedCount", smithyprelude.Long)
-
-	StringConditionOperator_EQUALS_TO = StringConditionOperator.AddMember("EQUALS_TO", smithyprelude.Unit)
-
-	StringConditionOperator_NOT_EQUALS_TO = StringConditionOperator.AddMember("NOT_EQUALS_TO", smithyprelude.Unit)
-
-	StringConditionOperator_CONTAINS = StringConditionOperator.AddMember("CONTAINS", smithyprelude.Unit)
-
-	StringConditionOperator_DOES_NOT_CONTAIN = StringConditionOperator.AddMember("DOES_NOT_CONTAIN", smithyprelude.Unit)
-
-	StringConditionOperator_BEGINS_WITH = StringConditionOperator.AddMember("BEGINS_WITH", smithyprelude.Unit)
-
-	StringConditionOperator_ENDS_WITH = StringConditionOperator.AddMember("ENDS_WITH", smithyprelude.Unit)
-
-	StringConditionOperator_DOES_NOT_BEGIN_WITH = StringConditionOperator.AddMember("DOES_NOT_BEGIN_WITH", smithyprelude.Unit)
-
-	StringConditionOperator_DOES_NOT_END_WITH = StringConditionOperator.AddMember("DOES_NOT_END_WITH", smithyprelude.Unit)
-
-	StringCondition_Value = StringCondition.AddMember("Value", smithyprelude.String)
-
-	StringCondition_Operator = StringCondition.AddMember("Operator", StringConditionOperator)
-
-	_StringConditionList_member = _StringConditionList.AddMember("member", StringCondition)
-
-	LongConditionOperator_EQUALS_TO = LongConditionOperator.AddMember("EQUALS_TO", smithyprelude.Unit)
-
-	LongConditionOperator_NOT_EQUALS_TO = LongConditionOperator.AddMember("NOT_EQUALS_TO", smithyprelude.Unit)
-
-	LongConditionOperator_LESS_THAN_EQUAL_TO = LongConditionOperator.AddMember("LESS_THAN_EQUAL_TO", smithyprelude.Unit)
-
-	LongConditionOperator_GREATER_THAN_EQUAL_TO = LongConditionOperator.AddMember("GREATER_THAN_EQUAL_TO", smithyprelude.Unit)
-
-	LongCondition_Value = LongCondition.AddMember("Value", smithyprelude.Long)
-
-	LongCondition_Operator = LongCondition.AddMember("Operator", LongConditionOperator)
-
-	_LongConditionList_member = _LongConditionList.AddMember("member", LongCondition)
-
-	TimeConditionOperator_EQUALS_TO = TimeConditionOperator.AddMember("EQUALS_TO", smithyprelude.Unit)
-
-	TimeConditionOperator_NOT_EQUALS_TO = TimeConditionOperator.AddMember("NOT_EQUALS_TO", smithyprelude.Unit)
-
-	TimeConditionOperator_LESS_THAN_EQUAL_TO = TimeConditionOperator.AddMember("LESS_THAN_EQUAL_TO", smithyprelude.Unit)
-
-	TimeConditionOperator_GREATER_THAN_EQUAL_TO = TimeConditionOperator.AddMember("GREATER_THAN_EQUAL_TO", smithyprelude.Unit)
-
-	TimeCondition_Value = TimeCondition.AddMember("Value", smithyprelude.Timestamp)
-
-	TimeCondition_Operator = TimeCondition.AddMember("Operator", TimeConditionOperator)
-
-	_TimeConditionList_member = _TimeConditionList.AddMember("member", TimeCondition)
-
-	EBSItemFilter_FilePaths = EBSItemFilter.AddMember("FilePaths", _StringConditionList)
-
-	EBSItemFilter_Sizes = EBSItemFilter.AddMember("Sizes", _LongConditionList)
-
-	EBSItemFilter_CreationTimes = EBSItemFilter.AddMember("CreationTimes", _TimeConditionList)
-
-	EBSItemFilter_LastModificationTimes = EBSItemFilter.AddMember("LastModificationTimes", _TimeConditionList)
-
-	_EBSItemFilters_member = _EBSItemFilters.AddMember("member", EBSItemFilter)
-
-	EBSResultItem_BackupResourceArn = EBSResultItem.AddMember("BackupResourceArn", smithyprelude.String)
-
-	EBSResultItem_SourceResourceArn = EBSResultItem.AddMember("SourceResourceArn", smithyprelude.String)
-
-	EBSResultItem_BackupVaultName = EBSResultItem.AddMember("BackupVaultName", smithyprelude.String)
-
-	EBSResultItem_FileSystemIdentifier = EBSResultItem.AddMember("FileSystemIdentifier", smithyprelude.String)
-
-	EBSResultItem_FilePath = EBSResultItem.AddMember("FilePath", _FilePath)
-
-	EBSResultItem_FileSize = EBSResultItem.AddMember("FileSize", smithyprelude.Long)
-
-	EBSResultItem_CreationTime = EBSResultItem.AddMember("CreationTime", smithyprelude.Timestamp)
-
-	EBSResultItem_LastModifiedTime = EBSResultItem.AddMember("LastModifiedTime", smithyprelude.Timestamp)
-
-	ExportJobStatus_RUNNING = ExportJobStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	ExportJobStatus_FAILED = ExportJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ExportJobStatus_COMPLETED = ExportJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ExportJobSummary_ExportJobIdentifier = ExportJobSummary.AddMember("ExportJobIdentifier", _GenericId)
-
-	ExportJobSummary_ExportJobArn = ExportJobSummary.AddMember("ExportJobArn", _ExportJobArn)
-
-	ExportJobSummary_Status = ExportJobSummary.AddMember("Status", ExportJobStatus)
-
-	ExportJobSummary_CreationTime = ExportJobSummary.AddMember("CreationTime", smithyprelude.Timestamp)
-
-	ExportJobSummary_CompletionTime = ExportJobSummary.AddMember("CompletionTime", smithyprelude.Timestamp)
-
-	ExportJobSummary_StatusMessage = ExportJobSummary.AddMember("StatusMessage", smithyprelude.String)
-
-	ExportJobSummary_SearchJobArn = ExportJobSummary.AddMember("SearchJobArn", _SearchJobArn)
-
-	_ExportJobSummaries_member = _ExportJobSummaries.AddMember("member", ExportJobSummary)
-
-	S3ExportSpecification_DestinationBucket = S3ExportSpecification.AddMember("DestinationBucket", smithyprelude.String)
-
-	S3ExportSpecification_DestinationPrefix = S3ExportSpecification.AddMember("DestinationPrefix", smithyprelude.String)
-
-	ExportSpecification_s3ExportSpecification = ExportSpecification.AddMember("s3ExportSpecification", S3ExportSpecification)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	S3ItemFilter_ObjectKeys = S3ItemFilter.AddMember("ObjectKeys", _StringConditionList)
-
-	S3ItemFilter_Sizes = S3ItemFilter.AddMember("Sizes", _LongConditionList)
-
-	S3ItemFilter_CreationTimes = S3ItemFilter.AddMember("CreationTimes", _TimeConditionList)
-
-	S3ItemFilter_VersionIds = S3ItemFilter.AddMember("VersionIds", _StringConditionList)
-
-	S3ItemFilter_ETags = S3ItemFilter.AddMember("ETags", _StringConditionList)
-
-	_S3ItemFilters_member = _S3ItemFilters.AddMember("member", S3ItemFilter)
-
-	ItemFilters_S3ItemFilters = ItemFilters.AddMember("S3ItemFilters", _S3ItemFilters)
-
-	ItemFilters_EBSItemFilters = ItemFilters.AddMember("EBSItemFilters", _EBSItemFilters)
-
-	_RecoveryPointArnList_member = _RecoveryPointArnList.AddMember("member", _RecoveryPoint)
-
-	_ResourceArnList_member = _ResourceArnList.AddMember("member", smithyprelude.String)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ResourceType_S3 = ResourceType.AddMember("S3", smithyprelude.Unit)
-
-	ResourceType_EBS = ResourceType.AddMember("EBS", smithyprelude.Unit)
-
-	_ResourceTypeList_member = _ResourceTypeList.AddMember("member", ResourceType)
-
-	S3ResultItem_BackupResourceArn = S3ResultItem.AddMember("BackupResourceArn", smithyprelude.String)
-
-	S3ResultItem_SourceResourceArn = S3ResultItem.AddMember("SourceResourceArn", smithyprelude.String)
-
-	S3ResultItem_BackupVaultName = S3ResultItem.AddMember("BackupVaultName", smithyprelude.String)
-
-	S3ResultItem_ObjectKey = S3ResultItem.AddMember("ObjectKey", _ObjectKey)
-
-	S3ResultItem_ObjectSize = S3ResultItem.AddMember("ObjectSize", smithyprelude.Long)
-
-	S3ResultItem_CreationTime = S3ResultItem.AddMember("CreationTime", smithyprelude.Timestamp)
-
-	S3ResultItem_ETag = S3ResultItem.AddMember("ETag", smithyprelude.String)
-
-	S3ResultItem_VersionId = S3ResultItem.AddMember("VersionId", smithyprelude.String)
-
-	ResultItem_S3ResultItem = ResultItem.AddMember("S3ResultItem", S3ResultItem)
-
-	ResultItem_EBSResultItem = ResultItem.AddMember("EBSResultItem", EBSResultItem)
-
-	_Results_member = _Results.AddMember("member", ResultItem)
-
-	SearchJobState_RUNNING = SearchJobState.AddMember("RUNNING", smithyprelude.Unit)
-
-	SearchJobState_COMPLETED = SearchJobState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	SearchJobState_STOPPING = SearchJobState.AddMember("STOPPING", smithyprelude.Unit)
-
-	SearchJobState_STOPPED = SearchJobState.AddMember("STOPPED", smithyprelude.Unit)
-
-	SearchJobState_FAILED = SearchJobState.AddMember("FAILED", smithyprelude.Unit)
-
-	SearchJobBackupsResult_Status = SearchJobBackupsResult.AddMember("Status", SearchJobState)
-
-	SearchJobBackupsResult_StatusMessage = SearchJobBackupsResult.AddMember("StatusMessage", smithyprelude.String)
-
-	SearchJobBackupsResult_ResourceType = SearchJobBackupsResult.AddMember("ResourceType", ResourceType)
-
-	SearchJobBackupsResult_BackupResourceArn = SearchJobBackupsResult.AddMember("BackupResourceArn", smithyprelude.String)
-
-	SearchJobBackupsResult_SourceResourceArn = SearchJobBackupsResult.AddMember("SourceResourceArn", smithyprelude.String)
-
-	SearchJobBackupsResult_IndexCreationTime = SearchJobBackupsResult.AddMember("IndexCreationTime", smithyprelude.Timestamp)
-
-	SearchJobBackupsResult_BackupCreationTime = SearchJobBackupsResult.AddMember("BackupCreationTime", smithyprelude.Timestamp)
-
-	_SearchJobBackupsResults_member = _SearchJobBackupsResults.AddMember("member", SearchJobBackupsResult)
-
-	SearchScopeSummary_TotalRecoveryPointsToScanCount = SearchScopeSummary.AddMember("TotalRecoveryPointsToScanCount", smithyprelude.Integer)
-
-	SearchScopeSummary_TotalItemsToScanCount = SearchScopeSummary.AddMember("TotalItemsToScanCount", smithyprelude.Long)
-
-	SearchJobSummary_SearchJobIdentifier = SearchJobSummary.AddMember("SearchJobIdentifier", _GenericId)
-
-	SearchJobSummary_SearchJobArn = SearchJobSummary.AddMember("SearchJobArn", _SearchJobArn)
-
-	SearchJobSummary_Name = SearchJobSummary.AddMember("Name", smithyprelude.String)
-
-	SearchJobSummary_Status = SearchJobSummary.AddMember("Status", SearchJobState)
-
-	SearchJobSummary_CreationTime = SearchJobSummary.AddMember("CreationTime", smithyprelude.Timestamp)
-
-	SearchJobSummary_CompletionTime = SearchJobSummary.AddMember("CompletionTime", smithyprelude.Timestamp)
-
-	SearchJobSummary_SearchScopeSummary = SearchJobSummary.AddMember("SearchScopeSummary", SearchScopeSummary)
-
-	SearchJobSummary_StatusMessage = SearchJobSummary.AddMember("StatusMessage", smithyprelude.String)
-
-	_SearchJobs_member = _SearchJobs.AddMember("member", SearchJobSummary)
-
-	_TagMap_key = _TagMap.AddMember("key", smithyprelude.String)
-
-	_TagMap_value = _TagMap.AddMember("value", smithyprelude.String)
-
-	SearchScope_BackupResourceTypes = SearchScope.AddMember("BackupResourceTypes", _ResourceTypeList)
-
-	SearchScope_BackupResourceCreationTime = SearchScope.AddMember("BackupResourceCreationTime", BackupCreationTimeFilter)
-
-	SearchScope_SourceResourceArns = SearchScope.AddMember("SourceResourceArns", _ResourceArnList)
-
-	SearchScope_BackupResourceArns = SearchScope.AddMember("BackupResourceArns", _RecoveryPointArnList)
-
-	SearchScope_BackupResourceTags = SearchScope.AddMember("BackupResourceTags", _TagMap)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", smithyprelude.String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", smithyprelude.String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", smithyprelude.String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", smithyprelude.String)
-
-	_TagKeys_member = _TagKeys.AddMember("member", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	GetSearchJobInput_SearchJobIdentifier = GetSearchJobInput.AddMember("SearchJobIdentifier", _GenericId, &smithytraits.HTTPLabel{})
-
-	GetSearchJobOutput_Name = GetSearchJobOutput.AddMember("Name", smithyprelude.String)
-
-	GetSearchJobOutput_SearchScopeSummary = GetSearchJobOutput.AddMember("SearchScopeSummary", SearchScopeSummary)
-
-	GetSearchJobOutput_CurrentSearchProgress = GetSearchJobOutput.AddMember("CurrentSearchProgress", CurrentSearchProgress)
-
-	GetSearchJobOutput_StatusMessage = GetSearchJobOutput.AddMember("StatusMessage", smithyprelude.String)
-
-	GetSearchJobOutput_EncryptionKeyArn = GetSearchJobOutput.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	GetSearchJobOutput_CompletionTime = GetSearchJobOutput.AddMember("CompletionTime", smithyprelude.Timestamp)
-
-	GetSearchJobOutput_Status = GetSearchJobOutput.AddMember("Status", SearchJobState)
-
-	GetSearchJobOutput_SearchScope = GetSearchJobOutput.AddMember("SearchScope", SearchScope)
-
-	GetSearchJobOutput_ItemFilters = GetSearchJobOutput.AddMember("ItemFilters", ItemFilters)
-
-	GetSearchJobOutput_CreationTime = GetSearchJobOutput.AddMember("CreationTime", smithyprelude.Timestamp)
-
-	GetSearchJobOutput_SearchJobIdentifier = GetSearchJobOutput.AddMember("SearchJobIdentifier", _GenericId)
-
-	GetSearchJobOutput_SearchJobArn = GetSearchJobOutput.AddMember("SearchJobArn", _SearchJobArn)
-
-	GetSearchResultExportJobInput_ExportJobIdentifier = GetSearchResultExportJobInput.AddMember("ExportJobIdentifier", _GenericId, &smithytraits.HTTPLabel{})
-
-	GetSearchResultExportJobOutput_ExportJobIdentifier = GetSearchResultExportJobOutput.AddMember("ExportJobIdentifier", _GenericId)
-
-	GetSearchResultExportJobOutput_ExportJobArn = GetSearchResultExportJobOutput.AddMember("ExportJobArn", _ExportJobArn)
-
-	GetSearchResultExportJobOutput_Status = GetSearchResultExportJobOutput.AddMember("Status", ExportJobStatus)
-
-	GetSearchResultExportJobOutput_CreationTime = GetSearchResultExportJobOutput.AddMember("CreationTime", smithyprelude.Timestamp)
-
-	GetSearchResultExportJobOutput_CompletionTime = GetSearchResultExportJobOutput.AddMember("CompletionTime", smithyprelude.Timestamp)
-
-	GetSearchResultExportJobOutput_StatusMessage = GetSearchResultExportJobOutput.AddMember("StatusMessage", smithyprelude.String)
-
-	GetSearchResultExportJobOutput_ExportSpecification = GetSearchResultExportJobOutput.AddMember("ExportSpecification", ExportSpecification)
-
-	GetSearchResultExportJobOutput_SearchJobArn = GetSearchResultExportJobOutput.AddMember("SearchJobArn", _SearchJobArn)
-
-	ListSearchJobBackupsInput_SearchJobIdentifier = ListSearchJobBackupsInput.AddMember("SearchJobIdentifier", _GenericId, &smithytraits.HTTPLabel{})
-
-	ListSearchJobBackupsInput_NextToken = ListSearchJobBackupsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSearchJobBackupsInput_MaxResults = ListSearchJobBackupsInput.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSearchJobBackupsOutput_Results = ListSearchJobBackupsOutput.AddMember("Results", _SearchJobBackupsResults)
-
-	ListSearchJobBackupsOutput_NextToken = ListSearchJobBackupsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListSearchJobResultsInput_SearchJobIdentifier = ListSearchJobResultsInput.AddMember("SearchJobIdentifier", _GenericId, &smithytraits.HTTPLabel{})
-
-	ListSearchJobResultsInput_NextToken = ListSearchJobResultsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSearchJobResultsInput_MaxResults = ListSearchJobResultsInput.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSearchJobResultsOutput_Results = ListSearchJobResultsOutput.AddMember("Results", _Results)
-
-	ListSearchJobResultsOutput_NextToken = ListSearchJobResultsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListSearchJobsInput_ByStatus = ListSearchJobsInput.AddMember("ByStatus", SearchJobState, &smithytraits.HTTPQuery{Name: "Status"})
-
-	ListSearchJobsInput_NextToken = ListSearchJobsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListSearchJobsInput_MaxResults = ListSearchJobsInput.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListSearchJobsOutput_SearchJobs = ListSearchJobsOutput.AddMember("SearchJobs", _SearchJobs)
-
-	ListSearchJobsOutput_NextToken = ListSearchJobsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListSearchResultExportJobsInput_Status = ListSearchResultExportJobsInput.AddMember("Status", ExportJobStatus, &smithytraits.HTTPQuery{Name: "Status"})
-
-	ListSearchResultExportJobsInput_SearchJobIdentifier = ListSearchResultExportJobsInput.AddMember("SearchJobIdentifier", _GenericId, &smithytraits.HTTPQuery{Name: "SearchJobIdentifier"})
-
-	ListSearchResultExportJobsInput_NextToken = ListSearchResultExportJobsInput.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "NextToken"})
-
-	ListSearchResultExportJobsInput_MaxResults = ListSearchResultExportJobsInput.AddMember("MaxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "MaxResults"})
-
-	ListSearchResultExportJobsOutput_ExportJobs = ListSearchResultExportJobsOutput.AddMember("ExportJobs", _ExportJobSummaries)
-
-	ListSearchResultExportJobsOutput_NextToken = ListSearchResultExportJobsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	StartSearchJobInput_Tags = StartSearchJobInput.AddMember("Tags", _TagMap)
-
-	StartSearchJobInput_Name = StartSearchJobInput.AddMember("Name", smithyprelude.String)
-
-	StartSearchJobInput_EncryptionKeyArn = StartSearchJobInput.AddMember("EncryptionKeyArn", _EncryptionKeyArn)
-
-	StartSearchJobInput_ClientToken = StartSearchJobInput.AddMember("ClientToken", smithyprelude.String)
-
-	StartSearchJobInput_SearchScope = StartSearchJobInput.AddMember("SearchScope", SearchScope)
-
-	StartSearchJobInput_ItemFilters = StartSearchJobInput.AddMember("ItemFilters", ItemFilters)
-
-	StartSearchJobOutput_SearchJobArn = StartSearchJobOutput.AddMember("SearchJobArn", _SearchJobArn)
-
-	StartSearchJobOutput_CreationTime = StartSearchJobOutput.AddMember("CreationTime", smithyprelude.Timestamp)
-
-	StartSearchJobOutput_SearchJobIdentifier = StartSearchJobOutput.AddMember("SearchJobIdentifier", _GenericId)
-
-	StartSearchResultExportJobInput_SearchJobIdentifier = StartSearchResultExportJobInput.AddMember("SearchJobIdentifier", _GenericId)
-
-	StartSearchResultExportJobInput_ExportSpecification = StartSearchResultExportJobInput.AddMember("ExportSpecification", ExportSpecification)
-
-	StartSearchResultExportJobInput_ClientToken = StartSearchResultExportJobInput.AddMember("ClientToken", smithyprelude.String)
-
-	StartSearchResultExportJobInput_Tags = StartSearchResultExportJobInput.AddMember("Tags", _TagMap)
-
-	StartSearchResultExportJobInput_RoleArn = StartSearchResultExportJobInput.AddMember("RoleArn", _IamRoleArn)
-
-	StartSearchResultExportJobOutput_ExportJobArn = StartSearchResultExportJobOutput.AddMember("ExportJobArn", _ExportJobArn)
-
-	StartSearchResultExportJobOutput_ExportJobIdentifier = StartSearchResultExportJobOutput.AddMember("ExportJobIdentifier", _GenericId)
-
-	StopSearchJobInput_SearchJobIdentifier = StopSearchJobInput.AddMember("SearchJobIdentifier", _GenericId, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Status"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "NextToken"}}, DirectMask: 0x10}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxResults"}}, DirectMask: 0x10}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "SearchJobIdentifier"}}, DirectMask: 0x10}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBackupCreationTimeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupCreationTimeFilter_CreatedAfter, &sBackupCreationTimeFilter_CreatedBefore}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mCurrentSearchProgress = smithy.SchemaMembers{List: []*smithy.Schema{&sCurrentSearchProgress_RecoveryPointsScannedCount, &sCurrentSearchProgress_ItemsScannedCount, &sCurrentSearchProgress_ItemsMatchedCount}}
+var mEBSItemFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEBSItemFilter_FilePaths, &sEBSItemFilter_Sizes, &sEBSItemFilter_CreationTimes, &sEBSItemFilter_LastModificationTimes}}
+var m_EBSItemFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_EBSItemFilters_member}}
+var mEBSResultItem = smithy.SchemaMembers{List: []*smithy.Schema{&sEBSResultItem_BackupResourceArn, &sEBSResultItem_SourceResourceArn, &sEBSResultItem_BackupVaultName, &sEBSResultItem_FileSystemIdentifier, &sEBSResultItem_FilePath, &sEBSResultItem_FileSize, &sEBSResultItem_CreationTime, &sEBSResultItem_LastModifiedTime}}
+var mExportJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sExportJobStatus_RUNNING, &sExportJobStatus_FAILED, &sExportJobStatus_COMPLETED}}
+var m_ExportJobSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExportJobSummaries_member}}
+var mExportJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExportJobSummary_ExportJobIdentifier, &sExportJobSummary_ExportJobArn, &sExportJobSummary_Status, &sExportJobSummary_CreationTime, &sExportJobSummary_CompletionTime, &sExportJobSummary_StatusMessage, &sExportJobSummary_SearchJobArn}}
+var mExportSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sExportSpecification_s3ExportSpecification}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mItemFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sItemFilters_S3ItemFilters, &sItemFilters_EBSItemFilters}}
+var mLongCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sLongCondition_Value, &sLongCondition_Operator}}
+var m_LongConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LongConditionList_member}}
+var mLongConditionOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sLongConditionOperator_EQUALS_TO, &sLongConditionOperator_NOT_EQUALS_TO, &sLongConditionOperator_LESS_THAN_EQUAL_TO, &sLongConditionOperator_GREATER_THAN_EQUAL_TO}}
+var m_RecoveryPointArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecoveryPointArnList_member}}
+var m_ResourceArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceArnList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_S3, &sResourceType_EBS}}
+var m_ResourceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTypeList_member}}
+var mResultItem = smithy.SchemaMembers{List: []*smithy.Schema{&sResultItem_S3ResultItem, &sResultItem_EBSResultItem}}
+var m_Results = smithy.SchemaMembers{List: []*smithy.Schema{&s_Results_member}}
+var mS3ExportSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ExportSpecification_DestinationBucket, &sS3ExportSpecification_DestinationPrefix}}
+var mS3ItemFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ItemFilter_ObjectKeys, &sS3ItemFilter_Sizes, &sS3ItemFilter_CreationTimes, &sS3ItemFilter_VersionIds, &sS3ItemFilter_ETags}}
+var m_S3ItemFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3ItemFilters_member}}
+var mS3ResultItem = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ResultItem_BackupResourceArn, &sS3ResultItem_SourceResourceArn, &sS3ResultItem_BackupVaultName, &sS3ResultItem_ObjectKey, &sS3ResultItem_ObjectSize, &sS3ResultItem_CreationTime, &sS3ResultItem_ETag, &sS3ResultItem_VersionId}}
+var mSearchJobBackupsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchJobBackupsResult_Status, &sSearchJobBackupsResult_StatusMessage, &sSearchJobBackupsResult_ResourceType, &sSearchJobBackupsResult_BackupResourceArn, &sSearchJobBackupsResult_SourceResourceArn, &sSearchJobBackupsResult_IndexCreationTime, &sSearchJobBackupsResult_BackupCreationTime}}
+var m_SearchJobBackupsResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchJobBackupsResults_member}}
+var m_SearchJobs = smithy.SchemaMembers{List: []*smithy.Schema{&s_SearchJobs_member}}
+var mSearchJobState = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchJobState_RUNNING, &sSearchJobState_COMPLETED, &sSearchJobState_STOPPING, &sSearchJobState_STOPPED, &sSearchJobState_FAILED}}
+var mSearchJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchJobSummary_SearchJobIdentifier, &sSearchJobSummary_SearchJobArn, &sSearchJobSummary_Name, &sSearchJobSummary_Status, &sSearchJobSummary_CreationTime, &sSearchJobSummary_CompletionTime, &sSearchJobSummary_SearchScopeSummary, &sSearchJobSummary_StatusMessage}}
+var mSearchScope = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchScope_BackupResourceTypes, &sSearchScope_BackupResourceCreationTime, &sSearchScope_SourceResourceArns, &sSearchScope_BackupResourceArns, &sSearchScope_BackupResourceTags}}
+var mSearchScopeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchScopeSummary_TotalRecoveryPointsToScanCount, &sSearchScopeSummary_TotalItemsToScanCount}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var mStringCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sStringCondition_Value, &sStringCondition_Operator}}
+var m_StringConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringConditionList_member}}
+var mStringConditionOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sStringConditionOperator_EQUALS_TO, &sStringConditionOperator_NOT_EQUALS_TO, &sStringConditionOperator_CONTAINS, &sStringConditionOperator_DOES_NOT_CONTAIN, &sStringConditionOperator_BEGINS_WITH, &sStringConditionOperator_ENDS_WITH, &sStringConditionOperator_DOES_NOT_BEGIN_WITH, &sStringConditionOperator_DOES_NOT_END_WITH}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mTimeCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeCondition_Value, &sTimeCondition_Operator}}
+var m_TimeConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TimeConditionList_member}}
+var mTimeConditionOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sTimeConditionOperator_EQUALS_TO, &sTimeConditionOperator_NOT_EQUALS_TO, &sTimeConditionOperator_LESS_THAN_EQUAL_TO, &sTimeConditionOperator_GREATER_THAN_EQUAL_TO}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mGetSearchJobInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSearchJobInput_SearchJobIdentifier}}
+var mGetSearchJobOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSearchJobOutput_Name, &sGetSearchJobOutput_SearchScopeSummary, &sGetSearchJobOutput_CurrentSearchProgress, &sGetSearchJobOutput_StatusMessage, &sGetSearchJobOutput_EncryptionKeyArn, &sGetSearchJobOutput_CompletionTime, &sGetSearchJobOutput_Status, &sGetSearchJobOutput_SearchScope, &sGetSearchJobOutput_ItemFilters, &sGetSearchJobOutput_CreationTime, &sGetSearchJobOutput_SearchJobIdentifier, &sGetSearchJobOutput_SearchJobArn}, Seed: 8, Slots: []uint16{
+	0, 1, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 12, 0, 0, 4, 11, 7, 0, 5,
+	0, 3, 0, 10, 0, 9, 6, 0,
+}}
+var mGetSearchResultExportJobInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSearchResultExportJobInput_ExportJobIdentifier}}
+var mGetSearchResultExportJobOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSearchResultExportJobOutput_ExportJobIdentifier, &sGetSearchResultExportJobOutput_ExportJobArn, &sGetSearchResultExportJobOutput_Status, &sGetSearchResultExportJobOutput_CreationTime, &sGetSearchResultExportJobOutput_CompletionTime, &sGetSearchResultExportJobOutput_StatusMessage, &sGetSearchResultExportJobOutput_ExportSpecification, &sGetSearchResultExportJobOutput_SearchJobArn}}
+var mListSearchJobBackupsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchJobBackupsInput_SearchJobIdentifier, &sListSearchJobBackupsInput_NextToken, &sListSearchJobBackupsInput_MaxResults}}
+var mListSearchJobBackupsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchJobBackupsOutput_Results, &sListSearchJobBackupsOutput_NextToken}}
+var mListSearchJobResultsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchJobResultsInput_SearchJobIdentifier, &sListSearchJobResultsInput_NextToken, &sListSearchJobResultsInput_MaxResults}}
+var mListSearchJobResultsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchJobResultsOutput_Results, &sListSearchJobResultsOutput_NextToken}}
+var mListSearchJobsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchJobsInput_ByStatus, &sListSearchJobsInput_NextToken, &sListSearchJobsInput_MaxResults}}
+var mListSearchJobsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchJobsOutput_SearchJobs, &sListSearchJobsOutput_NextToken}}
+var mListSearchResultExportJobsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchResultExportJobsInput_Status, &sListSearchResultExportJobsInput_SearchJobIdentifier, &sListSearchResultExportJobsInput_NextToken, &sListSearchResultExportJobsInput_MaxResults}}
+var mListSearchResultExportJobsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSearchResultExportJobsOutput_ExportJobs, &sListSearchResultExportJobsOutput_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mStartSearchJobInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSearchJobInput_Tags, &sStartSearchJobInput_Name, &sStartSearchJobInput_EncryptionKeyArn, &sStartSearchJobInput_ClientToken, &sStartSearchJobInput_SearchScope, &sStartSearchJobInput_ItemFilters}}
+var mStartSearchJobOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSearchJobOutput_SearchJobArn, &sStartSearchJobOutput_CreationTime, &sStartSearchJobOutput_SearchJobIdentifier}}
+var mStartSearchResultExportJobInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSearchResultExportJobInput_SearchJobIdentifier, &sStartSearchResultExportJobInput_ExportSpecification, &sStartSearchResultExportJobInput_ClientToken, &sStartSearchResultExportJobInput_Tags, &sStartSearchResultExportJobInput_RoleArn}}
+var mStartSearchResultExportJobOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSearchResultExportJobOutput_ExportJobArn, &sStartSearchResultExportJobOutput_ExportJobIdentifier}}
+var mStopSearchJobInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSearchJobInput_SearchJobIdentifier}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+
+var sGetSearchJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSearchJob, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetSearchResultExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSearchResultExportJob, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sListSearchJobBackups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobBackups, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sListSearchJobResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobResults, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sListSearchJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobs, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sListSearchResultExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchResultExportJobs, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sStartSearchJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSearchJob, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sStartSearchResultExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSearchResultExportJob, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sStopSearchJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSearchJob, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var s_CryoBackupSearchService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CryoBackupSearchService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sBackupCreationTimeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupCreationTimeFilter, Members: &mBackupCreationTimeFilter, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var sCurrentSearchProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrentSearchProgress, Members: &mCurrentSearchProgress, Type: smithy.ShapeTypeStructure})
+var sEBSItemFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEBSItemFilter, Members: &mEBSItemFilter, Type: smithy.ShapeTypeStructure})
+var s_EBSItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EBSItemFilters, Members: &m_EBSItemFilters, Type: smithy.ShapeTypeList})
+var sEBSResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEBSResultItem, Members: &mEBSResultItem, Type: smithy.ShapeTypeStructure})
+var s_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var s_ExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportJobArn, Type: smithy.ShapeTypeString})
+var sExportJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportJobStatus, Members: &mExportJobStatus, Type: smithy.ShapeTypeEnum})
+var s_ExportJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportJobSummaries, Members: &m_ExportJobSummaries, Type: smithy.ShapeTypeList})
+var sExportJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportJobSummary, Members: &mExportJobSummary, Type: smithy.ShapeTypeStructure})
+var sExportSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportSpecification, Members: &mExportSpecification, Type: smithy.ShapeTypeUnion})
+var s_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilePath, Traits: &t15, Type: smithy.ShapeTypeString})
+var s_GenericId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iItemFilters, Members: &mItemFilters, Type: smithy.ShapeTypeStructure})
+var sLongCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLongCondition, Members: &mLongCondition, Type: smithy.ShapeTypeStructure})
+var s_LongConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongConditionList, Members: &m_LongConditionList, Type: smithy.ShapeTypeList})
+var sLongConditionOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLongConditionOperator, Members: &mLongConditionOperator, Type: smithy.ShapeTypeEnum})
+var s_ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ObjectKey, Traits: &t15, Type: smithy.ShapeTypeString})
+var s_RecoveryPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPoint, Type: smithy.ShapeTypeString})
+var s_RecoveryPointArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecoveryPointArnList, Members: &m_RecoveryPointArnList, Type: smithy.ShapeTypeList})
+var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var s_ResourceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypeList, Members: &m_ResourceTypeList, Type: smithy.ShapeTypeList})
+var sResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResultItem, Members: &mResultItem, Type: smithy.ShapeTypeUnion})
+var s_Results = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Results, Members: &m_Results, Type: smithy.ShapeTypeList})
+var sS3ExportSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ExportSpecification, Members: &mS3ExportSpecification, Type: smithy.ShapeTypeStructure})
+var sS3ItemFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ItemFilter, Members: &mS3ItemFilter, Type: smithy.ShapeTypeStructure})
+var s_S3ItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ItemFilters, Members: &m_S3ItemFilters, Type: smithy.ShapeTypeList})
+var sS3ResultItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ResultItem, Members: &mS3ResultItem, Type: smithy.ShapeTypeStructure})
+var s_SearchJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchJobArn, Type: smithy.ShapeTypeString})
+var sSearchJobBackupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchJobBackupsResult, Members: &mSearchJobBackupsResult, Type: smithy.ShapeTypeStructure})
+var s_SearchJobBackupsResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchJobBackupsResults, Members: &m_SearchJobBackupsResults, Type: smithy.ShapeTypeList})
+var s_SearchJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SearchJobs, Members: &m_SearchJobs, Type: smithy.ShapeTypeList})
+var sSearchJobState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchJobState, Members: &mSearchJobState, Type: smithy.ShapeTypeEnum})
+var sSearchJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchJobSummary, Members: &mSearchJobSummary, Type: smithy.ShapeTypeStructure})
+var sSearchScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchScope, Members: &mSearchScope, Type: smithy.ShapeTypeStructure})
+var sSearchScopeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchScopeSummary, Members: &mSearchScopeSummary, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var sStringCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringCondition, Members: &mStringCondition, Type: smithy.ShapeTypeStructure})
+var s_StringConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringConditionList, Members: &m_StringConditionList, Type: smithy.ShapeTypeList})
+var sStringConditionOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringConditionOperator, Members: &mStringConditionOperator, Type: smithy.ShapeTypeEnum})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var sTimeCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeCondition, Members: &mTimeCondition, Type: smithy.ShapeTypeStructure})
+var s_TimeConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TimeConditionList, Members: &m_TimeConditionList, Type: smithy.ShapeTypeList})
+var sTimeConditionOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimeConditionOperator, Members: &mTimeConditionOperator, Type: smithy.ShapeTypeEnum})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var sGetSearchJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSearchJobInput, Members: &mGetSearchJobInput, Type: smithy.ShapeTypeStructure})
+var sGetSearchJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSearchJobOutput, Members: &mGetSearchJobOutput, Type: smithy.ShapeTypeStructure})
+var sGetSearchResultExportJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSearchResultExportJobInput, Members: &mGetSearchResultExportJobInput, Type: smithy.ShapeTypeStructure})
+var sGetSearchResultExportJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSearchResultExportJobOutput, Members: &mGetSearchResultExportJobOutput, Type: smithy.ShapeTypeStructure})
+var sListSearchJobBackupsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobBackupsInput, Members: &mListSearchJobBackupsInput, Type: smithy.ShapeTypeStructure})
+var sListSearchJobBackupsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobBackupsOutput, Members: &mListSearchJobBackupsOutput, Type: smithy.ShapeTypeStructure})
+var sListSearchJobResultsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobResultsInput, Members: &mListSearchJobResultsInput, Type: smithy.ShapeTypeStructure})
+var sListSearchJobResultsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobResultsOutput, Members: &mListSearchJobResultsOutput, Type: smithy.ShapeTypeStructure})
+var sListSearchJobsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobsInput, Members: &mListSearchJobsInput, Type: smithy.ShapeTypeStructure})
+var sListSearchJobsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchJobsOutput, Members: &mListSearchJobsOutput, Type: smithy.ShapeTypeStructure})
+var sListSearchResultExportJobsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchResultExportJobsInput, Members: &mListSearchResultExportJobsInput, Type: smithy.ShapeTypeStructure})
+var sListSearchResultExportJobsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSearchResultExportJobsOutput, Members: &mListSearchResultExportJobsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sStartSearchJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSearchJobInput, Members: &mStartSearchJobInput, Type: smithy.ShapeTypeStructure})
+var sStartSearchJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSearchJobOutput, Members: &mStartSearchJobOutput, Type: smithy.ShapeTypeStructure})
+var sStartSearchResultExportJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSearchResultExportJobInput, Members: &mStartSearchResultExportJobInput, Type: smithy.ShapeTypeStructure})
+var sStartSearchResultExportJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSearchResultExportJobOutput, Members: &mStartSearchResultExportJobOutput, Type: smithy.ShapeTypeStructure})
+var sStopSearchJobInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSearchJobInput, Members: &mStopSearchJobInput, Type: smithy.ShapeTypeStructure})
+var sStopSearchJobOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSearchJobOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sBackupCreationTimeFilter_CreatedAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAfter", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sBackupCreationTimeFilter_CreatedBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBefore", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sCurrentSearchProgress_RecoveryPointsScannedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecoveryPointsScannedCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCurrentSearchProgress_ItemsScannedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemsScannedCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCurrentSearchProgress_ItemsMatchedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemsMatchedCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sEBSItemFilter_FilePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilePaths", ID: &i_StringConditionList, Members: &m_StringConditionList, Type: smithy.ShapeTypeList})
+var sEBSItemFilter_Sizes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sizes", ID: &i_LongConditionList, Members: &m_LongConditionList, Type: smithy.ShapeTypeList})
+var sEBSItemFilter_CreationTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTimes", ID: &i_TimeConditionList, Members: &m_TimeConditionList, Type: smithy.ShapeTypeList})
+var sEBSItemFilter_LastModificationTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationTimes", ID: &i_TimeConditionList, Members: &m_TimeConditionList, Type: smithy.ShapeTypeList})
+var s_EBSItemFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEBSItemFilter, Members: &mEBSItemFilter, Type: smithy.ShapeTypeStructure})
+var sEBSResultItem_BackupResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupResourceArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sEBSResultItem_SourceResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceResourceArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sEBSResultItem_BackupVaultName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupVaultName", ID: &pString, Type: smithy.ShapeTypeString})
+var sEBSResultItem_FileSystemIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sEBSResultItem_FilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilePath", ID: &i_FilePath, Traits: &t14, Type: smithy.ShapeTypeString})
+var sEBSResultItem_FileSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSize", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sEBSResultItem_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEBSResultItem_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sExportJobStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExportJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExportJobStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ExportJobSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExportJobSummary, Members: &mExportJobSummary, Type: smithy.ShapeTypeStructure})
+var sExportJobSummary_ExportJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobIdentifier", ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var sExportJobSummary_ExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobArn", ID: &i_ExportJobArn, Type: smithy.ShapeTypeString})
+var sExportJobSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExportJobStatus, Members: &mExportJobStatus, Type: smithy.ShapeTypeEnum})
+var sExportJobSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sExportJobSummary_CompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sExportJobSummary_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sExportJobSummary_SearchJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobArn", ID: &i_SearchJobArn, Type: smithy.ShapeTypeString})
+var sExportSpecification_s3ExportSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3ExportSpecification", ID: &iS3ExportSpecification, Members: &mS3ExportSpecification, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t17, Type: smithy.ShapeTypeInteger})
+var sItemFilters_S3ItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3ItemFilters", ID: &i_S3ItemFilters, Members: &m_S3ItemFilters, Type: smithy.ShapeTypeList})
+var sItemFilters_EBSItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBSItemFilters", ID: &i_EBSItemFilters, Members: &m_EBSItemFilters, Type: smithy.ShapeTypeList})
+var sLongCondition_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sLongCondition_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iLongConditionOperator, Members: &mLongConditionOperator, Type: smithy.ShapeTypeEnum})
+var s_LongConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLongCondition, Members: &mLongCondition, Type: smithy.ShapeTypeStructure})
+var sLongConditionOperator_EQUALS_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLongConditionOperator_NOT_EQUALS_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLongConditionOperator_LESS_THAN_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLongConditionOperator_GREATER_THAN_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RecoveryPointArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RecoveryPoint, Type: smithy.ShapeTypeString})
+var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_EBS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ResourceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sResultItem_S3ResultItem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3ResultItem", ID: &iS3ResultItem, Members: &mS3ResultItem, Type: smithy.ShapeTypeStructure})
+var sResultItem_EBSResultItem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBSResultItem", ID: &iEBSResultItem, Members: &mEBSResultItem, Type: smithy.ShapeTypeStructure})
+var s_Results_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResultItem, Members: &mResultItem, Type: smithy.ShapeTypeUnion})
+var sS3ExportSpecification_DestinationBucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationBucket", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3ExportSpecification_DestinationPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPrefix", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3ItemFilter_ObjectKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectKeys", ID: &i_StringConditionList, Members: &m_StringConditionList, Type: smithy.ShapeTypeList})
+var sS3ItemFilter_Sizes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sizes", ID: &i_LongConditionList, Members: &m_LongConditionList, Type: smithy.ShapeTypeList})
+var sS3ItemFilter_CreationTimes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTimes", ID: &i_TimeConditionList, Members: &m_TimeConditionList, Type: smithy.ShapeTypeList})
+var sS3ItemFilter_VersionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionIds", ID: &i_StringConditionList, Members: &m_StringConditionList, Type: smithy.ShapeTypeList})
+var sS3ItemFilter_ETags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETags", ID: &i_StringConditionList, Members: &m_StringConditionList, Type: smithy.ShapeTypeList})
+var s_S3ItemFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3ItemFilter, Members: &mS3ItemFilter, Type: smithy.ShapeTypeStructure})
+var sS3ResultItem_BackupResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupResourceArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3ResultItem_SourceResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceResourceArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3ResultItem_BackupVaultName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupVaultName", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3ResultItem_ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectKey", ID: &i_ObjectKey, Traits: &t14, Type: smithy.ShapeTypeString})
+var sS3ResultItem_ObjectSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ObjectSize", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sS3ResultItem_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sS3ResultItem_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3ResultItem_VersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionId", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchJobBackupsResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSearchJobState, Members: &mSearchJobState, Type: smithy.ShapeTypeEnum})
+var sSearchJobBackupsResult_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchJobBackupsResult_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sSearchJobBackupsResult_BackupResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupResourceArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchJobBackupsResult_SourceResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceResourceArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchJobBackupsResult_IndexCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndexCreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sSearchJobBackupsResult_BackupCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupCreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_SearchJobBackupsResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchJobBackupsResult, Members: &mSearchJobBackupsResult, Type: smithy.ShapeTypeStructure})
+var s_SearchJobs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSearchJobSummary, Members: &mSearchJobSummary, Type: smithy.ShapeTypeStructure})
+var sSearchJobState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSearchJobState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSearchJobState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSearchJobState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSearchJobState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSearchJobSummary_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var sSearchJobSummary_SearchJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobArn", ID: &i_SearchJobArn, Type: smithy.ShapeTypeString})
+var sSearchJobSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchJobSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSearchJobState, Members: &mSearchJobState, Type: smithy.ShapeTypeEnum})
+var sSearchJobSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sSearchJobSummary_CompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sSearchJobSummary_SearchScopeSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchScopeSummary", ID: &iSearchScopeSummary, Members: &mSearchScopeSummary, Type: smithy.ShapeTypeStructure})
+var sSearchJobSummary_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchScope_BackupResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupResourceTypes", ID: &i_ResourceTypeList, Members: &m_ResourceTypeList, Type: smithy.ShapeTypeList})
+var sSearchScope_BackupResourceCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupResourceCreationTime", ID: &iBackupCreationTimeFilter, Members: &mBackupCreationTimeFilter, Type: smithy.ShapeTypeStructure})
+var sSearchScope_SourceResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceResourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList})
+var sSearchScope_BackupResourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupResourceArns", ID: &i_RecoveryPointArnList, Members: &m_RecoveryPointArnList, Type: smithy.ShapeTypeList})
+var sSearchScope_BackupResourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupResourceTags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sSearchScopeSummary_TotalRecoveryPointsToScanCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRecoveryPointsToScanCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSearchScopeSummary_TotalItemsToScanCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalItemsToScanCount", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sStringCondition_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var sStringCondition_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iStringConditionOperator, Members: &mStringConditionOperator, Type: smithy.ShapeTypeEnum})
+var s_StringConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStringCondition, Members: &mStringCondition, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_EQUALS_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_NOT_EQUALS_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_CONTAINS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_DOES_NOT_CONTAIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOES_NOT_CONTAIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_BEGINS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEGINS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_ENDS_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENDS_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_DOES_NOT_BEGIN_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOES_NOT_BEGIN_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringConditionOperator_DOES_NOT_END_WITH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOES_NOT_END_WITH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t17, Type: smithy.ShapeTypeInteger})
+var sTimeCondition_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sTimeCondition_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &iTimeConditionOperator, Members: &mTimeConditionOperator, Type: smithy.ShapeTypeEnum})
+var s_TimeConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTimeCondition, Members: &mTimeCondition, Type: smithy.ShapeTypeStructure})
+var sTimeConditionOperator_EQUALS_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUALS_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTimeConditionOperator_NOT_EQUALS_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EQUALS_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTimeConditionOperator_LESS_THAN_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LESS_THAN_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTimeConditionOperator_GREATER_THAN_EQUAL_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREATER_THAN_EQUAL_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSearchJobInput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sGetSearchJobOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSearchJobOutput_SearchScopeSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchScopeSummary", ID: &iSearchScopeSummary, Members: &mSearchScopeSummary, Type: smithy.ShapeTypeStructure})
+var sGetSearchJobOutput_CurrentSearchProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrentSearchProgress", ID: &iCurrentSearchProgress, Members: &mCurrentSearchProgress, Type: smithy.ShapeTypeStructure})
+var sGetSearchJobOutput_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSearchJobOutput_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sGetSearchJobOutput_CompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSearchJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSearchJobState, Members: &mSearchJobState, Type: smithy.ShapeTypeEnum})
+var sGetSearchJobOutput_SearchScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchScope", ID: &iSearchScope, Members: &mSearchScope, Type: smithy.ShapeTypeStructure})
+var sGetSearchJobOutput_ItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemFilters", ID: &iItemFilters, Members: &mItemFilters, Type: smithy.ShapeTypeStructure})
+var sGetSearchJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSearchJobOutput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var sGetSearchJobOutput_SearchJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobArn", ID: &i_SearchJobArn, Type: smithy.ShapeTypeString})
+var sGetSearchResultExportJobInput_ExportJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobIdentifier", ID: &i_GenericId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sGetSearchResultExportJobOutput_ExportJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobIdentifier", ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var sGetSearchResultExportJobOutput_ExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobArn", ID: &i_ExportJobArn, Type: smithy.ShapeTypeString})
+var sGetSearchResultExportJobOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExportJobStatus, Members: &mExportJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetSearchResultExportJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSearchResultExportJobOutput_CompletionTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetSearchResultExportJobOutput_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetSearchResultExportJobOutput_ExportSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSpecification", ID: &iExportSpecification, Members: &mExportSpecification, Type: smithy.ShapeTypeUnion})
+var sGetSearchResultExportJobOutput_SearchJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobArn", ID: &i_SearchJobArn, Type: smithy.ShapeTypeString})
+var sListSearchJobBackupsInput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sListSearchJobBackupsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sListSearchJobBackupsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t24, Type: smithy.ShapeTypeInteger})
+var sListSearchJobBackupsOutput_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_SearchJobBackupsResults, Members: &m_SearchJobBackupsResults, Type: smithy.ShapeTypeList})
+var sListSearchJobBackupsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSearchJobResultsInput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sListSearchJobResultsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sListSearchJobResultsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t24, Type: smithy.ShapeTypeInteger})
+var sListSearchJobResultsOutput_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_Results, Members: &m_Results, Type: smithy.ShapeTypeList})
+var sListSearchJobResultsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSearchJobsInput_ByStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ByStatus", ID: &iSearchJobState, Members: &mSearchJobState, Traits: &t25, Type: smithy.ShapeTypeEnum})
+var sListSearchJobsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t26, Type: smithy.ShapeTypeString})
+var sListSearchJobsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t27, Type: smithy.ShapeTypeInteger})
+var sListSearchJobsOutput_SearchJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobs", ID: &i_SearchJobs, Members: &m_SearchJobs, Type: smithy.ShapeTypeList})
+var sListSearchJobsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSearchResultExportJobsInput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iExportJobStatus, Members: &mExportJobStatus, Traits: &t25, Type: smithy.ShapeTypeEnum})
+var sListSearchResultExportJobsInput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListSearchResultExportJobsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t26, Type: smithy.ShapeTypeString})
+var sListSearchResultExportJobsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Traits: &t27, Type: smithy.ShapeTypeInteger})
+var sListSearchResultExportJobsOutput_ExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobs", ID: &i_ExportJobSummaries, Members: &m_ExportJobSummaries, Type: smithy.ShapeTypeList})
+var sListSearchResultExportJobsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sStartSearchJobInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sStartSearchJobInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartSearchJobInput_EncryptionKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionKeyArn", ID: &i_EncryptionKeyArn, Type: smithy.ShapeTypeString})
+var sStartSearchJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartSearchJobInput_SearchScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchScope", ID: &iSearchScope, Members: &mSearchScope, Type: smithy.ShapeTypeStructure})
+var sStartSearchJobInput_ItemFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ItemFilters", ID: &iItemFilters, Members: &mItemFilters, Type: smithy.ShapeTypeStructure})
+var sStartSearchJobOutput_SearchJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobArn", ID: &i_SearchJobArn, Type: smithy.ShapeTypeString})
+var sStartSearchJobOutput_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sStartSearchJobOutput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var sStartSearchResultExportJobInput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var sStartSearchResultExportJobInput_ExportSpecification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportSpecification", ID: &iExportSpecification, Members: &mExportSpecification, Type: smithy.ShapeTypeUnion})
+var sStartSearchResultExportJobInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartSearchResultExportJobInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sStartSearchResultExportJobInput_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sStartSearchResultExportJobOutput_ExportJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobArn", ID: &i_ExportJobArn, Type: smithy.ShapeTypeString})
+var sStartSearchResultExportJobOutput_ExportJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportJobIdentifier", ID: &i_GenericId, Type: smithy.ShapeTypeString})
+var sStopSearchJobInput_SearchJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SearchJobIdentifier", ID: &i_GenericId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t22, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t29, Type: smithy.ShapeTypeList})
+
+var GetSearchJob = &sGetSearchJob
+
+var GetSearchResultExportJob = &sGetSearchResultExportJob
+
+var ListSearchJobBackups = &sListSearchJobBackups
+
+var ListSearchJobResults = &sListSearchJobResults
+
+var ListSearchJobs = &sListSearchJobs
+
+var ListSearchResultExportJobs = &sListSearchResultExportJobs
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartSearchJob = &sStartSearchJob
+
+var StartSearchResultExportJob = &sStartSearchResultExportJob
+
+var StopSearchJob = &sStopSearchJob
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _CryoBackupSearchService = &s_CryoBackupSearchService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var BackupCreationTimeFilter = &sBackupCreationTimeFilter
+var BackupCreationTimeFilter_CreatedAfter = &sBackupCreationTimeFilter_CreatedAfter
+var BackupCreationTimeFilter_CreatedBefore = &sBackupCreationTimeFilter_CreatedBefore
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var CurrentSearchProgress = &sCurrentSearchProgress
+var CurrentSearchProgress_RecoveryPointsScannedCount = &sCurrentSearchProgress_RecoveryPointsScannedCount
+var CurrentSearchProgress_ItemsScannedCount = &sCurrentSearchProgress_ItemsScannedCount
+var CurrentSearchProgress_ItemsMatchedCount = &sCurrentSearchProgress_ItemsMatchedCount
+
+var EBSItemFilter = &sEBSItemFilter
+var EBSItemFilter_FilePaths = &sEBSItemFilter_FilePaths
+var EBSItemFilter_Sizes = &sEBSItemFilter_Sizes
+var EBSItemFilter_CreationTimes = &sEBSItemFilter_CreationTimes
+var EBSItemFilter_LastModificationTimes = &sEBSItemFilter_LastModificationTimes
+
+var _EBSItemFilters = &s_EBSItemFilters
+var _EBSItemFilters_member = &s_EBSItemFilters_member
+
+var EBSResultItem = &sEBSResultItem
+var EBSResultItem_BackupResourceArn = &sEBSResultItem_BackupResourceArn
+var EBSResultItem_SourceResourceArn = &sEBSResultItem_SourceResourceArn
+var EBSResultItem_BackupVaultName = &sEBSResultItem_BackupVaultName
+var EBSResultItem_FileSystemIdentifier = &sEBSResultItem_FileSystemIdentifier
+var EBSResultItem_FilePath = &sEBSResultItem_FilePath
+var EBSResultItem_FileSize = &sEBSResultItem_FileSize
+var EBSResultItem_CreationTime = &sEBSResultItem_CreationTime
+var EBSResultItem_LastModifiedTime = &sEBSResultItem_LastModifiedTime
+
+var _EncryptionKeyArn = &s_EncryptionKeyArn
+
+var _ExportJobArn = &s_ExportJobArn
+
+var ExportJobStatus = &sExportJobStatus
+var ExportJobStatus_RUNNING = &sExportJobStatus_RUNNING
+var ExportJobStatus_FAILED = &sExportJobStatus_FAILED
+var ExportJobStatus_COMPLETED = &sExportJobStatus_COMPLETED
+
+var _ExportJobSummaries = &s_ExportJobSummaries
+var _ExportJobSummaries_member = &s_ExportJobSummaries_member
+
+var ExportJobSummary = &sExportJobSummary
+var ExportJobSummary_ExportJobIdentifier = &sExportJobSummary_ExportJobIdentifier
+var ExportJobSummary_ExportJobArn = &sExportJobSummary_ExportJobArn
+var ExportJobSummary_Status = &sExportJobSummary_Status
+var ExportJobSummary_CreationTime = &sExportJobSummary_CreationTime
+var ExportJobSummary_CompletionTime = &sExportJobSummary_CompletionTime
+var ExportJobSummary_StatusMessage = &sExportJobSummary_StatusMessage
+var ExportJobSummary_SearchJobArn = &sExportJobSummary_SearchJobArn
+
+var ExportSpecification = &sExportSpecification
+var ExportSpecification_s3ExportSpecification = &sExportSpecification_s3ExportSpecification
+
+var _FilePath = &s_FilePath
+
+var _GenericId = &s_GenericId
+
+var _IamRoleArn = &s_IamRoleArn
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var ItemFilters = &sItemFilters
+var ItemFilters_S3ItemFilters = &sItemFilters_S3ItemFilters
+var ItemFilters_EBSItemFilters = &sItemFilters_EBSItemFilters
+
+var LongCondition = &sLongCondition
+var LongCondition_Value = &sLongCondition_Value
+var LongCondition_Operator = &sLongCondition_Operator
+
+var _LongConditionList = &s_LongConditionList
+var _LongConditionList_member = &s_LongConditionList_member
+
+var LongConditionOperator = &sLongConditionOperator
+var LongConditionOperator_EQUALS_TO = &sLongConditionOperator_EQUALS_TO
+var LongConditionOperator_NOT_EQUALS_TO = &sLongConditionOperator_NOT_EQUALS_TO
+var LongConditionOperator_LESS_THAN_EQUAL_TO = &sLongConditionOperator_LESS_THAN_EQUAL_TO
+var LongConditionOperator_GREATER_THAN_EQUAL_TO = &sLongConditionOperator_GREATER_THAN_EQUAL_TO
+
+var _ObjectKey = &s_ObjectKey
+
+var _RecoveryPoint = &s_RecoveryPoint
+
+var _RecoveryPointArnList = &s_RecoveryPointArnList
+var _RecoveryPointArnList_member = &s_RecoveryPointArnList_member
+
+var _ResourceArnList = &s_ResourceArnList
+var _ResourceArnList_member = &s_ResourceArnList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ResourceType = &sResourceType
+var ResourceType_S3 = &sResourceType_S3
+var ResourceType_EBS = &sResourceType_EBS
+
+var _ResourceTypeList = &s_ResourceTypeList
+var _ResourceTypeList_member = &s_ResourceTypeList_member
+
+var ResultItem = &sResultItem
+var ResultItem_S3ResultItem = &sResultItem_S3ResultItem
+var ResultItem_EBSResultItem = &sResultItem_EBSResultItem
+
+var _Results = &s_Results
+var _Results_member = &s_Results_member
+
+var S3ExportSpecification = &sS3ExportSpecification
+var S3ExportSpecification_DestinationBucket = &sS3ExportSpecification_DestinationBucket
+var S3ExportSpecification_DestinationPrefix = &sS3ExportSpecification_DestinationPrefix
+
+var S3ItemFilter = &sS3ItemFilter
+var S3ItemFilter_ObjectKeys = &sS3ItemFilter_ObjectKeys
+var S3ItemFilter_Sizes = &sS3ItemFilter_Sizes
+var S3ItemFilter_CreationTimes = &sS3ItemFilter_CreationTimes
+var S3ItemFilter_VersionIds = &sS3ItemFilter_VersionIds
+var S3ItemFilter_ETags = &sS3ItemFilter_ETags
+
+var _S3ItemFilters = &s_S3ItemFilters
+var _S3ItemFilters_member = &s_S3ItemFilters_member
+
+var S3ResultItem = &sS3ResultItem
+var S3ResultItem_BackupResourceArn = &sS3ResultItem_BackupResourceArn
+var S3ResultItem_SourceResourceArn = &sS3ResultItem_SourceResourceArn
+var S3ResultItem_BackupVaultName = &sS3ResultItem_BackupVaultName
+var S3ResultItem_ObjectKey = &sS3ResultItem_ObjectKey
+var S3ResultItem_ObjectSize = &sS3ResultItem_ObjectSize
+var S3ResultItem_CreationTime = &sS3ResultItem_CreationTime
+var S3ResultItem_ETag = &sS3ResultItem_ETag
+var S3ResultItem_VersionId = &sS3ResultItem_VersionId
+
+var _SearchJobArn = &s_SearchJobArn
+
+var SearchJobBackupsResult = &sSearchJobBackupsResult
+var SearchJobBackupsResult_Status = &sSearchJobBackupsResult_Status
+var SearchJobBackupsResult_StatusMessage = &sSearchJobBackupsResult_StatusMessage
+var SearchJobBackupsResult_ResourceType = &sSearchJobBackupsResult_ResourceType
+var SearchJobBackupsResult_BackupResourceArn = &sSearchJobBackupsResult_BackupResourceArn
+var SearchJobBackupsResult_SourceResourceArn = &sSearchJobBackupsResult_SourceResourceArn
+var SearchJobBackupsResult_IndexCreationTime = &sSearchJobBackupsResult_IndexCreationTime
+var SearchJobBackupsResult_BackupCreationTime = &sSearchJobBackupsResult_BackupCreationTime
+
+var _SearchJobBackupsResults = &s_SearchJobBackupsResults
+var _SearchJobBackupsResults_member = &s_SearchJobBackupsResults_member
+
+var _SearchJobs = &s_SearchJobs
+var _SearchJobs_member = &s_SearchJobs_member
+
+var SearchJobState = &sSearchJobState
+var SearchJobState_RUNNING = &sSearchJobState_RUNNING
+var SearchJobState_COMPLETED = &sSearchJobState_COMPLETED
+var SearchJobState_STOPPING = &sSearchJobState_STOPPING
+var SearchJobState_STOPPED = &sSearchJobState_STOPPED
+var SearchJobState_FAILED = &sSearchJobState_FAILED
+
+var SearchJobSummary = &sSearchJobSummary
+var SearchJobSummary_SearchJobIdentifier = &sSearchJobSummary_SearchJobIdentifier
+var SearchJobSummary_SearchJobArn = &sSearchJobSummary_SearchJobArn
+var SearchJobSummary_Name = &sSearchJobSummary_Name
+var SearchJobSummary_Status = &sSearchJobSummary_Status
+var SearchJobSummary_CreationTime = &sSearchJobSummary_CreationTime
+var SearchJobSummary_CompletionTime = &sSearchJobSummary_CompletionTime
+var SearchJobSummary_SearchScopeSummary = &sSearchJobSummary_SearchScopeSummary
+var SearchJobSummary_StatusMessage = &sSearchJobSummary_StatusMessage
+
+var SearchScope = &sSearchScope
+var SearchScope_BackupResourceTypes = &sSearchScope_BackupResourceTypes
+var SearchScope_BackupResourceCreationTime = &sSearchScope_BackupResourceCreationTime
+var SearchScope_SourceResourceArns = &sSearchScope_SourceResourceArns
+var SearchScope_BackupResourceArns = &sSearchScope_BackupResourceArns
+var SearchScope_BackupResourceTags = &sSearchScope_BackupResourceTags
+
+var SearchScopeSummary = &sSearchScopeSummary
+var SearchScopeSummary_TotalRecoveryPointsToScanCount = &sSearchScopeSummary_TotalRecoveryPointsToScanCount
+var SearchScopeSummary_TotalItemsToScanCount = &sSearchScopeSummary_TotalItemsToScanCount
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var StringCondition = &sStringCondition
+var StringCondition_Value = &sStringCondition_Value
+var StringCondition_Operator = &sStringCondition_Operator
+
+var _StringConditionList = &s_StringConditionList
+var _StringConditionList_member = &s_StringConditionList_member
+
+var StringConditionOperator = &sStringConditionOperator
+var StringConditionOperator_EQUALS_TO = &sStringConditionOperator_EQUALS_TO
+var StringConditionOperator_NOT_EQUALS_TO = &sStringConditionOperator_NOT_EQUALS_TO
+var StringConditionOperator_CONTAINS = &sStringConditionOperator_CONTAINS
+var StringConditionOperator_DOES_NOT_CONTAIN = &sStringConditionOperator_DOES_NOT_CONTAIN
+var StringConditionOperator_BEGINS_WITH = &sStringConditionOperator_BEGINS_WITH
+var StringConditionOperator_ENDS_WITH = &sStringConditionOperator_ENDS_WITH
+var StringConditionOperator_DOES_NOT_BEGIN_WITH = &sStringConditionOperator_DOES_NOT_BEGIN_WITH
+var StringConditionOperator_DOES_NOT_END_WITH = &sStringConditionOperator_DOES_NOT_END_WITH
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var TimeCondition = &sTimeCondition
+var TimeCondition_Value = &sTimeCondition_Value
+var TimeCondition_Operator = &sTimeCondition_Operator
+
+var _TimeConditionList = &s_TimeConditionList
+var _TimeConditionList_member = &s_TimeConditionList_member
+
+var TimeConditionOperator = &sTimeConditionOperator
+var TimeConditionOperator_EQUALS_TO = &sTimeConditionOperator_EQUALS_TO
+var TimeConditionOperator_NOT_EQUALS_TO = &sTimeConditionOperator_NOT_EQUALS_TO
+var TimeConditionOperator_LESS_THAN_EQUAL_TO = &sTimeConditionOperator_LESS_THAN_EQUAL_TO
+var TimeConditionOperator_GREATER_THAN_EQUAL_TO = &sTimeConditionOperator_GREATER_THAN_EQUAL_TO
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var GetSearchJobInput = &sGetSearchJobInput
+var GetSearchJobInput_SearchJobIdentifier = &sGetSearchJobInput_SearchJobIdentifier
+
+var GetSearchJobOutput = &sGetSearchJobOutput
+var GetSearchJobOutput_Name = &sGetSearchJobOutput_Name
+var GetSearchJobOutput_SearchScopeSummary = &sGetSearchJobOutput_SearchScopeSummary
+var GetSearchJobOutput_CurrentSearchProgress = &sGetSearchJobOutput_CurrentSearchProgress
+var GetSearchJobOutput_StatusMessage = &sGetSearchJobOutput_StatusMessage
+var GetSearchJobOutput_EncryptionKeyArn = &sGetSearchJobOutput_EncryptionKeyArn
+var GetSearchJobOutput_CompletionTime = &sGetSearchJobOutput_CompletionTime
+var GetSearchJobOutput_Status = &sGetSearchJobOutput_Status
+var GetSearchJobOutput_SearchScope = &sGetSearchJobOutput_SearchScope
+var GetSearchJobOutput_ItemFilters = &sGetSearchJobOutput_ItemFilters
+var GetSearchJobOutput_CreationTime = &sGetSearchJobOutput_CreationTime
+var GetSearchJobOutput_SearchJobIdentifier = &sGetSearchJobOutput_SearchJobIdentifier
+var GetSearchJobOutput_SearchJobArn = &sGetSearchJobOutput_SearchJobArn
+
+var GetSearchResultExportJobInput = &sGetSearchResultExportJobInput
+var GetSearchResultExportJobInput_ExportJobIdentifier = &sGetSearchResultExportJobInput_ExportJobIdentifier
+
+var GetSearchResultExportJobOutput = &sGetSearchResultExportJobOutput
+var GetSearchResultExportJobOutput_ExportJobIdentifier = &sGetSearchResultExportJobOutput_ExportJobIdentifier
+var GetSearchResultExportJobOutput_ExportJobArn = &sGetSearchResultExportJobOutput_ExportJobArn
+var GetSearchResultExportJobOutput_Status = &sGetSearchResultExportJobOutput_Status
+var GetSearchResultExportJobOutput_CreationTime = &sGetSearchResultExportJobOutput_CreationTime
+var GetSearchResultExportJobOutput_CompletionTime = &sGetSearchResultExportJobOutput_CompletionTime
+var GetSearchResultExportJobOutput_StatusMessage = &sGetSearchResultExportJobOutput_StatusMessage
+var GetSearchResultExportJobOutput_ExportSpecification = &sGetSearchResultExportJobOutput_ExportSpecification
+var GetSearchResultExportJobOutput_SearchJobArn = &sGetSearchResultExportJobOutput_SearchJobArn
+
+var ListSearchJobBackupsInput = &sListSearchJobBackupsInput
+var ListSearchJobBackupsInput_SearchJobIdentifier = &sListSearchJobBackupsInput_SearchJobIdentifier
+var ListSearchJobBackupsInput_NextToken = &sListSearchJobBackupsInput_NextToken
+var ListSearchJobBackupsInput_MaxResults = &sListSearchJobBackupsInput_MaxResults
+
+var ListSearchJobBackupsOutput = &sListSearchJobBackupsOutput
+var ListSearchJobBackupsOutput_Results = &sListSearchJobBackupsOutput_Results
+var ListSearchJobBackupsOutput_NextToken = &sListSearchJobBackupsOutput_NextToken
+
+var ListSearchJobResultsInput = &sListSearchJobResultsInput
+var ListSearchJobResultsInput_SearchJobIdentifier = &sListSearchJobResultsInput_SearchJobIdentifier
+var ListSearchJobResultsInput_NextToken = &sListSearchJobResultsInput_NextToken
+var ListSearchJobResultsInput_MaxResults = &sListSearchJobResultsInput_MaxResults
+
+var ListSearchJobResultsOutput = &sListSearchJobResultsOutput
+var ListSearchJobResultsOutput_Results = &sListSearchJobResultsOutput_Results
+var ListSearchJobResultsOutput_NextToken = &sListSearchJobResultsOutput_NextToken
+
+var ListSearchJobsInput = &sListSearchJobsInput
+var ListSearchJobsInput_ByStatus = &sListSearchJobsInput_ByStatus
+var ListSearchJobsInput_NextToken = &sListSearchJobsInput_NextToken
+var ListSearchJobsInput_MaxResults = &sListSearchJobsInput_MaxResults
+
+var ListSearchJobsOutput = &sListSearchJobsOutput
+var ListSearchJobsOutput_SearchJobs = &sListSearchJobsOutput_SearchJobs
+var ListSearchJobsOutput_NextToken = &sListSearchJobsOutput_NextToken
+
+var ListSearchResultExportJobsInput = &sListSearchResultExportJobsInput
+var ListSearchResultExportJobsInput_Status = &sListSearchResultExportJobsInput_Status
+var ListSearchResultExportJobsInput_SearchJobIdentifier = &sListSearchResultExportJobsInput_SearchJobIdentifier
+var ListSearchResultExportJobsInput_NextToken = &sListSearchResultExportJobsInput_NextToken
+var ListSearchResultExportJobsInput_MaxResults = &sListSearchResultExportJobsInput_MaxResults
+
+var ListSearchResultExportJobsOutput = &sListSearchResultExportJobsOutput
+var ListSearchResultExportJobsOutput_ExportJobs = &sListSearchResultExportJobsOutput_ExportJobs
+var ListSearchResultExportJobsOutput_NextToken = &sListSearchResultExportJobsOutput_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var StartSearchJobInput = &sStartSearchJobInput
+var StartSearchJobInput_Tags = &sStartSearchJobInput_Tags
+var StartSearchJobInput_Name = &sStartSearchJobInput_Name
+var StartSearchJobInput_EncryptionKeyArn = &sStartSearchJobInput_EncryptionKeyArn
+var StartSearchJobInput_ClientToken = &sStartSearchJobInput_ClientToken
+var StartSearchJobInput_SearchScope = &sStartSearchJobInput_SearchScope
+var StartSearchJobInput_ItemFilters = &sStartSearchJobInput_ItemFilters
+
+var StartSearchJobOutput = &sStartSearchJobOutput
+var StartSearchJobOutput_SearchJobArn = &sStartSearchJobOutput_SearchJobArn
+var StartSearchJobOutput_CreationTime = &sStartSearchJobOutput_CreationTime
+var StartSearchJobOutput_SearchJobIdentifier = &sStartSearchJobOutput_SearchJobIdentifier
+
+var StartSearchResultExportJobInput = &sStartSearchResultExportJobInput
+var StartSearchResultExportJobInput_SearchJobIdentifier = &sStartSearchResultExportJobInput_SearchJobIdentifier
+var StartSearchResultExportJobInput_ExportSpecification = &sStartSearchResultExportJobInput_ExportSpecification
+var StartSearchResultExportJobInput_ClientToken = &sStartSearchResultExportJobInput_ClientToken
+var StartSearchResultExportJobInput_Tags = &sStartSearchResultExportJobInput_Tags
+var StartSearchResultExportJobInput_RoleArn = &sStartSearchResultExportJobInput_RoleArn
+
+var StartSearchResultExportJobOutput = &sStartSearchResultExportJobOutput
+var StartSearchResultExportJobOutput_ExportJobArn = &sStartSearchResultExportJobOutput_ExportJobArn
+var StartSearchResultExportJobOutput_ExportJobIdentifier = &sStartSearchResultExportJobOutput_ExportJobIdentifier
+
+var StopSearchJobInput = &sStopSearchJobInput
+var StopSearchJobInput_SearchJobIdentifier = &sStopSearchJobInput_SearchJobIdentifier
+
+var StopSearchJobOutput = &sStopSearchJobOutput
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var CryoBackupSearchService = &smithy.ServiceSchema{Schema: &s_CryoBackupSearchService, Version: "2018-05-10"}

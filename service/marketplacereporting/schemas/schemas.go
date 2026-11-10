@@ -4,107 +4,93 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetBuyerDashboard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "GetBuyerDashboard",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iGetBuyerDashboard        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "GetBuyerDashboard"}
+	i_AWSMarketplaceReporting = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "AWSMarketplaceReporting"}
+	iAccessDeniedException    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "AccessDeniedException"}
+	iBadRequestException      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "BadRequestException"}
+	i_DashboardIdentifier     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "DashboardIdentifier"}
+	i_EmbeddingDomain         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "EmbeddingDomain"}
+	i_EmbeddingDomains        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "EmbeddingDomains"}
+	iInternalServerException  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "InternalServerException"}
+	iUnauthorizedException    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "UnauthorizedException"}
+	iGetBuyerDashboardInput   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "GetBuyerDashboardInput"}
+	iGetBuyerDashboardOutput  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacereporting", Name: "GetBuyerDashboardOutput"}
+	pString                   = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getBuyerDashboard",
-	Code: 200})
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
 
-var _AWSMarketplaceReporting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "AWSMarketplaceReporting",
-}, smithy.ShapeTypeService, 0)
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var m_EmbeddingDomains = smithy.SchemaMembers{List: []*smithy.Schema{&s_EmbeddingDomains_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_message}}
+var mGetBuyerDashboardInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuyerDashboardInput_dashboardIdentifier, &sGetBuyerDashboardInput_embeddingDomains}}
+var mGetBuyerDashboardOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBuyerDashboardOutput_embedUrl, &sGetBuyerDashboardOutput_dashboardIdentifier, &sGetBuyerDashboardOutput_embeddingDomains}}
 
-var AWSMarketplaceReporting = smithy.NewServiceSchema(_AWSMarketplaceReporting, "2018-05-10")
+var sGetBuyerDashboard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboard, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var s_AWSMarketplaceReporting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMarketplaceReporting, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_DashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString})
+var s_EmbeddingDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbeddingDomain, Type: smithy.ShapeTypeString})
+var s_EmbeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sGetBuyerDashboardInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboardInput, Members: &mGetBuyerDashboardInput, Type: smithy.ShapeTypeStructure})
+var sGetBuyerDashboardOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBuyerDashboardOutput, Members: &mGetBuyerDashboardOutput, Type: smithy.ShapeTypeStructure})
 
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_EmbeddingDomains_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmbeddingDomain, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sUnauthorizedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetBuyerDashboardInput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString})
+var sGetBuyerDashboardInput_embeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddingDomains", ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList})
+var sGetBuyerDashboardOutput_embedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embedUrl", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetBuyerDashboardOutput_dashboardIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dashboardIdentifier", ID: &i_DashboardIdentifier, Type: smithy.ShapeTypeString})
+var sGetBuyerDashboardOutput_embeddingDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "embeddingDomains", ID: &i_EmbeddingDomains, Members: &m_EmbeddingDomains, Type: smithy.ShapeTypeList})
 
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
+var GetBuyerDashboard = &sGetBuyerDashboard
 
-var _DashboardIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "DashboardIdentifier",
-}, smithy.ShapeTypeString, 0)
+var _AWSMarketplaceReporting = &s_AWSMarketplaceReporting
 
-var _EmbeddingDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "EmbeddingDomain",
-}, smithy.ShapeTypeString, 0)
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
 
-var _EmbeddingDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "EmbeddingDomains",
-}, smithy.ShapeTypeList, 1)
-var _EmbeddingDomains_member *smithy.Schema
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
 
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
+var _DashboardIdentifier = &s_DashboardIdentifier
 
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_message *smithy.Schema
+var _EmbeddingDomain = &s_EmbeddingDomain
 
-var GetBuyerDashboardInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "GetBuyerDashboardInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetBuyerDashboardInput_dashboardIdentifier *smithy.Schema
+var _EmbeddingDomains = &s_EmbeddingDomains
+var _EmbeddingDomains_member = &s_EmbeddingDomains_member
 
-var GetBuyerDashboardInput_embeddingDomains *smithy.Schema
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
 
-var GetBuyerDashboardOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacereporting",
-	Name:      "GetBuyerDashboardOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetBuyerDashboardOutput_embedUrl *smithy.Schema
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_message = &sUnauthorizedException_message
 
-var GetBuyerDashboardOutput_dashboardIdentifier *smithy.Schema
+var GetBuyerDashboardInput = &sGetBuyerDashboardInput
+var GetBuyerDashboardInput_dashboardIdentifier = &sGetBuyerDashboardInput_dashboardIdentifier
+var GetBuyerDashboardInput_embeddingDomains = &sGetBuyerDashboardInput_embeddingDomains
 
-var GetBuyerDashboardOutput_embeddingDomains *smithy.Schema
+var GetBuyerDashboardOutput = &sGetBuyerDashboardOutput
+var GetBuyerDashboardOutput_embedUrl = &sGetBuyerDashboardOutput_embedUrl
+var GetBuyerDashboardOutput_dashboardIdentifier = &sGetBuyerDashboardOutput_dashboardIdentifier
+var GetBuyerDashboardOutput_embeddingDomains = &sGetBuyerDashboardOutput_embeddingDomains
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	BadRequestException_message = BadRequestException.AddMember("message", smithyprelude.String)
-
-	_EmbeddingDomains_member = _EmbeddingDomains.AddMember("member", _EmbeddingDomain)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	UnauthorizedException_message = UnauthorizedException.AddMember("message", smithyprelude.String)
-
-	GetBuyerDashboardInput_dashboardIdentifier = GetBuyerDashboardInput.AddMember("dashboardIdentifier", _DashboardIdentifier)
-
-	GetBuyerDashboardInput_embeddingDomains = GetBuyerDashboardInput.AddMember("embeddingDomains", _EmbeddingDomains)
-
-	GetBuyerDashboardOutput_embedUrl = GetBuyerDashboardOutput.AddMember("embedUrl", smithyprelude.String)
-
-	GetBuyerDashboardOutput_dashboardIdentifier = GetBuyerDashboardOutput.AddMember("dashboardIdentifier", _DashboardIdentifier)
-
-	GetBuyerDashboardOutput_embeddingDomains = GetBuyerDashboardOutput.AddMember("embeddingDomains", _EmbeddingDomains)
-
-}
+var AWSMarketplaceReporting = &smithy.ServiceSchema{Schema: &s_AWSMarketplaceReporting, Version: "2018-05-10"}

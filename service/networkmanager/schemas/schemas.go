@@ -4,7302 +4,5385 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AcceptAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAcceptAttachment                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AcceptAttachment"}
+	iAssociateConnectPeer                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateConnectPeer"}
+	iAssociateCustomerGateway                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateCustomerGateway"}
+	iAssociateLink                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateLink"}
+	iAssociateTransitGatewayConnectPeer               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateTransitGatewayConnectPeer"}
+	iCreateConnectAttachment                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectAttachment"}
+	iCreateConnection                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnection"}
+	iCreateConnectPeer                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectPeer"}
+	iCreateCoreNetwork                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateCoreNetwork"}
+	iCreateCoreNetworkPrefixListAssociation           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateCoreNetworkPrefixListAssociation"}
+	iCreateDevice                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateDevice"}
+	iCreateDirectConnectGatewayAttachment             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateDirectConnectGatewayAttachment"}
+	iCreateGlobalNetwork                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateGlobalNetwork"}
+	iCreateLink                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateLink"}
+	iCreateSite                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateSite"}
+	iCreateSiteToSiteVpnAttachment                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateSiteToSiteVpnAttachment"}
+	iCreateTransitGatewayPeering                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateTransitGatewayPeering"}
+	iCreateTransitGatewayRouteTableAttachment         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateTransitGatewayRouteTableAttachment"}
+	iCreateVpcAttachment                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateVpcAttachment"}
+	iDeleteAttachment                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteAttachment"}
+	iDeleteConnection                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteConnection"}
+	iDeleteConnectPeer                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteConnectPeer"}
+	iDeleteCoreNetwork                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetwork"}
+	iDeleteCoreNetworkPolicyVersion                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkPolicyVersion"}
+	iDeleteCoreNetworkPrefixListAssociation           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkPrefixListAssociation"}
+	iDeleteDevice                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteDevice"}
+	iDeleteGlobalNetwork                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteGlobalNetwork"}
+	iDeleteLink                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteLink"}
+	iDeletePeering                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeletePeering"}
+	iDeleteResourcePolicy                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteResourcePolicy"}
+	iDeleteSite                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteSite"}
+	iDeregisterTransitGateway                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeregisterTransitGateway"}
+	iDescribeGlobalNetworks                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DescribeGlobalNetworks"}
+	iDisassociateConnectPeer                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateConnectPeer"}
+	iDisassociateCustomerGateway                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateCustomerGateway"}
+	iDisassociateLink                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateLink"}
+	iDisassociateTransitGatewayConnectPeer            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateTransitGatewayConnectPeer"}
+	iExecuteCoreNetworkChangeSet                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExecuteCoreNetworkChangeSet"}
+	iGetConnectAttachment                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectAttachment"}
+	iGetConnections                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnections"}
+	iGetConnectPeer                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectPeer"}
+	iGetConnectPeerAssociations                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectPeerAssociations"}
+	iGetCoreNetwork                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetwork"}
+	iGetCoreNetworkChangeEvents                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkChangeEvents"}
+	iGetCoreNetworkChangeSet                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkChangeSet"}
+	iGetCoreNetworkPolicy                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkPolicy"}
+	iGetCustomerGatewayAssociations                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCustomerGatewayAssociations"}
+	iGetDevices                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetDevices"}
+	iGetDirectConnectGatewayAttachment                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetDirectConnectGatewayAttachment"}
+	iGetLinkAssociations                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetLinkAssociations"}
+	iGetLinks                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetLinks"}
+	iGetNetworkResourceCounts                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourceCounts"}
+	iGetNetworkResourceRelationships                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourceRelationships"}
+	iGetNetworkResources                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResources"}
+	iGetNetworkRoutes                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkRoutes"}
+	iGetNetworkTelemetry                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkTelemetry"}
+	iGetResourcePolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetResourcePolicy"}
+	iGetRouteAnalysis                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetRouteAnalysis"}
+	iGetSites                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetSites"}
+	iGetSiteToSiteVpnAttachment                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetSiteToSiteVpnAttachment"}
+	iGetTransitGatewayConnectPeerAssociations         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayConnectPeerAssociations"}
+	iGetTransitGatewayPeering                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayPeering"}
+	iGetTransitGatewayRegistrations                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayRegistrations"}
+	iGetTransitGatewayRouteTableAttachment            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayRouteTableAttachment"}
+	iGetVpcAttachment                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetVpcAttachment"}
+	iListAttachmentNatConfigurations                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentNatConfigurations"}
+	iListAttachmentRoutingPolicyAssociations          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentRoutingPolicyAssociations"}
+	iListAttachments                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachments"}
+	iListConnectPeers                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListConnectPeers"}
+	iListCoreNetworkPolicyVersions                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkPolicyVersions"}
+	iListCoreNetworkPrefixListAssociations            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkPrefixListAssociations"}
+	iListCoreNetworkRoutingInformation                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkRoutingInformation"}
+	iListCoreNetworks                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworks"}
+	iListOrganizationServiceAccessStatus              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListOrganizationServiceAccessStatus"}
+	iListPeerings                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListPeerings"}
+	iListTagsForResource                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListTagsForResource"}
+	iPutAttachmentRoutingPolicyLabel                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutAttachmentRoutingPolicyLabel"}
+	iPutCoreNetworkPolicy                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutCoreNetworkPolicy"}
+	iPutResourcePolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutResourcePolicy"}
+	iRegisterTransitGateway                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RegisterTransitGateway"}
+	iRejectAttachment                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RejectAttachment"}
+	iRemoveAttachmentRoutingPolicyLabel               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RemoveAttachmentRoutingPolicyLabel"}
+	iRestoreCoreNetworkPolicyVersion                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RestoreCoreNetworkPolicyVersion"}
+	iStartOrganizationServiceAccessUpdate             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "StartOrganizationServiceAccessUpdate"}
+	iStartRouteAnalysis                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "StartRouteAnalysis"}
+	iTagResource                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TagResource"}
+	iUntagResource                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UntagResource"}
+	iUpdateAttachmentNatConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateAttachmentNatConfiguration"}
+	iUpdateConnection                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateConnection"}
+	iUpdateCoreNetwork                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateCoreNetwork"}
+	iUpdateDevice                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateDevice"}
+	iUpdateDirectConnectGatewayAttachment             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateDirectConnectGatewayAttachment"}
+	iUpdateGlobalNetwork                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateGlobalNetwork"}
+	iUpdateLink                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateLink"}
+	iUpdateNetworkResourceMetadata                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateNetworkResourceMetadata"}
+	iUpdateSite                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateSite"}
+	iUpdateVpcAttachment                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateVpcAttachment"}
+	i_NetworkManager                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkManager"}
+	iAccessDeniedException                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AccessDeniedException"}
+	i_AccountId                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AccountId"}
+	iAccountStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AccountStatus"}
+	i_AccountStatusList                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AccountStatusList"}
+	i_Action                                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Action"}
+	iAttachment                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Attachment"}
+	iAttachmentError                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentError"}
+	iAttachmentErrorCode                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentErrorCode"}
+	i_AttachmentErrorList                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentErrorList"}
+	i_AttachmentId                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentId"}
+	i_AttachmentList                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentList"}
+	iAttachmentNatConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentNatConfiguration"}
+	i_AttachmentNatConfigurationList                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentNatConfigurationList"}
+	i_AttachmentRoutingPolicyAssociationsList         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentRoutingPolicyAssociationsList"}
+	iAttachmentRoutingPolicyAssociationSummary        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentRoutingPolicyAssociationSummary"}
+	iAttachmentState                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentState"}
+	iAttachmentType                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AttachmentType"}
+	i_AWSAccountId                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AWSAccountId"}
+	iAWSLocation                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AWSLocation"}
+	iBandwidth                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Bandwidth"}
+	iBgpOptions                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "BgpOptions"}
+	i_Boolean                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Boolean"}
+	i_BoxedBoolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "BoxedBoolean"}
+	iChangeAction                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ChangeAction"}
+	iChangeSetState                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ChangeSetState"}
+	iChangeStatus                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ChangeStatus"}
+	iChangeType                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ChangeType"}
+	i_ClientToken                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ClientToken"}
+	iConflictException                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConflictException"}
+	iConnectAttachment                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectAttachment"}
+	iConnectAttachmentOptions                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectAttachmentOptions"}
+	iConnection                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Connection"}
+	i_ConnectionArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionArn"}
+	iConnectionHealth                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionHealth"}
+	i_ConnectionId                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionId"}
+	i_ConnectionIdList                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionIdList"}
+	i_ConnectionList                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionList"}
+	iConnectionState                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionState"}
+	iConnectionStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionStatus"}
+	iConnectionType                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectionType"}
+	iConnectPeer                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeer"}
+	iConnectPeerAssociation                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerAssociation"}
+	i_ConnectPeerAssociationList                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerAssociationList"}
+	iConnectPeerAssociationState                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerAssociationState"}
+	iConnectPeerBgpConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerBgpConfiguration"}
+	i_ConnectPeerBgpConfigurationList                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerBgpConfigurationList"}
+	iConnectPeerConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerConfiguration"}
+	iConnectPeerError                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerError"}
+	iConnectPeerErrorCode                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerErrorCode"}
+	i_ConnectPeerErrorList                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerErrorList"}
+	i_ConnectPeerId                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerId"}
+	i_ConnectPeerIdList                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerIdList"}
+	iConnectPeerState                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerState"}
+	iConnectPeerSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerSummary"}
+	i_ConnectPeerSummaryList                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConnectPeerSummaryList"}
+	i_ConstrainedString                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConstrainedString"}
+	i_ConstrainedStringList                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ConstrainedStringList"}
+	iCoreNetwork                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetwork"}
+	i_CoreNetworkArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkArn"}
+	iCoreNetworkChange                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkChange"}
+	iCoreNetworkChangeEvent                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkChangeEvent"}
+	i_CoreNetworkChangeEventList                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkChangeEventList"}
+	iCoreNetworkChangeEventValues                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkChangeEventValues"}
+	i_CoreNetworkChangeList                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkChangeList"}
+	iCoreNetworkChangeValues                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkChangeValues"}
+	iCoreNetworkEdge                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkEdge"}
+	i_CoreNetworkEdgeList                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkEdgeList"}
+	i_CoreNetworkId                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkId"}
+	iCoreNetworkNetworkFunctionGroup                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkNetworkFunctionGroup"}
+	iCoreNetworkNetworkFunctionGroupIdentifier        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkNetworkFunctionGroupIdentifier"}
+	i_CoreNetworkNetworkFunctionGroupList             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkNetworkFunctionGroupList"}
+	iCoreNetworkPolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicy"}
+	iCoreNetworkPolicyAlias                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicyAlias"}
+	i_CoreNetworkPolicyDocument                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicyDocument"}
+	iCoreNetworkPolicyError                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicyError"}
+	i_CoreNetworkPolicyErrorList                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicyErrorList"}
+	iCoreNetworkPolicyException                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicyException"}
+	iCoreNetworkPolicyVersion                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicyVersion"}
+	i_CoreNetworkPolicyVersionList                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkPolicyVersionList"}
+	iCoreNetworkRoutingInformation                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkRoutingInformation"}
+	i_CoreNetworkRoutingInformationList               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkRoutingInformationList"}
+	iCoreNetworkSegment                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkSegment"}
+	iCoreNetworkSegmentEdgeIdentifier                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkSegmentEdgeIdentifier"}
+	i_CoreNetworkSegmentList                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkSegmentList"}
+	iCoreNetworkState                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkState"}
+	iCoreNetworkSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkSummary"}
+	i_CoreNetworkSummaryList                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CoreNetworkSummaryList"}
+	i_CustomerGatewayArn                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CustomerGatewayArn"}
+	i_CustomerGatewayArnList                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CustomerGatewayArnList"}
+	iCustomerGatewayAssociation                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CustomerGatewayAssociation"}
+	i_CustomerGatewayAssociationList                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CustomerGatewayAssociationList"}
+	iCustomerGatewayAssociationState                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CustomerGatewayAssociationState"}
+	i_DateTime                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DateTime"}
+	iDevice                                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Device"}
+	i_DeviceArn                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeviceArn"}
+	i_DeviceId                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeviceId"}
+	i_DeviceIdList                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeviceIdList"}
+	i_DeviceList                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeviceList"}
+	iDeviceState                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeviceState"}
+	i_DirectConnectGatewayArn                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DirectConnectGatewayArn"}
+	iDirectConnectGatewayAttachment                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DirectConnectGatewayAttachment"}
+	iEdgeOverride                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "EdgeOverride"}
+	i_EdgeSet                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "EdgeSet"}
+	i_EdgeSetList                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "EdgeSetList"}
+	i_ExceptionContextKey                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExceptionContextKey"}
+	i_ExceptionContextMap                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExceptionContextMap"}
+	i_ExceptionContextValue                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExceptionContextValue"}
+	i_ExternalRegionCode                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExternalRegionCode"}
+	i_ExternalRegionCodeList                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExternalRegionCodeList"}
+	i_FilterMap                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "FilterMap"}
+	i_FilterName                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "FilterName"}
+	i_FilterValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "FilterValue"}
+	i_FilterValues                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "FilterValues"}
+	iGlobalNetwork                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GlobalNetwork"}
+	i_GlobalNetworkArn                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GlobalNetworkArn"}
+	i_GlobalNetworkId                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GlobalNetworkId"}
+	i_GlobalNetworkIdList                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GlobalNetworkIdList"}
+	i_GlobalNetworkList                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GlobalNetworkList"}
+	iGlobalNetworkState                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GlobalNetworkState"}
+	i_Integer                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Integer"}
+	iInternalServerException                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "InternalServerException"}
+	i_IPAddress                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "IPAddress"}
+	iLink                                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Link"}
+	i_LinkArn                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkArn"}
+	iLinkAssociation                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkAssociation"}
+	i_LinkAssociationList                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkAssociationList"}
+	iLinkAssociationState                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkAssociationState"}
+	i_LinkId                                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkId"}
+	i_LinkIdList                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkIdList"}
+	i_LinkList                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkList"}
+	iLinkState                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "LinkState"}
+	iLocation                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Location"}
+	i_Long                                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Long"}
+	i_MaxResults                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "MaxResults"}
+	iNatGatewaySupportState                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatGatewaySupportState"}
+	iNatGatewaySupportValue                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatGatewaySupportValue"}
+	iNatRule                                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatRule"}
+	i_NatRuleList                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatRuleList"}
+	i_NatRuleNumber                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatRuleNumber"}
+	iNatRuleRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatRuleRequest"}
+	i_NatRuleRequestList                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatRuleRequestList"}
+	iNatRuleState                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NatRuleState"}
+	iNetworkFunctionGroup                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkFunctionGroup"}
+	i_NetworkFunctionGroupList                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkFunctionGroupList"}
+	i_NetworkFunctionGroupName                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkFunctionGroupName"}
+	iNetworkResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkResource"}
+	iNetworkResourceCount                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkResourceCount"}
+	i_NetworkResourceCountList                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkResourceCountList"}
+	i_NetworkResourceList                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkResourceList"}
+	i_NetworkResourceMetadataMap                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkResourceMetadataMap"}
+	iNetworkResourceSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkResourceSummary"}
+	iNetworkRoute                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkRoute"}
+	iNetworkRouteDestination                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkRouteDestination"}
+	i_NetworkRouteDestinationList                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkRouteDestinationList"}
+	i_NetworkRouteList                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkRouteList"}
+	iNetworkTelemetry                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkTelemetry"}
+	i_NetworkTelemetryList                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NetworkTelemetryList"}
+	i_NextToken                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "NextToken"}
+	i_OrganizationAwsServiceAccessStatus              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "OrganizationAwsServiceAccessStatus"}
+	i_OrganizationId                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "OrganizationId"}
+	iOrganizationStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "OrganizationStatus"}
+	iPathComponent                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PathComponent"}
+	i_PathComponentList                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PathComponentList"}
+	iPeering                                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Peering"}
+	iPeeringError                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PeeringError"}
+	iPeeringErrorCode                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PeeringErrorCode"}
+	i_PeeringErrorList                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PeeringErrorList"}
+	i_PeeringId                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PeeringId"}
+	i_PeeringList                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PeeringList"}
+	iPeeringState                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PeeringState"}
+	iPeeringType                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PeeringType"}
+	iPermissionsErrorContext                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PermissionsErrorContext"}
+	i_PrefixListArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PrefixListArn"}
+	iPrefixListAssociation                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PrefixListAssociation"}
+	i_PrefixListAssociationList                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PrefixListAssociationList"}
+	iProposedNetworkFunctionGroupChange               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ProposedNetworkFunctionGroupChange"}
+	iProposedSegmentChange                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ProposedSegmentChange"}
+	i_ReasonContextKey                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ReasonContextKey"}
+	i_ReasonContextMap                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ReasonContextMap"}
+	i_ReasonContextValue                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ReasonContextValue"}
+	iRelationship                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Relationship"}
+	i_RelationshipList                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RelationshipList"}
+	i_ResourceArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ResourceArn"}
+	iResourceNotFoundException                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ResourceNotFoundException"}
+	i_RetryAfterSeconds                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RetryAfterSeconds"}
+	iRouteAnalysis                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysis"}
+	iRouteAnalysisCompletion                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysisCompletion"}
+	iRouteAnalysisCompletionReasonCode                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysisCompletionReasonCode"}
+	iRouteAnalysisCompletionResultCode                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysisCompletionResultCode"}
+	iRouteAnalysisEndpointOptions                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysisEndpointOptions"}
+	iRouteAnalysisEndpointOptionsSpecification        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysisEndpointOptionsSpecification"}
+	iRouteAnalysisPath                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysisPath"}
+	iRouteAnalysisStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteAnalysisStatus"}
+	iRouteState                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteState"}
+	i_RouteStateList                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteStateList"}
+	iRouteTableIdentifier                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteTableIdentifier"}
+	iRouteTableType                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteTableType"}
+	iRouteType                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteType"}
+	i_RouteTypeList                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RouteTypeList"}
+	iRoutingInformationNextHop                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RoutingInformationNextHop"}
+	iRoutingPolicyAssociationDetail                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RoutingPolicyAssociationDetail"}
+	i_RoutingPolicyAssociationDetailsList             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RoutingPolicyAssociationDetailsList"}
+	iRoutingPolicyDirection                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RoutingPolicyDirection"}
+	iSegmentActionServiceInsertion                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SegmentActionServiceInsertion"}
+	iSendViaMode                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SendViaMode"}
+	i_ServerSideString                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ServerSideString"}
+	iServiceInsertionAction                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ServiceInsertionAction"}
+	i_ServiceInsertionActionList                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ServiceInsertionActionList"}
+	iServiceInsertionSegments                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ServiceInsertionSegments"}
+	iServiceQuotaExceededException                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ServiceQuotaExceededException"}
+	iSite                                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Site"}
+	i_SiteArn                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SiteArn"}
+	i_SiteId                                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SiteId"}
+	i_SiteIdList                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SiteIdList"}
+	i_SiteList                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SiteList"}
+	iSiteState                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SiteState"}
+	iSiteToSiteVpnAttachment                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SiteToSiteVpnAttachment"}
+	i_SLRDeploymentStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SLRDeploymentStatus"}
+	i_SubnetArn                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SubnetArn"}
+	i_SubnetArnList                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SubnetArnList"}
+	i_SynthesizedJsonCoreNetworkPolicyDocument        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SynthesizedJsonCoreNetworkPolicyDocument"}
+	i_SynthesizedJsonResourcePolicyDocument           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "SynthesizedJsonResourcePolicyDocument"}
+	iTag                                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Tag"}
+	i_TagKey                                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TagKey"}
+	i_TagKeyList                                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TagKeyList"}
+	i_TagList                                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TagList"}
+	i_TagValue                                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TagValue"}
+	iThrottlingException                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ThrottlingException"}
+	i_TransitGatewayArn                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayArn"}
+	i_TransitGatewayArnList                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayArnList"}
+	i_TransitGatewayAttachmentArn                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayAttachmentArn"}
+	i_TransitGatewayAttachmentId                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayAttachmentId"}
+	i_TransitGatewayConnectPeerArn                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayConnectPeerArn"}
+	i_TransitGatewayConnectPeerArnList                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayConnectPeerArnList"}
+	iTransitGatewayConnectPeerAssociation             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayConnectPeerAssociation"}
+	i_TransitGatewayConnectPeerAssociationList        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayConnectPeerAssociationList"}
+	iTransitGatewayConnectPeerAssociationState        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayConnectPeerAssociationState"}
+	iTransitGatewayPeering                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayPeering"}
+	i_TransitGatewayPeeringAttachmentId               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayPeeringAttachmentId"}
+	iTransitGatewayRegistration                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayRegistration"}
+	i_TransitGatewayRegistrationList                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayRegistrationList"}
+	iTransitGatewayRegistrationState                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayRegistrationState"}
+	iTransitGatewayRegistrationStateReason            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayRegistrationStateReason"}
+	i_TransitGatewayRouteTableArn                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayRouteTableArn"}
+	iTransitGatewayRouteTableAttachment               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TransitGatewayRouteTableAttachment"}
+	iTunnelProtocol                                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TunnelProtocol"}
+	iValidationException                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ValidationException"}
+	iValidationExceptionField                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ValidationExceptionReason"}
+	iVia                                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "Via"}
+	i_VpcArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "VpcArn"}
+	iVpcAttachment                                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "VpcAttachment"}
+	iVpcOptions                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "VpcOptions"}
+	i_VpnConnectionArn                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "VpnConnectionArn"}
+	iWhenSentTo                                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "WhenSentTo"}
+	i_WhenSentToSegmentsList                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "WhenSentToSegmentsList"}
+	i_WithEdgeOverridesList                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "WithEdgeOverridesList"}
+	iAcceptAttachmentRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AcceptAttachmentRequest"}
+	iAcceptAttachmentResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AcceptAttachmentResponse"}
+	iAssociateConnectPeerRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateConnectPeerRequest"}
+	iAssociateConnectPeerResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateConnectPeerResponse"}
+	iAssociateCustomerGatewayRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateCustomerGatewayRequest"}
+	iAssociateCustomerGatewayResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateCustomerGatewayResponse"}
+	iAssociateLinkRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateLinkRequest"}
+	iAssociateLinkResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateLinkResponse"}
+	iAssociateTransitGatewayConnectPeerRequest        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateTransitGatewayConnectPeerRequest"}
+	iAssociateTransitGatewayConnectPeerResponse       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "AssociateTransitGatewayConnectPeerResponse"}
+	iCreateConnectAttachmentRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectAttachmentRequest"}
+	iCreateConnectAttachmentResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectAttachmentResponse"}
+	iCreateConnectionRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectionRequest"}
+	iCreateConnectionResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectionResponse"}
+	iCreateConnectPeerRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectPeerRequest"}
+	iCreateConnectPeerResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateConnectPeerResponse"}
+	iCreateCoreNetworkRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateCoreNetworkRequest"}
+	iCreateCoreNetworkResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateCoreNetworkResponse"}
+	iCreateCoreNetworkPrefixListAssociationRequest    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateCoreNetworkPrefixListAssociationRequest"}
+	iCreateCoreNetworkPrefixListAssociationResponse   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateCoreNetworkPrefixListAssociationResponse"}
+	iCreateDeviceRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateDeviceRequest"}
+	iCreateDeviceResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateDeviceResponse"}
+	iCreateDirectConnectGatewayAttachmentRequest      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateDirectConnectGatewayAttachmentRequest"}
+	iCreateDirectConnectGatewayAttachmentResponse     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateDirectConnectGatewayAttachmentResponse"}
+	iCreateGlobalNetworkRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateGlobalNetworkRequest"}
+	iCreateGlobalNetworkResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateGlobalNetworkResponse"}
+	iCreateLinkRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateLinkRequest"}
+	iCreateLinkResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateLinkResponse"}
+	iCreateSiteRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateSiteRequest"}
+	iCreateSiteResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateSiteResponse"}
+	iCreateSiteToSiteVpnAttachmentRequest             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateSiteToSiteVpnAttachmentRequest"}
+	iCreateSiteToSiteVpnAttachmentResponse            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateSiteToSiteVpnAttachmentResponse"}
+	iCreateTransitGatewayPeeringRequest               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateTransitGatewayPeeringRequest"}
+	iCreateTransitGatewayPeeringResponse              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateTransitGatewayPeeringResponse"}
+	iCreateTransitGatewayRouteTableAttachmentRequest  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateTransitGatewayRouteTableAttachmentRequest"}
+	iCreateTransitGatewayRouteTableAttachmentResponse = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateTransitGatewayRouteTableAttachmentResponse"}
+	iCreateVpcAttachmentRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateVpcAttachmentRequest"}
+	iCreateVpcAttachmentResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "CreateVpcAttachmentResponse"}
+	iDeleteAttachmentRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteAttachmentRequest"}
+	iDeleteAttachmentResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteAttachmentResponse"}
+	iDeleteConnectionRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteConnectionRequest"}
+	iDeleteConnectionResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteConnectionResponse"}
+	iDeleteConnectPeerRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteConnectPeerRequest"}
+	iDeleteConnectPeerResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteConnectPeerResponse"}
+	iDeleteCoreNetworkRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkRequest"}
+	iDeleteCoreNetworkResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkResponse"}
+	iDeleteCoreNetworkPolicyVersionRequest            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkPolicyVersionRequest"}
+	iDeleteCoreNetworkPolicyVersionResponse           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkPolicyVersionResponse"}
+	iDeleteCoreNetworkPrefixListAssociationRequest    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkPrefixListAssociationRequest"}
+	iDeleteCoreNetworkPrefixListAssociationResponse   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteCoreNetworkPrefixListAssociationResponse"}
+	iDeleteDeviceRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteDeviceRequest"}
+	iDeleteDeviceResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteDeviceResponse"}
+	iDeleteGlobalNetworkRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteGlobalNetworkRequest"}
+	iDeleteGlobalNetworkResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteGlobalNetworkResponse"}
+	iDeleteLinkRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteLinkRequest"}
+	iDeleteLinkResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteLinkResponse"}
+	iDeletePeeringRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeletePeeringRequest"}
+	iDeletePeeringResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeletePeeringResponse"}
+	iDeleteResourcePolicyRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteResourcePolicyRequest"}
+	iDeleteResourcePolicyResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteResourcePolicyResponse"}
+	iDeleteSiteRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteSiteRequest"}
+	iDeleteSiteResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeleteSiteResponse"}
+	iDeregisterTransitGatewayRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeregisterTransitGatewayRequest"}
+	iDeregisterTransitGatewayResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DeregisterTransitGatewayResponse"}
+	iDescribeGlobalNetworksRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DescribeGlobalNetworksRequest"}
+	iDescribeGlobalNetworksResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DescribeGlobalNetworksResponse"}
+	iDisassociateConnectPeerRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateConnectPeerRequest"}
+	iDisassociateConnectPeerResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateConnectPeerResponse"}
+	iDisassociateCustomerGatewayRequest               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateCustomerGatewayRequest"}
+	iDisassociateCustomerGatewayResponse              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateCustomerGatewayResponse"}
+	iDisassociateLinkRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateLinkRequest"}
+	iDisassociateLinkResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateLinkResponse"}
+	iDisassociateTransitGatewayConnectPeerRequest     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateTransitGatewayConnectPeerRequest"}
+	iDisassociateTransitGatewayConnectPeerResponse    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "DisassociateTransitGatewayConnectPeerResponse"}
+	iExecuteCoreNetworkChangeSetRequest               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExecuteCoreNetworkChangeSetRequest"}
+	iExecuteCoreNetworkChangeSetResponse              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ExecuteCoreNetworkChangeSetResponse"}
+	iGetConnectAttachmentRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectAttachmentRequest"}
+	iGetConnectAttachmentResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectAttachmentResponse"}
+	iGetConnectionsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectionsRequest"}
+	iGetConnectionsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectionsResponse"}
+	iGetConnectPeerAssociationsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectPeerAssociationsRequest"}
+	iGetConnectPeerAssociationsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectPeerAssociationsResponse"}
+	iGetConnectPeerRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectPeerRequest"}
+	iGetConnectPeerResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetConnectPeerResponse"}
+	iGetCoreNetworkChangeEventsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkChangeEventsRequest"}
+	iGetCoreNetworkChangeEventsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkChangeEventsResponse"}
+	iGetCoreNetworkChangeSetRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkChangeSetRequest"}
+	iGetCoreNetworkChangeSetResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkChangeSetResponse"}
+	iGetCoreNetworkRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkRequest"}
+	iGetCoreNetworkResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkResponse"}
+	iGetCoreNetworkPolicyRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkPolicyRequest"}
+	iGetCoreNetworkPolicyResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCoreNetworkPolicyResponse"}
+	iGetCustomerGatewayAssociationsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCustomerGatewayAssociationsRequest"}
+	iGetCustomerGatewayAssociationsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetCustomerGatewayAssociationsResponse"}
+	iGetDevicesRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetDevicesRequest"}
+	iGetDevicesResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetDevicesResponse"}
+	iGetDirectConnectGatewayAttachmentRequest         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetDirectConnectGatewayAttachmentRequest"}
+	iGetDirectConnectGatewayAttachmentResponse        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetDirectConnectGatewayAttachmentResponse"}
+	iGetLinkAssociationsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetLinkAssociationsRequest"}
+	iGetLinkAssociationsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetLinkAssociationsResponse"}
+	iGetLinksRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetLinksRequest"}
+	iGetLinksResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetLinksResponse"}
+	iGetNetworkResourceCountsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourceCountsRequest"}
+	iGetNetworkResourceCountsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourceCountsResponse"}
+	iGetNetworkResourceRelationshipsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourceRelationshipsRequest"}
+	iGetNetworkResourceRelationshipsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourceRelationshipsResponse"}
+	iGetNetworkResourcesRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourcesRequest"}
+	iGetNetworkResourcesResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkResourcesResponse"}
+	iGetNetworkRoutesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkRoutesRequest"}
+	iGetNetworkRoutesResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkRoutesResponse"}
+	iGetNetworkTelemetryRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkTelemetryRequest"}
+	iGetNetworkTelemetryResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetNetworkTelemetryResponse"}
+	iGetResourcePolicyRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetResourcePolicyResponse"}
+	iGetRouteAnalysisRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetRouteAnalysisRequest"}
+	iGetRouteAnalysisResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetRouteAnalysisResponse"}
+	iGetSitesRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetSitesRequest"}
+	iGetSitesResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetSitesResponse"}
+	iGetSiteToSiteVpnAttachmentRequest                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetSiteToSiteVpnAttachmentRequest"}
+	iGetSiteToSiteVpnAttachmentResponse               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetSiteToSiteVpnAttachmentResponse"}
+	iGetTransitGatewayConnectPeerAssociationsRequest  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayConnectPeerAssociationsRequest"}
+	iGetTransitGatewayConnectPeerAssociationsResponse = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayConnectPeerAssociationsResponse"}
+	iGetTransitGatewayPeeringRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayPeeringRequest"}
+	iGetTransitGatewayPeeringResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayPeeringResponse"}
+	iGetTransitGatewayRegistrationsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayRegistrationsRequest"}
+	iGetTransitGatewayRegistrationsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayRegistrationsResponse"}
+	iGetTransitGatewayRouteTableAttachmentRequest     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayRouteTableAttachmentRequest"}
+	iGetTransitGatewayRouteTableAttachmentResponse    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetTransitGatewayRouteTableAttachmentResponse"}
+	iGetVpcAttachmentRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetVpcAttachmentRequest"}
+	iGetVpcAttachmentResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "GetVpcAttachmentResponse"}
+	iListAttachmentNatConfigurationsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentNatConfigurationsRequest"}
+	iListAttachmentNatConfigurationsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentNatConfigurationsResponse"}
+	iListAttachmentRoutingPolicyAssociationsRequest   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentRoutingPolicyAssociationsRequest"}
+	iListAttachmentRoutingPolicyAssociationsResponse  = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentRoutingPolicyAssociationsResponse"}
+	iListAttachmentsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentsRequest"}
+	iListAttachmentsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListAttachmentsResponse"}
+	iListConnectPeersRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListConnectPeersRequest"}
+	iListConnectPeersResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListConnectPeersResponse"}
+	iListCoreNetworkPolicyVersionsRequest             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkPolicyVersionsRequest"}
+	iListCoreNetworkPolicyVersionsResponse            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkPolicyVersionsResponse"}
+	iListCoreNetworkPrefixListAssociationsRequest     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkPrefixListAssociationsRequest"}
+	iListCoreNetworkPrefixListAssociationsResponse    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkPrefixListAssociationsResponse"}
+	iListCoreNetworkRoutingInformationRequest         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkRoutingInformationRequest"}
+	iListCoreNetworkRoutingInformationResponse        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworkRoutingInformationResponse"}
+	iListCoreNetworksRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworksRequest"}
+	iListCoreNetworksResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListCoreNetworksResponse"}
+	iListOrganizationServiceAccessStatusRequest       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListOrganizationServiceAccessStatusRequest"}
+	iListOrganizationServiceAccessStatusResponse      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListOrganizationServiceAccessStatusResponse"}
+	iListPeeringsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListPeeringsRequest"}
+	iListPeeringsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListPeeringsResponse"}
+	iListTagsForResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "ListTagsForResourceResponse"}
+	iPutAttachmentRoutingPolicyLabelRequest           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutAttachmentRoutingPolicyLabelRequest"}
+	iPutAttachmentRoutingPolicyLabelResponse          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutAttachmentRoutingPolicyLabelResponse"}
+	iPutCoreNetworkPolicyRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutCoreNetworkPolicyRequest"}
+	iPutCoreNetworkPolicyResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutCoreNetworkPolicyResponse"}
+	iPutResourcePolicyRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "PutResourcePolicyResponse"}
+	iRegisterTransitGatewayRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RegisterTransitGatewayRequest"}
+	iRegisterTransitGatewayResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RegisterTransitGatewayResponse"}
+	iRejectAttachmentRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RejectAttachmentRequest"}
+	iRejectAttachmentResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RejectAttachmentResponse"}
+	iRemoveAttachmentRoutingPolicyLabelRequest        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RemoveAttachmentRoutingPolicyLabelRequest"}
+	iRemoveAttachmentRoutingPolicyLabelResponse       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RemoveAttachmentRoutingPolicyLabelResponse"}
+	iRestoreCoreNetworkPolicyVersionRequest           = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RestoreCoreNetworkPolicyVersionRequest"}
+	iRestoreCoreNetworkPolicyVersionResponse          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "RestoreCoreNetworkPolicyVersionResponse"}
+	iStartOrganizationServiceAccessUpdateRequest      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "StartOrganizationServiceAccessUpdateRequest"}
+	iStartOrganizationServiceAccessUpdateResponse     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "StartOrganizationServiceAccessUpdateResponse"}
+	iStartRouteAnalysisRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "StartRouteAnalysisRequest"}
+	iStartRouteAnalysisResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "StartRouteAnalysisResponse"}
+	iTagResourceRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TagResourceRequest"}
+	iTagResourceResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "TagResourceResponse"}
+	iUntagResourceRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UntagResourceResponse"}
+	iUpdateAttachmentNatConfigurationRequest          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateAttachmentNatConfigurationRequest"}
+	iUpdateAttachmentNatConfigurationResponse         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateAttachmentNatConfigurationResponse"}
+	iUpdateConnectionRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateConnectionRequest"}
+	iUpdateConnectionResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateConnectionResponse"}
+	iUpdateCoreNetworkRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateCoreNetworkRequest"}
+	iUpdateCoreNetworkResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateCoreNetworkResponse"}
+	iUpdateDeviceRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateDeviceRequest"}
+	iUpdateDeviceResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateDeviceResponse"}
+	iUpdateDirectConnectGatewayAttachmentRequest      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateDirectConnectGatewayAttachmentRequest"}
+	iUpdateDirectConnectGatewayAttachmentResponse     = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateDirectConnectGatewayAttachmentResponse"}
+	iUpdateGlobalNetworkRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateGlobalNetworkRequest"}
+	iUpdateGlobalNetworkResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateGlobalNetworkResponse"}
+	iUpdateLinkRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateLinkRequest"}
+	iUpdateLinkResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateLinkResponse"}
+	iUpdateNetworkResourceMetadataRequest             = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateNetworkResourceMetadataRequest"}
+	iUpdateNetworkResourceMetadataResponse            = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateNetworkResourceMetadataResponse"}
+	iUpdateSiteRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateSiteRequest"}
+	iUpdateSiteResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateSiteResponse"}
+	iUpdateVpcAttachmentRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateVpcAttachmentRequest"}
+	iUpdateVpcAttachmentResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.networkmanager", Name: "UpdateVpcAttachmentResponse"}
+	pUnit                                             = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/attachments/{AttachmentId}/accept",
-	Code: 200})
-
-var AssociateConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateConnectPeer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/connect-peer-associations",
-	Code: 200})
-
-var AssociateCustomerGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateCustomerGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/customer-gateway-associations",
-	Code: 200})
-
-var AssociateLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/link-associations",
-	Code: 200})
-
-var AssociateTransitGatewayConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateTransitGatewayConnectPeer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/transit-gateway-connect-peer-associations",
-	Code: 200})
-
-var CreateConnectAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/connect-attachments",
-	Code: 200})
-
-var CreateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/connections",
-	Code: 200})
-
-var CreateConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectPeer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/connect-peers",
-	Code: 200})
-
-var CreateCoreNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateCoreNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/core-networks",
-	Code: 200})
-
-var CreateCoreNetworkPrefixListAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateCoreNetworkPrefixListAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/prefix-list",
-	Code: 200})
-
-var CreateDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/devices",
-	Code: 200})
-
-var CreateDirectConnectGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateDirectConnectGatewayAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/direct-connect-gateway-attachments",
-	Code: 200})
-
-var CreateGlobalNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateGlobalNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks",
-	Code: 200})
-
-var CreateLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/links",
-	Code: 200})
-
-var CreateSite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateSite",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/sites",
-	Code: 200})
-
-var CreateSiteToSiteVpnAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateSiteToSiteVpnAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/site-to-site-vpn-attachments",
-	Code: 200})
-
-var CreateTransitGatewayPeering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateTransitGatewayPeering",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/transit-gateway-peerings",
-	Code: 200})
-
-var CreateTransitGatewayRouteTableAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateTransitGatewayRouteTableAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/transit-gateway-route-table-attachments",
-	Code: 200})
-
-var CreateVpcAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateVpcAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/vpc-attachments",
-	Code: 200})
-
-var DeleteAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/attachments/{AttachmentId}",
-	Code: 200})
-
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/connections/{ConnectionId}",
-	Code: 200})
-
-var DeleteConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteConnectPeer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/connect-peers/{ConnectPeerId}",
-	Code: 200})
-
-var DeleteCoreNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/core-networks/{CoreNetworkId}",
-	Code: 200})
-
-var DeleteCoreNetworkPolicyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkPolicyVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-policy-versions/{PolicyVersionId}",
-	Code: 200})
-
-var DeleteCoreNetworkPrefixListAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkPrefixListAssociation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/prefix-list/{PrefixListArn}/core-network/{CoreNetworkId}",
-	Code: 200})
-
-var DeleteDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/devices/{DeviceId}",
-	Code: 200})
-
-var DeleteGlobalNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteGlobalNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}",
-	Code: 200})
-
-var DeleteLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/links/{LinkId}",
-	Code: 200})
-
-var DeletePeering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeletePeering",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/peerings/{PeeringId}",
-	Code: 200})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/resource-policy/{ResourceArn}",
-	Code: 200})
-
-var DeleteSite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteSite",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/sites/{SiteId}",
-	Code: 200})
-
-var DeregisterTransitGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeregisterTransitGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/transit-gateway-registrations/{TransitGatewayArn}",
-	Code: 200})
-
-var DescribeGlobalNetworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DescribeGlobalNetworks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks",
-	Code: 200})
-
-var DisassociateConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateConnectPeer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/connect-peer-associations/{ConnectPeerId}",
-	Code: 200})
-
-var DisassociateCustomerGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateCustomerGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/customer-gateway-associations/{CustomerGatewayArn}",
-	Code: 200})
-
-var DisassociateLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/link-associations",
-	Code: 200})
-
-var DisassociateTransitGatewayConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateTransitGatewayConnectPeer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/global-networks/{GlobalNetworkId}/transit-gateway-connect-peer-associations/{TransitGatewayConnectPeerArn}",
-	Code: 200})
-
-var ExecuteCoreNetworkChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExecuteCoreNetworkChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-change-sets/{PolicyVersionId}/execute",
-	Code: 200})
-
-var GetConnectAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/connect-attachments/{AttachmentId}",
-	Code: 200})
-
-var GetConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnections",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/connections",
-	Code: 200})
-
-var GetConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectPeer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/connect-peers/{ConnectPeerId}",
-	Code: 200})
-
-var GetConnectPeerAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectPeerAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/connect-peer-associations",
-	Code: 200})
-
-var GetCoreNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/core-networks/{CoreNetworkId}",
-	Code: 200})
-
-var GetCoreNetworkChangeEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkChangeEvents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-change-events/{PolicyVersionId}",
-	Code: 200})
-
-var GetCoreNetworkChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-change-sets/{PolicyVersionId}",
-	Code: 200})
-
-var GetCoreNetworkPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-policy",
-	Code: 200})
-
-var GetCustomerGatewayAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCustomerGatewayAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/customer-gateway-associations",
-	Code: 200})
-
-var GetDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetDevices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/devices",
-	Code: 200})
-
-var GetDirectConnectGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetDirectConnectGatewayAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/direct-connect-gateway-attachments/{AttachmentId}",
-	Code: 200})
-
-var GetLinkAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetLinkAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/link-associations",
-	Code: 200})
-
-var GetLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetLinks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/links",
-	Code: 200})
-
-var GetNetworkResourceCounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourceCounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/network-resource-count",
-	Code: 200})
-
-var GetNetworkResourceRelationships = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourceRelationships",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/network-resource-relationships",
-	Code: 200})
-
-var GetNetworkResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/network-resources",
-	Code: 200})
-
-var GetNetworkRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkRoutes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/network-routes",
-	Code: 200})
-
-var GetNetworkTelemetry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkTelemetry",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/network-telemetry",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/resource-policy/{ResourceArn}",
-	Code: 200})
-
-var GetRouteAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetRouteAnalysis",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/route-analyses/{RouteAnalysisId}",
-	Code: 200})
-
-var GetSites = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetSites",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/sites",
-	Code: 200})
-
-var GetSiteToSiteVpnAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetSiteToSiteVpnAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/site-to-site-vpn-attachments/{AttachmentId}",
-	Code: 200})
-
-var GetTransitGatewayConnectPeerAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayConnectPeerAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/transit-gateway-connect-peer-associations",
-	Code: 200})
-
-var GetTransitGatewayPeering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayPeering",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/transit-gateway-peerings/{PeeringId}",
-	Code: 200})
-
-var GetTransitGatewayRegistrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayRegistrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/global-networks/{GlobalNetworkId}/transit-gateway-registrations",
-	Code: 200})
-
-var GetTransitGatewayRouteTableAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayRouteTableAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/transit-gateway-route-table-attachments/{AttachmentId}",
-	Code: 200})
-
-var GetVpcAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetVpcAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/vpc-attachments/{AttachmentId}",
-	Code: 200})
-
-var ListAttachmentNatConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentNatConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/nat-configurations",
-	Code: 200})
-
-var ListAttachmentRoutingPolicyAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentRoutingPolicyAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/routing-policy-label/core-network/{CoreNetworkId}",
-	Code: 200})
-
-var ListAttachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/attachments",
-	Code: 200})
-
-var ListConnectPeers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListConnectPeers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/connect-peers",
-	Code: 200})
-
-var ListCoreNetworkPolicyVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkPolicyVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-policy-versions",
-	Code: 200})
-
-var ListCoreNetworkPrefixListAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkPrefixListAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/prefix-list/core-network/{CoreNetworkId}",
-	Code: 200})
-
-var ListCoreNetworkRoutingInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkRoutingInformation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-routing-information",
-	Code: 200})
-
-var ListCoreNetworks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/core-networks",
-	Code: 200})
-
-var ListOrganizationServiceAccessStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListOrganizationServiceAccessStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/organizations/service-access",
-	Code: 200})
-
-var ListPeerings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListPeerings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/peerings",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PutAttachmentRoutingPolicyLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutAttachmentRoutingPolicyLabel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/routing-policy-label",
-	Code: 200})
-
-var PutCoreNetworkPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutCoreNetworkPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-policy",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/resource-policy/{ResourceArn}",
-	Code: 200})
-
-var RegisterTransitGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RegisterTransitGateway",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/transit-gateway-registrations",
-	Code: 200})
-
-var RejectAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RejectAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/attachments/{AttachmentId}/reject",
-	Code: 200})
-
-var RemoveAttachmentRoutingPolicyLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RemoveAttachmentRoutingPolicyLabel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/routing-policy-label/core-network/{CoreNetworkId}/attachment/{AttachmentId}",
-	Code: 200})
-
-var RestoreCoreNetworkPolicyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RestoreCoreNetworkPolicyVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/core-networks/{CoreNetworkId}/core-network-policy-versions/{PolicyVersionId}/restore",
-	Code: 200})
-
-var StartOrganizationServiceAccessUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "StartOrganizationServiceAccessUpdate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/organizations/service-access",
-	Code: 200})
-
-var StartRouteAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "StartRouteAnalysis",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/global-networks/{GlobalNetworkId}/route-analyses",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateAttachmentNatConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateAttachmentNatConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/attachments/{AttachmentId}/nat-configuration",
-	Code: 200})
-
-var UpdateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateConnection",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/global-networks/{GlobalNetworkId}/connections/{ConnectionId}",
-	Code: 200})
-
-var UpdateCoreNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateCoreNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/core-networks/{CoreNetworkId}",
-	Code: 200})
-
-var UpdateDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/global-networks/{GlobalNetworkId}/devices/{DeviceId}",
-	Code: 200})
-
-var UpdateDirectConnectGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateDirectConnectGatewayAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/direct-connect-gateway-attachments/{AttachmentId}",
-	Code: 200})
-
-var UpdateGlobalNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateGlobalNetwork",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/global-networks/{GlobalNetworkId}",
-	Code: 200})
-
-var UpdateLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/global-networks/{GlobalNetworkId}/links/{LinkId}",
-	Code: 200})
-
-var UpdateNetworkResourceMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateNetworkResourceMetadata",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/global-networks/{GlobalNetworkId}/network-resources/{ResourceArn}/metadata",
-	Code: 200})
-
-var UpdateSite = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateSite",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/global-networks/{GlobalNetworkId}/sites/{SiteId}",
-	Code: 200})
-
-var UpdateVpcAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateVpcAttachment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/vpc-attachments/{AttachmentId}",
-	Code: 200})
-
-var _NetworkManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkManager",
-}, smithy.ShapeTypeService, 0)
-
-var NetworkManager = smithy.NewServiceSchema(_NetworkManager, "2019-07-05")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var AccountStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AccountStatus",
-}, smithy.ShapeTypeStructure, 2)
-var AccountStatus_AccountId *smithy.Schema
-
-var AccountStatus_SLRDeploymentStatus *smithy.Schema
-
-var _AccountStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AccountStatusList",
-}, smithy.ShapeTypeList, 1)
-var _AccountStatusList_member *smithy.Schema
-
-var _Action = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Action",
-}, smithy.ShapeTypeString, 0)
-
-var Attachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Attachment",
-}, smithy.ShapeTypeStructure, 20)
-var Attachment_CoreNetworkId *smithy.Schema
-
-var Attachment_CoreNetworkArn *smithy.Schema
-
-var Attachment_AttachmentId *smithy.Schema
-
-var Attachment_OwnerAccountId *smithy.Schema
-
-var Attachment_AttachmentType *smithy.Schema
-
-var Attachment_State *smithy.Schema
-
-var Attachment_EdgeLocation *smithy.Schema
-
-var Attachment_EdgeLocations *smithy.Schema
-
-var Attachment_ResourceArn *smithy.Schema
-
-var Attachment_AttachmentPolicyRuleNumber *smithy.Schema
-
-var Attachment_SegmentName *smithy.Schema
-
-var Attachment_NetworkFunctionGroupName *smithy.Schema
-
-var Attachment_NatGatewaySupport *smithy.Schema
-
-var Attachment_NatSystemRouteSupport *smithy.Schema
-
-var Attachment_Tags *smithy.Schema
-
-var Attachment_ProposedSegmentChange *smithy.Schema
-
-var Attachment_ProposedNetworkFunctionGroupChange *smithy.Schema
-
-var Attachment_CreatedAt *smithy.Schema
-
-var Attachment_UpdatedAt *smithy.Schema
-
-var Attachment_LastModificationErrors *smithy.Schema
-
-var AttachmentError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentError",
-}, smithy.ShapeTypeStructure, 4)
-var AttachmentError_Code *smithy.Schema
-
-var AttachmentError_Message *smithy.Schema
-
-var AttachmentError_ResourceArn *smithy.Schema
-
-var AttachmentError_RequestId *smithy.Schema
-
-var AttachmentErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentErrorCode",
-}, smithy.ShapeTypeEnum, 19)
-var AttachmentErrorCode_VPC_NOT_FOUND *smithy.Schema
-
-var AttachmentErrorCode_SUBNET_NOT_FOUND *smithy.Schema
-
-var AttachmentErrorCode_SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE *smithy.Schema
-
-var AttachmentErrorCode_SUBNET_NO_FREE_ADDRESSES *smithy.Schema
-
-var AttachmentErrorCode_SUBNET_UNSUPPORTED_AVAILABILITY_ZONE *smithy.Schema
-
-var AttachmentErrorCode_SUBNET_NO_IPV6_CIDRS *smithy.Schema
-
-var AttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE *smithy.Schema
-
-var AttachmentErrorCode_VPN_CONNECTION_NOT_FOUND *smithy.Schema
-
-var AttachmentErrorCode_MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED *smithy.Schema
-
-var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NOT_FOUND *smithy.Schema
-
-var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS *smithy.Schema
-
-var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF *smithy.Schema
-
-var AttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS *smithy.Schema
-
-var AttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED *smithy.Schema
-
-var AttachmentErrorCode_VPC_UNSUPPORTED_FEATURES *smithy.Schema
-
-var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS *smithy.Schema
-
-var AttachmentErrorCode_CREATION_FAILED *smithy.Schema
-
-var AttachmentErrorCode_UPDATE_FAILED *smithy.Schema
-
-var AttachmentErrorCode_DELETION_FAILED *smithy.Schema
-
-var _AttachmentErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentErrorList",
-}, smithy.ShapeTypeList, 1)
-var _AttachmentErrorList_member *smithy.Schema
-
-var _AttachmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _AttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _AttachmentList_member *smithy.Schema
-
-var AttachmentNatConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentNatConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var AttachmentNatConfiguration_AttachmentId *smithy.Schema
-
-var AttachmentNatConfiguration_NatGatewaySupport *smithy.Schema
-
-var AttachmentNatConfiguration_NatSystemRouteSupport *smithy.Schema
-
-var AttachmentNatConfiguration_NatGatewayRules *smithy.Schema
-
-var _AttachmentNatConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentNatConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _AttachmentNatConfigurationList_member *smithy.Schema
-
-var _AttachmentRoutingPolicyAssociationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentRoutingPolicyAssociationsList",
-}, smithy.ShapeTypeList, 1)
-var _AttachmentRoutingPolicyAssociationsList_member *smithy.Schema
-
-var AttachmentRoutingPolicyAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentRoutingPolicyAssociationSummary",
-}, smithy.ShapeTypeStructure, 4)
-var AttachmentRoutingPolicyAssociationSummary_AttachmentId *smithy.Schema
-
-var AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies *smithy.Schema
-
-var AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies *smithy.Schema
-
-var AttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel *smithy.Schema
-
-var AttachmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentState",
-}, smithy.ShapeTypeEnum, 9)
-var AttachmentState_REJECTED *smithy.Schema
-
-var AttachmentState_PENDING_ATTACHMENT_ACCEPTANCE *smithy.Schema
-
-var AttachmentState_CREATING *smithy.Schema
-
-var AttachmentState_FAILED *smithy.Schema
-
-var AttachmentState_AVAILABLE *smithy.Schema
-
-var AttachmentState_UPDATING *smithy.Schema
-
-var AttachmentState_PENDING_NETWORK_UPDATE *smithy.Schema
-
-var AttachmentState_PENDING_TAG_ACCEPTANCE *smithy.Schema
-
-var AttachmentState_DELETING *smithy.Schema
-
-var AttachmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AttachmentType",
-}, smithy.ShapeTypeEnum, 5)
-var AttachmentType_CONNECT *smithy.Schema
-
-var AttachmentType_SITE_TO_SITE_VPN *smithy.Schema
-
-var AttachmentType_VPC *smithy.Schema
-
-var AttachmentType_DIRECT_CONNECT_GATEWAY *smithy.Schema
-
-var AttachmentType_TRANSIT_GATEWAY_ROUTE_TABLE *smithy.Schema
-
-var _AWSAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AWSAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var AWSLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AWSLocation",
-}, smithy.ShapeTypeStructure, 2)
-var AWSLocation_Zone *smithy.Schema
-
-var AWSLocation_SubnetArn *smithy.Schema
-
-var Bandwidth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Bandwidth",
-}, smithy.ShapeTypeStructure, 2)
-var Bandwidth_UploadSpeed *smithy.Schema
-
-var Bandwidth_DownloadSpeed *smithy.Schema
-
-var BgpOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "BgpOptions",
-}, smithy.ShapeTypeStructure, 1)
-var BgpOptions_PeerAsn *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BoxedBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "BoxedBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ChangeAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ChangeAction",
-}, smithy.ShapeTypeEnum, 3)
-var ChangeAction_ADD *smithy.Schema
-
-var ChangeAction_MODIFY *smithy.Schema
-
-var ChangeAction_REMOVE *smithy.Schema
-
-var ChangeSetState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ChangeSetState",
-}, smithy.ShapeTypeEnum, 6)
-var ChangeSetState_PENDING_GENERATION *smithy.Schema
-
-var ChangeSetState_FAILED_GENERATION *smithy.Schema
-
-var ChangeSetState_READY_TO_EXECUTE *smithy.Schema
-
-var ChangeSetState_EXECUTING *smithy.Schema
-
-var ChangeSetState_EXECUTION_SUCCEEDED *smithy.Schema
-
-var ChangeSetState_OUT_OF_DATE *smithy.Schema
-
-var ChangeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ChangeStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ChangeStatus_NOT_STARTED *smithy.Schema
-
-var ChangeStatus_IN_PROGRESS *smithy.Schema
-
-var ChangeStatus_COMPLETE *smithy.Schema
-
-var ChangeStatus_FAILED *smithy.Schema
-
-var ChangeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ChangeType",
-}, smithy.ShapeTypeEnum, 14)
-var ChangeType_CORE_NETWORK_SEGMENT *smithy.Schema
-
-var ChangeType_NETWORK_FUNCTION_GROUP *smithy.Schema
-
-var ChangeType_CORE_NETWORK_EDGE *smithy.Schema
-
-var ChangeType_ATTACHMENT_MAPPING *smithy.Schema
-
-var ChangeType_ATTACHMENT_ROUTE_PROPAGATION *smithy.Schema
-
-var ChangeType_ATTACHMENT_ROUTE_STATIC *smithy.Schema
-
-var ChangeType_ROUTING_POLICY *smithy.Schema
-
-var ChangeType_ROUTING_POLICY_SEGMENT_ASSOCIATION *smithy.Schema
-
-var ChangeType_ROUTING_POLICY_EDGE_ASSOCIATION *smithy.Schema
-
-var ChangeType_ROUTING_POLICY_ATTACHMENT_ASSOCIATION *smithy.Schema
-
-var ChangeType_CORE_NETWORK_CONFIGURATION *smithy.Schema
-
-var ChangeType_SEGMENTS_CONFIGURATION *smithy.Schema
-
-var ChangeType_SEGMENT_ACTIONS_CONFIGURATION *smithy.Schema
-
-var ChangeType_ATTACHMENT_POLICIES_CONFIGURATION *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ResourceId *smithy.Schema
-
-var ConflictException_ResourceType *smithy.Schema
-
-var ConnectAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectAttachment",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectAttachment_Attachment *smithy.Schema
-
-var ConnectAttachment_TransportAttachmentId *smithy.Schema
-
-var ConnectAttachment_Options *smithy.Schema
-
-var ConnectAttachmentOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectAttachmentOptions",
-}, smithy.ShapeTypeStructure, 1)
-var ConnectAttachmentOptions_Protocol *smithy.Schema
-
-var Connection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Connection",
-}, smithy.ShapeTypeStructure, 11)
-var Connection_ConnectionId *smithy.Schema
-
-var Connection_ConnectionArn *smithy.Schema
-
-var Connection_GlobalNetworkId *smithy.Schema
-
-var Connection_DeviceId *smithy.Schema
-
-var Connection_ConnectedDeviceId *smithy.Schema
-
-var Connection_LinkId *smithy.Schema
-
-var Connection_ConnectedLinkId *smithy.Schema
-
-var Connection_Description *smithy.Schema
-
-var Connection_CreatedAt *smithy.Schema
-
-var Connection_State *smithy.Schema
-
-var Connection_Tags *smithy.Schema
-
-var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionHealth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionHealth",
-}, smithy.ShapeTypeStructure, 3)
-var ConnectionHealth_Type *smithy.Schema
-
-var ConnectionHealth_Status *smithy.Schema
-
-var ConnectionHealth_Timestamp *smithy.Schema
-
-var _ConnectionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionIdList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionIdList_member *smithy.Schema
-
-var _ConnectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionList_member *smithy.Schema
-
-var ConnectionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionState",
-}, smithy.ShapeTypeEnum, 4)
-var ConnectionState_pending *smithy.Schema
-
-var ConnectionState_available *smithy.Schema
-
-var ConnectionState_deleting *smithy.Schema
-
-var ConnectionState_updating *smithy.Schema
-
-var ConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectionStatus_UP *smithy.Schema
-
-var ConnectionStatus_DOWN *smithy.Schema
-
-var ConnectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectionType",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectionType_BGP *smithy.Schema
-
-var ConnectionType_IPSEC *smithy.Schema
-
-var ConnectPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeer",
-}, smithy.ShapeTypeStructure, 10)
-var ConnectPeer_CoreNetworkId *smithy.Schema
-
-var ConnectPeer_ConnectAttachmentId *smithy.Schema
-
-var ConnectPeer_ConnectPeerId *smithy.Schema
-
-var ConnectPeer_EdgeLocation *smithy.Schema
-
-var ConnectPeer_State *smithy.Schema
-
-var ConnectPeer_CreatedAt *smithy.Schema
-
-var ConnectPeer_Configuration *smithy.Schema
-
-var ConnectPeer_Tags *smithy.Schema
-
-var ConnectPeer_SubnetArn *smithy.Schema
-
-var ConnectPeer_LastModificationErrors *smithy.Schema
-
-var ConnectPeerAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerAssociation",
-}, smithy.ShapeTypeStructure, 5)
-var ConnectPeerAssociation_ConnectPeerId *smithy.Schema
-
-var ConnectPeerAssociation_GlobalNetworkId *smithy.Schema
-
-var ConnectPeerAssociation_DeviceId *smithy.Schema
-
-var ConnectPeerAssociation_LinkId *smithy.Schema
-
-var ConnectPeerAssociation_State *smithy.Schema
-
-var _ConnectPeerAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectPeerAssociationList_member *smithy.Schema
-
-var ConnectPeerAssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerAssociationState",
-}, smithy.ShapeTypeEnum, 4)
-var ConnectPeerAssociationState_pending *smithy.Schema
-
-var ConnectPeerAssociationState_available *smithy.Schema
-
-var ConnectPeerAssociationState_deleting *smithy.Schema
-
-var ConnectPeerAssociationState_deleted *smithy.Schema
-
-var ConnectPeerBgpConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerBgpConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ConnectPeerBgpConfiguration_CoreNetworkAsn *smithy.Schema
-
-var ConnectPeerBgpConfiguration_PeerAsn *smithy.Schema
-
-var ConnectPeerBgpConfiguration_CoreNetworkAddress *smithy.Schema
-
-var ConnectPeerBgpConfiguration_PeerAddress *smithy.Schema
-
-var _ConnectPeerBgpConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerBgpConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectPeerBgpConfigurationList_member *smithy.Schema
-
-var ConnectPeerConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var ConnectPeerConfiguration_CoreNetworkAddress *smithy.Schema
-
-var ConnectPeerConfiguration_PeerAddress *smithy.Schema
-
-var ConnectPeerConfiguration_InsideCidrBlocks *smithy.Schema
-
-var ConnectPeerConfiguration_Protocol *smithy.Schema
-
-var ConnectPeerConfiguration_BgpConfigurations *smithy.Schema
-
-var ConnectPeerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerError",
-}, smithy.ShapeTypeStructure, 4)
-var ConnectPeerError_Code *smithy.Schema
-
-var ConnectPeerError_Message *smithy.Schema
-
-var ConnectPeerError_ResourceArn *smithy.Schema
-
-var ConnectPeerError_RequestId *smithy.Schema
-
-var ConnectPeerErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerErrorCode",
-}, smithy.ShapeTypeEnum, 8)
-var ConnectPeerErrorCode_EDGE_LOCATION_NO_FREE_IPS *smithy.Schema
-
-var ConnectPeerErrorCode_EDGE_LOCATION_PEER_DUPLICATE *smithy.Schema
-
-var ConnectPeerErrorCode_SUBNET_NOT_FOUND *smithy.Schema
-
-var ConnectPeerErrorCode_IP_OUTSIDE_SUBNET_CIDR_RANGE *smithy.Schema
-
-var ConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK *smithy.Schema
-
-var ConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK *smithy.Schema
-
-var ConnectPeerErrorCode_CREATION_FAILED *smithy.Schema
-
-var ConnectPeerErrorCode_DELETION_FAILED *smithy.Schema
-
-var _ConnectPeerErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerErrorList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectPeerErrorList_member *smithy.Schema
-
-var _ConnectPeerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerId",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectPeerIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerIdList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectPeerIdList_member *smithy.Schema
-
-var ConnectPeerState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerState",
-}, smithy.ShapeTypeEnum, 4)
-var ConnectPeerState_CREATING *smithy.Schema
-
-var ConnectPeerState_FAILED *smithy.Schema
-
-var ConnectPeerState_AVAILABLE *smithy.Schema
-
-var ConnectPeerState_DELETING *smithy.Schema
-
-var ConnectPeerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ConnectPeerSummary_CoreNetworkId *smithy.Schema
-
-var ConnectPeerSummary_ConnectAttachmentId *smithy.Schema
-
-var ConnectPeerSummary_ConnectPeerId *smithy.Schema
-
-var ConnectPeerSummary_EdgeLocation *smithy.Schema
-
-var ConnectPeerSummary_ConnectPeerState *smithy.Schema
-
-var ConnectPeerSummary_CreatedAt *smithy.Schema
-
-var ConnectPeerSummary_Tags *smithy.Schema
-
-var ConnectPeerSummary_SubnetArn *smithy.Schema
-
-var _ConnectPeerSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConnectPeerSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectPeerSummaryList_member *smithy.Schema
-
-var _ConstrainedString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConstrainedString",
-}, smithy.ShapeTypeString, 0)
-
-var _ConstrainedStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ConstrainedStringList",
-}, smithy.ShapeTypeList, 1)
-var _ConstrainedStringList_member *smithy.Schema
-
-var CoreNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetwork",
-}, smithy.ShapeTypeStructure, 10)
-var CoreNetwork_GlobalNetworkId *smithy.Schema
-
-var CoreNetwork_CoreNetworkId *smithy.Schema
-
-var CoreNetwork_CoreNetworkArn *smithy.Schema
-
-var CoreNetwork_Description *smithy.Schema
-
-var CoreNetwork_CreatedAt *smithy.Schema
-
-var CoreNetwork_State *smithy.Schema
-
-var CoreNetwork_Segments *smithy.Schema
-
-var CoreNetwork_NetworkFunctionGroups *smithy.Schema
-
-var CoreNetwork_Edges *smithy.Schema
-
-var CoreNetwork_Tags *smithy.Schema
-
-var _CoreNetworkArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkArn",
-}, smithy.ShapeTypeString, 0)
-
-var CoreNetworkChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkChange",
-}, smithy.ShapeTypeStructure, 6)
-var CoreNetworkChange_Type *smithy.Schema
-
-var CoreNetworkChange_Action *smithy.Schema
-
-var CoreNetworkChange_Identifier *smithy.Schema
-
-var CoreNetworkChange_PreviousValues *smithy.Schema
-
-var CoreNetworkChange_NewValues *smithy.Schema
-
-var CoreNetworkChange_IdentifierPath *smithy.Schema
-
-var CoreNetworkChangeEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkChangeEvent",
-}, smithy.ShapeTypeStructure, 6)
-var CoreNetworkChangeEvent_Type *smithy.Schema
-
-var CoreNetworkChangeEvent_Action *smithy.Schema
-
-var CoreNetworkChangeEvent_IdentifierPath *smithy.Schema
-
-var CoreNetworkChangeEvent_EventTime *smithy.Schema
-
-var CoreNetworkChangeEvent_Status *smithy.Schema
-
-var CoreNetworkChangeEvent_Values *smithy.Schema
-
-var _CoreNetworkChangeEventList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkChangeEventList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkChangeEventList_member *smithy.Schema
-
-var CoreNetworkChangeEventValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkChangeEventValues",
-}, smithy.ShapeTypeStructure, 8)
-var CoreNetworkChangeEventValues_EdgeLocation *smithy.Schema
-
-var CoreNetworkChangeEventValues_PeerEdgeLocation *smithy.Schema
-
-var CoreNetworkChangeEventValues_RoutingPolicyDirection *smithy.Schema
-
-var CoreNetworkChangeEventValues_SegmentName *smithy.Schema
-
-var CoreNetworkChangeEventValues_NetworkFunctionGroupName *smithy.Schema
-
-var CoreNetworkChangeEventValues_AttachmentId *smithy.Schema
-
-var CoreNetworkChangeEventValues_Cidr *smithy.Schema
-
-var CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails *smithy.Schema
-
-var _CoreNetworkChangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkChangeList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkChangeList_member *smithy.Schema
-
-var CoreNetworkChangeValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkChangeValues",
-}, smithy.ShapeTypeStructure, 17)
-var CoreNetworkChangeValues_SegmentName *smithy.Schema
-
-var CoreNetworkChangeValues_NetworkFunctionGroupName *smithy.Schema
-
-var CoreNetworkChangeValues_EdgeLocations *smithy.Schema
-
-var CoreNetworkChangeValues_Asn *smithy.Schema
-
-var CoreNetworkChangeValues_Cidr *smithy.Schema
-
-var CoreNetworkChangeValues_DestinationIdentifier *smithy.Schema
-
-var CoreNetworkChangeValues_InsideCidrBlocks *smithy.Schema
-
-var CoreNetworkChangeValues_SharedSegments *smithy.Schema
-
-var CoreNetworkChangeValues_ServiceInsertionActions *smithy.Schema
-
-var CoreNetworkChangeValues_VpnEcmpSupport *smithy.Schema
-
-var CoreNetworkChangeValues_DnsSupport *smithy.Schema
-
-var CoreNetworkChangeValues_SecurityGroupReferencingSupport *smithy.Schema
-
-var CoreNetworkChangeValues_RoutingPolicyDirection *smithy.Schema
-
-var CoreNetworkChangeValues_RoutingPolicy *smithy.Schema
-
-var CoreNetworkChangeValues_PeerEdgeLocations *smithy.Schema
-
-var CoreNetworkChangeValues_AttachmentId *smithy.Schema
-
-var CoreNetworkChangeValues_RoutingPolicyAssociationDetails *smithy.Schema
-
-var CoreNetworkEdge = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkEdge",
-}, smithy.ShapeTypeStructure, 3)
-var CoreNetworkEdge_EdgeLocation *smithy.Schema
-
-var CoreNetworkEdge_Asn *smithy.Schema
-
-var CoreNetworkEdge_InsideCidrBlocks *smithy.Schema
-
-var _CoreNetworkEdgeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkEdgeList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkEdgeList_member *smithy.Schema
-
-var _CoreNetworkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkId",
-}, smithy.ShapeTypeString, 0)
-
-var CoreNetworkNetworkFunctionGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkNetworkFunctionGroup",
-}, smithy.ShapeTypeStructure, 3)
-var CoreNetworkNetworkFunctionGroup_Name *smithy.Schema
-
-var CoreNetworkNetworkFunctionGroup_EdgeLocations *smithy.Schema
-
-var CoreNetworkNetworkFunctionGroup_Segments *smithy.Schema
-
-var CoreNetworkNetworkFunctionGroupIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkNetworkFunctionGroupIdentifier",
-}, smithy.ShapeTypeStructure, 3)
-var CoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId *smithy.Schema
-
-var CoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName *smithy.Schema
-
-var CoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation *smithy.Schema
-
-var _CoreNetworkNetworkFunctionGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkNetworkFunctionGroupList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkNetworkFunctionGroupList_member *smithy.Schema
-
-var CoreNetworkPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicy",
-}, smithy.ShapeTypeStructure, 8)
-var CoreNetworkPolicy_CoreNetworkId *smithy.Schema
-
-var CoreNetworkPolicy_PolicyVersionId *smithy.Schema
-
-var CoreNetworkPolicy_Alias *smithy.Schema
-
-var CoreNetworkPolicy_Description *smithy.Schema
-
-var CoreNetworkPolicy_CreatedAt *smithy.Schema
-
-var CoreNetworkPolicy_ChangeSetState *smithy.Schema
-
-var CoreNetworkPolicy_PolicyErrors *smithy.Schema
-
-var CoreNetworkPolicy_PolicyDocument *smithy.Schema
-
-var CoreNetworkPolicyAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicyAlias",
-}, smithy.ShapeTypeEnum, 2)
-var CoreNetworkPolicyAlias_LIVE *smithy.Schema
-
-var CoreNetworkPolicyAlias_LATEST *smithy.Schema
-
-var _CoreNetworkPolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var CoreNetworkPolicyError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicyError",
-}, smithy.ShapeTypeStructure, 3)
-var CoreNetworkPolicyError_ErrorCode *smithy.Schema
-
-var CoreNetworkPolicyError_Message *smithy.Schema
-
-var CoreNetworkPolicyError_Path *smithy.Schema
-
-var _CoreNetworkPolicyErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicyErrorList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkPolicyErrorList_member *smithy.Schema
-
-var CoreNetworkPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicyException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var CoreNetworkPolicyException_Message *smithy.Schema
-
-var CoreNetworkPolicyException_Errors *smithy.Schema
-
-var CoreNetworkPolicyVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicyVersion",
-}, smithy.ShapeTypeStructure, 6)
-var CoreNetworkPolicyVersion_CoreNetworkId *smithy.Schema
-
-var CoreNetworkPolicyVersion_PolicyVersionId *smithy.Schema
-
-var CoreNetworkPolicyVersion_Alias *smithy.Schema
-
-var CoreNetworkPolicyVersion_Description *smithy.Schema
-
-var CoreNetworkPolicyVersion_CreatedAt *smithy.Schema
-
-var CoreNetworkPolicyVersion_ChangeSetState *smithy.Schema
-
-var _CoreNetworkPolicyVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkPolicyVersionList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkPolicyVersionList_member *smithy.Schema
-
-var CoreNetworkRoutingInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkRoutingInformation",
-}, smithy.ShapeTypeStructure, 6)
-var CoreNetworkRoutingInformation_Prefix *smithy.Schema
-
-var CoreNetworkRoutingInformation_NextHop *smithy.Schema
-
-var CoreNetworkRoutingInformation_LocalPreference *smithy.Schema
-
-var CoreNetworkRoutingInformation_Med *smithy.Schema
-
-var CoreNetworkRoutingInformation_AsPath *smithy.Schema
-
-var CoreNetworkRoutingInformation_Communities *smithy.Schema
-
-var _CoreNetworkRoutingInformationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkRoutingInformationList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkRoutingInformationList_member *smithy.Schema
-
-var CoreNetworkSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkSegment",
-}, smithy.ShapeTypeStructure, 3)
-var CoreNetworkSegment_Name *smithy.Schema
-
-var CoreNetworkSegment_EdgeLocations *smithy.Schema
-
-var CoreNetworkSegment_SharedSegments *smithy.Schema
-
-var CoreNetworkSegmentEdgeIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkSegmentEdgeIdentifier",
-}, smithy.ShapeTypeStructure, 3)
-var CoreNetworkSegmentEdgeIdentifier_CoreNetworkId *smithy.Schema
-
-var CoreNetworkSegmentEdgeIdentifier_SegmentName *smithy.Schema
-
-var CoreNetworkSegmentEdgeIdentifier_EdgeLocation *smithy.Schema
-
-var _CoreNetworkSegmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkSegmentList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkSegmentList_member *smithy.Schema
-
-var CoreNetworkState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkState",
-}, smithy.ShapeTypeEnum, 4)
-var CoreNetworkState_CREATING *smithy.Schema
-
-var CoreNetworkState_UPDATING *smithy.Schema
-
-var CoreNetworkState_AVAILABLE *smithy.Schema
-
-var CoreNetworkState_DELETING *smithy.Schema
-
-var CoreNetworkSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkSummary",
-}, smithy.ShapeTypeStructure, 7)
-var CoreNetworkSummary_CoreNetworkId *smithy.Schema
-
-var CoreNetworkSummary_CoreNetworkArn *smithy.Schema
-
-var CoreNetworkSummary_GlobalNetworkId *smithy.Schema
-
-var CoreNetworkSummary_OwnerAccountId *smithy.Schema
-
-var CoreNetworkSummary_State *smithy.Schema
-
-var CoreNetworkSummary_Description *smithy.Schema
-
-var CoreNetworkSummary_Tags *smithy.Schema
-
-var _CoreNetworkSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CoreNetworkSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _CoreNetworkSummaryList_member *smithy.Schema
-
-var _CustomerGatewayArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CustomerGatewayArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerGatewayArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CustomerGatewayArnList",
-}, smithy.ShapeTypeList, 1)
-var _CustomerGatewayArnList_member *smithy.Schema
-
-var CustomerGatewayAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CustomerGatewayAssociation",
-}, smithy.ShapeTypeStructure, 5)
-var CustomerGatewayAssociation_CustomerGatewayArn *smithy.Schema
-
-var CustomerGatewayAssociation_GlobalNetworkId *smithy.Schema
-
-var CustomerGatewayAssociation_DeviceId *smithy.Schema
-
-var CustomerGatewayAssociation_LinkId *smithy.Schema
-
-var CustomerGatewayAssociation_State *smithy.Schema
-
-var _CustomerGatewayAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CustomerGatewayAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _CustomerGatewayAssociationList_member *smithy.Schema
-
-var CustomerGatewayAssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CustomerGatewayAssociationState",
-}, smithy.ShapeTypeEnum, 4)
-var CustomerGatewayAssociationState_pending *smithy.Schema
-
-var CustomerGatewayAssociationState_available *smithy.Schema
-
-var CustomerGatewayAssociationState_deleting *smithy.Schema
-
-var CustomerGatewayAssociationState_deleted *smithy.Schema
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Device = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Device",
-}, smithy.ShapeTypeStructure, 14)
-var Device_DeviceId *smithy.Schema
-
-var Device_DeviceArn *smithy.Schema
-
-var Device_GlobalNetworkId *smithy.Schema
-
-var Device_AWSLocation *smithy.Schema
-
-var Device_Description *smithy.Schema
-
-var Device_Type *smithy.Schema
-
-var Device_Vendor *smithy.Schema
-
-var Device_Model *smithy.Schema
-
-var Device_SerialNumber *smithy.Schema
-
-var Device_Location *smithy.Schema
-
-var Device_SiteId *smithy.Schema
-
-var Device_CreatedAt *smithy.Schema
-
-var Device_State *smithy.Schema
-
-var Device_Tags *smithy.Schema
-
-var _DeviceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeviceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeviceId",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeviceIdList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceIdList_member *smithy.Schema
-
-var _DeviceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeviceList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceList_member *smithy.Schema
-
-var DeviceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeviceState",
-}, smithy.ShapeTypeEnum, 4)
-var DeviceState_pending *smithy.Schema
-
-var DeviceState_available *smithy.Schema
-
-var DeviceState_deleting *smithy.Schema
-
-var DeviceState_updating *smithy.Schema
-
-var _DirectConnectGatewayArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DirectConnectGatewayArn",
-}, smithy.ShapeTypeString, 0)
-
-var DirectConnectGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DirectConnectGatewayAttachment",
-}, smithy.ShapeTypeStructure, 2)
-var DirectConnectGatewayAttachment_Attachment *smithy.Schema
-
-var DirectConnectGatewayAttachment_DirectConnectGatewayArn *smithy.Schema
-
-var EdgeOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "EdgeOverride",
-}, smithy.ShapeTypeStructure, 2)
-var EdgeOverride_EdgeSets *smithy.Schema
-
-var EdgeOverride_UseEdge *smithy.Schema
-
-var _EdgeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "EdgeSet",
-}, smithy.ShapeTypeList, 1)
-var _EdgeSet_member *smithy.Schema
-
-var _EdgeSetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "EdgeSetList",
-}, smithy.ShapeTypeList, 1)
-var _EdgeSetList_member *smithy.Schema
-
-var _ExceptionContextKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExceptionContextKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ExceptionContextMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExceptionContextMap",
-}, smithy.ShapeTypeMap, 2)
-var _ExceptionContextMap_key *smithy.Schema
-
-var _ExceptionContextMap_value *smithy.Schema
-
-var _ExceptionContextValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExceptionContextValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalRegionCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExternalRegionCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ExternalRegionCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExternalRegionCodeList",
-}, smithy.ShapeTypeList, 1)
-var _ExternalRegionCodeList_member *smithy.Schema
-
-var _FilterMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "FilterMap",
-}, smithy.ShapeTypeMap, 2)
-var _FilterMap_key *smithy.Schema
-
-var _FilterMap_value *smithy.Schema
-
-var _FilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "FilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var GlobalNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GlobalNetwork",
-}, smithy.ShapeTypeStructure, 6)
-var GlobalNetwork_GlobalNetworkId *smithy.Schema
-
-var GlobalNetwork_GlobalNetworkArn *smithy.Schema
-
-var GlobalNetwork_Description *smithy.Schema
-
-var GlobalNetwork_CreatedAt *smithy.Schema
-
-var GlobalNetwork_State *smithy.Schema
-
-var GlobalNetwork_Tags *smithy.Schema
-
-var _GlobalNetworkArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GlobalNetworkArn",
-}, smithy.ShapeTypeString, 0)
-
-var _GlobalNetworkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GlobalNetworkId",
-}, smithy.ShapeTypeString, 0)
-
-var _GlobalNetworkIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GlobalNetworkIdList",
-}, smithy.ShapeTypeList, 1)
-var _GlobalNetworkIdList_member *smithy.Schema
-
-var _GlobalNetworkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GlobalNetworkList",
-}, smithy.ShapeTypeList, 1)
-var _GlobalNetworkList_member *smithy.Schema
-
-var GlobalNetworkState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GlobalNetworkState",
-}, smithy.ShapeTypeEnum, 4)
-var GlobalNetworkState_pending *smithy.Schema
-
-var GlobalNetworkState_available *smithy.Schema
-
-var GlobalNetworkState_deleting *smithy.Schema
-
-var GlobalNetworkState_updating *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InternalServerException_RetryAfterSeconds *smithy.Schema
-
-var _IPAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "IPAddress",
-}, smithy.ShapeTypeString, 0)
-
-var Link = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Link",
-}, smithy.ShapeTypeStructure, 11)
-var Link_LinkId *smithy.Schema
-
-var Link_LinkArn *smithy.Schema
-
-var Link_GlobalNetworkId *smithy.Schema
-
-var Link_SiteId *smithy.Schema
-
-var Link_Description *smithy.Schema
-
-var Link_Type *smithy.Schema
-
-var Link_Bandwidth *smithy.Schema
-
-var Link_Provider *smithy.Schema
-
-var Link_CreatedAt *smithy.Schema
-
-var Link_State *smithy.Schema
-
-var Link_Tags *smithy.Schema
-
-var _LinkArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkArn",
-}, smithy.ShapeTypeString, 0)
-
-var LinkAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkAssociation",
-}, smithy.ShapeTypeStructure, 4)
-var LinkAssociation_GlobalNetworkId *smithy.Schema
-
-var LinkAssociation_DeviceId *smithy.Schema
-
-var LinkAssociation_LinkId *smithy.Schema
-
-var LinkAssociation_LinkAssociationState *smithy.Schema
-
-var _LinkAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _LinkAssociationList_member *smithy.Schema
-
-var LinkAssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkAssociationState",
-}, smithy.ShapeTypeEnum, 4)
-var LinkAssociationState_pending *smithy.Schema
-
-var LinkAssociationState_available *smithy.Schema
-
-var LinkAssociationState_deleting *smithy.Schema
-
-var LinkAssociationState_deleted *smithy.Schema
-
-var _LinkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkId",
-}, smithy.ShapeTypeString, 0)
-
-var _LinkIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkIdList",
-}, smithy.ShapeTypeList, 1)
-var _LinkIdList_member *smithy.Schema
-
-var _LinkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkList",
-}, smithy.ShapeTypeList, 1)
-var _LinkList_member *smithy.Schema
-
-var LinkState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "LinkState",
-}, smithy.ShapeTypeEnum, 4)
-var LinkState_pending *smithy.Schema
-
-var LinkState_available *smithy.Schema
-
-var LinkState_deleting *smithy.Schema
-
-var LinkState_updating *smithy.Schema
-
-var Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Location",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Sensitive{})
-var Location_Address *smithy.Schema
-
-var Location_Latitude *smithy.Schema
-
-var Location_Longitude *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var NatGatewaySupportState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatGatewaySupportState",
-}, smithy.ShapeTypeEnum, 5)
-var NatGatewaySupportState_ENABLED *smithy.Schema
-
-var NatGatewaySupportState_ENABLING *smithy.Schema
-
-var NatGatewaySupportState_DISABLED *smithy.Schema
-
-var NatGatewaySupportState_DISABLING *smithy.Schema
-
-var NatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE *smithy.Schema
-
-var NatGatewaySupportValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatGatewaySupportValue",
-}, smithy.ShapeTypeEnum, 2)
-var NatGatewaySupportValue_ENABLE *smithy.Schema
-
-var NatGatewaySupportValue_DISABLE *smithy.Schema
-
-var NatRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatRule",
-}, smithy.ShapeTypeStructure, 4)
-var NatRule_RuleNumber *smithy.Schema
-
-var NatRule_MatchSourceCidr *smithy.Schema
-
-var NatRule_NatCidr *smithy.Schema
-
-var NatRule_State *smithy.Schema
-
-var _NatRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatRuleList",
-}, smithy.ShapeTypeList, 1)
-var _NatRuleList_member *smithy.Schema
-
-var _NatRuleNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatRuleNumber",
-}, smithy.ShapeTypeInteger, 0)
-
-var NatRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var NatRuleRequest_RuleNumber *smithy.Schema
-
-var NatRuleRequest_MatchSourceCidr *smithy.Schema
-
-var NatRuleRequest_NatCidr *smithy.Schema
-
-var _NatRuleRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatRuleRequestList",
-}, smithy.ShapeTypeList, 1)
-var _NatRuleRequestList_member *smithy.Schema
-
-var NatRuleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NatRuleState",
-}, smithy.ShapeTypeEnum, 9)
-var NatRuleState_CREATING *smithy.Schema
-
-var NatRuleState_MODIFYING *smithy.Schema
-
-var NatRuleState_DELETING *smithy.Schema
-
-var NatRuleState_ACTIVATED *smithy.Schema
-
-var NatRuleState_ACTIVATING *smithy.Schema
-
-var NatRuleState_DEACTIVATED *smithy.Schema
-
-var NatRuleState_DEACTIVATING *smithy.Schema
-
-var NatRuleState_FAILED *smithy.Schema
-
-var NatRuleState_PENDING_ATTACHMENT_ACCEPTANCE *smithy.Schema
-
-var NetworkFunctionGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkFunctionGroup",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkFunctionGroup_Name *smithy.Schema
-
-var _NetworkFunctionGroupList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkFunctionGroupList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkFunctionGroupList_member *smithy.Schema
-
-var _NetworkFunctionGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkFunctionGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkResource",
-}, smithy.ShapeTypeStructure, 11)
-var NetworkResource_RegisteredGatewayArn *smithy.Schema
-
-var NetworkResource_CoreNetworkId *smithy.Schema
-
-var NetworkResource_AwsRegion *smithy.Schema
-
-var NetworkResource_AccountId *smithy.Schema
-
-var NetworkResource_ResourceType *smithy.Schema
-
-var NetworkResource_ResourceId *smithy.Schema
-
-var NetworkResource_ResourceArn *smithy.Schema
-
-var NetworkResource_Definition *smithy.Schema
-
-var NetworkResource_DefinitionTimestamp *smithy.Schema
-
-var NetworkResource_Tags *smithy.Schema
-
-var NetworkResource_Metadata *smithy.Schema
-
-var NetworkResourceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkResourceCount",
-}, smithy.ShapeTypeStructure, 2)
-var NetworkResourceCount_ResourceType *smithy.Schema
-
-var NetworkResourceCount_Count *smithy.Schema
-
-var _NetworkResourceCountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkResourceCountList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkResourceCountList_member *smithy.Schema
-
-var _NetworkResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkResourceList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkResourceList_member *smithy.Schema
-
-var _NetworkResourceMetadataMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkResourceMetadataMap",
-}, smithy.ShapeTypeMap, 2)
-var _NetworkResourceMetadataMap_key *smithy.Schema
-
-var _NetworkResourceMetadataMap_value *smithy.Schema
-
-var NetworkResourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkResourceSummary",
-}, smithy.ShapeTypeStructure, 6)
-var NetworkResourceSummary_RegisteredGatewayArn *smithy.Schema
-
-var NetworkResourceSummary_ResourceArn *smithy.Schema
-
-var NetworkResourceSummary_ResourceType *smithy.Schema
-
-var NetworkResourceSummary_Definition *smithy.Schema
-
-var NetworkResourceSummary_NameTag *smithy.Schema
-
-var NetworkResourceSummary_IsMiddlebox *smithy.Schema
-
-var NetworkRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkRoute",
-}, smithy.ShapeTypeStructure, 5)
-var NetworkRoute_DestinationCidrBlock *smithy.Schema
-
-var NetworkRoute_Destinations *smithy.Schema
-
-var NetworkRoute_PrefixListId *smithy.Schema
-
-var NetworkRoute_State *smithy.Schema
-
-var NetworkRoute_Type *smithy.Schema
-
-var NetworkRouteDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkRouteDestination",
-}, smithy.ShapeTypeStructure, 7)
-var NetworkRouteDestination_CoreNetworkAttachmentId *smithy.Schema
-
-var NetworkRouteDestination_TransitGatewayAttachmentId *smithy.Schema
-
-var NetworkRouteDestination_SegmentName *smithy.Schema
-
-var NetworkRouteDestination_NetworkFunctionGroupName *smithy.Schema
-
-var NetworkRouteDestination_EdgeLocation *smithy.Schema
-
-var NetworkRouteDestination_ResourceType *smithy.Schema
-
-var NetworkRouteDestination_ResourceId *smithy.Schema
-
-var _NetworkRouteDestinationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkRouteDestinationList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkRouteDestinationList_member *smithy.Schema
-
-var _NetworkRouteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkRouteList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkRouteList_member *smithy.Schema
-
-var NetworkTelemetry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkTelemetry",
-}, smithy.ShapeTypeStructure, 9)
-var NetworkTelemetry_RegisteredGatewayArn *smithy.Schema
-
-var NetworkTelemetry_CoreNetworkId *smithy.Schema
-
-var NetworkTelemetry_AwsRegion *smithy.Schema
-
-var NetworkTelemetry_AccountId *smithy.Schema
-
-var NetworkTelemetry_ResourceType *smithy.Schema
-
-var NetworkTelemetry_ResourceId *smithy.Schema
-
-var NetworkTelemetry_ResourceArn *smithy.Schema
-
-var NetworkTelemetry_Address *smithy.Schema
-
-var NetworkTelemetry_Health *smithy.Schema
-
-var _NetworkTelemetryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NetworkTelemetryList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkTelemetryList_member *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationAwsServiceAccessStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "OrganizationAwsServiceAccessStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "OrganizationId",
-}, smithy.ShapeTypeString, 0)
-
-var OrganizationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "OrganizationStatus",
-}, smithy.ShapeTypeStructure, 4)
-var OrganizationStatus_OrganizationId *smithy.Schema
-
-var OrganizationStatus_OrganizationAwsServiceAccessStatus *smithy.Schema
-
-var OrganizationStatus_SLRDeploymentStatus *smithy.Schema
-
-var OrganizationStatus_AccountStatusList *smithy.Schema
-
-var PathComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PathComponent",
-}, smithy.ShapeTypeStructure, 3)
-var PathComponent_Sequence *smithy.Schema
-
-var PathComponent_Resource *smithy.Schema
-
-var PathComponent_DestinationCidrBlock *smithy.Schema
-
-var _PathComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PathComponentList",
-}, smithy.ShapeTypeList, 1)
-var _PathComponentList_member *smithy.Schema
-
-var Peering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Peering",
-}, smithy.ShapeTypeStructure, 11)
-var Peering_CoreNetworkId *smithy.Schema
-
-var Peering_CoreNetworkArn *smithy.Schema
-
-var Peering_PeeringId *smithy.Schema
-
-var Peering_OwnerAccountId *smithy.Schema
-
-var Peering_PeeringType *smithy.Schema
-
-var Peering_State *smithy.Schema
-
-var Peering_EdgeLocation *smithy.Schema
-
-var Peering_ResourceArn *smithy.Schema
-
-var Peering_Tags *smithy.Schema
-
-var Peering_CreatedAt *smithy.Schema
-
-var Peering_LastModificationErrors *smithy.Schema
-
-var PeeringError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PeeringError",
-}, smithy.ShapeTypeStructure, 5)
-var PeeringError_Code *smithy.Schema
-
-var PeeringError_Message *smithy.Schema
-
-var PeeringError_ResourceArn *smithy.Schema
-
-var PeeringError_RequestId *smithy.Schema
-
-var PeeringError_MissingPermissionsContext *smithy.Schema
-
-var PeeringErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PeeringErrorCode",
-}, smithy.ShapeTypeEnum, 9)
-var PeeringErrorCode_TRANSIT_GATEWAY_NOT_FOUND *smithy.Schema
-
-var PeeringErrorCode_TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED *smithy.Schema
-
-var PeeringErrorCode_MISSING_REQUIRED_PERMISSIONS *smithy.Schema
-
-var PeeringErrorCode_INTERNAL_ERROR *smithy.Schema
-
-var PeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE *smithy.Schema
-
-var PeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE *smithy.Schema
-
-var PeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED *smithy.Schema
-
-var PeeringErrorCode_CREATION_FAILED *smithy.Schema
-
-var PeeringErrorCode_DELETION_FAILED *smithy.Schema
-
-var _PeeringErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PeeringErrorList",
-}, smithy.ShapeTypeList, 1)
-var _PeeringErrorList_member *smithy.Schema
-
-var _PeeringId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PeeringId",
-}, smithy.ShapeTypeString, 0)
-
-var _PeeringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PeeringList",
-}, smithy.ShapeTypeList, 1)
-var _PeeringList_member *smithy.Schema
-
-var PeeringState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PeeringState",
-}, smithy.ShapeTypeEnum, 4)
-var PeeringState_CREATING *smithy.Schema
-
-var PeeringState_FAILED *smithy.Schema
-
-var PeeringState_AVAILABLE *smithy.Schema
-
-var PeeringState_DELETING *smithy.Schema
-
-var PeeringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PeeringType",
-}, smithy.ShapeTypeEnum, 1)
-var PeeringType_TRANSIT_GATEWAY *smithy.Schema
-
-var PermissionsErrorContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PermissionsErrorContext",
-}, smithy.ShapeTypeStructure, 1)
-var PermissionsErrorContext_MissingPermission *smithy.Schema
-
-var _PrefixListArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PrefixListArn",
-}, smithy.ShapeTypeString, 0)
-
-var PrefixListAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PrefixListAssociation",
-}, smithy.ShapeTypeStructure, 3)
-var PrefixListAssociation_CoreNetworkId *smithy.Schema
-
-var PrefixListAssociation_PrefixListArn *smithy.Schema
-
-var PrefixListAssociation_PrefixListAlias *smithy.Schema
-
-var _PrefixListAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PrefixListAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _PrefixListAssociationList_member *smithy.Schema
-
-var ProposedNetworkFunctionGroupChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ProposedNetworkFunctionGroupChange",
-}, smithy.ShapeTypeStructure, 3)
-var ProposedNetworkFunctionGroupChange_Tags *smithy.Schema
-
-var ProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber *smithy.Schema
-
-var ProposedNetworkFunctionGroupChange_NetworkFunctionGroupName *smithy.Schema
-
-var ProposedSegmentChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ProposedSegmentChange",
-}, smithy.ShapeTypeStructure, 3)
-var ProposedSegmentChange_Tags *smithy.Schema
-
-var ProposedSegmentChange_AttachmentPolicyRuleNumber *smithy.Schema
-
-var ProposedSegmentChange_SegmentName *smithy.Schema
-
-var _ReasonContextKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ReasonContextKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ReasonContextMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ReasonContextMap",
-}, smithy.ShapeTypeMap, 2)
-var _ReasonContextMap_key *smithy.Schema
-
-var _ReasonContextMap_value *smithy.Schema
-
-var _ReasonContextValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ReasonContextValue",
-}, smithy.ShapeTypeString, 0)
-
-var Relationship = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Relationship",
-}, smithy.ShapeTypeStructure, 2)
-var Relationship_From *smithy.Schema
-
-var Relationship_To *smithy.Schema
-
-var _RelationshipList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RelationshipList",
-}, smithy.ShapeTypeList, 1)
-var _RelationshipList_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceId *smithy.Schema
-
-var ResourceNotFoundException_ResourceType *smithy.Schema
-
-var ResourceNotFoundException_Context *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var RouteAnalysis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysis",
-}, smithy.ShapeTypeStructure, 11)
-var RouteAnalysis_GlobalNetworkId *smithy.Schema
-
-var RouteAnalysis_OwnerAccountId *smithy.Schema
-
-var RouteAnalysis_RouteAnalysisId *smithy.Schema
-
-var RouteAnalysis_StartTimestamp *smithy.Schema
-
-var RouteAnalysis_Status *smithy.Schema
-
-var RouteAnalysis_Source *smithy.Schema
-
-var RouteAnalysis_Destination *smithy.Schema
-
-var RouteAnalysis_IncludeReturnPath *smithy.Schema
-
-var RouteAnalysis_UseMiddleboxes *smithy.Schema
-
-var RouteAnalysis_ForwardPath *smithy.Schema
-
-var RouteAnalysis_ReturnPath *smithy.Schema
-
-var RouteAnalysisCompletion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysisCompletion",
-}, smithy.ShapeTypeStructure, 3)
-var RouteAnalysisCompletion_ResultCode *smithy.Schema
-
-var RouteAnalysisCompletion_ReasonCode *smithy.Schema
-
-var RouteAnalysisCompletion_ReasonContext *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysisCompletionReasonCode",
-}, smithy.ShapeTypeEnum, 11)
-var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_CYCLIC_PATH_DETECTED *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_ROUTE_NOT_FOUND *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_INACTIVE_ROUTE_FOR_DESTINATION_FOUND *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_MAX_HOPS_EXCEEDED *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_POSSIBLE_MIDDLEBOX *smithy.Schema
-
-var RouteAnalysisCompletionReasonCode_NO_DESTINATION_ARN_PROVIDED *smithy.Schema
-
-var RouteAnalysisCompletionResultCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysisCompletionResultCode",
-}, smithy.ShapeTypeEnum, 2)
-var RouteAnalysisCompletionResultCode_CONNECTED *smithy.Schema
-
-var RouteAnalysisCompletionResultCode_NOT_CONNECTED *smithy.Schema
-
-var RouteAnalysisEndpointOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysisEndpointOptions",
-}, smithy.ShapeTypeStructure, 3)
-var RouteAnalysisEndpointOptions_TransitGatewayAttachmentArn *smithy.Schema
-
-var RouteAnalysisEndpointOptions_TransitGatewayArn *smithy.Schema
-
-var RouteAnalysisEndpointOptions_IpAddress *smithy.Schema
-
-var RouteAnalysisEndpointOptionsSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysisEndpointOptionsSpecification",
-}, smithy.ShapeTypeStructure, 2)
-var RouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn *smithy.Schema
-
-var RouteAnalysisEndpointOptionsSpecification_IpAddress *smithy.Schema
-
-var RouteAnalysisPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysisPath",
-}, smithy.ShapeTypeStructure, 2)
-var RouteAnalysisPath_CompletionStatus *smithy.Schema
-
-var RouteAnalysisPath_Path *smithy.Schema
-
-var RouteAnalysisStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteAnalysisStatus",
-}, smithy.ShapeTypeEnum, 3)
-var RouteAnalysisStatus_running *smithy.Schema
-
-var RouteAnalysisStatus_completed *smithy.Schema
-
-var RouteAnalysisStatus_failed *smithy.Schema
-
-var RouteState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteState",
-}, smithy.ShapeTypeEnum, 2)
-var RouteState_ACTIVE *smithy.Schema
-
-var RouteState_BLACKHOLE *smithy.Schema
-
-var _RouteStateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteStateList",
-}, smithy.ShapeTypeList, 1)
-var _RouteStateList_member *smithy.Schema
-
-var RouteTableIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteTableIdentifier",
-}, smithy.ShapeTypeStructure, 3)
-var RouteTableIdentifier_TransitGatewayRouteTableArn *smithy.Schema
-
-var RouteTableIdentifier_CoreNetworkSegmentEdge *smithy.Schema
-
-var RouteTableIdentifier_CoreNetworkNetworkFunctionGroup *smithy.Schema
-
-var RouteTableType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteTableType",
-}, smithy.ShapeTypeEnum, 3)
-var RouteTableType_TRANSIT_GATEWAY_ROUTE_TABLE *smithy.Schema
-
-var RouteTableType_CORE_NETWORK_SEGMENT *smithy.Schema
-
-var RouteTableType_NETWORK_FUNCTION_GROUP *smithy.Schema
-
-var RouteType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteType",
-}, smithy.ShapeTypeEnum, 3)
-var RouteType_PROPAGATED *smithy.Schema
-
-var RouteType_STATIC *smithy.Schema
-
-var RouteType_SYSTEM *smithy.Schema
-
-var _RouteTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RouteTypeList",
-}, smithy.ShapeTypeList, 1)
-var _RouteTypeList_member *smithy.Schema
-
-var RoutingInformationNextHop = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RoutingInformationNextHop",
-}, smithy.ShapeTypeStructure, 6)
-var RoutingInformationNextHop_IpAddress *smithy.Schema
-
-var RoutingInformationNextHop_CoreNetworkAttachmentId *smithy.Schema
-
-var RoutingInformationNextHop_ResourceId *smithy.Schema
-
-var RoutingInformationNextHop_ResourceType *smithy.Schema
-
-var RoutingInformationNextHop_SegmentName *smithy.Schema
-
-var RoutingInformationNextHop_EdgeLocation *smithy.Schema
-
-var RoutingPolicyAssociationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RoutingPolicyAssociationDetail",
-}, smithy.ShapeTypeStructure, 2)
-var RoutingPolicyAssociationDetail_RoutingPolicyNames *smithy.Schema
-
-var RoutingPolicyAssociationDetail_SharedSegments *smithy.Schema
-
-var _RoutingPolicyAssociationDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RoutingPolicyAssociationDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _RoutingPolicyAssociationDetailsList_member *smithy.Schema
-
-var RoutingPolicyDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RoutingPolicyDirection",
-}, smithy.ShapeTypeEnum, 2)
-var RoutingPolicyDirection_INBOUND *smithy.Schema
-
-var RoutingPolicyDirection_OUTBOUND *smithy.Schema
-
-var SegmentActionServiceInsertion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SegmentActionServiceInsertion",
-}, smithy.ShapeTypeEnum, 2)
-var SegmentActionServiceInsertion_SEND_VIA *smithy.Schema
-
-var SegmentActionServiceInsertion_SEND_TO *smithy.Schema
-
-var SendViaMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SendViaMode",
-}, smithy.ShapeTypeEnum, 2)
-var SendViaMode_DUAL_HOP *smithy.Schema
-
-var SendViaMode_SINGLE_HOP *smithy.Schema
-
-var _ServerSideString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ServerSideString",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceInsertionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ServiceInsertionAction",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceInsertionAction_Action *smithy.Schema
-
-var ServiceInsertionAction_Mode *smithy.Schema
-
-var ServiceInsertionAction_WhenSentTo *smithy.Schema
-
-var ServiceInsertionAction_Via *smithy.Schema
-
-var _ServiceInsertionActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ServiceInsertionActionList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceInsertionActionList_member *smithy.Schema
-
-var ServiceInsertionSegments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ServiceInsertionSegments",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceInsertionSegments_SendVia *smithy.Schema
-
-var ServiceInsertionSegments_SendTo *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceId *smithy.Schema
-
-var ServiceQuotaExceededException_ResourceType *smithy.Schema
-
-var ServiceQuotaExceededException_LimitCode *smithy.Schema
-
-var ServiceQuotaExceededException_ServiceCode *smithy.Schema
-
-var Site = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Site",
-}, smithy.ShapeTypeStructure, 8)
-var Site_SiteId *smithy.Schema
-
-var Site_SiteArn *smithy.Schema
-
-var Site_GlobalNetworkId *smithy.Schema
-
-var Site_Description *smithy.Schema
-
-var Site_Location *smithy.Schema
-
-var Site_CreatedAt *smithy.Schema
-
-var Site_State *smithy.Schema
-
-var Site_Tags *smithy.Schema
-
-var _SiteArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SiteArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SiteId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SiteId",
-}, smithy.ShapeTypeString, 0)
-
-var _SiteIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SiteIdList",
-}, smithy.ShapeTypeList, 1)
-var _SiteIdList_member *smithy.Schema
-
-var _SiteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SiteList",
-}, smithy.ShapeTypeList, 1)
-var _SiteList_member *smithy.Schema
-
-var SiteState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SiteState",
-}, smithy.ShapeTypeEnum, 4)
-var SiteState_pending *smithy.Schema
-
-var SiteState_available *smithy.Schema
-
-var SiteState_deleting *smithy.Schema
-
-var SiteState_updating *smithy.Schema
-
-var SiteToSiteVpnAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SiteToSiteVpnAttachment",
-}, smithy.ShapeTypeStructure, 2)
-var SiteToSiteVpnAttachment_Attachment *smithy.Schema
-
-var SiteToSiteVpnAttachment_VpnConnectionArn *smithy.Schema
-
-var _SLRDeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SLRDeploymentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SubnetArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SubnetArnList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetArnList_member *smithy.Schema
-
-var _SynthesizedJsonCoreNetworkPolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SynthesizedJsonCoreNetworkPolicyDocument",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var _SynthesizedJsonResourcePolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "SynthesizedJsonResourcePolicyDocument",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ThrottlingException_RetryAfterSeconds *smithy.Schema
-
-var _TransitGatewayArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TransitGatewayArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayArnList",
-}, smithy.ShapeTypeList, 1)
-var _TransitGatewayArnList_member *smithy.Schema
-
-var _TransitGatewayAttachmentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayAttachmentArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TransitGatewayAttachmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayAttachmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _TransitGatewayConnectPeerArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayConnectPeerArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TransitGatewayConnectPeerArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayConnectPeerArnList",
-}, smithy.ShapeTypeList, 1)
-var _TransitGatewayConnectPeerArnList_member *smithy.Schema
-
-var TransitGatewayConnectPeerAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayConnectPeerAssociation",
-}, smithy.ShapeTypeStructure, 5)
-var TransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn *smithy.Schema
-
-var TransitGatewayConnectPeerAssociation_GlobalNetworkId *smithy.Schema
-
-var TransitGatewayConnectPeerAssociation_DeviceId *smithy.Schema
-
-var TransitGatewayConnectPeerAssociation_LinkId *smithy.Schema
-
-var TransitGatewayConnectPeerAssociation_State *smithy.Schema
-
-var _TransitGatewayConnectPeerAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayConnectPeerAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _TransitGatewayConnectPeerAssociationList_member *smithy.Schema
-
-var TransitGatewayConnectPeerAssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayConnectPeerAssociationState",
-}, smithy.ShapeTypeEnum, 4)
-var TransitGatewayConnectPeerAssociationState_pending *smithy.Schema
-
-var TransitGatewayConnectPeerAssociationState_available *smithy.Schema
-
-var TransitGatewayConnectPeerAssociationState_deleting *smithy.Schema
-
-var TransitGatewayConnectPeerAssociationState_deleted *smithy.Schema
-
-var TransitGatewayPeering = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayPeering",
-}, smithy.ShapeTypeStructure, 3)
-var TransitGatewayPeering_Peering *smithy.Schema
-
-var TransitGatewayPeering_TransitGatewayArn *smithy.Schema
-
-var TransitGatewayPeering_TransitGatewayPeeringAttachmentId *smithy.Schema
-
-var _TransitGatewayPeeringAttachmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayPeeringAttachmentId",
-}, smithy.ShapeTypeString, 0)
-
-var TransitGatewayRegistration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayRegistration",
-}, smithy.ShapeTypeStructure, 3)
-var TransitGatewayRegistration_GlobalNetworkId *smithy.Schema
-
-var TransitGatewayRegistration_TransitGatewayArn *smithy.Schema
-
-var TransitGatewayRegistration_State *smithy.Schema
-
-var _TransitGatewayRegistrationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayRegistrationList",
-}, smithy.ShapeTypeList, 1)
-var _TransitGatewayRegistrationList_member *smithy.Schema
-
-var TransitGatewayRegistrationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayRegistrationState",
-}, smithy.ShapeTypeEnum, 5)
-var TransitGatewayRegistrationState_pending *smithy.Schema
-
-var TransitGatewayRegistrationState_available *smithy.Schema
-
-var TransitGatewayRegistrationState_deleting *smithy.Schema
-
-var TransitGatewayRegistrationState_deleted *smithy.Schema
-
-var TransitGatewayRegistrationState_failed *smithy.Schema
-
-var TransitGatewayRegistrationStateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayRegistrationStateReason",
-}, smithy.ShapeTypeStructure, 2)
-var TransitGatewayRegistrationStateReason_Code *smithy.Schema
-
-var TransitGatewayRegistrationStateReason_Message *smithy.Schema
-
-var _TransitGatewayRouteTableArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayRouteTableArn",
-}, smithy.ShapeTypeString, 0)
-
-var TransitGatewayRouteTableAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TransitGatewayRouteTableAttachment",
-}, smithy.ShapeTypeStructure, 3)
-var TransitGatewayRouteTableAttachment_Attachment *smithy.Schema
-
-var TransitGatewayRouteTableAttachment_PeeringId *smithy.Schema
-
-var TransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn *smithy.Schema
-
-var TunnelProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TunnelProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var TunnelProtocol_GRE *smithy.Schema
-
-var TunnelProtocol_NO_ENCAP *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_Fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var Via = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "Via",
-}, smithy.ShapeTypeStructure, 2)
-var Via_NetworkFunctionGroups *smithy.Schema
-
-var Via_WithEdgeOverrides *smithy.Schema
-
-var _VpcArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "VpcArn",
-}, smithy.ShapeTypeString, 0)
-
-var VpcAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "VpcAttachment",
-}, smithy.ShapeTypeStructure, 3)
-var VpcAttachment_Attachment *smithy.Schema
-
-var VpcAttachment_SubnetArns *smithy.Schema
-
-var VpcAttachment_Options *smithy.Schema
-
-var VpcOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "VpcOptions",
-}, smithy.ShapeTypeStructure, 4)
-var VpcOptions_Ipv6Support *smithy.Schema
-
-var VpcOptions_ApplianceModeSupport *smithy.Schema
-
-var VpcOptions_DnsSupport *smithy.Schema
-
-var VpcOptions_SecurityGroupReferencingSupport *smithy.Schema
-
-var _VpnConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "VpnConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var WhenSentTo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "WhenSentTo",
-}, smithy.ShapeTypeStructure, 1)
-var WhenSentTo_WhenSentToSegmentsList *smithy.Schema
-
-var _WhenSentToSegmentsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "WhenSentToSegmentsList",
-}, smithy.ShapeTypeList, 1)
-var _WhenSentToSegmentsList_member *smithy.Schema
-
-var _WithEdgeOverridesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "WithEdgeOverridesList",
-}, smithy.ShapeTypeList, 1)
-var _WithEdgeOverridesList_member *smithy.Schema
-
-var AcceptAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AcceptAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptAttachmentRequest_AttachmentId *smithy.Schema
-
-var AcceptAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AcceptAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptAttachmentResponse_Attachment *smithy.Schema
-
-var AssociateConnectPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateConnectPeerRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateConnectPeerRequest_GlobalNetworkId *smithy.Schema
-
-var AssociateConnectPeerRequest_ConnectPeerId *smithy.Schema
-
-var AssociateConnectPeerRequest_DeviceId *smithy.Schema
-
-var AssociateConnectPeerRequest_LinkId *smithy.Schema
-
-var AssociateConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateConnectPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateConnectPeerResponse_ConnectPeerAssociation *smithy.Schema
-
-var AssociateCustomerGatewayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateCustomerGatewayRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateCustomerGatewayRequest_CustomerGatewayArn *smithy.Schema
-
-var AssociateCustomerGatewayRequest_GlobalNetworkId *smithy.Schema
-
-var AssociateCustomerGatewayRequest_DeviceId *smithy.Schema
-
-var AssociateCustomerGatewayRequest_LinkId *smithy.Schema
-
-var AssociateCustomerGatewayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateCustomerGatewayResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateCustomerGatewayResponse_CustomerGatewayAssociation *smithy.Schema
-
-var AssociateLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateLinkRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateLinkRequest_GlobalNetworkId *smithy.Schema
-
-var AssociateLinkRequest_DeviceId *smithy.Schema
-
-var AssociateLinkRequest_LinkId *smithy.Schema
-
-var AssociateLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateLinkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateLinkResponse_LinkAssociation *smithy.Schema
-
-var AssociateTransitGatewayConnectPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateTransitGatewayConnectPeerRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateTransitGatewayConnectPeerRequest_GlobalNetworkId *smithy.Schema
-
-var AssociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn *smithy.Schema
-
-var AssociateTransitGatewayConnectPeerRequest_DeviceId *smithy.Schema
-
-var AssociateTransitGatewayConnectPeerRequest_LinkId *smithy.Schema
-
-var AssociateTransitGatewayConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "AssociateTransitGatewayConnectPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation *smithy.Schema
-
-var CreateConnectAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectAttachmentRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateConnectAttachmentRequest_CoreNetworkId *smithy.Schema
-
-var CreateConnectAttachmentRequest_EdgeLocation *smithy.Schema
-
-var CreateConnectAttachmentRequest_TransportAttachmentId *smithy.Schema
-
-var CreateConnectAttachmentRequest_RoutingPolicyLabel *smithy.Schema
-
-var CreateConnectAttachmentRequest_NatGatewaySupport *smithy.Schema
-
-var CreateConnectAttachmentRequest_NatGatewayRules *smithy.Schema
-
-var CreateConnectAttachmentRequest_Options *smithy.Schema
-
-var CreateConnectAttachmentRequest_Tags *smithy.Schema
-
-var CreateConnectAttachmentRequest_ClientToken *smithy.Schema
-
-var CreateConnectAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectAttachmentResponse_ConnectAttachment *smithy.Schema
-
-var CreateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectionRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateConnectionRequest_GlobalNetworkId *smithy.Schema
-
-var CreateConnectionRequest_DeviceId *smithy.Schema
-
-var CreateConnectionRequest_ConnectedDeviceId *smithy.Schema
-
-var CreateConnectionRequest_LinkId *smithy.Schema
-
-var CreateConnectionRequest_ConnectedLinkId *smithy.Schema
-
-var CreateConnectionRequest_Description *smithy.Schema
-
-var CreateConnectionRequest_Tags *smithy.Schema
-
-var CreateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectionResponse_Connection *smithy.Schema
-
-var CreateConnectPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectPeerRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateConnectPeerRequest_ConnectAttachmentId *smithy.Schema
-
-var CreateConnectPeerRequest_CoreNetworkAddress *smithy.Schema
-
-var CreateConnectPeerRequest_PeerAddress *smithy.Schema
-
-var CreateConnectPeerRequest_BgpOptions *smithy.Schema
-
-var CreateConnectPeerRequest_InsideCidrBlocks *smithy.Schema
-
-var CreateConnectPeerRequest_Tags *smithy.Schema
-
-var CreateConnectPeerRequest_ClientToken *smithy.Schema
-
-var CreateConnectPeerRequest_SubnetArn *smithy.Schema
-
-var CreateConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateConnectPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConnectPeerResponse_ConnectPeer *smithy.Schema
-
-var CreateCoreNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateCoreNetworkRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateCoreNetworkRequest_GlobalNetworkId *smithy.Schema
-
-var CreateCoreNetworkRequest_Description *smithy.Schema
-
-var CreateCoreNetworkRequest_Tags *smithy.Schema
-
-var CreateCoreNetworkRequest_PolicyDocument *smithy.Schema
-
-var CreateCoreNetworkRequest_ClientToken *smithy.Schema
-
-var CreateCoreNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateCoreNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateCoreNetworkResponse_CoreNetwork *smithy.Schema
-
-var CreateCoreNetworkPrefixListAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateCoreNetworkPrefixListAssociationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateCoreNetworkPrefixListAssociationRequest_CoreNetworkId *smithy.Schema
-
-var CreateCoreNetworkPrefixListAssociationRequest_PrefixListArn *smithy.Schema
-
-var CreateCoreNetworkPrefixListAssociationRequest_PrefixListAlias *smithy.Schema
-
-var CreateCoreNetworkPrefixListAssociationRequest_ClientToken *smithy.Schema
-
-var CreateCoreNetworkPrefixListAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateCoreNetworkPrefixListAssociationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId *smithy.Schema
-
-var CreateCoreNetworkPrefixListAssociationResponse_PrefixListArn *smithy.Schema
-
-var CreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias *smithy.Schema
-
-var CreateDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateDeviceRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateDeviceRequest_GlobalNetworkId *smithy.Schema
-
-var CreateDeviceRequest_AWSLocation *smithy.Schema
-
-var CreateDeviceRequest_Description *smithy.Schema
-
-var CreateDeviceRequest_Type *smithy.Schema
-
-var CreateDeviceRequest_Vendor *smithy.Schema
-
-var CreateDeviceRequest_Model *smithy.Schema
-
-var CreateDeviceRequest_SerialNumber *smithy.Schema
-
-var CreateDeviceRequest_Location *smithy.Schema
-
-var CreateDeviceRequest_SiteId *smithy.Schema
-
-var CreateDeviceRequest_Tags *smithy.Schema
-
-var CreateDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDeviceResponse_Device *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateDirectConnectGatewayAttachmentRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateDirectConnectGatewayAttachmentRequest_CoreNetworkId *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_EdgeLocations *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_Tags *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentRequest_ClientToken *smithy.Schema
-
-var CreateDirectConnectGatewayAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateDirectConnectGatewayAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment *smithy.Schema
-
-var CreateGlobalNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateGlobalNetworkRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateGlobalNetworkRequest_Description *smithy.Schema
-
-var CreateGlobalNetworkRequest_Tags *smithy.Schema
-
-var CreateGlobalNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateGlobalNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGlobalNetworkResponse_GlobalNetwork *smithy.Schema
-
-var CreateLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateLinkRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateLinkRequest_GlobalNetworkId *smithy.Schema
-
-var CreateLinkRequest_Description *smithy.Schema
-
-var CreateLinkRequest_Type *smithy.Schema
-
-var CreateLinkRequest_Bandwidth *smithy.Schema
-
-var CreateLinkRequest_Provider *smithy.Schema
-
-var CreateLinkRequest_SiteId *smithy.Schema
-
-var CreateLinkRequest_Tags *smithy.Schema
-
-var CreateLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateLinkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateLinkResponse_Link *smithy.Schema
-
-var CreateSiteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateSiteRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSiteRequest_GlobalNetworkId *smithy.Schema
-
-var CreateSiteRequest_Description *smithy.Schema
-
-var CreateSiteRequest_Location *smithy.Schema
-
-var CreateSiteRequest_Tags *smithy.Schema
-
-var CreateSiteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateSiteResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSiteResponse_Site *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateSiteToSiteVpnAttachmentRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSiteToSiteVpnAttachmentRequest_CoreNetworkId *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest_Tags *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentRequest_ClientToken *smithy.Schema
-
-var CreateSiteToSiteVpnAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateSiteToSiteVpnAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment *smithy.Schema
-
-var CreateTransitGatewayPeeringRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateTransitGatewayPeeringRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateTransitGatewayPeeringRequest_CoreNetworkId *smithy.Schema
-
-var CreateTransitGatewayPeeringRequest_TransitGatewayArn *smithy.Schema
-
-var CreateTransitGatewayPeeringRequest_Tags *smithy.Schema
-
-var CreateTransitGatewayPeeringRequest_ClientToken *smithy.Schema
-
-var CreateTransitGatewayPeeringResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateTransitGatewayPeeringResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTransitGatewayPeeringResponse_TransitGatewayPeering *smithy.Schema
-
-var CreateTransitGatewayRouteTableAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateTransitGatewayRouteTableAttachmentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateTransitGatewayRouteTableAttachmentRequest_PeeringId *smithy.Schema
-
-var CreateTransitGatewayRouteTableAttachmentRequest_TransitGatewayRouteTableArn *smithy.Schema
-
-var CreateTransitGatewayRouteTableAttachmentRequest_RoutingPolicyLabel *smithy.Schema
-
-var CreateTransitGatewayRouteTableAttachmentRequest_Tags *smithy.Schema
-
-var CreateTransitGatewayRouteTableAttachmentRequest_ClientToken *smithy.Schema
-
-var CreateTransitGatewayRouteTableAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateTransitGatewayRouteTableAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment *smithy.Schema
-
-var CreateVpcAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateVpcAttachmentRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateVpcAttachmentRequest_CoreNetworkId *smithy.Schema
-
-var CreateVpcAttachmentRequest_VpcArn *smithy.Schema
-
-var CreateVpcAttachmentRequest_SubnetArns *smithy.Schema
-
-var CreateVpcAttachmentRequest_Options *smithy.Schema
-
-var CreateVpcAttachmentRequest_RoutingPolicyLabel *smithy.Schema
-
-var CreateVpcAttachmentRequest_NatGatewaySupport *smithy.Schema
-
-var CreateVpcAttachmentRequest_NatGatewayRules *smithy.Schema
-
-var CreateVpcAttachmentRequest_Tags *smithy.Schema
-
-var CreateVpcAttachmentRequest_ClientToken *smithy.Schema
-
-var CreateVpcAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "CreateVpcAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVpcAttachmentResponse_VpcAttachment *smithy.Schema
-
-var DeleteAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAttachmentRequest_AttachmentId *smithy.Schema
-
-var DeleteAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteAttachmentResponse_Attachment *smithy.Schema
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteConnectionRequest_GlobalNetworkId *smithy.Schema
-
-var DeleteConnectionRequest_ConnectionId *smithy.Schema
-
-var DeleteConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionResponse_Connection *smithy.Schema
-
-var DeleteConnectPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteConnectPeerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectPeerRequest_ConnectPeerId *smithy.Schema
-
-var DeleteConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteConnectPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectPeerResponse_ConnectPeer *smithy.Schema
-
-var DeleteCoreNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCoreNetworkRequest_CoreNetworkId *smithy.Schema
-
-var DeleteCoreNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCoreNetworkResponse_CoreNetwork *smithy.Schema
-
-var DeleteCoreNetworkPolicyVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkPolicyVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCoreNetworkPolicyVersionRequest_CoreNetworkId *smithy.Schema
-
-var DeleteCoreNetworkPolicyVersionRequest_PolicyVersionId *smithy.Schema
-
-var DeleteCoreNetworkPolicyVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkPolicyVersionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy *smithy.Schema
-
-var DeleteCoreNetworkPrefixListAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkPrefixListAssociationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCoreNetworkPrefixListAssociationRequest_CoreNetworkId *smithy.Schema
-
-var DeleteCoreNetworkPrefixListAssociationRequest_PrefixListArn *smithy.Schema
-
-var DeleteCoreNetworkPrefixListAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteCoreNetworkPrefixListAssociationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId *smithy.Schema
-
-var DeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn *smithy.Schema
-
-var DeleteDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteDeviceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDeviceRequest_GlobalNetworkId *smithy.Schema
-
-var DeleteDeviceRequest_DeviceId *smithy.Schema
-
-var DeleteDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDeviceResponse_Device *smithy.Schema
-
-var DeleteGlobalNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteGlobalNetworkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGlobalNetworkRequest_GlobalNetworkId *smithy.Schema
-
-var DeleteGlobalNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteGlobalNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteGlobalNetworkResponse_GlobalNetwork *smithy.Schema
-
-var DeleteLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteLinkRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteLinkRequest_GlobalNetworkId *smithy.Schema
-
-var DeleteLinkRequest_LinkId *smithy.Schema
-
-var DeleteLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteLinkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLinkResponse_Link *smithy.Schema
-
-var DeletePeeringRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeletePeeringRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePeeringRequest_PeeringId *smithy.Schema
-
-var DeletePeeringResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeletePeeringResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePeeringResponse_Peering *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSiteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteSiteRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSiteRequest_GlobalNetworkId *smithy.Schema
-
-var DeleteSiteRequest_SiteId *smithy.Schema
-
-var DeleteSiteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeleteSiteResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSiteResponse_Site *smithy.Schema
-
-var DeregisterTransitGatewayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeregisterTransitGatewayRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterTransitGatewayRequest_GlobalNetworkId *smithy.Schema
-
-var DeregisterTransitGatewayRequest_TransitGatewayArn *smithy.Schema
-
-var DeregisterTransitGatewayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DeregisterTransitGatewayResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterTransitGatewayResponse_TransitGatewayRegistration *smithy.Schema
-
-var DescribeGlobalNetworksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DescribeGlobalNetworksRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeGlobalNetworksRequest_GlobalNetworkIds *smithy.Schema
-
-var DescribeGlobalNetworksRequest_MaxResults *smithy.Schema
-
-var DescribeGlobalNetworksRequest_NextToken *smithy.Schema
-
-var DescribeGlobalNetworksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DescribeGlobalNetworksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeGlobalNetworksResponse_GlobalNetworks *smithy.Schema
-
-var DescribeGlobalNetworksResponse_NextToken *smithy.Schema
-
-var DisassociateConnectPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateConnectPeerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateConnectPeerRequest_GlobalNetworkId *smithy.Schema
-
-var DisassociateConnectPeerRequest_ConnectPeerId *smithy.Schema
-
-var DisassociateConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateConnectPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateConnectPeerResponse_ConnectPeerAssociation *smithy.Schema
-
-var DisassociateCustomerGatewayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateCustomerGatewayRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateCustomerGatewayRequest_GlobalNetworkId *smithy.Schema
-
-var DisassociateCustomerGatewayRequest_CustomerGatewayArn *smithy.Schema
-
-var DisassociateCustomerGatewayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateCustomerGatewayResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateCustomerGatewayResponse_CustomerGatewayAssociation *smithy.Schema
-
-var DisassociateLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateLinkRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateLinkRequest_GlobalNetworkId *smithy.Schema
-
-var DisassociateLinkRequest_DeviceId *smithy.Schema
-
-var DisassociateLinkRequest_LinkId *smithy.Schema
-
-var DisassociateLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateLinkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateLinkResponse_LinkAssociation *smithy.Schema
-
-var DisassociateTransitGatewayConnectPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateTransitGatewayConnectPeerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateTransitGatewayConnectPeerRequest_GlobalNetworkId *smithy.Schema
-
-var DisassociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn *smithy.Schema
-
-var DisassociateTransitGatewayConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "DisassociateTransitGatewayConnectPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation *smithy.Schema
-
-var ExecuteCoreNetworkChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExecuteCoreNetworkChangeSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ExecuteCoreNetworkChangeSetRequest_CoreNetworkId *smithy.Schema
-
-var ExecuteCoreNetworkChangeSetRequest_PolicyVersionId *smithy.Schema
-
-var ExecuteCoreNetworkChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ExecuteCoreNetworkChangeSetResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetConnectAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectAttachmentRequest_AttachmentId *smithy.Schema
-
-var GetConnectAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectAttachmentResponse_ConnectAttachment *smithy.Schema
-
-var GetConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetConnectionsRequest_GlobalNetworkId *smithy.Schema
-
-var GetConnectionsRequest_ConnectionIds *smithy.Schema
-
-var GetConnectionsRequest_DeviceId *smithy.Schema
-
-var GetConnectionsRequest_MaxResults *smithy.Schema
-
-var GetConnectionsRequest_NextToken *smithy.Schema
-
-var GetConnectionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetConnectionsResponse_Connections *smithy.Schema
-
-var GetConnectionsResponse_NextToken *smithy.Schema
-
-var GetConnectPeerAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectPeerAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetConnectPeerAssociationsRequest_GlobalNetworkId *smithy.Schema
-
-var GetConnectPeerAssociationsRequest_ConnectPeerIds *smithy.Schema
-
-var GetConnectPeerAssociationsRequest_MaxResults *smithy.Schema
-
-var GetConnectPeerAssociationsRequest_NextToken *smithy.Schema
-
-var GetConnectPeerAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectPeerAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetConnectPeerAssociationsResponse_ConnectPeerAssociations *smithy.Schema
-
-var GetConnectPeerAssociationsResponse_NextToken *smithy.Schema
-
-var GetConnectPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectPeerRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectPeerRequest_ConnectPeerId *smithy.Schema
-
-var GetConnectPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetConnectPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectPeerResponse_ConnectPeer *smithy.Schema
-
-var GetCoreNetworkChangeEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkChangeEventsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetCoreNetworkChangeEventsRequest_CoreNetworkId *smithy.Schema
-
-var GetCoreNetworkChangeEventsRequest_PolicyVersionId *smithy.Schema
-
-var GetCoreNetworkChangeEventsRequest_MaxResults *smithy.Schema
-
-var GetCoreNetworkChangeEventsRequest_NextToken *smithy.Schema
-
-var GetCoreNetworkChangeEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkChangeEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents *smithy.Schema
-
-var GetCoreNetworkChangeEventsResponse_NextToken *smithy.Schema
-
-var GetCoreNetworkChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkChangeSetRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetCoreNetworkChangeSetRequest_CoreNetworkId *smithy.Schema
-
-var GetCoreNetworkChangeSetRequest_PolicyVersionId *smithy.Schema
-
-var GetCoreNetworkChangeSetRequest_MaxResults *smithy.Schema
-
-var GetCoreNetworkChangeSetRequest_NextToken *smithy.Schema
-
-var GetCoreNetworkChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkChangeSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCoreNetworkChangeSetResponse_CoreNetworkChanges *smithy.Schema
-
-var GetCoreNetworkChangeSetResponse_NextToken *smithy.Schema
-
-var GetCoreNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCoreNetworkRequest_CoreNetworkId *smithy.Schema
-
-var GetCoreNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCoreNetworkResponse_CoreNetwork *smithy.Schema
-
-var GetCoreNetworkPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetCoreNetworkPolicyRequest_CoreNetworkId *smithy.Schema
-
-var GetCoreNetworkPolicyRequest_PolicyVersionId *smithy.Schema
-
-var GetCoreNetworkPolicyRequest_Alias *smithy.Schema
-
-var GetCoreNetworkPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCoreNetworkPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetCoreNetworkPolicyResponse_CoreNetworkPolicy *smithy.Schema
-
-var GetCustomerGatewayAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCustomerGatewayAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetCustomerGatewayAssociationsRequest_GlobalNetworkId *smithy.Schema
-
-var GetCustomerGatewayAssociationsRequest_CustomerGatewayArns *smithy.Schema
-
-var GetCustomerGatewayAssociationsRequest_MaxResults *smithy.Schema
-
-var GetCustomerGatewayAssociationsRequest_NextToken *smithy.Schema
-
-var GetCustomerGatewayAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetCustomerGatewayAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations *smithy.Schema
-
-var GetCustomerGatewayAssociationsResponse_NextToken *smithy.Schema
-
-var GetDevicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetDevicesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetDevicesRequest_GlobalNetworkId *smithy.Schema
-
-var GetDevicesRequest_DeviceIds *smithy.Schema
-
-var GetDevicesRequest_SiteId *smithy.Schema
-
-var GetDevicesRequest_MaxResults *smithy.Schema
-
-var GetDevicesRequest_NextToken *smithy.Schema
-
-var GetDevicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetDevicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetDevicesResponse_Devices *smithy.Schema
-
-var GetDevicesResponse_NextToken *smithy.Schema
-
-var GetDirectConnectGatewayAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetDirectConnectGatewayAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDirectConnectGatewayAttachmentRequest_AttachmentId *smithy.Schema
-
-var GetDirectConnectGatewayAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetDirectConnectGatewayAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment *smithy.Schema
-
-var GetLinkAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetLinkAssociationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetLinkAssociationsRequest_GlobalNetworkId *smithy.Schema
-
-var GetLinkAssociationsRequest_DeviceId *smithy.Schema
-
-var GetLinkAssociationsRequest_LinkId *smithy.Schema
-
-var GetLinkAssociationsRequest_MaxResults *smithy.Schema
-
-var GetLinkAssociationsRequest_NextToken *smithy.Schema
-
-var GetLinkAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetLinkAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetLinkAssociationsResponse_LinkAssociations *smithy.Schema
-
-var GetLinkAssociationsResponse_NextToken *smithy.Schema
-
-var GetLinksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetLinksRequest",
-}, smithy.ShapeTypeStructure, 7)
-var GetLinksRequest_GlobalNetworkId *smithy.Schema
-
-var GetLinksRequest_LinkIds *smithy.Schema
-
-var GetLinksRequest_SiteId *smithy.Schema
-
-var GetLinksRequest_Type *smithy.Schema
-
-var GetLinksRequest_Provider *smithy.Schema
-
-var GetLinksRequest_MaxResults *smithy.Schema
-
-var GetLinksRequest_NextToken *smithy.Schema
-
-var GetLinksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetLinksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetLinksResponse_Links *smithy.Schema
-
-var GetLinksResponse_NextToken *smithy.Schema
-
-var GetNetworkResourceCountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourceCountsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetNetworkResourceCountsRequest_GlobalNetworkId *smithy.Schema
-
-var GetNetworkResourceCountsRequest_ResourceType *smithy.Schema
-
-var GetNetworkResourceCountsRequest_MaxResults *smithy.Schema
-
-var GetNetworkResourceCountsRequest_NextToken *smithy.Schema
-
-var GetNetworkResourceCountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourceCountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetNetworkResourceCountsResponse_NetworkResourceCounts *smithy.Schema
-
-var GetNetworkResourceCountsResponse_NextToken *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourceRelationshipsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var GetNetworkResourceRelationshipsRequest_GlobalNetworkId *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_CoreNetworkId *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_RegisteredGatewayArn *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_AwsRegion *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_AccountId *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_ResourceType *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_ResourceArn *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_MaxResults *smithy.Schema
-
-var GetNetworkResourceRelationshipsRequest_NextToken *smithy.Schema
-
-var GetNetworkResourceRelationshipsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourceRelationshipsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetNetworkResourceRelationshipsResponse_Relationships *smithy.Schema
-
-var GetNetworkResourceRelationshipsResponse_NextToken *smithy.Schema
-
-var GetNetworkResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourcesRequest",
-}, smithy.ShapeTypeStructure, 9)
-var GetNetworkResourcesRequest_GlobalNetworkId *smithy.Schema
-
-var GetNetworkResourcesRequest_CoreNetworkId *smithy.Schema
-
-var GetNetworkResourcesRequest_RegisteredGatewayArn *smithy.Schema
-
-var GetNetworkResourcesRequest_AwsRegion *smithy.Schema
-
-var GetNetworkResourcesRequest_AccountId *smithy.Schema
-
-var GetNetworkResourcesRequest_ResourceType *smithy.Schema
-
-var GetNetworkResourcesRequest_ResourceArn *smithy.Schema
-
-var GetNetworkResourcesRequest_MaxResults *smithy.Schema
-
-var GetNetworkResourcesRequest_NextToken *smithy.Schema
-
-var GetNetworkResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetNetworkResourcesResponse_NetworkResources *smithy.Schema
-
-var GetNetworkResourcesResponse_NextToken *smithy.Schema
-
-var GetNetworkRoutesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkRoutesRequest",
-}, smithy.ShapeTypeStructure, 12)
-var GetNetworkRoutesRequest_GlobalNetworkId *smithy.Schema
-
-var GetNetworkRoutesRequest_RouteTableIdentifier *smithy.Schema
-
-var GetNetworkRoutesRequest_ExactCidrMatches *smithy.Schema
-
-var GetNetworkRoutesRequest_LongestPrefixMatches *smithy.Schema
-
-var GetNetworkRoutesRequest_SubnetOfMatches *smithy.Schema
-
-var GetNetworkRoutesRequest_SupernetOfMatches *smithy.Schema
-
-var GetNetworkRoutesRequest_PrefixListIds *smithy.Schema
-
-var GetNetworkRoutesRequest_States *smithy.Schema
-
-var GetNetworkRoutesRequest_Types *smithy.Schema
-
-var GetNetworkRoutesRequest_DestinationFilters *smithy.Schema
-
-var GetNetworkRoutesRequest_MaxResults *smithy.Schema
-
-var GetNetworkRoutesRequest_NextToken *smithy.Schema
-
-var GetNetworkRoutesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkRoutesResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetNetworkRoutesResponse_RouteTableArn *smithy.Schema
-
-var GetNetworkRoutesResponse_CoreNetworkSegmentEdge *smithy.Schema
-
-var GetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup *smithy.Schema
-
-var GetNetworkRoutesResponse_RouteTableType *smithy.Schema
-
-var GetNetworkRoutesResponse_RouteTableTimestamp *smithy.Schema
-
-var GetNetworkRoutesResponse_NetworkRoutes *smithy.Schema
-
-var GetNetworkRoutesResponse_NextToken *smithy.Schema
-
-var GetNetworkTelemetryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkTelemetryRequest",
-}, smithy.ShapeTypeStructure, 9)
-var GetNetworkTelemetryRequest_GlobalNetworkId *smithy.Schema
-
-var GetNetworkTelemetryRequest_CoreNetworkId *smithy.Schema
-
-var GetNetworkTelemetryRequest_RegisteredGatewayArn *smithy.Schema
-
-var GetNetworkTelemetryRequest_AwsRegion *smithy.Schema
-
-var GetNetworkTelemetryRequest_AccountId *smithy.Schema
-
-var GetNetworkTelemetryRequest_ResourceType *smithy.Schema
-
-var GetNetworkTelemetryRequest_ResourceArn *smithy.Schema
-
-var GetNetworkTelemetryRequest_MaxResults *smithy.Schema
-
-var GetNetworkTelemetryRequest_NextToken *smithy.Schema
-
-var GetNetworkTelemetryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetNetworkTelemetryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetNetworkTelemetryResponse_NetworkTelemetry *smithy.Schema
-
-var GetNetworkTelemetryResponse_NextToken *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyResponse_PolicyDocument *smithy.Schema
-
-var GetRouteAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetRouteAnalysisRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetRouteAnalysisRequest_GlobalNetworkId *smithy.Schema
-
-var GetRouteAnalysisRequest_RouteAnalysisId *smithy.Schema
-
-var GetRouteAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetRouteAnalysisResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetRouteAnalysisResponse_RouteAnalysis *smithy.Schema
-
-var GetSitesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetSitesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetSitesRequest_GlobalNetworkId *smithy.Schema
-
-var GetSitesRequest_SiteIds *smithy.Schema
-
-var GetSitesRequest_MaxResults *smithy.Schema
-
-var GetSitesRequest_NextToken *smithy.Schema
-
-var GetSitesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetSitesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSitesResponse_Sites *smithy.Schema
-
-var GetSitesResponse_NextToken *smithy.Schema
-
-var GetSiteToSiteVpnAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetSiteToSiteVpnAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSiteToSiteVpnAttachmentRequest_AttachmentId *smithy.Schema
-
-var GetSiteToSiteVpnAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetSiteToSiteVpnAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment *smithy.Schema
-
-var GetTransitGatewayConnectPeerAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayConnectPeerAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetTransitGatewayConnectPeerAssociationsRequest_GlobalNetworkId *smithy.Schema
-
-var GetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns *smithy.Schema
-
-var GetTransitGatewayConnectPeerAssociationsRequest_MaxResults *smithy.Schema
-
-var GetTransitGatewayConnectPeerAssociationsRequest_NextToken *smithy.Schema
-
-var GetTransitGatewayConnectPeerAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayConnectPeerAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations *smithy.Schema
-
-var GetTransitGatewayConnectPeerAssociationsResponse_NextToken *smithy.Schema
-
-var GetTransitGatewayPeeringRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayPeeringRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTransitGatewayPeeringRequest_PeeringId *smithy.Schema
-
-var GetTransitGatewayPeeringResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayPeeringResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTransitGatewayPeeringResponse_TransitGatewayPeering *smithy.Schema
-
-var GetTransitGatewayRegistrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayRegistrationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetTransitGatewayRegistrationsRequest_GlobalNetworkId *smithy.Schema
-
-var GetTransitGatewayRegistrationsRequest_TransitGatewayArns *smithy.Schema
-
-var GetTransitGatewayRegistrationsRequest_MaxResults *smithy.Schema
-
-var GetTransitGatewayRegistrationsRequest_NextToken *smithy.Schema
-
-var GetTransitGatewayRegistrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayRegistrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations *smithy.Schema
-
-var GetTransitGatewayRegistrationsResponse_NextToken *smithy.Schema
-
-var GetTransitGatewayRouteTableAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayRouteTableAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTransitGatewayRouteTableAttachmentRequest_AttachmentId *smithy.Schema
-
-var GetTransitGatewayRouteTableAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetTransitGatewayRouteTableAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment *smithy.Schema
-
-var GetVpcAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetVpcAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVpcAttachmentRequest_AttachmentId *smithy.Schema
-
-var GetVpcAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "GetVpcAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVpcAttachmentResponse_VpcAttachment *smithy.Schema
-
-var ListAttachmentNatConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentNatConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListAttachmentNatConfigurationsRequest_CoreNetworkId *smithy.Schema
-
-var ListAttachmentNatConfigurationsRequest_AttachmentId *smithy.Schema
-
-var ListAttachmentNatConfigurationsRequest_Filters *smithy.Schema
-
-var ListAttachmentNatConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListAttachmentNatConfigurationsRequest_NextToken *smithy.Schema
-
-var ListAttachmentNatConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentNatConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations *smithy.Schema
-
-var ListAttachmentNatConfigurationsResponse_NextToken *smithy.Schema
-
-var ListAttachmentRoutingPolicyAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentRoutingPolicyAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId *smithy.Schema
-
-var ListAttachmentRoutingPolicyAssociationsRequest_AttachmentId *smithy.Schema
-
-var ListAttachmentRoutingPolicyAssociationsRequest_MaxResults *smithy.Schema
-
-var ListAttachmentRoutingPolicyAssociationsRequest_NextToken *smithy.Schema
-
-var ListAttachmentRoutingPolicyAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentRoutingPolicyAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations *smithy.Schema
-
-var ListAttachmentRoutingPolicyAssociationsResponse_NextToken *smithy.Schema
-
-var ListAttachmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListAttachmentsRequest_CoreNetworkId *smithy.Schema
-
-var ListAttachmentsRequest_AttachmentType *smithy.Schema
-
-var ListAttachmentsRequest_EdgeLocation *smithy.Schema
-
-var ListAttachmentsRequest_State *smithy.Schema
-
-var ListAttachmentsRequest_MaxResults *smithy.Schema
-
-var ListAttachmentsRequest_NextToken *smithy.Schema
-
-var ListAttachmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListAttachmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAttachmentsResponse_Attachments *smithy.Schema
-
-var ListAttachmentsResponse_NextToken *smithy.Schema
-
-var ListConnectPeersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListConnectPeersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListConnectPeersRequest_CoreNetworkId *smithy.Schema
-
-var ListConnectPeersRequest_ConnectAttachmentId *smithy.Schema
-
-var ListConnectPeersRequest_MaxResults *smithy.Schema
-
-var ListConnectPeersRequest_NextToken *smithy.Schema
-
-var ListConnectPeersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListConnectPeersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConnectPeersResponse_ConnectPeers *smithy.Schema
-
-var ListConnectPeersResponse_NextToken *smithy.Schema
-
-var ListCoreNetworkPolicyVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkPolicyVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListCoreNetworkPolicyVersionsRequest_CoreNetworkId *smithy.Schema
-
-var ListCoreNetworkPolicyVersionsRequest_MaxResults *smithy.Schema
-
-var ListCoreNetworkPolicyVersionsRequest_NextToken *smithy.Schema
-
-var ListCoreNetworkPolicyVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkPolicyVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions *smithy.Schema
-
-var ListCoreNetworkPolicyVersionsResponse_NextToken *smithy.Schema
-
-var ListCoreNetworkPrefixListAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkPrefixListAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListCoreNetworkPrefixListAssociationsRequest_CoreNetworkId *smithy.Schema
-
-var ListCoreNetworkPrefixListAssociationsRequest_PrefixListArn *smithy.Schema
-
-var ListCoreNetworkPrefixListAssociationsRequest_MaxResults *smithy.Schema
-
-var ListCoreNetworkPrefixListAssociationsRequest_NextToken *smithy.Schema
-
-var ListCoreNetworkPrefixListAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkPrefixListAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations *smithy.Schema
-
-var ListCoreNetworkPrefixListAssociationsResponse_NextToken *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkRoutingInformationRequest",
-}, smithy.ShapeTypeStructure, 14)
-var ListCoreNetworkRoutingInformationRequest_CoreNetworkId *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_SegmentName *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_EdgeLocation *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_NextHopFilters *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_SubnetOfMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_SupernetOfMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_MedMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_CommunityMatches *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_MaxResults *smithy.Schema
-
-var ListCoreNetworkRoutingInformationRequest_NextToken *smithy.Schema
-
-var ListCoreNetworkRoutingInformationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworkRoutingInformationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation *smithy.Schema
-
-var ListCoreNetworkRoutingInformationResponse_NextToken *smithy.Schema
-
-var ListCoreNetworksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListCoreNetworksRequest_MaxResults *smithy.Schema
-
-var ListCoreNetworksRequest_NextToken *smithy.Schema
-
-var ListCoreNetworksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListCoreNetworksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCoreNetworksResponse_CoreNetworks *smithy.Schema
-
-var ListCoreNetworksResponse_NextToken *smithy.Schema
-
-var ListOrganizationServiceAccessStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListOrganizationServiceAccessStatusRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListOrganizationServiceAccessStatusRequest_MaxResults *smithy.Schema
-
-var ListOrganizationServiceAccessStatusRequest_NextToken *smithy.Schema
-
-var ListOrganizationServiceAccessStatusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListOrganizationServiceAccessStatusResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOrganizationServiceAccessStatusResponse_OrganizationStatus *smithy.Schema
-
-var ListOrganizationServiceAccessStatusResponse_NextToken *smithy.Schema
-
-var ListPeeringsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListPeeringsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListPeeringsRequest_CoreNetworkId *smithy.Schema
-
-var ListPeeringsRequest_PeeringType *smithy.Schema
-
-var ListPeeringsRequest_EdgeLocation *smithy.Schema
-
-var ListPeeringsRequest_State *smithy.Schema
-
-var ListPeeringsRequest_MaxResults *smithy.Schema
-
-var ListPeeringsRequest_NextToken *smithy.Schema
-
-var ListPeeringsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListPeeringsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPeeringsResponse_Peerings *smithy.Schema
-
-var ListPeeringsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_TagList *smithy.Schema
-
-var PutAttachmentRoutingPolicyLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutAttachmentRoutingPolicyLabelRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutAttachmentRoutingPolicyLabelRequest_CoreNetworkId *smithy.Schema
-
-var PutAttachmentRoutingPolicyLabelRequest_AttachmentId *smithy.Schema
-
-var PutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel *smithy.Schema
-
-var PutAttachmentRoutingPolicyLabelRequest_ClientToken *smithy.Schema
-
-var PutAttachmentRoutingPolicyLabelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutAttachmentRoutingPolicyLabelResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId *smithy.Schema
-
-var PutAttachmentRoutingPolicyLabelResponse_AttachmentId *smithy.Schema
-
-var PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel *smithy.Schema
-
-var PutCoreNetworkPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutCoreNetworkPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutCoreNetworkPolicyRequest_CoreNetworkId *smithy.Schema
-
-var PutCoreNetworkPolicyRequest_PolicyDocument *smithy.Schema
-
-var PutCoreNetworkPolicyRequest_Description *smithy.Schema
-
-var PutCoreNetworkPolicyRequest_LatestVersionId *smithy.Schema
-
-var PutCoreNetworkPolicyRequest_ClientToken *smithy.Schema
-
-var PutCoreNetworkPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutCoreNetworkPolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var PutCoreNetworkPolicyResponse_CoreNetworkPolicy *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyRequest_PolicyDocument *smithy.Schema
-
-var PutResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RegisterTransitGatewayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RegisterTransitGatewayRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RegisterTransitGatewayRequest_GlobalNetworkId *smithy.Schema
-
-var RegisterTransitGatewayRequest_TransitGatewayArn *smithy.Schema
-
-var RegisterTransitGatewayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RegisterTransitGatewayResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RegisterTransitGatewayResponse_TransitGatewayRegistration *smithy.Schema
-
-var RejectAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RejectAttachmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RejectAttachmentRequest_AttachmentId *smithy.Schema
-
-var RejectAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RejectAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RejectAttachmentResponse_Attachment *smithy.Schema
-
-var RemoveAttachmentRoutingPolicyLabelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RemoveAttachmentRoutingPolicyLabelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RemoveAttachmentRoutingPolicyLabelRequest_CoreNetworkId *smithy.Schema
-
-var RemoveAttachmentRoutingPolicyLabelRequest_AttachmentId *smithy.Schema
-
-var RemoveAttachmentRoutingPolicyLabelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RemoveAttachmentRoutingPolicyLabelResponse",
-}, smithy.ShapeTypeStructure, 3)
-var RemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId *smithy.Schema
-
-var RemoveAttachmentRoutingPolicyLabelResponse_AttachmentId *smithy.Schema
-
-var RemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel *smithy.Schema
-
-var RestoreCoreNetworkPolicyVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RestoreCoreNetworkPolicyVersionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RestoreCoreNetworkPolicyVersionRequest_CoreNetworkId *smithy.Schema
-
-var RestoreCoreNetworkPolicyVersionRequest_PolicyVersionId *smithy.Schema
-
-var RestoreCoreNetworkPolicyVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "RestoreCoreNetworkPolicyVersionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy *smithy.Schema
-
-var StartOrganizationServiceAccessUpdateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "StartOrganizationServiceAccessUpdateRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StartOrganizationServiceAccessUpdateRequest_Action *smithy.Schema
-
-var StartOrganizationServiceAccessUpdateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "StartOrganizationServiceAccessUpdateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartOrganizationServiceAccessUpdateResponse_OrganizationStatus *smithy.Schema
-
-var StartRouteAnalysisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "StartRouteAnalysisRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartRouteAnalysisRequest_GlobalNetworkId *smithy.Schema
-
-var StartRouteAnalysisRequest_Source *smithy.Schema
-
-var StartRouteAnalysisRequest_Destination *smithy.Schema
-
-var StartRouteAnalysisRequest_IncludeReturnPath *smithy.Schema
-
-var StartRouteAnalysisRequest_UseMiddleboxes *smithy.Schema
-
-var StartRouteAnalysisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "StartRouteAnalysisResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRouteAnalysisResponse_RouteAnalysis *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAttachmentNatConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateAttachmentNatConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateAttachmentNatConfigurationRequest_AttachmentId *smithy.Schema
-
-var UpdateAttachmentNatConfigurationRequest_NatGatewaySupport *smithy.Schema
-
-var UpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport *smithy.Schema
-
-var UpdateAttachmentNatConfigurationRequest_NatGatewayRules *smithy.Schema
-
-var UpdateAttachmentNatConfigurationRequest_ClientToken *smithy.Schema
-
-var UpdateAttachmentNatConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateAttachmentNatConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAttachmentNatConfigurationResponse_AttachmentId *smithy.Schema
-
-var UpdateAttachmentNatConfigurationResponse_NatGatewaySupport *smithy.Schema
-
-var UpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport *smithy.Schema
-
-var UpdateAttachmentNatConfigurationResponse_NatGatewayRules *smithy.Schema
-
-var UpdateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateConnectionRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateConnectionRequest_GlobalNetworkId *smithy.Schema
-
-var UpdateConnectionRequest_ConnectionId *smithy.Schema
-
-var UpdateConnectionRequest_LinkId *smithy.Schema
-
-var UpdateConnectionRequest_ConnectedLinkId *smithy.Schema
-
-var UpdateConnectionRequest_Description *smithy.Schema
-
-var UpdateConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateConnectionResponse_Connection *smithy.Schema
-
-var UpdateCoreNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateCoreNetworkRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateCoreNetworkRequest_CoreNetworkId *smithy.Schema
-
-var UpdateCoreNetworkRequest_Description *smithy.Schema
-
-var UpdateCoreNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateCoreNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateCoreNetworkResponse_CoreNetwork *smithy.Schema
-
-var UpdateDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateDeviceRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateDeviceRequest_GlobalNetworkId *smithy.Schema
-
-var UpdateDeviceRequest_DeviceId *smithy.Schema
-
-var UpdateDeviceRequest_AWSLocation *smithy.Schema
-
-var UpdateDeviceRequest_Description *smithy.Schema
-
-var UpdateDeviceRequest_Type *smithy.Schema
-
-var UpdateDeviceRequest_Vendor *smithy.Schema
-
-var UpdateDeviceRequest_Model *smithy.Schema
-
-var UpdateDeviceRequest_SerialNumber *smithy.Schema
-
-var UpdateDeviceRequest_Location *smithy.Schema
-
-var UpdateDeviceRequest_SiteId *smithy.Schema
-
-var UpdateDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDeviceResponse_Device *smithy.Schema
-
-var UpdateDirectConnectGatewayAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateDirectConnectGatewayAttachmentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDirectConnectGatewayAttachmentRequest_AttachmentId *smithy.Schema
-
-var UpdateDirectConnectGatewayAttachmentRequest_EdgeLocations *smithy.Schema
-
-var UpdateDirectConnectGatewayAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateDirectConnectGatewayAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment *smithy.Schema
-
-var UpdateGlobalNetworkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateGlobalNetworkRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateGlobalNetworkRequest_GlobalNetworkId *smithy.Schema
-
-var UpdateGlobalNetworkRequest_Description *smithy.Schema
-
-var UpdateGlobalNetworkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateGlobalNetworkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateGlobalNetworkResponse_GlobalNetwork *smithy.Schema
-
-var UpdateLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateLinkRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateLinkRequest_GlobalNetworkId *smithy.Schema
-
-var UpdateLinkRequest_LinkId *smithy.Schema
-
-var UpdateLinkRequest_Description *smithy.Schema
-
-var UpdateLinkRequest_Type *smithy.Schema
-
-var UpdateLinkRequest_Bandwidth *smithy.Schema
-
-var UpdateLinkRequest_Provider *smithy.Schema
-
-var UpdateLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateLinkResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateLinkResponse_Link *smithy.Schema
-
-var UpdateNetworkResourceMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateNetworkResourceMetadataRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateNetworkResourceMetadataRequest_GlobalNetworkId *smithy.Schema
-
-var UpdateNetworkResourceMetadataRequest_ResourceArn *smithy.Schema
-
-var UpdateNetworkResourceMetadataRequest_Metadata *smithy.Schema
-
-var UpdateNetworkResourceMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateNetworkResourceMetadataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateNetworkResourceMetadataResponse_ResourceArn *smithy.Schema
-
-var UpdateNetworkResourceMetadataResponse_Metadata *smithy.Schema
-
-var UpdateSiteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateSiteRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateSiteRequest_GlobalNetworkId *smithy.Schema
-
-var UpdateSiteRequest_SiteId *smithy.Schema
-
-var UpdateSiteRequest_Description *smithy.Schema
-
-var UpdateSiteRequest_Location *smithy.Schema
-
-var UpdateSiteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateSiteResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSiteResponse_Site *smithy.Schema
-
-var UpdateVpcAttachmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateVpcAttachmentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateVpcAttachmentRequest_AttachmentId *smithy.Schema
-
-var UpdateVpcAttachmentRequest_AddSubnetArns *smithy.Schema
-
-var UpdateVpcAttachmentRequest_RemoveSubnetArns *smithy.Schema
-
-var UpdateVpcAttachmentRequest_Options *smithy.Schema
-
-var UpdateVpcAttachmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.networkmanager",
-	Name:      "UpdateVpcAttachmentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVpcAttachmentResponse_VpcAttachment *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ServerSideString)
-
-	AccountStatus_AccountId = AccountStatus.AddMember("AccountId", _AccountId)
-
-	AccountStatus_SLRDeploymentStatus = AccountStatus.AddMember("SLRDeploymentStatus", _SLRDeploymentStatus)
-
-	_AccountStatusList_member = _AccountStatusList.AddMember("member", AccountStatus)
-
-	AttachmentType_CONNECT = AttachmentType.AddMember("CONNECT", smithyprelude.Unit)
-
-	AttachmentType_SITE_TO_SITE_VPN = AttachmentType.AddMember("SITE_TO_SITE_VPN", smithyprelude.Unit)
-
-	AttachmentType_VPC = AttachmentType.AddMember("VPC", smithyprelude.Unit)
-
-	AttachmentType_DIRECT_CONNECT_GATEWAY = AttachmentType.AddMember("DIRECT_CONNECT_GATEWAY", smithyprelude.Unit)
-
-	AttachmentType_TRANSIT_GATEWAY_ROUTE_TABLE = AttachmentType.AddMember("TRANSIT_GATEWAY_ROUTE_TABLE", smithyprelude.Unit)
-
-	AttachmentState_REJECTED = AttachmentState.AddMember("REJECTED", smithyprelude.Unit)
-
-	AttachmentState_PENDING_ATTACHMENT_ACCEPTANCE = AttachmentState.AddMember("PENDING_ATTACHMENT_ACCEPTANCE", smithyprelude.Unit)
-
-	AttachmentState_CREATING = AttachmentState.AddMember("CREATING", smithyprelude.Unit)
-
-	AttachmentState_FAILED = AttachmentState.AddMember("FAILED", smithyprelude.Unit)
-
-	AttachmentState_AVAILABLE = AttachmentState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	AttachmentState_UPDATING = AttachmentState.AddMember("UPDATING", smithyprelude.Unit)
-
-	AttachmentState_PENDING_NETWORK_UPDATE = AttachmentState.AddMember("PENDING_NETWORK_UPDATE", smithyprelude.Unit)
-
-	AttachmentState_PENDING_TAG_ACCEPTANCE = AttachmentState.AddMember("PENDING_TAG_ACCEPTANCE", smithyprelude.Unit)
-
-	AttachmentState_DELETING = AttachmentState.AddMember("DELETING", smithyprelude.Unit)
-
-	_ExternalRegionCodeList_member = _ExternalRegionCodeList.AddMember("member", _ExternalRegionCode)
-
-	NatGatewaySupportState_ENABLED = NatGatewaySupportState.AddMember("ENABLED", smithyprelude.Unit)
-
-	NatGatewaySupportState_ENABLING = NatGatewaySupportState.AddMember("ENABLING", smithyprelude.Unit)
-
-	NatGatewaySupportState_DISABLED = NatGatewaySupportState.AddMember("DISABLED", smithyprelude.Unit)
-
-	NatGatewaySupportState_DISABLING = NatGatewaySupportState.AddMember("DISABLING", smithyprelude.Unit)
-
-	NatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE = NatGatewaySupportState.AddMember("PENDING_ATTACHMENT_ACCEPTANCE", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ProposedSegmentChange_Tags = ProposedSegmentChange.AddMember("Tags", _TagList)
-
-	ProposedSegmentChange_AttachmentPolicyRuleNumber = ProposedSegmentChange.AddMember("AttachmentPolicyRuleNumber", _Integer)
-
-	ProposedSegmentChange_SegmentName = ProposedSegmentChange.AddMember("SegmentName", _ConstrainedString)
-
-	ProposedNetworkFunctionGroupChange_Tags = ProposedNetworkFunctionGroupChange.AddMember("Tags", _TagList)
-
-	ProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber = ProposedNetworkFunctionGroupChange.AddMember("AttachmentPolicyRuleNumber", _Integer)
-
-	ProposedNetworkFunctionGroupChange_NetworkFunctionGroupName = ProposedNetworkFunctionGroupChange.AddMember("NetworkFunctionGroupName", _ConstrainedString)
-
-	AttachmentErrorCode_VPC_NOT_FOUND = AttachmentErrorCode.AddMember("VPC_NOT_FOUND", smithyprelude.Unit)
-
-	AttachmentErrorCode_SUBNET_NOT_FOUND = AttachmentErrorCode.AddMember("SUBNET_NOT_FOUND", smithyprelude.Unit)
-
-	AttachmentErrorCode_SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE = AttachmentErrorCode.AddMember("SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", smithyprelude.Unit)
-
-	AttachmentErrorCode_SUBNET_NO_FREE_ADDRESSES = AttachmentErrorCode.AddMember("SUBNET_NO_FREE_ADDRESSES", smithyprelude.Unit)
-
-	AttachmentErrorCode_SUBNET_UNSUPPORTED_AVAILABILITY_ZONE = AttachmentErrorCode.AddMember("SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", smithyprelude.Unit)
-
-	AttachmentErrorCode_SUBNET_NO_IPV6_CIDRS = AttachmentErrorCode.AddMember("SUBNET_NO_IPV6_CIDRS", smithyprelude.Unit)
-
-	AttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE = AttachmentErrorCode.AddMember("SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", smithyprelude.Unit)
-
-	AttachmentErrorCode_VPN_CONNECTION_NOT_FOUND = AttachmentErrorCode.AddMember("VPN_CONNECTION_NOT_FOUND", smithyprelude.Unit)
-
-	AttachmentErrorCode_MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED = AttachmentErrorCode.AddMember("MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NOT_FOUND = AttachmentErrorCode.AddMember("DIRECT_CONNECT_GATEWAY_NOT_FOUND", smithyprelude.Unit)
-
-	AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS = AttachmentErrorCode.AddMember("DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", smithyprelude.Unit)
-
-	AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF = AttachmentErrorCode.AddMember("DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", smithyprelude.Unit)
-
-	AttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS = AttachmentErrorCode.AddMember("VPN_EXISTING_ASSOCIATIONS", smithyprelude.Unit)
-
-	AttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED = AttachmentErrorCode.AddMember("VPN_STATIC_ROUTES_NAT_UNSUPPORTED", smithyprelude.Unit)
-
-	AttachmentErrorCode_VPC_UNSUPPORTED_FEATURES = AttachmentErrorCode.AddMember("VPC_UNSUPPORTED_FEATURES", smithyprelude.Unit)
-
-	AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS = AttachmentErrorCode.AddMember("DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", smithyprelude.Unit)
-
-	AttachmentErrorCode_CREATION_FAILED = AttachmentErrorCode.AddMember("CREATION_FAILED", smithyprelude.Unit)
-
-	AttachmentErrorCode_UPDATE_FAILED = AttachmentErrorCode.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	AttachmentErrorCode_DELETION_FAILED = AttachmentErrorCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
-
-	AttachmentError_Code = AttachmentError.AddMember("Code", AttachmentErrorCode)
-
-	AttachmentError_Message = AttachmentError.AddMember("Message", _ServerSideString)
-
-	AttachmentError_ResourceArn = AttachmentError.AddMember("ResourceArn", _ResourceArn)
-
-	AttachmentError_RequestId = AttachmentError.AddMember("RequestId", _ServerSideString)
-
-	_AttachmentErrorList_member = _AttachmentErrorList.AddMember("member", AttachmentError)
-
-	Attachment_CoreNetworkId = Attachment.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	Attachment_CoreNetworkArn = Attachment.AddMember("CoreNetworkArn", _CoreNetworkArn)
-
-	Attachment_AttachmentId = Attachment.AddMember("AttachmentId", _AttachmentId)
-
-	Attachment_OwnerAccountId = Attachment.AddMember("OwnerAccountId", _AWSAccountId)
-
-	Attachment_AttachmentType = Attachment.AddMember("AttachmentType", AttachmentType)
-
-	Attachment_State = Attachment.AddMember("State", AttachmentState)
-
-	Attachment_EdgeLocation = Attachment.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	Attachment_EdgeLocations = Attachment.AddMember("EdgeLocations", _ExternalRegionCodeList)
-
-	Attachment_ResourceArn = Attachment.AddMember("ResourceArn", _ResourceArn)
-
-	Attachment_AttachmentPolicyRuleNumber = Attachment.AddMember("AttachmentPolicyRuleNumber", _Integer)
-
-	Attachment_SegmentName = Attachment.AddMember("SegmentName", _ConstrainedString)
-
-	Attachment_NetworkFunctionGroupName = Attachment.AddMember("NetworkFunctionGroupName", _NetworkFunctionGroupName)
-
-	Attachment_NatGatewaySupport = Attachment.AddMember("NatGatewaySupport", NatGatewaySupportState)
-
-	Attachment_NatSystemRouteSupport = Attachment.AddMember("NatSystemRouteSupport", _BoxedBoolean)
-
-	Attachment_Tags = Attachment.AddMember("Tags", _TagList)
-
-	Attachment_ProposedSegmentChange = Attachment.AddMember("ProposedSegmentChange", ProposedSegmentChange)
-
-	Attachment_ProposedNetworkFunctionGroupChange = Attachment.AddMember("ProposedNetworkFunctionGroupChange", ProposedNetworkFunctionGroupChange)
-
-	Attachment_CreatedAt = Attachment.AddMember("CreatedAt", _DateTime)
-
-	Attachment_UpdatedAt = Attachment.AddMember("UpdatedAt", _DateTime)
-
-	Attachment_LastModificationErrors = Attachment.AddMember("LastModificationErrors", _AttachmentErrorList)
-
-	_AttachmentList_member = _AttachmentList.AddMember("member", Attachment)
-
-	NatRuleState_CREATING = NatRuleState.AddMember("CREATING", smithyprelude.Unit)
-
-	NatRuleState_MODIFYING = NatRuleState.AddMember("MODIFYING", smithyprelude.Unit)
-
-	NatRuleState_DELETING = NatRuleState.AddMember("DELETING", smithyprelude.Unit)
-
-	NatRuleState_ACTIVATED = NatRuleState.AddMember("ACTIVATED", smithyprelude.Unit)
-
-	NatRuleState_ACTIVATING = NatRuleState.AddMember("ACTIVATING", smithyprelude.Unit)
-
-	NatRuleState_DEACTIVATED = NatRuleState.AddMember("DEACTIVATED", smithyprelude.Unit)
-
-	NatRuleState_DEACTIVATING = NatRuleState.AddMember("DEACTIVATING", smithyprelude.Unit)
-
-	NatRuleState_FAILED = NatRuleState.AddMember("FAILED", smithyprelude.Unit)
-
-	NatRuleState_PENDING_ATTACHMENT_ACCEPTANCE = NatRuleState.AddMember("PENDING_ATTACHMENT_ACCEPTANCE", smithyprelude.Unit)
-
-	NatRule_RuleNumber = NatRule.AddMember("RuleNumber", _NatRuleNumber)
-
-	NatRule_MatchSourceCidr = NatRule.AddMember("MatchSourceCidr", _IPAddress)
-
-	NatRule_NatCidr = NatRule.AddMember("NatCidr", _IPAddress)
-
-	NatRule_State = NatRule.AddMember("State", NatRuleState)
-
-	_NatRuleList_member = _NatRuleList.AddMember("member", NatRule)
-
-	AttachmentNatConfiguration_AttachmentId = AttachmentNatConfiguration.AddMember("AttachmentId", _AttachmentId)
-
-	AttachmentNatConfiguration_NatGatewaySupport = AttachmentNatConfiguration.AddMember("NatGatewaySupport", NatGatewaySupportState)
-
-	AttachmentNatConfiguration_NatSystemRouteSupport = AttachmentNatConfiguration.AddMember("NatSystemRouteSupport", _BoxedBoolean)
-
-	AttachmentNatConfiguration_NatGatewayRules = AttachmentNatConfiguration.AddMember("NatGatewayRules", _NatRuleList)
-
-	_AttachmentNatConfigurationList_member = _AttachmentNatConfigurationList.AddMember("member", AttachmentNatConfiguration)
-
-	_ConstrainedStringList_member = _ConstrainedStringList.AddMember("member", _ConstrainedString)
-
-	AttachmentRoutingPolicyAssociationSummary_AttachmentId = AttachmentRoutingPolicyAssociationSummary.AddMember("AttachmentId", _AttachmentId)
-
-	AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies = AttachmentRoutingPolicyAssociationSummary.AddMember("PendingRoutingPolicies", _ConstrainedStringList)
-
-	AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies = AttachmentRoutingPolicyAssociationSummary.AddMember("AssociatedRoutingPolicies", _ConstrainedStringList)
-
-	AttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel = AttachmentRoutingPolicyAssociationSummary.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	_AttachmentRoutingPolicyAssociationsList_member = _AttachmentRoutingPolicyAssociationsList.AddMember("member", AttachmentRoutingPolicyAssociationSummary)
-
-	AWSLocation_Zone = AWSLocation.AddMember("Zone", _ConstrainedString)
-
-	AWSLocation_SubnetArn = AWSLocation.AddMember("SubnetArn", _SubnetArn)
-
-	Bandwidth_UploadSpeed = Bandwidth.AddMember("UploadSpeed", _Integer)
-
-	Bandwidth_DownloadSpeed = Bandwidth.AddMember("DownloadSpeed", _Integer)
-
-	BgpOptions_PeerAsn = BgpOptions.AddMember("PeerAsn", _Long)
-
-	ChangeAction_ADD = ChangeAction.AddMember("ADD", smithyprelude.Unit)
-
-	ChangeAction_MODIFY = ChangeAction.AddMember("MODIFY", smithyprelude.Unit)
-
-	ChangeAction_REMOVE = ChangeAction.AddMember("REMOVE", smithyprelude.Unit)
-
-	ChangeSetState_PENDING_GENERATION = ChangeSetState.AddMember("PENDING_GENERATION", smithyprelude.Unit)
-
-	ChangeSetState_FAILED_GENERATION = ChangeSetState.AddMember("FAILED_GENERATION", smithyprelude.Unit)
-
-	ChangeSetState_READY_TO_EXECUTE = ChangeSetState.AddMember("READY_TO_EXECUTE", smithyprelude.Unit)
-
-	ChangeSetState_EXECUTING = ChangeSetState.AddMember("EXECUTING", smithyprelude.Unit)
-
-	ChangeSetState_EXECUTION_SUCCEEDED = ChangeSetState.AddMember("EXECUTION_SUCCEEDED", smithyprelude.Unit)
-
-	ChangeSetState_OUT_OF_DATE = ChangeSetState.AddMember("OUT_OF_DATE", smithyprelude.Unit)
-
-	ChangeStatus_NOT_STARTED = ChangeStatus.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	ChangeStatus_IN_PROGRESS = ChangeStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ChangeStatus_COMPLETE = ChangeStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	ChangeStatus_FAILED = ChangeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ChangeType_CORE_NETWORK_SEGMENT = ChangeType.AddMember("CORE_NETWORK_SEGMENT", smithyprelude.Unit)
-
-	ChangeType_NETWORK_FUNCTION_GROUP = ChangeType.AddMember("NETWORK_FUNCTION_GROUP", smithyprelude.Unit)
-
-	ChangeType_CORE_NETWORK_EDGE = ChangeType.AddMember("CORE_NETWORK_EDGE", smithyprelude.Unit)
-
-	ChangeType_ATTACHMENT_MAPPING = ChangeType.AddMember("ATTACHMENT_MAPPING", smithyprelude.Unit)
-
-	ChangeType_ATTACHMENT_ROUTE_PROPAGATION = ChangeType.AddMember("ATTACHMENT_ROUTE_PROPAGATION", smithyprelude.Unit)
-
-	ChangeType_ATTACHMENT_ROUTE_STATIC = ChangeType.AddMember("ATTACHMENT_ROUTE_STATIC", smithyprelude.Unit)
-
-	ChangeType_ROUTING_POLICY = ChangeType.AddMember("ROUTING_POLICY", smithyprelude.Unit)
-
-	ChangeType_ROUTING_POLICY_SEGMENT_ASSOCIATION = ChangeType.AddMember("ROUTING_POLICY_SEGMENT_ASSOCIATION", smithyprelude.Unit)
-
-	ChangeType_ROUTING_POLICY_EDGE_ASSOCIATION = ChangeType.AddMember("ROUTING_POLICY_EDGE_ASSOCIATION", smithyprelude.Unit)
-
-	ChangeType_ROUTING_POLICY_ATTACHMENT_ASSOCIATION = ChangeType.AddMember("ROUTING_POLICY_ATTACHMENT_ASSOCIATION", smithyprelude.Unit)
-
-	ChangeType_CORE_NETWORK_CONFIGURATION = ChangeType.AddMember("CORE_NETWORK_CONFIGURATION", smithyprelude.Unit)
-
-	ChangeType_SEGMENTS_CONFIGURATION = ChangeType.AddMember("SEGMENTS_CONFIGURATION", smithyprelude.Unit)
-
-	ChangeType_SEGMENT_ACTIONS_CONFIGURATION = ChangeType.AddMember("SEGMENT_ACTIONS_CONFIGURATION", smithyprelude.Unit)
-
-	ChangeType_ATTACHMENT_POLICIES_CONFIGURATION = ChangeType.AddMember("ATTACHMENT_POLICIES_CONFIGURATION", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _ServerSideString)
-
-	ConflictException_ResourceId = ConflictException.AddMember("ResourceId", _ServerSideString)
-
-	ConflictException_ResourceType = ConflictException.AddMember("ResourceType", _ServerSideString)
-
-	TunnelProtocol_GRE = TunnelProtocol.AddMember("GRE", smithyprelude.Unit)
-
-	TunnelProtocol_NO_ENCAP = TunnelProtocol.AddMember("NO_ENCAP", smithyprelude.Unit)
-
-	ConnectAttachmentOptions_Protocol = ConnectAttachmentOptions.AddMember("Protocol", TunnelProtocol)
-
-	ConnectAttachment_Attachment = ConnectAttachment.AddMember("Attachment", Attachment)
-
-	ConnectAttachment_TransportAttachmentId = ConnectAttachment.AddMember("TransportAttachmentId", _AttachmentId)
-
-	ConnectAttachment_Options = ConnectAttachment.AddMember("Options", ConnectAttachmentOptions)
-
-	ConnectionState_pending = ConnectionState.AddMember("pending", smithyprelude.Unit)
-
-	ConnectionState_available = ConnectionState.AddMember("available", smithyprelude.Unit)
-
-	ConnectionState_deleting = ConnectionState.AddMember("deleting", smithyprelude.Unit)
-
-	ConnectionState_updating = ConnectionState.AddMember("updating", smithyprelude.Unit)
-
-	Connection_ConnectionId = Connection.AddMember("ConnectionId", _ConnectionId)
-
-	Connection_ConnectionArn = Connection.AddMember("ConnectionArn", _ConnectionArn)
-
-	Connection_GlobalNetworkId = Connection.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	Connection_DeviceId = Connection.AddMember("DeviceId", _DeviceId)
-
-	Connection_ConnectedDeviceId = Connection.AddMember("ConnectedDeviceId", _DeviceId)
-
-	Connection_LinkId = Connection.AddMember("LinkId", _LinkId)
-
-	Connection_ConnectedLinkId = Connection.AddMember("ConnectedLinkId", _LinkId)
-
-	Connection_Description = Connection.AddMember("Description", _ConstrainedString)
-
-	Connection_CreatedAt = Connection.AddMember("CreatedAt", _DateTime)
-
-	Connection_State = Connection.AddMember("State", ConnectionState)
-
-	Connection_Tags = Connection.AddMember("Tags", _TagList)
-
-	ConnectionType_BGP = ConnectionType.AddMember("BGP", smithyprelude.Unit)
-
-	ConnectionType_IPSEC = ConnectionType.AddMember("IPSEC", smithyprelude.Unit)
-
-	ConnectionStatus_UP = ConnectionStatus.AddMember("UP", smithyprelude.Unit)
-
-	ConnectionStatus_DOWN = ConnectionStatus.AddMember("DOWN", smithyprelude.Unit)
-
-	ConnectionHealth_Type = ConnectionHealth.AddMember("Type", ConnectionType)
-
-	ConnectionHealth_Status = ConnectionHealth.AddMember("Status", ConnectionStatus)
-
-	ConnectionHealth_Timestamp = ConnectionHealth.AddMember("Timestamp", _DateTime)
-
-	_ConnectionIdList_member = _ConnectionIdList.AddMember("member", _ConnectionId)
-
-	_ConnectionList_member = _ConnectionList.AddMember("member", Connection)
-
-	ConnectPeerState_CREATING = ConnectPeerState.AddMember("CREATING", smithyprelude.Unit)
-
-	ConnectPeerState_FAILED = ConnectPeerState.AddMember("FAILED", smithyprelude.Unit)
-
-	ConnectPeerState_AVAILABLE = ConnectPeerState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	ConnectPeerState_DELETING = ConnectPeerState.AddMember("DELETING", smithyprelude.Unit)
-
-	ConnectPeerBgpConfiguration_CoreNetworkAsn = ConnectPeerBgpConfiguration.AddMember("CoreNetworkAsn", _Long)
-
-	ConnectPeerBgpConfiguration_PeerAsn = ConnectPeerBgpConfiguration.AddMember("PeerAsn", _Long)
-
-	ConnectPeerBgpConfiguration_CoreNetworkAddress = ConnectPeerBgpConfiguration.AddMember("CoreNetworkAddress", _IPAddress)
-
-	ConnectPeerBgpConfiguration_PeerAddress = ConnectPeerBgpConfiguration.AddMember("PeerAddress", _IPAddress)
-
-	_ConnectPeerBgpConfigurationList_member = _ConnectPeerBgpConfigurationList.AddMember("member", ConnectPeerBgpConfiguration)
-
-	ConnectPeerConfiguration_CoreNetworkAddress = ConnectPeerConfiguration.AddMember("CoreNetworkAddress", _IPAddress)
-
-	ConnectPeerConfiguration_PeerAddress = ConnectPeerConfiguration.AddMember("PeerAddress", _IPAddress)
-
-	ConnectPeerConfiguration_InsideCidrBlocks = ConnectPeerConfiguration.AddMember("InsideCidrBlocks", _ConstrainedStringList)
-
-	ConnectPeerConfiguration_Protocol = ConnectPeerConfiguration.AddMember("Protocol", TunnelProtocol)
-
-	ConnectPeerConfiguration_BgpConfigurations = ConnectPeerConfiguration.AddMember("BgpConfigurations", _ConnectPeerBgpConfigurationList)
-
-	ConnectPeerErrorCode_EDGE_LOCATION_NO_FREE_IPS = ConnectPeerErrorCode.AddMember("EDGE_LOCATION_NO_FREE_IPS", smithyprelude.Unit)
-
-	ConnectPeerErrorCode_EDGE_LOCATION_PEER_DUPLICATE = ConnectPeerErrorCode.AddMember("EDGE_LOCATION_PEER_DUPLICATE", smithyprelude.Unit)
-
-	ConnectPeerErrorCode_SUBNET_NOT_FOUND = ConnectPeerErrorCode.AddMember("SUBNET_NOT_FOUND", smithyprelude.Unit)
-
-	ConnectPeerErrorCode_IP_OUTSIDE_SUBNET_CIDR_RANGE = ConnectPeerErrorCode.AddMember("IP_OUTSIDE_SUBNET_CIDR_RANGE", smithyprelude.Unit)
-
-	ConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK = ConnectPeerErrorCode.AddMember("INVALID_INSIDE_CIDR_BLOCK", smithyprelude.Unit)
-
-	ConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK = ConnectPeerErrorCode.AddMember("NO_ASSOCIATED_CIDR_BLOCK", smithyprelude.Unit)
-
-	ConnectPeerErrorCode_CREATION_FAILED = ConnectPeerErrorCode.AddMember("CREATION_FAILED", smithyprelude.Unit)
-
-	ConnectPeerErrorCode_DELETION_FAILED = ConnectPeerErrorCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
-
-	ConnectPeerError_Code = ConnectPeerError.AddMember("Code", ConnectPeerErrorCode)
-
-	ConnectPeerError_Message = ConnectPeerError.AddMember("Message", _ServerSideString)
-
-	ConnectPeerError_ResourceArn = ConnectPeerError.AddMember("ResourceArn", _ResourceArn)
-
-	ConnectPeerError_RequestId = ConnectPeerError.AddMember("RequestId", _ServerSideString)
-
-	_ConnectPeerErrorList_member = _ConnectPeerErrorList.AddMember("member", ConnectPeerError)
-
-	ConnectPeer_CoreNetworkId = ConnectPeer.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	ConnectPeer_ConnectAttachmentId = ConnectPeer.AddMember("ConnectAttachmentId", _AttachmentId)
-
-	ConnectPeer_ConnectPeerId = ConnectPeer.AddMember("ConnectPeerId", _ConnectPeerId)
-
-	ConnectPeer_EdgeLocation = ConnectPeer.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	ConnectPeer_State = ConnectPeer.AddMember("State", ConnectPeerState)
-
-	ConnectPeer_CreatedAt = ConnectPeer.AddMember("CreatedAt", _DateTime)
-
-	ConnectPeer_Configuration = ConnectPeer.AddMember("Configuration", ConnectPeerConfiguration)
-
-	ConnectPeer_Tags = ConnectPeer.AddMember("Tags", _TagList)
-
-	ConnectPeer_SubnetArn = ConnectPeer.AddMember("SubnetArn", _SubnetArn)
-
-	ConnectPeer_LastModificationErrors = ConnectPeer.AddMember("LastModificationErrors", _ConnectPeerErrorList)
-
-	ConnectPeerAssociationState_pending = ConnectPeerAssociationState.AddMember("pending", smithyprelude.Unit)
-
-	ConnectPeerAssociationState_available = ConnectPeerAssociationState.AddMember("available", smithyprelude.Unit)
-
-	ConnectPeerAssociationState_deleting = ConnectPeerAssociationState.AddMember("deleting", smithyprelude.Unit)
-
-	ConnectPeerAssociationState_deleted = ConnectPeerAssociationState.AddMember("deleted", smithyprelude.Unit)
-
-	ConnectPeerAssociation_ConnectPeerId = ConnectPeerAssociation.AddMember("ConnectPeerId", _ConnectPeerId)
-
-	ConnectPeerAssociation_GlobalNetworkId = ConnectPeerAssociation.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	ConnectPeerAssociation_DeviceId = ConnectPeerAssociation.AddMember("DeviceId", _DeviceId)
-
-	ConnectPeerAssociation_LinkId = ConnectPeerAssociation.AddMember("LinkId", _LinkId)
-
-	ConnectPeerAssociation_State = ConnectPeerAssociation.AddMember("State", ConnectPeerAssociationState)
-
-	_ConnectPeerAssociationList_member = _ConnectPeerAssociationList.AddMember("member", ConnectPeerAssociation)
-
-	_ConnectPeerIdList_member = _ConnectPeerIdList.AddMember("member", _ConnectPeerId)
-
-	ConnectPeerSummary_CoreNetworkId = ConnectPeerSummary.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	ConnectPeerSummary_ConnectAttachmentId = ConnectPeerSummary.AddMember("ConnectAttachmentId", _AttachmentId)
-
-	ConnectPeerSummary_ConnectPeerId = ConnectPeerSummary.AddMember("ConnectPeerId", _ConnectPeerId)
-
-	ConnectPeerSummary_EdgeLocation = ConnectPeerSummary.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	ConnectPeerSummary_ConnectPeerState = ConnectPeerSummary.AddMember("ConnectPeerState", ConnectPeerState)
-
-	ConnectPeerSummary_CreatedAt = ConnectPeerSummary.AddMember("CreatedAt", _DateTime)
-
-	ConnectPeerSummary_Tags = ConnectPeerSummary.AddMember("Tags", _TagList)
-
-	ConnectPeerSummary_SubnetArn = ConnectPeerSummary.AddMember("SubnetArn", _SubnetArn)
-
-	_ConnectPeerSummaryList_member = _ConnectPeerSummaryList.AddMember("member", ConnectPeerSummary)
-
-	CoreNetworkState_CREATING = CoreNetworkState.AddMember("CREATING", smithyprelude.Unit)
-
-	CoreNetworkState_UPDATING = CoreNetworkState.AddMember("UPDATING", smithyprelude.Unit)
-
-	CoreNetworkState_AVAILABLE = CoreNetworkState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	CoreNetworkState_DELETING = CoreNetworkState.AddMember("DELETING", smithyprelude.Unit)
-
-	CoreNetworkSegment_Name = CoreNetworkSegment.AddMember("Name", _ConstrainedString)
-
-	CoreNetworkSegment_EdgeLocations = CoreNetworkSegment.AddMember("EdgeLocations", _ExternalRegionCodeList)
-
-	CoreNetworkSegment_SharedSegments = CoreNetworkSegment.AddMember("SharedSegments", _ConstrainedStringList)
-
-	_CoreNetworkSegmentList_member = _CoreNetworkSegmentList.AddMember("member", CoreNetworkSegment)
-
-	ServiceInsertionSegments_SendVia = ServiceInsertionSegments.AddMember("SendVia", _ConstrainedStringList)
-
-	ServiceInsertionSegments_SendTo = ServiceInsertionSegments.AddMember("SendTo", _ConstrainedStringList)
-
-	CoreNetworkNetworkFunctionGroup_Name = CoreNetworkNetworkFunctionGroup.AddMember("Name", _ConstrainedString)
-
-	CoreNetworkNetworkFunctionGroup_EdgeLocations = CoreNetworkNetworkFunctionGroup.AddMember("EdgeLocations", _ExternalRegionCodeList)
-
-	CoreNetworkNetworkFunctionGroup_Segments = CoreNetworkNetworkFunctionGroup.AddMember("Segments", ServiceInsertionSegments)
-
-	_CoreNetworkNetworkFunctionGroupList_member = _CoreNetworkNetworkFunctionGroupList.AddMember("member", CoreNetworkNetworkFunctionGroup)
-
-	CoreNetworkEdge_EdgeLocation = CoreNetworkEdge.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	CoreNetworkEdge_Asn = CoreNetworkEdge.AddMember("Asn", _Long)
-
-	CoreNetworkEdge_InsideCidrBlocks = CoreNetworkEdge.AddMember("InsideCidrBlocks", _ConstrainedStringList)
-
-	_CoreNetworkEdgeList_member = _CoreNetworkEdgeList.AddMember("member", CoreNetworkEdge)
-
-	CoreNetwork_GlobalNetworkId = CoreNetwork.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	CoreNetwork_CoreNetworkId = CoreNetwork.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CoreNetwork_CoreNetworkArn = CoreNetwork.AddMember("CoreNetworkArn", _CoreNetworkArn)
-
-	CoreNetwork_Description = CoreNetwork.AddMember("Description", _ConstrainedString)
-
-	CoreNetwork_CreatedAt = CoreNetwork.AddMember("CreatedAt", _DateTime)
-
-	CoreNetwork_State = CoreNetwork.AddMember("State", CoreNetworkState)
-
-	CoreNetwork_Segments = CoreNetwork.AddMember("Segments", _CoreNetworkSegmentList)
-
-	CoreNetwork_NetworkFunctionGroups = CoreNetwork.AddMember("NetworkFunctionGroups", _CoreNetworkNetworkFunctionGroupList)
-
-	CoreNetwork_Edges = CoreNetwork.AddMember("Edges", _CoreNetworkEdgeList)
-
-	CoreNetwork_Tags = CoreNetwork.AddMember("Tags", _TagList)
-
-	SegmentActionServiceInsertion_SEND_VIA = SegmentActionServiceInsertion.AddMember("SEND_VIA", smithyprelude.Unit)
-
-	SegmentActionServiceInsertion_SEND_TO = SegmentActionServiceInsertion.AddMember("SEND_TO", smithyprelude.Unit)
-
-	SendViaMode_DUAL_HOP = SendViaMode.AddMember("DUAL_HOP", smithyprelude.Unit)
-
-	SendViaMode_SINGLE_HOP = SendViaMode.AddMember("SINGLE_HOP", smithyprelude.Unit)
-
-	_WhenSentToSegmentsList_member = _WhenSentToSegmentsList.AddMember("member", _ConstrainedString)
-
-	WhenSentTo_WhenSentToSegmentsList = WhenSentTo.AddMember("WhenSentToSegmentsList", _WhenSentToSegmentsList)
-
-	NetworkFunctionGroup_Name = NetworkFunctionGroup.AddMember("Name", _ConstrainedString)
-
-	_NetworkFunctionGroupList_member = _NetworkFunctionGroupList.AddMember("member", NetworkFunctionGroup)
-
-	_EdgeSet_member = _EdgeSet.AddMember("member", _ConstrainedString)
-
-	_EdgeSetList_member = _EdgeSetList.AddMember("member", _EdgeSet)
-
-	EdgeOverride_EdgeSets = EdgeOverride.AddMember("EdgeSets", _EdgeSetList)
-
-	EdgeOverride_UseEdge = EdgeOverride.AddMember("UseEdge", _ConstrainedString)
-
-	_WithEdgeOverridesList_member = _WithEdgeOverridesList.AddMember("member", EdgeOverride)
-
-	Via_NetworkFunctionGroups = Via.AddMember("NetworkFunctionGroups", _NetworkFunctionGroupList)
-
-	Via_WithEdgeOverrides = Via.AddMember("WithEdgeOverrides", _WithEdgeOverridesList)
-
-	ServiceInsertionAction_Action = ServiceInsertionAction.AddMember("Action", SegmentActionServiceInsertion)
-
-	ServiceInsertionAction_Mode = ServiceInsertionAction.AddMember("Mode", SendViaMode)
-
-	ServiceInsertionAction_WhenSentTo = ServiceInsertionAction.AddMember("WhenSentTo", WhenSentTo)
-
-	ServiceInsertionAction_Via = ServiceInsertionAction.AddMember("Via", Via)
-
-	_ServiceInsertionActionList_member = _ServiceInsertionActionList.AddMember("member", ServiceInsertionAction)
-
-	RoutingPolicyDirection_INBOUND = RoutingPolicyDirection.AddMember("INBOUND", smithyprelude.Unit)
-
-	RoutingPolicyDirection_OUTBOUND = RoutingPolicyDirection.AddMember("OUTBOUND", smithyprelude.Unit)
-
-	RoutingPolicyAssociationDetail_RoutingPolicyNames = RoutingPolicyAssociationDetail.AddMember("RoutingPolicyNames", _ConstrainedStringList)
-
-	RoutingPolicyAssociationDetail_SharedSegments = RoutingPolicyAssociationDetail.AddMember("SharedSegments", _ConstrainedStringList)
-
-	_RoutingPolicyAssociationDetailsList_member = _RoutingPolicyAssociationDetailsList.AddMember("member", RoutingPolicyAssociationDetail)
-
-	CoreNetworkChangeValues_SegmentName = CoreNetworkChangeValues.AddMember("SegmentName", _ConstrainedString)
-
-	CoreNetworkChangeValues_NetworkFunctionGroupName = CoreNetworkChangeValues.AddMember("NetworkFunctionGroupName", _ConstrainedString)
-
-	CoreNetworkChangeValues_EdgeLocations = CoreNetworkChangeValues.AddMember("EdgeLocations", _ExternalRegionCodeList)
-
-	CoreNetworkChangeValues_Asn = CoreNetworkChangeValues.AddMember("Asn", _Long)
-
-	CoreNetworkChangeValues_Cidr = CoreNetworkChangeValues.AddMember("Cidr", _ConstrainedString)
-
-	CoreNetworkChangeValues_DestinationIdentifier = CoreNetworkChangeValues.AddMember("DestinationIdentifier", _ConstrainedString)
-
-	CoreNetworkChangeValues_InsideCidrBlocks = CoreNetworkChangeValues.AddMember("InsideCidrBlocks", _ConstrainedStringList)
-
-	CoreNetworkChangeValues_SharedSegments = CoreNetworkChangeValues.AddMember("SharedSegments", _ConstrainedStringList)
-
-	CoreNetworkChangeValues_ServiceInsertionActions = CoreNetworkChangeValues.AddMember("ServiceInsertionActions", _ServiceInsertionActionList)
-
-	CoreNetworkChangeValues_VpnEcmpSupport = CoreNetworkChangeValues.AddMember("VpnEcmpSupport", _Boolean)
-
-	CoreNetworkChangeValues_DnsSupport = CoreNetworkChangeValues.AddMember("DnsSupport", _Boolean)
-
-	CoreNetworkChangeValues_SecurityGroupReferencingSupport = CoreNetworkChangeValues.AddMember("SecurityGroupReferencingSupport", _Boolean)
-
-	CoreNetworkChangeValues_RoutingPolicyDirection = CoreNetworkChangeValues.AddMember("RoutingPolicyDirection", RoutingPolicyDirection)
-
-	CoreNetworkChangeValues_RoutingPolicy = CoreNetworkChangeValues.AddMember("RoutingPolicy", _CoreNetworkPolicyDocument)
-
-	CoreNetworkChangeValues_PeerEdgeLocations = CoreNetworkChangeValues.AddMember("PeerEdgeLocations", _ExternalRegionCodeList)
-
-	CoreNetworkChangeValues_AttachmentId = CoreNetworkChangeValues.AddMember("AttachmentId", _ConstrainedString)
-
-	CoreNetworkChangeValues_RoutingPolicyAssociationDetails = CoreNetworkChangeValues.AddMember("RoutingPolicyAssociationDetails", _RoutingPolicyAssociationDetailsList)
-
-	CoreNetworkChange_Type = CoreNetworkChange.AddMember("Type", ChangeType)
-
-	CoreNetworkChange_Action = CoreNetworkChange.AddMember("Action", ChangeAction)
-
-	CoreNetworkChange_Identifier = CoreNetworkChange.AddMember("Identifier", _ConstrainedString)
-
-	CoreNetworkChange_PreviousValues = CoreNetworkChange.AddMember("PreviousValues", CoreNetworkChangeValues)
-
-	CoreNetworkChange_NewValues = CoreNetworkChange.AddMember("NewValues", CoreNetworkChangeValues)
-
-	CoreNetworkChange_IdentifierPath = CoreNetworkChange.AddMember("IdentifierPath", _ConstrainedString)
-
-	CoreNetworkChangeEventValues_EdgeLocation = CoreNetworkChangeEventValues.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	CoreNetworkChangeEventValues_PeerEdgeLocation = CoreNetworkChangeEventValues.AddMember("PeerEdgeLocation", _ExternalRegionCode)
-
-	CoreNetworkChangeEventValues_RoutingPolicyDirection = CoreNetworkChangeEventValues.AddMember("RoutingPolicyDirection", RoutingPolicyDirection)
-
-	CoreNetworkChangeEventValues_SegmentName = CoreNetworkChangeEventValues.AddMember("SegmentName", _ConstrainedString)
-
-	CoreNetworkChangeEventValues_NetworkFunctionGroupName = CoreNetworkChangeEventValues.AddMember("NetworkFunctionGroupName", _ConstrainedString)
-
-	CoreNetworkChangeEventValues_AttachmentId = CoreNetworkChangeEventValues.AddMember("AttachmentId", _AttachmentId)
-
-	CoreNetworkChangeEventValues_Cidr = CoreNetworkChangeEventValues.AddMember("Cidr", _ConstrainedString)
-
-	CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails = CoreNetworkChangeEventValues.AddMember("RoutingPolicyAssociationDetails", _RoutingPolicyAssociationDetailsList)
-
-	CoreNetworkChangeEvent_Type = CoreNetworkChangeEvent.AddMember("Type", ChangeType)
-
-	CoreNetworkChangeEvent_Action = CoreNetworkChangeEvent.AddMember("Action", ChangeAction)
-
-	CoreNetworkChangeEvent_IdentifierPath = CoreNetworkChangeEvent.AddMember("IdentifierPath", _ConstrainedString)
-
-	CoreNetworkChangeEvent_EventTime = CoreNetworkChangeEvent.AddMember("EventTime", _DateTime)
-
-	CoreNetworkChangeEvent_Status = CoreNetworkChangeEvent.AddMember("Status", ChangeStatus)
-
-	CoreNetworkChangeEvent_Values = CoreNetworkChangeEvent.AddMember("Values", CoreNetworkChangeEventValues)
-
-	_CoreNetworkChangeEventList_member = _CoreNetworkChangeEventList.AddMember("member", CoreNetworkChangeEvent)
-
-	_CoreNetworkChangeList_member = _CoreNetworkChangeList.AddMember("member", CoreNetworkChange)
-
-	CoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId = CoreNetworkNetworkFunctionGroupIdentifier.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName = CoreNetworkNetworkFunctionGroupIdentifier.AddMember("NetworkFunctionGroupName", _ConstrainedString)
-
-	CoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation = CoreNetworkNetworkFunctionGroupIdentifier.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	CoreNetworkPolicyAlias_LIVE = CoreNetworkPolicyAlias.AddMember("LIVE", smithyprelude.Unit)
-
-	CoreNetworkPolicyAlias_LATEST = CoreNetworkPolicyAlias.AddMember("LATEST", smithyprelude.Unit)
-
-	CoreNetworkPolicyError_ErrorCode = CoreNetworkPolicyError.AddMember("ErrorCode", _ServerSideString)
-
-	CoreNetworkPolicyError_Message = CoreNetworkPolicyError.AddMember("Message", _ServerSideString)
-
-	CoreNetworkPolicyError_Path = CoreNetworkPolicyError.AddMember("Path", _ServerSideString)
-
-	_CoreNetworkPolicyErrorList_member = _CoreNetworkPolicyErrorList.AddMember("member", CoreNetworkPolicyError)
-
-	CoreNetworkPolicy_CoreNetworkId = CoreNetworkPolicy.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CoreNetworkPolicy_PolicyVersionId = CoreNetworkPolicy.AddMember("PolicyVersionId", _Integer)
-
-	CoreNetworkPolicy_Alias = CoreNetworkPolicy.AddMember("Alias", CoreNetworkPolicyAlias)
-
-	CoreNetworkPolicy_Description = CoreNetworkPolicy.AddMember("Description", _ConstrainedString)
-
-	CoreNetworkPolicy_CreatedAt = CoreNetworkPolicy.AddMember("CreatedAt", _DateTime)
-
-	CoreNetworkPolicy_ChangeSetState = CoreNetworkPolicy.AddMember("ChangeSetState", ChangeSetState)
-
-	CoreNetworkPolicy_PolicyErrors = CoreNetworkPolicy.AddMember("PolicyErrors", _CoreNetworkPolicyErrorList)
-
-	CoreNetworkPolicy_PolicyDocument = CoreNetworkPolicy.AddMember("PolicyDocument", _SynthesizedJsonCoreNetworkPolicyDocument)
-
-	CoreNetworkPolicyException_Message = CoreNetworkPolicyException.AddMember("Message", _ServerSideString)
-
-	CoreNetworkPolicyException_Errors = CoreNetworkPolicyException.AddMember("Errors", _CoreNetworkPolicyErrorList)
-
-	CoreNetworkPolicyVersion_CoreNetworkId = CoreNetworkPolicyVersion.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CoreNetworkPolicyVersion_PolicyVersionId = CoreNetworkPolicyVersion.AddMember("PolicyVersionId", _Integer)
-
-	CoreNetworkPolicyVersion_Alias = CoreNetworkPolicyVersion.AddMember("Alias", CoreNetworkPolicyAlias)
-
-	CoreNetworkPolicyVersion_Description = CoreNetworkPolicyVersion.AddMember("Description", _ConstrainedString)
-
-	CoreNetworkPolicyVersion_CreatedAt = CoreNetworkPolicyVersion.AddMember("CreatedAt", _DateTime)
-
-	CoreNetworkPolicyVersion_ChangeSetState = CoreNetworkPolicyVersion.AddMember("ChangeSetState", ChangeSetState)
-
-	_CoreNetworkPolicyVersionList_member = _CoreNetworkPolicyVersionList.AddMember("member", CoreNetworkPolicyVersion)
-
-	RoutingInformationNextHop_IpAddress = RoutingInformationNextHop.AddMember("IpAddress", _IPAddress)
-
-	RoutingInformationNextHop_CoreNetworkAttachmentId = RoutingInformationNextHop.AddMember("CoreNetworkAttachmentId", _ConstrainedString)
-
-	RoutingInformationNextHop_ResourceId = RoutingInformationNextHop.AddMember("ResourceId", _ConstrainedString)
-
-	RoutingInformationNextHop_ResourceType = RoutingInformationNextHop.AddMember("ResourceType", _ConstrainedString)
-
-	RoutingInformationNextHop_SegmentName = RoutingInformationNextHop.AddMember("SegmentName", _ConstrainedString)
-
-	RoutingInformationNextHop_EdgeLocation = RoutingInformationNextHop.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	CoreNetworkRoutingInformation_Prefix = CoreNetworkRoutingInformation.AddMember("Prefix", _ConstrainedString)
-
-	CoreNetworkRoutingInformation_NextHop = CoreNetworkRoutingInformation.AddMember("NextHop", RoutingInformationNextHop)
-
-	CoreNetworkRoutingInformation_LocalPreference = CoreNetworkRoutingInformation.AddMember("LocalPreference", _ConstrainedString)
-
-	CoreNetworkRoutingInformation_Med = CoreNetworkRoutingInformation.AddMember("Med", _ConstrainedString)
-
-	CoreNetworkRoutingInformation_AsPath = CoreNetworkRoutingInformation.AddMember("AsPath", _ConstrainedStringList)
-
-	CoreNetworkRoutingInformation_Communities = CoreNetworkRoutingInformation.AddMember("Communities", _ConstrainedStringList)
-
-	_CoreNetworkRoutingInformationList_member = _CoreNetworkRoutingInformationList.AddMember("member", CoreNetworkRoutingInformation)
-
-	CoreNetworkSegmentEdgeIdentifier_CoreNetworkId = CoreNetworkSegmentEdgeIdentifier.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CoreNetworkSegmentEdgeIdentifier_SegmentName = CoreNetworkSegmentEdgeIdentifier.AddMember("SegmentName", _ConstrainedString)
-
-	CoreNetworkSegmentEdgeIdentifier_EdgeLocation = CoreNetworkSegmentEdgeIdentifier.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	CoreNetworkSummary_CoreNetworkId = CoreNetworkSummary.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CoreNetworkSummary_CoreNetworkArn = CoreNetworkSummary.AddMember("CoreNetworkArn", _CoreNetworkArn)
-
-	CoreNetworkSummary_GlobalNetworkId = CoreNetworkSummary.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	CoreNetworkSummary_OwnerAccountId = CoreNetworkSummary.AddMember("OwnerAccountId", _AWSAccountId)
-
-	CoreNetworkSummary_State = CoreNetworkSummary.AddMember("State", CoreNetworkState)
-
-	CoreNetworkSummary_Description = CoreNetworkSummary.AddMember("Description", _ConstrainedString)
-
-	CoreNetworkSummary_Tags = CoreNetworkSummary.AddMember("Tags", _TagList)
-
-	_CoreNetworkSummaryList_member = _CoreNetworkSummaryList.AddMember("member", CoreNetworkSummary)
-
-	_CustomerGatewayArnList_member = _CustomerGatewayArnList.AddMember("member", _CustomerGatewayArn)
-
-	CustomerGatewayAssociationState_pending = CustomerGatewayAssociationState.AddMember("pending", smithyprelude.Unit)
-
-	CustomerGatewayAssociationState_available = CustomerGatewayAssociationState.AddMember("available", smithyprelude.Unit)
-
-	CustomerGatewayAssociationState_deleting = CustomerGatewayAssociationState.AddMember("deleting", smithyprelude.Unit)
-
-	CustomerGatewayAssociationState_deleted = CustomerGatewayAssociationState.AddMember("deleted", smithyprelude.Unit)
-
-	CustomerGatewayAssociation_CustomerGatewayArn = CustomerGatewayAssociation.AddMember("CustomerGatewayArn", _CustomerGatewayArn)
-
-	CustomerGatewayAssociation_GlobalNetworkId = CustomerGatewayAssociation.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	CustomerGatewayAssociation_DeviceId = CustomerGatewayAssociation.AddMember("DeviceId", _DeviceId)
-
-	CustomerGatewayAssociation_LinkId = CustomerGatewayAssociation.AddMember("LinkId", _LinkId)
-
-	CustomerGatewayAssociation_State = CustomerGatewayAssociation.AddMember("State", CustomerGatewayAssociationState)
-
-	_CustomerGatewayAssociationList_member = _CustomerGatewayAssociationList.AddMember("member", CustomerGatewayAssociation)
-
-	Location_Address = Location.AddMember("Address", _ConstrainedString)
-
-	Location_Latitude = Location.AddMember("Latitude", _ConstrainedString)
-
-	Location_Longitude = Location.AddMember("Longitude", _ConstrainedString)
-
-	DeviceState_pending = DeviceState.AddMember("pending", smithyprelude.Unit)
-
-	DeviceState_available = DeviceState.AddMember("available", smithyprelude.Unit)
-
-	DeviceState_deleting = DeviceState.AddMember("deleting", smithyprelude.Unit)
-
-	DeviceState_updating = DeviceState.AddMember("updating", smithyprelude.Unit)
-
-	Device_DeviceId = Device.AddMember("DeviceId", _DeviceId)
-
-	Device_DeviceArn = Device.AddMember("DeviceArn", _DeviceArn)
-
-	Device_GlobalNetworkId = Device.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	Device_AWSLocation = Device.AddMember("AWSLocation", AWSLocation)
-
-	Device_Description = Device.AddMember("Description", _ConstrainedString)
-
-	Device_Type = Device.AddMember("Type", _ConstrainedString)
-
-	Device_Vendor = Device.AddMember("Vendor", _ConstrainedString)
-
-	Device_Model = Device.AddMember("Model", _ConstrainedString)
-
-	Device_SerialNumber = Device.AddMember("SerialNumber", _ConstrainedString)
-
-	Device_Location = Device.AddMember("Location", Location)
-
-	Device_SiteId = Device.AddMember("SiteId", _SiteId)
-
-	Device_CreatedAt = Device.AddMember("CreatedAt", _DateTime)
-
-	Device_State = Device.AddMember("State", DeviceState)
-
-	Device_Tags = Device.AddMember("Tags", _TagList)
-
-	_DeviceIdList_member = _DeviceIdList.AddMember("member", _DeviceId)
-
-	_DeviceList_member = _DeviceList.AddMember("member", Device)
-
-	DirectConnectGatewayAttachment_Attachment = DirectConnectGatewayAttachment.AddMember("Attachment", Attachment)
-
-	DirectConnectGatewayAttachment_DirectConnectGatewayArn = DirectConnectGatewayAttachment.AddMember("DirectConnectGatewayArn", _DirectConnectGatewayArn)
-
-	_ExceptionContextMap_key = _ExceptionContextMap.AddMember("key", _ExceptionContextKey)
-
-	_ExceptionContextMap_value = _ExceptionContextMap.AddMember("value", _ExceptionContextValue)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
-
-	_FilterMap_key = _FilterMap.AddMember("key", _FilterName)
-
-	_FilterMap_value = _FilterMap.AddMember("value", _FilterValues)
-
-	GlobalNetworkState_pending = GlobalNetworkState.AddMember("pending", smithyprelude.Unit)
-
-	GlobalNetworkState_available = GlobalNetworkState.AddMember("available", smithyprelude.Unit)
-
-	GlobalNetworkState_deleting = GlobalNetworkState.AddMember("deleting", smithyprelude.Unit)
-
-	GlobalNetworkState_updating = GlobalNetworkState.AddMember("updating", smithyprelude.Unit)
-
-	GlobalNetwork_GlobalNetworkId = GlobalNetwork.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	GlobalNetwork_GlobalNetworkArn = GlobalNetwork.AddMember("GlobalNetworkArn", _GlobalNetworkArn)
-
-	GlobalNetwork_Description = GlobalNetwork.AddMember("Description", _ConstrainedString)
-
-	GlobalNetwork_CreatedAt = GlobalNetwork.AddMember("CreatedAt", _DateTime)
-
-	GlobalNetwork_State = GlobalNetwork.AddMember("State", GlobalNetworkState)
-
-	GlobalNetwork_Tags = GlobalNetwork.AddMember("Tags", _TagList)
-
-	_GlobalNetworkIdList_member = _GlobalNetworkIdList.AddMember("member", _GlobalNetworkId)
-
-	_GlobalNetworkList_member = _GlobalNetworkList.AddMember("member", GlobalNetwork)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _ServerSideString)
-
-	InternalServerException_RetryAfterSeconds = InternalServerException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	LinkState_pending = LinkState.AddMember("pending", smithyprelude.Unit)
-
-	LinkState_available = LinkState.AddMember("available", smithyprelude.Unit)
-
-	LinkState_deleting = LinkState.AddMember("deleting", smithyprelude.Unit)
-
-	LinkState_updating = LinkState.AddMember("updating", smithyprelude.Unit)
-
-	Link_LinkId = Link.AddMember("LinkId", _LinkId)
-
-	Link_LinkArn = Link.AddMember("LinkArn", _LinkArn)
-
-	Link_GlobalNetworkId = Link.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	Link_SiteId = Link.AddMember("SiteId", _SiteId)
-
-	Link_Description = Link.AddMember("Description", _ConstrainedString)
-
-	Link_Type = Link.AddMember("Type", _ConstrainedString)
-
-	Link_Bandwidth = Link.AddMember("Bandwidth", Bandwidth)
-
-	Link_Provider = Link.AddMember("Provider", _ConstrainedString)
-
-	Link_CreatedAt = Link.AddMember("CreatedAt", _DateTime)
-
-	Link_State = Link.AddMember("State", LinkState)
-
-	Link_Tags = Link.AddMember("Tags", _TagList)
-
-	LinkAssociationState_pending = LinkAssociationState.AddMember("pending", smithyprelude.Unit)
-
-	LinkAssociationState_available = LinkAssociationState.AddMember("available", smithyprelude.Unit)
-
-	LinkAssociationState_deleting = LinkAssociationState.AddMember("deleting", smithyprelude.Unit)
-
-	LinkAssociationState_deleted = LinkAssociationState.AddMember("deleted", smithyprelude.Unit)
-
-	LinkAssociation_GlobalNetworkId = LinkAssociation.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	LinkAssociation_DeviceId = LinkAssociation.AddMember("DeviceId", _DeviceId)
-
-	LinkAssociation_LinkId = LinkAssociation.AddMember("LinkId", _LinkId)
-
-	LinkAssociation_LinkAssociationState = LinkAssociation.AddMember("LinkAssociationState", LinkAssociationState)
-
-	_LinkAssociationList_member = _LinkAssociationList.AddMember("member", LinkAssociation)
-
-	_LinkIdList_member = _LinkIdList.AddMember("member", _LinkId)
-
-	_LinkList_member = _LinkList.AddMember("member", Link)
-
-	NatGatewaySupportValue_ENABLE = NatGatewaySupportValue.AddMember("ENABLE", smithyprelude.Unit)
-
-	NatGatewaySupportValue_DISABLE = NatGatewaySupportValue.AddMember("DISABLE", smithyprelude.Unit)
-
-	NatRuleRequest_RuleNumber = NatRuleRequest.AddMember("RuleNumber", _NatRuleNumber)
-
-	NatRuleRequest_MatchSourceCidr = NatRuleRequest.AddMember("MatchSourceCidr", _IPAddress)
-
-	NatRuleRequest_NatCidr = NatRuleRequest.AddMember("NatCidr", _IPAddress)
-
-	_NatRuleRequestList_member = _NatRuleRequestList.AddMember("member", NatRuleRequest)
-
-	_NetworkResourceMetadataMap_key = _NetworkResourceMetadataMap.AddMember("key", _ConstrainedString)
-
-	_NetworkResourceMetadataMap_value = _NetworkResourceMetadataMap.AddMember("value", _ConstrainedString)
-
-	NetworkResource_RegisteredGatewayArn = NetworkResource.AddMember("RegisteredGatewayArn", _ResourceArn)
-
-	NetworkResource_CoreNetworkId = NetworkResource.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	NetworkResource_AwsRegion = NetworkResource.AddMember("AwsRegion", _ExternalRegionCode)
-
-	NetworkResource_AccountId = NetworkResource.AddMember("AccountId", _AWSAccountId)
-
-	NetworkResource_ResourceType = NetworkResource.AddMember("ResourceType", _ConstrainedString)
-
-	NetworkResource_ResourceId = NetworkResource.AddMember("ResourceId", _ConstrainedString)
-
-	NetworkResource_ResourceArn = NetworkResource.AddMember("ResourceArn", _ResourceArn)
-
-	NetworkResource_Definition = NetworkResource.AddMember("Definition", _ConstrainedString)
-
-	NetworkResource_DefinitionTimestamp = NetworkResource.AddMember("DefinitionTimestamp", _DateTime)
-
-	NetworkResource_Tags = NetworkResource.AddMember("Tags", _TagList)
-
-	NetworkResource_Metadata = NetworkResource.AddMember("Metadata", _NetworkResourceMetadataMap)
-
-	NetworkResourceCount_ResourceType = NetworkResourceCount.AddMember("ResourceType", _ConstrainedString)
-
-	NetworkResourceCount_Count = NetworkResourceCount.AddMember("Count", _Integer)
-
-	_NetworkResourceCountList_member = _NetworkResourceCountList.AddMember("member", NetworkResourceCount)
-
-	_NetworkResourceList_member = _NetworkResourceList.AddMember("member", NetworkResource)
-
-	NetworkResourceSummary_RegisteredGatewayArn = NetworkResourceSummary.AddMember("RegisteredGatewayArn", _ResourceArn)
-
-	NetworkResourceSummary_ResourceArn = NetworkResourceSummary.AddMember("ResourceArn", _ResourceArn)
-
-	NetworkResourceSummary_ResourceType = NetworkResourceSummary.AddMember("ResourceType", _ConstrainedString)
-
-	NetworkResourceSummary_Definition = NetworkResourceSummary.AddMember("Definition", _ConstrainedString)
-
-	NetworkResourceSummary_NameTag = NetworkResourceSummary.AddMember("NameTag", _ConstrainedString)
-
-	NetworkResourceSummary_IsMiddlebox = NetworkResourceSummary.AddMember("IsMiddlebox", _Boolean)
-
-	NetworkRouteDestination_CoreNetworkAttachmentId = NetworkRouteDestination.AddMember("CoreNetworkAttachmentId", _AttachmentId)
-
-	NetworkRouteDestination_TransitGatewayAttachmentId = NetworkRouteDestination.AddMember("TransitGatewayAttachmentId", _TransitGatewayAttachmentId)
-
-	NetworkRouteDestination_SegmentName = NetworkRouteDestination.AddMember("SegmentName", _ConstrainedString)
-
-	NetworkRouteDestination_NetworkFunctionGroupName = NetworkRouteDestination.AddMember("NetworkFunctionGroupName", _ConstrainedString)
-
-	NetworkRouteDestination_EdgeLocation = NetworkRouteDestination.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	NetworkRouteDestination_ResourceType = NetworkRouteDestination.AddMember("ResourceType", _ConstrainedString)
-
-	NetworkRouteDestination_ResourceId = NetworkRouteDestination.AddMember("ResourceId", _ConstrainedString)
-
-	_NetworkRouteDestinationList_member = _NetworkRouteDestinationList.AddMember("member", NetworkRouteDestination)
-
-	RouteState_ACTIVE = RouteState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	RouteState_BLACKHOLE = RouteState.AddMember("BLACKHOLE", smithyprelude.Unit)
-
-	RouteType_PROPAGATED = RouteType.AddMember("PROPAGATED", smithyprelude.Unit)
-
-	RouteType_STATIC = RouteType.AddMember("STATIC", smithyprelude.Unit)
-
-	RouteType_SYSTEM = RouteType.AddMember("SYSTEM", smithyprelude.Unit)
-
-	NetworkRoute_DestinationCidrBlock = NetworkRoute.AddMember("DestinationCidrBlock", _ConstrainedString)
-
-	NetworkRoute_Destinations = NetworkRoute.AddMember("Destinations", _NetworkRouteDestinationList)
-
-	NetworkRoute_PrefixListId = NetworkRoute.AddMember("PrefixListId", _ConstrainedString)
-
-	NetworkRoute_State = NetworkRoute.AddMember("State", RouteState)
-
-	NetworkRoute_Type = NetworkRoute.AddMember("Type", RouteType)
-
-	_NetworkRouteList_member = _NetworkRouteList.AddMember("member", NetworkRoute)
-
-	NetworkTelemetry_RegisteredGatewayArn = NetworkTelemetry.AddMember("RegisteredGatewayArn", _ResourceArn)
-
-	NetworkTelemetry_CoreNetworkId = NetworkTelemetry.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	NetworkTelemetry_AwsRegion = NetworkTelemetry.AddMember("AwsRegion", _ExternalRegionCode)
-
-	NetworkTelemetry_AccountId = NetworkTelemetry.AddMember("AccountId", _AWSAccountId)
-
-	NetworkTelemetry_ResourceType = NetworkTelemetry.AddMember("ResourceType", _ConstrainedString)
-
-	NetworkTelemetry_ResourceId = NetworkTelemetry.AddMember("ResourceId", _ConstrainedString)
-
-	NetworkTelemetry_ResourceArn = NetworkTelemetry.AddMember("ResourceArn", _ResourceArn)
-
-	NetworkTelemetry_Address = NetworkTelemetry.AddMember("Address", _ConstrainedString)
-
-	NetworkTelemetry_Health = NetworkTelemetry.AddMember("Health", ConnectionHealth)
-
-	_NetworkTelemetryList_member = _NetworkTelemetryList.AddMember("member", NetworkTelemetry)
-
-	OrganizationStatus_OrganizationId = OrganizationStatus.AddMember("OrganizationId", _OrganizationId)
-
-	OrganizationStatus_OrganizationAwsServiceAccessStatus = OrganizationStatus.AddMember("OrganizationAwsServiceAccessStatus", _OrganizationAwsServiceAccessStatus)
-
-	OrganizationStatus_SLRDeploymentStatus = OrganizationStatus.AddMember("SLRDeploymentStatus", _SLRDeploymentStatus)
-
-	OrganizationStatus_AccountStatusList = OrganizationStatus.AddMember("AccountStatusList", _AccountStatusList, &smithytraits.XMLName{Name: "OrganizationStatus"})
-
-	PathComponent_Sequence = PathComponent.AddMember("Sequence", _Integer)
-
-	PathComponent_Resource = PathComponent.AddMember("Resource", NetworkResourceSummary)
-
-	PathComponent_DestinationCidrBlock = PathComponent.AddMember("DestinationCidrBlock", _ConstrainedString)
-
-	_PathComponentList_member = _PathComponentList.AddMember("member", PathComponent)
-
-	PeeringType_TRANSIT_GATEWAY = PeeringType.AddMember("TRANSIT_GATEWAY", smithyprelude.Unit)
-
-	PeeringState_CREATING = PeeringState.AddMember("CREATING", smithyprelude.Unit)
-
-	PeeringState_FAILED = PeeringState.AddMember("FAILED", smithyprelude.Unit)
-
-	PeeringState_AVAILABLE = PeeringState.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	PeeringState_DELETING = PeeringState.AddMember("DELETING", smithyprelude.Unit)
-
-	PeeringErrorCode_TRANSIT_GATEWAY_NOT_FOUND = PeeringErrorCode.AddMember("TRANSIT_GATEWAY_NOT_FOUND", smithyprelude.Unit)
-
-	PeeringErrorCode_TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED = PeeringErrorCode.AddMember("TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	PeeringErrorCode_MISSING_REQUIRED_PERMISSIONS = PeeringErrorCode.AddMember("MISSING_REQUIRED_PERMISSIONS", smithyprelude.Unit)
-
-	PeeringErrorCode_INTERNAL_ERROR = PeeringErrorCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	PeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE = PeeringErrorCode.AddMember("EDGE_LOCATION_PEER_DUPLICATE", smithyprelude.Unit)
-
-	PeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE = PeeringErrorCode.AddMember("INVALID_TRANSIT_GATEWAY_STATE", smithyprelude.Unit)
-
-	PeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED = PeeringErrorCode.AddMember("TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED", smithyprelude.Unit)
-
-	PeeringErrorCode_CREATION_FAILED = PeeringErrorCode.AddMember("CREATION_FAILED", smithyprelude.Unit)
-
-	PeeringErrorCode_DELETION_FAILED = PeeringErrorCode.AddMember("DELETION_FAILED", smithyprelude.Unit)
-
-	PermissionsErrorContext_MissingPermission = PermissionsErrorContext.AddMember("MissingPermission", _ServerSideString)
-
-	PeeringError_Code = PeeringError.AddMember("Code", PeeringErrorCode)
-
-	PeeringError_Message = PeeringError.AddMember("Message", _ServerSideString)
-
-	PeeringError_ResourceArn = PeeringError.AddMember("ResourceArn", _ResourceArn)
-
-	PeeringError_RequestId = PeeringError.AddMember("RequestId", _ServerSideString)
-
-	PeeringError_MissingPermissionsContext = PeeringError.AddMember("MissingPermissionsContext", PermissionsErrorContext)
-
-	_PeeringErrorList_member = _PeeringErrorList.AddMember("member", PeeringError)
-
-	Peering_CoreNetworkId = Peering.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	Peering_CoreNetworkArn = Peering.AddMember("CoreNetworkArn", _CoreNetworkArn)
-
-	Peering_PeeringId = Peering.AddMember("PeeringId", _PeeringId)
-
-	Peering_OwnerAccountId = Peering.AddMember("OwnerAccountId", _AWSAccountId)
-
-	Peering_PeeringType = Peering.AddMember("PeeringType", PeeringType)
-
-	Peering_State = Peering.AddMember("State", PeeringState)
-
-	Peering_EdgeLocation = Peering.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	Peering_ResourceArn = Peering.AddMember("ResourceArn", _ResourceArn)
-
-	Peering_Tags = Peering.AddMember("Tags", _TagList)
-
-	Peering_CreatedAt = Peering.AddMember("CreatedAt", _DateTime)
-
-	Peering_LastModificationErrors = Peering.AddMember("LastModificationErrors", _PeeringErrorList)
-
-	_PeeringList_member = _PeeringList.AddMember("member", Peering)
-
-	PrefixListAssociation_CoreNetworkId = PrefixListAssociation.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	PrefixListAssociation_PrefixListArn = PrefixListAssociation.AddMember("PrefixListArn", _PrefixListArn)
-
-	PrefixListAssociation_PrefixListAlias = PrefixListAssociation.AddMember("PrefixListAlias", _ConstrainedString)
-
-	_PrefixListAssociationList_member = _PrefixListAssociationList.AddMember("member", PrefixListAssociation)
-
-	_ReasonContextMap_key = _ReasonContextMap.AddMember("key", _ReasonContextKey)
-
-	_ReasonContextMap_value = _ReasonContextMap.AddMember("value", _ReasonContextValue)
-
-	Relationship_From = Relationship.AddMember("From", _ConstrainedString)
-
-	Relationship_To = Relationship.AddMember("To", _ConstrainedString)
-
-	_RelationshipList_member = _RelationshipList.AddMember("member", Relationship)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ServerSideString)
-
-	ResourceNotFoundException_ResourceId = ResourceNotFoundException.AddMember("ResourceId", _ServerSideString)
-
-	ResourceNotFoundException_ResourceType = ResourceNotFoundException.AddMember("ResourceType", _ServerSideString)
-
-	ResourceNotFoundException_Context = ResourceNotFoundException.AddMember("Context", _ExceptionContextMap)
-
-	RouteAnalysisStatus_running = RouteAnalysisStatus.AddMember("running", smithyprelude.Unit)
-
-	RouteAnalysisStatus_completed = RouteAnalysisStatus.AddMember("completed", smithyprelude.Unit)
-
-	RouteAnalysisStatus_failed = RouteAnalysisStatus.AddMember("failed", smithyprelude.Unit)
-
-	RouteAnalysisEndpointOptions_TransitGatewayAttachmentArn = RouteAnalysisEndpointOptions.AddMember("TransitGatewayAttachmentArn", _TransitGatewayAttachmentArn)
-
-	RouteAnalysisEndpointOptions_TransitGatewayArn = RouteAnalysisEndpointOptions.AddMember("TransitGatewayArn", _TransitGatewayArn)
-
-	RouteAnalysisEndpointOptions_IpAddress = RouteAnalysisEndpointOptions.AddMember("IpAddress", _IPAddress)
-
-	RouteAnalysisCompletionResultCode_CONNECTED = RouteAnalysisCompletionResultCode.AddMember("CONNECTED", smithyprelude.Unit)
-
-	RouteAnalysisCompletionResultCode_NOT_CONNECTED = RouteAnalysisCompletionResultCode.AddMember("NOT_CONNECTED", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND = RouteAnalysisCompletionReasonCode.AddMember("TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY = RouteAnalysisCompletionReasonCode.AddMember("TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_CYCLIC_PATH_DETECTED = RouteAnalysisCompletionReasonCode.AddMember("CYCLIC_PATH_DETECTED", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND = RouteAnalysisCompletionReasonCode.AddMember("TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_ROUTE_NOT_FOUND = RouteAnalysisCompletionReasonCode.AddMember("ROUTE_NOT_FOUND", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND = RouteAnalysisCompletionReasonCode.AddMember("BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_INACTIVE_ROUTE_FOR_DESTINATION_FOUND = RouteAnalysisCompletionReasonCode.AddMember("INACTIVE_ROUTE_FOR_DESTINATION_FOUND", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT = RouteAnalysisCompletionReasonCode.AddMember("TRANSIT_GATEWAY_ATTACHMENT", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_MAX_HOPS_EXCEEDED = RouteAnalysisCompletionReasonCode.AddMember("MAX_HOPS_EXCEEDED", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_POSSIBLE_MIDDLEBOX = RouteAnalysisCompletionReasonCode.AddMember("POSSIBLE_MIDDLEBOX", smithyprelude.Unit)
-
-	RouteAnalysisCompletionReasonCode_NO_DESTINATION_ARN_PROVIDED = RouteAnalysisCompletionReasonCode.AddMember("NO_DESTINATION_ARN_PROVIDED", smithyprelude.Unit)
-
-	RouteAnalysisCompletion_ResultCode = RouteAnalysisCompletion.AddMember("ResultCode", RouteAnalysisCompletionResultCode)
-
-	RouteAnalysisCompletion_ReasonCode = RouteAnalysisCompletion.AddMember("ReasonCode", RouteAnalysisCompletionReasonCode)
-
-	RouteAnalysisCompletion_ReasonContext = RouteAnalysisCompletion.AddMember("ReasonContext", _ReasonContextMap)
-
-	RouteAnalysisPath_CompletionStatus = RouteAnalysisPath.AddMember("CompletionStatus", RouteAnalysisCompletion)
-
-	RouteAnalysisPath_Path = RouteAnalysisPath.AddMember("Path", _PathComponentList)
-
-	RouteAnalysis_GlobalNetworkId = RouteAnalysis.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	RouteAnalysis_OwnerAccountId = RouteAnalysis.AddMember("OwnerAccountId", _AWSAccountId)
-
-	RouteAnalysis_RouteAnalysisId = RouteAnalysis.AddMember("RouteAnalysisId", _ConstrainedString)
-
-	RouteAnalysis_StartTimestamp = RouteAnalysis.AddMember("StartTimestamp", _DateTime)
-
-	RouteAnalysis_Status = RouteAnalysis.AddMember("Status", RouteAnalysisStatus)
-
-	RouteAnalysis_Source = RouteAnalysis.AddMember("Source", RouteAnalysisEndpointOptions)
-
-	RouteAnalysis_Destination = RouteAnalysis.AddMember("Destination", RouteAnalysisEndpointOptions)
-
-	RouteAnalysis_IncludeReturnPath = RouteAnalysis.AddMember("IncludeReturnPath", _Boolean)
-
-	RouteAnalysis_UseMiddleboxes = RouteAnalysis.AddMember("UseMiddleboxes", _Boolean)
-
-	RouteAnalysis_ForwardPath = RouteAnalysis.AddMember("ForwardPath", RouteAnalysisPath)
-
-	RouteAnalysis_ReturnPath = RouteAnalysis.AddMember("ReturnPath", RouteAnalysisPath)
-
-	RouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn = RouteAnalysisEndpointOptionsSpecification.AddMember("TransitGatewayAttachmentArn", _TransitGatewayAttachmentArn)
-
-	RouteAnalysisEndpointOptionsSpecification_IpAddress = RouteAnalysisEndpointOptionsSpecification.AddMember("IpAddress", _IPAddress)
-
-	_RouteStateList_member = _RouteStateList.AddMember("member", RouteState)
-
-	RouteTableIdentifier_TransitGatewayRouteTableArn = RouteTableIdentifier.AddMember("TransitGatewayRouteTableArn", _TransitGatewayRouteTableArn)
-
-	RouteTableIdentifier_CoreNetworkSegmentEdge = RouteTableIdentifier.AddMember("CoreNetworkSegmentEdge", CoreNetworkSegmentEdgeIdentifier)
-
-	RouteTableIdentifier_CoreNetworkNetworkFunctionGroup = RouteTableIdentifier.AddMember("CoreNetworkNetworkFunctionGroup", CoreNetworkNetworkFunctionGroupIdentifier)
-
-	RouteTableType_TRANSIT_GATEWAY_ROUTE_TABLE = RouteTableType.AddMember("TRANSIT_GATEWAY_ROUTE_TABLE", smithyprelude.Unit)
-
-	RouteTableType_CORE_NETWORK_SEGMENT = RouteTableType.AddMember("CORE_NETWORK_SEGMENT", smithyprelude.Unit)
-
-	RouteTableType_NETWORK_FUNCTION_GROUP = RouteTableType.AddMember("NETWORK_FUNCTION_GROUP", smithyprelude.Unit)
-
-	_RouteTypeList_member = _RouteTypeList.AddMember("member", RouteType)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ServerSideString)
-
-	ServiceQuotaExceededException_ResourceId = ServiceQuotaExceededException.AddMember("ResourceId", _ServerSideString)
-
-	ServiceQuotaExceededException_ResourceType = ServiceQuotaExceededException.AddMember("ResourceType", _ServerSideString)
-
-	ServiceQuotaExceededException_LimitCode = ServiceQuotaExceededException.AddMember("LimitCode", _ServerSideString)
-
-	ServiceQuotaExceededException_ServiceCode = ServiceQuotaExceededException.AddMember("ServiceCode", _ServerSideString)
-
-	SiteState_pending = SiteState.AddMember("pending", smithyprelude.Unit)
-
-	SiteState_available = SiteState.AddMember("available", smithyprelude.Unit)
-
-	SiteState_deleting = SiteState.AddMember("deleting", smithyprelude.Unit)
-
-	SiteState_updating = SiteState.AddMember("updating", smithyprelude.Unit)
-
-	Site_SiteId = Site.AddMember("SiteId", _SiteId)
-
-	Site_SiteArn = Site.AddMember("SiteArn", _SiteArn)
-
-	Site_GlobalNetworkId = Site.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	Site_Description = Site.AddMember("Description", _ConstrainedString)
-
-	Site_Location = Site.AddMember("Location", Location)
-
-	Site_CreatedAt = Site.AddMember("CreatedAt", _DateTime)
-
-	Site_State = Site.AddMember("State", SiteState)
-
-	Site_Tags = Site.AddMember("Tags", _TagList)
-
-	_SiteIdList_member = _SiteIdList.AddMember("member", _SiteId)
-
-	_SiteList_member = _SiteList.AddMember("member", Site)
-
-	SiteToSiteVpnAttachment_Attachment = SiteToSiteVpnAttachment.AddMember("Attachment", Attachment)
-
-	SiteToSiteVpnAttachment_VpnConnectionArn = SiteToSiteVpnAttachment.AddMember("VpnConnectionArn", _VpnConnectionArn)
-
-	_SubnetArnList_member = _SubnetArnList.AddMember("member", _SubnetArn)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ServerSideString)
-
-	ThrottlingException_RetryAfterSeconds = ThrottlingException.AddMember("RetryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	_TransitGatewayArnList_member = _TransitGatewayArnList.AddMember("member", _TransitGatewayArn)
-
-	_TransitGatewayConnectPeerArnList_member = _TransitGatewayConnectPeerArnList.AddMember("member", _TransitGatewayConnectPeerArn)
-
-	TransitGatewayConnectPeerAssociationState_pending = TransitGatewayConnectPeerAssociationState.AddMember("pending", smithyprelude.Unit)
-
-	TransitGatewayConnectPeerAssociationState_available = TransitGatewayConnectPeerAssociationState.AddMember("available", smithyprelude.Unit)
-
-	TransitGatewayConnectPeerAssociationState_deleting = TransitGatewayConnectPeerAssociationState.AddMember("deleting", smithyprelude.Unit)
-
-	TransitGatewayConnectPeerAssociationState_deleted = TransitGatewayConnectPeerAssociationState.AddMember("deleted", smithyprelude.Unit)
-
-	TransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn = TransitGatewayConnectPeerAssociation.AddMember("TransitGatewayConnectPeerArn", _TransitGatewayConnectPeerArn)
-
-	TransitGatewayConnectPeerAssociation_GlobalNetworkId = TransitGatewayConnectPeerAssociation.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	TransitGatewayConnectPeerAssociation_DeviceId = TransitGatewayConnectPeerAssociation.AddMember("DeviceId", _DeviceId)
-
-	TransitGatewayConnectPeerAssociation_LinkId = TransitGatewayConnectPeerAssociation.AddMember("LinkId", _LinkId)
-
-	TransitGatewayConnectPeerAssociation_State = TransitGatewayConnectPeerAssociation.AddMember("State", TransitGatewayConnectPeerAssociationState)
-
-	_TransitGatewayConnectPeerAssociationList_member = _TransitGatewayConnectPeerAssociationList.AddMember("member", TransitGatewayConnectPeerAssociation)
-
-	TransitGatewayPeering_Peering = TransitGatewayPeering.AddMember("Peering", Peering)
-
-	TransitGatewayPeering_TransitGatewayArn = TransitGatewayPeering.AddMember("TransitGatewayArn", _TransitGatewayArn)
-
-	TransitGatewayPeering_TransitGatewayPeeringAttachmentId = TransitGatewayPeering.AddMember("TransitGatewayPeeringAttachmentId", _TransitGatewayPeeringAttachmentId)
-
-	TransitGatewayRegistrationState_pending = TransitGatewayRegistrationState.AddMember("pending", smithyprelude.Unit)
-
-	TransitGatewayRegistrationState_available = TransitGatewayRegistrationState.AddMember("available", smithyprelude.Unit)
-
-	TransitGatewayRegistrationState_deleting = TransitGatewayRegistrationState.AddMember("deleting", smithyprelude.Unit)
-
-	TransitGatewayRegistrationState_deleted = TransitGatewayRegistrationState.AddMember("deleted", smithyprelude.Unit)
-
-	TransitGatewayRegistrationState_failed = TransitGatewayRegistrationState.AddMember("failed", smithyprelude.Unit)
-
-	TransitGatewayRegistrationStateReason_Code = TransitGatewayRegistrationStateReason.AddMember("Code", TransitGatewayRegistrationState)
-
-	TransitGatewayRegistrationStateReason_Message = TransitGatewayRegistrationStateReason.AddMember("Message", _ConstrainedString)
-
-	TransitGatewayRegistration_GlobalNetworkId = TransitGatewayRegistration.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	TransitGatewayRegistration_TransitGatewayArn = TransitGatewayRegistration.AddMember("TransitGatewayArn", _TransitGatewayArn)
-
-	TransitGatewayRegistration_State = TransitGatewayRegistration.AddMember("State", TransitGatewayRegistrationStateReason)
-
-	_TransitGatewayRegistrationList_member = _TransitGatewayRegistrationList.AddMember("member", TransitGatewayRegistration)
-
-	TransitGatewayRouteTableAttachment_Attachment = TransitGatewayRouteTableAttachment.AddMember("Attachment", Attachment)
-
-	TransitGatewayRouteTableAttachment_PeeringId = TransitGatewayRouteTableAttachment.AddMember("PeeringId", _PeeringId)
-
-	TransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn = TransitGatewayRouteTableAttachment.AddMember("TransitGatewayRouteTableArn", _TransitGatewayRouteTableArn)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", _ServerSideString)
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", _ServerSideString)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ServerSideString)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationException_Fields = ValidationException.AddMember("Fields", _ValidationExceptionFieldList)
-
-	VpcOptions_Ipv6Support = VpcOptions.AddMember("Ipv6Support", _Boolean)
-
-	VpcOptions_ApplianceModeSupport = VpcOptions.AddMember("ApplianceModeSupport", _Boolean)
-
-	VpcOptions_DnsSupport = VpcOptions.AddMember("DnsSupport", _Boolean)
-
-	VpcOptions_SecurityGroupReferencingSupport = VpcOptions.AddMember("SecurityGroupReferencingSupport", _Boolean)
-
-	VpcAttachment_Attachment = VpcAttachment.AddMember("Attachment", Attachment)
-
-	VpcAttachment_SubnetArns = VpcAttachment.AddMember("SubnetArns", _SubnetArnList)
-
-	VpcAttachment_Options = VpcAttachment.AddMember("Options", VpcOptions)
-
-	AcceptAttachmentRequest_AttachmentId = AcceptAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	AcceptAttachmentResponse_Attachment = AcceptAttachmentResponse.AddMember("Attachment", Attachment)
-
-	AssociateConnectPeerRequest_GlobalNetworkId = AssociateConnectPeerRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	AssociateConnectPeerRequest_ConnectPeerId = AssociateConnectPeerRequest.AddMember("ConnectPeerId", _ConnectPeerId)
-
-	AssociateConnectPeerRequest_DeviceId = AssociateConnectPeerRequest.AddMember("DeviceId", _DeviceId)
-
-	AssociateConnectPeerRequest_LinkId = AssociateConnectPeerRequest.AddMember("LinkId", _LinkId)
-
-	AssociateConnectPeerResponse_ConnectPeerAssociation = AssociateConnectPeerResponse.AddMember("ConnectPeerAssociation", ConnectPeerAssociation)
-
-	AssociateCustomerGatewayRequest_CustomerGatewayArn = AssociateCustomerGatewayRequest.AddMember("CustomerGatewayArn", _CustomerGatewayArn)
-
-	AssociateCustomerGatewayRequest_GlobalNetworkId = AssociateCustomerGatewayRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	AssociateCustomerGatewayRequest_DeviceId = AssociateCustomerGatewayRequest.AddMember("DeviceId", _DeviceId)
-
-	AssociateCustomerGatewayRequest_LinkId = AssociateCustomerGatewayRequest.AddMember("LinkId", _LinkId)
-
-	AssociateCustomerGatewayResponse_CustomerGatewayAssociation = AssociateCustomerGatewayResponse.AddMember("CustomerGatewayAssociation", CustomerGatewayAssociation)
-
-	AssociateLinkRequest_GlobalNetworkId = AssociateLinkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	AssociateLinkRequest_DeviceId = AssociateLinkRequest.AddMember("DeviceId", _DeviceId)
-
-	AssociateLinkRequest_LinkId = AssociateLinkRequest.AddMember("LinkId", _LinkId)
-
-	AssociateLinkResponse_LinkAssociation = AssociateLinkResponse.AddMember("LinkAssociation", LinkAssociation)
-
-	AssociateTransitGatewayConnectPeerRequest_GlobalNetworkId = AssociateTransitGatewayConnectPeerRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	AssociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn = AssociateTransitGatewayConnectPeerRequest.AddMember("TransitGatewayConnectPeerArn", _TransitGatewayConnectPeerArn)
-
-	AssociateTransitGatewayConnectPeerRequest_DeviceId = AssociateTransitGatewayConnectPeerRequest.AddMember("DeviceId", _DeviceId)
-
-	AssociateTransitGatewayConnectPeerRequest_LinkId = AssociateTransitGatewayConnectPeerRequest.AddMember("LinkId", _LinkId)
-
-	AssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation = AssociateTransitGatewayConnectPeerResponse.AddMember("TransitGatewayConnectPeerAssociation", TransitGatewayConnectPeerAssociation)
-
-	CreateConnectAttachmentRequest_CoreNetworkId = CreateConnectAttachmentRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CreateConnectAttachmentRequest_EdgeLocation = CreateConnectAttachmentRequest.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	CreateConnectAttachmentRequest_TransportAttachmentId = CreateConnectAttachmentRequest.AddMember("TransportAttachmentId", _AttachmentId)
-
-	CreateConnectAttachmentRequest_RoutingPolicyLabel = CreateConnectAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	CreateConnectAttachmentRequest_NatGatewaySupport = CreateConnectAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
-
-	CreateConnectAttachmentRequest_NatGatewayRules = CreateConnectAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
-
-	CreateConnectAttachmentRequest_Options = CreateConnectAttachmentRequest.AddMember("Options", ConnectAttachmentOptions)
-
-	CreateConnectAttachmentRequest_Tags = CreateConnectAttachmentRequest.AddMember("Tags", _TagList)
-
-	CreateConnectAttachmentRequest_ClientToken = CreateConnectAttachmentRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateConnectAttachmentResponse_ConnectAttachment = CreateConnectAttachmentResponse.AddMember("ConnectAttachment", ConnectAttachment)
-
-	CreateConnectionRequest_GlobalNetworkId = CreateConnectionRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	CreateConnectionRequest_DeviceId = CreateConnectionRequest.AddMember("DeviceId", _DeviceId)
-
-	CreateConnectionRequest_ConnectedDeviceId = CreateConnectionRequest.AddMember("ConnectedDeviceId", _DeviceId)
-
-	CreateConnectionRequest_LinkId = CreateConnectionRequest.AddMember("LinkId", _LinkId)
-
-	CreateConnectionRequest_ConnectedLinkId = CreateConnectionRequest.AddMember("ConnectedLinkId", _LinkId)
-
-	CreateConnectionRequest_Description = CreateConnectionRequest.AddMember("Description", _ConstrainedString)
-
-	CreateConnectionRequest_Tags = CreateConnectionRequest.AddMember("Tags", _TagList)
-
-	CreateConnectionResponse_Connection = CreateConnectionResponse.AddMember("Connection", Connection)
-
-	CreateConnectPeerRequest_ConnectAttachmentId = CreateConnectPeerRequest.AddMember("ConnectAttachmentId", _AttachmentId)
-
-	CreateConnectPeerRequest_CoreNetworkAddress = CreateConnectPeerRequest.AddMember("CoreNetworkAddress", _IPAddress)
-
-	CreateConnectPeerRequest_PeerAddress = CreateConnectPeerRequest.AddMember("PeerAddress", _IPAddress)
-
-	CreateConnectPeerRequest_BgpOptions = CreateConnectPeerRequest.AddMember("BgpOptions", BgpOptions)
-
-	CreateConnectPeerRequest_InsideCidrBlocks = CreateConnectPeerRequest.AddMember("InsideCidrBlocks", _ConstrainedStringList)
-
-	CreateConnectPeerRequest_Tags = CreateConnectPeerRequest.AddMember("Tags", _TagList)
-
-	CreateConnectPeerRequest_ClientToken = CreateConnectPeerRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateConnectPeerRequest_SubnetArn = CreateConnectPeerRequest.AddMember("SubnetArn", _SubnetArn)
-
-	CreateConnectPeerResponse_ConnectPeer = CreateConnectPeerResponse.AddMember("ConnectPeer", ConnectPeer)
-
-	CreateCoreNetworkRequest_GlobalNetworkId = CreateCoreNetworkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId)
-
-	CreateCoreNetworkRequest_Description = CreateCoreNetworkRequest.AddMember("Description", _ConstrainedString)
-
-	CreateCoreNetworkRequest_Tags = CreateCoreNetworkRequest.AddMember("Tags", _TagList)
-
-	CreateCoreNetworkRequest_PolicyDocument = CreateCoreNetworkRequest.AddMember("PolicyDocument", _CoreNetworkPolicyDocument)
-
-	CreateCoreNetworkRequest_ClientToken = CreateCoreNetworkRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateCoreNetworkResponse_CoreNetwork = CreateCoreNetworkResponse.AddMember("CoreNetwork", CoreNetwork)
-
-	CreateCoreNetworkPrefixListAssociationRequest_CoreNetworkId = CreateCoreNetworkPrefixListAssociationRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CreateCoreNetworkPrefixListAssociationRequest_PrefixListArn = CreateCoreNetworkPrefixListAssociationRequest.AddMember("PrefixListArn", _PrefixListArn)
-
-	CreateCoreNetworkPrefixListAssociationRequest_PrefixListAlias = CreateCoreNetworkPrefixListAssociationRequest.AddMember("PrefixListAlias", _ConstrainedString)
-
-	CreateCoreNetworkPrefixListAssociationRequest_ClientToken = CreateCoreNetworkPrefixListAssociationRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId = CreateCoreNetworkPrefixListAssociationResponse.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CreateCoreNetworkPrefixListAssociationResponse_PrefixListArn = CreateCoreNetworkPrefixListAssociationResponse.AddMember("PrefixListArn", _PrefixListArn)
-
-	CreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias = CreateCoreNetworkPrefixListAssociationResponse.AddMember("PrefixListAlias", _ConstrainedString)
-
-	CreateDeviceRequest_GlobalNetworkId = CreateDeviceRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	CreateDeviceRequest_AWSLocation = CreateDeviceRequest.AddMember("AWSLocation", AWSLocation)
-
-	CreateDeviceRequest_Description = CreateDeviceRequest.AddMember("Description", _ConstrainedString)
-
-	CreateDeviceRequest_Type = CreateDeviceRequest.AddMember("Type", _ConstrainedString)
-
-	CreateDeviceRequest_Vendor = CreateDeviceRequest.AddMember("Vendor", _ConstrainedString)
-
-	CreateDeviceRequest_Model = CreateDeviceRequest.AddMember("Model", _ConstrainedString)
-
-	CreateDeviceRequest_SerialNumber = CreateDeviceRequest.AddMember("SerialNumber", _ConstrainedString)
-
-	CreateDeviceRequest_Location = CreateDeviceRequest.AddMember("Location", Location)
-
-	CreateDeviceRequest_SiteId = CreateDeviceRequest.AddMember("SiteId", _SiteId)
-
-	CreateDeviceRequest_Tags = CreateDeviceRequest.AddMember("Tags", _TagList)
-
-	CreateDeviceResponse_Device = CreateDeviceResponse.AddMember("Device", Device)
-
-	CreateDirectConnectGatewayAttachmentRequest_CoreNetworkId = CreateDirectConnectGatewayAttachmentRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn = CreateDirectConnectGatewayAttachmentRequest.AddMember("DirectConnectGatewayArn", _DirectConnectGatewayArn)
-
-	CreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel = CreateDirectConnectGatewayAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	CreateDirectConnectGatewayAttachmentRequest_EdgeLocations = CreateDirectConnectGatewayAttachmentRequest.AddMember("EdgeLocations", _ExternalRegionCodeList)
-
-	CreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport = CreateDirectConnectGatewayAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
-
-	CreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport = CreateDirectConnectGatewayAttachmentRequest.AddMember("NatSystemRouteSupport", _BoxedBoolean)
-
-	CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules = CreateDirectConnectGatewayAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
-
-	CreateDirectConnectGatewayAttachmentRequest_Tags = CreateDirectConnectGatewayAttachmentRequest.AddMember("Tags", _TagList)
-
-	CreateDirectConnectGatewayAttachmentRequest_ClientToken = CreateDirectConnectGatewayAttachmentRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = CreateDirectConnectGatewayAttachmentResponse.AddMember("DirectConnectGatewayAttachment", DirectConnectGatewayAttachment)
-
-	CreateGlobalNetworkRequest_Description = CreateGlobalNetworkRequest.AddMember("Description", _ConstrainedString)
-
-	CreateGlobalNetworkRequest_Tags = CreateGlobalNetworkRequest.AddMember("Tags", _TagList)
-
-	CreateGlobalNetworkResponse_GlobalNetwork = CreateGlobalNetworkResponse.AddMember("GlobalNetwork", GlobalNetwork)
-
-	CreateLinkRequest_GlobalNetworkId = CreateLinkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	CreateLinkRequest_Description = CreateLinkRequest.AddMember("Description", _ConstrainedString)
-
-	CreateLinkRequest_Type = CreateLinkRequest.AddMember("Type", _ConstrainedString)
-
-	CreateLinkRequest_Bandwidth = CreateLinkRequest.AddMember("Bandwidth", Bandwidth)
-
-	CreateLinkRequest_Provider = CreateLinkRequest.AddMember("Provider", _ConstrainedString)
-
-	CreateLinkRequest_SiteId = CreateLinkRequest.AddMember("SiteId", _SiteId)
-
-	CreateLinkRequest_Tags = CreateLinkRequest.AddMember("Tags", _TagList)
-
-	CreateLinkResponse_Link = CreateLinkResponse.AddMember("Link", Link)
-
-	CreateSiteRequest_GlobalNetworkId = CreateSiteRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	CreateSiteRequest_Description = CreateSiteRequest.AddMember("Description", _ConstrainedString)
-
-	CreateSiteRequest_Location = CreateSiteRequest.AddMember("Location", Location)
-
-	CreateSiteRequest_Tags = CreateSiteRequest.AddMember("Tags", _TagList)
-
-	CreateSiteResponse_Site = CreateSiteResponse.AddMember("Site", Site)
-
-	CreateSiteToSiteVpnAttachmentRequest_CoreNetworkId = CreateSiteToSiteVpnAttachmentRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn = CreateSiteToSiteVpnAttachmentRequest.AddMember("VpnConnectionArn", _VpnConnectionArn)
-
-	CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel = CreateSiteToSiteVpnAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	CreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport = CreateSiteToSiteVpnAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
-
-	CreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport = CreateSiteToSiteVpnAttachmentRequest.AddMember("NatSystemRouteSupport", _BoxedBoolean)
-
-	CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules = CreateSiteToSiteVpnAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
-
-	CreateSiteToSiteVpnAttachmentRequest_Tags = CreateSiteToSiteVpnAttachmentRequest.AddMember("Tags", _TagList)
-
-	CreateSiteToSiteVpnAttachmentRequest_ClientToken = CreateSiteToSiteVpnAttachmentRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment = CreateSiteToSiteVpnAttachmentResponse.AddMember("SiteToSiteVpnAttachment", SiteToSiteVpnAttachment)
-
-	CreateTransitGatewayPeeringRequest_CoreNetworkId = CreateTransitGatewayPeeringRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CreateTransitGatewayPeeringRequest_TransitGatewayArn = CreateTransitGatewayPeeringRequest.AddMember("TransitGatewayArn", _TransitGatewayArn)
-
-	CreateTransitGatewayPeeringRequest_Tags = CreateTransitGatewayPeeringRequest.AddMember("Tags", _TagList)
-
-	CreateTransitGatewayPeeringRequest_ClientToken = CreateTransitGatewayPeeringRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateTransitGatewayPeeringResponse_TransitGatewayPeering = CreateTransitGatewayPeeringResponse.AddMember("TransitGatewayPeering", TransitGatewayPeering)
-
-	CreateTransitGatewayRouteTableAttachmentRequest_PeeringId = CreateTransitGatewayRouteTableAttachmentRequest.AddMember("PeeringId", _PeeringId)
-
-	CreateTransitGatewayRouteTableAttachmentRequest_TransitGatewayRouteTableArn = CreateTransitGatewayRouteTableAttachmentRequest.AddMember("TransitGatewayRouteTableArn", _TransitGatewayRouteTableArn)
-
-	CreateTransitGatewayRouteTableAttachmentRequest_RoutingPolicyLabel = CreateTransitGatewayRouteTableAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	CreateTransitGatewayRouteTableAttachmentRequest_Tags = CreateTransitGatewayRouteTableAttachmentRequest.AddMember("Tags", _TagList)
-
-	CreateTransitGatewayRouteTableAttachmentRequest_ClientToken = CreateTransitGatewayRouteTableAttachmentRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment = CreateTransitGatewayRouteTableAttachmentResponse.AddMember("TransitGatewayRouteTableAttachment", TransitGatewayRouteTableAttachment)
-
-	CreateVpcAttachmentRequest_CoreNetworkId = CreateVpcAttachmentRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	CreateVpcAttachmentRequest_VpcArn = CreateVpcAttachmentRequest.AddMember("VpcArn", _VpcArn)
-
-	CreateVpcAttachmentRequest_SubnetArns = CreateVpcAttachmentRequest.AddMember("SubnetArns", _SubnetArnList)
-
-	CreateVpcAttachmentRequest_Options = CreateVpcAttachmentRequest.AddMember("Options", VpcOptions)
-
-	CreateVpcAttachmentRequest_RoutingPolicyLabel = CreateVpcAttachmentRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	CreateVpcAttachmentRequest_NatGatewaySupport = CreateVpcAttachmentRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
-
-	CreateVpcAttachmentRequest_NatGatewayRules = CreateVpcAttachmentRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
-
-	CreateVpcAttachmentRequest_Tags = CreateVpcAttachmentRequest.AddMember("Tags", _TagList)
-
-	CreateVpcAttachmentRequest_ClientToken = CreateVpcAttachmentRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateVpcAttachmentResponse_VpcAttachment = CreateVpcAttachmentResponse.AddMember("VpcAttachment", VpcAttachment)
-
-	DeleteAttachmentRequest_AttachmentId = DeleteAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	DeleteAttachmentResponse_Attachment = DeleteAttachmentResponse.AddMember("Attachment", Attachment)
-
-	DeleteConnectionRequest_GlobalNetworkId = DeleteConnectionRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteConnectionRequest_ConnectionId = DeleteConnectionRequest.AddMember("ConnectionId", _ConnectionId, &smithytraits.HTTPLabel{})
-
-	DeleteConnectionResponse_Connection = DeleteConnectionResponse.AddMember("Connection", Connection)
-
-	DeleteConnectPeerRequest_ConnectPeerId = DeleteConnectPeerRequest.AddMember("ConnectPeerId", _ConnectPeerId, &smithytraits.HTTPLabel{})
-
-	DeleteConnectPeerResponse_ConnectPeer = DeleteConnectPeerResponse.AddMember("ConnectPeer", ConnectPeer)
-
-	DeleteCoreNetworkRequest_CoreNetworkId = DeleteCoreNetworkRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteCoreNetworkResponse_CoreNetwork = DeleteCoreNetworkResponse.AddMember("CoreNetwork", CoreNetwork)
-
-	DeleteCoreNetworkPolicyVersionRequest_CoreNetworkId = DeleteCoreNetworkPolicyVersionRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteCoreNetworkPolicyVersionRequest_PolicyVersionId = DeleteCoreNetworkPolicyVersionRequest.AddMember("PolicyVersionId", _Integer, &smithytraits.HTTPLabel{})
-
-	DeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy = DeleteCoreNetworkPolicyVersionResponse.AddMember("CoreNetworkPolicy", CoreNetworkPolicy)
-
-	DeleteCoreNetworkPrefixListAssociationRequest_CoreNetworkId = DeleteCoreNetworkPrefixListAssociationRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteCoreNetworkPrefixListAssociationRequest_PrefixListArn = DeleteCoreNetworkPrefixListAssociationRequest.AddMember("PrefixListArn", _PrefixListArn, &smithytraits.HTTPLabel{})
-
-	DeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId = DeleteCoreNetworkPrefixListAssociationResponse.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	DeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn = DeleteCoreNetworkPrefixListAssociationResponse.AddMember("PrefixListArn", _PrefixListArn)
-
-	DeleteDeviceRequest_GlobalNetworkId = DeleteDeviceRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteDeviceRequest_DeviceId = DeleteDeviceRequest.AddMember("DeviceId", _DeviceId, &smithytraits.HTTPLabel{})
-
-	DeleteDeviceResponse_Device = DeleteDeviceResponse.AddMember("Device", Device)
-
-	DeleteGlobalNetworkRequest_GlobalNetworkId = DeleteGlobalNetworkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteGlobalNetworkResponse_GlobalNetwork = DeleteGlobalNetworkResponse.AddMember("GlobalNetwork", GlobalNetwork)
-
-	DeleteLinkRequest_GlobalNetworkId = DeleteLinkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteLinkRequest_LinkId = DeleteLinkRequest.AddMember("LinkId", _LinkId, &smithytraits.HTTPLabel{})
-
-	DeleteLinkResponse_Link = DeleteLinkResponse.AddMember("Link", Link)
-
-	DeletePeeringRequest_PeeringId = DeletePeeringRequest.AddMember("PeeringId", _PeeringId, &smithytraits.HTTPLabel{})
-
-	DeletePeeringResponse_Peering = DeletePeeringResponse.AddMember("Peering", Peering)
-
-	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	DeleteSiteRequest_GlobalNetworkId = DeleteSiteRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DeleteSiteRequest_SiteId = DeleteSiteRequest.AddMember("SiteId", _SiteId, &smithytraits.HTTPLabel{})
-
-	DeleteSiteResponse_Site = DeleteSiteResponse.AddMember("Site", Site)
-
-	DeregisterTransitGatewayRequest_GlobalNetworkId = DeregisterTransitGatewayRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DeregisterTransitGatewayRequest_TransitGatewayArn = DeregisterTransitGatewayRequest.AddMember("TransitGatewayArn", _TransitGatewayArn, &smithytraits.HTTPLabel{})
-
-	DeregisterTransitGatewayResponse_TransitGatewayRegistration = DeregisterTransitGatewayResponse.AddMember("TransitGatewayRegistration", TransitGatewayRegistration)
-
-	DescribeGlobalNetworksRequest_GlobalNetworkIds = DescribeGlobalNetworksRequest.AddMember("GlobalNetworkIds", _GlobalNetworkIdList, &smithytraits.HTTPQuery{Name: "globalNetworkIds"})
-
-	DescribeGlobalNetworksRequest_MaxResults = DescribeGlobalNetworksRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	DescribeGlobalNetworksRequest_NextToken = DescribeGlobalNetworksRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	DescribeGlobalNetworksResponse_GlobalNetworks = DescribeGlobalNetworksResponse.AddMember("GlobalNetworks", _GlobalNetworkList)
-
-	DescribeGlobalNetworksResponse_NextToken = DescribeGlobalNetworksResponse.AddMember("NextToken", _NextToken)
-
-	DisassociateConnectPeerRequest_GlobalNetworkId = DisassociateConnectPeerRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DisassociateConnectPeerRequest_ConnectPeerId = DisassociateConnectPeerRequest.AddMember("ConnectPeerId", _ConnectPeerId, &smithytraits.HTTPLabel{})
-
-	DisassociateConnectPeerResponse_ConnectPeerAssociation = DisassociateConnectPeerResponse.AddMember("ConnectPeerAssociation", ConnectPeerAssociation)
-
-	DisassociateCustomerGatewayRequest_GlobalNetworkId = DisassociateCustomerGatewayRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DisassociateCustomerGatewayRequest_CustomerGatewayArn = DisassociateCustomerGatewayRequest.AddMember("CustomerGatewayArn", _CustomerGatewayArn, &smithytraits.HTTPLabel{})
-
-	DisassociateCustomerGatewayResponse_CustomerGatewayAssociation = DisassociateCustomerGatewayResponse.AddMember("CustomerGatewayAssociation", CustomerGatewayAssociation)
-
-	DisassociateLinkRequest_GlobalNetworkId = DisassociateLinkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DisassociateLinkRequest_DeviceId = DisassociateLinkRequest.AddMember("DeviceId", _DeviceId, &smithytraits.HTTPQuery{Name: "deviceId"})
-
-	DisassociateLinkRequest_LinkId = DisassociateLinkRequest.AddMember("LinkId", _LinkId, &smithytraits.HTTPQuery{Name: "linkId"})
-
-	DisassociateLinkResponse_LinkAssociation = DisassociateLinkResponse.AddMember("LinkAssociation", LinkAssociation)
-
-	DisassociateTransitGatewayConnectPeerRequest_GlobalNetworkId = DisassociateTransitGatewayConnectPeerRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	DisassociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn = DisassociateTransitGatewayConnectPeerRequest.AddMember("TransitGatewayConnectPeerArn", _TransitGatewayConnectPeerArn, &smithytraits.HTTPLabel{})
-
-	DisassociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation = DisassociateTransitGatewayConnectPeerResponse.AddMember("TransitGatewayConnectPeerAssociation", TransitGatewayConnectPeerAssociation)
-
-	ExecuteCoreNetworkChangeSetRequest_CoreNetworkId = ExecuteCoreNetworkChangeSetRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	ExecuteCoreNetworkChangeSetRequest_PolicyVersionId = ExecuteCoreNetworkChangeSetRequest.AddMember("PolicyVersionId", _Integer, &smithytraits.HTTPLabel{})
-
-	GetConnectAttachmentRequest_AttachmentId = GetConnectAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	GetConnectAttachmentResponse_ConnectAttachment = GetConnectAttachmentResponse.AddMember("ConnectAttachment", ConnectAttachment)
-
-	GetConnectionsRequest_GlobalNetworkId = GetConnectionsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetConnectionsRequest_ConnectionIds = GetConnectionsRequest.AddMember("ConnectionIds", _ConnectionIdList, &smithytraits.HTTPQuery{Name: "connectionIds"})
-
-	GetConnectionsRequest_DeviceId = GetConnectionsRequest.AddMember("DeviceId", _DeviceId, &smithytraits.HTTPQuery{Name: "deviceId"})
-
-	GetConnectionsRequest_MaxResults = GetConnectionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetConnectionsRequest_NextToken = GetConnectionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetConnectionsResponse_Connections = GetConnectionsResponse.AddMember("Connections", _ConnectionList)
-
-	GetConnectionsResponse_NextToken = GetConnectionsResponse.AddMember("NextToken", _NextToken)
-
-	GetConnectPeerAssociationsRequest_GlobalNetworkId = GetConnectPeerAssociationsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetConnectPeerAssociationsRequest_ConnectPeerIds = GetConnectPeerAssociationsRequest.AddMember("ConnectPeerIds", _ConnectPeerIdList, &smithytraits.HTTPQuery{Name: "connectPeerIds"})
-
-	GetConnectPeerAssociationsRequest_MaxResults = GetConnectPeerAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetConnectPeerAssociationsRequest_NextToken = GetConnectPeerAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetConnectPeerAssociationsResponse_ConnectPeerAssociations = GetConnectPeerAssociationsResponse.AddMember("ConnectPeerAssociations", _ConnectPeerAssociationList)
-
-	GetConnectPeerAssociationsResponse_NextToken = GetConnectPeerAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	GetConnectPeerRequest_ConnectPeerId = GetConnectPeerRequest.AddMember("ConnectPeerId", _ConnectPeerId, &smithytraits.HTTPLabel{})
-
-	GetConnectPeerResponse_ConnectPeer = GetConnectPeerResponse.AddMember("ConnectPeer", ConnectPeer)
-
-	GetCoreNetworkChangeEventsRequest_CoreNetworkId = GetCoreNetworkChangeEventsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	GetCoreNetworkChangeEventsRequest_PolicyVersionId = GetCoreNetworkChangeEventsRequest.AddMember("PolicyVersionId", _Integer, &smithytraits.HTTPLabel{})
-
-	GetCoreNetworkChangeEventsRequest_MaxResults = GetCoreNetworkChangeEventsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetCoreNetworkChangeEventsRequest_NextToken = GetCoreNetworkChangeEventsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents = GetCoreNetworkChangeEventsResponse.AddMember("CoreNetworkChangeEvents", _CoreNetworkChangeEventList)
-
-	GetCoreNetworkChangeEventsResponse_NextToken = GetCoreNetworkChangeEventsResponse.AddMember("NextToken", _NextToken)
-
-	GetCoreNetworkChangeSetRequest_CoreNetworkId = GetCoreNetworkChangeSetRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	GetCoreNetworkChangeSetRequest_PolicyVersionId = GetCoreNetworkChangeSetRequest.AddMember("PolicyVersionId", _Integer, &smithytraits.HTTPLabel{})
-
-	GetCoreNetworkChangeSetRequest_MaxResults = GetCoreNetworkChangeSetRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetCoreNetworkChangeSetRequest_NextToken = GetCoreNetworkChangeSetRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetCoreNetworkChangeSetResponse_CoreNetworkChanges = GetCoreNetworkChangeSetResponse.AddMember("CoreNetworkChanges", _CoreNetworkChangeList)
-
-	GetCoreNetworkChangeSetResponse_NextToken = GetCoreNetworkChangeSetResponse.AddMember("NextToken", _NextToken)
-
-	GetCoreNetworkRequest_CoreNetworkId = GetCoreNetworkRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	GetCoreNetworkResponse_CoreNetwork = GetCoreNetworkResponse.AddMember("CoreNetwork", CoreNetwork)
-
-	GetCoreNetworkPolicyRequest_CoreNetworkId = GetCoreNetworkPolicyRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	GetCoreNetworkPolicyRequest_PolicyVersionId = GetCoreNetworkPolicyRequest.AddMember("PolicyVersionId", _Integer, &smithytraits.HTTPQuery{Name: "policyVersionId"})
-
-	GetCoreNetworkPolicyRequest_Alias = GetCoreNetworkPolicyRequest.AddMember("Alias", CoreNetworkPolicyAlias, &smithytraits.HTTPQuery{Name: "alias"})
-
-	GetCoreNetworkPolicyResponse_CoreNetworkPolicy = GetCoreNetworkPolicyResponse.AddMember("CoreNetworkPolicy", CoreNetworkPolicy)
-
-	GetCustomerGatewayAssociationsRequest_GlobalNetworkId = GetCustomerGatewayAssociationsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetCustomerGatewayAssociationsRequest_CustomerGatewayArns = GetCustomerGatewayAssociationsRequest.AddMember("CustomerGatewayArns", _CustomerGatewayArnList, &smithytraits.HTTPQuery{Name: "customerGatewayArns"})
-
-	GetCustomerGatewayAssociationsRequest_MaxResults = GetCustomerGatewayAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetCustomerGatewayAssociationsRequest_NextToken = GetCustomerGatewayAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations = GetCustomerGatewayAssociationsResponse.AddMember("CustomerGatewayAssociations", _CustomerGatewayAssociationList)
-
-	GetCustomerGatewayAssociationsResponse_NextToken = GetCustomerGatewayAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	GetDevicesRequest_GlobalNetworkId = GetDevicesRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetDevicesRequest_DeviceIds = GetDevicesRequest.AddMember("DeviceIds", _DeviceIdList, &smithytraits.HTTPQuery{Name: "deviceIds"})
-
-	GetDevicesRequest_SiteId = GetDevicesRequest.AddMember("SiteId", _SiteId, &smithytraits.HTTPQuery{Name: "siteId"})
-
-	GetDevicesRequest_MaxResults = GetDevicesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetDevicesRequest_NextToken = GetDevicesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetDevicesResponse_Devices = GetDevicesResponse.AddMember("Devices", _DeviceList)
-
-	GetDevicesResponse_NextToken = GetDevicesResponse.AddMember("NextToken", _NextToken)
-
-	GetDirectConnectGatewayAttachmentRequest_AttachmentId = GetDirectConnectGatewayAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	GetDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = GetDirectConnectGatewayAttachmentResponse.AddMember("DirectConnectGatewayAttachment", DirectConnectGatewayAttachment)
-
-	GetLinkAssociationsRequest_GlobalNetworkId = GetLinkAssociationsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetLinkAssociationsRequest_DeviceId = GetLinkAssociationsRequest.AddMember("DeviceId", _DeviceId, &smithytraits.HTTPQuery{Name: "deviceId"})
-
-	GetLinkAssociationsRequest_LinkId = GetLinkAssociationsRequest.AddMember("LinkId", _LinkId, &smithytraits.HTTPQuery{Name: "linkId"})
-
-	GetLinkAssociationsRequest_MaxResults = GetLinkAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetLinkAssociationsRequest_NextToken = GetLinkAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetLinkAssociationsResponse_LinkAssociations = GetLinkAssociationsResponse.AddMember("LinkAssociations", _LinkAssociationList)
-
-	GetLinkAssociationsResponse_NextToken = GetLinkAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	GetLinksRequest_GlobalNetworkId = GetLinksRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetLinksRequest_LinkIds = GetLinksRequest.AddMember("LinkIds", _LinkIdList, &smithytraits.HTTPQuery{Name: "linkIds"})
-
-	GetLinksRequest_SiteId = GetLinksRequest.AddMember("SiteId", _SiteId, &smithytraits.HTTPQuery{Name: "siteId"})
-
-	GetLinksRequest_Type = GetLinksRequest.AddMember("Type", _ConstrainedString, &smithytraits.HTTPQuery{Name: "type"})
-
-	GetLinksRequest_Provider = GetLinksRequest.AddMember("Provider", _ConstrainedString, &smithytraits.HTTPQuery{Name: "provider"})
-
-	GetLinksRequest_MaxResults = GetLinksRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetLinksRequest_NextToken = GetLinksRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetLinksResponse_Links = GetLinksResponse.AddMember("Links", _LinkList)
-
-	GetLinksResponse_NextToken = GetLinksResponse.AddMember("NextToken", _NextToken)
-
-	GetNetworkResourceCountsRequest_GlobalNetworkId = GetNetworkResourceCountsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetNetworkResourceCountsRequest_ResourceType = GetNetworkResourceCountsRequest.AddMember("ResourceType", _ConstrainedString, &smithytraits.HTTPQuery{Name: "resourceType"})
-
-	GetNetworkResourceCountsRequest_MaxResults = GetNetworkResourceCountsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetNetworkResourceCountsRequest_NextToken = GetNetworkResourceCountsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetNetworkResourceCountsResponse_NetworkResourceCounts = GetNetworkResourceCountsResponse.AddMember("NetworkResourceCounts", _NetworkResourceCountList)
-
-	GetNetworkResourceCountsResponse_NextToken = GetNetworkResourceCountsResponse.AddMember("NextToken", _NextToken)
-
-	GetNetworkResourceRelationshipsRequest_GlobalNetworkId = GetNetworkResourceRelationshipsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetNetworkResourceRelationshipsRequest_CoreNetworkId = GetNetworkResourceRelationshipsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPQuery{Name: "coreNetworkId"})
-
-	GetNetworkResourceRelationshipsRequest_RegisteredGatewayArn = GetNetworkResourceRelationshipsRequest.AddMember("RegisteredGatewayArn", _ResourceArn, &smithytraits.HTTPQuery{Name: "registeredGatewayArn"})
-
-	GetNetworkResourceRelationshipsRequest_AwsRegion = GetNetworkResourceRelationshipsRequest.AddMember("AwsRegion", _ExternalRegionCode, &smithytraits.HTTPQuery{Name: "awsRegion"})
-
-	GetNetworkResourceRelationshipsRequest_AccountId = GetNetworkResourceRelationshipsRequest.AddMember("AccountId", _AWSAccountId, &smithytraits.HTTPQuery{Name: "accountId"})
-
-	GetNetworkResourceRelationshipsRequest_ResourceType = GetNetworkResourceRelationshipsRequest.AddMember("ResourceType", _ConstrainedString, &smithytraits.HTTPQuery{Name: "resourceType"})
-
-	GetNetworkResourceRelationshipsRequest_ResourceArn = GetNetworkResourceRelationshipsRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	GetNetworkResourceRelationshipsRequest_MaxResults = GetNetworkResourceRelationshipsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetNetworkResourceRelationshipsRequest_NextToken = GetNetworkResourceRelationshipsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetNetworkResourceRelationshipsResponse_Relationships = GetNetworkResourceRelationshipsResponse.AddMember("Relationships", _RelationshipList)
-
-	GetNetworkResourceRelationshipsResponse_NextToken = GetNetworkResourceRelationshipsResponse.AddMember("NextToken", _NextToken)
-
-	GetNetworkResourcesRequest_GlobalNetworkId = GetNetworkResourcesRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetNetworkResourcesRequest_CoreNetworkId = GetNetworkResourcesRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPQuery{Name: "coreNetworkId"})
-
-	GetNetworkResourcesRequest_RegisteredGatewayArn = GetNetworkResourcesRequest.AddMember("RegisteredGatewayArn", _ResourceArn, &smithytraits.HTTPQuery{Name: "registeredGatewayArn"})
-
-	GetNetworkResourcesRequest_AwsRegion = GetNetworkResourcesRequest.AddMember("AwsRegion", _ExternalRegionCode, &smithytraits.HTTPQuery{Name: "awsRegion"})
-
-	GetNetworkResourcesRequest_AccountId = GetNetworkResourcesRequest.AddMember("AccountId", _AWSAccountId, &smithytraits.HTTPQuery{Name: "accountId"})
-
-	GetNetworkResourcesRequest_ResourceType = GetNetworkResourcesRequest.AddMember("ResourceType", _ConstrainedString, &smithytraits.HTTPQuery{Name: "resourceType"})
-
-	GetNetworkResourcesRequest_ResourceArn = GetNetworkResourcesRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	GetNetworkResourcesRequest_MaxResults = GetNetworkResourcesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetNetworkResourcesRequest_NextToken = GetNetworkResourcesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetNetworkResourcesResponse_NetworkResources = GetNetworkResourcesResponse.AddMember("NetworkResources", _NetworkResourceList)
-
-	GetNetworkResourcesResponse_NextToken = GetNetworkResourcesResponse.AddMember("NextToken", _NextToken)
-
-	GetNetworkRoutesRequest_GlobalNetworkId = GetNetworkRoutesRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetNetworkRoutesRequest_RouteTableIdentifier = GetNetworkRoutesRequest.AddMember("RouteTableIdentifier", RouteTableIdentifier)
-
-	GetNetworkRoutesRequest_ExactCidrMatches = GetNetworkRoutesRequest.AddMember("ExactCidrMatches", _ConstrainedStringList)
-
-	GetNetworkRoutesRequest_LongestPrefixMatches = GetNetworkRoutesRequest.AddMember("LongestPrefixMatches", _ConstrainedStringList)
-
-	GetNetworkRoutesRequest_SubnetOfMatches = GetNetworkRoutesRequest.AddMember("SubnetOfMatches", _ConstrainedStringList)
-
-	GetNetworkRoutesRequest_SupernetOfMatches = GetNetworkRoutesRequest.AddMember("SupernetOfMatches", _ConstrainedStringList)
-
-	GetNetworkRoutesRequest_PrefixListIds = GetNetworkRoutesRequest.AddMember("PrefixListIds", _ConstrainedStringList)
-
-	GetNetworkRoutesRequest_States = GetNetworkRoutesRequest.AddMember("States", _RouteStateList)
-
-	GetNetworkRoutesRequest_Types = GetNetworkRoutesRequest.AddMember("Types", _RouteTypeList)
-
-	GetNetworkRoutesRequest_DestinationFilters = GetNetworkRoutesRequest.AddMember("DestinationFilters", _FilterMap)
-
-	GetNetworkRoutesRequest_MaxResults = GetNetworkRoutesRequest.AddMember("MaxResults", _MaxResults)
-
-	GetNetworkRoutesRequest_NextToken = GetNetworkRoutesRequest.AddMember("NextToken", _NextToken)
-
-	GetNetworkRoutesResponse_RouteTableArn = GetNetworkRoutesResponse.AddMember("RouteTableArn", _ResourceArn)
-
-	GetNetworkRoutesResponse_CoreNetworkSegmentEdge = GetNetworkRoutesResponse.AddMember("CoreNetworkSegmentEdge", CoreNetworkSegmentEdgeIdentifier)
-
-	GetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup = GetNetworkRoutesResponse.AddMember("CoreNetworkNetworkFunctionGroup", CoreNetworkNetworkFunctionGroupIdentifier)
-
-	GetNetworkRoutesResponse_RouteTableType = GetNetworkRoutesResponse.AddMember("RouteTableType", RouteTableType)
-
-	GetNetworkRoutesResponse_RouteTableTimestamp = GetNetworkRoutesResponse.AddMember("RouteTableTimestamp", _DateTime)
-
-	GetNetworkRoutesResponse_NetworkRoutes = GetNetworkRoutesResponse.AddMember("NetworkRoutes", _NetworkRouteList)
-
-	GetNetworkRoutesResponse_NextToken = GetNetworkRoutesResponse.AddMember("NextToken", _NextToken)
-
-	GetNetworkTelemetryRequest_GlobalNetworkId = GetNetworkTelemetryRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetNetworkTelemetryRequest_CoreNetworkId = GetNetworkTelemetryRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPQuery{Name: "coreNetworkId"})
-
-	GetNetworkTelemetryRequest_RegisteredGatewayArn = GetNetworkTelemetryRequest.AddMember("RegisteredGatewayArn", _ResourceArn, &smithytraits.HTTPQuery{Name: "registeredGatewayArn"})
-
-	GetNetworkTelemetryRequest_AwsRegion = GetNetworkTelemetryRequest.AddMember("AwsRegion", _ExternalRegionCode, &smithytraits.HTTPQuery{Name: "awsRegion"})
-
-	GetNetworkTelemetryRequest_AccountId = GetNetworkTelemetryRequest.AddMember("AccountId", _AWSAccountId, &smithytraits.HTTPQuery{Name: "accountId"})
-
-	GetNetworkTelemetryRequest_ResourceType = GetNetworkTelemetryRequest.AddMember("ResourceType", _ConstrainedString, &smithytraits.HTTPQuery{Name: "resourceType"})
-
-	GetNetworkTelemetryRequest_ResourceArn = GetNetworkTelemetryRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	GetNetworkTelemetryRequest_MaxResults = GetNetworkTelemetryRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetNetworkTelemetryRequest_NextToken = GetNetworkTelemetryRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetNetworkTelemetryResponse_NetworkTelemetry = GetNetworkTelemetryResponse.AddMember("NetworkTelemetry", _NetworkTelemetryList)
-
-	GetNetworkTelemetryResponse_NextToken = GetNetworkTelemetryResponse.AddMember("NextToken", _NextToken)
-
-	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	GetResourcePolicyResponse_PolicyDocument = GetResourcePolicyResponse.AddMember("PolicyDocument", _SynthesizedJsonResourcePolicyDocument)
-
-	GetRouteAnalysisRequest_GlobalNetworkId = GetRouteAnalysisRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetRouteAnalysisRequest_RouteAnalysisId = GetRouteAnalysisRequest.AddMember("RouteAnalysisId", _ConstrainedString, &smithytraits.HTTPLabel{})
-
-	GetRouteAnalysisResponse_RouteAnalysis = GetRouteAnalysisResponse.AddMember("RouteAnalysis", RouteAnalysis)
-
-	GetSitesRequest_GlobalNetworkId = GetSitesRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetSitesRequest_SiteIds = GetSitesRequest.AddMember("SiteIds", _SiteIdList, &smithytraits.HTTPQuery{Name: "siteIds"})
-
-	GetSitesRequest_MaxResults = GetSitesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetSitesRequest_NextToken = GetSitesRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetSitesResponse_Sites = GetSitesResponse.AddMember("Sites", _SiteList)
-
-	GetSitesResponse_NextToken = GetSitesResponse.AddMember("NextToken", _NextToken)
-
-	GetSiteToSiteVpnAttachmentRequest_AttachmentId = GetSiteToSiteVpnAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	GetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment = GetSiteToSiteVpnAttachmentResponse.AddMember("SiteToSiteVpnAttachment", SiteToSiteVpnAttachment)
-
-	GetTransitGatewayConnectPeerAssociationsRequest_GlobalNetworkId = GetTransitGatewayConnectPeerAssociationsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns = GetTransitGatewayConnectPeerAssociationsRequest.AddMember("TransitGatewayConnectPeerArns", _TransitGatewayConnectPeerArnList, &smithytraits.HTTPQuery{Name: "transitGatewayConnectPeerArns"})
-
-	GetTransitGatewayConnectPeerAssociationsRequest_MaxResults = GetTransitGatewayConnectPeerAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetTransitGatewayConnectPeerAssociationsRequest_NextToken = GetTransitGatewayConnectPeerAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations = GetTransitGatewayConnectPeerAssociationsResponse.AddMember("TransitGatewayConnectPeerAssociations", _TransitGatewayConnectPeerAssociationList)
-
-	GetTransitGatewayConnectPeerAssociationsResponse_NextToken = GetTransitGatewayConnectPeerAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	GetTransitGatewayPeeringRequest_PeeringId = GetTransitGatewayPeeringRequest.AddMember("PeeringId", _PeeringId, &smithytraits.HTTPLabel{})
-
-	GetTransitGatewayPeeringResponse_TransitGatewayPeering = GetTransitGatewayPeeringResponse.AddMember("TransitGatewayPeering", TransitGatewayPeering)
-
-	GetTransitGatewayRegistrationsRequest_GlobalNetworkId = GetTransitGatewayRegistrationsRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	GetTransitGatewayRegistrationsRequest_TransitGatewayArns = GetTransitGatewayRegistrationsRequest.AddMember("TransitGatewayArns", _TransitGatewayArnList, &smithytraits.HTTPQuery{Name: "transitGatewayArns"})
-
-	GetTransitGatewayRegistrationsRequest_MaxResults = GetTransitGatewayRegistrationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetTransitGatewayRegistrationsRequest_NextToken = GetTransitGatewayRegistrationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations = GetTransitGatewayRegistrationsResponse.AddMember("TransitGatewayRegistrations", _TransitGatewayRegistrationList)
-
-	GetTransitGatewayRegistrationsResponse_NextToken = GetTransitGatewayRegistrationsResponse.AddMember("NextToken", _NextToken)
-
-	GetTransitGatewayRouteTableAttachmentRequest_AttachmentId = GetTransitGatewayRouteTableAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	GetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment = GetTransitGatewayRouteTableAttachmentResponse.AddMember("TransitGatewayRouteTableAttachment", TransitGatewayRouteTableAttachment)
-
-	GetVpcAttachmentRequest_AttachmentId = GetVpcAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	GetVpcAttachmentResponse_VpcAttachment = GetVpcAttachmentResponse.AddMember("VpcAttachment", VpcAttachment)
-
-	ListAttachmentNatConfigurationsRequest_CoreNetworkId = ListAttachmentNatConfigurationsRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	ListAttachmentNatConfigurationsRequest_AttachmentId = ListAttachmentNatConfigurationsRequest.AddMember("AttachmentId", _AttachmentId)
-
-	ListAttachmentNatConfigurationsRequest_Filters = ListAttachmentNatConfigurationsRequest.AddMember("Filters", _FilterMap)
-
-	ListAttachmentNatConfigurationsRequest_MaxResults = ListAttachmentNatConfigurationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAttachmentNatConfigurationsRequest_NextToken = ListAttachmentNatConfigurationsRequest.AddMember("NextToken", _NextToken)
-
-	ListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations = ListAttachmentNatConfigurationsResponse.AddMember("AttachmentNatConfigurations", _AttachmentNatConfigurationList)
-
-	ListAttachmentNatConfigurationsResponse_NextToken = ListAttachmentNatConfigurationsResponse.AddMember("NextToken", _NextToken)
-
-	ListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId = ListAttachmentRoutingPolicyAssociationsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	ListAttachmentRoutingPolicyAssociationsRequest_AttachmentId = ListAttachmentRoutingPolicyAssociationsRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPQuery{Name: "attachmentId"})
-
-	ListAttachmentRoutingPolicyAssociationsRequest_MaxResults = ListAttachmentRoutingPolicyAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAttachmentRoutingPolicyAssociationsRequest_NextToken = ListAttachmentRoutingPolicyAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations = ListAttachmentRoutingPolicyAssociationsResponse.AddMember("AttachmentRoutingPolicyAssociations", _AttachmentRoutingPolicyAssociationsList)
-
-	ListAttachmentRoutingPolicyAssociationsResponse_NextToken = ListAttachmentRoutingPolicyAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	ListAttachmentsRequest_CoreNetworkId = ListAttachmentsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPQuery{Name: "coreNetworkId"})
-
-	ListAttachmentsRequest_AttachmentType = ListAttachmentsRequest.AddMember("AttachmentType", AttachmentType, &smithytraits.HTTPQuery{Name: "attachmentType"})
-
-	ListAttachmentsRequest_EdgeLocation = ListAttachmentsRequest.AddMember("EdgeLocation", _ExternalRegionCode, &smithytraits.HTTPQuery{Name: "edgeLocation"})
-
-	ListAttachmentsRequest_State = ListAttachmentsRequest.AddMember("State", AttachmentState, &smithytraits.HTTPQuery{Name: "state"})
-
-	ListAttachmentsRequest_MaxResults = ListAttachmentsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListAttachmentsRequest_NextToken = ListAttachmentsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListAttachmentsResponse_Attachments = ListAttachmentsResponse.AddMember("Attachments", _AttachmentList)
-
-	ListAttachmentsResponse_NextToken = ListAttachmentsResponse.AddMember("NextToken", _NextToken)
-
-	ListConnectPeersRequest_CoreNetworkId = ListConnectPeersRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPQuery{Name: "coreNetworkId"})
-
-	ListConnectPeersRequest_ConnectAttachmentId = ListConnectPeersRequest.AddMember("ConnectAttachmentId", _AttachmentId, &smithytraits.HTTPQuery{Name: "connectAttachmentId"})
-
-	ListConnectPeersRequest_MaxResults = ListConnectPeersRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListConnectPeersRequest_NextToken = ListConnectPeersRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListConnectPeersResponse_ConnectPeers = ListConnectPeersResponse.AddMember("ConnectPeers", _ConnectPeerSummaryList)
-
-	ListConnectPeersResponse_NextToken = ListConnectPeersResponse.AddMember("NextToken", _NextToken)
-
-	ListCoreNetworkPolicyVersionsRequest_CoreNetworkId = ListCoreNetworkPolicyVersionsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	ListCoreNetworkPolicyVersionsRequest_MaxResults = ListCoreNetworkPolicyVersionsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCoreNetworkPolicyVersionsRequest_NextToken = ListCoreNetworkPolicyVersionsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions = ListCoreNetworkPolicyVersionsResponse.AddMember("CoreNetworkPolicyVersions", _CoreNetworkPolicyVersionList)
-
-	ListCoreNetworkPolicyVersionsResponse_NextToken = ListCoreNetworkPolicyVersionsResponse.AddMember("NextToken", _NextToken)
-
-	ListCoreNetworkPrefixListAssociationsRequest_CoreNetworkId = ListCoreNetworkPrefixListAssociationsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	ListCoreNetworkPrefixListAssociationsRequest_PrefixListArn = ListCoreNetworkPrefixListAssociationsRequest.AddMember("PrefixListArn", _PrefixListArn, &smithytraits.HTTPQuery{Name: "prefixListArn"})
-
-	ListCoreNetworkPrefixListAssociationsRequest_MaxResults = ListCoreNetworkPrefixListAssociationsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCoreNetworkPrefixListAssociationsRequest_NextToken = ListCoreNetworkPrefixListAssociationsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations = ListCoreNetworkPrefixListAssociationsResponse.AddMember("PrefixListAssociations", _PrefixListAssociationList)
-
-	ListCoreNetworkPrefixListAssociationsResponse_NextToken = ListCoreNetworkPrefixListAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	ListCoreNetworkRoutingInformationRequest_CoreNetworkId = ListCoreNetworkRoutingInformationRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	ListCoreNetworkRoutingInformationRequest_SegmentName = ListCoreNetworkRoutingInformationRequest.AddMember("SegmentName", _ConstrainedString)
-
-	ListCoreNetworkRoutingInformationRequest_EdgeLocation = ListCoreNetworkRoutingInformationRequest.AddMember("EdgeLocation", _ExternalRegionCode)
-
-	ListCoreNetworkRoutingInformationRequest_NextHopFilters = ListCoreNetworkRoutingInformationRequest.AddMember("NextHopFilters", _FilterMap)
-
-	ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches = ListCoreNetworkRoutingInformationRequest.AddMember("ExactPrefixMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches = ListCoreNetworkRoutingInformationRequest.AddMember("LongestPrefixMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_SubnetOfMatches = ListCoreNetworkRoutingInformationRequest.AddMember("SubnetOfMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_SupernetOfMatches = ListCoreNetworkRoutingInformationRequest.AddMember("SupernetOfMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches = ListCoreNetworkRoutingInformationRequest.AddMember("LocalPreferenceMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches = ListCoreNetworkRoutingInformationRequest.AddMember("ExactAsPathMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_MedMatches = ListCoreNetworkRoutingInformationRequest.AddMember("MedMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_CommunityMatches = ListCoreNetworkRoutingInformationRequest.AddMember("CommunityMatches", _ConstrainedStringList)
-
-	ListCoreNetworkRoutingInformationRequest_MaxResults = ListCoreNetworkRoutingInformationRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCoreNetworkRoutingInformationRequest_NextToken = ListCoreNetworkRoutingInformationRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation = ListCoreNetworkRoutingInformationResponse.AddMember("CoreNetworkRoutingInformation", _CoreNetworkRoutingInformationList)
-
-	ListCoreNetworkRoutingInformationResponse_NextToken = ListCoreNetworkRoutingInformationResponse.AddMember("NextToken", _NextToken)
-
-	ListCoreNetworksRequest_MaxResults = ListCoreNetworksRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCoreNetworksRequest_NextToken = ListCoreNetworksRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCoreNetworksResponse_CoreNetworks = ListCoreNetworksResponse.AddMember("CoreNetworks", _CoreNetworkSummaryList)
-
-	ListCoreNetworksResponse_NextToken = ListCoreNetworksResponse.AddMember("NextToken", _NextToken)
-
-	ListOrganizationServiceAccessStatusRequest_MaxResults = ListOrganizationServiceAccessStatusRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListOrganizationServiceAccessStatusRequest_NextToken = ListOrganizationServiceAccessStatusRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListOrganizationServiceAccessStatusResponse_OrganizationStatus = ListOrganizationServiceAccessStatusResponse.AddMember("OrganizationStatus", OrganizationStatus)
-
-	ListOrganizationServiceAccessStatusResponse_NextToken = ListOrganizationServiceAccessStatusResponse.AddMember("NextToken", _NextToken)
-
-	ListPeeringsRequest_CoreNetworkId = ListPeeringsRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPQuery{Name: "coreNetworkId"})
-
-	ListPeeringsRequest_PeeringType = ListPeeringsRequest.AddMember("PeeringType", PeeringType, &smithytraits.HTTPQuery{Name: "peeringType"})
-
-	ListPeeringsRequest_EdgeLocation = ListPeeringsRequest.AddMember("EdgeLocation", _ExternalRegionCode, &smithytraits.HTTPQuery{Name: "edgeLocation"})
-
-	ListPeeringsRequest_State = ListPeeringsRequest.AddMember("State", PeeringState, &smithytraits.HTTPQuery{Name: "state"})
-
-	ListPeeringsRequest_MaxResults = ListPeeringsRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListPeeringsRequest_NextToken = ListPeeringsRequest.AddMember("NextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListPeeringsResponse_Peerings = ListPeeringsResponse.AddMember("Peerings", _PeeringList)
-
-	ListPeeringsResponse_NextToken = ListPeeringsResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_TagList = ListTagsForResourceResponse.AddMember("TagList", _TagList)
-
-	PutAttachmentRoutingPolicyLabelRequest_CoreNetworkId = PutAttachmentRoutingPolicyLabelRequest.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	PutAttachmentRoutingPolicyLabelRequest_AttachmentId = PutAttachmentRoutingPolicyLabelRequest.AddMember("AttachmentId", _AttachmentId)
-
-	PutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel = PutAttachmentRoutingPolicyLabelRequest.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	PutAttachmentRoutingPolicyLabelRequest_ClientToken = PutAttachmentRoutingPolicyLabelRequest.AddMember("ClientToken", _ClientToken)
-
-	PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId = PutAttachmentRoutingPolicyLabelResponse.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	PutAttachmentRoutingPolicyLabelResponse_AttachmentId = PutAttachmentRoutingPolicyLabelResponse.AddMember("AttachmentId", _AttachmentId)
-
-	PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel = PutAttachmentRoutingPolicyLabelResponse.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	PutCoreNetworkPolicyRequest_CoreNetworkId = PutCoreNetworkPolicyRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	PutCoreNetworkPolicyRequest_PolicyDocument = PutCoreNetworkPolicyRequest.AddMember("PolicyDocument", _SynthesizedJsonCoreNetworkPolicyDocument)
-
-	PutCoreNetworkPolicyRequest_Description = PutCoreNetworkPolicyRequest.AddMember("Description", _ConstrainedString)
-
-	PutCoreNetworkPolicyRequest_LatestVersionId = PutCoreNetworkPolicyRequest.AddMember("LatestVersionId", _Integer)
-
-	PutCoreNetworkPolicyRequest_ClientToken = PutCoreNetworkPolicyRequest.AddMember("ClientToken", _ClientToken)
-
-	PutCoreNetworkPolicyResponse_CoreNetworkPolicy = PutCoreNetworkPolicyResponse.AddMember("CoreNetworkPolicy", CoreNetworkPolicy)
-
-	PutResourcePolicyRequest_PolicyDocument = PutResourcePolicyRequest.AddMember("PolicyDocument", _SynthesizedJsonResourcePolicyDocument)
-
-	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	RegisterTransitGatewayRequest_GlobalNetworkId = RegisterTransitGatewayRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	RegisterTransitGatewayRequest_TransitGatewayArn = RegisterTransitGatewayRequest.AddMember("TransitGatewayArn", _TransitGatewayArn)
-
-	RegisterTransitGatewayResponse_TransitGatewayRegistration = RegisterTransitGatewayResponse.AddMember("TransitGatewayRegistration", TransitGatewayRegistration)
-
-	RejectAttachmentRequest_AttachmentId = RejectAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	RejectAttachmentResponse_Attachment = RejectAttachmentResponse.AddMember("Attachment", Attachment)
-
-	RemoveAttachmentRoutingPolicyLabelRequest_CoreNetworkId = RemoveAttachmentRoutingPolicyLabelRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	RemoveAttachmentRoutingPolicyLabelRequest_AttachmentId = RemoveAttachmentRoutingPolicyLabelRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	RemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId = RemoveAttachmentRoutingPolicyLabelResponse.AddMember("CoreNetworkId", _CoreNetworkId)
-
-	RemoveAttachmentRoutingPolicyLabelResponse_AttachmentId = RemoveAttachmentRoutingPolicyLabelResponse.AddMember("AttachmentId", _AttachmentId)
-
-	RemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel = RemoveAttachmentRoutingPolicyLabelResponse.AddMember("RoutingPolicyLabel", _ConstrainedString)
-
-	RestoreCoreNetworkPolicyVersionRequest_CoreNetworkId = RestoreCoreNetworkPolicyVersionRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	RestoreCoreNetworkPolicyVersionRequest_PolicyVersionId = RestoreCoreNetworkPolicyVersionRequest.AddMember("PolicyVersionId", _Integer, &smithytraits.HTTPLabel{})
-
-	RestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy = RestoreCoreNetworkPolicyVersionResponse.AddMember("CoreNetworkPolicy", CoreNetworkPolicy)
-
-	StartOrganizationServiceAccessUpdateRequest_Action = StartOrganizationServiceAccessUpdateRequest.AddMember("Action", _Action)
-
-	StartOrganizationServiceAccessUpdateResponse_OrganizationStatus = StartOrganizationServiceAccessUpdateResponse.AddMember("OrganizationStatus", OrganizationStatus)
-
-	StartRouteAnalysisRequest_GlobalNetworkId = StartRouteAnalysisRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	StartRouteAnalysisRequest_Source = StartRouteAnalysisRequest.AddMember("Source", RouteAnalysisEndpointOptionsSpecification)
-
-	StartRouteAnalysisRequest_Destination = StartRouteAnalysisRequest.AddMember("Destination", RouteAnalysisEndpointOptionsSpecification)
-
-	StartRouteAnalysisRequest_IncludeReturnPath = StartRouteAnalysisRequest.AddMember("IncludeReturnPath", _Boolean)
-
-	StartRouteAnalysisRequest_UseMiddleboxes = StartRouteAnalysisRequest.AddMember("UseMiddleboxes", _Boolean)
-
-	StartRouteAnalysisResponse_RouteAnalysis = StartRouteAnalysisResponse.AddMember("RouteAnalysis", RouteAnalysis)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateAttachmentNatConfigurationRequest_AttachmentId = UpdateAttachmentNatConfigurationRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	UpdateAttachmentNatConfigurationRequest_NatGatewaySupport = UpdateAttachmentNatConfigurationRequest.AddMember("NatGatewaySupport", NatGatewaySupportValue)
-
-	UpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport = UpdateAttachmentNatConfigurationRequest.AddMember("NatSystemRouteSupport", _BoxedBoolean)
-
-	UpdateAttachmentNatConfigurationRequest_NatGatewayRules = UpdateAttachmentNatConfigurationRequest.AddMember("NatGatewayRules", _NatRuleRequestList)
-
-	UpdateAttachmentNatConfigurationRequest_ClientToken = UpdateAttachmentNatConfigurationRequest.AddMember("ClientToken", _ClientToken)
-
-	UpdateAttachmentNatConfigurationResponse_AttachmentId = UpdateAttachmentNatConfigurationResponse.AddMember("AttachmentId", _AttachmentId)
-
-	UpdateAttachmentNatConfigurationResponse_NatGatewaySupport = UpdateAttachmentNatConfigurationResponse.AddMember("NatGatewaySupport", NatGatewaySupportState)
-
-	UpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport = UpdateAttachmentNatConfigurationResponse.AddMember("NatSystemRouteSupport", _BoxedBoolean)
-
-	UpdateAttachmentNatConfigurationResponse_NatGatewayRules = UpdateAttachmentNatConfigurationResponse.AddMember("NatGatewayRules", _NatRuleList)
-
-	UpdateConnectionRequest_GlobalNetworkId = UpdateConnectionRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateConnectionRequest_ConnectionId = UpdateConnectionRequest.AddMember("ConnectionId", _ConnectionId, &smithytraits.HTTPLabel{})
-
-	UpdateConnectionRequest_LinkId = UpdateConnectionRequest.AddMember("LinkId", _LinkId)
-
-	UpdateConnectionRequest_ConnectedLinkId = UpdateConnectionRequest.AddMember("ConnectedLinkId", _LinkId)
-
-	UpdateConnectionRequest_Description = UpdateConnectionRequest.AddMember("Description", _ConstrainedString)
-
-	UpdateConnectionResponse_Connection = UpdateConnectionResponse.AddMember("Connection", Connection)
-
-	UpdateCoreNetworkRequest_CoreNetworkId = UpdateCoreNetworkRequest.AddMember("CoreNetworkId", _CoreNetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateCoreNetworkRequest_Description = UpdateCoreNetworkRequest.AddMember("Description", _ConstrainedString)
-
-	UpdateCoreNetworkResponse_CoreNetwork = UpdateCoreNetworkResponse.AddMember("CoreNetwork", CoreNetwork)
-
-	UpdateDeviceRequest_GlobalNetworkId = UpdateDeviceRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateDeviceRequest_DeviceId = UpdateDeviceRequest.AddMember("DeviceId", _DeviceId, &smithytraits.HTTPLabel{})
-
-	UpdateDeviceRequest_AWSLocation = UpdateDeviceRequest.AddMember("AWSLocation", AWSLocation)
-
-	UpdateDeviceRequest_Description = UpdateDeviceRequest.AddMember("Description", _ConstrainedString)
-
-	UpdateDeviceRequest_Type = UpdateDeviceRequest.AddMember("Type", _ConstrainedString)
-
-	UpdateDeviceRequest_Vendor = UpdateDeviceRequest.AddMember("Vendor", _ConstrainedString)
-
-	UpdateDeviceRequest_Model = UpdateDeviceRequest.AddMember("Model", _ConstrainedString)
-
-	UpdateDeviceRequest_SerialNumber = UpdateDeviceRequest.AddMember("SerialNumber", _ConstrainedString)
-
-	UpdateDeviceRequest_Location = UpdateDeviceRequest.AddMember("Location", Location)
-
-	UpdateDeviceRequest_SiteId = UpdateDeviceRequest.AddMember("SiteId", _SiteId)
-
-	UpdateDeviceResponse_Device = UpdateDeviceResponse.AddMember("Device", Device)
-
-	UpdateDirectConnectGatewayAttachmentRequest_AttachmentId = UpdateDirectConnectGatewayAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	UpdateDirectConnectGatewayAttachmentRequest_EdgeLocations = UpdateDirectConnectGatewayAttachmentRequest.AddMember("EdgeLocations", _ExternalRegionCodeList)
-
-	UpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = UpdateDirectConnectGatewayAttachmentResponse.AddMember("DirectConnectGatewayAttachment", DirectConnectGatewayAttachment)
-
-	UpdateGlobalNetworkRequest_GlobalNetworkId = UpdateGlobalNetworkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateGlobalNetworkRequest_Description = UpdateGlobalNetworkRequest.AddMember("Description", _ConstrainedString)
-
-	UpdateGlobalNetworkResponse_GlobalNetwork = UpdateGlobalNetworkResponse.AddMember("GlobalNetwork", GlobalNetwork)
-
-	UpdateLinkRequest_GlobalNetworkId = UpdateLinkRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateLinkRequest_LinkId = UpdateLinkRequest.AddMember("LinkId", _LinkId, &smithytraits.HTTPLabel{})
-
-	UpdateLinkRequest_Description = UpdateLinkRequest.AddMember("Description", _ConstrainedString)
-
-	UpdateLinkRequest_Type = UpdateLinkRequest.AddMember("Type", _ConstrainedString)
-
-	UpdateLinkRequest_Bandwidth = UpdateLinkRequest.AddMember("Bandwidth", Bandwidth)
-
-	UpdateLinkRequest_Provider = UpdateLinkRequest.AddMember("Provider", _ConstrainedString)
-
-	UpdateLinkResponse_Link = UpdateLinkResponse.AddMember("Link", Link)
-
-	UpdateNetworkResourceMetadataRequest_GlobalNetworkId = UpdateNetworkResourceMetadataRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateNetworkResourceMetadataRequest_ResourceArn = UpdateNetworkResourceMetadataRequest.AddMember("ResourceArn", _ResourceArn, &smithytraits.HTTPLabel{})
-
-	UpdateNetworkResourceMetadataRequest_Metadata = UpdateNetworkResourceMetadataRequest.AddMember("Metadata", _NetworkResourceMetadataMap)
-
-	UpdateNetworkResourceMetadataResponse_ResourceArn = UpdateNetworkResourceMetadataResponse.AddMember("ResourceArn", _ResourceArn)
-
-	UpdateNetworkResourceMetadataResponse_Metadata = UpdateNetworkResourceMetadataResponse.AddMember("Metadata", _NetworkResourceMetadataMap)
-
-	UpdateSiteRequest_GlobalNetworkId = UpdateSiteRequest.AddMember("GlobalNetworkId", _GlobalNetworkId, &smithytraits.HTTPLabel{})
-
-	UpdateSiteRequest_SiteId = UpdateSiteRequest.AddMember("SiteId", _SiteId, &smithytraits.HTTPLabel{})
-
-	UpdateSiteRequest_Description = UpdateSiteRequest.AddMember("Description", _ConstrainedString)
-
-	UpdateSiteRequest_Location = UpdateSiteRequest.AddMember("Location", Location)
-
-	UpdateSiteResponse_Site = UpdateSiteResponse.AddMember("Site", Site)
-
-	UpdateVpcAttachmentRequest_AttachmentId = UpdateVpcAttachmentRequest.AddMember("AttachmentId", _AttachmentId, &smithytraits.HTTPLabel{})
-
-	UpdateVpcAttachmentRequest_AddSubnetArns = UpdateVpcAttachmentRequest.AddMember("AddSubnetArns", _SubnetArnList)
-
-	UpdateVpcAttachmentRequest_RemoveSubnetArns = UpdateVpcAttachmentRequest.AddMember("RemoveSubnetArns", _SubnetArnList)
-
-	UpdateVpcAttachmentRequest_Options = UpdateVpcAttachmentRequest.AddMember("Options", VpcOptions)
-
-	UpdateVpcAttachmentResponse_VpcAttachment = UpdateVpcAttachmentResponse.AddMember("VpcAttachment", VpcAttachment)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t98 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t99 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}}
+var t100 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t101 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t102 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t103 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t104 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t105 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "OrganizationStatus"}}, DirectMask: 0x8}
+var t106 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t107 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t108 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+var t109 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t110 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t111 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "globalNetworkIds"}}, DirectMask: 0x10}
+var t112 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t113 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t114 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "deviceId"}}, DirectMask: 0x10}
+var t115 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "linkId"}}, DirectMask: 0x10}
+var t116 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "connectionIds"}}, DirectMask: 0x10}
+var t117 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "connectPeerIds"}}, DirectMask: 0x10}
+var t118 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "policyVersionId"}}, DirectMask: 0x10}
+var t119 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "alias"}}, DirectMask: 0x10}
+var t120 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "customerGatewayArns"}}, DirectMask: 0x10}
+var t121 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "deviceIds"}}, DirectMask: 0x10}
+var t122 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "siteId"}}, DirectMask: 0x10}
+var t123 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "linkIds"}}, DirectMask: 0x10}
+var t124 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "type"}}, DirectMask: 0x10}
+var t125 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "provider"}}, DirectMask: 0x10}
+var t126 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceType"}}, DirectMask: 0x10}
+var t127 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "coreNetworkId"}}, DirectMask: 0x10}
+var t128 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "registeredGatewayArn"}}, DirectMask: 0x10}
+var t129 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "awsRegion"}}, DirectMask: 0x10}
+var t130 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "accountId"}}, DirectMask: 0x10}
+var t131 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+var t132 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "siteIds"}}, DirectMask: 0x10}
+var t133 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "transitGatewayConnectPeerArns"}}, DirectMask: 0x10}
+var t134 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "transitGatewayArns"}}, DirectMask: 0x10}
+var t135 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "attachmentId"}}, DirectMask: 0x10}
+var t136 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "attachmentType"}}, DirectMask: 0x10}
+var t137 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "edgeLocation"}}, DirectMask: 0x10}
+var t138 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "state"}}, DirectMask: 0x10}
+var t139 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "connectAttachmentId"}}, DirectMask: 0x10}
+var t140 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "prefixListArn"}}, DirectMask: 0x10}
+var t141 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "peeringType"}}, DirectMask: 0x10}
+var t142 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAccountStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountStatus_AccountId, &sAccountStatus_SLRDeploymentStatus}}
+var m_AccountStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountStatusList_member}}
+var mAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachment_CoreNetworkId, &sAttachment_CoreNetworkArn, &sAttachment_AttachmentId, &sAttachment_OwnerAccountId, &sAttachment_AttachmentType, &sAttachment_State, &sAttachment_EdgeLocation, &sAttachment_EdgeLocations, &sAttachment_ResourceArn, &sAttachment_AttachmentPolicyRuleNumber, &sAttachment_SegmentName, &sAttachment_NetworkFunctionGroupName, &sAttachment_NatGatewaySupport, &sAttachment_NatSystemRouteSupport, &sAttachment_Tags, &sAttachment_ProposedSegmentChange, &sAttachment_ProposedNetworkFunctionGroupChange, &sAttachment_CreatedAt, &sAttachment_UpdatedAt, &sAttachment_LastModificationErrors}, Seed: 7, Slots: []uint16{
+	13, 0, 0, 15, 16, 18, 0, 0, 0, 0, 0, 19, 6, 8, 0, 3, 0, 0, 0, 14, 0, 2, 5, 0,
+	0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 11, 9, 0, 4, 0, 17, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 1, 0, 20,
+}}
+var mAttachmentError = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentError_Code, &sAttachmentError_Message, &sAttachmentError_ResourceArn, &sAttachmentError_RequestId}}
+var mAttachmentErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentErrorCode_VPC_NOT_FOUND, &sAttachmentErrorCode_SUBNET_NOT_FOUND, &sAttachmentErrorCode_SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE, &sAttachmentErrorCode_SUBNET_NO_FREE_ADDRESSES, &sAttachmentErrorCode_SUBNET_UNSUPPORTED_AVAILABILITY_ZONE, &sAttachmentErrorCode_SUBNET_NO_IPV6_CIDRS, &sAttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE, &sAttachmentErrorCode_VPN_CONNECTION_NOT_FOUND, &sAttachmentErrorCode_MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED, &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NOT_FOUND, &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS, &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF, &sAttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS, &sAttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED, &sAttachmentErrorCode_VPC_UNSUPPORTED_FEATURES, &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS, &sAttachmentErrorCode_CREATION_FAILED, &sAttachmentErrorCode_UPDATE_FAILED, &sAttachmentErrorCode_DELETION_FAILED}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 16, 0, 0, 9, 0, 0, 0, 0, 10, 18, 0, 0, 0, 14, 7, 0, 6, 0, 4, 12,
+	0, 0, 0, 1, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 3, 15, 5, 0, 0,
+	0, 0, 2, 0, 13, 0, 17, 0, 0, 0, 0, 0, 19, 0, 0, 0,
+}}
+var m_AttachmentErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttachmentErrorList_member}}
+var m_AttachmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttachmentList_member}}
+var mAttachmentNatConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentNatConfiguration_AttachmentId, &sAttachmentNatConfiguration_NatGatewaySupport, &sAttachmentNatConfiguration_NatSystemRouteSupport, &sAttachmentNatConfiguration_NatGatewayRules}}
+var m_AttachmentNatConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttachmentNatConfigurationList_member}}
+var m_AttachmentRoutingPolicyAssociationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttachmentRoutingPolicyAssociationsList_member}}
+var mAttachmentRoutingPolicyAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentRoutingPolicyAssociationSummary_AttachmentId, &sAttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies, &sAttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies, &sAttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel}}
+var mAttachmentState = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentState_REJECTED, &sAttachmentState_PENDING_ATTACHMENT_ACCEPTANCE, &sAttachmentState_CREATING, &sAttachmentState_FAILED, &sAttachmentState_AVAILABLE, &sAttachmentState_UPDATING, &sAttachmentState_PENDING_NETWORK_UPDATE, &sAttachmentState_PENDING_TAG_ACCEPTANCE, &sAttachmentState_DELETING}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 6, 2, 0, 0, 0, 4, 0, 0, 0, 0, 9, 0, 5, 8, 0, 0, 1, 0,
+	0, 0, 0, 0, 3, 0, 0, 7,
+}}
+var mAttachmentType = smithy.SchemaMembers{List: []*smithy.Schema{&sAttachmentType_CONNECT, &sAttachmentType_SITE_TO_SITE_VPN, &sAttachmentType_VPC, &sAttachmentType_DIRECT_CONNECT_GATEWAY, &sAttachmentType_TRANSIT_GATEWAY_ROUTE_TABLE}}
+var mAWSLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sAWSLocation_Zone, &sAWSLocation_SubnetArn}}
+var mBandwidth = smithy.SchemaMembers{List: []*smithy.Schema{&sBandwidth_UploadSpeed, &sBandwidth_DownloadSpeed}}
+var mBgpOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sBgpOptions_PeerAsn}}
+var mChangeAction = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeAction_ADD, &sChangeAction_MODIFY, &sChangeAction_REMOVE}}
+var mChangeSetState = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeSetState_PENDING_GENERATION, &sChangeSetState_FAILED_GENERATION, &sChangeSetState_READY_TO_EXECUTE, &sChangeSetState_EXECUTING, &sChangeSetState_EXECUTION_SUCCEEDED, &sChangeSetState_OUT_OF_DATE}}
+var mChangeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeStatus_NOT_STARTED, &sChangeStatus_IN_PROGRESS, &sChangeStatus_COMPLETE, &sChangeStatus_FAILED}}
+var mChangeType = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeType_CORE_NETWORK_SEGMENT, &sChangeType_NETWORK_FUNCTION_GROUP, &sChangeType_CORE_NETWORK_EDGE, &sChangeType_ATTACHMENT_MAPPING, &sChangeType_ATTACHMENT_ROUTE_PROPAGATION, &sChangeType_ATTACHMENT_ROUTE_STATIC, &sChangeType_ROUTING_POLICY, &sChangeType_ROUTING_POLICY_SEGMENT_ASSOCIATION, &sChangeType_ROUTING_POLICY_EDGE_ASSOCIATION, &sChangeType_ROUTING_POLICY_ATTACHMENT_ASSOCIATION, &sChangeType_CORE_NETWORK_CONFIGURATION, &sChangeType_SEGMENTS_CONFIGURATION, &sChangeType_SEGMENT_ACTIONS_CONFIGURATION, &sChangeType_ATTACHMENT_POLICIES_CONFIGURATION}, Seed: 23, Slots: []uint16{
+	2, 0, 0, 6, 8, 4, 0, 11, 0, 0, 14, 0, 0, 0, 0, 3, 0, 0, 7, 1, 0, 10, 5, 9,
+	0, 13, 0, 0, 0, 0, 12, 0,
+}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_ResourceId, &sConflictException_ResourceType}}
+var mConnectAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectAttachment_Attachment, &sConnectAttachment_TransportAttachmentId, &sConnectAttachment_Options}}
+var mConnectAttachmentOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectAttachmentOptions_Protocol}}
+var mConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sConnection_ConnectionId, &sConnection_ConnectionArn, &sConnection_GlobalNetworkId, &sConnection_DeviceId, &sConnection_ConnectedDeviceId, &sConnection_LinkId, &sConnection_ConnectedLinkId, &sConnection_Description, &sConnection_CreatedAt, &sConnection_State, &sConnection_Tags}, Seed: 4, Slots: []uint16{
+	0, 1, 7, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 10, 11, 0, 4, 0, 6, 0, 0, 0,
+	3, 0, 0, 5, 0, 2, 0, 8,
+}}
+var mConnectionHealth = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionHealth_Type, &sConnectionHealth_Status, &sConnectionHealth_Timestamp}}
+var m_ConnectionIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionIdList_member}}
+var m_ConnectionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionList_member}}
+var mConnectionState = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionState_pending, &sConnectionState_available, &sConnectionState_deleting, &sConnectionState_updating}}
+var mConnectionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionStatus_UP, &sConnectionStatus_DOWN}}
+var mConnectionType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionType_BGP, &sConnectionType_IPSEC}}
+var mConnectPeer = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeer_CoreNetworkId, &sConnectPeer_ConnectAttachmentId, &sConnectPeer_ConnectPeerId, &sConnectPeer_EdgeLocation, &sConnectPeer_State, &sConnectPeer_CreatedAt, &sConnectPeer_Configuration, &sConnectPeer_Tags, &sConnectPeer_SubnetArn, &sConnectPeer_LastModificationErrors}, Seed: 2, Slots: []uint16{
+	0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 4, 9, 0, 8, 0, 0, 7, 3, 0, 5, 1, 0, 6, 2,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mConnectPeerAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerAssociation_ConnectPeerId, &sConnectPeerAssociation_GlobalNetworkId, &sConnectPeerAssociation_DeviceId, &sConnectPeerAssociation_LinkId, &sConnectPeerAssociation_State}}
+var m_ConnectPeerAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectPeerAssociationList_member}}
+var mConnectPeerAssociationState = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerAssociationState_pending, &sConnectPeerAssociationState_available, &sConnectPeerAssociationState_deleting, &sConnectPeerAssociationState_deleted}}
+var mConnectPeerBgpConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerBgpConfiguration_CoreNetworkAsn, &sConnectPeerBgpConfiguration_PeerAsn, &sConnectPeerBgpConfiguration_CoreNetworkAddress, &sConnectPeerBgpConfiguration_PeerAddress}}
+var m_ConnectPeerBgpConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectPeerBgpConfigurationList_member}}
+var mConnectPeerConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerConfiguration_CoreNetworkAddress, &sConnectPeerConfiguration_PeerAddress, &sConnectPeerConfiguration_InsideCidrBlocks, &sConnectPeerConfiguration_Protocol, &sConnectPeerConfiguration_BgpConfigurations}}
+var mConnectPeerError = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerError_Code, &sConnectPeerError_Message, &sConnectPeerError_ResourceArn, &sConnectPeerError_RequestId}}
+var mConnectPeerErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerErrorCode_EDGE_LOCATION_NO_FREE_IPS, &sConnectPeerErrorCode_EDGE_LOCATION_PEER_DUPLICATE, &sConnectPeerErrorCode_SUBNET_NOT_FOUND, &sConnectPeerErrorCode_IP_OUTSIDE_SUBNET_CIDR_RANGE, &sConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK, &sConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK, &sConnectPeerErrorCode_CREATION_FAILED, &sConnectPeerErrorCode_DELETION_FAILED}}
+var m_ConnectPeerErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectPeerErrorList_member}}
+var m_ConnectPeerIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectPeerIdList_member}}
+var mConnectPeerState = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerState_CREATING, &sConnectPeerState_FAILED, &sConnectPeerState_AVAILABLE, &sConnectPeerState_DELETING}}
+var mConnectPeerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectPeerSummary_CoreNetworkId, &sConnectPeerSummary_ConnectAttachmentId, &sConnectPeerSummary_ConnectPeerId, &sConnectPeerSummary_EdgeLocation, &sConnectPeerSummary_ConnectPeerState, &sConnectPeerSummary_CreatedAt, &sConnectPeerSummary_Tags, &sConnectPeerSummary_SubnetArn}}
+var m_ConnectPeerSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectPeerSummaryList_member}}
+var m_ConstrainedStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConstrainedStringList_member}}
+var mCoreNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetwork_GlobalNetworkId, &sCoreNetwork_CoreNetworkId, &sCoreNetwork_CoreNetworkArn, &sCoreNetwork_Description, &sCoreNetwork_CreatedAt, &sCoreNetwork_State, &sCoreNetwork_Segments, &sCoreNetwork_NetworkFunctionGroups, &sCoreNetwork_Edges, &sCoreNetwork_Tags}, Seed: 4, Slots: []uint16{
+	8, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 6, 10, 0, 7, 0, 0, 0, 0, 2,
+	1, 0, 0, 0, 0, 9, 0, 4,
+}}
+var mCoreNetworkChange = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkChange_Type, &sCoreNetworkChange_Action, &sCoreNetworkChange_Identifier, &sCoreNetworkChange_PreviousValues, &sCoreNetworkChange_NewValues, &sCoreNetworkChange_IdentifierPath}}
+var mCoreNetworkChangeEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkChangeEvent_Type, &sCoreNetworkChangeEvent_Action, &sCoreNetworkChangeEvent_IdentifierPath, &sCoreNetworkChangeEvent_EventTime, &sCoreNetworkChangeEvent_Status, &sCoreNetworkChangeEvent_Values}}
+var m_CoreNetworkChangeEventList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkChangeEventList_member}}
+var mCoreNetworkChangeEventValues = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkChangeEventValues_EdgeLocation, &sCoreNetworkChangeEventValues_PeerEdgeLocation, &sCoreNetworkChangeEventValues_RoutingPolicyDirection, &sCoreNetworkChangeEventValues_SegmentName, &sCoreNetworkChangeEventValues_NetworkFunctionGroupName, &sCoreNetworkChangeEventValues_AttachmentId, &sCoreNetworkChangeEventValues_Cidr, &sCoreNetworkChangeEventValues_RoutingPolicyAssociationDetails}}
+var m_CoreNetworkChangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkChangeList_member}}
+var mCoreNetworkChangeValues = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkChangeValues_SegmentName, &sCoreNetworkChangeValues_NetworkFunctionGroupName, &sCoreNetworkChangeValues_EdgeLocations, &sCoreNetworkChangeValues_Asn, &sCoreNetworkChangeValues_Cidr, &sCoreNetworkChangeValues_DestinationIdentifier, &sCoreNetworkChangeValues_InsideCidrBlocks, &sCoreNetworkChangeValues_SharedSegments, &sCoreNetworkChangeValues_ServiceInsertionActions, &sCoreNetworkChangeValues_VpnEcmpSupport, &sCoreNetworkChangeValues_DnsSupport, &sCoreNetworkChangeValues_SecurityGroupReferencingSupport, &sCoreNetworkChangeValues_RoutingPolicyDirection, &sCoreNetworkChangeValues_RoutingPolicy, &sCoreNetworkChangeValues_PeerEdgeLocations, &sCoreNetworkChangeValues_AttachmentId, &sCoreNetworkChangeValues_RoutingPolicyAssociationDetails}, Seed: 4, Slots: []uint16{
+	9, 0, 0, 0, 0, 13, 0, 0, 5, 0, 0, 0, 0, 17, 0, 0, 15, 0, 0, 0, 12, 0, 0, 0,
+	0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 6, 0, 0, 1, 0, 0,
+	14, 0, 0, 0, 0, 0, 0, 0, 16, 11, 8, 0, 0, 7, 0, 0,
+}}
+var mCoreNetworkEdge = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkEdge_EdgeLocation, &sCoreNetworkEdge_Asn, &sCoreNetworkEdge_InsideCidrBlocks}}
+var m_CoreNetworkEdgeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkEdgeList_member}}
+var mCoreNetworkNetworkFunctionGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkNetworkFunctionGroup_Name, &sCoreNetworkNetworkFunctionGroup_EdgeLocations, &sCoreNetworkNetworkFunctionGroup_Segments}}
+var mCoreNetworkNetworkFunctionGroupIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId, &sCoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName, &sCoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation}}
+var m_CoreNetworkNetworkFunctionGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkNetworkFunctionGroupList_member}}
+var mCoreNetworkPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkPolicy_CoreNetworkId, &sCoreNetworkPolicy_PolicyVersionId, &sCoreNetworkPolicy_Alias, &sCoreNetworkPolicy_Description, &sCoreNetworkPolicy_CreatedAt, &sCoreNetworkPolicy_ChangeSetState, &sCoreNetworkPolicy_PolicyErrors, &sCoreNetworkPolicy_PolicyDocument}}
+var mCoreNetworkPolicyAlias = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkPolicyAlias_LIVE, &sCoreNetworkPolicyAlias_LATEST}}
+var mCoreNetworkPolicyError = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkPolicyError_ErrorCode, &sCoreNetworkPolicyError_Message, &sCoreNetworkPolicyError_Path}}
+var m_CoreNetworkPolicyErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkPolicyErrorList_member}}
+var mCoreNetworkPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkPolicyException_Message, &sCoreNetworkPolicyException_Errors}}
+var mCoreNetworkPolicyVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkPolicyVersion_CoreNetworkId, &sCoreNetworkPolicyVersion_PolicyVersionId, &sCoreNetworkPolicyVersion_Alias, &sCoreNetworkPolicyVersion_Description, &sCoreNetworkPolicyVersion_CreatedAt, &sCoreNetworkPolicyVersion_ChangeSetState}}
+var m_CoreNetworkPolicyVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkPolicyVersionList_member}}
+var mCoreNetworkRoutingInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkRoutingInformation_Prefix, &sCoreNetworkRoutingInformation_NextHop, &sCoreNetworkRoutingInformation_LocalPreference, &sCoreNetworkRoutingInformation_Med, &sCoreNetworkRoutingInformation_AsPath, &sCoreNetworkRoutingInformation_Communities}}
+var m_CoreNetworkRoutingInformationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkRoutingInformationList_member}}
+var mCoreNetworkSegment = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkSegment_Name, &sCoreNetworkSegment_EdgeLocations, &sCoreNetworkSegment_SharedSegments}}
+var mCoreNetworkSegmentEdgeIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkSegmentEdgeIdentifier_CoreNetworkId, &sCoreNetworkSegmentEdgeIdentifier_SegmentName, &sCoreNetworkSegmentEdgeIdentifier_EdgeLocation}}
+var m_CoreNetworkSegmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkSegmentList_member}}
+var mCoreNetworkState = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkState_CREATING, &sCoreNetworkState_UPDATING, &sCoreNetworkState_AVAILABLE, &sCoreNetworkState_DELETING}}
+var mCoreNetworkSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreNetworkSummary_CoreNetworkId, &sCoreNetworkSummary_CoreNetworkArn, &sCoreNetworkSummary_GlobalNetworkId, &sCoreNetworkSummary_OwnerAccountId, &sCoreNetworkSummary_State, &sCoreNetworkSummary_Description, &sCoreNetworkSummary_Tags}}
+var m_CoreNetworkSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreNetworkSummaryList_member}}
+var m_CustomerGatewayArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomerGatewayArnList_member}}
+var mCustomerGatewayAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerGatewayAssociation_CustomerGatewayArn, &sCustomerGatewayAssociation_GlobalNetworkId, &sCustomerGatewayAssociation_DeviceId, &sCustomerGatewayAssociation_LinkId, &sCustomerGatewayAssociation_State}}
+var m_CustomerGatewayAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomerGatewayAssociationList_member}}
+var mCustomerGatewayAssociationState = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerGatewayAssociationState_pending, &sCustomerGatewayAssociationState_available, &sCustomerGatewayAssociationState_deleting, &sCustomerGatewayAssociationState_deleted}}
+var mDevice = smithy.SchemaMembers{List: []*smithy.Schema{&sDevice_DeviceId, &sDevice_DeviceArn, &sDevice_GlobalNetworkId, &sDevice_AWSLocation, &sDevice_Description, &sDevice_Type, &sDevice_Vendor, &sDevice_Model, &sDevice_SerialNumber, &sDevice_Location, &sDevice_SiteId, &sDevice_CreatedAt, &sDevice_State, &sDevice_Tags}, Seed: 11, Slots: []uint16{
+	0, 0, 0, 0, 1, 11, 0, 0, 14, 0, 0, 6, 3, 0, 5, 0, 0, 0, 12, 0, 9, 2, 0, 8,
+	10, 13, 4, 0, 0, 7, 0, 0,
+}}
+var m_DeviceIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceIdList_member}}
+var m_DeviceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceList_member}}
+var mDeviceState = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceState_pending, &sDeviceState_available, &sDeviceState_deleting, &sDeviceState_updating}}
+var mDirectConnectGatewayAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAttachment_Attachment, &sDirectConnectGatewayAttachment_DirectConnectGatewayArn}}
+var mEdgeOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEdgeOverride_EdgeSets, &sEdgeOverride_UseEdge}}
+var m_EdgeSet = smithy.SchemaMembers{List: []*smithy.Schema{&s_EdgeSet_member}}
+var m_EdgeSetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EdgeSetList_member}}
+var m_ExceptionContextMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExceptionContextMap_key, &s_ExceptionContextMap_value}}
+var m_ExternalRegionCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExternalRegionCodeList_member}}
+var m_FilterMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterMap_key, &s_FilterMap_value}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mGlobalNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalNetwork_GlobalNetworkId, &sGlobalNetwork_GlobalNetworkArn, &sGlobalNetwork_Description, &sGlobalNetwork_CreatedAt, &sGlobalNetwork_State, &sGlobalNetwork_Tags}}
+var m_GlobalNetworkIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GlobalNetworkIdList_member}}
+var m_GlobalNetworkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_GlobalNetworkList_member}}
+var mGlobalNetworkState = smithy.SchemaMembers{List: []*smithy.Schema{&sGlobalNetworkState_pending, &sGlobalNetworkState_available, &sGlobalNetworkState_deleting, &sGlobalNetworkState_updating}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message, &sInternalServerException_RetryAfterSeconds}}
+var mLink = smithy.SchemaMembers{List: []*smithy.Schema{&sLink_LinkId, &sLink_LinkArn, &sLink_GlobalNetworkId, &sLink_SiteId, &sLink_Description, &sLink_Type, &sLink_Bandwidth, &sLink_Provider, &sLink_CreatedAt, &sLink_State, &sLink_Tags}, Seed: 4, Slots: []uint16{
+	0, 7, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 9, 0, 0, 10, 11, 0, 6, 0, 1, 0, 0, 0,
+	3, 2, 0, 8, 0, 0, 0, 5,
+}}
+var mLinkAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkAssociation_GlobalNetworkId, &sLinkAssociation_DeviceId, &sLinkAssociation_LinkId, &sLinkAssociation_LinkAssociationState}}
+var m_LinkAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkAssociationList_member}}
+var mLinkAssociationState = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkAssociationState_pending, &sLinkAssociationState_available, &sLinkAssociationState_deleting, &sLinkAssociationState_deleted}}
+var m_LinkIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkIdList_member}}
+var m_LinkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkList_member}}
+var mLinkState = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkState_pending, &sLinkState_available, &sLinkState_deleting, &sLinkState_updating}}
+var mLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sLocation_Address, &sLocation_Latitude, &sLocation_Longitude}}
+var mNatGatewaySupportState = smithy.SchemaMembers{List: []*smithy.Schema{&sNatGatewaySupportState_ENABLED, &sNatGatewaySupportState_ENABLING, &sNatGatewaySupportState_DISABLED, &sNatGatewaySupportState_DISABLING, &sNatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE}}
+var mNatGatewaySupportValue = smithy.SchemaMembers{List: []*smithy.Schema{&sNatGatewaySupportValue_ENABLE, &sNatGatewaySupportValue_DISABLE}}
+var mNatRule = smithy.SchemaMembers{List: []*smithy.Schema{&sNatRule_RuleNumber, &sNatRule_MatchSourceCidr, &sNatRule_NatCidr, &sNatRule_State}}
+var m_NatRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NatRuleList_member}}
+var mNatRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sNatRuleRequest_RuleNumber, &sNatRuleRequest_MatchSourceCidr, &sNatRuleRequest_NatCidr}}
+var m_NatRuleRequestList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NatRuleRequestList_member}}
+var mNatRuleState = smithy.SchemaMembers{List: []*smithy.Schema{&sNatRuleState_CREATING, &sNatRuleState_MODIFYING, &sNatRuleState_DELETING, &sNatRuleState_ACTIVATED, &sNatRuleState_ACTIVATING, &sNatRuleState_DEACTIVATED, &sNatRuleState_DEACTIVATING, &sNatRuleState_FAILED, &sNatRuleState_PENDING_ATTACHMENT_ACCEPTANCE}, Seed: 4, Slots: []uint16{
+	0, 6, 0, 0, 0, 0, 0, 9, 0, 0, 0, 8, 0, 0, 0, 0, 3, 0, 0, 5, 0, 2, 4, 0,
+	0, 0, 0, 0, 1, 7, 0, 0,
+}}
+var mNetworkFunctionGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkFunctionGroup_Name}}
+var m_NetworkFunctionGroupList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkFunctionGroupList_member}}
+var mNetworkResource = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkResource_RegisteredGatewayArn, &sNetworkResource_CoreNetworkId, &sNetworkResource_AwsRegion, &sNetworkResource_AccountId, &sNetworkResource_ResourceType, &sNetworkResource_ResourceId, &sNetworkResource_ResourceArn, &sNetworkResource_Definition, &sNetworkResource_DefinitionTimestamp, &sNetworkResource_Tags, &sNetworkResource_Metadata}, Seed: 6, Slots: []uint16{
+	0, 2, 0, 5, 0, 0, 0, 0, 0, 9, 0, 0, 0, 8, 0, 7, 0, 3, 0, 1, 4, 0, 0, 0,
+	0, 0, 0, 0, 11, 0, 6, 10,
+}}
+var mNetworkResourceCount = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkResourceCount_ResourceType, &sNetworkResourceCount_Count}}
+var m_NetworkResourceCountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkResourceCountList_member}}
+var m_NetworkResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkResourceList_member}}
+var m_NetworkResourceMetadataMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkResourceMetadataMap_key, &s_NetworkResourceMetadataMap_value}}
+var mNetworkResourceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkResourceSummary_RegisteredGatewayArn, &sNetworkResourceSummary_ResourceArn, &sNetworkResourceSummary_ResourceType, &sNetworkResourceSummary_Definition, &sNetworkResourceSummary_NameTag, &sNetworkResourceSummary_IsMiddlebox}}
+var mNetworkRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkRoute_DestinationCidrBlock, &sNetworkRoute_Destinations, &sNetworkRoute_PrefixListId, &sNetworkRoute_State, &sNetworkRoute_Type}}
+var mNetworkRouteDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkRouteDestination_CoreNetworkAttachmentId, &sNetworkRouteDestination_TransitGatewayAttachmentId, &sNetworkRouteDestination_SegmentName, &sNetworkRouteDestination_NetworkFunctionGroupName, &sNetworkRouteDestination_EdgeLocation, &sNetworkRouteDestination_ResourceType, &sNetworkRouteDestination_ResourceId}}
+var m_NetworkRouteDestinationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkRouteDestinationList_member}}
+var m_NetworkRouteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkRouteList_member}}
+var mNetworkTelemetry = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkTelemetry_RegisteredGatewayArn, &sNetworkTelemetry_CoreNetworkId, &sNetworkTelemetry_AwsRegion, &sNetworkTelemetry_AccountId, &sNetworkTelemetry_ResourceType, &sNetworkTelemetry_ResourceId, &sNetworkTelemetry_ResourceArn, &sNetworkTelemetry_Address, &sNetworkTelemetry_Health}, Seed: 6, Slots: []uint16{
+	0, 2, 0, 5, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 3, 0, 1, 4, 0, 0, 9,
+	0, 0, 0, 0, 0, 0, 6, 0,
+}}
+var m_NetworkTelemetryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkTelemetryList_member}}
+var mOrganizationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationStatus_OrganizationId, &sOrganizationStatus_OrganizationAwsServiceAccessStatus, &sOrganizationStatus_SLRDeploymentStatus, &sOrganizationStatus_AccountStatusList}}
+var mPathComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sPathComponent_Sequence, &sPathComponent_Resource, &sPathComponent_DestinationCidrBlock}}
+var m_PathComponentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PathComponentList_member}}
+var mPeering = smithy.SchemaMembers{List: []*smithy.Schema{&sPeering_CoreNetworkId, &sPeering_CoreNetworkArn, &sPeering_PeeringId, &sPeering_OwnerAccountId, &sPeering_PeeringType, &sPeering_State, &sPeering_EdgeLocation, &sPeering_ResourceArn, &sPeering_Tags, &sPeering_CreatedAt, &sPeering_LastModificationErrors}, Seed: 7, Slots: []uint16{
+	0, 0, 0, 9, 7, 10, 0, 0, 0, 8, 0, 4, 6, 0, 0, 0, 0, 5, 0, 0, 0, 2, 0, 0,
+	0, 0, 3, 0, 0, 1, 0, 11,
+}}
+var mPeeringError = smithy.SchemaMembers{List: []*smithy.Schema{&sPeeringError_Code, &sPeeringError_Message, &sPeeringError_ResourceArn, &sPeeringError_RequestId, &sPeeringError_MissingPermissionsContext}}
+var mPeeringErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sPeeringErrorCode_TRANSIT_GATEWAY_NOT_FOUND, &sPeeringErrorCode_TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED, &sPeeringErrorCode_MISSING_REQUIRED_PERMISSIONS, &sPeeringErrorCode_INTERNAL_ERROR, &sPeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE, &sPeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE, &sPeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED, &sPeeringErrorCode_CREATION_FAILED, &sPeeringErrorCode_DELETION_FAILED}, Seed: 9, Slots: []uint16{
+	0, 5, 9, 6, 0, 2, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 4, 0, 7, 0, 0, 0, 0,
+	0, 1, 0, 3, 0, 0, 0, 0,
+}}
+var m_PeeringErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PeeringErrorList_member}}
+var m_PeeringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PeeringList_member}}
+var mPeeringState = smithy.SchemaMembers{List: []*smithy.Schema{&sPeeringState_CREATING, &sPeeringState_FAILED, &sPeeringState_AVAILABLE, &sPeeringState_DELETING}}
+var mPeeringType = smithy.SchemaMembers{List: []*smithy.Schema{&sPeeringType_TRANSIT_GATEWAY}}
+var mPermissionsErrorContext = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionsErrorContext_MissingPermission}}
+var mPrefixListAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sPrefixListAssociation_CoreNetworkId, &sPrefixListAssociation_PrefixListArn, &sPrefixListAssociation_PrefixListAlias}}
+var m_PrefixListAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PrefixListAssociationList_member}}
+var mProposedNetworkFunctionGroupChange = smithy.SchemaMembers{List: []*smithy.Schema{&sProposedNetworkFunctionGroupChange_Tags, &sProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber, &sProposedNetworkFunctionGroupChange_NetworkFunctionGroupName}}
+var mProposedSegmentChange = smithy.SchemaMembers{List: []*smithy.Schema{&sProposedSegmentChange_Tags, &sProposedSegmentChange_AttachmentPolicyRuleNumber, &sProposedSegmentChange_SegmentName}}
+var m_ReasonContextMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReasonContextMap_key, &s_ReasonContextMap_value}}
+var mRelationship = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationship_From, &sRelationship_To}}
+var m_RelationshipList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RelationshipList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceId, &sResourceNotFoundException_ResourceType, &sResourceNotFoundException_Context}}
+var mRouteAnalysis = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysis_GlobalNetworkId, &sRouteAnalysis_OwnerAccountId, &sRouteAnalysis_RouteAnalysisId, &sRouteAnalysis_StartTimestamp, &sRouteAnalysis_Status, &sRouteAnalysis_Source, &sRouteAnalysis_Destination, &sRouteAnalysis_IncludeReturnPath, &sRouteAnalysis_UseMiddleboxes, &sRouteAnalysis_ForwardPath, &sRouteAnalysis_ReturnPath}, Seed: 4, Slots: []uint16{
+	0, 0, 3, 0, 0, 11, 0, 5, 10, 0, 0, 2, 0, 4, 0, 0, 7, 8, 0, 0, 0, 0, 0, 0,
+	1, 0, 0, 6, 0, 0, 9, 0,
+}}
+var mRouteAnalysisCompletion = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysisCompletion_ResultCode, &sRouteAnalysisCompletion_ReasonCode, &sRouteAnalysisCompletion_ReasonContext}}
+var mRouteAnalysisCompletionReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND, &sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY, &sRouteAnalysisCompletionReasonCode_CYCLIC_PATH_DETECTED, &sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND, &sRouteAnalysisCompletionReasonCode_ROUTE_NOT_FOUND, &sRouteAnalysisCompletionReasonCode_BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND, &sRouteAnalysisCompletionReasonCode_INACTIVE_ROUTE_FOR_DESTINATION_FOUND, &sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT, &sRouteAnalysisCompletionReasonCode_MAX_HOPS_EXCEEDED, &sRouteAnalysisCompletionReasonCode_POSSIBLE_MIDDLEBOX, &sRouteAnalysisCompletionReasonCode_NO_DESTINATION_ARN_PROVIDED}, Seed: 2, Slots: []uint16{
+	0, 0, 6, 0, 0, 0, 0, 9, 1, 0, 10, 0, 0, 0, 0, 0, 0, 5, 0, 4, 8, 11, 0, 0,
+	7, 0, 0, 0, 3, 2, 0, 0,
+}}
+var mRouteAnalysisCompletionResultCode = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysisCompletionResultCode_CONNECTED, &sRouteAnalysisCompletionResultCode_NOT_CONNECTED}}
+var mRouteAnalysisEndpointOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysisEndpointOptions_TransitGatewayAttachmentArn, &sRouteAnalysisEndpointOptions_TransitGatewayArn, &sRouteAnalysisEndpointOptions_IpAddress}}
+var mRouteAnalysisEndpointOptionsSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn, &sRouteAnalysisEndpointOptionsSpecification_IpAddress}}
+var mRouteAnalysisPath = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysisPath_CompletionStatus, &sRouteAnalysisPath_Path}}
+var mRouteAnalysisStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteAnalysisStatus_running, &sRouteAnalysisStatus_completed, &sRouteAnalysisStatus_failed}}
+var mRouteState = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteState_ACTIVE, &sRouteState_BLACKHOLE}}
+var m_RouteStateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteStateList_member}}
+var mRouteTableIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteTableIdentifier_TransitGatewayRouteTableArn, &sRouteTableIdentifier_CoreNetworkSegmentEdge, &sRouteTableIdentifier_CoreNetworkNetworkFunctionGroup}}
+var mRouteTableType = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteTableType_TRANSIT_GATEWAY_ROUTE_TABLE, &sRouteTableType_CORE_NETWORK_SEGMENT, &sRouteTableType_NETWORK_FUNCTION_GROUP}}
+var mRouteType = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteType_PROPAGATED, &sRouteType_STATIC, &sRouteType_SYSTEM}}
+var m_RouteTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteTypeList_member}}
+var mRoutingInformationNextHop = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingInformationNextHop_IpAddress, &sRoutingInformationNextHop_CoreNetworkAttachmentId, &sRoutingInformationNextHop_ResourceId, &sRoutingInformationNextHop_ResourceType, &sRoutingInformationNextHop_SegmentName, &sRoutingInformationNextHop_EdgeLocation}}
+var mRoutingPolicyAssociationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingPolicyAssociationDetail_RoutingPolicyNames, &sRoutingPolicyAssociationDetail_SharedSegments}}
+var m_RoutingPolicyAssociationDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RoutingPolicyAssociationDetailsList_member}}
+var mRoutingPolicyDirection = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingPolicyDirection_INBOUND, &sRoutingPolicyDirection_OUTBOUND}}
+var mSegmentActionServiceInsertion = smithy.SchemaMembers{List: []*smithy.Schema{&sSegmentActionServiceInsertion_SEND_VIA, &sSegmentActionServiceInsertion_SEND_TO}}
+var mSendViaMode = smithy.SchemaMembers{List: []*smithy.Schema{&sSendViaMode_DUAL_HOP, &sSendViaMode_SINGLE_HOP}}
+var mServiceInsertionAction = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceInsertionAction_Action, &sServiceInsertionAction_Mode, &sServiceInsertionAction_WhenSentTo, &sServiceInsertionAction_Via}}
+var m_ServiceInsertionActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceInsertionActionList_member}}
+var mServiceInsertionSegments = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceInsertionSegments_SendVia, &sServiceInsertionSegments_SendTo}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_ResourceId, &sServiceQuotaExceededException_ResourceType, &sServiceQuotaExceededException_LimitCode, &sServiceQuotaExceededException_ServiceCode}}
+var mSite = smithy.SchemaMembers{List: []*smithy.Schema{&sSite_SiteId, &sSite_SiteArn, &sSite_GlobalNetworkId, &sSite_Description, &sSite_Location, &sSite_CreatedAt, &sSite_State, &sSite_Tags}}
+var m_SiteIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SiteIdList_member}}
+var m_SiteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SiteList_member}}
+var mSiteState = smithy.SchemaMembers{List: []*smithy.Schema{&sSiteState_pending, &sSiteState_available, &sSiteState_deleting, &sSiteState_updating}}
+var mSiteToSiteVpnAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sSiteToSiteVpnAttachment_Attachment, &sSiteToSiteVpnAttachment_VpnConnectionArn}}
+var m_SubnetArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetArnList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message, &sThrottlingException_RetryAfterSeconds}}
+var m_TransitGatewayArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TransitGatewayArnList_member}}
+var m_TransitGatewayConnectPeerArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TransitGatewayConnectPeerArnList_member}}
+var mTransitGatewayConnectPeerAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sTransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn, &sTransitGatewayConnectPeerAssociation_GlobalNetworkId, &sTransitGatewayConnectPeerAssociation_DeviceId, &sTransitGatewayConnectPeerAssociation_LinkId, &sTransitGatewayConnectPeerAssociation_State}}
+var m_TransitGatewayConnectPeerAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TransitGatewayConnectPeerAssociationList_member}}
+var mTransitGatewayConnectPeerAssociationState = smithy.SchemaMembers{List: []*smithy.Schema{&sTransitGatewayConnectPeerAssociationState_pending, &sTransitGatewayConnectPeerAssociationState_available, &sTransitGatewayConnectPeerAssociationState_deleting, &sTransitGatewayConnectPeerAssociationState_deleted}}
+var mTransitGatewayPeering = smithy.SchemaMembers{List: []*smithy.Schema{&sTransitGatewayPeering_Peering, &sTransitGatewayPeering_TransitGatewayArn, &sTransitGatewayPeering_TransitGatewayPeeringAttachmentId}}
+var mTransitGatewayRegistration = smithy.SchemaMembers{List: []*smithy.Schema{&sTransitGatewayRegistration_GlobalNetworkId, &sTransitGatewayRegistration_TransitGatewayArn, &sTransitGatewayRegistration_State}}
+var m_TransitGatewayRegistrationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TransitGatewayRegistrationList_member}}
+var mTransitGatewayRegistrationState = smithy.SchemaMembers{List: []*smithy.Schema{&sTransitGatewayRegistrationState_pending, &sTransitGatewayRegistrationState_available, &sTransitGatewayRegistrationState_deleting, &sTransitGatewayRegistrationState_deleted, &sTransitGatewayRegistrationState_failed}}
+var mTransitGatewayRegistrationStateReason = smithy.SchemaMembers{List: []*smithy.Schema{&sTransitGatewayRegistrationStateReason_Code, &sTransitGatewayRegistrationStateReason_Message}}
+var mTransitGatewayRouteTableAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sTransitGatewayRouteTableAttachment_Attachment, &sTransitGatewayRouteTableAttachment_PeeringId, &sTransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn}}
+var mTunnelProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sTunnelProtocol_GRE, &sTunnelProtocol_NO_ENCAP}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Reason, &sValidationException_Fields}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_Name, &sValidationExceptionField_Message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mVia = smithy.SchemaMembers{List: []*smithy.Schema{&sVia_NetworkFunctionGroups, &sVia_WithEdgeOverrides}}
+var mVpcAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcAttachment_Attachment, &sVpcAttachment_SubnetArns, &sVpcAttachment_Options}}
+var mVpcOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcOptions_Ipv6Support, &sVpcOptions_ApplianceModeSupport, &sVpcOptions_DnsSupport, &sVpcOptions_SecurityGroupReferencingSupport}}
+var mWhenSentTo = smithy.SchemaMembers{List: []*smithy.Schema{&sWhenSentTo_WhenSentToSegmentsList}}
+var m_WhenSentToSegmentsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhenSentToSegmentsList_member}}
+var m_WithEdgeOverridesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WithEdgeOverridesList_member}}
+var mAcceptAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptAttachmentRequest_AttachmentId}}
+var mAcceptAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptAttachmentResponse_Attachment}}
+var mAssociateConnectPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateConnectPeerRequest_GlobalNetworkId, &sAssociateConnectPeerRequest_ConnectPeerId, &sAssociateConnectPeerRequest_DeviceId, &sAssociateConnectPeerRequest_LinkId}}
+var mAssociateConnectPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateConnectPeerResponse_ConnectPeerAssociation}}
+var mAssociateCustomerGatewayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateCustomerGatewayRequest_CustomerGatewayArn, &sAssociateCustomerGatewayRequest_GlobalNetworkId, &sAssociateCustomerGatewayRequest_DeviceId, &sAssociateCustomerGatewayRequest_LinkId}}
+var mAssociateCustomerGatewayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateCustomerGatewayResponse_CustomerGatewayAssociation}}
+var mAssociateLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateLinkRequest_GlobalNetworkId, &sAssociateLinkRequest_DeviceId, &sAssociateLinkRequest_LinkId}}
+var mAssociateLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateLinkResponse_LinkAssociation}}
+var mAssociateTransitGatewayConnectPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateTransitGatewayConnectPeerRequest_GlobalNetworkId, &sAssociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn, &sAssociateTransitGatewayConnectPeerRequest_DeviceId, &sAssociateTransitGatewayConnectPeerRequest_LinkId}}
+var mAssociateTransitGatewayConnectPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation}}
+var mCreateConnectAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectAttachmentRequest_CoreNetworkId, &sCreateConnectAttachmentRequest_EdgeLocation, &sCreateConnectAttachmentRequest_TransportAttachmentId, &sCreateConnectAttachmentRequest_RoutingPolicyLabel, &sCreateConnectAttachmentRequest_NatGatewaySupport, &sCreateConnectAttachmentRequest_NatGatewayRules, &sCreateConnectAttachmentRequest_Options, &sCreateConnectAttachmentRequest_Tags, &sCreateConnectAttachmentRequest_ClientToken}, Seed: 6, Slots: []uint16{
+	0, 1, 0, 0, 0, 3, 4, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0,
+	0, 5, 0, 0, 7, 2, 0, 8,
+}}
+var mCreateConnectAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectAttachmentResponse_ConnectAttachment}}
+var mCreateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionRequest_GlobalNetworkId, &sCreateConnectionRequest_DeviceId, &sCreateConnectionRequest_ConnectedDeviceId, &sCreateConnectionRequest_LinkId, &sCreateConnectionRequest_ConnectedLinkId, &sCreateConnectionRequest_Description, &sCreateConnectionRequest_Tags}}
+var mCreateConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionResponse_Connection}}
+var mCreateConnectPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectPeerRequest_ConnectAttachmentId, &sCreateConnectPeerRequest_CoreNetworkAddress, &sCreateConnectPeerRequest_PeerAddress, &sCreateConnectPeerRequest_BgpOptions, &sCreateConnectPeerRequest_InsideCidrBlocks, &sCreateConnectPeerRequest_Tags, &sCreateConnectPeerRequest_ClientToken, &sCreateConnectPeerRequest_SubnetArn}}
+var mCreateConnectPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectPeerResponse_ConnectPeer}}
+var mCreateCoreNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCoreNetworkRequest_GlobalNetworkId, &sCreateCoreNetworkRequest_Description, &sCreateCoreNetworkRequest_Tags, &sCreateCoreNetworkRequest_PolicyDocument, &sCreateCoreNetworkRequest_ClientToken}}
+var mCreateCoreNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCoreNetworkResponse_CoreNetwork}}
+var mCreateCoreNetworkPrefixListAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCoreNetworkPrefixListAssociationRequest_CoreNetworkId, &sCreateCoreNetworkPrefixListAssociationRequest_PrefixListArn, &sCreateCoreNetworkPrefixListAssociationRequest_PrefixListAlias, &sCreateCoreNetworkPrefixListAssociationRequest_ClientToken}}
+var mCreateCoreNetworkPrefixListAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId, &sCreateCoreNetworkPrefixListAssociationResponse_PrefixListArn, &sCreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias}}
+var mCreateDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeviceRequest_GlobalNetworkId, &sCreateDeviceRequest_AWSLocation, &sCreateDeviceRequest_Description, &sCreateDeviceRequest_Type, &sCreateDeviceRequest_Vendor, &sCreateDeviceRequest_Model, &sCreateDeviceRequest_SerialNumber, &sCreateDeviceRequest_Location, &sCreateDeviceRequest_SiteId, &sCreateDeviceRequest_Tags}, Seed: 5, Slots: []uint16{
+	0, 6, 2, 0, 0, 0, 9, 0, 0, 8, 0, 3, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 5,
+	4, 0, 10, 0, 0, 0, 7, 0,
+}}
+var mCreateDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeviceResponse_Device}}
+var mCreateDirectConnectGatewayAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayAttachmentRequest_CoreNetworkId, &sCreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn, &sCreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel, &sCreateDirectConnectGatewayAttachmentRequest_EdgeLocations, &sCreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport, &sCreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport, &sCreateDirectConnectGatewayAttachmentRequest_NatGatewayRules, &sCreateDirectConnectGatewayAttachmentRequest_Tags, &sCreateDirectConnectGatewayAttachmentRequest_ClientToken}, Seed: 1, Slots: []uint16{
+	0, 8, 3, 0, 0, 2, 0, 1, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0,
+	6, 5, 0, 0, 9, 0, 0, 0,
+}}
+var mCreateDirectConnectGatewayAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment}}
+var mCreateGlobalNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGlobalNetworkRequest_Description, &sCreateGlobalNetworkRequest_Tags}}
+var mCreateGlobalNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGlobalNetworkResponse_GlobalNetwork}}
+var mCreateLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLinkRequest_GlobalNetworkId, &sCreateLinkRequest_Description, &sCreateLinkRequest_Type, &sCreateLinkRequest_Bandwidth, &sCreateLinkRequest_Provider, &sCreateLinkRequest_SiteId, &sCreateLinkRequest_Tags}}
+var mCreateLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLinkResponse_Link}}
+var mCreateSiteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSiteRequest_GlobalNetworkId, &sCreateSiteRequest_Description, &sCreateSiteRequest_Location, &sCreateSiteRequest_Tags}}
+var mCreateSiteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSiteResponse_Site}}
+var mCreateSiteToSiteVpnAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSiteToSiteVpnAttachmentRequest_CoreNetworkId, &sCreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn, &sCreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel, &sCreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport, &sCreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport, &sCreateSiteToSiteVpnAttachmentRequest_NatGatewayRules, &sCreateSiteToSiteVpnAttachmentRequest_Tags, &sCreateSiteToSiteVpnAttachmentRequest_ClientToken}}
+var mCreateSiteToSiteVpnAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment}}
+var mCreateTransitGatewayPeeringRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTransitGatewayPeeringRequest_CoreNetworkId, &sCreateTransitGatewayPeeringRequest_TransitGatewayArn, &sCreateTransitGatewayPeeringRequest_Tags, &sCreateTransitGatewayPeeringRequest_ClientToken}}
+var mCreateTransitGatewayPeeringResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTransitGatewayPeeringResponse_TransitGatewayPeering}}
+var mCreateTransitGatewayRouteTableAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTransitGatewayRouteTableAttachmentRequest_PeeringId, &sCreateTransitGatewayRouteTableAttachmentRequest_TransitGatewayRouteTableArn, &sCreateTransitGatewayRouteTableAttachmentRequest_RoutingPolicyLabel, &sCreateTransitGatewayRouteTableAttachmentRequest_Tags, &sCreateTransitGatewayRouteTableAttachmentRequest_ClientToken}}
+var mCreateTransitGatewayRouteTableAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment}}
+var mCreateVpcAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcAttachmentRequest_CoreNetworkId, &sCreateVpcAttachmentRequest_VpcArn, &sCreateVpcAttachmentRequest_SubnetArns, &sCreateVpcAttachmentRequest_Options, &sCreateVpcAttachmentRequest_RoutingPolicyLabel, &sCreateVpcAttachmentRequest_NatGatewaySupport, &sCreateVpcAttachmentRequest_NatGatewayRules, &sCreateVpcAttachmentRequest_Tags, &sCreateVpcAttachmentRequest_ClientToken}, Seed: 2, Slots: []uint16{
+	0, 0, 3, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 7, 6, 1, 0, 9, 0,
+	0, 2, 4, 0, 0, 0, 0, 0,
+}}
+var mCreateVpcAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcAttachmentResponse_VpcAttachment}}
+var mDeleteAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAttachmentRequest_AttachmentId}}
+var mDeleteAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAttachmentResponse_Attachment}}
+var mDeleteConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionRequest_GlobalNetworkId, &sDeleteConnectionRequest_ConnectionId}}
+var mDeleteConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionResponse_Connection}}
+var mDeleteConnectPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectPeerRequest_ConnectPeerId}}
+var mDeleteConnectPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectPeerResponse_ConnectPeer}}
+var mDeleteCoreNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCoreNetworkRequest_CoreNetworkId}}
+var mDeleteCoreNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCoreNetworkResponse_CoreNetwork}}
+var mDeleteCoreNetworkPolicyVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCoreNetworkPolicyVersionRequest_CoreNetworkId, &sDeleteCoreNetworkPolicyVersionRequest_PolicyVersionId}}
+var mDeleteCoreNetworkPolicyVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy}}
+var mDeleteCoreNetworkPrefixListAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCoreNetworkPrefixListAssociationRequest_CoreNetworkId, &sDeleteCoreNetworkPrefixListAssociationRequest_PrefixListArn}}
+var mDeleteCoreNetworkPrefixListAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId, &sDeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn}}
+var mDeleteDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeviceRequest_GlobalNetworkId, &sDeleteDeviceRequest_DeviceId}}
+var mDeleteDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeviceResponse_Device}}
+var mDeleteGlobalNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGlobalNetworkRequest_GlobalNetworkId}}
+var mDeleteGlobalNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGlobalNetworkResponse_GlobalNetwork}}
+var mDeleteLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLinkRequest_GlobalNetworkId, &sDeleteLinkRequest_LinkId}}
+var mDeleteLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLinkResponse_Link}}
+var mDeletePeeringRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePeeringRequest_PeeringId}}
+var mDeletePeeringResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePeeringResponse_Peering}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_ResourceArn}}
+var mDeleteSiteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSiteRequest_GlobalNetworkId, &sDeleteSiteRequest_SiteId}}
+var mDeleteSiteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSiteResponse_Site}}
+var mDeregisterTransitGatewayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterTransitGatewayRequest_GlobalNetworkId, &sDeregisterTransitGatewayRequest_TransitGatewayArn}}
+var mDeregisterTransitGatewayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterTransitGatewayResponse_TransitGatewayRegistration}}
+var mDescribeGlobalNetworksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGlobalNetworksRequest_GlobalNetworkIds, &sDescribeGlobalNetworksRequest_MaxResults, &sDescribeGlobalNetworksRequest_NextToken}}
+var mDescribeGlobalNetworksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGlobalNetworksResponse_GlobalNetworks, &sDescribeGlobalNetworksResponse_NextToken}}
+var mDisassociateConnectPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateConnectPeerRequest_GlobalNetworkId, &sDisassociateConnectPeerRequest_ConnectPeerId}}
+var mDisassociateConnectPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateConnectPeerResponse_ConnectPeerAssociation}}
+var mDisassociateCustomerGatewayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateCustomerGatewayRequest_GlobalNetworkId, &sDisassociateCustomerGatewayRequest_CustomerGatewayArn}}
+var mDisassociateCustomerGatewayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateCustomerGatewayResponse_CustomerGatewayAssociation}}
+var mDisassociateLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateLinkRequest_GlobalNetworkId, &sDisassociateLinkRequest_DeviceId, &sDisassociateLinkRequest_LinkId}}
+var mDisassociateLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateLinkResponse_LinkAssociation}}
+var mDisassociateTransitGatewayConnectPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateTransitGatewayConnectPeerRequest_GlobalNetworkId, &sDisassociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn}}
+var mDisassociateTransitGatewayConnectPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation}}
+var mExecuteCoreNetworkChangeSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExecuteCoreNetworkChangeSetRequest_CoreNetworkId, &sExecuteCoreNetworkChangeSetRequest_PolicyVersionId}}
+var mGetConnectAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectAttachmentRequest_AttachmentId}}
+var mGetConnectAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectAttachmentResponse_ConnectAttachment}}
+var mGetConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionsRequest_GlobalNetworkId, &sGetConnectionsRequest_ConnectionIds, &sGetConnectionsRequest_DeviceId, &sGetConnectionsRequest_MaxResults, &sGetConnectionsRequest_NextToken}}
+var mGetConnectionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectionsResponse_Connections, &sGetConnectionsResponse_NextToken}}
+var mGetConnectPeerAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectPeerAssociationsRequest_GlobalNetworkId, &sGetConnectPeerAssociationsRequest_ConnectPeerIds, &sGetConnectPeerAssociationsRequest_MaxResults, &sGetConnectPeerAssociationsRequest_NextToken}}
+var mGetConnectPeerAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectPeerAssociationsResponse_ConnectPeerAssociations, &sGetConnectPeerAssociationsResponse_NextToken}}
+var mGetConnectPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectPeerRequest_ConnectPeerId}}
+var mGetConnectPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectPeerResponse_ConnectPeer}}
+var mGetCoreNetworkChangeEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkChangeEventsRequest_CoreNetworkId, &sGetCoreNetworkChangeEventsRequest_PolicyVersionId, &sGetCoreNetworkChangeEventsRequest_MaxResults, &sGetCoreNetworkChangeEventsRequest_NextToken}}
+var mGetCoreNetworkChangeEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents, &sGetCoreNetworkChangeEventsResponse_NextToken}}
+var mGetCoreNetworkChangeSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkChangeSetRequest_CoreNetworkId, &sGetCoreNetworkChangeSetRequest_PolicyVersionId, &sGetCoreNetworkChangeSetRequest_MaxResults, &sGetCoreNetworkChangeSetRequest_NextToken}}
+var mGetCoreNetworkChangeSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkChangeSetResponse_CoreNetworkChanges, &sGetCoreNetworkChangeSetResponse_NextToken}}
+var mGetCoreNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkRequest_CoreNetworkId}}
+var mGetCoreNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkResponse_CoreNetwork}}
+var mGetCoreNetworkPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkPolicyRequest_CoreNetworkId, &sGetCoreNetworkPolicyRequest_PolicyVersionId, &sGetCoreNetworkPolicyRequest_Alias}}
+var mGetCoreNetworkPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreNetworkPolicyResponse_CoreNetworkPolicy}}
+var mGetCustomerGatewayAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCustomerGatewayAssociationsRequest_GlobalNetworkId, &sGetCustomerGatewayAssociationsRequest_CustomerGatewayArns, &sGetCustomerGatewayAssociationsRequest_MaxResults, &sGetCustomerGatewayAssociationsRequest_NextToken}}
+var mGetCustomerGatewayAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations, &sGetCustomerGatewayAssociationsResponse_NextToken}}
+var mGetDevicesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDevicesRequest_GlobalNetworkId, &sGetDevicesRequest_DeviceIds, &sGetDevicesRequest_SiteId, &sGetDevicesRequest_MaxResults, &sGetDevicesRequest_NextToken}}
+var mGetDevicesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDevicesResponse_Devices, &sGetDevicesResponse_NextToken}}
+var mGetDirectConnectGatewayAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDirectConnectGatewayAttachmentRequest_AttachmentId}}
+var mGetDirectConnectGatewayAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment}}
+var mGetLinkAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkAssociationsRequest_GlobalNetworkId, &sGetLinkAssociationsRequest_DeviceId, &sGetLinkAssociationsRequest_LinkId, &sGetLinkAssociationsRequest_MaxResults, &sGetLinkAssociationsRequest_NextToken}}
+var mGetLinkAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkAssociationsResponse_LinkAssociations, &sGetLinkAssociationsResponse_NextToken}}
+var mGetLinksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinksRequest_GlobalNetworkId, &sGetLinksRequest_LinkIds, &sGetLinksRequest_SiteId, &sGetLinksRequest_Type, &sGetLinksRequest_Provider, &sGetLinksRequest_MaxResults, &sGetLinksRequest_NextToken}}
+var mGetLinksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinksResponse_Links, &sGetLinksResponse_NextToken}}
+var mGetNetworkResourceCountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkResourceCountsRequest_GlobalNetworkId, &sGetNetworkResourceCountsRequest_ResourceType, &sGetNetworkResourceCountsRequest_MaxResults, &sGetNetworkResourceCountsRequest_NextToken}}
+var mGetNetworkResourceCountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkResourceCountsResponse_NetworkResourceCounts, &sGetNetworkResourceCountsResponse_NextToken}}
+var mGetNetworkResourceRelationshipsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkResourceRelationshipsRequest_GlobalNetworkId, &sGetNetworkResourceRelationshipsRequest_CoreNetworkId, &sGetNetworkResourceRelationshipsRequest_RegisteredGatewayArn, &sGetNetworkResourceRelationshipsRequest_AwsRegion, &sGetNetworkResourceRelationshipsRequest_AccountId, &sGetNetworkResourceRelationshipsRequest_ResourceType, &sGetNetworkResourceRelationshipsRequest_ResourceArn, &sGetNetworkResourceRelationshipsRequest_MaxResults, &sGetNetworkResourceRelationshipsRequest_NextToken}, Seed: 11, Slots: []uint16{
+	3, 8, 0, 0, 5, 0, 7, 0, 0, 9, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 6, 0, 4, 0,
+}}
+var mGetNetworkResourceRelationshipsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkResourceRelationshipsResponse_Relationships, &sGetNetworkResourceRelationshipsResponse_NextToken}}
+var mGetNetworkResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkResourcesRequest_GlobalNetworkId, &sGetNetworkResourcesRequest_CoreNetworkId, &sGetNetworkResourcesRequest_RegisteredGatewayArn, &sGetNetworkResourcesRequest_AwsRegion, &sGetNetworkResourcesRequest_AccountId, &sGetNetworkResourcesRequest_ResourceType, &sGetNetworkResourcesRequest_ResourceArn, &sGetNetworkResourcesRequest_MaxResults, &sGetNetworkResourcesRequest_NextToken}, Seed: 11, Slots: []uint16{
+	3, 8, 0, 0, 5, 0, 7, 0, 0, 9, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 6, 0, 4, 0,
+}}
+var mGetNetworkResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkResourcesResponse_NetworkResources, &sGetNetworkResourcesResponse_NextToken}}
+var mGetNetworkRoutesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkRoutesRequest_GlobalNetworkId, &sGetNetworkRoutesRequest_RouteTableIdentifier, &sGetNetworkRoutesRequest_ExactCidrMatches, &sGetNetworkRoutesRequest_LongestPrefixMatches, &sGetNetworkRoutesRequest_SubnetOfMatches, &sGetNetworkRoutesRequest_SupernetOfMatches, &sGetNetworkRoutesRequest_PrefixListIds, &sGetNetworkRoutesRequest_States, &sGetNetworkRoutesRequest_Types, &sGetNetworkRoutesRequest_DestinationFilters, &sGetNetworkRoutesRequest_MaxResults, &sGetNetworkRoutesRequest_NextToken}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 2, 0, 8, 3, 0, 10, 11, 1, 6, 7, 5, 0, 0, 0,
+	0, 0, 0, 4, 12, 0, 0, 0,
+}}
+var mGetNetworkRoutesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkRoutesResponse_RouteTableArn, &sGetNetworkRoutesResponse_CoreNetworkSegmentEdge, &sGetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup, &sGetNetworkRoutesResponse_RouteTableType, &sGetNetworkRoutesResponse_RouteTableTimestamp, &sGetNetworkRoutesResponse_NetworkRoutes, &sGetNetworkRoutesResponse_NextToken}}
+var mGetNetworkTelemetryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkTelemetryRequest_GlobalNetworkId, &sGetNetworkTelemetryRequest_CoreNetworkId, &sGetNetworkTelemetryRequest_RegisteredGatewayArn, &sGetNetworkTelemetryRequest_AwsRegion, &sGetNetworkTelemetryRequest_AccountId, &sGetNetworkTelemetryRequest_ResourceType, &sGetNetworkTelemetryRequest_ResourceArn, &sGetNetworkTelemetryRequest_MaxResults, &sGetNetworkTelemetryRequest_NextToken}, Seed: 11, Slots: []uint16{
+	3, 8, 0, 0, 5, 0, 7, 0, 0, 9, 0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 6, 0, 4, 0,
+}}
+var mGetNetworkTelemetryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkTelemetryResponse_NetworkTelemetry, &sGetNetworkTelemetryResponse_NextToken}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_ResourceArn}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_PolicyDocument}}
+var mGetRouteAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteAnalysisRequest_GlobalNetworkId, &sGetRouteAnalysisRequest_RouteAnalysisId}}
+var mGetRouteAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteAnalysisResponse_RouteAnalysis}}
+var mGetSitesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSitesRequest_GlobalNetworkId, &sGetSitesRequest_SiteIds, &sGetSitesRequest_MaxResults, &sGetSitesRequest_NextToken}}
+var mGetSitesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSitesResponse_Sites, &sGetSitesResponse_NextToken}}
+var mGetSiteToSiteVpnAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSiteToSiteVpnAttachmentRequest_AttachmentId}}
+var mGetSiteToSiteVpnAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment}}
+var mGetTransitGatewayConnectPeerAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayConnectPeerAssociationsRequest_GlobalNetworkId, &sGetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns, &sGetTransitGatewayConnectPeerAssociationsRequest_MaxResults, &sGetTransitGatewayConnectPeerAssociationsRequest_NextToken}}
+var mGetTransitGatewayConnectPeerAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations, &sGetTransitGatewayConnectPeerAssociationsResponse_NextToken}}
+var mGetTransitGatewayPeeringRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayPeeringRequest_PeeringId}}
+var mGetTransitGatewayPeeringResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayPeeringResponse_TransitGatewayPeering}}
+var mGetTransitGatewayRegistrationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayRegistrationsRequest_GlobalNetworkId, &sGetTransitGatewayRegistrationsRequest_TransitGatewayArns, &sGetTransitGatewayRegistrationsRequest_MaxResults, &sGetTransitGatewayRegistrationsRequest_NextToken}}
+var mGetTransitGatewayRegistrationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations, &sGetTransitGatewayRegistrationsResponse_NextToken}}
+var mGetTransitGatewayRouteTableAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayRouteTableAttachmentRequest_AttachmentId}}
+var mGetTransitGatewayRouteTableAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment}}
+var mGetVpcAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVpcAttachmentRequest_AttachmentId}}
+var mGetVpcAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVpcAttachmentResponse_VpcAttachment}}
+var mListAttachmentNatConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachmentNatConfigurationsRequest_CoreNetworkId, &sListAttachmentNatConfigurationsRequest_AttachmentId, &sListAttachmentNatConfigurationsRequest_Filters, &sListAttachmentNatConfigurationsRequest_MaxResults, &sListAttachmentNatConfigurationsRequest_NextToken}}
+var mListAttachmentNatConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations, &sListAttachmentNatConfigurationsResponse_NextToken}}
+var mListAttachmentRoutingPolicyAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId, &sListAttachmentRoutingPolicyAssociationsRequest_AttachmentId, &sListAttachmentRoutingPolicyAssociationsRequest_MaxResults, &sListAttachmentRoutingPolicyAssociationsRequest_NextToken}}
+var mListAttachmentRoutingPolicyAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations, &sListAttachmentRoutingPolicyAssociationsResponse_NextToken}}
+var mListAttachmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachmentsRequest_CoreNetworkId, &sListAttachmentsRequest_AttachmentType, &sListAttachmentsRequest_EdgeLocation, &sListAttachmentsRequest_State, &sListAttachmentsRequest_MaxResults, &sListAttachmentsRequest_NextToken}}
+var mListAttachmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAttachmentsResponse_Attachments, &sListAttachmentsResponse_NextToken}}
+var mListConnectPeersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectPeersRequest_CoreNetworkId, &sListConnectPeersRequest_ConnectAttachmentId, &sListConnectPeersRequest_MaxResults, &sListConnectPeersRequest_NextToken}}
+var mListConnectPeersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConnectPeersResponse_ConnectPeers, &sListConnectPeersResponse_NextToken}}
+var mListCoreNetworkPolicyVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworkPolicyVersionsRequest_CoreNetworkId, &sListCoreNetworkPolicyVersionsRequest_MaxResults, &sListCoreNetworkPolicyVersionsRequest_NextToken}}
+var mListCoreNetworkPolicyVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions, &sListCoreNetworkPolicyVersionsResponse_NextToken}}
+var mListCoreNetworkPrefixListAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworkPrefixListAssociationsRequest_CoreNetworkId, &sListCoreNetworkPrefixListAssociationsRequest_PrefixListArn, &sListCoreNetworkPrefixListAssociationsRequest_MaxResults, &sListCoreNetworkPrefixListAssociationsRequest_NextToken}}
+var mListCoreNetworkPrefixListAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations, &sListCoreNetworkPrefixListAssociationsResponse_NextToken}}
+var mListCoreNetworkRoutingInformationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworkRoutingInformationRequest_CoreNetworkId, &sListCoreNetworkRoutingInformationRequest_SegmentName, &sListCoreNetworkRoutingInformationRequest_EdgeLocation, &sListCoreNetworkRoutingInformationRequest_NextHopFilters, &sListCoreNetworkRoutingInformationRequest_ExactPrefixMatches, &sListCoreNetworkRoutingInformationRequest_LongestPrefixMatches, &sListCoreNetworkRoutingInformationRequest_SubnetOfMatches, &sListCoreNetworkRoutingInformationRequest_SupernetOfMatches, &sListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches, &sListCoreNetworkRoutingInformationRequest_ExactAsPathMatches, &sListCoreNetworkRoutingInformationRequest_MedMatches, &sListCoreNetworkRoutingInformationRequest_CommunityMatches, &sListCoreNetworkRoutingInformationRequest_MaxResults, &sListCoreNetworkRoutingInformationRequest_NextToken}, Seed: 9, Slots: []uint16{
+	4, 7, 12, 13, 0, 0, 0, 0, 11, 14, 0, 0, 0, 0, 0, 2, 5, 0, 0, 0, 0, 0, 0, 8,
+	10, 3, 6, 0, 9, 0, 1, 0,
+}}
+var mListCoreNetworkRoutingInformationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation, &sListCoreNetworkRoutingInformationResponse_NextToken}}
+var mListCoreNetworksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworksRequest_MaxResults, &sListCoreNetworksRequest_NextToken}}
+var mListCoreNetworksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreNetworksResponse_CoreNetworks, &sListCoreNetworksResponse_NextToken}}
+var mListOrganizationServiceAccessStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationServiceAccessStatusRequest_MaxResults, &sListOrganizationServiceAccessStatusRequest_NextToken}}
+var mListOrganizationServiceAccessStatusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationServiceAccessStatusResponse_OrganizationStatus, &sListOrganizationServiceAccessStatusResponse_NextToken}}
+var mListPeeringsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPeeringsRequest_CoreNetworkId, &sListPeeringsRequest_PeeringType, &sListPeeringsRequest_EdgeLocation, &sListPeeringsRequest_State, &sListPeeringsRequest_MaxResults, &sListPeeringsRequest_NextToken}}
+var mListPeeringsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPeeringsResponse_Peerings, &sListPeeringsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_TagList}}
+var mPutAttachmentRoutingPolicyLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAttachmentRoutingPolicyLabelRequest_CoreNetworkId, &sPutAttachmentRoutingPolicyLabelRequest_AttachmentId, &sPutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel, &sPutAttachmentRoutingPolicyLabelRequest_ClientToken}}
+var mPutAttachmentRoutingPolicyLabelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAttachmentRoutingPolicyLabelResponse_CoreNetworkId, &sPutAttachmentRoutingPolicyLabelResponse_AttachmentId, &sPutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel}}
+var mPutCoreNetworkPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCoreNetworkPolicyRequest_CoreNetworkId, &sPutCoreNetworkPolicyRequest_PolicyDocument, &sPutCoreNetworkPolicyRequest_Description, &sPutCoreNetworkPolicyRequest_LatestVersionId, &sPutCoreNetworkPolicyRequest_ClientToken}}
+var mPutCoreNetworkPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutCoreNetworkPolicyResponse_CoreNetworkPolicy}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_PolicyDocument, &sPutResourcePolicyRequest_ResourceArn}}
+var mRegisterTransitGatewayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterTransitGatewayRequest_GlobalNetworkId, &sRegisterTransitGatewayRequest_TransitGatewayArn}}
+var mRegisterTransitGatewayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterTransitGatewayResponse_TransitGatewayRegistration}}
+var mRejectAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectAttachmentRequest_AttachmentId}}
+var mRejectAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectAttachmentResponse_Attachment}}
+var mRemoveAttachmentRoutingPolicyLabelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveAttachmentRoutingPolicyLabelRequest_CoreNetworkId, &sRemoveAttachmentRoutingPolicyLabelRequest_AttachmentId}}
+var mRemoveAttachmentRoutingPolicyLabelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId, &sRemoveAttachmentRoutingPolicyLabelResponse_AttachmentId, &sRemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel}}
+var mRestoreCoreNetworkPolicyVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreCoreNetworkPolicyVersionRequest_CoreNetworkId, &sRestoreCoreNetworkPolicyVersionRequest_PolicyVersionId}}
+var mRestoreCoreNetworkPolicyVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy}}
+var mStartOrganizationServiceAccessUpdateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartOrganizationServiceAccessUpdateRequest_Action}}
+var mStartOrganizationServiceAccessUpdateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartOrganizationServiceAccessUpdateResponse_OrganizationStatus}}
+var mStartRouteAnalysisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRouteAnalysisRequest_GlobalNetworkId, &sStartRouteAnalysisRequest_Source, &sStartRouteAnalysisRequest_Destination, &sStartRouteAnalysisRequest_IncludeReturnPath, &sStartRouteAnalysisRequest_UseMiddleboxes}}
+var mStartRouteAnalysisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRouteAnalysisResponse_RouteAnalysis}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateAttachmentNatConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAttachmentNatConfigurationRequest_AttachmentId, &sUpdateAttachmentNatConfigurationRequest_NatGatewaySupport, &sUpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport, &sUpdateAttachmentNatConfigurationRequest_NatGatewayRules, &sUpdateAttachmentNatConfigurationRequest_ClientToken}}
+var mUpdateAttachmentNatConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAttachmentNatConfigurationResponse_AttachmentId, &sUpdateAttachmentNatConfigurationResponse_NatGatewaySupport, &sUpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport, &sUpdateAttachmentNatConfigurationResponse_NatGatewayRules}}
+var mUpdateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionRequest_GlobalNetworkId, &sUpdateConnectionRequest_ConnectionId, &sUpdateConnectionRequest_LinkId, &sUpdateConnectionRequest_ConnectedLinkId, &sUpdateConnectionRequest_Description}}
+var mUpdateConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionResponse_Connection}}
+var mUpdateCoreNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCoreNetworkRequest_CoreNetworkId, &sUpdateCoreNetworkRequest_Description}}
+var mUpdateCoreNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateCoreNetworkResponse_CoreNetwork}}
+var mUpdateDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeviceRequest_GlobalNetworkId, &sUpdateDeviceRequest_DeviceId, &sUpdateDeviceRequest_AWSLocation, &sUpdateDeviceRequest_Description, &sUpdateDeviceRequest_Type, &sUpdateDeviceRequest_Vendor, &sUpdateDeviceRequest_Model, &sUpdateDeviceRequest_SerialNumber, &sUpdateDeviceRequest_Location, &sUpdateDeviceRequest_SiteId}, Seed: 5, Slots: []uint16{
+	0, 7, 3, 0, 0, 0, 10, 0, 2, 9, 0, 4, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 6,
+	5, 0, 0, 0, 0, 0, 8, 0,
+}}
+var mUpdateDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeviceResponse_Device}}
+var mUpdateDirectConnectGatewayAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectConnectGatewayAttachmentRequest_AttachmentId, &sUpdateDirectConnectGatewayAttachmentRequest_EdgeLocations}}
+var mUpdateDirectConnectGatewayAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment}}
+var mUpdateGlobalNetworkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGlobalNetworkRequest_GlobalNetworkId, &sUpdateGlobalNetworkRequest_Description}}
+var mUpdateGlobalNetworkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGlobalNetworkResponse_GlobalNetwork}}
+var mUpdateLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLinkRequest_GlobalNetworkId, &sUpdateLinkRequest_LinkId, &sUpdateLinkRequest_Description, &sUpdateLinkRequest_Type, &sUpdateLinkRequest_Bandwidth, &sUpdateLinkRequest_Provider}}
+var mUpdateLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLinkResponse_Link}}
+var mUpdateNetworkResourceMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkResourceMetadataRequest_GlobalNetworkId, &sUpdateNetworkResourceMetadataRequest_ResourceArn, &sUpdateNetworkResourceMetadataRequest_Metadata}}
+var mUpdateNetworkResourceMetadataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkResourceMetadataResponse_ResourceArn, &sUpdateNetworkResourceMetadataResponse_Metadata}}
+var mUpdateSiteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSiteRequest_GlobalNetworkId, &sUpdateSiteRequest_SiteId, &sUpdateSiteRequest_Description, &sUpdateSiteRequest_Location}}
+var mUpdateSiteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSiteResponse_Site}}
+var mUpdateVpcAttachmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcAttachmentRequest_AttachmentId, &sUpdateVpcAttachmentRequest_AddSubnetArns, &sUpdateVpcAttachmentRequest_RemoveSubnetArns, &sUpdateVpcAttachmentRequest_Options}}
+var mUpdateVpcAttachmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcAttachmentResponse_VpcAttachment}}
+
+var sAcceptAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptAttachment, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sAssociateConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectPeer, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sAssociateCustomerGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCustomerGateway, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sAssociateLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateLink, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sAssociateTransitGatewayConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateTransitGatewayConnectPeer, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateConnectAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectAttachment, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnection, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectPeer, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreateCoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCoreNetwork, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sCreateCoreNetworkPrefixListAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCoreNetworkPrefixListAssociation, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sCreateDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDevice, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sCreateDirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAttachment, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sCreateGlobalNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalNetwork, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sCreateLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLink, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sCreateSite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSite, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sCreateSiteToSiteVpnAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSiteToSiteVpnAttachment, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sCreateTransitGatewayPeering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitGatewayPeering, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sCreateTransitGatewayRouteTableAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitGatewayRouteTableAttachment, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sCreateVpcAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcAttachment, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sDeleteAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttachment, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sDeleteConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectPeer, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sDeleteCoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetwork, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sDeleteCoreNetworkPolicyVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkPolicyVersion, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sDeleteCoreNetworkPrefixListAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkPrefixListAssociation, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sDeleteDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDevice, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sDeleteGlobalNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalNetwork, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sDeleteLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLink, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sDeletePeering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePeering, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sDeleteSite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSite, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sDeregisterTransitGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterTransitGateway, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sDescribeGlobalNetworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGlobalNetworks, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sDisassociateConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectPeer, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sDisassociateCustomerGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCustomerGateway, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sDisassociateLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateLink, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sDisassociateTransitGatewayConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateTransitGatewayConnectPeer, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sExecuteCoreNetworkChangeSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteCoreNetworkChangeSet, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sGetConnectAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectAttachment, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sGetConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnections, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sGetConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectPeer, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sGetConnectPeerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectPeerAssociations, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sGetCoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetwork, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sGetCoreNetworkChangeEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkChangeEvents, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sGetCoreNetworkChangeSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkChangeSet, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var sGetCoreNetworkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkPolicy, Traits: &t45, Type: smithy.ShapeTypeOperation})
+var sGetCustomerGatewayAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCustomerGatewayAssociations, Traits: &t46, Type: smithy.ShapeTypeOperation})
+var sGetDevices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDevices, Traits: &t47, Type: smithy.ShapeTypeOperation})
+var sGetDirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectConnectGatewayAttachment, Traits: &t48, Type: smithy.ShapeTypeOperation})
+var sGetLinkAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkAssociations, Traits: &t49, Type: smithy.ShapeTypeOperation})
+var sGetLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinks, Traits: &t50, Type: smithy.ShapeTypeOperation})
+var sGetNetworkResourceCounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourceCounts, Traits: &t51, Type: smithy.ShapeTypeOperation})
+var sGetNetworkResourceRelationships = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourceRelationships, Traits: &t52, Type: smithy.ShapeTypeOperation})
+var sGetNetworkResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResources, Traits: &t53, Type: smithy.ShapeTypeOperation})
+var sGetNetworkRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkRoutes, Traits: &t54, Type: smithy.ShapeTypeOperation})
+var sGetNetworkTelemetry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkTelemetry, Traits: &t55, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t56, Type: smithy.ShapeTypeOperation})
+var sGetRouteAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteAnalysis, Traits: &t57, Type: smithy.ShapeTypeOperation})
+var sGetSites = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSites, Traits: &t58, Type: smithy.ShapeTypeOperation})
+var sGetSiteToSiteVpnAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSiteToSiteVpnAttachment, Traits: &t59, Type: smithy.ShapeTypeOperation})
+var sGetTransitGatewayConnectPeerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayConnectPeerAssociations, Traits: &t60, Type: smithy.ShapeTypeOperation})
+var sGetTransitGatewayPeering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayPeering, Traits: &t61, Type: smithy.ShapeTypeOperation})
+var sGetTransitGatewayRegistrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayRegistrations, Traits: &t62, Type: smithy.ShapeTypeOperation})
+var sGetTransitGatewayRouteTableAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayRouteTableAttachment, Traits: &t63, Type: smithy.ShapeTypeOperation})
+var sGetVpcAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcAttachment, Traits: &t64, Type: smithy.ShapeTypeOperation})
+var sListAttachmentNatConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentNatConfigurations, Traits: &t65, Type: smithy.ShapeTypeOperation})
+var sListAttachmentRoutingPolicyAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentRoutingPolicyAssociations, Traits: &t66, Type: smithy.ShapeTypeOperation})
+var sListAttachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachments, Traits: &t67, Type: smithy.ShapeTypeOperation})
+var sListConnectPeers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectPeers, Traits: &t68, Type: smithy.ShapeTypeOperation})
+var sListCoreNetworkPolicyVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkPolicyVersions, Traits: &t69, Type: smithy.ShapeTypeOperation})
+var sListCoreNetworkPrefixListAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkPrefixListAssociations, Traits: &t70, Type: smithy.ShapeTypeOperation})
+var sListCoreNetworkRoutingInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkRoutingInformation, Traits: &t71, Type: smithy.ShapeTypeOperation})
+var sListCoreNetworks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworks, Traits: &t72, Type: smithy.ShapeTypeOperation})
+var sListOrganizationServiceAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationServiceAccessStatus, Traits: &t73, Type: smithy.ShapeTypeOperation})
+var sListPeerings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPeerings, Traits: &t74, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t75, Type: smithy.ShapeTypeOperation})
+var sPutAttachmentRoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAttachmentRoutingPolicyLabel, Traits: &t76, Type: smithy.ShapeTypeOperation})
+var sPutCoreNetworkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCoreNetworkPolicy, Traits: &t77, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t78, Type: smithy.ShapeTypeOperation})
+var sRegisterTransitGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterTransitGateway, Traits: &t79, Type: smithy.ShapeTypeOperation})
+var sRejectAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAttachment, Traits: &t80, Type: smithy.ShapeTypeOperation})
+var sRemoveAttachmentRoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAttachmentRoutingPolicyLabel, Traits: &t81, Type: smithy.ShapeTypeOperation})
+var sRestoreCoreNetworkPolicyVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreCoreNetworkPolicyVersion, Traits: &t82, Type: smithy.ShapeTypeOperation})
+var sStartOrganizationServiceAccessUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOrganizationServiceAccessUpdate, Traits: &t83, Type: smithy.ShapeTypeOperation})
+var sStartRouteAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRouteAnalysis, Traits: &t84, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t85, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t86, Type: smithy.ShapeTypeOperation})
+var sUpdateAttachmentNatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAttachmentNatConfiguration, Traits: &t87, Type: smithy.ShapeTypeOperation})
+var sUpdateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnection, Traits: &t88, Type: smithy.ShapeTypeOperation})
+var sUpdateCoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCoreNetwork, Traits: &t89, Type: smithy.ShapeTypeOperation})
+var sUpdateDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDevice, Traits: &t90, Type: smithy.ShapeTypeOperation})
+var sUpdateDirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayAttachment, Traits: &t91, Type: smithy.ShapeTypeOperation})
+var sUpdateGlobalNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalNetwork, Traits: &t92, Type: smithy.ShapeTypeOperation})
+var sUpdateLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLink, Traits: &t93, Type: smithy.ShapeTypeOperation})
+var sUpdateNetworkResourceMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkResourceMetadata, Traits: &t94, Type: smithy.ShapeTypeOperation})
+var sUpdateSite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSite, Traits: &t95, Type: smithy.ShapeTypeOperation})
+var sUpdateVpcAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcAttachment, Traits: &t96, Type: smithy.ShapeTypeOperation})
+var s_NetworkManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkManager, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t97, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAccountStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeStructure})
+var s_AccountStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountStatusList, Members: &m_AccountStatusList, Type: smithy.ShapeTypeList})
+var s_Action = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Action, Type: smithy.ShapeTypeString})
+var sAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sAttachmentError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentError, Members: &mAttachmentError, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentErrorCode, Members: &mAttachmentErrorCode, Type: smithy.ShapeTypeEnum})
+var s_AttachmentErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentErrorList, Members: &m_AttachmentErrorList, Type: smithy.ShapeTypeList})
+var s_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var s_AttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentList, Members: &m_AttachmentList, Type: smithy.ShapeTypeList})
+var sAttachmentNatConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentNatConfiguration, Members: &mAttachmentNatConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AttachmentNatConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentNatConfigurationList, Members: &m_AttachmentNatConfigurationList, Type: smithy.ShapeTypeList})
+var s_AttachmentRoutingPolicyAssociationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentRoutingPolicyAssociationsList, Members: &m_AttachmentRoutingPolicyAssociationsList, Type: smithy.ShapeTypeList})
+var sAttachmentRoutingPolicyAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentRoutingPolicyAssociationSummary, Members: &mAttachmentRoutingPolicyAssociationSummary, Type: smithy.ShapeTypeStructure})
+var sAttachmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentState, Members: &mAttachmentState, Type: smithy.ShapeTypeEnum})
+var sAttachmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttachmentType, Members: &mAttachmentType, Type: smithy.ShapeTypeEnum})
+var s_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sAWSLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAWSLocation, Members: &mAWSLocation, Type: smithy.ShapeTypeStructure})
+var sBandwidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBandwidth, Members: &mBandwidth, Type: smithy.ShapeTypeStructure})
+var sBgpOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBgpOptions, Members: &mBgpOptions, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BoxedBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sChangeAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum})
+var sChangeSetState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeSetState, Members: &mChangeSetState, Type: smithy.ShapeTypeEnum})
+var sChangeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeStatus, Members: &mChangeStatus, Type: smithy.ShapeTypeEnum})
+var sChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeType, Members: &mChangeType, Type: smithy.ShapeTypeEnum})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t98, Type: smithy.ShapeTypeStructure})
+var sConnectAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectAttachment, Members: &mConnectAttachment, Type: smithy.ShapeTypeStructure})
+var sConnectAttachmentOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectAttachmentOptions, Members: &mConnectAttachmentOptions, Type: smithy.ShapeTypeStructure})
+var sConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var s_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sConnectionHealth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionHealth, Members: &mConnectionHealth, Type: smithy.ShapeTypeStructure})
+var s_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var s_ConnectionIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionIdList, Members: &m_ConnectionIdList, Type: smithy.ShapeTypeList})
+var s_ConnectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var sConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum})
+var sConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeer, Members: &mConnectPeer, Type: smithy.ShapeTypeStructure})
+var sConnectPeerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerAssociation, Members: &mConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var s_ConnectPeerAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectPeerAssociationList, Members: &m_ConnectPeerAssociationList, Type: smithy.ShapeTypeList})
+var sConnectPeerAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerAssociationState, Members: &mConnectPeerAssociationState, Type: smithy.ShapeTypeEnum})
+var sConnectPeerBgpConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerBgpConfiguration, Members: &mConnectPeerBgpConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ConnectPeerBgpConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectPeerBgpConfigurationList, Members: &m_ConnectPeerBgpConfigurationList, Type: smithy.ShapeTypeList})
+var sConnectPeerConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerConfiguration, Members: &mConnectPeerConfiguration, Type: smithy.ShapeTypeStructure})
+var sConnectPeerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerError, Members: &mConnectPeerError, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerErrorCode, Members: &mConnectPeerErrorCode, Type: smithy.ShapeTypeEnum})
+var s_ConnectPeerErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectPeerErrorList, Members: &m_ConnectPeerErrorList, Type: smithy.ShapeTypeList})
+var s_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectPeerId, Type: smithy.ShapeTypeString})
+var s_ConnectPeerIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectPeerIdList, Members: &m_ConnectPeerIdList, Type: smithy.ShapeTypeList})
+var sConnectPeerState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerState, Members: &mConnectPeerState, Type: smithy.ShapeTypeEnum})
+var sConnectPeerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectPeerSummary, Members: &mConnectPeerSummary, Type: smithy.ShapeTypeStructure})
+var s_ConnectPeerSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectPeerSummaryList, Members: &m_ConnectPeerSummaryList, Type: smithy.ShapeTypeList})
+var s_ConstrainedString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_ConstrainedStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sCoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetwork, Members: &mCoreNetwork, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkArn, Type: smithy.ShapeTypeString})
+var sCoreNetworkChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkChange, Members: &mCoreNetworkChange, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkChangeEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkChangeEvent, Members: &mCoreNetworkChangeEvent, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkChangeEventList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkChangeEventList, Members: &m_CoreNetworkChangeEventList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChangeEventValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkChangeEventValues, Members: &mCoreNetworkChangeEventValues, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkChangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkChangeList, Members: &m_CoreNetworkChangeList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChangeValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkChangeValues, Members: &mCoreNetworkChangeValues, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkEdge = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkEdge, Members: &mCoreNetworkEdge, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkEdgeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkEdgeList, Members: &m_CoreNetworkEdgeList, Type: smithy.ShapeTypeList})
+var s_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetworkNetworkFunctionGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkNetworkFunctionGroup, Members: &mCoreNetworkNetworkFunctionGroup, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkNetworkFunctionGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkNetworkFunctionGroupIdentifier, Members: &mCoreNetworkNetworkFunctionGroupIdentifier, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkNetworkFunctionGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkNetworkFunctionGroupList, Members: &m_CoreNetworkNetworkFunctionGroupList, Type: smithy.ShapeTypeList})
+var sCoreNetworkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkPolicy, Members: &mCoreNetworkPolicy, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkPolicyAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkPolicyAlias, Members: &mCoreNetworkPolicyAlias, Type: smithy.ShapeTypeEnum})
+var s_CoreNetworkPolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkPolicyDocument, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicyError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkPolicyError, Members: &mCoreNetworkPolicyError, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkPolicyErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkPolicyErrorList, Members: &m_CoreNetworkPolicyErrorList, Type: smithy.ShapeTypeList})
+var sCoreNetworkPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkPolicyException, Members: &mCoreNetworkPolicyException, Traits: &t100, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkPolicyVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkPolicyVersion, Members: &mCoreNetworkPolicyVersion, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkPolicyVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkPolicyVersionList, Members: &m_CoreNetworkPolicyVersionList, Type: smithy.ShapeTypeList})
+var sCoreNetworkRoutingInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkRoutingInformation, Members: &mCoreNetworkRoutingInformation, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkRoutingInformationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkRoutingInformationList, Members: &m_CoreNetworkRoutingInformationList, Type: smithy.ShapeTypeList})
+var sCoreNetworkSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkSegment, Members: &mCoreNetworkSegment, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkSegmentEdgeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkSegmentEdgeIdentifier, Members: &mCoreNetworkSegmentEdgeIdentifier, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkSegmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkSegmentList, Members: &m_CoreNetworkSegmentList, Type: smithy.ShapeTypeList})
+var sCoreNetworkState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkState, Members: &mCoreNetworkState, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreNetworkSummary, Members: &mCoreNetworkSummary, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkSummaryList, Members: &m_CoreNetworkSummaryList, Type: smithy.ShapeTypeList})
+var s_CustomerGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerGatewayArn, Type: smithy.ShapeTypeString})
+var s_CustomerGatewayArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerGatewayArnList, Members: &m_CustomerGatewayArnList, Type: smithy.ShapeTypeList})
+var sCustomerGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerGatewayAssociation, Members: &mCustomerGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var s_CustomerGatewayAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerGatewayAssociationList, Members: &m_CustomerGatewayAssociationList, Type: smithy.ShapeTypeList})
+var sCustomerGatewayAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerGatewayAssociationState, Members: &mCustomerGatewayAssociationState, Type: smithy.ShapeTypeEnum})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDevice, Members: &mDevice, Type: smithy.ShapeTypeStructure})
+var s_DeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceArn, Type: smithy.ShapeTypeString})
+var s_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var s_DeviceIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceIdList, Members: &m_DeviceIdList, Type: smithy.ShapeTypeList})
+var s_DeviceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceList, Members: &m_DeviceList, Type: smithy.ShapeTypeList})
+var sDeviceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceState, Members: &mDeviceState, Type: smithy.ShapeTypeEnum})
+var s_DirectConnectGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayArn, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAttachment, Members: &mDirectConnectGatewayAttachment, Type: smithy.ShapeTypeStructure})
+var sEdgeOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEdgeOverride, Members: &mEdgeOverride, Type: smithy.ShapeTypeStructure})
+var s_EdgeSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EdgeSet, Members: &m_EdgeSet, Type: smithy.ShapeTypeList})
+var s_EdgeSetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EdgeSetList, Members: &m_EdgeSetList, Type: smithy.ShapeTypeList})
+var s_ExceptionContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionContextKey, Type: smithy.ShapeTypeString})
+var s_ExceptionContextMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionContextMap, Members: &m_ExceptionContextMap, Type: smithy.ShapeTypeMap})
+var s_ExceptionContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionContextValue, Type: smithy.ShapeTypeString})
+var s_ExternalRegionCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var s_ExternalRegionCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var s_FilterMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterMap, Members: &m_FilterMap, Type: smithy.ShapeTypeMap})
+var s_FilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterName, Type: smithy.ShapeTypeString})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var sGlobalNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalNetwork, Members: &mGlobalNetwork, Type: smithy.ShapeTypeStructure})
+var s_GlobalNetworkArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalNetworkArn, Type: smithy.ShapeTypeString})
+var s_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var s_GlobalNetworkIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalNetworkIdList, Members: &m_GlobalNetworkIdList, Type: smithy.ShapeTypeList})
+var s_GlobalNetworkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GlobalNetworkList, Members: &m_GlobalNetworkList, Type: smithy.ShapeTypeList})
+var sGlobalNetworkState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGlobalNetworkState, Members: &mGlobalNetworkState, Type: smithy.ShapeTypeEnum})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t102, Type: smithy.ShapeTypeStructure})
+var s_IPAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLink, Members: &mLink, Type: smithy.ShapeTypeStructure})
+var s_LinkArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkArn, Type: smithy.ShapeTypeString})
+var sLinkAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkAssociation, Members: &mLinkAssociation, Type: smithy.ShapeTypeStructure})
+var s_LinkAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkAssociationList, Members: &m_LinkAssociationList, Type: smithy.ShapeTypeList})
+var sLinkAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkAssociationState, Members: &mLinkAssociationState, Type: smithy.ShapeTypeEnum})
+var s_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var s_LinkIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkIdList, Members: &m_LinkIdList, Type: smithy.ShapeTypeList})
+var s_LinkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkList, Members: &m_LinkList, Type: smithy.ShapeTypeList})
+var sLinkState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkState, Members: &mLinkState, Type: smithy.ShapeTypeEnum})
+var sLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocation, Members: &mLocation, Traits: &t104, Type: smithy.ShapeTypeStructure})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sNatGatewaySupportState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewaySupportState, Members: &mNatGatewaySupportState, Type: smithy.ShapeTypeEnum})
+var sNatGatewaySupportValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatGatewaySupportValue, Members: &mNatGatewaySupportValue, Type: smithy.ShapeTypeEnum})
+var sNatRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatRule, Members: &mNatRule, Type: smithy.ShapeTypeStructure})
+var s_NatRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatRuleList, Members: &m_NatRuleList, Type: smithy.ShapeTypeList})
+var s_NatRuleNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatRuleNumber, Type: smithy.ShapeTypeInteger})
+var sNatRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatRuleRequest, Members: &mNatRuleRequest, Type: smithy.ShapeTypeStructure})
+var s_NatRuleRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NatRuleRequestList, Members: &m_NatRuleRequestList, Type: smithy.ShapeTypeList})
+var sNatRuleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNatRuleState, Members: &mNatRuleState, Type: smithy.ShapeTypeEnum})
+var sNetworkFunctionGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkFunctionGroup, Members: &mNetworkFunctionGroup, Type: smithy.ShapeTypeStructure})
+var s_NetworkFunctionGroupList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFunctionGroupList, Members: &m_NetworkFunctionGroupList, Type: smithy.ShapeTypeList})
+var s_NetworkFunctionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkFunctionGroupName, Type: smithy.ShapeTypeString})
+var sNetworkResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkResource, Members: &mNetworkResource, Type: smithy.ShapeTypeStructure})
+var sNetworkResourceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkResourceCount, Members: &mNetworkResourceCount, Type: smithy.ShapeTypeStructure})
+var s_NetworkResourceCountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkResourceCountList, Members: &m_NetworkResourceCountList, Type: smithy.ShapeTypeList})
+var s_NetworkResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkResourceList, Members: &m_NetworkResourceList, Type: smithy.ShapeTypeList})
+var s_NetworkResourceMetadataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkResourceMetadataMap, Members: &m_NetworkResourceMetadataMap, Type: smithy.ShapeTypeMap})
+var sNetworkResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkResourceSummary, Members: &mNetworkResourceSummary, Type: smithy.ShapeTypeStructure})
+var sNetworkRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkRoute, Members: &mNetworkRoute, Type: smithy.ShapeTypeStructure})
+var sNetworkRouteDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkRouteDestination, Members: &mNetworkRouteDestination, Type: smithy.ShapeTypeStructure})
+var s_NetworkRouteDestinationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkRouteDestinationList, Members: &m_NetworkRouteDestinationList, Type: smithy.ShapeTypeList})
+var s_NetworkRouteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkRouteList, Members: &m_NetworkRouteList, Type: smithy.ShapeTypeList})
+var sNetworkTelemetry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkTelemetry, Members: &mNetworkTelemetry, Type: smithy.ShapeTypeStructure})
+var s_NetworkTelemetryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkTelemetryList, Members: &m_NetworkTelemetryList, Type: smithy.ShapeTypeList})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OrganizationAwsServiceAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationAwsServiceAccessStatus, Type: smithy.ShapeTypeString})
+var s_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sOrganizationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationStatus, Members: &mOrganizationStatus, Type: smithy.ShapeTypeStructure})
+var sPathComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPathComponent, Members: &mPathComponent, Type: smithy.ShapeTypeStructure})
+var s_PathComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathComponentList, Members: &m_PathComponentList, Type: smithy.ShapeTypeList})
+var sPeering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeering, Members: &mPeering, Type: smithy.ShapeTypeStructure})
+var sPeeringError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeeringError, Members: &mPeeringError, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeeringErrorCode, Members: &mPeeringErrorCode, Type: smithy.ShapeTypeEnum})
+var s_PeeringErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PeeringErrorList, Members: &m_PeeringErrorList, Type: smithy.ShapeTypeList})
+var s_PeeringId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PeeringId, Type: smithy.ShapeTypeString})
+var s_PeeringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PeeringList, Members: &m_PeeringList, Type: smithy.ShapeTypeList})
+var sPeeringState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeeringState, Members: &mPeeringState, Type: smithy.ShapeTypeEnum})
+var sPeeringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPeeringType, Members: &mPeeringType, Type: smithy.ShapeTypeEnum})
+var sPermissionsErrorContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionsErrorContext, Members: &mPermissionsErrorContext, Type: smithy.ShapeTypeStructure})
+var s_PrefixListArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrefixListArn, Type: smithy.ShapeTypeString})
+var sPrefixListAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrefixListAssociation, Members: &mPrefixListAssociation, Type: smithy.ShapeTypeStructure})
+var s_PrefixListAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrefixListAssociationList, Members: &m_PrefixListAssociationList, Type: smithy.ShapeTypeList})
+var sProposedNetworkFunctionGroupChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProposedNetworkFunctionGroupChange, Members: &mProposedNetworkFunctionGroupChange, Type: smithy.ShapeTypeStructure})
+var sProposedSegmentChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProposedSegmentChange, Members: &mProposedSegmentChange, Type: smithy.ShapeTypeStructure})
+var s_ReasonContextKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReasonContextKey, Type: smithy.ShapeTypeString})
+var s_ReasonContextMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReasonContextMap, Members: &m_ReasonContextMap, Type: smithy.ShapeTypeMap})
+var s_ReasonContextValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReasonContextValue, Type: smithy.ShapeTypeString})
+var sRelationship = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationship, Members: &mRelationship, Type: smithy.ShapeTypeStructure})
+var s_RelationshipList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RelationshipList, Members: &m_RelationshipList, Type: smithy.ShapeTypeList})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t106, Type: smithy.ShapeTypeStructure})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger})
+var sRouteAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysis, Members: &mRouteAnalysis, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysisCompletion, Members: &mRouteAnalysisCompletion, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysisCompletionReasonCode, Members: &mRouteAnalysisCompletionReasonCode, Type: smithy.ShapeTypeEnum})
+var sRouteAnalysisCompletionResultCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysisCompletionResultCode, Members: &mRouteAnalysisCompletionResultCode, Type: smithy.ShapeTypeEnum})
+var sRouteAnalysisEndpointOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysisEndpointOptions, Members: &mRouteAnalysisEndpointOptions, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisEndpointOptionsSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysisEndpointOptionsSpecification, Members: &mRouteAnalysisEndpointOptionsSpecification, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysisPath, Members: &mRouteAnalysisPath, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteAnalysisStatus, Members: &mRouteAnalysisStatus, Type: smithy.ShapeTypeEnum})
+var sRouteState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteState, Members: &mRouteState, Type: smithy.ShapeTypeEnum})
+var s_RouteStateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteStateList, Members: &m_RouteStateList, Type: smithy.ShapeTypeList})
+var sRouteTableIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteTableIdentifier, Members: &mRouteTableIdentifier, Type: smithy.ShapeTypeStructure})
+var sRouteTableType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteTableType, Members: &mRouteTableType, Type: smithy.ShapeTypeEnum})
+var sRouteType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteType, Members: &mRouteType, Type: smithy.ShapeTypeEnum})
+var s_RouteTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteTypeList, Members: &m_RouteTypeList, Type: smithy.ShapeTypeList})
+var sRoutingInformationNextHop = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingInformationNextHop, Members: &mRoutingInformationNextHop, Type: smithy.ShapeTypeStructure})
+var sRoutingPolicyAssociationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingPolicyAssociationDetail, Members: &mRoutingPolicyAssociationDetail, Type: smithy.ShapeTypeStructure})
+var s_RoutingPolicyAssociationDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoutingPolicyAssociationDetailsList, Members: &m_RoutingPolicyAssociationDetailsList, Type: smithy.ShapeTypeList})
+var sRoutingPolicyDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingPolicyDirection, Members: &mRoutingPolicyDirection, Type: smithy.ShapeTypeEnum})
+var sSegmentActionServiceInsertion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSegmentActionServiceInsertion, Members: &mSegmentActionServiceInsertion, Type: smithy.ShapeTypeEnum})
+var sSendViaMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendViaMode, Members: &mSendViaMode, Type: smithy.ShapeTypeEnum})
+var s_ServerSideString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sServiceInsertionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInsertionAction, Members: &mServiceInsertionAction, Type: smithy.ShapeTypeStructure})
+var s_ServiceInsertionActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceInsertionActionList, Members: &m_ServiceInsertionActionList, Type: smithy.ShapeTypeList})
+var sServiceInsertionSegments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInsertionSegments, Members: &mServiceInsertionSegments, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t107, Type: smithy.ShapeTypeStructure})
+var sSite = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSite, Members: &mSite, Type: smithy.ShapeTypeStructure})
+var s_SiteArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SiteArn, Type: smithy.ShapeTypeString})
+var s_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var s_SiteIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SiteIdList, Members: &m_SiteIdList, Type: smithy.ShapeTypeList})
+var s_SiteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SiteList, Members: &m_SiteList, Type: smithy.ShapeTypeList})
+var sSiteState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSiteState, Members: &mSiteState, Type: smithy.ShapeTypeEnum})
+var sSiteToSiteVpnAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSiteToSiteVpnAttachment, Members: &mSiteToSiteVpnAttachment, Type: smithy.ShapeTypeStructure})
+var s_SLRDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SLRDeploymentStatus, Type: smithy.ShapeTypeString})
+var s_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetArn, Type: smithy.ShapeTypeString})
+var s_SubnetArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetArnList, Members: &m_SubnetArnList, Type: smithy.ShapeTypeList})
+var s_SynthesizedJsonCoreNetworkPolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonCoreNetworkPolicyDocument, Traits: &t108, Type: smithy.ShapeTypeString})
+var s_SynthesizedJsonResourcePolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonResourcePolicyDocument, Traits: &t108, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t109, Type: smithy.ShapeTypeStructure})
+var s_TransitGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayArn, Type: smithy.ShapeTypeString})
+var s_TransitGatewayArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayArnList, Members: &m_TransitGatewayArnList, Type: smithy.ShapeTypeList})
+var s_TransitGatewayAttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayAttachmentArn, Type: smithy.ShapeTypeString})
+var s_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString})
+var s_TransitGatewayConnectPeerArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayConnectPeerArn, Type: smithy.ShapeTypeString})
+var s_TransitGatewayConnectPeerArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayConnectPeerArnList, Members: &m_TransitGatewayConnectPeerArnList, Type: smithy.ShapeTypeList})
+var sTransitGatewayConnectPeerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayConnectPeerAssociation, Members: &mTransitGatewayConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var s_TransitGatewayConnectPeerAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayConnectPeerAssociationList, Members: &m_TransitGatewayConnectPeerAssociationList, Type: smithy.ShapeTypeList})
+var sTransitGatewayConnectPeerAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayConnectPeerAssociationState, Members: &mTransitGatewayConnectPeerAssociationState, Type: smithy.ShapeTypeEnum})
+var sTransitGatewayPeering = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayPeering, Members: &mTransitGatewayPeering, Type: smithy.ShapeTypeStructure})
+var s_TransitGatewayPeeringAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayPeeringAttachmentId, Type: smithy.ShapeTypeString})
+var sTransitGatewayRegistration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayRegistration, Members: &mTransitGatewayRegistration, Type: smithy.ShapeTypeStructure})
+var s_TransitGatewayRegistrationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayRegistrationList, Members: &m_TransitGatewayRegistrationList, Type: smithy.ShapeTypeList})
+var sTransitGatewayRegistrationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayRegistrationState, Members: &mTransitGatewayRegistrationState, Type: smithy.ShapeTypeEnum})
+var sTransitGatewayRegistrationStateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayRegistrationStateReason, Members: &mTransitGatewayRegistrationStateReason, Type: smithy.ShapeTypeStructure})
+var s_TransitGatewayRouteTableArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TransitGatewayRouteTableArn, Type: smithy.ShapeTypeString})
+var sTransitGatewayRouteTableAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransitGatewayRouteTableAttachment, Members: &mTransitGatewayRouteTableAttachment, Type: smithy.ShapeTypeStructure})
+var sTunnelProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTunnelProtocol, Members: &mTunnelProtocol, Type: smithy.ShapeTypeEnum})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t100, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sVia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVia, Members: &mVia, Type: smithy.ShapeTypeStructure})
+var s_VpcArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcArn, Type: smithy.ShapeTypeString})
+var sVpcAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcAttachment, Members: &mVpcAttachment, Type: smithy.ShapeTypeStructure})
+var sVpcOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure})
+var s_VpnConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpnConnectionArn, Type: smithy.ShapeTypeString})
+var sWhenSentTo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhenSentTo, Members: &mWhenSentTo, Type: smithy.ShapeTypeStructure})
+var s_WhenSentToSegmentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhenSentToSegmentsList, Members: &m_WhenSentToSegmentsList, Type: smithy.ShapeTypeList})
+var s_WithEdgeOverridesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WithEdgeOverridesList, Members: &m_WithEdgeOverridesList, Type: smithy.ShapeTypeList})
+var sAcceptAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptAttachmentRequest, Members: &mAcceptAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sAcceptAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptAttachmentResponse, Members: &mAcceptAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateConnectPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectPeerRequest, Members: &mAssociateConnectPeerRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateConnectPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectPeerResponse, Members: &mAssociateConnectPeerResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateCustomerGatewayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCustomerGatewayRequest, Members: &mAssociateCustomerGatewayRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateCustomerGatewayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateCustomerGatewayResponse, Members: &mAssociateCustomerGatewayResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateLinkRequest, Members: &mAssociateLinkRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateLinkResponse, Members: &mAssociateLinkResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateTransitGatewayConnectPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateTransitGatewayConnectPeerRequest, Members: &mAssociateTransitGatewayConnectPeerRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateTransitGatewayConnectPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateTransitGatewayConnectPeerResponse, Members: &mAssociateTransitGatewayConnectPeerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectAttachmentRequest, Members: &mCreateConnectAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectAttachmentResponse, Members: &mCreateConnectAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionRequest, Members: &mCreateConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionResponse, Members: &mCreateConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectPeerRequest, Members: &mCreateConnectPeerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConnectPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectPeerResponse, Members: &mCreateConnectPeerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCoreNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCoreNetworkRequest, Members: &mCreateCoreNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCoreNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCoreNetworkResponse, Members: &mCreateCoreNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sCreateCoreNetworkPrefixListAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCoreNetworkPrefixListAssociationRequest, Members: &mCreateCoreNetworkPrefixListAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateCoreNetworkPrefixListAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCoreNetworkPrefixListAssociationResponse, Members: &mCreateCoreNetworkPrefixListAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeviceRequest, Members: &mCreateDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeviceResponse, Members: &mCreateDeviceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAttachmentRequest, Members: &mCreateDirectConnectGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAttachmentResponse, Members: &mCreateDirectConnectGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateGlobalNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalNetworkRequest, Members: &mCreateGlobalNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sCreateGlobalNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGlobalNetworkResponse, Members: &mCreateGlobalNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sCreateLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLinkRequest, Members: &mCreateLinkRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLinkResponse, Members: &mCreateLinkResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSiteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSiteRequest, Members: &mCreateSiteRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSiteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSiteResponse, Members: &mCreateSiteResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSiteToSiteVpnAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSiteToSiteVpnAttachmentRequest, Members: &mCreateSiteToSiteVpnAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSiteToSiteVpnAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSiteToSiteVpnAttachmentResponse, Members: &mCreateSiteToSiteVpnAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTransitGatewayPeeringRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitGatewayPeeringRequest, Members: &mCreateTransitGatewayPeeringRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTransitGatewayPeeringResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitGatewayPeeringResponse, Members: &mCreateTransitGatewayPeeringResponse, Type: smithy.ShapeTypeStructure})
+var sCreateTransitGatewayRouteTableAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitGatewayRouteTableAttachmentRequest, Members: &mCreateTransitGatewayRouteTableAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTransitGatewayRouteTableAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitGatewayRouteTableAttachmentResponse, Members: &mCreateTransitGatewayRouteTableAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateVpcAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcAttachmentRequest, Members: &mCreateVpcAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateVpcAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcAttachmentResponse, Members: &mCreateVpcAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttachmentRequest, Members: &mDeleteAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAttachmentResponse, Members: &mDeleteAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionResponse, Members: &mDeleteConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectPeerRequest, Members: &mDeleteConnectPeerRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectPeerResponse, Members: &mDeleteConnectPeerResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkRequest, Members: &mDeleteCoreNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkResponse, Members: &mDeleteCoreNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkPolicyVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkPolicyVersionRequest, Members: &mDeleteCoreNetworkPolicyVersionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkPolicyVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkPolicyVersionResponse, Members: &mDeleteCoreNetworkPolicyVersionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkPrefixListAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkPrefixListAssociationRequest, Members: &mDeleteCoreNetworkPrefixListAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkPrefixListAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreNetworkPrefixListAssociationResponse, Members: &mDeleteCoreNetworkPrefixListAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeviceRequest, Members: &mDeleteDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeviceResponse, Members: &mDeleteDeviceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteGlobalNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalNetworkRequest, Members: &mDeleteGlobalNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteGlobalNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGlobalNetworkResponse, Members: &mDeleteGlobalNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLinkRequest, Members: &mDeleteLinkRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLinkResponse, Members: &mDeleteLinkResponse, Type: smithy.ShapeTypeStructure})
+var sDeletePeeringRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePeeringRequest, Members: &mDeletePeeringRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePeeringResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePeeringResponse, Members: &mDeletePeeringResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSiteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSiteRequest, Members: &mDeleteSiteRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSiteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSiteResponse, Members: &mDeleteSiteResponse, Type: smithy.ShapeTypeStructure})
+var sDeregisterTransitGatewayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterTransitGatewayRequest, Members: &mDeregisterTransitGatewayRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterTransitGatewayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterTransitGatewayResponse, Members: &mDeregisterTransitGatewayResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeGlobalNetworksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGlobalNetworksRequest, Members: &mDescribeGlobalNetworksRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeGlobalNetworksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGlobalNetworksResponse, Members: &mDescribeGlobalNetworksResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateConnectPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectPeerRequest, Members: &mDisassociateConnectPeerRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateConnectPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectPeerResponse, Members: &mDisassociateConnectPeerResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateCustomerGatewayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCustomerGatewayRequest, Members: &mDisassociateCustomerGatewayRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateCustomerGatewayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateCustomerGatewayResponse, Members: &mDisassociateCustomerGatewayResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateLinkRequest, Members: &mDisassociateLinkRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateLinkResponse, Members: &mDisassociateLinkResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateTransitGatewayConnectPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateTransitGatewayConnectPeerRequest, Members: &mDisassociateTransitGatewayConnectPeerRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateTransitGatewayConnectPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateTransitGatewayConnectPeerResponse, Members: &mDisassociateTransitGatewayConnectPeerResponse, Type: smithy.ShapeTypeStructure})
+var sExecuteCoreNetworkChangeSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteCoreNetworkChangeSetRequest, Members: &mExecuteCoreNetworkChangeSetRequest, Type: smithy.ShapeTypeStructure})
+var sExecuteCoreNetworkChangeSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExecuteCoreNetworkChangeSetResponse, Type: smithy.ShapeTypeStructure})
+var sGetConnectAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectAttachmentRequest, Members: &mGetConnectAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sGetConnectAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectAttachmentResponse, Members: &mGetConnectAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sGetConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionsRequest, Members: &mGetConnectionsRequest, Type: smithy.ShapeTypeStructure})
+var sGetConnectionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectionsResponse, Members: &mGetConnectionsResponse, Type: smithy.ShapeTypeStructure})
+var sGetConnectPeerAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectPeerAssociationsRequest, Members: &mGetConnectPeerAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetConnectPeerAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectPeerAssociationsResponse, Members: &mGetConnectPeerAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetConnectPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectPeerRequest, Members: &mGetConnectPeerRequest, Type: smithy.ShapeTypeStructure})
+var sGetConnectPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectPeerResponse, Members: &mGetConnectPeerResponse, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkChangeEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkChangeEventsRequest, Members: &mGetCoreNetworkChangeEventsRequest, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkChangeEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkChangeEventsResponse, Members: &mGetCoreNetworkChangeEventsResponse, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkChangeSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkChangeSetRequest, Members: &mGetCoreNetworkChangeSetRequest, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkChangeSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkChangeSetResponse, Members: &mGetCoreNetworkChangeSetResponse, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkRequest, Members: &mGetCoreNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkResponse, Members: &mGetCoreNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkPolicyRequest, Members: &mGetCoreNetworkPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreNetworkPolicyResponse, Members: &mGetCoreNetworkPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetCustomerGatewayAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCustomerGatewayAssociationsRequest, Members: &mGetCustomerGatewayAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetCustomerGatewayAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCustomerGatewayAssociationsResponse, Members: &mGetCustomerGatewayAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetDevicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDevicesRequest, Members: &mGetDevicesRequest, Type: smithy.ShapeTypeStructure})
+var sGetDevicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDevicesResponse, Members: &mGetDevicesResponse, Type: smithy.ShapeTypeStructure})
+var sGetDirectConnectGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectConnectGatewayAttachmentRequest, Members: &mGetDirectConnectGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sGetDirectConnectGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDirectConnectGatewayAttachmentResponse, Members: &mGetDirectConnectGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sGetLinkAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkAssociationsRequest, Members: &mGetLinkAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetLinkAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkAssociationsResponse, Members: &mGetLinkAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetLinksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinksRequest, Members: &mGetLinksRequest, Type: smithy.ShapeTypeStructure})
+var sGetLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinksResponse, Members: &mGetLinksResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkResourceCountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourceCountsRequest, Members: &mGetNetworkResourceCountsRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkResourceCountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourceCountsResponse, Members: &mGetNetworkResourceCountsResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkResourceRelationshipsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourceRelationshipsRequest, Members: &mGetNetworkResourceRelationshipsRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkResourceRelationshipsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourceRelationshipsResponse, Members: &mGetNetworkResourceRelationshipsResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourcesRequest, Members: &mGetNetworkResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkResourcesResponse, Members: &mGetNetworkResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkRoutesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkRoutesRequest, Members: &mGetNetworkRoutesRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkRoutesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkRoutesResponse, Members: &mGetNetworkRoutesResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkTelemetryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkTelemetryRequest, Members: &mGetNetworkTelemetryRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkTelemetryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkTelemetryResponse, Members: &mGetNetworkTelemetryResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetRouteAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteAnalysisRequest, Members: &mGetRouteAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sGetRouteAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteAnalysisResponse, Members: &mGetRouteAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sGetSitesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSitesRequest, Members: &mGetSitesRequest, Type: smithy.ShapeTypeStructure})
+var sGetSitesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSitesResponse, Members: &mGetSitesResponse, Type: smithy.ShapeTypeStructure})
+var sGetSiteToSiteVpnAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSiteToSiteVpnAttachmentRequest, Members: &mGetSiteToSiteVpnAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sGetSiteToSiteVpnAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSiteToSiteVpnAttachmentResponse, Members: &mGetSiteToSiteVpnAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayConnectPeerAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayConnectPeerAssociationsRequest, Members: &mGetTransitGatewayConnectPeerAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayConnectPeerAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayConnectPeerAssociationsResponse, Members: &mGetTransitGatewayConnectPeerAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayPeeringRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayPeeringRequest, Members: &mGetTransitGatewayPeeringRequest, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayPeeringResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayPeeringResponse, Members: &mGetTransitGatewayPeeringResponse, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayRegistrationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayRegistrationsRequest, Members: &mGetTransitGatewayRegistrationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayRegistrationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayRegistrationsResponse, Members: &mGetTransitGatewayRegistrationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayRouteTableAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayRouteTableAttachmentRequest, Members: &mGetTransitGatewayRouteTableAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayRouteTableAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTransitGatewayRouteTableAttachmentResponse, Members: &mGetTransitGatewayRouteTableAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sGetVpcAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcAttachmentRequest, Members: &mGetVpcAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sGetVpcAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcAttachmentResponse, Members: &mGetVpcAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sListAttachmentNatConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentNatConfigurationsRequest, Members: &mListAttachmentNatConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sListAttachmentNatConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentNatConfigurationsResponse, Members: &mListAttachmentNatConfigurationsResponse, Type: smithy.ShapeTypeStructure})
+var sListAttachmentRoutingPolicyAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentRoutingPolicyAssociationsRequest, Members: &mListAttachmentRoutingPolicyAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sListAttachmentRoutingPolicyAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentRoutingPolicyAssociationsResponse, Members: &mListAttachmentRoutingPolicyAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sListAttachmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentsRequest, Members: &mListAttachmentsRequest, Type: smithy.ShapeTypeStructure})
+var sListAttachmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAttachmentsResponse, Members: &mListAttachmentsResponse, Type: smithy.ShapeTypeStructure})
+var sListConnectPeersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectPeersRequest, Members: &mListConnectPeersRequest, Type: smithy.ShapeTypeStructure})
+var sListConnectPeersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConnectPeersResponse, Members: &mListConnectPeersResponse, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworkPolicyVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkPolicyVersionsRequest, Members: &mListCoreNetworkPolicyVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworkPolicyVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkPolicyVersionsResponse, Members: &mListCoreNetworkPolicyVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworkPrefixListAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkPrefixListAssociationsRequest, Members: &mListCoreNetworkPrefixListAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworkPrefixListAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkPrefixListAssociationsResponse, Members: &mListCoreNetworkPrefixListAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworkRoutingInformationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkRoutingInformationRequest, Members: &mListCoreNetworkRoutingInformationRequest, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworkRoutingInformationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworkRoutingInformationResponse, Members: &mListCoreNetworkRoutingInformationResponse, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworksRequest, Members: &mListCoreNetworksRequest, Type: smithy.ShapeTypeStructure})
+var sListCoreNetworksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreNetworksResponse, Members: &mListCoreNetworksResponse, Type: smithy.ShapeTypeStructure})
+var sListOrganizationServiceAccessStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationServiceAccessStatusRequest, Members: &mListOrganizationServiceAccessStatusRequest, Type: smithy.ShapeTypeStructure})
+var sListOrganizationServiceAccessStatusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationServiceAccessStatusResponse, Members: &mListOrganizationServiceAccessStatusResponse, Type: smithy.ShapeTypeStructure})
+var sListPeeringsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPeeringsRequest, Members: &mListPeeringsRequest, Type: smithy.ShapeTypeStructure})
+var sListPeeringsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPeeringsResponse, Members: &mListPeeringsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutAttachmentRoutingPolicyLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAttachmentRoutingPolicyLabelRequest, Members: &mPutAttachmentRoutingPolicyLabelRequest, Type: smithy.ShapeTypeStructure})
+var sPutAttachmentRoutingPolicyLabelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAttachmentRoutingPolicyLabelResponse, Members: &mPutAttachmentRoutingPolicyLabelResponse, Type: smithy.ShapeTypeStructure})
+var sPutCoreNetworkPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCoreNetworkPolicyRequest, Members: &mPutCoreNetworkPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutCoreNetworkPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutCoreNetworkPolicyResponse, Members: &mPutCoreNetworkPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterTransitGatewayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterTransitGatewayRequest, Members: &mRegisterTransitGatewayRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterTransitGatewayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterTransitGatewayResponse, Members: &mRegisterTransitGatewayResponse, Type: smithy.ShapeTypeStructure})
+var sRejectAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAttachmentRequest, Members: &mRejectAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sRejectAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectAttachmentResponse, Members: &mRejectAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sRemoveAttachmentRoutingPolicyLabelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAttachmentRoutingPolicyLabelRequest, Members: &mRemoveAttachmentRoutingPolicyLabelRequest, Type: smithy.ShapeTypeStructure})
+var sRemoveAttachmentRoutingPolicyLabelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemoveAttachmentRoutingPolicyLabelResponse, Members: &mRemoveAttachmentRoutingPolicyLabelResponse, Type: smithy.ShapeTypeStructure})
+var sRestoreCoreNetworkPolicyVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreCoreNetworkPolicyVersionRequest, Members: &mRestoreCoreNetworkPolicyVersionRequest, Type: smithy.ShapeTypeStructure})
+var sRestoreCoreNetworkPolicyVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreCoreNetworkPolicyVersionResponse, Members: &mRestoreCoreNetworkPolicyVersionResponse, Type: smithy.ShapeTypeStructure})
+var sStartOrganizationServiceAccessUpdateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOrganizationServiceAccessUpdateRequest, Members: &mStartOrganizationServiceAccessUpdateRequest, Type: smithy.ShapeTypeStructure})
+var sStartOrganizationServiceAccessUpdateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOrganizationServiceAccessUpdateResponse, Members: &mStartOrganizationServiceAccessUpdateResponse, Type: smithy.ShapeTypeStructure})
+var sStartRouteAnalysisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRouteAnalysisRequest, Members: &mStartRouteAnalysisRequest, Type: smithy.ShapeTypeStructure})
+var sStartRouteAnalysisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRouteAnalysisResponse, Members: &mStartRouteAnalysisResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAttachmentNatConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAttachmentNatConfigurationRequest, Members: &mUpdateAttachmentNatConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAttachmentNatConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAttachmentNatConfigurationResponse, Members: &mUpdateAttachmentNatConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRequest, Members: &mUpdateConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionResponse, Members: &mUpdateConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateCoreNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCoreNetworkRequest, Members: &mUpdateCoreNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateCoreNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCoreNetworkResponse, Members: &mUpdateCoreNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeviceRequest, Members: &mUpdateDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeviceResponse, Members: &mUpdateDeviceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayAttachmentRequest, Members: &mUpdateDirectConnectGatewayAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayAttachmentResponse, Members: &mUpdateDirectConnectGatewayAttachmentResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateGlobalNetworkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalNetworkRequest, Members: &mUpdateGlobalNetworkRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateGlobalNetworkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGlobalNetworkResponse, Members: &mUpdateGlobalNetworkResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkRequest, Members: &mUpdateLinkRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkResponse, Members: &mUpdateLinkResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkResourceMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkResourceMetadataRequest, Members: &mUpdateNetworkResourceMetadataRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkResourceMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkResourceMetadataResponse, Members: &mUpdateNetworkResourceMetadataResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSiteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSiteRequest, Members: &mUpdateSiteRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSiteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSiteResponse, Members: &mUpdateSiteResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcAttachmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcAttachmentRequest, Members: &mUpdateVpcAttachmentRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcAttachmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcAttachmentResponse, Members: &mUpdateVpcAttachmentResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sAccountStatus_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAccountStatus_SLRDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLRDeploymentStatus", ID: &i_SLRDeploymentStatus, Type: smithy.ShapeTypeString})
+var s_AccountStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountStatus, Members: &mAccountStatus, Type: smithy.ShapeTypeStructure})
+var sAttachment_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sAttachment_CoreNetworkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkArn", ID: &i_CoreNetworkArn, Type: smithy.ShapeTypeString})
+var sAttachment_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sAttachment_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sAttachment_AttachmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentType", ID: &iAttachmentType, Members: &mAttachmentType, Type: smithy.ShapeTypeEnum})
+var sAttachment_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iAttachmentState, Members: &mAttachmentState, Type: smithy.ShapeTypeEnum})
+var sAttachment_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sAttachment_EdgeLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocations", ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var sAttachment_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sAttachment_AttachmentPolicyRuleNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentPolicyRuleNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sAttachment_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sAttachment_NetworkFunctionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroupName", ID: &i_NetworkFunctionGroupName, Type: smithy.ShapeTypeString})
+var sAttachment_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportState, Members: &mNatGatewaySupportState, Type: smithy.ShapeTypeEnum})
+var sAttachment_NatSystemRouteSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatSystemRouteSupport", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sAttachment_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sAttachment_ProposedSegmentChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposedSegmentChange", ID: &iProposedSegmentChange, Members: &mProposedSegmentChange, Type: smithy.ShapeTypeStructure})
+var sAttachment_ProposedNetworkFunctionGroupChange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProposedNetworkFunctionGroupChange", ID: &iProposedNetworkFunctionGroupChange, Members: &mProposedNetworkFunctionGroupChange, Type: smithy.ShapeTypeStructure})
+var sAttachment_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sAttachment_UpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sAttachment_LastModificationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationErrors", ID: &i_AttachmentErrorList, Members: &m_AttachmentErrorList, Type: smithy.ShapeTypeList})
+var sAttachmentError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iAttachmentErrorCode, Members: &mAttachmentErrorCode, Type: smithy.ShapeTypeEnum})
+var sAttachmentError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sAttachmentError_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sAttachmentError_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sAttachmentErrorCode_VPC_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_SUBNET_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_SUBNET_NO_FREE_ADDRESSES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_NO_FREE_ADDRESSES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_SUBNET_UNSUPPORTED_AVAILABILITY_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_UNSUPPORTED_AVAILABILITY_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_SUBNET_NO_IPV6_CIDRS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_NO_IPV6_CIDRS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_VPN_CONNECTION_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPN_CONNECTION_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT_CONNECT_GATEWAY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPN_EXISTING_ASSOCIATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPN_STATIC_ROUTES_NAT_UNSUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_VPC_UNSUPPORTED_FEATURES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_UNSUPPORTED_FEATURES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_CREATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentErrorCode_DELETION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AttachmentErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachmentError, Members: &mAttachmentError, Type: smithy.ShapeTypeStructure})
+var s_AttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sAttachmentNatConfiguration_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sAttachmentNatConfiguration_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportState, Members: &mNatGatewaySupportState, Type: smithy.ShapeTypeEnum})
+var sAttachmentNatConfiguration_NatSystemRouteSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatSystemRouteSupport", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sAttachmentNatConfiguration_NatGatewayRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayRules", ID: &i_NatRuleList, Members: &m_NatRuleList, Type: smithy.ShapeTypeList})
+var s_AttachmentNatConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachmentNatConfiguration, Members: &mAttachmentNatConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AttachmentRoutingPolicyAssociationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttachmentRoutingPolicyAssociationSummary, Members: &mAttachmentRoutingPolicyAssociationSummary, Type: smithy.ShapeTypeStructure})
+var sAttachmentRoutingPolicyAssociationSummary_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sAttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PendingRoutingPolicies", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sAttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedRoutingPolicies", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sAttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sAttachmentState_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_PENDING_ATTACHMENT_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ATTACHMENT_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_PENDING_NETWORK_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_NETWORK_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_PENDING_TAG_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_TAG_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentType_CONNECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentType_SITE_TO_SITE_VPN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SITE_TO_SITE_VPN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentType_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentType_DIRECT_CONNECT_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT_CONNECT_GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttachmentType_TRANSIT_GATEWAY_ROUTE_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_ROUTE_TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAWSLocation_Zone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Zone", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sAWSLocation_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString})
+var sBandwidth_UploadSpeed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UploadSpeed", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sBandwidth_DownloadSpeed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DownloadSpeed", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sBgpOptions_PeerAsn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerAsn", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sChangeAction_ADD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeAction_MODIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeAction_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeSetState_PENDING_GENERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_GENERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeSetState_FAILED_GENERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_GENERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeSetState_READY_TO_EXECUTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY_TO_EXECUTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeSetState_EXECUTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeSetState_EXECUTION_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTION_SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeSetState_OUT_OF_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUT_OF_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_CORE_NETWORK_SEGMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE_NETWORK_SEGMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_NETWORK_FUNCTION_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_FUNCTION_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_CORE_NETWORK_EDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE_NETWORK_EDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ATTACHMENT_MAPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_MAPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ATTACHMENT_ROUTE_PROPAGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_ROUTE_PROPAGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ATTACHMENT_ROUTE_STATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_ROUTE_STATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ROUTING_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTING_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ROUTING_POLICY_SEGMENT_ASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTING_POLICY_SEGMENT_ASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ROUTING_POLICY_EDGE_ASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTING_POLICY_EDGE_ASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ROUTING_POLICY_ATTACHMENT_ASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTING_POLICY_ATTACHMENT_ASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_CORE_NETWORK_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE_NETWORK_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_SEGMENTS_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEGMENTS_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_SEGMENT_ACTIONS_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEGMENT_ACTIONS_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeType_ATTACHMENT_POLICIES_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ATTACHMENT_POLICIES_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sConflictException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sConflictException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sConnectAttachment_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sConnectAttachment_TransportAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransportAttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sConnectAttachment_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iConnectAttachmentOptions, Members: &mConnectAttachmentOptions, Type: smithy.ShapeTypeStructure})
+var sConnectAttachmentOptions_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iTunnelProtocol, Members: &mTunnelProtocol, Type: smithy.ShapeTypeEnum})
+var sConnection_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sConnection_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sConnection_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sConnection_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sConnection_ConnectedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedDeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sConnection_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sConnection_ConnectedLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedLinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sConnection_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sConnection_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sConnection_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sConnection_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sConnectionHealth_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum})
+var sConnectionHealth_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iConnectionStatus, Members: &mConnectionStatus, Type: smithy.ShapeTypeEnum})
+var sConnectionHealth_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var s_ConnectionIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var s_ConnectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sConnectionState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_UP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionStatus_DOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_BGP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BGP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_IPSEC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPSEC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeer_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sConnectPeer_ConnectAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectAttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sConnectPeer_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerId", ID: &i_ConnectPeerId, Type: smithy.ShapeTypeString})
+var sConnectPeer_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sConnectPeer_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iConnectPeerState, Members: &mConnectPeerState, Type: smithy.ShapeTypeEnum})
+var sConnectPeer_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sConnectPeer_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iConnectPeerConfiguration, Members: &mConnectPeerConfiguration, Type: smithy.ShapeTypeStructure})
+var sConnectPeer_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sConnectPeer_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString})
+var sConnectPeer_LastModificationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationErrors", ID: &i_ConnectPeerErrorList, Members: &m_ConnectPeerErrorList, Type: smithy.ShapeTypeList})
+var sConnectPeerAssociation_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerId", ID: &i_ConnectPeerId, Type: smithy.ShapeTypeString})
+var sConnectPeerAssociation_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sConnectPeerAssociation_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sConnectPeerAssociation_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sConnectPeerAssociation_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iConnectPeerAssociationState, Members: &mConnectPeerAssociationState, Type: smithy.ShapeTypeEnum})
+var s_ConnectPeerAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectPeerAssociation, Members: &mConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var sConnectPeerAssociationState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerAssociationState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerAssociationState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerAssociationState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerBgpConfiguration_CoreNetworkAsn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkAsn", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sConnectPeerBgpConfiguration_PeerAsn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerAsn", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sConnectPeerBgpConfiguration_CoreNetworkAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sConnectPeerBgpConfiguration_PeerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var s_ConnectPeerBgpConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectPeerBgpConfiguration, Members: &mConnectPeerBgpConfiguration, Type: smithy.ShapeTypeStructure})
+var sConnectPeerConfiguration_CoreNetworkAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sConnectPeerConfiguration_PeerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sConnectPeerConfiguration_InsideCidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsideCidrBlocks", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sConnectPeerConfiguration_Protocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Protocol", ID: &iTunnelProtocol, Members: &mTunnelProtocol, Type: smithy.ShapeTypeEnum})
+var sConnectPeerConfiguration_BgpConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BgpConfigurations", ID: &i_ConnectPeerBgpConfigurationList, Members: &m_ConnectPeerBgpConfigurationList, Type: smithy.ShapeTypeList})
+var sConnectPeerError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iConnectPeerErrorCode, Members: &mConnectPeerErrorCode, Type: smithy.ShapeTypeEnum})
+var sConnectPeerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sConnectPeerError_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sConnectPeerError_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sConnectPeerErrorCode_EDGE_LOCATION_NO_FREE_IPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE_LOCATION_NO_FREE_IPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode_EDGE_LOCATION_PEER_DUPLICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE_LOCATION_PEER_DUPLICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode_SUBNET_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBNET_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode_IP_OUTSIDE_SUBNET_CIDR_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IP_OUTSIDE_SUBNET_CIDR_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_INSIDE_CIDR_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_ASSOCIATED_CIDR_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode_CREATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerErrorCode_DELETION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ConnectPeerErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectPeerError, Members: &mConnectPeerError, Type: smithy.ShapeTypeStructure})
+var s_ConnectPeerIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectPeerId, Type: smithy.ShapeTypeString})
+var sConnectPeerState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectPeerSummary_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sConnectPeerSummary_ConnectAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectAttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sConnectPeerSummary_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerId", ID: &i_ConnectPeerId, Type: smithy.ShapeTypeString})
+var sConnectPeerSummary_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sConnectPeerSummary_ConnectPeerState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerState", ID: &iConnectPeerState, Members: &mConnectPeerState, Type: smithy.ShapeTypeEnum})
+var sConnectPeerSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sConnectPeerSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sConnectPeerSummary_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString})
+var s_ConnectPeerSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectPeerSummary, Members: &mConnectPeerSummary, Type: smithy.ShapeTypeStructure})
+var s_ConstrainedStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetwork_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetwork_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetwork_CoreNetworkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkArn", ID: &i_CoreNetworkArn, Type: smithy.ShapeTypeString})
+var sCoreNetwork_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetwork_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sCoreNetwork_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCoreNetworkState, Members: &mCoreNetworkState, Type: smithy.ShapeTypeEnum})
+var sCoreNetwork_Segments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segments", ID: &i_CoreNetworkSegmentList, Members: &m_CoreNetworkSegmentList, Type: smithy.ShapeTypeList})
+var sCoreNetwork_NetworkFunctionGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroups", ID: &i_CoreNetworkNetworkFunctionGroupList, Members: &m_CoreNetworkNetworkFunctionGroupList, Type: smithy.ShapeTypeList})
+var sCoreNetwork_Edges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Edges", ID: &i_CoreNetworkEdgeList, Members: &m_CoreNetworkEdgeList, Type: smithy.ShapeTypeList})
+var sCoreNetwork_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChange_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChangeType, Members: &mChangeType, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkChange_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkChange_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChange_PreviousValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviousValues", ID: &iCoreNetworkChangeValues, Members: &mCoreNetworkChangeValues, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkChange_NewValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewValues", ID: &iCoreNetworkChangeValues, Members: &mCoreNetworkChangeValues, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkChange_IdentifierPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifierPath", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEvent_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iChangeType, Members: &mChangeType, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkChangeEvent_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iChangeAction, Members: &mChangeAction, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkChangeEvent_IdentifierPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifierPath", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEvent_EventTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventTime", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sCoreNetworkChangeEvent_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChangeStatus, Members: &mChangeStatus, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkChangeEvent_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &iCoreNetworkChangeEventValues, Members: &mCoreNetworkChangeEventValues, Type: smithy.ShapeTypeStructure})
+var s_CoreNetworkChangeEventList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkChangeEvent, Members: &mCoreNetworkChangeEvent, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkChangeEventValues_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEventValues_PeerEdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerEdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEventValues_RoutingPolicyDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyDirection", ID: &iRoutingPolicyDirection, Members: &mRoutingPolicyDirection, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkChangeEventValues_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEventValues_NetworkFunctionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroupName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEventValues_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEventValues_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeEventValues_RoutingPolicyAssociationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyAssociationDetails", ID: &i_RoutingPolicyAssociationDetailsList, Members: &m_RoutingPolicyAssociationDetailsList, Type: smithy.ShapeTypeList})
+var s_CoreNetworkChangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkChange, Members: &mCoreNetworkChange, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkChangeValues_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeValues_NetworkFunctionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroupName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeValues_EdgeLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocations", ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChangeValues_Asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Asn", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sCoreNetworkChangeValues_Cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Cidr", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeValues_DestinationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationIdentifier", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeValues_InsideCidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsideCidrBlocks", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChangeValues_SharedSegments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSegments", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChangeValues_ServiceInsertionActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceInsertionActions", ID: &i_ServiceInsertionActionList, Members: &m_ServiceInsertionActionList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChangeValues_VpnEcmpSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpnEcmpSupport", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCoreNetworkChangeValues_DnsSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsSupport", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCoreNetworkChangeValues_SecurityGroupReferencingSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupReferencingSupport", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCoreNetworkChangeValues_RoutingPolicyDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyDirection", ID: &iRoutingPolicyDirection, Members: &mRoutingPolicyDirection, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkChangeValues_RoutingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicy", ID: &i_CoreNetworkPolicyDocument, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeValues_PeerEdgeLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerEdgeLocations", ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var sCoreNetworkChangeValues_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkChangeValues_RoutingPolicyAssociationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyAssociationDetails", ID: &i_RoutingPolicyAssociationDetailsList, Members: &m_RoutingPolicyAssociationDetailsList, Type: smithy.ShapeTypeList})
+var sCoreNetworkEdge_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sCoreNetworkEdge_Asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Asn", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sCoreNetworkEdge_InsideCidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsideCidrBlocks", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var s_CoreNetworkEdgeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkEdge, Members: &mCoreNetworkEdge, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkNetworkFunctionGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkNetworkFunctionGroup_EdgeLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocations", ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var sCoreNetworkNetworkFunctionGroup_Segments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segments", ID: &iServiceInsertionSegments, Members: &mServiceInsertionSegments, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroupName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var s_CoreNetworkNetworkFunctionGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkNetworkFunctionGroup, Members: &mCoreNetworkNetworkFunctionGroup, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkPolicy_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicy_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sCoreNetworkPolicy_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &iCoreNetworkPolicyAlias, Members: &mCoreNetworkPolicyAlias, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkPolicy_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicy_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sCoreNetworkPolicy_ChangeSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetState", ID: &iChangeSetState, Members: &mChangeSetState, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkPolicy_PolicyErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyErrors", ID: &i_CoreNetworkPolicyErrorList, Members: &m_CoreNetworkPolicyErrorList, Type: smithy.ShapeTypeList})
+var sCoreNetworkPolicy_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_SynthesizedJsonCoreNetworkPolicyDocument, Traits: &t99, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicyAlias_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkPolicyAlias_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkPolicyError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicyError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicyError_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var s_CoreNetworkPolicyErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkPolicyError, Members: &mCoreNetworkPolicyError, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicyException_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_CoreNetworkPolicyErrorList, Members: &m_CoreNetworkPolicyErrorList, Type: smithy.ShapeTypeList})
+var sCoreNetworkPolicyVersion_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicyVersion_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sCoreNetworkPolicyVersion_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &iCoreNetworkPolicyAlias, Members: &mCoreNetworkPolicyAlias, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkPolicyVersion_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkPolicyVersion_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sCoreNetworkPolicyVersion_ChangeSetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetState", ID: &iChangeSetState, Members: &mChangeSetState, Type: smithy.ShapeTypeEnum})
+var s_CoreNetworkPolicyVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkPolicyVersion, Members: &mCoreNetworkPolicyVersion, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkRoutingInformation_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkRoutingInformation_NextHop = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextHop", ID: &iRoutingInformationNextHop, Members: &mRoutingInformationNextHop, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkRoutingInformation_LocalPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalPreference", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkRoutingInformation_Med = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Med", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkRoutingInformation_AsPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AsPath", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sCoreNetworkRoutingInformation_Communities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Communities", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var s_CoreNetworkRoutingInformationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkRoutingInformation, Members: &mCoreNetworkRoutingInformation, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkSegment_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkSegment_EdgeLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocations", ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var sCoreNetworkSegment_SharedSegments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSegments", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sCoreNetworkSegmentEdgeIdentifier_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetworkSegmentEdgeIdentifier_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkSegmentEdgeIdentifier_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var s_CoreNetworkSegmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkSegment, Members: &mCoreNetworkSegment, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCoreNetworkSummary_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetworkSummary_CoreNetworkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkArn", ID: &i_CoreNetworkArn, Type: smithy.ShapeTypeString})
+var sCoreNetworkSummary_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sCoreNetworkSummary_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sCoreNetworkSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCoreNetworkState, Members: &mCoreNetworkState, Type: smithy.ShapeTypeEnum})
+var sCoreNetworkSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCoreNetworkSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_CoreNetworkSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreNetworkSummary, Members: &mCoreNetworkSummary, Type: smithy.ShapeTypeStructure})
+var s_CustomerGatewayArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CustomerGatewayArn, Type: smithy.ShapeTypeString})
+var sCustomerGatewayAssociation_CustomerGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerGatewayArn", ID: &i_CustomerGatewayArn, Type: smithy.ShapeTypeString})
+var sCustomerGatewayAssociation_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sCustomerGatewayAssociation_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sCustomerGatewayAssociation_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sCustomerGatewayAssociation_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iCustomerGatewayAssociationState, Members: &mCustomerGatewayAssociationState, Type: smithy.ShapeTypeEnum})
+var s_CustomerGatewayAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomerGatewayAssociation, Members: &mCustomerGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sCustomerGatewayAssociationState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomerGatewayAssociationState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomerGatewayAssociationState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomerGatewayAssociationState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDevice_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sDevice_DeviceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceArn", ID: &i_DeviceArn, Type: smithy.ShapeTypeString})
+var sDevice_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sDevice_AWSLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSLocation", ID: &iAWSLocation, Members: &mAWSLocation, Type: smithy.ShapeTypeStructure})
+var sDevice_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sDevice_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sDevice_Vendor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vendor", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sDevice_Model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Model", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sDevice_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sDevice_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Traits: &t101, Type: smithy.ShapeTypeStructure})
+var sDevice_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var sDevice_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sDevice_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iDeviceState, Members: &mDeviceState, Type: smithy.ShapeTypeEnum})
+var sDevice_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_DeviceIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var s_DeviceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDevice, Members: &mDevice, Type: smithy.ShapeTypeStructure})
+var sDeviceState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeviceState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeviceState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeviceState_updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachment_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachment_DirectConnectGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectConnectGatewayArn", ID: &i_DirectConnectGatewayArn, Type: smithy.ShapeTypeString})
+var sEdgeOverride_EdgeSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeSets", ID: &i_EdgeSetList, Members: &m_EdgeSetList, Type: smithy.ShapeTypeList})
+var sEdgeOverride_UseEdge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseEdge", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_EdgeSet_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_EdgeSetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EdgeSet, Members: &m_EdgeSet, Type: smithy.ShapeTypeList})
+var s_ExceptionContextMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ExceptionContextKey, Type: smithy.ShapeTypeString})
+var s_ExceptionContextMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ExceptionContextValue, Type: smithy.ShapeTypeString})
+var s_ExternalRegionCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var s_FilterMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_FilterName, Type: smithy.ShapeTypeString})
+var s_FilterMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var sGlobalNetwork_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sGlobalNetwork_GlobalNetworkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkArn", ID: &i_GlobalNetworkArn, Type: smithy.ShapeTypeString})
+var sGlobalNetwork_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sGlobalNetwork_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sGlobalNetwork_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iGlobalNetworkState, Members: &mGlobalNetworkState, Type: smithy.ShapeTypeEnum})
+var sGlobalNetwork_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_GlobalNetworkIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var s_GlobalNetworkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGlobalNetwork, Members: &mGlobalNetwork, Type: smithy.ShapeTypeStructure})
+var sGlobalNetworkState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGlobalNetworkState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGlobalNetworkState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGlobalNetworkState_updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sInternalServerException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t103, Type: smithy.ShapeTypeInteger})
+var sLink_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sLink_LinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkArn", ID: &i_LinkArn, Type: smithy.ShapeTypeString})
+var sLink_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sLink_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var sLink_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sLink_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sLink_Bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bandwidth", ID: &iBandwidth, Members: &mBandwidth, Type: smithy.ShapeTypeStructure})
+var sLink_Provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provider", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sLink_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sLink_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iLinkState, Members: &mLinkState, Type: smithy.ShapeTypeEnum})
+var sLink_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sLinkAssociation_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sLinkAssociation_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sLinkAssociation_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sLinkAssociation_LinkAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkAssociationState", ID: &iLinkAssociationState, Members: &mLinkAssociationState, Type: smithy.ShapeTypeEnum})
+var s_LinkAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLinkAssociation, Members: &mLinkAssociation, Type: smithy.ShapeTypeStructure})
+var sLinkAssociationState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLinkAssociationState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLinkAssociationState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLinkAssociationState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LinkIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var s_LinkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLink, Members: &mLink, Type: smithy.ShapeTypeStructure})
+var sLinkState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLinkState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLinkState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLinkState_updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocation_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sLocation_Latitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Latitude", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sLocation_Longitude = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Longitude", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNatGatewaySupportState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatGatewaySupportState_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatGatewaySupportState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatGatewaySupportState_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ATTACHMENT_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatGatewaySupportValue_ENABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatGatewaySupportValue_DISABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRule_RuleNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNumber", ID: &i_NatRuleNumber, Type: smithy.ShapeTypeInteger})
+var sNatRule_MatchSourceCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchSourceCidr", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sNatRule_NatCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatCidr", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sNatRule_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNatRuleState, Members: &mNatRuleState, Type: smithy.ShapeTypeEnum})
+var s_NatRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNatRule, Members: &mNatRule, Type: smithy.ShapeTypeStructure})
+var sNatRuleRequest_RuleNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleNumber", ID: &i_NatRuleNumber, Type: smithy.ShapeTypeInteger})
+var sNatRuleRequest_MatchSourceCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchSourceCidr", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sNatRuleRequest_NatCidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatCidr", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var s_NatRuleRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNatRuleRequest, Members: &mNatRuleRequest, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_MODIFYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFYING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_ACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_ACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_DEACTIVATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_DEACTIVATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEACTIVATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNatRuleState_PENDING_ATTACHMENT_ACCEPTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_ATTACHMENT_ACCEPTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkFunctionGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_NetworkFunctionGroupList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkFunctionGroup, Members: &mNetworkFunctionGroup, Type: smithy.ShapeTypeStructure})
+var sNetworkResource_RegisteredGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredGatewayArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sNetworkResource_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sNetworkResource_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sNetworkResource_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sNetworkResource_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResource_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResource_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sNetworkResource_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResource_DefinitionTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefinitionTimestamp", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sNetworkResource_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sNetworkResource_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_NetworkResourceMetadataMap, Members: &m_NetworkResourceMetadataMap, Type: smithy.ShapeTypeMap})
+var sNetworkResourceCount_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResourceCount_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_NetworkResourceCountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkResourceCount, Members: &mNetworkResourceCount, Type: smithy.ShapeTypeStructure})
+var s_NetworkResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkResource, Members: &mNetworkResource, Type: smithy.ShapeTypeStructure})
+var s_NetworkResourceMetadataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_NetworkResourceMetadataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResourceSummary_RegisteredGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredGatewayArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sNetworkResourceSummary_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sNetworkResourceSummary_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResourceSummary_Definition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Definition", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResourceSummary_NameTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NameTag", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkResourceSummary_IsMiddlebox = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsMiddlebox", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNetworkRoute_DestinationCidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationCidrBlock", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkRoute_Destinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destinations", ID: &i_NetworkRouteDestinationList, Members: &m_NetworkRouteDestinationList, Type: smithy.ShapeTypeList})
+var sNetworkRoute_PrefixListId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkRoute_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iRouteState, Members: &mRouteState, Type: smithy.ShapeTypeEnum})
+var sNetworkRoute_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRouteType, Members: &mRouteType, Type: smithy.ShapeTypeEnum})
+var sNetworkRouteDestination_CoreNetworkAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkAttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sNetworkRouteDestination_TransitGatewayAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentId", ID: &i_TransitGatewayAttachmentId, Type: smithy.ShapeTypeString})
+var sNetworkRouteDestination_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkRouteDestination_NetworkFunctionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroupName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkRouteDestination_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sNetworkRouteDestination_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkRouteDestination_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_NetworkRouteDestinationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkRouteDestination, Members: &mNetworkRouteDestination, Type: smithy.ShapeTypeStructure})
+var s_NetworkRouteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkRoute, Members: &mNetworkRoute, Type: smithy.ShapeTypeStructure})
+var sNetworkTelemetry_RegisteredGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredGatewayArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sNetworkTelemetry_Health = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Health", ID: &iConnectionHealth, Members: &mConnectionHealth, Type: smithy.ShapeTypeStructure})
+var s_NetworkTelemetryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkTelemetry, Members: &mNetworkTelemetry, Type: smithy.ShapeTypeStructure})
+var sOrganizationStatus_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sOrganizationStatus_OrganizationAwsServiceAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationAwsServiceAccessStatus", ID: &i_OrganizationAwsServiceAccessStatus, Type: smithy.ShapeTypeString})
+var sOrganizationStatus_SLRDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLRDeploymentStatus", ID: &i_SLRDeploymentStatus, Type: smithy.ShapeTypeString})
+var sOrganizationStatus_AccountStatusList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountStatusList", ID: &i_AccountStatusList, Members: &m_AccountStatusList, Traits: &t105, Type: smithy.ShapeTypeList})
+var sPathComponent_Sequence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sequence", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sPathComponent_Resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resource", ID: &iNetworkResourceSummary, Members: &mNetworkResourceSummary, Type: smithy.ShapeTypeStructure})
+var sPathComponent_DestinationCidrBlock = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationCidrBlock", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_PathComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPathComponent, Members: &mPathComponent, Type: smithy.ShapeTypeStructure})
+var sPeering_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sPeering_CoreNetworkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkArn", ID: &i_CoreNetworkArn, Type: smithy.ShapeTypeString})
+var sPeering_PeeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeeringId", ID: &i_PeeringId, Type: smithy.ShapeTypeString})
+var sPeering_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sPeering_PeeringType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeeringType", ID: &iPeeringType, Members: &mPeeringType, Type: smithy.ShapeTypeEnum})
+var sPeering_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iPeeringState, Members: &mPeeringState, Type: smithy.ShapeTypeEnum})
+var sPeering_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sPeering_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPeering_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPeering_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sPeering_LastModificationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModificationErrors", ID: &i_PeeringErrorList, Members: &m_PeeringErrorList, Type: smithy.ShapeTypeList})
+var sPeeringError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iPeeringErrorCode, Members: &mPeeringErrorCode, Type: smithy.ShapeTypeEnum})
+var sPeeringError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sPeeringError_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPeeringError_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sPeeringError_MissingPermissionsContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingPermissionsContext", ID: &iPermissionsErrorContext, Members: &mPermissionsErrorContext, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_TRANSIT_GATEWAY_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_MISSING_REQUIRED_PERMISSIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_REQUIRED_PERMISSIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE_LOCATION_PEER_DUPLICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TRANSIT_GATEWAY_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_CREATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringErrorCode_DELETION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PeeringErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPeeringError, Members: &mPeeringError, Type: smithy.ShapeTypeStructure})
+var s_PeeringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPeering, Members: &mPeering, Type: smithy.ShapeTypeStructure})
+var sPeeringState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringState_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPeeringType_TRANSIT_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPermissionsErrorContext_MissingPermission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MissingPermission", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sPrefixListAssociation_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sPrefixListAssociation_PrefixListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListArn", ID: &i_PrefixListArn, Type: smithy.ShapeTypeString})
+var sPrefixListAssociation_PrefixListAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListAlias", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_PrefixListAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPrefixListAssociation, Members: &mPrefixListAssociation, Type: smithy.ShapeTypeStructure})
+var sProposedNetworkFunctionGroupChange_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentPolicyRuleNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sProposedNetworkFunctionGroupChange_NetworkFunctionGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroupName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sProposedSegmentChange_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sProposedSegmentChange_AttachmentPolicyRuleNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentPolicyRuleNumber", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sProposedSegmentChange_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_ReasonContextMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ReasonContextKey, Type: smithy.ShapeTypeString})
+var s_ReasonContextMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ReasonContextValue, Type: smithy.ShapeTypeString})
+var sRelationship_From = smithy.NewStaticSchema(smithy.StaticSchema{Member: "From", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sRelationship_To = smithy.NewStaticSchema(smithy.StaticSchema{Member: "To", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_RelationshipList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRelationship, Members: &mRelationship, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Context", ID: &i_ExceptionContextMap, Members: &m_ExceptionContextMap, Type: smithy.ShapeTypeMap})
+var sRouteAnalysis_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sRouteAnalysis_OwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerAccountId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sRouteAnalysis_RouteAnalysisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteAnalysisId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sRouteAnalysis_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sRouteAnalysis_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iRouteAnalysisStatus, Members: &mRouteAnalysisStatus, Type: smithy.ShapeTypeEnum})
+var sRouteAnalysis_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iRouteAnalysisEndpointOptions, Members: &mRouteAnalysisEndpointOptions, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysis_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iRouteAnalysisEndpointOptions, Members: &mRouteAnalysisEndpointOptions, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysis_IncludeReturnPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeReturnPath", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRouteAnalysis_UseMiddleboxes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseMiddleboxes", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRouteAnalysis_ForwardPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForwardPath", ID: &iRouteAnalysisPath, Members: &mRouteAnalysisPath, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysis_ReturnPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReturnPath", ID: &iRouteAnalysisPath, Members: &mRouteAnalysisPath, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletion_ResultCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResultCode", ID: &iRouteAnalysisCompletionResultCode, Members: &mRouteAnalysisCompletionResultCode, Type: smithy.ShapeTypeEnum})
+var sRouteAnalysisCompletion_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &iRouteAnalysisCompletionReasonCode, Members: &mRouteAnalysisCompletionReasonCode, Type: smithy.ShapeTypeEnum})
+var sRouteAnalysisCompletion_ReasonContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonContext", ID: &i_ReasonContextMap, Members: &m_ReasonContextMap, Type: smithy.ShapeTypeMap})
+var sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_CYCLIC_PATH_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CYCLIC_PATH_DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_ROUTE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_INACTIVE_ROUTE_FOR_DESTINATION_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE_ROUTE_FOR_DESTINATION_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_ATTACHMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_MAX_HOPS_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAX_HOPS_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_POSSIBLE_MIDDLEBOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSSIBLE_MIDDLEBOX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionReasonCode_NO_DESTINATION_ARN_PROVIDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_DESTINATION_ARN_PROVIDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionResultCode_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisCompletionResultCode_NOT_CONNECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CONNECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisEndpointOptions_TransitGatewayAttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentArn", ID: &i_TransitGatewayAttachmentArn, Type: smithy.ShapeTypeString})
+var sRouteAnalysisEndpointOptions_TransitGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayArn", ID: &i_TransitGatewayArn, Type: smithy.ShapeTypeString})
+var sRouteAnalysisEndpointOptions_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sRouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayAttachmentArn", ID: &i_TransitGatewayAttachmentArn, Type: smithy.ShapeTypeString})
+var sRouteAnalysisEndpointOptionsSpecification_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sRouteAnalysisPath_CompletionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionStatus", ID: &iRouteAnalysisCompletion, Members: &mRouteAnalysisCompletion, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisPath_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_PathComponentList, Members: &m_PathComponentList, Type: smithy.ShapeTypeList})
+var sRouteAnalysisStatus_running = smithy.NewStaticSchema(smithy.StaticSchema{Member: "running", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisStatus_completed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteAnalysisStatus_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteState_BLACKHOLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BLACKHOLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RouteStateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRouteState, Members: &mRouteState, Type: smithy.ShapeTypeEnum})
+var sRouteTableIdentifier_TransitGatewayRouteTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRouteTableArn", ID: &i_TransitGatewayRouteTableArn, Type: smithy.ShapeTypeString})
+var sRouteTableIdentifier_CoreNetworkSegmentEdge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkSegmentEdge", ID: &iCoreNetworkSegmentEdgeIdentifier, Members: &mCoreNetworkSegmentEdgeIdentifier, Type: smithy.ShapeTypeStructure})
+var sRouteTableIdentifier_CoreNetworkNetworkFunctionGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkNetworkFunctionGroup", ID: &iCoreNetworkNetworkFunctionGroupIdentifier, Members: &mCoreNetworkNetworkFunctionGroupIdentifier, Type: smithy.ShapeTypeStructure})
+var sRouteTableType_TRANSIT_GATEWAY_ROUTE_TABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSIT_GATEWAY_ROUTE_TABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteTableType_CORE_NETWORK_SEGMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CORE_NETWORK_SEGMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteTableType_NETWORK_FUNCTION_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK_FUNCTION_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteType_PROPAGATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROPAGATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteType_STATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteType_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RouteTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRouteType, Members: &mRouteType, Type: smithy.ShapeTypeEnum})
+var sRoutingInformationNextHop_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sRoutingInformationNextHop_CoreNetworkAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkAttachmentId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sRoutingInformationNextHop_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sRoutingInformationNextHop_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sRoutingInformationNextHop_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sRoutingInformationNextHop_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sRoutingPolicyAssociationDetail_RoutingPolicyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyNames", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sRoutingPolicyAssociationDetail_SharedSegments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SharedSegments", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var s_RoutingPolicyAssociationDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingPolicyAssociationDetail, Members: &mRoutingPolicyAssociationDetail, Type: smithy.ShapeTypeStructure})
+var sRoutingPolicyDirection_INBOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INBOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRoutingPolicyDirection_OUTBOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTBOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSegmentActionServiceInsertion_SEND_VIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND_VIA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSegmentActionServiceInsertion_SEND_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND_TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSendViaMode_DUAL_HOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL_HOP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSendViaMode_SINGLE_HOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_HOP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceInsertionAction_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iSegmentActionServiceInsertion, Members: &mSegmentActionServiceInsertion, Type: smithy.ShapeTypeEnum})
+var sServiceInsertionAction_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iSendViaMode, Members: &mSendViaMode, Type: smithy.ShapeTypeEnum})
+var sServiceInsertionAction_WhenSentTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhenSentTo", ID: &iWhenSentTo, Members: &mWhenSentTo, Type: smithy.ShapeTypeStructure})
+var sServiceInsertionAction_Via = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Via", ID: &iVia, Members: &mVia, Type: smithy.ShapeTypeStructure})
+var s_ServiceInsertionActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceInsertionAction, Members: &mServiceInsertionAction, Type: smithy.ShapeTypeStructure})
+var sServiceInsertionSegments_SendVia = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendVia", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sServiceInsertionSegments_SendTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SendTo", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_LimitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitCode", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sSite_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var sSite_SiteArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteArn", ID: &i_SiteArn, Type: smithy.ShapeTypeString})
+var sSite_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sSite_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sSite_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Traits: &t101, Type: smithy.ShapeTypeStructure})
+var sSite_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sSite_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSiteState, Members: &mSiteState, Type: smithy.ShapeTypeEnum})
+var sSite_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_SiteIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var s_SiteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSite, Members: &mSite, Type: smithy.ShapeTypeStructure})
+var sSiteState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSiteState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSiteState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSiteState_updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSiteToSiteVpnAttachment_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sSiteToSiteVpnAttachment_VpnConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpnConnectionArn", ID: &i_VpnConnectionArn, Type: smithy.ShapeTypeString})
+var s_SubnetArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetArn, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sThrottlingException_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t103, Type: smithy.ShapeTypeInteger})
+var s_TransitGatewayArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TransitGatewayArn, Type: smithy.ShapeTypeString})
+var s_TransitGatewayConnectPeerArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TransitGatewayConnectPeerArn, Type: smithy.ShapeTypeString})
+var sTransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayConnectPeerArn", ID: &i_TransitGatewayConnectPeerArn, Type: smithy.ShapeTypeString})
+var sTransitGatewayConnectPeerAssociation_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sTransitGatewayConnectPeerAssociation_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sTransitGatewayConnectPeerAssociation_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sTransitGatewayConnectPeerAssociation_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iTransitGatewayConnectPeerAssociationState, Members: &mTransitGatewayConnectPeerAssociationState, Type: smithy.ShapeTypeEnum})
+var s_TransitGatewayConnectPeerAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTransitGatewayConnectPeerAssociation, Members: &mTransitGatewayConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayConnectPeerAssociationState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayConnectPeerAssociationState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayConnectPeerAssociationState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayConnectPeerAssociationState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayPeering_Peering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Peering", ID: &iPeering, Members: &mPeering, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayPeering_TransitGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayArn", ID: &i_TransitGatewayArn, Type: smithy.ShapeTypeString})
+var sTransitGatewayPeering_TransitGatewayPeeringAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayPeeringAttachmentId", ID: &i_TransitGatewayPeeringAttachmentId, Type: smithy.ShapeTypeString})
+var sTransitGatewayRegistration_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sTransitGatewayRegistration_TransitGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayArn", ID: &i_TransitGatewayArn, Type: smithy.ShapeTypeString})
+var sTransitGatewayRegistration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iTransitGatewayRegistrationStateReason, Members: &mTransitGatewayRegistrationStateReason, Type: smithy.ShapeTypeStructure})
+var s_TransitGatewayRegistrationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTransitGatewayRegistration, Members: &mTransitGatewayRegistration, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayRegistrationState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayRegistrationState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayRegistrationState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayRegistrationState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayRegistrationState_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayRegistrationStateReason_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iTransitGatewayRegistrationState, Members: &mTransitGatewayRegistrationState, Type: smithy.ShapeTypeEnum})
+var sTransitGatewayRegistrationStateReason_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sTransitGatewayRouteTableAttachment_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sTransitGatewayRouteTableAttachment_PeeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeeringId", ID: &i_PeeringId, Type: smithy.ShapeTypeString})
+var sTransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRouteTableArn", ID: &i_TransitGatewayRouteTableArn, Type: smithy.ShapeTypeString})
+var sTunnelProtocol_GRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GRE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTunnelProtocol_NO_ENCAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_ENCAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationException_Fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ServerSideString, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVia_NetworkFunctionGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkFunctionGroups", ID: &i_NetworkFunctionGroupList, Members: &m_NetworkFunctionGroupList, Type: smithy.ShapeTypeList})
+var sVia_WithEdgeOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WithEdgeOverrides", ID: &i_WithEdgeOverridesList, Members: &m_WithEdgeOverridesList, Type: smithy.ShapeTypeList})
+var sVpcAttachment_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sVpcAttachment_SubnetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArns", ID: &i_SubnetArnList, Members: &m_SubnetArnList, Type: smithy.ShapeTypeList})
+var sVpcAttachment_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure})
+var sVpcOptions_Ipv6Support = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6Support", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sVpcOptions_ApplianceModeSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplianceModeSupport", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sVpcOptions_DnsSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsSupport", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sVpcOptions_SecurityGroupReferencingSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupReferencingSupport", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sWhenSentTo_WhenSentToSegmentsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WhenSentToSegmentsList", ID: &i_WhenSentToSegmentsList, Members: &m_WhenSentToSegmentsList, Type: smithy.ShapeTypeList})
+var s_WhenSentToSegmentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var s_WithEdgeOverridesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEdgeOverride, Members: &mEdgeOverride, Type: smithy.ShapeTypeStructure})
+var sAcceptAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sAcceptAttachmentResponse_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sAssociateConnectPeerRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sAssociateConnectPeerRequest_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerId", ID: &i_ConnectPeerId, Type: smithy.ShapeTypeString})
+var sAssociateConnectPeerRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sAssociateConnectPeerRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sAssociateConnectPeerResponse_ConnectPeerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerAssociation", ID: &iConnectPeerAssociation, Members: &mConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var sAssociateCustomerGatewayRequest_CustomerGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerGatewayArn", ID: &i_CustomerGatewayArn, Type: smithy.ShapeTypeString})
+var sAssociateCustomerGatewayRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sAssociateCustomerGatewayRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sAssociateCustomerGatewayRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sAssociateCustomerGatewayResponse_CustomerGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerGatewayAssociation", ID: &iCustomerGatewayAssociation, Members: &mCustomerGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sAssociateLinkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sAssociateLinkRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sAssociateLinkRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sAssociateLinkResponse_LinkAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkAssociation", ID: &iLinkAssociation, Members: &mLinkAssociation, Type: smithy.ShapeTypeStructure})
+var sAssociateTransitGatewayConnectPeerRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sAssociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayConnectPeerArn", ID: &i_TransitGatewayConnectPeerArn, Type: smithy.ShapeTypeString})
+var sAssociateTransitGatewayConnectPeerRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sAssociateTransitGatewayConnectPeerRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sAssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayConnectPeerAssociation", ID: &iTransitGatewayConnectPeerAssociation, Members: &mTransitGatewayConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var sCreateConnectAttachmentRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCreateConnectAttachmentRequest_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sCreateConnectAttachmentRequest_TransportAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransportAttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sCreateConnectAttachmentRequest_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateConnectAttachmentRequest_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportValue, Members: &mNatGatewaySupportValue, Type: smithy.ShapeTypeEnum})
+var sCreateConnectAttachmentRequest_NatGatewayRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayRules", ID: &i_NatRuleRequestList, Members: &m_NatRuleRequestList, Type: smithy.ShapeTypeList})
+var sCreateConnectAttachmentRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iConnectAttachmentOptions, Members: &mConnectAttachmentOptions, Type: smithy.ShapeTypeStructure})
+var sCreateConnectAttachmentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateConnectAttachmentRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateConnectAttachmentResponse_ConnectAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectAttachment", ID: &iConnectAttachment, Members: &mConnectAttachment, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_ConnectedDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedDeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_ConnectedLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedLinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateConnectionResponse_Connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sCreateConnectPeerRequest_ConnectAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectAttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sCreateConnectPeerRequest_CoreNetworkAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sCreateConnectPeerRequest_PeerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeerAddress", ID: &i_IPAddress, Type: smithy.ShapeTypeString})
+var sCreateConnectPeerRequest_BgpOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BgpOptions", ID: &iBgpOptions, Members: &mBgpOptions, Type: smithy.ShapeTypeStructure})
+var sCreateConnectPeerRequest_InsideCidrBlocks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsideCidrBlocks", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sCreateConnectPeerRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateConnectPeerRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateConnectPeerRequest_SubnetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArn", ID: &i_SubnetArn, Type: smithy.ShapeTypeString})
+var sCreateConnectPeerResponse_ConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeer", ID: &iConnectPeer, Members: &mConnectPeer, Type: smithy.ShapeTypeStructure})
+var sCreateCoreNetworkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateCoreNetworkRequest_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_CoreNetworkPolicyDocument, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkResponse_CoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetwork", ID: &iCoreNetwork, Members: &mCoreNetwork, Type: smithy.ShapeTypeStructure})
+var sCreateCoreNetworkPrefixListAssociationRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkPrefixListAssociationRequest_PrefixListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListArn", ID: &i_PrefixListArn, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkPrefixListAssociationRequest_PrefixListAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListAlias", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkPrefixListAssociationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkPrefixListAssociationResponse_PrefixListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListArn", ID: &i_PrefixListArn, Type: smithy.ShapeTypeString})
+var sCreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListAlias", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_AWSLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSLocation", ID: &iAWSLocation, Members: &mAWSLocation, Type: smithy.ShapeTypeStructure})
+var sCreateDeviceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_Vendor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vendor", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_Model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Model", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Traits: &t101, Type: smithy.ShapeTypeStructure})
+var sCreateDeviceRequest_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var sCreateDeviceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDeviceResponse_Device = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Device", ID: &iDevice, Members: &mDevice, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAttachmentRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectConnectGatewayArn", ID: &i_DirectConnectGatewayArn, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAttachmentRequest_EdgeLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocations", ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var sCreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportValue, Members: &mNatGatewaySupportValue, Type: smithy.ShapeTypeEnum})
+var sCreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatSystemRouteSupport", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateDirectConnectGatewayAttachmentRequest_NatGatewayRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayRules", ID: &i_NatRuleRequestList, Members: &m_NatRuleRequestList, Type: smithy.ShapeTypeList})
+var sCreateDirectConnectGatewayAttachmentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDirectConnectGatewayAttachmentRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectConnectGatewayAttachment", ID: &iDirectConnectGatewayAttachment, Members: &mDirectConnectGatewayAttachment, Type: smithy.ShapeTypeStructure})
+var sCreateGlobalNetworkRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateGlobalNetworkRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateGlobalNetworkResponse_GlobalNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetwork", ID: &iGlobalNetwork, Members: &mGlobalNetwork, Type: smithy.ShapeTypeStructure})
+var sCreateLinkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sCreateLinkRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateLinkRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateLinkRequest_Bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bandwidth", ID: &iBandwidth, Members: &mBandwidth, Type: smithy.ShapeTypeStructure})
+var sCreateLinkRequest_Provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provider", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateLinkRequest_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var sCreateLinkRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateLinkResponse_Link = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Link", ID: &iLink, Members: &mLink, Type: smithy.ShapeTypeStructure})
+var sCreateSiteRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sCreateSiteRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateSiteRequest_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Traits: &t101, Type: smithy.ShapeTypeStructure})
+var sCreateSiteRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateSiteResponse_Site = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Site", ID: &iSite, Members: &mSite, Type: smithy.ShapeTypeStructure})
+var sCreateSiteToSiteVpnAttachmentRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpnConnectionArn", ID: &i_VpnConnectionArn, Type: smithy.ShapeTypeString})
+var sCreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportValue, Members: &mNatGatewaySupportValue, Type: smithy.ShapeTypeEnum})
+var sCreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatSystemRouteSupport", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateSiteToSiteVpnAttachmentRequest_NatGatewayRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayRules", ID: &i_NatRuleRequestList, Members: &m_NatRuleRequestList, Type: smithy.ShapeTypeList})
+var sCreateSiteToSiteVpnAttachmentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateSiteToSiteVpnAttachmentRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteToSiteVpnAttachment", ID: &iSiteToSiteVpnAttachment, Members: &mSiteToSiteVpnAttachment, Type: smithy.ShapeTypeStructure})
+var sCreateTransitGatewayPeeringRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCreateTransitGatewayPeeringRequest_TransitGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayArn", ID: &i_TransitGatewayArn, Type: smithy.ShapeTypeString})
+var sCreateTransitGatewayPeeringRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateTransitGatewayPeeringRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateTransitGatewayPeeringResponse_TransitGatewayPeering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayPeering", ID: &iTransitGatewayPeering, Members: &mTransitGatewayPeering, Type: smithy.ShapeTypeStructure})
+var sCreateTransitGatewayRouteTableAttachmentRequest_PeeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeeringId", ID: &i_PeeringId, Type: smithy.ShapeTypeString})
+var sCreateTransitGatewayRouteTableAttachmentRequest_TransitGatewayRouteTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRouteTableArn", ID: &i_TransitGatewayRouteTableArn, Type: smithy.ShapeTypeString})
+var sCreateTransitGatewayRouteTableAttachmentRequest_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateTransitGatewayRouteTableAttachmentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateTransitGatewayRouteTableAttachmentRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRouteTableAttachment", ID: &iTransitGatewayRouteTableAttachment, Members: &mTransitGatewayRouteTableAttachment, Type: smithy.ShapeTypeStructure})
+var sCreateVpcAttachmentRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sCreateVpcAttachmentRequest_VpcArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcArn", ID: &i_VpcArn, Type: smithy.ShapeTypeString})
+var sCreateVpcAttachmentRequest_SubnetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetArns", ID: &i_SubnetArnList, Members: &m_SubnetArnList, Type: smithy.ShapeTypeList})
+var sCreateVpcAttachmentRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure})
+var sCreateVpcAttachmentRequest_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sCreateVpcAttachmentRequest_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportValue, Members: &mNatGatewaySupportValue, Type: smithy.ShapeTypeEnum})
+var sCreateVpcAttachmentRequest_NatGatewayRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayRules", ID: &i_NatRuleRequestList, Members: &m_NatRuleRequestList, Type: smithy.ShapeTypeList})
+var sCreateVpcAttachmentRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateVpcAttachmentRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateVpcAttachmentResponse_VpcAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcAttachment", ID: &iVpcAttachment, Members: &mVpcAttachment, Type: smithy.ShapeTypeStructure})
+var sDeleteAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteAttachmentResponse_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_ConnectionId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteConnectionResponse_Connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectPeerRequest_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerId", ID: &i_ConnectPeerId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteConnectPeerResponse_ConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeer", ID: &iConnectPeer, Members: &mConnectPeer, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteCoreNetworkResponse_CoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetwork", ID: &iCoreNetwork, Members: &mCoreNetwork, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkPolicyVersionRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteCoreNetworkPolicyVersionRequest_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Traits: &t110, Type: smithy.ShapeTypeInteger})
+var sDeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkPolicy", ID: &iCoreNetworkPolicy, Members: &mCoreNetworkPolicy, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreNetworkPrefixListAssociationRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteCoreNetworkPrefixListAssociationRequest_PrefixListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListArn", ID: &i_PrefixListArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sDeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListArn", ID: &i_PrefixListArn, Type: smithy.ShapeTypeString})
+var sDeleteDeviceRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteDeviceRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteDeviceResponse_Device = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Device", ID: &iDevice, Members: &mDevice, Type: smithy.ShapeTypeStructure})
+var sDeleteGlobalNetworkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteGlobalNetworkResponse_GlobalNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetwork", ID: &iGlobalNetwork, Members: &mGlobalNetwork, Type: smithy.ShapeTypeStructure})
+var sDeleteLinkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteLinkRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteLinkResponse_Link = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Link", ID: &iLink, Members: &mLink, Type: smithy.ShapeTypeStructure})
+var sDeletePeeringRequest_PeeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeeringId", ID: &i_PeeringId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeletePeeringResponse_Peering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Peering", ID: &iPeering, Members: &mPeering, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteSiteRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteSiteRequest_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeleteSiteResponse_Site = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Site", ID: &iSite, Members: &mSite, Type: smithy.ShapeTypeStructure})
+var sDeregisterTransitGatewayRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeregisterTransitGatewayRequest_TransitGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayArn", ID: &i_TransitGatewayArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDeregisterTransitGatewayResponse_TransitGatewayRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRegistration", ID: &iTransitGatewayRegistration, Members: &mTransitGatewayRegistration, Type: smithy.ShapeTypeStructure})
+var sDescribeGlobalNetworksRequest_GlobalNetworkIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkIds", ID: &i_GlobalNetworkIdList, Members: &m_GlobalNetworkIdList, Traits: &t111, Type: smithy.ShapeTypeList})
+var sDescribeGlobalNetworksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sDescribeGlobalNetworksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sDescribeGlobalNetworksResponse_GlobalNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworks", ID: &i_GlobalNetworkList, Members: &m_GlobalNetworkList, Type: smithy.ShapeTypeList})
+var sDescribeGlobalNetworksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDisassociateConnectPeerRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDisassociateConnectPeerRequest_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerId", ID: &i_ConnectPeerId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDisassociateConnectPeerResponse_ConnectPeerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerAssociation", ID: &iConnectPeerAssociation, Members: &mConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var sDisassociateCustomerGatewayRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDisassociateCustomerGatewayRequest_CustomerGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerGatewayArn", ID: &i_CustomerGatewayArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDisassociateCustomerGatewayResponse_CustomerGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerGatewayAssociation", ID: &iCustomerGatewayAssociation, Members: &mCustomerGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sDisassociateLinkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDisassociateLinkRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t114, Type: smithy.ShapeTypeString})
+var sDisassociateLinkRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Traits: &t115, Type: smithy.ShapeTypeString})
+var sDisassociateLinkResponse_LinkAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkAssociation", ID: &iLinkAssociation, Members: &mLinkAssociation, Type: smithy.ShapeTypeStructure})
+var sDisassociateTransitGatewayConnectPeerRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDisassociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayConnectPeerArn", ID: &i_TransitGatewayConnectPeerArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sDisassociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayConnectPeerAssociation", ID: &iTransitGatewayConnectPeerAssociation, Members: &mTransitGatewayConnectPeerAssociation, Type: smithy.ShapeTypeStructure})
+var sExecuteCoreNetworkChangeSetRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sExecuteCoreNetworkChangeSetRequest_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Traits: &t110, Type: smithy.ShapeTypeInteger})
+var sGetConnectAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetConnectAttachmentResponse_ConnectAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectAttachment", ID: &iConnectAttachment, Members: &mConnectAttachment, Type: smithy.ShapeTypeStructure})
+var sGetConnectionsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetConnectionsRequest_ConnectionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionIds", ID: &i_ConnectionIdList, Members: &m_ConnectionIdList, Traits: &t116, Type: smithy.ShapeTypeList})
+var sGetConnectionsRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t114, Type: smithy.ShapeTypeString})
+var sGetConnectionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetConnectionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetConnectionsResponse_Connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connections", ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var sGetConnectionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetConnectPeerAssociationsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetConnectPeerAssociationsRequest_ConnectPeerIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerIds", ID: &i_ConnectPeerIdList, Members: &m_ConnectPeerIdList, Traits: &t117, Type: smithy.ShapeTypeList})
+var sGetConnectPeerAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetConnectPeerAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetConnectPeerAssociationsResponse_ConnectPeerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerAssociations", ID: &i_ConnectPeerAssociationList, Members: &m_ConnectPeerAssociationList, Type: smithy.ShapeTypeList})
+var sGetConnectPeerAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetConnectPeerRequest_ConnectPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeerId", ID: &i_ConnectPeerId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetConnectPeerResponse_ConnectPeer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeer", ID: &iConnectPeer, Members: &mConnectPeer, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkChangeEventsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkChangeEventsRequest_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Traits: &t110, Type: smithy.ShapeTypeInteger})
+var sGetCoreNetworkChangeEventsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetCoreNetworkChangeEventsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkChangeEvents", ID: &i_CoreNetworkChangeEventList, Members: &m_CoreNetworkChangeEventList, Type: smithy.ShapeTypeList})
+var sGetCoreNetworkChangeEventsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkChangeSetRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkChangeSetRequest_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Traits: &t110, Type: smithy.ShapeTypeInteger})
+var sGetCoreNetworkChangeSetRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetCoreNetworkChangeSetRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkChangeSetResponse_CoreNetworkChanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkChanges", ID: &i_CoreNetworkChangeList, Members: &m_CoreNetworkChangeList, Type: smithy.ShapeTypeList})
+var sGetCoreNetworkChangeSetResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkResponse_CoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetwork", ID: &iCoreNetwork, Members: &mCoreNetwork, Type: smithy.ShapeTypeStructure})
+var sGetCoreNetworkPolicyRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetCoreNetworkPolicyRequest_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Traits: &t118, Type: smithy.ShapeTypeInteger})
+var sGetCoreNetworkPolicyRequest_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &iCoreNetworkPolicyAlias, Members: &mCoreNetworkPolicyAlias, Traits: &t119, Type: smithy.ShapeTypeEnum})
+var sGetCoreNetworkPolicyResponse_CoreNetworkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkPolicy", ID: &iCoreNetworkPolicy, Members: &mCoreNetworkPolicy, Type: smithy.ShapeTypeStructure})
+var sGetCustomerGatewayAssociationsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetCustomerGatewayAssociationsRequest_CustomerGatewayArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerGatewayArns", ID: &i_CustomerGatewayArnList, Members: &m_CustomerGatewayArnList, Traits: &t120, Type: smithy.ShapeTypeList})
+var sGetCustomerGatewayAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetCustomerGatewayAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerGatewayAssociations", ID: &i_CustomerGatewayAssociationList, Members: &m_CustomerGatewayAssociationList, Type: smithy.ShapeTypeList})
+var sGetCustomerGatewayAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetDevicesRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetDevicesRequest_DeviceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceIds", ID: &i_DeviceIdList, Members: &m_DeviceIdList, Traits: &t121, Type: smithy.ShapeTypeList})
+var sGetDevicesRequest_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Traits: &t122, Type: smithy.ShapeTypeString})
+var sGetDevicesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetDevicesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetDevicesResponse_Devices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Devices", ID: &i_DeviceList, Members: &m_DeviceList, Type: smithy.ShapeTypeList})
+var sGetDevicesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetDirectConnectGatewayAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectConnectGatewayAttachment", ID: &iDirectConnectGatewayAttachment, Members: &mDirectConnectGatewayAttachment, Type: smithy.ShapeTypeStructure})
+var sGetLinkAssociationsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetLinkAssociationsRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t114, Type: smithy.ShapeTypeString})
+var sGetLinkAssociationsRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Traits: &t115, Type: smithy.ShapeTypeString})
+var sGetLinkAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetLinkAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetLinkAssociationsResponse_LinkAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkAssociations", ID: &i_LinkAssociationList, Members: &m_LinkAssociationList, Type: smithy.ShapeTypeList})
+var sGetLinkAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetLinksRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetLinksRequest_LinkIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkIds", ID: &i_LinkIdList, Members: &m_LinkIdList, Traits: &t123, Type: smithy.ShapeTypeList})
+var sGetLinksRequest_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Traits: &t122, Type: smithy.ShapeTypeString})
+var sGetLinksRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConstrainedString, Traits: &t124, Type: smithy.ShapeTypeString})
+var sGetLinksRequest_Provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provider", ID: &i_ConstrainedString, Traits: &t125, Type: smithy.ShapeTypeString})
+var sGetLinksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetLinksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetLinksResponse_Links = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Links", ID: &i_LinkList, Members: &m_LinkList, Type: smithy.ShapeTypeList})
+var sGetLinksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceCountsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceCountsRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Traits: &t126, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceCountsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetNetworkResourceCountsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceCountsResponse_NetworkResourceCounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkResourceCounts", ID: &i_NetworkResourceCountList, Members: &m_NetworkResourceCountList, Type: smithy.ShapeTypeList})
+var sGetNetworkResourceCountsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t127, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_RegisteredGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredGatewayArn", ID: &i_ResourceArn, Traits: &t128, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_ExternalRegionCode, Traits: &t129, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AWSAccountId, Traits: &t130, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Traits: &t126, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t131, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetNetworkResourceRelationshipsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetNetworkResourceRelationshipsResponse_Relationships = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Relationships", ID: &i_RelationshipList, Members: &m_RelationshipList, Type: smithy.ShapeTypeList})
+var sGetNetworkResourceRelationshipsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t127, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_RegisteredGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredGatewayArn", ID: &i_ResourceArn, Traits: &t128, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_ExternalRegionCode, Traits: &t129, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AWSAccountId, Traits: &t130, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Traits: &t126, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t131, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetNetworkResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetNetworkResourcesResponse_NetworkResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkResources", ID: &i_NetworkResourceList, Members: &m_NetworkResourceList, Type: smithy.ShapeTypeList})
+var sGetNetworkResourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetNetworkRoutesRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetNetworkRoutesRequest_RouteTableIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableIdentifier", ID: &iRouteTableIdentifier, Members: &mRouteTableIdentifier, Type: smithy.ShapeTypeStructure})
+var sGetNetworkRoutesRequest_ExactCidrMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExactCidrMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesRequest_LongestPrefixMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongestPrefixMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesRequest_SubnetOfMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetOfMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesRequest_SupernetOfMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupernetOfMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesRequest_PrefixListIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListIds", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesRequest_States = smithy.NewStaticSchema(smithy.StaticSchema{Member: "States", ID: &i_RouteStateList, Members: &m_RouteStateList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesRequest_Types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Types", ID: &i_RouteTypeList, Members: &m_RouteTypeList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesRequest_DestinationFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationFilters", ID: &i_FilterMap, Members: &m_FilterMap, Type: smithy.ShapeTypeMap})
+var sGetNetworkRoutesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sGetNetworkRoutesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetNetworkRoutesResponse_RouteTableArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetNetworkRoutesResponse_CoreNetworkSegmentEdge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkSegmentEdge", ID: &iCoreNetworkSegmentEdgeIdentifier, Members: &mCoreNetworkSegmentEdgeIdentifier, Type: smithy.ShapeTypeStructure})
+var sGetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkNetworkFunctionGroup", ID: &iCoreNetworkNetworkFunctionGroupIdentifier, Members: &mCoreNetworkNetworkFunctionGroupIdentifier, Type: smithy.ShapeTypeStructure})
+var sGetNetworkRoutesResponse_RouteTableType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableType", ID: &iRouteTableType, Members: &mRouteTableType, Type: smithy.ShapeTypeEnum})
+var sGetNetworkRoutesResponse_RouteTableTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableTimestamp", ID: &i_DateTime, Type: smithy.ShapeTypeTimestamp})
+var sGetNetworkRoutesResponse_NetworkRoutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkRoutes", ID: &i_NetworkRouteList, Members: &m_NetworkRouteList, Type: smithy.ShapeTypeList})
+var sGetNetworkRoutesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t127, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_RegisteredGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredGatewayArn", ID: &i_ResourceArn, Traits: &t128, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsRegion", ID: &i_ExternalRegionCode, Traits: &t129, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AWSAccountId, Traits: &t130, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i_ConstrainedString, Traits: &t126, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t131, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetNetworkTelemetryRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetNetworkTelemetryResponse_NetworkTelemetry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkTelemetry", ID: &i_NetworkTelemetryList, Members: &m_NetworkTelemetryList, Type: smithy.ShapeTypeList})
+var sGetNetworkTelemetryResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_SynthesizedJsonResourcePolicyDocument, Traits: &t99, Type: smithy.ShapeTypeString})
+var sGetRouteAnalysisRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetRouteAnalysisRequest_RouteAnalysisId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteAnalysisId", ID: &i_ConstrainedString, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetRouteAnalysisResponse_RouteAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteAnalysis", ID: &iRouteAnalysis, Members: &mRouteAnalysis, Type: smithy.ShapeTypeStructure})
+var sGetSitesRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetSitesRequest_SiteIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteIds", ID: &i_SiteIdList, Members: &m_SiteIdList, Traits: &t132, Type: smithy.ShapeTypeList})
+var sGetSitesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetSitesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetSitesResponse_Sites = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sites", ID: &i_SiteList, Members: &m_SiteList, Type: smithy.ShapeTypeList})
+var sGetSitesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetSiteToSiteVpnAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteToSiteVpnAttachment", ID: &iSiteToSiteVpnAttachment, Members: &mSiteToSiteVpnAttachment, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayConnectPeerAssociationsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayConnectPeerArns", ID: &i_TransitGatewayConnectPeerArnList, Members: &m_TransitGatewayConnectPeerArnList, Traits: &t133, Type: smithy.ShapeTypeList})
+var sGetTransitGatewayConnectPeerAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetTransitGatewayConnectPeerAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayConnectPeerAssociations", ID: &i_TransitGatewayConnectPeerAssociationList, Members: &m_TransitGatewayConnectPeerAssociationList, Type: smithy.ShapeTypeList})
+var sGetTransitGatewayConnectPeerAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayPeeringRequest_PeeringId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeeringId", ID: &i_PeeringId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayPeeringResponse_TransitGatewayPeering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayPeering", ID: &iTransitGatewayPeering, Members: &mTransitGatewayPeering, Type: smithy.ShapeTypeStructure})
+var sGetTransitGatewayRegistrationsRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayRegistrationsRequest_TransitGatewayArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayArns", ID: &i_TransitGatewayArnList, Members: &m_TransitGatewayArnList, Traits: &t134, Type: smithy.ShapeTypeList})
+var sGetTransitGatewayRegistrationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sGetTransitGatewayRegistrationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRegistrations", ID: &i_TransitGatewayRegistrationList, Members: &m_TransitGatewayRegistrationList, Type: smithy.ShapeTypeList})
+var sGetTransitGatewayRegistrationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayRouteTableAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRouteTableAttachment", ID: &iTransitGatewayRouteTableAttachment, Members: &mTransitGatewayRouteTableAttachment, Type: smithy.ShapeTypeStructure})
+var sGetVpcAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetVpcAttachmentResponse_VpcAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcAttachment", ID: &iVpcAttachment, Members: &mVpcAttachment, Type: smithy.ShapeTypeStructure})
+var sListAttachmentNatConfigurationsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sListAttachmentNatConfigurationsRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sListAttachmentNatConfigurationsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterMap, Members: &m_FilterMap, Type: smithy.ShapeTypeMap})
+var sListAttachmentNatConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAttachmentNatConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentNatConfigurations", ID: &i_AttachmentNatConfigurationList, Members: &m_AttachmentNatConfigurationList, Type: smithy.ShapeTypeList})
+var sListAttachmentNatConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sListAttachmentRoutingPolicyAssociationsRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t135, Type: smithy.ShapeTypeString})
+var sListAttachmentRoutingPolicyAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListAttachmentRoutingPolicyAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentRoutingPolicyAssociations", ID: &i_AttachmentRoutingPolicyAssociationsList, Members: &m_AttachmentRoutingPolicyAssociationsList, Type: smithy.ShapeTypeList})
+var sListAttachmentRoutingPolicyAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAttachmentsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t127, Type: smithy.ShapeTypeString})
+var sListAttachmentsRequest_AttachmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentType", ID: &iAttachmentType, Members: &mAttachmentType, Traits: &t136, Type: smithy.ShapeTypeEnum})
+var sListAttachmentsRequest_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Traits: &t137, Type: smithy.ShapeTypeString})
+var sListAttachmentsRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iAttachmentState, Members: &mAttachmentState, Traits: &t138, Type: smithy.ShapeTypeEnum})
+var sListAttachmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListAttachmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListAttachmentsResponse_Attachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachments", ID: &i_AttachmentList, Members: &m_AttachmentList, Type: smithy.ShapeTypeList})
+var sListAttachmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListConnectPeersRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t127, Type: smithy.ShapeTypeString})
+var sListConnectPeersRequest_ConnectAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectAttachmentId", ID: &i_AttachmentId, Traits: &t139, Type: smithy.ShapeTypeString})
+var sListConnectPeersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListConnectPeersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListConnectPeersResponse_ConnectPeers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectPeers", ID: &i_ConnectPeerSummaryList, Members: &m_ConnectPeerSummaryList, Type: smithy.ShapeTypeList})
+var sListConnectPeersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCoreNetworkPolicyVersionsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sListCoreNetworkPolicyVersionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListCoreNetworkPolicyVersionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkPolicyVersions", ID: &i_CoreNetworkPolicyVersionList, Members: &m_CoreNetworkPolicyVersionList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkPolicyVersionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCoreNetworkPrefixListAssociationsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sListCoreNetworkPrefixListAssociationsRequest_PrefixListArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListArn", ID: &i_PrefixListArn, Traits: &t140, Type: smithy.ShapeTypeString})
+var sListCoreNetworkPrefixListAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListCoreNetworkPrefixListAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrefixListAssociations", ID: &i_PrefixListAssociationList, Members: &m_PrefixListAssociationList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkPrefixListAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCoreNetworkRoutingInformationRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sListCoreNetworkRoutingInformationRequest_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sListCoreNetworkRoutingInformationRequest_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Type: smithy.ShapeTypeString})
+var sListCoreNetworkRoutingInformationRequest_NextHopFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextHopFilters", ID: &i_FilterMap, Members: &m_FilterMap, Type: smithy.ShapeTypeMap})
+var sListCoreNetworkRoutingInformationRequest_ExactPrefixMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExactPrefixMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_LongestPrefixMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LongestPrefixMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_SubnetOfMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetOfMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_SupernetOfMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SupernetOfMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalPreferenceMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_ExactAsPathMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExactAsPathMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_MedMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MedMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_CommunityMatches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CommunityMatches", ID: &i_ConstrainedStringList, Members: &m_ConstrainedStringList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListCoreNetworkRoutingInformationRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkRoutingInformation", ID: &i_CoreNetworkRoutingInformationList, Members: &m_CoreNetworkRoutingInformationList, Type: smithy.ShapeTypeList})
+var sListCoreNetworkRoutingInformationResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListCoreNetworksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListCoreNetworksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListCoreNetworksResponse_CoreNetworks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworks", ID: &i_CoreNetworkSummaryList, Members: &m_CoreNetworkSummaryList, Type: smithy.ShapeTypeList})
+var sListCoreNetworksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListOrganizationServiceAccessStatusRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListOrganizationServiceAccessStatusRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListOrganizationServiceAccessStatusResponse_OrganizationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationStatus", ID: &iOrganizationStatus, Members: &mOrganizationStatus, Type: smithy.ShapeTypeStructure})
+var sListOrganizationServiceAccessStatusResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPeeringsRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t127, Type: smithy.ShapeTypeString})
+var sListPeeringsRequest_PeeringType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeeringType", ID: &iPeeringType, Members: &mPeeringType, Traits: &t141, Type: smithy.ShapeTypeEnum})
+var sListPeeringsRequest_EdgeLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocation", ID: &i_ExternalRegionCode, Traits: &t137, Type: smithy.ShapeTypeString})
+var sListPeeringsRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iPeeringState, Members: &mPeeringState, Traits: &t138, Type: smithy.ShapeTypeEnum})
+var sListPeeringsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t112, Type: smithy.ShapeTypeInteger})
+var sListPeeringsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t113, Type: smithy.ShapeTypeString})
+var sListPeeringsResponse_Peerings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Peerings", ID: &i_PeeringList, Members: &m_PeeringList, Type: smithy.ShapeTypeList})
+var sListPeeringsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_TagList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagList", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutAttachmentRoutingPolicyLabelRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sPutAttachmentRoutingPolicyLabelRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sPutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sPutAttachmentRoutingPolicyLabelRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sPutAttachmentRoutingPolicyLabelResponse_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sPutAttachmentRoutingPolicyLabelResponse_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sPutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sPutCoreNetworkPolicyRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sPutCoreNetworkPolicyRequest_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_SynthesizedJsonCoreNetworkPolicyDocument, Traits: &t99, Type: smithy.ShapeTypeString})
+var sPutCoreNetworkPolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sPutCoreNetworkPolicyRequest_LatestVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersionId", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sPutCoreNetworkPolicyRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sPutCoreNetworkPolicyResponse_CoreNetworkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkPolicy", ID: &iCoreNetworkPolicy, Members: &mCoreNetworkPolicy, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_SynthesizedJsonResourcePolicyDocument, Traits: &t99, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sRegisterTransitGatewayRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sRegisterTransitGatewayRequest_TransitGatewayArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayArn", ID: &i_TransitGatewayArn, Type: smithy.ShapeTypeString})
+var sRegisterTransitGatewayResponse_TransitGatewayRegistration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGatewayRegistration", ID: &iTransitGatewayRegistration, Members: &mTransitGatewayRegistration, Type: smithy.ShapeTypeStructure})
+var sRejectAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sRejectAttachmentResponse_Attachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attachment", ID: &iAttachment, Members: &mAttachment, Type: smithy.ShapeTypeStructure})
+var sRemoveAttachmentRoutingPolicyLabelRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sRemoveAttachmentRoutingPolicyLabelRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sRemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Type: smithy.ShapeTypeString})
+var sRemoveAttachmentRoutingPolicyLabelResponse_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sRemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingPolicyLabel", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sRestoreCoreNetworkPolicyVersionRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sRestoreCoreNetworkPolicyVersionRequest_PolicyVersionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyVersionId", ID: &i_Integer, Traits: &t110, Type: smithy.ShapeTypeInteger})
+var sRestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkPolicy", ID: &iCoreNetworkPolicy, Members: &mCoreNetworkPolicy, Type: smithy.ShapeTypeStructure})
+var sStartOrganizationServiceAccessUpdateRequest_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_Action, Type: smithy.ShapeTypeString})
+var sStartOrganizationServiceAccessUpdateResponse_OrganizationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationStatus", ID: &iOrganizationStatus, Members: &mOrganizationStatus, Type: smithy.ShapeTypeStructure})
+var sStartRouteAnalysisRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sStartRouteAnalysisRequest_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iRouteAnalysisEndpointOptionsSpecification, Members: &mRouteAnalysisEndpointOptionsSpecification, Type: smithy.ShapeTypeStructure})
+var sStartRouteAnalysisRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iRouteAnalysisEndpointOptionsSpecification, Members: &mRouteAnalysisEndpointOptionsSpecification, Type: smithy.ShapeTypeStructure})
+var sStartRouteAnalysisRequest_IncludeReturnPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeReturnPath", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sStartRouteAnalysisRequest_UseMiddleboxes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseMiddleboxes", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sStartRouteAnalysisResponse_RouteAnalysis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteAnalysis", ID: &iRouteAnalysis, Members: &mRouteAnalysis, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t142, Type: smithy.ShapeTypeList})
+var sUpdateAttachmentNatConfigurationRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateAttachmentNatConfigurationRequest_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportValue, Members: &mNatGatewaySupportValue, Type: smithy.ShapeTypeEnum})
+var sUpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatSystemRouteSupport", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateAttachmentNatConfigurationRequest_NatGatewayRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayRules", ID: &i_NatRuleRequestList, Members: &m_NatRuleRequestList, Type: smithy.ShapeTypeList})
+var sUpdateAttachmentNatConfigurationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateAttachmentNatConfigurationResponse_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Type: smithy.ShapeTypeString})
+var sUpdateAttachmentNatConfigurationResponse_NatGatewaySupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewaySupport", ID: &iNatGatewaySupportState, Members: &mNatGatewaySupportState, Type: smithy.ShapeTypeEnum})
+var sUpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatSystemRouteSupport", ID: &i_BoxedBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateAttachmentNatConfigurationResponse_NatGatewayRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NatGatewayRules", ID: &i_NatRuleList, Members: &m_NatRuleList, Type: smithy.ShapeTypeList})
+var sUpdateConnectionRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_ConnectionId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_ConnectedLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectedLinkId", ID: &i_LinkId, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateConnectionResponse_Connection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Connection", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sUpdateCoreNetworkRequest_CoreNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetworkId", ID: &i_CoreNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateCoreNetworkRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateCoreNetworkResponse_CoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoreNetwork", ID: &iCoreNetwork, Members: &mCoreNetwork, Type: smithy.ShapeTypeStructure})
+var sUpdateDeviceRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateDeviceRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateDeviceRequest_AWSLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSLocation", ID: &iAWSLocation, Members: &mAWSLocation, Type: smithy.ShapeTypeStructure})
+var sUpdateDeviceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateDeviceRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateDeviceRequest_Vendor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vendor", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateDeviceRequest_Model = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Model", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateDeviceRequest_SerialNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SerialNumber", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateDeviceRequest_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Traits: &t101, Type: smithy.ShapeTypeStructure})
+var sUpdateDeviceRequest_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Type: smithy.ShapeTypeString})
+var sUpdateDeviceResponse_Device = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Device", ID: &iDevice, Members: &mDevice, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateDirectConnectGatewayAttachmentRequest_EdgeLocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EdgeLocations", ID: &i_ExternalRegionCodeList, Members: &m_ExternalRegionCodeList, Type: smithy.ShapeTypeList})
+var sUpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectConnectGatewayAttachment", ID: &iDirectConnectGatewayAttachment, Members: &mDirectConnectGatewayAttachment, Type: smithy.ShapeTypeStructure})
+var sUpdateGlobalNetworkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateGlobalNetworkRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateGlobalNetworkResponse_GlobalNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetwork", ID: &iGlobalNetwork, Members: &mGlobalNetwork, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateLinkRequest_LinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinkId", ID: &i_LinkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateLinkRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateLinkRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateLinkRequest_Bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bandwidth", ID: &iBandwidth, Members: &mBandwidth, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkRequest_Provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Provider", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateLinkResponse_Link = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Link", ID: &iLink, Members: &mLink, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkResourceMetadataRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateNetworkResourceMetadataRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateNetworkResourceMetadataRequest_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_NetworkResourceMetadataMap, Members: &m_NetworkResourceMetadataMap, Type: smithy.ShapeTypeMap})
+var sUpdateNetworkResourceMetadataResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUpdateNetworkResourceMetadataResponse_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_NetworkResourceMetadataMap, Members: &m_NetworkResourceMetadataMap, Type: smithy.ShapeTypeMap})
+var sUpdateSiteRequest_GlobalNetworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GlobalNetworkId", ID: &i_GlobalNetworkId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateSiteRequest_SiteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SiteId", ID: &i_SiteId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateSiteRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ConstrainedString, Type: smithy.ShapeTypeString})
+var sUpdateSiteRequest_Location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Location", ID: &iLocation, Members: &mLocation, Traits: &t101, Type: smithy.ShapeTypeStructure})
+var sUpdateSiteResponse_Site = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Site", ID: &iSite, Members: &mSite, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcAttachmentRequest_AttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachmentId", ID: &i_AttachmentId, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateVpcAttachmentRequest_AddSubnetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddSubnetArns", ID: &i_SubnetArnList, Members: &m_SubnetArnList, Type: smithy.ShapeTypeList})
+var sUpdateVpcAttachmentRequest_RemoveSubnetArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveSubnetArns", ID: &i_SubnetArnList, Members: &m_SubnetArnList, Type: smithy.ShapeTypeList})
+var sUpdateVpcAttachmentRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &iVpcOptions, Members: &mVpcOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcAttachmentResponse_VpcAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcAttachment", ID: &iVpcAttachment, Members: &mVpcAttachment, Type: smithy.ShapeTypeStructure})
+
+var AcceptAttachment = &sAcceptAttachment
+
+var AssociateConnectPeer = &sAssociateConnectPeer
+
+var AssociateCustomerGateway = &sAssociateCustomerGateway
+
+var AssociateLink = &sAssociateLink
+
+var AssociateTransitGatewayConnectPeer = &sAssociateTransitGatewayConnectPeer
+
+var CreateConnectAttachment = &sCreateConnectAttachment
+
+var CreateConnection = &sCreateConnection
+
+var CreateConnectPeer = &sCreateConnectPeer
+
+var CreateCoreNetwork = &sCreateCoreNetwork
+
+var CreateCoreNetworkPrefixListAssociation = &sCreateCoreNetworkPrefixListAssociation
+
+var CreateDevice = &sCreateDevice
+
+var CreateDirectConnectGatewayAttachment = &sCreateDirectConnectGatewayAttachment
+
+var CreateGlobalNetwork = &sCreateGlobalNetwork
+
+var CreateLink = &sCreateLink
+
+var CreateSite = &sCreateSite
+
+var CreateSiteToSiteVpnAttachment = &sCreateSiteToSiteVpnAttachment
+
+var CreateTransitGatewayPeering = &sCreateTransitGatewayPeering
+
+var CreateTransitGatewayRouteTableAttachment = &sCreateTransitGatewayRouteTableAttachment
+
+var CreateVpcAttachment = &sCreateVpcAttachment
+
+var DeleteAttachment = &sDeleteAttachment
+
+var DeleteConnection = &sDeleteConnection
+
+var DeleteConnectPeer = &sDeleteConnectPeer
+
+var DeleteCoreNetwork = &sDeleteCoreNetwork
+
+var DeleteCoreNetworkPolicyVersion = &sDeleteCoreNetworkPolicyVersion
+
+var DeleteCoreNetworkPrefixListAssociation = &sDeleteCoreNetworkPrefixListAssociation
+
+var DeleteDevice = &sDeleteDevice
+
+var DeleteGlobalNetwork = &sDeleteGlobalNetwork
+
+var DeleteLink = &sDeleteLink
+
+var DeletePeering = &sDeletePeering
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteSite = &sDeleteSite
+
+var DeregisterTransitGateway = &sDeregisterTransitGateway
+
+var DescribeGlobalNetworks = &sDescribeGlobalNetworks
+
+var DisassociateConnectPeer = &sDisassociateConnectPeer
+
+var DisassociateCustomerGateway = &sDisassociateCustomerGateway
+
+var DisassociateLink = &sDisassociateLink
+
+var DisassociateTransitGatewayConnectPeer = &sDisassociateTransitGatewayConnectPeer
+
+var ExecuteCoreNetworkChangeSet = &sExecuteCoreNetworkChangeSet
+
+var GetConnectAttachment = &sGetConnectAttachment
+
+var GetConnections = &sGetConnections
+
+var GetConnectPeer = &sGetConnectPeer
+
+var GetConnectPeerAssociations = &sGetConnectPeerAssociations
+
+var GetCoreNetwork = &sGetCoreNetwork
+
+var GetCoreNetworkChangeEvents = &sGetCoreNetworkChangeEvents
+
+var GetCoreNetworkChangeSet = &sGetCoreNetworkChangeSet
+
+var GetCoreNetworkPolicy = &sGetCoreNetworkPolicy
+
+var GetCustomerGatewayAssociations = &sGetCustomerGatewayAssociations
+
+var GetDevices = &sGetDevices
+
+var GetDirectConnectGatewayAttachment = &sGetDirectConnectGatewayAttachment
+
+var GetLinkAssociations = &sGetLinkAssociations
+
+var GetLinks = &sGetLinks
+
+var GetNetworkResourceCounts = &sGetNetworkResourceCounts
+
+var GetNetworkResourceRelationships = &sGetNetworkResourceRelationships
+
+var GetNetworkResources = &sGetNetworkResources
+
+var GetNetworkRoutes = &sGetNetworkRoutes
+
+var GetNetworkTelemetry = &sGetNetworkTelemetry
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var GetRouteAnalysis = &sGetRouteAnalysis
+
+var GetSites = &sGetSites
+
+var GetSiteToSiteVpnAttachment = &sGetSiteToSiteVpnAttachment
+
+var GetTransitGatewayConnectPeerAssociations = &sGetTransitGatewayConnectPeerAssociations
+
+var GetTransitGatewayPeering = &sGetTransitGatewayPeering
+
+var GetTransitGatewayRegistrations = &sGetTransitGatewayRegistrations
+
+var GetTransitGatewayRouteTableAttachment = &sGetTransitGatewayRouteTableAttachment
+
+var GetVpcAttachment = &sGetVpcAttachment
+
+var ListAttachmentNatConfigurations = &sListAttachmentNatConfigurations
+
+var ListAttachmentRoutingPolicyAssociations = &sListAttachmentRoutingPolicyAssociations
+
+var ListAttachments = &sListAttachments
+
+var ListConnectPeers = &sListConnectPeers
+
+var ListCoreNetworkPolicyVersions = &sListCoreNetworkPolicyVersions
+
+var ListCoreNetworkPrefixListAssociations = &sListCoreNetworkPrefixListAssociations
+
+var ListCoreNetworkRoutingInformation = &sListCoreNetworkRoutingInformation
+
+var ListCoreNetworks = &sListCoreNetworks
+
+var ListOrganizationServiceAccessStatus = &sListOrganizationServiceAccessStatus
+
+var ListPeerings = &sListPeerings
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutAttachmentRoutingPolicyLabel = &sPutAttachmentRoutingPolicyLabel
+
+var PutCoreNetworkPolicy = &sPutCoreNetworkPolicy
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var RegisterTransitGateway = &sRegisterTransitGateway
+
+var RejectAttachment = &sRejectAttachment
+
+var RemoveAttachmentRoutingPolicyLabel = &sRemoveAttachmentRoutingPolicyLabel
+
+var RestoreCoreNetworkPolicyVersion = &sRestoreCoreNetworkPolicyVersion
+
+var StartOrganizationServiceAccessUpdate = &sStartOrganizationServiceAccessUpdate
+
+var StartRouteAnalysis = &sStartRouteAnalysis
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAttachmentNatConfiguration = &sUpdateAttachmentNatConfiguration
+
+var UpdateConnection = &sUpdateConnection
+
+var UpdateCoreNetwork = &sUpdateCoreNetwork
+
+var UpdateDevice = &sUpdateDevice
+
+var UpdateDirectConnectGatewayAttachment = &sUpdateDirectConnectGatewayAttachment
+
+var UpdateGlobalNetwork = &sUpdateGlobalNetwork
+
+var UpdateLink = &sUpdateLink
+
+var UpdateNetworkResourceMetadata = &sUpdateNetworkResourceMetadata
+
+var UpdateSite = &sUpdateSite
+
+var UpdateVpcAttachment = &sUpdateVpcAttachment
+
+var _NetworkManager = &s_NetworkManager
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var AccountStatus = &sAccountStatus
+var AccountStatus_AccountId = &sAccountStatus_AccountId
+var AccountStatus_SLRDeploymentStatus = &sAccountStatus_SLRDeploymentStatus
+
+var _AccountStatusList = &s_AccountStatusList
+var _AccountStatusList_member = &s_AccountStatusList_member
+
+var _Action = &s_Action
+
+var Attachment = &sAttachment
+var Attachment_CoreNetworkId = &sAttachment_CoreNetworkId
+var Attachment_CoreNetworkArn = &sAttachment_CoreNetworkArn
+var Attachment_AttachmentId = &sAttachment_AttachmentId
+var Attachment_OwnerAccountId = &sAttachment_OwnerAccountId
+var Attachment_AttachmentType = &sAttachment_AttachmentType
+var Attachment_State = &sAttachment_State
+var Attachment_EdgeLocation = &sAttachment_EdgeLocation
+var Attachment_EdgeLocations = &sAttachment_EdgeLocations
+var Attachment_ResourceArn = &sAttachment_ResourceArn
+var Attachment_AttachmentPolicyRuleNumber = &sAttachment_AttachmentPolicyRuleNumber
+var Attachment_SegmentName = &sAttachment_SegmentName
+var Attachment_NetworkFunctionGroupName = &sAttachment_NetworkFunctionGroupName
+var Attachment_NatGatewaySupport = &sAttachment_NatGatewaySupport
+var Attachment_NatSystemRouteSupport = &sAttachment_NatSystemRouteSupport
+var Attachment_Tags = &sAttachment_Tags
+var Attachment_ProposedSegmentChange = &sAttachment_ProposedSegmentChange
+var Attachment_ProposedNetworkFunctionGroupChange = &sAttachment_ProposedNetworkFunctionGroupChange
+var Attachment_CreatedAt = &sAttachment_CreatedAt
+var Attachment_UpdatedAt = &sAttachment_UpdatedAt
+var Attachment_LastModificationErrors = &sAttachment_LastModificationErrors
+
+var AttachmentError = &sAttachmentError
+var AttachmentError_Code = &sAttachmentError_Code
+var AttachmentError_Message = &sAttachmentError_Message
+var AttachmentError_ResourceArn = &sAttachmentError_ResourceArn
+var AttachmentError_RequestId = &sAttachmentError_RequestId
+
+var AttachmentErrorCode = &sAttachmentErrorCode
+var AttachmentErrorCode_VPC_NOT_FOUND = &sAttachmentErrorCode_VPC_NOT_FOUND
+var AttachmentErrorCode_SUBNET_NOT_FOUND = &sAttachmentErrorCode_SUBNET_NOT_FOUND
+var AttachmentErrorCode_SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE = &sAttachmentErrorCode_SUBNET_DUPLICATED_IN_AVAILABILITY_ZONE
+var AttachmentErrorCode_SUBNET_NO_FREE_ADDRESSES = &sAttachmentErrorCode_SUBNET_NO_FREE_ADDRESSES
+var AttachmentErrorCode_SUBNET_UNSUPPORTED_AVAILABILITY_ZONE = &sAttachmentErrorCode_SUBNET_UNSUPPORTED_AVAILABILITY_ZONE
+var AttachmentErrorCode_SUBNET_NO_IPV6_CIDRS = &sAttachmentErrorCode_SUBNET_NO_IPV6_CIDRS
+var AttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE = &sAttachmentErrorCode_SECURITY_GROUP_REFERENCING_UNSUPPORTED_AVAILABILITY_ZONE
+var AttachmentErrorCode_VPN_CONNECTION_NOT_FOUND = &sAttachmentErrorCode_VPN_CONNECTION_NOT_FOUND
+var AttachmentErrorCode_MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED = &sAttachmentErrorCode_MAXIMUM_NO_ENCAP_LIMIT_EXCEEDED
+var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NOT_FOUND = &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NOT_FOUND
+var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS = &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_EXISTING_ATTACHMENTS
+var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF = &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_NO_PRIVATE_VIF
+var AttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS = &sAttachmentErrorCode_VPN_EXISTING_ASSOCIATIONS
+var AttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED = &sAttachmentErrorCode_VPN_STATIC_ROUTES_NAT_UNSUPPORTED
+var AttachmentErrorCode_VPC_UNSUPPORTED_FEATURES = &sAttachmentErrorCode_VPC_UNSUPPORTED_FEATURES
+var AttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS = &sAttachmentErrorCode_DIRECT_CONNECT_GATEWAY_TOPOLOGY_RESTRICTIONS
+var AttachmentErrorCode_CREATION_FAILED = &sAttachmentErrorCode_CREATION_FAILED
+var AttachmentErrorCode_UPDATE_FAILED = &sAttachmentErrorCode_UPDATE_FAILED
+var AttachmentErrorCode_DELETION_FAILED = &sAttachmentErrorCode_DELETION_FAILED
+
+var _AttachmentErrorList = &s_AttachmentErrorList
+var _AttachmentErrorList_member = &s_AttachmentErrorList_member
+
+var _AttachmentId = &s_AttachmentId
+
+var _AttachmentList = &s_AttachmentList
+var _AttachmentList_member = &s_AttachmentList_member
+
+var AttachmentNatConfiguration = &sAttachmentNatConfiguration
+var AttachmentNatConfiguration_AttachmentId = &sAttachmentNatConfiguration_AttachmentId
+var AttachmentNatConfiguration_NatGatewaySupport = &sAttachmentNatConfiguration_NatGatewaySupport
+var AttachmentNatConfiguration_NatSystemRouteSupport = &sAttachmentNatConfiguration_NatSystemRouteSupport
+var AttachmentNatConfiguration_NatGatewayRules = &sAttachmentNatConfiguration_NatGatewayRules
+
+var _AttachmentNatConfigurationList = &s_AttachmentNatConfigurationList
+var _AttachmentNatConfigurationList_member = &s_AttachmentNatConfigurationList_member
+
+var _AttachmentRoutingPolicyAssociationsList = &s_AttachmentRoutingPolicyAssociationsList
+var _AttachmentRoutingPolicyAssociationsList_member = &s_AttachmentRoutingPolicyAssociationsList_member
+
+var AttachmentRoutingPolicyAssociationSummary = &sAttachmentRoutingPolicyAssociationSummary
+var AttachmentRoutingPolicyAssociationSummary_AttachmentId = &sAttachmentRoutingPolicyAssociationSummary_AttachmentId
+var AttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies = &sAttachmentRoutingPolicyAssociationSummary_PendingRoutingPolicies
+var AttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies = &sAttachmentRoutingPolicyAssociationSummary_AssociatedRoutingPolicies
+var AttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel = &sAttachmentRoutingPolicyAssociationSummary_RoutingPolicyLabel
+
+var AttachmentState = &sAttachmentState
+var AttachmentState_REJECTED = &sAttachmentState_REJECTED
+var AttachmentState_PENDING_ATTACHMENT_ACCEPTANCE = &sAttachmentState_PENDING_ATTACHMENT_ACCEPTANCE
+var AttachmentState_CREATING = &sAttachmentState_CREATING
+var AttachmentState_FAILED = &sAttachmentState_FAILED
+var AttachmentState_AVAILABLE = &sAttachmentState_AVAILABLE
+var AttachmentState_UPDATING = &sAttachmentState_UPDATING
+var AttachmentState_PENDING_NETWORK_UPDATE = &sAttachmentState_PENDING_NETWORK_UPDATE
+var AttachmentState_PENDING_TAG_ACCEPTANCE = &sAttachmentState_PENDING_TAG_ACCEPTANCE
+var AttachmentState_DELETING = &sAttachmentState_DELETING
+
+var AttachmentType = &sAttachmentType
+var AttachmentType_CONNECT = &sAttachmentType_CONNECT
+var AttachmentType_SITE_TO_SITE_VPN = &sAttachmentType_SITE_TO_SITE_VPN
+var AttachmentType_VPC = &sAttachmentType_VPC
+var AttachmentType_DIRECT_CONNECT_GATEWAY = &sAttachmentType_DIRECT_CONNECT_GATEWAY
+var AttachmentType_TRANSIT_GATEWAY_ROUTE_TABLE = &sAttachmentType_TRANSIT_GATEWAY_ROUTE_TABLE
+
+var _AWSAccountId = &s_AWSAccountId
+
+var AWSLocation = &sAWSLocation
+var AWSLocation_Zone = &sAWSLocation_Zone
+var AWSLocation_SubnetArn = &sAWSLocation_SubnetArn
+
+var Bandwidth = &sBandwidth
+var Bandwidth_UploadSpeed = &sBandwidth_UploadSpeed
+var Bandwidth_DownloadSpeed = &sBandwidth_DownloadSpeed
+
+var BgpOptions = &sBgpOptions
+var BgpOptions_PeerAsn = &sBgpOptions_PeerAsn
+
+var _Boolean = &s_Boolean
+
+var _BoxedBoolean = &s_BoxedBoolean
+
+var ChangeAction = &sChangeAction
+var ChangeAction_ADD = &sChangeAction_ADD
+var ChangeAction_MODIFY = &sChangeAction_MODIFY
+var ChangeAction_REMOVE = &sChangeAction_REMOVE
+
+var ChangeSetState = &sChangeSetState
+var ChangeSetState_PENDING_GENERATION = &sChangeSetState_PENDING_GENERATION
+var ChangeSetState_FAILED_GENERATION = &sChangeSetState_FAILED_GENERATION
+var ChangeSetState_READY_TO_EXECUTE = &sChangeSetState_READY_TO_EXECUTE
+var ChangeSetState_EXECUTING = &sChangeSetState_EXECUTING
+var ChangeSetState_EXECUTION_SUCCEEDED = &sChangeSetState_EXECUTION_SUCCEEDED
+var ChangeSetState_OUT_OF_DATE = &sChangeSetState_OUT_OF_DATE
+
+var ChangeStatus = &sChangeStatus
+var ChangeStatus_NOT_STARTED = &sChangeStatus_NOT_STARTED
+var ChangeStatus_IN_PROGRESS = &sChangeStatus_IN_PROGRESS
+var ChangeStatus_COMPLETE = &sChangeStatus_COMPLETE
+var ChangeStatus_FAILED = &sChangeStatus_FAILED
+
+var ChangeType = &sChangeType
+var ChangeType_CORE_NETWORK_SEGMENT = &sChangeType_CORE_NETWORK_SEGMENT
+var ChangeType_NETWORK_FUNCTION_GROUP = &sChangeType_NETWORK_FUNCTION_GROUP
+var ChangeType_CORE_NETWORK_EDGE = &sChangeType_CORE_NETWORK_EDGE
+var ChangeType_ATTACHMENT_MAPPING = &sChangeType_ATTACHMENT_MAPPING
+var ChangeType_ATTACHMENT_ROUTE_PROPAGATION = &sChangeType_ATTACHMENT_ROUTE_PROPAGATION
+var ChangeType_ATTACHMENT_ROUTE_STATIC = &sChangeType_ATTACHMENT_ROUTE_STATIC
+var ChangeType_ROUTING_POLICY = &sChangeType_ROUTING_POLICY
+var ChangeType_ROUTING_POLICY_SEGMENT_ASSOCIATION = &sChangeType_ROUTING_POLICY_SEGMENT_ASSOCIATION
+var ChangeType_ROUTING_POLICY_EDGE_ASSOCIATION = &sChangeType_ROUTING_POLICY_EDGE_ASSOCIATION
+var ChangeType_ROUTING_POLICY_ATTACHMENT_ASSOCIATION = &sChangeType_ROUTING_POLICY_ATTACHMENT_ASSOCIATION
+var ChangeType_CORE_NETWORK_CONFIGURATION = &sChangeType_CORE_NETWORK_CONFIGURATION
+var ChangeType_SEGMENTS_CONFIGURATION = &sChangeType_SEGMENTS_CONFIGURATION
+var ChangeType_SEGMENT_ACTIONS_CONFIGURATION = &sChangeType_SEGMENT_ACTIONS_CONFIGURATION
+var ChangeType_ATTACHMENT_POLICIES_CONFIGURATION = &sChangeType_ATTACHMENT_POLICIES_CONFIGURATION
+
+var _ClientToken = &s_ClientToken
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_ResourceId = &sConflictException_ResourceId
+var ConflictException_ResourceType = &sConflictException_ResourceType
+
+var ConnectAttachment = &sConnectAttachment
+var ConnectAttachment_Attachment = &sConnectAttachment_Attachment
+var ConnectAttachment_TransportAttachmentId = &sConnectAttachment_TransportAttachmentId
+var ConnectAttachment_Options = &sConnectAttachment_Options
+
+var ConnectAttachmentOptions = &sConnectAttachmentOptions
+var ConnectAttachmentOptions_Protocol = &sConnectAttachmentOptions_Protocol
+
+var Connection = &sConnection
+var Connection_ConnectionId = &sConnection_ConnectionId
+var Connection_ConnectionArn = &sConnection_ConnectionArn
+var Connection_GlobalNetworkId = &sConnection_GlobalNetworkId
+var Connection_DeviceId = &sConnection_DeviceId
+var Connection_ConnectedDeviceId = &sConnection_ConnectedDeviceId
+var Connection_LinkId = &sConnection_LinkId
+var Connection_ConnectedLinkId = &sConnection_ConnectedLinkId
+var Connection_Description = &sConnection_Description
+var Connection_CreatedAt = &sConnection_CreatedAt
+var Connection_State = &sConnection_State
+var Connection_Tags = &sConnection_Tags
+
+var _ConnectionArn = &s_ConnectionArn
+
+var ConnectionHealth = &sConnectionHealth
+var ConnectionHealth_Type = &sConnectionHealth_Type
+var ConnectionHealth_Status = &sConnectionHealth_Status
+var ConnectionHealth_Timestamp = &sConnectionHealth_Timestamp
+
+var _ConnectionId = &s_ConnectionId
+
+var _ConnectionIdList = &s_ConnectionIdList
+var _ConnectionIdList_member = &s_ConnectionIdList_member
+
+var _ConnectionList = &s_ConnectionList
+var _ConnectionList_member = &s_ConnectionList_member
+
+var ConnectionState = &sConnectionState
+var ConnectionState_pending = &sConnectionState_pending
+var ConnectionState_available = &sConnectionState_available
+var ConnectionState_deleting = &sConnectionState_deleting
+var ConnectionState_updating = &sConnectionState_updating
+
+var ConnectionStatus = &sConnectionStatus
+var ConnectionStatus_UP = &sConnectionStatus_UP
+var ConnectionStatus_DOWN = &sConnectionStatus_DOWN
+
+var ConnectionType = &sConnectionType
+var ConnectionType_BGP = &sConnectionType_BGP
+var ConnectionType_IPSEC = &sConnectionType_IPSEC
+
+var ConnectPeer = &sConnectPeer
+var ConnectPeer_CoreNetworkId = &sConnectPeer_CoreNetworkId
+var ConnectPeer_ConnectAttachmentId = &sConnectPeer_ConnectAttachmentId
+var ConnectPeer_ConnectPeerId = &sConnectPeer_ConnectPeerId
+var ConnectPeer_EdgeLocation = &sConnectPeer_EdgeLocation
+var ConnectPeer_State = &sConnectPeer_State
+var ConnectPeer_CreatedAt = &sConnectPeer_CreatedAt
+var ConnectPeer_Configuration = &sConnectPeer_Configuration
+var ConnectPeer_Tags = &sConnectPeer_Tags
+var ConnectPeer_SubnetArn = &sConnectPeer_SubnetArn
+var ConnectPeer_LastModificationErrors = &sConnectPeer_LastModificationErrors
+
+var ConnectPeerAssociation = &sConnectPeerAssociation
+var ConnectPeerAssociation_ConnectPeerId = &sConnectPeerAssociation_ConnectPeerId
+var ConnectPeerAssociation_GlobalNetworkId = &sConnectPeerAssociation_GlobalNetworkId
+var ConnectPeerAssociation_DeviceId = &sConnectPeerAssociation_DeviceId
+var ConnectPeerAssociation_LinkId = &sConnectPeerAssociation_LinkId
+var ConnectPeerAssociation_State = &sConnectPeerAssociation_State
+
+var _ConnectPeerAssociationList = &s_ConnectPeerAssociationList
+var _ConnectPeerAssociationList_member = &s_ConnectPeerAssociationList_member
+
+var ConnectPeerAssociationState = &sConnectPeerAssociationState
+var ConnectPeerAssociationState_pending = &sConnectPeerAssociationState_pending
+var ConnectPeerAssociationState_available = &sConnectPeerAssociationState_available
+var ConnectPeerAssociationState_deleting = &sConnectPeerAssociationState_deleting
+var ConnectPeerAssociationState_deleted = &sConnectPeerAssociationState_deleted
+
+var ConnectPeerBgpConfiguration = &sConnectPeerBgpConfiguration
+var ConnectPeerBgpConfiguration_CoreNetworkAsn = &sConnectPeerBgpConfiguration_CoreNetworkAsn
+var ConnectPeerBgpConfiguration_PeerAsn = &sConnectPeerBgpConfiguration_PeerAsn
+var ConnectPeerBgpConfiguration_CoreNetworkAddress = &sConnectPeerBgpConfiguration_CoreNetworkAddress
+var ConnectPeerBgpConfiguration_PeerAddress = &sConnectPeerBgpConfiguration_PeerAddress
+
+var _ConnectPeerBgpConfigurationList = &s_ConnectPeerBgpConfigurationList
+var _ConnectPeerBgpConfigurationList_member = &s_ConnectPeerBgpConfigurationList_member
+
+var ConnectPeerConfiguration = &sConnectPeerConfiguration
+var ConnectPeerConfiguration_CoreNetworkAddress = &sConnectPeerConfiguration_CoreNetworkAddress
+var ConnectPeerConfiguration_PeerAddress = &sConnectPeerConfiguration_PeerAddress
+var ConnectPeerConfiguration_InsideCidrBlocks = &sConnectPeerConfiguration_InsideCidrBlocks
+var ConnectPeerConfiguration_Protocol = &sConnectPeerConfiguration_Protocol
+var ConnectPeerConfiguration_BgpConfigurations = &sConnectPeerConfiguration_BgpConfigurations
+
+var ConnectPeerError = &sConnectPeerError
+var ConnectPeerError_Code = &sConnectPeerError_Code
+var ConnectPeerError_Message = &sConnectPeerError_Message
+var ConnectPeerError_ResourceArn = &sConnectPeerError_ResourceArn
+var ConnectPeerError_RequestId = &sConnectPeerError_RequestId
+
+var ConnectPeerErrorCode = &sConnectPeerErrorCode
+var ConnectPeerErrorCode_EDGE_LOCATION_NO_FREE_IPS = &sConnectPeerErrorCode_EDGE_LOCATION_NO_FREE_IPS
+var ConnectPeerErrorCode_EDGE_LOCATION_PEER_DUPLICATE = &sConnectPeerErrorCode_EDGE_LOCATION_PEER_DUPLICATE
+var ConnectPeerErrorCode_SUBNET_NOT_FOUND = &sConnectPeerErrorCode_SUBNET_NOT_FOUND
+var ConnectPeerErrorCode_IP_OUTSIDE_SUBNET_CIDR_RANGE = &sConnectPeerErrorCode_IP_OUTSIDE_SUBNET_CIDR_RANGE
+var ConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK = &sConnectPeerErrorCode_INVALID_INSIDE_CIDR_BLOCK
+var ConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK = &sConnectPeerErrorCode_NO_ASSOCIATED_CIDR_BLOCK
+var ConnectPeerErrorCode_CREATION_FAILED = &sConnectPeerErrorCode_CREATION_FAILED
+var ConnectPeerErrorCode_DELETION_FAILED = &sConnectPeerErrorCode_DELETION_FAILED
+
+var _ConnectPeerErrorList = &s_ConnectPeerErrorList
+var _ConnectPeerErrorList_member = &s_ConnectPeerErrorList_member
+
+var _ConnectPeerId = &s_ConnectPeerId
+
+var _ConnectPeerIdList = &s_ConnectPeerIdList
+var _ConnectPeerIdList_member = &s_ConnectPeerIdList_member
+
+var ConnectPeerState = &sConnectPeerState
+var ConnectPeerState_CREATING = &sConnectPeerState_CREATING
+var ConnectPeerState_FAILED = &sConnectPeerState_FAILED
+var ConnectPeerState_AVAILABLE = &sConnectPeerState_AVAILABLE
+var ConnectPeerState_DELETING = &sConnectPeerState_DELETING
+
+var ConnectPeerSummary = &sConnectPeerSummary
+var ConnectPeerSummary_CoreNetworkId = &sConnectPeerSummary_CoreNetworkId
+var ConnectPeerSummary_ConnectAttachmentId = &sConnectPeerSummary_ConnectAttachmentId
+var ConnectPeerSummary_ConnectPeerId = &sConnectPeerSummary_ConnectPeerId
+var ConnectPeerSummary_EdgeLocation = &sConnectPeerSummary_EdgeLocation
+var ConnectPeerSummary_ConnectPeerState = &sConnectPeerSummary_ConnectPeerState
+var ConnectPeerSummary_CreatedAt = &sConnectPeerSummary_CreatedAt
+var ConnectPeerSummary_Tags = &sConnectPeerSummary_Tags
+var ConnectPeerSummary_SubnetArn = &sConnectPeerSummary_SubnetArn
+
+var _ConnectPeerSummaryList = &s_ConnectPeerSummaryList
+var _ConnectPeerSummaryList_member = &s_ConnectPeerSummaryList_member
+
+var _ConstrainedString = &s_ConstrainedString
+
+var _ConstrainedStringList = &s_ConstrainedStringList
+var _ConstrainedStringList_member = &s_ConstrainedStringList_member
+
+var CoreNetwork = &sCoreNetwork
+var CoreNetwork_GlobalNetworkId = &sCoreNetwork_GlobalNetworkId
+var CoreNetwork_CoreNetworkId = &sCoreNetwork_CoreNetworkId
+var CoreNetwork_CoreNetworkArn = &sCoreNetwork_CoreNetworkArn
+var CoreNetwork_Description = &sCoreNetwork_Description
+var CoreNetwork_CreatedAt = &sCoreNetwork_CreatedAt
+var CoreNetwork_State = &sCoreNetwork_State
+var CoreNetwork_Segments = &sCoreNetwork_Segments
+var CoreNetwork_NetworkFunctionGroups = &sCoreNetwork_NetworkFunctionGroups
+var CoreNetwork_Edges = &sCoreNetwork_Edges
+var CoreNetwork_Tags = &sCoreNetwork_Tags
+
+var _CoreNetworkArn = &s_CoreNetworkArn
+
+var CoreNetworkChange = &sCoreNetworkChange
+var CoreNetworkChange_Type = &sCoreNetworkChange_Type
+var CoreNetworkChange_Action = &sCoreNetworkChange_Action
+var CoreNetworkChange_Identifier = &sCoreNetworkChange_Identifier
+var CoreNetworkChange_PreviousValues = &sCoreNetworkChange_PreviousValues
+var CoreNetworkChange_NewValues = &sCoreNetworkChange_NewValues
+var CoreNetworkChange_IdentifierPath = &sCoreNetworkChange_IdentifierPath
+
+var CoreNetworkChangeEvent = &sCoreNetworkChangeEvent
+var CoreNetworkChangeEvent_Type = &sCoreNetworkChangeEvent_Type
+var CoreNetworkChangeEvent_Action = &sCoreNetworkChangeEvent_Action
+var CoreNetworkChangeEvent_IdentifierPath = &sCoreNetworkChangeEvent_IdentifierPath
+var CoreNetworkChangeEvent_EventTime = &sCoreNetworkChangeEvent_EventTime
+var CoreNetworkChangeEvent_Status = &sCoreNetworkChangeEvent_Status
+var CoreNetworkChangeEvent_Values = &sCoreNetworkChangeEvent_Values
+
+var _CoreNetworkChangeEventList = &s_CoreNetworkChangeEventList
+var _CoreNetworkChangeEventList_member = &s_CoreNetworkChangeEventList_member
+
+var CoreNetworkChangeEventValues = &sCoreNetworkChangeEventValues
+var CoreNetworkChangeEventValues_EdgeLocation = &sCoreNetworkChangeEventValues_EdgeLocation
+var CoreNetworkChangeEventValues_PeerEdgeLocation = &sCoreNetworkChangeEventValues_PeerEdgeLocation
+var CoreNetworkChangeEventValues_RoutingPolicyDirection = &sCoreNetworkChangeEventValues_RoutingPolicyDirection
+var CoreNetworkChangeEventValues_SegmentName = &sCoreNetworkChangeEventValues_SegmentName
+var CoreNetworkChangeEventValues_NetworkFunctionGroupName = &sCoreNetworkChangeEventValues_NetworkFunctionGroupName
+var CoreNetworkChangeEventValues_AttachmentId = &sCoreNetworkChangeEventValues_AttachmentId
+var CoreNetworkChangeEventValues_Cidr = &sCoreNetworkChangeEventValues_Cidr
+var CoreNetworkChangeEventValues_RoutingPolicyAssociationDetails = &sCoreNetworkChangeEventValues_RoutingPolicyAssociationDetails
+
+var _CoreNetworkChangeList = &s_CoreNetworkChangeList
+var _CoreNetworkChangeList_member = &s_CoreNetworkChangeList_member
+
+var CoreNetworkChangeValues = &sCoreNetworkChangeValues
+var CoreNetworkChangeValues_SegmentName = &sCoreNetworkChangeValues_SegmentName
+var CoreNetworkChangeValues_NetworkFunctionGroupName = &sCoreNetworkChangeValues_NetworkFunctionGroupName
+var CoreNetworkChangeValues_EdgeLocations = &sCoreNetworkChangeValues_EdgeLocations
+var CoreNetworkChangeValues_Asn = &sCoreNetworkChangeValues_Asn
+var CoreNetworkChangeValues_Cidr = &sCoreNetworkChangeValues_Cidr
+var CoreNetworkChangeValues_DestinationIdentifier = &sCoreNetworkChangeValues_DestinationIdentifier
+var CoreNetworkChangeValues_InsideCidrBlocks = &sCoreNetworkChangeValues_InsideCidrBlocks
+var CoreNetworkChangeValues_SharedSegments = &sCoreNetworkChangeValues_SharedSegments
+var CoreNetworkChangeValues_ServiceInsertionActions = &sCoreNetworkChangeValues_ServiceInsertionActions
+var CoreNetworkChangeValues_VpnEcmpSupport = &sCoreNetworkChangeValues_VpnEcmpSupport
+var CoreNetworkChangeValues_DnsSupport = &sCoreNetworkChangeValues_DnsSupport
+var CoreNetworkChangeValues_SecurityGroupReferencingSupport = &sCoreNetworkChangeValues_SecurityGroupReferencingSupport
+var CoreNetworkChangeValues_RoutingPolicyDirection = &sCoreNetworkChangeValues_RoutingPolicyDirection
+var CoreNetworkChangeValues_RoutingPolicy = &sCoreNetworkChangeValues_RoutingPolicy
+var CoreNetworkChangeValues_PeerEdgeLocations = &sCoreNetworkChangeValues_PeerEdgeLocations
+var CoreNetworkChangeValues_AttachmentId = &sCoreNetworkChangeValues_AttachmentId
+var CoreNetworkChangeValues_RoutingPolicyAssociationDetails = &sCoreNetworkChangeValues_RoutingPolicyAssociationDetails
+
+var CoreNetworkEdge = &sCoreNetworkEdge
+var CoreNetworkEdge_EdgeLocation = &sCoreNetworkEdge_EdgeLocation
+var CoreNetworkEdge_Asn = &sCoreNetworkEdge_Asn
+var CoreNetworkEdge_InsideCidrBlocks = &sCoreNetworkEdge_InsideCidrBlocks
+
+var _CoreNetworkEdgeList = &s_CoreNetworkEdgeList
+var _CoreNetworkEdgeList_member = &s_CoreNetworkEdgeList_member
+
+var _CoreNetworkId = &s_CoreNetworkId
+
+var CoreNetworkNetworkFunctionGroup = &sCoreNetworkNetworkFunctionGroup
+var CoreNetworkNetworkFunctionGroup_Name = &sCoreNetworkNetworkFunctionGroup_Name
+var CoreNetworkNetworkFunctionGroup_EdgeLocations = &sCoreNetworkNetworkFunctionGroup_EdgeLocations
+var CoreNetworkNetworkFunctionGroup_Segments = &sCoreNetworkNetworkFunctionGroup_Segments
+
+var CoreNetworkNetworkFunctionGroupIdentifier = &sCoreNetworkNetworkFunctionGroupIdentifier
+var CoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId = &sCoreNetworkNetworkFunctionGroupIdentifier_CoreNetworkId
+var CoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName = &sCoreNetworkNetworkFunctionGroupIdentifier_NetworkFunctionGroupName
+var CoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation = &sCoreNetworkNetworkFunctionGroupIdentifier_EdgeLocation
+
+var _CoreNetworkNetworkFunctionGroupList = &s_CoreNetworkNetworkFunctionGroupList
+var _CoreNetworkNetworkFunctionGroupList_member = &s_CoreNetworkNetworkFunctionGroupList_member
+
+var CoreNetworkPolicy = &sCoreNetworkPolicy
+var CoreNetworkPolicy_CoreNetworkId = &sCoreNetworkPolicy_CoreNetworkId
+var CoreNetworkPolicy_PolicyVersionId = &sCoreNetworkPolicy_PolicyVersionId
+var CoreNetworkPolicy_Alias = &sCoreNetworkPolicy_Alias
+var CoreNetworkPolicy_Description = &sCoreNetworkPolicy_Description
+var CoreNetworkPolicy_CreatedAt = &sCoreNetworkPolicy_CreatedAt
+var CoreNetworkPolicy_ChangeSetState = &sCoreNetworkPolicy_ChangeSetState
+var CoreNetworkPolicy_PolicyErrors = &sCoreNetworkPolicy_PolicyErrors
+var CoreNetworkPolicy_PolicyDocument = &sCoreNetworkPolicy_PolicyDocument
+
+var CoreNetworkPolicyAlias = &sCoreNetworkPolicyAlias
+var CoreNetworkPolicyAlias_LIVE = &sCoreNetworkPolicyAlias_LIVE
+var CoreNetworkPolicyAlias_LATEST = &sCoreNetworkPolicyAlias_LATEST
+
+var _CoreNetworkPolicyDocument = &s_CoreNetworkPolicyDocument
+
+var CoreNetworkPolicyError = &sCoreNetworkPolicyError
+var CoreNetworkPolicyError_ErrorCode = &sCoreNetworkPolicyError_ErrorCode
+var CoreNetworkPolicyError_Message = &sCoreNetworkPolicyError_Message
+var CoreNetworkPolicyError_Path = &sCoreNetworkPolicyError_Path
+
+var _CoreNetworkPolicyErrorList = &s_CoreNetworkPolicyErrorList
+var _CoreNetworkPolicyErrorList_member = &s_CoreNetworkPolicyErrorList_member
+
+var CoreNetworkPolicyException = &sCoreNetworkPolicyException
+var CoreNetworkPolicyException_Message = &sCoreNetworkPolicyException_Message
+var CoreNetworkPolicyException_Errors = &sCoreNetworkPolicyException_Errors
+
+var CoreNetworkPolicyVersion = &sCoreNetworkPolicyVersion
+var CoreNetworkPolicyVersion_CoreNetworkId = &sCoreNetworkPolicyVersion_CoreNetworkId
+var CoreNetworkPolicyVersion_PolicyVersionId = &sCoreNetworkPolicyVersion_PolicyVersionId
+var CoreNetworkPolicyVersion_Alias = &sCoreNetworkPolicyVersion_Alias
+var CoreNetworkPolicyVersion_Description = &sCoreNetworkPolicyVersion_Description
+var CoreNetworkPolicyVersion_CreatedAt = &sCoreNetworkPolicyVersion_CreatedAt
+var CoreNetworkPolicyVersion_ChangeSetState = &sCoreNetworkPolicyVersion_ChangeSetState
+
+var _CoreNetworkPolicyVersionList = &s_CoreNetworkPolicyVersionList
+var _CoreNetworkPolicyVersionList_member = &s_CoreNetworkPolicyVersionList_member
+
+var CoreNetworkRoutingInformation = &sCoreNetworkRoutingInformation
+var CoreNetworkRoutingInformation_Prefix = &sCoreNetworkRoutingInformation_Prefix
+var CoreNetworkRoutingInformation_NextHop = &sCoreNetworkRoutingInformation_NextHop
+var CoreNetworkRoutingInformation_LocalPreference = &sCoreNetworkRoutingInformation_LocalPreference
+var CoreNetworkRoutingInformation_Med = &sCoreNetworkRoutingInformation_Med
+var CoreNetworkRoutingInformation_AsPath = &sCoreNetworkRoutingInformation_AsPath
+var CoreNetworkRoutingInformation_Communities = &sCoreNetworkRoutingInformation_Communities
+
+var _CoreNetworkRoutingInformationList = &s_CoreNetworkRoutingInformationList
+var _CoreNetworkRoutingInformationList_member = &s_CoreNetworkRoutingInformationList_member
+
+var CoreNetworkSegment = &sCoreNetworkSegment
+var CoreNetworkSegment_Name = &sCoreNetworkSegment_Name
+var CoreNetworkSegment_EdgeLocations = &sCoreNetworkSegment_EdgeLocations
+var CoreNetworkSegment_SharedSegments = &sCoreNetworkSegment_SharedSegments
+
+var CoreNetworkSegmentEdgeIdentifier = &sCoreNetworkSegmentEdgeIdentifier
+var CoreNetworkSegmentEdgeIdentifier_CoreNetworkId = &sCoreNetworkSegmentEdgeIdentifier_CoreNetworkId
+var CoreNetworkSegmentEdgeIdentifier_SegmentName = &sCoreNetworkSegmentEdgeIdentifier_SegmentName
+var CoreNetworkSegmentEdgeIdentifier_EdgeLocation = &sCoreNetworkSegmentEdgeIdentifier_EdgeLocation
+
+var _CoreNetworkSegmentList = &s_CoreNetworkSegmentList
+var _CoreNetworkSegmentList_member = &s_CoreNetworkSegmentList_member
+
+var CoreNetworkState = &sCoreNetworkState
+var CoreNetworkState_CREATING = &sCoreNetworkState_CREATING
+var CoreNetworkState_UPDATING = &sCoreNetworkState_UPDATING
+var CoreNetworkState_AVAILABLE = &sCoreNetworkState_AVAILABLE
+var CoreNetworkState_DELETING = &sCoreNetworkState_DELETING
+
+var CoreNetworkSummary = &sCoreNetworkSummary
+var CoreNetworkSummary_CoreNetworkId = &sCoreNetworkSummary_CoreNetworkId
+var CoreNetworkSummary_CoreNetworkArn = &sCoreNetworkSummary_CoreNetworkArn
+var CoreNetworkSummary_GlobalNetworkId = &sCoreNetworkSummary_GlobalNetworkId
+var CoreNetworkSummary_OwnerAccountId = &sCoreNetworkSummary_OwnerAccountId
+var CoreNetworkSummary_State = &sCoreNetworkSummary_State
+var CoreNetworkSummary_Description = &sCoreNetworkSummary_Description
+var CoreNetworkSummary_Tags = &sCoreNetworkSummary_Tags
+
+var _CoreNetworkSummaryList = &s_CoreNetworkSummaryList
+var _CoreNetworkSummaryList_member = &s_CoreNetworkSummaryList_member
+
+var _CustomerGatewayArn = &s_CustomerGatewayArn
+
+var _CustomerGatewayArnList = &s_CustomerGatewayArnList
+var _CustomerGatewayArnList_member = &s_CustomerGatewayArnList_member
+
+var CustomerGatewayAssociation = &sCustomerGatewayAssociation
+var CustomerGatewayAssociation_CustomerGatewayArn = &sCustomerGatewayAssociation_CustomerGatewayArn
+var CustomerGatewayAssociation_GlobalNetworkId = &sCustomerGatewayAssociation_GlobalNetworkId
+var CustomerGatewayAssociation_DeviceId = &sCustomerGatewayAssociation_DeviceId
+var CustomerGatewayAssociation_LinkId = &sCustomerGatewayAssociation_LinkId
+var CustomerGatewayAssociation_State = &sCustomerGatewayAssociation_State
+
+var _CustomerGatewayAssociationList = &s_CustomerGatewayAssociationList
+var _CustomerGatewayAssociationList_member = &s_CustomerGatewayAssociationList_member
+
+var CustomerGatewayAssociationState = &sCustomerGatewayAssociationState
+var CustomerGatewayAssociationState_pending = &sCustomerGatewayAssociationState_pending
+var CustomerGatewayAssociationState_available = &sCustomerGatewayAssociationState_available
+var CustomerGatewayAssociationState_deleting = &sCustomerGatewayAssociationState_deleting
+var CustomerGatewayAssociationState_deleted = &sCustomerGatewayAssociationState_deleted
+
+var _DateTime = &s_DateTime
+
+var Device = &sDevice
+var Device_DeviceId = &sDevice_DeviceId
+var Device_DeviceArn = &sDevice_DeviceArn
+var Device_GlobalNetworkId = &sDevice_GlobalNetworkId
+var Device_AWSLocation = &sDevice_AWSLocation
+var Device_Description = &sDevice_Description
+var Device_Type = &sDevice_Type
+var Device_Vendor = &sDevice_Vendor
+var Device_Model = &sDevice_Model
+var Device_SerialNumber = &sDevice_SerialNumber
+var Device_Location = &sDevice_Location
+var Device_SiteId = &sDevice_SiteId
+var Device_CreatedAt = &sDevice_CreatedAt
+var Device_State = &sDevice_State
+var Device_Tags = &sDevice_Tags
+
+var _DeviceArn = &s_DeviceArn
+
+var _DeviceId = &s_DeviceId
+
+var _DeviceIdList = &s_DeviceIdList
+var _DeviceIdList_member = &s_DeviceIdList_member
+
+var _DeviceList = &s_DeviceList
+var _DeviceList_member = &s_DeviceList_member
+
+var DeviceState = &sDeviceState
+var DeviceState_pending = &sDeviceState_pending
+var DeviceState_available = &sDeviceState_available
+var DeviceState_deleting = &sDeviceState_deleting
+var DeviceState_updating = &sDeviceState_updating
+
+var _DirectConnectGatewayArn = &s_DirectConnectGatewayArn
+
+var DirectConnectGatewayAttachment = &sDirectConnectGatewayAttachment
+var DirectConnectGatewayAttachment_Attachment = &sDirectConnectGatewayAttachment_Attachment
+var DirectConnectGatewayAttachment_DirectConnectGatewayArn = &sDirectConnectGatewayAttachment_DirectConnectGatewayArn
+
+var EdgeOverride = &sEdgeOverride
+var EdgeOverride_EdgeSets = &sEdgeOverride_EdgeSets
+var EdgeOverride_UseEdge = &sEdgeOverride_UseEdge
+
+var _EdgeSet = &s_EdgeSet
+var _EdgeSet_member = &s_EdgeSet_member
+
+var _EdgeSetList = &s_EdgeSetList
+var _EdgeSetList_member = &s_EdgeSetList_member
+
+var _ExceptionContextKey = &s_ExceptionContextKey
+
+var _ExceptionContextMap = &s_ExceptionContextMap
+var _ExceptionContextMap_key = &s_ExceptionContextMap_key
+var _ExceptionContextMap_value = &s_ExceptionContextMap_value
+
+var _ExceptionContextValue = &s_ExceptionContextValue
+
+var _ExternalRegionCode = &s_ExternalRegionCode
+
+var _ExternalRegionCodeList = &s_ExternalRegionCodeList
+var _ExternalRegionCodeList_member = &s_ExternalRegionCodeList_member
+
+var _FilterMap = &s_FilterMap
+var _FilterMap_key = &s_FilterMap_key
+var _FilterMap_value = &s_FilterMap_value
+
+var _FilterName = &s_FilterName
+
+var _FilterValue = &s_FilterValue
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var GlobalNetwork = &sGlobalNetwork
+var GlobalNetwork_GlobalNetworkId = &sGlobalNetwork_GlobalNetworkId
+var GlobalNetwork_GlobalNetworkArn = &sGlobalNetwork_GlobalNetworkArn
+var GlobalNetwork_Description = &sGlobalNetwork_Description
+var GlobalNetwork_CreatedAt = &sGlobalNetwork_CreatedAt
+var GlobalNetwork_State = &sGlobalNetwork_State
+var GlobalNetwork_Tags = &sGlobalNetwork_Tags
+
+var _GlobalNetworkArn = &s_GlobalNetworkArn
+
+var _GlobalNetworkId = &s_GlobalNetworkId
+
+var _GlobalNetworkIdList = &s_GlobalNetworkIdList
+var _GlobalNetworkIdList_member = &s_GlobalNetworkIdList_member
+
+var _GlobalNetworkList = &s_GlobalNetworkList
+var _GlobalNetworkList_member = &s_GlobalNetworkList_member
+
+var GlobalNetworkState = &sGlobalNetworkState
+var GlobalNetworkState_pending = &sGlobalNetworkState_pending
+var GlobalNetworkState_available = &sGlobalNetworkState_available
+var GlobalNetworkState_deleting = &sGlobalNetworkState_deleting
+var GlobalNetworkState_updating = &sGlobalNetworkState_updating
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+var InternalServerException_RetryAfterSeconds = &sInternalServerException_RetryAfterSeconds
+
+var _IPAddress = &s_IPAddress
+
+var Link = &sLink
+var Link_LinkId = &sLink_LinkId
+var Link_LinkArn = &sLink_LinkArn
+var Link_GlobalNetworkId = &sLink_GlobalNetworkId
+var Link_SiteId = &sLink_SiteId
+var Link_Description = &sLink_Description
+var Link_Type = &sLink_Type
+var Link_Bandwidth = &sLink_Bandwidth
+var Link_Provider = &sLink_Provider
+var Link_CreatedAt = &sLink_CreatedAt
+var Link_State = &sLink_State
+var Link_Tags = &sLink_Tags
+
+var _LinkArn = &s_LinkArn
+
+var LinkAssociation = &sLinkAssociation
+var LinkAssociation_GlobalNetworkId = &sLinkAssociation_GlobalNetworkId
+var LinkAssociation_DeviceId = &sLinkAssociation_DeviceId
+var LinkAssociation_LinkId = &sLinkAssociation_LinkId
+var LinkAssociation_LinkAssociationState = &sLinkAssociation_LinkAssociationState
+
+var _LinkAssociationList = &s_LinkAssociationList
+var _LinkAssociationList_member = &s_LinkAssociationList_member
+
+var LinkAssociationState = &sLinkAssociationState
+var LinkAssociationState_pending = &sLinkAssociationState_pending
+var LinkAssociationState_available = &sLinkAssociationState_available
+var LinkAssociationState_deleting = &sLinkAssociationState_deleting
+var LinkAssociationState_deleted = &sLinkAssociationState_deleted
+
+var _LinkId = &s_LinkId
+
+var _LinkIdList = &s_LinkIdList
+var _LinkIdList_member = &s_LinkIdList_member
+
+var _LinkList = &s_LinkList
+var _LinkList_member = &s_LinkList_member
+
+var LinkState = &sLinkState
+var LinkState_pending = &sLinkState_pending
+var LinkState_available = &sLinkState_available
+var LinkState_deleting = &sLinkState_deleting
+var LinkState_updating = &sLinkState_updating
+
+var Location = &sLocation
+var Location_Address = &sLocation_Address
+var Location_Latitude = &sLocation_Latitude
+var Location_Longitude = &sLocation_Longitude
+
+var _Long = &s_Long
+
+var _MaxResults = &s_MaxResults
+
+var NatGatewaySupportState = &sNatGatewaySupportState
+var NatGatewaySupportState_ENABLED = &sNatGatewaySupportState_ENABLED
+var NatGatewaySupportState_ENABLING = &sNatGatewaySupportState_ENABLING
+var NatGatewaySupportState_DISABLED = &sNatGatewaySupportState_DISABLED
+var NatGatewaySupportState_DISABLING = &sNatGatewaySupportState_DISABLING
+var NatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE = &sNatGatewaySupportState_PENDING_ATTACHMENT_ACCEPTANCE
+
+var NatGatewaySupportValue = &sNatGatewaySupportValue
+var NatGatewaySupportValue_ENABLE = &sNatGatewaySupportValue_ENABLE
+var NatGatewaySupportValue_DISABLE = &sNatGatewaySupportValue_DISABLE
+
+var NatRule = &sNatRule
+var NatRule_RuleNumber = &sNatRule_RuleNumber
+var NatRule_MatchSourceCidr = &sNatRule_MatchSourceCidr
+var NatRule_NatCidr = &sNatRule_NatCidr
+var NatRule_State = &sNatRule_State
+
+var _NatRuleList = &s_NatRuleList
+var _NatRuleList_member = &s_NatRuleList_member
+
+var _NatRuleNumber = &s_NatRuleNumber
+
+var NatRuleRequest = &sNatRuleRequest
+var NatRuleRequest_RuleNumber = &sNatRuleRequest_RuleNumber
+var NatRuleRequest_MatchSourceCidr = &sNatRuleRequest_MatchSourceCidr
+var NatRuleRequest_NatCidr = &sNatRuleRequest_NatCidr
+
+var _NatRuleRequestList = &s_NatRuleRequestList
+var _NatRuleRequestList_member = &s_NatRuleRequestList_member
+
+var NatRuleState = &sNatRuleState
+var NatRuleState_CREATING = &sNatRuleState_CREATING
+var NatRuleState_MODIFYING = &sNatRuleState_MODIFYING
+var NatRuleState_DELETING = &sNatRuleState_DELETING
+var NatRuleState_ACTIVATED = &sNatRuleState_ACTIVATED
+var NatRuleState_ACTIVATING = &sNatRuleState_ACTIVATING
+var NatRuleState_DEACTIVATED = &sNatRuleState_DEACTIVATED
+var NatRuleState_DEACTIVATING = &sNatRuleState_DEACTIVATING
+var NatRuleState_FAILED = &sNatRuleState_FAILED
+var NatRuleState_PENDING_ATTACHMENT_ACCEPTANCE = &sNatRuleState_PENDING_ATTACHMENT_ACCEPTANCE
+
+var NetworkFunctionGroup = &sNetworkFunctionGroup
+var NetworkFunctionGroup_Name = &sNetworkFunctionGroup_Name
+
+var _NetworkFunctionGroupList = &s_NetworkFunctionGroupList
+var _NetworkFunctionGroupList_member = &s_NetworkFunctionGroupList_member
+
+var _NetworkFunctionGroupName = &s_NetworkFunctionGroupName
+
+var NetworkResource = &sNetworkResource
+var NetworkResource_RegisteredGatewayArn = &sNetworkResource_RegisteredGatewayArn
+var NetworkResource_CoreNetworkId = &sNetworkResource_CoreNetworkId
+var NetworkResource_AwsRegion = &sNetworkResource_AwsRegion
+var NetworkResource_AccountId = &sNetworkResource_AccountId
+var NetworkResource_ResourceType = &sNetworkResource_ResourceType
+var NetworkResource_ResourceId = &sNetworkResource_ResourceId
+var NetworkResource_ResourceArn = &sNetworkResource_ResourceArn
+var NetworkResource_Definition = &sNetworkResource_Definition
+var NetworkResource_DefinitionTimestamp = &sNetworkResource_DefinitionTimestamp
+var NetworkResource_Tags = &sNetworkResource_Tags
+var NetworkResource_Metadata = &sNetworkResource_Metadata
+
+var NetworkResourceCount = &sNetworkResourceCount
+var NetworkResourceCount_ResourceType = &sNetworkResourceCount_ResourceType
+var NetworkResourceCount_Count = &sNetworkResourceCount_Count
+
+var _NetworkResourceCountList = &s_NetworkResourceCountList
+var _NetworkResourceCountList_member = &s_NetworkResourceCountList_member
+
+var _NetworkResourceList = &s_NetworkResourceList
+var _NetworkResourceList_member = &s_NetworkResourceList_member
+
+var _NetworkResourceMetadataMap = &s_NetworkResourceMetadataMap
+var _NetworkResourceMetadataMap_key = &s_NetworkResourceMetadataMap_key
+var _NetworkResourceMetadataMap_value = &s_NetworkResourceMetadataMap_value
+
+var NetworkResourceSummary = &sNetworkResourceSummary
+var NetworkResourceSummary_RegisteredGatewayArn = &sNetworkResourceSummary_RegisteredGatewayArn
+var NetworkResourceSummary_ResourceArn = &sNetworkResourceSummary_ResourceArn
+var NetworkResourceSummary_ResourceType = &sNetworkResourceSummary_ResourceType
+var NetworkResourceSummary_Definition = &sNetworkResourceSummary_Definition
+var NetworkResourceSummary_NameTag = &sNetworkResourceSummary_NameTag
+var NetworkResourceSummary_IsMiddlebox = &sNetworkResourceSummary_IsMiddlebox
+
+var NetworkRoute = &sNetworkRoute
+var NetworkRoute_DestinationCidrBlock = &sNetworkRoute_DestinationCidrBlock
+var NetworkRoute_Destinations = &sNetworkRoute_Destinations
+var NetworkRoute_PrefixListId = &sNetworkRoute_PrefixListId
+var NetworkRoute_State = &sNetworkRoute_State
+var NetworkRoute_Type = &sNetworkRoute_Type
+
+var NetworkRouteDestination = &sNetworkRouteDestination
+var NetworkRouteDestination_CoreNetworkAttachmentId = &sNetworkRouteDestination_CoreNetworkAttachmentId
+var NetworkRouteDestination_TransitGatewayAttachmentId = &sNetworkRouteDestination_TransitGatewayAttachmentId
+var NetworkRouteDestination_SegmentName = &sNetworkRouteDestination_SegmentName
+var NetworkRouteDestination_NetworkFunctionGroupName = &sNetworkRouteDestination_NetworkFunctionGroupName
+var NetworkRouteDestination_EdgeLocation = &sNetworkRouteDestination_EdgeLocation
+var NetworkRouteDestination_ResourceType = &sNetworkRouteDestination_ResourceType
+var NetworkRouteDestination_ResourceId = &sNetworkRouteDestination_ResourceId
+
+var _NetworkRouteDestinationList = &s_NetworkRouteDestinationList
+var _NetworkRouteDestinationList_member = &s_NetworkRouteDestinationList_member
+
+var _NetworkRouteList = &s_NetworkRouteList
+var _NetworkRouteList_member = &s_NetworkRouteList_member
+
+var NetworkTelemetry = &sNetworkTelemetry
+var NetworkTelemetry_RegisteredGatewayArn = &sNetworkTelemetry_RegisteredGatewayArn
+var NetworkTelemetry_CoreNetworkId = &sNetworkTelemetry_CoreNetworkId
+var NetworkTelemetry_AwsRegion = &sNetworkTelemetry_AwsRegion
+var NetworkTelemetry_AccountId = &sNetworkTelemetry_AccountId
+var NetworkTelemetry_ResourceType = &sNetworkTelemetry_ResourceType
+var NetworkTelemetry_ResourceId = &sNetworkTelemetry_ResourceId
+var NetworkTelemetry_ResourceArn = &sNetworkTelemetry_ResourceArn
+var NetworkTelemetry_Address = &sNetworkTelemetry_Address
+var NetworkTelemetry_Health = &sNetworkTelemetry_Health
+
+var _NetworkTelemetryList = &s_NetworkTelemetryList
+var _NetworkTelemetryList_member = &s_NetworkTelemetryList_member
+
+var _NextToken = &s_NextToken
+
+var _OrganizationAwsServiceAccessStatus = &s_OrganizationAwsServiceAccessStatus
+
+var _OrganizationId = &s_OrganizationId
+
+var OrganizationStatus = &sOrganizationStatus
+var OrganizationStatus_OrganizationId = &sOrganizationStatus_OrganizationId
+var OrganizationStatus_OrganizationAwsServiceAccessStatus = &sOrganizationStatus_OrganizationAwsServiceAccessStatus
+var OrganizationStatus_SLRDeploymentStatus = &sOrganizationStatus_SLRDeploymentStatus
+var OrganizationStatus_AccountStatusList = &sOrganizationStatus_AccountStatusList
+
+var PathComponent = &sPathComponent
+var PathComponent_Sequence = &sPathComponent_Sequence
+var PathComponent_Resource = &sPathComponent_Resource
+var PathComponent_DestinationCidrBlock = &sPathComponent_DestinationCidrBlock
+
+var _PathComponentList = &s_PathComponentList
+var _PathComponentList_member = &s_PathComponentList_member
+
+var Peering = &sPeering
+var Peering_CoreNetworkId = &sPeering_CoreNetworkId
+var Peering_CoreNetworkArn = &sPeering_CoreNetworkArn
+var Peering_PeeringId = &sPeering_PeeringId
+var Peering_OwnerAccountId = &sPeering_OwnerAccountId
+var Peering_PeeringType = &sPeering_PeeringType
+var Peering_State = &sPeering_State
+var Peering_EdgeLocation = &sPeering_EdgeLocation
+var Peering_ResourceArn = &sPeering_ResourceArn
+var Peering_Tags = &sPeering_Tags
+var Peering_CreatedAt = &sPeering_CreatedAt
+var Peering_LastModificationErrors = &sPeering_LastModificationErrors
+
+var PeeringError = &sPeeringError
+var PeeringError_Code = &sPeeringError_Code
+var PeeringError_Message = &sPeeringError_Message
+var PeeringError_ResourceArn = &sPeeringError_ResourceArn
+var PeeringError_RequestId = &sPeeringError_RequestId
+var PeeringError_MissingPermissionsContext = &sPeeringError_MissingPermissionsContext
+
+var PeeringErrorCode = &sPeeringErrorCode
+var PeeringErrorCode_TRANSIT_GATEWAY_NOT_FOUND = &sPeeringErrorCode_TRANSIT_GATEWAY_NOT_FOUND
+var PeeringErrorCode_TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED = &sPeeringErrorCode_TRANSIT_GATEWAY_PEERS_LIMIT_EXCEEDED
+var PeeringErrorCode_MISSING_REQUIRED_PERMISSIONS = &sPeeringErrorCode_MISSING_REQUIRED_PERMISSIONS
+var PeeringErrorCode_INTERNAL_ERROR = &sPeeringErrorCode_INTERNAL_ERROR
+var PeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE = &sPeeringErrorCode_EDGE_LOCATION_PEER_DUPLICATE
+var PeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE = &sPeeringErrorCode_INVALID_TRANSIT_GATEWAY_STATE
+var PeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED = &sPeeringErrorCode_TRANSIT_GATEWAY_ENCRYPTION_NOT_SUPPORTED
+var PeeringErrorCode_CREATION_FAILED = &sPeeringErrorCode_CREATION_FAILED
+var PeeringErrorCode_DELETION_FAILED = &sPeeringErrorCode_DELETION_FAILED
+
+var _PeeringErrorList = &s_PeeringErrorList
+var _PeeringErrorList_member = &s_PeeringErrorList_member
+
+var _PeeringId = &s_PeeringId
+
+var _PeeringList = &s_PeeringList
+var _PeeringList_member = &s_PeeringList_member
+
+var PeeringState = &sPeeringState
+var PeeringState_CREATING = &sPeeringState_CREATING
+var PeeringState_FAILED = &sPeeringState_FAILED
+var PeeringState_AVAILABLE = &sPeeringState_AVAILABLE
+var PeeringState_DELETING = &sPeeringState_DELETING
+
+var PeeringType = &sPeeringType
+var PeeringType_TRANSIT_GATEWAY = &sPeeringType_TRANSIT_GATEWAY
+
+var PermissionsErrorContext = &sPermissionsErrorContext
+var PermissionsErrorContext_MissingPermission = &sPermissionsErrorContext_MissingPermission
+
+var _PrefixListArn = &s_PrefixListArn
+
+var PrefixListAssociation = &sPrefixListAssociation
+var PrefixListAssociation_CoreNetworkId = &sPrefixListAssociation_CoreNetworkId
+var PrefixListAssociation_PrefixListArn = &sPrefixListAssociation_PrefixListArn
+var PrefixListAssociation_PrefixListAlias = &sPrefixListAssociation_PrefixListAlias
+
+var _PrefixListAssociationList = &s_PrefixListAssociationList
+var _PrefixListAssociationList_member = &s_PrefixListAssociationList_member
+
+var ProposedNetworkFunctionGroupChange = &sProposedNetworkFunctionGroupChange
+var ProposedNetworkFunctionGroupChange_Tags = &sProposedNetworkFunctionGroupChange_Tags
+var ProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber = &sProposedNetworkFunctionGroupChange_AttachmentPolicyRuleNumber
+var ProposedNetworkFunctionGroupChange_NetworkFunctionGroupName = &sProposedNetworkFunctionGroupChange_NetworkFunctionGroupName
+
+var ProposedSegmentChange = &sProposedSegmentChange
+var ProposedSegmentChange_Tags = &sProposedSegmentChange_Tags
+var ProposedSegmentChange_AttachmentPolicyRuleNumber = &sProposedSegmentChange_AttachmentPolicyRuleNumber
+var ProposedSegmentChange_SegmentName = &sProposedSegmentChange_SegmentName
+
+var _ReasonContextKey = &s_ReasonContextKey
+
+var _ReasonContextMap = &s_ReasonContextMap
+var _ReasonContextMap_key = &s_ReasonContextMap_key
+var _ReasonContextMap_value = &s_ReasonContextMap_value
+
+var _ReasonContextValue = &s_ReasonContextValue
+
+var Relationship = &sRelationship
+var Relationship_From = &sRelationship_From
+var Relationship_To = &sRelationship_To
+
+var _RelationshipList = &s_RelationshipList
+var _RelationshipList_member = &s_RelationshipList_member
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceId = &sResourceNotFoundException_ResourceId
+var ResourceNotFoundException_ResourceType = &sResourceNotFoundException_ResourceType
+var ResourceNotFoundException_Context = &sResourceNotFoundException_Context
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var RouteAnalysis = &sRouteAnalysis
+var RouteAnalysis_GlobalNetworkId = &sRouteAnalysis_GlobalNetworkId
+var RouteAnalysis_OwnerAccountId = &sRouteAnalysis_OwnerAccountId
+var RouteAnalysis_RouteAnalysisId = &sRouteAnalysis_RouteAnalysisId
+var RouteAnalysis_StartTimestamp = &sRouteAnalysis_StartTimestamp
+var RouteAnalysis_Status = &sRouteAnalysis_Status
+var RouteAnalysis_Source = &sRouteAnalysis_Source
+var RouteAnalysis_Destination = &sRouteAnalysis_Destination
+var RouteAnalysis_IncludeReturnPath = &sRouteAnalysis_IncludeReturnPath
+var RouteAnalysis_UseMiddleboxes = &sRouteAnalysis_UseMiddleboxes
+var RouteAnalysis_ForwardPath = &sRouteAnalysis_ForwardPath
+var RouteAnalysis_ReturnPath = &sRouteAnalysis_ReturnPath
+
+var RouteAnalysisCompletion = &sRouteAnalysisCompletion
+var RouteAnalysisCompletion_ResultCode = &sRouteAnalysisCompletion_ResultCode
+var RouteAnalysisCompletion_ReasonCode = &sRouteAnalysisCompletion_ReasonCode
+var RouteAnalysisCompletion_ReasonContext = &sRouteAnalysisCompletion_ReasonContext
+
+var RouteAnalysisCompletionReasonCode = &sRouteAnalysisCompletionReasonCode
+var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND = &sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_FOUND
+var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY = &sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_NOT_IN_TRANSIT_GATEWAY
+var RouteAnalysisCompletionReasonCode_CYCLIC_PATH_DETECTED = &sRouteAnalysisCompletionReasonCode_CYCLIC_PATH_DETECTED
+var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND = &sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT_STABLE_ROUTE_TABLE_NOT_FOUND
+var RouteAnalysisCompletionReasonCode_ROUTE_NOT_FOUND = &sRouteAnalysisCompletionReasonCode_ROUTE_NOT_FOUND
+var RouteAnalysisCompletionReasonCode_BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND = &sRouteAnalysisCompletionReasonCode_BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND
+var RouteAnalysisCompletionReasonCode_INACTIVE_ROUTE_FOR_DESTINATION_FOUND = &sRouteAnalysisCompletionReasonCode_INACTIVE_ROUTE_FOR_DESTINATION_FOUND
+var RouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT = &sRouteAnalysisCompletionReasonCode_TRANSIT_GATEWAY_ATTACHMENT
+var RouteAnalysisCompletionReasonCode_MAX_HOPS_EXCEEDED = &sRouteAnalysisCompletionReasonCode_MAX_HOPS_EXCEEDED
+var RouteAnalysisCompletionReasonCode_POSSIBLE_MIDDLEBOX = &sRouteAnalysisCompletionReasonCode_POSSIBLE_MIDDLEBOX
+var RouteAnalysisCompletionReasonCode_NO_DESTINATION_ARN_PROVIDED = &sRouteAnalysisCompletionReasonCode_NO_DESTINATION_ARN_PROVIDED
+
+var RouteAnalysisCompletionResultCode = &sRouteAnalysisCompletionResultCode
+var RouteAnalysisCompletionResultCode_CONNECTED = &sRouteAnalysisCompletionResultCode_CONNECTED
+var RouteAnalysisCompletionResultCode_NOT_CONNECTED = &sRouteAnalysisCompletionResultCode_NOT_CONNECTED
+
+var RouteAnalysisEndpointOptions = &sRouteAnalysisEndpointOptions
+var RouteAnalysisEndpointOptions_TransitGatewayAttachmentArn = &sRouteAnalysisEndpointOptions_TransitGatewayAttachmentArn
+var RouteAnalysisEndpointOptions_TransitGatewayArn = &sRouteAnalysisEndpointOptions_TransitGatewayArn
+var RouteAnalysisEndpointOptions_IpAddress = &sRouteAnalysisEndpointOptions_IpAddress
+
+var RouteAnalysisEndpointOptionsSpecification = &sRouteAnalysisEndpointOptionsSpecification
+var RouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn = &sRouteAnalysisEndpointOptionsSpecification_TransitGatewayAttachmentArn
+var RouteAnalysisEndpointOptionsSpecification_IpAddress = &sRouteAnalysisEndpointOptionsSpecification_IpAddress
+
+var RouteAnalysisPath = &sRouteAnalysisPath
+var RouteAnalysisPath_CompletionStatus = &sRouteAnalysisPath_CompletionStatus
+var RouteAnalysisPath_Path = &sRouteAnalysisPath_Path
+
+var RouteAnalysisStatus = &sRouteAnalysisStatus
+var RouteAnalysisStatus_running = &sRouteAnalysisStatus_running
+var RouteAnalysisStatus_completed = &sRouteAnalysisStatus_completed
+var RouteAnalysisStatus_failed = &sRouteAnalysisStatus_failed
+
+var RouteState = &sRouteState
+var RouteState_ACTIVE = &sRouteState_ACTIVE
+var RouteState_BLACKHOLE = &sRouteState_BLACKHOLE
+
+var _RouteStateList = &s_RouteStateList
+var _RouteStateList_member = &s_RouteStateList_member
+
+var RouteTableIdentifier = &sRouteTableIdentifier
+var RouteTableIdentifier_TransitGatewayRouteTableArn = &sRouteTableIdentifier_TransitGatewayRouteTableArn
+var RouteTableIdentifier_CoreNetworkSegmentEdge = &sRouteTableIdentifier_CoreNetworkSegmentEdge
+var RouteTableIdentifier_CoreNetworkNetworkFunctionGroup = &sRouteTableIdentifier_CoreNetworkNetworkFunctionGroup
+
+var RouteTableType = &sRouteTableType
+var RouteTableType_TRANSIT_GATEWAY_ROUTE_TABLE = &sRouteTableType_TRANSIT_GATEWAY_ROUTE_TABLE
+var RouteTableType_CORE_NETWORK_SEGMENT = &sRouteTableType_CORE_NETWORK_SEGMENT
+var RouteTableType_NETWORK_FUNCTION_GROUP = &sRouteTableType_NETWORK_FUNCTION_GROUP
+
+var RouteType = &sRouteType
+var RouteType_PROPAGATED = &sRouteType_PROPAGATED
+var RouteType_STATIC = &sRouteType_STATIC
+var RouteType_SYSTEM = &sRouteType_SYSTEM
+
+var _RouteTypeList = &s_RouteTypeList
+var _RouteTypeList_member = &s_RouteTypeList_member
+
+var RoutingInformationNextHop = &sRoutingInformationNextHop
+var RoutingInformationNextHop_IpAddress = &sRoutingInformationNextHop_IpAddress
+var RoutingInformationNextHop_CoreNetworkAttachmentId = &sRoutingInformationNextHop_CoreNetworkAttachmentId
+var RoutingInformationNextHop_ResourceId = &sRoutingInformationNextHop_ResourceId
+var RoutingInformationNextHop_ResourceType = &sRoutingInformationNextHop_ResourceType
+var RoutingInformationNextHop_SegmentName = &sRoutingInformationNextHop_SegmentName
+var RoutingInformationNextHop_EdgeLocation = &sRoutingInformationNextHop_EdgeLocation
+
+var RoutingPolicyAssociationDetail = &sRoutingPolicyAssociationDetail
+var RoutingPolicyAssociationDetail_RoutingPolicyNames = &sRoutingPolicyAssociationDetail_RoutingPolicyNames
+var RoutingPolicyAssociationDetail_SharedSegments = &sRoutingPolicyAssociationDetail_SharedSegments
+
+var _RoutingPolicyAssociationDetailsList = &s_RoutingPolicyAssociationDetailsList
+var _RoutingPolicyAssociationDetailsList_member = &s_RoutingPolicyAssociationDetailsList_member
+
+var RoutingPolicyDirection = &sRoutingPolicyDirection
+var RoutingPolicyDirection_INBOUND = &sRoutingPolicyDirection_INBOUND
+var RoutingPolicyDirection_OUTBOUND = &sRoutingPolicyDirection_OUTBOUND
+
+var SegmentActionServiceInsertion = &sSegmentActionServiceInsertion
+var SegmentActionServiceInsertion_SEND_VIA = &sSegmentActionServiceInsertion_SEND_VIA
+var SegmentActionServiceInsertion_SEND_TO = &sSegmentActionServiceInsertion_SEND_TO
+
+var SendViaMode = &sSendViaMode
+var SendViaMode_DUAL_HOP = &sSendViaMode_DUAL_HOP
+var SendViaMode_SINGLE_HOP = &sSendViaMode_SINGLE_HOP
+
+var _ServerSideString = &s_ServerSideString
+
+var ServiceInsertionAction = &sServiceInsertionAction
+var ServiceInsertionAction_Action = &sServiceInsertionAction_Action
+var ServiceInsertionAction_Mode = &sServiceInsertionAction_Mode
+var ServiceInsertionAction_WhenSentTo = &sServiceInsertionAction_WhenSentTo
+var ServiceInsertionAction_Via = &sServiceInsertionAction_Via
+
+var _ServiceInsertionActionList = &s_ServiceInsertionActionList
+var _ServiceInsertionActionList_member = &s_ServiceInsertionActionList_member
+
+var ServiceInsertionSegments = &sServiceInsertionSegments
+var ServiceInsertionSegments_SendVia = &sServiceInsertionSegments_SendVia
+var ServiceInsertionSegments_SendTo = &sServiceInsertionSegments_SendTo
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_ResourceId = &sServiceQuotaExceededException_ResourceId
+var ServiceQuotaExceededException_ResourceType = &sServiceQuotaExceededException_ResourceType
+var ServiceQuotaExceededException_LimitCode = &sServiceQuotaExceededException_LimitCode
+var ServiceQuotaExceededException_ServiceCode = &sServiceQuotaExceededException_ServiceCode
+
+var Site = &sSite
+var Site_SiteId = &sSite_SiteId
+var Site_SiteArn = &sSite_SiteArn
+var Site_GlobalNetworkId = &sSite_GlobalNetworkId
+var Site_Description = &sSite_Description
+var Site_Location = &sSite_Location
+var Site_CreatedAt = &sSite_CreatedAt
+var Site_State = &sSite_State
+var Site_Tags = &sSite_Tags
+
+var _SiteArn = &s_SiteArn
+
+var _SiteId = &s_SiteId
+
+var _SiteIdList = &s_SiteIdList
+var _SiteIdList_member = &s_SiteIdList_member
+
+var _SiteList = &s_SiteList
+var _SiteList_member = &s_SiteList_member
+
+var SiteState = &sSiteState
+var SiteState_pending = &sSiteState_pending
+var SiteState_available = &sSiteState_available
+var SiteState_deleting = &sSiteState_deleting
+var SiteState_updating = &sSiteState_updating
+
+var SiteToSiteVpnAttachment = &sSiteToSiteVpnAttachment
+var SiteToSiteVpnAttachment_Attachment = &sSiteToSiteVpnAttachment_Attachment
+var SiteToSiteVpnAttachment_VpnConnectionArn = &sSiteToSiteVpnAttachment_VpnConnectionArn
+
+var _SLRDeploymentStatus = &s_SLRDeploymentStatus
+
+var _SubnetArn = &s_SubnetArn
+
+var _SubnetArnList = &s_SubnetArnList
+var _SubnetArnList_member = &s_SubnetArnList_member
+
+var _SynthesizedJsonCoreNetworkPolicyDocument = &s_SynthesizedJsonCoreNetworkPolicyDocument
+
+var _SynthesizedJsonResourcePolicyDocument = &s_SynthesizedJsonResourcePolicyDocument
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+var ThrottlingException_RetryAfterSeconds = &sThrottlingException_RetryAfterSeconds
+
+var _TransitGatewayArn = &s_TransitGatewayArn
+
+var _TransitGatewayArnList = &s_TransitGatewayArnList
+var _TransitGatewayArnList_member = &s_TransitGatewayArnList_member
+
+var _TransitGatewayAttachmentArn = &s_TransitGatewayAttachmentArn
+
+var _TransitGatewayAttachmentId = &s_TransitGatewayAttachmentId
+
+var _TransitGatewayConnectPeerArn = &s_TransitGatewayConnectPeerArn
+
+var _TransitGatewayConnectPeerArnList = &s_TransitGatewayConnectPeerArnList
+var _TransitGatewayConnectPeerArnList_member = &s_TransitGatewayConnectPeerArnList_member
+
+var TransitGatewayConnectPeerAssociation = &sTransitGatewayConnectPeerAssociation
+var TransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn = &sTransitGatewayConnectPeerAssociation_TransitGatewayConnectPeerArn
+var TransitGatewayConnectPeerAssociation_GlobalNetworkId = &sTransitGatewayConnectPeerAssociation_GlobalNetworkId
+var TransitGatewayConnectPeerAssociation_DeviceId = &sTransitGatewayConnectPeerAssociation_DeviceId
+var TransitGatewayConnectPeerAssociation_LinkId = &sTransitGatewayConnectPeerAssociation_LinkId
+var TransitGatewayConnectPeerAssociation_State = &sTransitGatewayConnectPeerAssociation_State
+
+var _TransitGatewayConnectPeerAssociationList = &s_TransitGatewayConnectPeerAssociationList
+var _TransitGatewayConnectPeerAssociationList_member = &s_TransitGatewayConnectPeerAssociationList_member
+
+var TransitGatewayConnectPeerAssociationState = &sTransitGatewayConnectPeerAssociationState
+var TransitGatewayConnectPeerAssociationState_pending = &sTransitGatewayConnectPeerAssociationState_pending
+var TransitGatewayConnectPeerAssociationState_available = &sTransitGatewayConnectPeerAssociationState_available
+var TransitGatewayConnectPeerAssociationState_deleting = &sTransitGatewayConnectPeerAssociationState_deleting
+var TransitGatewayConnectPeerAssociationState_deleted = &sTransitGatewayConnectPeerAssociationState_deleted
+
+var TransitGatewayPeering = &sTransitGatewayPeering
+var TransitGatewayPeering_Peering = &sTransitGatewayPeering_Peering
+var TransitGatewayPeering_TransitGatewayArn = &sTransitGatewayPeering_TransitGatewayArn
+var TransitGatewayPeering_TransitGatewayPeeringAttachmentId = &sTransitGatewayPeering_TransitGatewayPeeringAttachmentId
+
+var _TransitGatewayPeeringAttachmentId = &s_TransitGatewayPeeringAttachmentId
+
+var TransitGatewayRegistration = &sTransitGatewayRegistration
+var TransitGatewayRegistration_GlobalNetworkId = &sTransitGatewayRegistration_GlobalNetworkId
+var TransitGatewayRegistration_TransitGatewayArn = &sTransitGatewayRegistration_TransitGatewayArn
+var TransitGatewayRegistration_State = &sTransitGatewayRegistration_State
+
+var _TransitGatewayRegistrationList = &s_TransitGatewayRegistrationList
+var _TransitGatewayRegistrationList_member = &s_TransitGatewayRegistrationList_member
+
+var TransitGatewayRegistrationState = &sTransitGatewayRegistrationState
+var TransitGatewayRegistrationState_pending = &sTransitGatewayRegistrationState_pending
+var TransitGatewayRegistrationState_available = &sTransitGatewayRegistrationState_available
+var TransitGatewayRegistrationState_deleting = &sTransitGatewayRegistrationState_deleting
+var TransitGatewayRegistrationState_deleted = &sTransitGatewayRegistrationState_deleted
+var TransitGatewayRegistrationState_failed = &sTransitGatewayRegistrationState_failed
+
+var TransitGatewayRegistrationStateReason = &sTransitGatewayRegistrationStateReason
+var TransitGatewayRegistrationStateReason_Code = &sTransitGatewayRegistrationStateReason_Code
+var TransitGatewayRegistrationStateReason_Message = &sTransitGatewayRegistrationStateReason_Message
+
+var _TransitGatewayRouteTableArn = &s_TransitGatewayRouteTableArn
+
+var TransitGatewayRouteTableAttachment = &sTransitGatewayRouteTableAttachment
+var TransitGatewayRouteTableAttachment_Attachment = &sTransitGatewayRouteTableAttachment_Attachment
+var TransitGatewayRouteTableAttachment_PeeringId = &sTransitGatewayRouteTableAttachment_PeeringId
+var TransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn = &sTransitGatewayRouteTableAttachment_TransitGatewayRouteTableArn
+
+var TunnelProtocol = &sTunnelProtocol
+var TunnelProtocol_GRE = &sTunnelProtocol_GRE
+var TunnelProtocol_NO_ENCAP = &sTunnelProtocol_NO_ENCAP
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Reason = &sValidationException_Reason
+var ValidationException_Fields = &sValidationException_Fields
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_Name = &sValidationExceptionField_Name
+var ValidationExceptionField_Message = &sValidationExceptionField_Message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var Via = &sVia
+var Via_NetworkFunctionGroups = &sVia_NetworkFunctionGroups
+var Via_WithEdgeOverrides = &sVia_WithEdgeOverrides
+
+var _VpcArn = &s_VpcArn
+
+var VpcAttachment = &sVpcAttachment
+var VpcAttachment_Attachment = &sVpcAttachment_Attachment
+var VpcAttachment_SubnetArns = &sVpcAttachment_SubnetArns
+var VpcAttachment_Options = &sVpcAttachment_Options
+
+var VpcOptions = &sVpcOptions
+var VpcOptions_Ipv6Support = &sVpcOptions_Ipv6Support
+var VpcOptions_ApplianceModeSupport = &sVpcOptions_ApplianceModeSupport
+var VpcOptions_DnsSupport = &sVpcOptions_DnsSupport
+var VpcOptions_SecurityGroupReferencingSupport = &sVpcOptions_SecurityGroupReferencingSupport
+
+var _VpnConnectionArn = &s_VpnConnectionArn
+
+var WhenSentTo = &sWhenSentTo
+var WhenSentTo_WhenSentToSegmentsList = &sWhenSentTo_WhenSentToSegmentsList
+
+var _WhenSentToSegmentsList = &s_WhenSentToSegmentsList
+var _WhenSentToSegmentsList_member = &s_WhenSentToSegmentsList_member
+
+var _WithEdgeOverridesList = &s_WithEdgeOverridesList
+var _WithEdgeOverridesList_member = &s_WithEdgeOverridesList_member
+
+var AcceptAttachmentRequest = &sAcceptAttachmentRequest
+var AcceptAttachmentRequest_AttachmentId = &sAcceptAttachmentRequest_AttachmentId
+
+var AcceptAttachmentResponse = &sAcceptAttachmentResponse
+var AcceptAttachmentResponse_Attachment = &sAcceptAttachmentResponse_Attachment
+
+var AssociateConnectPeerRequest = &sAssociateConnectPeerRequest
+var AssociateConnectPeerRequest_GlobalNetworkId = &sAssociateConnectPeerRequest_GlobalNetworkId
+var AssociateConnectPeerRequest_ConnectPeerId = &sAssociateConnectPeerRequest_ConnectPeerId
+var AssociateConnectPeerRequest_DeviceId = &sAssociateConnectPeerRequest_DeviceId
+var AssociateConnectPeerRequest_LinkId = &sAssociateConnectPeerRequest_LinkId
+
+var AssociateConnectPeerResponse = &sAssociateConnectPeerResponse
+var AssociateConnectPeerResponse_ConnectPeerAssociation = &sAssociateConnectPeerResponse_ConnectPeerAssociation
+
+var AssociateCustomerGatewayRequest = &sAssociateCustomerGatewayRequest
+var AssociateCustomerGatewayRequest_CustomerGatewayArn = &sAssociateCustomerGatewayRequest_CustomerGatewayArn
+var AssociateCustomerGatewayRequest_GlobalNetworkId = &sAssociateCustomerGatewayRequest_GlobalNetworkId
+var AssociateCustomerGatewayRequest_DeviceId = &sAssociateCustomerGatewayRequest_DeviceId
+var AssociateCustomerGatewayRequest_LinkId = &sAssociateCustomerGatewayRequest_LinkId
+
+var AssociateCustomerGatewayResponse = &sAssociateCustomerGatewayResponse
+var AssociateCustomerGatewayResponse_CustomerGatewayAssociation = &sAssociateCustomerGatewayResponse_CustomerGatewayAssociation
+
+var AssociateLinkRequest = &sAssociateLinkRequest
+var AssociateLinkRequest_GlobalNetworkId = &sAssociateLinkRequest_GlobalNetworkId
+var AssociateLinkRequest_DeviceId = &sAssociateLinkRequest_DeviceId
+var AssociateLinkRequest_LinkId = &sAssociateLinkRequest_LinkId
+
+var AssociateLinkResponse = &sAssociateLinkResponse
+var AssociateLinkResponse_LinkAssociation = &sAssociateLinkResponse_LinkAssociation
+
+var AssociateTransitGatewayConnectPeerRequest = &sAssociateTransitGatewayConnectPeerRequest
+var AssociateTransitGatewayConnectPeerRequest_GlobalNetworkId = &sAssociateTransitGatewayConnectPeerRequest_GlobalNetworkId
+var AssociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn = &sAssociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn
+var AssociateTransitGatewayConnectPeerRequest_DeviceId = &sAssociateTransitGatewayConnectPeerRequest_DeviceId
+var AssociateTransitGatewayConnectPeerRequest_LinkId = &sAssociateTransitGatewayConnectPeerRequest_LinkId
+
+var AssociateTransitGatewayConnectPeerResponse = &sAssociateTransitGatewayConnectPeerResponse
+var AssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation = &sAssociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation
+
+var CreateConnectAttachmentRequest = &sCreateConnectAttachmentRequest
+var CreateConnectAttachmentRequest_CoreNetworkId = &sCreateConnectAttachmentRequest_CoreNetworkId
+var CreateConnectAttachmentRequest_EdgeLocation = &sCreateConnectAttachmentRequest_EdgeLocation
+var CreateConnectAttachmentRequest_TransportAttachmentId = &sCreateConnectAttachmentRequest_TransportAttachmentId
+var CreateConnectAttachmentRequest_RoutingPolicyLabel = &sCreateConnectAttachmentRequest_RoutingPolicyLabel
+var CreateConnectAttachmentRequest_NatGatewaySupport = &sCreateConnectAttachmentRequest_NatGatewaySupport
+var CreateConnectAttachmentRequest_NatGatewayRules = &sCreateConnectAttachmentRequest_NatGatewayRules
+var CreateConnectAttachmentRequest_Options = &sCreateConnectAttachmentRequest_Options
+var CreateConnectAttachmentRequest_Tags = &sCreateConnectAttachmentRequest_Tags
+var CreateConnectAttachmentRequest_ClientToken = &sCreateConnectAttachmentRequest_ClientToken
+
+var CreateConnectAttachmentResponse = &sCreateConnectAttachmentResponse
+var CreateConnectAttachmentResponse_ConnectAttachment = &sCreateConnectAttachmentResponse_ConnectAttachment
+
+var CreateConnectionRequest = &sCreateConnectionRequest
+var CreateConnectionRequest_GlobalNetworkId = &sCreateConnectionRequest_GlobalNetworkId
+var CreateConnectionRequest_DeviceId = &sCreateConnectionRequest_DeviceId
+var CreateConnectionRequest_ConnectedDeviceId = &sCreateConnectionRequest_ConnectedDeviceId
+var CreateConnectionRequest_LinkId = &sCreateConnectionRequest_LinkId
+var CreateConnectionRequest_ConnectedLinkId = &sCreateConnectionRequest_ConnectedLinkId
+var CreateConnectionRequest_Description = &sCreateConnectionRequest_Description
+var CreateConnectionRequest_Tags = &sCreateConnectionRequest_Tags
+
+var CreateConnectionResponse = &sCreateConnectionResponse
+var CreateConnectionResponse_Connection = &sCreateConnectionResponse_Connection
+
+var CreateConnectPeerRequest = &sCreateConnectPeerRequest
+var CreateConnectPeerRequest_ConnectAttachmentId = &sCreateConnectPeerRequest_ConnectAttachmentId
+var CreateConnectPeerRequest_CoreNetworkAddress = &sCreateConnectPeerRequest_CoreNetworkAddress
+var CreateConnectPeerRequest_PeerAddress = &sCreateConnectPeerRequest_PeerAddress
+var CreateConnectPeerRequest_BgpOptions = &sCreateConnectPeerRequest_BgpOptions
+var CreateConnectPeerRequest_InsideCidrBlocks = &sCreateConnectPeerRequest_InsideCidrBlocks
+var CreateConnectPeerRequest_Tags = &sCreateConnectPeerRequest_Tags
+var CreateConnectPeerRequest_ClientToken = &sCreateConnectPeerRequest_ClientToken
+var CreateConnectPeerRequest_SubnetArn = &sCreateConnectPeerRequest_SubnetArn
+
+var CreateConnectPeerResponse = &sCreateConnectPeerResponse
+var CreateConnectPeerResponse_ConnectPeer = &sCreateConnectPeerResponse_ConnectPeer
+
+var CreateCoreNetworkRequest = &sCreateCoreNetworkRequest
+var CreateCoreNetworkRequest_GlobalNetworkId = &sCreateCoreNetworkRequest_GlobalNetworkId
+var CreateCoreNetworkRequest_Description = &sCreateCoreNetworkRequest_Description
+var CreateCoreNetworkRequest_Tags = &sCreateCoreNetworkRequest_Tags
+var CreateCoreNetworkRequest_PolicyDocument = &sCreateCoreNetworkRequest_PolicyDocument
+var CreateCoreNetworkRequest_ClientToken = &sCreateCoreNetworkRequest_ClientToken
+
+var CreateCoreNetworkResponse = &sCreateCoreNetworkResponse
+var CreateCoreNetworkResponse_CoreNetwork = &sCreateCoreNetworkResponse_CoreNetwork
+
+var CreateCoreNetworkPrefixListAssociationRequest = &sCreateCoreNetworkPrefixListAssociationRequest
+var CreateCoreNetworkPrefixListAssociationRequest_CoreNetworkId = &sCreateCoreNetworkPrefixListAssociationRequest_CoreNetworkId
+var CreateCoreNetworkPrefixListAssociationRequest_PrefixListArn = &sCreateCoreNetworkPrefixListAssociationRequest_PrefixListArn
+var CreateCoreNetworkPrefixListAssociationRequest_PrefixListAlias = &sCreateCoreNetworkPrefixListAssociationRequest_PrefixListAlias
+var CreateCoreNetworkPrefixListAssociationRequest_ClientToken = &sCreateCoreNetworkPrefixListAssociationRequest_ClientToken
+
+var CreateCoreNetworkPrefixListAssociationResponse = &sCreateCoreNetworkPrefixListAssociationResponse
+var CreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId = &sCreateCoreNetworkPrefixListAssociationResponse_CoreNetworkId
+var CreateCoreNetworkPrefixListAssociationResponse_PrefixListArn = &sCreateCoreNetworkPrefixListAssociationResponse_PrefixListArn
+var CreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias = &sCreateCoreNetworkPrefixListAssociationResponse_PrefixListAlias
+
+var CreateDeviceRequest = &sCreateDeviceRequest
+var CreateDeviceRequest_GlobalNetworkId = &sCreateDeviceRequest_GlobalNetworkId
+var CreateDeviceRequest_AWSLocation = &sCreateDeviceRequest_AWSLocation
+var CreateDeviceRequest_Description = &sCreateDeviceRequest_Description
+var CreateDeviceRequest_Type = &sCreateDeviceRequest_Type
+var CreateDeviceRequest_Vendor = &sCreateDeviceRequest_Vendor
+var CreateDeviceRequest_Model = &sCreateDeviceRequest_Model
+var CreateDeviceRequest_SerialNumber = &sCreateDeviceRequest_SerialNumber
+var CreateDeviceRequest_Location = &sCreateDeviceRequest_Location
+var CreateDeviceRequest_SiteId = &sCreateDeviceRequest_SiteId
+var CreateDeviceRequest_Tags = &sCreateDeviceRequest_Tags
+
+var CreateDeviceResponse = &sCreateDeviceResponse
+var CreateDeviceResponse_Device = &sCreateDeviceResponse_Device
+
+var CreateDirectConnectGatewayAttachmentRequest = &sCreateDirectConnectGatewayAttachmentRequest
+var CreateDirectConnectGatewayAttachmentRequest_CoreNetworkId = &sCreateDirectConnectGatewayAttachmentRequest_CoreNetworkId
+var CreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn = &sCreateDirectConnectGatewayAttachmentRequest_DirectConnectGatewayArn
+var CreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel = &sCreateDirectConnectGatewayAttachmentRequest_RoutingPolicyLabel
+var CreateDirectConnectGatewayAttachmentRequest_EdgeLocations = &sCreateDirectConnectGatewayAttachmentRequest_EdgeLocations
+var CreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport = &sCreateDirectConnectGatewayAttachmentRequest_NatGatewaySupport
+var CreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport = &sCreateDirectConnectGatewayAttachmentRequest_NatSystemRouteSupport
+var CreateDirectConnectGatewayAttachmentRequest_NatGatewayRules = &sCreateDirectConnectGatewayAttachmentRequest_NatGatewayRules
+var CreateDirectConnectGatewayAttachmentRequest_Tags = &sCreateDirectConnectGatewayAttachmentRequest_Tags
+var CreateDirectConnectGatewayAttachmentRequest_ClientToken = &sCreateDirectConnectGatewayAttachmentRequest_ClientToken
+
+var CreateDirectConnectGatewayAttachmentResponse = &sCreateDirectConnectGatewayAttachmentResponse
+var CreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = &sCreateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment
+
+var CreateGlobalNetworkRequest = &sCreateGlobalNetworkRequest
+var CreateGlobalNetworkRequest_Description = &sCreateGlobalNetworkRequest_Description
+var CreateGlobalNetworkRequest_Tags = &sCreateGlobalNetworkRequest_Tags
+
+var CreateGlobalNetworkResponse = &sCreateGlobalNetworkResponse
+var CreateGlobalNetworkResponse_GlobalNetwork = &sCreateGlobalNetworkResponse_GlobalNetwork
+
+var CreateLinkRequest = &sCreateLinkRequest
+var CreateLinkRequest_GlobalNetworkId = &sCreateLinkRequest_GlobalNetworkId
+var CreateLinkRequest_Description = &sCreateLinkRequest_Description
+var CreateLinkRequest_Type = &sCreateLinkRequest_Type
+var CreateLinkRequest_Bandwidth = &sCreateLinkRequest_Bandwidth
+var CreateLinkRequest_Provider = &sCreateLinkRequest_Provider
+var CreateLinkRequest_SiteId = &sCreateLinkRequest_SiteId
+var CreateLinkRequest_Tags = &sCreateLinkRequest_Tags
+
+var CreateLinkResponse = &sCreateLinkResponse
+var CreateLinkResponse_Link = &sCreateLinkResponse_Link
+
+var CreateSiteRequest = &sCreateSiteRequest
+var CreateSiteRequest_GlobalNetworkId = &sCreateSiteRequest_GlobalNetworkId
+var CreateSiteRequest_Description = &sCreateSiteRequest_Description
+var CreateSiteRequest_Location = &sCreateSiteRequest_Location
+var CreateSiteRequest_Tags = &sCreateSiteRequest_Tags
+
+var CreateSiteResponse = &sCreateSiteResponse
+var CreateSiteResponse_Site = &sCreateSiteResponse_Site
+
+var CreateSiteToSiteVpnAttachmentRequest = &sCreateSiteToSiteVpnAttachmentRequest
+var CreateSiteToSiteVpnAttachmentRequest_CoreNetworkId = &sCreateSiteToSiteVpnAttachmentRequest_CoreNetworkId
+var CreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn = &sCreateSiteToSiteVpnAttachmentRequest_VpnConnectionArn
+var CreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel = &sCreateSiteToSiteVpnAttachmentRequest_RoutingPolicyLabel
+var CreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport = &sCreateSiteToSiteVpnAttachmentRequest_NatGatewaySupport
+var CreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport = &sCreateSiteToSiteVpnAttachmentRequest_NatSystemRouteSupport
+var CreateSiteToSiteVpnAttachmentRequest_NatGatewayRules = &sCreateSiteToSiteVpnAttachmentRequest_NatGatewayRules
+var CreateSiteToSiteVpnAttachmentRequest_Tags = &sCreateSiteToSiteVpnAttachmentRequest_Tags
+var CreateSiteToSiteVpnAttachmentRequest_ClientToken = &sCreateSiteToSiteVpnAttachmentRequest_ClientToken
+
+var CreateSiteToSiteVpnAttachmentResponse = &sCreateSiteToSiteVpnAttachmentResponse
+var CreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment = &sCreateSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment
+
+var CreateTransitGatewayPeeringRequest = &sCreateTransitGatewayPeeringRequest
+var CreateTransitGatewayPeeringRequest_CoreNetworkId = &sCreateTransitGatewayPeeringRequest_CoreNetworkId
+var CreateTransitGatewayPeeringRequest_TransitGatewayArn = &sCreateTransitGatewayPeeringRequest_TransitGatewayArn
+var CreateTransitGatewayPeeringRequest_Tags = &sCreateTransitGatewayPeeringRequest_Tags
+var CreateTransitGatewayPeeringRequest_ClientToken = &sCreateTransitGatewayPeeringRequest_ClientToken
+
+var CreateTransitGatewayPeeringResponse = &sCreateTransitGatewayPeeringResponse
+var CreateTransitGatewayPeeringResponse_TransitGatewayPeering = &sCreateTransitGatewayPeeringResponse_TransitGatewayPeering
+
+var CreateTransitGatewayRouteTableAttachmentRequest = &sCreateTransitGatewayRouteTableAttachmentRequest
+var CreateTransitGatewayRouteTableAttachmentRequest_PeeringId = &sCreateTransitGatewayRouteTableAttachmentRequest_PeeringId
+var CreateTransitGatewayRouteTableAttachmentRequest_TransitGatewayRouteTableArn = &sCreateTransitGatewayRouteTableAttachmentRequest_TransitGatewayRouteTableArn
+var CreateTransitGatewayRouteTableAttachmentRequest_RoutingPolicyLabel = &sCreateTransitGatewayRouteTableAttachmentRequest_RoutingPolicyLabel
+var CreateTransitGatewayRouteTableAttachmentRequest_Tags = &sCreateTransitGatewayRouteTableAttachmentRequest_Tags
+var CreateTransitGatewayRouteTableAttachmentRequest_ClientToken = &sCreateTransitGatewayRouteTableAttachmentRequest_ClientToken
+
+var CreateTransitGatewayRouteTableAttachmentResponse = &sCreateTransitGatewayRouteTableAttachmentResponse
+var CreateTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment = &sCreateTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment
+
+var CreateVpcAttachmentRequest = &sCreateVpcAttachmentRequest
+var CreateVpcAttachmentRequest_CoreNetworkId = &sCreateVpcAttachmentRequest_CoreNetworkId
+var CreateVpcAttachmentRequest_VpcArn = &sCreateVpcAttachmentRequest_VpcArn
+var CreateVpcAttachmentRequest_SubnetArns = &sCreateVpcAttachmentRequest_SubnetArns
+var CreateVpcAttachmentRequest_Options = &sCreateVpcAttachmentRequest_Options
+var CreateVpcAttachmentRequest_RoutingPolicyLabel = &sCreateVpcAttachmentRequest_RoutingPolicyLabel
+var CreateVpcAttachmentRequest_NatGatewaySupport = &sCreateVpcAttachmentRequest_NatGatewaySupport
+var CreateVpcAttachmentRequest_NatGatewayRules = &sCreateVpcAttachmentRequest_NatGatewayRules
+var CreateVpcAttachmentRequest_Tags = &sCreateVpcAttachmentRequest_Tags
+var CreateVpcAttachmentRequest_ClientToken = &sCreateVpcAttachmentRequest_ClientToken
+
+var CreateVpcAttachmentResponse = &sCreateVpcAttachmentResponse
+var CreateVpcAttachmentResponse_VpcAttachment = &sCreateVpcAttachmentResponse_VpcAttachment
+
+var DeleteAttachmentRequest = &sDeleteAttachmentRequest
+var DeleteAttachmentRequest_AttachmentId = &sDeleteAttachmentRequest_AttachmentId
+
+var DeleteAttachmentResponse = &sDeleteAttachmentResponse
+var DeleteAttachmentResponse_Attachment = &sDeleteAttachmentResponse_Attachment
+
+var DeleteConnectionRequest = &sDeleteConnectionRequest
+var DeleteConnectionRequest_GlobalNetworkId = &sDeleteConnectionRequest_GlobalNetworkId
+var DeleteConnectionRequest_ConnectionId = &sDeleteConnectionRequest_ConnectionId
+
+var DeleteConnectionResponse = &sDeleteConnectionResponse
+var DeleteConnectionResponse_Connection = &sDeleteConnectionResponse_Connection
+
+var DeleteConnectPeerRequest = &sDeleteConnectPeerRequest
+var DeleteConnectPeerRequest_ConnectPeerId = &sDeleteConnectPeerRequest_ConnectPeerId
+
+var DeleteConnectPeerResponse = &sDeleteConnectPeerResponse
+var DeleteConnectPeerResponse_ConnectPeer = &sDeleteConnectPeerResponse_ConnectPeer
+
+var DeleteCoreNetworkRequest = &sDeleteCoreNetworkRequest
+var DeleteCoreNetworkRequest_CoreNetworkId = &sDeleteCoreNetworkRequest_CoreNetworkId
+
+var DeleteCoreNetworkResponse = &sDeleteCoreNetworkResponse
+var DeleteCoreNetworkResponse_CoreNetwork = &sDeleteCoreNetworkResponse_CoreNetwork
+
+var DeleteCoreNetworkPolicyVersionRequest = &sDeleteCoreNetworkPolicyVersionRequest
+var DeleteCoreNetworkPolicyVersionRequest_CoreNetworkId = &sDeleteCoreNetworkPolicyVersionRequest_CoreNetworkId
+var DeleteCoreNetworkPolicyVersionRequest_PolicyVersionId = &sDeleteCoreNetworkPolicyVersionRequest_PolicyVersionId
+
+var DeleteCoreNetworkPolicyVersionResponse = &sDeleteCoreNetworkPolicyVersionResponse
+var DeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy = &sDeleteCoreNetworkPolicyVersionResponse_CoreNetworkPolicy
+
+var DeleteCoreNetworkPrefixListAssociationRequest = &sDeleteCoreNetworkPrefixListAssociationRequest
+var DeleteCoreNetworkPrefixListAssociationRequest_CoreNetworkId = &sDeleteCoreNetworkPrefixListAssociationRequest_CoreNetworkId
+var DeleteCoreNetworkPrefixListAssociationRequest_PrefixListArn = &sDeleteCoreNetworkPrefixListAssociationRequest_PrefixListArn
+
+var DeleteCoreNetworkPrefixListAssociationResponse = &sDeleteCoreNetworkPrefixListAssociationResponse
+var DeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId = &sDeleteCoreNetworkPrefixListAssociationResponse_CoreNetworkId
+var DeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn = &sDeleteCoreNetworkPrefixListAssociationResponse_PrefixListArn
+
+var DeleteDeviceRequest = &sDeleteDeviceRequest
+var DeleteDeviceRequest_GlobalNetworkId = &sDeleteDeviceRequest_GlobalNetworkId
+var DeleteDeviceRequest_DeviceId = &sDeleteDeviceRequest_DeviceId
+
+var DeleteDeviceResponse = &sDeleteDeviceResponse
+var DeleteDeviceResponse_Device = &sDeleteDeviceResponse_Device
+
+var DeleteGlobalNetworkRequest = &sDeleteGlobalNetworkRequest
+var DeleteGlobalNetworkRequest_GlobalNetworkId = &sDeleteGlobalNetworkRequest_GlobalNetworkId
+
+var DeleteGlobalNetworkResponse = &sDeleteGlobalNetworkResponse
+var DeleteGlobalNetworkResponse_GlobalNetwork = &sDeleteGlobalNetworkResponse_GlobalNetwork
+
+var DeleteLinkRequest = &sDeleteLinkRequest
+var DeleteLinkRequest_GlobalNetworkId = &sDeleteLinkRequest_GlobalNetworkId
+var DeleteLinkRequest_LinkId = &sDeleteLinkRequest_LinkId
+
+var DeleteLinkResponse = &sDeleteLinkResponse
+var DeleteLinkResponse_Link = &sDeleteLinkResponse_Link
+
+var DeletePeeringRequest = &sDeletePeeringRequest
+var DeletePeeringRequest_PeeringId = &sDeletePeeringRequest_PeeringId
+
+var DeletePeeringResponse = &sDeletePeeringResponse
+var DeletePeeringResponse_Peering = &sDeletePeeringResponse_Peering
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_ResourceArn = &sDeleteResourcePolicyRequest_ResourceArn
+
+var DeleteResourcePolicyResponse = &sDeleteResourcePolicyResponse
+
+var DeleteSiteRequest = &sDeleteSiteRequest
+var DeleteSiteRequest_GlobalNetworkId = &sDeleteSiteRequest_GlobalNetworkId
+var DeleteSiteRequest_SiteId = &sDeleteSiteRequest_SiteId
+
+var DeleteSiteResponse = &sDeleteSiteResponse
+var DeleteSiteResponse_Site = &sDeleteSiteResponse_Site
+
+var DeregisterTransitGatewayRequest = &sDeregisterTransitGatewayRequest
+var DeregisterTransitGatewayRequest_GlobalNetworkId = &sDeregisterTransitGatewayRequest_GlobalNetworkId
+var DeregisterTransitGatewayRequest_TransitGatewayArn = &sDeregisterTransitGatewayRequest_TransitGatewayArn
+
+var DeregisterTransitGatewayResponse = &sDeregisterTransitGatewayResponse
+var DeregisterTransitGatewayResponse_TransitGatewayRegistration = &sDeregisterTransitGatewayResponse_TransitGatewayRegistration
+
+var DescribeGlobalNetworksRequest = &sDescribeGlobalNetworksRequest
+var DescribeGlobalNetworksRequest_GlobalNetworkIds = &sDescribeGlobalNetworksRequest_GlobalNetworkIds
+var DescribeGlobalNetworksRequest_MaxResults = &sDescribeGlobalNetworksRequest_MaxResults
+var DescribeGlobalNetworksRequest_NextToken = &sDescribeGlobalNetworksRequest_NextToken
+
+var DescribeGlobalNetworksResponse = &sDescribeGlobalNetworksResponse
+var DescribeGlobalNetworksResponse_GlobalNetworks = &sDescribeGlobalNetworksResponse_GlobalNetworks
+var DescribeGlobalNetworksResponse_NextToken = &sDescribeGlobalNetworksResponse_NextToken
+
+var DisassociateConnectPeerRequest = &sDisassociateConnectPeerRequest
+var DisassociateConnectPeerRequest_GlobalNetworkId = &sDisassociateConnectPeerRequest_GlobalNetworkId
+var DisassociateConnectPeerRequest_ConnectPeerId = &sDisassociateConnectPeerRequest_ConnectPeerId
+
+var DisassociateConnectPeerResponse = &sDisassociateConnectPeerResponse
+var DisassociateConnectPeerResponse_ConnectPeerAssociation = &sDisassociateConnectPeerResponse_ConnectPeerAssociation
+
+var DisassociateCustomerGatewayRequest = &sDisassociateCustomerGatewayRequest
+var DisassociateCustomerGatewayRequest_GlobalNetworkId = &sDisassociateCustomerGatewayRequest_GlobalNetworkId
+var DisassociateCustomerGatewayRequest_CustomerGatewayArn = &sDisassociateCustomerGatewayRequest_CustomerGatewayArn
+
+var DisassociateCustomerGatewayResponse = &sDisassociateCustomerGatewayResponse
+var DisassociateCustomerGatewayResponse_CustomerGatewayAssociation = &sDisassociateCustomerGatewayResponse_CustomerGatewayAssociation
+
+var DisassociateLinkRequest = &sDisassociateLinkRequest
+var DisassociateLinkRequest_GlobalNetworkId = &sDisassociateLinkRequest_GlobalNetworkId
+var DisassociateLinkRequest_DeviceId = &sDisassociateLinkRequest_DeviceId
+var DisassociateLinkRequest_LinkId = &sDisassociateLinkRequest_LinkId
+
+var DisassociateLinkResponse = &sDisassociateLinkResponse
+var DisassociateLinkResponse_LinkAssociation = &sDisassociateLinkResponse_LinkAssociation
+
+var DisassociateTransitGatewayConnectPeerRequest = &sDisassociateTransitGatewayConnectPeerRequest
+var DisassociateTransitGatewayConnectPeerRequest_GlobalNetworkId = &sDisassociateTransitGatewayConnectPeerRequest_GlobalNetworkId
+var DisassociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn = &sDisassociateTransitGatewayConnectPeerRequest_TransitGatewayConnectPeerArn
+
+var DisassociateTransitGatewayConnectPeerResponse = &sDisassociateTransitGatewayConnectPeerResponse
+var DisassociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation = &sDisassociateTransitGatewayConnectPeerResponse_TransitGatewayConnectPeerAssociation
+
+var ExecuteCoreNetworkChangeSetRequest = &sExecuteCoreNetworkChangeSetRequest
+var ExecuteCoreNetworkChangeSetRequest_CoreNetworkId = &sExecuteCoreNetworkChangeSetRequest_CoreNetworkId
+var ExecuteCoreNetworkChangeSetRequest_PolicyVersionId = &sExecuteCoreNetworkChangeSetRequest_PolicyVersionId
+
+var ExecuteCoreNetworkChangeSetResponse = &sExecuteCoreNetworkChangeSetResponse
+
+var GetConnectAttachmentRequest = &sGetConnectAttachmentRequest
+var GetConnectAttachmentRequest_AttachmentId = &sGetConnectAttachmentRequest_AttachmentId
+
+var GetConnectAttachmentResponse = &sGetConnectAttachmentResponse
+var GetConnectAttachmentResponse_ConnectAttachment = &sGetConnectAttachmentResponse_ConnectAttachment
+
+var GetConnectionsRequest = &sGetConnectionsRequest
+var GetConnectionsRequest_GlobalNetworkId = &sGetConnectionsRequest_GlobalNetworkId
+var GetConnectionsRequest_ConnectionIds = &sGetConnectionsRequest_ConnectionIds
+var GetConnectionsRequest_DeviceId = &sGetConnectionsRequest_DeviceId
+var GetConnectionsRequest_MaxResults = &sGetConnectionsRequest_MaxResults
+var GetConnectionsRequest_NextToken = &sGetConnectionsRequest_NextToken
+
+var GetConnectionsResponse = &sGetConnectionsResponse
+var GetConnectionsResponse_Connections = &sGetConnectionsResponse_Connections
+var GetConnectionsResponse_NextToken = &sGetConnectionsResponse_NextToken
+
+var GetConnectPeerAssociationsRequest = &sGetConnectPeerAssociationsRequest
+var GetConnectPeerAssociationsRequest_GlobalNetworkId = &sGetConnectPeerAssociationsRequest_GlobalNetworkId
+var GetConnectPeerAssociationsRequest_ConnectPeerIds = &sGetConnectPeerAssociationsRequest_ConnectPeerIds
+var GetConnectPeerAssociationsRequest_MaxResults = &sGetConnectPeerAssociationsRequest_MaxResults
+var GetConnectPeerAssociationsRequest_NextToken = &sGetConnectPeerAssociationsRequest_NextToken
+
+var GetConnectPeerAssociationsResponse = &sGetConnectPeerAssociationsResponse
+var GetConnectPeerAssociationsResponse_ConnectPeerAssociations = &sGetConnectPeerAssociationsResponse_ConnectPeerAssociations
+var GetConnectPeerAssociationsResponse_NextToken = &sGetConnectPeerAssociationsResponse_NextToken
+
+var GetConnectPeerRequest = &sGetConnectPeerRequest
+var GetConnectPeerRequest_ConnectPeerId = &sGetConnectPeerRequest_ConnectPeerId
+
+var GetConnectPeerResponse = &sGetConnectPeerResponse
+var GetConnectPeerResponse_ConnectPeer = &sGetConnectPeerResponse_ConnectPeer
+
+var GetCoreNetworkChangeEventsRequest = &sGetCoreNetworkChangeEventsRequest
+var GetCoreNetworkChangeEventsRequest_CoreNetworkId = &sGetCoreNetworkChangeEventsRequest_CoreNetworkId
+var GetCoreNetworkChangeEventsRequest_PolicyVersionId = &sGetCoreNetworkChangeEventsRequest_PolicyVersionId
+var GetCoreNetworkChangeEventsRequest_MaxResults = &sGetCoreNetworkChangeEventsRequest_MaxResults
+var GetCoreNetworkChangeEventsRequest_NextToken = &sGetCoreNetworkChangeEventsRequest_NextToken
+
+var GetCoreNetworkChangeEventsResponse = &sGetCoreNetworkChangeEventsResponse
+var GetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents = &sGetCoreNetworkChangeEventsResponse_CoreNetworkChangeEvents
+var GetCoreNetworkChangeEventsResponse_NextToken = &sGetCoreNetworkChangeEventsResponse_NextToken
+
+var GetCoreNetworkChangeSetRequest = &sGetCoreNetworkChangeSetRequest
+var GetCoreNetworkChangeSetRequest_CoreNetworkId = &sGetCoreNetworkChangeSetRequest_CoreNetworkId
+var GetCoreNetworkChangeSetRequest_PolicyVersionId = &sGetCoreNetworkChangeSetRequest_PolicyVersionId
+var GetCoreNetworkChangeSetRequest_MaxResults = &sGetCoreNetworkChangeSetRequest_MaxResults
+var GetCoreNetworkChangeSetRequest_NextToken = &sGetCoreNetworkChangeSetRequest_NextToken
+
+var GetCoreNetworkChangeSetResponse = &sGetCoreNetworkChangeSetResponse
+var GetCoreNetworkChangeSetResponse_CoreNetworkChanges = &sGetCoreNetworkChangeSetResponse_CoreNetworkChanges
+var GetCoreNetworkChangeSetResponse_NextToken = &sGetCoreNetworkChangeSetResponse_NextToken
+
+var GetCoreNetworkRequest = &sGetCoreNetworkRequest
+var GetCoreNetworkRequest_CoreNetworkId = &sGetCoreNetworkRequest_CoreNetworkId
+
+var GetCoreNetworkResponse = &sGetCoreNetworkResponse
+var GetCoreNetworkResponse_CoreNetwork = &sGetCoreNetworkResponse_CoreNetwork
+
+var GetCoreNetworkPolicyRequest = &sGetCoreNetworkPolicyRequest
+var GetCoreNetworkPolicyRequest_CoreNetworkId = &sGetCoreNetworkPolicyRequest_CoreNetworkId
+var GetCoreNetworkPolicyRequest_PolicyVersionId = &sGetCoreNetworkPolicyRequest_PolicyVersionId
+var GetCoreNetworkPolicyRequest_Alias = &sGetCoreNetworkPolicyRequest_Alias
+
+var GetCoreNetworkPolicyResponse = &sGetCoreNetworkPolicyResponse
+var GetCoreNetworkPolicyResponse_CoreNetworkPolicy = &sGetCoreNetworkPolicyResponse_CoreNetworkPolicy
+
+var GetCustomerGatewayAssociationsRequest = &sGetCustomerGatewayAssociationsRequest
+var GetCustomerGatewayAssociationsRequest_GlobalNetworkId = &sGetCustomerGatewayAssociationsRequest_GlobalNetworkId
+var GetCustomerGatewayAssociationsRequest_CustomerGatewayArns = &sGetCustomerGatewayAssociationsRequest_CustomerGatewayArns
+var GetCustomerGatewayAssociationsRequest_MaxResults = &sGetCustomerGatewayAssociationsRequest_MaxResults
+var GetCustomerGatewayAssociationsRequest_NextToken = &sGetCustomerGatewayAssociationsRequest_NextToken
+
+var GetCustomerGatewayAssociationsResponse = &sGetCustomerGatewayAssociationsResponse
+var GetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations = &sGetCustomerGatewayAssociationsResponse_CustomerGatewayAssociations
+var GetCustomerGatewayAssociationsResponse_NextToken = &sGetCustomerGatewayAssociationsResponse_NextToken
+
+var GetDevicesRequest = &sGetDevicesRequest
+var GetDevicesRequest_GlobalNetworkId = &sGetDevicesRequest_GlobalNetworkId
+var GetDevicesRequest_DeviceIds = &sGetDevicesRequest_DeviceIds
+var GetDevicesRequest_SiteId = &sGetDevicesRequest_SiteId
+var GetDevicesRequest_MaxResults = &sGetDevicesRequest_MaxResults
+var GetDevicesRequest_NextToken = &sGetDevicesRequest_NextToken
+
+var GetDevicesResponse = &sGetDevicesResponse
+var GetDevicesResponse_Devices = &sGetDevicesResponse_Devices
+var GetDevicesResponse_NextToken = &sGetDevicesResponse_NextToken
+
+var GetDirectConnectGatewayAttachmentRequest = &sGetDirectConnectGatewayAttachmentRequest
+var GetDirectConnectGatewayAttachmentRequest_AttachmentId = &sGetDirectConnectGatewayAttachmentRequest_AttachmentId
+
+var GetDirectConnectGatewayAttachmentResponse = &sGetDirectConnectGatewayAttachmentResponse
+var GetDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = &sGetDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment
+
+var GetLinkAssociationsRequest = &sGetLinkAssociationsRequest
+var GetLinkAssociationsRequest_GlobalNetworkId = &sGetLinkAssociationsRequest_GlobalNetworkId
+var GetLinkAssociationsRequest_DeviceId = &sGetLinkAssociationsRequest_DeviceId
+var GetLinkAssociationsRequest_LinkId = &sGetLinkAssociationsRequest_LinkId
+var GetLinkAssociationsRequest_MaxResults = &sGetLinkAssociationsRequest_MaxResults
+var GetLinkAssociationsRequest_NextToken = &sGetLinkAssociationsRequest_NextToken
+
+var GetLinkAssociationsResponse = &sGetLinkAssociationsResponse
+var GetLinkAssociationsResponse_LinkAssociations = &sGetLinkAssociationsResponse_LinkAssociations
+var GetLinkAssociationsResponse_NextToken = &sGetLinkAssociationsResponse_NextToken
+
+var GetLinksRequest = &sGetLinksRequest
+var GetLinksRequest_GlobalNetworkId = &sGetLinksRequest_GlobalNetworkId
+var GetLinksRequest_LinkIds = &sGetLinksRequest_LinkIds
+var GetLinksRequest_SiteId = &sGetLinksRequest_SiteId
+var GetLinksRequest_Type = &sGetLinksRequest_Type
+var GetLinksRequest_Provider = &sGetLinksRequest_Provider
+var GetLinksRequest_MaxResults = &sGetLinksRequest_MaxResults
+var GetLinksRequest_NextToken = &sGetLinksRequest_NextToken
+
+var GetLinksResponse = &sGetLinksResponse
+var GetLinksResponse_Links = &sGetLinksResponse_Links
+var GetLinksResponse_NextToken = &sGetLinksResponse_NextToken
+
+var GetNetworkResourceCountsRequest = &sGetNetworkResourceCountsRequest
+var GetNetworkResourceCountsRequest_GlobalNetworkId = &sGetNetworkResourceCountsRequest_GlobalNetworkId
+var GetNetworkResourceCountsRequest_ResourceType = &sGetNetworkResourceCountsRequest_ResourceType
+var GetNetworkResourceCountsRequest_MaxResults = &sGetNetworkResourceCountsRequest_MaxResults
+var GetNetworkResourceCountsRequest_NextToken = &sGetNetworkResourceCountsRequest_NextToken
+
+var GetNetworkResourceCountsResponse = &sGetNetworkResourceCountsResponse
+var GetNetworkResourceCountsResponse_NetworkResourceCounts = &sGetNetworkResourceCountsResponse_NetworkResourceCounts
+var GetNetworkResourceCountsResponse_NextToken = &sGetNetworkResourceCountsResponse_NextToken
+
+var GetNetworkResourceRelationshipsRequest = &sGetNetworkResourceRelationshipsRequest
+var GetNetworkResourceRelationshipsRequest_GlobalNetworkId = &sGetNetworkResourceRelationshipsRequest_GlobalNetworkId
+var GetNetworkResourceRelationshipsRequest_CoreNetworkId = &sGetNetworkResourceRelationshipsRequest_CoreNetworkId
+var GetNetworkResourceRelationshipsRequest_RegisteredGatewayArn = &sGetNetworkResourceRelationshipsRequest_RegisteredGatewayArn
+var GetNetworkResourceRelationshipsRequest_AwsRegion = &sGetNetworkResourceRelationshipsRequest_AwsRegion
+var GetNetworkResourceRelationshipsRequest_AccountId = &sGetNetworkResourceRelationshipsRequest_AccountId
+var GetNetworkResourceRelationshipsRequest_ResourceType = &sGetNetworkResourceRelationshipsRequest_ResourceType
+var GetNetworkResourceRelationshipsRequest_ResourceArn = &sGetNetworkResourceRelationshipsRequest_ResourceArn
+var GetNetworkResourceRelationshipsRequest_MaxResults = &sGetNetworkResourceRelationshipsRequest_MaxResults
+var GetNetworkResourceRelationshipsRequest_NextToken = &sGetNetworkResourceRelationshipsRequest_NextToken
+
+var GetNetworkResourceRelationshipsResponse = &sGetNetworkResourceRelationshipsResponse
+var GetNetworkResourceRelationshipsResponse_Relationships = &sGetNetworkResourceRelationshipsResponse_Relationships
+var GetNetworkResourceRelationshipsResponse_NextToken = &sGetNetworkResourceRelationshipsResponse_NextToken
+
+var GetNetworkResourcesRequest = &sGetNetworkResourcesRequest
+var GetNetworkResourcesRequest_GlobalNetworkId = &sGetNetworkResourcesRequest_GlobalNetworkId
+var GetNetworkResourcesRequest_CoreNetworkId = &sGetNetworkResourcesRequest_CoreNetworkId
+var GetNetworkResourcesRequest_RegisteredGatewayArn = &sGetNetworkResourcesRequest_RegisteredGatewayArn
+var GetNetworkResourcesRequest_AwsRegion = &sGetNetworkResourcesRequest_AwsRegion
+var GetNetworkResourcesRequest_AccountId = &sGetNetworkResourcesRequest_AccountId
+var GetNetworkResourcesRequest_ResourceType = &sGetNetworkResourcesRequest_ResourceType
+var GetNetworkResourcesRequest_ResourceArn = &sGetNetworkResourcesRequest_ResourceArn
+var GetNetworkResourcesRequest_MaxResults = &sGetNetworkResourcesRequest_MaxResults
+var GetNetworkResourcesRequest_NextToken = &sGetNetworkResourcesRequest_NextToken
+
+var GetNetworkResourcesResponse = &sGetNetworkResourcesResponse
+var GetNetworkResourcesResponse_NetworkResources = &sGetNetworkResourcesResponse_NetworkResources
+var GetNetworkResourcesResponse_NextToken = &sGetNetworkResourcesResponse_NextToken
+
+var GetNetworkRoutesRequest = &sGetNetworkRoutesRequest
+var GetNetworkRoutesRequest_GlobalNetworkId = &sGetNetworkRoutesRequest_GlobalNetworkId
+var GetNetworkRoutesRequest_RouteTableIdentifier = &sGetNetworkRoutesRequest_RouteTableIdentifier
+var GetNetworkRoutesRequest_ExactCidrMatches = &sGetNetworkRoutesRequest_ExactCidrMatches
+var GetNetworkRoutesRequest_LongestPrefixMatches = &sGetNetworkRoutesRequest_LongestPrefixMatches
+var GetNetworkRoutesRequest_SubnetOfMatches = &sGetNetworkRoutesRequest_SubnetOfMatches
+var GetNetworkRoutesRequest_SupernetOfMatches = &sGetNetworkRoutesRequest_SupernetOfMatches
+var GetNetworkRoutesRequest_PrefixListIds = &sGetNetworkRoutesRequest_PrefixListIds
+var GetNetworkRoutesRequest_States = &sGetNetworkRoutesRequest_States
+var GetNetworkRoutesRequest_Types = &sGetNetworkRoutesRequest_Types
+var GetNetworkRoutesRequest_DestinationFilters = &sGetNetworkRoutesRequest_DestinationFilters
+var GetNetworkRoutesRequest_MaxResults = &sGetNetworkRoutesRequest_MaxResults
+var GetNetworkRoutesRequest_NextToken = &sGetNetworkRoutesRequest_NextToken
+
+var GetNetworkRoutesResponse = &sGetNetworkRoutesResponse
+var GetNetworkRoutesResponse_RouteTableArn = &sGetNetworkRoutesResponse_RouteTableArn
+var GetNetworkRoutesResponse_CoreNetworkSegmentEdge = &sGetNetworkRoutesResponse_CoreNetworkSegmentEdge
+var GetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup = &sGetNetworkRoutesResponse_CoreNetworkNetworkFunctionGroup
+var GetNetworkRoutesResponse_RouteTableType = &sGetNetworkRoutesResponse_RouteTableType
+var GetNetworkRoutesResponse_RouteTableTimestamp = &sGetNetworkRoutesResponse_RouteTableTimestamp
+var GetNetworkRoutesResponse_NetworkRoutes = &sGetNetworkRoutesResponse_NetworkRoutes
+var GetNetworkRoutesResponse_NextToken = &sGetNetworkRoutesResponse_NextToken
+
+var GetNetworkTelemetryRequest = &sGetNetworkTelemetryRequest
+var GetNetworkTelemetryRequest_GlobalNetworkId = &sGetNetworkTelemetryRequest_GlobalNetworkId
+var GetNetworkTelemetryRequest_CoreNetworkId = &sGetNetworkTelemetryRequest_CoreNetworkId
+var GetNetworkTelemetryRequest_RegisteredGatewayArn = &sGetNetworkTelemetryRequest_RegisteredGatewayArn
+var GetNetworkTelemetryRequest_AwsRegion = &sGetNetworkTelemetryRequest_AwsRegion
+var GetNetworkTelemetryRequest_AccountId = &sGetNetworkTelemetryRequest_AccountId
+var GetNetworkTelemetryRequest_ResourceType = &sGetNetworkTelemetryRequest_ResourceType
+var GetNetworkTelemetryRequest_ResourceArn = &sGetNetworkTelemetryRequest_ResourceArn
+var GetNetworkTelemetryRequest_MaxResults = &sGetNetworkTelemetryRequest_MaxResults
+var GetNetworkTelemetryRequest_NextToken = &sGetNetworkTelemetryRequest_NextToken
+
+var GetNetworkTelemetryResponse = &sGetNetworkTelemetryResponse
+var GetNetworkTelemetryResponse_NetworkTelemetry = &sGetNetworkTelemetryResponse_NetworkTelemetry
+var GetNetworkTelemetryResponse_NextToken = &sGetNetworkTelemetryResponse_NextToken
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_ResourceArn = &sGetResourcePolicyRequest_ResourceArn
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_PolicyDocument = &sGetResourcePolicyResponse_PolicyDocument
+
+var GetRouteAnalysisRequest = &sGetRouteAnalysisRequest
+var GetRouteAnalysisRequest_GlobalNetworkId = &sGetRouteAnalysisRequest_GlobalNetworkId
+var GetRouteAnalysisRequest_RouteAnalysisId = &sGetRouteAnalysisRequest_RouteAnalysisId
+
+var GetRouteAnalysisResponse = &sGetRouteAnalysisResponse
+var GetRouteAnalysisResponse_RouteAnalysis = &sGetRouteAnalysisResponse_RouteAnalysis
+
+var GetSitesRequest = &sGetSitesRequest
+var GetSitesRequest_GlobalNetworkId = &sGetSitesRequest_GlobalNetworkId
+var GetSitesRequest_SiteIds = &sGetSitesRequest_SiteIds
+var GetSitesRequest_MaxResults = &sGetSitesRequest_MaxResults
+var GetSitesRequest_NextToken = &sGetSitesRequest_NextToken
+
+var GetSitesResponse = &sGetSitesResponse
+var GetSitesResponse_Sites = &sGetSitesResponse_Sites
+var GetSitesResponse_NextToken = &sGetSitesResponse_NextToken
+
+var GetSiteToSiteVpnAttachmentRequest = &sGetSiteToSiteVpnAttachmentRequest
+var GetSiteToSiteVpnAttachmentRequest_AttachmentId = &sGetSiteToSiteVpnAttachmentRequest_AttachmentId
+
+var GetSiteToSiteVpnAttachmentResponse = &sGetSiteToSiteVpnAttachmentResponse
+var GetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment = &sGetSiteToSiteVpnAttachmentResponse_SiteToSiteVpnAttachment
+
+var GetTransitGatewayConnectPeerAssociationsRequest = &sGetTransitGatewayConnectPeerAssociationsRequest
+var GetTransitGatewayConnectPeerAssociationsRequest_GlobalNetworkId = &sGetTransitGatewayConnectPeerAssociationsRequest_GlobalNetworkId
+var GetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns = &sGetTransitGatewayConnectPeerAssociationsRequest_TransitGatewayConnectPeerArns
+var GetTransitGatewayConnectPeerAssociationsRequest_MaxResults = &sGetTransitGatewayConnectPeerAssociationsRequest_MaxResults
+var GetTransitGatewayConnectPeerAssociationsRequest_NextToken = &sGetTransitGatewayConnectPeerAssociationsRequest_NextToken
+
+var GetTransitGatewayConnectPeerAssociationsResponse = &sGetTransitGatewayConnectPeerAssociationsResponse
+var GetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations = &sGetTransitGatewayConnectPeerAssociationsResponse_TransitGatewayConnectPeerAssociations
+var GetTransitGatewayConnectPeerAssociationsResponse_NextToken = &sGetTransitGatewayConnectPeerAssociationsResponse_NextToken
+
+var GetTransitGatewayPeeringRequest = &sGetTransitGatewayPeeringRequest
+var GetTransitGatewayPeeringRequest_PeeringId = &sGetTransitGatewayPeeringRequest_PeeringId
+
+var GetTransitGatewayPeeringResponse = &sGetTransitGatewayPeeringResponse
+var GetTransitGatewayPeeringResponse_TransitGatewayPeering = &sGetTransitGatewayPeeringResponse_TransitGatewayPeering
+
+var GetTransitGatewayRegistrationsRequest = &sGetTransitGatewayRegistrationsRequest
+var GetTransitGatewayRegistrationsRequest_GlobalNetworkId = &sGetTransitGatewayRegistrationsRequest_GlobalNetworkId
+var GetTransitGatewayRegistrationsRequest_TransitGatewayArns = &sGetTransitGatewayRegistrationsRequest_TransitGatewayArns
+var GetTransitGatewayRegistrationsRequest_MaxResults = &sGetTransitGatewayRegistrationsRequest_MaxResults
+var GetTransitGatewayRegistrationsRequest_NextToken = &sGetTransitGatewayRegistrationsRequest_NextToken
+
+var GetTransitGatewayRegistrationsResponse = &sGetTransitGatewayRegistrationsResponse
+var GetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations = &sGetTransitGatewayRegistrationsResponse_TransitGatewayRegistrations
+var GetTransitGatewayRegistrationsResponse_NextToken = &sGetTransitGatewayRegistrationsResponse_NextToken
+
+var GetTransitGatewayRouteTableAttachmentRequest = &sGetTransitGatewayRouteTableAttachmentRequest
+var GetTransitGatewayRouteTableAttachmentRequest_AttachmentId = &sGetTransitGatewayRouteTableAttachmentRequest_AttachmentId
+
+var GetTransitGatewayRouteTableAttachmentResponse = &sGetTransitGatewayRouteTableAttachmentResponse
+var GetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment = &sGetTransitGatewayRouteTableAttachmentResponse_TransitGatewayRouteTableAttachment
+
+var GetVpcAttachmentRequest = &sGetVpcAttachmentRequest
+var GetVpcAttachmentRequest_AttachmentId = &sGetVpcAttachmentRequest_AttachmentId
+
+var GetVpcAttachmentResponse = &sGetVpcAttachmentResponse
+var GetVpcAttachmentResponse_VpcAttachment = &sGetVpcAttachmentResponse_VpcAttachment
+
+var ListAttachmentNatConfigurationsRequest = &sListAttachmentNatConfigurationsRequest
+var ListAttachmentNatConfigurationsRequest_CoreNetworkId = &sListAttachmentNatConfigurationsRequest_CoreNetworkId
+var ListAttachmentNatConfigurationsRequest_AttachmentId = &sListAttachmentNatConfigurationsRequest_AttachmentId
+var ListAttachmentNatConfigurationsRequest_Filters = &sListAttachmentNatConfigurationsRequest_Filters
+var ListAttachmentNatConfigurationsRequest_MaxResults = &sListAttachmentNatConfigurationsRequest_MaxResults
+var ListAttachmentNatConfigurationsRequest_NextToken = &sListAttachmentNatConfigurationsRequest_NextToken
+
+var ListAttachmentNatConfigurationsResponse = &sListAttachmentNatConfigurationsResponse
+var ListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations = &sListAttachmentNatConfigurationsResponse_AttachmentNatConfigurations
+var ListAttachmentNatConfigurationsResponse_NextToken = &sListAttachmentNatConfigurationsResponse_NextToken
+
+var ListAttachmentRoutingPolicyAssociationsRequest = &sListAttachmentRoutingPolicyAssociationsRequest
+var ListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId = &sListAttachmentRoutingPolicyAssociationsRequest_CoreNetworkId
+var ListAttachmentRoutingPolicyAssociationsRequest_AttachmentId = &sListAttachmentRoutingPolicyAssociationsRequest_AttachmentId
+var ListAttachmentRoutingPolicyAssociationsRequest_MaxResults = &sListAttachmentRoutingPolicyAssociationsRequest_MaxResults
+var ListAttachmentRoutingPolicyAssociationsRequest_NextToken = &sListAttachmentRoutingPolicyAssociationsRequest_NextToken
+
+var ListAttachmentRoutingPolicyAssociationsResponse = &sListAttachmentRoutingPolicyAssociationsResponse
+var ListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations = &sListAttachmentRoutingPolicyAssociationsResponse_AttachmentRoutingPolicyAssociations
+var ListAttachmentRoutingPolicyAssociationsResponse_NextToken = &sListAttachmentRoutingPolicyAssociationsResponse_NextToken
+
+var ListAttachmentsRequest = &sListAttachmentsRequest
+var ListAttachmentsRequest_CoreNetworkId = &sListAttachmentsRequest_CoreNetworkId
+var ListAttachmentsRequest_AttachmentType = &sListAttachmentsRequest_AttachmentType
+var ListAttachmentsRequest_EdgeLocation = &sListAttachmentsRequest_EdgeLocation
+var ListAttachmentsRequest_State = &sListAttachmentsRequest_State
+var ListAttachmentsRequest_MaxResults = &sListAttachmentsRequest_MaxResults
+var ListAttachmentsRequest_NextToken = &sListAttachmentsRequest_NextToken
+
+var ListAttachmentsResponse = &sListAttachmentsResponse
+var ListAttachmentsResponse_Attachments = &sListAttachmentsResponse_Attachments
+var ListAttachmentsResponse_NextToken = &sListAttachmentsResponse_NextToken
+
+var ListConnectPeersRequest = &sListConnectPeersRequest
+var ListConnectPeersRequest_CoreNetworkId = &sListConnectPeersRequest_CoreNetworkId
+var ListConnectPeersRequest_ConnectAttachmentId = &sListConnectPeersRequest_ConnectAttachmentId
+var ListConnectPeersRequest_MaxResults = &sListConnectPeersRequest_MaxResults
+var ListConnectPeersRequest_NextToken = &sListConnectPeersRequest_NextToken
+
+var ListConnectPeersResponse = &sListConnectPeersResponse
+var ListConnectPeersResponse_ConnectPeers = &sListConnectPeersResponse_ConnectPeers
+var ListConnectPeersResponse_NextToken = &sListConnectPeersResponse_NextToken
+
+var ListCoreNetworkPolicyVersionsRequest = &sListCoreNetworkPolicyVersionsRequest
+var ListCoreNetworkPolicyVersionsRequest_CoreNetworkId = &sListCoreNetworkPolicyVersionsRequest_CoreNetworkId
+var ListCoreNetworkPolicyVersionsRequest_MaxResults = &sListCoreNetworkPolicyVersionsRequest_MaxResults
+var ListCoreNetworkPolicyVersionsRequest_NextToken = &sListCoreNetworkPolicyVersionsRequest_NextToken
+
+var ListCoreNetworkPolicyVersionsResponse = &sListCoreNetworkPolicyVersionsResponse
+var ListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions = &sListCoreNetworkPolicyVersionsResponse_CoreNetworkPolicyVersions
+var ListCoreNetworkPolicyVersionsResponse_NextToken = &sListCoreNetworkPolicyVersionsResponse_NextToken
+
+var ListCoreNetworkPrefixListAssociationsRequest = &sListCoreNetworkPrefixListAssociationsRequest
+var ListCoreNetworkPrefixListAssociationsRequest_CoreNetworkId = &sListCoreNetworkPrefixListAssociationsRequest_CoreNetworkId
+var ListCoreNetworkPrefixListAssociationsRequest_PrefixListArn = &sListCoreNetworkPrefixListAssociationsRequest_PrefixListArn
+var ListCoreNetworkPrefixListAssociationsRequest_MaxResults = &sListCoreNetworkPrefixListAssociationsRequest_MaxResults
+var ListCoreNetworkPrefixListAssociationsRequest_NextToken = &sListCoreNetworkPrefixListAssociationsRequest_NextToken
+
+var ListCoreNetworkPrefixListAssociationsResponse = &sListCoreNetworkPrefixListAssociationsResponse
+var ListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations = &sListCoreNetworkPrefixListAssociationsResponse_PrefixListAssociations
+var ListCoreNetworkPrefixListAssociationsResponse_NextToken = &sListCoreNetworkPrefixListAssociationsResponse_NextToken
+
+var ListCoreNetworkRoutingInformationRequest = &sListCoreNetworkRoutingInformationRequest
+var ListCoreNetworkRoutingInformationRequest_CoreNetworkId = &sListCoreNetworkRoutingInformationRequest_CoreNetworkId
+var ListCoreNetworkRoutingInformationRequest_SegmentName = &sListCoreNetworkRoutingInformationRequest_SegmentName
+var ListCoreNetworkRoutingInformationRequest_EdgeLocation = &sListCoreNetworkRoutingInformationRequest_EdgeLocation
+var ListCoreNetworkRoutingInformationRequest_NextHopFilters = &sListCoreNetworkRoutingInformationRequest_NextHopFilters
+var ListCoreNetworkRoutingInformationRequest_ExactPrefixMatches = &sListCoreNetworkRoutingInformationRequest_ExactPrefixMatches
+var ListCoreNetworkRoutingInformationRequest_LongestPrefixMatches = &sListCoreNetworkRoutingInformationRequest_LongestPrefixMatches
+var ListCoreNetworkRoutingInformationRequest_SubnetOfMatches = &sListCoreNetworkRoutingInformationRequest_SubnetOfMatches
+var ListCoreNetworkRoutingInformationRequest_SupernetOfMatches = &sListCoreNetworkRoutingInformationRequest_SupernetOfMatches
+var ListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches = &sListCoreNetworkRoutingInformationRequest_LocalPreferenceMatches
+var ListCoreNetworkRoutingInformationRequest_ExactAsPathMatches = &sListCoreNetworkRoutingInformationRequest_ExactAsPathMatches
+var ListCoreNetworkRoutingInformationRequest_MedMatches = &sListCoreNetworkRoutingInformationRequest_MedMatches
+var ListCoreNetworkRoutingInformationRequest_CommunityMatches = &sListCoreNetworkRoutingInformationRequest_CommunityMatches
+var ListCoreNetworkRoutingInformationRequest_MaxResults = &sListCoreNetworkRoutingInformationRequest_MaxResults
+var ListCoreNetworkRoutingInformationRequest_NextToken = &sListCoreNetworkRoutingInformationRequest_NextToken
+
+var ListCoreNetworkRoutingInformationResponse = &sListCoreNetworkRoutingInformationResponse
+var ListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation = &sListCoreNetworkRoutingInformationResponse_CoreNetworkRoutingInformation
+var ListCoreNetworkRoutingInformationResponse_NextToken = &sListCoreNetworkRoutingInformationResponse_NextToken
+
+var ListCoreNetworksRequest = &sListCoreNetworksRequest
+var ListCoreNetworksRequest_MaxResults = &sListCoreNetworksRequest_MaxResults
+var ListCoreNetworksRequest_NextToken = &sListCoreNetworksRequest_NextToken
+
+var ListCoreNetworksResponse = &sListCoreNetworksResponse
+var ListCoreNetworksResponse_CoreNetworks = &sListCoreNetworksResponse_CoreNetworks
+var ListCoreNetworksResponse_NextToken = &sListCoreNetworksResponse_NextToken
+
+var ListOrganizationServiceAccessStatusRequest = &sListOrganizationServiceAccessStatusRequest
+var ListOrganizationServiceAccessStatusRequest_MaxResults = &sListOrganizationServiceAccessStatusRequest_MaxResults
+var ListOrganizationServiceAccessStatusRequest_NextToken = &sListOrganizationServiceAccessStatusRequest_NextToken
+
+var ListOrganizationServiceAccessStatusResponse = &sListOrganizationServiceAccessStatusResponse
+var ListOrganizationServiceAccessStatusResponse_OrganizationStatus = &sListOrganizationServiceAccessStatusResponse_OrganizationStatus
+var ListOrganizationServiceAccessStatusResponse_NextToken = &sListOrganizationServiceAccessStatusResponse_NextToken
+
+var ListPeeringsRequest = &sListPeeringsRequest
+var ListPeeringsRequest_CoreNetworkId = &sListPeeringsRequest_CoreNetworkId
+var ListPeeringsRequest_PeeringType = &sListPeeringsRequest_PeeringType
+var ListPeeringsRequest_EdgeLocation = &sListPeeringsRequest_EdgeLocation
+var ListPeeringsRequest_State = &sListPeeringsRequest_State
+var ListPeeringsRequest_MaxResults = &sListPeeringsRequest_MaxResults
+var ListPeeringsRequest_NextToken = &sListPeeringsRequest_NextToken
+
+var ListPeeringsResponse = &sListPeeringsResponse
+var ListPeeringsResponse_Peerings = &sListPeeringsResponse_Peerings
+var ListPeeringsResponse_NextToken = &sListPeeringsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_TagList = &sListTagsForResourceResponse_TagList
+
+var PutAttachmentRoutingPolicyLabelRequest = &sPutAttachmentRoutingPolicyLabelRequest
+var PutAttachmentRoutingPolicyLabelRequest_CoreNetworkId = &sPutAttachmentRoutingPolicyLabelRequest_CoreNetworkId
+var PutAttachmentRoutingPolicyLabelRequest_AttachmentId = &sPutAttachmentRoutingPolicyLabelRequest_AttachmentId
+var PutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel = &sPutAttachmentRoutingPolicyLabelRequest_RoutingPolicyLabel
+var PutAttachmentRoutingPolicyLabelRequest_ClientToken = &sPutAttachmentRoutingPolicyLabelRequest_ClientToken
+
+var PutAttachmentRoutingPolicyLabelResponse = &sPutAttachmentRoutingPolicyLabelResponse
+var PutAttachmentRoutingPolicyLabelResponse_CoreNetworkId = &sPutAttachmentRoutingPolicyLabelResponse_CoreNetworkId
+var PutAttachmentRoutingPolicyLabelResponse_AttachmentId = &sPutAttachmentRoutingPolicyLabelResponse_AttachmentId
+var PutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel = &sPutAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel
+
+var PutCoreNetworkPolicyRequest = &sPutCoreNetworkPolicyRequest
+var PutCoreNetworkPolicyRequest_CoreNetworkId = &sPutCoreNetworkPolicyRequest_CoreNetworkId
+var PutCoreNetworkPolicyRequest_PolicyDocument = &sPutCoreNetworkPolicyRequest_PolicyDocument
+var PutCoreNetworkPolicyRequest_Description = &sPutCoreNetworkPolicyRequest_Description
+var PutCoreNetworkPolicyRequest_LatestVersionId = &sPutCoreNetworkPolicyRequest_LatestVersionId
+var PutCoreNetworkPolicyRequest_ClientToken = &sPutCoreNetworkPolicyRequest_ClientToken
+
+var PutCoreNetworkPolicyResponse = &sPutCoreNetworkPolicyResponse
+var PutCoreNetworkPolicyResponse_CoreNetworkPolicy = &sPutCoreNetworkPolicyResponse_CoreNetworkPolicy
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_PolicyDocument = &sPutResourcePolicyRequest_PolicyDocument
+var PutResourcePolicyRequest_ResourceArn = &sPutResourcePolicyRequest_ResourceArn
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+
+var RegisterTransitGatewayRequest = &sRegisterTransitGatewayRequest
+var RegisterTransitGatewayRequest_GlobalNetworkId = &sRegisterTransitGatewayRequest_GlobalNetworkId
+var RegisterTransitGatewayRequest_TransitGatewayArn = &sRegisterTransitGatewayRequest_TransitGatewayArn
+
+var RegisterTransitGatewayResponse = &sRegisterTransitGatewayResponse
+var RegisterTransitGatewayResponse_TransitGatewayRegistration = &sRegisterTransitGatewayResponse_TransitGatewayRegistration
+
+var RejectAttachmentRequest = &sRejectAttachmentRequest
+var RejectAttachmentRequest_AttachmentId = &sRejectAttachmentRequest_AttachmentId
+
+var RejectAttachmentResponse = &sRejectAttachmentResponse
+var RejectAttachmentResponse_Attachment = &sRejectAttachmentResponse_Attachment
+
+var RemoveAttachmentRoutingPolicyLabelRequest = &sRemoveAttachmentRoutingPolicyLabelRequest
+var RemoveAttachmentRoutingPolicyLabelRequest_CoreNetworkId = &sRemoveAttachmentRoutingPolicyLabelRequest_CoreNetworkId
+var RemoveAttachmentRoutingPolicyLabelRequest_AttachmentId = &sRemoveAttachmentRoutingPolicyLabelRequest_AttachmentId
+
+var RemoveAttachmentRoutingPolicyLabelResponse = &sRemoveAttachmentRoutingPolicyLabelResponse
+var RemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId = &sRemoveAttachmentRoutingPolicyLabelResponse_CoreNetworkId
+var RemoveAttachmentRoutingPolicyLabelResponse_AttachmentId = &sRemoveAttachmentRoutingPolicyLabelResponse_AttachmentId
+var RemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel = &sRemoveAttachmentRoutingPolicyLabelResponse_RoutingPolicyLabel
+
+var RestoreCoreNetworkPolicyVersionRequest = &sRestoreCoreNetworkPolicyVersionRequest
+var RestoreCoreNetworkPolicyVersionRequest_CoreNetworkId = &sRestoreCoreNetworkPolicyVersionRequest_CoreNetworkId
+var RestoreCoreNetworkPolicyVersionRequest_PolicyVersionId = &sRestoreCoreNetworkPolicyVersionRequest_PolicyVersionId
+
+var RestoreCoreNetworkPolicyVersionResponse = &sRestoreCoreNetworkPolicyVersionResponse
+var RestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy = &sRestoreCoreNetworkPolicyVersionResponse_CoreNetworkPolicy
+
+var StartOrganizationServiceAccessUpdateRequest = &sStartOrganizationServiceAccessUpdateRequest
+var StartOrganizationServiceAccessUpdateRequest_Action = &sStartOrganizationServiceAccessUpdateRequest_Action
+
+var StartOrganizationServiceAccessUpdateResponse = &sStartOrganizationServiceAccessUpdateResponse
+var StartOrganizationServiceAccessUpdateResponse_OrganizationStatus = &sStartOrganizationServiceAccessUpdateResponse_OrganizationStatus
+
+var StartRouteAnalysisRequest = &sStartRouteAnalysisRequest
+var StartRouteAnalysisRequest_GlobalNetworkId = &sStartRouteAnalysisRequest_GlobalNetworkId
+var StartRouteAnalysisRequest_Source = &sStartRouteAnalysisRequest_Source
+var StartRouteAnalysisRequest_Destination = &sStartRouteAnalysisRequest_Destination
+var StartRouteAnalysisRequest_IncludeReturnPath = &sStartRouteAnalysisRequest_IncludeReturnPath
+var StartRouteAnalysisRequest_UseMiddleboxes = &sStartRouteAnalysisRequest_UseMiddleboxes
+
+var StartRouteAnalysisResponse = &sStartRouteAnalysisResponse
+var StartRouteAnalysisResponse_RouteAnalysis = &sStartRouteAnalysisResponse_RouteAnalysis
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAttachmentNatConfigurationRequest = &sUpdateAttachmentNatConfigurationRequest
+var UpdateAttachmentNatConfigurationRequest_AttachmentId = &sUpdateAttachmentNatConfigurationRequest_AttachmentId
+var UpdateAttachmentNatConfigurationRequest_NatGatewaySupport = &sUpdateAttachmentNatConfigurationRequest_NatGatewaySupport
+var UpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport = &sUpdateAttachmentNatConfigurationRequest_NatSystemRouteSupport
+var UpdateAttachmentNatConfigurationRequest_NatGatewayRules = &sUpdateAttachmentNatConfigurationRequest_NatGatewayRules
+var UpdateAttachmentNatConfigurationRequest_ClientToken = &sUpdateAttachmentNatConfigurationRequest_ClientToken
+
+var UpdateAttachmentNatConfigurationResponse = &sUpdateAttachmentNatConfigurationResponse
+var UpdateAttachmentNatConfigurationResponse_AttachmentId = &sUpdateAttachmentNatConfigurationResponse_AttachmentId
+var UpdateAttachmentNatConfigurationResponse_NatGatewaySupport = &sUpdateAttachmentNatConfigurationResponse_NatGatewaySupport
+var UpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport = &sUpdateAttachmentNatConfigurationResponse_NatSystemRouteSupport
+var UpdateAttachmentNatConfigurationResponse_NatGatewayRules = &sUpdateAttachmentNatConfigurationResponse_NatGatewayRules
+
+var UpdateConnectionRequest = &sUpdateConnectionRequest
+var UpdateConnectionRequest_GlobalNetworkId = &sUpdateConnectionRequest_GlobalNetworkId
+var UpdateConnectionRequest_ConnectionId = &sUpdateConnectionRequest_ConnectionId
+var UpdateConnectionRequest_LinkId = &sUpdateConnectionRequest_LinkId
+var UpdateConnectionRequest_ConnectedLinkId = &sUpdateConnectionRequest_ConnectedLinkId
+var UpdateConnectionRequest_Description = &sUpdateConnectionRequest_Description
+
+var UpdateConnectionResponse = &sUpdateConnectionResponse
+var UpdateConnectionResponse_Connection = &sUpdateConnectionResponse_Connection
+
+var UpdateCoreNetworkRequest = &sUpdateCoreNetworkRequest
+var UpdateCoreNetworkRequest_CoreNetworkId = &sUpdateCoreNetworkRequest_CoreNetworkId
+var UpdateCoreNetworkRequest_Description = &sUpdateCoreNetworkRequest_Description
+
+var UpdateCoreNetworkResponse = &sUpdateCoreNetworkResponse
+var UpdateCoreNetworkResponse_CoreNetwork = &sUpdateCoreNetworkResponse_CoreNetwork
+
+var UpdateDeviceRequest = &sUpdateDeviceRequest
+var UpdateDeviceRequest_GlobalNetworkId = &sUpdateDeviceRequest_GlobalNetworkId
+var UpdateDeviceRequest_DeviceId = &sUpdateDeviceRequest_DeviceId
+var UpdateDeviceRequest_AWSLocation = &sUpdateDeviceRequest_AWSLocation
+var UpdateDeviceRequest_Description = &sUpdateDeviceRequest_Description
+var UpdateDeviceRequest_Type = &sUpdateDeviceRequest_Type
+var UpdateDeviceRequest_Vendor = &sUpdateDeviceRequest_Vendor
+var UpdateDeviceRequest_Model = &sUpdateDeviceRequest_Model
+var UpdateDeviceRequest_SerialNumber = &sUpdateDeviceRequest_SerialNumber
+var UpdateDeviceRequest_Location = &sUpdateDeviceRequest_Location
+var UpdateDeviceRequest_SiteId = &sUpdateDeviceRequest_SiteId
+
+var UpdateDeviceResponse = &sUpdateDeviceResponse
+var UpdateDeviceResponse_Device = &sUpdateDeviceResponse_Device
+
+var UpdateDirectConnectGatewayAttachmentRequest = &sUpdateDirectConnectGatewayAttachmentRequest
+var UpdateDirectConnectGatewayAttachmentRequest_AttachmentId = &sUpdateDirectConnectGatewayAttachmentRequest_AttachmentId
+var UpdateDirectConnectGatewayAttachmentRequest_EdgeLocations = &sUpdateDirectConnectGatewayAttachmentRequest_EdgeLocations
+
+var UpdateDirectConnectGatewayAttachmentResponse = &sUpdateDirectConnectGatewayAttachmentResponse
+var UpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment = &sUpdateDirectConnectGatewayAttachmentResponse_DirectConnectGatewayAttachment
+
+var UpdateGlobalNetworkRequest = &sUpdateGlobalNetworkRequest
+var UpdateGlobalNetworkRequest_GlobalNetworkId = &sUpdateGlobalNetworkRequest_GlobalNetworkId
+var UpdateGlobalNetworkRequest_Description = &sUpdateGlobalNetworkRequest_Description
+
+var UpdateGlobalNetworkResponse = &sUpdateGlobalNetworkResponse
+var UpdateGlobalNetworkResponse_GlobalNetwork = &sUpdateGlobalNetworkResponse_GlobalNetwork
+
+var UpdateLinkRequest = &sUpdateLinkRequest
+var UpdateLinkRequest_GlobalNetworkId = &sUpdateLinkRequest_GlobalNetworkId
+var UpdateLinkRequest_LinkId = &sUpdateLinkRequest_LinkId
+var UpdateLinkRequest_Description = &sUpdateLinkRequest_Description
+var UpdateLinkRequest_Type = &sUpdateLinkRequest_Type
+var UpdateLinkRequest_Bandwidth = &sUpdateLinkRequest_Bandwidth
+var UpdateLinkRequest_Provider = &sUpdateLinkRequest_Provider
+
+var UpdateLinkResponse = &sUpdateLinkResponse
+var UpdateLinkResponse_Link = &sUpdateLinkResponse_Link
+
+var UpdateNetworkResourceMetadataRequest = &sUpdateNetworkResourceMetadataRequest
+var UpdateNetworkResourceMetadataRequest_GlobalNetworkId = &sUpdateNetworkResourceMetadataRequest_GlobalNetworkId
+var UpdateNetworkResourceMetadataRequest_ResourceArn = &sUpdateNetworkResourceMetadataRequest_ResourceArn
+var UpdateNetworkResourceMetadataRequest_Metadata = &sUpdateNetworkResourceMetadataRequest_Metadata
+
+var UpdateNetworkResourceMetadataResponse = &sUpdateNetworkResourceMetadataResponse
+var UpdateNetworkResourceMetadataResponse_ResourceArn = &sUpdateNetworkResourceMetadataResponse_ResourceArn
+var UpdateNetworkResourceMetadataResponse_Metadata = &sUpdateNetworkResourceMetadataResponse_Metadata
+
+var UpdateSiteRequest = &sUpdateSiteRequest
+var UpdateSiteRequest_GlobalNetworkId = &sUpdateSiteRequest_GlobalNetworkId
+var UpdateSiteRequest_SiteId = &sUpdateSiteRequest_SiteId
+var UpdateSiteRequest_Description = &sUpdateSiteRequest_Description
+var UpdateSiteRequest_Location = &sUpdateSiteRequest_Location
+
+var UpdateSiteResponse = &sUpdateSiteResponse
+var UpdateSiteResponse_Site = &sUpdateSiteResponse_Site
+
+var UpdateVpcAttachmentRequest = &sUpdateVpcAttachmentRequest
+var UpdateVpcAttachmentRequest_AttachmentId = &sUpdateVpcAttachmentRequest_AttachmentId
+var UpdateVpcAttachmentRequest_AddSubnetArns = &sUpdateVpcAttachmentRequest_AddSubnetArns
+var UpdateVpcAttachmentRequest_RemoveSubnetArns = &sUpdateVpcAttachmentRequest_RemoveSubnetArns
+var UpdateVpcAttachmentRequest_Options = &sUpdateVpcAttachmentRequest_Options
+
+var UpdateVpcAttachmentResponse = &sUpdateVpcAttachmentResponse
+var UpdateVpcAttachmentResponse_VpcAttachment = &sUpdateVpcAttachmentResponse_VpcAttachment
+
+var NetworkManager = &smithy.ServiceSchema{Schema: &s_NetworkManager, Version: "2019-07-05"}

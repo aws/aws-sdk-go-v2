@@ -4,7400 +4,5390 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateApi                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateApi"}
+	iCreateApiMapping                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateApiMapping"}
+	iCreateAuthorizer                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateAuthorizer"}
+	iCreateDeployment                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateDeployment"}
+	iCreateDomainName                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateDomainName"}
+	iCreateIntegration                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateIntegration"}
+	iCreateIntegrationResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateIntegrationResponse"}
+	iCreateModel                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateModel"}
+	iCreatePortal                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreatePortal"}
+	iCreatePortalProduct                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreatePortalProduct"}
+	iCreateProductPage                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateProductPage"}
+	iCreateProductRestEndpointPage                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateProductRestEndpointPage"}
+	iCreateRoute                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRoute"}
+	iCreateRouteResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRouteResponse"}
+	iCreateRoutingRule                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRoutingRule"}
+	iCreateStage                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateStage"}
+	iCreateVpcLink                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateVpcLink"}
+	iDeleteAccessLogSettings                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteAccessLogSettings"}
+	iDeleteApi                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteApi"}
+	iDeleteApiMapping                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteApiMapping"}
+	iDeleteAuthorizer                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteAuthorizer"}
+	iDeleteCorsConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteCorsConfiguration"}
+	iDeleteDeployment                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteDeployment"}
+	iDeleteDomainName                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteDomainName"}
+	iDeleteIntegration                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteIntegration"}
+	iDeleteIntegrationResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteIntegrationResponse"}
+	iDeleteModel                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteModel"}
+	iDeletePortal                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeletePortal"}
+	iDeletePortalProduct                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeletePortalProduct"}
+	iDeletePortalProductSharingPolicy              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeletePortalProductSharingPolicy"}
+	iDeleteProductPage                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteProductPage"}
+	iDeleteProductRestEndpointPage                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteProductRestEndpointPage"}
+	iDeleteRoute                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRoute"}
+	iDeleteRouteRequestParameter                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRouteRequestParameter"}
+	iDeleteRouteResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRouteResponse"}
+	iDeleteRouteSettings                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRouteSettings"}
+	iDeleteRoutingRule                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRoutingRule"}
+	iDeleteStage                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteStage"}
+	iDeleteVpcLink                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteVpcLink"}
+	iDisablePortal                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DisablePortal"}
+	iExportApi                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ExportApi"}
+	iGetApi                                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApi"}
+	iGetApiMapping                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiMapping"}
+	iGetApiMappings                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiMappings"}
+	iGetApis                                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApis"}
+	iGetAuthorizer                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetAuthorizer"}
+	iGetAuthorizers                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetAuthorizers"}
+	iGetDeployment                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDeployment"}
+	iGetDeployments                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDeployments"}
+	iGetDomainName                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDomainName"}
+	iGetDomainNames                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDomainNames"}
+	iGetIntegration                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegration"}
+	iGetIntegrationResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationResponse"}
+	iGetIntegrationResponses                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationResponses"}
+	iGetIntegrations                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrations"}
+	iGetModel                                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModel"}
+	iGetModels                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModels"}
+	iGetModelTemplate                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModelTemplate"}
+	iGetPortal                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortal"}
+	iGetPortalProduct                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalProduct"}
+	iGetPortalProductSharingPolicy                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalProductSharingPolicy"}
+	iGetProductPage                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetProductPage"}
+	iGetProductRestEndpointPage                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetProductRestEndpointPage"}
+	iGetRoute                                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRoute"}
+	iGetRouteResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteResponse"}
+	iGetRouteResponses                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteResponses"}
+	iGetRoutes                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRoutes"}
+	iGetRoutingRule                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRoutingRule"}
+	iGetStage                                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetStage"}
+	iGetStages                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetStages"}
+	iGetTags                                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetTags"}
+	iGetVpcLink                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetVpcLink"}
+	iGetVpcLinks                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetVpcLinks"}
+	iImportApi                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ImportApi"}
+	iListPortalProducts                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListPortalProducts"}
+	iListPortals                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListPortals"}
+	iListProductPages                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListProductPages"}
+	iListProductRestEndpointPages                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListProductRestEndpointPages"}
+	iListRoutingRules                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListRoutingRules"}
+	iPreviewPortal                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PreviewPortal"}
+	iPublishPortal                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PublishPortal"}
+	iPutPortalProductSharingPolicy                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PutPortalProductSharingPolicy"}
+	iPutRoutingRule                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PutRoutingRule"}
+	iReimportApi                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ReimportApi"}
+	iResetAuthorizersCache                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ResetAuthorizersCache"}
+	iTagResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TagResource"}
+	iUntagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UntagResource"}
+	iUpdateApi                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateApi"}
+	iUpdateApiMapping                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateApiMapping"}
+	iUpdateAuthorizer                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateAuthorizer"}
+	iUpdateDeployment                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateDeployment"}
+	iUpdateDomainName                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateDomainName"}
+	iUpdateIntegration                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateIntegration"}
+	iUpdateIntegrationResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateIntegrationResponse"}
+	iUpdateModel                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateModel"}
+	iUpdatePortal                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdatePortal"}
+	iUpdatePortalProduct                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdatePortalProduct"}
+	iUpdateProductPage                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateProductPage"}
+	iUpdateProductRestEndpointPage                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateProductRestEndpointPage"}
+	iUpdateRoute                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateRoute"}
+	iUpdateRouteResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateRouteResponse"}
+	iUpdateStage                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateStage"}
+	iUpdateVpcLink                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateVpcLink"}
+	i_ApiGatewayV2                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ApiGatewayV2"}
+	i___boolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__boolean"}
+	i___double                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__double"}
+	i___integer                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__integer"}
+	i___listOf__string                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOf__string"}
+	i___listOf__stringMin20Max2048                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOf__stringMin20Max2048"}
+	i___listOfApi                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfApi"}
+	i___listOfApiMapping                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfApiMapping"}
+	i___listOfAuthorizer                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfAuthorizer"}
+	i___listOfDeployment                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfDeployment"}
+	i___listOfDomainName                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfDomainName"}
+	i___listOfIntegration                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfIntegration"}
+	i___listOfIntegrationResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfIntegrationResponse"}
+	i___listOfModel                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfModel"}
+	i___listOfPortalProductSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfPortalProductSummary"}
+	i___listOfPortalSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfPortalSummary"}
+	i___listOfProductPageSummaryNoBody             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfProductPageSummaryNoBody"}
+	i___listOfProductRestEndpointPageSummaryNoBody = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfProductRestEndpointPageSummaryNoBody"}
+	i___listOfRoute                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfRoute"}
+	i___listOfRouteResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfRouteResponse"}
+	i___listOfRoutingRule                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfRoutingRule"}
+	i___listOfRoutingRuleAction                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfRoutingRuleAction"}
+	i___listOfRoutingRuleCondition                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfRoutingRuleCondition"}
+	i___listOfRoutingRuleMatchHeaderValue          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfRoutingRuleMatchHeaderValue"}
+	i___listOfSection                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfSection"}
+	i___listOfSelectionKey                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfSelectionKey"}
+	i___listOfStage                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfStage"}
+	i___listOfVpcLink                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__listOfVpcLink"}
+	i___string                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__string"}
+	i___stringMin0Max1024                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin0Max1024"}
+	i___stringMin0Max1092                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin0Max1092"}
+	i___stringMin0Max255                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin0Max255"}
+	i___stringMin10Max2048                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin10Max2048"}
+	i___stringMin10Max30PatternAZ09                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin10Max30PatternAZ09"}
+	i___stringMin1Max1024                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max1024"}
+	i___stringMin1Max128                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max128"}
+	i___stringMin1Max16                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max16"}
+	i___stringMin1Max20                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max20"}
+	i___stringMin1Max2048                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max2048"}
+	i___stringMin1Max255                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max255"}
+	i___stringMin1Max256                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max256"}
+	i___stringMin1Max307200                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max307200"}
+	i___stringMin1Max32768                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max32768"}
+	i___stringMin1Max4096                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max4096"}
+	i___stringMin1Max50                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max50"}
+	i___stringMin1Max64                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin1Max64"}
+	i___stringMin20Max2048                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin20Max2048"}
+	i___stringMin3Max255                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin3Max255"}
+	i___stringMin3Max256                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__stringMin3Max256"}
+	i___timestampIso8601                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "__timestampIso8601"}
+	iAccessDeniedException                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "AccessDeniedException"}
+	iAccessLogSettings                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "AccessLogSettings"}
+	iACMManaged                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ACMManaged"}
+	iApi                                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Api"}
+	iApiMapping                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ApiMapping"}
+	i_Arn                                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Arn"}
+	iAuthorization                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Authorization"}
+	i_AuthorizationScopes                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "AuthorizationScopes"}
+	iAuthorizationType                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "AuthorizationType"}
+	iAuthorizer                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Authorizer"}
+	iAuthorizerType                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "AuthorizerType"}
+	iBadRequestException                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "BadRequestException"}
+	iCognitoConfig                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CognitoConfig"}
+	iConflictException                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ConflictException"}
+	iConnectionType                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ConnectionType"}
+	iContentHandlingStrategy                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ContentHandlingStrategy"}
+	iCors                                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Cors"}
+	i_CorsHeaderList                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CorsHeaderList"}
+	i_CorsMethodList                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CorsMethodList"}
+	i_CorsOriginList                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CorsOriginList"}
+	iCustomColors                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CustomColors"}
+	iDeployment                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Deployment"}
+	iDeploymentStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeploymentStatus"}
+	iDisplayContent                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DisplayContent"}
+	iDisplayContentOverrides                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DisplayContentOverrides"}
+	iDisplayOrder                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DisplayOrder"}
+	iDomainName                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DomainName"}
+	iDomainNameConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DomainNameConfiguration"}
+	i_DomainNameConfigurations                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DomainNameConfigurations"}
+	iDomainNameStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DomainNameStatus"}
+	iEndpointConfigurationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "EndpointConfigurationRequest"}
+	iEndpointConfigurationResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "EndpointConfigurationResponse"}
+	iEndpointDisplayContent                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "EndpointDisplayContent"}
+	iEndpointDisplayContentResponse                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "EndpointDisplayContentResponse"}
+	iEndpointType                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "EndpointType"}
+	i_ExportedApi                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ExportedApi"}
+	i_Id                                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Id"}
+	iIdentifierParts                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IdentifierParts"}
+	i_IdentitySourceList                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IdentitySourceList"}
+	i_IntegerWithLengthBetween0And3600             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IntegerWithLengthBetween0And3600"}
+	i_IntegerWithLengthBetween50And30000           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IntegerWithLengthBetween50And30000"}
+	i_IntegerWithLengthBetweenMinus1And86400       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IntegerWithLengthBetweenMinus1And86400"}
+	iIntegration                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Integration"}
+	i_IntegrationParameters                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IntegrationParameters"}
+	iIntegrationResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IntegrationResponse"}
+	iIntegrationType                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IntegrationType"}
+	iIpAddressType                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "IpAddressType"}
+	iJWTConfiguration                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "JWTConfiguration"}
+	iLoggingLevel                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "LoggingLevel"}
+	i_MaxResults                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "MaxResults"}
+	iModel                                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Model"}
+	iMutualTlsAuthentication                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "MutualTlsAuthentication"}
+	iMutualTlsAuthenticationInput                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "MutualTlsAuthenticationInput"}
+	i_NextToken                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "NextToken"}
+	iNone                                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "None"}
+	iNotFoundException                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "NotFoundException"}
+	iParameterConstraints                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ParameterConstraints"}
+	iPassthroughBehavior                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PassthroughBehavior"}
+	iPortalContent                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PortalContent"}
+	iPortalProductSummary                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PortalProductSummary"}
+	iPortalSummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PortalSummary"}
+	iPortalTheme                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PortalTheme"}
+	iPreview                                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Preview"}
+	iPreviewStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PreviewStatus"}
+	iProductPageSummaryNoBody                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ProductPageSummaryNoBody"}
+	iProductRestEndpointPageSummaryNoBody          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ProductRestEndpointPageSummaryNoBody"}
+	iProtocolType                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ProtocolType"}
+	iPublishStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PublishStatus"}
+	i_ResponseParameters                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ResponseParameters"}
+	iRestEndpointIdentifier                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RestEndpointIdentifier"}
+	iRoute                                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Route"}
+	i_RouteModels                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RouteModels"}
+	i_RouteParameters                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RouteParameters"}
+	iRouteResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RouteResponse"}
+	iRouteSettings                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RouteSettings"}
+	i_RouteSettingsMap                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RouteSettingsMap"}
+	iRoutingMode                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingMode"}
+	iRoutingRule                                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRule"}
+	iRoutingRuleAction                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRuleAction"}
+	iRoutingRuleActionInvokeApi                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRuleActionInvokeApi"}
+	iRoutingRuleCondition                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRuleCondition"}
+	iRoutingRuleMatchBasePaths                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRuleMatchBasePaths"}
+	iRoutingRuleMatchHeaders                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRuleMatchHeaders"}
+	iRoutingRuleMatchHeaderValue                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRuleMatchHeaderValue"}
+	i_RoutingRulePriority                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "RoutingRulePriority"}
+	iSection                                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Section"}
+	i_SecurityGroupIdList                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "SecurityGroupIdList"}
+	iSecurityPolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "SecurityPolicy"}
+	i_SelectionExpression                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "SelectionExpression"}
+	i_SelectionKey                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "SelectionKey"}
+	iStage                                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Stage"}
+	i_StageVariablesMap                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StageVariablesMap"}
+	iStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Status"}
+	iStatusException                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StatusException"}
+	i_StringWithLengthBetween0And1024              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween0And1024"}
+	i_StringWithLengthBetween0And2048              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween0And2048"}
+	i_StringWithLengthBetween0And32K               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween0And32K"}
+	i_StringWithLengthBetween1And1024              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween1And1024"}
+	i_StringWithLengthBetween1And128               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween1And128"}
+	i_StringWithLengthBetween1And1600              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween1And1600"}
+	i_StringWithLengthBetween1And256               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween1And256"}
+	i_StringWithLengthBetween1And512               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween1And512"}
+	i_StringWithLengthBetween1And64                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "StringWithLengthBetween1And64"}
+	i_SubnetIdList                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "SubnetIdList"}
+	i_Tags                                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "Tags"}
+	i_TemplateMap                                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TemplateMap"}
+	iTlsConfig                                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TlsConfig"}
+	iTlsConfigInput                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TlsConfigInput"}
+	iTooManyRequestsException                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TooManyRequestsException"}
+	iTryItState                                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TryItState"}
+	i_UriWithLengthBetween1And2048                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UriWithLengthBetween1And2048"}
+	iVpcLink                                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "VpcLink"}
+	iVpcLinkStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "VpcLinkStatus"}
+	iVpcLinkVersion                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "VpcLinkVersion"}
+	iCreateApiRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateApiRequest"}
+	iCreateApiMappingRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateApiMappingRequest"}
+	iCreateApiMappingResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateApiMappingResponse"}
+	iCreateApiResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateApiResponse"}
+	iCreateAuthorizerRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateAuthorizerRequest"}
+	iCreateAuthorizerResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateAuthorizerResponse"}
+	iCreateDeploymentRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateDeploymentRequest"}
+	iCreateDeploymentResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateDeploymentResponse"}
+	iCreateDomainNameRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateDomainNameRequest"}
+	iCreateDomainNameResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateDomainNameResponse"}
+	iCreateIntegrationRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateIntegrationRequest"}
+	iCreateIntegrationResult                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateIntegrationResult"}
+	iCreateIntegrationResponseRequest              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateIntegrationResponseRequest"}
+	iCreateIntegrationResponseResponse             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateIntegrationResponseResponse"}
+	iCreateModelRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateModelRequest"}
+	iCreateModelResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateModelResponse"}
+	iCreatePortalRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreatePortalRequest"}
+	iCreatePortalResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreatePortalResponse"}
+	iCreatePortalProductRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreatePortalProductRequest"}
+	iCreatePortalProductResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreatePortalProductResponse"}
+	iCreateProductPageRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateProductPageRequest"}
+	iCreateProductPageResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateProductPageResponse"}
+	iCreateProductRestEndpointPageRequest          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateProductRestEndpointPageRequest"}
+	iCreateProductRestEndpointPageResponse         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateProductRestEndpointPageResponse"}
+	iCreateRouteRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRouteRequest"}
+	iCreateRouteResult                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRouteResult"}
+	iCreateRouteResponseRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRouteResponseRequest"}
+	iCreateRouteResponseResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRouteResponseResponse"}
+	iCreateRoutingRuleRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRoutingRuleRequest"}
+	iCreateRoutingRuleResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateRoutingRuleResponse"}
+	iCreateStageRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateStageRequest"}
+	iCreateStageResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateStageResponse"}
+	iCreateVpcLinkRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateVpcLinkRequest"}
+	iCreateVpcLinkResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "CreateVpcLinkResponse"}
+	iDeleteAccessLogSettingsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteAccessLogSettingsRequest"}
+	iDeleteApiRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteApiRequest"}
+	iDeleteApiMappingRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteApiMappingRequest"}
+	iDeleteAuthorizerRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteAuthorizerRequest"}
+	iDeleteCorsConfigurationRequest                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteCorsConfigurationRequest"}
+	iDeleteDeploymentRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteDeploymentRequest"}
+	iDeleteDomainNameRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteDomainNameRequest"}
+	iDeleteIntegrationRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteIntegrationRequest"}
+	iDeleteIntegrationResponseRequest              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteIntegrationResponseRequest"}
+	iDeleteModelRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteModelRequest"}
+	iDeletePortalRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeletePortalRequest"}
+	iDeletePortalProductRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeletePortalProductRequest"}
+	iDeletePortalProductSharingPolicyRequest       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeletePortalProductSharingPolicyRequest"}
+	iDeleteProductPageRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteProductPageRequest"}
+	iDeleteProductRestEndpointPageRequest          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteProductRestEndpointPageRequest"}
+	iDeleteRouteRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRouteRequest"}
+	iDeleteRouteRequestParameterRequest            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRouteRequestParameterRequest"}
+	iDeleteRouteResponseRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRouteResponseRequest"}
+	iDeleteRouteSettingsRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRouteSettingsRequest"}
+	iDeleteRoutingRuleRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteRoutingRuleRequest"}
+	iDeleteStageRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteStageRequest"}
+	iDeleteVpcLinkRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteVpcLinkRequest"}
+	iDeleteVpcLinkResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DeleteVpcLinkResponse"}
+	iDisablePortalRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "DisablePortalRequest"}
+	iExportApiRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ExportApiRequest"}
+	iExportApiResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ExportApiResponse"}
+	iGetApiRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiRequest"}
+	iGetApiMappingRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiMappingRequest"}
+	iGetApiMappingResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiMappingResponse"}
+	iGetApiMappingsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiMappingsRequest"}
+	iGetApiMappingsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiMappingsResponse"}
+	iGetApiResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApiResponse"}
+	iGetApisRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApisRequest"}
+	iGetApisResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetApisResponse"}
+	iGetAuthorizerRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetAuthorizerRequest"}
+	iGetAuthorizerResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetAuthorizerResponse"}
+	iGetAuthorizersRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetAuthorizersRequest"}
+	iGetAuthorizersResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetAuthorizersResponse"}
+	iGetDeploymentRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDeploymentRequest"}
+	iGetDeploymentResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDeploymentResponse"}
+	iGetDeploymentsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDeploymentsRequest"}
+	iGetDeploymentsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDeploymentsResponse"}
+	iGetDomainNameRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDomainNameRequest"}
+	iGetDomainNameResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDomainNameResponse"}
+	iGetDomainNamesRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDomainNamesRequest"}
+	iGetDomainNamesResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetDomainNamesResponse"}
+	iGetIntegrationRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationRequest"}
+	iGetIntegrationResult                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationResult"}
+	iGetIntegrationResponseRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationResponseRequest"}
+	iGetIntegrationResponseResponse                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationResponseResponse"}
+	iGetIntegrationResponsesRequest                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationResponsesRequest"}
+	iGetIntegrationResponsesResponse               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationResponsesResponse"}
+	iGetIntegrationsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationsRequest"}
+	iGetIntegrationsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetIntegrationsResponse"}
+	iGetModelRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModelRequest"}
+	iGetModelResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModelResponse"}
+	iGetModelsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModelsRequest"}
+	iGetModelsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModelsResponse"}
+	iGetModelTemplateRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModelTemplateRequest"}
+	iGetModelTemplateResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetModelTemplateResponse"}
+	iGetPortalRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalRequest"}
+	iGetPortalResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalResponse"}
+	iGetPortalProductRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalProductRequest"}
+	iGetPortalProductResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalProductResponse"}
+	iGetPortalProductSharingPolicyRequest          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalProductSharingPolicyRequest"}
+	iGetPortalProductSharingPolicyResponse         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetPortalProductSharingPolicyResponse"}
+	iGetProductPageRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetProductPageRequest"}
+	iGetProductPageResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetProductPageResponse"}
+	iGetProductRestEndpointPageRequest             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetProductRestEndpointPageRequest"}
+	iGetProductRestEndpointPageResponse            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetProductRestEndpointPageResponse"}
+	iGetRouteRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteRequest"}
+	iGetRouteResult                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteResult"}
+	iGetRouteResponseRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteResponseRequest"}
+	iGetRouteResponseResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteResponseResponse"}
+	iGetRouteResponsesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteResponsesRequest"}
+	iGetRouteResponsesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRouteResponsesResponse"}
+	iGetRoutesRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRoutesRequest"}
+	iGetRoutesResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRoutesResponse"}
+	iGetRoutingRuleRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRoutingRuleRequest"}
+	iGetRoutingRuleResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetRoutingRuleResponse"}
+	iGetStageRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetStageRequest"}
+	iGetStageResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetStageResponse"}
+	iGetStagesRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetStagesRequest"}
+	iGetStagesResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetStagesResponse"}
+	iGetTagsRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetTagsRequest"}
+	iGetTagsResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetTagsResponse"}
+	iGetVpcLinkRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetVpcLinkRequest"}
+	iGetVpcLinkResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetVpcLinkResponse"}
+	iGetVpcLinksRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetVpcLinksRequest"}
+	iGetVpcLinksResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "GetVpcLinksResponse"}
+	iImportApiRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ImportApiRequest"}
+	iImportApiResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ImportApiResponse"}
+	iListPortalProductsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListPortalProductsRequest"}
+	iListPortalProductsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListPortalProductsResponse"}
+	iListPortalsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListPortalsRequest"}
+	iListPortalsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListPortalsResponse"}
+	iListProductPagesRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListProductPagesRequest"}
+	iListProductPagesResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListProductPagesResponse"}
+	iListProductRestEndpointPagesRequest           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListProductRestEndpointPagesRequest"}
+	iListProductRestEndpointPagesResponse          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListProductRestEndpointPagesResponse"}
+	iListRoutingRulesRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListRoutingRulesRequest"}
+	iListRoutingRulesResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ListRoutingRulesResponse"}
+	iPreviewPortalRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PreviewPortalRequest"}
+	iPreviewPortalResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PreviewPortalResponse"}
+	iPublishPortalRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PublishPortalRequest"}
+	iPublishPortalResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PublishPortalResponse"}
+	iPutPortalProductSharingPolicyRequest          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PutPortalProductSharingPolicyRequest"}
+	iPutPortalProductSharingPolicyResponse         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PutPortalProductSharingPolicyResponse"}
+	iPutRoutingRuleRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PutRoutingRuleRequest"}
+	iPutRoutingRuleResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "PutRoutingRuleResponse"}
+	iReimportApiRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ReimportApiRequest"}
+	iReimportApiResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ReimportApiResponse"}
+	iResetAuthorizersCacheRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "ResetAuthorizersCacheRequest"}
+	iTagResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TagResourceRequest"}
+	iTagResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "TagResourceResponse"}
+	iUntagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UntagResourceRequest"}
+	iUpdateApiRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateApiRequest"}
+	iUpdateApiMappingRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateApiMappingRequest"}
+	iUpdateApiMappingResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateApiMappingResponse"}
+	iUpdateApiResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateApiResponse"}
+	iUpdateAuthorizerRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateAuthorizerRequest"}
+	iUpdateAuthorizerResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateAuthorizerResponse"}
+	iUpdateDeploymentRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateDeploymentRequest"}
+	iUpdateDeploymentResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateDeploymentResponse"}
+	iUpdateDomainNameRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateDomainNameRequest"}
+	iUpdateDomainNameResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateDomainNameResponse"}
+	iUpdateIntegrationRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateIntegrationRequest"}
+	iUpdateIntegrationResult                       = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateIntegrationResult"}
+	iUpdateIntegrationResponseRequest              = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateIntegrationResponseRequest"}
+	iUpdateIntegrationResponseResponse             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateIntegrationResponseResponse"}
+	iUpdateModelRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateModelRequest"}
+	iUpdateModelResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateModelResponse"}
+	iUpdatePortalRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdatePortalRequest"}
+	iUpdatePortalResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdatePortalResponse"}
+	iUpdatePortalProductRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdatePortalProductRequest"}
+	iUpdatePortalProductResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdatePortalProductResponse"}
+	iUpdateProductPageRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateProductPageRequest"}
+	iUpdateProductPageResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateProductPageResponse"}
+	iUpdateProductRestEndpointPageRequest          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateProductRestEndpointPageRequest"}
+	iUpdateProductRestEndpointPageResponse         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateProductRestEndpointPageResponse"}
+	iUpdateRouteRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateRouteRequest"}
+	iUpdateRouteResult                             = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateRouteResult"}
+	iUpdateRouteResponseRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateRouteResponseRequest"}
+	iUpdateRouteResponseResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateRouteResponseResponse"}
+	iUpdateStageRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateStageRequest"}
+	iUpdateStageResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateStageResponse"}
+	iUpdateVpcLinkRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateVpcLinkRequest"}
+	iUpdateVpcLinkResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.apigatewayv2", Name: "UpdateVpcLinkResponse"}
+	pUnit                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis",
-	Code: 201})
-
-var CreateApiMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateApiMapping",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/domainnames/{DomainName}/apimappings",
-	Code: 201})
-
-var CreateAuthorizer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateAuthorizer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/authorizers",
-	Code: 201})
-
-var CreateDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/deployments",
-	Code: 201})
-
-var CreateDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/domainnames",
-	Code: 201})
-
-var CreateIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/integrations",
-	Code: 201})
-
-var CreateIntegrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateIntegrationResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}/integrationresponses",
-	Code: 201})
-
-var CreateModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/models",
-	Code: 201})
-
-var CreatePortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreatePortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/portals",
-	Code: 201})
-
-var CreatePortalProduct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreatePortalProduct",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/portalproducts",
-	Code: 201})
-
-var CreateProductPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateProductPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/portalproducts/{PortalProductId}/productpages",
-	Code: 201})
-
-var CreateProductRestEndpointPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateProductRestEndpointPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/portalproducts/{PortalProductId}/productrestendpointpages",
-	Code: 201})
-
-var CreateRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/routes",
-	Code: 201})
-
-var CreateRouteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRouteResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}/routeresponses",
-	Code: 201})
-
-var CreateRoutingRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRoutingRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/domainnames/{DomainName}/routingrules",
-	Code: 201})
-
-var CreateStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateStage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/apis/{ApiId}/stages",
-	Code: 201})
-
-var CreateVpcLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateVpcLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/vpclinks",
-	Code: 201})
-
-var DeleteAccessLogSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteAccessLogSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/stages/{StageName}/accesslogsettings",
-	Code: 204})
-
-var DeleteApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}",
-	Code: 204})
-
-var DeleteApiMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteApiMapping",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/domainnames/{DomainName}/apimappings/{ApiMappingId}",
-	Code: 204})
-
-var DeleteAuthorizer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteAuthorizer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/authorizers/{AuthorizerId}",
-	Code: 204})
-
-var DeleteCorsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteCorsConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/cors",
-	Code: 204})
-
-var DeleteDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/deployments/{DeploymentId}",
-	Code: 204})
-
-var DeleteDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/domainnames/{DomainName}",
-	Code: 204})
-
-var DeleteIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}",
-	Code: 204})
-
-var DeleteIntegrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteIntegrationResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}/integrationresponses/{IntegrationResponseId}",
-	Code: 204})
-
-var DeleteModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/models/{ModelId}",
-	Code: 204})
-
-var DeletePortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeletePortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/portals/{PortalId}",
-	Code: 204})
-
-var DeletePortalProduct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeletePortalProduct",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/portalproducts/{PortalProductId}",
-	Code: 204})
-
-var DeletePortalProductSharingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeletePortalProductSharingPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/portalproducts/{PortalProductId}/sharingpolicy",
-	Code: 204})
-
-var DeleteProductPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteProductPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}",
-	Code: 204})
-
-var DeleteProductRestEndpointPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteProductRestEndpointPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}",
-	Code: 204})
-
-var DeleteRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}",
-	Code: 204})
-
-var DeleteRouteRequestParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRouteRequestParameter",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}/requestparameters/{RequestParameterKey}",
-	Code: 204})
-
-var DeleteRouteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRouteResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}/routeresponses/{RouteResponseId}",
-	Code: 204})
-
-var DeleteRouteSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRouteSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/stages/{StageName}/routesettings/{RouteKey}",
-	Code: 204})
-
-var DeleteRoutingRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRoutingRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/domainnames/{DomainName}/routingrules/{RoutingRuleId}",
-	Code: 204})
-
-var DeleteStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteStage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/stages/{StageName}",
-	Code: 204})
-
-var DeleteVpcLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteVpcLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/vpclinks/{VpcLinkId}",
-	Code: 202})
-
-var DisablePortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DisablePortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/portals/{PortalId}/publish",
-	Code: 204})
-
-var ExportApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ExportApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/exports/{Specification}",
-	Code: 200})
-
-var GetApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}",
-	Code: 200})
-
-var GetApiMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiMapping",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domainnames/{DomainName}/apimappings/{ApiMappingId}",
-	Code: 200})
-
-var GetApiMappings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiMappings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domainnames/{DomainName}/apimappings",
-	Code: 200})
-
-var GetApis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApis",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis",
-	Code: 200})
-
-var GetAuthorizer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetAuthorizer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/authorizers/{AuthorizerId}",
-	Code: 200})
-
-var GetAuthorizers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetAuthorizers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/authorizers",
-	Code: 200})
-
-var GetDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/deployments/{DeploymentId}",
-	Code: 200})
-
-var GetDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/deployments",
-	Code: 200})
-
-var GetDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domainnames/{DomainName}",
-	Code: 200})
-
-var GetDomainNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDomainNames",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domainnames",
-	Code: 200})
-
-var GetIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}",
-	Code: 200})
-
-var GetIntegrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}/integrationresponses/{IntegrationResponseId}",
-	Code: 200})
-
-var GetIntegrationResponses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationResponses",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}/integrationresponses",
-	Code: 200})
-
-var GetIntegrations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/integrations",
-	Code: 200})
-
-var GetModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/models/{ModelId}",
-	Code: 200})
-
-var GetModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/models",
-	Code: 200})
-
-var GetModelTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModelTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/models/{ModelId}/template",
-	Code: 200})
-
-var GetPortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portals/{PortalId}",
-	Code: 200})
-
-var GetPortalProduct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalProduct",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portalproducts/{PortalProductId}",
-	Code: 200})
-
-var GetPortalProductSharingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalProductSharingPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portalproducts/{PortalProductId}/sharingpolicy",
-	Code: 200})
-
-var GetProductPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetProductPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}",
-	Code: 200})
-
-var GetProductRestEndpointPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetProductRestEndpointPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}",
-	Code: 200})
-
-var GetRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t63 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}",
-	Code: 200})
-
-var GetRouteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t64 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}/routeresponses/{RouteResponseId}",
-	Code: 200})
-
-var GetRouteResponses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteResponses",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t65 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}/routeresponses",
-	Code: 200})
-
-var GetRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRoutes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t66 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/routes",
-	Code: 200})
-
-var GetRoutingRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRoutingRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t67 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domainnames/{DomainName}/routingrules/{RoutingRuleId}",
-	Code: 200})
-
-var GetStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetStage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t68 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/stages/{StageName}",
-	Code: 200})
-
-var GetStages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetStages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t69 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/apis/{ApiId}/stages",
-	Code: 200})
-
-var GetTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetTags",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t70 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/tags/{ResourceArn}",
-	Code: 200})
-
-var GetVpcLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetVpcLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t71 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/vpclinks/{VpcLinkId}",
-	Code: 200})
-
-var GetVpcLinks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetVpcLinks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t72 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/vpclinks",
-	Code: 200})
-
-var ImportApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ImportApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t73 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v2/apis",
-	Code: 201})
-
-var ListPortalProducts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListPortalProducts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 201}}, DirectMask: 0x2}
+var t74 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portalproducts",
-	Code: 200})
-
-var ListPortals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListPortals",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t75 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portals",
-	Code: 200})
-
-var ListProductPages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListProductPages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t76 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portalproducts/{PortalProductId}/productpages",
-	Code: 200})
-
-var ListProductRestEndpointPages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListProductRestEndpointPages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t77 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/portalproducts/{PortalProductId}/productrestendpointpages",
-	Code: 200})
-
-var ListRoutingRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListRoutingRules",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t78 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v2/domainnames/{DomainName}/routingrules",
-	Code: 200})
-
-var PreviewPortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PreviewPortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t79 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/portals/{PortalId}/preview",
-	Code: 202})
-
-var PublishPortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PublishPortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 202}}, DirectMask: 0x2}
+var t80 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/portals/{PortalId}/publish",
-	Code: 202})
-
-var PutPortalProductSharingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PutPortalProductSharingPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 202}}, DirectMask: 0x2}
+var t81 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v2/portalproducts/{PortalProductId}/sharingpolicy",
-	Code: 200})
-
-var PutRoutingRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PutRoutingRule",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t82 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v2/domainnames/{DomainName}/routingrules/{RoutingRuleId}",
-	Code: 200})
-
-var ReimportApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ReimportApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t83 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v2/apis/{ApiId}",
-	Code: 201})
-
-var ResetAuthorizersCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ResetAuthorizersCache",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t84 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/apis/{ApiId}/stages/{StageName}/cache/authorizers",
-	Code: 204})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t85 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v2/tags/{ResourceArn}",
-	Code: 201})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t86 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v2/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateApi",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 204}}, DirectMask: 0x2}
+var t87 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}",
-	Code: 200})
-
-var UpdateApiMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateApiMapping",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t88 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/domainnames/{DomainName}/apimappings/{ApiMappingId}",
-	Code: 200})
-
-var UpdateAuthorizer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateAuthorizer",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t89 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/authorizers/{AuthorizerId}",
-	Code: 200})
-
-var UpdateDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t90 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/deployments/{DeploymentId}",
-	Code: 200})
-
-var UpdateDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateDomainName",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t91 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/domainnames/{DomainName}",
-	Code: 200})
-
-var UpdateIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateIntegration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t92 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}",
-	Code: 200})
-
-var UpdateIntegrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateIntegrationResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t93 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/integrations/{IntegrationId}/integrationresponses/{IntegrationResponseId}",
-	Code: 200})
-
-var UpdateModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateModel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t94 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/models/{ModelId}",
-	Code: 200})
-
-var UpdatePortal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdatePortal",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t95 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/portals/{PortalId}",
-	Code: 200})
-
-var UpdatePortalProduct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdatePortalProduct",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t96 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/portalproducts/{PortalProductId}",
-	Code: 200})
-
-var UpdateProductPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateProductPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t97 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/portalproducts/{PortalProductId}/productpages/{ProductPageId}",
-	Code: 200})
-
-var UpdateProductRestEndpointPage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateProductRestEndpointPage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t98 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/portalproducts/{PortalProductId}/productrestendpointpages/{ProductRestEndpointPageId}",
-	Code: 200})
-
-var UpdateRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateRoute",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t99 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}",
-	Code: 200})
-
-var UpdateRouteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateRouteResponse",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t100 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/routes/{RouteId}/routeresponses/{RouteResponseId}",
-	Code: 200})
-
-var UpdateStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateStage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t101 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/apis/{ApiId}/stages/{StageName}",
-	Code: 200})
-
-var UpdateVpcLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateVpcLink",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t102 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/v2/vpclinks/{VpcLinkId}",
-	Code: 200})
-
-var _ApiGatewayV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ApiGatewayV2",
-}, smithy.ShapeTypeService, 0)
-
-var ApiGatewayV2 = smithy.NewServiceSchema(_ApiGatewayV2, "2018-11-29")
-
-var ___boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ___double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__double",
-}, smithy.ShapeTypeDouble, 0)
-
-var ___integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var ___listOf__string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOf__string",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__string_member *smithy.Schema
-
-var ___listOf__stringMin20Max2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOf__stringMin20Max2048",
-}, smithy.ShapeTypeList, 1)
-var ___listOf__stringMin20Max2048_member *smithy.Schema
-
-var ___listOfApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfApi",
-}, smithy.ShapeTypeList, 1)
-var ___listOfApi_member *smithy.Schema
-
-var ___listOfApiMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfApiMapping",
-}, smithy.ShapeTypeList, 1)
-var ___listOfApiMapping_member *smithy.Schema
-
-var ___listOfAuthorizer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfAuthorizer",
-}, smithy.ShapeTypeList, 1)
-var ___listOfAuthorizer_member *smithy.Schema
-
-var ___listOfDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfDeployment",
-}, smithy.ShapeTypeList, 1)
-var ___listOfDeployment_member *smithy.Schema
-
-var ___listOfDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfDomainName",
-}, smithy.ShapeTypeList, 1)
-var ___listOfDomainName_member *smithy.Schema
-
-var ___listOfIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfIntegration",
-}, smithy.ShapeTypeList, 1)
-var ___listOfIntegration_member *smithy.Schema
-
-var ___listOfIntegrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfIntegrationResponse",
-}, smithy.ShapeTypeList, 1)
-var ___listOfIntegrationResponse_member *smithy.Schema
-
-var ___listOfModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfModel",
-}, smithy.ShapeTypeList, 1)
-var ___listOfModel_member *smithy.Schema
-
-var ___listOfPortalProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfPortalProductSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPortalProductSummary_member *smithy.Schema
-
-var ___listOfPortalSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfPortalSummary",
-}, smithy.ShapeTypeList, 1)
-var ___listOfPortalSummary_member *smithy.Schema
-
-var ___listOfProductPageSummaryNoBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfProductPageSummaryNoBody",
-}, smithy.ShapeTypeList, 1)
-var ___listOfProductPageSummaryNoBody_member *smithy.Schema
-
-var ___listOfProductRestEndpointPageSummaryNoBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfProductRestEndpointPageSummaryNoBody",
-}, smithy.ShapeTypeList, 1)
-var ___listOfProductRestEndpointPageSummaryNoBody_member *smithy.Schema
-
-var ___listOfRoute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfRoute",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRoute_member *smithy.Schema
-
-var ___listOfRouteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfRouteResponse",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRouteResponse_member *smithy.Schema
-
-var ___listOfRoutingRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfRoutingRule",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRoutingRule_member *smithy.Schema
-
-var ___listOfRoutingRuleAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfRoutingRuleAction",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRoutingRuleAction_member *smithy.Schema
-
-var ___listOfRoutingRuleCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfRoutingRuleCondition",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRoutingRuleCondition_member *smithy.Schema
-
-var ___listOfRoutingRuleMatchHeaderValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfRoutingRuleMatchHeaderValue",
-}, smithy.ShapeTypeList, 1)
-var ___listOfRoutingRuleMatchHeaderValue_member *smithy.Schema
-
-var ___listOfSection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfSection",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSection_member *smithy.Schema
-
-var ___listOfSelectionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfSelectionKey",
-}, smithy.ShapeTypeList, 1)
-var ___listOfSelectionKey_member *smithy.Schema
-
-var ___listOfStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfStage",
-}, smithy.ShapeTypeList, 1)
-var ___listOfStage_member *smithy.Schema
-
-var ___listOfVpcLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__listOfVpcLink",
-}, smithy.ShapeTypeList, 1)
-var ___listOfVpcLink_member *smithy.Schema
-
-var ___string = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__string",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin0Max1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin0Max1024",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin0Max1092 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin0Max1092",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin0Max255 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin0Max255",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin10Max2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin10Max2048",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin10Max30PatternAZ09 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin10Max30PatternAZ09",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max1024",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max128",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max16 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max16",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max20 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max20",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max2048",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max255 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max255",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max256",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max307200 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max307200",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max32768 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max32768",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max4096 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max4096",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max50 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max50",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin1Max64 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin1Max64",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin20Max2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin20Max2048",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin3Max255 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin3Max255",
-}, smithy.ShapeTypeString, 0)
-
-var ___stringMin3Max256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__stringMin3Max256",
-}, smithy.ShapeTypeString, 0)
-
-var ___timestampIso8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "__timestampIso8601",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessLogSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "AccessLogSettings",
-}, smithy.ShapeTypeStructure, 2)
-var AccessLogSettings_DestinationArn *smithy.Schema
-
-var AccessLogSettings_Format *smithy.Schema
-
-var ACMManaged = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ACMManaged",
-}, smithy.ShapeTypeStructure, 2)
-var ACMManaged_CertificateArn *smithy.Schema
-
-var ACMManaged_DomainName *smithy.Schema
-
-var Api = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Api",
-}, smithy.ShapeTypeStructure, 17)
-var Api_ApiEndpoint *smithy.Schema
-
-var Api_ApiGatewayManaged *smithy.Schema
-
-var Api_ApiId *smithy.Schema
-
-var Api_ApiKeySelectionExpression *smithy.Schema
-
-var Api_CorsConfiguration *smithy.Schema
-
-var Api_CreatedDate *smithy.Schema
-
-var Api_Description *smithy.Schema
-
-var Api_DisableSchemaValidation *smithy.Schema
-
-var Api_DisableExecuteApiEndpoint *smithy.Schema
-
-var Api_ImportInfo *smithy.Schema
-
-var Api_IpAddressType *smithy.Schema
-
-var Api_Name *smithy.Schema
-
-var Api_ProtocolType *smithy.Schema
-
-var Api_RouteSelectionExpression *smithy.Schema
-
-var Api_Tags *smithy.Schema
-
-var Api_Version *smithy.Schema
-
-var Api_Warnings *smithy.Schema
-
-var ApiMapping = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ApiMapping",
-}, smithy.ShapeTypeStructure, 4)
-var ApiMapping_ApiId *smithy.Schema
-
-var ApiMapping_ApiMappingId *smithy.Schema
-
-var ApiMapping_ApiMappingKey *smithy.Schema
-
-var ApiMapping_Stage *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var Authorization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Authorization",
-}, smithy.ShapeTypeStructure, 2)
-var Authorization_CognitoConfig *smithy.Schema
-
-var Authorization_None *smithy.Schema
-
-var _AuthorizationScopes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "AuthorizationScopes",
-}, smithy.ShapeTypeList, 1)
-var _AuthorizationScopes_member *smithy.Schema
-
-var AuthorizationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "AuthorizationType",
-}, smithy.ShapeTypeEnum, 4)
-var AuthorizationType_NONE *smithy.Schema
-
-var AuthorizationType_AWS_IAM *smithy.Schema
-
-var AuthorizationType_CUSTOM *smithy.Schema
-
-var AuthorizationType_JWT *smithy.Schema
-
-var Authorizer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Authorizer",
-}, smithy.ShapeTypeStructure, 11)
-var Authorizer_AuthorizerCredentialsArn *smithy.Schema
-
-var Authorizer_AuthorizerId *smithy.Schema
-
-var Authorizer_AuthorizerPayloadFormatVersion *smithy.Schema
-
-var Authorizer_AuthorizerResultTtlInSeconds *smithy.Schema
-
-var Authorizer_AuthorizerType *smithy.Schema
-
-var Authorizer_AuthorizerUri *smithy.Schema
-
-var Authorizer_EnableSimpleResponses *smithy.Schema
-
-var Authorizer_IdentitySource *smithy.Schema
-
-var Authorizer_IdentityValidationExpression *smithy.Schema
-
-var Authorizer_JwtConfiguration *smithy.Schema
-
-var Authorizer_Name *smithy.Schema
-
-var AuthorizerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "AuthorizerType",
-}, smithy.ShapeTypeEnum, 2)
-var AuthorizerType_REQUEST *smithy.Schema
-
-var AuthorizerType_JWT *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Message *smithy.Schema
-
-var CognitoConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CognitoConfig",
-}, smithy.ShapeTypeStructure, 3)
-var CognitoConfig_AppClientId *smithy.Schema
-
-var CognitoConfig_UserPoolArn *smithy.Schema
-
-var CognitoConfig_UserPoolDomain *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConnectionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ConnectionType",
-}, smithy.ShapeTypeEnum, 2)
-var ConnectionType_INTERNET *smithy.Schema
-
-var ConnectionType_VPC_LINK *smithy.Schema
-
-var ContentHandlingStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ContentHandlingStrategy",
-}, smithy.ShapeTypeEnum, 2)
-var ContentHandlingStrategy_CONVERT_TO_BINARY *smithy.Schema
-
-var ContentHandlingStrategy_CONVERT_TO_TEXT *smithy.Schema
-
-var Cors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Cors",
-}, smithy.ShapeTypeStructure, 6)
-var Cors_AllowCredentials *smithy.Schema
-
-var Cors_AllowHeaders *smithy.Schema
-
-var Cors_AllowMethods *smithy.Schema
-
-var Cors_AllowOrigins *smithy.Schema
-
-var Cors_ExposeHeaders *smithy.Schema
-
-var Cors_MaxAge *smithy.Schema
-
-var _CorsHeaderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CorsHeaderList",
-}, smithy.ShapeTypeList, 1)
-var _CorsHeaderList_member *smithy.Schema
-
-var _CorsMethodList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CorsMethodList",
-}, smithy.ShapeTypeList, 1)
-var _CorsMethodList_member *smithy.Schema
-
-var _CorsOriginList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CorsOriginList",
-}, smithy.ShapeTypeList, 1)
-var _CorsOriginList_member *smithy.Schema
-
-var CustomColors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CustomColors",
-}, smithy.ShapeTypeStructure, 6)
-var CustomColors_AccentColor *smithy.Schema
-
-var CustomColors_BackgroundColor *smithy.Schema
-
-var CustomColors_ErrorValidationColor *smithy.Schema
-
-var CustomColors_HeaderColor *smithy.Schema
-
-var CustomColors_NavigationColor *smithy.Schema
-
-var CustomColors_TextColor *smithy.Schema
-
-var Deployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Deployment",
-}, smithy.ShapeTypeStructure, 6)
-var Deployment_AutoDeployed *smithy.Schema
-
-var Deployment_CreatedDate *smithy.Schema
-
-var Deployment_DeploymentId *smithy.Schema
-
-var Deployment_DeploymentStatus *smithy.Schema
-
-var Deployment_DeploymentStatusMessage *smithy.Schema
-
-var Deployment_Description *smithy.Schema
-
-var DeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeploymentStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DeploymentStatus_PENDING *smithy.Schema
-
-var DeploymentStatus_FAILED *smithy.Schema
-
-var DeploymentStatus_DEPLOYED *smithy.Schema
-
-var DisplayContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DisplayContent",
-}, smithy.ShapeTypeStructure, 2)
-var DisplayContent_Body *smithy.Schema
-
-var DisplayContent_Title *smithy.Schema
-
-var DisplayContentOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DisplayContentOverrides",
-}, smithy.ShapeTypeStructure, 3)
-var DisplayContentOverrides_Body *smithy.Schema
-
-var DisplayContentOverrides_Endpoint *smithy.Schema
-
-var DisplayContentOverrides_OperationName *smithy.Schema
-
-var DisplayOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DisplayOrder",
-}, smithy.ShapeTypeStructure, 3)
-var DisplayOrder_Contents *smithy.Schema
-
-var DisplayOrder_OverviewPageArn *smithy.Schema
-
-var DisplayOrder_ProductPageArns *smithy.Schema
-
-var DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DomainName",
-}, smithy.ShapeTypeStructure, 7)
-var DomainName_ApiMappingSelectionExpression *smithy.Schema
-
-var DomainName_DomainName *smithy.Schema
-
-var DomainName_DomainNameArn *smithy.Schema
-
-var DomainName_DomainNameConfigurations *smithy.Schema
-
-var DomainName_MutualTlsAuthentication *smithy.Schema
-
-var DomainName_RoutingMode *smithy.Schema
-
-var DomainName_Tags *smithy.Schema
-
-var DomainNameConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DomainNameConfiguration",
-}, smithy.ShapeTypeStructure, 11)
-var DomainNameConfiguration_ApiGatewayDomainName *smithy.Schema
-
-var DomainNameConfiguration_CertificateArn *smithy.Schema
-
-var DomainNameConfiguration_CertificateName *smithy.Schema
-
-var DomainNameConfiguration_CertificateUploadDate *smithy.Schema
-
-var DomainNameConfiguration_DomainNameStatus *smithy.Schema
-
-var DomainNameConfiguration_DomainNameStatusMessage *smithy.Schema
-
-var DomainNameConfiguration_EndpointType *smithy.Schema
-
-var DomainNameConfiguration_HostedZoneId *smithy.Schema
-
-var DomainNameConfiguration_IpAddressType *smithy.Schema
-
-var DomainNameConfiguration_SecurityPolicy *smithy.Schema
-
-var DomainNameConfiguration_OwnershipVerificationCertificateArn *smithy.Schema
-
-var _DomainNameConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DomainNameConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _DomainNameConfigurations_member *smithy.Schema
-
-var DomainNameStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DomainNameStatus",
-}, smithy.ShapeTypeEnum, 4)
-var DomainNameStatus_AVAILABLE *smithy.Schema
-
-var DomainNameStatus_UPDATING *smithy.Schema
-
-var DomainNameStatus_PENDING_CERTIFICATE_REIMPORT *smithy.Schema
-
-var DomainNameStatus_PENDING_OWNERSHIP_VERIFICATION *smithy.Schema
-
-var EndpointConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "EndpointConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EndpointConfigurationRequest_AcmManaged *smithy.Schema
-
-var EndpointConfigurationRequest_None *smithy.Schema
-
-var EndpointConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "EndpointConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var EndpointConfigurationResponse_CertificateArn *smithy.Schema
-
-var EndpointConfigurationResponse_DomainName *smithy.Schema
-
-var EndpointConfigurationResponse_PortalDefaultDomainName *smithy.Schema
-
-var EndpointConfigurationResponse_PortalDomainHostedZoneId *smithy.Schema
-
-var EndpointDisplayContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "EndpointDisplayContent",
-}, smithy.ShapeTypeStructure, 2)
-var EndpointDisplayContent_None *smithy.Schema
-
-var EndpointDisplayContent_Overrides *smithy.Schema
-
-var EndpointDisplayContentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "EndpointDisplayContentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var EndpointDisplayContentResponse_Body *smithy.Schema
-
-var EndpointDisplayContentResponse_Endpoint *smithy.Schema
-
-var EndpointDisplayContentResponse_OperationName *smithy.Schema
-
-var EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "EndpointType",
-}, smithy.ShapeTypeEnum, 2)
-var EndpointType_REGIONAL *smithy.Schema
-
-var EndpointType_EDGE *smithy.Schema
-
-var _ExportedApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ExportedApi",
-}, smithy.ShapeTypeBlob, 0)
-
-var _Id = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Id",
-}, smithy.ShapeTypeString, 0)
-
-var IdentifierParts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IdentifierParts",
-}, smithy.ShapeTypeStructure, 4)
-var IdentifierParts_Method *smithy.Schema
-
-var IdentifierParts_Path *smithy.Schema
-
-var IdentifierParts_RestApiId *smithy.Schema
-
-var IdentifierParts_Stage *smithy.Schema
-
-var _IdentitySourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IdentitySourceList",
-}, smithy.ShapeTypeList, 1)
-var _IdentitySourceList_member *smithy.Schema
-
-var _IntegerWithLengthBetween0And3600 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IntegerWithLengthBetween0And3600",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerWithLengthBetween50And30000 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IntegerWithLengthBetween50And30000",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerWithLengthBetweenMinus1And86400 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IntegerWithLengthBetweenMinus1And86400",
-}, smithy.ShapeTypeInteger, 0)
-
-var Integration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Integration",
-}, smithy.ShapeTypeStructure, 20)
-var Integration_ApiGatewayManaged *smithy.Schema
-
-var Integration_ConnectionId *smithy.Schema
-
-var Integration_ConnectionType *smithy.Schema
-
-var Integration_ContentHandlingStrategy *smithy.Schema
-
-var Integration_CredentialsArn *smithy.Schema
-
-var Integration_Description *smithy.Schema
-
-var Integration_IntegrationId *smithy.Schema
-
-var Integration_IntegrationMethod *smithy.Schema
-
-var Integration_IntegrationResponseSelectionExpression *smithy.Schema
-
-var Integration_IntegrationSubtype *smithy.Schema
-
-var Integration_IntegrationType *smithy.Schema
-
-var Integration_IntegrationUri *smithy.Schema
-
-var Integration_PassthroughBehavior *smithy.Schema
-
-var Integration_PayloadFormatVersion *smithy.Schema
-
-var Integration_RequestParameters *smithy.Schema
-
-var Integration_RequestTemplates *smithy.Schema
-
-var Integration_ResponseParameters *smithy.Schema
-
-var Integration_TemplateSelectionExpression *smithy.Schema
-
-var Integration_TimeoutInMillis *smithy.Schema
-
-var Integration_TlsConfig *smithy.Schema
-
-var _IntegrationParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IntegrationParameters",
-}, smithy.ShapeTypeMap, 2)
-var _IntegrationParameters_key *smithy.Schema
-
-var _IntegrationParameters_value *smithy.Schema
-
-var IntegrationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IntegrationResponse",
-}, smithy.ShapeTypeStructure, 6)
-var IntegrationResponse_ContentHandlingStrategy *smithy.Schema
-
-var IntegrationResponse_IntegrationResponseId *smithy.Schema
-
-var IntegrationResponse_IntegrationResponseKey *smithy.Schema
-
-var IntegrationResponse_ResponseParameters *smithy.Schema
-
-var IntegrationResponse_ResponseTemplates *smithy.Schema
-
-var IntegrationResponse_TemplateSelectionExpression *smithy.Schema
-
-var IntegrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IntegrationType",
-}, smithy.ShapeTypeEnum, 5)
-var IntegrationType_AWS *smithy.Schema
-
-var IntegrationType_HTTP *smithy.Schema
-
-var IntegrationType_MOCK *smithy.Schema
-
-var IntegrationType_HTTP_PROXY *smithy.Schema
-
-var IntegrationType_AWS_PROXY *smithy.Schema
-
-var IpAddressType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "IpAddressType",
-}, smithy.ShapeTypeEnum, 2)
-var IpAddressType_ipv4 *smithy.Schema
-
-var IpAddressType_dualstack *smithy.Schema
-
-var JWTConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "JWTConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var JWTConfiguration_Audience *smithy.Schema
-
-var JWTConfiguration_Issuer *smithy.Schema
-
-var LoggingLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "LoggingLevel",
-}, smithy.ShapeTypeEnum, 3)
-var LoggingLevel_ERROR *smithy.Schema
-
-var LoggingLevel_INFO *smithy.Schema
-
-var LoggingLevel_OFF *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Model = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Model",
-}, smithy.ShapeTypeStructure, 5)
-var Model_ContentType *smithy.Schema
-
-var Model_Description *smithy.Schema
-
-var Model_ModelId *smithy.Schema
-
-var Model_Name *smithy.Schema
-
-var Model_Schema *smithy.Schema
-
-var MutualTlsAuthentication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "MutualTlsAuthentication",
-}, smithy.ShapeTypeStructure, 3)
-var MutualTlsAuthentication_TruststoreUri *smithy.Schema
-
-var MutualTlsAuthentication_TruststoreVersion *smithy.Schema
-
-var MutualTlsAuthentication_TruststoreWarnings *smithy.Schema
-
-var MutualTlsAuthenticationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "MutualTlsAuthenticationInput",
-}, smithy.ShapeTypeStructure, 2)
-var MutualTlsAuthenticationInput_TruststoreUri *smithy.Schema
-
-var MutualTlsAuthenticationInput_TruststoreVersion *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var None = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "None",
-}, smithy.ShapeTypeStructure, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Message *smithy.Schema
-
-var NotFoundException_ResourceType *smithy.Schema
-
-var ParameterConstraints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ParameterConstraints",
-}, smithy.ShapeTypeStructure, 1)
-var ParameterConstraints_Required *smithy.Schema
-
-var PassthroughBehavior = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PassthroughBehavior",
-}, smithy.ShapeTypeEnum, 3)
-var PassthroughBehavior_WHEN_NO_MATCH *smithy.Schema
-
-var PassthroughBehavior_NEVER *smithy.Schema
-
-var PassthroughBehavior_WHEN_NO_TEMPLATES *smithy.Schema
-
-var PortalContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PortalContent",
-}, smithy.ShapeTypeStructure, 3)
-var PortalContent_Description *smithy.Schema
-
-var PortalContent_DisplayName *smithy.Schema
-
-var PortalContent_Theme *smithy.Schema
-
-var PortalProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PortalProductSummary",
-}, smithy.ShapeTypeStructure, 6)
-var PortalProductSummary_Description *smithy.Schema
-
-var PortalProductSummary_DisplayName *smithy.Schema
-
-var PortalProductSummary_LastModified *smithy.Schema
-
-var PortalProductSummary_PortalProductArn *smithy.Schema
-
-var PortalProductSummary_PortalProductId *smithy.Schema
-
-var PortalProductSummary_Tags *smithy.Schema
-
-var PortalSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PortalSummary",
-}, smithy.ShapeTypeStructure, 14)
-var PortalSummary_Authorization *smithy.Schema
-
-var PortalSummary_EndpointConfiguration *smithy.Schema
-
-var PortalSummary_IncludedPortalProductArns *smithy.Schema
-
-var PortalSummary_LastModified *smithy.Schema
-
-var PortalSummary_LastPublished *smithy.Schema
-
-var PortalSummary_LastPublishedDescription *smithy.Schema
-
-var PortalSummary_PortalArn *smithy.Schema
-
-var PortalSummary_PortalContent *smithy.Schema
-
-var PortalSummary_PortalId *smithy.Schema
-
-var PortalSummary_Preview *smithy.Schema
-
-var PortalSummary_PublishStatus *smithy.Schema
-
-var PortalSummary_RumAppMonitorName *smithy.Schema
-
-var PortalSummary_StatusException *smithy.Schema
-
-var PortalSummary_Tags *smithy.Schema
-
-var PortalTheme = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PortalTheme",
-}, smithy.ShapeTypeStructure, 2)
-var PortalTheme_CustomColors *smithy.Schema
-
-var PortalTheme_LogoLastUploaded *smithy.Schema
-
-var Preview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Preview",
-}, smithy.ShapeTypeStructure, 3)
-var Preview_PreviewStatus *smithy.Schema
-
-var Preview_PreviewUrl *smithy.Schema
-
-var Preview_StatusException *smithy.Schema
-
-var PreviewStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PreviewStatus",
-}, smithy.ShapeTypeEnum, 3)
-var PreviewStatus_PREVIEW_IN_PROGRESS *smithy.Schema
-
-var PreviewStatus_PREVIEW_FAILED *smithy.Schema
-
-var PreviewStatus_PREVIEW_READY *smithy.Schema
-
-var ProductPageSummaryNoBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ProductPageSummaryNoBody",
-}, smithy.ShapeTypeStructure, 4)
-var ProductPageSummaryNoBody_LastModified *smithy.Schema
-
-var ProductPageSummaryNoBody_PageTitle *smithy.Schema
-
-var ProductPageSummaryNoBody_ProductPageArn *smithy.Schema
-
-var ProductPageSummaryNoBody_ProductPageId *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ProductRestEndpointPageSummaryNoBody",
-}, smithy.ShapeTypeStructure, 9)
-var ProductRestEndpointPageSummaryNoBody_Endpoint *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_LastModified *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_OperationName *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageArn *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageId *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_RestEndpointIdentifier *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_Status *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_StatusException *smithy.Schema
-
-var ProductRestEndpointPageSummaryNoBody_TryItState *smithy.Schema
-
-var ProtocolType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ProtocolType",
-}, smithy.ShapeTypeEnum, 2)
-var ProtocolType_WEBSOCKET *smithy.Schema
-
-var ProtocolType_HTTP *smithy.Schema
-
-var PublishStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PublishStatus",
-}, smithy.ShapeTypeEnum, 6)
-var PublishStatus_PUBLISHED *smithy.Schema
-
-var PublishStatus_PUBLISH_IN_PROGRESS *smithy.Schema
-
-var PublishStatus_PUBLISH_FAILED *smithy.Schema
-
-var PublishStatus_DISABLE_IN_PROGRESS *smithy.Schema
-
-var PublishStatus_DISABLE_FAILED *smithy.Schema
-
-var PublishStatus_DISABLED *smithy.Schema
-
-var _ResponseParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ResponseParameters",
-}, smithy.ShapeTypeMap, 2)
-var _ResponseParameters_key *smithy.Schema
-
-var _ResponseParameters_value *smithy.Schema
-
-var RestEndpointIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RestEndpointIdentifier",
-}, smithy.ShapeTypeStructure, 1)
-var RestEndpointIdentifier_IdentifierParts *smithy.Schema
-
-var Route = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Route",
-}, smithy.ShapeTypeStructure, 13)
-var Route_ApiGatewayManaged *smithy.Schema
-
-var Route_ApiKeyRequired *smithy.Schema
-
-var Route_AuthorizationScopes *smithy.Schema
-
-var Route_AuthorizationType *smithy.Schema
-
-var Route_AuthorizerId *smithy.Schema
-
-var Route_ModelSelectionExpression *smithy.Schema
-
-var Route_OperationName *smithy.Schema
-
-var Route_RequestModels *smithy.Schema
-
-var Route_RequestParameters *smithy.Schema
-
-var Route_RouteId *smithy.Schema
-
-var Route_RouteKey *smithy.Schema
-
-var Route_RouteResponseSelectionExpression *smithy.Schema
-
-var Route_Target *smithy.Schema
-
-var _RouteModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RouteModels",
-}, smithy.ShapeTypeMap, 2)
-var _RouteModels_key *smithy.Schema
-
-var _RouteModels_value *smithy.Schema
-
-var _RouteParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RouteParameters",
-}, smithy.ShapeTypeMap, 2)
-var _RouteParameters_key *smithy.Schema
-
-var _RouteParameters_value *smithy.Schema
-
-var RouteResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RouteResponse",
-}, smithy.ShapeTypeStructure, 5)
-var RouteResponse_ModelSelectionExpression *smithy.Schema
-
-var RouteResponse_ResponseModels *smithy.Schema
-
-var RouteResponse_ResponseParameters *smithy.Schema
-
-var RouteResponse_RouteResponseId *smithy.Schema
-
-var RouteResponse_RouteResponseKey *smithy.Schema
-
-var RouteSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RouteSettings",
-}, smithy.ShapeTypeStructure, 5)
-var RouteSettings_DataTraceEnabled *smithy.Schema
-
-var RouteSettings_DetailedMetricsEnabled *smithy.Schema
-
-var RouteSettings_LoggingLevel *smithy.Schema
-
-var RouteSettings_ThrottlingBurstLimit *smithy.Schema
-
-var RouteSettings_ThrottlingRateLimit *smithy.Schema
-
-var _RouteSettingsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RouteSettingsMap",
-}, smithy.ShapeTypeMap, 2)
-var _RouteSettingsMap_key *smithy.Schema
-
-var _RouteSettingsMap_value *smithy.Schema
-
-var RoutingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingMode",
-}, smithy.ShapeTypeEnum, 3)
-var RoutingMode_API_MAPPING_ONLY *smithy.Schema
-
-var RoutingMode_ROUTING_RULE_ONLY *smithy.Schema
-
-var RoutingMode_ROUTING_RULE_THEN_API_MAPPING *smithy.Schema
-
-var RoutingRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRule",
-}, smithy.ShapeTypeStructure, 5)
-var RoutingRule_Actions *smithy.Schema
-
-var RoutingRule_Conditions *smithy.Schema
-
-var RoutingRule_Priority *smithy.Schema
-
-var RoutingRule_RoutingRuleArn *smithy.Schema
-
-var RoutingRule_RoutingRuleId *smithy.Schema
-
-var RoutingRuleAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRuleAction",
-}, smithy.ShapeTypeStructure, 1)
-var RoutingRuleAction_InvokeApi *smithy.Schema
-
-var RoutingRuleActionInvokeApi = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRuleActionInvokeApi",
-}, smithy.ShapeTypeStructure, 3)
-var RoutingRuleActionInvokeApi_ApiId *smithy.Schema
-
-var RoutingRuleActionInvokeApi_Stage *smithy.Schema
-
-var RoutingRuleActionInvokeApi_StripBasePath *smithy.Schema
-
-var RoutingRuleCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRuleCondition",
-}, smithy.ShapeTypeStructure, 2)
-var RoutingRuleCondition_MatchBasePaths *smithy.Schema
-
-var RoutingRuleCondition_MatchHeaders *smithy.Schema
-
-var RoutingRuleMatchBasePaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRuleMatchBasePaths",
-}, smithy.ShapeTypeStructure, 1)
-var RoutingRuleMatchBasePaths_AnyOf *smithy.Schema
-
-var RoutingRuleMatchHeaders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRuleMatchHeaders",
-}, smithy.ShapeTypeStructure, 1)
-var RoutingRuleMatchHeaders_AnyOf *smithy.Schema
-
-var RoutingRuleMatchHeaderValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRuleMatchHeaderValue",
-}, smithy.ShapeTypeStructure, 2)
-var RoutingRuleMatchHeaderValue_Header *smithy.Schema
-
-var RoutingRuleMatchHeaderValue_ValueGlob *smithy.Schema
-
-var _RoutingRulePriority = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "RoutingRulePriority",
-}, smithy.ShapeTypeInteger, 0)
-
-var Section = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Section",
-}, smithy.ShapeTypeStructure, 2)
-var Section_ProductRestEndpointPageArns *smithy.Schema
-
-var Section_SectionName *smithy.Schema
-
-var _SecurityGroupIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "SecurityGroupIdList",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIdList_member *smithy.Schema
-
-var SecurityPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "SecurityPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var SecurityPolicy_TLS_1_0 *smithy.Schema
-
-var SecurityPolicy_TLS_1_2 *smithy.Schema
-
-var _SelectionExpression = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "SelectionExpression",
-}, smithy.ShapeTypeString, 0)
-
-var _SelectionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "SelectionKey",
-}, smithy.ShapeTypeString, 0)
-
-var Stage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Stage",
-}, smithy.ShapeTypeStructure, 14)
-var Stage_AccessLogSettings *smithy.Schema
-
-var Stage_ApiGatewayManaged *smithy.Schema
-
-var Stage_AutoDeploy *smithy.Schema
-
-var Stage_ClientCertificateId *smithy.Schema
-
-var Stage_CreatedDate *smithy.Schema
-
-var Stage_DefaultRouteSettings *smithy.Schema
-
-var Stage_DeploymentId *smithy.Schema
-
-var Stage_Description *smithy.Schema
-
-var Stage_LastDeploymentStatusMessage *smithy.Schema
-
-var Stage_LastUpdatedDate *smithy.Schema
-
-var Stage_RouteSettings *smithy.Schema
-
-var Stage_StageName *smithy.Schema
-
-var Stage_StageVariables *smithy.Schema
-
-var Stage_Tags *smithy.Schema
-
-var _StageVariablesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StageVariablesMap",
-}, smithy.ShapeTypeMap, 2)
-var _StageVariablesMap_key *smithy.Schema
-
-var _StageVariablesMap_value *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 3)
-var Status_AVAILABLE *smithy.Schema
-
-var Status_IN_PROGRESS *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var StatusException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StatusException",
-}, smithy.ShapeTypeStructure, 2)
-var StatusException_Exception *smithy.Schema
-
-var StatusException_Message *smithy.Schema
-
-var _StringWithLengthBetween0And1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween0And1024",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween0And2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween0And2048",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween0And32K = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween0And32K",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And1024 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween1And1024",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And128 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween1And128",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And1600 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween1And1600",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And256 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween1And256",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And512 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween1And512",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLengthBetween1And64 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "StringWithLengthBetween1And64",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "SubnetIdList",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIdList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2)
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var _TemplateMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TemplateMap",
-}, smithy.ShapeTypeMap, 2)
-var _TemplateMap_key *smithy.Schema
-
-var _TemplateMap_value *smithy.Schema
-
-var TlsConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TlsConfig",
-}, smithy.ShapeTypeStructure, 1)
-var TlsConfig_ServerNameToVerify *smithy.Schema
-
-var TlsConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TlsConfigInput",
-}, smithy.ShapeTypeStructure, 1)
-var TlsConfigInput_ServerNameToVerify *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_LimitType *smithy.Schema
-
-var TooManyRequestsException_Message *smithy.Schema
-
-var TryItState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TryItState",
-}, smithy.ShapeTypeEnum, 2)
-var TryItState_ENABLED *smithy.Schema
-
-var TryItState_DISABLED *smithy.Schema
-
-var _UriWithLengthBetween1And2048 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UriWithLengthBetween1And2048",
-}, smithy.ShapeTypeString, 0)
-
-var VpcLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "VpcLink",
-}, smithy.ShapeTypeStructure, 9)
-var VpcLink_CreatedDate *smithy.Schema
-
-var VpcLink_Name *smithy.Schema
-
-var VpcLink_SecurityGroupIds *smithy.Schema
-
-var VpcLink_SubnetIds *smithy.Schema
-
-var VpcLink_Tags *smithy.Schema
-
-var VpcLink_VpcLinkId *smithy.Schema
-
-var VpcLink_VpcLinkStatus *smithy.Schema
-
-var VpcLink_VpcLinkStatusMessage *smithy.Schema
-
-var VpcLink_VpcLinkVersion *smithy.Schema
-
-var VpcLinkStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "VpcLinkStatus",
-}, smithy.ShapeTypeEnum, 5)
-var VpcLinkStatus_PENDING *smithy.Schema
-
-var VpcLinkStatus_AVAILABLE *smithy.Schema
-
-var VpcLinkStatus_DELETING *smithy.Schema
-
-var VpcLinkStatus_FAILED *smithy.Schema
-
-var VpcLinkStatus_INACTIVE *smithy.Schema
-
-var VpcLinkVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "VpcLinkVersion",
-}, smithy.ShapeTypeEnum, 1)
-var VpcLinkVersion_V2 *smithy.Schema
-
-var CreateApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateApiRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateApiRequest_ApiKeySelectionExpression *smithy.Schema
-
-var CreateApiRequest_CorsConfiguration *smithy.Schema
-
-var CreateApiRequest_CredentialsArn *smithy.Schema
-
-var CreateApiRequest_Description *smithy.Schema
-
-var CreateApiRequest_DisableSchemaValidation *smithy.Schema
-
-var CreateApiRequest_DisableExecuteApiEndpoint *smithy.Schema
-
-var CreateApiRequest_IpAddressType *smithy.Schema
-
-var CreateApiRequest_Name *smithy.Schema
-
-var CreateApiRequest_ProtocolType *smithy.Schema
-
-var CreateApiRequest_RouteKey *smithy.Schema
-
-var CreateApiRequest_RouteSelectionExpression *smithy.Schema
-
-var CreateApiRequest_Tags *smithy.Schema
-
-var CreateApiRequest_Target *smithy.Schema
-
-var CreateApiRequest_Version *smithy.Schema
-
-var CreateApiMappingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateApiMappingRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateApiMappingRequest_ApiId *smithy.Schema
-
-var CreateApiMappingRequest_ApiMappingKey *smithy.Schema
-
-var CreateApiMappingRequest_DomainName *smithy.Schema
-
-var CreateApiMappingRequest_Stage *smithy.Schema
-
-var CreateApiMappingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateApiMappingResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateApiMappingResponse_ApiId *smithy.Schema
-
-var CreateApiMappingResponse_ApiMappingId *smithy.Schema
-
-var CreateApiMappingResponse_ApiMappingKey *smithy.Schema
-
-var CreateApiMappingResponse_Stage *smithy.Schema
-
-var CreateApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateApiResponse",
-}, smithy.ShapeTypeStructure, 17)
-var CreateApiResponse_ApiEndpoint *smithy.Schema
-
-var CreateApiResponse_ApiGatewayManaged *smithy.Schema
-
-var CreateApiResponse_ApiId *smithy.Schema
-
-var CreateApiResponse_ApiKeySelectionExpression *smithy.Schema
-
-var CreateApiResponse_CorsConfiguration *smithy.Schema
-
-var CreateApiResponse_CreatedDate *smithy.Schema
-
-var CreateApiResponse_Description *smithy.Schema
-
-var CreateApiResponse_DisableSchemaValidation *smithy.Schema
-
-var CreateApiResponse_DisableExecuteApiEndpoint *smithy.Schema
-
-var CreateApiResponse_ImportInfo *smithy.Schema
-
-var CreateApiResponse_IpAddressType *smithy.Schema
-
-var CreateApiResponse_Name *smithy.Schema
-
-var CreateApiResponse_ProtocolType *smithy.Schema
-
-var CreateApiResponse_RouteSelectionExpression *smithy.Schema
-
-var CreateApiResponse_Tags *smithy.Schema
-
-var CreateApiResponse_Version *smithy.Schema
-
-var CreateApiResponse_Warnings *smithy.Schema
-
-var CreateAuthorizerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateAuthorizerRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateAuthorizerRequest_ApiId *smithy.Schema
-
-var CreateAuthorizerRequest_AuthorizerCredentialsArn *smithy.Schema
-
-var CreateAuthorizerRequest_AuthorizerPayloadFormatVersion *smithy.Schema
-
-var CreateAuthorizerRequest_AuthorizerResultTtlInSeconds *smithy.Schema
-
-var CreateAuthorizerRequest_AuthorizerType *smithy.Schema
-
-var CreateAuthorizerRequest_AuthorizerUri *smithy.Schema
-
-var CreateAuthorizerRequest_EnableSimpleResponses *smithy.Schema
-
-var CreateAuthorizerRequest_IdentitySource *smithy.Schema
-
-var CreateAuthorizerRequest_IdentityValidationExpression *smithy.Schema
-
-var CreateAuthorizerRequest_JwtConfiguration *smithy.Schema
-
-var CreateAuthorizerRequest_Name *smithy.Schema
-
-var CreateAuthorizerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateAuthorizerResponse",
-}, smithy.ShapeTypeStructure, 11)
-var CreateAuthorizerResponse_AuthorizerCredentialsArn *smithy.Schema
-
-var CreateAuthorizerResponse_AuthorizerId *smithy.Schema
-
-var CreateAuthorizerResponse_AuthorizerPayloadFormatVersion *smithy.Schema
-
-var CreateAuthorizerResponse_AuthorizerResultTtlInSeconds *smithy.Schema
-
-var CreateAuthorizerResponse_AuthorizerType *smithy.Schema
-
-var CreateAuthorizerResponse_AuthorizerUri *smithy.Schema
-
-var CreateAuthorizerResponse_EnableSimpleResponses *smithy.Schema
-
-var CreateAuthorizerResponse_IdentitySource *smithy.Schema
-
-var CreateAuthorizerResponse_IdentityValidationExpression *smithy.Schema
-
-var CreateAuthorizerResponse_JwtConfiguration *smithy.Schema
-
-var CreateAuthorizerResponse_Name *smithy.Schema
-
-var CreateDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateDeploymentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDeploymentRequest_ApiId *smithy.Schema
-
-var CreateDeploymentRequest_Description *smithy.Schema
-
-var CreateDeploymentRequest_StageName *smithy.Schema
-
-var CreateDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateDeploymentResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateDeploymentResponse_AutoDeployed *smithy.Schema
-
-var CreateDeploymentResponse_CreatedDate *smithy.Schema
-
-var CreateDeploymentResponse_DeploymentId *smithy.Schema
-
-var CreateDeploymentResponse_DeploymentStatus *smithy.Schema
-
-var CreateDeploymentResponse_DeploymentStatusMessage *smithy.Schema
-
-var CreateDeploymentResponse_Description *smithy.Schema
-
-var CreateDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateDomainNameRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDomainNameRequest_DomainName *smithy.Schema
-
-var CreateDomainNameRequest_DomainNameConfigurations *smithy.Schema
-
-var CreateDomainNameRequest_MutualTlsAuthentication *smithy.Schema
-
-var CreateDomainNameRequest_RoutingMode *smithy.Schema
-
-var CreateDomainNameRequest_Tags *smithy.Schema
-
-var CreateDomainNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateDomainNameResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CreateDomainNameResponse_ApiMappingSelectionExpression *smithy.Schema
-
-var CreateDomainNameResponse_DomainName *smithy.Schema
-
-var CreateDomainNameResponse_DomainNameArn *smithy.Schema
-
-var CreateDomainNameResponse_DomainNameConfigurations *smithy.Schema
-
-var CreateDomainNameResponse_MutualTlsAuthentication *smithy.Schema
-
-var CreateDomainNameResponse_RoutingMode *smithy.Schema
-
-var CreateDomainNameResponse_Tags *smithy.Schema
-
-var CreateIntegrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateIntegrationRequest",
-}, smithy.ShapeTypeStructure, 18)
-var CreateIntegrationRequest_ApiId *smithy.Schema
-
-var CreateIntegrationRequest_ConnectionId *smithy.Schema
-
-var CreateIntegrationRequest_ConnectionType *smithy.Schema
-
-var CreateIntegrationRequest_ContentHandlingStrategy *smithy.Schema
-
-var CreateIntegrationRequest_CredentialsArn *smithy.Schema
-
-var CreateIntegrationRequest_Description *smithy.Schema
-
-var CreateIntegrationRequest_IntegrationMethod *smithy.Schema
-
-var CreateIntegrationRequest_IntegrationSubtype *smithy.Schema
-
-var CreateIntegrationRequest_IntegrationType *smithy.Schema
-
-var CreateIntegrationRequest_IntegrationUri *smithy.Schema
-
-var CreateIntegrationRequest_PassthroughBehavior *smithy.Schema
-
-var CreateIntegrationRequest_PayloadFormatVersion *smithy.Schema
-
-var CreateIntegrationRequest_RequestParameters *smithy.Schema
-
-var CreateIntegrationRequest_RequestTemplates *smithy.Schema
-
-var CreateIntegrationRequest_ResponseParameters *smithy.Schema
-
-var CreateIntegrationRequest_TemplateSelectionExpression *smithy.Schema
-
-var CreateIntegrationRequest_TimeoutInMillis *smithy.Schema
-
-var CreateIntegrationRequest_TlsConfig *smithy.Schema
-
-var CreateIntegrationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateIntegrationResult",
-}, smithy.ShapeTypeStructure, 20)
-var CreateIntegrationResult_ApiGatewayManaged *smithy.Schema
-
-var CreateIntegrationResult_ConnectionId *smithy.Schema
-
-var CreateIntegrationResult_ConnectionType *smithy.Schema
-
-var CreateIntegrationResult_ContentHandlingStrategy *smithy.Schema
-
-var CreateIntegrationResult_CredentialsArn *smithy.Schema
-
-var CreateIntegrationResult_Description *smithy.Schema
-
-var CreateIntegrationResult_IntegrationId *smithy.Schema
-
-var CreateIntegrationResult_IntegrationMethod *smithy.Schema
-
-var CreateIntegrationResult_IntegrationResponseSelectionExpression *smithy.Schema
-
-var CreateIntegrationResult_IntegrationSubtype *smithy.Schema
-
-var CreateIntegrationResult_IntegrationType *smithy.Schema
-
-var CreateIntegrationResult_IntegrationUri *smithy.Schema
-
-var CreateIntegrationResult_PassthroughBehavior *smithy.Schema
-
-var CreateIntegrationResult_PayloadFormatVersion *smithy.Schema
-
-var CreateIntegrationResult_RequestParameters *smithy.Schema
-
-var CreateIntegrationResult_RequestTemplates *smithy.Schema
-
-var CreateIntegrationResult_ResponseParameters *smithy.Schema
-
-var CreateIntegrationResult_TemplateSelectionExpression *smithy.Schema
-
-var CreateIntegrationResult_TimeoutInMillis *smithy.Schema
-
-var CreateIntegrationResult_TlsConfig *smithy.Schema
-
-var CreateIntegrationResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateIntegrationResponseRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateIntegrationResponseRequest_ApiId *smithy.Schema
-
-var CreateIntegrationResponseRequest_ContentHandlingStrategy *smithy.Schema
-
-var CreateIntegrationResponseRequest_IntegrationId *smithy.Schema
-
-var CreateIntegrationResponseRequest_IntegrationResponseKey *smithy.Schema
-
-var CreateIntegrationResponseRequest_ResponseParameters *smithy.Schema
-
-var CreateIntegrationResponseRequest_ResponseTemplates *smithy.Schema
-
-var CreateIntegrationResponseRequest_TemplateSelectionExpression *smithy.Schema
-
-var CreateIntegrationResponseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateIntegrationResponseResponse",
-}, smithy.ShapeTypeStructure, 6)
-var CreateIntegrationResponseResponse_ContentHandlingStrategy *smithy.Schema
-
-var CreateIntegrationResponseResponse_IntegrationResponseId *smithy.Schema
-
-var CreateIntegrationResponseResponse_IntegrationResponseKey *smithy.Schema
-
-var CreateIntegrationResponseResponse_ResponseParameters *smithy.Schema
-
-var CreateIntegrationResponseResponse_ResponseTemplates *smithy.Schema
-
-var CreateIntegrationResponseResponse_TemplateSelectionExpression *smithy.Schema
-
-var CreateModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateModelRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateModelRequest_ApiId *smithy.Schema
-
-var CreateModelRequest_ContentType *smithy.Schema
-
-var CreateModelRequest_Description *smithy.Schema
-
-var CreateModelRequest_Name *smithy.Schema
-
-var CreateModelRequest_Schema *smithy.Schema
-
-var CreateModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateModelResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateModelResponse_ContentType *smithy.Schema
-
-var CreateModelResponse_Description *smithy.Schema
-
-var CreateModelResponse_ModelId *smithy.Schema
-
-var CreateModelResponse_Name *smithy.Schema
-
-var CreateModelResponse_Schema *smithy.Schema
-
-var CreatePortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreatePortalRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreatePortalRequest_Authorization *smithy.Schema
-
-var CreatePortalRequest_EndpointConfiguration *smithy.Schema
-
-var CreatePortalRequest_IncludedPortalProductArns *smithy.Schema
-
-var CreatePortalRequest_LogoUri *smithy.Schema
-
-var CreatePortalRequest_PortalContent *smithy.Schema
-
-var CreatePortalRequest_RumAppMonitorName *smithy.Schema
-
-var CreatePortalRequest_Tags *smithy.Schema
-
-var CreatePortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreatePortalResponse",
-}, smithy.ShapeTypeStructure, 13)
-var CreatePortalResponse_Authorization *smithy.Schema
-
-var CreatePortalResponse_EndpointConfiguration *smithy.Schema
-
-var CreatePortalResponse_IncludedPortalProductArns *smithy.Schema
-
-var CreatePortalResponse_LastModified *smithy.Schema
-
-var CreatePortalResponse_LastPublished *smithy.Schema
-
-var CreatePortalResponse_LastPublishedDescription *smithy.Schema
-
-var CreatePortalResponse_PortalArn *smithy.Schema
-
-var CreatePortalResponse_PortalContent *smithy.Schema
-
-var CreatePortalResponse_PortalId *smithy.Schema
-
-var CreatePortalResponse_PublishStatus *smithy.Schema
-
-var CreatePortalResponse_RumAppMonitorName *smithy.Schema
-
-var CreatePortalResponse_StatusException *smithy.Schema
-
-var CreatePortalResponse_Tags *smithy.Schema
-
-var CreatePortalProductRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreatePortalProductRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreatePortalProductRequest_Description *smithy.Schema
-
-var CreatePortalProductRequest_DisplayName *smithy.Schema
-
-var CreatePortalProductRequest_Tags *smithy.Schema
-
-var CreatePortalProductResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreatePortalProductResponse",
-}, smithy.ShapeTypeStructure, 7)
-var CreatePortalProductResponse_Description *smithy.Schema
-
-var CreatePortalProductResponse_DisplayName *smithy.Schema
-
-var CreatePortalProductResponse_DisplayOrder *smithy.Schema
-
-var CreatePortalProductResponse_LastModified *smithy.Schema
-
-var CreatePortalProductResponse_PortalProductArn *smithy.Schema
-
-var CreatePortalProductResponse_PortalProductId *smithy.Schema
-
-var CreatePortalProductResponse_Tags *smithy.Schema
-
-var CreateProductPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateProductPageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateProductPageRequest_DisplayContent *smithy.Schema
-
-var CreateProductPageRequest_PortalProductId *smithy.Schema
-
-var CreateProductPageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateProductPageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateProductPageResponse_DisplayContent *smithy.Schema
-
-var CreateProductPageResponse_LastModified *smithy.Schema
-
-var CreateProductPageResponse_ProductPageArn *smithy.Schema
-
-var CreateProductPageResponse_ProductPageId *smithy.Schema
-
-var CreateProductRestEndpointPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateProductRestEndpointPageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateProductRestEndpointPageRequest_DisplayContent *smithy.Schema
-
-var CreateProductRestEndpointPageRequest_PortalProductId *smithy.Schema
-
-var CreateProductRestEndpointPageRequest_RestEndpointIdentifier *smithy.Schema
-
-var CreateProductRestEndpointPageRequest_TryItState *smithy.Schema
-
-var CreateProductRestEndpointPageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateProductRestEndpointPageResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateProductRestEndpointPageResponse_DisplayContent *smithy.Schema
-
-var CreateProductRestEndpointPageResponse_LastModified *smithy.Schema
-
-var CreateProductRestEndpointPageResponse_ProductRestEndpointPageArn *smithy.Schema
-
-var CreateProductRestEndpointPageResponse_ProductRestEndpointPageId *smithy.Schema
-
-var CreateProductRestEndpointPageResponse_RestEndpointIdentifier *smithy.Schema
-
-var CreateProductRestEndpointPageResponse_Status *smithy.Schema
-
-var CreateProductRestEndpointPageResponse_StatusException *smithy.Schema
-
-var CreateProductRestEndpointPageResponse_TryItState *smithy.Schema
-
-var CreateRouteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRouteRequest",
-}, smithy.ShapeTypeStructure, 12)
-var CreateRouteRequest_ApiId *smithy.Schema
-
-var CreateRouteRequest_ApiKeyRequired *smithy.Schema
-
-var CreateRouteRequest_AuthorizationScopes *smithy.Schema
-
-var CreateRouteRequest_AuthorizationType *smithy.Schema
-
-var CreateRouteRequest_AuthorizerId *smithy.Schema
-
-var CreateRouteRequest_ModelSelectionExpression *smithy.Schema
-
-var CreateRouteRequest_OperationName *smithy.Schema
-
-var CreateRouteRequest_RequestModels *smithy.Schema
-
-var CreateRouteRequest_RequestParameters *smithy.Schema
-
-var CreateRouteRequest_RouteKey *smithy.Schema
-
-var CreateRouteRequest_RouteResponseSelectionExpression *smithy.Schema
-
-var CreateRouteRequest_Target *smithy.Schema
-
-var CreateRouteResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRouteResult",
-}, smithy.ShapeTypeStructure, 13)
-var CreateRouteResult_ApiGatewayManaged *smithy.Schema
-
-var CreateRouteResult_ApiKeyRequired *smithy.Schema
-
-var CreateRouteResult_AuthorizationScopes *smithy.Schema
-
-var CreateRouteResult_AuthorizationType *smithy.Schema
-
-var CreateRouteResult_AuthorizerId *smithy.Schema
-
-var CreateRouteResult_ModelSelectionExpression *smithy.Schema
-
-var CreateRouteResult_OperationName *smithy.Schema
-
-var CreateRouteResult_RequestModels *smithy.Schema
-
-var CreateRouteResult_RequestParameters *smithy.Schema
-
-var CreateRouteResult_RouteId *smithy.Schema
-
-var CreateRouteResult_RouteKey *smithy.Schema
-
-var CreateRouteResult_RouteResponseSelectionExpression *smithy.Schema
-
-var CreateRouteResult_Target *smithy.Schema
-
-var CreateRouteResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRouteResponseRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateRouteResponseRequest_ApiId *smithy.Schema
-
-var CreateRouteResponseRequest_ModelSelectionExpression *smithy.Schema
-
-var CreateRouteResponseRequest_ResponseModels *smithy.Schema
-
-var CreateRouteResponseRequest_ResponseParameters *smithy.Schema
-
-var CreateRouteResponseRequest_RouteId *smithy.Schema
-
-var CreateRouteResponseRequest_RouteResponseKey *smithy.Schema
-
-var CreateRouteResponseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRouteResponseResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRouteResponseResponse_ModelSelectionExpression *smithy.Schema
-
-var CreateRouteResponseResponse_ResponseModels *smithy.Schema
-
-var CreateRouteResponseResponse_ResponseParameters *smithy.Schema
-
-var CreateRouteResponseResponse_RouteResponseId *smithy.Schema
-
-var CreateRouteResponseResponse_RouteResponseKey *smithy.Schema
-
-var CreateRoutingRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRoutingRuleRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRoutingRuleRequest_Actions *smithy.Schema
-
-var CreateRoutingRuleRequest_Conditions *smithy.Schema
-
-var CreateRoutingRuleRequest_DomainName *smithy.Schema
-
-var CreateRoutingRuleRequest_DomainNameId *smithy.Schema
-
-var CreateRoutingRuleRequest_Priority *smithy.Schema
-
-var CreateRoutingRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateRoutingRuleResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRoutingRuleResponse_Actions *smithy.Schema
-
-var CreateRoutingRuleResponse_Conditions *smithy.Schema
-
-var CreateRoutingRuleResponse_Priority *smithy.Schema
-
-var CreateRoutingRuleResponse_RoutingRuleArn *smithy.Schema
-
-var CreateRoutingRuleResponse_RoutingRuleId *smithy.Schema
-
-var CreateStageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateStageRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateStageRequest_AccessLogSettings *smithy.Schema
-
-var CreateStageRequest_ApiId *smithy.Schema
-
-var CreateStageRequest_AutoDeploy *smithy.Schema
-
-var CreateStageRequest_ClientCertificateId *smithy.Schema
-
-var CreateStageRequest_DefaultRouteSettings *smithy.Schema
-
-var CreateStageRequest_DeploymentId *smithy.Schema
-
-var CreateStageRequest_Description *smithy.Schema
-
-var CreateStageRequest_RouteSettings *smithy.Schema
-
-var CreateStageRequest_StageName *smithy.Schema
-
-var CreateStageRequest_StageVariables *smithy.Schema
-
-var CreateStageRequest_Tags *smithy.Schema
-
-var CreateStageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateStageResponse",
-}, smithy.ShapeTypeStructure, 14)
-var CreateStageResponse_AccessLogSettings *smithy.Schema
-
-var CreateStageResponse_ApiGatewayManaged *smithy.Schema
-
-var CreateStageResponse_AutoDeploy *smithy.Schema
-
-var CreateStageResponse_ClientCertificateId *smithy.Schema
-
-var CreateStageResponse_CreatedDate *smithy.Schema
-
-var CreateStageResponse_DefaultRouteSettings *smithy.Schema
-
-var CreateStageResponse_DeploymentId *smithy.Schema
-
-var CreateStageResponse_Description *smithy.Schema
-
-var CreateStageResponse_LastDeploymentStatusMessage *smithy.Schema
-
-var CreateStageResponse_LastUpdatedDate *smithy.Schema
-
-var CreateStageResponse_RouteSettings *smithy.Schema
-
-var CreateStageResponse_StageName *smithy.Schema
-
-var CreateStageResponse_StageVariables *smithy.Schema
-
-var CreateStageResponse_Tags *smithy.Schema
-
-var CreateVpcLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateVpcLinkRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateVpcLinkRequest_Name *smithy.Schema
-
-var CreateVpcLinkRequest_SecurityGroupIds *smithy.Schema
-
-var CreateVpcLinkRequest_SubnetIds *smithy.Schema
-
-var CreateVpcLinkRequest_Tags *smithy.Schema
-
-var CreateVpcLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "CreateVpcLinkResponse",
-}, smithy.ShapeTypeStructure, 9)
-var CreateVpcLinkResponse_CreatedDate *smithy.Schema
-
-var CreateVpcLinkResponse_Name *smithy.Schema
-
-var CreateVpcLinkResponse_SecurityGroupIds *smithy.Schema
-
-var CreateVpcLinkResponse_SubnetIds *smithy.Schema
-
-var CreateVpcLinkResponse_Tags *smithy.Schema
-
-var CreateVpcLinkResponse_VpcLinkId *smithy.Schema
-
-var CreateVpcLinkResponse_VpcLinkStatus *smithy.Schema
-
-var CreateVpcLinkResponse_VpcLinkStatusMessage *smithy.Schema
-
-var CreateVpcLinkResponse_VpcLinkVersion *smithy.Schema
-
-var DeleteAccessLogSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteAccessLogSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAccessLogSettingsRequest_ApiId *smithy.Schema
-
-var DeleteAccessLogSettingsRequest_StageName *smithy.Schema
-
-var DeleteApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteApiRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteApiRequest_ApiId *smithy.Schema
-
-var DeleteApiMappingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteApiMappingRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteApiMappingRequest_ApiMappingId *smithy.Schema
-
-var DeleteApiMappingRequest_DomainName *smithy.Schema
-
-var DeleteAuthorizerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteAuthorizerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAuthorizerRequest_ApiId *smithy.Schema
-
-var DeleteAuthorizerRequest_AuthorizerId *smithy.Schema
-
-var DeleteCorsConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteCorsConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCorsConfigurationRequest_ApiId *smithy.Schema
-
-var DeleteDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteDeploymentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteDeploymentRequest_ApiId *smithy.Schema
-
-var DeleteDeploymentRequest_DeploymentId *smithy.Schema
-
-var DeleteDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteDomainNameRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDomainNameRequest_DomainName *smithy.Schema
-
-var DeleteIntegrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteIntegrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteIntegrationRequest_ApiId *smithy.Schema
-
-var DeleteIntegrationRequest_IntegrationId *smithy.Schema
-
-var DeleteIntegrationResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteIntegrationResponseRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteIntegrationResponseRequest_ApiId *smithy.Schema
-
-var DeleteIntegrationResponseRequest_IntegrationId *smithy.Schema
-
-var DeleteIntegrationResponseRequest_IntegrationResponseId *smithy.Schema
-
-var DeleteModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteModelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteModelRequest_ApiId *smithy.Schema
-
-var DeleteModelRequest_ModelId *smithy.Schema
-
-var DeletePortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeletePortalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePortalRequest_PortalId *smithy.Schema
-
-var DeletePortalProductRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeletePortalProductRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePortalProductRequest_PortalProductId *smithy.Schema
-
-var DeletePortalProductSharingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeletePortalProductSharingPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeletePortalProductSharingPolicyRequest_PortalProductId *smithy.Schema
-
-var DeleteProductPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteProductPageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProductPageRequest_PortalProductId *smithy.Schema
-
-var DeleteProductPageRequest_ProductPageId *smithy.Schema
-
-var DeleteProductRestEndpointPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteProductRestEndpointPageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteProductRestEndpointPageRequest_PortalProductId *smithy.Schema
-
-var DeleteProductRestEndpointPageRequest_ProductRestEndpointPageId *smithy.Schema
-
-var DeleteRouteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRouteRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRouteRequest_ApiId *smithy.Schema
-
-var DeleteRouteRequest_RouteId *smithy.Schema
-
-var DeleteRouteRequestParameterRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRouteRequestParameterRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRouteRequestParameterRequest_ApiId *smithy.Schema
-
-var DeleteRouteRequestParameterRequest_RequestParameterKey *smithy.Schema
-
-var DeleteRouteRequestParameterRequest_RouteId *smithy.Schema
-
-var DeleteRouteResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRouteResponseRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRouteResponseRequest_ApiId *smithy.Schema
-
-var DeleteRouteResponseRequest_RouteId *smithy.Schema
-
-var DeleteRouteResponseRequest_RouteResponseId *smithy.Schema
-
-var DeleteRouteSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRouteSettingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRouteSettingsRequest_ApiId *smithy.Schema
-
-var DeleteRouteSettingsRequest_RouteKey *smithy.Schema
-
-var DeleteRouteSettingsRequest_StageName *smithy.Schema
-
-var DeleteRoutingRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteRoutingRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteRoutingRuleRequest_DomainName *smithy.Schema
-
-var DeleteRoutingRuleRequest_DomainNameId *smithy.Schema
-
-var DeleteRoutingRuleRequest_RoutingRuleId *smithy.Schema
-
-var DeleteStageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteStageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteStageRequest_ApiId *smithy.Schema
-
-var DeleteStageRequest_StageName *smithy.Schema
-
-var DeleteVpcLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteVpcLinkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVpcLinkRequest_VpcLinkId *smithy.Schema
-
-var DeleteVpcLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DeleteVpcLinkResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisablePortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "DisablePortalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DisablePortalRequest_PortalId *smithy.Schema
-
-var ExportApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ExportApiRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ExportApiRequest_ApiId *smithy.Schema
-
-var ExportApiRequest_ExportVersion *smithy.Schema
-
-var ExportApiRequest_IncludeExtensions *smithy.Schema
-
-var ExportApiRequest_OutputType *smithy.Schema
-
-var ExportApiRequest_Specification *smithy.Schema
-
-var ExportApiRequest_StageName *smithy.Schema
-
-var ExportApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ExportApiResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ExportApiResponse_body *smithy.Schema
-
-var GetApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetApiRequest_ApiId *smithy.Schema
-
-var GetApiMappingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiMappingRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetApiMappingRequest_ApiMappingId *smithy.Schema
-
-var GetApiMappingRequest_DomainName *smithy.Schema
-
-var GetApiMappingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiMappingResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetApiMappingResponse_ApiId *smithy.Schema
-
-var GetApiMappingResponse_ApiMappingId *smithy.Schema
-
-var GetApiMappingResponse_ApiMappingKey *smithy.Schema
-
-var GetApiMappingResponse_Stage *smithy.Schema
-
-var GetApiMappingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiMappingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetApiMappingsRequest_DomainName *smithy.Schema
-
-var GetApiMappingsRequest_MaxResults *smithy.Schema
-
-var GetApiMappingsRequest_NextToken *smithy.Schema
-
-var GetApiMappingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiMappingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetApiMappingsResponse_Items *smithy.Schema
-
-var GetApiMappingsResponse_NextToken *smithy.Schema
-
-var GetApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApiResponse",
-}, smithy.ShapeTypeStructure, 17)
-var GetApiResponse_ApiEndpoint *smithy.Schema
-
-var GetApiResponse_ApiGatewayManaged *smithy.Schema
-
-var GetApiResponse_ApiId *smithy.Schema
-
-var GetApiResponse_ApiKeySelectionExpression *smithy.Schema
-
-var GetApiResponse_CorsConfiguration *smithy.Schema
-
-var GetApiResponse_CreatedDate *smithy.Schema
-
-var GetApiResponse_Description *smithy.Schema
-
-var GetApiResponse_DisableSchemaValidation *smithy.Schema
-
-var GetApiResponse_DisableExecuteApiEndpoint *smithy.Schema
-
-var GetApiResponse_ImportInfo *smithy.Schema
-
-var GetApiResponse_IpAddressType *smithy.Schema
-
-var GetApiResponse_Name *smithy.Schema
-
-var GetApiResponse_ProtocolType *smithy.Schema
-
-var GetApiResponse_RouteSelectionExpression *smithy.Schema
-
-var GetApiResponse_Tags *smithy.Schema
-
-var GetApiResponse_Version *smithy.Schema
-
-var GetApiResponse_Warnings *smithy.Schema
-
-var GetApisRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApisRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetApisRequest_MaxResults *smithy.Schema
-
-var GetApisRequest_NextToken *smithy.Schema
-
-var GetApisResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetApisResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetApisResponse_Items *smithy.Schema
-
-var GetApisResponse_NextToken *smithy.Schema
-
-var GetAuthorizerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetAuthorizerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAuthorizerRequest_ApiId *smithy.Schema
-
-var GetAuthorizerRequest_AuthorizerId *smithy.Schema
-
-var GetAuthorizerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetAuthorizerResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetAuthorizerResponse_AuthorizerCredentialsArn *smithy.Schema
-
-var GetAuthorizerResponse_AuthorizerId *smithy.Schema
-
-var GetAuthorizerResponse_AuthorizerPayloadFormatVersion *smithy.Schema
-
-var GetAuthorizerResponse_AuthorizerResultTtlInSeconds *smithy.Schema
-
-var GetAuthorizerResponse_AuthorizerType *smithy.Schema
-
-var GetAuthorizerResponse_AuthorizerUri *smithy.Schema
-
-var GetAuthorizerResponse_EnableSimpleResponses *smithy.Schema
-
-var GetAuthorizerResponse_IdentitySource *smithy.Schema
-
-var GetAuthorizerResponse_IdentityValidationExpression *smithy.Schema
-
-var GetAuthorizerResponse_JwtConfiguration *smithy.Schema
-
-var GetAuthorizerResponse_Name *smithy.Schema
-
-var GetAuthorizersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetAuthorizersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetAuthorizersRequest_ApiId *smithy.Schema
-
-var GetAuthorizersRequest_MaxResults *smithy.Schema
-
-var GetAuthorizersRequest_NextToken *smithy.Schema
-
-var GetAuthorizersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetAuthorizersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAuthorizersResponse_Items *smithy.Schema
-
-var GetAuthorizersResponse_NextToken *smithy.Schema
-
-var GetDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDeploymentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDeploymentRequest_ApiId *smithy.Schema
-
-var GetDeploymentRequest_DeploymentId *smithy.Schema
-
-var GetDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDeploymentResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetDeploymentResponse_AutoDeployed *smithy.Schema
-
-var GetDeploymentResponse_CreatedDate *smithy.Schema
-
-var GetDeploymentResponse_DeploymentId *smithy.Schema
-
-var GetDeploymentResponse_DeploymentStatus *smithy.Schema
-
-var GetDeploymentResponse_DeploymentStatusMessage *smithy.Schema
-
-var GetDeploymentResponse_Description *smithy.Schema
-
-var GetDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDeploymentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetDeploymentsRequest_ApiId *smithy.Schema
-
-var GetDeploymentsRequest_MaxResults *smithy.Schema
-
-var GetDeploymentsRequest_NextToken *smithy.Schema
-
-var GetDeploymentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDeploymentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetDeploymentsResponse_Items *smithy.Schema
-
-var GetDeploymentsResponse_NextToken *smithy.Schema
-
-var GetDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDomainNameRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDomainNameRequest_DomainName *smithy.Schema
-
-var GetDomainNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDomainNameResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetDomainNameResponse_ApiMappingSelectionExpression *smithy.Schema
-
-var GetDomainNameResponse_DomainName *smithy.Schema
-
-var GetDomainNameResponse_DomainNameArn *smithy.Schema
-
-var GetDomainNameResponse_DomainNameConfigurations *smithy.Schema
-
-var GetDomainNameResponse_MutualTlsAuthentication *smithy.Schema
-
-var GetDomainNameResponse_RoutingMode *smithy.Schema
-
-var GetDomainNameResponse_Tags *smithy.Schema
-
-var GetDomainNamesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDomainNamesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetDomainNamesRequest_MaxResults *smithy.Schema
-
-var GetDomainNamesRequest_NextToken *smithy.Schema
-
-var GetDomainNamesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetDomainNamesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetDomainNamesResponse_Items *smithy.Schema
-
-var GetDomainNamesResponse_NextToken *smithy.Schema
-
-var GetIntegrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntegrationRequest_ApiId *smithy.Schema
-
-var GetIntegrationRequest_IntegrationId *smithy.Schema
-
-var GetIntegrationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationResult",
-}, smithy.ShapeTypeStructure, 20)
-var GetIntegrationResult_ApiGatewayManaged *smithy.Schema
-
-var GetIntegrationResult_ConnectionId *smithy.Schema
-
-var GetIntegrationResult_ConnectionType *smithy.Schema
-
-var GetIntegrationResult_ContentHandlingStrategy *smithy.Schema
-
-var GetIntegrationResult_CredentialsArn *smithy.Schema
-
-var GetIntegrationResult_Description *smithy.Schema
-
-var GetIntegrationResult_IntegrationId *smithy.Schema
-
-var GetIntegrationResult_IntegrationMethod *smithy.Schema
-
-var GetIntegrationResult_IntegrationResponseSelectionExpression *smithy.Schema
-
-var GetIntegrationResult_IntegrationSubtype *smithy.Schema
-
-var GetIntegrationResult_IntegrationType *smithy.Schema
-
-var GetIntegrationResult_IntegrationUri *smithy.Schema
-
-var GetIntegrationResult_PassthroughBehavior *smithy.Schema
-
-var GetIntegrationResult_PayloadFormatVersion *smithy.Schema
-
-var GetIntegrationResult_RequestParameters *smithy.Schema
-
-var GetIntegrationResult_RequestTemplates *smithy.Schema
-
-var GetIntegrationResult_ResponseParameters *smithy.Schema
-
-var GetIntegrationResult_TemplateSelectionExpression *smithy.Schema
-
-var GetIntegrationResult_TimeoutInMillis *smithy.Schema
-
-var GetIntegrationResult_TlsConfig *smithy.Schema
-
-var GetIntegrationResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationResponseRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIntegrationResponseRequest_ApiId *smithy.Schema
-
-var GetIntegrationResponseRequest_IntegrationId *smithy.Schema
-
-var GetIntegrationResponseRequest_IntegrationResponseId *smithy.Schema
-
-var GetIntegrationResponseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationResponseResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetIntegrationResponseResponse_ContentHandlingStrategy *smithy.Schema
-
-var GetIntegrationResponseResponse_IntegrationResponseId *smithy.Schema
-
-var GetIntegrationResponseResponse_IntegrationResponseKey *smithy.Schema
-
-var GetIntegrationResponseResponse_ResponseParameters *smithy.Schema
-
-var GetIntegrationResponseResponse_ResponseTemplates *smithy.Schema
-
-var GetIntegrationResponseResponse_TemplateSelectionExpression *smithy.Schema
-
-var GetIntegrationResponsesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationResponsesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetIntegrationResponsesRequest_ApiId *smithy.Schema
-
-var GetIntegrationResponsesRequest_IntegrationId *smithy.Schema
-
-var GetIntegrationResponsesRequest_MaxResults *smithy.Schema
-
-var GetIntegrationResponsesRequest_NextToken *smithy.Schema
-
-var GetIntegrationResponsesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationResponsesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntegrationResponsesResponse_Items *smithy.Schema
-
-var GetIntegrationResponsesResponse_NextToken *smithy.Schema
-
-var GetIntegrationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetIntegrationsRequest_ApiId *smithy.Schema
-
-var GetIntegrationsRequest_MaxResults *smithy.Schema
-
-var GetIntegrationsRequest_NextToken *smithy.Schema
-
-var GetIntegrationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetIntegrationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetIntegrationsResponse_Items *smithy.Schema
-
-var GetIntegrationsResponse_NextToken *smithy.Schema
-
-var GetModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetModelRequest_ApiId *smithy.Schema
-
-var GetModelRequest_ModelId *smithy.Schema
-
-var GetModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModelResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetModelResponse_ContentType *smithy.Schema
-
-var GetModelResponse_Description *smithy.Schema
-
-var GetModelResponse_ModelId *smithy.Schema
-
-var GetModelResponse_Name *smithy.Schema
-
-var GetModelResponse_Schema *smithy.Schema
-
-var GetModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetModelsRequest_ApiId *smithy.Schema
-
-var GetModelsRequest_MaxResults *smithy.Schema
-
-var GetModelsRequest_NextToken *smithy.Schema
-
-var GetModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetModelsResponse_Items *smithy.Schema
-
-var GetModelsResponse_NextToken *smithy.Schema
-
-var GetModelTemplateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModelTemplateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetModelTemplateRequest_ApiId *smithy.Schema
-
-var GetModelTemplateRequest_ModelId *smithy.Schema
-
-var GetModelTemplateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetModelTemplateResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetModelTemplateResponse_Value *smithy.Schema
-
-var GetPortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPortalRequest_PortalId *smithy.Schema
-
-var GetPortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetPortalResponse_Authorization *smithy.Schema
-
-var GetPortalResponse_EndpointConfiguration *smithy.Schema
-
-var GetPortalResponse_IncludedPortalProductArns *smithy.Schema
-
-var GetPortalResponse_LastModified *smithy.Schema
-
-var GetPortalResponse_LastPublished *smithy.Schema
-
-var GetPortalResponse_LastPublishedDescription *smithy.Schema
-
-var GetPortalResponse_PortalArn *smithy.Schema
-
-var GetPortalResponse_PortalContent *smithy.Schema
-
-var GetPortalResponse_PortalId *smithy.Schema
-
-var GetPortalResponse_Preview *smithy.Schema
-
-var GetPortalResponse_PublishStatus *smithy.Schema
-
-var GetPortalResponse_RumAppMonitorName *smithy.Schema
-
-var GetPortalResponse_StatusException *smithy.Schema
-
-var GetPortalResponse_Tags *smithy.Schema
-
-var GetPortalProductRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalProductRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetPortalProductRequest_PortalProductId *smithy.Schema
-
-var GetPortalProductRequest_ResourceOwnerAccountId *smithy.Schema
-
-var GetPortalProductResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalProductResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetPortalProductResponse_Description *smithy.Schema
-
-var GetPortalProductResponse_DisplayName *smithy.Schema
-
-var GetPortalProductResponse_DisplayOrder *smithy.Schema
-
-var GetPortalProductResponse_LastModified *smithy.Schema
-
-var GetPortalProductResponse_PortalProductArn *smithy.Schema
-
-var GetPortalProductResponse_PortalProductId *smithy.Schema
-
-var GetPortalProductResponse_Tags *smithy.Schema
-
-var GetPortalProductSharingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalProductSharingPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetPortalProductSharingPolicyRequest_PortalProductId *smithy.Schema
-
-var GetPortalProductSharingPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetPortalProductSharingPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetPortalProductSharingPolicyResponse_PolicyDocument *smithy.Schema
-
-var GetPortalProductSharingPolicyResponse_PortalProductId *smithy.Schema
-
-var GetProductPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetProductPageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetProductPageRequest_PortalProductId *smithy.Schema
-
-var GetProductPageRequest_ProductPageId *smithy.Schema
-
-var GetProductPageRequest_ResourceOwnerAccountId *smithy.Schema
-
-var GetProductPageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetProductPageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetProductPageResponse_DisplayContent *smithy.Schema
-
-var GetProductPageResponse_LastModified *smithy.Schema
-
-var GetProductPageResponse_ProductPageArn *smithy.Schema
-
-var GetProductPageResponse_ProductPageId *smithy.Schema
-
-var GetProductRestEndpointPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetProductRestEndpointPageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetProductRestEndpointPageRequest_IncludeRawDisplayContent *smithy.Schema
-
-var GetProductRestEndpointPageRequest_PortalProductId *smithy.Schema
-
-var GetProductRestEndpointPageRequest_ProductRestEndpointPageId *smithy.Schema
-
-var GetProductRestEndpointPageRequest_ResourceOwnerAccountId *smithy.Schema
-
-var GetProductRestEndpointPageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetProductRestEndpointPageResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetProductRestEndpointPageResponse_DisplayContent *smithy.Schema
-
-var GetProductRestEndpointPageResponse_LastModified *smithy.Schema
-
-var GetProductRestEndpointPageResponse_ProductRestEndpointPageArn *smithy.Schema
-
-var GetProductRestEndpointPageResponse_ProductRestEndpointPageId *smithy.Schema
-
-var GetProductRestEndpointPageResponse_RawDisplayContent *smithy.Schema
-
-var GetProductRestEndpointPageResponse_RestEndpointIdentifier *smithy.Schema
-
-var GetProductRestEndpointPageResponse_Status *smithy.Schema
-
-var GetProductRestEndpointPageResponse_StatusException *smithy.Schema
-
-var GetProductRestEndpointPageResponse_TryItState *smithy.Schema
-
-var GetRouteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetRouteRequest_ApiId *smithy.Schema
-
-var GetRouteRequest_RouteId *smithy.Schema
-
-var GetRouteResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteResult",
-}, smithy.ShapeTypeStructure, 13)
-var GetRouteResult_ApiGatewayManaged *smithy.Schema
-
-var GetRouteResult_ApiKeyRequired *smithy.Schema
-
-var GetRouteResult_AuthorizationScopes *smithy.Schema
-
-var GetRouteResult_AuthorizationType *smithy.Schema
-
-var GetRouteResult_AuthorizerId *smithy.Schema
-
-var GetRouteResult_ModelSelectionExpression *smithy.Schema
-
-var GetRouteResult_OperationName *smithy.Schema
-
-var GetRouteResult_RequestModels *smithy.Schema
-
-var GetRouteResult_RequestParameters *smithy.Schema
-
-var GetRouteResult_RouteId *smithy.Schema
-
-var GetRouteResult_RouteKey *smithy.Schema
-
-var GetRouteResult_RouteResponseSelectionExpression *smithy.Schema
-
-var GetRouteResult_Target *smithy.Schema
-
-var GetRouteResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteResponseRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRouteResponseRequest_ApiId *smithy.Schema
-
-var GetRouteResponseRequest_RouteId *smithy.Schema
-
-var GetRouteResponseRequest_RouteResponseId *smithy.Schema
-
-var GetRouteResponseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteResponseResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetRouteResponseResponse_ModelSelectionExpression *smithy.Schema
-
-var GetRouteResponseResponse_ResponseModels *smithy.Schema
-
-var GetRouteResponseResponse_ResponseParameters *smithy.Schema
-
-var GetRouteResponseResponse_RouteResponseId *smithy.Schema
-
-var GetRouteResponseResponse_RouteResponseKey *smithy.Schema
-
-var GetRouteResponsesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteResponsesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetRouteResponsesRequest_ApiId *smithy.Schema
-
-var GetRouteResponsesRequest_MaxResults *smithy.Schema
-
-var GetRouteResponsesRequest_NextToken *smithy.Schema
-
-var GetRouteResponsesRequest_RouteId *smithy.Schema
-
-var GetRouteResponsesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRouteResponsesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRouteResponsesResponse_Items *smithy.Schema
-
-var GetRouteResponsesResponse_NextToken *smithy.Schema
-
-var GetRoutesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRoutesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRoutesRequest_ApiId *smithy.Schema
-
-var GetRoutesRequest_MaxResults *smithy.Schema
-
-var GetRoutesRequest_NextToken *smithy.Schema
-
-var GetRoutesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRoutesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetRoutesResponse_Items *smithy.Schema
-
-var GetRoutesResponse_NextToken *smithy.Schema
-
-var GetRoutingRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRoutingRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetRoutingRuleRequest_DomainName *smithy.Schema
-
-var GetRoutingRuleRequest_DomainNameId *smithy.Schema
-
-var GetRoutingRuleRequest_RoutingRuleId *smithy.Schema
-
-var GetRoutingRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetRoutingRuleResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetRoutingRuleResponse_Actions *smithy.Schema
-
-var GetRoutingRuleResponse_Conditions *smithy.Schema
-
-var GetRoutingRuleResponse_Priority *smithy.Schema
-
-var GetRoutingRuleResponse_RoutingRuleArn *smithy.Schema
-
-var GetRoutingRuleResponse_RoutingRuleId *smithy.Schema
-
-var GetStageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetStageRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetStageRequest_ApiId *smithy.Schema
-
-var GetStageRequest_StageName *smithy.Schema
-
-var GetStageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetStageResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetStageResponse_AccessLogSettings *smithy.Schema
-
-var GetStageResponse_ApiGatewayManaged *smithy.Schema
-
-var GetStageResponse_AutoDeploy *smithy.Schema
-
-var GetStageResponse_ClientCertificateId *smithy.Schema
-
-var GetStageResponse_CreatedDate *smithy.Schema
-
-var GetStageResponse_DefaultRouteSettings *smithy.Schema
-
-var GetStageResponse_DeploymentId *smithy.Schema
-
-var GetStageResponse_Description *smithy.Schema
-
-var GetStageResponse_LastDeploymentStatusMessage *smithy.Schema
-
-var GetStageResponse_LastUpdatedDate *smithy.Schema
-
-var GetStageResponse_RouteSettings *smithy.Schema
-
-var GetStageResponse_StageName *smithy.Schema
-
-var GetStageResponse_StageVariables *smithy.Schema
-
-var GetStageResponse_Tags *smithy.Schema
-
-var GetStagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetStagesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetStagesRequest_ApiId *smithy.Schema
-
-var GetStagesRequest_MaxResults *smithy.Schema
-
-var GetStagesRequest_NextToken *smithy.Schema
-
-var GetStagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetStagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetStagesResponse_Items *smithy.Schema
-
-var GetStagesResponse_NextToken *smithy.Schema
-
-var GetTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetTagsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetTagsRequest_ResourceArn *smithy.Schema
-
-var GetTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetTagsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetTagsResponse_Tags *smithy.Schema
-
-var GetVpcLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetVpcLinkRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetVpcLinkRequest_VpcLinkId *smithy.Schema
-
-var GetVpcLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetVpcLinkResponse",
-}, smithy.ShapeTypeStructure, 9)
-var GetVpcLinkResponse_CreatedDate *smithy.Schema
-
-var GetVpcLinkResponse_Name *smithy.Schema
-
-var GetVpcLinkResponse_SecurityGroupIds *smithy.Schema
-
-var GetVpcLinkResponse_SubnetIds *smithy.Schema
-
-var GetVpcLinkResponse_Tags *smithy.Schema
-
-var GetVpcLinkResponse_VpcLinkId *smithy.Schema
-
-var GetVpcLinkResponse_VpcLinkStatus *smithy.Schema
-
-var GetVpcLinkResponse_VpcLinkStatusMessage *smithy.Schema
-
-var GetVpcLinkResponse_VpcLinkVersion *smithy.Schema
-
-var GetVpcLinksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetVpcLinksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetVpcLinksRequest_MaxResults *smithy.Schema
-
-var GetVpcLinksRequest_NextToken *smithy.Schema
-
-var GetVpcLinksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "GetVpcLinksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetVpcLinksResponse_Items *smithy.Schema
-
-var GetVpcLinksResponse_NextToken *smithy.Schema
-
-var ImportApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ImportApiRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ImportApiRequest_Basepath *smithy.Schema
-
-var ImportApiRequest_Body *smithy.Schema
-
-var ImportApiRequest_FailOnWarnings *smithy.Schema
-
-var ImportApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ImportApiResponse",
-}, smithy.ShapeTypeStructure, 17)
-var ImportApiResponse_ApiEndpoint *smithy.Schema
-
-var ImportApiResponse_ApiGatewayManaged *smithy.Schema
-
-var ImportApiResponse_ApiId *smithy.Schema
-
-var ImportApiResponse_ApiKeySelectionExpression *smithy.Schema
-
-var ImportApiResponse_CorsConfiguration *smithy.Schema
-
-var ImportApiResponse_CreatedDate *smithy.Schema
-
-var ImportApiResponse_Description *smithy.Schema
-
-var ImportApiResponse_DisableSchemaValidation *smithy.Schema
-
-var ImportApiResponse_DisableExecuteApiEndpoint *smithy.Schema
-
-var ImportApiResponse_ImportInfo *smithy.Schema
-
-var ImportApiResponse_IpAddressType *smithy.Schema
-
-var ImportApiResponse_Name *smithy.Schema
-
-var ImportApiResponse_ProtocolType *smithy.Schema
-
-var ImportApiResponse_RouteSelectionExpression *smithy.Schema
-
-var ImportApiResponse_Tags *smithy.Schema
-
-var ImportApiResponse_Version *smithy.Schema
-
-var ImportApiResponse_Warnings *smithy.Schema
-
-var ListPortalProductsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListPortalProductsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPortalProductsRequest_MaxResults *smithy.Schema
-
-var ListPortalProductsRequest_NextToken *smithy.Schema
-
-var ListPortalProductsRequest_ResourceOwner *smithy.Schema
-
-var ListPortalProductsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListPortalProductsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPortalProductsResponse_Items *smithy.Schema
-
-var ListPortalProductsResponse_NextToken *smithy.Schema
-
-var ListPortalsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListPortalsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListPortalsRequest_MaxResults *smithy.Schema
-
-var ListPortalsRequest_NextToken *smithy.Schema
-
-var ListPortalsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListPortalsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPortalsResponse_Items *smithy.Schema
-
-var ListPortalsResponse_NextToken *smithy.Schema
-
-var ListProductPagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListProductPagesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListProductPagesRequest_MaxResults *smithy.Schema
-
-var ListProductPagesRequest_NextToken *smithy.Schema
-
-var ListProductPagesRequest_PortalProductId *smithy.Schema
-
-var ListProductPagesRequest_ResourceOwnerAccountId *smithy.Schema
-
-var ListProductPagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListProductPagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProductPagesResponse_Items *smithy.Schema
-
-var ListProductPagesResponse_NextToken *smithy.Schema
-
-var ListProductRestEndpointPagesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListProductRestEndpointPagesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListProductRestEndpointPagesRequest_MaxResults *smithy.Schema
-
-var ListProductRestEndpointPagesRequest_NextToken *smithy.Schema
-
-var ListProductRestEndpointPagesRequest_PortalProductId *smithy.Schema
-
-var ListProductRestEndpointPagesRequest_ResourceOwnerAccountId *smithy.Schema
-
-var ListProductRestEndpointPagesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListProductRestEndpointPagesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProductRestEndpointPagesResponse_Items *smithy.Schema
-
-var ListProductRestEndpointPagesResponse_NextToken *smithy.Schema
-
-var ListRoutingRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListRoutingRulesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListRoutingRulesRequest_DomainName *smithy.Schema
-
-var ListRoutingRulesRequest_DomainNameId *smithy.Schema
-
-var ListRoutingRulesRequest_MaxResults *smithy.Schema
-
-var ListRoutingRulesRequest_NextToken *smithy.Schema
-
-var ListRoutingRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ListRoutingRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRoutingRulesResponse_NextToken *smithy.Schema
-
-var ListRoutingRulesResponse_RoutingRules *smithy.Schema
-
-var PreviewPortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PreviewPortalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var PreviewPortalRequest_PortalId *smithy.Schema
-
-var PreviewPortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PreviewPortalResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PublishPortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PublishPortalRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PublishPortalRequest_Description *smithy.Schema
-
-var PublishPortalRequest_PortalId *smithy.Schema
-
-var PublishPortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PublishPortalResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutPortalProductSharingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PutPortalProductSharingPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutPortalProductSharingPolicyRequest_PolicyDocument *smithy.Schema
-
-var PutPortalProductSharingPolicyRequest_PortalProductId *smithy.Schema
-
-var PutPortalProductSharingPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PutPortalProductSharingPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutRoutingRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PutRoutingRuleRequest",
-}, smithy.ShapeTypeStructure, 6)
-var PutRoutingRuleRequest_Actions *smithy.Schema
-
-var PutRoutingRuleRequest_Conditions *smithy.Schema
-
-var PutRoutingRuleRequest_DomainName *smithy.Schema
-
-var PutRoutingRuleRequest_DomainNameId *smithy.Schema
-
-var PutRoutingRuleRequest_Priority *smithy.Schema
-
-var PutRoutingRuleRequest_RoutingRuleId *smithy.Schema
-
-var PutRoutingRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "PutRoutingRuleResponse",
-}, smithy.ShapeTypeStructure, 5)
-var PutRoutingRuleResponse_Actions *smithy.Schema
-
-var PutRoutingRuleResponse_Conditions *smithy.Schema
-
-var PutRoutingRuleResponse_Priority *smithy.Schema
-
-var PutRoutingRuleResponse_RoutingRuleArn *smithy.Schema
-
-var PutRoutingRuleResponse_RoutingRuleId *smithy.Schema
-
-var ReimportApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ReimportApiRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ReimportApiRequest_ApiId *smithy.Schema
-
-var ReimportApiRequest_Basepath *smithy.Schema
-
-var ReimportApiRequest_Body *smithy.Schema
-
-var ReimportApiRequest_FailOnWarnings *smithy.Schema
-
-var ReimportApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ReimportApiResponse",
-}, smithy.ShapeTypeStructure, 17)
-var ReimportApiResponse_ApiEndpoint *smithy.Schema
-
-var ReimportApiResponse_ApiGatewayManaged *smithy.Schema
-
-var ReimportApiResponse_ApiId *smithy.Schema
-
-var ReimportApiResponse_ApiKeySelectionExpression *smithy.Schema
-
-var ReimportApiResponse_CorsConfiguration *smithy.Schema
-
-var ReimportApiResponse_CreatedDate *smithy.Schema
-
-var ReimportApiResponse_Description *smithy.Schema
-
-var ReimportApiResponse_DisableSchemaValidation *smithy.Schema
-
-var ReimportApiResponse_DisableExecuteApiEndpoint *smithy.Schema
-
-var ReimportApiResponse_ImportInfo *smithy.Schema
-
-var ReimportApiResponse_IpAddressType *smithy.Schema
-
-var ReimportApiResponse_Name *smithy.Schema
-
-var ReimportApiResponse_ProtocolType *smithy.Schema
-
-var ReimportApiResponse_RouteSelectionExpression *smithy.Schema
-
-var ReimportApiResponse_Tags *smithy.Schema
-
-var ReimportApiResponse_Version *smithy.Schema
-
-var ReimportApiResponse_Warnings *smithy.Schema
-
-var ResetAuthorizersCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "ResetAuthorizersCacheRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ResetAuthorizersCacheRequest_ApiId *smithy.Schema
-
-var ResetAuthorizersCacheRequest_StageName *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateApiRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateApiRequest",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateApiRequest_ApiId *smithy.Schema
-
-var UpdateApiRequest_ApiKeySelectionExpression *smithy.Schema
-
-var UpdateApiRequest_CorsConfiguration *smithy.Schema
-
-var UpdateApiRequest_CredentialsArn *smithy.Schema
-
-var UpdateApiRequest_Description *smithy.Schema
-
-var UpdateApiRequest_DisableSchemaValidation *smithy.Schema
-
-var UpdateApiRequest_DisableExecuteApiEndpoint *smithy.Schema
-
-var UpdateApiRequest_IpAddressType *smithy.Schema
-
-var UpdateApiRequest_Name *smithy.Schema
-
-var UpdateApiRequest_RouteKey *smithy.Schema
-
-var UpdateApiRequest_RouteSelectionExpression *smithy.Schema
-
-var UpdateApiRequest_Target *smithy.Schema
-
-var UpdateApiRequest_Version *smithy.Schema
-
-var UpdateApiMappingRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateApiMappingRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateApiMappingRequest_ApiId *smithy.Schema
-
-var UpdateApiMappingRequest_ApiMappingId *smithy.Schema
-
-var UpdateApiMappingRequest_ApiMappingKey *smithy.Schema
-
-var UpdateApiMappingRequest_DomainName *smithy.Schema
-
-var UpdateApiMappingRequest_Stage *smithy.Schema
-
-var UpdateApiMappingResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateApiMappingResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateApiMappingResponse_ApiId *smithy.Schema
-
-var UpdateApiMappingResponse_ApiMappingId *smithy.Schema
-
-var UpdateApiMappingResponse_ApiMappingKey *smithy.Schema
-
-var UpdateApiMappingResponse_Stage *smithy.Schema
-
-var UpdateApiResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateApiResponse",
-}, smithy.ShapeTypeStructure, 17)
-var UpdateApiResponse_ApiEndpoint *smithy.Schema
-
-var UpdateApiResponse_ApiGatewayManaged *smithy.Schema
-
-var UpdateApiResponse_ApiId *smithy.Schema
-
-var UpdateApiResponse_ApiKeySelectionExpression *smithy.Schema
-
-var UpdateApiResponse_CorsConfiguration *smithy.Schema
-
-var UpdateApiResponse_CreatedDate *smithy.Schema
-
-var UpdateApiResponse_Description *smithy.Schema
-
-var UpdateApiResponse_DisableSchemaValidation *smithy.Schema
-
-var UpdateApiResponse_DisableExecuteApiEndpoint *smithy.Schema
-
-var UpdateApiResponse_ImportInfo *smithy.Schema
-
-var UpdateApiResponse_IpAddressType *smithy.Schema
-
-var UpdateApiResponse_Name *smithy.Schema
-
-var UpdateApiResponse_ProtocolType *smithy.Schema
-
-var UpdateApiResponse_RouteSelectionExpression *smithy.Schema
-
-var UpdateApiResponse_Tags *smithy.Schema
-
-var UpdateApiResponse_Version *smithy.Schema
-
-var UpdateApiResponse_Warnings *smithy.Schema
-
-var UpdateAuthorizerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateAuthorizerRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateAuthorizerRequest_ApiId *smithy.Schema
-
-var UpdateAuthorizerRequest_AuthorizerCredentialsArn *smithy.Schema
-
-var UpdateAuthorizerRequest_AuthorizerId *smithy.Schema
-
-var UpdateAuthorizerRequest_AuthorizerPayloadFormatVersion *smithy.Schema
-
-var UpdateAuthorizerRequest_AuthorizerResultTtlInSeconds *smithy.Schema
-
-var UpdateAuthorizerRequest_AuthorizerType *smithy.Schema
-
-var UpdateAuthorizerRequest_AuthorizerUri *smithy.Schema
-
-var UpdateAuthorizerRequest_EnableSimpleResponses *smithy.Schema
-
-var UpdateAuthorizerRequest_IdentitySource *smithy.Schema
-
-var UpdateAuthorizerRequest_IdentityValidationExpression *smithy.Schema
-
-var UpdateAuthorizerRequest_JwtConfiguration *smithy.Schema
-
-var UpdateAuthorizerRequest_Name *smithy.Schema
-
-var UpdateAuthorizerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateAuthorizerResponse",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateAuthorizerResponse_AuthorizerCredentialsArn *smithy.Schema
-
-var UpdateAuthorizerResponse_AuthorizerId *smithy.Schema
-
-var UpdateAuthorizerResponse_AuthorizerPayloadFormatVersion *smithy.Schema
-
-var UpdateAuthorizerResponse_AuthorizerResultTtlInSeconds *smithy.Schema
-
-var UpdateAuthorizerResponse_AuthorizerType *smithy.Schema
-
-var UpdateAuthorizerResponse_AuthorizerUri *smithy.Schema
-
-var UpdateAuthorizerResponse_EnableSimpleResponses *smithy.Schema
-
-var UpdateAuthorizerResponse_IdentitySource *smithy.Schema
-
-var UpdateAuthorizerResponse_IdentityValidationExpression *smithy.Schema
-
-var UpdateAuthorizerResponse_JwtConfiguration *smithy.Schema
-
-var UpdateAuthorizerResponse_Name *smithy.Schema
-
-var UpdateDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateDeploymentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDeploymentRequest_ApiId *smithy.Schema
-
-var UpdateDeploymentRequest_DeploymentId *smithy.Schema
-
-var UpdateDeploymentRequest_Description *smithy.Schema
-
-var UpdateDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateDeploymentResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateDeploymentResponse_AutoDeployed *smithy.Schema
-
-var UpdateDeploymentResponse_CreatedDate *smithy.Schema
-
-var UpdateDeploymentResponse_DeploymentId *smithy.Schema
-
-var UpdateDeploymentResponse_DeploymentStatus *smithy.Schema
-
-var UpdateDeploymentResponse_DeploymentStatusMessage *smithy.Schema
-
-var UpdateDeploymentResponse_Description *smithy.Schema
-
-var UpdateDomainNameRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateDomainNameRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDomainNameRequest_DomainName *smithy.Schema
-
-var UpdateDomainNameRequest_DomainNameConfigurations *smithy.Schema
-
-var UpdateDomainNameRequest_MutualTlsAuthentication *smithy.Schema
-
-var UpdateDomainNameRequest_RoutingMode *smithy.Schema
-
-var UpdateDomainNameResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateDomainNameResponse",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateDomainNameResponse_ApiMappingSelectionExpression *smithy.Schema
-
-var UpdateDomainNameResponse_DomainName *smithy.Schema
-
-var UpdateDomainNameResponse_DomainNameArn *smithy.Schema
-
-var UpdateDomainNameResponse_DomainNameConfigurations *smithy.Schema
-
-var UpdateDomainNameResponse_MutualTlsAuthentication *smithy.Schema
-
-var UpdateDomainNameResponse_RoutingMode *smithy.Schema
-
-var UpdateDomainNameResponse_Tags *smithy.Schema
-
-var UpdateIntegrationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateIntegrationRequest",
-}, smithy.ShapeTypeStructure, 19)
-var UpdateIntegrationRequest_ApiId *smithy.Schema
-
-var UpdateIntegrationRequest_ConnectionId *smithy.Schema
-
-var UpdateIntegrationRequest_ConnectionType *smithy.Schema
-
-var UpdateIntegrationRequest_ContentHandlingStrategy *smithy.Schema
-
-var UpdateIntegrationRequest_CredentialsArn *smithy.Schema
-
-var UpdateIntegrationRequest_Description *smithy.Schema
-
-var UpdateIntegrationRequest_IntegrationId *smithy.Schema
-
-var UpdateIntegrationRequest_IntegrationMethod *smithy.Schema
-
-var UpdateIntegrationRequest_IntegrationSubtype *smithy.Schema
-
-var UpdateIntegrationRequest_IntegrationType *smithy.Schema
-
-var UpdateIntegrationRequest_IntegrationUri *smithy.Schema
-
-var UpdateIntegrationRequest_PassthroughBehavior *smithy.Schema
-
-var UpdateIntegrationRequest_PayloadFormatVersion *smithy.Schema
-
-var UpdateIntegrationRequest_RequestParameters *smithy.Schema
-
-var UpdateIntegrationRequest_RequestTemplates *smithy.Schema
-
-var UpdateIntegrationRequest_ResponseParameters *smithy.Schema
-
-var UpdateIntegrationRequest_TemplateSelectionExpression *smithy.Schema
-
-var UpdateIntegrationRequest_TimeoutInMillis *smithy.Schema
-
-var UpdateIntegrationRequest_TlsConfig *smithy.Schema
-
-var UpdateIntegrationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateIntegrationResult",
-}, smithy.ShapeTypeStructure, 20)
-var UpdateIntegrationResult_ApiGatewayManaged *smithy.Schema
-
-var UpdateIntegrationResult_ConnectionId *smithy.Schema
-
-var UpdateIntegrationResult_ConnectionType *smithy.Schema
-
-var UpdateIntegrationResult_ContentHandlingStrategy *smithy.Schema
-
-var UpdateIntegrationResult_CredentialsArn *smithy.Schema
-
-var UpdateIntegrationResult_Description *smithy.Schema
-
-var UpdateIntegrationResult_IntegrationId *smithy.Schema
-
-var UpdateIntegrationResult_IntegrationMethod *smithy.Schema
-
-var UpdateIntegrationResult_IntegrationResponseSelectionExpression *smithy.Schema
-
-var UpdateIntegrationResult_IntegrationSubtype *smithy.Schema
-
-var UpdateIntegrationResult_IntegrationType *smithy.Schema
-
-var UpdateIntegrationResult_IntegrationUri *smithy.Schema
-
-var UpdateIntegrationResult_PassthroughBehavior *smithy.Schema
-
-var UpdateIntegrationResult_PayloadFormatVersion *smithy.Schema
-
-var UpdateIntegrationResult_RequestParameters *smithy.Schema
-
-var UpdateIntegrationResult_RequestTemplates *smithy.Schema
-
-var UpdateIntegrationResult_ResponseParameters *smithy.Schema
-
-var UpdateIntegrationResult_TemplateSelectionExpression *smithy.Schema
-
-var UpdateIntegrationResult_TimeoutInMillis *smithy.Schema
-
-var UpdateIntegrationResult_TlsConfig *smithy.Schema
-
-var UpdateIntegrationResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateIntegrationResponseRequest",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateIntegrationResponseRequest_ApiId *smithy.Schema
-
-var UpdateIntegrationResponseRequest_ContentHandlingStrategy *smithy.Schema
-
-var UpdateIntegrationResponseRequest_IntegrationId *smithy.Schema
-
-var UpdateIntegrationResponseRequest_IntegrationResponseId *smithy.Schema
-
-var UpdateIntegrationResponseRequest_IntegrationResponseKey *smithy.Schema
-
-var UpdateIntegrationResponseRequest_ResponseParameters *smithy.Schema
-
-var UpdateIntegrationResponseRequest_ResponseTemplates *smithy.Schema
-
-var UpdateIntegrationResponseRequest_TemplateSelectionExpression *smithy.Schema
-
-var UpdateIntegrationResponseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateIntegrationResponseResponse",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateIntegrationResponseResponse_ContentHandlingStrategy *smithy.Schema
-
-var UpdateIntegrationResponseResponse_IntegrationResponseId *smithy.Schema
-
-var UpdateIntegrationResponseResponse_IntegrationResponseKey *smithy.Schema
-
-var UpdateIntegrationResponseResponse_ResponseParameters *smithy.Schema
-
-var UpdateIntegrationResponseResponse_ResponseTemplates *smithy.Schema
-
-var UpdateIntegrationResponseResponse_TemplateSelectionExpression *smithy.Schema
-
-var UpdateModelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateModelRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateModelRequest_ApiId *smithy.Schema
-
-var UpdateModelRequest_ContentType *smithy.Schema
-
-var UpdateModelRequest_Description *smithy.Schema
-
-var UpdateModelRequest_ModelId *smithy.Schema
-
-var UpdateModelRequest_Name *smithy.Schema
-
-var UpdateModelRequest_Schema *smithy.Schema
-
-var UpdateModelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateModelResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateModelResponse_ContentType *smithy.Schema
-
-var UpdateModelResponse_Description *smithy.Schema
-
-var UpdateModelResponse_ModelId *smithy.Schema
-
-var UpdateModelResponse_Name *smithy.Schema
-
-var UpdateModelResponse_Schema *smithy.Schema
-
-var UpdatePortalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdatePortalRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdatePortalRequest_Authorization *smithy.Schema
-
-var UpdatePortalRequest_EndpointConfiguration *smithy.Schema
-
-var UpdatePortalRequest_IncludedPortalProductArns *smithy.Schema
-
-var UpdatePortalRequest_LogoUri *smithy.Schema
-
-var UpdatePortalRequest_PortalContent *smithy.Schema
-
-var UpdatePortalRequest_PortalId *smithy.Schema
-
-var UpdatePortalRequest_RumAppMonitorName *smithy.Schema
-
-var UpdatePortalResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdatePortalResponse",
-}, smithy.ShapeTypeStructure, 14)
-var UpdatePortalResponse_Authorization *smithy.Schema
-
-var UpdatePortalResponse_EndpointConfiguration *smithy.Schema
-
-var UpdatePortalResponse_IncludedPortalProductArns *smithy.Schema
-
-var UpdatePortalResponse_LastModified *smithy.Schema
-
-var UpdatePortalResponse_LastPublished *smithy.Schema
-
-var UpdatePortalResponse_LastPublishedDescription *smithy.Schema
-
-var UpdatePortalResponse_PortalArn *smithy.Schema
-
-var UpdatePortalResponse_PortalContent *smithy.Schema
-
-var UpdatePortalResponse_PortalId *smithy.Schema
-
-var UpdatePortalResponse_Preview *smithy.Schema
-
-var UpdatePortalResponse_PublishStatus *smithy.Schema
-
-var UpdatePortalResponse_RumAppMonitorName *smithy.Schema
-
-var UpdatePortalResponse_StatusException *smithy.Schema
-
-var UpdatePortalResponse_Tags *smithy.Schema
-
-var UpdatePortalProductRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdatePortalProductRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdatePortalProductRequest_Description *smithy.Schema
-
-var UpdatePortalProductRequest_DisplayName *smithy.Schema
-
-var UpdatePortalProductRequest_DisplayOrder *smithy.Schema
-
-var UpdatePortalProductRequest_PortalProductId *smithy.Schema
-
-var UpdatePortalProductResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdatePortalProductResponse",
-}, smithy.ShapeTypeStructure, 7)
-var UpdatePortalProductResponse_Description *smithy.Schema
-
-var UpdatePortalProductResponse_DisplayName *smithy.Schema
-
-var UpdatePortalProductResponse_DisplayOrder *smithy.Schema
-
-var UpdatePortalProductResponse_LastModified *smithy.Schema
-
-var UpdatePortalProductResponse_PortalProductArn *smithy.Schema
-
-var UpdatePortalProductResponse_PortalProductId *smithy.Schema
-
-var UpdatePortalProductResponse_Tags *smithy.Schema
-
-var UpdateProductPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateProductPageRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateProductPageRequest_DisplayContent *smithy.Schema
-
-var UpdateProductPageRequest_PortalProductId *smithy.Schema
-
-var UpdateProductPageRequest_ProductPageId *smithy.Schema
-
-var UpdateProductPageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateProductPageResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProductPageResponse_DisplayContent *smithy.Schema
-
-var UpdateProductPageResponse_LastModified *smithy.Schema
-
-var UpdateProductPageResponse_ProductPageArn *smithy.Schema
-
-var UpdateProductPageResponse_ProductPageId *smithy.Schema
-
-var UpdateProductRestEndpointPageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateProductRestEndpointPageRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateProductRestEndpointPageRequest_DisplayContent *smithy.Schema
-
-var UpdateProductRestEndpointPageRequest_PortalProductId *smithy.Schema
-
-var UpdateProductRestEndpointPageRequest_ProductRestEndpointPageId *smithy.Schema
-
-var UpdateProductRestEndpointPageRequest_TryItState *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateProductRestEndpointPageResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateProductRestEndpointPageResponse_DisplayContent *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse_LastModified *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse_ProductRestEndpointPageId *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse_RestEndpointIdentifier *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse_Status *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse_StatusException *smithy.Schema
-
-var UpdateProductRestEndpointPageResponse_TryItState *smithy.Schema
-
-var UpdateRouteRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateRouteRequest",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateRouteRequest_ApiId *smithy.Schema
-
-var UpdateRouteRequest_ApiKeyRequired *smithy.Schema
-
-var UpdateRouteRequest_AuthorizationScopes *smithy.Schema
-
-var UpdateRouteRequest_AuthorizationType *smithy.Schema
-
-var UpdateRouteRequest_AuthorizerId *smithy.Schema
-
-var UpdateRouteRequest_ModelSelectionExpression *smithy.Schema
-
-var UpdateRouteRequest_OperationName *smithy.Schema
-
-var UpdateRouteRequest_RequestModels *smithy.Schema
-
-var UpdateRouteRequest_RequestParameters *smithy.Schema
-
-var UpdateRouteRequest_RouteId *smithy.Schema
-
-var UpdateRouteRequest_RouteKey *smithy.Schema
-
-var UpdateRouteRequest_RouteResponseSelectionExpression *smithy.Schema
-
-var UpdateRouteRequest_Target *smithy.Schema
-
-var UpdateRouteResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateRouteResult",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateRouteResult_ApiGatewayManaged *smithy.Schema
-
-var UpdateRouteResult_ApiKeyRequired *smithy.Schema
-
-var UpdateRouteResult_AuthorizationScopes *smithy.Schema
-
-var UpdateRouteResult_AuthorizationType *smithy.Schema
-
-var UpdateRouteResult_AuthorizerId *smithy.Schema
-
-var UpdateRouteResult_ModelSelectionExpression *smithy.Schema
-
-var UpdateRouteResult_OperationName *smithy.Schema
-
-var UpdateRouteResult_RequestModels *smithy.Schema
-
-var UpdateRouteResult_RequestParameters *smithy.Schema
-
-var UpdateRouteResult_RouteId *smithy.Schema
-
-var UpdateRouteResult_RouteKey *smithy.Schema
-
-var UpdateRouteResult_RouteResponseSelectionExpression *smithy.Schema
-
-var UpdateRouteResult_Target *smithy.Schema
-
-var UpdateRouteResponseRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateRouteResponseRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateRouteResponseRequest_ApiId *smithy.Schema
-
-var UpdateRouteResponseRequest_ModelSelectionExpression *smithy.Schema
-
-var UpdateRouteResponseRequest_ResponseModels *smithy.Schema
-
-var UpdateRouteResponseRequest_ResponseParameters *smithy.Schema
-
-var UpdateRouteResponseRequest_RouteId *smithy.Schema
-
-var UpdateRouteResponseRequest_RouteResponseId *smithy.Schema
-
-var UpdateRouteResponseRequest_RouteResponseKey *smithy.Schema
-
-var UpdateRouteResponseResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateRouteResponseResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateRouteResponseResponse_ModelSelectionExpression *smithy.Schema
-
-var UpdateRouteResponseResponse_ResponseModels *smithy.Schema
-
-var UpdateRouteResponseResponse_ResponseParameters *smithy.Schema
-
-var UpdateRouteResponseResponse_RouteResponseId *smithy.Schema
-
-var UpdateRouteResponseResponse_RouteResponseKey *smithy.Schema
-
-var UpdateStageRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateStageRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateStageRequest_AccessLogSettings *smithy.Schema
-
-var UpdateStageRequest_ApiId *smithy.Schema
-
-var UpdateStageRequest_AutoDeploy *smithy.Schema
-
-var UpdateStageRequest_ClientCertificateId *smithy.Schema
-
-var UpdateStageRequest_DefaultRouteSettings *smithy.Schema
-
-var UpdateStageRequest_DeploymentId *smithy.Schema
-
-var UpdateStageRequest_Description *smithy.Schema
-
-var UpdateStageRequest_RouteSettings *smithy.Schema
-
-var UpdateStageRequest_StageName *smithy.Schema
-
-var UpdateStageRequest_StageVariables *smithy.Schema
-
-var UpdateStageResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateStageResponse",
-}, smithy.ShapeTypeStructure, 14)
-var UpdateStageResponse_AccessLogSettings *smithy.Schema
-
-var UpdateStageResponse_ApiGatewayManaged *smithy.Schema
-
-var UpdateStageResponse_AutoDeploy *smithy.Schema
-
-var UpdateStageResponse_ClientCertificateId *smithy.Schema
-
-var UpdateStageResponse_CreatedDate *smithy.Schema
-
-var UpdateStageResponse_DefaultRouteSettings *smithy.Schema
-
-var UpdateStageResponse_DeploymentId *smithy.Schema
-
-var UpdateStageResponse_Description *smithy.Schema
-
-var UpdateStageResponse_LastDeploymentStatusMessage *smithy.Schema
-
-var UpdateStageResponse_LastUpdatedDate *smithy.Schema
-
-var UpdateStageResponse_RouteSettings *smithy.Schema
-
-var UpdateStageResponse_StageName *smithy.Schema
-
-var UpdateStageResponse_StageVariables *smithy.Schema
-
-var UpdateStageResponse_Tags *smithy.Schema
-
-var UpdateVpcLinkRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateVpcLinkRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateVpcLinkRequest_Name *smithy.Schema
-
-var UpdateVpcLinkRequest_VpcLinkId *smithy.Schema
-
-var UpdateVpcLinkResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.apigatewayv2",
-	Name:      "UpdateVpcLinkResponse",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateVpcLinkResponse_CreatedDate *smithy.Schema
-
-var UpdateVpcLinkResponse_Name *smithy.Schema
-
-var UpdateVpcLinkResponse_SecurityGroupIds *smithy.Schema
-
-var UpdateVpcLinkResponse_SubnetIds *smithy.Schema
-
-var UpdateVpcLinkResponse_Tags *smithy.Schema
-
-var UpdateVpcLinkResponse_VpcLinkId *smithy.Schema
-
-var UpdateVpcLinkResponse_VpcLinkStatus *smithy.Schema
-
-var UpdateVpcLinkResponse_VpcLinkStatusMessage *smithy.Schema
-
-var UpdateVpcLinkResponse_VpcLinkVersion *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	___listOf__string_member = ___listOf__string.AddMember("member", ___string)
-
-	___listOf__stringMin20Max2048_member = ___listOf__stringMin20Max2048.AddMember("member", ___stringMin20Max2048)
-
-	_CorsHeaderList_member = _CorsHeaderList.AddMember("member", ___string)
-
-	_CorsMethodList_member = _CorsMethodList.AddMember("member", _StringWithLengthBetween1And64)
-
-	_CorsOriginList_member = _CorsOriginList.AddMember("member", ___string)
-
-	Cors_AllowCredentials = Cors.AddMember("AllowCredentials", ___boolean, &smithytraits.JSONName{Name: "allowCredentials"})
-
-	Cors_AllowHeaders = Cors.AddMember("AllowHeaders", _CorsHeaderList, &smithytraits.JSONName{Name: "allowHeaders"})
-
-	Cors_AllowMethods = Cors.AddMember("AllowMethods", _CorsMethodList, &smithytraits.JSONName{Name: "allowMethods"})
-
-	Cors_AllowOrigins = Cors.AddMember("AllowOrigins", _CorsOriginList, &smithytraits.JSONName{Name: "allowOrigins"})
-
-	Cors_ExposeHeaders = Cors.AddMember("ExposeHeaders", _CorsHeaderList, &smithytraits.JSONName{Name: "exposeHeaders"})
-
-	Cors_MaxAge = Cors.AddMember("MaxAge", _IntegerWithLengthBetweenMinus1And86400, &smithytraits.JSONName{Name: "maxAge"})
-
-	IpAddressType_ipv4 = IpAddressType.AddMember("ipv4", smithyprelude.Unit)
-
-	IpAddressType_dualstack = IpAddressType.AddMember("dualstack", smithyprelude.Unit)
-
-	ProtocolType_WEBSOCKET = ProtocolType.AddMember("WEBSOCKET", smithyprelude.Unit)
-
-	ProtocolType_HTTP = ProtocolType.AddMember("HTTP", smithyprelude.Unit)
-
-	_Tags_key = _Tags.AddMember("key", ___string)
-
-	_Tags_value = _Tags.AddMember("value", _StringWithLengthBetween1And1600)
-
-	Api_ApiEndpoint = Api.AddMember("ApiEndpoint", ___string, &smithytraits.JSONName{Name: "apiEndpoint"})
-
-	Api_ApiGatewayManaged = Api.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	Api_ApiId = Api.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	Api_ApiKeySelectionExpression = Api.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	Api_CorsConfiguration = Api.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	Api_CreatedDate = Api.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	Api_Description = Api.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	Api_DisableSchemaValidation = Api.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	Api_DisableExecuteApiEndpoint = Api.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	Api_ImportInfo = Api.AddMember("ImportInfo", ___listOf__string, &smithytraits.JSONName{Name: "importInfo"})
-
-	Api_IpAddressType = Api.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	Api_Name = Api.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	Api_ProtocolType = Api.AddMember("ProtocolType", ProtocolType, &smithytraits.JSONName{Name: "protocolType"})
-
-	Api_RouteSelectionExpression = Api.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	Api_Tags = Api.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	Api_Version = Api.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	Api_Warnings = Api.AddMember("Warnings", ___listOf__string, &smithytraits.JSONName{Name: "warnings"})
-
-	___listOfApi_member = ___listOfApi.AddMember("member", Api)
-
-	ApiMapping_ApiId = ApiMapping.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	ApiMapping_ApiMappingId = ApiMapping.AddMember("ApiMappingId", _Id, &smithytraits.JSONName{Name: "apiMappingId"})
-
-	ApiMapping_ApiMappingKey = ApiMapping.AddMember("ApiMappingKey", _SelectionKey, &smithytraits.JSONName{Name: "apiMappingKey"})
-
-	ApiMapping_Stage = ApiMapping.AddMember("Stage", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stage"})
-
-	___listOfApiMapping_member = ___listOfApiMapping.AddMember("member", ApiMapping)
-
-	AuthorizerType_REQUEST = AuthorizerType.AddMember("REQUEST", smithyprelude.Unit)
-
-	AuthorizerType_JWT = AuthorizerType.AddMember("JWT", smithyprelude.Unit)
-
-	_IdentitySourceList_member = _IdentitySourceList.AddMember("member", ___string)
-
-	JWTConfiguration_Audience = JWTConfiguration.AddMember("Audience", ___listOf__string, &smithytraits.JSONName{Name: "audience"})
-
-	JWTConfiguration_Issuer = JWTConfiguration.AddMember("Issuer", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "issuer"})
-
-	Authorizer_AuthorizerCredentialsArn = Authorizer.AddMember("AuthorizerCredentialsArn", _Arn, &smithytraits.JSONName{Name: "authorizerCredentialsArn"})
-
-	Authorizer_AuthorizerId = Authorizer.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	Authorizer_AuthorizerPayloadFormatVersion = Authorizer.AddMember("AuthorizerPayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "authorizerPayloadFormatVersion"})
-
-	Authorizer_AuthorizerResultTtlInSeconds = Authorizer.AddMember("AuthorizerResultTtlInSeconds", _IntegerWithLengthBetween0And3600, &smithytraits.JSONName{Name: "authorizerResultTtlInSeconds"})
-
-	Authorizer_AuthorizerType = Authorizer.AddMember("AuthorizerType", AuthorizerType, &smithytraits.JSONName{Name: "authorizerType"})
-
-	Authorizer_AuthorizerUri = Authorizer.AddMember("AuthorizerUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "authorizerUri"})
-
-	Authorizer_EnableSimpleResponses = Authorizer.AddMember("EnableSimpleResponses", ___boolean, &smithytraits.JSONName{Name: "enableSimpleResponses"})
-
-	Authorizer_IdentitySource = Authorizer.AddMember("IdentitySource", _IdentitySourceList, &smithytraits.JSONName{Name: "identitySource"})
-
-	Authorizer_IdentityValidationExpression = Authorizer.AddMember("IdentityValidationExpression", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "identityValidationExpression"})
-
-	Authorizer_JwtConfiguration = Authorizer.AddMember("JwtConfiguration", JWTConfiguration, &smithytraits.JSONName{Name: "jwtConfiguration"})
-
-	Authorizer_Name = Authorizer.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	___listOfAuthorizer_member = ___listOfAuthorizer.AddMember("member", Authorizer)
-
-	DeploymentStatus_PENDING = DeploymentStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	DeploymentStatus_FAILED = DeploymentStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DeploymentStatus_DEPLOYED = DeploymentStatus.AddMember("DEPLOYED", smithyprelude.Unit)
-
-	Deployment_AutoDeployed = Deployment.AddMember("AutoDeployed", ___boolean, &smithytraits.JSONName{Name: "autoDeployed"})
-
-	Deployment_CreatedDate = Deployment.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	Deployment_DeploymentId = Deployment.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	Deployment_DeploymentStatus = Deployment.AddMember("DeploymentStatus", DeploymentStatus, &smithytraits.JSONName{Name: "deploymentStatus"})
-
-	Deployment_DeploymentStatusMessage = Deployment.AddMember("DeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "deploymentStatusMessage"})
-
-	Deployment_Description = Deployment.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	___listOfDeployment_member = ___listOfDeployment.AddMember("member", Deployment)
-
-	DomainNameStatus_AVAILABLE = DomainNameStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	DomainNameStatus_UPDATING = DomainNameStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	DomainNameStatus_PENDING_CERTIFICATE_REIMPORT = DomainNameStatus.AddMember("PENDING_CERTIFICATE_REIMPORT", smithyprelude.Unit)
-
-	DomainNameStatus_PENDING_OWNERSHIP_VERIFICATION = DomainNameStatus.AddMember("PENDING_OWNERSHIP_VERIFICATION", smithyprelude.Unit)
-
-	EndpointType_REGIONAL = EndpointType.AddMember("REGIONAL", smithyprelude.Unit)
-
-	EndpointType_EDGE = EndpointType.AddMember("EDGE", smithyprelude.Unit)
-
-	SecurityPolicy_TLS_1_0 = SecurityPolicy.AddMember("TLS_1_0", smithyprelude.Unit)
-
-	SecurityPolicy_TLS_1_2 = SecurityPolicy.AddMember("TLS_1_2", smithyprelude.Unit)
-
-	DomainNameConfiguration_ApiGatewayDomainName = DomainNameConfiguration.AddMember("ApiGatewayDomainName", ___string, &smithytraits.JSONName{Name: "apiGatewayDomainName"})
-
-	DomainNameConfiguration_CertificateArn = DomainNameConfiguration.AddMember("CertificateArn", _Arn, &smithytraits.JSONName{Name: "certificateArn"})
-
-	DomainNameConfiguration_CertificateName = DomainNameConfiguration.AddMember("CertificateName", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "certificateName"})
-
-	DomainNameConfiguration_CertificateUploadDate = DomainNameConfiguration.AddMember("CertificateUploadDate", ___timestampIso8601, &smithytraits.JSONName{Name: "certificateUploadDate"})
-
-	DomainNameConfiguration_DomainNameStatus = DomainNameConfiguration.AddMember("DomainNameStatus", DomainNameStatus, &smithytraits.JSONName{Name: "domainNameStatus"})
-
-	DomainNameConfiguration_DomainNameStatusMessage = DomainNameConfiguration.AddMember("DomainNameStatusMessage", ___string, &smithytraits.JSONName{Name: "domainNameStatusMessage"})
-
-	DomainNameConfiguration_EndpointType = DomainNameConfiguration.AddMember("EndpointType", EndpointType, &smithytraits.JSONName{Name: "endpointType"})
-
-	DomainNameConfiguration_HostedZoneId = DomainNameConfiguration.AddMember("HostedZoneId", ___string, &smithytraits.JSONName{Name: "hostedZoneId"})
-
-	DomainNameConfiguration_IpAddressType = DomainNameConfiguration.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	DomainNameConfiguration_SecurityPolicy = DomainNameConfiguration.AddMember("SecurityPolicy", SecurityPolicy, &smithytraits.JSONName{Name: "securityPolicy"})
-
-	DomainNameConfiguration_OwnershipVerificationCertificateArn = DomainNameConfiguration.AddMember("OwnershipVerificationCertificateArn", _Arn, &smithytraits.JSONName{Name: "ownershipVerificationCertificateArn"})
-
-	_DomainNameConfigurations_member = _DomainNameConfigurations.AddMember("member", DomainNameConfiguration)
-
-	MutualTlsAuthentication_TruststoreUri = MutualTlsAuthentication.AddMember("TruststoreUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "truststoreUri"})
-
-	MutualTlsAuthentication_TruststoreVersion = MutualTlsAuthentication.AddMember("TruststoreVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "truststoreVersion"})
-
-	MutualTlsAuthentication_TruststoreWarnings = MutualTlsAuthentication.AddMember("TruststoreWarnings", ___listOf__string, &smithytraits.JSONName{Name: "truststoreWarnings"})
-
-	RoutingMode_API_MAPPING_ONLY = RoutingMode.AddMember("API_MAPPING_ONLY", smithyprelude.Unit)
-
-	RoutingMode_ROUTING_RULE_ONLY = RoutingMode.AddMember("ROUTING_RULE_ONLY", smithyprelude.Unit)
-
-	RoutingMode_ROUTING_RULE_THEN_API_MAPPING = RoutingMode.AddMember("ROUTING_RULE_THEN_API_MAPPING", smithyprelude.Unit)
-
-	DomainName_ApiMappingSelectionExpression = DomainName.AddMember("ApiMappingSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiMappingSelectionExpression"})
-
-	DomainName_DomainName = DomainName.AddMember("DomainName", _StringWithLengthBetween1And512, &smithytraits.JSONName{Name: "domainName"})
-
-	DomainName_DomainNameArn = DomainName.AddMember("DomainNameArn", _Arn, &smithytraits.JSONName{Name: "domainNameArn"})
-
-	DomainName_DomainNameConfigurations = DomainName.AddMember("DomainNameConfigurations", _DomainNameConfigurations, &smithytraits.JSONName{Name: "domainNameConfigurations"})
-
-	DomainName_MutualTlsAuthentication = DomainName.AddMember("MutualTlsAuthentication", MutualTlsAuthentication, &smithytraits.JSONName{Name: "mutualTlsAuthentication"})
-
-	DomainName_RoutingMode = DomainName.AddMember("RoutingMode", RoutingMode, &smithytraits.JSONName{Name: "routingMode"})
-
-	DomainName_Tags = DomainName.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfDomainName_member = ___listOfDomainName.AddMember("member", DomainName)
-
-	ConnectionType_INTERNET = ConnectionType.AddMember("INTERNET", smithyprelude.Unit)
-
-	ConnectionType_VPC_LINK = ConnectionType.AddMember("VPC_LINK", smithyprelude.Unit)
-
-	ContentHandlingStrategy_CONVERT_TO_BINARY = ContentHandlingStrategy.AddMember("CONVERT_TO_BINARY", smithyprelude.Unit)
-
-	ContentHandlingStrategy_CONVERT_TO_TEXT = ContentHandlingStrategy.AddMember("CONVERT_TO_TEXT", smithyprelude.Unit)
-
-	IntegrationType_AWS = IntegrationType.AddMember("AWS", smithyprelude.Unit)
-
-	IntegrationType_HTTP = IntegrationType.AddMember("HTTP", smithyprelude.Unit)
-
-	IntegrationType_MOCK = IntegrationType.AddMember("MOCK", smithyprelude.Unit)
-
-	IntegrationType_HTTP_PROXY = IntegrationType.AddMember("HTTP_PROXY", smithyprelude.Unit)
-
-	IntegrationType_AWS_PROXY = IntegrationType.AddMember("AWS_PROXY", smithyprelude.Unit)
-
-	PassthroughBehavior_WHEN_NO_MATCH = PassthroughBehavior.AddMember("WHEN_NO_MATCH", smithyprelude.Unit)
-
-	PassthroughBehavior_NEVER = PassthroughBehavior.AddMember("NEVER", smithyprelude.Unit)
-
-	PassthroughBehavior_WHEN_NO_TEMPLATES = PassthroughBehavior.AddMember("WHEN_NO_TEMPLATES", smithyprelude.Unit)
-
-	_IntegrationParameters_key = _IntegrationParameters.AddMember("key", ___string)
-
-	_IntegrationParameters_value = _IntegrationParameters.AddMember("value", _StringWithLengthBetween1And512)
-
-	_TemplateMap_key = _TemplateMap.AddMember("key", ___string)
-
-	_TemplateMap_value = _TemplateMap.AddMember("value", _StringWithLengthBetween0And32K)
-
-	_ResponseParameters_key = _ResponseParameters.AddMember("key", ___string)
-
-	_ResponseParameters_value = _ResponseParameters.AddMember("value", _IntegrationParameters)
-
-	TlsConfig_ServerNameToVerify = TlsConfig.AddMember("ServerNameToVerify", _StringWithLengthBetween1And512, &smithytraits.JSONName{Name: "serverNameToVerify"})
-
-	Integration_ApiGatewayManaged = Integration.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	Integration_ConnectionId = Integration.AddMember("ConnectionId", _StringWithLengthBetween1And1024, &smithytraits.JSONName{Name: "connectionId"})
-
-	Integration_ConnectionType = Integration.AddMember("ConnectionType", ConnectionType, &smithytraits.JSONName{Name: "connectionType"})
-
-	Integration_ContentHandlingStrategy = Integration.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	Integration_CredentialsArn = Integration.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	Integration_Description = Integration.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	Integration_IntegrationId = Integration.AddMember("IntegrationId", _Id, &smithytraits.JSONName{Name: "integrationId"})
-
-	Integration_IntegrationMethod = Integration.AddMember("IntegrationMethod", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "integrationMethod"})
-
-	Integration_IntegrationResponseSelectionExpression = Integration.AddMember("IntegrationResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "integrationResponseSelectionExpression"})
-
-	Integration_IntegrationSubtype = Integration.AddMember("IntegrationSubtype", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "integrationSubtype"})
-
-	Integration_IntegrationType = Integration.AddMember("IntegrationType", IntegrationType, &smithytraits.JSONName{Name: "integrationType"})
-
-	Integration_IntegrationUri = Integration.AddMember("IntegrationUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "integrationUri"})
-
-	Integration_PassthroughBehavior = Integration.AddMember("PassthroughBehavior", PassthroughBehavior, &smithytraits.JSONName{Name: "passthroughBehavior"})
-
-	Integration_PayloadFormatVersion = Integration.AddMember("PayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "payloadFormatVersion"})
-
-	Integration_RequestParameters = Integration.AddMember("RequestParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	Integration_RequestTemplates = Integration.AddMember("RequestTemplates", _TemplateMap, &smithytraits.JSONName{Name: "requestTemplates"})
-
-	Integration_ResponseParameters = Integration.AddMember("ResponseParameters", _ResponseParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	Integration_TemplateSelectionExpression = Integration.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	Integration_TimeoutInMillis = Integration.AddMember("TimeoutInMillis", _IntegerWithLengthBetween50And30000, &smithytraits.JSONName{Name: "timeoutInMillis"})
-
-	Integration_TlsConfig = Integration.AddMember("TlsConfig", TlsConfig, &smithytraits.JSONName{Name: "tlsConfig"})
-
-	___listOfIntegration_member = ___listOfIntegration.AddMember("member", Integration)
-
-	IntegrationResponse_ContentHandlingStrategy = IntegrationResponse.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	IntegrationResponse_IntegrationResponseId = IntegrationResponse.AddMember("IntegrationResponseId", _Id, &smithytraits.JSONName{Name: "integrationResponseId"})
-
-	IntegrationResponse_IntegrationResponseKey = IntegrationResponse.AddMember("IntegrationResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "integrationResponseKey"})
-
-	IntegrationResponse_ResponseParameters = IntegrationResponse.AddMember("ResponseParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	IntegrationResponse_ResponseTemplates = IntegrationResponse.AddMember("ResponseTemplates", _TemplateMap, &smithytraits.JSONName{Name: "responseTemplates"})
-
-	IntegrationResponse_TemplateSelectionExpression = IntegrationResponse.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	___listOfIntegrationResponse_member = ___listOfIntegrationResponse.AddMember("member", IntegrationResponse)
-
-	Model_ContentType = Model.AddMember("ContentType", _StringWithLengthBetween1And256, &smithytraits.JSONName{Name: "contentType"})
-
-	Model_Description = Model.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	Model_ModelId = Model.AddMember("ModelId", _Id, &smithytraits.JSONName{Name: "modelId"})
-
-	Model_Name = Model.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	Model_Schema = Model.AddMember("Schema", _StringWithLengthBetween0And32K, &smithytraits.JSONName{Name: "schema"})
-
-	___listOfModel_member = ___listOfModel.AddMember("member", Model)
-
-	PortalProductSummary_Description = PortalProductSummary.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	PortalProductSummary_DisplayName = PortalProductSummary.AddMember("DisplayName", ___stringMin1Max255, &smithytraits.JSONName{Name: "displayName"})
-
-	PortalProductSummary_LastModified = PortalProductSummary.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	PortalProductSummary_PortalProductArn = PortalProductSummary.AddMember("PortalProductArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalProductArn"})
-
-	PortalProductSummary_PortalProductId = PortalProductSummary.AddMember("PortalProductId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalProductId"})
-
-	PortalProductSummary_Tags = PortalProductSummary.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfPortalProductSummary_member = ___listOfPortalProductSummary.AddMember("member", PortalProductSummary)
-
-	CognitoConfig_AppClientId = CognitoConfig.AddMember("AppClientId", ___stringMin1Max256, &smithytraits.JSONName{Name: "appClientId"})
-
-	CognitoConfig_UserPoolArn = CognitoConfig.AddMember("UserPoolArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "userPoolArn"})
-
-	CognitoConfig_UserPoolDomain = CognitoConfig.AddMember("UserPoolDomain", ___stringMin20Max2048, &smithytraits.JSONName{Name: "userPoolDomain"})
-
-	Authorization_CognitoConfig = Authorization.AddMember("CognitoConfig", CognitoConfig, &smithytraits.JSONName{Name: "cognitoConfig"})
-
-	Authorization_None = Authorization.AddMember("None", None, &smithytraits.JSONName{Name: "none"})
-
-	EndpointConfigurationResponse_CertificateArn = EndpointConfigurationResponse.AddMember("CertificateArn", ___stringMin10Max2048, &smithytraits.JSONName{Name: "certificateArn"})
-
-	EndpointConfigurationResponse_DomainName = EndpointConfigurationResponse.AddMember("DomainName", ___stringMin3Max256, &smithytraits.JSONName{Name: "domainName"})
-
-	EndpointConfigurationResponse_PortalDefaultDomainName = EndpointConfigurationResponse.AddMember("PortalDefaultDomainName", ___stringMin3Max256, &smithytraits.JSONName{Name: "portalDefaultDomainName"})
-
-	EndpointConfigurationResponse_PortalDomainHostedZoneId = EndpointConfigurationResponse.AddMember("PortalDomainHostedZoneId", ___stringMin1Max64, &smithytraits.JSONName{Name: "portalDomainHostedZoneId"})
-
-	CustomColors_AccentColor = CustomColors.AddMember("AccentColor", ___stringMin1Max16, &smithytraits.JSONName{Name: "accentColor"})
-
-	CustomColors_BackgroundColor = CustomColors.AddMember("BackgroundColor", ___stringMin1Max16, &smithytraits.JSONName{Name: "backgroundColor"})
-
-	CustomColors_ErrorValidationColor = CustomColors.AddMember("ErrorValidationColor", ___stringMin1Max16, &smithytraits.JSONName{Name: "errorValidationColor"})
-
-	CustomColors_HeaderColor = CustomColors.AddMember("HeaderColor", ___stringMin1Max16, &smithytraits.JSONName{Name: "headerColor"})
-
-	CustomColors_NavigationColor = CustomColors.AddMember("NavigationColor", ___stringMin1Max16, &smithytraits.JSONName{Name: "navigationColor"})
-
-	CustomColors_TextColor = CustomColors.AddMember("TextColor", ___stringMin1Max16, &smithytraits.JSONName{Name: "textColor"})
-
-	PortalTheme_CustomColors = PortalTheme.AddMember("CustomColors", CustomColors, &smithytraits.JSONName{Name: "customColors"})
-
-	PortalTheme_LogoLastUploaded = PortalTheme.AddMember("LogoLastUploaded", ___timestampIso8601, &smithytraits.JSONName{Name: "logoLastUploaded"})
-
-	PortalContent_Description = PortalContent.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	PortalContent_DisplayName = PortalContent.AddMember("DisplayName", ___stringMin3Max255, &smithytraits.JSONName{Name: "displayName"})
-
-	PortalContent_Theme = PortalContent.AddMember("Theme", PortalTheme, &smithytraits.JSONName{Name: "theme"})
-
-	PreviewStatus_PREVIEW_IN_PROGRESS = PreviewStatus.AddMember("PREVIEW_IN_PROGRESS", smithyprelude.Unit)
-
-	PreviewStatus_PREVIEW_FAILED = PreviewStatus.AddMember("PREVIEW_FAILED", smithyprelude.Unit)
-
-	PreviewStatus_PREVIEW_READY = PreviewStatus.AddMember("PREVIEW_READY", smithyprelude.Unit)
-
-	StatusException_Exception = StatusException.AddMember("Exception", ___stringMin1Max256, &smithytraits.JSONName{Name: "exception"})
-
-	StatusException_Message = StatusException.AddMember("Message", ___stringMin1Max2048, &smithytraits.JSONName{Name: "message"})
-
-	Preview_PreviewStatus = Preview.AddMember("PreviewStatus", PreviewStatus, &smithytraits.JSONName{Name: "previewStatus"})
-
-	Preview_PreviewUrl = Preview.AddMember("PreviewUrl", ___string, &smithytraits.JSONName{Name: "previewUrl"})
-
-	Preview_StatusException = Preview.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	PublishStatus_PUBLISHED = PublishStatus.AddMember("PUBLISHED", smithyprelude.Unit)
-
-	PublishStatus_PUBLISH_IN_PROGRESS = PublishStatus.AddMember("PUBLISH_IN_PROGRESS", smithyprelude.Unit)
-
-	PublishStatus_PUBLISH_FAILED = PublishStatus.AddMember("PUBLISH_FAILED", smithyprelude.Unit)
-
-	PublishStatus_DISABLE_IN_PROGRESS = PublishStatus.AddMember("DISABLE_IN_PROGRESS", smithyprelude.Unit)
-
-	PublishStatus_DISABLE_FAILED = PublishStatus.AddMember("DISABLE_FAILED", smithyprelude.Unit)
-
-	PublishStatus_DISABLED = PublishStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	PortalSummary_Authorization = PortalSummary.AddMember("Authorization", Authorization, &smithytraits.JSONName{Name: "authorization"})
-
-	PortalSummary_EndpointConfiguration = PortalSummary.AddMember("EndpointConfiguration", EndpointConfigurationResponse, &smithytraits.JSONName{Name: "endpointConfiguration"})
-
-	PortalSummary_IncludedPortalProductArns = PortalSummary.AddMember("IncludedPortalProductArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "includedPortalProductArns"})
-
-	PortalSummary_LastModified = PortalSummary.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	PortalSummary_LastPublished = PortalSummary.AddMember("LastPublished", ___timestampIso8601, &smithytraits.JSONName{Name: "lastPublished"})
-
-	PortalSummary_LastPublishedDescription = PortalSummary.AddMember("LastPublishedDescription", ___stringMin0Max1024, &smithytraits.JSONName{Name: "lastPublishedDescription"})
-
-	PortalSummary_PortalArn = PortalSummary.AddMember("PortalArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalArn"})
-
-	PortalSummary_PortalContent = PortalSummary.AddMember("PortalContent", PortalContent, &smithytraits.JSONName{Name: "portalContent"})
-
-	PortalSummary_PortalId = PortalSummary.AddMember("PortalId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalId"})
-
-	PortalSummary_Preview = PortalSummary.AddMember("Preview", Preview, &smithytraits.JSONName{Name: "preview"})
-
-	PortalSummary_PublishStatus = PortalSummary.AddMember("PublishStatus", PublishStatus, &smithytraits.JSONName{Name: "publishStatus"})
-
-	PortalSummary_RumAppMonitorName = PortalSummary.AddMember("RumAppMonitorName", ___stringMin0Max255, &smithytraits.JSONName{Name: "rumAppMonitorName"})
-
-	PortalSummary_StatusException = PortalSummary.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	PortalSummary_Tags = PortalSummary.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfPortalSummary_member = ___listOfPortalSummary.AddMember("member", PortalSummary)
-
-	ProductPageSummaryNoBody_LastModified = ProductPageSummaryNoBody.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	ProductPageSummaryNoBody_PageTitle = ProductPageSummaryNoBody.AddMember("PageTitle", ___stringMin1Max255, &smithytraits.JSONName{Name: "pageTitle"})
-
-	ProductPageSummaryNoBody_ProductPageArn = ProductPageSummaryNoBody.AddMember("ProductPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productPageArn"})
-
-	ProductPageSummaryNoBody_ProductPageId = ProductPageSummaryNoBody.AddMember("ProductPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productPageId"})
-
-	___listOfProductPageSummaryNoBody_member = ___listOfProductPageSummaryNoBody.AddMember("member", ProductPageSummaryNoBody)
-
-	IdentifierParts_Method = IdentifierParts.AddMember("Method", ___stringMin1Max20, &smithytraits.JSONName{Name: "method"})
-
-	IdentifierParts_Path = IdentifierParts.AddMember("Path", ___stringMin1Max4096, &smithytraits.JSONName{Name: "path"})
-
-	IdentifierParts_RestApiId = IdentifierParts.AddMember("RestApiId", ___stringMin1Max50, &smithytraits.JSONName{Name: "restApiId"})
-
-	IdentifierParts_Stage = IdentifierParts.AddMember("Stage", ___stringMin1Max128, &smithytraits.JSONName{Name: "stage"})
-
-	RestEndpointIdentifier_IdentifierParts = RestEndpointIdentifier.AddMember("IdentifierParts", IdentifierParts, &smithytraits.JSONName{Name: "identifierParts"})
-
-	Status_AVAILABLE = Status.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	Status_IN_PROGRESS = Status.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	TryItState_ENABLED = TryItState.AddMember("ENABLED", smithyprelude.Unit)
-
-	TryItState_DISABLED = TryItState.AddMember("DISABLED", smithyprelude.Unit)
-
-	ProductRestEndpointPageSummaryNoBody_Endpoint = ProductRestEndpointPageSummaryNoBody.AddMember("Endpoint", ___stringMin1Max1024, &smithytraits.JSONName{Name: "endpoint"})
-
-	ProductRestEndpointPageSummaryNoBody_LastModified = ProductRestEndpointPageSummaryNoBody.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	ProductRestEndpointPageSummaryNoBody_OperationName = ProductRestEndpointPageSummaryNoBody.AddMember("OperationName", ___stringMin1Max255, &smithytraits.JSONName{Name: "operationName"})
-
-	ProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageArn = ProductRestEndpointPageSummaryNoBody.AddMember("ProductRestEndpointPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productRestEndpointPageArn"})
-
-	ProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageId = ProductRestEndpointPageSummaryNoBody.AddMember("ProductRestEndpointPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productRestEndpointPageId"})
-
-	ProductRestEndpointPageSummaryNoBody_RestEndpointIdentifier = ProductRestEndpointPageSummaryNoBody.AddMember("RestEndpointIdentifier", RestEndpointIdentifier, &smithytraits.JSONName{Name: "restEndpointIdentifier"})
-
-	ProductRestEndpointPageSummaryNoBody_Status = ProductRestEndpointPageSummaryNoBody.AddMember("Status", Status, &smithytraits.JSONName{Name: "status"})
-
-	ProductRestEndpointPageSummaryNoBody_StatusException = ProductRestEndpointPageSummaryNoBody.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	ProductRestEndpointPageSummaryNoBody_TryItState = ProductRestEndpointPageSummaryNoBody.AddMember("TryItState", TryItState, &smithytraits.JSONName{Name: "tryItState"})
-
-	___listOfProductRestEndpointPageSummaryNoBody_member = ___listOfProductRestEndpointPageSummaryNoBody.AddMember("member", ProductRestEndpointPageSummaryNoBody)
-
-	_AuthorizationScopes_member = _AuthorizationScopes.AddMember("member", _StringWithLengthBetween1And64)
-
-	AuthorizationType_NONE = AuthorizationType.AddMember("NONE", smithyprelude.Unit)
-
-	AuthorizationType_AWS_IAM = AuthorizationType.AddMember("AWS_IAM", smithyprelude.Unit)
-
-	AuthorizationType_CUSTOM = AuthorizationType.AddMember("CUSTOM", smithyprelude.Unit)
-
-	AuthorizationType_JWT = AuthorizationType.AddMember("JWT", smithyprelude.Unit)
-
-	_RouteModels_key = _RouteModels.AddMember("key", ___string)
-
-	_RouteModels_value = _RouteModels.AddMember("value", _StringWithLengthBetween1And128)
-
-	ParameterConstraints_Required = ParameterConstraints.AddMember("Required", ___boolean, &smithytraits.JSONName{Name: "required"})
-
-	_RouteParameters_key = _RouteParameters.AddMember("key", ___string)
-
-	_RouteParameters_value = _RouteParameters.AddMember("value", ParameterConstraints)
-
-	Route_ApiGatewayManaged = Route.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	Route_ApiKeyRequired = Route.AddMember("ApiKeyRequired", ___boolean, &smithytraits.JSONName{Name: "apiKeyRequired"})
-
-	Route_AuthorizationScopes = Route.AddMember("AuthorizationScopes", _AuthorizationScopes, &smithytraits.JSONName{Name: "authorizationScopes"})
-
-	Route_AuthorizationType = Route.AddMember("AuthorizationType", AuthorizationType, &smithytraits.JSONName{Name: "authorizationType"})
-
-	Route_AuthorizerId = Route.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	Route_ModelSelectionExpression = Route.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	Route_OperationName = Route.AddMember("OperationName", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "operationName"})
-
-	Route_RequestModels = Route.AddMember("RequestModels", _RouteModels, &smithytraits.JSONName{Name: "requestModels"})
-
-	Route_RequestParameters = Route.AddMember("RequestParameters", _RouteParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	Route_RouteId = Route.AddMember("RouteId", _Id, &smithytraits.JSONName{Name: "routeId"})
-
-	Route_RouteKey = Route.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	Route_RouteResponseSelectionExpression = Route.AddMember("RouteResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeResponseSelectionExpression"})
-
-	Route_Target = Route.AddMember("Target", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "target"})
-
-	___listOfRoute_member = ___listOfRoute.AddMember("member", Route)
-
-	RouteResponse_ModelSelectionExpression = RouteResponse.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	RouteResponse_ResponseModels = RouteResponse.AddMember("ResponseModels", _RouteModels, &smithytraits.JSONName{Name: "responseModels"})
-
-	RouteResponse_ResponseParameters = RouteResponse.AddMember("ResponseParameters", _RouteParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	RouteResponse_RouteResponseId = RouteResponse.AddMember("RouteResponseId", _Id, &smithytraits.JSONName{Name: "routeResponseId"})
-
-	RouteResponse_RouteResponseKey = RouteResponse.AddMember("RouteResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "routeResponseKey"})
-
-	___listOfRouteResponse_member = ___listOfRouteResponse.AddMember("member", RouteResponse)
-
-	RoutingRuleActionInvokeApi_ApiId = RoutingRuleActionInvokeApi.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	RoutingRuleActionInvokeApi_Stage = RoutingRuleActionInvokeApi.AddMember("Stage", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stage"})
-
-	RoutingRuleActionInvokeApi_StripBasePath = RoutingRuleActionInvokeApi.AddMember("StripBasePath", ___boolean, &smithytraits.JSONName{Name: "stripBasePath"})
-
-	RoutingRuleAction_InvokeApi = RoutingRuleAction.AddMember("InvokeApi", RoutingRuleActionInvokeApi, &smithytraits.JSONName{Name: "invokeApi"})
-
-	___listOfRoutingRuleAction_member = ___listOfRoutingRuleAction.AddMember("member", RoutingRuleAction)
-
-	___listOfSelectionKey_member = ___listOfSelectionKey.AddMember("member", _SelectionKey)
-
-	RoutingRuleMatchBasePaths_AnyOf = RoutingRuleMatchBasePaths.AddMember("AnyOf", ___listOfSelectionKey, &smithytraits.JSONName{Name: "anyOf"})
-
-	RoutingRuleMatchHeaderValue_Header = RoutingRuleMatchHeaderValue.AddMember("Header", _SelectionKey, &smithytraits.JSONName{Name: "header"})
-
-	RoutingRuleMatchHeaderValue_ValueGlob = RoutingRuleMatchHeaderValue.AddMember("ValueGlob", _SelectionExpression, &smithytraits.JSONName{Name: "valueGlob"})
-
-	___listOfRoutingRuleMatchHeaderValue_member = ___listOfRoutingRuleMatchHeaderValue.AddMember("member", RoutingRuleMatchHeaderValue)
-
-	RoutingRuleMatchHeaders_AnyOf = RoutingRuleMatchHeaders.AddMember("AnyOf", ___listOfRoutingRuleMatchHeaderValue, &smithytraits.JSONName{Name: "anyOf"})
-
-	RoutingRuleCondition_MatchBasePaths = RoutingRuleCondition.AddMember("MatchBasePaths", RoutingRuleMatchBasePaths, &smithytraits.JSONName{Name: "matchBasePaths"})
-
-	RoutingRuleCondition_MatchHeaders = RoutingRuleCondition.AddMember("MatchHeaders", RoutingRuleMatchHeaders, &smithytraits.JSONName{Name: "matchHeaders"})
-
-	___listOfRoutingRuleCondition_member = ___listOfRoutingRuleCondition.AddMember("member", RoutingRuleCondition)
-
-	RoutingRule_Actions = RoutingRule.AddMember("Actions", ___listOfRoutingRuleAction, &smithytraits.JSONName{Name: "actions"})
-
-	RoutingRule_Conditions = RoutingRule.AddMember("Conditions", ___listOfRoutingRuleCondition, &smithytraits.JSONName{Name: "conditions"})
-
-	RoutingRule_Priority = RoutingRule.AddMember("Priority", _RoutingRulePriority, &smithytraits.JSONName{Name: "priority"})
-
-	RoutingRule_RoutingRuleArn = RoutingRule.AddMember("RoutingRuleArn", _Arn, &smithytraits.JSONName{Name: "routingRuleArn"})
-
-	RoutingRule_RoutingRuleId = RoutingRule.AddMember("RoutingRuleId", _Id, &smithytraits.JSONName{Name: "routingRuleId"})
-
-	___listOfRoutingRule_member = ___listOfRoutingRule.AddMember("member", RoutingRule)
-
-	Section_ProductRestEndpointPageArns = Section.AddMember("ProductRestEndpointPageArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "productRestEndpointPageArns"})
-
-	Section_SectionName = Section.AddMember("SectionName", ___string, &smithytraits.JSONName{Name: "sectionName"})
-
-	___listOfSection_member = ___listOfSection.AddMember("member", Section)
-
-	AccessLogSettings_DestinationArn = AccessLogSettings.AddMember("DestinationArn", _Arn, &smithytraits.JSONName{Name: "destinationArn"})
-
-	AccessLogSettings_Format = AccessLogSettings.AddMember("Format", _StringWithLengthBetween1And1024, &smithytraits.JSONName{Name: "format"})
-
-	LoggingLevel_ERROR = LoggingLevel.AddMember("ERROR", smithyprelude.Unit)
-
-	LoggingLevel_INFO = LoggingLevel.AddMember("INFO", smithyprelude.Unit)
-
-	LoggingLevel_OFF = LoggingLevel.AddMember("OFF", smithyprelude.Unit)
-
-	RouteSettings_DataTraceEnabled = RouteSettings.AddMember("DataTraceEnabled", ___boolean, &smithytraits.JSONName{Name: "dataTraceEnabled"})
-
-	RouteSettings_DetailedMetricsEnabled = RouteSettings.AddMember("DetailedMetricsEnabled", ___boolean, &smithytraits.JSONName{Name: "detailedMetricsEnabled"})
-
-	RouteSettings_LoggingLevel = RouteSettings.AddMember("LoggingLevel", LoggingLevel, &smithytraits.JSONName{Name: "loggingLevel"})
-
-	RouteSettings_ThrottlingBurstLimit = RouteSettings.AddMember("ThrottlingBurstLimit", ___integer, &smithytraits.JSONName{Name: "throttlingBurstLimit"})
-
-	RouteSettings_ThrottlingRateLimit = RouteSettings.AddMember("ThrottlingRateLimit", ___double, &smithytraits.JSONName{Name: "throttlingRateLimit"})
-
-	_RouteSettingsMap_key = _RouteSettingsMap.AddMember("key", ___string)
-
-	_RouteSettingsMap_value = _RouteSettingsMap.AddMember("value", RouteSettings)
-
-	_StageVariablesMap_key = _StageVariablesMap.AddMember("key", ___string)
-
-	_StageVariablesMap_value = _StageVariablesMap.AddMember("value", _StringWithLengthBetween0And2048)
-
-	Stage_AccessLogSettings = Stage.AddMember("AccessLogSettings", AccessLogSettings, &smithytraits.JSONName{Name: "accessLogSettings"})
-
-	Stage_ApiGatewayManaged = Stage.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	Stage_AutoDeploy = Stage.AddMember("AutoDeploy", ___boolean, &smithytraits.JSONName{Name: "autoDeploy"})
-
-	Stage_ClientCertificateId = Stage.AddMember("ClientCertificateId", _Id, &smithytraits.JSONName{Name: "clientCertificateId"})
-
-	Stage_CreatedDate = Stage.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	Stage_DefaultRouteSettings = Stage.AddMember("DefaultRouteSettings", RouteSettings, &smithytraits.JSONName{Name: "defaultRouteSettings"})
-
-	Stage_DeploymentId = Stage.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	Stage_Description = Stage.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	Stage_LastDeploymentStatusMessage = Stage.AddMember("LastDeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "lastDeploymentStatusMessage"})
-
-	Stage_LastUpdatedDate = Stage.AddMember("LastUpdatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "lastUpdatedDate"})
-
-	Stage_RouteSettings = Stage.AddMember("RouteSettings", _RouteSettingsMap, &smithytraits.JSONName{Name: "routeSettings"})
-
-	Stage_StageName = Stage.AddMember("StageName", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stageName"})
-
-	Stage_StageVariables = Stage.AddMember("StageVariables", _StageVariablesMap, &smithytraits.JSONName{Name: "stageVariables"})
-
-	Stage_Tags = Stage.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	___listOfStage_member = ___listOfStage.AddMember("member", Stage)
-
-	_SecurityGroupIdList_member = _SecurityGroupIdList.AddMember("member", ___string)
-
-	_SubnetIdList_member = _SubnetIdList.AddMember("member", ___string)
-
-	VpcLinkStatus_PENDING = VpcLinkStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	VpcLinkStatus_AVAILABLE = VpcLinkStatus.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	VpcLinkStatus_DELETING = VpcLinkStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	VpcLinkStatus_FAILED = VpcLinkStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	VpcLinkStatus_INACTIVE = VpcLinkStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	VpcLinkVersion_V2 = VpcLinkVersion.AddMember("V2", smithyprelude.Unit)
-
-	VpcLink_CreatedDate = VpcLink.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	VpcLink_Name = VpcLink.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	VpcLink_SecurityGroupIds = VpcLink.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
-
-	VpcLink_SubnetIds = VpcLink.AddMember("SubnetIds", _SubnetIdList, &smithytraits.JSONName{Name: "subnetIds"})
-
-	VpcLink_Tags = VpcLink.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	VpcLink_VpcLinkId = VpcLink.AddMember("VpcLinkId", _Id, &smithytraits.JSONName{Name: "vpcLinkId"})
-
-	VpcLink_VpcLinkStatus = VpcLink.AddMember("VpcLinkStatus", VpcLinkStatus, &smithytraits.JSONName{Name: "vpcLinkStatus"})
-
-	VpcLink_VpcLinkStatusMessage = VpcLink.AddMember("VpcLinkStatusMessage", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "vpcLinkStatusMessage"})
-
-	VpcLink_VpcLinkVersion = VpcLink.AddMember("VpcLinkVersion", VpcLinkVersion, &smithytraits.JSONName{Name: "vpcLinkVersion"})
-
-	___listOfVpcLink_member = ___listOfVpcLink.AddMember("member", VpcLink)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ACMManaged_CertificateArn = ACMManaged.AddMember("CertificateArn", ___stringMin10Max2048, &smithytraits.JSONName{Name: "certificateArn"})
-
-	ACMManaged_DomainName = ACMManaged.AddMember("DomainName", ___stringMin3Max256, &smithytraits.JSONName{Name: "domainName"})
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	ConflictException_Message = ConflictException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	DisplayContent_Body = DisplayContent.AddMember("Body", ___stringMin1Max32768, &smithytraits.JSONName{Name: "body"})
-
-	DisplayContent_Title = DisplayContent.AddMember("Title", ___stringMin1Max255, &smithytraits.JSONName{Name: "title"})
-
-	DisplayContentOverrides_Body = DisplayContentOverrides.AddMember("Body", ___stringMin1Max32768, &smithytraits.JSONName{Name: "body"})
-
-	DisplayContentOverrides_Endpoint = DisplayContentOverrides.AddMember("Endpoint", ___stringMin1Max1024, &smithytraits.JSONName{Name: "endpoint"})
-
-	DisplayContentOverrides_OperationName = DisplayContentOverrides.AddMember("OperationName", ___stringMin1Max255, &smithytraits.JSONName{Name: "operationName"})
-
-	DisplayOrder_Contents = DisplayOrder.AddMember("Contents", ___listOfSection, &smithytraits.JSONName{Name: "contents"})
-
-	DisplayOrder_OverviewPageArn = DisplayOrder.AddMember("OverviewPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "overviewPageArn"})
-
-	DisplayOrder_ProductPageArns = DisplayOrder.AddMember("ProductPageArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "productPageArns"})
-
-	EndpointConfigurationRequest_AcmManaged = EndpointConfigurationRequest.AddMember("AcmManaged", ACMManaged, &smithytraits.JSONName{Name: "acmManaged"})
-
-	EndpointConfigurationRequest_None = EndpointConfigurationRequest.AddMember("None", None, &smithytraits.JSONName{Name: "none"})
-
-	EndpointDisplayContent_None = EndpointDisplayContent.AddMember("None", None, &smithytraits.JSONName{Name: "none"})
-
-	EndpointDisplayContent_Overrides = EndpointDisplayContent.AddMember("Overrides", DisplayContentOverrides, &smithytraits.JSONName{Name: "overrides"})
-
-	EndpointDisplayContentResponse_Body = EndpointDisplayContentResponse.AddMember("Body", ___stringMin1Max32768, &smithytraits.JSONName{Name: "body"})
-
-	EndpointDisplayContentResponse_Endpoint = EndpointDisplayContentResponse.AddMember("Endpoint", ___stringMin1Max1024, &smithytraits.JSONName{Name: "endpoint"})
-
-	EndpointDisplayContentResponse_OperationName = EndpointDisplayContentResponse.AddMember("OperationName", ___stringMin1Max255, &smithytraits.JSONName{Name: "operationName"})
-
-	MutualTlsAuthenticationInput_TruststoreUri = MutualTlsAuthenticationInput.AddMember("TruststoreUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "truststoreUri"})
-
-	MutualTlsAuthenticationInput_TruststoreVersion = MutualTlsAuthenticationInput.AddMember("TruststoreVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "truststoreVersion"})
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	NotFoundException_ResourceType = NotFoundException.AddMember("ResourceType", ___string, &smithytraits.JSONName{Name: "resourceType"})
-
-	TlsConfigInput_ServerNameToVerify = TlsConfigInput.AddMember("ServerNameToVerify", _StringWithLengthBetween1And512, &smithytraits.JSONName{Name: "serverNameToVerify"})
-
-	TooManyRequestsException_LimitType = TooManyRequestsException.AddMember("LimitType", ___string, &smithytraits.JSONName{Name: "limitType"})
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", ___string, &smithytraits.JSONName{Name: "message"})
-
-	CreateApiRequest_ApiKeySelectionExpression = CreateApiRequest.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	CreateApiRequest_CorsConfiguration = CreateApiRequest.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	CreateApiRequest_CredentialsArn = CreateApiRequest.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	CreateApiRequest_Description = CreateApiRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateApiRequest_DisableSchemaValidation = CreateApiRequest.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	CreateApiRequest_DisableExecuteApiEndpoint = CreateApiRequest.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	CreateApiRequest_IpAddressType = CreateApiRequest.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	CreateApiRequest_Name = CreateApiRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateApiRequest_ProtocolType = CreateApiRequest.AddMember("ProtocolType", ProtocolType, &smithytraits.JSONName{Name: "protocolType"})
-
-	CreateApiRequest_RouteKey = CreateApiRequest.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	CreateApiRequest_RouteSelectionExpression = CreateApiRequest.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	CreateApiRequest_Tags = CreateApiRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateApiRequest_Target = CreateApiRequest.AddMember("Target", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "target"})
-
-	CreateApiRequest_Version = CreateApiRequest.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	CreateApiMappingRequest_ApiId = CreateApiMappingRequest.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	CreateApiMappingRequest_ApiMappingKey = CreateApiMappingRequest.AddMember("ApiMappingKey", _SelectionKey, &smithytraits.JSONName{Name: "apiMappingKey"})
-
-	CreateApiMappingRequest_DomainName = CreateApiMappingRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateApiMappingRequest_Stage = CreateApiMappingRequest.AddMember("Stage", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stage"})
-
-	CreateApiMappingResponse_ApiId = CreateApiMappingResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	CreateApiMappingResponse_ApiMappingId = CreateApiMappingResponse.AddMember("ApiMappingId", _Id, &smithytraits.JSONName{Name: "apiMappingId"})
-
-	CreateApiMappingResponse_ApiMappingKey = CreateApiMappingResponse.AddMember("ApiMappingKey", _SelectionKey, &smithytraits.JSONName{Name: "apiMappingKey"})
-
-	CreateApiMappingResponse_Stage = CreateApiMappingResponse.AddMember("Stage", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stage"})
-
-	CreateApiResponse_ApiEndpoint = CreateApiResponse.AddMember("ApiEndpoint", ___string, &smithytraits.JSONName{Name: "apiEndpoint"})
-
-	CreateApiResponse_ApiGatewayManaged = CreateApiResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	CreateApiResponse_ApiId = CreateApiResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	CreateApiResponse_ApiKeySelectionExpression = CreateApiResponse.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	CreateApiResponse_CorsConfiguration = CreateApiResponse.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	CreateApiResponse_CreatedDate = CreateApiResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	CreateApiResponse_Description = CreateApiResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateApiResponse_DisableSchemaValidation = CreateApiResponse.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	CreateApiResponse_DisableExecuteApiEndpoint = CreateApiResponse.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	CreateApiResponse_ImportInfo = CreateApiResponse.AddMember("ImportInfo", ___listOf__string, &smithytraits.JSONName{Name: "importInfo"})
-
-	CreateApiResponse_IpAddressType = CreateApiResponse.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	CreateApiResponse_Name = CreateApiResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateApiResponse_ProtocolType = CreateApiResponse.AddMember("ProtocolType", ProtocolType, &smithytraits.JSONName{Name: "protocolType"})
-
-	CreateApiResponse_RouteSelectionExpression = CreateApiResponse.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	CreateApiResponse_Tags = CreateApiResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateApiResponse_Version = CreateApiResponse.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	CreateApiResponse_Warnings = CreateApiResponse.AddMember("Warnings", ___listOf__string, &smithytraits.JSONName{Name: "warnings"})
-
-	CreateAuthorizerRequest_ApiId = CreateAuthorizerRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateAuthorizerRequest_AuthorizerCredentialsArn = CreateAuthorizerRequest.AddMember("AuthorizerCredentialsArn", _Arn, &smithytraits.JSONName{Name: "authorizerCredentialsArn"})
-
-	CreateAuthorizerRequest_AuthorizerPayloadFormatVersion = CreateAuthorizerRequest.AddMember("AuthorizerPayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "authorizerPayloadFormatVersion"})
-
-	CreateAuthorizerRequest_AuthorizerResultTtlInSeconds = CreateAuthorizerRequest.AddMember("AuthorizerResultTtlInSeconds", _IntegerWithLengthBetween0And3600, &smithytraits.JSONName{Name: "authorizerResultTtlInSeconds"})
-
-	CreateAuthorizerRequest_AuthorizerType = CreateAuthorizerRequest.AddMember("AuthorizerType", AuthorizerType, &smithytraits.JSONName{Name: "authorizerType"})
-
-	CreateAuthorizerRequest_AuthorizerUri = CreateAuthorizerRequest.AddMember("AuthorizerUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "authorizerUri"})
-
-	CreateAuthorizerRequest_EnableSimpleResponses = CreateAuthorizerRequest.AddMember("EnableSimpleResponses", ___boolean, &smithytraits.JSONName{Name: "enableSimpleResponses"})
-
-	CreateAuthorizerRequest_IdentitySource = CreateAuthorizerRequest.AddMember("IdentitySource", _IdentitySourceList, &smithytraits.JSONName{Name: "identitySource"})
-
-	CreateAuthorizerRequest_IdentityValidationExpression = CreateAuthorizerRequest.AddMember("IdentityValidationExpression", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "identityValidationExpression"})
-
-	CreateAuthorizerRequest_JwtConfiguration = CreateAuthorizerRequest.AddMember("JwtConfiguration", JWTConfiguration, &smithytraits.JSONName{Name: "jwtConfiguration"})
-
-	CreateAuthorizerRequest_Name = CreateAuthorizerRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateAuthorizerResponse_AuthorizerCredentialsArn = CreateAuthorizerResponse.AddMember("AuthorizerCredentialsArn", _Arn, &smithytraits.JSONName{Name: "authorizerCredentialsArn"})
-
-	CreateAuthorizerResponse_AuthorizerId = CreateAuthorizerResponse.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	CreateAuthorizerResponse_AuthorizerPayloadFormatVersion = CreateAuthorizerResponse.AddMember("AuthorizerPayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "authorizerPayloadFormatVersion"})
-
-	CreateAuthorizerResponse_AuthorizerResultTtlInSeconds = CreateAuthorizerResponse.AddMember("AuthorizerResultTtlInSeconds", _IntegerWithLengthBetween0And3600, &smithytraits.JSONName{Name: "authorizerResultTtlInSeconds"})
-
-	CreateAuthorizerResponse_AuthorizerType = CreateAuthorizerResponse.AddMember("AuthorizerType", AuthorizerType, &smithytraits.JSONName{Name: "authorizerType"})
-
-	CreateAuthorizerResponse_AuthorizerUri = CreateAuthorizerResponse.AddMember("AuthorizerUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "authorizerUri"})
-
-	CreateAuthorizerResponse_EnableSimpleResponses = CreateAuthorizerResponse.AddMember("EnableSimpleResponses", ___boolean, &smithytraits.JSONName{Name: "enableSimpleResponses"})
-
-	CreateAuthorizerResponse_IdentitySource = CreateAuthorizerResponse.AddMember("IdentitySource", _IdentitySourceList, &smithytraits.JSONName{Name: "identitySource"})
-
-	CreateAuthorizerResponse_IdentityValidationExpression = CreateAuthorizerResponse.AddMember("IdentityValidationExpression", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "identityValidationExpression"})
-
-	CreateAuthorizerResponse_JwtConfiguration = CreateAuthorizerResponse.AddMember("JwtConfiguration", JWTConfiguration, &smithytraits.JSONName{Name: "jwtConfiguration"})
-
-	CreateAuthorizerResponse_Name = CreateAuthorizerResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateDeploymentRequest_ApiId = CreateDeploymentRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateDeploymentRequest_Description = CreateDeploymentRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateDeploymentRequest_StageName = CreateDeploymentRequest.AddMember("StageName", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stageName"})
-
-	CreateDeploymentResponse_AutoDeployed = CreateDeploymentResponse.AddMember("AutoDeployed", ___boolean, &smithytraits.JSONName{Name: "autoDeployed"})
-
-	CreateDeploymentResponse_CreatedDate = CreateDeploymentResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	CreateDeploymentResponse_DeploymentId = CreateDeploymentResponse.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	CreateDeploymentResponse_DeploymentStatus = CreateDeploymentResponse.AddMember("DeploymentStatus", DeploymentStatus, &smithytraits.JSONName{Name: "deploymentStatus"})
-
-	CreateDeploymentResponse_DeploymentStatusMessage = CreateDeploymentResponse.AddMember("DeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "deploymentStatusMessage"})
-
-	CreateDeploymentResponse_Description = CreateDeploymentResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateDomainNameRequest_DomainName = CreateDomainNameRequest.AddMember("DomainName", _StringWithLengthBetween1And512, &smithytraits.JSONName{Name: "domainName"})
-
-	CreateDomainNameRequest_DomainNameConfigurations = CreateDomainNameRequest.AddMember("DomainNameConfigurations", _DomainNameConfigurations, &smithytraits.JSONName{Name: "domainNameConfigurations"})
-
-	CreateDomainNameRequest_MutualTlsAuthentication = CreateDomainNameRequest.AddMember("MutualTlsAuthentication", MutualTlsAuthenticationInput, &smithytraits.JSONName{Name: "mutualTlsAuthentication"})
-
-	CreateDomainNameRequest_RoutingMode = CreateDomainNameRequest.AddMember("RoutingMode", RoutingMode, &smithytraits.JSONName{Name: "routingMode"})
-
-	CreateDomainNameRequest_Tags = CreateDomainNameRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateDomainNameResponse_ApiMappingSelectionExpression = CreateDomainNameResponse.AddMember("ApiMappingSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiMappingSelectionExpression"})
-
-	CreateDomainNameResponse_DomainName = CreateDomainNameResponse.AddMember("DomainName", _StringWithLengthBetween1And512, &smithytraits.JSONName{Name: "domainName"})
-
-	CreateDomainNameResponse_DomainNameArn = CreateDomainNameResponse.AddMember("DomainNameArn", _Arn, &smithytraits.JSONName{Name: "domainNameArn"})
-
-	CreateDomainNameResponse_DomainNameConfigurations = CreateDomainNameResponse.AddMember("DomainNameConfigurations", _DomainNameConfigurations, &smithytraits.JSONName{Name: "domainNameConfigurations"})
-
-	CreateDomainNameResponse_MutualTlsAuthentication = CreateDomainNameResponse.AddMember("MutualTlsAuthentication", MutualTlsAuthentication, &smithytraits.JSONName{Name: "mutualTlsAuthentication"})
-
-	CreateDomainNameResponse_RoutingMode = CreateDomainNameResponse.AddMember("RoutingMode", RoutingMode, &smithytraits.JSONName{Name: "routingMode"})
-
-	CreateDomainNameResponse_Tags = CreateDomainNameResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateIntegrationRequest_ApiId = CreateIntegrationRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateIntegrationRequest_ConnectionId = CreateIntegrationRequest.AddMember("ConnectionId", _StringWithLengthBetween1And1024, &smithytraits.JSONName{Name: "connectionId"})
-
-	CreateIntegrationRequest_ConnectionType = CreateIntegrationRequest.AddMember("ConnectionType", ConnectionType, &smithytraits.JSONName{Name: "connectionType"})
-
-	CreateIntegrationRequest_ContentHandlingStrategy = CreateIntegrationRequest.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	CreateIntegrationRequest_CredentialsArn = CreateIntegrationRequest.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	CreateIntegrationRequest_Description = CreateIntegrationRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateIntegrationRequest_IntegrationMethod = CreateIntegrationRequest.AddMember("IntegrationMethod", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "integrationMethod"})
-
-	CreateIntegrationRequest_IntegrationSubtype = CreateIntegrationRequest.AddMember("IntegrationSubtype", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "integrationSubtype"})
-
-	CreateIntegrationRequest_IntegrationType = CreateIntegrationRequest.AddMember("IntegrationType", IntegrationType, &smithytraits.JSONName{Name: "integrationType"})
-
-	CreateIntegrationRequest_IntegrationUri = CreateIntegrationRequest.AddMember("IntegrationUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "integrationUri"})
-
-	CreateIntegrationRequest_PassthroughBehavior = CreateIntegrationRequest.AddMember("PassthroughBehavior", PassthroughBehavior, &smithytraits.JSONName{Name: "passthroughBehavior"})
-
-	CreateIntegrationRequest_PayloadFormatVersion = CreateIntegrationRequest.AddMember("PayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "payloadFormatVersion"})
-
-	CreateIntegrationRequest_RequestParameters = CreateIntegrationRequest.AddMember("RequestParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	CreateIntegrationRequest_RequestTemplates = CreateIntegrationRequest.AddMember("RequestTemplates", _TemplateMap, &smithytraits.JSONName{Name: "requestTemplates"})
-
-	CreateIntegrationRequest_ResponseParameters = CreateIntegrationRequest.AddMember("ResponseParameters", _ResponseParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	CreateIntegrationRequest_TemplateSelectionExpression = CreateIntegrationRequest.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	CreateIntegrationRequest_TimeoutInMillis = CreateIntegrationRequest.AddMember("TimeoutInMillis", _IntegerWithLengthBetween50And30000, &smithytraits.JSONName{Name: "timeoutInMillis"})
-
-	CreateIntegrationRequest_TlsConfig = CreateIntegrationRequest.AddMember("TlsConfig", TlsConfigInput, &smithytraits.JSONName{Name: "tlsConfig"})
-
-	CreateIntegrationResult_ApiGatewayManaged = CreateIntegrationResult.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	CreateIntegrationResult_ConnectionId = CreateIntegrationResult.AddMember("ConnectionId", _StringWithLengthBetween1And1024, &smithytraits.JSONName{Name: "connectionId"})
-
-	CreateIntegrationResult_ConnectionType = CreateIntegrationResult.AddMember("ConnectionType", ConnectionType, &smithytraits.JSONName{Name: "connectionType"})
-
-	CreateIntegrationResult_ContentHandlingStrategy = CreateIntegrationResult.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	CreateIntegrationResult_CredentialsArn = CreateIntegrationResult.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	CreateIntegrationResult_Description = CreateIntegrationResult.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateIntegrationResult_IntegrationId = CreateIntegrationResult.AddMember("IntegrationId", _Id, &smithytraits.JSONName{Name: "integrationId"})
-
-	CreateIntegrationResult_IntegrationMethod = CreateIntegrationResult.AddMember("IntegrationMethod", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "integrationMethod"})
-
-	CreateIntegrationResult_IntegrationResponseSelectionExpression = CreateIntegrationResult.AddMember("IntegrationResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "integrationResponseSelectionExpression"})
-
-	CreateIntegrationResult_IntegrationSubtype = CreateIntegrationResult.AddMember("IntegrationSubtype", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "integrationSubtype"})
-
-	CreateIntegrationResult_IntegrationType = CreateIntegrationResult.AddMember("IntegrationType", IntegrationType, &smithytraits.JSONName{Name: "integrationType"})
-
-	CreateIntegrationResult_IntegrationUri = CreateIntegrationResult.AddMember("IntegrationUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "integrationUri"})
-
-	CreateIntegrationResult_PassthroughBehavior = CreateIntegrationResult.AddMember("PassthroughBehavior", PassthroughBehavior, &smithytraits.JSONName{Name: "passthroughBehavior"})
-
-	CreateIntegrationResult_PayloadFormatVersion = CreateIntegrationResult.AddMember("PayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "payloadFormatVersion"})
-
-	CreateIntegrationResult_RequestParameters = CreateIntegrationResult.AddMember("RequestParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	CreateIntegrationResult_RequestTemplates = CreateIntegrationResult.AddMember("RequestTemplates", _TemplateMap, &smithytraits.JSONName{Name: "requestTemplates"})
-
-	CreateIntegrationResult_ResponseParameters = CreateIntegrationResult.AddMember("ResponseParameters", _ResponseParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	CreateIntegrationResult_TemplateSelectionExpression = CreateIntegrationResult.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	CreateIntegrationResult_TimeoutInMillis = CreateIntegrationResult.AddMember("TimeoutInMillis", _IntegerWithLengthBetween50And30000, &smithytraits.JSONName{Name: "timeoutInMillis"})
-
-	CreateIntegrationResult_TlsConfig = CreateIntegrationResult.AddMember("TlsConfig", TlsConfig, &smithytraits.JSONName{Name: "tlsConfig"})
-
-	CreateIntegrationResponseRequest_ApiId = CreateIntegrationResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateIntegrationResponseRequest_ContentHandlingStrategy = CreateIntegrationResponseRequest.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	CreateIntegrationResponseRequest_IntegrationId = CreateIntegrationResponseRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateIntegrationResponseRequest_IntegrationResponseKey = CreateIntegrationResponseRequest.AddMember("IntegrationResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "integrationResponseKey"})
-
-	CreateIntegrationResponseRequest_ResponseParameters = CreateIntegrationResponseRequest.AddMember("ResponseParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	CreateIntegrationResponseRequest_ResponseTemplates = CreateIntegrationResponseRequest.AddMember("ResponseTemplates", _TemplateMap, &smithytraits.JSONName{Name: "responseTemplates"})
-
-	CreateIntegrationResponseRequest_TemplateSelectionExpression = CreateIntegrationResponseRequest.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	CreateIntegrationResponseResponse_ContentHandlingStrategy = CreateIntegrationResponseResponse.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	CreateIntegrationResponseResponse_IntegrationResponseId = CreateIntegrationResponseResponse.AddMember("IntegrationResponseId", _Id, &smithytraits.JSONName{Name: "integrationResponseId"})
-
-	CreateIntegrationResponseResponse_IntegrationResponseKey = CreateIntegrationResponseResponse.AddMember("IntegrationResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "integrationResponseKey"})
-
-	CreateIntegrationResponseResponse_ResponseParameters = CreateIntegrationResponseResponse.AddMember("ResponseParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	CreateIntegrationResponseResponse_ResponseTemplates = CreateIntegrationResponseResponse.AddMember("ResponseTemplates", _TemplateMap, &smithytraits.JSONName{Name: "responseTemplates"})
-
-	CreateIntegrationResponseResponse_TemplateSelectionExpression = CreateIntegrationResponseResponse.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	CreateModelRequest_ApiId = CreateModelRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateModelRequest_ContentType = CreateModelRequest.AddMember("ContentType", _StringWithLengthBetween1And256, &smithytraits.JSONName{Name: "contentType"})
-
-	CreateModelRequest_Description = CreateModelRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateModelRequest_Name = CreateModelRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateModelRequest_Schema = CreateModelRequest.AddMember("Schema", _StringWithLengthBetween0And32K, &smithytraits.JSONName{Name: "schema"})
-
-	CreateModelResponse_ContentType = CreateModelResponse.AddMember("ContentType", _StringWithLengthBetween1And256, &smithytraits.JSONName{Name: "contentType"})
-
-	CreateModelResponse_Description = CreateModelResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateModelResponse_ModelId = CreateModelResponse.AddMember("ModelId", _Id, &smithytraits.JSONName{Name: "modelId"})
-
-	CreateModelResponse_Name = CreateModelResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateModelResponse_Schema = CreateModelResponse.AddMember("Schema", _StringWithLengthBetween0And32K, &smithytraits.JSONName{Name: "schema"})
-
-	CreatePortalRequest_Authorization = CreatePortalRequest.AddMember("Authorization", Authorization, &smithytraits.JSONName{Name: "authorization"})
-
-	CreatePortalRequest_EndpointConfiguration = CreatePortalRequest.AddMember("EndpointConfiguration", EndpointConfigurationRequest, &smithytraits.JSONName{Name: "endpointConfiguration"})
-
-	CreatePortalRequest_IncludedPortalProductArns = CreatePortalRequest.AddMember("IncludedPortalProductArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "includedPortalProductArns"})
-
-	CreatePortalRequest_LogoUri = CreatePortalRequest.AddMember("LogoUri", ___stringMin0Max1092, &smithytraits.JSONName{Name: "logoUri"})
-
-	CreatePortalRequest_PortalContent = CreatePortalRequest.AddMember("PortalContent", PortalContent, &smithytraits.JSONName{Name: "portalContent"})
-
-	CreatePortalRequest_RumAppMonitorName = CreatePortalRequest.AddMember("RumAppMonitorName", ___stringMin0Max255, &smithytraits.JSONName{Name: "rumAppMonitorName"})
-
-	CreatePortalRequest_Tags = CreatePortalRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreatePortalResponse_Authorization = CreatePortalResponse.AddMember("Authorization", Authorization, &smithytraits.JSONName{Name: "authorization"})
-
-	CreatePortalResponse_EndpointConfiguration = CreatePortalResponse.AddMember("EndpointConfiguration", EndpointConfigurationResponse, &smithytraits.JSONName{Name: "endpointConfiguration"})
-
-	CreatePortalResponse_IncludedPortalProductArns = CreatePortalResponse.AddMember("IncludedPortalProductArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "includedPortalProductArns"})
-
-	CreatePortalResponse_LastModified = CreatePortalResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	CreatePortalResponse_LastPublished = CreatePortalResponse.AddMember("LastPublished", ___timestampIso8601, &smithytraits.JSONName{Name: "lastPublished"})
-
-	CreatePortalResponse_LastPublishedDescription = CreatePortalResponse.AddMember("LastPublishedDescription", ___stringMin0Max1024, &smithytraits.JSONName{Name: "lastPublishedDescription"})
-
-	CreatePortalResponse_PortalArn = CreatePortalResponse.AddMember("PortalArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalArn"})
-
-	CreatePortalResponse_PortalContent = CreatePortalResponse.AddMember("PortalContent", PortalContent, &smithytraits.JSONName{Name: "portalContent"})
-
-	CreatePortalResponse_PortalId = CreatePortalResponse.AddMember("PortalId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalId"})
-
-	CreatePortalResponse_PublishStatus = CreatePortalResponse.AddMember("PublishStatus", PublishStatus, &smithytraits.JSONName{Name: "publishStatus"})
-
-	CreatePortalResponse_RumAppMonitorName = CreatePortalResponse.AddMember("RumAppMonitorName", ___stringMin0Max255, &smithytraits.JSONName{Name: "rumAppMonitorName"})
-
-	CreatePortalResponse_StatusException = CreatePortalResponse.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	CreatePortalResponse_Tags = CreatePortalResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreatePortalProductRequest_Description = CreatePortalProductRequest.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	CreatePortalProductRequest_DisplayName = CreatePortalProductRequest.AddMember("DisplayName", ___stringMin1Max255, &smithytraits.JSONName{Name: "displayName"})
-
-	CreatePortalProductRequest_Tags = CreatePortalProductRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreatePortalProductResponse_Description = CreatePortalProductResponse.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	CreatePortalProductResponse_DisplayName = CreatePortalProductResponse.AddMember("DisplayName", ___stringMin1Max255, &smithytraits.JSONName{Name: "displayName"})
-
-	CreatePortalProductResponse_DisplayOrder = CreatePortalProductResponse.AddMember("DisplayOrder", DisplayOrder, &smithytraits.JSONName{Name: "displayOrder"})
-
-	CreatePortalProductResponse_LastModified = CreatePortalProductResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	CreatePortalProductResponse_PortalProductArn = CreatePortalProductResponse.AddMember("PortalProductArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalProductArn"})
-
-	CreatePortalProductResponse_PortalProductId = CreatePortalProductResponse.AddMember("PortalProductId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalProductId"})
-
-	CreatePortalProductResponse_Tags = CreatePortalProductResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateProductPageRequest_DisplayContent = CreateProductPageRequest.AddMember("DisplayContent", DisplayContent, &smithytraits.JSONName{Name: "displayContent"})
-
-	CreateProductPageRequest_PortalProductId = CreateProductPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateProductPageResponse_DisplayContent = CreateProductPageResponse.AddMember("DisplayContent", DisplayContent, &smithytraits.JSONName{Name: "displayContent"})
-
-	CreateProductPageResponse_LastModified = CreateProductPageResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	CreateProductPageResponse_ProductPageArn = CreateProductPageResponse.AddMember("ProductPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productPageArn"})
-
-	CreateProductPageResponse_ProductPageId = CreateProductPageResponse.AddMember("ProductPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productPageId"})
-
-	CreateProductRestEndpointPageRequest_DisplayContent = CreateProductRestEndpointPageRequest.AddMember("DisplayContent", EndpointDisplayContent, &smithytraits.JSONName{Name: "displayContent"})
-
-	CreateProductRestEndpointPageRequest_PortalProductId = CreateProductRestEndpointPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateProductRestEndpointPageRequest_RestEndpointIdentifier = CreateProductRestEndpointPageRequest.AddMember("RestEndpointIdentifier", RestEndpointIdentifier, &smithytraits.JSONName{Name: "restEndpointIdentifier"})
-
-	CreateProductRestEndpointPageRequest_TryItState = CreateProductRestEndpointPageRequest.AddMember("TryItState", TryItState, &smithytraits.JSONName{Name: "tryItState"})
-
-	CreateProductRestEndpointPageResponse_DisplayContent = CreateProductRestEndpointPageResponse.AddMember("DisplayContent", EndpointDisplayContentResponse, &smithytraits.JSONName{Name: "displayContent"})
-
-	CreateProductRestEndpointPageResponse_LastModified = CreateProductRestEndpointPageResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	CreateProductRestEndpointPageResponse_ProductRestEndpointPageArn = CreateProductRestEndpointPageResponse.AddMember("ProductRestEndpointPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productRestEndpointPageArn"})
-
-	CreateProductRestEndpointPageResponse_ProductRestEndpointPageId = CreateProductRestEndpointPageResponse.AddMember("ProductRestEndpointPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productRestEndpointPageId"})
-
-	CreateProductRestEndpointPageResponse_RestEndpointIdentifier = CreateProductRestEndpointPageResponse.AddMember("RestEndpointIdentifier", RestEndpointIdentifier, &smithytraits.JSONName{Name: "restEndpointIdentifier"})
-
-	CreateProductRestEndpointPageResponse_Status = CreateProductRestEndpointPageResponse.AddMember("Status", Status, &smithytraits.JSONName{Name: "status"})
-
-	CreateProductRestEndpointPageResponse_StatusException = CreateProductRestEndpointPageResponse.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	CreateProductRestEndpointPageResponse_TryItState = CreateProductRestEndpointPageResponse.AddMember("TryItState", TryItState, &smithytraits.JSONName{Name: "tryItState"})
-
-	CreateRouteRequest_ApiId = CreateRouteRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateRouteRequest_ApiKeyRequired = CreateRouteRequest.AddMember("ApiKeyRequired", ___boolean, &smithytraits.JSONName{Name: "apiKeyRequired"})
-
-	CreateRouteRequest_AuthorizationScopes = CreateRouteRequest.AddMember("AuthorizationScopes", _AuthorizationScopes, &smithytraits.JSONName{Name: "authorizationScopes"})
-
-	CreateRouteRequest_AuthorizationType = CreateRouteRequest.AddMember("AuthorizationType", AuthorizationType, &smithytraits.JSONName{Name: "authorizationType"})
-
-	CreateRouteRequest_AuthorizerId = CreateRouteRequest.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	CreateRouteRequest_ModelSelectionExpression = CreateRouteRequest.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	CreateRouteRequest_OperationName = CreateRouteRequest.AddMember("OperationName", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "operationName"})
-
-	CreateRouteRequest_RequestModels = CreateRouteRequest.AddMember("RequestModels", _RouteModels, &smithytraits.JSONName{Name: "requestModels"})
-
-	CreateRouteRequest_RequestParameters = CreateRouteRequest.AddMember("RequestParameters", _RouteParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	CreateRouteRequest_RouteKey = CreateRouteRequest.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	CreateRouteRequest_RouteResponseSelectionExpression = CreateRouteRequest.AddMember("RouteResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeResponseSelectionExpression"})
-
-	CreateRouteRequest_Target = CreateRouteRequest.AddMember("Target", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "target"})
-
-	CreateRouteResult_ApiGatewayManaged = CreateRouteResult.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	CreateRouteResult_ApiKeyRequired = CreateRouteResult.AddMember("ApiKeyRequired", ___boolean, &smithytraits.JSONName{Name: "apiKeyRequired"})
-
-	CreateRouteResult_AuthorizationScopes = CreateRouteResult.AddMember("AuthorizationScopes", _AuthorizationScopes, &smithytraits.JSONName{Name: "authorizationScopes"})
-
-	CreateRouteResult_AuthorizationType = CreateRouteResult.AddMember("AuthorizationType", AuthorizationType, &smithytraits.JSONName{Name: "authorizationType"})
-
-	CreateRouteResult_AuthorizerId = CreateRouteResult.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	CreateRouteResult_ModelSelectionExpression = CreateRouteResult.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	CreateRouteResult_OperationName = CreateRouteResult.AddMember("OperationName", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "operationName"})
-
-	CreateRouteResult_RequestModels = CreateRouteResult.AddMember("RequestModels", _RouteModels, &smithytraits.JSONName{Name: "requestModels"})
-
-	CreateRouteResult_RequestParameters = CreateRouteResult.AddMember("RequestParameters", _RouteParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	CreateRouteResult_RouteId = CreateRouteResult.AddMember("RouteId", _Id, &smithytraits.JSONName{Name: "routeId"})
-
-	CreateRouteResult_RouteKey = CreateRouteResult.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	CreateRouteResult_RouteResponseSelectionExpression = CreateRouteResult.AddMember("RouteResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeResponseSelectionExpression"})
-
-	CreateRouteResult_Target = CreateRouteResult.AddMember("Target", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "target"})
-
-	CreateRouteResponseRequest_ApiId = CreateRouteResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateRouteResponseRequest_ModelSelectionExpression = CreateRouteResponseRequest.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	CreateRouteResponseRequest_ResponseModels = CreateRouteResponseRequest.AddMember("ResponseModels", _RouteModels, &smithytraits.JSONName{Name: "responseModels"})
-
-	CreateRouteResponseRequest_ResponseParameters = CreateRouteResponseRequest.AddMember("ResponseParameters", _RouteParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	CreateRouteResponseRequest_RouteId = CreateRouteResponseRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateRouteResponseRequest_RouteResponseKey = CreateRouteResponseRequest.AddMember("RouteResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "routeResponseKey"})
-
-	CreateRouteResponseResponse_ModelSelectionExpression = CreateRouteResponseResponse.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	CreateRouteResponseResponse_ResponseModels = CreateRouteResponseResponse.AddMember("ResponseModels", _RouteModels, &smithytraits.JSONName{Name: "responseModels"})
-
-	CreateRouteResponseResponse_ResponseParameters = CreateRouteResponseResponse.AddMember("ResponseParameters", _RouteParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	CreateRouteResponseResponse_RouteResponseId = CreateRouteResponseResponse.AddMember("RouteResponseId", _Id, &smithytraits.JSONName{Name: "routeResponseId"})
-
-	CreateRouteResponseResponse_RouteResponseKey = CreateRouteResponseResponse.AddMember("RouteResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "routeResponseKey"})
-
-	CreateRoutingRuleRequest_Actions = CreateRoutingRuleRequest.AddMember("Actions", ___listOfRoutingRuleAction, &smithytraits.JSONName{Name: "actions"})
-
-	CreateRoutingRuleRequest_Conditions = CreateRoutingRuleRequest.AddMember("Conditions", ___listOfRoutingRuleCondition, &smithytraits.JSONName{Name: "conditions"})
-
-	CreateRoutingRuleRequest_DomainName = CreateRoutingRuleRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	CreateRoutingRuleRequest_DomainNameId = CreateRoutingRuleRequest.AddMember("DomainNameId", ___string, &smithytraits.HTTPQuery{Name: "domainNameId"})
-
-	CreateRoutingRuleRequest_Priority = CreateRoutingRuleRequest.AddMember("Priority", _RoutingRulePriority, &smithytraits.JSONName{Name: "priority"})
-
-	CreateRoutingRuleResponse_Actions = CreateRoutingRuleResponse.AddMember("Actions", ___listOfRoutingRuleAction, &smithytraits.JSONName{Name: "actions"})
-
-	CreateRoutingRuleResponse_Conditions = CreateRoutingRuleResponse.AddMember("Conditions", ___listOfRoutingRuleCondition, &smithytraits.JSONName{Name: "conditions"})
-
-	CreateRoutingRuleResponse_Priority = CreateRoutingRuleResponse.AddMember("Priority", _RoutingRulePriority, &smithytraits.JSONName{Name: "priority"})
-
-	CreateRoutingRuleResponse_RoutingRuleArn = CreateRoutingRuleResponse.AddMember("RoutingRuleArn", _Arn, &smithytraits.JSONName{Name: "routingRuleArn"})
-
-	CreateRoutingRuleResponse_RoutingRuleId = CreateRoutingRuleResponse.AddMember("RoutingRuleId", _Id, &smithytraits.JSONName{Name: "routingRuleId"})
-
-	CreateStageRequest_AccessLogSettings = CreateStageRequest.AddMember("AccessLogSettings", AccessLogSettings, &smithytraits.JSONName{Name: "accessLogSettings"})
-
-	CreateStageRequest_ApiId = CreateStageRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	CreateStageRequest_AutoDeploy = CreateStageRequest.AddMember("AutoDeploy", ___boolean, &smithytraits.JSONName{Name: "autoDeploy"})
-
-	CreateStageRequest_ClientCertificateId = CreateStageRequest.AddMember("ClientCertificateId", _Id, &smithytraits.JSONName{Name: "clientCertificateId"})
-
-	CreateStageRequest_DefaultRouteSettings = CreateStageRequest.AddMember("DefaultRouteSettings", RouteSettings, &smithytraits.JSONName{Name: "defaultRouteSettings"})
-
-	CreateStageRequest_DeploymentId = CreateStageRequest.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	CreateStageRequest_Description = CreateStageRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateStageRequest_RouteSettings = CreateStageRequest.AddMember("RouteSettings", _RouteSettingsMap, &smithytraits.JSONName{Name: "routeSettings"})
-
-	CreateStageRequest_StageName = CreateStageRequest.AddMember("StageName", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stageName"})
-
-	CreateStageRequest_StageVariables = CreateStageRequest.AddMember("StageVariables", _StageVariablesMap, &smithytraits.JSONName{Name: "stageVariables"})
-
-	CreateStageRequest_Tags = CreateStageRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateStageResponse_AccessLogSettings = CreateStageResponse.AddMember("AccessLogSettings", AccessLogSettings, &smithytraits.JSONName{Name: "accessLogSettings"})
-
-	CreateStageResponse_ApiGatewayManaged = CreateStageResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	CreateStageResponse_AutoDeploy = CreateStageResponse.AddMember("AutoDeploy", ___boolean, &smithytraits.JSONName{Name: "autoDeploy"})
-
-	CreateStageResponse_ClientCertificateId = CreateStageResponse.AddMember("ClientCertificateId", _Id, &smithytraits.JSONName{Name: "clientCertificateId"})
-
-	CreateStageResponse_CreatedDate = CreateStageResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	CreateStageResponse_DefaultRouteSettings = CreateStageResponse.AddMember("DefaultRouteSettings", RouteSettings, &smithytraits.JSONName{Name: "defaultRouteSettings"})
-
-	CreateStageResponse_DeploymentId = CreateStageResponse.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	CreateStageResponse_Description = CreateStageResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	CreateStageResponse_LastDeploymentStatusMessage = CreateStageResponse.AddMember("LastDeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "lastDeploymentStatusMessage"})
-
-	CreateStageResponse_LastUpdatedDate = CreateStageResponse.AddMember("LastUpdatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "lastUpdatedDate"})
-
-	CreateStageResponse_RouteSettings = CreateStageResponse.AddMember("RouteSettings", _RouteSettingsMap, &smithytraits.JSONName{Name: "routeSettings"})
-
-	CreateStageResponse_StageName = CreateStageResponse.AddMember("StageName", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stageName"})
-
-	CreateStageResponse_StageVariables = CreateStageResponse.AddMember("StageVariables", _StageVariablesMap, &smithytraits.JSONName{Name: "stageVariables"})
-
-	CreateStageResponse_Tags = CreateStageResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateVpcLinkRequest_Name = CreateVpcLinkRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateVpcLinkRequest_SecurityGroupIds = CreateVpcLinkRequest.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
-
-	CreateVpcLinkRequest_SubnetIds = CreateVpcLinkRequest.AddMember("SubnetIds", _SubnetIdList, &smithytraits.JSONName{Name: "subnetIds"})
-
-	CreateVpcLinkRequest_Tags = CreateVpcLinkRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateVpcLinkResponse_CreatedDate = CreateVpcLinkResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	CreateVpcLinkResponse_Name = CreateVpcLinkResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	CreateVpcLinkResponse_SecurityGroupIds = CreateVpcLinkResponse.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
-
-	CreateVpcLinkResponse_SubnetIds = CreateVpcLinkResponse.AddMember("SubnetIds", _SubnetIdList, &smithytraits.JSONName{Name: "subnetIds"})
-
-	CreateVpcLinkResponse_Tags = CreateVpcLinkResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	CreateVpcLinkResponse_VpcLinkId = CreateVpcLinkResponse.AddMember("VpcLinkId", _Id, &smithytraits.JSONName{Name: "vpcLinkId"})
-
-	CreateVpcLinkResponse_VpcLinkStatus = CreateVpcLinkResponse.AddMember("VpcLinkStatus", VpcLinkStatus, &smithytraits.JSONName{Name: "vpcLinkStatus"})
-
-	CreateVpcLinkResponse_VpcLinkStatusMessage = CreateVpcLinkResponse.AddMember("VpcLinkStatusMessage", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "vpcLinkStatusMessage"})
-
-	CreateVpcLinkResponse_VpcLinkVersion = CreateVpcLinkResponse.AddMember("VpcLinkVersion", VpcLinkVersion, &smithytraits.JSONName{Name: "vpcLinkVersion"})
-
-	DeleteAccessLogSettingsRequest_ApiId = DeleteAccessLogSettingsRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteAccessLogSettingsRequest_StageName = DeleteAccessLogSettingsRequest.AddMember("StageName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteApiRequest_ApiId = DeleteApiRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteApiMappingRequest_ApiMappingId = DeleteApiMappingRequest.AddMember("ApiMappingId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteApiMappingRequest_DomainName = DeleteApiMappingRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteAuthorizerRequest_ApiId = DeleteAuthorizerRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteAuthorizerRequest_AuthorizerId = DeleteAuthorizerRequest.AddMember("AuthorizerId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteCorsConfigurationRequest_ApiId = DeleteCorsConfigurationRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteDeploymentRequest_ApiId = DeleteDeploymentRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteDeploymentRequest_DeploymentId = DeleteDeploymentRequest.AddMember("DeploymentId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteDomainNameRequest_DomainName = DeleteDomainNameRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteIntegrationRequest_ApiId = DeleteIntegrationRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteIntegrationRequest_IntegrationId = DeleteIntegrationRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteIntegrationResponseRequest_ApiId = DeleteIntegrationResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteIntegrationResponseRequest_IntegrationId = DeleteIntegrationResponseRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteIntegrationResponseRequest_IntegrationResponseId = DeleteIntegrationResponseRequest.AddMember("IntegrationResponseId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteModelRequest_ApiId = DeleteModelRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteModelRequest_ModelId = DeleteModelRequest.AddMember("ModelId", ___string, &smithytraits.HTTPLabel{})
-
-	DeletePortalRequest_PortalId = DeletePortalRequest.AddMember("PortalId", ___string, &smithytraits.HTTPLabel{})
-
-	DeletePortalProductRequest_PortalProductId = DeletePortalProductRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	DeletePortalProductSharingPolicyRequest_PortalProductId = DeletePortalProductSharingPolicyRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteProductPageRequest_PortalProductId = DeleteProductPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteProductPageRequest_ProductPageId = DeleteProductPageRequest.AddMember("ProductPageId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteProductRestEndpointPageRequest_PortalProductId = DeleteProductRestEndpointPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteProductRestEndpointPageRequest_ProductRestEndpointPageId = DeleteProductRestEndpointPageRequest.AddMember("ProductRestEndpointPageId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteRequest_ApiId = DeleteRouteRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteRequest_RouteId = DeleteRouteRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteRequestParameterRequest_ApiId = DeleteRouteRequestParameterRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteRequestParameterRequest_RequestParameterKey = DeleteRouteRequestParameterRequest.AddMember("RequestParameterKey", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteRequestParameterRequest_RouteId = DeleteRouteRequestParameterRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteResponseRequest_ApiId = DeleteRouteResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteResponseRequest_RouteId = DeleteRouteResponseRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteResponseRequest_RouteResponseId = DeleteRouteResponseRequest.AddMember("RouteResponseId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteSettingsRequest_ApiId = DeleteRouteSettingsRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteSettingsRequest_RouteKey = DeleteRouteSettingsRequest.AddMember("RouteKey", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRouteSettingsRequest_StageName = DeleteRouteSettingsRequest.AddMember("StageName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRoutingRuleRequest_DomainName = DeleteRoutingRuleRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteRoutingRuleRequest_DomainNameId = DeleteRoutingRuleRequest.AddMember("DomainNameId", ___string, &smithytraits.HTTPQuery{Name: "domainNameId"})
-
-	DeleteRoutingRuleRequest_RoutingRuleId = DeleteRoutingRuleRequest.AddMember("RoutingRuleId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteStageRequest_ApiId = DeleteStageRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteStageRequest_StageName = DeleteStageRequest.AddMember("StageName", ___string, &smithytraits.HTTPLabel{})
-
-	DeleteVpcLinkRequest_VpcLinkId = DeleteVpcLinkRequest.AddMember("VpcLinkId", ___string, &smithytraits.HTTPLabel{})
-
-	DisablePortalRequest_PortalId = DisablePortalRequest.AddMember("PortalId", ___string, &smithytraits.HTTPLabel{})
-
-	ExportApiRequest_ApiId = ExportApiRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	ExportApiRequest_ExportVersion = ExportApiRequest.AddMember("ExportVersion", ___string, &smithytraits.HTTPQuery{Name: "exportVersion"})
-
-	ExportApiRequest_IncludeExtensions = ExportApiRequest.AddMember("IncludeExtensions", ___boolean, &smithytraits.HTTPQuery{Name: "includeExtensions"})
-
-	ExportApiRequest_OutputType = ExportApiRequest.AddMember("OutputType", ___string, &smithytraits.HTTPQuery{Name: "outputType"})
-
-	ExportApiRequest_Specification = ExportApiRequest.AddMember("Specification", ___string, &smithytraits.HTTPLabel{})
-
-	ExportApiRequest_StageName = ExportApiRequest.AddMember("StageName", ___string, &smithytraits.HTTPQuery{Name: "stageName"})
-
-	ExportApiResponse_body = ExportApiResponse.AddMember("body", _ExportedApi, &smithytraits.HTTPPayload{})
-
-	GetApiRequest_ApiId = GetApiRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetApiMappingRequest_ApiMappingId = GetApiMappingRequest.AddMember("ApiMappingId", ___string, &smithytraits.HTTPLabel{})
-
-	GetApiMappingRequest_DomainName = GetApiMappingRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	GetApiMappingResponse_ApiId = GetApiMappingResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	GetApiMappingResponse_ApiMappingId = GetApiMappingResponse.AddMember("ApiMappingId", _Id, &smithytraits.JSONName{Name: "apiMappingId"})
-
-	GetApiMappingResponse_ApiMappingKey = GetApiMappingResponse.AddMember("ApiMappingKey", _SelectionKey, &smithytraits.JSONName{Name: "apiMappingKey"})
-
-	GetApiMappingResponse_Stage = GetApiMappingResponse.AddMember("Stage", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stage"})
-
-	GetApiMappingsRequest_DomainName = GetApiMappingsRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	GetApiMappingsRequest_MaxResults = GetApiMappingsRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetApiMappingsRequest_NextToken = GetApiMappingsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetApiMappingsResponse_Items = GetApiMappingsResponse.AddMember("Items", ___listOfApiMapping, &smithytraits.JSONName{Name: "items"})
-
-	GetApiMappingsResponse_NextToken = GetApiMappingsResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetApiResponse_ApiEndpoint = GetApiResponse.AddMember("ApiEndpoint", ___string, &smithytraits.JSONName{Name: "apiEndpoint"})
-
-	GetApiResponse_ApiGatewayManaged = GetApiResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	GetApiResponse_ApiId = GetApiResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	GetApiResponse_ApiKeySelectionExpression = GetApiResponse.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	GetApiResponse_CorsConfiguration = GetApiResponse.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	GetApiResponse_CreatedDate = GetApiResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	GetApiResponse_Description = GetApiResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	GetApiResponse_DisableSchemaValidation = GetApiResponse.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	GetApiResponse_DisableExecuteApiEndpoint = GetApiResponse.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	GetApiResponse_ImportInfo = GetApiResponse.AddMember("ImportInfo", ___listOf__string, &smithytraits.JSONName{Name: "importInfo"})
-
-	GetApiResponse_IpAddressType = GetApiResponse.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	GetApiResponse_Name = GetApiResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	GetApiResponse_ProtocolType = GetApiResponse.AddMember("ProtocolType", ProtocolType, &smithytraits.JSONName{Name: "protocolType"})
-
-	GetApiResponse_RouteSelectionExpression = GetApiResponse.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	GetApiResponse_Tags = GetApiResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetApiResponse_Version = GetApiResponse.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	GetApiResponse_Warnings = GetApiResponse.AddMember("Warnings", ___listOf__string, &smithytraits.JSONName{Name: "warnings"})
-
-	GetApisRequest_MaxResults = GetApisRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetApisRequest_NextToken = GetApisRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetApisResponse_Items = GetApisResponse.AddMember("Items", ___listOfApi, &smithytraits.JSONName{Name: "items"})
-
-	GetApisResponse_NextToken = GetApisResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetAuthorizerRequest_ApiId = GetAuthorizerRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetAuthorizerRequest_AuthorizerId = GetAuthorizerRequest.AddMember("AuthorizerId", ___string, &smithytraits.HTTPLabel{})
-
-	GetAuthorizerResponse_AuthorizerCredentialsArn = GetAuthorizerResponse.AddMember("AuthorizerCredentialsArn", _Arn, &smithytraits.JSONName{Name: "authorizerCredentialsArn"})
-
-	GetAuthorizerResponse_AuthorizerId = GetAuthorizerResponse.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	GetAuthorizerResponse_AuthorizerPayloadFormatVersion = GetAuthorizerResponse.AddMember("AuthorizerPayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "authorizerPayloadFormatVersion"})
-
-	GetAuthorizerResponse_AuthorizerResultTtlInSeconds = GetAuthorizerResponse.AddMember("AuthorizerResultTtlInSeconds", _IntegerWithLengthBetween0And3600, &smithytraits.JSONName{Name: "authorizerResultTtlInSeconds"})
-
-	GetAuthorizerResponse_AuthorizerType = GetAuthorizerResponse.AddMember("AuthorizerType", AuthorizerType, &smithytraits.JSONName{Name: "authorizerType"})
-
-	GetAuthorizerResponse_AuthorizerUri = GetAuthorizerResponse.AddMember("AuthorizerUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "authorizerUri"})
-
-	GetAuthorizerResponse_EnableSimpleResponses = GetAuthorizerResponse.AddMember("EnableSimpleResponses", ___boolean, &smithytraits.JSONName{Name: "enableSimpleResponses"})
-
-	GetAuthorizerResponse_IdentitySource = GetAuthorizerResponse.AddMember("IdentitySource", _IdentitySourceList, &smithytraits.JSONName{Name: "identitySource"})
-
-	GetAuthorizerResponse_IdentityValidationExpression = GetAuthorizerResponse.AddMember("IdentityValidationExpression", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "identityValidationExpression"})
-
-	GetAuthorizerResponse_JwtConfiguration = GetAuthorizerResponse.AddMember("JwtConfiguration", JWTConfiguration, &smithytraits.JSONName{Name: "jwtConfiguration"})
-
-	GetAuthorizerResponse_Name = GetAuthorizerResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	GetAuthorizersRequest_ApiId = GetAuthorizersRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetAuthorizersRequest_MaxResults = GetAuthorizersRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetAuthorizersRequest_NextToken = GetAuthorizersRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetAuthorizersResponse_Items = GetAuthorizersResponse.AddMember("Items", ___listOfAuthorizer, &smithytraits.JSONName{Name: "items"})
-
-	GetAuthorizersResponse_NextToken = GetAuthorizersResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetDeploymentRequest_ApiId = GetDeploymentRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetDeploymentRequest_DeploymentId = GetDeploymentRequest.AddMember("DeploymentId", ___string, &smithytraits.HTTPLabel{})
-
-	GetDeploymentResponse_AutoDeployed = GetDeploymentResponse.AddMember("AutoDeployed", ___boolean, &smithytraits.JSONName{Name: "autoDeployed"})
-
-	GetDeploymentResponse_CreatedDate = GetDeploymentResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	GetDeploymentResponse_DeploymentId = GetDeploymentResponse.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	GetDeploymentResponse_DeploymentStatus = GetDeploymentResponse.AddMember("DeploymentStatus", DeploymentStatus, &smithytraits.JSONName{Name: "deploymentStatus"})
-
-	GetDeploymentResponse_DeploymentStatusMessage = GetDeploymentResponse.AddMember("DeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "deploymentStatusMessage"})
-
-	GetDeploymentResponse_Description = GetDeploymentResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	GetDeploymentsRequest_ApiId = GetDeploymentsRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetDeploymentsRequest_MaxResults = GetDeploymentsRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetDeploymentsRequest_NextToken = GetDeploymentsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetDeploymentsResponse_Items = GetDeploymentsResponse.AddMember("Items", ___listOfDeployment, &smithytraits.JSONName{Name: "items"})
-
-	GetDeploymentsResponse_NextToken = GetDeploymentsResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetDomainNameRequest_DomainName = GetDomainNameRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	GetDomainNameResponse_ApiMappingSelectionExpression = GetDomainNameResponse.AddMember("ApiMappingSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiMappingSelectionExpression"})
-
-	GetDomainNameResponse_DomainName = GetDomainNameResponse.AddMember("DomainName", _StringWithLengthBetween1And512, &smithytraits.JSONName{Name: "domainName"})
-
-	GetDomainNameResponse_DomainNameArn = GetDomainNameResponse.AddMember("DomainNameArn", _Arn, &smithytraits.JSONName{Name: "domainNameArn"})
-
-	GetDomainNameResponse_DomainNameConfigurations = GetDomainNameResponse.AddMember("DomainNameConfigurations", _DomainNameConfigurations, &smithytraits.JSONName{Name: "domainNameConfigurations"})
-
-	GetDomainNameResponse_MutualTlsAuthentication = GetDomainNameResponse.AddMember("MutualTlsAuthentication", MutualTlsAuthentication, &smithytraits.JSONName{Name: "mutualTlsAuthentication"})
-
-	GetDomainNameResponse_RoutingMode = GetDomainNameResponse.AddMember("RoutingMode", RoutingMode, &smithytraits.JSONName{Name: "routingMode"})
-
-	GetDomainNameResponse_Tags = GetDomainNameResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetDomainNamesRequest_MaxResults = GetDomainNamesRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetDomainNamesRequest_NextToken = GetDomainNamesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetDomainNamesResponse_Items = GetDomainNamesResponse.AddMember("Items", ___listOfDomainName, &smithytraits.JSONName{Name: "items"})
-
-	GetDomainNamesResponse_NextToken = GetDomainNamesResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetIntegrationRequest_ApiId = GetIntegrationRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationRequest_IntegrationId = GetIntegrationRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationResult_ApiGatewayManaged = GetIntegrationResult.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	GetIntegrationResult_ConnectionId = GetIntegrationResult.AddMember("ConnectionId", _StringWithLengthBetween1And1024, &smithytraits.JSONName{Name: "connectionId"})
-
-	GetIntegrationResult_ConnectionType = GetIntegrationResult.AddMember("ConnectionType", ConnectionType, &smithytraits.JSONName{Name: "connectionType"})
-
-	GetIntegrationResult_ContentHandlingStrategy = GetIntegrationResult.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	GetIntegrationResult_CredentialsArn = GetIntegrationResult.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	GetIntegrationResult_Description = GetIntegrationResult.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	GetIntegrationResult_IntegrationId = GetIntegrationResult.AddMember("IntegrationId", _Id, &smithytraits.JSONName{Name: "integrationId"})
-
-	GetIntegrationResult_IntegrationMethod = GetIntegrationResult.AddMember("IntegrationMethod", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "integrationMethod"})
-
-	GetIntegrationResult_IntegrationResponseSelectionExpression = GetIntegrationResult.AddMember("IntegrationResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "integrationResponseSelectionExpression"})
-
-	GetIntegrationResult_IntegrationSubtype = GetIntegrationResult.AddMember("IntegrationSubtype", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "integrationSubtype"})
-
-	GetIntegrationResult_IntegrationType = GetIntegrationResult.AddMember("IntegrationType", IntegrationType, &smithytraits.JSONName{Name: "integrationType"})
-
-	GetIntegrationResult_IntegrationUri = GetIntegrationResult.AddMember("IntegrationUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "integrationUri"})
-
-	GetIntegrationResult_PassthroughBehavior = GetIntegrationResult.AddMember("PassthroughBehavior", PassthroughBehavior, &smithytraits.JSONName{Name: "passthroughBehavior"})
-
-	GetIntegrationResult_PayloadFormatVersion = GetIntegrationResult.AddMember("PayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "payloadFormatVersion"})
-
-	GetIntegrationResult_RequestParameters = GetIntegrationResult.AddMember("RequestParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	GetIntegrationResult_RequestTemplates = GetIntegrationResult.AddMember("RequestTemplates", _TemplateMap, &smithytraits.JSONName{Name: "requestTemplates"})
-
-	GetIntegrationResult_ResponseParameters = GetIntegrationResult.AddMember("ResponseParameters", _ResponseParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	GetIntegrationResult_TemplateSelectionExpression = GetIntegrationResult.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	GetIntegrationResult_TimeoutInMillis = GetIntegrationResult.AddMember("TimeoutInMillis", _IntegerWithLengthBetween50And30000, &smithytraits.JSONName{Name: "timeoutInMillis"})
-
-	GetIntegrationResult_TlsConfig = GetIntegrationResult.AddMember("TlsConfig", TlsConfig, &smithytraits.JSONName{Name: "tlsConfig"})
-
-	GetIntegrationResponseRequest_ApiId = GetIntegrationResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationResponseRequest_IntegrationId = GetIntegrationResponseRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationResponseRequest_IntegrationResponseId = GetIntegrationResponseRequest.AddMember("IntegrationResponseId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationResponseResponse_ContentHandlingStrategy = GetIntegrationResponseResponse.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	GetIntegrationResponseResponse_IntegrationResponseId = GetIntegrationResponseResponse.AddMember("IntegrationResponseId", _Id, &smithytraits.JSONName{Name: "integrationResponseId"})
-
-	GetIntegrationResponseResponse_IntegrationResponseKey = GetIntegrationResponseResponse.AddMember("IntegrationResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "integrationResponseKey"})
-
-	GetIntegrationResponseResponse_ResponseParameters = GetIntegrationResponseResponse.AddMember("ResponseParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	GetIntegrationResponseResponse_ResponseTemplates = GetIntegrationResponseResponse.AddMember("ResponseTemplates", _TemplateMap, &smithytraits.JSONName{Name: "responseTemplates"})
-
-	GetIntegrationResponseResponse_TemplateSelectionExpression = GetIntegrationResponseResponse.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	GetIntegrationResponsesRequest_ApiId = GetIntegrationResponsesRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationResponsesRequest_IntegrationId = GetIntegrationResponsesRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationResponsesRequest_MaxResults = GetIntegrationResponsesRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetIntegrationResponsesRequest_NextToken = GetIntegrationResponsesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetIntegrationResponsesResponse_Items = GetIntegrationResponsesResponse.AddMember("Items", ___listOfIntegrationResponse, &smithytraits.JSONName{Name: "items"})
-
-	GetIntegrationResponsesResponse_NextToken = GetIntegrationResponsesResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetIntegrationsRequest_ApiId = GetIntegrationsRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetIntegrationsRequest_MaxResults = GetIntegrationsRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetIntegrationsRequest_NextToken = GetIntegrationsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetIntegrationsResponse_Items = GetIntegrationsResponse.AddMember("Items", ___listOfIntegration, &smithytraits.JSONName{Name: "items"})
-
-	GetIntegrationsResponse_NextToken = GetIntegrationsResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetModelRequest_ApiId = GetModelRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetModelRequest_ModelId = GetModelRequest.AddMember("ModelId", ___string, &smithytraits.HTTPLabel{})
-
-	GetModelResponse_ContentType = GetModelResponse.AddMember("ContentType", _StringWithLengthBetween1And256, &smithytraits.JSONName{Name: "contentType"})
-
-	GetModelResponse_Description = GetModelResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	GetModelResponse_ModelId = GetModelResponse.AddMember("ModelId", _Id, &smithytraits.JSONName{Name: "modelId"})
-
-	GetModelResponse_Name = GetModelResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	GetModelResponse_Schema = GetModelResponse.AddMember("Schema", _StringWithLengthBetween0And32K, &smithytraits.JSONName{Name: "schema"})
-
-	GetModelsRequest_ApiId = GetModelsRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetModelsRequest_MaxResults = GetModelsRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetModelsRequest_NextToken = GetModelsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetModelsResponse_Items = GetModelsResponse.AddMember("Items", ___listOfModel, &smithytraits.JSONName{Name: "items"})
-
-	GetModelsResponse_NextToken = GetModelsResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetModelTemplateRequest_ApiId = GetModelTemplateRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetModelTemplateRequest_ModelId = GetModelTemplateRequest.AddMember("ModelId", ___string, &smithytraits.HTTPLabel{})
-
-	GetModelTemplateResponse_Value = GetModelTemplateResponse.AddMember("Value", ___string, &smithytraits.JSONName{Name: "value"})
-
-	GetPortalRequest_PortalId = GetPortalRequest.AddMember("PortalId", ___string, &smithytraits.HTTPLabel{})
-
-	GetPortalResponse_Authorization = GetPortalResponse.AddMember("Authorization", Authorization, &smithytraits.JSONName{Name: "authorization"})
-
-	GetPortalResponse_EndpointConfiguration = GetPortalResponse.AddMember("EndpointConfiguration", EndpointConfigurationResponse, &smithytraits.JSONName{Name: "endpointConfiguration"})
-
-	GetPortalResponse_IncludedPortalProductArns = GetPortalResponse.AddMember("IncludedPortalProductArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "includedPortalProductArns"})
-
-	GetPortalResponse_LastModified = GetPortalResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	GetPortalResponse_LastPublished = GetPortalResponse.AddMember("LastPublished", ___timestampIso8601, &smithytraits.JSONName{Name: "lastPublished"})
-
-	GetPortalResponse_LastPublishedDescription = GetPortalResponse.AddMember("LastPublishedDescription", ___stringMin0Max1024, &smithytraits.JSONName{Name: "lastPublishedDescription"})
-
-	GetPortalResponse_PortalArn = GetPortalResponse.AddMember("PortalArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalArn"})
-
-	GetPortalResponse_PortalContent = GetPortalResponse.AddMember("PortalContent", PortalContent, &smithytraits.JSONName{Name: "portalContent"})
-
-	GetPortalResponse_PortalId = GetPortalResponse.AddMember("PortalId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalId"})
-
-	GetPortalResponse_Preview = GetPortalResponse.AddMember("Preview", Preview, &smithytraits.JSONName{Name: "preview"})
-
-	GetPortalResponse_PublishStatus = GetPortalResponse.AddMember("PublishStatus", PublishStatus, &smithytraits.JSONName{Name: "publishStatus"})
-
-	GetPortalResponse_RumAppMonitorName = GetPortalResponse.AddMember("RumAppMonitorName", ___stringMin0Max255, &smithytraits.JSONName{Name: "rumAppMonitorName"})
-
-	GetPortalResponse_StatusException = GetPortalResponse.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	GetPortalResponse_Tags = GetPortalResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetPortalProductRequest_PortalProductId = GetPortalProductRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	GetPortalProductRequest_ResourceOwnerAccountId = GetPortalProductRequest.AddMember("ResourceOwnerAccountId", ___string, &smithytraits.HTTPQuery{Name: "resourceOwnerAccountId"})
-
-	GetPortalProductResponse_Description = GetPortalProductResponse.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	GetPortalProductResponse_DisplayName = GetPortalProductResponse.AddMember("DisplayName", ___stringMin1Max255, &smithytraits.JSONName{Name: "displayName"})
-
-	GetPortalProductResponse_DisplayOrder = GetPortalProductResponse.AddMember("DisplayOrder", DisplayOrder, &smithytraits.JSONName{Name: "displayOrder"})
-
-	GetPortalProductResponse_LastModified = GetPortalProductResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	GetPortalProductResponse_PortalProductArn = GetPortalProductResponse.AddMember("PortalProductArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalProductArn"})
-
-	GetPortalProductResponse_PortalProductId = GetPortalProductResponse.AddMember("PortalProductId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalProductId"})
-
-	GetPortalProductResponse_Tags = GetPortalProductResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetPortalProductSharingPolicyRequest_PortalProductId = GetPortalProductSharingPolicyRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	GetPortalProductSharingPolicyResponse_PolicyDocument = GetPortalProductSharingPolicyResponse.AddMember("PolicyDocument", ___stringMin1Max307200, &smithytraits.JSONName{Name: "policyDocument"})
-
-	GetPortalProductSharingPolicyResponse_PortalProductId = GetPortalProductSharingPolicyResponse.AddMember("PortalProductId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalProductId"})
-
-	GetProductPageRequest_PortalProductId = GetProductPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	GetProductPageRequest_ProductPageId = GetProductPageRequest.AddMember("ProductPageId", ___string, &smithytraits.HTTPLabel{})
-
-	GetProductPageRequest_ResourceOwnerAccountId = GetProductPageRequest.AddMember("ResourceOwnerAccountId", ___string, &smithytraits.HTTPQuery{Name: "resourceOwnerAccountId"})
-
-	GetProductPageResponse_DisplayContent = GetProductPageResponse.AddMember("DisplayContent", DisplayContent, &smithytraits.JSONName{Name: "displayContent"})
-
-	GetProductPageResponse_LastModified = GetProductPageResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	GetProductPageResponse_ProductPageArn = GetProductPageResponse.AddMember("ProductPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productPageArn"})
-
-	GetProductPageResponse_ProductPageId = GetProductPageResponse.AddMember("ProductPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productPageId"})
-
-	GetProductRestEndpointPageRequest_IncludeRawDisplayContent = GetProductRestEndpointPageRequest.AddMember("IncludeRawDisplayContent", ___string, &smithytraits.HTTPQuery{Name: "includeRawDisplayContent"})
-
-	GetProductRestEndpointPageRequest_PortalProductId = GetProductRestEndpointPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	GetProductRestEndpointPageRequest_ProductRestEndpointPageId = GetProductRestEndpointPageRequest.AddMember("ProductRestEndpointPageId", ___string, &smithytraits.HTTPLabel{})
-
-	GetProductRestEndpointPageRequest_ResourceOwnerAccountId = GetProductRestEndpointPageRequest.AddMember("ResourceOwnerAccountId", ___string, &smithytraits.HTTPQuery{Name: "resourceOwnerAccountId"})
-
-	GetProductRestEndpointPageResponse_DisplayContent = GetProductRestEndpointPageResponse.AddMember("DisplayContent", EndpointDisplayContentResponse, &smithytraits.JSONName{Name: "displayContent"})
-
-	GetProductRestEndpointPageResponse_LastModified = GetProductRestEndpointPageResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	GetProductRestEndpointPageResponse_ProductRestEndpointPageArn = GetProductRestEndpointPageResponse.AddMember("ProductRestEndpointPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productRestEndpointPageArn"})
-
-	GetProductRestEndpointPageResponse_ProductRestEndpointPageId = GetProductRestEndpointPageResponse.AddMember("ProductRestEndpointPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productRestEndpointPageId"})
-
-	GetProductRestEndpointPageResponse_RawDisplayContent = GetProductRestEndpointPageResponse.AddMember("RawDisplayContent", ___string, &smithytraits.JSONName{Name: "rawDisplayContent"})
-
-	GetProductRestEndpointPageResponse_RestEndpointIdentifier = GetProductRestEndpointPageResponse.AddMember("RestEndpointIdentifier", RestEndpointIdentifier, &smithytraits.JSONName{Name: "restEndpointIdentifier"})
-
-	GetProductRestEndpointPageResponse_Status = GetProductRestEndpointPageResponse.AddMember("Status", Status, &smithytraits.JSONName{Name: "status"})
-
-	GetProductRestEndpointPageResponse_StatusException = GetProductRestEndpointPageResponse.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	GetProductRestEndpointPageResponse_TryItState = GetProductRestEndpointPageResponse.AddMember("TryItState", TryItState, &smithytraits.JSONName{Name: "tryItState"})
-
-	GetRouteRequest_ApiId = GetRouteRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRouteRequest_RouteId = GetRouteRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRouteResult_ApiGatewayManaged = GetRouteResult.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	GetRouteResult_ApiKeyRequired = GetRouteResult.AddMember("ApiKeyRequired", ___boolean, &smithytraits.JSONName{Name: "apiKeyRequired"})
-
-	GetRouteResult_AuthorizationScopes = GetRouteResult.AddMember("AuthorizationScopes", _AuthorizationScopes, &smithytraits.JSONName{Name: "authorizationScopes"})
-
-	GetRouteResult_AuthorizationType = GetRouteResult.AddMember("AuthorizationType", AuthorizationType, &smithytraits.JSONName{Name: "authorizationType"})
-
-	GetRouteResult_AuthorizerId = GetRouteResult.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	GetRouteResult_ModelSelectionExpression = GetRouteResult.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	GetRouteResult_OperationName = GetRouteResult.AddMember("OperationName", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "operationName"})
-
-	GetRouteResult_RequestModels = GetRouteResult.AddMember("RequestModels", _RouteModels, &smithytraits.JSONName{Name: "requestModels"})
-
-	GetRouteResult_RequestParameters = GetRouteResult.AddMember("RequestParameters", _RouteParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	GetRouteResult_RouteId = GetRouteResult.AddMember("RouteId", _Id, &smithytraits.JSONName{Name: "routeId"})
-
-	GetRouteResult_RouteKey = GetRouteResult.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	GetRouteResult_RouteResponseSelectionExpression = GetRouteResult.AddMember("RouteResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeResponseSelectionExpression"})
-
-	GetRouteResult_Target = GetRouteResult.AddMember("Target", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "target"})
-
-	GetRouteResponseRequest_ApiId = GetRouteResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRouteResponseRequest_RouteId = GetRouteResponseRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRouteResponseRequest_RouteResponseId = GetRouteResponseRequest.AddMember("RouteResponseId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRouteResponseResponse_ModelSelectionExpression = GetRouteResponseResponse.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	GetRouteResponseResponse_ResponseModels = GetRouteResponseResponse.AddMember("ResponseModels", _RouteModels, &smithytraits.JSONName{Name: "responseModels"})
-
-	GetRouteResponseResponse_ResponseParameters = GetRouteResponseResponse.AddMember("ResponseParameters", _RouteParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	GetRouteResponseResponse_RouteResponseId = GetRouteResponseResponse.AddMember("RouteResponseId", _Id, &smithytraits.JSONName{Name: "routeResponseId"})
-
-	GetRouteResponseResponse_RouteResponseKey = GetRouteResponseResponse.AddMember("RouteResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "routeResponseKey"})
-
-	GetRouteResponsesRequest_ApiId = GetRouteResponsesRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRouteResponsesRequest_MaxResults = GetRouteResponsesRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetRouteResponsesRequest_NextToken = GetRouteResponsesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetRouteResponsesRequest_RouteId = GetRouteResponsesRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRouteResponsesResponse_Items = GetRouteResponsesResponse.AddMember("Items", ___listOfRouteResponse, &smithytraits.JSONName{Name: "items"})
-
-	GetRouteResponsesResponse_NextToken = GetRouteResponsesResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetRoutesRequest_ApiId = GetRoutesRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRoutesRequest_MaxResults = GetRoutesRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetRoutesRequest_NextToken = GetRoutesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetRoutesResponse_Items = GetRoutesResponse.AddMember("Items", ___listOfRoute, &smithytraits.JSONName{Name: "items"})
-
-	GetRoutesResponse_NextToken = GetRoutesResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetRoutingRuleRequest_DomainName = GetRoutingRuleRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	GetRoutingRuleRequest_DomainNameId = GetRoutingRuleRequest.AddMember("DomainNameId", ___string, &smithytraits.HTTPQuery{Name: "domainNameId"})
-
-	GetRoutingRuleRequest_RoutingRuleId = GetRoutingRuleRequest.AddMember("RoutingRuleId", ___string, &smithytraits.HTTPLabel{})
-
-	GetRoutingRuleResponse_Actions = GetRoutingRuleResponse.AddMember("Actions", ___listOfRoutingRuleAction, &smithytraits.JSONName{Name: "actions"})
-
-	GetRoutingRuleResponse_Conditions = GetRoutingRuleResponse.AddMember("Conditions", ___listOfRoutingRuleCondition, &smithytraits.JSONName{Name: "conditions"})
-
-	GetRoutingRuleResponse_Priority = GetRoutingRuleResponse.AddMember("Priority", _RoutingRulePriority, &smithytraits.JSONName{Name: "priority"})
-
-	GetRoutingRuleResponse_RoutingRuleArn = GetRoutingRuleResponse.AddMember("RoutingRuleArn", _Arn, &smithytraits.JSONName{Name: "routingRuleArn"})
-
-	GetRoutingRuleResponse_RoutingRuleId = GetRoutingRuleResponse.AddMember("RoutingRuleId", _Id, &smithytraits.JSONName{Name: "routingRuleId"})
-
-	GetStageRequest_ApiId = GetStageRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetStageRequest_StageName = GetStageRequest.AddMember("StageName", ___string, &smithytraits.HTTPLabel{})
-
-	GetStageResponse_AccessLogSettings = GetStageResponse.AddMember("AccessLogSettings", AccessLogSettings, &smithytraits.JSONName{Name: "accessLogSettings"})
-
-	GetStageResponse_ApiGatewayManaged = GetStageResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	GetStageResponse_AutoDeploy = GetStageResponse.AddMember("AutoDeploy", ___boolean, &smithytraits.JSONName{Name: "autoDeploy"})
-
-	GetStageResponse_ClientCertificateId = GetStageResponse.AddMember("ClientCertificateId", _Id, &smithytraits.JSONName{Name: "clientCertificateId"})
-
-	GetStageResponse_CreatedDate = GetStageResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	GetStageResponse_DefaultRouteSettings = GetStageResponse.AddMember("DefaultRouteSettings", RouteSettings, &smithytraits.JSONName{Name: "defaultRouteSettings"})
-
-	GetStageResponse_DeploymentId = GetStageResponse.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	GetStageResponse_Description = GetStageResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	GetStageResponse_LastDeploymentStatusMessage = GetStageResponse.AddMember("LastDeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "lastDeploymentStatusMessage"})
-
-	GetStageResponse_LastUpdatedDate = GetStageResponse.AddMember("LastUpdatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "lastUpdatedDate"})
-
-	GetStageResponse_RouteSettings = GetStageResponse.AddMember("RouteSettings", _RouteSettingsMap, &smithytraits.JSONName{Name: "routeSettings"})
-
-	GetStageResponse_StageName = GetStageResponse.AddMember("StageName", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stageName"})
-
-	GetStageResponse_StageVariables = GetStageResponse.AddMember("StageVariables", _StageVariablesMap, &smithytraits.JSONName{Name: "stageVariables"})
-
-	GetStageResponse_Tags = GetStageResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetStagesRequest_ApiId = GetStagesRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	GetStagesRequest_MaxResults = GetStagesRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetStagesRequest_NextToken = GetStagesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetStagesResponse_Items = GetStagesResponse.AddMember("Items", ___listOfStage, &smithytraits.JSONName{Name: "items"})
-
-	GetStagesResponse_NextToken = GetStagesResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	GetTagsRequest_ResourceArn = GetTagsRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	GetTagsResponse_Tags = GetTagsResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetVpcLinkRequest_VpcLinkId = GetVpcLinkRequest.AddMember("VpcLinkId", ___string, &smithytraits.HTTPLabel{})
-
-	GetVpcLinkResponse_CreatedDate = GetVpcLinkResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	GetVpcLinkResponse_Name = GetVpcLinkResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	GetVpcLinkResponse_SecurityGroupIds = GetVpcLinkResponse.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
-
-	GetVpcLinkResponse_SubnetIds = GetVpcLinkResponse.AddMember("SubnetIds", _SubnetIdList, &smithytraits.JSONName{Name: "subnetIds"})
-
-	GetVpcLinkResponse_Tags = GetVpcLinkResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	GetVpcLinkResponse_VpcLinkId = GetVpcLinkResponse.AddMember("VpcLinkId", _Id, &smithytraits.JSONName{Name: "vpcLinkId"})
-
-	GetVpcLinkResponse_VpcLinkStatus = GetVpcLinkResponse.AddMember("VpcLinkStatus", VpcLinkStatus, &smithytraits.JSONName{Name: "vpcLinkStatus"})
-
-	GetVpcLinkResponse_VpcLinkStatusMessage = GetVpcLinkResponse.AddMember("VpcLinkStatusMessage", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "vpcLinkStatusMessage"})
-
-	GetVpcLinkResponse_VpcLinkVersion = GetVpcLinkResponse.AddMember("VpcLinkVersion", VpcLinkVersion, &smithytraits.JSONName{Name: "vpcLinkVersion"})
-
-	GetVpcLinksRequest_MaxResults = GetVpcLinksRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	GetVpcLinksRequest_NextToken = GetVpcLinksRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	GetVpcLinksResponse_Items = GetVpcLinksResponse.AddMember("Items", ___listOfVpcLink, &smithytraits.JSONName{Name: "items"})
-
-	GetVpcLinksResponse_NextToken = GetVpcLinksResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	ImportApiRequest_Basepath = ImportApiRequest.AddMember("Basepath", ___string, &smithytraits.HTTPQuery{Name: "basepath"})
-
-	ImportApiRequest_Body = ImportApiRequest.AddMember("Body", ___string, &smithytraits.JSONName{Name: "body"})
-
-	ImportApiRequest_FailOnWarnings = ImportApiRequest.AddMember("FailOnWarnings", ___boolean, &smithytraits.HTTPQuery{Name: "failOnWarnings"})
-
-	ImportApiResponse_ApiEndpoint = ImportApiResponse.AddMember("ApiEndpoint", ___string, &smithytraits.JSONName{Name: "apiEndpoint"})
-
-	ImportApiResponse_ApiGatewayManaged = ImportApiResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	ImportApiResponse_ApiId = ImportApiResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	ImportApiResponse_ApiKeySelectionExpression = ImportApiResponse.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	ImportApiResponse_CorsConfiguration = ImportApiResponse.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	ImportApiResponse_CreatedDate = ImportApiResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	ImportApiResponse_Description = ImportApiResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	ImportApiResponse_DisableSchemaValidation = ImportApiResponse.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	ImportApiResponse_DisableExecuteApiEndpoint = ImportApiResponse.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	ImportApiResponse_ImportInfo = ImportApiResponse.AddMember("ImportInfo", ___listOf__string, &smithytraits.JSONName{Name: "importInfo"})
-
-	ImportApiResponse_IpAddressType = ImportApiResponse.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	ImportApiResponse_Name = ImportApiResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	ImportApiResponse_ProtocolType = ImportApiResponse.AddMember("ProtocolType", ProtocolType, &smithytraits.JSONName{Name: "protocolType"})
-
-	ImportApiResponse_RouteSelectionExpression = ImportApiResponse.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	ImportApiResponse_Tags = ImportApiResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	ImportApiResponse_Version = ImportApiResponse.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	ImportApiResponse_Warnings = ImportApiResponse.AddMember("Warnings", ___listOf__string, &smithytraits.JSONName{Name: "warnings"})
-
-	ListPortalProductsRequest_MaxResults = ListPortalProductsRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListPortalProductsRequest_NextToken = ListPortalProductsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListPortalProductsRequest_ResourceOwner = ListPortalProductsRequest.AddMember("ResourceOwner", ___string, &smithytraits.HTTPQuery{Name: "resourceOwner"})
-
-	ListPortalProductsResponse_Items = ListPortalProductsResponse.AddMember("Items", ___listOfPortalProductSummary, &smithytraits.JSONName{Name: "items"})
-
-	ListPortalProductsResponse_NextToken = ListPortalProductsResponse.AddMember("NextToken", ___stringMin1Max2048, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListPortalsRequest_MaxResults = ListPortalsRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListPortalsRequest_NextToken = ListPortalsRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListPortalsResponse_Items = ListPortalsResponse.AddMember("Items", ___listOfPortalSummary, &smithytraits.JSONName{Name: "items"})
-
-	ListPortalsResponse_NextToken = ListPortalsResponse.AddMember("NextToken", ___stringMin1Max2048, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListProductPagesRequest_MaxResults = ListProductPagesRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListProductPagesRequest_NextToken = ListProductPagesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListProductPagesRequest_PortalProductId = ListProductPagesRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	ListProductPagesRequest_ResourceOwnerAccountId = ListProductPagesRequest.AddMember("ResourceOwnerAccountId", ___string, &smithytraits.HTTPQuery{Name: "resourceOwnerAccountId"})
-
-	ListProductPagesResponse_Items = ListProductPagesResponse.AddMember("Items", ___listOfProductPageSummaryNoBody, &smithytraits.JSONName{Name: "items"})
-
-	ListProductPagesResponse_NextToken = ListProductPagesResponse.AddMember("NextToken", ___stringMin1Max2048, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListProductRestEndpointPagesRequest_MaxResults = ListProductRestEndpointPagesRequest.AddMember("MaxResults", ___string, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListProductRestEndpointPagesRequest_NextToken = ListProductRestEndpointPagesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListProductRestEndpointPagesRequest_PortalProductId = ListProductRestEndpointPagesRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	ListProductRestEndpointPagesRequest_ResourceOwnerAccountId = ListProductRestEndpointPagesRequest.AddMember("ResourceOwnerAccountId", ___string, &smithytraits.HTTPQuery{Name: "resourceOwnerAccountId"})
-
-	ListProductRestEndpointPagesResponse_Items = ListProductRestEndpointPagesResponse.AddMember("Items", ___listOfProductRestEndpointPageSummaryNoBody, &smithytraits.JSONName{Name: "items"})
-
-	ListProductRestEndpointPagesResponse_NextToken = ListProductRestEndpointPagesResponse.AddMember("NextToken", ___string, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListRoutingRulesRequest_DomainName = ListRoutingRulesRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	ListRoutingRulesRequest_DomainNameId = ListRoutingRulesRequest.AddMember("DomainNameId", ___string, &smithytraits.HTTPQuery{Name: "domainNameId"})
-
-	ListRoutingRulesRequest_MaxResults = ListRoutingRulesRequest.AddMember("MaxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListRoutingRulesRequest_NextToken = ListRoutingRulesRequest.AddMember("NextToken", ___string, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListRoutingRulesResponse_NextToken = ListRoutingRulesResponse.AddMember("NextToken", _NextToken, &smithytraits.JSONName{Name: "nextToken"})
-
-	ListRoutingRulesResponse_RoutingRules = ListRoutingRulesResponse.AddMember("RoutingRules", ___listOfRoutingRule, &smithytraits.JSONName{Name: "routingRules"})
-
-	PreviewPortalRequest_PortalId = PreviewPortalRequest.AddMember("PortalId", ___string, &smithytraits.HTTPLabel{})
-
-	PublishPortalRequest_Description = PublishPortalRequest.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	PublishPortalRequest_PortalId = PublishPortalRequest.AddMember("PortalId", ___string, &smithytraits.HTTPLabel{})
-
-	PutPortalProductSharingPolicyRequest_PolicyDocument = PutPortalProductSharingPolicyRequest.AddMember("PolicyDocument", ___stringMin1Max307200, &smithytraits.JSONName{Name: "policyDocument"})
-
-	PutPortalProductSharingPolicyRequest_PortalProductId = PutPortalProductSharingPolicyRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	PutRoutingRuleRequest_Actions = PutRoutingRuleRequest.AddMember("Actions", ___listOfRoutingRuleAction, &smithytraits.JSONName{Name: "actions"})
-
-	PutRoutingRuleRequest_Conditions = PutRoutingRuleRequest.AddMember("Conditions", ___listOfRoutingRuleCondition, &smithytraits.JSONName{Name: "conditions"})
-
-	PutRoutingRuleRequest_DomainName = PutRoutingRuleRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	PutRoutingRuleRequest_DomainNameId = PutRoutingRuleRequest.AddMember("DomainNameId", ___string, &smithytraits.HTTPQuery{Name: "domainNameId"})
-
-	PutRoutingRuleRequest_Priority = PutRoutingRuleRequest.AddMember("Priority", _RoutingRulePriority, &smithytraits.JSONName{Name: "priority"})
-
-	PutRoutingRuleRequest_RoutingRuleId = PutRoutingRuleRequest.AddMember("RoutingRuleId", ___string, &smithytraits.HTTPLabel{})
-
-	PutRoutingRuleResponse_Actions = PutRoutingRuleResponse.AddMember("Actions", ___listOfRoutingRuleAction, &smithytraits.JSONName{Name: "actions"})
-
-	PutRoutingRuleResponse_Conditions = PutRoutingRuleResponse.AddMember("Conditions", ___listOfRoutingRuleCondition, &smithytraits.JSONName{Name: "conditions"})
-
-	PutRoutingRuleResponse_Priority = PutRoutingRuleResponse.AddMember("Priority", _RoutingRulePriority, &smithytraits.JSONName{Name: "priority"})
-
-	PutRoutingRuleResponse_RoutingRuleArn = PutRoutingRuleResponse.AddMember("RoutingRuleArn", _Arn, &smithytraits.JSONName{Name: "routingRuleArn"})
-
-	PutRoutingRuleResponse_RoutingRuleId = PutRoutingRuleResponse.AddMember("RoutingRuleId", _Id, &smithytraits.JSONName{Name: "routingRuleId"})
-
-	ReimportApiRequest_ApiId = ReimportApiRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	ReimportApiRequest_Basepath = ReimportApiRequest.AddMember("Basepath", ___string, &smithytraits.HTTPQuery{Name: "basepath"})
-
-	ReimportApiRequest_Body = ReimportApiRequest.AddMember("Body", ___string, &smithytraits.JSONName{Name: "body"})
-
-	ReimportApiRequest_FailOnWarnings = ReimportApiRequest.AddMember("FailOnWarnings", ___boolean, &smithytraits.HTTPQuery{Name: "failOnWarnings"})
-
-	ReimportApiResponse_ApiEndpoint = ReimportApiResponse.AddMember("ApiEndpoint", ___string, &smithytraits.JSONName{Name: "apiEndpoint"})
-
-	ReimportApiResponse_ApiGatewayManaged = ReimportApiResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	ReimportApiResponse_ApiId = ReimportApiResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	ReimportApiResponse_ApiKeySelectionExpression = ReimportApiResponse.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	ReimportApiResponse_CorsConfiguration = ReimportApiResponse.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	ReimportApiResponse_CreatedDate = ReimportApiResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	ReimportApiResponse_Description = ReimportApiResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	ReimportApiResponse_DisableSchemaValidation = ReimportApiResponse.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	ReimportApiResponse_DisableExecuteApiEndpoint = ReimportApiResponse.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	ReimportApiResponse_ImportInfo = ReimportApiResponse.AddMember("ImportInfo", ___listOf__string, &smithytraits.JSONName{Name: "importInfo"})
-
-	ReimportApiResponse_IpAddressType = ReimportApiResponse.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	ReimportApiResponse_Name = ReimportApiResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	ReimportApiResponse_ProtocolType = ReimportApiResponse.AddMember("ProtocolType", ProtocolType, &smithytraits.JSONName{Name: "protocolType"})
-
-	ReimportApiResponse_RouteSelectionExpression = ReimportApiResponse.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	ReimportApiResponse_Tags = ReimportApiResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	ReimportApiResponse_Version = ReimportApiResponse.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	ReimportApiResponse_Warnings = ReimportApiResponse.AddMember("Warnings", ___listOf__string, &smithytraits.JSONName{Name: "warnings"})
-
-	ResetAuthorizersCacheRequest_ApiId = ResetAuthorizersCacheRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	ResetAuthorizersCacheRequest_StageName = ResetAuthorizersCacheRequest.AddMember("StageName", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", ___string, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", ___listOf__string, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateApiRequest_ApiId = UpdateApiRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateApiRequest_ApiKeySelectionExpression = UpdateApiRequest.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	UpdateApiRequest_CorsConfiguration = UpdateApiRequest.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	UpdateApiRequest_CredentialsArn = UpdateApiRequest.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	UpdateApiRequest_Description = UpdateApiRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateApiRequest_DisableSchemaValidation = UpdateApiRequest.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	UpdateApiRequest_DisableExecuteApiEndpoint = UpdateApiRequest.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	UpdateApiRequest_IpAddressType = UpdateApiRequest.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	UpdateApiRequest_Name = UpdateApiRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateApiRequest_RouteKey = UpdateApiRequest.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	UpdateApiRequest_RouteSelectionExpression = UpdateApiRequest.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	UpdateApiRequest_Target = UpdateApiRequest.AddMember("Target", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "target"})
-
-	UpdateApiRequest_Version = UpdateApiRequest.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	UpdateApiMappingRequest_ApiId = UpdateApiMappingRequest.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	UpdateApiMappingRequest_ApiMappingId = UpdateApiMappingRequest.AddMember("ApiMappingId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateApiMappingRequest_ApiMappingKey = UpdateApiMappingRequest.AddMember("ApiMappingKey", _SelectionKey, &smithytraits.JSONName{Name: "apiMappingKey"})
-
-	UpdateApiMappingRequest_DomainName = UpdateApiMappingRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateApiMappingRequest_Stage = UpdateApiMappingRequest.AddMember("Stage", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stage"})
-
-	UpdateApiMappingResponse_ApiId = UpdateApiMappingResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	UpdateApiMappingResponse_ApiMappingId = UpdateApiMappingResponse.AddMember("ApiMappingId", _Id, &smithytraits.JSONName{Name: "apiMappingId"})
-
-	UpdateApiMappingResponse_ApiMappingKey = UpdateApiMappingResponse.AddMember("ApiMappingKey", _SelectionKey, &smithytraits.JSONName{Name: "apiMappingKey"})
-
-	UpdateApiMappingResponse_Stage = UpdateApiMappingResponse.AddMember("Stage", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stage"})
-
-	UpdateApiResponse_ApiEndpoint = UpdateApiResponse.AddMember("ApiEndpoint", ___string, &smithytraits.JSONName{Name: "apiEndpoint"})
-
-	UpdateApiResponse_ApiGatewayManaged = UpdateApiResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	UpdateApiResponse_ApiId = UpdateApiResponse.AddMember("ApiId", _Id, &smithytraits.JSONName{Name: "apiId"})
-
-	UpdateApiResponse_ApiKeySelectionExpression = UpdateApiResponse.AddMember("ApiKeySelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiKeySelectionExpression"})
-
-	UpdateApiResponse_CorsConfiguration = UpdateApiResponse.AddMember("CorsConfiguration", Cors, &smithytraits.JSONName{Name: "corsConfiguration"})
-
-	UpdateApiResponse_CreatedDate = UpdateApiResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	UpdateApiResponse_Description = UpdateApiResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateApiResponse_DisableSchemaValidation = UpdateApiResponse.AddMember("DisableSchemaValidation", ___boolean, &smithytraits.JSONName{Name: "disableSchemaValidation"})
-
-	UpdateApiResponse_DisableExecuteApiEndpoint = UpdateApiResponse.AddMember("DisableExecuteApiEndpoint", ___boolean, &smithytraits.JSONName{Name: "disableExecuteApiEndpoint"})
-
-	UpdateApiResponse_ImportInfo = UpdateApiResponse.AddMember("ImportInfo", ___listOf__string, &smithytraits.JSONName{Name: "importInfo"})
-
-	UpdateApiResponse_IpAddressType = UpdateApiResponse.AddMember("IpAddressType", IpAddressType, &smithytraits.JSONName{Name: "ipAddressType"})
-
-	UpdateApiResponse_Name = UpdateApiResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateApiResponse_ProtocolType = UpdateApiResponse.AddMember("ProtocolType", ProtocolType, &smithytraits.JSONName{Name: "protocolType"})
-
-	UpdateApiResponse_RouteSelectionExpression = UpdateApiResponse.AddMember("RouteSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeSelectionExpression"})
-
-	UpdateApiResponse_Tags = UpdateApiResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateApiResponse_Version = UpdateApiResponse.AddMember("Version", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "version"})
-
-	UpdateApiResponse_Warnings = UpdateApiResponse.AddMember("Warnings", ___listOf__string, &smithytraits.JSONName{Name: "warnings"})
-
-	UpdateAuthorizerRequest_ApiId = UpdateAuthorizerRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateAuthorizerRequest_AuthorizerCredentialsArn = UpdateAuthorizerRequest.AddMember("AuthorizerCredentialsArn", _Arn, &smithytraits.JSONName{Name: "authorizerCredentialsArn"})
-
-	UpdateAuthorizerRequest_AuthorizerId = UpdateAuthorizerRequest.AddMember("AuthorizerId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateAuthorizerRequest_AuthorizerPayloadFormatVersion = UpdateAuthorizerRequest.AddMember("AuthorizerPayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "authorizerPayloadFormatVersion"})
-
-	UpdateAuthorizerRequest_AuthorizerResultTtlInSeconds = UpdateAuthorizerRequest.AddMember("AuthorizerResultTtlInSeconds", _IntegerWithLengthBetween0And3600, &smithytraits.JSONName{Name: "authorizerResultTtlInSeconds"})
-
-	UpdateAuthorizerRequest_AuthorizerType = UpdateAuthorizerRequest.AddMember("AuthorizerType", AuthorizerType, &smithytraits.JSONName{Name: "authorizerType"})
-
-	UpdateAuthorizerRequest_AuthorizerUri = UpdateAuthorizerRequest.AddMember("AuthorizerUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "authorizerUri"})
-
-	UpdateAuthorizerRequest_EnableSimpleResponses = UpdateAuthorizerRequest.AddMember("EnableSimpleResponses", ___boolean, &smithytraits.JSONName{Name: "enableSimpleResponses"})
-
-	UpdateAuthorizerRequest_IdentitySource = UpdateAuthorizerRequest.AddMember("IdentitySource", _IdentitySourceList, &smithytraits.JSONName{Name: "identitySource"})
-
-	UpdateAuthorizerRequest_IdentityValidationExpression = UpdateAuthorizerRequest.AddMember("IdentityValidationExpression", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "identityValidationExpression"})
-
-	UpdateAuthorizerRequest_JwtConfiguration = UpdateAuthorizerRequest.AddMember("JwtConfiguration", JWTConfiguration, &smithytraits.JSONName{Name: "jwtConfiguration"})
-
-	UpdateAuthorizerRequest_Name = UpdateAuthorizerRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateAuthorizerResponse_AuthorizerCredentialsArn = UpdateAuthorizerResponse.AddMember("AuthorizerCredentialsArn", _Arn, &smithytraits.JSONName{Name: "authorizerCredentialsArn"})
-
-	UpdateAuthorizerResponse_AuthorizerId = UpdateAuthorizerResponse.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	UpdateAuthorizerResponse_AuthorizerPayloadFormatVersion = UpdateAuthorizerResponse.AddMember("AuthorizerPayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "authorizerPayloadFormatVersion"})
-
-	UpdateAuthorizerResponse_AuthorizerResultTtlInSeconds = UpdateAuthorizerResponse.AddMember("AuthorizerResultTtlInSeconds", _IntegerWithLengthBetween0And3600, &smithytraits.JSONName{Name: "authorizerResultTtlInSeconds"})
-
-	UpdateAuthorizerResponse_AuthorizerType = UpdateAuthorizerResponse.AddMember("AuthorizerType", AuthorizerType, &smithytraits.JSONName{Name: "authorizerType"})
-
-	UpdateAuthorizerResponse_AuthorizerUri = UpdateAuthorizerResponse.AddMember("AuthorizerUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "authorizerUri"})
-
-	UpdateAuthorizerResponse_EnableSimpleResponses = UpdateAuthorizerResponse.AddMember("EnableSimpleResponses", ___boolean, &smithytraits.JSONName{Name: "enableSimpleResponses"})
-
-	UpdateAuthorizerResponse_IdentitySource = UpdateAuthorizerResponse.AddMember("IdentitySource", _IdentitySourceList, &smithytraits.JSONName{Name: "identitySource"})
-
-	UpdateAuthorizerResponse_IdentityValidationExpression = UpdateAuthorizerResponse.AddMember("IdentityValidationExpression", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "identityValidationExpression"})
-
-	UpdateAuthorizerResponse_JwtConfiguration = UpdateAuthorizerResponse.AddMember("JwtConfiguration", JWTConfiguration, &smithytraits.JSONName{Name: "jwtConfiguration"})
-
-	UpdateAuthorizerResponse_Name = UpdateAuthorizerResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateDeploymentRequest_ApiId = UpdateDeploymentRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateDeploymentRequest_DeploymentId = UpdateDeploymentRequest.AddMember("DeploymentId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateDeploymentRequest_Description = UpdateDeploymentRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateDeploymentResponse_AutoDeployed = UpdateDeploymentResponse.AddMember("AutoDeployed", ___boolean, &smithytraits.JSONName{Name: "autoDeployed"})
-
-	UpdateDeploymentResponse_CreatedDate = UpdateDeploymentResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	UpdateDeploymentResponse_DeploymentId = UpdateDeploymentResponse.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	UpdateDeploymentResponse_DeploymentStatus = UpdateDeploymentResponse.AddMember("DeploymentStatus", DeploymentStatus, &smithytraits.JSONName{Name: "deploymentStatus"})
-
-	UpdateDeploymentResponse_DeploymentStatusMessage = UpdateDeploymentResponse.AddMember("DeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "deploymentStatusMessage"})
-
-	UpdateDeploymentResponse_Description = UpdateDeploymentResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateDomainNameRequest_DomainName = UpdateDomainNameRequest.AddMember("DomainName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateDomainNameRequest_DomainNameConfigurations = UpdateDomainNameRequest.AddMember("DomainNameConfigurations", _DomainNameConfigurations, &smithytraits.JSONName{Name: "domainNameConfigurations"})
-
-	UpdateDomainNameRequest_MutualTlsAuthentication = UpdateDomainNameRequest.AddMember("MutualTlsAuthentication", MutualTlsAuthenticationInput, &smithytraits.JSONName{Name: "mutualTlsAuthentication"})
-
-	UpdateDomainNameRequest_RoutingMode = UpdateDomainNameRequest.AddMember("RoutingMode", RoutingMode, &smithytraits.JSONName{Name: "routingMode"})
-
-	UpdateDomainNameResponse_ApiMappingSelectionExpression = UpdateDomainNameResponse.AddMember("ApiMappingSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "apiMappingSelectionExpression"})
-
-	UpdateDomainNameResponse_DomainName = UpdateDomainNameResponse.AddMember("DomainName", _StringWithLengthBetween1And512, &smithytraits.JSONName{Name: "domainName"})
-
-	UpdateDomainNameResponse_DomainNameArn = UpdateDomainNameResponse.AddMember("DomainNameArn", _Arn, &smithytraits.JSONName{Name: "domainNameArn"})
-
-	UpdateDomainNameResponse_DomainNameConfigurations = UpdateDomainNameResponse.AddMember("DomainNameConfigurations", _DomainNameConfigurations, &smithytraits.JSONName{Name: "domainNameConfigurations"})
-
-	UpdateDomainNameResponse_MutualTlsAuthentication = UpdateDomainNameResponse.AddMember("MutualTlsAuthentication", MutualTlsAuthentication, &smithytraits.JSONName{Name: "mutualTlsAuthentication"})
-
-	UpdateDomainNameResponse_RoutingMode = UpdateDomainNameResponse.AddMember("RoutingMode", RoutingMode, &smithytraits.JSONName{Name: "routingMode"})
-
-	UpdateDomainNameResponse_Tags = UpdateDomainNameResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateIntegrationRequest_ApiId = UpdateIntegrationRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateIntegrationRequest_ConnectionId = UpdateIntegrationRequest.AddMember("ConnectionId", _StringWithLengthBetween1And1024, &smithytraits.JSONName{Name: "connectionId"})
-
-	UpdateIntegrationRequest_ConnectionType = UpdateIntegrationRequest.AddMember("ConnectionType", ConnectionType, &smithytraits.JSONName{Name: "connectionType"})
-
-	UpdateIntegrationRequest_ContentHandlingStrategy = UpdateIntegrationRequest.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	UpdateIntegrationRequest_CredentialsArn = UpdateIntegrationRequest.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	UpdateIntegrationRequest_Description = UpdateIntegrationRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateIntegrationRequest_IntegrationId = UpdateIntegrationRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateIntegrationRequest_IntegrationMethod = UpdateIntegrationRequest.AddMember("IntegrationMethod", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "integrationMethod"})
-
-	UpdateIntegrationRequest_IntegrationSubtype = UpdateIntegrationRequest.AddMember("IntegrationSubtype", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "integrationSubtype"})
-
-	UpdateIntegrationRequest_IntegrationType = UpdateIntegrationRequest.AddMember("IntegrationType", IntegrationType, &smithytraits.JSONName{Name: "integrationType"})
-
-	UpdateIntegrationRequest_IntegrationUri = UpdateIntegrationRequest.AddMember("IntegrationUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "integrationUri"})
-
-	UpdateIntegrationRequest_PassthroughBehavior = UpdateIntegrationRequest.AddMember("PassthroughBehavior", PassthroughBehavior, &smithytraits.JSONName{Name: "passthroughBehavior"})
-
-	UpdateIntegrationRequest_PayloadFormatVersion = UpdateIntegrationRequest.AddMember("PayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "payloadFormatVersion"})
-
-	UpdateIntegrationRequest_RequestParameters = UpdateIntegrationRequest.AddMember("RequestParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	UpdateIntegrationRequest_RequestTemplates = UpdateIntegrationRequest.AddMember("RequestTemplates", _TemplateMap, &smithytraits.JSONName{Name: "requestTemplates"})
-
-	UpdateIntegrationRequest_ResponseParameters = UpdateIntegrationRequest.AddMember("ResponseParameters", _ResponseParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	UpdateIntegrationRequest_TemplateSelectionExpression = UpdateIntegrationRequest.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	UpdateIntegrationRequest_TimeoutInMillis = UpdateIntegrationRequest.AddMember("TimeoutInMillis", _IntegerWithLengthBetween50And30000, &smithytraits.JSONName{Name: "timeoutInMillis"})
-
-	UpdateIntegrationRequest_TlsConfig = UpdateIntegrationRequest.AddMember("TlsConfig", TlsConfigInput, &smithytraits.JSONName{Name: "tlsConfig"})
-
-	UpdateIntegrationResult_ApiGatewayManaged = UpdateIntegrationResult.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	UpdateIntegrationResult_ConnectionId = UpdateIntegrationResult.AddMember("ConnectionId", _StringWithLengthBetween1And1024, &smithytraits.JSONName{Name: "connectionId"})
-
-	UpdateIntegrationResult_ConnectionType = UpdateIntegrationResult.AddMember("ConnectionType", ConnectionType, &smithytraits.JSONName{Name: "connectionType"})
-
-	UpdateIntegrationResult_ContentHandlingStrategy = UpdateIntegrationResult.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	UpdateIntegrationResult_CredentialsArn = UpdateIntegrationResult.AddMember("CredentialsArn", _Arn, &smithytraits.JSONName{Name: "credentialsArn"})
-
-	UpdateIntegrationResult_Description = UpdateIntegrationResult.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateIntegrationResult_IntegrationId = UpdateIntegrationResult.AddMember("IntegrationId", _Id, &smithytraits.JSONName{Name: "integrationId"})
-
-	UpdateIntegrationResult_IntegrationMethod = UpdateIntegrationResult.AddMember("IntegrationMethod", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "integrationMethod"})
-
-	UpdateIntegrationResult_IntegrationResponseSelectionExpression = UpdateIntegrationResult.AddMember("IntegrationResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "integrationResponseSelectionExpression"})
-
-	UpdateIntegrationResult_IntegrationSubtype = UpdateIntegrationResult.AddMember("IntegrationSubtype", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "integrationSubtype"})
-
-	UpdateIntegrationResult_IntegrationType = UpdateIntegrationResult.AddMember("IntegrationType", IntegrationType, &smithytraits.JSONName{Name: "integrationType"})
-
-	UpdateIntegrationResult_IntegrationUri = UpdateIntegrationResult.AddMember("IntegrationUri", _UriWithLengthBetween1And2048, &smithytraits.JSONName{Name: "integrationUri"})
-
-	UpdateIntegrationResult_PassthroughBehavior = UpdateIntegrationResult.AddMember("PassthroughBehavior", PassthroughBehavior, &smithytraits.JSONName{Name: "passthroughBehavior"})
-
-	UpdateIntegrationResult_PayloadFormatVersion = UpdateIntegrationResult.AddMember("PayloadFormatVersion", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "payloadFormatVersion"})
-
-	UpdateIntegrationResult_RequestParameters = UpdateIntegrationResult.AddMember("RequestParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	UpdateIntegrationResult_RequestTemplates = UpdateIntegrationResult.AddMember("RequestTemplates", _TemplateMap, &smithytraits.JSONName{Name: "requestTemplates"})
-
-	UpdateIntegrationResult_ResponseParameters = UpdateIntegrationResult.AddMember("ResponseParameters", _ResponseParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	UpdateIntegrationResult_TemplateSelectionExpression = UpdateIntegrationResult.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	UpdateIntegrationResult_TimeoutInMillis = UpdateIntegrationResult.AddMember("TimeoutInMillis", _IntegerWithLengthBetween50And30000, &smithytraits.JSONName{Name: "timeoutInMillis"})
-
-	UpdateIntegrationResult_TlsConfig = UpdateIntegrationResult.AddMember("TlsConfig", TlsConfig, &smithytraits.JSONName{Name: "tlsConfig"})
-
-	UpdateIntegrationResponseRequest_ApiId = UpdateIntegrationResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateIntegrationResponseRequest_ContentHandlingStrategy = UpdateIntegrationResponseRequest.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	UpdateIntegrationResponseRequest_IntegrationId = UpdateIntegrationResponseRequest.AddMember("IntegrationId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateIntegrationResponseRequest_IntegrationResponseId = UpdateIntegrationResponseRequest.AddMember("IntegrationResponseId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateIntegrationResponseRequest_IntegrationResponseKey = UpdateIntegrationResponseRequest.AddMember("IntegrationResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "integrationResponseKey"})
-
-	UpdateIntegrationResponseRequest_ResponseParameters = UpdateIntegrationResponseRequest.AddMember("ResponseParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	UpdateIntegrationResponseRequest_ResponseTemplates = UpdateIntegrationResponseRequest.AddMember("ResponseTemplates", _TemplateMap, &smithytraits.JSONName{Name: "responseTemplates"})
-
-	UpdateIntegrationResponseRequest_TemplateSelectionExpression = UpdateIntegrationResponseRequest.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	UpdateIntegrationResponseResponse_ContentHandlingStrategy = UpdateIntegrationResponseResponse.AddMember("ContentHandlingStrategy", ContentHandlingStrategy, &smithytraits.JSONName{Name: "contentHandlingStrategy"})
-
-	UpdateIntegrationResponseResponse_IntegrationResponseId = UpdateIntegrationResponseResponse.AddMember("IntegrationResponseId", _Id, &smithytraits.JSONName{Name: "integrationResponseId"})
-
-	UpdateIntegrationResponseResponse_IntegrationResponseKey = UpdateIntegrationResponseResponse.AddMember("IntegrationResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "integrationResponseKey"})
-
-	UpdateIntegrationResponseResponse_ResponseParameters = UpdateIntegrationResponseResponse.AddMember("ResponseParameters", _IntegrationParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	UpdateIntegrationResponseResponse_ResponseTemplates = UpdateIntegrationResponseResponse.AddMember("ResponseTemplates", _TemplateMap, &smithytraits.JSONName{Name: "responseTemplates"})
-
-	UpdateIntegrationResponseResponse_TemplateSelectionExpression = UpdateIntegrationResponseResponse.AddMember("TemplateSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "templateSelectionExpression"})
-
-	UpdateModelRequest_ApiId = UpdateModelRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateModelRequest_ContentType = UpdateModelRequest.AddMember("ContentType", _StringWithLengthBetween1And256, &smithytraits.JSONName{Name: "contentType"})
-
-	UpdateModelRequest_Description = UpdateModelRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateModelRequest_ModelId = UpdateModelRequest.AddMember("ModelId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateModelRequest_Name = UpdateModelRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateModelRequest_Schema = UpdateModelRequest.AddMember("Schema", _StringWithLengthBetween0And32K, &smithytraits.JSONName{Name: "schema"})
-
-	UpdateModelResponse_ContentType = UpdateModelResponse.AddMember("ContentType", _StringWithLengthBetween1And256, &smithytraits.JSONName{Name: "contentType"})
-
-	UpdateModelResponse_Description = UpdateModelResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateModelResponse_ModelId = UpdateModelResponse.AddMember("ModelId", _Id, &smithytraits.JSONName{Name: "modelId"})
-
-	UpdateModelResponse_Name = UpdateModelResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateModelResponse_Schema = UpdateModelResponse.AddMember("Schema", _StringWithLengthBetween0And32K, &smithytraits.JSONName{Name: "schema"})
-
-	UpdatePortalRequest_Authorization = UpdatePortalRequest.AddMember("Authorization", Authorization, &smithytraits.JSONName{Name: "authorization"})
-
-	UpdatePortalRequest_EndpointConfiguration = UpdatePortalRequest.AddMember("EndpointConfiguration", EndpointConfigurationRequest, &smithytraits.JSONName{Name: "endpointConfiguration"})
-
-	UpdatePortalRequest_IncludedPortalProductArns = UpdatePortalRequest.AddMember("IncludedPortalProductArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "includedPortalProductArns"})
-
-	UpdatePortalRequest_LogoUri = UpdatePortalRequest.AddMember("LogoUri", ___stringMin0Max1092, &smithytraits.JSONName{Name: "logoUri"})
-
-	UpdatePortalRequest_PortalContent = UpdatePortalRequest.AddMember("PortalContent", PortalContent, &smithytraits.JSONName{Name: "portalContent"})
-
-	UpdatePortalRequest_PortalId = UpdatePortalRequest.AddMember("PortalId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdatePortalRequest_RumAppMonitorName = UpdatePortalRequest.AddMember("RumAppMonitorName", ___stringMin0Max255, &smithytraits.JSONName{Name: "rumAppMonitorName"})
-
-	UpdatePortalResponse_Authorization = UpdatePortalResponse.AddMember("Authorization", Authorization, &smithytraits.JSONName{Name: "authorization"})
-
-	UpdatePortalResponse_EndpointConfiguration = UpdatePortalResponse.AddMember("EndpointConfiguration", EndpointConfigurationResponse, &smithytraits.JSONName{Name: "endpointConfiguration"})
-
-	UpdatePortalResponse_IncludedPortalProductArns = UpdatePortalResponse.AddMember("IncludedPortalProductArns", ___listOf__stringMin20Max2048, &smithytraits.JSONName{Name: "includedPortalProductArns"})
-
-	UpdatePortalResponse_LastModified = UpdatePortalResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	UpdatePortalResponse_LastPublished = UpdatePortalResponse.AddMember("LastPublished", ___timestampIso8601, &smithytraits.JSONName{Name: "lastPublished"})
-
-	UpdatePortalResponse_LastPublishedDescription = UpdatePortalResponse.AddMember("LastPublishedDescription", ___stringMin0Max1024, &smithytraits.JSONName{Name: "lastPublishedDescription"})
-
-	UpdatePortalResponse_PortalArn = UpdatePortalResponse.AddMember("PortalArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalArn"})
-
-	UpdatePortalResponse_PortalContent = UpdatePortalResponse.AddMember("PortalContent", PortalContent, &smithytraits.JSONName{Name: "portalContent"})
-
-	UpdatePortalResponse_PortalId = UpdatePortalResponse.AddMember("PortalId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalId"})
-
-	UpdatePortalResponse_Preview = UpdatePortalResponse.AddMember("Preview", Preview, &smithytraits.JSONName{Name: "preview"})
-
-	UpdatePortalResponse_PublishStatus = UpdatePortalResponse.AddMember("PublishStatus", PublishStatus, &smithytraits.JSONName{Name: "publishStatus"})
-
-	UpdatePortalResponse_RumAppMonitorName = UpdatePortalResponse.AddMember("RumAppMonitorName", ___stringMin0Max255, &smithytraits.JSONName{Name: "rumAppMonitorName"})
-
-	UpdatePortalResponse_StatusException = UpdatePortalResponse.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	UpdatePortalResponse_Tags = UpdatePortalResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdatePortalProductRequest_Description = UpdatePortalProductRequest.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdatePortalProductRequest_DisplayName = UpdatePortalProductRequest.AddMember("DisplayName", ___stringMin1Max255, &smithytraits.JSONName{Name: "displayName"})
-
-	UpdatePortalProductRequest_DisplayOrder = UpdatePortalProductRequest.AddMember("DisplayOrder", DisplayOrder, &smithytraits.JSONName{Name: "displayOrder"})
-
-	UpdatePortalProductRequest_PortalProductId = UpdatePortalProductRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdatePortalProductResponse_Description = UpdatePortalProductResponse.AddMember("Description", ___stringMin0Max1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdatePortalProductResponse_DisplayName = UpdatePortalProductResponse.AddMember("DisplayName", ___stringMin1Max255, &smithytraits.JSONName{Name: "displayName"})
-
-	UpdatePortalProductResponse_DisplayOrder = UpdatePortalProductResponse.AddMember("DisplayOrder", DisplayOrder, &smithytraits.JSONName{Name: "displayOrder"})
-
-	UpdatePortalProductResponse_LastModified = UpdatePortalProductResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	UpdatePortalProductResponse_PortalProductArn = UpdatePortalProductResponse.AddMember("PortalProductArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "portalProductArn"})
-
-	UpdatePortalProductResponse_PortalProductId = UpdatePortalProductResponse.AddMember("PortalProductId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "portalProductId"})
-
-	UpdatePortalProductResponse_Tags = UpdatePortalProductResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateProductPageRequest_DisplayContent = UpdateProductPageRequest.AddMember("DisplayContent", DisplayContent, &smithytraits.JSONName{Name: "displayContent"})
-
-	UpdateProductPageRequest_PortalProductId = UpdateProductPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateProductPageRequest_ProductPageId = UpdateProductPageRequest.AddMember("ProductPageId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateProductPageResponse_DisplayContent = UpdateProductPageResponse.AddMember("DisplayContent", DisplayContent, &smithytraits.JSONName{Name: "displayContent"})
-
-	UpdateProductPageResponse_LastModified = UpdateProductPageResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	UpdateProductPageResponse_ProductPageArn = UpdateProductPageResponse.AddMember("ProductPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productPageArn"})
-
-	UpdateProductPageResponse_ProductPageId = UpdateProductPageResponse.AddMember("ProductPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productPageId"})
-
-	UpdateProductRestEndpointPageRequest_DisplayContent = UpdateProductRestEndpointPageRequest.AddMember("DisplayContent", EndpointDisplayContent, &smithytraits.JSONName{Name: "displayContent"})
-
-	UpdateProductRestEndpointPageRequest_PortalProductId = UpdateProductRestEndpointPageRequest.AddMember("PortalProductId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateProductRestEndpointPageRequest_ProductRestEndpointPageId = UpdateProductRestEndpointPageRequest.AddMember("ProductRestEndpointPageId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateProductRestEndpointPageRequest_TryItState = UpdateProductRestEndpointPageRequest.AddMember("TryItState", TryItState, &smithytraits.JSONName{Name: "tryItState"})
-
-	UpdateProductRestEndpointPageResponse_DisplayContent = UpdateProductRestEndpointPageResponse.AddMember("DisplayContent", EndpointDisplayContentResponse, &smithytraits.JSONName{Name: "displayContent"})
-
-	UpdateProductRestEndpointPageResponse_LastModified = UpdateProductRestEndpointPageResponse.AddMember("LastModified", ___timestampIso8601, &smithytraits.JSONName{Name: "lastModified"})
-
-	UpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn = UpdateProductRestEndpointPageResponse.AddMember("ProductRestEndpointPageArn", ___stringMin20Max2048, &smithytraits.JSONName{Name: "productRestEndpointPageArn"})
-
-	UpdateProductRestEndpointPageResponse_ProductRestEndpointPageId = UpdateProductRestEndpointPageResponse.AddMember("ProductRestEndpointPageId", ___stringMin10Max30PatternAZ09, &smithytraits.JSONName{Name: "productRestEndpointPageId"})
-
-	UpdateProductRestEndpointPageResponse_RestEndpointIdentifier = UpdateProductRestEndpointPageResponse.AddMember("RestEndpointIdentifier", RestEndpointIdentifier, &smithytraits.JSONName{Name: "restEndpointIdentifier"})
-
-	UpdateProductRestEndpointPageResponse_Status = UpdateProductRestEndpointPageResponse.AddMember("Status", Status, &smithytraits.JSONName{Name: "status"})
-
-	UpdateProductRestEndpointPageResponse_StatusException = UpdateProductRestEndpointPageResponse.AddMember("StatusException", StatusException, &smithytraits.JSONName{Name: "statusException"})
-
-	UpdateProductRestEndpointPageResponse_TryItState = UpdateProductRestEndpointPageResponse.AddMember("TryItState", TryItState, &smithytraits.JSONName{Name: "tryItState"})
-
-	UpdateRouteRequest_ApiId = UpdateRouteRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRouteRequest_ApiKeyRequired = UpdateRouteRequest.AddMember("ApiKeyRequired", ___boolean, &smithytraits.JSONName{Name: "apiKeyRequired"})
-
-	UpdateRouteRequest_AuthorizationScopes = UpdateRouteRequest.AddMember("AuthorizationScopes", _AuthorizationScopes, &smithytraits.JSONName{Name: "authorizationScopes"})
-
-	UpdateRouteRequest_AuthorizationType = UpdateRouteRequest.AddMember("AuthorizationType", AuthorizationType, &smithytraits.JSONName{Name: "authorizationType"})
-
-	UpdateRouteRequest_AuthorizerId = UpdateRouteRequest.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	UpdateRouteRequest_ModelSelectionExpression = UpdateRouteRequest.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	UpdateRouteRequest_OperationName = UpdateRouteRequest.AddMember("OperationName", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "operationName"})
-
-	UpdateRouteRequest_RequestModels = UpdateRouteRequest.AddMember("RequestModels", _RouteModels, &smithytraits.JSONName{Name: "requestModels"})
-
-	UpdateRouteRequest_RequestParameters = UpdateRouteRequest.AddMember("RequestParameters", _RouteParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	UpdateRouteRequest_RouteId = UpdateRouteRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRouteRequest_RouteKey = UpdateRouteRequest.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	UpdateRouteRequest_RouteResponseSelectionExpression = UpdateRouteRequest.AddMember("RouteResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeResponseSelectionExpression"})
-
-	UpdateRouteRequest_Target = UpdateRouteRequest.AddMember("Target", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "target"})
-
-	UpdateRouteResult_ApiGatewayManaged = UpdateRouteResult.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	UpdateRouteResult_ApiKeyRequired = UpdateRouteResult.AddMember("ApiKeyRequired", ___boolean, &smithytraits.JSONName{Name: "apiKeyRequired"})
-
-	UpdateRouteResult_AuthorizationScopes = UpdateRouteResult.AddMember("AuthorizationScopes", _AuthorizationScopes, &smithytraits.JSONName{Name: "authorizationScopes"})
-
-	UpdateRouteResult_AuthorizationType = UpdateRouteResult.AddMember("AuthorizationType", AuthorizationType, &smithytraits.JSONName{Name: "authorizationType"})
-
-	UpdateRouteResult_AuthorizerId = UpdateRouteResult.AddMember("AuthorizerId", _Id, &smithytraits.JSONName{Name: "authorizerId"})
-
-	UpdateRouteResult_ModelSelectionExpression = UpdateRouteResult.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	UpdateRouteResult_OperationName = UpdateRouteResult.AddMember("OperationName", _StringWithLengthBetween1And64, &smithytraits.JSONName{Name: "operationName"})
-
-	UpdateRouteResult_RequestModels = UpdateRouteResult.AddMember("RequestModels", _RouteModels, &smithytraits.JSONName{Name: "requestModels"})
-
-	UpdateRouteResult_RequestParameters = UpdateRouteResult.AddMember("RequestParameters", _RouteParameters, &smithytraits.JSONName{Name: "requestParameters"})
-
-	UpdateRouteResult_RouteId = UpdateRouteResult.AddMember("RouteId", _Id, &smithytraits.JSONName{Name: "routeId"})
-
-	UpdateRouteResult_RouteKey = UpdateRouteResult.AddMember("RouteKey", _SelectionKey, &smithytraits.JSONName{Name: "routeKey"})
-
-	UpdateRouteResult_RouteResponseSelectionExpression = UpdateRouteResult.AddMember("RouteResponseSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "routeResponseSelectionExpression"})
-
-	UpdateRouteResult_Target = UpdateRouteResult.AddMember("Target", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "target"})
-
-	UpdateRouteResponseRequest_ApiId = UpdateRouteResponseRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRouteResponseRequest_ModelSelectionExpression = UpdateRouteResponseRequest.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	UpdateRouteResponseRequest_ResponseModels = UpdateRouteResponseRequest.AddMember("ResponseModels", _RouteModels, &smithytraits.JSONName{Name: "responseModels"})
-
-	UpdateRouteResponseRequest_ResponseParameters = UpdateRouteResponseRequest.AddMember("ResponseParameters", _RouteParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	UpdateRouteResponseRequest_RouteId = UpdateRouteResponseRequest.AddMember("RouteId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRouteResponseRequest_RouteResponseId = UpdateRouteResponseRequest.AddMember("RouteResponseId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateRouteResponseRequest_RouteResponseKey = UpdateRouteResponseRequest.AddMember("RouteResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "routeResponseKey"})
-
-	UpdateRouteResponseResponse_ModelSelectionExpression = UpdateRouteResponseResponse.AddMember("ModelSelectionExpression", _SelectionExpression, &smithytraits.JSONName{Name: "modelSelectionExpression"})
-
-	UpdateRouteResponseResponse_ResponseModels = UpdateRouteResponseResponse.AddMember("ResponseModels", _RouteModels, &smithytraits.JSONName{Name: "responseModels"})
-
-	UpdateRouteResponseResponse_ResponseParameters = UpdateRouteResponseResponse.AddMember("ResponseParameters", _RouteParameters, &smithytraits.JSONName{Name: "responseParameters"})
-
-	UpdateRouteResponseResponse_RouteResponseId = UpdateRouteResponseResponse.AddMember("RouteResponseId", _Id, &smithytraits.JSONName{Name: "routeResponseId"})
-
-	UpdateRouteResponseResponse_RouteResponseKey = UpdateRouteResponseResponse.AddMember("RouteResponseKey", _SelectionKey, &smithytraits.JSONName{Name: "routeResponseKey"})
-
-	UpdateStageRequest_AccessLogSettings = UpdateStageRequest.AddMember("AccessLogSettings", AccessLogSettings, &smithytraits.JSONName{Name: "accessLogSettings"})
-
-	UpdateStageRequest_ApiId = UpdateStageRequest.AddMember("ApiId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateStageRequest_AutoDeploy = UpdateStageRequest.AddMember("AutoDeploy", ___boolean, &smithytraits.JSONName{Name: "autoDeploy"})
-
-	UpdateStageRequest_ClientCertificateId = UpdateStageRequest.AddMember("ClientCertificateId", _Id, &smithytraits.JSONName{Name: "clientCertificateId"})
-
-	UpdateStageRequest_DefaultRouteSettings = UpdateStageRequest.AddMember("DefaultRouteSettings", RouteSettings, &smithytraits.JSONName{Name: "defaultRouteSettings"})
-
-	UpdateStageRequest_DeploymentId = UpdateStageRequest.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	UpdateStageRequest_Description = UpdateStageRequest.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateStageRequest_RouteSettings = UpdateStageRequest.AddMember("RouteSettings", _RouteSettingsMap, &smithytraits.JSONName{Name: "routeSettings"})
-
-	UpdateStageRequest_StageName = UpdateStageRequest.AddMember("StageName", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateStageRequest_StageVariables = UpdateStageRequest.AddMember("StageVariables", _StageVariablesMap, &smithytraits.JSONName{Name: "stageVariables"})
-
-	UpdateStageResponse_AccessLogSettings = UpdateStageResponse.AddMember("AccessLogSettings", AccessLogSettings, &smithytraits.JSONName{Name: "accessLogSettings"})
-
-	UpdateStageResponse_ApiGatewayManaged = UpdateStageResponse.AddMember("ApiGatewayManaged", ___boolean, &smithytraits.JSONName{Name: "apiGatewayManaged"})
-
-	UpdateStageResponse_AutoDeploy = UpdateStageResponse.AddMember("AutoDeploy", ___boolean, &smithytraits.JSONName{Name: "autoDeploy"})
-
-	UpdateStageResponse_ClientCertificateId = UpdateStageResponse.AddMember("ClientCertificateId", _Id, &smithytraits.JSONName{Name: "clientCertificateId"})
-
-	UpdateStageResponse_CreatedDate = UpdateStageResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	UpdateStageResponse_DefaultRouteSettings = UpdateStageResponse.AddMember("DefaultRouteSettings", RouteSettings, &smithytraits.JSONName{Name: "defaultRouteSettings"})
-
-	UpdateStageResponse_DeploymentId = UpdateStageResponse.AddMember("DeploymentId", _Id, &smithytraits.JSONName{Name: "deploymentId"})
-
-	UpdateStageResponse_Description = UpdateStageResponse.AddMember("Description", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "description"})
-
-	UpdateStageResponse_LastDeploymentStatusMessage = UpdateStageResponse.AddMember("LastDeploymentStatusMessage", ___string, &smithytraits.JSONName{Name: "lastDeploymentStatusMessage"})
-
-	UpdateStageResponse_LastUpdatedDate = UpdateStageResponse.AddMember("LastUpdatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "lastUpdatedDate"})
-
-	UpdateStageResponse_RouteSettings = UpdateStageResponse.AddMember("RouteSettings", _RouteSettingsMap, &smithytraits.JSONName{Name: "routeSettings"})
-
-	UpdateStageResponse_StageName = UpdateStageResponse.AddMember("StageName", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "stageName"})
-
-	UpdateStageResponse_StageVariables = UpdateStageResponse.AddMember("StageVariables", _StageVariablesMap, &smithytraits.JSONName{Name: "stageVariables"})
-
-	UpdateStageResponse_Tags = UpdateStageResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateVpcLinkRequest_Name = UpdateVpcLinkRequest.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateVpcLinkRequest_VpcLinkId = UpdateVpcLinkRequest.AddMember("VpcLinkId", ___string, &smithytraits.HTTPLabel{})
-
-	UpdateVpcLinkResponse_CreatedDate = UpdateVpcLinkResponse.AddMember("CreatedDate", ___timestampIso8601, &smithytraits.JSONName{Name: "createdDate"})
-
-	UpdateVpcLinkResponse_Name = UpdateVpcLinkResponse.AddMember("Name", _StringWithLengthBetween1And128, &smithytraits.JSONName{Name: "name"})
-
-	UpdateVpcLinkResponse_SecurityGroupIds = UpdateVpcLinkResponse.AddMember("SecurityGroupIds", _SecurityGroupIdList, &smithytraits.JSONName{Name: "securityGroupIds"})
-
-	UpdateVpcLinkResponse_SubnetIds = UpdateVpcLinkResponse.AddMember("SubnetIds", _SubnetIdList, &smithytraits.JSONName{Name: "subnetIds"})
-
-	UpdateVpcLinkResponse_Tags = UpdateVpcLinkResponse.AddMember("Tags", _Tags, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateVpcLinkResponse_VpcLinkId = UpdateVpcLinkResponse.AddMember("VpcLinkId", _Id, &smithytraits.JSONName{Name: "vpcLinkId"})
-
-	UpdateVpcLinkResponse_VpcLinkStatus = UpdateVpcLinkResponse.AddMember("VpcLinkStatus", VpcLinkStatus, &smithytraits.JSONName{Name: "vpcLinkStatus"})
-
-	UpdateVpcLinkResponse_VpcLinkStatusMessage = UpdateVpcLinkResponse.AddMember("VpcLinkStatusMessage", _StringWithLengthBetween0And1024, &smithytraits.JSONName{Name: "vpcLinkStatusMessage"})
-
-	UpdateVpcLinkResponse_VpcLinkVersion = UpdateVpcLinkResponse.AddMember("VpcLinkVersion", VpcLinkVersion, &smithytraits.JSONName{Name: "vpcLinkVersion"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t103 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t104 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t105 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "message"}}, DirectMask: 0x1}
+var t106 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "destinationArn"}}, DirectMask: 0x1}
+var t107 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "format"}}, DirectMask: 0x1}
+var t108 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "certificateArn"}}, DirectMask: 0x1}
+var t109 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "domainName"}}, DirectMask: 0x1}
+var t110 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiEndpoint"}}, DirectMask: 0x1}
+var t111 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiGatewayManaged"}}, DirectMask: 0x1}
+var t112 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiId"}}, DirectMask: 0x1}
+var t113 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiKeySelectionExpression"}}, DirectMask: 0x1}
+var t114 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "corsConfiguration"}}, DirectMask: 0x1}
+var t115 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "createdDate"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t116 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "description"}}, DirectMask: 0x1}
+var t117 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "disableSchemaValidation"}}, DirectMask: 0x1}
+var t118 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "disableExecuteApiEndpoint"}}, DirectMask: 0x1}
+var t119 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "importInfo"}}, DirectMask: 0x1}
+var t120 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ipAddressType"}}, DirectMask: 0x1}
+var t121 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "name"}}, DirectMask: 0x1}
+var t122 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "protocolType"}}, DirectMask: 0x1}
+var t123 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routeSelectionExpression"}}, DirectMask: 0x1}
+var t124 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tags"}}, DirectMask: 0x1}
+var t125 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "version"}}, DirectMask: 0x1}
+var t126 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "warnings"}}, DirectMask: 0x1}
+var t127 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiMappingId"}}, DirectMask: 0x1}
+var t128 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiMappingKey"}}, DirectMask: 0x1}
+var t129 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stage"}}, DirectMask: 0x1}
+var t130 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "cognitoConfig"}}, DirectMask: 0x1}
+var t131 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "none"}}, DirectMask: 0x1}
+var t132 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizerCredentialsArn"}}, DirectMask: 0x1}
+var t133 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizerId"}}, DirectMask: 0x1}
+var t134 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizerPayloadFormatVersion"}}, DirectMask: 0x1}
+var t135 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizerResultTtlInSeconds"}}, DirectMask: 0x1}
+var t136 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizerType"}}, DirectMask: 0x1}
+var t137 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizerUri"}}, DirectMask: 0x1}
+var t138 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "enableSimpleResponses"}}, DirectMask: 0x1}
+var t139 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identitySource"}}, DirectMask: 0x1}
+var t140 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identityValidationExpression"}}, DirectMask: 0x1}
+var t141 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "jwtConfiguration"}}, DirectMask: 0x1}
+var t142 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t143 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "appClientId"}}, DirectMask: 0x1}
+var t144 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userPoolArn"}}, DirectMask: 0x1}
+var t145 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "userPoolDomain"}}, DirectMask: 0x1}
+var t146 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t147 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "allowCredentials"}}, DirectMask: 0x1}
+var t148 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "allowHeaders"}}, DirectMask: 0x1}
+var t149 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "allowMethods"}}, DirectMask: 0x1}
+var t150 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "allowOrigins"}}, DirectMask: 0x1}
+var t151 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "exposeHeaders"}}, DirectMask: 0x1}
+var t152 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "maxAge"}}, DirectMask: 0x1}
+var t153 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "accentColor"}}, DirectMask: 0x1}
+var t154 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "backgroundColor"}}, DirectMask: 0x1}
+var t155 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "errorValidationColor"}}, DirectMask: 0x1}
+var t156 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "headerColor"}}, DirectMask: 0x1}
+var t157 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "navigationColor"}}, DirectMask: 0x1}
+var t158 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "textColor"}}, DirectMask: 0x1}
+var t159 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "autoDeployed"}}, DirectMask: 0x1}
+var t160 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deploymentId"}}, DirectMask: 0x1}
+var t161 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deploymentStatus"}}, DirectMask: 0x1}
+var t162 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "deploymentStatusMessage"}}, DirectMask: 0x1}
+var t163 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "body"}}, DirectMask: 0x1}
+var t164 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "title"}}, DirectMask: 0x1}
+var t165 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "endpoint"}}, DirectMask: 0x1}
+var t166 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "operationName"}}, DirectMask: 0x1}
+var t167 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "contents"}}, DirectMask: 0x1}
+var t168 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "overviewPageArn"}}, DirectMask: 0x1}
+var t169 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "productPageArns"}}, DirectMask: 0x1}
+var t170 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiMappingSelectionExpression"}}, DirectMask: 0x1}
+var t171 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "domainNameArn"}}, DirectMask: 0x1}
+var t172 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "domainNameConfigurations"}}, DirectMask: 0x1}
+var t173 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "mutualTlsAuthentication"}}, DirectMask: 0x1}
+var t174 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routingMode"}}, DirectMask: 0x1}
+var t175 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiGatewayDomainName"}}, DirectMask: 0x1}
+var t176 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "certificateName"}}, DirectMask: 0x1}
+var t177 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "certificateUploadDate"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t178 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "domainNameStatus"}}, DirectMask: 0x1}
+var t179 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "domainNameStatusMessage"}}, DirectMask: 0x1}
+var t180 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "endpointType"}}, DirectMask: 0x1}
+var t181 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "hostedZoneId"}}, DirectMask: 0x1}
+var t182 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "securityPolicy"}}, DirectMask: 0x1}
+var t183 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ownershipVerificationCertificateArn"}}, DirectMask: 0x1}
+var t184 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "acmManaged"}}, DirectMask: 0x1}
+var t185 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "portalDefaultDomainName"}}, DirectMask: 0x1}
+var t186 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "portalDomainHostedZoneId"}}, DirectMask: 0x1}
+var t187 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "overrides"}}, DirectMask: 0x1}
+var t188 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "method"}}, DirectMask: 0x1}
+var t189 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "path"}}, DirectMask: 0x1}
+var t190 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "restApiId"}}, DirectMask: 0x1}
+var t191 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "connectionId"}}, DirectMask: 0x1}
+var t192 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "connectionType"}}, DirectMask: 0x1}
+var t193 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "contentHandlingStrategy"}}, DirectMask: 0x1}
+var t194 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "credentialsArn"}}, DirectMask: 0x1}
+var t195 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationId"}}, DirectMask: 0x1}
+var t196 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationMethod"}}, DirectMask: 0x1}
+var t197 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationResponseSelectionExpression"}}, DirectMask: 0x1}
+var t198 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationSubtype"}}, DirectMask: 0x1}
+var t199 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationType"}}, DirectMask: 0x1}
+var t200 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationUri"}}, DirectMask: 0x1}
+var t201 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "passthroughBehavior"}}, DirectMask: 0x1}
+var t202 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "payloadFormatVersion"}}, DirectMask: 0x1}
+var t203 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "requestParameters"}}, DirectMask: 0x1}
+var t204 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "requestTemplates"}}, DirectMask: 0x1}
+var t205 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "responseParameters"}}, DirectMask: 0x1}
+var t206 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "templateSelectionExpression"}}, DirectMask: 0x1}
+var t207 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "timeoutInMillis"}}, DirectMask: 0x1}
+var t208 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tlsConfig"}}, DirectMask: 0x1}
+var t209 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationResponseId"}}, DirectMask: 0x1}
+var t210 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "integrationResponseKey"}}, DirectMask: 0x1}
+var t211 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "responseTemplates"}}, DirectMask: 0x1}
+var t212 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "audience"}}, DirectMask: 0x1}
+var t213 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "issuer"}}, DirectMask: 0x1}
+var t214 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "contentType"}}, DirectMask: 0x1}
+var t215 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "modelId"}}, DirectMask: 0x1}
+var t216 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "schema"}}, DirectMask: 0x1}
+var t217 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "truststoreUri"}}, DirectMask: 0x1}
+var t218 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "truststoreVersion"}}, DirectMask: 0x1}
+var t219 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "truststoreWarnings"}}, DirectMask: 0x1}
+var t220 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t221 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "resourceType"}}, DirectMask: 0x1}
+var t222 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "required"}}, DirectMask: 0x1}
+var t223 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "displayName"}}, DirectMask: 0x1}
+var t224 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "theme"}}, DirectMask: 0x1}
+var t225 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastModified"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t226 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "portalProductArn"}}, DirectMask: 0x1}
+var t227 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "portalProductId"}}, DirectMask: 0x1}
+var t228 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorization"}}, DirectMask: 0x1}
+var t229 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "endpointConfiguration"}}, DirectMask: 0x1}
+var t230 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "includedPortalProductArns"}}, DirectMask: 0x1}
+var t231 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastPublished"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t232 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastPublishedDescription"}}, DirectMask: 0x1}
+var t233 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "portalArn"}}, DirectMask: 0x1}
+var t234 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "portalContent"}}, DirectMask: 0x1}
+var t235 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "portalId"}}, DirectMask: 0x1}
+var t236 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "preview"}}, DirectMask: 0x1}
+var t237 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "publishStatus"}}, DirectMask: 0x1}
+var t238 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "rumAppMonitorName"}}, DirectMask: 0x1}
+var t239 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "statusException"}}, DirectMask: 0x1}
+var t240 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "customColors"}}, DirectMask: 0x1}
+var t241 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "logoLastUploaded"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t242 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "previewStatus"}}, DirectMask: 0x1}
+var t243 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "previewUrl"}}, DirectMask: 0x1}
+var t244 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "pageTitle"}}, DirectMask: 0x1}
+var t245 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "productPageArn"}}, DirectMask: 0x1}
+var t246 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "productPageId"}}, DirectMask: 0x1}
+var t247 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "productRestEndpointPageArn"}}, DirectMask: 0x1}
+var t248 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "productRestEndpointPageId"}}, DirectMask: 0x1}
+var t249 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "restEndpointIdentifier"}}, DirectMask: 0x1}
+var t250 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "status"}}, DirectMask: 0x1}
+var t251 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tryItState"}}, DirectMask: 0x1}
+var t252 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "identifierParts"}}, DirectMask: 0x1}
+var t253 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "apiKeyRequired"}}, DirectMask: 0x1}
+var t254 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizationScopes"}}, DirectMask: 0x1}
+var t255 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "authorizationType"}}, DirectMask: 0x1}
+var t256 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "modelSelectionExpression"}}, DirectMask: 0x1}
+var t257 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "requestModels"}}, DirectMask: 0x1}
+var t258 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routeId"}}, DirectMask: 0x1}
+var t259 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routeKey"}}, DirectMask: 0x1}
+var t260 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routeResponseSelectionExpression"}}, DirectMask: 0x1}
+var t261 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "target"}}, DirectMask: 0x1}
+var t262 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "responseModels"}}, DirectMask: 0x1}
+var t263 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routeResponseId"}}, DirectMask: 0x1}
+var t264 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routeResponseKey"}}, DirectMask: 0x1}
+var t265 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "dataTraceEnabled"}}, DirectMask: 0x1}
+var t266 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "detailedMetricsEnabled"}}, DirectMask: 0x1}
+var t267 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "loggingLevel"}}, DirectMask: 0x1}
+var t268 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "throttlingBurstLimit"}}, DirectMask: 0x1}
+var t269 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "throttlingRateLimit"}}, DirectMask: 0x1}
+var t270 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "actions"}}, DirectMask: 0x1}
+var t271 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "conditions"}}, DirectMask: 0x1}
+var t272 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "priority"}}, DirectMask: 0x1}
+var t273 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routingRuleArn"}}, DirectMask: 0x1}
+var t274 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routingRuleId"}}, DirectMask: 0x1}
+var t275 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "invokeApi"}}, DirectMask: 0x1}
+var t276 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stripBasePath"}}, DirectMask: 0x1}
+var t277 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "matchBasePaths"}}, DirectMask: 0x1}
+var t278 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "matchHeaders"}}, DirectMask: 0x1}
+var t279 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "anyOf"}}, DirectMask: 0x1}
+var t280 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "header"}}, DirectMask: 0x1}
+var t281 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "valueGlob"}}, DirectMask: 0x1}
+var t282 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "productRestEndpointPageArns"}}, DirectMask: 0x1}
+var t283 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "sectionName"}}, DirectMask: 0x1}
+var t284 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "accessLogSettings"}}, DirectMask: 0x1}
+var t285 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "autoDeploy"}}, DirectMask: 0x1}
+var t286 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "clientCertificateId"}}, DirectMask: 0x1}
+var t287 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "defaultRouteSettings"}}, DirectMask: 0x1}
+var t288 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastDeploymentStatusMessage"}}, DirectMask: 0x1}
+var t289 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "lastUpdatedDate"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x1}
+var t290 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routeSettings"}}, DirectMask: 0x1}
+var t291 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stageName"}}, DirectMask: 0x1}
+var t292 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "stageVariables"}}, DirectMask: 0x1}
+var t293 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "exception"}}, DirectMask: 0x1}
+var t294 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "serverNameToVerify"}}, DirectMask: 0x1}
+var t295 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t296 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "limitType"}}, DirectMask: 0x1}
+var t297 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "securityGroupIds"}}, DirectMask: 0x1}
+var t298 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "subnetIds"}}, DirectMask: 0x1}
+var t299 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcLinkId"}}, DirectMask: 0x1}
+var t300 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcLinkStatus"}}, DirectMask: 0x1}
+var t301 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcLinkStatusMessage"}}, DirectMask: 0x1}
+var t302 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "vpcLinkVersion"}}, DirectMask: 0x1}
+var t303 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t304 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "logoUri"}}, DirectMask: 0x1}
+var t305 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "displayOrder"}}, DirectMask: 0x1}
+var t306 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "displayContent"}}, DirectMask: 0x1}
+var t307 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "domainNameId"}}, DirectMask: 0x10}
+var t308 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "exportVersion"}}, DirectMask: 0x10}
+var t309 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeExtensions"}}, DirectMask: 0x10}
+var t310 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "outputType"}}, DirectMask: 0x10}
+var t311 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "stageName"}}, DirectMask: 0x10}
+var t312 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}}, DirectMask: 0x800}
+var t313 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t314 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t315 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "items"}}, DirectMask: 0x1}
+var t316 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "nextToken"}}, DirectMask: 0x1}
+var t317 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "value"}}, DirectMask: 0x1}
+var t318 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceOwnerAccountId"}}, DirectMask: 0x10}
+var t319 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "policyDocument"}}, DirectMask: 0x1}
+var t320 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeRawDisplayContent"}}, DirectMask: 0x10}
+var t321 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "rawDisplayContent"}}, DirectMask: 0x1}
+var t322 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "basepath"}}, DirectMask: 0x10}
+var t323 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "failOnWarnings"}}, DirectMask: 0x10}
+var t324 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceOwner"}}, DirectMask: 0x10}
+var t325 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "routingRules"}}, DirectMask: 0x1}
+var t326 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var m___listOf__string = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__string_member}}
+var m___listOf__stringMin20Max2048 = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOf__stringMin20Max2048_member}}
+var m___listOfApi = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfApi_member}}
+var m___listOfApiMapping = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfApiMapping_member}}
+var m___listOfAuthorizer = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfAuthorizer_member}}
+var m___listOfDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfDeployment_member}}
+var m___listOfDomainName = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfDomainName_member}}
+var m___listOfIntegration = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfIntegration_member}}
+var m___listOfIntegrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfIntegrationResponse_member}}
+var m___listOfModel = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfModel_member}}
+var m___listOfPortalProductSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPortalProductSummary_member}}
+var m___listOfPortalSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfPortalSummary_member}}
+var m___listOfProductPageSummaryNoBody = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfProductPageSummaryNoBody_member}}
+var m___listOfProductRestEndpointPageSummaryNoBody = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfProductRestEndpointPageSummaryNoBody_member}}
+var m___listOfRoute = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRoute_member}}
+var m___listOfRouteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRouteResponse_member}}
+var m___listOfRoutingRule = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRoutingRule_member}}
+var m___listOfRoutingRuleAction = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRoutingRuleAction_member}}
+var m___listOfRoutingRuleCondition = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRoutingRuleCondition_member}}
+var m___listOfRoutingRuleMatchHeaderValue = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfRoutingRuleMatchHeaderValue_member}}
+var m___listOfSection = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSection_member}}
+var m___listOfSelectionKey = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfSelectionKey_member}}
+var m___listOfStage = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfStage_member}}
+var m___listOfVpcLink = smithy.SchemaMembers{List: []*smithy.Schema{&s___listOfVpcLink_member}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAccessLogSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessLogSettings_DestinationArn, &sAccessLogSettings_Format}}
+var mACMManaged = smithy.SchemaMembers{List: []*smithy.Schema{&sACMManaged_CertificateArn, &sACMManaged_DomainName}}
+var mApi = smithy.SchemaMembers{List: []*smithy.Schema{&sApi_ApiEndpoint, &sApi_ApiGatewayManaged, &sApi_ApiId, &sApi_ApiKeySelectionExpression, &sApi_CorsConfiguration, &sApi_CreatedDate, &sApi_Description, &sApi_DisableSchemaValidation, &sApi_DisableExecuteApiEndpoint, &sApi_ImportInfo, &sApi_IpAddressType, &sApi_Name, &sApi_ProtocolType, &sApi_RouteSelectionExpression, &sApi_Tags, &sApi_Version, &sApi_Warnings}, Seed: 18, Slots: []uint16{
+	0, 0, 0, 15, 0, 0, 10, 1, 11, 0, 0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 13, 0, 8, 0, 0, 0, 0, 14, 0, 0, 7, 12, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 16, 0, 0, 5, 17, 0, 0, 4, 0, 0, 0, 0,
+}}
+var mApiMapping = smithy.SchemaMembers{List: []*smithy.Schema{&sApiMapping_ApiId, &sApiMapping_ApiMappingId, &sApiMapping_ApiMappingKey, &sApiMapping_Stage}}
+var mAuthorization = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorization_CognitoConfig, &sAuthorization_None}}
+var m_AuthorizationScopes = smithy.SchemaMembers{List: []*smithy.Schema{&s_AuthorizationScopes_member}}
+var mAuthorizationType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizationType_NONE, &sAuthorizationType_AWS_IAM, &sAuthorizationType_CUSTOM, &sAuthorizationType_JWT}}
+var mAuthorizer = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizer_AuthorizerCredentialsArn, &sAuthorizer_AuthorizerId, &sAuthorizer_AuthorizerPayloadFormatVersion, &sAuthorizer_AuthorizerResultTtlInSeconds, &sAuthorizer_AuthorizerType, &sAuthorizer_AuthorizerUri, &sAuthorizer_EnableSimpleResponses, &sAuthorizer_IdentitySource, &sAuthorizer_IdentityValidationExpression, &sAuthorizer_JwtConfiguration, &sAuthorizer_Name}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 0, 9, 4, 0, 0, 0, 0, 0, 11, 0, 6, 1, 5, 8, 0, 0, 2, 0,
+	0, 10, 0, 0, 0, 3, 0, 0,
+}}
+var mAuthorizerType = smithy.SchemaMembers{List: []*smithy.Schema{&sAuthorizerType_REQUEST, &sAuthorizerType_JWT}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Message}}
+var mCognitoConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sCognitoConfig_AppClientId, &sCognitoConfig_UserPoolArn, &sCognitoConfig_UserPoolDomain}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mConnectionType = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionType_INTERNET, &sConnectionType_VPC_LINK}}
+var mContentHandlingStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sContentHandlingStrategy_CONVERT_TO_BINARY, &sContentHandlingStrategy_CONVERT_TO_TEXT}}
+var mCors = smithy.SchemaMembers{List: []*smithy.Schema{&sCors_AllowCredentials, &sCors_AllowHeaders, &sCors_AllowMethods, &sCors_AllowOrigins, &sCors_ExposeHeaders, &sCors_MaxAge}}
+var m_CorsHeaderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CorsHeaderList_member}}
+var m_CorsMethodList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CorsMethodList_member}}
+var m_CorsOriginList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CorsOriginList_member}}
+var mCustomColors = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomColors_AccentColor, &sCustomColors_BackgroundColor, &sCustomColors_ErrorValidationColor, &sCustomColors_HeaderColor, &sCustomColors_NavigationColor, &sCustomColors_TextColor}}
+var mDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&sDeployment_AutoDeployed, &sDeployment_CreatedDate, &sDeployment_DeploymentId, &sDeployment_DeploymentStatus, &sDeployment_DeploymentStatusMessage, &sDeployment_Description}}
+var mDeploymentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStatus_PENDING, &sDeploymentStatus_FAILED, &sDeploymentStatus_DEPLOYED}}
+var mDisplayContent = smithy.SchemaMembers{List: []*smithy.Schema{&sDisplayContent_Body, &sDisplayContent_Title}}
+var mDisplayContentOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sDisplayContentOverrides_Body, &sDisplayContentOverrides_Endpoint, &sDisplayContentOverrides_OperationName}}
+var mDisplayOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sDisplayOrder_Contents, &sDisplayOrder_OverviewPageArn, &sDisplayOrder_ProductPageArns}}
+var mDomainName = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainName_ApiMappingSelectionExpression, &sDomainName_DomainName, &sDomainName_DomainNameArn, &sDomainName_DomainNameConfigurations, &sDomainName_MutualTlsAuthentication, &sDomainName_RoutingMode, &sDomainName_Tags}}
+var mDomainNameConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainNameConfiguration_ApiGatewayDomainName, &sDomainNameConfiguration_CertificateArn, &sDomainNameConfiguration_CertificateName, &sDomainNameConfiguration_CertificateUploadDate, &sDomainNameConfiguration_DomainNameStatus, &sDomainNameConfiguration_DomainNameStatusMessage, &sDomainNameConfiguration_EndpointType, &sDomainNameConfiguration_HostedZoneId, &sDomainNameConfiguration_IpAddressType, &sDomainNameConfiguration_SecurityPolicy, &sDomainNameConfiguration_OwnershipVerificationCertificateArn}, Seed: 17, Slots: []uint16{
+	0, 0, 0, 9, 0, 0, 11, 8, 0, 0, 0, 7, 0, 0, 0, 0, 2, 0, 0, 3, 0, 0, 0, 6,
+	0, 0, 1, 0, 4, 5, 10, 0,
+}}
+var m_DomainNameConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_DomainNameConfigurations_member}}
+var mDomainNameStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDomainNameStatus_AVAILABLE, &sDomainNameStatus_UPDATING, &sDomainNameStatus_PENDING_CERTIFICATE_REIMPORT, &sDomainNameStatus_PENDING_OWNERSHIP_VERIFICATION}}
+var mEndpointConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointConfigurationRequest_AcmManaged, &sEndpointConfigurationRequest_None}}
+var mEndpointConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointConfigurationResponse_CertificateArn, &sEndpointConfigurationResponse_DomainName, &sEndpointConfigurationResponse_PortalDefaultDomainName, &sEndpointConfigurationResponse_PortalDomainHostedZoneId}}
+var mEndpointDisplayContent = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointDisplayContent_None, &sEndpointDisplayContent_Overrides}}
+var mEndpointDisplayContentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointDisplayContentResponse_Body, &sEndpointDisplayContentResponse_Endpoint, &sEndpointDisplayContentResponse_OperationName}}
+var mEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointType_REGIONAL, &sEndpointType_EDGE}}
+var mIdentifierParts = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentifierParts_Method, &sIdentifierParts_Path, &sIdentifierParts_RestApiId, &sIdentifierParts_Stage}}
+var m_IdentitySourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IdentitySourceList_member}}
+var mIntegration = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegration_ApiGatewayManaged, &sIntegration_ConnectionId, &sIntegration_ConnectionType, &sIntegration_ContentHandlingStrategy, &sIntegration_CredentialsArn, &sIntegration_Description, &sIntegration_IntegrationId, &sIntegration_IntegrationMethod, &sIntegration_IntegrationResponseSelectionExpression, &sIntegration_IntegrationSubtype, &sIntegration_IntegrationType, &sIntegration_IntegrationUri, &sIntegration_PassthroughBehavior, &sIntegration_PayloadFormatVersion, &sIntegration_RequestParameters, &sIntegration_RequestTemplates, &sIntegration_ResponseParameters, &sIntegration_TemplateSelectionExpression, &sIntegration_TimeoutInMillis, &sIntegration_TlsConfig}, Seed: 2, Slots: []uint16{
+	0, 8, 0, 0, 0, 0, 6, 0, 11, 17, 0, 0, 0, 7, 0, 16, 0, 9, 12, 0, 0, 0, 4, 0,
+	0, 0, 3, 0, 0, 0, 0, 5, 14, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 13, 10, 20, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 19, 0, 18,
+}}
+var m_IntegrationParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegrationParameters_key, &s_IntegrationParameters_value}}
+var mIntegrationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrationResponse_ContentHandlingStrategy, &sIntegrationResponse_IntegrationResponseId, &sIntegrationResponse_IntegrationResponseKey, &sIntegrationResponse_ResponseParameters, &sIntegrationResponse_ResponseTemplates, &sIntegrationResponse_TemplateSelectionExpression}}
+var mIntegrationType = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegrationType_AWS, &sIntegrationType_HTTP, &sIntegrationType_MOCK, &sIntegrationType_HTTP_PROXY, &sIntegrationType_AWS_PROXY}}
+var mIpAddressType = smithy.SchemaMembers{List: []*smithy.Schema{&sIpAddressType_ipv4, &sIpAddressType_dualstack}}
+var mJWTConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sJWTConfiguration_Audience, &sJWTConfiguration_Issuer}}
+var mLoggingLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sLoggingLevel_ERROR, &sLoggingLevel_INFO, &sLoggingLevel_OFF}}
+var mModel = smithy.SchemaMembers{List: []*smithy.Schema{&sModel_ContentType, &sModel_Description, &sModel_ModelId, &sModel_Name, &sModel_Schema}}
+var mMutualTlsAuthentication = smithy.SchemaMembers{List: []*smithy.Schema{&sMutualTlsAuthentication_TruststoreUri, &sMutualTlsAuthentication_TruststoreVersion, &sMutualTlsAuthentication_TruststoreWarnings}}
+var mMutualTlsAuthenticationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sMutualTlsAuthenticationInput_TruststoreUri, &sMutualTlsAuthenticationInput_TruststoreVersion}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Message, &sNotFoundException_ResourceType}}
+var mParameterConstraints = smithy.SchemaMembers{List: []*smithy.Schema{&sParameterConstraints_Required}}
+var mPassthroughBehavior = smithy.SchemaMembers{List: []*smithy.Schema{&sPassthroughBehavior_WHEN_NO_MATCH, &sPassthroughBehavior_NEVER, &sPassthroughBehavior_WHEN_NO_TEMPLATES}}
+var mPortalContent = smithy.SchemaMembers{List: []*smithy.Schema{&sPortalContent_Description, &sPortalContent_DisplayName, &sPortalContent_Theme}}
+var mPortalProductSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPortalProductSummary_Description, &sPortalProductSummary_DisplayName, &sPortalProductSummary_LastModified, &sPortalProductSummary_PortalProductArn, &sPortalProductSummary_PortalProductId, &sPortalProductSummary_Tags}}
+var mPortalSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPortalSummary_Authorization, &sPortalSummary_EndpointConfiguration, &sPortalSummary_IncludedPortalProductArns, &sPortalSummary_LastModified, &sPortalSummary_LastPublished, &sPortalSummary_LastPublishedDescription, &sPortalSummary_PortalArn, &sPortalSummary_PortalContent, &sPortalSummary_PortalId, &sPortalSummary_Preview, &sPortalSummary_PublishStatus, &sPortalSummary_RumAppMonitorName, &sPortalSummary_StatusException, &sPortalSummary_Tags}, Seed: 9, Slots: []uint16{
+	13, 0, 0, 0, 12, 5, 9, 0, 2, 0, 0, 1, 14, 6, 0, 11, 4, 7, 0, 0, 0, 0, 0, 0,
+	0, 10, 0, 3, 8, 0, 0, 0,
+}}
+var mPortalTheme = smithy.SchemaMembers{List: []*smithy.Schema{&sPortalTheme_CustomColors, &sPortalTheme_LogoLastUploaded}}
+var mPreview = smithy.SchemaMembers{List: []*smithy.Schema{&sPreview_PreviewStatus, &sPreview_PreviewUrl, &sPreview_StatusException}}
+var mPreviewStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPreviewStatus_PREVIEW_IN_PROGRESS, &sPreviewStatus_PREVIEW_FAILED, &sPreviewStatus_PREVIEW_READY}}
+var mProductPageSummaryNoBody = smithy.SchemaMembers{List: []*smithy.Schema{&sProductPageSummaryNoBody_LastModified, &sProductPageSummaryNoBody_PageTitle, &sProductPageSummaryNoBody_ProductPageArn, &sProductPageSummaryNoBody_ProductPageId}}
+var mProductRestEndpointPageSummaryNoBody = smithy.SchemaMembers{List: []*smithy.Schema{&sProductRestEndpointPageSummaryNoBody_Endpoint, &sProductRestEndpointPageSummaryNoBody_LastModified, &sProductRestEndpointPageSummaryNoBody_OperationName, &sProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageArn, &sProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageId, &sProductRestEndpointPageSummaryNoBody_RestEndpointIdentifier, &sProductRestEndpointPageSummaryNoBody_Status, &sProductRestEndpointPageSummaryNoBody_StatusException, &sProductRestEndpointPageSummaryNoBody_TryItState}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 5, 7, 0, 4, 0, 2, 0, 0, 3, 0, 0,
+	8, 0, 0, 0, 1, 0, 0, 9,
+}}
+var mProtocolType = smithy.SchemaMembers{List: []*smithy.Schema{&sProtocolType_WEBSOCKET, &sProtocolType_HTTP}}
+var mPublishStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishStatus_PUBLISHED, &sPublishStatus_PUBLISH_IN_PROGRESS, &sPublishStatus_PUBLISH_FAILED, &sPublishStatus_DISABLE_IN_PROGRESS, &sPublishStatus_DISABLE_FAILED, &sPublishStatus_DISABLED}}
+var m_ResponseParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResponseParameters_key, &s_ResponseParameters_value}}
+var mRestEndpointIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sRestEndpointIdentifier_IdentifierParts}}
+var mRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sRoute_ApiGatewayManaged, &sRoute_ApiKeyRequired, &sRoute_AuthorizationScopes, &sRoute_AuthorizationType, &sRoute_AuthorizerId, &sRoute_ModelSelectionExpression, &sRoute_OperationName, &sRoute_RequestModels, &sRoute_RequestParameters, &sRoute_RouteId, &sRoute_RouteKey, &sRoute_RouteResponseSelectionExpression, &sRoute_Target}, Seed: 4, Slots: []uint16{
+	0, 0, 12, 1, 0, 2, 0, 0, 10, 0, 4, 13, 9, 0, 11, 0, 0, 0, 0, 7, 0, 0, 0, 0,
+	0, 0, 6, 0, 0, 8, 3, 5,
+}}
+var m_RouteModels = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteModels_key, &s_RouteModels_value}}
+var m_RouteParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteParameters_key, &s_RouteParameters_value}}
+var mRouteResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteResponse_ModelSelectionExpression, &sRouteResponse_ResponseModels, &sRouteResponse_ResponseParameters, &sRouteResponse_RouteResponseId, &sRouteResponse_RouteResponseKey}}
+var mRouteSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteSettings_DataTraceEnabled, &sRouteSettings_DetailedMetricsEnabled, &sRouteSettings_LoggingLevel, &sRouteSettings_ThrottlingBurstLimit, &sRouteSettings_ThrottlingRateLimit}}
+var m_RouteSettingsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteSettingsMap_key, &s_RouteSettingsMap_value}}
+var mRoutingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingMode_API_MAPPING_ONLY, &sRoutingMode_ROUTING_RULE_ONLY, &sRoutingMode_ROUTING_RULE_THEN_API_MAPPING}}
+var mRoutingRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingRule_Actions, &sRoutingRule_Conditions, &sRoutingRule_Priority, &sRoutingRule_RoutingRuleArn, &sRoutingRule_RoutingRuleId}}
+var mRoutingRuleAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingRuleAction_InvokeApi}}
+var mRoutingRuleActionInvokeApi = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingRuleActionInvokeApi_ApiId, &sRoutingRuleActionInvokeApi_Stage, &sRoutingRuleActionInvokeApi_StripBasePath}}
+var mRoutingRuleCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingRuleCondition_MatchBasePaths, &sRoutingRuleCondition_MatchHeaders}}
+var mRoutingRuleMatchBasePaths = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingRuleMatchBasePaths_AnyOf}}
+var mRoutingRuleMatchHeaders = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingRuleMatchHeaders_AnyOf}}
+var mRoutingRuleMatchHeaderValue = smithy.SchemaMembers{List: []*smithy.Schema{&sRoutingRuleMatchHeaderValue_Header, &sRoutingRuleMatchHeaderValue_ValueGlob}}
+var mSection = smithy.SchemaMembers{List: []*smithy.Schema{&sSection_ProductRestEndpointPageArns, &sSection_SectionName}}
+var m_SecurityGroupIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIdList_member}}
+var mSecurityPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityPolicy_TLS_1_0, &sSecurityPolicy_TLS_1_2}}
+var mStage = smithy.SchemaMembers{List: []*smithy.Schema{&sStage_AccessLogSettings, &sStage_ApiGatewayManaged, &sStage_AutoDeploy, &sStage_ClientCertificateId, &sStage_CreatedDate, &sStage_DefaultRouteSettings, &sStage_DeploymentId, &sStage_Description, &sStage_LastDeploymentStatusMessage, &sStage_LastUpdatedDate, &sStage_RouteSettings, &sStage_StageName, &sStage_StageVariables, &sStage_Tags}, Seed: 2, Slots: []uint16{
+	5, 1, 7, 0, 0, 0, 8, 13, 0, 9, 0, 6, 0, 14, 0, 3, 0, 10, 11, 12, 0, 0, 4, 0,
+	0, 0, 0, 0, 2, 0, 0, 0,
+}}
+var m_StageVariablesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StageVariablesMap_key, &s_StageVariablesMap_value}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_AVAILABLE, &sStatus_IN_PROGRESS, &sStatus_FAILED}}
+var mStatusException = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusException_Exception, &sStatusException_Message}}
+var m_SubnetIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIdList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var m_TemplateMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateMap_key, &s_TemplateMap_value}}
+var mTlsConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsConfig_ServerNameToVerify}}
+var mTlsConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTlsConfigInput_ServerNameToVerify}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_LimitType, &sTooManyRequestsException_Message}}
+var mTryItState = smithy.SchemaMembers{List: []*smithy.Schema{&sTryItState_ENABLED, &sTryItState_DISABLED}}
+var mVpcLink = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcLink_CreatedDate, &sVpcLink_Name, &sVpcLink_SecurityGroupIds, &sVpcLink_SubnetIds, &sVpcLink_Tags, &sVpcLink_VpcLinkId, &sVpcLink_VpcLinkStatus, &sVpcLink_VpcLinkStatusMessage, &sVpcLink_VpcLinkVersion}, Seed: 1, Slots: []uint16{
+	6, 5, 9, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 4, 0, 0, 0,
+}}
+var mVpcLinkStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcLinkStatus_PENDING, &sVpcLinkStatus_AVAILABLE, &sVpcLinkStatus_DELETING, &sVpcLinkStatus_FAILED, &sVpcLinkStatus_INACTIVE}}
+var mVpcLinkVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sVpcLinkVersion_V2}}
+var mCreateApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiRequest_ApiKeySelectionExpression, &sCreateApiRequest_CorsConfiguration, &sCreateApiRequest_CredentialsArn, &sCreateApiRequest_Description, &sCreateApiRequest_DisableSchemaValidation, &sCreateApiRequest_DisableExecuteApiEndpoint, &sCreateApiRequest_IpAddressType, &sCreateApiRequest_Name, &sCreateApiRequest_ProtocolType, &sCreateApiRequest_RouteKey, &sCreateApiRequest_RouteSelectionExpression, &sCreateApiRequest_Tags, &sCreateApiRequest_Target, &sCreateApiRequest_Version}, Seed: 14, Slots: []uint16{
+	8, 5, 0, 0, 0, 7, 13, 1, 0, 4, 2, 0, 6, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	12, 3, 11, 10, 0, 0, 9, 0,
+}}
+var mCreateApiMappingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiMappingRequest_ApiId, &sCreateApiMappingRequest_ApiMappingKey, &sCreateApiMappingRequest_DomainName, &sCreateApiMappingRequest_Stage}}
+var mCreateApiMappingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiMappingResponse_ApiId, &sCreateApiMappingResponse_ApiMappingId, &sCreateApiMappingResponse_ApiMappingKey, &sCreateApiMappingResponse_Stage}}
+var mCreateApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateApiResponse_ApiEndpoint, &sCreateApiResponse_ApiGatewayManaged, &sCreateApiResponse_ApiId, &sCreateApiResponse_ApiKeySelectionExpression, &sCreateApiResponse_CorsConfiguration, &sCreateApiResponse_CreatedDate, &sCreateApiResponse_Description, &sCreateApiResponse_DisableSchemaValidation, &sCreateApiResponse_DisableExecuteApiEndpoint, &sCreateApiResponse_ImportInfo, &sCreateApiResponse_IpAddressType, &sCreateApiResponse_Name, &sCreateApiResponse_ProtocolType, &sCreateApiResponse_RouteSelectionExpression, &sCreateApiResponse_Tags, &sCreateApiResponse_Version, &sCreateApiResponse_Warnings}, Seed: 18, Slots: []uint16{
+	0, 0, 0, 15, 0, 0, 10, 1, 11, 0, 0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 13, 0, 8, 0, 0, 0, 0, 14, 0, 0, 7, 12, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 16, 0, 0, 5, 17, 0, 0, 4, 0, 0, 0, 0,
+}}
+var mCreateAuthorizerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAuthorizerRequest_ApiId, &sCreateAuthorizerRequest_AuthorizerCredentialsArn, &sCreateAuthorizerRequest_AuthorizerPayloadFormatVersion, &sCreateAuthorizerRequest_AuthorizerResultTtlInSeconds, &sCreateAuthorizerRequest_AuthorizerType, &sCreateAuthorizerRequest_AuthorizerUri, &sCreateAuthorizerRequest_EnableSimpleResponses, &sCreateAuthorizerRequest_IdentitySource, &sCreateAuthorizerRequest_IdentityValidationExpression, &sCreateAuthorizerRequest_JwtConfiguration, &sCreateAuthorizerRequest_Name}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 7, 1, 0, 9, 4, 0, 0, 0, 0, 0, 11, 0, 6, 2, 5, 8, 0, 0, 0, 0,
+	0, 10, 0, 0, 0, 3, 0, 0,
+}}
+var mCreateAuthorizerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAuthorizerResponse_AuthorizerCredentialsArn, &sCreateAuthorizerResponse_AuthorizerId, &sCreateAuthorizerResponse_AuthorizerPayloadFormatVersion, &sCreateAuthorizerResponse_AuthorizerResultTtlInSeconds, &sCreateAuthorizerResponse_AuthorizerType, &sCreateAuthorizerResponse_AuthorizerUri, &sCreateAuthorizerResponse_EnableSimpleResponses, &sCreateAuthorizerResponse_IdentitySource, &sCreateAuthorizerResponse_IdentityValidationExpression, &sCreateAuthorizerResponse_JwtConfiguration, &sCreateAuthorizerResponse_Name}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 0, 9, 4, 0, 0, 0, 0, 0, 11, 0, 6, 1, 5, 8, 0, 0, 2, 0,
+	0, 10, 0, 0, 0, 3, 0, 0,
+}}
+var mCreateDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeploymentRequest_ApiId, &sCreateDeploymentRequest_Description, &sCreateDeploymentRequest_StageName}}
+var mCreateDeploymentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeploymentResponse_AutoDeployed, &sCreateDeploymentResponse_CreatedDate, &sCreateDeploymentResponse_DeploymentId, &sCreateDeploymentResponse_DeploymentStatus, &sCreateDeploymentResponse_DeploymentStatusMessage, &sCreateDeploymentResponse_Description}}
+var mCreateDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainNameRequest_DomainName, &sCreateDomainNameRequest_DomainNameConfigurations, &sCreateDomainNameRequest_MutualTlsAuthentication, &sCreateDomainNameRequest_RoutingMode, &sCreateDomainNameRequest_Tags}}
+var mCreateDomainNameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDomainNameResponse_ApiMappingSelectionExpression, &sCreateDomainNameResponse_DomainName, &sCreateDomainNameResponse_DomainNameArn, &sCreateDomainNameResponse_DomainNameConfigurations, &sCreateDomainNameResponse_MutualTlsAuthentication, &sCreateDomainNameResponse_RoutingMode, &sCreateDomainNameResponse_Tags}}
+var mCreateIntegrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntegrationRequest_ApiId, &sCreateIntegrationRequest_ConnectionId, &sCreateIntegrationRequest_ConnectionType, &sCreateIntegrationRequest_ContentHandlingStrategy, &sCreateIntegrationRequest_CredentialsArn, &sCreateIntegrationRequest_Description, &sCreateIntegrationRequest_IntegrationMethod, &sCreateIntegrationRequest_IntegrationSubtype, &sCreateIntegrationRequest_IntegrationType, &sCreateIntegrationRequest_IntegrationUri, &sCreateIntegrationRequest_PassthroughBehavior, &sCreateIntegrationRequest_PayloadFormatVersion, &sCreateIntegrationRequest_RequestParameters, &sCreateIntegrationRequest_RequestTemplates, &sCreateIntegrationRequest_ResponseParameters, &sCreateIntegrationRequest_TemplateSelectionExpression, &sCreateIntegrationRequest_TimeoutInMillis, &sCreateIntegrationRequest_TlsConfig}, Seed: 2, Slots: []uint16{
+	0, 7, 0, 0, 0, 0, 6, 0, 9, 15, 0, 0, 0, 0, 0, 14, 0, 0, 10, 0, 0, 0, 4, 0,
+	0, 0, 3, 0, 0, 0, 0, 5, 12, 0, 0, 0, 0, 1, 0, 0, 0, 13, 0, 11, 8, 18, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 17, 0, 16,
+}}
+var mCreateIntegrationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntegrationResult_ApiGatewayManaged, &sCreateIntegrationResult_ConnectionId, &sCreateIntegrationResult_ConnectionType, &sCreateIntegrationResult_ContentHandlingStrategy, &sCreateIntegrationResult_CredentialsArn, &sCreateIntegrationResult_Description, &sCreateIntegrationResult_IntegrationId, &sCreateIntegrationResult_IntegrationMethod, &sCreateIntegrationResult_IntegrationResponseSelectionExpression, &sCreateIntegrationResult_IntegrationSubtype, &sCreateIntegrationResult_IntegrationType, &sCreateIntegrationResult_IntegrationUri, &sCreateIntegrationResult_PassthroughBehavior, &sCreateIntegrationResult_PayloadFormatVersion, &sCreateIntegrationResult_RequestParameters, &sCreateIntegrationResult_RequestTemplates, &sCreateIntegrationResult_ResponseParameters, &sCreateIntegrationResult_TemplateSelectionExpression, &sCreateIntegrationResult_TimeoutInMillis, &sCreateIntegrationResult_TlsConfig}, Seed: 2, Slots: []uint16{
+	0, 8, 0, 0, 0, 0, 6, 0, 11, 17, 0, 0, 0, 7, 0, 16, 0, 9, 12, 0, 0, 0, 4, 0,
+	0, 0, 3, 0, 0, 0, 0, 5, 14, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 13, 10, 20, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 19, 0, 18,
+}}
+var mCreateIntegrationResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntegrationResponseRequest_ApiId, &sCreateIntegrationResponseRequest_ContentHandlingStrategy, &sCreateIntegrationResponseRequest_IntegrationId, &sCreateIntegrationResponseRequest_IntegrationResponseKey, &sCreateIntegrationResponseRequest_ResponseParameters, &sCreateIntegrationResponseRequest_ResponseTemplates, &sCreateIntegrationResponseRequest_TemplateSelectionExpression}}
+var mCreateIntegrationResponseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIntegrationResponseResponse_ContentHandlingStrategy, &sCreateIntegrationResponseResponse_IntegrationResponseId, &sCreateIntegrationResponseResponse_IntegrationResponseKey, &sCreateIntegrationResponseResponse_ResponseParameters, &sCreateIntegrationResponseResponse_ResponseTemplates, &sCreateIntegrationResponseResponse_TemplateSelectionExpression}}
+var mCreateModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelRequest_ApiId, &sCreateModelRequest_ContentType, &sCreateModelRequest_Description, &sCreateModelRequest_Name, &sCreateModelRequest_Schema}}
+var mCreateModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateModelResponse_ContentType, &sCreateModelResponse_Description, &sCreateModelResponse_ModelId, &sCreateModelResponse_Name, &sCreateModelResponse_Schema}}
+var mCreatePortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePortalRequest_Authorization, &sCreatePortalRequest_EndpointConfiguration, &sCreatePortalRequest_IncludedPortalProductArns, &sCreatePortalRequest_LogoUri, &sCreatePortalRequest_PortalContent, &sCreatePortalRequest_RumAppMonitorName, &sCreatePortalRequest_Tags}}
+var mCreatePortalResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePortalResponse_Authorization, &sCreatePortalResponse_EndpointConfiguration, &sCreatePortalResponse_IncludedPortalProductArns, &sCreatePortalResponse_LastModified, &sCreatePortalResponse_LastPublished, &sCreatePortalResponse_LastPublishedDescription, &sCreatePortalResponse_PortalArn, &sCreatePortalResponse_PortalContent, &sCreatePortalResponse_PortalId, &sCreatePortalResponse_PublishStatus, &sCreatePortalResponse_RumAppMonitorName, &sCreatePortalResponse_StatusException, &sCreatePortalResponse_Tags}, Seed: 9, Slots: []uint16{
+	12, 0, 0, 0, 11, 5, 9, 0, 2, 0, 0, 1, 13, 6, 0, 10, 4, 7, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 3, 8, 0, 0, 0,
+}}
+var mCreatePortalProductRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePortalProductRequest_Description, &sCreatePortalProductRequest_DisplayName, &sCreatePortalProductRequest_Tags}}
+var mCreatePortalProductResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePortalProductResponse_Description, &sCreatePortalProductResponse_DisplayName, &sCreatePortalProductResponse_DisplayOrder, &sCreatePortalProductResponse_LastModified, &sCreatePortalProductResponse_PortalProductArn, &sCreatePortalProductResponse_PortalProductId, &sCreatePortalProductResponse_Tags}}
+var mCreateProductPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProductPageRequest_DisplayContent, &sCreateProductPageRequest_PortalProductId}}
+var mCreateProductPageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProductPageResponse_DisplayContent, &sCreateProductPageResponse_LastModified, &sCreateProductPageResponse_ProductPageArn, &sCreateProductPageResponse_ProductPageId}}
+var mCreateProductRestEndpointPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProductRestEndpointPageRequest_DisplayContent, &sCreateProductRestEndpointPageRequest_PortalProductId, &sCreateProductRestEndpointPageRequest_RestEndpointIdentifier, &sCreateProductRestEndpointPageRequest_TryItState}}
+var mCreateProductRestEndpointPageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateProductRestEndpointPageResponse_DisplayContent, &sCreateProductRestEndpointPageResponse_LastModified, &sCreateProductRestEndpointPageResponse_ProductRestEndpointPageArn, &sCreateProductRestEndpointPageResponse_ProductRestEndpointPageId, &sCreateProductRestEndpointPageResponse_RestEndpointIdentifier, &sCreateProductRestEndpointPageResponse_Status, &sCreateProductRestEndpointPageResponse_StatusException, &sCreateProductRestEndpointPageResponse_TryItState}}
+var mCreateRouteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRouteRequest_ApiId, &sCreateRouteRequest_ApiKeyRequired, &sCreateRouteRequest_AuthorizationScopes, &sCreateRouteRequest_AuthorizationType, &sCreateRouteRequest_AuthorizerId, &sCreateRouteRequest_ModelSelectionExpression, &sCreateRouteRequest_OperationName, &sCreateRouteRequest_RequestModels, &sCreateRouteRequest_RequestParameters, &sCreateRouteRequest_RouteKey, &sCreateRouteRequest_RouteResponseSelectionExpression, &sCreateRouteRequest_Target}, Seed: 4, Slots: []uint16{
+	0, 0, 11, 0, 0, 2, 0, 0, 0, 0, 4, 12, 9, 0, 10, 0, 0, 0, 0, 7, 0, 0, 1, 0,
+	0, 0, 6, 0, 0, 8, 3, 5,
+}}
+var mCreateRouteResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRouteResult_ApiGatewayManaged, &sCreateRouteResult_ApiKeyRequired, &sCreateRouteResult_AuthorizationScopes, &sCreateRouteResult_AuthorizationType, &sCreateRouteResult_AuthorizerId, &sCreateRouteResult_ModelSelectionExpression, &sCreateRouteResult_OperationName, &sCreateRouteResult_RequestModels, &sCreateRouteResult_RequestParameters, &sCreateRouteResult_RouteId, &sCreateRouteResult_RouteKey, &sCreateRouteResult_RouteResponseSelectionExpression, &sCreateRouteResult_Target}, Seed: 4, Slots: []uint16{
+	0, 0, 12, 1, 0, 2, 0, 0, 10, 0, 4, 13, 9, 0, 11, 0, 0, 0, 0, 7, 0, 0, 0, 0,
+	0, 0, 6, 0, 0, 8, 3, 5,
+}}
+var mCreateRouteResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRouteResponseRequest_ApiId, &sCreateRouteResponseRequest_ModelSelectionExpression, &sCreateRouteResponseRequest_ResponseModels, &sCreateRouteResponseRequest_ResponseParameters, &sCreateRouteResponseRequest_RouteId, &sCreateRouteResponseRequest_RouteResponseKey}}
+var mCreateRouteResponseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRouteResponseResponse_ModelSelectionExpression, &sCreateRouteResponseResponse_ResponseModels, &sCreateRouteResponseResponse_ResponseParameters, &sCreateRouteResponseResponse_RouteResponseId, &sCreateRouteResponseResponse_RouteResponseKey}}
+var mCreateRoutingRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRoutingRuleRequest_Actions, &sCreateRoutingRuleRequest_Conditions, &sCreateRoutingRuleRequest_DomainName, &sCreateRoutingRuleRequest_DomainNameId, &sCreateRoutingRuleRequest_Priority}}
+var mCreateRoutingRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRoutingRuleResponse_Actions, &sCreateRoutingRuleResponse_Conditions, &sCreateRoutingRuleResponse_Priority, &sCreateRoutingRuleResponse_RoutingRuleArn, &sCreateRoutingRuleResponse_RoutingRuleId}}
+var mCreateStageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStageRequest_AccessLogSettings, &sCreateStageRequest_ApiId, &sCreateStageRequest_AutoDeploy, &sCreateStageRequest_ClientCertificateId, &sCreateStageRequest_DefaultRouteSettings, &sCreateStageRequest_DeploymentId, &sCreateStageRequest_Description, &sCreateStageRequest_RouteSettings, &sCreateStageRequest_StageName, &sCreateStageRequest_StageVariables, &sCreateStageRequest_Tags}, Seed: 2, Slots: []uint16{
+	0, 1, 6, 0, 0, 2, 7, 10, 0, 0, 0, 5, 0, 11, 0, 3, 0, 0, 8, 9, 0, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mCreateStageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStageResponse_AccessLogSettings, &sCreateStageResponse_ApiGatewayManaged, &sCreateStageResponse_AutoDeploy, &sCreateStageResponse_ClientCertificateId, &sCreateStageResponse_CreatedDate, &sCreateStageResponse_DefaultRouteSettings, &sCreateStageResponse_DeploymentId, &sCreateStageResponse_Description, &sCreateStageResponse_LastDeploymentStatusMessage, &sCreateStageResponse_LastUpdatedDate, &sCreateStageResponse_RouteSettings, &sCreateStageResponse_StageName, &sCreateStageResponse_StageVariables, &sCreateStageResponse_Tags}, Seed: 2, Slots: []uint16{
+	5, 1, 7, 0, 0, 0, 8, 13, 0, 9, 0, 6, 0, 14, 0, 3, 0, 10, 11, 12, 0, 0, 4, 0,
+	0, 0, 0, 0, 2, 0, 0, 0,
+}}
+var mCreateVpcLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcLinkRequest_Name, &sCreateVpcLinkRequest_SecurityGroupIds, &sCreateVpcLinkRequest_SubnetIds, &sCreateVpcLinkRequest_Tags}}
+var mCreateVpcLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVpcLinkResponse_CreatedDate, &sCreateVpcLinkResponse_Name, &sCreateVpcLinkResponse_SecurityGroupIds, &sCreateVpcLinkResponse_SubnetIds, &sCreateVpcLinkResponse_Tags, &sCreateVpcLinkResponse_VpcLinkId, &sCreateVpcLinkResponse_VpcLinkStatus, &sCreateVpcLinkResponse_VpcLinkStatusMessage, &sCreateVpcLinkResponse_VpcLinkVersion}, Seed: 1, Slots: []uint16{
+	6, 5, 9, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 4, 0, 0, 0,
+}}
+var mDeleteAccessLogSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessLogSettingsRequest_ApiId, &sDeleteAccessLogSettingsRequest_StageName}}
+var mDeleteApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApiRequest_ApiId}}
+var mDeleteApiMappingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteApiMappingRequest_ApiMappingId, &sDeleteApiMappingRequest_DomainName}}
+var mDeleteAuthorizerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAuthorizerRequest_ApiId, &sDeleteAuthorizerRequest_AuthorizerId}}
+var mDeleteCorsConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCorsConfigurationRequest_ApiId}}
+var mDeleteDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeploymentRequest_ApiId, &sDeleteDeploymentRequest_DeploymentId}}
+var mDeleteDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDomainNameRequest_DomainName}}
+var mDeleteIntegrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIntegrationRequest_ApiId, &sDeleteIntegrationRequest_IntegrationId}}
+var mDeleteIntegrationResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIntegrationResponseRequest_ApiId, &sDeleteIntegrationResponseRequest_IntegrationId, &sDeleteIntegrationResponseRequest_IntegrationResponseId}}
+var mDeleteModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteModelRequest_ApiId, &sDeleteModelRequest_ModelId}}
+var mDeletePortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePortalRequest_PortalId}}
+var mDeletePortalProductRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePortalProductRequest_PortalProductId}}
+var mDeletePortalProductSharingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePortalProductSharingPolicyRequest_PortalProductId}}
+var mDeleteProductPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProductPageRequest_PortalProductId, &sDeleteProductPageRequest_ProductPageId}}
+var mDeleteProductRestEndpointPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteProductRestEndpointPageRequest_PortalProductId, &sDeleteProductRestEndpointPageRequest_ProductRestEndpointPageId}}
+var mDeleteRouteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRouteRequest_ApiId, &sDeleteRouteRequest_RouteId}}
+var mDeleteRouteRequestParameterRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRouteRequestParameterRequest_ApiId, &sDeleteRouteRequestParameterRequest_RequestParameterKey, &sDeleteRouteRequestParameterRequest_RouteId}}
+var mDeleteRouteResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRouteResponseRequest_ApiId, &sDeleteRouteResponseRequest_RouteId, &sDeleteRouteResponseRequest_RouteResponseId}}
+var mDeleteRouteSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRouteSettingsRequest_ApiId, &sDeleteRouteSettingsRequest_RouteKey, &sDeleteRouteSettingsRequest_StageName}}
+var mDeleteRoutingRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRoutingRuleRequest_DomainName, &sDeleteRoutingRuleRequest_DomainNameId, &sDeleteRoutingRuleRequest_RoutingRuleId}}
+var mDeleteStageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStageRequest_ApiId, &sDeleteStageRequest_StageName}}
+var mDeleteVpcLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVpcLinkRequest_VpcLinkId}}
+var mDisablePortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisablePortalRequest_PortalId}}
+var mExportApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sExportApiRequest_ApiId, &sExportApiRequest_ExportVersion, &sExportApiRequest_IncludeExtensions, &sExportApiRequest_OutputType, &sExportApiRequest_Specification, &sExportApiRequest_StageName}}
+var mExportApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sExportApiResponse_body}}
+var mGetApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiRequest_ApiId}}
+var mGetApiMappingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiMappingRequest_ApiMappingId, &sGetApiMappingRequest_DomainName}}
+var mGetApiMappingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiMappingResponse_ApiId, &sGetApiMappingResponse_ApiMappingId, &sGetApiMappingResponse_ApiMappingKey, &sGetApiMappingResponse_Stage}}
+var mGetApiMappingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiMappingsRequest_DomainName, &sGetApiMappingsRequest_MaxResults, &sGetApiMappingsRequest_NextToken}}
+var mGetApiMappingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiMappingsResponse_Items, &sGetApiMappingsResponse_NextToken}}
+var mGetApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApiResponse_ApiEndpoint, &sGetApiResponse_ApiGatewayManaged, &sGetApiResponse_ApiId, &sGetApiResponse_ApiKeySelectionExpression, &sGetApiResponse_CorsConfiguration, &sGetApiResponse_CreatedDate, &sGetApiResponse_Description, &sGetApiResponse_DisableSchemaValidation, &sGetApiResponse_DisableExecuteApiEndpoint, &sGetApiResponse_ImportInfo, &sGetApiResponse_IpAddressType, &sGetApiResponse_Name, &sGetApiResponse_ProtocolType, &sGetApiResponse_RouteSelectionExpression, &sGetApiResponse_Tags, &sGetApiResponse_Version, &sGetApiResponse_Warnings}, Seed: 18, Slots: []uint16{
+	0, 0, 0, 15, 0, 0, 10, 1, 11, 0, 0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 13, 0, 8, 0, 0, 0, 0, 14, 0, 0, 7, 12, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 16, 0, 0, 5, 17, 0, 0, 4, 0, 0, 0, 0,
+}}
+var mGetApisRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApisRequest_MaxResults, &sGetApisRequest_NextToken}}
+var mGetApisResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetApisResponse_Items, &sGetApisResponse_NextToken}}
+var mGetAuthorizerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAuthorizerRequest_ApiId, &sGetAuthorizerRequest_AuthorizerId}}
+var mGetAuthorizerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAuthorizerResponse_AuthorizerCredentialsArn, &sGetAuthorizerResponse_AuthorizerId, &sGetAuthorizerResponse_AuthorizerPayloadFormatVersion, &sGetAuthorizerResponse_AuthorizerResultTtlInSeconds, &sGetAuthorizerResponse_AuthorizerType, &sGetAuthorizerResponse_AuthorizerUri, &sGetAuthorizerResponse_EnableSimpleResponses, &sGetAuthorizerResponse_IdentitySource, &sGetAuthorizerResponse_IdentityValidationExpression, &sGetAuthorizerResponse_JwtConfiguration, &sGetAuthorizerResponse_Name}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 0, 9, 4, 0, 0, 0, 0, 0, 11, 0, 6, 1, 5, 8, 0, 0, 2, 0,
+	0, 10, 0, 0, 0, 3, 0, 0,
+}}
+var mGetAuthorizersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAuthorizersRequest_ApiId, &sGetAuthorizersRequest_MaxResults, &sGetAuthorizersRequest_NextToken}}
+var mGetAuthorizersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAuthorizersResponse_Items, &sGetAuthorizersResponse_NextToken}}
+var mGetDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentRequest_ApiId, &sGetDeploymentRequest_DeploymentId}}
+var mGetDeploymentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentResponse_AutoDeployed, &sGetDeploymentResponse_CreatedDate, &sGetDeploymentResponse_DeploymentId, &sGetDeploymentResponse_DeploymentStatus, &sGetDeploymentResponse_DeploymentStatusMessage, &sGetDeploymentResponse_Description}}
+var mGetDeploymentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentsRequest_ApiId, &sGetDeploymentsRequest_MaxResults, &sGetDeploymentsRequest_NextToken}}
+var mGetDeploymentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentsResponse_Items, &sGetDeploymentsResponse_NextToken}}
+var mGetDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainNameRequest_DomainName}}
+var mGetDomainNameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainNameResponse_ApiMappingSelectionExpression, &sGetDomainNameResponse_DomainName, &sGetDomainNameResponse_DomainNameArn, &sGetDomainNameResponse_DomainNameConfigurations, &sGetDomainNameResponse_MutualTlsAuthentication, &sGetDomainNameResponse_RoutingMode, &sGetDomainNameResponse_Tags}}
+var mGetDomainNamesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainNamesRequest_MaxResults, &sGetDomainNamesRequest_NextToken}}
+var mGetDomainNamesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDomainNamesResponse_Items, &sGetDomainNamesResponse_NextToken}}
+var mGetIntegrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationRequest_ApiId, &sGetIntegrationRequest_IntegrationId}}
+var mGetIntegrationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationResult_ApiGatewayManaged, &sGetIntegrationResult_ConnectionId, &sGetIntegrationResult_ConnectionType, &sGetIntegrationResult_ContentHandlingStrategy, &sGetIntegrationResult_CredentialsArn, &sGetIntegrationResult_Description, &sGetIntegrationResult_IntegrationId, &sGetIntegrationResult_IntegrationMethod, &sGetIntegrationResult_IntegrationResponseSelectionExpression, &sGetIntegrationResult_IntegrationSubtype, &sGetIntegrationResult_IntegrationType, &sGetIntegrationResult_IntegrationUri, &sGetIntegrationResult_PassthroughBehavior, &sGetIntegrationResult_PayloadFormatVersion, &sGetIntegrationResult_RequestParameters, &sGetIntegrationResult_RequestTemplates, &sGetIntegrationResult_ResponseParameters, &sGetIntegrationResult_TemplateSelectionExpression, &sGetIntegrationResult_TimeoutInMillis, &sGetIntegrationResult_TlsConfig}, Seed: 2, Slots: []uint16{
+	0, 8, 0, 0, 0, 0, 6, 0, 11, 17, 0, 0, 0, 7, 0, 16, 0, 9, 12, 0, 0, 0, 4, 0,
+	0, 0, 3, 0, 0, 0, 0, 5, 14, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 13, 10, 20, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 19, 0, 18,
+}}
+var mGetIntegrationResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationResponseRequest_ApiId, &sGetIntegrationResponseRequest_IntegrationId, &sGetIntegrationResponseRequest_IntegrationResponseId}}
+var mGetIntegrationResponseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationResponseResponse_ContentHandlingStrategy, &sGetIntegrationResponseResponse_IntegrationResponseId, &sGetIntegrationResponseResponse_IntegrationResponseKey, &sGetIntegrationResponseResponse_ResponseParameters, &sGetIntegrationResponseResponse_ResponseTemplates, &sGetIntegrationResponseResponse_TemplateSelectionExpression}}
+var mGetIntegrationResponsesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationResponsesRequest_ApiId, &sGetIntegrationResponsesRequest_IntegrationId, &sGetIntegrationResponsesRequest_MaxResults, &sGetIntegrationResponsesRequest_NextToken}}
+var mGetIntegrationResponsesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationResponsesResponse_Items, &sGetIntegrationResponsesResponse_NextToken}}
+var mGetIntegrationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationsRequest_ApiId, &sGetIntegrationsRequest_MaxResults, &sGetIntegrationsRequest_NextToken}}
+var mGetIntegrationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIntegrationsResponse_Items, &sGetIntegrationsResponse_NextToken}}
+var mGetModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelRequest_ApiId, &sGetModelRequest_ModelId}}
+var mGetModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelResponse_ContentType, &sGetModelResponse_Description, &sGetModelResponse_ModelId, &sGetModelResponse_Name, &sGetModelResponse_Schema}}
+var mGetModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelsRequest_ApiId, &sGetModelsRequest_MaxResults, &sGetModelsRequest_NextToken}}
+var mGetModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelsResponse_Items, &sGetModelsResponse_NextToken}}
+var mGetModelTemplateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelTemplateRequest_ApiId, &sGetModelTemplateRequest_ModelId}}
+var mGetModelTemplateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetModelTemplateResponse_Value}}
+var mGetPortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalRequest_PortalId}}
+var mGetPortalResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalResponse_Authorization, &sGetPortalResponse_EndpointConfiguration, &sGetPortalResponse_IncludedPortalProductArns, &sGetPortalResponse_LastModified, &sGetPortalResponse_LastPublished, &sGetPortalResponse_LastPublishedDescription, &sGetPortalResponse_PortalArn, &sGetPortalResponse_PortalContent, &sGetPortalResponse_PortalId, &sGetPortalResponse_Preview, &sGetPortalResponse_PublishStatus, &sGetPortalResponse_RumAppMonitorName, &sGetPortalResponse_StatusException, &sGetPortalResponse_Tags}, Seed: 9, Slots: []uint16{
+	13, 0, 0, 0, 12, 5, 9, 0, 2, 0, 0, 1, 14, 6, 0, 11, 4, 7, 0, 0, 0, 0, 0, 0,
+	0, 10, 0, 3, 8, 0, 0, 0,
+}}
+var mGetPortalProductRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalProductRequest_PortalProductId, &sGetPortalProductRequest_ResourceOwnerAccountId}}
+var mGetPortalProductResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalProductResponse_Description, &sGetPortalProductResponse_DisplayName, &sGetPortalProductResponse_DisplayOrder, &sGetPortalProductResponse_LastModified, &sGetPortalProductResponse_PortalProductArn, &sGetPortalProductResponse_PortalProductId, &sGetPortalProductResponse_Tags}}
+var mGetPortalProductSharingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalProductSharingPolicyRequest_PortalProductId}}
+var mGetPortalProductSharingPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPortalProductSharingPolicyResponse_PolicyDocument, &sGetPortalProductSharingPolicyResponse_PortalProductId}}
+var mGetProductPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProductPageRequest_PortalProductId, &sGetProductPageRequest_ProductPageId, &sGetProductPageRequest_ResourceOwnerAccountId}}
+var mGetProductPageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProductPageResponse_DisplayContent, &sGetProductPageResponse_LastModified, &sGetProductPageResponse_ProductPageArn, &sGetProductPageResponse_ProductPageId}}
+var mGetProductRestEndpointPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProductRestEndpointPageRequest_IncludeRawDisplayContent, &sGetProductRestEndpointPageRequest_PortalProductId, &sGetProductRestEndpointPageRequest_ProductRestEndpointPageId, &sGetProductRestEndpointPageRequest_ResourceOwnerAccountId}}
+var mGetProductRestEndpointPageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProductRestEndpointPageResponse_DisplayContent, &sGetProductRestEndpointPageResponse_LastModified, &sGetProductRestEndpointPageResponse_ProductRestEndpointPageArn, &sGetProductRestEndpointPageResponse_ProductRestEndpointPageId, &sGetProductRestEndpointPageResponse_RawDisplayContent, &sGetProductRestEndpointPageResponse_RestEndpointIdentifier, &sGetProductRestEndpointPageResponse_Status, &sGetProductRestEndpointPageResponse_StatusException, &sGetProductRestEndpointPageResponse_TryItState}, Seed: 1, Slots: []uint16{
+	0, 2, 0, 0, 0, 0, 0, 0, 0, 5, 8, 0, 1, 3, 0, 0, 9, 0, 0, 0, 0, 0, 4, 0,
+	0, 0, 0, 0, 6, 7, 0, 0,
+}}
+var mGetRouteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteRequest_ApiId, &sGetRouteRequest_RouteId}}
+var mGetRouteResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteResult_ApiGatewayManaged, &sGetRouteResult_ApiKeyRequired, &sGetRouteResult_AuthorizationScopes, &sGetRouteResult_AuthorizationType, &sGetRouteResult_AuthorizerId, &sGetRouteResult_ModelSelectionExpression, &sGetRouteResult_OperationName, &sGetRouteResult_RequestModels, &sGetRouteResult_RequestParameters, &sGetRouteResult_RouteId, &sGetRouteResult_RouteKey, &sGetRouteResult_RouteResponseSelectionExpression, &sGetRouteResult_Target}, Seed: 4, Slots: []uint16{
+	0, 0, 12, 1, 0, 2, 0, 0, 10, 0, 4, 13, 9, 0, 11, 0, 0, 0, 0, 7, 0, 0, 0, 0,
+	0, 0, 6, 0, 0, 8, 3, 5,
+}}
+var mGetRouteResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteResponseRequest_ApiId, &sGetRouteResponseRequest_RouteId, &sGetRouteResponseRequest_RouteResponseId}}
+var mGetRouteResponseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteResponseResponse_ModelSelectionExpression, &sGetRouteResponseResponse_ResponseModels, &sGetRouteResponseResponse_ResponseParameters, &sGetRouteResponseResponse_RouteResponseId, &sGetRouteResponseResponse_RouteResponseKey}}
+var mGetRouteResponsesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteResponsesRequest_ApiId, &sGetRouteResponsesRequest_MaxResults, &sGetRouteResponsesRequest_NextToken, &sGetRouteResponsesRequest_RouteId}}
+var mGetRouteResponsesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRouteResponsesResponse_Items, &sGetRouteResponsesResponse_NextToken}}
+var mGetRoutesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoutesRequest_ApiId, &sGetRoutesRequest_MaxResults, &sGetRoutesRequest_NextToken}}
+var mGetRoutesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoutesResponse_Items, &sGetRoutesResponse_NextToken}}
+var mGetRoutingRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoutingRuleRequest_DomainName, &sGetRoutingRuleRequest_DomainNameId, &sGetRoutingRuleRequest_RoutingRuleId}}
+var mGetRoutingRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRoutingRuleResponse_Actions, &sGetRoutingRuleResponse_Conditions, &sGetRoutingRuleResponse_Priority, &sGetRoutingRuleResponse_RoutingRuleArn, &sGetRoutingRuleResponse_RoutingRuleId}}
+var mGetStageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStageRequest_ApiId, &sGetStageRequest_StageName}}
+var mGetStageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStageResponse_AccessLogSettings, &sGetStageResponse_ApiGatewayManaged, &sGetStageResponse_AutoDeploy, &sGetStageResponse_ClientCertificateId, &sGetStageResponse_CreatedDate, &sGetStageResponse_DefaultRouteSettings, &sGetStageResponse_DeploymentId, &sGetStageResponse_Description, &sGetStageResponse_LastDeploymentStatusMessage, &sGetStageResponse_LastUpdatedDate, &sGetStageResponse_RouteSettings, &sGetStageResponse_StageName, &sGetStageResponse_StageVariables, &sGetStageResponse_Tags}, Seed: 2, Slots: []uint16{
+	5, 1, 7, 0, 0, 0, 8, 13, 0, 9, 0, 6, 0, 14, 0, 3, 0, 10, 11, 12, 0, 0, 4, 0,
+	0, 0, 0, 0, 2, 0, 0, 0,
+}}
+var mGetStagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStagesRequest_ApiId, &sGetStagesRequest_MaxResults, &sGetStagesRequest_NextToken}}
+var mGetStagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetStagesResponse_Items, &sGetStagesResponse_NextToken}}
+var mGetTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTagsRequest_ResourceArn}}
+var mGetTagsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTagsResponse_Tags}}
+var mGetVpcLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVpcLinkRequest_VpcLinkId}}
+var mGetVpcLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVpcLinkResponse_CreatedDate, &sGetVpcLinkResponse_Name, &sGetVpcLinkResponse_SecurityGroupIds, &sGetVpcLinkResponse_SubnetIds, &sGetVpcLinkResponse_Tags, &sGetVpcLinkResponse_VpcLinkId, &sGetVpcLinkResponse_VpcLinkStatus, &sGetVpcLinkResponse_VpcLinkStatusMessage, &sGetVpcLinkResponse_VpcLinkVersion}, Seed: 1, Slots: []uint16{
+	6, 5, 9, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 4, 0, 0, 0,
+}}
+var mGetVpcLinksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVpcLinksRequest_MaxResults, &sGetVpcLinksRequest_NextToken}}
+var mGetVpcLinksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVpcLinksResponse_Items, &sGetVpcLinksResponse_NextToken}}
+var mImportApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sImportApiRequest_Basepath, &sImportApiRequest_Body, &sImportApiRequest_FailOnWarnings}}
+var mImportApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sImportApiResponse_ApiEndpoint, &sImportApiResponse_ApiGatewayManaged, &sImportApiResponse_ApiId, &sImportApiResponse_ApiKeySelectionExpression, &sImportApiResponse_CorsConfiguration, &sImportApiResponse_CreatedDate, &sImportApiResponse_Description, &sImportApiResponse_DisableSchemaValidation, &sImportApiResponse_DisableExecuteApiEndpoint, &sImportApiResponse_ImportInfo, &sImportApiResponse_IpAddressType, &sImportApiResponse_Name, &sImportApiResponse_ProtocolType, &sImportApiResponse_RouteSelectionExpression, &sImportApiResponse_Tags, &sImportApiResponse_Version, &sImportApiResponse_Warnings}, Seed: 18, Slots: []uint16{
+	0, 0, 0, 15, 0, 0, 10, 1, 11, 0, 0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 13, 0, 8, 0, 0, 0, 0, 14, 0, 0, 7, 12, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 16, 0, 0, 5, 17, 0, 0, 4, 0, 0, 0, 0,
+}}
+var mListPortalProductsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPortalProductsRequest_MaxResults, &sListPortalProductsRequest_NextToken, &sListPortalProductsRequest_ResourceOwner}}
+var mListPortalProductsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPortalProductsResponse_Items, &sListPortalProductsResponse_NextToken}}
+var mListPortalsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPortalsRequest_MaxResults, &sListPortalsRequest_NextToken}}
+var mListPortalsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPortalsResponse_Items, &sListPortalsResponse_NextToken}}
+var mListProductPagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProductPagesRequest_MaxResults, &sListProductPagesRequest_NextToken, &sListProductPagesRequest_PortalProductId, &sListProductPagesRequest_ResourceOwnerAccountId}}
+var mListProductPagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProductPagesResponse_Items, &sListProductPagesResponse_NextToken}}
+var mListProductRestEndpointPagesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProductRestEndpointPagesRequest_MaxResults, &sListProductRestEndpointPagesRequest_NextToken, &sListProductRestEndpointPagesRequest_PortalProductId, &sListProductRestEndpointPagesRequest_ResourceOwnerAccountId}}
+var mListProductRestEndpointPagesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProductRestEndpointPagesResponse_Items, &sListProductRestEndpointPagesResponse_NextToken}}
+var mListRoutingRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoutingRulesRequest_DomainName, &sListRoutingRulesRequest_DomainNameId, &sListRoutingRulesRequest_MaxResults, &sListRoutingRulesRequest_NextToken}}
+var mListRoutingRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRoutingRulesResponse_NextToken, &sListRoutingRulesResponse_RoutingRules}}
+var mPreviewPortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPreviewPortalRequest_PortalId}}
+var mPublishPortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishPortalRequest_Description, &sPublishPortalRequest_PortalId}}
+var mPutPortalProductSharingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutPortalProductSharingPolicyRequest_PolicyDocument, &sPutPortalProductSharingPolicyRequest_PortalProductId}}
+var mPutRoutingRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRoutingRuleRequest_Actions, &sPutRoutingRuleRequest_Conditions, &sPutRoutingRuleRequest_DomainName, &sPutRoutingRuleRequest_DomainNameId, &sPutRoutingRuleRequest_Priority, &sPutRoutingRuleRequest_RoutingRuleId}}
+var mPutRoutingRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRoutingRuleResponse_Actions, &sPutRoutingRuleResponse_Conditions, &sPutRoutingRuleResponse_Priority, &sPutRoutingRuleResponse_RoutingRuleArn, &sPutRoutingRuleResponse_RoutingRuleId}}
+var mReimportApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReimportApiRequest_ApiId, &sReimportApiRequest_Basepath, &sReimportApiRequest_Body, &sReimportApiRequest_FailOnWarnings}}
+var mReimportApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sReimportApiResponse_ApiEndpoint, &sReimportApiResponse_ApiGatewayManaged, &sReimportApiResponse_ApiId, &sReimportApiResponse_ApiKeySelectionExpression, &sReimportApiResponse_CorsConfiguration, &sReimportApiResponse_CreatedDate, &sReimportApiResponse_Description, &sReimportApiResponse_DisableSchemaValidation, &sReimportApiResponse_DisableExecuteApiEndpoint, &sReimportApiResponse_ImportInfo, &sReimportApiResponse_IpAddressType, &sReimportApiResponse_Name, &sReimportApiResponse_ProtocolType, &sReimportApiResponse_RouteSelectionExpression, &sReimportApiResponse_Tags, &sReimportApiResponse_Version, &sReimportApiResponse_Warnings}, Seed: 18, Slots: []uint16{
+	0, 0, 0, 15, 0, 0, 10, 1, 11, 0, 0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 13, 0, 8, 0, 0, 0, 0, 14, 0, 0, 7, 12, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 16, 0, 0, 5, 17, 0, 0, 4, 0, 0, 0, 0,
+}}
+var mResetAuthorizersCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetAuthorizersCacheRequest_ApiId, &sResetAuthorizersCacheRequest_StageName}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateApiRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiRequest_ApiId, &sUpdateApiRequest_ApiKeySelectionExpression, &sUpdateApiRequest_CorsConfiguration, &sUpdateApiRequest_CredentialsArn, &sUpdateApiRequest_Description, &sUpdateApiRequest_DisableSchemaValidation, &sUpdateApiRequest_DisableExecuteApiEndpoint, &sUpdateApiRequest_IpAddressType, &sUpdateApiRequest_Name, &sUpdateApiRequest_RouteKey, &sUpdateApiRequest_RouteSelectionExpression, &sUpdateApiRequest_Target, &sUpdateApiRequest_Version}, Seed: 14, Slots: []uint16{
+	9, 6, 0, 0, 0, 8, 12, 2, 0, 5, 3, 0, 7, 13, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 4, 11, 10, 0, 0, 0, 1,
+}}
+var mUpdateApiMappingRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiMappingRequest_ApiId, &sUpdateApiMappingRequest_ApiMappingId, &sUpdateApiMappingRequest_ApiMappingKey, &sUpdateApiMappingRequest_DomainName, &sUpdateApiMappingRequest_Stage}}
+var mUpdateApiMappingResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiMappingResponse_ApiId, &sUpdateApiMappingResponse_ApiMappingId, &sUpdateApiMappingResponse_ApiMappingKey, &sUpdateApiMappingResponse_Stage}}
+var mUpdateApiResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateApiResponse_ApiEndpoint, &sUpdateApiResponse_ApiGatewayManaged, &sUpdateApiResponse_ApiId, &sUpdateApiResponse_ApiKeySelectionExpression, &sUpdateApiResponse_CorsConfiguration, &sUpdateApiResponse_CreatedDate, &sUpdateApiResponse_Description, &sUpdateApiResponse_DisableSchemaValidation, &sUpdateApiResponse_DisableExecuteApiEndpoint, &sUpdateApiResponse_ImportInfo, &sUpdateApiResponse_IpAddressType, &sUpdateApiResponse_Name, &sUpdateApiResponse_ProtocolType, &sUpdateApiResponse_RouteSelectionExpression, &sUpdateApiResponse_Tags, &sUpdateApiResponse_Version, &sUpdateApiResponse_Warnings}, Seed: 18, Slots: []uint16{
+	0, 0, 0, 15, 0, 0, 10, 1, 11, 0, 0, 0, 0, 0, 6, 3, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 13, 0, 8, 0, 0, 0, 0, 14, 0, 0, 7, 12, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0,
+	0, 0, 0, 0, 16, 0, 0, 5, 17, 0, 0, 4, 0, 0, 0, 0,
+}}
+var mUpdateAuthorizerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAuthorizerRequest_ApiId, &sUpdateAuthorizerRequest_AuthorizerCredentialsArn, &sUpdateAuthorizerRequest_AuthorizerId, &sUpdateAuthorizerRequest_AuthorizerPayloadFormatVersion, &sUpdateAuthorizerRequest_AuthorizerResultTtlInSeconds, &sUpdateAuthorizerRequest_AuthorizerType, &sUpdateAuthorizerRequest_AuthorizerUri, &sUpdateAuthorizerRequest_EnableSimpleResponses, &sUpdateAuthorizerRequest_IdentitySource, &sUpdateAuthorizerRequest_IdentityValidationExpression, &sUpdateAuthorizerRequest_JwtConfiguration, &sUpdateAuthorizerRequest_Name}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 8, 1, 0, 10, 5, 0, 0, 0, 0, 0, 12, 0, 7, 2, 6, 9, 0, 0, 3, 0,
+	0, 11, 0, 0, 0, 4, 0, 0,
+}}
+var mUpdateAuthorizerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAuthorizerResponse_AuthorizerCredentialsArn, &sUpdateAuthorizerResponse_AuthorizerId, &sUpdateAuthorizerResponse_AuthorizerPayloadFormatVersion, &sUpdateAuthorizerResponse_AuthorizerResultTtlInSeconds, &sUpdateAuthorizerResponse_AuthorizerType, &sUpdateAuthorizerResponse_AuthorizerUri, &sUpdateAuthorizerResponse_EnableSimpleResponses, &sUpdateAuthorizerResponse_IdentitySource, &sUpdateAuthorizerResponse_IdentityValidationExpression, &sUpdateAuthorizerResponse_JwtConfiguration, &sUpdateAuthorizerResponse_Name}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 0, 9, 4, 0, 0, 0, 0, 0, 11, 0, 6, 1, 5, 8, 0, 0, 2, 0,
+	0, 10, 0, 0, 0, 3, 0, 0,
+}}
+var mUpdateDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeploymentRequest_ApiId, &sUpdateDeploymentRequest_DeploymentId, &sUpdateDeploymentRequest_Description}}
+var mUpdateDeploymentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDeploymentResponse_AutoDeployed, &sUpdateDeploymentResponse_CreatedDate, &sUpdateDeploymentResponse_DeploymentId, &sUpdateDeploymentResponse_DeploymentStatus, &sUpdateDeploymentResponse_DeploymentStatusMessage, &sUpdateDeploymentResponse_Description}}
+var mUpdateDomainNameRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDomainNameRequest_DomainName, &sUpdateDomainNameRequest_DomainNameConfigurations, &sUpdateDomainNameRequest_MutualTlsAuthentication, &sUpdateDomainNameRequest_RoutingMode}}
+var mUpdateDomainNameResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDomainNameResponse_ApiMappingSelectionExpression, &sUpdateDomainNameResponse_DomainName, &sUpdateDomainNameResponse_DomainNameArn, &sUpdateDomainNameResponse_DomainNameConfigurations, &sUpdateDomainNameResponse_MutualTlsAuthentication, &sUpdateDomainNameResponse_RoutingMode, &sUpdateDomainNameResponse_Tags}}
+var mUpdateIntegrationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIntegrationRequest_ApiId, &sUpdateIntegrationRequest_ConnectionId, &sUpdateIntegrationRequest_ConnectionType, &sUpdateIntegrationRequest_ContentHandlingStrategy, &sUpdateIntegrationRequest_CredentialsArn, &sUpdateIntegrationRequest_Description, &sUpdateIntegrationRequest_IntegrationId, &sUpdateIntegrationRequest_IntegrationMethod, &sUpdateIntegrationRequest_IntegrationSubtype, &sUpdateIntegrationRequest_IntegrationType, &sUpdateIntegrationRequest_IntegrationUri, &sUpdateIntegrationRequest_PassthroughBehavior, &sUpdateIntegrationRequest_PayloadFormatVersion, &sUpdateIntegrationRequest_RequestParameters, &sUpdateIntegrationRequest_RequestTemplates, &sUpdateIntegrationRequest_ResponseParameters, &sUpdateIntegrationRequest_TemplateSelectionExpression, &sUpdateIntegrationRequest_TimeoutInMillis, &sUpdateIntegrationRequest_TlsConfig}, Seed: 2, Slots: []uint16{
+	0, 8, 0, 0, 0, 0, 6, 0, 10, 16, 0, 0, 0, 7, 0, 15, 0, 0, 11, 0, 0, 0, 4, 0,
+	0, 0, 3, 0, 0, 0, 0, 5, 13, 0, 0, 0, 0, 1, 0, 0, 0, 14, 0, 12, 9, 19, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 18, 0, 17,
+}}
+var mUpdateIntegrationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIntegrationResult_ApiGatewayManaged, &sUpdateIntegrationResult_ConnectionId, &sUpdateIntegrationResult_ConnectionType, &sUpdateIntegrationResult_ContentHandlingStrategy, &sUpdateIntegrationResult_CredentialsArn, &sUpdateIntegrationResult_Description, &sUpdateIntegrationResult_IntegrationId, &sUpdateIntegrationResult_IntegrationMethod, &sUpdateIntegrationResult_IntegrationResponseSelectionExpression, &sUpdateIntegrationResult_IntegrationSubtype, &sUpdateIntegrationResult_IntegrationType, &sUpdateIntegrationResult_IntegrationUri, &sUpdateIntegrationResult_PassthroughBehavior, &sUpdateIntegrationResult_PayloadFormatVersion, &sUpdateIntegrationResult_RequestParameters, &sUpdateIntegrationResult_RequestTemplates, &sUpdateIntegrationResult_ResponseParameters, &sUpdateIntegrationResult_TemplateSelectionExpression, &sUpdateIntegrationResult_TimeoutInMillis, &sUpdateIntegrationResult_TlsConfig}, Seed: 2, Slots: []uint16{
+	0, 8, 0, 0, 0, 0, 6, 0, 11, 17, 0, 0, 0, 7, 0, 16, 0, 9, 12, 0, 0, 0, 4, 0,
+	0, 0, 3, 0, 0, 0, 0, 5, 14, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 13, 10, 20, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 19, 0, 18,
+}}
+var mUpdateIntegrationResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIntegrationResponseRequest_ApiId, &sUpdateIntegrationResponseRequest_ContentHandlingStrategy, &sUpdateIntegrationResponseRequest_IntegrationId, &sUpdateIntegrationResponseRequest_IntegrationResponseId, &sUpdateIntegrationResponseRequest_IntegrationResponseKey, &sUpdateIntegrationResponseRequest_ResponseParameters, &sUpdateIntegrationResponseRequest_ResponseTemplates, &sUpdateIntegrationResponseRequest_TemplateSelectionExpression}}
+var mUpdateIntegrationResponseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIntegrationResponseResponse_ContentHandlingStrategy, &sUpdateIntegrationResponseResponse_IntegrationResponseId, &sUpdateIntegrationResponseResponse_IntegrationResponseKey, &sUpdateIntegrationResponseResponse_ResponseParameters, &sUpdateIntegrationResponseResponse_ResponseTemplates, &sUpdateIntegrationResponseResponse_TemplateSelectionExpression}}
+var mUpdateModelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelRequest_ApiId, &sUpdateModelRequest_ContentType, &sUpdateModelRequest_Description, &sUpdateModelRequest_ModelId, &sUpdateModelRequest_Name, &sUpdateModelRequest_Schema}}
+var mUpdateModelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateModelResponse_ContentType, &sUpdateModelResponse_Description, &sUpdateModelResponse_ModelId, &sUpdateModelResponse_Name, &sUpdateModelResponse_Schema}}
+var mUpdatePortalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePortalRequest_Authorization, &sUpdatePortalRequest_EndpointConfiguration, &sUpdatePortalRequest_IncludedPortalProductArns, &sUpdatePortalRequest_LogoUri, &sUpdatePortalRequest_PortalContent, &sUpdatePortalRequest_PortalId, &sUpdatePortalRequest_RumAppMonitorName}}
+var mUpdatePortalResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePortalResponse_Authorization, &sUpdatePortalResponse_EndpointConfiguration, &sUpdatePortalResponse_IncludedPortalProductArns, &sUpdatePortalResponse_LastModified, &sUpdatePortalResponse_LastPublished, &sUpdatePortalResponse_LastPublishedDescription, &sUpdatePortalResponse_PortalArn, &sUpdatePortalResponse_PortalContent, &sUpdatePortalResponse_PortalId, &sUpdatePortalResponse_Preview, &sUpdatePortalResponse_PublishStatus, &sUpdatePortalResponse_RumAppMonitorName, &sUpdatePortalResponse_StatusException, &sUpdatePortalResponse_Tags}, Seed: 9, Slots: []uint16{
+	13, 0, 0, 0, 12, 5, 9, 0, 2, 0, 0, 1, 14, 6, 0, 11, 4, 7, 0, 0, 0, 0, 0, 0,
+	0, 10, 0, 3, 8, 0, 0, 0,
+}}
+var mUpdatePortalProductRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePortalProductRequest_Description, &sUpdatePortalProductRequest_DisplayName, &sUpdatePortalProductRequest_DisplayOrder, &sUpdatePortalProductRequest_PortalProductId}}
+var mUpdatePortalProductResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePortalProductResponse_Description, &sUpdatePortalProductResponse_DisplayName, &sUpdatePortalProductResponse_DisplayOrder, &sUpdatePortalProductResponse_LastModified, &sUpdatePortalProductResponse_PortalProductArn, &sUpdatePortalProductResponse_PortalProductId, &sUpdatePortalProductResponse_Tags}}
+var mUpdateProductPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProductPageRequest_DisplayContent, &sUpdateProductPageRequest_PortalProductId, &sUpdateProductPageRequest_ProductPageId}}
+var mUpdateProductPageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProductPageResponse_DisplayContent, &sUpdateProductPageResponse_LastModified, &sUpdateProductPageResponse_ProductPageArn, &sUpdateProductPageResponse_ProductPageId}}
+var mUpdateProductRestEndpointPageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProductRestEndpointPageRequest_DisplayContent, &sUpdateProductRestEndpointPageRequest_PortalProductId, &sUpdateProductRestEndpointPageRequest_ProductRestEndpointPageId, &sUpdateProductRestEndpointPageRequest_TryItState}}
+var mUpdateProductRestEndpointPageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateProductRestEndpointPageResponse_DisplayContent, &sUpdateProductRestEndpointPageResponse_LastModified, &sUpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn, &sUpdateProductRestEndpointPageResponse_ProductRestEndpointPageId, &sUpdateProductRestEndpointPageResponse_RestEndpointIdentifier, &sUpdateProductRestEndpointPageResponse_Status, &sUpdateProductRestEndpointPageResponse_StatusException, &sUpdateProductRestEndpointPageResponse_TryItState}}
+var mUpdateRouteRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRouteRequest_ApiId, &sUpdateRouteRequest_ApiKeyRequired, &sUpdateRouteRequest_AuthorizationScopes, &sUpdateRouteRequest_AuthorizationType, &sUpdateRouteRequest_AuthorizerId, &sUpdateRouteRequest_ModelSelectionExpression, &sUpdateRouteRequest_OperationName, &sUpdateRouteRequest_RequestModels, &sUpdateRouteRequest_RequestParameters, &sUpdateRouteRequest_RouteId, &sUpdateRouteRequest_RouteKey, &sUpdateRouteRequest_RouteResponseSelectionExpression, &sUpdateRouteRequest_Target}, Seed: 4, Slots: []uint16{
+	0, 0, 12, 0, 0, 2, 0, 0, 10, 0, 4, 13, 9, 0, 11, 0, 0, 0, 0, 7, 0, 0, 1, 0,
+	0, 0, 6, 0, 0, 8, 3, 5,
+}}
+var mUpdateRouteResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRouteResult_ApiGatewayManaged, &sUpdateRouteResult_ApiKeyRequired, &sUpdateRouteResult_AuthorizationScopes, &sUpdateRouteResult_AuthorizationType, &sUpdateRouteResult_AuthorizerId, &sUpdateRouteResult_ModelSelectionExpression, &sUpdateRouteResult_OperationName, &sUpdateRouteResult_RequestModels, &sUpdateRouteResult_RequestParameters, &sUpdateRouteResult_RouteId, &sUpdateRouteResult_RouteKey, &sUpdateRouteResult_RouteResponseSelectionExpression, &sUpdateRouteResult_Target}, Seed: 4, Slots: []uint16{
+	0, 0, 12, 1, 0, 2, 0, 0, 10, 0, 4, 13, 9, 0, 11, 0, 0, 0, 0, 7, 0, 0, 0, 0,
+	0, 0, 6, 0, 0, 8, 3, 5,
+}}
+var mUpdateRouteResponseRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRouteResponseRequest_ApiId, &sUpdateRouteResponseRequest_ModelSelectionExpression, &sUpdateRouteResponseRequest_ResponseModels, &sUpdateRouteResponseRequest_ResponseParameters, &sUpdateRouteResponseRequest_RouteId, &sUpdateRouteResponseRequest_RouteResponseId, &sUpdateRouteResponseRequest_RouteResponseKey}}
+var mUpdateRouteResponseResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateRouteResponseResponse_ModelSelectionExpression, &sUpdateRouteResponseResponse_ResponseModels, &sUpdateRouteResponseResponse_ResponseParameters, &sUpdateRouteResponseResponse_RouteResponseId, &sUpdateRouteResponseResponse_RouteResponseKey}}
+var mUpdateStageRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStageRequest_AccessLogSettings, &sUpdateStageRequest_ApiId, &sUpdateStageRequest_AutoDeploy, &sUpdateStageRequest_ClientCertificateId, &sUpdateStageRequest_DefaultRouteSettings, &sUpdateStageRequest_DeploymentId, &sUpdateStageRequest_Description, &sUpdateStageRequest_RouteSettings, &sUpdateStageRequest_StageName, &sUpdateStageRequest_StageVariables}, Seed: 2, Slots: []uint16{
+	0, 1, 6, 0, 0, 2, 7, 10, 0, 0, 0, 5, 0, 0, 0, 3, 0, 0, 8, 9, 0, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mUpdateStageResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStageResponse_AccessLogSettings, &sUpdateStageResponse_ApiGatewayManaged, &sUpdateStageResponse_AutoDeploy, &sUpdateStageResponse_ClientCertificateId, &sUpdateStageResponse_CreatedDate, &sUpdateStageResponse_DefaultRouteSettings, &sUpdateStageResponse_DeploymentId, &sUpdateStageResponse_Description, &sUpdateStageResponse_LastDeploymentStatusMessage, &sUpdateStageResponse_LastUpdatedDate, &sUpdateStageResponse_RouteSettings, &sUpdateStageResponse_StageName, &sUpdateStageResponse_StageVariables, &sUpdateStageResponse_Tags}, Seed: 2, Slots: []uint16{
+	5, 1, 7, 0, 0, 0, 8, 13, 0, 9, 0, 6, 0, 14, 0, 3, 0, 10, 11, 12, 0, 0, 4, 0,
+	0, 0, 0, 0, 2, 0, 0, 0,
+}}
+var mUpdateVpcLinkRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcLinkRequest_Name, &sUpdateVpcLinkRequest_VpcLinkId}}
+var mUpdateVpcLinkResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVpcLinkResponse_CreatedDate, &sUpdateVpcLinkResponse_Name, &sUpdateVpcLinkResponse_SecurityGroupIds, &sUpdateVpcLinkResponse_SubnetIds, &sUpdateVpcLinkResponse_Tags, &sUpdateVpcLinkResponse_VpcLinkId, &sUpdateVpcLinkResponse_VpcLinkStatus, &sUpdateVpcLinkResponse_VpcLinkStatusMessage, &sUpdateVpcLinkResponse_VpcLinkVersion}, Seed: 1, Slots: []uint16{
+	6, 5, 9, 2, 0, 0, 1, 3, 0, 0, 0, 0, 0, 8, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 4, 0, 0, 0,
+}}
+
+var sCreateApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApi, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateApiMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiMapping, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateAuthorizer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAuthorizer, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeployment, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainName, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegration, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateIntegrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegrationResponse, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModel, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreatePortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortal, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sCreatePortalProduct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortalProduct, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sCreateProductPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProductPage, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sCreateProductRestEndpointPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProductRestEndpointPage, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sCreateRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoute, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sCreateRouteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRouteResponse, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sCreateRoutingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingRule, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sCreateStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStage, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sCreateVpcLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcLink, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sDeleteAccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessLogSettings, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sDeleteApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApi, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sDeleteApiMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiMapping, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sDeleteAuthorizer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAuthorizer, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sDeleteCorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsConfiguration, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sDeleteDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeployment, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sDeleteDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainName, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sDeleteIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntegration, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sDeleteIntegrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntegrationResponse, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sDeleteModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModel, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sDeletePortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortal, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sDeletePortalProduct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortalProduct, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sDeletePortalProductSharingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortalProductSharingPolicy, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sDeleteProductPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProductPage, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sDeleteProductRestEndpointPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProductRestEndpointPage, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sDeleteRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoute, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sDeleteRouteRequestParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteRequestParameter, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sDeleteRouteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteResponse, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sDeleteRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteSettings, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sDeleteRoutingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingRule, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sDeleteStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStage, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sDeleteVpcLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcLink, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sDisablePortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisablePortal, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sExportApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportApi, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sGetApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApi, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sGetApiMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiMapping, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sGetApiMappings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiMappings, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sGetApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApis, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var sGetAuthorizer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizer, Traits: &t45, Type: smithy.ShapeTypeOperation})
+var sGetAuthorizers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizers, Traits: &t46, Type: smithy.ShapeTypeOperation})
+var sGetDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeployment, Traits: &t47, Type: smithy.ShapeTypeOperation})
+var sGetDeployments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeployments, Traits: &t48, Type: smithy.ShapeTypeOperation})
+var sGetDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainName, Traits: &t49, Type: smithy.ShapeTypeOperation})
+var sGetDomainNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainNames, Traits: &t50, Type: smithy.ShapeTypeOperation})
+var sGetIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegration, Traits: &t51, Type: smithy.ShapeTypeOperation})
+var sGetIntegrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationResponse, Traits: &t52, Type: smithy.ShapeTypeOperation})
+var sGetIntegrationResponses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationResponses, Traits: &t53, Type: smithy.ShapeTypeOperation})
+var sGetIntegrations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrations, Traits: &t54, Type: smithy.ShapeTypeOperation})
+var sGetModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModel, Traits: &t55, Type: smithy.ShapeTypeOperation})
+var sGetModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModels, Traits: &t56, Type: smithy.ShapeTypeOperation})
+var sGetModelTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelTemplate, Traits: &t57, Type: smithy.ShapeTypeOperation})
+var sGetPortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortal, Traits: &t58, Type: smithy.ShapeTypeOperation})
+var sGetPortalProduct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalProduct, Traits: &t59, Type: smithy.ShapeTypeOperation})
+var sGetPortalProductSharingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalProductSharingPolicy, Traits: &t60, Type: smithy.ShapeTypeOperation})
+var sGetProductPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductPage, Traits: &t61, Type: smithy.ShapeTypeOperation})
+var sGetProductRestEndpointPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductRestEndpointPage, Traits: &t62, Type: smithy.ShapeTypeOperation})
+var sGetRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoute, Traits: &t63, Type: smithy.ShapeTypeOperation})
+var sGetRouteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteResponse, Traits: &t64, Type: smithy.ShapeTypeOperation})
+var sGetRouteResponses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteResponses, Traits: &t65, Type: smithy.ShapeTypeOperation})
+var sGetRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutes, Traits: &t66, Type: smithy.ShapeTypeOperation})
+var sGetRoutingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingRule, Traits: &t67, Type: smithy.ShapeTypeOperation})
+var sGetStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStage, Traits: &t68, Type: smithy.ShapeTypeOperation})
+var sGetStages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStages, Traits: &t69, Type: smithy.ShapeTypeOperation})
+var sGetTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTags, Traits: &t70, Type: smithy.ShapeTypeOperation})
+var sGetVpcLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcLink, Traits: &t71, Type: smithy.ShapeTypeOperation})
+var sGetVpcLinks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcLinks, Traits: &t72, Type: smithy.ShapeTypeOperation})
+var sImportApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportApi, Traits: &t73, Type: smithy.ShapeTypeOperation})
+var sListPortalProducts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortalProducts, Traits: &t74, Type: smithy.ShapeTypeOperation})
+var sListPortals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortals, Traits: &t75, Type: smithy.ShapeTypeOperation})
+var sListProductPages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProductPages, Traits: &t76, Type: smithy.ShapeTypeOperation})
+var sListProductRestEndpointPages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProductRestEndpointPages, Traits: &t77, Type: smithy.ShapeTypeOperation})
+var sListRoutingRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingRules, Traits: &t78, Type: smithy.ShapeTypeOperation})
+var sPreviewPortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreviewPortal, Traits: &t79, Type: smithy.ShapeTypeOperation})
+var sPublishPortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishPortal, Traits: &t80, Type: smithy.ShapeTypeOperation})
+var sPutPortalProductSharingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPortalProductSharingPolicy, Traits: &t81, Type: smithy.ShapeTypeOperation})
+var sPutRoutingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRoutingRule, Traits: &t82, Type: smithy.ShapeTypeOperation})
+var sReimportApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReimportApi, Traits: &t83, Type: smithy.ShapeTypeOperation})
+var sResetAuthorizersCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetAuthorizersCache, Traits: &t84, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t85, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t86, Type: smithy.ShapeTypeOperation})
+var sUpdateApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApi, Traits: &t87, Type: smithy.ShapeTypeOperation})
+var sUpdateApiMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiMapping, Traits: &t88, Type: smithy.ShapeTypeOperation})
+var sUpdateAuthorizer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAuthorizer, Traits: &t89, Type: smithy.ShapeTypeOperation})
+var sUpdateDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeployment, Traits: &t90, Type: smithy.ShapeTypeOperation})
+var sUpdateDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainName, Traits: &t91, Type: smithy.ShapeTypeOperation})
+var sUpdateIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegration, Traits: &t92, Type: smithy.ShapeTypeOperation})
+var sUpdateIntegrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegrationResponse, Traits: &t93, Type: smithy.ShapeTypeOperation})
+var sUpdateModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModel, Traits: &t94, Type: smithy.ShapeTypeOperation})
+var sUpdatePortal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortal, Traits: &t95, Type: smithy.ShapeTypeOperation})
+var sUpdatePortalProduct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortalProduct, Traits: &t96, Type: smithy.ShapeTypeOperation})
+var sUpdateProductPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProductPage, Traits: &t97, Type: smithy.ShapeTypeOperation})
+var sUpdateProductRestEndpointPage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProductRestEndpointPage, Traits: &t98, Type: smithy.ShapeTypeOperation})
+var sUpdateRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRoute, Traits: &t99, Type: smithy.ShapeTypeOperation})
+var sUpdateRouteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRouteResponse, Traits: &t100, Type: smithy.ShapeTypeOperation})
+var sUpdateStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStage, Traits: &t101, Type: smithy.ShapeTypeOperation})
+var sUpdateVpcLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcLink, Traits: &t102, Type: smithy.ShapeTypeOperation})
+var s_ApiGatewayV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApiGatewayV2, Type: smithy.ShapeTypeService})
+var s___boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___boolean, Type: smithy.ShapeTypeBoolean})
+var s___double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___double, Type: smithy.ShapeTypeDouble})
+var s___integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___integer, Type: smithy.ShapeTypeInteger})
+var s___listOf__string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__string, Members: &m___listOf__string, Type: smithy.ShapeTypeList})
+var s___listOf__stringMin20Max2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Type: smithy.ShapeTypeList})
+var s___listOfApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfApi, Members: &m___listOfApi, Type: smithy.ShapeTypeList})
+var s___listOfApiMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfApiMapping, Members: &m___listOfApiMapping, Type: smithy.ShapeTypeList})
+var s___listOfAuthorizer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfAuthorizer, Members: &m___listOfAuthorizer, Type: smithy.ShapeTypeList})
+var s___listOfDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfDeployment, Members: &m___listOfDeployment, Type: smithy.ShapeTypeList})
+var s___listOfDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfDomainName, Members: &m___listOfDomainName, Type: smithy.ShapeTypeList})
+var s___listOfIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfIntegration, Members: &m___listOfIntegration, Type: smithy.ShapeTypeList})
+var s___listOfIntegrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfIntegrationResponse, Members: &m___listOfIntegrationResponse, Type: smithy.ShapeTypeList})
+var s___listOfModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfModel, Members: &m___listOfModel, Type: smithy.ShapeTypeList})
+var s___listOfPortalProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPortalProductSummary, Members: &m___listOfPortalProductSummary, Type: smithy.ShapeTypeList})
+var s___listOfPortalSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfPortalSummary, Members: &m___listOfPortalSummary, Type: smithy.ShapeTypeList})
+var s___listOfProductPageSummaryNoBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfProductPageSummaryNoBody, Members: &m___listOfProductPageSummaryNoBody, Type: smithy.ShapeTypeList})
+var s___listOfProductRestEndpointPageSummaryNoBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfProductRestEndpointPageSummaryNoBody, Members: &m___listOfProductRestEndpointPageSummaryNoBody, Type: smithy.ShapeTypeList})
+var s___listOfRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRoute, Members: &m___listOfRoute, Type: smithy.ShapeTypeList})
+var s___listOfRouteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRouteResponse, Members: &m___listOfRouteResponse, Type: smithy.ShapeTypeList})
+var s___listOfRoutingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRoutingRule, Members: &m___listOfRoutingRule, Type: smithy.ShapeTypeList})
+var s___listOfRoutingRuleAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRoutingRuleAction, Members: &m___listOfRoutingRuleAction, Type: smithy.ShapeTypeList})
+var s___listOfRoutingRuleCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRoutingRuleCondition, Members: &m___listOfRoutingRuleCondition, Type: smithy.ShapeTypeList})
+var s___listOfRoutingRuleMatchHeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfRoutingRuleMatchHeaderValue, Members: &m___listOfRoutingRuleMatchHeaderValue, Type: smithy.ShapeTypeList})
+var s___listOfSection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSection, Members: &m___listOfSection, Type: smithy.ShapeTypeList})
+var s___listOfSelectionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfSelectionKey, Members: &m___listOfSelectionKey, Type: smithy.ShapeTypeList})
+var s___listOfStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfStage, Members: &m___listOfStage, Type: smithy.ShapeTypeList})
+var s___listOfVpcLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___listOfVpcLink, Members: &m___listOfVpcLink, Type: smithy.ShapeTypeList})
+var s___string = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___string, Type: smithy.ShapeTypeString})
+var s___stringMin0Max1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin0Max1024, Type: smithy.ShapeTypeString})
+var s___stringMin0Max1092 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin0Max1092, Type: smithy.ShapeTypeString})
+var s___stringMin0Max255 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin0Max255, Type: smithy.ShapeTypeString})
+var s___stringMin10Max2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin10Max2048, Type: smithy.ShapeTypeString})
+var s___stringMin10Max30PatternAZ09 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin10Max30PatternAZ09, Type: smithy.ShapeTypeString})
+var s___stringMin1Max1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max1024, Type: smithy.ShapeTypeString})
+var s___stringMin1Max128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max128, Type: smithy.ShapeTypeString})
+var s___stringMin1Max16 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max16, Type: smithy.ShapeTypeString})
+var s___stringMin1Max20 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max20, Type: smithy.ShapeTypeString})
+var s___stringMin1Max2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max2048, Type: smithy.ShapeTypeString})
+var s___stringMin1Max255 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max255, Type: smithy.ShapeTypeString})
+var s___stringMin1Max256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max256, Type: smithy.ShapeTypeString})
+var s___stringMin1Max307200 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max307200, Type: smithy.ShapeTypeString})
+var s___stringMin1Max32768 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max32768, Type: smithy.ShapeTypeString})
+var s___stringMin1Max4096 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max4096, Type: smithy.ShapeTypeString})
+var s___stringMin1Max50 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max50, Type: smithy.ShapeTypeString})
+var s___stringMin1Max64 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin1Max64, Type: smithy.ShapeTypeString})
+var s___stringMin20Max2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin20Max2048, Type: smithy.ShapeTypeString})
+var s___stringMin3Max255 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin3Max255, Type: smithy.ShapeTypeString})
+var s___stringMin3Max256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___stringMin3Max256, Type: smithy.ShapeTypeString})
+var s___timestampIso8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i___timestampIso8601, Traits: &t103, Type: smithy.ShapeTypeTimestamp})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t104, Type: smithy.ShapeTypeStructure})
+var sAccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessLogSettings, Members: &mAccessLogSettings, Type: smithy.ShapeTypeStructure})
+var sACMManaged = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iACMManaged, Members: &mACMManaged, Type: smithy.ShapeTypeStructure})
+var sApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApi, Members: &mApi, Type: smithy.ShapeTypeStructure})
+var sApiMapping = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApiMapping, Members: &mApiMapping, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorization, Members: &mAuthorization, Type: smithy.ShapeTypeStructure})
+var s_AuthorizationScopes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AuthorizationScopes, Members: &m_AuthorizationScopes, Type: smithy.ShapeTypeList})
+var sAuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizationType, Members: &mAuthorizationType, Type: smithy.ShapeTypeEnum})
+var sAuthorizer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizer, Members: &mAuthorizer, Type: smithy.ShapeTypeStructure})
+var sAuthorizerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAuthorizerType, Members: &mAuthorizerType, Type: smithy.ShapeTypeEnum})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t142, Type: smithy.ShapeTypeStructure})
+var sCognitoConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCognitoConfig, Members: &mCognitoConfig, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t146, Type: smithy.ShapeTypeStructure})
+var sConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionType, Members: &mConnectionType, Type: smithy.ShapeTypeEnum})
+var sContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Type: smithy.ShapeTypeEnum})
+var sCors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCors, Members: &mCors, Type: smithy.ShapeTypeStructure})
+var s_CorsHeaderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CorsHeaderList, Members: &m_CorsHeaderList, Type: smithy.ShapeTypeList})
+var s_CorsMethodList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CorsMethodList, Members: &m_CorsMethodList, Type: smithy.ShapeTypeList})
+var s_CorsOriginList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CorsOriginList, Members: &m_CorsOriginList, Type: smithy.ShapeTypeList})
+var sCustomColors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomColors, Members: &mCustomColors, Type: smithy.ShapeTypeStructure})
+var sDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var sDisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisplayContent, Members: &mDisplayContent, Type: smithy.ShapeTypeStructure})
+var sDisplayContentOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisplayContentOverrides, Members: &mDisplayContentOverrides, Type: smithy.ShapeTypeStructure})
+var sDisplayOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisplayOrder, Members: &mDisplayOrder, Type: smithy.ShapeTypeStructure})
+var sDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainName, Members: &mDomainName, Type: smithy.ShapeTypeStructure})
+var sDomainNameConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainNameConfiguration, Members: &mDomainNameConfiguration, Type: smithy.ShapeTypeStructure})
+var s_DomainNameConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainNameConfigurations, Members: &m_DomainNameConfigurations, Type: smithy.ShapeTypeList})
+var sDomainNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomainNameStatus, Members: &mDomainNameStatus, Type: smithy.ShapeTypeEnum})
+var sEndpointConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointConfigurationRequest, Members: &mEndpointConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sEndpointConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointConfigurationResponse, Members: &mEndpointConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sEndpointDisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointDisplayContent, Members: &mEndpointDisplayContent, Type: smithy.ShapeTypeStructure})
+var sEndpointDisplayContentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointDisplayContentResponse, Members: &mEndpointDisplayContentResponse, Type: smithy.ShapeTypeStructure})
+var sEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointType, Members: &mEndpointType, Type: smithy.ShapeTypeEnum})
+var s_ExportedApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExportedApi, Type: smithy.ShapeTypeBlob})
+var s_Id = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Id, Type: smithy.ShapeTypeString})
+var sIdentifierParts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentifierParts, Members: &mIdentifierParts, Type: smithy.ShapeTypeStructure})
+var s_IdentitySourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentitySourceList, Members: &m_IdentitySourceList, Type: smithy.ShapeTypeList})
+var s_IntegerWithLengthBetween0And3600 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerWithLengthBetween0And3600, Type: smithy.ShapeTypeInteger})
+var s_IntegerWithLengthBetween50And30000 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerWithLengthBetween50And30000, Type: smithy.ShapeTypeInteger})
+var s_IntegerWithLengthBetweenMinus1And86400 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerWithLengthBetweenMinus1And86400, Type: smithy.ShapeTypeInteger})
+var sIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegration, Members: &mIntegration, Type: smithy.ShapeTypeStructure})
+var s_IntegrationParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Type: smithy.ShapeTypeMap})
+var sIntegrationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrationResponse, Members: &mIntegrationResponse, Type: smithy.ShapeTypeStructure})
+var sIntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegrationType, Members: &mIntegrationType, Type: smithy.ShapeTypeEnum})
+var sIpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIpAddressType, Members: &mIpAddressType, Type: smithy.ShapeTypeEnum})
+var sJWTConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJWTConfiguration, Members: &mJWTConfiguration, Type: smithy.ShapeTypeStructure})
+var sLoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoggingLevel, Members: &mLoggingLevel, Type: smithy.ShapeTypeEnum})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModel, Members: &mModel, Type: smithy.ShapeTypeStructure})
+var sMutualTlsAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMutualTlsAuthentication, Members: &mMutualTlsAuthentication, Type: smithy.ShapeTypeStructure})
+var sMutualTlsAuthenticationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMutualTlsAuthenticationInput, Members: &mMutualTlsAuthenticationInput, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNone, Type: smithy.ShapeTypeStructure})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t220, Type: smithy.ShapeTypeStructure})
+var sParameterConstraints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParameterConstraints, Members: &mParameterConstraints, Type: smithy.ShapeTypeStructure})
+var sPassthroughBehavior = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPassthroughBehavior, Members: &mPassthroughBehavior, Type: smithy.ShapeTypeEnum})
+var sPortalContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortalContent, Members: &mPortalContent, Type: smithy.ShapeTypeStructure})
+var sPortalProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortalProductSummary, Members: &mPortalProductSummary, Type: smithy.ShapeTypeStructure})
+var sPortalSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortalSummary, Members: &mPortalSummary, Type: smithy.ShapeTypeStructure})
+var sPortalTheme = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPortalTheme, Members: &mPortalTheme, Type: smithy.ShapeTypeStructure})
+var sPreview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreview, Members: &mPreview, Type: smithy.ShapeTypeStructure})
+var sPreviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreviewStatus, Members: &mPreviewStatus, Type: smithy.ShapeTypeEnum})
+var sProductPageSummaryNoBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProductPageSummaryNoBody, Members: &mProductPageSummaryNoBody, Type: smithy.ShapeTypeStructure})
+var sProductRestEndpointPageSummaryNoBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProductRestEndpointPageSummaryNoBody, Members: &mProductRestEndpointPageSummaryNoBody, Type: smithy.ShapeTypeStructure})
+var sProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProtocolType, Members: &mProtocolType, Type: smithy.ShapeTypeEnum})
+var sPublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishStatus, Members: &mPublishStatus, Type: smithy.ShapeTypeEnum})
+var s_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResponseParameters, Members: &m_ResponseParameters, Type: smithy.ShapeTypeMap})
+var sRestEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestEndpointIdentifier, Members: &mRestEndpointIdentifier, Type: smithy.ShapeTypeStructure})
+var sRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoute, Members: &mRoute, Type: smithy.ShapeTypeStructure})
+var s_RouteModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteModels, Members: &m_RouteModels, Type: smithy.ShapeTypeMap})
+var s_RouteParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteParameters, Members: &m_RouteParameters, Type: smithy.ShapeTypeMap})
+var sRouteResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteResponse, Members: &mRouteResponse, Type: smithy.ShapeTypeStructure})
+var sRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteSettings, Members: &mRouteSettings, Type: smithy.ShapeTypeStructure})
+var s_RouteSettingsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteSettingsMap, Members: &m_RouteSettingsMap, Type: smithy.ShapeTypeMap})
+var sRoutingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingMode, Members: &mRoutingMode, Type: smithy.ShapeTypeEnum})
+var sRoutingRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingRule, Members: &mRoutingRule, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingRuleAction, Members: &mRoutingRuleAction, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleActionInvokeApi = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingRuleActionInvokeApi, Members: &mRoutingRuleActionInvokeApi, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingRuleCondition, Members: &mRoutingRuleCondition, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleMatchBasePaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingRuleMatchBasePaths, Members: &mRoutingRuleMatchBasePaths, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleMatchHeaders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingRuleMatchHeaders, Members: &mRoutingRuleMatchHeaders, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleMatchHeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoutingRuleMatchHeaderValue, Members: &mRoutingRuleMatchHeaderValue, Type: smithy.ShapeTypeStructure})
+var s_RoutingRulePriority = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoutingRulePriority, Type: smithy.ShapeTypeInteger})
+var sSection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSection, Members: &mSection, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Type: smithy.ShapeTypeList})
+var sSecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityPolicy, Members: &mSecurityPolicy, Type: smithy.ShapeTypeEnum})
+var s_SelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectionExpression, Type: smithy.ShapeTypeString})
+var s_SelectionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SelectionKey, Type: smithy.ShapeTypeString})
+var sStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeStructure})
+var s_StageVariablesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StageVariablesMap, Members: &m_StageVariablesMap, Type: smithy.ShapeTypeMap})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sStatusException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusException, Members: &mStatusException, Type: smithy.ShapeTypeStructure})
+var s_StringWithLengthBetween0And1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween0And1024, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween0And2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween0And2048, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween0And32K = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween0And32K, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween1And1024 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And1024, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween1And128 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And128, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween1And1600 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And1600, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween1And256 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And256, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween1And512 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And512, Type: smithy.ShapeTypeString})
+var s_StringWithLengthBetween1And64 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLengthBetween1And64, Type: smithy.ShapeTypeString})
+var s_SubnetIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIdList, Members: &m_SubnetIdList, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeMap})
+var s_TemplateMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateMap, Members: &m_TemplateMap, Type: smithy.ShapeTypeMap})
+var sTlsConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsConfig, Members: &mTlsConfig, Type: smithy.ShapeTypeStructure})
+var sTlsConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTlsConfigInput, Members: &mTlsConfigInput, Type: smithy.ShapeTypeStructure})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t295, Type: smithy.ShapeTypeStructure})
+var sTryItState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTryItState, Members: &mTryItState, Type: smithy.ShapeTypeEnum})
+var s_UriWithLengthBetween1And2048 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UriWithLengthBetween1And2048, Type: smithy.ShapeTypeString})
+var sVpcLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcLink, Members: &mVpcLink, Type: smithy.ShapeTypeStructure})
+var sVpcLinkStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcLinkStatus, Members: &mVpcLinkStatus, Type: smithy.ShapeTypeEnum})
+var sVpcLinkVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVpcLinkVersion, Members: &mVpcLinkVersion, Type: smithy.ShapeTypeEnum})
+var sCreateApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiRequest, Members: &mCreateApiRequest, Type: smithy.ShapeTypeStructure})
+var sCreateApiMappingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiMappingRequest, Members: &mCreateApiMappingRequest, Type: smithy.ShapeTypeStructure})
+var sCreateApiMappingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiMappingResponse, Members: &mCreateApiMappingResponse, Type: smithy.ShapeTypeStructure})
+var sCreateApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateApiResponse, Members: &mCreateApiResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAuthorizerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAuthorizerRequest, Members: &mCreateAuthorizerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAuthorizerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAuthorizerResponse, Members: &mCreateAuthorizerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentRequest, Members: &mCreateDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDeploymentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentResponse, Members: &mCreateDeploymentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainNameRequest, Members: &mCreateDomainNameRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDomainNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDomainNameResponse, Members: &mCreateDomainNameResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegrationRequest, Members: &mCreateIntegrationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegrationResult, Members: &mCreateIntegrationResult, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegrationResponseRequest, Members: &mCreateIntegrationResponseRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationResponseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIntegrationResponseResponse, Members: &mCreateIntegrationResponseResponse, Type: smithy.ShapeTypeStructure})
+var sCreateModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelRequest, Members: &mCreateModelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateModelResponse, Members: &mCreateModelResponse, Type: smithy.ShapeTypeStructure})
+var sCreatePortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortalRequest, Members: &mCreatePortalRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortalResponse, Members: &mCreatePortalResponse, Type: smithy.ShapeTypeStructure})
+var sCreatePortalProductRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortalProductRequest, Members: &mCreatePortalProductRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePortalProductResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePortalProductResponse, Members: &mCreatePortalProductResponse, Type: smithy.ShapeTypeStructure})
+var sCreateProductPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProductPageRequest, Members: &mCreateProductPageRequest, Type: smithy.ShapeTypeStructure})
+var sCreateProductPageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProductPageResponse, Members: &mCreateProductPageResponse, Type: smithy.ShapeTypeStructure})
+var sCreateProductRestEndpointPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProductRestEndpointPageRequest, Members: &mCreateProductRestEndpointPageRequest, Type: smithy.ShapeTypeStructure})
+var sCreateProductRestEndpointPageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateProductRestEndpointPageResponse, Members: &mCreateProductRestEndpointPageResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRouteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRouteRequest, Members: &mCreateRouteRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRouteResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRouteResult, Members: &mCreateRouteResult, Type: smithy.ShapeTypeStructure})
+var sCreateRouteResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRouteResponseRequest, Members: &mCreateRouteResponseRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRouteResponseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRouteResponseResponse, Members: &mCreateRouteResponseResponse, Type: smithy.ShapeTypeStructure})
+var sCreateRoutingRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingRuleRequest, Members: &mCreateRoutingRuleRequest, Type: smithy.ShapeTypeStructure})
+var sCreateRoutingRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRoutingRuleResponse, Members: &mCreateRoutingRuleResponse, Type: smithy.ShapeTypeStructure})
+var sCreateStageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStageRequest, Members: &mCreateStageRequest, Type: smithy.ShapeTypeStructure})
+var sCreateStageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStageResponse, Members: &mCreateStageResponse, Type: smithy.ShapeTypeStructure})
+var sCreateVpcLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcLinkRequest, Members: &mCreateVpcLinkRequest, Type: smithy.ShapeTypeStructure})
+var sCreateVpcLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVpcLinkResponse, Members: &mCreateVpcLinkResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAccessLogSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessLogSettingsRequest, Members: &mDeleteAccessLogSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiRequest, Members: &mDeleteApiRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteApiMappingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteApiMappingRequest, Members: &mDeleteApiMappingRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAuthorizerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAuthorizerRequest, Members: &mDeleteAuthorizerRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCorsConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCorsConfigurationRequest, Members: &mDeleteCorsConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentRequest, Members: &mDeleteDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDomainNameRequest, Members: &mDeleteDomainNameRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIntegrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntegrationRequest, Members: &mDeleteIntegrationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIntegrationResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIntegrationResponseRequest, Members: &mDeleteIntegrationResponseRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteModelRequest, Members: &mDeleteModelRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortalRequest, Members: &mDeletePortalRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePortalProductRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortalProductRequest, Members: &mDeletePortalProductRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePortalProductSharingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePortalProductSharingPolicyRequest, Members: &mDeletePortalProductSharingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteProductPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProductPageRequest, Members: &mDeleteProductPageRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteProductRestEndpointPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteProductRestEndpointPageRequest, Members: &mDeleteProductRestEndpointPageRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRouteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteRequest, Members: &mDeleteRouteRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRouteRequestParameterRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteRequestParameterRequest, Members: &mDeleteRouteRequestParameterRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRouteResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteResponseRequest, Members: &mDeleteRouteResponseRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRouteSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRouteSettingsRequest, Members: &mDeleteRouteSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRoutingRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRoutingRuleRequest, Members: &mDeleteRoutingRuleRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteStageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStageRequest, Members: &mDeleteStageRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcLinkRequest, Members: &mDeleteVpcLinkRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteVpcLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVpcLinkResponse, Type: smithy.ShapeTypeStructure})
+var sDisablePortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisablePortalRequest, Members: &mDisablePortalRequest, Type: smithy.ShapeTypeStructure})
+var sExportApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportApiRequest, Members: &mExportApiRequest, Type: smithy.ShapeTypeStructure})
+var sExportApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExportApiResponse, Members: &mExportApiResponse, Type: smithy.ShapeTypeStructure})
+var sGetApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiRequest, Members: &mGetApiRequest, Type: smithy.ShapeTypeStructure})
+var sGetApiMappingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiMappingRequest, Members: &mGetApiMappingRequest, Type: smithy.ShapeTypeStructure})
+var sGetApiMappingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiMappingResponse, Members: &mGetApiMappingResponse, Type: smithy.ShapeTypeStructure})
+var sGetApiMappingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiMappingsRequest, Members: &mGetApiMappingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetApiMappingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiMappingsResponse, Members: &mGetApiMappingsResponse, Type: smithy.ShapeTypeStructure})
+var sGetApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApiResponse, Members: &mGetApiResponse, Type: smithy.ShapeTypeStructure})
+var sGetApisRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApisRequest, Members: &mGetApisRequest, Type: smithy.ShapeTypeStructure})
+var sGetApisResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetApisResponse, Members: &mGetApisResponse, Type: smithy.ShapeTypeStructure})
+var sGetAuthorizerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizerRequest, Members: &mGetAuthorizerRequest, Type: smithy.ShapeTypeStructure})
+var sGetAuthorizerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizerResponse, Members: &mGetAuthorizerResponse, Type: smithy.ShapeTypeStructure})
+var sGetAuthorizersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizersRequest, Members: &mGetAuthorizersRequest, Type: smithy.ShapeTypeStructure})
+var sGetAuthorizersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAuthorizersResponse, Members: &mGetAuthorizersResponse, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentRequest, Members: &mGetDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentResponse, Members: &mGetDeploymentResponse, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentsRequest, Members: &mGetDeploymentsRequest, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentsResponse, Members: &mGetDeploymentsResponse, Type: smithy.ShapeTypeStructure})
+var sGetDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainNameRequest, Members: &mGetDomainNameRequest, Type: smithy.ShapeTypeStructure})
+var sGetDomainNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainNameResponse, Members: &mGetDomainNameResponse, Type: smithy.ShapeTypeStructure})
+var sGetDomainNamesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainNamesRequest, Members: &mGetDomainNamesRequest, Type: smithy.ShapeTypeStructure})
+var sGetDomainNamesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDomainNamesResponse, Members: &mGetDomainNamesResponse, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationRequest, Members: &mGetIntegrationRequest, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationResult, Members: &mGetIntegrationResult, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationResponseRequest, Members: &mGetIntegrationResponseRequest, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationResponseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationResponseResponse, Members: &mGetIntegrationResponseResponse, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationResponsesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationResponsesRequest, Members: &mGetIntegrationResponsesRequest, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationResponsesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationResponsesResponse, Members: &mGetIntegrationResponsesResponse, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationsRequest, Members: &mGetIntegrationsRequest, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIntegrationsResponse, Members: &mGetIntegrationsResponse, Type: smithy.ShapeTypeStructure})
+var sGetModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelRequest, Members: &mGetModelRequest, Type: smithy.ShapeTypeStructure})
+var sGetModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelResponse, Members: &mGetModelResponse, Type: smithy.ShapeTypeStructure})
+var sGetModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelsRequest, Members: &mGetModelsRequest, Type: smithy.ShapeTypeStructure})
+var sGetModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelsResponse, Members: &mGetModelsResponse, Type: smithy.ShapeTypeStructure})
+var sGetModelTemplateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelTemplateRequest, Members: &mGetModelTemplateRequest, Type: smithy.ShapeTypeStructure})
+var sGetModelTemplateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetModelTemplateResponse, Members: &mGetModelTemplateResponse, Type: smithy.ShapeTypeStructure})
+var sGetPortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalRequest, Members: &mGetPortalRequest, Type: smithy.ShapeTypeStructure})
+var sGetPortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalResponse, Members: &mGetPortalResponse, Type: smithy.ShapeTypeStructure})
+var sGetPortalProductRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalProductRequest, Members: &mGetPortalProductRequest, Type: smithy.ShapeTypeStructure})
+var sGetPortalProductResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalProductResponse, Members: &mGetPortalProductResponse, Type: smithy.ShapeTypeStructure})
+var sGetPortalProductSharingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalProductSharingPolicyRequest, Members: &mGetPortalProductSharingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetPortalProductSharingPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPortalProductSharingPolicyResponse, Members: &mGetPortalProductSharingPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetProductPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductPageRequest, Members: &mGetProductPageRequest, Type: smithy.ShapeTypeStructure})
+var sGetProductPageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductPageResponse, Members: &mGetProductPageResponse, Type: smithy.ShapeTypeStructure})
+var sGetProductRestEndpointPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductRestEndpointPageRequest, Members: &mGetProductRestEndpointPageRequest, Type: smithy.ShapeTypeStructure})
+var sGetProductRestEndpointPageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProductRestEndpointPageResponse, Members: &mGetProductRestEndpointPageResponse, Type: smithy.ShapeTypeStructure})
+var sGetRouteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteRequest, Members: &mGetRouteRequest, Type: smithy.ShapeTypeStructure})
+var sGetRouteResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteResult, Members: &mGetRouteResult, Type: smithy.ShapeTypeStructure})
+var sGetRouteResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteResponseRequest, Members: &mGetRouteResponseRequest, Type: smithy.ShapeTypeStructure})
+var sGetRouteResponseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteResponseResponse, Members: &mGetRouteResponseResponse, Type: smithy.ShapeTypeStructure})
+var sGetRouteResponsesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteResponsesRequest, Members: &mGetRouteResponsesRequest, Type: smithy.ShapeTypeStructure})
+var sGetRouteResponsesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRouteResponsesResponse, Members: &mGetRouteResponsesResponse, Type: smithy.ShapeTypeStructure})
+var sGetRoutesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutesRequest, Members: &mGetRoutesRequest, Type: smithy.ShapeTypeStructure})
+var sGetRoutesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutesResponse, Members: &mGetRoutesResponse, Type: smithy.ShapeTypeStructure})
+var sGetRoutingRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingRuleRequest, Members: &mGetRoutingRuleRequest, Type: smithy.ShapeTypeStructure})
+var sGetRoutingRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRoutingRuleResponse, Members: &mGetRoutingRuleResponse, Type: smithy.ShapeTypeStructure})
+var sGetStageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStageRequest, Members: &mGetStageRequest, Type: smithy.ShapeTypeStructure})
+var sGetStageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStageResponse, Members: &mGetStageResponse, Type: smithy.ShapeTypeStructure})
+var sGetStagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStagesRequest, Members: &mGetStagesRequest, Type: smithy.ShapeTypeStructure})
+var sGetStagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetStagesResponse, Members: &mGetStagesResponse, Type: smithy.ShapeTypeStructure})
+var sGetTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagsRequest, Members: &mGetTagsRequest, Type: smithy.ShapeTypeStructure})
+var sGetTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTagsResponse, Members: &mGetTagsResponse, Type: smithy.ShapeTypeStructure})
+var sGetVpcLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcLinkRequest, Members: &mGetVpcLinkRequest, Type: smithy.ShapeTypeStructure})
+var sGetVpcLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcLinkResponse, Members: &mGetVpcLinkResponse, Type: smithy.ShapeTypeStructure})
+var sGetVpcLinksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcLinksRequest, Members: &mGetVpcLinksRequest, Type: smithy.ShapeTypeStructure})
+var sGetVpcLinksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVpcLinksResponse, Members: &mGetVpcLinksResponse, Type: smithy.ShapeTypeStructure})
+var sImportApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportApiRequest, Members: &mImportApiRequest, Type: smithy.ShapeTypeStructure})
+var sImportApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImportApiResponse, Members: &mImportApiResponse, Type: smithy.ShapeTypeStructure})
+var sListPortalProductsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortalProductsRequest, Members: &mListPortalProductsRequest, Type: smithy.ShapeTypeStructure})
+var sListPortalProductsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortalProductsResponse, Members: &mListPortalProductsResponse, Type: smithy.ShapeTypeStructure})
+var sListPortalsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortalsRequest, Members: &mListPortalsRequest, Type: smithy.ShapeTypeStructure})
+var sListPortalsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPortalsResponse, Members: &mListPortalsResponse, Type: smithy.ShapeTypeStructure})
+var sListProductPagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProductPagesRequest, Members: &mListProductPagesRequest, Type: smithy.ShapeTypeStructure})
+var sListProductPagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProductPagesResponse, Members: &mListProductPagesResponse, Type: smithy.ShapeTypeStructure})
+var sListProductRestEndpointPagesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProductRestEndpointPagesRequest, Members: &mListProductRestEndpointPagesRequest, Type: smithy.ShapeTypeStructure})
+var sListProductRestEndpointPagesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProductRestEndpointPagesResponse, Members: &mListProductRestEndpointPagesResponse, Type: smithy.ShapeTypeStructure})
+var sListRoutingRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingRulesRequest, Members: &mListRoutingRulesRequest, Type: smithy.ShapeTypeStructure})
+var sListRoutingRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRoutingRulesResponse, Members: &mListRoutingRulesResponse, Type: smithy.ShapeTypeStructure})
+var sPreviewPortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreviewPortalRequest, Members: &mPreviewPortalRequest, Type: smithy.ShapeTypeStructure})
+var sPreviewPortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreviewPortalResponse, Type: smithy.ShapeTypeStructure})
+var sPublishPortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishPortalRequest, Members: &mPublishPortalRequest, Type: smithy.ShapeTypeStructure})
+var sPublishPortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishPortalResponse, Type: smithy.ShapeTypeStructure})
+var sPutPortalProductSharingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPortalProductSharingPolicyRequest, Members: &mPutPortalProductSharingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutPortalProductSharingPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutPortalProductSharingPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sPutRoutingRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRoutingRuleRequest, Members: &mPutRoutingRuleRequest, Type: smithy.ShapeTypeStructure})
+var sPutRoutingRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRoutingRuleResponse, Members: &mPutRoutingRuleResponse, Type: smithy.ShapeTypeStructure})
+var sReimportApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReimportApiRequest, Members: &mReimportApiRequest, Type: smithy.ShapeTypeStructure})
+var sReimportApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReimportApiResponse, Members: &mReimportApiResponse, Type: smithy.ShapeTypeStructure})
+var sResetAuthorizersCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetAuthorizersCacheRequest, Members: &mResetAuthorizersCacheRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateApiRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiRequest, Members: &mUpdateApiRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateApiMappingRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiMappingRequest, Members: &mUpdateApiMappingRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateApiMappingResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiMappingResponse, Members: &mUpdateApiMappingResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateApiResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateApiResponse, Members: &mUpdateApiResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAuthorizerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAuthorizerRequest, Members: &mUpdateAuthorizerRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAuthorizerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAuthorizerResponse, Members: &mUpdateAuthorizerResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeploymentRequest, Members: &mUpdateDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDeploymentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDeploymentResponse, Members: &mUpdateDeploymentResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDomainNameRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameRequest, Members: &mUpdateDomainNameRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDomainNameResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDomainNameResponse, Members: &mUpdateDomainNameResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegrationRequest, Members: &mUpdateIntegrationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegrationResult, Members: &mUpdateIntegrationResult, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegrationResponseRequest, Members: &mUpdateIntegrationResponseRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationResponseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIntegrationResponseResponse, Members: &mUpdateIntegrationResponseResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateModelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelRequest, Members: &mUpdateModelRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateModelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateModelResponse, Members: &mUpdateModelResponse, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortalRequest, Members: &mUpdatePortalRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortalResponse, Members: &mUpdatePortalResponse, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalProductRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortalProductRequest, Members: &mUpdatePortalProductRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalProductResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePortalProductResponse, Members: &mUpdatePortalProductResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateProductPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProductPageRequest, Members: &mUpdateProductPageRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateProductPageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProductPageResponse, Members: &mUpdateProductPageResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateProductRestEndpointPageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProductRestEndpointPageRequest, Members: &mUpdateProductRestEndpointPageRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateProductRestEndpointPageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateProductRestEndpointPageResponse, Members: &mUpdateProductRestEndpointPageResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateRouteRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRouteRequest, Members: &mUpdateRouteRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRouteResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRouteResult, Members: &mUpdateRouteResult, Type: smithy.ShapeTypeStructure})
+var sUpdateRouteResponseRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRouteResponseRequest, Members: &mUpdateRouteResponseRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateRouteResponseResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateRouteResponseResponse, Members: &mUpdateRouteResponseResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateStageRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStageRequest, Members: &mUpdateStageRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateStageResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStageResponse, Members: &mUpdateStageResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcLinkRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcLinkRequest, Members: &mUpdateVpcLinkRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateVpcLinkResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVpcLinkResponse, Members: &mUpdateVpcLinkResponse, Type: smithy.ShapeTypeStructure})
+
+var s___listOf__string_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString})
+var s___listOf__stringMin20Max2048_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___stringMin20Max2048, Type: smithy.ShapeTypeString})
+var s___listOfApi_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApi, Members: &mApi, Type: smithy.ShapeTypeStructure})
+var s___listOfApiMapping_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iApiMapping, Members: &mApiMapping, Type: smithy.ShapeTypeStructure})
+var s___listOfAuthorizer_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAuthorizer, Members: &mAuthorizer, Type: smithy.ShapeTypeStructure})
+var s___listOfDeployment_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure})
+var s___listOfDomainName_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainName, Members: &mDomainName, Type: smithy.ShapeTypeStructure})
+var s___listOfIntegration_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntegration, Members: &mIntegration, Type: smithy.ShapeTypeStructure})
+var s___listOfIntegrationResponse_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntegrationResponse, Members: &mIntegrationResponse, Type: smithy.ShapeTypeStructure})
+var s___listOfModel_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModel, Members: &mModel, Type: smithy.ShapeTypeStructure})
+var s___listOfPortalProductSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortalProductSummary, Members: &mPortalProductSummary, Type: smithy.ShapeTypeStructure})
+var s___listOfPortalSummary_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPortalSummary, Members: &mPortalSummary, Type: smithy.ShapeTypeStructure})
+var s___listOfProductPageSummaryNoBody_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProductPageSummaryNoBody, Members: &mProductPageSummaryNoBody, Type: smithy.ShapeTypeStructure})
+var s___listOfProductRestEndpointPageSummaryNoBody_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProductRestEndpointPageSummaryNoBody, Members: &mProductRestEndpointPageSummaryNoBody, Type: smithy.ShapeTypeStructure})
+var s___listOfRoute_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoute, Members: &mRoute, Type: smithy.ShapeTypeStructure})
+var s___listOfRouteResponse_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRouteResponse, Members: &mRouteResponse, Type: smithy.ShapeTypeStructure})
+var s___listOfRoutingRule_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingRule, Members: &mRoutingRule, Type: smithy.ShapeTypeStructure})
+var s___listOfRoutingRuleAction_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingRuleAction, Members: &mRoutingRuleAction, Type: smithy.ShapeTypeStructure})
+var s___listOfRoutingRuleCondition_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingRuleCondition, Members: &mRoutingRuleCondition, Type: smithy.ShapeTypeStructure})
+var s___listOfRoutingRuleMatchHeaderValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoutingRuleMatchHeaderValue, Members: &mRoutingRuleMatchHeaderValue, Type: smithy.ShapeTypeStructure})
+var s___listOfSection_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSection, Members: &mSection, Type: smithy.ShapeTypeStructure})
+var s___listOfSelectionKey_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SelectionKey, Type: smithy.ShapeTypeString})
+var s___listOfStage_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeStructure})
+var s___listOfVpcLink_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVpcLink, Members: &mVpcLink, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString})
+var sAccessLogSettings_DestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationArn", ID: &i_Arn, Traits: &t106, Type: smithy.ShapeTypeString})
+var sAccessLogSettings_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &i_StringWithLengthBetween1And1024, Traits: &t107, Type: smithy.ShapeTypeString})
+var sACMManaged_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i___stringMin10Max2048, Traits: &t108, Type: smithy.ShapeTypeString})
+var sACMManaged_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___stringMin3Max256, Traits: &t109, Type: smithy.ShapeTypeString})
+var sApi_ApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiEndpoint", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString})
+var sApi_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sApi_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sApi_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sApi_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sApi_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sApi_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sApi_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sApi_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sApi_ImportInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportInfo", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t119, Type: smithy.ShapeTypeList})
+var sApi_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sApi_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sApi_ProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolType", ID: &iProtocolType, Members: &mProtocolType, Traits: &t122, Type: smithy.ShapeTypeEnum})
+var sApi_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sApi_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sApi_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sApi_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t126, Type: smithy.ShapeTypeList})
+var sApiMapping_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sApiMapping_ApiMappingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingId", ID: &i_Id, Traits: &t127, Type: smithy.ShapeTypeString})
+var sApiMapping_ApiMappingKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingKey", ID: &i_SelectionKey, Traits: &t128, Type: smithy.ShapeTypeString})
+var sApiMapping_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_StringWithLengthBetween1And128, Traits: &t129, Type: smithy.ShapeTypeString})
+var sAuthorization_CognitoConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CognitoConfig", ID: &iCognitoConfig, Members: &mCognitoConfig, Traits: &t130, Type: smithy.ShapeTypeStructure})
+var sAuthorization_None = smithy.NewStaticSchema(smithy.StaticSchema{Member: "None", ID: &iNone, Traits: &t131, Type: smithy.ShapeTypeStructure})
+var s_AuthorizationScopes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringWithLengthBetween1And64, Type: smithy.ShapeTypeString})
+var sAuthorizationType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthorizationType_AWS_IAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_IAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthorizationType_CUSTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthorizationType_JWT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JWT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthorizer_AuthorizerCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerCredentialsArn", ID: &i_Arn, Traits: &t132, Type: smithy.ShapeTypeString})
+var sAuthorizer_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sAuthorizer_AuthorizerPayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerPayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t134, Type: smithy.ShapeTypeString})
+var sAuthorizer_AuthorizerResultTtlInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerResultTtlInSeconds", ID: &i_IntegerWithLengthBetween0And3600, Traits: &t135, Type: smithy.ShapeTypeInteger})
+var sAuthorizer_AuthorizerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerType", ID: &iAuthorizerType, Members: &mAuthorizerType, Traits: &t136, Type: smithy.ShapeTypeEnum})
+var sAuthorizer_AuthorizerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t137, Type: smithy.ShapeTypeString})
+var sAuthorizer_EnableSimpleResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSimpleResponses", ID: &i___boolean, Traits: &t138, Type: smithy.ShapeTypeBoolean})
+var sAuthorizer_IdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySource", ID: &i_IdentitySourceList, Members: &m_IdentitySourceList, Traits: &t139, Type: smithy.ShapeTypeList})
+var sAuthorizer_IdentityValidationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityValidationExpression", ID: &i_StringWithLengthBetween0And1024, Traits: &t140, Type: smithy.ShapeTypeString})
+var sAuthorizer_JwtConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwtConfiguration", ID: &iJWTConfiguration, Members: &mJWTConfiguration, Traits: &t141, Type: smithy.ShapeTypeStructure})
+var sAuthorizer_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sAuthorizerType_REQUEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAuthorizerType_JWT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JWT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString})
+var sCognitoConfig_AppClientId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AppClientId", ID: &i___stringMin1Max256, Traits: &t143, Type: smithy.ShapeTypeString})
+var sCognitoConfig_UserPoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolArn", ID: &i___stringMin20Max2048, Traits: &t144, Type: smithy.ShapeTypeString})
+var sCognitoConfig_UserPoolDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserPoolDomain", ID: &i___stringMin20Max2048, Traits: &t145, Type: smithy.ShapeTypeString})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString})
+var sConnectionType_INTERNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionType_VPC_LINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_LINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentHandlingStrategy_CONVERT_TO_BINARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONVERT_TO_BINARY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentHandlingStrategy_CONVERT_TO_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONVERT_TO_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCors_AllowCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowCredentials", ID: &i___boolean, Traits: &t147, Type: smithy.ShapeTypeBoolean})
+var sCors_AllowHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowHeaders", ID: &i_CorsHeaderList, Members: &m_CorsHeaderList, Traits: &t148, Type: smithy.ShapeTypeList})
+var sCors_AllowMethods = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowMethods", ID: &i_CorsMethodList, Members: &m_CorsMethodList, Traits: &t149, Type: smithy.ShapeTypeList})
+var sCors_AllowOrigins = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowOrigins", ID: &i_CorsOriginList, Members: &m_CorsOriginList, Traits: &t150, Type: smithy.ShapeTypeList})
+var sCors_ExposeHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExposeHeaders", ID: &i_CorsHeaderList, Members: &m_CorsHeaderList, Traits: &t151, Type: smithy.ShapeTypeList})
+var sCors_MaxAge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxAge", ID: &i_IntegerWithLengthBetweenMinus1And86400, Traits: &t152, Type: smithy.ShapeTypeInteger})
+var s_CorsHeaderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_CorsMethodList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringWithLengthBetween1And64, Type: smithy.ShapeTypeString})
+var s_CorsOriginList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString})
+var sCustomColors_AccentColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccentColor", ID: &i___stringMin1Max16, Traits: &t153, Type: smithy.ShapeTypeString})
+var sCustomColors_BackgroundColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackgroundColor", ID: &i___stringMin1Max16, Traits: &t154, Type: smithy.ShapeTypeString})
+var sCustomColors_ErrorValidationColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorValidationColor", ID: &i___stringMin1Max16, Traits: &t155, Type: smithy.ShapeTypeString})
+var sCustomColors_HeaderColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderColor", ID: &i___stringMin1Max16, Traits: &t156, Type: smithy.ShapeTypeString})
+var sCustomColors_NavigationColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NavigationColor", ID: &i___stringMin1Max16, Traits: &t157, Type: smithy.ShapeTypeString})
+var sCustomColors_TextColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextColor", ID: &i___stringMin1Max16, Traits: &t158, Type: smithy.ShapeTypeString})
+var sDeployment_AutoDeployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeployed", ID: &i___boolean, Traits: &t159, Type: smithy.ShapeTypeBoolean})
+var sDeployment_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sDeployment_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sDeployment_DeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatus", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Traits: &t161, Type: smithy.ShapeTypeEnum})
+var sDeployment_DeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatusMessage", ID: &i___string, Traits: &t162, Type: smithy.ShapeTypeString})
+var sDeployment_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sDeploymentStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus_DEPLOYED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDisplayContent_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___stringMin1Max32768, Traits: &t163, Type: smithy.ShapeTypeString})
+var sDisplayContent_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i___stringMin1Max255, Traits: &t164, Type: smithy.ShapeTypeString})
+var sDisplayContentOverrides_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___stringMin1Max32768, Traits: &t163, Type: smithy.ShapeTypeString})
+var sDisplayContentOverrides_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i___stringMin1Max1024, Traits: &t165, Type: smithy.ShapeTypeString})
+var sDisplayContentOverrides_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i___stringMin1Max255, Traits: &t166, Type: smithy.ShapeTypeString})
+var sDisplayOrder_Contents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contents", ID: &i___listOfSection, Members: &m___listOfSection, Traits: &t167, Type: smithy.ShapeTypeList})
+var sDisplayOrder_OverviewPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OverviewPageArn", ID: &i___stringMin20Max2048, Traits: &t168, Type: smithy.ShapeTypeString})
+var sDisplayOrder_ProductPageArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t169, Type: smithy.ShapeTypeList})
+var sDomainName_ApiMappingSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingSelectionExpression", ID: &i_SelectionExpression, Traits: &t170, Type: smithy.ShapeTypeString})
+var sDomainName_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_StringWithLengthBetween1And512, Traits: &t109, Type: smithy.ShapeTypeString})
+var sDomainName_DomainNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameArn", ID: &i_Arn, Traits: &t171, Type: smithy.ShapeTypeString})
+var sDomainName_DomainNameConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameConfigurations", ID: &i_DomainNameConfigurations, Members: &m_DomainNameConfigurations, Traits: &t172, Type: smithy.ShapeTypeList})
+var sDomainName_MutualTlsAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualTlsAuthentication", ID: &iMutualTlsAuthentication, Members: &mMutualTlsAuthentication, Traits: &t173, Type: smithy.ShapeTypeStructure})
+var sDomainName_RoutingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingMode", ID: &iRoutingMode, Members: &mRoutingMode, Traits: &t174, Type: smithy.ShapeTypeEnum})
+var sDomainName_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sDomainNameConfiguration_ApiGatewayDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayDomainName", ID: &i___string, Traits: &t175, Type: smithy.ShapeTypeString})
+var sDomainNameConfiguration_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i_Arn, Traits: &t108, Type: smithy.ShapeTypeString})
+var sDomainNameConfiguration_CertificateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateName", ID: &i_StringWithLengthBetween1And128, Traits: &t176, Type: smithy.ShapeTypeString})
+var sDomainNameConfiguration_CertificateUploadDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateUploadDate", ID: &i___timestampIso8601, Traits: &t177, Type: smithy.ShapeTypeTimestamp})
+var sDomainNameConfiguration_DomainNameStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameStatus", ID: &iDomainNameStatus, Members: &mDomainNameStatus, Traits: &t178, Type: smithy.ShapeTypeEnum})
+var sDomainNameConfiguration_DomainNameStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameStatusMessage", ID: &i___string, Traits: &t179, Type: smithy.ShapeTypeString})
+var sDomainNameConfiguration_EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointType", ID: &iEndpointType, Members: &mEndpointType, Traits: &t180, Type: smithy.ShapeTypeEnum})
+var sDomainNameConfiguration_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneId", ID: &i___string, Traits: &t181, Type: smithy.ShapeTypeString})
+var sDomainNameConfiguration_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sDomainNameConfiguration_SecurityPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityPolicy", ID: &iSecurityPolicy, Members: &mSecurityPolicy, Traits: &t182, Type: smithy.ShapeTypeEnum})
+var sDomainNameConfiguration_OwnershipVerificationCertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnershipVerificationCertificateArn", ID: &i_Arn, Traits: &t183, Type: smithy.ShapeTypeString})
+var s_DomainNameConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomainNameConfiguration, Members: &mDomainNameConfiguration, Type: smithy.ShapeTypeStructure})
+var sDomainNameStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainNameStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainNameStatus_PENDING_CERTIFICATE_REIMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CERTIFICATE_REIMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomainNameStatus_PENDING_OWNERSHIP_VERIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_OWNERSHIP_VERIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointConfigurationRequest_AcmManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AcmManaged", ID: &iACMManaged, Members: &mACMManaged, Traits: &t184, Type: smithy.ShapeTypeStructure})
+var sEndpointConfigurationRequest_None = smithy.NewStaticSchema(smithy.StaticSchema{Member: "None", ID: &iNone, Traits: &t131, Type: smithy.ShapeTypeStructure})
+var sEndpointConfigurationResponse_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &i___stringMin10Max2048, Traits: &t108, Type: smithy.ShapeTypeString})
+var sEndpointConfigurationResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___stringMin3Max256, Traits: &t109, Type: smithy.ShapeTypeString})
+var sEndpointConfigurationResponse_PortalDefaultDomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalDefaultDomainName", ID: &i___stringMin3Max256, Traits: &t185, Type: smithy.ShapeTypeString})
+var sEndpointConfigurationResponse_PortalDomainHostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalDomainHostedZoneId", ID: &i___stringMin1Max64, Traits: &t186, Type: smithy.ShapeTypeString})
+var sEndpointDisplayContent_None = smithy.NewStaticSchema(smithy.StaticSchema{Member: "None", ID: &iNone, Traits: &t131, Type: smithy.ShapeTypeStructure})
+var sEndpointDisplayContent_Overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overrides", ID: &iDisplayContentOverrides, Members: &mDisplayContentOverrides, Traits: &t187, Type: smithy.ShapeTypeStructure})
+var sEndpointDisplayContentResponse_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___stringMin1Max32768, Traits: &t163, Type: smithy.ShapeTypeString})
+var sEndpointDisplayContentResponse_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i___stringMin1Max1024, Traits: &t165, Type: smithy.ShapeTypeString})
+var sEndpointDisplayContentResponse_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i___stringMin1Max255, Traits: &t166, Type: smithy.ShapeTypeString})
+var sEndpointType_REGIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointType_EDGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentifierParts_Method = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Method", ID: &i___stringMin1Max20, Traits: &t188, Type: smithy.ShapeTypeString})
+var sIdentifierParts_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i___stringMin1Max4096, Traits: &t189, Type: smithy.ShapeTypeString})
+var sIdentifierParts_RestApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestApiId", ID: &i___stringMin1Max50, Traits: &t190, Type: smithy.ShapeTypeString})
+var sIdentifierParts_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i___stringMin1Max128, Traits: &t129, Type: smithy.ShapeTypeString})
+var s_IdentitySourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString})
+var sIntegration_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sIntegration_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_StringWithLengthBetween1And1024, Traits: &t191, Type: smithy.ShapeTypeString})
+var sIntegration_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Traits: &t192, Type: smithy.ShapeTypeEnum})
+var sIntegration_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sIntegration_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sIntegration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sIntegration_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i_Id, Traits: &t195, Type: smithy.ShapeTypeString})
+var sIntegration_IntegrationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationMethod", ID: &i_StringWithLengthBetween1And64, Traits: &t196, Type: smithy.ShapeTypeString})
+var sIntegration_IntegrationResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t197, Type: smithy.ShapeTypeString})
+var sIntegration_IntegrationSubtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationSubtype", ID: &i_StringWithLengthBetween1And128, Traits: &t198, Type: smithy.ShapeTypeString})
+var sIntegration_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iIntegrationType, Members: &mIntegrationType, Traits: &t199, Type: smithy.ShapeTypeEnum})
+var sIntegration_IntegrationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t200, Type: smithy.ShapeTypeString})
+var sIntegration_PassthroughBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PassthroughBehavior", ID: &iPassthroughBehavior, Members: &mPassthroughBehavior, Traits: &t201, Type: smithy.ShapeTypeEnum})
+var sIntegration_PayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t202, Type: smithy.ShapeTypeString})
+var sIntegration_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sIntegration_RequestTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t204, Type: smithy.ShapeTypeMap})
+var sIntegration_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_ResponseParameters, Members: &m_ResponseParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sIntegration_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sIntegration_TimeoutInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMillis", ID: &i_IntegerWithLengthBetween50And30000, Traits: &t207, Type: smithy.ShapeTypeInteger})
+var sIntegration_TlsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsConfig", ID: &iTlsConfig, Members: &mTlsConfig, Traits: &t208, Type: smithy.ShapeTypeStructure})
+var s_IntegrationParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_IntegrationParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringWithLengthBetween1And512, Type: smithy.ShapeTypeString})
+var sIntegrationResponse_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sIntegrationResponse_IntegrationResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseId", ID: &i_Id, Traits: &t209, Type: smithy.ShapeTypeString})
+var sIntegrationResponse_IntegrationResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseKey", ID: &i_SelectionKey, Traits: &t210, Type: smithy.ShapeTypeString})
+var sIntegrationResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sIntegrationResponse_ResponseTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t211, Type: smithy.ShapeTypeMap})
+var sIntegrationResponse_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sIntegrationType_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationType_MOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationType_HTTP_PROXY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_PROXY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntegrationType_AWS_PROXY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_PROXY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressType_ipv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIpAddressType_dualstack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dualstack", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJWTConfiguration_Audience = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audience", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t212, Type: smithy.ShapeTypeList})
+var sJWTConfiguration_Issuer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Issuer", ID: &i_UriWithLengthBetween1And2048, Traits: &t213, Type: smithy.ShapeTypeString})
+var sLoggingLevel_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLoggingLevel_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLoggingLevel_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModel_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And256, Traits: &t214, Type: smithy.ShapeTypeString})
+var sModel_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sModel_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i_Id, Traits: &t215, Type: smithy.ShapeTypeString})
+var sModel_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sModel_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_StringWithLengthBetween0And32K, Traits: &t216, Type: smithy.ShapeTypeString})
+var sMutualTlsAuthentication_TruststoreUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TruststoreUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t217, Type: smithy.ShapeTypeString})
+var sMutualTlsAuthentication_TruststoreVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TruststoreVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t218, Type: smithy.ShapeTypeString})
+var sMutualTlsAuthentication_TruststoreWarnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TruststoreWarnings", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t219, Type: smithy.ShapeTypeList})
+var sMutualTlsAuthenticationInput_TruststoreUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TruststoreUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t217, Type: smithy.ShapeTypeString})
+var sMutualTlsAuthenticationInput_TruststoreVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TruststoreVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t218, Type: smithy.ShapeTypeString})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString})
+var sNotFoundException_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &i___string, Traits: &t221, Type: smithy.ShapeTypeString})
+var sParameterConstraints_Required = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Required", ID: &i___boolean, Traits: &t222, Type: smithy.ShapeTypeBoolean})
+var sPassthroughBehavior_WHEN_NO_MATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WHEN_NO_MATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPassthroughBehavior_NEVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPassthroughBehavior_WHEN_NO_TEMPLATES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WHEN_NO_TEMPLATES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPortalContent_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sPortalContent_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i___stringMin3Max255, Traits: &t223, Type: smithy.ShapeTypeString})
+var sPortalContent_Theme = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Theme", ID: &iPortalTheme, Members: &mPortalTheme, Traits: &t224, Type: smithy.ShapeTypeStructure})
+var sPortalProductSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sPortalProductSummary_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i___stringMin1Max255, Traits: &t223, Type: smithy.ShapeTypeString})
+var sPortalProductSummary_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sPortalProductSummary_PortalProductArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductArn", ID: &i___stringMin20Max2048, Traits: &t226, Type: smithy.ShapeTypeString})
+var sPortalProductSummary_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t227, Type: smithy.ShapeTypeString})
+var sPortalProductSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sPortalSummary_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t228, Type: smithy.ShapeTypeStructure})
+var sPortalSummary_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iEndpointConfigurationResponse, Members: &mEndpointConfigurationResponse, Traits: &t229, Type: smithy.ShapeTypeStructure})
+var sPortalSummary_IncludedPortalProductArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedPortalProductArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t230, Type: smithy.ShapeTypeList})
+var sPortalSummary_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sPortalSummary_LastPublished = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublished", ID: &i___timestampIso8601, Traits: &t231, Type: smithy.ShapeTypeTimestamp})
+var sPortalSummary_LastPublishedDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublishedDescription", ID: &i___stringMin0Max1024, Traits: &t232, Type: smithy.ShapeTypeString})
+var sPortalSummary_PortalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalArn", ID: &i___stringMin20Max2048, Traits: &t233, Type: smithy.ShapeTypeString})
+var sPortalSummary_PortalContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalContent", ID: &iPortalContent, Members: &mPortalContent, Traits: &t234, Type: smithy.ShapeTypeStructure})
+var sPortalSummary_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t235, Type: smithy.ShapeTypeString})
+var sPortalSummary_Preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preview", ID: &iPreview, Members: &mPreview, Traits: &t236, Type: smithy.ShapeTypeStructure})
+var sPortalSummary_PublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishStatus", ID: &iPublishStatus, Members: &mPublishStatus, Traits: &t237, Type: smithy.ShapeTypeEnum})
+var sPortalSummary_RumAppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RumAppMonitorName", ID: &i___stringMin0Max255, Traits: &t238, Type: smithy.ShapeTypeString})
+var sPortalSummary_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sPortalSummary_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sPortalTheme_CustomColors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomColors", ID: &iCustomColors, Members: &mCustomColors, Traits: &t240, Type: smithy.ShapeTypeStructure})
+var sPortalTheme_LogoLastUploaded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogoLastUploaded", ID: &i___timestampIso8601, Traits: &t241, Type: smithy.ShapeTypeTimestamp})
+var sPreview_PreviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviewStatus", ID: &iPreviewStatus, Members: &mPreviewStatus, Traits: &t242, Type: smithy.ShapeTypeEnum})
+var sPreview_PreviewUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreviewUrl", ID: &i___string, Traits: &t243, Type: smithy.ShapeTypeString})
+var sPreview_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sPreviewStatus_PREVIEW_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREVIEW_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPreviewStatus_PREVIEW_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREVIEW_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPreviewStatus_PREVIEW_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREVIEW_READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProductPageSummaryNoBody_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sProductPageSummaryNoBody_PageTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PageTitle", ID: &i___stringMin1Max255, Traits: &t244, Type: smithy.ShapeTypeString})
+var sProductPageSummaryNoBody_ProductPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageArn", ID: &i___stringMin20Max2048, Traits: &t245, Type: smithy.ShapeTypeString})
+var sProductPageSummaryNoBody_ProductPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t246, Type: smithy.ShapeTypeString})
+var sProductRestEndpointPageSummaryNoBody_Endpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoint", ID: &i___stringMin1Max1024, Traits: &t165, Type: smithy.ShapeTypeString})
+var sProductRestEndpointPageSummaryNoBody_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sProductRestEndpointPageSummaryNoBody_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i___stringMin1Max255, Traits: &t166, Type: smithy.ShapeTypeString})
+var sProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageArn", ID: &i___stringMin20Max2048, Traits: &t247, Type: smithy.ShapeTypeString})
+var sProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t248, Type: smithy.ShapeTypeString})
+var sProductRestEndpointPageSummaryNoBody_RestEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestEndpointIdentifier", ID: &iRestEndpointIdentifier, Members: &mRestEndpointIdentifier, Traits: &t249, Type: smithy.ShapeTypeStructure})
+var sProductRestEndpointPageSummaryNoBody_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t250, Type: smithy.ShapeTypeEnum})
+var sProductRestEndpointPageSummaryNoBody_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sProductRestEndpointPageSummaryNoBody_TryItState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TryItState", ID: &iTryItState, Members: &mTryItState, Traits: &t251, Type: smithy.ShapeTypeEnum})
+var sProtocolType_WEBSOCKET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEBSOCKET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProtocolType_HTTP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishStatus_PUBLISHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishStatus_PUBLISH_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISH_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishStatus_PUBLISH_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISH_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishStatus_DISABLE_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishStatus_DISABLE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPublishStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ResponseParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_ResponseParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Type: smithy.ShapeTypeMap})
+var sRestEndpointIdentifier_IdentifierParts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifierParts", ID: &iIdentifierParts, Members: &mIdentifierParts, Traits: &t252, Type: smithy.ShapeTypeStructure})
+var sRoute_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sRoute_ApiKeyRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyRequired", ID: &i___boolean, Traits: &t253, Type: smithy.ShapeTypeBoolean})
+var sRoute_AuthorizationScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationScopes", ID: &i_AuthorizationScopes, Members: &m_AuthorizationScopes, Traits: &t254, Type: smithy.ShapeTypeList})
+var sRoute_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iAuthorizationType, Members: &mAuthorizationType, Traits: &t255, Type: smithy.ShapeTypeEnum})
+var sRoute_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sRoute_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sRoute_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_StringWithLengthBetween1And64, Traits: &t166, Type: smithy.ShapeTypeString})
+var sRoute_RequestModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t257, Type: smithy.ShapeTypeMap})
+var sRoute_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sRoute_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i_Id, Traits: &t258, Type: smithy.ShapeTypeString})
+var sRoute_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sRoute_RouteResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t260, Type: smithy.ShapeTypeString})
+var sRoute_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_StringWithLengthBetween1And128, Traits: &t261, Type: smithy.ShapeTypeString})
+var s_RouteModels_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_RouteModels_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringWithLengthBetween1And128, Type: smithy.ShapeTypeString})
+var s_RouteParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_RouteParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iParameterConstraints, Members: &mParameterConstraints, Type: smithy.ShapeTypeStructure})
+var sRouteResponse_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sRouteResponse_ResponseModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t262, Type: smithy.ShapeTypeMap})
+var sRouteResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sRouteResponse_RouteResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseId", ID: &i_Id, Traits: &t263, Type: smithy.ShapeTypeString})
+var sRouteResponse_RouteResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseKey", ID: &i_SelectionKey, Traits: &t264, Type: smithy.ShapeTypeString})
+var sRouteSettings_DataTraceEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataTraceEnabled", ID: &i___boolean, Traits: &t265, Type: smithy.ShapeTypeBoolean})
+var sRouteSettings_DetailedMetricsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailedMetricsEnabled", ID: &i___boolean, Traits: &t266, Type: smithy.ShapeTypeBoolean})
+var sRouteSettings_LoggingLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LoggingLevel", ID: &iLoggingLevel, Members: &mLoggingLevel, Traits: &t267, Type: smithy.ShapeTypeEnum})
+var sRouteSettings_ThrottlingBurstLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThrottlingBurstLimit", ID: &i___integer, Traits: &t268, Type: smithy.ShapeTypeInteger})
+var sRouteSettings_ThrottlingRateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThrottlingRateLimit", ID: &i___double, Traits: &t269, Type: smithy.ShapeTypeDouble})
+var s_RouteSettingsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_RouteSettingsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iRouteSettings, Members: &mRouteSettings, Type: smithy.ShapeTypeStructure})
+var sRoutingMode_API_MAPPING_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "API_MAPPING_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRoutingMode_ROUTING_RULE_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTING_RULE_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRoutingMode_ROUTING_RULE_THEN_API_MAPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTING_RULE_THEN_API_MAPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRoutingRule_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i___listOfRoutingRuleAction, Members: &m___listOfRoutingRuleAction, Traits: &t270, Type: smithy.ShapeTypeList})
+var sRoutingRule_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i___listOfRoutingRuleCondition, Members: &m___listOfRoutingRuleCondition, Traits: &t271, Type: smithy.ShapeTypeList})
+var sRoutingRule_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RoutingRulePriority, Traits: &t272, Type: smithy.ShapeTypeInteger})
+var sRoutingRule_RoutingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleArn", ID: &i_Arn, Traits: &t273, Type: smithy.ShapeTypeString})
+var sRoutingRule_RoutingRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleId", ID: &i_Id, Traits: &t274, Type: smithy.ShapeTypeString})
+var sRoutingRuleAction_InvokeApi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokeApi", ID: &iRoutingRuleActionInvokeApi, Members: &mRoutingRuleActionInvokeApi, Traits: &t275, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleActionInvokeApi_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sRoutingRuleActionInvokeApi_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_StringWithLengthBetween1And128, Traits: &t129, Type: smithy.ShapeTypeString})
+var sRoutingRuleActionInvokeApi_StripBasePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StripBasePath", ID: &i___boolean, Traits: &t276, Type: smithy.ShapeTypeBoolean})
+var sRoutingRuleCondition_MatchBasePaths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchBasePaths", ID: &iRoutingRuleMatchBasePaths, Members: &mRoutingRuleMatchBasePaths, Traits: &t277, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleCondition_MatchHeaders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchHeaders", ID: &iRoutingRuleMatchHeaders, Members: &mRoutingRuleMatchHeaders, Traits: &t278, Type: smithy.ShapeTypeStructure})
+var sRoutingRuleMatchBasePaths_AnyOf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnyOf", ID: &i___listOfSelectionKey, Members: &m___listOfSelectionKey, Traits: &t279, Type: smithy.ShapeTypeList})
+var sRoutingRuleMatchHeaders_AnyOf = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AnyOf", ID: &i___listOfRoutingRuleMatchHeaderValue, Members: &m___listOfRoutingRuleMatchHeaderValue, Traits: &t279, Type: smithy.ShapeTypeList})
+var sRoutingRuleMatchHeaderValue_Header = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Header", ID: &i_SelectionKey, Traits: &t280, Type: smithy.ShapeTypeString})
+var sRoutingRuleMatchHeaderValue_ValueGlob = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueGlob", ID: &i_SelectionExpression, Traits: &t281, Type: smithy.ShapeTypeString})
+var sSection_ProductRestEndpointPageArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t282, Type: smithy.ShapeTypeList})
+var sSection_SectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SectionName", ID: &i___string, Traits: &t283, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString})
+var sSecurityPolicy_TLS_1_0 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_1_0", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityPolicy_TLS_1_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TLS_1_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_AccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLogSettings", ID: &iAccessLogSettings, Members: &mAccessLogSettings, Traits: &t284, Type: smithy.ShapeTypeStructure})
+var sStage_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sStage_AutoDeploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeploy", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean})
+var sStage_ClientCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateId", ID: &i_Id, Traits: &t286, Type: smithy.ShapeTypeString})
+var sStage_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sStage_DefaultRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRouteSettings", ID: &iRouteSettings, Members: &mRouteSettings, Traits: &t287, Type: smithy.ShapeTypeStructure})
+var sStage_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sStage_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sStage_LastDeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastDeploymentStatusMessage", ID: &i___string, Traits: &t288, Type: smithy.ShapeTypeString})
+var sStage_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i___timestampIso8601, Traits: &t289, Type: smithy.ShapeTypeTimestamp})
+var sStage_RouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSettings", ID: &i_RouteSettingsMap, Members: &m_RouteSettingsMap, Traits: &t290, Type: smithy.ShapeTypeMap})
+var sStage_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i_StringWithLengthBetween1And128, Traits: &t291, Type: smithy.ShapeTypeString})
+var sStage_StageVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageVariables", ID: &i_StageVariablesMap, Members: &m_StageVariablesMap, Traits: &t292, Type: smithy.ShapeTypeMap})
+var sStage_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var s_StageVariablesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_StageVariablesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringWithLengthBetween0And2048, Type: smithy.ShapeTypeString})
+var sStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusException_Exception = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Exception", ID: &i___stringMin1Max256, Traits: &t293, Type: smithy.ShapeTypeString})
+var sStatusException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___stringMin1Max2048, Traits: &t105, Type: smithy.ShapeTypeString})
+var s_SubnetIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringWithLengthBetween1And1600, Type: smithy.ShapeTypeString})
+var s_TemplateMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i___string, Type: smithy.ShapeTypeString})
+var s_TemplateMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringWithLengthBetween0And32K, Type: smithy.ShapeTypeString})
+var sTlsConfig_ServerNameToVerify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerNameToVerify", ID: &i_StringWithLengthBetween1And512, Traits: &t294, Type: smithy.ShapeTypeString})
+var sTlsConfigInput_ServerNameToVerify = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerNameToVerify", ID: &i_StringWithLengthBetween1And512, Traits: &t294, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_LimitType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LimitType", ID: &i___string, Traits: &t296, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i___string, Traits: &t105, Type: smithy.ShapeTypeString})
+var sTryItState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTryItState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcLink_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sVpcLink_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sVpcLink_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Traits: &t297, Type: smithy.ShapeTypeList})
+var sVpcLink_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Traits: &t298, Type: smithy.ShapeTypeList})
+var sVpcLink_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sVpcLink_VpcLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkId", ID: &i_Id, Traits: &t299, Type: smithy.ShapeTypeString})
+var sVpcLink_VpcLinkStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatus", ID: &iVpcLinkStatus, Members: &mVpcLinkStatus, Traits: &t300, Type: smithy.ShapeTypeEnum})
+var sVpcLink_VpcLinkStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatusMessage", ID: &i_StringWithLengthBetween0And1024, Traits: &t301, Type: smithy.ShapeTypeString})
+var sVpcLink_VpcLinkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkVersion", ID: &iVpcLinkVersion, Members: &mVpcLinkVersion, Traits: &t302, Type: smithy.ShapeTypeEnum})
+var sVpcLinkStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcLinkStatus_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcLinkStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcLinkStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcLinkStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVpcLinkVersion_V2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreateApiRequest_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sCreateApiRequest_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sCreateApiRequest_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sCreateApiRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateApiRequest_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sCreateApiRequest_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sCreateApiRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sCreateApiRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateApiRequest_ProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolType", ID: &iProtocolType, Members: &mProtocolType, Traits: &t122, Type: smithy.ShapeTypeEnum})
+var sCreateApiRequest_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sCreateApiRequest_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sCreateApiRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateApiRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_UriWithLengthBetween1And2048, Traits: &t261, Type: smithy.ShapeTypeString})
+var sCreateApiRequest_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sCreateApiMappingRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sCreateApiMappingRequest_ApiMappingKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingKey", ID: &i_SelectionKey, Traits: &t128, Type: smithy.ShapeTypeString})
+var sCreateApiMappingRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateApiMappingRequest_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_StringWithLengthBetween1And128, Traits: &t129, Type: smithy.ShapeTypeString})
+var sCreateApiMappingResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sCreateApiMappingResponse_ApiMappingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingId", ID: &i_Id, Traits: &t127, Type: smithy.ShapeTypeString})
+var sCreateApiMappingResponse_ApiMappingKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingKey", ID: &i_SelectionKey, Traits: &t128, Type: smithy.ShapeTypeString})
+var sCreateApiMappingResponse_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_StringWithLengthBetween1And128, Traits: &t129, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_ApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiEndpoint", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sCreateApiResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sCreateApiResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sCreateApiResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sCreateApiResponse_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sCreateApiResponse_ImportInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportInfo", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t119, Type: smithy.ShapeTypeList})
+var sCreateApiResponse_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sCreateApiResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_ProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolType", ID: &iProtocolType, Members: &mProtocolType, Traits: &t122, Type: smithy.ShapeTypeEnum})
+var sCreateApiResponse_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateApiResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sCreateApiResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t126, Type: smithy.ShapeTypeList})
+var sCreateAuthorizerRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerRequest_AuthorizerCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerCredentialsArn", ID: &i_Arn, Traits: &t132, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerRequest_AuthorizerPayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerPayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t134, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerRequest_AuthorizerResultTtlInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerResultTtlInSeconds", ID: &i_IntegerWithLengthBetween0And3600, Traits: &t135, Type: smithy.ShapeTypeInteger})
+var sCreateAuthorizerRequest_AuthorizerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerType", ID: &iAuthorizerType, Members: &mAuthorizerType, Traits: &t136, Type: smithy.ShapeTypeEnum})
+var sCreateAuthorizerRequest_AuthorizerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t137, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerRequest_EnableSimpleResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSimpleResponses", ID: &i___boolean, Traits: &t138, Type: smithy.ShapeTypeBoolean})
+var sCreateAuthorizerRequest_IdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySource", ID: &i_IdentitySourceList, Members: &m_IdentitySourceList, Traits: &t139, Type: smithy.ShapeTypeList})
+var sCreateAuthorizerRequest_IdentityValidationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityValidationExpression", ID: &i_StringWithLengthBetween0And1024, Traits: &t140, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerRequest_JwtConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwtConfiguration", ID: &iJWTConfiguration, Members: &mJWTConfiguration, Traits: &t141, Type: smithy.ShapeTypeStructure})
+var sCreateAuthorizerRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerResponse_AuthorizerCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerCredentialsArn", ID: &i_Arn, Traits: &t132, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerResponse_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerResponse_AuthorizerPayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerPayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t134, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerResponse_AuthorizerResultTtlInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerResultTtlInSeconds", ID: &i_IntegerWithLengthBetween0And3600, Traits: &t135, Type: smithy.ShapeTypeInteger})
+var sCreateAuthorizerResponse_AuthorizerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerType", ID: &iAuthorizerType, Members: &mAuthorizerType, Traits: &t136, Type: smithy.ShapeTypeEnum})
+var sCreateAuthorizerResponse_AuthorizerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t137, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerResponse_EnableSimpleResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSimpleResponses", ID: &i___boolean, Traits: &t138, Type: smithy.ShapeTypeBoolean})
+var sCreateAuthorizerResponse_IdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySource", ID: &i_IdentitySourceList, Members: &m_IdentitySourceList, Traits: &t139, Type: smithy.ShapeTypeList})
+var sCreateAuthorizerResponse_IdentityValidationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityValidationExpression", ID: &i_StringWithLengthBetween0And1024, Traits: &t140, Type: smithy.ShapeTypeString})
+var sCreateAuthorizerResponse_JwtConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwtConfiguration", ID: &iJWTConfiguration, Members: &mJWTConfiguration, Traits: &t141, Type: smithy.ShapeTypeStructure})
+var sCreateAuthorizerResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateDeploymentRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateDeploymentRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateDeploymentRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i_StringWithLengthBetween1And128, Traits: &t291, Type: smithy.ShapeTypeString})
+var sCreateDeploymentResponse_AutoDeployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeployed", ID: &i___boolean, Traits: &t159, Type: smithy.ShapeTypeBoolean})
+var sCreateDeploymentResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sCreateDeploymentResponse_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sCreateDeploymentResponse_DeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatus", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Traits: &t161, Type: smithy.ShapeTypeEnum})
+var sCreateDeploymentResponse_DeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatusMessage", ID: &i___string, Traits: &t162, Type: smithy.ShapeTypeString})
+var sCreateDeploymentResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateDomainNameRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_StringWithLengthBetween1And512, Traits: &t109, Type: smithy.ShapeTypeString})
+var sCreateDomainNameRequest_DomainNameConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameConfigurations", ID: &i_DomainNameConfigurations, Members: &m_DomainNameConfigurations, Traits: &t172, Type: smithy.ShapeTypeList})
+var sCreateDomainNameRequest_MutualTlsAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualTlsAuthentication", ID: &iMutualTlsAuthenticationInput, Members: &mMutualTlsAuthenticationInput, Traits: &t173, Type: smithy.ShapeTypeStructure})
+var sCreateDomainNameRequest_RoutingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingMode", ID: &iRoutingMode, Members: &mRoutingMode, Traits: &t174, Type: smithy.ShapeTypeEnum})
+var sCreateDomainNameRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateDomainNameResponse_ApiMappingSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingSelectionExpression", ID: &i_SelectionExpression, Traits: &t170, Type: smithy.ShapeTypeString})
+var sCreateDomainNameResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_StringWithLengthBetween1And512, Traits: &t109, Type: smithy.ShapeTypeString})
+var sCreateDomainNameResponse_DomainNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameArn", ID: &i_Arn, Traits: &t171, Type: smithy.ShapeTypeString})
+var sCreateDomainNameResponse_DomainNameConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameConfigurations", ID: &i_DomainNameConfigurations, Members: &m_DomainNameConfigurations, Traits: &t172, Type: smithy.ShapeTypeList})
+var sCreateDomainNameResponse_MutualTlsAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualTlsAuthentication", ID: &iMutualTlsAuthentication, Members: &mMutualTlsAuthentication, Traits: &t173, Type: smithy.ShapeTypeStructure})
+var sCreateDomainNameResponse_RoutingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingMode", ID: &iRoutingMode, Members: &mRoutingMode, Traits: &t174, Type: smithy.ShapeTypeEnum})
+var sCreateDomainNameResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_StringWithLengthBetween1And1024, Traits: &t191, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Traits: &t192, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationRequest_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationRequest_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_IntegrationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationMethod", ID: &i_StringWithLengthBetween1And64, Traits: &t196, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_IntegrationSubtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationSubtype", ID: &i_StringWithLengthBetween1And128, Traits: &t198, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iIntegrationType, Members: &mIntegrationType, Traits: &t199, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationRequest_IntegrationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t200, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_PassthroughBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PassthroughBehavior", ID: &iPassthroughBehavior, Members: &mPassthroughBehavior, Traits: &t201, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationRequest_PayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t202, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationRequest_RequestTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t204, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationRequest_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_ResponseParameters, Members: &m_ResponseParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationRequest_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sCreateIntegrationRequest_TimeoutInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMillis", ID: &i_IntegerWithLengthBetween50And30000, Traits: &t207, Type: smithy.ShapeTypeInteger})
+var sCreateIntegrationRequest_TlsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsConfig", ID: &iTlsConfigInput, Members: &mTlsConfigInput, Traits: &t208, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationResult_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sCreateIntegrationResult_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_StringWithLengthBetween1And1024, Traits: &t191, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Traits: &t192, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationResult_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationResult_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i_Id, Traits: &t195, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_IntegrationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationMethod", ID: &i_StringWithLengthBetween1And64, Traits: &t196, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_IntegrationResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t197, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_IntegrationSubtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationSubtype", ID: &i_StringWithLengthBetween1And128, Traits: &t198, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iIntegrationType, Members: &mIntegrationType, Traits: &t199, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationResult_IntegrationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t200, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_PassthroughBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PassthroughBehavior", ID: &iPassthroughBehavior, Members: &mPassthroughBehavior, Traits: &t201, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationResult_PayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t202, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationResult_RequestTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t204, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationResult_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_ResponseParameters, Members: &m_ResponseParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationResult_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResult_TimeoutInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMillis", ID: &i_IntegerWithLengthBetween50And30000, Traits: &t207, Type: smithy.ShapeTypeInteger})
+var sCreateIntegrationResult_TlsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsConfig", ID: &iTlsConfig, Members: &mTlsConfig, Traits: &t208, Type: smithy.ShapeTypeStructure})
+var sCreateIntegrationResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResponseRequest_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationResponseRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResponseRequest_IntegrationResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseKey", ID: &i_SelectionKey, Traits: &t210, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResponseRequest_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationResponseRequest_ResponseTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t211, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationResponseRequest_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResponseResponse_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sCreateIntegrationResponseResponse_IntegrationResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseId", ID: &i_Id, Traits: &t209, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResponseResponse_IntegrationResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseKey", ID: &i_SelectionKey, Traits: &t210, Type: smithy.ShapeTypeString})
+var sCreateIntegrationResponseResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationResponseResponse_ResponseTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t211, Type: smithy.ShapeTypeMap})
+var sCreateIntegrationResponseResponse_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And256, Traits: &t214, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateModelRequest_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_StringWithLengthBetween0And32K, Traits: &t216, Type: smithy.ShapeTypeString})
+var sCreateModelResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And256, Traits: &t214, Type: smithy.ShapeTypeString})
+var sCreateModelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateModelResponse_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i_Id, Traits: &t215, Type: smithy.ShapeTypeString})
+var sCreateModelResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateModelResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_StringWithLengthBetween0And32K, Traits: &t216, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t228, Type: smithy.ShapeTypeStructure})
+var sCreatePortalRequest_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iEndpointConfigurationRequest, Members: &mEndpointConfigurationRequest, Traits: &t229, Type: smithy.ShapeTypeStructure})
+var sCreatePortalRequest_IncludedPortalProductArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedPortalProductArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t230, Type: smithy.ShapeTypeList})
+var sCreatePortalRequest_LogoUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogoUri", ID: &i___stringMin0Max1092, Traits: &t304, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_PortalContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalContent", ID: &iPortalContent, Members: &mPortalContent, Traits: &t234, Type: smithy.ShapeTypeStructure})
+var sCreatePortalRequest_RumAppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RumAppMonitorName", ID: &i___stringMin0Max255, Traits: &t238, Type: smithy.ShapeTypeString})
+var sCreatePortalRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreatePortalResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t228, Type: smithy.ShapeTypeStructure})
+var sCreatePortalResponse_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iEndpointConfigurationResponse, Members: &mEndpointConfigurationResponse, Traits: &t229, Type: smithy.ShapeTypeStructure})
+var sCreatePortalResponse_IncludedPortalProductArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedPortalProductArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t230, Type: smithy.ShapeTypeList})
+var sCreatePortalResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sCreatePortalResponse_LastPublished = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublished", ID: &i___timestampIso8601, Traits: &t231, Type: smithy.ShapeTypeTimestamp})
+var sCreatePortalResponse_LastPublishedDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublishedDescription", ID: &i___stringMin0Max1024, Traits: &t232, Type: smithy.ShapeTypeString})
+var sCreatePortalResponse_PortalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalArn", ID: &i___stringMin20Max2048, Traits: &t233, Type: smithy.ShapeTypeString})
+var sCreatePortalResponse_PortalContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalContent", ID: &iPortalContent, Members: &mPortalContent, Traits: &t234, Type: smithy.ShapeTypeStructure})
+var sCreatePortalResponse_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t235, Type: smithy.ShapeTypeString})
+var sCreatePortalResponse_PublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishStatus", ID: &iPublishStatus, Members: &mPublishStatus, Traits: &t237, Type: smithy.ShapeTypeEnum})
+var sCreatePortalResponse_RumAppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RumAppMonitorName", ID: &i___stringMin0Max255, Traits: &t238, Type: smithy.ShapeTypeString})
+var sCreatePortalResponse_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sCreatePortalResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreatePortalProductRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreatePortalProductRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i___stringMin1Max255, Traits: &t223, Type: smithy.ShapeTypeString})
+var sCreatePortalProductRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreatePortalProductResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreatePortalProductResponse_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i___stringMin1Max255, Traits: &t223, Type: smithy.ShapeTypeString})
+var sCreatePortalProductResponse_DisplayOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayOrder", ID: &iDisplayOrder, Members: &mDisplayOrder, Traits: &t305, Type: smithy.ShapeTypeStructure})
+var sCreatePortalProductResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sCreatePortalProductResponse_PortalProductArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductArn", ID: &i___stringMin20Max2048, Traits: &t226, Type: smithy.ShapeTypeString})
+var sCreatePortalProductResponse_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t227, Type: smithy.ShapeTypeString})
+var sCreatePortalProductResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateProductPageRequest_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iDisplayContent, Members: &mDisplayContent, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sCreateProductPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateProductPageResponse_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iDisplayContent, Members: &mDisplayContent, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sCreateProductPageResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sCreateProductPageResponse_ProductPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageArn", ID: &i___stringMin20Max2048, Traits: &t245, Type: smithy.ShapeTypeString})
+var sCreateProductPageResponse_ProductPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t246, Type: smithy.ShapeTypeString})
+var sCreateProductRestEndpointPageRequest_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iEndpointDisplayContent, Members: &mEndpointDisplayContent, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sCreateProductRestEndpointPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateProductRestEndpointPageRequest_RestEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestEndpointIdentifier", ID: &iRestEndpointIdentifier, Members: &mRestEndpointIdentifier, Traits: &t249, Type: smithy.ShapeTypeStructure})
+var sCreateProductRestEndpointPageRequest_TryItState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TryItState", ID: &iTryItState, Members: &mTryItState, Traits: &t251, Type: smithy.ShapeTypeEnum})
+var sCreateProductRestEndpointPageResponse_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iEndpointDisplayContentResponse, Members: &mEndpointDisplayContentResponse, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sCreateProductRestEndpointPageResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sCreateProductRestEndpointPageResponse_ProductRestEndpointPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageArn", ID: &i___stringMin20Max2048, Traits: &t247, Type: smithy.ShapeTypeString})
+var sCreateProductRestEndpointPageResponse_ProductRestEndpointPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t248, Type: smithy.ShapeTypeString})
+var sCreateProductRestEndpointPageResponse_RestEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestEndpointIdentifier", ID: &iRestEndpointIdentifier, Members: &mRestEndpointIdentifier, Traits: &t249, Type: smithy.ShapeTypeStructure})
+var sCreateProductRestEndpointPageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t250, Type: smithy.ShapeTypeEnum})
+var sCreateProductRestEndpointPageResponse_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sCreateProductRestEndpointPageResponse_TryItState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TryItState", ID: &iTryItState, Members: &mTryItState, Traits: &t251, Type: smithy.ShapeTypeEnum})
+var sCreateRouteRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateRouteRequest_ApiKeyRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyRequired", ID: &i___boolean, Traits: &t253, Type: smithy.ShapeTypeBoolean})
+var sCreateRouteRequest_AuthorizationScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationScopes", ID: &i_AuthorizationScopes, Members: &m_AuthorizationScopes, Traits: &t254, Type: smithy.ShapeTypeList})
+var sCreateRouteRequest_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iAuthorizationType, Members: &mAuthorizationType, Traits: &t255, Type: smithy.ShapeTypeEnum})
+var sCreateRouteRequest_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sCreateRouteRequest_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sCreateRouteRequest_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_StringWithLengthBetween1And64, Traits: &t166, Type: smithy.ShapeTypeString})
+var sCreateRouteRequest_RequestModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t257, Type: smithy.ShapeTypeMap})
+var sCreateRouteRequest_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sCreateRouteRequest_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sCreateRouteRequest_RouteResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t260, Type: smithy.ShapeTypeString})
+var sCreateRouteRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_StringWithLengthBetween1And128, Traits: &t261, Type: smithy.ShapeTypeString})
+var sCreateRouteResult_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sCreateRouteResult_ApiKeyRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyRequired", ID: &i___boolean, Traits: &t253, Type: smithy.ShapeTypeBoolean})
+var sCreateRouteResult_AuthorizationScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationScopes", ID: &i_AuthorizationScopes, Members: &m_AuthorizationScopes, Traits: &t254, Type: smithy.ShapeTypeList})
+var sCreateRouteResult_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iAuthorizationType, Members: &mAuthorizationType, Traits: &t255, Type: smithy.ShapeTypeEnum})
+var sCreateRouteResult_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sCreateRouteResult_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sCreateRouteResult_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_StringWithLengthBetween1And64, Traits: &t166, Type: smithy.ShapeTypeString})
+var sCreateRouteResult_RequestModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t257, Type: smithy.ShapeTypeMap})
+var sCreateRouteResult_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sCreateRouteResult_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i_Id, Traits: &t258, Type: smithy.ShapeTypeString})
+var sCreateRouteResult_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sCreateRouteResult_RouteResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t260, Type: smithy.ShapeTypeString})
+var sCreateRouteResult_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_StringWithLengthBetween1And128, Traits: &t261, Type: smithy.ShapeTypeString})
+var sCreateRouteResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateRouteResponseRequest_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sCreateRouteResponseRequest_ResponseModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t262, Type: smithy.ShapeTypeMap})
+var sCreateRouteResponseRequest_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sCreateRouteResponseRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateRouteResponseRequest_RouteResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseKey", ID: &i_SelectionKey, Traits: &t264, Type: smithy.ShapeTypeString})
+var sCreateRouteResponseResponse_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sCreateRouteResponseResponse_ResponseModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t262, Type: smithy.ShapeTypeMap})
+var sCreateRouteResponseResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sCreateRouteResponseResponse_RouteResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseId", ID: &i_Id, Traits: &t263, Type: smithy.ShapeTypeString})
+var sCreateRouteResponseResponse_RouteResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseKey", ID: &i_SelectionKey, Traits: &t264, Type: smithy.ShapeTypeString})
+var sCreateRoutingRuleRequest_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i___listOfRoutingRuleAction, Members: &m___listOfRoutingRuleAction, Traits: &t270, Type: smithy.ShapeTypeList})
+var sCreateRoutingRuleRequest_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i___listOfRoutingRuleCondition, Members: &m___listOfRoutingRuleCondition, Traits: &t271, Type: smithy.ShapeTypeList})
+var sCreateRoutingRuleRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateRoutingRuleRequest_DomainNameId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameId", ID: &i___string, Traits: &t307, Type: smithy.ShapeTypeString})
+var sCreateRoutingRuleRequest_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RoutingRulePriority, Traits: &t272, Type: smithy.ShapeTypeInteger})
+var sCreateRoutingRuleResponse_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i___listOfRoutingRuleAction, Members: &m___listOfRoutingRuleAction, Traits: &t270, Type: smithy.ShapeTypeList})
+var sCreateRoutingRuleResponse_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i___listOfRoutingRuleCondition, Members: &m___listOfRoutingRuleCondition, Traits: &t271, Type: smithy.ShapeTypeList})
+var sCreateRoutingRuleResponse_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RoutingRulePriority, Traits: &t272, Type: smithy.ShapeTypeInteger})
+var sCreateRoutingRuleResponse_RoutingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleArn", ID: &i_Arn, Traits: &t273, Type: smithy.ShapeTypeString})
+var sCreateRoutingRuleResponse_RoutingRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleId", ID: &i_Id, Traits: &t274, Type: smithy.ShapeTypeString})
+var sCreateStageRequest_AccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLogSettings", ID: &iAccessLogSettings, Members: &mAccessLogSettings, Traits: &t284, Type: smithy.ShapeTypeStructure})
+var sCreateStageRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sCreateStageRequest_AutoDeploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeploy", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean})
+var sCreateStageRequest_ClientCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateId", ID: &i_Id, Traits: &t286, Type: smithy.ShapeTypeString})
+var sCreateStageRequest_DefaultRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRouteSettings", ID: &iRouteSettings, Members: &mRouteSettings, Traits: &t287, Type: smithy.ShapeTypeStructure})
+var sCreateStageRequest_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sCreateStageRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateStageRequest_RouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSettings", ID: &i_RouteSettingsMap, Members: &m_RouteSettingsMap, Traits: &t290, Type: smithy.ShapeTypeMap})
+var sCreateStageRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i_StringWithLengthBetween1And128, Traits: &t291, Type: smithy.ShapeTypeString})
+var sCreateStageRequest_StageVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageVariables", ID: &i_StageVariablesMap, Members: &m_StageVariablesMap, Traits: &t292, Type: smithy.ShapeTypeMap})
+var sCreateStageRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateStageResponse_AccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLogSettings", ID: &iAccessLogSettings, Members: &mAccessLogSettings, Traits: &t284, Type: smithy.ShapeTypeStructure})
+var sCreateStageResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sCreateStageResponse_AutoDeploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeploy", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean})
+var sCreateStageResponse_ClientCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateId", ID: &i_Id, Traits: &t286, Type: smithy.ShapeTypeString})
+var sCreateStageResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sCreateStageResponse_DefaultRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRouteSettings", ID: &iRouteSettings, Members: &mRouteSettings, Traits: &t287, Type: smithy.ShapeTypeStructure})
+var sCreateStageResponse_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sCreateStageResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sCreateStageResponse_LastDeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastDeploymentStatusMessage", ID: &i___string, Traits: &t288, Type: smithy.ShapeTypeString})
+var sCreateStageResponse_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i___timestampIso8601, Traits: &t289, Type: smithy.ShapeTypeTimestamp})
+var sCreateStageResponse_RouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSettings", ID: &i_RouteSettingsMap, Members: &m_RouteSettingsMap, Traits: &t290, Type: smithy.ShapeTypeMap})
+var sCreateStageResponse_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i_StringWithLengthBetween1And128, Traits: &t291, Type: smithy.ShapeTypeString})
+var sCreateStageResponse_StageVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageVariables", ID: &i_StageVariablesMap, Members: &m_StageVariablesMap, Traits: &t292, Type: smithy.ShapeTypeMap})
+var sCreateStageResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateVpcLinkRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateVpcLinkRequest_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Traits: &t297, Type: smithy.ShapeTypeList})
+var sCreateVpcLinkRequest_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Traits: &t298, Type: smithy.ShapeTypeList})
+var sCreateVpcLinkRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateVpcLinkResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sCreateVpcLinkResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sCreateVpcLinkResponse_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Traits: &t297, Type: smithy.ShapeTypeList})
+var sCreateVpcLinkResponse_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Traits: &t298, Type: smithy.ShapeTypeList})
+var sCreateVpcLinkResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sCreateVpcLinkResponse_VpcLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkId", ID: &i_Id, Traits: &t299, Type: smithy.ShapeTypeString})
+var sCreateVpcLinkResponse_VpcLinkStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatus", ID: &iVpcLinkStatus, Members: &mVpcLinkStatus, Traits: &t300, Type: smithy.ShapeTypeEnum})
+var sCreateVpcLinkResponse_VpcLinkStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatusMessage", ID: &i_StringWithLengthBetween0And1024, Traits: &t301, Type: smithy.ShapeTypeString})
+var sCreateVpcLinkResponse_VpcLinkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkVersion", ID: &iVpcLinkVersion, Members: &mVpcLinkVersion, Traits: &t302, Type: smithy.ShapeTypeEnum})
+var sDeleteAccessLogSettingsRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteAccessLogSettingsRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteApiRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteApiMappingRequest_ApiMappingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteApiMappingRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteAuthorizerRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteAuthorizerRequest_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteCorsConfigurationRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteDeploymentRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteDeploymentRequest_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteDomainNameRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteIntegrationRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteIntegrationRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteIntegrationResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteIntegrationResponseRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteIntegrationResponseRequest_IntegrationResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteModelRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteModelRequest_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeletePortalRequest_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeletePortalProductRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeletePortalProductSharingPolicyRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteProductPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteProductPageRequest_ProductPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteProductRestEndpointPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteProductRestEndpointPageRequest_ProductRestEndpointPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteRequestParameterRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteRequestParameterRequest_RequestParameterKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameterKey", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteRequestParameterRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteResponseRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteResponseRequest_RouteResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteSettingsRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteSettingsRequest_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRouteSettingsRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRoutingRuleRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteRoutingRuleRequest_DomainNameId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameId", ID: &i___string, Traits: &t307, Type: smithy.ShapeTypeString})
+var sDeleteRoutingRuleRequest_RoutingRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteStageRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteStageRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDeleteVpcLinkRequest_VpcLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sDisablePortalRequest_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sExportApiRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sExportApiRequest_ExportVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportVersion", ID: &i___string, Traits: &t308, Type: smithy.ShapeTypeString})
+var sExportApiRequest_IncludeExtensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeExtensions", ID: &i___boolean, Traits: &t309, Type: smithy.ShapeTypeBoolean})
+var sExportApiRequest_OutputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputType", ID: &i___string, Traits: &t310, Type: smithy.ShapeTypeString})
+var sExportApiRequest_Specification = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Specification", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sExportApiRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i___string, Traits: &t311, Type: smithy.ShapeTypeString})
+var sExportApiResponse_body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "body", ID: &i_ExportedApi, Traits: &t312, Type: smithy.ShapeTypeBlob})
+var sGetApiRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetApiMappingRequest_ApiMappingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetApiMappingRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetApiMappingResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sGetApiMappingResponse_ApiMappingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingId", ID: &i_Id, Traits: &t127, Type: smithy.ShapeTypeString})
+var sGetApiMappingResponse_ApiMappingKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingKey", ID: &i_SelectionKey, Traits: &t128, Type: smithy.ShapeTypeString})
+var sGetApiMappingResponse_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_StringWithLengthBetween1And128, Traits: &t129, Type: smithy.ShapeTypeString})
+var sGetApiMappingsRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetApiMappingsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetApiMappingsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetApiMappingsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfApiMapping, Members: &m___listOfApiMapping, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetApiMappingsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetApiResponse_ApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiEndpoint", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString})
+var sGetApiResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sGetApiResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sGetApiResponse_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sGetApiResponse_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sGetApiResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sGetApiResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sGetApiResponse_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sGetApiResponse_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sGetApiResponse_ImportInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportInfo", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t119, Type: smithy.ShapeTypeList})
+var sGetApiResponse_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sGetApiResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sGetApiResponse_ProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolType", ID: &iProtocolType, Members: &mProtocolType, Traits: &t122, Type: smithy.ShapeTypeEnum})
+var sGetApiResponse_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sGetApiResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sGetApiResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sGetApiResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t126, Type: smithy.ShapeTypeList})
+var sGetApisRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetApisRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetApisResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfApi, Members: &m___listOfApi, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetApisResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetAuthorizerRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetAuthorizerRequest_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetAuthorizerResponse_AuthorizerCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerCredentialsArn", ID: &i_Arn, Traits: &t132, Type: smithy.ShapeTypeString})
+var sGetAuthorizerResponse_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sGetAuthorizerResponse_AuthorizerPayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerPayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t134, Type: smithy.ShapeTypeString})
+var sGetAuthorizerResponse_AuthorizerResultTtlInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerResultTtlInSeconds", ID: &i_IntegerWithLengthBetween0And3600, Traits: &t135, Type: smithy.ShapeTypeInteger})
+var sGetAuthorizerResponse_AuthorizerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerType", ID: &iAuthorizerType, Members: &mAuthorizerType, Traits: &t136, Type: smithy.ShapeTypeEnum})
+var sGetAuthorizerResponse_AuthorizerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t137, Type: smithy.ShapeTypeString})
+var sGetAuthorizerResponse_EnableSimpleResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSimpleResponses", ID: &i___boolean, Traits: &t138, Type: smithy.ShapeTypeBoolean})
+var sGetAuthorizerResponse_IdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySource", ID: &i_IdentitySourceList, Members: &m_IdentitySourceList, Traits: &t139, Type: smithy.ShapeTypeList})
+var sGetAuthorizerResponse_IdentityValidationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityValidationExpression", ID: &i_StringWithLengthBetween0And1024, Traits: &t140, Type: smithy.ShapeTypeString})
+var sGetAuthorizerResponse_JwtConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwtConfiguration", ID: &iJWTConfiguration, Members: &mJWTConfiguration, Traits: &t141, Type: smithy.ShapeTypeStructure})
+var sGetAuthorizerResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sGetAuthorizersRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetAuthorizersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetAuthorizersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetAuthorizersResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfAuthorizer, Members: &m___listOfAuthorizer, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetAuthorizersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetDeploymentRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetDeploymentRequest_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_AutoDeployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeployed", ID: &i___boolean, Traits: &t159, Type: smithy.ShapeTypeBoolean})
+var sGetDeploymentResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sGetDeploymentResponse_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_DeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatus", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Traits: &t161, Type: smithy.ShapeTypeEnum})
+var sGetDeploymentResponse_DeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatusMessage", ID: &i___string, Traits: &t162, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sGetDeploymentsRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetDeploymentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetDeploymentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetDeploymentsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfDeployment, Members: &m___listOfDeployment, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetDeploymentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetDomainNameRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetDomainNameResponse_ApiMappingSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingSelectionExpression", ID: &i_SelectionExpression, Traits: &t170, Type: smithy.ShapeTypeString})
+var sGetDomainNameResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_StringWithLengthBetween1And512, Traits: &t109, Type: smithy.ShapeTypeString})
+var sGetDomainNameResponse_DomainNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameArn", ID: &i_Arn, Traits: &t171, Type: smithy.ShapeTypeString})
+var sGetDomainNameResponse_DomainNameConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameConfigurations", ID: &i_DomainNameConfigurations, Members: &m_DomainNameConfigurations, Traits: &t172, Type: smithy.ShapeTypeList})
+var sGetDomainNameResponse_MutualTlsAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualTlsAuthentication", ID: &iMutualTlsAuthentication, Members: &mMutualTlsAuthentication, Traits: &t173, Type: smithy.ShapeTypeStructure})
+var sGetDomainNameResponse_RoutingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingMode", ID: &iRoutingMode, Members: &mRoutingMode, Traits: &t174, Type: smithy.ShapeTypeEnum})
+var sGetDomainNameResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sGetDomainNamesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetDomainNamesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetDomainNamesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfDomainName, Members: &m___listOfDomainName, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetDomainNamesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetIntegrationRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sGetIntegrationResult_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_StringWithLengthBetween1And1024, Traits: &t191, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Traits: &t192, Type: smithy.ShapeTypeEnum})
+var sGetIntegrationResult_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sGetIntegrationResult_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i_Id, Traits: &t195, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_IntegrationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationMethod", ID: &i_StringWithLengthBetween1And64, Traits: &t196, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_IntegrationResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t197, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_IntegrationSubtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationSubtype", ID: &i_StringWithLengthBetween1And128, Traits: &t198, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iIntegrationType, Members: &mIntegrationType, Traits: &t199, Type: smithy.ShapeTypeEnum})
+var sGetIntegrationResult_IntegrationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t200, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_PassthroughBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PassthroughBehavior", ID: &iPassthroughBehavior, Members: &mPassthroughBehavior, Traits: &t201, Type: smithy.ShapeTypeEnum})
+var sGetIntegrationResult_PayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t202, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sGetIntegrationResult_RequestTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t204, Type: smithy.ShapeTypeMap})
+var sGetIntegrationResult_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_ResponseParameters, Members: &m_ResponseParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sGetIntegrationResult_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sGetIntegrationResult_TimeoutInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMillis", ID: &i_IntegerWithLengthBetween50And30000, Traits: &t207, Type: smithy.ShapeTypeInteger})
+var sGetIntegrationResult_TlsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsConfig", ID: &iTlsConfig, Members: &mTlsConfig, Traits: &t208, Type: smithy.ShapeTypeStructure})
+var sGetIntegrationResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponseRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponseRequest_IntegrationResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponseResponse_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sGetIntegrationResponseResponse_IntegrationResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseId", ID: &i_Id, Traits: &t209, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponseResponse_IntegrationResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseKey", ID: &i_SelectionKey, Traits: &t210, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponseResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sGetIntegrationResponseResponse_ResponseTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t211, Type: smithy.ShapeTypeMap})
+var sGetIntegrationResponseResponse_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponsesRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponsesRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponsesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponsesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetIntegrationResponsesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfIntegrationResponse, Members: &m___listOfIntegrationResponse, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetIntegrationResponsesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetIntegrationsRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetIntegrationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetIntegrationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetIntegrationsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfIntegration, Members: &m___listOfIntegration, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetIntegrationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetModelRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetModelRequest_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetModelResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And256, Traits: &t214, Type: smithy.ShapeTypeString})
+var sGetModelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sGetModelResponse_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i_Id, Traits: &t215, Type: smithy.ShapeTypeString})
+var sGetModelResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sGetModelResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_StringWithLengthBetween0And32K, Traits: &t216, Type: smithy.ShapeTypeString})
+var sGetModelsRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetModelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetModelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetModelsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfModel, Members: &m___listOfModel, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetModelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetModelTemplateRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetModelTemplateRequest_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetModelTemplateResponse_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i___string, Traits: &t317, Type: smithy.ShapeTypeString})
+var sGetPortalRequest_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetPortalResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t228, Type: smithy.ShapeTypeStructure})
+var sGetPortalResponse_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iEndpointConfigurationResponse, Members: &mEndpointConfigurationResponse, Traits: &t229, Type: smithy.ShapeTypeStructure})
+var sGetPortalResponse_IncludedPortalProductArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedPortalProductArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t230, Type: smithy.ShapeTypeList})
+var sGetPortalResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sGetPortalResponse_LastPublished = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublished", ID: &i___timestampIso8601, Traits: &t231, Type: smithy.ShapeTypeTimestamp})
+var sGetPortalResponse_LastPublishedDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublishedDescription", ID: &i___stringMin0Max1024, Traits: &t232, Type: smithy.ShapeTypeString})
+var sGetPortalResponse_PortalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalArn", ID: &i___stringMin20Max2048, Traits: &t233, Type: smithy.ShapeTypeString})
+var sGetPortalResponse_PortalContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalContent", ID: &iPortalContent, Members: &mPortalContent, Traits: &t234, Type: smithy.ShapeTypeStructure})
+var sGetPortalResponse_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t235, Type: smithy.ShapeTypeString})
+var sGetPortalResponse_Preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preview", ID: &iPreview, Members: &mPreview, Traits: &t236, Type: smithy.ShapeTypeStructure})
+var sGetPortalResponse_PublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishStatus", ID: &iPublishStatus, Members: &mPublishStatus, Traits: &t237, Type: smithy.ShapeTypeEnum})
+var sGetPortalResponse_RumAppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RumAppMonitorName", ID: &i___stringMin0Max255, Traits: &t238, Type: smithy.ShapeTypeString})
+var sGetPortalResponse_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sGetPortalResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sGetPortalProductRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetPortalProductRequest_ResourceOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwnerAccountId", ID: &i___string, Traits: &t318, Type: smithy.ShapeTypeString})
+var sGetPortalProductResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sGetPortalProductResponse_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i___stringMin1Max255, Traits: &t223, Type: smithy.ShapeTypeString})
+var sGetPortalProductResponse_DisplayOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayOrder", ID: &iDisplayOrder, Members: &mDisplayOrder, Traits: &t305, Type: smithy.ShapeTypeStructure})
+var sGetPortalProductResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sGetPortalProductResponse_PortalProductArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductArn", ID: &i___stringMin20Max2048, Traits: &t226, Type: smithy.ShapeTypeString})
+var sGetPortalProductResponse_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t227, Type: smithy.ShapeTypeString})
+var sGetPortalProductResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sGetPortalProductSharingPolicyRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetPortalProductSharingPolicyResponse_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i___stringMin1Max307200, Traits: &t319, Type: smithy.ShapeTypeString})
+var sGetPortalProductSharingPolicyResponse_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t227, Type: smithy.ShapeTypeString})
+var sGetProductPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetProductPageRequest_ProductPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetProductPageRequest_ResourceOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwnerAccountId", ID: &i___string, Traits: &t318, Type: smithy.ShapeTypeString})
+var sGetProductPageResponse_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iDisplayContent, Members: &mDisplayContent, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sGetProductPageResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sGetProductPageResponse_ProductPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageArn", ID: &i___stringMin20Max2048, Traits: &t245, Type: smithy.ShapeTypeString})
+var sGetProductPageResponse_ProductPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t246, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageRequest_IncludeRawDisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeRawDisplayContent", ID: &i___string, Traits: &t320, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageRequest_ProductRestEndpointPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageRequest_ResourceOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwnerAccountId", ID: &i___string, Traits: &t318, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageResponse_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iEndpointDisplayContentResponse, Members: &mEndpointDisplayContentResponse, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sGetProductRestEndpointPageResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sGetProductRestEndpointPageResponse_ProductRestEndpointPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageArn", ID: &i___stringMin20Max2048, Traits: &t247, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageResponse_ProductRestEndpointPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t248, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageResponse_RawDisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RawDisplayContent", ID: &i___string, Traits: &t321, Type: smithy.ShapeTypeString})
+var sGetProductRestEndpointPageResponse_RestEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestEndpointIdentifier", ID: &iRestEndpointIdentifier, Members: &mRestEndpointIdentifier, Traits: &t249, Type: smithy.ShapeTypeStructure})
+var sGetProductRestEndpointPageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t250, Type: smithy.ShapeTypeEnum})
+var sGetProductRestEndpointPageResponse_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sGetProductRestEndpointPageResponse_TryItState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TryItState", ID: &iTryItState, Members: &mTryItState, Traits: &t251, Type: smithy.ShapeTypeEnum})
+var sGetRouteRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRouteRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRouteResult_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sGetRouteResult_ApiKeyRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyRequired", ID: &i___boolean, Traits: &t253, Type: smithy.ShapeTypeBoolean})
+var sGetRouteResult_AuthorizationScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationScopes", ID: &i_AuthorizationScopes, Members: &m_AuthorizationScopes, Traits: &t254, Type: smithy.ShapeTypeList})
+var sGetRouteResult_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iAuthorizationType, Members: &mAuthorizationType, Traits: &t255, Type: smithy.ShapeTypeEnum})
+var sGetRouteResult_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sGetRouteResult_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sGetRouteResult_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_StringWithLengthBetween1And64, Traits: &t166, Type: smithy.ShapeTypeString})
+var sGetRouteResult_RequestModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t257, Type: smithy.ShapeTypeMap})
+var sGetRouteResult_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sGetRouteResult_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i_Id, Traits: &t258, Type: smithy.ShapeTypeString})
+var sGetRouteResult_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sGetRouteResult_RouteResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t260, Type: smithy.ShapeTypeString})
+var sGetRouteResult_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_StringWithLengthBetween1And128, Traits: &t261, Type: smithy.ShapeTypeString})
+var sGetRouteResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRouteResponseRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRouteResponseRequest_RouteResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRouteResponseResponse_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sGetRouteResponseResponse_ResponseModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t262, Type: smithy.ShapeTypeMap})
+var sGetRouteResponseResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sGetRouteResponseResponse_RouteResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseId", ID: &i_Id, Traits: &t263, Type: smithy.ShapeTypeString})
+var sGetRouteResponseResponse_RouteResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseKey", ID: &i_SelectionKey, Traits: &t264, Type: smithy.ShapeTypeString})
+var sGetRouteResponsesRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRouteResponsesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetRouteResponsesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetRouteResponsesRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRouteResponsesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfRouteResponse, Members: &m___listOfRouteResponse, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetRouteResponsesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetRoutesRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRoutesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetRoutesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetRoutesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfRoute, Members: &m___listOfRoute, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetRoutesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetRoutingRuleRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRoutingRuleRequest_DomainNameId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameId", ID: &i___string, Traits: &t307, Type: smithy.ShapeTypeString})
+var sGetRoutingRuleRequest_RoutingRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetRoutingRuleResponse_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i___listOfRoutingRuleAction, Members: &m___listOfRoutingRuleAction, Traits: &t270, Type: smithy.ShapeTypeList})
+var sGetRoutingRuleResponse_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i___listOfRoutingRuleCondition, Members: &m___listOfRoutingRuleCondition, Traits: &t271, Type: smithy.ShapeTypeList})
+var sGetRoutingRuleResponse_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RoutingRulePriority, Traits: &t272, Type: smithy.ShapeTypeInteger})
+var sGetRoutingRuleResponse_RoutingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleArn", ID: &i_Arn, Traits: &t273, Type: smithy.ShapeTypeString})
+var sGetRoutingRuleResponse_RoutingRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleId", ID: &i_Id, Traits: &t274, Type: smithy.ShapeTypeString})
+var sGetStageRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetStageRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetStageResponse_AccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLogSettings", ID: &iAccessLogSettings, Members: &mAccessLogSettings, Traits: &t284, Type: smithy.ShapeTypeStructure})
+var sGetStageResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sGetStageResponse_AutoDeploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeploy", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean})
+var sGetStageResponse_ClientCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateId", ID: &i_Id, Traits: &t286, Type: smithy.ShapeTypeString})
+var sGetStageResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sGetStageResponse_DefaultRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRouteSettings", ID: &iRouteSettings, Members: &mRouteSettings, Traits: &t287, Type: smithy.ShapeTypeStructure})
+var sGetStageResponse_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sGetStageResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sGetStageResponse_LastDeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastDeploymentStatusMessage", ID: &i___string, Traits: &t288, Type: smithy.ShapeTypeString})
+var sGetStageResponse_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i___timestampIso8601, Traits: &t289, Type: smithy.ShapeTypeTimestamp})
+var sGetStageResponse_RouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSettings", ID: &i_RouteSettingsMap, Members: &m_RouteSettingsMap, Traits: &t290, Type: smithy.ShapeTypeMap})
+var sGetStageResponse_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i_StringWithLengthBetween1And128, Traits: &t291, Type: smithy.ShapeTypeString})
+var sGetStageResponse_StageVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageVariables", ID: &i_StageVariablesMap, Members: &m_StageVariablesMap, Traits: &t292, Type: smithy.ShapeTypeMap})
+var sGetStageResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sGetStagesRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetStagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetStagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetStagesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfStage, Members: &m___listOfStage, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetStagesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sGetTagsRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetTagsResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sGetVpcLinkRequest_VpcLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sGetVpcLinkResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sGetVpcLinkResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sGetVpcLinkResponse_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Traits: &t297, Type: smithy.ShapeTypeList})
+var sGetVpcLinkResponse_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Traits: &t298, Type: smithy.ShapeTypeList})
+var sGetVpcLinkResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sGetVpcLinkResponse_VpcLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkId", ID: &i_Id, Traits: &t299, Type: smithy.ShapeTypeString})
+var sGetVpcLinkResponse_VpcLinkStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatus", ID: &iVpcLinkStatus, Members: &mVpcLinkStatus, Traits: &t300, Type: smithy.ShapeTypeEnum})
+var sGetVpcLinkResponse_VpcLinkStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatusMessage", ID: &i_StringWithLengthBetween0And1024, Traits: &t301, Type: smithy.ShapeTypeString})
+var sGetVpcLinkResponse_VpcLinkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkVersion", ID: &iVpcLinkVersion, Members: &mVpcLinkVersion, Traits: &t302, Type: smithy.ShapeTypeEnum})
+var sGetVpcLinksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sGetVpcLinksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sGetVpcLinksResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfVpcLink, Members: &m___listOfVpcLink, Traits: &t315, Type: smithy.ShapeTypeList})
+var sGetVpcLinksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sImportApiRequest_Basepath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Basepath", ID: &i___string, Traits: &t322, Type: smithy.ShapeTypeString})
+var sImportApiRequest_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___string, Traits: &t163, Type: smithy.ShapeTypeString})
+var sImportApiRequest_FailOnWarnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailOnWarnings", ID: &i___boolean, Traits: &t323, Type: smithy.ShapeTypeBoolean})
+var sImportApiResponse_ApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiEndpoint", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString})
+var sImportApiResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sImportApiResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sImportApiResponse_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sImportApiResponse_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sImportApiResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sImportApiResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sImportApiResponse_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sImportApiResponse_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sImportApiResponse_ImportInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportInfo", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t119, Type: smithy.ShapeTypeList})
+var sImportApiResponse_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sImportApiResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sImportApiResponse_ProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolType", ID: &iProtocolType, Members: &mProtocolType, Traits: &t122, Type: smithy.ShapeTypeEnum})
+var sImportApiResponse_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sImportApiResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sImportApiResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sImportApiResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t126, Type: smithy.ShapeTypeList})
+var sListPortalProductsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sListPortalProductsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sListPortalProductsRequest_ResourceOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwner", ID: &i___string, Traits: &t324, Type: smithy.ShapeTypeString})
+var sListPortalProductsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfPortalProductSummary, Members: &m___listOfPortalProductSummary, Traits: &t315, Type: smithy.ShapeTypeList})
+var sListPortalProductsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max2048, Traits: &t316, Type: smithy.ShapeTypeString})
+var sListPortalsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sListPortalsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sListPortalsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfPortalSummary, Members: &m___listOfPortalSummary, Traits: &t315, Type: smithy.ShapeTypeList})
+var sListPortalsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max2048, Traits: &t316, Type: smithy.ShapeTypeString})
+var sListProductPagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sListProductPagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sListProductPagesRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sListProductPagesRequest_ResourceOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwnerAccountId", ID: &i___string, Traits: &t318, Type: smithy.ShapeTypeString})
+var sListProductPagesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfProductPageSummaryNoBody, Members: &m___listOfProductPageSummaryNoBody, Traits: &t315, Type: smithy.ShapeTypeList})
+var sListProductPagesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___stringMin1Max2048, Traits: &t316, Type: smithy.ShapeTypeString})
+var sListProductRestEndpointPagesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i___string, Traits: &t313, Type: smithy.ShapeTypeString})
+var sListProductRestEndpointPagesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sListProductRestEndpointPagesRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sListProductRestEndpointPagesRequest_ResourceOwnerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceOwnerAccountId", ID: &i___string, Traits: &t318, Type: smithy.ShapeTypeString})
+var sListProductRestEndpointPagesResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i___listOfProductRestEndpointPageSummaryNoBody, Members: &m___listOfProductRestEndpointPageSummaryNoBody, Traits: &t315, Type: smithy.ShapeTypeList})
+var sListProductRestEndpointPagesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t316, Type: smithy.ShapeTypeString})
+var sListRoutingRulesRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sListRoutingRulesRequest_DomainNameId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameId", ID: &i___string, Traits: &t307, Type: smithy.ShapeTypeString})
+var sListRoutingRulesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Traits: &t313, Type: smithy.ShapeTypeInteger})
+var sListRoutingRulesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i___string, Traits: &t314, Type: smithy.ShapeTypeString})
+var sListRoutingRulesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Traits: &t316, Type: smithy.ShapeTypeString})
+var sListRoutingRulesResponse_RoutingRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRules", ID: &i___listOfRoutingRule, Members: &m___listOfRoutingRule, Traits: &t325, Type: smithy.ShapeTypeList})
+var sPreviewPortalRequest_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sPublishPortalRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sPublishPortalRequest_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sPutPortalProductSharingPolicyRequest_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i___stringMin1Max307200, Traits: &t319, Type: smithy.ShapeTypeString})
+var sPutPortalProductSharingPolicyRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sPutRoutingRuleRequest_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i___listOfRoutingRuleAction, Members: &m___listOfRoutingRuleAction, Traits: &t270, Type: smithy.ShapeTypeList})
+var sPutRoutingRuleRequest_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i___listOfRoutingRuleCondition, Members: &m___listOfRoutingRuleCondition, Traits: &t271, Type: smithy.ShapeTypeList})
+var sPutRoutingRuleRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sPutRoutingRuleRequest_DomainNameId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameId", ID: &i___string, Traits: &t307, Type: smithy.ShapeTypeString})
+var sPutRoutingRuleRequest_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RoutingRulePriority, Traits: &t272, Type: smithy.ShapeTypeInteger})
+var sPutRoutingRuleRequest_RoutingRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sPutRoutingRuleResponse_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i___listOfRoutingRuleAction, Members: &m___listOfRoutingRuleAction, Traits: &t270, Type: smithy.ShapeTypeList})
+var sPutRoutingRuleResponse_Conditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Conditions", ID: &i___listOfRoutingRuleCondition, Members: &m___listOfRoutingRuleCondition, Traits: &t271, Type: smithy.ShapeTypeList})
+var sPutRoutingRuleResponse_Priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Priority", ID: &i_RoutingRulePriority, Traits: &t272, Type: smithy.ShapeTypeInteger})
+var sPutRoutingRuleResponse_RoutingRuleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleArn", ID: &i_Arn, Traits: &t273, Type: smithy.ShapeTypeString})
+var sPutRoutingRuleResponse_RoutingRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingRuleId", ID: &i_Id, Traits: &t274, Type: smithy.ShapeTypeString})
+var sReimportApiRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sReimportApiRequest_Basepath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Basepath", ID: &i___string, Traits: &t322, Type: smithy.ShapeTypeString})
+var sReimportApiRequest_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &i___string, Traits: &t163, Type: smithy.ShapeTypeString})
+var sReimportApiRequest_FailOnWarnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailOnWarnings", ID: &i___boolean, Traits: &t323, Type: smithy.ShapeTypeBoolean})
+var sReimportApiResponse_ApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiEndpoint", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString})
+var sReimportApiResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sReimportApiResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sReimportApiResponse_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sReimportApiResponse_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sReimportApiResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sReimportApiResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sReimportApiResponse_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sReimportApiResponse_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sReimportApiResponse_ImportInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportInfo", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t119, Type: smithy.ShapeTypeList})
+var sReimportApiResponse_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sReimportApiResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sReimportApiResponse_ProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolType", ID: &iProtocolType, Members: &mProtocolType, Traits: &t122, Type: smithy.ShapeTypeEnum})
+var sReimportApiResponse_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sReimportApiResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sReimportApiResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sReimportApiResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t126, Type: smithy.ShapeTypeList})
+var sResetAuthorizersCacheRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sResetAuthorizersCacheRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t326, Type: smithy.ShapeTypeList})
+var sUpdateApiRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sUpdateApiRequest_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sUpdateApiRequest_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sUpdateApiRequest_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sUpdateApiRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_UriWithLengthBetween1And2048, Traits: &t261, Type: smithy.ShapeTypeString})
+var sUpdateApiRequest_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingRequest_ApiMappingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingRequest_ApiMappingKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingKey", ID: &i_SelectionKey, Traits: &t128, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingRequest_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_StringWithLengthBetween1And128, Traits: &t129, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingResponse_ApiMappingId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingId", ID: &i_Id, Traits: &t127, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingResponse_ApiMappingKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingKey", ID: &i_SelectionKey, Traits: &t128, Type: smithy.ShapeTypeString})
+var sUpdateApiMappingResponse_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &i_StringWithLengthBetween1And128, Traits: &t129, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_ApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiEndpoint", ID: &i___string, Traits: &t110, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sUpdateApiResponse_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i_Id, Traits: &t112, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_ApiKeySelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeySelectionExpression", ID: &i_SelectionExpression, Traits: &t113, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_CorsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CorsConfiguration", ID: &iCors, Members: &mCors, Traits: &t114, Type: smithy.ShapeTypeStructure})
+var sUpdateApiResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sUpdateApiResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_DisableSchemaValidation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableSchemaValidation", ID: &i___boolean, Traits: &t117, Type: smithy.ShapeTypeBoolean})
+var sUpdateApiResponse_DisableExecuteApiEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisableExecuteApiEndpoint", ID: &i___boolean, Traits: &t118, Type: smithy.ShapeTypeBoolean})
+var sUpdateApiResponse_ImportInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportInfo", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t119, Type: smithy.ShapeTypeList})
+var sUpdateApiResponse_IpAddressType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddressType", ID: &iIpAddressType, Members: &mIpAddressType, Traits: &t120, Type: smithy.ShapeTypeEnum})
+var sUpdateApiResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_ProtocolType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProtocolType", ID: &iProtocolType, Members: &mProtocolType, Traits: &t122, Type: smithy.ShapeTypeEnum})
+var sUpdateApiResponse_RouteSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSelectionExpression", ID: &i_SelectionExpression, Traits: &t123, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sUpdateApiResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_StringWithLengthBetween1And64, Traits: &t125, Type: smithy.ShapeTypeString})
+var sUpdateApiResponse_Warnings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Warnings", ID: &i___listOf__string, Members: &m___listOf__string, Traits: &t126, Type: smithy.ShapeTypeList})
+var sUpdateAuthorizerRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerRequest_AuthorizerCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerCredentialsArn", ID: &i_Arn, Traits: &t132, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerRequest_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerRequest_AuthorizerPayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerPayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t134, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerRequest_AuthorizerResultTtlInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerResultTtlInSeconds", ID: &i_IntegerWithLengthBetween0And3600, Traits: &t135, Type: smithy.ShapeTypeInteger})
+var sUpdateAuthorizerRequest_AuthorizerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerType", ID: &iAuthorizerType, Members: &mAuthorizerType, Traits: &t136, Type: smithy.ShapeTypeEnum})
+var sUpdateAuthorizerRequest_AuthorizerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t137, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerRequest_EnableSimpleResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSimpleResponses", ID: &i___boolean, Traits: &t138, Type: smithy.ShapeTypeBoolean})
+var sUpdateAuthorizerRequest_IdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySource", ID: &i_IdentitySourceList, Members: &m_IdentitySourceList, Traits: &t139, Type: smithy.ShapeTypeList})
+var sUpdateAuthorizerRequest_IdentityValidationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityValidationExpression", ID: &i_StringWithLengthBetween0And1024, Traits: &t140, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerRequest_JwtConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwtConfiguration", ID: &iJWTConfiguration, Members: &mJWTConfiguration, Traits: &t141, Type: smithy.ShapeTypeStructure})
+var sUpdateAuthorizerRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerResponse_AuthorizerCredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerCredentialsArn", ID: &i_Arn, Traits: &t132, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerResponse_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerResponse_AuthorizerPayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerPayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t134, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerResponse_AuthorizerResultTtlInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerResultTtlInSeconds", ID: &i_IntegerWithLengthBetween0And3600, Traits: &t135, Type: smithy.ShapeTypeInteger})
+var sUpdateAuthorizerResponse_AuthorizerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerType", ID: &iAuthorizerType, Members: &mAuthorizerType, Traits: &t136, Type: smithy.ShapeTypeEnum})
+var sUpdateAuthorizerResponse_AuthorizerUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t137, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerResponse_EnableSimpleResponses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableSimpleResponses", ID: &i___boolean, Traits: &t138, Type: smithy.ShapeTypeBoolean})
+var sUpdateAuthorizerResponse_IdentitySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentitySource", ID: &i_IdentitySourceList, Members: &m_IdentitySourceList, Traits: &t139, Type: smithy.ShapeTypeList})
+var sUpdateAuthorizerResponse_IdentityValidationExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityValidationExpression", ID: &i_StringWithLengthBetween0And1024, Traits: &t140, Type: smithy.ShapeTypeString})
+var sUpdateAuthorizerResponse_JwtConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JwtConfiguration", ID: &iJWTConfiguration, Members: &mJWTConfiguration, Traits: &t141, Type: smithy.ShapeTypeStructure})
+var sUpdateAuthorizerResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateDeploymentRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateDeploymentRequest_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateDeploymentRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateDeploymentResponse_AutoDeployed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeployed", ID: &i___boolean, Traits: &t159, Type: smithy.ShapeTypeBoolean})
+var sUpdateDeploymentResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sUpdateDeploymentResponse_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sUpdateDeploymentResponse_DeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatus", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Traits: &t161, Type: smithy.ShapeTypeEnum})
+var sUpdateDeploymentResponse_DeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentStatusMessage", ID: &i___string, Traits: &t162, Type: smithy.ShapeTypeString})
+var sUpdateDeploymentResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateDomainNameRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateDomainNameRequest_DomainNameConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameConfigurations", ID: &i_DomainNameConfigurations, Members: &m_DomainNameConfigurations, Traits: &t172, Type: smithy.ShapeTypeList})
+var sUpdateDomainNameRequest_MutualTlsAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualTlsAuthentication", ID: &iMutualTlsAuthenticationInput, Members: &mMutualTlsAuthenticationInput, Traits: &t173, Type: smithy.ShapeTypeStructure})
+var sUpdateDomainNameRequest_RoutingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingMode", ID: &iRoutingMode, Members: &mRoutingMode, Traits: &t174, Type: smithy.ShapeTypeEnum})
+var sUpdateDomainNameResponse_ApiMappingSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiMappingSelectionExpression", ID: &i_SelectionExpression, Traits: &t170, Type: smithy.ShapeTypeString})
+var sUpdateDomainNameResponse_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_StringWithLengthBetween1And512, Traits: &t109, Type: smithy.ShapeTypeString})
+var sUpdateDomainNameResponse_DomainNameArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameArn", ID: &i_Arn, Traits: &t171, Type: smithy.ShapeTypeString})
+var sUpdateDomainNameResponse_DomainNameConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainNameConfigurations", ID: &i_DomainNameConfigurations, Members: &m_DomainNameConfigurations, Traits: &t172, Type: smithy.ShapeTypeList})
+var sUpdateDomainNameResponse_MutualTlsAuthentication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MutualTlsAuthentication", ID: &iMutualTlsAuthentication, Members: &mMutualTlsAuthentication, Traits: &t173, Type: smithy.ShapeTypeStructure})
+var sUpdateDomainNameResponse_RoutingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoutingMode", ID: &iRoutingMode, Members: &mRoutingMode, Traits: &t174, Type: smithy.ShapeTypeEnum})
+var sUpdateDomainNameResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_StringWithLengthBetween1And1024, Traits: &t191, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Traits: &t192, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationRequest_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationRequest_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_IntegrationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationMethod", ID: &i_StringWithLengthBetween1And64, Traits: &t196, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_IntegrationSubtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationSubtype", ID: &i_StringWithLengthBetween1And128, Traits: &t198, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iIntegrationType, Members: &mIntegrationType, Traits: &t199, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationRequest_IntegrationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t200, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_PassthroughBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PassthroughBehavior", ID: &iPassthroughBehavior, Members: &mPassthroughBehavior, Traits: &t201, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationRequest_PayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t202, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationRequest_RequestTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t204, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationRequest_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_ResponseParameters, Members: &m_ResponseParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationRequest_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationRequest_TimeoutInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMillis", ID: &i_IntegerWithLengthBetween50And30000, Traits: &t207, Type: smithy.ShapeTypeInteger})
+var sUpdateIntegrationRequest_TlsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsConfig", ID: &iTlsConfigInput, Members: &mTlsConfigInput, Traits: &t208, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationResult_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sUpdateIntegrationResult_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionId", ID: &i_StringWithLengthBetween1And1024, Traits: &t191, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_ConnectionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionType", ID: &iConnectionType, Members: &mConnectionType, Traits: &t192, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationResult_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationResult_CredentialsArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CredentialsArn", ID: &i_Arn, Traits: &t194, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i_Id, Traits: &t195, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_IntegrationMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationMethod", ID: &i_StringWithLengthBetween1And64, Traits: &t196, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_IntegrationResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t197, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_IntegrationSubtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationSubtype", ID: &i_StringWithLengthBetween1And128, Traits: &t198, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_IntegrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationType", ID: &iIntegrationType, Members: &mIntegrationType, Traits: &t199, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationResult_IntegrationUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationUri", ID: &i_UriWithLengthBetween1And2048, Traits: &t200, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_PassthroughBehavior = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PassthroughBehavior", ID: &iPassthroughBehavior, Members: &mPassthroughBehavior, Traits: &t201, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationResult_PayloadFormatVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadFormatVersion", ID: &i_StringWithLengthBetween1And64, Traits: &t202, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationResult_RequestTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t204, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationResult_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_ResponseParameters, Members: &m_ResponseParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationResult_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResult_TimeoutInMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeoutInMillis", ID: &i_IntegerWithLengthBetween50And30000, Traits: &t207, Type: smithy.ShapeTypeInteger})
+var sUpdateIntegrationResult_TlsConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TlsConfig", ID: &iTlsConfig, Members: &mTlsConfig, Traits: &t208, Type: smithy.ShapeTypeStructure})
+var sUpdateIntegrationResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResponseRequest_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationResponseRequest_IntegrationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResponseRequest_IntegrationResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResponseRequest_IntegrationResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseKey", ID: &i_SelectionKey, Traits: &t210, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResponseRequest_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationResponseRequest_ResponseTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t211, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationResponseRequest_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResponseResponse_ContentHandlingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentHandlingStrategy", ID: &iContentHandlingStrategy, Members: &mContentHandlingStrategy, Traits: &t193, Type: smithy.ShapeTypeEnum})
+var sUpdateIntegrationResponseResponse_IntegrationResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseId", ID: &i_Id, Traits: &t209, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResponseResponse_IntegrationResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntegrationResponseKey", ID: &i_SelectionKey, Traits: &t210, Type: smithy.ShapeTypeString})
+var sUpdateIntegrationResponseResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_IntegrationParameters, Members: &m_IntegrationParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationResponseResponse_ResponseTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseTemplates", ID: &i_TemplateMap, Members: &m_TemplateMap, Traits: &t211, Type: smithy.ShapeTypeMap})
+var sUpdateIntegrationResponseResponse_TemplateSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TemplateSelectionExpression", ID: &i_SelectionExpression, Traits: &t206, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And256, Traits: &t214, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateModelRequest_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_StringWithLengthBetween0And32K, Traits: &t216, Type: smithy.ShapeTypeString})
+var sUpdateModelResponse_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_StringWithLengthBetween1And256, Traits: &t214, Type: smithy.ShapeTypeString})
+var sUpdateModelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateModelResponse_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelId", ID: &i_Id, Traits: &t215, Type: smithy.ShapeTypeString})
+var sUpdateModelResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateModelResponse_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_StringWithLengthBetween0And32K, Traits: &t216, Type: smithy.ShapeTypeString})
+var sUpdatePortalRequest_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t228, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalRequest_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iEndpointConfigurationRequest, Members: &mEndpointConfigurationRequest, Traits: &t229, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalRequest_IncludedPortalProductArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedPortalProductArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t230, Type: smithy.ShapeTypeList})
+var sUpdatePortalRequest_LogoUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogoUri", ID: &i___stringMin0Max1092, Traits: &t304, Type: smithy.ShapeTypeString})
+var sUpdatePortalRequest_PortalContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalContent", ID: &iPortalContent, Members: &mPortalContent, Traits: &t234, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalRequest_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdatePortalRequest_RumAppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RumAppMonitorName", ID: &i___stringMin0Max255, Traits: &t238, Type: smithy.ShapeTypeString})
+var sUpdatePortalResponse_Authorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Authorization", ID: &iAuthorization, Members: &mAuthorization, Traits: &t228, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalResponse_EndpointConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointConfiguration", ID: &iEndpointConfigurationResponse, Members: &mEndpointConfigurationResponse, Traits: &t229, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalResponse_IncludedPortalProductArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedPortalProductArns", ID: &i___listOf__stringMin20Max2048, Members: &m___listOf__stringMin20Max2048, Traits: &t230, Type: smithy.ShapeTypeList})
+var sUpdatePortalResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sUpdatePortalResponse_LastPublished = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublished", ID: &i___timestampIso8601, Traits: &t231, Type: smithy.ShapeTypeTimestamp})
+var sUpdatePortalResponse_LastPublishedDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastPublishedDescription", ID: &i___stringMin0Max1024, Traits: &t232, Type: smithy.ShapeTypeString})
+var sUpdatePortalResponse_PortalArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalArn", ID: &i___stringMin20Max2048, Traits: &t233, Type: smithy.ShapeTypeString})
+var sUpdatePortalResponse_PortalContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalContent", ID: &iPortalContent, Members: &mPortalContent, Traits: &t234, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalResponse_PortalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t235, Type: smithy.ShapeTypeString})
+var sUpdatePortalResponse_Preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Preview", ID: &iPreview, Members: &mPreview, Traits: &t236, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalResponse_PublishStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishStatus", ID: &iPublishStatus, Members: &mPublishStatus, Traits: &t237, Type: smithy.ShapeTypeEnum})
+var sUpdatePortalResponse_RumAppMonitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RumAppMonitorName", ID: &i___stringMin0Max255, Traits: &t238, Type: smithy.ShapeTypeString})
+var sUpdatePortalResponse_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sUpdatePortalProductRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdatePortalProductRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i___stringMin1Max255, Traits: &t223, Type: smithy.ShapeTypeString})
+var sUpdatePortalProductRequest_DisplayOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayOrder", ID: &iDisplayOrder, Members: &mDisplayOrder, Traits: &t305, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalProductRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdatePortalProductResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i___stringMin0Max1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdatePortalProductResponse_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i___stringMin1Max255, Traits: &t223, Type: smithy.ShapeTypeString})
+var sUpdatePortalProductResponse_DisplayOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayOrder", ID: &iDisplayOrder, Members: &mDisplayOrder, Traits: &t305, Type: smithy.ShapeTypeStructure})
+var sUpdatePortalProductResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sUpdatePortalProductResponse_PortalProductArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductArn", ID: &i___stringMin20Max2048, Traits: &t226, Type: smithy.ShapeTypeString})
+var sUpdatePortalProductResponse_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t227, Type: smithy.ShapeTypeString})
+var sUpdatePortalProductResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sUpdateProductPageRequest_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iDisplayContent, Members: &mDisplayContent, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sUpdateProductPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateProductPageRequest_ProductPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateProductPageResponse_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iDisplayContent, Members: &mDisplayContent, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sUpdateProductPageResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sUpdateProductPageResponse_ProductPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageArn", ID: &i___stringMin20Max2048, Traits: &t245, Type: smithy.ShapeTypeString})
+var sUpdateProductPageResponse_ProductPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t246, Type: smithy.ShapeTypeString})
+var sUpdateProductRestEndpointPageRequest_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iEndpointDisplayContent, Members: &mEndpointDisplayContent, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sUpdateProductRestEndpointPageRequest_PortalProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortalProductId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateProductRestEndpointPageRequest_ProductRestEndpointPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateProductRestEndpointPageRequest_TryItState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TryItState", ID: &iTryItState, Members: &mTryItState, Traits: &t251, Type: smithy.ShapeTypeEnum})
+var sUpdateProductRestEndpointPageResponse_DisplayContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayContent", ID: &iEndpointDisplayContentResponse, Members: &mEndpointDisplayContentResponse, Traits: &t306, Type: smithy.ShapeTypeStructure})
+var sUpdateProductRestEndpointPageResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i___timestampIso8601, Traits: &t225, Type: smithy.ShapeTypeTimestamp})
+var sUpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageArn", ID: &i___stringMin20Max2048, Traits: &t247, Type: smithy.ShapeTypeString})
+var sUpdateProductRestEndpointPageResponse_ProductRestEndpointPageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductRestEndpointPageId", ID: &i___stringMin10Max30PatternAZ09, Traits: &t248, Type: smithy.ShapeTypeString})
+var sUpdateProductRestEndpointPageResponse_RestEndpointIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestEndpointIdentifier", ID: &iRestEndpointIdentifier, Members: &mRestEndpointIdentifier, Traits: &t249, Type: smithy.ShapeTypeStructure})
+var sUpdateProductRestEndpointPageResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Traits: &t250, Type: smithy.ShapeTypeEnum})
+var sUpdateProductRestEndpointPageResponse_StatusException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusException", ID: &iStatusException, Members: &mStatusException, Traits: &t239, Type: smithy.ShapeTypeStructure})
+var sUpdateProductRestEndpointPageResponse_TryItState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TryItState", ID: &iTryItState, Members: &mTryItState, Traits: &t251, Type: smithy.ShapeTypeEnum})
+var sUpdateRouteRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateRouteRequest_ApiKeyRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyRequired", ID: &i___boolean, Traits: &t253, Type: smithy.ShapeTypeBoolean})
+var sUpdateRouteRequest_AuthorizationScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationScopes", ID: &i_AuthorizationScopes, Members: &m_AuthorizationScopes, Traits: &t254, Type: smithy.ShapeTypeList})
+var sUpdateRouteRequest_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iAuthorizationType, Members: &mAuthorizationType, Traits: &t255, Type: smithy.ShapeTypeEnum})
+var sUpdateRouteRequest_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sUpdateRouteRequest_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sUpdateRouteRequest_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_StringWithLengthBetween1And64, Traits: &t166, Type: smithy.ShapeTypeString})
+var sUpdateRouteRequest_RequestModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t257, Type: smithy.ShapeTypeMap})
+var sUpdateRouteRequest_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sUpdateRouteRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateRouteRequest_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sUpdateRouteRequest_RouteResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t260, Type: smithy.ShapeTypeString})
+var sUpdateRouteRequest_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_StringWithLengthBetween1And128, Traits: &t261, Type: smithy.ShapeTypeString})
+var sUpdateRouteResult_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sUpdateRouteResult_ApiKeyRequired = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiKeyRequired", ID: &i___boolean, Traits: &t253, Type: smithy.ShapeTypeBoolean})
+var sUpdateRouteResult_AuthorizationScopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationScopes", ID: &i_AuthorizationScopes, Members: &m_AuthorizationScopes, Traits: &t254, Type: smithy.ShapeTypeList})
+var sUpdateRouteResult_AuthorizationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizationType", ID: &iAuthorizationType, Members: &mAuthorizationType, Traits: &t255, Type: smithy.ShapeTypeEnum})
+var sUpdateRouteResult_AuthorizerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthorizerId", ID: &i_Id, Traits: &t133, Type: smithy.ShapeTypeString})
+var sUpdateRouteResult_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sUpdateRouteResult_OperationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperationName", ID: &i_StringWithLengthBetween1And64, Traits: &t166, Type: smithy.ShapeTypeString})
+var sUpdateRouteResult_RequestModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t257, Type: smithy.ShapeTypeMap})
+var sUpdateRouteResult_RequestParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t203, Type: smithy.ShapeTypeMap})
+var sUpdateRouteResult_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i_Id, Traits: &t258, Type: smithy.ShapeTypeString})
+var sUpdateRouteResult_RouteKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteKey", ID: &i_SelectionKey, Traits: &t259, Type: smithy.ShapeTypeString})
+var sUpdateRouteResult_RouteResponseSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseSelectionExpression", ID: &i_SelectionExpression, Traits: &t260, Type: smithy.ShapeTypeString})
+var sUpdateRouteResult_Target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Target", ID: &i_StringWithLengthBetween1And128, Traits: &t261, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseRequest_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseRequest_ResponseModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t262, Type: smithy.ShapeTypeMap})
+var sUpdateRouteResponseRequest_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sUpdateRouteResponseRequest_RouteId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseRequest_RouteResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseRequest_RouteResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseKey", ID: &i_SelectionKey, Traits: &t264, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseResponse_ModelSelectionExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelSelectionExpression", ID: &i_SelectionExpression, Traits: &t256, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseResponse_ResponseModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseModels", ID: &i_RouteModels, Members: &m_RouteModels, Traits: &t262, Type: smithy.ShapeTypeMap})
+var sUpdateRouteResponseResponse_ResponseParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResponseParameters", ID: &i_RouteParameters, Members: &m_RouteParameters, Traits: &t205, Type: smithy.ShapeTypeMap})
+var sUpdateRouteResponseResponse_RouteResponseId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseId", ID: &i_Id, Traits: &t263, Type: smithy.ShapeTypeString})
+var sUpdateRouteResponseResponse_RouteResponseKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteResponseKey", ID: &i_SelectionKey, Traits: &t264, Type: smithy.ShapeTypeString})
+var sUpdateStageRequest_AccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLogSettings", ID: &iAccessLogSettings, Members: &mAccessLogSettings, Traits: &t284, Type: smithy.ShapeTypeStructure})
+var sUpdateStageRequest_ApiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateStageRequest_AutoDeploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeploy", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean})
+var sUpdateStageRequest_ClientCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateId", ID: &i_Id, Traits: &t286, Type: smithy.ShapeTypeString})
+var sUpdateStageRequest_DefaultRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRouteSettings", ID: &iRouteSettings, Members: &mRouteSettings, Traits: &t287, Type: smithy.ShapeTypeStructure})
+var sUpdateStageRequest_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sUpdateStageRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateStageRequest_RouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSettings", ID: &i_RouteSettingsMap, Members: &m_RouteSettingsMap, Traits: &t290, Type: smithy.ShapeTypeMap})
+var sUpdateStageRequest_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateStageRequest_StageVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageVariables", ID: &i_StageVariablesMap, Members: &m_StageVariablesMap, Traits: &t292, Type: smithy.ShapeTypeMap})
+var sUpdateStageResponse_AccessLogSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessLogSettings", ID: &iAccessLogSettings, Members: &mAccessLogSettings, Traits: &t284, Type: smithy.ShapeTypeStructure})
+var sUpdateStageResponse_ApiGatewayManaged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApiGatewayManaged", ID: &i___boolean, Traits: &t111, Type: smithy.ShapeTypeBoolean})
+var sUpdateStageResponse_AutoDeploy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeploy", ID: &i___boolean, Traits: &t285, Type: smithy.ShapeTypeBoolean})
+var sUpdateStageResponse_ClientCertificateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientCertificateId", ID: &i_Id, Traits: &t286, Type: smithy.ShapeTypeString})
+var sUpdateStageResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sUpdateStageResponse_DefaultRouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRouteSettings", ID: &iRouteSettings, Members: &mRouteSettings, Traits: &t287, Type: smithy.ShapeTypeStructure})
+var sUpdateStageResponse_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentId", ID: &i_Id, Traits: &t160, Type: smithy.ShapeTypeString})
+var sUpdateStageResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_StringWithLengthBetween0And1024, Traits: &t116, Type: smithy.ShapeTypeString})
+var sUpdateStageResponse_LastDeploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastDeploymentStatusMessage", ID: &i___string, Traits: &t288, Type: smithy.ShapeTypeString})
+var sUpdateStageResponse_LastUpdatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedDate", ID: &i___timestampIso8601, Traits: &t289, Type: smithy.ShapeTypeTimestamp})
+var sUpdateStageResponse_RouteSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteSettings", ID: &i_RouteSettingsMap, Members: &m_RouteSettingsMap, Traits: &t290, Type: smithy.ShapeTypeMap})
+var sUpdateStageResponse_StageName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageName", ID: &i_StringWithLengthBetween1And128, Traits: &t291, Type: smithy.ShapeTypeString})
+var sUpdateStageResponse_StageVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StageVariables", ID: &i_StageVariablesMap, Members: &m_StageVariablesMap, Traits: &t292, Type: smithy.ShapeTypeMap})
+var sUpdateStageResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sUpdateVpcLinkRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateVpcLinkRequest_VpcLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkId", ID: &i___string, Traits: &t303, Type: smithy.ShapeTypeString})
+var sUpdateVpcLinkResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i___timestampIso8601, Traits: &t115, Type: smithy.ShapeTypeTimestamp})
+var sUpdateVpcLinkResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StringWithLengthBetween1And128, Traits: &t121, Type: smithy.ShapeTypeString})
+var sUpdateVpcLinkResponse_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIdList, Members: &m_SecurityGroupIdList, Traits: &t297, Type: smithy.ShapeTypeList})
+var sUpdateVpcLinkResponse_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIdList, Members: &m_SubnetIdList, Traits: &t298, Type: smithy.ShapeTypeList})
+var sUpdateVpcLinkResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t124, Type: smithy.ShapeTypeMap})
+var sUpdateVpcLinkResponse_VpcLinkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkId", ID: &i_Id, Traits: &t299, Type: smithy.ShapeTypeString})
+var sUpdateVpcLinkResponse_VpcLinkStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatus", ID: &iVpcLinkStatus, Members: &mVpcLinkStatus, Traits: &t300, Type: smithy.ShapeTypeEnum})
+var sUpdateVpcLinkResponse_VpcLinkStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkStatusMessage", ID: &i_StringWithLengthBetween0And1024, Traits: &t301, Type: smithy.ShapeTypeString})
+var sUpdateVpcLinkResponse_VpcLinkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcLinkVersion", ID: &iVpcLinkVersion, Members: &mVpcLinkVersion, Traits: &t302, Type: smithy.ShapeTypeEnum})
+
+var CreateApi = &sCreateApi
+
+var CreateApiMapping = &sCreateApiMapping
+
+var CreateAuthorizer = &sCreateAuthorizer
+
+var CreateDeployment = &sCreateDeployment
+
+var CreateDomainName = &sCreateDomainName
+
+var CreateIntegration = &sCreateIntegration
+
+var CreateIntegrationResponse = &sCreateIntegrationResponse
+
+var CreateModel = &sCreateModel
+
+var CreatePortal = &sCreatePortal
+
+var CreatePortalProduct = &sCreatePortalProduct
+
+var CreateProductPage = &sCreateProductPage
+
+var CreateProductRestEndpointPage = &sCreateProductRestEndpointPage
+
+var CreateRoute = &sCreateRoute
+
+var CreateRouteResponse = &sCreateRouteResponse
+
+var CreateRoutingRule = &sCreateRoutingRule
+
+var CreateStage = &sCreateStage
+
+var CreateVpcLink = &sCreateVpcLink
+
+var DeleteAccessLogSettings = &sDeleteAccessLogSettings
+
+var DeleteApi = &sDeleteApi
+
+var DeleteApiMapping = &sDeleteApiMapping
+
+var DeleteAuthorizer = &sDeleteAuthorizer
+
+var DeleteCorsConfiguration = &sDeleteCorsConfiguration
+
+var DeleteDeployment = &sDeleteDeployment
+
+var DeleteDomainName = &sDeleteDomainName
+
+var DeleteIntegration = &sDeleteIntegration
+
+var DeleteIntegrationResponse = &sDeleteIntegrationResponse
+
+var DeleteModel = &sDeleteModel
+
+var DeletePortal = &sDeletePortal
+
+var DeletePortalProduct = &sDeletePortalProduct
+
+var DeletePortalProductSharingPolicy = &sDeletePortalProductSharingPolicy
+
+var DeleteProductPage = &sDeleteProductPage
+
+var DeleteProductRestEndpointPage = &sDeleteProductRestEndpointPage
+
+var DeleteRoute = &sDeleteRoute
+
+var DeleteRouteRequestParameter = &sDeleteRouteRequestParameter
+
+var DeleteRouteResponse = &sDeleteRouteResponse
+
+var DeleteRouteSettings = &sDeleteRouteSettings
+
+var DeleteRoutingRule = &sDeleteRoutingRule
+
+var DeleteStage = &sDeleteStage
+
+var DeleteVpcLink = &sDeleteVpcLink
+
+var DisablePortal = &sDisablePortal
+
+var ExportApi = &sExportApi
+
+var GetApi = &sGetApi
+
+var GetApiMapping = &sGetApiMapping
+
+var GetApiMappings = &sGetApiMappings
+
+var GetApis = &sGetApis
+
+var GetAuthorizer = &sGetAuthorizer
+
+var GetAuthorizers = &sGetAuthorizers
+
+var GetDeployment = &sGetDeployment
+
+var GetDeployments = &sGetDeployments
+
+var GetDomainName = &sGetDomainName
+
+var GetDomainNames = &sGetDomainNames
+
+var GetIntegration = &sGetIntegration
+
+var GetIntegrationResponse = &sGetIntegrationResponse
+
+var GetIntegrationResponses = &sGetIntegrationResponses
+
+var GetIntegrations = &sGetIntegrations
+
+var GetModel = &sGetModel
+
+var GetModels = &sGetModels
+
+var GetModelTemplate = &sGetModelTemplate
+
+var GetPortal = &sGetPortal
+
+var GetPortalProduct = &sGetPortalProduct
+
+var GetPortalProductSharingPolicy = &sGetPortalProductSharingPolicy
+
+var GetProductPage = &sGetProductPage
+
+var GetProductRestEndpointPage = &sGetProductRestEndpointPage
+
+var GetRoute = &sGetRoute
+
+var GetRouteResponse = &sGetRouteResponse
+
+var GetRouteResponses = &sGetRouteResponses
+
+var GetRoutes = &sGetRoutes
+
+var GetRoutingRule = &sGetRoutingRule
+
+var GetStage = &sGetStage
+
+var GetStages = &sGetStages
+
+var GetTags = &sGetTags
+
+var GetVpcLink = &sGetVpcLink
+
+var GetVpcLinks = &sGetVpcLinks
+
+var ImportApi = &sImportApi
+
+var ListPortalProducts = &sListPortalProducts
+
+var ListPortals = &sListPortals
+
+var ListProductPages = &sListProductPages
+
+var ListProductRestEndpointPages = &sListProductRestEndpointPages
+
+var ListRoutingRules = &sListRoutingRules
+
+var PreviewPortal = &sPreviewPortal
+
+var PublishPortal = &sPublishPortal
+
+var PutPortalProductSharingPolicy = &sPutPortalProductSharingPolicy
+
+var PutRoutingRule = &sPutRoutingRule
+
+var ReimportApi = &sReimportApi
+
+var ResetAuthorizersCache = &sResetAuthorizersCache
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateApi = &sUpdateApi
+
+var UpdateApiMapping = &sUpdateApiMapping
+
+var UpdateAuthorizer = &sUpdateAuthorizer
+
+var UpdateDeployment = &sUpdateDeployment
+
+var UpdateDomainName = &sUpdateDomainName
+
+var UpdateIntegration = &sUpdateIntegration
+
+var UpdateIntegrationResponse = &sUpdateIntegrationResponse
+
+var UpdateModel = &sUpdateModel
+
+var UpdatePortal = &sUpdatePortal
+
+var UpdatePortalProduct = &sUpdatePortalProduct
+
+var UpdateProductPage = &sUpdateProductPage
+
+var UpdateProductRestEndpointPage = &sUpdateProductRestEndpointPage
+
+var UpdateRoute = &sUpdateRoute
+
+var UpdateRouteResponse = &sUpdateRouteResponse
+
+var UpdateStage = &sUpdateStage
+
+var UpdateVpcLink = &sUpdateVpcLink
+
+var _ApiGatewayV2 = &s_ApiGatewayV2
+
+var ___boolean = &s___boolean
+
+var ___double = &s___double
+
+var ___integer = &s___integer
+
+var ___listOf__string = &s___listOf__string
+var ___listOf__string_member = &s___listOf__string_member
+
+var ___listOf__stringMin20Max2048 = &s___listOf__stringMin20Max2048
+var ___listOf__stringMin20Max2048_member = &s___listOf__stringMin20Max2048_member
+
+var ___listOfApi = &s___listOfApi
+var ___listOfApi_member = &s___listOfApi_member
+
+var ___listOfApiMapping = &s___listOfApiMapping
+var ___listOfApiMapping_member = &s___listOfApiMapping_member
+
+var ___listOfAuthorizer = &s___listOfAuthorizer
+var ___listOfAuthorizer_member = &s___listOfAuthorizer_member
+
+var ___listOfDeployment = &s___listOfDeployment
+var ___listOfDeployment_member = &s___listOfDeployment_member
+
+var ___listOfDomainName = &s___listOfDomainName
+var ___listOfDomainName_member = &s___listOfDomainName_member
+
+var ___listOfIntegration = &s___listOfIntegration
+var ___listOfIntegration_member = &s___listOfIntegration_member
+
+var ___listOfIntegrationResponse = &s___listOfIntegrationResponse
+var ___listOfIntegrationResponse_member = &s___listOfIntegrationResponse_member
+
+var ___listOfModel = &s___listOfModel
+var ___listOfModel_member = &s___listOfModel_member
+
+var ___listOfPortalProductSummary = &s___listOfPortalProductSummary
+var ___listOfPortalProductSummary_member = &s___listOfPortalProductSummary_member
+
+var ___listOfPortalSummary = &s___listOfPortalSummary
+var ___listOfPortalSummary_member = &s___listOfPortalSummary_member
+
+var ___listOfProductPageSummaryNoBody = &s___listOfProductPageSummaryNoBody
+var ___listOfProductPageSummaryNoBody_member = &s___listOfProductPageSummaryNoBody_member
+
+var ___listOfProductRestEndpointPageSummaryNoBody = &s___listOfProductRestEndpointPageSummaryNoBody
+var ___listOfProductRestEndpointPageSummaryNoBody_member = &s___listOfProductRestEndpointPageSummaryNoBody_member
+
+var ___listOfRoute = &s___listOfRoute
+var ___listOfRoute_member = &s___listOfRoute_member
+
+var ___listOfRouteResponse = &s___listOfRouteResponse
+var ___listOfRouteResponse_member = &s___listOfRouteResponse_member
+
+var ___listOfRoutingRule = &s___listOfRoutingRule
+var ___listOfRoutingRule_member = &s___listOfRoutingRule_member
+
+var ___listOfRoutingRuleAction = &s___listOfRoutingRuleAction
+var ___listOfRoutingRuleAction_member = &s___listOfRoutingRuleAction_member
+
+var ___listOfRoutingRuleCondition = &s___listOfRoutingRuleCondition
+var ___listOfRoutingRuleCondition_member = &s___listOfRoutingRuleCondition_member
+
+var ___listOfRoutingRuleMatchHeaderValue = &s___listOfRoutingRuleMatchHeaderValue
+var ___listOfRoutingRuleMatchHeaderValue_member = &s___listOfRoutingRuleMatchHeaderValue_member
+
+var ___listOfSection = &s___listOfSection
+var ___listOfSection_member = &s___listOfSection_member
+
+var ___listOfSelectionKey = &s___listOfSelectionKey
+var ___listOfSelectionKey_member = &s___listOfSelectionKey_member
+
+var ___listOfStage = &s___listOfStage
+var ___listOfStage_member = &s___listOfStage_member
+
+var ___listOfVpcLink = &s___listOfVpcLink
+var ___listOfVpcLink_member = &s___listOfVpcLink_member
+
+var ___string = &s___string
+
+var ___stringMin0Max1024 = &s___stringMin0Max1024
+
+var ___stringMin0Max1092 = &s___stringMin0Max1092
+
+var ___stringMin0Max255 = &s___stringMin0Max255
+
+var ___stringMin10Max2048 = &s___stringMin10Max2048
+
+var ___stringMin10Max30PatternAZ09 = &s___stringMin10Max30PatternAZ09
+
+var ___stringMin1Max1024 = &s___stringMin1Max1024
+
+var ___stringMin1Max128 = &s___stringMin1Max128
+
+var ___stringMin1Max16 = &s___stringMin1Max16
+
+var ___stringMin1Max20 = &s___stringMin1Max20
+
+var ___stringMin1Max2048 = &s___stringMin1Max2048
+
+var ___stringMin1Max255 = &s___stringMin1Max255
+
+var ___stringMin1Max256 = &s___stringMin1Max256
+
+var ___stringMin1Max307200 = &s___stringMin1Max307200
+
+var ___stringMin1Max32768 = &s___stringMin1Max32768
+
+var ___stringMin1Max4096 = &s___stringMin1Max4096
+
+var ___stringMin1Max50 = &s___stringMin1Max50
+
+var ___stringMin1Max64 = &s___stringMin1Max64
+
+var ___stringMin20Max2048 = &s___stringMin20Max2048
+
+var ___stringMin3Max255 = &s___stringMin3Max255
+
+var ___stringMin3Max256 = &s___stringMin3Max256
+
+var ___timestampIso8601 = &s___timestampIso8601
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AccessLogSettings = &sAccessLogSettings
+var AccessLogSettings_DestinationArn = &sAccessLogSettings_DestinationArn
+var AccessLogSettings_Format = &sAccessLogSettings_Format
+
+var ACMManaged = &sACMManaged
+var ACMManaged_CertificateArn = &sACMManaged_CertificateArn
+var ACMManaged_DomainName = &sACMManaged_DomainName
+
+var Api = &sApi
+var Api_ApiEndpoint = &sApi_ApiEndpoint
+var Api_ApiGatewayManaged = &sApi_ApiGatewayManaged
+var Api_ApiId = &sApi_ApiId
+var Api_ApiKeySelectionExpression = &sApi_ApiKeySelectionExpression
+var Api_CorsConfiguration = &sApi_CorsConfiguration
+var Api_CreatedDate = &sApi_CreatedDate
+var Api_Description = &sApi_Description
+var Api_DisableSchemaValidation = &sApi_DisableSchemaValidation
+var Api_DisableExecuteApiEndpoint = &sApi_DisableExecuteApiEndpoint
+var Api_ImportInfo = &sApi_ImportInfo
+var Api_IpAddressType = &sApi_IpAddressType
+var Api_Name = &sApi_Name
+var Api_ProtocolType = &sApi_ProtocolType
+var Api_RouteSelectionExpression = &sApi_RouteSelectionExpression
+var Api_Tags = &sApi_Tags
+var Api_Version = &sApi_Version
+var Api_Warnings = &sApi_Warnings
+
+var ApiMapping = &sApiMapping
+var ApiMapping_ApiId = &sApiMapping_ApiId
+var ApiMapping_ApiMappingId = &sApiMapping_ApiMappingId
+var ApiMapping_ApiMappingKey = &sApiMapping_ApiMappingKey
+var ApiMapping_Stage = &sApiMapping_Stage
+
+var _Arn = &s_Arn
+
+var Authorization = &sAuthorization
+var Authorization_CognitoConfig = &sAuthorization_CognitoConfig
+var Authorization_None = &sAuthorization_None
+
+var _AuthorizationScopes = &s_AuthorizationScopes
+var _AuthorizationScopes_member = &s_AuthorizationScopes_member
+
+var AuthorizationType = &sAuthorizationType
+var AuthorizationType_NONE = &sAuthorizationType_NONE
+var AuthorizationType_AWS_IAM = &sAuthorizationType_AWS_IAM
+var AuthorizationType_CUSTOM = &sAuthorizationType_CUSTOM
+var AuthorizationType_JWT = &sAuthorizationType_JWT
+
+var Authorizer = &sAuthorizer
+var Authorizer_AuthorizerCredentialsArn = &sAuthorizer_AuthorizerCredentialsArn
+var Authorizer_AuthorizerId = &sAuthorizer_AuthorizerId
+var Authorizer_AuthorizerPayloadFormatVersion = &sAuthorizer_AuthorizerPayloadFormatVersion
+var Authorizer_AuthorizerResultTtlInSeconds = &sAuthorizer_AuthorizerResultTtlInSeconds
+var Authorizer_AuthorizerType = &sAuthorizer_AuthorizerType
+var Authorizer_AuthorizerUri = &sAuthorizer_AuthorizerUri
+var Authorizer_EnableSimpleResponses = &sAuthorizer_EnableSimpleResponses
+var Authorizer_IdentitySource = &sAuthorizer_IdentitySource
+var Authorizer_IdentityValidationExpression = &sAuthorizer_IdentityValidationExpression
+var Authorizer_JwtConfiguration = &sAuthorizer_JwtConfiguration
+var Authorizer_Name = &sAuthorizer_Name
+
+var AuthorizerType = &sAuthorizerType
+var AuthorizerType_REQUEST = &sAuthorizerType_REQUEST
+var AuthorizerType_JWT = &sAuthorizerType_JWT
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Message = &sBadRequestException_Message
+
+var CognitoConfig = &sCognitoConfig
+var CognitoConfig_AppClientId = &sCognitoConfig_AppClientId
+var CognitoConfig_UserPoolArn = &sCognitoConfig_UserPoolArn
+var CognitoConfig_UserPoolDomain = &sCognitoConfig_UserPoolDomain
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var ConnectionType = &sConnectionType
+var ConnectionType_INTERNET = &sConnectionType_INTERNET
+var ConnectionType_VPC_LINK = &sConnectionType_VPC_LINK
+
+var ContentHandlingStrategy = &sContentHandlingStrategy
+var ContentHandlingStrategy_CONVERT_TO_BINARY = &sContentHandlingStrategy_CONVERT_TO_BINARY
+var ContentHandlingStrategy_CONVERT_TO_TEXT = &sContentHandlingStrategy_CONVERT_TO_TEXT
+
+var Cors = &sCors
+var Cors_AllowCredentials = &sCors_AllowCredentials
+var Cors_AllowHeaders = &sCors_AllowHeaders
+var Cors_AllowMethods = &sCors_AllowMethods
+var Cors_AllowOrigins = &sCors_AllowOrigins
+var Cors_ExposeHeaders = &sCors_ExposeHeaders
+var Cors_MaxAge = &sCors_MaxAge
+
+var _CorsHeaderList = &s_CorsHeaderList
+var _CorsHeaderList_member = &s_CorsHeaderList_member
+
+var _CorsMethodList = &s_CorsMethodList
+var _CorsMethodList_member = &s_CorsMethodList_member
+
+var _CorsOriginList = &s_CorsOriginList
+var _CorsOriginList_member = &s_CorsOriginList_member
+
+var CustomColors = &sCustomColors
+var CustomColors_AccentColor = &sCustomColors_AccentColor
+var CustomColors_BackgroundColor = &sCustomColors_BackgroundColor
+var CustomColors_ErrorValidationColor = &sCustomColors_ErrorValidationColor
+var CustomColors_HeaderColor = &sCustomColors_HeaderColor
+var CustomColors_NavigationColor = &sCustomColors_NavigationColor
+var CustomColors_TextColor = &sCustomColors_TextColor
+
+var Deployment = &sDeployment
+var Deployment_AutoDeployed = &sDeployment_AutoDeployed
+var Deployment_CreatedDate = &sDeployment_CreatedDate
+var Deployment_DeploymentId = &sDeployment_DeploymentId
+var Deployment_DeploymentStatus = &sDeployment_DeploymentStatus
+var Deployment_DeploymentStatusMessage = &sDeployment_DeploymentStatusMessage
+var Deployment_Description = &sDeployment_Description
+
+var DeploymentStatus = &sDeploymentStatus
+var DeploymentStatus_PENDING = &sDeploymentStatus_PENDING
+var DeploymentStatus_FAILED = &sDeploymentStatus_FAILED
+var DeploymentStatus_DEPLOYED = &sDeploymentStatus_DEPLOYED
+
+var DisplayContent = &sDisplayContent
+var DisplayContent_Body = &sDisplayContent_Body
+var DisplayContent_Title = &sDisplayContent_Title
+
+var DisplayContentOverrides = &sDisplayContentOverrides
+var DisplayContentOverrides_Body = &sDisplayContentOverrides_Body
+var DisplayContentOverrides_Endpoint = &sDisplayContentOverrides_Endpoint
+var DisplayContentOverrides_OperationName = &sDisplayContentOverrides_OperationName
+
+var DisplayOrder = &sDisplayOrder
+var DisplayOrder_Contents = &sDisplayOrder_Contents
+var DisplayOrder_OverviewPageArn = &sDisplayOrder_OverviewPageArn
+var DisplayOrder_ProductPageArns = &sDisplayOrder_ProductPageArns
+
+var DomainName = &sDomainName
+var DomainName_ApiMappingSelectionExpression = &sDomainName_ApiMappingSelectionExpression
+var DomainName_DomainName = &sDomainName_DomainName
+var DomainName_DomainNameArn = &sDomainName_DomainNameArn
+var DomainName_DomainNameConfigurations = &sDomainName_DomainNameConfigurations
+var DomainName_MutualTlsAuthentication = &sDomainName_MutualTlsAuthentication
+var DomainName_RoutingMode = &sDomainName_RoutingMode
+var DomainName_Tags = &sDomainName_Tags
+
+var DomainNameConfiguration = &sDomainNameConfiguration
+var DomainNameConfiguration_ApiGatewayDomainName = &sDomainNameConfiguration_ApiGatewayDomainName
+var DomainNameConfiguration_CertificateArn = &sDomainNameConfiguration_CertificateArn
+var DomainNameConfiguration_CertificateName = &sDomainNameConfiguration_CertificateName
+var DomainNameConfiguration_CertificateUploadDate = &sDomainNameConfiguration_CertificateUploadDate
+var DomainNameConfiguration_DomainNameStatus = &sDomainNameConfiguration_DomainNameStatus
+var DomainNameConfiguration_DomainNameStatusMessage = &sDomainNameConfiguration_DomainNameStatusMessage
+var DomainNameConfiguration_EndpointType = &sDomainNameConfiguration_EndpointType
+var DomainNameConfiguration_HostedZoneId = &sDomainNameConfiguration_HostedZoneId
+var DomainNameConfiguration_IpAddressType = &sDomainNameConfiguration_IpAddressType
+var DomainNameConfiguration_SecurityPolicy = &sDomainNameConfiguration_SecurityPolicy
+var DomainNameConfiguration_OwnershipVerificationCertificateArn = &sDomainNameConfiguration_OwnershipVerificationCertificateArn
+
+var _DomainNameConfigurations = &s_DomainNameConfigurations
+var _DomainNameConfigurations_member = &s_DomainNameConfigurations_member
+
+var DomainNameStatus = &sDomainNameStatus
+var DomainNameStatus_AVAILABLE = &sDomainNameStatus_AVAILABLE
+var DomainNameStatus_UPDATING = &sDomainNameStatus_UPDATING
+var DomainNameStatus_PENDING_CERTIFICATE_REIMPORT = &sDomainNameStatus_PENDING_CERTIFICATE_REIMPORT
+var DomainNameStatus_PENDING_OWNERSHIP_VERIFICATION = &sDomainNameStatus_PENDING_OWNERSHIP_VERIFICATION
+
+var EndpointConfigurationRequest = &sEndpointConfigurationRequest
+var EndpointConfigurationRequest_AcmManaged = &sEndpointConfigurationRequest_AcmManaged
+var EndpointConfigurationRequest_None = &sEndpointConfigurationRequest_None
+
+var EndpointConfigurationResponse = &sEndpointConfigurationResponse
+var EndpointConfigurationResponse_CertificateArn = &sEndpointConfigurationResponse_CertificateArn
+var EndpointConfigurationResponse_DomainName = &sEndpointConfigurationResponse_DomainName
+var EndpointConfigurationResponse_PortalDefaultDomainName = &sEndpointConfigurationResponse_PortalDefaultDomainName
+var EndpointConfigurationResponse_PortalDomainHostedZoneId = &sEndpointConfigurationResponse_PortalDomainHostedZoneId
+
+var EndpointDisplayContent = &sEndpointDisplayContent
+var EndpointDisplayContent_None = &sEndpointDisplayContent_None
+var EndpointDisplayContent_Overrides = &sEndpointDisplayContent_Overrides
+
+var EndpointDisplayContentResponse = &sEndpointDisplayContentResponse
+var EndpointDisplayContentResponse_Body = &sEndpointDisplayContentResponse_Body
+var EndpointDisplayContentResponse_Endpoint = &sEndpointDisplayContentResponse_Endpoint
+var EndpointDisplayContentResponse_OperationName = &sEndpointDisplayContentResponse_OperationName
+
+var EndpointType = &sEndpointType
+var EndpointType_REGIONAL = &sEndpointType_REGIONAL
+var EndpointType_EDGE = &sEndpointType_EDGE
+
+var _ExportedApi = &s_ExportedApi
+
+var _Id = &s_Id
+
+var IdentifierParts = &sIdentifierParts
+var IdentifierParts_Method = &sIdentifierParts_Method
+var IdentifierParts_Path = &sIdentifierParts_Path
+var IdentifierParts_RestApiId = &sIdentifierParts_RestApiId
+var IdentifierParts_Stage = &sIdentifierParts_Stage
+
+var _IdentitySourceList = &s_IdentitySourceList
+var _IdentitySourceList_member = &s_IdentitySourceList_member
+
+var _IntegerWithLengthBetween0And3600 = &s_IntegerWithLengthBetween0And3600
+
+var _IntegerWithLengthBetween50And30000 = &s_IntegerWithLengthBetween50And30000
+
+var _IntegerWithLengthBetweenMinus1And86400 = &s_IntegerWithLengthBetweenMinus1And86400
+
+var Integration = &sIntegration
+var Integration_ApiGatewayManaged = &sIntegration_ApiGatewayManaged
+var Integration_ConnectionId = &sIntegration_ConnectionId
+var Integration_ConnectionType = &sIntegration_ConnectionType
+var Integration_ContentHandlingStrategy = &sIntegration_ContentHandlingStrategy
+var Integration_CredentialsArn = &sIntegration_CredentialsArn
+var Integration_Description = &sIntegration_Description
+var Integration_IntegrationId = &sIntegration_IntegrationId
+var Integration_IntegrationMethod = &sIntegration_IntegrationMethod
+var Integration_IntegrationResponseSelectionExpression = &sIntegration_IntegrationResponseSelectionExpression
+var Integration_IntegrationSubtype = &sIntegration_IntegrationSubtype
+var Integration_IntegrationType = &sIntegration_IntegrationType
+var Integration_IntegrationUri = &sIntegration_IntegrationUri
+var Integration_PassthroughBehavior = &sIntegration_PassthroughBehavior
+var Integration_PayloadFormatVersion = &sIntegration_PayloadFormatVersion
+var Integration_RequestParameters = &sIntegration_RequestParameters
+var Integration_RequestTemplates = &sIntegration_RequestTemplates
+var Integration_ResponseParameters = &sIntegration_ResponseParameters
+var Integration_TemplateSelectionExpression = &sIntegration_TemplateSelectionExpression
+var Integration_TimeoutInMillis = &sIntegration_TimeoutInMillis
+var Integration_TlsConfig = &sIntegration_TlsConfig
+
+var _IntegrationParameters = &s_IntegrationParameters
+var _IntegrationParameters_key = &s_IntegrationParameters_key
+var _IntegrationParameters_value = &s_IntegrationParameters_value
+
+var IntegrationResponse = &sIntegrationResponse
+var IntegrationResponse_ContentHandlingStrategy = &sIntegrationResponse_ContentHandlingStrategy
+var IntegrationResponse_IntegrationResponseId = &sIntegrationResponse_IntegrationResponseId
+var IntegrationResponse_IntegrationResponseKey = &sIntegrationResponse_IntegrationResponseKey
+var IntegrationResponse_ResponseParameters = &sIntegrationResponse_ResponseParameters
+var IntegrationResponse_ResponseTemplates = &sIntegrationResponse_ResponseTemplates
+var IntegrationResponse_TemplateSelectionExpression = &sIntegrationResponse_TemplateSelectionExpression
+
+var IntegrationType = &sIntegrationType
+var IntegrationType_AWS = &sIntegrationType_AWS
+var IntegrationType_HTTP = &sIntegrationType_HTTP
+var IntegrationType_MOCK = &sIntegrationType_MOCK
+var IntegrationType_HTTP_PROXY = &sIntegrationType_HTTP_PROXY
+var IntegrationType_AWS_PROXY = &sIntegrationType_AWS_PROXY
+
+var IpAddressType = &sIpAddressType
+var IpAddressType_ipv4 = &sIpAddressType_ipv4
+var IpAddressType_dualstack = &sIpAddressType_dualstack
+
+var JWTConfiguration = &sJWTConfiguration
+var JWTConfiguration_Audience = &sJWTConfiguration_Audience
+var JWTConfiguration_Issuer = &sJWTConfiguration_Issuer
+
+var LoggingLevel = &sLoggingLevel
+var LoggingLevel_ERROR = &sLoggingLevel_ERROR
+var LoggingLevel_INFO = &sLoggingLevel_INFO
+var LoggingLevel_OFF = &sLoggingLevel_OFF
+
+var _MaxResults = &s_MaxResults
+
+var Model = &sModel
+var Model_ContentType = &sModel_ContentType
+var Model_Description = &sModel_Description
+var Model_ModelId = &sModel_ModelId
+var Model_Name = &sModel_Name
+var Model_Schema = &sModel_Schema
+
+var MutualTlsAuthentication = &sMutualTlsAuthentication
+var MutualTlsAuthentication_TruststoreUri = &sMutualTlsAuthentication_TruststoreUri
+var MutualTlsAuthentication_TruststoreVersion = &sMutualTlsAuthentication_TruststoreVersion
+var MutualTlsAuthentication_TruststoreWarnings = &sMutualTlsAuthentication_TruststoreWarnings
+
+var MutualTlsAuthenticationInput = &sMutualTlsAuthenticationInput
+var MutualTlsAuthenticationInput_TruststoreUri = &sMutualTlsAuthenticationInput_TruststoreUri
+var MutualTlsAuthenticationInput_TruststoreVersion = &sMutualTlsAuthenticationInput_TruststoreVersion
+
+var _NextToken = &s_NextToken
+
+var None = &sNone
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Message = &sNotFoundException_Message
+var NotFoundException_ResourceType = &sNotFoundException_ResourceType
+
+var ParameterConstraints = &sParameterConstraints
+var ParameterConstraints_Required = &sParameterConstraints_Required
+
+var PassthroughBehavior = &sPassthroughBehavior
+var PassthroughBehavior_WHEN_NO_MATCH = &sPassthroughBehavior_WHEN_NO_MATCH
+var PassthroughBehavior_NEVER = &sPassthroughBehavior_NEVER
+var PassthroughBehavior_WHEN_NO_TEMPLATES = &sPassthroughBehavior_WHEN_NO_TEMPLATES
+
+var PortalContent = &sPortalContent
+var PortalContent_Description = &sPortalContent_Description
+var PortalContent_DisplayName = &sPortalContent_DisplayName
+var PortalContent_Theme = &sPortalContent_Theme
+
+var PortalProductSummary = &sPortalProductSummary
+var PortalProductSummary_Description = &sPortalProductSummary_Description
+var PortalProductSummary_DisplayName = &sPortalProductSummary_DisplayName
+var PortalProductSummary_LastModified = &sPortalProductSummary_LastModified
+var PortalProductSummary_PortalProductArn = &sPortalProductSummary_PortalProductArn
+var PortalProductSummary_PortalProductId = &sPortalProductSummary_PortalProductId
+var PortalProductSummary_Tags = &sPortalProductSummary_Tags
+
+var PortalSummary = &sPortalSummary
+var PortalSummary_Authorization = &sPortalSummary_Authorization
+var PortalSummary_EndpointConfiguration = &sPortalSummary_EndpointConfiguration
+var PortalSummary_IncludedPortalProductArns = &sPortalSummary_IncludedPortalProductArns
+var PortalSummary_LastModified = &sPortalSummary_LastModified
+var PortalSummary_LastPublished = &sPortalSummary_LastPublished
+var PortalSummary_LastPublishedDescription = &sPortalSummary_LastPublishedDescription
+var PortalSummary_PortalArn = &sPortalSummary_PortalArn
+var PortalSummary_PortalContent = &sPortalSummary_PortalContent
+var PortalSummary_PortalId = &sPortalSummary_PortalId
+var PortalSummary_Preview = &sPortalSummary_Preview
+var PortalSummary_PublishStatus = &sPortalSummary_PublishStatus
+var PortalSummary_RumAppMonitorName = &sPortalSummary_RumAppMonitorName
+var PortalSummary_StatusException = &sPortalSummary_StatusException
+var PortalSummary_Tags = &sPortalSummary_Tags
+
+var PortalTheme = &sPortalTheme
+var PortalTheme_CustomColors = &sPortalTheme_CustomColors
+var PortalTheme_LogoLastUploaded = &sPortalTheme_LogoLastUploaded
+
+var Preview = &sPreview
+var Preview_PreviewStatus = &sPreview_PreviewStatus
+var Preview_PreviewUrl = &sPreview_PreviewUrl
+var Preview_StatusException = &sPreview_StatusException
+
+var PreviewStatus = &sPreviewStatus
+var PreviewStatus_PREVIEW_IN_PROGRESS = &sPreviewStatus_PREVIEW_IN_PROGRESS
+var PreviewStatus_PREVIEW_FAILED = &sPreviewStatus_PREVIEW_FAILED
+var PreviewStatus_PREVIEW_READY = &sPreviewStatus_PREVIEW_READY
+
+var ProductPageSummaryNoBody = &sProductPageSummaryNoBody
+var ProductPageSummaryNoBody_LastModified = &sProductPageSummaryNoBody_LastModified
+var ProductPageSummaryNoBody_PageTitle = &sProductPageSummaryNoBody_PageTitle
+var ProductPageSummaryNoBody_ProductPageArn = &sProductPageSummaryNoBody_ProductPageArn
+var ProductPageSummaryNoBody_ProductPageId = &sProductPageSummaryNoBody_ProductPageId
+
+var ProductRestEndpointPageSummaryNoBody = &sProductRestEndpointPageSummaryNoBody
+var ProductRestEndpointPageSummaryNoBody_Endpoint = &sProductRestEndpointPageSummaryNoBody_Endpoint
+var ProductRestEndpointPageSummaryNoBody_LastModified = &sProductRestEndpointPageSummaryNoBody_LastModified
+var ProductRestEndpointPageSummaryNoBody_OperationName = &sProductRestEndpointPageSummaryNoBody_OperationName
+var ProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageArn = &sProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageArn
+var ProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageId = &sProductRestEndpointPageSummaryNoBody_ProductRestEndpointPageId
+var ProductRestEndpointPageSummaryNoBody_RestEndpointIdentifier = &sProductRestEndpointPageSummaryNoBody_RestEndpointIdentifier
+var ProductRestEndpointPageSummaryNoBody_Status = &sProductRestEndpointPageSummaryNoBody_Status
+var ProductRestEndpointPageSummaryNoBody_StatusException = &sProductRestEndpointPageSummaryNoBody_StatusException
+var ProductRestEndpointPageSummaryNoBody_TryItState = &sProductRestEndpointPageSummaryNoBody_TryItState
+
+var ProtocolType = &sProtocolType
+var ProtocolType_WEBSOCKET = &sProtocolType_WEBSOCKET
+var ProtocolType_HTTP = &sProtocolType_HTTP
+
+var PublishStatus = &sPublishStatus
+var PublishStatus_PUBLISHED = &sPublishStatus_PUBLISHED
+var PublishStatus_PUBLISH_IN_PROGRESS = &sPublishStatus_PUBLISH_IN_PROGRESS
+var PublishStatus_PUBLISH_FAILED = &sPublishStatus_PUBLISH_FAILED
+var PublishStatus_DISABLE_IN_PROGRESS = &sPublishStatus_DISABLE_IN_PROGRESS
+var PublishStatus_DISABLE_FAILED = &sPublishStatus_DISABLE_FAILED
+var PublishStatus_DISABLED = &sPublishStatus_DISABLED
+
+var _ResponseParameters = &s_ResponseParameters
+var _ResponseParameters_key = &s_ResponseParameters_key
+var _ResponseParameters_value = &s_ResponseParameters_value
+
+var RestEndpointIdentifier = &sRestEndpointIdentifier
+var RestEndpointIdentifier_IdentifierParts = &sRestEndpointIdentifier_IdentifierParts
+
+var Route = &sRoute
+var Route_ApiGatewayManaged = &sRoute_ApiGatewayManaged
+var Route_ApiKeyRequired = &sRoute_ApiKeyRequired
+var Route_AuthorizationScopes = &sRoute_AuthorizationScopes
+var Route_AuthorizationType = &sRoute_AuthorizationType
+var Route_AuthorizerId = &sRoute_AuthorizerId
+var Route_ModelSelectionExpression = &sRoute_ModelSelectionExpression
+var Route_OperationName = &sRoute_OperationName
+var Route_RequestModels = &sRoute_RequestModels
+var Route_RequestParameters = &sRoute_RequestParameters
+var Route_RouteId = &sRoute_RouteId
+var Route_RouteKey = &sRoute_RouteKey
+var Route_RouteResponseSelectionExpression = &sRoute_RouteResponseSelectionExpression
+var Route_Target = &sRoute_Target
+
+var _RouteModels = &s_RouteModels
+var _RouteModels_key = &s_RouteModels_key
+var _RouteModels_value = &s_RouteModels_value
+
+var _RouteParameters = &s_RouteParameters
+var _RouteParameters_key = &s_RouteParameters_key
+var _RouteParameters_value = &s_RouteParameters_value
+
+var RouteResponse = &sRouteResponse
+var RouteResponse_ModelSelectionExpression = &sRouteResponse_ModelSelectionExpression
+var RouteResponse_ResponseModels = &sRouteResponse_ResponseModels
+var RouteResponse_ResponseParameters = &sRouteResponse_ResponseParameters
+var RouteResponse_RouteResponseId = &sRouteResponse_RouteResponseId
+var RouteResponse_RouteResponseKey = &sRouteResponse_RouteResponseKey
+
+var RouteSettings = &sRouteSettings
+var RouteSettings_DataTraceEnabled = &sRouteSettings_DataTraceEnabled
+var RouteSettings_DetailedMetricsEnabled = &sRouteSettings_DetailedMetricsEnabled
+var RouteSettings_LoggingLevel = &sRouteSettings_LoggingLevel
+var RouteSettings_ThrottlingBurstLimit = &sRouteSettings_ThrottlingBurstLimit
+var RouteSettings_ThrottlingRateLimit = &sRouteSettings_ThrottlingRateLimit
+
+var _RouteSettingsMap = &s_RouteSettingsMap
+var _RouteSettingsMap_key = &s_RouteSettingsMap_key
+var _RouteSettingsMap_value = &s_RouteSettingsMap_value
+
+var RoutingMode = &sRoutingMode
+var RoutingMode_API_MAPPING_ONLY = &sRoutingMode_API_MAPPING_ONLY
+var RoutingMode_ROUTING_RULE_ONLY = &sRoutingMode_ROUTING_RULE_ONLY
+var RoutingMode_ROUTING_RULE_THEN_API_MAPPING = &sRoutingMode_ROUTING_RULE_THEN_API_MAPPING
+
+var RoutingRule = &sRoutingRule
+var RoutingRule_Actions = &sRoutingRule_Actions
+var RoutingRule_Conditions = &sRoutingRule_Conditions
+var RoutingRule_Priority = &sRoutingRule_Priority
+var RoutingRule_RoutingRuleArn = &sRoutingRule_RoutingRuleArn
+var RoutingRule_RoutingRuleId = &sRoutingRule_RoutingRuleId
+
+var RoutingRuleAction = &sRoutingRuleAction
+var RoutingRuleAction_InvokeApi = &sRoutingRuleAction_InvokeApi
+
+var RoutingRuleActionInvokeApi = &sRoutingRuleActionInvokeApi
+var RoutingRuleActionInvokeApi_ApiId = &sRoutingRuleActionInvokeApi_ApiId
+var RoutingRuleActionInvokeApi_Stage = &sRoutingRuleActionInvokeApi_Stage
+var RoutingRuleActionInvokeApi_StripBasePath = &sRoutingRuleActionInvokeApi_StripBasePath
+
+var RoutingRuleCondition = &sRoutingRuleCondition
+var RoutingRuleCondition_MatchBasePaths = &sRoutingRuleCondition_MatchBasePaths
+var RoutingRuleCondition_MatchHeaders = &sRoutingRuleCondition_MatchHeaders
+
+var RoutingRuleMatchBasePaths = &sRoutingRuleMatchBasePaths
+var RoutingRuleMatchBasePaths_AnyOf = &sRoutingRuleMatchBasePaths_AnyOf
+
+var RoutingRuleMatchHeaders = &sRoutingRuleMatchHeaders
+var RoutingRuleMatchHeaders_AnyOf = &sRoutingRuleMatchHeaders_AnyOf
+
+var RoutingRuleMatchHeaderValue = &sRoutingRuleMatchHeaderValue
+var RoutingRuleMatchHeaderValue_Header = &sRoutingRuleMatchHeaderValue_Header
+var RoutingRuleMatchHeaderValue_ValueGlob = &sRoutingRuleMatchHeaderValue_ValueGlob
+
+var _RoutingRulePriority = &s_RoutingRulePriority
+
+var Section = &sSection
+var Section_ProductRestEndpointPageArns = &sSection_ProductRestEndpointPageArns
+var Section_SectionName = &sSection_SectionName
+
+var _SecurityGroupIdList = &s_SecurityGroupIdList
+var _SecurityGroupIdList_member = &s_SecurityGroupIdList_member
+
+var SecurityPolicy = &sSecurityPolicy
+var SecurityPolicy_TLS_1_0 = &sSecurityPolicy_TLS_1_0
+var SecurityPolicy_TLS_1_2 = &sSecurityPolicy_TLS_1_2
+
+var _SelectionExpression = &s_SelectionExpression
+
+var _SelectionKey = &s_SelectionKey
+
+var Stage = &sStage
+var Stage_AccessLogSettings = &sStage_AccessLogSettings
+var Stage_ApiGatewayManaged = &sStage_ApiGatewayManaged
+var Stage_AutoDeploy = &sStage_AutoDeploy
+var Stage_ClientCertificateId = &sStage_ClientCertificateId
+var Stage_CreatedDate = &sStage_CreatedDate
+var Stage_DefaultRouteSettings = &sStage_DefaultRouteSettings
+var Stage_DeploymentId = &sStage_DeploymentId
+var Stage_Description = &sStage_Description
+var Stage_LastDeploymentStatusMessage = &sStage_LastDeploymentStatusMessage
+var Stage_LastUpdatedDate = &sStage_LastUpdatedDate
+var Stage_RouteSettings = &sStage_RouteSettings
+var Stage_StageName = &sStage_StageName
+var Stage_StageVariables = &sStage_StageVariables
+var Stage_Tags = &sStage_Tags
+
+var _StageVariablesMap = &s_StageVariablesMap
+var _StageVariablesMap_key = &s_StageVariablesMap_key
+var _StageVariablesMap_value = &s_StageVariablesMap_value
+
+var Status = &sStatus
+var Status_AVAILABLE = &sStatus_AVAILABLE
+var Status_IN_PROGRESS = &sStatus_IN_PROGRESS
+var Status_FAILED = &sStatus_FAILED
+
+var StatusException = &sStatusException
+var StatusException_Exception = &sStatusException_Exception
+var StatusException_Message = &sStatusException_Message
+
+var _StringWithLengthBetween0And1024 = &s_StringWithLengthBetween0And1024
+
+var _StringWithLengthBetween0And2048 = &s_StringWithLengthBetween0And2048
+
+var _StringWithLengthBetween0And32K = &s_StringWithLengthBetween0And32K
+
+var _StringWithLengthBetween1And1024 = &s_StringWithLengthBetween1And1024
+
+var _StringWithLengthBetween1And128 = &s_StringWithLengthBetween1And128
+
+var _StringWithLengthBetween1And1600 = &s_StringWithLengthBetween1And1600
+
+var _StringWithLengthBetween1And256 = &s_StringWithLengthBetween1And256
+
+var _StringWithLengthBetween1And512 = &s_StringWithLengthBetween1And512
+
+var _StringWithLengthBetween1And64 = &s_StringWithLengthBetween1And64
+
+var _SubnetIdList = &s_SubnetIdList
+var _SubnetIdList_member = &s_SubnetIdList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var _TemplateMap = &s_TemplateMap
+var _TemplateMap_key = &s_TemplateMap_key
+var _TemplateMap_value = &s_TemplateMap_value
+
+var TlsConfig = &sTlsConfig
+var TlsConfig_ServerNameToVerify = &sTlsConfig_ServerNameToVerify
+
+var TlsConfigInput = &sTlsConfigInput
+var TlsConfigInput_ServerNameToVerify = &sTlsConfigInput_ServerNameToVerify
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_LimitType = &sTooManyRequestsException_LimitType
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var TryItState = &sTryItState
+var TryItState_ENABLED = &sTryItState_ENABLED
+var TryItState_DISABLED = &sTryItState_DISABLED
+
+var _UriWithLengthBetween1And2048 = &s_UriWithLengthBetween1And2048
+
+var VpcLink = &sVpcLink
+var VpcLink_CreatedDate = &sVpcLink_CreatedDate
+var VpcLink_Name = &sVpcLink_Name
+var VpcLink_SecurityGroupIds = &sVpcLink_SecurityGroupIds
+var VpcLink_SubnetIds = &sVpcLink_SubnetIds
+var VpcLink_Tags = &sVpcLink_Tags
+var VpcLink_VpcLinkId = &sVpcLink_VpcLinkId
+var VpcLink_VpcLinkStatus = &sVpcLink_VpcLinkStatus
+var VpcLink_VpcLinkStatusMessage = &sVpcLink_VpcLinkStatusMessage
+var VpcLink_VpcLinkVersion = &sVpcLink_VpcLinkVersion
+
+var VpcLinkStatus = &sVpcLinkStatus
+var VpcLinkStatus_PENDING = &sVpcLinkStatus_PENDING
+var VpcLinkStatus_AVAILABLE = &sVpcLinkStatus_AVAILABLE
+var VpcLinkStatus_DELETING = &sVpcLinkStatus_DELETING
+var VpcLinkStatus_FAILED = &sVpcLinkStatus_FAILED
+var VpcLinkStatus_INACTIVE = &sVpcLinkStatus_INACTIVE
+
+var VpcLinkVersion = &sVpcLinkVersion
+var VpcLinkVersion_V2 = &sVpcLinkVersion_V2
+
+var CreateApiRequest = &sCreateApiRequest
+var CreateApiRequest_ApiKeySelectionExpression = &sCreateApiRequest_ApiKeySelectionExpression
+var CreateApiRequest_CorsConfiguration = &sCreateApiRequest_CorsConfiguration
+var CreateApiRequest_CredentialsArn = &sCreateApiRequest_CredentialsArn
+var CreateApiRequest_Description = &sCreateApiRequest_Description
+var CreateApiRequest_DisableSchemaValidation = &sCreateApiRequest_DisableSchemaValidation
+var CreateApiRequest_DisableExecuteApiEndpoint = &sCreateApiRequest_DisableExecuteApiEndpoint
+var CreateApiRequest_IpAddressType = &sCreateApiRequest_IpAddressType
+var CreateApiRequest_Name = &sCreateApiRequest_Name
+var CreateApiRequest_ProtocolType = &sCreateApiRequest_ProtocolType
+var CreateApiRequest_RouteKey = &sCreateApiRequest_RouteKey
+var CreateApiRequest_RouteSelectionExpression = &sCreateApiRequest_RouteSelectionExpression
+var CreateApiRequest_Tags = &sCreateApiRequest_Tags
+var CreateApiRequest_Target = &sCreateApiRequest_Target
+var CreateApiRequest_Version = &sCreateApiRequest_Version
+
+var CreateApiMappingRequest = &sCreateApiMappingRequest
+var CreateApiMappingRequest_ApiId = &sCreateApiMappingRequest_ApiId
+var CreateApiMappingRequest_ApiMappingKey = &sCreateApiMappingRequest_ApiMappingKey
+var CreateApiMappingRequest_DomainName = &sCreateApiMappingRequest_DomainName
+var CreateApiMappingRequest_Stage = &sCreateApiMappingRequest_Stage
+
+var CreateApiMappingResponse = &sCreateApiMappingResponse
+var CreateApiMappingResponse_ApiId = &sCreateApiMappingResponse_ApiId
+var CreateApiMappingResponse_ApiMappingId = &sCreateApiMappingResponse_ApiMappingId
+var CreateApiMappingResponse_ApiMappingKey = &sCreateApiMappingResponse_ApiMappingKey
+var CreateApiMappingResponse_Stage = &sCreateApiMappingResponse_Stage
+
+var CreateApiResponse = &sCreateApiResponse
+var CreateApiResponse_ApiEndpoint = &sCreateApiResponse_ApiEndpoint
+var CreateApiResponse_ApiGatewayManaged = &sCreateApiResponse_ApiGatewayManaged
+var CreateApiResponse_ApiId = &sCreateApiResponse_ApiId
+var CreateApiResponse_ApiKeySelectionExpression = &sCreateApiResponse_ApiKeySelectionExpression
+var CreateApiResponse_CorsConfiguration = &sCreateApiResponse_CorsConfiguration
+var CreateApiResponse_CreatedDate = &sCreateApiResponse_CreatedDate
+var CreateApiResponse_Description = &sCreateApiResponse_Description
+var CreateApiResponse_DisableSchemaValidation = &sCreateApiResponse_DisableSchemaValidation
+var CreateApiResponse_DisableExecuteApiEndpoint = &sCreateApiResponse_DisableExecuteApiEndpoint
+var CreateApiResponse_ImportInfo = &sCreateApiResponse_ImportInfo
+var CreateApiResponse_IpAddressType = &sCreateApiResponse_IpAddressType
+var CreateApiResponse_Name = &sCreateApiResponse_Name
+var CreateApiResponse_ProtocolType = &sCreateApiResponse_ProtocolType
+var CreateApiResponse_RouteSelectionExpression = &sCreateApiResponse_RouteSelectionExpression
+var CreateApiResponse_Tags = &sCreateApiResponse_Tags
+var CreateApiResponse_Version = &sCreateApiResponse_Version
+var CreateApiResponse_Warnings = &sCreateApiResponse_Warnings
+
+var CreateAuthorizerRequest = &sCreateAuthorizerRequest
+var CreateAuthorizerRequest_ApiId = &sCreateAuthorizerRequest_ApiId
+var CreateAuthorizerRequest_AuthorizerCredentialsArn = &sCreateAuthorizerRequest_AuthorizerCredentialsArn
+var CreateAuthorizerRequest_AuthorizerPayloadFormatVersion = &sCreateAuthorizerRequest_AuthorizerPayloadFormatVersion
+var CreateAuthorizerRequest_AuthorizerResultTtlInSeconds = &sCreateAuthorizerRequest_AuthorizerResultTtlInSeconds
+var CreateAuthorizerRequest_AuthorizerType = &sCreateAuthorizerRequest_AuthorizerType
+var CreateAuthorizerRequest_AuthorizerUri = &sCreateAuthorizerRequest_AuthorizerUri
+var CreateAuthorizerRequest_EnableSimpleResponses = &sCreateAuthorizerRequest_EnableSimpleResponses
+var CreateAuthorizerRequest_IdentitySource = &sCreateAuthorizerRequest_IdentitySource
+var CreateAuthorizerRequest_IdentityValidationExpression = &sCreateAuthorizerRequest_IdentityValidationExpression
+var CreateAuthorizerRequest_JwtConfiguration = &sCreateAuthorizerRequest_JwtConfiguration
+var CreateAuthorizerRequest_Name = &sCreateAuthorizerRequest_Name
+
+var CreateAuthorizerResponse = &sCreateAuthorizerResponse
+var CreateAuthorizerResponse_AuthorizerCredentialsArn = &sCreateAuthorizerResponse_AuthorizerCredentialsArn
+var CreateAuthorizerResponse_AuthorizerId = &sCreateAuthorizerResponse_AuthorizerId
+var CreateAuthorizerResponse_AuthorizerPayloadFormatVersion = &sCreateAuthorizerResponse_AuthorizerPayloadFormatVersion
+var CreateAuthorizerResponse_AuthorizerResultTtlInSeconds = &sCreateAuthorizerResponse_AuthorizerResultTtlInSeconds
+var CreateAuthorizerResponse_AuthorizerType = &sCreateAuthorizerResponse_AuthorizerType
+var CreateAuthorizerResponse_AuthorizerUri = &sCreateAuthorizerResponse_AuthorizerUri
+var CreateAuthorizerResponse_EnableSimpleResponses = &sCreateAuthorizerResponse_EnableSimpleResponses
+var CreateAuthorizerResponse_IdentitySource = &sCreateAuthorizerResponse_IdentitySource
+var CreateAuthorizerResponse_IdentityValidationExpression = &sCreateAuthorizerResponse_IdentityValidationExpression
+var CreateAuthorizerResponse_JwtConfiguration = &sCreateAuthorizerResponse_JwtConfiguration
+var CreateAuthorizerResponse_Name = &sCreateAuthorizerResponse_Name
+
+var CreateDeploymentRequest = &sCreateDeploymentRequest
+var CreateDeploymentRequest_ApiId = &sCreateDeploymentRequest_ApiId
+var CreateDeploymentRequest_Description = &sCreateDeploymentRequest_Description
+var CreateDeploymentRequest_StageName = &sCreateDeploymentRequest_StageName
+
+var CreateDeploymentResponse = &sCreateDeploymentResponse
+var CreateDeploymentResponse_AutoDeployed = &sCreateDeploymentResponse_AutoDeployed
+var CreateDeploymentResponse_CreatedDate = &sCreateDeploymentResponse_CreatedDate
+var CreateDeploymentResponse_DeploymentId = &sCreateDeploymentResponse_DeploymentId
+var CreateDeploymentResponse_DeploymentStatus = &sCreateDeploymentResponse_DeploymentStatus
+var CreateDeploymentResponse_DeploymentStatusMessage = &sCreateDeploymentResponse_DeploymentStatusMessage
+var CreateDeploymentResponse_Description = &sCreateDeploymentResponse_Description
+
+var CreateDomainNameRequest = &sCreateDomainNameRequest
+var CreateDomainNameRequest_DomainName = &sCreateDomainNameRequest_DomainName
+var CreateDomainNameRequest_DomainNameConfigurations = &sCreateDomainNameRequest_DomainNameConfigurations
+var CreateDomainNameRequest_MutualTlsAuthentication = &sCreateDomainNameRequest_MutualTlsAuthentication
+var CreateDomainNameRequest_RoutingMode = &sCreateDomainNameRequest_RoutingMode
+var CreateDomainNameRequest_Tags = &sCreateDomainNameRequest_Tags
+
+var CreateDomainNameResponse = &sCreateDomainNameResponse
+var CreateDomainNameResponse_ApiMappingSelectionExpression = &sCreateDomainNameResponse_ApiMappingSelectionExpression
+var CreateDomainNameResponse_DomainName = &sCreateDomainNameResponse_DomainName
+var CreateDomainNameResponse_DomainNameArn = &sCreateDomainNameResponse_DomainNameArn
+var CreateDomainNameResponse_DomainNameConfigurations = &sCreateDomainNameResponse_DomainNameConfigurations
+var CreateDomainNameResponse_MutualTlsAuthentication = &sCreateDomainNameResponse_MutualTlsAuthentication
+var CreateDomainNameResponse_RoutingMode = &sCreateDomainNameResponse_RoutingMode
+var CreateDomainNameResponse_Tags = &sCreateDomainNameResponse_Tags
+
+var CreateIntegrationRequest = &sCreateIntegrationRequest
+var CreateIntegrationRequest_ApiId = &sCreateIntegrationRequest_ApiId
+var CreateIntegrationRequest_ConnectionId = &sCreateIntegrationRequest_ConnectionId
+var CreateIntegrationRequest_ConnectionType = &sCreateIntegrationRequest_ConnectionType
+var CreateIntegrationRequest_ContentHandlingStrategy = &sCreateIntegrationRequest_ContentHandlingStrategy
+var CreateIntegrationRequest_CredentialsArn = &sCreateIntegrationRequest_CredentialsArn
+var CreateIntegrationRequest_Description = &sCreateIntegrationRequest_Description
+var CreateIntegrationRequest_IntegrationMethod = &sCreateIntegrationRequest_IntegrationMethod
+var CreateIntegrationRequest_IntegrationSubtype = &sCreateIntegrationRequest_IntegrationSubtype
+var CreateIntegrationRequest_IntegrationType = &sCreateIntegrationRequest_IntegrationType
+var CreateIntegrationRequest_IntegrationUri = &sCreateIntegrationRequest_IntegrationUri
+var CreateIntegrationRequest_PassthroughBehavior = &sCreateIntegrationRequest_PassthroughBehavior
+var CreateIntegrationRequest_PayloadFormatVersion = &sCreateIntegrationRequest_PayloadFormatVersion
+var CreateIntegrationRequest_RequestParameters = &sCreateIntegrationRequest_RequestParameters
+var CreateIntegrationRequest_RequestTemplates = &sCreateIntegrationRequest_RequestTemplates
+var CreateIntegrationRequest_ResponseParameters = &sCreateIntegrationRequest_ResponseParameters
+var CreateIntegrationRequest_TemplateSelectionExpression = &sCreateIntegrationRequest_TemplateSelectionExpression
+var CreateIntegrationRequest_TimeoutInMillis = &sCreateIntegrationRequest_TimeoutInMillis
+var CreateIntegrationRequest_TlsConfig = &sCreateIntegrationRequest_TlsConfig
+
+var CreateIntegrationResult = &sCreateIntegrationResult
+var CreateIntegrationResult_ApiGatewayManaged = &sCreateIntegrationResult_ApiGatewayManaged
+var CreateIntegrationResult_ConnectionId = &sCreateIntegrationResult_ConnectionId
+var CreateIntegrationResult_ConnectionType = &sCreateIntegrationResult_ConnectionType
+var CreateIntegrationResult_ContentHandlingStrategy = &sCreateIntegrationResult_ContentHandlingStrategy
+var CreateIntegrationResult_CredentialsArn = &sCreateIntegrationResult_CredentialsArn
+var CreateIntegrationResult_Description = &sCreateIntegrationResult_Description
+var CreateIntegrationResult_IntegrationId = &sCreateIntegrationResult_IntegrationId
+var CreateIntegrationResult_IntegrationMethod = &sCreateIntegrationResult_IntegrationMethod
+var CreateIntegrationResult_IntegrationResponseSelectionExpression = &sCreateIntegrationResult_IntegrationResponseSelectionExpression
+var CreateIntegrationResult_IntegrationSubtype = &sCreateIntegrationResult_IntegrationSubtype
+var CreateIntegrationResult_IntegrationType = &sCreateIntegrationResult_IntegrationType
+var CreateIntegrationResult_IntegrationUri = &sCreateIntegrationResult_IntegrationUri
+var CreateIntegrationResult_PassthroughBehavior = &sCreateIntegrationResult_PassthroughBehavior
+var CreateIntegrationResult_PayloadFormatVersion = &sCreateIntegrationResult_PayloadFormatVersion
+var CreateIntegrationResult_RequestParameters = &sCreateIntegrationResult_RequestParameters
+var CreateIntegrationResult_RequestTemplates = &sCreateIntegrationResult_RequestTemplates
+var CreateIntegrationResult_ResponseParameters = &sCreateIntegrationResult_ResponseParameters
+var CreateIntegrationResult_TemplateSelectionExpression = &sCreateIntegrationResult_TemplateSelectionExpression
+var CreateIntegrationResult_TimeoutInMillis = &sCreateIntegrationResult_TimeoutInMillis
+var CreateIntegrationResult_TlsConfig = &sCreateIntegrationResult_TlsConfig
+
+var CreateIntegrationResponseRequest = &sCreateIntegrationResponseRequest
+var CreateIntegrationResponseRequest_ApiId = &sCreateIntegrationResponseRequest_ApiId
+var CreateIntegrationResponseRequest_ContentHandlingStrategy = &sCreateIntegrationResponseRequest_ContentHandlingStrategy
+var CreateIntegrationResponseRequest_IntegrationId = &sCreateIntegrationResponseRequest_IntegrationId
+var CreateIntegrationResponseRequest_IntegrationResponseKey = &sCreateIntegrationResponseRequest_IntegrationResponseKey
+var CreateIntegrationResponseRequest_ResponseParameters = &sCreateIntegrationResponseRequest_ResponseParameters
+var CreateIntegrationResponseRequest_ResponseTemplates = &sCreateIntegrationResponseRequest_ResponseTemplates
+var CreateIntegrationResponseRequest_TemplateSelectionExpression = &sCreateIntegrationResponseRequest_TemplateSelectionExpression
+
+var CreateIntegrationResponseResponse = &sCreateIntegrationResponseResponse
+var CreateIntegrationResponseResponse_ContentHandlingStrategy = &sCreateIntegrationResponseResponse_ContentHandlingStrategy
+var CreateIntegrationResponseResponse_IntegrationResponseId = &sCreateIntegrationResponseResponse_IntegrationResponseId
+var CreateIntegrationResponseResponse_IntegrationResponseKey = &sCreateIntegrationResponseResponse_IntegrationResponseKey
+var CreateIntegrationResponseResponse_ResponseParameters = &sCreateIntegrationResponseResponse_ResponseParameters
+var CreateIntegrationResponseResponse_ResponseTemplates = &sCreateIntegrationResponseResponse_ResponseTemplates
+var CreateIntegrationResponseResponse_TemplateSelectionExpression = &sCreateIntegrationResponseResponse_TemplateSelectionExpression
+
+var CreateModelRequest = &sCreateModelRequest
+var CreateModelRequest_ApiId = &sCreateModelRequest_ApiId
+var CreateModelRequest_ContentType = &sCreateModelRequest_ContentType
+var CreateModelRequest_Description = &sCreateModelRequest_Description
+var CreateModelRequest_Name = &sCreateModelRequest_Name
+var CreateModelRequest_Schema = &sCreateModelRequest_Schema
+
+var CreateModelResponse = &sCreateModelResponse
+var CreateModelResponse_ContentType = &sCreateModelResponse_ContentType
+var CreateModelResponse_Description = &sCreateModelResponse_Description
+var CreateModelResponse_ModelId = &sCreateModelResponse_ModelId
+var CreateModelResponse_Name = &sCreateModelResponse_Name
+var CreateModelResponse_Schema = &sCreateModelResponse_Schema
+
+var CreatePortalRequest = &sCreatePortalRequest
+var CreatePortalRequest_Authorization = &sCreatePortalRequest_Authorization
+var CreatePortalRequest_EndpointConfiguration = &sCreatePortalRequest_EndpointConfiguration
+var CreatePortalRequest_IncludedPortalProductArns = &sCreatePortalRequest_IncludedPortalProductArns
+var CreatePortalRequest_LogoUri = &sCreatePortalRequest_LogoUri
+var CreatePortalRequest_PortalContent = &sCreatePortalRequest_PortalContent
+var CreatePortalRequest_RumAppMonitorName = &sCreatePortalRequest_RumAppMonitorName
+var CreatePortalRequest_Tags = &sCreatePortalRequest_Tags
+
+var CreatePortalResponse = &sCreatePortalResponse
+var CreatePortalResponse_Authorization = &sCreatePortalResponse_Authorization
+var CreatePortalResponse_EndpointConfiguration = &sCreatePortalResponse_EndpointConfiguration
+var CreatePortalResponse_IncludedPortalProductArns = &sCreatePortalResponse_IncludedPortalProductArns
+var CreatePortalResponse_LastModified = &sCreatePortalResponse_LastModified
+var CreatePortalResponse_LastPublished = &sCreatePortalResponse_LastPublished
+var CreatePortalResponse_LastPublishedDescription = &sCreatePortalResponse_LastPublishedDescription
+var CreatePortalResponse_PortalArn = &sCreatePortalResponse_PortalArn
+var CreatePortalResponse_PortalContent = &sCreatePortalResponse_PortalContent
+var CreatePortalResponse_PortalId = &sCreatePortalResponse_PortalId
+var CreatePortalResponse_PublishStatus = &sCreatePortalResponse_PublishStatus
+var CreatePortalResponse_RumAppMonitorName = &sCreatePortalResponse_RumAppMonitorName
+var CreatePortalResponse_StatusException = &sCreatePortalResponse_StatusException
+var CreatePortalResponse_Tags = &sCreatePortalResponse_Tags
+
+var CreatePortalProductRequest = &sCreatePortalProductRequest
+var CreatePortalProductRequest_Description = &sCreatePortalProductRequest_Description
+var CreatePortalProductRequest_DisplayName = &sCreatePortalProductRequest_DisplayName
+var CreatePortalProductRequest_Tags = &sCreatePortalProductRequest_Tags
+
+var CreatePortalProductResponse = &sCreatePortalProductResponse
+var CreatePortalProductResponse_Description = &sCreatePortalProductResponse_Description
+var CreatePortalProductResponse_DisplayName = &sCreatePortalProductResponse_DisplayName
+var CreatePortalProductResponse_DisplayOrder = &sCreatePortalProductResponse_DisplayOrder
+var CreatePortalProductResponse_LastModified = &sCreatePortalProductResponse_LastModified
+var CreatePortalProductResponse_PortalProductArn = &sCreatePortalProductResponse_PortalProductArn
+var CreatePortalProductResponse_PortalProductId = &sCreatePortalProductResponse_PortalProductId
+var CreatePortalProductResponse_Tags = &sCreatePortalProductResponse_Tags
+
+var CreateProductPageRequest = &sCreateProductPageRequest
+var CreateProductPageRequest_DisplayContent = &sCreateProductPageRequest_DisplayContent
+var CreateProductPageRequest_PortalProductId = &sCreateProductPageRequest_PortalProductId
+
+var CreateProductPageResponse = &sCreateProductPageResponse
+var CreateProductPageResponse_DisplayContent = &sCreateProductPageResponse_DisplayContent
+var CreateProductPageResponse_LastModified = &sCreateProductPageResponse_LastModified
+var CreateProductPageResponse_ProductPageArn = &sCreateProductPageResponse_ProductPageArn
+var CreateProductPageResponse_ProductPageId = &sCreateProductPageResponse_ProductPageId
+
+var CreateProductRestEndpointPageRequest = &sCreateProductRestEndpointPageRequest
+var CreateProductRestEndpointPageRequest_DisplayContent = &sCreateProductRestEndpointPageRequest_DisplayContent
+var CreateProductRestEndpointPageRequest_PortalProductId = &sCreateProductRestEndpointPageRequest_PortalProductId
+var CreateProductRestEndpointPageRequest_RestEndpointIdentifier = &sCreateProductRestEndpointPageRequest_RestEndpointIdentifier
+var CreateProductRestEndpointPageRequest_TryItState = &sCreateProductRestEndpointPageRequest_TryItState
+
+var CreateProductRestEndpointPageResponse = &sCreateProductRestEndpointPageResponse
+var CreateProductRestEndpointPageResponse_DisplayContent = &sCreateProductRestEndpointPageResponse_DisplayContent
+var CreateProductRestEndpointPageResponse_LastModified = &sCreateProductRestEndpointPageResponse_LastModified
+var CreateProductRestEndpointPageResponse_ProductRestEndpointPageArn = &sCreateProductRestEndpointPageResponse_ProductRestEndpointPageArn
+var CreateProductRestEndpointPageResponse_ProductRestEndpointPageId = &sCreateProductRestEndpointPageResponse_ProductRestEndpointPageId
+var CreateProductRestEndpointPageResponse_RestEndpointIdentifier = &sCreateProductRestEndpointPageResponse_RestEndpointIdentifier
+var CreateProductRestEndpointPageResponse_Status = &sCreateProductRestEndpointPageResponse_Status
+var CreateProductRestEndpointPageResponse_StatusException = &sCreateProductRestEndpointPageResponse_StatusException
+var CreateProductRestEndpointPageResponse_TryItState = &sCreateProductRestEndpointPageResponse_TryItState
+
+var CreateRouteRequest = &sCreateRouteRequest
+var CreateRouteRequest_ApiId = &sCreateRouteRequest_ApiId
+var CreateRouteRequest_ApiKeyRequired = &sCreateRouteRequest_ApiKeyRequired
+var CreateRouteRequest_AuthorizationScopes = &sCreateRouteRequest_AuthorizationScopes
+var CreateRouteRequest_AuthorizationType = &sCreateRouteRequest_AuthorizationType
+var CreateRouteRequest_AuthorizerId = &sCreateRouteRequest_AuthorizerId
+var CreateRouteRequest_ModelSelectionExpression = &sCreateRouteRequest_ModelSelectionExpression
+var CreateRouteRequest_OperationName = &sCreateRouteRequest_OperationName
+var CreateRouteRequest_RequestModels = &sCreateRouteRequest_RequestModels
+var CreateRouteRequest_RequestParameters = &sCreateRouteRequest_RequestParameters
+var CreateRouteRequest_RouteKey = &sCreateRouteRequest_RouteKey
+var CreateRouteRequest_RouteResponseSelectionExpression = &sCreateRouteRequest_RouteResponseSelectionExpression
+var CreateRouteRequest_Target = &sCreateRouteRequest_Target
+
+var CreateRouteResult = &sCreateRouteResult
+var CreateRouteResult_ApiGatewayManaged = &sCreateRouteResult_ApiGatewayManaged
+var CreateRouteResult_ApiKeyRequired = &sCreateRouteResult_ApiKeyRequired
+var CreateRouteResult_AuthorizationScopes = &sCreateRouteResult_AuthorizationScopes
+var CreateRouteResult_AuthorizationType = &sCreateRouteResult_AuthorizationType
+var CreateRouteResult_AuthorizerId = &sCreateRouteResult_AuthorizerId
+var CreateRouteResult_ModelSelectionExpression = &sCreateRouteResult_ModelSelectionExpression
+var CreateRouteResult_OperationName = &sCreateRouteResult_OperationName
+var CreateRouteResult_RequestModels = &sCreateRouteResult_RequestModels
+var CreateRouteResult_RequestParameters = &sCreateRouteResult_RequestParameters
+var CreateRouteResult_RouteId = &sCreateRouteResult_RouteId
+var CreateRouteResult_RouteKey = &sCreateRouteResult_RouteKey
+var CreateRouteResult_RouteResponseSelectionExpression = &sCreateRouteResult_RouteResponseSelectionExpression
+var CreateRouteResult_Target = &sCreateRouteResult_Target
+
+var CreateRouteResponseRequest = &sCreateRouteResponseRequest
+var CreateRouteResponseRequest_ApiId = &sCreateRouteResponseRequest_ApiId
+var CreateRouteResponseRequest_ModelSelectionExpression = &sCreateRouteResponseRequest_ModelSelectionExpression
+var CreateRouteResponseRequest_ResponseModels = &sCreateRouteResponseRequest_ResponseModels
+var CreateRouteResponseRequest_ResponseParameters = &sCreateRouteResponseRequest_ResponseParameters
+var CreateRouteResponseRequest_RouteId = &sCreateRouteResponseRequest_RouteId
+var CreateRouteResponseRequest_RouteResponseKey = &sCreateRouteResponseRequest_RouteResponseKey
+
+var CreateRouteResponseResponse = &sCreateRouteResponseResponse
+var CreateRouteResponseResponse_ModelSelectionExpression = &sCreateRouteResponseResponse_ModelSelectionExpression
+var CreateRouteResponseResponse_ResponseModels = &sCreateRouteResponseResponse_ResponseModels
+var CreateRouteResponseResponse_ResponseParameters = &sCreateRouteResponseResponse_ResponseParameters
+var CreateRouteResponseResponse_RouteResponseId = &sCreateRouteResponseResponse_RouteResponseId
+var CreateRouteResponseResponse_RouteResponseKey = &sCreateRouteResponseResponse_RouteResponseKey
+
+var CreateRoutingRuleRequest = &sCreateRoutingRuleRequest
+var CreateRoutingRuleRequest_Actions = &sCreateRoutingRuleRequest_Actions
+var CreateRoutingRuleRequest_Conditions = &sCreateRoutingRuleRequest_Conditions
+var CreateRoutingRuleRequest_DomainName = &sCreateRoutingRuleRequest_DomainName
+var CreateRoutingRuleRequest_DomainNameId = &sCreateRoutingRuleRequest_DomainNameId
+var CreateRoutingRuleRequest_Priority = &sCreateRoutingRuleRequest_Priority
+
+var CreateRoutingRuleResponse = &sCreateRoutingRuleResponse
+var CreateRoutingRuleResponse_Actions = &sCreateRoutingRuleResponse_Actions
+var CreateRoutingRuleResponse_Conditions = &sCreateRoutingRuleResponse_Conditions
+var CreateRoutingRuleResponse_Priority = &sCreateRoutingRuleResponse_Priority
+var CreateRoutingRuleResponse_RoutingRuleArn = &sCreateRoutingRuleResponse_RoutingRuleArn
+var CreateRoutingRuleResponse_RoutingRuleId = &sCreateRoutingRuleResponse_RoutingRuleId
+
+var CreateStageRequest = &sCreateStageRequest
+var CreateStageRequest_AccessLogSettings = &sCreateStageRequest_AccessLogSettings
+var CreateStageRequest_ApiId = &sCreateStageRequest_ApiId
+var CreateStageRequest_AutoDeploy = &sCreateStageRequest_AutoDeploy
+var CreateStageRequest_ClientCertificateId = &sCreateStageRequest_ClientCertificateId
+var CreateStageRequest_DefaultRouteSettings = &sCreateStageRequest_DefaultRouteSettings
+var CreateStageRequest_DeploymentId = &sCreateStageRequest_DeploymentId
+var CreateStageRequest_Description = &sCreateStageRequest_Description
+var CreateStageRequest_RouteSettings = &sCreateStageRequest_RouteSettings
+var CreateStageRequest_StageName = &sCreateStageRequest_StageName
+var CreateStageRequest_StageVariables = &sCreateStageRequest_StageVariables
+var CreateStageRequest_Tags = &sCreateStageRequest_Tags
+
+var CreateStageResponse = &sCreateStageResponse
+var CreateStageResponse_AccessLogSettings = &sCreateStageResponse_AccessLogSettings
+var CreateStageResponse_ApiGatewayManaged = &sCreateStageResponse_ApiGatewayManaged
+var CreateStageResponse_AutoDeploy = &sCreateStageResponse_AutoDeploy
+var CreateStageResponse_ClientCertificateId = &sCreateStageResponse_ClientCertificateId
+var CreateStageResponse_CreatedDate = &sCreateStageResponse_CreatedDate
+var CreateStageResponse_DefaultRouteSettings = &sCreateStageResponse_DefaultRouteSettings
+var CreateStageResponse_DeploymentId = &sCreateStageResponse_DeploymentId
+var CreateStageResponse_Description = &sCreateStageResponse_Description
+var CreateStageResponse_LastDeploymentStatusMessage = &sCreateStageResponse_LastDeploymentStatusMessage
+var CreateStageResponse_LastUpdatedDate = &sCreateStageResponse_LastUpdatedDate
+var CreateStageResponse_RouteSettings = &sCreateStageResponse_RouteSettings
+var CreateStageResponse_StageName = &sCreateStageResponse_StageName
+var CreateStageResponse_StageVariables = &sCreateStageResponse_StageVariables
+var CreateStageResponse_Tags = &sCreateStageResponse_Tags
+
+var CreateVpcLinkRequest = &sCreateVpcLinkRequest
+var CreateVpcLinkRequest_Name = &sCreateVpcLinkRequest_Name
+var CreateVpcLinkRequest_SecurityGroupIds = &sCreateVpcLinkRequest_SecurityGroupIds
+var CreateVpcLinkRequest_SubnetIds = &sCreateVpcLinkRequest_SubnetIds
+var CreateVpcLinkRequest_Tags = &sCreateVpcLinkRequest_Tags
+
+var CreateVpcLinkResponse = &sCreateVpcLinkResponse
+var CreateVpcLinkResponse_CreatedDate = &sCreateVpcLinkResponse_CreatedDate
+var CreateVpcLinkResponse_Name = &sCreateVpcLinkResponse_Name
+var CreateVpcLinkResponse_SecurityGroupIds = &sCreateVpcLinkResponse_SecurityGroupIds
+var CreateVpcLinkResponse_SubnetIds = &sCreateVpcLinkResponse_SubnetIds
+var CreateVpcLinkResponse_Tags = &sCreateVpcLinkResponse_Tags
+var CreateVpcLinkResponse_VpcLinkId = &sCreateVpcLinkResponse_VpcLinkId
+var CreateVpcLinkResponse_VpcLinkStatus = &sCreateVpcLinkResponse_VpcLinkStatus
+var CreateVpcLinkResponse_VpcLinkStatusMessage = &sCreateVpcLinkResponse_VpcLinkStatusMessage
+var CreateVpcLinkResponse_VpcLinkVersion = &sCreateVpcLinkResponse_VpcLinkVersion
+
+var DeleteAccessLogSettingsRequest = &sDeleteAccessLogSettingsRequest
+var DeleteAccessLogSettingsRequest_ApiId = &sDeleteAccessLogSettingsRequest_ApiId
+var DeleteAccessLogSettingsRequest_StageName = &sDeleteAccessLogSettingsRequest_StageName
+
+var DeleteApiRequest = &sDeleteApiRequest
+var DeleteApiRequest_ApiId = &sDeleteApiRequest_ApiId
+
+var DeleteApiMappingRequest = &sDeleteApiMappingRequest
+var DeleteApiMappingRequest_ApiMappingId = &sDeleteApiMappingRequest_ApiMappingId
+var DeleteApiMappingRequest_DomainName = &sDeleteApiMappingRequest_DomainName
+
+var DeleteAuthorizerRequest = &sDeleteAuthorizerRequest
+var DeleteAuthorizerRequest_ApiId = &sDeleteAuthorizerRequest_ApiId
+var DeleteAuthorizerRequest_AuthorizerId = &sDeleteAuthorizerRequest_AuthorizerId
+
+var DeleteCorsConfigurationRequest = &sDeleteCorsConfigurationRequest
+var DeleteCorsConfigurationRequest_ApiId = &sDeleteCorsConfigurationRequest_ApiId
+
+var DeleteDeploymentRequest = &sDeleteDeploymentRequest
+var DeleteDeploymentRequest_ApiId = &sDeleteDeploymentRequest_ApiId
+var DeleteDeploymentRequest_DeploymentId = &sDeleteDeploymentRequest_DeploymentId
+
+var DeleteDomainNameRequest = &sDeleteDomainNameRequest
+var DeleteDomainNameRequest_DomainName = &sDeleteDomainNameRequest_DomainName
+
+var DeleteIntegrationRequest = &sDeleteIntegrationRequest
+var DeleteIntegrationRequest_ApiId = &sDeleteIntegrationRequest_ApiId
+var DeleteIntegrationRequest_IntegrationId = &sDeleteIntegrationRequest_IntegrationId
+
+var DeleteIntegrationResponseRequest = &sDeleteIntegrationResponseRequest
+var DeleteIntegrationResponseRequest_ApiId = &sDeleteIntegrationResponseRequest_ApiId
+var DeleteIntegrationResponseRequest_IntegrationId = &sDeleteIntegrationResponseRequest_IntegrationId
+var DeleteIntegrationResponseRequest_IntegrationResponseId = &sDeleteIntegrationResponseRequest_IntegrationResponseId
+
+var DeleteModelRequest = &sDeleteModelRequest
+var DeleteModelRequest_ApiId = &sDeleteModelRequest_ApiId
+var DeleteModelRequest_ModelId = &sDeleteModelRequest_ModelId
+
+var DeletePortalRequest = &sDeletePortalRequest
+var DeletePortalRequest_PortalId = &sDeletePortalRequest_PortalId
+
+var DeletePortalProductRequest = &sDeletePortalProductRequest
+var DeletePortalProductRequest_PortalProductId = &sDeletePortalProductRequest_PortalProductId
+
+var DeletePortalProductSharingPolicyRequest = &sDeletePortalProductSharingPolicyRequest
+var DeletePortalProductSharingPolicyRequest_PortalProductId = &sDeletePortalProductSharingPolicyRequest_PortalProductId
+
+var DeleteProductPageRequest = &sDeleteProductPageRequest
+var DeleteProductPageRequest_PortalProductId = &sDeleteProductPageRequest_PortalProductId
+var DeleteProductPageRequest_ProductPageId = &sDeleteProductPageRequest_ProductPageId
+
+var DeleteProductRestEndpointPageRequest = &sDeleteProductRestEndpointPageRequest
+var DeleteProductRestEndpointPageRequest_PortalProductId = &sDeleteProductRestEndpointPageRequest_PortalProductId
+var DeleteProductRestEndpointPageRequest_ProductRestEndpointPageId = &sDeleteProductRestEndpointPageRequest_ProductRestEndpointPageId
+
+var DeleteRouteRequest = &sDeleteRouteRequest
+var DeleteRouteRequest_ApiId = &sDeleteRouteRequest_ApiId
+var DeleteRouteRequest_RouteId = &sDeleteRouteRequest_RouteId
+
+var DeleteRouteRequestParameterRequest = &sDeleteRouteRequestParameterRequest
+var DeleteRouteRequestParameterRequest_ApiId = &sDeleteRouteRequestParameterRequest_ApiId
+var DeleteRouteRequestParameterRequest_RequestParameterKey = &sDeleteRouteRequestParameterRequest_RequestParameterKey
+var DeleteRouteRequestParameterRequest_RouteId = &sDeleteRouteRequestParameterRequest_RouteId
+
+var DeleteRouteResponseRequest = &sDeleteRouteResponseRequest
+var DeleteRouteResponseRequest_ApiId = &sDeleteRouteResponseRequest_ApiId
+var DeleteRouteResponseRequest_RouteId = &sDeleteRouteResponseRequest_RouteId
+var DeleteRouteResponseRequest_RouteResponseId = &sDeleteRouteResponseRequest_RouteResponseId
+
+var DeleteRouteSettingsRequest = &sDeleteRouteSettingsRequest
+var DeleteRouteSettingsRequest_ApiId = &sDeleteRouteSettingsRequest_ApiId
+var DeleteRouteSettingsRequest_RouteKey = &sDeleteRouteSettingsRequest_RouteKey
+var DeleteRouteSettingsRequest_StageName = &sDeleteRouteSettingsRequest_StageName
+
+var DeleteRoutingRuleRequest = &sDeleteRoutingRuleRequest
+var DeleteRoutingRuleRequest_DomainName = &sDeleteRoutingRuleRequest_DomainName
+var DeleteRoutingRuleRequest_DomainNameId = &sDeleteRoutingRuleRequest_DomainNameId
+var DeleteRoutingRuleRequest_RoutingRuleId = &sDeleteRoutingRuleRequest_RoutingRuleId
+
+var DeleteStageRequest = &sDeleteStageRequest
+var DeleteStageRequest_ApiId = &sDeleteStageRequest_ApiId
+var DeleteStageRequest_StageName = &sDeleteStageRequest_StageName
+
+var DeleteVpcLinkRequest = &sDeleteVpcLinkRequest
+var DeleteVpcLinkRequest_VpcLinkId = &sDeleteVpcLinkRequest_VpcLinkId
+
+var DeleteVpcLinkResponse = &sDeleteVpcLinkResponse
+
+var DisablePortalRequest = &sDisablePortalRequest
+var DisablePortalRequest_PortalId = &sDisablePortalRequest_PortalId
+
+var ExportApiRequest = &sExportApiRequest
+var ExportApiRequest_ApiId = &sExportApiRequest_ApiId
+var ExportApiRequest_ExportVersion = &sExportApiRequest_ExportVersion
+var ExportApiRequest_IncludeExtensions = &sExportApiRequest_IncludeExtensions
+var ExportApiRequest_OutputType = &sExportApiRequest_OutputType
+var ExportApiRequest_Specification = &sExportApiRequest_Specification
+var ExportApiRequest_StageName = &sExportApiRequest_StageName
+
+var ExportApiResponse = &sExportApiResponse
+var ExportApiResponse_body = &sExportApiResponse_body
+
+var GetApiRequest = &sGetApiRequest
+var GetApiRequest_ApiId = &sGetApiRequest_ApiId
+
+var GetApiMappingRequest = &sGetApiMappingRequest
+var GetApiMappingRequest_ApiMappingId = &sGetApiMappingRequest_ApiMappingId
+var GetApiMappingRequest_DomainName = &sGetApiMappingRequest_DomainName
+
+var GetApiMappingResponse = &sGetApiMappingResponse
+var GetApiMappingResponse_ApiId = &sGetApiMappingResponse_ApiId
+var GetApiMappingResponse_ApiMappingId = &sGetApiMappingResponse_ApiMappingId
+var GetApiMappingResponse_ApiMappingKey = &sGetApiMappingResponse_ApiMappingKey
+var GetApiMappingResponse_Stage = &sGetApiMappingResponse_Stage
+
+var GetApiMappingsRequest = &sGetApiMappingsRequest
+var GetApiMappingsRequest_DomainName = &sGetApiMappingsRequest_DomainName
+var GetApiMappingsRequest_MaxResults = &sGetApiMappingsRequest_MaxResults
+var GetApiMappingsRequest_NextToken = &sGetApiMappingsRequest_NextToken
+
+var GetApiMappingsResponse = &sGetApiMappingsResponse
+var GetApiMappingsResponse_Items = &sGetApiMappingsResponse_Items
+var GetApiMappingsResponse_NextToken = &sGetApiMappingsResponse_NextToken
+
+var GetApiResponse = &sGetApiResponse
+var GetApiResponse_ApiEndpoint = &sGetApiResponse_ApiEndpoint
+var GetApiResponse_ApiGatewayManaged = &sGetApiResponse_ApiGatewayManaged
+var GetApiResponse_ApiId = &sGetApiResponse_ApiId
+var GetApiResponse_ApiKeySelectionExpression = &sGetApiResponse_ApiKeySelectionExpression
+var GetApiResponse_CorsConfiguration = &sGetApiResponse_CorsConfiguration
+var GetApiResponse_CreatedDate = &sGetApiResponse_CreatedDate
+var GetApiResponse_Description = &sGetApiResponse_Description
+var GetApiResponse_DisableSchemaValidation = &sGetApiResponse_DisableSchemaValidation
+var GetApiResponse_DisableExecuteApiEndpoint = &sGetApiResponse_DisableExecuteApiEndpoint
+var GetApiResponse_ImportInfo = &sGetApiResponse_ImportInfo
+var GetApiResponse_IpAddressType = &sGetApiResponse_IpAddressType
+var GetApiResponse_Name = &sGetApiResponse_Name
+var GetApiResponse_ProtocolType = &sGetApiResponse_ProtocolType
+var GetApiResponse_RouteSelectionExpression = &sGetApiResponse_RouteSelectionExpression
+var GetApiResponse_Tags = &sGetApiResponse_Tags
+var GetApiResponse_Version = &sGetApiResponse_Version
+var GetApiResponse_Warnings = &sGetApiResponse_Warnings
+
+var GetApisRequest = &sGetApisRequest
+var GetApisRequest_MaxResults = &sGetApisRequest_MaxResults
+var GetApisRequest_NextToken = &sGetApisRequest_NextToken
+
+var GetApisResponse = &sGetApisResponse
+var GetApisResponse_Items = &sGetApisResponse_Items
+var GetApisResponse_NextToken = &sGetApisResponse_NextToken
+
+var GetAuthorizerRequest = &sGetAuthorizerRequest
+var GetAuthorizerRequest_ApiId = &sGetAuthorizerRequest_ApiId
+var GetAuthorizerRequest_AuthorizerId = &sGetAuthorizerRequest_AuthorizerId
+
+var GetAuthorizerResponse = &sGetAuthorizerResponse
+var GetAuthorizerResponse_AuthorizerCredentialsArn = &sGetAuthorizerResponse_AuthorizerCredentialsArn
+var GetAuthorizerResponse_AuthorizerId = &sGetAuthorizerResponse_AuthorizerId
+var GetAuthorizerResponse_AuthorizerPayloadFormatVersion = &sGetAuthorizerResponse_AuthorizerPayloadFormatVersion
+var GetAuthorizerResponse_AuthorizerResultTtlInSeconds = &sGetAuthorizerResponse_AuthorizerResultTtlInSeconds
+var GetAuthorizerResponse_AuthorizerType = &sGetAuthorizerResponse_AuthorizerType
+var GetAuthorizerResponse_AuthorizerUri = &sGetAuthorizerResponse_AuthorizerUri
+var GetAuthorizerResponse_EnableSimpleResponses = &sGetAuthorizerResponse_EnableSimpleResponses
+var GetAuthorizerResponse_IdentitySource = &sGetAuthorizerResponse_IdentitySource
+var GetAuthorizerResponse_IdentityValidationExpression = &sGetAuthorizerResponse_IdentityValidationExpression
+var GetAuthorizerResponse_JwtConfiguration = &sGetAuthorizerResponse_JwtConfiguration
+var GetAuthorizerResponse_Name = &sGetAuthorizerResponse_Name
+
+var GetAuthorizersRequest = &sGetAuthorizersRequest
+var GetAuthorizersRequest_ApiId = &sGetAuthorizersRequest_ApiId
+var GetAuthorizersRequest_MaxResults = &sGetAuthorizersRequest_MaxResults
+var GetAuthorizersRequest_NextToken = &sGetAuthorizersRequest_NextToken
+
+var GetAuthorizersResponse = &sGetAuthorizersResponse
+var GetAuthorizersResponse_Items = &sGetAuthorizersResponse_Items
+var GetAuthorizersResponse_NextToken = &sGetAuthorizersResponse_NextToken
+
+var GetDeploymentRequest = &sGetDeploymentRequest
+var GetDeploymentRequest_ApiId = &sGetDeploymentRequest_ApiId
+var GetDeploymentRequest_DeploymentId = &sGetDeploymentRequest_DeploymentId
+
+var GetDeploymentResponse = &sGetDeploymentResponse
+var GetDeploymentResponse_AutoDeployed = &sGetDeploymentResponse_AutoDeployed
+var GetDeploymentResponse_CreatedDate = &sGetDeploymentResponse_CreatedDate
+var GetDeploymentResponse_DeploymentId = &sGetDeploymentResponse_DeploymentId
+var GetDeploymentResponse_DeploymentStatus = &sGetDeploymentResponse_DeploymentStatus
+var GetDeploymentResponse_DeploymentStatusMessage = &sGetDeploymentResponse_DeploymentStatusMessage
+var GetDeploymentResponse_Description = &sGetDeploymentResponse_Description
+
+var GetDeploymentsRequest = &sGetDeploymentsRequest
+var GetDeploymentsRequest_ApiId = &sGetDeploymentsRequest_ApiId
+var GetDeploymentsRequest_MaxResults = &sGetDeploymentsRequest_MaxResults
+var GetDeploymentsRequest_NextToken = &sGetDeploymentsRequest_NextToken
+
+var GetDeploymentsResponse = &sGetDeploymentsResponse
+var GetDeploymentsResponse_Items = &sGetDeploymentsResponse_Items
+var GetDeploymentsResponse_NextToken = &sGetDeploymentsResponse_NextToken
+
+var GetDomainNameRequest = &sGetDomainNameRequest
+var GetDomainNameRequest_DomainName = &sGetDomainNameRequest_DomainName
+
+var GetDomainNameResponse = &sGetDomainNameResponse
+var GetDomainNameResponse_ApiMappingSelectionExpression = &sGetDomainNameResponse_ApiMappingSelectionExpression
+var GetDomainNameResponse_DomainName = &sGetDomainNameResponse_DomainName
+var GetDomainNameResponse_DomainNameArn = &sGetDomainNameResponse_DomainNameArn
+var GetDomainNameResponse_DomainNameConfigurations = &sGetDomainNameResponse_DomainNameConfigurations
+var GetDomainNameResponse_MutualTlsAuthentication = &sGetDomainNameResponse_MutualTlsAuthentication
+var GetDomainNameResponse_RoutingMode = &sGetDomainNameResponse_RoutingMode
+var GetDomainNameResponse_Tags = &sGetDomainNameResponse_Tags
+
+var GetDomainNamesRequest = &sGetDomainNamesRequest
+var GetDomainNamesRequest_MaxResults = &sGetDomainNamesRequest_MaxResults
+var GetDomainNamesRequest_NextToken = &sGetDomainNamesRequest_NextToken
+
+var GetDomainNamesResponse = &sGetDomainNamesResponse
+var GetDomainNamesResponse_Items = &sGetDomainNamesResponse_Items
+var GetDomainNamesResponse_NextToken = &sGetDomainNamesResponse_NextToken
+
+var GetIntegrationRequest = &sGetIntegrationRequest
+var GetIntegrationRequest_ApiId = &sGetIntegrationRequest_ApiId
+var GetIntegrationRequest_IntegrationId = &sGetIntegrationRequest_IntegrationId
+
+var GetIntegrationResult = &sGetIntegrationResult
+var GetIntegrationResult_ApiGatewayManaged = &sGetIntegrationResult_ApiGatewayManaged
+var GetIntegrationResult_ConnectionId = &sGetIntegrationResult_ConnectionId
+var GetIntegrationResult_ConnectionType = &sGetIntegrationResult_ConnectionType
+var GetIntegrationResult_ContentHandlingStrategy = &sGetIntegrationResult_ContentHandlingStrategy
+var GetIntegrationResult_CredentialsArn = &sGetIntegrationResult_CredentialsArn
+var GetIntegrationResult_Description = &sGetIntegrationResult_Description
+var GetIntegrationResult_IntegrationId = &sGetIntegrationResult_IntegrationId
+var GetIntegrationResult_IntegrationMethod = &sGetIntegrationResult_IntegrationMethod
+var GetIntegrationResult_IntegrationResponseSelectionExpression = &sGetIntegrationResult_IntegrationResponseSelectionExpression
+var GetIntegrationResult_IntegrationSubtype = &sGetIntegrationResult_IntegrationSubtype
+var GetIntegrationResult_IntegrationType = &sGetIntegrationResult_IntegrationType
+var GetIntegrationResult_IntegrationUri = &sGetIntegrationResult_IntegrationUri
+var GetIntegrationResult_PassthroughBehavior = &sGetIntegrationResult_PassthroughBehavior
+var GetIntegrationResult_PayloadFormatVersion = &sGetIntegrationResult_PayloadFormatVersion
+var GetIntegrationResult_RequestParameters = &sGetIntegrationResult_RequestParameters
+var GetIntegrationResult_RequestTemplates = &sGetIntegrationResult_RequestTemplates
+var GetIntegrationResult_ResponseParameters = &sGetIntegrationResult_ResponseParameters
+var GetIntegrationResult_TemplateSelectionExpression = &sGetIntegrationResult_TemplateSelectionExpression
+var GetIntegrationResult_TimeoutInMillis = &sGetIntegrationResult_TimeoutInMillis
+var GetIntegrationResult_TlsConfig = &sGetIntegrationResult_TlsConfig
+
+var GetIntegrationResponseRequest = &sGetIntegrationResponseRequest
+var GetIntegrationResponseRequest_ApiId = &sGetIntegrationResponseRequest_ApiId
+var GetIntegrationResponseRequest_IntegrationId = &sGetIntegrationResponseRequest_IntegrationId
+var GetIntegrationResponseRequest_IntegrationResponseId = &sGetIntegrationResponseRequest_IntegrationResponseId
+
+var GetIntegrationResponseResponse = &sGetIntegrationResponseResponse
+var GetIntegrationResponseResponse_ContentHandlingStrategy = &sGetIntegrationResponseResponse_ContentHandlingStrategy
+var GetIntegrationResponseResponse_IntegrationResponseId = &sGetIntegrationResponseResponse_IntegrationResponseId
+var GetIntegrationResponseResponse_IntegrationResponseKey = &sGetIntegrationResponseResponse_IntegrationResponseKey
+var GetIntegrationResponseResponse_ResponseParameters = &sGetIntegrationResponseResponse_ResponseParameters
+var GetIntegrationResponseResponse_ResponseTemplates = &sGetIntegrationResponseResponse_ResponseTemplates
+var GetIntegrationResponseResponse_TemplateSelectionExpression = &sGetIntegrationResponseResponse_TemplateSelectionExpression
+
+var GetIntegrationResponsesRequest = &sGetIntegrationResponsesRequest
+var GetIntegrationResponsesRequest_ApiId = &sGetIntegrationResponsesRequest_ApiId
+var GetIntegrationResponsesRequest_IntegrationId = &sGetIntegrationResponsesRequest_IntegrationId
+var GetIntegrationResponsesRequest_MaxResults = &sGetIntegrationResponsesRequest_MaxResults
+var GetIntegrationResponsesRequest_NextToken = &sGetIntegrationResponsesRequest_NextToken
+
+var GetIntegrationResponsesResponse = &sGetIntegrationResponsesResponse
+var GetIntegrationResponsesResponse_Items = &sGetIntegrationResponsesResponse_Items
+var GetIntegrationResponsesResponse_NextToken = &sGetIntegrationResponsesResponse_NextToken
+
+var GetIntegrationsRequest = &sGetIntegrationsRequest
+var GetIntegrationsRequest_ApiId = &sGetIntegrationsRequest_ApiId
+var GetIntegrationsRequest_MaxResults = &sGetIntegrationsRequest_MaxResults
+var GetIntegrationsRequest_NextToken = &sGetIntegrationsRequest_NextToken
+
+var GetIntegrationsResponse = &sGetIntegrationsResponse
+var GetIntegrationsResponse_Items = &sGetIntegrationsResponse_Items
+var GetIntegrationsResponse_NextToken = &sGetIntegrationsResponse_NextToken
+
+var GetModelRequest = &sGetModelRequest
+var GetModelRequest_ApiId = &sGetModelRequest_ApiId
+var GetModelRequest_ModelId = &sGetModelRequest_ModelId
+
+var GetModelResponse = &sGetModelResponse
+var GetModelResponse_ContentType = &sGetModelResponse_ContentType
+var GetModelResponse_Description = &sGetModelResponse_Description
+var GetModelResponse_ModelId = &sGetModelResponse_ModelId
+var GetModelResponse_Name = &sGetModelResponse_Name
+var GetModelResponse_Schema = &sGetModelResponse_Schema
+
+var GetModelsRequest = &sGetModelsRequest
+var GetModelsRequest_ApiId = &sGetModelsRequest_ApiId
+var GetModelsRequest_MaxResults = &sGetModelsRequest_MaxResults
+var GetModelsRequest_NextToken = &sGetModelsRequest_NextToken
+
+var GetModelsResponse = &sGetModelsResponse
+var GetModelsResponse_Items = &sGetModelsResponse_Items
+var GetModelsResponse_NextToken = &sGetModelsResponse_NextToken
+
+var GetModelTemplateRequest = &sGetModelTemplateRequest
+var GetModelTemplateRequest_ApiId = &sGetModelTemplateRequest_ApiId
+var GetModelTemplateRequest_ModelId = &sGetModelTemplateRequest_ModelId
+
+var GetModelTemplateResponse = &sGetModelTemplateResponse
+var GetModelTemplateResponse_Value = &sGetModelTemplateResponse_Value
+
+var GetPortalRequest = &sGetPortalRequest
+var GetPortalRequest_PortalId = &sGetPortalRequest_PortalId
+
+var GetPortalResponse = &sGetPortalResponse
+var GetPortalResponse_Authorization = &sGetPortalResponse_Authorization
+var GetPortalResponse_EndpointConfiguration = &sGetPortalResponse_EndpointConfiguration
+var GetPortalResponse_IncludedPortalProductArns = &sGetPortalResponse_IncludedPortalProductArns
+var GetPortalResponse_LastModified = &sGetPortalResponse_LastModified
+var GetPortalResponse_LastPublished = &sGetPortalResponse_LastPublished
+var GetPortalResponse_LastPublishedDescription = &sGetPortalResponse_LastPublishedDescription
+var GetPortalResponse_PortalArn = &sGetPortalResponse_PortalArn
+var GetPortalResponse_PortalContent = &sGetPortalResponse_PortalContent
+var GetPortalResponse_PortalId = &sGetPortalResponse_PortalId
+var GetPortalResponse_Preview = &sGetPortalResponse_Preview
+var GetPortalResponse_PublishStatus = &sGetPortalResponse_PublishStatus
+var GetPortalResponse_RumAppMonitorName = &sGetPortalResponse_RumAppMonitorName
+var GetPortalResponse_StatusException = &sGetPortalResponse_StatusException
+var GetPortalResponse_Tags = &sGetPortalResponse_Tags
+
+var GetPortalProductRequest = &sGetPortalProductRequest
+var GetPortalProductRequest_PortalProductId = &sGetPortalProductRequest_PortalProductId
+var GetPortalProductRequest_ResourceOwnerAccountId = &sGetPortalProductRequest_ResourceOwnerAccountId
+
+var GetPortalProductResponse = &sGetPortalProductResponse
+var GetPortalProductResponse_Description = &sGetPortalProductResponse_Description
+var GetPortalProductResponse_DisplayName = &sGetPortalProductResponse_DisplayName
+var GetPortalProductResponse_DisplayOrder = &sGetPortalProductResponse_DisplayOrder
+var GetPortalProductResponse_LastModified = &sGetPortalProductResponse_LastModified
+var GetPortalProductResponse_PortalProductArn = &sGetPortalProductResponse_PortalProductArn
+var GetPortalProductResponse_PortalProductId = &sGetPortalProductResponse_PortalProductId
+var GetPortalProductResponse_Tags = &sGetPortalProductResponse_Tags
+
+var GetPortalProductSharingPolicyRequest = &sGetPortalProductSharingPolicyRequest
+var GetPortalProductSharingPolicyRequest_PortalProductId = &sGetPortalProductSharingPolicyRequest_PortalProductId
+
+var GetPortalProductSharingPolicyResponse = &sGetPortalProductSharingPolicyResponse
+var GetPortalProductSharingPolicyResponse_PolicyDocument = &sGetPortalProductSharingPolicyResponse_PolicyDocument
+var GetPortalProductSharingPolicyResponse_PortalProductId = &sGetPortalProductSharingPolicyResponse_PortalProductId
+
+var GetProductPageRequest = &sGetProductPageRequest
+var GetProductPageRequest_PortalProductId = &sGetProductPageRequest_PortalProductId
+var GetProductPageRequest_ProductPageId = &sGetProductPageRequest_ProductPageId
+var GetProductPageRequest_ResourceOwnerAccountId = &sGetProductPageRequest_ResourceOwnerAccountId
+
+var GetProductPageResponse = &sGetProductPageResponse
+var GetProductPageResponse_DisplayContent = &sGetProductPageResponse_DisplayContent
+var GetProductPageResponse_LastModified = &sGetProductPageResponse_LastModified
+var GetProductPageResponse_ProductPageArn = &sGetProductPageResponse_ProductPageArn
+var GetProductPageResponse_ProductPageId = &sGetProductPageResponse_ProductPageId
+
+var GetProductRestEndpointPageRequest = &sGetProductRestEndpointPageRequest
+var GetProductRestEndpointPageRequest_IncludeRawDisplayContent = &sGetProductRestEndpointPageRequest_IncludeRawDisplayContent
+var GetProductRestEndpointPageRequest_PortalProductId = &sGetProductRestEndpointPageRequest_PortalProductId
+var GetProductRestEndpointPageRequest_ProductRestEndpointPageId = &sGetProductRestEndpointPageRequest_ProductRestEndpointPageId
+var GetProductRestEndpointPageRequest_ResourceOwnerAccountId = &sGetProductRestEndpointPageRequest_ResourceOwnerAccountId
+
+var GetProductRestEndpointPageResponse = &sGetProductRestEndpointPageResponse
+var GetProductRestEndpointPageResponse_DisplayContent = &sGetProductRestEndpointPageResponse_DisplayContent
+var GetProductRestEndpointPageResponse_LastModified = &sGetProductRestEndpointPageResponse_LastModified
+var GetProductRestEndpointPageResponse_ProductRestEndpointPageArn = &sGetProductRestEndpointPageResponse_ProductRestEndpointPageArn
+var GetProductRestEndpointPageResponse_ProductRestEndpointPageId = &sGetProductRestEndpointPageResponse_ProductRestEndpointPageId
+var GetProductRestEndpointPageResponse_RawDisplayContent = &sGetProductRestEndpointPageResponse_RawDisplayContent
+var GetProductRestEndpointPageResponse_RestEndpointIdentifier = &sGetProductRestEndpointPageResponse_RestEndpointIdentifier
+var GetProductRestEndpointPageResponse_Status = &sGetProductRestEndpointPageResponse_Status
+var GetProductRestEndpointPageResponse_StatusException = &sGetProductRestEndpointPageResponse_StatusException
+var GetProductRestEndpointPageResponse_TryItState = &sGetProductRestEndpointPageResponse_TryItState
+
+var GetRouteRequest = &sGetRouteRequest
+var GetRouteRequest_ApiId = &sGetRouteRequest_ApiId
+var GetRouteRequest_RouteId = &sGetRouteRequest_RouteId
+
+var GetRouteResult = &sGetRouteResult
+var GetRouteResult_ApiGatewayManaged = &sGetRouteResult_ApiGatewayManaged
+var GetRouteResult_ApiKeyRequired = &sGetRouteResult_ApiKeyRequired
+var GetRouteResult_AuthorizationScopes = &sGetRouteResult_AuthorizationScopes
+var GetRouteResult_AuthorizationType = &sGetRouteResult_AuthorizationType
+var GetRouteResult_AuthorizerId = &sGetRouteResult_AuthorizerId
+var GetRouteResult_ModelSelectionExpression = &sGetRouteResult_ModelSelectionExpression
+var GetRouteResult_OperationName = &sGetRouteResult_OperationName
+var GetRouteResult_RequestModels = &sGetRouteResult_RequestModels
+var GetRouteResult_RequestParameters = &sGetRouteResult_RequestParameters
+var GetRouteResult_RouteId = &sGetRouteResult_RouteId
+var GetRouteResult_RouteKey = &sGetRouteResult_RouteKey
+var GetRouteResult_RouteResponseSelectionExpression = &sGetRouteResult_RouteResponseSelectionExpression
+var GetRouteResult_Target = &sGetRouteResult_Target
+
+var GetRouteResponseRequest = &sGetRouteResponseRequest
+var GetRouteResponseRequest_ApiId = &sGetRouteResponseRequest_ApiId
+var GetRouteResponseRequest_RouteId = &sGetRouteResponseRequest_RouteId
+var GetRouteResponseRequest_RouteResponseId = &sGetRouteResponseRequest_RouteResponseId
+
+var GetRouteResponseResponse = &sGetRouteResponseResponse
+var GetRouteResponseResponse_ModelSelectionExpression = &sGetRouteResponseResponse_ModelSelectionExpression
+var GetRouteResponseResponse_ResponseModels = &sGetRouteResponseResponse_ResponseModels
+var GetRouteResponseResponse_ResponseParameters = &sGetRouteResponseResponse_ResponseParameters
+var GetRouteResponseResponse_RouteResponseId = &sGetRouteResponseResponse_RouteResponseId
+var GetRouteResponseResponse_RouteResponseKey = &sGetRouteResponseResponse_RouteResponseKey
+
+var GetRouteResponsesRequest = &sGetRouteResponsesRequest
+var GetRouteResponsesRequest_ApiId = &sGetRouteResponsesRequest_ApiId
+var GetRouteResponsesRequest_MaxResults = &sGetRouteResponsesRequest_MaxResults
+var GetRouteResponsesRequest_NextToken = &sGetRouteResponsesRequest_NextToken
+var GetRouteResponsesRequest_RouteId = &sGetRouteResponsesRequest_RouteId
+
+var GetRouteResponsesResponse = &sGetRouteResponsesResponse
+var GetRouteResponsesResponse_Items = &sGetRouteResponsesResponse_Items
+var GetRouteResponsesResponse_NextToken = &sGetRouteResponsesResponse_NextToken
+
+var GetRoutesRequest = &sGetRoutesRequest
+var GetRoutesRequest_ApiId = &sGetRoutesRequest_ApiId
+var GetRoutesRequest_MaxResults = &sGetRoutesRequest_MaxResults
+var GetRoutesRequest_NextToken = &sGetRoutesRequest_NextToken
+
+var GetRoutesResponse = &sGetRoutesResponse
+var GetRoutesResponse_Items = &sGetRoutesResponse_Items
+var GetRoutesResponse_NextToken = &sGetRoutesResponse_NextToken
+
+var GetRoutingRuleRequest = &sGetRoutingRuleRequest
+var GetRoutingRuleRequest_DomainName = &sGetRoutingRuleRequest_DomainName
+var GetRoutingRuleRequest_DomainNameId = &sGetRoutingRuleRequest_DomainNameId
+var GetRoutingRuleRequest_RoutingRuleId = &sGetRoutingRuleRequest_RoutingRuleId
+
+var GetRoutingRuleResponse = &sGetRoutingRuleResponse
+var GetRoutingRuleResponse_Actions = &sGetRoutingRuleResponse_Actions
+var GetRoutingRuleResponse_Conditions = &sGetRoutingRuleResponse_Conditions
+var GetRoutingRuleResponse_Priority = &sGetRoutingRuleResponse_Priority
+var GetRoutingRuleResponse_RoutingRuleArn = &sGetRoutingRuleResponse_RoutingRuleArn
+var GetRoutingRuleResponse_RoutingRuleId = &sGetRoutingRuleResponse_RoutingRuleId
+
+var GetStageRequest = &sGetStageRequest
+var GetStageRequest_ApiId = &sGetStageRequest_ApiId
+var GetStageRequest_StageName = &sGetStageRequest_StageName
+
+var GetStageResponse = &sGetStageResponse
+var GetStageResponse_AccessLogSettings = &sGetStageResponse_AccessLogSettings
+var GetStageResponse_ApiGatewayManaged = &sGetStageResponse_ApiGatewayManaged
+var GetStageResponse_AutoDeploy = &sGetStageResponse_AutoDeploy
+var GetStageResponse_ClientCertificateId = &sGetStageResponse_ClientCertificateId
+var GetStageResponse_CreatedDate = &sGetStageResponse_CreatedDate
+var GetStageResponse_DefaultRouteSettings = &sGetStageResponse_DefaultRouteSettings
+var GetStageResponse_DeploymentId = &sGetStageResponse_DeploymentId
+var GetStageResponse_Description = &sGetStageResponse_Description
+var GetStageResponse_LastDeploymentStatusMessage = &sGetStageResponse_LastDeploymentStatusMessage
+var GetStageResponse_LastUpdatedDate = &sGetStageResponse_LastUpdatedDate
+var GetStageResponse_RouteSettings = &sGetStageResponse_RouteSettings
+var GetStageResponse_StageName = &sGetStageResponse_StageName
+var GetStageResponse_StageVariables = &sGetStageResponse_StageVariables
+var GetStageResponse_Tags = &sGetStageResponse_Tags
+
+var GetStagesRequest = &sGetStagesRequest
+var GetStagesRequest_ApiId = &sGetStagesRequest_ApiId
+var GetStagesRequest_MaxResults = &sGetStagesRequest_MaxResults
+var GetStagesRequest_NextToken = &sGetStagesRequest_NextToken
+
+var GetStagesResponse = &sGetStagesResponse
+var GetStagesResponse_Items = &sGetStagesResponse_Items
+var GetStagesResponse_NextToken = &sGetStagesResponse_NextToken
+
+var GetTagsRequest = &sGetTagsRequest
+var GetTagsRequest_ResourceArn = &sGetTagsRequest_ResourceArn
+
+var GetTagsResponse = &sGetTagsResponse
+var GetTagsResponse_Tags = &sGetTagsResponse_Tags
+
+var GetVpcLinkRequest = &sGetVpcLinkRequest
+var GetVpcLinkRequest_VpcLinkId = &sGetVpcLinkRequest_VpcLinkId
+
+var GetVpcLinkResponse = &sGetVpcLinkResponse
+var GetVpcLinkResponse_CreatedDate = &sGetVpcLinkResponse_CreatedDate
+var GetVpcLinkResponse_Name = &sGetVpcLinkResponse_Name
+var GetVpcLinkResponse_SecurityGroupIds = &sGetVpcLinkResponse_SecurityGroupIds
+var GetVpcLinkResponse_SubnetIds = &sGetVpcLinkResponse_SubnetIds
+var GetVpcLinkResponse_Tags = &sGetVpcLinkResponse_Tags
+var GetVpcLinkResponse_VpcLinkId = &sGetVpcLinkResponse_VpcLinkId
+var GetVpcLinkResponse_VpcLinkStatus = &sGetVpcLinkResponse_VpcLinkStatus
+var GetVpcLinkResponse_VpcLinkStatusMessage = &sGetVpcLinkResponse_VpcLinkStatusMessage
+var GetVpcLinkResponse_VpcLinkVersion = &sGetVpcLinkResponse_VpcLinkVersion
+
+var GetVpcLinksRequest = &sGetVpcLinksRequest
+var GetVpcLinksRequest_MaxResults = &sGetVpcLinksRequest_MaxResults
+var GetVpcLinksRequest_NextToken = &sGetVpcLinksRequest_NextToken
+
+var GetVpcLinksResponse = &sGetVpcLinksResponse
+var GetVpcLinksResponse_Items = &sGetVpcLinksResponse_Items
+var GetVpcLinksResponse_NextToken = &sGetVpcLinksResponse_NextToken
+
+var ImportApiRequest = &sImportApiRequest
+var ImportApiRequest_Basepath = &sImportApiRequest_Basepath
+var ImportApiRequest_Body = &sImportApiRequest_Body
+var ImportApiRequest_FailOnWarnings = &sImportApiRequest_FailOnWarnings
+
+var ImportApiResponse = &sImportApiResponse
+var ImportApiResponse_ApiEndpoint = &sImportApiResponse_ApiEndpoint
+var ImportApiResponse_ApiGatewayManaged = &sImportApiResponse_ApiGatewayManaged
+var ImportApiResponse_ApiId = &sImportApiResponse_ApiId
+var ImportApiResponse_ApiKeySelectionExpression = &sImportApiResponse_ApiKeySelectionExpression
+var ImportApiResponse_CorsConfiguration = &sImportApiResponse_CorsConfiguration
+var ImportApiResponse_CreatedDate = &sImportApiResponse_CreatedDate
+var ImportApiResponse_Description = &sImportApiResponse_Description
+var ImportApiResponse_DisableSchemaValidation = &sImportApiResponse_DisableSchemaValidation
+var ImportApiResponse_DisableExecuteApiEndpoint = &sImportApiResponse_DisableExecuteApiEndpoint
+var ImportApiResponse_ImportInfo = &sImportApiResponse_ImportInfo
+var ImportApiResponse_IpAddressType = &sImportApiResponse_IpAddressType
+var ImportApiResponse_Name = &sImportApiResponse_Name
+var ImportApiResponse_ProtocolType = &sImportApiResponse_ProtocolType
+var ImportApiResponse_RouteSelectionExpression = &sImportApiResponse_RouteSelectionExpression
+var ImportApiResponse_Tags = &sImportApiResponse_Tags
+var ImportApiResponse_Version = &sImportApiResponse_Version
+var ImportApiResponse_Warnings = &sImportApiResponse_Warnings
+
+var ListPortalProductsRequest = &sListPortalProductsRequest
+var ListPortalProductsRequest_MaxResults = &sListPortalProductsRequest_MaxResults
+var ListPortalProductsRequest_NextToken = &sListPortalProductsRequest_NextToken
+var ListPortalProductsRequest_ResourceOwner = &sListPortalProductsRequest_ResourceOwner
+
+var ListPortalProductsResponse = &sListPortalProductsResponse
+var ListPortalProductsResponse_Items = &sListPortalProductsResponse_Items
+var ListPortalProductsResponse_NextToken = &sListPortalProductsResponse_NextToken
+
+var ListPortalsRequest = &sListPortalsRequest
+var ListPortalsRequest_MaxResults = &sListPortalsRequest_MaxResults
+var ListPortalsRequest_NextToken = &sListPortalsRequest_NextToken
+
+var ListPortalsResponse = &sListPortalsResponse
+var ListPortalsResponse_Items = &sListPortalsResponse_Items
+var ListPortalsResponse_NextToken = &sListPortalsResponse_NextToken
+
+var ListProductPagesRequest = &sListProductPagesRequest
+var ListProductPagesRequest_MaxResults = &sListProductPagesRequest_MaxResults
+var ListProductPagesRequest_NextToken = &sListProductPagesRequest_NextToken
+var ListProductPagesRequest_PortalProductId = &sListProductPagesRequest_PortalProductId
+var ListProductPagesRequest_ResourceOwnerAccountId = &sListProductPagesRequest_ResourceOwnerAccountId
+
+var ListProductPagesResponse = &sListProductPagesResponse
+var ListProductPagesResponse_Items = &sListProductPagesResponse_Items
+var ListProductPagesResponse_NextToken = &sListProductPagesResponse_NextToken
+
+var ListProductRestEndpointPagesRequest = &sListProductRestEndpointPagesRequest
+var ListProductRestEndpointPagesRequest_MaxResults = &sListProductRestEndpointPagesRequest_MaxResults
+var ListProductRestEndpointPagesRequest_NextToken = &sListProductRestEndpointPagesRequest_NextToken
+var ListProductRestEndpointPagesRequest_PortalProductId = &sListProductRestEndpointPagesRequest_PortalProductId
+var ListProductRestEndpointPagesRequest_ResourceOwnerAccountId = &sListProductRestEndpointPagesRequest_ResourceOwnerAccountId
+
+var ListProductRestEndpointPagesResponse = &sListProductRestEndpointPagesResponse
+var ListProductRestEndpointPagesResponse_Items = &sListProductRestEndpointPagesResponse_Items
+var ListProductRestEndpointPagesResponse_NextToken = &sListProductRestEndpointPagesResponse_NextToken
+
+var ListRoutingRulesRequest = &sListRoutingRulesRequest
+var ListRoutingRulesRequest_DomainName = &sListRoutingRulesRequest_DomainName
+var ListRoutingRulesRequest_DomainNameId = &sListRoutingRulesRequest_DomainNameId
+var ListRoutingRulesRequest_MaxResults = &sListRoutingRulesRequest_MaxResults
+var ListRoutingRulesRequest_NextToken = &sListRoutingRulesRequest_NextToken
+
+var ListRoutingRulesResponse = &sListRoutingRulesResponse
+var ListRoutingRulesResponse_NextToken = &sListRoutingRulesResponse_NextToken
+var ListRoutingRulesResponse_RoutingRules = &sListRoutingRulesResponse_RoutingRules
+
+var PreviewPortalRequest = &sPreviewPortalRequest
+var PreviewPortalRequest_PortalId = &sPreviewPortalRequest_PortalId
+
+var PreviewPortalResponse = &sPreviewPortalResponse
+
+var PublishPortalRequest = &sPublishPortalRequest
+var PublishPortalRequest_Description = &sPublishPortalRequest_Description
+var PublishPortalRequest_PortalId = &sPublishPortalRequest_PortalId
+
+var PublishPortalResponse = &sPublishPortalResponse
+
+var PutPortalProductSharingPolicyRequest = &sPutPortalProductSharingPolicyRequest
+var PutPortalProductSharingPolicyRequest_PolicyDocument = &sPutPortalProductSharingPolicyRequest_PolicyDocument
+var PutPortalProductSharingPolicyRequest_PortalProductId = &sPutPortalProductSharingPolicyRequest_PortalProductId
+
+var PutPortalProductSharingPolicyResponse = &sPutPortalProductSharingPolicyResponse
+
+var PutRoutingRuleRequest = &sPutRoutingRuleRequest
+var PutRoutingRuleRequest_Actions = &sPutRoutingRuleRequest_Actions
+var PutRoutingRuleRequest_Conditions = &sPutRoutingRuleRequest_Conditions
+var PutRoutingRuleRequest_DomainName = &sPutRoutingRuleRequest_DomainName
+var PutRoutingRuleRequest_DomainNameId = &sPutRoutingRuleRequest_DomainNameId
+var PutRoutingRuleRequest_Priority = &sPutRoutingRuleRequest_Priority
+var PutRoutingRuleRequest_RoutingRuleId = &sPutRoutingRuleRequest_RoutingRuleId
+
+var PutRoutingRuleResponse = &sPutRoutingRuleResponse
+var PutRoutingRuleResponse_Actions = &sPutRoutingRuleResponse_Actions
+var PutRoutingRuleResponse_Conditions = &sPutRoutingRuleResponse_Conditions
+var PutRoutingRuleResponse_Priority = &sPutRoutingRuleResponse_Priority
+var PutRoutingRuleResponse_RoutingRuleArn = &sPutRoutingRuleResponse_RoutingRuleArn
+var PutRoutingRuleResponse_RoutingRuleId = &sPutRoutingRuleResponse_RoutingRuleId
+
+var ReimportApiRequest = &sReimportApiRequest
+var ReimportApiRequest_ApiId = &sReimportApiRequest_ApiId
+var ReimportApiRequest_Basepath = &sReimportApiRequest_Basepath
+var ReimportApiRequest_Body = &sReimportApiRequest_Body
+var ReimportApiRequest_FailOnWarnings = &sReimportApiRequest_FailOnWarnings
+
+var ReimportApiResponse = &sReimportApiResponse
+var ReimportApiResponse_ApiEndpoint = &sReimportApiResponse_ApiEndpoint
+var ReimportApiResponse_ApiGatewayManaged = &sReimportApiResponse_ApiGatewayManaged
+var ReimportApiResponse_ApiId = &sReimportApiResponse_ApiId
+var ReimportApiResponse_ApiKeySelectionExpression = &sReimportApiResponse_ApiKeySelectionExpression
+var ReimportApiResponse_CorsConfiguration = &sReimportApiResponse_CorsConfiguration
+var ReimportApiResponse_CreatedDate = &sReimportApiResponse_CreatedDate
+var ReimportApiResponse_Description = &sReimportApiResponse_Description
+var ReimportApiResponse_DisableSchemaValidation = &sReimportApiResponse_DisableSchemaValidation
+var ReimportApiResponse_DisableExecuteApiEndpoint = &sReimportApiResponse_DisableExecuteApiEndpoint
+var ReimportApiResponse_ImportInfo = &sReimportApiResponse_ImportInfo
+var ReimportApiResponse_IpAddressType = &sReimportApiResponse_IpAddressType
+var ReimportApiResponse_Name = &sReimportApiResponse_Name
+var ReimportApiResponse_ProtocolType = &sReimportApiResponse_ProtocolType
+var ReimportApiResponse_RouteSelectionExpression = &sReimportApiResponse_RouteSelectionExpression
+var ReimportApiResponse_Tags = &sReimportApiResponse_Tags
+var ReimportApiResponse_Version = &sReimportApiResponse_Version
+var ReimportApiResponse_Warnings = &sReimportApiResponse_Warnings
+
+var ResetAuthorizersCacheRequest = &sResetAuthorizersCacheRequest
+var ResetAuthorizersCacheRequest_ApiId = &sResetAuthorizersCacheRequest_ApiId
+var ResetAuthorizersCacheRequest_StageName = &sResetAuthorizersCacheRequest_StageName
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateApiRequest = &sUpdateApiRequest
+var UpdateApiRequest_ApiId = &sUpdateApiRequest_ApiId
+var UpdateApiRequest_ApiKeySelectionExpression = &sUpdateApiRequest_ApiKeySelectionExpression
+var UpdateApiRequest_CorsConfiguration = &sUpdateApiRequest_CorsConfiguration
+var UpdateApiRequest_CredentialsArn = &sUpdateApiRequest_CredentialsArn
+var UpdateApiRequest_Description = &sUpdateApiRequest_Description
+var UpdateApiRequest_DisableSchemaValidation = &sUpdateApiRequest_DisableSchemaValidation
+var UpdateApiRequest_DisableExecuteApiEndpoint = &sUpdateApiRequest_DisableExecuteApiEndpoint
+var UpdateApiRequest_IpAddressType = &sUpdateApiRequest_IpAddressType
+var UpdateApiRequest_Name = &sUpdateApiRequest_Name
+var UpdateApiRequest_RouteKey = &sUpdateApiRequest_RouteKey
+var UpdateApiRequest_RouteSelectionExpression = &sUpdateApiRequest_RouteSelectionExpression
+var UpdateApiRequest_Target = &sUpdateApiRequest_Target
+var UpdateApiRequest_Version = &sUpdateApiRequest_Version
+
+var UpdateApiMappingRequest = &sUpdateApiMappingRequest
+var UpdateApiMappingRequest_ApiId = &sUpdateApiMappingRequest_ApiId
+var UpdateApiMappingRequest_ApiMappingId = &sUpdateApiMappingRequest_ApiMappingId
+var UpdateApiMappingRequest_ApiMappingKey = &sUpdateApiMappingRequest_ApiMappingKey
+var UpdateApiMappingRequest_DomainName = &sUpdateApiMappingRequest_DomainName
+var UpdateApiMappingRequest_Stage = &sUpdateApiMappingRequest_Stage
+
+var UpdateApiMappingResponse = &sUpdateApiMappingResponse
+var UpdateApiMappingResponse_ApiId = &sUpdateApiMappingResponse_ApiId
+var UpdateApiMappingResponse_ApiMappingId = &sUpdateApiMappingResponse_ApiMappingId
+var UpdateApiMappingResponse_ApiMappingKey = &sUpdateApiMappingResponse_ApiMappingKey
+var UpdateApiMappingResponse_Stage = &sUpdateApiMappingResponse_Stage
+
+var UpdateApiResponse = &sUpdateApiResponse
+var UpdateApiResponse_ApiEndpoint = &sUpdateApiResponse_ApiEndpoint
+var UpdateApiResponse_ApiGatewayManaged = &sUpdateApiResponse_ApiGatewayManaged
+var UpdateApiResponse_ApiId = &sUpdateApiResponse_ApiId
+var UpdateApiResponse_ApiKeySelectionExpression = &sUpdateApiResponse_ApiKeySelectionExpression
+var UpdateApiResponse_CorsConfiguration = &sUpdateApiResponse_CorsConfiguration
+var UpdateApiResponse_CreatedDate = &sUpdateApiResponse_CreatedDate
+var UpdateApiResponse_Description = &sUpdateApiResponse_Description
+var UpdateApiResponse_DisableSchemaValidation = &sUpdateApiResponse_DisableSchemaValidation
+var UpdateApiResponse_DisableExecuteApiEndpoint = &sUpdateApiResponse_DisableExecuteApiEndpoint
+var UpdateApiResponse_ImportInfo = &sUpdateApiResponse_ImportInfo
+var UpdateApiResponse_IpAddressType = &sUpdateApiResponse_IpAddressType
+var UpdateApiResponse_Name = &sUpdateApiResponse_Name
+var UpdateApiResponse_ProtocolType = &sUpdateApiResponse_ProtocolType
+var UpdateApiResponse_RouteSelectionExpression = &sUpdateApiResponse_RouteSelectionExpression
+var UpdateApiResponse_Tags = &sUpdateApiResponse_Tags
+var UpdateApiResponse_Version = &sUpdateApiResponse_Version
+var UpdateApiResponse_Warnings = &sUpdateApiResponse_Warnings
+
+var UpdateAuthorizerRequest = &sUpdateAuthorizerRequest
+var UpdateAuthorizerRequest_ApiId = &sUpdateAuthorizerRequest_ApiId
+var UpdateAuthorizerRequest_AuthorizerCredentialsArn = &sUpdateAuthorizerRequest_AuthorizerCredentialsArn
+var UpdateAuthorizerRequest_AuthorizerId = &sUpdateAuthorizerRequest_AuthorizerId
+var UpdateAuthorizerRequest_AuthorizerPayloadFormatVersion = &sUpdateAuthorizerRequest_AuthorizerPayloadFormatVersion
+var UpdateAuthorizerRequest_AuthorizerResultTtlInSeconds = &sUpdateAuthorizerRequest_AuthorizerResultTtlInSeconds
+var UpdateAuthorizerRequest_AuthorizerType = &sUpdateAuthorizerRequest_AuthorizerType
+var UpdateAuthorizerRequest_AuthorizerUri = &sUpdateAuthorizerRequest_AuthorizerUri
+var UpdateAuthorizerRequest_EnableSimpleResponses = &sUpdateAuthorizerRequest_EnableSimpleResponses
+var UpdateAuthorizerRequest_IdentitySource = &sUpdateAuthorizerRequest_IdentitySource
+var UpdateAuthorizerRequest_IdentityValidationExpression = &sUpdateAuthorizerRequest_IdentityValidationExpression
+var UpdateAuthorizerRequest_JwtConfiguration = &sUpdateAuthorizerRequest_JwtConfiguration
+var UpdateAuthorizerRequest_Name = &sUpdateAuthorizerRequest_Name
+
+var UpdateAuthorizerResponse = &sUpdateAuthorizerResponse
+var UpdateAuthorizerResponse_AuthorizerCredentialsArn = &sUpdateAuthorizerResponse_AuthorizerCredentialsArn
+var UpdateAuthorizerResponse_AuthorizerId = &sUpdateAuthorizerResponse_AuthorizerId
+var UpdateAuthorizerResponse_AuthorizerPayloadFormatVersion = &sUpdateAuthorizerResponse_AuthorizerPayloadFormatVersion
+var UpdateAuthorizerResponse_AuthorizerResultTtlInSeconds = &sUpdateAuthorizerResponse_AuthorizerResultTtlInSeconds
+var UpdateAuthorizerResponse_AuthorizerType = &sUpdateAuthorizerResponse_AuthorizerType
+var UpdateAuthorizerResponse_AuthorizerUri = &sUpdateAuthorizerResponse_AuthorizerUri
+var UpdateAuthorizerResponse_EnableSimpleResponses = &sUpdateAuthorizerResponse_EnableSimpleResponses
+var UpdateAuthorizerResponse_IdentitySource = &sUpdateAuthorizerResponse_IdentitySource
+var UpdateAuthorizerResponse_IdentityValidationExpression = &sUpdateAuthorizerResponse_IdentityValidationExpression
+var UpdateAuthorizerResponse_JwtConfiguration = &sUpdateAuthorizerResponse_JwtConfiguration
+var UpdateAuthorizerResponse_Name = &sUpdateAuthorizerResponse_Name
+
+var UpdateDeploymentRequest = &sUpdateDeploymentRequest
+var UpdateDeploymentRequest_ApiId = &sUpdateDeploymentRequest_ApiId
+var UpdateDeploymentRequest_DeploymentId = &sUpdateDeploymentRequest_DeploymentId
+var UpdateDeploymentRequest_Description = &sUpdateDeploymentRequest_Description
+
+var UpdateDeploymentResponse = &sUpdateDeploymentResponse
+var UpdateDeploymentResponse_AutoDeployed = &sUpdateDeploymentResponse_AutoDeployed
+var UpdateDeploymentResponse_CreatedDate = &sUpdateDeploymentResponse_CreatedDate
+var UpdateDeploymentResponse_DeploymentId = &sUpdateDeploymentResponse_DeploymentId
+var UpdateDeploymentResponse_DeploymentStatus = &sUpdateDeploymentResponse_DeploymentStatus
+var UpdateDeploymentResponse_DeploymentStatusMessage = &sUpdateDeploymentResponse_DeploymentStatusMessage
+var UpdateDeploymentResponse_Description = &sUpdateDeploymentResponse_Description
+
+var UpdateDomainNameRequest = &sUpdateDomainNameRequest
+var UpdateDomainNameRequest_DomainName = &sUpdateDomainNameRequest_DomainName
+var UpdateDomainNameRequest_DomainNameConfigurations = &sUpdateDomainNameRequest_DomainNameConfigurations
+var UpdateDomainNameRequest_MutualTlsAuthentication = &sUpdateDomainNameRequest_MutualTlsAuthentication
+var UpdateDomainNameRequest_RoutingMode = &sUpdateDomainNameRequest_RoutingMode
+
+var UpdateDomainNameResponse = &sUpdateDomainNameResponse
+var UpdateDomainNameResponse_ApiMappingSelectionExpression = &sUpdateDomainNameResponse_ApiMappingSelectionExpression
+var UpdateDomainNameResponse_DomainName = &sUpdateDomainNameResponse_DomainName
+var UpdateDomainNameResponse_DomainNameArn = &sUpdateDomainNameResponse_DomainNameArn
+var UpdateDomainNameResponse_DomainNameConfigurations = &sUpdateDomainNameResponse_DomainNameConfigurations
+var UpdateDomainNameResponse_MutualTlsAuthentication = &sUpdateDomainNameResponse_MutualTlsAuthentication
+var UpdateDomainNameResponse_RoutingMode = &sUpdateDomainNameResponse_RoutingMode
+var UpdateDomainNameResponse_Tags = &sUpdateDomainNameResponse_Tags
+
+var UpdateIntegrationRequest = &sUpdateIntegrationRequest
+var UpdateIntegrationRequest_ApiId = &sUpdateIntegrationRequest_ApiId
+var UpdateIntegrationRequest_ConnectionId = &sUpdateIntegrationRequest_ConnectionId
+var UpdateIntegrationRequest_ConnectionType = &sUpdateIntegrationRequest_ConnectionType
+var UpdateIntegrationRequest_ContentHandlingStrategy = &sUpdateIntegrationRequest_ContentHandlingStrategy
+var UpdateIntegrationRequest_CredentialsArn = &sUpdateIntegrationRequest_CredentialsArn
+var UpdateIntegrationRequest_Description = &sUpdateIntegrationRequest_Description
+var UpdateIntegrationRequest_IntegrationId = &sUpdateIntegrationRequest_IntegrationId
+var UpdateIntegrationRequest_IntegrationMethod = &sUpdateIntegrationRequest_IntegrationMethod
+var UpdateIntegrationRequest_IntegrationSubtype = &sUpdateIntegrationRequest_IntegrationSubtype
+var UpdateIntegrationRequest_IntegrationType = &sUpdateIntegrationRequest_IntegrationType
+var UpdateIntegrationRequest_IntegrationUri = &sUpdateIntegrationRequest_IntegrationUri
+var UpdateIntegrationRequest_PassthroughBehavior = &sUpdateIntegrationRequest_PassthroughBehavior
+var UpdateIntegrationRequest_PayloadFormatVersion = &sUpdateIntegrationRequest_PayloadFormatVersion
+var UpdateIntegrationRequest_RequestParameters = &sUpdateIntegrationRequest_RequestParameters
+var UpdateIntegrationRequest_RequestTemplates = &sUpdateIntegrationRequest_RequestTemplates
+var UpdateIntegrationRequest_ResponseParameters = &sUpdateIntegrationRequest_ResponseParameters
+var UpdateIntegrationRequest_TemplateSelectionExpression = &sUpdateIntegrationRequest_TemplateSelectionExpression
+var UpdateIntegrationRequest_TimeoutInMillis = &sUpdateIntegrationRequest_TimeoutInMillis
+var UpdateIntegrationRequest_TlsConfig = &sUpdateIntegrationRequest_TlsConfig
+
+var UpdateIntegrationResult = &sUpdateIntegrationResult
+var UpdateIntegrationResult_ApiGatewayManaged = &sUpdateIntegrationResult_ApiGatewayManaged
+var UpdateIntegrationResult_ConnectionId = &sUpdateIntegrationResult_ConnectionId
+var UpdateIntegrationResult_ConnectionType = &sUpdateIntegrationResult_ConnectionType
+var UpdateIntegrationResult_ContentHandlingStrategy = &sUpdateIntegrationResult_ContentHandlingStrategy
+var UpdateIntegrationResult_CredentialsArn = &sUpdateIntegrationResult_CredentialsArn
+var UpdateIntegrationResult_Description = &sUpdateIntegrationResult_Description
+var UpdateIntegrationResult_IntegrationId = &sUpdateIntegrationResult_IntegrationId
+var UpdateIntegrationResult_IntegrationMethod = &sUpdateIntegrationResult_IntegrationMethod
+var UpdateIntegrationResult_IntegrationResponseSelectionExpression = &sUpdateIntegrationResult_IntegrationResponseSelectionExpression
+var UpdateIntegrationResult_IntegrationSubtype = &sUpdateIntegrationResult_IntegrationSubtype
+var UpdateIntegrationResult_IntegrationType = &sUpdateIntegrationResult_IntegrationType
+var UpdateIntegrationResult_IntegrationUri = &sUpdateIntegrationResult_IntegrationUri
+var UpdateIntegrationResult_PassthroughBehavior = &sUpdateIntegrationResult_PassthroughBehavior
+var UpdateIntegrationResult_PayloadFormatVersion = &sUpdateIntegrationResult_PayloadFormatVersion
+var UpdateIntegrationResult_RequestParameters = &sUpdateIntegrationResult_RequestParameters
+var UpdateIntegrationResult_RequestTemplates = &sUpdateIntegrationResult_RequestTemplates
+var UpdateIntegrationResult_ResponseParameters = &sUpdateIntegrationResult_ResponseParameters
+var UpdateIntegrationResult_TemplateSelectionExpression = &sUpdateIntegrationResult_TemplateSelectionExpression
+var UpdateIntegrationResult_TimeoutInMillis = &sUpdateIntegrationResult_TimeoutInMillis
+var UpdateIntegrationResult_TlsConfig = &sUpdateIntegrationResult_TlsConfig
+
+var UpdateIntegrationResponseRequest = &sUpdateIntegrationResponseRequest
+var UpdateIntegrationResponseRequest_ApiId = &sUpdateIntegrationResponseRequest_ApiId
+var UpdateIntegrationResponseRequest_ContentHandlingStrategy = &sUpdateIntegrationResponseRequest_ContentHandlingStrategy
+var UpdateIntegrationResponseRequest_IntegrationId = &sUpdateIntegrationResponseRequest_IntegrationId
+var UpdateIntegrationResponseRequest_IntegrationResponseId = &sUpdateIntegrationResponseRequest_IntegrationResponseId
+var UpdateIntegrationResponseRequest_IntegrationResponseKey = &sUpdateIntegrationResponseRequest_IntegrationResponseKey
+var UpdateIntegrationResponseRequest_ResponseParameters = &sUpdateIntegrationResponseRequest_ResponseParameters
+var UpdateIntegrationResponseRequest_ResponseTemplates = &sUpdateIntegrationResponseRequest_ResponseTemplates
+var UpdateIntegrationResponseRequest_TemplateSelectionExpression = &sUpdateIntegrationResponseRequest_TemplateSelectionExpression
+
+var UpdateIntegrationResponseResponse = &sUpdateIntegrationResponseResponse
+var UpdateIntegrationResponseResponse_ContentHandlingStrategy = &sUpdateIntegrationResponseResponse_ContentHandlingStrategy
+var UpdateIntegrationResponseResponse_IntegrationResponseId = &sUpdateIntegrationResponseResponse_IntegrationResponseId
+var UpdateIntegrationResponseResponse_IntegrationResponseKey = &sUpdateIntegrationResponseResponse_IntegrationResponseKey
+var UpdateIntegrationResponseResponse_ResponseParameters = &sUpdateIntegrationResponseResponse_ResponseParameters
+var UpdateIntegrationResponseResponse_ResponseTemplates = &sUpdateIntegrationResponseResponse_ResponseTemplates
+var UpdateIntegrationResponseResponse_TemplateSelectionExpression = &sUpdateIntegrationResponseResponse_TemplateSelectionExpression
+
+var UpdateModelRequest = &sUpdateModelRequest
+var UpdateModelRequest_ApiId = &sUpdateModelRequest_ApiId
+var UpdateModelRequest_ContentType = &sUpdateModelRequest_ContentType
+var UpdateModelRequest_Description = &sUpdateModelRequest_Description
+var UpdateModelRequest_ModelId = &sUpdateModelRequest_ModelId
+var UpdateModelRequest_Name = &sUpdateModelRequest_Name
+var UpdateModelRequest_Schema = &sUpdateModelRequest_Schema
+
+var UpdateModelResponse = &sUpdateModelResponse
+var UpdateModelResponse_ContentType = &sUpdateModelResponse_ContentType
+var UpdateModelResponse_Description = &sUpdateModelResponse_Description
+var UpdateModelResponse_ModelId = &sUpdateModelResponse_ModelId
+var UpdateModelResponse_Name = &sUpdateModelResponse_Name
+var UpdateModelResponse_Schema = &sUpdateModelResponse_Schema
+
+var UpdatePortalRequest = &sUpdatePortalRequest
+var UpdatePortalRequest_Authorization = &sUpdatePortalRequest_Authorization
+var UpdatePortalRequest_EndpointConfiguration = &sUpdatePortalRequest_EndpointConfiguration
+var UpdatePortalRequest_IncludedPortalProductArns = &sUpdatePortalRequest_IncludedPortalProductArns
+var UpdatePortalRequest_LogoUri = &sUpdatePortalRequest_LogoUri
+var UpdatePortalRequest_PortalContent = &sUpdatePortalRequest_PortalContent
+var UpdatePortalRequest_PortalId = &sUpdatePortalRequest_PortalId
+var UpdatePortalRequest_RumAppMonitorName = &sUpdatePortalRequest_RumAppMonitorName
+
+var UpdatePortalResponse = &sUpdatePortalResponse
+var UpdatePortalResponse_Authorization = &sUpdatePortalResponse_Authorization
+var UpdatePortalResponse_EndpointConfiguration = &sUpdatePortalResponse_EndpointConfiguration
+var UpdatePortalResponse_IncludedPortalProductArns = &sUpdatePortalResponse_IncludedPortalProductArns
+var UpdatePortalResponse_LastModified = &sUpdatePortalResponse_LastModified
+var UpdatePortalResponse_LastPublished = &sUpdatePortalResponse_LastPublished
+var UpdatePortalResponse_LastPublishedDescription = &sUpdatePortalResponse_LastPublishedDescription
+var UpdatePortalResponse_PortalArn = &sUpdatePortalResponse_PortalArn
+var UpdatePortalResponse_PortalContent = &sUpdatePortalResponse_PortalContent
+var UpdatePortalResponse_PortalId = &sUpdatePortalResponse_PortalId
+var UpdatePortalResponse_Preview = &sUpdatePortalResponse_Preview
+var UpdatePortalResponse_PublishStatus = &sUpdatePortalResponse_PublishStatus
+var UpdatePortalResponse_RumAppMonitorName = &sUpdatePortalResponse_RumAppMonitorName
+var UpdatePortalResponse_StatusException = &sUpdatePortalResponse_StatusException
+var UpdatePortalResponse_Tags = &sUpdatePortalResponse_Tags
+
+var UpdatePortalProductRequest = &sUpdatePortalProductRequest
+var UpdatePortalProductRequest_Description = &sUpdatePortalProductRequest_Description
+var UpdatePortalProductRequest_DisplayName = &sUpdatePortalProductRequest_DisplayName
+var UpdatePortalProductRequest_DisplayOrder = &sUpdatePortalProductRequest_DisplayOrder
+var UpdatePortalProductRequest_PortalProductId = &sUpdatePortalProductRequest_PortalProductId
+
+var UpdatePortalProductResponse = &sUpdatePortalProductResponse
+var UpdatePortalProductResponse_Description = &sUpdatePortalProductResponse_Description
+var UpdatePortalProductResponse_DisplayName = &sUpdatePortalProductResponse_DisplayName
+var UpdatePortalProductResponse_DisplayOrder = &sUpdatePortalProductResponse_DisplayOrder
+var UpdatePortalProductResponse_LastModified = &sUpdatePortalProductResponse_LastModified
+var UpdatePortalProductResponse_PortalProductArn = &sUpdatePortalProductResponse_PortalProductArn
+var UpdatePortalProductResponse_PortalProductId = &sUpdatePortalProductResponse_PortalProductId
+var UpdatePortalProductResponse_Tags = &sUpdatePortalProductResponse_Tags
+
+var UpdateProductPageRequest = &sUpdateProductPageRequest
+var UpdateProductPageRequest_DisplayContent = &sUpdateProductPageRequest_DisplayContent
+var UpdateProductPageRequest_PortalProductId = &sUpdateProductPageRequest_PortalProductId
+var UpdateProductPageRequest_ProductPageId = &sUpdateProductPageRequest_ProductPageId
+
+var UpdateProductPageResponse = &sUpdateProductPageResponse
+var UpdateProductPageResponse_DisplayContent = &sUpdateProductPageResponse_DisplayContent
+var UpdateProductPageResponse_LastModified = &sUpdateProductPageResponse_LastModified
+var UpdateProductPageResponse_ProductPageArn = &sUpdateProductPageResponse_ProductPageArn
+var UpdateProductPageResponse_ProductPageId = &sUpdateProductPageResponse_ProductPageId
+
+var UpdateProductRestEndpointPageRequest = &sUpdateProductRestEndpointPageRequest
+var UpdateProductRestEndpointPageRequest_DisplayContent = &sUpdateProductRestEndpointPageRequest_DisplayContent
+var UpdateProductRestEndpointPageRequest_PortalProductId = &sUpdateProductRestEndpointPageRequest_PortalProductId
+var UpdateProductRestEndpointPageRequest_ProductRestEndpointPageId = &sUpdateProductRestEndpointPageRequest_ProductRestEndpointPageId
+var UpdateProductRestEndpointPageRequest_TryItState = &sUpdateProductRestEndpointPageRequest_TryItState
+
+var UpdateProductRestEndpointPageResponse = &sUpdateProductRestEndpointPageResponse
+var UpdateProductRestEndpointPageResponse_DisplayContent = &sUpdateProductRestEndpointPageResponse_DisplayContent
+var UpdateProductRestEndpointPageResponse_LastModified = &sUpdateProductRestEndpointPageResponse_LastModified
+var UpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn = &sUpdateProductRestEndpointPageResponse_ProductRestEndpointPageArn
+var UpdateProductRestEndpointPageResponse_ProductRestEndpointPageId = &sUpdateProductRestEndpointPageResponse_ProductRestEndpointPageId
+var UpdateProductRestEndpointPageResponse_RestEndpointIdentifier = &sUpdateProductRestEndpointPageResponse_RestEndpointIdentifier
+var UpdateProductRestEndpointPageResponse_Status = &sUpdateProductRestEndpointPageResponse_Status
+var UpdateProductRestEndpointPageResponse_StatusException = &sUpdateProductRestEndpointPageResponse_StatusException
+var UpdateProductRestEndpointPageResponse_TryItState = &sUpdateProductRestEndpointPageResponse_TryItState
+
+var UpdateRouteRequest = &sUpdateRouteRequest
+var UpdateRouteRequest_ApiId = &sUpdateRouteRequest_ApiId
+var UpdateRouteRequest_ApiKeyRequired = &sUpdateRouteRequest_ApiKeyRequired
+var UpdateRouteRequest_AuthorizationScopes = &sUpdateRouteRequest_AuthorizationScopes
+var UpdateRouteRequest_AuthorizationType = &sUpdateRouteRequest_AuthorizationType
+var UpdateRouteRequest_AuthorizerId = &sUpdateRouteRequest_AuthorizerId
+var UpdateRouteRequest_ModelSelectionExpression = &sUpdateRouteRequest_ModelSelectionExpression
+var UpdateRouteRequest_OperationName = &sUpdateRouteRequest_OperationName
+var UpdateRouteRequest_RequestModels = &sUpdateRouteRequest_RequestModels
+var UpdateRouteRequest_RequestParameters = &sUpdateRouteRequest_RequestParameters
+var UpdateRouteRequest_RouteId = &sUpdateRouteRequest_RouteId
+var UpdateRouteRequest_RouteKey = &sUpdateRouteRequest_RouteKey
+var UpdateRouteRequest_RouteResponseSelectionExpression = &sUpdateRouteRequest_RouteResponseSelectionExpression
+var UpdateRouteRequest_Target = &sUpdateRouteRequest_Target
+
+var UpdateRouteResult = &sUpdateRouteResult
+var UpdateRouteResult_ApiGatewayManaged = &sUpdateRouteResult_ApiGatewayManaged
+var UpdateRouteResult_ApiKeyRequired = &sUpdateRouteResult_ApiKeyRequired
+var UpdateRouteResult_AuthorizationScopes = &sUpdateRouteResult_AuthorizationScopes
+var UpdateRouteResult_AuthorizationType = &sUpdateRouteResult_AuthorizationType
+var UpdateRouteResult_AuthorizerId = &sUpdateRouteResult_AuthorizerId
+var UpdateRouteResult_ModelSelectionExpression = &sUpdateRouteResult_ModelSelectionExpression
+var UpdateRouteResult_OperationName = &sUpdateRouteResult_OperationName
+var UpdateRouteResult_RequestModels = &sUpdateRouteResult_RequestModels
+var UpdateRouteResult_RequestParameters = &sUpdateRouteResult_RequestParameters
+var UpdateRouteResult_RouteId = &sUpdateRouteResult_RouteId
+var UpdateRouteResult_RouteKey = &sUpdateRouteResult_RouteKey
+var UpdateRouteResult_RouteResponseSelectionExpression = &sUpdateRouteResult_RouteResponseSelectionExpression
+var UpdateRouteResult_Target = &sUpdateRouteResult_Target
+
+var UpdateRouteResponseRequest = &sUpdateRouteResponseRequest
+var UpdateRouteResponseRequest_ApiId = &sUpdateRouteResponseRequest_ApiId
+var UpdateRouteResponseRequest_ModelSelectionExpression = &sUpdateRouteResponseRequest_ModelSelectionExpression
+var UpdateRouteResponseRequest_ResponseModels = &sUpdateRouteResponseRequest_ResponseModels
+var UpdateRouteResponseRequest_ResponseParameters = &sUpdateRouteResponseRequest_ResponseParameters
+var UpdateRouteResponseRequest_RouteId = &sUpdateRouteResponseRequest_RouteId
+var UpdateRouteResponseRequest_RouteResponseId = &sUpdateRouteResponseRequest_RouteResponseId
+var UpdateRouteResponseRequest_RouteResponseKey = &sUpdateRouteResponseRequest_RouteResponseKey
+
+var UpdateRouteResponseResponse = &sUpdateRouteResponseResponse
+var UpdateRouteResponseResponse_ModelSelectionExpression = &sUpdateRouteResponseResponse_ModelSelectionExpression
+var UpdateRouteResponseResponse_ResponseModels = &sUpdateRouteResponseResponse_ResponseModels
+var UpdateRouteResponseResponse_ResponseParameters = &sUpdateRouteResponseResponse_ResponseParameters
+var UpdateRouteResponseResponse_RouteResponseId = &sUpdateRouteResponseResponse_RouteResponseId
+var UpdateRouteResponseResponse_RouteResponseKey = &sUpdateRouteResponseResponse_RouteResponseKey
+
+var UpdateStageRequest = &sUpdateStageRequest
+var UpdateStageRequest_AccessLogSettings = &sUpdateStageRequest_AccessLogSettings
+var UpdateStageRequest_ApiId = &sUpdateStageRequest_ApiId
+var UpdateStageRequest_AutoDeploy = &sUpdateStageRequest_AutoDeploy
+var UpdateStageRequest_ClientCertificateId = &sUpdateStageRequest_ClientCertificateId
+var UpdateStageRequest_DefaultRouteSettings = &sUpdateStageRequest_DefaultRouteSettings
+var UpdateStageRequest_DeploymentId = &sUpdateStageRequest_DeploymentId
+var UpdateStageRequest_Description = &sUpdateStageRequest_Description
+var UpdateStageRequest_RouteSettings = &sUpdateStageRequest_RouteSettings
+var UpdateStageRequest_StageName = &sUpdateStageRequest_StageName
+var UpdateStageRequest_StageVariables = &sUpdateStageRequest_StageVariables
+
+var UpdateStageResponse = &sUpdateStageResponse
+var UpdateStageResponse_AccessLogSettings = &sUpdateStageResponse_AccessLogSettings
+var UpdateStageResponse_ApiGatewayManaged = &sUpdateStageResponse_ApiGatewayManaged
+var UpdateStageResponse_AutoDeploy = &sUpdateStageResponse_AutoDeploy
+var UpdateStageResponse_ClientCertificateId = &sUpdateStageResponse_ClientCertificateId
+var UpdateStageResponse_CreatedDate = &sUpdateStageResponse_CreatedDate
+var UpdateStageResponse_DefaultRouteSettings = &sUpdateStageResponse_DefaultRouteSettings
+var UpdateStageResponse_DeploymentId = &sUpdateStageResponse_DeploymentId
+var UpdateStageResponse_Description = &sUpdateStageResponse_Description
+var UpdateStageResponse_LastDeploymentStatusMessage = &sUpdateStageResponse_LastDeploymentStatusMessage
+var UpdateStageResponse_LastUpdatedDate = &sUpdateStageResponse_LastUpdatedDate
+var UpdateStageResponse_RouteSettings = &sUpdateStageResponse_RouteSettings
+var UpdateStageResponse_StageName = &sUpdateStageResponse_StageName
+var UpdateStageResponse_StageVariables = &sUpdateStageResponse_StageVariables
+var UpdateStageResponse_Tags = &sUpdateStageResponse_Tags
+
+var UpdateVpcLinkRequest = &sUpdateVpcLinkRequest
+var UpdateVpcLinkRequest_Name = &sUpdateVpcLinkRequest_Name
+var UpdateVpcLinkRequest_VpcLinkId = &sUpdateVpcLinkRequest_VpcLinkId
+
+var UpdateVpcLinkResponse = &sUpdateVpcLinkResponse
+var UpdateVpcLinkResponse_CreatedDate = &sUpdateVpcLinkResponse_CreatedDate
+var UpdateVpcLinkResponse_Name = &sUpdateVpcLinkResponse_Name
+var UpdateVpcLinkResponse_SecurityGroupIds = &sUpdateVpcLinkResponse_SecurityGroupIds
+var UpdateVpcLinkResponse_SubnetIds = &sUpdateVpcLinkResponse_SubnetIds
+var UpdateVpcLinkResponse_Tags = &sUpdateVpcLinkResponse_Tags
+var UpdateVpcLinkResponse_VpcLinkId = &sUpdateVpcLinkResponse_VpcLinkId
+var UpdateVpcLinkResponse_VpcLinkStatus = &sUpdateVpcLinkResponse_VpcLinkStatus
+var UpdateVpcLinkResponse_VpcLinkStatusMessage = &sUpdateVpcLinkResponse_VpcLinkStatusMessage
+var UpdateVpcLinkResponse_VpcLinkVersion = &sUpdateVpcLinkResponse_VpcLinkVersion
+
+var ApiGatewayV2 = &smithy.ServiceSchema{Schema: &s_ApiGatewayV2, Version: "2018-11-29"}

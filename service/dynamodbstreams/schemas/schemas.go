@@ -4,696 +4,524 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DescribeStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "DescribeStream",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "GetRecords",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetShardIterator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "GetShardIterator",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ListStreams",
-}, smithy.ShapeTypeOperation, 0)
-
-var _DynamoDBStreams_20120810 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "DynamoDBStreams_20120810",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://dynamodb.amazonaws.com/doc/2012-08-10/"})
-
-var DynamoDBStreams_20120810 = smithy.NewServiceSchema(_DynamoDBStreams_20120810, "2012-08-10")
-
-var _AttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "AttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _AttributeMap_key *smithy.Schema
-
-var _AttributeMap_value *smithy.Schema
-
-var _AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var AttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "AttributeValue",
-}, smithy.ShapeTypeUnion, 10)
-var AttributeValue_S *smithy.Schema
-
-var AttributeValue_N *smithy.Schema
-
-var AttributeValue_B *smithy.Schema
-
-var AttributeValue_SS *smithy.Schema
-
-var AttributeValue_NS *smithy.Schema
-
-var AttributeValue_BS *smithy.Schema
-
-var AttributeValue_M *smithy.Schema
-
-var AttributeValue_L *smithy.Schema
-
-var AttributeValue_NULL *smithy.Schema
-
-var AttributeValue_BOOL *smithy.Schema
-
-var _BinaryAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "BinaryAttributeValue",
-}, smithy.ShapeTypeBlob, 0)
-
-var _BinarySetAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "BinarySetAttributeValue",
-}, smithy.ShapeTypeList, 1)
-var _BinarySetAttributeValue_member *smithy.Schema
-
-var _BooleanAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "BooleanAttributeValue",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "Date",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var ExpiredIteratorException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ExpiredIteratorException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ExpiredIteratorException_message *smithy.Schema
-
-var Identity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "Identity",
-}, smithy.ShapeTypeStructure, 2)
-var Identity_PrincipalId *smithy.Schema
-
-var Identity_Type *smithy.Schema
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerError_message *smithy.Schema
-
-var _KeySchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "KeySchema",
-}, smithy.ShapeTypeList, 1)
-var _KeySchema_member *smithy.Schema
-
-var _KeySchemaAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "KeySchemaAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var KeySchemaElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "KeySchemaElement",
-}, smithy.ShapeTypeStructure, 2)
-var KeySchemaElement_AttributeName *smithy.Schema
-
-var KeySchemaElement_KeyType *smithy.Schema
-
-var KeyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "KeyType",
-}, smithy.ShapeTypeEnum, 2)
-var KeyType_HASH *smithy.Schema
-
-var KeyType_RANGE *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var LimitExceededException_message *smithy.Schema
-
-var _ListAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ListAttributeValue",
-}, smithy.ShapeTypeList, 1)
-var _ListAttributeValue_member *smithy.Schema
-
-var _MapAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "MapAttributeValue",
-}, smithy.ShapeTypeMap, 2)
-var _MapAttributeValue_key *smithy.Schema
-
-var _MapAttributeValue_value *smithy.Schema
-
-var _NullAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "NullAttributeValue",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _NumberAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "NumberAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _NumberSetAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "NumberSetAttributeValue",
-}, smithy.ShapeTypeList, 1)
-var _NumberSetAttributeValue_member *smithy.Schema
-
-var OperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "OperationType",
-}, smithy.ShapeTypeEnum, 3)
-var OperationType_INSERT *smithy.Schema
-
-var OperationType_MODIFY *smithy.Schema
-
-var OperationType_REMOVE *smithy.Schema
-
-var _PositiveIntegerObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "PositiveIntegerObject",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PositiveLongObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "PositiveLongObject",
-}, smithy.ShapeTypeLong, 0)
-
-var Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "Record",
-}, smithy.ShapeTypeStructure, 7)
-var Record_eventID *smithy.Schema
-
-var Record_eventName *smithy.Schema
-
-var Record_eventVersion *smithy.Schema
-
-var Record_eventSource *smithy.Schema
-
-var Record_awsRegion *smithy.Schema
-
-var Record_dynamodb *smithy.Schema
-
-var Record_userIdentity *smithy.Schema
-
-var _RecordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "RecordList",
-}, smithy.ShapeTypeList, 1)
-var _RecordList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _SequenceNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "SequenceNumber",
-}, smithy.ShapeTypeString, 0)
-
-var SequenceNumberRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "SequenceNumberRange",
-}, smithy.ShapeTypeStructure, 2)
-var SequenceNumberRange_StartingSequenceNumber *smithy.Schema
-
-var SequenceNumberRange_EndingSequenceNumber *smithy.Schema
-
-var Shard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "Shard",
-}, smithy.ShapeTypeStructure, 3)
-var Shard_ShardId *smithy.Schema
-
-var Shard_SequenceNumberRange *smithy.Schema
-
-var Shard_ParentShardId *smithy.Schema
-
-var _ShardDescriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ShardDescriptionList",
-}, smithy.ShapeTypeList, 1)
-var _ShardDescriptionList_member *smithy.Schema
-
-var ShardFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ShardFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ShardFilter_Type *smithy.Schema
-
-var ShardFilter_ShardId *smithy.Schema
-
-var ShardFilterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ShardFilterType",
-}, smithy.ShapeTypeEnum, 1)
-var ShardFilterType_CHILD_SHARDS *smithy.Schema
-
-var _ShardId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ShardId",
-}, smithy.ShapeTypeString, 0)
-
-var _ShardIterator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ShardIterator",
-}, smithy.ShapeTypeString, 0)
-
-var ShardIteratorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ShardIteratorType",
-}, smithy.ShapeTypeEnum, 5)
-var ShardIteratorType_TRIM_HORIZON *smithy.Schema
-
-var ShardIteratorType_LATEST *smithy.Schema
-
-var ShardIteratorType_AT_SEQUENCE_NUMBER *smithy.Schema
-
-var ShardIteratorType_AFTER_SEQUENCE_NUMBER *smithy.Schema
-
-var ShardIteratorType_AT_TIMESTAMP *smithy.Schema
-
-var Stream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "Stream",
-}, smithy.ShapeTypeStructure, 3)
-var Stream_StreamArn *smithy.Schema
-
-var Stream_TableName *smithy.Schema
-
-var Stream_StreamLabel *smithy.Schema
-
-var _StreamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StreamArn",
-}, smithy.ShapeTypeString, 0)
-
-var StreamDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StreamDescription",
-}, smithy.ShapeTypeStructure, 9)
-var StreamDescription_StreamArn *smithy.Schema
-
-var StreamDescription_StreamLabel *smithy.Schema
-
-var StreamDescription_StreamStatus *smithy.Schema
-
-var StreamDescription_StreamViewType *smithy.Schema
-
-var StreamDescription_CreationRequestDateTime *smithy.Schema
-
-var StreamDescription_TableName *smithy.Schema
-
-var StreamDescription_KeySchema *smithy.Schema
-
-var StreamDescription_Shards *smithy.Schema
-
-var StreamDescription_LastEvaluatedShardId *smithy.Schema
-
-var _StreamList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StreamList",
-}, smithy.ShapeTypeList, 1)
-var _StreamList_member *smithy.Schema
-
-var StreamRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StreamRecord",
-}, smithy.ShapeTypeStructure, 7)
-var StreamRecord_ApproximateCreationDateTime *smithy.Schema
-
-var StreamRecord_Keys *smithy.Schema
-
-var StreamRecord_NewImage *smithy.Schema
-
-var StreamRecord_OldImage *smithy.Schema
-
-var StreamRecord_SequenceNumber *smithy.Schema
-
-var StreamRecord_SizeBytes *smithy.Schema
-
-var StreamRecord_StreamViewType *smithy.Schema
-
-var StreamStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StreamStatus",
-}, smithy.ShapeTypeEnum, 4)
-var StreamStatus_ENABLING *smithy.Schema
-
-var StreamStatus_ENABLED *smithy.Schema
-
-var StreamStatus_DISABLING *smithy.Schema
-
-var StreamStatus_DISABLED *smithy.Schema
-
-var StreamViewType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StreamViewType",
-}, smithy.ShapeTypeEnum, 4)
-var StreamViewType_NEW_IMAGE *smithy.Schema
-
-var StreamViewType_OLD_IMAGE *smithy.Schema
-
-var StreamViewType_NEW_AND_OLD_IMAGES *smithy.Schema
-
-var StreamViewType_KEYS_ONLY *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StringAttributeValue",
-}, smithy.ShapeTypeString, 0)
-
-var _StringSetAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "StringSetAttributeValue",
-}, smithy.ShapeTypeList, 1)
-var _StringSetAttributeValue_member *smithy.Schema
-
-var _TableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "TableName",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TrimmedDataAccessException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "TrimmedDataAccessException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TrimmedDataAccessException_message *smithy.Schema
-
-var DescribeStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "DescribeStreamInput",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeStreamInput_StreamArn *smithy.Schema
-
-var DescribeStreamInput_Limit *smithy.Schema
-
-var DescribeStreamInput_ExclusiveStartShardId *smithy.Schema
-
-var DescribeStreamInput_ShardFilter *smithy.Schema
-
-var DescribeStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "DescribeStreamOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeStreamOutput_StreamDescription *smithy.Schema
-
-var GetRecordsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "GetRecordsInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecordsInput_ShardIterator *smithy.Schema
-
-var GetRecordsInput_Limit *smithy.Schema
-
-var GetRecordsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "GetRecordsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetRecordsOutput_Records *smithy.Schema
-
-var GetRecordsOutput_NextShardIterator *smithy.Schema
-
-var GetShardIteratorInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "GetShardIteratorInput",
-}, smithy.ShapeTypeStructure, 5)
-var GetShardIteratorInput_StreamArn *smithy.Schema
-
-var GetShardIteratorInput_ShardId *smithy.Schema
-
-var GetShardIteratorInput_ShardIteratorType *smithy.Schema
-
-var GetShardIteratorInput_SequenceNumber *smithy.Schema
-
-var GetShardIteratorInput_Timestamp *smithy.Schema
-
-var GetShardIteratorOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "GetShardIteratorOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetShardIteratorOutput_ShardIterator *smithy.Schema
-
-var ListStreamsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ListStreamsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListStreamsInput_TableName *smithy.Schema
-
-var ListStreamsInput_Limit *smithy.Schema
-
-var ListStreamsInput_ExclusiveStartStreamArn *smithy.Schema
-
-var ListStreamsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.dynamodbstreams",
-	Name:      "ListStreamsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamsOutput_Streams *smithy.Schema
-
-var ListStreamsOutput_LastEvaluatedStreamArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	iDescribeStream             = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "DescribeStream"}
+	iGetRecords                 = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "GetRecords"}
+	iGetShardIterator           = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "GetShardIterator"}
+	iListStreams                = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ListStreams"}
+	i_DynamoDBStreams_20120810  = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "DynamoDBStreams_20120810"}
+	i_AttributeMap              = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "AttributeMap"}
+	i_AttributeName             = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "AttributeName"}
+	iAttributeValue             = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "AttributeValue"}
+	i_BinaryAttributeValue      = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "BinaryAttributeValue"}
+	i_BinarySetAttributeValue   = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "BinarySetAttributeValue"}
+	i_BooleanAttributeValue     = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "BooleanAttributeValue"}
+	i_Date                      = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "Date"}
+	i_ErrorMessage              = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ErrorMessage"}
+	iExpiredIteratorException   = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ExpiredIteratorException"}
+	iIdentity                   = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "Identity"}
+	iInternalServerError        = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "InternalServerError"}
+	i_KeySchema                 = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "KeySchema"}
+	i_KeySchemaAttributeName    = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "KeySchemaAttributeName"}
+	iKeySchemaElement           = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "KeySchemaElement"}
+	iKeyType                    = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "KeyType"}
+	iLimitExceededException     = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "LimitExceededException"}
+	i_ListAttributeValue        = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ListAttributeValue"}
+	i_MapAttributeValue         = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "MapAttributeValue"}
+	i_NullAttributeValue        = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "NullAttributeValue"}
+	i_NumberAttributeValue      = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "NumberAttributeValue"}
+	i_NumberSetAttributeValue   = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "NumberSetAttributeValue"}
+	iOperationType              = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "OperationType"}
+	i_PositiveIntegerObject     = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "PositiveIntegerObject"}
+	i_PositiveLongObject        = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "PositiveLongObject"}
+	iRecord                     = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "Record"}
+	i_RecordList                = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "RecordList"}
+	iResourceNotFoundException  = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ResourceNotFoundException"}
+	i_SequenceNumber            = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "SequenceNumber"}
+	iSequenceNumberRange        = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "SequenceNumberRange"}
+	iShard                      = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "Shard"}
+	i_ShardDescriptionList      = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ShardDescriptionList"}
+	iShardFilter                = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ShardFilter"}
+	iShardFilterType            = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ShardFilterType"}
+	i_ShardId                   = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ShardId"}
+	i_ShardIterator             = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ShardIterator"}
+	iShardIteratorType          = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ShardIteratorType"}
+	iStream                     = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "Stream"}
+	i_StreamArn                 = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StreamArn"}
+	iStreamDescription          = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StreamDescription"}
+	i_StreamList                = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StreamList"}
+	iStreamRecord               = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StreamRecord"}
+	iStreamStatus               = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StreamStatus"}
+	iStreamViewType             = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StreamViewType"}
+	i_String                    = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "String"}
+	i_StringAttributeValue      = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StringAttributeValue"}
+	i_StringSetAttributeValue   = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "StringSetAttributeValue"}
+	i_TableName                 = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "TableName"}
+	i_Timestamp                 = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "Timestamp"}
+	iTrimmedDataAccessException = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "TrimmedDataAccessException"}
+	iDescribeStreamInput        = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "DescribeStreamInput"}
+	iDescribeStreamOutput       = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "DescribeStreamOutput"}
+	iGetRecordsInput            = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "GetRecordsInput"}
+	iGetRecordsOutput           = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "GetRecordsOutput"}
+	iGetShardIteratorInput      = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "GetShardIteratorInput"}
+	iGetShardIteratorOutput     = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "GetShardIteratorOutput"}
+	iListStreamsInput           = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ListStreamsInput"}
+	iListStreamsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.dynamodbstreams", Name: "ListStreamsOutput"}
+	pUnit                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://dynamodb.amazonaws.com/doc/2012-08-10/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+
+var m_AttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeMap_key, &s_AttributeMap_value}}
+var mAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeValue_S, &sAttributeValue_N, &sAttributeValue_B, &sAttributeValue_SS, &sAttributeValue_NS, &sAttributeValue_BS, &sAttributeValue_M, &sAttributeValue_L, &sAttributeValue_NULL, &sAttributeValue_BOOL}, Seed: 2, Slots: []uint16{
+	9, 6, 10, 4, 0, 0, 8, 7, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0,
+	0, 0, 2, 0, 0, 0, 3, 0,
+}}
+var m_BinarySetAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_BinarySetAttributeValue_member}}
+var mExpiredIteratorException = smithy.SchemaMembers{List: []*smithy.Schema{&sExpiredIteratorException_message}}
+var mIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentity_PrincipalId, &sIdentity_Type}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_message}}
+var m_KeySchema = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeySchema_member}}
+var mKeySchemaElement = smithy.SchemaMembers{List: []*smithy.Schema{&sKeySchemaElement_AttributeName, &sKeySchemaElement_KeyType}}
+var mKeyType = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyType_HASH, &sKeyType_RANGE}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var m_ListAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListAttributeValue_member}}
+var m_MapAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_MapAttributeValue_key, &s_MapAttributeValue_value}}
+var m_NumberSetAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_NumberSetAttributeValue_member}}
+var mOperationType = smithy.SchemaMembers{List: []*smithy.Schema{&sOperationType_INSERT, &sOperationType_MODIFY, &sOperationType_REMOVE}}
+var mRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sRecord_eventID, &sRecord_eventName, &sRecord_eventVersion, &sRecord_eventSource, &sRecord_awsRegion, &sRecord_dynamodb, &sRecord_userIdentity}}
+var m_RecordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecordList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mSequenceNumberRange = smithy.SchemaMembers{List: []*smithy.Schema{&sSequenceNumberRange_StartingSequenceNumber, &sSequenceNumberRange_EndingSequenceNumber}}
+var mShard = smithy.SchemaMembers{List: []*smithy.Schema{&sShard_ShardId, &sShard_SequenceNumberRange, &sShard_ParentShardId}}
+var m_ShardDescriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShardDescriptionList_member}}
+var mShardFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sShardFilter_Type, &sShardFilter_ShardId}}
+var mShardFilterType = smithy.SchemaMembers{List: []*smithy.Schema{&sShardFilterType_CHILD_SHARDS}}
+var mShardIteratorType = smithy.SchemaMembers{List: []*smithy.Schema{&sShardIteratorType_TRIM_HORIZON, &sShardIteratorType_LATEST, &sShardIteratorType_AT_SEQUENCE_NUMBER, &sShardIteratorType_AFTER_SEQUENCE_NUMBER, &sShardIteratorType_AT_TIMESTAMP}}
+var mStream = smithy.SchemaMembers{List: []*smithy.Schema{&sStream_StreamArn, &sStream_TableName, &sStream_StreamLabel}}
+var mStreamDescription = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamDescription_StreamArn, &sStreamDescription_StreamLabel, &sStreamDescription_StreamStatus, &sStreamDescription_StreamViewType, &sStreamDescription_CreationRequestDateTime, &sStreamDescription_TableName, &sStreamDescription_KeySchema, &sStreamDescription_Shards, &sStreamDescription_LastEvaluatedShardId}, Seed: 1, Slots: []uint16{
+	3, 0, 0, 9, 7, 0, 0, 0, 4, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 5, 0, 0, 6, 0,
+	0, 0, 0, 0, 0, 0, 8, 0,
+}}
+var m_StreamList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamList_member}}
+var mStreamRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamRecord_ApproximateCreationDateTime, &sStreamRecord_Keys, &sStreamRecord_NewImage, &sStreamRecord_OldImage, &sStreamRecord_SequenceNumber, &sStreamRecord_SizeBytes, &sStreamRecord_StreamViewType}}
+var mStreamStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamStatus_ENABLING, &sStreamStatus_ENABLED, &sStreamStatus_DISABLING, &sStreamStatus_DISABLED}}
+var mStreamViewType = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamViewType_NEW_IMAGE, &sStreamViewType_OLD_IMAGE, &sStreamViewType_NEW_AND_OLD_IMAGES, &sStreamViewType_KEYS_ONLY}}
+var m_StringSetAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringSetAttributeValue_member}}
+var mTrimmedDataAccessException = smithy.SchemaMembers{List: []*smithy.Schema{&sTrimmedDataAccessException_message}}
+var mDescribeStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamInput_StreamArn, &sDescribeStreamInput_Limit, &sDescribeStreamInput_ExclusiveStartShardId, &sDescribeStreamInput_ShardFilter}}
+var mDescribeStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStreamOutput_StreamDescription}}
+var mGetRecordsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordsInput_ShardIterator, &sGetRecordsInput_Limit}}
+var mGetRecordsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRecordsOutput_Records, &sGetRecordsOutput_NextShardIterator}}
+var mGetShardIteratorInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetShardIteratorInput_StreamArn, &sGetShardIteratorInput_ShardId, &sGetShardIteratorInput_ShardIteratorType, &sGetShardIteratorInput_SequenceNumber, &sGetShardIteratorInput_Timestamp}}
+var mGetShardIteratorOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetShardIteratorOutput_ShardIterator}}
+var mListStreamsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsInput_TableName, &sListStreamsInput_Limit, &sListStreamsInput_ExclusiveStartStreamArn}}
+var mListStreamsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamsOutput_Streams, &sListStreamsOutput_LastEvaluatedStreamArn}}
+
+var sDescribeStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStream, Type: smithy.ShapeTypeOperation})
+var sGetRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecords, Type: smithy.ShapeTypeOperation})
+var sGetShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIterator, Type: smithy.ShapeTypeOperation})
+var sListStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreams, Type: smithy.ShapeTypeOperation})
+var s_DynamoDBStreams_20120810 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DynamoDBStreams_20120810, Traits: &t0, Type: smithy.ShapeTypeService})
+var s_AttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap})
+var s_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeName, Type: smithy.ShapeTypeString})
+var sAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion})
+var s_BinaryAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob})
+var s_BinarySetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BinarySetAttributeValue, Members: &m_BinarySetAttributeValue, Type: smithy.ShapeTypeList})
+var s_BooleanAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sExpiredIteratorException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpiredIteratorException, Members: &mExpiredIteratorException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var s_KeySchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeySchema, Members: &m_KeySchema, Type: smithy.ShapeTypeList})
+var s_KeySchemaAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeySchemaAttributeName, Type: smithy.ShapeTypeString})
+var sKeySchemaElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeySchemaElement, Members: &mKeySchemaElement, Type: smithy.ShapeTypeStructure})
+var sKeyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_ListAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAttributeValue, Members: &m_ListAttributeValue, Type: smithy.ShapeTypeList})
+var s_MapAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MapAttributeValue, Members: &m_MapAttributeValue, Type: smithy.ShapeTypeMap})
+var s_NullAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullAttributeValue, Type: smithy.ShapeTypeBoolean})
+var s_NumberAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString})
+var s_NumberSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberSetAttributeValue, Members: &m_NumberSetAttributeValue, Type: smithy.ShapeTypeList})
+var sOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum})
+var s_PositiveIntegerObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var s_PositiveLongObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PositiveLongObject, Type: smithy.ShapeTypeLong})
+var sRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var s_RecordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sSequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure})
+var sShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure})
+var s_ShardDescriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList})
+var sShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure})
+var sShardFilterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum})
+var s_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var s_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum})
+var sStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure})
+var s_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var sStreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure})
+var s_StreamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList})
+var sStreamRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamRecord, Members: &mStreamRecord, Type: smithy.ShapeTypeStructure})
+var sStreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum})
+var sStreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString})
+var s_StringSetAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Type: smithy.ShapeTypeList})
+var s_TableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TableName, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTrimmedDataAccessException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrimmedDataAccessException, Members: &mTrimmedDataAccessException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamInput, Members: &mDescribeStreamInput, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStreamOutput, Members: &mDescribeStreamOutput, Type: smithy.ShapeTypeStructure})
+var sGetRecordsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsInput, Members: &mGetRecordsInput, Type: smithy.ShapeTypeStructure})
+var sGetRecordsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRecordsOutput, Members: &mGetRecordsOutput, Type: smithy.ShapeTypeStructure})
+var sGetShardIteratorInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorInput, Members: &mGetShardIteratorInput, Type: smithy.ShapeTypeStructure})
+var sGetShardIteratorOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetShardIteratorOutput, Members: &mGetShardIteratorOutput, Type: smithy.ShapeTypeStructure})
+var sListStreamsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsInput, Members: &mListStreamsInput, Type: smithy.ShapeTypeStructure})
+var sListStreamsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamsOutput, Members: &mListStreamsOutput, Type: smithy.ShapeTypeStructure})
+
+var s_AttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString})
+var s_AttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion})
+var sAttributeValue_S = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S", ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString})
+var sAttributeValue_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "N", ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString})
+var sAttributeValue_B = smithy.NewStaticSchema(smithy.StaticSchema{Member: "B", ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob})
+var sAttributeValue_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &i_StringSetAttributeValue, Members: &m_StringSetAttributeValue, Type: smithy.ShapeTypeList})
+var sAttributeValue_NS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NS", ID: &i_NumberSetAttributeValue, Members: &m_NumberSetAttributeValue, Type: smithy.ShapeTypeList})
+var sAttributeValue_BS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BS", ID: &i_BinarySetAttributeValue, Members: &m_BinarySetAttributeValue, Type: smithy.ShapeTypeList})
+var sAttributeValue_M = smithy.NewStaticSchema(smithy.StaticSchema{Member: "M", ID: &i_MapAttributeValue, Members: &m_MapAttributeValue, Type: smithy.ShapeTypeMap})
+var sAttributeValue_L = smithy.NewStaticSchema(smithy.StaticSchema{Member: "L", ID: &i_ListAttributeValue, Members: &m_ListAttributeValue, Type: smithy.ShapeTypeList})
+var sAttributeValue_NULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NULL", ID: &i_NullAttributeValue, Type: smithy.ShapeTypeBoolean})
+var sAttributeValue_BOOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOOL", ID: &i_BooleanAttributeValue, Type: smithy.ShapeTypeBoolean})
+var s_BinarySetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BinaryAttributeValue, Type: smithy.ShapeTypeBlob})
+var sExpiredIteratorException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sIdentity_PrincipalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrincipalId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdentity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInternalServerError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_KeySchema_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeySchemaElement, Members: &mKeySchemaElement, Type: smithy.ShapeTypeStructure})
+var sKeySchemaElement_AttributeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttributeName", ID: &i_KeySchemaAttributeName, Type: smithy.ShapeTypeString})
+var sKeySchemaElement_KeyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyType", ID: &iKeyType, Members: &mKeyType, Type: smithy.ShapeTypeEnum})
+var sKeyType_HASH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HASH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyType_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ListAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion})
+var s_MapAttributeValue_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_AttributeName, Type: smithy.ShapeTypeString})
+var s_MapAttributeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Type: smithy.ShapeTypeUnion})
+var s_NumberSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NumberAttributeValue, Type: smithy.ShapeTypeString})
+var sOperationType_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationType_MODIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOperationType_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecord_eventID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventID", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRecord_eventName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventName", ID: &iOperationType, Members: &mOperationType, Type: smithy.ShapeTypeEnum})
+var sRecord_eventVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRecord_eventSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventSource", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRecord_awsRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsRegion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRecord_dynamodb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dynamodb", ID: &iStreamRecord, Members: &mStreamRecord, Type: smithy.ShapeTypeStructure})
+var sRecord_userIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userIdentity", ID: &iIdentity, Members: &mIdentity, Type: smithy.ShapeTypeStructure})
+var s_RecordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecord, Members: &mRecord, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSequenceNumberRange_StartingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sSequenceNumberRange_EndingSequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndingSequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sShard_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sShard_SequenceNumberRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumberRange", ID: &iSequenceNumberRange, Members: &mSequenceNumberRange, Type: smithy.ShapeTypeStructure})
+var sShard_ParentShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var s_ShardDescriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure})
+var sShardFilter_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iShardFilterType, Members: &mShardFilterType, Type: smithy.ShapeTypeEnum})
+var sShardFilter_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sShardFilterType_CHILD_SHARDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHILD_SHARDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_TRIM_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRIM_HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_AT_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_AFTER_SEQUENCE_NUMBER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_SEQUENCE_NUMBER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShardIteratorType_AT_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStream_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var sStream_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sStream_StreamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamLabel", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStreamDescription_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var sStreamDescription_StreamLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamLabel", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStreamDescription_StreamStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamStatus", ID: &iStreamStatus, Members: &mStreamStatus, Type: smithy.ShapeTypeEnum})
+var sStreamDescription_StreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamViewType", ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum})
+var sStreamDescription_CreationRequestDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationRequestDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStreamDescription_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sStreamDescription_KeySchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeySchema", ID: &i_KeySchema, Members: &m_KeySchema, Type: smithy.ShapeTypeList})
+var sStreamDescription_Shards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Shards", ID: &i_ShardDescriptionList, Members: &m_ShardDescriptionList, Type: smithy.ShapeTypeList})
+var sStreamDescription_LastEvaluatedShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluatedShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var s_StreamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStream, Members: &mStream, Type: smithy.ShapeTypeStructure})
+var sStreamRecord_ApproximateCreationDateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApproximateCreationDateTime", ID: &i_Date, Type: smithy.ShapeTypeTimestamp})
+var sStreamRecord_Keys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keys", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap})
+var sStreamRecord_NewImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NewImage", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap})
+var sStreamRecord_OldImage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OldImage", ID: &i_AttributeMap, Members: &m_AttributeMap, Type: smithy.ShapeTypeMap})
+var sStreamRecord_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sStreamRecord_SizeBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeBytes", ID: &i_PositiveLongObject, Type: smithy.ShapeTypeLong})
+var sStreamRecord_StreamViewType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamViewType", ID: &iStreamViewType, Members: &mStreamViewType, Type: smithy.ShapeTypeEnum})
+var sStreamStatus_ENABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamStatus_DISABLING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamViewType_NEW_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamViewType_OLD_IMAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OLD_IMAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamViewType_NEW_AND_OLD_IMAGES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_AND_OLD_IMAGES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamViewType_KEYS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KEYS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StringSetAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringAttributeValue, Type: smithy.ShapeTypeString})
+var sTrimmedDataAccessException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDescribeStreamInput_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var sDescribeStreamInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sDescribeStreamInput_ExclusiveStartShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sDescribeStreamInput_ShardFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardFilter", ID: &iShardFilter, Members: &mShardFilter, Type: smithy.ShapeTypeStructure})
+var sDescribeStreamOutput_StreamDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamDescription", ID: &iStreamDescription, Members: &mStreamDescription, Type: smithy.ShapeTypeStructure})
+var sGetRecordsInput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sGetRecordsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sGetRecordsOutput_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_RecordList, Members: &m_RecordList, Type: smithy.ShapeTypeList})
+var sGetRecordsOutput_NextShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_ShardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardId", ID: &i_ShardId, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_ShardIteratorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIteratorType", ID: &iShardIteratorType, Members: &mShardIteratorType, Type: smithy.ShapeTypeEnum})
+var sGetShardIteratorInput_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sGetShardIteratorInput_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Timestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetShardIteratorOutput_ShardIterator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShardIterator", ID: &i_ShardIterator, Type: smithy.ShapeTypeString})
+var sListStreamsInput_TableName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TableName", ID: &i_TableName, Type: smithy.ShapeTypeString})
+var sListStreamsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PositiveIntegerObject, Type: smithy.ShapeTypeInteger})
+var sListStreamsInput_ExclusiveStartStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExclusiveStartStreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+var sListStreamsOutput_Streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Streams", ID: &i_StreamList, Members: &m_StreamList, Type: smithy.ShapeTypeList})
+var sListStreamsOutput_LastEvaluatedStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastEvaluatedStreamArn", ID: &i_StreamArn, Type: smithy.ShapeTypeString})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	_StringSetAttributeValue_member = _StringSetAttributeValue.AddMember("member", _StringAttributeValue)
-
-	_NumberSetAttributeValue_member = _NumberSetAttributeValue.AddMember("member", _NumberAttributeValue)
-
-	_BinarySetAttributeValue_member = _BinarySetAttributeValue.AddMember("member", _BinaryAttributeValue)
-
-	_MapAttributeValue_key = _MapAttributeValue.AddMember("key", _AttributeName)
-
-	_MapAttributeValue_value = _MapAttributeValue.AddMember("value", AttributeValue)
-
-	_ListAttributeValue_member = _ListAttributeValue.AddMember("member", AttributeValue)
-
-	AttributeValue_S = AttributeValue.AddMember("S", _StringAttributeValue)
-
-	AttributeValue_N = AttributeValue.AddMember("N", _NumberAttributeValue)
-
-	AttributeValue_B = AttributeValue.AddMember("B", _BinaryAttributeValue)
-
-	AttributeValue_SS = AttributeValue.AddMember("SS", _StringSetAttributeValue)
-
-	AttributeValue_NS = AttributeValue.AddMember("NS", _NumberSetAttributeValue)
-
-	AttributeValue_BS = AttributeValue.AddMember("BS", _BinarySetAttributeValue)
-
-	AttributeValue_M = AttributeValue.AddMember("M", _MapAttributeValue)
-
-	AttributeValue_L = AttributeValue.AddMember("L", _ListAttributeValue)
-
-	AttributeValue_NULL = AttributeValue.AddMember("NULL", _NullAttributeValue)
-
-	AttributeValue_BOOL = AttributeValue.AddMember("BOOL", _BooleanAttributeValue)
-
-	_AttributeMap_key = _AttributeMap.AddMember("key", _AttributeName)
-
-	_AttributeMap_value = _AttributeMap.AddMember("value", AttributeValue)
-
-	ExpiredIteratorException_message = ExpiredIteratorException.AddMember("message", _ErrorMessage)
-
-	Identity_PrincipalId = Identity.AddMember("PrincipalId", _String)
-
-	Identity_Type = Identity.AddMember("Type", _String)
-
-	InternalServerError_message = InternalServerError.AddMember("message", _ErrorMessage)
-
-	KeyType_HASH = KeyType.AddMember("HASH", smithyprelude.Unit)
-
-	KeyType_RANGE = KeyType.AddMember("RANGE", smithyprelude.Unit)
-
-	KeySchemaElement_AttributeName = KeySchemaElement.AddMember("AttributeName", _KeySchemaAttributeName)
-
-	KeySchemaElement_KeyType = KeySchemaElement.AddMember("KeyType", KeyType)
-
-	_KeySchema_member = _KeySchema.AddMember("member", KeySchemaElement)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	OperationType_INSERT = OperationType.AddMember("INSERT", smithyprelude.Unit)
-
-	OperationType_MODIFY = OperationType.AddMember("MODIFY", smithyprelude.Unit)
-
-	OperationType_REMOVE = OperationType.AddMember("REMOVE", smithyprelude.Unit)
-
-	StreamViewType_NEW_IMAGE = StreamViewType.AddMember("NEW_IMAGE", smithyprelude.Unit)
-
-	StreamViewType_OLD_IMAGE = StreamViewType.AddMember("OLD_IMAGE", smithyprelude.Unit)
-
-	StreamViewType_NEW_AND_OLD_IMAGES = StreamViewType.AddMember("NEW_AND_OLD_IMAGES", smithyprelude.Unit)
-
-	StreamViewType_KEYS_ONLY = StreamViewType.AddMember("KEYS_ONLY", smithyprelude.Unit)
-
-	StreamRecord_ApproximateCreationDateTime = StreamRecord.AddMember("ApproximateCreationDateTime", _Date)
-
-	StreamRecord_Keys = StreamRecord.AddMember("Keys", _AttributeMap)
-
-	StreamRecord_NewImage = StreamRecord.AddMember("NewImage", _AttributeMap)
-
-	StreamRecord_OldImage = StreamRecord.AddMember("OldImage", _AttributeMap)
-
-	StreamRecord_SequenceNumber = StreamRecord.AddMember("SequenceNumber", _SequenceNumber)
-
-	StreamRecord_SizeBytes = StreamRecord.AddMember("SizeBytes", _PositiveLongObject)
-
-	StreamRecord_StreamViewType = StreamRecord.AddMember("StreamViewType", StreamViewType)
-
-	Record_eventID = Record.AddMember("eventID", _String)
-
-	Record_eventName = Record.AddMember("eventName", OperationType)
-
-	Record_eventVersion = Record.AddMember("eventVersion", _String)
-
-	Record_eventSource = Record.AddMember("eventSource", _String)
-
-	Record_awsRegion = Record.AddMember("awsRegion", _String)
-
-	Record_dynamodb = Record.AddMember("dynamodb", StreamRecord)
-
-	Record_userIdentity = Record.AddMember("userIdentity", Identity)
-
-	_RecordList_member = _RecordList.AddMember("member", Record)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	SequenceNumberRange_StartingSequenceNumber = SequenceNumberRange.AddMember("StartingSequenceNumber", _SequenceNumber)
-
-	SequenceNumberRange_EndingSequenceNumber = SequenceNumberRange.AddMember("EndingSequenceNumber", _SequenceNumber)
-
-	Shard_ShardId = Shard.AddMember("ShardId", _ShardId)
-
-	Shard_SequenceNumberRange = Shard.AddMember("SequenceNumberRange", SequenceNumberRange)
-
-	Shard_ParentShardId = Shard.AddMember("ParentShardId", _ShardId)
-
-	_ShardDescriptionList_member = _ShardDescriptionList.AddMember("member", Shard)
-
-	ShardFilterType_CHILD_SHARDS = ShardFilterType.AddMember("CHILD_SHARDS", smithyprelude.Unit)
-
-	ShardFilter_Type = ShardFilter.AddMember("Type", ShardFilterType)
-
-	ShardFilter_ShardId = ShardFilter.AddMember("ShardId", _ShardId)
-
-	ShardIteratorType_TRIM_HORIZON = ShardIteratorType.AddMember("TRIM_HORIZON", smithyprelude.Unit)
-
-	ShardIteratorType_LATEST = ShardIteratorType.AddMember("LATEST", smithyprelude.Unit)
-
-	ShardIteratorType_AT_SEQUENCE_NUMBER = ShardIteratorType.AddMember("AT_SEQUENCE_NUMBER", smithyprelude.Unit)
-
-	ShardIteratorType_AFTER_SEQUENCE_NUMBER = ShardIteratorType.AddMember("AFTER_SEQUENCE_NUMBER", smithyprelude.Unit)
-
-	ShardIteratorType_AT_TIMESTAMP = ShardIteratorType.AddMember("AT_TIMESTAMP", smithyprelude.Unit)
-
-	Stream_StreamArn = Stream.AddMember("StreamArn", _StreamArn)
-
-	Stream_TableName = Stream.AddMember("TableName", _TableName)
-
-	Stream_StreamLabel = Stream.AddMember("StreamLabel", _String)
-
-	StreamStatus_ENABLING = StreamStatus.AddMember("ENABLING", smithyprelude.Unit)
-
-	StreamStatus_ENABLED = StreamStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	StreamStatus_DISABLING = StreamStatus.AddMember("DISABLING", smithyprelude.Unit)
-
-	StreamStatus_DISABLED = StreamStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	StreamDescription_StreamArn = StreamDescription.AddMember("StreamArn", _StreamArn)
-
-	StreamDescription_StreamLabel = StreamDescription.AddMember("StreamLabel", _String)
-
-	StreamDescription_StreamStatus = StreamDescription.AddMember("StreamStatus", StreamStatus)
-
-	StreamDescription_StreamViewType = StreamDescription.AddMember("StreamViewType", StreamViewType)
-
-	StreamDescription_CreationRequestDateTime = StreamDescription.AddMember("CreationRequestDateTime", _Date)
-
-	StreamDescription_TableName = StreamDescription.AddMember("TableName", _TableName)
-
-	StreamDescription_KeySchema = StreamDescription.AddMember("KeySchema", _KeySchema)
-
-	StreamDescription_Shards = StreamDescription.AddMember("Shards", _ShardDescriptionList)
-
-	StreamDescription_LastEvaluatedShardId = StreamDescription.AddMember("LastEvaluatedShardId", _ShardId)
-
-	_StreamList_member = _StreamList.AddMember("member", Stream)
-
-	TrimmedDataAccessException_message = TrimmedDataAccessException.AddMember("message", _ErrorMessage)
-
-	DescribeStreamInput_StreamArn = DescribeStreamInput.AddMember("StreamArn", _StreamArn)
-
-	DescribeStreamInput_Limit = DescribeStreamInput.AddMember("Limit", _PositiveIntegerObject)
-
-	DescribeStreamInput_ExclusiveStartShardId = DescribeStreamInput.AddMember("ExclusiveStartShardId", _ShardId)
-
-	DescribeStreamInput_ShardFilter = DescribeStreamInput.AddMember("ShardFilter", ShardFilter)
-
-	DescribeStreamOutput_StreamDescription = DescribeStreamOutput.AddMember("StreamDescription", StreamDescription)
-
-	GetRecordsInput_ShardIterator = GetRecordsInput.AddMember("ShardIterator", _ShardIterator)
-
-	GetRecordsInput_Limit = GetRecordsInput.AddMember("Limit", _PositiveIntegerObject)
-
-	GetRecordsOutput_Records = GetRecordsOutput.AddMember("Records", _RecordList)
-
-	GetRecordsOutput_NextShardIterator = GetRecordsOutput.AddMember("NextShardIterator", _ShardIterator)
-
-	GetShardIteratorInput_StreamArn = GetShardIteratorInput.AddMember("StreamArn", _StreamArn)
-
-	GetShardIteratorInput_ShardId = GetShardIteratorInput.AddMember("ShardId", _ShardId)
-
-	GetShardIteratorInput_ShardIteratorType = GetShardIteratorInput.AddMember("ShardIteratorType", ShardIteratorType)
-
-	GetShardIteratorInput_SequenceNumber = GetShardIteratorInput.AddMember("SequenceNumber", _SequenceNumber)
-
-	GetShardIteratorInput_Timestamp = GetShardIteratorInput.AddMember("Timestamp", _Timestamp)
-
-	GetShardIteratorOutput_ShardIterator = GetShardIteratorOutput.AddMember("ShardIterator", _ShardIterator)
-
-	ListStreamsInput_TableName = ListStreamsInput.AddMember("TableName", _TableName)
-
-	ListStreamsInput_Limit = ListStreamsInput.AddMember("Limit", _PositiveIntegerObject)
-
-	ListStreamsInput_ExclusiveStartStreamArn = ListStreamsInput.AddMember("ExclusiveStartStreamArn", _StreamArn)
-
-	ListStreamsOutput_Streams = ListStreamsOutput.AddMember("Streams", _StreamList)
-
-	ListStreamsOutput_LastEvaluatedStreamArn = ListStreamsOutput.AddMember("LastEvaluatedStreamArn", _StreamArn)
-
+	s_ListAttributeValue_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion})
+	s_MapAttributeValue_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iAttributeValue, Members: &mAttributeValue, Type: smithy.ShapeTypeUnion})
 }
+
+var DescribeStream = &sDescribeStream
+
+var GetRecords = &sGetRecords
+
+var GetShardIterator = &sGetShardIterator
+
+var ListStreams = &sListStreams
+
+var _DynamoDBStreams_20120810 = &s_DynamoDBStreams_20120810
+
+var _AttributeMap = &s_AttributeMap
+var _AttributeMap_key = &s_AttributeMap_key
+var _AttributeMap_value = &s_AttributeMap_value
+
+var _AttributeName = &s_AttributeName
+
+var AttributeValue = &sAttributeValue
+var AttributeValue_S = &sAttributeValue_S
+var AttributeValue_N = &sAttributeValue_N
+var AttributeValue_B = &sAttributeValue_B
+var AttributeValue_SS = &sAttributeValue_SS
+var AttributeValue_NS = &sAttributeValue_NS
+var AttributeValue_BS = &sAttributeValue_BS
+var AttributeValue_M = &sAttributeValue_M
+var AttributeValue_L = &sAttributeValue_L
+var AttributeValue_NULL = &sAttributeValue_NULL
+var AttributeValue_BOOL = &sAttributeValue_BOOL
+
+var _BinaryAttributeValue = &s_BinaryAttributeValue
+
+var _BinarySetAttributeValue = &s_BinarySetAttributeValue
+var _BinarySetAttributeValue_member = &s_BinarySetAttributeValue_member
+
+var _BooleanAttributeValue = &s_BooleanAttributeValue
+
+var _Date = &s_Date
+
+var _ErrorMessage = &s_ErrorMessage
+
+var ExpiredIteratorException = &sExpiredIteratorException
+var ExpiredIteratorException_message = &sExpiredIteratorException_message
+
+var Identity = &sIdentity
+var Identity_PrincipalId = &sIdentity_PrincipalId
+var Identity_Type = &sIdentity_Type
+
+var InternalServerError = &sInternalServerError
+var InternalServerError_message = &sInternalServerError_message
+
+var _KeySchema = &s_KeySchema
+var _KeySchema_member = &s_KeySchema_member
+
+var _KeySchemaAttributeName = &s_KeySchemaAttributeName
+
+var KeySchemaElement = &sKeySchemaElement
+var KeySchemaElement_AttributeName = &sKeySchemaElement_AttributeName
+var KeySchemaElement_KeyType = &sKeySchemaElement_KeyType
+
+var KeyType = &sKeyType
+var KeyType_HASH = &sKeyType_HASH
+var KeyType_RANGE = &sKeyType_RANGE
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _ListAttributeValue = &s_ListAttributeValue
+var _ListAttributeValue_member = &s_ListAttributeValue_member
+
+var _MapAttributeValue = &s_MapAttributeValue
+var _MapAttributeValue_key = &s_MapAttributeValue_key
+var _MapAttributeValue_value = &s_MapAttributeValue_value
+
+var _NullAttributeValue = &s_NullAttributeValue
+
+var _NumberAttributeValue = &s_NumberAttributeValue
+
+var _NumberSetAttributeValue = &s_NumberSetAttributeValue
+var _NumberSetAttributeValue_member = &s_NumberSetAttributeValue_member
+
+var OperationType = &sOperationType
+var OperationType_INSERT = &sOperationType_INSERT
+var OperationType_MODIFY = &sOperationType_MODIFY
+var OperationType_REMOVE = &sOperationType_REMOVE
+
+var _PositiveIntegerObject = &s_PositiveIntegerObject
+
+var _PositiveLongObject = &s_PositiveLongObject
+
+var Record = &sRecord
+var Record_eventID = &sRecord_eventID
+var Record_eventName = &sRecord_eventName
+var Record_eventVersion = &sRecord_eventVersion
+var Record_eventSource = &sRecord_eventSource
+var Record_awsRegion = &sRecord_awsRegion
+var Record_dynamodb = &sRecord_dynamodb
+var Record_userIdentity = &sRecord_userIdentity
+
+var _RecordList = &s_RecordList
+var _RecordList_member = &s_RecordList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _SequenceNumber = &s_SequenceNumber
+
+var SequenceNumberRange = &sSequenceNumberRange
+var SequenceNumberRange_StartingSequenceNumber = &sSequenceNumberRange_StartingSequenceNumber
+var SequenceNumberRange_EndingSequenceNumber = &sSequenceNumberRange_EndingSequenceNumber
+
+var Shard = &sShard
+var Shard_ShardId = &sShard_ShardId
+var Shard_SequenceNumberRange = &sShard_SequenceNumberRange
+var Shard_ParentShardId = &sShard_ParentShardId
+
+var _ShardDescriptionList = &s_ShardDescriptionList
+var _ShardDescriptionList_member = &s_ShardDescriptionList_member
+
+var ShardFilter = &sShardFilter
+var ShardFilter_Type = &sShardFilter_Type
+var ShardFilter_ShardId = &sShardFilter_ShardId
+
+var ShardFilterType = &sShardFilterType
+var ShardFilterType_CHILD_SHARDS = &sShardFilterType_CHILD_SHARDS
+
+var _ShardId = &s_ShardId
+
+var _ShardIterator = &s_ShardIterator
+
+var ShardIteratorType = &sShardIteratorType
+var ShardIteratorType_TRIM_HORIZON = &sShardIteratorType_TRIM_HORIZON
+var ShardIteratorType_LATEST = &sShardIteratorType_LATEST
+var ShardIteratorType_AT_SEQUENCE_NUMBER = &sShardIteratorType_AT_SEQUENCE_NUMBER
+var ShardIteratorType_AFTER_SEQUENCE_NUMBER = &sShardIteratorType_AFTER_SEQUENCE_NUMBER
+var ShardIteratorType_AT_TIMESTAMP = &sShardIteratorType_AT_TIMESTAMP
+
+var Stream = &sStream
+var Stream_StreamArn = &sStream_StreamArn
+var Stream_TableName = &sStream_TableName
+var Stream_StreamLabel = &sStream_StreamLabel
+
+var _StreamArn = &s_StreamArn
+
+var StreamDescription = &sStreamDescription
+var StreamDescription_StreamArn = &sStreamDescription_StreamArn
+var StreamDescription_StreamLabel = &sStreamDescription_StreamLabel
+var StreamDescription_StreamStatus = &sStreamDescription_StreamStatus
+var StreamDescription_StreamViewType = &sStreamDescription_StreamViewType
+var StreamDescription_CreationRequestDateTime = &sStreamDescription_CreationRequestDateTime
+var StreamDescription_TableName = &sStreamDescription_TableName
+var StreamDescription_KeySchema = &sStreamDescription_KeySchema
+var StreamDescription_Shards = &sStreamDescription_Shards
+var StreamDescription_LastEvaluatedShardId = &sStreamDescription_LastEvaluatedShardId
+
+var _StreamList = &s_StreamList
+var _StreamList_member = &s_StreamList_member
+
+var StreamRecord = &sStreamRecord
+var StreamRecord_ApproximateCreationDateTime = &sStreamRecord_ApproximateCreationDateTime
+var StreamRecord_Keys = &sStreamRecord_Keys
+var StreamRecord_NewImage = &sStreamRecord_NewImage
+var StreamRecord_OldImage = &sStreamRecord_OldImage
+var StreamRecord_SequenceNumber = &sStreamRecord_SequenceNumber
+var StreamRecord_SizeBytes = &sStreamRecord_SizeBytes
+var StreamRecord_StreamViewType = &sStreamRecord_StreamViewType
+
+var StreamStatus = &sStreamStatus
+var StreamStatus_ENABLING = &sStreamStatus_ENABLING
+var StreamStatus_ENABLED = &sStreamStatus_ENABLED
+var StreamStatus_DISABLING = &sStreamStatus_DISABLING
+var StreamStatus_DISABLED = &sStreamStatus_DISABLED
+
+var StreamViewType = &sStreamViewType
+var StreamViewType_NEW_IMAGE = &sStreamViewType_NEW_IMAGE
+var StreamViewType_OLD_IMAGE = &sStreamViewType_OLD_IMAGE
+var StreamViewType_NEW_AND_OLD_IMAGES = &sStreamViewType_NEW_AND_OLD_IMAGES
+var StreamViewType_KEYS_ONLY = &sStreamViewType_KEYS_ONLY
+
+var _String = &s_String
+
+var _StringAttributeValue = &s_StringAttributeValue
+
+var _StringSetAttributeValue = &s_StringSetAttributeValue
+var _StringSetAttributeValue_member = &s_StringSetAttributeValue_member
+
+var _TableName = &s_TableName
+
+var _Timestamp = &s_Timestamp
+
+var TrimmedDataAccessException = &sTrimmedDataAccessException
+var TrimmedDataAccessException_message = &sTrimmedDataAccessException_message
+
+var DescribeStreamInput = &sDescribeStreamInput
+var DescribeStreamInput_StreamArn = &sDescribeStreamInput_StreamArn
+var DescribeStreamInput_Limit = &sDescribeStreamInput_Limit
+var DescribeStreamInput_ExclusiveStartShardId = &sDescribeStreamInput_ExclusiveStartShardId
+var DescribeStreamInput_ShardFilter = &sDescribeStreamInput_ShardFilter
+
+var DescribeStreamOutput = &sDescribeStreamOutput
+var DescribeStreamOutput_StreamDescription = &sDescribeStreamOutput_StreamDescription
+
+var GetRecordsInput = &sGetRecordsInput
+var GetRecordsInput_ShardIterator = &sGetRecordsInput_ShardIterator
+var GetRecordsInput_Limit = &sGetRecordsInput_Limit
+
+var GetRecordsOutput = &sGetRecordsOutput
+var GetRecordsOutput_Records = &sGetRecordsOutput_Records
+var GetRecordsOutput_NextShardIterator = &sGetRecordsOutput_NextShardIterator
+
+var GetShardIteratorInput = &sGetShardIteratorInput
+var GetShardIteratorInput_StreamArn = &sGetShardIteratorInput_StreamArn
+var GetShardIteratorInput_ShardId = &sGetShardIteratorInput_ShardId
+var GetShardIteratorInput_ShardIteratorType = &sGetShardIteratorInput_ShardIteratorType
+var GetShardIteratorInput_SequenceNumber = &sGetShardIteratorInput_SequenceNumber
+var GetShardIteratorInput_Timestamp = &sGetShardIteratorInput_Timestamp
+
+var GetShardIteratorOutput = &sGetShardIteratorOutput
+var GetShardIteratorOutput_ShardIterator = &sGetShardIteratorOutput_ShardIterator
+
+var ListStreamsInput = &sListStreamsInput
+var ListStreamsInput_TableName = &sListStreamsInput_TableName
+var ListStreamsInput_Limit = &sListStreamsInput_Limit
+var ListStreamsInput_ExclusiveStartStreamArn = &sListStreamsInput_ExclusiveStartStreamArn
+
+var ListStreamsOutput = &sListStreamsOutput
+var ListStreamsOutput_Streams = &sListStreamsOutput_Streams
+var ListStreamsOutput_LastEvaluatedStreamArn = &sListStreamsOutput_LastEvaluatedStreamArn
+
+var DynamoDBStreams_20120810 = &smithy.ServiceSchema{Schema: &s_DynamoDBStreams_20120810, Version: "2012-08-10"}

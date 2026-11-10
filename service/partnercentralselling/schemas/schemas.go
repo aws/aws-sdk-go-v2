@@ -4,8436 +4,5742 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptEngagementInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AcceptEngagementInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAcceptEngagementInvitation                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AcceptEngagementInvitation"}
+	iAssignOpportunity                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AssignOpportunity"}
+	iAssociateOpportunity                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AssociateOpportunity"}
+	iCreateEngagement                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagement"}
+	iCreateEngagementContext                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementContext"}
+	iCreateEngagementInvitation                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementInvitation"}
+	iCreateOpportunity                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateOpportunity"}
+	iCreateResourceSnapshot                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateResourceSnapshot"}
+	iCreateResourceSnapshotJob                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateResourceSnapshotJob"}
+	iDeleteResourceSnapshotJob                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DeleteResourceSnapshotJob"}
+	iDisassociateOpportunity                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DisassociateOpportunity"}
+	iGetAwsOpportunitySummary                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetAwsOpportunitySummary"}
+	iGetEngagement                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetEngagement"}
+	iGetEngagementInvitation                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetEngagementInvitation"}
+	iGetOpportunity                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetOpportunity"}
+	iGetProspectingFromEngagementTask                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetProspectingFromEngagementTask"}
+	iGetResourceSnapshot                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetResourceSnapshot"}
+	iGetResourceSnapshotJob                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetResourceSnapshotJob"}
+	iGetSellingSystemSettings                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetSellingSystemSettings"}
+	iListEngagementByAcceptingInvitationTasks          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementByAcceptingInvitationTasks"}
+	iListEngagementFromOpportunityTasks                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementFromOpportunityTasks"}
+	iListEngagementInvitations                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementInvitations"}
+	iListEngagementMembers                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementMembers"}
+	iListEngagementResourceAssociations                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementResourceAssociations"}
+	iListEngagements                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagements"}
+	iListOpportunities                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunities"}
+	iListOpportunityFromEngagementTasks                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunityFromEngagementTasks"}
+	iListProspectingFromEngagementTasks                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListProspectingFromEngagementTasks"}
+	iListResourceSnapshotJobs                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListResourceSnapshotJobs"}
+	iListResourceSnapshots                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListResourceSnapshots"}
+	iListSolutions                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListSolutions"}
+	iListTagsForResource                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListTagsForResource"}
+	iPutSellingSystemSettings                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PutSellingSystemSettings"}
+	iRejectEngagementInvitation                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RejectEngagementInvitation"}
+	iStartEngagementByAcceptingInvitationTask          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartEngagementByAcceptingInvitationTask"}
+	iStartEngagementFromOpportunityTask                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartEngagementFromOpportunityTask"}
+	iStartOpportunityFromEngagementTask                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartOpportunityFromEngagementTask"}
+	iStartProspectingFromEngagementTask                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartProspectingFromEngagementTask"}
+	iStartResourceSnapshotJob                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartResourceSnapshotJob"}
+	iStopResourceSnapshotJob                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StopResourceSnapshotJob"}
+	iSubmitOpportunity                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SubmitOpportunity"}
+	iTagResource                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TagResource"}
+	iUntagResource                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UntagResource"}
+	iUpdateEngagementContext                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateEngagementContext"}
+	iUpdateOpportunity                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateOpportunity"}
+	i_AWSPartnerCentralSelling                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AWSPartnerCentralSelling"}
+	iAccessDeniedException                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AccessDeniedException"}
+	iAccessDeniedExceptionErrorCode                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AccessDeniedExceptionErrorCode"}
+	iAccount                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Account"}
+	iAccountReceiver                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AccountReceiver"}
+	iAccountSummary                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AccountSummary"}
+	iAddress                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Address"}
+	i_AddressPart                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AddressPart"}
+	iAddressSummary                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AddressSummary"}
+	i_Alias                                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Alias"}
+	i_Amount                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Amount"}
+	i_AmountMap                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AmountMap"}
+	i_ApnPrograms                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ApnPrograms"}
+	iAssigneeContact                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AssigneeContact"}
+	i_AwsAccount                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsAccount"}
+	i_AwsAccountIdOrAliasList                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsAccountIdOrAliasList"}
+	i_AwsAccountList                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsAccountList"}
+	iAwsClosedLostReason                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsClosedLostReason"}
+	iAwsFundingUsed                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsFundingUsed"}
+	i_AwsMarketplaceOfferIdentifier                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceOfferIdentifier"}
+	i_AwsMarketplaceOfferIdentifiers                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceOfferIdentifiers"}
+	i_AwsMarketplaceOfferSetIdentifier                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceOfferSetIdentifier"}
+	i_AwsMarketplaceOfferSetIdentifiers                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceOfferSetIdentifiers"}
+	i_AwsMarketplaceProductArn                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceProductArn"}
+	i_AwsMarketplaceProductIdentifiers                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceProductIdentifiers"}
+	i_AwsMarketplaceSolutionArn                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceSolutionArn"}
+	i_AwsMarketplaceSolutionArnList                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceSolutionArnList"}
+	i_AwsMarketplaceSolutionIdentifier                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceSolutionIdentifier"}
+	i_AwsMarketplaceSolutionIdentifiers                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMarketplaceSolutionIdentifiers"}
+	i_AwsMaturity                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMaturity"}
+	iAwsMemberBusinessTitle                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsMemberBusinessTitle"}
+	iAwsOpportunityCustomer                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunityCustomer"}
+	iAwsOpportunityInsights                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunityInsights"}
+	iAwsOpportunityLifeCycle                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunityLifeCycle"}
+	iAwsOpportunityProject                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunityProject"}
+	iAwsOpportunityRelatedEntities                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunityRelatedEntities"}
+	iAwsOpportunityStage                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunityStage"}
+	iAwsOpportunitySummaryFullView                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunitySummaryFullView"}
+	i_AwsOpportunityTeamMembersList                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsOpportunityTeamMembersList"}
+	iAwsPartition                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsPartition"}
+	iAwsProductDetails                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductDetails"}
+	i_AwsProductIdentifier                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductIdentifier"}
+	i_AwsProductIdentifiers                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductIdentifiers"}
+	iAwsProductInsights                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductInsights"}
+	iAwsProductOptimization                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductOptimization"}
+	i_AwsProductOptimizationsList                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductOptimizationsList"}
+	i_AwsProductsList                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductsList"}
+	iAwsProductsSpendInsightsBySource                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsProductsSpendInsightsBySource"}
+	iAwsSoftwareRevenue                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsSoftwareRevenue"}
+	iAwsSubmission                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsSubmission"}
+	iAwsTeamMember                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AwsTeamMember"}
+	i_CatalogIdentifier                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CatalogIdentifier"}
+	iChannel                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Channel"}
+	i_Channels                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Channels"}
+	i_ClientToken                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ClientToken"}
+	iClosedLostReason                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ClosedLostReason"}
+	i_CompanyName                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CompanyName"}
+	i_CompanyWebsiteUrl                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CompanyWebsiteUrl"}
+	iCompetitorName                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CompetitorName"}
+	iConflictException                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ConflictException"}
+	iContact                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Contact"}
+	i_ContextIdentifier                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ContextIdentifier"}
+	i_ContextIdentifiers                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ContextIdentifiers"}
+	iCountryCode                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CountryCode"}
+	iCreatedDateFilter                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreatedDateFilter"}
+	iCurrencyCode                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CurrencyCode"}
+	iCustomer                                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Customer"}
+	i_CustomerAction                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CustomerAction"}
+	i_CustomerContactsList                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CustomerContactsList"}
+	iCustomerProjectsContext                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CustomerProjectsContext"}
+	iCustomerSummary                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CustomerSummary"}
+	i_Date                                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Date"}
+	i_DateTime                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DateTime"}
+	iDeliveryModel                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DeliveryModel"}
+	i_DeliveryModels                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DeliveryModels"}
+	i_DunsNumber                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DunsNumber"}
+	i_EligibleProgramsList                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EligibleProgramsList"}
+	i_Email                                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Email"}
+	i_EngagementArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementArn"}
+	i_EngagementArnOrIdentifier                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementArnOrIdentifier"}
+	iEngagementContextDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementContextDetails"}
+	i_EngagementContextIdentifier                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementContextIdentifier"}
+	iEngagementContextPayload                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementContextPayload"}
+	i_EngagementContexts                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementContexts"}
+	iEngagementContextType                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementContextType"}
+	i_EngagementContextTypeList                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementContextTypeList"}
+	iEngagementCustomer                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementCustomer"}
+	i_EngagementCustomerBusinessProblem                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementCustomerBusinessProblem"}
+	iEngagementCustomerProjectDetails                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementCustomerProjectDetails"}
+	i_EngagementCustomerProjectTitle                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementCustomerProjectTitle"}
+	i_EngagementDescription                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementDescription"}
+	i_EngagementIdentifier                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementIdentifier"}
+	i_EngagementIdentifierList                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementIdentifierList"}
+	i_EngagementIdentifiers                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementIdentifiers"}
+	i_EngagementInvitationArn                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationArn"}
+	i_EngagementInvitationArnOrIdentifier              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationArnOrIdentifier"}
+	i_EngagementInvitationIdentifier                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationIdentifier"}
+	i_EngagementInvitationIdentifiers                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationIdentifiers"}
+	iEngagementInvitationPayloadType                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationPayloadType"}
+	i_EngagementInvitationsPayloadType                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationsPayloadType"}
+	i_EngagementInvitationSummaries                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationSummaries"}
+	iEngagementInvitationSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementInvitationSummary"}
+	iEngagementMember                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementMember"}
+	i_EngagementMembers                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementMembers"}
+	i_EngagementMemberSummaries                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementMemberSummaries"}
+	iEngagementMemberSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementMemberSummary"}
+	i_EngagementPageSize                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementPageSize"}
+	iEngagementProspectingResult                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementProspectingResult"}
+	i_EngagementProspectingResultList                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementProspectingResultList"}
+	iEngagementResourceAssociationSummary              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementResourceAssociationSummary"}
+	i_EngagementResourceAssociationSummaryList         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementResourceAssociationSummaryList"}
+	iEngagementScore                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementScore"}
+	i_EngagementScoreLevel                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementScoreLevel"}
+	iEngagementSort                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementSort"}
+	iEngagementSortName                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementSortName"}
+	iEngagementSummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementSummary"}
+	i_EngagementSummaryList                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementSummaryList"}
+	i_EngagementTitle                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementTitle"}
+	i_EngagementUseCase                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EngagementUseCase"}
+	iEnrichmentContext                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EnrichmentContext"}
+	i_EstimationUrl                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "EstimationUrl"}
+	iExpectedContractDuration                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ExpectedContractDuration"}
+	iExpectedContractDurationTerm                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ExpectedContractDurationTerm"}
+	iExpectedCustomerSpend                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ExpectedCustomerSpend"}
+	i_ExpectedCustomerSpendList                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ExpectedCustomerSpendList"}
+	i_FilterIdentifier                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "FilterIdentifier"}
+	i_FilterLifeCycleReviewStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "FilterLifeCycleReviewStatus"}
+	i_FilterLifeCycleStage                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "FilterLifeCycleStage"}
+	i_FilterStatus                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "FilterStatus"}
+	iIndustry                                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Industry"}
+	iInternalServerException                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "InternalServerException"}
+	iInvitation                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Invitation"}
+	i_InvitationMessage                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "InvitationMessage"}
+	iInvitationProspectingResultAws                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "InvitationProspectingResultAws"}
+	iInvitationStatus                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "InvitationStatus"}
+	i_InvitationStatusList                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "InvitationStatusList"}
+	iInvolvementTypeChangeReason                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "InvolvementTypeChangeReason"}
+	i_JobTitle                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "JobTitle"}
+	iLastModifiedDate                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LastModifiedDate"}
+	iLeadAddress                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadAddress"}
+	i_LeadBusinessProblem                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadBusinessProblem"}
+	iLeadContact                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadContact"}
+	iLeadContext                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadContext"}
+	i_LeadCountryCode                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadCountryCode"}
+	iLeadCustomer                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadCustomer"}
+	i_LeadEmail                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadEmail"}
+	i_LeadIndustry                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadIndustry"}
+	iLeadInsights                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadInsights"}
+	iLeadInteraction                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadInteraction"}
+	i_LeadInteractionList                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadInteractionList"}
+	iLeadInvitationCustomer                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadInvitationCustomer"}
+	iLeadInvitationInteraction                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadInvitationInteraction"}
+	iLeadInvitationPayload                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadInvitationPayload"}
+	i_LeadJobTitle                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadJobTitle"}
+	i_LeadMarketSegment                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadMarketSegment"}
+	i_LeadPhoneNumber                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadPhoneNumber"}
+	i_LeadQualificationStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadQualificationStatus"}
+	i_LeadSourceId                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadSourceId"}
+	i_LeadSourceName                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadSourceName"}
+	i_LeadSourceType                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadSourceType"}
+	i_LeadWebsiteUrl                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LeadWebsiteUrl"}
+	iLifeCycle                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LifeCycle"}
+	iLifeCycleForView                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LifeCycleForView"}
+	iLifeCycleSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "LifeCycleSummary"}
+	i_ListEngagementByAcceptingInvitationTaskSummaries = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementByAcceptingInvitationTaskSummaries"}
+	iListEngagementByAcceptingInvitationTaskSummary    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementByAcceptingInvitationTaskSummary"}
+	i_ListEngagementFromOpportunityTaskSummaries       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementFromOpportunityTaskSummaries"}
+	iListEngagementFromOpportunityTaskSummary          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementFromOpportunityTaskSummary"}
+	i_ListOpportunityFromEngagementTaskSummaries       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunityFromEngagementTaskSummaries"}
+	iListOpportunityFromEngagementTaskSummary          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunityFromEngagementTaskSummary"}
+	iListTasksSortBase                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListTasksSortBase"}
+	iListTasksSortName                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListTasksSortName"}
+	iMarketing                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Marketing"}
+	iMarketingSource                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "MarketingSource"}
+	i_MemberCompanyName                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "MemberCompanyName"}
+	i_MemberPageSize                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "MemberPageSize"}
+	i_MonetaryAmount                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "MonetaryAmount"}
+	iMonetaryValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "MonetaryValue"}
+	i_Name                                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Name"}
+	iNationalSecurity                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "NationalSecurity"}
+	i_NextStepsHistories                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "NextStepsHistories"}
+	iNextStepsHistory                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "NextStepsHistory"}
+	i_OpportunityArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityArn"}
+	iOpportunityEngagementInvitationSort               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityEngagementInvitationSort"}
+	iOpportunityEngagementInvitationSortName           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityEngagementInvitationSortName"}
+	i_OpportunityIdentifier                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityIdentifier"}
+	i_OpportunityIdentifiers                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityIdentifiers"}
+	iOpportunityInvitationPayload                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityInvitationPayload"}
+	iOpportunityOrigin                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityOrigin"}
+	iOpportunityQuality                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityQuality"}
+	iOpportunitySort                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunitySort"}
+	iOpportunitySortName                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunitySortName"}
+	i_OpportunitySummaries                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunitySummaries"}
+	iOpportunitySummary                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunitySummary"}
+	iOpportunitySummaryView                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunitySummaryView"}
+	iOpportunityType                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "OpportunityType"}
+	i_PageSize                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PageSize"}
+	iParticipantType                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ParticipantType"}
+	i_PartnerOpportunityTeamMembersList                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PartnerOpportunityTeamMembersList"}
+	iPayload                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Payload"}
+	iPaymentFrequency                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PaymentFrequency"}
+	i_PhoneNumber                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PhoneNumber"}
+	i_PiiString                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PiiString"}
+	iPrimaryNeedFromAws                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PrimaryNeedFromAws"}
+	i_PrimaryNeedsFromAws                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PrimaryNeedsFromAws"}
+	i_ProfileNextStepsHistories                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProfileNextStepsHistories"}
+	iProfileNextStepsHistory                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProfileNextStepsHistory"}
+	iProject                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Project"}
+	iProjectDetails                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProjectDetails"}
+	iProjectSummary                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProjectSummary"}
+	iProjectView                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProjectView"}
+	i_ProspectingAccountName                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingAccountName"}
+	i_ProspectingCompanySize                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingCompanySize"}
+	iProspectingFromEngagementTaskSort                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingFromEngagementTaskSort"}
+	iProspectingFromEngagementTaskSortName             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingFromEngagementTaskSortName"}
+	i_ProspectingGeo                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingGeo"}
+	iProspectingInsights                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingInsights"}
+	i_ProspectingPublicProfileSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingPublicProfileSummary"}
+	i_ProspectingRegion                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingRegion"}
+	iProspectingResult                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingResult"}
+	iProspectingResultAws                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingResultAws"}
+	iProspectingResultCustomer                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingResultCustomer"}
+	i_ProspectingSegment                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingSegment"}
+	i_ProspectingSubIndustry                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingSubIndustry"}
+	i_ProspectingSubRegion                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingSubRegion"}
+	i_ProspectingTaskArn                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingTaskArn"}
+	i_ProspectingTaskIdentifier                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingTaskIdentifier"}
+	iProspectingTaskStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingTaskStatus"}
+	iProspectingTaskSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingTaskSummary"}
+	i_ProspectingTaskSummaryList                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ProspectingTaskSummaryList"}
+	iReasonCode                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ReasonCode"}
+	iReceiver                                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Receiver"}
+	iReceiverResponsibility                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ReceiverResponsibility"}
+	i_ReceiverResponsibilityList                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ReceiverResponsibilityList"}
+	iRecommendation                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Recommendation"}
+	i_RecommendationAttributeMap                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RecommendationAttributeMap"}
+	i_RecommendationList                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RecommendationList"}
+	i_RejectionReasonString                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RejectionReasonString"}
+	iRelatedEntityIdentifiers                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RelatedEntityIdentifiers"}
+	iRelatedEntityType                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RelatedEntityType"}
+	i_ResourceArn                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceArn"}
+	i_ResourceIdentifier                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceIdentifier"}
+	iResourceNotFoundException                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceNotFoundException"}
+	i_ResourceSnapshotArn                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotArn"}
+	i_ResourceSnapshotJobArn                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotJobArn"}
+	i_ResourceSnapshotJobIdentifier                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotJobIdentifier"}
+	i_ResourceSnapshotJobRoleArn                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotJobRoleArn"}
+	i_ResourceSnapshotJobRoleIdentifier                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotJobRoleIdentifier"}
+	iResourceSnapshotJobStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotJobStatus"}
+	iResourceSnapshotJobSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotJobSummary"}
+	i_ResourceSnapshotJobSummaryList                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotJobSummaryList"}
+	iResourceSnapshotPayload                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotPayload"}
+	i_ResourceSnapshotRevision                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotRevision"}
+	iResourceSnapshotSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotSummary"}
+	i_ResourceSnapshotSummaryList                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceSnapshotSummaryList"}
+	i_ResourceTemplateName                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceTemplateName"}
+	iResourceType                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ResourceType"}
+	iRevenueModel                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RevenueModel"}
+	iReviewStatus                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ReviewStatus"}
+	i_SalesActivities                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SalesActivities"}
+	iSalesActivity                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SalesActivity"}
+	iSalesInvolvementType                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SalesInvolvementType"}
+	iSenderContact                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SenderContact"}
+	i_SenderContactEmail                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SenderContactEmail"}
+	i_SenderContactList                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SenderContactList"}
+	iServiceQuotaExceededException                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ServiceQuotaExceededException"}
+	iSoftwareRevenue                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SoftwareRevenue"}
+	i_SolutionArn                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionArn"}
+	iSolutionBase                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionBase"}
+	i_SolutionIdentifier                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionIdentifier"}
+	i_SolutionIdentifiers                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionIdentifiers"}
+	i_SolutionList                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionList"}
+	iSolutionSort                                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionSort"}
+	iSolutionSortName                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionSortName"}
+	iSolutionStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SolutionStatus"}
+	iSortBy                                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SortBy"}
+	iSortObject                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SortObject"}
+	iSortOrder                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SortOrder"}
+	iStage                                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Stage"}
+	i_StringList                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StringList"}
+	iTag                                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Tag"}
+	i_TaggableResourceArn                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaggableResourceArn"}
+	i_TagKey                                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TagKey"}
+	i_TagKeyList                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TagKeyList"}
+	i_TagList                                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TagList"}
+	i_TagValue                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TagValue"}
+	iTargetCloseDateFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TargetCloseDateFilter"}
+	i_TaskArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskArn"}
+	i_TaskArnOrIdentifier                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskArnOrIdentifier"}
+	i_TaskIdentifier                                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskIdentifier"}
+	i_TaskIdentifierList                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskIdentifierList"}
+	i_TaskIdentifiers                                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskIdentifiers"}
+	i_TaskName                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskName"}
+	i_TaskNameList                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskNameList"}
+	iTaskStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskStatus"}
+	i_TaskStatuses                                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TaskStatuses"}
+	iThrottlingException                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ThrottlingException"}
+	iUpdateEngagementContextPayload                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateEngagementContextPayload"}
+	iUpdateLeadContext                                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateLeadContext"}
+	i_UseCases                                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UseCases"}
+	iValidationException                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ValidationException"}
+	iValidationExceptionError                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ValidationExceptionError"}
+	iValidationExceptionErrorCode                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ValidationExceptionErrorCode"}
+	i_ValidationExceptionErrorList                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ValidationExceptionErrorList"}
+	iValidationExceptionReason                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ValidationExceptionReason"}
+	iVisibility                                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "Visibility"}
+	i_WebsiteUrl                                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "WebsiteUrl"}
+	iAcceptEngagementInvitationRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AcceptEngagementInvitationRequest"}
+	iAssignOpportunityRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AssignOpportunityRequest"}
+	iAssociateOpportunityRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "AssociateOpportunityRequest"}
+	iCreateEngagementContextRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementContextRequest"}
+	iCreateEngagementContextResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementContextResponse"}
+	iCreateEngagementRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementRequest"}
+	iCreateEngagementInvitationRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementInvitationRequest"}
+	iCreateEngagementInvitationResponse                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementInvitationResponse"}
+	iCreateEngagementResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateEngagementResponse"}
+	iCreateOpportunityRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateOpportunityRequest"}
+	iCreateOpportunityResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateOpportunityResponse"}
+	iCreateResourceSnapshotRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateResourceSnapshotRequest"}
+	iCreateResourceSnapshotJobRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateResourceSnapshotJobRequest"}
+	iCreateResourceSnapshotJobResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateResourceSnapshotJobResponse"}
+	iCreateResourceSnapshotResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "CreateResourceSnapshotResponse"}
+	iDeleteResourceSnapshotJobRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DeleteResourceSnapshotJobRequest"}
+	iDisassociateOpportunityRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "DisassociateOpportunityRequest"}
+	iGetAwsOpportunitySummaryRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetAwsOpportunitySummaryRequest"}
+	iGetAwsOpportunitySummaryResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetAwsOpportunitySummaryResponse"}
+	iGetEngagementRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetEngagementRequest"}
+	iGetEngagementInvitationRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetEngagementInvitationRequest"}
+	iGetEngagementInvitationResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetEngagementInvitationResponse"}
+	iGetEngagementResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetEngagementResponse"}
+	iGetOpportunityRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetOpportunityRequest"}
+	iGetOpportunityResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetOpportunityResponse"}
+	iGetProspectingFromEngagementTaskRequest           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetProspectingFromEngagementTaskRequest"}
+	iGetProspectingFromEngagementTaskResponse          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetProspectingFromEngagementTaskResponse"}
+	iGetResourceSnapshotRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetResourceSnapshotRequest"}
+	iGetResourceSnapshotJobRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetResourceSnapshotJobRequest"}
+	iGetResourceSnapshotJobResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetResourceSnapshotJobResponse"}
+	iGetResourceSnapshotResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetResourceSnapshotResponse"}
+	iGetSellingSystemSettingsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetSellingSystemSettingsRequest"}
+	iGetSellingSystemSettingsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "GetSellingSystemSettingsResponse"}
+	iListEngagementByAcceptingInvitationTasksRequest   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementByAcceptingInvitationTasksRequest"}
+	iListEngagementByAcceptingInvitationTasksResponse  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementByAcceptingInvitationTasksResponse"}
+	iListEngagementFromOpportunityTasksRequest         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementFromOpportunityTasksRequest"}
+	iListEngagementFromOpportunityTasksResponse        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementFromOpportunityTasksResponse"}
+	iListEngagementInvitationsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementInvitationsRequest"}
+	iListEngagementInvitationsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementInvitationsResponse"}
+	iListEngagementMembersRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementMembersRequest"}
+	iListEngagementMembersResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementMembersResponse"}
+	iListEngagementResourceAssociationsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementResourceAssociationsRequest"}
+	iListEngagementResourceAssociationsResponse        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementResourceAssociationsResponse"}
+	iListEngagementsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementsRequest"}
+	iListEngagementsResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListEngagementsResponse"}
+	iListOpportunitiesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunitiesRequest"}
+	iListOpportunitiesResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunitiesResponse"}
+	iListOpportunityFromEngagementTasksRequest         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunityFromEngagementTasksRequest"}
+	iListOpportunityFromEngagementTasksResponse        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListOpportunityFromEngagementTasksResponse"}
+	iListProspectingFromEngagementTasksRequest         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListProspectingFromEngagementTasksRequest"}
+	iListProspectingFromEngagementTasksResponse        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListProspectingFromEngagementTasksResponse"}
+	iListResourceSnapshotJobsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListResourceSnapshotJobsRequest"}
+	iListResourceSnapshotJobsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListResourceSnapshotJobsResponse"}
+	iListResourceSnapshotsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListResourceSnapshotsRequest"}
+	iListResourceSnapshotsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListResourceSnapshotsResponse"}
+	iListSolutionsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListSolutionsRequest"}
+	iListSolutionsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListSolutionsResponse"}
+	iListTagsForResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "ListTagsForResourceResponse"}
+	iPutSellingSystemSettingsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PutSellingSystemSettingsRequest"}
+	iPutSellingSystemSettingsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "PutSellingSystemSettingsResponse"}
+	iRejectEngagementInvitationRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "RejectEngagementInvitationRequest"}
+	iStartEngagementByAcceptingInvitationTaskRequest   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartEngagementByAcceptingInvitationTaskRequest"}
+	iStartEngagementByAcceptingInvitationTaskResponse  = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartEngagementByAcceptingInvitationTaskResponse"}
+	iStartEngagementFromOpportunityTaskRequest         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartEngagementFromOpportunityTaskRequest"}
+	iStartEngagementFromOpportunityTaskResponse        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartEngagementFromOpportunityTaskResponse"}
+	iStartOpportunityFromEngagementTaskRequest         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartOpportunityFromEngagementTaskRequest"}
+	iStartOpportunityFromEngagementTaskResponse        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartOpportunityFromEngagementTaskResponse"}
+	iStartProspectingFromEngagementTaskRequest         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartProspectingFromEngagementTaskRequest"}
+	iStartProspectingFromEngagementTaskResponse        = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartProspectingFromEngagementTaskResponse"}
+	iStartResourceSnapshotJobRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StartResourceSnapshotJobRequest"}
+	iStopResourceSnapshotJobRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "StopResourceSnapshotJobRequest"}
+	iSubmitOpportunityRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "SubmitOpportunityRequest"}
+	iTagResourceRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TagResourceRequest"}
+	iTagResourceResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "TagResourceResponse"}
+	iUntagResourceRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UntagResourceResponse"}
+	iUpdateEngagementContextRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateEngagementContextRequest"}
+	iUpdateEngagementContextResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateEngagementContextResponse"}
+	iUpdateOpportunityRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateOpportunityRequest"}
+	iUpdateOpportunityResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.partnercentralselling", Name: "UpdateOpportunityResponse"}
+	pString                                            = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/AcceptEngagementInvitation",
-	Code: 200})
-
-var AssignOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AssignOpportunity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/AssignOpportunity",
-	Code: 200})
-
-var AssociateOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AssociateOpportunity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/AssociateOpportunity",
-	Code: 200})
-
-var CreateEngagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagement",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateEngagement",
-	Code: 200})
-
-var CreateEngagementContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementContext",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateEngagementContext",
-	Code: 200})
-
-var CreateEngagementInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateEngagementInvitation",
-	Code: 200})
-
-var CreateOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateOpportunity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateOpportunity",
-	Code: 200})
-
-var CreateResourceSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateResourceSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateResourceSnapshot",
-	Code: 200})
-
-var CreateResourceSnapshotJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateResourceSnapshotJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateResourceSnapshotJob",
-	Code: 200})
-
-var DeleteResourceSnapshotJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DeleteResourceSnapshotJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteResourceSnapshotJob",
-	Code: 204})
-
-var DisassociateOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DisassociateOpportunity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DisassociateOpportunity",
-	Code: 200})
-
-var GetAwsOpportunitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetAwsOpportunitySummary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetAwsOpportunitySummary",
-	Code: 200})
-
-var GetEngagement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetEngagement",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetEngagement",
-	Code: 200})
-
-var GetEngagementInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetEngagementInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetEngagementInvitation",
-	Code: 200})
-
-var GetOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetOpportunity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetOpportunity",
-	Code: 200})
-
-var GetProspectingFromEngagementTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetProspectingFromEngagementTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetProspectingFromEngagementTask",
-	Code: 200})
-
-var GetResourceSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetResourceSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetResourceSnapshot",
-	Code: 200})
-
-var GetResourceSnapshotJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetResourceSnapshotJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetResourceSnapshotJob",
-	Code: 200})
-
-var GetSellingSystemSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetSellingSystemSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetSellingSystemSettings",
-	Code: 200})
-
-var ListEngagementByAcceptingInvitationTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementByAcceptingInvitationTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEngagementByAcceptingInvitationTasks",
-	Code: 200})
-
-var ListEngagementFromOpportunityTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementFromOpportunityTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEngagementFromOpportunityTasks",
-	Code: 200})
-
-var ListEngagementInvitations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementInvitations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEngagementInvitations",
-	Code: 200})
-
-var ListEngagementMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementMembers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEngagementMembers",
-	Code: 200})
-
-var ListEngagementResourceAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementResourceAssociations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEngagementResourceAssociations",
-	Code: 200})
-
-var ListEngagements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagements",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEngagements",
-	Code: 200})
-
-var ListOpportunities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListOpportunities",
-	Code: 200})
-
-var ListOpportunityFromEngagementTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunityFromEngagementTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListOpportunityFromEngagementTasks",
-	Code: 200})
-
-var ListProspectingFromEngagementTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListProspectingFromEngagementTasks",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListProspectingFromEngagementTasks",
-	Code: 200})
-
-var ListResourceSnapshotJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListResourceSnapshotJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListResourceSnapshotJobs",
-	Code: 200})
-
-var ListResourceSnapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListResourceSnapshots",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListResourceSnapshots",
-	Code: 200})
-
-var ListSolutions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListSolutions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListSolutions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var PutSellingSystemSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PutSellingSystemSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutSellingSystemSettings",
-	Code: 200})
-
-var RejectEngagementInvitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RejectEngagementInvitation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/RejectEngagementInvitation",
-	Code: 200})
-
-var StartEngagementByAcceptingInvitationTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartEngagementByAcceptingInvitationTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartEngagementByAcceptingInvitationTask",
-	Code: 200})
-
-var StartEngagementFromOpportunityTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartEngagementFromOpportunityTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartEngagementFromOpportunityTask",
-	Code: 200})
-
-var StartOpportunityFromEngagementTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartOpportunityFromEngagementTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartOpportunityFromEngagementTask",
-	Code: 200})
-
-var StartProspectingFromEngagementTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartProspectingFromEngagementTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartProspectingFromEngagementTask",
-	Code: 200})
-
-var StartResourceSnapshotJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartResourceSnapshotJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartResourceSnapshotJob",
-	Code: 204})
-
-var StopResourceSnapshotJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StopResourceSnapshotJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StopResourceSnapshotJob",
-	Code: 204})
-
-var SubmitOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SubmitOpportunity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/SubmitOpportunity",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UntagResource",
-	Code: 200})
-
-var UpdateEngagementContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateEngagementContext",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateEngagementContext",
-	Code: 200})
-
-var UpdateOpportunity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateOpportunity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateOpportunity",
-	Code: 200})
-
-var _AWSPartnerCentralSelling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AWSPartnerCentralSelling",
-}, smithy.ShapeTypeService, 0)
-
-var AWSPartnerCentralSelling = smithy.NewServiceSchema(_AWSPartnerCentralSelling, "2022-07-26")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AccessDeniedException_Reason *smithy.Schema
-
-var AccessDeniedExceptionErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AccessDeniedExceptionErrorCode",
-}, smithy.ShapeTypeEnum, 1)
-var AccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE *smithy.Schema
-
-var Account = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Account",
-}, smithy.ShapeTypeStructure, 7)
-var Account_Industry *smithy.Schema
-
-var Account_OtherIndustry *smithy.Schema
-
-var Account_CompanyName *smithy.Schema
-
-var Account_WebsiteUrl *smithy.Schema
-
-var Account_AwsAccountId *smithy.Schema
-
-var Account_Address *smithy.Schema
-
-var Account_Duns *smithy.Schema
-
-var AccountReceiver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AccountReceiver",
-}, smithy.ShapeTypeStructure, 2)
-var AccountReceiver_Alias *smithy.Schema
-
-var AccountReceiver_AwsAccountId *smithy.Schema
-
-var AccountSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AccountSummary",
-}, smithy.ShapeTypeStructure, 5)
-var AccountSummary_Industry *smithy.Schema
-
-var AccountSummary_OtherIndustry *smithy.Schema
-
-var AccountSummary_CompanyName *smithy.Schema
-
-var AccountSummary_WebsiteUrl *smithy.Schema
-
-var AccountSummary_Address *smithy.Schema
-
-var Address = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Address",
-}, smithy.ShapeTypeStructure, 5)
-var Address_City *smithy.Schema
-
-var Address_PostalCode *smithy.Schema
-
-var Address_StateOrRegion *smithy.Schema
-
-var Address_CountryCode *smithy.Schema
-
-var Address_StreetAddress *smithy.Schema
-
-var _AddressPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AddressPart",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AddressSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AddressSummary",
-}, smithy.ShapeTypeStructure, 4)
-var AddressSummary_City *smithy.Schema
-
-var AddressSummary_PostalCode *smithy.Schema
-
-var AddressSummary_StateOrRegion *smithy.Schema
-
-var AddressSummary_CountryCode *smithy.Schema
-
-var _Alias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Alias",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Amount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Amount",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AmountMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AmountMap",
-}, smithy.ShapeTypeMap, 2)
-var _AmountMap_key *smithy.Schema
-
-var _AmountMap_value *smithy.Schema
-
-var _ApnPrograms = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ApnPrograms",
-}, smithy.ShapeTypeList, 1)
-var _ApnPrograms_member *smithy.Schema
-
-var AssigneeContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AssigneeContact",
-}, smithy.ShapeTypeStructure, 5)
-var AssigneeContact_Email *smithy.Schema
-
-var AssigneeContact_FirstName *smithy.Schema
-
-var AssigneeContact_LastName *smithy.Schema
-
-var AssigneeContact_Phone *smithy.Schema
-
-var AssigneeContact_BusinessTitle *smithy.Schema
-
-var _AwsAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsAccount",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _AwsAccountIdOrAliasList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsAccountIdOrAliasList",
-}, smithy.ShapeTypeList, 1)
-var _AwsAccountIdOrAliasList_member *smithy.Schema
-
-var _AwsAccountList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsAccountList",
-}, smithy.ShapeTypeList, 1)
-var _AwsAccountList_member *smithy.Schema
-
-var AwsClosedLostReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsClosedLostReason",
-}, smithy.ShapeTypeEnum, 48)
-var AwsClosedLostReason_ADMINISTRATIVE *smithy.Schema
-
-var AwsClosedLostReason_BUSINESS_ASSOCIATE_AGREEMENT *smithy.Schema
-
-var AwsClosedLostReason_COMPANY_ACQUIRED_DISSOLVED *smithy.Schema
-
-var AwsClosedLostReason_COMPETITIVE_OFFERING *smithy.Schema
-
-var AwsClosedLostReason_CUSTOMER_DATA_REQUIREMENT *smithy.Schema
-
-var AwsClosedLostReason_CUSTOMER_DEFICIENCY *smithy.Schema
-
-var AwsClosedLostReason_CUSTOMER_EXPERIENCE *smithy.Schema
-
-var AwsClosedLostReason_DELAY_CANCELLATION_OF_PROJECT *smithy.Schema
-
-var AwsClosedLostReason_DUPLICATE *smithy.Schema
-
-var AwsClosedLostReason_DUPLICATE_OPPORTUNITY *smithy.Schema
-
-var AwsClosedLostReason_EXECUTIVE_BLOCKER *smithy.Schema
-
-var AwsClosedLostReason_FAILED_VETTING *smithy.Schema
-
-var AwsClosedLostReason_FEATURE_LIMITATION *smithy.Schema
-
-var AwsClosedLostReason_FINANCIAL_COMMERCIAL *smithy.Schema
-
-var AwsClosedLostReason_INSUFFICIENT_AMAZON_VALUE *smithy.Schema
-
-var AwsClosedLostReason_INSUFFICIENT_AWS_VALUE *smithy.Schema
-
-var AwsClosedLostReason_INTERNATIONAL_CONSTRAINTS *smithy.Schema
-
-var AwsClosedLostReason_LEGAL_TAX_REGULATORY *smithy.Schema
-
-var AwsClosedLostReason_LEGAL_TERMS_AND_CONDITIONS *smithy.Schema
-
-var AwsClosedLostReason_LOST_TO_COMPETITOR *smithy.Schema
-
-var AwsClosedLostReason_LOST_TO_COMPETITOR_GOOGLE *smithy.Schema
-
-var AwsClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT *smithy.Schema
-
-var AwsClosedLostReason_LOST_TO_COMPETITOR_OTHER *smithy.Schema
-
-var AwsClosedLostReason_LOST_TO_COMPETITOR_RACKSPACE *smithy.Schema
-
-var AwsClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER *smithy.Schema
-
-var AwsClosedLostReason_LOST_TO_COMPETITOR_VMWARE *smithy.Schema
-
-var AwsClosedLostReason_NO_CUSTOMER_REFERENCE *smithy.Schema
-
-var AwsClosedLostReason_NO_INTEGRATION_RESOURCES *smithy.Schema
-
-var AwsClosedLostReason_NO_OPPORTUNITY *smithy.Schema
-
-var AwsClosedLostReason_NO_PERCEIVED_VALUE_OF_MP *smithy.Schema
-
-var AwsClosedLostReason_NO_RESPONSE *smithy.Schema
-
-var AwsClosedLostReason_NOT_COMMITTED_TO_AWS *smithy.Schema
-
-var AwsClosedLostReason_NO_UPDATE *smithy.Schema
-
-var AwsClosedLostReason_ON_PREMISES_DEPLOYMENT *smithy.Schema
-
-var AwsClosedLostReason_OTHER *smithy.Schema
-
-var AwsClosedLostReason_OTHER_DETAILS_IN_DESCRIPTION *smithy.Schema
-
-var AwsClosedLostReason_PARTNER_GAP *smithy.Schema
-
-var AwsClosedLostReason_PAST_DUE *smithy.Schema
-
-var AwsClosedLostReason_PEOPLE_RELATIONSHIP_GOVERNANCE *smithy.Schema
-
-var AwsClosedLostReason_PLATFORM_TECHNOLOGY_LIMITATION *smithy.Schema
-
-var AwsClosedLostReason_PREFERENCE_FOR_COMPETITOR *smithy.Schema
-
-var AwsClosedLostReason_PRICE *smithy.Schema
-
-var AwsClosedLostReason_PRODUCT_TECHNOLOGY *smithy.Schema
-
-var AwsClosedLostReason_PRODUCT_NOT_ON_AWS *smithy.Schema
-
-var AwsClosedLostReason_SECURITY_COMPLIANCE *smithy.Schema
-
-var AwsClosedLostReason_SELF_SERVICE *smithy.Schema
-
-var AwsClosedLostReason_TECHNICAL_LIMITATIONS *smithy.Schema
-
-var AwsClosedLostReason_TERM_SHEET_IMPASSE *smithy.Schema
-
-var AwsFundingUsed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsFundingUsed",
-}, smithy.ShapeTypeEnum, 2)
-var AwsFundingUsed_YES *smithy.Schema
-
-var AwsFundingUsed_NO *smithy.Schema
-
-var _AwsMarketplaceOfferIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceOfferIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsMarketplaceOfferIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceOfferIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _AwsMarketplaceOfferIdentifiers_member *smithy.Schema
-
-var _AwsMarketplaceOfferSetIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceOfferSetIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsMarketplaceOfferSetIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceOfferSetIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _AwsMarketplaceOfferSetIdentifiers_member *smithy.Schema
-
-var _AwsMarketplaceProductArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceProductArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsMarketplaceProductIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceProductIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _AwsMarketplaceProductIdentifiers_member *smithy.Schema
-
-var _AwsMarketplaceSolutionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceSolutionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsMarketplaceSolutionArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceSolutionArnList",
-}, smithy.ShapeTypeList, 1)
-var _AwsMarketplaceSolutionArnList_member *smithy.Schema
-
-var _AwsMarketplaceSolutionIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceSolutionIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsMarketplaceSolutionIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMarketplaceSolutionIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _AwsMarketplaceSolutionIdentifiers_member *smithy.Schema
-
-var _AwsMaturity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMaturity",
-}, smithy.ShapeTypeString, 0)
-
-var AwsMemberBusinessTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsMemberBusinessTitle",
-}, smithy.ShapeTypeEnum, 7)
-var AwsMemberBusinessTitle_AWS_SALES_REP *smithy.Schema
-
-var AwsMemberBusinessTitle_AWS_ACCOUNT_OWNER *smithy.Schema
-
-var AwsMemberBusinessTitle_WWPSPDM *smithy.Schema
-
-var AwsMemberBusinessTitle_PDM *smithy.Schema
-
-var AwsMemberBusinessTitle_PSM *smithy.Schema
-
-var AwsMemberBusinessTitle_ISVSM *smithy.Schema
-
-var AwsMemberBusinessTitle_SIGNATORY *smithy.Schema
-
-var AwsOpportunityCustomer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunityCustomer",
-}, smithy.ShapeTypeStructure, 1)
-var AwsOpportunityCustomer_Contacts *smithy.Schema
-
-var AwsOpportunityInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunityInsights",
-}, smithy.ShapeTypeStructure, 5)
-var AwsOpportunityInsights_NextBestActions *smithy.Schema
-
-var AwsOpportunityInsights_EngagementScore *smithy.Schema
-
-var AwsOpportunityInsights_AwsProductsSpendInsightsBySource *smithy.Schema
-
-var AwsOpportunityInsights_OpportunityQuality *smithy.Schema
-
-var AwsOpportunityInsights_Recommendations *smithy.Schema
-
-var AwsOpportunityLifeCycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunityLifeCycle",
-}, smithy.ShapeTypeStructure, 5)
-var AwsOpportunityLifeCycle_TargetCloseDate *smithy.Schema
-
-var AwsOpportunityLifeCycle_ClosedLostReason *smithy.Schema
-
-var AwsOpportunityLifeCycle_Stage *smithy.Schema
-
-var AwsOpportunityLifeCycle_NextSteps *smithy.Schema
-
-var AwsOpportunityLifeCycle_NextStepsHistory *smithy.Schema
-
-var AwsOpportunityProject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunityProject",
-}, smithy.ShapeTypeStructure, 2)
-var AwsOpportunityProject_ExpectedCustomerSpend *smithy.Schema
-
-var AwsOpportunityProject_AwsPartition *smithy.Schema
-
-var AwsOpportunityRelatedEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunityRelatedEntities",
-}, smithy.ShapeTypeStructure, 4)
-var AwsOpportunityRelatedEntities_AwsProducts *smithy.Schema
-
-var AwsOpportunityRelatedEntities_Solutions *smithy.Schema
-
-var AwsOpportunityRelatedEntities_AwsMarketplaceSolutions *smithy.Schema
-
-var AwsOpportunityRelatedEntities_AwsMarketplaceProducts *smithy.Schema
-
-var AwsOpportunityStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunityStage",
-}, smithy.ShapeTypeEnum, 24)
-var AwsOpportunityStage_NOT_STARTED *smithy.Schema
-
-var AwsOpportunityStage_IN_PROGRESS *smithy.Schema
-
-var AwsOpportunityStage_PROSPECT *smithy.Schema
-
-var AwsOpportunityStage_ENGAGED *smithy.Schema
-
-var AwsOpportunityStage_IDENTIFIED *smithy.Schema
-
-var AwsOpportunityStage_QUALIFY *smithy.Schema
-
-var AwsOpportunityStage_RESEARCH *smithy.Schema
-
-var AwsOpportunityStage_SELLER_ENGAGED *smithy.Schema
-
-var AwsOpportunityStage_EVALUATING *smithy.Schema
-
-var AwsOpportunityStage_SELLER_REGISTERED *smithy.Schema
-
-var AwsOpportunityStage_TERM_SHEET_NEGOTIATION *smithy.Schema
-
-var AwsOpportunityStage_CONTRACT_NEGOTIATION *smithy.Schema
-
-var AwsOpportunityStage_ONBOARDING *smithy.Schema
-
-var AwsOpportunityStage_BUILDING_INTEGRATION *smithy.Schema
-
-var AwsOpportunityStage_QUALIFIED *smithy.Schema
-
-var AwsOpportunityStage_ON_HOLD *smithy.Schema
-
-var AwsOpportunityStage_TECHNICAL_VALIDATION *smithy.Schema
-
-var AwsOpportunityStage_BUSINESS_VALIDATION *smithy.Schema
-
-var AwsOpportunityStage_COMMITTED *smithy.Schema
-
-var AwsOpportunityStage_LAUNCHED *smithy.Schema
-
-var AwsOpportunityStage_DEFERRED_TO_PARTNER *smithy.Schema
-
-var AwsOpportunityStage_CLOSED_LOST *smithy.Schema
-
-var AwsOpportunityStage_COMPLETED *smithy.Schema
-
-var AwsOpportunityStage_CLOSED_INCOMPLETE *smithy.Schema
-
-var AwsOpportunitySummaryFullView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunitySummaryFullView",
-}, smithy.ShapeTypeStructure, 13)
-var AwsOpportunitySummaryFullView_RelatedOpportunityId *smithy.Schema
-
-var AwsOpportunitySummaryFullView_Origin *smithy.Schema
-
-var AwsOpportunitySummaryFullView_InvolvementType *smithy.Schema
-
-var AwsOpportunitySummaryFullView_Visibility *smithy.Schema
-
-var AwsOpportunitySummaryFullView_LifeCycle *smithy.Schema
-
-var AwsOpportunitySummaryFullView_OpportunityTeam *smithy.Schema
-
-var AwsOpportunitySummaryFullView_Insights *smithy.Schema
-
-var AwsOpportunitySummaryFullView_InvolvementTypeChangeReason *smithy.Schema
-
-var AwsOpportunitySummaryFullView_RelatedEntityIds *smithy.Schema
-
-var AwsOpportunitySummaryFullView_Customer *smithy.Schema
-
-var AwsOpportunitySummaryFullView_Project *smithy.Schema
-
-var AwsOpportunitySummaryFullView_CosellMotion *smithy.Schema
-
-var AwsOpportunitySummaryFullView_SoftwareRevenue *smithy.Schema
-
-var _AwsOpportunityTeamMembersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsOpportunityTeamMembersList",
-}, smithy.ShapeTypeList, 1)
-var _AwsOpportunityTeamMembersList_member *smithy.Schema
-
-var AwsPartition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsPartition",
-}, smithy.ShapeTypeEnum, 1)
-var AwsPartition_AWS_EUSC *smithy.Schema
-
-var AwsProductDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductDetails",
-}, smithy.ShapeTypeStructure, 7)
-var AwsProductDetails_ProductCode *smithy.Schema
-
-var AwsProductDetails_ServiceCode *smithy.Schema
-
-var AwsProductDetails_Categories *smithy.Schema
-
-var AwsProductDetails_Amount *smithy.Schema
-
-var AwsProductDetails_OptimizedAmount *smithy.Schema
-
-var AwsProductDetails_PotentialSavingsAmount *smithy.Schema
-
-var AwsProductDetails_Optimizations *smithy.Schema
-
-var _AwsProductIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsProductIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _AwsProductIdentifiers_member *smithy.Schema
-
-var AwsProductInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductInsights",
-}, smithy.ShapeTypeStructure, 7)
-var AwsProductInsights_CurrencyCode *smithy.Schema
-
-var AwsProductInsights_Frequency *smithy.Schema
-
-var AwsProductInsights_TotalAmount *smithy.Schema
-
-var AwsProductInsights_TotalOptimizedAmount *smithy.Schema
-
-var AwsProductInsights_TotalPotentialSavingsAmount *smithy.Schema
-
-var AwsProductInsights_TotalAmountByCategory *smithy.Schema
-
-var AwsProductInsights_AwsProducts *smithy.Schema
-
-var AwsProductOptimization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductOptimization",
-}, smithy.ShapeTypeStructure, 2)
-var AwsProductOptimization_Description *smithy.Schema
-
-var AwsProductOptimization_SavingsAmount *smithy.Schema
-
-var _AwsProductOptimizationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductOptimizationsList",
-}, smithy.ShapeTypeList, 1)
-var _AwsProductOptimizationsList_member *smithy.Schema
-
-var _AwsProductsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductsList",
-}, smithy.ShapeTypeList, 1)
-var _AwsProductsList_member *smithy.Schema
-
-var AwsProductsSpendInsightsBySource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsProductsSpendInsightsBySource",
-}, smithy.ShapeTypeStructure, 2)
-var AwsProductsSpendInsightsBySource_Partner *smithy.Schema
-
-var AwsProductsSpendInsightsBySource_AWS *smithy.Schema
-
-var AwsSoftwareRevenue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsSoftwareRevenue",
-}, smithy.ShapeTypeStructure, 4)
-var AwsSoftwareRevenue_Value *smithy.Schema
-
-var AwsSoftwareRevenue_Discount *smithy.Schema
-
-var AwsSoftwareRevenue_EffectiveDate *smithy.Schema
-
-var AwsSoftwareRevenue_ExpirationDate *smithy.Schema
-
-var AwsSubmission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsSubmission",
-}, smithy.ShapeTypeStructure, 2)
-var AwsSubmission_InvolvementType *smithy.Schema
-
-var AwsSubmission_Visibility *smithy.Schema
-
-var AwsTeamMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AwsTeamMember",
-}, smithy.ShapeTypeStructure, 4)
-var AwsTeamMember_Email *smithy.Schema
-
-var AwsTeamMember_FirstName *smithy.Schema
-
-var AwsTeamMember_LastName *smithy.Schema
-
-var AwsTeamMember_BusinessTitle *smithy.Schema
-
-var _CatalogIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CatalogIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var Channel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Channel",
-}, smithy.ShapeTypeEnum, 13)
-var Channel_AWS_MARKETING_CENTRAL *smithy.Schema
-
-var Channel_CONTENT_SYNDICATION *smithy.Schema
-
-var Channel_DISPLAY *smithy.Schema
-
-var Channel_EMAIL *smithy.Schema
-
-var Channel_LIVE_EVENT *smithy.Schema
-
-var Channel_OUT_OF_HOME *smithy.Schema
-
-var Channel_PRINT *smithy.Schema
-
-var Channel_SEARCH *smithy.Schema
-
-var Channel_SOCIAL *smithy.Schema
-
-var Channel_TELEMARKETING *smithy.Schema
-
-var Channel_TV *smithy.Schema
-
-var Channel_VIDEO *smithy.Schema
-
-var Channel_VIRTUAL_EVENT *smithy.Schema
-
-var _Channels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Channels",
-}, smithy.ShapeTypeList, 1)
-var _Channels_member *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ClosedLostReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ClosedLostReason",
-}, smithy.ShapeTypeEnum, 19)
-var ClosedLostReason_CUSTOMER_DEFICIENCY *smithy.Schema
-
-var ClosedLostReason_DELAY_CANCELLATION_OF_PROJECT *smithy.Schema
-
-var ClosedLostReason_LEGAL_TAX_REGULATORY *smithy.Schema
-
-var ClosedLostReason_LOST_TO_COMPETITOR_GOOGLE *smithy.Schema
-
-var ClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT *smithy.Schema
-
-var ClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER *smithy.Schema
-
-var ClosedLostReason_LOST_TO_COMPETITOR_VMWARE *smithy.Schema
-
-var ClosedLostReason_LOST_TO_COMPETITOR_OTHER *smithy.Schema
-
-var ClosedLostReason_NO_OPPORTUNITY *smithy.Schema
-
-var ClosedLostReason_ON_PREMISES_DEPLOYMENT *smithy.Schema
-
-var ClosedLostReason_PARTNER_GAP *smithy.Schema
-
-var ClosedLostReason_PRICE *smithy.Schema
-
-var ClosedLostReason_SECURITY_COMPLIANCE *smithy.Schema
-
-var ClosedLostReason_TECHNICAL_LIMITATIONS *smithy.Schema
-
-var ClosedLostReason_CUSTOMER_EXPERIENCE *smithy.Schema
-
-var ClosedLostReason_OTHER *smithy.Schema
-
-var ClosedLostReason_PEOPLERELATIONSHIPGOVERNANCE *smithy.Schema
-
-var ClosedLostReason_PRODUCTTECHNOLOGY *smithy.Schema
-
-var ClosedLostReason_FINANCIALCOMMERCIAL *smithy.Schema
-
-var _CompanyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CompanyName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _CompanyWebsiteUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CompanyWebsiteUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CompetitorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CompetitorName",
-}, smithy.ShapeTypeEnum, 11)
-var CompetitorName_ORACLE_CLOUD *smithy.Schema
-
-var CompetitorName_ON_PREM *smithy.Schema
-
-var CompetitorName_CO_LOCATION *smithy.Schema
-
-var CompetitorName_AKAMAI *smithy.Schema
-
-var CompetitorName_ALICLOUD *smithy.Schema
-
-var CompetitorName_GOOGLE_CLOUD_PLATFORM *smithy.Schema
-
-var CompetitorName_IBM_SOFTLAYER *smithy.Schema
-
-var CompetitorName_MICROSOFT_AZURE *smithy.Schema
-
-var CompetitorName_OTHER_COST_OPTIMIZATION *smithy.Schema
-
-var CompetitorName_NO_COMPETITION *smithy.Schema
-
-var CompetitorName_OTHER *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var Contact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Contact",
-}, smithy.ShapeTypeStructure, 5)
-var Contact_Email *smithy.Schema
-
-var Contact_FirstName *smithy.Schema
-
-var Contact_LastName *smithy.Schema
-
-var Contact_BusinessTitle *smithy.Schema
-
-var Contact_Phone *smithy.Schema
-
-var _ContextIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ContextIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ContextIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ContextIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _ContextIdentifiers_member *smithy.Schema
-
-var CountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CountryCode",
-}, smithy.ShapeTypeEnum, 249, &smithytraits.Sensitive{})
-var CountryCode_US *smithy.Schema
-
-var CountryCode_AF *smithy.Schema
-
-var CountryCode_AX *smithy.Schema
-
-var CountryCode_AL *smithy.Schema
-
-var CountryCode_DZ *smithy.Schema
-
-var CountryCode_AS *smithy.Schema
-
-var CountryCode_AD *smithy.Schema
-
-var CountryCode_AO *smithy.Schema
-
-var CountryCode_AI *smithy.Schema
-
-var CountryCode_AQ *smithy.Schema
-
-var CountryCode_AG *smithy.Schema
-
-var CountryCode_AR *smithy.Schema
-
-var CountryCode_AM *smithy.Schema
-
-var CountryCode_AW *smithy.Schema
-
-var CountryCode_AU *smithy.Schema
-
-var CountryCode_AT *smithy.Schema
-
-var CountryCode_AZ *smithy.Schema
-
-var CountryCode_BS *smithy.Schema
-
-var CountryCode_BH *smithy.Schema
-
-var CountryCode_BD *smithy.Schema
-
-var CountryCode_BB *smithy.Schema
-
-var CountryCode_BY *smithy.Schema
-
-var CountryCode_BE *smithy.Schema
-
-var CountryCode_BZ *smithy.Schema
-
-var CountryCode_BJ *smithy.Schema
-
-var CountryCode_BM *smithy.Schema
-
-var CountryCode_BT *smithy.Schema
-
-var CountryCode_BO *smithy.Schema
-
-var CountryCode_BQ *smithy.Schema
-
-var CountryCode_BA *smithy.Schema
-
-var CountryCode_BW *smithy.Schema
-
-var CountryCode_BV *smithy.Schema
-
-var CountryCode_BR *smithy.Schema
-
-var CountryCode_IO *smithy.Schema
-
-var CountryCode_BN *smithy.Schema
-
-var CountryCode_BG *smithy.Schema
-
-var CountryCode_BF *smithy.Schema
-
-var CountryCode_BI *smithy.Schema
-
-var CountryCode_KH *smithy.Schema
-
-var CountryCode_CM *smithy.Schema
-
-var CountryCode_CA *smithy.Schema
-
-var CountryCode_CV *smithy.Schema
-
-var CountryCode_KY *smithy.Schema
-
-var CountryCode_CF *smithy.Schema
-
-var CountryCode_TD *smithy.Schema
-
-var CountryCode_CL *smithy.Schema
-
-var CountryCode_CN *smithy.Schema
-
-var CountryCode_CX *smithy.Schema
-
-var CountryCode_CC *smithy.Schema
-
-var CountryCode_CO *smithy.Schema
-
-var CountryCode_KM *smithy.Schema
-
-var CountryCode_CG *smithy.Schema
-
-var CountryCode_CK *smithy.Schema
-
-var CountryCode_CR *smithy.Schema
-
-var CountryCode_CI *smithy.Schema
-
-var CountryCode_HR *smithy.Schema
-
-var CountryCode_CU *smithy.Schema
-
-var CountryCode_CW *smithy.Schema
-
-var CountryCode_CY *smithy.Schema
-
-var CountryCode_CZ *smithy.Schema
-
-var CountryCode_CD *smithy.Schema
-
-var CountryCode_DK *smithy.Schema
-
-var CountryCode_DJ *smithy.Schema
-
-var CountryCode_DM *smithy.Schema
-
-var CountryCode_DO *smithy.Schema
-
-var CountryCode_EC *smithy.Schema
-
-var CountryCode_EG *smithy.Schema
-
-var CountryCode_SV *smithy.Schema
-
-var CountryCode_GQ *smithy.Schema
-
-var CountryCode_ER *smithy.Schema
-
-var CountryCode_EE *smithy.Schema
-
-var CountryCode_ET *smithy.Schema
-
-var CountryCode_FK *smithy.Schema
-
-var CountryCode_FO *smithy.Schema
-
-var CountryCode_FJ *smithy.Schema
-
-var CountryCode_FI *smithy.Schema
-
-var CountryCode_FR *smithy.Schema
-
-var CountryCode_GF *smithy.Schema
-
-var CountryCode_PF *smithy.Schema
-
-var CountryCode_TF *smithy.Schema
-
-var CountryCode_GA *smithy.Schema
-
-var CountryCode_GM *smithy.Schema
-
-var CountryCode_GE *smithy.Schema
-
-var CountryCode_DE *smithy.Schema
-
-var CountryCode_GH *smithy.Schema
-
-var CountryCode_GI *smithy.Schema
-
-var CountryCode_GR *smithy.Schema
-
-var CountryCode_GL *smithy.Schema
-
-var CountryCode_GD *smithy.Schema
-
-var CountryCode_GP *smithy.Schema
-
-var CountryCode_GU *smithy.Schema
-
-var CountryCode_GT *smithy.Schema
-
-var CountryCode_GG *smithy.Schema
-
-var CountryCode_GN *smithy.Schema
-
-var CountryCode_GW *smithy.Schema
-
-var CountryCode_GY *smithy.Schema
-
-var CountryCode_HT *smithy.Schema
-
-var CountryCode_HM *smithy.Schema
-
-var CountryCode_VA *smithy.Schema
-
-var CountryCode_HN *smithy.Schema
-
-var CountryCode_HK *smithy.Schema
-
-var CountryCode_HU *smithy.Schema
-
-var CountryCode_IS *smithy.Schema
-
-var CountryCode_IN *smithy.Schema
-
-var CountryCode_ID *smithy.Schema
-
-var CountryCode_IR *smithy.Schema
-
-var CountryCode_IQ *smithy.Schema
-
-var CountryCode_IE *smithy.Schema
-
-var CountryCode_IM *smithy.Schema
-
-var CountryCode_IL *smithy.Schema
-
-var CountryCode_IT *smithy.Schema
-
-var CountryCode_JM *smithy.Schema
-
-var CountryCode_JP *smithy.Schema
-
-var CountryCode_JE *smithy.Schema
-
-var CountryCode_JO *smithy.Schema
-
-var CountryCode_KZ *smithy.Schema
-
-var CountryCode_KE *smithy.Schema
-
-var CountryCode_KI *smithy.Schema
-
-var CountryCode_KR *smithy.Schema
-
-var CountryCode_KW *smithy.Schema
-
-var CountryCode_KG *smithy.Schema
-
-var CountryCode_LA *smithy.Schema
-
-var CountryCode_LV *smithy.Schema
-
-var CountryCode_LB *smithy.Schema
-
-var CountryCode_LS *smithy.Schema
-
-var CountryCode_LR *smithy.Schema
-
-var CountryCode_LY *smithy.Schema
-
-var CountryCode_LI *smithy.Schema
-
-var CountryCode_LT *smithy.Schema
-
-var CountryCode_LU *smithy.Schema
-
-var CountryCode_MO *smithy.Schema
-
-var CountryCode_MK *smithy.Schema
-
-var CountryCode_MG *smithy.Schema
-
-var CountryCode_MW *smithy.Schema
-
-var CountryCode_MY *smithy.Schema
-
-var CountryCode_MV *smithy.Schema
-
-var CountryCode_ML *smithy.Schema
-
-var CountryCode_MT *smithy.Schema
-
-var CountryCode_MH *smithy.Schema
-
-var CountryCode_MQ *smithy.Schema
-
-var CountryCode_MR *smithy.Schema
-
-var CountryCode_MU *smithy.Schema
-
-var CountryCode_YT *smithy.Schema
-
-var CountryCode_MX *smithy.Schema
-
-var CountryCode_FM *smithy.Schema
-
-var CountryCode_MD *smithy.Schema
-
-var CountryCode_MC *smithy.Schema
-
-var CountryCode_MN *smithy.Schema
-
-var CountryCode_ME *smithy.Schema
-
-var CountryCode_MS *smithy.Schema
-
-var CountryCode_MA *smithy.Schema
-
-var CountryCode_MZ *smithy.Schema
-
-var CountryCode_MM *smithy.Schema
-
-var CountryCode_NA *smithy.Schema
-
-var CountryCode_NR *smithy.Schema
-
-var CountryCode_NP *smithy.Schema
-
-var CountryCode_NL *smithy.Schema
-
-var CountryCode_AN *smithy.Schema
-
-var CountryCode_NC *smithy.Schema
-
-var CountryCode_NZ *smithy.Schema
-
-var CountryCode_NI *smithy.Schema
-
-var CountryCode_NE *smithy.Schema
-
-var CountryCode_NG *smithy.Schema
-
-var CountryCode_NU *smithy.Schema
-
-var CountryCode_NF *smithy.Schema
-
-var CountryCode_MP *smithy.Schema
-
-var CountryCode_NO *smithy.Schema
-
-var CountryCode_OM *smithy.Schema
-
-var CountryCode_PK *smithy.Schema
-
-var CountryCode_PW *smithy.Schema
-
-var CountryCode_PS *smithy.Schema
-
-var CountryCode_PA *smithy.Schema
-
-var CountryCode_PG *smithy.Schema
-
-var CountryCode_PY *smithy.Schema
-
-var CountryCode_PE *smithy.Schema
-
-var CountryCode_PH *smithy.Schema
-
-var CountryCode_PN *smithy.Schema
-
-var CountryCode_PL *smithy.Schema
-
-var CountryCode_PT *smithy.Schema
-
-var CountryCode_PR *smithy.Schema
-
-var CountryCode_QA *smithy.Schema
-
-var CountryCode_RE *smithy.Schema
-
-var CountryCode_RO *smithy.Schema
-
-var CountryCode_RU *smithy.Schema
-
-var CountryCode_RW *smithy.Schema
-
-var CountryCode_BL *smithy.Schema
-
-var CountryCode_SH *smithy.Schema
-
-var CountryCode_KN *smithy.Schema
-
-var CountryCode_LC *smithy.Schema
-
-var CountryCode_MF *smithy.Schema
-
-var CountryCode_PM *smithy.Schema
-
-var CountryCode_VC *smithy.Schema
-
-var CountryCode_WS *smithy.Schema
-
-var CountryCode_SM *smithy.Schema
-
-var CountryCode_ST *smithy.Schema
-
-var CountryCode_SA *smithy.Schema
-
-var CountryCode_SN *smithy.Schema
-
-var CountryCode_RS *smithy.Schema
-
-var CountryCode_SC *smithy.Schema
-
-var CountryCode_SL *smithy.Schema
-
-var CountryCode_SG *smithy.Schema
-
-var CountryCode_SX *smithy.Schema
-
-var CountryCode_SK *smithy.Schema
-
-var CountryCode_SI *smithy.Schema
-
-var CountryCode_SB *smithy.Schema
-
-var CountryCode_SO *smithy.Schema
-
-var CountryCode_ZA *smithy.Schema
-
-var CountryCode_GS *smithy.Schema
-
-var CountryCode_SS *smithy.Schema
-
-var CountryCode_ES *smithy.Schema
-
-var CountryCode_LK *smithy.Schema
-
-var CountryCode_SD *smithy.Schema
-
-var CountryCode_SR *smithy.Schema
-
-var CountryCode_SJ *smithy.Schema
-
-var CountryCode_SZ *smithy.Schema
-
-var CountryCode_SE *smithy.Schema
-
-var CountryCode_CH *smithy.Schema
-
-var CountryCode_SY *smithy.Schema
-
-var CountryCode_TW *smithy.Schema
-
-var CountryCode_TJ *smithy.Schema
-
-var CountryCode_TZ *smithy.Schema
-
-var CountryCode_TH *smithy.Schema
-
-var CountryCode_TL *smithy.Schema
-
-var CountryCode_TG *smithy.Schema
-
-var CountryCode_TK *smithy.Schema
-
-var CountryCode_TO *smithy.Schema
-
-var CountryCode_TT *smithy.Schema
-
-var CountryCode_TN *smithy.Schema
-
-var CountryCode_TR *smithy.Schema
-
-var CountryCode_TM *smithy.Schema
-
-var CountryCode_TC *smithy.Schema
-
-var CountryCode_TV *smithy.Schema
-
-var CountryCode_UG *smithy.Schema
-
-var CountryCode_UA *smithy.Schema
-
-var CountryCode_AE *smithy.Schema
-
-var CountryCode_GB *smithy.Schema
-
-var CountryCode_UM *smithy.Schema
-
-var CountryCode_UY *smithy.Schema
-
-var CountryCode_UZ *smithy.Schema
-
-var CountryCode_VU *smithy.Schema
-
-var CountryCode_VE *smithy.Schema
-
-var CountryCode_VN *smithy.Schema
-
-var CountryCode_VG *smithy.Schema
-
-var CountryCode_VI *smithy.Schema
-
-var CountryCode_WF *smithy.Schema
-
-var CountryCode_EH *smithy.Schema
-
-var CountryCode_YE *smithy.Schema
-
-var CountryCode_ZM *smithy.Schema
-
-var CountryCode_ZW *smithy.Schema
-
-var CreatedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreatedDateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var CreatedDateFilter_AfterCreatedDate *smithy.Schema
-
-var CreatedDateFilter_BeforeCreatedDate *smithy.Schema
-
-var CurrencyCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CurrencyCode",
-}, smithy.ShapeTypeEnum, 168, &smithytraits.Sensitive{})
-var CurrencyCode_USD *smithy.Schema
-
-var CurrencyCode_EUR *smithy.Schema
-
-var CurrencyCode_GBP *smithy.Schema
-
-var CurrencyCode_AUD *smithy.Schema
-
-var CurrencyCode_CAD *smithy.Schema
-
-var CurrencyCode_CNY *smithy.Schema
-
-var CurrencyCode_NZD *smithy.Schema
-
-var CurrencyCode_INR *smithy.Schema
-
-var CurrencyCode_JPY *smithy.Schema
-
-var CurrencyCode_CHF *smithy.Schema
-
-var CurrencyCode_SEK *smithy.Schema
-
-var CurrencyCode_AED *smithy.Schema
-
-var CurrencyCode_AFN *smithy.Schema
-
-var CurrencyCode_ALL *smithy.Schema
-
-var CurrencyCode_AMD *smithy.Schema
-
-var CurrencyCode_ANG *smithy.Schema
-
-var CurrencyCode_AOA *smithy.Schema
-
-var CurrencyCode_ARS *smithy.Schema
-
-var CurrencyCode_AWG *smithy.Schema
-
-var CurrencyCode_AZN *smithy.Schema
-
-var CurrencyCode_BAM *smithy.Schema
-
-var CurrencyCode_BBD *smithy.Schema
-
-var CurrencyCode_BDT *smithy.Schema
-
-var CurrencyCode_BGN *smithy.Schema
-
-var CurrencyCode_BHD *smithy.Schema
-
-var CurrencyCode_BIF *smithy.Schema
-
-var CurrencyCode_BMD *smithy.Schema
-
-var CurrencyCode_BND *smithy.Schema
-
-var CurrencyCode_BOB *smithy.Schema
-
-var CurrencyCode_BOV *smithy.Schema
-
-var CurrencyCode_BRL *smithy.Schema
-
-var CurrencyCode_BSD *smithy.Schema
-
-var CurrencyCode_BTN *smithy.Schema
-
-var CurrencyCode_BWP *smithy.Schema
-
-var CurrencyCode_BYN *smithy.Schema
-
-var CurrencyCode_BZD *smithy.Schema
-
-var CurrencyCode_CDF *smithy.Schema
-
-var CurrencyCode_CHE *smithy.Schema
-
-var CurrencyCode_CHW *smithy.Schema
-
-var CurrencyCode_CLF *smithy.Schema
-
-var CurrencyCode_CLP *smithy.Schema
-
-var CurrencyCode_COP *smithy.Schema
-
-var CurrencyCode_COU *smithy.Schema
-
-var CurrencyCode_CRC *smithy.Schema
-
-var CurrencyCode_CUC *smithy.Schema
-
-var CurrencyCode_CUP *smithy.Schema
-
-var CurrencyCode_CVE *smithy.Schema
-
-var CurrencyCode_CZK *smithy.Schema
-
-var CurrencyCode_DJF *smithy.Schema
-
-var CurrencyCode_DKK *smithy.Schema
-
-var CurrencyCode_DOP *smithy.Schema
-
-var CurrencyCode_DZD *smithy.Schema
-
-var CurrencyCode_EGP *smithy.Schema
-
-var CurrencyCode_ERN *smithy.Schema
-
-var CurrencyCode_ETB *smithy.Schema
-
-var CurrencyCode_FJD *smithy.Schema
-
-var CurrencyCode_FKP *smithy.Schema
-
-var CurrencyCode_GEL *smithy.Schema
-
-var CurrencyCode_GHS *smithy.Schema
-
-var CurrencyCode_GIP *smithy.Schema
-
-var CurrencyCode_GMD *smithy.Schema
-
-var CurrencyCode_GNF *smithy.Schema
-
-var CurrencyCode_GTQ *smithy.Schema
-
-var CurrencyCode_GYD *smithy.Schema
-
-var CurrencyCode_HKD *smithy.Schema
-
-var CurrencyCode_HNL *smithy.Schema
-
-var CurrencyCode_HRK *smithy.Schema
-
-var CurrencyCode_HTG *smithy.Schema
-
-var CurrencyCode_HUF *smithy.Schema
-
-var CurrencyCode_IDR *smithy.Schema
-
-var CurrencyCode_ILS *smithy.Schema
-
-var CurrencyCode_IQD *smithy.Schema
-
-var CurrencyCode_IRR *smithy.Schema
-
-var CurrencyCode_ISK *smithy.Schema
-
-var CurrencyCode_JMD *smithy.Schema
-
-var CurrencyCode_JOD *smithy.Schema
-
-var CurrencyCode_KES *smithy.Schema
-
-var CurrencyCode_KGS *smithy.Schema
-
-var CurrencyCode_KHR *smithy.Schema
-
-var CurrencyCode_KMF *smithy.Schema
-
-var CurrencyCode_KPW *smithy.Schema
-
-var CurrencyCode_KRW *smithy.Schema
-
-var CurrencyCode_KWD *smithy.Schema
-
-var CurrencyCode_KYD *smithy.Schema
-
-var CurrencyCode_KZT *smithy.Schema
-
-var CurrencyCode_LAK *smithy.Schema
-
-var CurrencyCode_LBP *smithy.Schema
-
-var CurrencyCode_LKR *smithy.Schema
-
-var CurrencyCode_LRD *smithy.Schema
-
-var CurrencyCode_LSL *smithy.Schema
-
-var CurrencyCode_LYD *smithy.Schema
-
-var CurrencyCode_MAD *smithy.Schema
-
-var CurrencyCode_MDL *smithy.Schema
-
-var CurrencyCode_MGA *smithy.Schema
-
-var CurrencyCode_MKD *smithy.Schema
-
-var CurrencyCode_MMK *smithy.Schema
-
-var CurrencyCode_MNT *smithy.Schema
-
-var CurrencyCode_MOP *smithy.Schema
-
-var CurrencyCode_MRU *smithy.Schema
-
-var CurrencyCode_MUR *smithy.Schema
-
-var CurrencyCode_MVR *smithy.Schema
-
-var CurrencyCode_MWK *smithy.Schema
-
-var CurrencyCode_MXN *smithy.Schema
-
-var CurrencyCode_MXV *smithy.Schema
-
-var CurrencyCode_MYR *smithy.Schema
-
-var CurrencyCode_MZN *smithy.Schema
-
-var CurrencyCode_NAD *smithy.Schema
-
-var CurrencyCode_NGN *smithy.Schema
-
-var CurrencyCode_NIO *smithy.Schema
-
-var CurrencyCode_NOK *smithy.Schema
-
-var CurrencyCode_NPR *smithy.Schema
-
-var CurrencyCode_OMR *smithy.Schema
-
-var CurrencyCode_PAB *smithy.Schema
-
-var CurrencyCode_PEN *smithy.Schema
-
-var CurrencyCode_PGK *smithy.Schema
-
-var CurrencyCode_PHP *smithy.Schema
-
-var CurrencyCode_PKR *smithy.Schema
-
-var CurrencyCode_PLN *smithy.Schema
-
-var CurrencyCode_PYG *smithy.Schema
-
-var CurrencyCode_QAR *smithy.Schema
-
-var CurrencyCode_RON *smithy.Schema
-
-var CurrencyCode_RSD *smithy.Schema
-
-var CurrencyCode_RUB *smithy.Schema
-
-var CurrencyCode_RWF *smithy.Schema
-
-var CurrencyCode_SAR *smithy.Schema
-
-var CurrencyCode_SBD *smithy.Schema
-
-var CurrencyCode_SCR *smithy.Schema
-
-var CurrencyCode_SDG *smithy.Schema
-
-var CurrencyCode_SGD *smithy.Schema
-
-var CurrencyCode_SHP *smithy.Schema
-
-var CurrencyCode_SLL *smithy.Schema
-
-var CurrencyCode_SOS *smithy.Schema
-
-var CurrencyCode_SRD *smithy.Schema
-
-var CurrencyCode_SSP *smithy.Schema
-
-var CurrencyCode_STN *smithy.Schema
-
-var CurrencyCode_SVC *smithy.Schema
-
-var CurrencyCode_SYP *smithy.Schema
-
-var CurrencyCode_SZL *smithy.Schema
-
-var CurrencyCode_THB *smithy.Schema
-
-var CurrencyCode_TJS *smithy.Schema
-
-var CurrencyCode_TMT *smithy.Schema
-
-var CurrencyCode_TND *smithy.Schema
-
-var CurrencyCode_TOP *smithy.Schema
-
-var CurrencyCode_TRY *smithy.Schema
-
-var CurrencyCode_TTD *smithy.Schema
-
-var CurrencyCode_TWD *smithy.Schema
-
-var CurrencyCode_TZS *smithy.Schema
-
-var CurrencyCode_UAH *smithy.Schema
-
-var CurrencyCode_UGX *smithy.Schema
-
-var CurrencyCode_USN *smithy.Schema
-
-var CurrencyCode_UYI *smithy.Schema
-
-var CurrencyCode_UYU *smithy.Schema
-
-var CurrencyCode_UZS *smithy.Schema
-
-var CurrencyCode_VEF *smithy.Schema
-
-var CurrencyCode_VND *smithy.Schema
-
-var CurrencyCode_VUV *smithy.Schema
-
-var CurrencyCode_WST *smithy.Schema
-
-var CurrencyCode_XAF *smithy.Schema
-
-var CurrencyCode_XCD *smithy.Schema
-
-var CurrencyCode_XDR *smithy.Schema
-
-var CurrencyCode_XOF *smithy.Schema
-
-var CurrencyCode_XPF *smithy.Schema
-
-var CurrencyCode_XSU *smithy.Schema
-
-var CurrencyCode_XUA *smithy.Schema
-
-var CurrencyCode_YER *smithy.Schema
-
-var CurrencyCode_ZAR *smithy.Schema
-
-var CurrencyCode_ZMW *smithy.Schema
-
-var CurrencyCode_ZWL *smithy.Schema
-
-var Customer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Customer",
-}, smithy.ShapeTypeStructure, 2)
-var Customer_Account *smithy.Schema
-
-var Customer_Contacts *smithy.Schema
-
-var _CustomerAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CustomerAction",
-}, smithy.ShapeTypeString, 0)
-
-var _CustomerContactsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CustomerContactsList",
-}, smithy.ShapeTypeList, 1)
-var _CustomerContactsList_member *smithy.Schema
-
-var CustomerProjectsContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CustomerProjectsContext",
-}, smithy.ShapeTypeStructure, 2)
-var CustomerProjectsContext_Customer *smithy.Schema
-
-var CustomerProjectsContext_Project *smithy.Schema
-
-var CustomerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CustomerSummary",
-}, smithy.ShapeTypeStructure, 1)
-var CustomerSummary_Account *smithy.Schema
-
-var _Date = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Date",
-}, smithy.ShapeTypeString, 0)
-
-var _DateTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DateTime",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var DeliveryModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DeliveryModel",
-}, smithy.ShapeTypeEnum, 6)
-var DeliveryModel_SAAS_OR_PAAS *smithy.Schema
-
-var DeliveryModel_BYOL_OR_AMI *smithy.Schema
-
-var DeliveryModel_MANAGED_SERVICES *smithy.Schema
-
-var DeliveryModel_PROFESSIONAL_SERVICES *smithy.Schema
-
-var DeliveryModel_RESELL *smithy.Schema
-
-var DeliveryModel_OTHER *smithy.Schema
-
-var _DeliveryModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DeliveryModels",
-}, smithy.ShapeTypeList, 1)
-var _DeliveryModels_member *smithy.Schema
-
-var _DunsNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DunsNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EligibleProgramsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EligibleProgramsList",
-}, smithy.ShapeTypeList, 1)
-var _EligibleProgramsList_member *smithy.Schema
-
-var _Email = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Email",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EngagementArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementArnOrIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementArnOrIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var EngagementContextDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementContextDetails",
-}, smithy.ShapeTypeStructure, 3)
-var EngagementContextDetails_Id *smithy.Schema
-
-var EngagementContextDetails_Type *smithy.Schema
-
-var EngagementContextDetails_Payload *smithy.Schema
-
-var _EngagementContextIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementContextIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var EngagementContextPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementContextPayload",
-}, smithy.ShapeTypeUnion, 3)
-var EngagementContextPayload_CustomerProject *smithy.Schema
-
-var EngagementContextPayload_Lead *smithy.Schema
-
-var EngagementContextPayload_ProspectingResult *smithy.Schema
-
-var _EngagementContexts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementContexts",
-}, smithy.ShapeTypeList, 1)
-var _EngagementContexts_member *smithy.Schema
-
-var EngagementContextType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementContextType",
-}, smithy.ShapeTypeEnum, 3)
-var EngagementContextType_CUSTOMER_PROJECT *smithy.Schema
-
-var EngagementContextType_LEAD *smithy.Schema
-
-var EngagementContextType_PROSPECTING_RESULT *smithy.Schema
-
-var _EngagementContextTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementContextTypeList",
-}, smithy.ShapeTypeList, 1)
-var _EngagementContextTypeList_member *smithy.Schema
-
-var EngagementCustomer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementCustomer",
-}, smithy.ShapeTypeStructure, 4)
-var EngagementCustomer_Industry *smithy.Schema
-
-var EngagementCustomer_CompanyName *smithy.Schema
-
-var EngagementCustomer_WebsiteUrl *smithy.Schema
-
-var EngagementCustomer_CountryCode *smithy.Schema
-
-var _EngagementCustomerBusinessProblem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementCustomerBusinessProblem",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var EngagementCustomerProjectDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementCustomerProjectDetails",
-}, smithy.ShapeTypeStructure, 3)
-var EngagementCustomerProjectDetails_Title *smithy.Schema
-
-var EngagementCustomerProjectDetails_BusinessProblem *smithy.Schema
-
-var EngagementCustomerProjectDetails_TargetCompletionDate *smithy.Schema
-
-var _EngagementCustomerProjectTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementCustomerProjectTitle",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _EngagementIdentifierList_member *smithy.Schema
-
-var _EngagementIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _EngagementIdentifiers_member *smithy.Schema
-
-var _EngagementInvitationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementInvitationArnOrIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationArnOrIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementInvitationIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementInvitationIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _EngagementInvitationIdentifiers_member *smithy.Schema
-
-var EngagementInvitationPayloadType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationPayloadType",
-}, smithy.ShapeTypeEnum, 2)
-var EngagementInvitationPayloadType_OPPORTUNITY_INVITATION *smithy.Schema
-
-var EngagementInvitationPayloadType_LEAD_INVITATION *smithy.Schema
-
-var _EngagementInvitationsPayloadType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationsPayloadType",
-}, smithy.ShapeTypeList, 1)
-var _EngagementInvitationsPayloadType_member *smithy.Schema
-
-var _EngagementInvitationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _EngagementInvitationSummaries_member *smithy.Schema
-
-var EngagementInvitationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementInvitationSummary",
-}, smithy.ShapeTypeStructure, 13)
-var EngagementInvitationSummary_Arn *smithy.Schema
-
-var EngagementInvitationSummary_PayloadType *smithy.Schema
-
-var EngagementInvitationSummary_Id *smithy.Schema
-
-var EngagementInvitationSummary_EngagementId *smithy.Schema
-
-var EngagementInvitationSummary_EngagementTitle *smithy.Schema
-
-var EngagementInvitationSummary_Status *smithy.Schema
-
-var EngagementInvitationSummary_InvitationDate *smithy.Schema
-
-var EngagementInvitationSummary_ExpirationDate *smithy.Schema
-
-var EngagementInvitationSummary_SenderAwsAccountId *smithy.Schema
-
-var EngagementInvitationSummary_SenderCompanyName *smithy.Schema
-
-var EngagementInvitationSummary_Receiver *smithy.Schema
-
-var EngagementInvitationSummary_Catalog *smithy.Schema
-
-var EngagementInvitationSummary_ParticipantType *smithy.Schema
-
-var EngagementMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementMember",
-}, smithy.ShapeTypeStructure, 3)
-var EngagementMember_CompanyName *smithy.Schema
-
-var EngagementMember_WebsiteUrl *smithy.Schema
-
-var EngagementMember_AccountId *smithy.Schema
-
-var _EngagementMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementMembers",
-}, smithy.ShapeTypeList, 1)
-var _EngagementMembers_member *smithy.Schema
-
-var _EngagementMemberSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementMemberSummaries",
-}, smithy.ShapeTypeList, 1)
-var _EngagementMemberSummaries_member *smithy.Schema
-
-var EngagementMemberSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementMemberSummary",
-}, smithy.ShapeTypeStructure, 2)
-var EngagementMemberSummary_CompanyName *smithy.Schema
-
-var EngagementMemberSummary_WebsiteUrl *smithy.Schema
-
-var _EngagementPageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementPageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var EngagementProspectingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementProspectingResult",
-}, smithy.ShapeTypeStructure, 5)
-var EngagementProspectingResult_EngagementIdentifier *smithy.Schema
-
-var EngagementProspectingResult_EngagementContextId *smithy.Schema
-
-var EngagementProspectingResult_Status *smithy.Schema
-
-var EngagementProspectingResult_ReasonCode *smithy.Schema
-
-var EngagementProspectingResult_Message *smithy.Schema
-
-var _EngagementProspectingResultList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementProspectingResultList",
-}, smithy.ShapeTypeList, 1)
-var _EngagementProspectingResultList_member *smithy.Schema
-
-var EngagementResourceAssociationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementResourceAssociationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var EngagementResourceAssociationSummary_Catalog *smithy.Schema
-
-var EngagementResourceAssociationSummary_EngagementId *smithy.Schema
-
-var EngagementResourceAssociationSummary_ResourceType *smithy.Schema
-
-var EngagementResourceAssociationSummary_ResourceId *smithy.Schema
-
-var EngagementResourceAssociationSummary_CreatedBy *smithy.Schema
-
-var _EngagementResourceAssociationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementResourceAssociationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EngagementResourceAssociationSummaryList_member *smithy.Schema
-
-var EngagementScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementScore",
-}, smithy.ShapeTypeEnum, 3)
-var EngagementScore_HIGH *smithy.Schema
-
-var EngagementScore_MEDIUM *smithy.Schema
-
-var EngagementScore_LOW *smithy.Schema
-
-var _EngagementScoreLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementScoreLevel",
-}, smithy.ShapeTypeString, 0)
-
-var EngagementSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementSort",
-}, smithy.ShapeTypeStructure, 2)
-var EngagementSort_SortOrder *smithy.Schema
-
-var EngagementSort_SortBy *smithy.Schema
-
-var EngagementSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementSortName",
-}, smithy.ShapeTypeEnum, 1)
-var EngagementSortName_CreatedDate *smithy.Schema
-
-var EngagementSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementSummary",
-}, smithy.ShapeTypeStructure, 9)
-var EngagementSummary_Arn *smithy.Schema
-
-var EngagementSummary_Id *smithy.Schema
-
-var EngagementSummary_Title *smithy.Schema
-
-var EngagementSummary_CreatedAt *smithy.Schema
-
-var EngagementSummary_CreatedBy *smithy.Schema
-
-var EngagementSummary_MemberCount *smithy.Schema
-
-var EngagementSummary_ModifiedAt *smithy.Schema
-
-var EngagementSummary_ModifiedBy *smithy.Schema
-
-var EngagementSummary_ContextTypes *smithy.Schema
-
-var _EngagementSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EngagementSummaryList_member *smithy.Schema
-
-var _EngagementTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementTitle",
-}, smithy.ShapeTypeString, 0)
-
-var _EngagementUseCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EngagementUseCase",
-}, smithy.ShapeTypeString, 0)
-
-var EnrichmentContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EnrichmentContext",
-}, smithy.ShapeTypeStructure, 2)
-var EnrichmentContext_ProspectingResultAws *smithy.Schema
-
-var EnrichmentContext_LeadInsights *smithy.Schema
-
-var _EstimationUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "EstimationUrl",
-}, smithy.ShapeTypeString, 0)
-
-var ExpectedContractDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ExpectedContractDuration",
-}, smithy.ShapeTypeStructure, 2)
-var ExpectedContractDuration_Term *smithy.Schema
-
-var ExpectedContractDuration_Value *smithy.Schema
-
-var ExpectedContractDurationTerm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ExpectedContractDurationTerm",
-}, smithy.ShapeTypeEnum, 1)
-var ExpectedContractDurationTerm_MONTHS *smithy.Schema
-
-var ExpectedCustomerSpend = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ExpectedCustomerSpend",
-}, smithy.ShapeTypeStructure, 5)
-var ExpectedCustomerSpend_Amount *smithy.Schema
-
-var ExpectedCustomerSpend_CurrencyCode *smithy.Schema
-
-var ExpectedCustomerSpend_Frequency *smithy.Schema
-
-var ExpectedCustomerSpend_TargetCompany *smithy.Schema
-
-var ExpectedCustomerSpend_EstimationUrl *smithy.Schema
-
-var _ExpectedCustomerSpendList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ExpectedCustomerSpendList",
-}, smithy.ShapeTypeList, 1)
-var _ExpectedCustomerSpendList_member *smithy.Schema
-
-var _FilterIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "FilterIdentifier",
-}, smithy.ShapeTypeList, 1)
-var _FilterIdentifier_member *smithy.Schema
-
-var _FilterLifeCycleReviewStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "FilterLifeCycleReviewStatus",
-}, smithy.ShapeTypeList, 1)
-var _FilterLifeCycleReviewStatus_member *smithy.Schema
-
-var _FilterLifeCycleStage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "FilterLifeCycleStage",
-}, smithy.ShapeTypeList, 1)
-var _FilterLifeCycleStage_member *smithy.Schema
-
-var _FilterStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "FilterStatus",
-}, smithy.ShapeTypeList, 1)
-var _FilterStatus_member *smithy.Schema
-
-var Industry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Industry",
-}, smithy.ShapeTypeEnum, 28)
-var Industry_AEROSPACE_SATELLITE *smithy.Schema
-
-var Industry_AGRICULTURE *smithy.Schema
-
-var Industry_AUTOMOTIVE *smithy.Schema
-
-var Industry_COMPUTERS_ELECTRONICS *smithy.Schema
-
-var Industry_CONSUMER_GOODS *smithy.Schema
-
-var Industry_EDUCATION *smithy.Schema
-
-var Industry_ENERGY_OIL_GAS *smithy.Schema
-
-var Industry_ENERGY_POWER_UTILITIES *smithy.Schema
-
-var Industry_FINANCIAL_SERVICES *smithy.Schema
-
-var Industry_GAMING *smithy.Schema
-
-var Industry_GOVERNMENT *smithy.Schema
-
-var Industry_HEALTHCARE *smithy.Schema
-
-var Industry_HOSPITALITY *smithy.Schema
-
-var Industry_LIFE_SCIENCES *smithy.Schema
-
-var Industry_MANUFACTURING *smithy.Schema
-
-var Industry_MARKETING_ADVERTISING *smithy.Schema
-
-var Industry_MEDIA_ENTERTAINMENT *smithy.Schema
-
-var Industry_MINING *smithy.Schema
-
-var Industry_NON_PROFIT_ORGANIZATION *smithy.Schema
-
-var Industry_PROFESSIONAL_SERVICES *smithy.Schema
-
-var Industry_REALESTATE_CONSTRUCTION *smithy.Schema
-
-var Industry_RETAIL *smithy.Schema
-
-var Industry_SOFTWARE_INTERNET *smithy.Schema
-
-var Industry_TELECOMMUNICATIONS *smithy.Schema
-
-var Industry_TRANSPORTATION_LOGISTICS *smithy.Schema
-
-var Industry_TRAVEL *smithy.Schema
-
-var Industry_WHOLESALE_DISTRIBUTION *smithy.Schema
-
-var Industry_OTHER *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var Invitation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Invitation",
-}, smithy.ShapeTypeStructure, 3)
-var Invitation_Message *smithy.Schema
-
-var Invitation_Receiver *smithy.Schema
-
-var Invitation_Payload *smithy.Schema
-
-var _InvitationMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "InvitationMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var InvitationProspectingResultAws = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "InvitationProspectingResultAws",
-}, smithy.ShapeTypeStructure, 2)
-var InvitationProspectingResultAws_Customer *smithy.Schema
-
-var InvitationProspectingResultAws_Insights *smithy.Schema
-
-var InvitationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "InvitationStatus",
-}, smithy.ShapeTypeEnum, 4)
-var InvitationStatus_ACCEPTED *smithy.Schema
-
-var InvitationStatus_PENDING *smithy.Schema
-
-var InvitationStatus_REJECTED *smithy.Schema
-
-var InvitationStatus_EXPIRED *smithy.Schema
-
-var _InvitationStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "InvitationStatusList",
-}, smithy.ShapeTypeList, 1)
-var _InvitationStatusList_member *smithy.Schema
-
-var InvolvementTypeChangeReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "InvolvementTypeChangeReason",
-}, smithy.ShapeTypeEnum, 5)
-var InvolvementTypeChangeReason_EXPANSION_OPPORTUNITY *smithy.Schema
-
-var InvolvementTypeChangeReason_CHANGE_IN_DEAL_INFORMATION *smithy.Schema
-
-var InvolvementTypeChangeReason_CUSTOMER_REQUESTED *smithy.Schema
-
-var InvolvementTypeChangeReason_TECHNICAL_COMPLEXITY *smithy.Schema
-
-var InvolvementTypeChangeReason_RISK_MITIGATION *smithy.Schema
-
-var _JobTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "JobTitle",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var LastModifiedDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LastModifiedDate",
-}, smithy.ShapeTypeStructure, 2)
-var LastModifiedDate_AfterLastModifiedDate *smithy.Schema
-
-var LastModifiedDate_BeforeLastModifiedDate *smithy.Schema
-
-var LeadAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadAddress",
-}, smithy.ShapeTypeStructure, 4)
-var LeadAddress_City *smithy.Schema
-
-var LeadAddress_PostalCode *smithy.Schema
-
-var LeadAddress_StateOrRegion *smithy.Schema
-
-var LeadAddress_CountryCode *smithy.Schema
-
-var _LeadBusinessProblem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadBusinessProblem",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var LeadContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadContact",
-}, smithy.ShapeTypeStructure, 5)
-var LeadContact_BusinessTitle *smithy.Schema
-
-var LeadContact_Email *smithy.Schema
-
-var LeadContact_FirstName *smithy.Schema
-
-var LeadContact_LastName *smithy.Schema
-
-var LeadContact_Phone *smithy.Schema
-
-var LeadContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadContext",
-}, smithy.ShapeTypeStructure, 4)
-var LeadContext_Insights *smithy.Schema
-
-var LeadContext_QualificationStatus *smithy.Schema
-
-var LeadContext_Customer *smithy.Schema
-
-var LeadContext_Interactions *smithy.Schema
-
-var _LeadCountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadCountryCode",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var LeadCustomer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadCustomer",
-}, smithy.ShapeTypeStructure, 6)
-var LeadCustomer_Industry *smithy.Schema
-
-var LeadCustomer_CompanyName *smithy.Schema
-
-var LeadCustomer_WebsiteUrl *smithy.Schema
-
-var LeadCustomer_Address *smithy.Schema
-
-var LeadCustomer_AwsMaturity *smithy.Schema
-
-var LeadCustomer_MarketSegment *smithy.Schema
-
-var _LeadEmail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadEmail",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _LeadIndustry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadIndustry",
-}, smithy.ShapeTypeString, 0)
-
-var LeadInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadInsights",
-}, smithy.ShapeTypeStructure, 1)
-var LeadInsights_LeadReadinessScore *smithy.Schema
-
-var LeadInteraction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadInteraction",
-}, smithy.ShapeTypeStructure, 8)
-var LeadInteraction_SourceType *smithy.Schema
-
-var LeadInteraction_SourceId *smithy.Schema
-
-var LeadInteraction_SourceName *smithy.Schema
-
-var LeadInteraction_Usecase *smithy.Schema
-
-var LeadInteraction_InteractionDate *smithy.Schema
-
-var LeadInteraction_CustomerAction *smithy.Schema
-
-var LeadInteraction_BusinessProblem *smithy.Schema
-
-var LeadInteraction_Contact *smithy.Schema
-
-var _LeadInteractionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadInteractionList",
-}, smithy.ShapeTypeList, 1)
-var _LeadInteractionList_member *smithy.Schema
-
-var LeadInvitationCustomer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadInvitationCustomer",
-}, smithy.ShapeTypeStructure, 6)
-var LeadInvitationCustomer_Industry *smithy.Schema
-
-var LeadInvitationCustomer_CompanyName *smithy.Schema
-
-var LeadInvitationCustomer_WebsiteUrl *smithy.Schema
-
-var LeadInvitationCustomer_CountryCode *smithy.Schema
-
-var LeadInvitationCustomer_AwsMaturity *smithy.Schema
-
-var LeadInvitationCustomer_MarketSegment *smithy.Schema
-
-var LeadInvitationInteraction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadInvitationInteraction",
-}, smithy.ShapeTypeStructure, 5)
-var LeadInvitationInteraction_SourceType *smithy.Schema
-
-var LeadInvitationInteraction_SourceId *smithy.Schema
-
-var LeadInvitationInteraction_SourceName *smithy.Schema
-
-var LeadInvitationInteraction_Usecase *smithy.Schema
-
-var LeadInvitationInteraction_ContactBusinessTitle *smithy.Schema
-
-var LeadInvitationPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadInvitationPayload",
-}, smithy.ShapeTypeStructure, 2)
-var LeadInvitationPayload_Customer *smithy.Schema
-
-var LeadInvitationPayload_Interaction *smithy.Schema
-
-var _LeadJobTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadJobTitle",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _LeadMarketSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadMarketSegment",
-}, smithy.ShapeTypeString, 0)
-
-var _LeadPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadPhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _LeadQualificationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadQualificationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _LeadSourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadSourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _LeadSourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadSourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _LeadSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadSourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _LeadWebsiteUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LeadWebsiteUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var LifeCycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LifeCycle",
-}, smithy.ShapeTypeStructure, 8)
-var LifeCycle_Stage *smithy.Schema
-
-var LifeCycle_ClosedLostReason *smithy.Schema
-
-var LifeCycle_NextSteps *smithy.Schema
-
-var LifeCycle_TargetCloseDate *smithy.Schema
-
-var LifeCycle_ReviewStatus *smithy.Schema
-
-var LifeCycle_ReviewComments *smithy.Schema
-
-var LifeCycle_ReviewStatusReason *smithy.Schema
-
-var LifeCycle_NextStepsHistory *smithy.Schema
-
-var LifeCycleForView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LifeCycleForView",
-}, smithy.ShapeTypeStructure, 4)
-var LifeCycleForView_TargetCloseDate *smithy.Schema
-
-var LifeCycleForView_ReviewStatus *smithy.Schema
-
-var LifeCycleForView_Stage *smithy.Schema
-
-var LifeCycleForView_NextSteps *smithy.Schema
-
-var LifeCycleSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "LifeCycleSummary",
-}, smithy.ShapeTypeStructure, 7)
-var LifeCycleSummary_Stage *smithy.Schema
-
-var LifeCycleSummary_ClosedLostReason *smithy.Schema
-
-var LifeCycleSummary_NextSteps *smithy.Schema
-
-var LifeCycleSummary_TargetCloseDate *smithy.Schema
-
-var LifeCycleSummary_ReviewStatus *smithy.Schema
-
-var LifeCycleSummary_ReviewComments *smithy.Schema
-
-var LifeCycleSummary_ReviewStatusReason *smithy.Schema
-
-var _ListEngagementByAcceptingInvitationTaskSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementByAcceptingInvitationTaskSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ListEngagementByAcceptingInvitationTaskSummaries_member *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementByAcceptingInvitationTaskSummary",
-}, smithy.ShapeTypeStructure, 9)
-var ListEngagementByAcceptingInvitationTaskSummary_TaskId *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_TaskArn *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_StartTime *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_TaskStatus *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_Message *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_ReasonCode *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_OpportunityId *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId *smithy.Schema
-
-var _ListEngagementFromOpportunityTaskSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementFromOpportunityTaskSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ListEngagementFromOpportunityTaskSummaries_member *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementFromOpportunityTaskSummary",
-}, smithy.ShapeTypeStructure, 10)
-var ListEngagementFromOpportunityTaskSummary_TaskId *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_TaskArn *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_StartTime *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_TaskStatus *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_Message *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_ReasonCode *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_OpportunityId *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_EngagementId *smithy.Schema
-
-var ListEngagementFromOpportunityTaskSummary_EngagementInvitationId *smithy.Schema
-
-var _ListOpportunityFromEngagementTaskSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunityFromEngagementTaskSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ListOpportunityFromEngagementTaskSummaries_member *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunityFromEngagementTaskSummary",
-}, smithy.ShapeTypeStructure, 10)
-var ListOpportunityFromEngagementTaskSummary_TaskId *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_TaskArn *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_StartTime *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_TaskStatus *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_Message *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_ReasonCode *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_OpportunityId *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_EngagementId *smithy.Schema
-
-var ListOpportunityFromEngagementTaskSummary_ContextId *smithy.Schema
-
-var ListTasksSortBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListTasksSortBase",
-}, smithy.ShapeTypeStructure, 2)
-var ListTasksSortBase_SortOrder *smithy.Schema
-
-var ListTasksSortBase_SortBy *smithy.Schema
-
-var ListTasksSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListTasksSortName",
-}, smithy.ShapeTypeEnum, 1)
-var ListTasksSortName_START_TIME *smithy.Schema
-
-var Marketing = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Marketing",
-}, smithy.ShapeTypeStructure, 5)
-var Marketing_CampaignName *smithy.Schema
-
-var Marketing_Source *smithy.Schema
-
-var Marketing_UseCases *smithy.Schema
-
-var Marketing_Channels *smithy.Schema
-
-var Marketing_AwsFundingUsed *smithy.Schema
-
-var MarketingSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "MarketingSource",
-}, smithy.ShapeTypeEnum, 2)
-var MarketingSource_MARKETING_ACTIVITY *smithy.Schema
-
-var MarketingSource_NONE *smithy.Schema
-
-var _MemberCompanyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "MemberCompanyName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _MemberPageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "MemberPageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MonetaryAmount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "MonetaryAmount",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var MonetaryValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "MonetaryValue",
-}, smithy.ShapeTypeStructure, 2)
-var MonetaryValue_Amount *smithy.Schema
-
-var MonetaryValue_CurrencyCode *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var NationalSecurity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "NationalSecurity",
-}, smithy.ShapeTypeEnum, 2)
-var NationalSecurity_YES *smithy.Schema
-
-var NationalSecurity_NO *smithy.Schema
-
-var _NextStepsHistories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "NextStepsHistories",
-}, smithy.ShapeTypeList, 1)
-var _NextStepsHistories_member *smithy.Schema
-
-var NextStepsHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "NextStepsHistory",
-}, smithy.ShapeTypeStructure, 2)
-var NextStepsHistory_Value *smithy.Schema
-
-var NextStepsHistory_Time *smithy.Schema
-
-var _OpportunityArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityArn",
-}, smithy.ShapeTypeString, 0)
-
-var OpportunityEngagementInvitationSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityEngagementInvitationSort",
-}, smithy.ShapeTypeStructure, 2)
-var OpportunityEngagementInvitationSort_SortOrder *smithy.Schema
-
-var OpportunityEngagementInvitationSort_SortBy *smithy.Schema
-
-var OpportunityEngagementInvitationSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityEngagementInvitationSortName",
-}, smithy.ShapeTypeEnum, 1)
-var OpportunityEngagementInvitationSortName_INVITATION_DATE *smithy.Schema
-
-var _OpportunityIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _OpportunityIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _OpportunityIdentifiers_member *smithy.Schema
-
-var OpportunityInvitationPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityInvitationPayload",
-}, smithy.ShapeTypeStructure, 4)
-var OpportunityInvitationPayload_SenderContacts *smithy.Schema
-
-var OpportunityInvitationPayload_ReceiverResponsibilities *smithy.Schema
-
-var OpportunityInvitationPayload_Customer *smithy.Schema
-
-var OpportunityInvitationPayload_Project *smithy.Schema
-
-var OpportunityOrigin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityOrigin",
-}, smithy.ShapeTypeEnum, 2)
-var OpportunityOrigin_AWS_REFERRAL *smithy.Schema
-
-var OpportunityOrigin_PARTNER_REFERRAL *smithy.Schema
-
-var OpportunityQuality = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityQuality",
-}, smithy.ShapeTypeStructure, 2)
-var OpportunityQuality_Score *smithy.Schema
-
-var OpportunityQuality_Trend *smithy.Schema
-
-var OpportunitySort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunitySort",
-}, smithy.ShapeTypeStructure, 2)
-var OpportunitySort_SortOrder *smithy.Schema
-
-var OpportunitySort_SortBy *smithy.Schema
-
-var OpportunitySortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunitySortName",
-}, smithy.ShapeTypeEnum, 5)
-var OpportunitySortName_LAST_MODIFIEDDATE *smithy.Schema
-
-var OpportunitySortName_IDENTIFIER *smithy.Schema
-
-var OpportunitySortName_CUSTOMER_COMPANY_NAME *smithy.Schema
-
-var OpportunitySortName_CREATED_DATE *smithy.Schema
-
-var OpportunitySortName_TARGET_CLOSE_DATE *smithy.Schema
-
-var _OpportunitySummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunitySummaries",
-}, smithy.ShapeTypeList, 1)
-var _OpportunitySummaries_member *smithy.Schema
-
-var OpportunitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunitySummary",
-}, smithy.ShapeTypeStructure, 10)
-var OpportunitySummary_Catalog *smithy.Schema
-
-var OpportunitySummary_Id *smithy.Schema
-
-var OpportunitySummary_Arn *smithy.Schema
-
-var OpportunitySummary_PartnerOpportunityIdentifier *smithy.Schema
-
-var OpportunitySummary_OpportunityType *smithy.Schema
-
-var OpportunitySummary_LastModifiedDate *smithy.Schema
-
-var OpportunitySummary_CreatedDate *smithy.Schema
-
-var OpportunitySummary_LifeCycle *smithy.Schema
-
-var OpportunitySummary_Customer *smithy.Schema
-
-var OpportunitySummary_Project *smithy.Schema
-
-var OpportunitySummaryView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunitySummaryView",
-}, smithy.ShapeTypeStructure, 7)
-var OpportunitySummaryView_OpportunityType *smithy.Schema
-
-var OpportunitySummaryView_Lifecycle *smithy.Schema
-
-var OpportunitySummaryView_OpportunityTeam *smithy.Schema
-
-var OpportunitySummaryView_PrimaryNeedsFromAws *smithy.Schema
-
-var OpportunitySummaryView_Customer *smithy.Schema
-
-var OpportunitySummaryView_Project *smithy.Schema
-
-var OpportunitySummaryView_RelatedEntityIdentifiers *smithy.Schema
-
-var OpportunityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "OpportunityType",
-}, smithy.ShapeTypeEnum, 3)
-var OpportunityType_NET_NEW_BUSINESS *smithy.Schema
-
-var OpportunityType_FLAT_RENEWAL *smithy.Schema
-
-var OpportunityType_EXPANSION *smithy.Schema
-
-var _PageSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PageSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var ParticipantType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ParticipantType",
-}, smithy.ShapeTypeEnum, 2)
-var ParticipantType_SENDER *smithy.Schema
-
-var ParticipantType_RECEIVER *smithy.Schema
-
-var _PartnerOpportunityTeamMembersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PartnerOpportunityTeamMembersList",
-}, smithy.ShapeTypeList, 1)
-var _PartnerOpportunityTeamMembersList_member *smithy.Schema
-
-var Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Payload",
-}, smithy.ShapeTypeUnion, 2)
-var Payload_OpportunityInvitation *smithy.Schema
-
-var Payload_LeadInvitation *smithy.Schema
-
-var PaymentFrequency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PaymentFrequency",
-}, smithy.ShapeTypeEnum, 1)
-var PaymentFrequency_MONTHLY *smithy.Schema
-
-var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _PiiString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PiiString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PrimaryNeedFromAws = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PrimaryNeedFromAws",
-}, smithy.ShapeTypeEnum, 8)
-var PrimaryNeedFromAws_CO_SELL_ARCHITECTURAL_VALIDATION *smithy.Schema
-
-var PrimaryNeedFromAws_CO_SELL_BUSINESS_PRESENTATION *smithy.Schema
-
-var PrimaryNeedFromAws_CO_SELL_COMPETITIVE_INFORMATION *smithy.Schema
-
-var PrimaryNeedFromAws_CO_SELL_PRICING_ASSISTANCE *smithy.Schema
-
-var PrimaryNeedFromAws_CO_SELL_TECHNICAL_CONSULTATION *smithy.Schema
-
-var PrimaryNeedFromAws_CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION *smithy.Schema
-
-var PrimaryNeedFromAws_CO_SELL_DEAL_SUPPORT *smithy.Schema
-
-var PrimaryNeedFromAws_CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX *smithy.Schema
-
-var _PrimaryNeedsFromAws = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PrimaryNeedsFromAws",
-}, smithy.ShapeTypeList, 1)
-var _PrimaryNeedsFromAws_member *smithy.Schema
-
-var _ProfileNextStepsHistories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProfileNextStepsHistories",
-}, smithy.ShapeTypeList, 1)
-var _ProfileNextStepsHistories_member *smithy.Schema
-
-var ProfileNextStepsHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProfileNextStepsHistory",
-}, smithy.ShapeTypeStructure, 2)
-var ProfileNextStepsHistory_Value *smithy.Schema
-
-var ProfileNextStepsHistory_Time *smithy.Schema
-
-var Project = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Project",
-}, smithy.ShapeTypeStructure, 14)
-var Project_DeliveryModels *smithy.Schema
-
-var Project_ExpectedCustomerSpend *smithy.Schema
-
-var Project_ExpectedContractDuration *smithy.Schema
-
-var Project_Title *smithy.Schema
-
-var Project_ApnPrograms *smithy.Schema
-
-var Project_CustomerBusinessProblem *smithy.Schema
-
-var Project_CustomerUseCase *smithy.Schema
-
-var Project_RelatedOpportunityIdentifier *smithy.Schema
-
-var Project_SalesActivities *smithy.Schema
-
-var Project_CompetitorName *smithy.Schema
-
-var Project_OtherCompetitorNames *smithy.Schema
-
-var Project_OtherSolutionDescription *smithy.Schema
-
-var Project_AdditionalComments *smithy.Schema
-
-var Project_AwsPartition *smithy.Schema
-
-var ProjectDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProjectDetails",
-}, smithy.ShapeTypeStructure, 4)
-var ProjectDetails_BusinessProblem *smithy.Schema
-
-var ProjectDetails_Title *smithy.Schema
-
-var ProjectDetails_TargetCompletionDate *smithy.Schema
-
-var ProjectDetails_ExpectedCustomerSpend *smithy.Schema
-
-var ProjectSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProjectSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ProjectSummary_DeliveryModels *smithy.Schema
-
-var ProjectSummary_ExpectedCustomerSpend *smithy.Schema
-
-var ProjectSummary_ExpectedContractDuration *smithy.Schema
-
-var ProjectView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProjectView",
-}, smithy.ShapeTypeStructure, 6)
-var ProjectView_DeliveryModels *smithy.Schema
-
-var ProjectView_ExpectedCustomerSpend *smithy.Schema
-
-var ProjectView_ExpectedContractDuration *smithy.Schema
-
-var ProjectView_CustomerUseCase *smithy.Schema
-
-var ProjectView_SalesActivities *smithy.Schema
-
-var ProjectView_OtherSolutionDescription *smithy.Schema
-
-var _ProspectingAccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingAccountName",
-}, smithy.ShapeTypeString, 0)
-
-var _ProspectingCompanySize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingCompanySize",
-}, smithy.ShapeTypeString, 0)
-
-var ProspectingFromEngagementTaskSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingFromEngagementTaskSort",
-}, smithy.ShapeTypeStructure, 2)
-var ProspectingFromEngagementTaskSort_SortOrder *smithy.Schema
-
-var ProspectingFromEngagementTaskSort_SortBy *smithy.Schema
-
-var ProspectingFromEngagementTaskSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingFromEngagementTaskSortName",
-}, smithy.ShapeTypeEnum, 3)
-var ProspectingFromEngagementTaskSortName_StartTime *smithy.Schema
-
-var ProspectingFromEngagementTaskSortName_TaskName *smithy.Schema
-
-var ProspectingFromEngagementTaskSortName_FailedEngagementCount *smithy.Schema
-
-var _ProspectingGeo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingGeo",
-}, smithy.ShapeTypeString, 0)
-
-var ProspectingInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingInsights",
-}, smithy.ShapeTypeStructure, 4)
-var ProspectingInsights_MarketplaceEngagementScore *smithy.Schema
-
-var ProspectingInsights_SolutionScore *smithy.Schema
-
-var ProspectingInsights_SolutionCategory *smithy.Schema
-
-var ProspectingInsights_SolutionSubCategory *smithy.Schema
-
-var _ProspectingPublicProfileSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingPublicProfileSummary",
-}, smithy.ShapeTypeString, 0)
-
-var _ProspectingRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingRegion",
-}, smithy.ShapeTypeString, 0)
-
-var ProspectingResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingResult",
-}, smithy.ShapeTypeStructure, 1)
-var ProspectingResult_Aws *smithy.Schema
-
-var ProspectingResultAws = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingResultAws",
-}, smithy.ShapeTypeStructure, 7)
-var ProspectingResultAws_Customer *smithy.Schema
-
-var ProspectingResultAws_Insights *smithy.Schema
-
-var ProspectingResultAws_StartTime *smithy.Schema
-
-var ProspectingResultAws_EndTime *smithy.Schema
-
-var ProspectingResultAws_TaskId *smithy.Schema
-
-var ProspectingResultAws_TaskArn *smithy.Schema
-
-var ProspectingResultAws_TaskName *smithy.Schema
-
-var ProspectingResultCustomer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingResultCustomer",
-}, smithy.ShapeTypeStructure, 11)
-var ProspectingResultCustomer_AccountName *smithy.Schema
-
-var ProspectingResultCustomer_Geo *smithy.Schema
-
-var ProspectingResultCustomer_Region *smithy.Schema
-
-var ProspectingResultCustomer_SubRegion *smithy.Schema
-
-var ProspectingResultCustomer_Country *smithy.Schema
-
-var ProspectingResultCustomer_Industry *smithy.Schema
-
-var ProspectingResultCustomer_SubIndustry *smithy.Schema
-
-var ProspectingResultCustomer_Segment *smithy.Schema
-
-var ProspectingResultCustomer_CompanySize *smithy.Schema
-
-var ProspectingResultCustomer_EligiblePrograms *smithy.Schema
-
-var ProspectingResultCustomer_PublicProfileSummary *smithy.Schema
-
-var _ProspectingSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingSegment",
-}, smithy.ShapeTypeString, 0)
-
-var _ProspectingSubIndustry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingSubIndustry",
-}, smithy.ShapeTypeString, 0)
-
-var _ProspectingSubRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingSubRegion",
-}, smithy.ShapeTypeString, 0)
-
-var _ProspectingTaskArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingTaskArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ProspectingTaskIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingTaskIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ProspectingTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingTaskStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ProspectingTaskStatus_PENDING *smithy.Schema
-
-var ProspectingTaskStatus_IN_PROGRESS *smithy.Schema
-
-var ProspectingTaskStatus_COMPLETED *smithy.Schema
-
-var ProspectingTaskStatus_FAILED *smithy.Schema
-
-var ProspectingTaskSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingTaskSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ProspectingTaskSummary_TaskId *smithy.Schema
-
-var ProspectingTaskSummary_TaskArn *smithy.Schema
-
-var ProspectingTaskSummary_TaskName *smithy.Schema
-
-var ProspectingTaskSummary_StartTime *smithy.Schema
-
-var ProspectingTaskSummary_EndTime *smithy.Schema
-
-var ProspectingTaskSummary_TotalEngagementCount *smithy.Schema
-
-var ProspectingTaskSummary_CompletedEngagementCount *smithy.Schema
-
-var ProspectingTaskSummary_FailedEngagementCount *smithy.Schema
-
-var _ProspectingTaskSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ProspectingTaskSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ProspectingTaskSummaryList_member *smithy.Schema
-
-var ReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ReasonCode",
-}, smithy.ShapeTypeEnum, 22)
-var ReasonCode_INVITATION_ACCESS_DENIED *smithy.Schema
-
-var ReasonCode_INVITATION_VALIDATION_FAILED *smithy.Schema
-
-var ReasonCode_ENGAGEMENT_ACCESS_DENIED *smithy.Schema
-
-var ReasonCode_OPPORTUNITY_ACCESS_DENIED *smithy.Schema
-
-var ReasonCode_RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED *smithy.Schema
-
-var ReasonCode_RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED *smithy.Schema
-
-var ReasonCode_RESOURCE_SNAPSHOT_JOB_CONFLICT *smithy.Schema
-
-var ReasonCode_ENGAGEMENT_VALIDATION_FAILED *smithy.Schema
-
-var ReasonCode_ENGAGEMENT_CONFLICT *smithy.Schema
-
-var ReasonCode_OPPORTUNITY_SUBMISSION_FAILED *smithy.Schema
-
-var ReasonCode_ENGAGEMENT_INVITATION_CONFLICT *smithy.Schema
-
-var ReasonCode_INTERNAL_ERROR *smithy.Schema
-
-var ReasonCode_OPPORTUNITY_VALIDATION_FAILED *smithy.Schema
-
-var ReasonCode_OPPORTUNITY_CONFLICT *smithy.Schema
-
-var ReasonCode_RESOURCE_SNAPSHOT_ACCESS_DENIED *smithy.Schema
-
-var ReasonCode_RESOURCE_SNAPSHOT_VALIDATION_FAILED *smithy.Schema
-
-var ReasonCode_RESOURCE_SNAPSHOT_CONFLICT *smithy.Schema
-
-var ReasonCode_SERVICE_QUOTA_EXCEEDED *smithy.Schema
-
-var ReasonCode_REQUEST_THROTTLED *smithy.Schema
-
-var ReasonCode_CONTEXT_NOT_FOUND *smithy.Schema
-
-var ReasonCode_CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED *smithy.Schema
-
-var ReasonCode_DISQUALIFIED_LEAD_NOT_PERMITTED *smithy.Schema
-
-var Receiver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Receiver",
-}, smithy.ShapeTypeUnion, 1)
-var Receiver_Account *smithy.Schema
-
-var ReceiverResponsibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ReceiverResponsibility",
-}, smithy.ShapeTypeEnum, 9)
-var ReceiverResponsibility_DISTRIBUTOR *smithy.Schema
-
-var ReceiverResponsibility_RESELLER *smithy.Schema
-
-var ReceiverResponsibility_HARDWARE_PARTNER *smithy.Schema
-
-var ReceiverResponsibility_MANAGED_SERVICE_PROVIDER *smithy.Schema
-
-var ReceiverResponsibility_SOFTWARE_PARTNER *smithy.Schema
-
-var ReceiverResponsibility_SERVICES_PARTNER *smithy.Schema
-
-var ReceiverResponsibility_TRAINING_PARTNER *smithy.Schema
-
-var ReceiverResponsibility_CO_SELL_FACILITATOR *smithy.Schema
-
-var ReceiverResponsibility_FACILITATOR *smithy.Schema
-
-var _ReceiverResponsibilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ReceiverResponsibilityList",
-}, smithy.ShapeTypeList, 1)
-var _ReceiverResponsibilityList_member *smithy.Schema
-
-var Recommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Recommendation",
-}, smithy.ShapeTypeStructure, 3)
-var Recommendation_Type *smithy.Schema
-
-var Recommendation_Details *smithy.Schema
-
-var Recommendation_Attributes *smithy.Schema
-
-var _RecommendationAttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RecommendationAttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _RecommendationAttributeMap_key *smithy.Schema
-
-var _RecommendationAttributeMap_value *smithy.Schema
-
-var _RecommendationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RecommendationList",
-}, smithy.ShapeTypeList, 1)
-var _RecommendationList_member *smithy.Schema
-
-var _RejectionReasonString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RejectionReasonString",
-}, smithy.ShapeTypeString, 0)
-
-var RelatedEntityIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RelatedEntityIdentifiers",
-}, smithy.ShapeTypeStructure, 6)
-var RelatedEntityIdentifiers_AwsMarketplaceOffers *smithy.Schema
-
-var RelatedEntityIdentifiers_AwsMarketplaceOfferSets *smithy.Schema
-
-var RelatedEntityIdentifiers_Solutions *smithy.Schema
-
-var RelatedEntityIdentifiers_AwsProducts *smithy.Schema
-
-var RelatedEntityIdentifiers_AwsMarketplaceSolutions *smithy.Schema
-
-var RelatedEntityIdentifiers_AwsMarketplaceProducts *smithy.Schema
-
-var RelatedEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RelatedEntityType",
-}, smithy.ShapeTypeEnum, 6)
-var RelatedEntityType_SOLUTIONS *smithy.Schema
-
-var RelatedEntityType_AWS_PRODUCTS *smithy.Schema
-
-var RelatedEntityType_AWS_MARKETPLACE_OFFERS *smithy.Schema
-
-var RelatedEntityType_AWS_MARKETPLACE_OFFER_SETS *smithy.Schema
-
-var RelatedEntityType_AWS_MARKETPLACE_SOLUTIONS *smithy.Schema
-
-var RelatedEntityType_AWS_MARKETPLACE_PRODUCTS *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _ResourceSnapshotArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceSnapshotJobArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotJobArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceSnapshotJobIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotJobIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceSnapshotJobRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotJobRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceSnapshotJobRoleIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotJobRoleIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceSnapshotJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotJobStatus",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceSnapshotJobStatus_RUNNING *smithy.Schema
-
-var ResourceSnapshotJobStatus_STOPPED *smithy.Schema
-
-var ResourceSnapshotJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotJobSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ResourceSnapshotJobSummary_Id *smithy.Schema
-
-var ResourceSnapshotJobSummary_Arn *smithy.Schema
-
-var ResourceSnapshotJobSummary_EngagementId *smithy.Schema
-
-var ResourceSnapshotJobSummary_Status *smithy.Schema
-
-var _ResourceSnapshotJobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotJobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSnapshotJobSummaryList_member *smithy.Schema
-
-var ResourceSnapshotPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotPayload",
-}, smithy.ShapeTypeUnion, 2)
-var ResourceSnapshotPayload_OpportunitySummary *smithy.Schema
-
-var ResourceSnapshotPayload_AwsOpportunitySummaryFullView *smithy.Schema
-
-var _ResourceSnapshotRevision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotRevision",
-}, smithy.ShapeTypeInteger, 0)
-
-var ResourceSnapshotSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ResourceSnapshotSummary_Arn *smithy.Schema
-
-var ResourceSnapshotSummary_Revision *smithy.Schema
-
-var ResourceSnapshotSummary_ResourceType *smithy.Schema
-
-var ResourceSnapshotSummary_ResourceId *smithy.Schema
-
-var ResourceSnapshotSummary_ResourceSnapshotTemplateName *smithy.Schema
-
-var ResourceSnapshotSummary_CreatedBy *smithy.Schema
-
-var _ResourceSnapshotSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceSnapshotSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSnapshotSummaryList_member *smithy.Schema
-
-var _ResourceTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 1)
-var ResourceType_OPPORTUNITY *smithy.Schema
-
-var RevenueModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RevenueModel",
-}, smithy.ShapeTypeEnum, 3)
-var RevenueModel_CONTRACT *smithy.Schema
-
-var RevenueModel_PAY_AS_YOU_GO *smithy.Schema
-
-var RevenueModel_SUBSCRIPTION *smithy.Schema
-
-var ReviewStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ReviewStatus",
-}, smithy.ShapeTypeEnum, 6)
-var ReviewStatus_PENDING_SUBMISSION *smithy.Schema
-
-var ReviewStatus_SUBMITTED *smithy.Schema
-
-var ReviewStatus_IN_REVIEW *smithy.Schema
-
-var ReviewStatus_APPROVED *smithy.Schema
-
-var ReviewStatus_REJECTED *smithy.Schema
-
-var ReviewStatus_ACTION_REQUIRED *smithy.Schema
-
-var _SalesActivities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SalesActivities",
-}, smithy.ShapeTypeList, 1)
-var _SalesActivities_member *smithy.Schema
-
-var SalesActivity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SalesActivity",
-}, smithy.ShapeTypeEnum, 8)
-var SalesActivity_INITIALIZED_DISCUSSIONS_WITH_CUSTOMER *smithy.Schema
-
-var SalesActivity_CUSTOMER_HAS_SHOWN_INTEREST *smithy.Schema
-
-var SalesActivity_CONDUCTED_POC_DEMO *smithy.Schema
-
-var SalesActivity_IN_EVALUATION_PLANNING_STAGE *smithy.Schema
-
-var SalesActivity_AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM *smithy.Schema
-
-var SalesActivity_COMPLETED_ACTION_PLAN *smithy.Schema
-
-var SalesActivity_FINALIZED_DEPLOYMENT_NEEDS *smithy.Schema
-
-var SalesActivity_SOW_SIGNED *smithy.Schema
-
-var SalesInvolvementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SalesInvolvementType",
-}, smithy.ShapeTypeEnum, 2)
-var SalesInvolvementType_FOR_VISIBILITY_ONLY *smithy.Schema
-
-var SalesInvolvementType_CO_SELL *smithy.Schema
-
-var SenderContact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SenderContact",
-}, smithy.ShapeTypeStructure, 5)
-var SenderContact_Email *smithy.Schema
-
-var SenderContact_FirstName *smithy.Schema
-
-var SenderContact_LastName *smithy.Schema
-
-var SenderContact_BusinessTitle *smithy.Schema
-
-var SenderContact_Phone *smithy.Schema
-
-var _SenderContactEmail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SenderContactEmail",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SenderContactList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SenderContactList",
-}, smithy.ShapeTypeList, 1)
-var _SenderContactList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var SoftwareRevenue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SoftwareRevenue",
-}, smithy.ShapeTypeStructure, 4)
-var SoftwareRevenue_DeliveryModel *smithy.Schema
-
-var SoftwareRevenue_Value *smithy.Schema
-
-var SoftwareRevenue_EffectiveDate *smithy.Schema
-
-var SoftwareRevenue_ExpirationDate *smithy.Schema
-
-var _SolutionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionArn",
-}, smithy.ShapeTypeString, 0)
-
-var SolutionBase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionBase",
-}, smithy.ShapeTypeStructure, 8)
-var SolutionBase_Catalog *smithy.Schema
-
-var SolutionBase_Id *smithy.Schema
-
-var SolutionBase_Arn *smithy.Schema
-
-var SolutionBase_Name *smithy.Schema
-
-var SolutionBase_Status *smithy.Schema
-
-var SolutionBase_Category *smithy.Schema
-
-var SolutionBase_CreatedDate *smithy.Schema
-
-var SolutionBase_AwsMarketplaceSolutionArn *smithy.Schema
-
-var _SolutionIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _SolutionIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _SolutionIdentifiers_member *smithy.Schema
-
-var _SolutionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionList",
-}, smithy.ShapeTypeList, 1)
-var _SolutionList_member *smithy.Schema
-
-var SolutionSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionSort",
-}, smithy.ShapeTypeStructure, 2)
-var SolutionSort_SortOrder *smithy.Schema
-
-var SolutionSort_SortBy *smithy.Schema
-
-var SolutionSortName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionSortName",
-}, smithy.ShapeTypeEnum, 5)
-var SolutionSortName_IDENTIFIER *smithy.Schema
-
-var SolutionSortName_NAME *smithy.Schema
-
-var SolutionSortName_STATUS *smithy.Schema
-
-var SolutionSortName_CATEGORY *smithy.Schema
-
-var SolutionSortName_CREATEDDATE *smithy.Schema
-
-var SolutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SolutionStatus",
-}, smithy.ShapeTypeEnum, 3)
-var SolutionStatus_ACTIVE *smithy.Schema
-
-var SolutionStatus_INACTIVE *smithy.Schema
-
-var SolutionStatus_DRAFT *smithy.Schema
-
-var SortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SortBy",
-}, smithy.ShapeTypeEnum, 1)
-var SortBy_CREATED_DATE *smithy.Schema
-
-var SortObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SortObject",
-}, smithy.ShapeTypeStructure, 2)
-var SortObject_SortBy *smithy.Schema
-
-var SortObject_SortOrder *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var Stage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Stage",
-}, smithy.ShapeTypeEnum, 7)
-var Stage_PROSPECT *smithy.Schema
-
-var Stage_QUALIFIED *smithy.Schema
-
-var Stage_TECHNICAL_VALIDATION *smithy.Schema
-
-var Stage_BUSINESS_VALIDATION *smithy.Schema
-
-var Stage_COMMITTED *smithy.Schema
-
-var Stage_LAUNCHED *smithy.Schema
-
-var Stage_CLOSED_LOST *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TaggableResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaggableResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TargetCloseDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TargetCloseDateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var TargetCloseDateFilter_AfterTargetCloseDate *smithy.Schema
-
-var TargetCloseDateFilter_BeforeTargetCloseDate *smithy.Schema
-
-var _TaskArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskArnOrIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskArnOrIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _TaskIdentifierList_member *smithy.Schema
-
-var _TaskIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _TaskIdentifiers_member *smithy.Schema
-
-var _TaskName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskName",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskNameList",
-}, smithy.ShapeTypeList, 1)
-var _TaskNameList_member *smithy.Schema
-
-var TaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskStatus",
-}, smithy.ShapeTypeEnum, 3)
-var TaskStatus_IN_PROGRESS *smithy.Schema
-
-var TaskStatus_COMPLETE *smithy.Schema
-
-var TaskStatus_FAILED *smithy.Schema
-
-var _TaskStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TaskStatuses",
-}, smithy.ShapeTypeList, 1)
-var _TaskStatuses_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var UpdateEngagementContextPayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateEngagementContextPayload",
-}, smithy.ShapeTypeUnion, 3)
-var UpdateEngagementContextPayload_Lead *smithy.Schema
-
-var UpdateEngagementContextPayload_CustomerProject *smithy.Schema
-
-var UpdateEngagementContextPayload_ProspectingResult *smithy.Schema
-
-var UpdateLeadContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateLeadContext",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateLeadContext_QualificationStatus *smithy.Schema
-
-var UpdateLeadContext_Customer *smithy.Schema
-
-var UpdateLeadContext_Interaction *smithy.Schema
-
-var UpdateLeadContext_Insights *smithy.Schema
-
-var _UseCases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UseCases",
-}, smithy.ShapeTypeList, 1)
-var _UseCases_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_Reason *smithy.Schema
-
-var ValidationException_ErrorList *smithy.Schema
-
-var ValidationExceptionError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ValidationExceptionError",
-}, smithy.ShapeTypeStructure, 3)
-var ValidationExceptionError_FieldName *smithy.Schema
-
-var ValidationExceptionError_Message *smithy.Schema
-
-var ValidationExceptionError_Code *smithy.Schema
-
-var ValidationExceptionErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ValidationExceptionErrorCode",
-}, smithy.ShapeTypeEnum, 10)
-var ValidationExceptionErrorCode_REQUIRED_FIELD_MISSING *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_ENUM_VALUE *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_STRING_FORMAT *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_VALUE *smithy.Schema
-
-var ValidationExceptionErrorCode_NOT_ENOUGH_VALUES *smithy.Schema
-
-var ValidationExceptionErrorCode_TOO_MANY_VALUES *smithy.Schema
-
-var ValidationExceptionErrorCode_INVALID_RESOURCE_STATE *smithy.Schema
-
-var ValidationExceptionErrorCode_DUPLICATE_KEY_VALUE *smithy.Schema
-
-var ValidationExceptionErrorCode_VALUE_OUT_OF_RANGE *smithy.Schema
-
-var ValidationExceptionErrorCode_ACTION_NOT_PERMITTED *smithy.Schema
-
-var _ValidationExceptionErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ValidationExceptionErrorList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionErrorList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var ValidationExceptionReason_REQUEST_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED *smithy.Schema
-
-var Visibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "Visibility",
-}, smithy.ShapeTypeEnum, 2)
-var Visibility_FULL *smithy.Schema
-
-var Visibility_LIMITED *smithy.Schema
-
-var _WebsiteUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "WebsiteUrl",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var AcceptEngagementInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AcceptEngagementInvitationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AcceptEngagementInvitationRequest_Catalog *smithy.Schema
-
-var AcceptEngagementInvitationRequest_Identifier *smithy.Schema
-
-var AssignOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AssignOpportunityRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssignOpportunityRequest_Catalog *smithy.Schema
-
-var AssignOpportunityRequest_Identifier *smithy.Schema
-
-var AssignOpportunityRequest_Assignee *smithy.Schema
-
-var AssociateOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "AssociateOpportunityRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateOpportunityRequest_Catalog *smithy.Schema
-
-var AssociateOpportunityRequest_OpportunityIdentifier *smithy.Schema
-
-var AssociateOpportunityRequest_RelatedEntityType *smithy.Schema
-
-var AssociateOpportunityRequest_RelatedEntityIdentifier *smithy.Schema
-
-var CreateEngagementContextRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementContextRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateEngagementContextRequest_Catalog *smithy.Schema
-
-var CreateEngagementContextRequest_EngagementIdentifier *smithy.Schema
-
-var CreateEngagementContextRequest_ClientToken *smithy.Schema
-
-var CreateEngagementContextRequest_Type *smithy.Schema
-
-var CreateEngagementContextRequest_Payload *smithy.Schema
-
-var CreateEngagementContextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementContextResponse",
-}, smithy.ShapeTypeStructure, 4)
-var CreateEngagementContextResponse_EngagementId *smithy.Schema
-
-var CreateEngagementContextResponse_EngagementArn *smithy.Schema
-
-var CreateEngagementContextResponse_EngagementLastModifiedAt *smithy.Schema
-
-var CreateEngagementContextResponse_ContextId *smithy.Schema
-
-var CreateEngagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateEngagementRequest_Catalog *smithy.Schema
-
-var CreateEngagementRequest_ClientToken *smithy.Schema
-
-var CreateEngagementRequest_Title *smithy.Schema
-
-var CreateEngagementRequest_Description *smithy.Schema
-
-var CreateEngagementRequest_Contexts *smithy.Schema
-
-var CreateEngagementInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementInvitationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateEngagementInvitationRequest_Catalog *smithy.Schema
-
-var CreateEngagementInvitationRequest_ClientToken *smithy.Schema
-
-var CreateEngagementInvitationRequest_EngagementIdentifier *smithy.Schema
-
-var CreateEngagementInvitationRequest_Invitation *smithy.Schema
-
-var CreateEngagementInvitationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementInvitationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateEngagementInvitationResponse_Id *smithy.Schema
-
-var CreateEngagementInvitationResponse_Arn *smithy.Schema
-
-var CreateEngagementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateEngagementResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateEngagementResponse_Id *smithy.Schema
-
-var CreateEngagementResponse_Arn *smithy.Schema
-
-var CreateEngagementResponse_ModifiedAt *smithy.Schema
-
-var CreateOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateOpportunityRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateOpportunityRequest_Catalog *smithy.Schema
-
-var CreateOpportunityRequest_PrimaryNeedsFromAws *smithy.Schema
-
-var CreateOpportunityRequest_NationalSecurity *smithy.Schema
-
-var CreateOpportunityRequest_PartnerOpportunityIdentifier *smithy.Schema
-
-var CreateOpportunityRequest_Customer *smithy.Schema
-
-var CreateOpportunityRequest_Project *smithy.Schema
-
-var CreateOpportunityRequest_OpportunityType *smithy.Schema
-
-var CreateOpportunityRequest_Marketing *smithy.Schema
-
-var CreateOpportunityRequest_SoftwareRevenue *smithy.Schema
-
-var CreateOpportunityRequest_ClientToken *smithy.Schema
-
-var CreateOpportunityRequest_LifeCycle *smithy.Schema
-
-var CreateOpportunityRequest_Origin *smithy.Schema
-
-var CreateOpportunityRequest_OpportunityTeam *smithy.Schema
-
-var CreateOpportunityRequest_Tags *smithy.Schema
-
-var CreateOpportunityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateOpportunityResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateOpportunityResponse_Id *smithy.Schema
-
-var CreateOpportunityResponse_PartnerOpportunityIdentifier *smithy.Schema
-
-var CreateOpportunityResponse_LastModifiedDate *smithy.Schema
-
-var CreateResourceSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateResourceSnapshotRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateResourceSnapshotRequest_Catalog *smithy.Schema
-
-var CreateResourceSnapshotRequest_EngagementIdentifier *smithy.Schema
-
-var CreateResourceSnapshotRequest_ResourceType *smithy.Schema
-
-var CreateResourceSnapshotRequest_ResourceIdentifier *smithy.Schema
-
-var CreateResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier *smithy.Schema
-
-var CreateResourceSnapshotRequest_ClientToken *smithy.Schema
-
-var CreateResourceSnapshotJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateResourceSnapshotJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateResourceSnapshotJobRequest_Catalog *smithy.Schema
-
-var CreateResourceSnapshotJobRequest_ClientToken *smithy.Schema
-
-var CreateResourceSnapshotJobRequest_EngagementIdentifier *smithy.Schema
-
-var CreateResourceSnapshotJobRequest_ResourceType *smithy.Schema
-
-var CreateResourceSnapshotJobRequest_ResourceIdentifier *smithy.Schema
-
-var CreateResourceSnapshotJobRequest_ResourceSnapshotTemplateIdentifier *smithy.Schema
-
-var CreateResourceSnapshotJobRequest_Tags *smithy.Schema
-
-var CreateResourceSnapshotJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateResourceSnapshotJobResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateResourceSnapshotJobResponse_Id *smithy.Schema
-
-var CreateResourceSnapshotJobResponse_Arn *smithy.Schema
-
-var CreateResourceSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "CreateResourceSnapshotResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateResourceSnapshotResponse_Arn *smithy.Schema
-
-var CreateResourceSnapshotResponse_Revision *smithy.Schema
-
-var DeleteResourceSnapshotJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DeleteResourceSnapshotJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourceSnapshotJobRequest_Catalog *smithy.Schema
-
-var DeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier *smithy.Schema
-
-var DisassociateOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "DisassociateOpportunityRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DisassociateOpportunityRequest_Catalog *smithy.Schema
-
-var DisassociateOpportunityRequest_OpportunityIdentifier *smithy.Schema
-
-var DisassociateOpportunityRequest_RelatedEntityType *smithy.Schema
-
-var DisassociateOpportunityRequest_RelatedEntityIdentifier *smithy.Schema
-
-var GetAwsOpportunitySummaryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetAwsOpportunitySummaryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetAwsOpportunitySummaryRequest_Catalog *smithy.Schema
-
-var GetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetAwsOpportunitySummaryResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetAwsOpportunitySummaryResponse_RelatedOpportunityId *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_Origin *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_InvolvementType *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_Visibility *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_LifeCycle *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_OpportunityTeam *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_Insights *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_RelatedEntityIds *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_Customer *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_Project *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_CosellMotion *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_SoftwareRevenue *smithy.Schema
-
-var GetAwsOpportunitySummaryResponse_Catalog *smithy.Schema
-
-var GetEngagementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetEngagementRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetEngagementRequest_Catalog *smithy.Schema
-
-var GetEngagementRequest_Identifier *smithy.Schema
-
-var GetEngagementInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetEngagementInvitationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetEngagementInvitationRequest_Catalog *smithy.Schema
-
-var GetEngagementInvitationRequest_Identifier *smithy.Schema
-
-var GetEngagementInvitationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetEngagementInvitationResponse",
-}, smithy.ShapeTypeStructure, 18)
-var GetEngagementInvitationResponse_Arn *smithy.Schema
-
-var GetEngagementInvitationResponse_PayloadType *smithy.Schema
-
-var GetEngagementInvitationResponse_Id *smithy.Schema
-
-var GetEngagementInvitationResponse_EngagementId *smithy.Schema
-
-var GetEngagementInvitationResponse_EngagementTitle *smithy.Schema
-
-var GetEngagementInvitationResponse_Status *smithy.Schema
-
-var GetEngagementInvitationResponse_InvitationDate *smithy.Schema
-
-var GetEngagementInvitationResponse_ExpirationDate *smithy.Schema
-
-var GetEngagementInvitationResponse_SenderAwsAccountId *smithy.Schema
-
-var GetEngagementInvitationResponse_SenderCompanyName *smithy.Schema
-
-var GetEngagementInvitationResponse_Receiver *smithy.Schema
-
-var GetEngagementInvitationResponse_Catalog *smithy.Schema
-
-var GetEngagementInvitationResponse_RejectionReason *smithy.Schema
-
-var GetEngagementInvitationResponse_Payload *smithy.Schema
-
-var GetEngagementInvitationResponse_InvitationMessage *smithy.Schema
-
-var GetEngagementInvitationResponse_EngagementDescription *smithy.Schema
-
-var GetEngagementInvitationResponse_ExistingMembers *smithy.Schema
-
-var GetEngagementInvitationResponse_EnrichmentContext *smithy.Schema
-
-var GetEngagementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetEngagementResponse",
-}, smithy.ShapeTypeStructure, 10)
-var GetEngagementResponse_Id *smithy.Schema
-
-var GetEngagementResponse_Arn *smithy.Schema
-
-var GetEngagementResponse_Title *smithy.Schema
-
-var GetEngagementResponse_Description *smithy.Schema
-
-var GetEngagementResponse_CreatedAt *smithy.Schema
-
-var GetEngagementResponse_CreatedBy *smithy.Schema
-
-var GetEngagementResponse_MemberCount *smithy.Schema
-
-var GetEngagementResponse_ModifiedAt *smithy.Schema
-
-var GetEngagementResponse_ModifiedBy *smithy.Schema
-
-var GetEngagementResponse_Contexts *smithy.Schema
-
-var GetOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetOpportunityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetOpportunityRequest_Catalog *smithy.Schema
-
-var GetOpportunityRequest_Identifier *smithy.Schema
-
-var GetOpportunityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetOpportunityResponse",
-}, smithy.ShapeTypeStructure, 16)
-var GetOpportunityResponse_Catalog *smithy.Schema
-
-var GetOpportunityResponse_PrimaryNeedsFromAws *smithy.Schema
-
-var GetOpportunityResponse_NationalSecurity *smithy.Schema
-
-var GetOpportunityResponse_PartnerOpportunityIdentifier *smithy.Schema
-
-var GetOpportunityResponse_Customer *smithy.Schema
-
-var GetOpportunityResponse_Project *smithy.Schema
-
-var GetOpportunityResponse_OpportunityType *smithy.Schema
-
-var GetOpportunityResponse_Marketing *smithy.Schema
-
-var GetOpportunityResponse_SoftwareRevenue *smithy.Schema
-
-var GetOpportunityResponse_Id *smithy.Schema
-
-var GetOpportunityResponse_Arn *smithy.Schema
-
-var GetOpportunityResponse_LastModifiedDate *smithy.Schema
-
-var GetOpportunityResponse_CreatedDate *smithy.Schema
-
-var GetOpportunityResponse_RelatedEntityIdentifiers *smithy.Schema
-
-var GetOpportunityResponse_LifeCycle *smithy.Schema
-
-var GetOpportunityResponse_OpportunityTeam *smithy.Schema
-
-var GetProspectingFromEngagementTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetProspectingFromEngagementTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetProspectingFromEngagementTaskRequest_Catalog *smithy.Schema
-
-var GetProspectingFromEngagementTaskRequest_TaskIdentifier *smithy.Schema
-
-var GetProspectingFromEngagementTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetProspectingFromEngagementTaskResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetProspectingFromEngagementTaskResponse_TaskId *smithy.Schema
-
-var GetProspectingFromEngagementTaskResponse_TaskArn *smithy.Schema
-
-var GetProspectingFromEngagementTaskResponse_TaskName *smithy.Schema
-
-var GetProspectingFromEngagementTaskResponse_StartTime *smithy.Schema
-
-var GetProspectingFromEngagementTaskResponse_EndTime *smithy.Schema
-
-var GetProspectingFromEngagementTaskResponse_Engagements *smithy.Schema
-
-var GetResourceSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetResourceSnapshotRequest",
-}, smithy.ShapeTypeStructure, 6)
-var GetResourceSnapshotRequest_Catalog *smithy.Schema
-
-var GetResourceSnapshotRequest_EngagementIdentifier *smithy.Schema
-
-var GetResourceSnapshotRequest_ResourceType *smithy.Schema
-
-var GetResourceSnapshotRequest_ResourceIdentifier *smithy.Schema
-
-var GetResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier *smithy.Schema
-
-var GetResourceSnapshotRequest_Revision *smithy.Schema
-
-var GetResourceSnapshotJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetResourceSnapshotJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceSnapshotJobRequest_Catalog *smithy.Schema
-
-var GetResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier *smithy.Schema
-
-var GetResourceSnapshotJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetResourceSnapshotJobResponse",
-}, smithy.ShapeTypeStructure, 12)
-var GetResourceSnapshotJobResponse_Catalog *smithy.Schema
-
-var GetResourceSnapshotJobResponse_Id *smithy.Schema
-
-var GetResourceSnapshotJobResponse_Arn *smithy.Schema
-
-var GetResourceSnapshotJobResponse_EngagementId *smithy.Schema
-
-var GetResourceSnapshotJobResponse_ResourceType *smithy.Schema
-
-var GetResourceSnapshotJobResponse_ResourceId *smithy.Schema
-
-var GetResourceSnapshotJobResponse_ResourceArn *smithy.Schema
-
-var GetResourceSnapshotJobResponse_ResourceSnapshotTemplateName *smithy.Schema
-
-var GetResourceSnapshotJobResponse_CreatedAt *smithy.Schema
-
-var GetResourceSnapshotJobResponse_Status *smithy.Schema
-
-var GetResourceSnapshotJobResponse_LastSuccessfulExecutionDate *smithy.Schema
-
-var GetResourceSnapshotJobResponse_LastFailure *smithy.Schema
-
-var GetResourceSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetResourceSnapshotResponse",
-}, smithy.ShapeTypeStructure, 11)
-var GetResourceSnapshotResponse_Catalog *smithy.Schema
-
-var GetResourceSnapshotResponse_Arn *smithy.Schema
-
-var GetResourceSnapshotResponse_CreatedBy *smithy.Schema
-
-var GetResourceSnapshotResponse_CreatedAt *smithy.Schema
-
-var GetResourceSnapshotResponse_EngagementId *smithy.Schema
-
-var GetResourceSnapshotResponse_ResourceType *smithy.Schema
-
-var GetResourceSnapshotResponse_ResourceId *smithy.Schema
-
-var GetResourceSnapshotResponse_ResourceSnapshotTemplateName *smithy.Schema
-
-var GetResourceSnapshotResponse_Revision *smithy.Schema
-
-var GetResourceSnapshotResponse_Payload *smithy.Schema
-
-var GetResourceSnapshotResponse_TargetMemberAccounts *smithy.Schema
-
-var GetSellingSystemSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetSellingSystemSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetSellingSystemSettingsRequest_Catalog *smithy.Schema
-
-var GetSellingSystemSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "GetSellingSystemSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetSellingSystemSettingsResponse_Catalog *smithy.Schema
-
-var GetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementByAcceptingInvitationTasksRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListEngagementByAcceptingInvitationTasksRequest_MaxResults *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest_NextToken *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest_Sort *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest_Catalog *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest_TaskStatus *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementByAcceptingInvitationTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries *smithy.Schema
-
-var ListEngagementByAcceptingInvitationTasksResponse_NextToken *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementFromOpportunityTasksRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListEngagementFromOpportunityTasksRequest_MaxResults *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest_NextToken *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest_Sort *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest_Catalog *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest_TaskStatus *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest_TaskIdentifier *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest_OpportunityIdentifier *smithy.Schema
-
-var ListEngagementFromOpportunityTasksRequest_EngagementIdentifier *smithy.Schema
-
-var ListEngagementFromOpportunityTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementFromOpportunityTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngagementFromOpportunityTasksResponse_TaskSummaries *smithy.Schema
-
-var ListEngagementFromOpportunityTasksResponse_NextToken *smithy.Schema
-
-var ListEngagementInvitationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementInvitationsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListEngagementInvitationsRequest_Catalog *smithy.Schema
-
-var ListEngagementInvitationsRequest_MaxResults *smithy.Schema
-
-var ListEngagementInvitationsRequest_NextToken *smithy.Schema
-
-var ListEngagementInvitationsRequest_Sort *smithy.Schema
-
-var ListEngagementInvitationsRequest_PayloadType *smithy.Schema
-
-var ListEngagementInvitationsRequest_ParticipantType *smithy.Schema
-
-var ListEngagementInvitationsRequest_Status *smithy.Schema
-
-var ListEngagementInvitationsRequest_EngagementIdentifier *smithy.Schema
-
-var ListEngagementInvitationsRequest_SenderAwsAccountId *smithy.Schema
-
-var ListEngagementInvitationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementInvitationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngagementInvitationsResponse_EngagementInvitationSummaries *smithy.Schema
-
-var ListEngagementInvitationsResponse_NextToken *smithy.Schema
-
-var ListEngagementMembersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementMembersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEngagementMembersRequest_Catalog *smithy.Schema
-
-var ListEngagementMembersRequest_Identifier *smithy.Schema
-
-var ListEngagementMembersRequest_MaxResults *smithy.Schema
-
-var ListEngagementMembersRequest_NextToken *smithy.Schema
-
-var ListEngagementMembersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementMembersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngagementMembersResponse_EngagementMemberList *smithy.Schema
-
-var ListEngagementMembersResponse_NextToken *smithy.Schema
-
-var ListEngagementResourceAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementResourceAssociationsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListEngagementResourceAssociationsRequest_Catalog *smithy.Schema
-
-var ListEngagementResourceAssociationsRequest_MaxResults *smithy.Schema
-
-var ListEngagementResourceAssociationsRequest_NextToken *smithy.Schema
-
-var ListEngagementResourceAssociationsRequest_EngagementIdentifier *smithy.Schema
-
-var ListEngagementResourceAssociationsRequest_ResourceType *smithy.Schema
-
-var ListEngagementResourceAssociationsRequest_ResourceIdentifier *smithy.Schema
-
-var ListEngagementResourceAssociationsRequest_CreatedBy *smithy.Schema
-
-var ListEngagementResourceAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementResourceAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries *smithy.Schema
-
-var ListEngagementResourceAssociationsResponse_NextToken *smithy.Schema
-
-var ListEngagementsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementsRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListEngagementsRequest_Catalog *smithy.Schema
-
-var ListEngagementsRequest_CreatedBy *smithy.Schema
-
-var ListEngagementsRequest_ExcludeCreatedBy *smithy.Schema
-
-var ListEngagementsRequest_ContextTypes *smithy.Schema
-
-var ListEngagementsRequest_ExcludeContextTypes *smithy.Schema
-
-var ListEngagementsRequest_Sort *smithy.Schema
-
-var ListEngagementsRequest_MaxResults *smithy.Schema
-
-var ListEngagementsRequest_NextToken *smithy.Schema
-
-var ListEngagementsRequest_EngagementIdentifier *smithy.Schema
-
-var ListEngagementsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListEngagementsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEngagementsResponse_EngagementSummaryList *smithy.Schema
-
-var ListEngagementsResponse_NextToken *smithy.Schema
-
-var ListOpportunitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunitiesRequest",
-}, smithy.ShapeTypeStructure, 11)
-var ListOpportunitiesRequest_Catalog *smithy.Schema
-
-var ListOpportunitiesRequest_MaxResults *smithy.Schema
-
-var ListOpportunitiesRequest_NextToken *smithy.Schema
-
-var ListOpportunitiesRequest_Sort *smithy.Schema
-
-var ListOpportunitiesRequest_LastModifiedDate *smithy.Schema
-
-var ListOpportunitiesRequest_Identifier *smithy.Schema
-
-var ListOpportunitiesRequest_LifeCycleStage *smithy.Schema
-
-var ListOpportunitiesRequest_LifeCycleReviewStatus *smithy.Schema
-
-var ListOpportunitiesRequest_CustomerCompanyName *smithy.Schema
-
-var ListOpportunitiesRequest_CreatedDate *smithy.Schema
-
-var ListOpportunitiesRequest_TargetCloseDate *smithy.Schema
-
-var ListOpportunitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOpportunitiesResponse_OpportunitySummaries *smithy.Schema
-
-var ListOpportunitiesResponse_NextToken *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunityFromEngagementTasksRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListOpportunityFromEngagementTasksRequest_MaxResults *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_NextToken *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_Sort *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_Catalog *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_TaskStatus *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_TaskIdentifier *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_OpportunityIdentifier *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_EngagementIdentifier *smithy.Schema
-
-var ListOpportunityFromEngagementTasksRequest_ContextIdentifier *smithy.Schema
-
-var ListOpportunityFromEngagementTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListOpportunityFromEngagementTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOpportunityFromEngagementTasksResponse_TaskSummaries *smithy.Schema
-
-var ListOpportunityFromEngagementTasksResponse_NextToken *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListProspectingFromEngagementTasksRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListProspectingFromEngagementTasksRequest_Catalog *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest_MaxResults *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest_NextToken *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest_TaskIdentifier *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest_TaskName *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest_StartAfter *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest_StartBefore *smithy.Schema
-
-var ListProspectingFromEngagementTasksRequest_Sort *smithy.Schema
-
-var ListProspectingFromEngagementTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListProspectingFromEngagementTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListProspectingFromEngagementTasksResponse_NextToken *smithy.Schema
-
-var ListProspectingFromEngagementTasksResponse_TaskSummaries *smithy.Schema
-
-var ListResourceSnapshotJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListResourceSnapshotJobsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListResourceSnapshotJobsRequest_Catalog *smithy.Schema
-
-var ListResourceSnapshotJobsRequest_MaxResults *smithy.Schema
-
-var ListResourceSnapshotJobsRequest_NextToken *smithy.Schema
-
-var ListResourceSnapshotJobsRequest_EngagementIdentifier *smithy.Schema
-
-var ListResourceSnapshotJobsRequest_Status *smithy.Schema
-
-var ListResourceSnapshotJobsRequest_Sort *smithy.Schema
-
-var ListResourceSnapshotJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListResourceSnapshotJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries *smithy.Schema
-
-var ListResourceSnapshotJobsResponse_NextToken *smithy.Schema
-
-var ListResourceSnapshotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListResourceSnapshotsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListResourceSnapshotsRequest_Catalog *smithy.Schema
-
-var ListResourceSnapshotsRequest_MaxResults *smithy.Schema
-
-var ListResourceSnapshotsRequest_NextToken *smithy.Schema
-
-var ListResourceSnapshotsRequest_EngagementIdentifier *smithy.Schema
-
-var ListResourceSnapshotsRequest_ResourceType *smithy.Schema
-
-var ListResourceSnapshotsRequest_ResourceIdentifier *smithy.Schema
-
-var ListResourceSnapshotsRequest_ResourceSnapshotTemplateIdentifier *smithy.Schema
-
-var ListResourceSnapshotsRequest_CreatedBy *smithy.Schema
-
-var ListResourceSnapshotsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListResourceSnapshotsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceSnapshotsResponse_ResourceSnapshotSummaries *smithy.Schema
-
-var ListResourceSnapshotsResponse_NextToken *smithy.Schema
-
-var ListSolutionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListSolutionsRequest",
-}, smithy.ShapeTypeStructure, 8)
-var ListSolutionsRequest_Catalog *smithy.Schema
-
-var ListSolutionsRequest_MaxResults *smithy.Schema
-
-var ListSolutionsRequest_NextToken *smithy.Schema
-
-var ListSolutionsRequest_Sort *smithy.Schema
-
-var ListSolutionsRequest_Status *smithy.Schema
-
-var ListSolutionsRequest_Identifier *smithy.Schema
-
-var ListSolutionsRequest_Category *smithy.Schema
-
-var ListSolutionsRequest_AwsMarketplaceSolutionArn *smithy.Schema
-
-var ListSolutionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListSolutionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSolutionsResponse_SolutionSummaries *smithy.Schema
-
-var ListSolutionsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutSellingSystemSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PutSellingSystemSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutSellingSystemSettingsRequest_Catalog *smithy.Schema
-
-var PutSellingSystemSettingsRequest_ResourceSnapshotJobRoleIdentifier *smithy.Schema
-
-var PutSellingSystemSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "PutSellingSystemSettingsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutSellingSystemSettingsResponse_Catalog *smithy.Schema
-
-var PutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn *smithy.Schema
-
-var RejectEngagementInvitationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "RejectEngagementInvitationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RejectEngagementInvitationRequest_Catalog *smithy.Schema
-
-var RejectEngagementInvitationRequest_Identifier *smithy.Schema
-
-var RejectEngagementInvitationRequest_RejectionReason *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartEngagementByAcceptingInvitationTaskRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartEngagementByAcceptingInvitationTaskRequest_Catalog *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskRequest_ClientToken *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskRequest_Identifier *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskRequest_Tags *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartEngagementByAcceptingInvitationTaskResponse",
-}, smithy.ShapeTypeStructure, 9)
-var StartEngagementByAcceptingInvitationTaskResponse_TaskId *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_TaskArn *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_StartTime *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_TaskStatus *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_Message *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_ReasonCode *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_OpportunityId *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId *smithy.Schema
-
-var StartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId *smithy.Schema
-
-var StartEngagementFromOpportunityTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartEngagementFromOpportunityTaskRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartEngagementFromOpportunityTaskRequest_Catalog *smithy.Schema
-
-var StartEngagementFromOpportunityTaskRequest_ClientToken *smithy.Schema
-
-var StartEngagementFromOpportunityTaskRequest_Identifier *smithy.Schema
-
-var StartEngagementFromOpportunityTaskRequest_AwsSubmission *smithy.Schema
-
-var StartEngagementFromOpportunityTaskRequest_Tags *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartEngagementFromOpportunityTaskResponse",
-}, smithy.ShapeTypeStructure, 10)
-var StartEngagementFromOpportunityTaskResponse_TaskId *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_TaskArn *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_StartTime *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_TaskStatus *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_Message *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_ReasonCode *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_OpportunityId *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_EngagementId *smithy.Schema
-
-var StartEngagementFromOpportunityTaskResponse_EngagementInvitationId *smithy.Schema
-
-var StartOpportunityFromEngagementTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartOpportunityFromEngagementTaskRequest",
-}, smithy.ShapeTypeStructure, 5)
-var StartOpportunityFromEngagementTaskRequest_Catalog *smithy.Schema
-
-var StartOpportunityFromEngagementTaskRequest_ClientToken *smithy.Schema
-
-var StartOpportunityFromEngagementTaskRequest_Identifier *smithy.Schema
-
-var StartOpportunityFromEngagementTaskRequest_ContextIdentifier *smithy.Schema
-
-var StartOpportunityFromEngagementTaskRequest_Tags *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartOpportunityFromEngagementTaskResponse",
-}, smithy.ShapeTypeStructure, 10)
-var StartOpportunityFromEngagementTaskResponse_TaskId *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_TaskArn *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_StartTime *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_TaskStatus *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_Message *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_ReasonCode *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_OpportunityId *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_ResourceSnapshotJobId *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_EngagementId *smithy.Schema
-
-var StartOpportunityFromEngagementTaskResponse_ContextId *smithy.Schema
-
-var StartProspectingFromEngagementTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartProspectingFromEngagementTaskRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartProspectingFromEngagementTaskRequest_Catalog *smithy.Schema
-
-var StartProspectingFromEngagementTaskRequest_Identifiers *smithy.Schema
-
-var StartProspectingFromEngagementTaskRequest_TaskName *smithy.Schema
-
-var StartProspectingFromEngagementTaskRequest_ClientToken *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartProspectingFromEngagementTaskResponse",
-}, smithy.ShapeTypeStructure, 8)
-var StartProspectingFromEngagementTaskResponse_Identifiers *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse_TaskName *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse_Message *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse_ReasonCode *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse_StartTime *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse_TaskId *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse_TaskArn *smithy.Schema
-
-var StartProspectingFromEngagementTaskResponse_TaskStatus *smithy.Schema
-
-var StartResourceSnapshotJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StartResourceSnapshotJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartResourceSnapshotJobRequest_Catalog *smithy.Schema
-
-var StartResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier *smithy.Schema
-
-var StopResourceSnapshotJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "StopResourceSnapshotJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopResourceSnapshotJobRequest_Catalog *smithy.Schema
-
-var StopResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier *smithy.Schema
-
-var SubmitOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "SubmitOpportunityRequest",
-}, smithy.ShapeTypeStructure, 4)
-var SubmitOpportunityRequest_Catalog *smithy.Schema
-
-var SubmitOpportunityRequest_Identifier *smithy.Schema
-
-var SubmitOpportunityRequest_InvolvementType *smithy.Schema
-
-var SubmitOpportunityRequest_Visibility *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateEngagementContextRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateEngagementContextRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateEngagementContextRequest_Catalog *smithy.Schema
-
-var UpdateEngagementContextRequest_EngagementIdentifier *smithy.Schema
-
-var UpdateEngagementContextRequest_ContextIdentifier *smithy.Schema
-
-var UpdateEngagementContextRequest_EngagementLastModifiedAt *smithy.Schema
-
-var UpdateEngagementContextRequest_Type *smithy.Schema
-
-var UpdateEngagementContextRequest_Payload *smithy.Schema
-
-var UpdateEngagementContextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateEngagementContextResponse",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateEngagementContextResponse_EngagementId *smithy.Schema
-
-var UpdateEngagementContextResponse_EngagementArn *smithy.Schema
-
-var UpdateEngagementContextResponse_EngagementLastModifiedAt *smithy.Schema
-
-var UpdateEngagementContextResponse_ContextId *smithy.Schema
-
-var UpdateOpportunityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateOpportunityRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateOpportunityRequest_Catalog *smithy.Schema
-
-var UpdateOpportunityRequest_PrimaryNeedsFromAws *smithy.Schema
-
-var UpdateOpportunityRequest_NationalSecurity *smithy.Schema
-
-var UpdateOpportunityRequest_PartnerOpportunityIdentifier *smithy.Schema
-
-var UpdateOpportunityRequest_Customer *smithy.Schema
-
-var UpdateOpportunityRequest_Project *smithy.Schema
-
-var UpdateOpportunityRequest_OpportunityType *smithy.Schema
-
-var UpdateOpportunityRequest_Marketing *smithy.Schema
-
-var UpdateOpportunityRequest_SoftwareRevenue *smithy.Schema
-
-var UpdateOpportunityRequest_LastModifiedDate *smithy.Schema
-
-var UpdateOpportunityRequest_Identifier *smithy.Schema
-
-var UpdateOpportunityRequest_LifeCycle *smithy.Schema
-
-var UpdateOpportunityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.partnercentralselling",
-	Name:      "UpdateOpportunityResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateOpportunityResponse_Id *smithy.Schema
-
-var UpdateOpportunityResponse_LastModifiedDate *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE = AccessDeniedExceptionErrorCode.AddMember("INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE", smithyprelude.Unit)
-
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	AccessDeniedException_Reason = AccessDeniedException.AddMember("Reason", AccessDeniedExceptionErrorCode)
-
-	Industry_AEROSPACE_SATELLITE = Industry.AddMember("AEROSPACE_SATELLITE", smithyprelude.Unit)
-
-	Industry_AGRICULTURE = Industry.AddMember("AGRICULTURE", smithyprelude.Unit)
-
-	Industry_AUTOMOTIVE = Industry.AddMember("AUTOMOTIVE", smithyprelude.Unit)
-
-	Industry_COMPUTERS_ELECTRONICS = Industry.AddMember("COMPUTERS_ELECTRONICS", smithyprelude.Unit)
-
-	Industry_CONSUMER_GOODS = Industry.AddMember("CONSUMER_GOODS", smithyprelude.Unit)
-
-	Industry_EDUCATION = Industry.AddMember("EDUCATION", smithyprelude.Unit)
-
-	Industry_ENERGY_OIL_GAS = Industry.AddMember("ENERGY_OIL_GAS", smithyprelude.Unit)
-
-	Industry_ENERGY_POWER_UTILITIES = Industry.AddMember("ENERGY_POWER_UTILITIES", smithyprelude.Unit)
-
-	Industry_FINANCIAL_SERVICES = Industry.AddMember("FINANCIAL_SERVICES", smithyprelude.Unit)
-
-	Industry_GAMING = Industry.AddMember("GAMING", smithyprelude.Unit)
-
-	Industry_GOVERNMENT = Industry.AddMember("GOVERNMENT", smithyprelude.Unit)
-
-	Industry_HEALTHCARE = Industry.AddMember("HEALTHCARE", smithyprelude.Unit)
-
-	Industry_HOSPITALITY = Industry.AddMember("HOSPITALITY", smithyprelude.Unit)
-
-	Industry_LIFE_SCIENCES = Industry.AddMember("LIFE_SCIENCES", smithyprelude.Unit)
-
-	Industry_MANUFACTURING = Industry.AddMember("MANUFACTURING", smithyprelude.Unit)
-
-	Industry_MARKETING_ADVERTISING = Industry.AddMember("MARKETING_ADVERTISING", smithyprelude.Unit)
-
-	Industry_MEDIA_ENTERTAINMENT = Industry.AddMember("MEDIA_ENTERTAINMENT", smithyprelude.Unit)
-
-	Industry_MINING = Industry.AddMember("MINING", smithyprelude.Unit)
-
-	Industry_NON_PROFIT_ORGANIZATION = Industry.AddMember("NON_PROFIT_ORGANIZATION", smithyprelude.Unit)
-
-	Industry_PROFESSIONAL_SERVICES = Industry.AddMember("PROFESSIONAL_SERVICES", smithyprelude.Unit)
-
-	Industry_REALESTATE_CONSTRUCTION = Industry.AddMember("REALESTATE_CONSTRUCTION", smithyprelude.Unit)
-
-	Industry_RETAIL = Industry.AddMember("RETAIL", smithyprelude.Unit)
-
-	Industry_SOFTWARE_INTERNET = Industry.AddMember("SOFTWARE_INTERNET", smithyprelude.Unit)
-
-	Industry_TELECOMMUNICATIONS = Industry.AddMember("TELECOMMUNICATIONS", smithyprelude.Unit)
-
-	Industry_TRANSPORTATION_LOGISTICS = Industry.AddMember("TRANSPORTATION_LOGISTICS", smithyprelude.Unit)
-
-	Industry_TRAVEL = Industry.AddMember("TRAVEL", smithyprelude.Unit)
-
-	Industry_WHOLESALE_DISTRIBUTION = Industry.AddMember("WHOLESALE_DISTRIBUTION", smithyprelude.Unit)
-
-	Industry_OTHER = Industry.AddMember("OTHER", smithyprelude.Unit)
-
-	CountryCode_US = CountryCode.AddMember("US", smithyprelude.Unit)
-
-	CountryCode_AF = CountryCode.AddMember("AF", smithyprelude.Unit)
-
-	CountryCode_AX = CountryCode.AddMember("AX", smithyprelude.Unit)
-
-	CountryCode_AL = CountryCode.AddMember("AL", smithyprelude.Unit)
-
-	CountryCode_DZ = CountryCode.AddMember("DZ", smithyprelude.Unit)
-
-	CountryCode_AS = CountryCode.AddMember("AS", smithyprelude.Unit)
-
-	CountryCode_AD = CountryCode.AddMember("AD", smithyprelude.Unit)
-
-	CountryCode_AO = CountryCode.AddMember("AO", smithyprelude.Unit)
-
-	CountryCode_AI = CountryCode.AddMember("AI", smithyprelude.Unit)
-
-	CountryCode_AQ = CountryCode.AddMember("AQ", smithyprelude.Unit)
-
-	CountryCode_AG = CountryCode.AddMember("AG", smithyprelude.Unit)
-
-	CountryCode_AR = CountryCode.AddMember("AR", smithyprelude.Unit)
-
-	CountryCode_AM = CountryCode.AddMember("AM", smithyprelude.Unit)
-
-	CountryCode_AW = CountryCode.AddMember("AW", smithyprelude.Unit)
-
-	CountryCode_AU = CountryCode.AddMember("AU", smithyprelude.Unit)
-
-	CountryCode_AT = CountryCode.AddMember("AT", smithyprelude.Unit)
-
-	CountryCode_AZ = CountryCode.AddMember("AZ", smithyprelude.Unit)
-
-	CountryCode_BS = CountryCode.AddMember("BS", smithyprelude.Unit)
-
-	CountryCode_BH = CountryCode.AddMember("BH", smithyprelude.Unit)
-
-	CountryCode_BD = CountryCode.AddMember("BD", smithyprelude.Unit)
-
-	CountryCode_BB = CountryCode.AddMember("BB", smithyprelude.Unit)
-
-	CountryCode_BY = CountryCode.AddMember("BY", smithyprelude.Unit)
-
-	CountryCode_BE = CountryCode.AddMember("BE", smithyprelude.Unit)
-
-	CountryCode_BZ = CountryCode.AddMember("BZ", smithyprelude.Unit)
-
-	CountryCode_BJ = CountryCode.AddMember("BJ", smithyprelude.Unit)
-
-	CountryCode_BM = CountryCode.AddMember("BM", smithyprelude.Unit)
-
-	CountryCode_BT = CountryCode.AddMember("BT", smithyprelude.Unit)
-
-	CountryCode_BO = CountryCode.AddMember("BO", smithyprelude.Unit)
-
-	CountryCode_BQ = CountryCode.AddMember("BQ", smithyprelude.Unit)
-
-	CountryCode_BA = CountryCode.AddMember("BA", smithyprelude.Unit)
-
-	CountryCode_BW = CountryCode.AddMember("BW", smithyprelude.Unit)
-
-	CountryCode_BV = CountryCode.AddMember("BV", smithyprelude.Unit)
-
-	CountryCode_BR = CountryCode.AddMember("BR", smithyprelude.Unit)
-
-	CountryCode_IO = CountryCode.AddMember("IO", smithyprelude.Unit)
-
-	CountryCode_BN = CountryCode.AddMember("BN", smithyprelude.Unit)
-
-	CountryCode_BG = CountryCode.AddMember("BG", smithyprelude.Unit)
-
-	CountryCode_BF = CountryCode.AddMember("BF", smithyprelude.Unit)
-
-	CountryCode_BI = CountryCode.AddMember("BI", smithyprelude.Unit)
-
-	CountryCode_KH = CountryCode.AddMember("KH", smithyprelude.Unit)
-
-	CountryCode_CM = CountryCode.AddMember("CM", smithyprelude.Unit)
-
-	CountryCode_CA = CountryCode.AddMember("CA", smithyprelude.Unit)
-
-	CountryCode_CV = CountryCode.AddMember("CV", smithyprelude.Unit)
-
-	CountryCode_KY = CountryCode.AddMember("KY", smithyprelude.Unit)
-
-	CountryCode_CF = CountryCode.AddMember("CF", smithyprelude.Unit)
-
-	CountryCode_TD = CountryCode.AddMember("TD", smithyprelude.Unit)
-
-	CountryCode_CL = CountryCode.AddMember("CL", smithyprelude.Unit)
-
-	CountryCode_CN = CountryCode.AddMember("CN", smithyprelude.Unit)
-
-	CountryCode_CX = CountryCode.AddMember("CX", smithyprelude.Unit)
-
-	CountryCode_CC = CountryCode.AddMember("CC", smithyprelude.Unit)
-
-	CountryCode_CO = CountryCode.AddMember("CO", smithyprelude.Unit)
-
-	CountryCode_KM = CountryCode.AddMember("KM", smithyprelude.Unit)
-
-	CountryCode_CG = CountryCode.AddMember("CG", smithyprelude.Unit)
-
-	CountryCode_CK = CountryCode.AddMember("CK", smithyprelude.Unit)
-
-	CountryCode_CR = CountryCode.AddMember("CR", smithyprelude.Unit)
-
-	CountryCode_CI = CountryCode.AddMember("CI", smithyprelude.Unit)
-
-	CountryCode_HR = CountryCode.AddMember("HR", smithyprelude.Unit)
-
-	CountryCode_CU = CountryCode.AddMember("CU", smithyprelude.Unit)
-
-	CountryCode_CW = CountryCode.AddMember("CW", smithyprelude.Unit)
-
-	CountryCode_CY = CountryCode.AddMember("CY", smithyprelude.Unit)
-
-	CountryCode_CZ = CountryCode.AddMember("CZ", smithyprelude.Unit)
-
-	CountryCode_CD = CountryCode.AddMember("CD", smithyprelude.Unit)
-
-	CountryCode_DK = CountryCode.AddMember("DK", smithyprelude.Unit)
-
-	CountryCode_DJ = CountryCode.AddMember("DJ", smithyprelude.Unit)
-
-	CountryCode_DM = CountryCode.AddMember("DM", smithyprelude.Unit)
-
-	CountryCode_DO = CountryCode.AddMember("DO", smithyprelude.Unit)
-
-	CountryCode_EC = CountryCode.AddMember("EC", smithyprelude.Unit)
-
-	CountryCode_EG = CountryCode.AddMember("EG", smithyprelude.Unit)
-
-	CountryCode_SV = CountryCode.AddMember("SV", smithyprelude.Unit)
-
-	CountryCode_GQ = CountryCode.AddMember("GQ", smithyprelude.Unit)
-
-	CountryCode_ER = CountryCode.AddMember("ER", smithyprelude.Unit)
-
-	CountryCode_EE = CountryCode.AddMember("EE", smithyprelude.Unit)
-
-	CountryCode_ET = CountryCode.AddMember("ET", smithyprelude.Unit)
-
-	CountryCode_FK = CountryCode.AddMember("FK", smithyprelude.Unit)
-
-	CountryCode_FO = CountryCode.AddMember("FO", smithyprelude.Unit)
-
-	CountryCode_FJ = CountryCode.AddMember("FJ", smithyprelude.Unit)
-
-	CountryCode_FI = CountryCode.AddMember("FI", smithyprelude.Unit)
-
-	CountryCode_FR = CountryCode.AddMember("FR", smithyprelude.Unit)
-
-	CountryCode_GF = CountryCode.AddMember("GF", smithyprelude.Unit)
-
-	CountryCode_PF = CountryCode.AddMember("PF", smithyprelude.Unit)
-
-	CountryCode_TF = CountryCode.AddMember("TF", smithyprelude.Unit)
-
-	CountryCode_GA = CountryCode.AddMember("GA", smithyprelude.Unit)
-
-	CountryCode_GM = CountryCode.AddMember("GM", smithyprelude.Unit)
-
-	CountryCode_GE = CountryCode.AddMember("GE", smithyprelude.Unit)
-
-	CountryCode_DE = CountryCode.AddMember("DE", smithyprelude.Unit)
-
-	CountryCode_GH = CountryCode.AddMember("GH", smithyprelude.Unit)
-
-	CountryCode_GI = CountryCode.AddMember("GI", smithyprelude.Unit)
-
-	CountryCode_GR = CountryCode.AddMember("GR", smithyprelude.Unit)
-
-	CountryCode_GL = CountryCode.AddMember("GL", smithyprelude.Unit)
-
-	CountryCode_GD = CountryCode.AddMember("GD", smithyprelude.Unit)
-
-	CountryCode_GP = CountryCode.AddMember("GP", smithyprelude.Unit)
-
-	CountryCode_GU = CountryCode.AddMember("GU", smithyprelude.Unit)
-
-	CountryCode_GT = CountryCode.AddMember("GT", smithyprelude.Unit)
-
-	CountryCode_GG = CountryCode.AddMember("GG", smithyprelude.Unit)
-
-	CountryCode_GN = CountryCode.AddMember("GN", smithyprelude.Unit)
-
-	CountryCode_GW = CountryCode.AddMember("GW", smithyprelude.Unit)
-
-	CountryCode_GY = CountryCode.AddMember("GY", smithyprelude.Unit)
-
-	CountryCode_HT = CountryCode.AddMember("HT", smithyprelude.Unit)
-
-	CountryCode_HM = CountryCode.AddMember("HM", smithyprelude.Unit)
-
-	CountryCode_VA = CountryCode.AddMember("VA", smithyprelude.Unit)
-
-	CountryCode_HN = CountryCode.AddMember("HN", smithyprelude.Unit)
-
-	CountryCode_HK = CountryCode.AddMember("HK", smithyprelude.Unit)
-
-	CountryCode_HU = CountryCode.AddMember("HU", smithyprelude.Unit)
-
-	CountryCode_IS = CountryCode.AddMember("IS", smithyprelude.Unit)
-
-	CountryCode_IN = CountryCode.AddMember("IN", smithyprelude.Unit)
-
-	CountryCode_ID = CountryCode.AddMember("ID", smithyprelude.Unit)
-
-	CountryCode_IR = CountryCode.AddMember("IR", smithyprelude.Unit)
-
-	CountryCode_IQ = CountryCode.AddMember("IQ", smithyprelude.Unit)
-
-	CountryCode_IE = CountryCode.AddMember("IE", smithyprelude.Unit)
-
-	CountryCode_IM = CountryCode.AddMember("IM", smithyprelude.Unit)
-
-	CountryCode_IL = CountryCode.AddMember("IL", smithyprelude.Unit)
-
-	CountryCode_IT = CountryCode.AddMember("IT", smithyprelude.Unit)
-
-	CountryCode_JM = CountryCode.AddMember("JM", smithyprelude.Unit)
-
-	CountryCode_JP = CountryCode.AddMember("JP", smithyprelude.Unit)
-
-	CountryCode_JE = CountryCode.AddMember("JE", smithyprelude.Unit)
-
-	CountryCode_JO = CountryCode.AddMember("JO", smithyprelude.Unit)
-
-	CountryCode_KZ = CountryCode.AddMember("KZ", smithyprelude.Unit)
-
-	CountryCode_KE = CountryCode.AddMember("KE", smithyprelude.Unit)
-
-	CountryCode_KI = CountryCode.AddMember("KI", smithyprelude.Unit)
-
-	CountryCode_KR = CountryCode.AddMember("KR", smithyprelude.Unit)
-
-	CountryCode_KW = CountryCode.AddMember("KW", smithyprelude.Unit)
-
-	CountryCode_KG = CountryCode.AddMember("KG", smithyprelude.Unit)
-
-	CountryCode_LA = CountryCode.AddMember("LA", smithyprelude.Unit)
-
-	CountryCode_LV = CountryCode.AddMember("LV", smithyprelude.Unit)
-
-	CountryCode_LB = CountryCode.AddMember("LB", smithyprelude.Unit)
-
-	CountryCode_LS = CountryCode.AddMember("LS", smithyprelude.Unit)
-
-	CountryCode_LR = CountryCode.AddMember("LR", smithyprelude.Unit)
-
-	CountryCode_LY = CountryCode.AddMember("LY", smithyprelude.Unit)
-
-	CountryCode_LI = CountryCode.AddMember("LI", smithyprelude.Unit)
-
-	CountryCode_LT = CountryCode.AddMember("LT", smithyprelude.Unit)
-
-	CountryCode_LU = CountryCode.AddMember("LU", smithyprelude.Unit)
-
-	CountryCode_MO = CountryCode.AddMember("MO", smithyprelude.Unit)
-
-	CountryCode_MK = CountryCode.AddMember("MK", smithyprelude.Unit)
-
-	CountryCode_MG = CountryCode.AddMember("MG", smithyprelude.Unit)
-
-	CountryCode_MW = CountryCode.AddMember("MW", smithyprelude.Unit)
-
-	CountryCode_MY = CountryCode.AddMember("MY", smithyprelude.Unit)
-
-	CountryCode_MV = CountryCode.AddMember("MV", smithyprelude.Unit)
-
-	CountryCode_ML = CountryCode.AddMember("ML", smithyprelude.Unit)
-
-	CountryCode_MT = CountryCode.AddMember("MT", smithyprelude.Unit)
-
-	CountryCode_MH = CountryCode.AddMember("MH", smithyprelude.Unit)
-
-	CountryCode_MQ = CountryCode.AddMember("MQ", smithyprelude.Unit)
-
-	CountryCode_MR = CountryCode.AddMember("MR", smithyprelude.Unit)
-
-	CountryCode_MU = CountryCode.AddMember("MU", smithyprelude.Unit)
-
-	CountryCode_YT = CountryCode.AddMember("YT", smithyprelude.Unit)
-
-	CountryCode_MX = CountryCode.AddMember("MX", smithyprelude.Unit)
-
-	CountryCode_FM = CountryCode.AddMember("FM", smithyprelude.Unit)
-
-	CountryCode_MD = CountryCode.AddMember("MD", smithyprelude.Unit)
-
-	CountryCode_MC = CountryCode.AddMember("MC", smithyprelude.Unit)
-
-	CountryCode_MN = CountryCode.AddMember("MN", smithyprelude.Unit)
-
-	CountryCode_ME = CountryCode.AddMember("ME", smithyprelude.Unit)
-
-	CountryCode_MS = CountryCode.AddMember("MS", smithyprelude.Unit)
-
-	CountryCode_MA = CountryCode.AddMember("MA", smithyprelude.Unit)
-
-	CountryCode_MZ = CountryCode.AddMember("MZ", smithyprelude.Unit)
-
-	CountryCode_MM = CountryCode.AddMember("MM", smithyprelude.Unit)
-
-	CountryCode_NA = CountryCode.AddMember("NA", smithyprelude.Unit)
-
-	CountryCode_NR = CountryCode.AddMember("NR", smithyprelude.Unit)
-
-	CountryCode_NP = CountryCode.AddMember("NP", smithyprelude.Unit)
-
-	CountryCode_NL = CountryCode.AddMember("NL", smithyprelude.Unit)
-
-	CountryCode_AN = CountryCode.AddMember("AN", smithyprelude.Unit)
-
-	CountryCode_NC = CountryCode.AddMember("NC", smithyprelude.Unit)
-
-	CountryCode_NZ = CountryCode.AddMember("NZ", smithyprelude.Unit)
-
-	CountryCode_NI = CountryCode.AddMember("NI", smithyprelude.Unit)
-
-	CountryCode_NE = CountryCode.AddMember("NE", smithyprelude.Unit)
-
-	CountryCode_NG = CountryCode.AddMember("NG", smithyprelude.Unit)
-
-	CountryCode_NU = CountryCode.AddMember("NU", smithyprelude.Unit)
-
-	CountryCode_NF = CountryCode.AddMember("NF", smithyprelude.Unit)
-
-	CountryCode_MP = CountryCode.AddMember("MP", smithyprelude.Unit)
-
-	CountryCode_NO = CountryCode.AddMember("NO", smithyprelude.Unit)
-
-	CountryCode_OM = CountryCode.AddMember("OM", smithyprelude.Unit)
-
-	CountryCode_PK = CountryCode.AddMember("PK", smithyprelude.Unit)
-
-	CountryCode_PW = CountryCode.AddMember("PW", smithyprelude.Unit)
-
-	CountryCode_PS = CountryCode.AddMember("PS", smithyprelude.Unit)
-
-	CountryCode_PA = CountryCode.AddMember("PA", smithyprelude.Unit)
-
-	CountryCode_PG = CountryCode.AddMember("PG", smithyprelude.Unit)
-
-	CountryCode_PY = CountryCode.AddMember("PY", smithyprelude.Unit)
-
-	CountryCode_PE = CountryCode.AddMember("PE", smithyprelude.Unit)
-
-	CountryCode_PH = CountryCode.AddMember("PH", smithyprelude.Unit)
-
-	CountryCode_PN = CountryCode.AddMember("PN", smithyprelude.Unit)
-
-	CountryCode_PL = CountryCode.AddMember("PL", smithyprelude.Unit)
-
-	CountryCode_PT = CountryCode.AddMember("PT", smithyprelude.Unit)
-
-	CountryCode_PR = CountryCode.AddMember("PR", smithyprelude.Unit)
-
-	CountryCode_QA = CountryCode.AddMember("QA", smithyprelude.Unit)
-
-	CountryCode_RE = CountryCode.AddMember("RE", smithyprelude.Unit)
-
-	CountryCode_RO = CountryCode.AddMember("RO", smithyprelude.Unit)
-
-	CountryCode_RU = CountryCode.AddMember("RU", smithyprelude.Unit)
-
-	CountryCode_RW = CountryCode.AddMember("RW", smithyprelude.Unit)
-
-	CountryCode_BL = CountryCode.AddMember("BL", smithyprelude.Unit)
-
-	CountryCode_SH = CountryCode.AddMember("SH", smithyprelude.Unit)
-
-	CountryCode_KN = CountryCode.AddMember("KN", smithyprelude.Unit)
-
-	CountryCode_LC = CountryCode.AddMember("LC", smithyprelude.Unit)
-
-	CountryCode_MF = CountryCode.AddMember("MF", smithyprelude.Unit)
-
-	CountryCode_PM = CountryCode.AddMember("PM", smithyprelude.Unit)
-
-	CountryCode_VC = CountryCode.AddMember("VC", smithyprelude.Unit)
-
-	CountryCode_WS = CountryCode.AddMember("WS", smithyprelude.Unit)
-
-	CountryCode_SM = CountryCode.AddMember("SM", smithyprelude.Unit)
-
-	CountryCode_ST = CountryCode.AddMember("ST", smithyprelude.Unit)
-
-	CountryCode_SA = CountryCode.AddMember("SA", smithyprelude.Unit)
-
-	CountryCode_SN = CountryCode.AddMember("SN", smithyprelude.Unit)
-
-	CountryCode_RS = CountryCode.AddMember("RS", smithyprelude.Unit)
-
-	CountryCode_SC = CountryCode.AddMember("SC", smithyprelude.Unit)
-
-	CountryCode_SL = CountryCode.AddMember("SL", smithyprelude.Unit)
-
-	CountryCode_SG = CountryCode.AddMember("SG", smithyprelude.Unit)
-
-	CountryCode_SX = CountryCode.AddMember("SX", smithyprelude.Unit)
-
-	CountryCode_SK = CountryCode.AddMember("SK", smithyprelude.Unit)
-
-	CountryCode_SI = CountryCode.AddMember("SI", smithyprelude.Unit)
-
-	CountryCode_SB = CountryCode.AddMember("SB", smithyprelude.Unit)
-
-	CountryCode_SO = CountryCode.AddMember("SO", smithyprelude.Unit)
-
-	CountryCode_ZA = CountryCode.AddMember("ZA", smithyprelude.Unit)
-
-	CountryCode_GS = CountryCode.AddMember("GS", smithyprelude.Unit)
-
-	CountryCode_SS = CountryCode.AddMember("SS", smithyprelude.Unit)
-
-	CountryCode_ES = CountryCode.AddMember("ES", smithyprelude.Unit)
-
-	CountryCode_LK = CountryCode.AddMember("LK", smithyprelude.Unit)
-
-	CountryCode_SD = CountryCode.AddMember("SD", smithyprelude.Unit)
-
-	CountryCode_SR = CountryCode.AddMember("SR", smithyprelude.Unit)
-
-	CountryCode_SJ = CountryCode.AddMember("SJ", smithyprelude.Unit)
-
-	CountryCode_SZ = CountryCode.AddMember("SZ", smithyprelude.Unit)
-
-	CountryCode_SE = CountryCode.AddMember("SE", smithyprelude.Unit)
-
-	CountryCode_CH = CountryCode.AddMember("CH", smithyprelude.Unit)
-
-	CountryCode_SY = CountryCode.AddMember("SY", smithyprelude.Unit)
-
-	CountryCode_TW = CountryCode.AddMember("TW", smithyprelude.Unit)
-
-	CountryCode_TJ = CountryCode.AddMember("TJ", smithyprelude.Unit)
-
-	CountryCode_TZ = CountryCode.AddMember("TZ", smithyprelude.Unit)
-
-	CountryCode_TH = CountryCode.AddMember("TH", smithyprelude.Unit)
-
-	CountryCode_TL = CountryCode.AddMember("TL", smithyprelude.Unit)
-
-	CountryCode_TG = CountryCode.AddMember("TG", smithyprelude.Unit)
-
-	CountryCode_TK = CountryCode.AddMember("TK", smithyprelude.Unit)
-
-	CountryCode_TO = CountryCode.AddMember("TO", smithyprelude.Unit)
-
-	CountryCode_TT = CountryCode.AddMember("TT", smithyprelude.Unit)
-
-	CountryCode_TN = CountryCode.AddMember("TN", smithyprelude.Unit)
-
-	CountryCode_TR = CountryCode.AddMember("TR", smithyprelude.Unit)
-
-	CountryCode_TM = CountryCode.AddMember("TM", smithyprelude.Unit)
-
-	CountryCode_TC = CountryCode.AddMember("TC", smithyprelude.Unit)
-
-	CountryCode_TV = CountryCode.AddMember("TV", smithyprelude.Unit)
-
-	CountryCode_UG = CountryCode.AddMember("UG", smithyprelude.Unit)
-
-	CountryCode_UA = CountryCode.AddMember("UA", smithyprelude.Unit)
-
-	CountryCode_AE = CountryCode.AddMember("AE", smithyprelude.Unit)
-
-	CountryCode_GB = CountryCode.AddMember("GB", smithyprelude.Unit)
-
-	CountryCode_UM = CountryCode.AddMember("UM", smithyprelude.Unit)
-
-	CountryCode_UY = CountryCode.AddMember("UY", smithyprelude.Unit)
-
-	CountryCode_UZ = CountryCode.AddMember("UZ", smithyprelude.Unit)
-
-	CountryCode_VU = CountryCode.AddMember("VU", smithyprelude.Unit)
-
-	CountryCode_VE = CountryCode.AddMember("VE", smithyprelude.Unit)
-
-	CountryCode_VN = CountryCode.AddMember("VN", smithyprelude.Unit)
-
-	CountryCode_VG = CountryCode.AddMember("VG", smithyprelude.Unit)
-
-	CountryCode_VI = CountryCode.AddMember("VI", smithyprelude.Unit)
-
-	CountryCode_WF = CountryCode.AddMember("WF", smithyprelude.Unit)
-
-	CountryCode_EH = CountryCode.AddMember("EH", smithyprelude.Unit)
-
-	CountryCode_YE = CountryCode.AddMember("YE", smithyprelude.Unit)
-
-	CountryCode_ZM = CountryCode.AddMember("ZM", smithyprelude.Unit)
-
-	CountryCode_ZW = CountryCode.AddMember("ZW", smithyprelude.Unit)
-
-	Address_City = Address.AddMember("City", _AddressPart)
-
-	Address_PostalCode = Address.AddMember("PostalCode", _AddressPart)
-
-	Address_StateOrRegion = Address.AddMember("StateOrRegion", _AddressPart)
-
-	Address_CountryCode = Address.AddMember("CountryCode", CountryCode)
-
-	Address_StreetAddress = Address.AddMember("StreetAddress", _AddressPart)
-
-	Account_Industry = Account.AddMember("Industry", Industry)
-
-	Account_OtherIndustry = Account.AddMember("OtherIndustry", smithyprelude.String)
-
-	Account_CompanyName = Account.AddMember("CompanyName", _Name)
-
-	Account_WebsiteUrl = Account.AddMember("WebsiteUrl", _WebsiteUrl)
-
-	Account_AwsAccountId = Account.AddMember("AwsAccountId", _AwsAccount)
-
-	Account_Address = Account.AddMember("Address", Address)
-
-	Account_Duns = Account.AddMember("Duns", _DunsNumber)
-
-	AccountReceiver_Alias = AccountReceiver.AddMember("Alias", _Alias)
-
-	AccountReceiver_AwsAccountId = AccountReceiver.AddMember("AwsAccountId", _AwsAccount)
-
-	AddressSummary_City = AddressSummary.AddMember("City", _AddressPart)
-
-	AddressSummary_PostalCode = AddressSummary.AddMember("PostalCode", _AddressPart)
-
-	AddressSummary_StateOrRegion = AddressSummary.AddMember("StateOrRegion", _AddressPart)
-
-	AddressSummary_CountryCode = AddressSummary.AddMember("CountryCode", CountryCode)
-
-	AccountSummary_Industry = AccountSummary.AddMember("Industry", Industry)
-
-	AccountSummary_OtherIndustry = AccountSummary.AddMember("OtherIndustry", smithyprelude.String)
-
-	AccountSummary_CompanyName = AccountSummary.AddMember("CompanyName", _Name)
-
-	AccountSummary_WebsiteUrl = AccountSummary.AddMember("WebsiteUrl", _WebsiteUrl)
-
-	AccountSummary_Address = AccountSummary.AddMember("Address", AddressSummary)
-
-	_AmountMap_key = _AmountMap.AddMember("key", smithyprelude.String)
-
-	_AmountMap_value = _AmountMap.AddMember("value", _MonetaryAmount)
-
-	_ApnPrograms_member = _ApnPrograms.AddMember("member", smithyprelude.String)
-
-	AssigneeContact_Email = AssigneeContact.AddMember("Email", _Email)
-
-	AssigneeContact_FirstName = AssigneeContact.AddMember("FirstName", _Name)
-
-	AssigneeContact_LastName = AssigneeContact.AddMember("LastName", _Name)
-
-	AssigneeContact_Phone = AssigneeContact.AddMember("Phone", _PhoneNumber)
-
-	AssigneeContact_BusinessTitle = AssigneeContact.AddMember("BusinessTitle", _JobTitle)
-
-	_AwsAccountIdOrAliasList_member = _AwsAccountIdOrAliasList.AddMember("member", _AwsAccount)
-
-	_AwsAccountList_member = _AwsAccountList.AddMember("member", _AwsAccount)
-
-	AwsClosedLostReason_ADMINISTRATIVE = AwsClosedLostReason.AddMember("ADMINISTRATIVE", smithyprelude.Unit)
-
-	AwsClosedLostReason_BUSINESS_ASSOCIATE_AGREEMENT = AwsClosedLostReason.AddMember("BUSINESS_ASSOCIATE_AGREEMENT", smithyprelude.Unit)
-
-	AwsClosedLostReason_COMPANY_ACQUIRED_DISSOLVED = AwsClosedLostReason.AddMember("COMPANY_ACQUIRED_DISSOLVED", smithyprelude.Unit)
-
-	AwsClosedLostReason_COMPETITIVE_OFFERING = AwsClosedLostReason.AddMember("COMPETITIVE_OFFERING", smithyprelude.Unit)
-
-	AwsClosedLostReason_CUSTOMER_DATA_REQUIREMENT = AwsClosedLostReason.AddMember("CUSTOMER_DATA_REQUIREMENT", smithyprelude.Unit)
-
-	AwsClosedLostReason_CUSTOMER_DEFICIENCY = AwsClosedLostReason.AddMember("CUSTOMER_DEFICIENCY", smithyprelude.Unit)
-
-	AwsClosedLostReason_CUSTOMER_EXPERIENCE = AwsClosedLostReason.AddMember("CUSTOMER_EXPERIENCE", smithyprelude.Unit)
-
-	AwsClosedLostReason_DELAY_CANCELLATION_OF_PROJECT = AwsClosedLostReason.AddMember("DELAY_CANCELLATION_OF_PROJECT", smithyprelude.Unit)
-
-	AwsClosedLostReason_DUPLICATE = AwsClosedLostReason.AddMember("DUPLICATE", smithyprelude.Unit)
-
-	AwsClosedLostReason_DUPLICATE_OPPORTUNITY = AwsClosedLostReason.AddMember("DUPLICATE_OPPORTUNITY", smithyprelude.Unit)
-
-	AwsClosedLostReason_EXECUTIVE_BLOCKER = AwsClosedLostReason.AddMember("EXECUTIVE_BLOCKER", smithyprelude.Unit)
-
-	AwsClosedLostReason_FAILED_VETTING = AwsClosedLostReason.AddMember("FAILED_VETTING", smithyprelude.Unit)
-
-	AwsClosedLostReason_FEATURE_LIMITATION = AwsClosedLostReason.AddMember("FEATURE_LIMITATION", smithyprelude.Unit)
-
-	AwsClosedLostReason_FINANCIAL_COMMERCIAL = AwsClosedLostReason.AddMember("FINANCIAL_COMMERCIAL", smithyprelude.Unit)
-
-	AwsClosedLostReason_INSUFFICIENT_AMAZON_VALUE = AwsClosedLostReason.AddMember("INSUFFICIENT_AMAZON_VALUE", smithyprelude.Unit)
-
-	AwsClosedLostReason_INSUFFICIENT_AWS_VALUE = AwsClosedLostReason.AddMember("INSUFFICIENT_AWS_VALUE", smithyprelude.Unit)
-
-	AwsClosedLostReason_INTERNATIONAL_CONSTRAINTS = AwsClosedLostReason.AddMember("INTERNATIONAL_CONSTRAINTS", smithyprelude.Unit)
-
-	AwsClosedLostReason_LEGAL_TAX_REGULATORY = AwsClosedLostReason.AddMember("LEGAL_TAX_REGULATORY", smithyprelude.Unit)
-
-	AwsClosedLostReason_LEGAL_TERMS_AND_CONDITIONS = AwsClosedLostReason.AddMember("LEGAL_TERMS_AND_CONDITIONS", smithyprelude.Unit)
-
-	AwsClosedLostReason_LOST_TO_COMPETITOR = AwsClosedLostReason.AddMember("LOST_TO_COMPETITOR", smithyprelude.Unit)
-
-	AwsClosedLostReason_LOST_TO_COMPETITOR_GOOGLE = AwsClosedLostReason.AddMember("LOST_TO_COMPETITOR_GOOGLE", smithyprelude.Unit)
-
-	AwsClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT = AwsClosedLostReason.AddMember("LOST_TO_COMPETITOR_MICROSOFT", smithyprelude.Unit)
-
-	AwsClosedLostReason_LOST_TO_COMPETITOR_OTHER = AwsClosedLostReason.AddMember("LOST_TO_COMPETITOR_OTHER", smithyprelude.Unit)
-
-	AwsClosedLostReason_LOST_TO_COMPETITOR_RACKSPACE = AwsClosedLostReason.AddMember("LOST_TO_COMPETITOR_RACKSPACE", smithyprelude.Unit)
-
-	AwsClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER = AwsClosedLostReason.AddMember("LOST_TO_COMPETITOR_SOFTLAYER", smithyprelude.Unit)
-
-	AwsClosedLostReason_LOST_TO_COMPETITOR_VMWARE = AwsClosedLostReason.AddMember("LOST_TO_COMPETITOR_VMWARE", smithyprelude.Unit)
-
-	AwsClosedLostReason_NO_CUSTOMER_REFERENCE = AwsClosedLostReason.AddMember("NO_CUSTOMER_REFERENCE", smithyprelude.Unit)
-
-	AwsClosedLostReason_NO_INTEGRATION_RESOURCES = AwsClosedLostReason.AddMember("NO_INTEGRATION_RESOURCES", smithyprelude.Unit)
-
-	AwsClosedLostReason_NO_OPPORTUNITY = AwsClosedLostReason.AddMember("NO_OPPORTUNITY", smithyprelude.Unit)
-
-	AwsClosedLostReason_NO_PERCEIVED_VALUE_OF_MP = AwsClosedLostReason.AddMember("NO_PERCEIVED_VALUE_OF_MP", smithyprelude.Unit)
-
-	AwsClosedLostReason_NO_RESPONSE = AwsClosedLostReason.AddMember("NO_RESPONSE", smithyprelude.Unit)
-
-	AwsClosedLostReason_NOT_COMMITTED_TO_AWS = AwsClosedLostReason.AddMember("NOT_COMMITTED_TO_AWS", smithyprelude.Unit)
-
-	AwsClosedLostReason_NO_UPDATE = AwsClosedLostReason.AddMember("NO_UPDATE", smithyprelude.Unit)
-
-	AwsClosedLostReason_ON_PREMISES_DEPLOYMENT = AwsClosedLostReason.AddMember("ON_PREMISES_DEPLOYMENT", smithyprelude.Unit)
-
-	AwsClosedLostReason_OTHER = AwsClosedLostReason.AddMember("OTHER", smithyprelude.Unit)
-
-	AwsClosedLostReason_OTHER_DETAILS_IN_DESCRIPTION = AwsClosedLostReason.AddMember("OTHER_DETAILS_IN_DESCRIPTION", smithyprelude.Unit)
-
-	AwsClosedLostReason_PARTNER_GAP = AwsClosedLostReason.AddMember("PARTNER_GAP", smithyprelude.Unit)
-
-	AwsClosedLostReason_PAST_DUE = AwsClosedLostReason.AddMember("PAST_DUE", smithyprelude.Unit)
-
-	AwsClosedLostReason_PEOPLE_RELATIONSHIP_GOVERNANCE = AwsClosedLostReason.AddMember("PEOPLE_RELATIONSHIP_GOVERNANCE", smithyprelude.Unit)
-
-	AwsClosedLostReason_PLATFORM_TECHNOLOGY_LIMITATION = AwsClosedLostReason.AddMember("PLATFORM_TECHNOLOGY_LIMITATION", smithyprelude.Unit)
-
-	AwsClosedLostReason_PREFERENCE_FOR_COMPETITOR = AwsClosedLostReason.AddMember("PREFERENCE_FOR_COMPETITOR", smithyprelude.Unit)
-
-	AwsClosedLostReason_PRICE = AwsClosedLostReason.AddMember("PRICE", smithyprelude.Unit)
-
-	AwsClosedLostReason_PRODUCT_TECHNOLOGY = AwsClosedLostReason.AddMember("PRODUCT_TECHNOLOGY", smithyprelude.Unit)
-
-	AwsClosedLostReason_PRODUCT_NOT_ON_AWS = AwsClosedLostReason.AddMember("PRODUCT_NOT_ON_AWS", smithyprelude.Unit)
-
-	AwsClosedLostReason_SECURITY_COMPLIANCE = AwsClosedLostReason.AddMember("SECURITY_COMPLIANCE", smithyprelude.Unit)
-
-	AwsClosedLostReason_SELF_SERVICE = AwsClosedLostReason.AddMember("SELF_SERVICE", smithyprelude.Unit)
-
-	AwsClosedLostReason_TECHNICAL_LIMITATIONS = AwsClosedLostReason.AddMember("TECHNICAL_LIMITATIONS", smithyprelude.Unit)
-
-	AwsClosedLostReason_TERM_SHEET_IMPASSE = AwsClosedLostReason.AddMember("TERM_SHEET_IMPASSE", smithyprelude.Unit)
-
-	AwsFundingUsed_YES = AwsFundingUsed.AddMember("YES", smithyprelude.Unit)
-
-	AwsFundingUsed_NO = AwsFundingUsed.AddMember("NO", smithyprelude.Unit)
-
-	_AwsMarketplaceOfferIdentifiers_member = _AwsMarketplaceOfferIdentifiers.AddMember("member", _AwsMarketplaceOfferIdentifier)
-
-	_AwsMarketplaceOfferSetIdentifiers_member = _AwsMarketplaceOfferSetIdentifiers.AddMember("member", _AwsMarketplaceOfferSetIdentifier)
-
-	_AwsMarketplaceProductIdentifiers_member = _AwsMarketplaceProductIdentifiers.AddMember("member", _AwsMarketplaceProductArn)
-
-	_AwsMarketplaceSolutionArnList_member = _AwsMarketplaceSolutionArnList.AddMember("member", _AwsMarketplaceSolutionArn)
-
-	_AwsMarketplaceSolutionIdentifiers_member = _AwsMarketplaceSolutionIdentifiers.AddMember("member", _AwsMarketplaceSolutionIdentifier)
-
-	AwsMemberBusinessTitle_AWS_SALES_REP = AwsMemberBusinessTitle.AddMember("AWS_SALES_REP", smithyprelude.Unit)
-
-	AwsMemberBusinessTitle_AWS_ACCOUNT_OWNER = AwsMemberBusinessTitle.AddMember("AWS_ACCOUNT_OWNER", smithyprelude.Unit)
-
-	AwsMemberBusinessTitle_WWPSPDM = AwsMemberBusinessTitle.AddMember("WWPSPDM", smithyprelude.Unit)
-
-	AwsMemberBusinessTitle_PDM = AwsMemberBusinessTitle.AddMember("PDM", smithyprelude.Unit)
-
-	AwsMemberBusinessTitle_PSM = AwsMemberBusinessTitle.AddMember("PSM", smithyprelude.Unit)
-
-	AwsMemberBusinessTitle_ISVSM = AwsMemberBusinessTitle.AddMember("ISVSM", smithyprelude.Unit)
-
-	AwsMemberBusinessTitle_SIGNATORY = AwsMemberBusinessTitle.AddMember("SIGNATORY", smithyprelude.Unit)
-
-	Contact_Email = Contact.AddMember("Email", _Email)
-
-	Contact_FirstName = Contact.AddMember("FirstName", _Name)
-
-	Contact_LastName = Contact.AddMember("LastName", _Name)
-
-	Contact_BusinessTitle = Contact.AddMember("BusinessTitle", _JobTitle)
-
-	Contact_Phone = Contact.AddMember("Phone", _PhoneNumber)
-
-	_CustomerContactsList_member = _CustomerContactsList.AddMember("member", Contact)
-
-	AwsOpportunityCustomer_Contacts = AwsOpportunityCustomer.AddMember("Contacts", _CustomerContactsList)
-
-	EngagementScore_HIGH = EngagementScore.AddMember("HIGH", smithyprelude.Unit)
-
-	EngagementScore_MEDIUM = EngagementScore.AddMember("MEDIUM", smithyprelude.Unit)
-
-	EngagementScore_LOW = EngagementScore.AddMember("LOW", smithyprelude.Unit)
-
-	CurrencyCode_USD = CurrencyCode.AddMember("USD", smithyprelude.Unit)
-
-	CurrencyCode_EUR = CurrencyCode.AddMember("EUR", smithyprelude.Unit)
-
-	CurrencyCode_GBP = CurrencyCode.AddMember("GBP", smithyprelude.Unit)
-
-	CurrencyCode_AUD = CurrencyCode.AddMember("AUD", smithyprelude.Unit)
-
-	CurrencyCode_CAD = CurrencyCode.AddMember("CAD", smithyprelude.Unit)
-
-	CurrencyCode_CNY = CurrencyCode.AddMember("CNY", smithyprelude.Unit)
-
-	CurrencyCode_NZD = CurrencyCode.AddMember("NZD", smithyprelude.Unit)
-
-	CurrencyCode_INR = CurrencyCode.AddMember("INR", smithyprelude.Unit)
-
-	CurrencyCode_JPY = CurrencyCode.AddMember("JPY", smithyprelude.Unit)
-
-	CurrencyCode_CHF = CurrencyCode.AddMember("CHF", smithyprelude.Unit)
-
-	CurrencyCode_SEK = CurrencyCode.AddMember("SEK", smithyprelude.Unit)
-
-	CurrencyCode_AED = CurrencyCode.AddMember("AED", smithyprelude.Unit)
-
-	CurrencyCode_AFN = CurrencyCode.AddMember("AFN", smithyprelude.Unit)
-
-	CurrencyCode_ALL = CurrencyCode.AddMember("ALL", smithyprelude.Unit)
-
-	CurrencyCode_AMD = CurrencyCode.AddMember("AMD", smithyprelude.Unit)
-
-	CurrencyCode_ANG = CurrencyCode.AddMember("ANG", smithyprelude.Unit)
-
-	CurrencyCode_AOA = CurrencyCode.AddMember("AOA", smithyprelude.Unit)
-
-	CurrencyCode_ARS = CurrencyCode.AddMember("ARS", smithyprelude.Unit)
-
-	CurrencyCode_AWG = CurrencyCode.AddMember("AWG", smithyprelude.Unit)
-
-	CurrencyCode_AZN = CurrencyCode.AddMember("AZN", smithyprelude.Unit)
-
-	CurrencyCode_BAM = CurrencyCode.AddMember("BAM", smithyprelude.Unit)
-
-	CurrencyCode_BBD = CurrencyCode.AddMember("BBD", smithyprelude.Unit)
-
-	CurrencyCode_BDT = CurrencyCode.AddMember("BDT", smithyprelude.Unit)
-
-	CurrencyCode_BGN = CurrencyCode.AddMember("BGN", smithyprelude.Unit)
-
-	CurrencyCode_BHD = CurrencyCode.AddMember("BHD", smithyprelude.Unit)
-
-	CurrencyCode_BIF = CurrencyCode.AddMember("BIF", smithyprelude.Unit)
-
-	CurrencyCode_BMD = CurrencyCode.AddMember("BMD", smithyprelude.Unit)
-
-	CurrencyCode_BND = CurrencyCode.AddMember("BND", smithyprelude.Unit)
-
-	CurrencyCode_BOB = CurrencyCode.AddMember("BOB", smithyprelude.Unit)
-
-	CurrencyCode_BOV = CurrencyCode.AddMember("BOV", smithyprelude.Unit)
-
-	CurrencyCode_BRL = CurrencyCode.AddMember("BRL", smithyprelude.Unit)
-
-	CurrencyCode_BSD = CurrencyCode.AddMember("BSD", smithyprelude.Unit)
-
-	CurrencyCode_BTN = CurrencyCode.AddMember("BTN", smithyprelude.Unit)
-
-	CurrencyCode_BWP = CurrencyCode.AddMember("BWP", smithyprelude.Unit)
-
-	CurrencyCode_BYN = CurrencyCode.AddMember("BYN", smithyprelude.Unit)
-
-	CurrencyCode_BZD = CurrencyCode.AddMember("BZD", smithyprelude.Unit)
-
-	CurrencyCode_CDF = CurrencyCode.AddMember("CDF", smithyprelude.Unit)
-
-	CurrencyCode_CHE = CurrencyCode.AddMember("CHE", smithyprelude.Unit)
-
-	CurrencyCode_CHW = CurrencyCode.AddMember("CHW", smithyprelude.Unit)
-
-	CurrencyCode_CLF = CurrencyCode.AddMember("CLF", smithyprelude.Unit)
-
-	CurrencyCode_CLP = CurrencyCode.AddMember("CLP", smithyprelude.Unit)
-
-	CurrencyCode_COP = CurrencyCode.AddMember("COP", smithyprelude.Unit)
-
-	CurrencyCode_COU = CurrencyCode.AddMember("COU", smithyprelude.Unit)
-
-	CurrencyCode_CRC = CurrencyCode.AddMember("CRC", smithyprelude.Unit)
-
-	CurrencyCode_CUC = CurrencyCode.AddMember("CUC", smithyprelude.Unit)
-
-	CurrencyCode_CUP = CurrencyCode.AddMember("CUP", smithyprelude.Unit)
-
-	CurrencyCode_CVE = CurrencyCode.AddMember("CVE", smithyprelude.Unit)
-
-	CurrencyCode_CZK = CurrencyCode.AddMember("CZK", smithyprelude.Unit)
-
-	CurrencyCode_DJF = CurrencyCode.AddMember("DJF", smithyprelude.Unit)
-
-	CurrencyCode_DKK = CurrencyCode.AddMember("DKK", smithyprelude.Unit)
-
-	CurrencyCode_DOP = CurrencyCode.AddMember("DOP", smithyprelude.Unit)
-
-	CurrencyCode_DZD = CurrencyCode.AddMember("DZD", smithyprelude.Unit)
-
-	CurrencyCode_EGP = CurrencyCode.AddMember("EGP", smithyprelude.Unit)
-
-	CurrencyCode_ERN = CurrencyCode.AddMember("ERN", smithyprelude.Unit)
-
-	CurrencyCode_ETB = CurrencyCode.AddMember("ETB", smithyprelude.Unit)
-
-	CurrencyCode_FJD = CurrencyCode.AddMember("FJD", smithyprelude.Unit)
-
-	CurrencyCode_FKP = CurrencyCode.AddMember("FKP", smithyprelude.Unit)
-
-	CurrencyCode_GEL = CurrencyCode.AddMember("GEL", smithyprelude.Unit)
-
-	CurrencyCode_GHS = CurrencyCode.AddMember("GHS", smithyprelude.Unit)
-
-	CurrencyCode_GIP = CurrencyCode.AddMember("GIP", smithyprelude.Unit)
-
-	CurrencyCode_GMD = CurrencyCode.AddMember("GMD", smithyprelude.Unit)
-
-	CurrencyCode_GNF = CurrencyCode.AddMember("GNF", smithyprelude.Unit)
-
-	CurrencyCode_GTQ = CurrencyCode.AddMember("GTQ", smithyprelude.Unit)
-
-	CurrencyCode_GYD = CurrencyCode.AddMember("GYD", smithyprelude.Unit)
-
-	CurrencyCode_HKD = CurrencyCode.AddMember("HKD", smithyprelude.Unit)
-
-	CurrencyCode_HNL = CurrencyCode.AddMember("HNL", smithyprelude.Unit)
-
-	CurrencyCode_HRK = CurrencyCode.AddMember("HRK", smithyprelude.Unit)
-
-	CurrencyCode_HTG = CurrencyCode.AddMember("HTG", smithyprelude.Unit)
-
-	CurrencyCode_HUF = CurrencyCode.AddMember("HUF", smithyprelude.Unit)
-
-	CurrencyCode_IDR = CurrencyCode.AddMember("IDR", smithyprelude.Unit)
-
-	CurrencyCode_ILS = CurrencyCode.AddMember("ILS", smithyprelude.Unit)
-
-	CurrencyCode_IQD = CurrencyCode.AddMember("IQD", smithyprelude.Unit)
-
-	CurrencyCode_IRR = CurrencyCode.AddMember("IRR", smithyprelude.Unit)
-
-	CurrencyCode_ISK = CurrencyCode.AddMember("ISK", smithyprelude.Unit)
-
-	CurrencyCode_JMD = CurrencyCode.AddMember("JMD", smithyprelude.Unit)
-
-	CurrencyCode_JOD = CurrencyCode.AddMember("JOD", smithyprelude.Unit)
-
-	CurrencyCode_KES = CurrencyCode.AddMember("KES", smithyprelude.Unit)
-
-	CurrencyCode_KGS = CurrencyCode.AddMember("KGS", smithyprelude.Unit)
-
-	CurrencyCode_KHR = CurrencyCode.AddMember("KHR", smithyprelude.Unit)
-
-	CurrencyCode_KMF = CurrencyCode.AddMember("KMF", smithyprelude.Unit)
-
-	CurrencyCode_KPW = CurrencyCode.AddMember("KPW", smithyprelude.Unit)
-
-	CurrencyCode_KRW = CurrencyCode.AddMember("KRW", smithyprelude.Unit)
-
-	CurrencyCode_KWD = CurrencyCode.AddMember("KWD", smithyprelude.Unit)
-
-	CurrencyCode_KYD = CurrencyCode.AddMember("KYD", smithyprelude.Unit)
-
-	CurrencyCode_KZT = CurrencyCode.AddMember("KZT", smithyprelude.Unit)
-
-	CurrencyCode_LAK = CurrencyCode.AddMember("LAK", smithyprelude.Unit)
-
-	CurrencyCode_LBP = CurrencyCode.AddMember("LBP", smithyprelude.Unit)
-
-	CurrencyCode_LKR = CurrencyCode.AddMember("LKR", smithyprelude.Unit)
-
-	CurrencyCode_LRD = CurrencyCode.AddMember("LRD", smithyprelude.Unit)
-
-	CurrencyCode_LSL = CurrencyCode.AddMember("LSL", smithyprelude.Unit)
-
-	CurrencyCode_LYD = CurrencyCode.AddMember("LYD", smithyprelude.Unit)
-
-	CurrencyCode_MAD = CurrencyCode.AddMember("MAD", smithyprelude.Unit)
-
-	CurrencyCode_MDL = CurrencyCode.AddMember("MDL", smithyprelude.Unit)
-
-	CurrencyCode_MGA = CurrencyCode.AddMember("MGA", smithyprelude.Unit)
-
-	CurrencyCode_MKD = CurrencyCode.AddMember("MKD", smithyprelude.Unit)
-
-	CurrencyCode_MMK = CurrencyCode.AddMember("MMK", smithyprelude.Unit)
-
-	CurrencyCode_MNT = CurrencyCode.AddMember("MNT", smithyprelude.Unit)
-
-	CurrencyCode_MOP = CurrencyCode.AddMember("MOP", smithyprelude.Unit)
-
-	CurrencyCode_MRU = CurrencyCode.AddMember("MRU", smithyprelude.Unit)
-
-	CurrencyCode_MUR = CurrencyCode.AddMember("MUR", smithyprelude.Unit)
-
-	CurrencyCode_MVR = CurrencyCode.AddMember("MVR", smithyprelude.Unit)
-
-	CurrencyCode_MWK = CurrencyCode.AddMember("MWK", smithyprelude.Unit)
-
-	CurrencyCode_MXN = CurrencyCode.AddMember("MXN", smithyprelude.Unit)
-
-	CurrencyCode_MXV = CurrencyCode.AddMember("MXV", smithyprelude.Unit)
-
-	CurrencyCode_MYR = CurrencyCode.AddMember("MYR", smithyprelude.Unit)
-
-	CurrencyCode_MZN = CurrencyCode.AddMember("MZN", smithyprelude.Unit)
-
-	CurrencyCode_NAD = CurrencyCode.AddMember("NAD", smithyprelude.Unit)
-
-	CurrencyCode_NGN = CurrencyCode.AddMember("NGN", smithyprelude.Unit)
-
-	CurrencyCode_NIO = CurrencyCode.AddMember("NIO", smithyprelude.Unit)
-
-	CurrencyCode_NOK = CurrencyCode.AddMember("NOK", smithyprelude.Unit)
-
-	CurrencyCode_NPR = CurrencyCode.AddMember("NPR", smithyprelude.Unit)
-
-	CurrencyCode_OMR = CurrencyCode.AddMember("OMR", smithyprelude.Unit)
-
-	CurrencyCode_PAB = CurrencyCode.AddMember("PAB", smithyprelude.Unit)
-
-	CurrencyCode_PEN = CurrencyCode.AddMember("PEN", smithyprelude.Unit)
-
-	CurrencyCode_PGK = CurrencyCode.AddMember("PGK", smithyprelude.Unit)
-
-	CurrencyCode_PHP = CurrencyCode.AddMember("PHP", smithyprelude.Unit)
-
-	CurrencyCode_PKR = CurrencyCode.AddMember("PKR", smithyprelude.Unit)
-
-	CurrencyCode_PLN = CurrencyCode.AddMember("PLN", smithyprelude.Unit)
-
-	CurrencyCode_PYG = CurrencyCode.AddMember("PYG", smithyprelude.Unit)
-
-	CurrencyCode_QAR = CurrencyCode.AddMember("QAR", smithyprelude.Unit)
-
-	CurrencyCode_RON = CurrencyCode.AddMember("RON", smithyprelude.Unit)
-
-	CurrencyCode_RSD = CurrencyCode.AddMember("RSD", smithyprelude.Unit)
-
-	CurrencyCode_RUB = CurrencyCode.AddMember("RUB", smithyprelude.Unit)
-
-	CurrencyCode_RWF = CurrencyCode.AddMember("RWF", smithyprelude.Unit)
-
-	CurrencyCode_SAR = CurrencyCode.AddMember("SAR", smithyprelude.Unit)
-
-	CurrencyCode_SBD = CurrencyCode.AddMember("SBD", smithyprelude.Unit)
-
-	CurrencyCode_SCR = CurrencyCode.AddMember("SCR", smithyprelude.Unit)
-
-	CurrencyCode_SDG = CurrencyCode.AddMember("SDG", smithyprelude.Unit)
-
-	CurrencyCode_SGD = CurrencyCode.AddMember("SGD", smithyprelude.Unit)
-
-	CurrencyCode_SHP = CurrencyCode.AddMember("SHP", smithyprelude.Unit)
-
-	CurrencyCode_SLL = CurrencyCode.AddMember("SLL", smithyprelude.Unit)
-
-	CurrencyCode_SOS = CurrencyCode.AddMember("SOS", smithyprelude.Unit)
-
-	CurrencyCode_SRD = CurrencyCode.AddMember("SRD", smithyprelude.Unit)
-
-	CurrencyCode_SSP = CurrencyCode.AddMember("SSP", smithyprelude.Unit)
-
-	CurrencyCode_STN = CurrencyCode.AddMember("STN", smithyprelude.Unit)
-
-	CurrencyCode_SVC = CurrencyCode.AddMember("SVC", smithyprelude.Unit)
-
-	CurrencyCode_SYP = CurrencyCode.AddMember("SYP", smithyprelude.Unit)
-
-	CurrencyCode_SZL = CurrencyCode.AddMember("SZL", smithyprelude.Unit)
-
-	CurrencyCode_THB = CurrencyCode.AddMember("THB", smithyprelude.Unit)
-
-	CurrencyCode_TJS = CurrencyCode.AddMember("TJS", smithyprelude.Unit)
-
-	CurrencyCode_TMT = CurrencyCode.AddMember("TMT", smithyprelude.Unit)
-
-	CurrencyCode_TND = CurrencyCode.AddMember("TND", smithyprelude.Unit)
-
-	CurrencyCode_TOP = CurrencyCode.AddMember("TOP", smithyprelude.Unit)
-
-	CurrencyCode_TRY = CurrencyCode.AddMember("TRY", smithyprelude.Unit)
-
-	CurrencyCode_TTD = CurrencyCode.AddMember("TTD", smithyprelude.Unit)
-
-	CurrencyCode_TWD = CurrencyCode.AddMember("TWD", smithyprelude.Unit)
-
-	CurrencyCode_TZS = CurrencyCode.AddMember("TZS", smithyprelude.Unit)
-
-	CurrencyCode_UAH = CurrencyCode.AddMember("UAH", smithyprelude.Unit)
-
-	CurrencyCode_UGX = CurrencyCode.AddMember("UGX", smithyprelude.Unit)
-
-	CurrencyCode_USN = CurrencyCode.AddMember("USN", smithyprelude.Unit)
-
-	CurrencyCode_UYI = CurrencyCode.AddMember("UYI", smithyprelude.Unit)
-
-	CurrencyCode_UYU = CurrencyCode.AddMember("UYU", smithyprelude.Unit)
-
-	CurrencyCode_UZS = CurrencyCode.AddMember("UZS", smithyprelude.Unit)
-
-	CurrencyCode_VEF = CurrencyCode.AddMember("VEF", smithyprelude.Unit)
-
-	CurrencyCode_VND = CurrencyCode.AddMember("VND", smithyprelude.Unit)
-
-	CurrencyCode_VUV = CurrencyCode.AddMember("VUV", smithyprelude.Unit)
-
-	CurrencyCode_WST = CurrencyCode.AddMember("WST", smithyprelude.Unit)
-
-	CurrencyCode_XAF = CurrencyCode.AddMember("XAF", smithyprelude.Unit)
-
-	CurrencyCode_XCD = CurrencyCode.AddMember("XCD", smithyprelude.Unit)
-
-	CurrencyCode_XDR = CurrencyCode.AddMember("XDR", smithyprelude.Unit)
-
-	CurrencyCode_XOF = CurrencyCode.AddMember("XOF", smithyprelude.Unit)
-
-	CurrencyCode_XPF = CurrencyCode.AddMember("XPF", smithyprelude.Unit)
-
-	CurrencyCode_XSU = CurrencyCode.AddMember("XSU", smithyprelude.Unit)
-
-	CurrencyCode_XUA = CurrencyCode.AddMember("XUA", smithyprelude.Unit)
-
-	CurrencyCode_YER = CurrencyCode.AddMember("YER", smithyprelude.Unit)
-
-	CurrencyCode_ZAR = CurrencyCode.AddMember("ZAR", smithyprelude.Unit)
-
-	CurrencyCode_ZMW = CurrencyCode.AddMember("ZMW", smithyprelude.Unit)
-
-	CurrencyCode_ZWL = CurrencyCode.AddMember("ZWL", smithyprelude.Unit)
-
-	PaymentFrequency_MONTHLY = PaymentFrequency.AddMember("MONTHLY", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	AwsProductOptimization_Description = AwsProductOptimization.AddMember("Description", smithyprelude.String)
-
-	AwsProductOptimization_SavingsAmount = AwsProductOptimization.AddMember("SavingsAmount", _MonetaryAmount)
-
-	_AwsProductOptimizationsList_member = _AwsProductOptimizationsList.AddMember("member", AwsProductOptimization)
-
-	AwsProductDetails_ProductCode = AwsProductDetails.AddMember("ProductCode", smithyprelude.String)
-
-	AwsProductDetails_ServiceCode = AwsProductDetails.AddMember("ServiceCode", smithyprelude.String)
-
-	AwsProductDetails_Categories = AwsProductDetails.AddMember("Categories", _StringList)
-
-	AwsProductDetails_Amount = AwsProductDetails.AddMember("Amount", _MonetaryAmount)
-
-	AwsProductDetails_OptimizedAmount = AwsProductDetails.AddMember("OptimizedAmount", _MonetaryAmount)
-
-	AwsProductDetails_PotentialSavingsAmount = AwsProductDetails.AddMember("PotentialSavingsAmount", _MonetaryAmount)
-
-	AwsProductDetails_Optimizations = AwsProductDetails.AddMember("Optimizations", _AwsProductOptimizationsList)
-
-	_AwsProductsList_member = _AwsProductsList.AddMember("member", AwsProductDetails)
-
-	AwsProductInsights_CurrencyCode = AwsProductInsights.AddMember("CurrencyCode", CurrencyCode)
-
-	AwsProductInsights_Frequency = AwsProductInsights.AddMember("Frequency", PaymentFrequency)
-
-	AwsProductInsights_TotalAmount = AwsProductInsights.AddMember("TotalAmount", _MonetaryAmount)
-
-	AwsProductInsights_TotalOptimizedAmount = AwsProductInsights.AddMember("TotalOptimizedAmount", _MonetaryAmount)
-
-	AwsProductInsights_TotalPotentialSavingsAmount = AwsProductInsights.AddMember("TotalPotentialSavingsAmount", _MonetaryAmount)
-
-	AwsProductInsights_TotalAmountByCategory = AwsProductInsights.AddMember("TotalAmountByCategory", _AmountMap)
-
-	AwsProductInsights_AwsProducts = AwsProductInsights.AddMember("AwsProducts", _AwsProductsList)
-
-	AwsProductsSpendInsightsBySource_Partner = AwsProductsSpendInsightsBySource.AddMember("Partner", AwsProductInsights)
-
-	AwsProductsSpendInsightsBySource_AWS = AwsProductsSpendInsightsBySource.AddMember("AWS", AwsProductInsights)
-
-	OpportunityQuality_Score = OpportunityQuality.AddMember("Score", smithyprelude.Integer)
-
-	OpportunityQuality_Trend = OpportunityQuality.AddMember("Trend", smithyprelude.String)
-
-	_RecommendationAttributeMap_key = _RecommendationAttributeMap.AddMember("key", smithyprelude.String)
-
-	_RecommendationAttributeMap_value = _RecommendationAttributeMap.AddMember("value", smithyprelude.String)
-
-	Recommendation_Type = Recommendation.AddMember("Type", smithyprelude.String)
-
-	Recommendation_Details = Recommendation.AddMember("Details", smithyprelude.String)
-
-	Recommendation_Attributes = Recommendation.AddMember("Attributes", _RecommendationAttributeMap)
-
-	_RecommendationList_member = _RecommendationList.AddMember("member", Recommendation)
-
-	AwsOpportunityInsights_NextBestActions = AwsOpportunityInsights.AddMember("NextBestActions", smithyprelude.String)
-
-	AwsOpportunityInsights_EngagementScore = AwsOpportunityInsights.AddMember("EngagementScore", EngagementScore)
-
-	AwsOpportunityInsights_AwsProductsSpendInsightsBySource = AwsOpportunityInsights.AddMember("AwsProductsSpendInsightsBySource", AwsProductsSpendInsightsBySource)
-
-	AwsOpportunityInsights_OpportunityQuality = AwsOpportunityInsights.AddMember("OpportunityQuality", OpportunityQuality)
-
-	AwsOpportunityInsights_Recommendations = AwsOpportunityInsights.AddMember("Recommendations", _RecommendationList)
-
-	AwsOpportunityStage_NOT_STARTED = AwsOpportunityStage.AddMember("NOT_STARTED", smithyprelude.Unit)
-
-	AwsOpportunityStage_IN_PROGRESS = AwsOpportunityStage.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	AwsOpportunityStage_PROSPECT = AwsOpportunityStage.AddMember("PROSPECT", smithyprelude.Unit)
-
-	AwsOpportunityStage_ENGAGED = AwsOpportunityStage.AddMember("ENGAGED", smithyprelude.Unit)
-
-	AwsOpportunityStage_IDENTIFIED = AwsOpportunityStage.AddMember("IDENTIFIED", smithyprelude.Unit)
-
-	AwsOpportunityStage_QUALIFY = AwsOpportunityStage.AddMember("QUALIFY", smithyprelude.Unit)
-
-	AwsOpportunityStage_RESEARCH = AwsOpportunityStage.AddMember("RESEARCH", smithyprelude.Unit)
-
-	AwsOpportunityStage_SELLER_ENGAGED = AwsOpportunityStage.AddMember("SELLER_ENGAGED", smithyprelude.Unit)
-
-	AwsOpportunityStage_EVALUATING = AwsOpportunityStage.AddMember("EVALUATING", smithyprelude.Unit)
-
-	AwsOpportunityStage_SELLER_REGISTERED = AwsOpportunityStage.AddMember("SELLER_REGISTERED", smithyprelude.Unit)
-
-	AwsOpportunityStage_TERM_SHEET_NEGOTIATION = AwsOpportunityStage.AddMember("TERM_SHEET_NEGOTIATION", smithyprelude.Unit)
-
-	AwsOpportunityStage_CONTRACT_NEGOTIATION = AwsOpportunityStage.AddMember("CONTRACT_NEGOTIATION", smithyprelude.Unit)
-
-	AwsOpportunityStage_ONBOARDING = AwsOpportunityStage.AddMember("ONBOARDING", smithyprelude.Unit)
-
-	AwsOpportunityStage_BUILDING_INTEGRATION = AwsOpportunityStage.AddMember("BUILDING_INTEGRATION", smithyprelude.Unit)
-
-	AwsOpportunityStage_QUALIFIED = AwsOpportunityStage.AddMember("QUALIFIED", smithyprelude.Unit)
-
-	AwsOpportunityStage_ON_HOLD = AwsOpportunityStage.AddMember("ON_HOLD", smithyprelude.Unit)
-
-	AwsOpportunityStage_TECHNICAL_VALIDATION = AwsOpportunityStage.AddMember("TECHNICAL_VALIDATION", smithyprelude.Unit)
-
-	AwsOpportunityStage_BUSINESS_VALIDATION = AwsOpportunityStage.AddMember("BUSINESS_VALIDATION", smithyprelude.Unit)
-
-	AwsOpportunityStage_COMMITTED = AwsOpportunityStage.AddMember("COMMITTED", smithyprelude.Unit)
-
-	AwsOpportunityStage_LAUNCHED = AwsOpportunityStage.AddMember("LAUNCHED", smithyprelude.Unit)
-
-	AwsOpportunityStage_DEFERRED_TO_PARTNER = AwsOpportunityStage.AddMember("DEFERRED_TO_PARTNER", smithyprelude.Unit)
-
-	AwsOpportunityStage_CLOSED_LOST = AwsOpportunityStage.AddMember("CLOSED_LOST", smithyprelude.Unit)
-
-	AwsOpportunityStage_COMPLETED = AwsOpportunityStage.AddMember("COMPLETED", smithyprelude.Unit)
-
-	AwsOpportunityStage_CLOSED_INCOMPLETE = AwsOpportunityStage.AddMember("CLOSED_INCOMPLETE", smithyprelude.Unit)
-
-	ProfileNextStepsHistory_Value = ProfileNextStepsHistory.AddMember("Value", smithyprelude.String)
-
-	ProfileNextStepsHistory_Time = ProfileNextStepsHistory.AddMember("Time", _DateTime)
-
-	_ProfileNextStepsHistories_member = _ProfileNextStepsHistories.AddMember("member", ProfileNextStepsHistory)
-
-	AwsOpportunityLifeCycle_TargetCloseDate = AwsOpportunityLifeCycle.AddMember("TargetCloseDate", _Date)
-
-	AwsOpportunityLifeCycle_ClosedLostReason = AwsOpportunityLifeCycle.AddMember("ClosedLostReason", AwsClosedLostReason)
-
-	AwsOpportunityLifeCycle_Stage = AwsOpportunityLifeCycle.AddMember("Stage", AwsOpportunityStage)
-
-	AwsOpportunityLifeCycle_NextSteps = AwsOpportunityLifeCycle.AddMember("NextSteps", _PiiString)
-
-	AwsOpportunityLifeCycle_NextStepsHistory = AwsOpportunityLifeCycle.AddMember("NextStepsHistory", _ProfileNextStepsHistories)
-
-	ExpectedCustomerSpend_Amount = ExpectedCustomerSpend.AddMember("Amount", _Amount)
-
-	ExpectedCustomerSpend_CurrencyCode = ExpectedCustomerSpend.AddMember("CurrencyCode", CurrencyCode)
-
-	ExpectedCustomerSpend_Frequency = ExpectedCustomerSpend.AddMember("Frequency", PaymentFrequency)
-
-	ExpectedCustomerSpend_TargetCompany = ExpectedCustomerSpend.AddMember("TargetCompany", smithyprelude.String)
-
-	ExpectedCustomerSpend_EstimationUrl = ExpectedCustomerSpend.AddMember("EstimationUrl", _EstimationUrl)
-
-	_ExpectedCustomerSpendList_member = _ExpectedCustomerSpendList.AddMember("member", ExpectedCustomerSpend)
-
-	AwsPartition_AWS_EUSC = AwsPartition.AddMember("AWS_EUSC", smithyprelude.Unit)
-
-	AwsOpportunityProject_ExpectedCustomerSpend = AwsOpportunityProject.AddMember("ExpectedCustomerSpend", _ExpectedCustomerSpendList)
-
-	AwsOpportunityProject_AwsPartition = AwsOpportunityProject.AddMember("AwsPartition", AwsPartition)
-
-	_AwsProductIdentifiers_member = _AwsProductIdentifiers.AddMember("member", _AwsProductIdentifier)
-
-	_SolutionIdentifiers_member = _SolutionIdentifiers.AddMember("member", _SolutionIdentifier)
-
-	AwsOpportunityRelatedEntities_AwsProducts = AwsOpportunityRelatedEntities.AddMember("AwsProducts", _AwsProductIdentifiers)
-
-	AwsOpportunityRelatedEntities_Solutions = AwsOpportunityRelatedEntities.AddMember("Solutions", _SolutionIdentifiers)
-
-	AwsOpportunityRelatedEntities_AwsMarketplaceSolutions = AwsOpportunityRelatedEntities.AddMember("AwsMarketplaceSolutions", _AwsMarketplaceSolutionIdentifiers)
-
-	AwsOpportunityRelatedEntities_AwsMarketplaceProducts = AwsOpportunityRelatedEntities.AddMember("AwsMarketplaceProducts", _AwsMarketplaceProductIdentifiers)
-
-	OpportunityOrigin_AWS_REFERRAL = OpportunityOrigin.AddMember("AWS_REFERRAL", smithyprelude.Unit)
-
-	OpportunityOrigin_PARTNER_REFERRAL = OpportunityOrigin.AddMember("PARTNER_REFERRAL", smithyprelude.Unit)
-
-	SalesInvolvementType_FOR_VISIBILITY_ONLY = SalesInvolvementType.AddMember("FOR_VISIBILITY_ONLY", smithyprelude.Unit)
-
-	SalesInvolvementType_CO_SELL = SalesInvolvementType.AddMember("CO_SELL", smithyprelude.Unit)
-
-	Visibility_FULL = Visibility.AddMember("FULL", smithyprelude.Unit)
-
-	Visibility_LIMITED = Visibility.AddMember("LIMITED", smithyprelude.Unit)
-
-	AwsTeamMember_Email = AwsTeamMember.AddMember("Email", _Email)
-
-	AwsTeamMember_FirstName = AwsTeamMember.AddMember("FirstName", _Name)
-
-	AwsTeamMember_LastName = AwsTeamMember.AddMember("LastName", _Name)
-
-	AwsTeamMember_BusinessTitle = AwsTeamMember.AddMember("BusinessTitle", AwsMemberBusinessTitle)
-
-	_AwsOpportunityTeamMembersList_member = _AwsOpportunityTeamMembersList.AddMember("member", AwsTeamMember)
-
-	InvolvementTypeChangeReason_EXPANSION_OPPORTUNITY = InvolvementTypeChangeReason.AddMember("EXPANSION_OPPORTUNITY", smithyprelude.Unit)
-
-	InvolvementTypeChangeReason_CHANGE_IN_DEAL_INFORMATION = InvolvementTypeChangeReason.AddMember("CHANGE_IN_DEAL_INFORMATION", smithyprelude.Unit)
-
-	InvolvementTypeChangeReason_CUSTOMER_REQUESTED = InvolvementTypeChangeReason.AddMember("CUSTOMER_REQUESTED", smithyprelude.Unit)
-
-	InvolvementTypeChangeReason_TECHNICAL_COMPLEXITY = InvolvementTypeChangeReason.AddMember("TECHNICAL_COMPLEXITY", smithyprelude.Unit)
-
-	InvolvementTypeChangeReason_RISK_MITIGATION = InvolvementTypeChangeReason.AddMember("RISK_MITIGATION", smithyprelude.Unit)
-
-	MonetaryValue_Amount = MonetaryValue.AddMember("Amount", smithyprelude.String)
-
-	MonetaryValue_CurrencyCode = MonetaryValue.AddMember("CurrencyCode", CurrencyCode)
-
-	AwsSoftwareRevenue_Value = AwsSoftwareRevenue.AddMember("Value", MonetaryValue)
-
-	AwsSoftwareRevenue_Discount = AwsSoftwareRevenue.AddMember("Discount", smithyprelude.String)
-
-	AwsSoftwareRevenue_EffectiveDate = AwsSoftwareRevenue.AddMember("EffectiveDate", smithyprelude.String)
-
-	AwsSoftwareRevenue_ExpirationDate = AwsSoftwareRevenue.AddMember("ExpirationDate", smithyprelude.String)
-
-	AwsOpportunitySummaryFullView_RelatedOpportunityId = AwsOpportunitySummaryFullView.AddMember("RelatedOpportunityId", _OpportunityIdentifier)
-
-	AwsOpportunitySummaryFullView_Origin = AwsOpportunitySummaryFullView.AddMember("Origin", OpportunityOrigin)
-
-	AwsOpportunitySummaryFullView_InvolvementType = AwsOpportunitySummaryFullView.AddMember("InvolvementType", SalesInvolvementType)
-
-	AwsOpportunitySummaryFullView_Visibility = AwsOpportunitySummaryFullView.AddMember("Visibility", Visibility)
-
-	AwsOpportunitySummaryFullView_LifeCycle = AwsOpportunitySummaryFullView.AddMember("LifeCycle", AwsOpportunityLifeCycle)
-
-	AwsOpportunitySummaryFullView_OpportunityTeam = AwsOpportunitySummaryFullView.AddMember("OpportunityTeam", _AwsOpportunityTeamMembersList)
-
-	AwsOpportunitySummaryFullView_Insights = AwsOpportunitySummaryFullView.AddMember("Insights", AwsOpportunityInsights)
-
-	AwsOpportunitySummaryFullView_InvolvementTypeChangeReason = AwsOpportunitySummaryFullView.AddMember("InvolvementTypeChangeReason", InvolvementTypeChangeReason)
-
-	AwsOpportunitySummaryFullView_RelatedEntityIds = AwsOpportunitySummaryFullView.AddMember("RelatedEntityIds", AwsOpportunityRelatedEntities)
-
-	AwsOpportunitySummaryFullView_Customer = AwsOpportunitySummaryFullView.AddMember("Customer", AwsOpportunityCustomer)
-
-	AwsOpportunitySummaryFullView_Project = AwsOpportunitySummaryFullView.AddMember("Project", AwsOpportunityProject)
-
-	AwsOpportunitySummaryFullView_CosellMotion = AwsOpportunitySummaryFullView.AddMember("CosellMotion", smithyprelude.String)
-
-	AwsOpportunitySummaryFullView_SoftwareRevenue = AwsOpportunitySummaryFullView.AddMember("SoftwareRevenue", AwsSoftwareRevenue)
-
-	AwsSubmission_InvolvementType = AwsSubmission.AddMember("InvolvementType", SalesInvolvementType)
-
-	AwsSubmission_Visibility = AwsSubmission.AddMember("Visibility", Visibility)
-
-	Channel_AWS_MARKETING_CENTRAL = Channel.AddMember("AWS_MARKETING_CENTRAL", smithyprelude.Unit)
-
-	Channel_CONTENT_SYNDICATION = Channel.AddMember("CONTENT_SYNDICATION", smithyprelude.Unit)
-
-	Channel_DISPLAY = Channel.AddMember("DISPLAY", smithyprelude.Unit)
-
-	Channel_EMAIL = Channel.AddMember("EMAIL", smithyprelude.Unit)
-
-	Channel_LIVE_EVENT = Channel.AddMember("LIVE_EVENT", smithyprelude.Unit)
-
-	Channel_OUT_OF_HOME = Channel.AddMember("OUT_OF_HOME", smithyprelude.Unit)
-
-	Channel_PRINT = Channel.AddMember("PRINT", smithyprelude.Unit)
-
-	Channel_SEARCH = Channel.AddMember("SEARCH", smithyprelude.Unit)
-
-	Channel_SOCIAL = Channel.AddMember("SOCIAL", smithyprelude.Unit)
-
-	Channel_TELEMARKETING = Channel.AddMember("TELEMARKETING", smithyprelude.Unit)
-
-	Channel_TV = Channel.AddMember("TV", smithyprelude.Unit)
-
-	Channel_VIDEO = Channel.AddMember("VIDEO", smithyprelude.Unit)
-
-	Channel_VIRTUAL_EVENT = Channel.AddMember("VIRTUAL_EVENT", smithyprelude.Unit)
-
-	_Channels_member = _Channels.AddMember("member", Channel)
-
-	ClosedLostReason_CUSTOMER_DEFICIENCY = ClosedLostReason.AddMember("CUSTOMER_DEFICIENCY", smithyprelude.Unit)
-
-	ClosedLostReason_DELAY_CANCELLATION_OF_PROJECT = ClosedLostReason.AddMember("DELAY_CANCELLATION_OF_PROJECT", smithyprelude.Unit)
-
-	ClosedLostReason_LEGAL_TAX_REGULATORY = ClosedLostReason.AddMember("LEGAL_TAX_REGULATORY", smithyprelude.Unit)
-
-	ClosedLostReason_LOST_TO_COMPETITOR_GOOGLE = ClosedLostReason.AddMember("LOST_TO_COMPETITOR_GOOGLE", smithyprelude.Unit)
-
-	ClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT = ClosedLostReason.AddMember("LOST_TO_COMPETITOR_MICROSOFT", smithyprelude.Unit)
-
-	ClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER = ClosedLostReason.AddMember("LOST_TO_COMPETITOR_SOFTLAYER", smithyprelude.Unit)
-
-	ClosedLostReason_LOST_TO_COMPETITOR_VMWARE = ClosedLostReason.AddMember("LOST_TO_COMPETITOR_VMWARE", smithyprelude.Unit)
-
-	ClosedLostReason_LOST_TO_COMPETITOR_OTHER = ClosedLostReason.AddMember("LOST_TO_COMPETITOR_OTHER", smithyprelude.Unit)
-
-	ClosedLostReason_NO_OPPORTUNITY = ClosedLostReason.AddMember("NO_OPPORTUNITY", smithyprelude.Unit)
-
-	ClosedLostReason_ON_PREMISES_DEPLOYMENT = ClosedLostReason.AddMember("ON_PREMISES_DEPLOYMENT", smithyprelude.Unit)
-
-	ClosedLostReason_PARTNER_GAP = ClosedLostReason.AddMember("PARTNER_GAP", smithyprelude.Unit)
-
-	ClosedLostReason_PRICE = ClosedLostReason.AddMember("PRICE", smithyprelude.Unit)
-
-	ClosedLostReason_SECURITY_COMPLIANCE = ClosedLostReason.AddMember("SECURITY_COMPLIANCE", smithyprelude.Unit)
-
-	ClosedLostReason_TECHNICAL_LIMITATIONS = ClosedLostReason.AddMember("TECHNICAL_LIMITATIONS", smithyprelude.Unit)
-
-	ClosedLostReason_CUSTOMER_EXPERIENCE = ClosedLostReason.AddMember("CUSTOMER_EXPERIENCE", smithyprelude.Unit)
-
-	ClosedLostReason_OTHER = ClosedLostReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ClosedLostReason_PEOPLERELATIONSHIPGOVERNANCE = ClosedLostReason.AddMember("PEOPLERELATIONSHIPGOVERNANCE", smithyprelude.Unit)
-
-	ClosedLostReason_PRODUCTTECHNOLOGY = ClosedLostReason.AddMember("PRODUCTTECHNOLOGY", smithyprelude.Unit)
-
-	ClosedLostReason_FINANCIALCOMMERCIAL = ClosedLostReason.AddMember("FINANCIALCOMMERCIAL", smithyprelude.Unit)
-
-	CompetitorName_ORACLE_CLOUD = CompetitorName.AddMember("ORACLE_CLOUD", smithyprelude.Unit)
-
-	CompetitorName_ON_PREM = CompetitorName.AddMember("ON_PREM", smithyprelude.Unit)
-
-	CompetitorName_CO_LOCATION = CompetitorName.AddMember("CO_LOCATION", smithyprelude.Unit)
-
-	CompetitorName_AKAMAI = CompetitorName.AddMember("AKAMAI", smithyprelude.Unit)
-
-	CompetitorName_ALICLOUD = CompetitorName.AddMember("ALICLOUD", smithyprelude.Unit)
-
-	CompetitorName_GOOGLE_CLOUD_PLATFORM = CompetitorName.AddMember("GOOGLE_CLOUD_PLATFORM", smithyprelude.Unit)
-
-	CompetitorName_IBM_SOFTLAYER = CompetitorName.AddMember("IBM_SOFTLAYER", smithyprelude.Unit)
-
-	CompetitorName_MICROSOFT_AZURE = CompetitorName.AddMember("MICROSOFT_AZURE", smithyprelude.Unit)
-
-	CompetitorName_OTHER_COST_OPTIMIZATION = CompetitorName.AddMember("OTHER_COST_OPTIMIZATION", smithyprelude.Unit)
-
-	CompetitorName_NO_COMPETITION = CompetitorName.AddMember("NO_COMPETITION", smithyprelude.Unit)
-
-	CompetitorName_OTHER = CompetitorName.AddMember("OTHER", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	_ContextIdentifiers_member = _ContextIdentifiers.AddMember("member", _ContextIdentifier)
-
-	CreatedDateFilter_AfterCreatedDate = CreatedDateFilter.AddMember("AfterCreatedDate", _DateTime)
-
-	CreatedDateFilter_BeforeCreatedDate = CreatedDateFilter.AddMember("BeforeCreatedDate", _DateTime)
-
-	Customer_Account = Customer.AddMember("Account", Account)
-
-	Customer_Contacts = Customer.AddMember("Contacts", _CustomerContactsList)
-
-	EngagementCustomer_Industry = EngagementCustomer.AddMember("Industry", Industry)
-
-	EngagementCustomer_CompanyName = EngagementCustomer.AddMember("CompanyName", _CompanyName)
-
-	EngagementCustomer_WebsiteUrl = EngagementCustomer.AddMember("WebsiteUrl", _CompanyWebsiteUrl)
-
-	EngagementCustomer_CountryCode = EngagementCustomer.AddMember("CountryCode", CountryCode)
-
-	EngagementCustomerProjectDetails_Title = EngagementCustomerProjectDetails.AddMember("Title", _EngagementCustomerProjectTitle)
-
-	EngagementCustomerProjectDetails_BusinessProblem = EngagementCustomerProjectDetails.AddMember("BusinessProblem", _EngagementCustomerBusinessProblem)
-
-	EngagementCustomerProjectDetails_TargetCompletionDate = EngagementCustomerProjectDetails.AddMember("TargetCompletionDate", smithyprelude.String)
-
-	CustomerProjectsContext_Customer = CustomerProjectsContext.AddMember("Customer", EngagementCustomer)
-
-	CustomerProjectsContext_Project = CustomerProjectsContext.AddMember("Project", EngagementCustomerProjectDetails)
-
-	CustomerSummary_Account = CustomerSummary.AddMember("Account", AccountSummary)
-
-	DeliveryModel_SAAS_OR_PAAS = DeliveryModel.AddMember("SAAS_OR_PAAS", smithyprelude.Unit)
-
-	DeliveryModel_BYOL_OR_AMI = DeliveryModel.AddMember("BYOL_OR_AMI", smithyprelude.Unit)
-
-	DeliveryModel_MANAGED_SERVICES = DeliveryModel.AddMember("MANAGED_SERVICES", smithyprelude.Unit)
-
-	DeliveryModel_PROFESSIONAL_SERVICES = DeliveryModel.AddMember("PROFESSIONAL_SERVICES", smithyprelude.Unit)
-
-	DeliveryModel_RESELL = DeliveryModel.AddMember("RESELL", smithyprelude.Unit)
-
-	DeliveryModel_OTHER = DeliveryModel.AddMember("OTHER", smithyprelude.Unit)
-
-	_DeliveryModels_member = _DeliveryModels.AddMember("member", DeliveryModel)
-
-	_EligibleProgramsList_member = _EligibleProgramsList.AddMember("member", smithyprelude.String)
-
-	EngagementContextType_CUSTOMER_PROJECT = EngagementContextType.AddMember("CUSTOMER_PROJECT", smithyprelude.Unit)
-
-	EngagementContextType_LEAD = EngagementContextType.AddMember("LEAD", smithyprelude.Unit)
-
-	EngagementContextType_PROSPECTING_RESULT = EngagementContextType.AddMember("PROSPECTING_RESULT", smithyprelude.Unit)
-
-	LeadInsights_LeadReadinessScore = LeadInsights.AddMember("LeadReadinessScore", smithyprelude.String)
-
-	LeadAddress_City = LeadAddress.AddMember("City", smithyprelude.String)
-
-	LeadAddress_PostalCode = LeadAddress.AddMember("PostalCode", smithyprelude.String)
-
-	LeadAddress_StateOrRegion = LeadAddress.AddMember("StateOrRegion", smithyprelude.String)
-
-	LeadAddress_CountryCode = LeadAddress.AddMember("CountryCode", _LeadCountryCode)
-
-	LeadCustomer_Industry = LeadCustomer.AddMember("Industry", _LeadIndustry)
-
-	LeadCustomer_CompanyName = LeadCustomer.AddMember("CompanyName", _CompanyName)
-
-	LeadCustomer_WebsiteUrl = LeadCustomer.AddMember("WebsiteUrl", _LeadWebsiteUrl)
-
-	LeadCustomer_Address = LeadCustomer.AddMember("Address", LeadAddress)
-
-	LeadCustomer_AwsMaturity = LeadCustomer.AddMember("AwsMaturity", _AwsMaturity)
-
-	LeadCustomer_MarketSegment = LeadCustomer.AddMember("MarketSegment", _LeadMarketSegment)
-
-	LeadContact_BusinessTitle = LeadContact.AddMember("BusinessTitle", _LeadJobTitle)
-
-	LeadContact_Email = LeadContact.AddMember("Email", _LeadEmail)
-
-	LeadContact_FirstName = LeadContact.AddMember("FirstName", _Name)
-
-	LeadContact_LastName = LeadContact.AddMember("LastName", _Name)
-
-	LeadContact_Phone = LeadContact.AddMember("Phone", _LeadPhoneNumber)
-
-	LeadInteraction_SourceType = LeadInteraction.AddMember("SourceType", _LeadSourceType)
-
-	LeadInteraction_SourceId = LeadInteraction.AddMember("SourceId", _LeadSourceId)
-
-	LeadInteraction_SourceName = LeadInteraction.AddMember("SourceName", _LeadSourceName)
-
-	LeadInteraction_Usecase = LeadInteraction.AddMember("Usecase", _EngagementUseCase)
-
-	LeadInteraction_InteractionDate = LeadInteraction.AddMember("InteractionDate", _DateTime)
-
-	LeadInteraction_CustomerAction = LeadInteraction.AddMember("CustomerAction", _CustomerAction)
-
-	LeadInteraction_BusinessProblem = LeadInteraction.AddMember("BusinessProblem", _LeadBusinessProblem)
-
-	LeadInteraction_Contact = LeadInteraction.AddMember("Contact", LeadContact)
-
-	_LeadInteractionList_member = _LeadInteractionList.AddMember("member", LeadInteraction)
-
-	LeadContext_Insights = LeadContext.AddMember("Insights", LeadInsights)
-
-	LeadContext_QualificationStatus = LeadContext.AddMember("QualificationStatus", _LeadQualificationStatus)
-
-	LeadContext_Customer = LeadContext.AddMember("Customer", LeadCustomer)
-
-	LeadContext_Interactions = LeadContext.AddMember("Interactions", _LeadInteractionList)
-
-	ProspectingResultCustomer_AccountName = ProspectingResultCustomer.AddMember("AccountName", _ProspectingAccountName)
-
-	ProspectingResultCustomer_Geo = ProspectingResultCustomer.AddMember("Geo", _ProspectingGeo)
-
-	ProspectingResultCustomer_Region = ProspectingResultCustomer.AddMember("Region", _ProspectingRegion)
-
-	ProspectingResultCustomer_SubRegion = ProspectingResultCustomer.AddMember("SubRegion", _ProspectingSubRegion)
-
-	ProspectingResultCustomer_Country = ProspectingResultCustomer.AddMember("Country", CountryCode)
-
-	ProspectingResultCustomer_Industry = ProspectingResultCustomer.AddMember("Industry", Industry)
-
-	ProspectingResultCustomer_SubIndustry = ProspectingResultCustomer.AddMember("SubIndustry", _ProspectingSubIndustry)
-
-	ProspectingResultCustomer_Segment = ProspectingResultCustomer.AddMember("Segment", _ProspectingSegment)
-
-	ProspectingResultCustomer_CompanySize = ProspectingResultCustomer.AddMember("CompanySize", _ProspectingCompanySize)
-
-	ProspectingResultCustomer_EligiblePrograms = ProspectingResultCustomer.AddMember("EligiblePrograms", _EligibleProgramsList)
-
-	ProspectingResultCustomer_PublicProfileSummary = ProspectingResultCustomer.AddMember("PublicProfileSummary", _ProspectingPublicProfileSummary)
-
-	ProspectingInsights_MarketplaceEngagementScore = ProspectingInsights.AddMember("MarketplaceEngagementScore", _EngagementScoreLevel)
-
-	ProspectingInsights_SolutionScore = ProspectingInsights.AddMember("SolutionScore", smithyprelude.String)
-
-	ProspectingInsights_SolutionCategory = ProspectingInsights.AddMember("SolutionCategory", smithyprelude.String)
-
-	ProspectingInsights_SolutionSubCategory = ProspectingInsights.AddMember("SolutionSubCategory", smithyprelude.String)
-
-	ProspectingResultAws_Customer = ProspectingResultAws.AddMember("Customer", ProspectingResultCustomer)
-
-	ProspectingResultAws_Insights = ProspectingResultAws.AddMember("Insights", ProspectingInsights)
-
-	ProspectingResultAws_StartTime = ProspectingResultAws.AddMember("StartTime", _DateTime)
-
-	ProspectingResultAws_EndTime = ProspectingResultAws.AddMember("EndTime", _DateTime)
-
-	ProspectingResultAws_TaskId = ProspectingResultAws.AddMember("TaskId", _ProspectingTaskIdentifier)
-
-	ProspectingResultAws_TaskArn = ProspectingResultAws.AddMember("TaskArn", _TaskArn)
-
-	ProspectingResultAws_TaskName = ProspectingResultAws.AddMember("TaskName", _TaskName)
-
-	ProspectingResult_Aws = ProspectingResult.AddMember("Aws", ProspectingResultAws)
-
-	EngagementContextPayload_CustomerProject = EngagementContextPayload.AddMember("CustomerProject", CustomerProjectsContext)
-
-	EngagementContextPayload_Lead = EngagementContextPayload.AddMember("Lead", LeadContext)
-
-	EngagementContextPayload_ProspectingResult = EngagementContextPayload.AddMember("ProspectingResult", ProspectingResult)
-
-	EngagementContextDetails_Id = EngagementContextDetails.AddMember("Id", _EngagementContextIdentifier)
-
-	EngagementContextDetails_Type = EngagementContextDetails.AddMember("Type", EngagementContextType)
-
-	EngagementContextDetails_Payload = EngagementContextDetails.AddMember("Payload", EngagementContextPayload)
-
-	_EngagementContexts_member = _EngagementContexts.AddMember("member", EngagementContextDetails)
-
-	_EngagementContextTypeList_member = _EngagementContextTypeList.AddMember("member", EngagementContextType)
-
-	_EngagementIdentifierList_member = _EngagementIdentifierList.AddMember("member", _EngagementIdentifier)
-
-	_EngagementIdentifiers_member = _EngagementIdentifiers.AddMember("member", _EngagementArnOrIdentifier)
-
-	_EngagementInvitationIdentifiers_member = _EngagementInvitationIdentifiers.AddMember("member", _EngagementInvitationArnOrIdentifier)
-
-	EngagementInvitationPayloadType_OPPORTUNITY_INVITATION = EngagementInvitationPayloadType.AddMember("OPPORTUNITY_INVITATION", smithyprelude.Unit)
-
-	EngagementInvitationPayloadType_LEAD_INVITATION = EngagementInvitationPayloadType.AddMember("LEAD_INVITATION", smithyprelude.Unit)
-
-	_EngagementInvitationsPayloadType_member = _EngagementInvitationsPayloadType.AddMember("member", EngagementInvitationPayloadType)
-
-	InvitationStatus_ACCEPTED = InvitationStatus.AddMember("ACCEPTED", smithyprelude.Unit)
-
-	InvitationStatus_PENDING = InvitationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	InvitationStatus_REJECTED = InvitationStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	InvitationStatus_EXPIRED = InvitationStatus.AddMember("EXPIRED", smithyprelude.Unit)
-
-	Receiver_Account = Receiver.AddMember("Account", AccountReceiver)
-
-	ParticipantType_SENDER = ParticipantType.AddMember("SENDER", smithyprelude.Unit)
-
-	ParticipantType_RECEIVER = ParticipantType.AddMember("RECEIVER", smithyprelude.Unit)
-
-	EngagementInvitationSummary_Arn = EngagementInvitationSummary.AddMember("Arn", smithyprelude.String)
-
-	EngagementInvitationSummary_PayloadType = EngagementInvitationSummary.AddMember("PayloadType", EngagementInvitationPayloadType)
-
-	EngagementInvitationSummary_Id = EngagementInvitationSummary.AddMember("Id", _EngagementInvitationArnOrIdentifier)
-
-	EngagementInvitationSummary_EngagementId = EngagementInvitationSummary.AddMember("EngagementId", _EngagementIdentifier)
-
-	EngagementInvitationSummary_EngagementTitle = EngagementInvitationSummary.AddMember("EngagementTitle", _EngagementTitle)
-
-	EngagementInvitationSummary_Status = EngagementInvitationSummary.AddMember("Status", InvitationStatus)
-
-	EngagementInvitationSummary_InvitationDate = EngagementInvitationSummary.AddMember("InvitationDate", _DateTime)
-
-	EngagementInvitationSummary_ExpirationDate = EngagementInvitationSummary.AddMember("ExpirationDate", _DateTime)
-
-	EngagementInvitationSummary_SenderAwsAccountId = EngagementInvitationSummary.AddMember("SenderAwsAccountId", _AwsAccount)
-
-	EngagementInvitationSummary_SenderCompanyName = EngagementInvitationSummary.AddMember("SenderCompanyName", smithyprelude.String)
-
-	EngagementInvitationSummary_Receiver = EngagementInvitationSummary.AddMember("Receiver", Receiver)
-
-	EngagementInvitationSummary_Catalog = EngagementInvitationSummary.AddMember("Catalog", _CatalogIdentifier)
-
-	EngagementInvitationSummary_ParticipantType = EngagementInvitationSummary.AddMember("ParticipantType", ParticipantType)
-
-	_EngagementInvitationSummaries_member = _EngagementInvitationSummaries.AddMember("member", EngagementInvitationSummary)
-
-	EngagementMember_CompanyName = EngagementMember.AddMember("CompanyName", _MemberCompanyName)
-
-	EngagementMember_WebsiteUrl = EngagementMember.AddMember("WebsiteUrl", smithyprelude.String)
-
-	EngagementMember_AccountId = EngagementMember.AddMember("AccountId", _AwsAccount)
-
-	_EngagementMembers_member = _EngagementMembers.AddMember("member", EngagementMember)
-
-	EngagementMemberSummary_CompanyName = EngagementMemberSummary.AddMember("CompanyName", _MemberCompanyName)
-
-	EngagementMemberSummary_WebsiteUrl = EngagementMemberSummary.AddMember("WebsiteUrl", smithyprelude.String)
-
-	_EngagementMemberSummaries_member = _EngagementMemberSummaries.AddMember("member", EngagementMemberSummary)
-
-	ProspectingTaskStatus_PENDING = ProspectingTaskStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ProspectingTaskStatus_IN_PROGRESS = ProspectingTaskStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ProspectingTaskStatus_COMPLETED = ProspectingTaskStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	ProspectingTaskStatus_FAILED = ProspectingTaskStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	EngagementProspectingResult_EngagementIdentifier = EngagementProspectingResult.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	EngagementProspectingResult_EngagementContextId = EngagementProspectingResult.AddMember("EngagementContextId", smithyprelude.String)
-
-	EngagementProspectingResult_Status = EngagementProspectingResult.AddMember("Status", ProspectingTaskStatus)
-
-	EngagementProspectingResult_ReasonCode = EngagementProspectingResult.AddMember("ReasonCode", smithyprelude.String)
-
-	EngagementProspectingResult_Message = EngagementProspectingResult.AddMember("Message", smithyprelude.String)
-
-	_EngagementProspectingResultList_member = _EngagementProspectingResultList.AddMember("member", EngagementProspectingResult)
-
-	ResourceType_OPPORTUNITY = ResourceType.AddMember("OPPORTUNITY", smithyprelude.Unit)
-
-	EngagementResourceAssociationSummary_Catalog = EngagementResourceAssociationSummary.AddMember("Catalog", _CatalogIdentifier)
-
-	EngagementResourceAssociationSummary_EngagementId = EngagementResourceAssociationSummary.AddMember("EngagementId", _EngagementIdentifier)
-
-	EngagementResourceAssociationSummary_ResourceType = EngagementResourceAssociationSummary.AddMember("ResourceType", ResourceType)
-
-	EngagementResourceAssociationSummary_ResourceId = EngagementResourceAssociationSummary.AddMember("ResourceId", _ResourceIdentifier)
-
-	EngagementResourceAssociationSummary_CreatedBy = EngagementResourceAssociationSummary.AddMember("CreatedBy", _AwsAccount)
-
-	_EngagementResourceAssociationSummaryList_member = _EngagementResourceAssociationSummaryList.AddMember("member", EngagementResourceAssociationSummary)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	EngagementSortName_CreatedDate = EngagementSortName.AddMember("CreatedDate", smithyprelude.Unit)
-
-	EngagementSort_SortOrder = EngagementSort.AddMember("SortOrder", SortOrder)
-
-	EngagementSort_SortBy = EngagementSort.AddMember("SortBy", EngagementSortName)
-
-	EngagementSummary_Arn = EngagementSummary.AddMember("Arn", _EngagementArn)
-
-	EngagementSummary_Id = EngagementSummary.AddMember("Id", _EngagementIdentifier)
-
-	EngagementSummary_Title = EngagementSummary.AddMember("Title", _EngagementTitle)
-
-	EngagementSummary_CreatedAt = EngagementSummary.AddMember("CreatedAt", _DateTime)
-
-	EngagementSummary_CreatedBy = EngagementSummary.AddMember("CreatedBy", _AwsAccount)
-
-	EngagementSummary_MemberCount = EngagementSummary.AddMember("MemberCount", smithyprelude.Integer)
-
-	EngagementSummary_ModifiedAt = EngagementSummary.AddMember("ModifiedAt", _DateTime)
-
-	EngagementSummary_ModifiedBy = EngagementSummary.AddMember("ModifiedBy", _AwsAccount)
-
-	EngagementSummary_ContextTypes = EngagementSummary.AddMember("ContextTypes", _EngagementContextTypeList)
-
-	_EngagementSummaryList_member = _EngagementSummaryList.AddMember("member", EngagementSummary)
-
-	InvitationProspectingResultAws_Customer = InvitationProspectingResultAws.AddMember("Customer", ProspectingResultCustomer)
-
-	InvitationProspectingResultAws_Insights = InvitationProspectingResultAws.AddMember("Insights", ProspectingInsights)
-
-	EnrichmentContext_ProspectingResultAws = EnrichmentContext.AddMember("ProspectingResultAws", InvitationProspectingResultAws)
-
-	EnrichmentContext_LeadInsights = EnrichmentContext.AddMember("LeadInsights", LeadInsights)
-
-	ExpectedContractDurationTerm_MONTHS = ExpectedContractDurationTerm.AddMember("MONTHS", smithyprelude.Unit)
-
-	ExpectedContractDuration_Term = ExpectedContractDuration.AddMember("Term", ExpectedContractDurationTerm)
-
-	ExpectedContractDuration_Value = ExpectedContractDuration.AddMember("Value", smithyprelude.String)
-
-	_FilterIdentifier_member = _FilterIdentifier.AddMember("member", _OpportunityIdentifier)
-
-	ReviewStatus_PENDING_SUBMISSION = ReviewStatus.AddMember("PENDING_SUBMISSION", smithyprelude.Unit)
-
-	ReviewStatus_SUBMITTED = ReviewStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	ReviewStatus_IN_REVIEW = ReviewStatus.AddMember("IN_REVIEW", smithyprelude.Unit)
-
-	ReviewStatus_APPROVED = ReviewStatus.AddMember("APPROVED", smithyprelude.Unit)
-
-	ReviewStatus_REJECTED = ReviewStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	ReviewStatus_ACTION_REQUIRED = ReviewStatus.AddMember("ACTION_REQUIRED", smithyprelude.Unit)
-
-	_FilterLifeCycleReviewStatus_member = _FilterLifeCycleReviewStatus.AddMember("member", ReviewStatus)
-
-	Stage_PROSPECT = Stage.AddMember("PROSPECT", smithyprelude.Unit)
-
-	Stage_QUALIFIED = Stage.AddMember("QUALIFIED", smithyprelude.Unit)
-
-	Stage_TECHNICAL_VALIDATION = Stage.AddMember("TECHNICAL_VALIDATION", smithyprelude.Unit)
-
-	Stage_BUSINESS_VALIDATION = Stage.AddMember("BUSINESS_VALIDATION", smithyprelude.Unit)
-
-	Stage_COMMITTED = Stage.AddMember("COMMITTED", smithyprelude.Unit)
-
-	Stage_LAUNCHED = Stage.AddMember("LAUNCHED", smithyprelude.Unit)
-
-	Stage_CLOSED_LOST = Stage.AddMember("CLOSED_LOST", smithyprelude.Unit)
-
-	_FilterLifeCycleStage_member = _FilterLifeCycleStage.AddMember("member", Stage)
-
-	SolutionStatus_ACTIVE = SolutionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	SolutionStatus_INACTIVE = SolutionStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	SolutionStatus_DRAFT = SolutionStatus.AddMember("DRAFT", smithyprelude.Unit)
-
-	_FilterStatus_member = _FilterStatus.AddMember("member", SolutionStatus)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	SenderContact_Email = SenderContact.AddMember("Email", _SenderContactEmail)
-
-	SenderContact_FirstName = SenderContact.AddMember("FirstName", _Name)
-
-	SenderContact_LastName = SenderContact.AddMember("LastName", _Name)
-
-	SenderContact_BusinessTitle = SenderContact.AddMember("BusinessTitle", _JobTitle)
-
-	SenderContact_Phone = SenderContact.AddMember("Phone", _PhoneNumber)
-
-	_SenderContactList_member = _SenderContactList.AddMember("member", SenderContact)
-
-	ReceiverResponsibility_DISTRIBUTOR = ReceiverResponsibility.AddMember("DISTRIBUTOR", smithyprelude.Unit)
-
-	ReceiverResponsibility_RESELLER = ReceiverResponsibility.AddMember("RESELLER", smithyprelude.Unit)
-
-	ReceiverResponsibility_HARDWARE_PARTNER = ReceiverResponsibility.AddMember("HARDWARE_PARTNER", smithyprelude.Unit)
-
-	ReceiverResponsibility_MANAGED_SERVICE_PROVIDER = ReceiverResponsibility.AddMember("MANAGED_SERVICE_PROVIDER", smithyprelude.Unit)
-
-	ReceiverResponsibility_SOFTWARE_PARTNER = ReceiverResponsibility.AddMember("SOFTWARE_PARTNER", smithyprelude.Unit)
-
-	ReceiverResponsibility_SERVICES_PARTNER = ReceiverResponsibility.AddMember("SERVICES_PARTNER", smithyprelude.Unit)
-
-	ReceiverResponsibility_TRAINING_PARTNER = ReceiverResponsibility.AddMember("TRAINING_PARTNER", smithyprelude.Unit)
-
-	ReceiverResponsibility_CO_SELL_FACILITATOR = ReceiverResponsibility.AddMember("CO_SELL_FACILITATOR", smithyprelude.Unit)
-
-	ReceiverResponsibility_FACILITATOR = ReceiverResponsibility.AddMember("FACILITATOR", smithyprelude.Unit)
-
-	_ReceiverResponsibilityList_member = _ReceiverResponsibilityList.AddMember("member", ReceiverResponsibility)
-
-	ProjectDetails_BusinessProblem = ProjectDetails.AddMember("BusinessProblem", _EngagementCustomerBusinessProblem)
-
-	ProjectDetails_Title = ProjectDetails.AddMember("Title", smithyprelude.String)
-
-	ProjectDetails_TargetCompletionDate = ProjectDetails.AddMember("TargetCompletionDate", _Date)
-
-	ProjectDetails_ExpectedCustomerSpend = ProjectDetails.AddMember("ExpectedCustomerSpend", _ExpectedCustomerSpendList)
-
-	OpportunityInvitationPayload_SenderContacts = OpportunityInvitationPayload.AddMember("SenderContacts", _SenderContactList)
-
-	OpportunityInvitationPayload_ReceiverResponsibilities = OpportunityInvitationPayload.AddMember("ReceiverResponsibilities", _ReceiverResponsibilityList)
-
-	OpportunityInvitationPayload_Customer = OpportunityInvitationPayload.AddMember("Customer", EngagementCustomer)
-
-	OpportunityInvitationPayload_Project = OpportunityInvitationPayload.AddMember("Project", ProjectDetails)
-
-	LeadInvitationCustomer_Industry = LeadInvitationCustomer.AddMember("Industry", _LeadIndustry)
-
-	LeadInvitationCustomer_CompanyName = LeadInvitationCustomer.AddMember("CompanyName", _CompanyName)
-
-	LeadInvitationCustomer_WebsiteUrl = LeadInvitationCustomer.AddMember("WebsiteUrl", _LeadWebsiteUrl)
-
-	LeadInvitationCustomer_CountryCode = LeadInvitationCustomer.AddMember("CountryCode", _LeadCountryCode)
-
-	LeadInvitationCustomer_AwsMaturity = LeadInvitationCustomer.AddMember("AwsMaturity", _AwsMaturity)
-
-	LeadInvitationCustomer_MarketSegment = LeadInvitationCustomer.AddMember("MarketSegment", _LeadMarketSegment)
-
-	LeadInvitationInteraction_SourceType = LeadInvitationInteraction.AddMember("SourceType", _LeadSourceType)
-
-	LeadInvitationInteraction_SourceId = LeadInvitationInteraction.AddMember("SourceId", _LeadSourceId)
-
-	LeadInvitationInteraction_SourceName = LeadInvitationInteraction.AddMember("SourceName", _LeadSourceName)
-
-	LeadInvitationInteraction_Usecase = LeadInvitationInteraction.AddMember("Usecase", _EngagementUseCase)
-
-	LeadInvitationInteraction_ContactBusinessTitle = LeadInvitationInteraction.AddMember("ContactBusinessTitle", _JobTitle)
-
-	LeadInvitationPayload_Customer = LeadInvitationPayload.AddMember("Customer", LeadInvitationCustomer)
-
-	LeadInvitationPayload_Interaction = LeadInvitationPayload.AddMember("Interaction", LeadInvitationInteraction)
-
-	Payload_OpportunityInvitation = Payload.AddMember("OpportunityInvitation", OpportunityInvitationPayload)
-
-	Payload_LeadInvitation = Payload.AddMember("LeadInvitation", LeadInvitationPayload)
-
-	Invitation_Message = Invitation.AddMember("Message", _InvitationMessage)
-
-	Invitation_Receiver = Invitation.AddMember("Receiver", Receiver)
-
-	Invitation_Payload = Invitation.AddMember("Payload", Payload)
-
-	_InvitationStatusList_member = _InvitationStatusList.AddMember("member", InvitationStatus)
-
-	LastModifiedDate_AfterLastModifiedDate = LastModifiedDate.AddMember("AfterLastModifiedDate", _DateTime)
-
-	LastModifiedDate_BeforeLastModifiedDate = LastModifiedDate.AddMember("BeforeLastModifiedDate", _DateTime)
-
-	NextStepsHistory_Value = NextStepsHistory.AddMember("Value", smithyprelude.String)
-
-	NextStepsHistory_Time = NextStepsHistory.AddMember("Time", _DateTime)
-
-	_NextStepsHistories_member = _NextStepsHistories.AddMember("member", NextStepsHistory)
-
-	LifeCycle_Stage = LifeCycle.AddMember("Stage", Stage)
-
-	LifeCycle_ClosedLostReason = LifeCycle.AddMember("ClosedLostReason", ClosedLostReason)
-
-	LifeCycle_NextSteps = LifeCycle.AddMember("NextSteps", _PiiString)
-
-	LifeCycle_TargetCloseDate = LifeCycle.AddMember("TargetCloseDate", _Date)
-
-	LifeCycle_ReviewStatus = LifeCycle.AddMember("ReviewStatus", ReviewStatus)
-
-	LifeCycle_ReviewComments = LifeCycle.AddMember("ReviewComments", smithyprelude.String)
-
-	LifeCycle_ReviewStatusReason = LifeCycle.AddMember("ReviewStatusReason", smithyprelude.String)
-
-	LifeCycle_NextStepsHistory = LifeCycle.AddMember("NextStepsHistory", _NextStepsHistories)
-
-	LifeCycleForView_TargetCloseDate = LifeCycleForView.AddMember("TargetCloseDate", _Date)
-
-	LifeCycleForView_ReviewStatus = LifeCycleForView.AddMember("ReviewStatus", ReviewStatus)
-
-	LifeCycleForView_Stage = LifeCycleForView.AddMember("Stage", Stage)
-
-	LifeCycleForView_NextSteps = LifeCycleForView.AddMember("NextSteps", _PiiString)
-
-	LifeCycleSummary_Stage = LifeCycleSummary.AddMember("Stage", Stage)
-
-	LifeCycleSummary_ClosedLostReason = LifeCycleSummary.AddMember("ClosedLostReason", ClosedLostReason)
-
-	LifeCycleSummary_NextSteps = LifeCycleSummary.AddMember("NextSteps", _PiiString)
-
-	LifeCycleSummary_TargetCloseDate = LifeCycleSummary.AddMember("TargetCloseDate", _Date)
-
-	LifeCycleSummary_ReviewStatus = LifeCycleSummary.AddMember("ReviewStatus", ReviewStatus)
-
-	LifeCycleSummary_ReviewComments = LifeCycleSummary.AddMember("ReviewComments", smithyprelude.String)
-
-	LifeCycleSummary_ReviewStatusReason = LifeCycleSummary.AddMember("ReviewStatusReason", smithyprelude.String)
-
-	TaskStatus_IN_PROGRESS = TaskStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	TaskStatus_COMPLETE = TaskStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	TaskStatus_FAILED = TaskStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ReasonCode_INVITATION_ACCESS_DENIED = ReasonCode.AddMember("INVITATION_ACCESS_DENIED", smithyprelude.Unit)
-
-	ReasonCode_INVITATION_VALIDATION_FAILED = ReasonCode.AddMember("INVITATION_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ReasonCode_ENGAGEMENT_ACCESS_DENIED = ReasonCode.AddMember("ENGAGEMENT_ACCESS_DENIED", smithyprelude.Unit)
-
-	ReasonCode_OPPORTUNITY_ACCESS_DENIED = ReasonCode.AddMember("OPPORTUNITY_ACCESS_DENIED", smithyprelude.Unit)
-
-	ReasonCode_RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED = ReasonCode.AddMember("RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED", smithyprelude.Unit)
-
-	ReasonCode_RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED = ReasonCode.AddMember("RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ReasonCode_RESOURCE_SNAPSHOT_JOB_CONFLICT = ReasonCode.AddMember("RESOURCE_SNAPSHOT_JOB_CONFLICT", smithyprelude.Unit)
-
-	ReasonCode_ENGAGEMENT_VALIDATION_FAILED = ReasonCode.AddMember("ENGAGEMENT_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ReasonCode_ENGAGEMENT_CONFLICT = ReasonCode.AddMember("ENGAGEMENT_CONFLICT", smithyprelude.Unit)
-
-	ReasonCode_OPPORTUNITY_SUBMISSION_FAILED = ReasonCode.AddMember("OPPORTUNITY_SUBMISSION_FAILED", smithyprelude.Unit)
-
-	ReasonCode_ENGAGEMENT_INVITATION_CONFLICT = ReasonCode.AddMember("ENGAGEMENT_INVITATION_CONFLICT", smithyprelude.Unit)
-
-	ReasonCode_INTERNAL_ERROR = ReasonCode.AddMember("INTERNAL_ERROR", smithyprelude.Unit)
-
-	ReasonCode_OPPORTUNITY_VALIDATION_FAILED = ReasonCode.AddMember("OPPORTUNITY_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ReasonCode_OPPORTUNITY_CONFLICT = ReasonCode.AddMember("OPPORTUNITY_CONFLICT", smithyprelude.Unit)
-
-	ReasonCode_RESOURCE_SNAPSHOT_ACCESS_DENIED = ReasonCode.AddMember("RESOURCE_SNAPSHOT_ACCESS_DENIED", smithyprelude.Unit)
-
-	ReasonCode_RESOURCE_SNAPSHOT_VALIDATION_FAILED = ReasonCode.AddMember("RESOURCE_SNAPSHOT_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ReasonCode_RESOURCE_SNAPSHOT_CONFLICT = ReasonCode.AddMember("RESOURCE_SNAPSHOT_CONFLICT", smithyprelude.Unit)
-
-	ReasonCode_SERVICE_QUOTA_EXCEEDED = ReasonCode.AddMember("SERVICE_QUOTA_EXCEEDED", smithyprelude.Unit)
-
-	ReasonCode_REQUEST_THROTTLED = ReasonCode.AddMember("REQUEST_THROTTLED", smithyprelude.Unit)
-
-	ReasonCode_CONTEXT_NOT_FOUND = ReasonCode.AddMember("CONTEXT_NOT_FOUND", smithyprelude.Unit)
-
-	ReasonCode_CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED = ReasonCode.AddMember("CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED", smithyprelude.Unit)
-
-	ReasonCode_DISQUALIFIED_LEAD_NOT_PERMITTED = ReasonCode.AddMember("DISQUALIFIED_LEAD_NOT_PERMITTED", smithyprelude.Unit)
-
-	ListEngagementByAcceptingInvitationTaskSummary_TaskId = ListEngagementByAcceptingInvitationTaskSummary.AddMember("TaskId", _TaskIdentifier)
-
-	ListEngagementByAcceptingInvitationTaskSummary_TaskArn = ListEngagementByAcceptingInvitationTaskSummary.AddMember("TaskArn", _TaskArn)
-
-	ListEngagementByAcceptingInvitationTaskSummary_StartTime = ListEngagementByAcceptingInvitationTaskSummary.AddMember("StartTime", _DateTime)
-
-	ListEngagementByAcceptingInvitationTaskSummary_TaskStatus = ListEngagementByAcceptingInvitationTaskSummary.AddMember("TaskStatus", TaskStatus)
-
-	ListEngagementByAcceptingInvitationTaskSummary_Message = ListEngagementByAcceptingInvitationTaskSummary.AddMember("Message", smithyprelude.String)
-
-	ListEngagementByAcceptingInvitationTaskSummary_ReasonCode = ListEngagementByAcceptingInvitationTaskSummary.AddMember("ReasonCode", ReasonCode)
-
-	ListEngagementByAcceptingInvitationTaskSummary_OpportunityId = ListEngagementByAcceptingInvitationTaskSummary.AddMember("OpportunityId", _OpportunityIdentifier)
-
-	ListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId = ListEngagementByAcceptingInvitationTaskSummary.AddMember("ResourceSnapshotJobId", _ResourceSnapshotJobIdentifier)
-
-	ListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId = ListEngagementByAcceptingInvitationTaskSummary.AddMember("EngagementInvitationId", _EngagementInvitationIdentifier)
-
-	_ListEngagementByAcceptingInvitationTaskSummaries_member = _ListEngagementByAcceptingInvitationTaskSummaries.AddMember("member", ListEngagementByAcceptingInvitationTaskSummary)
-
-	ListEngagementFromOpportunityTaskSummary_TaskId = ListEngagementFromOpportunityTaskSummary.AddMember("TaskId", _TaskIdentifier)
-
-	ListEngagementFromOpportunityTaskSummary_TaskArn = ListEngagementFromOpportunityTaskSummary.AddMember("TaskArn", _TaskArn)
-
-	ListEngagementFromOpportunityTaskSummary_StartTime = ListEngagementFromOpportunityTaskSummary.AddMember("StartTime", _DateTime)
-
-	ListEngagementFromOpportunityTaskSummary_TaskStatus = ListEngagementFromOpportunityTaskSummary.AddMember("TaskStatus", TaskStatus)
-
-	ListEngagementFromOpportunityTaskSummary_Message = ListEngagementFromOpportunityTaskSummary.AddMember("Message", smithyprelude.String)
-
-	ListEngagementFromOpportunityTaskSummary_ReasonCode = ListEngagementFromOpportunityTaskSummary.AddMember("ReasonCode", ReasonCode)
-
-	ListEngagementFromOpportunityTaskSummary_OpportunityId = ListEngagementFromOpportunityTaskSummary.AddMember("OpportunityId", _OpportunityIdentifier)
-
-	ListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId = ListEngagementFromOpportunityTaskSummary.AddMember("ResourceSnapshotJobId", _ResourceSnapshotJobIdentifier)
-
-	ListEngagementFromOpportunityTaskSummary_EngagementId = ListEngagementFromOpportunityTaskSummary.AddMember("EngagementId", _EngagementIdentifier)
-
-	ListEngagementFromOpportunityTaskSummary_EngagementInvitationId = ListEngagementFromOpportunityTaskSummary.AddMember("EngagementInvitationId", _EngagementInvitationIdentifier)
-
-	_ListEngagementFromOpportunityTaskSummaries_member = _ListEngagementFromOpportunityTaskSummaries.AddMember("member", ListEngagementFromOpportunityTaskSummary)
-
-	ListOpportunityFromEngagementTaskSummary_TaskId = ListOpportunityFromEngagementTaskSummary.AddMember("TaskId", _TaskIdentifier)
-
-	ListOpportunityFromEngagementTaskSummary_TaskArn = ListOpportunityFromEngagementTaskSummary.AddMember("TaskArn", _TaskArn)
-
-	ListOpportunityFromEngagementTaskSummary_StartTime = ListOpportunityFromEngagementTaskSummary.AddMember("StartTime", _DateTime)
-
-	ListOpportunityFromEngagementTaskSummary_TaskStatus = ListOpportunityFromEngagementTaskSummary.AddMember("TaskStatus", TaskStatus)
-
-	ListOpportunityFromEngagementTaskSummary_Message = ListOpportunityFromEngagementTaskSummary.AddMember("Message", smithyprelude.String)
-
-	ListOpportunityFromEngagementTaskSummary_ReasonCode = ListOpportunityFromEngagementTaskSummary.AddMember("ReasonCode", ReasonCode)
-
-	ListOpportunityFromEngagementTaskSummary_OpportunityId = ListOpportunityFromEngagementTaskSummary.AddMember("OpportunityId", _OpportunityIdentifier)
-
-	ListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId = ListOpportunityFromEngagementTaskSummary.AddMember("ResourceSnapshotJobId", _ResourceSnapshotJobIdentifier)
-
-	ListOpportunityFromEngagementTaskSummary_EngagementId = ListOpportunityFromEngagementTaskSummary.AddMember("EngagementId", _EngagementIdentifier)
-
-	ListOpportunityFromEngagementTaskSummary_ContextId = ListOpportunityFromEngagementTaskSummary.AddMember("ContextId", _ContextIdentifier)
-
-	_ListOpportunityFromEngagementTaskSummaries_member = _ListOpportunityFromEngagementTaskSummaries.AddMember("member", ListOpportunityFromEngagementTaskSummary)
-
-	ListTasksSortName_START_TIME = ListTasksSortName.AddMember("START_TIME", smithyprelude.Unit)
-
-	ListTasksSortBase_SortOrder = ListTasksSortBase.AddMember("SortOrder", SortOrder)
-
-	ListTasksSortBase_SortBy = ListTasksSortBase.AddMember("SortBy", ListTasksSortName)
-
-	MarketingSource_MARKETING_ACTIVITY = MarketingSource.AddMember("MARKETING_ACTIVITY", smithyprelude.Unit)
-
-	MarketingSource_NONE = MarketingSource.AddMember("NONE", smithyprelude.Unit)
-
-	_UseCases_member = _UseCases.AddMember("member", smithyprelude.String)
-
-	Marketing_CampaignName = Marketing.AddMember("CampaignName", smithyprelude.String)
-
-	Marketing_Source = Marketing.AddMember("Source", MarketingSource)
-
-	Marketing_UseCases = Marketing.AddMember("UseCases", _UseCases)
-
-	Marketing_Channels = Marketing.AddMember("Channels", _Channels)
-
-	Marketing_AwsFundingUsed = Marketing.AddMember("AwsFundingUsed", AwsFundingUsed)
-
-	NationalSecurity_YES = NationalSecurity.AddMember("YES", smithyprelude.Unit)
-
-	NationalSecurity_NO = NationalSecurity.AddMember("NO", smithyprelude.Unit)
-
-	OpportunityEngagementInvitationSortName_INVITATION_DATE = OpportunityEngagementInvitationSortName.AddMember("INVITATION_DATE", smithyprelude.Unit)
-
-	OpportunityEngagementInvitationSort_SortOrder = OpportunityEngagementInvitationSort.AddMember("SortOrder", SortOrder)
-
-	OpportunityEngagementInvitationSort_SortBy = OpportunityEngagementInvitationSort.AddMember("SortBy", OpportunityEngagementInvitationSortName)
-
-	_OpportunityIdentifiers_member = _OpportunityIdentifiers.AddMember("member", _OpportunityIdentifier)
-
-	OpportunitySortName_LAST_MODIFIEDDATE = OpportunitySortName.AddMember("LAST_MODIFIEDDATE", smithyprelude.Unit)
-
-	OpportunitySortName_IDENTIFIER = OpportunitySortName.AddMember("IDENTIFIER", smithyprelude.Unit)
-
-	OpportunitySortName_CUSTOMER_COMPANY_NAME = OpportunitySortName.AddMember("CUSTOMER_COMPANY_NAME", smithyprelude.Unit)
-
-	OpportunitySortName_CREATED_DATE = OpportunitySortName.AddMember("CREATED_DATE", smithyprelude.Unit)
-
-	OpportunitySortName_TARGET_CLOSE_DATE = OpportunitySortName.AddMember("TARGET_CLOSE_DATE", smithyprelude.Unit)
-
-	OpportunitySort_SortOrder = OpportunitySort.AddMember("SortOrder", SortOrder)
-
-	OpportunitySort_SortBy = OpportunitySort.AddMember("SortBy", OpportunitySortName)
-
-	OpportunityType_NET_NEW_BUSINESS = OpportunityType.AddMember("NET_NEW_BUSINESS", smithyprelude.Unit)
-
-	OpportunityType_FLAT_RENEWAL = OpportunityType.AddMember("FLAT_RENEWAL", smithyprelude.Unit)
-
-	OpportunityType_EXPANSION = OpportunityType.AddMember("EXPANSION", smithyprelude.Unit)
-
-	ProjectSummary_DeliveryModels = ProjectSummary.AddMember("DeliveryModels", _DeliveryModels)
-
-	ProjectSummary_ExpectedCustomerSpend = ProjectSummary.AddMember("ExpectedCustomerSpend", _ExpectedCustomerSpendList)
-
-	ProjectSummary_ExpectedContractDuration = ProjectSummary.AddMember("ExpectedContractDuration", ExpectedContractDuration)
-
-	OpportunitySummary_Catalog = OpportunitySummary.AddMember("Catalog", _CatalogIdentifier)
-
-	OpportunitySummary_Id = OpportunitySummary.AddMember("Id", _OpportunityIdentifier)
-
-	OpportunitySummary_Arn = OpportunitySummary.AddMember("Arn", _OpportunityArn)
-
-	OpportunitySummary_PartnerOpportunityIdentifier = OpportunitySummary.AddMember("PartnerOpportunityIdentifier", smithyprelude.String)
-
-	OpportunitySummary_OpportunityType = OpportunitySummary.AddMember("OpportunityType", OpportunityType)
-
-	OpportunitySummary_LastModifiedDate = OpportunitySummary.AddMember("LastModifiedDate", _DateTime)
-
-	OpportunitySummary_CreatedDate = OpportunitySummary.AddMember("CreatedDate", _DateTime)
-
-	OpportunitySummary_LifeCycle = OpportunitySummary.AddMember("LifeCycle", LifeCycleSummary)
-
-	OpportunitySummary_Customer = OpportunitySummary.AddMember("Customer", CustomerSummary)
-
-	OpportunitySummary_Project = OpportunitySummary.AddMember("Project", ProjectSummary)
-
-	_OpportunitySummaries_member = _OpportunitySummaries.AddMember("member", OpportunitySummary)
-
-	_PartnerOpportunityTeamMembersList_member = _PartnerOpportunityTeamMembersList.AddMember("member", Contact)
-
-	PrimaryNeedFromAws_CO_SELL_ARCHITECTURAL_VALIDATION = PrimaryNeedFromAws.AddMember("CO_SELL_ARCHITECTURAL_VALIDATION", smithyprelude.Unit)
-
-	PrimaryNeedFromAws_CO_SELL_BUSINESS_PRESENTATION = PrimaryNeedFromAws.AddMember("CO_SELL_BUSINESS_PRESENTATION", smithyprelude.Unit)
-
-	PrimaryNeedFromAws_CO_SELL_COMPETITIVE_INFORMATION = PrimaryNeedFromAws.AddMember("CO_SELL_COMPETITIVE_INFORMATION", smithyprelude.Unit)
-
-	PrimaryNeedFromAws_CO_SELL_PRICING_ASSISTANCE = PrimaryNeedFromAws.AddMember("CO_SELL_PRICING_ASSISTANCE", smithyprelude.Unit)
-
-	PrimaryNeedFromAws_CO_SELL_TECHNICAL_CONSULTATION = PrimaryNeedFromAws.AddMember("CO_SELL_TECHNICAL_CONSULTATION", smithyprelude.Unit)
-
-	PrimaryNeedFromAws_CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION = PrimaryNeedFromAws.AddMember("CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION", smithyprelude.Unit)
-
-	PrimaryNeedFromAws_CO_SELL_DEAL_SUPPORT = PrimaryNeedFromAws.AddMember("CO_SELL_DEAL_SUPPORT", smithyprelude.Unit)
-
-	PrimaryNeedFromAws_CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX = PrimaryNeedFromAws.AddMember("CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX", smithyprelude.Unit)
-
-	_PrimaryNeedsFromAws_member = _PrimaryNeedsFromAws.AddMember("member", PrimaryNeedFromAws)
-
-	SalesActivity_INITIALIZED_DISCUSSIONS_WITH_CUSTOMER = SalesActivity.AddMember("INITIALIZED_DISCUSSIONS_WITH_CUSTOMER", smithyprelude.Unit)
-
-	SalesActivity_CUSTOMER_HAS_SHOWN_INTEREST = SalesActivity.AddMember("CUSTOMER_HAS_SHOWN_INTEREST", smithyprelude.Unit)
-
-	SalesActivity_CONDUCTED_POC_DEMO = SalesActivity.AddMember("CONDUCTED_POC_DEMO", smithyprelude.Unit)
-
-	SalesActivity_IN_EVALUATION_PLANNING_STAGE = SalesActivity.AddMember("IN_EVALUATION_PLANNING_STAGE", smithyprelude.Unit)
-
-	SalesActivity_AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM = SalesActivity.AddMember("AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM", smithyprelude.Unit)
-
-	SalesActivity_COMPLETED_ACTION_PLAN = SalesActivity.AddMember("COMPLETED_ACTION_PLAN", smithyprelude.Unit)
-
-	SalesActivity_FINALIZED_DEPLOYMENT_NEEDS = SalesActivity.AddMember("FINALIZED_DEPLOYMENT_NEEDS", smithyprelude.Unit)
-
-	SalesActivity_SOW_SIGNED = SalesActivity.AddMember("SOW_SIGNED", smithyprelude.Unit)
-
-	_SalesActivities_member = _SalesActivities.AddMember("member", SalesActivity)
-
-	ProjectView_DeliveryModels = ProjectView.AddMember("DeliveryModels", _DeliveryModels)
-
-	ProjectView_ExpectedCustomerSpend = ProjectView.AddMember("ExpectedCustomerSpend", _ExpectedCustomerSpendList)
-
-	ProjectView_ExpectedContractDuration = ProjectView.AddMember("ExpectedContractDuration", ExpectedContractDuration)
-
-	ProjectView_CustomerUseCase = ProjectView.AddMember("CustomerUseCase", smithyprelude.String)
-
-	ProjectView_SalesActivities = ProjectView.AddMember("SalesActivities", _SalesActivities)
-
-	ProjectView_OtherSolutionDescription = ProjectView.AddMember("OtherSolutionDescription", _PiiString)
-
-	RelatedEntityIdentifiers_AwsMarketplaceOffers = RelatedEntityIdentifiers.AddMember("AwsMarketplaceOffers", _AwsMarketplaceOfferIdentifiers)
-
-	RelatedEntityIdentifiers_AwsMarketplaceOfferSets = RelatedEntityIdentifiers.AddMember("AwsMarketplaceOfferSets", _AwsMarketplaceOfferSetIdentifiers)
-
-	RelatedEntityIdentifiers_Solutions = RelatedEntityIdentifiers.AddMember("Solutions", _SolutionIdentifiers)
-
-	RelatedEntityIdentifiers_AwsProducts = RelatedEntityIdentifiers.AddMember("AwsProducts", _AwsProductIdentifiers)
-
-	RelatedEntityIdentifiers_AwsMarketplaceSolutions = RelatedEntityIdentifiers.AddMember("AwsMarketplaceSolutions", _AwsMarketplaceSolutionIdentifiers)
-
-	RelatedEntityIdentifiers_AwsMarketplaceProducts = RelatedEntityIdentifiers.AddMember("AwsMarketplaceProducts", _AwsMarketplaceProductIdentifiers)
-
-	OpportunitySummaryView_OpportunityType = OpportunitySummaryView.AddMember("OpportunityType", OpportunityType)
-
-	OpportunitySummaryView_Lifecycle = OpportunitySummaryView.AddMember("Lifecycle", LifeCycleForView)
-
-	OpportunitySummaryView_OpportunityTeam = OpportunitySummaryView.AddMember("OpportunityTeam", _PartnerOpportunityTeamMembersList)
-
-	OpportunitySummaryView_PrimaryNeedsFromAws = OpportunitySummaryView.AddMember("PrimaryNeedsFromAws", _PrimaryNeedsFromAws)
-
-	OpportunitySummaryView_Customer = OpportunitySummaryView.AddMember("Customer", Customer)
-
-	OpportunitySummaryView_Project = OpportunitySummaryView.AddMember("Project", ProjectView)
-
-	OpportunitySummaryView_RelatedEntityIdentifiers = OpportunitySummaryView.AddMember("RelatedEntityIdentifiers", RelatedEntityIdentifiers)
-
-	Project_DeliveryModels = Project.AddMember("DeliveryModels", _DeliveryModels)
-
-	Project_ExpectedCustomerSpend = Project.AddMember("ExpectedCustomerSpend", _ExpectedCustomerSpendList)
-
-	Project_ExpectedContractDuration = Project.AddMember("ExpectedContractDuration", ExpectedContractDuration)
-
-	Project_Title = Project.AddMember("Title", _PiiString)
-
-	Project_ApnPrograms = Project.AddMember("ApnPrograms", _ApnPrograms)
-
-	Project_CustomerBusinessProblem = Project.AddMember("CustomerBusinessProblem", _PiiString)
-
-	Project_CustomerUseCase = Project.AddMember("CustomerUseCase", smithyprelude.String)
-
-	Project_RelatedOpportunityIdentifier = Project.AddMember("RelatedOpportunityIdentifier", _OpportunityIdentifier)
-
-	Project_SalesActivities = Project.AddMember("SalesActivities", _SalesActivities)
-
-	Project_CompetitorName = Project.AddMember("CompetitorName", CompetitorName)
-
-	Project_OtherCompetitorNames = Project.AddMember("OtherCompetitorNames", smithyprelude.String)
-
-	Project_OtherSolutionDescription = Project.AddMember("OtherSolutionDescription", _PiiString)
-
-	Project_AdditionalComments = Project.AddMember("AdditionalComments", smithyprelude.String)
-
-	Project_AwsPartition = Project.AddMember("AwsPartition", AwsPartition)
-
-	ProspectingFromEngagementTaskSortName_StartTime = ProspectingFromEngagementTaskSortName.AddMember("StartTime", smithyprelude.Unit)
-
-	ProspectingFromEngagementTaskSortName_TaskName = ProspectingFromEngagementTaskSortName.AddMember("TaskName", smithyprelude.Unit)
-
-	ProspectingFromEngagementTaskSortName_FailedEngagementCount = ProspectingFromEngagementTaskSortName.AddMember("FailedEngagementCount", smithyprelude.Unit)
-
-	ProspectingFromEngagementTaskSort_SortOrder = ProspectingFromEngagementTaskSort.AddMember("SortOrder", SortOrder)
-
-	ProspectingFromEngagementTaskSort_SortBy = ProspectingFromEngagementTaskSort.AddMember("SortBy", ProspectingFromEngagementTaskSortName)
-
-	ProspectingTaskSummary_TaskId = ProspectingTaskSummary.AddMember("TaskId", _ProspectingTaskIdentifier)
-
-	ProspectingTaskSummary_TaskArn = ProspectingTaskSummary.AddMember("TaskArn", _ProspectingTaskArn)
-
-	ProspectingTaskSummary_TaskName = ProspectingTaskSummary.AddMember("TaskName", _TaskName)
-
-	ProspectingTaskSummary_StartTime = ProspectingTaskSummary.AddMember("StartTime", _DateTime)
-
-	ProspectingTaskSummary_EndTime = ProspectingTaskSummary.AddMember("EndTime", _DateTime)
-
-	ProspectingTaskSummary_TotalEngagementCount = ProspectingTaskSummary.AddMember("TotalEngagementCount", smithyprelude.Integer)
-
-	ProspectingTaskSummary_CompletedEngagementCount = ProspectingTaskSummary.AddMember("CompletedEngagementCount", smithyprelude.Integer)
-
-	ProspectingTaskSummary_FailedEngagementCount = ProspectingTaskSummary.AddMember("FailedEngagementCount", smithyprelude.Integer)
-
-	_ProspectingTaskSummaryList_member = _ProspectingTaskSummaryList.AddMember("member", ProspectingTaskSummary)
-
-	RelatedEntityType_SOLUTIONS = RelatedEntityType.AddMember("SOLUTIONS", smithyprelude.Unit)
-
-	RelatedEntityType_AWS_PRODUCTS = RelatedEntityType.AddMember("AWS_PRODUCTS", smithyprelude.Unit)
-
-	RelatedEntityType_AWS_MARKETPLACE_OFFERS = RelatedEntityType.AddMember("AWS_MARKETPLACE_OFFERS", smithyprelude.Unit)
-
-	RelatedEntityType_AWS_MARKETPLACE_OFFER_SETS = RelatedEntityType.AddMember("AWS_MARKETPLACE_OFFER_SETS", smithyprelude.Unit)
-
-	RelatedEntityType_AWS_MARKETPLACE_SOLUTIONS = RelatedEntityType.AddMember("AWS_MARKETPLACE_SOLUTIONS", smithyprelude.Unit)
-
-	RelatedEntityType_AWS_MARKETPLACE_PRODUCTS = RelatedEntityType.AddMember("AWS_MARKETPLACE_PRODUCTS", smithyprelude.Unit)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceSnapshotJobStatus_RUNNING = ResourceSnapshotJobStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	ResourceSnapshotJobStatus_STOPPED = ResourceSnapshotJobStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	ResourceSnapshotJobSummary_Id = ResourceSnapshotJobSummary.AddMember("Id", _ResourceSnapshotJobIdentifier)
-
-	ResourceSnapshotJobSummary_Arn = ResourceSnapshotJobSummary.AddMember("Arn", _ResourceSnapshotJobArn)
-
-	ResourceSnapshotJobSummary_EngagementId = ResourceSnapshotJobSummary.AddMember("EngagementId", _EngagementIdentifier)
-
-	ResourceSnapshotJobSummary_Status = ResourceSnapshotJobSummary.AddMember("Status", ResourceSnapshotJobStatus)
-
-	_ResourceSnapshotJobSummaryList_member = _ResourceSnapshotJobSummaryList.AddMember("member", ResourceSnapshotJobSummary)
-
-	ResourceSnapshotPayload_OpportunitySummary = ResourceSnapshotPayload.AddMember("OpportunitySummary", OpportunitySummaryView)
-
-	ResourceSnapshotPayload_AwsOpportunitySummaryFullView = ResourceSnapshotPayload.AddMember("AwsOpportunitySummaryFullView", AwsOpportunitySummaryFullView)
-
-	ResourceSnapshotSummary_Arn = ResourceSnapshotSummary.AddMember("Arn", _ResourceSnapshotArn)
-
-	ResourceSnapshotSummary_Revision = ResourceSnapshotSummary.AddMember("Revision", _ResourceSnapshotRevision)
-
-	ResourceSnapshotSummary_ResourceType = ResourceSnapshotSummary.AddMember("ResourceType", ResourceType)
-
-	ResourceSnapshotSummary_ResourceId = ResourceSnapshotSummary.AddMember("ResourceId", _ResourceIdentifier)
-
-	ResourceSnapshotSummary_ResourceSnapshotTemplateName = ResourceSnapshotSummary.AddMember("ResourceSnapshotTemplateName", _ResourceTemplateName)
-
-	ResourceSnapshotSummary_CreatedBy = ResourceSnapshotSummary.AddMember("CreatedBy", _AwsAccount)
-
-	_ResourceSnapshotSummaryList_member = _ResourceSnapshotSummaryList.AddMember("member", ResourceSnapshotSummary)
-
-	RevenueModel_CONTRACT = RevenueModel.AddMember("CONTRACT", smithyprelude.Unit)
-
-	RevenueModel_PAY_AS_YOU_GO = RevenueModel.AddMember("PAY_AS_YOU_GO", smithyprelude.Unit)
-
-	RevenueModel_SUBSCRIPTION = RevenueModel.AddMember("SUBSCRIPTION", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	SoftwareRevenue_DeliveryModel = SoftwareRevenue.AddMember("DeliveryModel", RevenueModel)
-
-	SoftwareRevenue_Value = SoftwareRevenue.AddMember("Value", MonetaryValue)
-
-	SoftwareRevenue_EffectiveDate = SoftwareRevenue.AddMember("EffectiveDate", _Date)
-
-	SoftwareRevenue_ExpirationDate = SoftwareRevenue.AddMember("ExpirationDate", _Date)
-
-	SolutionBase_Catalog = SolutionBase.AddMember("Catalog", _CatalogIdentifier)
-
-	SolutionBase_Id = SolutionBase.AddMember("Id", _SolutionIdentifier)
-
-	SolutionBase_Arn = SolutionBase.AddMember("Arn", _SolutionArn)
-
-	SolutionBase_Name = SolutionBase.AddMember("Name", smithyprelude.String)
-
-	SolutionBase_Status = SolutionBase.AddMember("Status", SolutionStatus)
-
-	SolutionBase_Category = SolutionBase.AddMember("Category", smithyprelude.String)
-
-	SolutionBase_CreatedDate = SolutionBase.AddMember("CreatedDate", _DateTime)
-
-	SolutionBase_AwsMarketplaceSolutionArn = SolutionBase.AddMember("AwsMarketplaceSolutionArn", _AwsMarketplaceSolutionArn)
-
-	_SolutionList_member = _SolutionList.AddMember("member", SolutionBase)
-
-	SolutionSortName_IDENTIFIER = SolutionSortName.AddMember("IDENTIFIER", smithyprelude.Unit)
-
-	SolutionSortName_NAME = SolutionSortName.AddMember("NAME", smithyprelude.Unit)
-
-	SolutionSortName_STATUS = SolutionSortName.AddMember("STATUS", smithyprelude.Unit)
-
-	SolutionSortName_CATEGORY = SolutionSortName.AddMember("CATEGORY", smithyprelude.Unit)
-
-	SolutionSortName_CREATEDDATE = SolutionSortName.AddMember("CREATEDDATE", smithyprelude.Unit)
-
-	SolutionSort_SortOrder = SolutionSort.AddMember("SortOrder", SortOrder)
-
-	SolutionSort_SortBy = SolutionSort.AddMember("SortBy", SolutionSortName)
-
-	SortBy_CREATED_DATE = SortBy.AddMember("CREATED_DATE", smithyprelude.Unit)
-
-	SortObject_SortBy = SortObject.AddMember("SortBy", SortBy)
-
-	SortObject_SortOrder = SortObject.AddMember("SortOrder", SortOrder)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TargetCloseDateFilter_AfterTargetCloseDate = TargetCloseDateFilter.AddMember("AfterTargetCloseDate", _Date)
-
-	TargetCloseDateFilter_BeforeTargetCloseDate = TargetCloseDateFilter.AddMember("BeforeTargetCloseDate", _Date)
-
-	_TaskIdentifierList_member = _TaskIdentifierList.AddMember("member", _ProspectingTaskIdentifier)
-
-	_TaskIdentifiers_member = _TaskIdentifiers.AddMember("member", _TaskArnOrIdentifier)
-
-	_TaskNameList_member = _TaskNameList.AddMember("member", _TaskName)
-
-	_TaskStatuses_member = _TaskStatuses.AddMember("member", TaskStatus)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	UpdateLeadContext_QualificationStatus = UpdateLeadContext.AddMember("QualificationStatus", _LeadQualificationStatus)
-
-	UpdateLeadContext_Customer = UpdateLeadContext.AddMember("Customer", LeadCustomer)
-
-	UpdateLeadContext_Interaction = UpdateLeadContext.AddMember("Interaction", LeadInteraction)
-
-	UpdateLeadContext_Insights = UpdateLeadContext.AddMember("Insights", LeadInsights)
-
-	UpdateEngagementContextPayload_Lead = UpdateEngagementContextPayload.AddMember("Lead", UpdateLeadContext)
-
-	UpdateEngagementContextPayload_CustomerProject = UpdateEngagementContextPayload.AddMember("CustomerProject", CustomerProjectsContext)
-
-	UpdateEngagementContextPayload_ProspectingResult = UpdateEngagementContextPayload.AddMember("ProspectingResult", ProspectingResult)
-
-	ValidationExceptionReason_REQUEST_VALIDATION_FAILED = ValidationExceptionReason.AddMember("REQUEST_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = ValidationExceptionReason.AddMember("BUSINESS_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_REQUIRED_FIELD_MISSING = ValidationExceptionErrorCode.AddMember("REQUIRED_FIELD_MISSING", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_ENUM_VALUE = ValidationExceptionErrorCode.AddMember("INVALID_ENUM_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_STRING_FORMAT = ValidationExceptionErrorCode.AddMember("INVALID_STRING_FORMAT", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_VALUE = ValidationExceptionErrorCode.AddMember("INVALID_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_NOT_ENOUGH_VALUES = ValidationExceptionErrorCode.AddMember("NOT_ENOUGH_VALUES", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_TOO_MANY_VALUES = ValidationExceptionErrorCode.AddMember("TOO_MANY_VALUES", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_INVALID_RESOURCE_STATE = ValidationExceptionErrorCode.AddMember("INVALID_RESOURCE_STATE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_DUPLICATE_KEY_VALUE = ValidationExceptionErrorCode.AddMember("DUPLICATE_KEY_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_VALUE_OUT_OF_RANGE = ValidationExceptionErrorCode.AddMember("VALUE_OUT_OF_RANGE", smithyprelude.Unit)
-
-	ValidationExceptionErrorCode_ACTION_NOT_PERMITTED = ValidationExceptionErrorCode.AddMember("ACTION_NOT_PERMITTED", smithyprelude.Unit)
-
-	ValidationExceptionError_FieldName = ValidationExceptionError.AddMember("FieldName", smithyprelude.String)
-
-	ValidationExceptionError_Message = ValidationExceptionError.AddMember("Message", smithyprelude.String)
-
-	ValidationExceptionError_Code = ValidationExceptionError.AddMember("Code", ValidationExceptionErrorCode)
-
-	_ValidationExceptionErrorList_member = _ValidationExceptionErrorList.AddMember("member", ValidationExceptionError)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Reason = ValidationException.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationException_ErrorList = ValidationException.AddMember("ErrorList", _ValidationExceptionErrorList)
-
-	AcceptEngagementInvitationRequest_Catalog = AcceptEngagementInvitationRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	AcceptEngagementInvitationRequest_Identifier = AcceptEngagementInvitationRequest.AddMember("Identifier", _EngagementInvitationArnOrIdentifier)
-
-	AssignOpportunityRequest_Catalog = AssignOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	AssignOpportunityRequest_Identifier = AssignOpportunityRequest.AddMember("Identifier", _OpportunityIdentifier)
-
-	AssignOpportunityRequest_Assignee = AssignOpportunityRequest.AddMember("Assignee", AssigneeContact)
-
-	AssociateOpportunityRequest_Catalog = AssociateOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	AssociateOpportunityRequest_OpportunityIdentifier = AssociateOpportunityRequest.AddMember("OpportunityIdentifier", _OpportunityIdentifier)
-
-	AssociateOpportunityRequest_RelatedEntityType = AssociateOpportunityRequest.AddMember("RelatedEntityType", RelatedEntityType)
-
-	AssociateOpportunityRequest_RelatedEntityIdentifier = AssociateOpportunityRequest.AddMember("RelatedEntityIdentifier", smithyprelude.String)
-
-	CreateEngagementContextRequest_Catalog = CreateEngagementContextRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	CreateEngagementContextRequest_EngagementIdentifier = CreateEngagementContextRequest.AddMember("EngagementIdentifier", _EngagementArnOrIdentifier)
-
-	CreateEngagementContextRequest_ClientToken = CreateEngagementContextRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateEngagementContextRequest_Type = CreateEngagementContextRequest.AddMember("Type", EngagementContextType)
-
-	CreateEngagementContextRequest_Payload = CreateEngagementContextRequest.AddMember("Payload", EngagementContextPayload)
-
-	CreateEngagementContextResponse_EngagementId = CreateEngagementContextResponse.AddMember("EngagementId", _EngagementIdentifier)
-
-	CreateEngagementContextResponse_EngagementArn = CreateEngagementContextResponse.AddMember("EngagementArn", _EngagementArn)
-
-	CreateEngagementContextResponse_EngagementLastModifiedAt = CreateEngagementContextResponse.AddMember("EngagementLastModifiedAt", _DateTime)
-
-	CreateEngagementContextResponse_ContextId = CreateEngagementContextResponse.AddMember("ContextId", _EngagementContextIdentifier)
-
-	CreateEngagementRequest_Catalog = CreateEngagementRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	CreateEngagementRequest_ClientToken = CreateEngagementRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateEngagementRequest_Title = CreateEngagementRequest.AddMember("Title", _EngagementTitle)
-
-	CreateEngagementRequest_Description = CreateEngagementRequest.AddMember("Description", _EngagementDescription)
-
-	CreateEngagementRequest_Contexts = CreateEngagementRequest.AddMember("Contexts", _EngagementContexts)
-
-	CreateEngagementInvitationRequest_Catalog = CreateEngagementInvitationRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	CreateEngagementInvitationRequest_ClientToken = CreateEngagementInvitationRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateEngagementInvitationRequest_EngagementIdentifier = CreateEngagementInvitationRequest.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	CreateEngagementInvitationRequest_Invitation = CreateEngagementInvitationRequest.AddMember("Invitation", Invitation)
-
-	CreateEngagementInvitationResponse_Id = CreateEngagementInvitationResponse.AddMember("Id", _EngagementInvitationIdentifier)
-
-	CreateEngagementInvitationResponse_Arn = CreateEngagementInvitationResponse.AddMember("Arn", _EngagementInvitationArn)
-
-	CreateEngagementResponse_Id = CreateEngagementResponse.AddMember("Id", _EngagementIdentifier)
-
-	CreateEngagementResponse_Arn = CreateEngagementResponse.AddMember("Arn", _EngagementArn)
-
-	CreateEngagementResponse_ModifiedAt = CreateEngagementResponse.AddMember("ModifiedAt", _DateTime)
-
-	CreateOpportunityRequest_Catalog = CreateOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	CreateOpportunityRequest_PrimaryNeedsFromAws = CreateOpportunityRequest.AddMember("PrimaryNeedsFromAws", _PrimaryNeedsFromAws)
-
-	CreateOpportunityRequest_NationalSecurity = CreateOpportunityRequest.AddMember("NationalSecurity", NationalSecurity)
-
-	CreateOpportunityRequest_PartnerOpportunityIdentifier = CreateOpportunityRequest.AddMember("PartnerOpportunityIdentifier", smithyprelude.String)
-
-	CreateOpportunityRequest_Customer = CreateOpportunityRequest.AddMember("Customer", Customer)
-
-	CreateOpportunityRequest_Project = CreateOpportunityRequest.AddMember("Project", Project)
-
-	CreateOpportunityRequest_OpportunityType = CreateOpportunityRequest.AddMember("OpportunityType", OpportunityType)
-
-	CreateOpportunityRequest_Marketing = CreateOpportunityRequest.AddMember("Marketing", Marketing)
-
-	CreateOpportunityRequest_SoftwareRevenue = CreateOpportunityRequest.AddMember("SoftwareRevenue", SoftwareRevenue)
-
-	CreateOpportunityRequest_ClientToken = CreateOpportunityRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateOpportunityRequest_LifeCycle = CreateOpportunityRequest.AddMember("LifeCycle", LifeCycle)
-
-	CreateOpportunityRequest_Origin = CreateOpportunityRequest.AddMember("Origin", OpportunityOrigin)
-
-	CreateOpportunityRequest_OpportunityTeam = CreateOpportunityRequest.AddMember("OpportunityTeam", _PartnerOpportunityTeamMembersList)
-
-	CreateOpportunityRequest_Tags = CreateOpportunityRequest.AddMember("Tags", _TagList)
-
-	CreateOpportunityResponse_Id = CreateOpportunityResponse.AddMember("Id", _OpportunityIdentifier)
-
-	CreateOpportunityResponse_PartnerOpportunityIdentifier = CreateOpportunityResponse.AddMember("PartnerOpportunityIdentifier", smithyprelude.String)
-
-	CreateOpportunityResponse_LastModifiedDate = CreateOpportunityResponse.AddMember("LastModifiedDate", _DateTime)
-
-	CreateResourceSnapshotRequest_Catalog = CreateResourceSnapshotRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	CreateResourceSnapshotRequest_EngagementIdentifier = CreateResourceSnapshotRequest.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	CreateResourceSnapshotRequest_ResourceType = CreateResourceSnapshotRequest.AddMember("ResourceType", ResourceType)
-
-	CreateResourceSnapshotRequest_ResourceIdentifier = CreateResourceSnapshotRequest.AddMember("ResourceIdentifier", _ResourceIdentifier)
-
-	CreateResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier = CreateResourceSnapshotRequest.AddMember("ResourceSnapshotTemplateIdentifier", _ResourceTemplateName)
-
-	CreateResourceSnapshotRequest_ClientToken = CreateResourceSnapshotRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateResourceSnapshotJobRequest_Catalog = CreateResourceSnapshotJobRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	CreateResourceSnapshotJobRequest_ClientToken = CreateResourceSnapshotJobRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateResourceSnapshotJobRequest_EngagementIdentifier = CreateResourceSnapshotJobRequest.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	CreateResourceSnapshotJobRequest_ResourceType = CreateResourceSnapshotJobRequest.AddMember("ResourceType", ResourceType)
-
-	CreateResourceSnapshotJobRequest_ResourceIdentifier = CreateResourceSnapshotJobRequest.AddMember("ResourceIdentifier", _ResourceIdentifier)
-
-	CreateResourceSnapshotJobRequest_ResourceSnapshotTemplateIdentifier = CreateResourceSnapshotJobRequest.AddMember("ResourceSnapshotTemplateIdentifier", _ResourceTemplateName)
-
-	CreateResourceSnapshotJobRequest_Tags = CreateResourceSnapshotJobRequest.AddMember("Tags", _TagList)
-
-	CreateResourceSnapshotJobResponse_Id = CreateResourceSnapshotJobResponse.AddMember("Id", _ResourceSnapshotJobIdentifier)
-
-	CreateResourceSnapshotJobResponse_Arn = CreateResourceSnapshotJobResponse.AddMember("Arn", _ResourceSnapshotJobArn)
-
-	CreateResourceSnapshotResponse_Arn = CreateResourceSnapshotResponse.AddMember("Arn", _ResourceArn)
-
-	CreateResourceSnapshotResponse_Revision = CreateResourceSnapshotResponse.AddMember("Revision", _ResourceSnapshotRevision)
-
-	DeleteResourceSnapshotJobRequest_Catalog = DeleteResourceSnapshotJobRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	DeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = DeleteResourceSnapshotJobRequest.AddMember("ResourceSnapshotJobIdentifier", _ResourceSnapshotJobIdentifier)
-
-	DisassociateOpportunityRequest_Catalog = DisassociateOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	DisassociateOpportunityRequest_OpportunityIdentifier = DisassociateOpportunityRequest.AddMember("OpportunityIdentifier", _OpportunityIdentifier)
-
-	DisassociateOpportunityRequest_RelatedEntityType = DisassociateOpportunityRequest.AddMember("RelatedEntityType", RelatedEntityType)
-
-	DisassociateOpportunityRequest_RelatedEntityIdentifier = DisassociateOpportunityRequest.AddMember("RelatedEntityIdentifier", smithyprelude.String)
-
-	GetAwsOpportunitySummaryRequest_Catalog = GetAwsOpportunitySummaryRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier = GetAwsOpportunitySummaryRequest.AddMember("RelatedOpportunityIdentifier", _OpportunityIdentifier)
-
-	GetAwsOpportunitySummaryResponse_RelatedOpportunityId = GetAwsOpportunitySummaryResponse.AddMember("RelatedOpportunityId", _OpportunityIdentifier)
-
-	GetAwsOpportunitySummaryResponse_Origin = GetAwsOpportunitySummaryResponse.AddMember("Origin", OpportunityOrigin)
-
-	GetAwsOpportunitySummaryResponse_InvolvementType = GetAwsOpportunitySummaryResponse.AddMember("InvolvementType", SalesInvolvementType)
-
-	GetAwsOpportunitySummaryResponse_Visibility = GetAwsOpportunitySummaryResponse.AddMember("Visibility", Visibility)
-
-	GetAwsOpportunitySummaryResponse_LifeCycle = GetAwsOpportunitySummaryResponse.AddMember("LifeCycle", AwsOpportunityLifeCycle)
-
-	GetAwsOpportunitySummaryResponse_OpportunityTeam = GetAwsOpportunitySummaryResponse.AddMember("OpportunityTeam", _AwsOpportunityTeamMembersList)
-
-	GetAwsOpportunitySummaryResponse_Insights = GetAwsOpportunitySummaryResponse.AddMember("Insights", AwsOpportunityInsights)
-
-	GetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason = GetAwsOpportunitySummaryResponse.AddMember("InvolvementTypeChangeReason", InvolvementTypeChangeReason)
-
-	GetAwsOpportunitySummaryResponse_RelatedEntityIds = GetAwsOpportunitySummaryResponse.AddMember("RelatedEntityIds", AwsOpportunityRelatedEntities)
-
-	GetAwsOpportunitySummaryResponse_Customer = GetAwsOpportunitySummaryResponse.AddMember("Customer", AwsOpportunityCustomer)
-
-	GetAwsOpportunitySummaryResponse_Project = GetAwsOpportunitySummaryResponse.AddMember("Project", AwsOpportunityProject)
-
-	GetAwsOpportunitySummaryResponse_CosellMotion = GetAwsOpportunitySummaryResponse.AddMember("CosellMotion", smithyprelude.String)
-
-	GetAwsOpportunitySummaryResponse_SoftwareRevenue = GetAwsOpportunitySummaryResponse.AddMember("SoftwareRevenue", AwsSoftwareRevenue)
-
-	GetAwsOpportunitySummaryResponse_Catalog = GetAwsOpportunitySummaryResponse.AddMember("Catalog", _CatalogIdentifier)
-
-	GetEngagementRequest_Catalog = GetEngagementRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetEngagementRequest_Identifier = GetEngagementRequest.AddMember("Identifier", _EngagementArnOrIdentifier)
-
-	GetEngagementInvitationRequest_Catalog = GetEngagementInvitationRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetEngagementInvitationRequest_Identifier = GetEngagementInvitationRequest.AddMember("Identifier", _EngagementInvitationArnOrIdentifier)
-
-	GetEngagementInvitationResponse_Arn = GetEngagementInvitationResponse.AddMember("Arn", smithyprelude.String)
-
-	GetEngagementInvitationResponse_PayloadType = GetEngagementInvitationResponse.AddMember("PayloadType", EngagementInvitationPayloadType)
-
-	GetEngagementInvitationResponse_Id = GetEngagementInvitationResponse.AddMember("Id", _EngagementInvitationArnOrIdentifier)
-
-	GetEngagementInvitationResponse_EngagementId = GetEngagementInvitationResponse.AddMember("EngagementId", _EngagementIdentifier)
-
-	GetEngagementInvitationResponse_EngagementTitle = GetEngagementInvitationResponse.AddMember("EngagementTitle", _EngagementTitle)
-
-	GetEngagementInvitationResponse_Status = GetEngagementInvitationResponse.AddMember("Status", InvitationStatus)
-
-	GetEngagementInvitationResponse_InvitationDate = GetEngagementInvitationResponse.AddMember("InvitationDate", _DateTime)
-
-	GetEngagementInvitationResponse_ExpirationDate = GetEngagementInvitationResponse.AddMember("ExpirationDate", _DateTime)
-
-	GetEngagementInvitationResponse_SenderAwsAccountId = GetEngagementInvitationResponse.AddMember("SenderAwsAccountId", _AwsAccount)
-
-	GetEngagementInvitationResponse_SenderCompanyName = GetEngagementInvitationResponse.AddMember("SenderCompanyName", smithyprelude.String)
-
-	GetEngagementInvitationResponse_Receiver = GetEngagementInvitationResponse.AddMember("Receiver", Receiver)
-
-	GetEngagementInvitationResponse_Catalog = GetEngagementInvitationResponse.AddMember("Catalog", _CatalogIdentifier)
-
-	GetEngagementInvitationResponse_RejectionReason = GetEngagementInvitationResponse.AddMember("RejectionReason", _RejectionReasonString)
-
-	GetEngagementInvitationResponse_Payload = GetEngagementInvitationResponse.AddMember("Payload", Payload)
-
-	GetEngagementInvitationResponse_InvitationMessage = GetEngagementInvitationResponse.AddMember("InvitationMessage", _InvitationMessage)
-
-	GetEngagementInvitationResponse_EngagementDescription = GetEngagementInvitationResponse.AddMember("EngagementDescription", _EngagementDescription)
-
-	GetEngagementInvitationResponse_ExistingMembers = GetEngagementInvitationResponse.AddMember("ExistingMembers", _EngagementMemberSummaries)
-
-	GetEngagementInvitationResponse_EnrichmentContext = GetEngagementInvitationResponse.AddMember("EnrichmentContext", EnrichmentContext)
-
-	GetEngagementResponse_Id = GetEngagementResponse.AddMember("Id", _EngagementIdentifier)
-
-	GetEngagementResponse_Arn = GetEngagementResponse.AddMember("Arn", _EngagementArn)
-
-	GetEngagementResponse_Title = GetEngagementResponse.AddMember("Title", _EngagementTitle)
-
-	GetEngagementResponse_Description = GetEngagementResponse.AddMember("Description", _EngagementDescription)
-
-	GetEngagementResponse_CreatedAt = GetEngagementResponse.AddMember("CreatedAt", _DateTime)
-
-	GetEngagementResponse_CreatedBy = GetEngagementResponse.AddMember("CreatedBy", _AwsAccount)
-
-	GetEngagementResponse_MemberCount = GetEngagementResponse.AddMember("MemberCount", smithyprelude.Integer)
-
-	GetEngagementResponse_ModifiedAt = GetEngagementResponse.AddMember("ModifiedAt", _DateTime)
-
-	GetEngagementResponse_ModifiedBy = GetEngagementResponse.AddMember("ModifiedBy", _AwsAccount)
-
-	GetEngagementResponse_Contexts = GetEngagementResponse.AddMember("Contexts", _EngagementContexts)
-
-	GetOpportunityRequest_Catalog = GetOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetOpportunityRequest_Identifier = GetOpportunityRequest.AddMember("Identifier", _OpportunityIdentifier)
-
-	GetOpportunityResponse_Catalog = GetOpportunityResponse.AddMember("Catalog", _CatalogIdentifier)
-
-	GetOpportunityResponse_PrimaryNeedsFromAws = GetOpportunityResponse.AddMember("PrimaryNeedsFromAws", _PrimaryNeedsFromAws)
-
-	GetOpportunityResponse_NationalSecurity = GetOpportunityResponse.AddMember("NationalSecurity", NationalSecurity)
-
-	GetOpportunityResponse_PartnerOpportunityIdentifier = GetOpportunityResponse.AddMember("PartnerOpportunityIdentifier", smithyprelude.String)
-
-	GetOpportunityResponse_Customer = GetOpportunityResponse.AddMember("Customer", Customer)
-
-	GetOpportunityResponse_Project = GetOpportunityResponse.AddMember("Project", Project)
-
-	GetOpportunityResponse_OpportunityType = GetOpportunityResponse.AddMember("OpportunityType", OpportunityType)
-
-	GetOpportunityResponse_Marketing = GetOpportunityResponse.AddMember("Marketing", Marketing)
-
-	GetOpportunityResponse_SoftwareRevenue = GetOpportunityResponse.AddMember("SoftwareRevenue", SoftwareRevenue)
-
-	GetOpportunityResponse_Id = GetOpportunityResponse.AddMember("Id", _OpportunityIdentifier)
-
-	GetOpportunityResponse_Arn = GetOpportunityResponse.AddMember("Arn", _OpportunityArn)
-
-	GetOpportunityResponse_LastModifiedDate = GetOpportunityResponse.AddMember("LastModifiedDate", _DateTime)
-
-	GetOpportunityResponse_CreatedDate = GetOpportunityResponse.AddMember("CreatedDate", _DateTime)
-
-	GetOpportunityResponse_RelatedEntityIdentifiers = GetOpportunityResponse.AddMember("RelatedEntityIdentifiers", RelatedEntityIdentifiers)
-
-	GetOpportunityResponse_LifeCycle = GetOpportunityResponse.AddMember("LifeCycle", LifeCycle)
-
-	GetOpportunityResponse_OpportunityTeam = GetOpportunityResponse.AddMember("OpportunityTeam", _PartnerOpportunityTeamMembersList)
-
-	GetProspectingFromEngagementTaskRequest_Catalog = GetProspectingFromEngagementTaskRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetProspectingFromEngagementTaskRequest_TaskIdentifier = GetProspectingFromEngagementTaskRequest.AddMember("TaskIdentifier", _ProspectingTaskIdentifier)
-
-	GetProspectingFromEngagementTaskResponse_TaskId = GetProspectingFromEngagementTaskResponse.AddMember("TaskId", _ProspectingTaskIdentifier)
-
-	GetProspectingFromEngagementTaskResponse_TaskArn = GetProspectingFromEngagementTaskResponse.AddMember("TaskArn", _ProspectingTaskArn)
-
-	GetProspectingFromEngagementTaskResponse_TaskName = GetProspectingFromEngagementTaskResponse.AddMember("TaskName", _TaskName)
-
-	GetProspectingFromEngagementTaskResponse_StartTime = GetProspectingFromEngagementTaskResponse.AddMember("StartTime", _DateTime)
-
-	GetProspectingFromEngagementTaskResponse_EndTime = GetProspectingFromEngagementTaskResponse.AddMember("EndTime", _DateTime)
-
-	GetProspectingFromEngagementTaskResponse_Engagements = GetProspectingFromEngagementTaskResponse.AddMember("Engagements", _EngagementProspectingResultList)
-
-	GetResourceSnapshotRequest_Catalog = GetResourceSnapshotRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetResourceSnapshotRequest_EngagementIdentifier = GetResourceSnapshotRequest.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	GetResourceSnapshotRequest_ResourceType = GetResourceSnapshotRequest.AddMember("ResourceType", ResourceType)
-
-	GetResourceSnapshotRequest_ResourceIdentifier = GetResourceSnapshotRequest.AddMember("ResourceIdentifier", _ResourceIdentifier)
-
-	GetResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier = GetResourceSnapshotRequest.AddMember("ResourceSnapshotTemplateIdentifier", _ResourceTemplateName)
-
-	GetResourceSnapshotRequest_Revision = GetResourceSnapshotRequest.AddMember("Revision", _ResourceSnapshotRevision)
-
-	GetResourceSnapshotJobRequest_Catalog = GetResourceSnapshotJobRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = GetResourceSnapshotJobRequest.AddMember("ResourceSnapshotJobIdentifier", _ResourceSnapshotJobIdentifier)
-
-	GetResourceSnapshotJobResponse_Catalog = GetResourceSnapshotJobResponse.AddMember("Catalog", _CatalogIdentifier)
-
-	GetResourceSnapshotJobResponse_Id = GetResourceSnapshotJobResponse.AddMember("Id", _ResourceSnapshotJobIdentifier)
-
-	GetResourceSnapshotJobResponse_Arn = GetResourceSnapshotJobResponse.AddMember("Arn", _ResourceSnapshotJobArn)
-
-	GetResourceSnapshotJobResponse_EngagementId = GetResourceSnapshotJobResponse.AddMember("EngagementId", _EngagementIdentifier)
-
-	GetResourceSnapshotJobResponse_ResourceType = GetResourceSnapshotJobResponse.AddMember("ResourceType", ResourceType)
-
-	GetResourceSnapshotJobResponse_ResourceId = GetResourceSnapshotJobResponse.AddMember("ResourceId", _ResourceIdentifier)
-
-	GetResourceSnapshotJobResponse_ResourceArn = GetResourceSnapshotJobResponse.AddMember("ResourceArn", _ResourceArn)
-
-	GetResourceSnapshotJobResponse_ResourceSnapshotTemplateName = GetResourceSnapshotJobResponse.AddMember("ResourceSnapshotTemplateName", _ResourceTemplateName)
-
-	GetResourceSnapshotJobResponse_CreatedAt = GetResourceSnapshotJobResponse.AddMember("CreatedAt", _DateTime)
-
-	GetResourceSnapshotJobResponse_Status = GetResourceSnapshotJobResponse.AddMember("Status", ResourceSnapshotJobStatus)
-
-	GetResourceSnapshotJobResponse_LastSuccessfulExecutionDate = GetResourceSnapshotJobResponse.AddMember("LastSuccessfulExecutionDate", _DateTime)
-
-	GetResourceSnapshotJobResponse_LastFailure = GetResourceSnapshotJobResponse.AddMember("LastFailure", smithyprelude.String)
-
-	GetResourceSnapshotResponse_Catalog = GetResourceSnapshotResponse.AddMember("Catalog", _CatalogIdentifier)
-
-	GetResourceSnapshotResponse_Arn = GetResourceSnapshotResponse.AddMember("Arn", _ResourceArn)
-
-	GetResourceSnapshotResponse_CreatedBy = GetResourceSnapshotResponse.AddMember("CreatedBy", _AwsAccount)
-
-	GetResourceSnapshotResponse_CreatedAt = GetResourceSnapshotResponse.AddMember("CreatedAt", _DateTime)
-
-	GetResourceSnapshotResponse_EngagementId = GetResourceSnapshotResponse.AddMember("EngagementId", _EngagementIdentifier)
-
-	GetResourceSnapshotResponse_ResourceType = GetResourceSnapshotResponse.AddMember("ResourceType", ResourceType)
-
-	GetResourceSnapshotResponse_ResourceId = GetResourceSnapshotResponse.AddMember("ResourceId", _ResourceIdentifier)
-
-	GetResourceSnapshotResponse_ResourceSnapshotTemplateName = GetResourceSnapshotResponse.AddMember("ResourceSnapshotTemplateName", _ResourceTemplateName)
-
-	GetResourceSnapshotResponse_Revision = GetResourceSnapshotResponse.AddMember("Revision", _ResourceSnapshotRevision)
-
-	GetResourceSnapshotResponse_Payload = GetResourceSnapshotResponse.AddMember("Payload", ResourceSnapshotPayload)
-
-	GetResourceSnapshotResponse_TargetMemberAccounts = GetResourceSnapshotResponse.AddMember("TargetMemberAccounts", _AwsAccountIdOrAliasList)
-
-	GetSellingSystemSettingsRequest_Catalog = GetSellingSystemSettingsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	GetSellingSystemSettingsResponse_Catalog = GetSellingSystemSettingsResponse.AddMember("Catalog", _CatalogIdentifier)
-
-	GetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn = GetSellingSystemSettingsResponse.AddMember("ResourceSnapshotJobRoleArn", _ResourceSnapshotJobRoleArn)
-
-	ListEngagementByAcceptingInvitationTasksRequest_MaxResults = ListEngagementByAcceptingInvitationTasksRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListEngagementByAcceptingInvitationTasksRequest_NextToken = ListEngagementByAcceptingInvitationTasksRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementByAcceptingInvitationTasksRequest_Sort = ListEngagementByAcceptingInvitationTasksRequest.AddMember("Sort", ListTasksSortBase)
-
-	ListEngagementByAcceptingInvitationTasksRequest_Catalog = ListEngagementByAcceptingInvitationTasksRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListEngagementByAcceptingInvitationTasksRequest_TaskStatus = ListEngagementByAcceptingInvitationTasksRequest.AddMember("TaskStatus", _TaskStatuses)
-
-	ListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier = ListEngagementByAcceptingInvitationTasksRequest.AddMember("OpportunityIdentifier", _OpportunityIdentifiers)
-
-	ListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier = ListEngagementByAcceptingInvitationTasksRequest.AddMember("EngagementInvitationIdentifier", _EngagementInvitationIdentifiers)
-
-	ListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier = ListEngagementByAcceptingInvitationTasksRequest.AddMember("TaskIdentifier", _TaskIdentifiers)
-
-	ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries = ListEngagementByAcceptingInvitationTasksResponse.AddMember("TaskSummaries", _ListEngagementByAcceptingInvitationTaskSummaries)
-
-	ListEngagementByAcceptingInvitationTasksResponse_NextToken = ListEngagementByAcceptingInvitationTasksResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementFromOpportunityTasksRequest_MaxResults = ListEngagementFromOpportunityTasksRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListEngagementFromOpportunityTasksRequest_NextToken = ListEngagementFromOpportunityTasksRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementFromOpportunityTasksRequest_Sort = ListEngagementFromOpportunityTasksRequest.AddMember("Sort", ListTasksSortBase)
-
-	ListEngagementFromOpportunityTasksRequest_Catalog = ListEngagementFromOpportunityTasksRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListEngagementFromOpportunityTasksRequest_TaskStatus = ListEngagementFromOpportunityTasksRequest.AddMember("TaskStatus", _TaskStatuses)
-
-	ListEngagementFromOpportunityTasksRequest_TaskIdentifier = ListEngagementFromOpportunityTasksRequest.AddMember("TaskIdentifier", _TaskIdentifiers)
-
-	ListEngagementFromOpportunityTasksRequest_OpportunityIdentifier = ListEngagementFromOpportunityTasksRequest.AddMember("OpportunityIdentifier", _OpportunityIdentifiers)
-
-	ListEngagementFromOpportunityTasksRequest_EngagementIdentifier = ListEngagementFromOpportunityTasksRequest.AddMember("EngagementIdentifier", _EngagementIdentifiers)
-
-	ListEngagementFromOpportunityTasksResponse_TaskSummaries = ListEngagementFromOpportunityTasksResponse.AddMember("TaskSummaries", _ListEngagementFromOpportunityTaskSummaries)
-
-	ListEngagementFromOpportunityTasksResponse_NextToken = ListEngagementFromOpportunityTasksResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementInvitationsRequest_Catalog = ListEngagementInvitationsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListEngagementInvitationsRequest_MaxResults = ListEngagementInvitationsRequest.AddMember("MaxResults", _PageSize)
-
-	ListEngagementInvitationsRequest_NextToken = ListEngagementInvitationsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementInvitationsRequest_Sort = ListEngagementInvitationsRequest.AddMember("Sort", OpportunityEngagementInvitationSort)
-
-	ListEngagementInvitationsRequest_PayloadType = ListEngagementInvitationsRequest.AddMember("PayloadType", _EngagementInvitationsPayloadType)
-
-	ListEngagementInvitationsRequest_ParticipantType = ListEngagementInvitationsRequest.AddMember("ParticipantType", ParticipantType)
-
-	ListEngagementInvitationsRequest_Status = ListEngagementInvitationsRequest.AddMember("Status", _InvitationStatusList)
-
-	ListEngagementInvitationsRequest_EngagementIdentifier = ListEngagementInvitationsRequest.AddMember("EngagementIdentifier", _EngagementIdentifiers)
-
-	ListEngagementInvitationsRequest_SenderAwsAccountId = ListEngagementInvitationsRequest.AddMember("SenderAwsAccountId", _AwsAccountIdOrAliasList)
-
-	ListEngagementInvitationsResponse_EngagementInvitationSummaries = ListEngagementInvitationsResponse.AddMember("EngagementInvitationSummaries", _EngagementInvitationSummaries)
-
-	ListEngagementInvitationsResponse_NextToken = ListEngagementInvitationsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementMembersRequest_Catalog = ListEngagementMembersRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListEngagementMembersRequest_Identifier = ListEngagementMembersRequest.AddMember("Identifier", _EngagementArnOrIdentifier)
-
-	ListEngagementMembersRequest_MaxResults = ListEngagementMembersRequest.AddMember("MaxResults", _MemberPageSize)
-
-	ListEngagementMembersRequest_NextToken = ListEngagementMembersRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementMembersResponse_EngagementMemberList = ListEngagementMembersResponse.AddMember("EngagementMemberList", _EngagementMembers)
-
-	ListEngagementMembersResponse_NextToken = ListEngagementMembersResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementResourceAssociationsRequest_Catalog = ListEngagementResourceAssociationsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListEngagementResourceAssociationsRequest_MaxResults = ListEngagementResourceAssociationsRequest.AddMember("MaxResults", _PageSize)
-
-	ListEngagementResourceAssociationsRequest_NextToken = ListEngagementResourceAssociationsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementResourceAssociationsRequest_EngagementIdentifier = ListEngagementResourceAssociationsRequest.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	ListEngagementResourceAssociationsRequest_ResourceType = ListEngagementResourceAssociationsRequest.AddMember("ResourceType", ResourceType)
-
-	ListEngagementResourceAssociationsRequest_ResourceIdentifier = ListEngagementResourceAssociationsRequest.AddMember("ResourceIdentifier", _ResourceIdentifier)
-
-	ListEngagementResourceAssociationsRequest_CreatedBy = ListEngagementResourceAssociationsRequest.AddMember("CreatedBy", _AwsAccount)
-
-	ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries = ListEngagementResourceAssociationsResponse.AddMember("EngagementResourceAssociationSummaries", _EngagementResourceAssociationSummaryList)
-
-	ListEngagementResourceAssociationsResponse_NextToken = ListEngagementResourceAssociationsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementsRequest_Catalog = ListEngagementsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListEngagementsRequest_CreatedBy = ListEngagementsRequest.AddMember("CreatedBy", _AwsAccountList)
-
-	ListEngagementsRequest_ExcludeCreatedBy = ListEngagementsRequest.AddMember("ExcludeCreatedBy", _AwsAccountList)
-
-	ListEngagementsRequest_ContextTypes = ListEngagementsRequest.AddMember("ContextTypes", _EngagementContextTypeList)
-
-	ListEngagementsRequest_ExcludeContextTypes = ListEngagementsRequest.AddMember("ExcludeContextTypes", _EngagementContextTypeList)
-
-	ListEngagementsRequest_Sort = ListEngagementsRequest.AddMember("Sort", EngagementSort)
-
-	ListEngagementsRequest_MaxResults = ListEngagementsRequest.AddMember("MaxResults", _EngagementPageSize)
-
-	ListEngagementsRequest_NextToken = ListEngagementsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListEngagementsRequest_EngagementIdentifier = ListEngagementsRequest.AddMember("EngagementIdentifier", _EngagementIdentifiers)
-
-	ListEngagementsResponse_EngagementSummaryList = ListEngagementsResponse.AddMember("EngagementSummaryList", _EngagementSummaryList)
-
-	ListEngagementsResponse_NextToken = ListEngagementsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListOpportunitiesRequest_Catalog = ListOpportunitiesRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListOpportunitiesRequest_MaxResults = ListOpportunitiesRequest.AddMember("MaxResults", _PageSize)
-
-	ListOpportunitiesRequest_NextToken = ListOpportunitiesRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListOpportunitiesRequest_Sort = ListOpportunitiesRequest.AddMember("Sort", OpportunitySort)
-
-	ListOpportunitiesRequest_LastModifiedDate = ListOpportunitiesRequest.AddMember("LastModifiedDate", LastModifiedDate)
-
-	ListOpportunitiesRequest_Identifier = ListOpportunitiesRequest.AddMember("Identifier", _FilterIdentifier)
-
-	ListOpportunitiesRequest_LifeCycleStage = ListOpportunitiesRequest.AddMember("LifeCycleStage", _FilterLifeCycleStage)
-
-	ListOpportunitiesRequest_LifeCycleReviewStatus = ListOpportunitiesRequest.AddMember("LifeCycleReviewStatus", _FilterLifeCycleReviewStatus)
-
-	ListOpportunitiesRequest_CustomerCompanyName = ListOpportunitiesRequest.AddMember("CustomerCompanyName", _StringList)
-
-	ListOpportunitiesRequest_CreatedDate = ListOpportunitiesRequest.AddMember("CreatedDate", CreatedDateFilter)
-
-	ListOpportunitiesRequest_TargetCloseDate = ListOpportunitiesRequest.AddMember("TargetCloseDate", TargetCloseDateFilter)
-
-	ListOpportunitiesResponse_OpportunitySummaries = ListOpportunitiesResponse.AddMember("OpportunitySummaries", _OpportunitySummaries)
-
-	ListOpportunitiesResponse_NextToken = ListOpportunitiesResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListOpportunityFromEngagementTasksRequest_MaxResults = ListOpportunityFromEngagementTasksRequest.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListOpportunityFromEngagementTasksRequest_NextToken = ListOpportunityFromEngagementTasksRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListOpportunityFromEngagementTasksRequest_Sort = ListOpportunityFromEngagementTasksRequest.AddMember("Sort", ListTasksSortBase)
-
-	ListOpportunityFromEngagementTasksRequest_Catalog = ListOpportunityFromEngagementTasksRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListOpportunityFromEngagementTasksRequest_TaskStatus = ListOpportunityFromEngagementTasksRequest.AddMember("TaskStatus", _TaskStatuses)
-
-	ListOpportunityFromEngagementTasksRequest_TaskIdentifier = ListOpportunityFromEngagementTasksRequest.AddMember("TaskIdentifier", _TaskIdentifiers)
-
-	ListOpportunityFromEngagementTasksRequest_OpportunityIdentifier = ListOpportunityFromEngagementTasksRequest.AddMember("OpportunityIdentifier", _OpportunityIdentifiers)
-
-	ListOpportunityFromEngagementTasksRequest_EngagementIdentifier = ListOpportunityFromEngagementTasksRequest.AddMember("EngagementIdentifier", _EngagementIdentifiers)
-
-	ListOpportunityFromEngagementTasksRequest_ContextIdentifier = ListOpportunityFromEngagementTasksRequest.AddMember("ContextIdentifier", _ContextIdentifiers)
-
-	ListOpportunityFromEngagementTasksResponse_TaskSummaries = ListOpportunityFromEngagementTasksResponse.AddMember("TaskSummaries", _ListOpportunityFromEngagementTaskSummaries)
-
-	ListOpportunityFromEngagementTasksResponse_NextToken = ListOpportunityFromEngagementTasksResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListProspectingFromEngagementTasksRequest_Catalog = ListProspectingFromEngagementTasksRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListProspectingFromEngagementTasksRequest_MaxResults = ListProspectingFromEngagementTasksRequest.AddMember("MaxResults", _PageSize)
-
-	ListProspectingFromEngagementTasksRequest_NextToken = ListProspectingFromEngagementTasksRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListProspectingFromEngagementTasksRequest_TaskIdentifier = ListProspectingFromEngagementTasksRequest.AddMember("TaskIdentifier", _TaskIdentifierList)
-
-	ListProspectingFromEngagementTasksRequest_TaskName = ListProspectingFromEngagementTasksRequest.AddMember("TaskName", _TaskNameList)
-
-	ListProspectingFromEngagementTasksRequest_StartAfter = ListProspectingFromEngagementTasksRequest.AddMember("StartAfter", _DateTime)
-
-	ListProspectingFromEngagementTasksRequest_StartBefore = ListProspectingFromEngagementTasksRequest.AddMember("StartBefore", _DateTime)
-
-	ListProspectingFromEngagementTasksRequest_Sort = ListProspectingFromEngagementTasksRequest.AddMember("Sort", ProspectingFromEngagementTaskSort)
-
-	ListProspectingFromEngagementTasksResponse_NextToken = ListProspectingFromEngagementTasksResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListProspectingFromEngagementTasksResponse_TaskSummaries = ListProspectingFromEngagementTasksResponse.AddMember("TaskSummaries", _ProspectingTaskSummaryList)
-
-	ListResourceSnapshotJobsRequest_Catalog = ListResourceSnapshotJobsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListResourceSnapshotJobsRequest_MaxResults = ListResourceSnapshotJobsRequest.AddMember("MaxResults", _PageSize)
-
-	ListResourceSnapshotJobsRequest_NextToken = ListResourceSnapshotJobsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListResourceSnapshotJobsRequest_EngagementIdentifier = ListResourceSnapshotJobsRequest.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	ListResourceSnapshotJobsRequest_Status = ListResourceSnapshotJobsRequest.AddMember("Status", ResourceSnapshotJobStatus)
-
-	ListResourceSnapshotJobsRequest_Sort = ListResourceSnapshotJobsRequest.AddMember("Sort", SortObject)
-
-	ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries = ListResourceSnapshotJobsResponse.AddMember("ResourceSnapshotJobSummaries", _ResourceSnapshotJobSummaryList)
-
-	ListResourceSnapshotJobsResponse_NextToken = ListResourceSnapshotJobsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListResourceSnapshotsRequest_Catalog = ListResourceSnapshotsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListResourceSnapshotsRequest_MaxResults = ListResourceSnapshotsRequest.AddMember("MaxResults", _PageSize)
-
-	ListResourceSnapshotsRequest_NextToken = ListResourceSnapshotsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListResourceSnapshotsRequest_EngagementIdentifier = ListResourceSnapshotsRequest.AddMember("EngagementIdentifier", _EngagementIdentifier)
-
-	ListResourceSnapshotsRequest_ResourceType = ListResourceSnapshotsRequest.AddMember("ResourceType", ResourceType)
-
-	ListResourceSnapshotsRequest_ResourceIdentifier = ListResourceSnapshotsRequest.AddMember("ResourceIdentifier", _ResourceIdentifier)
-
-	ListResourceSnapshotsRequest_ResourceSnapshotTemplateIdentifier = ListResourceSnapshotsRequest.AddMember("ResourceSnapshotTemplateIdentifier", _ResourceTemplateName)
-
-	ListResourceSnapshotsRequest_CreatedBy = ListResourceSnapshotsRequest.AddMember("CreatedBy", _AwsAccount)
-
-	ListResourceSnapshotsResponse_ResourceSnapshotSummaries = ListResourceSnapshotsResponse.AddMember("ResourceSnapshotSummaries", _ResourceSnapshotSummaryList)
-
-	ListResourceSnapshotsResponse_NextToken = ListResourceSnapshotsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListSolutionsRequest_Catalog = ListSolutionsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	ListSolutionsRequest_MaxResults = ListSolutionsRequest.AddMember("MaxResults", _PageSize)
-
-	ListSolutionsRequest_NextToken = ListSolutionsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListSolutionsRequest_Sort = ListSolutionsRequest.AddMember("Sort", SolutionSort)
-
-	ListSolutionsRequest_Status = ListSolutionsRequest.AddMember("Status", _FilterStatus)
-
-	ListSolutionsRequest_Identifier = ListSolutionsRequest.AddMember("Identifier", _SolutionIdentifiers)
-
-	ListSolutionsRequest_Category = ListSolutionsRequest.AddMember("Category", _StringList)
-
-	ListSolutionsRequest_AwsMarketplaceSolutionArn = ListSolutionsRequest.AddMember("AwsMarketplaceSolutionArn", _AwsMarketplaceSolutionArnList)
-
-	ListSolutionsResponse_SolutionSummaries = ListSolutionsResponse.AddMember("SolutionSummaries", _SolutionList)
-
-	ListSolutionsResponse_NextToken = ListSolutionsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutSellingSystemSettingsRequest_Catalog = PutSellingSystemSettingsRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	PutSellingSystemSettingsRequest_ResourceSnapshotJobRoleIdentifier = PutSellingSystemSettingsRequest.AddMember("ResourceSnapshotJobRoleIdentifier", _ResourceSnapshotJobRoleIdentifier)
-
-	PutSellingSystemSettingsResponse_Catalog = PutSellingSystemSettingsResponse.AddMember("Catalog", _CatalogIdentifier)
-
-	PutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn = PutSellingSystemSettingsResponse.AddMember("ResourceSnapshotJobRoleArn", _ResourceSnapshotJobRoleArn)
-
-	RejectEngagementInvitationRequest_Catalog = RejectEngagementInvitationRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	RejectEngagementInvitationRequest_Identifier = RejectEngagementInvitationRequest.AddMember("Identifier", _EngagementInvitationArnOrIdentifier)
-
-	RejectEngagementInvitationRequest_RejectionReason = RejectEngagementInvitationRequest.AddMember("RejectionReason", _RejectionReasonString)
-
-	StartEngagementByAcceptingInvitationTaskRequest_Catalog = StartEngagementByAcceptingInvitationTaskRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	StartEngagementByAcceptingInvitationTaskRequest_ClientToken = StartEngagementByAcceptingInvitationTaskRequest.AddMember("ClientToken", _ClientToken)
-
-	StartEngagementByAcceptingInvitationTaskRequest_Identifier = StartEngagementByAcceptingInvitationTaskRequest.AddMember("Identifier", _EngagementInvitationArnOrIdentifier)
-
-	StartEngagementByAcceptingInvitationTaskRequest_Tags = StartEngagementByAcceptingInvitationTaskRequest.AddMember("Tags", _TagList)
-
-	StartEngagementByAcceptingInvitationTaskResponse_TaskId = StartEngagementByAcceptingInvitationTaskResponse.AddMember("TaskId", _TaskIdentifier)
-
-	StartEngagementByAcceptingInvitationTaskResponse_TaskArn = StartEngagementByAcceptingInvitationTaskResponse.AddMember("TaskArn", _TaskArn)
-
-	StartEngagementByAcceptingInvitationTaskResponse_StartTime = StartEngagementByAcceptingInvitationTaskResponse.AddMember("StartTime", _DateTime)
-
-	StartEngagementByAcceptingInvitationTaskResponse_TaskStatus = StartEngagementByAcceptingInvitationTaskResponse.AddMember("TaskStatus", TaskStatus)
-
-	StartEngagementByAcceptingInvitationTaskResponse_Message = StartEngagementByAcceptingInvitationTaskResponse.AddMember("Message", smithyprelude.String)
-
-	StartEngagementByAcceptingInvitationTaskResponse_ReasonCode = StartEngagementByAcceptingInvitationTaskResponse.AddMember("ReasonCode", ReasonCode)
-
-	StartEngagementByAcceptingInvitationTaskResponse_OpportunityId = StartEngagementByAcceptingInvitationTaskResponse.AddMember("OpportunityId", _OpportunityIdentifier)
-
-	StartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId = StartEngagementByAcceptingInvitationTaskResponse.AddMember("ResourceSnapshotJobId", _ResourceSnapshotJobIdentifier)
-
-	StartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId = StartEngagementByAcceptingInvitationTaskResponse.AddMember("EngagementInvitationId", _EngagementInvitationIdentifier)
-
-	StartEngagementFromOpportunityTaskRequest_Catalog = StartEngagementFromOpportunityTaskRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	StartEngagementFromOpportunityTaskRequest_ClientToken = StartEngagementFromOpportunityTaskRequest.AddMember("ClientToken", _ClientToken)
-
-	StartEngagementFromOpportunityTaskRequest_Identifier = StartEngagementFromOpportunityTaskRequest.AddMember("Identifier", _OpportunityIdentifier)
-
-	StartEngagementFromOpportunityTaskRequest_AwsSubmission = StartEngagementFromOpportunityTaskRequest.AddMember("AwsSubmission", AwsSubmission)
-
-	StartEngagementFromOpportunityTaskRequest_Tags = StartEngagementFromOpportunityTaskRequest.AddMember("Tags", _TagList)
-
-	StartEngagementFromOpportunityTaskResponse_TaskId = StartEngagementFromOpportunityTaskResponse.AddMember("TaskId", _TaskIdentifier)
-
-	StartEngagementFromOpportunityTaskResponse_TaskArn = StartEngagementFromOpportunityTaskResponse.AddMember("TaskArn", _TaskArn)
-
-	StartEngagementFromOpportunityTaskResponse_StartTime = StartEngagementFromOpportunityTaskResponse.AddMember("StartTime", _DateTime)
-
-	StartEngagementFromOpportunityTaskResponse_TaskStatus = StartEngagementFromOpportunityTaskResponse.AddMember("TaskStatus", TaskStatus)
-
-	StartEngagementFromOpportunityTaskResponse_Message = StartEngagementFromOpportunityTaskResponse.AddMember("Message", smithyprelude.String)
-
-	StartEngagementFromOpportunityTaskResponse_ReasonCode = StartEngagementFromOpportunityTaskResponse.AddMember("ReasonCode", ReasonCode)
-
-	StartEngagementFromOpportunityTaskResponse_OpportunityId = StartEngagementFromOpportunityTaskResponse.AddMember("OpportunityId", _OpportunityIdentifier)
-
-	StartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId = StartEngagementFromOpportunityTaskResponse.AddMember("ResourceSnapshotJobId", _ResourceSnapshotJobIdentifier)
-
-	StartEngagementFromOpportunityTaskResponse_EngagementId = StartEngagementFromOpportunityTaskResponse.AddMember("EngagementId", _EngagementIdentifier)
-
-	StartEngagementFromOpportunityTaskResponse_EngagementInvitationId = StartEngagementFromOpportunityTaskResponse.AddMember("EngagementInvitationId", _EngagementInvitationIdentifier)
-
-	StartOpportunityFromEngagementTaskRequest_Catalog = StartOpportunityFromEngagementTaskRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	StartOpportunityFromEngagementTaskRequest_ClientToken = StartOpportunityFromEngagementTaskRequest.AddMember("ClientToken", _ClientToken)
-
-	StartOpportunityFromEngagementTaskRequest_Identifier = StartOpportunityFromEngagementTaskRequest.AddMember("Identifier", _EngagementArnOrIdentifier)
-
-	StartOpportunityFromEngagementTaskRequest_ContextIdentifier = StartOpportunityFromEngagementTaskRequest.AddMember("ContextIdentifier", _ContextIdentifier)
-
-	StartOpportunityFromEngagementTaskRequest_Tags = StartOpportunityFromEngagementTaskRequest.AddMember("Tags", _TagList)
-
-	StartOpportunityFromEngagementTaskResponse_TaskId = StartOpportunityFromEngagementTaskResponse.AddMember("TaskId", _TaskIdentifier)
-
-	StartOpportunityFromEngagementTaskResponse_TaskArn = StartOpportunityFromEngagementTaskResponse.AddMember("TaskArn", _TaskArn)
-
-	StartOpportunityFromEngagementTaskResponse_StartTime = StartOpportunityFromEngagementTaskResponse.AddMember("StartTime", _DateTime)
-
-	StartOpportunityFromEngagementTaskResponse_TaskStatus = StartOpportunityFromEngagementTaskResponse.AddMember("TaskStatus", TaskStatus)
-
-	StartOpportunityFromEngagementTaskResponse_Message = StartOpportunityFromEngagementTaskResponse.AddMember("Message", smithyprelude.String)
-
-	StartOpportunityFromEngagementTaskResponse_ReasonCode = StartOpportunityFromEngagementTaskResponse.AddMember("ReasonCode", ReasonCode)
-
-	StartOpportunityFromEngagementTaskResponse_OpportunityId = StartOpportunityFromEngagementTaskResponse.AddMember("OpportunityId", _OpportunityIdentifier)
-
-	StartOpportunityFromEngagementTaskResponse_ResourceSnapshotJobId = StartOpportunityFromEngagementTaskResponse.AddMember("ResourceSnapshotJobId", _ResourceSnapshotJobIdentifier)
-
-	StartOpportunityFromEngagementTaskResponse_EngagementId = StartOpportunityFromEngagementTaskResponse.AddMember("EngagementId", _EngagementIdentifier)
-
-	StartOpportunityFromEngagementTaskResponse_ContextId = StartOpportunityFromEngagementTaskResponse.AddMember("ContextId", _ContextIdentifier)
-
-	StartProspectingFromEngagementTaskRequest_Catalog = StartProspectingFromEngagementTaskRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	StartProspectingFromEngagementTaskRequest_Identifiers = StartProspectingFromEngagementTaskRequest.AddMember("Identifiers", _EngagementIdentifierList)
-
-	StartProspectingFromEngagementTaskRequest_TaskName = StartProspectingFromEngagementTaskRequest.AddMember("TaskName", _TaskName)
-
-	StartProspectingFromEngagementTaskRequest_ClientToken = StartProspectingFromEngagementTaskRequest.AddMember("ClientToken", _ClientToken)
-
-	StartProspectingFromEngagementTaskResponse_Identifiers = StartProspectingFromEngagementTaskResponse.AddMember("Identifiers", _EngagementIdentifierList)
-
-	StartProspectingFromEngagementTaskResponse_TaskName = StartProspectingFromEngagementTaskResponse.AddMember("TaskName", _TaskName)
-
-	StartProspectingFromEngagementTaskResponse_Message = StartProspectingFromEngagementTaskResponse.AddMember("Message", smithyprelude.String)
-
-	StartProspectingFromEngagementTaskResponse_ReasonCode = StartProspectingFromEngagementTaskResponse.AddMember("ReasonCode", smithyprelude.String)
-
-	StartProspectingFromEngagementTaskResponse_StartTime = StartProspectingFromEngagementTaskResponse.AddMember("StartTime", _DateTime)
-
-	StartProspectingFromEngagementTaskResponse_TaskId = StartProspectingFromEngagementTaskResponse.AddMember("TaskId", _ProspectingTaskIdentifier)
-
-	StartProspectingFromEngagementTaskResponse_TaskArn = StartProspectingFromEngagementTaskResponse.AddMember("TaskArn", _ProspectingTaskArn)
-
-	StartProspectingFromEngagementTaskResponse_TaskStatus = StartProspectingFromEngagementTaskResponse.AddMember("TaskStatus", ProspectingTaskStatus)
-
-	StartResourceSnapshotJobRequest_Catalog = StartResourceSnapshotJobRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	StartResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = StartResourceSnapshotJobRequest.AddMember("ResourceSnapshotJobIdentifier", _ResourceSnapshotJobIdentifier)
-
-	StopResourceSnapshotJobRequest_Catalog = StopResourceSnapshotJobRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	StopResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = StopResourceSnapshotJobRequest.AddMember("ResourceSnapshotJobIdentifier", _ResourceSnapshotJobIdentifier)
-
-	SubmitOpportunityRequest_Catalog = SubmitOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	SubmitOpportunityRequest_Identifier = SubmitOpportunityRequest.AddMember("Identifier", _OpportunityIdentifier)
-
-	SubmitOpportunityRequest_InvolvementType = SubmitOpportunityRequest.AddMember("InvolvementType", SalesInvolvementType)
-
-	SubmitOpportunityRequest_Visibility = SubmitOpportunityRequest.AddMember("Visibility", Visibility)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateEngagementContextRequest_Catalog = UpdateEngagementContextRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	UpdateEngagementContextRequest_EngagementIdentifier = UpdateEngagementContextRequest.AddMember("EngagementIdentifier", _EngagementArnOrIdentifier)
-
-	UpdateEngagementContextRequest_ContextIdentifier = UpdateEngagementContextRequest.AddMember("ContextIdentifier", _EngagementContextIdentifier)
-
-	UpdateEngagementContextRequest_EngagementLastModifiedAt = UpdateEngagementContextRequest.AddMember("EngagementLastModifiedAt", _DateTime)
-
-	UpdateEngagementContextRequest_Type = UpdateEngagementContextRequest.AddMember("Type", EngagementContextType)
-
-	UpdateEngagementContextRequest_Payload = UpdateEngagementContextRequest.AddMember("Payload", UpdateEngagementContextPayload)
-
-	UpdateEngagementContextResponse_EngagementId = UpdateEngagementContextResponse.AddMember("EngagementId", _EngagementIdentifier)
-
-	UpdateEngagementContextResponse_EngagementArn = UpdateEngagementContextResponse.AddMember("EngagementArn", _EngagementArn)
-
-	UpdateEngagementContextResponse_EngagementLastModifiedAt = UpdateEngagementContextResponse.AddMember("EngagementLastModifiedAt", _DateTime)
-
-	UpdateEngagementContextResponse_ContextId = UpdateEngagementContextResponse.AddMember("ContextId", _EngagementContextIdentifier)
-
-	UpdateOpportunityRequest_Catalog = UpdateOpportunityRequest.AddMember("Catalog", _CatalogIdentifier)
-
-	UpdateOpportunityRequest_PrimaryNeedsFromAws = UpdateOpportunityRequest.AddMember("PrimaryNeedsFromAws", _PrimaryNeedsFromAws)
-
-	UpdateOpportunityRequest_NationalSecurity = UpdateOpportunityRequest.AddMember("NationalSecurity", NationalSecurity)
-
-	UpdateOpportunityRequest_PartnerOpportunityIdentifier = UpdateOpportunityRequest.AddMember("PartnerOpportunityIdentifier", smithyprelude.String)
-
-	UpdateOpportunityRequest_Customer = UpdateOpportunityRequest.AddMember("Customer", Customer)
-
-	UpdateOpportunityRequest_Project = UpdateOpportunityRequest.AddMember("Project", Project)
-
-	UpdateOpportunityRequest_OpportunityType = UpdateOpportunityRequest.AddMember("OpportunityType", OpportunityType)
-
-	UpdateOpportunityRequest_Marketing = UpdateOpportunityRequest.AddMember("Marketing", Marketing)
-
-	UpdateOpportunityRequest_SoftwareRevenue = UpdateOpportunityRequest.AddMember("SoftwareRevenue", SoftwareRevenue)
-
-	UpdateOpportunityRequest_LastModifiedDate = UpdateOpportunityRequest.AddMember("LastModifiedDate", _DateTime)
-
-	UpdateOpportunityRequest_Identifier = UpdateOpportunityRequest.AddMember("Identifier", _OpportunityIdentifier)
-
-	UpdateOpportunityRequest_LifeCycle = UpdateOpportunityRequest.AddMember("LifeCycle", LifeCycle)
-
-	UpdateOpportunityResponse_Id = UpdateOpportunityResponse.AddMember("Id", _OpportunityIdentifier)
-
-	UpdateOpportunityResponse_LastModifiedDate = UpdateOpportunityResponse.AddMember("LastModifiedDate", _DateTime)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message, &sAccessDeniedException_Reason}}
+var mAccessDeniedExceptionErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE}}
+var mAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sAccount_Industry, &sAccount_OtherIndustry, &sAccount_CompanyName, &sAccount_WebsiteUrl, &sAccount_AwsAccountId, &sAccount_Address, &sAccount_Duns}}
+var mAccountReceiver = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountReceiver_Alias, &sAccountReceiver_AwsAccountId}}
+var mAccountSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountSummary_Industry, &sAccountSummary_OtherIndustry, &sAccountSummary_CompanyName, &sAccountSummary_WebsiteUrl, &sAccountSummary_Address}}
+var mAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sAddress_City, &sAddress_PostalCode, &sAddress_StateOrRegion, &sAddress_CountryCode, &sAddress_StreetAddress}}
+var mAddressSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressSummary_City, &sAddressSummary_PostalCode, &sAddressSummary_StateOrRegion, &sAddressSummary_CountryCode}}
+var m_AmountMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmountMap_key, &s_AmountMap_value}}
+var m_ApnPrograms = smithy.SchemaMembers{List: []*smithy.Schema{&s_ApnPrograms_member}}
+var mAssigneeContact = smithy.SchemaMembers{List: []*smithy.Schema{&sAssigneeContact_Email, &sAssigneeContact_FirstName, &sAssigneeContact_LastName, &sAssigneeContact_Phone, &sAssigneeContact_BusinessTitle}}
+var m_AwsAccountIdOrAliasList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsAccountIdOrAliasList_member}}
+var m_AwsAccountList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsAccountList_member}}
+var mAwsClosedLostReason = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsClosedLostReason_ADMINISTRATIVE, &sAwsClosedLostReason_BUSINESS_ASSOCIATE_AGREEMENT, &sAwsClosedLostReason_COMPANY_ACQUIRED_DISSOLVED, &sAwsClosedLostReason_COMPETITIVE_OFFERING, &sAwsClosedLostReason_CUSTOMER_DATA_REQUIREMENT, &sAwsClosedLostReason_CUSTOMER_DEFICIENCY, &sAwsClosedLostReason_CUSTOMER_EXPERIENCE, &sAwsClosedLostReason_DELAY_CANCELLATION_OF_PROJECT, &sAwsClosedLostReason_DUPLICATE, &sAwsClosedLostReason_DUPLICATE_OPPORTUNITY, &sAwsClosedLostReason_EXECUTIVE_BLOCKER, &sAwsClosedLostReason_FAILED_VETTING, &sAwsClosedLostReason_FEATURE_LIMITATION, &sAwsClosedLostReason_FINANCIAL_COMMERCIAL, &sAwsClosedLostReason_INSUFFICIENT_AMAZON_VALUE, &sAwsClosedLostReason_INSUFFICIENT_AWS_VALUE, &sAwsClosedLostReason_INTERNATIONAL_CONSTRAINTS, &sAwsClosedLostReason_LEGAL_TAX_REGULATORY, &sAwsClosedLostReason_LEGAL_TERMS_AND_CONDITIONS, &sAwsClosedLostReason_LOST_TO_COMPETITOR, &sAwsClosedLostReason_LOST_TO_COMPETITOR_GOOGLE, &sAwsClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT, &sAwsClosedLostReason_LOST_TO_COMPETITOR_OTHER, &sAwsClosedLostReason_LOST_TO_COMPETITOR_RACKSPACE, &sAwsClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER, &sAwsClosedLostReason_LOST_TO_COMPETITOR_VMWARE, &sAwsClosedLostReason_NO_CUSTOMER_REFERENCE, &sAwsClosedLostReason_NO_INTEGRATION_RESOURCES, &sAwsClosedLostReason_NO_OPPORTUNITY, &sAwsClosedLostReason_NO_PERCEIVED_VALUE_OF_MP, &sAwsClosedLostReason_NO_RESPONSE, &sAwsClosedLostReason_NOT_COMMITTED_TO_AWS, &sAwsClosedLostReason_NO_UPDATE, &sAwsClosedLostReason_ON_PREMISES_DEPLOYMENT, &sAwsClosedLostReason_OTHER, &sAwsClosedLostReason_OTHER_DETAILS_IN_DESCRIPTION, &sAwsClosedLostReason_PARTNER_GAP, &sAwsClosedLostReason_PAST_DUE, &sAwsClosedLostReason_PEOPLE_RELATIONSHIP_GOVERNANCE, &sAwsClosedLostReason_PLATFORM_TECHNOLOGY_LIMITATION, &sAwsClosedLostReason_PREFERENCE_FOR_COMPETITOR, &sAwsClosedLostReason_PRICE, &sAwsClosedLostReason_PRODUCT_TECHNOLOGY, &sAwsClosedLostReason_PRODUCT_NOT_ON_AWS, &sAwsClosedLostReason_SECURITY_COMPLIANCE, &sAwsClosedLostReason_SELF_SERVICE, &sAwsClosedLostReason_TECHNICAL_LIMITATIONS, &sAwsClosedLostReason_TERM_SHEET_IMPASSE}, Seed: 12898, Slots: []uint16{
+	2, 0, 0, 40, 9, 0, 0, 0, 0, 0, 0, 46, 18, 21, 0, 0, 0, 45, 24, 0, 0, 0, 0, 0,
+	0, 0, 11, 0, 0, 10, 44, 42, 0, 0, 7, 0, 3, 28, 0, 0, 14, 0, 47, 16, 0, 30, 38, 0,
+	0, 0, 0, 33, 0, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 0, 0, 1, 0, 31, 0, 20,
+	0, 0, 37, 0, 0, 0, 0, 25, 36, 0, 32, 0, 15, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 48, 8, 0, 0, 0, 23, 0, 5, 0, 12, 19, 0, 0, 6, 0, 0, 26, 0, 22, 0, 0, 0,
+	0, 34, 4, 27, 17, 35, 13, 29,
+}}
+var mAwsFundingUsed = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsFundingUsed_YES, &sAwsFundingUsed_NO}}
+var m_AwsMarketplaceOfferIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsMarketplaceOfferIdentifiers_member}}
+var m_AwsMarketplaceOfferSetIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsMarketplaceOfferSetIdentifiers_member}}
+var m_AwsMarketplaceProductIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsMarketplaceProductIdentifiers_member}}
+var m_AwsMarketplaceSolutionArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsMarketplaceSolutionArnList_member}}
+var m_AwsMarketplaceSolutionIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsMarketplaceSolutionIdentifiers_member}}
+var mAwsMemberBusinessTitle = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsMemberBusinessTitle_AWS_SALES_REP, &sAwsMemberBusinessTitle_AWS_ACCOUNT_OWNER, &sAwsMemberBusinessTitle_WWPSPDM, &sAwsMemberBusinessTitle_PDM, &sAwsMemberBusinessTitle_PSM, &sAwsMemberBusinessTitle_ISVSM, &sAwsMemberBusinessTitle_SIGNATORY}}
+var mAwsOpportunityCustomer = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsOpportunityCustomer_Contacts}}
+var mAwsOpportunityInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsOpportunityInsights_NextBestActions, &sAwsOpportunityInsights_EngagementScore, &sAwsOpportunityInsights_AwsProductsSpendInsightsBySource, &sAwsOpportunityInsights_OpportunityQuality, &sAwsOpportunityInsights_Recommendations}}
+var mAwsOpportunityLifeCycle = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsOpportunityLifeCycle_TargetCloseDate, &sAwsOpportunityLifeCycle_ClosedLostReason, &sAwsOpportunityLifeCycle_Stage, &sAwsOpportunityLifeCycle_NextSteps, &sAwsOpportunityLifeCycle_NextStepsHistory}}
+var mAwsOpportunityProject = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsOpportunityProject_ExpectedCustomerSpend, &sAwsOpportunityProject_AwsPartition}}
+var mAwsOpportunityRelatedEntities = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsOpportunityRelatedEntities_AwsProducts, &sAwsOpportunityRelatedEntities_Solutions, &sAwsOpportunityRelatedEntities_AwsMarketplaceSolutions, &sAwsOpportunityRelatedEntities_AwsMarketplaceProducts}}
+var mAwsOpportunityStage = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsOpportunityStage_NOT_STARTED, &sAwsOpportunityStage_IN_PROGRESS, &sAwsOpportunityStage_PROSPECT, &sAwsOpportunityStage_ENGAGED, &sAwsOpportunityStage_IDENTIFIED, &sAwsOpportunityStage_QUALIFY, &sAwsOpportunityStage_RESEARCH, &sAwsOpportunityStage_SELLER_ENGAGED, &sAwsOpportunityStage_EVALUATING, &sAwsOpportunityStage_SELLER_REGISTERED, &sAwsOpportunityStage_TERM_SHEET_NEGOTIATION, &sAwsOpportunityStage_CONTRACT_NEGOTIATION, &sAwsOpportunityStage_ONBOARDING, &sAwsOpportunityStage_BUILDING_INTEGRATION, &sAwsOpportunityStage_QUALIFIED, &sAwsOpportunityStage_ON_HOLD, &sAwsOpportunityStage_TECHNICAL_VALIDATION, &sAwsOpportunityStage_BUSINESS_VALIDATION, &sAwsOpportunityStage_COMMITTED, &sAwsOpportunityStage_LAUNCHED, &sAwsOpportunityStage_DEFERRED_TO_PARTNER, &sAwsOpportunityStage_CLOSED_LOST, &sAwsOpportunityStage_COMPLETED, &sAwsOpportunityStage_CLOSED_INCOMPLETE}, Seed: 112, Slots: []uint16{
+	7, 16, 22, 0, 0, 0, 0, 20, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 14, 0, 0, 15, 0, 6, 18, 24, 19, 4, 13, 0, 0, 3, 21, 0, 2, 0, 0,
+	0, 0, 12, 17, 8, 9, 0, 10, 0, 0, 0, 0, 23, 0, 0, 5,
+}}
+var mAwsOpportunitySummaryFullView = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsOpportunitySummaryFullView_RelatedOpportunityId, &sAwsOpportunitySummaryFullView_Origin, &sAwsOpportunitySummaryFullView_InvolvementType, &sAwsOpportunitySummaryFullView_Visibility, &sAwsOpportunitySummaryFullView_LifeCycle, &sAwsOpportunitySummaryFullView_OpportunityTeam, &sAwsOpportunitySummaryFullView_Insights, &sAwsOpportunitySummaryFullView_InvolvementTypeChangeReason, &sAwsOpportunitySummaryFullView_RelatedEntityIds, &sAwsOpportunitySummaryFullView_Customer, &sAwsOpportunitySummaryFullView_Project, &sAwsOpportunitySummaryFullView_CosellMotion, &sAwsOpportunitySummaryFullView_SoftwareRevenue}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 8, 0, 0, 0, 1, 0, 0, 13, 10, 9, 0, 3, 0, 11,
+	0, 12, 5, 0, 0, 0, 6, 7,
+}}
+var m_AwsOpportunityTeamMembersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsOpportunityTeamMembersList_member}}
+var mAwsPartition = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsPartition_AWS_EUSC}}
+var mAwsProductDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsProductDetails_ProductCode, &sAwsProductDetails_ServiceCode, &sAwsProductDetails_Categories, &sAwsProductDetails_Amount, &sAwsProductDetails_OptimizedAmount, &sAwsProductDetails_PotentialSavingsAmount, &sAwsProductDetails_Optimizations}}
+var m_AwsProductIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsProductIdentifiers_member}}
+var mAwsProductInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsProductInsights_CurrencyCode, &sAwsProductInsights_Frequency, &sAwsProductInsights_TotalAmount, &sAwsProductInsights_TotalOptimizedAmount, &sAwsProductInsights_TotalPotentialSavingsAmount, &sAwsProductInsights_TotalAmountByCategory, &sAwsProductInsights_AwsProducts}}
+var mAwsProductOptimization = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsProductOptimization_Description, &sAwsProductOptimization_SavingsAmount}}
+var m_AwsProductOptimizationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsProductOptimizationsList_member}}
+var m_AwsProductsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AwsProductsList_member}}
+var mAwsProductsSpendInsightsBySource = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsProductsSpendInsightsBySource_Partner, &sAwsProductsSpendInsightsBySource_AWS}}
+var mAwsSoftwareRevenue = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsSoftwareRevenue_Value, &sAwsSoftwareRevenue_Discount, &sAwsSoftwareRevenue_EffectiveDate, &sAwsSoftwareRevenue_ExpirationDate}}
+var mAwsSubmission = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsSubmission_InvolvementType, &sAwsSubmission_Visibility}}
+var mAwsTeamMember = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsTeamMember_Email, &sAwsTeamMember_FirstName, &sAwsTeamMember_LastName, &sAwsTeamMember_BusinessTitle}}
+var mChannel = smithy.SchemaMembers{List: []*smithy.Schema{&sChannel_AWS_MARKETING_CENTRAL, &sChannel_CONTENT_SYNDICATION, &sChannel_DISPLAY, &sChannel_EMAIL, &sChannel_LIVE_EVENT, &sChannel_OUT_OF_HOME, &sChannel_PRINT, &sChannel_SEARCH, &sChannel_SOCIAL, &sChannel_TELEMARKETING, &sChannel_TV, &sChannel_VIDEO, &sChannel_VIRTUAL_EVENT}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 8, 0, 0, 0, 1, 5, 10, 0, 11, 3, 0, 12, 0, 4, 0, 0, 0, 0, 6, 0, 0,
+	0, 2, 9, 13, 0, 0, 7, 0,
+}}
+var m_Channels = smithy.SchemaMembers{List: []*smithy.Schema{&s_Channels_member}}
+var mClosedLostReason = smithy.SchemaMembers{List: []*smithy.Schema{&sClosedLostReason_CUSTOMER_DEFICIENCY, &sClosedLostReason_DELAY_CANCELLATION_OF_PROJECT, &sClosedLostReason_LEGAL_TAX_REGULATORY, &sClosedLostReason_LOST_TO_COMPETITOR_GOOGLE, &sClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT, &sClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER, &sClosedLostReason_LOST_TO_COMPETITOR_VMWARE, &sClosedLostReason_LOST_TO_COMPETITOR_OTHER, &sClosedLostReason_NO_OPPORTUNITY, &sClosedLostReason_ON_PREMISES_DEPLOYMENT, &sClosedLostReason_PARTNER_GAP, &sClosedLostReason_PRICE, &sClosedLostReason_SECURITY_COMPLIANCE, &sClosedLostReason_TECHNICAL_LIMITATIONS, &sClosedLostReason_CUSTOMER_EXPERIENCE, &sClosedLostReason_OTHER, &sClosedLostReason_PEOPLERELATIONSHIPGOVERNANCE, &sClosedLostReason_PRODUCTTECHNOLOGY, &sClosedLostReason_FINANCIALCOMMERCIAL}, Seed: 73, Slots: []uint16{
+	12, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 10, 0, 2, 0, 3, 0, 0, 0, 18, 8, 7, 15,
+	0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 19, 0, 0, 0, 0,
+	16, 4, 0, 0, 0, 17, 14, 0, 0, 0, 1, 6, 13, 0, 0, 0,
+}}
+var mCompetitorName = smithy.SchemaMembers{List: []*smithy.Schema{&sCompetitorName_ORACLE_CLOUD, &sCompetitorName_ON_PREM, &sCompetitorName_CO_LOCATION, &sCompetitorName_AKAMAI, &sCompetitorName_ALICLOUD, &sCompetitorName_GOOGLE_CLOUD_PLATFORM, &sCompetitorName_IBM_SOFTLAYER, &sCompetitorName_MICROSOFT_AZURE, &sCompetitorName_OTHER_COST_OPTIMIZATION, &sCompetitorName_NO_COMPETITION, &sCompetitorName_OTHER}, Seed: 19, Slots: []uint16{
+	8, 0, 0, 7, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 10, 5, 1, 0, 0,
+	4, 3, 9, 0, 0, 6, 0, 0,
+}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mContact = smithy.SchemaMembers{List: []*smithy.Schema{&sContact_Email, &sContact_FirstName, &sContact_LastName, &sContact_BusinessTitle, &sContact_Phone}}
+var m_ContextIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContextIdentifiers_member}}
+var mCountryCode = smithy.SchemaMembers{List: []*smithy.Schema{&sCountryCode_US, &sCountryCode_AF, &sCountryCode_AX, &sCountryCode_AL, &sCountryCode_DZ, &sCountryCode_AS, &sCountryCode_AD, &sCountryCode_AO, &sCountryCode_AI, &sCountryCode_AQ, &sCountryCode_AG, &sCountryCode_AR, &sCountryCode_AM, &sCountryCode_AW, &sCountryCode_AU, &sCountryCode_AT, &sCountryCode_AZ, &sCountryCode_BS, &sCountryCode_BH, &sCountryCode_BD, &sCountryCode_BB, &sCountryCode_BY, &sCountryCode_BE, &sCountryCode_BZ, &sCountryCode_BJ, &sCountryCode_BM, &sCountryCode_BT, &sCountryCode_BO, &sCountryCode_BQ, &sCountryCode_BA, &sCountryCode_BW, &sCountryCode_BV, &sCountryCode_BR, &sCountryCode_IO, &sCountryCode_BN, &sCountryCode_BG, &sCountryCode_BF, &sCountryCode_BI, &sCountryCode_KH, &sCountryCode_CM, &sCountryCode_CA, &sCountryCode_CV, &sCountryCode_KY, &sCountryCode_CF, &sCountryCode_TD, &sCountryCode_CL, &sCountryCode_CN, &sCountryCode_CX, &sCountryCode_CC, &sCountryCode_CO, &sCountryCode_KM, &sCountryCode_CG, &sCountryCode_CK, &sCountryCode_CR, &sCountryCode_CI, &sCountryCode_HR, &sCountryCode_CU, &sCountryCode_CW, &sCountryCode_CY, &sCountryCode_CZ, &sCountryCode_CD, &sCountryCode_DK, &sCountryCode_DJ, &sCountryCode_DM, &sCountryCode_DO, &sCountryCode_EC, &sCountryCode_EG, &sCountryCode_SV, &sCountryCode_GQ, &sCountryCode_ER, &sCountryCode_EE, &sCountryCode_ET, &sCountryCode_FK, &sCountryCode_FO, &sCountryCode_FJ, &sCountryCode_FI, &sCountryCode_FR, &sCountryCode_GF, &sCountryCode_PF, &sCountryCode_TF, &sCountryCode_GA, &sCountryCode_GM, &sCountryCode_GE, &sCountryCode_DE, &sCountryCode_GH, &sCountryCode_GI, &sCountryCode_GR, &sCountryCode_GL, &sCountryCode_GD, &sCountryCode_GP, &sCountryCode_GU, &sCountryCode_GT, &sCountryCode_GG, &sCountryCode_GN, &sCountryCode_GW, &sCountryCode_GY, &sCountryCode_HT, &sCountryCode_HM, &sCountryCode_VA, &sCountryCode_HN, &sCountryCode_HK, &sCountryCode_HU, &sCountryCode_IS, &sCountryCode_IN, &sCountryCode_ID, &sCountryCode_IR, &sCountryCode_IQ, &sCountryCode_IE, &sCountryCode_IM, &sCountryCode_IL, &sCountryCode_IT, &sCountryCode_JM, &sCountryCode_JP, &sCountryCode_JE, &sCountryCode_JO, &sCountryCode_KZ, &sCountryCode_KE, &sCountryCode_KI, &sCountryCode_KR, &sCountryCode_KW, &sCountryCode_KG, &sCountryCode_LA, &sCountryCode_LV, &sCountryCode_LB, &sCountryCode_LS, &sCountryCode_LR, &sCountryCode_LY, &sCountryCode_LI, &sCountryCode_LT, &sCountryCode_LU, &sCountryCode_MO, &sCountryCode_MK, &sCountryCode_MG, &sCountryCode_MW, &sCountryCode_MY, &sCountryCode_MV, &sCountryCode_ML, &sCountryCode_MT, &sCountryCode_MH, &sCountryCode_MQ, &sCountryCode_MR, &sCountryCode_MU, &sCountryCode_YT, &sCountryCode_MX, &sCountryCode_FM, &sCountryCode_MD, &sCountryCode_MC, &sCountryCode_MN, &sCountryCode_ME, &sCountryCode_MS, &sCountryCode_MA, &sCountryCode_MZ, &sCountryCode_MM, &sCountryCode_NA, &sCountryCode_NR, &sCountryCode_NP, &sCountryCode_NL, &sCountryCode_AN, &sCountryCode_NC, &sCountryCode_NZ, &sCountryCode_NI, &sCountryCode_NE, &sCountryCode_NG, &sCountryCode_NU, &sCountryCode_NF, &sCountryCode_MP, &sCountryCode_NO, &sCountryCode_OM, &sCountryCode_PK, &sCountryCode_PW, &sCountryCode_PS, &sCountryCode_PA, &sCountryCode_PG, &sCountryCode_PY, &sCountryCode_PE, &sCountryCode_PH, &sCountryCode_PN, &sCountryCode_PL, &sCountryCode_PT, &sCountryCode_PR, &sCountryCode_QA, &sCountryCode_RE, &sCountryCode_RO, &sCountryCode_RU, &sCountryCode_RW, &sCountryCode_BL, &sCountryCode_SH, &sCountryCode_KN, &sCountryCode_LC, &sCountryCode_MF, &sCountryCode_PM, &sCountryCode_VC, &sCountryCode_WS, &sCountryCode_SM, &sCountryCode_ST, &sCountryCode_SA, &sCountryCode_SN, &sCountryCode_RS, &sCountryCode_SC, &sCountryCode_SL, &sCountryCode_SG, &sCountryCode_SX, &sCountryCode_SK, &sCountryCode_SI, &sCountryCode_SB, &sCountryCode_SO, &sCountryCode_ZA, &sCountryCode_GS, &sCountryCode_SS, &sCountryCode_ES, &sCountryCode_LK, &sCountryCode_SD, &sCountryCode_SR, &sCountryCode_SJ, &sCountryCode_SZ, &sCountryCode_SE, &sCountryCode_CH, &sCountryCode_SY, &sCountryCode_TW, &sCountryCode_TJ, &sCountryCode_TZ, &sCountryCode_TH, &sCountryCode_TL, &sCountryCode_TG, &sCountryCode_TK, &sCountryCode_TO, &sCountryCode_TT, &sCountryCode_TN, &sCountryCode_TR, &sCountryCode_TM, &sCountryCode_TC, &sCountryCode_TV, &sCountryCode_UG, &sCountryCode_UA, &sCountryCode_AE, &sCountryCode_GB, &sCountryCode_UM, &sCountryCode_UY, &sCountryCode_UZ, &sCountryCode_VU, &sCountryCode_VE, &sCountryCode_VN, &sCountryCode_VG, &sCountryCode_VI, &sCountryCode_WF, &sCountryCode_EH, &sCountryCode_YE, &sCountryCode_ZM, &sCountryCode_ZW}, Seed: 2039, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 102, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 18, 212, 0, 0, 0, 0, 0, 0, 52, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 171, 0, 0, 0,
+	0, 0, 0, 55, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 46, 0, 0, 0, 0, 0, 0, 0, 57, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 111, 160, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 218, 0, 0, 0, 219, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 235, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 139, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 162, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 190, 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 154, 0, 0, 0, 56, 191, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 54, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 0,
+	0, 0, 203, 0, 192, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 183, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 228, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 208, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	133, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 206, 0, 0, 0, 0,
+	35, 0, 0, 0, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 142, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 168, 0, 86,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 0, 0, 0, 0, 0, 145,
+	0, 0, 230, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 241,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 138, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 44, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 97, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 174, 0, 0, 182, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 66, 0, 0, 0, 196, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 177, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 123, 22, 0, 0, 0, 0, 0, 0,
+	0, 0, 188, 0, 0, 240, 0, 0, 141, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 167, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 225, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 189, 0, 244,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 165, 0, 0,
+	0, 226, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 243, 0, 0,
+	0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 74, 0, 0, 0, 0, 0, 0, 0, 85, 0, 0, 0, 0, 0, 185, 0, 0, 0,
+	0, 0, 0, 0, 69, 0, 0, 0, 0, 229, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 84, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 112, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 149, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 77, 0, 0, 0,
+	0, 194, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 158, 42, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 119, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 238, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 63, 48, 0, 0, 0, 92, 0, 0, 0,
+	0, 0, 129, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 127, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 49, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 234, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 122, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 81, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 137, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 67, 0, 0, 0, 0, 0, 0, 156, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 130, 0, 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 0,
+	0, 0, 28, 0, 0, 0, 0, 0, 0, 0, 217, 0, 0, 180, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 136, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	5, 126, 197, 0, 0, 0, 89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 152, 0, 0, 0, 0, 0, 0, 27, 0, 0, 0, 0, 0, 87, 0, 0, 113, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 179, 0, 0, 0, 0, 0, 0, 143, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 110, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 59, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 172, 0, 0, 147, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 222, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 135, 0, 0, 0, 249, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 80, 83, 0, 0, 134, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 155, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 181, 0, 0, 0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 148, 0, 0, 11, 0, 0, 0, 62, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 124, 0, 0, 0,
+	0, 0, 0, 0, 0, 163, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 132, 0, 0, 0, 0, 236, 231, 0,
+	0, 210, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 21,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 198, 0, 0, 0, 0, 0,
+	0, 0, 201, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 60, 0, 0, 200, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 9, 0, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 161, 0,
+	0, 0, 0, 0, 0, 90, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 227, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 187, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 58, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 195, 176, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 23, 0, 0, 0, 0, 109,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 117, 0, 0, 0, 0,
+	105, 0, 0, 0, 104, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 213, 19, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 207, 0, 0, 0, 0, 0, 0, 151, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 242, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 224, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 157, 0, 0,
+	0, 0, 0, 50, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 144, 0, 0, 146, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 175, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 245, 0, 0, 0, 0, 0, 0, 247, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 64, 0, 0, 248, 0, 239, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 153, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 221, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 166, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 202,
+	95, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 94, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 214, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 38, 209, 0, 0, 0, 0,
+	0, 0, 0, 118, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 178, 0, 99, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 186, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 169, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 159, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 173, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 78, 0, 0, 0, 0, 131, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 246, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 205, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 121, 24, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 116, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 184, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 98, 0,
+	0, 0, 0, 0, 106, 0, 0, 0, 0, 0, 0, 0, 0, 75, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 100, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 232, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 220, 0,
+	0, 0, 0, 0, 215, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 101, 0, 0, 0, 0,
+	0, 0, 0, 223, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 199, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 53, 79, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 76, 193, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 216, 0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 164, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 211, 0, 0, 0, 237, 0, 0, 0, 0, 204, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 120, 0, 0, 0,
+	233, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 31, 0, 0, 0, 0,
+	0, 25, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 170, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 0, 0, 114, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mCreatedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatedDateFilter_AfterCreatedDate, &sCreatedDateFilter_BeforeCreatedDate}}
+var mCurrencyCode = smithy.SchemaMembers{List: []*smithy.Schema{&sCurrencyCode_USD, &sCurrencyCode_EUR, &sCurrencyCode_GBP, &sCurrencyCode_AUD, &sCurrencyCode_CAD, &sCurrencyCode_CNY, &sCurrencyCode_NZD, &sCurrencyCode_INR, &sCurrencyCode_JPY, &sCurrencyCode_CHF, &sCurrencyCode_SEK, &sCurrencyCode_AED, &sCurrencyCode_AFN, &sCurrencyCode_ALL, &sCurrencyCode_AMD, &sCurrencyCode_ANG, &sCurrencyCode_AOA, &sCurrencyCode_ARS, &sCurrencyCode_AWG, &sCurrencyCode_AZN, &sCurrencyCode_BAM, &sCurrencyCode_BBD, &sCurrencyCode_BDT, &sCurrencyCode_BGN, &sCurrencyCode_BHD, &sCurrencyCode_BIF, &sCurrencyCode_BMD, &sCurrencyCode_BND, &sCurrencyCode_BOB, &sCurrencyCode_BOV, &sCurrencyCode_BRL, &sCurrencyCode_BSD, &sCurrencyCode_BTN, &sCurrencyCode_BWP, &sCurrencyCode_BYN, &sCurrencyCode_BZD, &sCurrencyCode_CDF, &sCurrencyCode_CHE, &sCurrencyCode_CHW, &sCurrencyCode_CLF, &sCurrencyCode_CLP, &sCurrencyCode_COP, &sCurrencyCode_COU, &sCurrencyCode_CRC, &sCurrencyCode_CUC, &sCurrencyCode_CUP, &sCurrencyCode_CVE, &sCurrencyCode_CZK, &sCurrencyCode_DJF, &sCurrencyCode_DKK, &sCurrencyCode_DOP, &sCurrencyCode_DZD, &sCurrencyCode_EGP, &sCurrencyCode_ERN, &sCurrencyCode_ETB, &sCurrencyCode_FJD, &sCurrencyCode_FKP, &sCurrencyCode_GEL, &sCurrencyCode_GHS, &sCurrencyCode_GIP, &sCurrencyCode_GMD, &sCurrencyCode_GNF, &sCurrencyCode_GTQ, &sCurrencyCode_GYD, &sCurrencyCode_HKD, &sCurrencyCode_HNL, &sCurrencyCode_HRK, &sCurrencyCode_HTG, &sCurrencyCode_HUF, &sCurrencyCode_IDR, &sCurrencyCode_ILS, &sCurrencyCode_IQD, &sCurrencyCode_IRR, &sCurrencyCode_ISK, &sCurrencyCode_JMD, &sCurrencyCode_JOD, &sCurrencyCode_KES, &sCurrencyCode_KGS, &sCurrencyCode_KHR, &sCurrencyCode_KMF, &sCurrencyCode_KPW, &sCurrencyCode_KRW, &sCurrencyCode_KWD, &sCurrencyCode_KYD, &sCurrencyCode_KZT, &sCurrencyCode_LAK, &sCurrencyCode_LBP, &sCurrencyCode_LKR, &sCurrencyCode_LRD, &sCurrencyCode_LSL, &sCurrencyCode_LYD, &sCurrencyCode_MAD, &sCurrencyCode_MDL, &sCurrencyCode_MGA, &sCurrencyCode_MKD, &sCurrencyCode_MMK, &sCurrencyCode_MNT, &sCurrencyCode_MOP, &sCurrencyCode_MRU, &sCurrencyCode_MUR, &sCurrencyCode_MVR, &sCurrencyCode_MWK, &sCurrencyCode_MXN, &sCurrencyCode_MXV, &sCurrencyCode_MYR, &sCurrencyCode_MZN, &sCurrencyCode_NAD, &sCurrencyCode_NGN, &sCurrencyCode_NIO, &sCurrencyCode_NOK, &sCurrencyCode_NPR, &sCurrencyCode_OMR, &sCurrencyCode_PAB, &sCurrencyCode_PEN, &sCurrencyCode_PGK, &sCurrencyCode_PHP, &sCurrencyCode_PKR, &sCurrencyCode_PLN, &sCurrencyCode_PYG, &sCurrencyCode_QAR, &sCurrencyCode_RON, &sCurrencyCode_RSD, &sCurrencyCode_RUB, &sCurrencyCode_RWF, &sCurrencyCode_SAR, &sCurrencyCode_SBD, &sCurrencyCode_SCR, &sCurrencyCode_SDG, &sCurrencyCode_SGD, &sCurrencyCode_SHP, &sCurrencyCode_SLL, &sCurrencyCode_SOS, &sCurrencyCode_SRD, &sCurrencyCode_SSP, &sCurrencyCode_STN, &sCurrencyCode_SVC, &sCurrencyCode_SYP, &sCurrencyCode_SZL, &sCurrencyCode_THB, &sCurrencyCode_TJS, &sCurrencyCode_TMT, &sCurrencyCode_TND, &sCurrencyCode_TOP, &sCurrencyCode_TRY, &sCurrencyCode_TTD, &sCurrencyCode_TWD, &sCurrencyCode_TZS, &sCurrencyCode_UAH, &sCurrencyCode_UGX, &sCurrencyCode_USN, &sCurrencyCode_UYI, &sCurrencyCode_UYU, &sCurrencyCode_UZS, &sCurrencyCode_VEF, &sCurrencyCode_VND, &sCurrencyCode_VUV, &sCurrencyCode_WST, &sCurrencyCode_XAF, &sCurrencyCode_XCD, &sCurrencyCode_XDR, &sCurrencyCode_XOF, &sCurrencyCode_XPF, &sCurrencyCode_XSU, &sCurrencyCode_XUA, &sCurrencyCode_YER, &sCurrencyCode_ZAR, &sCurrencyCode_ZMW, &sCurrencyCode_ZWL}, Seed: 109371, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 93, 0, 0, 0, 0, 0, 0,
+	0, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 109, 0, 0, 0, 68, 79, 0, 0,
+	0, 0, 0, 0, 0, 147, 0, 0, 0, 0, 76, 0, 0, 0, 0, 0, 0, 0, 0, 28, 0, 92, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 34, 0, 0, 0, 0, 41, 0, 0, 0, 0, 0, 0, 0,
+	17, 0, 0, 138, 0, 0, 0, 0, 0, 83, 0, 0, 0, 0, 0, 24, 107, 168, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 82, 0, 33, 0, 53, 0, 0, 87, 0, 0, 0, 0, 20, 15, 0, 0,
+	0, 0, 124, 0, 0, 0, 0, 0, 0, 13, 0, 0, 157, 0, 23, 0, 0, 0, 0, 91, 0, 32, 0, 0,
+	46, 3, 115, 120, 0, 0, 0, 0, 0, 0, 0, 0, 47, 0, 0, 0, 27, 0, 18, 0, 0, 0, 0, 106,
+	0, 0, 0, 0, 0, 0, 0, 48, 0, 0, 0, 0, 0, 0, 0, 0, 0, 137, 0, 0, 0, 0, 0, 0,
+	0, 78, 0, 126, 0, 0, 0, 0, 0, 0, 0, 73, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 136,
+	51, 62, 0, 0, 0, 0, 122, 0, 0, 0, 0, 56, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 8, 0, 0, 0, 63, 22, 0, 21, 0, 0, 0, 0, 0, 0, 0, 144, 0, 0, 0, 0, 55,
+	141, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 129, 74, 0, 0, 0,
+	0, 0, 0, 0, 130, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 125, 0, 0, 0, 0, 158, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 160, 0, 0, 0, 0, 0, 0, 0,
+	0, 72, 0, 0, 0, 0, 0, 0, 0, 150, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 9,
+	0, 0, 108, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 151, 152, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 70, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 100, 0, 0, 0, 97, 71, 0, 0, 0, 0, 0, 0, 0, 26, 0, 159, 0, 0, 121, 95,
+	0, 0, 0, 84, 0, 0, 0, 12, 0, 0, 140, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 118, 0, 0, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0, 25, 0, 0, 0, 0, 142, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 54, 0, 65, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 123, 0, 0, 0, 162, 40, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 113, 161, 0, 0, 0, 0, 0, 81, 0, 75, 0, 0, 0, 0, 0, 0, 0, 0, 38, 0, 57,
+	0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 90, 0, 110, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 61, 0, 0, 0, 0, 135, 104, 0, 0, 0, 59, 77, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 133, 94, 0, 0, 0, 0, 99, 0, 0, 0, 0, 154, 0, 7, 0, 80, 0, 0, 2,
+	0, 0, 0, 0, 0, 0, 0, 0, 36, 131, 0, 0, 0, 0, 0, 5, 0, 52, 0, 60, 0, 0, 0, 0,
+	89, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69, 0, 0, 0, 163, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 119, 0, 49, 149, 50, 43, 0, 0, 85, 0, 88, 0, 0, 0, 0, 0, 0, 0, 0, 98, 101,
+	0, 0, 0, 66, 139, 0, 153, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 146, 0, 0,
+	0, 0, 0, 0, 0, 0, 114, 0, 0, 19, 0, 0, 0, 0, 0, 0, 156, 0, 0, 0, 0, 0, 0, 0,
+	37, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 148, 0,
+	0, 30, 0, 0, 0, 165, 0, 0, 67, 44, 132, 0, 0, 0, 0, 0, 0, 0, 155, 0, 112, 64, 0, 0,
+	102, 0, 0, 0, 0, 0, 0, 111, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 167, 0, 0, 0, 0, 0, 0, 0, 145, 0, 0, 0, 143, 0, 0, 58, 0, 0, 0,
+	0, 0, 0, 117, 0, 0, 0, 29, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 105, 0, 0, 0,
+	0, 0, 0, 0, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 35, 0, 0, 0,
+	0, 0, 0, 31, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0, 0, 1, 0, 11, 0, 164, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 96, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 39, 0, 166, 0, 0, 0, 0, 0,
+	0, 134, 0, 45, 0, 0, 0, 0, 0, 0, 0, 0, 0, 116, 0, 0,
+}}
+var mCustomer = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomer_Account, &sCustomer_Contacts}}
+var m_CustomerContactsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomerContactsList_member}}
+var mCustomerProjectsContext = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerProjectsContext_Customer, &sCustomerProjectsContext_Project}}
+var mCustomerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerSummary_Account}}
+var mDeliveryModel = smithy.SchemaMembers{List: []*smithy.Schema{&sDeliveryModel_SAAS_OR_PAAS, &sDeliveryModel_BYOL_OR_AMI, &sDeliveryModel_MANAGED_SERVICES, &sDeliveryModel_PROFESSIONAL_SERVICES, &sDeliveryModel_RESELL, &sDeliveryModel_OTHER}}
+var m_DeliveryModels = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeliveryModels_member}}
+var m_EligibleProgramsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EligibleProgramsList_member}}
+var mEngagementContextDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementContextDetails_Id, &sEngagementContextDetails_Type, &sEngagementContextDetails_Payload}}
+var mEngagementContextPayload = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementContextPayload_CustomerProject, &sEngagementContextPayload_Lead, &sEngagementContextPayload_ProspectingResult}}
+var m_EngagementContexts = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementContexts_member}}
+var mEngagementContextType = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementContextType_CUSTOMER_PROJECT, &sEngagementContextType_LEAD, &sEngagementContextType_PROSPECTING_RESULT}}
+var m_EngagementContextTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementContextTypeList_member}}
+var mEngagementCustomer = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementCustomer_Industry, &sEngagementCustomer_CompanyName, &sEngagementCustomer_WebsiteUrl, &sEngagementCustomer_CountryCode}}
+var mEngagementCustomerProjectDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementCustomerProjectDetails_Title, &sEngagementCustomerProjectDetails_BusinessProblem, &sEngagementCustomerProjectDetails_TargetCompletionDate}}
+var m_EngagementIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementIdentifierList_member}}
+var m_EngagementIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementIdentifiers_member}}
+var m_EngagementInvitationIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementInvitationIdentifiers_member}}
+var mEngagementInvitationPayloadType = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementInvitationPayloadType_OPPORTUNITY_INVITATION, &sEngagementInvitationPayloadType_LEAD_INVITATION}}
+var m_EngagementInvitationsPayloadType = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementInvitationsPayloadType_member}}
+var m_EngagementInvitationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementInvitationSummaries_member}}
+var mEngagementInvitationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementInvitationSummary_Arn, &sEngagementInvitationSummary_PayloadType, &sEngagementInvitationSummary_Id, &sEngagementInvitationSummary_EngagementId, &sEngagementInvitationSummary_EngagementTitle, &sEngagementInvitationSummary_Status, &sEngagementInvitationSummary_InvitationDate, &sEngagementInvitationSummary_ExpirationDate, &sEngagementInvitationSummary_SenderAwsAccountId, &sEngagementInvitationSummary_SenderCompanyName, &sEngagementInvitationSummary_Receiver, &sEngagementInvitationSummary_Catalog, &sEngagementInvitationSummary_ParticipantType}, Seed: 8, Slots: []uint16{
+	0, 9, 0, 0, 0, 0, 0, 3, 0, 0, 8, 0, 5, 13, 0, 0, 1, 10, 0, 0, 0, 6, 4, 12,
+	11, 2, 0, 0, 0, 7, 0, 0,
+}}
+var mEngagementMember = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementMember_CompanyName, &sEngagementMember_WebsiteUrl, &sEngagementMember_AccountId}}
+var m_EngagementMembers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementMembers_member}}
+var m_EngagementMemberSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementMemberSummaries_member}}
+var mEngagementMemberSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementMemberSummary_CompanyName, &sEngagementMemberSummary_WebsiteUrl}}
+var mEngagementProspectingResult = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementProspectingResult_EngagementIdentifier, &sEngagementProspectingResult_EngagementContextId, &sEngagementProspectingResult_Status, &sEngagementProspectingResult_ReasonCode, &sEngagementProspectingResult_Message}}
+var m_EngagementProspectingResultList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementProspectingResultList_member}}
+var mEngagementResourceAssociationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementResourceAssociationSummary_Catalog, &sEngagementResourceAssociationSummary_EngagementId, &sEngagementResourceAssociationSummary_ResourceType, &sEngagementResourceAssociationSummary_ResourceId, &sEngagementResourceAssociationSummary_CreatedBy}}
+var m_EngagementResourceAssociationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementResourceAssociationSummaryList_member}}
+var mEngagementScore = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementScore_HIGH, &sEngagementScore_MEDIUM, &sEngagementScore_LOW}}
+var mEngagementSort = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementSort_SortOrder, &sEngagementSort_SortBy}}
+var mEngagementSortName = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementSortName_CreatedDate}}
+var mEngagementSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEngagementSummary_Arn, &sEngagementSummary_Id, &sEngagementSummary_Title, &sEngagementSummary_CreatedAt, &sEngagementSummary_CreatedBy, &sEngagementSummary_MemberCount, &sEngagementSummary_ModifiedAt, &sEngagementSummary_ModifiedBy, &sEngagementSummary_ContextTypes}, Seed: 4, Slots: []uint16{
+	9, 6, 0, 2, 0, 8, 0, 0, 0, 0, 7, 3, 4, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 5, 0,
+}}
+var m_EngagementSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EngagementSummaryList_member}}
+var mEnrichmentContext = smithy.SchemaMembers{List: []*smithy.Schema{&sEnrichmentContext_ProspectingResultAws, &sEnrichmentContext_LeadInsights}}
+var mExpectedContractDuration = smithy.SchemaMembers{List: []*smithy.Schema{&sExpectedContractDuration_Term, &sExpectedContractDuration_Value}}
+var mExpectedContractDurationTerm = smithy.SchemaMembers{List: []*smithy.Schema{&sExpectedContractDurationTerm_MONTHS}}
+var mExpectedCustomerSpend = smithy.SchemaMembers{List: []*smithy.Schema{&sExpectedCustomerSpend_Amount, &sExpectedCustomerSpend_CurrencyCode, &sExpectedCustomerSpend_Frequency, &sExpectedCustomerSpend_TargetCompany, &sExpectedCustomerSpend_EstimationUrl}}
+var m_ExpectedCustomerSpendList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpectedCustomerSpendList_member}}
+var m_FilterIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterIdentifier_member}}
+var m_FilterLifeCycleReviewStatus = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterLifeCycleReviewStatus_member}}
+var m_FilterLifeCycleStage = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterLifeCycleStage_member}}
+var m_FilterStatus = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterStatus_member}}
+var mIndustry = smithy.SchemaMembers{List: []*smithy.Schema{&sIndustry_AEROSPACE_SATELLITE, &sIndustry_AGRICULTURE, &sIndustry_AUTOMOTIVE, &sIndustry_COMPUTERS_ELECTRONICS, &sIndustry_CONSUMER_GOODS, &sIndustry_EDUCATION, &sIndustry_ENERGY_OIL_GAS, &sIndustry_ENERGY_POWER_UTILITIES, &sIndustry_FINANCIAL_SERVICES, &sIndustry_GAMING, &sIndustry_GOVERNMENT, &sIndustry_HEALTHCARE, &sIndustry_HOSPITALITY, &sIndustry_LIFE_SCIENCES, &sIndustry_MANUFACTURING, &sIndustry_MARKETING_ADVERTISING, &sIndustry_MEDIA_ENTERTAINMENT, &sIndustry_MINING, &sIndustry_NON_PROFIT_ORGANIZATION, &sIndustry_PROFESSIONAL_SERVICES, &sIndustry_REALESTATE_CONSTRUCTION, &sIndustry_RETAIL, &sIndustry_SOFTWARE_INTERNET, &sIndustry_TELECOMMUNICATIONS, &sIndustry_TRANSPORTATION_LOGISTICS, &sIndustry_TRAVEL, &sIndustry_WHOLESALE_DISTRIBUTION, &sIndustry_OTHER}, Seed: 677, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 2, 3, 28, 0, 0, 27, 6, 16, 23, 0, 0, 18, 4, 0, 0, 15, 0, 24,
+	7, 0, 21, 0, 0, 25, 26, 0, 0, 17, 0, 0, 0, 0, 13, 0, 0, 8, 14, 1, 0, 0, 5, 0,
+	11, 0, 20, 0, 12, 0, 19, 0, 0, 0, 22, 0, 0, 0, 0, 10,
+}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvitation = smithy.SchemaMembers{List: []*smithy.Schema{&sInvitation_Message, &sInvitation_Receiver, &sInvitation_Payload}}
+var mInvitationProspectingResultAws = smithy.SchemaMembers{List: []*smithy.Schema{&sInvitationProspectingResultAws_Customer, &sInvitationProspectingResultAws_Insights}}
+var mInvitationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sInvitationStatus_ACCEPTED, &sInvitationStatus_PENDING, &sInvitationStatus_REJECTED, &sInvitationStatus_EXPIRED}}
+var m_InvitationStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InvitationStatusList_member}}
+var mInvolvementTypeChangeReason = smithy.SchemaMembers{List: []*smithy.Schema{&sInvolvementTypeChangeReason_EXPANSION_OPPORTUNITY, &sInvolvementTypeChangeReason_CHANGE_IN_DEAL_INFORMATION, &sInvolvementTypeChangeReason_CUSTOMER_REQUESTED, &sInvolvementTypeChangeReason_TECHNICAL_COMPLEXITY, &sInvolvementTypeChangeReason_RISK_MITIGATION}}
+var mLastModifiedDate = smithy.SchemaMembers{List: []*smithy.Schema{&sLastModifiedDate_AfterLastModifiedDate, &sLastModifiedDate_BeforeLastModifiedDate}}
+var mLeadAddress = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadAddress_City, &sLeadAddress_PostalCode, &sLeadAddress_StateOrRegion, &sLeadAddress_CountryCode}}
+var mLeadContact = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadContact_BusinessTitle, &sLeadContact_Email, &sLeadContact_FirstName, &sLeadContact_LastName, &sLeadContact_Phone}}
+var mLeadContext = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadContext_Insights, &sLeadContext_QualificationStatus, &sLeadContext_Customer, &sLeadContext_Interactions}}
+var mLeadCustomer = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadCustomer_Industry, &sLeadCustomer_CompanyName, &sLeadCustomer_WebsiteUrl, &sLeadCustomer_Address, &sLeadCustomer_AwsMaturity, &sLeadCustomer_MarketSegment}}
+var mLeadInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadInsights_LeadReadinessScore}}
+var mLeadInteraction = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadInteraction_SourceType, &sLeadInteraction_SourceId, &sLeadInteraction_SourceName, &sLeadInteraction_Usecase, &sLeadInteraction_InteractionDate, &sLeadInteraction_CustomerAction, &sLeadInteraction_BusinessProblem, &sLeadInteraction_Contact}}
+var m_LeadInteractionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LeadInteractionList_member}}
+var mLeadInvitationCustomer = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadInvitationCustomer_Industry, &sLeadInvitationCustomer_CompanyName, &sLeadInvitationCustomer_WebsiteUrl, &sLeadInvitationCustomer_CountryCode, &sLeadInvitationCustomer_AwsMaturity, &sLeadInvitationCustomer_MarketSegment}}
+var mLeadInvitationInteraction = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadInvitationInteraction_SourceType, &sLeadInvitationInteraction_SourceId, &sLeadInvitationInteraction_SourceName, &sLeadInvitationInteraction_Usecase, &sLeadInvitationInteraction_ContactBusinessTitle}}
+var mLeadInvitationPayload = smithy.SchemaMembers{List: []*smithy.Schema{&sLeadInvitationPayload_Customer, &sLeadInvitationPayload_Interaction}}
+var mLifeCycle = smithy.SchemaMembers{List: []*smithy.Schema{&sLifeCycle_Stage, &sLifeCycle_ClosedLostReason, &sLifeCycle_NextSteps, &sLifeCycle_TargetCloseDate, &sLifeCycle_ReviewStatus, &sLifeCycle_ReviewComments, &sLifeCycle_ReviewStatusReason, &sLifeCycle_NextStepsHistory}}
+var mLifeCycleForView = smithy.SchemaMembers{List: []*smithy.Schema{&sLifeCycleForView_TargetCloseDate, &sLifeCycleForView_ReviewStatus, &sLifeCycleForView_Stage, &sLifeCycleForView_NextSteps}}
+var mLifeCycleSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLifeCycleSummary_Stage, &sLifeCycleSummary_ClosedLostReason, &sLifeCycleSummary_NextSteps, &sLifeCycleSummary_TargetCloseDate, &sLifeCycleSummary_ReviewStatus, &sLifeCycleSummary_ReviewComments, &sLifeCycleSummary_ReviewStatusReason}}
+var m_ListEngagementByAcceptingInvitationTaskSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListEngagementByAcceptingInvitationTaskSummaries_member}}
+var mListEngagementByAcceptingInvitationTaskSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementByAcceptingInvitationTaskSummary_TaskId, &sListEngagementByAcceptingInvitationTaskSummary_TaskArn, &sListEngagementByAcceptingInvitationTaskSummary_StartTime, &sListEngagementByAcceptingInvitationTaskSummary_TaskStatus, &sListEngagementByAcceptingInvitationTaskSummary_Message, &sListEngagementByAcceptingInvitationTaskSummary_ReasonCode, &sListEngagementByAcceptingInvitationTaskSummary_OpportunityId, &sListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId, &sListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 9, 0, 6, 5, 7, 3, 8, 0, 0,
+	0, 0, 0, 0, 0, 0, 1, 2,
+}}
+var m_ListEngagementFromOpportunityTaskSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListEngagementFromOpportunityTaskSummaries_member}}
+var mListEngagementFromOpportunityTaskSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementFromOpportunityTaskSummary_TaskId, &sListEngagementFromOpportunityTaskSummary_TaskArn, &sListEngagementFromOpportunityTaskSummary_StartTime, &sListEngagementFromOpportunityTaskSummary_TaskStatus, &sListEngagementFromOpportunityTaskSummary_Message, &sListEngagementFromOpportunityTaskSummary_ReasonCode, &sListEngagementFromOpportunityTaskSummary_OpportunityId, &sListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId, &sListEngagementFromOpportunityTaskSummary_EngagementId, &sListEngagementFromOpportunityTaskSummary_EngagementInvitationId}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 10, 0, 6, 5, 7, 3, 8, 9, 0,
+	0, 0, 0, 0, 0, 0, 1, 2,
+}}
+var m_ListOpportunityFromEngagementTaskSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListOpportunityFromEngagementTaskSummaries_member}}
+var mListOpportunityFromEngagementTaskSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sListOpportunityFromEngagementTaskSummary_TaskId, &sListOpportunityFromEngagementTaskSummary_TaskArn, &sListOpportunityFromEngagementTaskSummary_StartTime, &sListOpportunityFromEngagementTaskSummary_TaskStatus, &sListOpportunityFromEngagementTaskSummary_Message, &sListOpportunityFromEngagementTaskSummary_ReasonCode, &sListOpportunityFromEngagementTaskSummary_OpportunityId, &sListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId, &sListOpportunityFromEngagementTaskSummary_EngagementId, &sListOpportunityFromEngagementTaskSummary_ContextId}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 6, 5, 7, 3, 8, 9, 0,
+	0, 0, 0, 0, 0, 0, 1, 2,
+}}
+var mListTasksSortBase = smithy.SchemaMembers{List: []*smithy.Schema{&sListTasksSortBase_SortOrder, &sListTasksSortBase_SortBy}}
+var mListTasksSortName = smithy.SchemaMembers{List: []*smithy.Schema{&sListTasksSortName_START_TIME}}
+var mMarketing = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketing_CampaignName, &sMarketing_Source, &sMarketing_UseCases, &sMarketing_Channels, &sMarketing_AwsFundingUsed}}
+var mMarketingSource = smithy.SchemaMembers{List: []*smithy.Schema{&sMarketingSource_MARKETING_ACTIVITY, &sMarketingSource_NONE}}
+var mMonetaryValue = smithy.SchemaMembers{List: []*smithy.Schema{&sMonetaryValue_Amount, &sMonetaryValue_CurrencyCode}}
+var mNationalSecurity = smithy.SchemaMembers{List: []*smithy.Schema{&sNationalSecurity_YES, &sNationalSecurity_NO}}
+var m_NextStepsHistories = smithy.SchemaMembers{List: []*smithy.Schema{&s_NextStepsHistories_member}}
+var mNextStepsHistory = smithy.SchemaMembers{List: []*smithy.Schema{&sNextStepsHistory_Value, &sNextStepsHistory_Time}}
+var mOpportunityEngagementInvitationSort = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunityEngagementInvitationSort_SortOrder, &sOpportunityEngagementInvitationSort_SortBy}}
+var mOpportunityEngagementInvitationSortName = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunityEngagementInvitationSortName_INVITATION_DATE}}
+var m_OpportunityIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_OpportunityIdentifiers_member}}
+var mOpportunityInvitationPayload = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunityInvitationPayload_SenderContacts, &sOpportunityInvitationPayload_ReceiverResponsibilities, &sOpportunityInvitationPayload_Customer, &sOpportunityInvitationPayload_Project}}
+var mOpportunityOrigin = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunityOrigin_AWS_REFERRAL, &sOpportunityOrigin_PARTNER_REFERRAL}}
+var mOpportunityQuality = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunityQuality_Score, &sOpportunityQuality_Trend}}
+var mOpportunitySort = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunitySort_SortOrder, &sOpportunitySort_SortBy}}
+var mOpportunitySortName = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunitySortName_LAST_MODIFIEDDATE, &sOpportunitySortName_IDENTIFIER, &sOpportunitySortName_CUSTOMER_COMPANY_NAME, &sOpportunitySortName_CREATED_DATE, &sOpportunitySortName_TARGET_CLOSE_DATE}}
+var m_OpportunitySummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_OpportunitySummaries_member}}
+var mOpportunitySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunitySummary_Catalog, &sOpportunitySummary_Id, &sOpportunitySummary_Arn, &sOpportunitySummary_PartnerOpportunityIdentifier, &sOpportunitySummary_OpportunityType, &sOpportunitySummary_LastModifiedDate, &sOpportunitySummary_CreatedDate, &sOpportunitySummary_LifeCycle, &sOpportunitySummary_Customer, &sOpportunitySummary_Project}, Seed: 13, Slots: []uint16{
+	9, 0, 0, 10, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 3, 6,
+	0, 2, 8, 0, 4, 0, 0, 5,
+}}
+var mOpportunitySummaryView = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunitySummaryView_OpportunityType, &sOpportunitySummaryView_Lifecycle, &sOpportunitySummaryView_OpportunityTeam, &sOpportunitySummaryView_PrimaryNeedsFromAws, &sOpportunitySummaryView_Customer, &sOpportunitySummaryView_Project, &sOpportunitySummaryView_RelatedEntityIdentifiers}}
+var mOpportunityType = smithy.SchemaMembers{List: []*smithy.Schema{&sOpportunityType_NET_NEW_BUSINESS, &sOpportunityType_FLAT_RENEWAL, &sOpportunityType_EXPANSION}}
+var mParticipantType = smithy.SchemaMembers{List: []*smithy.Schema{&sParticipantType_SENDER, &sParticipantType_RECEIVER}}
+var m_PartnerOpportunityTeamMembersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PartnerOpportunityTeamMembersList_member}}
+var mPayload = smithy.SchemaMembers{List: []*smithy.Schema{&sPayload_OpportunityInvitation, &sPayload_LeadInvitation}}
+var mPaymentFrequency = smithy.SchemaMembers{List: []*smithy.Schema{&sPaymentFrequency_MONTHLY}}
+var mPrimaryNeedFromAws = smithy.SchemaMembers{List: []*smithy.Schema{&sPrimaryNeedFromAws_CO_SELL_ARCHITECTURAL_VALIDATION, &sPrimaryNeedFromAws_CO_SELL_BUSINESS_PRESENTATION, &sPrimaryNeedFromAws_CO_SELL_COMPETITIVE_INFORMATION, &sPrimaryNeedFromAws_CO_SELL_PRICING_ASSISTANCE, &sPrimaryNeedFromAws_CO_SELL_TECHNICAL_CONSULTATION, &sPrimaryNeedFromAws_CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION, &sPrimaryNeedFromAws_CO_SELL_DEAL_SUPPORT, &sPrimaryNeedFromAws_CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX}}
+var m_PrimaryNeedsFromAws = smithy.SchemaMembers{List: []*smithy.Schema{&s_PrimaryNeedsFromAws_member}}
+var m_ProfileNextStepsHistories = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProfileNextStepsHistories_member}}
+var mProfileNextStepsHistory = smithy.SchemaMembers{List: []*smithy.Schema{&sProfileNextStepsHistory_Value, &sProfileNextStepsHistory_Time}}
+var mProject = smithy.SchemaMembers{List: []*smithy.Schema{&sProject_DeliveryModels, &sProject_ExpectedCustomerSpend, &sProject_ExpectedContractDuration, &sProject_Title, &sProject_ApnPrograms, &sProject_CustomerBusinessProblem, &sProject_CustomerUseCase, &sProject_RelatedOpportunityIdentifier, &sProject_SalesActivities, &sProject_CompetitorName, &sProject_OtherCompetitorNames, &sProject_OtherSolutionDescription, &sProject_AdditionalComments, &sProject_AwsPartition}, Seed: 14, Slots: []uint16{
+	3, 12, 14, 0, 0, 0, 0, 0, 0, 6, 0, 0, 13, 10, 2, 0, 0, 9, 0, 5, 0, 11, 0, 4,
+	0, 0, 1, 7, 0, 0, 8, 0,
+}}
+var mProjectDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectDetails_BusinessProblem, &sProjectDetails_Title, &sProjectDetails_TargetCompletionDate, &sProjectDetails_ExpectedCustomerSpend}}
+var mProjectSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectSummary_DeliveryModels, &sProjectSummary_ExpectedCustomerSpend, &sProjectSummary_ExpectedContractDuration}}
+var mProjectView = smithy.SchemaMembers{List: []*smithy.Schema{&sProjectView_DeliveryModels, &sProjectView_ExpectedCustomerSpend, &sProjectView_ExpectedContractDuration, &sProjectView_CustomerUseCase, &sProjectView_SalesActivities, &sProjectView_OtherSolutionDescription}}
+var mProspectingFromEngagementTaskSort = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingFromEngagementTaskSort_SortOrder, &sProspectingFromEngagementTaskSort_SortBy}}
+var mProspectingFromEngagementTaskSortName = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingFromEngagementTaskSortName_StartTime, &sProspectingFromEngagementTaskSortName_TaskName, &sProspectingFromEngagementTaskSortName_FailedEngagementCount}}
+var mProspectingInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingInsights_MarketplaceEngagementScore, &sProspectingInsights_SolutionScore, &sProspectingInsights_SolutionCategory, &sProspectingInsights_SolutionSubCategory}}
+var mProspectingResult = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingResult_Aws}}
+var mProspectingResultAws = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingResultAws_Customer, &sProspectingResultAws_Insights, &sProspectingResultAws_StartTime, &sProspectingResultAws_EndTime, &sProspectingResultAws_TaskId, &sProspectingResultAws_TaskArn, &sProspectingResultAws_TaskName}}
+var mProspectingResultCustomer = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingResultCustomer_AccountName, &sProspectingResultCustomer_Geo, &sProspectingResultCustomer_Region, &sProspectingResultCustomer_SubRegion, &sProspectingResultCustomer_Country, &sProspectingResultCustomer_Industry, &sProspectingResultCustomer_SubIndustry, &sProspectingResultCustomer_Segment, &sProspectingResultCustomer_CompanySize, &sProspectingResultCustomer_EligiblePrograms, &sProspectingResultCustomer_PublicProfileSummary}, Seed: 3, Slots: []uint16{
+	0, 0, 9, 0, 0, 6, 3, 0, 0, 0, 0, 0, 10, 2, 0, 0, 0, 0, 0, 0, 0, 7, 5, 4,
+	0, 0, 8, 0, 0, 11, 0, 1,
+}}
+var mProspectingTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingTaskStatus_PENDING, &sProspectingTaskStatus_IN_PROGRESS, &sProspectingTaskStatus_COMPLETED, &sProspectingTaskStatus_FAILED}}
+var mProspectingTaskSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sProspectingTaskSummary_TaskId, &sProspectingTaskSummary_TaskArn, &sProspectingTaskSummary_TaskName, &sProspectingTaskSummary_StartTime, &sProspectingTaskSummary_EndTime, &sProspectingTaskSummary_TotalEngagementCount, &sProspectingTaskSummary_CompletedEngagementCount, &sProspectingTaskSummary_FailedEngagementCount}}
+var m_ProspectingTaskSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProspectingTaskSummaryList_member}}
+var mReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sReasonCode_INVITATION_ACCESS_DENIED, &sReasonCode_INVITATION_VALIDATION_FAILED, &sReasonCode_ENGAGEMENT_ACCESS_DENIED, &sReasonCode_OPPORTUNITY_ACCESS_DENIED, &sReasonCode_RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED, &sReasonCode_RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED, &sReasonCode_RESOURCE_SNAPSHOT_JOB_CONFLICT, &sReasonCode_ENGAGEMENT_VALIDATION_FAILED, &sReasonCode_ENGAGEMENT_CONFLICT, &sReasonCode_OPPORTUNITY_SUBMISSION_FAILED, &sReasonCode_ENGAGEMENT_INVITATION_CONFLICT, &sReasonCode_INTERNAL_ERROR, &sReasonCode_OPPORTUNITY_VALIDATION_FAILED, &sReasonCode_OPPORTUNITY_CONFLICT, &sReasonCode_RESOURCE_SNAPSHOT_ACCESS_DENIED, &sReasonCode_RESOURCE_SNAPSHOT_VALIDATION_FAILED, &sReasonCode_RESOURCE_SNAPSHOT_CONFLICT, &sReasonCode_SERVICE_QUOTA_EXCEEDED, &sReasonCode_REQUEST_THROTTLED, &sReasonCode_CONTEXT_NOT_FOUND, &sReasonCode_CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED, &sReasonCode_DISQUALIFIED_LEAD_NOT_PERMITTED}, Seed: 5, Slots: []uint16{
+	22, 0, 0, 0, 0, 19, 0, 17, 0, 0, 0, 0, 0, 18, 0, 5, 6, 4, 0, 0, 0, 11, 12, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 21, 0, 13, 0, 7, 3, 0, 20, 0, 0, 16,
+	8, 0, 0, 0, 9, 2, 0, 14, 0, 0, 0, 0, 0, 15, 0, 0,
+}}
+var mReceiver = smithy.SchemaMembers{List: []*smithy.Schema{&sReceiver_Account}}
+var mReceiverResponsibility = smithy.SchemaMembers{List: []*smithy.Schema{&sReceiverResponsibility_DISTRIBUTOR, &sReceiverResponsibility_RESELLER, &sReceiverResponsibility_HARDWARE_PARTNER, &sReceiverResponsibility_MANAGED_SERVICE_PROVIDER, &sReceiverResponsibility_SOFTWARE_PARTNER, &sReceiverResponsibility_SERVICES_PARTNER, &sReceiverResponsibility_TRAINING_PARTNER, &sReceiverResponsibility_CO_SELL_FACILITATOR, &sReceiverResponsibility_FACILITATOR}, Seed: 16, Slots: []uint16{
+	0, 0, 4, 0, 5, 0, 0, 0, 2, 0, 0, 0, 6, 0, 9, 7, 0, 1, 8, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 3, 0, 0, 0,
+}}
+var m_ReceiverResponsibilityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ReceiverResponsibilityList_member}}
+var mRecommendation = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendation_Type, &sRecommendation_Details, &sRecommendation_Attributes}}
+var m_RecommendationAttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendationAttributeMap_key, &s_RecommendationAttributeMap_value}}
+var m_RecommendationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendationList_member}}
+var mRelatedEntityIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedEntityIdentifiers_AwsMarketplaceOffers, &sRelatedEntityIdentifiers_AwsMarketplaceOfferSets, &sRelatedEntityIdentifiers_Solutions, &sRelatedEntityIdentifiers_AwsProducts, &sRelatedEntityIdentifiers_AwsMarketplaceSolutions, &sRelatedEntityIdentifiers_AwsMarketplaceProducts}}
+var mRelatedEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sRelatedEntityType_SOLUTIONS, &sRelatedEntityType_AWS_PRODUCTS, &sRelatedEntityType_AWS_MARKETPLACE_OFFERS, &sRelatedEntityType_AWS_MARKETPLACE_OFFER_SETS, &sRelatedEntityType_AWS_MARKETPLACE_SOLUTIONS, &sRelatedEntityType_AWS_MARKETPLACE_PRODUCTS}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceSnapshotJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSnapshotJobStatus_RUNNING, &sResourceSnapshotJobStatus_STOPPED}}
+var mResourceSnapshotJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSnapshotJobSummary_Id, &sResourceSnapshotJobSummary_Arn, &sResourceSnapshotJobSummary_EngagementId, &sResourceSnapshotJobSummary_Status}}
+var m_ResourceSnapshotJobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSnapshotJobSummaryList_member}}
+var mResourceSnapshotPayload = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSnapshotPayload_OpportunitySummary, &sResourceSnapshotPayload_AwsOpportunitySummaryFullView}}
+var mResourceSnapshotSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSnapshotSummary_Arn, &sResourceSnapshotSummary_Revision, &sResourceSnapshotSummary_ResourceType, &sResourceSnapshotSummary_ResourceId, &sResourceSnapshotSummary_ResourceSnapshotTemplateName, &sResourceSnapshotSummary_CreatedBy}}
+var m_ResourceSnapshotSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSnapshotSummaryList_member}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_OPPORTUNITY}}
+var mRevenueModel = smithy.SchemaMembers{List: []*smithy.Schema{&sRevenueModel_CONTRACT, &sRevenueModel_PAY_AS_YOU_GO, &sRevenueModel_SUBSCRIPTION}}
+var mReviewStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sReviewStatus_PENDING_SUBMISSION, &sReviewStatus_SUBMITTED, &sReviewStatus_IN_REVIEW, &sReviewStatus_APPROVED, &sReviewStatus_REJECTED, &sReviewStatus_ACTION_REQUIRED}}
+var m_SalesActivities = smithy.SchemaMembers{List: []*smithy.Schema{&s_SalesActivities_member}}
+var mSalesActivity = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesActivity_INITIALIZED_DISCUSSIONS_WITH_CUSTOMER, &sSalesActivity_CUSTOMER_HAS_SHOWN_INTEREST, &sSalesActivity_CONDUCTED_POC_DEMO, &sSalesActivity_IN_EVALUATION_PLANNING_STAGE, &sSalesActivity_AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM, &sSalesActivity_COMPLETED_ACTION_PLAN, &sSalesActivity_FINALIZED_DEPLOYMENT_NEEDS, &sSalesActivity_SOW_SIGNED}}
+var mSalesInvolvementType = smithy.SchemaMembers{List: []*smithy.Schema{&sSalesInvolvementType_FOR_VISIBILITY_ONLY, &sSalesInvolvementType_CO_SELL}}
+var mSenderContact = smithy.SchemaMembers{List: []*smithy.Schema{&sSenderContact_Email, &sSenderContact_FirstName, &sSenderContact_LastName, &sSenderContact_BusinessTitle, &sSenderContact_Phone}}
+var m_SenderContactList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SenderContactList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSoftwareRevenue = smithy.SchemaMembers{List: []*smithy.Schema{&sSoftwareRevenue_DeliveryModel, &sSoftwareRevenue_Value, &sSoftwareRevenue_EffectiveDate, &sSoftwareRevenue_ExpirationDate}}
+var mSolutionBase = smithy.SchemaMembers{List: []*smithy.Schema{&sSolutionBase_Catalog, &sSolutionBase_Id, &sSolutionBase_Arn, &sSolutionBase_Name, &sSolutionBase_Status, &sSolutionBase_Category, &sSolutionBase_CreatedDate, &sSolutionBase_AwsMarketplaceSolutionArn}}
+var m_SolutionIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_SolutionIdentifiers_member}}
+var m_SolutionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SolutionList_member}}
+var mSolutionSort = smithy.SchemaMembers{List: []*smithy.Schema{&sSolutionSort_SortOrder, &sSolutionSort_SortBy}}
+var mSolutionSortName = smithy.SchemaMembers{List: []*smithy.Schema{&sSolutionSortName_IDENTIFIER, &sSolutionSortName_NAME, &sSolutionSortName_STATUS, &sSolutionSortName_CATEGORY, &sSolutionSortName_CREATEDDATE}}
+var mSolutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sSolutionStatus_ACTIVE, &sSolutionStatus_INACTIVE, &sSolutionStatus_DRAFT}}
+var mSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSortBy_CREATED_DATE}}
+var mSortObject = smithy.SchemaMembers{List: []*smithy.Schema{&sSortObject_SortBy, &sSortObject_SortOrder}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASCENDING, &sSortOrder_DESCENDING}}
+var mStage = smithy.SchemaMembers{List: []*smithy.Schema{&sStage_PROSPECT, &sStage_QUALIFIED, &sStage_TECHNICAL_VALIDATION, &sStage_BUSINESS_VALIDATION, &sStage_COMMITTED, &sStage_LAUNCHED, &sStage_CLOSED_LOST}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTargetCloseDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sTargetCloseDateFilter_AfterTargetCloseDate, &sTargetCloseDateFilter_BeforeTargetCloseDate}}
+var m_TaskIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskIdentifierList_member}}
+var m_TaskIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskIdentifiers_member}}
+var m_TaskNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskNameList_member}}
+var mTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskStatus_IN_PROGRESS, &sTaskStatus_COMPLETE, &sTaskStatus_FAILED}}
+var m_TaskStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskStatuses_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mUpdateEngagementContextPayload = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEngagementContextPayload_Lead, &sUpdateEngagementContextPayload_CustomerProject, &sUpdateEngagementContextPayload_ProspectingResult}}
+var mUpdateLeadContext = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLeadContext_QualificationStatus, &sUpdateLeadContext_Customer, &sUpdateLeadContext_Interaction, &sUpdateLeadContext_Insights}}
+var m_UseCases = smithy.SchemaMembers{List: []*smithy.Schema{&s_UseCases_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_Reason, &sValidationException_ErrorList}}
+var mValidationExceptionError = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionError_FieldName, &sValidationExceptionError_Message, &sValidationExceptionError_Code}}
+var mValidationExceptionErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionErrorCode_REQUIRED_FIELD_MISSING, &sValidationExceptionErrorCode_INVALID_ENUM_VALUE, &sValidationExceptionErrorCode_INVALID_STRING_FORMAT, &sValidationExceptionErrorCode_INVALID_VALUE, &sValidationExceptionErrorCode_NOT_ENOUGH_VALUES, &sValidationExceptionErrorCode_TOO_MANY_VALUES, &sValidationExceptionErrorCode_INVALID_RESOURCE_STATE, &sValidationExceptionErrorCode_DUPLICATE_KEY_VALUE, &sValidationExceptionErrorCode_VALUE_OUT_OF_RANGE, &sValidationExceptionErrorCode_ACTION_NOT_PERMITTED}, Seed: 3, Slots: []uint16{
+	2, 8, 0, 3, 0, 0, 0, 6, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 5, 10,
+	0, 0, 9, 0, 0, 7, 0, 0,
+}}
+var m_ValidationExceptionErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionErrorList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_REQUEST_VALIDATION_FAILED, &sValidationExceptionReason_BUSINESS_VALIDATION_FAILED}}
+var mVisibility = smithy.SchemaMembers{List: []*smithy.Schema{&sVisibility_FULL, &sVisibility_LIMITED}}
+var mAcceptEngagementInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptEngagementInvitationRequest_Catalog, &sAcceptEngagementInvitationRequest_Identifier}}
+var mAssignOpportunityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssignOpportunityRequest_Catalog, &sAssignOpportunityRequest_Identifier, &sAssignOpportunityRequest_Assignee}}
+var mAssociateOpportunityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateOpportunityRequest_Catalog, &sAssociateOpportunityRequest_OpportunityIdentifier, &sAssociateOpportunityRequest_RelatedEntityType, &sAssociateOpportunityRequest_RelatedEntityIdentifier}}
+var mCreateEngagementContextRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEngagementContextRequest_Catalog, &sCreateEngagementContextRequest_EngagementIdentifier, &sCreateEngagementContextRequest_ClientToken, &sCreateEngagementContextRequest_Type, &sCreateEngagementContextRequest_Payload}}
+var mCreateEngagementContextResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEngagementContextResponse_EngagementId, &sCreateEngagementContextResponse_EngagementArn, &sCreateEngagementContextResponse_EngagementLastModifiedAt, &sCreateEngagementContextResponse_ContextId}}
+var mCreateEngagementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEngagementRequest_Catalog, &sCreateEngagementRequest_ClientToken, &sCreateEngagementRequest_Title, &sCreateEngagementRequest_Description, &sCreateEngagementRequest_Contexts}}
+var mCreateEngagementInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEngagementInvitationRequest_Catalog, &sCreateEngagementInvitationRequest_ClientToken, &sCreateEngagementInvitationRequest_EngagementIdentifier, &sCreateEngagementInvitationRequest_Invitation}}
+var mCreateEngagementInvitationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEngagementInvitationResponse_Id, &sCreateEngagementInvitationResponse_Arn}}
+var mCreateEngagementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEngagementResponse_Id, &sCreateEngagementResponse_Arn, &sCreateEngagementResponse_ModifiedAt}}
+var mCreateOpportunityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOpportunityRequest_Catalog, &sCreateOpportunityRequest_PrimaryNeedsFromAws, &sCreateOpportunityRequest_NationalSecurity, &sCreateOpportunityRequest_PartnerOpportunityIdentifier, &sCreateOpportunityRequest_Customer, &sCreateOpportunityRequest_Project, &sCreateOpportunityRequest_OpportunityType, &sCreateOpportunityRequest_Marketing, &sCreateOpportunityRequest_SoftwareRevenue, &sCreateOpportunityRequest_ClientToken, &sCreateOpportunityRequest_LifeCycle, &sCreateOpportunityRequest_Origin, &sCreateOpportunityRequest_OpportunityTeam, &sCreateOpportunityRequest_Tags}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 4, 0, 1, 0, 0, 0, 12, 9, 0, 0, 0, 2, 0, 14, 0, 0, 10, 0, 0, 6, 0,
+	3, 7, 11, 5, 13, 8, 0, 0,
+}}
+var mCreateOpportunityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOpportunityResponse_Id, &sCreateOpportunityResponse_PartnerOpportunityIdentifier, &sCreateOpportunityResponse_LastModifiedDate}}
+var mCreateResourceSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceSnapshotRequest_Catalog, &sCreateResourceSnapshotRequest_EngagementIdentifier, &sCreateResourceSnapshotRequest_ResourceType, &sCreateResourceSnapshotRequest_ResourceIdentifier, &sCreateResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier, &sCreateResourceSnapshotRequest_ClientToken}}
+var mCreateResourceSnapshotJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceSnapshotJobRequest_Catalog, &sCreateResourceSnapshotJobRequest_ClientToken, &sCreateResourceSnapshotJobRequest_EngagementIdentifier, &sCreateResourceSnapshotJobRequest_ResourceType, &sCreateResourceSnapshotJobRequest_ResourceIdentifier, &sCreateResourceSnapshotJobRequest_ResourceSnapshotTemplateIdentifier, &sCreateResourceSnapshotJobRequest_Tags}}
+var mCreateResourceSnapshotJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceSnapshotJobResponse_Id, &sCreateResourceSnapshotJobResponse_Arn}}
+var mCreateResourceSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceSnapshotResponse_Arn, &sCreateResourceSnapshotResponse_Revision}}
+var mDeleteResourceSnapshotJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceSnapshotJobRequest_Catalog, &sDeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier}}
+var mDisassociateOpportunityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateOpportunityRequest_Catalog, &sDisassociateOpportunityRequest_OpportunityIdentifier, &sDisassociateOpportunityRequest_RelatedEntityType, &sDisassociateOpportunityRequest_RelatedEntityIdentifier}}
+var mGetAwsOpportunitySummaryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAwsOpportunitySummaryRequest_Catalog, &sGetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier}}
+var mGetAwsOpportunitySummaryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAwsOpportunitySummaryResponse_RelatedOpportunityId, &sGetAwsOpportunitySummaryResponse_Origin, &sGetAwsOpportunitySummaryResponse_InvolvementType, &sGetAwsOpportunitySummaryResponse_Visibility, &sGetAwsOpportunitySummaryResponse_LifeCycle, &sGetAwsOpportunitySummaryResponse_OpportunityTeam, &sGetAwsOpportunitySummaryResponse_Insights, &sGetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason, &sGetAwsOpportunitySummaryResponse_RelatedEntityIds, &sGetAwsOpportunitySummaryResponse_Customer, &sGetAwsOpportunitySummaryResponse_Project, &sGetAwsOpportunitySummaryResponse_CosellMotion, &sGetAwsOpportunitySummaryResponse_SoftwareRevenue, &sGetAwsOpportunitySummaryResponse_Catalog}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 2, 4, 8, 0, 0, 0, 1, 0, 0, 13, 10, 9, 0, 3, 0, 11,
+	0, 12, 5, 14, 0, 0, 6, 7,
+}}
+var mGetEngagementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEngagementRequest_Catalog, &sGetEngagementRequest_Identifier}}
+var mGetEngagementInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEngagementInvitationRequest_Catalog, &sGetEngagementInvitationRequest_Identifier}}
+var mGetEngagementInvitationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEngagementInvitationResponse_Arn, &sGetEngagementInvitationResponse_PayloadType, &sGetEngagementInvitationResponse_Id, &sGetEngagementInvitationResponse_EngagementId, &sGetEngagementInvitationResponse_EngagementTitle, &sGetEngagementInvitationResponse_Status, &sGetEngagementInvitationResponse_InvitationDate, &sGetEngagementInvitationResponse_ExpirationDate, &sGetEngagementInvitationResponse_SenderAwsAccountId, &sGetEngagementInvitationResponse_SenderCompanyName, &sGetEngagementInvitationResponse_Receiver, &sGetEngagementInvitationResponse_Catalog, &sGetEngagementInvitationResponse_RejectionReason, &sGetEngagementInvitationResponse_Payload, &sGetEngagementInvitationResponse_InvitationMessage, &sGetEngagementInvitationResponse_EngagementDescription, &sGetEngagementInvitationResponse_ExistingMembers, &sGetEngagementInvitationResponse_EnrichmentContext}, Seed: 41, Slots: []uint16{
+	0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 10, 18, 0, 0, 4, 17, 0, 0,
+	12, 7, 0, 0, 0, 0, 0, 11, 0, 0, 16, 0, 1, 9, 8, 13, 0, 0, 0, 0, 6, 0, 0, 5,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3,
+}}
+var mGetEngagementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEngagementResponse_Id, &sGetEngagementResponse_Arn, &sGetEngagementResponse_Title, &sGetEngagementResponse_Description, &sGetEngagementResponse_CreatedAt, &sGetEngagementResponse_CreatedBy, &sGetEngagementResponse_MemberCount, &sGetEngagementResponse_ModifiedAt, &sGetEngagementResponse_ModifiedBy, &sGetEngagementResponse_Contexts}, Seed: 4, Slots: []uint16{
+	0, 7, 10, 1, 0, 9, 0, 0, 0, 0, 8, 3, 5, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 6, 4,
+}}
+var mGetOpportunityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOpportunityRequest_Catalog, &sGetOpportunityRequest_Identifier}}
+var mGetOpportunityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOpportunityResponse_Catalog, &sGetOpportunityResponse_PrimaryNeedsFromAws, &sGetOpportunityResponse_NationalSecurity, &sGetOpportunityResponse_PartnerOpportunityIdentifier, &sGetOpportunityResponse_Customer, &sGetOpportunityResponse_Project, &sGetOpportunityResponse_OpportunityType, &sGetOpportunityResponse_Marketing, &sGetOpportunityResponse_SoftwareRevenue, &sGetOpportunityResponse_Id, &sGetOpportunityResponse_Arn, &sGetOpportunityResponse_LastModifiedDate, &sGetOpportunityResponse_CreatedDate, &sGetOpportunityResponse_RelatedEntityIdentifiers, &sGetOpportunityResponse_LifeCycle, &sGetOpportunityResponse_OpportunityTeam}, Seed: 127, Slots: []uint16{
+	3, 0, 0, 0, 8, 14, 4, 0, 0, 0, 12, 0, 15, 11, 0, 0, 6, 2, 0, 0, 13, 5, 10, 1,
+	0, 0, 7, 9, 0, 16, 0, 0,
+}}
+var mGetProspectingFromEngagementTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProspectingFromEngagementTaskRequest_Catalog, &sGetProspectingFromEngagementTaskRequest_TaskIdentifier}}
+var mGetProspectingFromEngagementTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetProspectingFromEngagementTaskResponse_TaskId, &sGetProspectingFromEngagementTaskResponse_TaskArn, &sGetProspectingFromEngagementTaskResponse_TaskName, &sGetProspectingFromEngagementTaskResponse_StartTime, &sGetProspectingFromEngagementTaskResponse_EndTime, &sGetProspectingFromEngagementTaskResponse_Engagements}}
+var mGetResourceSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSnapshotRequest_Catalog, &sGetResourceSnapshotRequest_EngagementIdentifier, &sGetResourceSnapshotRequest_ResourceType, &sGetResourceSnapshotRequest_ResourceIdentifier, &sGetResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier, &sGetResourceSnapshotRequest_Revision}}
+var mGetResourceSnapshotJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSnapshotJobRequest_Catalog, &sGetResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier}}
+var mGetResourceSnapshotJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSnapshotJobResponse_Catalog, &sGetResourceSnapshotJobResponse_Id, &sGetResourceSnapshotJobResponse_Arn, &sGetResourceSnapshotJobResponse_EngagementId, &sGetResourceSnapshotJobResponse_ResourceType, &sGetResourceSnapshotJobResponse_ResourceId, &sGetResourceSnapshotJobResponse_ResourceArn, &sGetResourceSnapshotJobResponse_ResourceSnapshotTemplateName, &sGetResourceSnapshotJobResponse_CreatedAt, &sGetResourceSnapshotJobResponse_Status, &sGetResourceSnapshotJobResponse_LastSuccessfulExecutionDate, &sGetResourceSnapshotJobResponse_LastFailure}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 5, 0, 0, 0, 0, 0, 12, 9, 0, 0, 4, 10, 7, 0, 3, 0, 2, 0, 0, 8, 11,
+	0, 0, 0, 1, 0, 0, 6, 0,
+}}
+var mGetResourceSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceSnapshotResponse_Catalog, &sGetResourceSnapshotResponse_Arn, &sGetResourceSnapshotResponse_CreatedBy, &sGetResourceSnapshotResponse_CreatedAt, &sGetResourceSnapshotResponse_EngagementId, &sGetResourceSnapshotResponse_ResourceType, &sGetResourceSnapshotResponse_ResourceId, &sGetResourceSnapshotResponse_ResourceSnapshotTemplateName, &sGetResourceSnapshotResponse_Revision, &sGetResourceSnapshotResponse_Payload, &sGetResourceSnapshotResponse_TargetMemberAccounts}, Seed: 10, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 7, 3, 0, 0, 0, 5, 8, 1, 0, 6, 0, 0, 2, 0, 10, 11, 0,
+	0, 0, 0, 0, 0, 0, 0, 4,
+}}
+var mGetSellingSystemSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSellingSystemSettingsRequest_Catalog}}
+var mGetSellingSystemSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSellingSystemSettingsResponse_Catalog, &sGetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn}}
+var mListEngagementByAcceptingInvitationTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementByAcceptingInvitationTasksRequest_MaxResults, &sListEngagementByAcceptingInvitationTasksRequest_NextToken, &sListEngagementByAcceptingInvitationTasksRequest_Sort, &sListEngagementByAcceptingInvitationTasksRequest_Catalog, &sListEngagementByAcceptingInvitationTasksRequest_TaskStatus, &sListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier, &sListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier, &sListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier}}
+var mListEngagementByAcceptingInvitationTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementByAcceptingInvitationTasksResponse_TaskSummaries, &sListEngagementByAcceptingInvitationTasksResponse_NextToken}}
+var mListEngagementFromOpportunityTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementFromOpportunityTasksRequest_MaxResults, &sListEngagementFromOpportunityTasksRequest_NextToken, &sListEngagementFromOpportunityTasksRequest_Sort, &sListEngagementFromOpportunityTasksRequest_Catalog, &sListEngagementFromOpportunityTasksRequest_TaskStatus, &sListEngagementFromOpportunityTasksRequest_TaskIdentifier, &sListEngagementFromOpportunityTasksRequest_OpportunityIdentifier, &sListEngagementFromOpportunityTasksRequest_EngagementIdentifier}}
+var mListEngagementFromOpportunityTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementFromOpportunityTasksResponse_TaskSummaries, &sListEngagementFromOpportunityTasksResponse_NextToken}}
+var mListEngagementInvitationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementInvitationsRequest_Catalog, &sListEngagementInvitationsRequest_MaxResults, &sListEngagementInvitationsRequest_NextToken, &sListEngagementInvitationsRequest_Sort, &sListEngagementInvitationsRequest_PayloadType, &sListEngagementInvitationsRequest_ParticipantType, &sListEngagementInvitationsRequest_Status, &sListEngagementInvitationsRequest_EngagementIdentifier, &sListEngagementInvitationsRequest_SenderAwsAccountId}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 0, 7, 1, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 8, 5, 0, 4, 0, 0, 0, 0,
+	2, 0, 9, 3, 0, 0, 0, 0,
+}}
+var mListEngagementInvitationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementInvitationsResponse_EngagementInvitationSummaries, &sListEngagementInvitationsResponse_NextToken}}
+var mListEngagementMembersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementMembersRequest_Catalog, &sListEngagementMembersRequest_Identifier, &sListEngagementMembersRequest_MaxResults, &sListEngagementMembersRequest_NextToken}}
+var mListEngagementMembersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementMembersResponse_EngagementMemberList, &sListEngagementMembersResponse_NextToken}}
+var mListEngagementResourceAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementResourceAssociationsRequest_Catalog, &sListEngagementResourceAssociationsRequest_MaxResults, &sListEngagementResourceAssociationsRequest_NextToken, &sListEngagementResourceAssociationsRequest_EngagementIdentifier, &sListEngagementResourceAssociationsRequest_ResourceType, &sListEngagementResourceAssociationsRequest_ResourceIdentifier, &sListEngagementResourceAssociationsRequest_CreatedBy}}
+var mListEngagementResourceAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries, &sListEngagementResourceAssociationsResponse_NextToken}}
+var mListEngagementsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementsRequest_Catalog, &sListEngagementsRequest_CreatedBy, &sListEngagementsRequest_ExcludeCreatedBy, &sListEngagementsRequest_ContextTypes, &sListEngagementsRequest_ExcludeContextTypes, &sListEngagementsRequest_Sort, &sListEngagementsRequest_MaxResults, &sListEngagementsRequest_NextToken, &sListEngagementsRequest_EngagementIdentifier}, Seed: 3, Slots: []uint16{
+	0, 4, 0, 0, 0, 1, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 9, 0, 0, 6, 0, 0, 5, 0,
+	7, 0, 3, 8, 0, 0, 0, 0,
+}}
+var mListEngagementsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEngagementsResponse_EngagementSummaryList, &sListEngagementsResponse_NextToken}}
+var mListOpportunitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOpportunitiesRequest_Catalog, &sListOpportunitiesRequest_MaxResults, &sListOpportunitiesRequest_NextToken, &sListOpportunitiesRequest_Sort, &sListOpportunitiesRequest_LastModifiedDate, &sListOpportunitiesRequest_Identifier, &sListOpportunitiesRequest_LifeCycleStage, &sListOpportunitiesRequest_LifeCycleReviewStatus, &sListOpportunitiesRequest_CustomerCompanyName, &sListOpportunitiesRequest_CreatedDate, &sListOpportunitiesRequest_TargetCloseDate}, Seed: 19, Slots: []uint16{
+	0, 0, 0, 10, 2, 9, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 6, 11, 0, 1, 0, 7, 0, 0,
+	3, 0, 5, 0, 0, 4, 0, 0,
+}}
+var mListOpportunitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOpportunitiesResponse_OpportunitySummaries, &sListOpportunitiesResponse_NextToken}}
+var mListOpportunityFromEngagementTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOpportunityFromEngagementTasksRequest_MaxResults, &sListOpportunityFromEngagementTasksRequest_NextToken, &sListOpportunityFromEngagementTasksRequest_Sort, &sListOpportunityFromEngagementTasksRequest_Catalog, &sListOpportunityFromEngagementTasksRequest_TaskStatus, &sListOpportunityFromEngagementTasksRequest_TaskIdentifier, &sListOpportunityFromEngagementTasksRequest_OpportunityIdentifier, &sListOpportunityFromEngagementTasksRequest_EngagementIdentifier, &sListOpportunityFromEngagementTasksRequest_ContextIdentifier}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 2, 6, 0, 0, 4, 0, 5, 0, 0, 0, 3, 0, 7, 0, 0, 8, 0, 0, 0,
+	0, 1, 0, 0, 0, 9, 0, 0,
+}}
+var mListOpportunityFromEngagementTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOpportunityFromEngagementTasksResponse_TaskSummaries, &sListOpportunityFromEngagementTasksResponse_NextToken}}
+var mListProspectingFromEngagementTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListProspectingFromEngagementTasksRequest_Catalog, &sListProspectingFromEngagementTasksRequest_MaxResults, &sListProspectingFromEngagementTasksRequest_NextToken, &sListProspectingFromEngagementTasksRequest_TaskIdentifier, &sListProspectingFromEngagementTasksRequest_TaskName, &sListProspectingFromEngagementTasksRequest_StartAfter, &sListProspectingFromEngagementTasksRequest_StartBefore, &sListProspectingFromEngagementTasksRequest_Sort}}
+var mListProspectingFromEngagementTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListProspectingFromEngagementTasksResponse_NextToken, &sListProspectingFromEngagementTasksResponse_TaskSummaries}}
+var mListResourceSnapshotJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSnapshotJobsRequest_Catalog, &sListResourceSnapshotJobsRequest_MaxResults, &sListResourceSnapshotJobsRequest_NextToken, &sListResourceSnapshotJobsRequest_EngagementIdentifier, &sListResourceSnapshotJobsRequest_Status, &sListResourceSnapshotJobsRequest_Sort}}
+var mListResourceSnapshotJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries, &sListResourceSnapshotJobsResponse_NextToken}}
+var mListResourceSnapshotsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSnapshotsRequest_Catalog, &sListResourceSnapshotsRequest_MaxResults, &sListResourceSnapshotsRequest_NextToken, &sListResourceSnapshotsRequest_EngagementIdentifier, &sListResourceSnapshotsRequest_ResourceType, &sListResourceSnapshotsRequest_ResourceIdentifier, &sListResourceSnapshotsRequest_ResourceSnapshotTemplateIdentifier, &sListResourceSnapshotsRequest_CreatedBy}}
+var mListResourceSnapshotsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceSnapshotsResponse_ResourceSnapshotSummaries, &sListResourceSnapshotsResponse_NextToken}}
+var mListSolutionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSolutionsRequest_Catalog, &sListSolutionsRequest_MaxResults, &sListSolutionsRequest_NextToken, &sListSolutionsRequest_Sort, &sListSolutionsRequest_Status, &sListSolutionsRequest_Identifier, &sListSolutionsRequest_Category, &sListSolutionsRequest_AwsMarketplaceSolutionArn}}
+var mListSolutionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSolutionsResponse_SolutionSummaries, &sListSolutionsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutSellingSystemSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSellingSystemSettingsRequest_Catalog, &sPutSellingSystemSettingsRequest_ResourceSnapshotJobRoleIdentifier}}
+var mPutSellingSystemSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSellingSystemSettingsResponse_Catalog, &sPutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn}}
+var mRejectEngagementInvitationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectEngagementInvitationRequest_Catalog, &sRejectEngagementInvitationRequest_Identifier, &sRejectEngagementInvitationRequest_RejectionReason}}
+var mStartEngagementByAcceptingInvitationTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEngagementByAcceptingInvitationTaskRequest_Catalog, &sStartEngagementByAcceptingInvitationTaskRequest_ClientToken, &sStartEngagementByAcceptingInvitationTaskRequest_Identifier, &sStartEngagementByAcceptingInvitationTaskRequest_Tags}}
+var mStartEngagementByAcceptingInvitationTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEngagementByAcceptingInvitationTaskResponse_TaskId, &sStartEngagementByAcceptingInvitationTaskResponse_TaskArn, &sStartEngagementByAcceptingInvitationTaskResponse_StartTime, &sStartEngagementByAcceptingInvitationTaskResponse_TaskStatus, &sStartEngagementByAcceptingInvitationTaskResponse_Message, &sStartEngagementByAcceptingInvitationTaskResponse_ReasonCode, &sStartEngagementByAcceptingInvitationTaskResponse_OpportunityId, &sStartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId, &sStartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 9, 0, 6, 5, 7, 3, 8, 0, 0,
+	0, 0, 0, 0, 0, 0, 1, 2,
+}}
+var mStartEngagementFromOpportunityTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEngagementFromOpportunityTaskRequest_Catalog, &sStartEngagementFromOpportunityTaskRequest_ClientToken, &sStartEngagementFromOpportunityTaskRequest_Identifier, &sStartEngagementFromOpportunityTaskRequest_AwsSubmission, &sStartEngagementFromOpportunityTaskRequest_Tags}}
+var mStartEngagementFromOpportunityTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEngagementFromOpportunityTaskResponse_TaskId, &sStartEngagementFromOpportunityTaskResponse_TaskArn, &sStartEngagementFromOpportunityTaskResponse_StartTime, &sStartEngagementFromOpportunityTaskResponse_TaskStatus, &sStartEngagementFromOpportunityTaskResponse_Message, &sStartEngagementFromOpportunityTaskResponse_ReasonCode, &sStartEngagementFromOpportunityTaskResponse_OpportunityId, &sStartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId, &sStartEngagementFromOpportunityTaskResponse_EngagementId, &sStartEngagementFromOpportunityTaskResponse_EngagementInvitationId}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 10, 0, 6, 5, 7, 3, 8, 9, 0,
+	0, 0, 0, 0, 0, 0, 1, 2,
+}}
+var mStartOpportunityFromEngagementTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartOpportunityFromEngagementTaskRequest_Catalog, &sStartOpportunityFromEngagementTaskRequest_ClientToken, &sStartOpportunityFromEngagementTaskRequest_Identifier, &sStartOpportunityFromEngagementTaskRequest_ContextIdentifier, &sStartOpportunityFromEngagementTaskRequest_Tags}}
+var mStartOpportunityFromEngagementTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartOpportunityFromEngagementTaskResponse_TaskId, &sStartOpportunityFromEngagementTaskResponse_TaskArn, &sStartOpportunityFromEngagementTaskResponse_StartTime, &sStartOpportunityFromEngagementTaskResponse_TaskStatus, &sStartOpportunityFromEngagementTaskResponse_Message, &sStartOpportunityFromEngagementTaskResponse_ReasonCode, &sStartOpportunityFromEngagementTaskResponse_OpportunityId, &sStartOpportunityFromEngagementTaskResponse_ResourceSnapshotJobId, &sStartOpportunityFromEngagementTaskResponse_EngagementId, &sStartOpportunityFromEngagementTaskResponse_ContextId}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 4, 0, 0, 0, 0, 0, 6, 5, 7, 3, 8, 9, 0,
+	0, 0, 0, 0, 0, 0, 1, 2,
+}}
+var mStartProspectingFromEngagementTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartProspectingFromEngagementTaskRequest_Catalog, &sStartProspectingFromEngagementTaskRequest_Identifiers, &sStartProspectingFromEngagementTaskRequest_TaskName, &sStartProspectingFromEngagementTaskRequest_ClientToken}}
+var mStartProspectingFromEngagementTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartProspectingFromEngagementTaskResponse_Identifiers, &sStartProspectingFromEngagementTaskResponse_TaskName, &sStartProspectingFromEngagementTaskResponse_Message, &sStartProspectingFromEngagementTaskResponse_ReasonCode, &sStartProspectingFromEngagementTaskResponse_StartTime, &sStartProspectingFromEngagementTaskResponse_TaskId, &sStartProspectingFromEngagementTaskResponse_TaskArn, &sStartProspectingFromEngagementTaskResponse_TaskStatus}}
+var mStartResourceSnapshotJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartResourceSnapshotJobRequest_Catalog, &sStartResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier}}
+var mStopResourceSnapshotJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopResourceSnapshotJobRequest_Catalog, &sStopResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier}}
+var mSubmitOpportunityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSubmitOpportunityRequest_Catalog, &sSubmitOpportunityRequest_Identifier, &sSubmitOpportunityRequest_InvolvementType, &sSubmitOpportunityRequest_Visibility}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateEngagementContextRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEngagementContextRequest_Catalog, &sUpdateEngagementContextRequest_EngagementIdentifier, &sUpdateEngagementContextRequest_ContextIdentifier, &sUpdateEngagementContextRequest_EngagementLastModifiedAt, &sUpdateEngagementContextRequest_Type, &sUpdateEngagementContextRequest_Payload}}
+var mUpdateEngagementContextResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEngagementContextResponse_EngagementId, &sUpdateEngagementContextResponse_EngagementArn, &sUpdateEngagementContextResponse_EngagementLastModifiedAt, &sUpdateEngagementContextResponse_ContextId}}
+var mUpdateOpportunityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpportunityRequest_Catalog, &sUpdateOpportunityRequest_PrimaryNeedsFromAws, &sUpdateOpportunityRequest_NationalSecurity, &sUpdateOpportunityRequest_PartnerOpportunityIdentifier, &sUpdateOpportunityRequest_Customer, &sUpdateOpportunityRequest_Project, &sUpdateOpportunityRequest_OpportunityType, &sUpdateOpportunityRequest_Marketing, &sUpdateOpportunityRequest_SoftwareRevenue, &sUpdateOpportunityRequest_LastModifiedDate, &sUpdateOpportunityRequest_Identifier, &sUpdateOpportunityRequest_LifeCycle}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 4, 0, 1, 11, 0, 0, 10, 9, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 6, 0,
+	3, 7, 12, 5, 0, 8, 0, 0,
+}}
+var mUpdateOpportunityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpportunityResponse_Id, &sUpdateOpportunityResponse_LastModifiedDate}}
+
+var sAcceptEngagementInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptEngagementInvitation, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sAssignOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignOpportunity, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sAssociateOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateOpportunity, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagement, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateEngagementContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementContext, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateEngagementInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementInvitation, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOpportunity, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateResourceSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSnapshot, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sCreateResourceSnapshotJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSnapshotJob, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteResourceSnapshotJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceSnapshotJob, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDisassociateOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateOpportunity, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetAwsOpportunitySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAwsOpportunitySummary, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetEngagement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEngagement, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetEngagementInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEngagementInvitation, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOpportunity, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetProspectingFromEngagementTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProspectingFromEngagementTask, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetResourceSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSnapshot, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetResourceSnapshotJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSnapshotJob, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetSellingSystemSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSellingSystemSettings, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListEngagementByAcceptingInvitationTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementByAcceptingInvitationTasks, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListEngagementFromOpportunityTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementFromOpportunityTasks, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListEngagementInvitations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementInvitations, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListEngagementMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementMembers, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListEngagementResourceAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementResourceAssociations, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListEngagements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagements, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListOpportunities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpportunities, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListOpportunityFromEngagementTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpportunityFromEngagementTasks, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListProspectingFromEngagementTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProspectingFromEngagementTasks, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListResourceSnapshotJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSnapshotJobs, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListResourceSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSnapshots, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sListSolutions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSolutions, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sPutSellingSystemSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSellingSystemSettings, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sRejectEngagementInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectEngagementInvitation, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sStartEngagementByAcceptingInvitationTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementByAcceptingInvitationTask, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sStartEngagementFromOpportunityTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementFromOpportunityTask, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sStartOpportunityFromEngagementTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOpportunityFromEngagementTask, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sStartProspectingFromEngagementTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartProspectingFromEngagementTask, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sStartResourceSnapshotJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartResourceSnapshotJob, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sStopResourceSnapshotJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopResourceSnapshotJob, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sSubmitOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitOpportunity, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sUpdateEngagementContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEngagementContext, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sUpdateOpportunity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpportunity, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var s_AWSPartnerCentralSelling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSPartnerCentralSelling, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedExceptionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedExceptionErrorCode, Members: &mAccessDeniedExceptionErrorCode, Type: smithy.ShapeTypeEnum})
+var sAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var sAccountReceiver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountReceiver, Members: &mAccountReceiver, Type: smithy.ShapeTypeStructure})
+var sAccountSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSummary, Members: &mAccountSummary, Type: smithy.ShapeTypeStructure})
+var sAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure})
+var s_AddressPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddressPart, Traits: &t47, Type: smithy.ShapeTypeString})
+var sAddressSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressSummary, Members: &mAddressSummary, Type: smithy.ShapeTypeStructure})
+var s_Alias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Alias, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_Amount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Amount, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_AmountMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmountMap, Members: &m_AmountMap, Type: smithy.ShapeTypeMap})
+var s_ApnPrograms = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApnPrograms, Members: &m_ApnPrograms, Type: smithy.ShapeTypeList})
+var sAssigneeContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssigneeContact, Members: &mAssigneeContact, Type: smithy.ShapeTypeStructure})
+var s_AwsAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccount, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_AwsAccountIdOrAliasList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountIdOrAliasList, Members: &m_AwsAccountIdOrAliasList, Type: smithy.ShapeTypeList})
+var s_AwsAccountList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountList, Members: &m_AwsAccountList, Type: smithy.ShapeTypeList})
+var sAwsClosedLostReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsClosedLostReason, Members: &mAwsClosedLostReason, Type: smithy.ShapeTypeEnum})
+var sAwsFundingUsed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsFundingUsed, Members: &mAwsFundingUsed, Type: smithy.ShapeTypeEnum})
+var s_AwsMarketplaceOfferIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceOfferIdentifier, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceOfferIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceOfferIdentifiers, Members: &m_AwsMarketplaceOfferIdentifiers, Type: smithy.ShapeTypeList})
+var s_AwsMarketplaceOfferSetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceOfferSetIdentifier, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceOfferSetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceOfferSetIdentifiers, Members: &m_AwsMarketplaceOfferSetIdentifiers, Type: smithy.ShapeTypeList})
+var s_AwsMarketplaceProductArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceProductArn, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceProductIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceProductIdentifiers, Members: &m_AwsMarketplaceProductIdentifiers, Type: smithy.ShapeTypeList})
+var s_AwsMarketplaceSolutionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceSolutionArn, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceSolutionArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceSolutionArnList, Members: &m_AwsMarketplaceSolutionArnList, Type: smithy.ShapeTypeList})
+var s_AwsMarketplaceSolutionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceSolutionIdentifier, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceSolutionIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMarketplaceSolutionIdentifiers, Members: &m_AwsMarketplaceSolutionIdentifiers, Type: smithy.ShapeTypeList})
+var s_AwsMaturity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsMaturity, Type: smithy.ShapeTypeString})
+var sAwsMemberBusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsMemberBusinessTitle, Members: &mAwsMemberBusinessTitle, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunityCustomer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsOpportunityCustomer, Members: &mAwsOpportunityCustomer, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsOpportunityInsights, Members: &mAwsOpportunityInsights, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityLifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsOpportunityLifeCycle, Members: &mAwsOpportunityLifeCycle, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsOpportunityProject, Members: &mAwsOpportunityProject, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityRelatedEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsOpportunityRelatedEntities, Members: &mAwsOpportunityRelatedEntities, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsOpportunityStage, Members: &mAwsOpportunityStage, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunitySummaryFullView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsOpportunitySummaryFullView, Members: &mAwsOpportunitySummaryFullView, Type: smithy.ShapeTypeStructure})
+var s_AwsOpportunityTeamMembersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsOpportunityTeamMembersList, Members: &m_AwsOpportunityTeamMembersList, Type: smithy.ShapeTypeList})
+var sAwsPartition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsPartition, Members: &mAwsPartition, Type: smithy.ShapeTypeEnum})
+var sAwsProductDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsProductDetails, Members: &mAwsProductDetails, Type: smithy.ShapeTypeStructure})
+var s_AwsProductIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsProductIdentifier, Type: smithy.ShapeTypeString})
+var s_AwsProductIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsProductIdentifiers, Members: &m_AwsProductIdentifiers, Type: smithy.ShapeTypeList})
+var sAwsProductInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsProductInsights, Members: &mAwsProductInsights, Type: smithy.ShapeTypeStructure})
+var sAwsProductOptimization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsProductOptimization, Members: &mAwsProductOptimization, Type: smithy.ShapeTypeStructure})
+var s_AwsProductOptimizationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsProductOptimizationsList, Members: &m_AwsProductOptimizationsList, Type: smithy.ShapeTypeList})
+var s_AwsProductsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsProductsList, Members: &m_AwsProductsList, Type: smithy.ShapeTypeList})
+var sAwsProductsSpendInsightsBySource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsProductsSpendInsightsBySource, Members: &mAwsProductsSpendInsightsBySource, Type: smithy.ShapeTypeStructure})
+var sAwsSoftwareRevenue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsSoftwareRevenue, Members: &mAwsSoftwareRevenue, Type: smithy.ShapeTypeStructure})
+var sAwsSubmission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsSubmission, Members: &mAwsSubmission, Type: smithy.ShapeTypeStructure})
+var sAwsTeamMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsTeamMember, Members: &mAwsTeamMember, Type: smithy.ShapeTypeStructure})
+var s_CatalogIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeEnum})
+var s_Channels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sClosedLostReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClosedLostReason, Members: &mClosedLostReason, Type: smithy.ShapeTypeEnum})
+var s_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompanyName, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_CompanyWebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompanyWebsiteUrl, Traits: &t47, Type: smithy.ShapeTypeString})
+var sCompetitorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompetitorName, Members: &mCompetitorName, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t48, Type: smithy.ShapeTypeStructure})
+var sContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure})
+var s_ContextIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextIdentifier, Type: smithy.ShapeTypeString})
+var s_ContextIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContextIdentifiers, Members: &m_ContextIdentifiers, Type: smithy.ShapeTypeList})
+var sCountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountryCode, Members: &mCountryCode, Traits: &t47, Type: smithy.ShapeTypeEnum})
+var sCreatedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatedDateFilter, Members: &mCreatedDateFilter, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCurrencyCode, Members: &mCurrencyCode, Traits: &t47, Type: smithy.ShapeTypeEnum})
+var sCustomer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomer, Members: &mCustomer, Type: smithy.ShapeTypeStructure})
+var s_CustomerAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAction, Type: smithy.ShapeTypeString})
+var s_CustomerContactsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerContactsList, Members: &m_CustomerContactsList, Type: smithy.ShapeTypeList})
+var sCustomerProjectsContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerProjectsContext, Members: &mCustomerProjectsContext, Type: smithy.ShapeTypeStructure})
+var sCustomerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerSummary, Members: &mCustomerSummary, Type: smithy.ShapeTypeStructure})
+var s_Date = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Date, Type: smithy.ShapeTypeString})
+var s_DateTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTime, Traits: &t50, Type: smithy.ShapeTypeTimestamp})
+var sDeliveryModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeliveryModel, Members: &mDeliveryModel, Type: smithy.ShapeTypeEnum})
+var s_DeliveryModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeliveryModels, Members: &m_DeliveryModels, Type: smithy.ShapeTypeList})
+var s_DunsNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DunsNumber, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_EligibleProgramsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EligibleProgramsList, Members: &m_EligibleProgramsList, Type: smithy.ShapeTypeList})
+var s_Email = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Email, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementArn, Type: smithy.ShapeTypeString})
+var s_EngagementArnOrIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementContextDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementContextDetails, Members: &mEngagementContextDetails, Type: smithy.ShapeTypeStructure})
+var s_EngagementContextIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementContextIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementContextPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementContextPayload, Members: &mEngagementContextPayload, Type: smithy.ShapeTypeUnion})
+var s_EngagementContexts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementContexts, Members: &m_EngagementContexts, Type: smithy.ShapeTypeList})
+var sEngagementContextType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementContextType, Members: &mEngagementContextType, Type: smithy.ShapeTypeEnum})
+var s_EngagementContextTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementContextTypeList, Members: &m_EngagementContextTypeList, Type: smithy.ShapeTypeList})
+var sEngagementCustomer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementCustomer, Members: &mEngagementCustomer, Type: smithy.ShapeTypeStructure})
+var s_EngagementCustomerBusinessProblem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementCustomerBusinessProblem, Traits: &t47, Type: smithy.ShapeTypeString})
+var sEngagementCustomerProjectDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementCustomerProjectDetails, Members: &mEngagementCustomerProjectDetails, Type: smithy.ShapeTypeStructure})
+var s_EngagementCustomerProjectTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementCustomerProjectTitle, Type: smithy.ShapeTypeString})
+var s_EngagementDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementDescription, Type: smithy.ShapeTypeString})
+var s_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var s_EngagementIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementIdentifierList, Members: &m_EngagementIdentifierList, Type: smithy.ShapeTypeList})
+var s_EngagementIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementIdentifiers, Members: &m_EngagementIdentifiers, Type: smithy.ShapeTypeList})
+var s_EngagementInvitationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementInvitationArn, Type: smithy.ShapeTypeString})
+var s_EngagementInvitationArnOrIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var s_EngagementInvitationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementInvitationIdentifier, Type: smithy.ShapeTypeString})
+var s_EngagementInvitationIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementInvitationIdentifiers, Members: &m_EngagementInvitationIdentifiers, Type: smithy.ShapeTypeList})
+var sEngagementInvitationPayloadType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementInvitationPayloadType, Members: &mEngagementInvitationPayloadType, Type: smithy.ShapeTypeEnum})
+var s_EngagementInvitationsPayloadType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementInvitationsPayloadType, Members: &m_EngagementInvitationsPayloadType, Type: smithy.ShapeTypeList})
+var s_EngagementInvitationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementInvitationSummaries, Members: &m_EngagementInvitationSummaries, Type: smithy.ShapeTypeList})
+var sEngagementInvitationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementInvitationSummary, Members: &mEngagementInvitationSummary, Type: smithy.ShapeTypeStructure})
+var sEngagementMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementMember, Members: &mEngagementMember, Type: smithy.ShapeTypeStructure})
+var s_EngagementMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementMembers, Members: &m_EngagementMembers, Type: smithy.ShapeTypeList})
+var s_EngagementMemberSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementMemberSummaries, Members: &m_EngagementMemberSummaries, Type: smithy.ShapeTypeList})
+var sEngagementMemberSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementMemberSummary, Members: &mEngagementMemberSummary, Type: smithy.ShapeTypeStructure})
+var s_EngagementPageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementPageSize, Type: smithy.ShapeTypeInteger})
+var sEngagementProspectingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementProspectingResult, Members: &mEngagementProspectingResult, Type: smithy.ShapeTypeStructure})
+var s_EngagementProspectingResultList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementProspectingResultList, Members: &m_EngagementProspectingResultList, Type: smithy.ShapeTypeList})
+var sEngagementResourceAssociationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementResourceAssociationSummary, Members: &mEngagementResourceAssociationSummary, Type: smithy.ShapeTypeStructure})
+var s_EngagementResourceAssociationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementResourceAssociationSummaryList, Members: &m_EngagementResourceAssociationSummaryList, Type: smithy.ShapeTypeList})
+var sEngagementScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementScore, Members: &mEngagementScore, Type: smithy.ShapeTypeEnum})
+var s_EngagementScoreLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementScoreLevel, Type: smithy.ShapeTypeString})
+var sEngagementSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementSort, Members: &mEngagementSort, Type: smithy.ShapeTypeStructure})
+var sEngagementSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementSortName, Members: &mEngagementSortName, Type: smithy.ShapeTypeEnum})
+var sEngagementSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEngagementSummary, Members: &mEngagementSummary, Type: smithy.ShapeTypeStructure})
+var s_EngagementSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementSummaryList, Members: &m_EngagementSummaryList, Type: smithy.ShapeTypeList})
+var s_EngagementTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementTitle, Type: smithy.ShapeTypeString})
+var s_EngagementUseCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EngagementUseCase, Type: smithy.ShapeTypeString})
+var sEnrichmentContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrichmentContext, Members: &mEnrichmentContext, Type: smithy.ShapeTypeStructure})
+var s_EstimationUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EstimationUrl, Type: smithy.ShapeTypeString})
+var sExpectedContractDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpectedContractDuration, Members: &mExpectedContractDuration, Type: smithy.ShapeTypeStructure})
+var sExpectedContractDurationTerm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpectedContractDurationTerm, Members: &mExpectedContractDurationTerm, Type: smithy.ShapeTypeEnum})
+var sExpectedCustomerSpend = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpectedCustomerSpend, Members: &mExpectedCustomerSpend, Type: smithy.ShapeTypeStructure})
+var s_ExpectedCustomerSpendList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpectedCustomerSpendList, Members: &m_ExpectedCustomerSpendList, Type: smithy.ShapeTypeList})
+var s_FilterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterIdentifier, Members: &m_FilterIdentifier, Type: smithy.ShapeTypeList})
+var s_FilterLifeCycleReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterLifeCycleReviewStatus, Members: &m_FilterLifeCycleReviewStatus, Type: smithy.ShapeTypeList})
+var s_FilterLifeCycleStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterLifeCycleStage, Members: &m_FilterLifeCycleStage, Type: smithy.ShapeTypeList})
+var s_FilterStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterStatus, Members: &m_FilterStatus, Type: smithy.ShapeTypeList})
+var sIndustry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndustry, Members: &mIndustry, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t51, Type: smithy.ShapeTypeStructure})
+var sInvitation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvitation, Members: &mInvitation, Type: smithy.ShapeTypeStructure})
+var s_InvitationMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvitationMessage, Traits: &t47, Type: smithy.ShapeTypeString})
+var sInvitationProspectingResultAws = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvitationProspectingResultAws, Members: &mInvitationProspectingResultAws, Type: smithy.ShapeTypeStructure})
+var sInvitationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvitationStatus, Members: &mInvitationStatus, Type: smithy.ShapeTypeEnum})
+var s_InvitationStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InvitationStatusList, Members: &m_InvitationStatusList, Type: smithy.ShapeTypeList})
+var sInvolvementTypeChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvolvementTypeChangeReason, Members: &mInvolvementTypeChangeReason, Type: smithy.ShapeTypeEnum})
+var s_JobTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobTitle, Traits: &t47, Type: smithy.ShapeTypeString})
+var sLastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLastModifiedDate, Members: &mLastModifiedDate, Type: smithy.ShapeTypeStructure})
+var sLeadAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadAddress, Members: &mLeadAddress, Type: smithy.ShapeTypeStructure})
+var s_LeadBusinessProblem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadBusinessProblem, Traits: &t47, Type: smithy.ShapeTypeString})
+var sLeadContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadContact, Members: &mLeadContact, Type: smithy.ShapeTypeStructure})
+var sLeadContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadContext, Members: &mLeadContext, Type: smithy.ShapeTypeStructure})
+var s_LeadCountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadCountryCode, Traits: &t47, Type: smithy.ShapeTypeString})
+var sLeadCustomer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadCustomer, Members: &mLeadCustomer, Type: smithy.ShapeTypeStructure})
+var s_LeadEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadEmail, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_LeadIndustry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadIndustry, Type: smithy.ShapeTypeString})
+var sLeadInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadInsights, Members: &mLeadInsights, Type: smithy.ShapeTypeStructure})
+var sLeadInteraction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadInteraction, Members: &mLeadInteraction, Type: smithy.ShapeTypeStructure})
+var s_LeadInteractionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadInteractionList, Members: &m_LeadInteractionList, Type: smithy.ShapeTypeList})
+var sLeadInvitationCustomer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadInvitationCustomer, Members: &mLeadInvitationCustomer, Type: smithy.ShapeTypeStructure})
+var sLeadInvitationInteraction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadInvitationInteraction, Members: &mLeadInvitationInteraction, Type: smithy.ShapeTypeStructure})
+var sLeadInvitationPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLeadInvitationPayload, Members: &mLeadInvitationPayload, Type: smithy.ShapeTypeStructure})
+var s_LeadJobTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadJobTitle, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_LeadMarketSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadMarketSegment, Type: smithy.ShapeTypeString})
+var s_LeadPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadPhoneNumber, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_LeadQualificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadQualificationStatus, Type: smithy.ShapeTypeString})
+var s_LeadSourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadSourceId, Type: smithy.ShapeTypeString})
+var s_LeadSourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadSourceName, Type: smithy.ShapeTypeString})
+var s_LeadSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadSourceType, Type: smithy.ShapeTypeString})
+var s_LeadWebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LeadWebsiteUrl, Traits: &t47, Type: smithy.ShapeTypeString})
+var sLifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifeCycle, Members: &mLifeCycle, Type: smithy.ShapeTypeStructure})
+var sLifeCycleForView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifeCycleForView, Members: &mLifeCycleForView, Type: smithy.ShapeTypeStructure})
+var sLifeCycleSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifeCycleSummary, Members: &mLifeCycleSummary, Type: smithy.ShapeTypeStructure})
+var s_ListEngagementByAcceptingInvitationTaskSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEngagementByAcceptingInvitationTaskSummaries, Members: &m_ListEngagementByAcceptingInvitationTaskSummaries, Type: smithy.ShapeTypeList})
+var sListEngagementByAcceptingInvitationTaskSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementByAcceptingInvitationTaskSummary, Members: &mListEngagementByAcceptingInvitationTaskSummary, Type: smithy.ShapeTypeStructure})
+var s_ListEngagementFromOpportunityTaskSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEngagementFromOpportunityTaskSummaries, Members: &m_ListEngagementFromOpportunityTaskSummaries, Type: smithy.ShapeTypeList})
+var sListEngagementFromOpportunityTaskSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementFromOpportunityTaskSummary, Members: &mListEngagementFromOpportunityTaskSummary, Type: smithy.ShapeTypeStructure})
+var s_ListOpportunityFromEngagementTaskSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListOpportunityFromEngagementTaskSummaries, Members: &m_ListOpportunityFromEngagementTaskSummaries, Type: smithy.ShapeTypeList})
+var sListOpportunityFromEngagementTaskSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpportunityFromEngagementTaskSummary, Members: &mListOpportunityFromEngagementTaskSummary, Type: smithy.ShapeTypeStructure})
+var sListTasksSortBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasksSortBase, Members: &mListTasksSortBase, Type: smithy.ShapeTypeStructure})
+var sListTasksSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTasksSortName, Members: &mListTasksSortName, Type: smithy.ShapeTypeEnum})
+var sMarketing = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketing, Members: &mMarketing, Type: smithy.ShapeTypeStructure})
+var sMarketingSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMarketingSource, Members: &mMarketingSource, Type: smithy.ShapeTypeEnum})
+var s_MemberCompanyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberCompanyName, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_MemberPageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberPageSize, Type: smithy.ShapeTypeInteger})
+var s_MonetaryAmount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MonetaryAmount, Traits: &t47, Type: smithy.ShapeTypeString})
+var sMonetaryValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Traits: &t47, Type: smithy.ShapeTypeString})
+var sNationalSecurity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNationalSecurity, Members: &mNationalSecurity, Type: smithy.ShapeTypeEnum})
+var s_NextStepsHistories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextStepsHistories, Members: &m_NextStepsHistories, Type: smithy.ShapeTypeList})
+var sNextStepsHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNextStepsHistory, Members: &mNextStepsHistory, Type: smithy.ShapeTypeStructure})
+var s_OpportunityArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpportunityArn, Type: smithy.ShapeTypeString})
+var sOpportunityEngagementInvitationSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunityEngagementInvitationSort, Members: &mOpportunityEngagementInvitationSort, Type: smithy.ShapeTypeStructure})
+var sOpportunityEngagementInvitationSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunityEngagementInvitationSortName, Members: &mOpportunityEngagementInvitationSortName, Type: smithy.ShapeTypeEnum})
+var s_OpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var s_OpportunityIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpportunityIdentifiers, Members: &m_OpportunityIdentifiers, Type: smithy.ShapeTypeList})
+var sOpportunityInvitationPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunityInvitationPayload, Members: &mOpportunityInvitationPayload, Type: smithy.ShapeTypeStructure})
+var sOpportunityOrigin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunityOrigin, Members: &mOpportunityOrigin, Type: smithy.ShapeTypeEnum})
+var sOpportunityQuality = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunityQuality, Members: &mOpportunityQuality, Type: smithy.ShapeTypeStructure})
+var sOpportunitySort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunitySort, Members: &mOpportunitySort, Type: smithy.ShapeTypeStructure})
+var sOpportunitySortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunitySortName, Members: &mOpportunitySortName, Type: smithy.ShapeTypeEnum})
+var s_OpportunitySummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpportunitySummaries, Members: &m_OpportunitySummaries, Type: smithy.ShapeTypeList})
+var sOpportunitySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunitySummary, Members: &mOpportunitySummary, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummaryView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunitySummaryView, Members: &mOpportunitySummaryView, Type: smithy.ShapeTypeStructure})
+var sOpportunityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpportunityType, Members: &mOpportunityType, Type: smithy.ShapeTypeEnum})
+var s_PageSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sParticipantType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipantType, Members: &mParticipantType, Type: smithy.ShapeTypeEnum})
+var s_PartnerOpportunityTeamMembersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerOpportunityTeamMembersList, Members: &m_PartnerOpportunityTeamMembersList, Type: smithy.ShapeTypeList})
+var sPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPayload, Members: &mPayload, Type: smithy.ShapeTypeUnion})
+var sPaymentFrequency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPaymentFrequency, Members: &mPaymentFrequency, Type: smithy.ShapeTypeEnum})
+var s_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumber, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_PiiString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PiiString, Traits: &t47, Type: smithy.ShapeTypeString})
+var sPrimaryNeedFromAws = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrimaryNeedFromAws, Members: &mPrimaryNeedFromAws, Type: smithy.ShapeTypeEnum})
+var s_PrimaryNeedsFromAws = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrimaryNeedsFromAws, Members: &m_PrimaryNeedsFromAws, Type: smithy.ShapeTypeList})
+var s_ProfileNextStepsHistories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProfileNextStepsHistories, Members: &m_ProfileNextStepsHistories, Type: smithy.ShapeTypeList})
+var sProfileNextStepsHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProfileNextStepsHistory, Members: &mProfileNextStepsHistory, Type: smithy.ShapeTypeStructure})
+var sProject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure})
+var sProjectDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectDetails, Members: &mProjectDetails, Type: smithy.ShapeTypeStructure})
+var sProjectSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectSummary, Members: &mProjectSummary, Type: smithy.ShapeTypeStructure})
+var sProjectView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProjectView, Members: &mProjectView, Type: smithy.ShapeTypeStructure})
+var s_ProspectingAccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingAccountName, Type: smithy.ShapeTypeString})
+var s_ProspectingCompanySize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingCompanySize, Type: smithy.ShapeTypeString})
+var sProspectingFromEngagementTaskSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingFromEngagementTaskSort, Members: &mProspectingFromEngagementTaskSort, Type: smithy.ShapeTypeStructure})
+var sProspectingFromEngagementTaskSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingFromEngagementTaskSortName, Members: &mProspectingFromEngagementTaskSortName, Type: smithy.ShapeTypeEnum})
+var s_ProspectingGeo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingGeo, Type: smithy.ShapeTypeString})
+var sProspectingInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingInsights, Members: &mProspectingInsights, Type: smithy.ShapeTypeStructure})
+var s_ProspectingPublicProfileSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingPublicProfileSummary, Type: smithy.ShapeTypeString})
+var s_ProspectingRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingRegion, Type: smithy.ShapeTypeString})
+var sProspectingResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingResult, Members: &mProspectingResult, Type: smithy.ShapeTypeStructure})
+var sProspectingResultAws = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingResultAws, Members: &mProspectingResultAws, Type: smithy.ShapeTypeStructure})
+var sProspectingResultCustomer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingResultCustomer, Members: &mProspectingResultCustomer, Type: smithy.ShapeTypeStructure})
+var s_ProspectingSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingSegment, Type: smithy.ShapeTypeString})
+var s_ProspectingSubIndustry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingSubIndustry, Type: smithy.ShapeTypeString})
+var s_ProspectingSubRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingSubRegion, Type: smithy.ShapeTypeString})
+var s_ProspectingTaskArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingTaskArn, Type: smithy.ShapeTypeString})
+var s_ProspectingTaskIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingTaskIdentifier, Type: smithy.ShapeTypeString})
+var sProspectingTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingTaskStatus, Members: &mProspectingTaskStatus, Type: smithy.ShapeTypeEnum})
+var sProspectingTaskSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProspectingTaskSummary, Members: &mProspectingTaskSummary, Type: smithy.ShapeTypeStructure})
+var s_ProspectingTaskSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProspectingTaskSummaryList, Members: &m_ProspectingTaskSummaryList, Type: smithy.ShapeTypeList})
+var sReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReasonCode, Members: &mReasonCode, Type: smithy.ShapeTypeEnum})
+var sReceiver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceiver, Members: &mReceiver, Type: smithy.ShapeTypeUnion})
+var sReceiverResponsibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReceiverResponsibility, Members: &mReceiverResponsibility, Type: smithy.ShapeTypeEnum})
+var s_ReceiverResponsibilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReceiverResponsibilityList, Members: &m_ReceiverResponsibilityList, Type: smithy.ShapeTypeList})
+var sRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure})
+var s_RecommendationAttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationAttributeMap, Members: &m_RecommendationAttributeMap, Type: smithy.ShapeTypeMap})
+var s_RecommendationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendationList, Members: &m_RecommendationList, Type: smithy.ShapeTypeList})
+var s_RejectionReasonString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RejectionReasonString, Type: smithy.ShapeTypeString})
+var sRelatedEntityIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedEntityIdentifiers, Members: &mRelatedEntityIdentifiers, Type: smithy.ShapeTypeStructure})
+var sRelatedEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelatedEntityType, Members: &mRelatedEntityType, Type: smithy.ShapeTypeEnum})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t52, Type: smithy.ShapeTypeStructure})
+var s_ResourceSnapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotArn, Type: smithy.ShapeTypeString})
+var s_ResourceSnapshotJobArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotJobArn, Type: smithy.ShapeTypeString})
+var s_ResourceSnapshotJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var s_ResourceSnapshotJobRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotJobRoleArn, Type: smithy.ShapeTypeString})
+var s_ResourceSnapshotJobRoleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotJobRoleIdentifier, Type: smithy.ShapeTypeString})
+var sResourceSnapshotJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSnapshotJobStatus, Members: &mResourceSnapshotJobStatus, Type: smithy.ShapeTypeEnum})
+var sResourceSnapshotJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSnapshotJobSummary, Members: &mResourceSnapshotJobSummary, Type: smithy.ShapeTypeStructure})
+var s_ResourceSnapshotJobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotJobSummaryList, Members: &m_ResourceSnapshotJobSummaryList, Type: smithy.ShapeTypeList})
+var sResourceSnapshotPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSnapshotPayload, Members: &mResourceSnapshotPayload, Type: smithy.ShapeTypeUnion})
+var s_ResourceSnapshotRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotRevision, Type: smithy.ShapeTypeInteger})
+var sResourceSnapshotSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSnapshotSummary, Members: &mResourceSnapshotSummary, Type: smithy.ShapeTypeStructure})
+var s_ResourceSnapshotSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSnapshotSummaryList, Members: &m_ResourceSnapshotSummaryList, Type: smithy.ShapeTypeList})
+var s_ResourceTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sRevenueModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevenueModel, Members: &mRevenueModel, Type: smithy.ShapeTypeEnum})
+var sReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReviewStatus, Members: &mReviewStatus, Type: smithy.ShapeTypeEnum})
+var s_SalesActivities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SalesActivities, Members: &m_SalesActivities, Type: smithy.ShapeTypeList})
+var sSalesActivity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesActivity, Members: &mSalesActivity, Type: smithy.ShapeTypeEnum})
+var sSalesInvolvementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSalesInvolvementType, Members: &mSalesInvolvementType, Type: smithy.ShapeTypeEnum})
+var sSenderContact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSenderContact, Members: &mSenderContact, Type: smithy.ShapeTypeStructure})
+var s_SenderContactEmail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SenderContactEmail, Traits: &t47, Type: smithy.ShapeTypeString})
+var s_SenderContactList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SenderContactList, Members: &m_SenderContactList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t53, Type: smithy.ShapeTypeStructure})
+var sSoftwareRevenue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSoftwareRevenue, Members: &mSoftwareRevenue, Type: smithy.ShapeTypeStructure})
+var s_SolutionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SolutionArn, Type: smithy.ShapeTypeString})
+var sSolutionBase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSolutionBase, Members: &mSolutionBase, Type: smithy.ShapeTypeStructure})
+var s_SolutionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SolutionIdentifier, Type: smithy.ShapeTypeString})
+var s_SolutionIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SolutionIdentifiers, Members: &m_SolutionIdentifiers, Type: smithy.ShapeTypeList})
+var s_SolutionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SolutionList, Members: &m_SolutionList, Type: smithy.ShapeTypeList})
+var sSolutionSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSolutionSort, Members: &mSolutionSort, Type: smithy.ShapeTypeStructure})
+var sSolutionSortName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSolutionSortName, Members: &mSolutionSortName, Type: smithy.ShapeTypeEnum})
+var sSolutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSolutionStatus, Members: &mSolutionStatus, Type: smithy.ShapeTypeEnum})
+var sSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortBy, Members: &mSortBy, Type: smithy.ShapeTypeEnum})
+var sSortObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortObject, Members: &mSortObject, Type: smithy.ShapeTypeStructure})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sStage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeEnum})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTargetCloseDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTargetCloseDateFilter, Members: &mTargetCloseDateFilter, Type: smithy.ShapeTypeStructure})
+var s_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var s_TaskArnOrIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskArnOrIdentifier, Type: smithy.ShapeTypeString})
+var s_TaskIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskIdentifier, Type: smithy.ShapeTypeString})
+var s_TaskIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskIdentifierList, Members: &m_TaskIdentifierList, Type: smithy.ShapeTypeList})
+var s_TaskIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskIdentifiers, Members: &m_TaskIdentifiers, Type: smithy.ShapeTypeList})
+var s_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskName, Type: smithy.ShapeTypeString})
+var s_TaskNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskNameList, Members: &m_TaskNameList, Type: smithy.ShapeTypeList})
+var sTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var s_TaskStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskStatuses, Members: &m_TaskStatuses, Type: smithy.ShapeTypeList})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t54, Type: smithy.ShapeTypeStructure})
+var sUpdateEngagementContextPayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEngagementContextPayload, Members: &mUpdateEngagementContextPayload, Type: smithy.ShapeTypeUnion})
+var sUpdateLeadContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLeadContext, Members: &mUpdateLeadContext, Type: smithy.ShapeTypeStructure})
+var s_UseCases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UseCases, Members: &m_UseCases, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t55, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionError, Members: &mValidationExceptionError, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum})
+var s_ValidationExceptionErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionErrorList, Members: &m_ValidationExceptionErrorList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sVisibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum})
+var s_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WebsiteUrl, Traits: &t47, Type: smithy.ShapeTypeString})
+var sAcceptEngagementInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptEngagementInvitationRequest, Members: &mAcceptEngagementInvitationRequest, Type: smithy.ShapeTypeStructure})
+var sAssignOpportunityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignOpportunityRequest, Members: &mAssignOpportunityRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateOpportunityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateOpportunityRequest, Members: &mAssociateOpportunityRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEngagementContextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementContextRequest, Members: &mCreateEngagementContextRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEngagementContextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementContextResponse, Members: &mCreateEngagementContextResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEngagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementRequest, Members: &mCreateEngagementRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEngagementInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementInvitationRequest, Members: &mCreateEngagementInvitationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEngagementInvitationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementInvitationResponse, Members: &mCreateEngagementInvitationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEngagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEngagementResponse, Members: &mCreateEngagementResponse, Type: smithy.ShapeTypeStructure})
+var sCreateOpportunityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOpportunityRequest, Members: &mCreateOpportunityRequest, Type: smithy.ShapeTypeStructure})
+var sCreateOpportunityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOpportunityResponse, Members: &mCreateOpportunityResponse, Type: smithy.ShapeTypeStructure})
+var sCreateResourceSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSnapshotRequest, Members: &mCreateResourceSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sCreateResourceSnapshotJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSnapshotJobRequest, Members: &mCreateResourceSnapshotJobRequest, Type: smithy.ShapeTypeStructure})
+var sCreateResourceSnapshotJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSnapshotJobResponse, Members: &mCreateResourceSnapshotJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateResourceSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceSnapshotResponse, Members: &mCreateResourceSnapshotResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceSnapshotJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceSnapshotJobRequest, Members: &mDeleteResourceSnapshotJobRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateOpportunityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateOpportunityRequest, Members: &mDisassociateOpportunityRequest, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAwsOpportunitySummaryRequest, Members: &mGetAwsOpportunitySummaryRequest, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAwsOpportunitySummaryResponse, Members: &mGetAwsOpportunitySummaryResponse, Type: smithy.ShapeTypeStructure})
+var sGetEngagementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEngagementRequest, Members: &mGetEngagementRequest, Type: smithy.ShapeTypeStructure})
+var sGetEngagementInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEngagementInvitationRequest, Members: &mGetEngagementInvitationRequest, Type: smithy.ShapeTypeStructure})
+var sGetEngagementInvitationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEngagementInvitationResponse, Members: &mGetEngagementInvitationResponse, Type: smithy.ShapeTypeStructure})
+var sGetEngagementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEngagementResponse, Members: &mGetEngagementResponse, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOpportunityRequest, Members: &mGetOpportunityRequest, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOpportunityResponse, Members: &mGetOpportunityResponse, Type: smithy.ShapeTypeStructure})
+var sGetProspectingFromEngagementTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProspectingFromEngagementTaskRequest, Members: &mGetProspectingFromEngagementTaskRequest, Type: smithy.ShapeTypeStructure})
+var sGetProspectingFromEngagementTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetProspectingFromEngagementTaskResponse, Members: &mGetProspectingFromEngagementTaskResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourceSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSnapshotRequest, Members: &mGetResourceSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourceSnapshotJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSnapshotJobRequest, Members: &mGetResourceSnapshotJobRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourceSnapshotJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSnapshotJobResponse, Members: &mGetResourceSnapshotJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourceSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceSnapshotResponse, Members: &mGetResourceSnapshotResponse, Type: smithy.ShapeTypeStructure})
+var sGetSellingSystemSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSellingSystemSettingsRequest, Members: &mGetSellingSystemSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetSellingSystemSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSellingSystemSettingsResponse, Members: &mGetSellingSystemSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListEngagementByAcceptingInvitationTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementByAcceptingInvitationTasksRequest, Members: &mListEngagementByAcceptingInvitationTasksRequest, Type: smithy.ShapeTypeStructure})
+var sListEngagementByAcceptingInvitationTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementByAcceptingInvitationTasksResponse, Members: &mListEngagementByAcceptingInvitationTasksResponse, Type: smithy.ShapeTypeStructure})
+var sListEngagementFromOpportunityTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementFromOpportunityTasksRequest, Members: &mListEngagementFromOpportunityTasksRequest, Type: smithy.ShapeTypeStructure})
+var sListEngagementFromOpportunityTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementFromOpportunityTasksResponse, Members: &mListEngagementFromOpportunityTasksResponse, Type: smithy.ShapeTypeStructure})
+var sListEngagementInvitationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementInvitationsRequest, Members: &mListEngagementInvitationsRequest, Type: smithy.ShapeTypeStructure})
+var sListEngagementInvitationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementInvitationsResponse, Members: &mListEngagementInvitationsResponse, Type: smithy.ShapeTypeStructure})
+var sListEngagementMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementMembersRequest, Members: &mListEngagementMembersRequest, Type: smithy.ShapeTypeStructure})
+var sListEngagementMembersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementMembersResponse, Members: &mListEngagementMembersResponse, Type: smithy.ShapeTypeStructure})
+var sListEngagementResourceAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementResourceAssociationsRequest, Members: &mListEngagementResourceAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sListEngagementResourceAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementResourceAssociationsResponse, Members: &mListEngagementResourceAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sListEngagementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementsRequest, Members: &mListEngagementsRequest, Type: smithy.ShapeTypeStructure})
+var sListEngagementsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEngagementsResponse, Members: &mListEngagementsResponse, Type: smithy.ShapeTypeStructure})
+var sListOpportunitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpportunitiesRequest, Members: &mListOpportunitiesRequest, Type: smithy.ShapeTypeStructure})
+var sListOpportunitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpportunitiesResponse, Members: &mListOpportunitiesResponse, Type: smithy.ShapeTypeStructure})
+var sListOpportunityFromEngagementTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpportunityFromEngagementTasksRequest, Members: &mListOpportunityFromEngagementTasksRequest, Type: smithy.ShapeTypeStructure})
+var sListOpportunityFromEngagementTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOpportunityFromEngagementTasksResponse, Members: &mListOpportunityFromEngagementTasksResponse, Type: smithy.ShapeTypeStructure})
+var sListProspectingFromEngagementTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProspectingFromEngagementTasksRequest, Members: &mListProspectingFromEngagementTasksRequest, Type: smithy.ShapeTypeStructure})
+var sListProspectingFromEngagementTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListProspectingFromEngagementTasksResponse, Members: &mListProspectingFromEngagementTasksResponse, Type: smithy.ShapeTypeStructure})
+var sListResourceSnapshotJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSnapshotJobsRequest, Members: &mListResourceSnapshotJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListResourceSnapshotJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSnapshotJobsResponse, Members: &mListResourceSnapshotJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListResourceSnapshotsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSnapshotsRequest, Members: &mListResourceSnapshotsRequest, Type: smithy.ShapeTypeStructure})
+var sListResourceSnapshotsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceSnapshotsResponse, Members: &mListResourceSnapshotsResponse, Type: smithy.ShapeTypeStructure})
+var sListSolutionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSolutionsRequest, Members: &mListSolutionsRequest, Type: smithy.ShapeTypeStructure})
+var sListSolutionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSolutionsResponse, Members: &mListSolutionsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutSellingSystemSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSellingSystemSettingsRequest, Members: &mPutSellingSystemSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sPutSellingSystemSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSellingSystemSettingsResponse, Members: &mPutSellingSystemSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sRejectEngagementInvitationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectEngagementInvitationRequest, Members: &mRejectEngagementInvitationRequest, Type: smithy.ShapeTypeStructure})
+var sStartEngagementByAcceptingInvitationTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementByAcceptingInvitationTaskRequest, Members: &mStartEngagementByAcceptingInvitationTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStartEngagementByAcceptingInvitationTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementByAcceptingInvitationTaskResponse, Members: &mStartEngagementByAcceptingInvitationTaskResponse, Type: smithy.ShapeTypeStructure})
+var sStartEngagementFromOpportunityTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementFromOpportunityTaskRequest, Members: &mStartEngagementFromOpportunityTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStartEngagementFromOpportunityTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEngagementFromOpportunityTaskResponse, Members: &mStartEngagementFromOpportunityTaskResponse, Type: smithy.ShapeTypeStructure})
+var sStartOpportunityFromEngagementTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOpportunityFromEngagementTaskRequest, Members: &mStartOpportunityFromEngagementTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStartOpportunityFromEngagementTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartOpportunityFromEngagementTaskResponse, Members: &mStartOpportunityFromEngagementTaskResponse, Type: smithy.ShapeTypeStructure})
+var sStartProspectingFromEngagementTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartProspectingFromEngagementTaskRequest, Members: &mStartProspectingFromEngagementTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStartProspectingFromEngagementTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartProspectingFromEngagementTaskResponse, Members: &mStartProspectingFromEngagementTaskResponse, Type: smithy.ShapeTypeStructure})
+var sStartResourceSnapshotJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartResourceSnapshotJobRequest, Members: &mStartResourceSnapshotJobRequest, Type: smithy.ShapeTypeStructure})
+var sStopResourceSnapshotJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopResourceSnapshotJobRequest, Members: &mStopResourceSnapshotJobRequest, Type: smithy.ShapeTypeStructure})
+var sSubmitOpportunityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitOpportunityRequest, Members: &mSubmitOpportunityRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateEngagementContextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEngagementContextRequest, Members: &mUpdateEngagementContextRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEngagementContextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEngagementContextResponse, Members: &mUpdateEngagementContextResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateOpportunityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpportunityRequest, Members: &mUpdateOpportunityRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateOpportunityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpportunityResponse, Members: &mUpdateOpportunityResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iAccessDeniedExceptionErrorCode, Members: &mAccessDeniedExceptionErrorCode, Type: smithy.ShapeTypeEnum})
+var sAccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccount_Industry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Industry", ID: &iIndustry, Members: &mIndustry, Type: smithy.ShapeTypeEnum})
+var sAccount_OtherIndustry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherIndustry", ID: &pString, Type: smithy.ShapeTypeString})
+var sAccount_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccount_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &i_WebsiteUrl, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccount_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccount_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddress, Members: &mAddress, Type: smithy.ShapeTypeStructure})
+var sAccount_Duns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Duns", ID: &i_DunsNumber, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccountReceiver_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_Alias, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccountReceiver_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsAccountId", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccountSummary_Industry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Industry", ID: &iIndustry, Members: &mIndustry, Type: smithy.ShapeTypeEnum})
+var sAccountSummary_OtherIndustry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherIndustry", ID: &pString, Type: smithy.ShapeTypeString})
+var sAccountSummary_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccountSummary_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &i_WebsiteUrl, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAccountSummary_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iAddressSummary, Members: &mAddressSummary, Type: smithy.ShapeTypeStructure})
+var sAddress_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_AddressPart, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_AddressPart, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAddress_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrRegion", ID: &i_AddressPart, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAddress_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &iCountryCode, Members: &mCountryCode, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sAddress_StreetAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreetAddress", ID: &i_AddressPart, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAddressSummary_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_AddressPart, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAddressSummary_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &i_AddressPart, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAddressSummary_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrRegion", ID: &i_AddressPart, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAddressSummary_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &iCountryCode, Members: &mCountryCode, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var s_AmountMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AmountMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_ApnPrograms_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sAssigneeContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_Email, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAssigneeContact_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAssigneeContact_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAssigneeContact_Phone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phone", ID: &i_PhoneNumber, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAssigneeContact_BusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessTitle", ID: &i_JobTitle, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_AwsAccountIdOrAliasList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_AwsAccountList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsClosedLostReason_ADMINISTRATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTRATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_BUSINESS_ASSOCIATE_AGREEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_ASSOCIATE_AGREEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_COMPANY_ACQUIRED_DISSOLVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPANY_ACQUIRED_DISSOLVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_COMPETITIVE_OFFERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPETITIVE_OFFERING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_CUSTOMER_DATA_REQUIREMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_DATA_REQUIREMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_CUSTOMER_DEFICIENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_DEFICIENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_CUSTOMER_EXPERIENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_EXPERIENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_DELAY_CANCELLATION_OF_PROJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELAY_CANCELLATION_OF_PROJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_DUPLICATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_DUPLICATE_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_EXECUTIVE_BLOCKER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTIVE_BLOCKER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_FAILED_VETTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_VETTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_FEATURE_LIMITATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FEATURE_LIMITATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_FINANCIAL_COMMERCIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINANCIAL_COMMERCIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_INSUFFICIENT_AMAZON_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_AMAZON_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_INSUFFICIENT_AWS_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSUFFICIENT_AWS_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_INTERNATIONAL_CONSTRAINTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNATIONAL_CONSTRAINTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LEGAL_TAX_REGULATORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_TAX_REGULATORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LEGAL_TERMS_AND_CONDITIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_TERMS_AND_CONDITIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LOST_TO_COMPETITOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LOST_TO_COMPETITOR_GOOGLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_GOOGLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_MICROSOFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LOST_TO_COMPETITOR_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LOST_TO_COMPETITOR_RACKSPACE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_RACKSPACE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_SOFTLAYER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_LOST_TO_COMPETITOR_VMWARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_VMWARE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_NO_CUSTOMER_REFERENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CUSTOMER_REFERENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_NO_INTEGRATION_RESOURCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_INTEGRATION_RESOURCES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_NO_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_NO_PERCEIVED_VALUE_OF_MP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_PERCEIVED_VALUE_OF_MP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_NO_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_NOT_COMMITTED_TO_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_COMMITTED_TO_AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_NO_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_ON_PREMISES_DEPLOYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_PREMISES_DEPLOYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_OTHER_DETAILS_IN_DESCRIPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER_DETAILS_IN_DESCRIPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PARTNER_GAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTNER_GAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PAST_DUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAST_DUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PEOPLE_RELATIONSHIP_GOVERNANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PEOPLE_RELATIONSHIP_GOVERNANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PLATFORM_TECHNOLOGY_LIMITATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLATFORM_TECHNOLOGY_LIMITATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PREFERENCE_FOR_COMPETITOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREFERENCE_FOR_COMPETITOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PRICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PRODUCT_TECHNOLOGY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_TECHNOLOGY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_PRODUCT_NOT_ON_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCT_NOT_ON_AWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_SECURITY_COMPLIANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_COMPLIANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_SELF_SERVICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELF_SERVICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_TECHNICAL_LIMITATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TECHNICAL_LIMITATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsClosedLostReason_TERM_SHEET_IMPASSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERM_SHEET_IMPASSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsFundingUsed_YES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsFundingUsed_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AwsMarketplaceOfferIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsMarketplaceOfferIdentifier, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceOfferSetIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsMarketplaceOfferSetIdentifier, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceProductIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsMarketplaceProductArn, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceSolutionArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsMarketplaceSolutionArn, Type: smithy.ShapeTypeString})
+var s_AwsMarketplaceSolutionIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsMarketplaceSolutionIdentifier, Type: smithy.ShapeTypeString})
+var sAwsMemberBusinessTitle_AWS_SALES_REP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SALES_REP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsMemberBusinessTitle_AWS_ACCOUNT_OWNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_ACCOUNT_OWNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsMemberBusinessTitle_WWPSPDM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WWPSPDM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsMemberBusinessTitle_PDM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PDM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsMemberBusinessTitle_PSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PSM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsMemberBusinessTitle_ISVSM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISVSM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsMemberBusinessTitle_SIGNATORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGNATORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityCustomer_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_CustomerContactsList, Members: &m_CustomerContactsList, Type: smithy.ShapeTypeList})
+var sAwsOpportunityInsights_NextBestActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextBestActions", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsOpportunityInsights_EngagementScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementScore", ID: &iEngagementScore, Members: &mEngagementScore, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunityInsights_AwsProductsSpendInsightsBySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsProductsSpendInsightsBySource", ID: &iAwsProductsSpendInsightsBySource, Members: &mAwsProductsSpendInsightsBySource, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityInsights_OpportunityQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityQuality", ID: &iOpportunityQuality, Members: &mOpportunityQuality, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityInsights_Recommendations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recommendations", ID: &i_RecommendationList, Members: &m_RecommendationList, Type: smithy.ShapeTypeList})
+var sAwsOpportunityLifeCycle_TargetCloseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCloseDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sAwsOpportunityLifeCycle_ClosedLostReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClosedLostReason", ID: &iAwsClosedLostReason, Members: &mAwsClosedLostReason, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunityLifeCycle_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &iAwsOpportunityStage, Members: &mAwsOpportunityStage, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunityLifeCycle_NextSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextSteps", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsOpportunityLifeCycle_NextStepsHistory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextStepsHistory", ID: &i_ProfileNextStepsHistories, Members: &m_ProfileNextStepsHistories, Type: smithy.ShapeTypeList})
+var sAwsOpportunityProject_ExpectedCustomerSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedCustomerSpend", ID: &i_ExpectedCustomerSpendList, Members: &m_ExpectedCustomerSpendList, Type: smithy.ShapeTypeList})
+var sAwsOpportunityProject_AwsPartition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsPartition", ID: &iAwsPartition, Members: &mAwsPartition, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunityRelatedEntities_AwsProducts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsProducts", ID: &i_AwsProductIdentifiers, Members: &m_AwsProductIdentifiers, Type: smithy.ShapeTypeList})
+var sAwsOpportunityRelatedEntities_Solutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Solutions", ID: &i_SolutionIdentifiers, Members: &m_SolutionIdentifiers, Type: smithy.ShapeTypeList})
+var sAwsOpportunityRelatedEntities_AwsMarketplaceSolutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceSolutions", ID: &i_AwsMarketplaceSolutionIdentifiers, Members: &m_AwsMarketplaceSolutionIdentifiers, Type: smithy.ShapeTypeList})
+var sAwsOpportunityRelatedEntities_AwsMarketplaceProducts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceProducts", ID: &i_AwsMarketplaceProductIdentifiers, Members: &m_AwsMarketplaceProductIdentifiers, Type: smithy.ShapeTypeList})
+var sAwsOpportunityStage_NOT_STARTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_STARTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_PROSPECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROSPECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_IDENTIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_QUALIFY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALIFY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_RESEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_SELLER_ENGAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELLER_ENGAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_EVALUATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVALUATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_SELLER_REGISTERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELLER_REGISTERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_TERM_SHEET_NEGOTIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERM_SHEET_NEGOTIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_CONTRACT_NEGOTIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTRACT_NEGOTIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_ONBOARDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONBOARDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_BUILDING_INTEGRATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUILDING_INTEGRATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_QUALIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_ON_HOLD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_HOLD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_TECHNICAL_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TECHNICAL_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_BUSINESS_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_COMMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_LAUNCHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAUNCHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_DEFERRED_TO_PARTNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFERRED_TO_PARTNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_CLOSED_LOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED_LOST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunityStage_CLOSED_INCOMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED_INCOMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunitySummaryFullView_RelatedOpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedOpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sAwsOpportunitySummaryFullView_Origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origin", ID: &iOpportunityOrigin, Members: &mOpportunityOrigin, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunitySummaryFullView_InvolvementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvolvementType", ID: &iSalesInvolvementType, Members: &mSalesInvolvementType, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunitySummaryFullView_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunitySummaryFullView_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycle", ID: &iAwsOpportunityLifeCycle, Members: &mAwsOpportunityLifeCycle, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunitySummaryFullView_OpportunityTeam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityTeam", ID: &i_AwsOpportunityTeamMembersList, Members: &m_AwsOpportunityTeamMembersList, Type: smithy.ShapeTypeList})
+var sAwsOpportunitySummaryFullView_Insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insights", ID: &iAwsOpportunityInsights, Members: &mAwsOpportunityInsights, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunitySummaryFullView_InvolvementTypeChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvolvementTypeChangeReason", ID: &iInvolvementTypeChangeReason, Members: &mInvolvementTypeChangeReason, Type: smithy.ShapeTypeEnum})
+var sAwsOpportunitySummaryFullView_RelatedEntityIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityIds", ID: &iAwsOpportunityRelatedEntities, Members: &mAwsOpportunityRelatedEntities, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunitySummaryFullView_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iAwsOpportunityCustomer, Members: &mAwsOpportunityCustomer, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunitySummaryFullView_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iAwsOpportunityProject, Members: &mAwsOpportunityProject, Type: smithy.ShapeTypeStructure})
+var sAwsOpportunitySummaryFullView_CosellMotion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CosellMotion", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsOpportunitySummaryFullView_SoftwareRevenue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareRevenue", ID: &iAwsSoftwareRevenue, Members: &mAwsSoftwareRevenue, Type: smithy.ShapeTypeStructure})
+var s_AwsOpportunityTeamMembersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsTeamMember, Members: &mAwsTeamMember, Type: smithy.ShapeTypeStructure})
+var sAwsPartition_AWS_EUSC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_EUSC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAwsProductDetails_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsProductDetails_ServiceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsProductDetails_Categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Categories", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sAwsProductDetails_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsProductDetails_OptimizedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OptimizedAmount", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsProductDetails_PotentialSavingsAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PotentialSavingsAmount", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsProductDetails_Optimizations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Optimizations", ID: &i_AwsProductOptimizationsList, Members: &m_AwsProductOptimizationsList, Type: smithy.ShapeTypeList})
+var s_AwsProductIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AwsProductIdentifier, Type: smithy.ShapeTypeString})
+var sAwsProductInsights_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sAwsProductInsights_Frequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Frequency", ID: &iPaymentFrequency, Members: &mPaymentFrequency, Type: smithy.ShapeTypeEnum})
+var sAwsProductInsights_TotalAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmount", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsProductInsights_TotalOptimizedAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalOptimizedAmount", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsProductInsights_TotalPotentialSavingsAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalPotentialSavingsAmount", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsProductInsights_TotalAmountByCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalAmountByCategory", ID: &i_AmountMap, Members: &m_AmountMap, Type: smithy.ShapeTypeMap})
+var sAwsProductInsights_AwsProducts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsProducts", ID: &i_AwsProductsList, Members: &m_AwsProductsList, Type: smithy.ShapeTypeList})
+var sAwsProductOptimization_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsProductOptimization_SavingsAmount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SavingsAmount", ID: &i_MonetaryAmount, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_AwsProductOptimizationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsProductOptimization, Members: &mAwsProductOptimization, Type: smithy.ShapeTypeStructure})
+var s_AwsProductsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAwsProductDetails, Members: &mAwsProductDetails, Type: smithy.ShapeTypeStructure})
+var sAwsProductsSpendInsightsBySource_Partner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Partner", ID: &iAwsProductInsights, Members: &mAwsProductInsights, Type: smithy.ShapeTypeStructure})
+var sAwsProductsSpendInsightsBySource_AWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS", ID: &iAwsProductInsights, Members: &mAwsProductInsights, Type: smithy.ShapeTypeStructure})
+var sAwsSoftwareRevenue_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure})
+var sAwsSoftwareRevenue_Discount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Discount", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsSoftwareRevenue_EffectiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveDate", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsSoftwareRevenue_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsSubmission_InvolvementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvolvementType", ID: &iSalesInvolvementType, Members: &mSalesInvolvementType, Type: smithy.ShapeTypeEnum})
+var sAwsSubmission_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum})
+var sAwsTeamMember_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_Email, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsTeamMember_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsTeamMember_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sAwsTeamMember_BusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessTitle", ID: &iAwsMemberBusinessTitle, Members: &mAwsMemberBusinessTitle, Type: smithy.ShapeTypeEnum})
+var sChannel_AWS_MARKETING_CENTRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETING_CENTRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_CONTENT_SYNDICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_SYNDICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_DISPLAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISPLAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_LIVE_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE_EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_OUT_OF_HOME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUT_OF_HOME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_PRINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRINT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_SEARCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEARCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_SOCIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOCIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_TELEMARKETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TELEMARKETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_TV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_VIDEO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIDEO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChannel_VIRTUAL_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VIRTUAL_EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Channels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannel, Members: &mChannel, Type: smithy.ShapeTypeEnum})
+var sClosedLostReason_CUSTOMER_DEFICIENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_DEFICIENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_DELAY_CANCELLATION_OF_PROJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELAY_CANCELLATION_OF_PROJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_LEGAL_TAX_REGULATORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGAL_TAX_REGULATORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_LOST_TO_COMPETITOR_GOOGLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_GOOGLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_MICROSOFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_SOFTLAYER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_LOST_TO_COMPETITOR_VMWARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_VMWARE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_LOST_TO_COMPETITOR_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOST_TO_COMPETITOR_OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_NO_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_ON_PREMISES_DEPLOYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_PREMISES_DEPLOYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_PARTNER_GAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTNER_GAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_PRICE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRICE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_SECURITY_COMPLIANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECURITY_COMPLIANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_TECHNICAL_LIMITATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TECHNICAL_LIMITATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_CUSTOMER_EXPERIENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_EXPERIENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_PEOPLERELATIONSHIPGOVERNANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PEOPLERELATIONSHIPGOVERNANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_PRODUCTTECHNOLOGY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCTTECHNOLOGY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClosedLostReason_FINANCIALCOMMERCIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINANCIALCOMMERCIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_ORACLE_CLOUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORACLE_CLOUD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_ON_PREM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_PREM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_CO_LOCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_LOCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_AKAMAI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AKAMAI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_ALICLOUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALICLOUD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_GOOGLE_CLOUD_PLATFORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOOGLE_CLOUD_PLATFORM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_IBM_SOFTLAYER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IBM_SOFTLAYER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_MICROSOFT_AZURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MICROSOFT_AZURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_OTHER_COST_OPTIMIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER_COST_OPTIMIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_NO_COMPETITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_COMPETITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCompetitorName_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_Email, Traits: &t46, Type: smithy.ShapeTypeString})
+var sContact_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sContact_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sContact_BusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessTitle", ID: &i_JobTitle, Traits: &t46, Type: smithy.ShapeTypeString})
+var sContact_Phone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phone", ID: &i_PhoneNumber, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_ContextIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ContextIdentifier, Type: smithy.ShapeTypeString})
+var sCountryCode_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "US", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_DZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AQ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BJ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BQ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_HR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_DK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_DJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DJ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_DM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_DO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_EC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_EG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GQ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_EE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_FK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_FO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_FJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FJ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_FI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_HT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_HM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_VA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_HN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_HK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_HU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IQ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_JM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_JP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_JE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_JO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MQ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_YT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_FM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_OM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_QA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_RE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_RO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_RU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_RW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_BL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_KN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_MF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_PM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_VC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_WS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_RS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ZA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_LK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SJ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_CH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_SY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TJ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TJ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_TV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_UG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_UA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_AE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_UM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_UY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_UZ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UZ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_VU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_VE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_VN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_VG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_VI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_WF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_EH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_YE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ZM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCountryCode_ZW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreatedDateFilter_AfterCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterCreatedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sCreatedDateFilter_BeforeCreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeCreatedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sCurrencyCode_USD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_EUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EUR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GBP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GBP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_AUD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CNY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CNY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_NZD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NZD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_INR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_JPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CHF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SEK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_AED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_AFN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_AMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ANG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_AOA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AOA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_AWG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_AZN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AZN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BBD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BBD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BDT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BDT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BGN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BHD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BHD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BIF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BIF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BMD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BOB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BOV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BOV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BRL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BSD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BSD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BTN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BTN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BWP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BWP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BYN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_BZD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BZD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CDF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CHW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CLF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CLP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_COP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_COU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CRC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CRC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CUC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_CZK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CZK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_DJF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DJF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_DKK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DKK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_DOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_DZD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DZD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_EGP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EGP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ERN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ETB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_FJD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FJD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_FKP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FKP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GHS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GIP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GIP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GMD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GNF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GNF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GTQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GTQ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_GYD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GYD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_HKD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HKD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_HNL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HNL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_HRK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HRK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_HTG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_HUF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HUF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_IDR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ILS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_IQD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IQD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_IRR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IRR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ISK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_JMD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JMD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_JOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JOD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KHR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KHR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KMF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KPW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KPW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KRW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KRW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KWD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KWD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KYD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KYD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_KZT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KZT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_LAK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_LBP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LBP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_LKR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LKR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_LRD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LRD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_LSL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LSL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_LYD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LYD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MDL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MDL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MGA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MGA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MKD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MKD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MMK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MMK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MOP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MRU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MRU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MUR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MUR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MVR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MVR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MWK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MWK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MXN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MXN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MXV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MXV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MYR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MYR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_MZN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MZN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_NAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_NGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NGN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_NIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NIO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_NOK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_NPR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NPR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_OMR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OMR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_PAB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_PEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_PGK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PGK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_PHP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_PKR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PKR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_PLN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_PYG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PYG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_QAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QAR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_RON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_RSD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RSD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_RUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_RWF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RWF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SBD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SBD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SCR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SDG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SDG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SGD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SGD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SHP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SLL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SOS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SRD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SRD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SSP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_STN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SVC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SVC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SYP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_SZL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SZL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_THB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TJS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TJS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TMT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TMT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TOP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TTD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TWD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TWD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_TZS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TZS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_UAH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UAH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_UGX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UGX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_USN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_UYI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UYI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_UYU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UYU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_UZS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UZS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_VEF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VEF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_VND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_VUV = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VUV", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_WST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_XAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XAF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_XCD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XCD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_XDR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XDR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_XOF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XOF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_XPF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XPF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_XSU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XSU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_XUA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XUA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_YER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ZAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZAR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ZMW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZMW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCurrencyCode_ZWL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZWL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomer_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &iAccount, Members: &mAccount, Type: smithy.ShapeTypeStructure})
+var sCustomer_Contacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contacts", ID: &i_CustomerContactsList, Members: &m_CustomerContactsList, Type: smithy.ShapeTypeList})
+var s_CustomerContactsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure})
+var sCustomerProjectsContext_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iEngagementCustomer, Members: &mEngagementCustomer, Type: smithy.ShapeTypeStructure})
+var sCustomerProjectsContext_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iEngagementCustomerProjectDetails, Members: &mEngagementCustomerProjectDetails, Type: smithy.ShapeTypeStructure})
+var sCustomerSummary_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &iAccountSummary, Members: &mAccountSummary, Type: smithy.ShapeTypeStructure})
+var sDeliveryModel_SAAS_OR_PAAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAAS_OR_PAAS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryModel_BYOL_OR_AMI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BYOL_OR_AMI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryModel_MANAGED_SERVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_SERVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryModel_PROFESSIONAL_SERVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFESSIONAL_SERVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryModel_RESELL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESELL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeliveryModel_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DeliveryModels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeliveryModel, Members: &mDeliveryModel, Type: smithy.ShapeTypeEnum})
+var s_EligibleProgramsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sEngagementContextDetails_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EngagementContextIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementContextDetails_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEngagementContextType, Members: &mEngagementContextType, Type: smithy.ShapeTypeEnum})
+var sEngagementContextDetails_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &iEngagementContextPayload, Members: &mEngagementContextPayload, Type: smithy.ShapeTypeUnion})
+var sEngagementContextPayload_CustomerProject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerProject", ID: &iCustomerProjectsContext, Members: &mCustomerProjectsContext, Type: smithy.ShapeTypeStructure})
+var sEngagementContextPayload_Lead = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lead", ID: &iLeadContext, Members: &mLeadContext, Type: smithy.ShapeTypeStructure})
+var sEngagementContextPayload_ProspectingResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProspectingResult", ID: &iProspectingResult, Members: &mProspectingResult, Type: smithy.ShapeTypeStructure})
+var s_EngagementContexts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementContextDetails, Members: &mEngagementContextDetails, Type: smithy.ShapeTypeStructure})
+var sEngagementContextType_CUSTOMER_PROJECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_PROJECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngagementContextType_LEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngagementContextType_PROSPECTING_RESULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROSPECTING_RESULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EngagementContextTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementContextType, Members: &mEngagementContextType, Type: smithy.ShapeTypeEnum})
+var sEngagementCustomer_Industry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Industry", ID: &iIndustry, Members: &mIndustry, Type: smithy.ShapeTypeEnum})
+var sEngagementCustomer_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_CompanyName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementCustomer_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &i_CompanyWebsiteUrl, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementCustomer_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &iCountryCode, Members: &mCountryCode, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sEngagementCustomerProjectDetails_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_EngagementCustomerProjectTitle, Type: smithy.ShapeTypeString})
+var sEngagementCustomerProjectDetails_BusinessProblem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessProblem", ID: &i_EngagementCustomerBusinessProblem, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementCustomerProjectDetails_TargetCompletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCompletionDate", ID: &pString, Type: smithy.ShapeTypeString})
+var s_EngagementIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var s_EngagementIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EngagementArnOrIdentifier, Type: smithy.ShapeTypeString})
+var s_EngagementInvitationIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementInvitationPayloadType_OPPORTUNITY_INVITATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY_INVITATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngagementInvitationPayloadType_LEAD_INVITATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEAD_INVITATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EngagementInvitationsPayloadType_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementInvitationPayloadType, Members: &mEngagementInvitationPayloadType, Type: smithy.ShapeTypeEnum})
+var s_EngagementInvitationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementInvitationSummary, Members: &mEngagementInvitationSummary, Type: smithy.ShapeTypeStructure})
+var sEngagementInvitationSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sEngagementInvitationSummary_PayloadType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadType", ID: &iEngagementInvitationPayloadType, Members: &mEngagementInvitationPayloadType, Type: smithy.ShapeTypeEnum})
+var sEngagementInvitationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementInvitationSummary_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementInvitationSummary_EngagementTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementTitle", ID: &i_EngagementTitle, Type: smithy.ShapeTypeString})
+var sEngagementInvitationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInvitationStatus, Members: &mInvitationStatus, Type: smithy.ShapeTypeEnum})
+var sEngagementInvitationSummary_InvitationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitationDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sEngagementInvitationSummary_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sEngagementInvitationSummary_SenderAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderAwsAccountId", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementInvitationSummary_SenderCompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderCompanyName", ID: &pString, Type: smithy.ShapeTypeString})
+var sEngagementInvitationSummary_Receiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Receiver", ID: &iReceiver, Members: &mReceiver, Type: smithy.ShapeTypeUnion})
+var sEngagementInvitationSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementInvitationSummary_ParticipantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantType", ID: &iParticipantType, Members: &mParticipantType, Type: smithy.ShapeTypeEnum})
+var sEngagementMember_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_MemberCompanyName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementMember_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &pString, Type: smithy.ShapeTypeString})
+var sEngagementMember_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_EngagementMembers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementMember, Members: &mEngagementMember, Type: smithy.ShapeTypeStructure})
+var s_EngagementMemberSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementMemberSummary, Members: &mEngagementMemberSummary, Type: smithy.ShapeTypeStructure})
+var sEngagementMemberSummary_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_MemberCompanyName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementMemberSummary_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &pString, Type: smithy.ShapeTypeString})
+var sEngagementProspectingResult_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementProspectingResult_EngagementContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementContextId", ID: &pString, Type: smithy.ShapeTypeString})
+var sEngagementProspectingResult_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iProspectingTaskStatus, Members: &mProspectingTaskStatus, Type: smithy.ShapeTypeEnum})
+var sEngagementProspectingResult_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sEngagementProspectingResult_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_EngagementProspectingResultList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementProspectingResult, Members: &mEngagementProspectingResult, Type: smithy.ShapeTypeStructure})
+var sEngagementResourceAssociationSummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementResourceAssociationSummary_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementResourceAssociationSummary_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sEngagementResourceAssociationSummary_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementResourceAssociationSummary_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_EngagementResourceAssociationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementResourceAssociationSummary, Members: &mEngagementResourceAssociationSummary, Type: smithy.ShapeTypeStructure})
+var sEngagementScore_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngagementScore_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngagementScore_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngagementSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sEngagementSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iEngagementSortName, Members: &mEngagementSortName, Type: smithy.ShapeTypeEnum})
+var sEngagementSortName_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEngagementSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EngagementArn, Type: smithy.ShapeTypeString})
+var sEngagementSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sEngagementSummary_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_EngagementTitle, Type: smithy.ShapeTypeString})
+var sEngagementSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sEngagementSummary_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementSummary_MemberCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEngagementSummary_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sEngagementSummary_ModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sEngagementSummary_ContextTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextTypes", ID: &i_EngagementContextTypeList, Members: &m_EngagementContextTypeList, Type: smithy.ShapeTypeList})
+var s_EngagementSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEngagementSummary, Members: &mEngagementSummary, Type: smithy.ShapeTypeStructure})
+var sEnrichmentContext_ProspectingResultAws = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProspectingResultAws", ID: &iInvitationProspectingResultAws, Members: &mInvitationProspectingResultAws, Type: smithy.ShapeTypeStructure})
+var sEnrichmentContext_LeadInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LeadInsights", ID: &iLeadInsights, Members: &mLeadInsights, Type: smithy.ShapeTypeStructure})
+var sExpectedContractDuration_Term = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Term", ID: &iExpectedContractDurationTerm, Members: &mExpectedContractDurationTerm, Type: smithy.ShapeTypeEnum})
+var sExpectedContractDuration_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var sExpectedContractDurationTerm_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExpectedCustomerSpend_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &i_Amount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sExpectedCustomerSpend_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sExpectedCustomerSpend_Frequency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Frequency", ID: &iPaymentFrequency, Members: &mPaymentFrequency, Type: smithy.ShapeTypeEnum})
+var sExpectedCustomerSpend_TargetCompany = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCompany", ID: &pString, Type: smithy.ShapeTypeString})
+var sExpectedCustomerSpend_EstimationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimationUrl", ID: &i_EstimationUrl, Type: smithy.ShapeTypeString})
+var s_ExpectedCustomerSpendList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpectedCustomerSpend, Members: &mExpectedCustomerSpend, Type: smithy.ShapeTypeStructure})
+var s_FilterIdentifier_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var s_FilterLifeCycleReviewStatus_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReviewStatus, Members: &mReviewStatus, Type: smithy.ShapeTypeEnum})
+var s_FilterLifeCycleStage_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeEnum})
+var s_FilterStatus_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSolutionStatus, Members: &mSolutionStatus, Type: smithy.ShapeTypeEnum})
+var sIndustry_AEROSPACE_SATELLITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AEROSPACE_SATELLITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_AGRICULTURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGRICULTURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_AUTOMOTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMOTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_COMPUTERS_ELECTRONICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPUTERS_ELECTRONICS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_CONSUMER_GOODS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONSUMER_GOODS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_EDUCATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EDUCATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_ENERGY_OIL_GAS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENERGY_OIL_GAS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_ENERGY_POWER_UTILITIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENERGY_POWER_UTILITIES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_FINANCIAL_SERVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINANCIAL_SERVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_GAMING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GAMING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_GOVERNMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GOVERNMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_HEALTHCARE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHCARE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_HOSPITALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOSPITALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_LIFE_SCIENCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIFE_SCIENCES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_MANUFACTURING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANUFACTURING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_MARKETING_ADVERTISING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MARKETING_ADVERTISING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_MEDIA_ENTERTAINMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIA_ENTERTAINMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_MINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_NON_PROFIT_ORGANIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_PROFIT_ORGANIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_PROFESSIONAL_SERVICES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFESSIONAL_SERVICES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_REALESTATE_CONSTRUCTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REALESTATE_CONSTRUCTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_RETAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_SOFTWARE_INTERNET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOFTWARE_INTERNET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_TELECOMMUNICATIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TELECOMMUNICATIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_TRANSPORTATION_LOGISTICS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSPORTATION_LOGISTICS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_TRAVEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAVEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_WHOLESALE_DISTRIBUTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WHOLESALE_DISTRIBUTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIndustry_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvitation_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_InvitationMessage, Traits: &t46, Type: smithy.ShapeTypeString})
+var sInvitation_Receiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Receiver", ID: &iReceiver, Members: &mReceiver, Type: smithy.ShapeTypeUnion})
+var sInvitation_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &iPayload, Members: &mPayload, Type: smithy.ShapeTypeUnion})
+var sInvitationProspectingResultAws_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iProspectingResultCustomer, Members: &mProspectingResultCustomer, Type: smithy.ShapeTypeStructure})
+var sInvitationProspectingResultAws_Insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insights", ID: &iProspectingInsights, Members: &mProspectingInsights, Type: smithy.ShapeTypeStructure})
+var sInvitationStatus_ACCEPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCEPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvitationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvitationStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvitationStatus_EXPIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_InvitationStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInvitationStatus, Members: &mInvitationStatus, Type: smithy.ShapeTypeEnum})
+var sInvolvementTypeChangeReason_EXPANSION_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPANSION_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvolvementTypeChangeReason_CHANGE_IN_DEAL_INFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGE_IN_DEAL_INFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvolvementTypeChangeReason_CUSTOMER_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvolvementTypeChangeReason_TECHNICAL_COMPLEXITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TECHNICAL_COMPLEXITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvolvementTypeChangeReason_RISK_MITIGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RISK_MITIGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLastModifiedDate_AfterLastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterLastModifiedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sLastModifiedDate_BeforeLastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeLastModifiedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sLeadAddress_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &pString, Type: smithy.ShapeTypeString})
+var sLeadAddress_PostalCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostalCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sLeadAddress_StateOrRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateOrRegion", ID: &pString, Type: smithy.ShapeTypeString})
+var sLeadAddress_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_LeadCountryCode, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadContact_BusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessTitle", ID: &i_LeadJobTitle, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_LeadEmail, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadContact_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadContact_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadContact_Phone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phone", ID: &i_LeadPhoneNumber, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadContext_Insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insights", ID: &iLeadInsights, Members: &mLeadInsights, Type: smithy.ShapeTypeStructure})
+var sLeadContext_QualificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationStatus", ID: &i_LeadQualificationStatus, Type: smithy.ShapeTypeString})
+var sLeadContext_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iLeadCustomer, Members: &mLeadCustomer, Type: smithy.ShapeTypeStructure})
+var sLeadContext_Interactions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interactions", ID: &i_LeadInteractionList, Members: &m_LeadInteractionList, Type: smithy.ShapeTypeList})
+var sLeadCustomer_Industry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Industry", ID: &i_LeadIndustry, Type: smithy.ShapeTypeString})
+var sLeadCustomer_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_CompanyName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadCustomer_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &i_LeadWebsiteUrl, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadCustomer_Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Address", ID: &iLeadAddress, Members: &mLeadAddress, Type: smithy.ShapeTypeStructure})
+var sLeadCustomer_AwsMaturity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMaturity", ID: &i_AwsMaturity, Type: smithy.ShapeTypeString})
+var sLeadCustomer_MarketSegment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketSegment", ID: &i_LeadMarketSegment, Type: smithy.ShapeTypeString})
+var sLeadInsights_LeadReadinessScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LeadReadinessScore", ID: &pString, Type: smithy.ShapeTypeString})
+var sLeadInteraction_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_LeadSourceType, Type: smithy.ShapeTypeString})
+var sLeadInteraction_SourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceId", ID: &i_LeadSourceId, Type: smithy.ShapeTypeString})
+var sLeadInteraction_SourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceName", ID: &i_LeadSourceName, Type: smithy.ShapeTypeString})
+var sLeadInteraction_Usecase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usecase", ID: &i_EngagementUseCase, Type: smithy.ShapeTypeString})
+var sLeadInteraction_InteractionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InteractionDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sLeadInteraction_CustomerAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerAction", ID: &i_CustomerAction, Type: smithy.ShapeTypeString})
+var sLeadInteraction_BusinessProblem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessProblem", ID: &i_LeadBusinessProblem, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadInteraction_Contact = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contact", ID: &iLeadContact, Members: &mLeadContact, Type: smithy.ShapeTypeStructure})
+var s_LeadInteractionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLeadInteraction, Members: &mLeadInteraction, Type: smithy.ShapeTypeStructure})
+var sLeadInvitationCustomer_Industry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Industry", ID: &i_LeadIndustry, Type: smithy.ShapeTypeString})
+var sLeadInvitationCustomer_CompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanyName", ID: &i_CompanyName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadInvitationCustomer_WebsiteUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebsiteUrl", ID: &i_LeadWebsiteUrl, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadInvitationCustomer_CountryCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCode", ID: &i_LeadCountryCode, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadInvitationCustomer_AwsMaturity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMaturity", ID: &i_AwsMaturity, Type: smithy.ShapeTypeString})
+var sLeadInvitationCustomer_MarketSegment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketSegment", ID: &i_LeadMarketSegment, Type: smithy.ShapeTypeString})
+var sLeadInvitationInteraction_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &i_LeadSourceType, Type: smithy.ShapeTypeString})
+var sLeadInvitationInteraction_SourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceId", ID: &i_LeadSourceId, Type: smithy.ShapeTypeString})
+var sLeadInvitationInteraction_SourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceName", ID: &i_LeadSourceName, Type: smithy.ShapeTypeString})
+var sLeadInvitationInteraction_Usecase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Usecase", ID: &i_EngagementUseCase, Type: smithy.ShapeTypeString})
+var sLeadInvitationInteraction_ContactBusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContactBusinessTitle", ID: &i_JobTitle, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLeadInvitationPayload_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iLeadInvitationCustomer, Members: &mLeadInvitationCustomer, Type: smithy.ShapeTypeStructure})
+var sLeadInvitationPayload_Interaction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interaction", ID: &iLeadInvitationInteraction, Members: &mLeadInvitationInteraction, Type: smithy.ShapeTypeStructure})
+var sLifeCycle_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeEnum})
+var sLifeCycle_ClosedLostReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClosedLostReason", ID: &iClosedLostReason, Members: &mClosedLostReason, Type: smithy.ShapeTypeEnum})
+var sLifeCycle_NextSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextSteps", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLifeCycle_TargetCloseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCloseDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sLifeCycle_ReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewStatus", ID: &iReviewStatus, Members: &mReviewStatus, Type: smithy.ShapeTypeEnum})
+var sLifeCycle_ReviewComments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewComments", ID: &pString, Type: smithy.ShapeTypeString})
+var sLifeCycle_ReviewStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewStatusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sLifeCycle_NextStepsHistory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextStepsHistory", ID: &i_NextStepsHistories, Members: &m_NextStepsHistories, Type: smithy.ShapeTypeList})
+var sLifeCycleForView_TargetCloseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCloseDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sLifeCycleForView_ReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewStatus", ID: &iReviewStatus, Members: &mReviewStatus, Type: smithy.ShapeTypeEnum})
+var sLifeCycleForView_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeEnum})
+var sLifeCycleForView_NextSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextSteps", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLifeCycleSummary_Stage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stage", ID: &iStage, Members: &mStage, Type: smithy.ShapeTypeEnum})
+var sLifeCycleSummary_ClosedLostReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClosedLostReason", ID: &iClosedLostReason, Members: &mClosedLostReason, Type: smithy.ShapeTypeEnum})
+var sLifeCycleSummary_NextSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextSteps", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sLifeCycleSummary_TargetCloseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCloseDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sLifeCycleSummary_ReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewStatus", ID: &iReviewStatus, Members: &mReviewStatus, Type: smithy.ShapeTypeEnum})
+var sLifeCycleSummary_ReviewComments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewComments", ID: &pString, Type: smithy.ShapeTypeString})
+var sLifeCycleSummary_ReviewStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReviewStatusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ListEngagementByAcceptingInvitationTaskSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListEngagementByAcceptingInvitationTaskSummary, Members: &mListEngagementByAcceptingInvitationTaskSummary, Type: smithy.ShapeTypeStructure})
+var sListEngagementByAcceptingInvitationTaskSummary_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTaskSummary_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTaskSummary_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sListEngagementByAcceptingInvitationTaskSummary_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var sListEngagementByAcceptingInvitationTaskSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTaskSummary_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &iReasonCode, Members: &mReasonCode, Type: smithy.ShapeTypeEnum})
+var sListEngagementByAcceptingInvitationTaskSummary_OpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobId", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementInvitationId", ID: &i_EngagementInvitationIdentifier, Type: smithy.ShapeTypeString})
+var s_ListEngagementFromOpportunityTaskSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListEngagementFromOpportunityTaskSummary, Members: &mListEngagementFromOpportunityTaskSummary, Type: smithy.ShapeTypeStructure})
+var sListEngagementFromOpportunityTaskSummary_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTaskSummary_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTaskSummary_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sListEngagementFromOpportunityTaskSummary_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var sListEngagementFromOpportunityTaskSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTaskSummary_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &iReasonCode, Members: &mReasonCode, Type: smithy.ShapeTypeEnum})
+var sListEngagementFromOpportunityTaskSummary_OpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobId", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTaskSummary_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTaskSummary_EngagementInvitationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementInvitationId", ID: &i_EngagementInvitationIdentifier, Type: smithy.ShapeTypeString})
+var s_ListOpportunityFromEngagementTaskSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListOpportunityFromEngagementTaskSummary, Members: &mListOpportunityFromEngagementTaskSummary, Type: smithy.ShapeTypeStructure})
+var sListOpportunityFromEngagementTaskSummary_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskIdentifier, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTaskSummary_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTaskSummary_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sListOpportunityFromEngagementTaskSummary_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var sListOpportunityFromEngagementTaskSummary_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTaskSummary_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &iReasonCode, Members: &mReasonCode, Type: smithy.ShapeTypeEnum})
+var sListOpportunityFromEngagementTaskSummary_OpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobId", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTaskSummary_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTaskSummary_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_ContextIdentifier, Type: smithy.ShapeTypeString})
+var sListTasksSortBase_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sListTasksSortBase_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iListTasksSortName, Members: &mListTasksSortName, Type: smithy.ShapeTypeEnum})
+var sListTasksSortName_START_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketing_CampaignName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CampaignName", ID: &pString, Type: smithy.ShapeTypeString})
+var sMarketing_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &iMarketingSource, Members: &mMarketingSource, Type: smithy.ShapeTypeEnum})
+var sMarketing_UseCases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UseCases", ID: &i_UseCases, Members: &m_UseCases, Type: smithy.ShapeTypeList})
+var sMarketing_Channels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Channels", ID: &i_Channels, Members: &m_Channels, Type: smithy.ShapeTypeList})
+var sMarketing_AwsFundingUsed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsFundingUsed", ID: &iAwsFundingUsed, Members: &mAwsFundingUsed, Type: smithy.ShapeTypeEnum})
+var sMarketingSource_MARKETING_ACTIVITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MARKETING_ACTIVITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMarketingSource_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMonetaryValue_Amount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Amount", ID: &pString, Type: smithy.ShapeTypeString})
+var sMonetaryValue_CurrencyCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CurrencyCode", ID: &iCurrencyCode, Members: &mCurrencyCode, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sNationalSecurity_YES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNationalSecurity_NO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_NextStepsHistories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNextStepsHistory, Members: &mNextStepsHistory, Type: smithy.ShapeTypeStructure})
+var sNextStepsHistory_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var sNextStepsHistory_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sOpportunityEngagementInvitationSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sOpportunityEngagementInvitationSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iOpportunityEngagementInvitationSortName, Members: &mOpportunityEngagementInvitationSortName, Type: smithy.ShapeTypeEnum})
+var sOpportunityEngagementInvitationSortName_INVITATION_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVITATION_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_OpportunityIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sOpportunityInvitationPayload_SenderContacts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderContacts", ID: &i_SenderContactList, Members: &m_SenderContactList, Type: smithy.ShapeTypeList})
+var sOpportunityInvitationPayload_ReceiverResponsibilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReceiverResponsibilities", ID: &i_ReceiverResponsibilityList, Members: &m_ReceiverResponsibilityList, Type: smithy.ShapeTypeList})
+var sOpportunityInvitationPayload_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iEngagementCustomer, Members: &mEngagementCustomer, Type: smithy.ShapeTypeStructure})
+var sOpportunityInvitationPayload_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iProjectDetails, Members: &mProjectDetails, Type: smithy.ShapeTypeStructure})
+var sOpportunityOrigin_AWS_REFERRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_REFERRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunityOrigin_PARTNER_REFERRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTNER_REFERRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunityQuality_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sOpportunityQuality_Trend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Trend", ID: &pString, Type: smithy.ShapeTypeString})
+var sOpportunitySort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sOpportunitySort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iOpportunitySortName, Members: &mOpportunitySortName, Type: smithy.ShapeTypeEnum})
+var sOpportunitySortName_LAST_MODIFIEDDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_MODIFIEDDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunitySortName_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunitySortName_CUSTOMER_COMPANY_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_COMPANY_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunitySortName_CREATED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunitySortName_TARGET_CLOSE_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TARGET_CLOSE_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_OpportunitySummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpportunitySummary, Members: &mOpportunitySummary, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummary_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sOpportunitySummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sOpportunitySummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_OpportunityArn, Type: smithy.ShapeTypeString})
+var sOpportunitySummary_PartnerOpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerOpportunityIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sOpportunitySummary_OpportunityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityType", ID: &iOpportunityType, Members: &mOpportunityType, Type: smithy.ShapeTypeEnum})
+var sOpportunitySummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sOpportunitySummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sOpportunitySummary_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycle", ID: &iLifeCycleSummary, Members: &mLifeCycleSummary, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummary_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iCustomerSummary, Members: &mCustomerSummary, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummary_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iProjectSummary, Members: &mProjectSummary, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummaryView_OpportunityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityType", ID: &iOpportunityType, Members: &mOpportunityType, Type: smithy.ShapeTypeEnum})
+var sOpportunitySummaryView_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iLifeCycleForView, Members: &mLifeCycleForView, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummaryView_OpportunityTeam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityTeam", ID: &i_PartnerOpportunityTeamMembersList, Members: &m_PartnerOpportunityTeamMembersList, Type: smithy.ShapeTypeList})
+var sOpportunitySummaryView_PrimaryNeedsFromAws = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryNeedsFromAws", ID: &i_PrimaryNeedsFromAws, Members: &m_PrimaryNeedsFromAws, Type: smithy.ShapeTypeList})
+var sOpportunitySummaryView_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iCustomer, Members: &mCustomer, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummaryView_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iProjectView, Members: &mProjectView, Type: smithy.ShapeTypeStructure})
+var sOpportunitySummaryView_RelatedEntityIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityIdentifiers", ID: &iRelatedEntityIdentifiers, Members: &mRelatedEntityIdentifiers, Type: smithy.ShapeTypeStructure})
+var sOpportunityType_NET_NEW_BUSINESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NET_NEW_BUSINESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunityType_FLAT_RENEWAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLAT_RENEWAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpportunityType_EXPANSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPANSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sParticipantType_SENDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENDER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sParticipantType_RECEIVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RECEIVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PartnerOpportunityTeamMembersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContact, Members: &mContact, Type: smithy.ShapeTypeStructure})
+var sPayload_OpportunityInvitation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityInvitation", ID: &iOpportunityInvitationPayload, Members: &mOpportunityInvitationPayload, Type: smithy.ShapeTypeStructure})
+var sPayload_LeadInvitation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LeadInvitation", ID: &iLeadInvitationPayload, Members: &mLeadInvitationPayload, Type: smithy.ShapeTypeStructure})
+var sPaymentFrequency_MONTHLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_ARCHITECTURAL_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_ARCHITECTURAL_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_BUSINESS_PRESENTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_BUSINESS_PRESENTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_COMPETITIVE_INFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_COMPETITIVE_INFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_PRICING_ASSISTANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_PRICING_ASSISTANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_TECHNICAL_CONSULTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_TECHNICAL_CONSULTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_DEAL_SUPPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_DEAL_SUPPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrimaryNeedFromAws_CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PrimaryNeedsFromAws_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPrimaryNeedFromAws, Members: &mPrimaryNeedFromAws, Type: smithy.ShapeTypeEnum})
+var s_ProfileNextStepsHistories_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProfileNextStepsHistory, Members: &mProfileNextStepsHistory, Type: smithy.ShapeTypeStructure})
+var sProfileNextStepsHistory_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var sProfileNextStepsHistory_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sProject_DeliveryModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryModels", ID: &i_DeliveryModels, Members: &m_DeliveryModels, Type: smithy.ShapeTypeList})
+var sProject_ExpectedCustomerSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedCustomerSpend", ID: &i_ExpectedCustomerSpendList, Members: &m_ExpectedCustomerSpendList, Type: smithy.ShapeTypeList})
+var sProject_ExpectedContractDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedContractDuration", ID: &iExpectedContractDuration, Members: &mExpectedContractDuration, Type: smithy.ShapeTypeStructure})
+var sProject_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sProject_ApnPrograms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApnPrograms", ID: &i_ApnPrograms, Members: &m_ApnPrograms, Type: smithy.ShapeTypeList})
+var sProject_CustomerBusinessProblem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerBusinessProblem", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sProject_CustomerUseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerUseCase", ID: &pString, Type: smithy.ShapeTypeString})
+var sProject_RelatedOpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedOpportunityIdentifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sProject_SalesActivities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SalesActivities", ID: &i_SalesActivities, Members: &m_SalesActivities, Type: smithy.ShapeTypeList})
+var sProject_CompetitorName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompetitorName", ID: &iCompetitorName, Members: &mCompetitorName, Type: smithy.ShapeTypeEnum})
+var sProject_OtherCompetitorNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherCompetitorNames", ID: &pString, Type: smithy.ShapeTypeString})
+var sProject_OtherSolutionDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherSolutionDescription", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sProject_AdditionalComments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdditionalComments", ID: &pString, Type: smithy.ShapeTypeString})
+var sProject_AwsPartition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsPartition", ID: &iAwsPartition, Members: &mAwsPartition, Type: smithy.ShapeTypeEnum})
+var sProjectDetails_BusinessProblem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessProblem", ID: &i_EngagementCustomerBusinessProblem, Traits: &t46, Type: smithy.ShapeTypeString})
+var sProjectDetails_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &pString, Type: smithy.ShapeTypeString})
+var sProjectDetails_TargetCompletionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCompletionDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sProjectDetails_ExpectedCustomerSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedCustomerSpend", ID: &i_ExpectedCustomerSpendList, Members: &m_ExpectedCustomerSpendList, Type: smithy.ShapeTypeList})
+var sProjectSummary_DeliveryModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryModels", ID: &i_DeliveryModels, Members: &m_DeliveryModels, Type: smithy.ShapeTypeList})
+var sProjectSummary_ExpectedCustomerSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedCustomerSpend", ID: &i_ExpectedCustomerSpendList, Members: &m_ExpectedCustomerSpendList, Type: smithy.ShapeTypeList})
+var sProjectSummary_ExpectedContractDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedContractDuration", ID: &iExpectedContractDuration, Members: &mExpectedContractDuration, Type: smithy.ShapeTypeStructure})
+var sProjectView_DeliveryModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryModels", ID: &i_DeliveryModels, Members: &m_DeliveryModels, Type: smithy.ShapeTypeList})
+var sProjectView_ExpectedCustomerSpend = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedCustomerSpend", ID: &i_ExpectedCustomerSpendList, Members: &m_ExpectedCustomerSpendList, Type: smithy.ShapeTypeList})
+var sProjectView_ExpectedContractDuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedContractDuration", ID: &iExpectedContractDuration, Members: &mExpectedContractDuration, Type: smithy.ShapeTypeStructure})
+var sProjectView_CustomerUseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerUseCase", ID: &pString, Type: smithy.ShapeTypeString})
+var sProjectView_SalesActivities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SalesActivities", ID: &i_SalesActivities, Members: &m_SalesActivities, Type: smithy.ShapeTypeList})
+var sProjectView_OtherSolutionDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OtherSolutionDescription", ID: &i_PiiString, Traits: &t46, Type: smithy.ShapeTypeString})
+var sProspectingFromEngagementTaskSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sProspectingFromEngagementTaskSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iProspectingFromEngagementTaskSortName, Members: &mProspectingFromEngagementTaskSortName, Type: smithy.ShapeTypeEnum})
+var sProspectingFromEngagementTaskSortName_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProspectingFromEngagementTaskSortName_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskName", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProspectingFromEngagementTaskSortName_FailedEngagementCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEngagementCount", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProspectingInsights_MarketplaceEngagementScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MarketplaceEngagementScore", ID: &i_EngagementScoreLevel, Type: smithy.ShapeTypeString})
+var sProspectingInsights_SolutionScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionScore", ID: &pString, Type: smithy.ShapeTypeString})
+var sProspectingInsights_SolutionCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionCategory", ID: &pString, Type: smithy.ShapeTypeString})
+var sProspectingInsights_SolutionSubCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionSubCategory", ID: &pString, Type: smithy.ShapeTypeString})
+var sProspectingResult_Aws = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aws", ID: &iProspectingResultAws, Members: &mProspectingResultAws, Type: smithy.ShapeTypeStructure})
+var sProspectingResultAws_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iProspectingResultCustomer, Members: &mProspectingResultCustomer, Type: smithy.ShapeTypeStructure})
+var sProspectingResultAws_Insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insights", ID: &iProspectingInsights, Members: &mProspectingInsights, Type: smithy.ShapeTypeStructure})
+var sProspectingResultAws_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sProspectingResultAws_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sProspectingResultAws_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_ProspectingTaskIdentifier, Type: smithy.ShapeTypeString})
+var sProspectingResultAws_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var sProspectingResultAws_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskName", ID: &i_TaskName, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_AccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountName", ID: &i_ProspectingAccountName, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_Geo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Geo", ID: &i_ProspectingGeo, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_ProspectingRegion, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_SubRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubRegion", ID: &i_ProspectingSubRegion, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &iCountryCode, Members: &mCountryCode, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sProspectingResultCustomer_Industry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Industry", ID: &iIndustry, Members: &mIndustry, Type: smithy.ShapeTypeEnum})
+var sProspectingResultCustomer_SubIndustry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubIndustry", ID: &i_ProspectingSubIndustry, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_Segment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segment", ID: &i_ProspectingSegment, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_CompanySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompanySize", ID: &i_ProspectingCompanySize, Type: smithy.ShapeTypeString})
+var sProspectingResultCustomer_EligiblePrograms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EligiblePrograms", ID: &i_EligibleProgramsList, Members: &m_EligibleProgramsList, Type: smithy.ShapeTypeList})
+var sProspectingResultCustomer_PublicProfileSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublicProfileSummary", ID: &i_ProspectingPublicProfileSummary, Type: smithy.ShapeTypeString})
+var sProspectingTaskStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProspectingTaskStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProspectingTaskStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProspectingTaskStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sProspectingTaskSummary_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_ProspectingTaskIdentifier, Type: smithy.ShapeTypeString})
+var sProspectingTaskSummary_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_ProspectingTaskArn, Type: smithy.ShapeTypeString})
+var sProspectingTaskSummary_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskName", ID: &i_TaskName, Type: smithy.ShapeTypeString})
+var sProspectingTaskSummary_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sProspectingTaskSummary_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sProspectingTaskSummary_TotalEngagementCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalEngagementCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sProspectingTaskSummary_CompletedEngagementCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedEngagementCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sProspectingTaskSummary_FailedEngagementCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEngagementCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var s_ProspectingTaskSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProspectingTaskSummary, Members: &mProspectingTaskSummary, Type: smithy.ShapeTypeStructure})
+var sReasonCode_INVITATION_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVITATION_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_INVITATION_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVITATION_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_ENGAGEMENT_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGEMENT_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_OPPORTUNITY_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_RESOURCE_SNAPSHOT_JOB_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_SNAPSHOT_JOB_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_ENGAGEMENT_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGEMENT_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_ENGAGEMENT_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGEMENT_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_OPPORTUNITY_SUBMISSION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY_SUBMISSION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_ENGAGEMENT_INVITATION_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENGAGEMENT_INVITATION_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_INTERNAL_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTERNAL_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_OPPORTUNITY_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_OPPORTUNITY_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_RESOURCE_SNAPSHOT_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_SNAPSHOT_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_RESOURCE_SNAPSHOT_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_SNAPSHOT_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_RESOURCE_SNAPSHOT_CONFLICT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_SNAPSHOT_CONFLICT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_SERVICE_QUOTA_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICE_QUOTA_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_REQUEST_THROTTLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_THROTTLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_CONTEXT_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTEXT_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReasonCode_DISQUALIFIED_LEAD_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISQUALIFIED_LEAD_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiver_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &iAccountReceiver, Members: &mAccountReceiver, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_DISTRIBUTOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_RESELLER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESELLER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_HARDWARE_PARTNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARDWARE_PARTNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_MANAGED_SERVICE_PROVIDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_SERVICE_PROVIDER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_SOFTWARE_PARTNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOFTWARE_PARTNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_SERVICES_PARTNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVICES_PARTNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_TRAINING_PARTNER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINING_PARTNER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_CO_SELL_FACILITATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL_FACILITATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReceiverResponsibility_FACILITATOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FACILITATOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ReceiverResponsibilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iReceiverResponsibility, Members: &mReceiverResponsibility, Type: smithy.ShapeTypeEnum})
+var sRecommendation_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecommendation_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecommendation_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_RecommendationAttributeMap, Members: &m_RecommendationAttributeMap, Type: smithy.ShapeTypeMap})
+var s_RecommendationAttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_RecommendationAttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_RecommendationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendation, Members: &mRecommendation, Type: smithy.ShapeTypeStructure})
+var sRelatedEntityIdentifiers_AwsMarketplaceOffers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceOffers", ID: &i_AwsMarketplaceOfferIdentifiers, Members: &m_AwsMarketplaceOfferIdentifiers, Type: smithy.ShapeTypeList})
+var sRelatedEntityIdentifiers_AwsMarketplaceOfferSets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceOfferSets", ID: &i_AwsMarketplaceOfferSetIdentifiers, Members: &m_AwsMarketplaceOfferSetIdentifiers, Type: smithy.ShapeTypeList})
+var sRelatedEntityIdentifiers_Solutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Solutions", ID: &i_SolutionIdentifiers, Members: &m_SolutionIdentifiers, Type: smithy.ShapeTypeList})
+var sRelatedEntityIdentifiers_AwsProducts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsProducts", ID: &i_AwsProductIdentifiers, Members: &m_AwsProductIdentifiers, Type: smithy.ShapeTypeList})
+var sRelatedEntityIdentifiers_AwsMarketplaceSolutions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceSolutions", ID: &i_AwsMarketplaceSolutionIdentifiers, Members: &m_AwsMarketplaceSolutionIdentifiers, Type: smithy.ShapeTypeList})
+var sRelatedEntityIdentifiers_AwsMarketplaceProducts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceProducts", ID: &i_AwsMarketplaceProductIdentifiers, Members: &m_AwsMarketplaceProductIdentifiers, Type: smithy.ShapeTypeList})
+var sRelatedEntityType_SOLUTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOLUTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelatedEntityType_AWS_PRODUCTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_PRODUCTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelatedEntityType_AWS_MARKETPLACE_OFFERS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_OFFERS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelatedEntityType_AWS_MARKETPLACE_OFFER_SETS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_OFFER_SETS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelatedEntityType_AWS_MARKETPLACE_SOLUTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_SOLUTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelatedEntityType_AWS_MARKETPLACE_PRODUCTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_MARKETPLACE_PRODUCTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceSnapshotJobStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceSnapshotJobStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceSnapshotJobSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sResourceSnapshotJobSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceSnapshotJobArn, Type: smithy.ShapeTypeString})
+var sResourceSnapshotJobSummary_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sResourceSnapshotJobSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iResourceSnapshotJobStatus, Members: &mResourceSnapshotJobStatus, Type: smithy.ShapeTypeEnum})
+var s_ResourceSnapshotJobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSnapshotJobSummary, Members: &mResourceSnapshotJobSummary, Type: smithy.ShapeTypeStructure})
+var sResourceSnapshotPayload_OpportunitySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunitySummary", ID: &iOpportunitySummaryView, Members: &mOpportunitySummaryView, Type: smithy.ShapeTypeStructure})
+var sResourceSnapshotPayload_AwsOpportunitySummaryFullView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsOpportunitySummaryFullView", ID: &iAwsOpportunitySummaryFullView, Members: &mAwsOpportunitySummaryFullView, Type: smithy.ShapeTypeStructure})
+var sResourceSnapshotSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceSnapshotArn, Type: smithy.ShapeTypeString})
+var sResourceSnapshotSummary_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceSnapshotRevision, Type: smithy.ShapeTypeInteger})
+var sResourceSnapshotSummary_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sResourceSnapshotSummary_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sResourceSnapshotSummary_ResourceSnapshotTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotTemplateName", ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sResourceSnapshotSummary_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_ResourceSnapshotSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSnapshotSummary, Members: &mResourceSnapshotSummary, Type: smithy.ShapeTypeStructure})
+var sResourceType_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRevenueModel_CONTRACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTRACT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRevenueModel_PAY_AS_YOU_GO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAY_AS_YOU_GO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRevenueModel_SUBSCRIPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBSCRIPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReviewStatus_PENDING_SUBMISSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_SUBMISSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReviewStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReviewStatus_IN_REVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_REVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReviewStatus_APPROVED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPROVED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReviewStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReviewStatus_ACTION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SalesActivities_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSalesActivity, Members: &mSalesActivity, Type: smithy.ShapeTypeEnum})
+var sSalesActivity_INITIALIZED_DISCUSSIONS_WITH_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZED_DISCUSSIONS_WITH_CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesActivity_CUSTOMER_HAS_SHOWN_INTEREST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_HAS_SHOWN_INTEREST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesActivity_CONDUCTED_POC_DEMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONDUCTED_POC_DEMO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesActivity_IN_EVALUATION_PLANNING_STAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_EVALUATION_PLANNING_STAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesActivity_AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesActivity_COMPLETED_ACTION_PLAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED_ACTION_PLAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesActivity_FINALIZED_DEPLOYMENT_NEEDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINALIZED_DEPLOYMENT_NEEDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesActivity_SOW_SIGNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOW_SIGNED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesInvolvementType_FOR_VISIBILITY_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOR_VISIBILITY_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSalesInvolvementType_CO_SELL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CO_SELL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSenderContact_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_SenderContactEmail, Traits: &t46, Type: smithy.ShapeTypeString})
+var sSenderContact_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sSenderContact_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_Name, Traits: &t46, Type: smithy.ShapeTypeString})
+var sSenderContact_BusinessTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BusinessTitle", ID: &i_JobTitle, Traits: &t46, Type: smithy.ShapeTypeString})
+var sSenderContact_Phone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Phone", ID: &i_PhoneNumber, Traits: &t46, Type: smithy.ShapeTypeString})
+var s_SenderContactList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSenderContact, Members: &mSenderContact, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sSoftwareRevenue_DeliveryModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryModel", ID: &iRevenueModel, Members: &mRevenueModel, Type: smithy.ShapeTypeEnum})
+var sSoftwareRevenue_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &iMonetaryValue, Members: &mMonetaryValue, Type: smithy.ShapeTypeStructure})
+var sSoftwareRevenue_EffectiveDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EffectiveDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sSoftwareRevenue_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sSolutionBase_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sSolutionBase_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_SolutionIdentifier, Type: smithy.ShapeTypeString})
+var sSolutionBase_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_SolutionArn, Type: smithy.ShapeTypeString})
+var sSolutionBase_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sSolutionBase_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSolutionStatus, Members: &mSolutionStatus, Type: smithy.ShapeTypeEnum})
+var sSolutionBase_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &pString, Type: smithy.ShapeTypeString})
+var sSolutionBase_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sSolutionBase_AwsMarketplaceSolutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceSolutionArn", ID: &i_AwsMarketplaceSolutionArn, Type: smithy.ShapeTypeString})
+var s_SolutionIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SolutionIdentifier, Type: smithy.ShapeTypeString})
+var s_SolutionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSolutionBase, Members: &mSolutionBase, Type: smithy.ShapeTypeStructure})
+var sSolutionSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sSolutionSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSolutionSortName, Members: &mSolutionSortName, Type: smithy.ShapeTypeEnum})
+var sSolutionSortName_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSolutionSortName_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSolutionSortName_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSolutionSortName_CATEGORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CATEGORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSolutionSortName_CREATEDDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATEDDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSolutionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSolutionStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSolutionStatus_DRAFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortBy_CREATED_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortObject_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSortBy, Members: &mSortBy, Type: smithy.ShapeTypeEnum})
+var sSortObject_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_PROSPECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROSPECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_QUALIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_TECHNICAL_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TECHNICAL_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_BUSINESS_VALIDATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_COMMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_LAUNCHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAUNCHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStage_CLOSED_LOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSED_LOST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTargetCloseDateFilter_AfterTargetCloseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterTargetCloseDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var sTargetCloseDateFilter_BeforeTargetCloseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeTargetCloseDate", ID: &i_Date, Type: smithy.ShapeTypeString})
+var s_TaskIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProspectingTaskIdentifier, Type: smithy.ShapeTypeString})
+var s_TaskIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TaskArnOrIdentifier, Type: smithy.ShapeTypeString})
+var s_TaskNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TaskName, Type: smithy.ShapeTypeString})
+var sTaskStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaskStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TaskStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateEngagementContextPayload_Lead = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lead", ID: &iUpdateLeadContext, Members: &mUpdateLeadContext, Type: smithy.ShapeTypeStructure})
+var sUpdateEngagementContextPayload_CustomerProject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerProject", ID: &iCustomerProjectsContext, Members: &mCustomerProjectsContext, Type: smithy.ShapeTypeStructure})
+var sUpdateEngagementContextPayload_ProspectingResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProspectingResult", ID: &iProspectingResult, Members: &mProspectingResult, Type: smithy.ShapeTypeStructure})
+var sUpdateLeadContext_QualificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QualificationStatus", ID: &i_LeadQualificationStatus, Type: smithy.ShapeTypeString})
+var sUpdateLeadContext_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iLeadCustomer, Members: &mLeadCustomer, Type: smithy.ShapeTypeStructure})
+var sUpdateLeadContext_Interaction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Interaction", ID: &iLeadInteraction, Members: &mLeadInteraction, Type: smithy.ShapeTypeStructure})
+var sUpdateLeadContext_Insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insights", ID: &iLeadInsights, Members: &mLeadInsights, Type: smithy.ShapeTypeStructure})
+var s_UseCases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationException_ErrorList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorList", ID: &i_ValidationExceptionErrorList, Members: &m_ValidationExceptionErrorList, Type: smithy.ShapeTypeList})
+var sValidationExceptionError_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldName", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iValidationExceptionErrorCode, Members: &mValidationExceptionErrorCode, Type: smithy.ShapeTypeEnum})
+var sValidationExceptionErrorCode_REQUIRED_FIELD_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUIRED_FIELD_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_INVALID_ENUM_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ENUM_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_INVALID_STRING_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STRING_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_INVALID_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_NOT_ENOUGH_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_ENOUGH_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_TOO_MANY_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_INVALID_RESOURCE_STATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_RESOURCE_STATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_DUPLICATE_KEY_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATE_KEY_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_VALUE_OUT_OF_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALUE_OUT_OF_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionErrorCode_ACTION_NOT_PERMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTION_NOT_PERMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionError, Members: &mValidationExceptionError, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_REQUEST_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_BUSINESS_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BUSINESS_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVisibility_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVisibility_LIMITED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIMITED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAcceptEngagementInvitationRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sAcceptEngagementInvitationRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sAssignOpportunityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sAssignOpportunityRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sAssignOpportunityRequest_Assignee = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Assignee", ID: &iAssigneeContact, Members: &mAssigneeContact, Type: smithy.ShapeTypeStructure})
+var sAssociateOpportunityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sAssociateOpportunityRequest_OpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityIdentifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sAssociateOpportunityRequest_RelatedEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityType", ID: &iRelatedEntityType, Members: &mRelatedEntityType, Type: smithy.ShapeTypeEnum})
+var sAssociateOpportunityRequest_RelatedEntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateEngagementContextRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementContextRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementContextRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateEngagementContextRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEngagementContextType, Members: &mEngagementContextType, Type: smithy.ShapeTypeEnum})
+var sCreateEngagementContextRequest_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &iEngagementContextPayload, Members: &mEngagementContextPayload, Type: smithy.ShapeTypeUnion})
+var sCreateEngagementContextResponse_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementContextResponse_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementArn", ID: &i_EngagementArn, Type: smithy.ShapeTypeString})
+var sCreateEngagementContextResponse_EngagementLastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementLastModifiedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sCreateEngagementContextResponse_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_EngagementContextIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateEngagementRequest_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_EngagementTitle, Type: smithy.ShapeTypeString})
+var sCreateEngagementRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_EngagementDescription, Type: smithy.ShapeTypeString})
+var sCreateEngagementRequest_Contexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contexts", ID: &i_EngagementContexts, Members: &m_EngagementContexts, Type: smithy.ShapeTypeList})
+var sCreateEngagementInvitationRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementInvitationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateEngagementInvitationRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementInvitationRequest_Invitation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Invitation", ID: &iInvitation, Members: &mInvitation, Type: smithy.ShapeTypeStructure})
+var sCreateEngagementInvitationResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EngagementInvitationIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementInvitationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EngagementInvitationArn, Type: smithy.ShapeTypeString})
+var sCreateEngagementResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sCreateEngagementResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EngagementArn, Type: smithy.ShapeTypeString})
+var sCreateEngagementResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sCreateOpportunityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sCreateOpportunityRequest_PrimaryNeedsFromAws = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryNeedsFromAws", ID: &i_PrimaryNeedsFromAws, Members: &m_PrimaryNeedsFromAws, Type: smithy.ShapeTypeList})
+var sCreateOpportunityRequest_NationalSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NationalSecurity", ID: &iNationalSecurity, Members: &mNationalSecurity, Type: smithy.ShapeTypeEnum})
+var sCreateOpportunityRequest_PartnerOpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerOpportunityIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateOpportunityRequest_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iCustomer, Members: &mCustomer, Type: smithy.ShapeTypeStructure})
+var sCreateOpportunityRequest_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure})
+var sCreateOpportunityRequest_OpportunityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityType", ID: &iOpportunityType, Members: &mOpportunityType, Type: smithy.ShapeTypeEnum})
+var sCreateOpportunityRequest_Marketing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketing", ID: &iMarketing, Members: &mMarketing, Type: smithy.ShapeTypeStructure})
+var sCreateOpportunityRequest_SoftwareRevenue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareRevenue", ID: &iSoftwareRevenue, Members: &mSoftwareRevenue, Type: smithy.ShapeTypeStructure})
+var sCreateOpportunityRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateOpportunityRequest_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycle", ID: &iLifeCycle, Members: &mLifeCycle, Type: smithy.ShapeTypeStructure})
+var sCreateOpportunityRequest_Origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origin", ID: &iOpportunityOrigin, Members: &mOpportunityOrigin, Type: smithy.ShapeTypeEnum})
+var sCreateOpportunityRequest_OpportunityTeam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityTeam", ID: &i_PartnerOpportunityTeamMembersList, Members: &m_PartnerOpportunityTeamMembersList, Type: smithy.ShapeTypeList})
+var sCreateOpportunityRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateOpportunityResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sCreateOpportunityResponse_PartnerOpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerOpportunityIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateOpportunityResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sCreateResourceSnapshotRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sCreateResourceSnapshotRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotTemplateIdentifier", ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotJobRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotJobRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotJobRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sCreateResourceSnapshotJobRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotJobRequest_ResourceSnapshotTemplateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotTemplateIdentifier", ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotJobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateResourceSnapshotJobResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceSnapshotJobArn, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sCreateResourceSnapshotResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceSnapshotRevision, Type: smithy.ShapeTypeInteger})
+var sDeleteResourceSnapshotJobRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobIdentifier", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sDisassociateOpportunityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sDisassociateOpportunityRequest_OpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityIdentifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sDisassociateOpportunityRequest_RelatedEntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityType", ID: &iRelatedEntityType, Members: &mRelatedEntityType, Type: smithy.ShapeTypeEnum})
+var sDisassociateOpportunityRequest_RelatedEntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAwsOpportunitySummaryRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedOpportunityIdentifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sGetAwsOpportunitySummaryResponse_RelatedOpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedOpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sGetAwsOpportunitySummaryResponse_Origin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Origin", ID: &iOpportunityOrigin, Members: &mOpportunityOrigin, Type: smithy.ShapeTypeEnum})
+var sGetAwsOpportunitySummaryResponse_InvolvementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvolvementType", ID: &iSalesInvolvementType, Members: &mSalesInvolvementType, Type: smithy.ShapeTypeEnum})
+var sGetAwsOpportunitySummaryResponse_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum})
+var sGetAwsOpportunitySummaryResponse_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycle", ID: &iAwsOpportunityLifeCycle, Members: &mAwsOpportunityLifeCycle, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryResponse_OpportunityTeam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityTeam", ID: &i_AwsOpportunityTeamMembersList, Members: &m_AwsOpportunityTeamMembersList, Type: smithy.ShapeTypeList})
+var sGetAwsOpportunitySummaryResponse_Insights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Insights", ID: &iAwsOpportunityInsights, Members: &mAwsOpportunityInsights, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvolvementTypeChangeReason", ID: &iInvolvementTypeChangeReason, Members: &mInvolvementTypeChangeReason, Type: smithy.ShapeTypeEnum})
+var sGetAwsOpportunitySummaryResponse_RelatedEntityIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityIds", ID: &iAwsOpportunityRelatedEntities, Members: &mAwsOpportunityRelatedEntities, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryResponse_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iAwsOpportunityCustomer, Members: &mAwsOpportunityCustomer, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryResponse_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iAwsOpportunityProject, Members: &mAwsOpportunityProject, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryResponse_CosellMotion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CosellMotion", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAwsOpportunitySummaryResponse_SoftwareRevenue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareRevenue", ID: &iAwsSoftwareRevenue, Members: &mAwsSoftwareRevenue, Type: smithy.ShapeTypeStructure})
+var sGetAwsOpportunitySummaryResponse_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_EngagementArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_PayloadType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadType", ID: &iEngagementInvitationPayloadType, Members: &mEngagementInvitationPayloadType, Type: smithy.ShapeTypeEnum})
+var sGetEngagementInvitationResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_EngagementTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementTitle", ID: &i_EngagementTitle, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iInvitationStatus, Members: &mInvitationStatus, Type: smithy.ShapeTypeEnum})
+var sGetEngagementInvitationResponse_InvitationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitationDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetEngagementInvitationResponse_ExpirationDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetEngagementInvitationResponse_SenderAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderAwsAccountId", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_SenderCompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderCompanyName", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_Receiver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Receiver", ID: &iReceiver, Members: &mReceiver, Type: smithy.ShapeTypeUnion})
+var sGetEngagementInvitationResponse_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_RejectionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RejectionReason", ID: &i_RejectionReasonString, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &iPayload, Members: &mPayload, Type: smithy.ShapeTypeUnion})
+var sGetEngagementInvitationResponse_InvitationMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvitationMessage", ID: &i_InvitationMessage, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_EngagementDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementDescription", ID: &i_EngagementDescription, Type: smithy.ShapeTypeString})
+var sGetEngagementInvitationResponse_ExistingMembers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExistingMembers", ID: &i_EngagementMemberSummaries, Members: &m_EngagementMemberSummaries, Type: smithy.ShapeTypeList})
+var sGetEngagementInvitationResponse_EnrichmentContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnrichmentContext", ID: &iEnrichmentContext, Members: &mEnrichmentContext, Type: smithy.ShapeTypeStructure})
+var sGetEngagementResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sGetEngagementResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_EngagementArn, Type: smithy.ShapeTypeString})
+var sGetEngagementResponse_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &i_EngagementTitle, Type: smithy.ShapeTypeString})
+var sGetEngagementResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_EngagementDescription, Type: smithy.ShapeTypeString})
+var sGetEngagementResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetEngagementResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetEngagementResponse_MemberCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetEngagementResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetEngagementResponse_ModifiedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetEngagementResponse_Contexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Contexts", ID: &i_EngagementContexts, Members: &m_EngagementContexts, Type: smithy.ShapeTypeList})
+var sGetOpportunityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetOpportunityRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sGetOpportunityResponse_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetOpportunityResponse_PrimaryNeedsFromAws = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryNeedsFromAws", ID: &i_PrimaryNeedsFromAws, Members: &m_PrimaryNeedsFromAws, Type: smithy.ShapeTypeList})
+var sGetOpportunityResponse_NationalSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NationalSecurity", ID: &iNationalSecurity, Members: &mNationalSecurity, Type: smithy.ShapeTypeEnum})
+var sGetOpportunityResponse_PartnerOpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerOpportunityIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetOpportunityResponse_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iCustomer, Members: &mCustomer, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityResponse_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityResponse_OpportunityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityType", ID: &iOpportunityType, Members: &mOpportunityType, Type: smithy.ShapeTypeEnum})
+var sGetOpportunityResponse_Marketing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketing", ID: &iMarketing, Members: &mMarketing, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityResponse_SoftwareRevenue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareRevenue", ID: &iSoftwareRevenue, Members: &mSoftwareRevenue, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sGetOpportunityResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_OpportunityArn, Type: smithy.ShapeTypeString})
+var sGetOpportunityResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetOpportunityResponse_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetOpportunityResponse_RelatedEntityIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelatedEntityIdentifiers", ID: &iRelatedEntityIdentifiers, Members: &mRelatedEntityIdentifiers, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityResponse_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycle", ID: &iLifeCycle, Members: &mLifeCycle, Type: smithy.ShapeTypeStructure})
+var sGetOpportunityResponse_OpportunityTeam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityTeam", ID: &i_PartnerOpportunityTeamMembersList, Members: &m_PartnerOpportunityTeamMembersList, Type: smithy.ShapeTypeList})
+var sGetProspectingFromEngagementTaskRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetProspectingFromEngagementTaskRequest_TaskIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskIdentifier", ID: &i_ProspectingTaskIdentifier, Type: smithy.ShapeTypeString})
+var sGetProspectingFromEngagementTaskResponse_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_ProspectingTaskIdentifier, Type: smithy.ShapeTypeString})
+var sGetProspectingFromEngagementTaskResponse_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_ProspectingTaskArn, Type: smithy.ShapeTypeString})
+var sGetProspectingFromEngagementTaskResponse_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskName", ID: &i_TaskName, Type: smithy.ShapeTypeString})
+var sGetProspectingFromEngagementTaskResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetProspectingFromEngagementTaskResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetProspectingFromEngagementTaskResponse_Engagements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Engagements", ID: &i_EngagementProspectingResultList, Members: &m_EngagementProspectingResultList, Type: smithy.ShapeTypeList})
+var sGetResourceSnapshotRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sGetResourceSnapshotRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotTemplateIdentifier", ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotRequest_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceSnapshotRevision, Type: smithy.ShapeTypeInteger})
+var sGetResourceSnapshotJobRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobIdentifier", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceSnapshotJobArn, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sGetResourceSnapshotJobResponse_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_ResourceSnapshotTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotTemplateName", ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetResourceSnapshotJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iResourceSnapshotJobStatus, Members: &mResourceSnapshotJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetResourceSnapshotJobResponse_LastSuccessfulExecutionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSuccessfulExecutionDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetResourceSnapshotJobResponse_LastFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastFailure", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotResponse_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotResponse_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sGetResourceSnapshotResponse_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotResponse_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sGetResourceSnapshotResponse_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotResponse_ResourceSnapshotTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotTemplateName", ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sGetResourceSnapshotResponse_Revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revision", ID: &i_ResourceSnapshotRevision, Type: smithy.ShapeTypeInteger})
+var sGetResourceSnapshotResponse_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &iResourceSnapshotPayload, Members: &mResourceSnapshotPayload, Type: smithy.ShapeTypeUnion})
+var sGetResourceSnapshotResponse_TargetMemberAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetMemberAccounts", ID: &i_AwsAccountIdOrAliasList, Members: &m_AwsAccountIdOrAliasList, Type: smithy.ShapeTypeList})
+var sGetSellingSystemSettingsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetSellingSystemSettingsResponse_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sGetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobRoleArn", ID: &i_ResourceSnapshotJobRoleArn, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListEngagementByAcceptingInvitationTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTasksRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iListTasksSortBase, Members: &mListTasksSortBase, Type: smithy.ShapeTypeStructure})
+var sListEngagementByAcceptingInvitationTasksRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementByAcceptingInvitationTasksRequest_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &i_TaskStatuses, Members: &m_TaskStatuses, Type: smithy.ShapeTypeList})
+var sListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityIdentifier", ID: &i_OpportunityIdentifiers, Members: &m_OpportunityIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementInvitationIdentifier", ID: &i_EngagementInvitationIdentifiers, Members: &m_EngagementInvitationIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskIdentifier", ID: &i_TaskIdentifiers, Members: &m_TaskIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementByAcceptingInvitationTasksResponse_TaskSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskSummaries", ID: &i_ListEngagementByAcceptingInvitationTaskSummaries, Members: &m_ListEngagementByAcceptingInvitationTaskSummaries, Type: smithy.ShapeTypeList})
+var sListEngagementByAcceptingInvitationTasksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListEngagementFromOpportunityTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTasksRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iListTasksSortBase, Members: &mListTasksSortBase, Type: smithy.ShapeTypeStructure})
+var sListEngagementFromOpportunityTasksRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementFromOpportunityTasksRequest_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &i_TaskStatuses, Members: &m_TaskStatuses, Type: smithy.ShapeTypeList})
+var sListEngagementFromOpportunityTasksRequest_TaskIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskIdentifier", ID: &i_TaskIdentifiers, Members: &m_TaskIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementFromOpportunityTasksRequest_OpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityIdentifier", ID: &i_OpportunityIdentifiers, Members: &m_OpportunityIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementFromOpportunityTasksRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifiers, Members: &m_EngagementIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementFromOpportunityTasksResponse_TaskSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskSummaries", ID: &i_ListEngagementFromOpportunityTaskSummaries, Members: &m_ListEngagementFromOpportunityTaskSummaries, Type: smithy.ShapeTypeList})
+var sListEngagementFromOpportunityTasksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementInvitationsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementInvitationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListEngagementInvitationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementInvitationsRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iOpportunityEngagementInvitationSort, Members: &mOpportunityEngagementInvitationSort, Type: smithy.ShapeTypeStructure})
+var sListEngagementInvitationsRequest_PayloadType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadType", ID: &i_EngagementInvitationsPayloadType, Members: &m_EngagementInvitationsPayloadType, Type: smithy.ShapeTypeList})
+var sListEngagementInvitationsRequest_ParticipantType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantType", ID: &iParticipantType, Members: &mParticipantType, Type: smithy.ShapeTypeEnum})
+var sListEngagementInvitationsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_InvitationStatusList, Members: &m_InvitationStatusList, Type: smithy.ShapeTypeList})
+var sListEngagementInvitationsRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifiers, Members: &m_EngagementIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementInvitationsRequest_SenderAwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SenderAwsAccountId", ID: &i_AwsAccountIdOrAliasList, Members: &m_AwsAccountIdOrAliasList, Type: smithy.ShapeTypeList})
+var sListEngagementInvitationsResponse_EngagementInvitationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementInvitationSummaries", ID: &i_EngagementInvitationSummaries, Members: &m_EngagementInvitationSummaries, Type: smithy.ShapeTypeList})
+var sListEngagementInvitationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementMembersRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementMembersRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_EngagementArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementMembersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MemberPageSize, Type: smithy.ShapeTypeInteger})
+var sListEngagementMembersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementMembersResponse_EngagementMemberList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementMemberList", ID: &i_EngagementMembers, Members: &m_EngagementMembers, Type: smithy.ShapeTypeList})
+var sListEngagementMembersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementResourceAssociationsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementResourceAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListEngagementResourceAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementResourceAssociationsRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementResourceAssociationsRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sListEngagementResourceAssociationsRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementResourceAssociationsRequest_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementResourceAssociationSummaries", ID: &i_EngagementResourceAssociationSummaryList, Members: &m_EngagementResourceAssociationSummaryList, Type: smithy.ShapeTypeList})
+var sListEngagementResourceAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListEngagementsRequest_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccountList, Members: &m_AwsAccountList, Type: smithy.ShapeTypeList})
+var sListEngagementsRequest_ExcludeCreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeCreatedBy", ID: &i_AwsAccountList, Members: &m_AwsAccountList, Type: smithy.ShapeTypeList})
+var sListEngagementsRequest_ContextTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextTypes", ID: &i_EngagementContextTypeList, Members: &m_EngagementContextTypeList, Type: smithy.ShapeTypeList})
+var sListEngagementsRequest_ExcludeContextTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExcludeContextTypes", ID: &i_EngagementContextTypeList, Members: &m_EngagementContextTypeList, Type: smithy.ShapeTypeList})
+var sListEngagementsRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iEngagementSort, Members: &mEngagementSort, Type: smithy.ShapeTypeStructure})
+var sListEngagementsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_EngagementPageSize, Type: smithy.ShapeTypeInteger})
+var sListEngagementsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEngagementsRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifiers, Members: &m_EngagementIdentifiers, Type: smithy.ShapeTypeList})
+var sListEngagementsResponse_EngagementSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementSummaryList", ID: &i_EngagementSummaryList, Members: &m_EngagementSummaryList, Type: smithy.ShapeTypeList})
+var sListEngagementsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListOpportunitiesRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListOpportunitiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListOpportunitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListOpportunitiesRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iOpportunitySort, Members: &mOpportunitySort, Type: smithy.ShapeTypeStructure})
+var sListOpportunitiesRequest_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iLastModifiedDate, Members: &mLastModifiedDate, Type: smithy.ShapeTypeStructure})
+var sListOpportunitiesRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_FilterIdentifier, Members: &m_FilterIdentifier, Type: smithy.ShapeTypeList})
+var sListOpportunitiesRequest_LifeCycleStage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycleStage", ID: &i_FilterLifeCycleStage, Members: &m_FilterLifeCycleStage, Type: smithy.ShapeTypeList})
+var sListOpportunitiesRequest_LifeCycleReviewStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycleReviewStatus", ID: &i_FilterLifeCycleReviewStatus, Members: &m_FilterLifeCycleReviewStatus, Type: smithy.ShapeTypeList})
+var sListOpportunitiesRequest_CustomerCompanyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomerCompanyName", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sListOpportunitiesRequest_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &iCreatedDateFilter, Members: &mCreatedDateFilter, Type: smithy.ShapeTypeStructure})
+var sListOpportunitiesRequest_TargetCloseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetCloseDate", ID: &iTargetCloseDateFilter, Members: &mTargetCloseDateFilter, Type: smithy.ShapeTypeStructure})
+var sListOpportunitiesResponse_OpportunitySummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunitySummaries", ID: &i_OpportunitySummaries, Members: &m_OpportunitySummaries, Type: smithy.ShapeTypeList})
+var sListOpportunitiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListOpportunityFromEngagementTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTasksRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iListTasksSortBase, Members: &mListTasksSortBase, Type: smithy.ShapeTypeStructure})
+var sListOpportunityFromEngagementTasksRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListOpportunityFromEngagementTasksRequest_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &i_TaskStatuses, Members: &m_TaskStatuses, Type: smithy.ShapeTypeList})
+var sListOpportunityFromEngagementTasksRequest_TaskIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskIdentifier", ID: &i_TaskIdentifiers, Members: &m_TaskIdentifiers, Type: smithy.ShapeTypeList})
+var sListOpportunityFromEngagementTasksRequest_OpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityIdentifier", ID: &i_OpportunityIdentifiers, Members: &m_OpportunityIdentifiers, Type: smithy.ShapeTypeList})
+var sListOpportunityFromEngagementTasksRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifiers, Members: &m_EngagementIdentifiers, Type: smithy.ShapeTypeList})
+var sListOpportunityFromEngagementTasksRequest_ContextIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextIdentifier", ID: &i_ContextIdentifiers, Members: &m_ContextIdentifiers, Type: smithy.ShapeTypeList})
+var sListOpportunityFromEngagementTasksResponse_TaskSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskSummaries", ID: &i_ListOpportunityFromEngagementTaskSummaries, Members: &m_ListOpportunityFromEngagementTaskSummaries, Type: smithy.ShapeTypeList})
+var sListOpportunityFromEngagementTasksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListProspectingFromEngagementTasksRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListProspectingFromEngagementTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListProspectingFromEngagementTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListProspectingFromEngagementTasksRequest_TaskIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskIdentifier", ID: &i_TaskIdentifierList, Members: &m_TaskIdentifierList, Type: smithy.ShapeTypeList})
+var sListProspectingFromEngagementTasksRequest_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskName", ID: &i_TaskNameList, Members: &m_TaskNameList, Type: smithy.ShapeTypeList})
+var sListProspectingFromEngagementTasksRequest_StartAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartAfter", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sListProspectingFromEngagementTasksRequest_StartBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartBefore", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sListProspectingFromEngagementTasksRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iProspectingFromEngagementTaskSort, Members: &mProspectingFromEngagementTaskSort, Type: smithy.ShapeTypeStructure})
+var sListProspectingFromEngagementTasksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListProspectingFromEngagementTasksResponse_TaskSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskSummaries", ID: &i_ProspectingTaskSummaryList, Members: &m_ProspectingTaskSummaryList, Type: smithy.ShapeTypeList})
+var sListResourceSnapshotJobsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListResourceSnapshotJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotJobsRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotJobsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iResourceSnapshotJobStatus, Members: &mResourceSnapshotJobStatus, Type: smithy.ShapeTypeEnum})
+var sListResourceSnapshotJobsRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iSortObject, Members: &mSortObject, Type: smithy.ShapeTypeStructure})
+var sListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobSummaries", ID: &i_ResourceSnapshotJobSummaryList, Members: &m_ResourceSnapshotJobSummaryList, Type: smithy.ShapeTypeList})
+var sListResourceSnapshotJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListResourceSnapshotsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotsRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotsRequest_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sListResourceSnapshotsRequest_ResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceIdentifier", ID: &i_ResourceIdentifier, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotsRequest_ResourceSnapshotTemplateIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotTemplateIdentifier", ID: &i_ResourceTemplateName, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotsRequest_CreatedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBy", ID: &i_AwsAccount, Traits: &t46, Type: smithy.ShapeTypeString})
+var sListResourceSnapshotsResponse_ResourceSnapshotSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotSummaries", ID: &i_ResourceSnapshotSummaryList, Members: &m_ResourceSnapshotSummaryList, Type: smithy.ShapeTypeList})
+var sListResourceSnapshotsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSolutionsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sListSolutionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_PageSize, Type: smithy.ShapeTypeInteger})
+var sListSolutionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSolutionsRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iSolutionSort, Members: &mSolutionSort, Type: smithy.ShapeTypeStructure})
+var sListSolutionsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_FilterStatus, Members: &m_FilterStatus, Type: smithy.ShapeTypeList})
+var sListSolutionsRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_SolutionIdentifiers, Members: &m_SolutionIdentifiers, Type: smithy.ShapeTypeList})
+var sListSolutionsRequest_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sListSolutionsRequest_AwsMarketplaceSolutionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplaceSolutionArn", ID: &i_AwsMarketplaceSolutionArnList, Members: &m_AwsMarketplaceSolutionArnList, Type: smithy.ShapeTypeList})
+var sListSolutionsResponse_SolutionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionSummaries", ID: &i_SolutionList, Members: &m_SolutionList, Type: smithy.ShapeTypeList})
+var sListSolutionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutSellingSystemSettingsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sPutSellingSystemSettingsRequest_ResourceSnapshotJobRoleIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobRoleIdentifier", ID: &i_ResourceSnapshotJobRoleIdentifier, Type: smithy.ShapeTypeString})
+var sPutSellingSystemSettingsResponse_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sPutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobRoleArn", ID: &i_ResourceSnapshotJobRoleArn, Type: smithy.ShapeTypeString})
+var sRejectEngagementInvitationRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sRejectEngagementInvitationRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sRejectEngagementInvitationRequest_RejectionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RejectionReason", ID: &i_RejectionReasonString, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_EngagementInvitationArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartEngagementByAcceptingInvitationTaskResponse_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskResponse_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sStartEngagementByAcceptingInvitationTaskResponse_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var sStartEngagementByAcceptingInvitationTaskResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskResponse_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &iReasonCode, Members: &mReasonCode, Type: smithy.ShapeTypeEnum})
+var sStartEngagementByAcceptingInvitationTaskResponse_OpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobId", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementInvitationId", ID: &i_EngagementInvitationIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskRequest_AwsSubmission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsSubmission", ID: &iAwsSubmission, Members: &mAwsSubmission, Type: smithy.ShapeTypeStructure})
+var sStartEngagementFromOpportunityTaskRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartEngagementFromOpportunityTaskResponse_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskResponse_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sStartEngagementFromOpportunityTaskResponse_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var sStartEngagementFromOpportunityTaskResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskResponse_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &iReasonCode, Members: &mReasonCode, Type: smithy.ShapeTypeEnum})
+var sStartEngagementFromOpportunityTaskResponse_OpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobId", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskResponse_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sStartEngagementFromOpportunityTaskResponse_EngagementInvitationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementInvitationId", ID: &i_EngagementInvitationIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_EngagementArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskRequest_ContextIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextIdentifier", ID: &i_ContextIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartOpportunityFromEngagementTaskResponse_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskResponse_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_TaskArn, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sStartOpportunityFromEngagementTaskResponse_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iTaskStatus, Members: &mTaskStatus, Type: smithy.ShapeTypeEnum})
+var sStartOpportunityFromEngagementTaskResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskResponse_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &iReasonCode, Members: &mReasonCode, Type: smithy.ShapeTypeEnum})
+var sStartOpportunityFromEngagementTaskResponse_OpportunityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityId", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskResponse_ResourceSnapshotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobId", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskResponse_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sStartOpportunityFromEngagementTaskResponse_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_ContextIdentifier, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskRequest_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifiers", ID: &i_EngagementIdentifierList, Members: &m_EngagementIdentifierList, Type: smithy.ShapeTypeList})
+var sStartProspectingFromEngagementTaskRequest_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskName", ID: &i_TaskName, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskResponse_Identifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifiers", ID: &i_EngagementIdentifierList, Members: &m_EngagementIdentifierList, Type: smithy.ShapeTypeList})
+var sStartProspectingFromEngagementTaskResponse_TaskName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskName", ID: &i_TaskName, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskResponse_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskResponse_ReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReasonCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sStartProspectingFromEngagementTaskResponse_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_ProspectingTaskIdentifier, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskResponse_TaskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskArn", ID: &i_ProspectingTaskArn, Type: smithy.ShapeTypeString})
+var sStartProspectingFromEngagementTaskResponse_TaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskStatus", ID: &iProspectingTaskStatus, Members: &mProspectingTaskStatus, Type: smithy.ShapeTypeEnum})
+var sStartResourceSnapshotJobRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sStartResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobIdentifier", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sStopResourceSnapshotJobRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sStopResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceSnapshotJobIdentifier", ID: &i_ResourceSnapshotJobIdentifier, Type: smithy.ShapeTypeString})
+var sSubmitOpportunityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sSubmitOpportunityRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sSubmitOpportunityRequest_InvolvementType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvolvementType", ID: &iSalesInvolvementType, Members: &mSalesInvolvementType, Type: smithy.ShapeTypeEnum})
+var sSubmitOpportunityRequest_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iVisibility, Members: &mVisibility, Type: smithy.ShapeTypeEnum})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateEngagementContextRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateEngagementContextRequest_EngagementIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementIdentifier", ID: &i_EngagementArnOrIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateEngagementContextRequest_ContextIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextIdentifier", ID: &i_EngagementContextIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateEngagementContextRequest_EngagementLastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementLastModifiedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEngagementContextRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEngagementContextType, Members: &mEngagementContextType, Type: smithy.ShapeTypeEnum})
+var sUpdateEngagementContextRequest_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &iUpdateEngagementContextPayload, Members: &mUpdateEngagementContextPayload, Type: smithy.ShapeTypeUnion})
+var sUpdateEngagementContextResponse_EngagementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementId", ID: &i_EngagementIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateEngagementContextResponse_EngagementArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementArn", ID: &i_EngagementArn, Type: smithy.ShapeTypeString})
+var sUpdateEngagementContextResponse_EngagementLastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EngagementLastModifiedAt", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEngagementContextResponse_ContextId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContextId", ID: &i_EngagementContextIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateOpportunityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_CatalogIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateOpportunityRequest_PrimaryNeedsFromAws = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryNeedsFromAws", ID: &i_PrimaryNeedsFromAws, Members: &m_PrimaryNeedsFromAws, Type: smithy.ShapeTypeList})
+var sUpdateOpportunityRequest_NationalSecurity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NationalSecurity", ID: &iNationalSecurity, Members: &mNationalSecurity, Type: smithy.ShapeTypeEnum})
+var sUpdateOpportunityRequest_PartnerOpportunityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerOpportunityIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateOpportunityRequest_Customer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Customer", ID: &iCustomer, Members: &mCustomer, Type: smithy.ShapeTypeStructure})
+var sUpdateOpportunityRequest_Project = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Project", ID: &iProject, Members: &mProject, Type: smithy.ShapeTypeStructure})
+var sUpdateOpportunityRequest_OpportunityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpportunityType", ID: &iOpportunityType, Members: &mOpportunityType, Type: smithy.ShapeTypeEnum})
+var sUpdateOpportunityRequest_Marketing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marketing", ID: &iMarketing, Members: &mMarketing, Type: smithy.ShapeTypeStructure})
+var sUpdateOpportunityRequest_SoftwareRevenue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SoftwareRevenue", ID: &iSoftwareRevenue, Members: &mSoftwareRevenue, Type: smithy.ShapeTypeStructure})
+var sUpdateOpportunityRequest_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+var sUpdateOpportunityRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateOpportunityRequest_LifeCycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifeCycle", ID: &iLifeCycle, Members: &mLifeCycle, Type: smithy.ShapeTypeStructure})
+var sUpdateOpportunityResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_OpportunityIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateOpportunityResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTime, Traits: &t49, Type: smithy.ShapeTypeTimestamp})
+
+var AcceptEngagementInvitation = &sAcceptEngagementInvitation
+
+var AssignOpportunity = &sAssignOpportunity
+
+var AssociateOpportunity = &sAssociateOpportunity
+
+var CreateEngagement = &sCreateEngagement
+
+var CreateEngagementContext = &sCreateEngagementContext
+
+var CreateEngagementInvitation = &sCreateEngagementInvitation
+
+var CreateOpportunity = &sCreateOpportunity
+
+var CreateResourceSnapshot = &sCreateResourceSnapshot
+
+var CreateResourceSnapshotJob = &sCreateResourceSnapshotJob
+
+var DeleteResourceSnapshotJob = &sDeleteResourceSnapshotJob
+
+var DisassociateOpportunity = &sDisassociateOpportunity
+
+var GetAwsOpportunitySummary = &sGetAwsOpportunitySummary
+
+var GetEngagement = &sGetEngagement
+
+var GetEngagementInvitation = &sGetEngagementInvitation
+
+var GetOpportunity = &sGetOpportunity
+
+var GetProspectingFromEngagementTask = &sGetProspectingFromEngagementTask
+
+var GetResourceSnapshot = &sGetResourceSnapshot
+
+var GetResourceSnapshotJob = &sGetResourceSnapshotJob
+
+var GetSellingSystemSettings = &sGetSellingSystemSettings
+
+var ListEngagementByAcceptingInvitationTasks = &sListEngagementByAcceptingInvitationTasks
+
+var ListEngagementFromOpportunityTasks = &sListEngagementFromOpportunityTasks
+
+var ListEngagementInvitations = &sListEngagementInvitations
+
+var ListEngagementMembers = &sListEngagementMembers
+
+var ListEngagementResourceAssociations = &sListEngagementResourceAssociations
+
+var ListEngagements = &sListEngagements
+
+var ListOpportunities = &sListOpportunities
+
+var ListOpportunityFromEngagementTasks = &sListOpportunityFromEngagementTasks
+
+var ListProspectingFromEngagementTasks = &sListProspectingFromEngagementTasks
+
+var ListResourceSnapshotJobs = &sListResourceSnapshotJobs
+
+var ListResourceSnapshots = &sListResourceSnapshots
+
+var ListSolutions = &sListSolutions
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutSellingSystemSettings = &sPutSellingSystemSettings
+
+var RejectEngagementInvitation = &sRejectEngagementInvitation
+
+var StartEngagementByAcceptingInvitationTask = &sStartEngagementByAcceptingInvitationTask
+
+var StartEngagementFromOpportunityTask = &sStartEngagementFromOpportunityTask
+
+var StartOpportunityFromEngagementTask = &sStartOpportunityFromEngagementTask
+
+var StartProspectingFromEngagementTask = &sStartProspectingFromEngagementTask
+
+var StartResourceSnapshotJob = &sStartResourceSnapshotJob
+
+var StopResourceSnapshotJob = &sStopResourceSnapshotJob
+
+var SubmitOpportunity = &sSubmitOpportunity
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateEngagementContext = &sUpdateEngagementContext
+
+var UpdateOpportunity = &sUpdateOpportunity
+
+var _AWSPartnerCentralSelling = &s_AWSPartnerCentralSelling
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+var AccessDeniedException_Reason = &sAccessDeniedException_Reason
+
+var AccessDeniedExceptionErrorCode = &sAccessDeniedExceptionErrorCode
+var AccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE = &sAccessDeniedExceptionErrorCode_INCOMPATIBLE_BENEFIT_AWS_PARTNER_STATE
+
+var Account = &sAccount
+var Account_Industry = &sAccount_Industry
+var Account_OtherIndustry = &sAccount_OtherIndustry
+var Account_CompanyName = &sAccount_CompanyName
+var Account_WebsiteUrl = &sAccount_WebsiteUrl
+var Account_AwsAccountId = &sAccount_AwsAccountId
+var Account_Address = &sAccount_Address
+var Account_Duns = &sAccount_Duns
+
+var AccountReceiver = &sAccountReceiver
+var AccountReceiver_Alias = &sAccountReceiver_Alias
+var AccountReceiver_AwsAccountId = &sAccountReceiver_AwsAccountId
+
+var AccountSummary = &sAccountSummary
+var AccountSummary_Industry = &sAccountSummary_Industry
+var AccountSummary_OtherIndustry = &sAccountSummary_OtherIndustry
+var AccountSummary_CompanyName = &sAccountSummary_CompanyName
+var AccountSummary_WebsiteUrl = &sAccountSummary_WebsiteUrl
+var AccountSummary_Address = &sAccountSummary_Address
+
+var Address = &sAddress
+var Address_City = &sAddress_City
+var Address_PostalCode = &sAddress_PostalCode
+var Address_StateOrRegion = &sAddress_StateOrRegion
+var Address_CountryCode = &sAddress_CountryCode
+var Address_StreetAddress = &sAddress_StreetAddress
+
+var _AddressPart = &s_AddressPart
+
+var AddressSummary = &sAddressSummary
+var AddressSummary_City = &sAddressSummary_City
+var AddressSummary_PostalCode = &sAddressSummary_PostalCode
+var AddressSummary_StateOrRegion = &sAddressSummary_StateOrRegion
+var AddressSummary_CountryCode = &sAddressSummary_CountryCode
+
+var _Alias = &s_Alias
+
+var _Amount = &s_Amount
+
+var _AmountMap = &s_AmountMap
+var _AmountMap_key = &s_AmountMap_key
+var _AmountMap_value = &s_AmountMap_value
+
+var _ApnPrograms = &s_ApnPrograms
+var _ApnPrograms_member = &s_ApnPrograms_member
+
+var AssigneeContact = &sAssigneeContact
+var AssigneeContact_Email = &sAssigneeContact_Email
+var AssigneeContact_FirstName = &sAssigneeContact_FirstName
+var AssigneeContact_LastName = &sAssigneeContact_LastName
+var AssigneeContact_Phone = &sAssigneeContact_Phone
+var AssigneeContact_BusinessTitle = &sAssigneeContact_BusinessTitle
+
+var _AwsAccount = &s_AwsAccount
+
+var _AwsAccountIdOrAliasList = &s_AwsAccountIdOrAliasList
+var _AwsAccountIdOrAliasList_member = &s_AwsAccountIdOrAliasList_member
+
+var _AwsAccountList = &s_AwsAccountList
+var _AwsAccountList_member = &s_AwsAccountList_member
+
+var AwsClosedLostReason = &sAwsClosedLostReason
+var AwsClosedLostReason_ADMINISTRATIVE = &sAwsClosedLostReason_ADMINISTRATIVE
+var AwsClosedLostReason_BUSINESS_ASSOCIATE_AGREEMENT = &sAwsClosedLostReason_BUSINESS_ASSOCIATE_AGREEMENT
+var AwsClosedLostReason_COMPANY_ACQUIRED_DISSOLVED = &sAwsClosedLostReason_COMPANY_ACQUIRED_DISSOLVED
+var AwsClosedLostReason_COMPETITIVE_OFFERING = &sAwsClosedLostReason_COMPETITIVE_OFFERING
+var AwsClosedLostReason_CUSTOMER_DATA_REQUIREMENT = &sAwsClosedLostReason_CUSTOMER_DATA_REQUIREMENT
+var AwsClosedLostReason_CUSTOMER_DEFICIENCY = &sAwsClosedLostReason_CUSTOMER_DEFICIENCY
+var AwsClosedLostReason_CUSTOMER_EXPERIENCE = &sAwsClosedLostReason_CUSTOMER_EXPERIENCE
+var AwsClosedLostReason_DELAY_CANCELLATION_OF_PROJECT = &sAwsClosedLostReason_DELAY_CANCELLATION_OF_PROJECT
+var AwsClosedLostReason_DUPLICATE = &sAwsClosedLostReason_DUPLICATE
+var AwsClosedLostReason_DUPLICATE_OPPORTUNITY = &sAwsClosedLostReason_DUPLICATE_OPPORTUNITY
+var AwsClosedLostReason_EXECUTIVE_BLOCKER = &sAwsClosedLostReason_EXECUTIVE_BLOCKER
+var AwsClosedLostReason_FAILED_VETTING = &sAwsClosedLostReason_FAILED_VETTING
+var AwsClosedLostReason_FEATURE_LIMITATION = &sAwsClosedLostReason_FEATURE_LIMITATION
+var AwsClosedLostReason_FINANCIAL_COMMERCIAL = &sAwsClosedLostReason_FINANCIAL_COMMERCIAL
+var AwsClosedLostReason_INSUFFICIENT_AMAZON_VALUE = &sAwsClosedLostReason_INSUFFICIENT_AMAZON_VALUE
+var AwsClosedLostReason_INSUFFICIENT_AWS_VALUE = &sAwsClosedLostReason_INSUFFICIENT_AWS_VALUE
+var AwsClosedLostReason_INTERNATIONAL_CONSTRAINTS = &sAwsClosedLostReason_INTERNATIONAL_CONSTRAINTS
+var AwsClosedLostReason_LEGAL_TAX_REGULATORY = &sAwsClosedLostReason_LEGAL_TAX_REGULATORY
+var AwsClosedLostReason_LEGAL_TERMS_AND_CONDITIONS = &sAwsClosedLostReason_LEGAL_TERMS_AND_CONDITIONS
+var AwsClosedLostReason_LOST_TO_COMPETITOR = &sAwsClosedLostReason_LOST_TO_COMPETITOR
+var AwsClosedLostReason_LOST_TO_COMPETITOR_GOOGLE = &sAwsClosedLostReason_LOST_TO_COMPETITOR_GOOGLE
+var AwsClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT = &sAwsClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT
+var AwsClosedLostReason_LOST_TO_COMPETITOR_OTHER = &sAwsClosedLostReason_LOST_TO_COMPETITOR_OTHER
+var AwsClosedLostReason_LOST_TO_COMPETITOR_RACKSPACE = &sAwsClosedLostReason_LOST_TO_COMPETITOR_RACKSPACE
+var AwsClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER = &sAwsClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER
+var AwsClosedLostReason_LOST_TO_COMPETITOR_VMWARE = &sAwsClosedLostReason_LOST_TO_COMPETITOR_VMWARE
+var AwsClosedLostReason_NO_CUSTOMER_REFERENCE = &sAwsClosedLostReason_NO_CUSTOMER_REFERENCE
+var AwsClosedLostReason_NO_INTEGRATION_RESOURCES = &sAwsClosedLostReason_NO_INTEGRATION_RESOURCES
+var AwsClosedLostReason_NO_OPPORTUNITY = &sAwsClosedLostReason_NO_OPPORTUNITY
+var AwsClosedLostReason_NO_PERCEIVED_VALUE_OF_MP = &sAwsClosedLostReason_NO_PERCEIVED_VALUE_OF_MP
+var AwsClosedLostReason_NO_RESPONSE = &sAwsClosedLostReason_NO_RESPONSE
+var AwsClosedLostReason_NOT_COMMITTED_TO_AWS = &sAwsClosedLostReason_NOT_COMMITTED_TO_AWS
+var AwsClosedLostReason_NO_UPDATE = &sAwsClosedLostReason_NO_UPDATE
+var AwsClosedLostReason_ON_PREMISES_DEPLOYMENT = &sAwsClosedLostReason_ON_PREMISES_DEPLOYMENT
+var AwsClosedLostReason_OTHER = &sAwsClosedLostReason_OTHER
+var AwsClosedLostReason_OTHER_DETAILS_IN_DESCRIPTION = &sAwsClosedLostReason_OTHER_DETAILS_IN_DESCRIPTION
+var AwsClosedLostReason_PARTNER_GAP = &sAwsClosedLostReason_PARTNER_GAP
+var AwsClosedLostReason_PAST_DUE = &sAwsClosedLostReason_PAST_DUE
+var AwsClosedLostReason_PEOPLE_RELATIONSHIP_GOVERNANCE = &sAwsClosedLostReason_PEOPLE_RELATIONSHIP_GOVERNANCE
+var AwsClosedLostReason_PLATFORM_TECHNOLOGY_LIMITATION = &sAwsClosedLostReason_PLATFORM_TECHNOLOGY_LIMITATION
+var AwsClosedLostReason_PREFERENCE_FOR_COMPETITOR = &sAwsClosedLostReason_PREFERENCE_FOR_COMPETITOR
+var AwsClosedLostReason_PRICE = &sAwsClosedLostReason_PRICE
+var AwsClosedLostReason_PRODUCT_TECHNOLOGY = &sAwsClosedLostReason_PRODUCT_TECHNOLOGY
+var AwsClosedLostReason_PRODUCT_NOT_ON_AWS = &sAwsClosedLostReason_PRODUCT_NOT_ON_AWS
+var AwsClosedLostReason_SECURITY_COMPLIANCE = &sAwsClosedLostReason_SECURITY_COMPLIANCE
+var AwsClosedLostReason_SELF_SERVICE = &sAwsClosedLostReason_SELF_SERVICE
+var AwsClosedLostReason_TECHNICAL_LIMITATIONS = &sAwsClosedLostReason_TECHNICAL_LIMITATIONS
+var AwsClosedLostReason_TERM_SHEET_IMPASSE = &sAwsClosedLostReason_TERM_SHEET_IMPASSE
+
+var AwsFundingUsed = &sAwsFundingUsed
+var AwsFundingUsed_YES = &sAwsFundingUsed_YES
+var AwsFundingUsed_NO = &sAwsFundingUsed_NO
+
+var _AwsMarketplaceOfferIdentifier = &s_AwsMarketplaceOfferIdentifier
+
+var _AwsMarketplaceOfferIdentifiers = &s_AwsMarketplaceOfferIdentifiers
+var _AwsMarketplaceOfferIdentifiers_member = &s_AwsMarketplaceOfferIdentifiers_member
+
+var _AwsMarketplaceOfferSetIdentifier = &s_AwsMarketplaceOfferSetIdentifier
+
+var _AwsMarketplaceOfferSetIdentifiers = &s_AwsMarketplaceOfferSetIdentifiers
+var _AwsMarketplaceOfferSetIdentifiers_member = &s_AwsMarketplaceOfferSetIdentifiers_member
+
+var _AwsMarketplaceProductArn = &s_AwsMarketplaceProductArn
+
+var _AwsMarketplaceProductIdentifiers = &s_AwsMarketplaceProductIdentifiers
+var _AwsMarketplaceProductIdentifiers_member = &s_AwsMarketplaceProductIdentifiers_member
+
+var _AwsMarketplaceSolutionArn = &s_AwsMarketplaceSolutionArn
+
+var _AwsMarketplaceSolutionArnList = &s_AwsMarketplaceSolutionArnList
+var _AwsMarketplaceSolutionArnList_member = &s_AwsMarketplaceSolutionArnList_member
+
+var _AwsMarketplaceSolutionIdentifier = &s_AwsMarketplaceSolutionIdentifier
+
+var _AwsMarketplaceSolutionIdentifiers = &s_AwsMarketplaceSolutionIdentifiers
+var _AwsMarketplaceSolutionIdentifiers_member = &s_AwsMarketplaceSolutionIdentifiers_member
+
+var _AwsMaturity = &s_AwsMaturity
+
+var AwsMemberBusinessTitle = &sAwsMemberBusinessTitle
+var AwsMemberBusinessTitle_AWS_SALES_REP = &sAwsMemberBusinessTitle_AWS_SALES_REP
+var AwsMemberBusinessTitle_AWS_ACCOUNT_OWNER = &sAwsMemberBusinessTitle_AWS_ACCOUNT_OWNER
+var AwsMemberBusinessTitle_WWPSPDM = &sAwsMemberBusinessTitle_WWPSPDM
+var AwsMemberBusinessTitle_PDM = &sAwsMemberBusinessTitle_PDM
+var AwsMemberBusinessTitle_PSM = &sAwsMemberBusinessTitle_PSM
+var AwsMemberBusinessTitle_ISVSM = &sAwsMemberBusinessTitle_ISVSM
+var AwsMemberBusinessTitle_SIGNATORY = &sAwsMemberBusinessTitle_SIGNATORY
+
+var AwsOpportunityCustomer = &sAwsOpportunityCustomer
+var AwsOpportunityCustomer_Contacts = &sAwsOpportunityCustomer_Contacts
+
+var AwsOpportunityInsights = &sAwsOpportunityInsights
+var AwsOpportunityInsights_NextBestActions = &sAwsOpportunityInsights_NextBestActions
+var AwsOpportunityInsights_EngagementScore = &sAwsOpportunityInsights_EngagementScore
+var AwsOpportunityInsights_AwsProductsSpendInsightsBySource = &sAwsOpportunityInsights_AwsProductsSpendInsightsBySource
+var AwsOpportunityInsights_OpportunityQuality = &sAwsOpportunityInsights_OpportunityQuality
+var AwsOpportunityInsights_Recommendations = &sAwsOpportunityInsights_Recommendations
+
+var AwsOpportunityLifeCycle = &sAwsOpportunityLifeCycle
+var AwsOpportunityLifeCycle_TargetCloseDate = &sAwsOpportunityLifeCycle_TargetCloseDate
+var AwsOpportunityLifeCycle_ClosedLostReason = &sAwsOpportunityLifeCycle_ClosedLostReason
+var AwsOpportunityLifeCycle_Stage = &sAwsOpportunityLifeCycle_Stage
+var AwsOpportunityLifeCycle_NextSteps = &sAwsOpportunityLifeCycle_NextSteps
+var AwsOpportunityLifeCycle_NextStepsHistory = &sAwsOpportunityLifeCycle_NextStepsHistory
+
+var AwsOpportunityProject = &sAwsOpportunityProject
+var AwsOpportunityProject_ExpectedCustomerSpend = &sAwsOpportunityProject_ExpectedCustomerSpend
+var AwsOpportunityProject_AwsPartition = &sAwsOpportunityProject_AwsPartition
+
+var AwsOpportunityRelatedEntities = &sAwsOpportunityRelatedEntities
+var AwsOpportunityRelatedEntities_AwsProducts = &sAwsOpportunityRelatedEntities_AwsProducts
+var AwsOpportunityRelatedEntities_Solutions = &sAwsOpportunityRelatedEntities_Solutions
+var AwsOpportunityRelatedEntities_AwsMarketplaceSolutions = &sAwsOpportunityRelatedEntities_AwsMarketplaceSolutions
+var AwsOpportunityRelatedEntities_AwsMarketplaceProducts = &sAwsOpportunityRelatedEntities_AwsMarketplaceProducts
+
+var AwsOpportunityStage = &sAwsOpportunityStage
+var AwsOpportunityStage_NOT_STARTED = &sAwsOpportunityStage_NOT_STARTED
+var AwsOpportunityStage_IN_PROGRESS = &sAwsOpportunityStage_IN_PROGRESS
+var AwsOpportunityStage_PROSPECT = &sAwsOpportunityStage_PROSPECT
+var AwsOpportunityStage_ENGAGED = &sAwsOpportunityStage_ENGAGED
+var AwsOpportunityStage_IDENTIFIED = &sAwsOpportunityStage_IDENTIFIED
+var AwsOpportunityStage_QUALIFY = &sAwsOpportunityStage_QUALIFY
+var AwsOpportunityStage_RESEARCH = &sAwsOpportunityStage_RESEARCH
+var AwsOpportunityStage_SELLER_ENGAGED = &sAwsOpportunityStage_SELLER_ENGAGED
+var AwsOpportunityStage_EVALUATING = &sAwsOpportunityStage_EVALUATING
+var AwsOpportunityStage_SELLER_REGISTERED = &sAwsOpportunityStage_SELLER_REGISTERED
+var AwsOpportunityStage_TERM_SHEET_NEGOTIATION = &sAwsOpportunityStage_TERM_SHEET_NEGOTIATION
+var AwsOpportunityStage_CONTRACT_NEGOTIATION = &sAwsOpportunityStage_CONTRACT_NEGOTIATION
+var AwsOpportunityStage_ONBOARDING = &sAwsOpportunityStage_ONBOARDING
+var AwsOpportunityStage_BUILDING_INTEGRATION = &sAwsOpportunityStage_BUILDING_INTEGRATION
+var AwsOpportunityStage_QUALIFIED = &sAwsOpportunityStage_QUALIFIED
+var AwsOpportunityStage_ON_HOLD = &sAwsOpportunityStage_ON_HOLD
+var AwsOpportunityStage_TECHNICAL_VALIDATION = &sAwsOpportunityStage_TECHNICAL_VALIDATION
+var AwsOpportunityStage_BUSINESS_VALIDATION = &sAwsOpportunityStage_BUSINESS_VALIDATION
+var AwsOpportunityStage_COMMITTED = &sAwsOpportunityStage_COMMITTED
+var AwsOpportunityStage_LAUNCHED = &sAwsOpportunityStage_LAUNCHED
+var AwsOpportunityStage_DEFERRED_TO_PARTNER = &sAwsOpportunityStage_DEFERRED_TO_PARTNER
+var AwsOpportunityStage_CLOSED_LOST = &sAwsOpportunityStage_CLOSED_LOST
+var AwsOpportunityStage_COMPLETED = &sAwsOpportunityStage_COMPLETED
+var AwsOpportunityStage_CLOSED_INCOMPLETE = &sAwsOpportunityStage_CLOSED_INCOMPLETE
+
+var AwsOpportunitySummaryFullView = &sAwsOpportunitySummaryFullView
+var AwsOpportunitySummaryFullView_RelatedOpportunityId = &sAwsOpportunitySummaryFullView_RelatedOpportunityId
+var AwsOpportunitySummaryFullView_Origin = &sAwsOpportunitySummaryFullView_Origin
+var AwsOpportunitySummaryFullView_InvolvementType = &sAwsOpportunitySummaryFullView_InvolvementType
+var AwsOpportunitySummaryFullView_Visibility = &sAwsOpportunitySummaryFullView_Visibility
+var AwsOpportunitySummaryFullView_LifeCycle = &sAwsOpportunitySummaryFullView_LifeCycle
+var AwsOpportunitySummaryFullView_OpportunityTeam = &sAwsOpportunitySummaryFullView_OpportunityTeam
+var AwsOpportunitySummaryFullView_Insights = &sAwsOpportunitySummaryFullView_Insights
+var AwsOpportunitySummaryFullView_InvolvementTypeChangeReason = &sAwsOpportunitySummaryFullView_InvolvementTypeChangeReason
+var AwsOpportunitySummaryFullView_RelatedEntityIds = &sAwsOpportunitySummaryFullView_RelatedEntityIds
+var AwsOpportunitySummaryFullView_Customer = &sAwsOpportunitySummaryFullView_Customer
+var AwsOpportunitySummaryFullView_Project = &sAwsOpportunitySummaryFullView_Project
+var AwsOpportunitySummaryFullView_CosellMotion = &sAwsOpportunitySummaryFullView_CosellMotion
+var AwsOpportunitySummaryFullView_SoftwareRevenue = &sAwsOpportunitySummaryFullView_SoftwareRevenue
+
+var _AwsOpportunityTeamMembersList = &s_AwsOpportunityTeamMembersList
+var _AwsOpportunityTeamMembersList_member = &s_AwsOpportunityTeamMembersList_member
+
+var AwsPartition = &sAwsPartition
+var AwsPartition_AWS_EUSC = &sAwsPartition_AWS_EUSC
+
+var AwsProductDetails = &sAwsProductDetails
+var AwsProductDetails_ProductCode = &sAwsProductDetails_ProductCode
+var AwsProductDetails_ServiceCode = &sAwsProductDetails_ServiceCode
+var AwsProductDetails_Categories = &sAwsProductDetails_Categories
+var AwsProductDetails_Amount = &sAwsProductDetails_Amount
+var AwsProductDetails_OptimizedAmount = &sAwsProductDetails_OptimizedAmount
+var AwsProductDetails_PotentialSavingsAmount = &sAwsProductDetails_PotentialSavingsAmount
+var AwsProductDetails_Optimizations = &sAwsProductDetails_Optimizations
+
+var _AwsProductIdentifier = &s_AwsProductIdentifier
+
+var _AwsProductIdentifiers = &s_AwsProductIdentifiers
+var _AwsProductIdentifiers_member = &s_AwsProductIdentifiers_member
+
+var AwsProductInsights = &sAwsProductInsights
+var AwsProductInsights_CurrencyCode = &sAwsProductInsights_CurrencyCode
+var AwsProductInsights_Frequency = &sAwsProductInsights_Frequency
+var AwsProductInsights_TotalAmount = &sAwsProductInsights_TotalAmount
+var AwsProductInsights_TotalOptimizedAmount = &sAwsProductInsights_TotalOptimizedAmount
+var AwsProductInsights_TotalPotentialSavingsAmount = &sAwsProductInsights_TotalPotentialSavingsAmount
+var AwsProductInsights_TotalAmountByCategory = &sAwsProductInsights_TotalAmountByCategory
+var AwsProductInsights_AwsProducts = &sAwsProductInsights_AwsProducts
+
+var AwsProductOptimization = &sAwsProductOptimization
+var AwsProductOptimization_Description = &sAwsProductOptimization_Description
+var AwsProductOptimization_SavingsAmount = &sAwsProductOptimization_SavingsAmount
+
+var _AwsProductOptimizationsList = &s_AwsProductOptimizationsList
+var _AwsProductOptimizationsList_member = &s_AwsProductOptimizationsList_member
+
+var _AwsProductsList = &s_AwsProductsList
+var _AwsProductsList_member = &s_AwsProductsList_member
+
+var AwsProductsSpendInsightsBySource = &sAwsProductsSpendInsightsBySource
+var AwsProductsSpendInsightsBySource_Partner = &sAwsProductsSpendInsightsBySource_Partner
+var AwsProductsSpendInsightsBySource_AWS = &sAwsProductsSpendInsightsBySource_AWS
+
+var AwsSoftwareRevenue = &sAwsSoftwareRevenue
+var AwsSoftwareRevenue_Value = &sAwsSoftwareRevenue_Value
+var AwsSoftwareRevenue_Discount = &sAwsSoftwareRevenue_Discount
+var AwsSoftwareRevenue_EffectiveDate = &sAwsSoftwareRevenue_EffectiveDate
+var AwsSoftwareRevenue_ExpirationDate = &sAwsSoftwareRevenue_ExpirationDate
+
+var AwsSubmission = &sAwsSubmission
+var AwsSubmission_InvolvementType = &sAwsSubmission_InvolvementType
+var AwsSubmission_Visibility = &sAwsSubmission_Visibility
+
+var AwsTeamMember = &sAwsTeamMember
+var AwsTeamMember_Email = &sAwsTeamMember_Email
+var AwsTeamMember_FirstName = &sAwsTeamMember_FirstName
+var AwsTeamMember_LastName = &sAwsTeamMember_LastName
+var AwsTeamMember_BusinessTitle = &sAwsTeamMember_BusinessTitle
+
+var _CatalogIdentifier = &s_CatalogIdentifier
+
+var Channel = &sChannel
+var Channel_AWS_MARKETING_CENTRAL = &sChannel_AWS_MARKETING_CENTRAL
+var Channel_CONTENT_SYNDICATION = &sChannel_CONTENT_SYNDICATION
+var Channel_DISPLAY = &sChannel_DISPLAY
+var Channel_EMAIL = &sChannel_EMAIL
+var Channel_LIVE_EVENT = &sChannel_LIVE_EVENT
+var Channel_OUT_OF_HOME = &sChannel_OUT_OF_HOME
+var Channel_PRINT = &sChannel_PRINT
+var Channel_SEARCH = &sChannel_SEARCH
+var Channel_SOCIAL = &sChannel_SOCIAL
+var Channel_TELEMARKETING = &sChannel_TELEMARKETING
+var Channel_TV = &sChannel_TV
+var Channel_VIDEO = &sChannel_VIDEO
+var Channel_VIRTUAL_EVENT = &sChannel_VIRTUAL_EVENT
+
+var _Channels = &s_Channels
+var _Channels_member = &s_Channels_member
+
+var _ClientToken = &s_ClientToken
+
+var ClosedLostReason = &sClosedLostReason
+var ClosedLostReason_CUSTOMER_DEFICIENCY = &sClosedLostReason_CUSTOMER_DEFICIENCY
+var ClosedLostReason_DELAY_CANCELLATION_OF_PROJECT = &sClosedLostReason_DELAY_CANCELLATION_OF_PROJECT
+var ClosedLostReason_LEGAL_TAX_REGULATORY = &sClosedLostReason_LEGAL_TAX_REGULATORY
+var ClosedLostReason_LOST_TO_COMPETITOR_GOOGLE = &sClosedLostReason_LOST_TO_COMPETITOR_GOOGLE
+var ClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT = &sClosedLostReason_LOST_TO_COMPETITOR_MICROSOFT
+var ClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER = &sClosedLostReason_LOST_TO_COMPETITOR_SOFTLAYER
+var ClosedLostReason_LOST_TO_COMPETITOR_VMWARE = &sClosedLostReason_LOST_TO_COMPETITOR_VMWARE
+var ClosedLostReason_LOST_TO_COMPETITOR_OTHER = &sClosedLostReason_LOST_TO_COMPETITOR_OTHER
+var ClosedLostReason_NO_OPPORTUNITY = &sClosedLostReason_NO_OPPORTUNITY
+var ClosedLostReason_ON_PREMISES_DEPLOYMENT = &sClosedLostReason_ON_PREMISES_DEPLOYMENT
+var ClosedLostReason_PARTNER_GAP = &sClosedLostReason_PARTNER_GAP
+var ClosedLostReason_PRICE = &sClosedLostReason_PRICE
+var ClosedLostReason_SECURITY_COMPLIANCE = &sClosedLostReason_SECURITY_COMPLIANCE
+var ClosedLostReason_TECHNICAL_LIMITATIONS = &sClosedLostReason_TECHNICAL_LIMITATIONS
+var ClosedLostReason_CUSTOMER_EXPERIENCE = &sClosedLostReason_CUSTOMER_EXPERIENCE
+var ClosedLostReason_OTHER = &sClosedLostReason_OTHER
+var ClosedLostReason_PEOPLERELATIONSHIPGOVERNANCE = &sClosedLostReason_PEOPLERELATIONSHIPGOVERNANCE
+var ClosedLostReason_PRODUCTTECHNOLOGY = &sClosedLostReason_PRODUCTTECHNOLOGY
+var ClosedLostReason_FINANCIALCOMMERCIAL = &sClosedLostReason_FINANCIALCOMMERCIAL
+
+var _CompanyName = &s_CompanyName
+
+var _CompanyWebsiteUrl = &s_CompanyWebsiteUrl
+
+var CompetitorName = &sCompetitorName
+var CompetitorName_ORACLE_CLOUD = &sCompetitorName_ORACLE_CLOUD
+var CompetitorName_ON_PREM = &sCompetitorName_ON_PREM
+var CompetitorName_CO_LOCATION = &sCompetitorName_CO_LOCATION
+var CompetitorName_AKAMAI = &sCompetitorName_AKAMAI
+var CompetitorName_ALICLOUD = &sCompetitorName_ALICLOUD
+var CompetitorName_GOOGLE_CLOUD_PLATFORM = &sCompetitorName_GOOGLE_CLOUD_PLATFORM
+var CompetitorName_IBM_SOFTLAYER = &sCompetitorName_IBM_SOFTLAYER
+var CompetitorName_MICROSOFT_AZURE = &sCompetitorName_MICROSOFT_AZURE
+var CompetitorName_OTHER_COST_OPTIMIZATION = &sCompetitorName_OTHER_COST_OPTIMIZATION
+var CompetitorName_NO_COMPETITION = &sCompetitorName_NO_COMPETITION
+var CompetitorName_OTHER = &sCompetitorName_OTHER
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var Contact = &sContact
+var Contact_Email = &sContact_Email
+var Contact_FirstName = &sContact_FirstName
+var Contact_LastName = &sContact_LastName
+var Contact_BusinessTitle = &sContact_BusinessTitle
+var Contact_Phone = &sContact_Phone
+
+var _ContextIdentifier = &s_ContextIdentifier
+
+var _ContextIdentifiers = &s_ContextIdentifiers
+var _ContextIdentifiers_member = &s_ContextIdentifiers_member
+
+var CountryCode = &sCountryCode
+var CountryCode_US = &sCountryCode_US
+var CountryCode_AF = &sCountryCode_AF
+var CountryCode_AX = &sCountryCode_AX
+var CountryCode_AL = &sCountryCode_AL
+var CountryCode_DZ = &sCountryCode_DZ
+var CountryCode_AS = &sCountryCode_AS
+var CountryCode_AD = &sCountryCode_AD
+var CountryCode_AO = &sCountryCode_AO
+var CountryCode_AI = &sCountryCode_AI
+var CountryCode_AQ = &sCountryCode_AQ
+var CountryCode_AG = &sCountryCode_AG
+var CountryCode_AR = &sCountryCode_AR
+var CountryCode_AM = &sCountryCode_AM
+var CountryCode_AW = &sCountryCode_AW
+var CountryCode_AU = &sCountryCode_AU
+var CountryCode_AT = &sCountryCode_AT
+var CountryCode_AZ = &sCountryCode_AZ
+var CountryCode_BS = &sCountryCode_BS
+var CountryCode_BH = &sCountryCode_BH
+var CountryCode_BD = &sCountryCode_BD
+var CountryCode_BB = &sCountryCode_BB
+var CountryCode_BY = &sCountryCode_BY
+var CountryCode_BE = &sCountryCode_BE
+var CountryCode_BZ = &sCountryCode_BZ
+var CountryCode_BJ = &sCountryCode_BJ
+var CountryCode_BM = &sCountryCode_BM
+var CountryCode_BT = &sCountryCode_BT
+var CountryCode_BO = &sCountryCode_BO
+var CountryCode_BQ = &sCountryCode_BQ
+var CountryCode_BA = &sCountryCode_BA
+var CountryCode_BW = &sCountryCode_BW
+var CountryCode_BV = &sCountryCode_BV
+var CountryCode_BR = &sCountryCode_BR
+var CountryCode_IO = &sCountryCode_IO
+var CountryCode_BN = &sCountryCode_BN
+var CountryCode_BG = &sCountryCode_BG
+var CountryCode_BF = &sCountryCode_BF
+var CountryCode_BI = &sCountryCode_BI
+var CountryCode_KH = &sCountryCode_KH
+var CountryCode_CM = &sCountryCode_CM
+var CountryCode_CA = &sCountryCode_CA
+var CountryCode_CV = &sCountryCode_CV
+var CountryCode_KY = &sCountryCode_KY
+var CountryCode_CF = &sCountryCode_CF
+var CountryCode_TD = &sCountryCode_TD
+var CountryCode_CL = &sCountryCode_CL
+var CountryCode_CN = &sCountryCode_CN
+var CountryCode_CX = &sCountryCode_CX
+var CountryCode_CC = &sCountryCode_CC
+var CountryCode_CO = &sCountryCode_CO
+var CountryCode_KM = &sCountryCode_KM
+var CountryCode_CG = &sCountryCode_CG
+var CountryCode_CK = &sCountryCode_CK
+var CountryCode_CR = &sCountryCode_CR
+var CountryCode_CI = &sCountryCode_CI
+var CountryCode_HR = &sCountryCode_HR
+var CountryCode_CU = &sCountryCode_CU
+var CountryCode_CW = &sCountryCode_CW
+var CountryCode_CY = &sCountryCode_CY
+var CountryCode_CZ = &sCountryCode_CZ
+var CountryCode_CD = &sCountryCode_CD
+var CountryCode_DK = &sCountryCode_DK
+var CountryCode_DJ = &sCountryCode_DJ
+var CountryCode_DM = &sCountryCode_DM
+var CountryCode_DO = &sCountryCode_DO
+var CountryCode_EC = &sCountryCode_EC
+var CountryCode_EG = &sCountryCode_EG
+var CountryCode_SV = &sCountryCode_SV
+var CountryCode_GQ = &sCountryCode_GQ
+var CountryCode_ER = &sCountryCode_ER
+var CountryCode_EE = &sCountryCode_EE
+var CountryCode_ET = &sCountryCode_ET
+var CountryCode_FK = &sCountryCode_FK
+var CountryCode_FO = &sCountryCode_FO
+var CountryCode_FJ = &sCountryCode_FJ
+var CountryCode_FI = &sCountryCode_FI
+var CountryCode_FR = &sCountryCode_FR
+var CountryCode_GF = &sCountryCode_GF
+var CountryCode_PF = &sCountryCode_PF
+var CountryCode_TF = &sCountryCode_TF
+var CountryCode_GA = &sCountryCode_GA
+var CountryCode_GM = &sCountryCode_GM
+var CountryCode_GE = &sCountryCode_GE
+var CountryCode_DE = &sCountryCode_DE
+var CountryCode_GH = &sCountryCode_GH
+var CountryCode_GI = &sCountryCode_GI
+var CountryCode_GR = &sCountryCode_GR
+var CountryCode_GL = &sCountryCode_GL
+var CountryCode_GD = &sCountryCode_GD
+var CountryCode_GP = &sCountryCode_GP
+var CountryCode_GU = &sCountryCode_GU
+var CountryCode_GT = &sCountryCode_GT
+var CountryCode_GG = &sCountryCode_GG
+var CountryCode_GN = &sCountryCode_GN
+var CountryCode_GW = &sCountryCode_GW
+var CountryCode_GY = &sCountryCode_GY
+var CountryCode_HT = &sCountryCode_HT
+var CountryCode_HM = &sCountryCode_HM
+var CountryCode_VA = &sCountryCode_VA
+var CountryCode_HN = &sCountryCode_HN
+var CountryCode_HK = &sCountryCode_HK
+var CountryCode_HU = &sCountryCode_HU
+var CountryCode_IS = &sCountryCode_IS
+var CountryCode_IN = &sCountryCode_IN
+var CountryCode_ID = &sCountryCode_ID
+var CountryCode_IR = &sCountryCode_IR
+var CountryCode_IQ = &sCountryCode_IQ
+var CountryCode_IE = &sCountryCode_IE
+var CountryCode_IM = &sCountryCode_IM
+var CountryCode_IL = &sCountryCode_IL
+var CountryCode_IT = &sCountryCode_IT
+var CountryCode_JM = &sCountryCode_JM
+var CountryCode_JP = &sCountryCode_JP
+var CountryCode_JE = &sCountryCode_JE
+var CountryCode_JO = &sCountryCode_JO
+var CountryCode_KZ = &sCountryCode_KZ
+var CountryCode_KE = &sCountryCode_KE
+var CountryCode_KI = &sCountryCode_KI
+var CountryCode_KR = &sCountryCode_KR
+var CountryCode_KW = &sCountryCode_KW
+var CountryCode_KG = &sCountryCode_KG
+var CountryCode_LA = &sCountryCode_LA
+var CountryCode_LV = &sCountryCode_LV
+var CountryCode_LB = &sCountryCode_LB
+var CountryCode_LS = &sCountryCode_LS
+var CountryCode_LR = &sCountryCode_LR
+var CountryCode_LY = &sCountryCode_LY
+var CountryCode_LI = &sCountryCode_LI
+var CountryCode_LT = &sCountryCode_LT
+var CountryCode_LU = &sCountryCode_LU
+var CountryCode_MO = &sCountryCode_MO
+var CountryCode_MK = &sCountryCode_MK
+var CountryCode_MG = &sCountryCode_MG
+var CountryCode_MW = &sCountryCode_MW
+var CountryCode_MY = &sCountryCode_MY
+var CountryCode_MV = &sCountryCode_MV
+var CountryCode_ML = &sCountryCode_ML
+var CountryCode_MT = &sCountryCode_MT
+var CountryCode_MH = &sCountryCode_MH
+var CountryCode_MQ = &sCountryCode_MQ
+var CountryCode_MR = &sCountryCode_MR
+var CountryCode_MU = &sCountryCode_MU
+var CountryCode_YT = &sCountryCode_YT
+var CountryCode_MX = &sCountryCode_MX
+var CountryCode_FM = &sCountryCode_FM
+var CountryCode_MD = &sCountryCode_MD
+var CountryCode_MC = &sCountryCode_MC
+var CountryCode_MN = &sCountryCode_MN
+var CountryCode_ME = &sCountryCode_ME
+var CountryCode_MS = &sCountryCode_MS
+var CountryCode_MA = &sCountryCode_MA
+var CountryCode_MZ = &sCountryCode_MZ
+var CountryCode_MM = &sCountryCode_MM
+var CountryCode_NA = &sCountryCode_NA
+var CountryCode_NR = &sCountryCode_NR
+var CountryCode_NP = &sCountryCode_NP
+var CountryCode_NL = &sCountryCode_NL
+var CountryCode_AN = &sCountryCode_AN
+var CountryCode_NC = &sCountryCode_NC
+var CountryCode_NZ = &sCountryCode_NZ
+var CountryCode_NI = &sCountryCode_NI
+var CountryCode_NE = &sCountryCode_NE
+var CountryCode_NG = &sCountryCode_NG
+var CountryCode_NU = &sCountryCode_NU
+var CountryCode_NF = &sCountryCode_NF
+var CountryCode_MP = &sCountryCode_MP
+var CountryCode_NO = &sCountryCode_NO
+var CountryCode_OM = &sCountryCode_OM
+var CountryCode_PK = &sCountryCode_PK
+var CountryCode_PW = &sCountryCode_PW
+var CountryCode_PS = &sCountryCode_PS
+var CountryCode_PA = &sCountryCode_PA
+var CountryCode_PG = &sCountryCode_PG
+var CountryCode_PY = &sCountryCode_PY
+var CountryCode_PE = &sCountryCode_PE
+var CountryCode_PH = &sCountryCode_PH
+var CountryCode_PN = &sCountryCode_PN
+var CountryCode_PL = &sCountryCode_PL
+var CountryCode_PT = &sCountryCode_PT
+var CountryCode_PR = &sCountryCode_PR
+var CountryCode_QA = &sCountryCode_QA
+var CountryCode_RE = &sCountryCode_RE
+var CountryCode_RO = &sCountryCode_RO
+var CountryCode_RU = &sCountryCode_RU
+var CountryCode_RW = &sCountryCode_RW
+var CountryCode_BL = &sCountryCode_BL
+var CountryCode_SH = &sCountryCode_SH
+var CountryCode_KN = &sCountryCode_KN
+var CountryCode_LC = &sCountryCode_LC
+var CountryCode_MF = &sCountryCode_MF
+var CountryCode_PM = &sCountryCode_PM
+var CountryCode_VC = &sCountryCode_VC
+var CountryCode_WS = &sCountryCode_WS
+var CountryCode_SM = &sCountryCode_SM
+var CountryCode_ST = &sCountryCode_ST
+var CountryCode_SA = &sCountryCode_SA
+var CountryCode_SN = &sCountryCode_SN
+var CountryCode_RS = &sCountryCode_RS
+var CountryCode_SC = &sCountryCode_SC
+var CountryCode_SL = &sCountryCode_SL
+var CountryCode_SG = &sCountryCode_SG
+var CountryCode_SX = &sCountryCode_SX
+var CountryCode_SK = &sCountryCode_SK
+var CountryCode_SI = &sCountryCode_SI
+var CountryCode_SB = &sCountryCode_SB
+var CountryCode_SO = &sCountryCode_SO
+var CountryCode_ZA = &sCountryCode_ZA
+var CountryCode_GS = &sCountryCode_GS
+var CountryCode_SS = &sCountryCode_SS
+var CountryCode_ES = &sCountryCode_ES
+var CountryCode_LK = &sCountryCode_LK
+var CountryCode_SD = &sCountryCode_SD
+var CountryCode_SR = &sCountryCode_SR
+var CountryCode_SJ = &sCountryCode_SJ
+var CountryCode_SZ = &sCountryCode_SZ
+var CountryCode_SE = &sCountryCode_SE
+var CountryCode_CH = &sCountryCode_CH
+var CountryCode_SY = &sCountryCode_SY
+var CountryCode_TW = &sCountryCode_TW
+var CountryCode_TJ = &sCountryCode_TJ
+var CountryCode_TZ = &sCountryCode_TZ
+var CountryCode_TH = &sCountryCode_TH
+var CountryCode_TL = &sCountryCode_TL
+var CountryCode_TG = &sCountryCode_TG
+var CountryCode_TK = &sCountryCode_TK
+var CountryCode_TO = &sCountryCode_TO
+var CountryCode_TT = &sCountryCode_TT
+var CountryCode_TN = &sCountryCode_TN
+var CountryCode_TR = &sCountryCode_TR
+var CountryCode_TM = &sCountryCode_TM
+var CountryCode_TC = &sCountryCode_TC
+var CountryCode_TV = &sCountryCode_TV
+var CountryCode_UG = &sCountryCode_UG
+var CountryCode_UA = &sCountryCode_UA
+var CountryCode_AE = &sCountryCode_AE
+var CountryCode_GB = &sCountryCode_GB
+var CountryCode_UM = &sCountryCode_UM
+var CountryCode_UY = &sCountryCode_UY
+var CountryCode_UZ = &sCountryCode_UZ
+var CountryCode_VU = &sCountryCode_VU
+var CountryCode_VE = &sCountryCode_VE
+var CountryCode_VN = &sCountryCode_VN
+var CountryCode_VG = &sCountryCode_VG
+var CountryCode_VI = &sCountryCode_VI
+var CountryCode_WF = &sCountryCode_WF
+var CountryCode_EH = &sCountryCode_EH
+var CountryCode_YE = &sCountryCode_YE
+var CountryCode_ZM = &sCountryCode_ZM
+var CountryCode_ZW = &sCountryCode_ZW
+
+var CreatedDateFilter = &sCreatedDateFilter
+var CreatedDateFilter_AfterCreatedDate = &sCreatedDateFilter_AfterCreatedDate
+var CreatedDateFilter_BeforeCreatedDate = &sCreatedDateFilter_BeforeCreatedDate
+
+var CurrencyCode = &sCurrencyCode
+var CurrencyCode_USD = &sCurrencyCode_USD
+var CurrencyCode_EUR = &sCurrencyCode_EUR
+var CurrencyCode_GBP = &sCurrencyCode_GBP
+var CurrencyCode_AUD = &sCurrencyCode_AUD
+var CurrencyCode_CAD = &sCurrencyCode_CAD
+var CurrencyCode_CNY = &sCurrencyCode_CNY
+var CurrencyCode_NZD = &sCurrencyCode_NZD
+var CurrencyCode_INR = &sCurrencyCode_INR
+var CurrencyCode_JPY = &sCurrencyCode_JPY
+var CurrencyCode_CHF = &sCurrencyCode_CHF
+var CurrencyCode_SEK = &sCurrencyCode_SEK
+var CurrencyCode_AED = &sCurrencyCode_AED
+var CurrencyCode_AFN = &sCurrencyCode_AFN
+var CurrencyCode_ALL = &sCurrencyCode_ALL
+var CurrencyCode_AMD = &sCurrencyCode_AMD
+var CurrencyCode_ANG = &sCurrencyCode_ANG
+var CurrencyCode_AOA = &sCurrencyCode_AOA
+var CurrencyCode_ARS = &sCurrencyCode_ARS
+var CurrencyCode_AWG = &sCurrencyCode_AWG
+var CurrencyCode_AZN = &sCurrencyCode_AZN
+var CurrencyCode_BAM = &sCurrencyCode_BAM
+var CurrencyCode_BBD = &sCurrencyCode_BBD
+var CurrencyCode_BDT = &sCurrencyCode_BDT
+var CurrencyCode_BGN = &sCurrencyCode_BGN
+var CurrencyCode_BHD = &sCurrencyCode_BHD
+var CurrencyCode_BIF = &sCurrencyCode_BIF
+var CurrencyCode_BMD = &sCurrencyCode_BMD
+var CurrencyCode_BND = &sCurrencyCode_BND
+var CurrencyCode_BOB = &sCurrencyCode_BOB
+var CurrencyCode_BOV = &sCurrencyCode_BOV
+var CurrencyCode_BRL = &sCurrencyCode_BRL
+var CurrencyCode_BSD = &sCurrencyCode_BSD
+var CurrencyCode_BTN = &sCurrencyCode_BTN
+var CurrencyCode_BWP = &sCurrencyCode_BWP
+var CurrencyCode_BYN = &sCurrencyCode_BYN
+var CurrencyCode_BZD = &sCurrencyCode_BZD
+var CurrencyCode_CDF = &sCurrencyCode_CDF
+var CurrencyCode_CHE = &sCurrencyCode_CHE
+var CurrencyCode_CHW = &sCurrencyCode_CHW
+var CurrencyCode_CLF = &sCurrencyCode_CLF
+var CurrencyCode_CLP = &sCurrencyCode_CLP
+var CurrencyCode_COP = &sCurrencyCode_COP
+var CurrencyCode_COU = &sCurrencyCode_COU
+var CurrencyCode_CRC = &sCurrencyCode_CRC
+var CurrencyCode_CUC = &sCurrencyCode_CUC
+var CurrencyCode_CUP = &sCurrencyCode_CUP
+var CurrencyCode_CVE = &sCurrencyCode_CVE
+var CurrencyCode_CZK = &sCurrencyCode_CZK
+var CurrencyCode_DJF = &sCurrencyCode_DJF
+var CurrencyCode_DKK = &sCurrencyCode_DKK
+var CurrencyCode_DOP = &sCurrencyCode_DOP
+var CurrencyCode_DZD = &sCurrencyCode_DZD
+var CurrencyCode_EGP = &sCurrencyCode_EGP
+var CurrencyCode_ERN = &sCurrencyCode_ERN
+var CurrencyCode_ETB = &sCurrencyCode_ETB
+var CurrencyCode_FJD = &sCurrencyCode_FJD
+var CurrencyCode_FKP = &sCurrencyCode_FKP
+var CurrencyCode_GEL = &sCurrencyCode_GEL
+var CurrencyCode_GHS = &sCurrencyCode_GHS
+var CurrencyCode_GIP = &sCurrencyCode_GIP
+var CurrencyCode_GMD = &sCurrencyCode_GMD
+var CurrencyCode_GNF = &sCurrencyCode_GNF
+var CurrencyCode_GTQ = &sCurrencyCode_GTQ
+var CurrencyCode_GYD = &sCurrencyCode_GYD
+var CurrencyCode_HKD = &sCurrencyCode_HKD
+var CurrencyCode_HNL = &sCurrencyCode_HNL
+var CurrencyCode_HRK = &sCurrencyCode_HRK
+var CurrencyCode_HTG = &sCurrencyCode_HTG
+var CurrencyCode_HUF = &sCurrencyCode_HUF
+var CurrencyCode_IDR = &sCurrencyCode_IDR
+var CurrencyCode_ILS = &sCurrencyCode_ILS
+var CurrencyCode_IQD = &sCurrencyCode_IQD
+var CurrencyCode_IRR = &sCurrencyCode_IRR
+var CurrencyCode_ISK = &sCurrencyCode_ISK
+var CurrencyCode_JMD = &sCurrencyCode_JMD
+var CurrencyCode_JOD = &sCurrencyCode_JOD
+var CurrencyCode_KES = &sCurrencyCode_KES
+var CurrencyCode_KGS = &sCurrencyCode_KGS
+var CurrencyCode_KHR = &sCurrencyCode_KHR
+var CurrencyCode_KMF = &sCurrencyCode_KMF
+var CurrencyCode_KPW = &sCurrencyCode_KPW
+var CurrencyCode_KRW = &sCurrencyCode_KRW
+var CurrencyCode_KWD = &sCurrencyCode_KWD
+var CurrencyCode_KYD = &sCurrencyCode_KYD
+var CurrencyCode_KZT = &sCurrencyCode_KZT
+var CurrencyCode_LAK = &sCurrencyCode_LAK
+var CurrencyCode_LBP = &sCurrencyCode_LBP
+var CurrencyCode_LKR = &sCurrencyCode_LKR
+var CurrencyCode_LRD = &sCurrencyCode_LRD
+var CurrencyCode_LSL = &sCurrencyCode_LSL
+var CurrencyCode_LYD = &sCurrencyCode_LYD
+var CurrencyCode_MAD = &sCurrencyCode_MAD
+var CurrencyCode_MDL = &sCurrencyCode_MDL
+var CurrencyCode_MGA = &sCurrencyCode_MGA
+var CurrencyCode_MKD = &sCurrencyCode_MKD
+var CurrencyCode_MMK = &sCurrencyCode_MMK
+var CurrencyCode_MNT = &sCurrencyCode_MNT
+var CurrencyCode_MOP = &sCurrencyCode_MOP
+var CurrencyCode_MRU = &sCurrencyCode_MRU
+var CurrencyCode_MUR = &sCurrencyCode_MUR
+var CurrencyCode_MVR = &sCurrencyCode_MVR
+var CurrencyCode_MWK = &sCurrencyCode_MWK
+var CurrencyCode_MXN = &sCurrencyCode_MXN
+var CurrencyCode_MXV = &sCurrencyCode_MXV
+var CurrencyCode_MYR = &sCurrencyCode_MYR
+var CurrencyCode_MZN = &sCurrencyCode_MZN
+var CurrencyCode_NAD = &sCurrencyCode_NAD
+var CurrencyCode_NGN = &sCurrencyCode_NGN
+var CurrencyCode_NIO = &sCurrencyCode_NIO
+var CurrencyCode_NOK = &sCurrencyCode_NOK
+var CurrencyCode_NPR = &sCurrencyCode_NPR
+var CurrencyCode_OMR = &sCurrencyCode_OMR
+var CurrencyCode_PAB = &sCurrencyCode_PAB
+var CurrencyCode_PEN = &sCurrencyCode_PEN
+var CurrencyCode_PGK = &sCurrencyCode_PGK
+var CurrencyCode_PHP = &sCurrencyCode_PHP
+var CurrencyCode_PKR = &sCurrencyCode_PKR
+var CurrencyCode_PLN = &sCurrencyCode_PLN
+var CurrencyCode_PYG = &sCurrencyCode_PYG
+var CurrencyCode_QAR = &sCurrencyCode_QAR
+var CurrencyCode_RON = &sCurrencyCode_RON
+var CurrencyCode_RSD = &sCurrencyCode_RSD
+var CurrencyCode_RUB = &sCurrencyCode_RUB
+var CurrencyCode_RWF = &sCurrencyCode_RWF
+var CurrencyCode_SAR = &sCurrencyCode_SAR
+var CurrencyCode_SBD = &sCurrencyCode_SBD
+var CurrencyCode_SCR = &sCurrencyCode_SCR
+var CurrencyCode_SDG = &sCurrencyCode_SDG
+var CurrencyCode_SGD = &sCurrencyCode_SGD
+var CurrencyCode_SHP = &sCurrencyCode_SHP
+var CurrencyCode_SLL = &sCurrencyCode_SLL
+var CurrencyCode_SOS = &sCurrencyCode_SOS
+var CurrencyCode_SRD = &sCurrencyCode_SRD
+var CurrencyCode_SSP = &sCurrencyCode_SSP
+var CurrencyCode_STN = &sCurrencyCode_STN
+var CurrencyCode_SVC = &sCurrencyCode_SVC
+var CurrencyCode_SYP = &sCurrencyCode_SYP
+var CurrencyCode_SZL = &sCurrencyCode_SZL
+var CurrencyCode_THB = &sCurrencyCode_THB
+var CurrencyCode_TJS = &sCurrencyCode_TJS
+var CurrencyCode_TMT = &sCurrencyCode_TMT
+var CurrencyCode_TND = &sCurrencyCode_TND
+var CurrencyCode_TOP = &sCurrencyCode_TOP
+var CurrencyCode_TRY = &sCurrencyCode_TRY
+var CurrencyCode_TTD = &sCurrencyCode_TTD
+var CurrencyCode_TWD = &sCurrencyCode_TWD
+var CurrencyCode_TZS = &sCurrencyCode_TZS
+var CurrencyCode_UAH = &sCurrencyCode_UAH
+var CurrencyCode_UGX = &sCurrencyCode_UGX
+var CurrencyCode_USN = &sCurrencyCode_USN
+var CurrencyCode_UYI = &sCurrencyCode_UYI
+var CurrencyCode_UYU = &sCurrencyCode_UYU
+var CurrencyCode_UZS = &sCurrencyCode_UZS
+var CurrencyCode_VEF = &sCurrencyCode_VEF
+var CurrencyCode_VND = &sCurrencyCode_VND
+var CurrencyCode_VUV = &sCurrencyCode_VUV
+var CurrencyCode_WST = &sCurrencyCode_WST
+var CurrencyCode_XAF = &sCurrencyCode_XAF
+var CurrencyCode_XCD = &sCurrencyCode_XCD
+var CurrencyCode_XDR = &sCurrencyCode_XDR
+var CurrencyCode_XOF = &sCurrencyCode_XOF
+var CurrencyCode_XPF = &sCurrencyCode_XPF
+var CurrencyCode_XSU = &sCurrencyCode_XSU
+var CurrencyCode_XUA = &sCurrencyCode_XUA
+var CurrencyCode_YER = &sCurrencyCode_YER
+var CurrencyCode_ZAR = &sCurrencyCode_ZAR
+var CurrencyCode_ZMW = &sCurrencyCode_ZMW
+var CurrencyCode_ZWL = &sCurrencyCode_ZWL
+
+var Customer = &sCustomer
+var Customer_Account = &sCustomer_Account
+var Customer_Contacts = &sCustomer_Contacts
+
+var _CustomerAction = &s_CustomerAction
+
+var _CustomerContactsList = &s_CustomerContactsList
+var _CustomerContactsList_member = &s_CustomerContactsList_member
+
+var CustomerProjectsContext = &sCustomerProjectsContext
+var CustomerProjectsContext_Customer = &sCustomerProjectsContext_Customer
+var CustomerProjectsContext_Project = &sCustomerProjectsContext_Project
+
+var CustomerSummary = &sCustomerSummary
+var CustomerSummary_Account = &sCustomerSummary_Account
+
+var _Date = &s_Date
+
+var _DateTime = &s_DateTime
+
+var DeliveryModel = &sDeliveryModel
+var DeliveryModel_SAAS_OR_PAAS = &sDeliveryModel_SAAS_OR_PAAS
+var DeliveryModel_BYOL_OR_AMI = &sDeliveryModel_BYOL_OR_AMI
+var DeliveryModel_MANAGED_SERVICES = &sDeliveryModel_MANAGED_SERVICES
+var DeliveryModel_PROFESSIONAL_SERVICES = &sDeliveryModel_PROFESSIONAL_SERVICES
+var DeliveryModel_RESELL = &sDeliveryModel_RESELL
+var DeliveryModel_OTHER = &sDeliveryModel_OTHER
+
+var _DeliveryModels = &s_DeliveryModels
+var _DeliveryModels_member = &s_DeliveryModels_member
+
+var _DunsNumber = &s_DunsNumber
+
+var _EligibleProgramsList = &s_EligibleProgramsList
+var _EligibleProgramsList_member = &s_EligibleProgramsList_member
+
+var _Email = &s_Email
+
+var _EngagementArn = &s_EngagementArn
+
+var _EngagementArnOrIdentifier = &s_EngagementArnOrIdentifier
+
+var EngagementContextDetails = &sEngagementContextDetails
+var EngagementContextDetails_Id = &sEngagementContextDetails_Id
+var EngagementContextDetails_Type = &sEngagementContextDetails_Type
+var EngagementContextDetails_Payload = &sEngagementContextDetails_Payload
+
+var _EngagementContextIdentifier = &s_EngagementContextIdentifier
+
+var EngagementContextPayload = &sEngagementContextPayload
+var EngagementContextPayload_CustomerProject = &sEngagementContextPayload_CustomerProject
+var EngagementContextPayload_Lead = &sEngagementContextPayload_Lead
+var EngagementContextPayload_ProspectingResult = &sEngagementContextPayload_ProspectingResult
+
+var _EngagementContexts = &s_EngagementContexts
+var _EngagementContexts_member = &s_EngagementContexts_member
+
+var EngagementContextType = &sEngagementContextType
+var EngagementContextType_CUSTOMER_PROJECT = &sEngagementContextType_CUSTOMER_PROJECT
+var EngagementContextType_LEAD = &sEngagementContextType_LEAD
+var EngagementContextType_PROSPECTING_RESULT = &sEngagementContextType_PROSPECTING_RESULT
+
+var _EngagementContextTypeList = &s_EngagementContextTypeList
+var _EngagementContextTypeList_member = &s_EngagementContextTypeList_member
+
+var EngagementCustomer = &sEngagementCustomer
+var EngagementCustomer_Industry = &sEngagementCustomer_Industry
+var EngagementCustomer_CompanyName = &sEngagementCustomer_CompanyName
+var EngagementCustomer_WebsiteUrl = &sEngagementCustomer_WebsiteUrl
+var EngagementCustomer_CountryCode = &sEngagementCustomer_CountryCode
+
+var _EngagementCustomerBusinessProblem = &s_EngagementCustomerBusinessProblem
+
+var EngagementCustomerProjectDetails = &sEngagementCustomerProjectDetails
+var EngagementCustomerProjectDetails_Title = &sEngagementCustomerProjectDetails_Title
+var EngagementCustomerProjectDetails_BusinessProblem = &sEngagementCustomerProjectDetails_BusinessProblem
+var EngagementCustomerProjectDetails_TargetCompletionDate = &sEngagementCustomerProjectDetails_TargetCompletionDate
+
+var _EngagementCustomerProjectTitle = &s_EngagementCustomerProjectTitle
+
+var _EngagementDescription = &s_EngagementDescription
+
+var _EngagementIdentifier = &s_EngagementIdentifier
+
+var _EngagementIdentifierList = &s_EngagementIdentifierList
+var _EngagementIdentifierList_member = &s_EngagementIdentifierList_member
+
+var _EngagementIdentifiers = &s_EngagementIdentifiers
+var _EngagementIdentifiers_member = &s_EngagementIdentifiers_member
+
+var _EngagementInvitationArn = &s_EngagementInvitationArn
+
+var _EngagementInvitationArnOrIdentifier = &s_EngagementInvitationArnOrIdentifier
+
+var _EngagementInvitationIdentifier = &s_EngagementInvitationIdentifier
+
+var _EngagementInvitationIdentifiers = &s_EngagementInvitationIdentifiers
+var _EngagementInvitationIdentifiers_member = &s_EngagementInvitationIdentifiers_member
+
+var EngagementInvitationPayloadType = &sEngagementInvitationPayloadType
+var EngagementInvitationPayloadType_OPPORTUNITY_INVITATION = &sEngagementInvitationPayloadType_OPPORTUNITY_INVITATION
+var EngagementInvitationPayloadType_LEAD_INVITATION = &sEngagementInvitationPayloadType_LEAD_INVITATION
+
+var _EngagementInvitationsPayloadType = &s_EngagementInvitationsPayloadType
+var _EngagementInvitationsPayloadType_member = &s_EngagementInvitationsPayloadType_member
+
+var _EngagementInvitationSummaries = &s_EngagementInvitationSummaries
+var _EngagementInvitationSummaries_member = &s_EngagementInvitationSummaries_member
+
+var EngagementInvitationSummary = &sEngagementInvitationSummary
+var EngagementInvitationSummary_Arn = &sEngagementInvitationSummary_Arn
+var EngagementInvitationSummary_PayloadType = &sEngagementInvitationSummary_PayloadType
+var EngagementInvitationSummary_Id = &sEngagementInvitationSummary_Id
+var EngagementInvitationSummary_EngagementId = &sEngagementInvitationSummary_EngagementId
+var EngagementInvitationSummary_EngagementTitle = &sEngagementInvitationSummary_EngagementTitle
+var EngagementInvitationSummary_Status = &sEngagementInvitationSummary_Status
+var EngagementInvitationSummary_InvitationDate = &sEngagementInvitationSummary_InvitationDate
+var EngagementInvitationSummary_ExpirationDate = &sEngagementInvitationSummary_ExpirationDate
+var EngagementInvitationSummary_SenderAwsAccountId = &sEngagementInvitationSummary_SenderAwsAccountId
+var EngagementInvitationSummary_SenderCompanyName = &sEngagementInvitationSummary_SenderCompanyName
+var EngagementInvitationSummary_Receiver = &sEngagementInvitationSummary_Receiver
+var EngagementInvitationSummary_Catalog = &sEngagementInvitationSummary_Catalog
+var EngagementInvitationSummary_ParticipantType = &sEngagementInvitationSummary_ParticipantType
+
+var EngagementMember = &sEngagementMember
+var EngagementMember_CompanyName = &sEngagementMember_CompanyName
+var EngagementMember_WebsiteUrl = &sEngagementMember_WebsiteUrl
+var EngagementMember_AccountId = &sEngagementMember_AccountId
+
+var _EngagementMembers = &s_EngagementMembers
+var _EngagementMembers_member = &s_EngagementMembers_member
+
+var _EngagementMemberSummaries = &s_EngagementMemberSummaries
+var _EngagementMemberSummaries_member = &s_EngagementMemberSummaries_member
+
+var EngagementMemberSummary = &sEngagementMemberSummary
+var EngagementMemberSummary_CompanyName = &sEngagementMemberSummary_CompanyName
+var EngagementMemberSummary_WebsiteUrl = &sEngagementMemberSummary_WebsiteUrl
+
+var _EngagementPageSize = &s_EngagementPageSize
+
+var EngagementProspectingResult = &sEngagementProspectingResult
+var EngagementProspectingResult_EngagementIdentifier = &sEngagementProspectingResult_EngagementIdentifier
+var EngagementProspectingResult_EngagementContextId = &sEngagementProspectingResult_EngagementContextId
+var EngagementProspectingResult_Status = &sEngagementProspectingResult_Status
+var EngagementProspectingResult_ReasonCode = &sEngagementProspectingResult_ReasonCode
+var EngagementProspectingResult_Message = &sEngagementProspectingResult_Message
+
+var _EngagementProspectingResultList = &s_EngagementProspectingResultList
+var _EngagementProspectingResultList_member = &s_EngagementProspectingResultList_member
+
+var EngagementResourceAssociationSummary = &sEngagementResourceAssociationSummary
+var EngagementResourceAssociationSummary_Catalog = &sEngagementResourceAssociationSummary_Catalog
+var EngagementResourceAssociationSummary_EngagementId = &sEngagementResourceAssociationSummary_EngagementId
+var EngagementResourceAssociationSummary_ResourceType = &sEngagementResourceAssociationSummary_ResourceType
+var EngagementResourceAssociationSummary_ResourceId = &sEngagementResourceAssociationSummary_ResourceId
+var EngagementResourceAssociationSummary_CreatedBy = &sEngagementResourceAssociationSummary_CreatedBy
+
+var _EngagementResourceAssociationSummaryList = &s_EngagementResourceAssociationSummaryList
+var _EngagementResourceAssociationSummaryList_member = &s_EngagementResourceAssociationSummaryList_member
+
+var EngagementScore = &sEngagementScore
+var EngagementScore_HIGH = &sEngagementScore_HIGH
+var EngagementScore_MEDIUM = &sEngagementScore_MEDIUM
+var EngagementScore_LOW = &sEngagementScore_LOW
+
+var _EngagementScoreLevel = &s_EngagementScoreLevel
+
+var EngagementSort = &sEngagementSort
+var EngagementSort_SortOrder = &sEngagementSort_SortOrder
+var EngagementSort_SortBy = &sEngagementSort_SortBy
+
+var EngagementSortName = &sEngagementSortName
+var EngagementSortName_CreatedDate = &sEngagementSortName_CreatedDate
+
+var EngagementSummary = &sEngagementSummary
+var EngagementSummary_Arn = &sEngagementSummary_Arn
+var EngagementSummary_Id = &sEngagementSummary_Id
+var EngagementSummary_Title = &sEngagementSummary_Title
+var EngagementSummary_CreatedAt = &sEngagementSummary_CreatedAt
+var EngagementSummary_CreatedBy = &sEngagementSummary_CreatedBy
+var EngagementSummary_MemberCount = &sEngagementSummary_MemberCount
+var EngagementSummary_ModifiedAt = &sEngagementSummary_ModifiedAt
+var EngagementSummary_ModifiedBy = &sEngagementSummary_ModifiedBy
+var EngagementSummary_ContextTypes = &sEngagementSummary_ContextTypes
+
+var _EngagementSummaryList = &s_EngagementSummaryList
+var _EngagementSummaryList_member = &s_EngagementSummaryList_member
+
+var _EngagementTitle = &s_EngagementTitle
+
+var _EngagementUseCase = &s_EngagementUseCase
+
+var EnrichmentContext = &sEnrichmentContext
+var EnrichmentContext_ProspectingResultAws = &sEnrichmentContext_ProspectingResultAws
+var EnrichmentContext_LeadInsights = &sEnrichmentContext_LeadInsights
+
+var _EstimationUrl = &s_EstimationUrl
+
+var ExpectedContractDuration = &sExpectedContractDuration
+var ExpectedContractDuration_Term = &sExpectedContractDuration_Term
+var ExpectedContractDuration_Value = &sExpectedContractDuration_Value
+
+var ExpectedContractDurationTerm = &sExpectedContractDurationTerm
+var ExpectedContractDurationTerm_MONTHS = &sExpectedContractDurationTerm_MONTHS
+
+var ExpectedCustomerSpend = &sExpectedCustomerSpend
+var ExpectedCustomerSpend_Amount = &sExpectedCustomerSpend_Amount
+var ExpectedCustomerSpend_CurrencyCode = &sExpectedCustomerSpend_CurrencyCode
+var ExpectedCustomerSpend_Frequency = &sExpectedCustomerSpend_Frequency
+var ExpectedCustomerSpend_TargetCompany = &sExpectedCustomerSpend_TargetCompany
+var ExpectedCustomerSpend_EstimationUrl = &sExpectedCustomerSpend_EstimationUrl
+
+var _ExpectedCustomerSpendList = &s_ExpectedCustomerSpendList
+var _ExpectedCustomerSpendList_member = &s_ExpectedCustomerSpendList_member
+
+var _FilterIdentifier = &s_FilterIdentifier
+var _FilterIdentifier_member = &s_FilterIdentifier_member
+
+var _FilterLifeCycleReviewStatus = &s_FilterLifeCycleReviewStatus
+var _FilterLifeCycleReviewStatus_member = &s_FilterLifeCycleReviewStatus_member
+
+var _FilterLifeCycleStage = &s_FilterLifeCycleStage
+var _FilterLifeCycleStage_member = &s_FilterLifeCycleStage_member
+
+var _FilterStatus = &s_FilterStatus
+var _FilterStatus_member = &s_FilterStatus_member
+
+var Industry = &sIndustry
+var Industry_AEROSPACE_SATELLITE = &sIndustry_AEROSPACE_SATELLITE
+var Industry_AGRICULTURE = &sIndustry_AGRICULTURE
+var Industry_AUTOMOTIVE = &sIndustry_AUTOMOTIVE
+var Industry_COMPUTERS_ELECTRONICS = &sIndustry_COMPUTERS_ELECTRONICS
+var Industry_CONSUMER_GOODS = &sIndustry_CONSUMER_GOODS
+var Industry_EDUCATION = &sIndustry_EDUCATION
+var Industry_ENERGY_OIL_GAS = &sIndustry_ENERGY_OIL_GAS
+var Industry_ENERGY_POWER_UTILITIES = &sIndustry_ENERGY_POWER_UTILITIES
+var Industry_FINANCIAL_SERVICES = &sIndustry_FINANCIAL_SERVICES
+var Industry_GAMING = &sIndustry_GAMING
+var Industry_GOVERNMENT = &sIndustry_GOVERNMENT
+var Industry_HEALTHCARE = &sIndustry_HEALTHCARE
+var Industry_HOSPITALITY = &sIndustry_HOSPITALITY
+var Industry_LIFE_SCIENCES = &sIndustry_LIFE_SCIENCES
+var Industry_MANUFACTURING = &sIndustry_MANUFACTURING
+var Industry_MARKETING_ADVERTISING = &sIndustry_MARKETING_ADVERTISING
+var Industry_MEDIA_ENTERTAINMENT = &sIndustry_MEDIA_ENTERTAINMENT
+var Industry_MINING = &sIndustry_MINING
+var Industry_NON_PROFIT_ORGANIZATION = &sIndustry_NON_PROFIT_ORGANIZATION
+var Industry_PROFESSIONAL_SERVICES = &sIndustry_PROFESSIONAL_SERVICES
+var Industry_REALESTATE_CONSTRUCTION = &sIndustry_REALESTATE_CONSTRUCTION
+var Industry_RETAIL = &sIndustry_RETAIL
+var Industry_SOFTWARE_INTERNET = &sIndustry_SOFTWARE_INTERNET
+var Industry_TELECOMMUNICATIONS = &sIndustry_TELECOMMUNICATIONS
+var Industry_TRANSPORTATION_LOGISTICS = &sIndustry_TRANSPORTATION_LOGISTICS
+var Industry_TRAVEL = &sIndustry_TRAVEL
+var Industry_WHOLESALE_DISTRIBUTION = &sIndustry_WHOLESALE_DISTRIBUTION
+var Industry_OTHER = &sIndustry_OTHER
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var Invitation = &sInvitation
+var Invitation_Message = &sInvitation_Message
+var Invitation_Receiver = &sInvitation_Receiver
+var Invitation_Payload = &sInvitation_Payload
+
+var _InvitationMessage = &s_InvitationMessage
+
+var InvitationProspectingResultAws = &sInvitationProspectingResultAws
+var InvitationProspectingResultAws_Customer = &sInvitationProspectingResultAws_Customer
+var InvitationProspectingResultAws_Insights = &sInvitationProspectingResultAws_Insights
+
+var InvitationStatus = &sInvitationStatus
+var InvitationStatus_ACCEPTED = &sInvitationStatus_ACCEPTED
+var InvitationStatus_PENDING = &sInvitationStatus_PENDING
+var InvitationStatus_REJECTED = &sInvitationStatus_REJECTED
+var InvitationStatus_EXPIRED = &sInvitationStatus_EXPIRED
+
+var _InvitationStatusList = &s_InvitationStatusList
+var _InvitationStatusList_member = &s_InvitationStatusList_member
+
+var InvolvementTypeChangeReason = &sInvolvementTypeChangeReason
+var InvolvementTypeChangeReason_EXPANSION_OPPORTUNITY = &sInvolvementTypeChangeReason_EXPANSION_OPPORTUNITY
+var InvolvementTypeChangeReason_CHANGE_IN_DEAL_INFORMATION = &sInvolvementTypeChangeReason_CHANGE_IN_DEAL_INFORMATION
+var InvolvementTypeChangeReason_CUSTOMER_REQUESTED = &sInvolvementTypeChangeReason_CUSTOMER_REQUESTED
+var InvolvementTypeChangeReason_TECHNICAL_COMPLEXITY = &sInvolvementTypeChangeReason_TECHNICAL_COMPLEXITY
+var InvolvementTypeChangeReason_RISK_MITIGATION = &sInvolvementTypeChangeReason_RISK_MITIGATION
+
+var _JobTitle = &s_JobTitle
+
+var LastModifiedDate = &sLastModifiedDate
+var LastModifiedDate_AfterLastModifiedDate = &sLastModifiedDate_AfterLastModifiedDate
+var LastModifiedDate_BeforeLastModifiedDate = &sLastModifiedDate_BeforeLastModifiedDate
+
+var LeadAddress = &sLeadAddress
+var LeadAddress_City = &sLeadAddress_City
+var LeadAddress_PostalCode = &sLeadAddress_PostalCode
+var LeadAddress_StateOrRegion = &sLeadAddress_StateOrRegion
+var LeadAddress_CountryCode = &sLeadAddress_CountryCode
+
+var _LeadBusinessProblem = &s_LeadBusinessProblem
+
+var LeadContact = &sLeadContact
+var LeadContact_BusinessTitle = &sLeadContact_BusinessTitle
+var LeadContact_Email = &sLeadContact_Email
+var LeadContact_FirstName = &sLeadContact_FirstName
+var LeadContact_LastName = &sLeadContact_LastName
+var LeadContact_Phone = &sLeadContact_Phone
+
+var LeadContext = &sLeadContext
+var LeadContext_Insights = &sLeadContext_Insights
+var LeadContext_QualificationStatus = &sLeadContext_QualificationStatus
+var LeadContext_Customer = &sLeadContext_Customer
+var LeadContext_Interactions = &sLeadContext_Interactions
+
+var _LeadCountryCode = &s_LeadCountryCode
+
+var LeadCustomer = &sLeadCustomer
+var LeadCustomer_Industry = &sLeadCustomer_Industry
+var LeadCustomer_CompanyName = &sLeadCustomer_CompanyName
+var LeadCustomer_WebsiteUrl = &sLeadCustomer_WebsiteUrl
+var LeadCustomer_Address = &sLeadCustomer_Address
+var LeadCustomer_AwsMaturity = &sLeadCustomer_AwsMaturity
+var LeadCustomer_MarketSegment = &sLeadCustomer_MarketSegment
+
+var _LeadEmail = &s_LeadEmail
+
+var _LeadIndustry = &s_LeadIndustry
+
+var LeadInsights = &sLeadInsights
+var LeadInsights_LeadReadinessScore = &sLeadInsights_LeadReadinessScore
+
+var LeadInteraction = &sLeadInteraction
+var LeadInteraction_SourceType = &sLeadInteraction_SourceType
+var LeadInteraction_SourceId = &sLeadInteraction_SourceId
+var LeadInteraction_SourceName = &sLeadInteraction_SourceName
+var LeadInteraction_Usecase = &sLeadInteraction_Usecase
+var LeadInteraction_InteractionDate = &sLeadInteraction_InteractionDate
+var LeadInteraction_CustomerAction = &sLeadInteraction_CustomerAction
+var LeadInteraction_BusinessProblem = &sLeadInteraction_BusinessProblem
+var LeadInteraction_Contact = &sLeadInteraction_Contact
+
+var _LeadInteractionList = &s_LeadInteractionList
+var _LeadInteractionList_member = &s_LeadInteractionList_member
+
+var LeadInvitationCustomer = &sLeadInvitationCustomer
+var LeadInvitationCustomer_Industry = &sLeadInvitationCustomer_Industry
+var LeadInvitationCustomer_CompanyName = &sLeadInvitationCustomer_CompanyName
+var LeadInvitationCustomer_WebsiteUrl = &sLeadInvitationCustomer_WebsiteUrl
+var LeadInvitationCustomer_CountryCode = &sLeadInvitationCustomer_CountryCode
+var LeadInvitationCustomer_AwsMaturity = &sLeadInvitationCustomer_AwsMaturity
+var LeadInvitationCustomer_MarketSegment = &sLeadInvitationCustomer_MarketSegment
+
+var LeadInvitationInteraction = &sLeadInvitationInteraction
+var LeadInvitationInteraction_SourceType = &sLeadInvitationInteraction_SourceType
+var LeadInvitationInteraction_SourceId = &sLeadInvitationInteraction_SourceId
+var LeadInvitationInteraction_SourceName = &sLeadInvitationInteraction_SourceName
+var LeadInvitationInteraction_Usecase = &sLeadInvitationInteraction_Usecase
+var LeadInvitationInteraction_ContactBusinessTitle = &sLeadInvitationInteraction_ContactBusinessTitle
+
+var LeadInvitationPayload = &sLeadInvitationPayload
+var LeadInvitationPayload_Customer = &sLeadInvitationPayload_Customer
+var LeadInvitationPayload_Interaction = &sLeadInvitationPayload_Interaction
+
+var _LeadJobTitle = &s_LeadJobTitle
+
+var _LeadMarketSegment = &s_LeadMarketSegment
+
+var _LeadPhoneNumber = &s_LeadPhoneNumber
+
+var _LeadQualificationStatus = &s_LeadQualificationStatus
+
+var _LeadSourceId = &s_LeadSourceId
+
+var _LeadSourceName = &s_LeadSourceName
+
+var _LeadSourceType = &s_LeadSourceType
+
+var _LeadWebsiteUrl = &s_LeadWebsiteUrl
+
+var LifeCycle = &sLifeCycle
+var LifeCycle_Stage = &sLifeCycle_Stage
+var LifeCycle_ClosedLostReason = &sLifeCycle_ClosedLostReason
+var LifeCycle_NextSteps = &sLifeCycle_NextSteps
+var LifeCycle_TargetCloseDate = &sLifeCycle_TargetCloseDate
+var LifeCycle_ReviewStatus = &sLifeCycle_ReviewStatus
+var LifeCycle_ReviewComments = &sLifeCycle_ReviewComments
+var LifeCycle_ReviewStatusReason = &sLifeCycle_ReviewStatusReason
+var LifeCycle_NextStepsHistory = &sLifeCycle_NextStepsHistory
+
+var LifeCycleForView = &sLifeCycleForView
+var LifeCycleForView_TargetCloseDate = &sLifeCycleForView_TargetCloseDate
+var LifeCycleForView_ReviewStatus = &sLifeCycleForView_ReviewStatus
+var LifeCycleForView_Stage = &sLifeCycleForView_Stage
+var LifeCycleForView_NextSteps = &sLifeCycleForView_NextSteps
+
+var LifeCycleSummary = &sLifeCycleSummary
+var LifeCycleSummary_Stage = &sLifeCycleSummary_Stage
+var LifeCycleSummary_ClosedLostReason = &sLifeCycleSummary_ClosedLostReason
+var LifeCycleSummary_NextSteps = &sLifeCycleSummary_NextSteps
+var LifeCycleSummary_TargetCloseDate = &sLifeCycleSummary_TargetCloseDate
+var LifeCycleSummary_ReviewStatus = &sLifeCycleSummary_ReviewStatus
+var LifeCycleSummary_ReviewComments = &sLifeCycleSummary_ReviewComments
+var LifeCycleSummary_ReviewStatusReason = &sLifeCycleSummary_ReviewStatusReason
+
+var _ListEngagementByAcceptingInvitationTaskSummaries = &s_ListEngagementByAcceptingInvitationTaskSummaries
+var _ListEngagementByAcceptingInvitationTaskSummaries_member = &s_ListEngagementByAcceptingInvitationTaskSummaries_member
+
+var ListEngagementByAcceptingInvitationTaskSummary = &sListEngagementByAcceptingInvitationTaskSummary
+var ListEngagementByAcceptingInvitationTaskSummary_TaskId = &sListEngagementByAcceptingInvitationTaskSummary_TaskId
+var ListEngagementByAcceptingInvitationTaskSummary_TaskArn = &sListEngagementByAcceptingInvitationTaskSummary_TaskArn
+var ListEngagementByAcceptingInvitationTaskSummary_StartTime = &sListEngagementByAcceptingInvitationTaskSummary_StartTime
+var ListEngagementByAcceptingInvitationTaskSummary_TaskStatus = &sListEngagementByAcceptingInvitationTaskSummary_TaskStatus
+var ListEngagementByAcceptingInvitationTaskSummary_Message = &sListEngagementByAcceptingInvitationTaskSummary_Message
+var ListEngagementByAcceptingInvitationTaskSummary_ReasonCode = &sListEngagementByAcceptingInvitationTaskSummary_ReasonCode
+var ListEngagementByAcceptingInvitationTaskSummary_OpportunityId = &sListEngagementByAcceptingInvitationTaskSummary_OpportunityId
+var ListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId = &sListEngagementByAcceptingInvitationTaskSummary_ResourceSnapshotJobId
+var ListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId = &sListEngagementByAcceptingInvitationTaskSummary_EngagementInvitationId
+
+var _ListEngagementFromOpportunityTaskSummaries = &s_ListEngagementFromOpportunityTaskSummaries
+var _ListEngagementFromOpportunityTaskSummaries_member = &s_ListEngagementFromOpportunityTaskSummaries_member
+
+var ListEngagementFromOpportunityTaskSummary = &sListEngagementFromOpportunityTaskSummary
+var ListEngagementFromOpportunityTaskSummary_TaskId = &sListEngagementFromOpportunityTaskSummary_TaskId
+var ListEngagementFromOpportunityTaskSummary_TaskArn = &sListEngagementFromOpportunityTaskSummary_TaskArn
+var ListEngagementFromOpportunityTaskSummary_StartTime = &sListEngagementFromOpportunityTaskSummary_StartTime
+var ListEngagementFromOpportunityTaskSummary_TaskStatus = &sListEngagementFromOpportunityTaskSummary_TaskStatus
+var ListEngagementFromOpportunityTaskSummary_Message = &sListEngagementFromOpportunityTaskSummary_Message
+var ListEngagementFromOpportunityTaskSummary_ReasonCode = &sListEngagementFromOpportunityTaskSummary_ReasonCode
+var ListEngagementFromOpportunityTaskSummary_OpportunityId = &sListEngagementFromOpportunityTaskSummary_OpportunityId
+var ListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId = &sListEngagementFromOpportunityTaskSummary_ResourceSnapshotJobId
+var ListEngagementFromOpportunityTaskSummary_EngagementId = &sListEngagementFromOpportunityTaskSummary_EngagementId
+var ListEngagementFromOpportunityTaskSummary_EngagementInvitationId = &sListEngagementFromOpportunityTaskSummary_EngagementInvitationId
+
+var _ListOpportunityFromEngagementTaskSummaries = &s_ListOpportunityFromEngagementTaskSummaries
+var _ListOpportunityFromEngagementTaskSummaries_member = &s_ListOpportunityFromEngagementTaskSummaries_member
+
+var ListOpportunityFromEngagementTaskSummary = &sListOpportunityFromEngagementTaskSummary
+var ListOpportunityFromEngagementTaskSummary_TaskId = &sListOpportunityFromEngagementTaskSummary_TaskId
+var ListOpportunityFromEngagementTaskSummary_TaskArn = &sListOpportunityFromEngagementTaskSummary_TaskArn
+var ListOpportunityFromEngagementTaskSummary_StartTime = &sListOpportunityFromEngagementTaskSummary_StartTime
+var ListOpportunityFromEngagementTaskSummary_TaskStatus = &sListOpportunityFromEngagementTaskSummary_TaskStatus
+var ListOpportunityFromEngagementTaskSummary_Message = &sListOpportunityFromEngagementTaskSummary_Message
+var ListOpportunityFromEngagementTaskSummary_ReasonCode = &sListOpportunityFromEngagementTaskSummary_ReasonCode
+var ListOpportunityFromEngagementTaskSummary_OpportunityId = &sListOpportunityFromEngagementTaskSummary_OpportunityId
+var ListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId = &sListOpportunityFromEngagementTaskSummary_ResourceSnapshotJobId
+var ListOpportunityFromEngagementTaskSummary_EngagementId = &sListOpportunityFromEngagementTaskSummary_EngagementId
+var ListOpportunityFromEngagementTaskSummary_ContextId = &sListOpportunityFromEngagementTaskSummary_ContextId
+
+var ListTasksSortBase = &sListTasksSortBase
+var ListTasksSortBase_SortOrder = &sListTasksSortBase_SortOrder
+var ListTasksSortBase_SortBy = &sListTasksSortBase_SortBy
+
+var ListTasksSortName = &sListTasksSortName
+var ListTasksSortName_START_TIME = &sListTasksSortName_START_TIME
+
+var Marketing = &sMarketing
+var Marketing_CampaignName = &sMarketing_CampaignName
+var Marketing_Source = &sMarketing_Source
+var Marketing_UseCases = &sMarketing_UseCases
+var Marketing_Channels = &sMarketing_Channels
+var Marketing_AwsFundingUsed = &sMarketing_AwsFundingUsed
+
+var MarketingSource = &sMarketingSource
+var MarketingSource_MARKETING_ACTIVITY = &sMarketingSource_MARKETING_ACTIVITY
+var MarketingSource_NONE = &sMarketingSource_NONE
+
+var _MemberCompanyName = &s_MemberCompanyName
+
+var _MemberPageSize = &s_MemberPageSize
+
+var _MonetaryAmount = &s_MonetaryAmount
+
+var MonetaryValue = &sMonetaryValue
+var MonetaryValue_Amount = &sMonetaryValue_Amount
+var MonetaryValue_CurrencyCode = &sMonetaryValue_CurrencyCode
+
+var _Name = &s_Name
+
+var NationalSecurity = &sNationalSecurity
+var NationalSecurity_YES = &sNationalSecurity_YES
+var NationalSecurity_NO = &sNationalSecurity_NO
+
+var _NextStepsHistories = &s_NextStepsHistories
+var _NextStepsHistories_member = &s_NextStepsHistories_member
+
+var NextStepsHistory = &sNextStepsHistory
+var NextStepsHistory_Value = &sNextStepsHistory_Value
+var NextStepsHistory_Time = &sNextStepsHistory_Time
+
+var _OpportunityArn = &s_OpportunityArn
+
+var OpportunityEngagementInvitationSort = &sOpportunityEngagementInvitationSort
+var OpportunityEngagementInvitationSort_SortOrder = &sOpportunityEngagementInvitationSort_SortOrder
+var OpportunityEngagementInvitationSort_SortBy = &sOpportunityEngagementInvitationSort_SortBy
+
+var OpportunityEngagementInvitationSortName = &sOpportunityEngagementInvitationSortName
+var OpportunityEngagementInvitationSortName_INVITATION_DATE = &sOpportunityEngagementInvitationSortName_INVITATION_DATE
+
+var _OpportunityIdentifier = &s_OpportunityIdentifier
+
+var _OpportunityIdentifiers = &s_OpportunityIdentifiers
+var _OpportunityIdentifiers_member = &s_OpportunityIdentifiers_member
+
+var OpportunityInvitationPayload = &sOpportunityInvitationPayload
+var OpportunityInvitationPayload_SenderContacts = &sOpportunityInvitationPayload_SenderContacts
+var OpportunityInvitationPayload_ReceiverResponsibilities = &sOpportunityInvitationPayload_ReceiverResponsibilities
+var OpportunityInvitationPayload_Customer = &sOpportunityInvitationPayload_Customer
+var OpportunityInvitationPayload_Project = &sOpportunityInvitationPayload_Project
+
+var OpportunityOrigin = &sOpportunityOrigin
+var OpportunityOrigin_AWS_REFERRAL = &sOpportunityOrigin_AWS_REFERRAL
+var OpportunityOrigin_PARTNER_REFERRAL = &sOpportunityOrigin_PARTNER_REFERRAL
+
+var OpportunityQuality = &sOpportunityQuality
+var OpportunityQuality_Score = &sOpportunityQuality_Score
+var OpportunityQuality_Trend = &sOpportunityQuality_Trend
+
+var OpportunitySort = &sOpportunitySort
+var OpportunitySort_SortOrder = &sOpportunitySort_SortOrder
+var OpportunitySort_SortBy = &sOpportunitySort_SortBy
+
+var OpportunitySortName = &sOpportunitySortName
+var OpportunitySortName_LAST_MODIFIEDDATE = &sOpportunitySortName_LAST_MODIFIEDDATE
+var OpportunitySortName_IDENTIFIER = &sOpportunitySortName_IDENTIFIER
+var OpportunitySortName_CUSTOMER_COMPANY_NAME = &sOpportunitySortName_CUSTOMER_COMPANY_NAME
+var OpportunitySortName_CREATED_DATE = &sOpportunitySortName_CREATED_DATE
+var OpportunitySortName_TARGET_CLOSE_DATE = &sOpportunitySortName_TARGET_CLOSE_DATE
+
+var _OpportunitySummaries = &s_OpportunitySummaries
+var _OpportunitySummaries_member = &s_OpportunitySummaries_member
+
+var OpportunitySummary = &sOpportunitySummary
+var OpportunitySummary_Catalog = &sOpportunitySummary_Catalog
+var OpportunitySummary_Id = &sOpportunitySummary_Id
+var OpportunitySummary_Arn = &sOpportunitySummary_Arn
+var OpportunitySummary_PartnerOpportunityIdentifier = &sOpportunitySummary_PartnerOpportunityIdentifier
+var OpportunitySummary_OpportunityType = &sOpportunitySummary_OpportunityType
+var OpportunitySummary_LastModifiedDate = &sOpportunitySummary_LastModifiedDate
+var OpportunitySummary_CreatedDate = &sOpportunitySummary_CreatedDate
+var OpportunitySummary_LifeCycle = &sOpportunitySummary_LifeCycle
+var OpportunitySummary_Customer = &sOpportunitySummary_Customer
+var OpportunitySummary_Project = &sOpportunitySummary_Project
+
+var OpportunitySummaryView = &sOpportunitySummaryView
+var OpportunitySummaryView_OpportunityType = &sOpportunitySummaryView_OpportunityType
+var OpportunitySummaryView_Lifecycle = &sOpportunitySummaryView_Lifecycle
+var OpportunitySummaryView_OpportunityTeam = &sOpportunitySummaryView_OpportunityTeam
+var OpportunitySummaryView_PrimaryNeedsFromAws = &sOpportunitySummaryView_PrimaryNeedsFromAws
+var OpportunitySummaryView_Customer = &sOpportunitySummaryView_Customer
+var OpportunitySummaryView_Project = &sOpportunitySummaryView_Project
+var OpportunitySummaryView_RelatedEntityIdentifiers = &sOpportunitySummaryView_RelatedEntityIdentifiers
+
+var OpportunityType = &sOpportunityType
+var OpportunityType_NET_NEW_BUSINESS = &sOpportunityType_NET_NEW_BUSINESS
+var OpportunityType_FLAT_RENEWAL = &sOpportunityType_FLAT_RENEWAL
+var OpportunityType_EXPANSION = &sOpportunityType_EXPANSION
+
+var _PageSize = &s_PageSize
+
+var ParticipantType = &sParticipantType
+var ParticipantType_SENDER = &sParticipantType_SENDER
+var ParticipantType_RECEIVER = &sParticipantType_RECEIVER
+
+var _PartnerOpportunityTeamMembersList = &s_PartnerOpportunityTeamMembersList
+var _PartnerOpportunityTeamMembersList_member = &s_PartnerOpportunityTeamMembersList_member
+
+var Payload = &sPayload
+var Payload_OpportunityInvitation = &sPayload_OpportunityInvitation
+var Payload_LeadInvitation = &sPayload_LeadInvitation
+
+var PaymentFrequency = &sPaymentFrequency
+var PaymentFrequency_MONTHLY = &sPaymentFrequency_MONTHLY
+
+var _PhoneNumber = &s_PhoneNumber
+
+var _PiiString = &s_PiiString
+
+var PrimaryNeedFromAws = &sPrimaryNeedFromAws
+var PrimaryNeedFromAws_CO_SELL_ARCHITECTURAL_VALIDATION = &sPrimaryNeedFromAws_CO_SELL_ARCHITECTURAL_VALIDATION
+var PrimaryNeedFromAws_CO_SELL_BUSINESS_PRESENTATION = &sPrimaryNeedFromAws_CO_SELL_BUSINESS_PRESENTATION
+var PrimaryNeedFromAws_CO_SELL_COMPETITIVE_INFORMATION = &sPrimaryNeedFromAws_CO_SELL_COMPETITIVE_INFORMATION
+var PrimaryNeedFromAws_CO_SELL_PRICING_ASSISTANCE = &sPrimaryNeedFromAws_CO_SELL_PRICING_ASSISTANCE
+var PrimaryNeedFromAws_CO_SELL_TECHNICAL_CONSULTATION = &sPrimaryNeedFromAws_CO_SELL_TECHNICAL_CONSULTATION
+var PrimaryNeedFromAws_CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION = &sPrimaryNeedFromAws_CO_SELL_TOTAL_COST_OF_OWNERSHIP_EVALUATION
+var PrimaryNeedFromAws_CO_SELL_DEAL_SUPPORT = &sPrimaryNeedFromAws_CO_SELL_DEAL_SUPPORT
+var PrimaryNeedFromAws_CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX = &sPrimaryNeedFromAws_CO_SELL_SUPPORT_FOR_PUBLIC_TENDER_RFX
+
+var _PrimaryNeedsFromAws = &s_PrimaryNeedsFromAws
+var _PrimaryNeedsFromAws_member = &s_PrimaryNeedsFromAws_member
+
+var _ProfileNextStepsHistories = &s_ProfileNextStepsHistories
+var _ProfileNextStepsHistories_member = &s_ProfileNextStepsHistories_member
+
+var ProfileNextStepsHistory = &sProfileNextStepsHistory
+var ProfileNextStepsHistory_Value = &sProfileNextStepsHistory_Value
+var ProfileNextStepsHistory_Time = &sProfileNextStepsHistory_Time
+
+var Project = &sProject
+var Project_DeliveryModels = &sProject_DeliveryModels
+var Project_ExpectedCustomerSpend = &sProject_ExpectedCustomerSpend
+var Project_ExpectedContractDuration = &sProject_ExpectedContractDuration
+var Project_Title = &sProject_Title
+var Project_ApnPrograms = &sProject_ApnPrograms
+var Project_CustomerBusinessProblem = &sProject_CustomerBusinessProblem
+var Project_CustomerUseCase = &sProject_CustomerUseCase
+var Project_RelatedOpportunityIdentifier = &sProject_RelatedOpportunityIdentifier
+var Project_SalesActivities = &sProject_SalesActivities
+var Project_CompetitorName = &sProject_CompetitorName
+var Project_OtherCompetitorNames = &sProject_OtherCompetitorNames
+var Project_OtherSolutionDescription = &sProject_OtherSolutionDescription
+var Project_AdditionalComments = &sProject_AdditionalComments
+var Project_AwsPartition = &sProject_AwsPartition
+
+var ProjectDetails = &sProjectDetails
+var ProjectDetails_BusinessProblem = &sProjectDetails_BusinessProblem
+var ProjectDetails_Title = &sProjectDetails_Title
+var ProjectDetails_TargetCompletionDate = &sProjectDetails_TargetCompletionDate
+var ProjectDetails_ExpectedCustomerSpend = &sProjectDetails_ExpectedCustomerSpend
+
+var ProjectSummary = &sProjectSummary
+var ProjectSummary_DeliveryModels = &sProjectSummary_DeliveryModels
+var ProjectSummary_ExpectedCustomerSpend = &sProjectSummary_ExpectedCustomerSpend
+var ProjectSummary_ExpectedContractDuration = &sProjectSummary_ExpectedContractDuration
+
+var ProjectView = &sProjectView
+var ProjectView_DeliveryModels = &sProjectView_DeliveryModels
+var ProjectView_ExpectedCustomerSpend = &sProjectView_ExpectedCustomerSpend
+var ProjectView_ExpectedContractDuration = &sProjectView_ExpectedContractDuration
+var ProjectView_CustomerUseCase = &sProjectView_CustomerUseCase
+var ProjectView_SalesActivities = &sProjectView_SalesActivities
+var ProjectView_OtherSolutionDescription = &sProjectView_OtherSolutionDescription
+
+var _ProspectingAccountName = &s_ProspectingAccountName
+
+var _ProspectingCompanySize = &s_ProspectingCompanySize
+
+var ProspectingFromEngagementTaskSort = &sProspectingFromEngagementTaskSort
+var ProspectingFromEngagementTaskSort_SortOrder = &sProspectingFromEngagementTaskSort_SortOrder
+var ProspectingFromEngagementTaskSort_SortBy = &sProspectingFromEngagementTaskSort_SortBy
+
+var ProspectingFromEngagementTaskSortName = &sProspectingFromEngagementTaskSortName
+var ProspectingFromEngagementTaskSortName_StartTime = &sProspectingFromEngagementTaskSortName_StartTime
+var ProspectingFromEngagementTaskSortName_TaskName = &sProspectingFromEngagementTaskSortName_TaskName
+var ProspectingFromEngagementTaskSortName_FailedEngagementCount = &sProspectingFromEngagementTaskSortName_FailedEngagementCount
+
+var _ProspectingGeo = &s_ProspectingGeo
+
+var ProspectingInsights = &sProspectingInsights
+var ProspectingInsights_MarketplaceEngagementScore = &sProspectingInsights_MarketplaceEngagementScore
+var ProspectingInsights_SolutionScore = &sProspectingInsights_SolutionScore
+var ProspectingInsights_SolutionCategory = &sProspectingInsights_SolutionCategory
+var ProspectingInsights_SolutionSubCategory = &sProspectingInsights_SolutionSubCategory
+
+var _ProspectingPublicProfileSummary = &s_ProspectingPublicProfileSummary
+
+var _ProspectingRegion = &s_ProspectingRegion
+
+var ProspectingResult = &sProspectingResult
+var ProspectingResult_Aws = &sProspectingResult_Aws
+
+var ProspectingResultAws = &sProspectingResultAws
+var ProspectingResultAws_Customer = &sProspectingResultAws_Customer
+var ProspectingResultAws_Insights = &sProspectingResultAws_Insights
+var ProspectingResultAws_StartTime = &sProspectingResultAws_StartTime
+var ProspectingResultAws_EndTime = &sProspectingResultAws_EndTime
+var ProspectingResultAws_TaskId = &sProspectingResultAws_TaskId
+var ProspectingResultAws_TaskArn = &sProspectingResultAws_TaskArn
+var ProspectingResultAws_TaskName = &sProspectingResultAws_TaskName
+
+var ProspectingResultCustomer = &sProspectingResultCustomer
+var ProspectingResultCustomer_AccountName = &sProspectingResultCustomer_AccountName
+var ProspectingResultCustomer_Geo = &sProspectingResultCustomer_Geo
+var ProspectingResultCustomer_Region = &sProspectingResultCustomer_Region
+var ProspectingResultCustomer_SubRegion = &sProspectingResultCustomer_SubRegion
+var ProspectingResultCustomer_Country = &sProspectingResultCustomer_Country
+var ProspectingResultCustomer_Industry = &sProspectingResultCustomer_Industry
+var ProspectingResultCustomer_SubIndustry = &sProspectingResultCustomer_SubIndustry
+var ProspectingResultCustomer_Segment = &sProspectingResultCustomer_Segment
+var ProspectingResultCustomer_CompanySize = &sProspectingResultCustomer_CompanySize
+var ProspectingResultCustomer_EligiblePrograms = &sProspectingResultCustomer_EligiblePrograms
+var ProspectingResultCustomer_PublicProfileSummary = &sProspectingResultCustomer_PublicProfileSummary
+
+var _ProspectingSegment = &s_ProspectingSegment
+
+var _ProspectingSubIndustry = &s_ProspectingSubIndustry
+
+var _ProspectingSubRegion = &s_ProspectingSubRegion
+
+var _ProspectingTaskArn = &s_ProspectingTaskArn
+
+var _ProspectingTaskIdentifier = &s_ProspectingTaskIdentifier
+
+var ProspectingTaskStatus = &sProspectingTaskStatus
+var ProspectingTaskStatus_PENDING = &sProspectingTaskStatus_PENDING
+var ProspectingTaskStatus_IN_PROGRESS = &sProspectingTaskStatus_IN_PROGRESS
+var ProspectingTaskStatus_COMPLETED = &sProspectingTaskStatus_COMPLETED
+var ProspectingTaskStatus_FAILED = &sProspectingTaskStatus_FAILED
+
+var ProspectingTaskSummary = &sProspectingTaskSummary
+var ProspectingTaskSummary_TaskId = &sProspectingTaskSummary_TaskId
+var ProspectingTaskSummary_TaskArn = &sProspectingTaskSummary_TaskArn
+var ProspectingTaskSummary_TaskName = &sProspectingTaskSummary_TaskName
+var ProspectingTaskSummary_StartTime = &sProspectingTaskSummary_StartTime
+var ProspectingTaskSummary_EndTime = &sProspectingTaskSummary_EndTime
+var ProspectingTaskSummary_TotalEngagementCount = &sProspectingTaskSummary_TotalEngagementCount
+var ProspectingTaskSummary_CompletedEngagementCount = &sProspectingTaskSummary_CompletedEngagementCount
+var ProspectingTaskSummary_FailedEngagementCount = &sProspectingTaskSummary_FailedEngagementCount
+
+var _ProspectingTaskSummaryList = &s_ProspectingTaskSummaryList
+var _ProspectingTaskSummaryList_member = &s_ProspectingTaskSummaryList_member
+
+var ReasonCode = &sReasonCode
+var ReasonCode_INVITATION_ACCESS_DENIED = &sReasonCode_INVITATION_ACCESS_DENIED
+var ReasonCode_INVITATION_VALIDATION_FAILED = &sReasonCode_INVITATION_VALIDATION_FAILED
+var ReasonCode_ENGAGEMENT_ACCESS_DENIED = &sReasonCode_ENGAGEMENT_ACCESS_DENIED
+var ReasonCode_OPPORTUNITY_ACCESS_DENIED = &sReasonCode_OPPORTUNITY_ACCESS_DENIED
+var ReasonCode_RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED = &sReasonCode_RESOURCE_SNAPSHOT_JOB_ACCESS_DENIED
+var ReasonCode_RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED = &sReasonCode_RESOURCE_SNAPSHOT_JOB_VALIDATION_FAILED
+var ReasonCode_RESOURCE_SNAPSHOT_JOB_CONFLICT = &sReasonCode_RESOURCE_SNAPSHOT_JOB_CONFLICT
+var ReasonCode_ENGAGEMENT_VALIDATION_FAILED = &sReasonCode_ENGAGEMENT_VALIDATION_FAILED
+var ReasonCode_ENGAGEMENT_CONFLICT = &sReasonCode_ENGAGEMENT_CONFLICT
+var ReasonCode_OPPORTUNITY_SUBMISSION_FAILED = &sReasonCode_OPPORTUNITY_SUBMISSION_FAILED
+var ReasonCode_ENGAGEMENT_INVITATION_CONFLICT = &sReasonCode_ENGAGEMENT_INVITATION_CONFLICT
+var ReasonCode_INTERNAL_ERROR = &sReasonCode_INTERNAL_ERROR
+var ReasonCode_OPPORTUNITY_VALIDATION_FAILED = &sReasonCode_OPPORTUNITY_VALIDATION_FAILED
+var ReasonCode_OPPORTUNITY_CONFLICT = &sReasonCode_OPPORTUNITY_CONFLICT
+var ReasonCode_RESOURCE_SNAPSHOT_ACCESS_DENIED = &sReasonCode_RESOURCE_SNAPSHOT_ACCESS_DENIED
+var ReasonCode_RESOURCE_SNAPSHOT_VALIDATION_FAILED = &sReasonCode_RESOURCE_SNAPSHOT_VALIDATION_FAILED
+var ReasonCode_RESOURCE_SNAPSHOT_CONFLICT = &sReasonCode_RESOURCE_SNAPSHOT_CONFLICT
+var ReasonCode_SERVICE_QUOTA_EXCEEDED = &sReasonCode_SERVICE_QUOTA_EXCEEDED
+var ReasonCode_REQUEST_THROTTLED = &sReasonCode_REQUEST_THROTTLED
+var ReasonCode_CONTEXT_NOT_FOUND = &sReasonCode_CONTEXT_NOT_FOUND
+var ReasonCode_CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED = &sReasonCode_CUSTOMER_PROJECT_CONTEXT_NOT_PERMITTED
+var ReasonCode_DISQUALIFIED_LEAD_NOT_PERMITTED = &sReasonCode_DISQUALIFIED_LEAD_NOT_PERMITTED
+
+var Receiver = &sReceiver
+var Receiver_Account = &sReceiver_Account
+
+var ReceiverResponsibility = &sReceiverResponsibility
+var ReceiverResponsibility_DISTRIBUTOR = &sReceiverResponsibility_DISTRIBUTOR
+var ReceiverResponsibility_RESELLER = &sReceiverResponsibility_RESELLER
+var ReceiverResponsibility_HARDWARE_PARTNER = &sReceiverResponsibility_HARDWARE_PARTNER
+var ReceiverResponsibility_MANAGED_SERVICE_PROVIDER = &sReceiverResponsibility_MANAGED_SERVICE_PROVIDER
+var ReceiverResponsibility_SOFTWARE_PARTNER = &sReceiverResponsibility_SOFTWARE_PARTNER
+var ReceiverResponsibility_SERVICES_PARTNER = &sReceiverResponsibility_SERVICES_PARTNER
+var ReceiverResponsibility_TRAINING_PARTNER = &sReceiverResponsibility_TRAINING_PARTNER
+var ReceiverResponsibility_CO_SELL_FACILITATOR = &sReceiverResponsibility_CO_SELL_FACILITATOR
+var ReceiverResponsibility_FACILITATOR = &sReceiverResponsibility_FACILITATOR
+
+var _ReceiverResponsibilityList = &s_ReceiverResponsibilityList
+var _ReceiverResponsibilityList_member = &s_ReceiverResponsibilityList_member
+
+var Recommendation = &sRecommendation
+var Recommendation_Type = &sRecommendation_Type
+var Recommendation_Details = &sRecommendation_Details
+var Recommendation_Attributes = &sRecommendation_Attributes
+
+var _RecommendationAttributeMap = &s_RecommendationAttributeMap
+var _RecommendationAttributeMap_key = &s_RecommendationAttributeMap_key
+var _RecommendationAttributeMap_value = &s_RecommendationAttributeMap_value
+
+var _RecommendationList = &s_RecommendationList
+var _RecommendationList_member = &s_RecommendationList_member
+
+var _RejectionReasonString = &s_RejectionReasonString
+
+var RelatedEntityIdentifiers = &sRelatedEntityIdentifiers
+var RelatedEntityIdentifiers_AwsMarketplaceOffers = &sRelatedEntityIdentifiers_AwsMarketplaceOffers
+var RelatedEntityIdentifiers_AwsMarketplaceOfferSets = &sRelatedEntityIdentifiers_AwsMarketplaceOfferSets
+var RelatedEntityIdentifiers_Solutions = &sRelatedEntityIdentifiers_Solutions
+var RelatedEntityIdentifiers_AwsProducts = &sRelatedEntityIdentifiers_AwsProducts
+var RelatedEntityIdentifiers_AwsMarketplaceSolutions = &sRelatedEntityIdentifiers_AwsMarketplaceSolutions
+var RelatedEntityIdentifiers_AwsMarketplaceProducts = &sRelatedEntityIdentifiers_AwsMarketplaceProducts
+
+var RelatedEntityType = &sRelatedEntityType
+var RelatedEntityType_SOLUTIONS = &sRelatedEntityType_SOLUTIONS
+var RelatedEntityType_AWS_PRODUCTS = &sRelatedEntityType_AWS_PRODUCTS
+var RelatedEntityType_AWS_MARKETPLACE_OFFERS = &sRelatedEntityType_AWS_MARKETPLACE_OFFERS
+var RelatedEntityType_AWS_MARKETPLACE_OFFER_SETS = &sRelatedEntityType_AWS_MARKETPLACE_OFFER_SETS
+var RelatedEntityType_AWS_MARKETPLACE_SOLUTIONS = &sRelatedEntityType_AWS_MARKETPLACE_SOLUTIONS
+var RelatedEntityType_AWS_MARKETPLACE_PRODUCTS = &sRelatedEntityType_AWS_MARKETPLACE_PRODUCTS
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceIdentifier = &s_ResourceIdentifier
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _ResourceSnapshotArn = &s_ResourceSnapshotArn
+
+var _ResourceSnapshotJobArn = &s_ResourceSnapshotJobArn
+
+var _ResourceSnapshotJobIdentifier = &s_ResourceSnapshotJobIdentifier
+
+var _ResourceSnapshotJobRoleArn = &s_ResourceSnapshotJobRoleArn
+
+var _ResourceSnapshotJobRoleIdentifier = &s_ResourceSnapshotJobRoleIdentifier
+
+var ResourceSnapshotJobStatus = &sResourceSnapshotJobStatus
+var ResourceSnapshotJobStatus_RUNNING = &sResourceSnapshotJobStatus_RUNNING
+var ResourceSnapshotJobStatus_STOPPED = &sResourceSnapshotJobStatus_STOPPED
+
+var ResourceSnapshotJobSummary = &sResourceSnapshotJobSummary
+var ResourceSnapshotJobSummary_Id = &sResourceSnapshotJobSummary_Id
+var ResourceSnapshotJobSummary_Arn = &sResourceSnapshotJobSummary_Arn
+var ResourceSnapshotJobSummary_EngagementId = &sResourceSnapshotJobSummary_EngagementId
+var ResourceSnapshotJobSummary_Status = &sResourceSnapshotJobSummary_Status
+
+var _ResourceSnapshotJobSummaryList = &s_ResourceSnapshotJobSummaryList
+var _ResourceSnapshotJobSummaryList_member = &s_ResourceSnapshotJobSummaryList_member
+
+var ResourceSnapshotPayload = &sResourceSnapshotPayload
+var ResourceSnapshotPayload_OpportunitySummary = &sResourceSnapshotPayload_OpportunitySummary
+var ResourceSnapshotPayload_AwsOpportunitySummaryFullView = &sResourceSnapshotPayload_AwsOpportunitySummaryFullView
+
+var _ResourceSnapshotRevision = &s_ResourceSnapshotRevision
+
+var ResourceSnapshotSummary = &sResourceSnapshotSummary
+var ResourceSnapshotSummary_Arn = &sResourceSnapshotSummary_Arn
+var ResourceSnapshotSummary_Revision = &sResourceSnapshotSummary_Revision
+var ResourceSnapshotSummary_ResourceType = &sResourceSnapshotSummary_ResourceType
+var ResourceSnapshotSummary_ResourceId = &sResourceSnapshotSummary_ResourceId
+var ResourceSnapshotSummary_ResourceSnapshotTemplateName = &sResourceSnapshotSummary_ResourceSnapshotTemplateName
+var ResourceSnapshotSummary_CreatedBy = &sResourceSnapshotSummary_CreatedBy
+
+var _ResourceSnapshotSummaryList = &s_ResourceSnapshotSummaryList
+var _ResourceSnapshotSummaryList_member = &s_ResourceSnapshotSummaryList_member
+
+var _ResourceTemplateName = &s_ResourceTemplateName
+
+var ResourceType = &sResourceType
+var ResourceType_OPPORTUNITY = &sResourceType_OPPORTUNITY
+
+var RevenueModel = &sRevenueModel
+var RevenueModel_CONTRACT = &sRevenueModel_CONTRACT
+var RevenueModel_PAY_AS_YOU_GO = &sRevenueModel_PAY_AS_YOU_GO
+var RevenueModel_SUBSCRIPTION = &sRevenueModel_SUBSCRIPTION
+
+var ReviewStatus = &sReviewStatus
+var ReviewStatus_PENDING_SUBMISSION = &sReviewStatus_PENDING_SUBMISSION
+var ReviewStatus_SUBMITTED = &sReviewStatus_SUBMITTED
+var ReviewStatus_IN_REVIEW = &sReviewStatus_IN_REVIEW
+var ReviewStatus_APPROVED = &sReviewStatus_APPROVED
+var ReviewStatus_REJECTED = &sReviewStatus_REJECTED
+var ReviewStatus_ACTION_REQUIRED = &sReviewStatus_ACTION_REQUIRED
+
+var _SalesActivities = &s_SalesActivities
+var _SalesActivities_member = &s_SalesActivities_member
+
+var SalesActivity = &sSalesActivity
+var SalesActivity_INITIALIZED_DISCUSSIONS_WITH_CUSTOMER = &sSalesActivity_INITIALIZED_DISCUSSIONS_WITH_CUSTOMER
+var SalesActivity_CUSTOMER_HAS_SHOWN_INTEREST = &sSalesActivity_CUSTOMER_HAS_SHOWN_INTEREST
+var SalesActivity_CONDUCTED_POC_DEMO = &sSalesActivity_CONDUCTED_POC_DEMO
+var SalesActivity_IN_EVALUATION_PLANNING_STAGE = &sSalesActivity_IN_EVALUATION_PLANNING_STAGE
+var SalesActivity_AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM = &sSalesActivity_AGREED_ON_SOLUTION_TO_BUSINESS_PROBLEM
+var SalesActivity_COMPLETED_ACTION_PLAN = &sSalesActivity_COMPLETED_ACTION_PLAN
+var SalesActivity_FINALIZED_DEPLOYMENT_NEEDS = &sSalesActivity_FINALIZED_DEPLOYMENT_NEEDS
+var SalesActivity_SOW_SIGNED = &sSalesActivity_SOW_SIGNED
+
+var SalesInvolvementType = &sSalesInvolvementType
+var SalesInvolvementType_FOR_VISIBILITY_ONLY = &sSalesInvolvementType_FOR_VISIBILITY_ONLY
+var SalesInvolvementType_CO_SELL = &sSalesInvolvementType_CO_SELL
+
+var SenderContact = &sSenderContact
+var SenderContact_Email = &sSenderContact_Email
+var SenderContact_FirstName = &sSenderContact_FirstName
+var SenderContact_LastName = &sSenderContact_LastName
+var SenderContact_BusinessTitle = &sSenderContact_BusinessTitle
+var SenderContact_Phone = &sSenderContact_Phone
+
+var _SenderContactEmail = &s_SenderContactEmail
+
+var _SenderContactList = &s_SenderContactList
+var _SenderContactList_member = &s_SenderContactList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var SoftwareRevenue = &sSoftwareRevenue
+var SoftwareRevenue_DeliveryModel = &sSoftwareRevenue_DeliveryModel
+var SoftwareRevenue_Value = &sSoftwareRevenue_Value
+var SoftwareRevenue_EffectiveDate = &sSoftwareRevenue_EffectiveDate
+var SoftwareRevenue_ExpirationDate = &sSoftwareRevenue_ExpirationDate
+
+var _SolutionArn = &s_SolutionArn
+
+var SolutionBase = &sSolutionBase
+var SolutionBase_Catalog = &sSolutionBase_Catalog
+var SolutionBase_Id = &sSolutionBase_Id
+var SolutionBase_Arn = &sSolutionBase_Arn
+var SolutionBase_Name = &sSolutionBase_Name
+var SolutionBase_Status = &sSolutionBase_Status
+var SolutionBase_Category = &sSolutionBase_Category
+var SolutionBase_CreatedDate = &sSolutionBase_CreatedDate
+var SolutionBase_AwsMarketplaceSolutionArn = &sSolutionBase_AwsMarketplaceSolutionArn
+
+var _SolutionIdentifier = &s_SolutionIdentifier
+
+var _SolutionIdentifiers = &s_SolutionIdentifiers
+var _SolutionIdentifiers_member = &s_SolutionIdentifiers_member
+
+var _SolutionList = &s_SolutionList
+var _SolutionList_member = &s_SolutionList_member
+
+var SolutionSort = &sSolutionSort
+var SolutionSort_SortOrder = &sSolutionSort_SortOrder
+var SolutionSort_SortBy = &sSolutionSort_SortBy
+
+var SolutionSortName = &sSolutionSortName
+var SolutionSortName_IDENTIFIER = &sSolutionSortName_IDENTIFIER
+var SolutionSortName_NAME = &sSolutionSortName_NAME
+var SolutionSortName_STATUS = &sSolutionSortName_STATUS
+var SolutionSortName_CATEGORY = &sSolutionSortName_CATEGORY
+var SolutionSortName_CREATEDDATE = &sSolutionSortName_CREATEDDATE
+
+var SolutionStatus = &sSolutionStatus
+var SolutionStatus_ACTIVE = &sSolutionStatus_ACTIVE
+var SolutionStatus_INACTIVE = &sSolutionStatus_INACTIVE
+var SolutionStatus_DRAFT = &sSolutionStatus_DRAFT
+
+var SortBy = &sSortBy
+var SortBy_CREATED_DATE = &sSortBy_CREATED_DATE
+
+var SortObject = &sSortObject
+var SortObject_SortBy = &sSortObject_SortBy
+var SortObject_SortOrder = &sSortObject_SortOrder
+
+var SortOrder = &sSortOrder
+var SortOrder_ASCENDING = &sSortOrder_ASCENDING
+var SortOrder_DESCENDING = &sSortOrder_DESCENDING
+
+var Stage = &sStage
+var Stage_PROSPECT = &sStage_PROSPECT
+var Stage_QUALIFIED = &sStage_QUALIFIED
+var Stage_TECHNICAL_VALIDATION = &sStage_TECHNICAL_VALIDATION
+var Stage_BUSINESS_VALIDATION = &sStage_BUSINESS_VALIDATION
+var Stage_COMMITTED = &sStage_COMMITTED
+var Stage_LAUNCHED = &sStage_LAUNCHED
+var Stage_CLOSED_LOST = &sStage_CLOSED_LOST
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TaggableResourceArn = &s_TaggableResourceArn
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var TargetCloseDateFilter = &sTargetCloseDateFilter
+var TargetCloseDateFilter_AfterTargetCloseDate = &sTargetCloseDateFilter_AfterTargetCloseDate
+var TargetCloseDateFilter_BeforeTargetCloseDate = &sTargetCloseDateFilter_BeforeTargetCloseDate
+
+var _TaskArn = &s_TaskArn
+
+var _TaskArnOrIdentifier = &s_TaskArnOrIdentifier
+
+var _TaskIdentifier = &s_TaskIdentifier
+
+var _TaskIdentifierList = &s_TaskIdentifierList
+var _TaskIdentifierList_member = &s_TaskIdentifierList_member
+
+var _TaskIdentifiers = &s_TaskIdentifiers
+var _TaskIdentifiers_member = &s_TaskIdentifiers_member
+
+var _TaskName = &s_TaskName
+
+var _TaskNameList = &s_TaskNameList
+var _TaskNameList_member = &s_TaskNameList_member
+
+var TaskStatus = &sTaskStatus
+var TaskStatus_IN_PROGRESS = &sTaskStatus_IN_PROGRESS
+var TaskStatus_COMPLETE = &sTaskStatus_COMPLETE
+var TaskStatus_FAILED = &sTaskStatus_FAILED
+
+var _TaskStatuses = &s_TaskStatuses
+var _TaskStatuses_member = &s_TaskStatuses_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var UpdateEngagementContextPayload = &sUpdateEngagementContextPayload
+var UpdateEngagementContextPayload_Lead = &sUpdateEngagementContextPayload_Lead
+var UpdateEngagementContextPayload_CustomerProject = &sUpdateEngagementContextPayload_CustomerProject
+var UpdateEngagementContextPayload_ProspectingResult = &sUpdateEngagementContextPayload_ProspectingResult
+
+var UpdateLeadContext = &sUpdateLeadContext
+var UpdateLeadContext_QualificationStatus = &sUpdateLeadContext_QualificationStatus
+var UpdateLeadContext_Customer = &sUpdateLeadContext_Customer
+var UpdateLeadContext_Interaction = &sUpdateLeadContext_Interaction
+var UpdateLeadContext_Insights = &sUpdateLeadContext_Insights
+
+var _UseCases = &s_UseCases
+var _UseCases_member = &s_UseCases_member
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_Reason = &sValidationException_Reason
+var ValidationException_ErrorList = &sValidationException_ErrorList
+
+var ValidationExceptionError = &sValidationExceptionError
+var ValidationExceptionError_FieldName = &sValidationExceptionError_FieldName
+var ValidationExceptionError_Message = &sValidationExceptionError_Message
+var ValidationExceptionError_Code = &sValidationExceptionError_Code
+
+var ValidationExceptionErrorCode = &sValidationExceptionErrorCode
+var ValidationExceptionErrorCode_REQUIRED_FIELD_MISSING = &sValidationExceptionErrorCode_REQUIRED_FIELD_MISSING
+var ValidationExceptionErrorCode_INVALID_ENUM_VALUE = &sValidationExceptionErrorCode_INVALID_ENUM_VALUE
+var ValidationExceptionErrorCode_INVALID_STRING_FORMAT = &sValidationExceptionErrorCode_INVALID_STRING_FORMAT
+var ValidationExceptionErrorCode_INVALID_VALUE = &sValidationExceptionErrorCode_INVALID_VALUE
+var ValidationExceptionErrorCode_NOT_ENOUGH_VALUES = &sValidationExceptionErrorCode_NOT_ENOUGH_VALUES
+var ValidationExceptionErrorCode_TOO_MANY_VALUES = &sValidationExceptionErrorCode_TOO_MANY_VALUES
+var ValidationExceptionErrorCode_INVALID_RESOURCE_STATE = &sValidationExceptionErrorCode_INVALID_RESOURCE_STATE
+var ValidationExceptionErrorCode_DUPLICATE_KEY_VALUE = &sValidationExceptionErrorCode_DUPLICATE_KEY_VALUE
+var ValidationExceptionErrorCode_VALUE_OUT_OF_RANGE = &sValidationExceptionErrorCode_VALUE_OUT_OF_RANGE
+var ValidationExceptionErrorCode_ACTION_NOT_PERMITTED = &sValidationExceptionErrorCode_ACTION_NOT_PERMITTED
+
+var _ValidationExceptionErrorList = &s_ValidationExceptionErrorList
+var _ValidationExceptionErrorList_member = &s_ValidationExceptionErrorList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_REQUEST_VALIDATION_FAILED = &sValidationExceptionReason_REQUEST_VALIDATION_FAILED
+var ValidationExceptionReason_BUSINESS_VALIDATION_FAILED = &sValidationExceptionReason_BUSINESS_VALIDATION_FAILED
+
+var Visibility = &sVisibility
+var Visibility_FULL = &sVisibility_FULL
+var Visibility_LIMITED = &sVisibility_LIMITED
+
+var _WebsiteUrl = &s_WebsiteUrl
+
+var AcceptEngagementInvitationRequest = &sAcceptEngagementInvitationRequest
+var AcceptEngagementInvitationRequest_Catalog = &sAcceptEngagementInvitationRequest_Catalog
+var AcceptEngagementInvitationRequest_Identifier = &sAcceptEngagementInvitationRequest_Identifier
+
+var AssignOpportunityRequest = &sAssignOpportunityRequest
+var AssignOpportunityRequest_Catalog = &sAssignOpportunityRequest_Catalog
+var AssignOpportunityRequest_Identifier = &sAssignOpportunityRequest_Identifier
+var AssignOpportunityRequest_Assignee = &sAssignOpportunityRequest_Assignee
+
+var AssociateOpportunityRequest = &sAssociateOpportunityRequest
+var AssociateOpportunityRequest_Catalog = &sAssociateOpportunityRequest_Catalog
+var AssociateOpportunityRequest_OpportunityIdentifier = &sAssociateOpportunityRequest_OpportunityIdentifier
+var AssociateOpportunityRequest_RelatedEntityType = &sAssociateOpportunityRequest_RelatedEntityType
+var AssociateOpportunityRequest_RelatedEntityIdentifier = &sAssociateOpportunityRequest_RelatedEntityIdentifier
+
+var CreateEngagementContextRequest = &sCreateEngagementContextRequest
+var CreateEngagementContextRequest_Catalog = &sCreateEngagementContextRequest_Catalog
+var CreateEngagementContextRequest_EngagementIdentifier = &sCreateEngagementContextRequest_EngagementIdentifier
+var CreateEngagementContextRequest_ClientToken = &sCreateEngagementContextRequest_ClientToken
+var CreateEngagementContextRequest_Type = &sCreateEngagementContextRequest_Type
+var CreateEngagementContextRequest_Payload = &sCreateEngagementContextRequest_Payload
+
+var CreateEngagementContextResponse = &sCreateEngagementContextResponse
+var CreateEngagementContextResponse_EngagementId = &sCreateEngagementContextResponse_EngagementId
+var CreateEngagementContextResponse_EngagementArn = &sCreateEngagementContextResponse_EngagementArn
+var CreateEngagementContextResponse_EngagementLastModifiedAt = &sCreateEngagementContextResponse_EngagementLastModifiedAt
+var CreateEngagementContextResponse_ContextId = &sCreateEngagementContextResponse_ContextId
+
+var CreateEngagementRequest = &sCreateEngagementRequest
+var CreateEngagementRequest_Catalog = &sCreateEngagementRequest_Catalog
+var CreateEngagementRequest_ClientToken = &sCreateEngagementRequest_ClientToken
+var CreateEngagementRequest_Title = &sCreateEngagementRequest_Title
+var CreateEngagementRequest_Description = &sCreateEngagementRequest_Description
+var CreateEngagementRequest_Contexts = &sCreateEngagementRequest_Contexts
+
+var CreateEngagementInvitationRequest = &sCreateEngagementInvitationRequest
+var CreateEngagementInvitationRequest_Catalog = &sCreateEngagementInvitationRequest_Catalog
+var CreateEngagementInvitationRequest_ClientToken = &sCreateEngagementInvitationRequest_ClientToken
+var CreateEngagementInvitationRequest_EngagementIdentifier = &sCreateEngagementInvitationRequest_EngagementIdentifier
+var CreateEngagementInvitationRequest_Invitation = &sCreateEngagementInvitationRequest_Invitation
+
+var CreateEngagementInvitationResponse = &sCreateEngagementInvitationResponse
+var CreateEngagementInvitationResponse_Id = &sCreateEngagementInvitationResponse_Id
+var CreateEngagementInvitationResponse_Arn = &sCreateEngagementInvitationResponse_Arn
+
+var CreateEngagementResponse = &sCreateEngagementResponse
+var CreateEngagementResponse_Id = &sCreateEngagementResponse_Id
+var CreateEngagementResponse_Arn = &sCreateEngagementResponse_Arn
+var CreateEngagementResponse_ModifiedAt = &sCreateEngagementResponse_ModifiedAt
+
+var CreateOpportunityRequest = &sCreateOpportunityRequest
+var CreateOpportunityRequest_Catalog = &sCreateOpportunityRequest_Catalog
+var CreateOpportunityRequest_PrimaryNeedsFromAws = &sCreateOpportunityRequest_PrimaryNeedsFromAws
+var CreateOpportunityRequest_NationalSecurity = &sCreateOpportunityRequest_NationalSecurity
+var CreateOpportunityRequest_PartnerOpportunityIdentifier = &sCreateOpportunityRequest_PartnerOpportunityIdentifier
+var CreateOpportunityRequest_Customer = &sCreateOpportunityRequest_Customer
+var CreateOpportunityRequest_Project = &sCreateOpportunityRequest_Project
+var CreateOpportunityRequest_OpportunityType = &sCreateOpportunityRequest_OpportunityType
+var CreateOpportunityRequest_Marketing = &sCreateOpportunityRequest_Marketing
+var CreateOpportunityRequest_SoftwareRevenue = &sCreateOpportunityRequest_SoftwareRevenue
+var CreateOpportunityRequest_ClientToken = &sCreateOpportunityRequest_ClientToken
+var CreateOpportunityRequest_LifeCycle = &sCreateOpportunityRequest_LifeCycle
+var CreateOpportunityRequest_Origin = &sCreateOpportunityRequest_Origin
+var CreateOpportunityRequest_OpportunityTeam = &sCreateOpportunityRequest_OpportunityTeam
+var CreateOpportunityRequest_Tags = &sCreateOpportunityRequest_Tags
+
+var CreateOpportunityResponse = &sCreateOpportunityResponse
+var CreateOpportunityResponse_Id = &sCreateOpportunityResponse_Id
+var CreateOpportunityResponse_PartnerOpportunityIdentifier = &sCreateOpportunityResponse_PartnerOpportunityIdentifier
+var CreateOpportunityResponse_LastModifiedDate = &sCreateOpportunityResponse_LastModifiedDate
+
+var CreateResourceSnapshotRequest = &sCreateResourceSnapshotRequest
+var CreateResourceSnapshotRequest_Catalog = &sCreateResourceSnapshotRequest_Catalog
+var CreateResourceSnapshotRequest_EngagementIdentifier = &sCreateResourceSnapshotRequest_EngagementIdentifier
+var CreateResourceSnapshotRequest_ResourceType = &sCreateResourceSnapshotRequest_ResourceType
+var CreateResourceSnapshotRequest_ResourceIdentifier = &sCreateResourceSnapshotRequest_ResourceIdentifier
+var CreateResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier = &sCreateResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier
+var CreateResourceSnapshotRequest_ClientToken = &sCreateResourceSnapshotRequest_ClientToken
+
+var CreateResourceSnapshotJobRequest = &sCreateResourceSnapshotJobRequest
+var CreateResourceSnapshotJobRequest_Catalog = &sCreateResourceSnapshotJobRequest_Catalog
+var CreateResourceSnapshotJobRequest_ClientToken = &sCreateResourceSnapshotJobRequest_ClientToken
+var CreateResourceSnapshotJobRequest_EngagementIdentifier = &sCreateResourceSnapshotJobRequest_EngagementIdentifier
+var CreateResourceSnapshotJobRequest_ResourceType = &sCreateResourceSnapshotJobRequest_ResourceType
+var CreateResourceSnapshotJobRequest_ResourceIdentifier = &sCreateResourceSnapshotJobRequest_ResourceIdentifier
+var CreateResourceSnapshotJobRequest_ResourceSnapshotTemplateIdentifier = &sCreateResourceSnapshotJobRequest_ResourceSnapshotTemplateIdentifier
+var CreateResourceSnapshotJobRequest_Tags = &sCreateResourceSnapshotJobRequest_Tags
+
+var CreateResourceSnapshotJobResponse = &sCreateResourceSnapshotJobResponse
+var CreateResourceSnapshotJobResponse_Id = &sCreateResourceSnapshotJobResponse_Id
+var CreateResourceSnapshotJobResponse_Arn = &sCreateResourceSnapshotJobResponse_Arn
+
+var CreateResourceSnapshotResponse = &sCreateResourceSnapshotResponse
+var CreateResourceSnapshotResponse_Arn = &sCreateResourceSnapshotResponse_Arn
+var CreateResourceSnapshotResponse_Revision = &sCreateResourceSnapshotResponse_Revision
+
+var DeleteResourceSnapshotJobRequest = &sDeleteResourceSnapshotJobRequest
+var DeleteResourceSnapshotJobRequest_Catalog = &sDeleteResourceSnapshotJobRequest_Catalog
+var DeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = &sDeleteResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier
+
+var DisassociateOpportunityRequest = &sDisassociateOpportunityRequest
+var DisassociateOpportunityRequest_Catalog = &sDisassociateOpportunityRequest_Catalog
+var DisassociateOpportunityRequest_OpportunityIdentifier = &sDisassociateOpportunityRequest_OpportunityIdentifier
+var DisassociateOpportunityRequest_RelatedEntityType = &sDisassociateOpportunityRequest_RelatedEntityType
+var DisassociateOpportunityRequest_RelatedEntityIdentifier = &sDisassociateOpportunityRequest_RelatedEntityIdentifier
+
+var GetAwsOpportunitySummaryRequest = &sGetAwsOpportunitySummaryRequest
+var GetAwsOpportunitySummaryRequest_Catalog = &sGetAwsOpportunitySummaryRequest_Catalog
+var GetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier = &sGetAwsOpportunitySummaryRequest_RelatedOpportunityIdentifier
+
+var GetAwsOpportunitySummaryResponse = &sGetAwsOpportunitySummaryResponse
+var GetAwsOpportunitySummaryResponse_RelatedOpportunityId = &sGetAwsOpportunitySummaryResponse_RelatedOpportunityId
+var GetAwsOpportunitySummaryResponse_Origin = &sGetAwsOpportunitySummaryResponse_Origin
+var GetAwsOpportunitySummaryResponse_InvolvementType = &sGetAwsOpportunitySummaryResponse_InvolvementType
+var GetAwsOpportunitySummaryResponse_Visibility = &sGetAwsOpportunitySummaryResponse_Visibility
+var GetAwsOpportunitySummaryResponse_LifeCycle = &sGetAwsOpportunitySummaryResponse_LifeCycle
+var GetAwsOpportunitySummaryResponse_OpportunityTeam = &sGetAwsOpportunitySummaryResponse_OpportunityTeam
+var GetAwsOpportunitySummaryResponse_Insights = &sGetAwsOpportunitySummaryResponse_Insights
+var GetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason = &sGetAwsOpportunitySummaryResponse_InvolvementTypeChangeReason
+var GetAwsOpportunitySummaryResponse_RelatedEntityIds = &sGetAwsOpportunitySummaryResponse_RelatedEntityIds
+var GetAwsOpportunitySummaryResponse_Customer = &sGetAwsOpportunitySummaryResponse_Customer
+var GetAwsOpportunitySummaryResponse_Project = &sGetAwsOpportunitySummaryResponse_Project
+var GetAwsOpportunitySummaryResponse_CosellMotion = &sGetAwsOpportunitySummaryResponse_CosellMotion
+var GetAwsOpportunitySummaryResponse_SoftwareRevenue = &sGetAwsOpportunitySummaryResponse_SoftwareRevenue
+var GetAwsOpportunitySummaryResponse_Catalog = &sGetAwsOpportunitySummaryResponse_Catalog
+
+var GetEngagementRequest = &sGetEngagementRequest
+var GetEngagementRequest_Catalog = &sGetEngagementRequest_Catalog
+var GetEngagementRequest_Identifier = &sGetEngagementRequest_Identifier
+
+var GetEngagementInvitationRequest = &sGetEngagementInvitationRequest
+var GetEngagementInvitationRequest_Catalog = &sGetEngagementInvitationRequest_Catalog
+var GetEngagementInvitationRequest_Identifier = &sGetEngagementInvitationRequest_Identifier
+
+var GetEngagementInvitationResponse = &sGetEngagementInvitationResponse
+var GetEngagementInvitationResponse_Arn = &sGetEngagementInvitationResponse_Arn
+var GetEngagementInvitationResponse_PayloadType = &sGetEngagementInvitationResponse_PayloadType
+var GetEngagementInvitationResponse_Id = &sGetEngagementInvitationResponse_Id
+var GetEngagementInvitationResponse_EngagementId = &sGetEngagementInvitationResponse_EngagementId
+var GetEngagementInvitationResponse_EngagementTitle = &sGetEngagementInvitationResponse_EngagementTitle
+var GetEngagementInvitationResponse_Status = &sGetEngagementInvitationResponse_Status
+var GetEngagementInvitationResponse_InvitationDate = &sGetEngagementInvitationResponse_InvitationDate
+var GetEngagementInvitationResponse_ExpirationDate = &sGetEngagementInvitationResponse_ExpirationDate
+var GetEngagementInvitationResponse_SenderAwsAccountId = &sGetEngagementInvitationResponse_SenderAwsAccountId
+var GetEngagementInvitationResponse_SenderCompanyName = &sGetEngagementInvitationResponse_SenderCompanyName
+var GetEngagementInvitationResponse_Receiver = &sGetEngagementInvitationResponse_Receiver
+var GetEngagementInvitationResponse_Catalog = &sGetEngagementInvitationResponse_Catalog
+var GetEngagementInvitationResponse_RejectionReason = &sGetEngagementInvitationResponse_RejectionReason
+var GetEngagementInvitationResponse_Payload = &sGetEngagementInvitationResponse_Payload
+var GetEngagementInvitationResponse_InvitationMessage = &sGetEngagementInvitationResponse_InvitationMessage
+var GetEngagementInvitationResponse_EngagementDescription = &sGetEngagementInvitationResponse_EngagementDescription
+var GetEngagementInvitationResponse_ExistingMembers = &sGetEngagementInvitationResponse_ExistingMembers
+var GetEngagementInvitationResponse_EnrichmentContext = &sGetEngagementInvitationResponse_EnrichmentContext
+
+var GetEngagementResponse = &sGetEngagementResponse
+var GetEngagementResponse_Id = &sGetEngagementResponse_Id
+var GetEngagementResponse_Arn = &sGetEngagementResponse_Arn
+var GetEngagementResponse_Title = &sGetEngagementResponse_Title
+var GetEngagementResponse_Description = &sGetEngagementResponse_Description
+var GetEngagementResponse_CreatedAt = &sGetEngagementResponse_CreatedAt
+var GetEngagementResponse_CreatedBy = &sGetEngagementResponse_CreatedBy
+var GetEngagementResponse_MemberCount = &sGetEngagementResponse_MemberCount
+var GetEngagementResponse_ModifiedAt = &sGetEngagementResponse_ModifiedAt
+var GetEngagementResponse_ModifiedBy = &sGetEngagementResponse_ModifiedBy
+var GetEngagementResponse_Contexts = &sGetEngagementResponse_Contexts
+
+var GetOpportunityRequest = &sGetOpportunityRequest
+var GetOpportunityRequest_Catalog = &sGetOpportunityRequest_Catalog
+var GetOpportunityRequest_Identifier = &sGetOpportunityRequest_Identifier
+
+var GetOpportunityResponse = &sGetOpportunityResponse
+var GetOpportunityResponse_Catalog = &sGetOpportunityResponse_Catalog
+var GetOpportunityResponse_PrimaryNeedsFromAws = &sGetOpportunityResponse_PrimaryNeedsFromAws
+var GetOpportunityResponse_NationalSecurity = &sGetOpportunityResponse_NationalSecurity
+var GetOpportunityResponse_PartnerOpportunityIdentifier = &sGetOpportunityResponse_PartnerOpportunityIdentifier
+var GetOpportunityResponse_Customer = &sGetOpportunityResponse_Customer
+var GetOpportunityResponse_Project = &sGetOpportunityResponse_Project
+var GetOpportunityResponse_OpportunityType = &sGetOpportunityResponse_OpportunityType
+var GetOpportunityResponse_Marketing = &sGetOpportunityResponse_Marketing
+var GetOpportunityResponse_SoftwareRevenue = &sGetOpportunityResponse_SoftwareRevenue
+var GetOpportunityResponse_Id = &sGetOpportunityResponse_Id
+var GetOpportunityResponse_Arn = &sGetOpportunityResponse_Arn
+var GetOpportunityResponse_LastModifiedDate = &sGetOpportunityResponse_LastModifiedDate
+var GetOpportunityResponse_CreatedDate = &sGetOpportunityResponse_CreatedDate
+var GetOpportunityResponse_RelatedEntityIdentifiers = &sGetOpportunityResponse_RelatedEntityIdentifiers
+var GetOpportunityResponse_LifeCycle = &sGetOpportunityResponse_LifeCycle
+var GetOpportunityResponse_OpportunityTeam = &sGetOpportunityResponse_OpportunityTeam
+
+var GetProspectingFromEngagementTaskRequest = &sGetProspectingFromEngagementTaskRequest
+var GetProspectingFromEngagementTaskRequest_Catalog = &sGetProspectingFromEngagementTaskRequest_Catalog
+var GetProspectingFromEngagementTaskRequest_TaskIdentifier = &sGetProspectingFromEngagementTaskRequest_TaskIdentifier
+
+var GetProspectingFromEngagementTaskResponse = &sGetProspectingFromEngagementTaskResponse
+var GetProspectingFromEngagementTaskResponse_TaskId = &sGetProspectingFromEngagementTaskResponse_TaskId
+var GetProspectingFromEngagementTaskResponse_TaskArn = &sGetProspectingFromEngagementTaskResponse_TaskArn
+var GetProspectingFromEngagementTaskResponse_TaskName = &sGetProspectingFromEngagementTaskResponse_TaskName
+var GetProspectingFromEngagementTaskResponse_StartTime = &sGetProspectingFromEngagementTaskResponse_StartTime
+var GetProspectingFromEngagementTaskResponse_EndTime = &sGetProspectingFromEngagementTaskResponse_EndTime
+var GetProspectingFromEngagementTaskResponse_Engagements = &sGetProspectingFromEngagementTaskResponse_Engagements
+
+var GetResourceSnapshotRequest = &sGetResourceSnapshotRequest
+var GetResourceSnapshotRequest_Catalog = &sGetResourceSnapshotRequest_Catalog
+var GetResourceSnapshotRequest_EngagementIdentifier = &sGetResourceSnapshotRequest_EngagementIdentifier
+var GetResourceSnapshotRequest_ResourceType = &sGetResourceSnapshotRequest_ResourceType
+var GetResourceSnapshotRequest_ResourceIdentifier = &sGetResourceSnapshotRequest_ResourceIdentifier
+var GetResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier = &sGetResourceSnapshotRequest_ResourceSnapshotTemplateIdentifier
+var GetResourceSnapshotRequest_Revision = &sGetResourceSnapshotRequest_Revision
+
+var GetResourceSnapshotJobRequest = &sGetResourceSnapshotJobRequest
+var GetResourceSnapshotJobRequest_Catalog = &sGetResourceSnapshotJobRequest_Catalog
+var GetResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = &sGetResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier
+
+var GetResourceSnapshotJobResponse = &sGetResourceSnapshotJobResponse
+var GetResourceSnapshotJobResponse_Catalog = &sGetResourceSnapshotJobResponse_Catalog
+var GetResourceSnapshotJobResponse_Id = &sGetResourceSnapshotJobResponse_Id
+var GetResourceSnapshotJobResponse_Arn = &sGetResourceSnapshotJobResponse_Arn
+var GetResourceSnapshotJobResponse_EngagementId = &sGetResourceSnapshotJobResponse_EngagementId
+var GetResourceSnapshotJobResponse_ResourceType = &sGetResourceSnapshotJobResponse_ResourceType
+var GetResourceSnapshotJobResponse_ResourceId = &sGetResourceSnapshotJobResponse_ResourceId
+var GetResourceSnapshotJobResponse_ResourceArn = &sGetResourceSnapshotJobResponse_ResourceArn
+var GetResourceSnapshotJobResponse_ResourceSnapshotTemplateName = &sGetResourceSnapshotJobResponse_ResourceSnapshotTemplateName
+var GetResourceSnapshotJobResponse_CreatedAt = &sGetResourceSnapshotJobResponse_CreatedAt
+var GetResourceSnapshotJobResponse_Status = &sGetResourceSnapshotJobResponse_Status
+var GetResourceSnapshotJobResponse_LastSuccessfulExecutionDate = &sGetResourceSnapshotJobResponse_LastSuccessfulExecutionDate
+var GetResourceSnapshotJobResponse_LastFailure = &sGetResourceSnapshotJobResponse_LastFailure
+
+var GetResourceSnapshotResponse = &sGetResourceSnapshotResponse
+var GetResourceSnapshotResponse_Catalog = &sGetResourceSnapshotResponse_Catalog
+var GetResourceSnapshotResponse_Arn = &sGetResourceSnapshotResponse_Arn
+var GetResourceSnapshotResponse_CreatedBy = &sGetResourceSnapshotResponse_CreatedBy
+var GetResourceSnapshotResponse_CreatedAt = &sGetResourceSnapshotResponse_CreatedAt
+var GetResourceSnapshotResponse_EngagementId = &sGetResourceSnapshotResponse_EngagementId
+var GetResourceSnapshotResponse_ResourceType = &sGetResourceSnapshotResponse_ResourceType
+var GetResourceSnapshotResponse_ResourceId = &sGetResourceSnapshotResponse_ResourceId
+var GetResourceSnapshotResponse_ResourceSnapshotTemplateName = &sGetResourceSnapshotResponse_ResourceSnapshotTemplateName
+var GetResourceSnapshotResponse_Revision = &sGetResourceSnapshotResponse_Revision
+var GetResourceSnapshotResponse_Payload = &sGetResourceSnapshotResponse_Payload
+var GetResourceSnapshotResponse_TargetMemberAccounts = &sGetResourceSnapshotResponse_TargetMemberAccounts
+
+var GetSellingSystemSettingsRequest = &sGetSellingSystemSettingsRequest
+var GetSellingSystemSettingsRequest_Catalog = &sGetSellingSystemSettingsRequest_Catalog
+
+var GetSellingSystemSettingsResponse = &sGetSellingSystemSettingsResponse
+var GetSellingSystemSettingsResponse_Catalog = &sGetSellingSystemSettingsResponse_Catalog
+var GetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn = &sGetSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn
+
+var ListEngagementByAcceptingInvitationTasksRequest = &sListEngagementByAcceptingInvitationTasksRequest
+var ListEngagementByAcceptingInvitationTasksRequest_MaxResults = &sListEngagementByAcceptingInvitationTasksRequest_MaxResults
+var ListEngagementByAcceptingInvitationTasksRequest_NextToken = &sListEngagementByAcceptingInvitationTasksRequest_NextToken
+var ListEngagementByAcceptingInvitationTasksRequest_Sort = &sListEngagementByAcceptingInvitationTasksRequest_Sort
+var ListEngagementByAcceptingInvitationTasksRequest_Catalog = &sListEngagementByAcceptingInvitationTasksRequest_Catalog
+var ListEngagementByAcceptingInvitationTasksRequest_TaskStatus = &sListEngagementByAcceptingInvitationTasksRequest_TaskStatus
+var ListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier = &sListEngagementByAcceptingInvitationTasksRequest_OpportunityIdentifier
+var ListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier = &sListEngagementByAcceptingInvitationTasksRequest_EngagementInvitationIdentifier
+var ListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier = &sListEngagementByAcceptingInvitationTasksRequest_TaskIdentifier
+
+var ListEngagementByAcceptingInvitationTasksResponse = &sListEngagementByAcceptingInvitationTasksResponse
+var ListEngagementByAcceptingInvitationTasksResponse_TaskSummaries = &sListEngagementByAcceptingInvitationTasksResponse_TaskSummaries
+var ListEngagementByAcceptingInvitationTasksResponse_NextToken = &sListEngagementByAcceptingInvitationTasksResponse_NextToken
+
+var ListEngagementFromOpportunityTasksRequest = &sListEngagementFromOpportunityTasksRequest
+var ListEngagementFromOpportunityTasksRequest_MaxResults = &sListEngagementFromOpportunityTasksRequest_MaxResults
+var ListEngagementFromOpportunityTasksRequest_NextToken = &sListEngagementFromOpportunityTasksRequest_NextToken
+var ListEngagementFromOpportunityTasksRequest_Sort = &sListEngagementFromOpportunityTasksRequest_Sort
+var ListEngagementFromOpportunityTasksRequest_Catalog = &sListEngagementFromOpportunityTasksRequest_Catalog
+var ListEngagementFromOpportunityTasksRequest_TaskStatus = &sListEngagementFromOpportunityTasksRequest_TaskStatus
+var ListEngagementFromOpportunityTasksRequest_TaskIdentifier = &sListEngagementFromOpportunityTasksRequest_TaskIdentifier
+var ListEngagementFromOpportunityTasksRequest_OpportunityIdentifier = &sListEngagementFromOpportunityTasksRequest_OpportunityIdentifier
+var ListEngagementFromOpportunityTasksRequest_EngagementIdentifier = &sListEngagementFromOpportunityTasksRequest_EngagementIdentifier
+
+var ListEngagementFromOpportunityTasksResponse = &sListEngagementFromOpportunityTasksResponse
+var ListEngagementFromOpportunityTasksResponse_TaskSummaries = &sListEngagementFromOpportunityTasksResponse_TaskSummaries
+var ListEngagementFromOpportunityTasksResponse_NextToken = &sListEngagementFromOpportunityTasksResponse_NextToken
+
+var ListEngagementInvitationsRequest = &sListEngagementInvitationsRequest
+var ListEngagementInvitationsRequest_Catalog = &sListEngagementInvitationsRequest_Catalog
+var ListEngagementInvitationsRequest_MaxResults = &sListEngagementInvitationsRequest_MaxResults
+var ListEngagementInvitationsRequest_NextToken = &sListEngagementInvitationsRequest_NextToken
+var ListEngagementInvitationsRequest_Sort = &sListEngagementInvitationsRequest_Sort
+var ListEngagementInvitationsRequest_PayloadType = &sListEngagementInvitationsRequest_PayloadType
+var ListEngagementInvitationsRequest_ParticipantType = &sListEngagementInvitationsRequest_ParticipantType
+var ListEngagementInvitationsRequest_Status = &sListEngagementInvitationsRequest_Status
+var ListEngagementInvitationsRequest_EngagementIdentifier = &sListEngagementInvitationsRequest_EngagementIdentifier
+var ListEngagementInvitationsRequest_SenderAwsAccountId = &sListEngagementInvitationsRequest_SenderAwsAccountId
+
+var ListEngagementInvitationsResponse = &sListEngagementInvitationsResponse
+var ListEngagementInvitationsResponse_EngagementInvitationSummaries = &sListEngagementInvitationsResponse_EngagementInvitationSummaries
+var ListEngagementInvitationsResponse_NextToken = &sListEngagementInvitationsResponse_NextToken
+
+var ListEngagementMembersRequest = &sListEngagementMembersRequest
+var ListEngagementMembersRequest_Catalog = &sListEngagementMembersRequest_Catalog
+var ListEngagementMembersRequest_Identifier = &sListEngagementMembersRequest_Identifier
+var ListEngagementMembersRequest_MaxResults = &sListEngagementMembersRequest_MaxResults
+var ListEngagementMembersRequest_NextToken = &sListEngagementMembersRequest_NextToken
+
+var ListEngagementMembersResponse = &sListEngagementMembersResponse
+var ListEngagementMembersResponse_EngagementMemberList = &sListEngagementMembersResponse_EngagementMemberList
+var ListEngagementMembersResponse_NextToken = &sListEngagementMembersResponse_NextToken
+
+var ListEngagementResourceAssociationsRequest = &sListEngagementResourceAssociationsRequest
+var ListEngagementResourceAssociationsRequest_Catalog = &sListEngagementResourceAssociationsRequest_Catalog
+var ListEngagementResourceAssociationsRequest_MaxResults = &sListEngagementResourceAssociationsRequest_MaxResults
+var ListEngagementResourceAssociationsRequest_NextToken = &sListEngagementResourceAssociationsRequest_NextToken
+var ListEngagementResourceAssociationsRequest_EngagementIdentifier = &sListEngagementResourceAssociationsRequest_EngagementIdentifier
+var ListEngagementResourceAssociationsRequest_ResourceType = &sListEngagementResourceAssociationsRequest_ResourceType
+var ListEngagementResourceAssociationsRequest_ResourceIdentifier = &sListEngagementResourceAssociationsRequest_ResourceIdentifier
+var ListEngagementResourceAssociationsRequest_CreatedBy = &sListEngagementResourceAssociationsRequest_CreatedBy
+
+var ListEngagementResourceAssociationsResponse = &sListEngagementResourceAssociationsResponse
+var ListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries = &sListEngagementResourceAssociationsResponse_EngagementResourceAssociationSummaries
+var ListEngagementResourceAssociationsResponse_NextToken = &sListEngagementResourceAssociationsResponse_NextToken
+
+var ListEngagementsRequest = &sListEngagementsRequest
+var ListEngagementsRequest_Catalog = &sListEngagementsRequest_Catalog
+var ListEngagementsRequest_CreatedBy = &sListEngagementsRequest_CreatedBy
+var ListEngagementsRequest_ExcludeCreatedBy = &sListEngagementsRequest_ExcludeCreatedBy
+var ListEngagementsRequest_ContextTypes = &sListEngagementsRequest_ContextTypes
+var ListEngagementsRequest_ExcludeContextTypes = &sListEngagementsRequest_ExcludeContextTypes
+var ListEngagementsRequest_Sort = &sListEngagementsRequest_Sort
+var ListEngagementsRequest_MaxResults = &sListEngagementsRequest_MaxResults
+var ListEngagementsRequest_NextToken = &sListEngagementsRequest_NextToken
+var ListEngagementsRequest_EngagementIdentifier = &sListEngagementsRequest_EngagementIdentifier
+
+var ListEngagementsResponse = &sListEngagementsResponse
+var ListEngagementsResponse_EngagementSummaryList = &sListEngagementsResponse_EngagementSummaryList
+var ListEngagementsResponse_NextToken = &sListEngagementsResponse_NextToken
+
+var ListOpportunitiesRequest = &sListOpportunitiesRequest
+var ListOpportunitiesRequest_Catalog = &sListOpportunitiesRequest_Catalog
+var ListOpportunitiesRequest_MaxResults = &sListOpportunitiesRequest_MaxResults
+var ListOpportunitiesRequest_NextToken = &sListOpportunitiesRequest_NextToken
+var ListOpportunitiesRequest_Sort = &sListOpportunitiesRequest_Sort
+var ListOpportunitiesRequest_LastModifiedDate = &sListOpportunitiesRequest_LastModifiedDate
+var ListOpportunitiesRequest_Identifier = &sListOpportunitiesRequest_Identifier
+var ListOpportunitiesRequest_LifeCycleStage = &sListOpportunitiesRequest_LifeCycleStage
+var ListOpportunitiesRequest_LifeCycleReviewStatus = &sListOpportunitiesRequest_LifeCycleReviewStatus
+var ListOpportunitiesRequest_CustomerCompanyName = &sListOpportunitiesRequest_CustomerCompanyName
+var ListOpportunitiesRequest_CreatedDate = &sListOpportunitiesRequest_CreatedDate
+var ListOpportunitiesRequest_TargetCloseDate = &sListOpportunitiesRequest_TargetCloseDate
+
+var ListOpportunitiesResponse = &sListOpportunitiesResponse
+var ListOpportunitiesResponse_OpportunitySummaries = &sListOpportunitiesResponse_OpportunitySummaries
+var ListOpportunitiesResponse_NextToken = &sListOpportunitiesResponse_NextToken
+
+var ListOpportunityFromEngagementTasksRequest = &sListOpportunityFromEngagementTasksRequest
+var ListOpportunityFromEngagementTasksRequest_MaxResults = &sListOpportunityFromEngagementTasksRequest_MaxResults
+var ListOpportunityFromEngagementTasksRequest_NextToken = &sListOpportunityFromEngagementTasksRequest_NextToken
+var ListOpportunityFromEngagementTasksRequest_Sort = &sListOpportunityFromEngagementTasksRequest_Sort
+var ListOpportunityFromEngagementTasksRequest_Catalog = &sListOpportunityFromEngagementTasksRequest_Catalog
+var ListOpportunityFromEngagementTasksRequest_TaskStatus = &sListOpportunityFromEngagementTasksRequest_TaskStatus
+var ListOpportunityFromEngagementTasksRequest_TaskIdentifier = &sListOpportunityFromEngagementTasksRequest_TaskIdentifier
+var ListOpportunityFromEngagementTasksRequest_OpportunityIdentifier = &sListOpportunityFromEngagementTasksRequest_OpportunityIdentifier
+var ListOpportunityFromEngagementTasksRequest_EngagementIdentifier = &sListOpportunityFromEngagementTasksRequest_EngagementIdentifier
+var ListOpportunityFromEngagementTasksRequest_ContextIdentifier = &sListOpportunityFromEngagementTasksRequest_ContextIdentifier
+
+var ListOpportunityFromEngagementTasksResponse = &sListOpportunityFromEngagementTasksResponse
+var ListOpportunityFromEngagementTasksResponse_TaskSummaries = &sListOpportunityFromEngagementTasksResponse_TaskSummaries
+var ListOpportunityFromEngagementTasksResponse_NextToken = &sListOpportunityFromEngagementTasksResponse_NextToken
+
+var ListProspectingFromEngagementTasksRequest = &sListProspectingFromEngagementTasksRequest
+var ListProspectingFromEngagementTasksRequest_Catalog = &sListProspectingFromEngagementTasksRequest_Catalog
+var ListProspectingFromEngagementTasksRequest_MaxResults = &sListProspectingFromEngagementTasksRequest_MaxResults
+var ListProspectingFromEngagementTasksRequest_NextToken = &sListProspectingFromEngagementTasksRequest_NextToken
+var ListProspectingFromEngagementTasksRequest_TaskIdentifier = &sListProspectingFromEngagementTasksRequest_TaskIdentifier
+var ListProspectingFromEngagementTasksRequest_TaskName = &sListProspectingFromEngagementTasksRequest_TaskName
+var ListProspectingFromEngagementTasksRequest_StartAfter = &sListProspectingFromEngagementTasksRequest_StartAfter
+var ListProspectingFromEngagementTasksRequest_StartBefore = &sListProspectingFromEngagementTasksRequest_StartBefore
+var ListProspectingFromEngagementTasksRequest_Sort = &sListProspectingFromEngagementTasksRequest_Sort
+
+var ListProspectingFromEngagementTasksResponse = &sListProspectingFromEngagementTasksResponse
+var ListProspectingFromEngagementTasksResponse_NextToken = &sListProspectingFromEngagementTasksResponse_NextToken
+var ListProspectingFromEngagementTasksResponse_TaskSummaries = &sListProspectingFromEngagementTasksResponse_TaskSummaries
+
+var ListResourceSnapshotJobsRequest = &sListResourceSnapshotJobsRequest
+var ListResourceSnapshotJobsRequest_Catalog = &sListResourceSnapshotJobsRequest_Catalog
+var ListResourceSnapshotJobsRequest_MaxResults = &sListResourceSnapshotJobsRequest_MaxResults
+var ListResourceSnapshotJobsRequest_NextToken = &sListResourceSnapshotJobsRequest_NextToken
+var ListResourceSnapshotJobsRequest_EngagementIdentifier = &sListResourceSnapshotJobsRequest_EngagementIdentifier
+var ListResourceSnapshotJobsRequest_Status = &sListResourceSnapshotJobsRequest_Status
+var ListResourceSnapshotJobsRequest_Sort = &sListResourceSnapshotJobsRequest_Sort
+
+var ListResourceSnapshotJobsResponse = &sListResourceSnapshotJobsResponse
+var ListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries = &sListResourceSnapshotJobsResponse_ResourceSnapshotJobSummaries
+var ListResourceSnapshotJobsResponse_NextToken = &sListResourceSnapshotJobsResponse_NextToken
+
+var ListResourceSnapshotsRequest = &sListResourceSnapshotsRequest
+var ListResourceSnapshotsRequest_Catalog = &sListResourceSnapshotsRequest_Catalog
+var ListResourceSnapshotsRequest_MaxResults = &sListResourceSnapshotsRequest_MaxResults
+var ListResourceSnapshotsRequest_NextToken = &sListResourceSnapshotsRequest_NextToken
+var ListResourceSnapshotsRequest_EngagementIdentifier = &sListResourceSnapshotsRequest_EngagementIdentifier
+var ListResourceSnapshotsRequest_ResourceType = &sListResourceSnapshotsRequest_ResourceType
+var ListResourceSnapshotsRequest_ResourceIdentifier = &sListResourceSnapshotsRequest_ResourceIdentifier
+var ListResourceSnapshotsRequest_ResourceSnapshotTemplateIdentifier = &sListResourceSnapshotsRequest_ResourceSnapshotTemplateIdentifier
+var ListResourceSnapshotsRequest_CreatedBy = &sListResourceSnapshotsRequest_CreatedBy
+
+var ListResourceSnapshotsResponse = &sListResourceSnapshotsResponse
+var ListResourceSnapshotsResponse_ResourceSnapshotSummaries = &sListResourceSnapshotsResponse_ResourceSnapshotSummaries
+var ListResourceSnapshotsResponse_NextToken = &sListResourceSnapshotsResponse_NextToken
+
+var ListSolutionsRequest = &sListSolutionsRequest
+var ListSolutionsRequest_Catalog = &sListSolutionsRequest_Catalog
+var ListSolutionsRequest_MaxResults = &sListSolutionsRequest_MaxResults
+var ListSolutionsRequest_NextToken = &sListSolutionsRequest_NextToken
+var ListSolutionsRequest_Sort = &sListSolutionsRequest_Sort
+var ListSolutionsRequest_Status = &sListSolutionsRequest_Status
+var ListSolutionsRequest_Identifier = &sListSolutionsRequest_Identifier
+var ListSolutionsRequest_Category = &sListSolutionsRequest_Category
+var ListSolutionsRequest_AwsMarketplaceSolutionArn = &sListSolutionsRequest_AwsMarketplaceSolutionArn
+
+var ListSolutionsResponse = &sListSolutionsResponse
+var ListSolutionsResponse_SolutionSummaries = &sListSolutionsResponse_SolutionSummaries
+var ListSolutionsResponse_NextToken = &sListSolutionsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutSellingSystemSettingsRequest = &sPutSellingSystemSettingsRequest
+var PutSellingSystemSettingsRequest_Catalog = &sPutSellingSystemSettingsRequest_Catalog
+var PutSellingSystemSettingsRequest_ResourceSnapshotJobRoleIdentifier = &sPutSellingSystemSettingsRequest_ResourceSnapshotJobRoleIdentifier
+
+var PutSellingSystemSettingsResponse = &sPutSellingSystemSettingsResponse
+var PutSellingSystemSettingsResponse_Catalog = &sPutSellingSystemSettingsResponse_Catalog
+var PutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn = &sPutSellingSystemSettingsResponse_ResourceSnapshotJobRoleArn
+
+var RejectEngagementInvitationRequest = &sRejectEngagementInvitationRequest
+var RejectEngagementInvitationRequest_Catalog = &sRejectEngagementInvitationRequest_Catalog
+var RejectEngagementInvitationRequest_Identifier = &sRejectEngagementInvitationRequest_Identifier
+var RejectEngagementInvitationRequest_RejectionReason = &sRejectEngagementInvitationRequest_RejectionReason
+
+var StartEngagementByAcceptingInvitationTaskRequest = &sStartEngagementByAcceptingInvitationTaskRequest
+var StartEngagementByAcceptingInvitationTaskRequest_Catalog = &sStartEngagementByAcceptingInvitationTaskRequest_Catalog
+var StartEngagementByAcceptingInvitationTaskRequest_ClientToken = &sStartEngagementByAcceptingInvitationTaskRequest_ClientToken
+var StartEngagementByAcceptingInvitationTaskRequest_Identifier = &sStartEngagementByAcceptingInvitationTaskRequest_Identifier
+var StartEngagementByAcceptingInvitationTaskRequest_Tags = &sStartEngagementByAcceptingInvitationTaskRequest_Tags
+
+var StartEngagementByAcceptingInvitationTaskResponse = &sStartEngagementByAcceptingInvitationTaskResponse
+var StartEngagementByAcceptingInvitationTaskResponse_TaskId = &sStartEngagementByAcceptingInvitationTaskResponse_TaskId
+var StartEngagementByAcceptingInvitationTaskResponse_TaskArn = &sStartEngagementByAcceptingInvitationTaskResponse_TaskArn
+var StartEngagementByAcceptingInvitationTaskResponse_StartTime = &sStartEngagementByAcceptingInvitationTaskResponse_StartTime
+var StartEngagementByAcceptingInvitationTaskResponse_TaskStatus = &sStartEngagementByAcceptingInvitationTaskResponse_TaskStatus
+var StartEngagementByAcceptingInvitationTaskResponse_Message = &sStartEngagementByAcceptingInvitationTaskResponse_Message
+var StartEngagementByAcceptingInvitationTaskResponse_ReasonCode = &sStartEngagementByAcceptingInvitationTaskResponse_ReasonCode
+var StartEngagementByAcceptingInvitationTaskResponse_OpportunityId = &sStartEngagementByAcceptingInvitationTaskResponse_OpportunityId
+var StartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId = &sStartEngagementByAcceptingInvitationTaskResponse_ResourceSnapshotJobId
+var StartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId = &sStartEngagementByAcceptingInvitationTaskResponse_EngagementInvitationId
+
+var StartEngagementFromOpportunityTaskRequest = &sStartEngagementFromOpportunityTaskRequest
+var StartEngagementFromOpportunityTaskRequest_Catalog = &sStartEngagementFromOpportunityTaskRequest_Catalog
+var StartEngagementFromOpportunityTaskRequest_ClientToken = &sStartEngagementFromOpportunityTaskRequest_ClientToken
+var StartEngagementFromOpportunityTaskRequest_Identifier = &sStartEngagementFromOpportunityTaskRequest_Identifier
+var StartEngagementFromOpportunityTaskRequest_AwsSubmission = &sStartEngagementFromOpportunityTaskRequest_AwsSubmission
+var StartEngagementFromOpportunityTaskRequest_Tags = &sStartEngagementFromOpportunityTaskRequest_Tags
+
+var StartEngagementFromOpportunityTaskResponse = &sStartEngagementFromOpportunityTaskResponse
+var StartEngagementFromOpportunityTaskResponse_TaskId = &sStartEngagementFromOpportunityTaskResponse_TaskId
+var StartEngagementFromOpportunityTaskResponse_TaskArn = &sStartEngagementFromOpportunityTaskResponse_TaskArn
+var StartEngagementFromOpportunityTaskResponse_StartTime = &sStartEngagementFromOpportunityTaskResponse_StartTime
+var StartEngagementFromOpportunityTaskResponse_TaskStatus = &sStartEngagementFromOpportunityTaskResponse_TaskStatus
+var StartEngagementFromOpportunityTaskResponse_Message = &sStartEngagementFromOpportunityTaskResponse_Message
+var StartEngagementFromOpportunityTaskResponse_ReasonCode = &sStartEngagementFromOpportunityTaskResponse_ReasonCode
+var StartEngagementFromOpportunityTaskResponse_OpportunityId = &sStartEngagementFromOpportunityTaskResponse_OpportunityId
+var StartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId = &sStartEngagementFromOpportunityTaskResponse_ResourceSnapshotJobId
+var StartEngagementFromOpportunityTaskResponse_EngagementId = &sStartEngagementFromOpportunityTaskResponse_EngagementId
+var StartEngagementFromOpportunityTaskResponse_EngagementInvitationId = &sStartEngagementFromOpportunityTaskResponse_EngagementInvitationId
+
+var StartOpportunityFromEngagementTaskRequest = &sStartOpportunityFromEngagementTaskRequest
+var StartOpportunityFromEngagementTaskRequest_Catalog = &sStartOpportunityFromEngagementTaskRequest_Catalog
+var StartOpportunityFromEngagementTaskRequest_ClientToken = &sStartOpportunityFromEngagementTaskRequest_ClientToken
+var StartOpportunityFromEngagementTaskRequest_Identifier = &sStartOpportunityFromEngagementTaskRequest_Identifier
+var StartOpportunityFromEngagementTaskRequest_ContextIdentifier = &sStartOpportunityFromEngagementTaskRequest_ContextIdentifier
+var StartOpportunityFromEngagementTaskRequest_Tags = &sStartOpportunityFromEngagementTaskRequest_Tags
+
+var StartOpportunityFromEngagementTaskResponse = &sStartOpportunityFromEngagementTaskResponse
+var StartOpportunityFromEngagementTaskResponse_TaskId = &sStartOpportunityFromEngagementTaskResponse_TaskId
+var StartOpportunityFromEngagementTaskResponse_TaskArn = &sStartOpportunityFromEngagementTaskResponse_TaskArn
+var StartOpportunityFromEngagementTaskResponse_StartTime = &sStartOpportunityFromEngagementTaskResponse_StartTime
+var StartOpportunityFromEngagementTaskResponse_TaskStatus = &sStartOpportunityFromEngagementTaskResponse_TaskStatus
+var StartOpportunityFromEngagementTaskResponse_Message = &sStartOpportunityFromEngagementTaskResponse_Message
+var StartOpportunityFromEngagementTaskResponse_ReasonCode = &sStartOpportunityFromEngagementTaskResponse_ReasonCode
+var StartOpportunityFromEngagementTaskResponse_OpportunityId = &sStartOpportunityFromEngagementTaskResponse_OpportunityId
+var StartOpportunityFromEngagementTaskResponse_ResourceSnapshotJobId = &sStartOpportunityFromEngagementTaskResponse_ResourceSnapshotJobId
+var StartOpportunityFromEngagementTaskResponse_EngagementId = &sStartOpportunityFromEngagementTaskResponse_EngagementId
+var StartOpportunityFromEngagementTaskResponse_ContextId = &sStartOpportunityFromEngagementTaskResponse_ContextId
+
+var StartProspectingFromEngagementTaskRequest = &sStartProspectingFromEngagementTaskRequest
+var StartProspectingFromEngagementTaskRequest_Catalog = &sStartProspectingFromEngagementTaskRequest_Catalog
+var StartProspectingFromEngagementTaskRequest_Identifiers = &sStartProspectingFromEngagementTaskRequest_Identifiers
+var StartProspectingFromEngagementTaskRequest_TaskName = &sStartProspectingFromEngagementTaskRequest_TaskName
+var StartProspectingFromEngagementTaskRequest_ClientToken = &sStartProspectingFromEngagementTaskRequest_ClientToken
+
+var StartProspectingFromEngagementTaskResponse = &sStartProspectingFromEngagementTaskResponse
+var StartProspectingFromEngagementTaskResponse_Identifiers = &sStartProspectingFromEngagementTaskResponse_Identifiers
+var StartProspectingFromEngagementTaskResponse_TaskName = &sStartProspectingFromEngagementTaskResponse_TaskName
+var StartProspectingFromEngagementTaskResponse_Message = &sStartProspectingFromEngagementTaskResponse_Message
+var StartProspectingFromEngagementTaskResponse_ReasonCode = &sStartProspectingFromEngagementTaskResponse_ReasonCode
+var StartProspectingFromEngagementTaskResponse_StartTime = &sStartProspectingFromEngagementTaskResponse_StartTime
+var StartProspectingFromEngagementTaskResponse_TaskId = &sStartProspectingFromEngagementTaskResponse_TaskId
+var StartProspectingFromEngagementTaskResponse_TaskArn = &sStartProspectingFromEngagementTaskResponse_TaskArn
+var StartProspectingFromEngagementTaskResponse_TaskStatus = &sStartProspectingFromEngagementTaskResponse_TaskStatus
+
+var StartResourceSnapshotJobRequest = &sStartResourceSnapshotJobRequest
+var StartResourceSnapshotJobRequest_Catalog = &sStartResourceSnapshotJobRequest_Catalog
+var StartResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = &sStartResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier
+
+var StopResourceSnapshotJobRequest = &sStopResourceSnapshotJobRequest
+var StopResourceSnapshotJobRequest_Catalog = &sStopResourceSnapshotJobRequest_Catalog
+var StopResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier = &sStopResourceSnapshotJobRequest_ResourceSnapshotJobIdentifier
+
+var SubmitOpportunityRequest = &sSubmitOpportunityRequest
+var SubmitOpportunityRequest_Catalog = &sSubmitOpportunityRequest_Catalog
+var SubmitOpportunityRequest_Identifier = &sSubmitOpportunityRequest_Identifier
+var SubmitOpportunityRequest_InvolvementType = &sSubmitOpportunityRequest_InvolvementType
+var SubmitOpportunityRequest_Visibility = &sSubmitOpportunityRequest_Visibility
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateEngagementContextRequest = &sUpdateEngagementContextRequest
+var UpdateEngagementContextRequest_Catalog = &sUpdateEngagementContextRequest_Catalog
+var UpdateEngagementContextRequest_EngagementIdentifier = &sUpdateEngagementContextRequest_EngagementIdentifier
+var UpdateEngagementContextRequest_ContextIdentifier = &sUpdateEngagementContextRequest_ContextIdentifier
+var UpdateEngagementContextRequest_EngagementLastModifiedAt = &sUpdateEngagementContextRequest_EngagementLastModifiedAt
+var UpdateEngagementContextRequest_Type = &sUpdateEngagementContextRequest_Type
+var UpdateEngagementContextRequest_Payload = &sUpdateEngagementContextRequest_Payload
+
+var UpdateEngagementContextResponse = &sUpdateEngagementContextResponse
+var UpdateEngagementContextResponse_EngagementId = &sUpdateEngagementContextResponse_EngagementId
+var UpdateEngagementContextResponse_EngagementArn = &sUpdateEngagementContextResponse_EngagementArn
+var UpdateEngagementContextResponse_EngagementLastModifiedAt = &sUpdateEngagementContextResponse_EngagementLastModifiedAt
+var UpdateEngagementContextResponse_ContextId = &sUpdateEngagementContextResponse_ContextId
+
+var UpdateOpportunityRequest = &sUpdateOpportunityRequest
+var UpdateOpportunityRequest_Catalog = &sUpdateOpportunityRequest_Catalog
+var UpdateOpportunityRequest_PrimaryNeedsFromAws = &sUpdateOpportunityRequest_PrimaryNeedsFromAws
+var UpdateOpportunityRequest_NationalSecurity = &sUpdateOpportunityRequest_NationalSecurity
+var UpdateOpportunityRequest_PartnerOpportunityIdentifier = &sUpdateOpportunityRequest_PartnerOpportunityIdentifier
+var UpdateOpportunityRequest_Customer = &sUpdateOpportunityRequest_Customer
+var UpdateOpportunityRequest_Project = &sUpdateOpportunityRequest_Project
+var UpdateOpportunityRequest_OpportunityType = &sUpdateOpportunityRequest_OpportunityType
+var UpdateOpportunityRequest_Marketing = &sUpdateOpportunityRequest_Marketing
+var UpdateOpportunityRequest_SoftwareRevenue = &sUpdateOpportunityRequest_SoftwareRevenue
+var UpdateOpportunityRequest_LastModifiedDate = &sUpdateOpportunityRequest_LastModifiedDate
+var UpdateOpportunityRequest_Identifier = &sUpdateOpportunityRequest_Identifier
+var UpdateOpportunityRequest_LifeCycle = &sUpdateOpportunityRequest_LifeCycle
+
+var UpdateOpportunityResponse = &sUpdateOpportunityResponse
+var UpdateOpportunityResponse_Id = &sUpdateOpportunityResponse_Id
+var UpdateOpportunityResponse_LastModifiedDate = &sUpdateOpportunityResponse_LastModifiedDate
+
+var AWSPartnerCentralSelling = &smithy.ServiceSchema{Schema: &s_AWSPartnerCentralSelling, Version: "2022-07-26"}

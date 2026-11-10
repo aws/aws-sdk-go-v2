@@ -4,1481 +4,1086 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DeleteSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
-	Code: 200})
+var (
+	iDeleteSession                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DeleteSession"}
+	iGetSession                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "GetSession"}
+	iPutSession                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "PutSession"}
+	iRecognizeText                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RecognizeText"}
+	iRecognizeUtterance                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RecognizeUtterance"}
+	iStartConversation                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StartConversation"}
+	i_AWSDeepSenseRunTimeServiceApi2_0    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "AWSDeepSenseRunTimeServiceApi2_0"}
+	iAccessDeniedException                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "AccessDeniedException"}
+	iActiveContext                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ActiveContext"}
+	i_ActiveContextName                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ActiveContextName"}
+	i_ActiveContextParametersMap          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ActiveContextParametersMap"}
+	i_ActiveContextsList                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ActiveContextsList"}
+	iActiveContextTimeToLive              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ActiveContextTimeToLive"}
+	i_ActiveContextTimeToLiveInSeconds    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ActiveContextTimeToLiveInSeconds"}
+	i_ActiveContextTurnsToLive            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ActiveContextTurnsToLive"}
+	i_AttachmentTitle                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "AttachmentTitle"}
+	i_AttachmentUrl                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "AttachmentUrl"}
+	i_AudioChunk                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "AudioChunk"}
+	iAudioInputEvent                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "AudioInputEvent"}
+	iAudioResponseEvent                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "AudioResponseEvent"}
+	iBadGatewayException                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "BadGatewayException"}
+	i_BlobStream                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "BlobStream"}
+	i_Boolean                             = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Boolean"}
+	i_BotAliasIdentifier                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "BotAliasIdentifier"}
+	i_BotIdentifier                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "BotIdentifier"}
+	iButton                               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Button"}
+	i_ButtonsList                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ButtonsList"}
+	i_ButtonText                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ButtonText"}
+	i_ButtonValue                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ButtonValue"}
+	iConfidenceScore                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ConfidenceScore"}
+	iConfigurationEvent                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ConfigurationEvent"}
+	iConfirmationState                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ConfirmationState"}
+	iConflictException                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ConflictException"}
+	iConversationMode                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ConversationMode"}
+	iDependencyFailedException            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DependencyFailedException"}
+	iDialogAction                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DialogAction"}
+	iDialogActionType                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DialogActionType"}
+	iDisconnectionEvent                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DisconnectionEvent"}
+	i_Double                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Double"}
+	iDTMFInputEvent                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DTMFInputEvent"}
+	i_DTMFRegex                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DTMFRegex"}
+	iElicitSubSlot                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ElicitSubSlot"}
+	i_EpochMillis                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "EpochMillis"}
+	i_EventId                             = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "EventId"}
+	iHeartbeatEvent                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "HeartbeatEvent"}
+	iImageResponseCard                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ImageResponseCard"}
+	iInputMode                            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "InputMode"}
+	iIntent                               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Intent"}
+	iIntentResultEvent                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "IntentResultEvent"}
+	iIntentState                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "IntentState"}
+	iInternalServerException              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "InternalServerException"}
+	iInterpretation                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Interpretation"}
+	i_Interpretations                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Interpretations"}
+	iInterpretationSource                 = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "InterpretationSource"}
+	i_LocaleId                            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "LocaleId"}
+	iMessage                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Message"}
+	iMessageContentType                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "MessageContentType"}
+	i_Messages                            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Messages"}
+	i_Name                                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Name"}
+	i_NonEmptyString                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "NonEmptyString"}
+	i_ParameterName                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ParameterName"}
+	iPlaybackCompletionEvent              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "PlaybackCompletionEvent"}
+	iPlaybackInterruptionEvent            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "PlaybackInterruptionEvent"}
+	iPlaybackInterruptionReason           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "PlaybackInterruptionReason"}
+	iRecognizedBotMember                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RecognizedBotMember"}
+	iResourceNotFoundException            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ResourceNotFoundException"}
+	iRuntimeHintDetails                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RuntimeHintDetails"}
+	i_RuntimeHintPhrase                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RuntimeHintPhrase"}
+	iRuntimeHints                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RuntimeHints"}
+	iRuntimeHintValue                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RuntimeHintValue"}
+	i_RuntimeHintValuesList               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RuntimeHintValuesList"}
+	i_SensitiveNonEmptyString             = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SensitiveNonEmptyString"}
+	iSentimentResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SentimentResponse"}
+	iSentimentScore                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SentimentScore"}
+	iSentimentType                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SentimentType"}
+	i_SessionId                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SessionId"}
+	iSessionState                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SessionState"}
+	iShape                                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Shape"}
+	iSlot                                 = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Slot"}
+	i_SlotHintsIntentMap                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SlotHintsIntentMap"}
+	i_SlotHintsSlotMap                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "SlotHintsSlotMap"}
+	i_Slots                               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Slots"}
+	iStartConversationRequestEventStream  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StartConversationRequestEventStream"}
+	iStartConversationResponseEventStream = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StartConversationResponseEventStream"}
+	i_String                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "String"}
+	i_StringList                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StringList"}
+	i_StringMap                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StringMap"}
+	iStyleType                            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StyleType"}
+	i_Text                                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Text"}
+	iTextInputEvent                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "TextInputEvent"}
+	iTextResponseEvent                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "TextResponseEvent"}
+	iThrottlingException                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ThrottlingException"}
+	iTranscriptEvent                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "TranscriptEvent"}
+	iValidationException                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "ValidationException"}
+	iValue                                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Value"}
+	i_Values                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "Values"}
+	iDeleteSessionRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DeleteSessionRequest"}
+	iDeleteSessionResponse                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "DeleteSessionResponse"}
+	iGetSessionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "GetSessionRequest"}
+	iGetSessionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "GetSessionResponse"}
+	iPutSessionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "PutSessionRequest"}
+	iPutSessionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "PutSessionResponse"}
+	iRecognizeTextRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RecognizeTextRequest"}
+	iRecognizeTextResponse                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RecognizeTextResponse"}
+	iRecognizeUtteranceRequest            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RecognizeUtteranceRequest"}
+	iRecognizeUtteranceResponse           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "RecognizeUtteranceResponse"}
+	iStartConversationRequest             = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StartConversationRequest"}
+	iStartConversationResponse            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimev2", Name: "StartConversationResponse"}
+	pUnit                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var GetSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "GetSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
-	Code: 200})
-
-var PutSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "PutSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
-	Code: 200})
-
-var RecognizeText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RecognizeText",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/text",
-	Code: 200})
-
-var RecognizeUtterance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RecognizeUtterance",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/utterance",
-	Code: 200})
-
-var StartConversation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StartConversation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/bots/{botId}/botAliases/{botAliasId}/botLocales/{localeId}/sessions/{sessionId}/conversation",
-	Code: 200})
-
-var _AWSDeepSenseRunTimeServiceApi2_0 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "AWSDeepSenseRunTimeServiceApi2_0",
-}, smithy.ShapeTypeService, 0)
-
-var AWSDeepSenseRunTimeServiceApi2_0 = smithy.NewServiceSchema(_AWSDeepSenseRunTimeServiceApi2_0, "2020-08-07")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var ActiveContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ActiveContext",
-}, smithy.ShapeTypeStructure, 3)
-var ActiveContext_name *smithy.Schema
-
-var ActiveContext_timeToLive *smithy.Schema
-
-var ActiveContext_contextAttributes *smithy.Schema
-
-var _ActiveContextName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ActiveContextName",
-}, smithy.ShapeTypeString, 0)
-
-var _ActiveContextParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ActiveContextParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _ActiveContextParametersMap_key *smithy.Schema
-
-var _ActiveContextParametersMap_value *smithy.Schema
-
-var _ActiveContextsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ActiveContextsList",
-}, smithy.ShapeTypeList, 1)
-var _ActiveContextsList_member *smithy.Schema
-
-var ActiveContextTimeToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ActiveContextTimeToLive",
-}, smithy.ShapeTypeStructure, 2)
-var ActiveContextTimeToLive_timeToLiveInSeconds *smithy.Schema
-
-var ActiveContextTimeToLive_turnsToLive *smithy.Schema
-
-var _ActiveContextTimeToLiveInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ActiveContextTimeToLiveInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ActiveContextTurnsToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ActiveContextTurnsToLive",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AttachmentTitle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "AttachmentTitle",
-}, smithy.ShapeTypeString, 0)
-
-var _AttachmentUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "AttachmentUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _AudioChunk = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "AudioChunk",
-}, smithy.ShapeTypeBlob, 0)
-
-var AudioInputEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "AudioInputEvent",
-}, smithy.ShapeTypeStructure, 4)
-var AudioInputEvent_audioChunk *smithy.Schema
-
-var AudioInputEvent_contentType *smithy.Schema
-
-var AudioInputEvent_eventId *smithy.Schema
-
-var AudioInputEvent_clientTimestampMillis *smithy.Schema
-
-var AudioResponseEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "AudioResponseEvent",
-}, smithy.ShapeTypeStructure, 3)
-var AudioResponseEvent_audioChunk *smithy.Schema
-
-var AudioResponseEvent_contentType *smithy.Schema
-
-var AudioResponseEvent_eventId *smithy.Schema
-
-var BadGatewayException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "BadGatewayException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502})
-var BadGatewayException_message *smithy.Schema
-
-var _BlobStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "BlobStream",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BotAliasIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "BotAliasIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _BotIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "BotIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var Button = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Button",
-}, smithy.ShapeTypeStructure, 2)
-var Button_text *smithy.Schema
-
-var Button_value *smithy.Schema
-
-var _ButtonsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ButtonsList",
-}, smithy.ShapeTypeList, 1)
-var _ButtonsList_member *smithy.Schema
-
-var _ButtonText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ButtonText",
-}, smithy.ShapeTypeString, 0)
-
-var _ButtonValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ButtonValue",
-}, smithy.ShapeTypeString, 0)
-
-var ConfidenceScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ConfidenceScore",
-}, smithy.ShapeTypeStructure, 1)
-var ConfidenceScore_score *smithy.Schema
-
-var ConfigurationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ConfigurationEvent",
-}, smithy.ShapeTypeStructure, 7)
-var ConfigurationEvent_requestAttributes *smithy.Schema
-
-var ConfigurationEvent_responseContentType *smithy.Schema
-
-var ConfigurationEvent_sessionState *smithy.Schema
-
-var ConfigurationEvent_welcomeMessages *smithy.Schema
-
-var ConfigurationEvent_disablePlayback *smithy.Schema
-
-var ConfigurationEvent_eventId *smithy.Schema
-
-var ConfigurationEvent_clientTimestampMillis *smithy.Schema
-
-var ConfirmationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ConfirmationState",
-}, smithy.ShapeTypeEnum, 3)
-var ConfirmationState_CONFIRMED *smithy.Schema
-
-var ConfirmationState_DENIED *smithy.Schema
-
-var ConfirmationState_NONE *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConversationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ConversationMode",
-}, smithy.ShapeTypeEnum, 2)
-var ConversationMode_AUDIO *smithy.Schema
-
-var ConversationMode_TEXT *smithy.Schema
-
-var DependencyFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DependencyFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var DependencyFailedException_message *smithy.Schema
-
-var DialogAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DialogAction",
-}, smithy.ShapeTypeStructure, 4)
-var DialogAction_type *smithy.Schema
-
-var DialogAction_slotToElicit *smithy.Schema
-
-var DialogAction_slotElicitationStyle *smithy.Schema
-
-var DialogAction_subSlotToElicit *smithy.Schema
-
-var DialogActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DialogActionType",
-}, smithy.ShapeTypeEnum, 6)
-var DialogActionType_CLOSE *smithy.Schema
-
-var DialogActionType_CONFIRM_INTENT *smithy.Schema
-
-var DialogActionType_DELEGATE *smithy.Schema
-
-var DialogActionType_ELICIT_INTENT *smithy.Schema
-
-var DialogActionType_ELICIT_SLOT *smithy.Schema
-
-var DialogActionType_NONE *smithy.Schema
-
-var DisconnectionEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DisconnectionEvent",
-}, smithy.ShapeTypeStructure, 2)
-var DisconnectionEvent_eventId *smithy.Schema
-
-var DisconnectionEvent_clientTimestampMillis *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var DTMFInputEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DTMFInputEvent",
-}, smithy.ShapeTypeStructure, 3)
-var DTMFInputEvent_inputCharacter *smithy.Schema
-
-var DTMFInputEvent_eventId *smithy.Schema
-
-var DTMFInputEvent_clientTimestampMillis *smithy.Schema
-
-var _DTMFRegex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DTMFRegex",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ElicitSubSlot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ElicitSubSlot",
-}, smithy.ShapeTypeStructure, 2)
-var ElicitSubSlot_name *smithy.Schema
-
-var ElicitSubSlot_subSlotToElicit *smithy.Schema
-
-var _EpochMillis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "EpochMillis",
-}, smithy.ShapeTypeLong, 0)
-
-var _EventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "EventId",
-}, smithy.ShapeTypeString, 0)
-
-var HeartbeatEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "HeartbeatEvent",
-}, smithy.ShapeTypeStructure, 1)
-var HeartbeatEvent_eventId *smithy.Schema
-
-var ImageResponseCard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ImageResponseCard",
-}, smithy.ShapeTypeStructure, 4)
-var ImageResponseCard_title *smithy.Schema
-
-var ImageResponseCard_subtitle *smithy.Schema
-
-var ImageResponseCard_imageUrl *smithy.Schema
-
-var ImageResponseCard_buttons *smithy.Schema
-
-var InputMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "InputMode",
-}, smithy.ShapeTypeEnum, 3)
-var InputMode_TEXT *smithy.Schema
-
-var InputMode_SPEECH *smithy.Schema
-
-var InputMode_DTMF *smithy.Schema
-
-var Intent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Intent",
-}, smithy.ShapeTypeStructure, 4)
-var Intent_name *smithy.Schema
-
-var Intent_slots *smithy.Schema
-
-var Intent_state *smithy.Schema
-
-var Intent_confirmationState *smithy.Schema
-
-var IntentResultEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "IntentResultEvent",
-}, smithy.ShapeTypeStructure, 7)
-var IntentResultEvent_inputMode *smithy.Schema
-
-var IntentResultEvent_interpretations *smithy.Schema
-
-var IntentResultEvent_sessionState *smithy.Schema
-
-var IntentResultEvent_requestAttributes *smithy.Schema
-
-var IntentResultEvent_sessionId *smithy.Schema
-
-var IntentResultEvent_eventId *smithy.Schema
-
-var IntentResultEvent_recognizedBotMember *smithy.Schema
-
-var IntentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "IntentState",
-}, smithy.ShapeTypeEnum, 6)
-var IntentState_FAILED *smithy.Schema
-
-var IntentState_FULFILLED *smithy.Schema
-
-var IntentState_IN_PROGRESS *smithy.Schema
-
-var IntentState_READY_FOR_FULFILLMENT *smithy.Schema
-
-var IntentState_WAITING *smithy.Schema
-
-var IntentState_FULFILLMENT_IN_PROGRESS *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var Interpretation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Interpretation",
-}, smithy.ShapeTypeStructure, 4)
-var Interpretation_nluConfidence *smithy.Schema
-
-var Interpretation_sentimentResponse *smithy.Schema
-
-var Interpretation_intent *smithy.Schema
-
-var Interpretation_interpretationSource *smithy.Schema
-
-var _Interpretations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Interpretations",
-}, smithy.ShapeTypeList, 1)
-var _Interpretations_member *smithy.Schema
-
-var InterpretationSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "InterpretationSource",
-}, smithy.ShapeTypeEnum, 2)
-var InterpretationSource_BEDROCK *smithy.Schema
-
-var InterpretationSource_LEX *smithy.Schema
-
-var _LocaleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "LocaleId",
-}, smithy.ShapeTypeString, 0)
-
-var Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Message",
-}, smithy.ShapeTypeStructure, 3)
-var Message_content *smithy.Schema
-
-var Message_contentType *smithy.Schema
-
-var Message_imageResponseCard *smithy.Schema
-
-var MessageContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "MessageContentType",
-}, smithy.ShapeTypeEnum, 4)
-var MessageContentType_CUSTOM_PAYLOAD *smithy.Schema
-
-var MessageContentType_IMAGE_RESPONSE_CARD *smithy.Schema
-
-var MessageContentType_PLAIN_TEXT *smithy.Schema
-
-var MessageContentType_SSML *smithy.Schema
-
-var _Messages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Messages",
-}, smithy.ShapeTypeList, 1)
-var _Messages_member *smithy.Schema
-
-var _Name = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Name",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _ParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var PlaybackCompletionEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "PlaybackCompletionEvent",
-}, smithy.ShapeTypeStructure, 2)
-var PlaybackCompletionEvent_eventId *smithy.Schema
-
-var PlaybackCompletionEvent_clientTimestampMillis *smithy.Schema
-
-var PlaybackInterruptionEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "PlaybackInterruptionEvent",
-}, smithy.ShapeTypeStructure, 3)
-var PlaybackInterruptionEvent_eventReason *smithy.Schema
-
-var PlaybackInterruptionEvent_causedByEventId *smithy.Schema
-
-var PlaybackInterruptionEvent_eventId *smithy.Schema
-
-var PlaybackInterruptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "PlaybackInterruptionReason",
-}, smithy.ShapeTypeEnum, 3)
-var PlaybackInterruptionReason_DTMF_START_DETECTED *smithy.Schema
-
-var PlaybackInterruptionReason_TEXT_DETECTED *smithy.Schema
-
-var PlaybackInterruptionReason_VOICE_START_DETECTED *smithy.Schema
-
-var RecognizedBotMember = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RecognizedBotMember",
-}, smithy.ShapeTypeStructure, 2)
-var RecognizedBotMember_botId *smithy.Schema
-
-var RecognizedBotMember_botName *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var RuntimeHintDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RuntimeHintDetails",
-}, smithy.ShapeTypeStructure, 2)
-var RuntimeHintDetails_runtimeHintValues *smithy.Schema
-
-var RuntimeHintDetails_subSlotHints *smithy.Schema
-
-var _RuntimeHintPhrase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RuntimeHintPhrase",
-}, smithy.ShapeTypeString, 0)
-
-var RuntimeHints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RuntimeHints",
-}, smithy.ShapeTypeStructure, 1)
-var RuntimeHints_slotHints *smithy.Schema
-
-var RuntimeHintValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RuntimeHintValue",
-}, smithy.ShapeTypeStructure, 1)
-var RuntimeHintValue_phrase *smithy.Schema
-
-var _RuntimeHintValuesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RuntimeHintValuesList",
-}, smithy.ShapeTypeList, 1)
-var _RuntimeHintValuesList_member *smithy.Schema
-
-var _SensitiveNonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SensitiveNonEmptyString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SentimentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SentimentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SentimentResponse_sentiment *smithy.Schema
-
-var SentimentResponse_sentimentScore *smithy.Schema
-
-var SentimentScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SentimentScore",
-}, smithy.ShapeTypeStructure, 4)
-var SentimentScore_positive *smithy.Schema
-
-var SentimentScore_negative *smithy.Schema
-
-var SentimentScore_neutral *smithy.Schema
-
-var SentimentScore_mixed *smithy.Schema
-
-var SentimentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SentimentType",
-}, smithy.ShapeTypeEnum, 4)
-var SentimentType_MIXED *smithy.Schema
-
-var SentimentType_NEGATIVE *smithy.Schema
-
-var SentimentType_NEUTRAL *smithy.Schema
-
-var SentimentType_POSITIVE *smithy.Schema
-
-var _SessionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SessionId",
-}, smithy.ShapeTypeString, 0)
-
-var SessionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SessionState",
-}, smithy.ShapeTypeStructure, 6)
-var SessionState_dialogAction *smithy.Schema
-
-var SessionState_intent *smithy.Schema
-
-var SessionState_activeContexts *smithy.Schema
-
-var SessionState_sessionAttributes *smithy.Schema
-
-var SessionState_originatingRequestId *smithy.Schema
-
-var SessionState_runtimeHints *smithy.Schema
-
-var Shape = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Shape",
-}, smithy.ShapeTypeEnum, 3)
-var Shape_SCALAR *smithy.Schema
-
-var Shape_LIST *smithy.Schema
-
-var Shape_COMPOSITE *smithy.Schema
-
-var Slot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Slot",
-}, smithy.ShapeTypeStructure, 4)
-var Slot_value *smithy.Schema
-
-var Slot_shape *smithy.Schema
-
-var Slot_values *smithy.Schema
-
-var Slot_subSlots *smithy.Schema
-
-var _SlotHintsIntentMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SlotHintsIntentMap",
-}, smithy.ShapeTypeMap, 2)
-var _SlotHintsIntentMap_key *smithy.Schema
-
-var _SlotHintsIntentMap_value *smithy.Schema
-
-var _SlotHintsSlotMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "SlotHintsSlotMap",
-}, smithy.ShapeTypeMap, 2)
-var _SlotHintsSlotMap_key *smithy.Schema
-
-var _SlotHintsSlotMap_value *smithy.Schema
-
-var _Slots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Slots",
-}, smithy.ShapeTypeMap, 2)
-var _Slots_key *smithy.Schema
-
-var _Slots_value *smithy.Schema
-
-var StartConversationRequestEventStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StartConversationRequestEventStream",
-}, smithy.ShapeTypeUnion, 6, &smithytraits.Streaming{})
-var StartConversationRequestEventStream_ConfigurationEvent *smithy.Schema
-
-var StartConversationRequestEventStream_AudioInputEvent *smithy.Schema
-
-var StartConversationRequestEventStream_DTMFInputEvent *smithy.Schema
-
-var StartConversationRequestEventStream_TextInputEvent *smithy.Schema
-
-var StartConversationRequestEventStream_PlaybackCompletionEvent *smithy.Schema
-
-var StartConversationRequestEventStream_DisconnectionEvent *smithy.Schema
-
-var StartConversationResponseEventStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StartConversationResponseEventStream",
-}, smithy.ShapeTypeUnion, 14, &smithytraits.Streaming{})
-var StartConversationResponseEventStream_PlaybackInterruptionEvent *smithy.Schema
-
-var StartConversationResponseEventStream_TranscriptEvent *smithy.Schema
-
-var StartConversationResponseEventStream_IntentResultEvent *smithy.Schema
-
-var StartConversationResponseEventStream_TextResponseEvent *smithy.Schema
-
-var StartConversationResponseEventStream_AudioResponseEvent *smithy.Schema
-
-var StartConversationResponseEventStream_HeartbeatEvent *smithy.Schema
-
-var StartConversationResponseEventStream_AccessDeniedException *smithy.Schema
-
-var StartConversationResponseEventStream_ResourceNotFoundException *smithy.Schema
-
-var StartConversationResponseEventStream_ValidationException *smithy.Schema
-
-var StartConversationResponseEventStream_ThrottlingException *smithy.Schema
-
-var StartConversationResponseEventStream_InternalServerException *smithy.Schema
-
-var StartConversationResponseEventStream_ConflictException *smithy.Schema
-
-var StartConversationResponseEventStream_DependencyFailedException *smithy.Schema
-
-var StartConversationResponseEventStream_BadGatewayException *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var StyleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StyleType",
-}, smithy.ShapeTypeEnum, 3)
-var StyleType_DEFAULT *smithy.Schema
-
-var StyleType_SPELL_BY_LETTER *smithy.Schema
-
-var StyleType_SPELL_BY_WORD *smithy.Schema
-
-var _Text = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Text",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var TextInputEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "TextInputEvent",
-}, smithy.ShapeTypeStructure, 3)
-var TextInputEvent_text *smithy.Schema
-
-var TextInputEvent_eventId *smithy.Schema
-
-var TextInputEvent_clientTimestampMillis *smithy.Schema
-
-var TextResponseEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "TextResponseEvent",
-}, smithy.ShapeTypeStructure, 2)
-var TextResponseEvent_messages *smithy.Schema
-
-var TextResponseEvent_eventId *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var TranscriptEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "TranscriptEvent",
-}, smithy.ShapeTypeStructure, 2)
-var TranscriptEvent_transcript *smithy.Schema
-
-var TranscriptEvent_eventId *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Value",
-}, smithy.ShapeTypeStructure, 3)
-var Value_originalValue *smithy.Schema
-
-var Value_interpretedValue *smithy.Schema
-
-var Value_resolvedValues *smithy.Schema
-
-var _Values = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "Values",
-}, smithy.ShapeTypeList, 1)
-var _Values_member *smithy.Schema
-
-var DeleteSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DeleteSessionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteSessionRequest_botId *smithy.Schema
-
-var DeleteSessionRequest_botAliasId *smithy.Schema
-
-var DeleteSessionRequest_localeId *smithy.Schema
-
-var DeleteSessionRequest_sessionId *smithy.Schema
-
-var DeleteSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "DeleteSessionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteSessionResponse_botId *smithy.Schema
-
-var DeleteSessionResponse_botAliasId *smithy.Schema
-
-var DeleteSessionResponse_localeId *smithy.Schema
-
-var DeleteSessionResponse_sessionId *smithy.Schema
-
-var GetSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "GetSessionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetSessionRequest_botId *smithy.Schema
-
-var GetSessionRequest_botAliasId *smithy.Schema
-
-var GetSessionRequest_localeId *smithy.Schema
-
-var GetSessionRequest_sessionId *smithy.Schema
-
-var GetSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "GetSessionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetSessionResponse_sessionId *smithy.Schema
-
-var GetSessionResponse_messages *smithy.Schema
-
-var GetSessionResponse_interpretations *smithy.Schema
-
-var GetSessionResponse_sessionState *smithy.Schema
-
-var PutSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "PutSessionRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PutSessionRequest_botId *smithy.Schema
-
-var PutSessionRequest_botAliasId *smithy.Schema
-
-var PutSessionRequest_localeId *smithy.Schema
-
-var PutSessionRequest_sessionId *smithy.Schema
-
-var PutSessionRequest_messages *smithy.Schema
-
-var PutSessionRequest_sessionState *smithy.Schema
-
-var PutSessionRequest_requestAttributes *smithy.Schema
-
-var PutSessionRequest_responseContentType *smithy.Schema
-
-var PutSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "PutSessionResponse",
-}, smithy.ShapeTypeStructure, 6)
-var PutSessionResponse_contentType *smithy.Schema
-
-var PutSessionResponse_messages *smithy.Schema
-
-var PutSessionResponse_sessionState *smithy.Schema
-
-var PutSessionResponse_requestAttributes *smithy.Schema
-
-var PutSessionResponse_sessionId *smithy.Schema
-
-var PutSessionResponse_audioStream *smithy.Schema
-
-var RecognizeTextRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RecognizeTextRequest",
-}, smithy.ShapeTypeStructure, 7)
-var RecognizeTextRequest_botId *smithy.Schema
-
-var RecognizeTextRequest_botAliasId *smithy.Schema
-
-var RecognizeTextRequest_localeId *smithy.Schema
-
-var RecognizeTextRequest_sessionId *smithy.Schema
-
-var RecognizeTextRequest_text *smithy.Schema
-
-var RecognizeTextRequest_sessionState *smithy.Schema
-
-var RecognizeTextRequest_requestAttributes *smithy.Schema
-
-var RecognizeTextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RecognizeTextResponse",
-}, smithy.ShapeTypeStructure, 6)
-var RecognizeTextResponse_messages *smithy.Schema
-
-var RecognizeTextResponse_sessionState *smithy.Schema
-
-var RecognizeTextResponse_interpretations *smithy.Schema
-
-var RecognizeTextResponse_requestAttributes *smithy.Schema
-
-var RecognizeTextResponse_sessionId *smithy.Schema
-
-var RecognizeTextResponse_recognizedBotMember *smithy.Schema
-
-var RecognizeUtteranceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RecognizeUtteranceRequest",
-}, smithy.ShapeTypeStructure, 9)
-var RecognizeUtteranceRequest_botId *smithy.Schema
-
-var RecognizeUtteranceRequest_botAliasId *smithy.Schema
-
-var RecognizeUtteranceRequest_localeId *smithy.Schema
-
-var RecognizeUtteranceRequest_sessionId *smithy.Schema
-
-var RecognizeUtteranceRequest_sessionState *smithy.Schema
-
-var RecognizeUtteranceRequest_requestAttributes *smithy.Schema
-
-var RecognizeUtteranceRequest_requestContentType *smithy.Schema
-
-var RecognizeUtteranceRequest_responseContentType *smithy.Schema
-
-var RecognizeUtteranceRequest_inputStream *smithy.Schema
-
-var RecognizeUtteranceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "RecognizeUtteranceResponse",
-}, smithy.ShapeTypeStructure, 10)
-var RecognizeUtteranceResponse_inputMode *smithy.Schema
-
-var RecognizeUtteranceResponse_contentType *smithy.Schema
-
-var RecognizeUtteranceResponse_messages *smithy.Schema
-
-var RecognizeUtteranceResponse_interpretations *smithy.Schema
-
-var RecognizeUtteranceResponse_sessionState *smithy.Schema
-
-var RecognizeUtteranceResponse_requestAttributes *smithy.Schema
-
-var RecognizeUtteranceResponse_sessionId *smithy.Schema
-
-var RecognizeUtteranceResponse_inputTranscript *smithy.Schema
-
-var RecognizeUtteranceResponse_audioStream *smithy.Schema
-
-var RecognizeUtteranceResponse_recognizedBotMember *smithy.Schema
-
-var StartConversationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StartConversationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartConversationRequest_botId *smithy.Schema
-
-var StartConversationRequest_botAliasId *smithy.Schema
-
-var StartConversationRequest_localeId *smithy.Schema
-
-var StartConversationRequest_sessionId *smithy.Schema
-
-var StartConversationRequest_conversationMode *smithy.Schema
-
-var StartConversationRequest_requestEventStream *smithy.Schema
-
-var StartConversationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimev2",
-	Name:      "StartConversationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartConversationResponse_responseEventStream *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "ResponseContentType"}}, DirectMask: 0x80}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-messages"}}, DirectMask: 0x80}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-state"}}, DirectMask: 0x80}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-request-attributes"}}, DirectMask: 0x80}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-id"}}, DirectMask: 0x80}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-state"}, &smithytraits.Sensitive{}}, DirectMask: 0x80}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-request-attributes"}, &smithytraits.Sensitive{}}, DirectMask: 0x80}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Response-Content-Type"}}, DirectMask: 0x80}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-input-mode"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-interpretations"}}, DirectMask: 0x80}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-input-transcript"}}, DirectMask: 0x80}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-recognized-bot-member"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-conversation-mode"}}, DirectMask: 0x80}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mActiveContext = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveContext_name, &sActiveContext_timeToLive, &sActiveContext_contextAttributes}}
+var m_ActiveContextParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActiveContextParametersMap_key, &s_ActiveContextParametersMap_value}}
+var m_ActiveContextsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActiveContextsList_member}}
+var mActiveContextTimeToLive = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveContextTimeToLive_timeToLiveInSeconds, &sActiveContextTimeToLive_turnsToLive}}
+var mAudioInputEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioInputEvent_audioChunk, &sAudioInputEvent_contentType, &sAudioInputEvent_eventId, &sAudioInputEvent_clientTimestampMillis}}
+var mAudioResponseEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioResponseEvent_audioChunk, &sAudioResponseEvent_contentType, &sAudioResponseEvent_eventId}}
+var mBadGatewayException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadGatewayException_message}}
+var mButton = smithy.SchemaMembers{List: []*smithy.Schema{&sButton_text, &sButton_value}}
+var m_ButtonsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ButtonsList_member}}
+var mConfidenceScore = smithy.SchemaMembers{List: []*smithy.Schema{&sConfidenceScore_score}}
+var mConfigurationEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationEvent_requestAttributes, &sConfigurationEvent_responseContentType, &sConfigurationEvent_sessionState, &sConfigurationEvent_welcomeMessages, &sConfigurationEvent_disablePlayback, &sConfigurationEvent_eventId, &sConfigurationEvent_clientTimestampMillis}}
+var mConfirmationState = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmationState_CONFIRMED, &sConfirmationState_DENIED, &sConfirmationState_NONE}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mConversationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sConversationMode_AUDIO, &sConversationMode_TEXT}}
+var mDependencyFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyFailedException_message}}
+var mDialogAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDialogAction_type, &sDialogAction_slotToElicit, &sDialogAction_slotElicitationStyle, &sDialogAction_subSlotToElicit}}
+var mDialogActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sDialogActionType_CLOSE, &sDialogActionType_CONFIRM_INTENT, &sDialogActionType_DELEGATE, &sDialogActionType_ELICIT_INTENT, &sDialogActionType_ELICIT_SLOT, &sDialogActionType_NONE}}
+var mDisconnectionEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sDisconnectionEvent_eventId, &sDisconnectionEvent_clientTimestampMillis}}
+var mDTMFInputEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sDTMFInputEvent_inputCharacter, &sDTMFInputEvent_eventId, &sDTMFInputEvent_clientTimestampMillis}}
+var mElicitSubSlot = smithy.SchemaMembers{List: []*smithy.Schema{&sElicitSubSlot_name, &sElicitSubSlot_subSlotToElicit}}
+var mHeartbeatEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sHeartbeatEvent_eventId}}
+var mImageResponseCard = smithy.SchemaMembers{List: []*smithy.Schema{&sImageResponseCard_title, &sImageResponseCard_subtitle, &sImageResponseCard_imageUrl, &sImageResponseCard_buttons}}
+var mInputMode = smithy.SchemaMembers{List: []*smithy.Schema{&sInputMode_TEXT, &sInputMode_SPEECH, &sInputMode_DTMF}}
+var mIntent = smithy.SchemaMembers{List: []*smithy.Schema{&sIntent_name, &sIntent_slots, &sIntent_state, &sIntent_confirmationState}}
+var mIntentResultEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sIntentResultEvent_inputMode, &sIntentResultEvent_interpretations, &sIntentResultEvent_sessionState, &sIntentResultEvent_requestAttributes, &sIntentResultEvent_sessionId, &sIntentResultEvent_eventId, &sIntentResultEvent_recognizedBotMember}}
+var mIntentState = smithy.SchemaMembers{List: []*smithy.Schema{&sIntentState_FAILED, &sIntentState_FULFILLED, &sIntentState_IN_PROGRESS, &sIntentState_READY_FOR_FULFILLMENT, &sIntentState_WAITING, &sIntentState_FULFILLMENT_IN_PROGRESS}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mInterpretation = smithy.SchemaMembers{List: []*smithy.Schema{&sInterpretation_nluConfidence, &sInterpretation_sentimentResponse, &sInterpretation_intent, &sInterpretation_interpretationSource}}
+var m_Interpretations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Interpretations_member}}
+var mInterpretationSource = smithy.SchemaMembers{List: []*smithy.Schema{&sInterpretationSource_BEDROCK, &sInterpretationSource_LEX}}
+var mMessage = smithy.SchemaMembers{List: []*smithy.Schema{&sMessage_content, &sMessage_contentType, &sMessage_imageResponseCard}}
+var mMessageContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageContentType_CUSTOM_PAYLOAD, &sMessageContentType_IMAGE_RESPONSE_CARD, &sMessageContentType_PLAIN_TEXT, &sMessageContentType_SSML}}
+var m_Messages = smithy.SchemaMembers{List: []*smithy.Schema{&s_Messages_member}}
+var mPlaybackCompletionEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackCompletionEvent_eventId, &sPlaybackCompletionEvent_clientTimestampMillis}}
+var mPlaybackInterruptionEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackInterruptionEvent_eventReason, &sPlaybackInterruptionEvent_causedByEventId, &sPlaybackInterruptionEvent_eventId}}
+var mPlaybackInterruptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sPlaybackInterruptionReason_DTMF_START_DETECTED, &sPlaybackInterruptionReason_TEXT_DETECTED, &sPlaybackInterruptionReason_VOICE_START_DETECTED}}
+var mRecognizedBotMember = smithy.SchemaMembers{List: []*smithy.Schema{&sRecognizedBotMember_botId, &sRecognizedBotMember_botName}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mRuntimeHintDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeHintDetails_runtimeHintValues, &sRuntimeHintDetails_subSlotHints}}
+var mRuntimeHints = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeHints_slotHints}}
+var mRuntimeHintValue = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimeHintValue_phrase}}
+var m_RuntimeHintValuesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RuntimeHintValuesList_member}}
+var mSentimentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSentimentResponse_sentiment, &sSentimentResponse_sentimentScore}}
+var mSentimentScore = smithy.SchemaMembers{List: []*smithy.Schema{&sSentimentScore_positive, &sSentimentScore_negative, &sSentimentScore_neutral, &sSentimentScore_mixed}}
+var mSentimentType = smithy.SchemaMembers{List: []*smithy.Schema{&sSentimentType_MIXED, &sSentimentType_NEGATIVE, &sSentimentType_NEUTRAL, &sSentimentType_POSITIVE}}
+var mSessionState = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionState_dialogAction, &sSessionState_intent, &sSessionState_activeContexts, &sSessionState_sessionAttributes, &sSessionState_originatingRequestId, &sSessionState_runtimeHints}}
+var mShape = smithy.SchemaMembers{List: []*smithy.Schema{&sShape_SCALAR, &sShape_LIST, &sShape_COMPOSITE}}
+var mSlot = smithy.SchemaMembers{List: []*smithy.Schema{&sSlot_value, &sSlot_shape, &sSlot_values, &sSlot_subSlots}}
+var m_SlotHintsIntentMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlotHintsIntentMap_key, &s_SlotHintsIntentMap_value}}
+var m_SlotHintsSlotMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SlotHintsSlotMap_key, &s_SlotHintsSlotMap_value}}
+var m_Slots = smithy.SchemaMembers{List: []*smithy.Schema{&s_Slots_key, &s_Slots_value}}
+var mStartConversationRequestEventStream = smithy.SchemaMembers{List: []*smithy.Schema{&sStartConversationRequestEventStream_ConfigurationEvent, &sStartConversationRequestEventStream_AudioInputEvent, &sStartConversationRequestEventStream_DTMFInputEvent, &sStartConversationRequestEventStream_TextInputEvent, &sStartConversationRequestEventStream_PlaybackCompletionEvent, &sStartConversationRequestEventStream_DisconnectionEvent}}
+var mStartConversationResponseEventStream = smithy.SchemaMembers{List: []*smithy.Schema{&sStartConversationResponseEventStream_PlaybackInterruptionEvent, &sStartConversationResponseEventStream_TranscriptEvent, &sStartConversationResponseEventStream_IntentResultEvent, &sStartConversationResponseEventStream_TextResponseEvent, &sStartConversationResponseEventStream_AudioResponseEvent, &sStartConversationResponseEventStream_HeartbeatEvent, &sStartConversationResponseEventStream_AccessDeniedException, &sStartConversationResponseEventStream_ResourceNotFoundException, &sStartConversationResponseEventStream_ValidationException, &sStartConversationResponseEventStream_ThrottlingException, &sStartConversationResponseEventStream_InternalServerException, &sStartConversationResponseEventStream_ConflictException, &sStartConversationResponseEventStream_DependencyFailedException, &sStartConversationResponseEventStream_BadGatewayException}, Seed: 10, Slots: []uint16{
+	11, 9, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 7, 14, 0, 8, 0, 6, 0, 0, 4, 12, 0, 5,
+	0, 10, 2, 13, 0, 0, 0, 0,
+}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_StringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringMap_key, &s_StringMap_value}}
+var mStyleType = smithy.SchemaMembers{List: []*smithy.Schema{&sStyleType_DEFAULT, &sStyleType_SPELL_BY_LETTER, &sStyleType_SPELL_BY_WORD}}
+var mTextInputEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sTextInputEvent_text, &sTextInputEvent_eventId, &sTextInputEvent_clientTimestampMillis}}
+var mTextResponseEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sTextResponseEvent_messages, &sTextResponseEvent_eventId}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTranscriptEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sTranscriptEvent_transcript, &sTranscriptEvent_eventId}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mValue = smithy.SchemaMembers{List: []*smithy.Schema{&sValue_originalValue, &sValue_interpretedValue, &sValue_resolvedValues}}
+var m_Values = smithy.SchemaMembers{List: []*smithy.Schema{&s_Values_member}}
+var mDeleteSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSessionRequest_botId, &sDeleteSessionRequest_botAliasId, &sDeleteSessionRequest_localeId, &sDeleteSessionRequest_sessionId}}
+var mDeleteSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSessionResponse_botId, &sDeleteSessionResponse_botAliasId, &sDeleteSessionResponse_localeId, &sDeleteSessionResponse_sessionId}}
+var mGetSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionRequest_botId, &sGetSessionRequest_botAliasId, &sGetSessionRequest_localeId, &sGetSessionRequest_sessionId}}
+var mGetSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionResponse_sessionId, &sGetSessionResponse_messages, &sGetSessionResponse_interpretations, &sGetSessionResponse_sessionState}}
+var mPutSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSessionRequest_botId, &sPutSessionRequest_botAliasId, &sPutSessionRequest_localeId, &sPutSessionRequest_sessionId, &sPutSessionRequest_messages, &sPutSessionRequest_sessionState, &sPutSessionRequest_requestAttributes, &sPutSessionRequest_responseContentType}}
+var mPutSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSessionResponse_contentType, &sPutSessionResponse_messages, &sPutSessionResponse_sessionState, &sPutSessionResponse_requestAttributes, &sPutSessionResponse_sessionId, &sPutSessionResponse_audioStream}}
+var mRecognizeTextRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRecognizeTextRequest_botId, &sRecognizeTextRequest_botAliasId, &sRecognizeTextRequest_localeId, &sRecognizeTextRequest_sessionId, &sRecognizeTextRequest_text, &sRecognizeTextRequest_sessionState, &sRecognizeTextRequest_requestAttributes}}
+var mRecognizeTextResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRecognizeTextResponse_messages, &sRecognizeTextResponse_sessionState, &sRecognizeTextResponse_interpretations, &sRecognizeTextResponse_requestAttributes, &sRecognizeTextResponse_sessionId, &sRecognizeTextResponse_recognizedBotMember}}
+var mRecognizeUtteranceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRecognizeUtteranceRequest_botId, &sRecognizeUtteranceRequest_botAliasId, &sRecognizeUtteranceRequest_localeId, &sRecognizeUtteranceRequest_sessionId, &sRecognizeUtteranceRequest_sessionState, &sRecognizeUtteranceRequest_requestAttributes, &sRecognizeUtteranceRequest_requestContentType, &sRecognizeUtteranceRequest_responseContentType, &sRecognizeUtteranceRequest_inputStream}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 5, 1, 0, 0, 0, 0, 0, 0, 4, 0, 3, 0, 9, 0, 0, 0, 0, 8, 0, 6,
+	0, 2, 0, 0, 0, 0, 0, 7,
+}}
+var mRecognizeUtteranceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRecognizeUtteranceResponse_inputMode, &sRecognizeUtteranceResponse_contentType, &sRecognizeUtteranceResponse_messages, &sRecognizeUtteranceResponse_interpretations, &sRecognizeUtteranceResponse_sessionState, &sRecognizeUtteranceResponse_requestAttributes, &sRecognizeUtteranceResponse_sessionId, &sRecognizeUtteranceResponse_inputTranscript, &sRecognizeUtteranceResponse_audioStream, &sRecognizeUtteranceResponse_recognizedBotMember}, Seed: 2, Slots: []uint16{
+	10, 0, 0, 0, 0, 0, 0, 0, 4, 7, 0, 9, 3, 0, 2, 1, 6, 0, 0, 5, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 8, 0,
+}}
+var mStartConversationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartConversationRequest_botId, &sStartConversationRequest_botAliasId, &sStartConversationRequest_localeId, &sStartConversationRequest_sessionId, &sStartConversationRequest_conversationMode, &sStartConversationRequest_requestEventStream}}
+var mStartConversationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartConversationResponse_responseEventStream}}
+
+var sDeleteSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSession, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSession, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sPutSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSession, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sRecognizeText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecognizeText, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sRecognizeUtterance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecognizeUtterance, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sStartConversation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConversation, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var s_AWSDeepSenseRunTimeServiceApi2_0 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSDeepSenseRunTimeServiceApi2_0, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sActiveContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveContext, Members: &mActiveContext, Type: smithy.ShapeTypeStructure})
+var s_ActiveContextName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextName, Type: smithy.ShapeTypeString})
+var s_ActiveContextParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextParametersMap, Members: &m_ActiveContextParametersMap, Type: smithy.ShapeTypeMap})
+var s_ActiveContextsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextsList, Members: &m_ActiveContextsList, Type: smithy.ShapeTypeList})
+var sActiveContextTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveContextTimeToLive, Members: &mActiveContextTimeToLive, Type: smithy.ShapeTypeStructure})
+var s_ActiveContextTimeToLiveInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextTimeToLiveInSeconds, Type: smithy.ShapeTypeInteger})
+var s_ActiveContextTurnsToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextTurnsToLive, Type: smithy.ShapeTypeInteger})
+var s_AttachmentTitle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentTitle, Type: smithy.ShapeTypeString})
+var s_AttachmentUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachmentUrl, Type: smithy.ShapeTypeString})
+var s_AudioChunk = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudioChunk, Type: smithy.ShapeTypeBlob})
+var sAudioInputEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioInputEvent, Members: &mAudioInputEvent, Type: smithy.ShapeTypeStructure})
+var sAudioResponseEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioResponseEvent, Members: &mAudioResponseEvent, Type: smithy.ShapeTypeStructure})
+var sBadGatewayException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadGatewayException, Members: &mBadGatewayException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_BlobStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlobStream, Traits: &t9, Type: smithy.ShapeTypeBlob})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BotAliasIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotAliasIdentifier, Type: smithy.ShapeTypeString})
+var s_BotIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotIdentifier, Type: smithy.ShapeTypeString})
+var sButton = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iButton, Members: &mButton, Type: smithy.ShapeTypeStructure})
+var s_ButtonsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ButtonsList, Members: &m_ButtonsList, Type: smithy.ShapeTypeList})
+var s_ButtonText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ButtonText, Type: smithy.ShapeTypeString})
+var s_ButtonValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ButtonValue, Type: smithy.ShapeTypeString})
+var sConfidenceScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfidenceScore, Members: &mConfidenceScore, Type: smithy.ShapeTypeStructure})
+var sConfigurationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationEvent, Members: &mConfigurationEvent, Type: smithy.ShapeTypeStructure})
+var sConfirmationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmationState, Members: &mConfirmationState, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sConversationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConversationMode, Members: &mConversationMode, Type: smithy.ShapeTypeEnum})
+var sDependencyFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyFailedException, Members: &mDependencyFailedException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var sDialogAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialogAction, Members: &mDialogAction, Type: smithy.ShapeTypeStructure})
+var sDialogActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialogActionType, Members: &mDialogActionType, Type: smithy.ShapeTypeEnum})
+var sDisconnectionEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisconnectionEvent, Members: &mDisconnectionEvent, Type: smithy.ShapeTypeStructure})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sDTMFInputEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDTMFInputEvent, Members: &mDTMFInputEvent, Type: smithy.ShapeTypeStructure})
+var s_DTMFRegex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DTMFRegex, Traits: &t12, Type: smithy.ShapeTypeString})
+var sElicitSubSlot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iElicitSubSlot, Members: &mElicitSubSlot, Type: smithy.ShapeTypeStructure})
+var s_EpochMillis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EpochMillis, Type: smithy.ShapeTypeLong})
+var s_EventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sHeartbeatEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHeartbeatEvent, Members: &mHeartbeatEvent, Type: smithy.ShapeTypeStructure})
+var sImageResponseCard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageResponseCard, Members: &mImageResponseCard, Type: smithy.ShapeTypeStructure})
+var sInputMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputMode, Members: &mInputMode, Type: smithy.ShapeTypeEnum})
+var sIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeStructure})
+var sIntentResultEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntentResultEvent, Members: &mIntentResultEvent, Type: smithy.ShapeTypeStructure})
+var sIntentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntentState, Members: &mIntentState, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var sInterpretation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterpretation, Members: &mInterpretation, Type: smithy.ShapeTypeStructure})
+var s_Interpretations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Interpretations, Members: &m_Interpretations, Type: smithy.ShapeTypeList})
+var sInterpretationSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterpretationSource, Members: &mInterpretationSource, Type: smithy.ShapeTypeEnum})
+var s_LocaleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocaleId, Type: smithy.ShapeTypeString})
+var sMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure})
+var sMessageContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageContentType, Members: &mMessageContentType, Type: smithy.ShapeTypeEnum})
+var s_Messages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList})
+var s_Name = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_ParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var sPlaybackCompletionEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackCompletionEvent, Members: &mPlaybackCompletionEvent, Type: smithy.ShapeTypeStructure})
+var sPlaybackInterruptionEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackInterruptionEvent, Members: &mPlaybackInterruptionEvent, Type: smithy.ShapeTypeStructure})
+var sPlaybackInterruptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlaybackInterruptionReason, Members: &mPlaybackInterruptionReason, Type: smithy.ShapeTypeEnum})
+var sRecognizedBotMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecognizedBotMember, Members: &mRecognizedBotMember, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var sRuntimeHintDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeHintDetails, Members: &mRuntimeHintDetails, Type: smithy.ShapeTypeStructure})
+var s_RuntimeHintPhrase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeHintPhrase, Type: smithy.ShapeTypeString})
+var sRuntimeHints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeHints, Members: &mRuntimeHints, Type: smithy.ShapeTypeStructure})
+var sRuntimeHintValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimeHintValue, Members: &mRuntimeHintValue, Type: smithy.ShapeTypeStructure})
+var s_RuntimeHintValuesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuntimeHintValuesList, Members: &m_RuntimeHintValuesList, Type: smithy.ShapeTypeList})
+var s_SensitiveNonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveNonEmptyString, Traits: &t12, Type: smithy.ShapeTypeString})
+var sSentimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentResponse, Members: &mSentimentResponse, Type: smithy.ShapeTypeStructure})
+var sSentimentScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentScore, Members: &mSentimentScore, Type: smithy.ShapeTypeStructure})
+var sSentimentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentType, Members: &mSentimentType, Type: smithy.ShapeTypeEnum})
+var s_SessionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sSessionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeStructure})
+var sShape = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShape, Members: &mShape, Type: smithy.ShapeTypeEnum})
+var sSlot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSlot, Members: &mSlot, Type: smithy.ShapeTypeStructure})
+var s_SlotHintsIntentMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotHintsIntentMap, Members: &m_SlotHintsIntentMap, Type: smithy.ShapeTypeMap})
+var s_SlotHintsSlotMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SlotHintsSlotMap, Members: &m_SlotHintsSlotMap, Type: smithy.ShapeTypeMap})
+var s_Slots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Slots, Members: &m_Slots, Type: smithy.ShapeTypeMap})
+var sStartConversationRequestEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConversationRequestEventStream, Members: &mStartConversationRequestEventStream, Traits: &t9, Type: smithy.ShapeTypeUnion})
+var sStartConversationResponseEventStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConversationResponseEventStream, Members: &mStartConversationResponseEventStream, Traits: &t9, Type: smithy.ShapeTypeUnion})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sStyleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStyleType, Members: &mStyleType, Type: smithy.ShapeTypeEnum})
+var s_Text = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Text, Traits: &t12, Type: smithy.ShapeTypeString})
+var sTextInputEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextInputEvent, Members: &mTextInputEvent, Type: smithy.ShapeTypeStructure})
+var sTextResponseEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextResponseEvent, Members: &mTextResponseEvent, Type: smithy.ShapeTypeStructure})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var sTranscriptEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranscriptEvent, Members: &mTranscriptEvent, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var sValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValue, Members: &mValue, Type: smithy.ShapeTypeStructure})
+var s_Values = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList})
+var sDeleteSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSessionRequest, Members: &mDeleteSessionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSessionResponse, Members: &mDeleteSessionResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionRequest, Members: &mGetSessionRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionResponse, Members: &mGetSessionResponse, Type: smithy.ShapeTypeStructure})
+var sPutSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSessionRequest, Members: &mPutSessionRequest, Type: smithy.ShapeTypeStructure})
+var sPutSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSessionResponse, Members: &mPutSessionResponse, Type: smithy.ShapeTypeStructure})
+var sRecognizeTextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecognizeTextRequest, Members: &mRecognizeTextRequest, Type: smithy.ShapeTypeStructure})
+var sRecognizeTextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecognizeTextResponse, Members: &mRecognizeTextResponse, Type: smithy.ShapeTypeStructure})
+var sRecognizeUtteranceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecognizeUtteranceRequest, Members: &mRecognizeUtteranceRequest, Type: smithy.ShapeTypeStructure})
+var sRecognizeUtteranceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecognizeUtteranceResponse, Members: &mRecognizeUtteranceResponse, Type: smithy.ShapeTypeStructure})
+var sStartConversationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConversationRequest, Members: &mStartConversationRequest, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartConversationResponse, Members: &mStartConversationResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sActiveContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActiveContextName, Type: smithy.ShapeTypeString})
+var sActiveContext_timeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeToLive", ID: &iActiveContextTimeToLive, Members: &mActiveContextTimeToLive, Type: smithy.ShapeTypeStructure})
+var sActiveContext_contextAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contextAttributes", ID: &i_ActiveContextParametersMap, Members: &m_ActiveContextParametersMap, Type: smithy.ShapeTypeMap})
+var s_ActiveContextParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var s_ActiveContextParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Text, Traits: &t7, Type: smithy.ShapeTypeString})
+var s_ActiveContextsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActiveContext, Members: &mActiveContext, Type: smithy.ShapeTypeStructure})
+var sActiveContextTimeToLive_timeToLiveInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeToLiveInSeconds", ID: &i_ActiveContextTimeToLiveInSeconds, Type: smithy.ShapeTypeInteger})
+var sActiveContextTimeToLive_turnsToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "turnsToLive", ID: &i_ActiveContextTurnsToLive, Type: smithy.ShapeTypeInteger})
+var sAudioInputEvent_audioChunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioChunk", ID: &i_AudioChunk, Type: smithy.ShapeTypeBlob})
+var sAudioInputEvent_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sAudioInputEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sAudioInputEvent_clientTimestampMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientTimestampMillis", ID: &i_EpochMillis, Type: smithy.ShapeTypeLong})
+var sAudioResponseEvent_audioChunk = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioChunk", ID: &i_AudioChunk, Type: smithy.ShapeTypeBlob})
+var sAudioResponseEvent_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sAudioResponseEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sBadGatewayException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sButton_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_ButtonText, Type: smithy.ShapeTypeString})
+var sButton_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ButtonValue, Type: smithy.ShapeTypeString})
+var s_ButtonsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iButton, Members: &mButton, Type: smithy.ShapeTypeStructure})
+var sConfidenceScore_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sConfigurationEvent_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sConfigurationEvent_responseContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseContentType", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sConfigurationEvent_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeStructure})
+var sConfigurationEvent_welcomeMessages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "welcomeMessages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList})
+var sConfigurationEvent_disablePlayback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disablePlayback", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sConfigurationEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sConfigurationEvent_clientTimestampMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientTimestampMillis", ID: &i_EpochMillis, Type: smithy.ShapeTypeLong})
+var sConfirmationState_CONFIRMED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIRMED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfirmationState_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfirmationState_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConversationMode_AUDIO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUDIO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConversationMode_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDependencyFailedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDialogAction_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDialogActionType, Members: &mDialogActionType, Type: smithy.ShapeTypeEnum})
+var sDialogAction_slotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotToElicit", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sDialogAction_slotElicitationStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotElicitationStyle", ID: &iStyleType, Members: &mStyleType, Type: smithy.ShapeTypeEnum})
+var sDialogAction_subSlotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subSlotToElicit", ID: &iElicitSubSlot, Members: &mElicitSubSlot, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_CONFIRM_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIRM_INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_DELEGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELEGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_ELICIT_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELICIT_INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_ELICIT_SLOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELICIT_SLOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDisconnectionEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sDisconnectionEvent_clientTimestampMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientTimestampMillis", ID: &i_EpochMillis, Type: smithy.ShapeTypeLong})
+var sDTMFInputEvent_inputCharacter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputCharacter", ID: &i_DTMFRegex, Traits: &t7, Type: smithy.ShapeTypeString})
+var sDTMFInputEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sDTMFInputEvent_clientTimestampMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientTimestampMillis", ID: &i_EpochMillis, Type: smithy.ShapeTypeLong})
+var sElicitSubSlot_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sElicitSubSlot_subSlotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subSlotToElicit", ID: &iElicitSubSlot, Type: smithy.ShapeTypeStructure})
+var sHeartbeatEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sImageResponseCard_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_AttachmentTitle, Type: smithy.ShapeTypeString})
+var sImageResponseCard_subtitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subtitle", ID: &i_AttachmentTitle, Type: smithy.ShapeTypeString})
+var sImageResponseCard_imageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageUrl", ID: &i_AttachmentUrl, Type: smithy.ShapeTypeString})
+var sImageResponseCard_buttons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buttons", ID: &i_ButtonsList, Members: &m_ButtonsList, Type: smithy.ShapeTypeList})
+var sInputMode_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputMode_SPEECH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPEECH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputMode_DTMF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DTMF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntent_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sIntent_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_Slots, Members: &m_Slots, Type: smithy.ShapeTypeMap})
+var sIntent_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iIntentState, Members: &mIntentState, Type: smithy.ShapeTypeEnum})
+var sIntent_confirmationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationState", ID: &iConfirmationState, Members: &mConfirmationState, Type: smithy.ShapeTypeEnum})
+var sIntentResultEvent_inputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputMode", ID: &iInputMode, Members: &mInputMode, Type: smithy.ShapeTypeEnum})
+var sIntentResultEvent_interpretations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpretations", ID: &i_Interpretations, Members: &m_Interpretations, Type: smithy.ShapeTypeList})
+var sIntentResultEvent_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeStructure})
+var sIntentResultEvent_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sIntentResultEvent_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sIntentResultEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sIntentResultEvent_recognizedBotMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recognizedBotMember", ID: &iRecognizedBotMember, Members: &mRecognizedBotMember, Type: smithy.ShapeTypeStructure})
+var sIntentState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntentState_FULFILLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntentState_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntentState_READY_FOR_FULFILLMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY_FOR_FULFILLMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntentState_WAITING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WAITING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntentState_FULFILLMENT_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLMENT_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInterpretation_nluConfidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nluConfidence", ID: &iConfidenceScore, Members: &mConfidenceScore, Type: smithy.ShapeTypeStructure})
+var sInterpretation_sentimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentimentResponse", ID: &iSentimentResponse, Members: &mSentimentResponse, Type: smithy.ShapeTypeStructure})
+var sInterpretation_intent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intent", ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeStructure})
+var sInterpretation_interpretationSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpretationSource", ID: &iInterpretationSource, Members: &mInterpretationSource, Type: smithy.ShapeTypeEnum})
+var s_Interpretations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInterpretation, Members: &mInterpretation, Type: smithy.ShapeTypeStructure})
+var sInterpretationSource_BEDROCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEDROCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInterpretationSource_LEX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessage_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_Text, Traits: &t7, Type: smithy.ShapeTypeString})
+var sMessage_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &iMessageContentType, Members: &mMessageContentType, Type: smithy.ShapeTypeEnum})
+var sMessage_imageResponseCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageResponseCard", ID: &iImageResponseCard, Members: &mImageResponseCard, Type: smithy.ShapeTypeStructure})
+var sMessageContentType_CUSTOM_PAYLOAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_PAYLOAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessageContentType_IMAGE_RESPONSE_CARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMAGE_RESPONSE_CARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessageContentType_PLAIN_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAIN_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessageContentType_SSML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSML", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Messages_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMessage, Members: &mMessage, Type: smithy.ShapeTypeStructure})
+var sPlaybackCompletionEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sPlaybackCompletionEvent_clientTimestampMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientTimestampMillis", ID: &i_EpochMillis, Type: smithy.ShapeTypeLong})
+var sPlaybackInterruptionEvent_eventReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventReason", ID: &iPlaybackInterruptionReason, Members: &mPlaybackInterruptionReason, Type: smithy.ShapeTypeEnum})
+var sPlaybackInterruptionEvent_causedByEventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "causedByEventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sPlaybackInterruptionEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sPlaybackInterruptionReason_DTMF_START_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DTMF_START_DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPlaybackInterruptionReason_TEXT_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEXT_DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPlaybackInterruptionReason_VOICE_START_DETECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOICE_START_DETECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecognizedBotMember_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Type: smithy.ShapeTypeString})
+var sRecognizedBotMember_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_Name, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRuntimeHintDetails_runtimeHintValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimeHintValues", ID: &i_RuntimeHintValuesList, Members: &m_RuntimeHintValuesList, Type: smithy.ShapeTypeList})
+var sRuntimeHintDetails_subSlotHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subSlotHints", ID: &i_SlotHintsSlotMap, Type: smithy.ShapeTypeMap})
+var sRuntimeHints_slotHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotHints", ID: &i_SlotHintsIntentMap, Members: &m_SlotHintsIntentMap, Type: smithy.ShapeTypeMap})
+var sRuntimeHintValue_phrase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phrase", ID: &i_RuntimeHintPhrase, Type: smithy.ShapeTypeString})
+var s_RuntimeHintValuesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRuntimeHintValue, Members: &mRuntimeHintValue, Type: smithy.ShapeTypeStructure})
+var sSentimentResponse_sentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentiment", ID: &iSentimentType, Members: &mSentimentType, Type: smithy.ShapeTypeEnum})
+var sSentimentResponse_sentimentScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentimentScore", ID: &iSentimentScore, Members: &mSentimentScore, Type: smithy.ShapeTypeStructure})
+var sSentimentScore_positive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "positive", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sSentimentScore_negative = smithy.NewStaticSchema(smithy.StaticSchema{Member: "negative", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sSentimentScore_neutral = smithy.NewStaticSchema(smithy.StaticSchema{Member: "neutral", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sSentimentScore_mixed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mixed", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sSentimentType_MIXED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIXED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSentimentType_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSentimentType_NEUTRAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEUTRAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSentimentType_POSITIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSITIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSessionState_dialogAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogAction", ID: &iDialogAction, Members: &mDialogAction, Type: smithy.ShapeTypeStructure})
+var sSessionState_intent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intent", ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeStructure})
+var sSessionState_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_ActiveContextsList, Members: &m_ActiveContextsList, Type: smithy.ShapeTypeList})
+var sSessionState_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sSessionState_originatingRequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originatingRequestId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sSessionState_runtimeHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimeHints", ID: &iRuntimeHints, Members: &mRuntimeHints, Type: smithy.ShapeTypeStructure})
+var sShape_SCALAR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCALAR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShape_LIST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShape_COMPOSITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPOSITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSlot_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iValue, Members: &mValue, Type: smithy.ShapeTypeStructure})
+var sSlot_shape = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shape", ID: &iShape, Members: &mShape, Type: smithy.ShapeTypeEnum})
+var sSlot_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_Values, Members: &m_Values, Type: smithy.ShapeTypeList})
+var sSlot_subSlots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subSlots", ID: &i_Slots, Type: smithy.ShapeTypeMap})
+var s_SlotHintsIntentMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_SlotHintsIntentMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_SlotHintsSlotMap, Members: &m_SlotHintsSlotMap, Type: smithy.ShapeTypeMap})
+var s_SlotHintsSlotMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Name, Type: smithy.ShapeTypeString})
+var s_SlotHintsSlotMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iRuntimeHintDetails, Members: &mRuntimeHintDetails, Type: smithy.ShapeTypeStructure})
+var s_Slots_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_Slots_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSlot, Members: &mSlot, Type: smithy.ShapeTypeStructure})
+var sStartConversationRequestEventStream_ConfigurationEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationEvent", ID: &iConfigurationEvent, Members: &mConfigurationEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationRequestEventStream_AudioInputEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioInputEvent", ID: &iAudioInputEvent, Members: &mAudioInputEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationRequestEventStream_DTMFInputEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DTMFInputEvent", ID: &iDTMFInputEvent, Members: &mDTMFInputEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationRequestEventStream_TextInputEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextInputEvent", ID: &iTextInputEvent, Members: &mTextInputEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationRequestEventStream_PlaybackCompletionEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackCompletionEvent", ID: &iPlaybackCompletionEvent, Members: &mPlaybackCompletionEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationRequestEventStream_DisconnectionEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisconnectionEvent", ID: &iDisconnectionEvent, Members: &mDisconnectionEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_PlaybackInterruptionEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackInterruptionEvent", ID: &iPlaybackInterruptionEvent, Members: &mPlaybackInterruptionEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_TranscriptEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranscriptEvent", ID: &iTranscriptEvent, Members: &mTranscriptEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_IntentResultEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IntentResultEvent", ID: &iIntentResultEvent, Members: &mIntentResultEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_TextResponseEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TextResponseEvent", ID: &iTextResponseEvent, Members: &mTextResponseEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_AudioResponseEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioResponseEvent", ID: &iAudioResponseEvent, Members: &mAudioResponseEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_HeartbeatEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeartbeatEvent", ID: &iHeartbeatEvent, Members: &mHeartbeatEvent, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_AccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccessDeniedException", ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_ResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceNotFoundException", ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_ValidationException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationException", ID: &iValidationException, Members: &mValidationException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_ThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThrottlingException", ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_InternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalServerException", ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_ConflictException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictException", ID: &iConflictException, Members: &mConflictException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_DependencyFailedException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DependencyFailedException", ID: &iDependencyFailedException, Members: &mDependencyFailedException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var sStartConversationResponseEventStream_BadGatewayException = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BadGatewayException", ID: &iBadGatewayException, Members: &mBadGatewayException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStyleType_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStyleType_SPELL_BY_LETTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPELL_BY_LETTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStyleType_SPELL_BY_WORD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPELL_BY_WORD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTextInputEvent_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_Text, Traits: &t7, Type: smithy.ShapeTypeString})
+var sTextInputEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sTextInputEvent_clientTimestampMillis = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientTimestampMillis", ID: &i_EpochMillis, Type: smithy.ShapeTypeLong})
+var sTextResponseEvent_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList})
+var sTextResponseEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTranscriptEvent_transcript = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transcript", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTranscriptEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValue_originalValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originalValue", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sValue_interpretedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpretedValue", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sValue_resolvedValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedValues", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlot, Type: smithy.ShapeTypeStructure})
+var sDeleteSessionRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sDeleteSessionRequest_botAliasId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAliasId", ID: &i_BotAliasIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sDeleteSessionRequest_localeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localeId", ID: &i_LocaleId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sDeleteSessionRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_botAliasId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAliasId", ID: &i_BotAliasIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_localeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localeId", ID: &i_LocaleId, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_botAliasId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAliasId", ID: &i_BotAliasIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_localeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localeId", ID: &i_LocaleId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList})
+var sGetSessionResponse_interpretations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpretations", ID: &i_Interpretations, Members: &m_Interpretations, Type: smithy.ShapeTypeList})
+var sGetSessionResponse_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeStructure})
+var sPutSessionRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_botAliasId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAliasId", ID: &i_BotAliasIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_localeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localeId", ID: &i_LocaleId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList})
+var sPutSessionRequest_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeStructure})
+var sPutSessionRequest_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sPutSessionRequest_responseContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseContentType", ID: &i_NonEmptyString, Traits: &t26, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_NonEmptyString, Traits: &t27, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_NonEmptyString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &i_NonEmptyString, Traits: &t29, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_NonEmptyString, Traits: &t30, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t31, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_audioStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioStream", ID: &i_BlobStream, Traits: &t32, Type: smithy.ShapeTypeBlob})
+var sRecognizeTextRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeTextRequest_botAliasId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAliasId", ID: &i_BotAliasIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeTextRequest_localeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localeId", ID: &i_LocaleId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeTextRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeTextRequest_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_Text, Traits: &t7, Type: smithy.ShapeTypeString})
+var sRecognizeTextRequest_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeStructure})
+var sRecognizeTextRequest_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sRecognizeTextResponse_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_Messages, Members: &m_Messages, Type: smithy.ShapeTypeList})
+var sRecognizeTextResponse_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &iSessionState, Members: &mSessionState, Type: smithy.ShapeTypeStructure})
+var sRecognizeTextResponse_interpretations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpretations", ID: &i_Interpretations, Members: &m_Interpretations, Type: smithy.ShapeTypeList})
+var sRecognizeTextResponse_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sRecognizeTextResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Type: smithy.ShapeTypeString})
+var sRecognizeTextResponse_recognizedBotMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recognizedBotMember", ID: &iRecognizedBotMember, Members: &mRecognizedBotMember, Type: smithy.ShapeTypeStructure})
+var sRecognizeUtteranceRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_botAliasId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAliasId", ID: &i_BotAliasIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_localeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localeId", ID: &i_LocaleId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &i_SensitiveNonEmptyString, Traits: &t33, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_SensitiveNonEmptyString, Traits: &t34, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_requestContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestContentType", ID: &i_NonEmptyString, Traits: &t27, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_responseContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseContentType", ID: &i_NonEmptyString, Traits: &t35, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceRequest_inputStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputStream", ID: &i_BlobStream, Traits: &t32, Type: smithy.ShapeTypeBlob})
+var sRecognizeUtteranceResponse_inputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputMode", ID: &i_NonEmptyString, Traits: &t36, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_NonEmptyString, Traits: &t27, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_messages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messages", ID: &i_NonEmptyString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_interpretations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interpretations", ID: &i_NonEmptyString, Traits: &t37, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_sessionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionState", ID: &i_NonEmptyString, Traits: &t29, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_NonEmptyString, Traits: &t30, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t31, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_inputTranscript = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputTranscript", ID: &i_NonEmptyString, Traits: &t38, Type: smithy.ShapeTypeString})
+var sRecognizeUtteranceResponse_audioStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioStream", ID: &i_BlobStream, Traits: &t32, Type: smithy.ShapeTypeBlob})
+var sRecognizeUtteranceResponse_recognizedBotMember = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recognizedBotMember", ID: &i_NonEmptyString, Traits: &t39, Type: smithy.ShapeTypeString})
+var sStartConversationRequest_botId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botId", ID: &i_BotIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sStartConversationRequest_botAliasId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAliasId", ID: &i_BotAliasIdentifier, Traits: &t25, Type: smithy.ShapeTypeString})
+var sStartConversationRequest_localeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localeId", ID: &i_LocaleId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sStartConversationRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_SessionId, Traits: &t25, Type: smithy.ShapeTypeString})
+var sStartConversationRequest_conversationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "conversationMode", ID: &iConversationMode, Members: &mConversationMode, Traits: &t40, Type: smithy.ShapeTypeEnum})
+var sStartConversationRequest_requestEventStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestEventStream", ID: &iStartConversationRequestEventStream, Members: &mStartConversationRequestEventStream, Traits: &t32, Type: smithy.ShapeTypeUnion})
+var sStartConversationResponse_responseEventStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseEventStream", ID: &iStartConversationResponseEventStream, Members: &mStartConversationResponseEventStream, Traits: &t32, Type: smithy.ShapeTypeUnion})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	ActiveContextTimeToLive_timeToLiveInSeconds = ActiveContextTimeToLive.AddMember("timeToLiveInSeconds", _ActiveContextTimeToLiveInSeconds)
-
-	ActiveContextTimeToLive_turnsToLive = ActiveContextTimeToLive.AddMember("turnsToLive", _ActiveContextTurnsToLive)
-
-	_ActiveContextParametersMap_key = _ActiveContextParametersMap.AddMember("key", _ParameterName)
-
-	_ActiveContextParametersMap_value = _ActiveContextParametersMap.AddMember("value", _Text)
-
-	ActiveContext_name = ActiveContext.AddMember("name", _ActiveContextName)
-
-	ActiveContext_timeToLive = ActiveContext.AddMember("timeToLive", ActiveContextTimeToLive)
-
-	ActiveContext_contextAttributes = ActiveContext.AddMember("contextAttributes", _ActiveContextParametersMap)
-
-	_ActiveContextsList_member = _ActiveContextsList.AddMember("member", ActiveContext)
-
-	AudioInputEvent_audioChunk = AudioInputEvent.AddMember("audioChunk", _AudioChunk)
-
-	AudioInputEvent_contentType = AudioInputEvent.AddMember("contentType", _NonEmptyString)
-
-	AudioInputEvent_eventId = AudioInputEvent.AddMember("eventId", _EventId)
-
-	AudioInputEvent_clientTimestampMillis = AudioInputEvent.AddMember("clientTimestampMillis", _EpochMillis)
-
-	AudioResponseEvent_audioChunk = AudioResponseEvent.AddMember("audioChunk", _AudioChunk)
-
-	AudioResponseEvent_contentType = AudioResponseEvent.AddMember("contentType", _NonEmptyString)
-
-	AudioResponseEvent_eventId = AudioResponseEvent.AddMember("eventId", _EventId)
-
-	BadGatewayException_message = BadGatewayException.AddMember("message", _String)
-
-	Button_text = Button.AddMember("text", _ButtonText)
-
-	Button_value = Button.AddMember("value", _ButtonValue)
-
-	_ButtonsList_member = _ButtonsList.AddMember("member", Button)
-
-	ConfidenceScore_score = ConfidenceScore.AddMember("score", _Double)
-
-	_StringMap_key = _StringMap.AddMember("key", _NonEmptyString)
-
-	_StringMap_value = _StringMap.AddMember("value", _String)
-
-	DialogActionType_CLOSE = DialogActionType.AddMember("CLOSE", smithyprelude.Unit)
-
-	DialogActionType_CONFIRM_INTENT = DialogActionType.AddMember("CONFIRM_INTENT", smithyprelude.Unit)
-
-	DialogActionType_DELEGATE = DialogActionType.AddMember("DELEGATE", smithyprelude.Unit)
-
-	DialogActionType_ELICIT_INTENT = DialogActionType.AddMember("ELICIT_INTENT", smithyprelude.Unit)
-
-	DialogActionType_ELICIT_SLOT = DialogActionType.AddMember("ELICIT_SLOT", smithyprelude.Unit)
-
-	DialogActionType_NONE = DialogActionType.AddMember("NONE", smithyprelude.Unit)
-
-	StyleType_DEFAULT = StyleType.AddMember("DEFAULT", smithyprelude.Unit)
-
-	StyleType_SPELL_BY_LETTER = StyleType.AddMember("SPELL_BY_LETTER", smithyprelude.Unit)
-
-	StyleType_SPELL_BY_WORD = StyleType.AddMember("SPELL_BY_WORD", smithyprelude.Unit)
-
-	ElicitSubSlot_name = ElicitSubSlot.AddMember("name", _NonEmptyString)
-
-	ElicitSubSlot_subSlotToElicit = ElicitSubSlot.AddMember("subSlotToElicit", ElicitSubSlot)
-
-	DialogAction_type = DialogAction.AddMember("type", DialogActionType)
-
-	DialogAction_slotToElicit = DialogAction.AddMember("slotToElicit", _NonEmptyString)
-
-	DialogAction_slotElicitationStyle = DialogAction.AddMember("slotElicitationStyle", StyleType)
-
-	DialogAction_subSlotToElicit = DialogAction.AddMember("subSlotToElicit", ElicitSubSlot)
-
-	_StringList_member = _StringList.AddMember("member", _NonEmptyString)
-
-	Value_originalValue = Value.AddMember("originalValue", _NonEmptyString)
-
-	Value_interpretedValue = Value.AddMember("interpretedValue", _NonEmptyString)
-
-	Value_resolvedValues = Value.AddMember("resolvedValues", _StringList)
-
-	Shape_SCALAR = Shape.AddMember("SCALAR", smithyprelude.Unit)
-
-	Shape_LIST = Shape.AddMember("LIST", smithyprelude.Unit)
-
-	Shape_COMPOSITE = Shape.AddMember("COMPOSITE", smithyprelude.Unit)
-
-	_Values_member = _Values.AddMember("member", Slot)
-
-	Slot_value = Slot.AddMember("value", Value)
-
-	Slot_shape = Slot.AddMember("shape", Shape)
-
-	Slot_values = Slot.AddMember("values", _Values)
-
-	Slot_subSlots = Slot.AddMember("subSlots", _Slots)
-
-	_Slots_key = _Slots.AddMember("key", _NonEmptyString)
-
-	_Slots_value = _Slots.AddMember("value", Slot)
-
-	IntentState_FAILED = IntentState.AddMember("FAILED", smithyprelude.Unit)
-
-	IntentState_FULFILLED = IntentState.AddMember("FULFILLED", smithyprelude.Unit)
-
-	IntentState_IN_PROGRESS = IntentState.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	IntentState_READY_FOR_FULFILLMENT = IntentState.AddMember("READY_FOR_FULFILLMENT", smithyprelude.Unit)
-
-	IntentState_WAITING = IntentState.AddMember("WAITING", smithyprelude.Unit)
-
-	IntentState_FULFILLMENT_IN_PROGRESS = IntentState.AddMember("FULFILLMENT_IN_PROGRESS", smithyprelude.Unit)
-
-	ConfirmationState_CONFIRMED = ConfirmationState.AddMember("CONFIRMED", smithyprelude.Unit)
-
-	ConfirmationState_DENIED = ConfirmationState.AddMember("DENIED", smithyprelude.Unit)
-
-	ConfirmationState_NONE = ConfirmationState.AddMember("NONE", smithyprelude.Unit)
-
-	Intent_name = Intent.AddMember("name", _NonEmptyString)
-
-	Intent_slots = Intent.AddMember("slots", _Slots)
-
-	Intent_state = Intent.AddMember("state", IntentState)
-
-	Intent_confirmationState = Intent.AddMember("confirmationState", ConfirmationState)
-
-	RuntimeHintValue_phrase = RuntimeHintValue.AddMember("phrase", _RuntimeHintPhrase)
-
-	_RuntimeHintValuesList_member = _RuntimeHintValuesList.AddMember("member", RuntimeHintValue)
-
-	RuntimeHintDetails_runtimeHintValues = RuntimeHintDetails.AddMember("runtimeHintValues", _RuntimeHintValuesList)
-
-	RuntimeHintDetails_subSlotHints = RuntimeHintDetails.AddMember("subSlotHints", _SlotHintsSlotMap)
-
-	_SlotHintsSlotMap_key = _SlotHintsSlotMap.AddMember("key", _Name)
-
-	_SlotHintsSlotMap_value = _SlotHintsSlotMap.AddMember("value", RuntimeHintDetails)
-
-	_SlotHintsIntentMap_key = _SlotHintsIntentMap.AddMember("key", _Name)
-
-	_SlotHintsIntentMap_value = _SlotHintsIntentMap.AddMember("value", _SlotHintsSlotMap)
-
-	RuntimeHints_slotHints = RuntimeHints.AddMember("slotHints", _SlotHintsIntentMap)
-
-	SessionState_dialogAction = SessionState.AddMember("dialogAction", DialogAction)
-
-	SessionState_intent = SessionState.AddMember("intent", Intent)
-
-	SessionState_activeContexts = SessionState.AddMember("activeContexts", _ActiveContextsList)
-
-	SessionState_sessionAttributes = SessionState.AddMember("sessionAttributes", _StringMap)
-
-	SessionState_originatingRequestId = SessionState.AddMember("originatingRequestId", _NonEmptyString)
-
-	SessionState_runtimeHints = SessionState.AddMember("runtimeHints", RuntimeHints)
-
-	MessageContentType_CUSTOM_PAYLOAD = MessageContentType.AddMember("CUSTOM_PAYLOAD", smithyprelude.Unit)
-
-	MessageContentType_IMAGE_RESPONSE_CARD = MessageContentType.AddMember("IMAGE_RESPONSE_CARD", smithyprelude.Unit)
-
-	MessageContentType_PLAIN_TEXT = MessageContentType.AddMember("PLAIN_TEXT", smithyprelude.Unit)
-
-	MessageContentType_SSML = MessageContentType.AddMember("SSML", smithyprelude.Unit)
-
-	ImageResponseCard_title = ImageResponseCard.AddMember("title", _AttachmentTitle)
-
-	ImageResponseCard_subtitle = ImageResponseCard.AddMember("subtitle", _AttachmentTitle)
-
-	ImageResponseCard_imageUrl = ImageResponseCard.AddMember("imageUrl", _AttachmentUrl)
-
-	ImageResponseCard_buttons = ImageResponseCard.AddMember("buttons", _ButtonsList)
-
-	Message_content = Message.AddMember("content", _Text)
-
-	Message_contentType = Message.AddMember("contentType", MessageContentType)
-
-	Message_imageResponseCard = Message.AddMember("imageResponseCard", ImageResponseCard)
-
-	_Messages_member = _Messages.AddMember("member", Message)
-
-	ConfigurationEvent_requestAttributes = ConfigurationEvent.AddMember("requestAttributes", _StringMap)
-
-	ConfigurationEvent_responseContentType = ConfigurationEvent.AddMember("responseContentType", _NonEmptyString)
-
-	ConfigurationEvent_sessionState = ConfigurationEvent.AddMember("sessionState", SessionState)
-
-	ConfigurationEvent_welcomeMessages = ConfigurationEvent.AddMember("welcomeMessages", _Messages)
-
-	ConfigurationEvent_disablePlayback = ConfigurationEvent.AddMember("disablePlayback", _Boolean)
-
-	ConfigurationEvent_eventId = ConfigurationEvent.AddMember("eventId", _EventId)
-
-	ConfigurationEvent_clientTimestampMillis = ConfigurationEvent.AddMember("clientTimestampMillis", _EpochMillis)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ConversationMode_AUDIO = ConversationMode.AddMember("AUDIO", smithyprelude.Unit)
-
-	ConversationMode_TEXT = ConversationMode.AddMember("TEXT", smithyprelude.Unit)
-
-	DependencyFailedException_message = DependencyFailedException.AddMember("message", _String)
-
-	DisconnectionEvent_eventId = DisconnectionEvent.AddMember("eventId", _EventId)
-
-	DisconnectionEvent_clientTimestampMillis = DisconnectionEvent.AddMember("clientTimestampMillis", _EpochMillis)
-
-	DTMFInputEvent_inputCharacter = DTMFInputEvent.AddMember("inputCharacter", _DTMFRegex)
-
-	DTMFInputEvent_eventId = DTMFInputEvent.AddMember("eventId", _EventId)
-
-	DTMFInputEvent_clientTimestampMillis = DTMFInputEvent.AddMember("clientTimestampMillis", _EpochMillis)
-
-	HeartbeatEvent_eventId = HeartbeatEvent.AddMember("eventId", _EventId)
-
-	InputMode_TEXT = InputMode.AddMember("TEXT", smithyprelude.Unit)
-
-	InputMode_SPEECH = InputMode.AddMember("SPEECH", smithyprelude.Unit)
-
-	InputMode_DTMF = InputMode.AddMember("DTMF", smithyprelude.Unit)
-
-	SentimentType_MIXED = SentimentType.AddMember("MIXED", smithyprelude.Unit)
-
-	SentimentType_NEGATIVE = SentimentType.AddMember("NEGATIVE", smithyprelude.Unit)
-
-	SentimentType_NEUTRAL = SentimentType.AddMember("NEUTRAL", smithyprelude.Unit)
-
-	SentimentType_POSITIVE = SentimentType.AddMember("POSITIVE", smithyprelude.Unit)
-
-	SentimentScore_positive = SentimentScore.AddMember("positive", _Double)
-
-	SentimentScore_negative = SentimentScore.AddMember("negative", _Double)
-
-	SentimentScore_neutral = SentimentScore.AddMember("neutral", _Double)
-
-	SentimentScore_mixed = SentimentScore.AddMember("mixed", _Double)
-
-	SentimentResponse_sentiment = SentimentResponse.AddMember("sentiment", SentimentType)
-
-	SentimentResponse_sentimentScore = SentimentResponse.AddMember("sentimentScore", SentimentScore)
-
-	InterpretationSource_BEDROCK = InterpretationSource.AddMember("BEDROCK", smithyprelude.Unit)
-
-	InterpretationSource_LEX = InterpretationSource.AddMember("LEX", smithyprelude.Unit)
-
-	Interpretation_nluConfidence = Interpretation.AddMember("nluConfidence", ConfidenceScore)
-
-	Interpretation_sentimentResponse = Interpretation.AddMember("sentimentResponse", SentimentResponse)
-
-	Interpretation_intent = Interpretation.AddMember("intent", Intent)
-
-	Interpretation_interpretationSource = Interpretation.AddMember("interpretationSource", InterpretationSource)
-
-	_Interpretations_member = _Interpretations.AddMember("member", Interpretation)
-
-	RecognizedBotMember_botId = RecognizedBotMember.AddMember("botId", _BotIdentifier)
-
-	RecognizedBotMember_botName = RecognizedBotMember.AddMember("botName", _Name)
-
-	IntentResultEvent_inputMode = IntentResultEvent.AddMember("inputMode", InputMode)
-
-	IntentResultEvent_interpretations = IntentResultEvent.AddMember("interpretations", _Interpretations)
-
-	IntentResultEvent_sessionState = IntentResultEvent.AddMember("sessionState", SessionState)
-
-	IntentResultEvent_requestAttributes = IntentResultEvent.AddMember("requestAttributes", _StringMap)
-
-	IntentResultEvent_sessionId = IntentResultEvent.AddMember("sessionId", _SessionId)
-
-	IntentResultEvent_eventId = IntentResultEvent.AddMember("eventId", _EventId)
-
-	IntentResultEvent_recognizedBotMember = IntentResultEvent.AddMember("recognizedBotMember", RecognizedBotMember)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	PlaybackCompletionEvent_eventId = PlaybackCompletionEvent.AddMember("eventId", _EventId)
-
-	PlaybackCompletionEvent_clientTimestampMillis = PlaybackCompletionEvent.AddMember("clientTimestampMillis", _EpochMillis)
-
-	PlaybackInterruptionReason_DTMF_START_DETECTED = PlaybackInterruptionReason.AddMember("DTMF_START_DETECTED", smithyprelude.Unit)
-
-	PlaybackInterruptionReason_TEXT_DETECTED = PlaybackInterruptionReason.AddMember("TEXT_DETECTED", smithyprelude.Unit)
-
-	PlaybackInterruptionReason_VOICE_START_DETECTED = PlaybackInterruptionReason.AddMember("VOICE_START_DETECTED", smithyprelude.Unit)
-
-	PlaybackInterruptionEvent_eventReason = PlaybackInterruptionEvent.AddMember("eventReason", PlaybackInterruptionReason)
-
-	PlaybackInterruptionEvent_causedByEventId = PlaybackInterruptionEvent.AddMember("causedByEventId", _EventId)
-
-	PlaybackInterruptionEvent_eventId = PlaybackInterruptionEvent.AddMember("eventId", _EventId)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	TextInputEvent_text = TextInputEvent.AddMember("text", _Text)
-
-	TextInputEvent_eventId = TextInputEvent.AddMember("eventId", _EventId)
-
-	TextInputEvent_clientTimestampMillis = TextInputEvent.AddMember("clientTimestampMillis", _EpochMillis)
-
-	StartConversationRequestEventStream_ConfigurationEvent = StartConversationRequestEventStream.AddMember("ConfigurationEvent", ConfigurationEvent)
-
-	StartConversationRequestEventStream_AudioInputEvent = StartConversationRequestEventStream.AddMember("AudioInputEvent", AudioInputEvent)
-
-	StartConversationRequestEventStream_DTMFInputEvent = StartConversationRequestEventStream.AddMember("DTMFInputEvent", DTMFInputEvent)
-
-	StartConversationRequestEventStream_TextInputEvent = StartConversationRequestEventStream.AddMember("TextInputEvent", TextInputEvent)
-
-	StartConversationRequestEventStream_PlaybackCompletionEvent = StartConversationRequestEventStream.AddMember("PlaybackCompletionEvent", PlaybackCompletionEvent)
-
-	StartConversationRequestEventStream_DisconnectionEvent = StartConversationRequestEventStream.AddMember("DisconnectionEvent", DisconnectionEvent)
-
-	TranscriptEvent_transcript = TranscriptEvent.AddMember("transcript", _String)
-
-	TranscriptEvent_eventId = TranscriptEvent.AddMember("eventId", _EventId)
-
-	TextResponseEvent_messages = TextResponseEvent.AddMember("messages", _Messages)
-
-	TextResponseEvent_eventId = TextResponseEvent.AddMember("eventId", _EventId)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	StartConversationResponseEventStream_PlaybackInterruptionEvent = StartConversationResponseEventStream.AddMember("PlaybackInterruptionEvent", PlaybackInterruptionEvent)
-
-	StartConversationResponseEventStream_TranscriptEvent = StartConversationResponseEventStream.AddMember("TranscriptEvent", TranscriptEvent)
-
-	StartConversationResponseEventStream_IntentResultEvent = StartConversationResponseEventStream.AddMember("IntentResultEvent", IntentResultEvent)
-
-	StartConversationResponseEventStream_TextResponseEvent = StartConversationResponseEventStream.AddMember("TextResponseEvent", TextResponseEvent)
-
-	StartConversationResponseEventStream_AudioResponseEvent = StartConversationResponseEventStream.AddMember("AudioResponseEvent", AudioResponseEvent)
-
-	StartConversationResponseEventStream_HeartbeatEvent = StartConversationResponseEventStream.AddMember("HeartbeatEvent", HeartbeatEvent)
-
-	StartConversationResponseEventStream_AccessDeniedException = StartConversationResponseEventStream.AddMember("AccessDeniedException", AccessDeniedException)
-
-	StartConversationResponseEventStream_ResourceNotFoundException = StartConversationResponseEventStream.AddMember("ResourceNotFoundException", ResourceNotFoundException)
-
-	StartConversationResponseEventStream_ValidationException = StartConversationResponseEventStream.AddMember("ValidationException", ValidationException)
-
-	StartConversationResponseEventStream_ThrottlingException = StartConversationResponseEventStream.AddMember("ThrottlingException", ThrottlingException)
-
-	StartConversationResponseEventStream_InternalServerException = StartConversationResponseEventStream.AddMember("InternalServerException", InternalServerException)
-
-	StartConversationResponseEventStream_ConflictException = StartConversationResponseEventStream.AddMember("ConflictException", ConflictException)
-
-	StartConversationResponseEventStream_DependencyFailedException = StartConversationResponseEventStream.AddMember("DependencyFailedException", DependencyFailedException)
-
-	StartConversationResponseEventStream_BadGatewayException = StartConversationResponseEventStream.AddMember("BadGatewayException", BadGatewayException)
-
-	DeleteSessionRequest_botId = DeleteSessionRequest.AddMember("botId", _BotIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteSessionRequest_botAliasId = DeleteSessionRequest.AddMember("botAliasId", _BotAliasIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteSessionRequest_localeId = DeleteSessionRequest.AddMember("localeId", _LocaleId, &smithytraits.HTTPLabel{})
-
-	DeleteSessionRequest_sessionId = DeleteSessionRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	DeleteSessionResponse_botId = DeleteSessionResponse.AddMember("botId", _BotIdentifier)
-
-	DeleteSessionResponse_botAliasId = DeleteSessionResponse.AddMember("botAliasId", _BotAliasIdentifier)
-
-	DeleteSessionResponse_localeId = DeleteSessionResponse.AddMember("localeId", _LocaleId)
-
-	DeleteSessionResponse_sessionId = DeleteSessionResponse.AddMember("sessionId", _SessionId)
-
-	GetSessionRequest_botId = GetSessionRequest.AddMember("botId", _BotIdentifier, &smithytraits.HTTPLabel{})
-
-	GetSessionRequest_botAliasId = GetSessionRequest.AddMember("botAliasId", _BotAliasIdentifier, &smithytraits.HTTPLabel{})
-
-	GetSessionRequest_localeId = GetSessionRequest.AddMember("localeId", _LocaleId, &smithytraits.HTTPLabel{})
-
-	GetSessionRequest_sessionId = GetSessionRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	GetSessionResponse_sessionId = GetSessionResponse.AddMember("sessionId", _NonEmptyString)
-
-	GetSessionResponse_messages = GetSessionResponse.AddMember("messages", _Messages)
-
-	GetSessionResponse_interpretations = GetSessionResponse.AddMember("interpretations", _Interpretations)
-
-	GetSessionResponse_sessionState = GetSessionResponse.AddMember("sessionState", SessionState)
-
-	PutSessionRequest_botId = PutSessionRequest.AddMember("botId", _BotIdentifier, &smithytraits.HTTPLabel{})
-
-	PutSessionRequest_botAliasId = PutSessionRequest.AddMember("botAliasId", _BotAliasIdentifier, &smithytraits.HTTPLabel{})
-
-	PutSessionRequest_localeId = PutSessionRequest.AddMember("localeId", _LocaleId, &smithytraits.HTTPLabel{})
-
-	PutSessionRequest_sessionId = PutSessionRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	PutSessionRequest_messages = PutSessionRequest.AddMember("messages", _Messages)
-
-	PutSessionRequest_sessionState = PutSessionRequest.AddMember("sessionState", SessionState)
-
-	PutSessionRequest_requestAttributes = PutSessionRequest.AddMember("requestAttributes", _StringMap)
-
-	PutSessionRequest_responseContentType = PutSessionRequest.AddMember("responseContentType", _NonEmptyString, &smithytraits.HTTPHeader{Name: "ResponseContentType"})
-
-	PutSessionResponse_contentType = PutSessionResponse.AddMember("contentType", _NonEmptyString, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	PutSessionResponse_messages = PutSessionResponse.AddMember("messages", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-messages"})
-
-	PutSessionResponse_sessionState = PutSessionResponse.AddMember("sessionState", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-state"})
-
-	PutSessionResponse_requestAttributes = PutSessionResponse.AddMember("requestAttributes", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-request-attributes"})
-
-	PutSessionResponse_sessionId = PutSessionResponse.AddMember("sessionId", _SessionId, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-id"})
-
-	PutSessionResponse_audioStream = PutSessionResponse.AddMember("audioStream", _BlobStream, &smithytraits.HTTPPayload{})
-
-	RecognizeTextRequest_botId = RecognizeTextRequest.AddMember("botId", _BotIdentifier, &smithytraits.HTTPLabel{})
-
-	RecognizeTextRequest_botAliasId = RecognizeTextRequest.AddMember("botAliasId", _BotAliasIdentifier, &smithytraits.HTTPLabel{})
-
-	RecognizeTextRequest_localeId = RecognizeTextRequest.AddMember("localeId", _LocaleId, &smithytraits.HTTPLabel{})
-
-	RecognizeTextRequest_sessionId = RecognizeTextRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	RecognizeTextRequest_text = RecognizeTextRequest.AddMember("text", _Text)
-
-	RecognizeTextRequest_sessionState = RecognizeTextRequest.AddMember("sessionState", SessionState)
-
-	RecognizeTextRequest_requestAttributes = RecognizeTextRequest.AddMember("requestAttributes", _StringMap)
-
-	RecognizeTextResponse_messages = RecognizeTextResponse.AddMember("messages", _Messages)
-
-	RecognizeTextResponse_sessionState = RecognizeTextResponse.AddMember("sessionState", SessionState)
-
-	RecognizeTextResponse_interpretations = RecognizeTextResponse.AddMember("interpretations", _Interpretations)
-
-	RecognizeTextResponse_requestAttributes = RecognizeTextResponse.AddMember("requestAttributes", _StringMap)
-
-	RecognizeTextResponse_sessionId = RecognizeTextResponse.AddMember("sessionId", _SessionId)
-
-	RecognizeTextResponse_recognizedBotMember = RecognizeTextResponse.AddMember("recognizedBotMember", RecognizedBotMember)
-
-	RecognizeUtteranceRequest_botId = RecognizeUtteranceRequest.AddMember("botId", _BotIdentifier, &smithytraits.HTTPLabel{})
-
-	RecognizeUtteranceRequest_botAliasId = RecognizeUtteranceRequest.AddMember("botAliasId", _BotAliasIdentifier, &smithytraits.HTTPLabel{})
-
-	RecognizeUtteranceRequest_localeId = RecognizeUtteranceRequest.AddMember("localeId", _LocaleId, &smithytraits.HTTPLabel{})
-
-	RecognizeUtteranceRequest_sessionId = RecognizeUtteranceRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	RecognizeUtteranceRequest_sessionState = RecognizeUtteranceRequest.AddMember("sessionState", _SensitiveNonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-state"})
-
-	RecognizeUtteranceRequest_requestAttributes = RecognizeUtteranceRequest.AddMember("requestAttributes", _SensitiveNonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-request-attributes"})
-
-	RecognizeUtteranceRequest_requestContentType = RecognizeUtteranceRequest.AddMember("requestContentType", _NonEmptyString, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	RecognizeUtteranceRequest_responseContentType = RecognizeUtteranceRequest.AddMember("responseContentType", _NonEmptyString, &smithytraits.HTTPHeader{Name: "Response-Content-Type"})
-
-	RecognizeUtteranceRequest_inputStream = RecognizeUtteranceRequest.AddMember("inputStream", _BlobStream, &smithytraits.HTTPPayload{})
-
-	RecognizeUtteranceResponse_inputMode = RecognizeUtteranceResponse.AddMember("inputMode", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-input-mode"})
-
-	RecognizeUtteranceResponse_contentType = RecognizeUtteranceResponse.AddMember("contentType", _NonEmptyString, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	RecognizeUtteranceResponse_messages = RecognizeUtteranceResponse.AddMember("messages", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-messages"})
-
-	RecognizeUtteranceResponse_interpretations = RecognizeUtteranceResponse.AddMember("interpretations", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-interpretations"})
-
-	RecognizeUtteranceResponse_sessionState = RecognizeUtteranceResponse.AddMember("sessionState", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-state"})
-
-	RecognizeUtteranceResponse_requestAttributes = RecognizeUtteranceResponse.AddMember("requestAttributes", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-request-attributes"})
-
-	RecognizeUtteranceResponse_sessionId = RecognizeUtteranceResponse.AddMember("sessionId", _SessionId, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-id"})
-
-	RecognizeUtteranceResponse_inputTranscript = RecognizeUtteranceResponse.AddMember("inputTranscript", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-input-transcript"})
-
-	RecognizeUtteranceResponse_audioStream = RecognizeUtteranceResponse.AddMember("audioStream", _BlobStream, &smithytraits.HTTPPayload{})
-
-	RecognizeUtteranceResponse_recognizedBotMember = RecognizeUtteranceResponse.AddMember("recognizedBotMember", _NonEmptyString, &smithytraits.HTTPHeader{Name: "x-amz-lex-recognized-bot-member"})
-
-	StartConversationRequest_botId = StartConversationRequest.AddMember("botId", _BotIdentifier, &smithytraits.HTTPLabel{})
-
-	StartConversationRequest_botAliasId = StartConversationRequest.AddMember("botAliasId", _BotAliasIdentifier, &smithytraits.HTTPLabel{})
-
-	StartConversationRequest_localeId = StartConversationRequest.AddMember("localeId", _LocaleId, &smithytraits.HTTPLabel{})
-
-	StartConversationRequest_sessionId = StartConversationRequest.AddMember("sessionId", _SessionId, &smithytraits.HTTPLabel{})
-
-	StartConversationRequest_conversationMode = StartConversationRequest.AddMember("conversationMode", ConversationMode, &smithytraits.HTTPHeader{Name: "x-amz-lex-conversation-mode"})
-
-	StartConversationRequest_requestEventStream = StartConversationRequest.AddMember("requestEventStream", StartConversationRequestEventStream, &smithytraits.HTTPPayload{})
-
-	StartConversationResponse_responseEventStream = StartConversationResponse.AddMember("responseEventStream", StartConversationResponseEventStream, &smithytraits.HTTPPayload{})
-
+	sElicitSubSlot_subSlotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subSlotToElicit", ID: &iElicitSubSlot, Members: &mElicitSubSlot, Type: smithy.ShapeTypeStructure})
+	sRuntimeHintDetails_subSlotHints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subSlotHints", ID: &i_SlotHintsSlotMap, Members: &m_SlotHintsSlotMap, Type: smithy.ShapeTypeMap})
+	sSlot_subSlots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subSlots", ID: &i_Slots, Members: &m_Slots, Type: smithy.ShapeTypeMap})
+	s_Values_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSlot, Members: &mSlot, Type: smithy.ShapeTypeStructure})
 }
+
+var DeleteSession = &sDeleteSession
+
+var GetSession = &sGetSession
+
+var PutSession = &sPutSession
+
+var RecognizeText = &sRecognizeText
+
+var RecognizeUtterance = &sRecognizeUtterance
+
+var StartConversation = &sStartConversation
+
+var _AWSDeepSenseRunTimeServiceApi2_0 = &s_AWSDeepSenseRunTimeServiceApi2_0
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var ActiveContext = &sActiveContext
+var ActiveContext_name = &sActiveContext_name
+var ActiveContext_timeToLive = &sActiveContext_timeToLive
+var ActiveContext_contextAttributes = &sActiveContext_contextAttributes
+
+var _ActiveContextName = &s_ActiveContextName
+
+var _ActiveContextParametersMap = &s_ActiveContextParametersMap
+var _ActiveContextParametersMap_key = &s_ActiveContextParametersMap_key
+var _ActiveContextParametersMap_value = &s_ActiveContextParametersMap_value
+
+var _ActiveContextsList = &s_ActiveContextsList
+var _ActiveContextsList_member = &s_ActiveContextsList_member
+
+var ActiveContextTimeToLive = &sActiveContextTimeToLive
+var ActiveContextTimeToLive_timeToLiveInSeconds = &sActiveContextTimeToLive_timeToLiveInSeconds
+var ActiveContextTimeToLive_turnsToLive = &sActiveContextTimeToLive_turnsToLive
+
+var _ActiveContextTimeToLiveInSeconds = &s_ActiveContextTimeToLiveInSeconds
+
+var _ActiveContextTurnsToLive = &s_ActiveContextTurnsToLive
+
+var _AttachmentTitle = &s_AttachmentTitle
+
+var _AttachmentUrl = &s_AttachmentUrl
+
+var _AudioChunk = &s_AudioChunk
+
+var AudioInputEvent = &sAudioInputEvent
+var AudioInputEvent_audioChunk = &sAudioInputEvent_audioChunk
+var AudioInputEvent_contentType = &sAudioInputEvent_contentType
+var AudioInputEvent_eventId = &sAudioInputEvent_eventId
+var AudioInputEvent_clientTimestampMillis = &sAudioInputEvent_clientTimestampMillis
+
+var AudioResponseEvent = &sAudioResponseEvent
+var AudioResponseEvent_audioChunk = &sAudioResponseEvent_audioChunk
+var AudioResponseEvent_contentType = &sAudioResponseEvent_contentType
+var AudioResponseEvent_eventId = &sAudioResponseEvent_eventId
+
+var BadGatewayException = &sBadGatewayException
+var BadGatewayException_message = &sBadGatewayException_message
+
+var _BlobStream = &s_BlobStream
+
+var _Boolean = &s_Boolean
+
+var _BotAliasIdentifier = &s_BotAliasIdentifier
+
+var _BotIdentifier = &s_BotIdentifier
+
+var Button = &sButton
+var Button_text = &sButton_text
+var Button_value = &sButton_value
+
+var _ButtonsList = &s_ButtonsList
+var _ButtonsList_member = &s_ButtonsList_member
+
+var _ButtonText = &s_ButtonText
+
+var _ButtonValue = &s_ButtonValue
+
+var ConfidenceScore = &sConfidenceScore
+var ConfidenceScore_score = &sConfidenceScore_score
+
+var ConfigurationEvent = &sConfigurationEvent
+var ConfigurationEvent_requestAttributes = &sConfigurationEvent_requestAttributes
+var ConfigurationEvent_responseContentType = &sConfigurationEvent_responseContentType
+var ConfigurationEvent_sessionState = &sConfigurationEvent_sessionState
+var ConfigurationEvent_welcomeMessages = &sConfigurationEvent_welcomeMessages
+var ConfigurationEvent_disablePlayback = &sConfigurationEvent_disablePlayback
+var ConfigurationEvent_eventId = &sConfigurationEvent_eventId
+var ConfigurationEvent_clientTimestampMillis = &sConfigurationEvent_clientTimestampMillis
+
+var ConfirmationState = &sConfirmationState
+var ConfirmationState_CONFIRMED = &sConfirmationState_CONFIRMED
+var ConfirmationState_DENIED = &sConfirmationState_DENIED
+var ConfirmationState_NONE = &sConfirmationState_NONE
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ConversationMode = &sConversationMode
+var ConversationMode_AUDIO = &sConversationMode_AUDIO
+var ConversationMode_TEXT = &sConversationMode_TEXT
+
+var DependencyFailedException = &sDependencyFailedException
+var DependencyFailedException_message = &sDependencyFailedException_message
+
+var DialogAction = &sDialogAction
+var DialogAction_type = &sDialogAction_type
+var DialogAction_slotToElicit = &sDialogAction_slotToElicit
+var DialogAction_slotElicitationStyle = &sDialogAction_slotElicitationStyle
+var DialogAction_subSlotToElicit = &sDialogAction_subSlotToElicit
+
+var DialogActionType = &sDialogActionType
+var DialogActionType_CLOSE = &sDialogActionType_CLOSE
+var DialogActionType_CONFIRM_INTENT = &sDialogActionType_CONFIRM_INTENT
+var DialogActionType_DELEGATE = &sDialogActionType_DELEGATE
+var DialogActionType_ELICIT_INTENT = &sDialogActionType_ELICIT_INTENT
+var DialogActionType_ELICIT_SLOT = &sDialogActionType_ELICIT_SLOT
+var DialogActionType_NONE = &sDialogActionType_NONE
+
+var DisconnectionEvent = &sDisconnectionEvent
+var DisconnectionEvent_eventId = &sDisconnectionEvent_eventId
+var DisconnectionEvent_clientTimestampMillis = &sDisconnectionEvent_clientTimestampMillis
+
+var _Double = &s_Double
+
+var DTMFInputEvent = &sDTMFInputEvent
+var DTMFInputEvent_inputCharacter = &sDTMFInputEvent_inputCharacter
+var DTMFInputEvent_eventId = &sDTMFInputEvent_eventId
+var DTMFInputEvent_clientTimestampMillis = &sDTMFInputEvent_clientTimestampMillis
+
+var _DTMFRegex = &s_DTMFRegex
+
+var ElicitSubSlot = &sElicitSubSlot
+var ElicitSubSlot_name = &sElicitSubSlot_name
+var ElicitSubSlot_subSlotToElicit = &sElicitSubSlot_subSlotToElicit
+
+var _EpochMillis = &s_EpochMillis
+
+var _EventId = &s_EventId
+
+var HeartbeatEvent = &sHeartbeatEvent
+var HeartbeatEvent_eventId = &sHeartbeatEvent_eventId
+
+var ImageResponseCard = &sImageResponseCard
+var ImageResponseCard_title = &sImageResponseCard_title
+var ImageResponseCard_subtitle = &sImageResponseCard_subtitle
+var ImageResponseCard_imageUrl = &sImageResponseCard_imageUrl
+var ImageResponseCard_buttons = &sImageResponseCard_buttons
+
+var InputMode = &sInputMode
+var InputMode_TEXT = &sInputMode_TEXT
+var InputMode_SPEECH = &sInputMode_SPEECH
+var InputMode_DTMF = &sInputMode_DTMF
+
+var Intent = &sIntent
+var Intent_name = &sIntent_name
+var Intent_slots = &sIntent_slots
+var Intent_state = &sIntent_state
+var Intent_confirmationState = &sIntent_confirmationState
+
+var IntentResultEvent = &sIntentResultEvent
+var IntentResultEvent_inputMode = &sIntentResultEvent_inputMode
+var IntentResultEvent_interpretations = &sIntentResultEvent_interpretations
+var IntentResultEvent_sessionState = &sIntentResultEvent_sessionState
+var IntentResultEvent_requestAttributes = &sIntentResultEvent_requestAttributes
+var IntentResultEvent_sessionId = &sIntentResultEvent_sessionId
+var IntentResultEvent_eventId = &sIntentResultEvent_eventId
+var IntentResultEvent_recognizedBotMember = &sIntentResultEvent_recognizedBotMember
+
+var IntentState = &sIntentState
+var IntentState_FAILED = &sIntentState_FAILED
+var IntentState_FULFILLED = &sIntentState_FULFILLED
+var IntentState_IN_PROGRESS = &sIntentState_IN_PROGRESS
+var IntentState_READY_FOR_FULFILLMENT = &sIntentState_READY_FOR_FULFILLMENT
+var IntentState_WAITING = &sIntentState_WAITING
+var IntentState_FULFILLMENT_IN_PROGRESS = &sIntentState_FULFILLMENT_IN_PROGRESS
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var Interpretation = &sInterpretation
+var Interpretation_nluConfidence = &sInterpretation_nluConfidence
+var Interpretation_sentimentResponse = &sInterpretation_sentimentResponse
+var Interpretation_intent = &sInterpretation_intent
+var Interpretation_interpretationSource = &sInterpretation_interpretationSource
+
+var _Interpretations = &s_Interpretations
+var _Interpretations_member = &s_Interpretations_member
+
+var InterpretationSource = &sInterpretationSource
+var InterpretationSource_BEDROCK = &sInterpretationSource_BEDROCK
+var InterpretationSource_LEX = &sInterpretationSource_LEX
+
+var _LocaleId = &s_LocaleId
+
+var Message = &sMessage
+var Message_content = &sMessage_content
+var Message_contentType = &sMessage_contentType
+var Message_imageResponseCard = &sMessage_imageResponseCard
+
+var MessageContentType = &sMessageContentType
+var MessageContentType_CUSTOM_PAYLOAD = &sMessageContentType_CUSTOM_PAYLOAD
+var MessageContentType_IMAGE_RESPONSE_CARD = &sMessageContentType_IMAGE_RESPONSE_CARD
+var MessageContentType_PLAIN_TEXT = &sMessageContentType_PLAIN_TEXT
+var MessageContentType_SSML = &sMessageContentType_SSML
+
+var _Messages = &s_Messages
+var _Messages_member = &s_Messages_member
+
+var _Name = &s_Name
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _ParameterName = &s_ParameterName
+
+var PlaybackCompletionEvent = &sPlaybackCompletionEvent
+var PlaybackCompletionEvent_eventId = &sPlaybackCompletionEvent_eventId
+var PlaybackCompletionEvent_clientTimestampMillis = &sPlaybackCompletionEvent_clientTimestampMillis
+
+var PlaybackInterruptionEvent = &sPlaybackInterruptionEvent
+var PlaybackInterruptionEvent_eventReason = &sPlaybackInterruptionEvent_eventReason
+var PlaybackInterruptionEvent_causedByEventId = &sPlaybackInterruptionEvent_causedByEventId
+var PlaybackInterruptionEvent_eventId = &sPlaybackInterruptionEvent_eventId
+
+var PlaybackInterruptionReason = &sPlaybackInterruptionReason
+var PlaybackInterruptionReason_DTMF_START_DETECTED = &sPlaybackInterruptionReason_DTMF_START_DETECTED
+var PlaybackInterruptionReason_TEXT_DETECTED = &sPlaybackInterruptionReason_TEXT_DETECTED
+var PlaybackInterruptionReason_VOICE_START_DETECTED = &sPlaybackInterruptionReason_VOICE_START_DETECTED
+
+var RecognizedBotMember = &sRecognizedBotMember
+var RecognizedBotMember_botId = &sRecognizedBotMember_botId
+var RecognizedBotMember_botName = &sRecognizedBotMember_botName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var RuntimeHintDetails = &sRuntimeHintDetails
+var RuntimeHintDetails_runtimeHintValues = &sRuntimeHintDetails_runtimeHintValues
+var RuntimeHintDetails_subSlotHints = &sRuntimeHintDetails_subSlotHints
+
+var _RuntimeHintPhrase = &s_RuntimeHintPhrase
+
+var RuntimeHints = &sRuntimeHints
+var RuntimeHints_slotHints = &sRuntimeHints_slotHints
+
+var RuntimeHintValue = &sRuntimeHintValue
+var RuntimeHintValue_phrase = &sRuntimeHintValue_phrase
+
+var _RuntimeHintValuesList = &s_RuntimeHintValuesList
+var _RuntimeHintValuesList_member = &s_RuntimeHintValuesList_member
+
+var _SensitiveNonEmptyString = &s_SensitiveNonEmptyString
+
+var SentimentResponse = &sSentimentResponse
+var SentimentResponse_sentiment = &sSentimentResponse_sentiment
+var SentimentResponse_sentimentScore = &sSentimentResponse_sentimentScore
+
+var SentimentScore = &sSentimentScore
+var SentimentScore_positive = &sSentimentScore_positive
+var SentimentScore_negative = &sSentimentScore_negative
+var SentimentScore_neutral = &sSentimentScore_neutral
+var SentimentScore_mixed = &sSentimentScore_mixed
+
+var SentimentType = &sSentimentType
+var SentimentType_MIXED = &sSentimentType_MIXED
+var SentimentType_NEGATIVE = &sSentimentType_NEGATIVE
+var SentimentType_NEUTRAL = &sSentimentType_NEUTRAL
+var SentimentType_POSITIVE = &sSentimentType_POSITIVE
+
+var _SessionId = &s_SessionId
+
+var SessionState = &sSessionState
+var SessionState_dialogAction = &sSessionState_dialogAction
+var SessionState_intent = &sSessionState_intent
+var SessionState_activeContexts = &sSessionState_activeContexts
+var SessionState_sessionAttributes = &sSessionState_sessionAttributes
+var SessionState_originatingRequestId = &sSessionState_originatingRequestId
+var SessionState_runtimeHints = &sSessionState_runtimeHints
+
+var Shape = &sShape
+var Shape_SCALAR = &sShape_SCALAR
+var Shape_LIST = &sShape_LIST
+var Shape_COMPOSITE = &sShape_COMPOSITE
+
+var Slot = &sSlot
+var Slot_value = &sSlot_value
+var Slot_shape = &sSlot_shape
+var Slot_values = &sSlot_values
+var Slot_subSlots = &sSlot_subSlots
+
+var _SlotHintsIntentMap = &s_SlotHintsIntentMap
+var _SlotHintsIntentMap_key = &s_SlotHintsIntentMap_key
+var _SlotHintsIntentMap_value = &s_SlotHintsIntentMap_value
+
+var _SlotHintsSlotMap = &s_SlotHintsSlotMap
+var _SlotHintsSlotMap_key = &s_SlotHintsSlotMap_key
+var _SlotHintsSlotMap_value = &s_SlotHintsSlotMap_value
+
+var _Slots = &s_Slots
+var _Slots_key = &s_Slots_key
+var _Slots_value = &s_Slots_value
+
+var StartConversationRequestEventStream = &sStartConversationRequestEventStream
+var StartConversationRequestEventStream_ConfigurationEvent = &sStartConversationRequestEventStream_ConfigurationEvent
+var StartConversationRequestEventStream_AudioInputEvent = &sStartConversationRequestEventStream_AudioInputEvent
+var StartConversationRequestEventStream_DTMFInputEvent = &sStartConversationRequestEventStream_DTMFInputEvent
+var StartConversationRequestEventStream_TextInputEvent = &sStartConversationRequestEventStream_TextInputEvent
+var StartConversationRequestEventStream_PlaybackCompletionEvent = &sStartConversationRequestEventStream_PlaybackCompletionEvent
+var StartConversationRequestEventStream_DisconnectionEvent = &sStartConversationRequestEventStream_DisconnectionEvent
+
+var StartConversationResponseEventStream = &sStartConversationResponseEventStream
+var StartConversationResponseEventStream_PlaybackInterruptionEvent = &sStartConversationResponseEventStream_PlaybackInterruptionEvent
+var StartConversationResponseEventStream_TranscriptEvent = &sStartConversationResponseEventStream_TranscriptEvent
+var StartConversationResponseEventStream_IntentResultEvent = &sStartConversationResponseEventStream_IntentResultEvent
+var StartConversationResponseEventStream_TextResponseEvent = &sStartConversationResponseEventStream_TextResponseEvent
+var StartConversationResponseEventStream_AudioResponseEvent = &sStartConversationResponseEventStream_AudioResponseEvent
+var StartConversationResponseEventStream_HeartbeatEvent = &sStartConversationResponseEventStream_HeartbeatEvent
+var StartConversationResponseEventStream_AccessDeniedException = &sStartConversationResponseEventStream_AccessDeniedException
+var StartConversationResponseEventStream_ResourceNotFoundException = &sStartConversationResponseEventStream_ResourceNotFoundException
+var StartConversationResponseEventStream_ValidationException = &sStartConversationResponseEventStream_ValidationException
+var StartConversationResponseEventStream_ThrottlingException = &sStartConversationResponseEventStream_ThrottlingException
+var StartConversationResponseEventStream_InternalServerException = &sStartConversationResponseEventStream_InternalServerException
+var StartConversationResponseEventStream_ConflictException = &sStartConversationResponseEventStream_ConflictException
+var StartConversationResponseEventStream_DependencyFailedException = &sStartConversationResponseEventStream_DependencyFailedException
+var StartConversationResponseEventStream_BadGatewayException = &sStartConversationResponseEventStream_BadGatewayException
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _StringMap = &s_StringMap
+var _StringMap_key = &s_StringMap_key
+var _StringMap_value = &s_StringMap_value
+
+var StyleType = &sStyleType
+var StyleType_DEFAULT = &sStyleType_DEFAULT
+var StyleType_SPELL_BY_LETTER = &sStyleType_SPELL_BY_LETTER
+var StyleType_SPELL_BY_WORD = &sStyleType_SPELL_BY_WORD
+
+var _Text = &s_Text
+
+var TextInputEvent = &sTextInputEvent
+var TextInputEvent_text = &sTextInputEvent_text
+var TextInputEvent_eventId = &sTextInputEvent_eventId
+var TextInputEvent_clientTimestampMillis = &sTextInputEvent_clientTimestampMillis
+
+var TextResponseEvent = &sTextResponseEvent
+var TextResponseEvent_messages = &sTextResponseEvent_messages
+var TextResponseEvent_eventId = &sTextResponseEvent_eventId
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var TranscriptEvent = &sTranscriptEvent
+var TranscriptEvent_transcript = &sTranscriptEvent_transcript
+var TranscriptEvent_eventId = &sTranscriptEvent_eventId
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var Value = &sValue
+var Value_originalValue = &sValue_originalValue
+var Value_interpretedValue = &sValue_interpretedValue
+var Value_resolvedValues = &sValue_resolvedValues
+
+var _Values = &s_Values
+var _Values_member = &s_Values_member
+
+var DeleteSessionRequest = &sDeleteSessionRequest
+var DeleteSessionRequest_botId = &sDeleteSessionRequest_botId
+var DeleteSessionRequest_botAliasId = &sDeleteSessionRequest_botAliasId
+var DeleteSessionRequest_localeId = &sDeleteSessionRequest_localeId
+var DeleteSessionRequest_sessionId = &sDeleteSessionRequest_sessionId
+
+var DeleteSessionResponse = &sDeleteSessionResponse
+var DeleteSessionResponse_botId = &sDeleteSessionResponse_botId
+var DeleteSessionResponse_botAliasId = &sDeleteSessionResponse_botAliasId
+var DeleteSessionResponse_localeId = &sDeleteSessionResponse_localeId
+var DeleteSessionResponse_sessionId = &sDeleteSessionResponse_sessionId
+
+var GetSessionRequest = &sGetSessionRequest
+var GetSessionRequest_botId = &sGetSessionRequest_botId
+var GetSessionRequest_botAliasId = &sGetSessionRequest_botAliasId
+var GetSessionRequest_localeId = &sGetSessionRequest_localeId
+var GetSessionRequest_sessionId = &sGetSessionRequest_sessionId
+
+var GetSessionResponse = &sGetSessionResponse
+var GetSessionResponse_sessionId = &sGetSessionResponse_sessionId
+var GetSessionResponse_messages = &sGetSessionResponse_messages
+var GetSessionResponse_interpretations = &sGetSessionResponse_interpretations
+var GetSessionResponse_sessionState = &sGetSessionResponse_sessionState
+
+var PutSessionRequest = &sPutSessionRequest
+var PutSessionRequest_botId = &sPutSessionRequest_botId
+var PutSessionRequest_botAliasId = &sPutSessionRequest_botAliasId
+var PutSessionRequest_localeId = &sPutSessionRequest_localeId
+var PutSessionRequest_sessionId = &sPutSessionRequest_sessionId
+var PutSessionRequest_messages = &sPutSessionRequest_messages
+var PutSessionRequest_sessionState = &sPutSessionRequest_sessionState
+var PutSessionRequest_requestAttributes = &sPutSessionRequest_requestAttributes
+var PutSessionRequest_responseContentType = &sPutSessionRequest_responseContentType
+
+var PutSessionResponse = &sPutSessionResponse
+var PutSessionResponse_contentType = &sPutSessionResponse_contentType
+var PutSessionResponse_messages = &sPutSessionResponse_messages
+var PutSessionResponse_sessionState = &sPutSessionResponse_sessionState
+var PutSessionResponse_requestAttributes = &sPutSessionResponse_requestAttributes
+var PutSessionResponse_sessionId = &sPutSessionResponse_sessionId
+var PutSessionResponse_audioStream = &sPutSessionResponse_audioStream
+
+var RecognizeTextRequest = &sRecognizeTextRequest
+var RecognizeTextRequest_botId = &sRecognizeTextRequest_botId
+var RecognizeTextRequest_botAliasId = &sRecognizeTextRequest_botAliasId
+var RecognizeTextRequest_localeId = &sRecognizeTextRequest_localeId
+var RecognizeTextRequest_sessionId = &sRecognizeTextRequest_sessionId
+var RecognizeTextRequest_text = &sRecognizeTextRequest_text
+var RecognizeTextRequest_sessionState = &sRecognizeTextRequest_sessionState
+var RecognizeTextRequest_requestAttributes = &sRecognizeTextRequest_requestAttributes
+
+var RecognizeTextResponse = &sRecognizeTextResponse
+var RecognizeTextResponse_messages = &sRecognizeTextResponse_messages
+var RecognizeTextResponse_sessionState = &sRecognizeTextResponse_sessionState
+var RecognizeTextResponse_interpretations = &sRecognizeTextResponse_interpretations
+var RecognizeTextResponse_requestAttributes = &sRecognizeTextResponse_requestAttributes
+var RecognizeTextResponse_sessionId = &sRecognizeTextResponse_sessionId
+var RecognizeTextResponse_recognizedBotMember = &sRecognizeTextResponse_recognizedBotMember
+
+var RecognizeUtteranceRequest = &sRecognizeUtteranceRequest
+var RecognizeUtteranceRequest_botId = &sRecognizeUtteranceRequest_botId
+var RecognizeUtteranceRequest_botAliasId = &sRecognizeUtteranceRequest_botAliasId
+var RecognizeUtteranceRequest_localeId = &sRecognizeUtteranceRequest_localeId
+var RecognizeUtteranceRequest_sessionId = &sRecognizeUtteranceRequest_sessionId
+var RecognizeUtteranceRequest_sessionState = &sRecognizeUtteranceRequest_sessionState
+var RecognizeUtteranceRequest_requestAttributes = &sRecognizeUtteranceRequest_requestAttributes
+var RecognizeUtteranceRequest_requestContentType = &sRecognizeUtteranceRequest_requestContentType
+var RecognizeUtteranceRequest_responseContentType = &sRecognizeUtteranceRequest_responseContentType
+var RecognizeUtteranceRequest_inputStream = &sRecognizeUtteranceRequest_inputStream
+
+var RecognizeUtteranceResponse = &sRecognizeUtteranceResponse
+var RecognizeUtteranceResponse_inputMode = &sRecognizeUtteranceResponse_inputMode
+var RecognizeUtteranceResponse_contentType = &sRecognizeUtteranceResponse_contentType
+var RecognizeUtteranceResponse_messages = &sRecognizeUtteranceResponse_messages
+var RecognizeUtteranceResponse_interpretations = &sRecognizeUtteranceResponse_interpretations
+var RecognizeUtteranceResponse_sessionState = &sRecognizeUtteranceResponse_sessionState
+var RecognizeUtteranceResponse_requestAttributes = &sRecognizeUtteranceResponse_requestAttributes
+var RecognizeUtteranceResponse_sessionId = &sRecognizeUtteranceResponse_sessionId
+var RecognizeUtteranceResponse_inputTranscript = &sRecognizeUtteranceResponse_inputTranscript
+var RecognizeUtteranceResponse_audioStream = &sRecognizeUtteranceResponse_audioStream
+var RecognizeUtteranceResponse_recognizedBotMember = &sRecognizeUtteranceResponse_recognizedBotMember
+
+var StartConversationRequest = &sStartConversationRequest
+var StartConversationRequest_botId = &sStartConversationRequest_botId
+var StartConversationRequest_botAliasId = &sStartConversationRequest_botAliasId
+var StartConversationRequest_localeId = &sStartConversationRequest_localeId
+var StartConversationRequest_sessionId = &sStartConversationRequest_sessionId
+var StartConversationRequest_conversationMode = &sStartConversationRequest_conversationMode
+var StartConversationRequest_requestEventStream = &sStartConversationRequest_requestEventStream
+
+var StartConversationResponse = &sStartConversationResponse
+var StartConversationResponse_responseEventStream = &sStartConversationResponse_responseEventStream
+
+var AWSDeepSenseRunTimeServiceApi2_0 = &smithy.ServiceSchema{Schema: &s_AWSDeepSenseRunTimeServiceApi2_0, Version: "2020-08-07"}

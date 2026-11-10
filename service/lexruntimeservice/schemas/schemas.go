@@ -4,1030 +4,763 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeleteSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "DeleteSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
-	URI:  "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
-	Code: 200})
+var (
+	iDeleteSession                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "DeleteSession"}
+	iGetSession                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "GetSession"}
+	iPostContent                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PostContent"}
+	iPostText                             = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PostText"}
+	iPutSession                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PutSession"}
+	i_AWSDeepSenseRunTimeService          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "AWSDeepSenseRunTimeService"}
+	i_Accept                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "Accept"}
+	iActiveContext                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ActiveContext"}
+	i_ActiveContextName                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ActiveContextName"}
+	i_ActiveContextParametersMap          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ActiveContextParametersMap"}
+	i_ActiveContextsList                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ActiveContextsList"}
+	iActiveContextTimeToLive              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ActiveContextTimeToLive"}
+	i_ActiveContextTimeToLiveInSeconds    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ActiveContextTimeToLiveInSeconds"}
+	i_ActiveContextTurnsToLive            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ActiveContextTurnsToLive"}
+	iBadGatewayException                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "BadGatewayException"}
+	iBadRequestException                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "BadRequestException"}
+	i_BlobStream                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "BlobStream"}
+	i_BotAlias                            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "BotAlias"}
+	i_BotName                             = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "BotName"}
+	i_BotVersion                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "BotVersion"}
+	iButton                               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "Button"}
+	i_ButtonTextStringWithLength          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ButtonTextStringWithLength"}
+	i_ButtonValueStringWithLength         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ButtonValueStringWithLength"}
+	iConfirmationStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ConfirmationStatus"}
+	iConflictException                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ConflictException"}
+	iContentType                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ContentType"}
+	iDependencyFailedException            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "DependencyFailedException"}
+	iDialogAction                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "DialogAction"}
+	iDialogActionType                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "DialogActionType"}
+	iDialogState                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "DialogState"}
+	i_Double                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "Double"}
+	i_ErrorMessage                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ErrorMessage"}
+	iFulfillmentState                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "FulfillmentState"}
+	iGenericAttachment                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "GenericAttachment"}
+	i_genericAttachmentList               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "genericAttachmentList"}
+	i_HttpContentType                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "HttpContentType"}
+	iIntentConfidence                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "IntentConfidence"}
+	i_IntentList                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "IntentList"}
+	i_IntentName                          = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "IntentName"}
+	iIntentSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "IntentSummary"}
+	i_IntentSummaryCheckpointLabel        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "IntentSummaryCheckpointLabel"}
+	i_IntentSummaryList                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "IntentSummaryList"}
+	iInternalFailureException             = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "InternalFailureException"}
+	iLimitExceededException               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "LimitExceededException"}
+	i_listOfButtons                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "listOfButtons"}
+	iLoopDetectedException                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "LoopDetectedException"}
+	iMessageFormatType                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "MessageFormatType"}
+	iNotAcceptableException               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "NotAcceptableException"}
+	iNotFoundException                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "NotFoundException"}
+	i_ParameterName                       = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ParameterName"}
+	iPredictedIntent                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PredictedIntent"}
+	iRequestTimeoutException              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "RequestTimeoutException"}
+	iResponseCard                         = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "ResponseCard"}
+	i_SensitiveString                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SensitiveString"}
+	i_SensitiveStringUnbounded            = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SensitiveStringUnbounded"}
+	i_SentimentLabel                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SentimentLabel"}
+	iSentimentResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SentimentResponse"}
+	i_SentimentScore                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SentimentScore"}
+	i_String                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "String"}
+	i_StringMap                           = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "StringMap"}
+	i_StringUrlWithLength                 = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "StringUrlWithLength"}
+	i_StringWithLength                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "StringWithLength"}
+	i_SynthesizedJsonActiveContextsString = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SynthesizedJsonActiveContextsString"}
+	i_SynthesizedJsonAttributesString     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SynthesizedJsonAttributesString"}
+	i_SynthesizedJsonString               = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "SynthesizedJsonString"}
+	i_Text                                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "Text"}
+	iUnsupportedMediaTypeException        = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "UnsupportedMediaTypeException"}
+	i_UserId                              = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "UserId"}
+	iDeleteSessionRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "DeleteSessionRequest"}
+	iDeleteSessionResponse                = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "DeleteSessionResponse"}
+	iGetSessionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "GetSessionRequest"}
+	iGetSessionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "GetSessionResponse"}
+	iPostContentRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PostContentRequest"}
+	iPostContentResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PostContentResponse"}
+	iPostTextRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PostTextRequest"}
+	iPostTextResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PostTextResponse"}
+	iPutSessionRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PutSessionRequest"}
+	iPutSessionResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.lexruntimeservice", Name: "PutSessionResponse"}
+	pUnit                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var GetSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "GetSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
-	Code: 200})
-
-var PostContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PostContent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
+	URI:  "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/bot/{botName}/alias/{botAlias}/user/{userId}/content",
-	Code: 200})
-
-var PostText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PostText",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/bot/{botName}/alias/{botAlias}/user/{userId}/text",
-	Code: 200})
-
-var PutSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PutSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/bot/{botName}/alias/{botAlias}/user/{userId}/session",
-	Code: 200})
-
-var _AWSDeepSenseRunTimeService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "AWSDeepSenseRunTimeService",
-}, smithy.ShapeTypeService, 0)
-
-var AWSDeepSenseRunTimeService = smithy.NewServiceSchema(_AWSDeepSenseRunTimeService, "2016-11-28")
-
-var _Accept = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "Accept",
-}, smithy.ShapeTypeString, 0)
-
-var ActiveContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ActiveContext",
-}, smithy.ShapeTypeStructure, 3)
-var ActiveContext_name *smithy.Schema
-
-var ActiveContext_timeToLive *smithy.Schema
-
-var ActiveContext_parameters *smithy.Schema
-
-var _ActiveContextName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ActiveContextName",
-}, smithy.ShapeTypeString, 0)
-
-var _ActiveContextParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ActiveContextParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _ActiveContextParametersMap_key *smithy.Schema
-
-var _ActiveContextParametersMap_value *smithy.Schema
-
-var _ActiveContextsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ActiveContextsList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _ActiveContextsList_member *smithy.Schema
-
-var ActiveContextTimeToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ActiveContextTimeToLive",
-}, smithy.ShapeTypeStructure, 2)
-var ActiveContextTimeToLive_timeToLiveInSeconds *smithy.Schema
-
-var ActiveContextTimeToLive_turnsToLive *smithy.Schema
-
-var _ActiveContextTimeToLiveInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ActiveContextTimeToLiveInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ActiveContextTurnsToLive = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ActiveContextTurnsToLive",
-}, smithy.ShapeTypeInteger, 0)
-
-var BadGatewayException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "BadGatewayException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502})
-var BadGatewayException_Message *smithy.Schema
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_message *smithy.Schema
-
-var _BlobStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "BlobStream",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _BotAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "BotAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _BotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "BotName",
-}, smithy.ShapeTypeString, 0)
-
-var _BotVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "BotVersion",
-}, smithy.ShapeTypeString, 0)
-
-var Button = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "Button",
-}, smithy.ShapeTypeStructure, 2)
-var Button_text *smithy.Schema
-
-var Button_value *smithy.Schema
-
-var _ButtonTextStringWithLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ButtonTextStringWithLength",
-}, smithy.ShapeTypeString, 0)
-
-var _ButtonValueStringWithLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ButtonValueStringWithLength",
-}, smithy.ShapeTypeString, 0)
-
-var ConfirmationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ConfirmationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ConfirmationStatus_NONE *smithy.Schema
-
-var ConfirmationStatus_CONFIRMED *smithy.Schema
-
-var ConfirmationStatus_DENIED *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ContentType",
-}, smithy.ShapeTypeEnum, 1)
-var ContentType_GENERIC *smithy.Schema
-
-var DependencyFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "DependencyFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var DependencyFailedException_Message *smithy.Schema
-
-var DialogAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "DialogAction",
-}, smithy.ShapeTypeStructure, 7)
-var DialogAction_type *smithy.Schema
-
-var DialogAction_intentName *smithy.Schema
-
-var DialogAction_slots *smithy.Schema
-
-var DialogAction_slotToElicit *smithy.Schema
-
-var DialogAction_fulfillmentState *smithy.Schema
-
-var DialogAction_message *smithy.Schema
-
-var DialogAction_messageFormat *smithy.Schema
-
-var DialogActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "DialogActionType",
-}, smithy.ShapeTypeEnum, 5)
-var DialogActionType_ELICIT_INTENT *smithy.Schema
-
-var DialogActionType_CONFIRM_INTENT *smithy.Schema
-
-var DialogActionType_ELICIT_SLOT *smithy.Schema
-
-var DialogActionType_CLOSE *smithy.Schema
-
-var DialogActionType_DELEGATE *smithy.Schema
-
-var DialogState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "DialogState",
-}, smithy.ShapeTypeEnum, 6)
-var DialogState_ELICIT_INTENT *smithy.Schema
-
-var DialogState_CONFIRM_INTENT *smithy.Schema
-
-var DialogState_ELICIT_SLOT *smithy.Schema
-
-var DialogState_FULFILLED *smithy.Schema
-
-var DialogState_READY_FOR_FULFILLMENT *smithy.Schema
-
-var DialogState_FAILED *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var FulfillmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "FulfillmentState",
-}, smithy.ShapeTypeEnum, 3)
-var FulfillmentState_FULFILLED *smithy.Schema
-
-var FulfillmentState_FAILED *smithy.Schema
-
-var FulfillmentState_READY_FOR_FULFILLMENT *smithy.Schema
-
-var GenericAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "GenericAttachment",
-}, smithy.ShapeTypeStructure, 5)
-var GenericAttachment_title *smithy.Schema
-
-var GenericAttachment_subTitle *smithy.Schema
-
-var GenericAttachment_attachmentLinkUrl *smithy.Schema
-
-var GenericAttachment_imageUrl *smithy.Schema
-
-var GenericAttachment_buttons *smithy.Schema
-
-var _genericAttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "genericAttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _genericAttachmentList_member *smithy.Schema
-
-var _HttpContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "HttpContentType",
-}, smithy.ShapeTypeString, 0)
-
-var IntentConfidence = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "IntentConfidence",
-}, smithy.ShapeTypeStructure, 1)
-var IntentConfidence_score *smithy.Schema
-
-var _IntentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "IntentList",
-}, smithy.ShapeTypeList, 1)
-var _IntentList_member *smithy.Schema
-
-var _IntentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "IntentName",
-}, smithy.ShapeTypeString, 0)
-
-var IntentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "IntentSummary",
-}, smithy.ShapeTypeStructure, 7)
-var IntentSummary_intentName *smithy.Schema
-
-var IntentSummary_checkpointLabel *smithy.Schema
-
-var IntentSummary_slots *smithy.Schema
-
-var IntentSummary_confirmationStatus *smithy.Schema
-
-var IntentSummary_dialogActionType *smithy.Schema
-
-var IntentSummary_fulfillmentState *smithy.Schema
-
-var IntentSummary_slotToElicit *smithy.Schema
-
-var _IntentSummaryCheckpointLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "IntentSummaryCheckpointLabel",
-}, smithy.ShapeTypeString, 0)
-
-var _IntentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "IntentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _IntentSummaryList_member *smithy.Schema
-
-var InternalFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "InternalFailureException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalFailureException_message *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var LimitExceededException_retryAfterSeconds *smithy.Schema
-
-var LimitExceededException_message *smithy.Schema
-
-var _listOfButtons = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "listOfButtons",
-}, smithy.ShapeTypeList, 1)
-var _listOfButtons_member *smithy.Schema
-
-var LoopDetectedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "LoopDetectedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 508})
-var LoopDetectedException_Message *smithy.Schema
-
-var MessageFormatType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "MessageFormatType",
-}, smithy.ShapeTypeEnum, 4)
-var MessageFormatType_PLAIN_TEXT *smithy.Schema
-
-var MessageFormatType_CUSTOM_PAYLOAD *smithy.Schema
-
-var MessageFormatType_SSML *smithy.Schema
-
-var MessageFormatType_COMPOSITE *smithy.Schema
-
-var NotAcceptableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "NotAcceptableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 406})
-var NotAcceptableException_message *smithy.Schema
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_message *smithy.Schema
-
-var _ParameterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ParameterName",
-}, smithy.ShapeTypeString, 0)
-
-var PredictedIntent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PredictedIntent",
-}, smithy.ShapeTypeStructure, 3)
-var PredictedIntent_intentName *smithy.Schema
-
-var PredictedIntent_nluIntentConfidence *smithy.Schema
-
-var PredictedIntent_slots *smithy.Schema
-
-var RequestTimeoutException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "RequestTimeoutException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 408})
-var RequestTimeoutException_message *smithy.Schema
-
-var ResponseCard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "ResponseCard",
-}, smithy.ShapeTypeStructure, 3)
-var ResponseCard_version *smithy.Schema
-
-var ResponseCard_contentType *smithy.Schema
-
-var ResponseCard_genericAttachments *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SensitiveStringUnbounded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SensitiveStringUnbounded",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _SentimentLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SentimentLabel",
-}, smithy.ShapeTypeString, 0)
-
-var SentimentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SentimentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var SentimentResponse_sentimentLabel *smithy.Schema
-
-var SentimentResponse_sentimentScore *smithy.Schema
-
-var _SentimentScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SentimentScore",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var _StringUrlWithLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "StringUrlWithLength",
-}, smithy.ShapeTypeString, 0)
-
-var _StringWithLength = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "StringWithLength",
-}, smithy.ShapeTypeString, 0)
-
-var _SynthesizedJsonActiveContextsString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SynthesizedJsonActiveContextsString",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonAttributesString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SynthesizedJsonAttributesString",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"},
-	&smithytraits.Sensitive{})
-
-var _SynthesizedJsonString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "SynthesizedJsonString",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/json"})
-
-var _Text = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "Text",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var UnsupportedMediaTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "UnsupportedMediaTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 415})
-var UnsupportedMediaTypeException_message *smithy.Schema
-
-var _UserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "UserId",
-}, smithy.ShapeTypeString, 0)
-
-var DeleteSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "DeleteSessionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteSessionRequest_botName *smithy.Schema
-
-var DeleteSessionRequest_botAlias *smithy.Schema
-
-var DeleteSessionRequest_userId *smithy.Schema
-
-var DeleteSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "DeleteSessionResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteSessionResponse_botName *smithy.Schema
-
-var DeleteSessionResponse_botAlias *smithy.Schema
-
-var DeleteSessionResponse_userId *smithy.Schema
-
-var DeleteSessionResponse_sessionId *smithy.Schema
-
-var GetSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "GetSessionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetSessionRequest_botName *smithy.Schema
-
-var GetSessionRequest_botAlias *smithy.Schema
-
-var GetSessionRequest_userId *smithy.Schema
-
-var GetSessionRequest_checkpointLabelFilter *smithy.Schema
-
-var GetSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "GetSessionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetSessionResponse_recentIntentSummaryView *smithy.Schema
-
-var GetSessionResponse_sessionAttributes *smithy.Schema
-
-var GetSessionResponse_sessionId *smithy.Schema
-
-var GetSessionResponse_dialogAction *smithy.Schema
-
-var GetSessionResponse_activeContexts *smithy.Schema
-
-var PostContentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PostContentRequest",
-}, smithy.ShapeTypeStructure, 9)
-var PostContentRequest_botName *smithy.Schema
-
-var PostContentRequest_botAlias *smithy.Schema
-
-var PostContentRequest_userId *smithy.Schema
-
-var PostContentRequest_sessionAttributes *smithy.Schema
-
-var PostContentRequest_requestAttributes *smithy.Schema
-
-var PostContentRequest_contentType *smithy.Schema
-
-var PostContentRequest_accept *smithy.Schema
-
-var PostContentRequest_inputStream *smithy.Schema
-
-var PostContentRequest_activeContexts *smithy.Schema
-
-var PostContentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PostContentResponse",
-}, smithy.ShapeTypeStructure, 18)
-var PostContentResponse_contentType *smithy.Schema
-
-var PostContentResponse_intentName *smithy.Schema
-
-var PostContentResponse_nluIntentConfidence *smithy.Schema
-
-var PostContentResponse_alternativeIntents *smithy.Schema
-
-var PostContentResponse_slots *smithy.Schema
-
-var PostContentResponse_sessionAttributes *smithy.Schema
-
-var PostContentResponse_sentimentResponse *smithy.Schema
-
-var PostContentResponse_message *smithy.Schema
-
-var PostContentResponse_encodedMessage *smithy.Schema
-
-var PostContentResponse_messageFormat *smithy.Schema
-
-var PostContentResponse_dialogState *smithy.Schema
-
-var PostContentResponse_slotToElicit *smithy.Schema
-
-var PostContentResponse_inputTranscript *smithy.Schema
-
-var PostContentResponse_encodedInputTranscript *smithy.Schema
-
-var PostContentResponse_audioStream *smithy.Schema
-
-var PostContentResponse_botVersion *smithy.Schema
-
-var PostContentResponse_sessionId *smithy.Schema
-
-var PostContentResponse_activeContexts *smithy.Schema
-
-var PostTextRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PostTextRequest",
-}, smithy.ShapeTypeStructure, 7)
-var PostTextRequest_botName *smithy.Schema
-
-var PostTextRequest_botAlias *smithy.Schema
-
-var PostTextRequest_userId *smithy.Schema
-
-var PostTextRequest_sessionAttributes *smithy.Schema
-
-var PostTextRequest_requestAttributes *smithy.Schema
-
-var PostTextRequest_inputText *smithy.Schema
-
-var PostTextRequest_activeContexts *smithy.Schema
-
-var PostTextResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PostTextResponse",
-}, smithy.ShapeTypeStructure, 14)
-var PostTextResponse_intentName *smithy.Schema
-
-var PostTextResponse_nluIntentConfidence *smithy.Schema
-
-var PostTextResponse_alternativeIntents *smithy.Schema
-
-var PostTextResponse_slots *smithy.Schema
-
-var PostTextResponse_sessionAttributes *smithy.Schema
-
-var PostTextResponse_message *smithy.Schema
-
-var PostTextResponse_sentimentResponse *smithy.Schema
-
-var PostTextResponse_messageFormat *smithy.Schema
-
-var PostTextResponse_dialogState *smithy.Schema
-
-var PostTextResponse_slotToElicit *smithy.Schema
-
-var PostTextResponse_responseCard *smithy.Schema
-
-var PostTextResponse_sessionId *smithy.Schema
-
-var PostTextResponse_botVersion *smithy.Schema
-
-var PostTextResponse_activeContexts *smithy.Schema
-
-var PutSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PutSessionRequest",
-}, smithy.ShapeTypeStructure, 8)
-var PutSessionRequest_botName *smithy.Schema
-
-var PutSessionRequest_botAlias *smithy.Schema
-
-var PutSessionRequest_userId *smithy.Schema
-
-var PutSessionRequest_sessionAttributes *smithy.Schema
-
-var PutSessionRequest_dialogAction *smithy.Schema
-
-var PutSessionRequest_recentIntentSummaryView *smithy.Schema
-
-var PutSessionRequest_accept *smithy.Schema
-
-var PutSessionRequest_activeContexts *smithy.Schema
-
-var PutSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lexruntimeservice",
-	Name:      "PutSessionResponse",
-}, smithy.ShapeTypeStructure, 12)
-var PutSessionResponse_contentType *smithy.Schema
-
-var PutSessionResponse_intentName *smithy.Schema
-
-var PutSessionResponse_slots *smithy.Schema
-
-var PutSessionResponse_sessionAttributes *smithy.Schema
-
-var PutSessionResponse_message *smithy.Schema
-
-var PutSessionResponse_encodedMessage *smithy.Schema
-
-var PutSessionResponse_messageFormat *smithy.Schema
-
-var PutSessionResponse_dialogState *smithy.Schema
-
-var PutSessionResponse_slotToElicit *smithy.Schema
-
-var PutSessionResponse_audioStream *smithy.Schema
-
-var PutSessionResponse_sessionId *smithy.Schema
-
-var PutSessionResponse_activeContexts *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ActiveContextTimeToLive_timeToLiveInSeconds = ActiveContextTimeToLive.AddMember("timeToLiveInSeconds", _ActiveContextTimeToLiveInSeconds)
-
-	ActiveContextTimeToLive_turnsToLive = ActiveContextTimeToLive.AddMember("turnsToLive", _ActiveContextTurnsToLive)
-
-	_ActiveContextParametersMap_key = _ActiveContextParametersMap.AddMember("key", _ParameterName)
-
-	_ActiveContextParametersMap_value = _ActiveContextParametersMap.AddMember("value", _Text)
-
-	ActiveContext_name = ActiveContext.AddMember("name", _ActiveContextName)
-
-	ActiveContext_timeToLive = ActiveContext.AddMember("timeToLive", ActiveContextTimeToLive)
-
-	ActiveContext_parameters = ActiveContext.AddMember("parameters", _ActiveContextParametersMap)
-
-	_ActiveContextsList_member = _ActiveContextsList.AddMember("member", ActiveContext)
-
-	BadGatewayException_Message = BadGatewayException.AddMember("Message", _ErrorMessage)
-
-	BadRequestException_message = BadRequestException.AddMember("message", _String)
-
-	Button_text = Button.AddMember("text", _ButtonTextStringWithLength)
-
-	Button_value = Button.AddMember("value", _ButtonValueStringWithLength)
-
-	ConfirmationStatus_NONE = ConfirmationStatus.AddMember("NONE", smithyprelude.Unit)
-
-	ConfirmationStatus_CONFIRMED = ConfirmationStatus.AddMember("CONFIRMED", smithyprelude.Unit)
-
-	ConfirmationStatus_DENIED = ConfirmationStatus.AddMember("DENIED", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ContentType_GENERIC = ContentType.AddMember("GENERIC", smithyprelude.Unit)
-
-	DependencyFailedException_Message = DependencyFailedException.AddMember("Message", _ErrorMessage)
-
-	DialogActionType_ELICIT_INTENT = DialogActionType.AddMember("ELICIT_INTENT", smithyprelude.Unit)
-
-	DialogActionType_CONFIRM_INTENT = DialogActionType.AddMember("CONFIRM_INTENT", smithyprelude.Unit)
-
-	DialogActionType_ELICIT_SLOT = DialogActionType.AddMember("ELICIT_SLOT", smithyprelude.Unit)
-
-	DialogActionType_CLOSE = DialogActionType.AddMember("CLOSE", smithyprelude.Unit)
-
-	DialogActionType_DELEGATE = DialogActionType.AddMember("DELEGATE", smithyprelude.Unit)
-
-	_StringMap_key = _StringMap.AddMember("key", _String)
-
-	_StringMap_value = _StringMap.AddMember("value", _String)
-
-	FulfillmentState_FULFILLED = FulfillmentState.AddMember("FULFILLED", smithyprelude.Unit)
-
-	FulfillmentState_FAILED = FulfillmentState.AddMember("FAILED", smithyprelude.Unit)
-
-	FulfillmentState_READY_FOR_FULFILLMENT = FulfillmentState.AddMember("READY_FOR_FULFILLMENT", smithyprelude.Unit)
-
-	MessageFormatType_PLAIN_TEXT = MessageFormatType.AddMember("PLAIN_TEXT", smithyprelude.Unit)
-
-	MessageFormatType_CUSTOM_PAYLOAD = MessageFormatType.AddMember("CUSTOM_PAYLOAD", smithyprelude.Unit)
-
-	MessageFormatType_SSML = MessageFormatType.AddMember("SSML", smithyprelude.Unit)
-
-	MessageFormatType_COMPOSITE = MessageFormatType.AddMember("COMPOSITE", smithyprelude.Unit)
-
-	DialogAction_type = DialogAction.AddMember("type", DialogActionType)
-
-	DialogAction_intentName = DialogAction.AddMember("intentName", _IntentName)
-
-	DialogAction_slots = DialogAction.AddMember("slots", _StringMap)
-
-	DialogAction_slotToElicit = DialogAction.AddMember("slotToElicit", _String)
-
-	DialogAction_fulfillmentState = DialogAction.AddMember("fulfillmentState", FulfillmentState)
-
-	DialogAction_message = DialogAction.AddMember("message", _Text)
-
-	DialogAction_messageFormat = DialogAction.AddMember("messageFormat", MessageFormatType)
-
-	DialogState_ELICIT_INTENT = DialogState.AddMember("ELICIT_INTENT", smithyprelude.Unit)
-
-	DialogState_CONFIRM_INTENT = DialogState.AddMember("CONFIRM_INTENT", smithyprelude.Unit)
-
-	DialogState_ELICIT_SLOT = DialogState.AddMember("ELICIT_SLOT", smithyprelude.Unit)
-
-	DialogState_FULFILLED = DialogState.AddMember("FULFILLED", smithyprelude.Unit)
-
-	DialogState_READY_FOR_FULFILLMENT = DialogState.AddMember("READY_FOR_FULFILLMENT", smithyprelude.Unit)
-
-	DialogState_FAILED = DialogState.AddMember("FAILED", smithyprelude.Unit)
-
-	_listOfButtons_member = _listOfButtons.AddMember("member", Button)
-
-	GenericAttachment_title = GenericAttachment.AddMember("title", _StringWithLength)
-
-	GenericAttachment_subTitle = GenericAttachment.AddMember("subTitle", _StringWithLength)
-
-	GenericAttachment_attachmentLinkUrl = GenericAttachment.AddMember("attachmentLinkUrl", _StringUrlWithLength)
-
-	GenericAttachment_imageUrl = GenericAttachment.AddMember("imageUrl", _StringUrlWithLength)
-
-	GenericAttachment_buttons = GenericAttachment.AddMember("buttons", _listOfButtons)
-
-	_genericAttachmentList_member = _genericAttachmentList.AddMember("member", GenericAttachment)
-
-	IntentConfidence_score = IntentConfidence.AddMember("score", _Double)
-
-	PredictedIntent_intentName = PredictedIntent.AddMember("intentName", _IntentName)
-
-	PredictedIntent_nluIntentConfidence = PredictedIntent.AddMember("nluIntentConfidence", IntentConfidence)
-
-	PredictedIntent_slots = PredictedIntent.AddMember("slots", _StringMap)
-
-	_IntentList_member = _IntentList.AddMember("member", PredictedIntent)
-
-	IntentSummary_intentName = IntentSummary.AddMember("intentName", _IntentName)
-
-	IntentSummary_checkpointLabel = IntentSummary.AddMember("checkpointLabel", _IntentSummaryCheckpointLabel)
-
-	IntentSummary_slots = IntentSummary.AddMember("slots", _StringMap)
-
-	IntentSummary_confirmationStatus = IntentSummary.AddMember("confirmationStatus", ConfirmationStatus)
-
-	IntentSummary_dialogActionType = IntentSummary.AddMember("dialogActionType", DialogActionType)
-
-	IntentSummary_fulfillmentState = IntentSummary.AddMember("fulfillmentState", FulfillmentState)
-
-	IntentSummary_slotToElicit = IntentSummary.AddMember("slotToElicit", _String)
-
-	_IntentSummaryList_member = _IntentSummaryList.AddMember("member", IntentSummary)
-
-	InternalFailureException_message = InternalFailureException.AddMember("message", _String)
-
-	LimitExceededException_retryAfterSeconds = LimitExceededException.AddMember("retryAfterSeconds", _String, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _String)
-
-	LoopDetectedException_Message = LoopDetectedException.AddMember("Message", _ErrorMessage)
-
-	NotAcceptableException_message = NotAcceptableException.AddMember("message", _String)
-
-	NotFoundException_message = NotFoundException.AddMember("message", _String)
-
-	RequestTimeoutException_message = RequestTimeoutException.AddMember("message", _String)
-
-	ResponseCard_version = ResponseCard.AddMember("version", _String)
-
-	ResponseCard_contentType = ResponseCard.AddMember("contentType", ContentType)
-
-	ResponseCard_genericAttachments = ResponseCard.AddMember("genericAttachments", _genericAttachmentList)
-
-	SentimentResponse_sentimentLabel = SentimentResponse.AddMember("sentimentLabel", _SentimentLabel)
-
-	SentimentResponse_sentimentScore = SentimentResponse.AddMember("sentimentScore", _SentimentScore)
-
-	UnsupportedMediaTypeException_message = UnsupportedMediaTypeException.AddMember("message", _String)
-
-	DeleteSessionRequest_botName = DeleteSessionRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	DeleteSessionRequest_botAlias = DeleteSessionRequest.AddMember("botAlias", _BotAlias, &smithytraits.HTTPLabel{})
-
-	DeleteSessionRequest_userId = DeleteSessionRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	DeleteSessionResponse_botName = DeleteSessionResponse.AddMember("botName", _BotName)
-
-	DeleteSessionResponse_botAlias = DeleteSessionResponse.AddMember("botAlias", _BotAlias)
-
-	DeleteSessionResponse_userId = DeleteSessionResponse.AddMember("userId", _UserId)
-
-	DeleteSessionResponse_sessionId = DeleteSessionResponse.AddMember("sessionId", _String)
-
-	GetSessionRequest_botName = GetSessionRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	GetSessionRequest_botAlias = GetSessionRequest.AddMember("botAlias", _BotAlias, &smithytraits.HTTPLabel{})
-
-	GetSessionRequest_userId = GetSessionRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	GetSessionRequest_checkpointLabelFilter = GetSessionRequest.AddMember("checkpointLabelFilter", _IntentSummaryCheckpointLabel, &smithytraits.HTTPQuery{Name: "checkpointLabelFilter"})
-
-	GetSessionResponse_recentIntentSummaryView = GetSessionResponse.AddMember("recentIntentSummaryView", _IntentSummaryList)
-
-	GetSessionResponse_sessionAttributes = GetSessionResponse.AddMember("sessionAttributes", _StringMap)
-
-	GetSessionResponse_sessionId = GetSessionResponse.AddMember("sessionId", _String)
-
-	GetSessionResponse_dialogAction = GetSessionResponse.AddMember("dialogAction", DialogAction)
-
-	GetSessionResponse_activeContexts = GetSessionResponse.AddMember("activeContexts", _ActiveContextsList)
-
-	PostContentRequest_botName = PostContentRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	PostContentRequest_botAlias = PostContentRequest.AddMember("botAlias", _BotAlias, &smithytraits.HTTPLabel{})
-
-	PostContentRequest_userId = PostContentRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	PostContentRequest_sessionAttributes = PostContentRequest.AddMember("sessionAttributes", _SynthesizedJsonAttributesString, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-attributes"})
-
-	PostContentRequest_requestAttributes = PostContentRequest.AddMember("requestAttributes", _SynthesizedJsonAttributesString, &smithytraits.HTTPHeader{Name: "x-amz-lex-request-attributes"})
-
-	PostContentRequest_contentType = PostContentRequest.AddMember("contentType", _HttpContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	PostContentRequest_accept = PostContentRequest.AddMember("accept", _Accept, &smithytraits.HTTPHeader{Name: "Accept"})
-
-	PostContentRequest_inputStream = PostContentRequest.AddMember("inputStream", _BlobStream, &smithytraits.HTTPPayload{})
-
-	PostContentRequest_activeContexts = PostContentRequest.AddMember("activeContexts", _SynthesizedJsonActiveContextsString, &smithytraits.HTTPHeader{Name: "x-amz-lex-active-contexts"})
-
-	PostContentResponse_contentType = PostContentResponse.AddMember("contentType", _HttpContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	PostContentResponse_intentName = PostContentResponse.AddMember("intentName", _IntentName, &smithytraits.HTTPHeader{Name: "x-amz-lex-intent-name"})
-
-	PostContentResponse_nluIntentConfidence = PostContentResponse.AddMember("nluIntentConfidence", _SynthesizedJsonString, &smithytraits.HTTPHeader{Name: "x-amz-lex-nlu-intent-confidence"})
-
-	PostContentResponse_alternativeIntents = PostContentResponse.AddMember("alternativeIntents", _SynthesizedJsonString, &smithytraits.HTTPHeader{Name: "x-amz-lex-alternative-intents"})
-
-	PostContentResponse_slots = PostContentResponse.AddMember("slots", _SynthesizedJsonString, &smithytraits.HTTPHeader{Name: "x-amz-lex-slots"})
-
-	PostContentResponse_sessionAttributes = PostContentResponse.AddMember("sessionAttributes", _SynthesizedJsonString, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-attributes"})
-
-	PostContentResponse_sentimentResponse = PostContentResponse.AddMember("sentimentResponse", _String, &smithytraits.HTTPHeader{Name: "x-amz-lex-sentiment"})
-
-	PostContentResponse_message = PostContentResponse.AddMember("message", _Text, &smithytraits.HTTPHeader{Name: "x-amz-lex-message"})
-
-	PostContentResponse_encodedMessage = PostContentResponse.AddMember("encodedMessage", _SensitiveString, &smithytraits.HTTPHeader{Name: "x-amz-lex-encoded-message"})
-
-	PostContentResponse_messageFormat = PostContentResponse.AddMember("messageFormat", MessageFormatType, &smithytraits.HTTPHeader{Name: "x-amz-lex-message-format"})
-
-	PostContentResponse_dialogState = PostContentResponse.AddMember("dialogState", DialogState, &smithytraits.HTTPHeader{Name: "x-amz-lex-dialog-state"})
-
-	PostContentResponse_slotToElicit = PostContentResponse.AddMember("slotToElicit", _String, &smithytraits.HTTPHeader{Name: "x-amz-lex-slot-to-elicit"})
-
-	PostContentResponse_inputTranscript = PostContentResponse.AddMember("inputTranscript", _String, &smithytraits.HTTPHeader{Name: "x-amz-lex-input-transcript"})
-
-	PostContentResponse_encodedInputTranscript = PostContentResponse.AddMember("encodedInputTranscript", _SensitiveStringUnbounded, &smithytraits.HTTPHeader{Name: "x-amz-lex-encoded-input-transcript"})
-
-	PostContentResponse_audioStream = PostContentResponse.AddMember("audioStream", _BlobStream, &smithytraits.HTTPPayload{})
-
-	PostContentResponse_botVersion = PostContentResponse.AddMember("botVersion", _BotVersion, &smithytraits.HTTPHeader{Name: "x-amz-lex-bot-version"})
-
-	PostContentResponse_sessionId = PostContentResponse.AddMember("sessionId", _String, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-id"})
-
-	PostContentResponse_activeContexts = PostContentResponse.AddMember("activeContexts", _SynthesizedJsonActiveContextsString, &smithytraits.HTTPHeader{Name: "x-amz-lex-active-contexts"})
-
-	PostTextRequest_botName = PostTextRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	PostTextRequest_botAlias = PostTextRequest.AddMember("botAlias", _BotAlias, &smithytraits.HTTPLabel{})
-
-	PostTextRequest_userId = PostTextRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	PostTextRequest_sessionAttributes = PostTextRequest.AddMember("sessionAttributes", _StringMap)
-
-	PostTextRequest_requestAttributes = PostTextRequest.AddMember("requestAttributes", _StringMap)
-
-	PostTextRequest_inputText = PostTextRequest.AddMember("inputText", _Text)
-
-	PostTextRequest_activeContexts = PostTextRequest.AddMember("activeContexts", _ActiveContextsList)
-
-	PostTextResponse_intentName = PostTextResponse.AddMember("intentName", _IntentName)
-
-	PostTextResponse_nluIntentConfidence = PostTextResponse.AddMember("nluIntentConfidence", IntentConfidence)
-
-	PostTextResponse_alternativeIntents = PostTextResponse.AddMember("alternativeIntents", _IntentList)
-
-	PostTextResponse_slots = PostTextResponse.AddMember("slots", _StringMap)
-
-	PostTextResponse_sessionAttributes = PostTextResponse.AddMember("sessionAttributes", _StringMap)
-
-	PostTextResponse_message = PostTextResponse.AddMember("message", _Text)
-
-	PostTextResponse_sentimentResponse = PostTextResponse.AddMember("sentimentResponse", SentimentResponse)
-
-	PostTextResponse_messageFormat = PostTextResponse.AddMember("messageFormat", MessageFormatType)
-
-	PostTextResponse_dialogState = PostTextResponse.AddMember("dialogState", DialogState)
-
-	PostTextResponse_slotToElicit = PostTextResponse.AddMember("slotToElicit", _String)
-
-	PostTextResponse_responseCard = PostTextResponse.AddMember("responseCard", ResponseCard)
-
-	PostTextResponse_sessionId = PostTextResponse.AddMember("sessionId", _String)
-
-	PostTextResponse_botVersion = PostTextResponse.AddMember("botVersion", _BotVersion)
-
-	PostTextResponse_activeContexts = PostTextResponse.AddMember("activeContexts", _ActiveContextsList)
-
-	PutSessionRequest_botName = PutSessionRequest.AddMember("botName", _BotName, &smithytraits.HTTPLabel{})
-
-	PutSessionRequest_botAlias = PutSessionRequest.AddMember("botAlias", _BotAlias, &smithytraits.HTTPLabel{})
-
-	PutSessionRequest_userId = PutSessionRequest.AddMember("userId", _UserId, &smithytraits.HTTPLabel{})
-
-	PutSessionRequest_sessionAttributes = PutSessionRequest.AddMember("sessionAttributes", _StringMap)
-
-	PutSessionRequest_dialogAction = PutSessionRequest.AddMember("dialogAction", DialogAction)
-
-	PutSessionRequest_recentIntentSummaryView = PutSessionRequest.AddMember("recentIntentSummaryView", _IntentSummaryList)
-
-	PutSessionRequest_accept = PutSessionRequest.AddMember("accept", _Accept, &smithytraits.HTTPHeader{Name: "Accept"})
-
-	PutSessionRequest_activeContexts = PutSessionRequest.AddMember("activeContexts", _ActiveContextsList)
-
-	PutSessionResponse_contentType = PutSessionResponse.AddMember("contentType", _HttpContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	PutSessionResponse_intentName = PutSessionResponse.AddMember("intentName", _IntentName, &smithytraits.HTTPHeader{Name: "x-amz-lex-intent-name"})
-
-	PutSessionResponse_slots = PutSessionResponse.AddMember("slots", _SynthesizedJsonString, &smithytraits.HTTPHeader{Name: "x-amz-lex-slots"})
-
-	PutSessionResponse_sessionAttributes = PutSessionResponse.AddMember("sessionAttributes", _SynthesizedJsonString, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-attributes"})
-
-	PutSessionResponse_message = PutSessionResponse.AddMember("message", _Text, &smithytraits.HTTPHeader{Name: "x-amz-lex-message"})
-
-	PutSessionResponse_encodedMessage = PutSessionResponse.AddMember("encodedMessage", _SensitiveString, &smithytraits.HTTPHeader{Name: "x-amz-lex-encoded-message"})
-
-	PutSessionResponse_messageFormat = PutSessionResponse.AddMember("messageFormat", MessageFormatType, &smithytraits.HTTPHeader{Name: "x-amz-lex-message-format"})
-
-	PutSessionResponse_dialogState = PutSessionResponse.AddMember("dialogState", DialogState, &smithytraits.HTTPHeader{Name: "x-amz-lex-dialog-state"})
-
-	PutSessionResponse_slotToElicit = PutSessionResponse.AddMember("slotToElicit", _String, &smithytraits.HTTPHeader{Name: "x-amz-lex-slot-to-elicit"})
-
-	PutSessionResponse_audioStream = PutSessionResponse.AddMember("audioStream", _BlobStream, &smithytraits.HTTPPayload{})
-
-	PutSessionResponse_sessionId = PutSessionResponse.AddMember("sessionId", _String, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-id"})
-
-	PutSessionResponse_activeContexts = PutSessionResponse.AddMember("activeContexts", _SynthesizedJsonActiveContextsString, &smithytraits.HTTPHeader{Name: "x-amz-lex-active-contexts"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 508}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 406}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 408}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40100}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x40000}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 415}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "checkpointLabelFilter"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-attributes"}, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-request-attributes"}, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Accept"}}, DirectMask: 0x80}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-active-contexts"}, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-intent-name"}}, DirectMask: 0x80}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-nlu-intent-confidence"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-alternative-intents"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-slots"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-attributes"}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/json"}}, DirectMask: 0x80}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-sentiment"}}, DirectMask: 0x80}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-message"}, &smithytraits.Sensitive{}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-encoded-message"}, &smithytraits.Sensitive{}}, DirectMask: 0x80}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-message-format"}}, DirectMask: 0x80}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-dialog-state"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-slot-to-elicit"}}, DirectMask: 0x80}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-input-transcript"}}, DirectMask: 0x80}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-encoded-input-transcript"}, &smithytraits.Sensitive{}}, DirectMask: 0x80}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-bot-version"}}, DirectMask: 0x80}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-lex-session-id"}}, DirectMask: 0x80}
+
+var mActiveContext = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveContext_name, &sActiveContext_timeToLive, &sActiveContext_parameters}}
+var m_ActiveContextParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActiveContextParametersMap_key, &s_ActiveContextParametersMap_value}}
+var m_ActiveContextsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActiveContextsList_member}}
+var mActiveContextTimeToLive = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveContextTimeToLive_timeToLiveInSeconds, &sActiveContextTimeToLive_turnsToLive}}
+var mBadGatewayException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadGatewayException_Message}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_message}}
+var mButton = smithy.SchemaMembers{List: []*smithy.Schema{&sButton_text, &sButton_value}}
+var mConfirmationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmationStatus_NONE, &sConfirmationStatus_CONFIRMED, &sConfirmationStatus_DENIED}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sContentType_GENERIC}}
+var mDependencyFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyFailedException_Message}}
+var mDialogAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDialogAction_type, &sDialogAction_intentName, &sDialogAction_slots, &sDialogAction_slotToElicit, &sDialogAction_fulfillmentState, &sDialogAction_message, &sDialogAction_messageFormat}}
+var mDialogActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sDialogActionType_ELICIT_INTENT, &sDialogActionType_CONFIRM_INTENT, &sDialogActionType_ELICIT_SLOT, &sDialogActionType_CLOSE, &sDialogActionType_DELEGATE}}
+var mDialogState = smithy.SchemaMembers{List: []*smithy.Schema{&sDialogState_ELICIT_INTENT, &sDialogState_CONFIRM_INTENT, &sDialogState_ELICIT_SLOT, &sDialogState_FULFILLED, &sDialogState_READY_FOR_FULFILLMENT, &sDialogState_FAILED}}
+var mFulfillmentState = smithy.SchemaMembers{List: []*smithy.Schema{&sFulfillmentState_FULFILLED, &sFulfillmentState_FAILED, &sFulfillmentState_READY_FOR_FULFILLMENT}}
+var mGenericAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sGenericAttachment_title, &sGenericAttachment_subTitle, &sGenericAttachment_attachmentLinkUrl, &sGenericAttachment_imageUrl, &sGenericAttachment_buttons}}
+var m_genericAttachmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_genericAttachmentList_member}}
+var mIntentConfidence = smithy.SchemaMembers{List: []*smithy.Schema{&sIntentConfidence_score}}
+var m_IntentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntentList_member}}
+var mIntentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sIntentSummary_intentName, &sIntentSummary_checkpointLabel, &sIntentSummary_slots, &sIntentSummary_confirmationStatus, &sIntentSummary_dialogActionType, &sIntentSummary_fulfillmentState, &sIntentSummary_slotToElicit}}
+var m_IntentSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntentSummaryList_member}}
+var mInternalFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalFailureException_message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_retryAfterSeconds, &sLimitExceededException_message}}
+var m_listOfButtons = smithy.SchemaMembers{List: []*smithy.Schema{&s_listOfButtons_member}}
+var mLoopDetectedException = smithy.SchemaMembers{List: []*smithy.Schema{&sLoopDetectedException_Message}}
+var mMessageFormatType = smithy.SchemaMembers{List: []*smithy.Schema{&sMessageFormatType_PLAIN_TEXT, &sMessageFormatType_CUSTOM_PAYLOAD, &sMessageFormatType_SSML, &sMessageFormatType_COMPOSITE}}
+var mNotAcceptableException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotAcceptableException_message}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_message}}
+var mPredictedIntent = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictedIntent_intentName, &sPredictedIntent_nluIntentConfidence, &sPredictedIntent_slots}}
+var mRequestTimeoutException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestTimeoutException_message}}
+var mResponseCard = smithy.SchemaMembers{List: []*smithy.Schema{&sResponseCard_version, &sResponseCard_contentType, &sResponseCard_genericAttachments}}
+var mSentimentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSentimentResponse_sentimentLabel, &sSentimentResponse_sentimentScore}}
+var m_StringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringMap_key, &s_StringMap_value}}
+var mUnsupportedMediaTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedMediaTypeException_message}}
+var mDeleteSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSessionRequest_botName, &sDeleteSessionRequest_botAlias, &sDeleteSessionRequest_userId}}
+var mDeleteSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSessionResponse_botName, &sDeleteSessionResponse_botAlias, &sDeleteSessionResponse_userId, &sDeleteSessionResponse_sessionId}}
+var mGetSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionRequest_botName, &sGetSessionRequest_botAlias, &sGetSessionRequest_userId, &sGetSessionRequest_checkpointLabelFilter}}
+var mGetSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSessionResponse_recentIntentSummaryView, &sGetSessionResponse_sessionAttributes, &sGetSessionResponse_sessionId, &sGetSessionResponse_dialogAction, &sGetSessionResponse_activeContexts}}
+var mPostContentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPostContentRequest_botName, &sPostContentRequest_botAlias, &sPostContentRequest_userId, &sPostContentRequest_sessionAttributes, &sPostContentRequest_requestAttributes, &sPostContentRequest_contentType, &sPostContentRequest_accept, &sPostContentRequest_inputStream, &sPostContentRequest_activeContexts}, Seed: 2, Slots: []uint16{
+	8, 0, 0, 0, 0, 0, 0, 9, 0, 4, 7, 0, 0, 0, 6, 1, 5, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 3, 2, 0,
+}}
+var mPostContentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPostContentResponse_contentType, &sPostContentResponse_intentName, &sPostContentResponse_nluIntentConfidence, &sPostContentResponse_alternativeIntents, &sPostContentResponse_slots, &sPostContentResponse_sessionAttributes, &sPostContentResponse_sentimentResponse, &sPostContentResponse_message, &sPostContentResponse_encodedMessage, &sPostContentResponse_messageFormat, &sPostContentResponse_dialogState, &sPostContentResponse_slotToElicit, &sPostContentResponse_inputTranscript, &sPostContentResponse_encodedInputTranscript, &sPostContentResponse_audioStream, &sPostContentResponse_botVersion, &sPostContentResponse_sessionId, &sPostContentResponse_activeContexts}, Seed: 10, Slots: []uint16{
+	0, 4, 0, 0, 0, 1, 0, 0, 0, 12, 0, 0, 0, 0, 0, 11, 0, 3, 0, 16, 10, 6, 9, 0,
+	0, 18, 0, 0, 7, 0, 0, 0, 0, 0, 0, 0, 8, 15, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 17, 14, 0, 5, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mPostTextRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPostTextRequest_botName, &sPostTextRequest_botAlias, &sPostTextRequest_userId, &sPostTextRequest_sessionAttributes, &sPostTextRequest_requestAttributes, &sPostTextRequest_inputText, &sPostTextRequest_activeContexts}}
+var mPostTextResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPostTextResponse_intentName, &sPostTextResponse_nluIntentConfidence, &sPostTextResponse_alternativeIntents, &sPostTextResponse_slots, &sPostTextResponse_sessionAttributes, &sPostTextResponse_message, &sPostTextResponse_sentimentResponse, &sPostTextResponse_messageFormat, &sPostTextResponse_dialogState, &sPostTextResponse_slotToElicit, &sPostTextResponse_responseCard, &sPostTextResponse_sessionId, &sPostTextResponse_botVersion, &sPostTextResponse_activeContexts}, Seed: 21, Slots: []uint16{
+	0, 0, 0, 13, 3, 0, 0, 1, 0, 12, 0, 10, 14, 0, 0, 0, 8, 4, 0, 0, 7, 2, 9, 11,
+	0, 0, 0, 5, 0, 6, 0, 0,
+}}
+var mPutSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSessionRequest_botName, &sPutSessionRequest_botAlias, &sPutSessionRequest_userId, &sPutSessionRequest_sessionAttributes, &sPutSessionRequest_dialogAction, &sPutSessionRequest_recentIntentSummaryView, &sPutSessionRequest_accept, &sPutSessionRequest_activeContexts}}
+var mPutSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutSessionResponse_contentType, &sPutSessionResponse_intentName, &sPutSessionResponse_slots, &sPutSessionResponse_sessionAttributes, &sPutSessionResponse_message, &sPutSessionResponse_encodedMessage, &sPutSessionResponse_messageFormat, &sPutSessionResponse_dialogState, &sPutSessionResponse_slotToElicit, &sPutSessionResponse_audioStream, &sPutSessionResponse_sessionId, &sPutSessionResponse_activeContexts}, Seed: 9, Slots: []uint16{
+	0, 12, 5, 0, 0, 0, 6, 0, 2, 4, 0, 0, 9, 0, 0, 0, 0, 7, 1, 8, 0, 11, 0, 0,
+	0, 0, 0, 0, 0, 10, 0, 3,
+}}
+
+var sDeleteSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSession, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSession, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sPostContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContent, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sPostText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostText, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sPutSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSession, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var s_AWSDeepSenseRunTimeService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSDeepSenseRunTimeService, Type: smithy.ShapeTypeService})
+var s_Accept = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Accept, Type: smithy.ShapeTypeString})
+var sActiveContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveContext, Members: &mActiveContext, Type: smithy.ShapeTypeStructure})
+var s_ActiveContextName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextName, Type: smithy.ShapeTypeString})
+var s_ActiveContextParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextParametersMap, Members: &m_ActiveContextParametersMap, Type: smithy.ShapeTypeMap})
+var s_ActiveContextsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextsList, Members: &m_ActiveContextsList, Traits: &t6, Type: smithy.ShapeTypeList})
+var sActiveContextTimeToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveContextTimeToLive, Members: &mActiveContextTimeToLive, Type: smithy.ShapeTypeStructure})
+var s_ActiveContextTimeToLiveInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextTimeToLiveInSeconds, Type: smithy.ShapeTypeInteger})
+var s_ActiveContextTurnsToLive = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveContextTurnsToLive, Type: smithy.ShapeTypeInteger})
+var sBadGatewayException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadGatewayException, Members: &mBadGatewayException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_BlobStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlobStream, Traits: &t9, Type: smithy.ShapeTypeBlob})
+var s_BotAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotAlias, Type: smithy.ShapeTypeString})
+var s_BotName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotName, Type: smithy.ShapeTypeString})
+var s_BotVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BotVersion, Type: smithy.ShapeTypeString})
+var sButton = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iButton, Members: &mButton, Type: smithy.ShapeTypeStructure})
+var s_ButtonTextStringWithLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ButtonTextStringWithLength, Type: smithy.ShapeTypeString})
+var s_ButtonValueStringWithLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ButtonValueStringWithLength, Type: smithy.ShapeTypeString})
+var sConfirmationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmationStatus, Members: &mConfirmationStatus, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum})
+var sDependencyFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyFailedException, Members: &mDependencyFailedException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var sDialogAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialogAction, Members: &mDialogAction, Type: smithy.ShapeTypeStructure})
+var sDialogActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialogActionType, Members: &mDialogActionType, Type: smithy.ShapeTypeEnum})
+var sDialogState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDialogState, Members: &mDialogState, Type: smithy.ShapeTypeEnum})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sFulfillmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFulfillmentState, Members: &mFulfillmentState, Type: smithy.ShapeTypeEnum})
+var sGenericAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGenericAttachment, Members: &mGenericAttachment, Type: smithy.ShapeTypeStructure})
+var s_genericAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_genericAttachmentList, Members: &m_genericAttachmentList, Type: smithy.ShapeTypeList})
+var s_HttpContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HttpContentType, Type: smithy.ShapeTypeString})
+var sIntentConfidence = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntentConfidence, Members: &mIntentConfidence, Type: smithy.ShapeTypeStructure})
+var s_IntentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentList, Members: &m_IntentList, Type: smithy.ShapeTypeList})
+var s_IntentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentName, Type: smithy.ShapeTypeString})
+var sIntentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntentSummary, Members: &mIntentSummary, Type: smithy.ShapeTypeStructure})
+var s_IntentSummaryCheckpointLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentSummaryCheckpointLabel, Type: smithy.ShapeTypeString})
+var s_IntentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntentSummaryList, Members: &m_IntentSummaryList, Type: smithy.ShapeTypeList})
+var sInternalFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalFailureException, Members: &mInternalFailureException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t13, Type: smithy.ShapeTypeStructure})
+var s_listOfButtons = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_listOfButtons, Members: &m_listOfButtons, Type: smithy.ShapeTypeList})
+var sLoopDetectedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoopDetectedException, Members: &mLoopDetectedException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var sMessageFormatType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMessageFormatType, Members: &mMessageFormatType, Type: smithy.ShapeTypeEnum})
+var sNotAcceptableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAcceptableException, Members: &mNotAcceptableException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var s_ParameterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var sPredictedIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictedIntent, Members: &mPredictedIntent, Type: smithy.ShapeTypeStructure})
+var sRequestTimeoutException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestTimeoutException, Members: &mRequestTimeoutException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sResponseCard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseCard, Members: &mResponseCard, Type: smithy.ShapeTypeStructure})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t6, Type: smithy.ShapeTypeString})
+var s_SensitiveStringUnbounded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveStringUnbounded, Traits: &t6, Type: smithy.ShapeTypeString})
+var s_SentimentLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SentimentLabel, Type: smithy.ShapeTypeString})
+var sSentimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentResponse, Members: &mSentimentResponse, Type: smithy.ShapeTypeStructure})
+var s_SentimentScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SentimentScore, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Traits: &t6, Type: smithy.ShapeTypeMap})
+var s_StringUrlWithLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringUrlWithLength, Type: smithy.ShapeTypeString})
+var s_StringWithLength = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringWithLength, Type: smithy.ShapeTypeString})
+var s_SynthesizedJsonActiveContextsString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonActiveContextsString, Traits: &t19, Type: smithy.ShapeTypeString})
+var s_SynthesizedJsonAttributesString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonAttributesString, Traits: &t19, Type: smithy.ShapeTypeString})
+var s_SynthesizedJsonString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SynthesizedJsonString, Traits: &t20, Type: smithy.ShapeTypeString})
+var s_Text = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Text, Traits: &t6, Type: smithy.ShapeTypeString})
+var sUnsupportedMediaTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedMediaTypeException, Members: &mUnsupportedMediaTypeException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var s_UserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserId, Type: smithy.ShapeTypeString})
+var sDeleteSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSessionRequest, Members: &mDeleteSessionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSessionResponse, Members: &mDeleteSessionResponse, Type: smithy.ShapeTypeStructure})
+var sGetSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionRequest, Members: &mGetSessionRequest, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSessionResponse, Members: &mGetSessionResponse, Type: smithy.ShapeTypeStructure})
+var sPostContentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContentRequest, Members: &mPostContentRequest, Type: smithy.ShapeTypeStructure})
+var sPostContentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostContentResponse, Members: &mPostContentResponse, Type: smithy.ShapeTypeStructure})
+var sPostTextRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostTextRequest, Members: &mPostTextRequest, Type: smithy.ShapeTypeStructure})
+var sPostTextResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostTextResponse, Members: &mPostTextResponse, Type: smithy.ShapeTypeStructure})
+var sPutSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSessionRequest, Members: &mPutSessionRequest, Type: smithy.ShapeTypeStructure})
+var sPutSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutSessionResponse, Members: &mPutSessionResponse, Type: smithy.ShapeTypeStructure})
+
+var sActiveContext_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ActiveContextName, Type: smithy.ShapeTypeString})
+var sActiveContext_timeToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeToLive", ID: &iActiveContextTimeToLive, Members: &mActiveContextTimeToLive, Type: smithy.ShapeTypeStructure})
+var sActiveContext_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ActiveContextParametersMap, Members: &m_ActiveContextParametersMap, Type: smithy.ShapeTypeMap})
+var s_ActiveContextParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ParameterName, Type: smithy.ShapeTypeString})
+var s_ActiveContextParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Text, Traits: &t5, Type: smithy.ShapeTypeString})
+var s_ActiveContextsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActiveContext, Members: &mActiveContext, Type: smithy.ShapeTypeStructure})
+var sActiveContextTimeToLive_timeToLiveInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeToLiveInSeconds", ID: &i_ActiveContextTimeToLiveInSeconds, Type: smithy.ShapeTypeInteger})
+var sActiveContextTimeToLive_turnsToLive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "turnsToLive", ID: &i_ActiveContextTurnsToLive, Type: smithy.ShapeTypeInteger})
+var sBadGatewayException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBadRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sButton_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_ButtonTextStringWithLength, Type: smithy.ShapeTypeString})
+var sButton_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ButtonValueStringWithLength, Type: smithy.ShapeTypeString})
+var sConfirmationStatus_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfirmationStatus_CONFIRMED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIRMED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConfirmationStatus_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContentType_GENERIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDependencyFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDialogAction_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iDialogActionType, Members: &mDialogActionType, Type: smithy.ShapeTypeEnum})
+var sDialogAction_intentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentName", ID: &i_IntentName, Type: smithy.ShapeTypeString})
+var sDialogAction_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sDialogAction_slotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotToElicit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDialogAction_fulfillmentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentState", ID: &iFulfillmentState, Members: &mFulfillmentState, Type: smithy.ShapeTypeEnum})
+var sDialogAction_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Text, Traits: &t5, Type: smithy.ShapeTypeString})
+var sDialogAction_messageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageFormat", ID: &iMessageFormatType, Members: &mMessageFormatType, Type: smithy.ShapeTypeEnum})
+var sDialogActionType_ELICIT_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELICIT_INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_CONFIRM_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIRM_INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_ELICIT_SLOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELICIT_SLOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_CLOSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLOSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogActionType_DELEGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELEGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogState_ELICIT_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELICIT_INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogState_CONFIRM_INTENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFIRM_INTENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogState_ELICIT_SLOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ELICIT_SLOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogState_FULFILLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogState_READY_FOR_FULFILLMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY_FOR_FULFILLMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDialogState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFulfillmentState_FULFILLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULFILLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFulfillmentState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFulfillmentState_READY_FOR_FULFILLMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY_FOR_FULFILLMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGenericAttachment_title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "title", ID: &i_StringWithLength, Type: smithy.ShapeTypeString})
+var sGenericAttachment_subTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subTitle", ID: &i_StringWithLength, Type: smithy.ShapeTypeString})
+var sGenericAttachment_attachmentLinkUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentLinkUrl", ID: &i_StringUrlWithLength, Type: smithy.ShapeTypeString})
+var sGenericAttachment_imageUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageUrl", ID: &i_StringUrlWithLength, Type: smithy.ShapeTypeString})
+var sGenericAttachment_buttons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "buttons", ID: &i_listOfButtons, Members: &m_listOfButtons, Type: smithy.ShapeTypeList})
+var s_genericAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGenericAttachment, Members: &mGenericAttachment, Type: smithy.ShapeTypeStructure})
+var sIntentConfidence_score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "score", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_IntentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPredictedIntent, Members: &mPredictedIntent, Type: smithy.ShapeTypeStructure})
+var sIntentSummary_intentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentName", ID: &i_IntentName, Type: smithy.ShapeTypeString})
+var sIntentSummary_checkpointLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkpointLabel", ID: &i_IntentSummaryCheckpointLabel, Type: smithy.ShapeTypeString})
+var sIntentSummary_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sIntentSummary_confirmationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirmationStatus", ID: &iConfirmationStatus, Members: &mConfirmationStatus, Type: smithy.ShapeTypeEnum})
+var sIntentSummary_dialogActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogActionType", ID: &iDialogActionType, Members: &mDialogActionType, Type: smithy.ShapeTypeEnum})
+var sIntentSummary_fulfillmentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fulfillmentState", ID: &iFulfillmentState, Members: &mFulfillmentState, Type: smithy.ShapeTypeEnum})
+var sIntentSummary_slotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotToElicit", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_IntentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntentSummary, Members: &mIntentSummary, Type: smithy.ShapeTypeStructure})
+var sInternalFailureException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLimitExceededException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_String, Traits: &t14, Type: smithy.ShapeTypeString})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_listOfButtons_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iButton, Members: &mButton, Type: smithy.ShapeTypeStructure})
+var sLoopDetectedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMessageFormatType_PLAIN_TEXT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAIN_TEXT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessageFormatType_CUSTOM_PAYLOAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_PAYLOAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessageFormatType_SSML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSML", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMessageFormatType_COMPOSITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPOSITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNotAcceptableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPredictedIntent_intentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentName", ID: &i_IntentName, Type: smithy.ShapeTypeString})
+var sPredictedIntent_nluIntentConfidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nluIntentConfidence", ID: &iIntentConfidence, Members: &mIntentConfidence, Type: smithy.ShapeTypeStructure})
+var sPredictedIntent_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sRequestTimeoutException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResponseCard_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResponseCard_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum})
+var sResponseCard_genericAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "genericAttachments", ID: &i_genericAttachmentList, Members: &m_genericAttachmentList, Type: smithy.ShapeTypeList})
+var sSentimentResponse_sentimentLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentimentLabel", ID: &i_SentimentLabel, Type: smithy.ShapeTypeString})
+var sSentimentResponse_sentimentScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentimentScore", ID: &i_SentimentScore, Type: smithy.ShapeTypeString})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUnsupportedMediaTypeException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteSessionRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t22, Type: smithy.ShapeTypeString})
+var sDeleteSessionRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_BotAlias, Traits: &t22, Type: smithy.ShapeTypeString})
+var sDeleteSessionRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_BotAlias, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Type: smithy.ShapeTypeString})
+var sDeleteSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t22, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_BotAlias, Traits: &t22, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sGetSessionRequest_checkpointLabelFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "checkpointLabelFilter", ID: &i_IntentSummaryCheckpointLabel, Traits: &t23, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_recentIntentSummaryView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recentIntentSummaryView", ID: &i_IntentSummaryList, Members: &m_IntentSummaryList, Type: smithy.ShapeTypeList})
+var sGetSessionResponse_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sGetSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetSessionResponse_dialogAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogAction", ID: &iDialogAction, Members: &mDialogAction, Type: smithy.ShapeTypeStructure})
+var sGetSessionResponse_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_ActiveContextsList, Members: &m_ActiveContextsList, Traits: &t5, Type: smithy.ShapeTypeList})
+var sPostContentRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPostContentRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_BotAlias, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPostContentRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPostContentRequest_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_SynthesizedJsonAttributesString, Traits: &t24, Type: smithy.ShapeTypeString})
+var sPostContentRequest_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_SynthesizedJsonAttributesString, Traits: &t25, Type: smithy.ShapeTypeString})
+var sPostContentRequest_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_HttpContentType, Traits: &t26, Type: smithy.ShapeTypeString})
+var sPostContentRequest_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &i_Accept, Traits: &t27, Type: smithy.ShapeTypeString})
+var sPostContentRequest_inputStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputStream", ID: &i_BlobStream, Traits: &t28, Type: smithy.ShapeTypeBlob})
+var sPostContentRequest_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_SynthesizedJsonActiveContextsString, Traits: &t29, Type: smithy.ShapeTypeString})
+var sPostContentResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_HttpContentType, Traits: &t26, Type: smithy.ShapeTypeString})
+var sPostContentResponse_intentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentName", ID: &i_IntentName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sPostContentResponse_nluIntentConfidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nluIntentConfidence", ID: &i_SynthesizedJsonString, Traits: &t31, Type: smithy.ShapeTypeString})
+var sPostContentResponse_alternativeIntents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alternativeIntents", ID: &i_SynthesizedJsonString, Traits: &t32, Type: smithy.ShapeTypeString})
+var sPostContentResponse_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_SynthesizedJsonString, Traits: &t33, Type: smithy.ShapeTypeString})
+var sPostContentResponse_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_SynthesizedJsonString, Traits: &t34, Type: smithy.ShapeTypeString})
+var sPostContentResponse_sentimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentimentResponse", ID: &i_String, Traits: &t35, Type: smithy.ShapeTypeString})
+var sPostContentResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Text, Traits: &t36, Type: smithy.ShapeTypeString})
+var sPostContentResponse_encodedMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encodedMessage", ID: &i_SensitiveString, Traits: &t37, Type: smithy.ShapeTypeString})
+var sPostContentResponse_messageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageFormat", ID: &iMessageFormatType, Members: &mMessageFormatType, Traits: &t38, Type: smithy.ShapeTypeEnum})
+var sPostContentResponse_dialogState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogState", ID: &iDialogState, Members: &mDialogState, Traits: &t39, Type: smithy.ShapeTypeEnum})
+var sPostContentResponse_slotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotToElicit", ID: &i_String, Traits: &t40, Type: smithy.ShapeTypeString})
+var sPostContentResponse_inputTranscript = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputTranscript", ID: &i_String, Traits: &t41, Type: smithy.ShapeTypeString})
+var sPostContentResponse_encodedInputTranscript = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encodedInputTranscript", ID: &i_SensitiveStringUnbounded, Traits: &t42, Type: smithy.ShapeTypeString})
+var sPostContentResponse_audioStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioStream", ID: &i_BlobStream, Traits: &t28, Type: smithy.ShapeTypeBlob})
+var sPostContentResponse_botVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersion", ID: &i_BotVersion, Traits: &t43, Type: smithy.ShapeTypeString})
+var sPostContentResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_String, Traits: &t44, Type: smithy.ShapeTypeString})
+var sPostContentResponse_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_SynthesizedJsonActiveContextsString, Traits: &t29, Type: smithy.ShapeTypeString})
+var sPostTextRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPostTextRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_BotAlias, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPostTextRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPostTextRequest_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sPostTextRequest_requestAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestAttributes", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sPostTextRequest_inputText = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputText", ID: &i_Text, Traits: &t5, Type: smithy.ShapeTypeString})
+var sPostTextRequest_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_ActiveContextsList, Members: &m_ActiveContextsList, Traits: &t5, Type: smithy.ShapeTypeList})
+var sPostTextResponse_intentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentName", ID: &i_IntentName, Type: smithy.ShapeTypeString})
+var sPostTextResponse_nluIntentConfidence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nluIntentConfidence", ID: &iIntentConfidence, Members: &mIntentConfidence, Type: smithy.ShapeTypeStructure})
+var sPostTextResponse_alternativeIntents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "alternativeIntents", ID: &i_IntentList, Members: &m_IntentList, Type: smithy.ShapeTypeList})
+var sPostTextResponse_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sPostTextResponse_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sPostTextResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Text, Traits: &t5, Type: smithy.ShapeTypeString})
+var sPostTextResponse_sentimentResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sentimentResponse", ID: &iSentimentResponse, Members: &mSentimentResponse, Type: smithy.ShapeTypeStructure})
+var sPostTextResponse_messageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageFormat", ID: &iMessageFormatType, Members: &mMessageFormatType, Type: smithy.ShapeTypeEnum})
+var sPostTextResponse_dialogState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogState", ID: &iDialogState, Members: &mDialogState, Type: smithy.ShapeTypeEnum})
+var sPostTextResponse_slotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotToElicit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPostTextResponse_responseCard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "responseCard", ID: &iResponseCard, Members: &mResponseCard, Type: smithy.ShapeTypeStructure})
+var sPostTextResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPostTextResponse_botVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botVersion", ID: &i_BotVersion, Type: smithy.ShapeTypeString})
+var sPostTextResponse_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_ActiveContextsList, Members: &m_ActiveContextsList, Traits: &t5, Type: smithy.ShapeTypeList})
+var sPutSessionRequest_botName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botName", ID: &i_BotName, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_botAlias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "botAlias", ID: &i_BotAlias, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_userId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userId", ID: &i_UserId, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_StringMap, Members: &m_StringMap, Traits: &t5, Type: smithy.ShapeTypeMap})
+var sPutSessionRequest_dialogAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogAction", ID: &iDialogAction, Members: &mDialogAction, Type: smithy.ShapeTypeStructure})
+var sPutSessionRequest_recentIntentSummaryView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recentIntentSummaryView", ID: &i_IntentSummaryList, Members: &m_IntentSummaryList, Type: smithy.ShapeTypeList})
+var sPutSessionRequest_accept = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accept", ID: &i_Accept, Traits: &t27, Type: smithy.ShapeTypeString})
+var sPutSessionRequest_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_ActiveContextsList, Members: &m_ActiveContextsList, Traits: &t5, Type: smithy.ShapeTypeList})
+var sPutSessionResponse_contentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contentType", ID: &i_HttpContentType, Traits: &t26, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_intentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intentName", ID: &i_IntentName, Traits: &t30, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_slots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slots", ID: &i_SynthesizedJsonString, Traits: &t33, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_sessionAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionAttributes", ID: &i_SynthesizedJsonString, Traits: &t34, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_Text, Traits: &t36, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_encodedMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encodedMessage", ID: &i_SensitiveString, Traits: &t37, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_messageFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageFormat", ID: &iMessageFormatType, Members: &mMessageFormatType, Traits: &t38, Type: smithy.ShapeTypeEnum})
+var sPutSessionResponse_dialogState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dialogState", ID: &iDialogState, Members: &mDialogState, Traits: &t39, Type: smithy.ShapeTypeEnum})
+var sPutSessionResponse_slotToElicit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "slotToElicit", ID: &i_String, Traits: &t40, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_audioStream = smithy.NewStaticSchema(smithy.StaticSchema{Member: "audioStream", ID: &i_BlobStream, Traits: &t28, Type: smithy.ShapeTypeBlob})
+var sPutSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_String, Traits: &t44, Type: smithy.ShapeTypeString})
+var sPutSessionResponse_activeContexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeContexts", ID: &i_SynthesizedJsonActiveContextsString, Traits: &t29, Type: smithy.ShapeTypeString})
+
+var DeleteSession = &sDeleteSession
+
+var GetSession = &sGetSession
+
+var PostContent = &sPostContent
+
+var PostText = &sPostText
+
+var PutSession = &sPutSession
+
+var _AWSDeepSenseRunTimeService = &s_AWSDeepSenseRunTimeService
+
+var _Accept = &s_Accept
+
+var ActiveContext = &sActiveContext
+var ActiveContext_name = &sActiveContext_name
+var ActiveContext_timeToLive = &sActiveContext_timeToLive
+var ActiveContext_parameters = &sActiveContext_parameters
+
+var _ActiveContextName = &s_ActiveContextName
+
+var _ActiveContextParametersMap = &s_ActiveContextParametersMap
+var _ActiveContextParametersMap_key = &s_ActiveContextParametersMap_key
+var _ActiveContextParametersMap_value = &s_ActiveContextParametersMap_value
+
+var _ActiveContextsList = &s_ActiveContextsList
+var _ActiveContextsList_member = &s_ActiveContextsList_member
+
+var ActiveContextTimeToLive = &sActiveContextTimeToLive
+var ActiveContextTimeToLive_timeToLiveInSeconds = &sActiveContextTimeToLive_timeToLiveInSeconds
+var ActiveContextTimeToLive_turnsToLive = &sActiveContextTimeToLive_turnsToLive
+
+var _ActiveContextTimeToLiveInSeconds = &s_ActiveContextTimeToLiveInSeconds
+
+var _ActiveContextTurnsToLive = &s_ActiveContextTurnsToLive
+
+var BadGatewayException = &sBadGatewayException
+var BadGatewayException_Message = &sBadGatewayException_Message
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_message = &sBadRequestException_message
+
+var _BlobStream = &s_BlobStream
+
+var _BotAlias = &s_BotAlias
+
+var _BotName = &s_BotName
+
+var _BotVersion = &s_BotVersion
+
+var Button = &sButton
+var Button_text = &sButton_text
+var Button_value = &sButton_value
+
+var _ButtonTextStringWithLength = &s_ButtonTextStringWithLength
+
+var _ButtonValueStringWithLength = &s_ButtonValueStringWithLength
+
+var ConfirmationStatus = &sConfirmationStatus
+var ConfirmationStatus_NONE = &sConfirmationStatus_NONE
+var ConfirmationStatus_CONFIRMED = &sConfirmationStatus_CONFIRMED
+var ConfirmationStatus_DENIED = &sConfirmationStatus_DENIED
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var ContentType = &sContentType
+var ContentType_GENERIC = &sContentType_GENERIC
+
+var DependencyFailedException = &sDependencyFailedException
+var DependencyFailedException_Message = &sDependencyFailedException_Message
+
+var DialogAction = &sDialogAction
+var DialogAction_type = &sDialogAction_type
+var DialogAction_intentName = &sDialogAction_intentName
+var DialogAction_slots = &sDialogAction_slots
+var DialogAction_slotToElicit = &sDialogAction_slotToElicit
+var DialogAction_fulfillmentState = &sDialogAction_fulfillmentState
+var DialogAction_message = &sDialogAction_message
+var DialogAction_messageFormat = &sDialogAction_messageFormat
+
+var DialogActionType = &sDialogActionType
+var DialogActionType_ELICIT_INTENT = &sDialogActionType_ELICIT_INTENT
+var DialogActionType_CONFIRM_INTENT = &sDialogActionType_CONFIRM_INTENT
+var DialogActionType_ELICIT_SLOT = &sDialogActionType_ELICIT_SLOT
+var DialogActionType_CLOSE = &sDialogActionType_CLOSE
+var DialogActionType_DELEGATE = &sDialogActionType_DELEGATE
+
+var DialogState = &sDialogState
+var DialogState_ELICIT_INTENT = &sDialogState_ELICIT_INTENT
+var DialogState_CONFIRM_INTENT = &sDialogState_CONFIRM_INTENT
+var DialogState_ELICIT_SLOT = &sDialogState_ELICIT_SLOT
+var DialogState_FULFILLED = &sDialogState_FULFILLED
+var DialogState_READY_FOR_FULFILLMENT = &sDialogState_READY_FOR_FULFILLMENT
+var DialogState_FAILED = &sDialogState_FAILED
+
+var _Double = &s_Double
+
+var _ErrorMessage = &s_ErrorMessage
+
+var FulfillmentState = &sFulfillmentState
+var FulfillmentState_FULFILLED = &sFulfillmentState_FULFILLED
+var FulfillmentState_FAILED = &sFulfillmentState_FAILED
+var FulfillmentState_READY_FOR_FULFILLMENT = &sFulfillmentState_READY_FOR_FULFILLMENT
+
+var GenericAttachment = &sGenericAttachment
+var GenericAttachment_title = &sGenericAttachment_title
+var GenericAttachment_subTitle = &sGenericAttachment_subTitle
+var GenericAttachment_attachmentLinkUrl = &sGenericAttachment_attachmentLinkUrl
+var GenericAttachment_imageUrl = &sGenericAttachment_imageUrl
+var GenericAttachment_buttons = &sGenericAttachment_buttons
+
+var _genericAttachmentList = &s_genericAttachmentList
+var _genericAttachmentList_member = &s_genericAttachmentList_member
+
+var _HttpContentType = &s_HttpContentType
+
+var IntentConfidence = &sIntentConfidence
+var IntentConfidence_score = &sIntentConfidence_score
+
+var _IntentList = &s_IntentList
+var _IntentList_member = &s_IntentList_member
+
+var _IntentName = &s_IntentName
+
+var IntentSummary = &sIntentSummary
+var IntentSummary_intentName = &sIntentSummary_intentName
+var IntentSummary_checkpointLabel = &sIntentSummary_checkpointLabel
+var IntentSummary_slots = &sIntentSummary_slots
+var IntentSummary_confirmationStatus = &sIntentSummary_confirmationStatus
+var IntentSummary_dialogActionType = &sIntentSummary_dialogActionType
+var IntentSummary_fulfillmentState = &sIntentSummary_fulfillmentState
+var IntentSummary_slotToElicit = &sIntentSummary_slotToElicit
+
+var _IntentSummaryCheckpointLabel = &s_IntentSummaryCheckpointLabel
+
+var _IntentSummaryList = &s_IntentSummaryList
+var _IntentSummaryList_member = &s_IntentSummaryList_member
+
+var InternalFailureException = &sInternalFailureException
+var InternalFailureException_message = &sInternalFailureException_message
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_retryAfterSeconds = &sLimitExceededException_retryAfterSeconds
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _listOfButtons = &s_listOfButtons
+var _listOfButtons_member = &s_listOfButtons_member
+
+var LoopDetectedException = &sLoopDetectedException
+var LoopDetectedException_Message = &sLoopDetectedException_Message
+
+var MessageFormatType = &sMessageFormatType
+var MessageFormatType_PLAIN_TEXT = &sMessageFormatType_PLAIN_TEXT
+var MessageFormatType_CUSTOM_PAYLOAD = &sMessageFormatType_CUSTOM_PAYLOAD
+var MessageFormatType_SSML = &sMessageFormatType_SSML
+var MessageFormatType_COMPOSITE = &sMessageFormatType_COMPOSITE
+
+var NotAcceptableException = &sNotAcceptableException
+var NotAcceptableException_message = &sNotAcceptableException_message
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_message = &sNotFoundException_message
+
+var _ParameterName = &s_ParameterName
+
+var PredictedIntent = &sPredictedIntent
+var PredictedIntent_intentName = &sPredictedIntent_intentName
+var PredictedIntent_nluIntentConfidence = &sPredictedIntent_nluIntentConfidence
+var PredictedIntent_slots = &sPredictedIntent_slots
+
+var RequestTimeoutException = &sRequestTimeoutException
+var RequestTimeoutException_message = &sRequestTimeoutException_message
+
+var ResponseCard = &sResponseCard
+var ResponseCard_version = &sResponseCard_version
+var ResponseCard_contentType = &sResponseCard_contentType
+var ResponseCard_genericAttachments = &sResponseCard_genericAttachments
+
+var _SensitiveString = &s_SensitiveString
+
+var _SensitiveStringUnbounded = &s_SensitiveStringUnbounded
+
+var _SentimentLabel = &s_SentimentLabel
+
+var SentimentResponse = &sSentimentResponse
+var SentimentResponse_sentimentLabel = &sSentimentResponse_sentimentLabel
+var SentimentResponse_sentimentScore = &sSentimentResponse_sentimentScore
+
+var _SentimentScore = &s_SentimentScore
+
+var _String = &s_String
+
+var _StringMap = &s_StringMap
+var _StringMap_key = &s_StringMap_key
+var _StringMap_value = &s_StringMap_value
+
+var _StringUrlWithLength = &s_StringUrlWithLength
+
+var _StringWithLength = &s_StringWithLength
+
+var _SynthesizedJsonActiveContextsString = &s_SynthesizedJsonActiveContextsString
+
+var _SynthesizedJsonAttributesString = &s_SynthesizedJsonAttributesString
+
+var _SynthesizedJsonString = &s_SynthesizedJsonString
+
+var _Text = &s_Text
+
+var UnsupportedMediaTypeException = &sUnsupportedMediaTypeException
+var UnsupportedMediaTypeException_message = &sUnsupportedMediaTypeException_message
+
+var _UserId = &s_UserId
+
+var DeleteSessionRequest = &sDeleteSessionRequest
+var DeleteSessionRequest_botName = &sDeleteSessionRequest_botName
+var DeleteSessionRequest_botAlias = &sDeleteSessionRequest_botAlias
+var DeleteSessionRequest_userId = &sDeleteSessionRequest_userId
+
+var DeleteSessionResponse = &sDeleteSessionResponse
+var DeleteSessionResponse_botName = &sDeleteSessionResponse_botName
+var DeleteSessionResponse_botAlias = &sDeleteSessionResponse_botAlias
+var DeleteSessionResponse_userId = &sDeleteSessionResponse_userId
+var DeleteSessionResponse_sessionId = &sDeleteSessionResponse_sessionId
+
+var GetSessionRequest = &sGetSessionRequest
+var GetSessionRequest_botName = &sGetSessionRequest_botName
+var GetSessionRequest_botAlias = &sGetSessionRequest_botAlias
+var GetSessionRequest_userId = &sGetSessionRequest_userId
+var GetSessionRequest_checkpointLabelFilter = &sGetSessionRequest_checkpointLabelFilter
+
+var GetSessionResponse = &sGetSessionResponse
+var GetSessionResponse_recentIntentSummaryView = &sGetSessionResponse_recentIntentSummaryView
+var GetSessionResponse_sessionAttributes = &sGetSessionResponse_sessionAttributes
+var GetSessionResponse_sessionId = &sGetSessionResponse_sessionId
+var GetSessionResponse_dialogAction = &sGetSessionResponse_dialogAction
+var GetSessionResponse_activeContexts = &sGetSessionResponse_activeContexts
+
+var PostContentRequest = &sPostContentRequest
+var PostContentRequest_botName = &sPostContentRequest_botName
+var PostContentRequest_botAlias = &sPostContentRequest_botAlias
+var PostContentRequest_userId = &sPostContentRequest_userId
+var PostContentRequest_sessionAttributes = &sPostContentRequest_sessionAttributes
+var PostContentRequest_requestAttributes = &sPostContentRequest_requestAttributes
+var PostContentRequest_contentType = &sPostContentRequest_contentType
+var PostContentRequest_accept = &sPostContentRequest_accept
+var PostContentRequest_inputStream = &sPostContentRequest_inputStream
+var PostContentRequest_activeContexts = &sPostContentRequest_activeContexts
+
+var PostContentResponse = &sPostContentResponse
+var PostContentResponse_contentType = &sPostContentResponse_contentType
+var PostContentResponse_intentName = &sPostContentResponse_intentName
+var PostContentResponse_nluIntentConfidence = &sPostContentResponse_nluIntentConfidence
+var PostContentResponse_alternativeIntents = &sPostContentResponse_alternativeIntents
+var PostContentResponse_slots = &sPostContentResponse_slots
+var PostContentResponse_sessionAttributes = &sPostContentResponse_sessionAttributes
+var PostContentResponse_sentimentResponse = &sPostContentResponse_sentimentResponse
+var PostContentResponse_message = &sPostContentResponse_message
+var PostContentResponse_encodedMessage = &sPostContentResponse_encodedMessage
+var PostContentResponse_messageFormat = &sPostContentResponse_messageFormat
+var PostContentResponse_dialogState = &sPostContentResponse_dialogState
+var PostContentResponse_slotToElicit = &sPostContentResponse_slotToElicit
+var PostContentResponse_inputTranscript = &sPostContentResponse_inputTranscript
+var PostContentResponse_encodedInputTranscript = &sPostContentResponse_encodedInputTranscript
+var PostContentResponse_audioStream = &sPostContentResponse_audioStream
+var PostContentResponse_botVersion = &sPostContentResponse_botVersion
+var PostContentResponse_sessionId = &sPostContentResponse_sessionId
+var PostContentResponse_activeContexts = &sPostContentResponse_activeContexts
+
+var PostTextRequest = &sPostTextRequest
+var PostTextRequest_botName = &sPostTextRequest_botName
+var PostTextRequest_botAlias = &sPostTextRequest_botAlias
+var PostTextRequest_userId = &sPostTextRequest_userId
+var PostTextRequest_sessionAttributes = &sPostTextRequest_sessionAttributes
+var PostTextRequest_requestAttributes = &sPostTextRequest_requestAttributes
+var PostTextRequest_inputText = &sPostTextRequest_inputText
+var PostTextRequest_activeContexts = &sPostTextRequest_activeContexts
+
+var PostTextResponse = &sPostTextResponse
+var PostTextResponse_intentName = &sPostTextResponse_intentName
+var PostTextResponse_nluIntentConfidence = &sPostTextResponse_nluIntentConfidence
+var PostTextResponse_alternativeIntents = &sPostTextResponse_alternativeIntents
+var PostTextResponse_slots = &sPostTextResponse_slots
+var PostTextResponse_sessionAttributes = &sPostTextResponse_sessionAttributes
+var PostTextResponse_message = &sPostTextResponse_message
+var PostTextResponse_sentimentResponse = &sPostTextResponse_sentimentResponse
+var PostTextResponse_messageFormat = &sPostTextResponse_messageFormat
+var PostTextResponse_dialogState = &sPostTextResponse_dialogState
+var PostTextResponse_slotToElicit = &sPostTextResponse_slotToElicit
+var PostTextResponse_responseCard = &sPostTextResponse_responseCard
+var PostTextResponse_sessionId = &sPostTextResponse_sessionId
+var PostTextResponse_botVersion = &sPostTextResponse_botVersion
+var PostTextResponse_activeContexts = &sPostTextResponse_activeContexts
+
+var PutSessionRequest = &sPutSessionRequest
+var PutSessionRequest_botName = &sPutSessionRequest_botName
+var PutSessionRequest_botAlias = &sPutSessionRequest_botAlias
+var PutSessionRequest_userId = &sPutSessionRequest_userId
+var PutSessionRequest_sessionAttributes = &sPutSessionRequest_sessionAttributes
+var PutSessionRequest_dialogAction = &sPutSessionRequest_dialogAction
+var PutSessionRequest_recentIntentSummaryView = &sPutSessionRequest_recentIntentSummaryView
+var PutSessionRequest_accept = &sPutSessionRequest_accept
+var PutSessionRequest_activeContexts = &sPutSessionRequest_activeContexts
+
+var PutSessionResponse = &sPutSessionResponse
+var PutSessionResponse_contentType = &sPutSessionResponse_contentType
+var PutSessionResponse_intentName = &sPutSessionResponse_intentName
+var PutSessionResponse_slots = &sPutSessionResponse_slots
+var PutSessionResponse_sessionAttributes = &sPutSessionResponse_sessionAttributes
+var PutSessionResponse_message = &sPutSessionResponse_message
+var PutSessionResponse_encodedMessage = &sPutSessionResponse_encodedMessage
+var PutSessionResponse_messageFormat = &sPutSessionResponse_messageFormat
+var PutSessionResponse_dialogState = &sPutSessionResponse_dialogState
+var PutSessionResponse_slotToElicit = &sPutSessionResponse_slotToElicit
+var PutSessionResponse_audioStream = &sPutSessionResponse_audioStream
+var PutSessionResponse_sessionId = &sPutSessionResponse_sessionId
+var PutSessionResponse_activeContexts = &sPutSessionResponse_activeContexts
+
+var AWSDeepSenseRunTimeService = &smithy.ServiceSchema{Schema: &s_AWSDeepSenseRunTimeService, Version: "2016-11-28"}

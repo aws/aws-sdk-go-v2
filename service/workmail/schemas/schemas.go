@@ -4,5033 +4,3635 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateDelegateToResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssociateDelegateToResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateMemberToGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssociateMemberToGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssumeImpersonationRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssumeImpersonationRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelMailboxExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CancelMailboxExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAvailabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateAvailabilityConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateIdentityCenterApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateIdentityCenterApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateImpersonationRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateImpersonationRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateMobileDeviceAccessRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateMobileDeviceAccessRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAccessControlRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAccessControlRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAlias",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAvailabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAvailabilityConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEmailMonitoringConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteEmailMonitoringConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIdentityCenterApplication = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteIdentityCenterApplication",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteIdentityProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteIdentityProviderConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteImpersonationRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteImpersonationRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteMailboxPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMailboxPermissions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteMobileDeviceAccessOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMobileDeviceAccessOverride",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteMobileDeviceAccessRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMobileDeviceAccessRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeletePersonalAccessToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeletePersonalAccessToken",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRetentionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteRetentionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterFromWorkMail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeregisterFromWorkMail",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeregisterMailDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeregisterMailDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEmailMonitoringConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeEmailMonitoringConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeEntity",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeIdentityProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeIdentityProviderConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeInboundDmarcSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeInboundDmarcSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeMailboxExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeMailboxExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeOrganization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeOrganization",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateDelegateFromResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DisassociateDelegateFromResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateMemberFromGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DisassociateMemberFromGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccessControlEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetAccessControlEffect",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDefaultRetentionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetDefaultRetentionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetImpersonationRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetImpersonationRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetImpersonationRoleEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetImpersonationRoleEffect",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMailboxDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMailboxDetails",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMailDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMailDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMobileDeviceAccessEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMobileDeviceAccessEffect",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMobileDeviceAccessOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMobileDeviceAccessOverride",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetPersonalAccessTokenMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetPersonalAccessTokenMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAccessControlRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAccessControlRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAliases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAvailabilityConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAvailabilityConfigurations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGroupMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupMembers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListGroupsForEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupsForEntity",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListImpersonationRoles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListImpersonationRoles",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMailboxExportJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailboxExportJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMailboxPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailboxPermissions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMailDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailDomains",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMobileDeviceAccessOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMobileDeviceAccessOverrides",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListMobileDeviceAccessRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMobileDeviceAccessRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListOrganizations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListOrganizations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPersonalAccessTokens = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListPersonalAccessTokens",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResourceDelegates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListResourceDelegates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListUsers",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutAccessControlRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutAccessControlRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutEmailMonitoringConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutEmailMonitoringConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutIdentityProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutIdentityProviderConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutInboundDmarcSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutInboundDmarcSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutMailboxPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutMailboxPermissions",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutMobileDeviceAccessOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutMobileDeviceAccessOverride",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutRetentionPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutRetentionPolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterMailDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RegisterMailDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var RegisterToWorkMail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RegisterToWorkMail",
-}, smithy.ShapeTypeOperation, 0)
-
-var ResetPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResetPassword",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartMailboxExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "StartMailboxExportJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TestAvailabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TestAvailabilityConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAvailabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateAvailabilityConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDefaultMailDomain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateDefaultMailDomain",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateImpersonationRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateImpersonationRole",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateMailboxQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateMailboxQuota",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateMobileDeviceAccessRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateMobileDeviceAccessRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdatePrimaryEmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdatePrimaryEmailAddress",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateUser",
-}, smithy.ShapeTypeOperation, 0)
-
-var _WorkMailService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "WorkMailService",
-}, smithy.ShapeTypeService, 0)
-
-var WorkMailService = smithy.NewServiceSchema(_WorkMailService, "2017-10-01")
-
-var AccessControlRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessControlRule",
-}, smithy.ShapeTypeStructure, 13)
-var AccessControlRule_Name *smithy.Schema
-
-var AccessControlRule_Effect *smithy.Schema
-
-var AccessControlRule_Description *smithy.Schema
-
-var AccessControlRule_IpRanges *smithy.Schema
-
-var AccessControlRule_NotIpRanges *smithy.Schema
-
-var AccessControlRule_Actions *smithy.Schema
-
-var AccessControlRule_NotActions *smithy.Schema
-
-var AccessControlRule_UserIds *smithy.Schema
-
-var AccessControlRule_NotUserIds *smithy.Schema
-
-var AccessControlRule_DateCreated *smithy.Schema
-
-var AccessControlRule_DateModified *smithy.Schema
-
-var AccessControlRule_ImpersonationRoleIds *smithy.Schema
-
-var AccessControlRule_NotImpersonationRoleIds *smithy.Schema
-
-var _AccessControlRuleAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessControlRuleAction",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessControlRuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessControlRuleDescription",
-}, smithy.ShapeTypeString, 0)
-
-var AccessControlRuleEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessControlRuleEffect",
-}, smithy.ShapeTypeEnum, 2)
-var AccessControlRuleEffect_ALLOW *smithy.Schema
-
-var AccessControlRuleEffect_DENY *smithy.Schema
-
-var _AccessControlRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessControlRuleName",
-}, smithy.ShapeTypeString, 0)
-
-var _AccessControlRuleNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessControlRuleNameList",
-}, smithy.ShapeTypeList, 1)
-var _AccessControlRuleNameList_member *smithy.Schema
-
-var _AccessControlRulesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessControlRulesList",
-}, smithy.ShapeTypeList, 1)
-var _AccessControlRulesList_member *smithy.Schema
-
-var AccessEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AccessEffect",
-}, smithy.ShapeTypeEnum, 2)
-var AccessEffect_ALLOW *smithy.Schema
-
-var AccessEffect_DENY *smithy.Schema
-
-var _ActionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ActionsList",
-}, smithy.ShapeTypeList, 1)
-var _ActionsList_member *smithy.Schema
-
-var _Aliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Aliases",
-}, smithy.ShapeTypeList, 1)
-var _Aliases_member *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ApplicationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ApplicationArn",
-}, smithy.ShapeTypeString, 0)
-
-var AvailabilityConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AvailabilityConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var AvailabilityConfiguration_DomainName *smithy.Schema
-
-var AvailabilityConfiguration_ProviderType *smithy.Schema
-
-var AvailabilityConfiguration_EwsProvider *smithy.Schema
-
-var AvailabilityConfiguration_LambdaProvider *smithy.Schema
-
-var AvailabilityConfiguration_DateCreated *smithy.Schema
-
-var AvailabilityConfiguration_DateModified *smithy.Schema
-
-var _AvailabilityConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AvailabilityConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _AvailabilityConfigurationList_member *smithy.Schema
-
-var AvailabilityProviderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AvailabilityProviderType",
-}, smithy.ShapeTypeEnum, 2)
-var AvailabilityProviderType_EWS *smithy.Schema
-
-var AvailabilityProviderType_LAMBDA *smithy.Schema
-
-var BookingOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "BookingOptions",
-}, smithy.ShapeTypeStructure, 3)
-var BookingOptions_AutoAcceptRequests *smithy.Schema
-
-var BookingOptions_AutoDeclineRecurringRequests *smithy.Schema
-
-var BookingOptions_AutoDeclineConflictingRequests *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _BooleanObject = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "BooleanObject",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Delegate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Delegate",
-}, smithy.ShapeTypeStructure, 2)
-var Delegate_Id *smithy.Schema
-
-var Delegate_Type *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceId",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceModel",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceModelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceModelList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceModelList_member *smithy.Schema
-
-var _DeviceOperatingSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceOperatingSystem",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceOperatingSystemList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceOperatingSystemList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceOperatingSystemList_member *smithy.Schema
-
-var _DeviceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceType",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceTypeList_member *smithy.Schema
-
-var _DeviceUserAgent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceUserAgent",
-}, smithy.ShapeTypeString, 0)
-
-var _DeviceUserAgentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeviceUserAgentList",
-}, smithy.ShapeTypeList, 1)
-var _DeviceUserAgentList_member *smithy.Schema
-
-var _DirectoryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DirectoryId",
-}, smithy.ShapeTypeString, 0)
-
-var DirectoryInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DirectoryInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DirectoryInUseException_Message *smithy.Schema
-
-var DirectoryServiceAuthenticationFailedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DirectoryServiceAuthenticationFailedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DirectoryServiceAuthenticationFailedException_Message *smithy.Schema
-
-var DirectoryUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DirectoryUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DirectoryUnavailableException_Message *smithy.Schema
-
-var DnsRecord = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DnsRecord",
-}, smithy.ShapeTypeStructure, 3)
-var DnsRecord_Type *smithy.Schema
-
-var DnsRecord_Hostname *smithy.Schema
-
-var DnsRecord_Value *smithy.Schema
-
-var _DnsRecords = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DnsRecords",
-}, smithy.ShapeTypeList, 1)
-var _DnsRecords_member *smithy.Schema
-
-var DnsRecordVerificationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DnsRecordVerificationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var DnsRecordVerificationStatus_PENDING *smithy.Schema
-
-var DnsRecordVerificationStatus_VERIFIED *smithy.Schema
-
-var DnsRecordVerificationStatus_FAILED *smithy.Schema
-
-var Domain = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Domain",
-}, smithy.ShapeTypeStructure, 2)
-var Domain_DomainName *smithy.Schema
-
-var Domain_HostedZoneId *smithy.Schema
-
-var _DomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _Domains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Domains",
-}, smithy.ShapeTypeList, 1)
-var _Domains_member *smithy.Schema
-
-var _EmailAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EmailAddress",
-}, smithy.ShapeTypeString, 0)
-
-var EmailAddressInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EmailAddressInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var EmailAddressInUseException_Message *smithy.Schema
-
-var EntityAlreadyRegisteredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EntityAlreadyRegisteredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var EntityAlreadyRegisteredException_Message *smithy.Schema
-
-var _EntityIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EntityIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var EntityNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EntityNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var EntityNotFoundException_Message *smithy.Schema
-
-var EntityState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EntityState",
-}, smithy.ShapeTypeEnum, 3)
-var EntityState_ENABLED *smithy.Schema
-
-var EntityState_DISABLED *smithy.Schema
-
-var EntityState_DELETED *smithy.Schema
-
-var EntityStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EntityStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var EntityStateException_Message *smithy.Schema
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EntityType",
-}, smithy.ShapeTypeEnum, 3)
-var EntityType_GROUP *smithy.Schema
-
-var EntityType_USER *smithy.Schema
-
-var EntityType_RESOURCE *smithy.Schema
-
-var EwsAvailabilityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "EwsAvailabilityProvider",
-}, smithy.ShapeTypeStructure, 3)
-var EwsAvailabilityProvider_EwsEndpoint *smithy.Schema
-
-var EwsAvailabilityProvider_EwsUsername *smithy.Schema
-
-var EwsAvailabilityProvider_EwsPassword *smithy.Schema
-
-var _ExpiresIn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ExpiresIn",
-}, smithy.ShapeTypeLong, 0)
-
-var _ExternalUserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ExternalUserName",
-}, smithy.ShapeTypeString, 0)
-
-var FolderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "FolderConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var FolderConfiguration_Name *smithy.Schema
-
-var FolderConfiguration_Action *smithy.Schema
-
-var FolderConfiguration_Period *smithy.Schema
-
-var _FolderConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "FolderConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _FolderConfigurations_member *smithy.Schema
-
-var FolderName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "FolderName",
-}, smithy.ShapeTypeEnum, 5)
-var FolderName_INBOX *smithy.Schema
-
-var FolderName_DELETED_ITEMS *smithy.Schema
-
-var FolderName_SENT_ITEMS *smithy.Schema
-
-var FolderName_DRAFTS *smithy.Schema
-
-var FolderName_JUNK_EMAIL *smithy.Schema
-
-var Group = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Group",
-}, smithy.ShapeTypeStructure, 6)
-var Group_Id *smithy.Schema
-
-var Group_Email *smithy.Schema
-
-var Group_Name *smithy.Schema
-
-var Group_State *smithy.Schema
-
-var Group_EnabledDate *smithy.Schema
-
-var Group_DisabledDate *smithy.Schema
-
-var GroupIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GroupIdentifier",
-}, smithy.ShapeTypeStructure, 2)
-var GroupIdentifier_GroupId *smithy.Schema
-
-var GroupIdentifier_GroupName *smithy.Schema
-
-var _GroupIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GroupIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _GroupIdentifiers_member *smithy.Schema
-
-var _GroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GroupName",
-}, smithy.ShapeTypeString, 0)
-
-var _Groups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Groups",
-}, smithy.ShapeTypeList, 1)
-var _Groups_member *smithy.Schema
-
-var _HostedZoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "HostedZoneId",
-}, smithy.ShapeTypeString, 0)
-
-var _IdempotencyClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdempotencyClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityCenterApplicationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdentityCenterApplicationName",
-}, smithy.ShapeTypeString, 0)
-
-var IdentityCenterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdentityCenterConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var IdentityCenterConfiguration_InstanceArn *smithy.Schema
-
-var IdentityCenterConfiguration_ApplicationArn *smithy.Schema
-
-var IdentityProviderAuthenticationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdentityProviderAuthenticationMode",
-}, smithy.ShapeTypeEnum, 2)
-var IdentityProviderAuthenticationMode_IDENTITY_PROVIDER_ONLY *smithy.Schema
-
-var IdentityProviderAuthenticationMode_IDENTITY_PROVIDER_AND_DIRECTORY *smithy.Schema
-
-var _IdentityProviderIdentityStoreId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdentityProviderIdentityStoreId",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityProviderUserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdentityProviderUserId",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityProviderUserIdForUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdentityProviderUserIdForUpdate",
-}, smithy.ShapeTypeString, 0)
-
-var _IdentityProviderUserIdPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IdentityProviderUserIdPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var ImpersonationMatchedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationMatchedRule",
-}, smithy.ShapeTypeStructure, 2)
-var ImpersonationMatchedRule_ImpersonationRuleId *smithy.Schema
-
-var ImpersonationMatchedRule_Name *smithy.Schema
-
-var _ImpersonationMatchedRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationMatchedRuleList",
-}, smithy.ShapeTypeList, 1)
-var _ImpersonationMatchedRuleList_member *smithy.Schema
-
-var ImpersonationRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRole",
-}, smithy.ShapeTypeStructure, 5)
-var ImpersonationRole_ImpersonationRoleId *smithy.Schema
-
-var ImpersonationRole_Name *smithy.Schema
-
-var ImpersonationRole_Type *smithy.Schema
-
-var ImpersonationRole_DateCreated *smithy.Schema
-
-var ImpersonationRole_DateModified *smithy.Schema
-
-var _ImpersonationRoleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRoleDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ImpersonationRoleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRoleId",
-}, smithy.ShapeTypeString, 0)
-
-var _ImpersonationRoleIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRoleIdList",
-}, smithy.ShapeTypeList, 1)
-var _ImpersonationRoleIdList_member *smithy.Schema
-
-var _ImpersonationRoleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRoleList",
-}, smithy.ShapeTypeList, 1)
-var _ImpersonationRoleList_member *smithy.Schema
-
-var _ImpersonationRoleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRoleName",
-}, smithy.ShapeTypeString, 0)
-
-var ImpersonationRoleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRoleType",
-}, smithy.ShapeTypeEnum, 2)
-var ImpersonationRoleType_FULL_ACCESS *smithy.Schema
-
-var ImpersonationRoleType_READ_ONLY *smithy.Schema
-
-var ImpersonationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRule",
-}, smithy.ShapeTypeStructure, 6)
-var ImpersonationRule_ImpersonationRuleId *smithy.Schema
-
-var ImpersonationRule_Name *smithy.Schema
-
-var ImpersonationRule_Description *smithy.Schema
-
-var ImpersonationRule_Effect *smithy.Schema
-
-var ImpersonationRule_TargetUsers *smithy.Schema
-
-var ImpersonationRule_NotTargetUsers *smithy.Schema
-
-var _ImpersonationRuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRuleDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ImpersonationRuleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRuleId",
-}, smithy.ShapeTypeString, 0)
-
-var _ImpersonationRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRuleList",
-}, smithy.ShapeTypeList, 1)
-var _ImpersonationRuleList_member *smithy.Schema
-
-var _ImpersonationRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationRuleName",
-}, smithy.ShapeTypeString, 0)
-
-var _ImpersonationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ImpersonationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _InstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "InstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var InvalidConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "InvalidConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidConfigurationException_Message *smithy.Schema
-
-var InvalidCustomSesConfigurationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "InvalidCustomSesConfigurationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidCustomSesConfigurationException_Message *smithy.Schema
-
-var InvalidParameterException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "InvalidParameterException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidParameterException_Message *smithy.Schema
-
-var InvalidPasswordException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "InvalidPasswordException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidPasswordException_Message *smithy.Schema
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _IpRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IpRange",
-}, smithy.ShapeTypeString, 0)
-
-var _IpRangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "IpRangeList",
-}, smithy.ShapeTypeList, 1)
-var _IpRangeList_member *smithy.Schema
-
-var _Jobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Jobs",
-}, smithy.ShapeTypeList, 1)
-var _Jobs_member *smithy.Schema
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "LambdaArn",
-}, smithy.ShapeTypeString, 0)
-
-var LambdaAvailabilityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "LambdaAvailabilityProvider",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaAvailabilityProvider_LambdaArn *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var LimitExceededException_Message *smithy.Schema
-
-var ListGroupsFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupsFilters",
-}, smithy.ShapeTypeStructure, 3)
-var ListGroupsFilters_NamePrefix *smithy.Schema
-
-var ListGroupsFilters_PrimaryEmailPrefix *smithy.Schema
-
-var ListGroupsFilters_State *smithy.Schema
-
-var ListGroupsForEntityFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupsForEntityFilters",
-}, smithy.ShapeTypeStructure, 1)
-var ListGroupsForEntityFilters_GroupNamePrefix *smithy.Schema
-
-var ListResourcesFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListResourcesFilters",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourcesFilters_NamePrefix *smithy.Schema
-
-var ListResourcesFilters_PrimaryEmailPrefix *smithy.Schema
-
-var ListResourcesFilters_State *smithy.Schema
-
-var ListUsersFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListUsersFilters",
-}, smithy.ShapeTypeStructure, 5)
-var ListUsersFilters_UsernamePrefix *smithy.Schema
-
-var ListUsersFilters_DisplayNamePrefix *smithy.Schema
-
-var ListUsersFilters_PrimaryEmailPrefix *smithy.Schema
-
-var ListUsersFilters_State *smithy.Schema
-
-var ListUsersFilters_IdentityProviderUserIdPrefix *smithy.Schema
-
-var _LogGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "LogGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MailboxExportErrorInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailboxExportErrorInfo",
-}, smithy.ShapeTypeString, 0)
-
-var MailboxExportJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailboxExportJob",
-}, smithy.ShapeTypeStructure, 9)
-var MailboxExportJob_JobId *smithy.Schema
-
-var MailboxExportJob_EntityId *smithy.Schema
-
-var MailboxExportJob_Description *smithy.Schema
-
-var MailboxExportJob_S3BucketName *smithy.Schema
-
-var MailboxExportJob_S3Path *smithy.Schema
-
-var MailboxExportJob_EstimatedProgress *smithy.Schema
-
-var MailboxExportJob_State *smithy.Schema
-
-var MailboxExportJob_StartTime *smithy.Schema
-
-var MailboxExportJob_EndTime *smithy.Schema
-
-var _MailboxExportJobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailboxExportJobId",
-}, smithy.ShapeTypeString, 0)
-
-var MailboxExportJobState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailboxExportJobState",
-}, smithy.ShapeTypeEnum, 4)
-var MailboxExportJobState_RUNNING *smithy.Schema
-
-var MailboxExportJobState_COMPLETED *smithy.Schema
-
-var MailboxExportJobState_FAILED *smithy.Schema
-
-var MailboxExportJobState_CANCELLED *smithy.Schema
-
-var _MailboxQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailboxQuota",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MailboxSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailboxSize",
-}, smithy.ShapeTypeDouble, 0)
-
-var MailDomainInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailDomainInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var MailDomainInUseException_Message *smithy.Schema
-
-var MailDomainNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailDomainNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var MailDomainNotFoundException_Message *smithy.Schema
-
-var _MailDomains = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailDomains",
-}, smithy.ShapeTypeList, 1)
-var _MailDomains_member *smithy.Schema
-
-var MailDomainStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailDomainStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var MailDomainStateException_Message *smithy.Schema
-
-var MailDomainSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MailDomainSummary",
-}, smithy.ShapeTypeStructure, 2)
-var MailDomainSummary_DomainName *smithy.Schema
-
-var MailDomainSummary_DefaultDomain *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Member = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Member",
-}, smithy.ShapeTypeStructure, 6)
-var Member_Id *smithy.Schema
-
-var Member_Name *smithy.Schema
-
-var Member_Type *smithy.Schema
-
-var Member_State *smithy.Schema
-
-var Member_EnabledDate *smithy.Schema
-
-var Member_DisabledDate *smithy.Schema
-
-var _Members = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Members",
-}, smithy.ShapeTypeList, 1)
-var _Members_member *smithy.Schema
-
-var MemberType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MemberType",
-}, smithy.ShapeTypeEnum, 2)
-var MemberType_GROUP *smithy.Schema
-
-var MemberType_USER *smithy.Schema
-
-var MobileDeviceAccessMatchedRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessMatchedRule",
-}, smithy.ShapeTypeStructure, 2)
-var MobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId *smithy.Schema
-
-var MobileDeviceAccessMatchedRule_Name *smithy.Schema
-
-var _MobileDeviceAccessMatchedRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessMatchedRuleList",
-}, smithy.ShapeTypeList, 1)
-var _MobileDeviceAccessMatchedRuleList_member *smithy.Schema
-
-var MobileDeviceAccessOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessOverride",
-}, smithy.ShapeTypeStructure, 6)
-var MobileDeviceAccessOverride_UserId *smithy.Schema
-
-var MobileDeviceAccessOverride_DeviceId *smithy.Schema
-
-var MobileDeviceAccessOverride_Effect *smithy.Schema
-
-var MobileDeviceAccessOverride_Description *smithy.Schema
-
-var MobileDeviceAccessOverride_DateCreated *smithy.Schema
-
-var MobileDeviceAccessOverride_DateModified *smithy.Schema
-
-var _MobileDeviceAccessOverridesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessOverridesList",
-}, smithy.ShapeTypeList, 1)
-var _MobileDeviceAccessOverridesList_member *smithy.Schema
-
-var MobileDeviceAccessRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessRule",
-}, smithy.ShapeTypeStructure, 14)
-var MobileDeviceAccessRule_MobileDeviceAccessRuleId *smithy.Schema
-
-var MobileDeviceAccessRule_Name *smithy.Schema
-
-var MobileDeviceAccessRule_Description *smithy.Schema
-
-var MobileDeviceAccessRule_Effect *smithy.Schema
-
-var MobileDeviceAccessRule_DeviceTypes *smithy.Schema
-
-var MobileDeviceAccessRule_NotDeviceTypes *smithy.Schema
-
-var MobileDeviceAccessRule_DeviceModels *smithy.Schema
-
-var MobileDeviceAccessRule_NotDeviceModels *smithy.Schema
-
-var MobileDeviceAccessRule_DeviceOperatingSystems *smithy.Schema
-
-var MobileDeviceAccessRule_NotDeviceOperatingSystems *smithy.Schema
-
-var MobileDeviceAccessRule_DeviceUserAgents *smithy.Schema
-
-var MobileDeviceAccessRule_NotDeviceUserAgents *smithy.Schema
-
-var MobileDeviceAccessRule_DateCreated *smithy.Schema
-
-var MobileDeviceAccessRule_DateModified *smithy.Schema
-
-var _MobileDeviceAccessRuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessRuleDescription",
-}, smithy.ShapeTypeString, 0)
-
-var MobileDeviceAccessRuleEffect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessRuleEffect",
-}, smithy.ShapeTypeEnum, 2)
-var MobileDeviceAccessRuleEffect_ALLOW *smithy.Schema
-
-var MobileDeviceAccessRuleEffect_DENY *smithy.Schema
-
-var _MobileDeviceAccessRuleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessRuleId",
-}, smithy.ShapeTypeString, 0)
-
-var _MobileDeviceAccessRuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessRuleName",
-}, smithy.ShapeTypeString, 0)
-
-var _MobileDeviceAccessRulesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "MobileDeviceAccessRulesList",
-}, smithy.ShapeTypeList, 1)
-var _MobileDeviceAccessRulesList_member *smithy.Schema
-
-var NameAvailabilityException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "NameAvailabilityException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var NameAvailabilityException_Message *smithy.Schema
-
-var _NewResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "NewResourceDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "OrganizationId",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "OrganizationName",
-}, smithy.ShapeTypeString, 0)
-
-var OrganizationNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "OrganizationNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var OrganizationNotFoundException_Message *smithy.Schema
-
-var OrganizationStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "OrganizationStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var OrganizationStateException_Message *smithy.Schema
-
-var _OrganizationSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "OrganizationSummaries",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationSummaries_member *smithy.Schema
-
-var OrganizationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "OrganizationSummary",
-}, smithy.ShapeTypeStructure, 5)
-var OrganizationSummary_OrganizationId *smithy.Schema
-
-var OrganizationSummary_Alias *smithy.Schema
-
-var OrganizationSummary_DefaultMailDomain *smithy.Schema
-
-var OrganizationSummary_ErrorMessage *smithy.Schema
-
-var OrganizationSummary_State *smithy.Schema
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Percentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Percentage",
-}, smithy.ShapeTypeInteger, 0)
-
-var Permission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Permission",
-}, smithy.ShapeTypeStructure, 3)
-var Permission_GranteeId *smithy.Schema
-
-var Permission_GranteeType *smithy.Schema
-
-var Permission_PermissionValues *smithy.Schema
-
-var _Permissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Permissions",
-}, smithy.ShapeTypeList, 1)
-var _Permissions_member *smithy.Schema
-
-var PermissionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PermissionType",
-}, smithy.ShapeTypeEnum, 3)
-var PermissionType_FULL_ACCESS *smithy.Schema
-
-var PermissionType_SEND_AS *smithy.Schema
-
-var PermissionType_SEND_ON_BEHALF *smithy.Schema
-
-var _PermissionValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PermissionValues",
-}, smithy.ShapeTypeList, 1)
-var _PermissionValues_member *smithy.Schema
-
-var PersonalAccessTokenConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var PersonalAccessTokenConfiguration_Status *smithy.Schema
-
-var PersonalAccessTokenConfiguration_LifetimeInDays *smithy.Schema
-
-var PersonalAccessTokenConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var PersonalAccessTokenConfigurationStatus_ACTIVE *smithy.Schema
-
-var PersonalAccessTokenConfigurationStatus_INACTIVE *smithy.Schema
-
-var _PersonalAccessTokenId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenId",
-}, smithy.ShapeTypeString, 0)
-
-var _PersonalAccessTokenLifetimeInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenLifetimeInDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PersonalAccessTokenName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenName",
-}, smithy.ShapeTypeString, 0)
-
-var _PersonalAccessTokenScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenScope",
-}, smithy.ShapeTypeString, 0)
-
-var _PersonalAccessTokenScopeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenScopeList",
-}, smithy.ShapeTypeList, 1)
-var _PersonalAccessTokenScopeList_member *smithy.Schema
-
-var PersonalAccessTokenSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenSummary",
-}, smithy.ShapeTypeStructure, 7)
-var PersonalAccessTokenSummary_PersonalAccessTokenId *smithy.Schema
-
-var PersonalAccessTokenSummary_UserId *smithy.Schema
-
-var PersonalAccessTokenSummary_Name *smithy.Schema
-
-var PersonalAccessTokenSummary_DateCreated *smithy.Schema
-
-var PersonalAccessTokenSummary_DateLastUsed *smithy.Schema
-
-var PersonalAccessTokenSummary_ExpiresTime *smithy.Schema
-
-var PersonalAccessTokenSummary_Scopes *smithy.Schema
-
-var _PersonalAccessTokenSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PersonalAccessTokenSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _PersonalAccessTokenSummaryList_member *smithy.Schema
-
-var _PolicyDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PolicyDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var RedactedEwsAvailabilityProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RedactedEwsAvailabilityProvider",
-}, smithy.ShapeTypeStructure, 2)
-var RedactedEwsAvailabilityProvider_EwsEndpoint *smithy.Schema
-
-var RedactedEwsAvailabilityProvider_EwsUsername *smithy.Schema
-
-var ReservedNameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ReservedNameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ReservedNameException_Message *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 8)
-var Resource_Id *smithy.Schema
-
-var Resource_Email *smithy.Schema
-
-var Resource_Name *smithy.Schema
-
-var Resource_Type *smithy.Schema
-
-var Resource_State *smithy.Schema
-
-var Resource_EnabledDate *smithy.Schema
-
-var Resource_DisabledDate *smithy.Schema
-
-var Resource_Description *smithy.Schema
-
-var _ResourceDelegates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResourceDelegates",
-}, smithy.ShapeTypeList, 1)
-var _ResourceDelegates_member *smithy.Schema
-
-var _ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _Resources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Resources",
-}, smithy.ShapeTypeList, 1)
-var _Resources_member *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceType_ROOM *smithy.Schema
-
-var ResourceType_EQUIPMENT *smithy.Schema
-
-var RetentionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RetentionAction",
-}, smithy.ShapeTypeEnum, 3)
-var RetentionAction_NONE *smithy.Schema
-
-var RetentionAction_DELETE *smithy.Schema
-
-var RetentionAction_PERMANENTLY_DELETE *smithy.Schema
-
-var _RetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RetentionPeriod",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3ObjectKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "S3ObjectKey",
-}, smithy.ShapeTypeString, 0)
-
-var _ShortString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ShortString",
-}, smithy.ShapeTypeString, 0)
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetUsers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TargetUsers",
-}, smithy.ShapeTypeList, 1)
-var _TargetUsers_member *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyTagsException_Message *smithy.Schema
-
-var UnsupportedOperationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UnsupportedOperationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var UnsupportedOperationException_Message *smithy.Schema
-
-var _Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Url",
-}, smithy.ShapeTypeString, 0)
-
-var User = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "User",
-}, smithy.ShapeTypeStructure, 10)
-var User_Id *smithy.Schema
-
-var User_Email *smithy.Schema
-
-var User_Name *smithy.Schema
-
-var User_DisplayName *smithy.Schema
-
-var User_State *smithy.Schema
-
-var User_UserRole *smithy.Schema
-
-var User_EnabledDate *smithy.Schema
-
-var User_DisabledDate *smithy.Schema
-
-var User_IdentityProviderUserId *smithy.Schema
-
-var User_IdentityProviderIdentityStoreId *smithy.Schema
-
-var _UserAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UserAttribute",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _UserIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UserIdList",
-}, smithy.ShapeTypeList, 1)
-var _UserIdList_member *smithy.Schema
-
-var _UserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UserName",
-}, smithy.ShapeTypeString, 0)
-
-var UserRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UserRole",
-}, smithy.ShapeTypeEnum, 4)
-var UserRole_USER *smithy.Schema
-
-var UserRole_RESOURCE *smithy.Schema
-
-var UserRole_SYSTEM_USER *smithy.Schema
-
-var UserRole_REMOTE_USER *smithy.Schema
-
-var _Users = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "Users",
-}, smithy.ShapeTypeList, 1)
-var _Users_member *smithy.Schema
-
-var _WorkMailDomainName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "WorkMailDomainName",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkMailIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "WorkMailIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var AssociateDelegateToResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssociateDelegateToResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateDelegateToResourceRequest_OrganizationId *smithy.Schema
-
-var AssociateDelegateToResourceRequest_ResourceId *smithy.Schema
-
-var AssociateDelegateToResourceRequest_EntityId *smithy.Schema
-
-var AssociateDelegateToResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssociateDelegateToResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssociateMemberToGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssociateMemberToGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateMemberToGroupRequest_OrganizationId *smithy.Schema
-
-var AssociateMemberToGroupRequest_GroupId *smithy.Schema
-
-var AssociateMemberToGroupRequest_MemberId *smithy.Schema
-
-var AssociateMemberToGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssociateMemberToGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var AssumeImpersonationRoleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssumeImpersonationRoleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssumeImpersonationRoleRequest_OrganizationId *smithy.Schema
-
-var AssumeImpersonationRoleRequest_ImpersonationRoleId *smithy.Schema
-
-var AssumeImpersonationRoleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "AssumeImpersonationRoleResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssumeImpersonationRoleResponse_Token *smithy.Schema
-
-var AssumeImpersonationRoleResponse_ExpiresIn *smithy.Schema
-
-var CancelMailboxExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CancelMailboxExportJobRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CancelMailboxExportJobRequest_ClientToken *smithy.Schema
-
-var CancelMailboxExportJobRequest_JobId *smithy.Schema
-
-var CancelMailboxExportJobRequest_OrganizationId *smithy.Schema
-
-var CancelMailboxExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CancelMailboxExportJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateAliasRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateAliasRequest_OrganizationId *smithy.Schema
-
-var CreateAliasRequest_EntityId *smithy.Schema
-
-var CreateAliasRequest_Alias *smithy.Schema
-
-var CreateAliasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateAliasResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateAvailabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateAvailabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateAvailabilityConfigurationRequest_ClientToken *smithy.Schema
-
-var CreateAvailabilityConfigurationRequest_OrganizationId *smithy.Schema
-
-var CreateAvailabilityConfigurationRequest_DomainName *smithy.Schema
-
-var CreateAvailabilityConfigurationRequest_EwsProvider *smithy.Schema
-
-var CreateAvailabilityConfigurationRequest_LambdaProvider *smithy.Schema
-
-var CreateAvailabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateAvailabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateGroupRequest_OrganizationId *smithy.Schema
-
-var CreateGroupRequest_Name *smithy.Schema
-
-var CreateGroupRequest_HiddenFromGlobalAddressList *smithy.Schema
-
-var CreateGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateGroupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateGroupResponse_GroupId *smithy.Schema
-
-var CreateIdentityCenterApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateIdentityCenterApplicationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIdentityCenterApplicationRequest_Name *smithy.Schema
-
-var CreateIdentityCenterApplicationRequest_InstanceArn *smithy.Schema
-
-var CreateIdentityCenterApplicationRequest_ClientToken *smithy.Schema
-
-var CreateIdentityCenterApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateIdentityCenterApplicationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateIdentityCenterApplicationResponse_ApplicationArn *smithy.Schema
-
-var CreateImpersonationRoleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateImpersonationRoleRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateImpersonationRoleRequest_ClientToken *smithy.Schema
-
-var CreateImpersonationRoleRequest_OrganizationId *smithy.Schema
-
-var CreateImpersonationRoleRequest_Name *smithy.Schema
-
-var CreateImpersonationRoleRequest_Type *smithy.Schema
-
-var CreateImpersonationRoleRequest_Description *smithy.Schema
-
-var CreateImpersonationRoleRequest_Rules *smithy.Schema
-
-var CreateImpersonationRoleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateImpersonationRoleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateImpersonationRoleResponse_ImpersonationRoleId *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateMobileDeviceAccessRuleRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateMobileDeviceAccessRuleRequest_OrganizationId *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_ClientToken *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_Name *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_Description *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_Effect *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_DeviceTypes *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_NotDeviceTypes *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_DeviceModels *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_NotDeviceModels *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_DeviceOperatingSystems *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_DeviceUserAgents *smithy.Schema
-
-var CreateMobileDeviceAccessRuleRequest_NotDeviceUserAgents *smithy.Schema
-
-var CreateMobileDeviceAccessRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateMobileDeviceAccessRuleResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId *smithy.Schema
-
-var CreateOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateOrganizationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateOrganizationRequest_DirectoryId *smithy.Schema
-
-var CreateOrganizationRequest_Alias *smithy.Schema
-
-var CreateOrganizationRequest_ClientToken *smithy.Schema
-
-var CreateOrganizationRequest_Domains *smithy.Schema
-
-var CreateOrganizationRequest_KmsKeyArn *smithy.Schema
-
-var CreateOrganizationRequest_EnableInteroperability *smithy.Schema
-
-var CreateOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateOrganizationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateOrganizationResponse_OrganizationId *smithy.Schema
-
-var CreateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateResourceRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateResourceRequest_OrganizationId *smithy.Schema
-
-var CreateResourceRequest_Name *smithy.Schema
-
-var CreateResourceRequest_Type *smithy.Schema
-
-var CreateResourceRequest_Description *smithy.Schema
-
-var CreateResourceRequest_HiddenFromGlobalAddressList *smithy.Schema
-
-var CreateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResourceResponse_ResourceId *smithy.Schema
-
-var CreateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateUserRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateUserRequest_OrganizationId *smithy.Schema
-
-var CreateUserRequest_Name *smithy.Schema
-
-var CreateUserRequest_DisplayName *smithy.Schema
-
-var CreateUserRequest_Password *smithy.Schema
-
-var CreateUserRequest_Role *smithy.Schema
-
-var CreateUserRequest_FirstName *smithy.Schema
-
-var CreateUserRequest_LastName *smithy.Schema
-
-var CreateUserRequest_HiddenFromGlobalAddressList *smithy.Schema
-
-var CreateUserRequest_IdentityProviderUserId *smithy.Schema
-
-var CreateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "CreateUserResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateUserResponse_UserId *smithy.Schema
-
-var DeleteAccessControlRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAccessControlRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAccessControlRuleRequest_OrganizationId *smithy.Schema
-
-var DeleteAccessControlRuleRequest_Name *smithy.Schema
-
-var DeleteAccessControlRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAccessControlRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAliasRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAliasRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteAliasRequest_OrganizationId *smithy.Schema
-
-var DeleteAliasRequest_EntityId *smithy.Schema
-
-var DeleteAliasRequest_Alias *smithy.Schema
-
-var DeleteAliasResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAliasResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteAvailabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAvailabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteAvailabilityConfigurationRequest_OrganizationId *smithy.Schema
-
-var DeleteAvailabilityConfigurationRequest_DomainName *smithy.Schema
-
-var DeleteAvailabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteAvailabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEmailMonitoringConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteEmailMonitoringConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEmailMonitoringConfigurationRequest_OrganizationId *smithy.Schema
-
-var DeleteEmailMonitoringConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteEmailMonitoringConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteGroupRequest_OrganizationId *smithy.Schema
-
-var DeleteGroupRequest_GroupId *smithy.Schema
-
-var DeleteGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIdentityCenterApplicationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteIdentityCenterApplicationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIdentityCenterApplicationRequest_ApplicationArn *smithy.Schema
-
-var DeleteIdentityCenterApplicationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteIdentityCenterApplicationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteIdentityProviderConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteIdentityProviderConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIdentityProviderConfigurationRequest_OrganizationId *smithy.Schema
-
-var DeleteIdentityProviderConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteIdentityProviderConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteImpersonationRoleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteImpersonationRoleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteImpersonationRoleRequest_OrganizationId *smithy.Schema
-
-var DeleteImpersonationRoleRequest_ImpersonationRoleId *smithy.Schema
-
-var DeleteImpersonationRoleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteImpersonationRoleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteMailboxPermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMailboxPermissionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteMailboxPermissionsRequest_OrganizationId *smithy.Schema
-
-var DeleteMailboxPermissionsRequest_EntityId *smithy.Schema
-
-var DeleteMailboxPermissionsRequest_GranteeId *smithy.Schema
-
-var DeleteMailboxPermissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMailboxPermissionsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteMobileDeviceAccessOverrideRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMobileDeviceAccessOverrideRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteMobileDeviceAccessOverrideRequest_OrganizationId *smithy.Schema
-
-var DeleteMobileDeviceAccessOverrideRequest_UserId *smithy.Schema
-
-var DeleteMobileDeviceAccessOverrideRequest_DeviceId *smithy.Schema
-
-var DeleteMobileDeviceAccessOverrideResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMobileDeviceAccessOverrideResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteMobileDeviceAccessRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMobileDeviceAccessRuleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteMobileDeviceAccessRuleRequest_OrganizationId *smithy.Schema
-
-var DeleteMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId *smithy.Schema
-
-var DeleteMobileDeviceAccessRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteMobileDeviceAccessRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteOrganizationRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteOrganizationRequest_ClientToken *smithy.Schema
-
-var DeleteOrganizationRequest_OrganizationId *smithy.Schema
-
-var DeleteOrganizationRequest_DeleteDirectory *smithy.Schema
-
-var DeleteOrganizationRequest_ForceDelete *smithy.Schema
-
-var DeleteOrganizationRequest_DeleteIdentityCenterApplication *smithy.Schema
-
-var DeleteOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteOrganizationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteOrganizationResponse_OrganizationId *smithy.Schema
-
-var DeleteOrganizationResponse_State *smithy.Schema
-
-var DeletePersonalAccessTokenRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeletePersonalAccessTokenRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeletePersonalAccessTokenRequest_OrganizationId *smithy.Schema
-
-var DeletePersonalAccessTokenRequest_PersonalAccessTokenId *smithy.Schema
-
-var DeletePersonalAccessTokenResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeletePersonalAccessTokenResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourceRequest_OrganizationId *smithy.Schema
-
-var DeleteResourceRequest_ResourceId *smithy.Schema
-
-var DeleteResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteRetentionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteRetentionPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRetentionPolicyRequest_OrganizationId *smithy.Schema
-
-var DeleteRetentionPolicyRequest_Id *smithy.Schema
-
-var DeleteRetentionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteRetentionPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteUserRequest_OrganizationId *smithy.Schema
-
-var DeleteUserRequest_UserId *smithy.Schema
-
-var DeleteUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeleteUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterFromWorkMailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeregisterFromWorkMailRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterFromWorkMailRequest_OrganizationId *smithy.Schema
-
-var DeregisterFromWorkMailRequest_EntityId *smithy.Schema
-
-var DeregisterFromWorkMailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeregisterFromWorkMailResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterMailDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeregisterMailDomainRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeregisterMailDomainRequest_OrganizationId *smithy.Schema
-
-var DeregisterMailDomainRequest_DomainName *smithy.Schema
-
-var DeregisterMailDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DeregisterMailDomainResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeEmailMonitoringConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeEmailMonitoringConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEmailMonitoringConfigurationRequest_OrganizationId *smithy.Schema
-
-var DescribeEmailMonitoringConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeEmailMonitoringConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEmailMonitoringConfigurationResponse_RoleArn *smithy.Schema
-
-var DescribeEmailMonitoringConfigurationResponse_LogGroupArn *smithy.Schema
-
-var DescribeEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeEntityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEntityRequest_OrganizationId *smithy.Schema
-
-var DescribeEntityRequest_Email *smithy.Schema
-
-var DescribeEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeEntityResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeEntityResponse_EntityId *smithy.Schema
-
-var DescribeEntityResponse_Name *smithy.Schema
-
-var DescribeEntityResponse_Type *smithy.Schema
-
-var DescribeGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeGroupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeGroupRequest_OrganizationId *smithy.Schema
-
-var DescribeGroupRequest_GroupId *smithy.Schema
-
-var DescribeGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeGroupResponse",
-}, smithy.ShapeTypeStructure, 7)
-var DescribeGroupResponse_GroupId *smithy.Schema
-
-var DescribeGroupResponse_Name *smithy.Schema
-
-var DescribeGroupResponse_Email *smithy.Schema
-
-var DescribeGroupResponse_State *smithy.Schema
-
-var DescribeGroupResponse_EnabledDate *smithy.Schema
-
-var DescribeGroupResponse_DisabledDate *smithy.Schema
-
-var DescribeGroupResponse_HiddenFromGlobalAddressList *smithy.Schema
-
-var DescribeIdentityProviderConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeIdentityProviderConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeIdentityProviderConfigurationRequest_OrganizationId *smithy.Schema
-
-var DescribeIdentityProviderConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeIdentityProviderConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeIdentityProviderConfigurationResponse_AuthenticationMode *smithy.Schema
-
-var DescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration *smithy.Schema
-
-var DescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration *smithy.Schema
-
-var DescribeInboundDmarcSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeInboundDmarcSettingsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeInboundDmarcSettingsRequest_OrganizationId *smithy.Schema
-
-var DescribeInboundDmarcSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeInboundDmarcSettingsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeInboundDmarcSettingsResponse_Enforced *smithy.Schema
-
-var DescribeMailboxExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeMailboxExportJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeMailboxExportJobRequest_JobId *smithy.Schema
-
-var DescribeMailboxExportJobRequest_OrganizationId *smithy.Schema
-
-var DescribeMailboxExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeMailboxExportJobResponse",
-}, smithy.ShapeTypeStructure, 12)
-var DescribeMailboxExportJobResponse_EntityId *smithy.Schema
-
-var DescribeMailboxExportJobResponse_Description *smithy.Schema
-
-var DescribeMailboxExportJobResponse_RoleArn *smithy.Schema
-
-var DescribeMailboxExportJobResponse_KmsKeyArn *smithy.Schema
-
-var DescribeMailboxExportJobResponse_S3BucketName *smithy.Schema
-
-var DescribeMailboxExportJobResponse_S3Prefix *smithy.Schema
-
-var DescribeMailboxExportJobResponse_S3Path *smithy.Schema
-
-var DescribeMailboxExportJobResponse_EstimatedProgress *smithy.Schema
-
-var DescribeMailboxExportJobResponse_State *smithy.Schema
-
-var DescribeMailboxExportJobResponse_ErrorInfo *smithy.Schema
-
-var DescribeMailboxExportJobResponse_StartTime *smithy.Schema
-
-var DescribeMailboxExportJobResponse_EndTime *smithy.Schema
-
-var DescribeOrganizationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeOrganizationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeOrganizationRequest_OrganizationId *smithy.Schema
-
-var DescribeOrganizationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeOrganizationResponse",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeOrganizationResponse_OrganizationId *smithy.Schema
-
-var DescribeOrganizationResponse_Alias *smithy.Schema
-
-var DescribeOrganizationResponse_State *smithy.Schema
-
-var DescribeOrganizationResponse_DirectoryId *smithy.Schema
-
-var DescribeOrganizationResponse_DirectoryType *smithy.Schema
-
-var DescribeOrganizationResponse_DefaultMailDomain *smithy.Schema
-
-var DescribeOrganizationResponse_CompletedDate *smithy.Schema
-
-var DescribeOrganizationResponse_ErrorMessage *smithy.Schema
-
-var DescribeOrganizationResponse_ARN *smithy.Schema
-
-var DescribeOrganizationResponse_MigrationAdmin *smithy.Schema
-
-var DescribeOrganizationResponse_InteroperabilityEnabled *smithy.Schema
-
-var DescribeResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeResourceRequest_OrganizationId *smithy.Schema
-
-var DescribeResourceRequest_ResourceId *smithy.Schema
-
-var DescribeResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeResourceResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeResourceResponse_ResourceId *smithy.Schema
-
-var DescribeResourceResponse_Email *smithy.Schema
-
-var DescribeResourceResponse_Name *smithy.Schema
-
-var DescribeResourceResponse_Type *smithy.Schema
-
-var DescribeResourceResponse_BookingOptions *smithy.Schema
-
-var DescribeResourceResponse_State *smithy.Schema
-
-var DescribeResourceResponse_EnabledDate *smithy.Schema
-
-var DescribeResourceResponse_DisabledDate *smithy.Schema
-
-var DescribeResourceResponse_Description *smithy.Schema
-
-var DescribeResourceResponse_HiddenFromGlobalAddressList *smithy.Schema
-
-var DescribeUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeUserRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeUserRequest_OrganizationId *smithy.Schema
-
-var DescribeUserRequest_UserId *smithy.Schema
-
-var DescribeUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DescribeUserResponse",
-}, smithy.ShapeTypeStructure, 25)
-var DescribeUserResponse_UserId *smithy.Schema
-
-var DescribeUserResponse_Name *smithy.Schema
-
-var DescribeUserResponse_Email *smithy.Schema
-
-var DescribeUserResponse_DisplayName *smithy.Schema
-
-var DescribeUserResponse_State *smithy.Schema
-
-var DescribeUserResponse_UserRole *smithy.Schema
-
-var DescribeUserResponse_EnabledDate *smithy.Schema
-
-var DescribeUserResponse_DisabledDate *smithy.Schema
-
-var DescribeUserResponse_MailboxProvisionedDate *smithy.Schema
-
-var DescribeUserResponse_MailboxDeprovisionedDate *smithy.Schema
-
-var DescribeUserResponse_FirstName *smithy.Schema
-
-var DescribeUserResponse_LastName *smithy.Schema
-
-var DescribeUserResponse_HiddenFromGlobalAddressList *smithy.Schema
-
-var DescribeUserResponse_Initials *smithy.Schema
-
-var DescribeUserResponse_Telephone *smithy.Schema
-
-var DescribeUserResponse_Street *smithy.Schema
-
-var DescribeUserResponse_JobTitle *smithy.Schema
-
-var DescribeUserResponse_City *smithy.Schema
-
-var DescribeUserResponse_Company *smithy.Schema
-
-var DescribeUserResponse_ZipCode *smithy.Schema
-
-var DescribeUserResponse_Department *smithy.Schema
-
-var DescribeUserResponse_Country *smithy.Schema
-
-var DescribeUserResponse_Office *smithy.Schema
-
-var DescribeUserResponse_IdentityProviderUserId *smithy.Schema
-
-var DescribeUserResponse_IdentityProviderIdentityStoreId *smithy.Schema
-
-var DisassociateDelegateFromResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DisassociateDelegateFromResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateDelegateFromResourceRequest_OrganizationId *smithy.Schema
-
-var DisassociateDelegateFromResourceRequest_ResourceId *smithy.Schema
-
-var DisassociateDelegateFromResourceRequest_EntityId *smithy.Schema
-
-var DisassociateDelegateFromResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DisassociateDelegateFromResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateMemberFromGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DisassociateMemberFromGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateMemberFromGroupRequest_OrganizationId *smithy.Schema
-
-var DisassociateMemberFromGroupRequest_GroupId *smithy.Schema
-
-var DisassociateMemberFromGroupRequest_MemberId *smithy.Schema
-
-var DisassociateMemberFromGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "DisassociateMemberFromGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccessControlEffectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetAccessControlEffectRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetAccessControlEffectRequest_OrganizationId *smithy.Schema
-
-var GetAccessControlEffectRequest_IpAddress *smithy.Schema
-
-var GetAccessControlEffectRequest_Action *smithy.Schema
-
-var GetAccessControlEffectRequest_UserId *smithy.Schema
-
-var GetAccessControlEffectRequest_ImpersonationRoleId *smithy.Schema
-
-var GetAccessControlEffectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetAccessControlEffectResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetAccessControlEffectResponse_Effect *smithy.Schema
-
-var GetAccessControlEffectResponse_MatchedRules *smithy.Schema
-
-var GetDefaultRetentionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetDefaultRetentionPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDefaultRetentionPolicyRequest_OrganizationId *smithy.Schema
-
-var GetDefaultRetentionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetDefaultRetentionPolicyResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetDefaultRetentionPolicyResponse_Id *smithy.Schema
-
-var GetDefaultRetentionPolicyResponse_Name *smithy.Schema
-
-var GetDefaultRetentionPolicyResponse_Description *smithy.Schema
-
-var GetDefaultRetentionPolicyResponse_FolderConfigurations *smithy.Schema
-
-var GetImpersonationRoleEffectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetImpersonationRoleEffectRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetImpersonationRoleEffectRequest_OrganizationId *smithy.Schema
-
-var GetImpersonationRoleEffectRequest_ImpersonationRoleId *smithy.Schema
-
-var GetImpersonationRoleEffectRequest_TargetUser *smithy.Schema
-
-var GetImpersonationRoleEffectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetImpersonationRoleEffectResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetImpersonationRoleEffectResponse_Type *smithy.Schema
-
-var GetImpersonationRoleEffectResponse_Effect *smithy.Schema
-
-var GetImpersonationRoleEffectResponse_MatchedRules *smithy.Schema
-
-var GetImpersonationRoleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetImpersonationRoleRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetImpersonationRoleRequest_OrganizationId *smithy.Schema
-
-var GetImpersonationRoleRequest_ImpersonationRoleId *smithy.Schema
-
-var GetImpersonationRoleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetImpersonationRoleResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetImpersonationRoleResponse_ImpersonationRoleId *smithy.Schema
-
-var GetImpersonationRoleResponse_Name *smithy.Schema
-
-var GetImpersonationRoleResponse_Type *smithy.Schema
-
-var GetImpersonationRoleResponse_Description *smithy.Schema
-
-var GetImpersonationRoleResponse_Rules *smithy.Schema
-
-var GetImpersonationRoleResponse_DateCreated *smithy.Schema
-
-var GetImpersonationRoleResponse_DateModified *smithy.Schema
-
-var GetMailboxDetailsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMailboxDetailsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetMailboxDetailsRequest_OrganizationId *smithy.Schema
-
-var GetMailboxDetailsRequest_UserId *smithy.Schema
-
-var GetMailboxDetailsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMailboxDetailsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetMailboxDetailsResponse_MailboxQuota *smithy.Schema
-
-var GetMailboxDetailsResponse_MailboxSize *smithy.Schema
-
-var GetMailDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMailDomainRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetMailDomainRequest_OrganizationId *smithy.Schema
-
-var GetMailDomainRequest_DomainName *smithy.Schema
-
-var GetMailDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMailDomainResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetMailDomainResponse_Records *smithy.Schema
-
-var GetMailDomainResponse_IsTestDomain *smithy.Schema
-
-var GetMailDomainResponse_IsDefault *smithy.Schema
-
-var GetMailDomainResponse_OwnershipVerificationStatus *smithy.Schema
-
-var GetMailDomainResponse_DkimVerificationStatus *smithy.Schema
-
-var GetMobileDeviceAccessEffectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMobileDeviceAccessEffectRequest",
-}, smithy.ShapeTypeStructure, 5)
-var GetMobileDeviceAccessEffectRequest_OrganizationId *smithy.Schema
-
-var GetMobileDeviceAccessEffectRequest_DeviceType *smithy.Schema
-
-var GetMobileDeviceAccessEffectRequest_DeviceModel *smithy.Schema
-
-var GetMobileDeviceAccessEffectRequest_DeviceOperatingSystem *smithy.Schema
-
-var GetMobileDeviceAccessEffectRequest_DeviceUserAgent *smithy.Schema
-
-var GetMobileDeviceAccessEffectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMobileDeviceAccessEffectResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetMobileDeviceAccessEffectResponse_Effect *smithy.Schema
-
-var GetMobileDeviceAccessEffectResponse_MatchedRules *smithy.Schema
-
-var GetMobileDeviceAccessOverrideRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMobileDeviceAccessOverrideRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetMobileDeviceAccessOverrideRequest_OrganizationId *smithy.Schema
-
-var GetMobileDeviceAccessOverrideRequest_UserId *smithy.Schema
-
-var GetMobileDeviceAccessOverrideRequest_DeviceId *smithy.Schema
-
-var GetMobileDeviceAccessOverrideResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetMobileDeviceAccessOverrideResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetMobileDeviceAccessOverrideResponse_UserId *smithy.Schema
-
-var GetMobileDeviceAccessOverrideResponse_DeviceId *smithy.Schema
-
-var GetMobileDeviceAccessOverrideResponse_Effect *smithy.Schema
-
-var GetMobileDeviceAccessOverrideResponse_Description *smithy.Schema
-
-var GetMobileDeviceAccessOverrideResponse_DateCreated *smithy.Schema
-
-var GetMobileDeviceAccessOverrideResponse_DateModified *smithy.Schema
-
-var GetPersonalAccessTokenMetadataRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetPersonalAccessTokenMetadataRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetPersonalAccessTokenMetadataRequest_OrganizationId *smithy.Schema
-
-var GetPersonalAccessTokenMetadataRequest_PersonalAccessTokenId *smithy.Schema
-
-var GetPersonalAccessTokenMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "GetPersonalAccessTokenMetadataResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId *smithy.Schema
-
-var GetPersonalAccessTokenMetadataResponse_UserId *smithy.Schema
-
-var GetPersonalAccessTokenMetadataResponse_Name *smithy.Schema
-
-var GetPersonalAccessTokenMetadataResponse_DateCreated *smithy.Schema
-
-var GetPersonalAccessTokenMetadataResponse_DateLastUsed *smithy.Schema
-
-var GetPersonalAccessTokenMetadataResponse_ExpiresTime *smithy.Schema
-
-var GetPersonalAccessTokenMetadataResponse_Scopes *smithy.Schema
-
-var ListAccessControlRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAccessControlRulesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListAccessControlRulesRequest_OrganizationId *smithy.Schema
-
-var ListAccessControlRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAccessControlRulesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListAccessControlRulesResponse_Rules *smithy.Schema
-
-var ListAliasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAliasesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListAliasesRequest_OrganizationId *smithy.Schema
-
-var ListAliasesRequest_EntityId *smithy.Schema
-
-var ListAliasesRequest_NextToken *smithy.Schema
-
-var ListAliasesRequest_MaxResults *smithy.Schema
-
-var ListAliasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAliasesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAliasesResponse_Aliases *smithy.Schema
-
-var ListAliasesResponse_NextToken *smithy.Schema
-
-var ListAvailabilityConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAvailabilityConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAvailabilityConfigurationsRequest_OrganizationId *smithy.Schema
-
-var ListAvailabilityConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListAvailabilityConfigurationsRequest_NextToken *smithy.Schema
-
-var ListAvailabilityConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListAvailabilityConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAvailabilityConfigurationsResponse_AvailabilityConfigurations *smithy.Schema
-
-var ListAvailabilityConfigurationsResponse_NextToken *smithy.Schema
-
-var ListGroupMembersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupMembersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListGroupMembersRequest_OrganizationId *smithy.Schema
-
-var ListGroupMembersRequest_GroupId *smithy.Schema
-
-var ListGroupMembersRequest_NextToken *smithy.Schema
-
-var ListGroupMembersRequest_MaxResults *smithy.Schema
-
-var ListGroupMembersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupMembersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupMembersResponse_Members *smithy.Schema
-
-var ListGroupMembersResponse_NextToken *smithy.Schema
-
-var ListGroupsForEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupsForEntityRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListGroupsForEntityRequest_OrganizationId *smithy.Schema
-
-var ListGroupsForEntityRequest_EntityId *smithy.Schema
-
-var ListGroupsForEntityRequest_Filters *smithy.Schema
-
-var ListGroupsForEntityRequest_NextToken *smithy.Schema
-
-var ListGroupsForEntityRequest_MaxResults *smithy.Schema
-
-var ListGroupsForEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupsForEntityResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupsForEntityResponse_Groups *smithy.Schema
-
-var ListGroupsForEntityResponse_NextToken *smithy.Schema
-
-var ListGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListGroupsRequest_OrganizationId *smithy.Schema
-
-var ListGroupsRequest_NextToken *smithy.Schema
-
-var ListGroupsRequest_MaxResults *smithy.Schema
-
-var ListGroupsRequest_Filters *smithy.Schema
-
-var ListGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListGroupsResponse_Groups *smithy.Schema
-
-var ListGroupsResponse_NextToken *smithy.Schema
-
-var ListImpersonationRolesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListImpersonationRolesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListImpersonationRolesRequest_OrganizationId *smithy.Schema
-
-var ListImpersonationRolesRequest_NextToken *smithy.Schema
-
-var ListImpersonationRolesRequest_MaxResults *smithy.Schema
-
-var ListImpersonationRolesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListImpersonationRolesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListImpersonationRolesResponse_Roles *smithy.Schema
-
-var ListImpersonationRolesResponse_NextToken *smithy.Schema
-
-var ListMailboxExportJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailboxExportJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMailboxExportJobsRequest_OrganizationId *smithy.Schema
-
-var ListMailboxExportJobsRequest_NextToken *smithy.Schema
-
-var ListMailboxExportJobsRequest_MaxResults *smithy.Schema
-
-var ListMailboxExportJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailboxExportJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMailboxExportJobsResponse_Jobs *smithy.Schema
-
-var ListMailboxExportJobsResponse_NextToken *smithy.Schema
-
-var ListMailboxPermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailboxPermissionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListMailboxPermissionsRequest_OrganizationId *smithy.Schema
-
-var ListMailboxPermissionsRequest_EntityId *smithy.Schema
-
-var ListMailboxPermissionsRequest_NextToken *smithy.Schema
-
-var ListMailboxPermissionsRequest_MaxResults *smithy.Schema
-
-var ListMailboxPermissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailboxPermissionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMailboxPermissionsResponse_Permissions *smithy.Schema
-
-var ListMailboxPermissionsResponse_NextToken *smithy.Schema
-
-var ListMailDomainsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailDomainsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListMailDomainsRequest_OrganizationId *smithy.Schema
-
-var ListMailDomainsRequest_MaxResults *smithy.Schema
-
-var ListMailDomainsRequest_NextToken *smithy.Schema
-
-var ListMailDomainsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMailDomainsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMailDomainsResponse_MailDomains *smithy.Schema
-
-var ListMailDomainsResponse_NextToken *smithy.Schema
-
-var ListMobileDeviceAccessOverridesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMobileDeviceAccessOverridesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListMobileDeviceAccessOverridesRequest_OrganizationId *smithy.Schema
-
-var ListMobileDeviceAccessOverridesRequest_UserId *smithy.Schema
-
-var ListMobileDeviceAccessOverridesRequest_DeviceId *smithy.Schema
-
-var ListMobileDeviceAccessOverridesRequest_NextToken *smithy.Schema
-
-var ListMobileDeviceAccessOverridesRequest_MaxResults *smithy.Schema
-
-var ListMobileDeviceAccessOverridesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMobileDeviceAccessOverridesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMobileDeviceAccessOverridesResponse_Overrides *smithy.Schema
-
-var ListMobileDeviceAccessOverridesResponse_NextToken *smithy.Schema
-
-var ListMobileDeviceAccessRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMobileDeviceAccessRulesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListMobileDeviceAccessRulesRequest_OrganizationId *smithy.Schema
-
-var ListMobileDeviceAccessRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListMobileDeviceAccessRulesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListMobileDeviceAccessRulesResponse_Rules *smithy.Schema
-
-var ListOrganizationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListOrganizationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListOrganizationsRequest_NextToken *smithy.Schema
-
-var ListOrganizationsRequest_MaxResults *smithy.Schema
-
-var ListOrganizationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListOrganizationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOrganizationsResponse_OrganizationSummaries *smithy.Schema
-
-var ListOrganizationsResponse_NextToken *smithy.Schema
-
-var ListPersonalAccessTokensRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListPersonalAccessTokensRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListPersonalAccessTokensRequest_OrganizationId *smithy.Schema
-
-var ListPersonalAccessTokensRequest_UserId *smithy.Schema
-
-var ListPersonalAccessTokensRequest_NextToken *smithy.Schema
-
-var ListPersonalAccessTokensRequest_MaxResults *smithy.Schema
-
-var ListPersonalAccessTokensResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListPersonalAccessTokensResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPersonalAccessTokensResponse_NextToken *smithy.Schema
-
-var ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries *smithy.Schema
-
-var ListResourceDelegatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListResourceDelegatesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListResourceDelegatesRequest_OrganizationId *smithy.Schema
-
-var ListResourceDelegatesRequest_ResourceId *smithy.Schema
-
-var ListResourceDelegatesRequest_NextToken *smithy.Schema
-
-var ListResourceDelegatesRequest_MaxResults *smithy.Schema
-
-var ListResourceDelegatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListResourceDelegatesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourceDelegatesResponse_Delegates *smithy.Schema
-
-var ListResourceDelegatesResponse_NextToken *smithy.Schema
-
-var ListResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListResourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListResourcesRequest_OrganizationId *smithy.Schema
-
-var ListResourcesRequest_NextToken *smithy.Schema
-
-var ListResourcesRequest_MaxResults *smithy.Schema
-
-var ListResourcesRequest_Filters *smithy.Schema
-
-var ListResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourcesResponse_Resources *smithy.Schema
-
-var ListResourcesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListUsersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListUsersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListUsersRequest_OrganizationId *smithy.Schema
-
-var ListUsersRequest_NextToken *smithy.Schema
-
-var ListUsersRequest_MaxResults *smithy.Schema
-
-var ListUsersRequest_Filters *smithy.Schema
-
-var ListUsersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ListUsersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListUsersResponse_Users *smithy.Schema
-
-var ListUsersResponse_NextToken *smithy.Schema
-
-var PutAccessControlRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutAccessControlRuleRequest",
-}, smithy.ShapeTypeStructure, 12)
-var PutAccessControlRuleRequest_Name *smithy.Schema
-
-var PutAccessControlRuleRequest_Effect *smithy.Schema
-
-var PutAccessControlRuleRequest_Description *smithy.Schema
-
-var PutAccessControlRuleRequest_IpRanges *smithy.Schema
-
-var PutAccessControlRuleRequest_NotIpRanges *smithy.Schema
-
-var PutAccessControlRuleRequest_Actions *smithy.Schema
-
-var PutAccessControlRuleRequest_NotActions *smithy.Schema
-
-var PutAccessControlRuleRequest_UserIds *smithy.Schema
-
-var PutAccessControlRuleRequest_NotUserIds *smithy.Schema
-
-var PutAccessControlRuleRequest_OrganizationId *smithy.Schema
-
-var PutAccessControlRuleRequest_ImpersonationRoleIds *smithy.Schema
-
-var PutAccessControlRuleRequest_NotImpersonationRoleIds *smithy.Schema
-
-var PutAccessControlRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutAccessControlRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutEmailMonitoringConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutEmailMonitoringConfigurationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutEmailMonitoringConfigurationRequest_OrganizationId *smithy.Schema
-
-var PutEmailMonitoringConfigurationRequest_RoleArn *smithy.Schema
-
-var PutEmailMonitoringConfigurationRequest_LogGroupArn *smithy.Schema
-
-var PutEmailMonitoringConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutEmailMonitoringConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutIdentityProviderConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutIdentityProviderConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutIdentityProviderConfigurationRequest_OrganizationId *smithy.Schema
-
-var PutIdentityProviderConfigurationRequest_AuthenticationMode *smithy.Schema
-
-var PutIdentityProviderConfigurationRequest_IdentityCenterConfiguration *smithy.Schema
-
-var PutIdentityProviderConfigurationRequest_PersonalAccessTokenConfiguration *smithy.Schema
-
-var PutIdentityProviderConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutIdentityProviderConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutInboundDmarcSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutInboundDmarcSettingsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutInboundDmarcSettingsRequest_OrganizationId *smithy.Schema
-
-var PutInboundDmarcSettingsRequest_Enforced *smithy.Schema
-
-var PutInboundDmarcSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutInboundDmarcSettingsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutMailboxPermissionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutMailboxPermissionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutMailboxPermissionsRequest_OrganizationId *smithy.Schema
-
-var PutMailboxPermissionsRequest_EntityId *smithy.Schema
-
-var PutMailboxPermissionsRequest_GranteeId *smithy.Schema
-
-var PutMailboxPermissionsRequest_PermissionValues *smithy.Schema
-
-var PutMailboxPermissionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutMailboxPermissionsResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutMobileDeviceAccessOverrideRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutMobileDeviceAccessOverrideRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutMobileDeviceAccessOverrideRequest_OrganizationId *smithy.Schema
-
-var PutMobileDeviceAccessOverrideRequest_UserId *smithy.Schema
-
-var PutMobileDeviceAccessOverrideRequest_DeviceId *smithy.Schema
-
-var PutMobileDeviceAccessOverrideRequest_Effect *smithy.Schema
-
-var PutMobileDeviceAccessOverrideRequest_Description *smithy.Schema
-
-var PutMobileDeviceAccessOverrideResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutMobileDeviceAccessOverrideResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutRetentionPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutRetentionPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutRetentionPolicyRequest_OrganizationId *smithy.Schema
-
-var PutRetentionPolicyRequest_Id *smithy.Schema
-
-var PutRetentionPolicyRequest_Name *smithy.Schema
-
-var PutRetentionPolicyRequest_Description *smithy.Schema
-
-var PutRetentionPolicyRequest_FolderConfigurations *smithy.Schema
-
-var PutRetentionPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "PutRetentionPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RegisterMailDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RegisterMailDomainRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterMailDomainRequest_ClientToken *smithy.Schema
-
-var RegisterMailDomainRequest_OrganizationId *smithy.Schema
-
-var RegisterMailDomainRequest_DomainName *smithy.Schema
-
-var RegisterMailDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RegisterMailDomainResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var RegisterToWorkMailRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RegisterToWorkMailRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterToWorkMailRequest_OrganizationId *smithy.Schema
-
-var RegisterToWorkMailRequest_EntityId *smithy.Schema
-
-var RegisterToWorkMailRequest_Email *smithy.Schema
-
-var RegisterToWorkMailResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "RegisterToWorkMailResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var ResetPasswordRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResetPasswordRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ResetPasswordRequest_OrganizationId *smithy.Schema
-
-var ResetPasswordRequest_UserId *smithy.Schema
-
-var ResetPasswordRequest_Password *smithy.Schema
-
-var ResetPasswordResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "ResetPasswordResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartMailboxExportJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "StartMailboxExportJobRequest",
-}, smithy.ShapeTypeStructure, 8)
-var StartMailboxExportJobRequest_ClientToken *smithy.Schema
-
-var StartMailboxExportJobRequest_OrganizationId *smithy.Schema
-
-var StartMailboxExportJobRequest_EntityId *smithy.Schema
-
-var StartMailboxExportJobRequest_Description *smithy.Schema
-
-var StartMailboxExportJobRequest_RoleArn *smithy.Schema
-
-var StartMailboxExportJobRequest_KmsKeyArn *smithy.Schema
-
-var StartMailboxExportJobRequest_S3BucketName *smithy.Schema
-
-var StartMailboxExportJobRequest_S3Prefix *smithy.Schema
-
-var StartMailboxExportJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "StartMailboxExportJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartMailboxExportJobResponse_JobId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TestAvailabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TestAvailabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var TestAvailabilityConfigurationRequest_OrganizationId *smithy.Schema
-
-var TestAvailabilityConfigurationRequest_DomainName *smithy.Schema
-
-var TestAvailabilityConfigurationRequest_EwsProvider *smithy.Schema
-
-var TestAvailabilityConfigurationRequest_LambdaProvider *smithy.Schema
-
-var TestAvailabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "TestAvailabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 2)
-var TestAvailabilityConfigurationResponse_TestPassed *smithy.Schema
-
-var TestAvailabilityConfigurationResponse_FailureReason *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAvailabilityConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateAvailabilityConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAvailabilityConfigurationRequest_OrganizationId *smithy.Schema
-
-var UpdateAvailabilityConfigurationRequest_DomainName *smithy.Schema
-
-var UpdateAvailabilityConfigurationRequest_EwsProvider *smithy.Schema
-
-var UpdateAvailabilityConfigurationRequest_LambdaProvider *smithy.Schema
-
-var UpdateAvailabilityConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateAvailabilityConfigurationResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDefaultMailDomainRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateDefaultMailDomainRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDefaultMailDomainRequest_OrganizationId *smithy.Schema
-
-var UpdateDefaultMailDomainRequest_DomainName *smithy.Schema
-
-var UpdateDefaultMailDomainResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateDefaultMailDomainResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateGroupRequest_OrganizationId *smithy.Schema
-
-var UpdateGroupRequest_GroupId *smithy.Schema
-
-var UpdateGroupRequest_HiddenFromGlobalAddressList *smithy.Schema
-
-var UpdateGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateImpersonationRoleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateImpersonationRoleRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateImpersonationRoleRequest_OrganizationId *smithy.Schema
-
-var UpdateImpersonationRoleRequest_ImpersonationRoleId *smithy.Schema
-
-var UpdateImpersonationRoleRequest_Name *smithy.Schema
-
-var UpdateImpersonationRoleRequest_Type *smithy.Schema
-
-var UpdateImpersonationRoleRequest_Description *smithy.Schema
-
-var UpdateImpersonationRoleRequest_Rules *smithy.Schema
-
-var UpdateImpersonationRoleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateImpersonationRoleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateMailboxQuotaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateMailboxQuotaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateMailboxQuotaRequest_OrganizationId *smithy.Schema
-
-var UpdateMailboxQuotaRequest_UserId *smithy.Schema
-
-var UpdateMailboxQuotaRequest_MailboxQuota *smithy.Schema
-
-var UpdateMailboxQuotaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateMailboxQuotaResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateMobileDeviceAccessRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateMobileDeviceAccessRuleRequest",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateMobileDeviceAccessRuleRequest_OrganizationId *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_Name *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_Description *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_Effect *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_DeviceTypes *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_NotDeviceTypes *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_DeviceModels *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_NotDeviceModels *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_DeviceUserAgents *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents *smithy.Schema
-
-var UpdateMobileDeviceAccessRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateMobileDeviceAccessRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdatePrimaryEmailAddressRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdatePrimaryEmailAddressRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdatePrimaryEmailAddressRequest_OrganizationId *smithy.Schema
-
-var UpdatePrimaryEmailAddressRequest_EntityId *smithy.Schema
-
-var UpdatePrimaryEmailAddressRequest_Email *smithy.Schema
-
-var UpdatePrimaryEmailAddressResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdatePrimaryEmailAddressResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateResourceRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateResourceRequest_OrganizationId *smithy.Schema
-
-var UpdateResourceRequest_ResourceId *smithy.Schema
-
-var UpdateResourceRequest_Name *smithy.Schema
-
-var UpdateResourceRequest_BookingOptions *smithy.Schema
-
-var UpdateResourceRequest_Description *smithy.Schema
-
-var UpdateResourceRequest_Type *smithy.Schema
-
-var UpdateResourceRequest_HiddenFromGlobalAddressList *smithy.Schema
-
-var UpdateResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateUserRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateUserRequest",
-}, smithy.ShapeTypeStructure, 18)
-var UpdateUserRequest_OrganizationId *smithy.Schema
-
-var UpdateUserRequest_UserId *smithy.Schema
-
-var UpdateUserRequest_Role *smithy.Schema
-
-var UpdateUserRequest_DisplayName *smithy.Schema
-
-var UpdateUserRequest_FirstName *smithy.Schema
-
-var UpdateUserRequest_LastName *smithy.Schema
-
-var UpdateUserRequest_HiddenFromGlobalAddressList *smithy.Schema
-
-var UpdateUserRequest_Initials *smithy.Schema
-
-var UpdateUserRequest_Telephone *smithy.Schema
-
-var UpdateUserRequest_Street *smithy.Schema
-
-var UpdateUserRequest_JobTitle *smithy.Schema
-
-var UpdateUserRequest_City *smithy.Schema
-
-var UpdateUserRequest_Company *smithy.Schema
-
-var UpdateUserRequest_ZipCode *smithy.Schema
-
-var UpdateUserRequest_Department *smithy.Schema
-
-var UpdateUserRequest_Country *smithy.Schema
-
-var UpdateUserRequest_Office *smithy.Schema
-
-var UpdateUserRequest_IdentityProviderUserId *smithy.Schema
-
-var UpdateUserResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.workmail",
-	Name:      "UpdateUserResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessControlRuleEffect_ALLOW = AccessControlRuleEffect.AddMember("ALLOW", smithyprelude.Unit)
-
-	AccessControlRuleEffect_DENY = AccessControlRuleEffect.AddMember("DENY", smithyprelude.Unit)
-
-	_IpRangeList_member = _IpRangeList.AddMember("member", _IpRange)
-
-	_ActionsList_member = _ActionsList.AddMember("member", _AccessControlRuleAction)
-
-	_UserIdList_member = _UserIdList.AddMember("member", _WorkMailIdentifier)
-
-	_ImpersonationRoleIdList_member = _ImpersonationRoleIdList.AddMember("member", _ImpersonationRoleId)
-
-	AccessControlRule_Name = AccessControlRule.AddMember("Name", _AccessControlRuleName)
-
-	AccessControlRule_Effect = AccessControlRule.AddMember("Effect", AccessControlRuleEffect)
-
-	AccessControlRule_Description = AccessControlRule.AddMember("Description", _AccessControlRuleDescription)
-
-	AccessControlRule_IpRanges = AccessControlRule.AddMember("IpRanges", _IpRangeList)
-
-	AccessControlRule_NotIpRanges = AccessControlRule.AddMember("NotIpRanges", _IpRangeList)
-
-	AccessControlRule_Actions = AccessControlRule.AddMember("Actions", _ActionsList)
-
-	AccessControlRule_NotActions = AccessControlRule.AddMember("NotActions", _ActionsList)
-
-	AccessControlRule_UserIds = AccessControlRule.AddMember("UserIds", _UserIdList)
-
-	AccessControlRule_NotUserIds = AccessControlRule.AddMember("NotUserIds", _UserIdList)
-
-	AccessControlRule_DateCreated = AccessControlRule.AddMember("DateCreated", _Timestamp)
-
-	AccessControlRule_DateModified = AccessControlRule.AddMember("DateModified", _Timestamp)
-
-	AccessControlRule_ImpersonationRoleIds = AccessControlRule.AddMember("ImpersonationRoleIds", _ImpersonationRoleIdList)
-
-	AccessControlRule_NotImpersonationRoleIds = AccessControlRule.AddMember("NotImpersonationRoleIds", _ImpersonationRoleIdList)
-
-	_AccessControlRuleNameList_member = _AccessControlRuleNameList.AddMember("member", _AccessControlRuleName)
-
-	_AccessControlRulesList_member = _AccessControlRulesList.AddMember("member", AccessControlRule)
-
-	AccessEffect_ALLOW = AccessEffect.AddMember("ALLOW", smithyprelude.Unit)
-
-	AccessEffect_DENY = AccessEffect.AddMember("DENY", smithyprelude.Unit)
-
-	_Aliases_member = _Aliases.AddMember("member", _EmailAddress)
-
-	AvailabilityProviderType_EWS = AvailabilityProviderType.AddMember("EWS", smithyprelude.Unit)
-
-	AvailabilityProviderType_LAMBDA = AvailabilityProviderType.AddMember("LAMBDA", smithyprelude.Unit)
-
-	RedactedEwsAvailabilityProvider_EwsEndpoint = RedactedEwsAvailabilityProvider.AddMember("EwsEndpoint", _Url)
-
-	RedactedEwsAvailabilityProvider_EwsUsername = RedactedEwsAvailabilityProvider.AddMember("EwsUsername", _ExternalUserName)
-
-	LambdaAvailabilityProvider_LambdaArn = LambdaAvailabilityProvider.AddMember("LambdaArn", _LambdaArn)
-
-	AvailabilityConfiguration_DomainName = AvailabilityConfiguration.AddMember("DomainName", _DomainName)
-
-	AvailabilityConfiguration_ProviderType = AvailabilityConfiguration.AddMember("ProviderType", AvailabilityProviderType)
-
-	AvailabilityConfiguration_EwsProvider = AvailabilityConfiguration.AddMember("EwsProvider", RedactedEwsAvailabilityProvider)
-
-	AvailabilityConfiguration_LambdaProvider = AvailabilityConfiguration.AddMember("LambdaProvider", LambdaAvailabilityProvider)
-
-	AvailabilityConfiguration_DateCreated = AvailabilityConfiguration.AddMember("DateCreated", _Timestamp)
-
-	AvailabilityConfiguration_DateModified = AvailabilityConfiguration.AddMember("DateModified", _Timestamp)
-
-	_AvailabilityConfigurationList_member = _AvailabilityConfigurationList.AddMember("member", AvailabilityConfiguration)
-
-	BookingOptions_AutoAcceptRequests = BookingOptions.AddMember("AutoAcceptRequests", _Boolean)
-
-	BookingOptions_AutoDeclineRecurringRequests = BookingOptions.AddMember("AutoDeclineRecurringRequests", _Boolean)
-
-	BookingOptions_AutoDeclineConflictingRequests = BookingOptions.AddMember("AutoDeclineConflictingRequests", _Boolean)
-
-	MemberType_GROUP = MemberType.AddMember("GROUP", smithyprelude.Unit)
-
-	MemberType_USER = MemberType.AddMember("USER", smithyprelude.Unit)
-
-	Delegate_Id = Delegate.AddMember("Id", _String)
-
-	Delegate_Type = Delegate.AddMember("Type", MemberType)
-
-	_DeviceModelList_member = _DeviceModelList.AddMember("member", _DeviceModel)
-
-	_DeviceOperatingSystemList_member = _DeviceOperatingSystemList.AddMember("member", _DeviceOperatingSystem)
-
-	_DeviceTypeList_member = _DeviceTypeList.AddMember("member", _DeviceType)
-
-	_DeviceUserAgentList_member = _DeviceUserAgentList.AddMember("member", _DeviceUserAgent)
-
-	DirectoryInUseException_Message = DirectoryInUseException.AddMember("Message", _String)
-
-	DirectoryServiceAuthenticationFailedException_Message = DirectoryServiceAuthenticationFailedException.AddMember("Message", _String)
-
-	DirectoryUnavailableException_Message = DirectoryUnavailableException.AddMember("Message", _String)
-
-	DnsRecord_Type = DnsRecord.AddMember("Type", _String)
-
-	DnsRecord_Hostname = DnsRecord.AddMember("Hostname", _String)
-
-	DnsRecord_Value = DnsRecord.AddMember("Value", _String)
-
-	_DnsRecords_member = _DnsRecords.AddMember("member", DnsRecord)
-
-	DnsRecordVerificationStatus_PENDING = DnsRecordVerificationStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	DnsRecordVerificationStatus_VERIFIED = DnsRecordVerificationStatus.AddMember("VERIFIED", smithyprelude.Unit)
-
-	DnsRecordVerificationStatus_FAILED = DnsRecordVerificationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	Domain_DomainName = Domain.AddMember("DomainName", _DomainName)
-
-	Domain_HostedZoneId = Domain.AddMember("HostedZoneId", _HostedZoneId)
-
-	_Domains_member = _Domains.AddMember("member", Domain)
-
-	EmailAddressInUseException_Message = EmailAddressInUseException.AddMember("Message", _String)
-
-	EntityAlreadyRegisteredException_Message = EntityAlreadyRegisteredException.AddMember("Message", _String)
-
-	EntityNotFoundException_Message = EntityNotFoundException.AddMember("Message", _String)
-
-	EntityState_ENABLED = EntityState.AddMember("ENABLED", smithyprelude.Unit)
-
-	EntityState_DISABLED = EntityState.AddMember("DISABLED", smithyprelude.Unit)
-
-	EntityState_DELETED = EntityState.AddMember("DELETED", smithyprelude.Unit)
-
-	EntityStateException_Message = EntityStateException.AddMember("Message", _String)
-
-	EntityType_GROUP = EntityType.AddMember("GROUP", smithyprelude.Unit)
-
-	EntityType_USER = EntityType.AddMember("USER", smithyprelude.Unit)
-
-	EntityType_RESOURCE = EntityType.AddMember("RESOURCE", smithyprelude.Unit)
-
-	EwsAvailabilityProvider_EwsEndpoint = EwsAvailabilityProvider.AddMember("EwsEndpoint", _Url)
-
-	EwsAvailabilityProvider_EwsUsername = EwsAvailabilityProvider.AddMember("EwsUsername", _ExternalUserName)
-
-	EwsAvailabilityProvider_EwsPassword = EwsAvailabilityProvider.AddMember("EwsPassword", _Password)
-
-	FolderName_INBOX = FolderName.AddMember("INBOX", smithyprelude.Unit)
-
-	FolderName_DELETED_ITEMS = FolderName.AddMember("DELETED_ITEMS", smithyprelude.Unit)
-
-	FolderName_SENT_ITEMS = FolderName.AddMember("SENT_ITEMS", smithyprelude.Unit)
-
-	FolderName_DRAFTS = FolderName.AddMember("DRAFTS", smithyprelude.Unit)
-
-	FolderName_JUNK_EMAIL = FolderName.AddMember("JUNK_EMAIL", smithyprelude.Unit)
-
-	RetentionAction_NONE = RetentionAction.AddMember("NONE", smithyprelude.Unit)
-
-	RetentionAction_DELETE = RetentionAction.AddMember("DELETE", smithyprelude.Unit)
-
-	RetentionAction_PERMANENTLY_DELETE = RetentionAction.AddMember("PERMANENTLY_DELETE", smithyprelude.Unit)
-
-	FolderConfiguration_Name = FolderConfiguration.AddMember("Name", FolderName)
-
-	FolderConfiguration_Action = FolderConfiguration.AddMember("Action", RetentionAction)
-
-	FolderConfiguration_Period = FolderConfiguration.AddMember("Period", _RetentionPeriod)
-
-	_FolderConfigurations_member = _FolderConfigurations.AddMember("member", FolderConfiguration)
-
-	Group_Id = Group.AddMember("Id", _WorkMailIdentifier)
-
-	Group_Email = Group.AddMember("Email", _EmailAddress)
-
-	Group_Name = Group.AddMember("Name", _GroupName)
-
-	Group_State = Group.AddMember("State", EntityState)
-
-	Group_EnabledDate = Group.AddMember("EnabledDate", _Timestamp)
-
-	Group_DisabledDate = Group.AddMember("DisabledDate", _Timestamp)
-
-	GroupIdentifier_GroupId = GroupIdentifier.AddMember("GroupId", _WorkMailIdentifier)
-
-	GroupIdentifier_GroupName = GroupIdentifier.AddMember("GroupName", _GroupName)
-
-	_GroupIdentifiers_member = _GroupIdentifiers.AddMember("member", GroupIdentifier)
-
-	_Groups_member = _Groups.AddMember("member", Group)
-
-	IdentityCenterConfiguration_InstanceArn = IdentityCenterConfiguration.AddMember("InstanceArn", _InstanceArn)
-
-	IdentityCenterConfiguration_ApplicationArn = IdentityCenterConfiguration.AddMember("ApplicationArn", _ApplicationArn)
-
-	IdentityProviderAuthenticationMode_IDENTITY_PROVIDER_ONLY = IdentityProviderAuthenticationMode.AddMember("IDENTITY_PROVIDER_ONLY", smithyprelude.Unit)
-
-	IdentityProviderAuthenticationMode_IDENTITY_PROVIDER_AND_DIRECTORY = IdentityProviderAuthenticationMode.AddMember("IDENTITY_PROVIDER_AND_DIRECTORY", smithyprelude.Unit)
-
-	ImpersonationMatchedRule_ImpersonationRuleId = ImpersonationMatchedRule.AddMember("ImpersonationRuleId", _ImpersonationRuleId)
-
-	ImpersonationMatchedRule_Name = ImpersonationMatchedRule.AddMember("Name", _ImpersonationRuleName)
-
-	_ImpersonationMatchedRuleList_member = _ImpersonationMatchedRuleList.AddMember("member", ImpersonationMatchedRule)
-
-	ImpersonationRoleType_FULL_ACCESS = ImpersonationRoleType.AddMember("FULL_ACCESS", smithyprelude.Unit)
-
-	ImpersonationRoleType_READ_ONLY = ImpersonationRoleType.AddMember("READ_ONLY", smithyprelude.Unit)
-
-	ImpersonationRole_ImpersonationRoleId = ImpersonationRole.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	ImpersonationRole_Name = ImpersonationRole.AddMember("Name", _ImpersonationRoleName)
-
-	ImpersonationRole_Type = ImpersonationRole.AddMember("Type", ImpersonationRoleType)
-
-	ImpersonationRole_DateCreated = ImpersonationRole.AddMember("DateCreated", _Timestamp)
-
-	ImpersonationRole_DateModified = ImpersonationRole.AddMember("DateModified", _Timestamp)
-
-	_ImpersonationRoleList_member = _ImpersonationRoleList.AddMember("member", ImpersonationRole)
-
-	_TargetUsers_member = _TargetUsers.AddMember("member", _EntityIdentifier)
-
-	ImpersonationRule_ImpersonationRuleId = ImpersonationRule.AddMember("ImpersonationRuleId", _ImpersonationRuleId)
-
-	ImpersonationRule_Name = ImpersonationRule.AddMember("Name", _ImpersonationRuleName)
-
-	ImpersonationRule_Description = ImpersonationRule.AddMember("Description", _ImpersonationRuleDescription)
-
-	ImpersonationRule_Effect = ImpersonationRule.AddMember("Effect", AccessEffect)
-
-	ImpersonationRule_TargetUsers = ImpersonationRule.AddMember("TargetUsers", _TargetUsers)
-
-	ImpersonationRule_NotTargetUsers = ImpersonationRule.AddMember("NotTargetUsers", _TargetUsers)
-
-	_ImpersonationRuleList_member = _ImpersonationRuleList.AddMember("member", ImpersonationRule)
-
-	InvalidConfigurationException_Message = InvalidConfigurationException.AddMember("Message", _String)
-
-	InvalidCustomSesConfigurationException_Message = InvalidCustomSesConfigurationException.AddMember("Message", _String)
-
-	InvalidParameterException_Message = InvalidParameterException.AddMember("Message", _String)
-
-	InvalidPasswordException_Message = InvalidPasswordException.AddMember("Message", _String)
-
-	MailboxExportJobState_RUNNING = MailboxExportJobState.AddMember("RUNNING", smithyprelude.Unit)
-
-	MailboxExportJobState_COMPLETED = MailboxExportJobState.AddMember("COMPLETED", smithyprelude.Unit)
-
-	MailboxExportJobState_FAILED = MailboxExportJobState.AddMember("FAILED", smithyprelude.Unit)
-
-	MailboxExportJobState_CANCELLED = MailboxExportJobState.AddMember("CANCELLED", smithyprelude.Unit)
-
-	MailboxExportJob_JobId = MailboxExportJob.AddMember("JobId", _MailboxExportJobId)
-
-	MailboxExportJob_EntityId = MailboxExportJob.AddMember("EntityId", _WorkMailIdentifier)
-
-	MailboxExportJob_Description = MailboxExportJob.AddMember("Description", _Description)
-
-	MailboxExportJob_S3BucketName = MailboxExportJob.AddMember("S3BucketName", _S3BucketName)
-
-	MailboxExportJob_S3Path = MailboxExportJob.AddMember("S3Path", _S3ObjectKey)
-
-	MailboxExportJob_EstimatedProgress = MailboxExportJob.AddMember("EstimatedProgress", _Percentage)
-
-	MailboxExportJob_State = MailboxExportJob.AddMember("State", MailboxExportJobState)
-
-	MailboxExportJob_StartTime = MailboxExportJob.AddMember("StartTime", _Timestamp)
-
-	MailboxExportJob_EndTime = MailboxExportJob.AddMember("EndTime", _Timestamp)
-
-	_Jobs_member = _Jobs.AddMember("member", MailboxExportJob)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", _String)
-
-	ListGroupsFilters_NamePrefix = ListGroupsFilters.AddMember("NamePrefix", _String)
-
-	ListGroupsFilters_PrimaryEmailPrefix = ListGroupsFilters.AddMember("PrimaryEmailPrefix", _String)
-
-	ListGroupsFilters_State = ListGroupsFilters.AddMember("State", EntityState)
-
-	ListGroupsForEntityFilters_GroupNamePrefix = ListGroupsForEntityFilters.AddMember("GroupNamePrefix", _String)
-
-	ListResourcesFilters_NamePrefix = ListResourcesFilters.AddMember("NamePrefix", _String)
-
-	ListResourcesFilters_PrimaryEmailPrefix = ListResourcesFilters.AddMember("PrimaryEmailPrefix", _String)
-
-	ListResourcesFilters_State = ListResourcesFilters.AddMember("State", EntityState)
-
-	ListUsersFilters_UsernamePrefix = ListUsersFilters.AddMember("UsernamePrefix", _String)
-
-	ListUsersFilters_DisplayNamePrefix = ListUsersFilters.AddMember("DisplayNamePrefix", _UserAttribute)
-
-	ListUsersFilters_PrimaryEmailPrefix = ListUsersFilters.AddMember("PrimaryEmailPrefix", _String)
-
-	ListUsersFilters_State = ListUsersFilters.AddMember("State", EntityState)
-
-	ListUsersFilters_IdentityProviderUserIdPrefix = ListUsersFilters.AddMember("IdentityProviderUserIdPrefix", _IdentityProviderUserIdPrefix)
-
-	MailDomainInUseException_Message = MailDomainInUseException.AddMember("Message", _String)
-
-	MailDomainNotFoundException_Message = MailDomainNotFoundException.AddMember("Message", _String)
-
-	MailDomainSummary_DomainName = MailDomainSummary.AddMember("DomainName", _DomainName)
-
-	MailDomainSummary_DefaultDomain = MailDomainSummary.AddMember("DefaultDomain", _Boolean)
-
-	_MailDomains_member = _MailDomains.AddMember("member", MailDomainSummary)
-
-	MailDomainStateException_Message = MailDomainStateException.AddMember("Message", _String)
-
-	Member_Id = Member.AddMember("Id", _String)
-
-	Member_Name = Member.AddMember("Name", _String)
-
-	Member_Type = Member.AddMember("Type", MemberType)
-
-	Member_State = Member.AddMember("State", EntityState)
-
-	Member_EnabledDate = Member.AddMember("EnabledDate", _Timestamp)
-
-	Member_DisabledDate = Member.AddMember("DisabledDate", _Timestamp)
-
-	_Members_member = _Members.AddMember("member", Member)
-
-	MobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId = MobileDeviceAccessMatchedRule.AddMember("MobileDeviceAccessRuleId", _MobileDeviceAccessRuleId)
-
-	MobileDeviceAccessMatchedRule_Name = MobileDeviceAccessMatchedRule.AddMember("Name", _MobileDeviceAccessRuleName)
-
-	_MobileDeviceAccessMatchedRuleList_member = _MobileDeviceAccessMatchedRuleList.AddMember("member", MobileDeviceAccessMatchedRule)
-
-	MobileDeviceAccessRuleEffect_ALLOW = MobileDeviceAccessRuleEffect.AddMember("ALLOW", smithyprelude.Unit)
-
-	MobileDeviceAccessRuleEffect_DENY = MobileDeviceAccessRuleEffect.AddMember("DENY", smithyprelude.Unit)
-
-	MobileDeviceAccessOverride_UserId = MobileDeviceAccessOverride.AddMember("UserId", _WorkMailIdentifier)
-
-	MobileDeviceAccessOverride_DeviceId = MobileDeviceAccessOverride.AddMember("DeviceId", _DeviceId)
-
-	MobileDeviceAccessOverride_Effect = MobileDeviceAccessOverride.AddMember("Effect", MobileDeviceAccessRuleEffect)
-
-	MobileDeviceAccessOverride_Description = MobileDeviceAccessOverride.AddMember("Description", _MobileDeviceAccessRuleDescription)
-
-	MobileDeviceAccessOverride_DateCreated = MobileDeviceAccessOverride.AddMember("DateCreated", _Timestamp)
-
-	MobileDeviceAccessOverride_DateModified = MobileDeviceAccessOverride.AddMember("DateModified", _Timestamp)
-
-	_MobileDeviceAccessOverridesList_member = _MobileDeviceAccessOverridesList.AddMember("member", MobileDeviceAccessOverride)
-
-	MobileDeviceAccessRule_MobileDeviceAccessRuleId = MobileDeviceAccessRule.AddMember("MobileDeviceAccessRuleId", _MobileDeviceAccessRuleId)
-
-	MobileDeviceAccessRule_Name = MobileDeviceAccessRule.AddMember("Name", _MobileDeviceAccessRuleName)
-
-	MobileDeviceAccessRule_Description = MobileDeviceAccessRule.AddMember("Description", _MobileDeviceAccessRuleDescription)
-
-	MobileDeviceAccessRule_Effect = MobileDeviceAccessRule.AddMember("Effect", MobileDeviceAccessRuleEffect)
-
-	MobileDeviceAccessRule_DeviceTypes = MobileDeviceAccessRule.AddMember("DeviceTypes", _DeviceTypeList)
-
-	MobileDeviceAccessRule_NotDeviceTypes = MobileDeviceAccessRule.AddMember("NotDeviceTypes", _DeviceTypeList)
-
-	MobileDeviceAccessRule_DeviceModels = MobileDeviceAccessRule.AddMember("DeviceModels", _DeviceModelList)
-
-	MobileDeviceAccessRule_NotDeviceModels = MobileDeviceAccessRule.AddMember("NotDeviceModels", _DeviceModelList)
-
-	MobileDeviceAccessRule_DeviceOperatingSystems = MobileDeviceAccessRule.AddMember("DeviceOperatingSystems", _DeviceOperatingSystemList)
-
-	MobileDeviceAccessRule_NotDeviceOperatingSystems = MobileDeviceAccessRule.AddMember("NotDeviceOperatingSystems", _DeviceOperatingSystemList)
-
-	MobileDeviceAccessRule_DeviceUserAgents = MobileDeviceAccessRule.AddMember("DeviceUserAgents", _DeviceUserAgentList)
-
-	MobileDeviceAccessRule_NotDeviceUserAgents = MobileDeviceAccessRule.AddMember("NotDeviceUserAgents", _DeviceUserAgentList)
-
-	MobileDeviceAccessRule_DateCreated = MobileDeviceAccessRule.AddMember("DateCreated", _Timestamp)
-
-	MobileDeviceAccessRule_DateModified = MobileDeviceAccessRule.AddMember("DateModified", _Timestamp)
-
-	_MobileDeviceAccessRulesList_member = _MobileDeviceAccessRulesList.AddMember("member", MobileDeviceAccessRule)
-
-	NameAvailabilityException_Message = NameAvailabilityException.AddMember("Message", _String)
-
-	OrganizationNotFoundException_Message = OrganizationNotFoundException.AddMember("Message", _String)
-
-	OrganizationStateException_Message = OrganizationStateException.AddMember("Message", _String)
-
-	OrganizationSummary_OrganizationId = OrganizationSummary.AddMember("OrganizationId", _OrganizationId)
-
-	OrganizationSummary_Alias = OrganizationSummary.AddMember("Alias", _OrganizationName)
-
-	OrganizationSummary_DefaultMailDomain = OrganizationSummary.AddMember("DefaultMailDomain", _DomainName)
-
-	OrganizationSummary_ErrorMessage = OrganizationSummary.AddMember("ErrorMessage", _String)
-
-	OrganizationSummary_State = OrganizationSummary.AddMember("State", _String)
-
-	_OrganizationSummaries_member = _OrganizationSummaries.AddMember("member", OrganizationSummary)
-
-	PermissionType_FULL_ACCESS = PermissionType.AddMember("FULL_ACCESS", smithyprelude.Unit)
-
-	PermissionType_SEND_AS = PermissionType.AddMember("SEND_AS", smithyprelude.Unit)
-
-	PermissionType_SEND_ON_BEHALF = PermissionType.AddMember("SEND_ON_BEHALF", smithyprelude.Unit)
-
-	_PermissionValues_member = _PermissionValues.AddMember("member", PermissionType)
-
-	Permission_GranteeId = Permission.AddMember("GranteeId", _WorkMailIdentifier)
-
-	Permission_GranteeType = Permission.AddMember("GranteeType", MemberType)
-
-	Permission_PermissionValues = Permission.AddMember("PermissionValues", _PermissionValues)
-
-	_Permissions_member = _Permissions.AddMember("member", Permission)
-
-	PersonalAccessTokenConfigurationStatus_ACTIVE = PersonalAccessTokenConfigurationStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	PersonalAccessTokenConfigurationStatus_INACTIVE = PersonalAccessTokenConfigurationStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	PersonalAccessTokenConfiguration_Status = PersonalAccessTokenConfiguration.AddMember("Status", PersonalAccessTokenConfigurationStatus)
-
-	PersonalAccessTokenConfiguration_LifetimeInDays = PersonalAccessTokenConfiguration.AddMember("LifetimeInDays", _PersonalAccessTokenLifetimeInDays)
-
-	_PersonalAccessTokenScopeList_member = _PersonalAccessTokenScopeList.AddMember("member", _PersonalAccessTokenScope)
-
-	PersonalAccessTokenSummary_PersonalAccessTokenId = PersonalAccessTokenSummary.AddMember("PersonalAccessTokenId", _PersonalAccessTokenId)
-
-	PersonalAccessTokenSummary_UserId = PersonalAccessTokenSummary.AddMember("UserId", _WorkMailIdentifier)
-
-	PersonalAccessTokenSummary_Name = PersonalAccessTokenSummary.AddMember("Name", _PersonalAccessTokenName)
-
-	PersonalAccessTokenSummary_DateCreated = PersonalAccessTokenSummary.AddMember("DateCreated", _Timestamp)
-
-	PersonalAccessTokenSummary_DateLastUsed = PersonalAccessTokenSummary.AddMember("DateLastUsed", _Timestamp)
-
-	PersonalAccessTokenSummary_ExpiresTime = PersonalAccessTokenSummary.AddMember("ExpiresTime", _Timestamp)
-
-	PersonalAccessTokenSummary_Scopes = PersonalAccessTokenSummary.AddMember("Scopes", _PersonalAccessTokenScopeList)
-
-	_PersonalAccessTokenSummaryList_member = _PersonalAccessTokenSummaryList.AddMember("member", PersonalAccessTokenSummary)
-
-	ReservedNameException_Message = ReservedNameException.AddMember("Message", _String)
-
-	ResourceType_ROOM = ResourceType.AddMember("ROOM", smithyprelude.Unit)
-
-	ResourceType_EQUIPMENT = ResourceType.AddMember("EQUIPMENT", smithyprelude.Unit)
-
-	Resource_Id = Resource.AddMember("Id", _WorkMailIdentifier)
-
-	Resource_Email = Resource.AddMember("Email", _EmailAddress)
-
-	Resource_Name = Resource.AddMember("Name", _ResourceName)
-
-	Resource_Type = Resource.AddMember("Type", ResourceType)
-
-	Resource_State = Resource.AddMember("State", EntityState)
-
-	Resource_EnabledDate = Resource.AddMember("EnabledDate", _Timestamp)
-
-	Resource_DisabledDate = Resource.AddMember("DisabledDate", _Timestamp)
-
-	Resource_Description = Resource.AddMember("Description", _ResourceDescription)
-
-	_ResourceDelegates_member = _ResourceDelegates.AddMember("member", Delegate)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	_Resources_member = _Resources.AddMember("member", Resource)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TooManyTagsException_Message = TooManyTagsException.AddMember("Message", _String)
-
-	UnsupportedOperationException_Message = UnsupportedOperationException.AddMember("Message", _String)
-
-	UserRole_USER = UserRole.AddMember("USER", smithyprelude.Unit)
-
-	UserRole_RESOURCE = UserRole.AddMember("RESOURCE", smithyprelude.Unit)
-
-	UserRole_SYSTEM_USER = UserRole.AddMember("SYSTEM_USER", smithyprelude.Unit)
-
-	UserRole_REMOTE_USER = UserRole.AddMember("REMOTE_USER", smithyprelude.Unit)
-
-	User_Id = User.AddMember("Id", _WorkMailIdentifier)
-
-	User_Email = User.AddMember("Email", _EmailAddress)
-
-	User_Name = User.AddMember("Name", _UserName)
-
-	User_DisplayName = User.AddMember("DisplayName", _String)
-
-	User_State = User.AddMember("State", EntityState)
-
-	User_UserRole = User.AddMember("UserRole", UserRole)
-
-	User_EnabledDate = User.AddMember("EnabledDate", _Timestamp)
-
-	User_DisabledDate = User.AddMember("DisabledDate", _Timestamp)
-
-	User_IdentityProviderUserId = User.AddMember("IdentityProviderUserId", _IdentityProviderUserId)
-
-	User_IdentityProviderIdentityStoreId = User.AddMember("IdentityProviderIdentityStoreId", _IdentityProviderIdentityStoreId)
-
-	_Users_member = _Users.AddMember("member", User)
-
-	AssociateDelegateToResourceRequest_OrganizationId = AssociateDelegateToResourceRequest.AddMember("OrganizationId", _OrganizationId)
-
-	AssociateDelegateToResourceRequest_ResourceId = AssociateDelegateToResourceRequest.AddMember("ResourceId", _EntityIdentifier)
-
-	AssociateDelegateToResourceRequest_EntityId = AssociateDelegateToResourceRequest.AddMember("EntityId", _EntityIdentifier)
-
-	AssociateMemberToGroupRequest_OrganizationId = AssociateMemberToGroupRequest.AddMember("OrganizationId", _OrganizationId)
-
-	AssociateMemberToGroupRequest_GroupId = AssociateMemberToGroupRequest.AddMember("GroupId", _EntityIdentifier)
-
-	AssociateMemberToGroupRequest_MemberId = AssociateMemberToGroupRequest.AddMember("MemberId", _EntityIdentifier)
-
-	AssumeImpersonationRoleRequest_OrganizationId = AssumeImpersonationRoleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	AssumeImpersonationRoleRequest_ImpersonationRoleId = AssumeImpersonationRoleRequest.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	AssumeImpersonationRoleResponse_Token = AssumeImpersonationRoleResponse.AddMember("Token", _ImpersonationToken)
-
-	AssumeImpersonationRoleResponse_ExpiresIn = AssumeImpersonationRoleResponse.AddMember("ExpiresIn", _ExpiresIn)
-
-	CancelMailboxExportJobRequest_ClientToken = CancelMailboxExportJobRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	CancelMailboxExportJobRequest_JobId = CancelMailboxExportJobRequest.AddMember("JobId", _MailboxExportJobId)
-
-	CancelMailboxExportJobRequest_OrganizationId = CancelMailboxExportJobRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateAliasRequest_OrganizationId = CreateAliasRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateAliasRequest_EntityId = CreateAliasRequest.AddMember("EntityId", _WorkMailIdentifier)
-
-	CreateAliasRequest_Alias = CreateAliasRequest.AddMember("Alias", _EmailAddress)
-
-	CreateAvailabilityConfigurationRequest_ClientToken = CreateAvailabilityConfigurationRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	CreateAvailabilityConfigurationRequest_OrganizationId = CreateAvailabilityConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateAvailabilityConfigurationRequest_DomainName = CreateAvailabilityConfigurationRequest.AddMember("DomainName", _DomainName)
-
-	CreateAvailabilityConfigurationRequest_EwsProvider = CreateAvailabilityConfigurationRequest.AddMember("EwsProvider", EwsAvailabilityProvider)
-
-	CreateAvailabilityConfigurationRequest_LambdaProvider = CreateAvailabilityConfigurationRequest.AddMember("LambdaProvider", LambdaAvailabilityProvider)
-
-	CreateGroupRequest_OrganizationId = CreateGroupRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateGroupRequest_Name = CreateGroupRequest.AddMember("Name", _GroupName)
-
-	CreateGroupRequest_HiddenFromGlobalAddressList = CreateGroupRequest.AddMember("HiddenFromGlobalAddressList", _Boolean)
-
-	CreateGroupResponse_GroupId = CreateGroupResponse.AddMember("GroupId", _WorkMailIdentifier)
-
-	CreateIdentityCenterApplicationRequest_Name = CreateIdentityCenterApplicationRequest.AddMember("Name", _IdentityCenterApplicationName)
-
-	CreateIdentityCenterApplicationRequest_InstanceArn = CreateIdentityCenterApplicationRequest.AddMember("InstanceArn", _InstanceArn)
-
-	CreateIdentityCenterApplicationRequest_ClientToken = CreateIdentityCenterApplicationRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	CreateIdentityCenterApplicationResponse_ApplicationArn = CreateIdentityCenterApplicationResponse.AddMember("ApplicationArn", _ApplicationArn)
-
-	CreateImpersonationRoleRequest_ClientToken = CreateImpersonationRoleRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	CreateImpersonationRoleRequest_OrganizationId = CreateImpersonationRoleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateImpersonationRoleRequest_Name = CreateImpersonationRoleRequest.AddMember("Name", _ImpersonationRoleName)
-
-	CreateImpersonationRoleRequest_Type = CreateImpersonationRoleRequest.AddMember("Type", ImpersonationRoleType)
-
-	CreateImpersonationRoleRequest_Description = CreateImpersonationRoleRequest.AddMember("Description", _ImpersonationRoleDescription)
-
-	CreateImpersonationRoleRequest_Rules = CreateImpersonationRoleRequest.AddMember("Rules", _ImpersonationRuleList)
-
-	CreateImpersonationRoleResponse_ImpersonationRoleId = CreateImpersonationRoleResponse.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	CreateMobileDeviceAccessRuleRequest_OrganizationId = CreateMobileDeviceAccessRuleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateMobileDeviceAccessRuleRequest_ClientToken = CreateMobileDeviceAccessRuleRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	CreateMobileDeviceAccessRuleRequest_Name = CreateMobileDeviceAccessRuleRequest.AddMember("Name", _MobileDeviceAccessRuleName)
-
-	CreateMobileDeviceAccessRuleRequest_Description = CreateMobileDeviceAccessRuleRequest.AddMember("Description", _MobileDeviceAccessRuleDescription)
-
-	CreateMobileDeviceAccessRuleRequest_Effect = CreateMobileDeviceAccessRuleRequest.AddMember("Effect", MobileDeviceAccessRuleEffect)
-
-	CreateMobileDeviceAccessRuleRequest_DeviceTypes = CreateMobileDeviceAccessRuleRequest.AddMember("DeviceTypes", _DeviceTypeList)
-
-	CreateMobileDeviceAccessRuleRequest_NotDeviceTypes = CreateMobileDeviceAccessRuleRequest.AddMember("NotDeviceTypes", _DeviceTypeList)
-
-	CreateMobileDeviceAccessRuleRequest_DeviceModels = CreateMobileDeviceAccessRuleRequest.AddMember("DeviceModels", _DeviceModelList)
-
-	CreateMobileDeviceAccessRuleRequest_NotDeviceModels = CreateMobileDeviceAccessRuleRequest.AddMember("NotDeviceModels", _DeviceModelList)
-
-	CreateMobileDeviceAccessRuleRequest_DeviceOperatingSystems = CreateMobileDeviceAccessRuleRequest.AddMember("DeviceOperatingSystems", _DeviceOperatingSystemList)
-
-	CreateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems = CreateMobileDeviceAccessRuleRequest.AddMember("NotDeviceOperatingSystems", _DeviceOperatingSystemList)
-
-	CreateMobileDeviceAccessRuleRequest_DeviceUserAgents = CreateMobileDeviceAccessRuleRequest.AddMember("DeviceUserAgents", _DeviceUserAgentList)
-
-	CreateMobileDeviceAccessRuleRequest_NotDeviceUserAgents = CreateMobileDeviceAccessRuleRequest.AddMember("NotDeviceUserAgents", _DeviceUserAgentList)
-
-	CreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId = CreateMobileDeviceAccessRuleResponse.AddMember("MobileDeviceAccessRuleId", _MobileDeviceAccessRuleId)
-
-	CreateOrganizationRequest_DirectoryId = CreateOrganizationRequest.AddMember("DirectoryId", _DirectoryId)
-
-	CreateOrganizationRequest_Alias = CreateOrganizationRequest.AddMember("Alias", _OrganizationName)
-
-	CreateOrganizationRequest_ClientToken = CreateOrganizationRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	CreateOrganizationRequest_Domains = CreateOrganizationRequest.AddMember("Domains", _Domains)
-
-	CreateOrganizationRequest_KmsKeyArn = CreateOrganizationRequest.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	CreateOrganizationRequest_EnableInteroperability = CreateOrganizationRequest.AddMember("EnableInteroperability", _Boolean)
-
-	CreateOrganizationResponse_OrganizationId = CreateOrganizationResponse.AddMember("OrganizationId", _OrganizationId)
-
-	CreateResourceRequest_OrganizationId = CreateResourceRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateResourceRequest_Name = CreateResourceRequest.AddMember("Name", _ResourceName)
-
-	CreateResourceRequest_Type = CreateResourceRequest.AddMember("Type", ResourceType)
-
-	CreateResourceRequest_Description = CreateResourceRequest.AddMember("Description", _ResourceDescription)
-
-	CreateResourceRequest_HiddenFromGlobalAddressList = CreateResourceRequest.AddMember("HiddenFromGlobalAddressList", _Boolean)
-
-	CreateResourceResponse_ResourceId = CreateResourceResponse.AddMember("ResourceId", _ResourceId)
-
-	CreateUserRequest_OrganizationId = CreateUserRequest.AddMember("OrganizationId", _OrganizationId)
-
-	CreateUserRequest_Name = CreateUserRequest.AddMember("Name", _UserName)
-
-	CreateUserRequest_DisplayName = CreateUserRequest.AddMember("DisplayName", _UserAttribute)
-
-	CreateUserRequest_Password = CreateUserRequest.AddMember("Password", _Password)
-
-	CreateUserRequest_Role = CreateUserRequest.AddMember("Role", UserRole)
-
-	CreateUserRequest_FirstName = CreateUserRequest.AddMember("FirstName", _UserAttribute)
-
-	CreateUserRequest_LastName = CreateUserRequest.AddMember("LastName", _UserAttribute)
-
-	CreateUserRequest_HiddenFromGlobalAddressList = CreateUserRequest.AddMember("HiddenFromGlobalAddressList", _Boolean)
-
-	CreateUserRequest_IdentityProviderUserId = CreateUserRequest.AddMember("IdentityProviderUserId", _IdentityProviderUserId)
-
-	CreateUserResponse_UserId = CreateUserResponse.AddMember("UserId", _WorkMailIdentifier)
-
-	DeleteAccessControlRuleRequest_OrganizationId = DeleteAccessControlRuleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteAccessControlRuleRequest_Name = DeleteAccessControlRuleRequest.AddMember("Name", _AccessControlRuleName)
-
-	DeleteAliasRequest_OrganizationId = DeleteAliasRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteAliasRequest_EntityId = DeleteAliasRequest.AddMember("EntityId", _WorkMailIdentifier)
-
-	DeleteAliasRequest_Alias = DeleteAliasRequest.AddMember("Alias", _EmailAddress)
-
-	DeleteAvailabilityConfigurationRequest_OrganizationId = DeleteAvailabilityConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteAvailabilityConfigurationRequest_DomainName = DeleteAvailabilityConfigurationRequest.AddMember("DomainName", _DomainName)
-
-	DeleteEmailMonitoringConfigurationRequest_OrganizationId = DeleteEmailMonitoringConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteGroupRequest_OrganizationId = DeleteGroupRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteGroupRequest_GroupId = DeleteGroupRequest.AddMember("GroupId", _EntityIdentifier)
-
-	DeleteIdentityCenterApplicationRequest_ApplicationArn = DeleteIdentityCenterApplicationRequest.AddMember("ApplicationArn", _ApplicationArn)
-
-	DeleteIdentityProviderConfigurationRequest_OrganizationId = DeleteIdentityProviderConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteImpersonationRoleRequest_OrganizationId = DeleteImpersonationRoleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteImpersonationRoleRequest_ImpersonationRoleId = DeleteImpersonationRoleRequest.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	DeleteMailboxPermissionsRequest_OrganizationId = DeleteMailboxPermissionsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteMailboxPermissionsRequest_EntityId = DeleteMailboxPermissionsRequest.AddMember("EntityId", _EntityIdentifier)
-
-	DeleteMailboxPermissionsRequest_GranteeId = DeleteMailboxPermissionsRequest.AddMember("GranteeId", _EntityIdentifier)
-
-	DeleteMobileDeviceAccessOverrideRequest_OrganizationId = DeleteMobileDeviceAccessOverrideRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteMobileDeviceAccessOverrideRequest_UserId = DeleteMobileDeviceAccessOverrideRequest.AddMember("UserId", _EntityIdentifier)
-
-	DeleteMobileDeviceAccessOverrideRequest_DeviceId = DeleteMobileDeviceAccessOverrideRequest.AddMember("DeviceId", _DeviceId)
-
-	DeleteMobileDeviceAccessRuleRequest_OrganizationId = DeleteMobileDeviceAccessRuleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId = DeleteMobileDeviceAccessRuleRequest.AddMember("MobileDeviceAccessRuleId", _MobileDeviceAccessRuleId)
-
-	DeleteOrganizationRequest_ClientToken = DeleteOrganizationRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	DeleteOrganizationRequest_OrganizationId = DeleteOrganizationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteOrganizationRequest_DeleteDirectory = DeleteOrganizationRequest.AddMember("DeleteDirectory", _Boolean)
-
-	DeleteOrganizationRequest_ForceDelete = DeleteOrganizationRequest.AddMember("ForceDelete", _Boolean)
-
-	DeleteOrganizationRequest_DeleteIdentityCenterApplication = DeleteOrganizationRequest.AddMember("DeleteIdentityCenterApplication", _Boolean)
-
-	DeleteOrganizationResponse_OrganizationId = DeleteOrganizationResponse.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteOrganizationResponse_State = DeleteOrganizationResponse.AddMember("State", _String)
-
-	DeletePersonalAccessTokenRequest_OrganizationId = DeletePersonalAccessTokenRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeletePersonalAccessTokenRequest_PersonalAccessTokenId = DeletePersonalAccessTokenRequest.AddMember("PersonalAccessTokenId", _PersonalAccessTokenId)
-
-	DeleteResourceRequest_OrganizationId = DeleteResourceRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteResourceRequest_ResourceId = DeleteResourceRequest.AddMember("ResourceId", _EntityIdentifier)
-
-	DeleteRetentionPolicyRequest_OrganizationId = DeleteRetentionPolicyRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteRetentionPolicyRequest_Id = DeleteRetentionPolicyRequest.AddMember("Id", _ShortString)
-
-	DeleteUserRequest_OrganizationId = DeleteUserRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeleteUserRequest_UserId = DeleteUserRequest.AddMember("UserId", _EntityIdentifier)
-
-	DeregisterFromWorkMailRequest_OrganizationId = DeregisterFromWorkMailRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeregisterFromWorkMailRequest_EntityId = DeregisterFromWorkMailRequest.AddMember("EntityId", _EntityIdentifier)
-
-	DeregisterMailDomainRequest_OrganizationId = DeregisterMailDomainRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DeregisterMailDomainRequest_DomainName = DeregisterMailDomainRequest.AddMember("DomainName", _WorkMailDomainName)
-
-	DescribeEmailMonitoringConfigurationRequest_OrganizationId = DescribeEmailMonitoringConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeEmailMonitoringConfigurationResponse_RoleArn = DescribeEmailMonitoringConfigurationResponse.AddMember("RoleArn", _RoleArn)
-
-	DescribeEmailMonitoringConfigurationResponse_LogGroupArn = DescribeEmailMonitoringConfigurationResponse.AddMember("LogGroupArn", _LogGroupArn)
-
-	DescribeEntityRequest_OrganizationId = DescribeEntityRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeEntityRequest_Email = DescribeEntityRequest.AddMember("Email", _EmailAddress)
-
-	DescribeEntityResponse_EntityId = DescribeEntityResponse.AddMember("EntityId", _WorkMailIdentifier)
-
-	DescribeEntityResponse_Name = DescribeEntityResponse.AddMember("Name", _String)
-
-	DescribeEntityResponse_Type = DescribeEntityResponse.AddMember("Type", EntityType)
-
-	DescribeGroupRequest_OrganizationId = DescribeGroupRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeGroupRequest_GroupId = DescribeGroupRequest.AddMember("GroupId", _EntityIdentifier)
-
-	DescribeGroupResponse_GroupId = DescribeGroupResponse.AddMember("GroupId", _WorkMailIdentifier)
-
-	DescribeGroupResponse_Name = DescribeGroupResponse.AddMember("Name", _GroupName)
-
-	DescribeGroupResponse_Email = DescribeGroupResponse.AddMember("Email", _EmailAddress)
-
-	DescribeGroupResponse_State = DescribeGroupResponse.AddMember("State", EntityState)
-
-	DescribeGroupResponse_EnabledDate = DescribeGroupResponse.AddMember("EnabledDate", _Timestamp)
-
-	DescribeGroupResponse_DisabledDate = DescribeGroupResponse.AddMember("DisabledDate", _Timestamp)
-
-	DescribeGroupResponse_HiddenFromGlobalAddressList = DescribeGroupResponse.AddMember("HiddenFromGlobalAddressList", _Boolean)
-
-	DescribeIdentityProviderConfigurationRequest_OrganizationId = DescribeIdentityProviderConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeIdentityProviderConfigurationResponse_AuthenticationMode = DescribeIdentityProviderConfigurationResponse.AddMember("AuthenticationMode", IdentityProviderAuthenticationMode)
-
-	DescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration = DescribeIdentityProviderConfigurationResponse.AddMember("IdentityCenterConfiguration", IdentityCenterConfiguration)
-
-	DescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration = DescribeIdentityProviderConfigurationResponse.AddMember("PersonalAccessTokenConfiguration", PersonalAccessTokenConfiguration)
-
-	DescribeInboundDmarcSettingsRequest_OrganizationId = DescribeInboundDmarcSettingsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeInboundDmarcSettingsResponse_Enforced = DescribeInboundDmarcSettingsResponse.AddMember("Enforced", _Boolean)
-
-	DescribeMailboxExportJobRequest_JobId = DescribeMailboxExportJobRequest.AddMember("JobId", _MailboxExportJobId)
-
-	DescribeMailboxExportJobRequest_OrganizationId = DescribeMailboxExportJobRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeMailboxExportJobResponse_EntityId = DescribeMailboxExportJobResponse.AddMember("EntityId", _WorkMailIdentifier)
-
-	DescribeMailboxExportJobResponse_Description = DescribeMailboxExportJobResponse.AddMember("Description", _Description)
-
-	DescribeMailboxExportJobResponse_RoleArn = DescribeMailboxExportJobResponse.AddMember("RoleArn", _RoleArn)
-
-	DescribeMailboxExportJobResponse_KmsKeyArn = DescribeMailboxExportJobResponse.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	DescribeMailboxExportJobResponse_S3BucketName = DescribeMailboxExportJobResponse.AddMember("S3BucketName", _S3BucketName)
-
-	DescribeMailboxExportJobResponse_S3Prefix = DescribeMailboxExportJobResponse.AddMember("S3Prefix", _S3ObjectKey)
-
-	DescribeMailboxExportJobResponse_S3Path = DescribeMailboxExportJobResponse.AddMember("S3Path", _S3ObjectKey)
-
-	DescribeMailboxExportJobResponse_EstimatedProgress = DescribeMailboxExportJobResponse.AddMember("EstimatedProgress", _Percentage)
-
-	DescribeMailboxExportJobResponse_State = DescribeMailboxExportJobResponse.AddMember("State", MailboxExportJobState)
-
-	DescribeMailboxExportJobResponse_ErrorInfo = DescribeMailboxExportJobResponse.AddMember("ErrorInfo", _MailboxExportErrorInfo)
-
-	DescribeMailboxExportJobResponse_StartTime = DescribeMailboxExportJobResponse.AddMember("StartTime", _Timestamp)
-
-	DescribeMailboxExportJobResponse_EndTime = DescribeMailboxExportJobResponse.AddMember("EndTime", _Timestamp)
-
-	DescribeOrganizationRequest_OrganizationId = DescribeOrganizationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeOrganizationResponse_OrganizationId = DescribeOrganizationResponse.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeOrganizationResponse_Alias = DescribeOrganizationResponse.AddMember("Alias", _OrganizationName)
-
-	DescribeOrganizationResponse_State = DescribeOrganizationResponse.AddMember("State", _String)
-
-	DescribeOrganizationResponse_DirectoryId = DescribeOrganizationResponse.AddMember("DirectoryId", _String)
-
-	DescribeOrganizationResponse_DirectoryType = DescribeOrganizationResponse.AddMember("DirectoryType", _String)
-
-	DescribeOrganizationResponse_DefaultMailDomain = DescribeOrganizationResponse.AddMember("DefaultMailDomain", _String)
-
-	DescribeOrganizationResponse_CompletedDate = DescribeOrganizationResponse.AddMember("CompletedDate", _Timestamp)
-
-	DescribeOrganizationResponse_ErrorMessage = DescribeOrganizationResponse.AddMember("ErrorMessage", _String)
-
-	DescribeOrganizationResponse_ARN = DescribeOrganizationResponse.AddMember("ARN", _AmazonResourceName)
-
-	DescribeOrganizationResponse_MigrationAdmin = DescribeOrganizationResponse.AddMember("MigrationAdmin", _WorkMailIdentifier)
-
-	DescribeOrganizationResponse_InteroperabilityEnabled = DescribeOrganizationResponse.AddMember("InteroperabilityEnabled", _Boolean)
-
-	DescribeResourceRequest_OrganizationId = DescribeResourceRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeResourceRequest_ResourceId = DescribeResourceRequest.AddMember("ResourceId", _EntityIdentifier)
-
-	DescribeResourceResponse_ResourceId = DescribeResourceResponse.AddMember("ResourceId", _ResourceId)
-
-	DescribeResourceResponse_Email = DescribeResourceResponse.AddMember("Email", _EmailAddress)
-
-	DescribeResourceResponse_Name = DescribeResourceResponse.AddMember("Name", _ResourceName)
-
-	DescribeResourceResponse_Type = DescribeResourceResponse.AddMember("Type", ResourceType)
-
-	DescribeResourceResponse_BookingOptions = DescribeResourceResponse.AddMember("BookingOptions", BookingOptions)
-
-	DescribeResourceResponse_State = DescribeResourceResponse.AddMember("State", EntityState)
-
-	DescribeResourceResponse_EnabledDate = DescribeResourceResponse.AddMember("EnabledDate", _Timestamp)
-
-	DescribeResourceResponse_DisabledDate = DescribeResourceResponse.AddMember("DisabledDate", _Timestamp)
-
-	DescribeResourceResponse_Description = DescribeResourceResponse.AddMember("Description", _ResourceDescription)
-
-	DescribeResourceResponse_HiddenFromGlobalAddressList = DescribeResourceResponse.AddMember("HiddenFromGlobalAddressList", _Boolean)
-
-	DescribeUserRequest_OrganizationId = DescribeUserRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DescribeUserRequest_UserId = DescribeUserRequest.AddMember("UserId", _EntityIdentifier)
-
-	DescribeUserResponse_UserId = DescribeUserResponse.AddMember("UserId", _WorkMailIdentifier)
-
-	DescribeUserResponse_Name = DescribeUserResponse.AddMember("Name", _UserName)
-
-	DescribeUserResponse_Email = DescribeUserResponse.AddMember("Email", _EmailAddress)
-
-	DescribeUserResponse_DisplayName = DescribeUserResponse.AddMember("DisplayName", _UserAttribute)
-
-	DescribeUserResponse_State = DescribeUserResponse.AddMember("State", EntityState)
-
-	DescribeUserResponse_UserRole = DescribeUserResponse.AddMember("UserRole", UserRole)
-
-	DescribeUserResponse_EnabledDate = DescribeUserResponse.AddMember("EnabledDate", _Timestamp)
-
-	DescribeUserResponse_DisabledDate = DescribeUserResponse.AddMember("DisabledDate", _Timestamp)
-
-	DescribeUserResponse_MailboxProvisionedDate = DescribeUserResponse.AddMember("MailboxProvisionedDate", _Timestamp)
-
-	DescribeUserResponse_MailboxDeprovisionedDate = DescribeUserResponse.AddMember("MailboxDeprovisionedDate", _Timestamp)
-
-	DescribeUserResponse_FirstName = DescribeUserResponse.AddMember("FirstName", _UserAttribute)
-
-	DescribeUserResponse_LastName = DescribeUserResponse.AddMember("LastName", _UserAttribute)
-
-	DescribeUserResponse_HiddenFromGlobalAddressList = DescribeUserResponse.AddMember("HiddenFromGlobalAddressList", _Boolean)
-
-	DescribeUserResponse_Initials = DescribeUserResponse.AddMember("Initials", _UserAttribute)
-
-	DescribeUserResponse_Telephone = DescribeUserResponse.AddMember("Telephone", _UserAttribute)
-
-	DescribeUserResponse_Street = DescribeUserResponse.AddMember("Street", _UserAttribute)
-
-	DescribeUserResponse_JobTitle = DescribeUserResponse.AddMember("JobTitle", _UserAttribute)
-
-	DescribeUserResponse_City = DescribeUserResponse.AddMember("City", _UserAttribute)
-
-	DescribeUserResponse_Company = DescribeUserResponse.AddMember("Company", _UserAttribute)
-
-	DescribeUserResponse_ZipCode = DescribeUserResponse.AddMember("ZipCode", _UserAttribute)
-
-	DescribeUserResponse_Department = DescribeUserResponse.AddMember("Department", _UserAttribute)
-
-	DescribeUserResponse_Country = DescribeUserResponse.AddMember("Country", _UserAttribute)
-
-	DescribeUserResponse_Office = DescribeUserResponse.AddMember("Office", _UserAttribute)
-
-	DescribeUserResponse_IdentityProviderUserId = DescribeUserResponse.AddMember("IdentityProviderUserId", _IdentityProviderUserId)
-
-	DescribeUserResponse_IdentityProviderIdentityStoreId = DescribeUserResponse.AddMember("IdentityProviderIdentityStoreId", _IdentityProviderIdentityStoreId)
-
-	DisassociateDelegateFromResourceRequest_OrganizationId = DisassociateDelegateFromResourceRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DisassociateDelegateFromResourceRequest_ResourceId = DisassociateDelegateFromResourceRequest.AddMember("ResourceId", _EntityIdentifier)
-
-	DisassociateDelegateFromResourceRequest_EntityId = DisassociateDelegateFromResourceRequest.AddMember("EntityId", _EntityIdentifier)
-
-	DisassociateMemberFromGroupRequest_OrganizationId = DisassociateMemberFromGroupRequest.AddMember("OrganizationId", _OrganizationId)
-
-	DisassociateMemberFromGroupRequest_GroupId = DisassociateMemberFromGroupRequest.AddMember("GroupId", _EntityIdentifier)
-
-	DisassociateMemberFromGroupRequest_MemberId = DisassociateMemberFromGroupRequest.AddMember("MemberId", _EntityIdentifier)
-
-	GetAccessControlEffectRequest_OrganizationId = GetAccessControlEffectRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetAccessControlEffectRequest_IpAddress = GetAccessControlEffectRequest.AddMember("IpAddress", _IpAddress)
-
-	GetAccessControlEffectRequest_Action = GetAccessControlEffectRequest.AddMember("Action", _AccessControlRuleAction)
-
-	GetAccessControlEffectRequest_UserId = GetAccessControlEffectRequest.AddMember("UserId", _WorkMailIdentifier)
-
-	GetAccessControlEffectRequest_ImpersonationRoleId = GetAccessControlEffectRequest.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	GetAccessControlEffectResponse_Effect = GetAccessControlEffectResponse.AddMember("Effect", AccessControlRuleEffect)
-
-	GetAccessControlEffectResponse_MatchedRules = GetAccessControlEffectResponse.AddMember("MatchedRules", _AccessControlRuleNameList)
-
-	GetDefaultRetentionPolicyRequest_OrganizationId = GetDefaultRetentionPolicyRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetDefaultRetentionPolicyResponse_Id = GetDefaultRetentionPolicyResponse.AddMember("Id", _ShortString)
-
-	GetDefaultRetentionPolicyResponse_Name = GetDefaultRetentionPolicyResponse.AddMember("Name", _ShortString)
-
-	GetDefaultRetentionPolicyResponse_Description = GetDefaultRetentionPolicyResponse.AddMember("Description", _String)
-
-	GetDefaultRetentionPolicyResponse_FolderConfigurations = GetDefaultRetentionPolicyResponse.AddMember("FolderConfigurations", _FolderConfigurations)
-
-	GetImpersonationRoleEffectRequest_OrganizationId = GetImpersonationRoleEffectRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetImpersonationRoleEffectRequest_ImpersonationRoleId = GetImpersonationRoleEffectRequest.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	GetImpersonationRoleEffectRequest_TargetUser = GetImpersonationRoleEffectRequest.AddMember("TargetUser", _EntityIdentifier)
-
-	GetImpersonationRoleEffectResponse_Type = GetImpersonationRoleEffectResponse.AddMember("Type", ImpersonationRoleType)
-
-	GetImpersonationRoleEffectResponse_Effect = GetImpersonationRoleEffectResponse.AddMember("Effect", AccessEffect)
-
-	GetImpersonationRoleEffectResponse_MatchedRules = GetImpersonationRoleEffectResponse.AddMember("MatchedRules", _ImpersonationMatchedRuleList)
-
-	GetImpersonationRoleRequest_OrganizationId = GetImpersonationRoleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetImpersonationRoleRequest_ImpersonationRoleId = GetImpersonationRoleRequest.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	GetImpersonationRoleResponse_ImpersonationRoleId = GetImpersonationRoleResponse.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	GetImpersonationRoleResponse_Name = GetImpersonationRoleResponse.AddMember("Name", _ImpersonationRoleName)
-
-	GetImpersonationRoleResponse_Type = GetImpersonationRoleResponse.AddMember("Type", ImpersonationRoleType)
-
-	GetImpersonationRoleResponse_Description = GetImpersonationRoleResponse.AddMember("Description", _ImpersonationRoleDescription)
-
-	GetImpersonationRoleResponse_Rules = GetImpersonationRoleResponse.AddMember("Rules", _ImpersonationRuleList)
-
-	GetImpersonationRoleResponse_DateCreated = GetImpersonationRoleResponse.AddMember("DateCreated", _Timestamp)
-
-	GetImpersonationRoleResponse_DateModified = GetImpersonationRoleResponse.AddMember("DateModified", _Timestamp)
-
-	GetMailboxDetailsRequest_OrganizationId = GetMailboxDetailsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetMailboxDetailsRequest_UserId = GetMailboxDetailsRequest.AddMember("UserId", _EntityIdentifier)
-
-	GetMailboxDetailsResponse_MailboxQuota = GetMailboxDetailsResponse.AddMember("MailboxQuota", _MailboxQuota)
-
-	GetMailboxDetailsResponse_MailboxSize = GetMailboxDetailsResponse.AddMember("MailboxSize", _MailboxSize)
-
-	GetMailDomainRequest_OrganizationId = GetMailDomainRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetMailDomainRequest_DomainName = GetMailDomainRequest.AddMember("DomainName", _WorkMailDomainName)
-
-	GetMailDomainResponse_Records = GetMailDomainResponse.AddMember("Records", _DnsRecords)
-
-	GetMailDomainResponse_IsTestDomain = GetMailDomainResponse.AddMember("IsTestDomain", _Boolean)
-
-	GetMailDomainResponse_IsDefault = GetMailDomainResponse.AddMember("IsDefault", _Boolean)
-
-	GetMailDomainResponse_OwnershipVerificationStatus = GetMailDomainResponse.AddMember("OwnershipVerificationStatus", DnsRecordVerificationStatus)
-
-	GetMailDomainResponse_DkimVerificationStatus = GetMailDomainResponse.AddMember("DkimVerificationStatus", DnsRecordVerificationStatus)
-
-	GetMobileDeviceAccessEffectRequest_OrganizationId = GetMobileDeviceAccessEffectRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetMobileDeviceAccessEffectRequest_DeviceType = GetMobileDeviceAccessEffectRequest.AddMember("DeviceType", _DeviceType)
-
-	GetMobileDeviceAccessEffectRequest_DeviceModel = GetMobileDeviceAccessEffectRequest.AddMember("DeviceModel", _DeviceModel)
-
-	GetMobileDeviceAccessEffectRequest_DeviceOperatingSystem = GetMobileDeviceAccessEffectRequest.AddMember("DeviceOperatingSystem", _DeviceOperatingSystem)
-
-	GetMobileDeviceAccessEffectRequest_DeviceUserAgent = GetMobileDeviceAccessEffectRequest.AddMember("DeviceUserAgent", _DeviceUserAgent)
-
-	GetMobileDeviceAccessEffectResponse_Effect = GetMobileDeviceAccessEffectResponse.AddMember("Effect", MobileDeviceAccessRuleEffect)
-
-	GetMobileDeviceAccessEffectResponse_MatchedRules = GetMobileDeviceAccessEffectResponse.AddMember("MatchedRules", _MobileDeviceAccessMatchedRuleList)
-
-	GetMobileDeviceAccessOverrideRequest_OrganizationId = GetMobileDeviceAccessOverrideRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetMobileDeviceAccessOverrideRequest_UserId = GetMobileDeviceAccessOverrideRequest.AddMember("UserId", _EntityIdentifier)
-
-	GetMobileDeviceAccessOverrideRequest_DeviceId = GetMobileDeviceAccessOverrideRequest.AddMember("DeviceId", _DeviceId)
-
-	GetMobileDeviceAccessOverrideResponse_UserId = GetMobileDeviceAccessOverrideResponse.AddMember("UserId", _WorkMailIdentifier)
-
-	GetMobileDeviceAccessOverrideResponse_DeviceId = GetMobileDeviceAccessOverrideResponse.AddMember("DeviceId", _DeviceId)
-
-	GetMobileDeviceAccessOverrideResponse_Effect = GetMobileDeviceAccessOverrideResponse.AddMember("Effect", MobileDeviceAccessRuleEffect)
-
-	GetMobileDeviceAccessOverrideResponse_Description = GetMobileDeviceAccessOverrideResponse.AddMember("Description", _MobileDeviceAccessRuleDescription)
-
-	GetMobileDeviceAccessOverrideResponse_DateCreated = GetMobileDeviceAccessOverrideResponse.AddMember("DateCreated", _Timestamp)
-
-	GetMobileDeviceAccessOverrideResponse_DateModified = GetMobileDeviceAccessOverrideResponse.AddMember("DateModified", _Timestamp)
-
-	GetPersonalAccessTokenMetadataRequest_OrganizationId = GetPersonalAccessTokenMetadataRequest.AddMember("OrganizationId", _OrganizationId)
-
-	GetPersonalAccessTokenMetadataRequest_PersonalAccessTokenId = GetPersonalAccessTokenMetadataRequest.AddMember("PersonalAccessTokenId", _PersonalAccessTokenId)
-
-	GetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId = GetPersonalAccessTokenMetadataResponse.AddMember("PersonalAccessTokenId", _PersonalAccessTokenId)
-
-	GetPersonalAccessTokenMetadataResponse_UserId = GetPersonalAccessTokenMetadataResponse.AddMember("UserId", _WorkMailIdentifier)
-
-	GetPersonalAccessTokenMetadataResponse_Name = GetPersonalAccessTokenMetadataResponse.AddMember("Name", _PersonalAccessTokenName)
-
-	GetPersonalAccessTokenMetadataResponse_DateCreated = GetPersonalAccessTokenMetadataResponse.AddMember("DateCreated", _Timestamp)
-
-	GetPersonalAccessTokenMetadataResponse_DateLastUsed = GetPersonalAccessTokenMetadataResponse.AddMember("DateLastUsed", _Timestamp)
-
-	GetPersonalAccessTokenMetadataResponse_ExpiresTime = GetPersonalAccessTokenMetadataResponse.AddMember("ExpiresTime", _Timestamp)
-
-	GetPersonalAccessTokenMetadataResponse_Scopes = GetPersonalAccessTokenMetadataResponse.AddMember("Scopes", _PersonalAccessTokenScopeList)
-
-	ListAccessControlRulesRequest_OrganizationId = ListAccessControlRulesRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListAccessControlRulesResponse_Rules = ListAccessControlRulesResponse.AddMember("Rules", _AccessControlRulesList)
-
-	ListAliasesRequest_OrganizationId = ListAliasesRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListAliasesRequest_EntityId = ListAliasesRequest.AddMember("EntityId", _WorkMailIdentifier)
-
-	ListAliasesRequest_NextToken = ListAliasesRequest.AddMember("NextToken", _NextToken)
-
-	ListAliasesRequest_MaxResults = ListAliasesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAliasesResponse_Aliases = ListAliasesResponse.AddMember("Aliases", _Aliases)
-
-	ListAliasesResponse_NextToken = ListAliasesResponse.AddMember("NextToken", _NextToken)
-
-	ListAvailabilityConfigurationsRequest_OrganizationId = ListAvailabilityConfigurationsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListAvailabilityConfigurationsRequest_MaxResults = ListAvailabilityConfigurationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListAvailabilityConfigurationsRequest_NextToken = ListAvailabilityConfigurationsRequest.AddMember("NextToken", _NextToken)
-
-	ListAvailabilityConfigurationsResponse_AvailabilityConfigurations = ListAvailabilityConfigurationsResponse.AddMember("AvailabilityConfigurations", _AvailabilityConfigurationList)
-
-	ListAvailabilityConfigurationsResponse_NextToken = ListAvailabilityConfigurationsResponse.AddMember("NextToken", _NextToken)
-
-	ListGroupMembersRequest_OrganizationId = ListGroupMembersRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListGroupMembersRequest_GroupId = ListGroupMembersRequest.AddMember("GroupId", _EntityIdentifier)
-
-	ListGroupMembersRequest_NextToken = ListGroupMembersRequest.AddMember("NextToken", _NextToken)
-
-	ListGroupMembersRequest_MaxResults = ListGroupMembersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListGroupMembersResponse_Members = ListGroupMembersResponse.AddMember("Members", _Members)
-
-	ListGroupMembersResponse_NextToken = ListGroupMembersResponse.AddMember("NextToken", _NextToken)
-
-	ListGroupsForEntityRequest_OrganizationId = ListGroupsForEntityRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListGroupsForEntityRequest_EntityId = ListGroupsForEntityRequest.AddMember("EntityId", _EntityIdentifier)
-
-	ListGroupsForEntityRequest_Filters = ListGroupsForEntityRequest.AddMember("Filters", ListGroupsForEntityFilters)
-
-	ListGroupsForEntityRequest_NextToken = ListGroupsForEntityRequest.AddMember("NextToken", _NextToken)
-
-	ListGroupsForEntityRequest_MaxResults = ListGroupsForEntityRequest.AddMember("MaxResults", _MaxResults)
-
-	ListGroupsForEntityResponse_Groups = ListGroupsForEntityResponse.AddMember("Groups", _GroupIdentifiers)
-
-	ListGroupsForEntityResponse_NextToken = ListGroupsForEntityResponse.AddMember("NextToken", _NextToken)
-
-	ListGroupsRequest_OrganizationId = ListGroupsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListGroupsRequest_NextToken = ListGroupsRequest.AddMember("NextToken", _NextToken)
-
-	ListGroupsRequest_MaxResults = ListGroupsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListGroupsRequest_Filters = ListGroupsRequest.AddMember("Filters", ListGroupsFilters)
-
-	ListGroupsResponse_Groups = ListGroupsResponse.AddMember("Groups", _Groups)
-
-	ListGroupsResponse_NextToken = ListGroupsResponse.AddMember("NextToken", _NextToken)
-
-	ListImpersonationRolesRequest_OrganizationId = ListImpersonationRolesRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListImpersonationRolesRequest_NextToken = ListImpersonationRolesRequest.AddMember("NextToken", _NextToken)
-
-	ListImpersonationRolesRequest_MaxResults = ListImpersonationRolesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListImpersonationRolesResponse_Roles = ListImpersonationRolesResponse.AddMember("Roles", _ImpersonationRoleList)
-
-	ListImpersonationRolesResponse_NextToken = ListImpersonationRolesResponse.AddMember("NextToken", _NextToken)
-
-	ListMailboxExportJobsRequest_OrganizationId = ListMailboxExportJobsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListMailboxExportJobsRequest_NextToken = ListMailboxExportJobsRequest.AddMember("NextToken", _NextToken)
-
-	ListMailboxExportJobsRequest_MaxResults = ListMailboxExportJobsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMailboxExportJobsResponse_Jobs = ListMailboxExportJobsResponse.AddMember("Jobs", _Jobs)
-
-	ListMailboxExportJobsResponse_NextToken = ListMailboxExportJobsResponse.AddMember("NextToken", _NextToken)
-
-	ListMailboxPermissionsRequest_OrganizationId = ListMailboxPermissionsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListMailboxPermissionsRequest_EntityId = ListMailboxPermissionsRequest.AddMember("EntityId", _EntityIdentifier)
-
-	ListMailboxPermissionsRequest_NextToken = ListMailboxPermissionsRequest.AddMember("NextToken", _NextToken)
-
-	ListMailboxPermissionsRequest_MaxResults = ListMailboxPermissionsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMailboxPermissionsResponse_Permissions = ListMailboxPermissionsResponse.AddMember("Permissions", _Permissions)
-
-	ListMailboxPermissionsResponse_NextToken = ListMailboxPermissionsResponse.AddMember("NextToken", _NextToken)
-
-	ListMailDomainsRequest_OrganizationId = ListMailDomainsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListMailDomainsRequest_MaxResults = ListMailDomainsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMailDomainsRequest_NextToken = ListMailDomainsRequest.AddMember("NextToken", _NextToken)
-
-	ListMailDomainsResponse_MailDomains = ListMailDomainsResponse.AddMember("MailDomains", _MailDomains)
-
-	ListMailDomainsResponse_NextToken = ListMailDomainsResponse.AddMember("NextToken", _NextToken)
-
-	ListMobileDeviceAccessOverridesRequest_OrganizationId = ListMobileDeviceAccessOverridesRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListMobileDeviceAccessOverridesRequest_UserId = ListMobileDeviceAccessOverridesRequest.AddMember("UserId", _EntityIdentifier)
-
-	ListMobileDeviceAccessOverridesRequest_DeviceId = ListMobileDeviceAccessOverridesRequest.AddMember("DeviceId", _DeviceId)
-
-	ListMobileDeviceAccessOverridesRequest_NextToken = ListMobileDeviceAccessOverridesRequest.AddMember("NextToken", _NextToken)
-
-	ListMobileDeviceAccessOverridesRequest_MaxResults = ListMobileDeviceAccessOverridesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListMobileDeviceAccessOverridesResponse_Overrides = ListMobileDeviceAccessOverridesResponse.AddMember("Overrides", _MobileDeviceAccessOverridesList)
-
-	ListMobileDeviceAccessOverridesResponse_NextToken = ListMobileDeviceAccessOverridesResponse.AddMember("NextToken", _NextToken)
-
-	ListMobileDeviceAccessRulesRequest_OrganizationId = ListMobileDeviceAccessRulesRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListMobileDeviceAccessRulesResponse_Rules = ListMobileDeviceAccessRulesResponse.AddMember("Rules", _MobileDeviceAccessRulesList)
-
-	ListOrganizationsRequest_NextToken = ListOrganizationsRequest.AddMember("NextToken", _NextToken)
-
-	ListOrganizationsRequest_MaxResults = ListOrganizationsRequest.AddMember("MaxResults", _MaxResults)
-
-	ListOrganizationsResponse_OrganizationSummaries = ListOrganizationsResponse.AddMember("OrganizationSummaries", _OrganizationSummaries)
-
-	ListOrganizationsResponse_NextToken = ListOrganizationsResponse.AddMember("NextToken", _NextToken)
-
-	ListPersonalAccessTokensRequest_OrganizationId = ListPersonalAccessTokensRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListPersonalAccessTokensRequest_UserId = ListPersonalAccessTokensRequest.AddMember("UserId", _EntityIdentifier)
-
-	ListPersonalAccessTokensRequest_NextToken = ListPersonalAccessTokensRequest.AddMember("NextToken", _NextToken)
-
-	ListPersonalAccessTokensRequest_MaxResults = ListPersonalAccessTokensRequest.AddMember("MaxResults", _MaxResults)
-
-	ListPersonalAccessTokensResponse_NextToken = ListPersonalAccessTokensResponse.AddMember("NextToken", _NextToken)
-
-	ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries = ListPersonalAccessTokensResponse.AddMember("PersonalAccessTokenSummaries", _PersonalAccessTokenSummaryList)
-
-	ListResourceDelegatesRequest_OrganizationId = ListResourceDelegatesRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListResourceDelegatesRequest_ResourceId = ListResourceDelegatesRequest.AddMember("ResourceId", _EntityIdentifier)
-
-	ListResourceDelegatesRequest_NextToken = ListResourceDelegatesRequest.AddMember("NextToken", _NextToken)
-
-	ListResourceDelegatesRequest_MaxResults = ListResourceDelegatesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListResourceDelegatesResponse_Delegates = ListResourceDelegatesResponse.AddMember("Delegates", _ResourceDelegates)
-
-	ListResourceDelegatesResponse_NextToken = ListResourceDelegatesResponse.AddMember("NextToken", _NextToken)
-
-	ListResourcesRequest_OrganizationId = ListResourcesRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListResourcesRequest_NextToken = ListResourcesRequest.AddMember("NextToken", _NextToken)
-
-	ListResourcesRequest_MaxResults = ListResourcesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListResourcesRequest_Filters = ListResourcesRequest.AddMember("Filters", ListResourcesFilters)
-
-	ListResourcesResponse_Resources = ListResourcesResponse.AddMember("Resources", _Resources)
-
-	ListResourcesResponse_NextToken = ListResourcesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	ListUsersRequest_OrganizationId = ListUsersRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ListUsersRequest_NextToken = ListUsersRequest.AddMember("NextToken", _NextToken)
-
-	ListUsersRequest_MaxResults = ListUsersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListUsersRequest_Filters = ListUsersRequest.AddMember("Filters", ListUsersFilters)
-
-	ListUsersResponse_Users = ListUsersResponse.AddMember("Users", _Users)
-
-	ListUsersResponse_NextToken = ListUsersResponse.AddMember("NextToken", _NextToken)
-
-	PutAccessControlRuleRequest_Name = PutAccessControlRuleRequest.AddMember("Name", _AccessControlRuleName)
-
-	PutAccessControlRuleRequest_Effect = PutAccessControlRuleRequest.AddMember("Effect", AccessControlRuleEffect)
-
-	PutAccessControlRuleRequest_Description = PutAccessControlRuleRequest.AddMember("Description", _AccessControlRuleDescription)
-
-	PutAccessControlRuleRequest_IpRanges = PutAccessControlRuleRequest.AddMember("IpRanges", _IpRangeList)
-
-	PutAccessControlRuleRequest_NotIpRanges = PutAccessControlRuleRequest.AddMember("NotIpRanges", _IpRangeList)
-
-	PutAccessControlRuleRequest_Actions = PutAccessControlRuleRequest.AddMember("Actions", _ActionsList)
-
-	PutAccessControlRuleRequest_NotActions = PutAccessControlRuleRequest.AddMember("NotActions", _ActionsList)
-
-	PutAccessControlRuleRequest_UserIds = PutAccessControlRuleRequest.AddMember("UserIds", _UserIdList)
-
-	PutAccessControlRuleRequest_NotUserIds = PutAccessControlRuleRequest.AddMember("NotUserIds", _UserIdList)
-
-	PutAccessControlRuleRequest_OrganizationId = PutAccessControlRuleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	PutAccessControlRuleRequest_ImpersonationRoleIds = PutAccessControlRuleRequest.AddMember("ImpersonationRoleIds", _ImpersonationRoleIdList)
-
-	PutAccessControlRuleRequest_NotImpersonationRoleIds = PutAccessControlRuleRequest.AddMember("NotImpersonationRoleIds", _ImpersonationRoleIdList)
-
-	PutEmailMonitoringConfigurationRequest_OrganizationId = PutEmailMonitoringConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	PutEmailMonitoringConfigurationRequest_RoleArn = PutEmailMonitoringConfigurationRequest.AddMember("RoleArn", _RoleArn)
-
-	PutEmailMonitoringConfigurationRequest_LogGroupArn = PutEmailMonitoringConfigurationRequest.AddMember("LogGroupArn", _LogGroupArn)
-
-	PutIdentityProviderConfigurationRequest_OrganizationId = PutIdentityProviderConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	PutIdentityProviderConfigurationRequest_AuthenticationMode = PutIdentityProviderConfigurationRequest.AddMember("AuthenticationMode", IdentityProviderAuthenticationMode)
-
-	PutIdentityProviderConfigurationRequest_IdentityCenterConfiguration = PutIdentityProviderConfigurationRequest.AddMember("IdentityCenterConfiguration", IdentityCenterConfiguration)
-
-	PutIdentityProviderConfigurationRequest_PersonalAccessTokenConfiguration = PutIdentityProviderConfigurationRequest.AddMember("PersonalAccessTokenConfiguration", PersonalAccessTokenConfiguration)
-
-	PutInboundDmarcSettingsRequest_OrganizationId = PutInboundDmarcSettingsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	PutInboundDmarcSettingsRequest_Enforced = PutInboundDmarcSettingsRequest.AddMember("Enforced", _BooleanObject)
-
-	PutMailboxPermissionsRequest_OrganizationId = PutMailboxPermissionsRequest.AddMember("OrganizationId", _OrganizationId)
-
-	PutMailboxPermissionsRequest_EntityId = PutMailboxPermissionsRequest.AddMember("EntityId", _EntityIdentifier)
-
-	PutMailboxPermissionsRequest_GranteeId = PutMailboxPermissionsRequest.AddMember("GranteeId", _EntityIdentifier)
-
-	PutMailboxPermissionsRequest_PermissionValues = PutMailboxPermissionsRequest.AddMember("PermissionValues", _PermissionValues)
-
-	PutMobileDeviceAccessOverrideRequest_OrganizationId = PutMobileDeviceAccessOverrideRequest.AddMember("OrganizationId", _OrganizationId)
-
-	PutMobileDeviceAccessOverrideRequest_UserId = PutMobileDeviceAccessOverrideRequest.AddMember("UserId", _EntityIdentifier)
-
-	PutMobileDeviceAccessOverrideRequest_DeviceId = PutMobileDeviceAccessOverrideRequest.AddMember("DeviceId", _DeviceId)
-
-	PutMobileDeviceAccessOverrideRequest_Effect = PutMobileDeviceAccessOverrideRequest.AddMember("Effect", MobileDeviceAccessRuleEffect)
-
-	PutMobileDeviceAccessOverrideRequest_Description = PutMobileDeviceAccessOverrideRequest.AddMember("Description", _MobileDeviceAccessRuleDescription)
-
-	PutRetentionPolicyRequest_OrganizationId = PutRetentionPolicyRequest.AddMember("OrganizationId", _OrganizationId)
-
-	PutRetentionPolicyRequest_Id = PutRetentionPolicyRequest.AddMember("Id", _ShortString)
-
-	PutRetentionPolicyRequest_Name = PutRetentionPolicyRequest.AddMember("Name", _ShortString)
-
-	PutRetentionPolicyRequest_Description = PutRetentionPolicyRequest.AddMember("Description", _PolicyDescription)
-
-	PutRetentionPolicyRequest_FolderConfigurations = PutRetentionPolicyRequest.AddMember("FolderConfigurations", _FolderConfigurations)
-
-	RegisterMailDomainRequest_ClientToken = RegisterMailDomainRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	RegisterMailDomainRequest_OrganizationId = RegisterMailDomainRequest.AddMember("OrganizationId", _OrganizationId)
-
-	RegisterMailDomainRequest_DomainName = RegisterMailDomainRequest.AddMember("DomainName", _WorkMailDomainName)
-
-	RegisterToWorkMailRequest_OrganizationId = RegisterToWorkMailRequest.AddMember("OrganizationId", _OrganizationId)
-
-	RegisterToWorkMailRequest_EntityId = RegisterToWorkMailRequest.AddMember("EntityId", _EntityIdentifier)
-
-	RegisterToWorkMailRequest_Email = RegisterToWorkMailRequest.AddMember("Email", _EmailAddress)
-
-	ResetPasswordRequest_OrganizationId = ResetPasswordRequest.AddMember("OrganizationId", _OrganizationId)
-
-	ResetPasswordRequest_UserId = ResetPasswordRequest.AddMember("UserId", _WorkMailIdentifier)
-
-	ResetPasswordRequest_Password = ResetPasswordRequest.AddMember("Password", _Password)
-
-	StartMailboxExportJobRequest_ClientToken = StartMailboxExportJobRequest.AddMember("ClientToken", _IdempotencyClientToken)
-
-	StartMailboxExportJobRequest_OrganizationId = StartMailboxExportJobRequest.AddMember("OrganizationId", _OrganizationId)
-
-	StartMailboxExportJobRequest_EntityId = StartMailboxExportJobRequest.AddMember("EntityId", _EntityIdentifier)
-
-	StartMailboxExportJobRequest_Description = StartMailboxExportJobRequest.AddMember("Description", _Description)
-
-	StartMailboxExportJobRequest_RoleArn = StartMailboxExportJobRequest.AddMember("RoleArn", _RoleArn)
-
-	StartMailboxExportJobRequest_KmsKeyArn = StartMailboxExportJobRequest.AddMember("KmsKeyArn", _KmsKeyArn)
-
-	StartMailboxExportJobRequest_S3BucketName = StartMailboxExportJobRequest.AddMember("S3BucketName", _S3BucketName)
-
-	StartMailboxExportJobRequest_S3Prefix = StartMailboxExportJobRequest.AddMember("S3Prefix", _S3ObjectKey)
-
-	StartMailboxExportJobResponse_JobId = StartMailboxExportJobResponse.AddMember("JobId", _MailboxExportJobId)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	TestAvailabilityConfigurationRequest_OrganizationId = TestAvailabilityConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	TestAvailabilityConfigurationRequest_DomainName = TestAvailabilityConfigurationRequest.AddMember("DomainName", _DomainName)
-
-	TestAvailabilityConfigurationRequest_EwsProvider = TestAvailabilityConfigurationRequest.AddMember("EwsProvider", EwsAvailabilityProvider)
-
-	TestAvailabilityConfigurationRequest_LambdaProvider = TestAvailabilityConfigurationRequest.AddMember("LambdaProvider", LambdaAvailabilityProvider)
-
-	TestAvailabilityConfigurationResponse_TestPassed = TestAvailabilityConfigurationResponse.AddMember("TestPassed", _Boolean)
-
-	TestAvailabilityConfigurationResponse_FailureReason = TestAvailabilityConfigurationResponse.AddMember("FailureReason", _String)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateAvailabilityConfigurationRequest_OrganizationId = UpdateAvailabilityConfigurationRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateAvailabilityConfigurationRequest_DomainName = UpdateAvailabilityConfigurationRequest.AddMember("DomainName", _DomainName)
-
-	UpdateAvailabilityConfigurationRequest_EwsProvider = UpdateAvailabilityConfigurationRequest.AddMember("EwsProvider", EwsAvailabilityProvider)
-
-	UpdateAvailabilityConfigurationRequest_LambdaProvider = UpdateAvailabilityConfigurationRequest.AddMember("LambdaProvider", LambdaAvailabilityProvider)
-
-	UpdateDefaultMailDomainRequest_OrganizationId = UpdateDefaultMailDomainRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateDefaultMailDomainRequest_DomainName = UpdateDefaultMailDomainRequest.AddMember("DomainName", _WorkMailDomainName)
-
-	UpdateGroupRequest_OrganizationId = UpdateGroupRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateGroupRequest_GroupId = UpdateGroupRequest.AddMember("GroupId", _EntityIdentifier)
-
-	UpdateGroupRequest_HiddenFromGlobalAddressList = UpdateGroupRequest.AddMember("HiddenFromGlobalAddressList", _BooleanObject)
-
-	UpdateImpersonationRoleRequest_OrganizationId = UpdateImpersonationRoleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateImpersonationRoleRequest_ImpersonationRoleId = UpdateImpersonationRoleRequest.AddMember("ImpersonationRoleId", _ImpersonationRoleId)
-
-	UpdateImpersonationRoleRequest_Name = UpdateImpersonationRoleRequest.AddMember("Name", _ImpersonationRoleName)
-
-	UpdateImpersonationRoleRequest_Type = UpdateImpersonationRoleRequest.AddMember("Type", ImpersonationRoleType)
-
-	UpdateImpersonationRoleRequest_Description = UpdateImpersonationRoleRequest.AddMember("Description", _ImpersonationRoleDescription)
-
-	UpdateImpersonationRoleRequest_Rules = UpdateImpersonationRoleRequest.AddMember("Rules", _ImpersonationRuleList)
-
-	UpdateMailboxQuotaRequest_OrganizationId = UpdateMailboxQuotaRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateMailboxQuotaRequest_UserId = UpdateMailboxQuotaRequest.AddMember("UserId", _EntityIdentifier)
-
-	UpdateMailboxQuotaRequest_MailboxQuota = UpdateMailboxQuotaRequest.AddMember("MailboxQuota", _MailboxQuota)
-
-	UpdateMobileDeviceAccessRuleRequest_OrganizationId = UpdateMobileDeviceAccessRuleRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId = UpdateMobileDeviceAccessRuleRequest.AddMember("MobileDeviceAccessRuleId", _MobileDeviceAccessRuleId)
-
-	UpdateMobileDeviceAccessRuleRequest_Name = UpdateMobileDeviceAccessRuleRequest.AddMember("Name", _MobileDeviceAccessRuleName)
-
-	UpdateMobileDeviceAccessRuleRequest_Description = UpdateMobileDeviceAccessRuleRequest.AddMember("Description", _MobileDeviceAccessRuleDescription)
-
-	UpdateMobileDeviceAccessRuleRequest_Effect = UpdateMobileDeviceAccessRuleRequest.AddMember("Effect", MobileDeviceAccessRuleEffect)
-
-	UpdateMobileDeviceAccessRuleRequest_DeviceTypes = UpdateMobileDeviceAccessRuleRequest.AddMember("DeviceTypes", _DeviceTypeList)
-
-	UpdateMobileDeviceAccessRuleRequest_NotDeviceTypes = UpdateMobileDeviceAccessRuleRequest.AddMember("NotDeviceTypes", _DeviceTypeList)
-
-	UpdateMobileDeviceAccessRuleRequest_DeviceModels = UpdateMobileDeviceAccessRuleRequest.AddMember("DeviceModels", _DeviceModelList)
-
-	UpdateMobileDeviceAccessRuleRequest_NotDeviceModels = UpdateMobileDeviceAccessRuleRequest.AddMember("NotDeviceModels", _DeviceModelList)
-
-	UpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems = UpdateMobileDeviceAccessRuleRequest.AddMember("DeviceOperatingSystems", _DeviceOperatingSystemList)
-
-	UpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems = UpdateMobileDeviceAccessRuleRequest.AddMember("NotDeviceOperatingSystems", _DeviceOperatingSystemList)
-
-	UpdateMobileDeviceAccessRuleRequest_DeviceUserAgents = UpdateMobileDeviceAccessRuleRequest.AddMember("DeviceUserAgents", _DeviceUserAgentList)
-
-	UpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents = UpdateMobileDeviceAccessRuleRequest.AddMember("NotDeviceUserAgents", _DeviceUserAgentList)
-
-	UpdatePrimaryEmailAddressRequest_OrganizationId = UpdatePrimaryEmailAddressRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdatePrimaryEmailAddressRequest_EntityId = UpdatePrimaryEmailAddressRequest.AddMember("EntityId", _EntityIdentifier)
-
-	UpdatePrimaryEmailAddressRequest_Email = UpdatePrimaryEmailAddressRequest.AddMember("Email", _EmailAddress)
-
-	UpdateResourceRequest_OrganizationId = UpdateResourceRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateResourceRequest_ResourceId = UpdateResourceRequest.AddMember("ResourceId", _EntityIdentifier)
-
-	UpdateResourceRequest_Name = UpdateResourceRequest.AddMember("Name", _ResourceName)
-
-	UpdateResourceRequest_BookingOptions = UpdateResourceRequest.AddMember("BookingOptions", BookingOptions)
-
-	UpdateResourceRequest_Description = UpdateResourceRequest.AddMember("Description", _NewResourceDescription)
-
-	UpdateResourceRequest_Type = UpdateResourceRequest.AddMember("Type", ResourceType)
-
-	UpdateResourceRequest_HiddenFromGlobalAddressList = UpdateResourceRequest.AddMember("HiddenFromGlobalAddressList", _BooleanObject)
-
-	UpdateUserRequest_OrganizationId = UpdateUserRequest.AddMember("OrganizationId", _OrganizationId)
-
-	UpdateUserRequest_UserId = UpdateUserRequest.AddMember("UserId", _EntityIdentifier)
-
-	UpdateUserRequest_Role = UpdateUserRequest.AddMember("Role", UserRole)
-
-	UpdateUserRequest_DisplayName = UpdateUserRequest.AddMember("DisplayName", _UserAttribute)
-
-	UpdateUserRequest_FirstName = UpdateUserRequest.AddMember("FirstName", _UserAttribute)
-
-	UpdateUserRequest_LastName = UpdateUserRequest.AddMember("LastName", _UserAttribute)
-
-	UpdateUserRequest_HiddenFromGlobalAddressList = UpdateUserRequest.AddMember("HiddenFromGlobalAddressList", _BooleanObject)
-
-	UpdateUserRequest_Initials = UpdateUserRequest.AddMember("Initials", _UserAttribute)
-
-	UpdateUserRequest_Telephone = UpdateUserRequest.AddMember("Telephone", _UserAttribute)
-
-	UpdateUserRequest_Street = UpdateUserRequest.AddMember("Street", _UserAttribute)
-
-	UpdateUserRequest_JobTitle = UpdateUserRequest.AddMember("JobTitle", _UserAttribute)
-
-	UpdateUserRequest_City = UpdateUserRequest.AddMember("City", _UserAttribute)
-
-	UpdateUserRequest_Company = UpdateUserRequest.AddMember("Company", _UserAttribute)
-
-	UpdateUserRequest_ZipCode = UpdateUserRequest.AddMember("ZipCode", _UserAttribute)
-
-	UpdateUserRequest_Department = UpdateUserRequest.AddMember("Department", _UserAttribute)
-
-	UpdateUserRequest_Country = UpdateUserRequest.AddMember("Country", _UserAttribute)
-
-	UpdateUserRequest_Office = UpdateUserRequest.AddMember("Office", _UserAttribute)
-
-	UpdateUserRequest_IdentityProviderUserId = UpdateUserRequest.AddMember("IdentityProviderUserId", _IdentityProviderUserIdForUpdate)
-
-}
+var (
+	iAssociateDelegateToResource                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssociateDelegateToResource"}
+	iAssociateMemberToGroup                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssociateMemberToGroup"}
+	iAssumeImpersonationRole                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssumeImpersonationRole"}
+	iCancelMailboxExportJob                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CancelMailboxExportJob"}
+	iCreateAlias                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateAlias"}
+	iCreateAvailabilityConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateAvailabilityConfiguration"}
+	iCreateGroup                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateGroup"}
+	iCreateIdentityCenterApplication               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateIdentityCenterApplication"}
+	iCreateImpersonationRole                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateImpersonationRole"}
+	iCreateMobileDeviceAccessRule                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateMobileDeviceAccessRule"}
+	iCreateOrganization                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateOrganization"}
+	iCreateResource                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateResource"}
+	iCreateUser                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateUser"}
+	iDeleteAccessControlRule                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAccessControlRule"}
+	iDeleteAlias                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAlias"}
+	iDeleteAvailabilityConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAvailabilityConfiguration"}
+	iDeleteEmailMonitoringConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteEmailMonitoringConfiguration"}
+	iDeleteGroup                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteGroup"}
+	iDeleteIdentityCenterApplication               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteIdentityCenterApplication"}
+	iDeleteIdentityProviderConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteIdentityProviderConfiguration"}
+	iDeleteImpersonationRole                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteImpersonationRole"}
+	iDeleteMailboxPermissions                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMailboxPermissions"}
+	iDeleteMobileDeviceAccessOverride              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMobileDeviceAccessOverride"}
+	iDeleteMobileDeviceAccessRule                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMobileDeviceAccessRule"}
+	iDeleteOrganization                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteOrganization"}
+	iDeletePersonalAccessToken                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeletePersonalAccessToken"}
+	iDeleteResource                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteResource"}
+	iDeleteRetentionPolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteRetentionPolicy"}
+	iDeleteUser                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteUser"}
+	iDeregisterFromWorkMail                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeregisterFromWorkMail"}
+	iDeregisterMailDomain                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeregisterMailDomain"}
+	iDescribeEmailMonitoringConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeEmailMonitoringConfiguration"}
+	iDescribeEntity                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeEntity"}
+	iDescribeGroup                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeGroup"}
+	iDescribeIdentityProviderConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeIdentityProviderConfiguration"}
+	iDescribeInboundDmarcSettings                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeInboundDmarcSettings"}
+	iDescribeMailboxExportJob                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeMailboxExportJob"}
+	iDescribeOrganization                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeOrganization"}
+	iDescribeResource                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeResource"}
+	iDescribeUser                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeUser"}
+	iDisassociateDelegateFromResource              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DisassociateDelegateFromResource"}
+	iDisassociateMemberFromGroup                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DisassociateMemberFromGroup"}
+	iGetAccessControlEffect                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetAccessControlEffect"}
+	iGetDefaultRetentionPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetDefaultRetentionPolicy"}
+	iGetImpersonationRole                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetImpersonationRole"}
+	iGetImpersonationRoleEffect                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetImpersonationRoleEffect"}
+	iGetMailboxDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMailboxDetails"}
+	iGetMailDomain                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMailDomain"}
+	iGetMobileDeviceAccessEffect                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMobileDeviceAccessEffect"}
+	iGetMobileDeviceAccessOverride                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMobileDeviceAccessOverride"}
+	iGetPersonalAccessTokenMetadata                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetPersonalAccessTokenMetadata"}
+	iListAccessControlRules                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAccessControlRules"}
+	iListAliases                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAliases"}
+	iListAvailabilityConfigurations                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAvailabilityConfigurations"}
+	iListGroupMembers                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupMembers"}
+	iListGroups                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroups"}
+	iListGroupsForEntity                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupsForEntity"}
+	iListImpersonationRoles                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListImpersonationRoles"}
+	iListMailboxExportJobs                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailboxExportJobs"}
+	iListMailboxPermissions                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailboxPermissions"}
+	iListMailDomains                               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailDomains"}
+	iListMobileDeviceAccessOverrides               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMobileDeviceAccessOverrides"}
+	iListMobileDeviceAccessRules                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMobileDeviceAccessRules"}
+	iListOrganizations                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListOrganizations"}
+	iListPersonalAccessTokens                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListPersonalAccessTokens"}
+	iListResourceDelegates                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListResourceDelegates"}
+	iListResources                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListResources"}
+	iListTagsForResource                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListTagsForResource"}
+	iListUsers                                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListUsers"}
+	iPutAccessControlRule                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutAccessControlRule"}
+	iPutEmailMonitoringConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutEmailMonitoringConfiguration"}
+	iPutIdentityProviderConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutIdentityProviderConfiguration"}
+	iPutInboundDmarcSettings                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutInboundDmarcSettings"}
+	iPutMailboxPermissions                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutMailboxPermissions"}
+	iPutMobileDeviceAccessOverride                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutMobileDeviceAccessOverride"}
+	iPutRetentionPolicy                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutRetentionPolicy"}
+	iRegisterMailDomain                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RegisterMailDomain"}
+	iRegisterToWorkMail                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RegisterToWorkMail"}
+	iResetPassword                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResetPassword"}
+	iStartMailboxExportJob                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "StartMailboxExportJob"}
+	iTagResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TagResource"}
+	iTestAvailabilityConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TestAvailabilityConfiguration"}
+	iUntagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UntagResource"}
+	iUpdateAvailabilityConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateAvailabilityConfiguration"}
+	iUpdateDefaultMailDomain                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateDefaultMailDomain"}
+	iUpdateGroup                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateGroup"}
+	iUpdateImpersonationRole                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateImpersonationRole"}
+	iUpdateMailboxQuota                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateMailboxQuota"}
+	iUpdateMobileDeviceAccessRule                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateMobileDeviceAccessRule"}
+	iUpdatePrimaryEmailAddress                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdatePrimaryEmailAddress"}
+	iUpdateResource                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateResource"}
+	iUpdateUser                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateUser"}
+	i_WorkMailService                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "WorkMailService"}
+	iAccessControlRule                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessControlRule"}
+	i_AccessControlRuleAction                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessControlRuleAction"}
+	i_AccessControlRuleDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessControlRuleDescription"}
+	iAccessControlRuleEffect                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessControlRuleEffect"}
+	i_AccessControlRuleName                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessControlRuleName"}
+	i_AccessControlRuleNameList                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessControlRuleNameList"}
+	i_AccessControlRulesList                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessControlRulesList"}
+	iAccessEffect                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AccessEffect"}
+	i_ActionsList                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ActionsList"}
+	i_Aliases                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Aliases"}
+	i_AmazonResourceName                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AmazonResourceName"}
+	i_ApplicationArn                               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ApplicationArn"}
+	iAvailabilityConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AvailabilityConfiguration"}
+	i_AvailabilityConfigurationList                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AvailabilityConfigurationList"}
+	iAvailabilityProviderType                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AvailabilityProviderType"}
+	iBookingOptions                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "BookingOptions"}
+	i_Boolean                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Boolean"}
+	i_BooleanObject                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "BooleanObject"}
+	iDelegate                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Delegate"}
+	i_Description                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Description"}
+	i_DeviceId                                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceId"}
+	i_DeviceModel                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceModel"}
+	i_DeviceModelList                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceModelList"}
+	i_DeviceOperatingSystem                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceOperatingSystem"}
+	i_DeviceOperatingSystemList                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceOperatingSystemList"}
+	i_DeviceType                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceType"}
+	i_DeviceTypeList                               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceTypeList"}
+	i_DeviceUserAgent                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceUserAgent"}
+	i_DeviceUserAgentList                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeviceUserAgentList"}
+	i_DirectoryId                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DirectoryId"}
+	iDirectoryInUseException                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DirectoryInUseException"}
+	iDirectoryServiceAuthenticationFailedException = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DirectoryServiceAuthenticationFailedException"}
+	iDirectoryUnavailableException                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DirectoryUnavailableException"}
+	iDnsRecord                                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DnsRecord"}
+	i_DnsRecords                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DnsRecords"}
+	iDnsRecordVerificationStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DnsRecordVerificationStatus"}
+	iDomain                                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Domain"}
+	i_DomainName                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DomainName"}
+	i_Domains                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Domains"}
+	i_EmailAddress                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EmailAddress"}
+	iEmailAddressInUseException                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EmailAddressInUseException"}
+	iEntityAlreadyRegisteredException              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EntityAlreadyRegisteredException"}
+	i_EntityIdentifier                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EntityIdentifier"}
+	iEntityNotFoundException                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EntityNotFoundException"}
+	iEntityState                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EntityState"}
+	iEntityStateException                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EntityStateException"}
+	iEntityType                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EntityType"}
+	iEwsAvailabilityProvider                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "EwsAvailabilityProvider"}
+	i_ExpiresIn                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ExpiresIn"}
+	i_ExternalUserName                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ExternalUserName"}
+	iFolderConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "FolderConfiguration"}
+	i_FolderConfigurations                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "FolderConfigurations"}
+	iFolderName                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "FolderName"}
+	iGroup                                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Group"}
+	iGroupIdentifier                               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GroupIdentifier"}
+	i_GroupIdentifiers                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GroupIdentifiers"}
+	i_GroupName                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GroupName"}
+	i_Groups                                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Groups"}
+	i_HostedZoneId                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "HostedZoneId"}
+	i_IdempotencyClientToken                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdempotencyClientToken"}
+	i_IdentityCenterApplicationName                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdentityCenterApplicationName"}
+	iIdentityCenterConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdentityCenterConfiguration"}
+	iIdentityProviderAuthenticationMode            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdentityProviderAuthenticationMode"}
+	i_IdentityProviderIdentityStoreId              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdentityProviderIdentityStoreId"}
+	i_IdentityProviderUserId                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdentityProviderUserId"}
+	i_IdentityProviderUserIdForUpdate              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdentityProviderUserIdForUpdate"}
+	i_IdentityProviderUserIdPrefix                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IdentityProviderUserIdPrefix"}
+	iImpersonationMatchedRule                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationMatchedRule"}
+	i_ImpersonationMatchedRuleList                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationMatchedRuleList"}
+	iImpersonationRole                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRole"}
+	i_ImpersonationRoleDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRoleDescription"}
+	i_ImpersonationRoleId                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRoleId"}
+	i_ImpersonationRoleIdList                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRoleIdList"}
+	i_ImpersonationRoleList                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRoleList"}
+	i_ImpersonationRoleName                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRoleName"}
+	iImpersonationRoleType                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRoleType"}
+	iImpersonationRule                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRule"}
+	i_ImpersonationRuleDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRuleDescription"}
+	i_ImpersonationRuleId                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRuleId"}
+	i_ImpersonationRuleList                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRuleList"}
+	i_ImpersonationRuleName                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationRuleName"}
+	i_ImpersonationToken                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ImpersonationToken"}
+	i_InstanceArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "InstanceArn"}
+	iInvalidConfigurationException                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "InvalidConfigurationException"}
+	iInvalidCustomSesConfigurationException        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "InvalidCustomSesConfigurationException"}
+	iInvalidParameterException                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "InvalidParameterException"}
+	iInvalidPasswordException                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "InvalidPasswordException"}
+	i_IpAddress                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IpAddress"}
+	i_IpRange                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IpRange"}
+	i_IpRangeList                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "IpRangeList"}
+	i_Jobs                                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Jobs"}
+	i_KmsKeyArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "KmsKeyArn"}
+	i_LambdaArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "LambdaArn"}
+	iLambdaAvailabilityProvider                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "LambdaAvailabilityProvider"}
+	iLimitExceededException                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "LimitExceededException"}
+	iListGroupsFilters                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupsFilters"}
+	iListGroupsForEntityFilters                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupsForEntityFilters"}
+	iListResourcesFilters                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListResourcesFilters"}
+	iListUsersFilters                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListUsersFilters"}
+	i_LogGroupArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "LogGroupArn"}
+	i_MailboxExportErrorInfo                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailboxExportErrorInfo"}
+	iMailboxExportJob                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailboxExportJob"}
+	i_MailboxExportJobId                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailboxExportJobId"}
+	iMailboxExportJobState                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailboxExportJobState"}
+	i_MailboxQuota                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailboxQuota"}
+	i_MailboxSize                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailboxSize"}
+	iMailDomainInUseException                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailDomainInUseException"}
+	iMailDomainNotFoundException                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailDomainNotFoundException"}
+	i_MailDomains                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailDomains"}
+	iMailDomainStateException                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailDomainStateException"}
+	iMailDomainSummary                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MailDomainSummary"}
+	i_MaxResults                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MaxResults"}
+	iMember                                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Member"}
+	i_Members                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Members"}
+	iMemberType                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MemberType"}
+	iMobileDeviceAccessMatchedRule                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessMatchedRule"}
+	i_MobileDeviceAccessMatchedRuleList            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessMatchedRuleList"}
+	iMobileDeviceAccessOverride                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessOverride"}
+	i_MobileDeviceAccessOverridesList              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessOverridesList"}
+	iMobileDeviceAccessRule                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessRule"}
+	i_MobileDeviceAccessRuleDescription            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessRuleDescription"}
+	iMobileDeviceAccessRuleEffect                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessRuleEffect"}
+	i_MobileDeviceAccessRuleId                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessRuleId"}
+	i_MobileDeviceAccessRuleName                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessRuleName"}
+	i_MobileDeviceAccessRulesList                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "MobileDeviceAccessRulesList"}
+	iNameAvailabilityException                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "NameAvailabilityException"}
+	i_NewResourceDescription                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "NewResourceDescription"}
+	i_NextToken                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "NextToken"}
+	i_OrganizationId                               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "OrganizationId"}
+	i_OrganizationName                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "OrganizationName"}
+	iOrganizationNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "OrganizationNotFoundException"}
+	iOrganizationStateException                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "OrganizationStateException"}
+	i_OrganizationSummaries                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "OrganizationSummaries"}
+	iOrganizationSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "OrganizationSummary"}
+	i_Password                                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Password"}
+	i_Percentage                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Percentage"}
+	iPermission                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Permission"}
+	i_Permissions                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Permissions"}
+	iPermissionType                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PermissionType"}
+	i_PermissionValues                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PermissionValues"}
+	iPersonalAccessTokenConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenConfiguration"}
+	iPersonalAccessTokenConfigurationStatus        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenConfigurationStatus"}
+	i_PersonalAccessTokenId                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenId"}
+	i_PersonalAccessTokenLifetimeInDays            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenLifetimeInDays"}
+	i_PersonalAccessTokenName                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenName"}
+	i_PersonalAccessTokenScope                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenScope"}
+	i_PersonalAccessTokenScopeList                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenScopeList"}
+	iPersonalAccessTokenSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenSummary"}
+	i_PersonalAccessTokenSummaryList               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PersonalAccessTokenSummaryList"}
+	i_PolicyDescription                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PolicyDescription"}
+	iRedactedEwsAvailabilityProvider               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RedactedEwsAvailabilityProvider"}
+	iReservedNameException                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ReservedNameException"}
+	iResource                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Resource"}
+	i_ResourceDelegates                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResourceDelegates"}
+	i_ResourceDescription                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResourceDescription"}
+	i_ResourceId                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResourceId"}
+	i_ResourceName                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResourceName"}
+	iResourceNotFoundException                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResourceNotFoundException"}
+	i_Resources                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Resources"}
+	iResourceType                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResourceType"}
+	iRetentionAction                               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RetentionAction"}
+	i_RetentionPeriod                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RetentionPeriod"}
+	i_RoleArn                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RoleArn"}
+	i_S3BucketName                                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "S3BucketName"}
+	i_S3ObjectKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "S3ObjectKey"}
+	i_ShortString                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ShortString"}
+	i_String                                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "String"}
+	iTag                                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Tag"}
+	i_TagKey                                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TagKey"}
+	i_TagKeyList                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TagKeyList"}
+	i_TagList                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TagList"}
+	i_TagValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TagValue"}
+	i_TargetUsers                                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TargetUsers"}
+	i_Timestamp                                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Timestamp"}
+	iTooManyTagsException                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TooManyTagsException"}
+	iUnsupportedOperationException                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UnsupportedOperationException"}
+	i_Url                                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Url"}
+	iUser                                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "User"}
+	i_UserAttribute                                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UserAttribute"}
+	i_UserIdList                                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UserIdList"}
+	i_UserName                                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UserName"}
+	iUserRole                                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UserRole"}
+	i_Users                                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "Users"}
+	i_WorkMailDomainName                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "WorkMailDomainName"}
+	i_WorkMailIdentifier                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "WorkMailIdentifier"}
+	iAssociateDelegateToResourceRequest            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssociateDelegateToResourceRequest"}
+	iAssociateDelegateToResourceResponse           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssociateDelegateToResourceResponse"}
+	iAssociateMemberToGroupRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssociateMemberToGroupRequest"}
+	iAssociateMemberToGroupResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssociateMemberToGroupResponse"}
+	iAssumeImpersonationRoleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssumeImpersonationRoleRequest"}
+	iAssumeImpersonationRoleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "AssumeImpersonationRoleResponse"}
+	iCancelMailboxExportJobRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CancelMailboxExportJobRequest"}
+	iCancelMailboxExportJobResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CancelMailboxExportJobResponse"}
+	iCreateAliasRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateAliasRequest"}
+	iCreateAliasResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateAliasResponse"}
+	iCreateAvailabilityConfigurationRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateAvailabilityConfigurationRequest"}
+	iCreateAvailabilityConfigurationResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateAvailabilityConfigurationResponse"}
+	iCreateGroupRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateGroupRequest"}
+	iCreateGroupResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateGroupResponse"}
+	iCreateIdentityCenterApplicationRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateIdentityCenterApplicationRequest"}
+	iCreateIdentityCenterApplicationResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateIdentityCenterApplicationResponse"}
+	iCreateImpersonationRoleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateImpersonationRoleRequest"}
+	iCreateImpersonationRoleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateImpersonationRoleResponse"}
+	iCreateMobileDeviceAccessRuleRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateMobileDeviceAccessRuleRequest"}
+	iCreateMobileDeviceAccessRuleResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateMobileDeviceAccessRuleResponse"}
+	iCreateOrganizationRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateOrganizationRequest"}
+	iCreateOrganizationResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateOrganizationResponse"}
+	iCreateResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateResourceRequest"}
+	iCreateResourceResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateResourceResponse"}
+	iCreateUserRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateUserRequest"}
+	iCreateUserResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "CreateUserResponse"}
+	iDeleteAccessControlRuleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAccessControlRuleRequest"}
+	iDeleteAccessControlRuleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAccessControlRuleResponse"}
+	iDeleteAliasRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAliasRequest"}
+	iDeleteAliasResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAliasResponse"}
+	iDeleteAvailabilityConfigurationRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAvailabilityConfigurationRequest"}
+	iDeleteAvailabilityConfigurationResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteAvailabilityConfigurationResponse"}
+	iDeleteEmailMonitoringConfigurationRequest     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteEmailMonitoringConfigurationRequest"}
+	iDeleteEmailMonitoringConfigurationResponse    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteEmailMonitoringConfigurationResponse"}
+	iDeleteGroupRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteGroupRequest"}
+	iDeleteGroupResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteGroupResponse"}
+	iDeleteIdentityCenterApplicationRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteIdentityCenterApplicationRequest"}
+	iDeleteIdentityCenterApplicationResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteIdentityCenterApplicationResponse"}
+	iDeleteIdentityProviderConfigurationRequest    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteIdentityProviderConfigurationRequest"}
+	iDeleteIdentityProviderConfigurationResponse   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteIdentityProviderConfigurationResponse"}
+	iDeleteImpersonationRoleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteImpersonationRoleRequest"}
+	iDeleteImpersonationRoleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteImpersonationRoleResponse"}
+	iDeleteMailboxPermissionsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMailboxPermissionsRequest"}
+	iDeleteMailboxPermissionsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMailboxPermissionsResponse"}
+	iDeleteMobileDeviceAccessOverrideRequest       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMobileDeviceAccessOverrideRequest"}
+	iDeleteMobileDeviceAccessOverrideResponse      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMobileDeviceAccessOverrideResponse"}
+	iDeleteMobileDeviceAccessRuleRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMobileDeviceAccessRuleRequest"}
+	iDeleteMobileDeviceAccessRuleResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteMobileDeviceAccessRuleResponse"}
+	iDeleteOrganizationRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteOrganizationRequest"}
+	iDeleteOrganizationResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteOrganizationResponse"}
+	iDeletePersonalAccessTokenRequest              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeletePersonalAccessTokenRequest"}
+	iDeletePersonalAccessTokenResponse             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeletePersonalAccessTokenResponse"}
+	iDeleteResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteResourceRequest"}
+	iDeleteResourceResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteResourceResponse"}
+	iDeleteRetentionPolicyRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteRetentionPolicyRequest"}
+	iDeleteRetentionPolicyResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteRetentionPolicyResponse"}
+	iDeleteUserRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteUserRequest"}
+	iDeleteUserResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeleteUserResponse"}
+	iDeregisterFromWorkMailRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeregisterFromWorkMailRequest"}
+	iDeregisterFromWorkMailResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeregisterFromWorkMailResponse"}
+	iDeregisterMailDomainRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeregisterMailDomainRequest"}
+	iDeregisterMailDomainResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DeregisterMailDomainResponse"}
+	iDescribeEmailMonitoringConfigurationRequest   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeEmailMonitoringConfigurationRequest"}
+	iDescribeEmailMonitoringConfigurationResponse  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeEmailMonitoringConfigurationResponse"}
+	iDescribeEntityRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeEntityRequest"}
+	iDescribeEntityResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeEntityResponse"}
+	iDescribeGroupRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeGroupRequest"}
+	iDescribeGroupResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeGroupResponse"}
+	iDescribeIdentityProviderConfigurationRequest  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeIdentityProviderConfigurationRequest"}
+	iDescribeIdentityProviderConfigurationResponse = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeIdentityProviderConfigurationResponse"}
+	iDescribeInboundDmarcSettingsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeInboundDmarcSettingsRequest"}
+	iDescribeInboundDmarcSettingsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeInboundDmarcSettingsResponse"}
+	iDescribeMailboxExportJobRequest               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeMailboxExportJobRequest"}
+	iDescribeMailboxExportJobResponse              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeMailboxExportJobResponse"}
+	iDescribeOrganizationRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeOrganizationRequest"}
+	iDescribeOrganizationResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeOrganizationResponse"}
+	iDescribeResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeResourceRequest"}
+	iDescribeResourceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeResourceResponse"}
+	iDescribeUserRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeUserRequest"}
+	iDescribeUserResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DescribeUserResponse"}
+	iDisassociateDelegateFromResourceRequest       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DisassociateDelegateFromResourceRequest"}
+	iDisassociateDelegateFromResourceResponse      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DisassociateDelegateFromResourceResponse"}
+	iDisassociateMemberFromGroupRequest            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DisassociateMemberFromGroupRequest"}
+	iDisassociateMemberFromGroupResponse           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "DisassociateMemberFromGroupResponse"}
+	iGetAccessControlEffectRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetAccessControlEffectRequest"}
+	iGetAccessControlEffectResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetAccessControlEffectResponse"}
+	iGetDefaultRetentionPolicyRequest              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetDefaultRetentionPolicyRequest"}
+	iGetDefaultRetentionPolicyResponse             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetDefaultRetentionPolicyResponse"}
+	iGetImpersonationRoleEffectRequest             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetImpersonationRoleEffectRequest"}
+	iGetImpersonationRoleEffectResponse            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetImpersonationRoleEffectResponse"}
+	iGetImpersonationRoleRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetImpersonationRoleRequest"}
+	iGetImpersonationRoleResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetImpersonationRoleResponse"}
+	iGetMailboxDetailsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMailboxDetailsRequest"}
+	iGetMailboxDetailsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMailboxDetailsResponse"}
+	iGetMailDomainRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMailDomainRequest"}
+	iGetMailDomainResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMailDomainResponse"}
+	iGetMobileDeviceAccessEffectRequest            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMobileDeviceAccessEffectRequest"}
+	iGetMobileDeviceAccessEffectResponse           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMobileDeviceAccessEffectResponse"}
+	iGetMobileDeviceAccessOverrideRequest          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMobileDeviceAccessOverrideRequest"}
+	iGetMobileDeviceAccessOverrideResponse         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetMobileDeviceAccessOverrideResponse"}
+	iGetPersonalAccessTokenMetadataRequest         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetPersonalAccessTokenMetadataRequest"}
+	iGetPersonalAccessTokenMetadataResponse        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "GetPersonalAccessTokenMetadataResponse"}
+	iListAccessControlRulesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAccessControlRulesRequest"}
+	iListAccessControlRulesResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAccessControlRulesResponse"}
+	iListAliasesRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAliasesRequest"}
+	iListAliasesResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAliasesResponse"}
+	iListAvailabilityConfigurationsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAvailabilityConfigurationsRequest"}
+	iListAvailabilityConfigurationsResponse        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListAvailabilityConfigurationsResponse"}
+	iListGroupMembersRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupMembersRequest"}
+	iListGroupMembersResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupMembersResponse"}
+	iListGroupsForEntityRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupsForEntityRequest"}
+	iListGroupsForEntityResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupsForEntityResponse"}
+	iListGroupsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupsRequest"}
+	iListGroupsResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListGroupsResponse"}
+	iListImpersonationRolesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListImpersonationRolesRequest"}
+	iListImpersonationRolesResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListImpersonationRolesResponse"}
+	iListMailboxExportJobsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailboxExportJobsRequest"}
+	iListMailboxExportJobsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailboxExportJobsResponse"}
+	iListMailboxPermissionsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailboxPermissionsRequest"}
+	iListMailboxPermissionsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailboxPermissionsResponse"}
+	iListMailDomainsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailDomainsRequest"}
+	iListMailDomainsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMailDomainsResponse"}
+	iListMobileDeviceAccessOverridesRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMobileDeviceAccessOverridesRequest"}
+	iListMobileDeviceAccessOverridesResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMobileDeviceAccessOverridesResponse"}
+	iListMobileDeviceAccessRulesRequest            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMobileDeviceAccessRulesRequest"}
+	iListMobileDeviceAccessRulesResponse           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListMobileDeviceAccessRulesResponse"}
+	iListOrganizationsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListOrganizationsRequest"}
+	iListOrganizationsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListOrganizationsResponse"}
+	iListPersonalAccessTokensRequest               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListPersonalAccessTokensRequest"}
+	iListPersonalAccessTokensResponse              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListPersonalAccessTokensResponse"}
+	iListResourceDelegatesRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListResourceDelegatesRequest"}
+	iListResourceDelegatesResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListResourceDelegatesResponse"}
+	iListResourcesRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListResourcesRequest"}
+	iListResourcesResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListResourcesResponse"}
+	iListTagsForResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListTagsForResourceResponse"}
+	iListUsersRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListUsersRequest"}
+	iListUsersResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ListUsersResponse"}
+	iPutAccessControlRuleRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutAccessControlRuleRequest"}
+	iPutAccessControlRuleResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutAccessControlRuleResponse"}
+	iPutEmailMonitoringConfigurationRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutEmailMonitoringConfigurationRequest"}
+	iPutEmailMonitoringConfigurationResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutEmailMonitoringConfigurationResponse"}
+	iPutIdentityProviderConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutIdentityProviderConfigurationRequest"}
+	iPutIdentityProviderConfigurationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutIdentityProviderConfigurationResponse"}
+	iPutInboundDmarcSettingsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutInboundDmarcSettingsRequest"}
+	iPutInboundDmarcSettingsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutInboundDmarcSettingsResponse"}
+	iPutMailboxPermissionsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutMailboxPermissionsRequest"}
+	iPutMailboxPermissionsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutMailboxPermissionsResponse"}
+	iPutMobileDeviceAccessOverrideRequest          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutMobileDeviceAccessOverrideRequest"}
+	iPutMobileDeviceAccessOverrideResponse         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutMobileDeviceAccessOverrideResponse"}
+	iPutRetentionPolicyRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutRetentionPolicyRequest"}
+	iPutRetentionPolicyResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "PutRetentionPolicyResponse"}
+	iRegisterMailDomainRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RegisterMailDomainRequest"}
+	iRegisterMailDomainResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RegisterMailDomainResponse"}
+	iRegisterToWorkMailRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RegisterToWorkMailRequest"}
+	iRegisterToWorkMailResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "RegisterToWorkMailResponse"}
+	iResetPasswordRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResetPasswordRequest"}
+	iResetPasswordResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "ResetPasswordResponse"}
+	iStartMailboxExportJobRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "StartMailboxExportJobRequest"}
+	iStartMailboxExportJobResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "StartMailboxExportJobResponse"}
+	iTagResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TagResourceRequest"}
+	iTagResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TagResourceResponse"}
+	iTestAvailabilityConfigurationRequest          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TestAvailabilityConfigurationRequest"}
+	iTestAvailabilityConfigurationResponse         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "TestAvailabilityConfigurationResponse"}
+	iUntagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UntagResourceResponse"}
+	iUpdateAvailabilityConfigurationRequest        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateAvailabilityConfigurationRequest"}
+	iUpdateAvailabilityConfigurationResponse       = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateAvailabilityConfigurationResponse"}
+	iUpdateDefaultMailDomainRequest                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateDefaultMailDomainRequest"}
+	iUpdateDefaultMailDomainResponse               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateDefaultMailDomainResponse"}
+	iUpdateGroupRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateGroupRequest"}
+	iUpdateGroupResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateGroupResponse"}
+	iUpdateImpersonationRoleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateImpersonationRoleRequest"}
+	iUpdateImpersonationRoleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateImpersonationRoleResponse"}
+	iUpdateMailboxQuotaRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateMailboxQuotaRequest"}
+	iUpdateMailboxQuotaResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateMailboxQuotaResponse"}
+	iUpdateMobileDeviceAccessRuleRequest           = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateMobileDeviceAccessRuleRequest"}
+	iUpdateMobileDeviceAccessRuleResponse          = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateMobileDeviceAccessRuleResponse"}
+	iUpdatePrimaryEmailAddressRequest              = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdatePrimaryEmailAddressRequest"}
+	iUpdatePrimaryEmailAddressResponse             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdatePrimaryEmailAddressResponse"}
+	iUpdateResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateResourceRequest"}
+	iUpdateResourceResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateResourceResponse"}
+	iUpdateUserRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateUserRequest"}
+	iUpdateUserResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.workmail", Name: "UpdateUserResponse"}
+	pUnit                                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessControlRule = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessControlRule_Name, &sAccessControlRule_Effect, &sAccessControlRule_Description, &sAccessControlRule_IpRanges, &sAccessControlRule_NotIpRanges, &sAccessControlRule_Actions, &sAccessControlRule_NotActions, &sAccessControlRule_UserIds, &sAccessControlRule_NotUserIds, &sAccessControlRule_DateCreated, &sAccessControlRule_DateModified, &sAccessControlRule_ImpersonationRoleIds, &sAccessControlRule_NotImpersonationRoleIds}, Seed: 11, Slots: []uint16{
+	0, 2, 4, 1, 0, 0, 0, 12, 0, 0, 9, 10, 0, 13, 3, 0, 5, 0, 6, 0, 0, 7, 0, 0,
+	0, 8, 0, 11, 0, 0, 0, 0,
+}}
+var mAccessControlRuleEffect = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessControlRuleEffect_ALLOW, &sAccessControlRuleEffect_DENY}}
+var m_AccessControlRuleNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessControlRuleNameList_member}}
+var m_AccessControlRulesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccessControlRulesList_member}}
+var mAccessEffect = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessEffect_ALLOW, &sAccessEffect_DENY}}
+var m_ActionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActionsList_member}}
+var m_Aliases = smithy.SchemaMembers{List: []*smithy.Schema{&s_Aliases_member}}
+var mAvailabilityConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityConfiguration_DomainName, &sAvailabilityConfiguration_ProviderType, &sAvailabilityConfiguration_EwsProvider, &sAvailabilityConfiguration_LambdaProvider, &sAvailabilityConfiguration_DateCreated, &sAvailabilityConfiguration_DateModified}}
+var m_AvailabilityConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailabilityConfigurationList_member}}
+var mAvailabilityProviderType = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailabilityProviderType_EWS, &sAvailabilityProviderType_LAMBDA}}
+var mBookingOptions = smithy.SchemaMembers{List: []*smithy.Schema{&sBookingOptions_AutoAcceptRequests, &sBookingOptions_AutoDeclineRecurringRequests, &sBookingOptions_AutoDeclineConflictingRequests}}
+var mDelegate = smithy.SchemaMembers{List: []*smithy.Schema{&sDelegate_Id, &sDelegate_Type}}
+var m_DeviceModelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceModelList_member}}
+var m_DeviceOperatingSystemList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceOperatingSystemList_member}}
+var m_DeviceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceTypeList_member}}
+var m_DeviceUserAgentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceUserAgentList_member}}
+var mDirectoryInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryInUseException_Message}}
+var mDirectoryServiceAuthenticationFailedException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryServiceAuthenticationFailedException_Message}}
+var mDirectoryUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectoryUnavailableException_Message}}
+var mDnsRecord = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsRecord_Type, &sDnsRecord_Hostname, &sDnsRecord_Value}}
+var m_DnsRecords = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsRecords_member}}
+var mDnsRecordVerificationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDnsRecordVerificationStatus_PENDING, &sDnsRecordVerificationStatus_VERIFIED, &sDnsRecordVerificationStatus_FAILED}}
+var mDomain = smithy.SchemaMembers{List: []*smithy.Schema{&sDomain_DomainName, &sDomain_HostedZoneId}}
+var m_Domains = smithy.SchemaMembers{List: []*smithy.Schema{&s_Domains_member}}
+var mEmailAddressInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sEmailAddressInUseException_Message}}
+var mEntityAlreadyRegisteredException = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityAlreadyRegisteredException_Message}}
+var mEntityNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityNotFoundException_Message}}
+var mEntityState = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityState_ENABLED, &sEntityState_DISABLED, &sEntityState_DELETED}}
+var mEntityStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityStateException_Message}}
+var mEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityType_GROUP, &sEntityType_USER, &sEntityType_RESOURCE}}
+var mEwsAvailabilityProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sEwsAvailabilityProvider_EwsEndpoint, &sEwsAvailabilityProvider_EwsUsername, &sEwsAvailabilityProvider_EwsPassword}}
+var mFolderConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFolderConfiguration_Name, &sFolderConfiguration_Action, &sFolderConfiguration_Period}}
+var m_FolderConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_FolderConfigurations_member}}
+var mFolderName = smithy.SchemaMembers{List: []*smithy.Schema{&sFolderName_INBOX, &sFolderName_DELETED_ITEMS, &sFolderName_SENT_ITEMS, &sFolderName_DRAFTS, &sFolderName_JUNK_EMAIL}}
+var mGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sGroup_Id, &sGroup_Email, &sGroup_Name, &sGroup_State, &sGroup_EnabledDate, &sGroup_DisabledDate}}
+var mGroupIdentifier = smithy.SchemaMembers{List: []*smithy.Schema{&sGroupIdentifier_GroupId, &sGroupIdentifier_GroupName}}
+var m_GroupIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_GroupIdentifiers_member}}
+var m_Groups = smithy.SchemaMembers{List: []*smithy.Schema{&s_Groups_member}}
+var mIdentityCenterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityCenterConfiguration_InstanceArn, &sIdentityCenterConfiguration_ApplicationArn}}
+var mIdentityProviderAuthenticationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sIdentityProviderAuthenticationMode_IDENTITY_PROVIDER_ONLY, &sIdentityProviderAuthenticationMode_IDENTITY_PROVIDER_AND_DIRECTORY}}
+var mImpersonationMatchedRule = smithy.SchemaMembers{List: []*smithy.Schema{&sImpersonationMatchedRule_ImpersonationRuleId, &sImpersonationMatchedRule_Name}}
+var m_ImpersonationMatchedRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImpersonationMatchedRuleList_member}}
+var mImpersonationRole = smithy.SchemaMembers{List: []*smithy.Schema{&sImpersonationRole_ImpersonationRoleId, &sImpersonationRole_Name, &sImpersonationRole_Type, &sImpersonationRole_DateCreated, &sImpersonationRole_DateModified}}
+var m_ImpersonationRoleIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImpersonationRoleIdList_member}}
+var m_ImpersonationRoleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImpersonationRoleList_member}}
+var mImpersonationRoleType = smithy.SchemaMembers{List: []*smithy.Schema{&sImpersonationRoleType_FULL_ACCESS, &sImpersonationRoleType_READ_ONLY}}
+var mImpersonationRule = smithy.SchemaMembers{List: []*smithy.Schema{&sImpersonationRule_ImpersonationRuleId, &sImpersonationRule_Name, &sImpersonationRule_Description, &sImpersonationRule_Effect, &sImpersonationRule_TargetUsers, &sImpersonationRule_NotTargetUsers}}
+var m_ImpersonationRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImpersonationRuleList_member}}
+var mInvalidConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidConfigurationException_Message}}
+var mInvalidCustomSesConfigurationException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCustomSesConfigurationException_Message}}
+var mInvalidParameterException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterException_Message}}
+var mInvalidPasswordException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPasswordException_Message}}
+var m_IpRangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IpRangeList_member}}
+var m_Jobs = smithy.SchemaMembers{List: []*smithy.Schema{&s_Jobs_member}}
+var mLambdaAvailabilityProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaAvailabilityProvider_LambdaArn}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mListGroupsFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsFilters_NamePrefix, &sListGroupsFilters_PrimaryEmailPrefix, &sListGroupsFilters_State}}
+var mListGroupsForEntityFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsForEntityFilters_GroupNamePrefix}}
+var mListResourcesFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesFilters_NamePrefix, &sListResourcesFilters_PrimaryEmailPrefix, &sListResourcesFilters_State}}
+var mListUsersFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersFilters_UsernamePrefix, &sListUsersFilters_DisplayNamePrefix, &sListUsersFilters_PrimaryEmailPrefix, &sListUsersFilters_State, &sListUsersFilters_IdentityProviderUserIdPrefix}}
+var mMailboxExportJob = smithy.SchemaMembers{List: []*smithy.Schema{&sMailboxExportJob_JobId, &sMailboxExportJob_EntityId, &sMailboxExportJob_Description, &sMailboxExportJob_S3BucketName, &sMailboxExportJob_S3Path, &sMailboxExportJob_EstimatedProgress, &sMailboxExportJob_State, &sMailboxExportJob_StartTime, &sMailboxExportJob_EndTime}, Seed: 6, Slots: []uint16{
+	7, 0, 0, 0, 0, 0, 0, 8, 2, 0, 9, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0, 6, 3, 0,
+	0, 5, 0, 0, 0, 0, 0, 0,
+}}
+var mMailboxExportJobState = smithy.SchemaMembers{List: []*smithy.Schema{&sMailboxExportJobState_RUNNING, &sMailboxExportJobState_COMPLETED, &sMailboxExportJobState_FAILED, &sMailboxExportJobState_CANCELLED}}
+var mMailDomainInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sMailDomainInUseException_Message}}
+var mMailDomainNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sMailDomainNotFoundException_Message}}
+var m_MailDomains = smithy.SchemaMembers{List: []*smithy.Schema{&s_MailDomains_member}}
+var mMailDomainStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sMailDomainStateException_Message}}
+var mMailDomainSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMailDomainSummary_DomainName, &sMailDomainSummary_DefaultDomain}}
+var mMember = smithy.SchemaMembers{List: []*smithy.Schema{&sMember_Id, &sMember_Name, &sMember_Type, &sMember_State, &sMember_EnabledDate, &sMember_DisabledDate}}
+var m_Members = smithy.SchemaMembers{List: []*smithy.Schema{&s_Members_member}}
+var mMemberType = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberType_GROUP, &sMemberType_USER}}
+var mMobileDeviceAccessMatchedRule = smithy.SchemaMembers{List: []*smithy.Schema{&sMobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId, &sMobileDeviceAccessMatchedRule_Name}}
+var m_MobileDeviceAccessMatchedRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MobileDeviceAccessMatchedRuleList_member}}
+var mMobileDeviceAccessOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sMobileDeviceAccessOverride_UserId, &sMobileDeviceAccessOverride_DeviceId, &sMobileDeviceAccessOverride_Effect, &sMobileDeviceAccessOverride_Description, &sMobileDeviceAccessOverride_DateCreated, &sMobileDeviceAccessOverride_DateModified}}
+var m_MobileDeviceAccessOverridesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MobileDeviceAccessOverridesList_member}}
+var mMobileDeviceAccessRule = smithy.SchemaMembers{List: []*smithy.Schema{&sMobileDeviceAccessRule_MobileDeviceAccessRuleId, &sMobileDeviceAccessRule_Name, &sMobileDeviceAccessRule_Description, &sMobileDeviceAccessRule_Effect, &sMobileDeviceAccessRule_DeviceTypes, &sMobileDeviceAccessRule_NotDeviceTypes, &sMobileDeviceAccessRule_DeviceModels, &sMobileDeviceAccessRule_NotDeviceModels, &sMobileDeviceAccessRule_DeviceOperatingSystems, &sMobileDeviceAccessRule_NotDeviceOperatingSystems, &sMobileDeviceAccessRule_DeviceUserAgents, &sMobileDeviceAccessRule_NotDeviceUserAgents, &sMobileDeviceAccessRule_DateCreated, &sMobileDeviceAccessRule_DateModified}, Seed: 8, Slots: []uint16{
+	0, 2, 10, 7, 1, 8, 13, 0, 9, 0, 0, 0, 0, 3, 0, 0, 12, 0, 0, 0, 0, 0, 0, 14,
+	0, 0, 6, 0, 5, 4, 11, 0,
+}}
+var mMobileDeviceAccessRuleEffect = smithy.SchemaMembers{List: []*smithy.Schema{&sMobileDeviceAccessRuleEffect_ALLOW, &sMobileDeviceAccessRuleEffect_DENY}}
+var m_MobileDeviceAccessRulesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MobileDeviceAccessRulesList_member}}
+var mNameAvailabilityException = smithy.SchemaMembers{List: []*smithy.Schema{&sNameAvailabilityException_Message}}
+var mOrganizationNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationNotFoundException_Message}}
+var mOrganizationStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationStateException_Message}}
+var m_OrganizationSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationSummaries_member}}
+var mOrganizationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationSummary_OrganizationId, &sOrganizationSummary_Alias, &sOrganizationSummary_DefaultMailDomain, &sOrganizationSummary_ErrorMessage, &sOrganizationSummary_State}}
+var mPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sPermission_GranteeId, &sPermission_GranteeType, &sPermission_PermissionValues}}
+var m_Permissions = smithy.SchemaMembers{List: []*smithy.Schema{&s_Permissions_member}}
+var mPermissionType = smithy.SchemaMembers{List: []*smithy.Schema{&sPermissionType_FULL_ACCESS, &sPermissionType_SEND_AS, &sPermissionType_SEND_ON_BEHALF}}
+var m_PermissionValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_PermissionValues_member}}
+var mPersonalAccessTokenConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPersonalAccessTokenConfiguration_Status, &sPersonalAccessTokenConfiguration_LifetimeInDays}}
+var mPersonalAccessTokenConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sPersonalAccessTokenConfigurationStatus_ACTIVE, &sPersonalAccessTokenConfigurationStatus_INACTIVE}}
+var m_PersonalAccessTokenScopeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PersonalAccessTokenScopeList_member}}
+var mPersonalAccessTokenSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPersonalAccessTokenSummary_PersonalAccessTokenId, &sPersonalAccessTokenSummary_UserId, &sPersonalAccessTokenSummary_Name, &sPersonalAccessTokenSummary_DateCreated, &sPersonalAccessTokenSummary_DateLastUsed, &sPersonalAccessTokenSummary_ExpiresTime, &sPersonalAccessTokenSummary_Scopes}}
+var m_PersonalAccessTokenSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PersonalAccessTokenSummaryList_member}}
+var mRedactedEwsAvailabilityProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sRedactedEwsAvailabilityProvider_EwsEndpoint, &sRedactedEwsAvailabilityProvider_EwsUsername}}
+var mReservedNameException = smithy.SchemaMembers{List: []*smithy.Schema{&sReservedNameException_Message}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_Id, &sResource_Email, &sResource_Name, &sResource_Type, &sResource_State, &sResource_EnabledDate, &sResource_DisabledDate, &sResource_Description}}
+var m_ResourceDelegates = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceDelegates_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var m_Resources = smithy.SchemaMembers{List: []*smithy.Schema{&s_Resources_member}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_ROOM, &sResourceType_EQUIPMENT}}
+var mRetentionAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionAction_NONE, &sRetentionAction_DELETE, &sRetentionAction_PERMANENTLY_DELETE}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TargetUsers = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetUsers_member}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_Message}}
+var mUnsupportedOperationException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedOperationException_Message}}
+var mUser = smithy.SchemaMembers{List: []*smithy.Schema{&sUser_Id, &sUser_Email, &sUser_Name, &sUser_DisplayName, &sUser_State, &sUser_UserRole, &sUser_EnabledDate, &sUser_DisabledDate, &sUser_IdentityProviderUserId, &sUser_IdentityProviderIdentityStoreId}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 3, 4, 5, 0, 0, 0, 10, 0, 0, 0, 2, 1, 0, 6, 0, 0, 9, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 8, 7,
+}}
+var m_UserIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UserIdList_member}}
+var mUserRole = smithy.SchemaMembers{List: []*smithy.Schema{&sUserRole_USER, &sUserRole_RESOURCE, &sUserRole_SYSTEM_USER, &sUserRole_REMOTE_USER}}
+var m_Users = smithy.SchemaMembers{List: []*smithy.Schema{&s_Users_member}}
+var mAssociateDelegateToResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateDelegateToResourceRequest_OrganizationId, &sAssociateDelegateToResourceRequest_ResourceId, &sAssociateDelegateToResourceRequest_EntityId}}
+var mAssociateMemberToGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateMemberToGroupRequest_OrganizationId, &sAssociateMemberToGroupRequest_GroupId, &sAssociateMemberToGroupRequest_MemberId}}
+var mAssumeImpersonationRoleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeImpersonationRoleRequest_OrganizationId, &sAssumeImpersonationRoleRequest_ImpersonationRoleId}}
+var mAssumeImpersonationRoleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssumeImpersonationRoleResponse_Token, &sAssumeImpersonationRoleResponse_ExpiresIn}}
+var mCancelMailboxExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelMailboxExportJobRequest_ClientToken, &sCancelMailboxExportJobRequest_JobId, &sCancelMailboxExportJobRequest_OrganizationId}}
+var mCreateAliasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAliasRequest_OrganizationId, &sCreateAliasRequest_EntityId, &sCreateAliasRequest_Alias}}
+var mCreateAvailabilityConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAvailabilityConfigurationRequest_ClientToken, &sCreateAvailabilityConfigurationRequest_OrganizationId, &sCreateAvailabilityConfigurationRequest_DomainName, &sCreateAvailabilityConfigurationRequest_EwsProvider, &sCreateAvailabilityConfigurationRequest_LambdaProvider}}
+var mCreateGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupRequest_OrganizationId, &sCreateGroupRequest_Name, &sCreateGroupRequest_HiddenFromGlobalAddressList}}
+var mCreateGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateGroupResponse_GroupId}}
+var mCreateIdentityCenterApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentityCenterApplicationRequest_Name, &sCreateIdentityCenterApplicationRequest_InstanceArn, &sCreateIdentityCenterApplicationRequest_ClientToken}}
+var mCreateIdentityCenterApplicationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIdentityCenterApplicationResponse_ApplicationArn}}
+var mCreateImpersonationRoleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImpersonationRoleRequest_ClientToken, &sCreateImpersonationRoleRequest_OrganizationId, &sCreateImpersonationRoleRequest_Name, &sCreateImpersonationRoleRequest_Type, &sCreateImpersonationRoleRequest_Description, &sCreateImpersonationRoleRequest_Rules}}
+var mCreateImpersonationRoleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateImpersonationRoleResponse_ImpersonationRoleId}}
+var mCreateMobileDeviceAccessRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMobileDeviceAccessRuleRequest_OrganizationId, &sCreateMobileDeviceAccessRuleRequest_ClientToken, &sCreateMobileDeviceAccessRuleRequest_Name, &sCreateMobileDeviceAccessRuleRequest_Description, &sCreateMobileDeviceAccessRuleRequest_Effect, &sCreateMobileDeviceAccessRuleRequest_DeviceTypes, &sCreateMobileDeviceAccessRuleRequest_NotDeviceTypes, &sCreateMobileDeviceAccessRuleRequest_DeviceModels, &sCreateMobileDeviceAccessRuleRequest_NotDeviceModels, &sCreateMobileDeviceAccessRuleRequest_DeviceOperatingSystems, &sCreateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems, &sCreateMobileDeviceAccessRuleRequest_DeviceUserAgents, &sCreateMobileDeviceAccessRuleRequest_NotDeviceUserAgents}, Seed: 8, Slots: []uint16{
+	0, 3, 11, 8, 0, 9, 2, 0, 10, 0, 0, 0, 0, 4, 0, 0, 13, 0, 0, 0, 0, 0, 0, 1,
+	0, 0, 7, 0, 6, 5, 12, 0,
+}}
+var mCreateMobileDeviceAccessRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId}}
+var mCreateOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOrganizationRequest_DirectoryId, &sCreateOrganizationRequest_Alias, &sCreateOrganizationRequest_ClientToken, &sCreateOrganizationRequest_Domains, &sCreateOrganizationRequest_KmsKeyArn, &sCreateOrganizationRequest_EnableInteroperability}}
+var mCreateOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOrganizationResponse_OrganizationId}}
+var mCreateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceRequest_OrganizationId, &sCreateResourceRequest_Name, &sCreateResourceRequest_Type, &sCreateResourceRequest_Description, &sCreateResourceRequest_HiddenFromGlobalAddressList}}
+var mCreateResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceResponse_ResourceId}}
+var mCreateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserRequest_OrganizationId, &sCreateUserRequest_Name, &sCreateUserRequest_DisplayName, &sCreateUserRequest_Password, &sCreateUserRequest_Role, &sCreateUserRequest_FirstName, &sCreateUserRequest_LastName, &sCreateUserRequest_HiddenFromGlobalAddressList, &sCreateUserRequest_IdentityProviderUserId}, Seed: 1, Slots: []uint16{
+	0, 0, 5, 2, 3, 0, 0, 6, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 9, 0, 7, 0, 8,
+	0, 0, 0, 0, 0, 1, 0, 0,
+}}
+var mCreateUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateUserResponse_UserId}}
+var mDeleteAccessControlRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAccessControlRuleRequest_OrganizationId, &sDeleteAccessControlRuleRequest_Name}}
+var mDeleteAliasRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAliasRequest_OrganizationId, &sDeleteAliasRequest_EntityId, &sDeleteAliasRequest_Alias}}
+var mDeleteAvailabilityConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAvailabilityConfigurationRequest_OrganizationId, &sDeleteAvailabilityConfigurationRequest_DomainName}}
+var mDeleteEmailMonitoringConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEmailMonitoringConfigurationRequest_OrganizationId}}
+var mDeleteGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteGroupRequest_OrganizationId, &sDeleteGroupRequest_GroupId}}
+var mDeleteIdentityCenterApplicationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIdentityCenterApplicationRequest_ApplicationArn}}
+var mDeleteIdentityProviderConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIdentityProviderConfigurationRequest_OrganizationId}}
+var mDeleteImpersonationRoleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteImpersonationRoleRequest_OrganizationId, &sDeleteImpersonationRoleRequest_ImpersonationRoleId}}
+var mDeleteMailboxPermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMailboxPermissionsRequest_OrganizationId, &sDeleteMailboxPermissionsRequest_EntityId, &sDeleteMailboxPermissionsRequest_GranteeId}}
+var mDeleteMobileDeviceAccessOverrideRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMobileDeviceAccessOverrideRequest_OrganizationId, &sDeleteMobileDeviceAccessOverrideRequest_UserId, &sDeleteMobileDeviceAccessOverrideRequest_DeviceId}}
+var mDeleteMobileDeviceAccessRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMobileDeviceAccessRuleRequest_OrganizationId, &sDeleteMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId}}
+var mDeleteOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOrganizationRequest_ClientToken, &sDeleteOrganizationRequest_OrganizationId, &sDeleteOrganizationRequest_DeleteDirectory, &sDeleteOrganizationRequest_ForceDelete, &sDeleteOrganizationRequest_DeleteIdentityCenterApplication}}
+var mDeleteOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOrganizationResponse_OrganizationId, &sDeleteOrganizationResponse_State}}
+var mDeletePersonalAccessTokenRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeletePersonalAccessTokenRequest_OrganizationId, &sDeletePersonalAccessTokenRequest_PersonalAccessTokenId}}
+var mDeleteResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceRequest_OrganizationId, &sDeleteResourceRequest_ResourceId}}
+var mDeleteRetentionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRetentionPolicyRequest_OrganizationId, &sDeleteRetentionPolicyRequest_Id}}
+var mDeleteUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteUserRequest_OrganizationId, &sDeleteUserRequest_UserId}}
+var mDeregisterFromWorkMailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterFromWorkMailRequest_OrganizationId, &sDeregisterFromWorkMailRequest_EntityId}}
+var mDeregisterMailDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterMailDomainRequest_OrganizationId, &sDeregisterMailDomainRequest_DomainName}}
+var mDescribeEmailMonitoringConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEmailMonitoringConfigurationRequest_OrganizationId}}
+var mDescribeEmailMonitoringConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEmailMonitoringConfigurationResponse_RoleArn, &sDescribeEmailMonitoringConfigurationResponse_LogGroupArn}}
+var mDescribeEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityRequest_OrganizationId, &sDescribeEntityRequest_Email}}
+var mDescribeEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityResponse_EntityId, &sDescribeEntityResponse_Name, &sDescribeEntityResponse_Type}}
+var mDescribeGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGroupRequest_OrganizationId, &sDescribeGroupRequest_GroupId}}
+var mDescribeGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeGroupResponse_GroupId, &sDescribeGroupResponse_Name, &sDescribeGroupResponse_Email, &sDescribeGroupResponse_State, &sDescribeGroupResponse_EnabledDate, &sDescribeGroupResponse_DisabledDate, &sDescribeGroupResponse_HiddenFromGlobalAddressList}}
+var mDescribeIdentityProviderConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeIdentityProviderConfigurationRequest_OrganizationId}}
+var mDescribeIdentityProviderConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeIdentityProviderConfigurationResponse_AuthenticationMode, &sDescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration, &sDescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration}}
+var mDescribeInboundDmarcSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInboundDmarcSettingsRequest_OrganizationId}}
+var mDescribeInboundDmarcSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInboundDmarcSettingsResponse_Enforced}}
+var mDescribeMailboxExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMailboxExportJobRequest_JobId, &sDescribeMailboxExportJobRequest_OrganizationId}}
+var mDescribeMailboxExportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMailboxExportJobResponse_EntityId, &sDescribeMailboxExportJobResponse_Description, &sDescribeMailboxExportJobResponse_RoleArn, &sDescribeMailboxExportJobResponse_KmsKeyArn, &sDescribeMailboxExportJobResponse_S3BucketName, &sDescribeMailboxExportJobResponse_S3Prefix, &sDescribeMailboxExportJobResponse_S3Path, &sDescribeMailboxExportJobResponse_EstimatedProgress, &sDescribeMailboxExportJobResponse_State, &sDescribeMailboxExportJobResponse_ErrorInfo, &sDescribeMailboxExportJobResponse_StartTime, &sDescribeMailboxExportJobResponse_EndTime}, Seed: 32, Slots: []uint16{
+	0, 7, 6, 0, 11, 0, 9, 0, 3, 5, 8, 0, 0, 1, 0, 0, 0, 2, 0, 10, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 4, 12, 0,
+}}
+var mDescribeOrganizationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeOrganizationRequest_OrganizationId}}
+var mDescribeOrganizationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeOrganizationResponse_OrganizationId, &sDescribeOrganizationResponse_Alias, &sDescribeOrganizationResponse_State, &sDescribeOrganizationResponse_DirectoryId, &sDescribeOrganizationResponse_DirectoryType, &sDescribeOrganizationResponse_DefaultMailDomain, &sDescribeOrganizationResponse_CompletedDate, &sDescribeOrganizationResponse_ErrorMessage, &sDescribeOrganizationResponse_ARN, &sDescribeOrganizationResponse_MigrationAdmin, &sDescribeOrganizationResponse_InteroperabilityEnabled}, Seed: 2, Slots: []uint16{
+	0, 4, 0, 0, 5, 0, 9, 0, 0, 10, 6, 0, 0, 0, 8, 0, 2, 0, 7, 3, 11, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 1, 0,
+}}
+var mDescribeResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeResourceRequest_OrganizationId, &sDescribeResourceRequest_ResourceId}}
+var mDescribeResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeResourceResponse_ResourceId, &sDescribeResourceResponse_Email, &sDescribeResourceResponse_Name, &sDescribeResourceResponse_Type, &sDescribeResourceResponse_BookingOptions, &sDescribeResourceResponse_State, &sDescribeResourceResponse_EnabledDate, &sDescribeResourceResponse_DisabledDate, &sDescribeResourceResponse_Description, &sDescribeResourceResponse_HiddenFromGlobalAddressList}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 5, 0, 7, 2, 0, 9, 0, 0, 1, 4, 0, 3, 0, 0, 0, 0, 0, 0, 8, 0, 0,
+	0, 0, 10, 0, 0, 0, 6, 0,
+}}
+var mDescribeUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserRequest_OrganizationId, &sDescribeUserRequest_UserId}}
+var mDescribeUserResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeUserResponse_UserId, &sDescribeUserResponse_Name, &sDescribeUserResponse_Email, &sDescribeUserResponse_DisplayName, &sDescribeUserResponse_State, &sDescribeUserResponse_UserRole, &sDescribeUserResponse_EnabledDate, &sDescribeUserResponse_DisabledDate, &sDescribeUserResponse_MailboxProvisionedDate, &sDescribeUserResponse_MailboxDeprovisionedDate, &sDescribeUserResponse_FirstName, &sDescribeUserResponse_LastName, &sDescribeUserResponse_HiddenFromGlobalAddressList, &sDescribeUserResponse_Initials, &sDescribeUserResponse_Telephone, &sDescribeUserResponse_Street, &sDescribeUserResponse_JobTitle, &sDescribeUserResponse_City, &sDescribeUserResponse_Company, &sDescribeUserResponse_ZipCode, &sDescribeUserResponse_Department, &sDescribeUserResponse_Country, &sDescribeUserResponse_Office, &sDescribeUserResponse_IdentityProviderUserId, &sDescribeUserResponse_IdentityProviderIdentityStoreId}, Seed: 1, Slots: []uint16{
+	16, 0, 0, 2, 0, 5, 0, 11, 0, 0, 1, 10, 0, 3, 0, 19, 0, 0, 0, 24, 9, 12, 0, 0,
+	0, 0, 0, 0, 0, 14, 0, 7, 0, 0, 20, 0, 4, 17, 0, 0, 21, 25, 0, 0, 0, 22, 0, 0,
+	6, 0, 0, 23, 15, 0, 0, 13, 18, 0, 0, 0, 0, 0, 8, 0,
+}}
+var mDisassociateDelegateFromResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateDelegateFromResourceRequest_OrganizationId, &sDisassociateDelegateFromResourceRequest_ResourceId, &sDisassociateDelegateFromResourceRequest_EntityId}}
+var mDisassociateMemberFromGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMemberFromGroupRequest_OrganizationId, &sDisassociateMemberFromGroupRequest_GroupId, &sDisassociateMemberFromGroupRequest_MemberId}}
+var mGetAccessControlEffectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessControlEffectRequest_OrganizationId, &sGetAccessControlEffectRequest_IpAddress, &sGetAccessControlEffectRequest_Action, &sGetAccessControlEffectRequest_UserId, &sGetAccessControlEffectRequest_ImpersonationRoleId}}
+var mGetAccessControlEffectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccessControlEffectResponse_Effect, &sGetAccessControlEffectResponse_MatchedRules}}
+var mGetDefaultRetentionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDefaultRetentionPolicyRequest_OrganizationId}}
+var mGetDefaultRetentionPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDefaultRetentionPolicyResponse_Id, &sGetDefaultRetentionPolicyResponse_Name, &sGetDefaultRetentionPolicyResponse_Description, &sGetDefaultRetentionPolicyResponse_FolderConfigurations}}
+var mGetImpersonationRoleEffectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImpersonationRoleEffectRequest_OrganizationId, &sGetImpersonationRoleEffectRequest_ImpersonationRoleId, &sGetImpersonationRoleEffectRequest_TargetUser}}
+var mGetImpersonationRoleEffectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImpersonationRoleEffectResponse_Type, &sGetImpersonationRoleEffectResponse_Effect, &sGetImpersonationRoleEffectResponse_MatchedRules}}
+var mGetImpersonationRoleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImpersonationRoleRequest_OrganizationId, &sGetImpersonationRoleRequest_ImpersonationRoleId}}
+var mGetImpersonationRoleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImpersonationRoleResponse_ImpersonationRoleId, &sGetImpersonationRoleResponse_Name, &sGetImpersonationRoleResponse_Type, &sGetImpersonationRoleResponse_Description, &sGetImpersonationRoleResponse_Rules, &sGetImpersonationRoleResponse_DateCreated, &sGetImpersonationRoleResponse_DateModified}}
+var mGetMailboxDetailsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMailboxDetailsRequest_OrganizationId, &sGetMailboxDetailsRequest_UserId}}
+var mGetMailboxDetailsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMailboxDetailsResponse_MailboxQuota, &sGetMailboxDetailsResponse_MailboxSize}}
+var mGetMailDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMailDomainRequest_OrganizationId, &sGetMailDomainRequest_DomainName}}
+var mGetMailDomainResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMailDomainResponse_Records, &sGetMailDomainResponse_IsTestDomain, &sGetMailDomainResponse_IsDefault, &sGetMailDomainResponse_OwnershipVerificationStatus, &sGetMailDomainResponse_DkimVerificationStatus}}
+var mGetMobileDeviceAccessEffectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMobileDeviceAccessEffectRequest_OrganizationId, &sGetMobileDeviceAccessEffectRequest_DeviceType, &sGetMobileDeviceAccessEffectRequest_DeviceModel, &sGetMobileDeviceAccessEffectRequest_DeviceOperatingSystem, &sGetMobileDeviceAccessEffectRequest_DeviceUserAgent}}
+var mGetMobileDeviceAccessEffectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMobileDeviceAccessEffectResponse_Effect, &sGetMobileDeviceAccessEffectResponse_MatchedRules}}
+var mGetMobileDeviceAccessOverrideRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMobileDeviceAccessOverrideRequest_OrganizationId, &sGetMobileDeviceAccessOverrideRequest_UserId, &sGetMobileDeviceAccessOverrideRequest_DeviceId}}
+var mGetMobileDeviceAccessOverrideResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMobileDeviceAccessOverrideResponse_UserId, &sGetMobileDeviceAccessOverrideResponse_DeviceId, &sGetMobileDeviceAccessOverrideResponse_Effect, &sGetMobileDeviceAccessOverrideResponse_Description, &sGetMobileDeviceAccessOverrideResponse_DateCreated, &sGetMobileDeviceAccessOverrideResponse_DateModified}}
+var mGetPersonalAccessTokenMetadataRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPersonalAccessTokenMetadataRequest_OrganizationId, &sGetPersonalAccessTokenMetadataRequest_PersonalAccessTokenId}}
+var mGetPersonalAccessTokenMetadataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId, &sGetPersonalAccessTokenMetadataResponse_UserId, &sGetPersonalAccessTokenMetadataResponse_Name, &sGetPersonalAccessTokenMetadataResponse_DateCreated, &sGetPersonalAccessTokenMetadataResponse_DateLastUsed, &sGetPersonalAccessTokenMetadataResponse_ExpiresTime, &sGetPersonalAccessTokenMetadataResponse_Scopes}}
+var mListAccessControlRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessControlRulesRequest_OrganizationId}}
+var mListAccessControlRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccessControlRulesResponse_Rules}}
+var mListAliasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAliasesRequest_OrganizationId, &sListAliasesRequest_EntityId, &sListAliasesRequest_NextToken, &sListAliasesRequest_MaxResults}}
+var mListAliasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAliasesResponse_Aliases, &sListAliasesResponse_NextToken}}
+var mListAvailabilityConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAvailabilityConfigurationsRequest_OrganizationId, &sListAvailabilityConfigurationsRequest_MaxResults, &sListAvailabilityConfigurationsRequest_NextToken}}
+var mListAvailabilityConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAvailabilityConfigurationsResponse_AvailabilityConfigurations, &sListAvailabilityConfigurationsResponse_NextToken}}
+var mListGroupMembersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupMembersRequest_OrganizationId, &sListGroupMembersRequest_GroupId, &sListGroupMembersRequest_NextToken, &sListGroupMembersRequest_MaxResults}}
+var mListGroupMembersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupMembersResponse_Members, &sListGroupMembersResponse_NextToken}}
+var mListGroupsForEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsForEntityRequest_OrganizationId, &sListGroupsForEntityRequest_EntityId, &sListGroupsForEntityRequest_Filters, &sListGroupsForEntityRequest_NextToken, &sListGroupsForEntityRequest_MaxResults}}
+var mListGroupsForEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsForEntityResponse_Groups, &sListGroupsForEntityResponse_NextToken}}
+var mListGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsRequest_OrganizationId, &sListGroupsRequest_NextToken, &sListGroupsRequest_MaxResults, &sListGroupsRequest_Filters}}
+var mListGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListGroupsResponse_Groups, &sListGroupsResponse_NextToken}}
+var mListImpersonationRolesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListImpersonationRolesRequest_OrganizationId, &sListImpersonationRolesRequest_NextToken, &sListImpersonationRolesRequest_MaxResults}}
+var mListImpersonationRolesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListImpersonationRolesResponse_Roles, &sListImpersonationRolesResponse_NextToken}}
+var mListMailboxExportJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMailboxExportJobsRequest_OrganizationId, &sListMailboxExportJobsRequest_NextToken, &sListMailboxExportJobsRequest_MaxResults}}
+var mListMailboxExportJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMailboxExportJobsResponse_Jobs, &sListMailboxExportJobsResponse_NextToken}}
+var mListMailboxPermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMailboxPermissionsRequest_OrganizationId, &sListMailboxPermissionsRequest_EntityId, &sListMailboxPermissionsRequest_NextToken, &sListMailboxPermissionsRequest_MaxResults}}
+var mListMailboxPermissionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMailboxPermissionsResponse_Permissions, &sListMailboxPermissionsResponse_NextToken}}
+var mListMailDomainsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMailDomainsRequest_OrganizationId, &sListMailDomainsRequest_MaxResults, &sListMailDomainsRequest_NextToken}}
+var mListMailDomainsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMailDomainsResponse_MailDomains, &sListMailDomainsResponse_NextToken}}
+var mListMobileDeviceAccessOverridesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMobileDeviceAccessOverridesRequest_OrganizationId, &sListMobileDeviceAccessOverridesRequest_UserId, &sListMobileDeviceAccessOverridesRequest_DeviceId, &sListMobileDeviceAccessOverridesRequest_NextToken, &sListMobileDeviceAccessOverridesRequest_MaxResults}}
+var mListMobileDeviceAccessOverridesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMobileDeviceAccessOverridesResponse_Overrides, &sListMobileDeviceAccessOverridesResponse_NextToken}}
+var mListMobileDeviceAccessRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMobileDeviceAccessRulesRequest_OrganizationId}}
+var mListMobileDeviceAccessRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMobileDeviceAccessRulesResponse_Rules}}
+var mListOrganizationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationsRequest_NextToken, &sListOrganizationsRequest_MaxResults}}
+var mListOrganizationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOrganizationsResponse_OrganizationSummaries, &sListOrganizationsResponse_NextToken}}
+var mListPersonalAccessTokensRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPersonalAccessTokensRequest_OrganizationId, &sListPersonalAccessTokensRequest_UserId, &sListPersonalAccessTokensRequest_NextToken, &sListPersonalAccessTokensRequest_MaxResults}}
+var mListPersonalAccessTokensResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPersonalAccessTokensResponse_NextToken, &sListPersonalAccessTokensResponse_PersonalAccessTokenSummaries}}
+var mListResourceDelegatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceDelegatesRequest_OrganizationId, &sListResourceDelegatesRequest_ResourceId, &sListResourceDelegatesRequest_NextToken, &sListResourceDelegatesRequest_MaxResults}}
+var mListResourceDelegatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourceDelegatesResponse_Delegates, &sListResourceDelegatesResponse_NextToken}}
+var mListResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesRequest_OrganizationId, &sListResourcesRequest_NextToken, &sListResourcesRequest_MaxResults, &sListResourcesRequest_Filters}}
+var mListResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesResponse_Resources, &sListResourcesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mListUsersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersRequest_OrganizationId, &sListUsersRequest_NextToken, &sListUsersRequest_MaxResults, &sListUsersRequest_Filters}}
+var mListUsersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListUsersResponse_Users, &sListUsersResponse_NextToken}}
+var mPutAccessControlRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutAccessControlRuleRequest_Name, &sPutAccessControlRuleRequest_Effect, &sPutAccessControlRuleRequest_Description, &sPutAccessControlRuleRequest_IpRanges, &sPutAccessControlRuleRequest_NotIpRanges, &sPutAccessControlRuleRequest_Actions, &sPutAccessControlRuleRequest_NotActions, &sPutAccessControlRuleRequest_UserIds, &sPutAccessControlRuleRequest_NotUserIds, &sPutAccessControlRuleRequest_OrganizationId, &sPutAccessControlRuleRequest_ImpersonationRoleIds, &sPutAccessControlRuleRequest_NotImpersonationRoleIds}, Seed: 12, Slots: []uint16{
+	12, 0, 0, 1, 0, 0, 0, 0, 2, 0, 11, 6, 0, 8, 4, 9, 0, 5, 0, 0, 10, 0, 0, 0,
+	0, 0, 0, 0, 0, 3, 0, 7,
+}}
+var mPutEmailMonitoringConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEmailMonitoringConfigurationRequest_OrganizationId, &sPutEmailMonitoringConfigurationRequest_RoleArn, &sPutEmailMonitoringConfigurationRequest_LogGroupArn}}
+var mPutIdentityProviderConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutIdentityProviderConfigurationRequest_OrganizationId, &sPutIdentityProviderConfigurationRequest_AuthenticationMode, &sPutIdentityProviderConfigurationRequest_IdentityCenterConfiguration, &sPutIdentityProviderConfigurationRequest_PersonalAccessTokenConfiguration}}
+var mPutInboundDmarcSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutInboundDmarcSettingsRequest_OrganizationId, &sPutInboundDmarcSettingsRequest_Enforced}}
+var mPutMailboxPermissionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMailboxPermissionsRequest_OrganizationId, &sPutMailboxPermissionsRequest_EntityId, &sPutMailboxPermissionsRequest_GranteeId, &sPutMailboxPermissionsRequest_PermissionValues}}
+var mPutMobileDeviceAccessOverrideRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutMobileDeviceAccessOverrideRequest_OrganizationId, &sPutMobileDeviceAccessOverrideRequest_UserId, &sPutMobileDeviceAccessOverrideRequest_DeviceId, &sPutMobileDeviceAccessOverrideRequest_Effect, &sPutMobileDeviceAccessOverrideRequest_Description}}
+var mPutRetentionPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRetentionPolicyRequest_OrganizationId, &sPutRetentionPolicyRequest_Id, &sPutRetentionPolicyRequest_Name, &sPutRetentionPolicyRequest_Description, &sPutRetentionPolicyRequest_FolderConfigurations}}
+var mRegisterMailDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterMailDomainRequest_ClientToken, &sRegisterMailDomainRequest_OrganizationId, &sRegisterMailDomainRequest_DomainName}}
+var mRegisterToWorkMailRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterToWorkMailRequest_OrganizationId, &sRegisterToWorkMailRequest_EntityId, &sRegisterToWorkMailRequest_Email}}
+var mResetPasswordRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetPasswordRequest_OrganizationId, &sResetPasswordRequest_UserId, &sResetPasswordRequest_Password}}
+var mStartMailboxExportJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMailboxExportJobRequest_ClientToken, &sStartMailboxExportJobRequest_OrganizationId, &sStartMailboxExportJobRequest_EntityId, &sStartMailboxExportJobRequest_Description, &sStartMailboxExportJobRequest_RoleArn, &sStartMailboxExportJobRequest_KmsKeyArn, &sStartMailboxExportJobRequest_S3BucketName, &sStartMailboxExportJobRequest_S3Prefix}}
+var mStartMailboxExportJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMailboxExportJobResponse_JobId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mTestAvailabilityConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTestAvailabilityConfigurationRequest_OrganizationId, &sTestAvailabilityConfigurationRequest_DomainName, &sTestAvailabilityConfigurationRequest_EwsProvider, &sTestAvailabilityConfigurationRequest_LambdaProvider}}
+var mTestAvailabilityConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTestAvailabilityConfigurationResponse_TestPassed, &sTestAvailabilityConfigurationResponse_FailureReason}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateAvailabilityConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAvailabilityConfigurationRequest_OrganizationId, &sUpdateAvailabilityConfigurationRequest_DomainName, &sUpdateAvailabilityConfigurationRequest_EwsProvider, &sUpdateAvailabilityConfigurationRequest_LambdaProvider}}
+var mUpdateDefaultMailDomainRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDefaultMailDomainRequest_OrganizationId, &sUpdateDefaultMailDomainRequest_DomainName}}
+var mUpdateGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateGroupRequest_OrganizationId, &sUpdateGroupRequest_GroupId, &sUpdateGroupRequest_HiddenFromGlobalAddressList}}
+var mUpdateImpersonationRoleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateImpersonationRoleRequest_OrganizationId, &sUpdateImpersonationRoleRequest_ImpersonationRoleId, &sUpdateImpersonationRoleRequest_Name, &sUpdateImpersonationRoleRequest_Type, &sUpdateImpersonationRoleRequest_Description, &sUpdateImpersonationRoleRequest_Rules}}
+var mUpdateMailboxQuotaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMailboxQuotaRequest_OrganizationId, &sUpdateMailboxQuotaRequest_UserId, &sUpdateMailboxQuotaRequest_MailboxQuota}}
+var mUpdateMobileDeviceAccessRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMobileDeviceAccessRuleRequest_OrganizationId, &sUpdateMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId, &sUpdateMobileDeviceAccessRuleRequest_Name, &sUpdateMobileDeviceAccessRuleRequest_Description, &sUpdateMobileDeviceAccessRuleRequest_Effect, &sUpdateMobileDeviceAccessRuleRequest_DeviceTypes, &sUpdateMobileDeviceAccessRuleRequest_NotDeviceTypes, &sUpdateMobileDeviceAccessRuleRequest_DeviceModels, &sUpdateMobileDeviceAccessRuleRequest_NotDeviceModels, &sUpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems, &sUpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems, &sUpdateMobileDeviceAccessRuleRequest_DeviceUserAgents, &sUpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents}, Seed: 8, Slots: []uint16{
+	0, 3, 11, 8, 2, 9, 0, 0, 10, 0, 0, 0, 0, 4, 0, 0, 13, 0, 0, 0, 0, 0, 0, 1,
+	0, 0, 7, 0, 6, 5, 12, 0,
+}}
+var mUpdatePrimaryEmailAddressRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePrimaryEmailAddressRequest_OrganizationId, &sUpdatePrimaryEmailAddressRequest_EntityId, &sUpdatePrimaryEmailAddressRequest_Email}}
+var mUpdateResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResourceRequest_OrganizationId, &sUpdateResourceRequest_ResourceId, &sUpdateResourceRequest_Name, &sUpdateResourceRequest_BookingOptions, &sUpdateResourceRequest_Description, &sUpdateResourceRequest_Type, &sUpdateResourceRequest_HiddenFromGlobalAddressList}}
+var mUpdateUserRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateUserRequest_OrganizationId, &sUpdateUserRequest_UserId, &sUpdateUserRequest_Role, &sUpdateUserRequest_DisplayName, &sUpdateUserRequest_FirstName, &sUpdateUserRequest_LastName, &sUpdateUserRequest_HiddenFromGlobalAddressList, &sUpdateUserRequest_Initials, &sUpdateUserRequest_Telephone, &sUpdateUserRequest_Street, &sUpdateUserRequest_JobTitle, &sUpdateUserRequest_City, &sUpdateUserRequest_Company, &sUpdateUserRequest_ZipCode, &sUpdateUserRequest_Department, &sUpdateUserRequest_Country, &sUpdateUserRequest_Office, &sUpdateUserRequest_IdentityProviderUserId}, Seed: 1, Slots: []uint16{
+	10, 0, 3, 0, 0, 0, 0, 5, 0, 0, 2, 0, 0, 0, 0, 13, 0, 0, 0, 18, 0, 6, 0, 0,
+	0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 14, 0, 4, 11, 0, 0, 15, 0, 0, 0, 0, 16, 0, 0,
+	0, 0, 0, 17, 9, 0, 0, 7, 12, 0, 0, 0, 0, 1, 0, 0,
+}}
+
+var sAssociateDelegateToResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegateToResource, Type: smithy.ShapeTypeOperation})
+var sAssociateMemberToGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMemberToGroup, Type: smithy.ShapeTypeOperation})
+var sAssumeImpersonationRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeImpersonationRole, Type: smithy.ShapeTypeOperation})
+var sCancelMailboxExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelMailboxExportJob, Type: smithy.ShapeTypeOperation})
+var sCreateAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAlias, Type: smithy.ShapeTypeOperation})
+var sCreateAvailabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAvailabilityConfiguration, Type: smithy.ShapeTypeOperation})
+var sCreateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroup, Type: smithy.ShapeTypeOperation})
+var sCreateIdentityCenterApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentityCenterApplication, Type: smithy.ShapeTypeOperation})
+var sCreateImpersonationRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImpersonationRole, Type: smithy.ShapeTypeOperation})
+var sCreateMobileDeviceAccessRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMobileDeviceAccessRule, Type: smithy.ShapeTypeOperation})
+var sCreateOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOrganization, Type: smithy.ShapeTypeOperation})
+var sCreateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResource, Type: smithy.ShapeTypeOperation})
+var sCreateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUser, Type: smithy.ShapeTypeOperation})
+var sDeleteAccessControlRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessControlRule, Type: smithy.ShapeTypeOperation})
+var sDeleteAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAlias, Type: smithy.ShapeTypeOperation})
+var sDeleteAvailabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAvailabilityConfiguration, Type: smithy.ShapeTypeOperation})
+var sDeleteEmailMonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailMonitoringConfiguration, Type: smithy.ShapeTypeOperation})
+var sDeleteGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroup, Type: smithy.ShapeTypeOperation})
+var sDeleteIdentityCenterApplication = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityCenterApplication, Type: smithy.ShapeTypeOperation})
+var sDeleteIdentityProviderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityProviderConfiguration, Type: smithy.ShapeTypeOperation})
+var sDeleteImpersonationRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImpersonationRole, Type: smithy.ShapeTypeOperation})
+var sDeleteMailboxPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMailboxPermissions, Type: smithy.ShapeTypeOperation})
+var sDeleteMobileDeviceAccessOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMobileDeviceAccessOverride, Type: smithy.ShapeTypeOperation})
+var sDeleteMobileDeviceAccessRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMobileDeviceAccessRule, Type: smithy.ShapeTypeOperation})
+var sDeleteOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOrganization, Type: smithy.ShapeTypeOperation})
+var sDeletePersonalAccessToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePersonalAccessToken, Type: smithy.ShapeTypeOperation})
+var sDeleteResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResource, Type: smithy.ShapeTypeOperation})
+var sDeleteRetentionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRetentionPolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUser, Type: smithy.ShapeTypeOperation})
+var sDeregisterFromWorkMail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterFromWorkMail, Type: smithy.ShapeTypeOperation})
+var sDeregisterMailDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterMailDomain, Type: smithy.ShapeTypeOperation})
+var sDescribeEmailMonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEmailMonitoringConfiguration, Type: smithy.ShapeTypeOperation})
+var sDescribeEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntity, Type: smithy.ShapeTypeOperation})
+var sDescribeGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroup, Type: smithy.ShapeTypeOperation})
+var sDescribeIdentityProviderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityProviderConfiguration, Type: smithy.ShapeTypeOperation})
+var sDescribeInboundDmarcSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInboundDmarcSettings, Type: smithy.ShapeTypeOperation})
+var sDescribeMailboxExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMailboxExportJob, Type: smithy.ShapeTypeOperation})
+var sDescribeOrganization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrganization, Type: smithy.ShapeTypeOperation})
+var sDescribeResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResource, Type: smithy.ShapeTypeOperation})
+var sDescribeUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUser, Type: smithy.ShapeTypeOperation})
+var sDisassociateDelegateFromResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegateFromResource, Type: smithy.ShapeTypeOperation})
+var sDisassociateMemberFromGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMemberFromGroup, Type: smithy.ShapeTypeOperation})
+var sGetAccessControlEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessControlEffect, Type: smithy.ShapeTypeOperation})
+var sGetDefaultRetentionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultRetentionPolicy, Type: smithy.ShapeTypeOperation})
+var sGetImpersonationRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImpersonationRole, Type: smithy.ShapeTypeOperation})
+var sGetImpersonationRoleEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImpersonationRoleEffect, Type: smithy.ShapeTypeOperation})
+var sGetMailboxDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMailboxDetails, Type: smithy.ShapeTypeOperation})
+var sGetMailDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMailDomain, Type: smithy.ShapeTypeOperation})
+var sGetMobileDeviceAccessEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMobileDeviceAccessEffect, Type: smithy.ShapeTypeOperation})
+var sGetMobileDeviceAccessOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMobileDeviceAccessOverride, Type: smithy.ShapeTypeOperation})
+var sGetPersonalAccessTokenMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPersonalAccessTokenMetadata, Type: smithy.ShapeTypeOperation})
+var sListAccessControlRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessControlRules, Type: smithy.ShapeTypeOperation})
+var sListAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliases, Type: smithy.ShapeTypeOperation})
+var sListAvailabilityConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailabilityConfigurations, Type: smithy.ShapeTypeOperation})
+var sListGroupMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembers, Type: smithy.ShapeTypeOperation})
+var sListGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroups, Type: smithy.ShapeTypeOperation})
+var sListGroupsForEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForEntity, Type: smithy.ShapeTypeOperation})
+var sListImpersonationRoles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImpersonationRoles, Type: smithy.ShapeTypeOperation})
+var sListMailboxExportJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailboxExportJobs, Type: smithy.ShapeTypeOperation})
+var sListMailboxPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailboxPermissions, Type: smithy.ShapeTypeOperation})
+var sListMailDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailDomains, Type: smithy.ShapeTypeOperation})
+var sListMobileDeviceAccessOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMobileDeviceAccessOverrides, Type: smithy.ShapeTypeOperation})
+var sListMobileDeviceAccessRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMobileDeviceAccessRules, Type: smithy.ShapeTypeOperation})
+var sListOrganizations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizations, Type: smithy.ShapeTypeOperation})
+var sListPersonalAccessTokens = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPersonalAccessTokens, Type: smithy.ShapeTypeOperation})
+var sListResourceDelegates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceDelegates, Type: smithy.ShapeTypeOperation})
+var sListResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResources, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sListUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsers, Type: smithy.ShapeTypeOperation})
+var sPutAccessControlRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccessControlRule, Type: smithy.ShapeTypeOperation})
+var sPutEmailMonitoringConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailMonitoringConfiguration, Type: smithy.ShapeTypeOperation})
+var sPutIdentityProviderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutIdentityProviderConfiguration, Type: smithy.ShapeTypeOperation})
+var sPutInboundDmarcSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInboundDmarcSettings, Type: smithy.ShapeTypeOperation})
+var sPutMailboxPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMailboxPermissions, Type: smithy.ShapeTypeOperation})
+var sPutMobileDeviceAccessOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMobileDeviceAccessOverride, Type: smithy.ShapeTypeOperation})
+var sPutRetentionPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRetentionPolicy, Type: smithy.ShapeTypeOperation})
+var sRegisterMailDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterMailDomain, Type: smithy.ShapeTypeOperation})
+var sRegisterToWorkMail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterToWorkMail, Type: smithy.ShapeTypeOperation})
+var sResetPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetPassword, Type: smithy.ShapeTypeOperation})
+var sStartMailboxExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMailboxExportJob, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sTestAvailabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestAvailabilityConfiguration, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAvailabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityConfiguration, Type: smithy.ShapeTypeOperation})
+var sUpdateDefaultMailDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultMailDomain, Type: smithy.ShapeTypeOperation})
+var sUpdateGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroup, Type: smithy.ShapeTypeOperation})
+var sUpdateImpersonationRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImpersonationRole, Type: smithy.ShapeTypeOperation})
+var sUpdateMailboxQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMailboxQuota, Type: smithy.ShapeTypeOperation})
+var sUpdateMobileDeviceAccessRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMobileDeviceAccessRule, Type: smithy.ShapeTypeOperation})
+var sUpdatePrimaryEmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrimaryEmailAddress, Type: smithy.ShapeTypeOperation})
+var sUpdateResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResource, Type: smithy.ShapeTypeOperation})
+var sUpdateUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUser, Type: smithy.ShapeTypeOperation})
+var s_WorkMailService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkMailService, Type: smithy.ShapeTypeService})
+var sAccessControlRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessControlRule, Members: &mAccessControlRule, Type: smithy.ShapeTypeStructure})
+var s_AccessControlRuleAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessControlRuleAction, Type: smithy.ShapeTypeString})
+var s_AccessControlRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessControlRuleDescription, Type: smithy.ShapeTypeString})
+var sAccessControlRuleEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessControlRuleEffect, Members: &mAccessControlRuleEffect, Type: smithy.ShapeTypeEnum})
+var s_AccessControlRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessControlRuleName, Type: smithy.ShapeTypeString})
+var s_AccessControlRuleNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessControlRuleNameList, Members: &m_AccessControlRuleNameList, Type: smithy.ShapeTypeList})
+var s_AccessControlRulesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessControlRulesList, Members: &m_AccessControlRulesList, Type: smithy.ShapeTypeList})
+var sAccessEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessEffect, Members: &mAccessEffect, Type: smithy.ShapeTypeEnum})
+var s_ActionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList})
+var s_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var s_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sAvailabilityConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityConfiguration, Members: &mAvailabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AvailabilityConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailabilityConfigurationList, Members: &m_AvailabilityConfigurationList, Type: smithy.ShapeTypeList})
+var sAvailabilityProviderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailabilityProviderType, Members: &mAvailabilityProviderType, Type: smithy.ShapeTypeEnum})
+var sBookingOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBookingOptions, Members: &mBookingOptions, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_BooleanObject = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sDelegate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDelegate, Members: &mDelegate, Type: smithy.ShapeTypeStructure})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var s_DeviceModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceModel, Type: smithy.ShapeTypeString})
+var s_DeviceModelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceModelList, Members: &m_DeviceModelList, Type: smithy.ShapeTypeList})
+var s_DeviceOperatingSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceOperatingSystem, Type: smithy.ShapeTypeString})
+var s_DeviceOperatingSystemList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceOperatingSystemList, Members: &m_DeviceOperatingSystemList, Type: smithy.ShapeTypeList})
+var s_DeviceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceType, Type: smithy.ShapeTypeString})
+var s_DeviceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceTypeList, Members: &m_DeviceTypeList, Type: smithy.ShapeTypeList})
+var s_DeviceUserAgent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceUserAgent, Type: smithy.ShapeTypeString})
+var s_DeviceUserAgentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceUserAgentList, Members: &m_DeviceUserAgentList, Type: smithy.ShapeTypeList})
+var s_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sDirectoryInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryInUseException, Members: &mDirectoryInUseException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sDirectoryServiceAuthenticationFailedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryServiceAuthenticationFailedException, Members: &mDirectoryServiceAuthenticationFailedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sDirectoryUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectoryUnavailableException, Members: &mDirectoryUnavailableException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sDnsRecord = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsRecord, Members: &mDnsRecord, Type: smithy.ShapeTypeStructure})
+var s_DnsRecords = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsRecords, Members: &m_DnsRecords, Type: smithy.ShapeTypeList})
+var sDnsRecordVerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDnsRecordVerificationStatus, Members: &mDnsRecordVerificationStatus, Type: smithy.ShapeTypeEnum})
+var sDomain = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure})
+var s_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var s_Domains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Domains, Members: &m_Domains, Type: smithy.ShapeTypeList})
+var s_EmailAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sEmailAddressInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEmailAddressInUseException, Members: &mEmailAddressInUseException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sEntityAlreadyRegisteredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityAlreadyRegisteredException, Members: &mEntityAlreadyRegisteredException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sEntityNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityNotFoundException, Members: &mEntityNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sEntityState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sEntityStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityStateException, Members: &mEntityStateException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sEwsAvailabilityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEwsAvailabilityProvider, Members: &mEwsAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var s_ExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpiresIn, Type: smithy.ShapeTypeLong})
+var s_ExternalUserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalUserName, Type: smithy.ShapeTypeString})
+var sFolderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolderConfiguration, Members: &mFolderConfiguration, Type: smithy.ShapeTypeStructure})
+var s_FolderConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FolderConfigurations, Members: &m_FolderConfigurations, Type: smithy.ShapeTypeList})
+var sFolderName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFolderName, Members: &mFolderName, Type: smithy.ShapeTypeEnum})
+var sGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure})
+var sGroupIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGroupIdentifier, Members: &mGroupIdentifier, Type: smithy.ShapeTypeStructure})
+var s_GroupIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupIdentifiers, Members: &m_GroupIdentifiers, Type: smithy.ShapeTypeList})
+var s_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GroupName, Type: smithy.ShapeTypeString})
+var s_Groups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList})
+var s_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HostedZoneId, Type: smithy.ShapeTypeString})
+var s_IdempotencyClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var s_IdentityCenterApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityCenterApplicationName, Type: smithy.ShapeTypeString})
+var sIdentityCenterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityCenterConfiguration, Members: &mIdentityCenterConfiguration, Type: smithy.ShapeTypeStructure})
+var sIdentityProviderAuthenticationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdentityProviderAuthenticationMode, Members: &mIdentityProviderAuthenticationMode, Type: smithy.ShapeTypeEnum})
+var s_IdentityProviderIdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderIdentityStoreId, Type: smithy.ShapeTypeString})
+var s_IdentityProviderUserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderUserId, Type: smithy.ShapeTypeString})
+var s_IdentityProviderUserIdForUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderUserIdForUpdate, Type: smithy.ShapeTypeString})
+var s_IdentityProviderUserIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdentityProviderUserIdPrefix, Type: smithy.ShapeTypeString})
+var sImpersonationMatchedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpersonationMatchedRule, Members: &mImpersonationMatchedRule, Type: smithy.ShapeTypeStructure})
+var s_ImpersonationMatchedRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationMatchedRuleList, Members: &m_ImpersonationMatchedRuleList, Type: smithy.ShapeTypeList})
+var sImpersonationRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpersonationRole, Members: &mImpersonationRole, Type: smithy.ShapeTypeStructure})
+var s_ImpersonationRoleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRoleDescription, Type: smithy.ShapeTypeString})
+var s_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var s_ImpersonationRoleIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRoleIdList, Members: &m_ImpersonationRoleIdList, Type: smithy.ShapeTypeList})
+var s_ImpersonationRoleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRoleList, Members: &m_ImpersonationRoleList, Type: smithy.ShapeTypeList})
+var s_ImpersonationRoleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRoleName, Type: smithy.ShapeTypeString})
+var sImpersonationRoleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpersonationRoleType, Members: &mImpersonationRoleType, Type: smithy.ShapeTypeEnum})
+var sImpersonationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImpersonationRule, Members: &mImpersonationRule, Type: smithy.ShapeTypeStructure})
+var s_ImpersonationRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRuleDescription, Type: smithy.ShapeTypeString})
+var s_ImpersonationRuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRuleId, Type: smithy.ShapeTypeString})
+var s_ImpersonationRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRuleList, Members: &m_ImpersonationRuleList, Type: smithy.ShapeTypeList})
+var s_ImpersonationRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationRuleName, Type: smithy.ShapeTypeString})
+var s_ImpersonationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImpersonationToken, Type: smithy.ShapeTypeString})
+var s_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceArn, Type: smithy.ShapeTypeString})
+var sInvalidConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidConfigurationException, Members: &mInvalidConfigurationException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidCustomSesConfigurationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCustomSesConfigurationException, Members: &mInvalidCustomSesConfigurationException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterException, Members: &mInvalidParameterException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidPasswordException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPasswordException, Members: &mInvalidPasswordException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var s_IpRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpRange, Type: smithy.ShapeTypeString})
+var s_IpRangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpRangeList, Members: &m_IpRangeList, Type: smithy.ShapeTypeList})
+var s_Jobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Jobs, Members: &m_Jobs, Type: smithy.ShapeTypeList})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var s_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaArn, Type: smithy.ShapeTypeString})
+var sLambdaAvailabilityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaAvailabilityProvider, Members: &mLambdaAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sListGroupsFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsFilters, Members: &mListGroupsFilters, Type: smithy.ShapeTypeStructure})
+var sListGroupsForEntityFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForEntityFilters, Members: &mListGroupsForEntityFilters, Type: smithy.ShapeTypeStructure})
+var sListResourcesFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesFilters, Members: &mListResourcesFilters, Type: smithy.ShapeTypeStructure})
+var sListUsersFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersFilters, Members: &mListUsersFilters, Type: smithy.ShapeTypeStructure})
+var s_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogGroupArn, Type: smithy.ShapeTypeString})
+var s_MailboxExportErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailboxExportErrorInfo, Type: smithy.ShapeTypeString})
+var sMailboxExportJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailboxExportJob, Members: &mMailboxExportJob, Type: smithy.ShapeTypeStructure})
+var s_MailboxExportJobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailboxExportJobId, Type: smithy.ShapeTypeString})
+var sMailboxExportJobState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailboxExportJobState, Members: &mMailboxExportJobState, Type: smithy.ShapeTypeEnum})
+var s_MailboxQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailboxQuota, Type: smithy.ShapeTypeInteger})
+var s_MailboxSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailboxSize, Type: smithy.ShapeTypeDouble})
+var sMailDomainInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailDomainInUseException, Members: &mMailDomainInUseException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sMailDomainNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailDomainNotFoundException, Members: &mMailDomainNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_MailDomains = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MailDomains, Members: &m_MailDomains, Type: smithy.ShapeTypeList})
+var sMailDomainStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailDomainStateException, Members: &mMailDomainStateException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sMailDomainSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMailDomainSummary, Members: &mMailDomainSummary, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sMember = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure})
+var s_Members = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Members, Members: &m_Members, Type: smithy.ShapeTypeList})
+var sMemberType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum})
+var sMobileDeviceAccessMatchedRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMobileDeviceAccessMatchedRule, Members: &mMobileDeviceAccessMatchedRule, Type: smithy.ShapeTypeStructure})
+var s_MobileDeviceAccessMatchedRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MobileDeviceAccessMatchedRuleList, Members: &m_MobileDeviceAccessMatchedRuleList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMobileDeviceAccessOverride, Members: &mMobileDeviceAccessOverride, Type: smithy.ShapeTypeStructure})
+var s_MobileDeviceAccessOverridesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MobileDeviceAccessOverridesList, Members: &m_MobileDeviceAccessOverridesList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMobileDeviceAccessRule, Members: &mMobileDeviceAccessRule, Type: smithy.ShapeTypeStructure})
+var s_MobileDeviceAccessRuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MobileDeviceAccessRuleDescription, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessRuleEffect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var s_MobileDeviceAccessRuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MobileDeviceAccessRuleId, Type: smithy.ShapeTypeString})
+var s_MobileDeviceAccessRuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MobileDeviceAccessRuleName, Type: smithy.ShapeTypeString})
+var s_MobileDeviceAccessRulesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MobileDeviceAccessRulesList, Members: &m_MobileDeviceAccessRulesList, Type: smithy.ShapeTypeList})
+var sNameAvailabilityException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNameAvailabilityException, Members: &mNameAvailabilityException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_NewResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NewResourceDescription, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var s_OrganizationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationName, Type: smithy.ShapeTypeString})
+var sOrganizationNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationNotFoundException, Members: &mOrganizationNotFoundException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sOrganizationStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationStateException, Members: &mOrganizationStateException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_OrganizationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationSummaries, Members: &m_OrganizationSummaries, Type: smithy.ShapeTypeList})
+var sOrganizationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationSummary, Members: &mOrganizationSummary, Type: smithy.ShapeTypeStructure})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_Percentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Percentage, Type: smithy.ShapeTypeInteger})
+var sPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermission, Members: &mPermission, Type: smithy.ShapeTypeStructure})
+var s_Permissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Permissions, Members: &m_Permissions, Type: smithy.ShapeTypeList})
+var sPermissionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPermissionType, Members: &mPermissionType, Type: smithy.ShapeTypeEnum})
+var s_PermissionValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PermissionValues, Members: &m_PermissionValues, Type: smithy.ShapeTypeList})
+var sPersonalAccessTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPersonalAccessTokenConfiguration, Members: &mPersonalAccessTokenConfiguration, Type: smithy.ShapeTypeStructure})
+var sPersonalAccessTokenConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPersonalAccessTokenConfigurationStatus, Members: &mPersonalAccessTokenConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var s_PersonalAccessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PersonalAccessTokenId, Type: smithy.ShapeTypeString})
+var s_PersonalAccessTokenLifetimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PersonalAccessTokenLifetimeInDays, Type: smithy.ShapeTypeInteger})
+var s_PersonalAccessTokenName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PersonalAccessTokenName, Type: smithy.ShapeTypeString})
+var s_PersonalAccessTokenScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PersonalAccessTokenScope, Type: smithy.ShapeTypeString})
+var s_PersonalAccessTokenScopeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PersonalAccessTokenScopeList, Members: &m_PersonalAccessTokenScopeList, Type: smithy.ShapeTypeList})
+var sPersonalAccessTokenSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPersonalAccessTokenSummary, Members: &mPersonalAccessTokenSummary, Type: smithy.ShapeTypeStructure})
+var s_PersonalAccessTokenSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PersonalAccessTokenSummaryList, Members: &m_PersonalAccessTokenSummaryList, Type: smithy.ShapeTypeList})
+var s_PolicyDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDescription, Traits: &t2, Type: smithy.ShapeTypeString})
+var sRedactedEwsAvailabilityProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedactedEwsAvailabilityProvider, Members: &mRedactedEwsAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sReservedNameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReservedNameException, Members: &mReservedNameException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var s_ResourceDelegates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDelegates, Members: &m_ResourceDelegates, Type: smithy.ShapeTypeList})
+var s_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescription, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_Resources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sRetentionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionAction, Members: &mRetentionAction, Type: smithy.ShapeTypeEnum})
+var s_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var s_S3ObjectKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString})
+var s_ShortString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShortString, Type: smithy.ShapeTypeString})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetUsers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetUsers, Members: &m_TargetUsers, Type: smithy.ShapeTypeList})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sUnsupportedOperationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperationException, Members: &mUnsupportedOperationException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Url, Type: smithy.ShapeTypeString})
+var sUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var s_UserAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserAttribute, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_UserIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var s_UserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sUserRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserRole, Members: &mUserRole, Type: smithy.ShapeTypeEnum})
+var s_Users = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList})
+var s_WorkMailDomainName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkMailDomainName, Type: smithy.ShapeTypeString})
+var s_WorkMailIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sAssociateDelegateToResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegateToResourceRequest, Members: &mAssociateDelegateToResourceRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateDelegateToResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDelegateToResourceResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateMemberToGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMemberToGroupRequest, Members: &mAssociateMemberToGroupRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateMemberToGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMemberToGroupResponse, Type: smithy.ShapeTypeStructure})
+var sAssumeImpersonationRoleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeImpersonationRoleRequest, Members: &mAssumeImpersonationRoleRequest, Type: smithy.ShapeTypeStructure})
+var sAssumeImpersonationRoleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssumeImpersonationRoleResponse, Members: &mAssumeImpersonationRoleResponse, Type: smithy.ShapeTypeStructure})
+var sCancelMailboxExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelMailboxExportJobRequest, Members: &mCancelMailboxExportJobRequest, Type: smithy.ShapeTypeStructure})
+var sCancelMailboxExportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelMailboxExportJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasRequest, Members: &mCreateAliasRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAliasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAliasResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAvailabilityConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAvailabilityConfigurationRequest, Members: &mCreateAvailabilityConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAvailabilityConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAvailabilityConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupRequest, Members: &mCreateGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateGroupResponse, Members: &mCreateGroupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateIdentityCenterApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentityCenterApplicationRequest, Members: &mCreateIdentityCenterApplicationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateIdentityCenterApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIdentityCenterApplicationResponse, Members: &mCreateIdentityCenterApplicationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateImpersonationRoleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImpersonationRoleRequest, Members: &mCreateImpersonationRoleRequest, Type: smithy.ShapeTypeStructure})
+var sCreateImpersonationRoleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateImpersonationRoleResponse, Members: &mCreateImpersonationRoleResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMobileDeviceAccessRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMobileDeviceAccessRuleRequest, Members: &mCreateMobileDeviceAccessRuleRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMobileDeviceAccessRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMobileDeviceAccessRuleResponse, Members: &mCreateMobileDeviceAccessRuleResponse, Type: smithy.ShapeTypeStructure})
+var sCreateOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOrganizationRequest, Members: &mCreateOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOrganizationResponse, Members: &mCreateOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceRequest, Members: &mCreateResourceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceResponse, Members: &mCreateResourceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserRequest, Members: &mCreateUserRequest, Type: smithy.ShapeTypeStructure})
+var sCreateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateUserResponse, Members: &mCreateUserResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAccessControlRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessControlRuleRequest, Members: &mDeleteAccessControlRuleRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAccessControlRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAccessControlRuleResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAliasRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAliasRequest, Members: &mDeleteAliasRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAliasResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAliasResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAvailabilityConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAvailabilityConfigurationRequest, Members: &mDeleteAvailabilityConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAvailabilityConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAvailabilityConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEmailMonitoringConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailMonitoringConfigurationRequest, Members: &mDeleteEmailMonitoringConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteEmailMonitoringConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEmailMonitoringConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupRequest, Members: &mDeleteGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteIdentityCenterApplicationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityCenterApplicationRequest, Members: &mDeleteIdentityCenterApplicationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIdentityCenterApplicationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityCenterApplicationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteIdentityProviderConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityProviderConfigurationRequest, Members: &mDeleteIdentityProviderConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteIdentityProviderConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIdentityProviderConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteImpersonationRoleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImpersonationRoleRequest, Members: &mDeleteImpersonationRoleRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteImpersonationRoleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteImpersonationRoleResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteMailboxPermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMailboxPermissionsRequest, Members: &mDeleteMailboxPermissionsRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMailboxPermissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMailboxPermissionsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteMobileDeviceAccessOverrideRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMobileDeviceAccessOverrideRequest, Members: &mDeleteMobileDeviceAccessOverrideRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMobileDeviceAccessOverrideResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMobileDeviceAccessOverrideResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteMobileDeviceAccessRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMobileDeviceAccessRuleRequest, Members: &mDeleteMobileDeviceAccessRuleRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMobileDeviceAccessRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMobileDeviceAccessRuleResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOrganizationRequest, Members: &mDeleteOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOrganizationResponse, Members: &mDeleteOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDeletePersonalAccessTokenRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePersonalAccessTokenRequest, Members: &mDeletePersonalAccessTokenRequest, Type: smithy.ShapeTypeStructure})
+var sDeletePersonalAccessTokenResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeletePersonalAccessTokenResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceRequest, Members: &mDeleteResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteRetentionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRetentionPolicyRequest, Members: &mDeleteRetentionPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteRetentionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRetentionPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserRequest, Members: &mDeleteUserRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteUserResponse, Type: smithy.ShapeTypeStructure})
+var sDeregisterFromWorkMailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterFromWorkMailRequest, Members: &mDeregisterFromWorkMailRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterFromWorkMailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterFromWorkMailResponse, Type: smithy.ShapeTypeStructure})
+var sDeregisterMailDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterMailDomainRequest, Members: &mDeregisterMailDomainRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterMailDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterMailDomainResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEmailMonitoringConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEmailMonitoringConfigurationRequest, Members: &mDescribeEmailMonitoringConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEmailMonitoringConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEmailMonitoringConfigurationResponse, Members: &mDescribeEmailMonitoringConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityRequest, Members: &mDescribeEntityRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityResponse, Members: &mDescribeEntityResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupRequest, Members: &mDescribeGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeGroupResponse, Members: &mDescribeGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeIdentityProviderConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityProviderConfigurationRequest, Members: &mDescribeIdentityProviderConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeIdentityProviderConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeIdentityProviderConfigurationResponse, Members: &mDescribeIdentityProviderConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeInboundDmarcSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInboundDmarcSettingsRequest, Members: &mDescribeInboundDmarcSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeInboundDmarcSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInboundDmarcSettingsResponse, Members: &mDescribeInboundDmarcSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeMailboxExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMailboxExportJobRequest, Members: &mDescribeMailboxExportJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeMailboxExportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMailboxExportJobResponse, Members: &mDescribeMailboxExportJobResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeOrganizationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrganizationRequest, Members: &mDescribeOrganizationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeOrganizationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeOrganizationResponse, Members: &mDescribeOrganizationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourceRequest, Members: &mDescribeResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeResourceResponse, Members: &mDescribeResourceResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserRequest, Members: &mDescribeUserRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeUserResponse, Members: &mDescribeUserResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateDelegateFromResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegateFromResourceRequest, Members: &mDisassociateDelegateFromResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateDelegateFromResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDelegateFromResourceResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateMemberFromGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMemberFromGroupRequest, Members: &mDisassociateMemberFromGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateMemberFromGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMemberFromGroupResponse, Type: smithy.ShapeTypeStructure})
+var sGetAccessControlEffectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessControlEffectRequest, Members: &mGetAccessControlEffectRequest, Type: smithy.ShapeTypeStructure})
+var sGetAccessControlEffectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccessControlEffectResponse, Members: &mGetAccessControlEffectResponse, Type: smithy.ShapeTypeStructure})
+var sGetDefaultRetentionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultRetentionPolicyRequest, Members: &mGetDefaultRetentionPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetDefaultRetentionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultRetentionPolicyResponse, Members: &mGetDefaultRetentionPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetImpersonationRoleEffectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImpersonationRoleEffectRequest, Members: &mGetImpersonationRoleEffectRequest, Type: smithy.ShapeTypeStructure})
+var sGetImpersonationRoleEffectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImpersonationRoleEffectResponse, Members: &mGetImpersonationRoleEffectResponse, Type: smithy.ShapeTypeStructure})
+var sGetImpersonationRoleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImpersonationRoleRequest, Members: &mGetImpersonationRoleRequest, Type: smithy.ShapeTypeStructure})
+var sGetImpersonationRoleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImpersonationRoleResponse, Members: &mGetImpersonationRoleResponse, Type: smithy.ShapeTypeStructure})
+var sGetMailboxDetailsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMailboxDetailsRequest, Members: &mGetMailboxDetailsRequest, Type: smithy.ShapeTypeStructure})
+var sGetMailboxDetailsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMailboxDetailsResponse, Members: &mGetMailboxDetailsResponse, Type: smithy.ShapeTypeStructure})
+var sGetMailDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMailDomainRequest, Members: &mGetMailDomainRequest, Type: smithy.ShapeTypeStructure})
+var sGetMailDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMailDomainResponse, Members: &mGetMailDomainResponse, Type: smithy.ShapeTypeStructure})
+var sGetMobileDeviceAccessEffectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMobileDeviceAccessEffectRequest, Members: &mGetMobileDeviceAccessEffectRequest, Type: smithy.ShapeTypeStructure})
+var sGetMobileDeviceAccessEffectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMobileDeviceAccessEffectResponse, Members: &mGetMobileDeviceAccessEffectResponse, Type: smithy.ShapeTypeStructure})
+var sGetMobileDeviceAccessOverrideRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMobileDeviceAccessOverrideRequest, Members: &mGetMobileDeviceAccessOverrideRequest, Type: smithy.ShapeTypeStructure})
+var sGetMobileDeviceAccessOverrideResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMobileDeviceAccessOverrideResponse, Members: &mGetMobileDeviceAccessOverrideResponse, Type: smithy.ShapeTypeStructure})
+var sGetPersonalAccessTokenMetadataRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPersonalAccessTokenMetadataRequest, Members: &mGetPersonalAccessTokenMetadataRequest, Type: smithy.ShapeTypeStructure})
+var sGetPersonalAccessTokenMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPersonalAccessTokenMetadataResponse, Members: &mGetPersonalAccessTokenMetadataResponse, Type: smithy.ShapeTypeStructure})
+var sListAccessControlRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessControlRulesRequest, Members: &mListAccessControlRulesRequest, Type: smithy.ShapeTypeStructure})
+var sListAccessControlRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccessControlRulesResponse, Members: &mListAccessControlRulesResponse, Type: smithy.ShapeTypeStructure})
+var sListAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesRequest, Members: &mListAliasesRequest, Type: smithy.ShapeTypeStructure})
+var sListAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAliasesResponse, Members: &mListAliasesResponse, Type: smithy.ShapeTypeStructure})
+var sListAvailabilityConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailabilityConfigurationsRequest, Members: &mListAvailabilityConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sListAvailabilityConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAvailabilityConfigurationsResponse, Members: &mListAvailabilityConfigurationsResponse, Type: smithy.ShapeTypeStructure})
+var sListGroupMembersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembersRequest, Members: &mListGroupMembersRequest, Type: smithy.ShapeTypeStructure})
+var sListGroupMembersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupMembersResponse, Members: &mListGroupMembersResponse, Type: smithy.ShapeTypeStructure})
+var sListGroupsForEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForEntityRequest, Members: &mListGroupsForEntityRequest, Type: smithy.ShapeTypeStructure})
+var sListGroupsForEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsForEntityResponse, Members: &mListGroupsForEntityResponse, Type: smithy.ShapeTypeStructure})
+var sListGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsRequest, Members: &mListGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListGroupsResponse, Members: &mListGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListImpersonationRolesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImpersonationRolesRequest, Members: &mListImpersonationRolesRequest, Type: smithy.ShapeTypeStructure})
+var sListImpersonationRolesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListImpersonationRolesResponse, Members: &mListImpersonationRolesResponse, Type: smithy.ShapeTypeStructure})
+var sListMailboxExportJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailboxExportJobsRequest, Members: &mListMailboxExportJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListMailboxExportJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailboxExportJobsResponse, Members: &mListMailboxExportJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListMailboxPermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailboxPermissionsRequest, Members: &mListMailboxPermissionsRequest, Type: smithy.ShapeTypeStructure})
+var sListMailboxPermissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailboxPermissionsResponse, Members: &mListMailboxPermissionsResponse, Type: smithy.ShapeTypeStructure})
+var sListMailDomainsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailDomainsRequest, Members: &mListMailDomainsRequest, Type: smithy.ShapeTypeStructure})
+var sListMailDomainsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMailDomainsResponse, Members: &mListMailDomainsResponse, Type: smithy.ShapeTypeStructure})
+var sListMobileDeviceAccessOverridesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMobileDeviceAccessOverridesRequest, Members: &mListMobileDeviceAccessOverridesRequest, Type: smithy.ShapeTypeStructure})
+var sListMobileDeviceAccessOverridesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMobileDeviceAccessOverridesResponse, Members: &mListMobileDeviceAccessOverridesResponse, Type: smithy.ShapeTypeStructure})
+var sListMobileDeviceAccessRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMobileDeviceAccessRulesRequest, Members: &mListMobileDeviceAccessRulesRequest, Type: smithy.ShapeTypeStructure})
+var sListMobileDeviceAccessRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMobileDeviceAccessRulesResponse, Members: &mListMobileDeviceAccessRulesResponse, Type: smithy.ShapeTypeStructure})
+var sListOrganizationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationsRequest, Members: &mListOrganizationsRequest, Type: smithy.ShapeTypeStructure})
+var sListOrganizationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOrganizationsResponse, Members: &mListOrganizationsResponse, Type: smithy.ShapeTypeStructure})
+var sListPersonalAccessTokensRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPersonalAccessTokensRequest, Members: &mListPersonalAccessTokensRequest, Type: smithy.ShapeTypeStructure})
+var sListPersonalAccessTokensResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPersonalAccessTokensResponse, Members: &mListPersonalAccessTokensResponse, Type: smithy.ShapeTypeStructure})
+var sListResourceDelegatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceDelegatesRequest, Members: &mListResourceDelegatesRequest, Type: smithy.ShapeTypeStructure})
+var sListResourceDelegatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourceDelegatesResponse, Members: &mListResourceDelegatesResponse, Type: smithy.ShapeTypeStructure})
+var sListResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesRequest, Members: &mListResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesResponse, Members: &mListResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListUsersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersRequest, Members: &mListUsersRequest, Type: smithy.ShapeTypeStructure})
+var sListUsersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListUsersResponse, Members: &mListUsersResponse, Type: smithy.ShapeTypeStructure})
+var sPutAccessControlRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccessControlRuleRequest, Members: &mPutAccessControlRuleRequest, Type: smithy.ShapeTypeStructure})
+var sPutAccessControlRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutAccessControlRuleResponse, Type: smithy.ShapeTypeStructure})
+var sPutEmailMonitoringConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailMonitoringConfigurationRequest, Members: &mPutEmailMonitoringConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sPutEmailMonitoringConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEmailMonitoringConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sPutIdentityProviderConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutIdentityProviderConfigurationRequest, Members: &mPutIdentityProviderConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sPutIdentityProviderConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutIdentityProviderConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sPutInboundDmarcSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInboundDmarcSettingsRequest, Members: &mPutInboundDmarcSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sPutInboundDmarcSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutInboundDmarcSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sPutMailboxPermissionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMailboxPermissionsRequest, Members: &mPutMailboxPermissionsRequest, Type: smithy.ShapeTypeStructure})
+var sPutMailboxPermissionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMailboxPermissionsResponse, Type: smithy.ShapeTypeStructure})
+var sPutMobileDeviceAccessOverrideRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMobileDeviceAccessOverrideRequest, Members: &mPutMobileDeviceAccessOverrideRequest, Type: smithy.ShapeTypeStructure})
+var sPutMobileDeviceAccessOverrideResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutMobileDeviceAccessOverrideResponse, Type: smithy.ShapeTypeStructure})
+var sPutRetentionPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRetentionPolicyRequest, Members: &mPutRetentionPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutRetentionPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRetentionPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterMailDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterMailDomainRequest, Members: &mRegisterMailDomainRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterMailDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterMailDomainResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterToWorkMailRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterToWorkMailRequest, Members: &mRegisterToWorkMailRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterToWorkMailResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterToWorkMailResponse, Type: smithy.ShapeTypeStructure})
+var sResetPasswordRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetPasswordRequest, Members: &mResetPasswordRequest, Type: smithy.ShapeTypeStructure})
+var sResetPasswordResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetPasswordResponse, Type: smithy.ShapeTypeStructure})
+var sStartMailboxExportJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMailboxExportJobRequest, Members: &mStartMailboxExportJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartMailboxExportJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMailboxExportJobResponse, Members: &mStartMailboxExportJobResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTestAvailabilityConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestAvailabilityConfigurationRequest, Members: &mTestAvailabilityConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sTestAvailabilityConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTestAvailabilityConfigurationResponse, Members: &mTestAvailabilityConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAvailabilityConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityConfigurationRequest, Members: &mUpdateAvailabilityConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAvailabilityConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAvailabilityConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDefaultMailDomainRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultMailDomainRequest, Members: &mUpdateDefaultMailDomainRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDefaultMailDomainResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDefaultMailDomainResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupRequest, Members: &mUpdateGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateGroupResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateImpersonationRoleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImpersonationRoleRequest, Members: &mUpdateImpersonationRoleRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateImpersonationRoleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateImpersonationRoleResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateMailboxQuotaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMailboxQuotaRequest, Members: &mUpdateMailboxQuotaRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateMailboxQuotaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMailboxQuotaResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateMobileDeviceAccessRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMobileDeviceAccessRuleRequest, Members: &mUpdateMobileDeviceAccessRuleRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateMobileDeviceAccessRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMobileDeviceAccessRuleResponse, Type: smithy.ShapeTypeStructure})
+var sUpdatePrimaryEmailAddressRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrimaryEmailAddressRequest, Members: &mUpdatePrimaryEmailAddressRequest, Type: smithy.ShapeTypeStructure})
+var sUpdatePrimaryEmailAddressResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePrimaryEmailAddressResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceRequest, Members: &mUpdateResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateUserRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserRequest, Members: &mUpdateUserRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateUserResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateUserResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessControlRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AccessControlRuleName, Type: smithy.ShapeTypeString})
+var sAccessControlRule_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iAccessControlRuleEffect, Members: &mAccessControlRuleEffect, Type: smithy.ShapeTypeEnum})
+var sAccessControlRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AccessControlRuleDescription, Type: smithy.ShapeTypeString})
+var sAccessControlRule_IpRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpRanges", ID: &i_IpRangeList, Members: &m_IpRangeList, Type: smithy.ShapeTypeList})
+var sAccessControlRule_NotIpRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotIpRanges", ID: &i_IpRangeList, Members: &m_IpRangeList, Type: smithy.ShapeTypeList})
+var sAccessControlRule_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList})
+var sAccessControlRule_NotActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotActions", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList})
+var sAccessControlRule_UserIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserIds", ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var sAccessControlRule_NotUserIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotUserIds", ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var sAccessControlRule_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAccessControlRule_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAccessControlRule_ImpersonationRoleIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleIds", ID: &i_ImpersonationRoleIdList, Members: &m_ImpersonationRoleIdList, Type: smithy.ShapeTypeList})
+var sAccessControlRule_NotImpersonationRoleIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotImpersonationRoleIds", ID: &i_ImpersonationRoleIdList, Members: &m_ImpersonationRoleIdList, Type: smithy.ShapeTypeList})
+var sAccessControlRuleEffect_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessControlRuleEffect_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AccessControlRuleNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccessControlRuleName, Type: smithy.ShapeTypeString})
+var s_AccessControlRulesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccessControlRule, Members: &mAccessControlRule, Type: smithy.ShapeTypeStructure})
+var sAccessEffect_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAccessEffect_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ActionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccessControlRuleAction, Type: smithy.ShapeTypeString})
+var s_Aliases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sAvailabilityConfiguration_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sAvailabilityConfiguration_ProviderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProviderType", ID: &iAvailabilityProviderType, Members: &mAvailabilityProviderType, Type: smithy.ShapeTypeEnum})
+var sAvailabilityConfiguration_EwsProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsProvider", ID: &iRedactedEwsAvailabilityProvider, Members: &mRedactedEwsAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sAvailabilityConfiguration_LambdaProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaProvider", ID: &iLambdaAvailabilityProvider, Members: &mLambdaAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sAvailabilityConfiguration_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sAvailabilityConfiguration_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_AvailabilityConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailabilityConfiguration, Members: &mAvailabilityConfiguration, Type: smithy.ShapeTypeStructure})
+var sAvailabilityProviderType_EWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAvailabilityProviderType_LAMBDA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBookingOptions_AutoAcceptRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoAcceptRequests", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sBookingOptions_AutoDeclineRecurringRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeclineRecurringRequests", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sBookingOptions_AutoDeclineConflictingRequests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoDeclineConflictingRequests", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDelegate_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDelegate_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum})
+var s_DeviceModelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeviceModel, Type: smithy.ShapeTypeString})
+var s_DeviceOperatingSystemList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeviceOperatingSystem, Type: smithy.ShapeTypeString})
+var s_DeviceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeviceType, Type: smithy.ShapeTypeString})
+var s_DeviceUserAgentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeviceUserAgent, Type: smithy.ShapeTypeString})
+var sDirectoryInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDirectoryServiceAuthenticationFailedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDirectoryUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDnsRecord_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDnsRecord_Hostname = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Hostname", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDnsRecord_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_DnsRecords_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDnsRecord, Members: &mDnsRecord, Type: smithy.ShapeTypeStructure})
+var sDnsRecordVerificationStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDnsRecordVerificationStatus_VERIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VERIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDnsRecordVerificationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDomain_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDomain_HostedZoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HostedZoneId", ID: &i_HostedZoneId, Type: smithy.ShapeTypeString})
+var s_Domains_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDomain, Members: &mDomain, Type: smithy.ShapeTypeStructure})
+var sEmailAddressInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEntityAlreadyRegisteredException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEntityNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEntityState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityState_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEntityType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEwsAvailabilityProvider_EwsEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsEndpoint", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sEwsAvailabilityProvider_EwsUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsUsername", ID: &i_ExternalUserName, Type: smithy.ShapeTypeString})
+var sEwsAvailabilityProvider_EwsPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsPassword", ID: &i_Password, Traits: &t1, Type: smithy.ShapeTypeString})
+var sFolderConfiguration_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iFolderName, Members: &mFolderName, Type: smithy.ShapeTypeEnum})
+var sFolderConfiguration_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &iRetentionAction, Members: &mRetentionAction, Type: smithy.ShapeTypeEnum})
+var sFolderConfiguration_Period = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Period", ID: &i_RetentionPeriod, Type: smithy.ShapeTypeInteger})
+var s_FolderConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFolderConfiguration, Members: &mFolderConfiguration, Type: smithy.ShapeTypeStructure})
+var sFolderName_INBOX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INBOX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFolderName_DELETED_ITEMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED_ITEMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFolderName_SENT_ITEMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SENT_ITEMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFolderName_DRAFTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRAFTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFolderName_JUNK_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JUNK_EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGroup_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sGroup_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sGroup_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GroupName, Type: smithy.ShapeTypeString})
+var sGroup_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sGroup_EnabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGroup_DisabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGroupIdentifier_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sGroupIdentifier_GroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupName", ID: &i_GroupName, Type: smithy.ShapeTypeString})
+var s_GroupIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroupIdentifier, Members: &mGroupIdentifier, Type: smithy.ShapeTypeStructure})
+var s_Groups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGroup, Members: &mGroup, Type: smithy.ShapeTypeStructure})
+var sIdentityCenterConfiguration_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceArn", ID: &i_InstanceArn, Type: smithy.ShapeTypeString})
+var sIdentityCenterConfiguration_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sIdentityProviderAuthenticationMode_IDENTITY_PROVIDER_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTITY_PROVIDER_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIdentityProviderAuthenticationMode_IDENTITY_PROVIDER_AND_DIRECTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTITY_PROVIDER_AND_DIRECTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImpersonationMatchedRule_ImpersonationRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRuleId", ID: &i_ImpersonationRuleId, Type: smithy.ShapeTypeString})
+var sImpersonationMatchedRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ImpersonationRuleName, Type: smithy.ShapeTypeString})
+var s_ImpersonationMatchedRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImpersonationMatchedRule, Members: &mImpersonationMatchedRule, Type: smithy.ShapeTypeStructure})
+var sImpersonationRole_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sImpersonationRole_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ImpersonationRoleName, Type: smithy.ShapeTypeString})
+var sImpersonationRole_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iImpersonationRoleType, Members: &mImpersonationRoleType, Type: smithy.ShapeTypeEnum})
+var sImpersonationRole_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sImpersonationRole_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ImpersonationRoleIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var s_ImpersonationRoleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImpersonationRole, Members: &mImpersonationRole, Type: smithy.ShapeTypeStructure})
+var sImpersonationRoleType_FULL_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImpersonationRoleType_READ_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImpersonationRule_ImpersonationRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRuleId", ID: &i_ImpersonationRuleId, Type: smithy.ShapeTypeString})
+var sImpersonationRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ImpersonationRuleName, Type: smithy.ShapeTypeString})
+var sImpersonationRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ImpersonationRuleDescription, Type: smithy.ShapeTypeString})
+var sImpersonationRule_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iAccessEffect, Members: &mAccessEffect, Type: smithy.ShapeTypeEnum})
+var sImpersonationRule_TargetUsers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetUsers", ID: &i_TargetUsers, Members: &m_TargetUsers, Type: smithy.ShapeTypeList})
+var sImpersonationRule_NotTargetUsers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotTargetUsers", ID: &i_TargetUsers, Members: &m_TargetUsers, Type: smithy.ShapeTypeList})
+var s_ImpersonationRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImpersonationRule, Members: &mImpersonationRule, Type: smithy.ShapeTypeStructure})
+var sInvalidConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidCustomSesConfigurationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidParameterException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidPasswordException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_IpRangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpRange, Type: smithy.ShapeTypeString})
+var s_Jobs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMailboxExportJob, Members: &mMailboxExportJob, Type: smithy.ShapeTypeStructure})
+var sLambdaAvailabilityProvider_LambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaArn", ID: &i_LambdaArn, Type: smithy.ShapeTypeString})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListGroupsFilters_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListGroupsFilters_PrimaryEmailPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmailPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListGroupsFilters_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sListGroupsForEntityFilters_GroupNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupNamePrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListResourcesFilters_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListResourcesFilters_PrimaryEmailPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmailPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListResourcesFilters_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sListUsersFilters_UsernamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsernamePrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListUsersFilters_DisplayNamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayNamePrefix", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sListUsersFilters_PrimaryEmailPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrimaryEmailPrefix", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListUsersFilters_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sListUsersFilters_IdentityProviderUserIdPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderUserIdPrefix", ID: &i_IdentityProviderUserIdPrefix, Type: smithy.ShapeTypeString})
+var sMailboxExportJob_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_MailboxExportJobId, Type: smithy.ShapeTypeString})
+var sMailboxExportJob_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sMailboxExportJob_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sMailboxExportJob_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var sMailboxExportJob_S3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Path", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString})
+var sMailboxExportJob_EstimatedProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedProgress", ID: &i_Percentage, Type: smithy.ShapeTypeInteger})
+var sMailboxExportJob_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iMailboxExportJobState, Members: &mMailboxExportJobState, Type: smithy.ShapeTypeEnum})
+var sMailboxExportJob_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMailboxExportJob_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMailboxExportJobState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMailboxExportJobState_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMailboxExportJobState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMailboxExportJobState_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMailDomainInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sMailDomainNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_MailDomains_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMailDomainSummary, Members: &mMailDomainSummary, Type: smithy.ShapeTypeStructure})
+var sMailDomainStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sMailDomainSummary_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sMailDomainSummary_DefaultDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultDomain", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sMember_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_String, Type: smithy.ShapeTypeString})
+var sMember_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sMember_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum})
+var sMember_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sMember_EnabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMember_DisabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_Members_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMember, Members: &mMember, Type: smithy.ShapeTypeStructure})
+var sMemberType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMemberType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceAccessRuleId", ID: &i_MobileDeviceAccessRuleId, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessMatchedRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MobileDeviceAccessRuleName, Type: smithy.ShapeTypeString})
+var s_MobileDeviceAccessMatchedRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMobileDeviceAccessMatchedRule, Members: &mMobileDeviceAccessMatchedRule, Type: smithy.ShapeTypeStructure})
+var sMobileDeviceAccessOverride_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessOverride_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessOverride_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var sMobileDeviceAccessOverride_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_MobileDeviceAccessRuleDescription, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessOverride_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMobileDeviceAccessOverride_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_MobileDeviceAccessOverridesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMobileDeviceAccessOverride, Members: &mMobileDeviceAccessOverride, Type: smithy.ShapeTypeStructure})
+var sMobileDeviceAccessRule_MobileDeviceAccessRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceAccessRuleId", ID: &i_MobileDeviceAccessRuleId, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessRule_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MobileDeviceAccessRuleName, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessRule_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_MobileDeviceAccessRuleDescription, Type: smithy.ShapeTypeString})
+var sMobileDeviceAccessRule_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var sMobileDeviceAccessRule_DeviceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceTypes", ID: &i_DeviceTypeList, Members: &m_DeviceTypeList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_NotDeviceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceTypes", ID: &i_DeviceTypeList, Members: &m_DeviceTypeList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_DeviceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceModels", ID: &i_DeviceModelList, Members: &m_DeviceModelList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_NotDeviceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceModels", ID: &i_DeviceModelList, Members: &m_DeviceModelList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_DeviceOperatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceOperatingSystems", ID: &i_DeviceOperatingSystemList, Members: &m_DeviceOperatingSystemList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_NotDeviceOperatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceOperatingSystems", ID: &i_DeviceOperatingSystemList, Members: &m_DeviceOperatingSystemList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_DeviceUserAgents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceUserAgents", ID: &i_DeviceUserAgentList, Members: &m_DeviceUserAgentList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_NotDeviceUserAgents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceUserAgents", ID: &i_DeviceUserAgentList, Members: &m_DeviceUserAgentList, Type: smithy.ShapeTypeList})
+var sMobileDeviceAccessRule_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMobileDeviceAccessRule_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sMobileDeviceAccessRuleEffect_ALLOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMobileDeviceAccessRuleEffect_DENY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DENY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MobileDeviceAccessRulesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMobileDeviceAccessRule, Members: &mMobileDeviceAccessRule, Type: smithy.ShapeTypeStructure})
+var sNameAvailabilityException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sOrganizationNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sOrganizationStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_OrganizationSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOrganizationSummary, Members: &mOrganizationSummary, Type: smithy.ShapeTypeStructure})
+var sOrganizationSummary_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sOrganizationSummary_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_OrganizationName, Type: smithy.ShapeTypeString})
+var sOrganizationSummary_DefaultMailDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultMailDomain", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sOrganizationSummary_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sOrganizationSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPermission_GranteeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sPermission_GranteeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeType", ID: &iMemberType, Members: &mMemberType, Type: smithy.ShapeTypeEnum})
+var sPermission_PermissionValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PermissionValues", ID: &i_PermissionValues, Members: &m_PermissionValues, Type: smithy.ShapeTypeList})
+var s_Permissions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermission, Members: &mPermission, Type: smithy.ShapeTypeStructure})
+var sPermissionType_FULL_ACCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_ACCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPermissionType_SEND_AS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND_AS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPermissionType_SEND_ON_BEHALF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEND_ON_BEHALF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PermissionValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPermissionType, Members: &mPermissionType, Type: smithy.ShapeTypeEnum})
+var sPersonalAccessTokenConfiguration_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iPersonalAccessTokenConfigurationStatus, Members: &mPersonalAccessTokenConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sPersonalAccessTokenConfiguration_LifetimeInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifetimeInDays", ID: &i_PersonalAccessTokenLifetimeInDays, Type: smithy.ShapeTypeInteger})
+var sPersonalAccessTokenConfigurationStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPersonalAccessTokenConfigurationStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PersonalAccessTokenScopeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PersonalAccessTokenScope, Type: smithy.ShapeTypeString})
+var sPersonalAccessTokenSummary_PersonalAccessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalAccessTokenId", ID: &i_PersonalAccessTokenId, Type: smithy.ShapeTypeString})
+var sPersonalAccessTokenSummary_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sPersonalAccessTokenSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PersonalAccessTokenName, Type: smithy.ShapeTypeString})
+var sPersonalAccessTokenSummary_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPersonalAccessTokenSummary_DateLastUsed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateLastUsed", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPersonalAccessTokenSummary_ExpiresTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPersonalAccessTokenSummary_Scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scopes", ID: &i_PersonalAccessTokenScopeList, Members: &m_PersonalAccessTokenScopeList, Type: smithy.ShapeTypeList})
+var s_PersonalAccessTokenSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPersonalAccessTokenSummary, Members: &mPersonalAccessTokenSummary, Type: smithy.ShapeTypeStructure})
+var sRedactedEwsAvailabilityProvider_EwsEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsEndpoint", ID: &i_Url, Type: smithy.ShapeTypeString})
+var sRedactedEwsAvailabilityProvider_EwsUsername = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsUsername", ID: &i_ExternalUserName, Type: smithy.ShapeTypeString})
+var sReservedNameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResource_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sResource_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sResource_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sResource_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sResource_EnabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sResource_DisabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sResource_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_ResourceDelegates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDelegate, Members: &mDelegate, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_Resources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sResourceType_ROOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_EQUIPMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQUIPMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionAction_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionAction_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionAction_PERMANENTLY_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERMANENTLY_DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TargetUsers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sTooManyTagsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUnsupportedOperationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUser_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sUser_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sUser_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sUser_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUser_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sUser_UserRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserRole", ID: &iUserRole, Members: &mUserRole, Type: smithy.ShapeTypeEnum})
+var sUser_EnabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUser_DisabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUser_IdentityProviderUserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderUserId", ID: &i_IdentityProviderUserId, Type: smithy.ShapeTypeString})
+var sUser_IdentityProviderIdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderIdentityStoreId", ID: &i_IdentityProviderIdentityStoreId, Type: smithy.ShapeTypeString})
+var s_UserIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sUserRole_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUserRole_RESOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUserRole_SYSTEM_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUserRole_REMOTE_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOTE_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Users_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUser, Members: &mUser, Type: smithy.ShapeTypeStructure})
+var sAssociateDelegateToResourceRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sAssociateDelegateToResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sAssociateDelegateToResourceRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sAssociateMemberToGroupRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sAssociateMemberToGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sAssociateMemberToGroupRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sAssumeImpersonationRoleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sAssumeImpersonationRoleRequest_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sAssumeImpersonationRoleResponse_Token = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Token", ID: &i_ImpersonationToken, Type: smithy.ShapeTypeString})
+var sAssumeImpersonationRoleResponse_ExpiresIn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresIn", ID: &i_ExpiresIn, Type: smithy.ShapeTypeLong})
+var sCancelMailboxExportJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sCancelMailboxExportJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_MailboxExportJobId, Type: smithy.ShapeTypeString})
+var sCancelMailboxExportJobRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateAliasRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateAliasRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sCreateAliasRequest_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sCreateAvailabilityConfigurationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sCreateAvailabilityConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateAvailabilityConfigurationRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sCreateAvailabilityConfigurationRequest_EwsProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsProvider", ID: &iEwsAvailabilityProvider, Members: &mEwsAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sCreateAvailabilityConfigurationRequest_LambdaProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaProvider", ID: &iLambdaAvailabilityProvider, Members: &mLambdaAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sCreateGroupRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateGroupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GroupName, Type: smithy.ShapeTypeString})
+var sCreateGroupRequest_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateGroupResponse_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sCreateIdentityCenterApplicationRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_IdentityCenterApplicationName, Type: smithy.ShapeTypeString})
+var sCreateIdentityCenterApplicationRequest_InstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceArn", ID: &i_InstanceArn, Type: smithy.ShapeTypeString})
+var sCreateIdentityCenterApplicationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sCreateIdentityCenterApplicationResponse_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sCreateImpersonationRoleRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sCreateImpersonationRoleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateImpersonationRoleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ImpersonationRoleName, Type: smithy.ShapeTypeString})
+var sCreateImpersonationRoleRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iImpersonationRoleType, Members: &mImpersonationRoleType, Type: smithy.ShapeTypeEnum})
+var sCreateImpersonationRoleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ImpersonationRoleDescription, Type: smithy.ShapeTypeString})
+var sCreateImpersonationRoleRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ImpersonationRuleList, Members: &m_ImpersonationRuleList, Type: smithy.ShapeTypeList})
+var sCreateImpersonationRoleResponse_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sCreateMobileDeviceAccessRuleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateMobileDeviceAccessRuleRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sCreateMobileDeviceAccessRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MobileDeviceAccessRuleName, Type: smithy.ShapeTypeString})
+var sCreateMobileDeviceAccessRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_MobileDeviceAccessRuleDescription, Type: smithy.ShapeTypeString})
+var sCreateMobileDeviceAccessRuleRequest_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var sCreateMobileDeviceAccessRuleRequest_DeviceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceTypes", ID: &i_DeviceTypeList, Members: &m_DeviceTypeList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleRequest_NotDeviceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceTypes", ID: &i_DeviceTypeList, Members: &m_DeviceTypeList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleRequest_DeviceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceModels", ID: &i_DeviceModelList, Members: &m_DeviceModelList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleRequest_NotDeviceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceModels", ID: &i_DeviceModelList, Members: &m_DeviceModelList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleRequest_DeviceOperatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceOperatingSystems", ID: &i_DeviceOperatingSystemList, Members: &m_DeviceOperatingSystemList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceOperatingSystems", ID: &i_DeviceOperatingSystemList, Members: &m_DeviceOperatingSystemList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleRequest_DeviceUserAgents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceUserAgents", ID: &i_DeviceUserAgentList, Members: &m_DeviceUserAgentList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleRequest_NotDeviceUserAgents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceUserAgents", ID: &i_DeviceUserAgentList, Members: &m_DeviceUserAgentList, Type: smithy.ShapeTypeList})
+var sCreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceAccessRuleId", ID: &i_MobileDeviceAccessRuleId, Type: smithy.ShapeTypeString})
+var sCreateOrganizationRequest_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateOrganizationRequest_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_OrganizationName, Type: smithy.ShapeTypeString})
+var sCreateOrganizationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sCreateOrganizationRequest_Domains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Domains", ID: &i_Domains, Members: &m_Domains, Type: smithy.ShapeTypeList})
+var sCreateOrganizationRequest_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sCreateOrganizationRequest_EnableInteroperability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableInteroperability", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateOrganizationResponse_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateResourceRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateResourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateResourceRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sCreateResourceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateResourceRequest_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateResourceResponse_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &iUserRole, Members: &mUserRole, Type: smithy.ShapeTypeEnum})
+var sCreateUserRequest_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateUserRequest_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCreateUserRequest_IdentityProviderUserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderUserId", ID: &i_IdentityProviderUserId, Type: smithy.ShapeTypeString})
+var sCreateUserResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteAccessControlRuleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteAccessControlRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AccessControlRuleName, Type: smithy.ShapeTypeString})
+var sDeleteAliasRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteAliasRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteAliasRequest_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sDeleteAvailabilityConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteAvailabilityConfigurationRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sDeleteEmailMonitoringConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteGroupRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteIdentityCenterApplicationRequest_ApplicationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ApplicationArn", ID: &i_ApplicationArn, Type: smithy.ShapeTypeString})
+var sDeleteIdentityProviderConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteImpersonationRoleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteImpersonationRoleRequest_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sDeleteMailboxPermissionsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteMailboxPermissionsRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteMailboxPermissionsRequest_GranteeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteMobileDeviceAccessOverrideRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteMobileDeviceAccessOverrideRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteMobileDeviceAccessOverrideRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sDeleteMobileDeviceAccessRuleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceAccessRuleId", ID: &i_MobileDeviceAccessRuleId, Type: smithy.ShapeTypeString})
+var sDeleteOrganizationRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sDeleteOrganizationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteOrganizationRequest_DeleteDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteDirectory", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteOrganizationRequest_ForceDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceDelete", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteOrganizationRequest_DeleteIdentityCenterApplication = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteIdentityCenterApplication", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteOrganizationResponse_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteOrganizationResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeletePersonalAccessTokenRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeletePersonalAccessTokenRequest_PersonalAccessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalAccessTokenId", ID: &i_PersonalAccessTokenId, Type: smithy.ShapeTypeString})
+var sDeleteResourceRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteRetentionPolicyRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteRetentionPolicyRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ShortString, Type: smithy.ShapeTypeString})
+var sDeleteUserRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeleteUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDeregisterFromWorkMailRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeregisterFromWorkMailRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDeregisterMailDomainRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDeregisterMailDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_WorkMailDomainName, Type: smithy.ShapeTypeString})
+var sDescribeEmailMonitoringConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeEmailMonitoringConfigurationResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sDescribeEmailMonitoringConfigurationResponse_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString})
+var sDescribeEntityRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeEntityRequest_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sDescribeGroupRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeGroupResponse_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeGroupResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_GroupName, Type: smithy.ShapeTypeString})
+var sDescribeGroupResponse_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sDescribeGroupResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sDescribeGroupResponse_EnabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeGroupResponse_DisabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeGroupResponse_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeIdentityProviderConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeIdentityProviderConfigurationResponse_AuthenticationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationMode", ID: &iIdentityProviderAuthenticationMode, Members: &mIdentityProviderAuthenticationMode, Type: smithy.ShapeTypeEnum})
+var sDescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterConfiguration", ID: &iIdentityCenterConfiguration, Members: &mIdentityCenterConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalAccessTokenConfiguration", ID: &iPersonalAccessTokenConfiguration, Members: &mPersonalAccessTokenConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeInboundDmarcSettingsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeInboundDmarcSettingsResponse_Enforced = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enforced", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeMailboxExportJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_MailboxExportJobId, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_S3Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Path", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_EstimatedProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EstimatedProgress", ID: &i_Percentage, Type: smithy.ShapeTypeInteger})
+var sDescribeMailboxExportJobResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iMailboxExportJobState, Members: &mMailboxExportJobState, Type: smithy.ShapeTypeEnum})
+var sDescribeMailboxExportJobResponse_ErrorInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorInfo", ID: &i_MailboxExportErrorInfo, Type: smithy.ShapeTypeString})
+var sDescribeMailboxExportJobResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeMailboxExportJobResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeOrganizationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_OrganizationName, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_DirectoryType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_DefaultMailDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultMailDomain", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_CompletedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeOrganizationResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_MigrationAdmin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MigrationAdmin", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeOrganizationResponse_InteroperabilityEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InteroperabilityEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeResourceRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeResourceResponse_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sDescribeResourceResponse_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sDescribeResourceResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDescribeResourceResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sDescribeResourceResponse_BookingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BookingOptions", ID: &iBookingOptions, Members: &mBookingOptions, Type: smithy.ShapeTypeStructure})
+var sDescribeResourceResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sDescribeResourceResponse_EnabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeResourceResponse_DisabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeResourceResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeResourceResponse_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeUserRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDescribeUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_UserName, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEntityState, Members: &mEntityState, Type: smithy.ShapeTypeEnum})
+var sDescribeUserResponse_UserRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserRole", ID: &iUserRole, Members: &mUserRole, Type: smithy.ShapeTypeEnum})
+var sDescribeUserResponse_EnabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeUserResponse_DisabledDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisabledDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeUserResponse_MailboxProvisionedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailboxProvisionedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeUserResponse_MailboxDeprovisionedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailboxDeprovisionedDate", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeUserResponse_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeUserResponse_Initials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Initials", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Telephone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Telephone", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_JobTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobTitle", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Company = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Company", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_ZipCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZipCode", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Department = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Department", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_Office = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Office", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_IdentityProviderUserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderUserId", ID: &i_IdentityProviderUserId, Type: smithy.ShapeTypeString})
+var sDescribeUserResponse_IdentityProviderIdentityStoreId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderIdentityStoreId", ID: &i_IdentityProviderIdentityStoreId, Type: smithy.ShapeTypeString})
+var sDisassociateDelegateFromResourceRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDisassociateDelegateFromResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDisassociateDelegateFromResourceRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDisassociateMemberFromGroupRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sDisassociateMemberFromGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sDisassociateMemberFromGroupRequest_MemberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MemberId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sGetAccessControlEffectRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetAccessControlEffectRequest_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sGetAccessControlEffectRequest_Action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Action", ID: &i_AccessControlRuleAction, Type: smithy.ShapeTypeString})
+var sGetAccessControlEffectRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sGetAccessControlEffectRequest_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sGetAccessControlEffectResponse_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iAccessControlRuleEffect, Members: &mAccessControlRuleEffect, Type: smithy.ShapeTypeEnum})
+var sGetAccessControlEffectResponse_MatchedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchedRules", ID: &i_AccessControlRuleNameList, Members: &m_AccessControlRuleNameList, Type: smithy.ShapeTypeList})
+var sGetDefaultRetentionPolicyRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetDefaultRetentionPolicyResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ShortString, Type: smithy.ShapeTypeString})
+var sGetDefaultRetentionPolicyResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ShortString, Type: smithy.ShapeTypeString})
+var sGetDefaultRetentionPolicyResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetDefaultRetentionPolicyResponse_FolderConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FolderConfigurations", ID: &i_FolderConfigurations, Members: &m_FolderConfigurations, Type: smithy.ShapeTypeList})
+var sGetImpersonationRoleEffectRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleEffectRequest_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleEffectRequest_TargetUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetUser", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleEffectResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iImpersonationRoleType, Members: &mImpersonationRoleType, Type: smithy.ShapeTypeEnum})
+var sGetImpersonationRoleEffectResponse_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iAccessEffect, Members: &mAccessEffect, Type: smithy.ShapeTypeEnum})
+var sGetImpersonationRoleEffectResponse_MatchedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchedRules", ID: &i_ImpersonationMatchedRuleList, Members: &m_ImpersonationMatchedRuleList, Type: smithy.ShapeTypeList})
+var sGetImpersonationRoleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleRequest_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleResponse_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ImpersonationRoleName, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iImpersonationRoleType, Members: &mImpersonationRoleType, Type: smithy.ShapeTypeEnum})
+var sGetImpersonationRoleResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ImpersonationRoleDescription, Type: smithy.ShapeTypeString})
+var sGetImpersonationRoleResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ImpersonationRuleList, Members: &m_ImpersonationRuleList, Type: smithy.ShapeTypeList})
+var sGetImpersonationRoleResponse_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetImpersonationRoleResponse_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetMailboxDetailsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetMailboxDetailsRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sGetMailboxDetailsResponse_MailboxQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailboxQuota", ID: &i_MailboxQuota, Type: smithy.ShapeTypeInteger})
+var sGetMailboxDetailsResponse_MailboxSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailboxSize", ID: &i_MailboxSize, Type: smithy.ShapeTypeDouble})
+var sGetMailDomainRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetMailDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_WorkMailDomainName, Type: smithy.ShapeTypeString})
+var sGetMailDomainResponse_Records = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Records", ID: &i_DnsRecords, Members: &m_DnsRecords, Type: smithy.ShapeTypeList})
+var sGetMailDomainResponse_IsTestDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsTestDomain", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetMailDomainResponse_IsDefault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsDefault", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sGetMailDomainResponse_OwnershipVerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnershipVerificationStatus", ID: &iDnsRecordVerificationStatus, Members: &mDnsRecordVerificationStatus, Type: smithy.ShapeTypeEnum})
+var sGetMailDomainResponse_DkimVerificationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DkimVerificationStatus", ID: &iDnsRecordVerificationStatus, Members: &mDnsRecordVerificationStatus, Type: smithy.ShapeTypeEnum})
+var sGetMobileDeviceAccessEffectRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessEffectRequest_DeviceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceType", ID: &i_DeviceType, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessEffectRequest_DeviceModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceModel", ID: &i_DeviceModel, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessEffectRequest_DeviceOperatingSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceOperatingSystem", ID: &i_DeviceOperatingSystem, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessEffectRequest_DeviceUserAgent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceUserAgent", ID: &i_DeviceUserAgent, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessEffectResponse_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var sGetMobileDeviceAccessEffectResponse_MatchedRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MatchedRules", ID: &i_MobileDeviceAccessMatchedRuleList, Members: &m_MobileDeviceAccessMatchedRuleList, Type: smithy.ShapeTypeList})
+var sGetMobileDeviceAccessOverrideRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessOverrideRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessOverrideRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessOverrideResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessOverrideResponse_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessOverrideResponse_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var sGetMobileDeviceAccessOverrideResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_MobileDeviceAccessRuleDescription, Type: smithy.ShapeTypeString})
+var sGetMobileDeviceAccessOverrideResponse_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetMobileDeviceAccessOverrideResponse_DateModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateModified", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetPersonalAccessTokenMetadataRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sGetPersonalAccessTokenMetadataRequest_PersonalAccessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalAccessTokenId", ID: &i_PersonalAccessTokenId, Type: smithy.ShapeTypeString})
+var sGetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalAccessTokenId", ID: &i_PersonalAccessTokenId, Type: smithy.ShapeTypeString})
+var sGetPersonalAccessTokenMetadataResponse_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sGetPersonalAccessTokenMetadataResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_PersonalAccessTokenName, Type: smithy.ShapeTypeString})
+var sGetPersonalAccessTokenMetadataResponse_DateCreated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateCreated", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetPersonalAccessTokenMetadataResponse_DateLastUsed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateLastUsed", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetPersonalAccessTokenMetadataResponse_ExpiresTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetPersonalAccessTokenMetadataResponse_Scopes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scopes", ID: &i_PersonalAccessTokenScopeList, Members: &m_PersonalAccessTokenScopeList, Type: smithy.ShapeTypeList})
+var sListAccessControlRulesRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListAccessControlRulesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_AccessControlRulesList, Members: &m_AccessControlRulesList, Type: smithy.ShapeTypeList})
+var sListAliasesRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListAliasesRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sListAliasesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAliasesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAliasesResponse_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var sListAliasesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAvailabilityConfigurationsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListAvailabilityConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListAvailabilityConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAvailabilityConfigurationsResponse_AvailabilityConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityConfigurations", ID: &i_AvailabilityConfigurationList, Members: &m_AvailabilityConfigurationList, Type: smithy.ShapeTypeList})
+var sListAvailabilityConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListGroupMembersRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListGroupMembersRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sListGroupMembersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListGroupMembersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListGroupMembersResponse_Members = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Members", ID: &i_Members, Members: &m_Members, Type: smithy.ShapeTypeList})
+var sListGroupMembersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListGroupsForEntityRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListGroupsForEntityRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sListGroupsForEntityRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListGroupsForEntityFilters, Members: &mListGroupsForEntityFilters, Type: smithy.ShapeTypeStructure})
+var sListGroupsForEntityRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListGroupsForEntityRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListGroupsForEntityResponse_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_GroupIdentifiers, Members: &m_GroupIdentifiers, Type: smithy.ShapeTypeList})
+var sListGroupsForEntityResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListGroupsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListGroupsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListGroupsFilters, Members: &mListGroupsFilters, Type: smithy.ShapeTypeStructure})
+var sListGroupsResponse_Groups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Groups", ID: &i_Groups, Members: &m_Groups, Type: smithy.ShapeTypeList})
+var sListGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListImpersonationRolesRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListImpersonationRolesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListImpersonationRolesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListImpersonationRolesResponse_Roles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Roles", ID: &i_ImpersonationRoleList, Members: &m_ImpersonationRoleList, Type: smithy.ShapeTypeList})
+var sListImpersonationRolesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMailboxExportJobsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListMailboxExportJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMailboxExportJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMailboxExportJobsResponse_Jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Jobs", ID: &i_Jobs, Members: &m_Jobs, Type: smithy.ShapeTypeList})
+var sListMailboxExportJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMailboxPermissionsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListMailboxPermissionsRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sListMailboxPermissionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMailboxPermissionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMailboxPermissionsResponse_Permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Permissions", ID: &i_Permissions, Members: &m_Permissions, Type: smithy.ShapeTypeList})
+var sListMailboxPermissionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMailDomainsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListMailDomainsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMailDomainsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMailDomainsResponse_MailDomains = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailDomains", ID: &i_MailDomains, Members: &m_MailDomains, Type: smithy.ShapeTypeList})
+var sListMailDomainsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMobileDeviceAccessOverridesRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListMobileDeviceAccessOverridesRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sListMobileDeviceAccessOverridesRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sListMobileDeviceAccessOverridesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMobileDeviceAccessOverridesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListMobileDeviceAccessOverridesResponse_Overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Overrides", ID: &i_MobileDeviceAccessOverridesList, Members: &m_MobileDeviceAccessOverridesList, Type: smithy.ShapeTypeList})
+var sListMobileDeviceAccessOverridesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListMobileDeviceAccessRulesRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListMobileDeviceAccessRulesResponse_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_MobileDeviceAccessRulesList, Members: &m_MobileDeviceAccessRulesList, Type: smithy.ShapeTypeList})
+var sListOrganizationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListOrganizationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListOrganizationsResponse_OrganizationSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationSummaries", ID: &i_OrganizationSummaries, Members: &m_OrganizationSummaries, Type: smithy.ShapeTypeList})
+var sListOrganizationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPersonalAccessTokensRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListPersonalAccessTokensRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sListPersonalAccessTokensRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPersonalAccessTokensRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListPersonalAccessTokensResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListPersonalAccessTokensResponse_PersonalAccessTokenSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalAccessTokenSummaries", ID: &i_PersonalAccessTokenSummaryList, Members: &m_PersonalAccessTokenSummaryList, Type: smithy.ShapeTypeList})
+var sListResourceDelegatesRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListResourceDelegatesRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sListResourceDelegatesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourceDelegatesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourceDelegatesResponse_Delegates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Delegates", ID: &i_ResourceDelegates, Members: &m_ResourceDelegates, Type: smithy.ShapeTypeList})
+var sListResourceDelegatesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourcesRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListResourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourcesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListResourcesFilters, Members: &mListResourcesFilters, Type: smithy.ShapeTypeStructure})
+var sListResourcesResponse_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_Resources, Members: &m_Resources, Type: smithy.ShapeTypeList})
+var sListResourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListUsersRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sListUsersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListUsersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListUsersRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iListUsersFilters, Members: &mListUsersFilters, Type: smithy.ShapeTypeStructure})
+var sListUsersResponse_Users = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Users", ID: &i_Users, Members: &m_Users, Type: smithy.ShapeTypeList})
+var sListUsersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPutAccessControlRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AccessControlRuleName, Type: smithy.ShapeTypeString})
+var sPutAccessControlRuleRequest_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iAccessControlRuleEffect, Members: &mAccessControlRuleEffect, Type: smithy.ShapeTypeEnum})
+var sPutAccessControlRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_AccessControlRuleDescription, Type: smithy.ShapeTypeString})
+var sPutAccessControlRuleRequest_IpRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpRanges", ID: &i_IpRangeList, Members: &m_IpRangeList, Type: smithy.ShapeTypeList})
+var sPutAccessControlRuleRequest_NotIpRanges = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotIpRanges", ID: &i_IpRangeList, Members: &m_IpRangeList, Type: smithy.ShapeTypeList})
+var sPutAccessControlRuleRequest_Actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Actions", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList})
+var sPutAccessControlRuleRequest_NotActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotActions", ID: &i_ActionsList, Members: &m_ActionsList, Type: smithy.ShapeTypeList})
+var sPutAccessControlRuleRequest_UserIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserIds", ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var sPutAccessControlRuleRequest_NotUserIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotUserIds", ID: &i_UserIdList, Members: &m_UserIdList, Type: smithy.ShapeTypeList})
+var sPutAccessControlRuleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sPutAccessControlRuleRequest_ImpersonationRoleIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleIds", ID: &i_ImpersonationRoleIdList, Members: &m_ImpersonationRoleIdList, Type: smithy.ShapeTypeList})
+var sPutAccessControlRuleRequest_NotImpersonationRoleIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotImpersonationRoleIds", ID: &i_ImpersonationRoleIdList, Members: &m_ImpersonationRoleIdList, Type: smithy.ShapeTypeList})
+var sPutEmailMonitoringConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sPutEmailMonitoringConfigurationRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sPutEmailMonitoringConfigurationRequest_LogGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogGroupArn", ID: &i_LogGroupArn, Type: smithy.ShapeTypeString})
+var sPutIdentityProviderConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sPutIdentityProviderConfigurationRequest_AuthenticationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuthenticationMode", ID: &iIdentityProviderAuthenticationMode, Members: &mIdentityProviderAuthenticationMode, Type: smithy.ShapeTypeEnum})
+var sPutIdentityProviderConfigurationRequest_IdentityCenterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityCenterConfiguration", ID: &iIdentityCenterConfiguration, Members: &mIdentityCenterConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutIdentityProviderConfigurationRequest_PersonalAccessTokenConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PersonalAccessTokenConfiguration", ID: &iPersonalAccessTokenConfiguration, Members: &mPersonalAccessTokenConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutInboundDmarcSettingsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sPutInboundDmarcSettingsRequest_Enforced = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enforced", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sPutMailboxPermissionsRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sPutMailboxPermissionsRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sPutMailboxPermissionsRequest_GranteeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GranteeId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sPutMailboxPermissionsRequest_PermissionValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PermissionValues", ID: &i_PermissionValues, Members: &m_PermissionValues, Type: smithy.ShapeTypeList})
+var sPutMobileDeviceAccessOverrideRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sPutMobileDeviceAccessOverrideRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sPutMobileDeviceAccessOverrideRequest_DeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceId", ID: &i_DeviceId, Type: smithy.ShapeTypeString})
+var sPutMobileDeviceAccessOverrideRequest_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var sPutMobileDeviceAccessOverrideRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_MobileDeviceAccessRuleDescription, Type: smithy.ShapeTypeString})
+var sPutRetentionPolicyRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sPutRetentionPolicyRequest_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_ShortString, Type: smithy.ShapeTypeString})
+var sPutRetentionPolicyRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ShortString, Type: smithy.ShapeTypeString})
+var sPutRetentionPolicyRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_PolicyDescription, Traits: &t1, Type: smithy.ShapeTypeString})
+var sPutRetentionPolicyRequest_FolderConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FolderConfigurations", ID: &i_FolderConfigurations, Members: &m_FolderConfigurations, Type: smithy.ShapeTypeList})
+var sRegisterMailDomainRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sRegisterMailDomainRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sRegisterMailDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_WorkMailDomainName, Type: smithy.ShapeTypeString})
+var sRegisterToWorkMailRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sRegisterToWorkMailRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sRegisterToWorkMailRequest_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sResetPasswordRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sResetPasswordRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_WorkMailIdentifier, Type: smithy.ShapeTypeString})
+var sResetPasswordRequest_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_Password, Traits: &t1, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyClientToken, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobRequest_S3Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Prefix", ID: &i_S3ObjectKey, Type: smithy.ShapeTypeString})
+var sStartMailboxExportJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_MailboxExportJobId, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTestAvailabilityConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sTestAvailabilityConfigurationRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sTestAvailabilityConfigurationRequest_EwsProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsProvider", ID: &iEwsAvailabilityProvider, Members: &mEwsAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sTestAvailabilityConfigurationRequest_LambdaProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaProvider", ID: &iLambdaAvailabilityProvider, Members: &mLambdaAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sTestAvailabilityConfigurationResponse_TestPassed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TestPassed", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTestAvailabilityConfigurationResponse_FailureReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateAvailabilityConfigurationRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateAvailabilityConfigurationRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_DomainName, Type: smithy.ShapeTypeString})
+var sUpdateAvailabilityConfigurationRequest_EwsProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EwsProvider", ID: &iEwsAvailabilityProvider, Members: &mEwsAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sUpdateAvailabilityConfigurationRequest_LambdaProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaProvider", ID: &iLambdaAvailabilityProvider, Members: &mLambdaAvailabilityProvider, Type: smithy.ShapeTypeStructure})
+var sUpdateDefaultMailDomainRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateDefaultMailDomainRequest_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_WorkMailDomainName, Type: smithy.ShapeTypeString})
+var sUpdateGroupRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateGroupRequest_GroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GroupId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateGroupRequest_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sUpdateImpersonationRoleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateImpersonationRoleRequest_ImpersonationRoleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImpersonationRoleId", ID: &i_ImpersonationRoleId, Type: smithy.ShapeTypeString})
+var sUpdateImpersonationRoleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ImpersonationRoleName, Type: smithy.ShapeTypeString})
+var sUpdateImpersonationRoleRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iImpersonationRoleType, Members: &mImpersonationRoleType, Type: smithy.ShapeTypeEnum})
+var sUpdateImpersonationRoleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ImpersonationRoleDescription, Type: smithy.ShapeTypeString})
+var sUpdateImpersonationRoleRequest_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_ImpersonationRuleList, Members: &m_ImpersonationRuleList, Type: smithy.ShapeTypeList})
+var sUpdateMailboxQuotaRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateMailboxQuotaRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateMailboxQuotaRequest_MailboxQuota = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MailboxQuota", ID: &i_MailboxQuota, Type: smithy.ShapeTypeInteger})
+var sUpdateMobileDeviceAccessRuleRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MobileDeviceAccessRuleId", ID: &i_MobileDeviceAccessRuleId, Type: smithy.ShapeTypeString})
+var sUpdateMobileDeviceAccessRuleRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MobileDeviceAccessRuleName, Type: smithy.ShapeTypeString})
+var sUpdateMobileDeviceAccessRuleRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_MobileDeviceAccessRuleDescription, Type: smithy.ShapeTypeString})
+var sUpdateMobileDeviceAccessRuleRequest_Effect = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Effect", ID: &iMobileDeviceAccessRuleEffect, Members: &mMobileDeviceAccessRuleEffect, Type: smithy.ShapeTypeEnum})
+var sUpdateMobileDeviceAccessRuleRequest_DeviceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceTypes", ID: &i_DeviceTypeList, Members: &m_DeviceTypeList, Type: smithy.ShapeTypeList})
+var sUpdateMobileDeviceAccessRuleRequest_NotDeviceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceTypes", ID: &i_DeviceTypeList, Members: &m_DeviceTypeList, Type: smithy.ShapeTypeList})
+var sUpdateMobileDeviceAccessRuleRequest_DeviceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceModels", ID: &i_DeviceModelList, Members: &m_DeviceModelList, Type: smithy.ShapeTypeList})
+var sUpdateMobileDeviceAccessRuleRequest_NotDeviceModels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceModels", ID: &i_DeviceModelList, Members: &m_DeviceModelList, Type: smithy.ShapeTypeList})
+var sUpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceOperatingSystems", ID: &i_DeviceOperatingSystemList, Members: &m_DeviceOperatingSystemList, Type: smithy.ShapeTypeList})
+var sUpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceOperatingSystems", ID: &i_DeviceOperatingSystemList, Members: &m_DeviceOperatingSystemList, Type: smithy.ShapeTypeList})
+var sUpdateMobileDeviceAccessRuleRequest_DeviceUserAgents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeviceUserAgents", ID: &i_DeviceUserAgentList, Members: &m_DeviceUserAgentList, Type: smithy.ShapeTypeList})
+var sUpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotDeviceUserAgents", ID: &i_DeviceUserAgentList, Members: &m_DeviceUserAgentList, Type: smithy.ShapeTypeList})
+var sUpdatePrimaryEmailAddressRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdatePrimaryEmailAddressRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sUpdatePrimaryEmailAddressRequest_Email = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Email", ID: &i_EmailAddress, Type: smithy.ShapeTypeString})
+var sUpdateResourceRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateResourceRequest_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateResourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateResourceRequest_BookingOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BookingOptions", ID: &iBookingOptions, Members: &mBookingOptions, Type: smithy.ShapeTypeStructure})
+var sUpdateResourceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_NewResourceDescription, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateResourceRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sUpdateResourceRequest_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sUpdateUserRequest_OrganizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationId", ID: &i_OrganizationId, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_UserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserId", ID: &i_EntityIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_Role = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Role", ID: &iUserRole, Members: &mUserRole, Type: smithy.ShapeTypeEnum})
+var sUpdateUserRequest_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_FirstName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_LastName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastName", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_HiddenFromGlobalAddressList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HiddenFromGlobalAddressList", ID: &i_BooleanObject, Type: smithy.ShapeTypeBoolean})
+var sUpdateUserRequest_Initials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Initials", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_Telephone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Telephone", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_Street = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Street", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_JobTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobTitle", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_City = smithy.NewStaticSchema(smithy.StaticSchema{Member: "City", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_Company = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Company", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_ZipCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZipCode", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_Department = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Department", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_Country = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Country", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_Office = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Office", ID: &i_UserAttribute, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateUserRequest_IdentityProviderUserId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentityProviderUserId", ID: &i_IdentityProviderUserIdForUpdate, Type: smithy.ShapeTypeString})
+
+var AssociateDelegateToResource = &sAssociateDelegateToResource
+
+var AssociateMemberToGroup = &sAssociateMemberToGroup
+
+var AssumeImpersonationRole = &sAssumeImpersonationRole
+
+var CancelMailboxExportJob = &sCancelMailboxExportJob
+
+var CreateAlias = &sCreateAlias
+
+var CreateAvailabilityConfiguration = &sCreateAvailabilityConfiguration
+
+var CreateGroup = &sCreateGroup
+
+var CreateIdentityCenterApplication = &sCreateIdentityCenterApplication
+
+var CreateImpersonationRole = &sCreateImpersonationRole
+
+var CreateMobileDeviceAccessRule = &sCreateMobileDeviceAccessRule
+
+var CreateOrganization = &sCreateOrganization
+
+var CreateResource = &sCreateResource
+
+var CreateUser = &sCreateUser
+
+var DeleteAccessControlRule = &sDeleteAccessControlRule
+
+var DeleteAlias = &sDeleteAlias
+
+var DeleteAvailabilityConfiguration = &sDeleteAvailabilityConfiguration
+
+var DeleteEmailMonitoringConfiguration = &sDeleteEmailMonitoringConfiguration
+
+var DeleteGroup = &sDeleteGroup
+
+var DeleteIdentityCenterApplication = &sDeleteIdentityCenterApplication
+
+var DeleteIdentityProviderConfiguration = &sDeleteIdentityProviderConfiguration
+
+var DeleteImpersonationRole = &sDeleteImpersonationRole
+
+var DeleteMailboxPermissions = &sDeleteMailboxPermissions
+
+var DeleteMobileDeviceAccessOverride = &sDeleteMobileDeviceAccessOverride
+
+var DeleteMobileDeviceAccessRule = &sDeleteMobileDeviceAccessRule
+
+var DeleteOrganization = &sDeleteOrganization
+
+var DeletePersonalAccessToken = &sDeletePersonalAccessToken
+
+var DeleteResource = &sDeleteResource
+
+var DeleteRetentionPolicy = &sDeleteRetentionPolicy
+
+var DeleteUser = &sDeleteUser
+
+var DeregisterFromWorkMail = &sDeregisterFromWorkMail
+
+var DeregisterMailDomain = &sDeregisterMailDomain
+
+var DescribeEmailMonitoringConfiguration = &sDescribeEmailMonitoringConfiguration
+
+var DescribeEntity = &sDescribeEntity
+
+var DescribeGroup = &sDescribeGroup
+
+var DescribeIdentityProviderConfiguration = &sDescribeIdentityProviderConfiguration
+
+var DescribeInboundDmarcSettings = &sDescribeInboundDmarcSettings
+
+var DescribeMailboxExportJob = &sDescribeMailboxExportJob
+
+var DescribeOrganization = &sDescribeOrganization
+
+var DescribeResource = &sDescribeResource
+
+var DescribeUser = &sDescribeUser
+
+var DisassociateDelegateFromResource = &sDisassociateDelegateFromResource
+
+var DisassociateMemberFromGroup = &sDisassociateMemberFromGroup
+
+var GetAccessControlEffect = &sGetAccessControlEffect
+
+var GetDefaultRetentionPolicy = &sGetDefaultRetentionPolicy
+
+var GetImpersonationRole = &sGetImpersonationRole
+
+var GetImpersonationRoleEffect = &sGetImpersonationRoleEffect
+
+var GetMailboxDetails = &sGetMailboxDetails
+
+var GetMailDomain = &sGetMailDomain
+
+var GetMobileDeviceAccessEffect = &sGetMobileDeviceAccessEffect
+
+var GetMobileDeviceAccessOverride = &sGetMobileDeviceAccessOverride
+
+var GetPersonalAccessTokenMetadata = &sGetPersonalAccessTokenMetadata
+
+var ListAccessControlRules = &sListAccessControlRules
+
+var ListAliases = &sListAliases
+
+var ListAvailabilityConfigurations = &sListAvailabilityConfigurations
+
+var ListGroupMembers = &sListGroupMembers
+
+var ListGroups = &sListGroups
+
+var ListGroupsForEntity = &sListGroupsForEntity
+
+var ListImpersonationRoles = &sListImpersonationRoles
+
+var ListMailboxExportJobs = &sListMailboxExportJobs
+
+var ListMailboxPermissions = &sListMailboxPermissions
+
+var ListMailDomains = &sListMailDomains
+
+var ListMobileDeviceAccessOverrides = &sListMobileDeviceAccessOverrides
+
+var ListMobileDeviceAccessRules = &sListMobileDeviceAccessRules
+
+var ListOrganizations = &sListOrganizations
+
+var ListPersonalAccessTokens = &sListPersonalAccessTokens
+
+var ListResourceDelegates = &sListResourceDelegates
+
+var ListResources = &sListResources
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListUsers = &sListUsers
+
+var PutAccessControlRule = &sPutAccessControlRule
+
+var PutEmailMonitoringConfiguration = &sPutEmailMonitoringConfiguration
+
+var PutIdentityProviderConfiguration = &sPutIdentityProviderConfiguration
+
+var PutInboundDmarcSettings = &sPutInboundDmarcSettings
+
+var PutMailboxPermissions = &sPutMailboxPermissions
+
+var PutMobileDeviceAccessOverride = &sPutMobileDeviceAccessOverride
+
+var PutRetentionPolicy = &sPutRetentionPolicy
+
+var RegisterMailDomain = &sRegisterMailDomain
+
+var RegisterToWorkMail = &sRegisterToWorkMail
+
+var ResetPassword = &sResetPassword
+
+var StartMailboxExportJob = &sStartMailboxExportJob
+
+var TagResource = &sTagResource
+
+var TestAvailabilityConfiguration = &sTestAvailabilityConfiguration
+
+var UntagResource = &sUntagResource
+
+var UpdateAvailabilityConfiguration = &sUpdateAvailabilityConfiguration
+
+var UpdateDefaultMailDomain = &sUpdateDefaultMailDomain
+
+var UpdateGroup = &sUpdateGroup
+
+var UpdateImpersonationRole = &sUpdateImpersonationRole
+
+var UpdateMailboxQuota = &sUpdateMailboxQuota
+
+var UpdateMobileDeviceAccessRule = &sUpdateMobileDeviceAccessRule
+
+var UpdatePrimaryEmailAddress = &sUpdatePrimaryEmailAddress
+
+var UpdateResource = &sUpdateResource
+
+var UpdateUser = &sUpdateUser
+
+var _WorkMailService = &s_WorkMailService
+
+var AccessControlRule = &sAccessControlRule
+var AccessControlRule_Name = &sAccessControlRule_Name
+var AccessControlRule_Effect = &sAccessControlRule_Effect
+var AccessControlRule_Description = &sAccessControlRule_Description
+var AccessControlRule_IpRanges = &sAccessControlRule_IpRanges
+var AccessControlRule_NotIpRanges = &sAccessControlRule_NotIpRanges
+var AccessControlRule_Actions = &sAccessControlRule_Actions
+var AccessControlRule_NotActions = &sAccessControlRule_NotActions
+var AccessControlRule_UserIds = &sAccessControlRule_UserIds
+var AccessControlRule_NotUserIds = &sAccessControlRule_NotUserIds
+var AccessControlRule_DateCreated = &sAccessControlRule_DateCreated
+var AccessControlRule_DateModified = &sAccessControlRule_DateModified
+var AccessControlRule_ImpersonationRoleIds = &sAccessControlRule_ImpersonationRoleIds
+var AccessControlRule_NotImpersonationRoleIds = &sAccessControlRule_NotImpersonationRoleIds
+
+var _AccessControlRuleAction = &s_AccessControlRuleAction
+
+var _AccessControlRuleDescription = &s_AccessControlRuleDescription
+
+var AccessControlRuleEffect = &sAccessControlRuleEffect
+var AccessControlRuleEffect_ALLOW = &sAccessControlRuleEffect_ALLOW
+var AccessControlRuleEffect_DENY = &sAccessControlRuleEffect_DENY
+
+var _AccessControlRuleName = &s_AccessControlRuleName
+
+var _AccessControlRuleNameList = &s_AccessControlRuleNameList
+var _AccessControlRuleNameList_member = &s_AccessControlRuleNameList_member
+
+var _AccessControlRulesList = &s_AccessControlRulesList
+var _AccessControlRulesList_member = &s_AccessControlRulesList_member
+
+var AccessEffect = &sAccessEffect
+var AccessEffect_ALLOW = &sAccessEffect_ALLOW
+var AccessEffect_DENY = &sAccessEffect_DENY
+
+var _ActionsList = &s_ActionsList
+var _ActionsList_member = &s_ActionsList_member
+
+var _Aliases = &s_Aliases
+var _Aliases_member = &s_Aliases_member
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var _ApplicationArn = &s_ApplicationArn
+
+var AvailabilityConfiguration = &sAvailabilityConfiguration
+var AvailabilityConfiguration_DomainName = &sAvailabilityConfiguration_DomainName
+var AvailabilityConfiguration_ProviderType = &sAvailabilityConfiguration_ProviderType
+var AvailabilityConfiguration_EwsProvider = &sAvailabilityConfiguration_EwsProvider
+var AvailabilityConfiguration_LambdaProvider = &sAvailabilityConfiguration_LambdaProvider
+var AvailabilityConfiguration_DateCreated = &sAvailabilityConfiguration_DateCreated
+var AvailabilityConfiguration_DateModified = &sAvailabilityConfiguration_DateModified
+
+var _AvailabilityConfigurationList = &s_AvailabilityConfigurationList
+var _AvailabilityConfigurationList_member = &s_AvailabilityConfigurationList_member
+
+var AvailabilityProviderType = &sAvailabilityProviderType
+var AvailabilityProviderType_EWS = &sAvailabilityProviderType_EWS
+var AvailabilityProviderType_LAMBDA = &sAvailabilityProviderType_LAMBDA
+
+var BookingOptions = &sBookingOptions
+var BookingOptions_AutoAcceptRequests = &sBookingOptions_AutoAcceptRequests
+var BookingOptions_AutoDeclineRecurringRequests = &sBookingOptions_AutoDeclineRecurringRequests
+var BookingOptions_AutoDeclineConflictingRequests = &sBookingOptions_AutoDeclineConflictingRequests
+
+var _Boolean = &s_Boolean
+
+var _BooleanObject = &s_BooleanObject
+
+var Delegate = &sDelegate
+var Delegate_Id = &sDelegate_Id
+var Delegate_Type = &sDelegate_Type
+
+var _Description = &s_Description
+
+var _DeviceId = &s_DeviceId
+
+var _DeviceModel = &s_DeviceModel
+
+var _DeviceModelList = &s_DeviceModelList
+var _DeviceModelList_member = &s_DeviceModelList_member
+
+var _DeviceOperatingSystem = &s_DeviceOperatingSystem
+
+var _DeviceOperatingSystemList = &s_DeviceOperatingSystemList
+var _DeviceOperatingSystemList_member = &s_DeviceOperatingSystemList_member
+
+var _DeviceType = &s_DeviceType
+
+var _DeviceTypeList = &s_DeviceTypeList
+var _DeviceTypeList_member = &s_DeviceTypeList_member
+
+var _DeviceUserAgent = &s_DeviceUserAgent
+
+var _DeviceUserAgentList = &s_DeviceUserAgentList
+var _DeviceUserAgentList_member = &s_DeviceUserAgentList_member
+
+var _DirectoryId = &s_DirectoryId
+
+var DirectoryInUseException = &sDirectoryInUseException
+var DirectoryInUseException_Message = &sDirectoryInUseException_Message
+
+var DirectoryServiceAuthenticationFailedException = &sDirectoryServiceAuthenticationFailedException
+var DirectoryServiceAuthenticationFailedException_Message = &sDirectoryServiceAuthenticationFailedException_Message
+
+var DirectoryUnavailableException = &sDirectoryUnavailableException
+var DirectoryUnavailableException_Message = &sDirectoryUnavailableException_Message
+
+var DnsRecord = &sDnsRecord
+var DnsRecord_Type = &sDnsRecord_Type
+var DnsRecord_Hostname = &sDnsRecord_Hostname
+var DnsRecord_Value = &sDnsRecord_Value
+
+var _DnsRecords = &s_DnsRecords
+var _DnsRecords_member = &s_DnsRecords_member
+
+var DnsRecordVerificationStatus = &sDnsRecordVerificationStatus
+var DnsRecordVerificationStatus_PENDING = &sDnsRecordVerificationStatus_PENDING
+var DnsRecordVerificationStatus_VERIFIED = &sDnsRecordVerificationStatus_VERIFIED
+var DnsRecordVerificationStatus_FAILED = &sDnsRecordVerificationStatus_FAILED
+
+var Domain = &sDomain
+var Domain_DomainName = &sDomain_DomainName
+var Domain_HostedZoneId = &sDomain_HostedZoneId
+
+var _DomainName = &s_DomainName
+
+var _Domains = &s_Domains
+var _Domains_member = &s_Domains_member
+
+var _EmailAddress = &s_EmailAddress
+
+var EmailAddressInUseException = &sEmailAddressInUseException
+var EmailAddressInUseException_Message = &sEmailAddressInUseException_Message
+
+var EntityAlreadyRegisteredException = &sEntityAlreadyRegisteredException
+var EntityAlreadyRegisteredException_Message = &sEntityAlreadyRegisteredException_Message
+
+var _EntityIdentifier = &s_EntityIdentifier
+
+var EntityNotFoundException = &sEntityNotFoundException
+var EntityNotFoundException_Message = &sEntityNotFoundException_Message
+
+var EntityState = &sEntityState
+var EntityState_ENABLED = &sEntityState_ENABLED
+var EntityState_DISABLED = &sEntityState_DISABLED
+var EntityState_DELETED = &sEntityState_DELETED
+
+var EntityStateException = &sEntityStateException
+var EntityStateException_Message = &sEntityStateException_Message
+
+var EntityType = &sEntityType
+var EntityType_GROUP = &sEntityType_GROUP
+var EntityType_USER = &sEntityType_USER
+var EntityType_RESOURCE = &sEntityType_RESOURCE
+
+var EwsAvailabilityProvider = &sEwsAvailabilityProvider
+var EwsAvailabilityProvider_EwsEndpoint = &sEwsAvailabilityProvider_EwsEndpoint
+var EwsAvailabilityProvider_EwsUsername = &sEwsAvailabilityProvider_EwsUsername
+var EwsAvailabilityProvider_EwsPassword = &sEwsAvailabilityProvider_EwsPassword
+
+var _ExpiresIn = &s_ExpiresIn
+
+var _ExternalUserName = &s_ExternalUserName
+
+var FolderConfiguration = &sFolderConfiguration
+var FolderConfiguration_Name = &sFolderConfiguration_Name
+var FolderConfiguration_Action = &sFolderConfiguration_Action
+var FolderConfiguration_Period = &sFolderConfiguration_Period
+
+var _FolderConfigurations = &s_FolderConfigurations
+var _FolderConfigurations_member = &s_FolderConfigurations_member
+
+var FolderName = &sFolderName
+var FolderName_INBOX = &sFolderName_INBOX
+var FolderName_DELETED_ITEMS = &sFolderName_DELETED_ITEMS
+var FolderName_SENT_ITEMS = &sFolderName_SENT_ITEMS
+var FolderName_DRAFTS = &sFolderName_DRAFTS
+var FolderName_JUNK_EMAIL = &sFolderName_JUNK_EMAIL
+
+var Group = &sGroup
+var Group_Id = &sGroup_Id
+var Group_Email = &sGroup_Email
+var Group_Name = &sGroup_Name
+var Group_State = &sGroup_State
+var Group_EnabledDate = &sGroup_EnabledDate
+var Group_DisabledDate = &sGroup_DisabledDate
+
+var GroupIdentifier = &sGroupIdentifier
+var GroupIdentifier_GroupId = &sGroupIdentifier_GroupId
+var GroupIdentifier_GroupName = &sGroupIdentifier_GroupName
+
+var _GroupIdentifiers = &s_GroupIdentifiers
+var _GroupIdentifiers_member = &s_GroupIdentifiers_member
+
+var _GroupName = &s_GroupName
+
+var _Groups = &s_Groups
+var _Groups_member = &s_Groups_member
+
+var _HostedZoneId = &s_HostedZoneId
+
+var _IdempotencyClientToken = &s_IdempotencyClientToken
+
+var _IdentityCenterApplicationName = &s_IdentityCenterApplicationName
+
+var IdentityCenterConfiguration = &sIdentityCenterConfiguration
+var IdentityCenterConfiguration_InstanceArn = &sIdentityCenterConfiguration_InstanceArn
+var IdentityCenterConfiguration_ApplicationArn = &sIdentityCenterConfiguration_ApplicationArn
+
+var IdentityProviderAuthenticationMode = &sIdentityProviderAuthenticationMode
+var IdentityProviderAuthenticationMode_IDENTITY_PROVIDER_ONLY = &sIdentityProviderAuthenticationMode_IDENTITY_PROVIDER_ONLY
+var IdentityProviderAuthenticationMode_IDENTITY_PROVIDER_AND_DIRECTORY = &sIdentityProviderAuthenticationMode_IDENTITY_PROVIDER_AND_DIRECTORY
+
+var _IdentityProviderIdentityStoreId = &s_IdentityProviderIdentityStoreId
+
+var _IdentityProviderUserId = &s_IdentityProviderUserId
+
+var _IdentityProviderUserIdForUpdate = &s_IdentityProviderUserIdForUpdate
+
+var _IdentityProviderUserIdPrefix = &s_IdentityProviderUserIdPrefix
+
+var ImpersonationMatchedRule = &sImpersonationMatchedRule
+var ImpersonationMatchedRule_ImpersonationRuleId = &sImpersonationMatchedRule_ImpersonationRuleId
+var ImpersonationMatchedRule_Name = &sImpersonationMatchedRule_Name
+
+var _ImpersonationMatchedRuleList = &s_ImpersonationMatchedRuleList
+var _ImpersonationMatchedRuleList_member = &s_ImpersonationMatchedRuleList_member
+
+var ImpersonationRole = &sImpersonationRole
+var ImpersonationRole_ImpersonationRoleId = &sImpersonationRole_ImpersonationRoleId
+var ImpersonationRole_Name = &sImpersonationRole_Name
+var ImpersonationRole_Type = &sImpersonationRole_Type
+var ImpersonationRole_DateCreated = &sImpersonationRole_DateCreated
+var ImpersonationRole_DateModified = &sImpersonationRole_DateModified
+
+var _ImpersonationRoleDescription = &s_ImpersonationRoleDescription
+
+var _ImpersonationRoleId = &s_ImpersonationRoleId
+
+var _ImpersonationRoleIdList = &s_ImpersonationRoleIdList
+var _ImpersonationRoleIdList_member = &s_ImpersonationRoleIdList_member
+
+var _ImpersonationRoleList = &s_ImpersonationRoleList
+var _ImpersonationRoleList_member = &s_ImpersonationRoleList_member
+
+var _ImpersonationRoleName = &s_ImpersonationRoleName
+
+var ImpersonationRoleType = &sImpersonationRoleType
+var ImpersonationRoleType_FULL_ACCESS = &sImpersonationRoleType_FULL_ACCESS
+var ImpersonationRoleType_READ_ONLY = &sImpersonationRoleType_READ_ONLY
+
+var ImpersonationRule = &sImpersonationRule
+var ImpersonationRule_ImpersonationRuleId = &sImpersonationRule_ImpersonationRuleId
+var ImpersonationRule_Name = &sImpersonationRule_Name
+var ImpersonationRule_Description = &sImpersonationRule_Description
+var ImpersonationRule_Effect = &sImpersonationRule_Effect
+var ImpersonationRule_TargetUsers = &sImpersonationRule_TargetUsers
+var ImpersonationRule_NotTargetUsers = &sImpersonationRule_NotTargetUsers
+
+var _ImpersonationRuleDescription = &s_ImpersonationRuleDescription
+
+var _ImpersonationRuleId = &s_ImpersonationRuleId
+
+var _ImpersonationRuleList = &s_ImpersonationRuleList
+var _ImpersonationRuleList_member = &s_ImpersonationRuleList_member
+
+var _ImpersonationRuleName = &s_ImpersonationRuleName
+
+var _ImpersonationToken = &s_ImpersonationToken
+
+var _InstanceArn = &s_InstanceArn
+
+var InvalidConfigurationException = &sInvalidConfigurationException
+var InvalidConfigurationException_Message = &sInvalidConfigurationException_Message
+
+var InvalidCustomSesConfigurationException = &sInvalidCustomSesConfigurationException
+var InvalidCustomSesConfigurationException_Message = &sInvalidCustomSesConfigurationException_Message
+
+var InvalidParameterException = &sInvalidParameterException
+var InvalidParameterException_Message = &sInvalidParameterException_Message
+
+var InvalidPasswordException = &sInvalidPasswordException
+var InvalidPasswordException_Message = &sInvalidPasswordException_Message
+
+var _IpAddress = &s_IpAddress
+
+var _IpRange = &s_IpRange
+
+var _IpRangeList = &s_IpRangeList
+var _IpRangeList_member = &s_IpRangeList_member
+
+var _Jobs = &s_Jobs
+var _Jobs_member = &s_Jobs_member
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var _LambdaArn = &s_LambdaArn
+
+var LambdaAvailabilityProvider = &sLambdaAvailabilityProvider
+var LambdaAvailabilityProvider_LambdaArn = &sLambdaAvailabilityProvider_LambdaArn
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var ListGroupsFilters = &sListGroupsFilters
+var ListGroupsFilters_NamePrefix = &sListGroupsFilters_NamePrefix
+var ListGroupsFilters_PrimaryEmailPrefix = &sListGroupsFilters_PrimaryEmailPrefix
+var ListGroupsFilters_State = &sListGroupsFilters_State
+
+var ListGroupsForEntityFilters = &sListGroupsForEntityFilters
+var ListGroupsForEntityFilters_GroupNamePrefix = &sListGroupsForEntityFilters_GroupNamePrefix
+
+var ListResourcesFilters = &sListResourcesFilters
+var ListResourcesFilters_NamePrefix = &sListResourcesFilters_NamePrefix
+var ListResourcesFilters_PrimaryEmailPrefix = &sListResourcesFilters_PrimaryEmailPrefix
+var ListResourcesFilters_State = &sListResourcesFilters_State
+
+var ListUsersFilters = &sListUsersFilters
+var ListUsersFilters_UsernamePrefix = &sListUsersFilters_UsernamePrefix
+var ListUsersFilters_DisplayNamePrefix = &sListUsersFilters_DisplayNamePrefix
+var ListUsersFilters_PrimaryEmailPrefix = &sListUsersFilters_PrimaryEmailPrefix
+var ListUsersFilters_State = &sListUsersFilters_State
+var ListUsersFilters_IdentityProviderUserIdPrefix = &sListUsersFilters_IdentityProviderUserIdPrefix
+
+var _LogGroupArn = &s_LogGroupArn
+
+var _MailboxExportErrorInfo = &s_MailboxExportErrorInfo
+
+var MailboxExportJob = &sMailboxExportJob
+var MailboxExportJob_JobId = &sMailboxExportJob_JobId
+var MailboxExportJob_EntityId = &sMailboxExportJob_EntityId
+var MailboxExportJob_Description = &sMailboxExportJob_Description
+var MailboxExportJob_S3BucketName = &sMailboxExportJob_S3BucketName
+var MailboxExportJob_S3Path = &sMailboxExportJob_S3Path
+var MailboxExportJob_EstimatedProgress = &sMailboxExportJob_EstimatedProgress
+var MailboxExportJob_State = &sMailboxExportJob_State
+var MailboxExportJob_StartTime = &sMailboxExportJob_StartTime
+var MailboxExportJob_EndTime = &sMailboxExportJob_EndTime
+
+var _MailboxExportJobId = &s_MailboxExportJobId
+
+var MailboxExportJobState = &sMailboxExportJobState
+var MailboxExportJobState_RUNNING = &sMailboxExportJobState_RUNNING
+var MailboxExportJobState_COMPLETED = &sMailboxExportJobState_COMPLETED
+var MailboxExportJobState_FAILED = &sMailboxExportJobState_FAILED
+var MailboxExportJobState_CANCELLED = &sMailboxExportJobState_CANCELLED
+
+var _MailboxQuota = &s_MailboxQuota
+
+var _MailboxSize = &s_MailboxSize
+
+var MailDomainInUseException = &sMailDomainInUseException
+var MailDomainInUseException_Message = &sMailDomainInUseException_Message
+
+var MailDomainNotFoundException = &sMailDomainNotFoundException
+var MailDomainNotFoundException_Message = &sMailDomainNotFoundException_Message
+
+var _MailDomains = &s_MailDomains
+var _MailDomains_member = &s_MailDomains_member
+
+var MailDomainStateException = &sMailDomainStateException
+var MailDomainStateException_Message = &sMailDomainStateException_Message
+
+var MailDomainSummary = &sMailDomainSummary
+var MailDomainSummary_DomainName = &sMailDomainSummary_DomainName
+var MailDomainSummary_DefaultDomain = &sMailDomainSummary_DefaultDomain
+
+var _MaxResults = &s_MaxResults
+
+var Member = &sMember
+var Member_Id = &sMember_Id
+var Member_Name = &sMember_Name
+var Member_Type = &sMember_Type
+var Member_State = &sMember_State
+var Member_EnabledDate = &sMember_EnabledDate
+var Member_DisabledDate = &sMember_DisabledDate
+
+var _Members = &s_Members
+var _Members_member = &s_Members_member
+
+var MemberType = &sMemberType
+var MemberType_GROUP = &sMemberType_GROUP
+var MemberType_USER = &sMemberType_USER
+
+var MobileDeviceAccessMatchedRule = &sMobileDeviceAccessMatchedRule
+var MobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId = &sMobileDeviceAccessMatchedRule_MobileDeviceAccessRuleId
+var MobileDeviceAccessMatchedRule_Name = &sMobileDeviceAccessMatchedRule_Name
+
+var _MobileDeviceAccessMatchedRuleList = &s_MobileDeviceAccessMatchedRuleList
+var _MobileDeviceAccessMatchedRuleList_member = &s_MobileDeviceAccessMatchedRuleList_member
+
+var MobileDeviceAccessOverride = &sMobileDeviceAccessOverride
+var MobileDeviceAccessOverride_UserId = &sMobileDeviceAccessOverride_UserId
+var MobileDeviceAccessOverride_DeviceId = &sMobileDeviceAccessOverride_DeviceId
+var MobileDeviceAccessOverride_Effect = &sMobileDeviceAccessOverride_Effect
+var MobileDeviceAccessOverride_Description = &sMobileDeviceAccessOverride_Description
+var MobileDeviceAccessOverride_DateCreated = &sMobileDeviceAccessOverride_DateCreated
+var MobileDeviceAccessOverride_DateModified = &sMobileDeviceAccessOverride_DateModified
+
+var _MobileDeviceAccessOverridesList = &s_MobileDeviceAccessOverridesList
+var _MobileDeviceAccessOverridesList_member = &s_MobileDeviceAccessOverridesList_member
+
+var MobileDeviceAccessRule = &sMobileDeviceAccessRule
+var MobileDeviceAccessRule_MobileDeviceAccessRuleId = &sMobileDeviceAccessRule_MobileDeviceAccessRuleId
+var MobileDeviceAccessRule_Name = &sMobileDeviceAccessRule_Name
+var MobileDeviceAccessRule_Description = &sMobileDeviceAccessRule_Description
+var MobileDeviceAccessRule_Effect = &sMobileDeviceAccessRule_Effect
+var MobileDeviceAccessRule_DeviceTypes = &sMobileDeviceAccessRule_DeviceTypes
+var MobileDeviceAccessRule_NotDeviceTypes = &sMobileDeviceAccessRule_NotDeviceTypes
+var MobileDeviceAccessRule_DeviceModels = &sMobileDeviceAccessRule_DeviceModels
+var MobileDeviceAccessRule_NotDeviceModels = &sMobileDeviceAccessRule_NotDeviceModels
+var MobileDeviceAccessRule_DeviceOperatingSystems = &sMobileDeviceAccessRule_DeviceOperatingSystems
+var MobileDeviceAccessRule_NotDeviceOperatingSystems = &sMobileDeviceAccessRule_NotDeviceOperatingSystems
+var MobileDeviceAccessRule_DeviceUserAgents = &sMobileDeviceAccessRule_DeviceUserAgents
+var MobileDeviceAccessRule_NotDeviceUserAgents = &sMobileDeviceAccessRule_NotDeviceUserAgents
+var MobileDeviceAccessRule_DateCreated = &sMobileDeviceAccessRule_DateCreated
+var MobileDeviceAccessRule_DateModified = &sMobileDeviceAccessRule_DateModified
+
+var _MobileDeviceAccessRuleDescription = &s_MobileDeviceAccessRuleDescription
+
+var MobileDeviceAccessRuleEffect = &sMobileDeviceAccessRuleEffect
+var MobileDeviceAccessRuleEffect_ALLOW = &sMobileDeviceAccessRuleEffect_ALLOW
+var MobileDeviceAccessRuleEffect_DENY = &sMobileDeviceAccessRuleEffect_DENY
+
+var _MobileDeviceAccessRuleId = &s_MobileDeviceAccessRuleId
+
+var _MobileDeviceAccessRuleName = &s_MobileDeviceAccessRuleName
+
+var _MobileDeviceAccessRulesList = &s_MobileDeviceAccessRulesList
+var _MobileDeviceAccessRulesList_member = &s_MobileDeviceAccessRulesList_member
+
+var NameAvailabilityException = &sNameAvailabilityException
+var NameAvailabilityException_Message = &sNameAvailabilityException_Message
+
+var _NewResourceDescription = &s_NewResourceDescription
+
+var _NextToken = &s_NextToken
+
+var _OrganizationId = &s_OrganizationId
+
+var _OrganizationName = &s_OrganizationName
+
+var OrganizationNotFoundException = &sOrganizationNotFoundException
+var OrganizationNotFoundException_Message = &sOrganizationNotFoundException_Message
+
+var OrganizationStateException = &sOrganizationStateException
+var OrganizationStateException_Message = &sOrganizationStateException_Message
+
+var _OrganizationSummaries = &s_OrganizationSummaries
+var _OrganizationSummaries_member = &s_OrganizationSummaries_member
+
+var OrganizationSummary = &sOrganizationSummary
+var OrganizationSummary_OrganizationId = &sOrganizationSummary_OrganizationId
+var OrganizationSummary_Alias = &sOrganizationSummary_Alias
+var OrganizationSummary_DefaultMailDomain = &sOrganizationSummary_DefaultMailDomain
+var OrganizationSummary_ErrorMessage = &sOrganizationSummary_ErrorMessage
+var OrganizationSummary_State = &sOrganizationSummary_State
+
+var _Password = &s_Password
+
+var _Percentage = &s_Percentage
+
+var Permission = &sPermission
+var Permission_GranteeId = &sPermission_GranteeId
+var Permission_GranteeType = &sPermission_GranteeType
+var Permission_PermissionValues = &sPermission_PermissionValues
+
+var _Permissions = &s_Permissions
+var _Permissions_member = &s_Permissions_member
+
+var PermissionType = &sPermissionType
+var PermissionType_FULL_ACCESS = &sPermissionType_FULL_ACCESS
+var PermissionType_SEND_AS = &sPermissionType_SEND_AS
+var PermissionType_SEND_ON_BEHALF = &sPermissionType_SEND_ON_BEHALF
+
+var _PermissionValues = &s_PermissionValues
+var _PermissionValues_member = &s_PermissionValues_member
+
+var PersonalAccessTokenConfiguration = &sPersonalAccessTokenConfiguration
+var PersonalAccessTokenConfiguration_Status = &sPersonalAccessTokenConfiguration_Status
+var PersonalAccessTokenConfiguration_LifetimeInDays = &sPersonalAccessTokenConfiguration_LifetimeInDays
+
+var PersonalAccessTokenConfigurationStatus = &sPersonalAccessTokenConfigurationStatus
+var PersonalAccessTokenConfigurationStatus_ACTIVE = &sPersonalAccessTokenConfigurationStatus_ACTIVE
+var PersonalAccessTokenConfigurationStatus_INACTIVE = &sPersonalAccessTokenConfigurationStatus_INACTIVE
+
+var _PersonalAccessTokenId = &s_PersonalAccessTokenId
+
+var _PersonalAccessTokenLifetimeInDays = &s_PersonalAccessTokenLifetimeInDays
+
+var _PersonalAccessTokenName = &s_PersonalAccessTokenName
+
+var _PersonalAccessTokenScope = &s_PersonalAccessTokenScope
+
+var _PersonalAccessTokenScopeList = &s_PersonalAccessTokenScopeList
+var _PersonalAccessTokenScopeList_member = &s_PersonalAccessTokenScopeList_member
+
+var PersonalAccessTokenSummary = &sPersonalAccessTokenSummary
+var PersonalAccessTokenSummary_PersonalAccessTokenId = &sPersonalAccessTokenSummary_PersonalAccessTokenId
+var PersonalAccessTokenSummary_UserId = &sPersonalAccessTokenSummary_UserId
+var PersonalAccessTokenSummary_Name = &sPersonalAccessTokenSummary_Name
+var PersonalAccessTokenSummary_DateCreated = &sPersonalAccessTokenSummary_DateCreated
+var PersonalAccessTokenSummary_DateLastUsed = &sPersonalAccessTokenSummary_DateLastUsed
+var PersonalAccessTokenSummary_ExpiresTime = &sPersonalAccessTokenSummary_ExpiresTime
+var PersonalAccessTokenSummary_Scopes = &sPersonalAccessTokenSummary_Scopes
+
+var _PersonalAccessTokenSummaryList = &s_PersonalAccessTokenSummaryList
+var _PersonalAccessTokenSummaryList_member = &s_PersonalAccessTokenSummaryList_member
+
+var _PolicyDescription = &s_PolicyDescription
+
+var RedactedEwsAvailabilityProvider = &sRedactedEwsAvailabilityProvider
+var RedactedEwsAvailabilityProvider_EwsEndpoint = &sRedactedEwsAvailabilityProvider_EwsEndpoint
+var RedactedEwsAvailabilityProvider_EwsUsername = &sRedactedEwsAvailabilityProvider_EwsUsername
+
+var ReservedNameException = &sReservedNameException
+var ReservedNameException_Message = &sReservedNameException_Message
+
+var Resource = &sResource
+var Resource_Id = &sResource_Id
+var Resource_Email = &sResource_Email
+var Resource_Name = &sResource_Name
+var Resource_Type = &sResource_Type
+var Resource_State = &sResource_State
+var Resource_EnabledDate = &sResource_EnabledDate
+var Resource_DisabledDate = &sResource_DisabledDate
+var Resource_Description = &sResource_Description
+
+var _ResourceDelegates = &s_ResourceDelegates
+var _ResourceDelegates_member = &s_ResourceDelegates_member
+
+var _ResourceDescription = &s_ResourceDescription
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _Resources = &s_Resources
+var _Resources_member = &s_Resources_member
+
+var ResourceType = &sResourceType
+var ResourceType_ROOM = &sResourceType_ROOM
+var ResourceType_EQUIPMENT = &sResourceType_EQUIPMENT
+
+var RetentionAction = &sRetentionAction
+var RetentionAction_NONE = &sRetentionAction_NONE
+var RetentionAction_DELETE = &sRetentionAction_DELETE
+var RetentionAction_PERMANENTLY_DELETE = &sRetentionAction_PERMANENTLY_DELETE
+
+var _RetentionPeriod = &s_RetentionPeriod
+
+var _RoleArn = &s_RoleArn
+
+var _S3BucketName = &s_S3BucketName
+
+var _S3ObjectKey = &s_S3ObjectKey
+
+var _ShortString = &s_ShortString
+
+var _String = &s_String
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TargetUsers = &s_TargetUsers
+var _TargetUsers_member = &s_TargetUsers_member
+
+var _Timestamp = &s_Timestamp
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_Message = &sTooManyTagsException_Message
+
+var UnsupportedOperationException = &sUnsupportedOperationException
+var UnsupportedOperationException_Message = &sUnsupportedOperationException_Message
+
+var _Url = &s_Url
+
+var User = &sUser
+var User_Id = &sUser_Id
+var User_Email = &sUser_Email
+var User_Name = &sUser_Name
+var User_DisplayName = &sUser_DisplayName
+var User_State = &sUser_State
+var User_UserRole = &sUser_UserRole
+var User_EnabledDate = &sUser_EnabledDate
+var User_DisabledDate = &sUser_DisabledDate
+var User_IdentityProviderUserId = &sUser_IdentityProviderUserId
+var User_IdentityProviderIdentityStoreId = &sUser_IdentityProviderIdentityStoreId
+
+var _UserAttribute = &s_UserAttribute
+
+var _UserIdList = &s_UserIdList
+var _UserIdList_member = &s_UserIdList_member
+
+var _UserName = &s_UserName
+
+var UserRole = &sUserRole
+var UserRole_USER = &sUserRole_USER
+var UserRole_RESOURCE = &sUserRole_RESOURCE
+var UserRole_SYSTEM_USER = &sUserRole_SYSTEM_USER
+var UserRole_REMOTE_USER = &sUserRole_REMOTE_USER
+
+var _Users = &s_Users
+var _Users_member = &s_Users_member
+
+var _WorkMailDomainName = &s_WorkMailDomainName
+
+var _WorkMailIdentifier = &s_WorkMailIdentifier
+
+var AssociateDelegateToResourceRequest = &sAssociateDelegateToResourceRequest
+var AssociateDelegateToResourceRequest_OrganizationId = &sAssociateDelegateToResourceRequest_OrganizationId
+var AssociateDelegateToResourceRequest_ResourceId = &sAssociateDelegateToResourceRequest_ResourceId
+var AssociateDelegateToResourceRequest_EntityId = &sAssociateDelegateToResourceRequest_EntityId
+
+var AssociateDelegateToResourceResponse = &sAssociateDelegateToResourceResponse
+
+var AssociateMemberToGroupRequest = &sAssociateMemberToGroupRequest
+var AssociateMemberToGroupRequest_OrganizationId = &sAssociateMemberToGroupRequest_OrganizationId
+var AssociateMemberToGroupRequest_GroupId = &sAssociateMemberToGroupRequest_GroupId
+var AssociateMemberToGroupRequest_MemberId = &sAssociateMemberToGroupRequest_MemberId
+
+var AssociateMemberToGroupResponse = &sAssociateMemberToGroupResponse
+
+var AssumeImpersonationRoleRequest = &sAssumeImpersonationRoleRequest
+var AssumeImpersonationRoleRequest_OrganizationId = &sAssumeImpersonationRoleRequest_OrganizationId
+var AssumeImpersonationRoleRequest_ImpersonationRoleId = &sAssumeImpersonationRoleRequest_ImpersonationRoleId
+
+var AssumeImpersonationRoleResponse = &sAssumeImpersonationRoleResponse
+var AssumeImpersonationRoleResponse_Token = &sAssumeImpersonationRoleResponse_Token
+var AssumeImpersonationRoleResponse_ExpiresIn = &sAssumeImpersonationRoleResponse_ExpiresIn
+
+var CancelMailboxExportJobRequest = &sCancelMailboxExportJobRequest
+var CancelMailboxExportJobRequest_ClientToken = &sCancelMailboxExportJobRequest_ClientToken
+var CancelMailboxExportJobRequest_JobId = &sCancelMailboxExportJobRequest_JobId
+var CancelMailboxExportJobRequest_OrganizationId = &sCancelMailboxExportJobRequest_OrganizationId
+
+var CancelMailboxExportJobResponse = &sCancelMailboxExportJobResponse
+
+var CreateAliasRequest = &sCreateAliasRequest
+var CreateAliasRequest_OrganizationId = &sCreateAliasRequest_OrganizationId
+var CreateAliasRequest_EntityId = &sCreateAliasRequest_EntityId
+var CreateAliasRequest_Alias = &sCreateAliasRequest_Alias
+
+var CreateAliasResponse = &sCreateAliasResponse
+
+var CreateAvailabilityConfigurationRequest = &sCreateAvailabilityConfigurationRequest
+var CreateAvailabilityConfigurationRequest_ClientToken = &sCreateAvailabilityConfigurationRequest_ClientToken
+var CreateAvailabilityConfigurationRequest_OrganizationId = &sCreateAvailabilityConfigurationRequest_OrganizationId
+var CreateAvailabilityConfigurationRequest_DomainName = &sCreateAvailabilityConfigurationRequest_DomainName
+var CreateAvailabilityConfigurationRequest_EwsProvider = &sCreateAvailabilityConfigurationRequest_EwsProvider
+var CreateAvailabilityConfigurationRequest_LambdaProvider = &sCreateAvailabilityConfigurationRequest_LambdaProvider
+
+var CreateAvailabilityConfigurationResponse = &sCreateAvailabilityConfigurationResponse
+
+var CreateGroupRequest = &sCreateGroupRequest
+var CreateGroupRequest_OrganizationId = &sCreateGroupRequest_OrganizationId
+var CreateGroupRequest_Name = &sCreateGroupRequest_Name
+var CreateGroupRequest_HiddenFromGlobalAddressList = &sCreateGroupRequest_HiddenFromGlobalAddressList
+
+var CreateGroupResponse = &sCreateGroupResponse
+var CreateGroupResponse_GroupId = &sCreateGroupResponse_GroupId
+
+var CreateIdentityCenterApplicationRequest = &sCreateIdentityCenterApplicationRequest
+var CreateIdentityCenterApplicationRequest_Name = &sCreateIdentityCenterApplicationRequest_Name
+var CreateIdentityCenterApplicationRequest_InstanceArn = &sCreateIdentityCenterApplicationRequest_InstanceArn
+var CreateIdentityCenterApplicationRequest_ClientToken = &sCreateIdentityCenterApplicationRequest_ClientToken
+
+var CreateIdentityCenterApplicationResponse = &sCreateIdentityCenterApplicationResponse
+var CreateIdentityCenterApplicationResponse_ApplicationArn = &sCreateIdentityCenterApplicationResponse_ApplicationArn
+
+var CreateImpersonationRoleRequest = &sCreateImpersonationRoleRequest
+var CreateImpersonationRoleRequest_ClientToken = &sCreateImpersonationRoleRequest_ClientToken
+var CreateImpersonationRoleRequest_OrganizationId = &sCreateImpersonationRoleRequest_OrganizationId
+var CreateImpersonationRoleRequest_Name = &sCreateImpersonationRoleRequest_Name
+var CreateImpersonationRoleRequest_Type = &sCreateImpersonationRoleRequest_Type
+var CreateImpersonationRoleRequest_Description = &sCreateImpersonationRoleRequest_Description
+var CreateImpersonationRoleRequest_Rules = &sCreateImpersonationRoleRequest_Rules
+
+var CreateImpersonationRoleResponse = &sCreateImpersonationRoleResponse
+var CreateImpersonationRoleResponse_ImpersonationRoleId = &sCreateImpersonationRoleResponse_ImpersonationRoleId
+
+var CreateMobileDeviceAccessRuleRequest = &sCreateMobileDeviceAccessRuleRequest
+var CreateMobileDeviceAccessRuleRequest_OrganizationId = &sCreateMobileDeviceAccessRuleRequest_OrganizationId
+var CreateMobileDeviceAccessRuleRequest_ClientToken = &sCreateMobileDeviceAccessRuleRequest_ClientToken
+var CreateMobileDeviceAccessRuleRequest_Name = &sCreateMobileDeviceAccessRuleRequest_Name
+var CreateMobileDeviceAccessRuleRequest_Description = &sCreateMobileDeviceAccessRuleRequest_Description
+var CreateMobileDeviceAccessRuleRequest_Effect = &sCreateMobileDeviceAccessRuleRequest_Effect
+var CreateMobileDeviceAccessRuleRequest_DeviceTypes = &sCreateMobileDeviceAccessRuleRequest_DeviceTypes
+var CreateMobileDeviceAccessRuleRequest_NotDeviceTypes = &sCreateMobileDeviceAccessRuleRequest_NotDeviceTypes
+var CreateMobileDeviceAccessRuleRequest_DeviceModels = &sCreateMobileDeviceAccessRuleRequest_DeviceModels
+var CreateMobileDeviceAccessRuleRequest_NotDeviceModels = &sCreateMobileDeviceAccessRuleRequest_NotDeviceModels
+var CreateMobileDeviceAccessRuleRequest_DeviceOperatingSystems = &sCreateMobileDeviceAccessRuleRequest_DeviceOperatingSystems
+var CreateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems = &sCreateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems
+var CreateMobileDeviceAccessRuleRequest_DeviceUserAgents = &sCreateMobileDeviceAccessRuleRequest_DeviceUserAgents
+var CreateMobileDeviceAccessRuleRequest_NotDeviceUserAgents = &sCreateMobileDeviceAccessRuleRequest_NotDeviceUserAgents
+
+var CreateMobileDeviceAccessRuleResponse = &sCreateMobileDeviceAccessRuleResponse
+var CreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId = &sCreateMobileDeviceAccessRuleResponse_MobileDeviceAccessRuleId
+
+var CreateOrganizationRequest = &sCreateOrganizationRequest
+var CreateOrganizationRequest_DirectoryId = &sCreateOrganizationRequest_DirectoryId
+var CreateOrganizationRequest_Alias = &sCreateOrganizationRequest_Alias
+var CreateOrganizationRequest_ClientToken = &sCreateOrganizationRequest_ClientToken
+var CreateOrganizationRequest_Domains = &sCreateOrganizationRequest_Domains
+var CreateOrganizationRequest_KmsKeyArn = &sCreateOrganizationRequest_KmsKeyArn
+var CreateOrganizationRequest_EnableInteroperability = &sCreateOrganizationRequest_EnableInteroperability
+
+var CreateOrganizationResponse = &sCreateOrganizationResponse
+var CreateOrganizationResponse_OrganizationId = &sCreateOrganizationResponse_OrganizationId
+
+var CreateResourceRequest = &sCreateResourceRequest
+var CreateResourceRequest_OrganizationId = &sCreateResourceRequest_OrganizationId
+var CreateResourceRequest_Name = &sCreateResourceRequest_Name
+var CreateResourceRequest_Type = &sCreateResourceRequest_Type
+var CreateResourceRequest_Description = &sCreateResourceRequest_Description
+var CreateResourceRequest_HiddenFromGlobalAddressList = &sCreateResourceRequest_HiddenFromGlobalAddressList
+
+var CreateResourceResponse = &sCreateResourceResponse
+var CreateResourceResponse_ResourceId = &sCreateResourceResponse_ResourceId
+
+var CreateUserRequest = &sCreateUserRequest
+var CreateUserRequest_OrganizationId = &sCreateUserRequest_OrganizationId
+var CreateUserRequest_Name = &sCreateUserRequest_Name
+var CreateUserRequest_DisplayName = &sCreateUserRequest_DisplayName
+var CreateUserRequest_Password = &sCreateUserRequest_Password
+var CreateUserRequest_Role = &sCreateUserRequest_Role
+var CreateUserRequest_FirstName = &sCreateUserRequest_FirstName
+var CreateUserRequest_LastName = &sCreateUserRequest_LastName
+var CreateUserRequest_HiddenFromGlobalAddressList = &sCreateUserRequest_HiddenFromGlobalAddressList
+var CreateUserRequest_IdentityProviderUserId = &sCreateUserRequest_IdentityProviderUserId
+
+var CreateUserResponse = &sCreateUserResponse
+var CreateUserResponse_UserId = &sCreateUserResponse_UserId
+
+var DeleteAccessControlRuleRequest = &sDeleteAccessControlRuleRequest
+var DeleteAccessControlRuleRequest_OrganizationId = &sDeleteAccessControlRuleRequest_OrganizationId
+var DeleteAccessControlRuleRequest_Name = &sDeleteAccessControlRuleRequest_Name
+
+var DeleteAccessControlRuleResponse = &sDeleteAccessControlRuleResponse
+
+var DeleteAliasRequest = &sDeleteAliasRequest
+var DeleteAliasRequest_OrganizationId = &sDeleteAliasRequest_OrganizationId
+var DeleteAliasRequest_EntityId = &sDeleteAliasRequest_EntityId
+var DeleteAliasRequest_Alias = &sDeleteAliasRequest_Alias
+
+var DeleteAliasResponse = &sDeleteAliasResponse
+
+var DeleteAvailabilityConfigurationRequest = &sDeleteAvailabilityConfigurationRequest
+var DeleteAvailabilityConfigurationRequest_OrganizationId = &sDeleteAvailabilityConfigurationRequest_OrganizationId
+var DeleteAvailabilityConfigurationRequest_DomainName = &sDeleteAvailabilityConfigurationRequest_DomainName
+
+var DeleteAvailabilityConfigurationResponse = &sDeleteAvailabilityConfigurationResponse
+
+var DeleteEmailMonitoringConfigurationRequest = &sDeleteEmailMonitoringConfigurationRequest
+var DeleteEmailMonitoringConfigurationRequest_OrganizationId = &sDeleteEmailMonitoringConfigurationRequest_OrganizationId
+
+var DeleteEmailMonitoringConfigurationResponse = &sDeleteEmailMonitoringConfigurationResponse
+
+var DeleteGroupRequest = &sDeleteGroupRequest
+var DeleteGroupRequest_OrganizationId = &sDeleteGroupRequest_OrganizationId
+var DeleteGroupRequest_GroupId = &sDeleteGroupRequest_GroupId
+
+var DeleteGroupResponse = &sDeleteGroupResponse
+
+var DeleteIdentityCenterApplicationRequest = &sDeleteIdentityCenterApplicationRequest
+var DeleteIdentityCenterApplicationRequest_ApplicationArn = &sDeleteIdentityCenterApplicationRequest_ApplicationArn
+
+var DeleteIdentityCenterApplicationResponse = &sDeleteIdentityCenterApplicationResponse
+
+var DeleteIdentityProviderConfigurationRequest = &sDeleteIdentityProviderConfigurationRequest
+var DeleteIdentityProviderConfigurationRequest_OrganizationId = &sDeleteIdentityProviderConfigurationRequest_OrganizationId
+
+var DeleteIdentityProviderConfigurationResponse = &sDeleteIdentityProviderConfigurationResponse
+
+var DeleteImpersonationRoleRequest = &sDeleteImpersonationRoleRequest
+var DeleteImpersonationRoleRequest_OrganizationId = &sDeleteImpersonationRoleRequest_OrganizationId
+var DeleteImpersonationRoleRequest_ImpersonationRoleId = &sDeleteImpersonationRoleRequest_ImpersonationRoleId
+
+var DeleteImpersonationRoleResponse = &sDeleteImpersonationRoleResponse
+
+var DeleteMailboxPermissionsRequest = &sDeleteMailboxPermissionsRequest
+var DeleteMailboxPermissionsRequest_OrganizationId = &sDeleteMailboxPermissionsRequest_OrganizationId
+var DeleteMailboxPermissionsRequest_EntityId = &sDeleteMailboxPermissionsRequest_EntityId
+var DeleteMailboxPermissionsRequest_GranteeId = &sDeleteMailboxPermissionsRequest_GranteeId
+
+var DeleteMailboxPermissionsResponse = &sDeleteMailboxPermissionsResponse
+
+var DeleteMobileDeviceAccessOverrideRequest = &sDeleteMobileDeviceAccessOverrideRequest
+var DeleteMobileDeviceAccessOverrideRequest_OrganizationId = &sDeleteMobileDeviceAccessOverrideRequest_OrganizationId
+var DeleteMobileDeviceAccessOverrideRequest_UserId = &sDeleteMobileDeviceAccessOverrideRequest_UserId
+var DeleteMobileDeviceAccessOverrideRequest_DeviceId = &sDeleteMobileDeviceAccessOverrideRequest_DeviceId
+
+var DeleteMobileDeviceAccessOverrideResponse = &sDeleteMobileDeviceAccessOverrideResponse
+
+var DeleteMobileDeviceAccessRuleRequest = &sDeleteMobileDeviceAccessRuleRequest
+var DeleteMobileDeviceAccessRuleRequest_OrganizationId = &sDeleteMobileDeviceAccessRuleRequest_OrganizationId
+var DeleteMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId = &sDeleteMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId
+
+var DeleteMobileDeviceAccessRuleResponse = &sDeleteMobileDeviceAccessRuleResponse
+
+var DeleteOrganizationRequest = &sDeleteOrganizationRequest
+var DeleteOrganizationRequest_ClientToken = &sDeleteOrganizationRequest_ClientToken
+var DeleteOrganizationRequest_OrganizationId = &sDeleteOrganizationRequest_OrganizationId
+var DeleteOrganizationRequest_DeleteDirectory = &sDeleteOrganizationRequest_DeleteDirectory
+var DeleteOrganizationRequest_ForceDelete = &sDeleteOrganizationRequest_ForceDelete
+var DeleteOrganizationRequest_DeleteIdentityCenterApplication = &sDeleteOrganizationRequest_DeleteIdentityCenterApplication
+
+var DeleteOrganizationResponse = &sDeleteOrganizationResponse
+var DeleteOrganizationResponse_OrganizationId = &sDeleteOrganizationResponse_OrganizationId
+var DeleteOrganizationResponse_State = &sDeleteOrganizationResponse_State
+
+var DeletePersonalAccessTokenRequest = &sDeletePersonalAccessTokenRequest
+var DeletePersonalAccessTokenRequest_OrganizationId = &sDeletePersonalAccessTokenRequest_OrganizationId
+var DeletePersonalAccessTokenRequest_PersonalAccessTokenId = &sDeletePersonalAccessTokenRequest_PersonalAccessTokenId
+
+var DeletePersonalAccessTokenResponse = &sDeletePersonalAccessTokenResponse
+
+var DeleteResourceRequest = &sDeleteResourceRequest
+var DeleteResourceRequest_OrganizationId = &sDeleteResourceRequest_OrganizationId
+var DeleteResourceRequest_ResourceId = &sDeleteResourceRequest_ResourceId
+
+var DeleteResourceResponse = &sDeleteResourceResponse
+
+var DeleteRetentionPolicyRequest = &sDeleteRetentionPolicyRequest
+var DeleteRetentionPolicyRequest_OrganizationId = &sDeleteRetentionPolicyRequest_OrganizationId
+var DeleteRetentionPolicyRequest_Id = &sDeleteRetentionPolicyRequest_Id
+
+var DeleteRetentionPolicyResponse = &sDeleteRetentionPolicyResponse
+
+var DeleteUserRequest = &sDeleteUserRequest
+var DeleteUserRequest_OrganizationId = &sDeleteUserRequest_OrganizationId
+var DeleteUserRequest_UserId = &sDeleteUserRequest_UserId
+
+var DeleteUserResponse = &sDeleteUserResponse
+
+var DeregisterFromWorkMailRequest = &sDeregisterFromWorkMailRequest
+var DeregisterFromWorkMailRequest_OrganizationId = &sDeregisterFromWorkMailRequest_OrganizationId
+var DeregisterFromWorkMailRequest_EntityId = &sDeregisterFromWorkMailRequest_EntityId
+
+var DeregisterFromWorkMailResponse = &sDeregisterFromWorkMailResponse
+
+var DeregisterMailDomainRequest = &sDeregisterMailDomainRequest
+var DeregisterMailDomainRequest_OrganizationId = &sDeregisterMailDomainRequest_OrganizationId
+var DeregisterMailDomainRequest_DomainName = &sDeregisterMailDomainRequest_DomainName
+
+var DeregisterMailDomainResponse = &sDeregisterMailDomainResponse
+
+var DescribeEmailMonitoringConfigurationRequest = &sDescribeEmailMonitoringConfigurationRequest
+var DescribeEmailMonitoringConfigurationRequest_OrganizationId = &sDescribeEmailMonitoringConfigurationRequest_OrganizationId
+
+var DescribeEmailMonitoringConfigurationResponse = &sDescribeEmailMonitoringConfigurationResponse
+var DescribeEmailMonitoringConfigurationResponse_RoleArn = &sDescribeEmailMonitoringConfigurationResponse_RoleArn
+var DescribeEmailMonitoringConfigurationResponse_LogGroupArn = &sDescribeEmailMonitoringConfigurationResponse_LogGroupArn
+
+var DescribeEntityRequest = &sDescribeEntityRequest
+var DescribeEntityRequest_OrganizationId = &sDescribeEntityRequest_OrganizationId
+var DescribeEntityRequest_Email = &sDescribeEntityRequest_Email
+
+var DescribeEntityResponse = &sDescribeEntityResponse
+var DescribeEntityResponse_EntityId = &sDescribeEntityResponse_EntityId
+var DescribeEntityResponse_Name = &sDescribeEntityResponse_Name
+var DescribeEntityResponse_Type = &sDescribeEntityResponse_Type
+
+var DescribeGroupRequest = &sDescribeGroupRequest
+var DescribeGroupRequest_OrganizationId = &sDescribeGroupRequest_OrganizationId
+var DescribeGroupRequest_GroupId = &sDescribeGroupRequest_GroupId
+
+var DescribeGroupResponse = &sDescribeGroupResponse
+var DescribeGroupResponse_GroupId = &sDescribeGroupResponse_GroupId
+var DescribeGroupResponse_Name = &sDescribeGroupResponse_Name
+var DescribeGroupResponse_Email = &sDescribeGroupResponse_Email
+var DescribeGroupResponse_State = &sDescribeGroupResponse_State
+var DescribeGroupResponse_EnabledDate = &sDescribeGroupResponse_EnabledDate
+var DescribeGroupResponse_DisabledDate = &sDescribeGroupResponse_DisabledDate
+var DescribeGroupResponse_HiddenFromGlobalAddressList = &sDescribeGroupResponse_HiddenFromGlobalAddressList
+
+var DescribeIdentityProviderConfigurationRequest = &sDescribeIdentityProviderConfigurationRequest
+var DescribeIdentityProviderConfigurationRequest_OrganizationId = &sDescribeIdentityProviderConfigurationRequest_OrganizationId
+
+var DescribeIdentityProviderConfigurationResponse = &sDescribeIdentityProviderConfigurationResponse
+var DescribeIdentityProviderConfigurationResponse_AuthenticationMode = &sDescribeIdentityProviderConfigurationResponse_AuthenticationMode
+var DescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration = &sDescribeIdentityProviderConfigurationResponse_IdentityCenterConfiguration
+var DescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration = &sDescribeIdentityProviderConfigurationResponse_PersonalAccessTokenConfiguration
+
+var DescribeInboundDmarcSettingsRequest = &sDescribeInboundDmarcSettingsRequest
+var DescribeInboundDmarcSettingsRequest_OrganizationId = &sDescribeInboundDmarcSettingsRequest_OrganizationId
+
+var DescribeInboundDmarcSettingsResponse = &sDescribeInboundDmarcSettingsResponse
+var DescribeInboundDmarcSettingsResponse_Enforced = &sDescribeInboundDmarcSettingsResponse_Enforced
+
+var DescribeMailboxExportJobRequest = &sDescribeMailboxExportJobRequest
+var DescribeMailboxExportJobRequest_JobId = &sDescribeMailboxExportJobRequest_JobId
+var DescribeMailboxExportJobRequest_OrganizationId = &sDescribeMailboxExportJobRequest_OrganizationId
+
+var DescribeMailboxExportJobResponse = &sDescribeMailboxExportJobResponse
+var DescribeMailboxExportJobResponse_EntityId = &sDescribeMailboxExportJobResponse_EntityId
+var DescribeMailboxExportJobResponse_Description = &sDescribeMailboxExportJobResponse_Description
+var DescribeMailboxExportJobResponse_RoleArn = &sDescribeMailboxExportJobResponse_RoleArn
+var DescribeMailboxExportJobResponse_KmsKeyArn = &sDescribeMailboxExportJobResponse_KmsKeyArn
+var DescribeMailboxExportJobResponse_S3BucketName = &sDescribeMailboxExportJobResponse_S3BucketName
+var DescribeMailboxExportJobResponse_S3Prefix = &sDescribeMailboxExportJobResponse_S3Prefix
+var DescribeMailboxExportJobResponse_S3Path = &sDescribeMailboxExportJobResponse_S3Path
+var DescribeMailboxExportJobResponse_EstimatedProgress = &sDescribeMailboxExportJobResponse_EstimatedProgress
+var DescribeMailboxExportJobResponse_State = &sDescribeMailboxExportJobResponse_State
+var DescribeMailboxExportJobResponse_ErrorInfo = &sDescribeMailboxExportJobResponse_ErrorInfo
+var DescribeMailboxExportJobResponse_StartTime = &sDescribeMailboxExportJobResponse_StartTime
+var DescribeMailboxExportJobResponse_EndTime = &sDescribeMailboxExportJobResponse_EndTime
+
+var DescribeOrganizationRequest = &sDescribeOrganizationRequest
+var DescribeOrganizationRequest_OrganizationId = &sDescribeOrganizationRequest_OrganizationId
+
+var DescribeOrganizationResponse = &sDescribeOrganizationResponse
+var DescribeOrganizationResponse_OrganizationId = &sDescribeOrganizationResponse_OrganizationId
+var DescribeOrganizationResponse_Alias = &sDescribeOrganizationResponse_Alias
+var DescribeOrganizationResponse_State = &sDescribeOrganizationResponse_State
+var DescribeOrganizationResponse_DirectoryId = &sDescribeOrganizationResponse_DirectoryId
+var DescribeOrganizationResponse_DirectoryType = &sDescribeOrganizationResponse_DirectoryType
+var DescribeOrganizationResponse_DefaultMailDomain = &sDescribeOrganizationResponse_DefaultMailDomain
+var DescribeOrganizationResponse_CompletedDate = &sDescribeOrganizationResponse_CompletedDate
+var DescribeOrganizationResponse_ErrorMessage = &sDescribeOrganizationResponse_ErrorMessage
+var DescribeOrganizationResponse_ARN = &sDescribeOrganizationResponse_ARN
+var DescribeOrganizationResponse_MigrationAdmin = &sDescribeOrganizationResponse_MigrationAdmin
+var DescribeOrganizationResponse_InteroperabilityEnabled = &sDescribeOrganizationResponse_InteroperabilityEnabled
+
+var DescribeResourceRequest = &sDescribeResourceRequest
+var DescribeResourceRequest_OrganizationId = &sDescribeResourceRequest_OrganizationId
+var DescribeResourceRequest_ResourceId = &sDescribeResourceRequest_ResourceId
+
+var DescribeResourceResponse = &sDescribeResourceResponse
+var DescribeResourceResponse_ResourceId = &sDescribeResourceResponse_ResourceId
+var DescribeResourceResponse_Email = &sDescribeResourceResponse_Email
+var DescribeResourceResponse_Name = &sDescribeResourceResponse_Name
+var DescribeResourceResponse_Type = &sDescribeResourceResponse_Type
+var DescribeResourceResponse_BookingOptions = &sDescribeResourceResponse_BookingOptions
+var DescribeResourceResponse_State = &sDescribeResourceResponse_State
+var DescribeResourceResponse_EnabledDate = &sDescribeResourceResponse_EnabledDate
+var DescribeResourceResponse_DisabledDate = &sDescribeResourceResponse_DisabledDate
+var DescribeResourceResponse_Description = &sDescribeResourceResponse_Description
+var DescribeResourceResponse_HiddenFromGlobalAddressList = &sDescribeResourceResponse_HiddenFromGlobalAddressList
+
+var DescribeUserRequest = &sDescribeUserRequest
+var DescribeUserRequest_OrganizationId = &sDescribeUserRequest_OrganizationId
+var DescribeUserRequest_UserId = &sDescribeUserRequest_UserId
+
+var DescribeUserResponse = &sDescribeUserResponse
+var DescribeUserResponse_UserId = &sDescribeUserResponse_UserId
+var DescribeUserResponse_Name = &sDescribeUserResponse_Name
+var DescribeUserResponse_Email = &sDescribeUserResponse_Email
+var DescribeUserResponse_DisplayName = &sDescribeUserResponse_DisplayName
+var DescribeUserResponse_State = &sDescribeUserResponse_State
+var DescribeUserResponse_UserRole = &sDescribeUserResponse_UserRole
+var DescribeUserResponse_EnabledDate = &sDescribeUserResponse_EnabledDate
+var DescribeUserResponse_DisabledDate = &sDescribeUserResponse_DisabledDate
+var DescribeUserResponse_MailboxProvisionedDate = &sDescribeUserResponse_MailboxProvisionedDate
+var DescribeUserResponse_MailboxDeprovisionedDate = &sDescribeUserResponse_MailboxDeprovisionedDate
+var DescribeUserResponse_FirstName = &sDescribeUserResponse_FirstName
+var DescribeUserResponse_LastName = &sDescribeUserResponse_LastName
+var DescribeUserResponse_HiddenFromGlobalAddressList = &sDescribeUserResponse_HiddenFromGlobalAddressList
+var DescribeUserResponse_Initials = &sDescribeUserResponse_Initials
+var DescribeUserResponse_Telephone = &sDescribeUserResponse_Telephone
+var DescribeUserResponse_Street = &sDescribeUserResponse_Street
+var DescribeUserResponse_JobTitle = &sDescribeUserResponse_JobTitle
+var DescribeUserResponse_City = &sDescribeUserResponse_City
+var DescribeUserResponse_Company = &sDescribeUserResponse_Company
+var DescribeUserResponse_ZipCode = &sDescribeUserResponse_ZipCode
+var DescribeUserResponse_Department = &sDescribeUserResponse_Department
+var DescribeUserResponse_Country = &sDescribeUserResponse_Country
+var DescribeUserResponse_Office = &sDescribeUserResponse_Office
+var DescribeUserResponse_IdentityProviderUserId = &sDescribeUserResponse_IdentityProviderUserId
+var DescribeUserResponse_IdentityProviderIdentityStoreId = &sDescribeUserResponse_IdentityProviderIdentityStoreId
+
+var DisassociateDelegateFromResourceRequest = &sDisassociateDelegateFromResourceRequest
+var DisassociateDelegateFromResourceRequest_OrganizationId = &sDisassociateDelegateFromResourceRequest_OrganizationId
+var DisassociateDelegateFromResourceRequest_ResourceId = &sDisassociateDelegateFromResourceRequest_ResourceId
+var DisassociateDelegateFromResourceRequest_EntityId = &sDisassociateDelegateFromResourceRequest_EntityId
+
+var DisassociateDelegateFromResourceResponse = &sDisassociateDelegateFromResourceResponse
+
+var DisassociateMemberFromGroupRequest = &sDisassociateMemberFromGroupRequest
+var DisassociateMemberFromGroupRequest_OrganizationId = &sDisassociateMemberFromGroupRequest_OrganizationId
+var DisassociateMemberFromGroupRequest_GroupId = &sDisassociateMemberFromGroupRequest_GroupId
+var DisassociateMemberFromGroupRequest_MemberId = &sDisassociateMemberFromGroupRequest_MemberId
+
+var DisassociateMemberFromGroupResponse = &sDisassociateMemberFromGroupResponse
+
+var GetAccessControlEffectRequest = &sGetAccessControlEffectRequest
+var GetAccessControlEffectRequest_OrganizationId = &sGetAccessControlEffectRequest_OrganizationId
+var GetAccessControlEffectRequest_IpAddress = &sGetAccessControlEffectRequest_IpAddress
+var GetAccessControlEffectRequest_Action = &sGetAccessControlEffectRequest_Action
+var GetAccessControlEffectRequest_UserId = &sGetAccessControlEffectRequest_UserId
+var GetAccessControlEffectRequest_ImpersonationRoleId = &sGetAccessControlEffectRequest_ImpersonationRoleId
+
+var GetAccessControlEffectResponse = &sGetAccessControlEffectResponse
+var GetAccessControlEffectResponse_Effect = &sGetAccessControlEffectResponse_Effect
+var GetAccessControlEffectResponse_MatchedRules = &sGetAccessControlEffectResponse_MatchedRules
+
+var GetDefaultRetentionPolicyRequest = &sGetDefaultRetentionPolicyRequest
+var GetDefaultRetentionPolicyRequest_OrganizationId = &sGetDefaultRetentionPolicyRequest_OrganizationId
+
+var GetDefaultRetentionPolicyResponse = &sGetDefaultRetentionPolicyResponse
+var GetDefaultRetentionPolicyResponse_Id = &sGetDefaultRetentionPolicyResponse_Id
+var GetDefaultRetentionPolicyResponse_Name = &sGetDefaultRetentionPolicyResponse_Name
+var GetDefaultRetentionPolicyResponse_Description = &sGetDefaultRetentionPolicyResponse_Description
+var GetDefaultRetentionPolicyResponse_FolderConfigurations = &sGetDefaultRetentionPolicyResponse_FolderConfigurations
+
+var GetImpersonationRoleEffectRequest = &sGetImpersonationRoleEffectRequest
+var GetImpersonationRoleEffectRequest_OrganizationId = &sGetImpersonationRoleEffectRequest_OrganizationId
+var GetImpersonationRoleEffectRequest_ImpersonationRoleId = &sGetImpersonationRoleEffectRequest_ImpersonationRoleId
+var GetImpersonationRoleEffectRequest_TargetUser = &sGetImpersonationRoleEffectRequest_TargetUser
+
+var GetImpersonationRoleEffectResponse = &sGetImpersonationRoleEffectResponse
+var GetImpersonationRoleEffectResponse_Type = &sGetImpersonationRoleEffectResponse_Type
+var GetImpersonationRoleEffectResponse_Effect = &sGetImpersonationRoleEffectResponse_Effect
+var GetImpersonationRoleEffectResponse_MatchedRules = &sGetImpersonationRoleEffectResponse_MatchedRules
+
+var GetImpersonationRoleRequest = &sGetImpersonationRoleRequest
+var GetImpersonationRoleRequest_OrganizationId = &sGetImpersonationRoleRequest_OrganizationId
+var GetImpersonationRoleRequest_ImpersonationRoleId = &sGetImpersonationRoleRequest_ImpersonationRoleId
+
+var GetImpersonationRoleResponse = &sGetImpersonationRoleResponse
+var GetImpersonationRoleResponse_ImpersonationRoleId = &sGetImpersonationRoleResponse_ImpersonationRoleId
+var GetImpersonationRoleResponse_Name = &sGetImpersonationRoleResponse_Name
+var GetImpersonationRoleResponse_Type = &sGetImpersonationRoleResponse_Type
+var GetImpersonationRoleResponse_Description = &sGetImpersonationRoleResponse_Description
+var GetImpersonationRoleResponse_Rules = &sGetImpersonationRoleResponse_Rules
+var GetImpersonationRoleResponse_DateCreated = &sGetImpersonationRoleResponse_DateCreated
+var GetImpersonationRoleResponse_DateModified = &sGetImpersonationRoleResponse_DateModified
+
+var GetMailboxDetailsRequest = &sGetMailboxDetailsRequest
+var GetMailboxDetailsRequest_OrganizationId = &sGetMailboxDetailsRequest_OrganizationId
+var GetMailboxDetailsRequest_UserId = &sGetMailboxDetailsRequest_UserId
+
+var GetMailboxDetailsResponse = &sGetMailboxDetailsResponse
+var GetMailboxDetailsResponse_MailboxQuota = &sGetMailboxDetailsResponse_MailboxQuota
+var GetMailboxDetailsResponse_MailboxSize = &sGetMailboxDetailsResponse_MailboxSize
+
+var GetMailDomainRequest = &sGetMailDomainRequest
+var GetMailDomainRequest_OrganizationId = &sGetMailDomainRequest_OrganizationId
+var GetMailDomainRequest_DomainName = &sGetMailDomainRequest_DomainName
+
+var GetMailDomainResponse = &sGetMailDomainResponse
+var GetMailDomainResponse_Records = &sGetMailDomainResponse_Records
+var GetMailDomainResponse_IsTestDomain = &sGetMailDomainResponse_IsTestDomain
+var GetMailDomainResponse_IsDefault = &sGetMailDomainResponse_IsDefault
+var GetMailDomainResponse_OwnershipVerificationStatus = &sGetMailDomainResponse_OwnershipVerificationStatus
+var GetMailDomainResponse_DkimVerificationStatus = &sGetMailDomainResponse_DkimVerificationStatus
+
+var GetMobileDeviceAccessEffectRequest = &sGetMobileDeviceAccessEffectRequest
+var GetMobileDeviceAccessEffectRequest_OrganizationId = &sGetMobileDeviceAccessEffectRequest_OrganizationId
+var GetMobileDeviceAccessEffectRequest_DeviceType = &sGetMobileDeviceAccessEffectRequest_DeviceType
+var GetMobileDeviceAccessEffectRequest_DeviceModel = &sGetMobileDeviceAccessEffectRequest_DeviceModel
+var GetMobileDeviceAccessEffectRequest_DeviceOperatingSystem = &sGetMobileDeviceAccessEffectRequest_DeviceOperatingSystem
+var GetMobileDeviceAccessEffectRequest_DeviceUserAgent = &sGetMobileDeviceAccessEffectRequest_DeviceUserAgent
+
+var GetMobileDeviceAccessEffectResponse = &sGetMobileDeviceAccessEffectResponse
+var GetMobileDeviceAccessEffectResponse_Effect = &sGetMobileDeviceAccessEffectResponse_Effect
+var GetMobileDeviceAccessEffectResponse_MatchedRules = &sGetMobileDeviceAccessEffectResponse_MatchedRules
+
+var GetMobileDeviceAccessOverrideRequest = &sGetMobileDeviceAccessOverrideRequest
+var GetMobileDeviceAccessOverrideRequest_OrganizationId = &sGetMobileDeviceAccessOverrideRequest_OrganizationId
+var GetMobileDeviceAccessOverrideRequest_UserId = &sGetMobileDeviceAccessOverrideRequest_UserId
+var GetMobileDeviceAccessOverrideRequest_DeviceId = &sGetMobileDeviceAccessOverrideRequest_DeviceId
+
+var GetMobileDeviceAccessOverrideResponse = &sGetMobileDeviceAccessOverrideResponse
+var GetMobileDeviceAccessOverrideResponse_UserId = &sGetMobileDeviceAccessOverrideResponse_UserId
+var GetMobileDeviceAccessOverrideResponse_DeviceId = &sGetMobileDeviceAccessOverrideResponse_DeviceId
+var GetMobileDeviceAccessOverrideResponse_Effect = &sGetMobileDeviceAccessOverrideResponse_Effect
+var GetMobileDeviceAccessOverrideResponse_Description = &sGetMobileDeviceAccessOverrideResponse_Description
+var GetMobileDeviceAccessOverrideResponse_DateCreated = &sGetMobileDeviceAccessOverrideResponse_DateCreated
+var GetMobileDeviceAccessOverrideResponse_DateModified = &sGetMobileDeviceAccessOverrideResponse_DateModified
+
+var GetPersonalAccessTokenMetadataRequest = &sGetPersonalAccessTokenMetadataRequest
+var GetPersonalAccessTokenMetadataRequest_OrganizationId = &sGetPersonalAccessTokenMetadataRequest_OrganizationId
+var GetPersonalAccessTokenMetadataRequest_PersonalAccessTokenId = &sGetPersonalAccessTokenMetadataRequest_PersonalAccessTokenId
+
+var GetPersonalAccessTokenMetadataResponse = &sGetPersonalAccessTokenMetadataResponse
+var GetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId = &sGetPersonalAccessTokenMetadataResponse_PersonalAccessTokenId
+var GetPersonalAccessTokenMetadataResponse_UserId = &sGetPersonalAccessTokenMetadataResponse_UserId
+var GetPersonalAccessTokenMetadataResponse_Name = &sGetPersonalAccessTokenMetadataResponse_Name
+var GetPersonalAccessTokenMetadataResponse_DateCreated = &sGetPersonalAccessTokenMetadataResponse_DateCreated
+var GetPersonalAccessTokenMetadataResponse_DateLastUsed = &sGetPersonalAccessTokenMetadataResponse_DateLastUsed
+var GetPersonalAccessTokenMetadataResponse_ExpiresTime = &sGetPersonalAccessTokenMetadataResponse_ExpiresTime
+var GetPersonalAccessTokenMetadataResponse_Scopes = &sGetPersonalAccessTokenMetadataResponse_Scopes
+
+var ListAccessControlRulesRequest = &sListAccessControlRulesRequest
+var ListAccessControlRulesRequest_OrganizationId = &sListAccessControlRulesRequest_OrganizationId
+
+var ListAccessControlRulesResponse = &sListAccessControlRulesResponse
+var ListAccessControlRulesResponse_Rules = &sListAccessControlRulesResponse_Rules
+
+var ListAliasesRequest = &sListAliasesRequest
+var ListAliasesRequest_OrganizationId = &sListAliasesRequest_OrganizationId
+var ListAliasesRequest_EntityId = &sListAliasesRequest_EntityId
+var ListAliasesRequest_NextToken = &sListAliasesRequest_NextToken
+var ListAliasesRequest_MaxResults = &sListAliasesRequest_MaxResults
+
+var ListAliasesResponse = &sListAliasesResponse
+var ListAliasesResponse_Aliases = &sListAliasesResponse_Aliases
+var ListAliasesResponse_NextToken = &sListAliasesResponse_NextToken
+
+var ListAvailabilityConfigurationsRequest = &sListAvailabilityConfigurationsRequest
+var ListAvailabilityConfigurationsRequest_OrganizationId = &sListAvailabilityConfigurationsRequest_OrganizationId
+var ListAvailabilityConfigurationsRequest_MaxResults = &sListAvailabilityConfigurationsRequest_MaxResults
+var ListAvailabilityConfigurationsRequest_NextToken = &sListAvailabilityConfigurationsRequest_NextToken
+
+var ListAvailabilityConfigurationsResponse = &sListAvailabilityConfigurationsResponse
+var ListAvailabilityConfigurationsResponse_AvailabilityConfigurations = &sListAvailabilityConfigurationsResponse_AvailabilityConfigurations
+var ListAvailabilityConfigurationsResponse_NextToken = &sListAvailabilityConfigurationsResponse_NextToken
+
+var ListGroupMembersRequest = &sListGroupMembersRequest
+var ListGroupMembersRequest_OrganizationId = &sListGroupMembersRequest_OrganizationId
+var ListGroupMembersRequest_GroupId = &sListGroupMembersRequest_GroupId
+var ListGroupMembersRequest_NextToken = &sListGroupMembersRequest_NextToken
+var ListGroupMembersRequest_MaxResults = &sListGroupMembersRequest_MaxResults
+
+var ListGroupMembersResponse = &sListGroupMembersResponse
+var ListGroupMembersResponse_Members = &sListGroupMembersResponse_Members
+var ListGroupMembersResponse_NextToken = &sListGroupMembersResponse_NextToken
+
+var ListGroupsForEntityRequest = &sListGroupsForEntityRequest
+var ListGroupsForEntityRequest_OrganizationId = &sListGroupsForEntityRequest_OrganizationId
+var ListGroupsForEntityRequest_EntityId = &sListGroupsForEntityRequest_EntityId
+var ListGroupsForEntityRequest_Filters = &sListGroupsForEntityRequest_Filters
+var ListGroupsForEntityRequest_NextToken = &sListGroupsForEntityRequest_NextToken
+var ListGroupsForEntityRequest_MaxResults = &sListGroupsForEntityRequest_MaxResults
+
+var ListGroupsForEntityResponse = &sListGroupsForEntityResponse
+var ListGroupsForEntityResponse_Groups = &sListGroupsForEntityResponse_Groups
+var ListGroupsForEntityResponse_NextToken = &sListGroupsForEntityResponse_NextToken
+
+var ListGroupsRequest = &sListGroupsRequest
+var ListGroupsRequest_OrganizationId = &sListGroupsRequest_OrganizationId
+var ListGroupsRequest_NextToken = &sListGroupsRequest_NextToken
+var ListGroupsRequest_MaxResults = &sListGroupsRequest_MaxResults
+var ListGroupsRequest_Filters = &sListGroupsRequest_Filters
+
+var ListGroupsResponse = &sListGroupsResponse
+var ListGroupsResponse_Groups = &sListGroupsResponse_Groups
+var ListGroupsResponse_NextToken = &sListGroupsResponse_NextToken
+
+var ListImpersonationRolesRequest = &sListImpersonationRolesRequest
+var ListImpersonationRolesRequest_OrganizationId = &sListImpersonationRolesRequest_OrganizationId
+var ListImpersonationRolesRequest_NextToken = &sListImpersonationRolesRequest_NextToken
+var ListImpersonationRolesRequest_MaxResults = &sListImpersonationRolesRequest_MaxResults
+
+var ListImpersonationRolesResponse = &sListImpersonationRolesResponse
+var ListImpersonationRolesResponse_Roles = &sListImpersonationRolesResponse_Roles
+var ListImpersonationRolesResponse_NextToken = &sListImpersonationRolesResponse_NextToken
+
+var ListMailboxExportJobsRequest = &sListMailboxExportJobsRequest
+var ListMailboxExportJobsRequest_OrganizationId = &sListMailboxExportJobsRequest_OrganizationId
+var ListMailboxExportJobsRequest_NextToken = &sListMailboxExportJobsRequest_NextToken
+var ListMailboxExportJobsRequest_MaxResults = &sListMailboxExportJobsRequest_MaxResults
+
+var ListMailboxExportJobsResponse = &sListMailboxExportJobsResponse
+var ListMailboxExportJobsResponse_Jobs = &sListMailboxExportJobsResponse_Jobs
+var ListMailboxExportJobsResponse_NextToken = &sListMailboxExportJobsResponse_NextToken
+
+var ListMailboxPermissionsRequest = &sListMailboxPermissionsRequest
+var ListMailboxPermissionsRequest_OrganizationId = &sListMailboxPermissionsRequest_OrganizationId
+var ListMailboxPermissionsRequest_EntityId = &sListMailboxPermissionsRequest_EntityId
+var ListMailboxPermissionsRequest_NextToken = &sListMailboxPermissionsRequest_NextToken
+var ListMailboxPermissionsRequest_MaxResults = &sListMailboxPermissionsRequest_MaxResults
+
+var ListMailboxPermissionsResponse = &sListMailboxPermissionsResponse
+var ListMailboxPermissionsResponse_Permissions = &sListMailboxPermissionsResponse_Permissions
+var ListMailboxPermissionsResponse_NextToken = &sListMailboxPermissionsResponse_NextToken
+
+var ListMailDomainsRequest = &sListMailDomainsRequest
+var ListMailDomainsRequest_OrganizationId = &sListMailDomainsRequest_OrganizationId
+var ListMailDomainsRequest_MaxResults = &sListMailDomainsRequest_MaxResults
+var ListMailDomainsRequest_NextToken = &sListMailDomainsRequest_NextToken
+
+var ListMailDomainsResponse = &sListMailDomainsResponse
+var ListMailDomainsResponse_MailDomains = &sListMailDomainsResponse_MailDomains
+var ListMailDomainsResponse_NextToken = &sListMailDomainsResponse_NextToken
+
+var ListMobileDeviceAccessOverridesRequest = &sListMobileDeviceAccessOverridesRequest
+var ListMobileDeviceAccessOverridesRequest_OrganizationId = &sListMobileDeviceAccessOverridesRequest_OrganizationId
+var ListMobileDeviceAccessOverridesRequest_UserId = &sListMobileDeviceAccessOverridesRequest_UserId
+var ListMobileDeviceAccessOverridesRequest_DeviceId = &sListMobileDeviceAccessOverridesRequest_DeviceId
+var ListMobileDeviceAccessOverridesRequest_NextToken = &sListMobileDeviceAccessOverridesRequest_NextToken
+var ListMobileDeviceAccessOverridesRequest_MaxResults = &sListMobileDeviceAccessOverridesRequest_MaxResults
+
+var ListMobileDeviceAccessOverridesResponse = &sListMobileDeviceAccessOverridesResponse
+var ListMobileDeviceAccessOverridesResponse_Overrides = &sListMobileDeviceAccessOverridesResponse_Overrides
+var ListMobileDeviceAccessOverridesResponse_NextToken = &sListMobileDeviceAccessOverridesResponse_NextToken
+
+var ListMobileDeviceAccessRulesRequest = &sListMobileDeviceAccessRulesRequest
+var ListMobileDeviceAccessRulesRequest_OrganizationId = &sListMobileDeviceAccessRulesRequest_OrganizationId
+
+var ListMobileDeviceAccessRulesResponse = &sListMobileDeviceAccessRulesResponse
+var ListMobileDeviceAccessRulesResponse_Rules = &sListMobileDeviceAccessRulesResponse_Rules
+
+var ListOrganizationsRequest = &sListOrganizationsRequest
+var ListOrganizationsRequest_NextToken = &sListOrganizationsRequest_NextToken
+var ListOrganizationsRequest_MaxResults = &sListOrganizationsRequest_MaxResults
+
+var ListOrganizationsResponse = &sListOrganizationsResponse
+var ListOrganizationsResponse_OrganizationSummaries = &sListOrganizationsResponse_OrganizationSummaries
+var ListOrganizationsResponse_NextToken = &sListOrganizationsResponse_NextToken
+
+var ListPersonalAccessTokensRequest = &sListPersonalAccessTokensRequest
+var ListPersonalAccessTokensRequest_OrganizationId = &sListPersonalAccessTokensRequest_OrganizationId
+var ListPersonalAccessTokensRequest_UserId = &sListPersonalAccessTokensRequest_UserId
+var ListPersonalAccessTokensRequest_NextToken = &sListPersonalAccessTokensRequest_NextToken
+var ListPersonalAccessTokensRequest_MaxResults = &sListPersonalAccessTokensRequest_MaxResults
+
+var ListPersonalAccessTokensResponse = &sListPersonalAccessTokensResponse
+var ListPersonalAccessTokensResponse_NextToken = &sListPersonalAccessTokensResponse_NextToken
+var ListPersonalAccessTokensResponse_PersonalAccessTokenSummaries = &sListPersonalAccessTokensResponse_PersonalAccessTokenSummaries
+
+var ListResourceDelegatesRequest = &sListResourceDelegatesRequest
+var ListResourceDelegatesRequest_OrganizationId = &sListResourceDelegatesRequest_OrganizationId
+var ListResourceDelegatesRequest_ResourceId = &sListResourceDelegatesRequest_ResourceId
+var ListResourceDelegatesRequest_NextToken = &sListResourceDelegatesRequest_NextToken
+var ListResourceDelegatesRequest_MaxResults = &sListResourceDelegatesRequest_MaxResults
+
+var ListResourceDelegatesResponse = &sListResourceDelegatesResponse
+var ListResourceDelegatesResponse_Delegates = &sListResourceDelegatesResponse_Delegates
+var ListResourceDelegatesResponse_NextToken = &sListResourceDelegatesResponse_NextToken
+
+var ListResourcesRequest = &sListResourcesRequest
+var ListResourcesRequest_OrganizationId = &sListResourcesRequest_OrganizationId
+var ListResourcesRequest_NextToken = &sListResourcesRequest_NextToken
+var ListResourcesRequest_MaxResults = &sListResourcesRequest_MaxResults
+var ListResourcesRequest_Filters = &sListResourcesRequest_Filters
+
+var ListResourcesResponse = &sListResourcesResponse
+var ListResourcesResponse_Resources = &sListResourcesResponse_Resources
+var ListResourcesResponse_NextToken = &sListResourcesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var ListUsersRequest = &sListUsersRequest
+var ListUsersRequest_OrganizationId = &sListUsersRequest_OrganizationId
+var ListUsersRequest_NextToken = &sListUsersRequest_NextToken
+var ListUsersRequest_MaxResults = &sListUsersRequest_MaxResults
+var ListUsersRequest_Filters = &sListUsersRequest_Filters
+
+var ListUsersResponse = &sListUsersResponse
+var ListUsersResponse_Users = &sListUsersResponse_Users
+var ListUsersResponse_NextToken = &sListUsersResponse_NextToken
+
+var PutAccessControlRuleRequest = &sPutAccessControlRuleRequest
+var PutAccessControlRuleRequest_Name = &sPutAccessControlRuleRequest_Name
+var PutAccessControlRuleRequest_Effect = &sPutAccessControlRuleRequest_Effect
+var PutAccessControlRuleRequest_Description = &sPutAccessControlRuleRequest_Description
+var PutAccessControlRuleRequest_IpRanges = &sPutAccessControlRuleRequest_IpRanges
+var PutAccessControlRuleRequest_NotIpRanges = &sPutAccessControlRuleRequest_NotIpRanges
+var PutAccessControlRuleRequest_Actions = &sPutAccessControlRuleRequest_Actions
+var PutAccessControlRuleRequest_NotActions = &sPutAccessControlRuleRequest_NotActions
+var PutAccessControlRuleRequest_UserIds = &sPutAccessControlRuleRequest_UserIds
+var PutAccessControlRuleRequest_NotUserIds = &sPutAccessControlRuleRequest_NotUserIds
+var PutAccessControlRuleRequest_OrganizationId = &sPutAccessControlRuleRequest_OrganizationId
+var PutAccessControlRuleRequest_ImpersonationRoleIds = &sPutAccessControlRuleRequest_ImpersonationRoleIds
+var PutAccessControlRuleRequest_NotImpersonationRoleIds = &sPutAccessControlRuleRequest_NotImpersonationRoleIds
+
+var PutAccessControlRuleResponse = &sPutAccessControlRuleResponse
+
+var PutEmailMonitoringConfigurationRequest = &sPutEmailMonitoringConfigurationRequest
+var PutEmailMonitoringConfigurationRequest_OrganizationId = &sPutEmailMonitoringConfigurationRequest_OrganizationId
+var PutEmailMonitoringConfigurationRequest_RoleArn = &sPutEmailMonitoringConfigurationRequest_RoleArn
+var PutEmailMonitoringConfigurationRequest_LogGroupArn = &sPutEmailMonitoringConfigurationRequest_LogGroupArn
+
+var PutEmailMonitoringConfigurationResponse = &sPutEmailMonitoringConfigurationResponse
+
+var PutIdentityProviderConfigurationRequest = &sPutIdentityProviderConfigurationRequest
+var PutIdentityProviderConfigurationRequest_OrganizationId = &sPutIdentityProviderConfigurationRequest_OrganizationId
+var PutIdentityProviderConfigurationRequest_AuthenticationMode = &sPutIdentityProviderConfigurationRequest_AuthenticationMode
+var PutIdentityProviderConfigurationRequest_IdentityCenterConfiguration = &sPutIdentityProviderConfigurationRequest_IdentityCenterConfiguration
+var PutIdentityProviderConfigurationRequest_PersonalAccessTokenConfiguration = &sPutIdentityProviderConfigurationRequest_PersonalAccessTokenConfiguration
+
+var PutIdentityProviderConfigurationResponse = &sPutIdentityProviderConfigurationResponse
+
+var PutInboundDmarcSettingsRequest = &sPutInboundDmarcSettingsRequest
+var PutInboundDmarcSettingsRequest_OrganizationId = &sPutInboundDmarcSettingsRequest_OrganizationId
+var PutInboundDmarcSettingsRequest_Enforced = &sPutInboundDmarcSettingsRequest_Enforced
+
+var PutInboundDmarcSettingsResponse = &sPutInboundDmarcSettingsResponse
+
+var PutMailboxPermissionsRequest = &sPutMailboxPermissionsRequest
+var PutMailboxPermissionsRequest_OrganizationId = &sPutMailboxPermissionsRequest_OrganizationId
+var PutMailboxPermissionsRequest_EntityId = &sPutMailboxPermissionsRequest_EntityId
+var PutMailboxPermissionsRequest_GranteeId = &sPutMailboxPermissionsRequest_GranteeId
+var PutMailboxPermissionsRequest_PermissionValues = &sPutMailboxPermissionsRequest_PermissionValues
+
+var PutMailboxPermissionsResponse = &sPutMailboxPermissionsResponse
+
+var PutMobileDeviceAccessOverrideRequest = &sPutMobileDeviceAccessOverrideRequest
+var PutMobileDeviceAccessOverrideRequest_OrganizationId = &sPutMobileDeviceAccessOverrideRequest_OrganizationId
+var PutMobileDeviceAccessOverrideRequest_UserId = &sPutMobileDeviceAccessOverrideRequest_UserId
+var PutMobileDeviceAccessOverrideRequest_DeviceId = &sPutMobileDeviceAccessOverrideRequest_DeviceId
+var PutMobileDeviceAccessOverrideRequest_Effect = &sPutMobileDeviceAccessOverrideRequest_Effect
+var PutMobileDeviceAccessOverrideRequest_Description = &sPutMobileDeviceAccessOverrideRequest_Description
+
+var PutMobileDeviceAccessOverrideResponse = &sPutMobileDeviceAccessOverrideResponse
+
+var PutRetentionPolicyRequest = &sPutRetentionPolicyRequest
+var PutRetentionPolicyRequest_OrganizationId = &sPutRetentionPolicyRequest_OrganizationId
+var PutRetentionPolicyRequest_Id = &sPutRetentionPolicyRequest_Id
+var PutRetentionPolicyRequest_Name = &sPutRetentionPolicyRequest_Name
+var PutRetentionPolicyRequest_Description = &sPutRetentionPolicyRequest_Description
+var PutRetentionPolicyRequest_FolderConfigurations = &sPutRetentionPolicyRequest_FolderConfigurations
+
+var PutRetentionPolicyResponse = &sPutRetentionPolicyResponse
+
+var RegisterMailDomainRequest = &sRegisterMailDomainRequest
+var RegisterMailDomainRequest_ClientToken = &sRegisterMailDomainRequest_ClientToken
+var RegisterMailDomainRequest_OrganizationId = &sRegisterMailDomainRequest_OrganizationId
+var RegisterMailDomainRequest_DomainName = &sRegisterMailDomainRequest_DomainName
+
+var RegisterMailDomainResponse = &sRegisterMailDomainResponse
+
+var RegisterToWorkMailRequest = &sRegisterToWorkMailRequest
+var RegisterToWorkMailRequest_OrganizationId = &sRegisterToWorkMailRequest_OrganizationId
+var RegisterToWorkMailRequest_EntityId = &sRegisterToWorkMailRequest_EntityId
+var RegisterToWorkMailRequest_Email = &sRegisterToWorkMailRequest_Email
+
+var RegisterToWorkMailResponse = &sRegisterToWorkMailResponse
+
+var ResetPasswordRequest = &sResetPasswordRequest
+var ResetPasswordRequest_OrganizationId = &sResetPasswordRequest_OrganizationId
+var ResetPasswordRequest_UserId = &sResetPasswordRequest_UserId
+var ResetPasswordRequest_Password = &sResetPasswordRequest_Password
+
+var ResetPasswordResponse = &sResetPasswordResponse
+
+var StartMailboxExportJobRequest = &sStartMailboxExportJobRequest
+var StartMailboxExportJobRequest_ClientToken = &sStartMailboxExportJobRequest_ClientToken
+var StartMailboxExportJobRequest_OrganizationId = &sStartMailboxExportJobRequest_OrganizationId
+var StartMailboxExportJobRequest_EntityId = &sStartMailboxExportJobRequest_EntityId
+var StartMailboxExportJobRequest_Description = &sStartMailboxExportJobRequest_Description
+var StartMailboxExportJobRequest_RoleArn = &sStartMailboxExportJobRequest_RoleArn
+var StartMailboxExportJobRequest_KmsKeyArn = &sStartMailboxExportJobRequest_KmsKeyArn
+var StartMailboxExportJobRequest_S3BucketName = &sStartMailboxExportJobRequest_S3BucketName
+var StartMailboxExportJobRequest_S3Prefix = &sStartMailboxExportJobRequest_S3Prefix
+
+var StartMailboxExportJobResponse = &sStartMailboxExportJobResponse
+var StartMailboxExportJobResponse_JobId = &sStartMailboxExportJobResponse_JobId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var TestAvailabilityConfigurationRequest = &sTestAvailabilityConfigurationRequest
+var TestAvailabilityConfigurationRequest_OrganizationId = &sTestAvailabilityConfigurationRequest_OrganizationId
+var TestAvailabilityConfigurationRequest_DomainName = &sTestAvailabilityConfigurationRequest_DomainName
+var TestAvailabilityConfigurationRequest_EwsProvider = &sTestAvailabilityConfigurationRequest_EwsProvider
+var TestAvailabilityConfigurationRequest_LambdaProvider = &sTestAvailabilityConfigurationRequest_LambdaProvider
+
+var TestAvailabilityConfigurationResponse = &sTestAvailabilityConfigurationResponse
+var TestAvailabilityConfigurationResponse_TestPassed = &sTestAvailabilityConfigurationResponse_TestPassed
+var TestAvailabilityConfigurationResponse_FailureReason = &sTestAvailabilityConfigurationResponse_FailureReason
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAvailabilityConfigurationRequest = &sUpdateAvailabilityConfigurationRequest
+var UpdateAvailabilityConfigurationRequest_OrganizationId = &sUpdateAvailabilityConfigurationRequest_OrganizationId
+var UpdateAvailabilityConfigurationRequest_DomainName = &sUpdateAvailabilityConfigurationRequest_DomainName
+var UpdateAvailabilityConfigurationRequest_EwsProvider = &sUpdateAvailabilityConfigurationRequest_EwsProvider
+var UpdateAvailabilityConfigurationRequest_LambdaProvider = &sUpdateAvailabilityConfigurationRequest_LambdaProvider
+
+var UpdateAvailabilityConfigurationResponse = &sUpdateAvailabilityConfigurationResponse
+
+var UpdateDefaultMailDomainRequest = &sUpdateDefaultMailDomainRequest
+var UpdateDefaultMailDomainRequest_OrganizationId = &sUpdateDefaultMailDomainRequest_OrganizationId
+var UpdateDefaultMailDomainRequest_DomainName = &sUpdateDefaultMailDomainRequest_DomainName
+
+var UpdateDefaultMailDomainResponse = &sUpdateDefaultMailDomainResponse
+
+var UpdateGroupRequest = &sUpdateGroupRequest
+var UpdateGroupRequest_OrganizationId = &sUpdateGroupRequest_OrganizationId
+var UpdateGroupRequest_GroupId = &sUpdateGroupRequest_GroupId
+var UpdateGroupRequest_HiddenFromGlobalAddressList = &sUpdateGroupRequest_HiddenFromGlobalAddressList
+
+var UpdateGroupResponse = &sUpdateGroupResponse
+
+var UpdateImpersonationRoleRequest = &sUpdateImpersonationRoleRequest
+var UpdateImpersonationRoleRequest_OrganizationId = &sUpdateImpersonationRoleRequest_OrganizationId
+var UpdateImpersonationRoleRequest_ImpersonationRoleId = &sUpdateImpersonationRoleRequest_ImpersonationRoleId
+var UpdateImpersonationRoleRequest_Name = &sUpdateImpersonationRoleRequest_Name
+var UpdateImpersonationRoleRequest_Type = &sUpdateImpersonationRoleRequest_Type
+var UpdateImpersonationRoleRequest_Description = &sUpdateImpersonationRoleRequest_Description
+var UpdateImpersonationRoleRequest_Rules = &sUpdateImpersonationRoleRequest_Rules
+
+var UpdateImpersonationRoleResponse = &sUpdateImpersonationRoleResponse
+
+var UpdateMailboxQuotaRequest = &sUpdateMailboxQuotaRequest
+var UpdateMailboxQuotaRequest_OrganizationId = &sUpdateMailboxQuotaRequest_OrganizationId
+var UpdateMailboxQuotaRequest_UserId = &sUpdateMailboxQuotaRequest_UserId
+var UpdateMailboxQuotaRequest_MailboxQuota = &sUpdateMailboxQuotaRequest_MailboxQuota
+
+var UpdateMailboxQuotaResponse = &sUpdateMailboxQuotaResponse
+
+var UpdateMobileDeviceAccessRuleRequest = &sUpdateMobileDeviceAccessRuleRequest
+var UpdateMobileDeviceAccessRuleRequest_OrganizationId = &sUpdateMobileDeviceAccessRuleRequest_OrganizationId
+var UpdateMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId = &sUpdateMobileDeviceAccessRuleRequest_MobileDeviceAccessRuleId
+var UpdateMobileDeviceAccessRuleRequest_Name = &sUpdateMobileDeviceAccessRuleRequest_Name
+var UpdateMobileDeviceAccessRuleRequest_Description = &sUpdateMobileDeviceAccessRuleRequest_Description
+var UpdateMobileDeviceAccessRuleRequest_Effect = &sUpdateMobileDeviceAccessRuleRequest_Effect
+var UpdateMobileDeviceAccessRuleRequest_DeviceTypes = &sUpdateMobileDeviceAccessRuleRequest_DeviceTypes
+var UpdateMobileDeviceAccessRuleRequest_NotDeviceTypes = &sUpdateMobileDeviceAccessRuleRequest_NotDeviceTypes
+var UpdateMobileDeviceAccessRuleRequest_DeviceModels = &sUpdateMobileDeviceAccessRuleRequest_DeviceModels
+var UpdateMobileDeviceAccessRuleRequest_NotDeviceModels = &sUpdateMobileDeviceAccessRuleRequest_NotDeviceModels
+var UpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems = &sUpdateMobileDeviceAccessRuleRequest_DeviceOperatingSystems
+var UpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems = &sUpdateMobileDeviceAccessRuleRequest_NotDeviceOperatingSystems
+var UpdateMobileDeviceAccessRuleRequest_DeviceUserAgents = &sUpdateMobileDeviceAccessRuleRequest_DeviceUserAgents
+var UpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents = &sUpdateMobileDeviceAccessRuleRequest_NotDeviceUserAgents
+
+var UpdateMobileDeviceAccessRuleResponse = &sUpdateMobileDeviceAccessRuleResponse
+
+var UpdatePrimaryEmailAddressRequest = &sUpdatePrimaryEmailAddressRequest
+var UpdatePrimaryEmailAddressRequest_OrganizationId = &sUpdatePrimaryEmailAddressRequest_OrganizationId
+var UpdatePrimaryEmailAddressRequest_EntityId = &sUpdatePrimaryEmailAddressRequest_EntityId
+var UpdatePrimaryEmailAddressRequest_Email = &sUpdatePrimaryEmailAddressRequest_Email
+
+var UpdatePrimaryEmailAddressResponse = &sUpdatePrimaryEmailAddressResponse
+
+var UpdateResourceRequest = &sUpdateResourceRequest
+var UpdateResourceRequest_OrganizationId = &sUpdateResourceRequest_OrganizationId
+var UpdateResourceRequest_ResourceId = &sUpdateResourceRequest_ResourceId
+var UpdateResourceRequest_Name = &sUpdateResourceRequest_Name
+var UpdateResourceRequest_BookingOptions = &sUpdateResourceRequest_BookingOptions
+var UpdateResourceRequest_Description = &sUpdateResourceRequest_Description
+var UpdateResourceRequest_Type = &sUpdateResourceRequest_Type
+var UpdateResourceRequest_HiddenFromGlobalAddressList = &sUpdateResourceRequest_HiddenFromGlobalAddressList
+
+var UpdateResourceResponse = &sUpdateResourceResponse
+
+var UpdateUserRequest = &sUpdateUserRequest
+var UpdateUserRequest_OrganizationId = &sUpdateUserRequest_OrganizationId
+var UpdateUserRequest_UserId = &sUpdateUserRequest_UserId
+var UpdateUserRequest_Role = &sUpdateUserRequest_Role
+var UpdateUserRequest_DisplayName = &sUpdateUserRequest_DisplayName
+var UpdateUserRequest_FirstName = &sUpdateUserRequest_FirstName
+var UpdateUserRequest_LastName = &sUpdateUserRequest_LastName
+var UpdateUserRequest_HiddenFromGlobalAddressList = &sUpdateUserRequest_HiddenFromGlobalAddressList
+var UpdateUserRequest_Initials = &sUpdateUserRequest_Initials
+var UpdateUserRequest_Telephone = &sUpdateUserRequest_Telephone
+var UpdateUserRequest_Street = &sUpdateUserRequest_Street
+var UpdateUserRequest_JobTitle = &sUpdateUserRequest_JobTitle
+var UpdateUserRequest_City = &sUpdateUserRequest_City
+var UpdateUserRequest_Company = &sUpdateUserRequest_Company
+var UpdateUserRequest_ZipCode = &sUpdateUserRequest_ZipCode
+var UpdateUserRequest_Department = &sUpdateUserRequest_Department
+var UpdateUserRequest_Country = &sUpdateUserRequest_Country
+var UpdateUserRequest_Office = &sUpdateUserRequest_Office
+var UpdateUserRequest_IdentityProviderUserId = &sUpdateUserRequest_IdentityProviderUserId
+
+var UpdateUserResponse = &sUpdateUserResponse
+
+var WorkMailService = &smithy.ServiceSchema{Schema: &s_WorkMailService, Version: "2017-10-01"}

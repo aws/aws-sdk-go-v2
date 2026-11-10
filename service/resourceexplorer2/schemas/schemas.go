@@ -4,1613 +4,1271 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateDefaultView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "AssociateDefaultView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAssociateDefaultView                      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "AssociateDefaultView"}
+	iBatchGetView                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "BatchGetView"}
+	iCreateIndex                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateIndex"}
+	iCreateResourceExplorerSetup               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateResourceExplorerSetup"}
+	iCreateView                                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateView"}
+	iDeleteIndex                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteIndex"}
+	iDeleteResourceExplorerSetup               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteResourceExplorerSetup"}
+	iDeleteView                                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteView"}
+	iDisassociateDefaultView                   = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DisassociateDefaultView"}
+	iGetAccountLevelServiceConfiguration       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetAccountLevelServiceConfiguration"}
+	iGetDefaultView                            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetDefaultView"}
+	iGetIndex                                  = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetIndex"}
+	iGetManagedView                            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetManagedView"}
+	iGetResourceExplorerSetup                  = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetResourceExplorerSetup"}
+	iGetServiceIndex                           = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetServiceIndex"}
+	iGetServiceView                            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetServiceView"}
+	iGetView                                   = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetView"}
+	iListIndexes                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListIndexes"}
+	iListIndexesForMembers                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListIndexesForMembers"}
+	iListManagedViews                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListManagedViews"}
+	iListResources                             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListResources"}
+	iListServiceIndexes                        = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListServiceIndexes"}
+	iListServiceViews                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListServiceViews"}
+	iListStreamingAccessForServices            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListStreamingAccessForServices"}
+	iListSupportedResourceTypes                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListSupportedResourceTypes"}
+	iListTagsForResource                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListTagsForResource"}
+	iListViews                                 = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListViews"}
+	iSearch                                    = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "Search"}
+	iTagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "TagResource"}
+	iUntagResource                             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UntagResource"}
+	iUpdateIndexType                           = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UpdateIndexType"}
+	iUpdateView                                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UpdateView"}
+	i_ResourceExplorer                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ResourceExplorer"}
+	iAccessDeniedException                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "AccessDeniedException"}
+	i_AccountId                                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "AccountId"}
+	i_AccountIdList                            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "AccountIdList"}
+	i_AWSServiceAccessStatus                   = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "AWSServiceAccessStatus"}
+	iBatchGetViewError                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "BatchGetViewError"}
+	i_BatchGetViewErrors                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "BatchGetViewErrors"}
+	i_CFNResourceTypeList                      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CFNResourceTypeList"}
+	iConflictException                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ConflictException"}
+	iErrorDetails                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ErrorDetails"}
+	iIncludedProperty                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "IncludedProperty"}
+	i_IncludedPropertyList                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "IncludedPropertyList"}
+	iIndex                                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "Index"}
+	i_IndexList                                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "IndexList"}
+	i_IndexState                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "IndexState"}
+	iIndexStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "IndexStatus"}
+	i_IndexType                                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "IndexType"}
+	iInternalServerException                   = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "InternalServerException"}
+	iManagedView                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ManagedView"}
+	i_ManagedViewArnList                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ManagedViewArnList"}
+	iMemberIndex                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "MemberIndex"}
+	i_MemberIndexList                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "MemberIndexList"}
+	i_OperationStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "OperationStatus"}
+	iOrgConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "OrgConfiguration"}
+	i_QueryString                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "QueryString"}
+	i_RecorderType                             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "RecorderType"}
+	i_RegionList                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "RegionList"}
+	iRegionStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "RegionStatus"}
+	i_RegionStatusList                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "RegionStatusList"}
+	iResource                                  = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "Resource"}
+	iResourceCount                             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ResourceCount"}
+	i_ResourceList                             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ResourceList"}
+	iResourceNotFoundException                 = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ResourceNotFoundException"}
+	iResourceProperty                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ResourceProperty"}
+	i_ResourcePropertyList                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ResourcePropertyList"}
+	i_ResourceTypeList                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ResourceTypeList"}
+	iSearchFilter                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "SearchFilter"}
+	iServiceLinkedRecorderInfo                 = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ServiceLinkedRecorderInfo"}
+	iServiceQuotaExceededException             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ServiceQuotaExceededException"}
+	iServiceView                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ServiceView"}
+	i_ServiceViewArnList                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ServiceViewArnList"}
+	i_ServiceViewName                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ServiceViewName"}
+	iStreamingAccessDetails                    = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "StreamingAccessDetails"}
+	i_StreamingAccessDetailsList               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "StreamingAccessDetailsList"}
+	i_StringList                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "StringList"}
+	iSupportedResourceType                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "SupportedResourceType"}
+	i_TagMap                                   = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "TagMap"}
+	iThrottlingException                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ThrottlingException"}
+	iUnauthorizedException                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UnauthorizedException"}
+	iValidationException                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ValidationException"}
+	iValidationExceptionField                  = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ValidationExceptionFieldList"}
+	iView                                      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "View"}
+	i_ViewArnList                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ViewArnList"}
+	i_ViewList                                 = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ViewList"}
+	i_ViewName                                 = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ViewName"}
+	iViewStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ViewStatus"}
+	iAssociateDefaultViewInput                 = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "AssociateDefaultViewInput"}
+	iAssociateDefaultViewOutput                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "AssociateDefaultViewOutput"}
+	iBatchGetViewInput                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "BatchGetViewInput"}
+	iBatchGetViewOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "BatchGetViewOutput"}
+	iCreateIndexInput                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateIndexInput"}
+	iCreateIndexOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateIndexOutput"}
+	iCreateResourceExplorerSetupInput          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateResourceExplorerSetupInput"}
+	iCreateResourceExplorerSetupOutput         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateResourceExplorerSetupOutput"}
+	iCreateViewInput                           = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateViewInput"}
+	iCreateViewOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "CreateViewOutput"}
+	iDeleteIndexInput                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteIndexInput"}
+	iDeleteIndexOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteIndexOutput"}
+	iDeleteResourceExplorerSetupInput          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteResourceExplorerSetupInput"}
+	iDeleteResourceExplorerSetupOutput         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteResourceExplorerSetupOutput"}
+	iDeleteViewInput                           = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteViewInput"}
+	iDeleteViewOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "DeleteViewOutput"}
+	iGetAccountLevelServiceConfigurationOutput = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetAccountLevelServiceConfigurationOutput"}
+	iGetDefaultViewOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetDefaultViewOutput"}
+	iGetIndexOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetIndexOutput"}
+	iGetManagedViewInput                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetManagedViewInput"}
+	iGetManagedViewOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetManagedViewOutput"}
+	iGetResourceExplorerSetupInput             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetResourceExplorerSetupInput"}
+	iGetResourceExplorerSetupOutput            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetResourceExplorerSetupOutput"}
+	iGetServiceIndexOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetServiceIndexOutput"}
+	iGetServiceViewInput                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetServiceViewInput"}
+	iGetServiceViewOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetServiceViewOutput"}
+	iGetViewInput                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetViewInput"}
+	iGetViewOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "GetViewOutput"}
+	iListIndexesForMembersInput                = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListIndexesForMembersInput"}
+	iListIndexesForMembersOutput               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListIndexesForMembersOutput"}
+	iListIndexesInput                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListIndexesInput"}
+	iListIndexesOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListIndexesOutput"}
+	iListManagedViewsInput                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListManagedViewsInput"}
+	iListManagedViewsOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListManagedViewsOutput"}
+	iListResourcesInput                        = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListResourcesInput"}
+	iListResourcesOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListResourcesOutput"}
+	iListServiceIndexesInput                   = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListServiceIndexesInput"}
+	iListServiceIndexesOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListServiceIndexesOutput"}
+	iListServiceViewsInput                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListServiceViewsInput"}
+	iListServiceViewsOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListServiceViewsOutput"}
+	iListStreamingAccessForServicesInput       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListStreamingAccessForServicesInput"}
+	iListStreamingAccessForServicesOutput      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListStreamingAccessForServicesOutput"}
+	iListSupportedResourceTypesInput           = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListSupportedResourceTypesInput"}
+	iListSupportedResourceTypesOutput          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListSupportedResourceTypesOutput"}
+	iListTagsForResourceInput                  = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListTagsForResourceOutput"}
+	iListViewsInput                            = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListViewsInput"}
+	iListViewsOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "ListViewsOutput"}
+	iSearchInput                               = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "SearchInput"}
+	iSearchOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "SearchOutput"}
+	iTagResourceInput                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "TagResourceInput"}
+	iTagResourceOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "TagResourceOutput"}
+	iUntagResourceInput                        = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UntagResourceInput"}
+	iUntagResourceOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UntagResourceOutput"}
+	iUpdateIndexTypeInput                      = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UpdateIndexTypeInput"}
+	iUpdateIndexTypeOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UpdateIndexTypeOutput"}
+	iUpdateViewInput                           = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UpdateViewInput"}
+	iUpdateViewOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.resourceexplorer2", Name: "UpdateViewOutput"}
+	pString                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pLong                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+	pBoolean                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pDocument                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Document"}
+	pInteger                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/AssociateDefaultView",
-	Code: 200})
-
-var BatchGetView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "BatchGetView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchGetView",
-	Code: 200})
-
-var CreateIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateIndex",
-	Code: 200})
-
-var CreateResourceExplorerSetup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateResourceExplorerSetup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateResourceExplorerSetup",
-	Code: 200})
-
-var CreateView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/CreateView",
-	Code: 200})
-
-var DeleteIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteIndex",
-	Code: 200})
-
-var DeleteResourceExplorerSetup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteResourceExplorerSetup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteResourceExplorerSetup",
-	Code: 200})
-
-var DeleteView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DeleteView",
-	Code: 200})
-
-var DisassociateDefaultView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DisassociateDefaultView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DisassociateDefaultView",
-	Code: 200})
-
-var GetAccountLevelServiceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetAccountLevelServiceConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetAccountLevelServiceConfiguration",
-	Code: 200})
-
-var GetDefaultView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetDefaultView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetDefaultView",
-	Code: 200})
-
-var GetIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetIndex",
-	Code: 200})
-
-var GetManagedView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetManagedView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetManagedView",
-	Code: 200})
-
-var GetResourceExplorerSetup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetResourceExplorerSetup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetResourceExplorerSetup",
-	Code: 200})
-
-var GetServiceIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetServiceIndex",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetServiceIndex",
-	Code: 200})
-
-var GetServiceView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetServiceView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetServiceView",
-	Code: 200})
-
-var GetView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/GetView",
-	Code: 200})
-
-var ListIndexes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListIndexes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListIndexes",
-	Code: 200})
-
-var ListIndexesForMembers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListIndexesForMembers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListIndexesForMembers",
-	Code: 200})
-
-var ListManagedViews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListManagedViews",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListManagedViews",
-	Code: 200})
-
-var ListResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListResources",
-	Code: 200})
-
-var ListServiceIndexes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListServiceIndexes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListServiceIndexes",
-	Code: 200})
-
-var ListServiceViews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListServiceViews",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListServiceViews",
-	Code: 200})
-
-var ListStreamingAccessForServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListStreamingAccessForServices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListStreamingAccessForServices",
-	Code: 200})
-
-var ListSupportedResourceTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListSupportedResourceTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListSupportedResourceTypes",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ListViews = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListViews",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListViews",
-	Code: 200})
-
-var Search = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "Search",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/Search",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateIndexType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UpdateIndexType",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateIndexType",
-	Code: 200})
-
-var UpdateView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UpdateView",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UpdateView",
-	Code: 200})
-
-var _ResourceExplorer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ResourceExplorer",
-}, smithy.ShapeTypeService, 0)
-
-var ResourceExplorer = smithy.NewServiceSchema(_ResourceExplorer, "2022-07-28")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var _AWSServiceAccessStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "AWSServiceAccessStatus",
-}, smithy.ShapeTypeString, 0)
-
-var BatchGetViewError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "BatchGetViewError",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetViewError_ViewArn *smithy.Schema
-
-var BatchGetViewError_ErrorMessage *smithy.Schema
-
-var _BatchGetViewErrors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "BatchGetViewErrors",
-}, smithy.ShapeTypeList, 1)
-var _BatchGetViewErrors_member *smithy.Schema
-
-var _CFNResourceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CFNResourceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _CFNResourceTypeList_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ErrorDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ErrorDetails",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetails_Code *smithy.Schema
-
-var ErrorDetails_Message *smithy.Schema
-
-var IncludedProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "IncludedProperty",
-}, smithy.ShapeTypeStructure, 1)
-var IncludedProperty_Name *smithy.Schema
-
-var _IncludedPropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "IncludedPropertyList",
-}, smithy.ShapeTypeList, 1)
-var _IncludedPropertyList_member *smithy.Schema
-
-var Index = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "Index",
-}, smithy.ShapeTypeStructure, 3)
-var Index_Region *smithy.Schema
-
-var Index_Arn *smithy.Schema
-
-var Index_Type *smithy.Schema
-
-var _IndexList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "IndexList",
-}, smithy.ShapeTypeList, 1)
-var _IndexList_member *smithy.Schema
-
-var _IndexState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "IndexState",
-}, smithy.ShapeTypeString, 0)
-
-var IndexStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "IndexStatus",
-}, smithy.ShapeTypeStructure, 3)
-var IndexStatus_Status *smithy.Schema
-
-var IndexStatus_Index *smithy.Schema
-
-var IndexStatus_ErrorDetails *smithy.Schema
-
-var _IndexType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "IndexType",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var ManagedView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ManagedView",
-}, smithy.ShapeTypeStructure, 10)
-var ManagedView_ManagedViewArn *smithy.Schema
-
-var ManagedView_ManagedViewName *smithy.Schema
-
-var ManagedView_TrustedService *smithy.Schema
-
-var ManagedView_LastUpdatedAt *smithy.Schema
-
-var ManagedView_Owner *smithy.Schema
-
-var ManagedView_Scope *smithy.Schema
-
-var ManagedView_IncludedProperties *smithy.Schema
-
-var ManagedView_Filters *smithy.Schema
-
-var ManagedView_ResourcePolicy *smithy.Schema
-
-var ManagedView_Version *smithy.Schema
-
-var _ManagedViewArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ManagedViewArnList",
-}, smithy.ShapeTypeList, 1)
-var _ManagedViewArnList_member *smithy.Schema
-
-var MemberIndex = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "MemberIndex",
-}, smithy.ShapeTypeStructure, 4)
-var MemberIndex_AccountId *smithy.Schema
-
-var MemberIndex_Region *smithy.Schema
-
-var MemberIndex_Arn *smithy.Schema
-
-var MemberIndex_Type *smithy.Schema
-
-var _MemberIndexList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "MemberIndexList",
-}, smithy.ShapeTypeList, 1)
-var _MemberIndexList_member *smithy.Schema
-
-var _OperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "OperationStatus",
-}, smithy.ShapeTypeString, 0)
-
-var OrgConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "OrgConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OrgConfiguration_AWSServiceAccessStatus *smithy.Schema
-
-var OrgConfiguration_ServiceLinkedRole *smithy.Schema
-
-var _QueryString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "QueryString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RecorderType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "RecorderType",
-}, smithy.ShapeTypeString, 0)
-
-var _RegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "RegionList",
-}, smithy.ShapeTypeList, 1)
-var _RegionList_member *smithy.Schema
-
-var RegionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "RegionStatus",
-}, smithy.ShapeTypeStructure, 3)
-var RegionStatus_Region *smithy.Schema
-
-var RegionStatus_Index *smithy.Schema
-
-var RegionStatus_View *smithy.Schema
-
-var _RegionStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "RegionStatusList",
-}, smithy.ShapeTypeList, 1)
-var _RegionStatusList_member *smithy.Schema
-
-var Resource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "Resource",
-}, smithy.ShapeTypeStructure, 8)
-var Resource_Arn *smithy.Schema
-
-var Resource_OwningAccountId *smithy.Schema
-
-var Resource_Region *smithy.Schema
-
-var Resource_ResourceType *smithy.Schema
-
-var Resource_Service *smithy.Schema
-
-var Resource_CfnResourceType *smithy.Schema
-
-var Resource_LastReportedAt *smithy.Schema
-
-var Resource_Properties *smithy.Schema
-
-var ResourceCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ResourceCount",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceCount_TotalResources *smithy.Schema
-
-var ResourceCount_Complete *smithy.Schema
-
-var _ResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ResourceProperty",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceProperty_Name *smithy.Schema
-
-var ResourceProperty_LastReportedAt *smithy.Schema
-
-var ResourceProperty_Data *smithy.Schema
-
-var _ResourcePropertyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ResourcePropertyList",
-}, smithy.ShapeTypeList, 1)
-var _ResourcePropertyList_member *smithy.Schema
-
-var _ResourceTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ResourceTypeList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTypeList_member *smithy.Schema
-
-var SearchFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "SearchFilter",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var SearchFilter_FilterString *smithy.Schema
-
-var ServiceLinkedRecorderInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ServiceLinkedRecorderInfo",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceLinkedRecorderInfo_ServicePrincipal *smithy.Schema
-
-var ServiceLinkedRecorderInfo_RecorderName *smithy.Schema
-
-var ServiceLinkedRecorderInfo_RecorderType *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var ServiceQuotaExceededException_Name *smithy.Schema
-
-var ServiceQuotaExceededException_Value *smithy.Schema
-
-var ServiceView = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ServiceView",
-}, smithy.ShapeTypeStructure, 7)
-var ServiceView_ServiceViewArn *smithy.Schema
-
-var ServiceView_ServiceViewName *smithy.Schema
-
-var ServiceView_Filters *smithy.Schema
-
-var ServiceView_IncludedProperties *smithy.Schema
-
-var ServiceView_StreamingAccessForService *smithy.Schema
-
-var ServiceView_ScopeType *smithy.Schema
-
-var ServiceView_ServiceLinkedRecorder *smithy.Schema
-
-var _ServiceViewArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ServiceViewArnList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceViewArnList_member *smithy.Schema
-
-var _ServiceViewName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ServiceViewName",
-}, smithy.ShapeTypeString, 0)
-
-var StreamingAccessDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "StreamingAccessDetails",
-}, smithy.ShapeTypeStructure, 2)
-var StreamingAccessDetails_ServicePrincipal *smithy.Schema
-
-var StreamingAccessDetails_CreatedAt *smithy.Schema
-
-var _StreamingAccessDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "StreamingAccessDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _StreamingAccessDetailsList_member *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _StringList_member *smithy.Schema
-
-var SupportedResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "SupportedResourceType",
-}, smithy.ShapeTypeStructure, 3)
-var SupportedResourceType_Service *smithy.Schema
-
-var SupportedResourceType_ResourceType *smithy.Schema
-
-var SupportedResourceType_CFNResourceTypes *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var UnauthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UnauthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_FieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_Name *smithy.Schema
-
-var ValidationExceptionField_ValidationIssue *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var View = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "View",
-}, smithy.ShapeTypeStructure, 7)
-var View_ViewArn *smithy.Schema
-
-var View_ViewName *smithy.Schema
-
-var View_Owner *smithy.Schema
-
-var View_LastUpdatedAt *smithy.Schema
-
-var View_Scope *smithy.Schema
-
-var View_IncludedProperties *smithy.Schema
-
-var View_Filters *smithy.Schema
-
-var _ViewArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ViewArnList",
-}, smithy.ShapeTypeList, 1)
-var _ViewArnList_member *smithy.Schema
-
-var _ViewList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ViewList",
-}, smithy.ShapeTypeList, 1)
-var _ViewList_member *smithy.Schema
-
-var _ViewName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ViewName",
-}, smithy.ShapeTypeString, 0)
-
-var ViewStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ViewStatus",
-}, smithy.ShapeTypeStructure, 3)
-var ViewStatus_Status *smithy.Schema
-
-var ViewStatus_View *smithy.Schema
-
-var ViewStatus_ErrorDetails *smithy.Schema
-
-var AssociateDefaultViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "AssociateDefaultViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateDefaultViewInput_ViewArn *smithy.Schema
-
-var AssociateDefaultViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "AssociateDefaultViewOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateDefaultViewOutput_ViewArn *smithy.Schema
-
-var BatchGetViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "BatchGetViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var BatchGetViewInput_ViewArns *smithy.Schema
-
-var BatchGetViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "BatchGetViewOutput",
-}, smithy.ShapeTypeStructure, 2)
-var BatchGetViewOutput_Views *smithy.Schema
-
-var BatchGetViewOutput_Errors *smithy.Schema
-
-var CreateIndexInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateIndexInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateIndexInput_ClientToken *smithy.Schema
-
-var CreateIndexInput_Tags *smithy.Schema
-
-var CreateIndexOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateIndexOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateIndexOutput_Arn *smithy.Schema
-
-var CreateIndexOutput_State *smithy.Schema
-
-var CreateIndexOutput_CreatedAt *smithy.Schema
-
-var CreateResourceExplorerSetupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateResourceExplorerSetupInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateResourceExplorerSetupInput_RegionList *smithy.Schema
-
-var CreateResourceExplorerSetupInput_AggregatorRegions *smithy.Schema
-
-var CreateResourceExplorerSetupInput_ViewName *smithy.Schema
-
-var CreateResourceExplorerSetupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateResourceExplorerSetupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResourceExplorerSetupOutput_TaskId *smithy.Schema
-
-var CreateViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateViewInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateViewInput_ClientToken *smithy.Schema
-
-var CreateViewInput_ViewName *smithy.Schema
-
-var CreateViewInput_IncludedProperties *smithy.Schema
-
-var CreateViewInput_Scope *smithy.Schema
-
-var CreateViewInput_Filters *smithy.Schema
-
-var CreateViewInput_Tags *smithy.Schema
-
-var CreateViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "CreateViewOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateViewOutput_View *smithy.Schema
-
-var DeleteIndexInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteIndexInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteIndexInput_Arn *smithy.Schema
-
-var DeleteIndexOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteIndexOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteIndexOutput_Arn *smithy.Schema
-
-var DeleteIndexOutput_State *smithy.Schema
-
-var DeleteIndexOutput_LastUpdatedAt *smithy.Schema
-
-var DeleteResourceExplorerSetupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteResourceExplorerSetupInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteResourceExplorerSetupInput_RegionList *smithy.Schema
-
-var DeleteResourceExplorerSetupInput_DeleteInAllRegions *smithy.Schema
-
-var DeleteResourceExplorerSetupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteResourceExplorerSetupOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourceExplorerSetupOutput_TaskId *smithy.Schema
-
-var DeleteViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteViewInput_ViewArn *smithy.Schema
-
-var DeleteViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "DeleteViewOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteViewOutput_ViewArn *smithy.Schema
-
-var GetAccountLevelServiceConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetAccountLevelServiceConfigurationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountLevelServiceConfigurationOutput_OrgConfiguration *smithy.Schema
-
-var GetDefaultViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetDefaultViewOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDefaultViewOutput_ViewArn *smithy.Schema
-
-var GetIndexOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetIndexOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetIndexOutput_Arn *smithy.Schema
-
-var GetIndexOutput_Type *smithy.Schema
-
-var GetIndexOutput_State *smithy.Schema
-
-var GetIndexOutput_ReplicatingFrom *smithy.Schema
-
-var GetIndexOutput_ReplicatingTo *smithy.Schema
-
-var GetIndexOutput_CreatedAt *smithy.Schema
-
-var GetIndexOutput_LastUpdatedAt *smithy.Schema
-
-var GetIndexOutput_Tags *smithy.Schema
-
-var GetManagedViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetManagedViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetManagedViewInput_ManagedViewArn *smithy.Schema
-
-var GetManagedViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetManagedViewOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetManagedViewOutput_ManagedView *smithy.Schema
-
-var GetResourceExplorerSetupInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetResourceExplorerSetupInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetResourceExplorerSetupInput_TaskId *smithy.Schema
-
-var GetResourceExplorerSetupInput_MaxResults *smithy.Schema
-
-var GetResourceExplorerSetupInput_NextToken *smithy.Schema
-
-var GetResourceExplorerSetupOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetResourceExplorerSetupOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourceExplorerSetupOutput_Regions *smithy.Schema
-
-var GetResourceExplorerSetupOutput_NextToken *smithy.Schema
-
-var GetServiceIndexOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetServiceIndexOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetServiceIndexOutput_Arn *smithy.Schema
-
-var GetServiceIndexOutput_Type *smithy.Schema
-
-var GetServiceViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetServiceViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceViewInput_ServiceViewArn *smithy.Schema
-
-var GetServiceViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetServiceViewOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceViewOutput_View *smithy.Schema
-
-var GetViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetViewInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetViewInput_ViewArn *smithy.Schema
-
-var GetViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "GetViewOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetViewOutput_View *smithy.Schema
-
-var GetViewOutput_Tags *smithy.Schema
-
-var ListIndexesForMembersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListIndexesForMembersInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListIndexesForMembersInput_AccountIdList *smithy.Schema
-
-var ListIndexesForMembersInput_MaxResults *smithy.Schema
-
-var ListIndexesForMembersInput_NextToken *smithy.Schema
-
-var ListIndexesForMembersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListIndexesForMembersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListIndexesForMembersOutput_Indexes *smithy.Schema
-
-var ListIndexesForMembersOutput_NextToken *smithy.Schema
-
-var ListIndexesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListIndexesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListIndexesInput_Type *smithy.Schema
-
-var ListIndexesInput_Regions *smithy.Schema
-
-var ListIndexesInput_MaxResults *smithy.Schema
-
-var ListIndexesInput_NextToken *smithy.Schema
-
-var ListIndexesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListIndexesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListIndexesOutput_Indexes *smithy.Schema
-
-var ListIndexesOutput_NextToken *smithy.Schema
-
-var ListManagedViewsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListManagedViewsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListManagedViewsInput_MaxResults *smithy.Schema
-
-var ListManagedViewsInput_NextToken *smithy.Schema
-
-var ListManagedViewsInput_ServicePrincipal *smithy.Schema
-
-var ListManagedViewsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListManagedViewsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListManagedViewsOutput_NextToken *smithy.Schema
-
-var ListManagedViewsOutput_ManagedViews *smithy.Schema
-
-var ListResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListResourcesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListResourcesInput_Filters *smithy.Schema
-
-var ListResourcesInput_MaxResults *smithy.Schema
-
-var ListResourcesInput_ViewArn *smithy.Schema
-
-var ListResourcesInput_NextToken *smithy.Schema
-
-var ListResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListResourcesOutput",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourcesOutput_Resources *smithy.Schema
-
-var ListResourcesOutput_NextToken *smithy.Schema
-
-var ListResourcesOutput_ViewArn *smithy.Schema
-
-var ListServiceIndexesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListServiceIndexesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListServiceIndexesInput_Regions *smithy.Schema
-
-var ListServiceIndexesInput_MaxResults *smithy.Schema
-
-var ListServiceIndexesInput_NextToken *smithy.Schema
-
-var ListServiceIndexesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListServiceIndexesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceIndexesOutput_Indexes *smithy.Schema
-
-var ListServiceIndexesOutput_NextToken *smithy.Schema
-
-var ListServiceViewsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListServiceViewsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceViewsInput_MaxResults *smithy.Schema
-
-var ListServiceViewsInput_NextToken *smithy.Schema
-
-var ListServiceViewsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListServiceViewsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceViewsOutput_NextToken *smithy.Schema
-
-var ListServiceViewsOutput_ServiceViews *smithy.Schema
-
-var ListStreamingAccessForServicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListStreamingAccessForServicesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamingAccessForServicesInput_MaxResults *smithy.Schema
-
-var ListStreamingAccessForServicesInput_NextToken *smithy.Schema
-
-var ListStreamingAccessForServicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListStreamingAccessForServicesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListStreamingAccessForServicesOutput_StreamingAccessForServices *smithy.Schema
-
-var ListStreamingAccessForServicesOutput_NextToken *smithy.Schema
-
-var ListSupportedResourceTypesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListSupportedResourceTypesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupportedResourceTypesInput_NextToken *smithy.Schema
-
-var ListSupportedResourceTypesInput_MaxResults *smithy.Schema
-
-var ListSupportedResourceTypesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListSupportedResourceTypesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListSupportedResourceTypesOutput_ResourceTypes *smithy.Schema
-
-var ListSupportedResourceTypesOutput_NextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_Tags *smithy.Schema
-
-var ListViewsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListViewsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListViewsInput_NextToken *smithy.Schema
-
-var ListViewsInput_MaxResults *smithy.Schema
-
-var ListViewsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "ListViewsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListViewsOutput_Views *smithy.Schema
-
-var ListViewsOutput_NextToken *smithy.Schema
-
-var SearchInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "SearchInput",
-}, smithy.ShapeTypeStructure, 4)
-var SearchInput_QueryString *smithy.Schema
-
-var SearchInput_MaxResults *smithy.Schema
-
-var SearchInput_ViewArn *smithy.Schema
-
-var SearchInput_NextToken *smithy.Schema
-
-var SearchOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "SearchOutput",
-}, smithy.ShapeTypeStructure, 4)
-var SearchOutput_Resources *smithy.Schema
-
-var SearchOutput_NextToken *smithy.Schema
-
-var SearchOutput_ViewArn *smithy.Schema
-
-var SearchOutput_Count *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateIndexTypeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UpdateIndexTypeInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateIndexTypeInput_Arn *smithy.Schema
-
-var UpdateIndexTypeInput_Type *smithy.Schema
-
-var UpdateIndexTypeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UpdateIndexTypeOutput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateIndexTypeOutput_Arn *smithy.Schema
-
-var UpdateIndexTypeOutput_Type *smithy.Schema
-
-var UpdateIndexTypeOutput_State *smithy.Schema
-
-var UpdateIndexTypeOutput_LastUpdatedAt *smithy.Schema
-
-var UpdateViewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UpdateViewInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateViewInput_ViewArn *smithy.Schema
-
-var UpdateViewInput_IncludedProperties *smithy.Schema
-
-var UpdateViewInput_Filters *smithy.Schema
-
-var UpdateViewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.resourceexplorer2",
-	Name:      "UpdateViewOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateViewOutput_View *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	_AccountIdList_member = _AccountIdList.AddMember("member", _AccountId)
-
-	BatchGetViewError_ViewArn = BatchGetViewError.AddMember("ViewArn", smithyprelude.String)
-
-	BatchGetViewError_ErrorMessage = BatchGetViewError.AddMember("ErrorMessage", smithyprelude.String)
-
-	_BatchGetViewErrors_member = _BatchGetViewErrors.AddMember("member", BatchGetViewError)
-
-	_CFNResourceTypeList_member = _CFNResourceTypeList.AddMember("member", smithyprelude.String)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ErrorDetails_Code = ErrorDetails.AddMember("Code", smithyprelude.String)
-
-	ErrorDetails_Message = ErrorDetails.AddMember("Message", smithyprelude.String)
-
-	IncludedProperty_Name = IncludedProperty.AddMember("Name", smithyprelude.String)
-
-	_IncludedPropertyList_member = _IncludedPropertyList.AddMember("member", IncludedProperty)
-
-	Index_Region = Index.AddMember("Region", smithyprelude.String)
-
-	Index_Arn = Index.AddMember("Arn", smithyprelude.String)
-
-	Index_Type = Index.AddMember("Type", _IndexType)
-
-	_IndexList_member = _IndexList.AddMember("member", Index)
-
-	IndexStatus_Status = IndexStatus.AddMember("Status", _OperationStatus)
-
-	IndexStatus_Index = IndexStatus.AddMember("Index", Index)
-
-	IndexStatus_ErrorDetails = IndexStatus.AddMember("ErrorDetails", ErrorDetails)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	SearchFilter_FilterString = SearchFilter.AddMember("FilterString", smithyprelude.String)
-
-	ManagedView_ManagedViewArn = ManagedView.AddMember("ManagedViewArn", smithyprelude.String)
-
-	ManagedView_ManagedViewName = ManagedView.AddMember("ManagedViewName", smithyprelude.String)
-
-	ManagedView_TrustedService = ManagedView.AddMember("TrustedService", smithyprelude.String)
-
-	ManagedView_LastUpdatedAt = ManagedView.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ManagedView_Owner = ManagedView.AddMember("Owner", smithyprelude.String)
-
-	ManagedView_Scope = ManagedView.AddMember("Scope", smithyprelude.String)
-
-	ManagedView_IncludedProperties = ManagedView.AddMember("IncludedProperties", _IncludedPropertyList)
-
-	ManagedView_Filters = ManagedView.AddMember("Filters", SearchFilter)
-
-	ManagedView_ResourcePolicy = ManagedView.AddMember("ResourcePolicy", smithyprelude.String)
-
-	ManagedView_Version = ManagedView.AddMember("Version", smithyprelude.String)
-
-	_ManagedViewArnList_member = _ManagedViewArnList.AddMember("member", smithyprelude.String)
-
-	MemberIndex_AccountId = MemberIndex.AddMember("AccountId", smithyprelude.String)
-
-	MemberIndex_Region = MemberIndex.AddMember("Region", smithyprelude.String)
-
-	MemberIndex_Arn = MemberIndex.AddMember("Arn", smithyprelude.String)
-
-	MemberIndex_Type = MemberIndex.AddMember("Type", _IndexType)
-
-	_MemberIndexList_member = _MemberIndexList.AddMember("member", MemberIndex)
-
-	OrgConfiguration_AWSServiceAccessStatus = OrgConfiguration.AddMember("AWSServiceAccessStatus", _AWSServiceAccessStatus)
-
-	OrgConfiguration_ServiceLinkedRole = OrgConfiguration.AddMember("ServiceLinkedRole", smithyprelude.String)
-
-	_RegionList_member = _RegionList.AddMember("member", smithyprelude.String)
-
-	View_ViewArn = View.AddMember("ViewArn", smithyprelude.String)
-
-	View_ViewName = View.AddMember("ViewName", _ViewName)
-
-	View_Owner = View.AddMember("Owner", smithyprelude.String)
-
-	View_LastUpdatedAt = View.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	View_Scope = View.AddMember("Scope", smithyprelude.String)
-
-	View_IncludedProperties = View.AddMember("IncludedProperties", _IncludedPropertyList)
-
-	View_Filters = View.AddMember("Filters", SearchFilter)
-
-	ViewStatus_Status = ViewStatus.AddMember("Status", _OperationStatus)
-
-	ViewStatus_View = ViewStatus.AddMember("View", View)
-
-	ViewStatus_ErrorDetails = ViewStatus.AddMember("ErrorDetails", ErrorDetails)
-
-	RegionStatus_Region = RegionStatus.AddMember("Region", smithyprelude.String)
-
-	RegionStatus_Index = RegionStatus.AddMember("Index", IndexStatus)
-
-	RegionStatus_View = RegionStatus.AddMember("View", ViewStatus)
-
-	_RegionStatusList_member = _RegionStatusList.AddMember("member", RegionStatus)
-
-	ResourceProperty_Name = ResourceProperty.AddMember("Name", smithyprelude.String)
-
-	ResourceProperty_LastReportedAt = ResourceProperty.AddMember("LastReportedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ResourceProperty_Data = ResourceProperty.AddMember("Data", smithyprelude.Document)
-
-	_ResourcePropertyList_member = _ResourcePropertyList.AddMember("member", ResourceProperty)
-
-	Resource_Arn = Resource.AddMember("Arn", smithyprelude.String)
-
-	Resource_OwningAccountId = Resource.AddMember("OwningAccountId", smithyprelude.String)
-
-	Resource_Region = Resource.AddMember("Region", smithyprelude.String)
-
-	Resource_ResourceType = Resource.AddMember("ResourceType", smithyprelude.String)
-
-	Resource_Service = Resource.AddMember("Service", smithyprelude.String)
-
-	Resource_CfnResourceType = Resource.AddMember("CfnResourceType", smithyprelude.String)
-
-	Resource_LastReportedAt = Resource.AddMember("LastReportedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	Resource_Properties = Resource.AddMember("Properties", _ResourcePropertyList)
-
-	ResourceCount_TotalResources = ResourceCount.AddMember("TotalResources", smithyprelude.Long)
-
-	ResourceCount_Complete = ResourceCount.AddMember("Complete", smithyprelude.Boolean)
-
-	_ResourceList_member = _ResourceList.AddMember("member", Resource)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	SupportedResourceType_Service = SupportedResourceType.AddMember("Service", smithyprelude.String)
-
-	SupportedResourceType_ResourceType = SupportedResourceType.AddMember("ResourceType", smithyprelude.String)
-
-	SupportedResourceType_CFNResourceTypes = SupportedResourceType.AddMember("CFNResourceTypes", _CFNResourceTypeList)
-
-	_ResourceTypeList_member = _ResourceTypeList.AddMember("member", SupportedResourceType)
-
-	ServiceLinkedRecorderInfo_ServicePrincipal = ServiceLinkedRecorderInfo.AddMember("ServicePrincipal", smithyprelude.String)
-
-	ServiceLinkedRecorderInfo_RecorderName = ServiceLinkedRecorderInfo.AddMember("RecorderName", smithyprelude.String)
-
-	ServiceLinkedRecorderInfo_RecorderType = ServiceLinkedRecorderInfo.AddMember("RecorderType", _RecorderType)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	ServiceQuotaExceededException_Name = ServiceQuotaExceededException.AddMember("Name", smithyprelude.String)
-
-	ServiceQuotaExceededException_Value = ServiceQuotaExceededException.AddMember("Value", smithyprelude.String)
-
-	ServiceView_ServiceViewArn = ServiceView.AddMember("ServiceViewArn", smithyprelude.String)
-
-	ServiceView_ServiceViewName = ServiceView.AddMember("ServiceViewName", _ServiceViewName)
-
-	ServiceView_Filters = ServiceView.AddMember("Filters", SearchFilter)
-
-	ServiceView_IncludedProperties = ServiceView.AddMember("IncludedProperties", _IncludedPropertyList)
-
-	ServiceView_StreamingAccessForService = ServiceView.AddMember("StreamingAccessForService", smithyprelude.String)
-
-	ServiceView_ScopeType = ServiceView.AddMember("ScopeType", smithyprelude.String)
-
-	ServiceView_ServiceLinkedRecorder = ServiceView.AddMember("ServiceLinkedRecorder", ServiceLinkedRecorderInfo)
-
-	_ServiceViewArnList_member = _ServiceViewArnList.AddMember("member", smithyprelude.String)
-
-	StreamingAccessDetails_ServicePrincipal = StreamingAccessDetails.AddMember("ServicePrincipal", smithyprelude.String)
-
-	StreamingAccessDetails_CreatedAt = StreamingAccessDetails.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	_StreamingAccessDetailsList_member = _StreamingAccessDetailsList.AddMember("member", StreamingAccessDetails)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	_TagMap_key = _TagMap.AddMember("key", smithyprelude.String)
-
-	_TagMap_value = _TagMap.AddMember("value", smithyprelude.String)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	UnauthorizedException_Message = UnauthorizedException.AddMember("Message", smithyprelude.String)
-
-	ValidationExceptionField_Name = ValidationExceptionField.AddMember("Name", smithyprelude.String)
-
-	ValidationExceptionField_ValidationIssue = ValidationExceptionField.AddMember("ValidationIssue", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_FieldList = ValidationException.AddMember("FieldList", _ValidationExceptionFieldList)
-
-	_ViewArnList_member = _ViewArnList.AddMember("member", smithyprelude.String)
-
-	_ViewList_member = _ViewList.AddMember("member", View)
-
-	AssociateDefaultViewInput_ViewArn = AssociateDefaultViewInput.AddMember("ViewArn", smithyprelude.String)
-
-	AssociateDefaultViewOutput_ViewArn = AssociateDefaultViewOutput.AddMember("ViewArn", smithyprelude.String)
-
-	BatchGetViewInput_ViewArns = BatchGetViewInput.AddMember("ViewArns", _ViewArnList)
-
-	BatchGetViewOutput_Views = BatchGetViewOutput.AddMember("Views", _ViewList)
-
-	BatchGetViewOutput_Errors = BatchGetViewOutput.AddMember("Errors", _BatchGetViewErrors)
-
-	CreateIndexInput_ClientToken = CreateIndexInput.AddMember("ClientToken", smithyprelude.String)
-
-	CreateIndexInput_Tags = CreateIndexInput.AddMember("Tags", _TagMap)
-
-	CreateIndexOutput_Arn = CreateIndexOutput.AddMember("Arn", smithyprelude.String)
-
-	CreateIndexOutput_State = CreateIndexOutput.AddMember("State", _IndexState)
-
-	CreateIndexOutput_CreatedAt = CreateIndexOutput.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateResourceExplorerSetupInput_RegionList = CreateResourceExplorerSetupInput.AddMember("RegionList", _RegionList)
-
-	CreateResourceExplorerSetupInput_AggregatorRegions = CreateResourceExplorerSetupInput.AddMember("AggregatorRegions", _RegionList)
-
-	CreateResourceExplorerSetupInput_ViewName = CreateResourceExplorerSetupInput.AddMember("ViewName", smithyprelude.String)
-
-	CreateResourceExplorerSetupOutput_TaskId = CreateResourceExplorerSetupOutput.AddMember("TaskId", smithyprelude.String)
-
-	CreateViewInput_ClientToken = CreateViewInput.AddMember("ClientToken", smithyprelude.String)
-
-	CreateViewInput_ViewName = CreateViewInput.AddMember("ViewName", _ViewName)
-
-	CreateViewInput_IncludedProperties = CreateViewInput.AddMember("IncludedProperties", _IncludedPropertyList)
-
-	CreateViewInput_Scope = CreateViewInput.AddMember("Scope", smithyprelude.String)
-
-	CreateViewInput_Filters = CreateViewInput.AddMember("Filters", SearchFilter)
-
-	CreateViewInput_Tags = CreateViewInput.AddMember("Tags", _TagMap)
-
-	CreateViewOutput_View = CreateViewOutput.AddMember("View", View)
-
-	DeleteIndexInput_Arn = DeleteIndexInput.AddMember("Arn", smithyprelude.String)
-
-	DeleteIndexOutput_Arn = DeleteIndexOutput.AddMember("Arn", smithyprelude.String)
-
-	DeleteIndexOutput_State = DeleteIndexOutput.AddMember("State", _IndexState)
-
-	DeleteIndexOutput_LastUpdatedAt = DeleteIndexOutput.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	DeleteResourceExplorerSetupInput_RegionList = DeleteResourceExplorerSetupInput.AddMember("RegionList", _RegionList)
-
-	DeleteResourceExplorerSetupInput_DeleteInAllRegions = DeleteResourceExplorerSetupInput.AddMember("DeleteInAllRegions", smithyprelude.Boolean)
-
-	DeleteResourceExplorerSetupOutput_TaskId = DeleteResourceExplorerSetupOutput.AddMember("TaskId", smithyprelude.String)
-
-	DeleteViewInput_ViewArn = DeleteViewInput.AddMember("ViewArn", smithyprelude.String)
-
-	DeleteViewOutput_ViewArn = DeleteViewOutput.AddMember("ViewArn", smithyprelude.String)
-
-	GetAccountLevelServiceConfigurationOutput_OrgConfiguration = GetAccountLevelServiceConfigurationOutput.AddMember("OrgConfiguration", OrgConfiguration)
-
-	GetDefaultViewOutput_ViewArn = GetDefaultViewOutput.AddMember("ViewArn", smithyprelude.String)
-
-	GetIndexOutput_Arn = GetIndexOutput.AddMember("Arn", smithyprelude.String)
-
-	GetIndexOutput_Type = GetIndexOutput.AddMember("Type", _IndexType)
-
-	GetIndexOutput_State = GetIndexOutput.AddMember("State", _IndexState)
-
-	GetIndexOutput_ReplicatingFrom = GetIndexOutput.AddMember("ReplicatingFrom", _RegionList)
-
-	GetIndexOutput_ReplicatingTo = GetIndexOutput.AddMember("ReplicatingTo", _RegionList)
-
-	GetIndexOutput_CreatedAt = GetIndexOutput.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetIndexOutput_LastUpdatedAt = GetIndexOutput.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetIndexOutput_Tags = GetIndexOutput.AddMember("Tags", _TagMap)
-
-	GetManagedViewInput_ManagedViewArn = GetManagedViewInput.AddMember("ManagedViewArn", smithyprelude.String)
-
-	GetManagedViewOutput_ManagedView = GetManagedViewOutput.AddMember("ManagedView", ManagedView)
-
-	GetResourceExplorerSetupInput_TaskId = GetResourceExplorerSetupInput.AddMember("TaskId", smithyprelude.String)
-
-	GetResourceExplorerSetupInput_MaxResults = GetResourceExplorerSetupInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	GetResourceExplorerSetupInput_NextToken = GetResourceExplorerSetupInput.AddMember("NextToken", smithyprelude.String)
-
-	GetResourceExplorerSetupOutput_Regions = GetResourceExplorerSetupOutput.AddMember("Regions", _RegionStatusList)
-
-	GetResourceExplorerSetupOutput_NextToken = GetResourceExplorerSetupOutput.AddMember("NextToken", smithyprelude.String)
-
-	GetServiceIndexOutput_Arn = GetServiceIndexOutput.AddMember("Arn", smithyprelude.String)
-
-	GetServiceIndexOutput_Type = GetServiceIndexOutput.AddMember("Type", _IndexType)
-
-	GetServiceViewInput_ServiceViewArn = GetServiceViewInput.AddMember("ServiceViewArn", smithyprelude.String)
-
-	GetServiceViewOutput_View = GetServiceViewOutput.AddMember("View", ServiceView)
-
-	GetViewInput_ViewArn = GetViewInput.AddMember("ViewArn", smithyprelude.String)
-
-	GetViewOutput_View = GetViewOutput.AddMember("View", View)
-
-	GetViewOutput_Tags = GetViewOutput.AddMember("Tags", _TagMap)
-
-	ListIndexesForMembersInput_AccountIdList = ListIndexesForMembersInput.AddMember("AccountIdList", _AccountIdList)
-
-	ListIndexesForMembersInput_MaxResults = ListIndexesForMembersInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListIndexesForMembersInput_NextToken = ListIndexesForMembersInput.AddMember("NextToken", smithyprelude.String)
-
-	ListIndexesForMembersOutput_Indexes = ListIndexesForMembersOutput.AddMember("Indexes", _MemberIndexList)
-
-	ListIndexesForMembersOutput_NextToken = ListIndexesForMembersOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListIndexesInput_Type = ListIndexesInput.AddMember("Type", _IndexType)
-
-	ListIndexesInput_Regions = ListIndexesInput.AddMember("Regions", _RegionList)
-
-	ListIndexesInput_MaxResults = ListIndexesInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListIndexesInput_NextToken = ListIndexesInput.AddMember("NextToken", smithyprelude.String)
-
-	ListIndexesOutput_Indexes = ListIndexesOutput.AddMember("Indexes", _IndexList)
-
-	ListIndexesOutput_NextToken = ListIndexesOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListManagedViewsInput_MaxResults = ListManagedViewsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListManagedViewsInput_NextToken = ListManagedViewsInput.AddMember("NextToken", smithyprelude.String)
-
-	ListManagedViewsInput_ServicePrincipal = ListManagedViewsInput.AddMember("ServicePrincipal", smithyprelude.String)
-
-	ListManagedViewsOutput_NextToken = ListManagedViewsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListManagedViewsOutput_ManagedViews = ListManagedViewsOutput.AddMember("ManagedViews", _ManagedViewArnList)
-
-	ListResourcesInput_Filters = ListResourcesInput.AddMember("Filters", SearchFilter)
-
-	ListResourcesInput_MaxResults = ListResourcesInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListResourcesInput_ViewArn = ListResourcesInput.AddMember("ViewArn", smithyprelude.String)
-
-	ListResourcesInput_NextToken = ListResourcesInput.AddMember("NextToken", smithyprelude.String)
-
-	ListResourcesOutput_Resources = ListResourcesOutput.AddMember("Resources", _ResourceList)
-
-	ListResourcesOutput_NextToken = ListResourcesOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListResourcesOutput_ViewArn = ListResourcesOutput.AddMember("ViewArn", smithyprelude.String)
-
-	ListServiceIndexesInput_Regions = ListServiceIndexesInput.AddMember("Regions", _RegionList)
-
-	ListServiceIndexesInput_MaxResults = ListServiceIndexesInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListServiceIndexesInput_NextToken = ListServiceIndexesInput.AddMember("NextToken", smithyprelude.String)
-
-	ListServiceIndexesOutput_Indexes = ListServiceIndexesOutput.AddMember("Indexes", _IndexList)
-
-	ListServiceIndexesOutput_NextToken = ListServiceIndexesOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListServiceViewsInput_MaxResults = ListServiceViewsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListServiceViewsInput_NextToken = ListServiceViewsInput.AddMember("NextToken", smithyprelude.String)
-
-	ListServiceViewsOutput_NextToken = ListServiceViewsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListServiceViewsOutput_ServiceViews = ListServiceViewsOutput.AddMember("ServiceViews", _ServiceViewArnList)
-
-	ListStreamingAccessForServicesInput_MaxResults = ListStreamingAccessForServicesInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListStreamingAccessForServicesInput_NextToken = ListStreamingAccessForServicesInput.AddMember("NextToken", smithyprelude.String)
-
-	ListStreamingAccessForServicesOutput_StreamingAccessForServices = ListStreamingAccessForServicesOutput.AddMember("StreamingAccessForServices", _StreamingAccessDetailsList)
-
-	ListStreamingAccessForServicesOutput_NextToken = ListStreamingAccessForServicesOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListSupportedResourceTypesInput_NextToken = ListSupportedResourceTypesInput.AddMember("NextToken", smithyprelude.String)
-
-	ListSupportedResourceTypesInput_MaxResults = ListSupportedResourceTypesInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListSupportedResourceTypesOutput_ResourceTypes = ListSupportedResourceTypesOutput.AddMember("ResourceTypes", _ResourceTypeList)
-
-	ListSupportedResourceTypesOutput_NextToken = ListSupportedResourceTypesOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_Tags = ListTagsForResourceOutput.AddMember("Tags", _TagMap)
-
-	ListViewsInput_NextToken = ListViewsInput.AddMember("NextToken", smithyprelude.String)
-
-	ListViewsInput_MaxResults = ListViewsInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	ListViewsOutput_Views = ListViewsOutput.AddMember("Views", _ViewArnList)
-
-	ListViewsOutput_NextToken = ListViewsOutput.AddMember("NextToken", smithyprelude.String)
-
-	SearchInput_QueryString = SearchInput.AddMember("QueryString", _QueryString)
-
-	SearchInput_MaxResults = SearchInput.AddMember("MaxResults", smithyprelude.Integer)
-
-	SearchInput_ViewArn = SearchInput.AddMember("ViewArn", smithyprelude.String)
-
-	SearchInput_NextToken = SearchInput.AddMember("NextToken", smithyprelude.String)
-
-	SearchOutput_Resources = SearchOutput.AddMember("Resources", _ResourceList)
-
-	SearchOutput_NextToken = SearchOutput.AddMember("NextToken", smithyprelude.String)
-
-	SearchOutput_ViewArn = SearchOutput.AddMember("ViewArn", smithyprelude.String)
-
-	SearchOutput_Count = SearchOutput.AddMember("Count", ResourceCount)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagMap)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _StringList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateIndexTypeInput_Arn = UpdateIndexTypeInput.AddMember("Arn", smithyprelude.String)
-
-	UpdateIndexTypeInput_Type = UpdateIndexTypeInput.AddMember("Type", _IndexType)
-
-	UpdateIndexTypeOutput_Arn = UpdateIndexTypeOutput.AddMember("Arn", smithyprelude.String)
-
-	UpdateIndexTypeOutput_Type = UpdateIndexTypeOutput.AddMember("Type", _IndexType)
-
-	UpdateIndexTypeOutput_State = UpdateIndexTypeOutput.AddMember("State", _IndexState)
-
-	UpdateIndexTypeOutput_LastUpdatedAt = UpdateIndexTypeOutput.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	UpdateViewInput_ViewArn = UpdateViewInput.AddMember("ViewArn", smithyprelude.String)
-
-	UpdateViewInput_IncludedProperties = UpdateViewInput.AddMember("IncludedProperties", _IncludedPropertyList)
-
-	UpdateViewInput_Filters = UpdateViewInput.AddMember("Filters", SearchFilter)
-
-	UpdateViewOutput_View = UpdateViewOutput.AddMember("View", View)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var m_AccountIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIdList_member}}
+var mBatchGetViewError = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetViewError_ViewArn, &sBatchGetViewError_ErrorMessage}}
+var m_BatchGetViewErrors = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchGetViewErrors_member}}
+var m_CFNResourceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CFNResourceTypeList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mErrorDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetails_Code, &sErrorDetails_Message}}
+var mIncludedProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sIncludedProperty_Name}}
+var m_IncludedPropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IncludedPropertyList_member}}
+var mIndex = smithy.SchemaMembers{List: []*smithy.Schema{&sIndex_Region, &sIndex_Arn, &sIndex_Type}}
+var m_IndexList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IndexList_member}}
+var mIndexStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sIndexStatus_Status, &sIndexStatus_Index, &sIndexStatus_ErrorDetails}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mManagedView = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedView_ManagedViewArn, &sManagedView_ManagedViewName, &sManagedView_TrustedService, &sManagedView_LastUpdatedAt, &sManagedView_Owner, &sManagedView_Scope, &sManagedView_IncludedProperties, &sManagedView_Filters, &sManagedView_ResourcePolicy, &sManagedView_Version}, Seed: 1, Slots: []uint16{
+	0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 1, 8, 0, 0, 0, 0, 0, 7, 10, 5, 0, 0, 3, 0,
+	9, 0, 4, 0, 2, 0, 0, 0,
+}}
+var m_ManagedViewArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ManagedViewArnList_member}}
+var mMemberIndex = smithy.SchemaMembers{List: []*smithy.Schema{&sMemberIndex_AccountId, &sMemberIndex_Region, &sMemberIndex_Arn, &sMemberIndex_Type}}
+var m_MemberIndexList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MemberIndexList_member}}
+var mOrgConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOrgConfiguration_AWSServiceAccessStatus, &sOrgConfiguration_ServiceLinkedRole}}
+var m_RegionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionList_member}}
+var mRegionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRegionStatus_Region, &sRegionStatus_Index, &sRegionStatus_View}}
+var m_RegionStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegionStatusList_member}}
+var mResource = smithy.SchemaMembers{List: []*smithy.Schema{&sResource_Arn, &sResource_OwningAccountId, &sResource_Region, &sResource_ResourceType, &sResource_Service, &sResource_CfnResourceType, &sResource_LastReportedAt, &sResource_Properties}}
+var mResourceCount = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceCount_TotalResources, &sResourceCount_Complete}}
+var m_ResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceProperty_Name, &sResourceProperty_LastReportedAt, &sResourceProperty_Data}}
+var m_ResourcePropertyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourcePropertyList_member}}
+var m_ResourceTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTypeList_member}}
+var mSearchFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchFilter_FilterString}}
+var mServiceLinkedRecorderInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLinkedRecorderInfo_ServicePrincipal, &sServiceLinkedRecorderInfo_RecorderName, &sServiceLinkedRecorderInfo_RecorderType}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message, &sServiceQuotaExceededException_Name, &sServiceQuotaExceededException_Value}}
+var mServiceView = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceView_ServiceViewArn, &sServiceView_ServiceViewName, &sServiceView_Filters, &sServiceView_IncludedProperties, &sServiceView_StreamingAccessForService, &sServiceView_ScopeType, &sServiceView_ServiceLinkedRecorder}}
+var m_ServiceViewArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceViewArnList_member}}
+var mStreamingAccessDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamingAccessDetails_ServicePrincipal, &sStreamingAccessDetails_CreatedAt}}
+var m_StreamingAccessDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StreamingAccessDetailsList_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mSupportedResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sSupportedResourceType_Service, &sSupportedResourceType_ResourceType, &sSupportedResourceType_CFNResourceTypes}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mUnauthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_FieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_Name, &sValidationExceptionField_ValidationIssue}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mView = smithy.SchemaMembers{List: []*smithy.Schema{&sView_ViewArn, &sView_ViewName, &sView_Owner, &sView_LastUpdatedAt, &sView_Scope, &sView_IncludedProperties, &sView_Filters}}
+var m_ViewArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ViewArnList_member}}
+var m_ViewList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ViewList_member}}
+var mViewStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sViewStatus_Status, &sViewStatus_View, &sViewStatus_ErrorDetails}}
+var mAssociateDefaultViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateDefaultViewInput_ViewArn}}
+var mAssociateDefaultViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateDefaultViewOutput_ViewArn}}
+var mBatchGetViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetViewInput_ViewArns}}
+var mBatchGetViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchGetViewOutput_Views, &sBatchGetViewOutput_Errors}}
+var mCreateIndexInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIndexInput_ClientToken, &sCreateIndexInput_Tags}}
+var mCreateIndexOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateIndexOutput_Arn, &sCreateIndexOutput_State, &sCreateIndexOutput_CreatedAt}}
+var mCreateResourceExplorerSetupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceExplorerSetupInput_RegionList, &sCreateResourceExplorerSetupInput_AggregatorRegions, &sCreateResourceExplorerSetupInput_ViewName}}
+var mCreateResourceExplorerSetupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResourceExplorerSetupOutput_TaskId}}
+var mCreateViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateViewInput_ClientToken, &sCreateViewInput_ViewName, &sCreateViewInput_IncludedProperties, &sCreateViewInput_Scope, &sCreateViewInput_Filters, &sCreateViewInput_Tags}}
+var mCreateViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateViewOutput_View}}
+var mDeleteIndexInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIndexInput_Arn}}
+var mDeleteIndexOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteIndexOutput_Arn, &sDeleteIndexOutput_State, &sDeleteIndexOutput_LastUpdatedAt}}
+var mDeleteResourceExplorerSetupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceExplorerSetupInput_RegionList, &sDeleteResourceExplorerSetupInput_DeleteInAllRegions}}
+var mDeleteResourceExplorerSetupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourceExplorerSetupOutput_TaskId}}
+var mDeleteViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteViewInput_ViewArn}}
+var mDeleteViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteViewOutput_ViewArn}}
+var mGetAccountLevelServiceConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountLevelServiceConfigurationOutput_OrgConfiguration}}
+var mGetDefaultViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDefaultViewOutput_ViewArn}}
+var mGetIndexOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetIndexOutput_Arn, &sGetIndexOutput_Type, &sGetIndexOutput_State, &sGetIndexOutput_ReplicatingFrom, &sGetIndexOutput_ReplicatingTo, &sGetIndexOutput_CreatedAt, &sGetIndexOutput_LastUpdatedAt, &sGetIndexOutput_Tags}}
+var mGetManagedViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedViewInput_ManagedViewArn}}
+var mGetManagedViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetManagedViewOutput_ManagedView}}
+var mGetResourceExplorerSetupInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceExplorerSetupInput_TaskId, &sGetResourceExplorerSetupInput_MaxResults, &sGetResourceExplorerSetupInput_NextToken}}
+var mGetResourceExplorerSetupOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourceExplorerSetupOutput_Regions, &sGetResourceExplorerSetupOutput_NextToken}}
+var mGetServiceIndexOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceIndexOutput_Arn, &sGetServiceIndexOutput_Type}}
+var mGetServiceViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceViewInput_ServiceViewArn}}
+var mGetServiceViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceViewOutput_View}}
+var mGetViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetViewInput_ViewArn}}
+var mGetViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetViewOutput_View, &sGetViewOutput_Tags}}
+var mListIndexesForMembersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndexesForMembersInput_AccountIdList, &sListIndexesForMembersInput_MaxResults, &sListIndexesForMembersInput_NextToken}}
+var mListIndexesForMembersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndexesForMembersOutput_Indexes, &sListIndexesForMembersOutput_NextToken}}
+var mListIndexesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndexesInput_Type, &sListIndexesInput_Regions, &sListIndexesInput_MaxResults, &sListIndexesInput_NextToken}}
+var mListIndexesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListIndexesOutput_Indexes, &sListIndexesOutput_NextToken}}
+var mListManagedViewsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedViewsInput_MaxResults, &sListManagedViewsInput_NextToken, &sListManagedViewsInput_ServicePrincipal}}
+var mListManagedViewsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListManagedViewsOutput_NextToken, &sListManagedViewsOutput_ManagedViews}}
+var mListResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesInput_Filters, &sListResourcesInput_MaxResults, &sListResourcesInput_ViewArn, &sListResourcesInput_NextToken}}
+var mListResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcesOutput_Resources, &sListResourcesOutput_NextToken, &sListResourcesOutput_ViewArn}}
+var mListServiceIndexesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceIndexesInput_Regions, &sListServiceIndexesInput_MaxResults, &sListServiceIndexesInput_NextToken}}
+var mListServiceIndexesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceIndexesOutput_Indexes, &sListServiceIndexesOutput_NextToken}}
+var mListServiceViewsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceViewsInput_MaxResults, &sListServiceViewsInput_NextToken}}
+var mListServiceViewsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceViewsOutput_NextToken, &sListServiceViewsOutput_ServiceViews}}
+var mListStreamingAccessForServicesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamingAccessForServicesInput_MaxResults, &sListStreamingAccessForServicesInput_NextToken}}
+var mListStreamingAccessForServicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListStreamingAccessForServicesOutput_StreamingAccessForServices, &sListStreamingAccessForServicesOutput_NextToken}}
+var mListSupportedResourceTypesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSupportedResourceTypesInput_NextToken, &sListSupportedResourceTypesInput_MaxResults}}
+var mListSupportedResourceTypesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListSupportedResourceTypesOutput_ResourceTypes, &sListSupportedResourceTypesOutput_NextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_Tags}}
+var mListViewsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListViewsInput_NextToken, &sListViewsInput_MaxResults}}
+var mListViewsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListViewsOutput_Views, &sListViewsOutput_NextToken}}
+var mSearchInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchInput_QueryString, &sSearchInput_MaxResults, &sSearchInput_ViewArn, &sSearchInput_NextToken}}
+var mSearchOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSearchOutput_Resources, &sSearchOutput_NextToken, &sSearchOutput_ViewArn, &sSearchOutput_Count}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateIndexTypeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIndexTypeInput_Arn, &sUpdateIndexTypeInput_Type}}
+var mUpdateIndexTypeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateIndexTypeOutput_Arn, &sUpdateIndexTypeOutput_Type, &sUpdateIndexTypeOutput_State, &sUpdateIndexTypeOutput_LastUpdatedAt}}
+var mUpdateViewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateViewInput_ViewArn, &sUpdateViewInput_IncludedProperties, &sUpdateViewInput_Filters}}
+var mUpdateViewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateViewOutput_View}}
+
+var sAssociateDefaultView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDefaultView, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBatchGetView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetView, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndex, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateResourceExplorerSetup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceExplorerSetup, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateView, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndex, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteResourceExplorerSetup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceExplorerSetup, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteView, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDisassociateDefaultView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateDefaultView, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetAccountLevelServiceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountLevelServiceConfiguration, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sGetDefaultView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultView, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndex, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetManagedView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedView, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetResourceExplorerSetup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceExplorerSetup, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetServiceIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceIndex, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetServiceView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceView, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetView, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListIndexes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexes, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListIndexesForMembers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesForMembers, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListManagedViews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedViews, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResources, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListServiceIndexes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceIndexes, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListServiceViews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceViews, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListStreamingAccessForServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamingAccessForServices, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListSupportedResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedResourceTypes, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListViews = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListViews, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sSearch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearch, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sUpdateIndexType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexType, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sUpdateView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateView, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var s_ResourceExplorer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceExplorer, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var s_AWSServiceAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSServiceAccessStatus, Type: smithy.ShapeTypeString})
+var sBatchGetViewError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetViewError, Members: &mBatchGetViewError, Type: smithy.ShapeTypeStructure})
+var s_BatchGetViewErrors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchGetViewErrors, Members: &m_BatchGetViewErrors, Type: smithy.ShapeTypeList})
+var s_CFNResourceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CFNResourceTypeList, Members: &m_CFNResourceTypeList, Type: smithy.ShapeTypeList})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var sIncludedProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncludedProperty, Members: &mIncludedProperty, Type: smithy.ShapeTypeStructure})
+var s_IncludedPropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludedPropertyList, Members: &m_IncludedPropertyList, Type: smithy.ShapeTypeList})
+var sIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndex, Members: &mIndex, Type: smithy.ShapeTypeStructure})
+var s_IndexList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexList, Members: &m_IndexList, Type: smithy.ShapeTypeList})
+var s_IndexState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexState, Type: smithy.ShapeTypeString})
+var sIndexStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIndexStatus, Members: &mIndexStatus, Type: smithy.ShapeTypeStructure})
+var s_IndexType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sManagedView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedView, Members: &mManagedView, Type: smithy.ShapeTypeStructure})
+var s_ManagedViewArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManagedViewArnList, Members: &m_ManagedViewArnList, Type: smithy.ShapeTypeList})
+var sMemberIndex = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMemberIndex, Members: &mMemberIndex, Type: smithy.ShapeTypeStructure})
+var s_MemberIndexList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MemberIndexList, Members: &m_MemberIndexList, Type: smithy.ShapeTypeList})
+var s_OperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationStatus, Type: smithy.ShapeTypeString})
+var sOrgConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrgConfiguration, Members: &mOrgConfiguration, Type: smithy.ShapeTypeStructure})
+var s_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryString, Traits: &t37, Type: smithy.ShapeTypeString})
+var s_RecorderType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecorderType, Type: smithy.ShapeTypeString})
+var s_RegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sRegionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegionStatus, Members: &mRegionStatus, Type: smithy.ShapeTypeStructure})
+var s_RegionStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionStatusList, Members: &m_RegionStatusList, Type: smithy.ShapeTypeList})
+var sResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sResourceCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceCount, Members: &mResourceCount, Type: smithy.ShapeTypeStructure})
+var s_ResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sResourceProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceProperty, Members: &mResourceProperty, Type: smithy.ShapeTypeStructure})
+var s_ResourcePropertyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePropertyList, Members: &m_ResourcePropertyList, Type: smithy.ShapeTypeList})
+var s_ResourceTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTypeList, Members: &m_ResourceTypeList, Type: smithy.ShapeTypeList})
+var sSearchFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchFilter, Members: &mSearchFilter, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sServiceLinkedRecorderInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLinkedRecorderInfo, Members: &mServiceLinkedRecorderInfo, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sServiceView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceView, Members: &mServiceView, Type: smithy.ShapeTypeStructure})
+var s_ServiceViewArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceViewArnList, Members: &m_ServiceViewArnList, Type: smithy.ShapeTypeList})
+var s_ServiceViewName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceViewName, Type: smithy.ShapeTypeString})
+var sStreamingAccessDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamingAccessDetails, Members: &mStreamingAccessDetails, Type: smithy.ShapeTypeStructure})
+var s_StreamingAccessDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamingAccessDetailsList, Members: &m_StreamingAccessDetailsList, Type: smithy.ShapeTypeList})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Traits: &t37, Type: smithy.ShapeTypeList})
+var sSupportedResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSupportedResourceType, Members: &mSupportedResourceType, Type: smithy.ShapeTypeStructure})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Traits: &t37, Type: smithy.ShapeTypeMap})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var sUnauthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedException, Members: &mUnauthorizedException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sView = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iView, Members: &mView, Type: smithy.ShapeTypeStructure})
+var s_ViewArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewArnList, Members: &m_ViewArnList, Type: smithy.ShapeTypeList})
+var s_ViewList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewList, Members: &m_ViewList, Type: smithy.ShapeTypeList})
+var s_ViewName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ViewName, Type: smithy.ShapeTypeString})
+var sViewStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iViewStatus, Members: &mViewStatus, Type: smithy.ShapeTypeStructure})
+var sAssociateDefaultViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDefaultViewInput, Members: &mAssociateDefaultViewInput, Type: smithy.ShapeTypeStructure})
+var sAssociateDefaultViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateDefaultViewOutput, Members: &mAssociateDefaultViewOutput, Type: smithy.ShapeTypeStructure})
+var sBatchGetViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetViewInput, Members: &mBatchGetViewInput, Type: smithy.ShapeTypeStructure})
+var sBatchGetViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchGetViewOutput, Members: &mBatchGetViewOutput, Type: smithy.ShapeTypeStructure})
+var sCreateIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexInput, Members: &mCreateIndexInput, Type: smithy.ShapeTypeStructure})
+var sCreateIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateIndexOutput, Members: &mCreateIndexOutput, Type: smithy.ShapeTypeStructure})
+var sCreateResourceExplorerSetupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceExplorerSetupInput, Members: &mCreateResourceExplorerSetupInput, Type: smithy.ShapeTypeStructure})
+var sCreateResourceExplorerSetupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResourceExplorerSetupOutput, Members: &mCreateResourceExplorerSetupOutput, Type: smithy.ShapeTypeStructure})
+var sCreateViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateViewInput, Members: &mCreateViewInput, Type: smithy.ShapeTypeStructure})
+var sCreateViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateViewOutput, Members: &mCreateViewOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteIndexInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexInput, Members: &mDeleteIndexInput, Type: smithy.ShapeTypeStructure})
+var sDeleteIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteIndexOutput, Members: &mDeleteIndexOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceExplorerSetupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceExplorerSetupInput, Members: &mDeleteResourceExplorerSetupInput, Type: smithy.ShapeTypeStructure})
+var sDeleteResourceExplorerSetupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourceExplorerSetupOutput, Members: &mDeleteResourceExplorerSetupOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteViewInput, Members: &mDeleteViewInput, Type: smithy.ShapeTypeStructure})
+var sDeleteViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteViewOutput, Members: &mDeleteViewOutput, Type: smithy.ShapeTypeStructure})
+var sGetAccountLevelServiceConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountLevelServiceConfigurationOutput, Members: &mGetAccountLevelServiceConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sGetDefaultViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDefaultViewOutput, Members: &mGetDefaultViewOutput, Type: smithy.ShapeTypeStructure})
+var sGetIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetIndexOutput, Members: &mGetIndexOutput, Type: smithy.ShapeTypeStructure})
+var sGetManagedViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedViewInput, Members: &mGetManagedViewInput, Type: smithy.ShapeTypeStructure})
+var sGetManagedViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetManagedViewOutput, Members: &mGetManagedViewOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourceExplorerSetupInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceExplorerSetupInput, Members: &mGetResourceExplorerSetupInput, Type: smithy.ShapeTypeStructure})
+var sGetResourceExplorerSetupOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourceExplorerSetupOutput, Members: &mGetResourceExplorerSetupOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceIndexOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceIndexOutput, Members: &mGetServiceIndexOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceViewInput, Members: &mGetServiceViewInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceViewOutput, Members: &mGetServiceViewOutput, Type: smithy.ShapeTypeStructure})
+var sGetViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetViewInput, Members: &mGetViewInput, Type: smithy.ShapeTypeStructure})
+var sGetViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetViewOutput, Members: &mGetViewOutput, Type: smithy.ShapeTypeStructure})
+var sListIndexesForMembersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesForMembersInput, Members: &mListIndexesForMembersInput, Type: smithy.ShapeTypeStructure})
+var sListIndexesForMembersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesForMembersOutput, Members: &mListIndexesForMembersOutput, Type: smithy.ShapeTypeStructure})
+var sListIndexesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesInput, Members: &mListIndexesInput, Type: smithy.ShapeTypeStructure})
+var sListIndexesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListIndexesOutput, Members: &mListIndexesOutput, Type: smithy.ShapeTypeStructure})
+var sListManagedViewsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedViewsInput, Members: &mListManagedViewsInput, Type: smithy.ShapeTypeStructure})
+var sListManagedViewsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListManagedViewsOutput, Members: &mListManagedViewsOutput, Type: smithy.ShapeTypeStructure})
+var sListResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesInput, Members: &mListResourcesInput, Type: smithy.ShapeTypeStructure})
+var sListResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcesOutput, Members: &mListResourcesOutput, Type: smithy.ShapeTypeStructure})
+var sListServiceIndexesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceIndexesInput, Members: &mListServiceIndexesInput, Type: smithy.ShapeTypeStructure})
+var sListServiceIndexesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceIndexesOutput, Members: &mListServiceIndexesOutput, Type: smithy.ShapeTypeStructure})
+var sListServiceViewsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceViewsInput, Members: &mListServiceViewsInput, Type: smithy.ShapeTypeStructure})
+var sListServiceViewsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceViewsOutput, Members: &mListServiceViewsOutput, Type: smithy.ShapeTypeStructure})
+var sListStreamingAccessForServicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamingAccessForServicesInput, Members: &mListStreamingAccessForServicesInput, Type: smithy.ShapeTypeStructure})
+var sListStreamingAccessForServicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListStreamingAccessForServicesOutput, Members: &mListStreamingAccessForServicesOutput, Type: smithy.ShapeTypeStructure})
+var sListSupportedResourceTypesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedResourceTypesInput, Members: &mListSupportedResourceTypesInput, Type: smithy.ShapeTypeStructure})
+var sListSupportedResourceTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSupportedResourceTypesOutput, Members: &mListSupportedResourceTypesOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListViewsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListViewsInput, Members: &mListViewsInput, Type: smithy.ShapeTypeStructure})
+var sListViewsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListViewsOutput, Members: &mListViewsOutput, Type: smithy.ShapeTypeStructure})
+var sSearchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchInput, Members: &mSearchInput, Type: smithy.ShapeTypeStructure})
+var sSearchOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSearchOutput, Members: &mSearchOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateIndexTypeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexTypeInput, Members: &mUpdateIndexTypeInput, Type: smithy.ShapeTypeStructure})
+var sUpdateIndexTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateIndexTypeOutput, Members: &mUpdateIndexTypeOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateViewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateViewInput, Members: &mUpdateViewInput, Type: smithy.ShapeTypeStructure})
+var sUpdateViewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateViewOutput, Members: &mUpdateViewOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sBatchGetViewError_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchGetViewError_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var s_BatchGetViewErrors_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchGetViewError, Members: &mBatchGetViewError, Type: smithy.ShapeTypeStructure})
+var s_CFNResourceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sErrorDetails_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &pString, Type: smithy.ShapeTypeString})
+var sErrorDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIncludedProperty_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var s_IncludedPropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIncludedProperty, Members: &mIncludedProperty, Type: smithy.ShapeTypeStructure})
+var sIndex_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString})
+var sIndex_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sIndex_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var s_IndexList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIndex, Members: &mIndex, Type: smithy.ShapeTypeStructure})
+var sIndexStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_OperationStatus, Type: smithy.ShapeTypeString})
+var sIndexStatus_Index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Index", ID: &iIndex, Members: &mIndex, Type: smithy.ShapeTypeStructure})
+var sIndexStatus_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sManagedView_ManagedViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sManagedView_ManagedViewName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedViewName", ID: &pString, Type: smithy.ShapeTypeString})
+var sManagedView_TrustedService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrustedService", ID: &pString, Type: smithy.ShapeTypeString})
+var sManagedView_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sManagedView_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &pString, Type: smithy.ShapeTypeString})
+var sManagedView_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &pString, Type: smithy.ShapeTypeString})
+var sManagedView_IncludedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedProperties", ID: &i_IncludedPropertyList, Members: &m_IncludedPropertyList, Type: smithy.ShapeTypeList})
+var sManagedView_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iSearchFilter, Members: &mSearchFilter, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sManagedView_ResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourcePolicy", ID: &pString, Type: smithy.ShapeTypeString})
+var sManagedView_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ManagedViewArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sMemberIndex_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountId", ID: &pString, Type: smithy.ShapeTypeString})
+var sMemberIndex_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString})
+var sMemberIndex_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sMemberIndex_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var s_MemberIndexList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMemberIndex, Members: &mMemberIndex, Type: smithy.ShapeTypeStructure})
+var sOrgConfiguration_AWSServiceAccessStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSServiceAccessStatus", ID: &i_AWSServiceAccessStatus, Type: smithy.ShapeTypeString})
+var sOrgConfiguration_ServiceLinkedRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceLinkedRole", ID: &pString, Type: smithy.ShapeTypeString})
+var s_RegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegionStatus_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegionStatus_Index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Index", ID: &iIndexStatus, Members: &mIndexStatus, Type: smithy.ShapeTypeStructure})
+var sRegionStatus_View = smithy.NewStaticSchema(smithy.StaticSchema{Member: "View", ID: &iViewStatus, Members: &mViewStatus, Type: smithy.ShapeTypeStructure})
+var s_RegionStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegionStatus, Members: &mRegionStatus, Type: smithy.ShapeTypeStructure})
+var sResource_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sResource_OwningAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwningAccountId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResource_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString})
+var sResource_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sResource_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString})
+var sResource_CfnResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CfnResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sResource_LastReportedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastReportedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sResource_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_ResourcePropertyList, Members: &m_ResourcePropertyList, Type: smithy.ShapeTypeList})
+var sResourceCount_TotalResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalResources", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sResourceCount_Complete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Complete", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var s_ResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResource, Members: &mResource, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceProperty_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceProperty_LastReportedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastReportedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sResourceProperty_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var s_ResourcePropertyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceProperty, Members: &mResourceProperty, Type: smithy.ShapeTypeStructure})
+var s_ResourceTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSupportedResourceType, Members: &mSupportedResourceType, Type: smithy.ShapeTypeStructure})
+var sSearchFilter_FilterString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterString", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceLinkedRecorderInfo_ServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServicePrincipal", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceLinkedRecorderInfo_RecorderName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecorderName", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceLinkedRecorderInfo_RecorderType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecorderType", ID: &i_RecorderType, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceView_ServiceViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceView_ServiceViewName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceViewName", ID: &i_ServiceViewName, Type: smithy.ShapeTypeString})
+var sServiceView_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iSearchFilter, Members: &mSearchFilter, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sServiceView_IncludedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedProperties", ID: &i_IncludedPropertyList, Members: &m_IncludedPropertyList, Type: smithy.ShapeTypeList})
+var sServiceView_StreamingAccessForService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingAccessForService", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceView_ScopeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScopeType", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceView_ServiceLinkedRecorder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceLinkedRecorder", ID: &iServiceLinkedRecorderInfo, Members: &mServiceLinkedRecorderInfo, Type: smithy.ShapeTypeStructure})
+var s_ServiceViewArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sStreamingAccessDetails_ServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServicePrincipal", ID: &pString, Type: smithy.ShapeTypeString})
+var sStreamingAccessDetails_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var s_StreamingAccessDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamingAccessDetails, Members: &mStreamingAccessDetails, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sSupportedResourceType_Service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Service", ID: &pString, Type: smithy.ShapeTypeString})
+var sSupportedResourceType_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sSupportedResourceType_CFNResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CFNResourceTypes", ID: &i_CFNResourceTypeList, Members: &m_CFNResourceTypeList, Type: smithy.ShapeTypeList})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sUnauthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_FieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_ValidationIssue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationIssue", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sView_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sView_ViewName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewName", ID: &i_ViewName, Type: smithy.ShapeTypeString})
+var sView_Owner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Owner", ID: &pString, Type: smithy.ShapeTypeString})
+var sView_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sView_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &pString, Type: smithy.ShapeTypeString})
+var sView_IncludedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedProperties", ID: &i_IncludedPropertyList, Members: &m_IncludedPropertyList, Type: smithy.ShapeTypeList})
+var sView_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iSearchFilter, Members: &mSearchFilter, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var s_ViewArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ViewList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iView, Members: &mView, Type: smithy.ShapeTypeStructure})
+var sViewStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_OperationStatus, Type: smithy.ShapeTypeString})
+var sViewStatus_View = smithy.NewStaticSchema(smithy.StaticSchema{Member: "View", ID: &iView, Members: &mView, Type: smithy.ShapeTypeStructure})
+var sViewStatus_ErrorDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetails", ID: &iErrorDetails, Members: &mErrorDetails, Type: smithy.ShapeTypeStructure})
+var sAssociateDefaultViewInput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sAssociateDefaultViewOutput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sBatchGetViewInput_ViewArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArns", ID: &i_ViewArnList, Members: &m_ViewArnList, Type: smithy.ShapeTypeList})
+var sBatchGetViewOutput_Views = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Views", ID: &i_ViewList, Members: &m_ViewList, Type: smithy.ShapeTypeList})
+var sBatchGetViewOutput_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_BatchGetViewErrors, Members: &m_BatchGetViewErrors, Type: smithy.ShapeTypeList})
+var sCreateIndexInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateIndexInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t36, Type: smithy.ShapeTypeMap})
+var sCreateIndexOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateIndexOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_IndexState, Type: smithy.ShapeTypeString})
+var sCreateIndexOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sCreateResourceExplorerSetupInput_RegionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionList", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sCreateResourceExplorerSetupInput_AggregatorRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregatorRegions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sCreateResourceExplorerSetupInput_ViewName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateResourceExplorerSetupOutput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateViewInput_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateViewInput_ViewName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewName", ID: &i_ViewName, Type: smithy.ShapeTypeString})
+var sCreateViewInput_IncludedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedProperties", ID: &i_IncludedPropertyList, Members: &m_IncludedPropertyList, Type: smithy.ShapeTypeList})
+var sCreateViewInput_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateViewInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iSearchFilter, Members: &mSearchFilter, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sCreateViewInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t36, Type: smithy.ShapeTypeMap})
+var sCreateViewOutput_View = smithy.NewStaticSchema(smithy.StaticSchema{Member: "View", ID: &iView, Members: &mView, Type: smithy.ShapeTypeStructure})
+var sDeleteIndexInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeleteIndexOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeleteIndexOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_IndexState, Type: smithy.ShapeTypeString})
+var sDeleteIndexOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sDeleteResourceExplorerSetupInput_RegionList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegionList", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sDeleteResourceExplorerSetupInput_DeleteInAllRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteInAllRegions", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteResourceExplorerSetupOutput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeleteViewInput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeleteViewOutput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAccountLevelServiceConfigurationOutput_OrgConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrgConfiguration", ID: &iOrgConfiguration, Members: &mOrgConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetDefaultViewOutput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetIndexOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetIndexOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var sGetIndexOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_IndexState, Type: smithy.ShapeTypeString})
+var sGetIndexOutput_ReplicatingFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatingFrom", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sGetIndexOutput_ReplicatingTo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReplicatingTo", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sGetIndexOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sGetIndexOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sGetIndexOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t36, Type: smithy.ShapeTypeMap})
+var sGetManagedViewInput_ManagedViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetManagedViewOutput_ManagedView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedView", ID: &iManagedView, Members: &mManagedView, Type: smithy.ShapeTypeStructure})
+var sGetResourceExplorerSetupInput_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetResourceExplorerSetupInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetResourceExplorerSetupInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetResourceExplorerSetupOutput_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_RegionStatusList, Members: &m_RegionStatusList, Type: smithy.ShapeTypeList})
+var sGetResourceExplorerSetupOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetServiceIndexOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetServiceIndexOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var sGetServiceViewInput_ServiceViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetServiceViewOutput_View = smithy.NewStaticSchema(smithy.StaticSchema{Member: "View", ID: &iServiceView, Members: &mServiceView, Type: smithy.ShapeTypeStructure})
+var sGetViewInput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetViewOutput_View = smithy.NewStaticSchema(smithy.StaticSchema{Member: "View", ID: &iView, Members: &mView, Type: smithy.ShapeTypeStructure})
+var sGetViewOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t36, Type: smithy.ShapeTypeMap})
+var sListIndexesForMembersInput_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountIdList", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sListIndexesForMembersInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListIndexesForMembersInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListIndexesForMembersOutput_Indexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Indexes", ID: &i_MemberIndexList, Members: &m_MemberIndexList, Type: smithy.ShapeTypeList})
+var sListIndexesForMembersOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListIndexesInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var sListIndexesInput_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sListIndexesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListIndexesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListIndexesOutput_Indexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Indexes", ID: &i_IndexList, Members: &m_IndexList, Type: smithy.ShapeTypeList})
+var sListIndexesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListManagedViewsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListManagedViewsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListManagedViewsInput_ServicePrincipal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServicePrincipal", ID: &pString, Type: smithy.ShapeTypeString})
+var sListManagedViewsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListManagedViewsOutput_ManagedViews = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagedViews", ID: &i_ManagedViewArnList, Members: &m_ManagedViewArnList, Type: smithy.ShapeTypeList})
+var sListResourcesInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iSearchFilter, Members: &mSearchFilter, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sListResourcesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListResourcesInput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sListResourcesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListResourcesOutput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sListResourcesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListResourcesOutput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sListServiceIndexesInput_Regions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Regions", ID: &i_RegionList, Members: &m_RegionList, Type: smithy.ShapeTypeList})
+var sListServiceIndexesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListServiceIndexesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListServiceIndexesOutput_Indexes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Indexes", ID: &i_IndexList, Members: &m_IndexList, Type: smithy.ShapeTypeList})
+var sListServiceIndexesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListServiceViewsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListServiceViewsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListServiceViewsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListServiceViewsOutput_ServiceViews = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceViews", ID: &i_ServiceViewArnList, Members: &m_ServiceViewArnList, Type: smithy.ShapeTypeList})
+var sListStreamingAccessForServicesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListStreamingAccessForServicesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListStreamingAccessForServicesOutput_StreamingAccessForServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamingAccessForServices", ID: &i_StreamingAccessDetailsList, Members: &m_StreamingAccessDetailsList, Type: smithy.ShapeTypeList})
+var sListStreamingAccessForServicesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSupportedResourceTypesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListSupportedResourceTypesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListSupportedResourceTypesOutput_ResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypes", ID: &i_ResourceTypeList, Members: &m_ResourceTypeList, Type: smithy.ShapeTypeList})
+var sListSupportedResourceTypesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t36, Type: smithy.ShapeTypeMap})
+var sListViewsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListViewsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListViewsOutput_Views = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Views", ID: &i_ViewArnList, Members: &m_ViewArnList, Type: smithy.ShapeTypeList})
+var sListViewsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchInput_QueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryString", ID: &i_QueryString, Traits: &t36, Type: smithy.ShapeTypeString})
+var sSearchInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSearchInput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchOutput_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_ResourceList, Members: &m_ResourceList, Type: smithy.ShapeTypeList})
+var sSearchOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchOutput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sSearchOutput_Count = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Count", ID: &iResourceCount, Members: &mResourceCount, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t36, Type: smithy.ShapeTypeMap})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_StringList, Members: &m_StringList, Traits: &t44, Type: smithy.ShapeTypeList})
+var sUpdateIndexTypeInput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateIndexTypeInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var sUpdateIndexTypeOutput_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateIndexTypeOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_IndexType, Type: smithy.ShapeTypeString})
+var sUpdateIndexTypeOutput_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &i_IndexState, Type: smithy.ShapeTypeString})
+var sUpdateIndexTypeOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t35, Type: smithy.ShapeTypeTimestamp})
+var sUpdateViewInput_ViewArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ViewArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateViewInput_IncludedProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludedProperties", ID: &i_IncludedPropertyList, Members: &m_IncludedPropertyList, Type: smithy.ShapeTypeList})
+var sUpdateViewInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &iSearchFilter, Members: &mSearchFilter, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sUpdateViewOutput_View = smithy.NewStaticSchema(smithy.StaticSchema{Member: "View", ID: &iView, Members: &mView, Type: smithy.ShapeTypeStructure})
+
+var AssociateDefaultView = &sAssociateDefaultView
+
+var BatchGetView = &sBatchGetView
+
+var CreateIndex = &sCreateIndex
+
+var CreateResourceExplorerSetup = &sCreateResourceExplorerSetup
+
+var CreateView = &sCreateView
+
+var DeleteIndex = &sDeleteIndex
+
+var DeleteResourceExplorerSetup = &sDeleteResourceExplorerSetup
+
+var DeleteView = &sDeleteView
+
+var DisassociateDefaultView = &sDisassociateDefaultView
+
+var GetAccountLevelServiceConfiguration = &sGetAccountLevelServiceConfiguration
+
+var GetDefaultView = &sGetDefaultView
+
+var GetIndex = &sGetIndex
+
+var GetManagedView = &sGetManagedView
+
+var GetResourceExplorerSetup = &sGetResourceExplorerSetup
+
+var GetServiceIndex = &sGetServiceIndex
+
+var GetServiceView = &sGetServiceView
+
+var GetView = &sGetView
+
+var ListIndexes = &sListIndexes
+
+var ListIndexesForMembers = &sListIndexesForMembers
+
+var ListManagedViews = &sListManagedViews
+
+var ListResources = &sListResources
+
+var ListServiceIndexes = &sListServiceIndexes
+
+var ListServiceViews = &sListServiceViews
+
+var ListStreamingAccessForServices = &sListStreamingAccessForServices
+
+var ListSupportedResourceTypes = &sListSupportedResourceTypes
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListViews = &sListViews
+
+var Search = &sSearch
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateIndexType = &sUpdateIndexType
+
+var UpdateView = &sUpdateView
+
+var _ResourceExplorer = &s_ResourceExplorer
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var _AccountIdList = &s_AccountIdList
+var _AccountIdList_member = &s_AccountIdList_member
+
+var _AWSServiceAccessStatus = &s_AWSServiceAccessStatus
+
+var BatchGetViewError = &sBatchGetViewError
+var BatchGetViewError_ViewArn = &sBatchGetViewError_ViewArn
+var BatchGetViewError_ErrorMessage = &sBatchGetViewError_ErrorMessage
+
+var _BatchGetViewErrors = &s_BatchGetViewErrors
+var _BatchGetViewErrors_member = &s_BatchGetViewErrors_member
+
+var _CFNResourceTypeList = &s_CFNResourceTypeList
+var _CFNResourceTypeList_member = &s_CFNResourceTypeList_member
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var ErrorDetails = &sErrorDetails
+var ErrorDetails_Code = &sErrorDetails_Code
+var ErrorDetails_Message = &sErrorDetails_Message
+
+var IncludedProperty = &sIncludedProperty
+var IncludedProperty_Name = &sIncludedProperty_Name
+
+var _IncludedPropertyList = &s_IncludedPropertyList
+var _IncludedPropertyList_member = &s_IncludedPropertyList_member
+
+var Index = &sIndex
+var Index_Region = &sIndex_Region
+var Index_Arn = &sIndex_Arn
+var Index_Type = &sIndex_Type
+
+var _IndexList = &s_IndexList
+var _IndexList_member = &s_IndexList_member
+
+var _IndexState = &s_IndexState
+
+var IndexStatus = &sIndexStatus
+var IndexStatus_Status = &sIndexStatus_Status
+var IndexStatus_Index = &sIndexStatus_Index
+var IndexStatus_ErrorDetails = &sIndexStatus_ErrorDetails
+
+var _IndexType = &s_IndexType
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var ManagedView = &sManagedView
+var ManagedView_ManagedViewArn = &sManagedView_ManagedViewArn
+var ManagedView_ManagedViewName = &sManagedView_ManagedViewName
+var ManagedView_TrustedService = &sManagedView_TrustedService
+var ManagedView_LastUpdatedAt = &sManagedView_LastUpdatedAt
+var ManagedView_Owner = &sManagedView_Owner
+var ManagedView_Scope = &sManagedView_Scope
+var ManagedView_IncludedProperties = &sManagedView_IncludedProperties
+var ManagedView_Filters = &sManagedView_Filters
+var ManagedView_ResourcePolicy = &sManagedView_ResourcePolicy
+var ManagedView_Version = &sManagedView_Version
+
+var _ManagedViewArnList = &s_ManagedViewArnList
+var _ManagedViewArnList_member = &s_ManagedViewArnList_member
+
+var MemberIndex = &sMemberIndex
+var MemberIndex_AccountId = &sMemberIndex_AccountId
+var MemberIndex_Region = &sMemberIndex_Region
+var MemberIndex_Arn = &sMemberIndex_Arn
+var MemberIndex_Type = &sMemberIndex_Type
+
+var _MemberIndexList = &s_MemberIndexList
+var _MemberIndexList_member = &s_MemberIndexList_member
+
+var _OperationStatus = &s_OperationStatus
+
+var OrgConfiguration = &sOrgConfiguration
+var OrgConfiguration_AWSServiceAccessStatus = &sOrgConfiguration_AWSServiceAccessStatus
+var OrgConfiguration_ServiceLinkedRole = &sOrgConfiguration_ServiceLinkedRole
+
+var _QueryString = &s_QueryString
+
+var _RecorderType = &s_RecorderType
+
+var _RegionList = &s_RegionList
+var _RegionList_member = &s_RegionList_member
+
+var RegionStatus = &sRegionStatus
+var RegionStatus_Region = &sRegionStatus_Region
+var RegionStatus_Index = &sRegionStatus_Index
+var RegionStatus_View = &sRegionStatus_View
+
+var _RegionStatusList = &s_RegionStatusList
+var _RegionStatusList_member = &s_RegionStatusList_member
+
+var Resource = &sResource
+var Resource_Arn = &sResource_Arn
+var Resource_OwningAccountId = &sResource_OwningAccountId
+var Resource_Region = &sResource_Region
+var Resource_ResourceType = &sResource_ResourceType
+var Resource_Service = &sResource_Service
+var Resource_CfnResourceType = &sResource_CfnResourceType
+var Resource_LastReportedAt = &sResource_LastReportedAt
+var Resource_Properties = &sResource_Properties
+
+var ResourceCount = &sResourceCount
+var ResourceCount_TotalResources = &sResourceCount_TotalResources
+var ResourceCount_Complete = &sResourceCount_Complete
+
+var _ResourceList = &s_ResourceList
+var _ResourceList_member = &s_ResourceList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceProperty = &sResourceProperty
+var ResourceProperty_Name = &sResourceProperty_Name
+var ResourceProperty_LastReportedAt = &sResourceProperty_LastReportedAt
+var ResourceProperty_Data = &sResourceProperty_Data
+
+var _ResourcePropertyList = &s_ResourcePropertyList
+var _ResourcePropertyList_member = &s_ResourcePropertyList_member
+
+var _ResourceTypeList = &s_ResourceTypeList
+var _ResourceTypeList_member = &s_ResourceTypeList_member
+
+var SearchFilter = &sSearchFilter
+var SearchFilter_FilterString = &sSearchFilter_FilterString
+
+var ServiceLinkedRecorderInfo = &sServiceLinkedRecorderInfo
+var ServiceLinkedRecorderInfo_ServicePrincipal = &sServiceLinkedRecorderInfo_ServicePrincipal
+var ServiceLinkedRecorderInfo_RecorderName = &sServiceLinkedRecorderInfo_RecorderName
+var ServiceLinkedRecorderInfo_RecorderType = &sServiceLinkedRecorderInfo_RecorderType
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+var ServiceQuotaExceededException_Name = &sServiceQuotaExceededException_Name
+var ServiceQuotaExceededException_Value = &sServiceQuotaExceededException_Value
+
+var ServiceView = &sServiceView
+var ServiceView_ServiceViewArn = &sServiceView_ServiceViewArn
+var ServiceView_ServiceViewName = &sServiceView_ServiceViewName
+var ServiceView_Filters = &sServiceView_Filters
+var ServiceView_IncludedProperties = &sServiceView_IncludedProperties
+var ServiceView_StreamingAccessForService = &sServiceView_StreamingAccessForService
+var ServiceView_ScopeType = &sServiceView_ScopeType
+var ServiceView_ServiceLinkedRecorder = &sServiceView_ServiceLinkedRecorder
+
+var _ServiceViewArnList = &s_ServiceViewArnList
+var _ServiceViewArnList_member = &s_ServiceViewArnList_member
+
+var _ServiceViewName = &s_ServiceViewName
+
+var StreamingAccessDetails = &sStreamingAccessDetails
+var StreamingAccessDetails_ServicePrincipal = &sStreamingAccessDetails_ServicePrincipal
+var StreamingAccessDetails_CreatedAt = &sStreamingAccessDetails_CreatedAt
+
+var _StreamingAccessDetailsList = &s_StreamingAccessDetailsList
+var _StreamingAccessDetailsList_member = &s_StreamingAccessDetailsList_member
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var SupportedResourceType = &sSupportedResourceType
+var SupportedResourceType_Service = &sSupportedResourceType_Service
+var SupportedResourceType_ResourceType = &sSupportedResourceType_ResourceType
+var SupportedResourceType_CFNResourceTypes = &sSupportedResourceType_CFNResourceTypes
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var UnauthorizedException = &sUnauthorizedException
+var UnauthorizedException_Message = &sUnauthorizedException_Message
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_FieldList = &sValidationException_FieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_Name = &sValidationExceptionField_Name
+var ValidationExceptionField_ValidationIssue = &sValidationExceptionField_ValidationIssue
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var View = &sView
+var View_ViewArn = &sView_ViewArn
+var View_ViewName = &sView_ViewName
+var View_Owner = &sView_Owner
+var View_LastUpdatedAt = &sView_LastUpdatedAt
+var View_Scope = &sView_Scope
+var View_IncludedProperties = &sView_IncludedProperties
+var View_Filters = &sView_Filters
+
+var _ViewArnList = &s_ViewArnList
+var _ViewArnList_member = &s_ViewArnList_member
+
+var _ViewList = &s_ViewList
+var _ViewList_member = &s_ViewList_member
+
+var _ViewName = &s_ViewName
+
+var ViewStatus = &sViewStatus
+var ViewStatus_Status = &sViewStatus_Status
+var ViewStatus_View = &sViewStatus_View
+var ViewStatus_ErrorDetails = &sViewStatus_ErrorDetails
+
+var AssociateDefaultViewInput = &sAssociateDefaultViewInput
+var AssociateDefaultViewInput_ViewArn = &sAssociateDefaultViewInput_ViewArn
+
+var AssociateDefaultViewOutput = &sAssociateDefaultViewOutput
+var AssociateDefaultViewOutput_ViewArn = &sAssociateDefaultViewOutput_ViewArn
+
+var BatchGetViewInput = &sBatchGetViewInput
+var BatchGetViewInput_ViewArns = &sBatchGetViewInput_ViewArns
+
+var BatchGetViewOutput = &sBatchGetViewOutput
+var BatchGetViewOutput_Views = &sBatchGetViewOutput_Views
+var BatchGetViewOutput_Errors = &sBatchGetViewOutput_Errors
+
+var CreateIndexInput = &sCreateIndexInput
+var CreateIndexInput_ClientToken = &sCreateIndexInput_ClientToken
+var CreateIndexInput_Tags = &sCreateIndexInput_Tags
+
+var CreateIndexOutput = &sCreateIndexOutput
+var CreateIndexOutput_Arn = &sCreateIndexOutput_Arn
+var CreateIndexOutput_State = &sCreateIndexOutput_State
+var CreateIndexOutput_CreatedAt = &sCreateIndexOutput_CreatedAt
+
+var CreateResourceExplorerSetupInput = &sCreateResourceExplorerSetupInput
+var CreateResourceExplorerSetupInput_RegionList = &sCreateResourceExplorerSetupInput_RegionList
+var CreateResourceExplorerSetupInput_AggregatorRegions = &sCreateResourceExplorerSetupInput_AggregatorRegions
+var CreateResourceExplorerSetupInput_ViewName = &sCreateResourceExplorerSetupInput_ViewName
+
+var CreateResourceExplorerSetupOutput = &sCreateResourceExplorerSetupOutput
+var CreateResourceExplorerSetupOutput_TaskId = &sCreateResourceExplorerSetupOutput_TaskId
+
+var CreateViewInput = &sCreateViewInput
+var CreateViewInput_ClientToken = &sCreateViewInput_ClientToken
+var CreateViewInput_ViewName = &sCreateViewInput_ViewName
+var CreateViewInput_IncludedProperties = &sCreateViewInput_IncludedProperties
+var CreateViewInput_Scope = &sCreateViewInput_Scope
+var CreateViewInput_Filters = &sCreateViewInput_Filters
+var CreateViewInput_Tags = &sCreateViewInput_Tags
+
+var CreateViewOutput = &sCreateViewOutput
+var CreateViewOutput_View = &sCreateViewOutput_View
+
+var DeleteIndexInput = &sDeleteIndexInput
+var DeleteIndexInput_Arn = &sDeleteIndexInput_Arn
+
+var DeleteIndexOutput = &sDeleteIndexOutput
+var DeleteIndexOutput_Arn = &sDeleteIndexOutput_Arn
+var DeleteIndexOutput_State = &sDeleteIndexOutput_State
+var DeleteIndexOutput_LastUpdatedAt = &sDeleteIndexOutput_LastUpdatedAt
+
+var DeleteResourceExplorerSetupInput = &sDeleteResourceExplorerSetupInput
+var DeleteResourceExplorerSetupInput_RegionList = &sDeleteResourceExplorerSetupInput_RegionList
+var DeleteResourceExplorerSetupInput_DeleteInAllRegions = &sDeleteResourceExplorerSetupInput_DeleteInAllRegions
+
+var DeleteResourceExplorerSetupOutput = &sDeleteResourceExplorerSetupOutput
+var DeleteResourceExplorerSetupOutput_TaskId = &sDeleteResourceExplorerSetupOutput_TaskId
+
+var DeleteViewInput = &sDeleteViewInput
+var DeleteViewInput_ViewArn = &sDeleteViewInput_ViewArn
+
+var DeleteViewOutput = &sDeleteViewOutput
+var DeleteViewOutput_ViewArn = &sDeleteViewOutput_ViewArn
+
+var GetAccountLevelServiceConfigurationOutput = &sGetAccountLevelServiceConfigurationOutput
+var GetAccountLevelServiceConfigurationOutput_OrgConfiguration = &sGetAccountLevelServiceConfigurationOutput_OrgConfiguration
+
+var GetDefaultViewOutput = &sGetDefaultViewOutput
+var GetDefaultViewOutput_ViewArn = &sGetDefaultViewOutput_ViewArn
+
+var GetIndexOutput = &sGetIndexOutput
+var GetIndexOutput_Arn = &sGetIndexOutput_Arn
+var GetIndexOutput_Type = &sGetIndexOutput_Type
+var GetIndexOutput_State = &sGetIndexOutput_State
+var GetIndexOutput_ReplicatingFrom = &sGetIndexOutput_ReplicatingFrom
+var GetIndexOutput_ReplicatingTo = &sGetIndexOutput_ReplicatingTo
+var GetIndexOutput_CreatedAt = &sGetIndexOutput_CreatedAt
+var GetIndexOutput_LastUpdatedAt = &sGetIndexOutput_LastUpdatedAt
+var GetIndexOutput_Tags = &sGetIndexOutput_Tags
+
+var GetManagedViewInput = &sGetManagedViewInput
+var GetManagedViewInput_ManagedViewArn = &sGetManagedViewInput_ManagedViewArn
+
+var GetManagedViewOutput = &sGetManagedViewOutput
+var GetManagedViewOutput_ManagedView = &sGetManagedViewOutput_ManagedView
+
+var GetResourceExplorerSetupInput = &sGetResourceExplorerSetupInput
+var GetResourceExplorerSetupInput_TaskId = &sGetResourceExplorerSetupInput_TaskId
+var GetResourceExplorerSetupInput_MaxResults = &sGetResourceExplorerSetupInput_MaxResults
+var GetResourceExplorerSetupInput_NextToken = &sGetResourceExplorerSetupInput_NextToken
+
+var GetResourceExplorerSetupOutput = &sGetResourceExplorerSetupOutput
+var GetResourceExplorerSetupOutput_Regions = &sGetResourceExplorerSetupOutput_Regions
+var GetResourceExplorerSetupOutput_NextToken = &sGetResourceExplorerSetupOutput_NextToken
+
+var GetServiceIndexOutput = &sGetServiceIndexOutput
+var GetServiceIndexOutput_Arn = &sGetServiceIndexOutput_Arn
+var GetServiceIndexOutput_Type = &sGetServiceIndexOutput_Type
+
+var GetServiceViewInput = &sGetServiceViewInput
+var GetServiceViewInput_ServiceViewArn = &sGetServiceViewInput_ServiceViewArn
+
+var GetServiceViewOutput = &sGetServiceViewOutput
+var GetServiceViewOutput_View = &sGetServiceViewOutput_View
+
+var GetViewInput = &sGetViewInput
+var GetViewInput_ViewArn = &sGetViewInput_ViewArn
+
+var GetViewOutput = &sGetViewOutput
+var GetViewOutput_View = &sGetViewOutput_View
+var GetViewOutput_Tags = &sGetViewOutput_Tags
+
+var ListIndexesForMembersInput = &sListIndexesForMembersInput
+var ListIndexesForMembersInput_AccountIdList = &sListIndexesForMembersInput_AccountIdList
+var ListIndexesForMembersInput_MaxResults = &sListIndexesForMembersInput_MaxResults
+var ListIndexesForMembersInput_NextToken = &sListIndexesForMembersInput_NextToken
+
+var ListIndexesForMembersOutput = &sListIndexesForMembersOutput
+var ListIndexesForMembersOutput_Indexes = &sListIndexesForMembersOutput_Indexes
+var ListIndexesForMembersOutput_NextToken = &sListIndexesForMembersOutput_NextToken
+
+var ListIndexesInput = &sListIndexesInput
+var ListIndexesInput_Type = &sListIndexesInput_Type
+var ListIndexesInput_Regions = &sListIndexesInput_Regions
+var ListIndexesInput_MaxResults = &sListIndexesInput_MaxResults
+var ListIndexesInput_NextToken = &sListIndexesInput_NextToken
+
+var ListIndexesOutput = &sListIndexesOutput
+var ListIndexesOutput_Indexes = &sListIndexesOutput_Indexes
+var ListIndexesOutput_NextToken = &sListIndexesOutput_NextToken
+
+var ListManagedViewsInput = &sListManagedViewsInput
+var ListManagedViewsInput_MaxResults = &sListManagedViewsInput_MaxResults
+var ListManagedViewsInput_NextToken = &sListManagedViewsInput_NextToken
+var ListManagedViewsInput_ServicePrincipal = &sListManagedViewsInput_ServicePrincipal
+
+var ListManagedViewsOutput = &sListManagedViewsOutput
+var ListManagedViewsOutput_NextToken = &sListManagedViewsOutput_NextToken
+var ListManagedViewsOutput_ManagedViews = &sListManagedViewsOutput_ManagedViews
+
+var ListResourcesInput = &sListResourcesInput
+var ListResourcesInput_Filters = &sListResourcesInput_Filters
+var ListResourcesInput_MaxResults = &sListResourcesInput_MaxResults
+var ListResourcesInput_ViewArn = &sListResourcesInput_ViewArn
+var ListResourcesInput_NextToken = &sListResourcesInput_NextToken
+
+var ListResourcesOutput = &sListResourcesOutput
+var ListResourcesOutput_Resources = &sListResourcesOutput_Resources
+var ListResourcesOutput_NextToken = &sListResourcesOutput_NextToken
+var ListResourcesOutput_ViewArn = &sListResourcesOutput_ViewArn
+
+var ListServiceIndexesInput = &sListServiceIndexesInput
+var ListServiceIndexesInput_Regions = &sListServiceIndexesInput_Regions
+var ListServiceIndexesInput_MaxResults = &sListServiceIndexesInput_MaxResults
+var ListServiceIndexesInput_NextToken = &sListServiceIndexesInput_NextToken
+
+var ListServiceIndexesOutput = &sListServiceIndexesOutput
+var ListServiceIndexesOutput_Indexes = &sListServiceIndexesOutput_Indexes
+var ListServiceIndexesOutput_NextToken = &sListServiceIndexesOutput_NextToken
+
+var ListServiceViewsInput = &sListServiceViewsInput
+var ListServiceViewsInput_MaxResults = &sListServiceViewsInput_MaxResults
+var ListServiceViewsInput_NextToken = &sListServiceViewsInput_NextToken
+
+var ListServiceViewsOutput = &sListServiceViewsOutput
+var ListServiceViewsOutput_NextToken = &sListServiceViewsOutput_NextToken
+var ListServiceViewsOutput_ServiceViews = &sListServiceViewsOutput_ServiceViews
+
+var ListStreamingAccessForServicesInput = &sListStreamingAccessForServicesInput
+var ListStreamingAccessForServicesInput_MaxResults = &sListStreamingAccessForServicesInput_MaxResults
+var ListStreamingAccessForServicesInput_NextToken = &sListStreamingAccessForServicesInput_NextToken
+
+var ListStreamingAccessForServicesOutput = &sListStreamingAccessForServicesOutput
+var ListStreamingAccessForServicesOutput_StreamingAccessForServices = &sListStreamingAccessForServicesOutput_StreamingAccessForServices
+var ListStreamingAccessForServicesOutput_NextToken = &sListStreamingAccessForServicesOutput_NextToken
+
+var ListSupportedResourceTypesInput = &sListSupportedResourceTypesInput
+var ListSupportedResourceTypesInput_NextToken = &sListSupportedResourceTypesInput_NextToken
+var ListSupportedResourceTypesInput_MaxResults = &sListSupportedResourceTypesInput_MaxResults
+
+var ListSupportedResourceTypesOutput = &sListSupportedResourceTypesOutput
+var ListSupportedResourceTypesOutput_ResourceTypes = &sListSupportedResourceTypesOutput_ResourceTypes
+var ListSupportedResourceTypesOutput_NextToken = &sListSupportedResourceTypesOutput_NextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_Tags = &sListTagsForResourceOutput_Tags
+
+var ListViewsInput = &sListViewsInput
+var ListViewsInput_NextToken = &sListViewsInput_NextToken
+var ListViewsInput_MaxResults = &sListViewsInput_MaxResults
+
+var ListViewsOutput = &sListViewsOutput
+var ListViewsOutput_Views = &sListViewsOutput_Views
+var ListViewsOutput_NextToken = &sListViewsOutput_NextToken
+
+var SearchInput = &sSearchInput
+var SearchInput_QueryString = &sSearchInput_QueryString
+var SearchInput_MaxResults = &sSearchInput_MaxResults
+var SearchInput_ViewArn = &sSearchInput_ViewArn
+var SearchInput_NextToken = &sSearchInput_NextToken
+
+var SearchOutput = &sSearchOutput
+var SearchOutput_Resources = &sSearchOutput_Resources
+var SearchOutput_NextToken = &sSearchOutput_NextToken
+var SearchOutput_ViewArn = &sSearchOutput_ViewArn
+var SearchOutput_Count = &sSearchOutput_Count
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateIndexTypeInput = &sUpdateIndexTypeInput
+var UpdateIndexTypeInput_Arn = &sUpdateIndexTypeInput_Arn
+var UpdateIndexTypeInput_Type = &sUpdateIndexTypeInput_Type
+
+var UpdateIndexTypeOutput = &sUpdateIndexTypeOutput
+var UpdateIndexTypeOutput_Arn = &sUpdateIndexTypeOutput_Arn
+var UpdateIndexTypeOutput_Type = &sUpdateIndexTypeOutput_Type
+var UpdateIndexTypeOutput_State = &sUpdateIndexTypeOutput_State
+var UpdateIndexTypeOutput_LastUpdatedAt = &sUpdateIndexTypeOutput_LastUpdatedAt
+
+var UpdateViewInput = &sUpdateViewInput
+var UpdateViewInput_ViewArn = &sUpdateViewInput_ViewArn
+var UpdateViewInput_IncludedProperties = &sUpdateViewInput_IncludedProperties
+var UpdateViewInput_Filters = &sUpdateViewInput_Filters
+
+var UpdateViewOutput = &sUpdateViewOutput
+var UpdateViewOutput_View = &sUpdateViewOutput_View
+
+var ResourceExplorer = &smithy.ServiceSchema{Schema: &s_ResourceExplorer, Version: "2022-07-28"}

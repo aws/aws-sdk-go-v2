@@ -4,5187 +4,3693 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptEnvironmentAccountConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "AcceptEnvironmentAccountConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelComponentDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelComponentDeployment",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelEnvironmentDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelEnvironmentDeployment",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelServiceInstanceDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelServiceInstanceDeployment",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelServicePipelineDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelServicePipelineDeployment",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEnvironmentAccountConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentAccountConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEnvironmentTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEnvironmentTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateRepository",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateService",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateServiceInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateServiceSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateServiceTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateServiceTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTemplateSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateTemplateSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteDeployment",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEnvironmentAccountConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentAccountConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEnvironmentTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEnvironmentTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteRepository",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteService",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteServiceSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteServiceTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteServiceTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTemplateSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteTemplateSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetAccountSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetDeployment",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnvironmentAccountConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentAccountConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnvironmentTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnvironmentTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRepository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetRepository",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetRepositorySyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetRepositorySyncStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcesSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetResourcesSummary",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetService",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceInstanceSyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceInstanceSyncStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceSyncBlockerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceSyncBlockerSummary",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetServiceTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTemplateSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetTemplateSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetTemplateSyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetTemplateSyncStatus",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListComponentOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentOutputs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListComponentProvisionedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentProvisionedResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponents",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListDeployments",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnvironmentAccountConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentAccountConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnvironmentOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentOutputs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnvironmentProvisionedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentProvisionedResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironments",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnvironmentTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentTemplates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEnvironmentTemplateVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentTemplateVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRepositories = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListRepositories",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRepositorySyncDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListRepositorySyncDefinitions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceInstanceOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstanceOutputs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceInstanceProvisionedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstanceProvisionedResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstances",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServicePipelineOutputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicePipelineOutputs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServicePipelineProvisionedResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicePipelineProvisionedResources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServices",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceTemplates",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListServiceTemplateVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceTemplateVersions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var NotifyResourceDeploymentStatusChange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "NotifyResourceDeploymentStatusChange",
-}, smithy.ShapeTypeOperation, 0)
-
-var RejectEnvironmentAccountConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RejectEnvironmentAccountConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateAccountSettings",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateComponent",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironment",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnvironmentAccountConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentAccountConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnvironmentTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnvironmentTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateService",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServiceInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceInstance",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServicePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServicePipeline",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServiceSyncBlocker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceSyncBlocker",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServiceSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServiceTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceTemplate",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateServiceTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceTemplateVersion",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateTemplateSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateTemplateSyncConfig",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AwsProton20200720 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "AwsProton20200720",
-}, smithy.ShapeTypeService, 0)
-
-var AwsProton20200720 = smithy.NewServiceSchema(_AwsProton20200720, "2020-07-20")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AccountSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "AccountSettings",
-}, smithy.ShapeTypeStructure, 3)
-var AccountSettings_pipelineServiceRoleArn *smithy.Schema
-
-var AccountSettings_pipelineProvisioningRepository *smithy.Schema
-
-var AccountSettings_pipelineCodebuildRoleArn *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "AwsAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _BlockerStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "BlockerStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _BlockerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "BlockerType",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var CompatibleEnvironmentTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CompatibleEnvironmentTemplate",
-}, smithy.ShapeTypeStructure, 2)
-var CompatibleEnvironmentTemplate_templateName *smithy.Schema
-
-var CompatibleEnvironmentTemplate_majorVersion *smithy.Schema
-
-var CompatibleEnvironmentTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CompatibleEnvironmentTemplateInput",
-}, smithy.ShapeTypeStructure, 2)
-var CompatibleEnvironmentTemplateInput_templateName *smithy.Schema
-
-var CompatibleEnvironmentTemplateInput_majorVersion *smithy.Schema
-
-var _CompatibleEnvironmentTemplateInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CompatibleEnvironmentTemplateInputList",
-}, smithy.ShapeTypeList, 1)
-var _CompatibleEnvironmentTemplateInputList_member *smithy.Schema
-
-var _CompatibleEnvironmentTemplateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CompatibleEnvironmentTemplateList",
-}, smithy.ShapeTypeList, 1)
-var _CompatibleEnvironmentTemplateList_member *smithy.Schema
-
-var Component = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Component",
-}, smithy.ShapeTypeStructure, 16)
-var Component_name *smithy.Schema
-
-var Component_description *smithy.Schema
-
-var Component_arn *smithy.Schema
-
-var Component_environmentName *smithy.Schema
-
-var Component_serviceName *smithy.Schema
-
-var Component_serviceInstanceName *smithy.Schema
-
-var Component_createdAt *smithy.Schema
-
-var Component_lastModifiedAt *smithy.Schema
-
-var Component_lastDeploymentAttemptedAt *smithy.Schema
-
-var Component_lastDeploymentSucceededAt *smithy.Schema
-
-var Component_deploymentStatus *smithy.Schema
-
-var Component_deploymentStatusMessage *smithy.Schema
-
-var Component_serviceSpec *smithy.Schema
-
-var Component_lastClientRequestToken *smithy.Schema
-
-var Component_lastAttemptedDeploymentId *smithy.Schema
-
-var Component_lastSucceededDeploymentId *smithy.Schema
-
-var _ComponentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ComponentArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentDeploymentIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ComponentDeploymentIdList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentDeploymentIdList_member *smithy.Schema
-
-var _ComponentDeploymentUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ComponentDeploymentUpdateType",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ComponentState",
-}, smithy.ShapeTypeStructure, 4)
-var ComponentState_serviceName *smithy.Schema
-
-var ComponentState_serviceInstanceName *smithy.Schema
-
-var ComponentState_serviceSpec *smithy.Schema
-
-var ComponentState_templateFile *smithy.Schema
-
-var ComponentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ComponentSummary",
-}, smithy.ShapeTypeStructure, 13)
-var ComponentSummary_name *smithy.Schema
-
-var ComponentSummary_arn *smithy.Schema
-
-var ComponentSummary_environmentName *smithy.Schema
-
-var ComponentSummary_serviceName *smithy.Schema
-
-var ComponentSummary_serviceInstanceName *smithy.Schema
-
-var ComponentSummary_createdAt *smithy.Schema
-
-var ComponentSummary_lastModifiedAt *smithy.Schema
-
-var ComponentSummary_lastDeploymentAttemptedAt *smithy.Schema
-
-var ComponentSummary_lastDeploymentSucceededAt *smithy.Schema
-
-var ComponentSummary_deploymentStatus *smithy.Schema
-
-var ComponentSummary_deploymentStatusMessage *smithy.Schema
-
-var ComponentSummary_lastAttemptedDeploymentId *smithy.Schema
-
-var ComponentSummary_lastSucceededDeploymentId *smithy.Schema
-
-var _ComponentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ComponentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentSummaryList_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var CountsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CountsSummary",
-}, smithy.ShapeTypeStructure, 7)
-var CountsSummary_components *smithy.Schema
-
-var CountsSummary_environments *smithy.Schema
-
-var CountsSummary_environmentTemplates *smithy.Schema
-
-var CountsSummary_serviceInstances *smithy.Schema
-
-var CountsSummary_services *smithy.Schema
-
-var CountsSummary_serviceTemplates *smithy.Schema
-
-var CountsSummary_pipelines *smithy.Schema
-
-var Deployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Deployment",
-}, smithy.ShapeTypeStructure, 18)
-var Deployment_id *smithy.Schema
-
-var Deployment_arn *smithy.Schema
-
-var Deployment_targetArn *smithy.Schema
-
-var Deployment_targetResourceCreatedAt *smithy.Schema
-
-var Deployment_targetResourceType *smithy.Schema
-
-var Deployment_environmentName *smithy.Schema
-
-var Deployment_serviceName *smithy.Schema
-
-var Deployment_serviceInstanceName *smithy.Schema
-
-var Deployment_componentName *smithy.Schema
-
-var Deployment_deploymentStatus *smithy.Schema
-
-var Deployment_deploymentStatusMessage *smithy.Schema
-
-var Deployment_createdAt *smithy.Schema
-
-var Deployment_lastModifiedAt *smithy.Schema
-
-var Deployment_completedAt *smithy.Schema
-
-var Deployment_lastAttemptedDeploymentId *smithy.Schema
-
-var Deployment_lastSucceededDeploymentId *smithy.Schema
-
-var Deployment_initialState *smithy.Schema
-
-var Deployment_targetState *smithy.Schema
-
-var _DeploymentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentArn",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentId",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentState",
-}, smithy.ShapeTypeUnion, 4)
-var DeploymentState_serviceInstance *smithy.Schema
-
-var DeploymentState_environment *smithy.Schema
-
-var DeploymentState_servicePipeline *smithy.Schema
-
-var DeploymentState_component *smithy.Schema
-
-var _DeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentSummary",
-}, smithy.ShapeTypeStructure, 15)
-var DeploymentSummary_id *smithy.Schema
-
-var DeploymentSummary_arn *smithy.Schema
-
-var DeploymentSummary_targetArn *smithy.Schema
-
-var DeploymentSummary_targetResourceCreatedAt *smithy.Schema
-
-var DeploymentSummary_targetResourceType *smithy.Schema
-
-var DeploymentSummary_createdAt *smithy.Schema
-
-var DeploymentSummary_lastModifiedAt *smithy.Schema
-
-var DeploymentSummary_completedAt *smithy.Schema
-
-var DeploymentSummary_environmentName *smithy.Schema
-
-var DeploymentSummary_serviceName *smithy.Schema
-
-var DeploymentSummary_serviceInstanceName *smithy.Schema
-
-var DeploymentSummary_componentName *smithy.Schema
-
-var DeploymentSummary_lastAttemptedDeploymentId *smithy.Schema
-
-var DeploymentSummary_lastSucceededDeploymentId *smithy.Schema
-
-var DeploymentSummary_deploymentStatus *smithy.Schema
-
-var _DeploymentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentSummaryList_member *smithy.Schema
-
-var _DeploymentTargetResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentTargetResourceType",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentUpdateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeploymentUpdateType",
-}, smithy.ShapeTypeString, 0)
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DisplayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DisplayName",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EmptyNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EmptyNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var Environment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Environment",
-}, smithy.ShapeTypeStructure, 21)
-var Environment_name *smithy.Schema
-
-var Environment_description *smithy.Schema
-
-var Environment_createdAt *smithy.Schema
-
-var Environment_lastDeploymentAttemptedAt *smithy.Schema
-
-var Environment_lastDeploymentSucceededAt *smithy.Schema
-
-var Environment_arn *smithy.Schema
-
-var Environment_templateName *smithy.Schema
-
-var Environment_templateMajorVersion *smithy.Schema
-
-var Environment_templateMinorVersion *smithy.Schema
-
-var Environment_deploymentStatus *smithy.Schema
-
-var Environment_deploymentStatusMessage *smithy.Schema
-
-var Environment_protonServiceRoleArn *smithy.Schema
-
-var Environment_environmentAccountConnectionId *smithy.Schema
-
-var Environment_environmentAccountId *smithy.Schema
-
-var Environment_spec *smithy.Schema
-
-var Environment_provisioning *smithy.Schema
-
-var Environment_provisioningRepository *smithy.Schema
-
-var Environment_componentRoleArn *smithy.Schema
-
-var Environment_codebuildRoleArn *smithy.Schema
-
-var Environment_lastAttemptedDeploymentId *smithy.Schema
-
-var Environment_lastSucceededDeploymentId *smithy.Schema
-
-var EnvironmentAccountConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnection",
-}, smithy.ShapeTypeStructure, 11)
-var EnvironmentAccountConnection_id *smithy.Schema
-
-var EnvironmentAccountConnection_arn *smithy.Schema
-
-var EnvironmentAccountConnection_managementAccountId *smithy.Schema
-
-var EnvironmentAccountConnection_environmentAccountId *smithy.Schema
-
-var EnvironmentAccountConnection_roleArn *smithy.Schema
-
-var EnvironmentAccountConnection_environmentName *smithy.Schema
-
-var EnvironmentAccountConnection_requestedAt *smithy.Schema
-
-var EnvironmentAccountConnection_lastModifiedAt *smithy.Schema
-
-var EnvironmentAccountConnection_status *smithy.Schema
-
-var EnvironmentAccountConnection_componentRoleArn *smithy.Schema
-
-var EnvironmentAccountConnection_codebuildRoleArn *smithy.Schema
-
-var _EnvironmentAccountConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentAccountConnectionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnectionId",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentAccountConnectionRequesterAccountType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnectionRequesterAccountType",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentAccountConnectionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnectionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _EnvironmentAccountConnectionStatusList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnectionStatusList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentAccountConnectionStatusList_member *smithy.Schema
-
-var EnvironmentAccountConnectionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnectionSummary",
-}, smithy.ShapeTypeStructure, 10)
-var EnvironmentAccountConnectionSummary_id *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_arn *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_managementAccountId *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_environmentAccountId *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_roleArn *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_environmentName *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_requestedAt *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_lastModifiedAt *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_status *smithy.Schema
-
-var EnvironmentAccountConnectionSummary_componentRoleArn *smithy.Schema
-
-var _EnvironmentAccountConnectionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentAccountConnectionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentAccountConnectionSummaryList_member *smithy.Schema
-
-var _EnvironmentArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentArn",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentState",
-}, smithy.ShapeTypeStructure, 4)
-var EnvironmentState_spec *smithy.Schema
-
-var EnvironmentState_templateName *smithy.Schema
-
-var EnvironmentState_templateMajorVersion *smithy.Schema
-
-var EnvironmentState_templateMinorVersion *smithy.Schema
-
-var EnvironmentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentSummary",
-}, smithy.ShapeTypeStructure, 18)
-var EnvironmentSummary_name *smithy.Schema
-
-var EnvironmentSummary_description *smithy.Schema
-
-var EnvironmentSummary_createdAt *smithy.Schema
-
-var EnvironmentSummary_lastDeploymentAttemptedAt *smithy.Schema
-
-var EnvironmentSummary_lastDeploymentSucceededAt *smithy.Schema
-
-var EnvironmentSummary_arn *smithy.Schema
-
-var EnvironmentSummary_templateName *smithy.Schema
-
-var EnvironmentSummary_templateMajorVersion *smithy.Schema
-
-var EnvironmentSummary_templateMinorVersion *smithy.Schema
-
-var EnvironmentSummary_deploymentStatus *smithy.Schema
-
-var EnvironmentSummary_deploymentStatusMessage *smithy.Schema
-
-var EnvironmentSummary_protonServiceRoleArn *smithy.Schema
-
-var EnvironmentSummary_environmentAccountConnectionId *smithy.Schema
-
-var EnvironmentSummary_environmentAccountId *smithy.Schema
-
-var EnvironmentSummary_provisioning *smithy.Schema
-
-var EnvironmentSummary_componentRoleArn *smithy.Schema
-
-var EnvironmentSummary_lastAttemptedDeploymentId *smithy.Schema
-
-var EnvironmentSummary_lastSucceededDeploymentId *smithy.Schema
-
-var _EnvironmentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentSummaryList_member *smithy.Schema
-
-var EnvironmentTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplate",
-}, smithy.ShapeTypeStructure, 9)
-var EnvironmentTemplate_name *smithy.Schema
-
-var EnvironmentTemplate_arn *smithy.Schema
-
-var EnvironmentTemplate_createdAt *smithy.Schema
-
-var EnvironmentTemplate_lastModifiedAt *smithy.Schema
-
-var EnvironmentTemplate_displayName *smithy.Schema
-
-var EnvironmentTemplate_description *smithy.Schema
-
-var EnvironmentTemplate_recommendedVersion *smithy.Schema
-
-var EnvironmentTemplate_encryptionKey *smithy.Schema
-
-var EnvironmentTemplate_provisioning *smithy.Schema
-
-var _EnvironmentTemplateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateArn",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentTemplateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var EnvironmentTemplateFilter_templateName *smithy.Schema
-
-var EnvironmentTemplateFilter_majorVersion *smithy.Schema
-
-var _EnvironmentTemplateFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateFilterList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentTemplateFilterList_member *smithy.Schema
-
-var EnvironmentTemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateSummary",
-}, smithy.ShapeTypeStructure, 8)
-var EnvironmentTemplateSummary_name *smithy.Schema
-
-var EnvironmentTemplateSummary_arn *smithy.Schema
-
-var EnvironmentTemplateSummary_createdAt *smithy.Schema
-
-var EnvironmentTemplateSummary_lastModifiedAt *smithy.Schema
-
-var EnvironmentTemplateSummary_displayName *smithy.Schema
-
-var EnvironmentTemplateSummary_description *smithy.Schema
-
-var EnvironmentTemplateSummary_recommendedVersion *smithy.Schema
-
-var EnvironmentTemplateSummary_provisioning *smithy.Schema
-
-var _EnvironmentTemplateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentTemplateSummaryList_member *smithy.Schema
-
-var EnvironmentTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateVersion",
-}, smithy.ShapeTypeStructure, 11)
-var EnvironmentTemplateVersion_templateName *smithy.Schema
-
-var EnvironmentTemplateVersion_majorVersion *smithy.Schema
-
-var EnvironmentTemplateVersion_minorVersion *smithy.Schema
-
-var EnvironmentTemplateVersion_recommendedMinorVersion *smithy.Schema
-
-var EnvironmentTemplateVersion_status *smithy.Schema
-
-var EnvironmentTemplateVersion_statusMessage *smithy.Schema
-
-var EnvironmentTemplateVersion_description *smithy.Schema
-
-var EnvironmentTemplateVersion_arn *smithy.Schema
-
-var EnvironmentTemplateVersion_createdAt *smithy.Schema
-
-var EnvironmentTemplateVersion_lastModifiedAt *smithy.Schema
-
-var EnvironmentTemplateVersion_schema *smithy.Schema
-
-var _EnvironmentTemplateVersionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateVersionArn",
-}, smithy.ShapeTypeString, 0)
-
-var EnvironmentTemplateVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateVersionSummary",
-}, smithy.ShapeTypeStructure, 10)
-var EnvironmentTemplateVersionSummary_templateName *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_majorVersion *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_minorVersion *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_recommendedMinorVersion *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_status *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_statusMessage *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_description *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_arn *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_createdAt *smithy.Schema
-
-var EnvironmentTemplateVersionSummary_lastModifiedAt *smithy.Schema
-
-var _EnvironmentTemplateVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "EnvironmentTemplateVersionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentTemplateVersionSummaryList_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _FullTemplateVersionNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "FullTemplateVersionNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _GitBranchName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GitBranchName",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _LatestSyncBlockers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "LatestSyncBlockers",
-}, smithy.ShapeTypeList, 1)
-var _LatestSyncBlockers_member *smithy.Schema
-
-var ListServiceInstancesFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstancesFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceInstancesFilter_key *smithy.Schema
-
-var ListServiceInstancesFilter_value *smithy.Schema
-
-var _ListServiceInstancesFilterBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstancesFilterBy",
-}, smithy.ShapeTypeString, 0)
-
-var _ListServiceInstancesFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstancesFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ListServiceInstancesFilterList_member *smithy.Schema
-
-var _ListServiceInstancesFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstancesFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ListServiceInstancesSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstancesSortBy",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxPageResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "MaxPageResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OpsFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "OpsFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var Output = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Output",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var Output_key *smithy.Schema
-
-var Output_valueString *smithy.Schema
-
-var _OutputKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "OutputKey",
-}, smithy.ShapeTypeString, 0)
-
-var _OutputsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "OutputsList",
-}, smithy.ShapeTypeList, 1)
-var _OutputsList_member *smithy.Schema
-
-var _OutputValueString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "OutputValueString",
-}, smithy.ShapeTypeString, 0)
-
-var ProvisionedResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ProvisionedResource",
-}, smithy.ShapeTypeStructure, 3)
-var ProvisionedResource_name *smithy.Schema
-
-var ProvisionedResource_identifier *smithy.Schema
-
-var ProvisionedResource_provisioningEngine *smithy.Schema
-
-var _ProvisionedResourceEngine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ProvisionedResourceEngine",
-}, smithy.ShapeTypeString, 0)
-
-var _ProvisionedResourceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ProvisionedResourceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ProvisionedResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ProvisionedResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ProvisionedResourceList_member *smithy.Schema
-
-var _ProvisionedResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ProvisionedResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _Provisioning = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Provisioning",
-}, smithy.ShapeTypeString, 0)
-
-var Repository = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Repository",
-}, smithy.ShapeTypeStructure, 5)
-var Repository_arn *smithy.Schema
-
-var Repository_provider *smithy.Schema
-
-var Repository_name *smithy.Schema
-
-var Repository_connectionArn *smithy.Schema
-
-var Repository_encryptionKey *smithy.Schema
-
-var _RepositoryArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositoryArn",
-}, smithy.ShapeTypeString, 0)
-
-var RepositoryBranch = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositoryBranch",
-}, smithy.ShapeTypeStructure, 4)
-var RepositoryBranch_arn *smithy.Schema
-
-var RepositoryBranch_provider *smithy.Schema
-
-var RepositoryBranch_name *smithy.Schema
-
-var RepositoryBranch_branch *smithy.Schema
-
-var RepositoryBranchInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositoryBranchInput",
-}, smithy.ShapeTypeStructure, 3)
-var RepositoryBranchInput_provider *smithy.Schema
-
-var RepositoryBranchInput_name *smithy.Schema
-
-var RepositoryBranchInput_branch *smithy.Schema
-
-var _RepositoryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositoryId",
-}, smithy.ShapeTypeString, 0)
-
-var _RepositoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositoryName",
-}, smithy.ShapeTypeString, 0)
-
-var _RepositoryProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositoryProvider",
-}, smithy.ShapeTypeString, 0)
-
-var RepositorySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySummary",
-}, smithy.ShapeTypeStructure, 4)
-var RepositorySummary_arn *smithy.Schema
-
-var RepositorySummary_provider *smithy.Schema
-
-var RepositorySummary_name *smithy.Schema
-
-var RepositorySummary_connectionArn *smithy.Schema
-
-var _RepositorySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _RepositorySummaryList_member *smithy.Schema
-
-var RepositorySyncAttempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySyncAttempt",
-}, smithy.ShapeTypeStructure, 3)
-var RepositorySyncAttempt_startedAt *smithy.Schema
-
-var RepositorySyncAttempt_status *smithy.Schema
-
-var RepositorySyncAttempt_events *smithy.Schema
-
-var RepositorySyncDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySyncDefinition",
-}, smithy.ShapeTypeStructure, 4)
-var RepositorySyncDefinition_target *smithy.Schema
-
-var RepositorySyncDefinition_parent *smithy.Schema
-
-var RepositorySyncDefinition_branch *smithy.Schema
-
-var RepositorySyncDefinition_directory *smithy.Schema
-
-var _RepositorySyncDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySyncDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _RepositorySyncDefinitionList_member *smithy.Schema
-
-var RepositorySyncEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySyncEvent",
-}, smithy.ShapeTypeStructure, 4)
-var RepositorySyncEvent_type *smithy.Schema
-
-var RepositorySyncEvent_externalId *smithy.Schema
-
-var RepositorySyncEvent_time *smithy.Schema
-
-var RepositorySyncEvent_event *smithy.Schema
-
-var _RepositorySyncEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySyncEvents",
-}, smithy.ShapeTypeList, 1)
-var _RepositorySyncEvents_member *smithy.Schema
-
-var _RepositorySyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RepositorySyncStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceCountsSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceCountsSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ResourceCountsSummary_total *smithy.Schema
-
-var ResourceCountsSummary_failed *smithy.Schema
-
-var ResourceCountsSummary_upToDate *smithy.Schema
-
-var ResourceCountsSummary_behindMajor *smithy.Schema
-
-var ResourceCountsSummary_behindMinor *smithy.Schema
-
-var _ResourceDeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceDeploymentStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceNameOrEmpty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceNameOrEmpty",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceSyncAttempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceSyncAttempt",
-}, smithy.ShapeTypeStructure, 6)
-var ResourceSyncAttempt_initialRevision *smithy.Schema
-
-var ResourceSyncAttempt_targetRevision *smithy.Schema
-
-var ResourceSyncAttempt_target *smithy.Schema
-
-var ResourceSyncAttempt_startedAt *smithy.Schema
-
-var ResourceSyncAttempt_status *smithy.Schema
-
-var ResourceSyncAttempt_events *smithy.Schema
-
-var ResourceSyncEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceSyncEvent",
-}, smithy.ShapeTypeStructure, 4)
-var ResourceSyncEvent_type *smithy.Schema
-
-var ResourceSyncEvent_externalId *smithy.Schema
-
-var ResourceSyncEvent_time *smithy.Schema
-
-var ResourceSyncEvent_event *smithy.Schema
-
-var _ResourceSyncEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceSyncEvents",
-}, smithy.ShapeTypeList, 1)
-var _ResourceSyncEvents_member *smithy.Schema
-
-var _ResourceSyncStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ResourceSyncStatus",
-}, smithy.ShapeTypeString, 0)
-
-var Revision = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Revision",
-}, smithy.ShapeTypeStructure, 5)
-var Revision_repositoryName *smithy.Schema
-
-var Revision_repositoryProvider *smithy.Schema
-
-var Revision_sha *smithy.Schema
-
-var Revision_directory *smithy.Schema
-
-var Revision_branch *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleArnOrEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RoleArnOrEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var S3ObjectSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "S3ObjectSource",
-}, smithy.ShapeTypeStructure, 2)
-var S3ObjectSource_bucket *smithy.Schema
-
-var S3ObjectSource_key *smithy.Schema
-
-var Service = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Service",
-}, smithy.ShapeTypeStructure, 13)
-var Service_name *smithy.Schema
-
-var Service_description *smithy.Schema
-
-var Service_arn *smithy.Schema
-
-var Service_templateName *smithy.Schema
-
-var Service_createdAt *smithy.Schema
-
-var Service_lastModifiedAt *smithy.Schema
-
-var Service_status *smithy.Schema
-
-var Service_statusMessage *smithy.Schema
-
-var Service_spec *smithy.Schema
-
-var Service_pipeline *smithy.Schema
-
-var Service_repositoryConnectionArn *smithy.Schema
-
-var Service_repositoryId *smithy.Schema
-
-var Service_branchName *smithy.Schema
-
-var _ServiceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceInstance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceInstance",
-}, smithy.ShapeTypeStructure, 16)
-var ServiceInstance_name *smithy.Schema
-
-var ServiceInstance_arn *smithy.Schema
-
-var ServiceInstance_createdAt *smithy.Schema
-
-var ServiceInstance_lastDeploymentAttemptedAt *smithy.Schema
-
-var ServiceInstance_lastDeploymentSucceededAt *smithy.Schema
-
-var ServiceInstance_serviceName *smithy.Schema
-
-var ServiceInstance_environmentName *smithy.Schema
-
-var ServiceInstance_templateName *smithy.Schema
-
-var ServiceInstance_templateMajorVersion *smithy.Schema
-
-var ServiceInstance_templateMinorVersion *smithy.Schema
-
-var ServiceInstance_deploymentStatus *smithy.Schema
-
-var ServiceInstance_deploymentStatusMessage *smithy.Schema
-
-var ServiceInstance_spec *smithy.Schema
-
-var ServiceInstance_lastClientRequestToken *smithy.Schema
-
-var ServiceInstance_lastAttemptedDeploymentId *smithy.Schema
-
-var ServiceInstance_lastSucceededDeploymentId *smithy.Schema
-
-var _ServiceInstanceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceInstanceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceInstanceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceInstanceState",
-}, smithy.ShapeTypeStructure, 7)
-var ServiceInstanceState_spec *smithy.Schema
-
-var ServiceInstanceState_templateName *smithy.Schema
-
-var ServiceInstanceState_templateMajorVersion *smithy.Schema
-
-var ServiceInstanceState_templateMinorVersion *smithy.Schema
-
-var ServiceInstanceState_lastSuccessfulComponentDeploymentIds *smithy.Schema
-
-var ServiceInstanceState_lastSuccessfulEnvironmentDeploymentId *smithy.Schema
-
-var ServiceInstanceState_lastSuccessfulServicePipelineDeploymentId *smithy.Schema
-
-var ServiceInstanceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceInstanceSummary",
-}, smithy.ShapeTypeStructure, 14)
-var ServiceInstanceSummary_name *smithy.Schema
-
-var ServiceInstanceSummary_arn *smithy.Schema
-
-var ServiceInstanceSummary_createdAt *smithy.Schema
-
-var ServiceInstanceSummary_lastDeploymentAttemptedAt *smithy.Schema
-
-var ServiceInstanceSummary_lastDeploymentSucceededAt *smithy.Schema
-
-var ServiceInstanceSummary_serviceName *smithy.Schema
-
-var ServiceInstanceSummary_environmentName *smithy.Schema
-
-var ServiceInstanceSummary_templateName *smithy.Schema
-
-var ServiceInstanceSummary_templateMajorVersion *smithy.Schema
-
-var ServiceInstanceSummary_templateMinorVersion *smithy.Schema
-
-var ServiceInstanceSummary_deploymentStatus *smithy.Schema
-
-var ServiceInstanceSummary_deploymentStatusMessage *smithy.Schema
-
-var ServiceInstanceSummary_lastAttemptedDeploymentId *smithy.Schema
-
-var ServiceInstanceSummary_lastSucceededDeploymentId *smithy.Schema
-
-var _ServiceInstanceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceInstanceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceInstanceSummaryList_member *smithy.Schema
-
-var ServicePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServicePipeline",
-}, smithy.ShapeTypeStructure, 12)
-var ServicePipeline_arn *smithy.Schema
-
-var ServicePipeline_createdAt *smithy.Schema
-
-var ServicePipeline_lastDeploymentAttemptedAt *smithy.Schema
-
-var ServicePipeline_lastDeploymentSucceededAt *smithy.Schema
-
-var ServicePipeline_templateName *smithy.Schema
-
-var ServicePipeline_templateMajorVersion *smithy.Schema
-
-var ServicePipeline_templateMinorVersion *smithy.Schema
-
-var ServicePipeline_deploymentStatus *smithy.Schema
-
-var ServicePipeline_deploymentStatusMessage *smithy.Schema
-
-var ServicePipeline_spec *smithy.Schema
-
-var ServicePipeline_lastAttemptedDeploymentId *smithy.Schema
-
-var ServicePipeline_lastSucceededDeploymentId *smithy.Schema
-
-var ServicePipelineState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServicePipelineState",
-}, smithy.ShapeTypeStructure, 4)
-var ServicePipelineState_spec *smithy.Schema
-
-var ServicePipelineState_templateName *smithy.Schema
-
-var ServicePipelineState_templateMajorVersion *smithy.Schema
-
-var ServicePipelineState_templateMinorVersion *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _ServiceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ServiceSummary_name *smithy.Schema
-
-var ServiceSummary_description *smithy.Schema
-
-var ServiceSummary_arn *smithy.Schema
-
-var ServiceSummary_templateName *smithy.Schema
-
-var ServiceSummary_createdAt *smithy.Schema
-
-var ServiceSummary_lastModifiedAt *smithy.Schema
-
-var ServiceSummary_status *smithy.Schema
-
-var ServiceSummary_statusMessage *smithy.Schema
-
-var _ServiceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceSummaryList_member *smithy.Schema
-
-var ServiceSyncBlockerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceSyncBlockerSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ServiceSyncBlockerSummary_serviceName *smithy.Schema
-
-var ServiceSyncBlockerSummary_serviceInstanceName *smithy.Schema
-
-var ServiceSyncBlockerSummary_latestBlockers *smithy.Schema
-
-var ServiceSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceSyncConfig",
-}, smithy.ShapeTypeStructure, 5)
-var ServiceSyncConfig_serviceName *smithy.Schema
-
-var ServiceSyncConfig_repositoryProvider *smithy.Schema
-
-var ServiceSyncConfig_repositoryName *smithy.Schema
-
-var ServiceSyncConfig_branch *smithy.Schema
-
-var ServiceSyncConfig_filePath *smithy.Schema
-
-var ServiceTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplate",
-}, smithy.ShapeTypeStructure, 9)
-var ServiceTemplate_name *smithy.Schema
-
-var ServiceTemplate_arn *smithy.Schema
-
-var ServiceTemplate_createdAt *smithy.Schema
-
-var ServiceTemplate_lastModifiedAt *smithy.Schema
-
-var ServiceTemplate_displayName *smithy.Schema
-
-var ServiceTemplate_description *smithy.Schema
-
-var ServiceTemplate_recommendedVersion *smithy.Schema
-
-var ServiceTemplate_encryptionKey *smithy.Schema
-
-var ServiceTemplate_pipelineProvisioning *smithy.Schema
-
-var _ServiceTemplateArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceTemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateSummary",
-}, smithy.ShapeTypeStructure, 8)
-var ServiceTemplateSummary_name *smithy.Schema
-
-var ServiceTemplateSummary_arn *smithy.Schema
-
-var ServiceTemplateSummary_createdAt *smithy.Schema
-
-var ServiceTemplateSummary_lastModifiedAt *smithy.Schema
-
-var ServiceTemplateSummary_displayName *smithy.Schema
-
-var ServiceTemplateSummary_description *smithy.Schema
-
-var ServiceTemplateSummary_recommendedVersion *smithy.Schema
-
-var ServiceTemplateSummary_pipelineProvisioning *smithy.Schema
-
-var _ServiceTemplateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceTemplateSummaryList_member *smithy.Schema
-
-var _ServiceTemplateSupportedComponentSourceInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateSupportedComponentSourceInputList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceTemplateSupportedComponentSourceInputList_member *smithy.Schema
-
-var _ServiceTemplateSupportedComponentSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateSupportedComponentSourceType",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceTemplateVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateVersion",
-}, smithy.ShapeTypeStructure, 13)
-var ServiceTemplateVersion_templateName *smithy.Schema
-
-var ServiceTemplateVersion_majorVersion *smithy.Schema
-
-var ServiceTemplateVersion_minorVersion *smithy.Schema
-
-var ServiceTemplateVersion_recommendedMinorVersion *smithy.Schema
-
-var ServiceTemplateVersion_status *smithy.Schema
-
-var ServiceTemplateVersion_statusMessage *smithy.Schema
-
-var ServiceTemplateVersion_description *smithy.Schema
-
-var ServiceTemplateVersion_arn *smithy.Schema
-
-var ServiceTemplateVersion_createdAt *smithy.Schema
-
-var ServiceTemplateVersion_lastModifiedAt *smithy.Schema
-
-var ServiceTemplateVersion_compatibleEnvironmentTemplates *smithy.Schema
-
-var ServiceTemplateVersion_schema *smithy.Schema
-
-var ServiceTemplateVersion_supportedComponentSources *smithy.Schema
-
-var _ServiceTemplateVersionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateVersionArn",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceTemplateVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateVersionSummary",
-}, smithy.ShapeTypeStructure, 10)
-var ServiceTemplateVersionSummary_templateName *smithy.Schema
-
-var ServiceTemplateVersionSummary_majorVersion *smithy.Schema
-
-var ServiceTemplateVersionSummary_minorVersion *smithy.Schema
-
-var ServiceTemplateVersionSummary_recommendedMinorVersion *smithy.Schema
-
-var ServiceTemplateVersionSummary_status *smithy.Schema
-
-var ServiceTemplateVersionSummary_statusMessage *smithy.Schema
-
-var ServiceTemplateVersionSummary_description *smithy.Schema
-
-var ServiceTemplateVersionSummary_arn *smithy.Schema
-
-var ServiceTemplateVersionSummary_createdAt *smithy.Schema
-
-var ServiceTemplateVersionSummary_lastModifiedAt *smithy.Schema
-
-var _ServiceTemplateVersionSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ServiceTemplateVersionSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceTemplateVersionSummaryList_member *smithy.Schema
-
-var _SHA = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "SHA",
-}, smithy.ShapeTypeString, 0)
-
-var _SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeString, 0)
-
-var _SpecContents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "SpecContents",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/yaml"},
-
-	&smithytraits.Sensitive{})
-
-var _StatusMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "StatusMessage",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Subdirectory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Subdirectory",
-}, smithy.ShapeTypeString, 0)
-
-var SyncBlocker = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "SyncBlocker",
-}, smithy.ShapeTypeStructure, 8)
-var SyncBlocker_id *smithy.Schema
-
-var SyncBlocker_type *smithy.Schema
-
-var SyncBlocker_status *smithy.Schema
-
-var SyncBlocker_createdReason *smithy.Schema
-
-var SyncBlocker_createdAt *smithy.Schema
-
-var SyncBlocker_contexts *smithy.Schema
-
-var SyncBlocker_resolvedReason *smithy.Schema
-
-var SyncBlocker_resolvedAt *smithy.Schema
-
-var SyncBlockerContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "SyncBlockerContext",
-}, smithy.ShapeTypeStructure, 2)
-var SyncBlockerContext_key *smithy.Schema
-
-var SyncBlockerContext_value *smithy.Schema
-
-var _SyncBlockerContexts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "SyncBlockerContexts",
-}, smithy.ShapeTypeList, 1)
-var _SyncBlockerContexts_member *smithy.Schema
-
-var _SyncType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "SyncType",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateFileContents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateFileContents",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/yaml"},
-
-	&smithytraits.Sensitive{})
-
-var _TemplateManifestContents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateManifestContents",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/yaml"},
-
-	&smithytraits.Sensitive{})
-
-var _TemplateSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateSchema",
-}, smithy.ShapeTypeString, 0, &smithytraits.MediaType{Type: "application/yaml"},
-
-	&smithytraits.Sensitive{})
-
-var TemplateSyncConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateSyncConfig",
-}, smithy.ShapeTypeStructure, 6)
-var TemplateSyncConfig_templateName *smithy.Schema
-
-var TemplateSyncConfig_templateType *smithy.Schema
-
-var TemplateSyncConfig_repositoryProvider *smithy.Schema
-
-var TemplateSyncConfig_repositoryName *smithy.Schema
-
-var TemplateSyncConfig_branch *smithy.Schema
-
-var TemplateSyncConfig_subdirectory *smithy.Schema
-
-var _TemplateType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateType",
-}, smithy.ShapeTypeString, 0)
-
-var _TemplateVersionPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateVersionPart",
-}, smithy.ShapeTypeString, 0)
-
-var TemplateVersionSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateVersionSourceInput",
-}, smithy.ShapeTypeUnion, 1)
-var TemplateVersionSourceInput_s3 *smithy.Schema
-
-var _TemplateVersionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TemplateVersionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var AcceptEnvironmentAccountConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "AcceptEnvironmentAccountConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptEnvironmentAccountConnectionInput_id *smithy.Schema
-
-var AcceptEnvironmentAccountConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "AcceptEnvironmentAccountConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptEnvironmentAccountConnectionOutput_environmentAccountConnection *smithy.Schema
-
-var CancelComponentDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelComponentDeploymentInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelComponentDeploymentInput_componentName *smithy.Schema
-
-var CancelComponentDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelComponentDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelComponentDeploymentOutput_component *smithy.Schema
-
-var CancelEnvironmentDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelEnvironmentDeploymentInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelEnvironmentDeploymentInput_environmentName *smithy.Schema
-
-var CancelEnvironmentDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelEnvironmentDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelEnvironmentDeploymentOutput_environment *smithy.Schema
-
-var CancelServiceInstanceDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelServiceInstanceDeploymentInput",
-}, smithy.ShapeTypeStructure, 2)
-var CancelServiceInstanceDeploymentInput_serviceInstanceName *smithy.Schema
-
-var CancelServiceInstanceDeploymentInput_serviceName *smithy.Schema
-
-var CancelServiceInstanceDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelServiceInstanceDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelServiceInstanceDeploymentOutput_serviceInstance *smithy.Schema
-
-var CancelServicePipelineDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelServicePipelineDeploymentInput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelServicePipelineDeploymentInput_serviceName *smithy.Schema
-
-var CancelServicePipelineDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CancelServicePipelineDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CancelServicePipelineDeploymentOutput_pipeline *smithy.Schema
-
-var CreateComponentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateComponentInput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateComponentInput_name *smithy.Schema
-
-var CreateComponentInput_description *smithy.Schema
-
-var CreateComponentInput_serviceName *smithy.Schema
-
-var CreateComponentInput_serviceInstanceName *smithy.Schema
-
-var CreateComponentInput_environmentName *smithy.Schema
-
-var CreateComponentInput_templateFile *smithy.Schema
-
-var CreateComponentInput_manifest *smithy.Schema
-
-var CreateComponentInput_serviceSpec *smithy.Schema
-
-var CreateComponentInput_tags *smithy.Schema
-
-var CreateComponentInput_clientToken *smithy.Schema
-
-var CreateComponentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateComponentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateComponentOutput_component *smithy.Schema
-
-var CreateEnvironmentAccountConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentAccountConnectionInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateEnvironmentAccountConnectionInput_clientToken *smithy.Schema
-
-var CreateEnvironmentAccountConnectionInput_managementAccountId *smithy.Schema
-
-var CreateEnvironmentAccountConnectionInput_roleArn *smithy.Schema
-
-var CreateEnvironmentAccountConnectionInput_environmentName *smithy.Schema
-
-var CreateEnvironmentAccountConnectionInput_tags *smithy.Schema
-
-var CreateEnvironmentAccountConnectionInput_componentRoleArn *smithy.Schema
-
-var CreateEnvironmentAccountConnectionInput_codebuildRoleArn *smithy.Schema
-
-var CreateEnvironmentAccountConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentAccountConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEnvironmentAccountConnectionOutput_environmentAccountConnection *smithy.Schema
-
-var CreateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 12)
-var CreateEnvironmentInput_name *smithy.Schema
-
-var CreateEnvironmentInput_templateName *smithy.Schema
-
-var CreateEnvironmentInput_templateMajorVersion *smithy.Schema
-
-var CreateEnvironmentInput_templateMinorVersion *smithy.Schema
-
-var CreateEnvironmentInput_description *smithy.Schema
-
-var CreateEnvironmentInput_spec *smithy.Schema
-
-var CreateEnvironmentInput_protonServiceRoleArn *smithy.Schema
-
-var CreateEnvironmentInput_environmentAccountConnectionId *smithy.Schema
-
-var CreateEnvironmentInput_tags *smithy.Schema
-
-var CreateEnvironmentInput_provisioningRepository *smithy.Schema
-
-var CreateEnvironmentInput_componentRoleArn *smithy.Schema
-
-var CreateEnvironmentInput_codebuildRoleArn *smithy.Schema
-
-var CreateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEnvironmentOutput_environment *smithy.Schema
-
-var CreateEnvironmentTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentTemplateInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateEnvironmentTemplateInput_name *smithy.Schema
-
-var CreateEnvironmentTemplateInput_displayName *smithy.Schema
-
-var CreateEnvironmentTemplateInput_description *smithy.Schema
-
-var CreateEnvironmentTemplateInput_encryptionKey *smithy.Schema
-
-var CreateEnvironmentTemplateInput_provisioning *smithy.Schema
-
-var CreateEnvironmentTemplateInput_tags *smithy.Schema
-
-var CreateEnvironmentTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEnvironmentTemplateOutput_environmentTemplate *smithy.Schema
-
-var CreateEnvironmentTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateEnvironmentTemplateVersionInput_clientToken *smithy.Schema
-
-var CreateEnvironmentTemplateVersionInput_templateName *smithy.Schema
-
-var CreateEnvironmentTemplateVersionInput_description *smithy.Schema
-
-var CreateEnvironmentTemplateVersionInput_majorVersion *smithy.Schema
-
-var CreateEnvironmentTemplateVersionInput_source *smithy.Schema
-
-var CreateEnvironmentTemplateVersionInput_tags *smithy.Schema
-
-var CreateEnvironmentTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateEnvironmentTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEnvironmentTemplateVersionOutput_environmentTemplateVersion *smithy.Schema
-
-var CreateRepositoryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateRepositoryInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateRepositoryInput_provider *smithy.Schema
-
-var CreateRepositoryInput_name *smithy.Schema
-
-var CreateRepositoryInput_connectionArn *smithy.Schema
-
-var CreateRepositoryInput_encryptionKey *smithy.Schema
-
-var CreateRepositoryInput_tags *smithy.Schema
-
-var CreateRepositoryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateRepositoryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRepositoryOutput_repository *smithy.Schema
-
-var CreateServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceInput",
-}, smithy.ShapeTypeStructure, 10)
-var CreateServiceInput_name *smithy.Schema
-
-var CreateServiceInput_description *smithy.Schema
-
-var CreateServiceInput_templateName *smithy.Schema
-
-var CreateServiceInput_templateMajorVersion *smithy.Schema
-
-var CreateServiceInput_templateMinorVersion *smithy.Schema
-
-var CreateServiceInput_spec *smithy.Schema
-
-var CreateServiceInput_repositoryConnectionArn *smithy.Schema
-
-var CreateServiceInput_repositoryId *smithy.Schema
-
-var CreateServiceInput_branchName *smithy.Schema
-
-var CreateServiceInput_tags *smithy.Schema
-
-var CreateServiceInstanceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceInstanceInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateServiceInstanceInput_name *smithy.Schema
-
-var CreateServiceInstanceInput_serviceName *smithy.Schema
-
-var CreateServiceInstanceInput_spec *smithy.Schema
-
-var CreateServiceInstanceInput_templateMajorVersion *smithy.Schema
-
-var CreateServiceInstanceInput_templateMinorVersion *smithy.Schema
-
-var CreateServiceInstanceInput_tags *smithy.Schema
-
-var CreateServiceInstanceInput_clientToken *smithy.Schema
-
-var CreateServiceInstanceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceInstanceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServiceInstanceOutput_serviceInstance *smithy.Schema
-
-var CreateServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServiceOutput_service *smithy.Schema
-
-var CreateServiceSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceSyncConfigInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateServiceSyncConfigInput_serviceName *smithy.Schema
-
-var CreateServiceSyncConfigInput_repositoryProvider *smithy.Schema
-
-var CreateServiceSyncConfigInput_repositoryName *smithy.Schema
-
-var CreateServiceSyncConfigInput_branch *smithy.Schema
-
-var CreateServiceSyncConfigInput_filePath *smithy.Schema
-
-var CreateServiceSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServiceSyncConfigOutput_serviceSyncConfig *smithy.Schema
-
-var CreateServiceTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceTemplateInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateServiceTemplateInput_name *smithy.Schema
-
-var CreateServiceTemplateInput_displayName *smithy.Schema
-
-var CreateServiceTemplateInput_description *smithy.Schema
-
-var CreateServiceTemplateInput_encryptionKey *smithy.Schema
-
-var CreateServiceTemplateInput_pipelineProvisioning *smithy.Schema
-
-var CreateServiceTemplateInput_tags *smithy.Schema
-
-var CreateServiceTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServiceTemplateOutput_serviceTemplate *smithy.Schema
-
-var CreateServiceTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 8)
-var CreateServiceTemplateVersionInput_clientToken *smithy.Schema
-
-var CreateServiceTemplateVersionInput_templateName *smithy.Schema
-
-var CreateServiceTemplateVersionInput_description *smithy.Schema
-
-var CreateServiceTemplateVersionInput_majorVersion *smithy.Schema
-
-var CreateServiceTemplateVersionInput_source *smithy.Schema
-
-var CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates *smithy.Schema
-
-var CreateServiceTemplateVersionInput_tags *smithy.Schema
-
-var CreateServiceTemplateVersionInput_supportedComponentSources *smithy.Schema
-
-var CreateServiceTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateServiceTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateServiceTemplateVersionOutput_serviceTemplateVersion *smithy.Schema
-
-var CreateTemplateSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateTemplateSyncConfigInput",
-}, smithy.ShapeTypeStructure, 6)
-var CreateTemplateSyncConfigInput_templateName *smithy.Schema
-
-var CreateTemplateSyncConfigInput_templateType *smithy.Schema
-
-var CreateTemplateSyncConfigInput_repositoryProvider *smithy.Schema
-
-var CreateTemplateSyncConfigInput_repositoryName *smithy.Schema
-
-var CreateTemplateSyncConfigInput_branch *smithy.Schema
-
-var CreateTemplateSyncConfigInput_subdirectory *smithy.Schema
-
-var CreateTemplateSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "CreateTemplateSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTemplateSyncConfigOutput_templateSyncConfig *smithy.Schema
-
-var DeleteComponentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteComponentInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteComponentInput_name *smithy.Schema
-
-var DeleteComponentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteComponentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteComponentOutput_component *smithy.Schema
-
-var DeleteDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteDeploymentInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDeploymentInput_id *smithy.Schema
-
-var DeleteDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDeploymentOutput_deployment *smithy.Schema
-
-var DeleteEnvironmentAccountConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentAccountConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentAccountConnectionInput_id *smithy.Schema
-
-var DeleteEnvironmentAccountConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentAccountConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentAccountConnectionOutput_environmentAccountConnection *smithy.Schema
-
-var DeleteEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentInput_name *smithy.Schema
-
-var DeleteEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentOutput_environment *smithy.Schema
-
-var DeleteEnvironmentTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentTemplateInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentTemplateInput_name *smithy.Schema
-
-var DeleteEnvironmentTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentTemplateOutput_environmentTemplate *smithy.Schema
-
-var DeleteEnvironmentTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteEnvironmentTemplateVersionInput_templateName *smithy.Schema
-
-var DeleteEnvironmentTemplateVersionInput_majorVersion *smithy.Schema
-
-var DeleteEnvironmentTemplateVersionInput_minorVersion *smithy.Schema
-
-var DeleteEnvironmentTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteEnvironmentTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion *smithy.Schema
-
-var DeleteRepositoryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteRepositoryInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRepositoryInput_provider *smithy.Schema
-
-var DeleteRepositoryInput_name *smithy.Schema
-
-var DeleteRepositoryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteRepositoryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRepositoryOutput_repository *smithy.Schema
-
-var DeleteServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceInput_name *smithy.Schema
-
-var DeleteServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceOutput_service *smithy.Schema
-
-var DeleteServiceSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceSyncConfigInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceSyncConfigInput_serviceName *smithy.Schema
-
-var DeleteServiceSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceSyncConfigOutput_serviceSyncConfig *smithy.Schema
-
-var DeleteServiceTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceTemplateInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceTemplateInput_name *smithy.Schema
-
-var DeleteServiceTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceTemplateOutput_serviceTemplate *smithy.Schema
-
-var DeleteServiceTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteServiceTemplateVersionInput_templateName *smithy.Schema
-
-var DeleteServiceTemplateVersionInput_majorVersion *smithy.Schema
-
-var DeleteServiceTemplateVersionInput_minorVersion *smithy.Schema
-
-var DeleteServiceTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteServiceTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceTemplateVersionOutput_serviceTemplateVersion *smithy.Schema
-
-var DeleteTemplateSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteTemplateSyncConfigInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTemplateSyncConfigInput_templateName *smithy.Schema
-
-var DeleteTemplateSyncConfigInput_templateType *smithy.Schema
-
-var DeleteTemplateSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "DeleteTemplateSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteTemplateSyncConfigOutput_templateSyncConfig *smithy.Schema
-
-var GetAccountSettingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetAccountSettingsInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetAccountSettingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetAccountSettingsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetAccountSettingsOutput_accountSettings *smithy.Schema
-
-var GetComponentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetComponentInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetComponentInput_name *smithy.Schema
-
-var GetComponentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetComponentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetComponentOutput_component *smithy.Schema
-
-var GetDeploymentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetDeploymentInput",
-}, smithy.ShapeTypeStructure, 5)
-var GetDeploymentInput_id *smithy.Schema
-
-var GetDeploymentInput_environmentName *smithy.Schema
-
-var GetDeploymentInput_serviceName *smithy.Schema
-
-var GetDeploymentInput_serviceInstanceName *smithy.Schema
-
-var GetDeploymentInput_componentName *smithy.Schema
-
-var GetDeploymentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetDeploymentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentOutput_deployment *smithy.Schema
-
-var GetEnvironmentAccountConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentAccountConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentAccountConnectionInput_id *smithy.Schema
-
-var GetEnvironmentAccountConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentAccountConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentAccountConnectionOutput_environmentAccountConnection *smithy.Schema
-
-var GetEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentInput_name *smithy.Schema
-
-var GetEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentOutput_environment *smithy.Schema
-
-var GetEnvironmentTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentTemplateInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentTemplateInput_name *smithy.Schema
-
-var GetEnvironmentTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentTemplateOutput_environmentTemplate *smithy.Schema
-
-var GetEnvironmentTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetEnvironmentTemplateVersionInput_templateName *smithy.Schema
-
-var GetEnvironmentTemplateVersionInput_majorVersion *smithy.Schema
-
-var GetEnvironmentTemplateVersionInput_minorVersion *smithy.Schema
-
-var GetEnvironmentTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetEnvironmentTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnvironmentTemplateVersionOutput_environmentTemplateVersion *smithy.Schema
-
-var GetRepositoryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetRepositoryInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetRepositoryInput_provider *smithy.Schema
-
-var GetRepositoryInput_name *smithy.Schema
-
-var GetRepositoryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetRepositoryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetRepositoryOutput_repository *smithy.Schema
-
-var GetRepositorySyncStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetRepositorySyncStatusInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetRepositorySyncStatusInput_repositoryName *smithy.Schema
-
-var GetRepositorySyncStatusInput_repositoryProvider *smithy.Schema
-
-var GetRepositorySyncStatusInput_branch *smithy.Schema
-
-var GetRepositorySyncStatusInput_syncType *smithy.Schema
-
-var GetRepositorySyncStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetRepositorySyncStatusOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetRepositorySyncStatusOutput_latestSync *smithy.Schema
-
-var GetResourcesSummaryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetResourcesSummaryInput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetResourcesSummaryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetResourcesSummaryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcesSummaryOutput_counts *smithy.Schema
-
-var GetServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceInput_name *smithy.Schema
-
-var GetServiceInstanceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceInstanceInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetServiceInstanceInput_name *smithy.Schema
-
-var GetServiceInstanceInput_serviceName *smithy.Schema
-
-var GetServiceInstanceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceInstanceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceInstanceOutput_serviceInstance *smithy.Schema
-
-var GetServiceInstanceSyncStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceInstanceSyncStatusInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetServiceInstanceSyncStatusInput_serviceName *smithy.Schema
-
-var GetServiceInstanceSyncStatusInput_serviceInstanceName *smithy.Schema
-
-var GetServiceInstanceSyncStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceInstanceSyncStatusOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetServiceInstanceSyncStatusOutput_latestSync *smithy.Schema
-
-var GetServiceInstanceSyncStatusOutput_latestSuccessfulSync *smithy.Schema
-
-var GetServiceInstanceSyncStatusOutput_desiredState *smithy.Schema
-
-var GetServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceOutput_service *smithy.Schema
-
-var GetServiceSyncBlockerSummaryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceSyncBlockerSummaryInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetServiceSyncBlockerSummaryInput_serviceName *smithy.Schema
-
-var GetServiceSyncBlockerSummaryInput_serviceInstanceName *smithy.Schema
-
-var GetServiceSyncBlockerSummaryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceSyncBlockerSummaryOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary *smithy.Schema
-
-var GetServiceSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceSyncConfigInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceSyncConfigInput_serviceName *smithy.Schema
-
-var GetServiceSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceSyncConfigOutput_serviceSyncConfig *smithy.Schema
-
-var GetServiceTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceTemplateInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceTemplateInput_name *smithy.Schema
-
-var GetServiceTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceTemplateOutput_serviceTemplate *smithy.Schema
-
-var GetServiceTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetServiceTemplateVersionInput_templateName *smithy.Schema
-
-var GetServiceTemplateVersionInput_majorVersion *smithy.Schema
-
-var GetServiceTemplateVersionInput_minorVersion *smithy.Schema
-
-var GetServiceTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetServiceTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceTemplateVersionOutput_serviceTemplateVersion *smithy.Schema
-
-var GetTemplateSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetTemplateSyncConfigInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetTemplateSyncConfigInput_templateName *smithy.Schema
-
-var GetTemplateSyncConfigInput_templateType *smithy.Schema
-
-var GetTemplateSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetTemplateSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetTemplateSyncConfigOutput_templateSyncConfig *smithy.Schema
-
-var GetTemplateSyncStatusInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetTemplateSyncStatusInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetTemplateSyncStatusInput_templateName *smithy.Schema
-
-var GetTemplateSyncStatusInput_templateType *smithy.Schema
-
-var GetTemplateSyncStatusInput_templateVersion *smithy.Schema
-
-var GetTemplateSyncStatusOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "GetTemplateSyncStatusOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetTemplateSyncStatusOutput_latestSync *smithy.Schema
-
-var GetTemplateSyncStatusOutput_latestSuccessfulSync *smithy.Schema
-
-var GetTemplateSyncStatusOutput_desiredState *smithy.Schema
-
-var ListComponentOutputsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentOutputsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListComponentOutputsInput_componentName *smithy.Schema
-
-var ListComponentOutputsInput_nextToken *smithy.Schema
-
-var ListComponentOutputsInput_deploymentId *smithy.Schema
-
-var ListComponentOutputsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentOutputsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentOutputsOutput_nextToken *smithy.Schema
-
-var ListComponentOutputsOutput_outputs *smithy.Schema
-
-var ListComponentProvisionedResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentProvisionedResourcesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentProvisionedResourcesInput_componentName *smithy.Schema
-
-var ListComponentProvisionedResourcesInput_nextToken *smithy.Schema
-
-var ListComponentProvisionedResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentProvisionedResourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentProvisionedResourcesOutput_nextToken *smithy.Schema
-
-var ListComponentProvisionedResourcesOutput_provisionedResources *smithy.Schema
-
-var ListComponentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListComponentsInput_nextToken *smithy.Schema
-
-var ListComponentsInput_environmentName *smithy.Schema
-
-var ListComponentsInput_serviceName *smithy.Schema
-
-var ListComponentsInput_serviceInstanceName *smithy.Schema
-
-var ListComponentsInput_maxResults *smithy.Schema
-
-var ListComponentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListComponentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentsOutput_nextToken *smithy.Schema
-
-var ListComponentsOutput_components *smithy.Schema
-
-var ListDeploymentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListDeploymentsInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListDeploymentsInput_nextToken *smithy.Schema
-
-var ListDeploymentsInput_environmentName *smithy.Schema
-
-var ListDeploymentsInput_serviceName *smithy.Schema
-
-var ListDeploymentsInput_serviceInstanceName *smithy.Schema
-
-var ListDeploymentsInput_componentName *smithy.Schema
-
-var ListDeploymentsInput_maxResults *smithy.Schema
-
-var ListDeploymentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListDeploymentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeploymentsOutput_nextToken *smithy.Schema
-
-var ListDeploymentsOutput_deployments *smithy.Schema
-
-var ListEnvironmentAccountConnectionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentAccountConnectionsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListEnvironmentAccountConnectionsInput_requestedBy *smithy.Schema
-
-var ListEnvironmentAccountConnectionsInput_environmentName *smithy.Schema
-
-var ListEnvironmentAccountConnectionsInput_statuses *smithy.Schema
-
-var ListEnvironmentAccountConnectionsInput_nextToken *smithy.Schema
-
-var ListEnvironmentAccountConnectionsInput_maxResults *smithy.Schema
-
-var ListEnvironmentAccountConnectionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentAccountConnectionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentAccountConnectionsOutput_environmentAccountConnections *smithy.Schema
-
-var ListEnvironmentAccountConnectionsOutput_nextToken *smithy.Schema
-
-var ListEnvironmentOutputsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentOutputsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListEnvironmentOutputsInput_environmentName *smithy.Schema
-
-var ListEnvironmentOutputsInput_nextToken *smithy.Schema
-
-var ListEnvironmentOutputsInput_deploymentId *smithy.Schema
-
-var ListEnvironmentOutputsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentOutputsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentOutputsOutput_nextToken *smithy.Schema
-
-var ListEnvironmentOutputsOutput_outputs *smithy.Schema
-
-var ListEnvironmentProvisionedResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentProvisionedResourcesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentProvisionedResourcesInput_environmentName *smithy.Schema
-
-var ListEnvironmentProvisionedResourcesInput_nextToken *smithy.Schema
-
-var ListEnvironmentProvisionedResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentProvisionedResourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentProvisionedResourcesOutput_nextToken *smithy.Schema
-
-var ListEnvironmentProvisionedResourcesOutput_provisionedResources *smithy.Schema
-
-var ListEnvironmentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListEnvironmentsInput_nextToken *smithy.Schema
-
-var ListEnvironmentsInput_maxResults *smithy.Schema
-
-var ListEnvironmentsInput_environmentTemplates *smithy.Schema
-
-var ListEnvironmentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentsOutput_nextToken *smithy.Schema
-
-var ListEnvironmentsOutput_environments *smithy.Schema
-
-var ListEnvironmentTemplatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentTemplatesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentTemplatesInput_nextToken *smithy.Schema
-
-var ListEnvironmentTemplatesInput_maxResults *smithy.Schema
-
-var ListEnvironmentTemplatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentTemplatesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentTemplatesOutput_nextToken *smithy.Schema
-
-var ListEnvironmentTemplatesOutput_templates *smithy.Schema
-
-var ListEnvironmentTemplateVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentTemplateVersionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListEnvironmentTemplateVersionsInput_nextToken *smithy.Schema
-
-var ListEnvironmentTemplateVersionsInput_maxResults *smithy.Schema
-
-var ListEnvironmentTemplateVersionsInput_templateName *smithy.Schema
-
-var ListEnvironmentTemplateVersionsInput_majorVersion *smithy.Schema
-
-var ListEnvironmentTemplateVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListEnvironmentTemplateVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnvironmentTemplateVersionsOutput_nextToken *smithy.Schema
-
-var ListEnvironmentTemplateVersionsOutput_templateVersions *smithy.Schema
-
-var ListRepositoriesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListRepositoriesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositoriesInput_nextToken *smithy.Schema
-
-var ListRepositoriesInput_maxResults *smithy.Schema
-
-var ListRepositoriesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListRepositoriesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositoriesOutput_nextToken *smithy.Schema
-
-var ListRepositoriesOutput_repositories *smithy.Schema
-
-var ListRepositorySyncDefinitionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListRepositorySyncDefinitionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListRepositorySyncDefinitionsInput_repositoryName *smithy.Schema
-
-var ListRepositorySyncDefinitionsInput_repositoryProvider *smithy.Schema
-
-var ListRepositorySyncDefinitionsInput_syncType *smithy.Schema
-
-var ListRepositorySyncDefinitionsInput_nextToken *smithy.Schema
-
-var ListRepositorySyncDefinitionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListRepositorySyncDefinitionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListRepositorySyncDefinitionsOutput_nextToken *smithy.Schema
-
-var ListRepositorySyncDefinitionsOutput_syncDefinitions *smithy.Schema
-
-var ListServiceInstanceOutputsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstanceOutputsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceInstanceOutputsInput_serviceInstanceName *smithy.Schema
-
-var ListServiceInstanceOutputsInput_serviceName *smithy.Schema
-
-var ListServiceInstanceOutputsInput_nextToken *smithy.Schema
-
-var ListServiceInstanceOutputsInput_deploymentId *smithy.Schema
-
-var ListServiceInstanceOutputsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstanceOutputsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceInstanceOutputsOutput_nextToken *smithy.Schema
-
-var ListServiceInstanceOutputsOutput_outputs *smithy.Schema
-
-var ListServiceInstanceProvisionedResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstanceProvisionedResourcesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListServiceInstanceProvisionedResourcesInput_serviceName *smithy.Schema
-
-var ListServiceInstanceProvisionedResourcesInput_serviceInstanceName *smithy.Schema
-
-var ListServiceInstanceProvisionedResourcesInput_nextToken *smithy.Schema
-
-var ListServiceInstanceProvisionedResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstanceProvisionedResourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceInstanceProvisionedResourcesOutput_nextToken *smithy.Schema
-
-var ListServiceInstanceProvisionedResourcesOutput_provisionedResources *smithy.Schema
-
-var ListServiceInstancesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstancesInput",
-}, smithy.ShapeTypeStructure, 6)
-var ListServiceInstancesInput_serviceName *smithy.Schema
-
-var ListServiceInstancesInput_nextToken *smithy.Schema
-
-var ListServiceInstancesInput_maxResults *smithy.Schema
-
-var ListServiceInstancesInput_filters *smithy.Schema
-
-var ListServiceInstancesInput_sortBy *smithy.Schema
-
-var ListServiceInstancesInput_sortOrder *smithy.Schema
-
-var ListServiceInstancesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceInstancesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceInstancesOutput_nextToken *smithy.Schema
-
-var ListServiceInstancesOutput_serviceInstances *smithy.Schema
-
-var ListServicePipelineOutputsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicePipelineOutputsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListServicePipelineOutputsInput_serviceName *smithy.Schema
-
-var ListServicePipelineOutputsInput_nextToken *smithy.Schema
-
-var ListServicePipelineOutputsInput_deploymentId *smithy.Schema
-
-var ListServicePipelineOutputsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicePipelineOutputsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicePipelineOutputsOutput_nextToken *smithy.Schema
-
-var ListServicePipelineOutputsOutput_outputs *smithy.Schema
-
-var ListServicePipelineProvisionedResourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicePipelineProvisionedResourcesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicePipelineProvisionedResourcesInput_serviceName *smithy.Schema
-
-var ListServicePipelineProvisionedResourcesInput_nextToken *smithy.Schema
-
-var ListServicePipelineProvisionedResourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicePipelineProvisionedResourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicePipelineProvisionedResourcesOutput_nextToken *smithy.Schema
-
-var ListServicePipelineProvisionedResourcesOutput_provisionedResources *smithy.Schema
-
-var ListServicesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesInput_nextToken *smithy.Schema
-
-var ListServicesInput_maxResults *smithy.Schema
-
-var ListServicesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServicesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServicesOutput_nextToken *smithy.Schema
-
-var ListServicesOutput_services *smithy.Schema
-
-var ListServiceTemplatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceTemplatesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceTemplatesInput_nextToken *smithy.Schema
-
-var ListServiceTemplatesInput_maxResults *smithy.Schema
-
-var ListServiceTemplatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceTemplatesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceTemplatesOutput_nextToken *smithy.Schema
-
-var ListServiceTemplatesOutput_templates *smithy.Schema
-
-var ListServiceTemplateVersionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceTemplateVersionsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListServiceTemplateVersionsInput_nextToken *smithy.Schema
-
-var ListServiceTemplateVersionsInput_maxResults *smithy.Schema
-
-var ListServiceTemplateVersionsInput_templateName *smithy.Schema
-
-var ListServiceTemplateVersionsInput_majorVersion *smithy.Schema
-
-var ListServiceTemplateVersionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListServiceTemplateVersionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceTemplateVersionsOutput_nextToken *smithy.Schema
-
-var ListServiceTemplateVersionsOutput_templateVersions *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceInput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput_maxResults *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ListTagsForResourceOutput_nextToken *smithy.Schema
-
-var NotifyResourceDeploymentStatusChangeInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "NotifyResourceDeploymentStatusChangeInput",
-}, smithy.ShapeTypeStructure, 5)
-var NotifyResourceDeploymentStatusChangeInput_resourceArn *smithy.Schema
-
-var NotifyResourceDeploymentStatusChangeInput_status *smithy.Schema
-
-var NotifyResourceDeploymentStatusChangeInput_outputs *smithy.Schema
-
-var NotifyResourceDeploymentStatusChangeInput_deploymentId *smithy.Schema
-
-var NotifyResourceDeploymentStatusChangeInput_statusMessage *smithy.Schema
-
-var NotifyResourceDeploymentStatusChangeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "NotifyResourceDeploymentStatusChangeOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var RejectEnvironmentAccountConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RejectEnvironmentAccountConnectionInput",
-}, smithy.ShapeTypeStructure, 1)
-var RejectEnvironmentAccountConnectionInput_id *smithy.Schema
-
-var RejectEnvironmentAccountConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "RejectEnvironmentAccountConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RejectEnvironmentAccountConnectionOutput_environmentAccountConnection *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAccountSettingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateAccountSettingsInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateAccountSettingsInput_pipelineServiceRoleArn *smithy.Schema
-
-var UpdateAccountSettingsInput_pipelineProvisioningRepository *smithy.Schema
-
-var UpdateAccountSettingsInput_deletePipelineProvisioningRepository *smithy.Schema
-
-var UpdateAccountSettingsInput_pipelineCodebuildRoleArn *smithy.Schema
-
-var UpdateAccountSettingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateAccountSettingsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateAccountSettingsOutput_accountSettings *smithy.Schema
-
-var UpdateComponentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateComponentInput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateComponentInput_name *smithy.Schema
-
-var UpdateComponentInput_deploymentType *smithy.Schema
-
-var UpdateComponentInput_description *smithy.Schema
-
-var UpdateComponentInput_serviceName *smithy.Schema
-
-var UpdateComponentInput_serviceInstanceName *smithy.Schema
-
-var UpdateComponentInput_serviceSpec *smithy.Schema
-
-var UpdateComponentInput_templateFile *smithy.Schema
-
-var UpdateComponentInput_clientToken *smithy.Schema
-
-var UpdateComponentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateComponentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateComponentOutput_component *smithy.Schema
-
-var UpdateEnvironmentAccountConnectionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentAccountConnectionInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateEnvironmentAccountConnectionInput_id *smithy.Schema
-
-var UpdateEnvironmentAccountConnectionInput_roleArn *smithy.Schema
-
-var UpdateEnvironmentAccountConnectionInput_componentRoleArn *smithy.Schema
-
-var UpdateEnvironmentAccountConnectionInput_codebuildRoleArn *smithy.Schema
-
-var UpdateEnvironmentAccountConnectionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentAccountConnectionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnvironmentAccountConnectionOutput_environmentAccountConnection *smithy.Schema
-
-var UpdateEnvironmentInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentInput",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateEnvironmentInput_name *smithy.Schema
-
-var UpdateEnvironmentInput_description *smithy.Schema
-
-var UpdateEnvironmentInput_spec *smithy.Schema
-
-var UpdateEnvironmentInput_templateMajorVersion *smithy.Schema
-
-var UpdateEnvironmentInput_templateMinorVersion *smithy.Schema
-
-var UpdateEnvironmentInput_protonServiceRoleArn *smithy.Schema
-
-var UpdateEnvironmentInput_deploymentType *smithy.Schema
-
-var UpdateEnvironmentInput_environmentAccountConnectionId *smithy.Schema
-
-var UpdateEnvironmentInput_provisioningRepository *smithy.Schema
-
-var UpdateEnvironmentInput_componentRoleArn *smithy.Schema
-
-var UpdateEnvironmentInput_codebuildRoleArn *smithy.Schema
-
-var UpdateEnvironmentOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnvironmentOutput_environment *smithy.Schema
-
-var UpdateEnvironmentTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentTemplateInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateEnvironmentTemplateInput_name *smithy.Schema
-
-var UpdateEnvironmentTemplateInput_displayName *smithy.Schema
-
-var UpdateEnvironmentTemplateInput_description *smithy.Schema
-
-var UpdateEnvironmentTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnvironmentTemplateOutput_environmentTemplate *smithy.Schema
-
-var UpdateEnvironmentTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateEnvironmentTemplateVersionInput_templateName *smithy.Schema
-
-var UpdateEnvironmentTemplateVersionInput_majorVersion *smithy.Schema
-
-var UpdateEnvironmentTemplateVersionInput_minorVersion *smithy.Schema
-
-var UpdateEnvironmentTemplateVersionInput_description *smithy.Schema
-
-var UpdateEnvironmentTemplateVersionInput_status *smithy.Schema
-
-var UpdateEnvironmentTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateEnvironmentTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion *smithy.Schema
-
-var UpdateServiceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateServiceInput_name *smithy.Schema
-
-var UpdateServiceInput_description *smithy.Schema
-
-var UpdateServiceInput_spec *smithy.Schema
-
-var UpdateServiceInstanceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceInstanceInput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateServiceInstanceInput_name *smithy.Schema
-
-var UpdateServiceInstanceInput_serviceName *smithy.Schema
-
-var UpdateServiceInstanceInput_deploymentType *smithy.Schema
-
-var UpdateServiceInstanceInput_spec *smithy.Schema
-
-var UpdateServiceInstanceInput_templateMajorVersion *smithy.Schema
-
-var UpdateServiceInstanceInput_templateMinorVersion *smithy.Schema
-
-var UpdateServiceInstanceInput_clientToken *smithy.Schema
-
-var UpdateServiceInstanceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceInstanceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceInstanceOutput_serviceInstance *smithy.Schema
-
-var UpdateServiceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceOutput_service *smithy.Schema
-
-var UpdateServicePipelineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServicePipelineInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateServicePipelineInput_serviceName *smithy.Schema
-
-var UpdateServicePipelineInput_spec *smithy.Schema
-
-var UpdateServicePipelineInput_deploymentType *smithy.Schema
-
-var UpdateServicePipelineInput_templateMajorVersion *smithy.Schema
-
-var UpdateServicePipelineInput_templateMinorVersion *smithy.Schema
-
-var UpdateServicePipelineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServicePipelineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServicePipelineOutput_pipeline *smithy.Schema
-
-var UpdateServiceSyncBlockerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceSyncBlockerInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServiceSyncBlockerInput_id *smithy.Schema
-
-var UpdateServiceSyncBlockerInput_resolvedReason *smithy.Schema
-
-var UpdateServiceSyncBlockerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceSyncBlockerOutput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateServiceSyncBlockerOutput_serviceName *smithy.Schema
-
-var UpdateServiceSyncBlockerOutput_serviceInstanceName *smithy.Schema
-
-var UpdateServiceSyncBlockerOutput_serviceSyncBlocker *smithy.Schema
-
-var UpdateServiceSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceSyncConfigInput",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateServiceSyncConfigInput_serviceName *smithy.Schema
-
-var UpdateServiceSyncConfigInput_repositoryProvider *smithy.Schema
-
-var UpdateServiceSyncConfigInput_repositoryName *smithy.Schema
-
-var UpdateServiceSyncConfigInput_branch *smithy.Schema
-
-var UpdateServiceSyncConfigInput_filePath *smithy.Schema
-
-var UpdateServiceSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceSyncConfigOutput_serviceSyncConfig *smithy.Schema
-
-var UpdateServiceTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceTemplateInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateServiceTemplateInput_name *smithy.Schema
-
-var UpdateServiceTemplateInput_displayName *smithy.Schema
-
-var UpdateServiceTemplateInput_description *smithy.Schema
-
-var UpdateServiceTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceTemplateOutput_serviceTemplate *smithy.Schema
-
-var UpdateServiceTemplateVersionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceTemplateVersionInput",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateServiceTemplateVersionInput_templateName *smithy.Schema
-
-var UpdateServiceTemplateVersionInput_majorVersion *smithy.Schema
-
-var UpdateServiceTemplateVersionInput_minorVersion *smithy.Schema
-
-var UpdateServiceTemplateVersionInput_description *smithy.Schema
-
-var UpdateServiceTemplateVersionInput_status *smithy.Schema
-
-var UpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates *smithy.Schema
-
-var UpdateServiceTemplateVersionInput_supportedComponentSources *smithy.Schema
-
-var UpdateServiceTemplateVersionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateServiceTemplateVersionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceTemplateVersionOutput_serviceTemplateVersion *smithy.Schema
-
-var UpdateTemplateSyncConfigInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateTemplateSyncConfigInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateTemplateSyncConfigInput_templateName *smithy.Schema
-
-var UpdateTemplateSyncConfigInput_templateType *smithy.Schema
-
-var UpdateTemplateSyncConfigInput_repositoryProvider *smithy.Schema
-
-var UpdateTemplateSyncConfigInput_repositoryName *smithy.Schema
-
-var UpdateTemplateSyncConfigInput_branch *smithy.Schema
-
-var UpdateTemplateSyncConfigInput_subdirectory *smithy.Schema
-
-var UpdateTemplateSyncConfigOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.proton",
-	Name:      "UpdateTemplateSyncConfigOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateTemplateSyncConfigOutput_templateSyncConfig *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	RepositoryBranch_arn = RepositoryBranch.AddMember("arn", _RepositoryArn)
-
-	RepositoryBranch_provider = RepositoryBranch.AddMember("provider", _RepositoryProvider)
-
-	RepositoryBranch_name = RepositoryBranch.AddMember("name", _RepositoryName)
-
-	RepositoryBranch_branch = RepositoryBranch.AddMember("branch", _GitBranchName)
-
-	AccountSettings_pipelineServiceRoleArn = AccountSettings.AddMember("pipelineServiceRoleArn", _RoleArnOrEmptyString)
-
-	AccountSettings_pipelineProvisioningRepository = AccountSettings.AddMember("pipelineProvisioningRepository", RepositoryBranch)
-
-	AccountSettings_pipelineCodebuildRoleArn = AccountSettings.AddMember("pipelineCodebuildRoleArn", _RoleArnOrEmptyString)
-
-	CompatibleEnvironmentTemplate_templateName = CompatibleEnvironmentTemplate.AddMember("templateName", _ResourceName)
-
-	CompatibleEnvironmentTemplate_majorVersion = CompatibleEnvironmentTemplate.AddMember("majorVersion", _TemplateVersionPart)
-
-	CompatibleEnvironmentTemplateInput_templateName = CompatibleEnvironmentTemplateInput.AddMember("templateName", _ResourceName)
-
-	CompatibleEnvironmentTemplateInput_majorVersion = CompatibleEnvironmentTemplateInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	_CompatibleEnvironmentTemplateInputList_member = _CompatibleEnvironmentTemplateInputList.AddMember("member", CompatibleEnvironmentTemplateInput)
-
-	_CompatibleEnvironmentTemplateList_member = _CompatibleEnvironmentTemplateList.AddMember("member", CompatibleEnvironmentTemplate)
-
-	Component_name = Component.AddMember("name", _ResourceName)
-
-	Component_description = Component.AddMember("description", _Description)
-
-	Component_arn = Component.AddMember("arn", _ComponentArn)
-
-	Component_environmentName = Component.AddMember("environmentName", _ResourceName)
-
-	Component_serviceName = Component.AddMember("serviceName", _ResourceName)
-
-	Component_serviceInstanceName = Component.AddMember("serviceInstanceName", _ResourceName)
-
-	Component_createdAt = Component.AddMember("createdAt", smithyprelude.Timestamp)
-
-	Component_lastModifiedAt = Component.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	Component_lastDeploymentAttemptedAt = Component.AddMember("lastDeploymentAttemptedAt", smithyprelude.Timestamp)
-
-	Component_lastDeploymentSucceededAt = Component.AddMember("lastDeploymentSucceededAt", smithyprelude.Timestamp)
-
-	Component_deploymentStatus = Component.AddMember("deploymentStatus", _DeploymentStatus)
-
-	Component_deploymentStatusMessage = Component.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	Component_serviceSpec = Component.AddMember("serviceSpec", _SpecContents)
-
-	Component_lastClientRequestToken = Component.AddMember("lastClientRequestToken", smithyprelude.String)
-
-	Component_lastAttemptedDeploymentId = Component.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	Component_lastSucceededDeploymentId = Component.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	_ComponentDeploymentIdList_member = _ComponentDeploymentIdList.AddMember("member", _DeploymentId)
-
-	ComponentState_serviceName = ComponentState.AddMember("serviceName", _ResourceNameOrEmpty)
-
-	ComponentState_serviceInstanceName = ComponentState.AddMember("serviceInstanceName", _ResourceNameOrEmpty)
-
-	ComponentState_serviceSpec = ComponentState.AddMember("serviceSpec", _SpecContents)
-
-	ComponentState_templateFile = ComponentState.AddMember("templateFile", _TemplateFileContents)
-
-	ComponentSummary_name = ComponentSummary.AddMember("name", _ResourceName)
-
-	ComponentSummary_arn = ComponentSummary.AddMember("arn", _ComponentArn)
-
-	ComponentSummary_environmentName = ComponentSummary.AddMember("environmentName", _ResourceName)
-
-	ComponentSummary_serviceName = ComponentSummary.AddMember("serviceName", _ResourceName)
-
-	ComponentSummary_serviceInstanceName = ComponentSummary.AddMember("serviceInstanceName", _ResourceName)
-
-	ComponentSummary_createdAt = ComponentSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ComponentSummary_lastModifiedAt = ComponentSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	ComponentSummary_lastDeploymentAttemptedAt = ComponentSummary.AddMember("lastDeploymentAttemptedAt", smithyprelude.Timestamp)
-
-	ComponentSummary_lastDeploymentSucceededAt = ComponentSummary.AddMember("lastDeploymentSucceededAt", smithyprelude.Timestamp)
-
-	ComponentSummary_deploymentStatus = ComponentSummary.AddMember("deploymentStatus", _DeploymentStatus)
-
-	ComponentSummary_deploymentStatusMessage = ComponentSummary.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	ComponentSummary_lastAttemptedDeploymentId = ComponentSummary.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	ComponentSummary_lastSucceededDeploymentId = ComponentSummary.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	_ComponentSummaryList_member = _ComponentSummaryList.AddMember("member", ComponentSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	ResourceCountsSummary_total = ResourceCountsSummary.AddMember("total", smithyprelude.Integer)
-
-	ResourceCountsSummary_failed = ResourceCountsSummary.AddMember("failed", smithyprelude.Integer)
-
-	ResourceCountsSummary_upToDate = ResourceCountsSummary.AddMember("upToDate", smithyprelude.Integer)
-
-	ResourceCountsSummary_behindMajor = ResourceCountsSummary.AddMember("behindMajor", smithyprelude.Integer)
-
-	ResourceCountsSummary_behindMinor = ResourceCountsSummary.AddMember("behindMinor", smithyprelude.Integer)
-
-	CountsSummary_components = CountsSummary.AddMember("components", ResourceCountsSummary)
-
-	CountsSummary_environments = CountsSummary.AddMember("environments", ResourceCountsSummary)
-
-	CountsSummary_environmentTemplates = CountsSummary.AddMember("environmentTemplates", ResourceCountsSummary)
-
-	CountsSummary_serviceInstances = CountsSummary.AddMember("serviceInstances", ResourceCountsSummary)
-
-	CountsSummary_services = CountsSummary.AddMember("services", ResourceCountsSummary)
-
-	CountsSummary_serviceTemplates = CountsSummary.AddMember("serviceTemplates", ResourceCountsSummary)
-
-	CountsSummary_pipelines = CountsSummary.AddMember("pipelines", ResourceCountsSummary)
-
-	ServiceInstanceState_spec = ServiceInstanceState.AddMember("spec", _SpecContents)
-
-	ServiceInstanceState_templateName = ServiceInstanceState.AddMember("templateName", _ResourceName)
-
-	ServiceInstanceState_templateMajorVersion = ServiceInstanceState.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	ServiceInstanceState_templateMinorVersion = ServiceInstanceState.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	ServiceInstanceState_lastSuccessfulComponentDeploymentIds = ServiceInstanceState.AddMember("lastSuccessfulComponentDeploymentIds", _ComponentDeploymentIdList)
-
-	ServiceInstanceState_lastSuccessfulEnvironmentDeploymentId = ServiceInstanceState.AddMember("lastSuccessfulEnvironmentDeploymentId", _DeploymentId)
-
-	ServiceInstanceState_lastSuccessfulServicePipelineDeploymentId = ServiceInstanceState.AddMember("lastSuccessfulServicePipelineDeploymentId", _DeploymentId)
-
-	EnvironmentState_spec = EnvironmentState.AddMember("spec", _SpecContents)
-
-	EnvironmentState_templateName = EnvironmentState.AddMember("templateName", _ResourceName)
-
-	EnvironmentState_templateMajorVersion = EnvironmentState.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	EnvironmentState_templateMinorVersion = EnvironmentState.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	ServicePipelineState_spec = ServicePipelineState.AddMember("spec", _SpecContents)
-
-	ServicePipelineState_templateName = ServicePipelineState.AddMember("templateName", _ResourceName)
-
-	ServicePipelineState_templateMajorVersion = ServicePipelineState.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	ServicePipelineState_templateMinorVersion = ServicePipelineState.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	DeploymentState_serviceInstance = DeploymentState.AddMember("serviceInstance", ServiceInstanceState)
-
-	DeploymentState_environment = DeploymentState.AddMember("environment", EnvironmentState)
-
-	DeploymentState_servicePipeline = DeploymentState.AddMember("servicePipeline", ServicePipelineState)
-
-	DeploymentState_component = DeploymentState.AddMember("component", ComponentState)
-
-	Deployment_id = Deployment.AddMember("id", _DeploymentId)
-
-	Deployment_arn = Deployment.AddMember("arn", _DeploymentArn)
-
-	Deployment_targetArn = Deployment.AddMember("targetArn", _Arn)
-
-	Deployment_targetResourceCreatedAt = Deployment.AddMember("targetResourceCreatedAt", smithyprelude.Timestamp)
-
-	Deployment_targetResourceType = Deployment.AddMember("targetResourceType", _DeploymentTargetResourceType)
-
-	Deployment_environmentName = Deployment.AddMember("environmentName", _ResourceName)
-
-	Deployment_serviceName = Deployment.AddMember("serviceName", _ResourceName)
-
-	Deployment_serviceInstanceName = Deployment.AddMember("serviceInstanceName", _ResourceName)
-
-	Deployment_componentName = Deployment.AddMember("componentName", _ResourceName)
-
-	Deployment_deploymentStatus = Deployment.AddMember("deploymentStatus", _DeploymentStatus)
-
-	Deployment_deploymentStatusMessage = Deployment.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	Deployment_createdAt = Deployment.AddMember("createdAt", smithyprelude.Timestamp)
-
-	Deployment_lastModifiedAt = Deployment.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	Deployment_completedAt = Deployment.AddMember("completedAt", smithyprelude.Timestamp)
-
-	Deployment_lastAttemptedDeploymentId = Deployment.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	Deployment_lastSucceededDeploymentId = Deployment.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	Deployment_initialState = Deployment.AddMember("initialState", DeploymentState)
-
-	Deployment_targetState = Deployment.AddMember("targetState", DeploymentState)
-
-	DeploymentSummary_id = DeploymentSummary.AddMember("id", _DeploymentId)
-
-	DeploymentSummary_arn = DeploymentSummary.AddMember("arn", _DeploymentArn)
-
-	DeploymentSummary_targetArn = DeploymentSummary.AddMember("targetArn", _Arn)
-
-	DeploymentSummary_targetResourceCreatedAt = DeploymentSummary.AddMember("targetResourceCreatedAt", smithyprelude.Timestamp)
-
-	DeploymentSummary_targetResourceType = DeploymentSummary.AddMember("targetResourceType", _DeploymentTargetResourceType)
-
-	DeploymentSummary_createdAt = DeploymentSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	DeploymentSummary_lastModifiedAt = DeploymentSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	DeploymentSummary_completedAt = DeploymentSummary.AddMember("completedAt", smithyprelude.Timestamp)
-
-	DeploymentSummary_environmentName = DeploymentSummary.AddMember("environmentName", _ResourceName)
-
-	DeploymentSummary_serviceName = DeploymentSummary.AddMember("serviceName", _ResourceName)
-
-	DeploymentSummary_serviceInstanceName = DeploymentSummary.AddMember("serviceInstanceName", _ResourceName)
-
-	DeploymentSummary_componentName = DeploymentSummary.AddMember("componentName", _ResourceName)
-
-	DeploymentSummary_lastAttemptedDeploymentId = DeploymentSummary.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	DeploymentSummary_lastSucceededDeploymentId = DeploymentSummary.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	DeploymentSummary_deploymentStatus = DeploymentSummary.AddMember("deploymentStatus", _DeploymentStatus)
-
-	_DeploymentSummaryList_member = _DeploymentSummaryList.AddMember("member", DeploymentSummary)
-
-	Environment_name = Environment.AddMember("name", _ResourceName)
-
-	Environment_description = Environment.AddMember("description", _Description)
-
-	Environment_createdAt = Environment.AddMember("createdAt", smithyprelude.Timestamp)
-
-	Environment_lastDeploymentAttemptedAt = Environment.AddMember("lastDeploymentAttemptedAt", smithyprelude.Timestamp)
-
-	Environment_lastDeploymentSucceededAt = Environment.AddMember("lastDeploymentSucceededAt", smithyprelude.Timestamp)
-
-	Environment_arn = Environment.AddMember("arn", _EnvironmentArn)
-
-	Environment_templateName = Environment.AddMember("templateName", _ResourceName)
-
-	Environment_templateMajorVersion = Environment.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	Environment_templateMinorVersion = Environment.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	Environment_deploymentStatus = Environment.AddMember("deploymentStatus", _DeploymentStatus)
-
-	Environment_deploymentStatusMessage = Environment.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	Environment_protonServiceRoleArn = Environment.AddMember("protonServiceRoleArn", _Arn)
-
-	Environment_environmentAccountConnectionId = Environment.AddMember("environmentAccountConnectionId", _EnvironmentAccountConnectionId)
-
-	Environment_environmentAccountId = Environment.AddMember("environmentAccountId", _AwsAccountId)
-
-	Environment_spec = Environment.AddMember("spec", _SpecContents)
-
-	Environment_provisioning = Environment.AddMember("provisioning", _Provisioning)
-
-	Environment_provisioningRepository = Environment.AddMember("provisioningRepository", RepositoryBranch)
-
-	Environment_componentRoleArn = Environment.AddMember("componentRoleArn", _RoleArn)
-
-	Environment_codebuildRoleArn = Environment.AddMember("codebuildRoleArn", _RoleArn)
-
-	Environment_lastAttemptedDeploymentId = Environment.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	Environment_lastSucceededDeploymentId = Environment.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	EnvironmentAccountConnection_id = EnvironmentAccountConnection.AddMember("id", _EnvironmentAccountConnectionId)
-
-	EnvironmentAccountConnection_arn = EnvironmentAccountConnection.AddMember("arn", _EnvironmentAccountConnectionArn)
-
-	EnvironmentAccountConnection_managementAccountId = EnvironmentAccountConnection.AddMember("managementAccountId", _AwsAccountId)
-
-	EnvironmentAccountConnection_environmentAccountId = EnvironmentAccountConnection.AddMember("environmentAccountId", _AwsAccountId)
-
-	EnvironmentAccountConnection_roleArn = EnvironmentAccountConnection.AddMember("roleArn", _Arn)
-
-	EnvironmentAccountConnection_environmentName = EnvironmentAccountConnection.AddMember("environmentName", _ResourceName)
-
-	EnvironmentAccountConnection_requestedAt = EnvironmentAccountConnection.AddMember("requestedAt", smithyprelude.Timestamp)
-
-	EnvironmentAccountConnection_lastModifiedAt = EnvironmentAccountConnection.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	EnvironmentAccountConnection_status = EnvironmentAccountConnection.AddMember("status", _EnvironmentAccountConnectionStatus)
-
-	EnvironmentAccountConnection_componentRoleArn = EnvironmentAccountConnection.AddMember("componentRoleArn", _RoleArn)
-
-	EnvironmentAccountConnection_codebuildRoleArn = EnvironmentAccountConnection.AddMember("codebuildRoleArn", _RoleArn)
-
-	_EnvironmentAccountConnectionStatusList_member = _EnvironmentAccountConnectionStatusList.AddMember("member", _EnvironmentAccountConnectionStatus)
-
-	EnvironmentAccountConnectionSummary_id = EnvironmentAccountConnectionSummary.AddMember("id", _EnvironmentAccountConnectionId)
-
-	EnvironmentAccountConnectionSummary_arn = EnvironmentAccountConnectionSummary.AddMember("arn", _EnvironmentAccountConnectionArn)
-
-	EnvironmentAccountConnectionSummary_managementAccountId = EnvironmentAccountConnectionSummary.AddMember("managementAccountId", _AwsAccountId)
-
-	EnvironmentAccountConnectionSummary_environmentAccountId = EnvironmentAccountConnectionSummary.AddMember("environmentAccountId", _AwsAccountId)
-
-	EnvironmentAccountConnectionSummary_roleArn = EnvironmentAccountConnectionSummary.AddMember("roleArn", _Arn)
-
-	EnvironmentAccountConnectionSummary_environmentName = EnvironmentAccountConnectionSummary.AddMember("environmentName", _ResourceName)
-
-	EnvironmentAccountConnectionSummary_requestedAt = EnvironmentAccountConnectionSummary.AddMember("requestedAt", smithyprelude.Timestamp)
-
-	EnvironmentAccountConnectionSummary_lastModifiedAt = EnvironmentAccountConnectionSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	EnvironmentAccountConnectionSummary_status = EnvironmentAccountConnectionSummary.AddMember("status", _EnvironmentAccountConnectionStatus)
-
-	EnvironmentAccountConnectionSummary_componentRoleArn = EnvironmentAccountConnectionSummary.AddMember("componentRoleArn", _Arn)
-
-	_EnvironmentAccountConnectionSummaryList_member = _EnvironmentAccountConnectionSummaryList.AddMember("member", EnvironmentAccountConnectionSummary)
-
-	EnvironmentSummary_name = EnvironmentSummary.AddMember("name", _ResourceName)
-
-	EnvironmentSummary_description = EnvironmentSummary.AddMember("description", _Description)
-
-	EnvironmentSummary_createdAt = EnvironmentSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	EnvironmentSummary_lastDeploymentAttemptedAt = EnvironmentSummary.AddMember("lastDeploymentAttemptedAt", smithyprelude.Timestamp)
-
-	EnvironmentSummary_lastDeploymentSucceededAt = EnvironmentSummary.AddMember("lastDeploymentSucceededAt", smithyprelude.Timestamp)
-
-	EnvironmentSummary_arn = EnvironmentSummary.AddMember("arn", _EnvironmentArn)
-
-	EnvironmentSummary_templateName = EnvironmentSummary.AddMember("templateName", _ResourceName)
-
-	EnvironmentSummary_templateMajorVersion = EnvironmentSummary.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	EnvironmentSummary_templateMinorVersion = EnvironmentSummary.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	EnvironmentSummary_deploymentStatus = EnvironmentSummary.AddMember("deploymentStatus", _DeploymentStatus)
-
-	EnvironmentSummary_deploymentStatusMessage = EnvironmentSummary.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	EnvironmentSummary_protonServiceRoleArn = EnvironmentSummary.AddMember("protonServiceRoleArn", _Arn)
-
-	EnvironmentSummary_environmentAccountConnectionId = EnvironmentSummary.AddMember("environmentAccountConnectionId", _EnvironmentAccountConnectionId)
-
-	EnvironmentSummary_environmentAccountId = EnvironmentSummary.AddMember("environmentAccountId", _AwsAccountId)
-
-	EnvironmentSummary_provisioning = EnvironmentSummary.AddMember("provisioning", _Provisioning)
-
-	EnvironmentSummary_componentRoleArn = EnvironmentSummary.AddMember("componentRoleArn", _Arn)
-
-	EnvironmentSummary_lastAttemptedDeploymentId = EnvironmentSummary.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	EnvironmentSummary_lastSucceededDeploymentId = EnvironmentSummary.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	_EnvironmentSummaryList_member = _EnvironmentSummaryList.AddMember("member", EnvironmentSummary)
-
-	EnvironmentTemplate_name = EnvironmentTemplate.AddMember("name", _ResourceName)
-
-	EnvironmentTemplate_arn = EnvironmentTemplate.AddMember("arn", _EnvironmentTemplateArn)
-
-	EnvironmentTemplate_createdAt = EnvironmentTemplate.AddMember("createdAt", smithyprelude.Timestamp)
-
-	EnvironmentTemplate_lastModifiedAt = EnvironmentTemplate.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	EnvironmentTemplate_displayName = EnvironmentTemplate.AddMember("displayName", _DisplayName)
-
-	EnvironmentTemplate_description = EnvironmentTemplate.AddMember("description", _Description)
-
-	EnvironmentTemplate_recommendedVersion = EnvironmentTemplate.AddMember("recommendedVersion", _FullTemplateVersionNumber)
-
-	EnvironmentTemplate_encryptionKey = EnvironmentTemplate.AddMember("encryptionKey", _Arn)
-
-	EnvironmentTemplate_provisioning = EnvironmentTemplate.AddMember("provisioning", _Provisioning)
-
-	EnvironmentTemplateFilter_templateName = EnvironmentTemplateFilter.AddMember("templateName", _ResourceName)
-
-	EnvironmentTemplateFilter_majorVersion = EnvironmentTemplateFilter.AddMember("majorVersion", _TemplateVersionPart)
-
-	_EnvironmentTemplateFilterList_member = _EnvironmentTemplateFilterList.AddMember("member", EnvironmentTemplateFilter)
-
-	EnvironmentTemplateSummary_name = EnvironmentTemplateSummary.AddMember("name", _ResourceName)
-
-	EnvironmentTemplateSummary_arn = EnvironmentTemplateSummary.AddMember("arn", _EnvironmentTemplateArn)
-
-	EnvironmentTemplateSummary_createdAt = EnvironmentTemplateSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	EnvironmentTemplateSummary_lastModifiedAt = EnvironmentTemplateSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	EnvironmentTemplateSummary_displayName = EnvironmentTemplateSummary.AddMember("displayName", _DisplayName)
-
-	EnvironmentTemplateSummary_description = EnvironmentTemplateSummary.AddMember("description", _Description)
-
-	EnvironmentTemplateSummary_recommendedVersion = EnvironmentTemplateSummary.AddMember("recommendedVersion", _FullTemplateVersionNumber)
-
-	EnvironmentTemplateSummary_provisioning = EnvironmentTemplateSummary.AddMember("provisioning", _Provisioning)
-
-	_EnvironmentTemplateSummaryList_member = _EnvironmentTemplateSummaryList.AddMember("member", EnvironmentTemplateSummary)
-
-	EnvironmentTemplateVersion_templateName = EnvironmentTemplateVersion.AddMember("templateName", _ResourceName)
-
-	EnvironmentTemplateVersion_majorVersion = EnvironmentTemplateVersion.AddMember("majorVersion", _TemplateVersionPart)
-
-	EnvironmentTemplateVersion_minorVersion = EnvironmentTemplateVersion.AddMember("minorVersion", _TemplateVersionPart)
-
-	EnvironmentTemplateVersion_recommendedMinorVersion = EnvironmentTemplateVersion.AddMember("recommendedMinorVersion", _TemplateVersionPart)
-
-	EnvironmentTemplateVersion_status = EnvironmentTemplateVersion.AddMember("status", _TemplateVersionStatus)
-
-	EnvironmentTemplateVersion_statusMessage = EnvironmentTemplateVersion.AddMember("statusMessage", _StatusMessage)
-
-	EnvironmentTemplateVersion_description = EnvironmentTemplateVersion.AddMember("description", _Description)
-
-	EnvironmentTemplateVersion_arn = EnvironmentTemplateVersion.AddMember("arn", _EnvironmentTemplateVersionArn)
-
-	EnvironmentTemplateVersion_createdAt = EnvironmentTemplateVersion.AddMember("createdAt", smithyprelude.Timestamp)
-
-	EnvironmentTemplateVersion_lastModifiedAt = EnvironmentTemplateVersion.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	EnvironmentTemplateVersion_schema = EnvironmentTemplateVersion.AddMember("schema", _TemplateSchema)
-
-	EnvironmentTemplateVersionSummary_templateName = EnvironmentTemplateVersionSummary.AddMember("templateName", _ResourceName)
-
-	EnvironmentTemplateVersionSummary_majorVersion = EnvironmentTemplateVersionSummary.AddMember("majorVersion", _TemplateVersionPart)
-
-	EnvironmentTemplateVersionSummary_minorVersion = EnvironmentTemplateVersionSummary.AddMember("minorVersion", _TemplateVersionPart)
-
-	EnvironmentTemplateVersionSummary_recommendedMinorVersion = EnvironmentTemplateVersionSummary.AddMember("recommendedMinorVersion", _TemplateVersionPart)
-
-	EnvironmentTemplateVersionSummary_status = EnvironmentTemplateVersionSummary.AddMember("status", _TemplateVersionStatus)
-
-	EnvironmentTemplateVersionSummary_statusMessage = EnvironmentTemplateVersionSummary.AddMember("statusMessage", _StatusMessage)
-
-	EnvironmentTemplateVersionSummary_description = EnvironmentTemplateVersionSummary.AddMember("description", _Description)
-
-	EnvironmentTemplateVersionSummary_arn = EnvironmentTemplateVersionSummary.AddMember("arn", _EnvironmentTemplateVersionArn)
-
-	EnvironmentTemplateVersionSummary_createdAt = EnvironmentTemplateVersionSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	EnvironmentTemplateVersionSummary_lastModifiedAt = EnvironmentTemplateVersionSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	_EnvironmentTemplateVersionSummaryList_member = _EnvironmentTemplateVersionSummaryList.AddMember("member", EnvironmentTemplateVersionSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	SyncBlockerContext_key = SyncBlockerContext.AddMember("key", smithyprelude.String)
-
-	SyncBlockerContext_value = SyncBlockerContext.AddMember("value", smithyprelude.String)
-
-	_SyncBlockerContexts_member = _SyncBlockerContexts.AddMember("member", SyncBlockerContext)
-
-	SyncBlocker_id = SyncBlocker.AddMember("id", smithyprelude.String)
-
-	SyncBlocker_type = SyncBlocker.AddMember("type", _BlockerType)
-
-	SyncBlocker_status = SyncBlocker.AddMember("status", _BlockerStatus)
-
-	SyncBlocker_createdReason = SyncBlocker.AddMember("createdReason", smithyprelude.String)
-
-	SyncBlocker_createdAt = SyncBlocker.AddMember("createdAt", smithyprelude.Timestamp)
-
-	SyncBlocker_contexts = SyncBlocker.AddMember("contexts", _SyncBlockerContexts)
-
-	SyncBlocker_resolvedReason = SyncBlocker.AddMember("resolvedReason", smithyprelude.String)
-
-	SyncBlocker_resolvedAt = SyncBlocker.AddMember("resolvedAt", smithyprelude.Timestamp)
-
-	_LatestSyncBlockers_member = _LatestSyncBlockers.AddMember("member", SyncBlocker)
-
-	ListServiceInstancesFilter_key = ListServiceInstancesFilter.AddMember("key", _ListServiceInstancesFilterBy)
-
-	ListServiceInstancesFilter_value = ListServiceInstancesFilter.AddMember("value", _ListServiceInstancesFilterValue)
-
-	_ListServiceInstancesFilterList_member = _ListServiceInstancesFilterList.AddMember("member", ListServiceInstancesFilter)
-
-	Output_key = Output.AddMember("key", _OutputKey)
-
-	Output_valueString = Output.AddMember("valueString", _OutputValueString)
-
-	_OutputsList_member = _OutputsList.AddMember("member", Output)
-
-	ProvisionedResource_name = ProvisionedResource.AddMember("name", _ProvisionedResourceName)
-
-	ProvisionedResource_identifier = ProvisionedResource.AddMember("identifier", _ProvisionedResourceIdentifier)
-
-	ProvisionedResource_provisioningEngine = ProvisionedResource.AddMember("provisioningEngine", _ProvisionedResourceEngine)
-
-	_ProvisionedResourceList_member = _ProvisionedResourceList.AddMember("member", ProvisionedResource)
-
-	Repository_arn = Repository.AddMember("arn", _RepositoryArn)
-
-	Repository_provider = Repository.AddMember("provider", _RepositoryProvider)
-
-	Repository_name = Repository.AddMember("name", _RepositoryName)
-
-	Repository_connectionArn = Repository.AddMember("connectionArn", _Arn)
-
-	Repository_encryptionKey = Repository.AddMember("encryptionKey", _Arn)
-
-	RepositoryBranchInput_provider = RepositoryBranchInput.AddMember("provider", _RepositoryProvider)
-
-	RepositoryBranchInput_name = RepositoryBranchInput.AddMember("name", _RepositoryName)
-
-	RepositoryBranchInput_branch = RepositoryBranchInput.AddMember("branch", _GitBranchName)
-
-	RepositorySummary_arn = RepositorySummary.AddMember("arn", _RepositoryArn)
-
-	RepositorySummary_provider = RepositorySummary.AddMember("provider", _RepositoryProvider)
-
-	RepositorySummary_name = RepositorySummary.AddMember("name", _RepositoryName)
-
-	RepositorySummary_connectionArn = RepositorySummary.AddMember("connectionArn", _Arn)
-
-	_RepositorySummaryList_member = _RepositorySummaryList.AddMember("member", RepositorySummary)
-
-	RepositorySyncEvent_type = RepositorySyncEvent.AddMember("type", smithyprelude.String)
-
-	RepositorySyncEvent_externalId = RepositorySyncEvent.AddMember("externalId", smithyprelude.String)
-
-	RepositorySyncEvent_time = RepositorySyncEvent.AddMember("time", smithyprelude.Timestamp)
-
-	RepositorySyncEvent_event = RepositorySyncEvent.AddMember("event", smithyprelude.String)
-
-	_RepositorySyncEvents_member = _RepositorySyncEvents.AddMember("member", RepositorySyncEvent)
-
-	RepositorySyncAttempt_startedAt = RepositorySyncAttempt.AddMember("startedAt", smithyprelude.Timestamp)
-
-	RepositorySyncAttempt_status = RepositorySyncAttempt.AddMember("status", _RepositorySyncStatus)
-
-	RepositorySyncAttempt_events = RepositorySyncAttempt.AddMember("events", _RepositorySyncEvents)
-
-	RepositorySyncDefinition_target = RepositorySyncDefinition.AddMember("target", smithyprelude.String)
-
-	RepositorySyncDefinition_parent = RepositorySyncDefinition.AddMember("parent", smithyprelude.String)
-
-	RepositorySyncDefinition_branch = RepositorySyncDefinition.AddMember("branch", _GitBranchName)
-
-	RepositorySyncDefinition_directory = RepositorySyncDefinition.AddMember("directory", smithyprelude.String)
-
-	_RepositorySyncDefinitionList_member = _RepositorySyncDefinitionList.AddMember("member", RepositorySyncDefinition)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	Revision_repositoryName = Revision.AddMember("repositoryName", _RepositoryName)
-
-	Revision_repositoryProvider = Revision.AddMember("repositoryProvider", _RepositoryProvider)
-
-	Revision_sha = Revision.AddMember("sha", _SHA)
-
-	Revision_directory = Revision.AddMember("directory", smithyprelude.String)
-
-	Revision_branch = Revision.AddMember("branch", _GitBranchName)
-
-	ResourceSyncEvent_type = ResourceSyncEvent.AddMember("type", smithyprelude.String)
-
-	ResourceSyncEvent_externalId = ResourceSyncEvent.AddMember("externalId", smithyprelude.String)
-
-	ResourceSyncEvent_time = ResourceSyncEvent.AddMember("time", smithyprelude.Timestamp)
-
-	ResourceSyncEvent_event = ResourceSyncEvent.AddMember("event", smithyprelude.String)
-
-	_ResourceSyncEvents_member = _ResourceSyncEvents.AddMember("member", ResourceSyncEvent)
-
-	ResourceSyncAttempt_initialRevision = ResourceSyncAttempt.AddMember("initialRevision", Revision)
-
-	ResourceSyncAttempt_targetRevision = ResourceSyncAttempt.AddMember("targetRevision", Revision)
-
-	ResourceSyncAttempt_target = ResourceSyncAttempt.AddMember("target", smithyprelude.String)
-
-	ResourceSyncAttempt_startedAt = ResourceSyncAttempt.AddMember("startedAt", smithyprelude.Timestamp)
-
-	ResourceSyncAttempt_status = ResourceSyncAttempt.AddMember("status", _ResourceSyncStatus)
-
-	ResourceSyncAttempt_events = ResourceSyncAttempt.AddMember("events", _ResourceSyncEvents)
-
-	S3ObjectSource_bucket = S3ObjectSource.AddMember("bucket", _S3Bucket)
-
-	S3ObjectSource_key = S3ObjectSource.AddMember("key", _S3Key)
-
-	ServicePipeline_arn = ServicePipeline.AddMember("arn", _Arn)
-
-	ServicePipeline_createdAt = ServicePipeline.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServicePipeline_lastDeploymentAttemptedAt = ServicePipeline.AddMember("lastDeploymentAttemptedAt", smithyprelude.Timestamp)
-
-	ServicePipeline_lastDeploymentSucceededAt = ServicePipeline.AddMember("lastDeploymentSucceededAt", smithyprelude.Timestamp)
-
-	ServicePipeline_templateName = ServicePipeline.AddMember("templateName", _ResourceName)
-
-	ServicePipeline_templateMajorVersion = ServicePipeline.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	ServicePipeline_templateMinorVersion = ServicePipeline.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	ServicePipeline_deploymentStatus = ServicePipeline.AddMember("deploymentStatus", _DeploymentStatus)
-
-	ServicePipeline_deploymentStatusMessage = ServicePipeline.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	ServicePipeline_spec = ServicePipeline.AddMember("spec", _SpecContents)
-
-	ServicePipeline_lastAttemptedDeploymentId = ServicePipeline.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	ServicePipeline_lastSucceededDeploymentId = ServicePipeline.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	Service_name = Service.AddMember("name", _ResourceName)
-
-	Service_description = Service.AddMember("description", _Description)
-
-	Service_arn = Service.AddMember("arn", _ServiceArn)
-
-	Service_templateName = Service.AddMember("templateName", _ResourceName)
-
-	Service_createdAt = Service.AddMember("createdAt", smithyprelude.Timestamp)
-
-	Service_lastModifiedAt = Service.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	Service_status = Service.AddMember("status", _ServiceStatus)
-
-	Service_statusMessage = Service.AddMember("statusMessage", _StatusMessage)
-
-	Service_spec = Service.AddMember("spec", _SpecContents)
-
-	Service_pipeline = Service.AddMember("pipeline", ServicePipeline)
-
-	Service_repositoryConnectionArn = Service.AddMember("repositoryConnectionArn", _Arn)
-
-	Service_repositoryId = Service.AddMember("repositoryId", _RepositoryId)
-
-	Service_branchName = Service.AddMember("branchName", _GitBranchName)
-
-	ServiceInstance_name = ServiceInstance.AddMember("name", _ResourceName)
-
-	ServiceInstance_arn = ServiceInstance.AddMember("arn", _ServiceInstanceArn)
-
-	ServiceInstance_createdAt = ServiceInstance.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServiceInstance_lastDeploymentAttemptedAt = ServiceInstance.AddMember("lastDeploymentAttemptedAt", smithyprelude.Timestamp)
-
-	ServiceInstance_lastDeploymentSucceededAt = ServiceInstance.AddMember("lastDeploymentSucceededAt", smithyprelude.Timestamp)
-
-	ServiceInstance_serviceName = ServiceInstance.AddMember("serviceName", _ResourceName)
-
-	ServiceInstance_environmentName = ServiceInstance.AddMember("environmentName", _ResourceName)
-
-	ServiceInstance_templateName = ServiceInstance.AddMember("templateName", _ResourceName)
-
-	ServiceInstance_templateMajorVersion = ServiceInstance.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	ServiceInstance_templateMinorVersion = ServiceInstance.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	ServiceInstance_deploymentStatus = ServiceInstance.AddMember("deploymentStatus", _DeploymentStatus)
-
-	ServiceInstance_deploymentStatusMessage = ServiceInstance.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	ServiceInstance_spec = ServiceInstance.AddMember("spec", _SpecContents)
-
-	ServiceInstance_lastClientRequestToken = ServiceInstance.AddMember("lastClientRequestToken", smithyprelude.String)
-
-	ServiceInstance_lastAttemptedDeploymentId = ServiceInstance.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	ServiceInstance_lastSucceededDeploymentId = ServiceInstance.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	ServiceInstanceSummary_name = ServiceInstanceSummary.AddMember("name", _ResourceName)
-
-	ServiceInstanceSummary_arn = ServiceInstanceSummary.AddMember("arn", _ServiceInstanceArn)
-
-	ServiceInstanceSummary_createdAt = ServiceInstanceSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServiceInstanceSummary_lastDeploymentAttemptedAt = ServiceInstanceSummary.AddMember("lastDeploymentAttemptedAt", smithyprelude.Timestamp)
-
-	ServiceInstanceSummary_lastDeploymentSucceededAt = ServiceInstanceSummary.AddMember("lastDeploymentSucceededAt", smithyprelude.Timestamp)
-
-	ServiceInstanceSummary_serviceName = ServiceInstanceSummary.AddMember("serviceName", _ResourceName)
-
-	ServiceInstanceSummary_environmentName = ServiceInstanceSummary.AddMember("environmentName", _ResourceName)
-
-	ServiceInstanceSummary_templateName = ServiceInstanceSummary.AddMember("templateName", _ResourceName)
-
-	ServiceInstanceSummary_templateMajorVersion = ServiceInstanceSummary.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	ServiceInstanceSummary_templateMinorVersion = ServiceInstanceSummary.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	ServiceInstanceSummary_deploymentStatus = ServiceInstanceSummary.AddMember("deploymentStatus", _DeploymentStatus)
-
-	ServiceInstanceSummary_deploymentStatusMessage = ServiceInstanceSummary.AddMember("deploymentStatusMessage", _StatusMessage)
-
-	ServiceInstanceSummary_lastAttemptedDeploymentId = ServiceInstanceSummary.AddMember("lastAttemptedDeploymentId", _DeploymentId)
-
-	ServiceInstanceSummary_lastSucceededDeploymentId = ServiceInstanceSummary.AddMember("lastSucceededDeploymentId", _DeploymentId)
-
-	_ServiceInstanceSummaryList_member = _ServiceInstanceSummaryList.AddMember("member", ServiceInstanceSummary)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _ErrorMessage)
-
-	ServiceSummary_name = ServiceSummary.AddMember("name", _ResourceName)
-
-	ServiceSummary_description = ServiceSummary.AddMember("description", _Description)
-
-	ServiceSummary_arn = ServiceSummary.AddMember("arn", _ServiceArn)
-
-	ServiceSummary_templateName = ServiceSummary.AddMember("templateName", _ResourceName)
-
-	ServiceSummary_createdAt = ServiceSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServiceSummary_lastModifiedAt = ServiceSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	ServiceSummary_status = ServiceSummary.AddMember("status", _ServiceStatus)
-
-	ServiceSummary_statusMessage = ServiceSummary.AddMember("statusMessage", _StatusMessage)
-
-	_ServiceSummaryList_member = _ServiceSummaryList.AddMember("member", ServiceSummary)
-
-	ServiceSyncBlockerSummary_serviceName = ServiceSyncBlockerSummary.AddMember("serviceName", smithyprelude.String)
-
-	ServiceSyncBlockerSummary_serviceInstanceName = ServiceSyncBlockerSummary.AddMember("serviceInstanceName", smithyprelude.String)
-
-	ServiceSyncBlockerSummary_latestBlockers = ServiceSyncBlockerSummary.AddMember("latestBlockers", _LatestSyncBlockers)
-
-	ServiceSyncConfig_serviceName = ServiceSyncConfig.AddMember("serviceName", _ResourceName)
-
-	ServiceSyncConfig_repositoryProvider = ServiceSyncConfig.AddMember("repositoryProvider", _RepositoryProvider)
-
-	ServiceSyncConfig_repositoryName = ServiceSyncConfig.AddMember("repositoryName", _RepositoryName)
-
-	ServiceSyncConfig_branch = ServiceSyncConfig.AddMember("branch", _GitBranchName)
-
-	ServiceSyncConfig_filePath = ServiceSyncConfig.AddMember("filePath", _OpsFilePath)
-
-	ServiceTemplate_name = ServiceTemplate.AddMember("name", _ResourceName)
-
-	ServiceTemplate_arn = ServiceTemplate.AddMember("arn", _ServiceTemplateArn)
-
-	ServiceTemplate_createdAt = ServiceTemplate.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServiceTemplate_lastModifiedAt = ServiceTemplate.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	ServiceTemplate_displayName = ServiceTemplate.AddMember("displayName", _DisplayName)
-
-	ServiceTemplate_description = ServiceTemplate.AddMember("description", _Description)
-
-	ServiceTemplate_recommendedVersion = ServiceTemplate.AddMember("recommendedVersion", _FullTemplateVersionNumber)
-
-	ServiceTemplate_encryptionKey = ServiceTemplate.AddMember("encryptionKey", _Arn)
-
-	ServiceTemplate_pipelineProvisioning = ServiceTemplate.AddMember("pipelineProvisioning", _Provisioning)
-
-	ServiceTemplateSummary_name = ServiceTemplateSummary.AddMember("name", _ResourceName)
-
-	ServiceTemplateSummary_arn = ServiceTemplateSummary.AddMember("arn", _ServiceTemplateArn)
-
-	ServiceTemplateSummary_createdAt = ServiceTemplateSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServiceTemplateSummary_lastModifiedAt = ServiceTemplateSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	ServiceTemplateSummary_displayName = ServiceTemplateSummary.AddMember("displayName", _DisplayName)
-
-	ServiceTemplateSummary_description = ServiceTemplateSummary.AddMember("description", _Description)
-
-	ServiceTemplateSummary_recommendedVersion = ServiceTemplateSummary.AddMember("recommendedVersion", _FullTemplateVersionNumber)
-
-	ServiceTemplateSummary_pipelineProvisioning = ServiceTemplateSummary.AddMember("pipelineProvisioning", _Provisioning)
-
-	_ServiceTemplateSummaryList_member = _ServiceTemplateSummaryList.AddMember("member", ServiceTemplateSummary)
-
-	_ServiceTemplateSupportedComponentSourceInputList_member = _ServiceTemplateSupportedComponentSourceInputList.AddMember("member", _ServiceTemplateSupportedComponentSourceType)
-
-	ServiceTemplateVersion_templateName = ServiceTemplateVersion.AddMember("templateName", _ResourceName)
-
-	ServiceTemplateVersion_majorVersion = ServiceTemplateVersion.AddMember("majorVersion", _TemplateVersionPart)
-
-	ServiceTemplateVersion_minorVersion = ServiceTemplateVersion.AddMember("minorVersion", _TemplateVersionPart)
-
-	ServiceTemplateVersion_recommendedMinorVersion = ServiceTemplateVersion.AddMember("recommendedMinorVersion", _TemplateVersionPart)
-
-	ServiceTemplateVersion_status = ServiceTemplateVersion.AddMember("status", _TemplateVersionStatus)
-
-	ServiceTemplateVersion_statusMessage = ServiceTemplateVersion.AddMember("statusMessage", _StatusMessage)
-
-	ServiceTemplateVersion_description = ServiceTemplateVersion.AddMember("description", _Description)
-
-	ServiceTemplateVersion_arn = ServiceTemplateVersion.AddMember("arn", _ServiceTemplateVersionArn)
-
-	ServiceTemplateVersion_createdAt = ServiceTemplateVersion.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServiceTemplateVersion_lastModifiedAt = ServiceTemplateVersion.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	ServiceTemplateVersion_compatibleEnvironmentTemplates = ServiceTemplateVersion.AddMember("compatibleEnvironmentTemplates", _CompatibleEnvironmentTemplateList)
-
-	ServiceTemplateVersion_schema = ServiceTemplateVersion.AddMember("schema", _TemplateSchema)
-
-	ServiceTemplateVersion_supportedComponentSources = ServiceTemplateVersion.AddMember("supportedComponentSources", _ServiceTemplateSupportedComponentSourceInputList)
-
-	ServiceTemplateVersionSummary_templateName = ServiceTemplateVersionSummary.AddMember("templateName", _ResourceName)
-
-	ServiceTemplateVersionSummary_majorVersion = ServiceTemplateVersionSummary.AddMember("majorVersion", _TemplateVersionPart)
-
-	ServiceTemplateVersionSummary_minorVersion = ServiceTemplateVersionSummary.AddMember("minorVersion", _TemplateVersionPart)
-
-	ServiceTemplateVersionSummary_recommendedMinorVersion = ServiceTemplateVersionSummary.AddMember("recommendedMinorVersion", _TemplateVersionPart)
-
-	ServiceTemplateVersionSummary_status = ServiceTemplateVersionSummary.AddMember("status", _TemplateVersionStatus)
-
-	ServiceTemplateVersionSummary_statusMessage = ServiceTemplateVersionSummary.AddMember("statusMessage", _StatusMessage)
-
-	ServiceTemplateVersionSummary_description = ServiceTemplateVersionSummary.AddMember("description", _Description)
-
-	ServiceTemplateVersionSummary_arn = ServiceTemplateVersionSummary.AddMember("arn", _ServiceTemplateVersionArn)
-
-	ServiceTemplateVersionSummary_createdAt = ServiceTemplateVersionSummary.AddMember("createdAt", smithyprelude.Timestamp)
-
-	ServiceTemplateVersionSummary_lastModifiedAt = ServiceTemplateVersionSummary.AddMember("lastModifiedAt", smithyprelude.Timestamp)
-
-	_ServiceTemplateVersionSummaryList_member = _ServiceTemplateVersionSummaryList.AddMember("member", ServiceTemplateVersionSummary)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TemplateSyncConfig_templateName = TemplateSyncConfig.AddMember("templateName", _ResourceName)
-
-	TemplateSyncConfig_templateType = TemplateSyncConfig.AddMember("templateType", _TemplateType)
-
-	TemplateSyncConfig_repositoryProvider = TemplateSyncConfig.AddMember("repositoryProvider", _RepositoryProvider)
-
-	TemplateSyncConfig_repositoryName = TemplateSyncConfig.AddMember("repositoryName", _RepositoryName)
-
-	TemplateSyncConfig_branch = TemplateSyncConfig.AddMember("branch", _GitBranchName)
-
-	TemplateSyncConfig_subdirectory = TemplateSyncConfig.AddMember("subdirectory", _Subdirectory)
-
-	TemplateVersionSourceInput_s3 = TemplateVersionSourceInput.AddMember("s3", S3ObjectSource)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _ErrorMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	AcceptEnvironmentAccountConnectionInput_id = AcceptEnvironmentAccountConnectionInput.AddMember("id", _EnvironmentAccountConnectionId)
-
-	AcceptEnvironmentAccountConnectionOutput_environmentAccountConnection = AcceptEnvironmentAccountConnectionOutput.AddMember("environmentAccountConnection", EnvironmentAccountConnection)
-
-	CancelComponentDeploymentInput_componentName = CancelComponentDeploymentInput.AddMember("componentName", _ResourceName)
-
-	CancelComponentDeploymentOutput_component = CancelComponentDeploymentOutput.AddMember("component", Component)
-
-	CancelEnvironmentDeploymentInput_environmentName = CancelEnvironmentDeploymentInput.AddMember("environmentName", _ResourceName)
-
-	CancelEnvironmentDeploymentOutput_environment = CancelEnvironmentDeploymentOutput.AddMember("environment", Environment)
-
-	CancelServiceInstanceDeploymentInput_serviceInstanceName = CancelServiceInstanceDeploymentInput.AddMember("serviceInstanceName", _ResourceName)
-
-	CancelServiceInstanceDeploymentInput_serviceName = CancelServiceInstanceDeploymentInput.AddMember("serviceName", _ResourceName)
-
-	CancelServiceInstanceDeploymentOutput_serviceInstance = CancelServiceInstanceDeploymentOutput.AddMember("serviceInstance", ServiceInstance)
-
-	CancelServicePipelineDeploymentInput_serviceName = CancelServicePipelineDeploymentInput.AddMember("serviceName", _ResourceName)
-
-	CancelServicePipelineDeploymentOutput_pipeline = CancelServicePipelineDeploymentOutput.AddMember("pipeline", ServicePipeline)
-
-	CreateComponentInput_name = CreateComponentInput.AddMember("name", _ResourceName)
-
-	CreateComponentInput_description = CreateComponentInput.AddMember("description", _Description)
-
-	CreateComponentInput_serviceName = CreateComponentInput.AddMember("serviceName", _ResourceName)
-
-	CreateComponentInput_serviceInstanceName = CreateComponentInput.AddMember("serviceInstanceName", _ResourceName)
-
-	CreateComponentInput_environmentName = CreateComponentInput.AddMember("environmentName", _ResourceName)
-
-	CreateComponentInput_templateFile = CreateComponentInput.AddMember("templateFile", _TemplateFileContents)
-
-	CreateComponentInput_manifest = CreateComponentInput.AddMember("manifest", _TemplateManifestContents)
-
-	CreateComponentInput_serviceSpec = CreateComponentInput.AddMember("serviceSpec", _SpecContents)
-
-	CreateComponentInput_tags = CreateComponentInput.AddMember("tags", _TagList)
-
-	CreateComponentInput_clientToken = CreateComponentInput.AddMember("clientToken", _ClientToken)
-
-	CreateComponentOutput_component = CreateComponentOutput.AddMember("component", Component)
-
-	CreateEnvironmentAccountConnectionInput_clientToken = CreateEnvironmentAccountConnectionInput.AddMember("clientToken", _ClientToken)
-
-	CreateEnvironmentAccountConnectionInput_managementAccountId = CreateEnvironmentAccountConnectionInput.AddMember("managementAccountId", _AwsAccountId)
-
-	CreateEnvironmentAccountConnectionInput_roleArn = CreateEnvironmentAccountConnectionInput.AddMember("roleArn", _RoleArn)
-
-	CreateEnvironmentAccountConnectionInput_environmentName = CreateEnvironmentAccountConnectionInput.AddMember("environmentName", _ResourceName)
-
-	CreateEnvironmentAccountConnectionInput_tags = CreateEnvironmentAccountConnectionInput.AddMember("tags", _TagList)
-
-	CreateEnvironmentAccountConnectionInput_componentRoleArn = CreateEnvironmentAccountConnectionInput.AddMember("componentRoleArn", _RoleArn)
-
-	CreateEnvironmentAccountConnectionInput_codebuildRoleArn = CreateEnvironmentAccountConnectionInput.AddMember("codebuildRoleArn", _RoleArn)
-
-	CreateEnvironmentAccountConnectionOutput_environmentAccountConnection = CreateEnvironmentAccountConnectionOutput.AddMember("environmentAccountConnection", EnvironmentAccountConnection)
-
-	CreateEnvironmentInput_name = CreateEnvironmentInput.AddMember("name", _ResourceName)
-
-	CreateEnvironmentInput_templateName = CreateEnvironmentInput.AddMember("templateName", _ResourceName)
-
-	CreateEnvironmentInput_templateMajorVersion = CreateEnvironmentInput.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	CreateEnvironmentInput_templateMinorVersion = CreateEnvironmentInput.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	CreateEnvironmentInput_description = CreateEnvironmentInput.AddMember("description", _Description)
-
-	CreateEnvironmentInput_spec = CreateEnvironmentInput.AddMember("spec", _SpecContents)
-
-	CreateEnvironmentInput_protonServiceRoleArn = CreateEnvironmentInput.AddMember("protonServiceRoleArn", _Arn)
-
-	CreateEnvironmentInput_environmentAccountConnectionId = CreateEnvironmentInput.AddMember("environmentAccountConnectionId", _EnvironmentAccountConnectionId)
-
-	CreateEnvironmentInput_tags = CreateEnvironmentInput.AddMember("tags", _TagList)
-
-	CreateEnvironmentInput_provisioningRepository = CreateEnvironmentInput.AddMember("provisioningRepository", RepositoryBranchInput)
-
-	CreateEnvironmentInput_componentRoleArn = CreateEnvironmentInput.AddMember("componentRoleArn", _RoleArn)
-
-	CreateEnvironmentInput_codebuildRoleArn = CreateEnvironmentInput.AddMember("codebuildRoleArn", _RoleArn)
-
-	CreateEnvironmentOutput_environment = CreateEnvironmentOutput.AddMember("environment", Environment)
-
-	CreateEnvironmentTemplateInput_name = CreateEnvironmentTemplateInput.AddMember("name", _ResourceName)
-
-	CreateEnvironmentTemplateInput_displayName = CreateEnvironmentTemplateInput.AddMember("displayName", _DisplayName)
-
-	CreateEnvironmentTemplateInput_description = CreateEnvironmentTemplateInput.AddMember("description", _Description)
-
-	CreateEnvironmentTemplateInput_encryptionKey = CreateEnvironmentTemplateInput.AddMember("encryptionKey", _Arn)
-
-	CreateEnvironmentTemplateInput_provisioning = CreateEnvironmentTemplateInput.AddMember("provisioning", _Provisioning)
-
-	CreateEnvironmentTemplateInput_tags = CreateEnvironmentTemplateInput.AddMember("tags", _TagList)
-
-	CreateEnvironmentTemplateOutput_environmentTemplate = CreateEnvironmentTemplateOutput.AddMember("environmentTemplate", EnvironmentTemplate)
-
-	CreateEnvironmentTemplateVersionInput_clientToken = CreateEnvironmentTemplateVersionInput.AddMember("clientToken", _ClientToken)
-
-	CreateEnvironmentTemplateVersionInput_templateName = CreateEnvironmentTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	CreateEnvironmentTemplateVersionInput_description = CreateEnvironmentTemplateVersionInput.AddMember("description", _Description)
-
-	CreateEnvironmentTemplateVersionInput_majorVersion = CreateEnvironmentTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	CreateEnvironmentTemplateVersionInput_source = CreateEnvironmentTemplateVersionInput.AddMember("source", TemplateVersionSourceInput)
-
-	CreateEnvironmentTemplateVersionInput_tags = CreateEnvironmentTemplateVersionInput.AddMember("tags", _TagList)
-
-	CreateEnvironmentTemplateVersionOutput_environmentTemplateVersion = CreateEnvironmentTemplateVersionOutput.AddMember("environmentTemplateVersion", EnvironmentTemplateVersion)
-
-	CreateRepositoryInput_provider = CreateRepositoryInput.AddMember("provider", _RepositoryProvider)
-
-	CreateRepositoryInput_name = CreateRepositoryInput.AddMember("name", _RepositoryName)
-
-	CreateRepositoryInput_connectionArn = CreateRepositoryInput.AddMember("connectionArn", _Arn)
-
-	CreateRepositoryInput_encryptionKey = CreateRepositoryInput.AddMember("encryptionKey", _Arn)
-
-	CreateRepositoryInput_tags = CreateRepositoryInput.AddMember("tags", _TagList)
-
-	CreateRepositoryOutput_repository = CreateRepositoryOutput.AddMember("repository", Repository)
-
-	CreateServiceInput_name = CreateServiceInput.AddMember("name", _ResourceName)
-
-	CreateServiceInput_description = CreateServiceInput.AddMember("description", _Description)
-
-	CreateServiceInput_templateName = CreateServiceInput.AddMember("templateName", _ResourceName)
-
-	CreateServiceInput_templateMajorVersion = CreateServiceInput.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	CreateServiceInput_templateMinorVersion = CreateServiceInput.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	CreateServiceInput_spec = CreateServiceInput.AddMember("spec", _SpecContents)
-
-	CreateServiceInput_repositoryConnectionArn = CreateServiceInput.AddMember("repositoryConnectionArn", _Arn)
-
-	CreateServiceInput_repositoryId = CreateServiceInput.AddMember("repositoryId", _RepositoryId)
-
-	CreateServiceInput_branchName = CreateServiceInput.AddMember("branchName", _GitBranchName)
-
-	CreateServiceInput_tags = CreateServiceInput.AddMember("tags", _TagList)
-
-	CreateServiceInstanceInput_name = CreateServiceInstanceInput.AddMember("name", _ResourceName)
-
-	CreateServiceInstanceInput_serviceName = CreateServiceInstanceInput.AddMember("serviceName", _ResourceName)
-
-	CreateServiceInstanceInput_spec = CreateServiceInstanceInput.AddMember("spec", _SpecContents)
-
-	CreateServiceInstanceInput_templateMajorVersion = CreateServiceInstanceInput.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	CreateServiceInstanceInput_templateMinorVersion = CreateServiceInstanceInput.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	CreateServiceInstanceInput_tags = CreateServiceInstanceInput.AddMember("tags", _TagList)
-
-	CreateServiceInstanceInput_clientToken = CreateServiceInstanceInput.AddMember("clientToken", _ClientToken)
-
-	CreateServiceInstanceOutput_serviceInstance = CreateServiceInstanceOutput.AddMember("serviceInstance", ServiceInstance)
-
-	CreateServiceOutput_service = CreateServiceOutput.AddMember("service", Service)
-
-	CreateServiceSyncConfigInput_serviceName = CreateServiceSyncConfigInput.AddMember("serviceName", _ResourceName)
-
-	CreateServiceSyncConfigInput_repositoryProvider = CreateServiceSyncConfigInput.AddMember("repositoryProvider", _RepositoryProvider)
-
-	CreateServiceSyncConfigInput_repositoryName = CreateServiceSyncConfigInput.AddMember("repositoryName", _RepositoryName)
-
-	CreateServiceSyncConfigInput_branch = CreateServiceSyncConfigInput.AddMember("branch", _GitBranchName)
-
-	CreateServiceSyncConfigInput_filePath = CreateServiceSyncConfigInput.AddMember("filePath", _OpsFilePath)
-
-	CreateServiceSyncConfigOutput_serviceSyncConfig = CreateServiceSyncConfigOutput.AddMember("serviceSyncConfig", ServiceSyncConfig)
-
-	CreateServiceTemplateInput_name = CreateServiceTemplateInput.AddMember("name", _ResourceName)
-
-	CreateServiceTemplateInput_displayName = CreateServiceTemplateInput.AddMember("displayName", _DisplayName)
-
-	CreateServiceTemplateInput_description = CreateServiceTemplateInput.AddMember("description", _Description)
-
-	CreateServiceTemplateInput_encryptionKey = CreateServiceTemplateInput.AddMember("encryptionKey", _Arn)
-
-	CreateServiceTemplateInput_pipelineProvisioning = CreateServiceTemplateInput.AddMember("pipelineProvisioning", _Provisioning)
-
-	CreateServiceTemplateInput_tags = CreateServiceTemplateInput.AddMember("tags", _TagList)
-
-	CreateServiceTemplateOutput_serviceTemplate = CreateServiceTemplateOutput.AddMember("serviceTemplate", ServiceTemplate)
-
-	CreateServiceTemplateVersionInput_clientToken = CreateServiceTemplateVersionInput.AddMember("clientToken", _ClientToken)
-
-	CreateServiceTemplateVersionInput_templateName = CreateServiceTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	CreateServiceTemplateVersionInput_description = CreateServiceTemplateVersionInput.AddMember("description", _Description)
-
-	CreateServiceTemplateVersionInput_majorVersion = CreateServiceTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	CreateServiceTemplateVersionInput_source = CreateServiceTemplateVersionInput.AddMember("source", TemplateVersionSourceInput)
-
-	CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates = CreateServiceTemplateVersionInput.AddMember("compatibleEnvironmentTemplates", _CompatibleEnvironmentTemplateInputList)
-
-	CreateServiceTemplateVersionInput_tags = CreateServiceTemplateVersionInput.AddMember("tags", _TagList)
-
-	CreateServiceTemplateVersionInput_supportedComponentSources = CreateServiceTemplateVersionInput.AddMember("supportedComponentSources", _ServiceTemplateSupportedComponentSourceInputList)
-
-	CreateServiceTemplateVersionOutput_serviceTemplateVersion = CreateServiceTemplateVersionOutput.AddMember("serviceTemplateVersion", ServiceTemplateVersion)
-
-	CreateTemplateSyncConfigInput_templateName = CreateTemplateSyncConfigInput.AddMember("templateName", _ResourceName)
-
-	CreateTemplateSyncConfigInput_templateType = CreateTemplateSyncConfigInput.AddMember("templateType", _TemplateType)
-
-	CreateTemplateSyncConfigInput_repositoryProvider = CreateTemplateSyncConfigInput.AddMember("repositoryProvider", _RepositoryProvider)
-
-	CreateTemplateSyncConfigInput_repositoryName = CreateTemplateSyncConfigInput.AddMember("repositoryName", _RepositoryName)
-
-	CreateTemplateSyncConfigInput_branch = CreateTemplateSyncConfigInput.AddMember("branch", _GitBranchName)
-
-	CreateTemplateSyncConfigInput_subdirectory = CreateTemplateSyncConfigInput.AddMember("subdirectory", _Subdirectory)
-
-	CreateTemplateSyncConfigOutput_templateSyncConfig = CreateTemplateSyncConfigOutput.AddMember("templateSyncConfig", TemplateSyncConfig)
-
-	DeleteComponentInput_name = DeleteComponentInput.AddMember("name", _ResourceName)
-
-	DeleteComponentOutput_component = DeleteComponentOutput.AddMember("component", Component)
-
-	DeleteDeploymentInput_id = DeleteDeploymentInput.AddMember("id", _DeploymentId)
-
-	DeleteDeploymentOutput_deployment = DeleteDeploymentOutput.AddMember("deployment", Deployment)
-
-	DeleteEnvironmentAccountConnectionInput_id = DeleteEnvironmentAccountConnectionInput.AddMember("id", _EnvironmentAccountConnectionId)
-
-	DeleteEnvironmentAccountConnectionOutput_environmentAccountConnection = DeleteEnvironmentAccountConnectionOutput.AddMember("environmentAccountConnection", EnvironmentAccountConnection)
-
-	DeleteEnvironmentInput_name = DeleteEnvironmentInput.AddMember("name", _ResourceName)
-
-	DeleteEnvironmentOutput_environment = DeleteEnvironmentOutput.AddMember("environment", Environment)
-
-	DeleteEnvironmentTemplateInput_name = DeleteEnvironmentTemplateInput.AddMember("name", _ResourceName)
-
-	DeleteEnvironmentTemplateOutput_environmentTemplate = DeleteEnvironmentTemplateOutput.AddMember("environmentTemplate", EnvironmentTemplate)
-
-	DeleteEnvironmentTemplateVersionInput_templateName = DeleteEnvironmentTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	DeleteEnvironmentTemplateVersionInput_majorVersion = DeleteEnvironmentTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	DeleteEnvironmentTemplateVersionInput_minorVersion = DeleteEnvironmentTemplateVersionInput.AddMember("minorVersion", _TemplateVersionPart)
-
-	DeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion = DeleteEnvironmentTemplateVersionOutput.AddMember("environmentTemplateVersion", EnvironmentTemplateVersion)
-
-	DeleteRepositoryInput_provider = DeleteRepositoryInput.AddMember("provider", _RepositoryProvider)
-
-	DeleteRepositoryInput_name = DeleteRepositoryInput.AddMember("name", _RepositoryName)
-
-	DeleteRepositoryOutput_repository = DeleteRepositoryOutput.AddMember("repository", Repository)
-
-	DeleteServiceInput_name = DeleteServiceInput.AddMember("name", _ResourceName)
-
-	DeleteServiceOutput_service = DeleteServiceOutput.AddMember("service", Service)
-
-	DeleteServiceSyncConfigInput_serviceName = DeleteServiceSyncConfigInput.AddMember("serviceName", _ResourceName)
-
-	DeleteServiceSyncConfigOutput_serviceSyncConfig = DeleteServiceSyncConfigOutput.AddMember("serviceSyncConfig", ServiceSyncConfig)
-
-	DeleteServiceTemplateInput_name = DeleteServiceTemplateInput.AddMember("name", _ResourceName)
-
-	DeleteServiceTemplateOutput_serviceTemplate = DeleteServiceTemplateOutput.AddMember("serviceTemplate", ServiceTemplate)
-
-	DeleteServiceTemplateVersionInput_templateName = DeleteServiceTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	DeleteServiceTemplateVersionInput_majorVersion = DeleteServiceTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	DeleteServiceTemplateVersionInput_minorVersion = DeleteServiceTemplateVersionInput.AddMember("minorVersion", _TemplateVersionPart)
-
-	DeleteServiceTemplateVersionOutput_serviceTemplateVersion = DeleteServiceTemplateVersionOutput.AddMember("serviceTemplateVersion", ServiceTemplateVersion)
-
-	DeleteTemplateSyncConfigInput_templateName = DeleteTemplateSyncConfigInput.AddMember("templateName", _ResourceName)
-
-	DeleteTemplateSyncConfigInput_templateType = DeleteTemplateSyncConfigInput.AddMember("templateType", _TemplateType)
-
-	DeleteTemplateSyncConfigOutput_templateSyncConfig = DeleteTemplateSyncConfigOutput.AddMember("templateSyncConfig", TemplateSyncConfig)
-
-	GetAccountSettingsOutput_accountSettings = GetAccountSettingsOutput.AddMember("accountSettings", AccountSettings)
-
-	GetComponentInput_name = GetComponentInput.AddMember("name", _ResourceName)
-
-	GetComponentOutput_component = GetComponentOutput.AddMember("component", Component)
-
-	GetDeploymentInput_id = GetDeploymentInput.AddMember("id", _DeploymentId)
-
-	GetDeploymentInput_environmentName = GetDeploymentInput.AddMember("environmentName", _ResourceName)
-
-	GetDeploymentInput_serviceName = GetDeploymentInput.AddMember("serviceName", _ResourceName)
-
-	GetDeploymentInput_serviceInstanceName = GetDeploymentInput.AddMember("serviceInstanceName", _ResourceName)
-
-	GetDeploymentInput_componentName = GetDeploymentInput.AddMember("componentName", _ResourceName)
-
-	GetDeploymentOutput_deployment = GetDeploymentOutput.AddMember("deployment", Deployment)
-
-	GetEnvironmentAccountConnectionInput_id = GetEnvironmentAccountConnectionInput.AddMember("id", _EnvironmentAccountConnectionId)
-
-	GetEnvironmentAccountConnectionOutput_environmentAccountConnection = GetEnvironmentAccountConnectionOutput.AddMember("environmentAccountConnection", EnvironmentAccountConnection)
-
-	GetEnvironmentInput_name = GetEnvironmentInput.AddMember("name", _ResourceName)
-
-	GetEnvironmentOutput_environment = GetEnvironmentOutput.AddMember("environment", Environment)
-
-	GetEnvironmentTemplateInput_name = GetEnvironmentTemplateInput.AddMember("name", _ResourceName)
-
-	GetEnvironmentTemplateOutput_environmentTemplate = GetEnvironmentTemplateOutput.AddMember("environmentTemplate", EnvironmentTemplate)
-
-	GetEnvironmentTemplateVersionInput_templateName = GetEnvironmentTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	GetEnvironmentTemplateVersionInput_majorVersion = GetEnvironmentTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	GetEnvironmentTemplateVersionInput_minorVersion = GetEnvironmentTemplateVersionInput.AddMember("minorVersion", _TemplateVersionPart)
-
-	GetEnvironmentTemplateVersionOutput_environmentTemplateVersion = GetEnvironmentTemplateVersionOutput.AddMember("environmentTemplateVersion", EnvironmentTemplateVersion)
-
-	GetRepositoryInput_provider = GetRepositoryInput.AddMember("provider", _RepositoryProvider)
-
-	GetRepositoryInput_name = GetRepositoryInput.AddMember("name", _RepositoryName)
-
-	GetRepositoryOutput_repository = GetRepositoryOutput.AddMember("repository", Repository)
-
-	GetRepositorySyncStatusInput_repositoryName = GetRepositorySyncStatusInput.AddMember("repositoryName", _RepositoryName)
-
-	GetRepositorySyncStatusInput_repositoryProvider = GetRepositorySyncStatusInput.AddMember("repositoryProvider", _RepositoryProvider)
-
-	GetRepositorySyncStatusInput_branch = GetRepositorySyncStatusInput.AddMember("branch", _GitBranchName)
-
-	GetRepositorySyncStatusInput_syncType = GetRepositorySyncStatusInput.AddMember("syncType", _SyncType)
-
-	GetRepositorySyncStatusOutput_latestSync = GetRepositorySyncStatusOutput.AddMember("latestSync", RepositorySyncAttempt)
-
-	GetResourcesSummaryOutput_counts = GetResourcesSummaryOutput.AddMember("counts", CountsSummary)
-
-	GetServiceInput_name = GetServiceInput.AddMember("name", _ResourceName)
-
-	GetServiceInstanceInput_name = GetServiceInstanceInput.AddMember("name", _ResourceName)
-
-	GetServiceInstanceInput_serviceName = GetServiceInstanceInput.AddMember("serviceName", _ResourceName)
-
-	GetServiceInstanceOutput_serviceInstance = GetServiceInstanceOutput.AddMember("serviceInstance", ServiceInstance)
-
-	GetServiceInstanceSyncStatusInput_serviceName = GetServiceInstanceSyncStatusInput.AddMember("serviceName", _ResourceName)
-
-	GetServiceInstanceSyncStatusInput_serviceInstanceName = GetServiceInstanceSyncStatusInput.AddMember("serviceInstanceName", _ResourceName)
-
-	GetServiceInstanceSyncStatusOutput_latestSync = GetServiceInstanceSyncStatusOutput.AddMember("latestSync", ResourceSyncAttempt)
-
-	GetServiceInstanceSyncStatusOutput_latestSuccessfulSync = GetServiceInstanceSyncStatusOutput.AddMember("latestSuccessfulSync", ResourceSyncAttempt)
-
-	GetServiceInstanceSyncStatusOutput_desiredState = GetServiceInstanceSyncStatusOutput.AddMember("desiredState", Revision)
-
-	GetServiceOutput_service = GetServiceOutput.AddMember("service", Service)
-
-	GetServiceSyncBlockerSummaryInput_serviceName = GetServiceSyncBlockerSummaryInput.AddMember("serviceName", _ResourceName)
-
-	GetServiceSyncBlockerSummaryInput_serviceInstanceName = GetServiceSyncBlockerSummaryInput.AddMember("serviceInstanceName", _ResourceName)
-
-	GetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary = GetServiceSyncBlockerSummaryOutput.AddMember("serviceSyncBlockerSummary", ServiceSyncBlockerSummary)
-
-	GetServiceSyncConfigInput_serviceName = GetServiceSyncConfigInput.AddMember("serviceName", _ResourceName)
-
-	GetServiceSyncConfigOutput_serviceSyncConfig = GetServiceSyncConfigOutput.AddMember("serviceSyncConfig", ServiceSyncConfig)
-
-	GetServiceTemplateInput_name = GetServiceTemplateInput.AddMember("name", _ResourceName)
-
-	GetServiceTemplateOutput_serviceTemplate = GetServiceTemplateOutput.AddMember("serviceTemplate", ServiceTemplate)
-
-	GetServiceTemplateVersionInput_templateName = GetServiceTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	GetServiceTemplateVersionInput_majorVersion = GetServiceTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	GetServiceTemplateVersionInput_minorVersion = GetServiceTemplateVersionInput.AddMember("minorVersion", _TemplateVersionPart)
-
-	GetServiceTemplateVersionOutput_serviceTemplateVersion = GetServiceTemplateVersionOutput.AddMember("serviceTemplateVersion", ServiceTemplateVersion)
-
-	GetTemplateSyncConfigInput_templateName = GetTemplateSyncConfigInput.AddMember("templateName", _ResourceName)
-
-	GetTemplateSyncConfigInput_templateType = GetTemplateSyncConfigInput.AddMember("templateType", _TemplateType)
-
-	GetTemplateSyncConfigOutput_templateSyncConfig = GetTemplateSyncConfigOutput.AddMember("templateSyncConfig", TemplateSyncConfig)
-
-	GetTemplateSyncStatusInput_templateName = GetTemplateSyncStatusInput.AddMember("templateName", _ResourceName)
-
-	GetTemplateSyncStatusInput_templateType = GetTemplateSyncStatusInput.AddMember("templateType", _TemplateType)
-
-	GetTemplateSyncStatusInput_templateVersion = GetTemplateSyncStatusInput.AddMember("templateVersion", _TemplateVersionPart)
-
-	GetTemplateSyncStatusOutput_latestSync = GetTemplateSyncStatusOutput.AddMember("latestSync", ResourceSyncAttempt)
-
-	GetTemplateSyncStatusOutput_latestSuccessfulSync = GetTemplateSyncStatusOutput.AddMember("latestSuccessfulSync", ResourceSyncAttempt)
-
-	GetTemplateSyncStatusOutput_desiredState = GetTemplateSyncStatusOutput.AddMember("desiredState", Revision)
-
-	ListComponentOutputsInput_componentName = ListComponentOutputsInput.AddMember("componentName", _ResourceName)
-
-	ListComponentOutputsInput_nextToken = ListComponentOutputsInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListComponentOutputsInput_deploymentId = ListComponentOutputsInput.AddMember("deploymentId", _DeploymentId)
-
-	ListComponentOutputsOutput_nextToken = ListComponentOutputsOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListComponentOutputsOutput_outputs = ListComponentOutputsOutput.AddMember("outputs", _OutputsList)
-
-	ListComponentProvisionedResourcesInput_componentName = ListComponentProvisionedResourcesInput.AddMember("componentName", _ResourceName)
-
-	ListComponentProvisionedResourcesInput_nextToken = ListComponentProvisionedResourcesInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListComponentProvisionedResourcesOutput_nextToken = ListComponentProvisionedResourcesOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListComponentProvisionedResourcesOutput_provisionedResources = ListComponentProvisionedResourcesOutput.AddMember("provisionedResources", _ProvisionedResourceList)
-
-	ListComponentsInput_nextToken = ListComponentsInput.AddMember("nextToken", _NextToken)
-
-	ListComponentsInput_environmentName = ListComponentsInput.AddMember("environmentName", _ResourceName)
-
-	ListComponentsInput_serviceName = ListComponentsInput.AddMember("serviceName", _ResourceName)
-
-	ListComponentsInput_serviceInstanceName = ListComponentsInput.AddMember("serviceInstanceName", _ResourceName)
-
-	ListComponentsInput_maxResults = ListComponentsInput.AddMember("maxResults", _MaxPageResults)
-
-	ListComponentsOutput_nextToken = ListComponentsOutput.AddMember("nextToken", _NextToken)
-
-	ListComponentsOutput_components = ListComponentsOutput.AddMember("components", _ComponentSummaryList)
-
-	ListDeploymentsInput_nextToken = ListDeploymentsInput.AddMember("nextToken", _NextToken)
-
-	ListDeploymentsInput_environmentName = ListDeploymentsInput.AddMember("environmentName", _ResourceName)
-
-	ListDeploymentsInput_serviceName = ListDeploymentsInput.AddMember("serviceName", _ResourceName)
-
-	ListDeploymentsInput_serviceInstanceName = ListDeploymentsInput.AddMember("serviceInstanceName", _ResourceName)
-
-	ListDeploymentsInput_componentName = ListDeploymentsInput.AddMember("componentName", _ResourceName)
-
-	ListDeploymentsInput_maxResults = ListDeploymentsInput.AddMember("maxResults", _MaxPageResults)
-
-	ListDeploymentsOutput_nextToken = ListDeploymentsOutput.AddMember("nextToken", _NextToken)
-
-	ListDeploymentsOutput_deployments = ListDeploymentsOutput.AddMember("deployments", _DeploymentSummaryList)
-
-	ListEnvironmentAccountConnectionsInput_requestedBy = ListEnvironmentAccountConnectionsInput.AddMember("requestedBy", _EnvironmentAccountConnectionRequesterAccountType)
-
-	ListEnvironmentAccountConnectionsInput_environmentName = ListEnvironmentAccountConnectionsInput.AddMember("environmentName", _ResourceName)
-
-	ListEnvironmentAccountConnectionsInput_statuses = ListEnvironmentAccountConnectionsInput.AddMember("statuses", _EnvironmentAccountConnectionStatusList)
-
-	ListEnvironmentAccountConnectionsInput_nextToken = ListEnvironmentAccountConnectionsInput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentAccountConnectionsInput_maxResults = ListEnvironmentAccountConnectionsInput.AddMember("maxResults", _MaxPageResults)
-
-	ListEnvironmentAccountConnectionsOutput_environmentAccountConnections = ListEnvironmentAccountConnectionsOutput.AddMember("environmentAccountConnections", _EnvironmentAccountConnectionSummaryList)
-
-	ListEnvironmentAccountConnectionsOutput_nextToken = ListEnvironmentAccountConnectionsOutput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentOutputsInput_environmentName = ListEnvironmentOutputsInput.AddMember("environmentName", _ResourceName)
-
-	ListEnvironmentOutputsInput_nextToken = ListEnvironmentOutputsInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListEnvironmentOutputsInput_deploymentId = ListEnvironmentOutputsInput.AddMember("deploymentId", _DeploymentId)
-
-	ListEnvironmentOutputsOutput_nextToken = ListEnvironmentOutputsOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListEnvironmentOutputsOutput_outputs = ListEnvironmentOutputsOutput.AddMember("outputs", _OutputsList)
-
-	ListEnvironmentProvisionedResourcesInput_environmentName = ListEnvironmentProvisionedResourcesInput.AddMember("environmentName", _ResourceName)
-
-	ListEnvironmentProvisionedResourcesInput_nextToken = ListEnvironmentProvisionedResourcesInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListEnvironmentProvisionedResourcesOutput_nextToken = ListEnvironmentProvisionedResourcesOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListEnvironmentProvisionedResourcesOutput_provisionedResources = ListEnvironmentProvisionedResourcesOutput.AddMember("provisionedResources", _ProvisionedResourceList)
-
-	ListEnvironmentsInput_nextToken = ListEnvironmentsInput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentsInput_maxResults = ListEnvironmentsInput.AddMember("maxResults", _MaxPageResults)
-
-	ListEnvironmentsInput_environmentTemplates = ListEnvironmentsInput.AddMember("environmentTemplates", _EnvironmentTemplateFilterList)
-
-	ListEnvironmentsOutput_nextToken = ListEnvironmentsOutput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentsOutput_environments = ListEnvironmentsOutput.AddMember("environments", _EnvironmentSummaryList)
-
-	ListEnvironmentTemplatesInput_nextToken = ListEnvironmentTemplatesInput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentTemplatesInput_maxResults = ListEnvironmentTemplatesInput.AddMember("maxResults", _MaxPageResults)
-
-	ListEnvironmentTemplatesOutput_nextToken = ListEnvironmentTemplatesOutput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentTemplatesOutput_templates = ListEnvironmentTemplatesOutput.AddMember("templates", _EnvironmentTemplateSummaryList)
-
-	ListEnvironmentTemplateVersionsInput_nextToken = ListEnvironmentTemplateVersionsInput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentTemplateVersionsInput_maxResults = ListEnvironmentTemplateVersionsInput.AddMember("maxResults", _MaxPageResults)
-
-	ListEnvironmentTemplateVersionsInput_templateName = ListEnvironmentTemplateVersionsInput.AddMember("templateName", _ResourceName)
-
-	ListEnvironmentTemplateVersionsInput_majorVersion = ListEnvironmentTemplateVersionsInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	ListEnvironmentTemplateVersionsOutput_nextToken = ListEnvironmentTemplateVersionsOutput.AddMember("nextToken", _NextToken)
-
-	ListEnvironmentTemplateVersionsOutput_templateVersions = ListEnvironmentTemplateVersionsOutput.AddMember("templateVersions", _EnvironmentTemplateVersionSummaryList)
-
-	ListRepositoriesInput_nextToken = ListRepositoriesInput.AddMember("nextToken", _NextToken)
-
-	ListRepositoriesInput_maxResults = ListRepositoriesInput.AddMember("maxResults", _MaxPageResults)
-
-	ListRepositoriesOutput_nextToken = ListRepositoriesOutput.AddMember("nextToken", _NextToken)
-
-	ListRepositoriesOutput_repositories = ListRepositoriesOutput.AddMember("repositories", _RepositorySummaryList)
-
-	ListRepositorySyncDefinitionsInput_repositoryName = ListRepositorySyncDefinitionsInput.AddMember("repositoryName", _RepositoryName)
-
-	ListRepositorySyncDefinitionsInput_repositoryProvider = ListRepositorySyncDefinitionsInput.AddMember("repositoryProvider", _RepositoryProvider)
-
-	ListRepositorySyncDefinitionsInput_syncType = ListRepositorySyncDefinitionsInput.AddMember("syncType", _SyncType)
-
-	ListRepositorySyncDefinitionsInput_nextToken = ListRepositorySyncDefinitionsInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListRepositorySyncDefinitionsOutput_nextToken = ListRepositorySyncDefinitionsOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListRepositorySyncDefinitionsOutput_syncDefinitions = ListRepositorySyncDefinitionsOutput.AddMember("syncDefinitions", _RepositorySyncDefinitionList)
-
-	ListServiceInstanceOutputsInput_serviceInstanceName = ListServiceInstanceOutputsInput.AddMember("serviceInstanceName", _ResourceName)
-
-	ListServiceInstanceOutputsInput_serviceName = ListServiceInstanceOutputsInput.AddMember("serviceName", _ResourceName)
-
-	ListServiceInstanceOutputsInput_nextToken = ListServiceInstanceOutputsInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServiceInstanceOutputsInput_deploymentId = ListServiceInstanceOutputsInput.AddMember("deploymentId", _DeploymentId)
-
-	ListServiceInstanceOutputsOutput_nextToken = ListServiceInstanceOutputsOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServiceInstanceOutputsOutput_outputs = ListServiceInstanceOutputsOutput.AddMember("outputs", _OutputsList)
-
-	ListServiceInstanceProvisionedResourcesInput_serviceName = ListServiceInstanceProvisionedResourcesInput.AddMember("serviceName", _ResourceName)
-
-	ListServiceInstanceProvisionedResourcesInput_serviceInstanceName = ListServiceInstanceProvisionedResourcesInput.AddMember("serviceInstanceName", _ResourceName)
-
-	ListServiceInstanceProvisionedResourcesInput_nextToken = ListServiceInstanceProvisionedResourcesInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServiceInstanceProvisionedResourcesOutput_nextToken = ListServiceInstanceProvisionedResourcesOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServiceInstanceProvisionedResourcesOutput_provisionedResources = ListServiceInstanceProvisionedResourcesOutput.AddMember("provisionedResources", _ProvisionedResourceList)
-
-	ListServiceInstancesInput_serviceName = ListServiceInstancesInput.AddMember("serviceName", _ResourceName)
-
-	ListServiceInstancesInput_nextToken = ListServiceInstancesInput.AddMember("nextToken", _NextToken)
-
-	ListServiceInstancesInput_maxResults = ListServiceInstancesInput.AddMember("maxResults", _MaxPageResults)
-
-	ListServiceInstancesInput_filters = ListServiceInstancesInput.AddMember("filters", _ListServiceInstancesFilterList)
-
-	ListServiceInstancesInput_sortBy = ListServiceInstancesInput.AddMember("sortBy", _ListServiceInstancesSortBy)
-
-	ListServiceInstancesInput_sortOrder = ListServiceInstancesInput.AddMember("sortOrder", _SortOrder)
-
-	ListServiceInstancesOutput_nextToken = ListServiceInstancesOutput.AddMember("nextToken", _NextToken)
-
-	ListServiceInstancesOutput_serviceInstances = ListServiceInstancesOutput.AddMember("serviceInstances", _ServiceInstanceSummaryList)
-
-	ListServicePipelineOutputsInput_serviceName = ListServicePipelineOutputsInput.AddMember("serviceName", _ResourceName)
-
-	ListServicePipelineOutputsInput_nextToken = ListServicePipelineOutputsInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServicePipelineOutputsInput_deploymentId = ListServicePipelineOutputsInput.AddMember("deploymentId", _DeploymentId)
-
-	ListServicePipelineOutputsOutput_nextToken = ListServicePipelineOutputsOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServicePipelineOutputsOutput_outputs = ListServicePipelineOutputsOutput.AddMember("outputs", _OutputsList)
-
-	ListServicePipelineProvisionedResourcesInput_serviceName = ListServicePipelineProvisionedResourcesInput.AddMember("serviceName", _ResourceName)
-
-	ListServicePipelineProvisionedResourcesInput_nextToken = ListServicePipelineProvisionedResourcesInput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServicePipelineProvisionedResourcesOutput_nextToken = ListServicePipelineProvisionedResourcesOutput.AddMember("nextToken", _EmptyNextToken)
-
-	ListServicePipelineProvisionedResourcesOutput_provisionedResources = ListServicePipelineProvisionedResourcesOutput.AddMember("provisionedResources", _ProvisionedResourceList)
-
-	ListServicesInput_nextToken = ListServicesInput.AddMember("nextToken", _NextToken)
-
-	ListServicesInput_maxResults = ListServicesInput.AddMember("maxResults", _MaxPageResults)
-
-	ListServicesOutput_nextToken = ListServicesOutput.AddMember("nextToken", _NextToken)
-
-	ListServicesOutput_services = ListServicesOutput.AddMember("services", _ServiceSummaryList)
-
-	ListServiceTemplatesInput_nextToken = ListServiceTemplatesInput.AddMember("nextToken", _NextToken)
-
-	ListServiceTemplatesInput_maxResults = ListServiceTemplatesInput.AddMember("maxResults", _MaxPageResults)
-
-	ListServiceTemplatesOutput_nextToken = ListServiceTemplatesOutput.AddMember("nextToken", _NextToken)
-
-	ListServiceTemplatesOutput_templates = ListServiceTemplatesOutput.AddMember("templates", _ServiceTemplateSummaryList)
-
-	ListServiceTemplateVersionsInput_nextToken = ListServiceTemplateVersionsInput.AddMember("nextToken", _NextToken)
-
-	ListServiceTemplateVersionsInput_maxResults = ListServiceTemplateVersionsInput.AddMember("maxResults", _MaxPageResults)
-
-	ListServiceTemplateVersionsInput_templateName = ListServiceTemplateVersionsInput.AddMember("templateName", _ResourceName)
-
-	ListServiceTemplateVersionsInput_majorVersion = ListServiceTemplateVersionsInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	ListServiceTemplateVersionsOutput_nextToken = ListServiceTemplateVersionsOutput.AddMember("nextToken", _NextToken)
-
-	ListServiceTemplateVersionsOutput_templateVersions = ListServiceTemplateVersionsOutput.AddMember("templateVersions", _ServiceTemplateVersionSummaryList)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceInput_nextToken = ListTagsForResourceInput.AddMember("nextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListTagsForResourceInput_maxResults = ListTagsForResourceInput.AddMember("maxResults", _MaxPageResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagList)
-
-	ListTagsForResourceOutput_nextToken = ListTagsForResourceOutput.AddMember("nextToken", smithyprelude.String)
-
-	NotifyResourceDeploymentStatusChangeInput_resourceArn = NotifyResourceDeploymentStatusChangeInput.AddMember("resourceArn", _Arn)
-
-	NotifyResourceDeploymentStatusChangeInput_status = NotifyResourceDeploymentStatusChangeInput.AddMember("status", _ResourceDeploymentStatus)
-
-	NotifyResourceDeploymentStatusChangeInput_outputs = NotifyResourceDeploymentStatusChangeInput.AddMember("outputs", _OutputsList)
-
-	NotifyResourceDeploymentStatusChangeInput_deploymentId = NotifyResourceDeploymentStatusChangeInput.AddMember("deploymentId", _DeploymentId)
-
-	NotifyResourceDeploymentStatusChangeInput_statusMessage = NotifyResourceDeploymentStatusChangeInput.AddMember("statusMessage", _StatusMessage)
-
-	RejectEnvironmentAccountConnectionInput_id = RejectEnvironmentAccountConnectionInput.AddMember("id", _EnvironmentAccountConnectionId)
-
-	RejectEnvironmentAccountConnectionOutput_environmentAccountConnection = RejectEnvironmentAccountConnectionOutput.AddMember("environmentAccountConnection", EnvironmentAccountConnection)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagList)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeyList)
-
-	UpdateAccountSettingsInput_pipelineServiceRoleArn = UpdateAccountSettingsInput.AddMember("pipelineServiceRoleArn", _RoleArnOrEmptyString)
-
-	UpdateAccountSettingsInput_pipelineProvisioningRepository = UpdateAccountSettingsInput.AddMember("pipelineProvisioningRepository", RepositoryBranchInput)
-
-	UpdateAccountSettingsInput_deletePipelineProvisioningRepository = UpdateAccountSettingsInput.AddMember("deletePipelineProvisioningRepository", smithyprelude.Boolean)
-
-	UpdateAccountSettingsInput_pipelineCodebuildRoleArn = UpdateAccountSettingsInput.AddMember("pipelineCodebuildRoleArn", _RoleArnOrEmptyString)
-
-	UpdateAccountSettingsOutput_accountSettings = UpdateAccountSettingsOutput.AddMember("accountSettings", AccountSettings)
-
-	UpdateComponentInput_name = UpdateComponentInput.AddMember("name", _ResourceName)
-
-	UpdateComponentInput_deploymentType = UpdateComponentInput.AddMember("deploymentType", _ComponentDeploymentUpdateType)
-
-	UpdateComponentInput_description = UpdateComponentInput.AddMember("description", _Description)
-
-	UpdateComponentInput_serviceName = UpdateComponentInput.AddMember("serviceName", _ResourceNameOrEmpty)
-
-	UpdateComponentInput_serviceInstanceName = UpdateComponentInput.AddMember("serviceInstanceName", _ResourceNameOrEmpty)
-
-	UpdateComponentInput_serviceSpec = UpdateComponentInput.AddMember("serviceSpec", _SpecContents)
-
-	UpdateComponentInput_templateFile = UpdateComponentInput.AddMember("templateFile", _TemplateFileContents)
-
-	UpdateComponentInput_clientToken = UpdateComponentInput.AddMember("clientToken", _ClientToken)
-
-	UpdateComponentOutput_component = UpdateComponentOutput.AddMember("component", Component)
-
-	UpdateEnvironmentAccountConnectionInput_id = UpdateEnvironmentAccountConnectionInput.AddMember("id", _EnvironmentAccountConnectionId)
-
-	UpdateEnvironmentAccountConnectionInput_roleArn = UpdateEnvironmentAccountConnectionInput.AddMember("roleArn", _RoleArn)
-
-	UpdateEnvironmentAccountConnectionInput_componentRoleArn = UpdateEnvironmentAccountConnectionInput.AddMember("componentRoleArn", _RoleArn)
-
-	UpdateEnvironmentAccountConnectionInput_codebuildRoleArn = UpdateEnvironmentAccountConnectionInput.AddMember("codebuildRoleArn", _RoleArn)
-
-	UpdateEnvironmentAccountConnectionOutput_environmentAccountConnection = UpdateEnvironmentAccountConnectionOutput.AddMember("environmentAccountConnection", EnvironmentAccountConnection)
-
-	UpdateEnvironmentInput_name = UpdateEnvironmentInput.AddMember("name", _ResourceName)
-
-	UpdateEnvironmentInput_description = UpdateEnvironmentInput.AddMember("description", _Description)
-
-	UpdateEnvironmentInput_spec = UpdateEnvironmentInput.AddMember("spec", _SpecContents)
-
-	UpdateEnvironmentInput_templateMajorVersion = UpdateEnvironmentInput.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	UpdateEnvironmentInput_templateMinorVersion = UpdateEnvironmentInput.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	UpdateEnvironmentInput_protonServiceRoleArn = UpdateEnvironmentInput.AddMember("protonServiceRoleArn", _Arn)
-
-	UpdateEnvironmentInput_deploymentType = UpdateEnvironmentInput.AddMember("deploymentType", _DeploymentUpdateType)
-
-	UpdateEnvironmentInput_environmentAccountConnectionId = UpdateEnvironmentInput.AddMember("environmentAccountConnectionId", _EnvironmentAccountConnectionId)
-
-	UpdateEnvironmentInput_provisioningRepository = UpdateEnvironmentInput.AddMember("provisioningRepository", RepositoryBranchInput)
-
-	UpdateEnvironmentInput_componentRoleArn = UpdateEnvironmentInput.AddMember("componentRoleArn", _RoleArn)
-
-	UpdateEnvironmentInput_codebuildRoleArn = UpdateEnvironmentInput.AddMember("codebuildRoleArn", _RoleArn)
-
-	UpdateEnvironmentOutput_environment = UpdateEnvironmentOutput.AddMember("environment", Environment)
-
-	UpdateEnvironmentTemplateInput_name = UpdateEnvironmentTemplateInput.AddMember("name", _ResourceName)
-
-	UpdateEnvironmentTemplateInput_displayName = UpdateEnvironmentTemplateInput.AddMember("displayName", _DisplayName)
-
-	UpdateEnvironmentTemplateInput_description = UpdateEnvironmentTemplateInput.AddMember("description", _Description)
-
-	UpdateEnvironmentTemplateOutput_environmentTemplate = UpdateEnvironmentTemplateOutput.AddMember("environmentTemplate", EnvironmentTemplate)
-
-	UpdateEnvironmentTemplateVersionInput_templateName = UpdateEnvironmentTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	UpdateEnvironmentTemplateVersionInput_majorVersion = UpdateEnvironmentTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	UpdateEnvironmentTemplateVersionInput_minorVersion = UpdateEnvironmentTemplateVersionInput.AddMember("minorVersion", _TemplateVersionPart)
-
-	UpdateEnvironmentTemplateVersionInput_description = UpdateEnvironmentTemplateVersionInput.AddMember("description", _Description)
-
-	UpdateEnvironmentTemplateVersionInput_status = UpdateEnvironmentTemplateVersionInput.AddMember("status", _TemplateVersionStatus)
-
-	UpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion = UpdateEnvironmentTemplateVersionOutput.AddMember("environmentTemplateVersion", EnvironmentTemplateVersion)
-
-	UpdateServiceInput_name = UpdateServiceInput.AddMember("name", _ResourceName)
-
-	UpdateServiceInput_description = UpdateServiceInput.AddMember("description", _Description)
-
-	UpdateServiceInput_spec = UpdateServiceInput.AddMember("spec", _SpecContents)
-
-	UpdateServiceInstanceInput_name = UpdateServiceInstanceInput.AddMember("name", _ResourceName)
-
-	UpdateServiceInstanceInput_serviceName = UpdateServiceInstanceInput.AddMember("serviceName", _ResourceName)
-
-	UpdateServiceInstanceInput_deploymentType = UpdateServiceInstanceInput.AddMember("deploymentType", _DeploymentUpdateType)
-
-	UpdateServiceInstanceInput_spec = UpdateServiceInstanceInput.AddMember("spec", _SpecContents)
-
-	UpdateServiceInstanceInput_templateMajorVersion = UpdateServiceInstanceInput.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	UpdateServiceInstanceInput_templateMinorVersion = UpdateServiceInstanceInput.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	UpdateServiceInstanceInput_clientToken = UpdateServiceInstanceInput.AddMember("clientToken", _ClientToken)
-
-	UpdateServiceInstanceOutput_serviceInstance = UpdateServiceInstanceOutput.AddMember("serviceInstance", ServiceInstance)
-
-	UpdateServiceOutput_service = UpdateServiceOutput.AddMember("service", Service)
-
-	UpdateServicePipelineInput_serviceName = UpdateServicePipelineInput.AddMember("serviceName", _ResourceName)
-
-	UpdateServicePipelineInput_spec = UpdateServicePipelineInput.AddMember("spec", _SpecContents)
-
-	UpdateServicePipelineInput_deploymentType = UpdateServicePipelineInput.AddMember("deploymentType", _DeploymentUpdateType)
-
-	UpdateServicePipelineInput_templateMajorVersion = UpdateServicePipelineInput.AddMember("templateMajorVersion", _TemplateVersionPart)
-
-	UpdateServicePipelineInput_templateMinorVersion = UpdateServicePipelineInput.AddMember("templateMinorVersion", _TemplateVersionPart)
-
-	UpdateServicePipelineOutput_pipeline = UpdateServicePipelineOutput.AddMember("pipeline", ServicePipeline)
-
-	UpdateServiceSyncBlockerInput_id = UpdateServiceSyncBlockerInput.AddMember("id", smithyprelude.String)
-
-	UpdateServiceSyncBlockerInput_resolvedReason = UpdateServiceSyncBlockerInput.AddMember("resolvedReason", smithyprelude.String)
-
-	UpdateServiceSyncBlockerOutput_serviceName = UpdateServiceSyncBlockerOutput.AddMember("serviceName", _ResourceName)
-
-	UpdateServiceSyncBlockerOutput_serviceInstanceName = UpdateServiceSyncBlockerOutput.AddMember("serviceInstanceName", _ResourceName)
-
-	UpdateServiceSyncBlockerOutput_serviceSyncBlocker = UpdateServiceSyncBlockerOutput.AddMember("serviceSyncBlocker", SyncBlocker)
-
-	UpdateServiceSyncConfigInput_serviceName = UpdateServiceSyncConfigInput.AddMember("serviceName", _ResourceName)
-
-	UpdateServiceSyncConfigInput_repositoryProvider = UpdateServiceSyncConfigInput.AddMember("repositoryProvider", _RepositoryProvider)
-
-	UpdateServiceSyncConfigInput_repositoryName = UpdateServiceSyncConfigInput.AddMember("repositoryName", _RepositoryName)
-
-	UpdateServiceSyncConfigInput_branch = UpdateServiceSyncConfigInput.AddMember("branch", _GitBranchName)
-
-	UpdateServiceSyncConfigInput_filePath = UpdateServiceSyncConfigInput.AddMember("filePath", _OpsFilePath)
-
-	UpdateServiceSyncConfigOutput_serviceSyncConfig = UpdateServiceSyncConfigOutput.AddMember("serviceSyncConfig", ServiceSyncConfig)
-
-	UpdateServiceTemplateInput_name = UpdateServiceTemplateInput.AddMember("name", _ResourceName)
-
-	UpdateServiceTemplateInput_displayName = UpdateServiceTemplateInput.AddMember("displayName", _DisplayName)
-
-	UpdateServiceTemplateInput_description = UpdateServiceTemplateInput.AddMember("description", _Description)
-
-	UpdateServiceTemplateOutput_serviceTemplate = UpdateServiceTemplateOutput.AddMember("serviceTemplate", ServiceTemplate)
-
-	UpdateServiceTemplateVersionInput_templateName = UpdateServiceTemplateVersionInput.AddMember("templateName", _ResourceName)
-
-	UpdateServiceTemplateVersionInput_majorVersion = UpdateServiceTemplateVersionInput.AddMember("majorVersion", _TemplateVersionPart)
-
-	UpdateServiceTemplateVersionInput_minorVersion = UpdateServiceTemplateVersionInput.AddMember("minorVersion", _TemplateVersionPart)
-
-	UpdateServiceTemplateVersionInput_description = UpdateServiceTemplateVersionInput.AddMember("description", _Description)
-
-	UpdateServiceTemplateVersionInput_status = UpdateServiceTemplateVersionInput.AddMember("status", _TemplateVersionStatus)
-
-	UpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates = UpdateServiceTemplateVersionInput.AddMember("compatibleEnvironmentTemplates", _CompatibleEnvironmentTemplateInputList)
-
-	UpdateServiceTemplateVersionInput_supportedComponentSources = UpdateServiceTemplateVersionInput.AddMember("supportedComponentSources", _ServiceTemplateSupportedComponentSourceInputList)
-
-	UpdateServiceTemplateVersionOutput_serviceTemplateVersion = UpdateServiceTemplateVersionOutput.AddMember("serviceTemplateVersion", ServiceTemplateVersion)
-
-	UpdateTemplateSyncConfigInput_templateName = UpdateTemplateSyncConfigInput.AddMember("templateName", _ResourceName)
-
-	UpdateTemplateSyncConfigInput_templateType = UpdateTemplateSyncConfigInput.AddMember("templateType", _TemplateType)
-
-	UpdateTemplateSyncConfigInput_repositoryProvider = UpdateTemplateSyncConfigInput.AddMember("repositoryProvider", _RepositoryProvider)
-
-	UpdateTemplateSyncConfigInput_repositoryName = UpdateTemplateSyncConfigInput.AddMember("repositoryName", _RepositoryName)
-
-	UpdateTemplateSyncConfigInput_branch = UpdateTemplateSyncConfigInput.AddMember("branch", _GitBranchName)
-
-	UpdateTemplateSyncConfigInput_subdirectory = UpdateTemplateSyncConfigInput.AddMember("subdirectory", _Subdirectory)
-
-	UpdateTemplateSyncConfigOutput_templateSyncConfig = UpdateTemplateSyncConfigOutput.AddMember("templateSyncConfig", TemplateSyncConfig)
-
-}
+var (
+	iAcceptEnvironmentAccountConnection                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "AcceptEnvironmentAccountConnection"}
+	iCancelComponentDeployment                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelComponentDeployment"}
+	iCancelEnvironmentDeployment                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelEnvironmentDeployment"}
+	iCancelServiceInstanceDeployment                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelServiceInstanceDeployment"}
+	iCancelServicePipelineDeployment                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelServicePipelineDeployment"}
+	iCreateComponent                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateComponent"}
+	iCreateEnvironment                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironment"}
+	iCreateEnvironmentAccountConnection                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentAccountConnection"}
+	iCreateEnvironmentTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentTemplate"}
+	iCreateEnvironmentTemplateVersion                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentTemplateVersion"}
+	iCreateRepository                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateRepository"}
+	iCreateService                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateService"}
+	iCreateServiceInstance                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceInstance"}
+	iCreateServiceSyncConfig                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceSyncConfig"}
+	iCreateServiceTemplate                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceTemplate"}
+	iCreateServiceTemplateVersion                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceTemplateVersion"}
+	iCreateTemplateSyncConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateTemplateSyncConfig"}
+	iDeleteComponent                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteComponent"}
+	iDeleteDeployment                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteDeployment"}
+	iDeleteEnvironment                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironment"}
+	iDeleteEnvironmentAccountConnection                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentAccountConnection"}
+	iDeleteEnvironmentTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentTemplate"}
+	iDeleteEnvironmentTemplateVersion                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentTemplateVersion"}
+	iDeleteRepository                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteRepository"}
+	iDeleteService                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteService"}
+	iDeleteServiceSyncConfig                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceSyncConfig"}
+	iDeleteServiceTemplate                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceTemplate"}
+	iDeleteServiceTemplateVersion                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceTemplateVersion"}
+	iDeleteTemplateSyncConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteTemplateSyncConfig"}
+	iGetAccountSettings                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetAccountSettings"}
+	iGetComponent                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetComponent"}
+	iGetDeployment                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetDeployment"}
+	iGetEnvironment                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironment"}
+	iGetEnvironmentAccountConnection                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentAccountConnection"}
+	iGetEnvironmentTemplate                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentTemplate"}
+	iGetEnvironmentTemplateVersion                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentTemplateVersion"}
+	iGetRepository                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetRepository"}
+	iGetRepositorySyncStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetRepositorySyncStatus"}
+	iGetResourcesSummary                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetResourcesSummary"}
+	iGetService                                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetService"}
+	iGetServiceInstance                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceInstance"}
+	iGetServiceInstanceSyncStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceInstanceSyncStatus"}
+	iGetServiceSyncBlockerSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceSyncBlockerSummary"}
+	iGetServiceSyncConfig                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceSyncConfig"}
+	iGetServiceTemplate                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceTemplate"}
+	iGetServiceTemplateVersion                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceTemplateVersion"}
+	iGetTemplateSyncConfig                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetTemplateSyncConfig"}
+	iGetTemplateSyncStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetTemplateSyncStatus"}
+	iListComponentOutputs                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentOutputs"}
+	iListComponentProvisionedResources                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentProvisionedResources"}
+	iListComponents                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponents"}
+	iListDeployments                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListDeployments"}
+	iListEnvironmentAccountConnections                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentAccountConnections"}
+	iListEnvironmentOutputs                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentOutputs"}
+	iListEnvironmentProvisionedResources               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentProvisionedResources"}
+	iListEnvironments                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironments"}
+	iListEnvironmentTemplates                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentTemplates"}
+	iListEnvironmentTemplateVersions                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentTemplateVersions"}
+	iListRepositories                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListRepositories"}
+	iListRepositorySyncDefinitions                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListRepositorySyncDefinitions"}
+	iListServiceInstanceOutputs                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstanceOutputs"}
+	iListServiceInstanceProvisionedResources           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstanceProvisionedResources"}
+	iListServiceInstances                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstances"}
+	iListServicePipelineOutputs                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicePipelineOutputs"}
+	iListServicePipelineProvisionedResources           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicePipelineProvisionedResources"}
+	iListServices                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServices"}
+	iListServiceTemplates                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceTemplates"}
+	iListServiceTemplateVersions                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceTemplateVersions"}
+	iListTagsForResource                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListTagsForResource"}
+	iNotifyResourceDeploymentStatusChange              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "NotifyResourceDeploymentStatusChange"}
+	iRejectEnvironmentAccountConnection                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RejectEnvironmentAccountConnection"}
+	iTagResource                                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TagResource"}
+	iUntagResource                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UntagResource"}
+	iUpdateAccountSettings                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateAccountSettings"}
+	iUpdateComponent                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateComponent"}
+	iUpdateEnvironment                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironment"}
+	iUpdateEnvironmentAccountConnection                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentAccountConnection"}
+	iUpdateEnvironmentTemplate                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentTemplate"}
+	iUpdateEnvironmentTemplateVersion                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentTemplateVersion"}
+	iUpdateService                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateService"}
+	iUpdateServiceInstance                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceInstance"}
+	iUpdateServicePipeline                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServicePipeline"}
+	iUpdateServiceSyncBlocker                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceSyncBlocker"}
+	iUpdateServiceSyncConfig                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceSyncConfig"}
+	iUpdateServiceTemplate                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceTemplate"}
+	iUpdateServiceTemplateVersion                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceTemplateVersion"}
+	iUpdateTemplateSyncConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateTemplateSyncConfig"}
+	i_AwsProton20200720                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "AwsProton20200720"}
+	iAccessDeniedException                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "AccessDeniedException"}
+	iAccountSettings                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "AccountSettings"}
+	i_Arn                                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Arn"}
+	i_AwsAccountId                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "AwsAccountId"}
+	i_BlockerStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "BlockerStatus"}
+	i_BlockerType                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "BlockerType"}
+	i_ClientToken                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ClientToken"}
+	iCompatibleEnvironmentTemplate                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CompatibleEnvironmentTemplate"}
+	iCompatibleEnvironmentTemplateInput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CompatibleEnvironmentTemplateInput"}
+	i_CompatibleEnvironmentTemplateInputList           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CompatibleEnvironmentTemplateInputList"}
+	i_CompatibleEnvironmentTemplateList                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CompatibleEnvironmentTemplateList"}
+	iComponent                                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Component"}
+	i_ComponentArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ComponentArn"}
+	i_ComponentDeploymentIdList                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ComponentDeploymentIdList"}
+	i_ComponentDeploymentUpdateType                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ComponentDeploymentUpdateType"}
+	iComponentState                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ComponentState"}
+	iComponentSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ComponentSummary"}
+	i_ComponentSummaryList                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ComponentSummaryList"}
+	iConflictException                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ConflictException"}
+	iCountsSummary                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CountsSummary"}
+	iDeployment                                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Deployment"}
+	i_DeploymentArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentArn"}
+	i_DeploymentId                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentId"}
+	iDeploymentState                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentState"}
+	i_DeploymentStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentStatus"}
+	iDeploymentSummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentSummary"}
+	i_DeploymentSummaryList                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentSummaryList"}
+	i_DeploymentTargetResourceType                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentTargetResourceType"}
+	i_DeploymentUpdateType                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeploymentUpdateType"}
+	i_Description                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Description"}
+	i_DisplayName                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DisplayName"}
+	i_EmptyNextToken                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EmptyNextToken"}
+	iEnvironment                                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Environment"}
+	iEnvironmentAccountConnection                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnection"}
+	i_EnvironmentAccountConnectionArn                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnectionArn"}
+	i_EnvironmentAccountConnectionId                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnectionId"}
+	i_EnvironmentAccountConnectionRequesterAccountType = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnectionRequesterAccountType"}
+	i_EnvironmentAccountConnectionStatus               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnectionStatus"}
+	i_EnvironmentAccountConnectionStatusList           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnectionStatusList"}
+	iEnvironmentAccountConnectionSummary               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnectionSummary"}
+	i_EnvironmentAccountConnectionSummaryList          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentAccountConnectionSummaryList"}
+	i_EnvironmentArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentArn"}
+	iEnvironmentState                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentState"}
+	iEnvironmentSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentSummary"}
+	i_EnvironmentSummaryList                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentSummaryList"}
+	iEnvironmentTemplate                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplate"}
+	i_EnvironmentTemplateArn                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateArn"}
+	iEnvironmentTemplateFilter                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateFilter"}
+	i_EnvironmentTemplateFilterList                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateFilterList"}
+	iEnvironmentTemplateSummary                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateSummary"}
+	i_EnvironmentTemplateSummaryList                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateSummaryList"}
+	iEnvironmentTemplateVersion                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateVersion"}
+	i_EnvironmentTemplateVersionArn                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateVersionArn"}
+	iEnvironmentTemplateVersionSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateVersionSummary"}
+	i_EnvironmentTemplateVersionSummaryList            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "EnvironmentTemplateVersionSummaryList"}
+	i_ErrorMessage                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ErrorMessage"}
+	i_FullTemplateVersionNumber                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "FullTemplateVersionNumber"}
+	i_GitBranchName                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GitBranchName"}
+	iInternalServerException                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "InternalServerException"}
+	i_LatestSyncBlockers                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "LatestSyncBlockers"}
+	iListServiceInstancesFilter                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstancesFilter"}
+	i_ListServiceInstancesFilterBy                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstancesFilterBy"}
+	i_ListServiceInstancesFilterList                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstancesFilterList"}
+	i_ListServiceInstancesFilterValue                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstancesFilterValue"}
+	i_ListServiceInstancesSortBy                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstancesSortBy"}
+	i_MaxPageResults                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "MaxPageResults"}
+	i_NextToken                                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "NextToken"}
+	i_OpsFilePath                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "OpsFilePath"}
+	iOutput                                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Output"}
+	i_OutputKey                                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "OutputKey"}
+	i_OutputsList                                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "OutputsList"}
+	i_OutputValueString                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "OutputValueString"}
+	iProvisionedResource                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ProvisionedResource"}
+	i_ProvisionedResourceEngine                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ProvisionedResourceEngine"}
+	i_ProvisionedResourceIdentifier                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ProvisionedResourceIdentifier"}
+	i_ProvisionedResourceList                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ProvisionedResourceList"}
+	i_ProvisionedResourceName                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ProvisionedResourceName"}
+	i_Provisioning                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Provisioning"}
+	iRepository                                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Repository"}
+	i_RepositoryArn                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositoryArn"}
+	iRepositoryBranch                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositoryBranch"}
+	iRepositoryBranchInput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositoryBranchInput"}
+	i_RepositoryId                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositoryId"}
+	i_RepositoryName                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositoryName"}
+	i_RepositoryProvider                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositoryProvider"}
+	iRepositorySummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySummary"}
+	i_RepositorySummaryList                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySummaryList"}
+	iRepositorySyncAttempt                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySyncAttempt"}
+	iRepositorySyncDefinition                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySyncDefinition"}
+	i_RepositorySyncDefinitionList                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySyncDefinitionList"}
+	iRepositorySyncEvent                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySyncEvent"}
+	i_RepositorySyncEvents                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySyncEvents"}
+	i_RepositorySyncStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RepositorySyncStatus"}
+	iResourceCountsSummary                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceCountsSummary"}
+	i_ResourceDeploymentStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceDeploymentStatus"}
+	i_ResourceName                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceName"}
+	i_ResourceNameOrEmpty                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceNameOrEmpty"}
+	iResourceNotFoundException                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceNotFoundException"}
+	iResourceSyncAttempt                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceSyncAttempt"}
+	iResourceSyncEvent                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceSyncEvent"}
+	i_ResourceSyncEvents                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceSyncEvents"}
+	i_ResourceSyncStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ResourceSyncStatus"}
+	iRevision                                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Revision"}
+	i_RoleArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RoleArn"}
+	i_RoleArnOrEmptyString                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RoleArnOrEmptyString"}
+	i_S3Bucket                                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "S3Bucket"}
+	i_S3Key                                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "S3Key"}
+	iS3ObjectSource                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "S3ObjectSource"}
+	iService                                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Service"}
+	i_ServiceArn                                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceArn"}
+	iServiceInstance                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceInstance"}
+	i_ServiceInstanceArn                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceInstanceArn"}
+	iServiceInstanceState                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceInstanceState"}
+	iServiceInstanceSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceInstanceSummary"}
+	i_ServiceInstanceSummaryList                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceInstanceSummaryList"}
+	iServicePipeline                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServicePipeline"}
+	iServicePipelineState                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServicePipelineState"}
+	iServiceQuotaExceededException                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceQuotaExceededException"}
+	i_ServiceStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceStatus"}
+	iServiceSummary                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceSummary"}
+	i_ServiceSummaryList                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceSummaryList"}
+	iServiceSyncBlockerSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceSyncBlockerSummary"}
+	iServiceSyncConfig                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceSyncConfig"}
+	iServiceTemplate                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplate"}
+	i_ServiceTemplateArn                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateArn"}
+	iServiceTemplateSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateSummary"}
+	i_ServiceTemplateSummaryList                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateSummaryList"}
+	i_ServiceTemplateSupportedComponentSourceInputList = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateSupportedComponentSourceInputList"}
+	i_ServiceTemplateSupportedComponentSourceType      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateSupportedComponentSourceType"}
+	iServiceTemplateVersion                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateVersion"}
+	i_ServiceTemplateVersionArn                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateVersionArn"}
+	iServiceTemplateVersionSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateVersionSummary"}
+	i_ServiceTemplateVersionSummaryList                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ServiceTemplateVersionSummaryList"}
+	i_SHA                                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "SHA"}
+	i_SortOrder                                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "SortOrder"}
+	i_SpecContents                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "SpecContents"}
+	i_StatusMessage                                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "StatusMessage"}
+	i_Subdirectory                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Subdirectory"}
+	iSyncBlocker                                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "SyncBlocker"}
+	iSyncBlockerContext                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "SyncBlockerContext"}
+	i_SyncBlockerContexts                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "SyncBlockerContexts"}
+	i_SyncType                                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "SyncType"}
+	iTag                                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "Tag"}
+	i_TagKey                                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TagKey"}
+	i_TagKeyList                                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TagKeyList"}
+	i_TagList                                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TagList"}
+	i_TagValue                                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TagValue"}
+	i_TemplateFileContents                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateFileContents"}
+	i_TemplateManifestContents                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateManifestContents"}
+	i_TemplateSchema                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateSchema"}
+	iTemplateSyncConfig                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateSyncConfig"}
+	i_TemplateType                                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateType"}
+	i_TemplateVersionPart                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateVersionPart"}
+	iTemplateVersionSourceInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateVersionSourceInput"}
+	i_TemplateVersionStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TemplateVersionStatus"}
+	iThrottlingException                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ThrottlingException"}
+	iValidationException                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ValidationException"}
+	iAcceptEnvironmentAccountConnectionInput           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "AcceptEnvironmentAccountConnectionInput"}
+	iAcceptEnvironmentAccountConnectionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "AcceptEnvironmentAccountConnectionOutput"}
+	iCancelComponentDeploymentInput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelComponentDeploymentInput"}
+	iCancelComponentDeploymentOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelComponentDeploymentOutput"}
+	iCancelEnvironmentDeploymentInput                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelEnvironmentDeploymentInput"}
+	iCancelEnvironmentDeploymentOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelEnvironmentDeploymentOutput"}
+	iCancelServiceInstanceDeploymentInput              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelServiceInstanceDeploymentInput"}
+	iCancelServiceInstanceDeploymentOutput             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelServiceInstanceDeploymentOutput"}
+	iCancelServicePipelineDeploymentInput              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelServicePipelineDeploymentInput"}
+	iCancelServicePipelineDeploymentOutput             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CancelServicePipelineDeploymentOutput"}
+	iCreateComponentInput                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateComponentInput"}
+	iCreateComponentOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateComponentOutput"}
+	iCreateEnvironmentAccountConnectionInput           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentAccountConnectionInput"}
+	iCreateEnvironmentAccountConnectionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentAccountConnectionOutput"}
+	iCreateEnvironmentInput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentInput"}
+	iCreateEnvironmentOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentOutput"}
+	iCreateEnvironmentTemplateInput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentTemplateInput"}
+	iCreateEnvironmentTemplateOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentTemplateOutput"}
+	iCreateEnvironmentTemplateVersionInput             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentTemplateVersionInput"}
+	iCreateEnvironmentTemplateVersionOutput            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateEnvironmentTemplateVersionOutput"}
+	iCreateRepositoryInput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateRepositoryInput"}
+	iCreateRepositoryOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateRepositoryOutput"}
+	iCreateServiceInput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceInput"}
+	iCreateServiceInstanceInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceInstanceInput"}
+	iCreateServiceInstanceOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceInstanceOutput"}
+	iCreateServiceOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceOutput"}
+	iCreateServiceSyncConfigInput                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceSyncConfigInput"}
+	iCreateServiceSyncConfigOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceSyncConfigOutput"}
+	iCreateServiceTemplateInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceTemplateInput"}
+	iCreateServiceTemplateOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceTemplateOutput"}
+	iCreateServiceTemplateVersionInput                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceTemplateVersionInput"}
+	iCreateServiceTemplateVersionOutput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateServiceTemplateVersionOutput"}
+	iCreateTemplateSyncConfigInput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateTemplateSyncConfigInput"}
+	iCreateTemplateSyncConfigOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "CreateTemplateSyncConfigOutput"}
+	iDeleteComponentInput                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteComponentInput"}
+	iDeleteComponentOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteComponentOutput"}
+	iDeleteDeploymentInput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteDeploymentInput"}
+	iDeleteDeploymentOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteDeploymentOutput"}
+	iDeleteEnvironmentAccountConnectionInput           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentAccountConnectionInput"}
+	iDeleteEnvironmentAccountConnectionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentAccountConnectionOutput"}
+	iDeleteEnvironmentInput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentInput"}
+	iDeleteEnvironmentOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentOutput"}
+	iDeleteEnvironmentTemplateInput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentTemplateInput"}
+	iDeleteEnvironmentTemplateOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentTemplateOutput"}
+	iDeleteEnvironmentTemplateVersionInput             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentTemplateVersionInput"}
+	iDeleteEnvironmentTemplateVersionOutput            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteEnvironmentTemplateVersionOutput"}
+	iDeleteRepositoryInput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteRepositoryInput"}
+	iDeleteRepositoryOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteRepositoryOutput"}
+	iDeleteServiceInput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceInput"}
+	iDeleteServiceOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceOutput"}
+	iDeleteServiceSyncConfigInput                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceSyncConfigInput"}
+	iDeleteServiceSyncConfigOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceSyncConfigOutput"}
+	iDeleteServiceTemplateInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceTemplateInput"}
+	iDeleteServiceTemplateOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceTemplateOutput"}
+	iDeleteServiceTemplateVersionInput                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceTemplateVersionInput"}
+	iDeleteServiceTemplateVersionOutput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteServiceTemplateVersionOutput"}
+	iDeleteTemplateSyncConfigInput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteTemplateSyncConfigInput"}
+	iDeleteTemplateSyncConfigOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "DeleteTemplateSyncConfigOutput"}
+	iGetAccountSettingsInput                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetAccountSettingsInput"}
+	iGetAccountSettingsOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetAccountSettingsOutput"}
+	iGetComponentInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetComponentInput"}
+	iGetComponentOutput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetComponentOutput"}
+	iGetDeploymentInput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetDeploymentInput"}
+	iGetDeploymentOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetDeploymentOutput"}
+	iGetEnvironmentAccountConnectionInput              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentAccountConnectionInput"}
+	iGetEnvironmentAccountConnectionOutput             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentAccountConnectionOutput"}
+	iGetEnvironmentInput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentInput"}
+	iGetEnvironmentOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentOutput"}
+	iGetEnvironmentTemplateInput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentTemplateInput"}
+	iGetEnvironmentTemplateOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentTemplateOutput"}
+	iGetEnvironmentTemplateVersionInput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentTemplateVersionInput"}
+	iGetEnvironmentTemplateVersionOutput               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetEnvironmentTemplateVersionOutput"}
+	iGetRepositoryInput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetRepositoryInput"}
+	iGetRepositoryOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetRepositoryOutput"}
+	iGetRepositorySyncStatusInput                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetRepositorySyncStatusInput"}
+	iGetRepositorySyncStatusOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetRepositorySyncStatusOutput"}
+	iGetResourcesSummaryInput                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetResourcesSummaryInput"}
+	iGetResourcesSummaryOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetResourcesSummaryOutput"}
+	iGetServiceInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceInput"}
+	iGetServiceInstanceInput                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceInstanceInput"}
+	iGetServiceInstanceOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceInstanceOutput"}
+	iGetServiceInstanceSyncStatusInput                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceInstanceSyncStatusInput"}
+	iGetServiceInstanceSyncStatusOutput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceInstanceSyncStatusOutput"}
+	iGetServiceOutput                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceOutput"}
+	iGetServiceSyncBlockerSummaryInput                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceSyncBlockerSummaryInput"}
+	iGetServiceSyncBlockerSummaryOutput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceSyncBlockerSummaryOutput"}
+	iGetServiceSyncConfigInput                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceSyncConfigInput"}
+	iGetServiceSyncConfigOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceSyncConfigOutput"}
+	iGetServiceTemplateInput                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceTemplateInput"}
+	iGetServiceTemplateOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceTemplateOutput"}
+	iGetServiceTemplateVersionInput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceTemplateVersionInput"}
+	iGetServiceTemplateVersionOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetServiceTemplateVersionOutput"}
+	iGetTemplateSyncConfigInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetTemplateSyncConfigInput"}
+	iGetTemplateSyncConfigOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetTemplateSyncConfigOutput"}
+	iGetTemplateSyncStatusInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetTemplateSyncStatusInput"}
+	iGetTemplateSyncStatusOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "GetTemplateSyncStatusOutput"}
+	iListComponentOutputsInput                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentOutputsInput"}
+	iListComponentOutputsOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentOutputsOutput"}
+	iListComponentProvisionedResourcesInput            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentProvisionedResourcesInput"}
+	iListComponentProvisionedResourcesOutput           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentProvisionedResourcesOutput"}
+	iListComponentsInput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentsInput"}
+	iListComponentsOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListComponentsOutput"}
+	iListDeploymentsInput                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListDeploymentsInput"}
+	iListDeploymentsOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListDeploymentsOutput"}
+	iListEnvironmentAccountConnectionsInput            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentAccountConnectionsInput"}
+	iListEnvironmentAccountConnectionsOutput           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentAccountConnectionsOutput"}
+	iListEnvironmentOutputsInput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentOutputsInput"}
+	iListEnvironmentOutputsOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentOutputsOutput"}
+	iListEnvironmentProvisionedResourcesInput          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentProvisionedResourcesInput"}
+	iListEnvironmentProvisionedResourcesOutput         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentProvisionedResourcesOutput"}
+	iListEnvironmentsInput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentsInput"}
+	iListEnvironmentsOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentsOutput"}
+	iListEnvironmentTemplatesInput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentTemplatesInput"}
+	iListEnvironmentTemplatesOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentTemplatesOutput"}
+	iListEnvironmentTemplateVersionsInput              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentTemplateVersionsInput"}
+	iListEnvironmentTemplateVersionsOutput             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListEnvironmentTemplateVersionsOutput"}
+	iListRepositoriesInput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListRepositoriesInput"}
+	iListRepositoriesOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListRepositoriesOutput"}
+	iListRepositorySyncDefinitionsInput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListRepositorySyncDefinitionsInput"}
+	iListRepositorySyncDefinitionsOutput               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListRepositorySyncDefinitionsOutput"}
+	iListServiceInstanceOutputsInput                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstanceOutputsInput"}
+	iListServiceInstanceOutputsOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstanceOutputsOutput"}
+	iListServiceInstanceProvisionedResourcesInput      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstanceProvisionedResourcesInput"}
+	iListServiceInstanceProvisionedResourcesOutput     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstanceProvisionedResourcesOutput"}
+	iListServiceInstancesInput                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstancesInput"}
+	iListServiceInstancesOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceInstancesOutput"}
+	iListServicePipelineOutputsInput                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicePipelineOutputsInput"}
+	iListServicePipelineOutputsOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicePipelineOutputsOutput"}
+	iListServicePipelineProvisionedResourcesInput      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicePipelineProvisionedResourcesInput"}
+	iListServicePipelineProvisionedResourcesOutput     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicePipelineProvisionedResourcesOutput"}
+	iListServicesInput                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicesInput"}
+	iListServicesOutput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServicesOutput"}
+	iListServiceTemplatesInput                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceTemplatesInput"}
+	iListServiceTemplatesOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceTemplatesOutput"}
+	iListServiceTemplateVersionsInput                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceTemplateVersionsInput"}
+	iListServiceTemplateVersionsOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListServiceTemplateVersionsOutput"}
+	iListTagsForResourceInput                          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "ListTagsForResourceOutput"}
+	iNotifyResourceDeploymentStatusChangeInput         = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "NotifyResourceDeploymentStatusChangeInput"}
+	iNotifyResourceDeploymentStatusChangeOutput        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "NotifyResourceDeploymentStatusChangeOutput"}
+	iRejectEnvironmentAccountConnectionInput           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RejectEnvironmentAccountConnectionInput"}
+	iRejectEnvironmentAccountConnectionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "RejectEnvironmentAccountConnectionOutput"}
+	iTagResourceInput                                  = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TagResourceInput"}
+	iTagResourceOutput                                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "TagResourceOutput"}
+	iUntagResourceInput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UntagResourceInput"}
+	iUntagResourceOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UntagResourceOutput"}
+	iUpdateAccountSettingsInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateAccountSettingsInput"}
+	iUpdateAccountSettingsOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateAccountSettingsOutput"}
+	iUpdateComponentInput                              = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateComponentInput"}
+	iUpdateComponentOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateComponentOutput"}
+	iUpdateEnvironmentAccountConnectionInput           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentAccountConnectionInput"}
+	iUpdateEnvironmentAccountConnectionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentAccountConnectionOutput"}
+	iUpdateEnvironmentInput                            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentInput"}
+	iUpdateEnvironmentOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentOutput"}
+	iUpdateEnvironmentTemplateInput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentTemplateInput"}
+	iUpdateEnvironmentTemplateOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentTemplateOutput"}
+	iUpdateEnvironmentTemplateVersionInput             = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentTemplateVersionInput"}
+	iUpdateEnvironmentTemplateVersionOutput            = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateEnvironmentTemplateVersionOutput"}
+	iUpdateServiceInput                                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceInput"}
+	iUpdateServiceInstanceInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceInstanceInput"}
+	iUpdateServiceInstanceOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceInstanceOutput"}
+	iUpdateServiceOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceOutput"}
+	iUpdateServicePipelineInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServicePipelineInput"}
+	iUpdateServicePipelineOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServicePipelineOutput"}
+	iUpdateServiceSyncBlockerInput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceSyncBlockerInput"}
+	iUpdateServiceSyncBlockerOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceSyncBlockerOutput"}
+	iUpdateServiceSyncConfigInput                      = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceSyncConfigInput"}
+	iUpdateServiceSyncConfigOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceSyncConfigOutput"}
+	iUpdateServiceTemplateInput                        = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceTemplateInput"}
+	iUpdateServiceTemplateOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceTemplateOutput"}
+	iUpdateServiceTemplateVersionInput                 = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceTemplateVersionInput"}
+	iUpdateServiceTemplateVersionOutput                = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateServiceTemplateVersionOutput"}
+	iUpdateTemplateSyncConfigInput                     = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateTemplateSyncConfigInput"}
+	iUpdateTemplateSyncConfigOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.proton", Name: "UpdateTemplateSyncConfigOutput"}
+	pTimestamp                                         = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pString                                            = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pInteger                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                           = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/yaml"}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.MediaType{Type: "application/yaml"}}, DirectMask: 0x40100}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAccountSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountSettings_pipelineServiceRoleArn, &sAccountSettings_pipelineProvisioningRepository, &sAccountSettings_pipelineCodebuildRoleArn}}
+var mCompatibleEnvironmentTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sCompatibleEnvironmentTemplate_templateName, &sCompatibleEnvironmentTemplate_majorVersion}}
+var mCompatibleEnvironmentTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCompatibleEnvironmentTemplateInput_templateName, &sCompatibleEnvironmentTemplateInput_majorVersion}}
+var m_CompatibleEnvironmentTemplateInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompatibleEnvironmentTemplateInputList_member}}
+var m_CompatibleEnvironmentTemplateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CompatibleEnvironmentTemplateList_member}}
+var mComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sComponent_name, &sComponent_description, &sComponent_arn, &sComponent_environmentName, &sComponent_serviceName, &sComponent_serviceInstanceName, &sComponent_createdAt, &sComponent_lastModifiedAt, &sComponent_lastDeploymentAttemptedAt, &sComponent_lastDeploymentSucceededAt, &sComponent_deploymentStatus, &sComponent_deploymentStatusMessage, &sComponent_serviceSpec, &sComponent_lastClientRequestToken, &sComponent_lastAttemptedDeploymentId, &sComponent_lastSucceededDeploymentId}, Seed: 7, Slots: []uint16{
+	14, 4, 3, 1, 0, 0, 7, 15, 0, 0, 0, 0, 2, 0, 0, 0, 16, 0, 0, 9, 8, 0, 6, 0,
+	13, 0, 0, 12, 0, 11, 10, 5,
+}}
+var m_ComponentDeploymentIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentDeploymentIdList_member}}
+var mComponentState = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentState_serviceName, &sComponentState_serviceInstanceName, &sComponentState_serviceSpec, &sComponentState_templateFile}}
+var mComponentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentSummary_name, &sComponentSummary_arn, &sComponentSummary_environmentName, &sComponentSummary_serviceName, &sComponentSummary_serviceInstanceName, &sComponentSummary_createdAt, &sComponentSummary_lastModifiedAt, &sComponentSummary_lastDeploymentAttemptedAt, &sComponentSummary_lastDeploymentSucceededAt, &sComponentSummary_deploymentStatus, &sComponentSummary_deploymentStatusMessage, &sComponentSummary_lastAttemptedDeploymentId, &sComponentSummary_lastSucceededDeploymentId}, Seed: 7, Slots: []uint16{
+	0, 3, 2, 1, 0, 0, 6, 12, 0, 0, 0, 0, 0, 0, 0, 0, 13, 0, 0, 8, 7, 0, 5, 0,
+	0, 0, 0, 11, 0, 10, 9, 4,
+}}
+var m_ComponentSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentSummaryList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mCountsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sCountsSummary_components, &sCountsSummary_environments, &sCountsSummary_environmentTemplates, &sCountsSummary_serviceInstances, &sCountsSummary_services, &sCountsSummary_serviceTemplates, &sCountsSummary_pipelines}}
+var mDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&sDeployment_id, &sDeployment_arn, &sDeployment_targetArn, &sDeployment_targetResourceCreatedAt, &sDeployment_targetResourceType, &sDeployment_environmentName, &sDeployment_serviceName, &sDeployment_serviceInstanceName, &sDeployment_componentName, &sDeployment_deploymentStatus, &sDeployment_deploymentStatusMessage, &sDeployment_createdAt, &sDeployment_lastModifiedAt, &sDeployment_completedAt, &sDeployment_lastAttemptedDeploymentId, &sDeployment_lastSucceededDeploymentId, &sDeployment_initialState, &sDeployment_targetState}, Seed: 15, Slots: []uint16{
+	0, 18, 1, 0, 0, 2, 13, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 0, 10, 0, 0, 0, 0,
+	0, 0, 8, 0, 14, 17, 11, 0, 0, 0, 0, 0, 0, 4, 0, 0, 6, 3, 0, 0, 0, 0, 16, 0,
+	0, 5, 0, 0, 0, 0, 0, 7, 9, 0, 0, 0, 0, 0, 0, 12,
+}}
+var mDeploymentState = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentState_serviceInstance, &sDeploymentState_environment, &sDeploymentState_servicePipeline, &sDeploymentState_component}}
+var mDeploymentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentSummary_id, &sDeploymentSummary_arn, &sDeploymentSummary_targetArn, &sDeploymentSummary_targetResourceCreatedAt, &sDeploymentSummary_targetResourceType, &sDeploymentSummary_createdAt, &sDeploymentSummary_lastModifiedAt, &sDeploymentSummary_completedAt, &sDeploymentSummary_environmentName, &sDeploymentSummary_serviceName, &sDeploymentSummary_serviceInstanceName, &sDeploymentSummary_componentName, &sDeploymentSummary_lastAttemptedDeploymentId, &sDeploymentSummary_lastSucceededDeploymentId, &sDeploymentSummary_deploymentStatus}, Seed: 6, Slots: []uint16{
+	0, 0, 2, 0, 14, 15, 0, 4, 0, 0, 9, 6, 0, 0, 0, 0, 3, 0, 0, 12, 0, 11, 7, 0,
+	0, 0, 8, 5, 10, 1, 0, 13,
+}}
+var m_DeploymentSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentSummaryList_member}}
+var mEnvironment = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironment_name, &sEnvironment_description, &sEnvironment_createdAt, &sEnvironment_lastDeploymentAttemptedAt, &sEnvironment_lastDeploymentSucceededAt, &sEnvironment_arn, &sEnvironment_templateName, &sEnvironment_templateMajorVersion, &sEnvironment_templateMinorVersion, &sEnvironment_deploymentStatus, &sEnvironment_deploymentStatusMessage, &sEnvironment_protonServiceRoleArn, &sEnvironment_environmentAccountConnectionId, &sEnvironment_environmentAccountId, &sEnvironment_spec, &sEnvironment_provisioning, &sEnvironment_provisioningRepository, &sEnvironment_componentRoleArn, &sEnvironment_codebuildRoleArn, &sEnvironment_lastAttemptedDeploymentId, &sEnvironment_lastSucceededDeploymentId}, Seed: 16, Slots: []uint16{
+	8, 16, 0, 0, 21, 0, 0, 20, 18, 0, 0, 13, 0, 0, 0, 5, 0, 0, 0, 0, 0, 14, 0, 7,
+	0, 1, 0, 6, 0, 0, 9, 0, 0, 0, 4, 0, 0, 0, 11, 2, 0, 0, 12, 0, 0, 0, 3, 0,
+	0, 0, 0, 15, 0, 0, 17, 0, 19, 0, 0, 0, 10, 0, 0, 0,
+}}
+var mEnvironmentAccountConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentAccountConnection_id, &sEnvironmentAccountConnection_arn, &sEnvironmentAccountConnection_managementAccountId, &sEnvironmentAccountConnection_environmentAccountId, &sEnvironmentAccountConnection_roleArn, &sEnvironmentAccountConnection_environmentName, &sEnvironmentAccountConnection_requestedAt, &sEnvironmentAccountConnection_lastModifiedAt, &sEnvironmentAccountConnection_status, &sEnvironmentAccountConnection_componentRoleArn, &sEnvironmentAccountConnection_codebuildRoleArn}, Seed: 11, Slots: []uint16{
+	10, 0, 0, 0, 0, 8, 0, 0, 9, 0, 11, 0, 2, 5, 0, 4, 0, 7, 0, 0, 0, 0, 0, 6,
+	0, 1, 0, 0, 0, 3, 0, 0,
+}}
+var m_EnvironmentAccountConnectionStatusList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentAccountConnectionStatusList_member}}
+var mEnvironmentAccountConnectionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentAccountConnectionSummary_id, &sEnvironmentAccountConnectionSummary_arn, &sEnvironmentAccountConnectionSummary_managementAccountId, &sEnvironmentAccountConnectionSummary_environmentAccountId, &sEnvironmentAccountConnectionSummary_roleArn, &sEnvironmentAccountConnectionSummary_environmentName, &sEnvironmentAccountConnectionSummary_requestedAt, &sEnvironmentAccountConnectionSummary_lastModifiedAt, &sEnvironmentAccountConnectionSummary_status, &sEnvironmentAccountConnectionSummary_componentRoleArn}, Seed: 11, Slots: []uint16{
+	10, 0, 0, 0, 0, 8, 0, 0, 9, 0, 0, 0, 2, 5, 0, 4, 0, 7, 0, 0, 0, 0, 0, 6,
+	0, 1, 0, 0, 0, 3, 0, 0,
+}}
+var m_EnvironmentAccountConnectionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentAccountConnectionSummaryList_member}}
+var mEnvironmentState = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentState_spec, &sEnvironmentState_templateName, &sEnvironmentState_templateMajorVersion, &sEnvironmentState_templateMinorVersion}}
+var mEnvironmentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentSummary_name, &sEnvironmentSummary_description, &sEnvironmentSummary_createdAt, &sEnvironmentSummary_lastDeploymentAttemptedAt, &sEnvironmentSummary_lastDeploymentSucceededAt, &sEnvironmentSummary_arn, &sEnvironmentSummary_templateName, &sEnvironmentSummary_templateMajorVersion, &sEnvironmentSummary_templateMinorVersion, &sEnvironmentSummary_deploymentStatus, &sEnvironmentSummary_deploymentStatusMessage, &sEnvironmentSummary_protonServiceRoleArn, &sEnvironmentSummary_environmentAccountConnectionId, &sEnvironmentSummary_environmentAccountId, &sEnvironmentSummary_provisioning, &sEnvironmentSummary_componentRoleArn, &sEnvironmentSummary_lastAttemptedDeploymentId, &sEnvironmentSummary_lastSucceededDeploymentId}, Seed: 16, Slots: []uint16{
+	8, 15, 0, 0, 18, 0, 0, 17, 16, 0, 0, 13, 0, 0, 0, 5, 0, 0, 0, 0, 0, 14, 0, 7,
+	0, 1, 0, 6, 0, 0, 9, 0, 0, 0, 4, 0, 0, 0, 11, 2, 0, 0, 12, 0, 0, 0, 3, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0,
+}}
+var m_EnvironmentSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentSummaryList_member}}
+var mEnvironmentTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentTemplate_name, &sEnvironmentTemplate_arn, &sEnvironmentTemplate_createdAt, &sEnvironmentTemplate_lastModifiedAt, &sEnvironmentTemplate_displayName, &sEnvironmentTemplate_description, &sEnvironmentTemplate_recommendedVersion, &sEnvironmentTemplate_encryptionKey, &sEnvironmentTemplate_provisioning}, Seed: 3, Slots: []uint16{
+	0, 2, 9, 5, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 4, 8, 0, 0,
+	0, 0, 3, 0, 0, 6, 0, 0,
+}}
+var mEnvironmentTemplateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentTemplateFilter_templateName, &sEnvironmentTemplateFilter_majorVersion}}
+var m_EnvironmentTemplateFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentTemplateFilterList_member}}
+var mEnvironmentTemplateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentTemplateSummary_name, &sEnvironmentTemplateSummary_arn, &sEnvironmentTemplateSummary_createdAt, &sEnvironmentTemplateSummary_lastModifiedAt, &sEnvironmentTemplateSummary_displayName, &sEnvironmentTemplateSummary_description, &sEnvironmentTemplateSummary_recommendedVersion, &sEnvironmentTemplateSummary_provisioning}}
+var m_EnvironmentTemplateSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentTemplateSummaryList_member}}
+var mEnvironmentTemplateVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentTemplateVersion_templateName, &sEnvironmentTemplateVersion_majorVersion, &sEnvironmentTemplateVersion_minorVersion, &sEnvironmentTemplateVersion_recommendedMinorVersion, &sEnvironmentTemplateVersion_status, &sEnvironmentTemplateVersion_statusMessage, &sEnvironmentTemplateVersion_description, &sEnvironmentTemplateVersion_arn, &sEnvironmentTemplateVersion_createdAt, &sEnvironmentTemplateVersion_lastModifiedAt, &sEnvironmentTemplateVersion_schema}, Seed: 9, Slots: []uint16{
+	0, 0, 0, 0, 11, 0, 0, 3, 0, 1, 6, 0, 9, 0, 0, 8, 0, 5, 0, 2, 0, 0, 0, 4,
+	0, 0, 7, 0, 0, 0, 10, 0,
+}}
+var mEnvironmentTemplateVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnvironmentTemplateVersionSummary_templateName, &sEnvironmentTemplateVersionSummary_majorVersion, &sEnvironmentTemplateVersionSummary_minorVersion, &sEnvironmentTemplateVersionSummary_recommendedMinorVersion, &sEnvironmentTemplateVersionSummary_status, &sEnvironmentTemplateVersionSummary_statusMessage, &sEnvironmentTemplateVersionSummary_description, &sEnvironmentTemplateVersionSummary_arn, &sEnvironmentTemplateVersionSummary_createdAt, &sEnvironmentTemplateVersionSummary_lastModifiedAt}, Seed: 9, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 6, 0, 9, 0, 0, 8, 0, 5, 0, 2, 0, 0, 0, 4,
+	0, 0, 7, 0, 0, 0, 10, 0,
+}}
+var m_EnvironmentTemplateVersionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentTemplateVersionSummaryList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var m_LatestSyncBlockers = smithy.SchemaMembers{List: []*smithy.Schema{&s_LatestSyncBlockers_member}}
+var mListServiceInstancesFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceInstancesFilter_key, &sListServiceInstancesFilter_value}}
+var m_ListServiceInstancesFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListServiceInstancesFilterList_member}}
+var mOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sOutput_key, &sOutput_valueString}}
+var m_OutputsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OutputsList_member}}
+var mProvisionedResource = smithy.SchemaMembers{List: []*smithy.Schema{&sProvisionedResource_name, &sProvisionedResource_identifier, &sProvisionedResource_provisioningEngine}}
+var m_ProvisionedResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProvisionedResourceList_member}}
+var mRepository = smithy.SchemaMembers{List: []*smithy.Schema{&sRepository_arn, &sRepository_provider, &sRepository_name, &sRepository_connectionArn, &sRepository_encryptionKey}}
+var mRepositoryBranch = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryBranch_arn, &sRepositoryBranch_provider, &sRepositoryBranch_name, &sRepositoryBranch_branch}}
+var mRepositoryBranchInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryBranchInput_provider, &sRepositoryBranchInput_name, &sRepositoryBranchInput_branch}}
+var mRepositorySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySummary_arn, &sRepositorySummary_provider, &sRepositorySummary_name, &sRepositorySummary_connectionArn}}
+var m_RepositorySummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositorySummaryList_member}}
+var mRepositorySyncAttempt = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySyncAttempt_startedAt, &sRepositorySyncAttempt_status, &sRepositorySyncAttempt_events}}
+var mRepositorySyncDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySyncDefinition_target, &sRepositorySyncDefinition_parent, &sRepositorySyncDefinition_branch, &sRepositorySyncDefinition_directory}}
+var m_RepositorySyncDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositorySyncDefinitionList_member}}
+var mRepositorySyncEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositorySyncEvent_type, &sRepositorySyncEvent_externalId, &sRepositorySyncEvent_time, &sRepositorySyncEvent_event}}
+var m_RepositorySyncEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositorySyncEvents_member}}
+var mResourceCountsSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceCountsSummary_total, &sResourceCountsSummary_failed, &sResourceCountsSummary_upToDate, &sResourceCountsSummary_behindMajor, &sResourceCountsSummary_behindMinor}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceSyncAttempt = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSyncAttempt_initialRevision, &sResourceSyncAttempt_targetRevision, &sResourceSyncAttempt_target, &sResourceSyncAttempt_startedAt, &sResourceSyncAttempt_status, &sResourceSyncAttempt_events}}
+var mResourceSyncEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceSyncEvent_type, &sResourceSyncEvent_externalId, &sResourceSyncEvent_time, &sResourceSyncEvent_event}}
+var m_ResourceSyncEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceSyncEvents_member}}
+var mRevision = smithy.SchemaMembers{List: []*smithy.Schema{&sRevision_repositoryName, &sRevision_repositoryProvider, &sRevision_sha, &sRevision_directory, &sRevision_branch}}
+var mS3ObjectSource = smithy.SchemaMembers{List: []*smithy.Schema{&sS3ObjectSource_bucket, &sS3ObjectSource_key}}
+var mService = smithy.SchemaMembers{List: []*smithy.Schema{&sService_name, &sService_description, &sService_arn, &sService_templateName, &sService_createdAt, &sService_lastModifiedAt, &sService_status, &sService_statusMessage, &sService_spec, &sService_pipeline, &sService_repositoryConnectionArn, &sService_repositoryId, &sService_branchName}, Seed: 20, Slots: []uint16{
+	0, 9, 0, 0, 0, 0, 0, 7, 2, 0, 6, 12, 0, 10, 8, 11, 0, 0, 0, 5, 0, 13, 4, 0,
+	0, 3, 0, 1, 0, 0, 0, 0,
+}}
+var mServiceInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceInstance_name, &sServiceInstance_arn, &sServiceInstance_createdAt, &sServiceInstance_lastDeploymentAttemptedAt, &sServiceInstance_lastDeploymentSucceededAt, &sServiceInstance_serviceName, &sServiceInstance_environmentName, &sServiceInstance_templateName, &sServiceInstance_templateMajorVersion, &sServiceInstance_templateMinorVersion, &sServiceInstance_deploymentStatus, &sServiceInstance_deploymentStatusMessage, &sServiceInstance_spec, &sServiceInstance_lastClientRequestToken, &sServiceInstance_lastAttemptedDeploymentId, &sServiceInstance_lastSucceededDeploymentId}, Seed: 53, Slots: []uint16{
+	14, 16, 9, 0, 7, 0, 0, 0, 0, 0, 3, 5, 0, 1, 0, 10, 0, 12, 11, 8, 6, 0, 4, 2,
+	13, 15, 0, 0, 0, 0, 0, 0,
+}}
+var mServiceInstanceState = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceInstanceState_spec, &sServiceInstanceState_templateName, &sServiceInstanceState_templateMajorVersion, &sServiceInstanceState_templateMinorVersion, &sServiceInstanceState_lastSuccessfulComponentDeploymentIds, &sServiceInstanceState_lastSuccessfulEnvironmentDeploymentId, &sServiceInstanceState_lastSuccessfulServicePipelineDeploymentId}}
+var mServiceInstanceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceInstanceSummary_name, &sServiceInstanceSummary_arn, &sServiceInstanceSummary_createdAt, &sServiceInstanceSummary_lastDeploymentAttemptedAt, &sServiceInstanceSummary_lastDeploymentSucceededAt, &sServiceInstanceSummary_serviceName, &sServiceInstanceSummary_environmentName, &sServiceInstanceSummary_templateName, &sServiceInstanceSummary_templateMajorVersion, &sServiceInstanceSummary_templateMinorVersion, &sServiceInstanceSummary_deploymentStatus, &sServiceInstanceSummary_deploymentStatusMessage, &sServiceInstanceSummary_lastAttemptedDeploymentId, &sServiceInstanceSummary_lastSucceededDeploymentId}, Seed: 36, Slots: []uint16{
+	0, 3, 0, 8, 5, 0, 0, 0, 11, 0, 0, 0, 13, 9, 0, 0, 0, 0, 7, 2, 0, 1, 0, 10,
+	6, 4, 0, 0, 0, 0, 12, 14,
+}}
+var m_ServiceInstanceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceInstanceSummaryList_member}}
+var mServicePipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sServicePipeline_arn, &sServicePipeline_createdAt, &sServicePipeline_lastDeploymentAttemptedAt, &sServicePipeline_lastDeploymentSucceededAt, &sServicePipeline_templateName, &sServicePipeline_templateMajorVersion, &sServicePipeline_templateMinorVersion, &sServicePipeline_deploymentStatus, &sServicePipeline_deploymentStatusMessage, &sServicePipeline_spec, &sServicePipeline_lastAttemptedDeploymentId, &sServicePipeline_lastSucceededDeploymentId}, Seed: 10, Slots: []uint16{
+	0, 0, 9, 0, 4, 0, 7, 0, 3, 6, 0, 0, 0, 1, 11, 0, 0, 0, 0, 0, 0, 5, 8, 0,
+	0, 0, 0, 12, 0, 10, 0, 2,
+}}
+var mServicePipelineState = smithy.SchemaMembers{List: []*smithy.Schema{&sServicePipelineState_spec, &sServicePipelineState_templateName, &sServicePipelineState_templateMajorVersion, &sServicePipelineState_templateMinorVersion}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mServiceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSummary_name, &sServiceSummary_description, &sServiceSummary_arn, &sServiceSummary_templateName, &sServiceSummary_createdAt, &sServiceSummary_lastModifiedAt, &sServiceSummary_status, &sServiceSummary_statusMessage}}
+var m_ServiceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceSummaryList_member}}
+var mServiceSyncBlockerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSyncBlockerSummary_serviceName, &sServiceSyncBlockerSummary_serviceInstanceName, &sServiceSyncBlockerSummary_latestBlockers}}
+var mServiceSyncConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSyncConfig_serviceName, &sServiceSyncConfig_repositoryProvider, &sServiceSyncConfig_repositoryName, &sServiceSyncConfig_branch, &sServiceSyncConfig_filePath}}
+var mServiceTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceTemplate_name, &sServiceTemplate_arn, &sServiceTemplate_createdAt, &sServiceTemplate_lastModifiedAt, &sServiceTemplate_displayName, &sServiceTemplate_description, &sServiceTemplate_recommendedVersion, &sServiceTemplate_encryptionKey, &sServiceTemplate_pipelineProvisioning}, Seed: 2, Slots: []uint16{
+	2, 0, 0, 1, 0, 0, 7, 5, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 3, 4,
+	0, 9, 0, 0, 8, 0, 0, 0,
+}}
+var mServiceTemplateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceTemplateSummary_name, &sServiceTemplateSummary_arn, &sServiceTemplateSummary_createdAt, &sServiceTemplateSummary_lastModifiedAt, &sServiceTemplateSummary_displayName, &sServiceTemplateSummary_description, &sServiceTemplateSummary_recommendedVersion, &sServiceTemplateSummary_pipelineProvisioning}}
+var m_ServiceTemplateSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceTemplateSummaryList_member}}
+var m_ServiceTemplateSupportedComponentSourceInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceTemplateSupportedComponentSourceInputList_member}}
+var mServiceTemplateVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceTemplateVersion_templateName, &sServiceTemplateVersion_majorVersion, &sServiceTemplateVersion_minorVersion, &sServiceTemplateVersion_recommendedMinorVersion, &sServiceTemplateVersion_status, &sServiceTemplateVersion_statusMessage, &sServiceTemplateVersion_description, &sServiceTemplateVersion_arn, &sServiceTemplateVersion_createdAt, &sServiceTemplateVersion_lastModifiedAt, &sServiceTemplateVersion_compatibleEnvironmentTemplates, &sServiceTemplateVersion_schema, &sServiceTemplateVersion_supportedComponentSources}, Seed: 9, Slots: []uint16{
+	11, 0, 13, 0, 12, 0, 0, 3, 0, 1, 6, 0, 9, 0, 0, 8, 0, 5, 0, 2, 0, 0, 0, 4,
+	0, 0, 7, 0, 0, 0, 10, 0,
+}}
+var mServiceTemplateVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceTemplateVersionSummary_templateName, &sServiceTemplateVersionSummary_majorVersion, &sServiceTemplateVersionSummary_minorVersion, &sServiceTemplateVersionSummary_recommendedMinorVersion, &sServiceTemplateVersionSummary_status, &sServiceTemplateVersionSummary_statusMessage, &sServiceTemplateVersionSummary_description, &sServiceTemplateVersionSummary_arn, &sServiceTemplateVersionSummary_createdAt, &sServiceTemplateVersionSummary_lastModifiedAt}, Seed: 9, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 3, 0, 1, 6, 0, 9, 0, 0, 8, 0, 5, 0, 2, 0, 0, 0, 4,
+	0, 0, 7, 0, 0, 0, 10, 0,
+}}
+var m_ServiceTemplateVersionSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceTemplateVersionSummaryList_member}}
+var mSyncBlocker = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncBlocker_id, &sSyncBlocker_type, &sSyncBlocker_status, &sSyncBlocker_createdReason, &sSyncBlocker_createdAt, &sSyncBlocker_contexts, &sSyncBlocker_resolvedReason, &sSyncBlocker_resolvedAt}}
+var mSyncBlockerContext = smithy.SchemaMembers{List: []*smithy.Schema{&sSyncBlockerContext_key, &sSyncBlockerContext_value}}
+var m_SyncBlockerContexts = smithy.SchemaMembers{List: []*smithy.Schema{&s_SyncBlockerContexts_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTemplateSyncConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateSyncConfig_templateName, &sTemplateSyncConfig_templateType, &sTemplateSyncConfig_repositoryProvider, &sTemplateSyncConfig_repositoryName, &sTemplateSyncConfig_branch, &sTemplateSyncConfig_subdirectory}}
+var mTemplateVersionSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateVersionSourceInput_s3}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mAcceptEnvironmentAccountConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptEnvironmentAccountConnectionInput_id}}
+var mAcceptEnvironmentAccountConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptEnvironmentAccountConnectionOutput_environmentAccountConnection}}
+var mCancelComponentDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelComponentDeploymentInput_componentName}}
+var mCancelComponentDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelComponentDeploymentOutput_component}}
+var mCancelEnvironmentDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelEnvironmentDeploymentInput_environmentName}}
+var mCancelEnvironmentDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelEnvironmentDeploymentOutput_environment}}
+var mCancelServiceInstanceDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelServiceInstanceDeploymentInput_serviceInstanceName, &sCancelServiceInstanceDeploymentInput_serviceName}}
+var mCancelServiceInstanceDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelServiceInstanceDeploymentOutput_serviceInstance}}
+var mCancelServicePipelineDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelServicePipelineDeploymentInput_serviceName}}
+var mCancelServicePipelineDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelServicePipelineDeploymentOutput_pipeline}}
+var mCreateComponentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentInput_name, &sCreateComponentInput_description, &sCreateComponentInput_serviceName, &sCreateComponentInput_serviceInstanceName, &sCreateComponentInput_environmentName, &sCreateComponentInput_templateFile, &sCreateComponentInput_manifest, &sCreateComponentInput_serviceSpec, &sCreateComponentInput_tags, &sCreateComponentInput_clientToken}, Seed: 1, Slots: []uint16{
+	10, 4, 0, 0, 9, 0, 1, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 6, 3, 0, 0, 0, 5, 7,
+	2, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mCreateComponentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentOutput_component}}
+var mCreateEnvironmentAccountConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentAccountConnectionInput_clientToken, &sCreateEnvironmentAccountConnectionInput_managementAccountId, &sCreateEnvironmentAccountConnectionInput_roleArn, &sCreateEnvironmentAccountConnectionInput_environmentName, &sCreateEnvironmentAccountConnectionInput_tags, &sCreateEnvironmentAccountConnectionInput_componentRoleArn, &sCreateEnvironmentAccountConnectionInput_codebuildRoleArn}}
+var mCreateEnvironmentAccountConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentAccountConnectionOutput_environmentAccountConnection}}
+var mCreateEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentInput_name, &sCreateEnvironmentInput_templateName, &sCreateEnvironmentInput_templateMajorVersion, &sCreateEnvironmentInput_templateMinorVersion, &sCreateEnvironmentInput_description, &sCreateEnvironmentInput_spec, &sCreateEnvironmentInput_protonServiceRoleArn, &sCreateEnvironmentInput_environmentAccountConnectionId, &sCreateEnvironmentInput_tags, &sCreateEnvironmentInput_provisioningRepository, &sCreateEnvironmentInput_componentRoleArn, &sCreateEnvironmentInput_codebuildRoleArn}, Seed: 4, Slots: []uint16{
+	10, 1, 0, 0, 0, 0, 0, 11, 3, 0, 5, 4, 0, 9, 0, 0, 0, 0, 12, 0, 8, 0, 0, 0,
+	0, 0, 7, 2, 0, 0, 0, 6,
+}}
+var mCreateEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentOutput_environment}}
+var mCreateEnvironmentTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentTemplateInput_name, &sCreateEnvironmentTemplateInput_displayName, &sCreateEnvironmentTemplateInput_description, &sCreateEnvironmentTemplateInput_encryptionKey, &sCreateEnvironmentTemplateInput_provisioning, &sCreateEnvironmentTemplateInput_tags}}
+var mCreateEnvironmentTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentTemplateOutput_environmentTemplate}}
+var mCreateEnvironmentTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentTemplateVersionInput_clientToken, &sCreateEnvironmentTemplateVersionInput_templateName, &sCreateEnvironmentTemplateVersionInput_description, &sCreateEnvironmentTemplateVersionInput_majorVersion, &sCreateEnvironmentTemplateVersionInput_source, &sCreateEnvironmentTemplateVersionInput_tags}}
+var mCreateEnvironmentTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEnvironmentTemplateVersionOutput_environmentTemplateVersion}}
+var mCreateRepositoryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRepositoryInput_provider, &sCreateRepositoryInput_name, &sCreateRepositoryInput_connectionArn, &sCreateRepositoryInput_encryptionKey, &sCreateRepositoryInput_tags}}
+var mCreateRepositoryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRepositoryOutput_repository}}
+var mCreateServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceInput_name, &sCreateServiceInput_description, &sCreateServiceInput_templateName, &sCreateServiceInput_templateMajorVersion, &sCreateServiceInput_templateMinorVersion, &sCreateServiceInput_spec, &sCreateServiceInput_repositoryConnectionArn, &sCreateServiceInput_repositoryId, &sCreateServiceInput_branchName, &sCreateServiceInput_tags}, Seed: 5, Slots: []uint16{
+	2, 5, 0, 0, 0, 10, 0, 9, 4, 0, 0, 0, 0, 0, 0, 7, 3, 0, 6, 0, 8, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 1,
+}}
+var mCreateServiceInstanceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceInstanceInput_name, &sCreateServiceInstanceInput_serviceName, &sCreateServiceInstanceInput_spec, &sCreateServiceInstanceInput_templateMajorVersion, &sCreateServiceInstanceInput_templateMinorVersion, &sCreateServiceInstanceInput_tags, &sCreateServiceInstanceInput_clientToken}}
+var mCreateServiceInstanceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceInstanceOutput_serviceInstance}}
+var mCreateServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceOutput_service}}
+var mCreateServiceSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceSyncConfigInput_serviceName, &sCreateServiceSyncConfigInput_repositoryProvider, &sCreateServiceSyncConfigInput_repositoryName, &sCreateServiceSyncConfigInput_branch, &sCreateServiceSyncConfigInput_filePath}}
+var mCreateServiceSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceSyncConfigOutput_serviceSyncConfig}}
+var mCreateServiceTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceTemplateInput_name, &sCreateServiceTemplateInput_displayName, &sCreateServiceTemplateInput_description, &sCreateServiceTemplateInput_encryptionKey, &sCreateServiceTemplateInput_pipelineProvisioning, &sCreateServiceTemplateInput_tags}}
+var mCreateServiceTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceTemplateOutput_serviceTemplate}}
+var mCreateServiceTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceTemplateVersionInput_clientToken, &sCreateServiceTemplateVersionInput_templateName, &sCreateServiceTemplateVersionInput_description, &sCreateServiceTemplateVersionInput_majorVersion, &sCreateServiceTemplateVersionInput_source, &sCreateServiceTemplateVersionInput_compatibleEnvironmentTemplates, &sCreateServiceTemplateVersionInput_tags, &sCreateServiceTemplateVersionInput_supportedComponentSources}}
+var mCreateServiceTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceTemplateVersionOutput_serviceTemplateVersion}}
+var mCreateTemplateSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTemplateSyncConfigInput_templateName, &sCreateTemplateSyncConfigInput_templateType, &sCreateTemplateSyncConfigInput_repositoryProvider, &sCreateTemplateSyncConfigInput_repositoryName, &sCreateTemplateSyncConfigInput_branch, &sCreateTemplateSyncConfigInput_subdirectory}}
+var mCreateTemplateSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTemplateSyncConfigOutput_templateSyncConfig}}
+var mDeleteComponentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComponentInput_name}}
+var mDeleteComponentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComponentOutput_component}}
+var mDeleteDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeploymentInput_id}}
+var mDeleteDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeploymentOutput_deployment}}
+var mDeleteEnvironmentAccountConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentAccountConnectionInput_id}}
+var mDeleteEnvironmentAccountConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentAccountConnectionOutput_environmentAccountConnection}}
+var mDeleteEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentInput_name}}
+var mDeleteEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentOutput_environment}}
+var mDeleteEnvironmentTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentTemplateInput_name}}
+var mDeleteEnvironmentTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentTemplateOutput_environmentTemplate}}
+var mDeleteEnvironmentTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentTemplateVersionInput_templateName, &sDeleteEnvironmentTemplateVersionInput_majorVersion, &sDeleteEnvironmentTemplateVersionInput_minorVersion}}
+var mDeleteEnvironmentTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion}}
+var mDeleteRepositoryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRepositoryInput_provider, &sDeleteRepositoryInput_name}}
+var mDeleteRepositoryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRepositoryOutput_repository}}
+var mDeleteServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceInput_name}}
+var mDeleteServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceOutput_service}}
+var mDeleteServiceSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceSyncConfigInput_serviceName}}
+var mDeleteServiceSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceSyncConfigOutput_serviceSyncConfig}}
+var mDeleteServiceTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceTemplateInput_name}}
+var mDeleteServiceTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceTemplateOutput_serviceTemplate}}
+var mDeleteServiceTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceTemplateVersionInput_templateName, &sDeleteServiceTemplateVersionInput_majorVersion, &sDeleteServiceTemplateVersionInput_minorVersion}}
+var mDeleteServiceTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceTemplateVersionOutput_serviceTemplateVersion}}
+var mDeleteTemplateSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTemplateSyncConfigInput_templateName, &sDeleteTemplateSyncConfigInput_templateType}}
+var mDeleteTemplateSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTemplateSyncConfigOutput_templateSyncConfig}}
+var mGetAccountSettingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAccountSettingsOutput_accountSettings}}
+var mGetComponentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentInput_name}}
+var mGetComponentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentOutput_component}}
+var mGetDeploymentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentInput_id, &sGetDeploymentInput_environmentName, &sGetDeploymentInput_serviceName, &sGetDeploymentInput_serviceInstanceName, &sGetDeploymentInput_componentName}}
+var mGetDeploymentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentOutput_deployment}}
+var mGetEnvironmentAccountConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentAccountConnectionInput_id}}
+var mGetEnvironmentAccountConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentAccountConnectionOutput_environmentAccountConnection}}
+var mGetEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentInput_name}}
+var mGetEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentOutput_environment}}
+var mGetEnvironmentTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentTemplateInput_name}}
+var mGetEnvironmentTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentTemplateOutput_environmentTemplate}}
+var mGetEnvironmentTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentTemplateVersionInput_templateName, &sGetEnvironmentTemplateVersionInput_majorVersion, &sGetEnvironmentTemplateVersionInput_minorVersion}}
+var mGetEnvironmentTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnvironmentTemplateVersionOutput_environmentTemplateVersion}}
+var mGetRepositoryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryInput_provider, &sGetRepositoryInput_name}}
+var mGetRepositoryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositoryOutput_repository}}
+var mGetRepositorySyncStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositorySyncStatusInput_repositoryName, &sGetRepositorySyncStatusInput_repositoryProvider, &sGetRepositorySyncStatusInput_branch, &sGetRepositorySyncStatusInput_syncType}}
+var mGetRepositorySyncStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRepositorySyncStatusOutput_latestSync}}
+var mGetResourcesSummaryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcesSummaryOutput_counts}}
+var mGetServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceInput_name}}
+var mGetServiceInstanceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceInstanceInput_name, &sGetServiceInstanceInput_serviceName}}
+var mGetServiceInstanceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceInstanceOutput_serviceInstance}}
+var mGetServiceInstanceSyncStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceInstanceSyncStatusInput_serviceName, &sGetServiceInstanceSyncStatusInput_serviceInstanceName}}
+var mGetServiceInstanceSyncStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceInstanceSyncStatusOutput_latestSync, &sGetServiceInstanceSyncStatusOutput_latestSuccessfulSync, &sGetServiceInstanceSyncStatusOutput_desiredState}}
+var mGetServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceOutput_service}}
+var mGetServiceSyncBlockerSummaryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceSyncBlockerSummaryInput_serviceName, &sGetServiceSyncBlockerSummaryInput_serviceInstanceName}}
+var mGetServiceSyncBlockerSummaryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary}}
+var mGetServiceSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceSyncConfigInput_serviceName}}
+var mGetServiceSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceSyncConfigOutput_serviceSyncConfig}}
+var mGetServiceTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceTemplateInput_name}}
+var mGetServiceTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceTemplateOutput_serviceTemplate}}
+var mGetServiceTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceTemplateVersionInput_templateName, &sGetServiceTemplateVersionInput_majorVersion, &sGetServiceTemplateVersionInput_minorVersion}}
+var mGetServiceTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceTemplateVersionOutput_serviceTemplateVersion}}
+var mGetTemplateSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateSyncConfigInput_templateName, &sGetTemplateSyncConfigInput_templateType}}
+var mGetTemplateSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateSyncConfigOutput_templateSyncConfig}}
+var mGetTemplateSyncStatusInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateSyncStatusInput_templateName, &sGetTemplateSyncStatusInput_templateType, &sGetTemplateSyncStatusInput_templateVersion}}
+var mGetTemplateSyncStatusOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetTemplateSyncStatusOutput_latestSync, &sGetTemplateSyncStatusOutput_latestSuccessfulSync, &sGetTemplateSyncStatusOutput_desiredState}}
+var mListComponentOutputsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentOutputsInput_componentName, &sListComponentOutputsInput_nextToken, &sListComponentOutputsInput_deploymentId}}
+var mListComponentOutputsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentOutputsOutput_nextToken, &sListComponentOutputsOutput_outputs}}
+var mListComponentProvisionedResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentProvisionedResourcesInput_componentName, &sListComponentProvisionedResourcesInput_nextToken}}
+var mListComponentProvisionedResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentProvisionedResourcesOutput_nextToken, &sListComponentProvisionedResourcesOutput_provisionedResources}}
+var mListComponentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsInput_nextToken, &sListComponentsInput_environmentName, &sListComponentsInput_serviceName, &sListComponentsInput_serviceInstanceName, &sListComponentsInput_maxResults}}
+var mListComponentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsOutput_nextToken, &sListComponentsOutput_components}}
+var mListDeploymentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentsInput_nextToken, &sListDeploymentsInput_environmentName, &sListDeploymentsInput_serviceName, &sListDeploymentsInput_serviceInstanceName, &sListDeploymentsInput_componentName, &sListDeploymentsInput_maxResults}}
+var mListDeploymentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentsOutput_nextToken, &sListDeploymentsOutput_deployments}}
+var mListEnvironmentAccountConnectionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentAccountConnectionsInput_requestedBy, &sListEnvironmentAccountConnectionsInput_environmentName, &sListEnvironmentAccountConnectionsInput_statuses, &sListEnvironmentAccountConnectionsInput_nextToken, &sListEnvironmentAccountConnectionsInput_maxResults}}
+var mListEnvironmentAccountConnectionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentAccountConnectionsOutput_environmentAccountConnections, &sListEnvironmentAccountConnectionsOutput_nextToken}}
+var mListEnvironmentOutputsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentOutputsInput_environmentName, &sListEnvironmentOutputsInput_nextToken, &sListEnvironmentOutputsInput_deploymentId}}
+var mListEnvironmentOutputsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentOutputsOutput_nextToken, &sListEnvironmentOutputsOutput_outputs}}
+var mListEnvironmentProvisionedResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentProvisionedResourcesInput_environmentName, &sListEnvironmentProvisionedResourcesInput_nextToken}}
+var mListEnvironmentProvisionedResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentProvisionedResourcesOutput_nextToken, &sListEnvironmentProvisionedResourcesOutput_provisionedResources}}
+var mListEnvironmentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentsInput_nextToken, &sListEnvironmentsInput_maxResults, &sListEnvironmentsInput_environmentTemplates}}
+var mListEnvironmentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentsOutput_nextToken, &sListEnvironmentsOutput_environments}}
+var mListEnvironmentTemplatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentTemplatesInput_nextToken, &sListEnvironmentTemplatesInput_maxResults}}
+var mListEnvironmentTemplatesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentTemplatesOutput_nextToken, &sListEnvironmentTemplatesOutput_templates}}
+var mListEnvironmentTemplateVersionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentTemplateVersionsInput_nextToken, &sListEnvironmentTemplateVersionsInput_maxResults, &sListEnvironmentTemplateVersionsInput_templateName, &sListEnvironmentTemplateVersionsInput_majorVersion}}
+var mListEnvironmentTemplateVersionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnvironmentTemplateVersionsOutput_nextToken, &sListEnvironmentTemplateVersionsOutput_templateVersions}}
+var mListRepositoriesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoriesInput_nextToken, &sListRepositoriesInput_maxResults}}
+var mListRepositoriesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositoriesOutput_nextToken, &sListRepositoriesOutput_repositories}}
+var mListRepositorySyncDefinitionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositorySyncDefinitionsInput_repositoryName, &sListRepositorySyncDefinitionsInput_repositoryProvider, &sListRepositorySyncDefinitionsInput_syncType, &sListRepositorySyncDefinitionsInput_nextToken}}
+var mListRepositorySyncDefinitionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListRepositorySyncDefinitionsOutput_nextToken, &sListRepositorySyncDefinitionsOutput_syncDefinitions}}
+var mListServiceInstanceOutputsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceInstanceOutputsInput_serviceInstanceName, &sListServiceInstanceOutputsInput_serviceName, &sListServiceInstanceOutputsInput_nextToken, &sListServiceInstanceOutputsInput_deploymentId}}
+var mListServiceInstanceOutputsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceInstanceOutputsOutput_nextToken, &sListServiceInstanceOutputsOutput_outputs}}
+var mListServiceInstanceProvisionedResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceInstanceProvisionedResourcesInput_serviceName, &sListServiceInstanceProvisionedResourcesInput_serviceInstanceName, &sListServiceInstanceProvisionedResourcesInput_nextToken}}
+var mListServiceInstanceProvisionedResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceInstanceProvisionedResourcesOutput_nextToken, &sListServiceInstanceProvisionedResourcesOutput_provisionedResources}}
+var mListServiceInstancesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceInstancesInput_serviceName, &sListServiceInstancesInput_nextToken, &sListServiceInstancesInput_maxResults, &sListServiceInstancesInput_filters, &sListServiceInstancesInput_sortBy, &sListServiceInstancesInput_sortOrder}}
+var mListServiceInstancesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceInstancesOutput_nextToken, &sListServiceInstancesOutput_serviceInstances}}
+var mListServicePipelineOutputsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicePipelineOutputsInput_serviceName, &sListServicePipelineOutputsInput_nextToken, &sListServicePipelineOutputsInput_deploymentId}}
+var mListServicePipelineOutputsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicePipelineOutputsOutput_nextToken, &sListServicePipelineOutputsOutput_outputs}}
+var mListServicePipelineProvisionedResourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicePipelineProvisionedResourcesInput_serviceName, &sListServicePipelineProvisionedResourcesInput_nextToken}}
+var mListServicePipelineProvisionedResourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicePipelineProvisionedResourcesOutput_nextToken, &sListServicePipelineProvisionedResourcesOutput_provisionedResources}}
+var mListServicesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesInput_nextToken, &sListServicesInput_maxResults}}
+var mListServicesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServicesOutput_nextToken, &sListServicesOutput_services}}
+var mListServiceTemplatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceTemplatesInput_nextToken, &sListServiceTemplatesInput_maxResults}}
+var mListServiceTemplatesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceTemplatesOutput_nextToken, &sListServiceTemplatesOutput_templates}}
+var mListServiceTemplateVersionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceTemplateVersionsInput_nextToken, &sListServiceTemplateVersionsInput_maxResults, &sListServiceTemplateVersionsInput_templateName, &sListServiceTemplateVersionsInput_majorVersion}}
+var mListServiceTemplateVersionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceTemplateVersionsOutput_nextToken, &sListServiceTemplateVersionsOutput_templateVersions}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn, &sListTagsForResourceInput_nextToken, &sListTagsForResourceInput_maxResults}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags, &sListTagsForResourceOutput_nextToken}}
+var mNotifyResourceDeploymentStatusChangeInput = smithy.SchemaMembers{List: []*smithy.Schema{&sNotifyResourceDeploymentStatusChangeInput_resourceArn, &sNotifyResourceDeploymentStatusChangeInput_status, &sNotifyResourceDeploymentStatusChangeInput_outputs, &sNotifyResourceDeploymentStatusChangeInput_deploymentId, &sNotifyResourceDeploymentStatusChangeInput_statusMessage}}
+var mRejectEnvironmentAccountConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectEnvironmentAccountConnectionInput_id}}
+var mRejectEnvironmentAccountConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRejectEnvironmentAccountConnectionOutput_environmentAccountConnection}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateAccountSettingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsInput_pipelineServiceRoleArn, &sUpdateAccountSettingsInput_pipelineProvisioningRepository, &sUpdateAccountSettingsInput_deletePipelineProvisioningRepository, &sUpdateAccountSettingsInput_pipelineCodebuildRoleArn}}
+var mUpdateAccountSettingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAccountSettingsOutput_accountSettings}}
+var mUpdateComponentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentInput_name, &sUpdateComponentInput_deploymentType, &sUpdateComponentInput_description, &sUpdateComponentInput_serviceName, &sUpdateComponentInput_serviceInstanceName, &sUpdateComponentInput_serviceSpec, &sUpdateComponentInput_templateFile, &sUpdateComponentInput_clientToken}}
+var mUpdateComponentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComponentOutput_component}}
+var mUpdateEnvironmentAccountConnectionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentAccountConnectionInput_id, &sUpdateEnvironmentAccountConnectionInput_roleArn, &sUpdateEnvironmentAccountConnectionInput_componentRoleArn, &sUpdateEnvironmentAccountConnectionInput_codebuildRoleArn}}
+var mUpdateEnvironmentAccountConnectionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentAccountConnectionOutput_environmentAccountConnection}}
+var mUpdateEnvironmentInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentInput_name, &sUpdateEnvironmentInput_description, &sUpdateEnvironmentInput_spec, &sUpdateEnvironmentInput_templateMajorVersion, &sUpdateEnvironmentInput_templateMinorVersion, &sUpdateEnvironmentInput_protonServiceRoleArn, &sUpdateEnvironmentInput_deploymentType, &sUpdateEnvironmentInput_environmentAccountConnectionId, &sUpdateEnvironmentInput_provisioningRepository, &sUpdateEnvironmentInput_componentRoleArn, &sUpdateEnvironmentInput_codebuildRoleArn}, Seed: 12, Slots: []uint16{
+	0, 0, 0, 8, 3, 0, 0, 0, 0, 2, 6, 0, 1, 4, 10, 0, 0, 0, 7, 0, 0, 5, 0, 0,
+	11, 0, 9, 0, 0, 0, 0, 0,
+}}
+var mUpdateEnvironmentOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentOutput_environment}}
+var mUpdateEnvironmentTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentTemplateInput_name, &sUpdateEnvironmentTemplateInput_displayName, &sUpdateEnvironmentTemplateInput_description}}
+var mUpdateEnvironmentTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentTemplateOutput_environmentTemplate}}
+var mUpdateEnvironmentTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentTemplateVersionInput_templateName, &sUpdateEnvironmentTemplateVersionInput_majorVersion, &sUpdateEnvironmentTemplateVersionInput_minorVersion, &sUpdateEnvironmentTemplateVersionInput_description, &sUpdateEnvironmentTemplateVersionInput_status}}
+var mUpdateEnvironmentTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion}}
+var mUpdateServiceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceInput_name, &sUpdateServiceInput_description, &sUpdateServiceInput_spec}}
+var mUpdateServiceInstanceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceInstanceInput_name, &sUpdateServiceInstanceInput_serviceName, &sUpdateServiceInstanceInput_deploymentType, &sUpdateServiceInstanceInput_spec, &sUpdateServiceInstanceInput_templateMajorVersion, &sUpdateServiceInstanceInput_templateMinorVersion, &sUpdateServiceInstanceInput_clientToken}}
+var mUpdateServiceInstanceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceInstanceOutput_serviceInstance}}
+var mUpdateServiceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceOutput_service}}
+var mUpdateServicePipelineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServicePipelineInput_serviceName, &sUpdateServicePipelineInput_spec, &sUpdateServicePipelineInput_deploymentType, &sUpdateServicePipelineInput_templateMajorVersion, &sUpdateServicePipelineInput_templateMinorVersion}}
+var mUpdateServicePipelineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServicePipelineOutput_pipeline}}
+var mUpdateServiceSyncBlockerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceSyncBlockerInput_id, &sUpdateServiceSyncBlockerInput_resolvedReason}}
+var mUpdateServiceSyncBlockerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceSyncBlockerOutput_serviceName, &sUpdateServiceSyncBlockerOutput_serviceInstanceName, &sUpdateServiceSyncBlockerOutput_serviceSyncBlocker}}
+var mUpdateServiceSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceSyncConfigInput_serviceName, &sUpdateServiceSyncConfigInput_repositoryProvider, &sUpdateServiceSyncConfigInput_repositoryName, &sUpdateServiceSyncConfigInput_branch, &sUpdateServiceSyncConfigInput_filePath}}
+var mUpdateServiceSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceSyncConfigOutput_serviceSyncConfig}}
+var mUpdateServiceTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceTemplateInput_name, &sUpdateServiceTemplateInput_displayName, &sUpdateServiceTemplateInput_description}}
+var mUpdateServiceTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceTemplateOutput_serviceTemplate}}
+var mUpdateServiceTemplateVersionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceTemplateVersionInput_templateName, &sUpdateServiceTemplateVersionInput_majorVersion, &sUpdateServiceTemplateVersionInput_minorVersion, &sUpdateServiceTemplateVersionInput_description, &sUpdateServiceTemplateVersionInput_status, &sUpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates, &sUpdateServiceTemplateVersionInput_supportedComponentSources}}
+var mUpdateServiceTemplateVersionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceTemplateVersionOutput_serviceTemplateVersion}}
+var mUpdateTemplateSyncConfigInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTemplateSyncConfigInput_templateName, &sUpdateTemplateSyncConfigInput_templateType, &sUpdateTemplateSyncConfigInput_repositoryProvider, &sUpdateTemplateSyncConfigInput_repositoryName, &sUpdateTemplateSyncConfigInput_branch, &sUpdateTemplateSyncConfigInput_subdirectory}}
+var mUpdateTemplateSyncConfigOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateTemplateSyncConfigOutput_templateSyncConfig}}
+
+var sAcceptEnvironmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptEnvironmentAccountConnection, Type: smithy.ShapeTypeOperation})
+var sCancelComponentDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelComponentDeployment, Type: smithy.ShapeTypeOperation})
+var sCancelEnvironmentDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelEnvironmentDeployment, Type: smithy.ShapeTypeOperation})
+var sCancelServiceInstanceDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelServiceInstanceDeployment, Type: smithy.ShapeTypeOperation})
+var sCancelServicePipelineDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelServicePipelineDeployment, Type: smithy.ShapeTypeOperation})
+var sCreateComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponent, Type: smithy.ShapeTypeOperation})
+var sCreateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironment, Type: smithy.ShapeTypeOperation})
+var sCreateEnvironmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentAccountConnection, Type: smithy.ShapeTypeOperation})
+var sCreateEnvironmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentTemplate, Type: smithy.ShapeTypeOperation})
+var sCreateEnvironmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sCreateRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepository, Type: smithy.ShapeTypeOperation})
+var sCreateService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateService, Type: smithy.ShapeTypeOperation})
+var sCreateServiceInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceInstance, Type: smithy.ShapeTypeOperation})
+var sCreateServiceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceSyncConfig, Type: smithy.ShapeTypeOperation})
+var sCreateServiceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceTemplate, Type: smithy.ShapeTypeOperation})
+var sCreateServiceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sCreateTemplateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateSyncConfig, Type: smithy.ShapeTypeOperation})
+var sDeleteComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponent, Type: smithy.ShapeTypeOperation})
+var sDeleteDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeployment, Type: smithy.ShapeTypeOperation})
+var sDeleteEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironment, Type: smithy.ShapeTypeOperation})
+var sDeleteEnvironmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentAccountConnection, Type: smithy.ShapeTypeOperation})
+var sDeleteEnvironmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentTemplate, Type: smithy.ShapeTypeOperation})
+var sDeleteEnvironmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sDeleteRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepository, Type: smithy.ShapeTypeOperation})
+var sDeleteService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteService, Type: smithy.ShapeTypeOperation})
+var sDeleteServiceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceSyncConfig, Type: smithy.ShapeTypeOperation})
+var sDeleteServiceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceTemplate, Type: smithy.ShapeTypeOperation})
+var sDeleteServiceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sDeleteTemplateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateSyncConfig, Type: smithy.ShapeTypeOperation})
+var sGetAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettings, Type: smithy.ShapeTypeOperation})
+var sGetComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponent, Type: smithy.ShapeTypeOperation})
+var sGetDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeployment, Type: smithy.ShapeTypeOperation})
+var sGetEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironment, Type: smithy.ShapeTypeOperation})
+var sGetEnvironmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentAccountConnection, Type: smithy.ShapeTypeOperation})
+var sGetEnvironmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentTemplate, Type: smithy.ShapeTypeOperation})
+var sGetEnvironmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sGetRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepository, Type: smithy.ShapeTypeOperation})
+var sGetRepositorySyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositorySyncStatus, Type: smithy.ShapeTypeOperation})
+var sGetResourcesSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcesSummary, Type: smithy.ShapeTypeOperation})
+var sGetService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetService, Type: smithy.ShapeTypeOperation})
+var sGetServiceInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInstance, Type: smithy.ShapeTypeOperation})
+var sGetServiceInstanceSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInstanceSyncStatus, Type: smithy.ShapeTypeOperation})
+var sGetServiceSyncBlockerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSyncBlockerSummary, Type: smithy.ShapeTypeOperation})
+var sGetServiceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSyncConfig, Type: smithy.ShapeTypeOperation})
+var sGetServiceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceTemplate, Type: smithy.ShapeTypeOperation})
+var sGetServiceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sGetTemplateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateSyncConfig, Type: smithy.ShapeTypeOperation})
+var sGetTemplateSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateSyncStatus, Type: smithy.ShapeTypeOperation})
+var sListComponentOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentOutputs, Type: smithy.ShapeTypeOperation})
+var sListComponentProvisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentProvisionedResources, Type: smithy.ShapeTypeOperation})
+var sListComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponents, Type: smithy.ShapeTypeOperation})
+var sListDeployments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployments, Type: smithy.ShapeTypeOperation})
+var sListEnvironmentAccountConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentAccountConnections, Type: smithy.ShapeTypeOperation})
+var sListEnvironmentOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentOutputs, Type: smithy.ShapeTypeOperation})
+var sListEnvironmentProvisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentProvisionedResources, Type: smithy.ShapeTypeOperation})
+var sListEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironments, Type: smithy.ShapeTypeOperation})
+var sListEnvironmentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentTemplates, Type: smithy.ShapeTypeOperation})
+var sListEnvironmentTemplateVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentTemplateVersions, Type: smithy.ShapeTypeOperation})
+var sListRepositories = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositories, Type: smithy.ShapeTypeOperation})
+var sListRepositorySyncDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositorySyncDefinitions, Type: smithy.ShapeTypeOperation})
+var sListServiceInstanceOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstanceOutputs, Type: smithy.ShapeTypeOperation})
+var sListServiceInstanceProvisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstanceProvisionedResources, Type: smithy.ShapeTypeOperation})
+var sListServiceInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstances, Type: smithy.ShapeTypeOperation})
+var sListServicePipelineOutputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePipelineOutputs, Type: smithy.ShapeTypeOperation})
+var sListServicePipelineProvisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePipelineProvisionedResources, Type: smithy.ShapeTypeOperation})
+var sListServices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServices, Type: smithy.ShapeTypeOperation})
+var sListServiceTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceTemplates, Type: smithy.ShapeTypeOperation})
+var sListServiceTemplateVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceTemplateVersions, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sNotifyResourceDeploymentStatusChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyResourceDeploymentStatusChange, Type: smithy.ShapeTypeOperation})
+var sRejectEnvironmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectEnvironmentAccountConnection, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettings, Type: smithy.ShapeTypeOperation})
+var sUpdateComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponent, Type: smithy.ShapeTypeOperation})
+var sUpdateEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironment, Type: smithy.ShapeTypeOperation})
+var sUpdateEnvironmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentAccountConnection, Type: smithy.ShapeTypeOperation})
+var sUpdateEnvironmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentTemplate, Type: smithy.ShapeTypeOperation})
+var sUpdateEnvironmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sUpdateService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateService, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceInstance, Type: smithy.ShapeTypeOperation})
+var sUpdateServicePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServicePipeline, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceSyncBlocker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSyncBlocker, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSyncConfig, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceTemplate, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceTemplateVersion, Type: smithy.ShapeTypeOperation})
+var sUpdateTemplateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateSyncConfig, Type: smithy.ShapeTypeOperation})
+var s_AwsProton20200720 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsProton20200720, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sAccountSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountSettings, Members: &mAccountSettings, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AwsAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var s_BlockerStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockerStatus, Type: smithy.ShapeTypeString})
+var s_BlockerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BlockerType, Type: smithy.ShapeTypeString})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCompatibleEnvironmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompatibleEnvironmentTemplate, Members: &mCompatibleEnvironmentTemplate, Type: smithy.ShapeTypeStructure})
+var sCompatibleEnvironmentTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompatibleEnvironmentTemplateInput, Members: &mCompatibleEnvironmentTemplateInput, Type: smithy.ShapeTypeStructure})
+var s_CompatibleEnvironmentTemplateInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompatibleEnvironmentTemplateInputList, Members: &m_CompatibleEnvironmentTemplateInputList, Type: smithy.ShapeTypeList})
+var s_CompatibleEnvironmentTemplateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CompatibleEnvironmentTemplateList, Members: &m_CompatibleEnvironmentTemplateList, Type: smithy.ShapeTypeList})
+var sComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var s_ComponentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentArn, Type: smithy.ShapeTypeString})
+var s_ComponentDeploymentIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentDeploymentIdList, Members: &m_ComponentDeploymentIdList, Type: smithy.ShapeTypeList})
+var s_ComponentDeploymentUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentDeploymentUpdateType, Type: smithy.ShapeTypeString})
+var sComponentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentState, Members: &mComponentState, Type: smithy.ShapeTypeStructure})
+var sComponentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentSummary, Members: &mComponentSummary, Type: smithy.ShapeTypeStructure})
+var s_ComponentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentSummaryList, Members: &m_ComponentSummaryList, Type: smithy.ShapeTypeList})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sCountsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCountsSummary, Members: &mCountsSummary, Type: smithy.ShapeTypeStructure})
+var sDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure})
+var s_DeploymentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentArn, Type: smithy.ShapeTypeString})
+var s_DeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeploymentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentState, Members: &mDeploymentState, Type: smithy.ShapeTypeUnion})
+var s_DeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sDeploymentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentSummary, Members: &mDeploymentSummary, Type: smithy.ShapeTypeStructure})
+var s_DeploymentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentSummaryList, Members: &m_DeploymentSummaryList, Type: smithy.ShapeTypeList})
+var s_DeploymentTargetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentTargetResourceType, Type: smithy.ShapeTypeString})
+var s_DeploymentUpdateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentUpdateType, Type: smithy.ShapeTypeString})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_DisplayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisplayName, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_EmptyNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var sEnvironmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentAccountConnection, Members: &mEnvironmentAccountConnection, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentAccountConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentAccountConnectionArn, Type: smithy.ShapeTypeString})
+var s_EnvironmentAccountConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var s_EnvironmentAccountConnectionRequesterAccountType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentAccountConnectionRequesterAccountType, Type: smithy.ShapeTypeString})
+var s_EnvironmentAccountConnectionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentAccountConnectionStatus, Type: smithy.ShapeTypeString})
+var s_EnvironmentAccountConnectionStatusList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentAccountConnectionStatusList, Members: &m_EnvironmentAccountConnectionStatusList, Type: smithy.ShapeTypeList})
+var sEnvironmentAccountConnectionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentAccountConnectionSummary, Members: &mEnvironmentAccountConnectionSummary, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentAccountConnectionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentAccountConnectionSummaryList, Members: &m_EnvironmentAccountConnectionSummaryList, Type: smithy.ShapeTypeList})
+var s_EnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sEnvironmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeStructure})
+var sEnvironmentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentSummary, Members: &mEnvironmentSummary, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentSummaryList, Members: &m_EnvironmentSummaryList, Type: smithy.ShapeTypeList})
+var sEnvironmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentTemplate, Members: &mEnvironmentTemplate, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentTemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentTemplateArn, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentTemplateFilter, Members: &mEnvironmentTemplateFilter, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentTemplateFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentTemplateFilterList, Members: &m_EnvironmentTemplateFilterList, Type: smithy.ShapeTypeList})
+var sEnvironmentTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentTemplateSummary, Members: &mEnvironmentTemplateSummary, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentTemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentTemplateSummaryList, Members: &m_EnvironmentTemplateSummaryList, Type: smithy.ShapeTypeList})
+var sEnvironmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentTemplateVersion, Members: &mEnvironmentTemplateVersion, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentTemplateVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentTemplateVersionArn, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnvironmentTemplateVersionSummary, Members: &mEnvironmentTemplateVersionSummary, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentTemplateVersionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentTemplateVersionSummaryList, Members: &m_EnvironmentTemplateVersionSummaryList, Type: smithy.ShapeTypeList})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_FullTemplateVersionNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FullTemplateVersionNumber, Type: smithy.ShapeTypeString})
+var s_GitBranchName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_LatestSyncBlockers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LatestSyncBlockers, Members: &m_LatestSyncBlockers, Type: smithy.ShapeTypeList})
+var sListServiceInstancesFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstancesFilter, Members: &mListServiceInstancesFilter, Type: smithy.ShapeTypeStructure})
+var s_ListServiceInstancesFilterBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceInstancesFilterBy, Type: smithy.ShapeTypeString})
+var s_ListServiceInstancesFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceInstancesFilterList, Members: &m_ListServiceInstancesFilterList, Type: smithy.ShapeTypeList})
+var s_ListServiceInstancesFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceInstancesFilterValue, Type: smithy.ShapeTypeString})
+var s_ListServiceInstancesSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListServiceInstancesSortBy, Type: smithy.ShapeTypeString})
+var s_MaxPageResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OpsFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpsFilePath, Type: smithy.ShapeTypeString})
+var sOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutput, Members: &mOutput, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_OutputKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputKey, Type: smithy.ShapeTypeString})
+var s_OutputsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputsList, Members: &m_OutputsList, Type: smithy.ShapeTypeList})
+var s_OutputValueString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OutputValueString, Type: smithy.ShapeTypeString})
+var sProvisionedResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iProvisionedResource, Members: &mProvisionedResource, Type: smithy.ShapeTypeStructure})
+var s_ProvisionedResourceEngine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProvisionedResourceEngine, Type: smithy.ShapeTypeString})
+var s_ProvisionedResourceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProvisionedResourceIdentifier, Type: smithy.ShapeTypeString})
+var s_ProvisionedResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProvisionedResourceList, Members: &m_ProvisionedResourceList, Type: smithy.ShapeTypeList})
+var s_ProvisionedResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProvisionedResourceName, Type: smithy.ShapeTypeString})
+var s_Provisioning = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var sRepository = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepository, Members: &mRepository, Type: smithy.ShapeTypeStructure})
+var s_RepositoryArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryArn, Type: smithy.ShapeTypeString})
+var sRepositoryBranch = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryBranch, Members: &mRepositoryBranch, Type: smithy.ShapeTypeStructure})
+var sRepositoryBranchInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryBranchInput, Members: &mRepositoryBranchInput, Type: smithy.ShapeTypeStructure})
+var s_RepositoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryId, Type: smithy.ShapeTypeString})
+var s_RepositoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var s_RepositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sRepositorySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySummary, Members: &mRepositorySummary, Type: smithy.ShapeTypeStructure})
+var s_RepositorySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositorySummaryList, Members: &m_RepositorySummaryList, Type: smithy.ShapeTypeList})
+var sRepositorySyncAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySyncAttempt, Members: &mRepositorySyncAttempt, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySyncDefinition, Members: &mRepositorySyncDefinition, Type: smithy.ShapeTypeStructure})
+var s_RepositorySyncDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositorySyncDefinitionList, Members: &m_RepositorySyncDefinitionList, Type: smithy.ShapeTypeList})
+var sRepositorySyncEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositorySyncEvent, Members: &mRepositorySyncEvent, Type: smithy.ShapeTypeStructure})
+var s_RepositorySyncEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositorySyncEvents, Members: &m_RepositorySyncEvents, Type: smithy.ShapeTypeList})
+var s_RepositorySyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositorySyncStatus, Type: smithy.ShapeTypeString})
+var sResourceCountsSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var s_ResourceDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDeploymentStatus, Type: smithy.ShapeTypeString})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var s_ResourceNameOrEmpty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceNameOrEmpty, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sResourceSyncAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sResourceSyncEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceSyncEvent, Members: &mResourceSyncEvent, Type: smithy.ShapeTypeStructure})
+var s_ResourceSyncEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSyncEvents, Members: &m_ResourceSyncEvents, Type: smithy.ShapeTypeList})
+var s_ResourceSyncStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceSyncStatus, Type: smithy.ShapeTypeString})
+var sRevision = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var s_RoleArnOrEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArnOrEmptyString, Type: smithy.ShapeTypeString})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sS3ObjectSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3ObjectSource, Members: &mS3ObjectSource, Type: smithy.ShapeTypeStructure})
+var sService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var s_ServiceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceArn, Type: smithy.ShapeTypeString})
+var sServiceInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInstance, Members: &mServiceInstance, Type: smithy.ShapeTypeStructure})
+var s_ServiceInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceInstanceArn, Type: smithy.ShapeTypeString})
+var sServiceInstanceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInstanceState, Members: &mServiceInstanceState, Type: smithy.ShapeTypeStructure})
+var sServiceInstanceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceInstanceSummary, Members: &mServiceInstanceSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceInstanceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceInstanceSummaryList, Members: &m_ServiceInstanceSummaryList, Type: smithy.ShapeTypeList})
+var sServicePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePipeline, Members: &mServicePipeline, Type: smithy.ShapeTypeStructure})
+var sServicePipelineState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServicePipelineState, Members: &mServicePipelineState, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_ServiceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceStatus, Type: smithy.ShapeTypeString})
+var sServiceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceSummaryList, Members: &m_ServiceSummaryList, Type: smithy.ShapeTypeList})
+var sServiceSyncBlockerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSyncBlockerSummary, Members: &mServiceSyncBlockerSummary, Type: smithy.ShapeTypeStructure})
+var sServiceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSyncConfig, Members: &mServiceSyncConfig, Type: smithy.ShapeTypeStructure})
+var sServiceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceTemplate, Members: &mServiceTemplate, Type: smithy.ShapeTypeStructure})
+var s_ServiceTemplateArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceTemplateArn, Type: smithy.ShapeTypeString})
+var sServiceTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceTemplateSummary, Members: &mServiceTemplateSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceTemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceTemplateSummaryList, Members: &m_ServiceTemplateSummaryList, Type: smithy.ShapeTypeList})
+var s_ServiceTemplateSupportedComponentSourceInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceTemplateSupportedComponentSourceInputList, Members: &m_ServiceTemplateSupportedComponentSourceInputList, Type: smithy.ShapeTypeList})
+var s_ServiceTemplateSupportedComponentSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceTemplateSupportedComponentSourceType, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceTemplateVersion, Members: &mServiceTemplateVersion, Type: smithy.ShapeTypeStructure})
+var s_ServiceTemplateVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceTemplateVersionArn, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceTemplateVersionSummary, Members: &mServiceTemplateVersionSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceTemplateVersionSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceTemplateVersionSummaryList, Members: &m_ServiceTemplateVersionSummaryList, Type: smithy.ShapeTypeList})
+var s_SHA = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SHA, Type: smithy.ShapeTypeString})
+var s_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var s_SpecContents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SpecContents, Traits: &t8, Type: smithy.ShapeTypeString})
+var s_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusMessage, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_Subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Subdirectory, Type: smithy.ShapeTypeString})
+var sSyncBlocker = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncBlocker, Members: &mSyncBlocker, Type: smithy.ShapeTypeStructure})
+var sSyncBlockerContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSyncBlockerContext, Members: &mSyncBlockerContext, Type: smithy.ShapeTypeStructure})
+var s_SyncBlockerContexts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncBlockerContexts, Members: &m_SyncBlockerContexts, Type: smithy.ShapeTypeList})
+var s_SyncType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SyncType, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TemplateFileContents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateFileContents, Traits: &t8, Type: smithy.ShapeTypeString})
+var s_TemplateManifestContents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateManifestContents, Traits: &t8, Type: smithy.ShapeTypeString})
+var s_TemplateSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateSchema, Traits: &t8, Type: smithy.ShapeTypeString})
+var sTemplateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSyncConfig, Members: &mTemplateSyncConfig, Type: smithy.ShapeTypeStructure})
+var s_TemplateType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateType, Type: smithy.ShapeTypeString})
+var s_TemplateVersionPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sTemplateVersionSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateVersionSourceInput, Members: &mTemplateVersionSourceInput, Type: smithy.ShapeTypeUnion})
+var s_TemplateVersionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateVersionStatus, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sAcceptEnvironmentAccountConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptEnvironmentAccountConnectionInput, Members: &mAcceptEnvironmentAccountConnectionInput, Type: smithy.ShapeTypeStructure})
+var sAcceptEnvironmentAccountConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptEnvironmentAccountConnectionOutput, Members: &mAcceptEnvironmentAccountConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sCancelComponentDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelComponentDeploymentInput, Members: &mCancelComponentDeploymentInput, Type: smithy.ShapeTypeStructure})
+var sCancelComponentDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelComponentDeploymentOutput, Members: &mCancelComponentDeploymentOutput, Type: smithy.ShapeTypeStructure})
+var sCancelEnvironmentDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelEnvironmentDeploymentInput, Members: &mCancelEnvironmentDeploymentInput, Type: smithy.ShapeTypeStructure})
+var sCancelEnvironmentDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelEnvironmentDeploymentOutput, Members: &mCancelEnvironmentDeploymentOutput, Type: smithy.ShapeTypeStructure})
+var sCancelServiceInstanceDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelServiceInstanceDeploymentInput, Members: &mCancelServiceInstanceDeploymentInput, Type: smithy.ShapeTypeStructure})
+var sCancelServiceInstanceDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelServiceInstanceDeploymentOutput, Members: &mCancelServiceInstanceDeploymentOutput, Type: smithy.ShapeTypeStructure})
+var sCancelServicePipelineDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelServicePipelineDeploymentInput, Members: &mCancelServicePipelineDeploymentInput, Type: smithy.ShapeTypeStructure})
+var sCancelServicePipelineDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelServicePipelineDeploymentOutput, Members: &mCancelServicePipelineDeploymentOutput, Type: smithy.ShapeTypeStructure})
+var sCreateComponentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentInput, Members: &mCreateComponentInput, Type: smithy.ShapeTypeStructure})
+var sCreateComponentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentOutput, Members: &mCreateComponentOutput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentAccountConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentAccountConnectionInput, Members: &mCreateEnvironmentAccountConnectionInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentAccountConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentAccountConnectionOutput, Members: &mCreateEnvironmentAccountConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentInput, Members: &mCreateEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentOutput, Members: &mCreateEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentTemplateInput, Members: &mCreateEnvironmentTemplateInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentTemplateOutput, Members: &mCreateEnvironmentTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentTemplateVersionInput, Members: &mCreateEnvironmentTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEnvironmentTemplateVersionOutput, Members: &mCreateEnvironmentTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryInput, Members: &mCreateRepositoryInput, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRepositoryOutput, Members: &mCreateRepositoryOutput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceInput, Members: &mCreateServiceInput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceInstanceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceInstanceInput, Members: &mCreateServiceInstanceInput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceInstanceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceInstanceOutput, Members: &mCreateServiceInstanceOutput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceOutput, Members: &mCreateServiceOutput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceSyncConfigInput, Members: &mCreateServiceSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceSyncConfigOutput, Members: &mCreateServiceSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceTemplateInput, Members: &mCreateServiceTemplateInput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceTemplateOutput, Members: &mCreateServiceTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceTemplateVersionInput, Members: &mCreateServiceTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sCreateServiceTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceTemplateVersionOutput, Members: &mCreateServiceTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateSyncConfigInput, Members: &mCreateTemplateSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTemplateSyncConfigOutput, Members: &mCreateTemplateSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteComponentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentInput, Members: &mDeleteComponentInput, Type: smithy.ShapeTypeStructure})
+var sDeleteComponentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentOutput, Members: &mDeleteComponentOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentInput, Members: &mDeleteDeploymentInput, Type: smithy.ShapeTypeStructure})
+var sDeleteDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentOutput, Members: &mDeleteDeploymentOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentAccountConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentAccountConnectionInput, Members: &mDeleteEnvironmentAccountConnectionInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentAccountConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentAccountConnectionOutput, Members: &mDeleteEnvironmentAccountConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentInput, Members: &mDeleteEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentOutput, Members: &mDeleteEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentTemplateInput, Members: &mDeleteEnvironmentTemplateInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentTemplateOutput, Members: &mDeleteEnvironmentTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentTemplateVersionInput, Members: &mDeleteEnvironmentTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEnvironmentTemplateVersionOutput, Members: &mDeleteEnvironmentTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryInput, Members: &mDeleteRepositoryInput, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRepositoryOutput, Members: &mDeleteRepositoryOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceInput, Members: &mDeleteServiceInput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceOutput, Members: &mDeleteServiceOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceSyncConfigInput, Members: &mDeleteServiceSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceSyncConfigOutput, Members: &mDeleteServiceSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceTemplateInput, Members: &mDeleteServiceTemplateInput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceTemplateOutput, Members: &mDeleteServiceTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceTemplateVersionInput, Members: &mDeleteServiceTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceTemplateVersionOutput, Members: &mDeleteServiceTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteTemplateSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateSyncConfigInput, Members: &mDeleteTemplateSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTemplateSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTemplateSyncConfigOutput, Members: &mDeleteTemplateSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettingsInput, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAccountSettingsOutput, Members: &mGetAccountSettingsOutput, Type: smithy.ShapeTypeStructure})
+var sGetComponentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentInput, Members: &mGetComponentInput, Type: smithy.ShapeTypeStructure})
+var sGetComponentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentOutput, Members: &mGetComponentOutput, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentInput, Members: &mGetDeploymentInput, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentOutput, Members: &mGetDeploymentOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentAccountConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentAccountConnectionInput, Members: &mGetEnvironmentAccountConnectionInput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentAccountConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentAccountConnectionOutput, Members: &mGetEnvironmentAccountConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentInput, Members: &mGetEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentOutput, Members: &mGetEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentTemplateInput, Members: &mGetEnvironmentTemplateInput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentTemplateOutput, Members: &mGetEnvironmentTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentTemplateVersionInput, Members: &mGetEnvironmentTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnvironmentTemplateVersionOutput, Members: &mGetEnvironmentTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryInput, Members: &mGetRepositoryInput, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositoryOutput, Members: &mGetRepositoryOutput, Type: smithy.ShapeTypeStructure})
+var sGetRepositorySyncStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositorySyncStatusInput, Members: &mGetRepositorySyncStatusInput, Type: smithy.ShapeTypeStructure})
+var sGetRepositorySyncStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRepositorySyncStatusOutput, Members: &mGetRepositorySyncStatusOutput, Type: smithy.ShapeTypeStructure})
+var sGetResourcesSummaryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcesSummaryInput, Type: smithy.ShapeTypeStructure})
+var sGetResourcesSummaryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcesSummaryOutput, Members: &mGetResourcesSummaryOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInput, Members: &mGetServiceInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceInstanceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInstanceInput, Members: &mGetServiceInstanceInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceInstanceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInstanceOutput, Members: &mGetServiceInstanceOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceInstanceSyncStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInstanceSyncStatusInput, Members: &mGetServiceInstanceSyncStatusInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceInstanceSyncStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceInstanceSyncStatusOutput, Members: &mGetServiceInstanceSyncStatusOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceOutput, Members: &mGetServiceOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceSyncBlockerSummaryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSyncBlockerSummaryInput, Members: &mGetServiceSyncBlockerSummaryInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceSyncBlockerSummaryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSyncBlockerSummaryOutput, Members: &mGetServiceSyncBlockerSummaryOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSyncConfigInput, Members: &mGetServiceSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSyncConfigOutput, Members: &mGetServiceSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceTemplateInput, Members: &mGetServiceTemplateInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceTemplateOutput, Members: &mGetServiceTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceTemplateVersionInput, Members: &mGetServiceTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sGetServiceTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceTemplateVersionOutput, Members: &mGetServiceTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateSyncConfigInput, Members: &mGetTemplateSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateSyncConfigOutput, Members: &mGetTemplateSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncStatusInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateSyncStatusInput, Members: &mGetTemplateSyncStatusInput, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncStatusOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetTemplateSyncStatusOutput, Members: &mGetTemplateSyncStatusOutput, Type: smithy.ShapeTypeStructure})
+var sListComponentOutputsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentOutputsInput, Members: &mListComponentOutputsInput, Type: smithy.ShapeTypeStructure})
+var sListComponentOutputsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentOutputsOutput, Members: &mListComponentOutputsOutput, Type: smithy.ShapeTypeStructure})
+var sListComponentProvisionedResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentProvisionedResourcesInput, Members: &mListComponentProvisionedResourcesInput, Type: smithy.ShapeTypeStructure})
+var sListComponentProvisionedResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentProvisionedResourcesOutput, Members: &mListComponentProvisionedResourcesOutput, Type: smithy.ShapeTypeStructure})
+var sListComponentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsInput, Members: &mListComponentsInput, Type: smithy.ShapeTypeStructure})
+var sListComponentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsOutput, Members: &mListComponentsOutput, Type: smithy.ShapeTypeStructure})
+var sListDeploymentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentsInput, Members: &mListDeploymentsInput, Type: smithy.ShapeTypeStructure})
+var sListDeploymentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentsOutput, Members: &mListDeploymentsOutput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentAccountConnectionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentAccountConnectionsInput, Members: &mListEnvironmentAccountConnectionsInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentAccountConnectionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentAccountConnectionsOutput, Members: &mListEnvironmentAccountConnectionsOutput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentOutputsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentOutputsInput, Members: &mListEnvironmentOutputsInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentOutputsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentOutputsOutput, Members: &mListEnvironmentOutputsOutput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentProvisionedResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentProvisionedResourcesInput, Members: &mListEnvironmentProvisionedResourcesInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentProvisionedResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentProvisionedResourcesOutput, Members: &mListEnvironmentProvisionedResourcesOutput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsInput, Members: &mListEnvironmentsInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentsOutput, Members: &mListEnvironmentsOutput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentTemplatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentTemplatesInput, Members: &mListEnvironmentTemplatesInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentTemplatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentTemplatesOutput, Members: &mListEnvironmentTemplatesOutput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentTemplateVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentTemplateVersionsInput, Members: &mListEnvironmentTemplateVersionsInput, Type: smithy.ShapeTypeStructure})
+var sListEnvironmentTemplateVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnvironmentTemplateVersionsOutput, Members: &mListEnvironmentTemplateVersionsOutput, Type: smithy.ShapeTypeStructure})
+var sListRepositoriesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesInput, Members: &mListRepositoriesInput, Type: smithy.ShapeTypeStructure})
+var sListRepositoriesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositoriesOutput, Members: &mListRepositoriesOutput, Type: smithy.ShapeTypeStructure})
+var sListRepositorySyncDefinitionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositorySyncDefinitionsInput, Members: &mListRepositorySyncDefinitionsInput, Type: smithy.ShapeTypeStructure})
+var sListRepositorySyncDefinitionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRepositorySyncDefinitionsOutput, Members: &mListRepositorySyncDefinitionsOutput, Type: smithy.ShapeTypeStructure})
+var sListServiceInstanceOutputsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstanceOutputsInput, Members: &mListServiceInstanceOutputsInput, Type: smithy.ShapeTypeStructure})
+var sListServiceInstanceOutputsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstanceOutputsOutput, Members: &mListServiceInstanceOutputsOutput, Type: smithy.ShapeTypeStructure})
+var sListServiceInstanceProvisionedResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstanceProvisionedResourcesInput, Members: &mListServiceInstanceProvisionedResourcesInput, Type: smithy.ShapeTypeStructure})
+var sListServiceInstanceProvisionedResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstanceProvisionedResourcesOutput, Members: &mListServiceInstanceProvisionedResourcesOutput, Type: smithy.ShapeTypeStructure})
+var sListServiceInstancesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstancesInput, Members: &mListServiceInstancesInput, Type: smithy.ShapeTypeStructure})
+var sListServiceInstancesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceInstancesOutput, Members: &mListServiceInstancesOutput, Type: smithy.ShapeTypeStructure})
+var sListServicePipelineOutputsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePipelineOutputsInput, Members: &mListServicePipelineOutputsInput, Type: smithy.ShapeTypeStructure})
+var sListServicePipelineOutputsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePipelineOutputsOutput, Members: &mListServicePipelineOutputsOutput, Type: smithy.ShapeTypeStructure})
+var sListServicePipelineProvisionedResourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePipelineProvisionedResourcesInput, Members: &mListServicePipelineProvisionedResourcesInput, Type: smithy.ShapeTypeStructure})
+var sListServicePipelineProvisionedResourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicePipelineProvisionedResourcesOutput, Members: &mListServicePipelineProvisionedResourcesOutput, Type: smithy.ShapeTypeStructure})
+var sListServicesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesInput, Members: &mListServicesInput, Type: smithy.ShapeTypeStructure})
+var sListServicesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServicesOutput, Members: &mListServicesOutput, Type: smithy.ShapeTypeStructure})
+var sListServiceTemplatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceTemplatesInput, Members: &mListServiceTemplatesInput, Type: smithy.ShapeTypeStructure})
+var sListServiceTemplatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceTemplatesOutput, Members: &mListServiceTemplatesOutput, Type: smithy.ShapeTypeStructure})
+var sListServiceTemplateVersionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceTemplateVersionsInput, Members: &mListServiceTemplateVersionsInput, Type: smithy.ShapeTypeStructure})
+var sListServiceTemplateVersionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceTemplateVersionsOutput, Members: &mListServiceTemplateVersionsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sNotifyResourceDeploymentStatusChangeInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyResourceDeploymentStatusChangeInput, Members: &mNotifyResourceDeploymentStatusChangeInput, Type: smithy.ShapeTypeStructure})
+var sNotifyResourceDeploymentStatusChangeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotifyResourceDeploymentStatusChangeOutput, Type: smithy.ShapeTypeStructure})
+var sRejectEnvironmentAccountConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectEnvironmentAccountConnectionInput, Members: &mRejectEnvironmentAccountConnectionInput, Type: smithy.ShapeTypeStructure})
+var sRejectEnvironmentAccountConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRejectEnvironmentAccountConnectionOutput, Members: &mRejectEnvironmentAccountConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsInput, Members: &mUpdateAccountSettingsInput, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAccountSettingsOutput, Members: &mUpdateAccountSettingsOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateComponentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentInput, Members: &mUpdateComponentInput, Type: smithy.ShapeTypeStructure})
+var sUpdateComponentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComponentOutput, Members: &mUpdateComponentOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentAccountConnectionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentAccountConnectionInput, Members: &mUpdateEnvironmentAccountConnectionInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentAccountConnectionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentAccountConnectionOutput, Members: &mUpdateEnvironmentAccountConnectionOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentInput, Members: &mUpdateEnvironmentInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentOutput, Members: &mUpdateEnvironmentOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentTemplateInput, Members: &mUpdateEnvironmentTemplateInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentTemplateOutput, Members: &mUpdateEnvironmentTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentTemplateVersionInput, Members: &mUpdateEnvironmentTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnvironmentTemplateVersionOutput, Members: &mUpdateEnvironmentTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceInput, Members: &mUpdateServiceInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceInstanceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceInstanceInput, Members: &mUpdateServiceInstanceInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceInstanceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceInstanceOutput, Members: &mUpdateServiceInstanceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceOutput, Members: &mUpdateServiceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateServicePipelineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServicePipelineInput, Members: &mUpdateServicePipelineInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServicePipelineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServicePipelineOutput, Members: &mUpdateServicePipelineOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSyncBlockerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSyncBlockerInput, Members: &mUpdateServiceSyncBlockerInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSyncBlockerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSyncBlockerOutput, Members: &mUpdateServiceSyncBlockerOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSyncConfigInput, Members: &mUpdateServiceSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSyncConfigOutput, Members: &mUpdateServiceSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceTemplateInput, Members: &mUpdateServiceTemplateInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceTemplateOutput, Members: &mUpdateServiceTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceTemplateVersionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceTemplateVersionInput, Members: &mUpdateServiceTemplateVersionInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceTemplateVersionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceTemplateVersionOutput, Members: &mUpdateServiceTemplateVersionOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateSyncConfigInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateSyncConfigInput, Members: &mUpdateTemplateSyncConfigInput, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateSyncConfigOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateTemplateSyncConfigOutput, Members: &mUpdateTemplateSyncConfigOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sAccountSettings_pipelineServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineServiceRoleArn", ID: &i_RoleArnOrEmptyString, Type: smithy.ShapeTypeString})
+var sAccountSettings_pipelineProvisioningRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineProvisioningRepository", ID: &iRepositoryBranch, Members: &mRepositoryBranch, Type: smithy.ShapeTypeStructure})
+var sAccountSettings_pipelineCodebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineCodebuildRoleArn", ID: &i_RoleArnOrEmptyString, Type: smithy.ShapeTypeString})
+var sCompatibleEnvironmentTemplate_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCompatibleEnvironmentTemplate_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCompatibleEnvironmentTemplateInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCompatibleEnvironmentTemplateInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var s_CompatibleEnvironmentTemplateInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompatibleEnvironmentTemplateInput, Members: &mCompatibleEnvironmentTemplateInput, Type: smithy.ShapeTypeStructure})
+var s_CompatibleEnvironmentTemplateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCompatibleEnvironmentTemplate, Members: &mCompatibleEnvironmentTemplate, Type: smithy.ShapeTypeStructure})
+var sComponent_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponent_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sComponent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentArn, Type: smithy.ShapeTypeString})
+var sComponent_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponent_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponent_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponent_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponent_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponent_lastDeploymentAttemptedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentAttemptedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponent_lastDeploymentSucceededAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentSucceededAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponent_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sComponent_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sComponent_serviceSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSpec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sComponent_lastClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastClientRequestToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sComponent_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sComponent_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var s_ComponentDeploymentIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sComponentState_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceNameOrEmpty, Type: smithy.ShapeTypeString})
+var sComponentState_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceNameOrEmpty, Type: smithy.ShapeTypeString})
+var sComponentState_serviceSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSpec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sComponentState_templateFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateFile", ID: &i_TemplateFileContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sComponentSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponentSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentArn, Type: smithy.ShapeTypeString})
+var sComponentSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponentSummary_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponentSummary_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sComponentSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponentSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponentSummary_lastDeploymentAttemptedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentAttemptedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponentSummary_lastDeploymentSucceededAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentSucceededAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponentSummary_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sComponentSummary_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sComponentSummary_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sComponentSummary_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var s_ComponentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentSummary, Members: &mComponentSummary, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCountsSummary_components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "components", ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var sCountsSummary_environments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environments", ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var sCountsSummary_environmentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplates", ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var sCountsSummary_serviceInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstances", ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var sCountsSummary_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var sCountsSummary_serviceTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplates", ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var sCountsSummary_pipelines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelines", ID: &iResourceCountsSummary, Members: &mResourceCountsSummary, Type: smithy.ShapeTypeStructure})
+var sDeployment_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeployment_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DeploymentArn, Type: smithy.ShapeTypeString})
+var sDeployment_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDeployment_targetResourceCreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceCreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeployment_targetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceType", ID: &i_DeploymentTargetResourceType, Type: smithy.ShapeTypeString})
+var sDeployment_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeployment_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeployment_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeployment_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeployment_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sDeployment_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sDeployment_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeployment_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeployment_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeployment_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeployment_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeployment_initialState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialState", ID: &iDeploymentState, Members: &mDeploymentState, Type: smithy.ShapeTypeUnion})
+var sDeployment_targetState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetState", ID: &iDeploymentState, Members: &mDeploymentState, Type: smithy.ShapeTypeUnion})
+var sDeploymentState_serviceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstance", ID: &iServiceInstanceState, Members: &mServiceInstanceState, Type: smithy.ShapeTypeStructure})
+var sDeploymentState_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironmentState, Members: &mEnvironmentState, Type: smithy.ShapeTypeStructure})
+var sDeploymentState_servicePipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "servicePipeline", ID: &iServicePipelineState, Members: &mServicePipelineState, Type: smithy.ShapeTypeStructure})
+var sDeploymentState_component = smithy.NewStaticSchema(smithy.StaticSchema{Member: "component", ID: &iComponentState, Members: &mComponentState, Type: smithy.ShapeTypeStructure})
+var sDeploymentSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_DeploymentArn, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_targetResourceCreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceCreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeploymentSummary_targetResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetResourceType", ID: &i_DeploymentTargetResourceType, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeploymentSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeploymentSummary_completedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeploymentSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeploymentSummary_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var s_DeploymentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeploymentSummary, Members: &mDeploymentSummary, Type: smithy.ShapeTypeStructure})
+var sEnvironment_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironment_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironment_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironment_lastDeploymentAttemptedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentAttemptedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironment_lastDeploymentSucceededAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentSucceededAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironment_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sEnvironment_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironment_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironment_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironment_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sEnvironment_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironment_protonServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protonServiceRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnvironment_environmentAccountConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnectionId", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sEnvironment_environmentAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sEnvironment_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sEnvironment_provisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var sEnvironment_provisioningRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioningRepository", ID: &iRepositoryBranch, Members: &mRepositoryBranch, Type: smithy.ShapeTypeStructure})
+var sEnvironment_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sEnvironment_codebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codebuildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sEnvironment_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sEnvironment_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentAccountConnectionArn, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_managementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managementAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_environmentAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_requestedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentAccountConnection_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentAccountConnection_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_EnvironmentAccountConnectionStatus, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnection_codebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codebuildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var s_EnvironmentAccountConnectionStatusList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EnvironmentAccountConnectionStatus, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentAccountConnectionArn, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_managementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managementAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_environmentAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_requestedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentAccountConnectionSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentAccountConnectionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_EnvironmentAccountConnectionStatus, Type: smithy.ShapeTypeString})
+var sEnvironmentAccountConnectionSummary_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_EnvironmentAccountConnectionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentAccountConnectionSummary, Members: &mEnvironmentAccountConnectionSummary, Type: smithy.ShapeTypeStructure})
+var sEnvironmentState_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sEnvironmentState_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentState_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentState_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentSummary_lastDeploymentAttemptedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentAttemptedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentSummary_lastDeploymentSucceededAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentSucceededAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentArn, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_protonServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protonServiceRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_environmentAccountConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnectionId", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_environmentAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_provisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sEnvironmentSummary_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var s_EnvironmentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentSummary, Members: &mEnvironmentSummary, Type: smithy.ShapeTypeStructure})
+var sEnvironmentTemplate_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplate_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentTemplateArn, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplate_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentTemplate_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentTemplate_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplate_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplate_recommendedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedVersion", ID: &i_FullTemplateVersionNumber, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplate_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplate_provisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateFilter_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateFilter_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var s_EnvironmentTemplateFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentTemplateFilter, Members: &mEnvironmentTemplateFilter, Type: smithy.ShapeTypeStructure})
+var sEnvironmentTemplateSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentTemplateArn, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentTemplateSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentTemplateSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateSummary_recommendedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedVersion", ID: &i_FullTemplateVersionNumber, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateSummary_provisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var s_EnvironmentTemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentTemplateSummary, Members: &mEnvironmentTemplateSummary, Type: smithy.ShapeTypeStructure})
+var sEnvironmentTemplateVersion_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_recommendedMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateVersionStatus, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentTemplateVersionArn, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersion_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentTemplateVersion_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentTemplateVersion_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_TemplateSchema, Traits: &t2, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_recommendedMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateVersionStatus, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_EnvironmentTemplateVersionArn, Type: smithy.ShapeTypeString})
+var sEnvironmentTemplateVersionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sEnvironmentTemplateVersionSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_EnvironmentTemplateVersionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnvironmentTemplateVersionSummary, Members: &mEnvironmentTemplateVersionSummary, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_LatestSyncBlockers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncBlocker, Members: &mSyncBlocker, Type: smithy.ShapeTypeStructure})
+var sListServiceInstancesFilter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_ListServiceInstancesFilterBy, Type: smithy.ShapeTypeString})
+var sListServiceInstancesFilter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ListServiceInstancesFilterValue, Type: smithy.ShapeTypeString})
+var s_ListServiceInstancesFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListServiceInstancesFilter, Members: &mListServiceInstancesFilter, Type: smithy.ShapeTypeStructure})
+var sOutput_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_OutputKey, Type: smithy.ShapeTypeString})
+var sOutput_valueString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueString", ID: &i_OutputValueString, Type: smithy.ShapeTypeString})
+var s_OutputsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOutput, Members: &mOutput, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sProvisionedResource_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ProvisionedResourceName, Type: smithy.ShapeTypeString})
+var sProvisionedResource_identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "identifier", ID: &i_ProvisionedResourceIdentifier, Type: smithy.ShapeTypeString})
+var sProvisionedResource_provisioningEngine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioningEngine", ID: &i_ProvisionedResourceEngine, Type: smithy.ShapeTypeString})
+var s_ProvisionedResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iProvisionedResource, Members: &mProvisionedResource, Type: smithy.ShapeTypeStructure})
+var sRepository_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RepositoryArn, Type: smithy.ShapeTypeString})
+var sRepository_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sRepository_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepository_connectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRepository_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sRepositoryBranch_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RepositoryArn, Type: smithy.ShapeTypeString})
+var sRepositoryBranch_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sRepositoryBranch_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepositoryBranch_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sRepositoryBranchInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sRepositoryBranchInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepositoryBranchInput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sRepositorySummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_RepositoryArn, Type: smithy.ShapeTypeString})
+var sRepositorySummary_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sRepositorySummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRepositorySummary_connectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_RepositorySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositorySummary, Members: &mRepositorySummary, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncAttempt_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sRepositorySyncAttempt_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_RepositorySyncStatus, Type: smithy.ShapeTypeString})
+var sRepositorySyncAttempt_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_RepositorySyncEvents, Members: &m_RepositorySyncEvents, Type: smithy.ShapeTypeList})
+var sRepositorySyncDefinition_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &pString, Type: smithy.ShapeTypeString})
+var sRepositorySyncDefinition_parent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parent", ID: &pString, Type: smithy.ShapeTypeString})
+var sRepositorySyncDefinition_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sRepositorySyncDefinition_directory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directory", ID: &pString, Type: smithy.ShapeTypeString})
+var s_RepositorySyncDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositorySyncDefinition, Members: &mRepositorySyncDefinition, Type: smithy.ShapeTypeStructure})
+var sRepositorySyncEvent_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString})
+var sRepositorySyncEvent_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &pString, Type: smithy.ShapeTypeString})
+var sRepositorySyncEvent_time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "time", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sRepositorySyncEvent_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &pString, Type: smithy.ShapeTypeString})
+var s_RepositorySyncEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRepositorySyncEvent, Members: &mRepositorySyncEvent, Type: smithy.ShapeTypeStructure})
+var sResourceCountsSummary_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceCountsSummary_failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failed", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceCountsSummary_upToDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "upToDate", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceCountsSummary_behindMajor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "behindMajor", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceCountsSummary_behindMinor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "behindMinor", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sResourceSyncAttempt_initialRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initialRevision", ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var sResourceSyncAttempt_targetRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetRevision", ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var sResourceSyncAttempt_target = smithy.NewStaticSchema(smithy.StaticSchema{Member: "target", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceSyncAttempt_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sResourceSyncAttempt_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ResourceSyncStatus, Type: smithy.ShapeTypeString})
+var sResourceSyncAttempt_events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "events", ID: &i_ResourceSyncEvents, Members: &m_ResourceSyncEvents, Type: smithy.ShapeTypeList})
+var sResourceSyncEvent_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceSyncEvent_externalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "externalId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceSyncEvent_time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "time", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sResourceSyncEvent_event = smithy.NewStaticSchema(smithy.StaticSchema{Member: "event", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ResourceSyncEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceSyncEvent, Members: &mResourceSyncEvent, Type: smithy.ShapeTypeStructure})
+var sRevision_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sRevision_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sRevision_sha = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sha", ID: &i_SHA, Type: smithy.ShapeTypeString})
+var sRevision_directory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directory", ID: &pString, Type: smithy.ShapeTypeString})
+var sRevision_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sS3ObjectSource_bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sS3ObjectSource_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sService_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sService_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sService_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceArn, Type: smithy.ShapeTypeString})
+var sService_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sService_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sService_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sService_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ServiceStatus, Type: smithy.ShapeTypeString})
+var sService_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sService_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sService_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iServicePipeline, Members: &mServicePipeline, Type: smithy.ShapeTypeStructure})
+var sService_repositoryConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryConnectionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sService_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString})
+var sService_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sServiceInstance_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstance_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceInstanceArn, Type: smithy.ShapeTypeString})
+var sServiceInstance_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceInstance_lastDeploymentAttemptedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentAttemptedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceInstance_lastDeploymentSucceededAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentSucceededAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceInstance_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstance_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstance_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstance_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceInstance_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceInstance_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sServiceInstance_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceInstance_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sServiceInstance_lastClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastClientRequestToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceInstance_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sServiceInstance_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sServiceInstanceState_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sServiceInstanceState_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstanceState_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceInstanceState_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceInstanceState_lastSuccessfulComponentDeploymentIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSuccessfulComponentDeploymentIds", ID: &i_ComponentDeploymentIdList, Members: &m_ComponentDeploymentIdList, Type: smithy.ShapeTypeList})
+var sServiceInstanceState_lastSuccessfulEnvironmentDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSuccessfulEnvironmentDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sServiceInstanceState_lastSuccessfulServicePipelineDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSuccessfulServicePipelineDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceInstanceArn, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceInstanceSummary_lastDeploymentAttemptedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentAttemptedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceInstanceSummary_lastDeploymentSucceededAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentSucceededAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceInstanceSummary_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sServiceInstanceSummary_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var s_ServiceInstanceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceInstanceSummary, Members: &mServiceInstanceSummary, Type: smithy.ShapeTypeStructure})
+var sServicePipeline_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sServicePipeline_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServicePipeline_lastDeploymentAttemptedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentAttemptedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServicePipeline_lastDeploymentSucceededAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastDeploymentSucceededAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServicePipeline_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServicePipeline_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServicePipeline_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServicePipeline_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &i_DeploymentStatus, Type: smithy.ShapeTypeString})
+var sServicePipeline_deploymentStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServicePipeline_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sServicePipeline_lastAttemptedDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastAttemptedDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sServicePipeline_lastSucceededDeploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastSucceededDeploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sServicePipelineState_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sServicePipelineState_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServicePipelineState_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServicePipelineState_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceArn, Type: smithy.ShapeTypeString})
+var sServiceSummary_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ServiceStatus, Type: smithy.ShapeTypeString})
+var sServiceSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var s_ServiceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceSummary, Members: &mServiceSummary, Type: smithy.ShapeTypeStructure})
+var sServiceSyncBlockerSummary_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceSyncBlockerSummary_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceSyncBlockerSummary_latestBlockers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestBlockers", ID: &i_LatestSyncBlockers, Members: &m_LatestSyncBlockers, Type: smithy.ShapeTypeList})
+var sServiceSyncConfig_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceSyncConfig_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sServiceSyncConfig_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sServiceSyncConfig_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sServiceSyncConfig_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_OpsFilePath, Type: smithy.ShapeTypeString})
+var sServiceTemplate_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceTemplate_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceTemplateArn, Type: smithy.ShapeTypeString})
+var sServiceTemplate_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceTemplate_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceTemplate_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplate_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplate_recommendedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedVersion", ID: &i_FullTemplateVersionNumber, Type: smithy.ShapeTypeString})
+var sServiceTemplate_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sServiceTemplate_pipelineProvisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineProvisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var sServiceTemplateSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceTemplateSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceTemplateArn, Type: smithy.ShapeTypeString})
+var sServiceTemplateSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceTemplateSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceTemplateSummary_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplateSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplateSummary_recommendedVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedVersion", ID: &i_FullTemplateVersionNumber, Type: smithy.ShapeTypeString})
+var sServiceTemplateSummary_pipelineProvisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineProvisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var s_ServiceTemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceTemplateSummary, Members: &mServiceTemplateSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceTemplateSupportedComponentSourceInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ServiceTemplateSupportedComponentSourceType, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_recommendedMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateVersionStatus, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceTemplateVersionArn, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceTemplateVersion_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceTemplateVersion_compatibleEnvironmentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compatibleEnvironmentTemplates", ID: &i_CompatibleEnvironmentTemplateList, Members: &m_CompatibleEnvironmentTemplateList, Type: smithy.ShapeTypeList})
+var sServiceTemplateVersion_schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schema", ID: &i_TemplateSchema, Traits: &t2, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersion_supportedComponentSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedComponentSources", ID: &i_ServiceTemplateSupportedComponentSourceInputList, Members: &m_ServiceTemplateSupportedComponentSourceInputList, Type: smithy.ShapeTypeList})
+var sServiceTemplateVersionSummary_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_recommendedMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateVersionStatus, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ServiceTemplateVersionArn, Type: smithy.ShapeTypeString})
+var sServiceTemplateVersionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sServiceTemplateVersionSummary_lastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_ServiceTemplateVersionSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceTemplateVersionSummary, Members: &mServiceTemplateVersionSummary, Type: smithy.ShapeTypeStructure})
+var sSyncBlocker_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString})
+var sSyncBlocker_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_BlockerType, Type: smithy.ShapeTypeString})
+var sSyncBlocker_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_BlockerStatus, Type: smithy.ShapeTypeString})
+var sSyncBlocker_createdReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sSyncBlocker_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sSyncBlocker_contexts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "contexts", ID: &i_SyncBlockerContexts, Members: &m_SyncBlockerContexts, Type: smithy.ShapeTypeList})
+var sSyncBlocker_resolvedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sSyncBlocker_resolvedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sSyncBlockerContext_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sSyncBlockerContext_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SyncBlockerContexts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSyncBlockerContext, Members: &mSyncBlockerContext, Type: smithy.ShapeTypeStructure})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTemplateSyncConfig_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sTemplateSyncConfig_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &i_TemplateType, Type: smithy.ShapeTypeString})
+var sTemplateSyncConfig_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sTemplateSyncConfig_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sTemplateSyncConfig_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sTemplateSyncConfig_subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subdirectory", ID: &i_Subdirectory, Type: smithy.ShapeTypeString})
+var sTemplateVersionSourceInput_s3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3", ID: &iS3ObjectSource, Members: &mS3ObjectSource, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sAcceptEnvironmentAccountConnectionInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sAcceptEnvironmentAccountConnectionOutput_environmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnection", ID: &iEnvironmentAccountConnection, Members: &mEnvironmentAccountConnection, Type: smithy.ShapeTypeStructure})
+var sCancelComponentDeploymentInput_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCancelComponentDeploymentOutput_component = smithy.NewStaticSchema(smithy.StaticSchema{Member: "component", ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var sCancelEnvironmentDeploymentInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCancelEnvironmentDeploymentOutput_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var sCancelServiceInstanceDeploymentInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCancelServiceInstanceDeploymentInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCancelServiceInstanceDeploymentOutput_serviceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstance", ID: &iServiceInstance, Members: &mServiceInstance, Type: smithy.ShapeTypeStructure})
+var sCancelServicePipelineDeploymentInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCancelServicePipelineDeploymentOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iServicePipeline, Members: &mServicePipeline, Type: smithy.ShapeTypeStructure})
+var sCreateComponentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_templateFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateFile", ID: &i_TemplateFileContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_TemplateManifestContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_serviceSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSpec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCreateComponentInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateComponentInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateComponentOutput_component = smithy.NewStaticSchema(smithy.StaticSchema{Member: "component", ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentAccountConnectionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentAccountConnectionInput_managementAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managementAccountId", ID: &i_AwsAccountId, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentAccountConnectionInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentAccountConnectionInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentAccountConnectionInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateEnvironmentAccountConnectionInput_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentAccountConnectionInput_codebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codebuildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentAccountConnectionOutput_environmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnection", ID: &iEnvironmentAccountConnection, Members: &mEnvironmentAccountConnection, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_protonServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protonServiceRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_environmentAccountConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnectionId", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateEnvironmentInput_provisioningRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioningRepository", ID: &iRepositoryBranchInput, Members: &mRepositoryBranchInput, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentInput_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentInput_codebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codebuildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentOutput_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateInput_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateInput_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateInput_provisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateEnvironmentTemplateOutput_environmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplate", ID: &iEnvironmentTemplate, Members: &mEnvironmentTemplate, Type: smithy.ShapeTypeStructure})
+var sCreateEnvironmentTemplateVersionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateVersionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateEnvironmentTemplateVersionInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iTemplateVersionSourceInput, Members: &mTemplateVersionSourceInput, Type: smithy.ShapeTypeUnion})
+var sCreateEnvironmentTemplateVersionInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateEnvironmentTemplateVersionOutput_environmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplateVersion", ID: &iEnvironmentTemplateVersion, Members: &mEnvironmentTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sCreateRepositoryInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sCreateRepositoryInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sCreateRepositoryInput_connectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateRepositoryInput_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateRepositoryInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateRepositoryOutput_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepository, Members: &mRepository, Type: smithy.ShapeTypeStructure})
+var sCreateServiceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_repositoryConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryConnectionArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_repositoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryId", ID: &i_RepositoryId, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_branchName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branchName", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sCreateServiceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateServiceInstanceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateServiceInstanceInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateServiceInstanceInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sCreateServiceInstanceInput_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateServiceInstanceInput_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateServiceInstanceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateServiceInstanceInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateServiceInstanceOutput_serviceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstance", ID: &iServiceInstance, Members: &mServiceInstance, Type: smithy.ShapeTypeStructure})
+var sCreateServiceOutput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sCreateServiceSyncConfigInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateServiceSyncConfigInput_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sCreateServiceSyncConfigInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sCreateServiceSyncConfigInput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sCreateServiceSyncConfigInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_OpsFilePath, Type: smithy.ShapeTypeString})
+var sCreateServiceSyncConfigOutput_serviceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSyncConfig", ID: &iServiceSyncConfig, Members: &mServiceSyncConfig, Type: smithy.ShapeTypeStructure})
+var sCreateServiceTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateInput_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateInput_encryptionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionKey", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateInput_pipelineProvisioning = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineProvisioning", ID: &i_Provisioning, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateServiceTemplateOutput_serviceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplate", ID: &iServiceTemplate, Members: &mServiceTemplate, Type: smithy.ShapeTypeStructure})
+var sCreateServiceTemplateVersionInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateVersionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sCreateServiceTemplateVersionInput_source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "source", ID: &iTemplateVersionSourceInput, Members: &mTemplateVersionSourceInput, Type: smithy.ShapeTypeUnion})
+var sCreateServiceTemplateVersionInput_compatibleEnvironmentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compatibleEnvironmentTemplates", ID: &i_CompatibleEnvironmentTemplateInputList, Members: &m_CompatibleEnvironmentTemplateInputList, Type: smithy.ShapeTypeList})
+var sCreateServiceTemplateVersionInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateServiceTemplateVersionInput_supportedComponentSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedComponentSources", ID: &i_ServiceTemplateSupportedComponentSourceInputList, Members: &m_ServiceTemplateSupportedComponentSourceInputList, Type: smithy.ShapeTypeList})
+var sCreateServiceTemplateVersionOutput_serviceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplateVersion", ID: &iServiceTemplateVersion, Members: &mServiceTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sCreateTemplateSyncConfigInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateTemplateSyncConfigInput_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &i_TemplateType, Type: smithy.ShapeTypeString})
+var sCreateTemplateSyncConfigInput_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sCreateTemplateSyncConfigInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sCreateTemplateSyncConfigInput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sCreateTemplateSyncConfigInput_subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subdirectory", ID: &i_Subdirectory, Type: smithy.ShapeTypeString})
+var sCreateTemplateSyncConfigOutput_templateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSyncConfig", ID: &iTemplateSyncConfig, Members: &mTemplateSyncConfig, Type: smithy.ShapeTypeStructure})
+var sDeleteComponentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteComponentOutput_component = smithy.NewStaticSchema(smithy.StaticSchema{Member: "component", ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var sDeleteDeploymentInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sDeleteDeploymentOutput_deployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployment", ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentAccountConnectionInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentAccountConnectionOutput_environmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnection", ID: &iEnvironmentAccountConnection, Members: &mEnvironmentAccountConnection, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentOutput_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentTemplateOutput_environmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplate", ID: &iEnvironmentTemplate, Members: &mEnvironmentTemplate, Type: smithy.ShapeTypeStructure})
+var sDeleteEnvironmentTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentTemplateVersionInput_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sDeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplateVersion", ID: &iEnvironmentTemplateVersion, Members: &mEnvironmentTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sDeleteRepositoryInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sDeleteRepositoryOutput_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepository, Members: &mRepository, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteServiceOutput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceSyncConfigInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteServiceSyncConfigOutput_serviceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSyncConfig", ID: &iServiceSyncConfig, Members: &mServiceSyncConfig, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteServiceTemplateOutput_serviceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplate", ID: &iServiceTemplate, Members: &mServiceTemplate, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteServiceTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sDeleteServiceTemplateVersionInput_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sDeleteServiceTemplateVersionOutput_serviceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplateVersion", ID: &iServiceTemplateVersion, Members: &mServiceTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sDeleteTemplateSyncConfigInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sDeleteTemplateSyncConfigInput_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &i_TemplateType, Type: smithy.ShapeTypeString})
+var sDeleteTemplateSyncConfigOutput_templateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSyncConfig", ID: &iTemplateSyncConfig, Members: &mTemplateSyncConfig, Type: smithy.ShapeTypeStructure})
+var sGetAccountSettingsOutput_accountSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountSettings", ID: &iAccountSettings, Members: &mAccountSettings, Type: smithy.ShapeTypeStructure})
+var sGetComponentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetComponentOutput_component = smithy.NewStaticSchema(smithy.StaticSchema{Member: "component", ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sGetDeploymentInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetDeploymentInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetDeploymentInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetDeploymentInput_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetDeploymentOutput_deployment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployment", ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentAccountConnectionInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sGetEnvironmentAccountConnectionOutput_environmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnection", ID: &iEnvironmentAccountConnection, Members: &mEnvironmentAccountConnection, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetEnvironmentOutput_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetEnvironmentTemplateOutput_environmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplate", ID: &iEnvironmentTemplate, Members: &mEnvironmentTemplate, Type: smithy.ShapeTypeStructure})
+var sGetEnvironmentTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetEnvironmentTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sGetEnvironmentTemplateVersionInput_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sGetEnvironmentTemplateVersionOutput_environmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplateVersion", ID: &iEnvironmentTemplateVersion, Members: &mEnvironmentTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sGetRepositoryInput_provider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sGetRepositoryInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sGetRepositoryOutput_repository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repository", ID: &iRepository, Members: &mRepository, Type: smithy.ShapeTypeStructure})
+var sGetRepositorySyncStatusInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sGetRepositorySyncStatusInput_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sGetRepositorySyncStatusInput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sGetRepositorySyncStatusInput_syncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncType", ID: &i_SyncType, Type: smithy.ShapeTypeString})
+var sGetRepositorySyncStatusOutput_latestSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestSync", ID: &iRepositorySyncAttempt, Members: &mRepositorySyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetResourcesSummaryOutput_counts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "counts", ID: &iCountsSummary, Members: &mCountsSummary, Type: smithy.ShapeTypeStructure})
+var sGetServiceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceInstanceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceInstanceInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceInstanceOutput_serviceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstance", ID: &iServiceInstance, Members: &mServiceInstance, Type: smithy.ShapeTypeStructure})
+var sGetServiceInstanceSyncStatusInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceInstanceSyncStatusInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceInstanceSyncStatusOutput_latestSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestSync", ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetServiceInstanceSyncStatusOutput_latestSuccessfulSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestSuccessfulSync", ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetServiceInstanceSyncStatusOutput_desiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desiredState", ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var sGetServiceOutput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sGetServiceSyncBlockerSummaryInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceSyncBlockerSummaryInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSyncBlockerSummary", ID: &iServiceSyncBlockerSummary, Members: &mServiceSyncBlockerSummary, Type: smithy.ShapeTypeStructure})
+var sGetServiceSyncConfigInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceSyncConfigOutput_serviceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSyncConfig", ID: &iServiceSyncConfig, Members: &mServiceSyncConfig, Type: smithy.ShapeTypeStructure})
+var sGetServiceTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceTemplateOutput_serviceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplate", ID: &iServiceTemplate, Members: &mServiceTemplate, Type: smithy.ShapeTypeStructure})
+var sGetServiceTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetServiceTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sGetServiceTemplateVersionInput_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sGetServiceTemplateVersionOutput_serviceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplateVersion", ID: &iServiceTemplateVersion, Members: &mServiceTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncConfigInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetTemplateSyncConfigInput_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &i_TemplateType, Type: smithy.ShapeTypeString})
+var sGetTemplateSyncConfigOutput_templateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSyncConfig", ID: &iTemplateSyncConfig, Members: &mTemplateSyncConfig, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncStatusInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetTemplateSyncStatusInput_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &i_TemplateType, Type: smithy.ShapeTypeString})
+var sGetTemplateSyncStatusInput_templateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sGetTemplateSyncStatusOutput_latestSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestSync", ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncStatusOutput_latestSuccessfulSync = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestSuccessfulSync", ID: &iResourceSyncAttempt, Members: &mResourceSyncAttempt, Type: smithy.ShapeTypeStructure})
+var sGetTemplateSyncStatusOutput_desiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desiredState", ID: &iRevision, Members: &mRevision, Type: smithy.ShapeTypeStructure})
+var sListComponentOutputsInput_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListComponentOutputsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListComponentOutputsInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sListComponentOutputsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListComponentOutputsOutput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_OutputsList, Members: &m_OutputsList, Type: smithy.ShapeTypeList})
+var sListComponentProvisionedResourcesInput_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListComponentProvisionedResourcesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListComponentProvisionedResourcesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListComponentProvisionedResourcesOutput_provisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisionedResources", ID: &i_ProvisionedResourceList, Members: &m_ProvisionedResourceList, Type: smithy.ShapeTypeList})
+var sListComponentsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListComponentsInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListComponentsInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListComponentsInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListComponentsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListComponentsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListComponentsOutput_components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "components", ID: &i_ComponentSummaryList, Members: &m_ComponentSummaryList, Type: smithy.ShapeTypeList})
+var sListDeploymentsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDeploymentsInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListDeploymentsInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListDeploymentsInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListDeploymentsInput_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListDeploymentsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListDeploymentsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListDeploymentsOutput_deployments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployments", ID: &i_DeploymentSummaryList, Members: &m_DeploymentSummaryList, Type: smithy.ShapeTypeList})
+var sListEnvironmentAccountConnectionsInput_requestedBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedBy", ID: &i_EnvironmentAccountConnectionRequesterAccountType, Type: smithy.ShapeTypeString})
+var sListEnvironmentAccountConnectionsInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListEnvironmentAccountConnectionsInput_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_EnvironmentAccountConnectionStatusList, Members: &m_EnvironmentAccountConnectionStatusList, Type: smithy.ShapeTypeList})
+var sListEnvironmentAccountConnectionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentAccountConnectionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListEnvironmentAccountConnectionsOutput_environmentAccountConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnections", ID: &i_EnvironmentAccountConnectionSummaryList, Members: &m_EnvironmentAccountConnectionSummaryList, Type: smithy.ShapeTypeList})
+var sListEnvironmentAccountConnectionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentOutputsInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListEnvironmentOutputsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentOutputsInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sListEnvironmentOutputsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentOutputsOutput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_OutputsList, Members: &m_OutputsList, Type: smithy.ShapeTypeList})
+var sListEnvironmentProvisionedResourcesInput_environmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListEnvironmentProvisionedResourcesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentProvisionedResourcesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentProvisionedResourcesOutput_provisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisionedResources", ID: &i_ProvisionedResourceList, Members: &m_ProvisionedResourceList, Type: smithy.ShapeTypeList})
+var sListEnvironmentsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListEnvironmentsInput_environmentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplates", ID: &i_EnvironmentTemplateFilterList, Members: &m_EnvironmentTemplateFilterList, Type: smithy.ShapeTypeList})
+var sListEnvironmentsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentsOutput_environments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environments", ID: &i_EnvironmentSummaryList, Members: &m_EnvironmentSummaryList, Type: smithy.ShapeTypeList})
+var sListEnvironmentTemplatesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentTemplatesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListEnvironmentTemplatesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentTemplatesOutput_templates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templates", ID: &i_EnvironmentTemplateSummaryList, Members: &m_EnvironmentTemplateSummaryList, Type: smithy.ShapeTypeList})
+var sListEnvironmentTemplateVersionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentTemplateVersionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListEnvironmentTemplateVersionsInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListEnvironmentTemplateVersionsInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sListEnvironmentTemplateVersionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEnvironmentTemplateVersionsOutput_templateVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateVersions", ID: &i_EnvironmentTemplateVersionSummaryList, Members: &m_EnvironmentTemplateVersionSummaryList, Type: smithy.ShapeTypeList})
+var sListRepositoriesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRepositoriesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListRepositoriesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRepositoriesOutput_repositories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositories", ID: &i_RepositorySummaryList, Members: &m_RepositorySummaryList, Type: smithy.ShapeTypeList})
+var sListRepositorySyncDefinitionsInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sListRepositorySyncDefinitionsInput_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sListRepositorySyncDefinitionsInput_syncType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncType", ID: &i_SyncType, Type: smithy.ShapeTypeString})
+var sListRepositorySyncDefinitionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListRepositorySyncDefinitionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListRepositorySyncDefinitionsOutput_syncDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "syncDefinitions", ID: &i_RepositorySyncDefinitionList, Members: &m_RepositorySyncDefinitionList, Type: smithy.ShapeTypeList})
+var sListServiceInstanceOutputsInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServiceInstanceOutputsInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServiceInstanceOutputsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServiceInstanceOutputsInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sListServiceInstanceOutputsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServiceInstanceOutputsOutput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_OutputsList, Members: &m_OutputsList, Type: smithy.ShapeTypeList})
+var sListServiceInstanceProvisionedResourcesInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServiceInstanceProvisionedResourcesInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServiceInstanceProvisionedResourcesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServiceInstanceProvisionedResourcesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServiceInstanceProvisionedResourcesOutput_provisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisionedResources", ID: &i_ProvisionedResourceList, Members: &m_ProvisionedResourceList, Type: smithy.ShapeTypeList})
+var sListServiceInstancesInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServiceInstancesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServiceInstancesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListServiceInstancesInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListServiceInstancesFilterList, Members: &m_ListServiceInstancesFilterList, Type: smithy.ShapeTypeList})
+var sListServiceInstancesInput_sortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortBy", ID: &i_ListServiceInstancesSortBy, Type: smithy.ShapeTypeString})
+var sListServiceInstancesInput_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &i_SortOrder, Type: smithy.ShapeTypeString})
+var sListServiceInstancesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServiceInstancesOutput_serviceInstances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstances", ID: &i_ServiceInstanceSummaryList, Members: &m_ServiceInstanceSummaryList, Type: smithy.ShapeTypeList})
+var sListServicePipelineOutputsInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServicePipelineOutputsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServicePipelineOutputsInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sListServicePipelineOutputsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServicePipelineOutputsOutput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_OutputsList, Members: &m_OutputsList, Type: smithy.ShapeTypeList})
+var sListServicePipelineProvisionedResourcesInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServicePipelineProvisionedResourcesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServicePipelineProvisionedResourcesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_EmptyNextToken, Type: smithy.ShapeTypeString})
+var sListServicePipelineProvisionedResourcesOutput_provisionedResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisionedResources", ID: &i_ProvisionedResourceList, Members: &m_ProvisionedResourceList, Type: smithy.ShapeTypeList})
+var sListServicesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServicesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListServicesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServicesOutput_services = smithy.NewStaticSchema(smithy.StaticSchema{Member: "services", ID: &i_ServiceSummaryList, Members: &m_ServiceSummaryList, Type: smithy.ShapeTypeList})
+var sListServiceTemplatesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServiceTemplatesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListServiceTemplatesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServiceTemplatesOutput_templates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templates", ID: &i_ServiceTemplateSummaryList, Members: &m_ServiceTemplateSummaryList, Type: smithy.ShapeTypeList})
+var sListServiceTemplateVersionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServiceTemplateVersionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Type: smithy.ShapeTypeInteger})
+var sListServiceTemplateVersionsInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListServiceTemplateVersionsInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sListServiceTemplateVersionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListServiceTemplateVersionsOutput_templateVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateVersions", ID: &i_ServiceTemplateVersionSummaryList, Members: &m_ServiceTemplateVersionSummaryList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t11, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Traits: &t12, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxPageResults, Traits: &t13, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sNotifyResourceDeploymentStatusChangeInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sNotifyResourceDeploymentStatusChangeInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_ResourceDeploymentStatus, Type: smithy.ShapeTypeString})
+var sNotifyResourceDeploymentStatusChangeInput_outputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "outputs", ID: &i_OutputsList, Members: &m_OutputsList, Type: smithy.ShapeTypeList})
+var sNotifyResourceDeploymentStatusChangeInput_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentId, Type: smithy.ShapeTypeString})
+var sNotifyResourceDeploymentStatusChangeInput_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &i_StatusMessage, Traits: &t1, Type: smithy.ShapeTypeString})
+var sRejectEnvironmentAccountConnectionInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sRejectEnvironmentAccountConnectionOutput_environmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnection", ID: &iEnvironmentAccountConnection, Members: &mEnvironmentAccountConnection, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t11, Type: smithy.ShapeTypeString})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t11, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateAccountSettingsInput_pipelineServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineServiceRoleArn", ID: &i_RoleArnOrEmptyString, Type: smithy.ShapeTypeString})
+var sUpdateAccountSettingsInput_pipelineProvisioningRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineProvisioningRepository", ID: &iRepositoryBranchInput, Members: &mRepositoryBranchInput, Type: smithy.ShapeTypeStructure})
+var sUpdateAccountSettingsInput_deletePipelineProvisioningRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deletePipelineProvisioningRepository", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateAccountSettingsInput_pipelineCodebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipelineCodebuildRoleArn", ID: &i_RoleArnOrEmptyString, Type: smithy.ShapeTypeString})
+var sUpdateAccountSettingsOutput_accountSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountSettings", ID: &iAccountSettings, Members: &mAccountSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateComponentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateComponentInput_deploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentType", ID: &i_ComponentDeploymentUpdateType, Type: smithy.ShapeTypeString})
+var sUpdateComponentInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateComponentInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceNameOrEmpty, Type: smithy.ShapeTypeString})
+var sUpdateComponentInput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceNameOrEmpty, Type: smithy.ShapeTypeString})
+var sUpdateComponentInput_serviceSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSpec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sUpdateComponentInput_templateFile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateFile", ID: &i_TemplateFileContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sUpdateComponentInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateComponentOutput_component = smithy.NewStaticSchema(smithy.StaticSchema{Member: "component", ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentAccountConnectionInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentAccountConnectionInput_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentAccountConnectionInput_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentAccountConnectionInput_codebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codebuildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentAccountConnectionOutput_environmentAccountConnection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnection", ID: &iEnvironmentAccountConnection, Members: &mEnvironmentAccountConnection, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_protonServiceRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "protonServiceRoleArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_deploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentType", ID: &i_DeploymentUpdateType, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_environmentAccountConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentAccountConnectionId", ID: &i_EnvironmentAccountConnectionId, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_provisioningRepository = smithy.NewStaticSchema(smithy.StaticSchema{Member: "provisioningRepository", ID: &iRepositoryBranchInput, Members: &mRepositoryBranchInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentInput_componentRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentInput_codebuildRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codebuildRoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentOutput_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &iEnvironment, Members: &mEnvironment, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateInput_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateOutput_environmentTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplate", ID: &iEnvironmentTemplate, Members: &mEnvironmentTemplate, Type: smithy.ShapeTypeStructure})
+var sUpdateEnvironmentTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateVersionInput_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateVersionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateVersionInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateVersionStatus, Type: smithy.ShapeTypeString})
+var sUpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentTemplateVersion", ID: &iEnvironmentTemplateVersion, Members: &mEnvironmentTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateServiceInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceInput_deploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentType", ID: &i_DeploymentUpdateType, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceInput_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceInput_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateServiceInstanceOutput_serviceInstance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstance", ID: &iServiceInstance, Members: &mServiceInstance, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceOutput_service = smithy.NewStaticSchema(smithy.StaticSchema{Member: "service", ID: &iService, Members: &mService, Type: smithy.ShapeTypeStructure})
+var sUpdateServicePipelineInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServicePipelineInput_spec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spec", ID: &i_SpecContents, Traits: &t2, Type: smithy.ShapeTypeString})
+var sUpdateServicePipelineInput_deploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentType", ID: &i_DeploymentUpdateType, Type: smithy.ShapeTypeString})
+var sUpdateServicePipelineInput_templateMajorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMajorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateServicePipelineInput_templateMinorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateMinorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateServicePipelineOutput_pipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pipeline", ID: &iServicePipeline, Members: &mServicePipeline, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSyncBlockerInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncBlockerInput_resolvedReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncBlockerOutput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncBlockerOutput_serviceInstanceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceInstanceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncBlockerOutput_serviceSyncBlocker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSyncBlocker", ID: &iSyncBlocker, Members: &mSyncBlocker, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSyncConfigInput_serviceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncConfigInput_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncConfigInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncConfigInput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncConfigInput_filePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filePath", ID: &i_OpsFilePath, Type: smithy.ShapeTypeString})
+var sUpdateServiceSyncConfigOutput_serviceSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceSyncConfig", ID: &iServiceSyncConfig, Members: &mServiceSyncConfig, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceTemplateInput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateInput_displayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayName", ID: &i_DisplayName, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateOutput_serviceTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplate", ID: &iServiceTemplate, Members: &mServiceTemplate, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceTemplateVersionInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateVersionInput_majorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "majorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateVersionInput_minorVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minorVersion", ID: &i_TemplateVersionPart, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateVersionInput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Traits: &t1, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateVersionInput_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_TemplateVersionStatus, Type: smithy.ShapeTypeString})
+var sUpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compatibleEnvironmentTemplates", ID: &i_CompatibleEnvironmentTemplateInputList, Members: &m_CompatibleEnvironmentTemplateInputList, Type: smithy.ShapeTypeList})
+var sUpdateServiceTemplateVersionInput_supportedComponentSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedComponentSources", ID: &i_ServiceTemplateSupportedComponentSourceInputList, Members: &m_ServiceTemplateSupportedComponentSourceInputList, Type: smithy.ShapeTypeList})
+var sUpdateServiceTemplateVersionOutput_serviceTemplateVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceTemplateVersion", ID: &iServiceTemplateVersion, Members: &mServiceTemplateVersion, Type: smithy.ShapeTypeStructure})
+var sUpdateTemplateSyncConfigInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateTemplateSyncConfigInput_templateType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateType", ID: &i_TemplateType, Type: smithy.ShapeTypeString})
+var sUpdateTemplateSyncConfigInput_repositoryProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryProvider", ID: &i_RepositoryProvider, Type: smithy.ShapeTypeString})
+var sUpdateTemplateSyncConfigInput_repositoryName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryName", ID: &i_RepositoryName, Type: smithy.ShapeTypeString})
+var sUpdateTemplateSyncConfigInput_branch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "branch", ID: &i_GitBranchName, Type: smithy.ShapeTypeString})
+var sUpdateTemplateSyncConfigInput_subdirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subdirectory", ID: &i_Subdirectory, Type: smithy.ShapeTypeString})
+var sUpdateTemplateSyncConfigOutput_templateSyncConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSyncConfig", ID: &iTemplateSyncConfig, Members: &mTemplateSyncConfig, Type: smithy.ShapeTypeStructure})
+
+var AcceptEnvironmentAccountConnection = &sAcceptEnvironmentAccountConnection
+
+var CancelComponentDeployment = &sCancelComponentDeployment
+
+var CancelEnvironmentDeployment = &sCancelEnvironmentDeployment
+
+var CancelServiceInstanceDeployment = &sCancelServiceInstanceDeployment
+
+var CancelServicePipelineDeployment = &sCancelServicePipelineDeployment
+
+var CreateComponent = &sCreateComponent
+
+var CreateEnvironment = &sCreateEnvironment
+
+var CreateEnvironmentAccountConnection = &sCreateEnvironmentAccountConnection
+
+var CreateEnvironmentTemplate = &sCreateEnvironmentTemplate
+
+var CreateEnvironmentTemplateVersion = &sCreateEnvironmentTemplateVersion
+
+var CreateRepository = &sCreateRepository
+
+var CreateService = &sCreateService
+
+var CreateServiceInstance = &sCreateServiceInstance
+
+var CreateServiceSyncConfig = &sCreateServiceSyncConfig
+
+var CreateServiceTemplate = &sCreateServiceTemplate
+
+var CreateServiceTemplateVersion = &sCreateServiceTemplateVersion
+
+var CreateTemplateSyncConfig = &sCreateTemplateSyncConfig
+
+var DeleteComponent = &sDeleteComponent
+
+var DeleteDeployment = &sDeleteDeployment
+
+var DeleteEnvironment = &sDeleteEnvironment
+
+var DeleteEnvironmentAccountConnection = &sDeleteEnvironmentAccountConnection
+
+var DeleteEnvironmentTemplate = &sDeleteEnvironmentTemplate
+
+var DeleteEnvironmentTemplateVersion = &sDeleteEnvironmentTemplateVersion
+
+var DeleteRepository = &sDeleteRepository
+
+var DeleteService = &sDeleteService
+
+var DeleteServiceSyncConfig = &sDeleteServiceSyncConfig
+
+var DeleteServiceTemplate = &sDeleteServiceTemplate
+
+var DeleteServiceTemplateVersion = &sDeleteServiceTemplateVersion
+
+var DeleteTemplateSyncConfig = &sDeleteTemplateSyncConfig
+
+var GetAccountSettings = &sGetAccountSettings
+
+var GetComponent = &sGetComponent
+
+var GetDeployment = &sGetDeployment
+
+var GetEnvironment = &sGetEnvironment
+
+var GetEnvironmentAccountConnection = &sGetEnvironmentAccountConnection
+
+var GetEnvironmentTemplate = &sGetEnvironmentTemplate
+
+var GetEnvironmentTemplateVersion = &sGetEnvironmentTemplateVersion
+
+var GetRepository = &sGetRepository
+
+var GetRepositorySyncStatus = &sGetRepositorySyncStatus
+
+var GetResourcesSummary = &sGetResourcesSummary
+
+var GetService = &sGetService
+
+var GetServiceInstance = &sGetServiceInstance
+
+var GetServiceInstanceSyncStatus = &sGetServiceInstanceSyncStatus
+
+var GetServiceSyncBlockerSummary = &sGetServiceSyncBlockerSummary
+
+var GetServiceSyncConfig = &sGetServiceSyncConfig
+
+var GetServiceTemplate = &sGetServiceTemplate
+
+var GetServiceTemplateVersion = &sGetServiceTemplateVersion
+
+var GetTemplateSyncConfig = &sGetTemplateSyncConfig
+
+var GetTemplateSyncStatus = &sGetTemplateSyncStatus
+
+var ListComponentOutputs = &sListComponentOutputs
+
+var ListComponentProvisionedResources = &sListComponentProvisionedResources
+
+var ListComponents = &sListComponents
+
+var ListDeployments = &sListDeployments
+
+var ListEnvironmentAccountConnections = &sListEnvironmentAccountConnections
+
+var ListEnvironmentOutputs = &sListEnvironmentOutputs
+
+var ListEnvironmentProvisionedResources = &sListEnvironmentProvisionedResources
+
+var ListEnvironments = &sListEnvironments
+
+var ListEnvironmentTemplates = &sListEnvironmentTemplates
+
+var ListEnvironmentTemplateVersions = &sListEnvironmentTemplateVersions
+
+var ListRepositories = &sListRepositories
+
+var ListRepositorySyncDefinitions = &sListRepositorySyncDefinitions
+
+var ListServiceInstanceOutputs = &sListServiceInstanceOutputs
+
+var ListServiceInstanceProvisionedResources = &sListServiceInstanceProvisionedResources
+
+var ListServiceInstances = &sListServiceInstances
+
+var ListServicePipelineOutputs = &sListServicePipelineOutputs
+
+var ListServicePipelineProvisionedResources = &sListServicePipelineProvisionedResources
+
+var ListServices = &sListServices
+
+var ListServiceTemplates = &sListServiceTemplates
+
+var ListServiceTemplateVersions = &sListServiceTemplateVersions
+
+var ListTagsForResource = &sListTagsForResource
+
+var NotifyResourceDeploymentStatusChange = &sNotifyResourceDeploymentStatusChange
+
+var RejectEnvironmentAccountConnection = &sRejectEnvironmentAccountConnection
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAccountSettings = &sUpdateAccountSettings
+
+var UpdateComponent = &sUpdateComponent
+
+var UpdateEnvironment = &sUpdateEnvironment
+
+var UpdateEnvironmentAccountConnection = &sUpdateEnvironmentAccountConnection
+
+var UpdateEnvironmentTemplate = &sUpdateEnvironmentTemplate
+
+var UpdateEnvironmentTemplateVersion = &sUpdateEnvironmentTemplateVersion
+
+var UpdateService = &sUpdateService
+
+var UpdateServiceInstance = &sUpdateServiceInstance
+
+var UpdateServicePipeline = &sUpdateServicePipeline
+
+var UpdateServiceSyncBlocker = &sUpdateServiceSyncBlocker
+
+var UpdateServiceSyncConfig = &sUpdateServiceSyncConfig
+
+var UpdateServiceTemplate = &sUpdateServiceTemplate
+
+var UpdateServiceTemplateVersion = &sUpdateServiceTemplateVersion
+
+var UpdateTemplateSyncConfig = &sUpdateTemplateSyncConfig
+
+var _AwsProton20200720 = &s_AwsProton20200720
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AccountSettings = &sAccountSettings
+var AccountSettings_pipelineServiceRoleArn = &sAccountSettings_pipelineServiceRoleArn
+var AccountSettings_pipelineProvisioningRepository = &sAccountSettings_pipelineProvisioningRepository
+var AccountSettings_pipelineCodebuildRoleArn = &sAccountSettings_pipelineCodebuildRoleArn
+
+var _Arn = &s_Arn
+
+var _AwsAccountId = &s_AwsAccountId
+
+var _BlockerStatus = &s_BlockerStatus
+
+var _BlockerType = &s_BlockerType
+
+var _ClientToken = &s_ClientToken
+
+var CompatibleEnvironmentTemplate = &sCompatibleEnvironmentTemplate
+var CompatibleEnvironmentTemplate_templateName = &sCompatibleEnvironmentTemplate_templateName
+var CompatibleEnvironmentTemplate_majorVersion = &sCompatibleEnvironmentTemplate_majorVersion
+
+var CompatibleEnvironmentTemplateInput = &sCompatibleEnvironmentTemplateInput
+var CompatibleEnvironmentTemplateInput_templateName = &sCompatibleEnvironmentTemplateInput_templateName
+var CompatibleEnvironmentTemplateInput_majorVersion = &sCompatibleEnvironmentTemplateInput_majorVersion
+
+var _CompatibleEnvironmentTemplateInputList = &s_CompatibleEnvironmentTemplateInputList
+var _CompatibleEnvironmentTemplateInputList_member = &s_CompatibleEnvironmentTemplateInputList_member
+
+var _CompatibleEnvironmentTemplateList = &s_CompatibleEnvironmentTemplateList
+var _CompatibleEnvironmentTemplateList_member = &s_CompatibleEnvironmentTemplateList_member
+
+var Component = &sComponent
+var Component_name = &sComponent_name
+var Component_description = &sComponent_description
+var Component_arn = &sComponent_arn
+var Component_environmentName = &sComponent_environmentName
+var Component_serviceName = &sComponent_serviceName
+var Component_serviceInstanceName = &sComponent_serviceInstanceName
+var Component_createdAt = &sComponent_createdAt
+var Component_lastModifiedAt = &sComponent_lastModifiedAt
+var Component_lastDeploymentAttemptedAt = &sComponent_lastDeploymentAttemptedAt
+var Component_lastDeploymentSucceededAt = &sComponent_lastDeploymentSucceededAt
+var Component_deploymentStatus = &sComponent_deploymentStatus
+var Component_deploymentStatusMessage = &sComponent_deploymentStatusMessage
+var Component_serviceSpec = &sComponent_serviceSpec
+var Component_lastClientRequestToken = &sComponent_lastClientRequestToken
+var Component_lastAttemptedDeploymentId = &sComponent_lastAttemptedDeploymentId
+var Component_lastSucceededDeploymentId = &sComponent_lastSucceededDeploymentId
+
+var _ComponentArn = &s_ComponentArn
+
+var _ComponentDeploymentIdList = &s_ComponentDeploymentIdList
+var _ComponentDeploymentIdList_member = &s_ComponentDeploymentIdList_member
+
+var _ComponentDeploymentUpdateType = &s_ComponentDeploymentUpdateType
+
+var ComponentState = &sComponentState
+var ComponentState_serviceName = &sComponentState_serviceName
+var ComponentState_serviceInstanceName = &sComponentState_serviceInstanceName
+var ComponentState_serviceSpec = &sComponentState_serviceSpec
+var ComponentState_templateFile = &sComponentState_templateFile
+
+var ComponentSummary = &sComponentSummary
+var ComponentSummary_name = &sComponentSummary_name
+var ComponentSummary_arn = &sComponentSummary_arn
+var ComponentSummary_environmentName = &sComponentSummary_environmentName
+var ComponentSummary_serviceName = &sComponentSummary_serviceName
+var ComponentSummary_serviceInstanceName = &sComponentSummary_serviceInstanceName
+var ComponentSummary_createdAt = &sComponentSummary_createdAt
+var ComponentSummary_lastModifiedAt = &sComponentSummary_lastModifiedAt
+var ComponentSummary_lastDeploymentAttemptedAt = &sComponentSummary_lastDeploymentAttemptedAt
+var ComponentSummary_lastDeploymentSucceededAt = &sComponentSummary_lastDeploymentSucceededAt
+var ComponentSummary_deploymentStatus = &sComponentSummary_deploymentStatus
+var ComponentSummary_deploymentStatusMessage = &sComponentSummary_deploymentStatusMessage
+var ComponentSummary_lastAttemptedDeploymentId = &sComponentSummary_lastAttemptedDeploymentId
+var ComponentSummary_lastSucceededDeploymentId = &sComponentSummary_lastSucceededDeploymentId
+
+var _ComponentSummaryList = &s_ComponentSummaryList
+var _ComponentSummaryList_member = &s_ComponentSummaryList_member
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var CountsSummary = &sCountsSummary
+var CountsSummary_components = &sCountsSummary_components
+var CountsSummary_environments = &sCountsSummary_environments
+var CountsSummary_environmentTemplates = &sCountsSummary_environmentTemplates
+var CountsSummary_serviceInstances = &sCountsSummary_serviceInstances
+var CountsSummary_services = &sCountsSummary_services
+var CountsSummary_serviceTemplates = &sCountsSummary_serviceTemplates
+var CountsSummary_pipelines = &sCountsSummary_pipelines
+
+var Deployment = &sDeployment
+var Deployment_id = &sDeployment_id
+var Deployment_arn = &sDeployment_arn
+var Deployment_targetArn = &sDeployment_targetArn
+var Deployment_targetResourceCreatedAt = &sDeployment_targetResourceCreatedAt
+var Deployment_targetResourceType = &sDeployment_targetResourceType
+var Deployment_environmentName = &sDeployment_environmentName
+var Deployment_serviceName = &sDeployment_serviceName
+var Deployment_serviceInstanceName = &sDeployment_serviceInstanceName
+var Deployment_componentName = &sDeployment_componentName
+var Deployment_deploymentStatus = &sDeployment_deploymentStatus
+var Deployment_deploymentStatusMessage = &sDeployment_deploymentStatusMessage
+var Deployment_createdAt = &sDeployment_createdAt
+var Deployment_lastModifiedAt = &sDeployment_lastModifiedAt
+var Deployment_completedAt = &sDeployment_completedAt
+var Deployment_lastAttemptedDeploymentId = &sDeployment_lastAttemptedDeploymentId
+var Deployment_lastSucceededDeploymentId = &sDeployment_lastSucceededDeploymentId
+var Deployment_initialState = &sDeployment_initialState
+var Deployment_targetState = &sDeployment_targetState
+
+var _DeploymentArn = &s_DeploymentArn
+
+var _DeploymentId = &s_DeploymentId
+
+var DeploymentState = &sDeploymentState
+var DeploymentState_serviceInstance = &sDeploymentState_serviceInstance
+var DeploymentState_environment = &sDeploymentState_environment
+var DeploymentState_servicePipeline = &sDeploymentState_servicePipeline
+var DeploymentState_component = &sDeploymentState_component
+
+var _DeploymentStatus = &s_DeploymentStatus
+
+var DeploymentSummary = &sDeploymentSummary
+var DeploymentSummary_id = &sDeploymentSummary_id
+var DeploymentSummary_arn = &sDeploymentSummary_arn
+var DeploymentSummary_targetArn = &sDeploymentSummary_targetArn
+var DeploymentSummary_targetResourceCreatedAt = &sDeploymentSummary_targetResourceCreatedAt
+var DeploymentSummary_targetResourceType = &sDeploymentSummary_targetResourceType
+var DeploymentSummary_createdAt = &sDeploymentSummary_createdAt
+var DeploymentSummary_lastModifiedAt = &sDeploymentSummary_lastModifiedAt
+var DeploymentSummary_completedAt = &sDeploymentSummary_completedAt
+var DeploymentSummary_environmentName = &sDeploymentSummary_environmentName
+var DeploymentSummary_serviceName = &sDeploymentSummary_serviceName
+var DeploymentSummary_serviceInstanceName = &sDeploymentSummary_serviceInstanceName
+var DeploymentSummary_componentName = &sDeploymentSummary_componentName
+var DeploymentSummary_lastAttemptedDeploymentId = &sDeploymentSummary_lastAttemptedDeploymentId
+var DeploymentSummary_lastSucceededDeploymentId = &sDeploymentSummary_lastSucceededDeploymentId
+var DeploymentSummary_deploymentStatus = &sDeploymentSummary_deploymentStatus
+
+var _DeploymentSummaryList = &s_DeploymentSummaryList
+var _DeploymentSummaryList_member = &s_DeploymentSummaryList_member
+
+var _DeploymentTargetResourceType = &s_DeploymentTargetResourceType
+
+var _DeploymentUpdateType = &s_DeploymentUpdateType
+
+var _Description = &s_Description
+
+var _DisplayName = &s_DisplayName
+
+var _EmptyNextToken = &s_EmptyNextToken
+
+var Environment = &sEnvironment
+var Environment_name = &sEnvironment_name
+var Environment_description = &sEnvironment_description
+var Environment_createdAt = &sEnvironment_createdAt
+var Environment_lastDeploymentAttemptedAt = &sEnvironment_lastDeploymentAttemptedAt
+var Environment_lastDeploymentSucceededAt = &sEnvironment_lastDeploymentSucceededAt
+var Environment_arn = &sEnvironment_arn
+var Environment_templateName = &sEnvironment_templateName
+var Environment_templateMajorVersion = &sEnvironment_templateMajorVersion
+var Environment_templateMinorVersion = &sEnvironment_templateMinorVersion
+var Environment_deploymentStatus = &sEnvironment_deploymentStatus
+var Environment_deploymentStatusMessage = &sEnvironment_deploymentStatusMessage
+var Environment_protonServiceRoleArn = &sEnvironment_protonServiceRoleArn
+var Environment_environmentAccountConnectionId = &sEnvironment_environmentAccountConnectionId
+var Environment_environmentAccountId = &sEnvironment_environmentAccountId
+var Environment_spec = &sEnvironment_spec
+var Environment_provisioning = &sEnvironment_provisioning
+var Environment_provisioningRepository = &sEnvironment_provisioningRepository
+var Environment_componentRoleArn = &sEnvironment_componentRoleArn
+var Environment_codebuildRoleArn = &sEnvironment_codebuildRoleArn
+var Environment_lastAttemptedDeploymentId = &sEnvironment_lastAttemptedDeploymentId
+var Environment_lastSucceededDeploymentId = &sEnvironment_lastSucceededDeploymentId
+
+var EnvironmentAccountConnection = &sEnvironmentAccountConnection
+var EnvironmentAccountConnection_id = &sEnvironmentAccountConnection_id
+var EnvironmentAccountConnection_arn = &sEnvironmentAccountConnection_arn
+var EnvironmentAccountConnection_managementAccountId = &sEnvironmentAccountConnection_managementAccountId
+var EnvironmentAccountConnection_environmentAccountId = &sEnvironmentAccountConnection_environmentAccountId
+var EnvironmentAccountConnection_roleArn = &sEnvironmentAccountConnection_roleArn
+var EnvironmentAccountConnection_environmentName = &sEnvironmentAccountConnection_environmentName
+var EnvironmentAccountConnection_requestedAt = &sEnvironmentAccountConnection_requestedAt
+var EnvironmentAccountConnection_lastModifiedAt = &sEnvironmentAccountConnection_lastModifiedAt
+var EnvironmentAccountConnection_status = &sEnvironmentAccountConnection_status
+var EnvironmentAccountConnection_componentRoleArn = &sEnvironmentAccountConnection_componentRoleArn
+var EnvironmentAccountConnection_codebuildRoleArn = &sEnvironmentAccountConnection_codebuildRoleArn
+
+var _EnvironmentAccountConnectionArn = &s_EnvironmentAccountConnectionArn
+
+var _EnvironmentAccountConnectionId = &s_EnvironmentAccountConnectionId
+
+var _EnvironmentAccountConnectionRequesterAccountType = &s_EnvironmentAccountConnectionRequesterAccountType
+
+var _EnvironmentAccountConnectionStatus = &s_EnvironmentAccountConnectionStatus
+
+var _EnvironmentAccountConnectionStatusList = &s_EnvironmentAccountConnectionStatusList
+var _EnvironmentAccountConnectionStatusList_member = &s_EnvironmentAccountConnectionStatusList_member
+
+var EnvironmentAccountConnectionSummary = &sEnvironmentAccountConnectionSummary
+var EnvironmentAccountConnectionSummary_id = &sEnvironmentAccountConnectionSummary_id
+var EnvironmentAccountConnectionSummary_arn = &sEnvironmentAccountConnectionSummary_arn
+var EnvironmentAccountConnectionSummary_managementAccountId = &sEnvironmentAccountConnectionSummary_managementAccountId
+var EnvironmentAccountConnectionSummary_environmentAccountId = &sEnvironmentAccountConnectionSummary_environmentAccountId
+var EnvironmentAccountConnectionSummary_roleArn = &sEnvironmentAccountConnectionSummary_roleArn
+var EnvironmentAccountConnectionSummary_environmentName = &sEnvironmentAccountConnectionSummary_environmentName
+var EnvironmentAccountConnectionSummary_requestedAt = &sEnvironmentAccountConnectionSummary_requestedAt
+var EnvironmentAccountConnectionSummary_lastModifiedAt = &sEnvironmentAccountConnectionSummary_lastModifiedAt
+var EnvironmentAccountConnectionSummary_status = &sEnvironmentAccountConnectionSummary_status
+var EnvironmentAccountConnectionSummary_componentRoleArn = &sEnvironmentAccountConnectionSummary_componentRoleArn
+
+var _EnvironmentAccountConnectionSummaryList = &s_EnvironmentAccountConnectionSummaryList
+var _EnvironmentAccountConnectionSummaryList_member = &s_EnvironmentAccountConnectionSummaryList_member
+
+var _EnvironmentArn = &s_EnvironmentArn
+
+var EnvironmentState = &sEnvironmentState
+var EnvironmentState_spec = &sEnvironmentState_spec
+var EnvironmentState_templateName = &sEnvironmentState_templateName
+var EnvironmentState_templateMajorVersion = &sEnvironmentState_templateMajorVersion
+var EnvironmentState_templateMinorVersion = &sEnvironmentState_templateMinorVersion
+
+var EnvironmentSummary = &sEnvironmentSummary
+var EnvironmentSummary_name = &sEnvironmentSummary_name
+var EnvironmentSummary_description = &sEnvironmentSummary_description
+var EnvironmentSummary_createdAt = &sEnvironmentSummary_createdAt
+var EnvironmentSummary_lastDeploymentAttemptedAt = &sEnvironmentSummary_lastDeploymentAttemptedAt
+var EnvironmentSummary_lastDeploymentSucceededAt = &sEnvironmentSummary_lastDeploymentSucceededAt
+var EnvironmentSummary_arn = &sEnvironmentSummary_arn
+var EnvironmentSummary_templateName = &sEnvironmentSummary_templateName
+var EnvironmentSummary_templateMajorVersion = &sEnvironmentSummary_templateMajorVersion
+var EnvironmentSummary_templateMinorVersion = &sEnvironmentSummary_templateMinorVersion
+var EnvironmentSummary_deploymentStatus = &sEnvironmentSummary_deploymentStatus
+var EnvironmentSummary_deploymentStatusMessage = &sEnvironmentSummary_deploymentStatusMessage
+var EnvironmentSummary_protonServiceRoleArn = &sEnvironmentSummary_protonServiceRoleArn
+var EnvironmentSummary_environmentAccountConnectionId = &sEnvironmentSummary_environmentAccountConnectionId
+var EnvironmentSummary_environmentAccountId = &sEnvironmentSummary_environmentAccountId
+var EnvironmentSummary_provisioning = &sEnvironmentSummary_provisioning
+var EnvironmentSummary_componentRoleArn = &sEnvironmentSummary_componentRoleArn
+var EnvironmentSummary_lastAttemptedDeploymentId = &sEnvironmentSummary_lastAttemptedDeploymentId
+var EnvironmentSummary_lastSucceededDeploymentId = &sEnvironmentSummary_lastSucceededDeploymentId
+
+var _EnvironmentSummaryList = &s_EnvironmentSummaryList
+var _EnvironmentSummaryList_member = &s_EnvironmentSummaryList_member
+
+var EnvironmentTemplate = &sEnvironmentTemplate
+var EnvironmentTemplate_name = &sEnvironmentTemplate_name
+var EnvironmentTemplate_arn = &sEnvironmentTemplate_arn
+var EnvironmentTemplate_createdAt = &sEnvironmentTemplate_createdAt
+var EnvironmentTemplate_lastModifiedAt = &sEnvironmentTemplate_lastModifiedAt
+var EnvironmentTemplate_displayName = &sEnvironmentTemplate_displayName
+var EnvironmentTemplate_description = &sEnvironmentTemplate_description
+var EnvironmentTemplate_recommendedVersion = &sEnvironmentTemplate_recommendedVersion
+var EnvironmentTemplate_encryptionKey = &sEnvironmentTemplate_encryptionKey
+var EnvironmentTemplate_provisioning = &sEnvironmentTemplate_provisioning
+
+var _EnvironmentTemplateArn = &s_EnvironmentTemplateArn
+
+var EnvironmentTemplateFilter = &sEnvironmentTemplateFilter
+var EnvironmentTemplateFilter_templateName = &sEnvironmentTemplateFilter_templateName
+var EnvironmentTemplateFilter_majorVersion = &sEnvironmentTemplateFilter_majorVersion
+
+var _EnvironmentTemplateFilterList = &s_EnvironmentTemplateFilterList
+var _EnvironmentTemplateFilterList_member = &s_EnvironmentTemplateFilterList_member
+
+var EnvironmentTemplateSummary = &sEnvironmentTemplateSummary
+var EnvironmentTemplateSummary_name = &sEnvironmentTemplateSummary_name
+var EnvironmentTemplateSummary_arn = &sEnvironmentTemplateSummary_arn
+var EnvironmentTemplateSummary_createdAt = &sEnvironmentTemplateSummary_createdAt
+var EnvironmentTemplateSummary_lastModifiedAt = &sEnvironmentTemplateSummary_lastModifiedAt
+var EnvironmentTemplateSummary_displayName = &sEnvironmentTemplateSummary_displayName
+var EnvironmentTemplateSummary_description = &sEnvironmentTemplateSummary_description
+var EnvironmentTemplateSummary_recommendedVersion = &sEnvironmentTemplateSummary_recommendedVersion
+var EnvironmentTemplateSummary_provisioning = &sEnvironmentTemplateSummary_provisioning
+
+var _EnvironmentTemplateSummaryList = &s_EnvironmentTemplateSummaryList
+var _EnvironmentTemplateSummaryList_member = &s_EnvironmentTemplateSummaryList_member
+
+var EnvironmentTemplateVersion = &sEnvironmentTemplateVersion
+var EnvironmentTemplateVersion_templateName = &sEnvironmentTemplateVersion_templateName
+var EnvironmentTemplateVersion_majorVersion = &sEnvironmentTemplateVersion_majorVersion
+var EnvironmentTemplateVersion_minorVersion = &sEnvironmentTemplateVersion_minorVersion
+var EnvironmentTemplateVersion_recommendedMinorVersion = &sEnvironmentTemplateVersion_recommendedMinorVersion
+var EnvironmentTemplateVersion_status = &sEnvironmentTemplateVersion_status
+var EnvironmentTemplateVersion_statusMessage = &sEnvironmentTemplateVersion_statusMessage
+var EnvironmentTemplateVersion_description = &sEnvironmentTemplateVersion_description
+var EnvironmentTemplateVersion_arn = &sEnvironmentTemplateVersion_arn
+var EnvironmentTemplateVersion_createdAt = &sEnvironmentTemplateVersion_createdAt
+var EnvironmentTemplateVersion_lastModifiedAt = &sEnvironmentTemplateVersion_lastModifiedAt
+var EnvironmentTemplateVersion_schema = &sEnvironmentTemplateVersion_schema
+
+var _EnvironmentTemplateVersionArn = &s_EnvironmentTemplateVersionArn
+
+var EnvironmentTemplateVersionSummary = &sEnvironmentTemplateVersionSummary
+var EnvironmentTemplateVersionSummary_templateName = &sEnvironmentTemplateVersionSummary_templateName
+var EnvironmentTemplateVersionSummary_majorVersion = &sEnvironmentTemplateVersionSummary_majorVersion
+var EnvironmentTemplateVersionSummary_minorVersion = &sEnvironmentTemplateVersionSummary_minorVersion
+var EnvironmentTemplateVersionSummary_recommendedMinorVersion = &sEnvironmentTemplateVersionSummary_recommendedMinorVersion
+var EnvironmentTemplateVersionSummary_status = &sEnvironmentTemplateVersionSummary_status
+var EnvironmentTemplateVersionSummary_statusMessage = &sEnvironmentTemplateVersionSummary_statusMessage
+var EnvironmentTemplateVersionSummary_description = &sEnvironmentTemplateVersionSummary_description
+var EnvironmentTemplateVersionSummary_arn = &sEnvironmentTemplateVersionSummary_arn
+var EnvironmentTemplateVersionSummary_createdAt = &sEnvironmentTemplateVersionSummary_createdAt
+var EnvironmentTemplateVersionSummary_lastModifiedAt = &sEnvironmentTemplateVersionSummary_lastModifiedAt
+
+var _EnvironmentTemplateVersionSummaryList = &s_EnvironmentTemplateVersionSummaryList
+var _EnvironmentTemplateVersionSummaryList_member = &s_EnvironmentTemplateVersionSummaryList_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _FullTemplateVersionNumber = &s_FullTemplateVersionNumber
+
+var _GitBranchName = &s_GitBranchName
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _LatestSyncBlockers = &s_LatestSyncBlockers
+var _LatestSyncBlockers_member = &s_LatestSyncBlockers_member
+
+var ListServiceInstancesFilter = &sListServiceInstancesFilter
+var ListServiceInstancesFilter_key = &sListServiceInstancesFilter_key
+var ListServiceInstancesFilter_value = &sListServiceInstancesFilter_value
+
+var _ListServiceInstancesFilterBy = &s_ListServiceInstancesFilterBy
+
+var _ListServiceInstancesFilterList = &s_ListServiceInstancesFilterList
+var _ListServiceInstancesFilterList_member = &s_ListServiceInstancesFilterList_member
+
+var _ListServiceInstancesFilterValue = &s_ListServiceInstancesFilterValue
+
+var _ListServiceInstancesSortBy = &s_ListServiceInstancesSortBy
+
+var _MaxPageResults = &s_MaxPageResults
+
+var _NextToken = &s_NextToken
+
+var _OpsFilePath = &s_OpsFilePath
+
+var Output = &sOutput
+var Output_key = &sOutput_key
+var Output_valueString = &sOutput_valueString
+
+var _OutputKey = &s_OutputKey
+
+var _OutputsList = &s_OutputsList
+var _OutputsList_member = &s_OutputsList_member
+
+var _OutputValueString = &s_OutputValueString
+
+var ProvisionedResource = &sProvisionedResource
+var ProvisionedResource_name = &sProvisionedResource_name
+var ProvisionedResource_identifier = &sProvisionedResource_identifier
+var ProvisionedResource_provisioningEngine = &sProvisionedResource_provisioningEngine
+
+var _ProvisionedResourceEngine = &s_ProvisionedResourceEngine
+
+var _ProvisionedResourceIdentifier = &s_ProvisionedResourceIdentifier
+
+var _ProvisionedResourceList = &s_ProvisionedResourceList
+var _ProvisionedResourceList_member = &s_ProvisionedResourceList_member
+
+var _ProvisionedResourceName = &s_ProvisionedResourceName
+
+var _Provisioning = &s_Provisioning
+
+var Repository = &sRepository
+var Repository_arn = &sRepository_arn
+var Repository_provider = &sRepository_provider
+var Repository_name = &sRepository_name
+var Repository_connectionArn = &sRepository_connectionArn
+var Repository_encryptionKey = &sRepository_encryptionKey
+
+var _RepositoryArn = &s_RepositoryArn
+
+var RepositoryBranch = &sRepositoryBranch
+var RepositoryBranch_arn = &sRepositoryBranch_arn
+var RepositoryBranch_provider = &sRepositoryBranch_provider
+var RepositoryBranch_name = &sRepositoryBranch_name
+var RepositoryBranch_branch = &sRepositoryBranch_branch
+
+var RepositoryBranchInput = &sRepositoryBranchInput
+var RepositoryBranchInput_provider = &sRepositoryBranchInput_provider
+var RepositoryBranchInput_name = &sRepositoryBranchInput_name
+var RepositoryBranchInput_branch = &sRepositoryBranchInput_branch
+
+var _RepositoryId = &s_RepositoryId
+
+var _RepositoryName = &s_RepositoryName
+
+var _RepositoryProvider = &s_RepositoryProvider
+
+var RepositorySummary = &sRepositorySummary
+var RepositorySummary_arn = &sRepositorySummary_arn
+var RepositorySummary_provider = &sRepositorySummary_provider
+var RepositorySummary_name = &sRepositorySummary_name
+var RepositorySummary_connectionArn = &sRepositorySummary_connectionArn
+
+var _RepositorySummaryList = &s_RepositorySummaryList
+var _RepositorySummaryList_member = &s_RepositorySummaryList_member
+
+var RepositorySyncAttempt = &sRepositorySyncAttempt
+var RepositorySyncAttempt_startedAt = &sRepositorySyncAttempt_startedAt
+var RepositorySyncAttempt_status = &sRepositorySyncAttempt_status
+var RepositorySyncAttempt_events = &sRepositorySyncAttempt_events
+
+var RepositorySyncDefinition = &sRepositorySyncDefinition
+var RepositorySyncDefinition_target = &sRepositorySyncDefinition_target
+var RepositorySyncDefinition_parent = &sRepositorySyncDefinition_parent
+var RepositorySyncDefinition_branch = &sRepositorySyncDefinition_branch
+var RepositorySyncDefinition_directory = &sRepositorySyncDefinition_directory
+
+var _RepositorySyncDefinitionList = &s_RepositorySyncDefinitionList
+var _RepositorySyncDefinitionList_member = &s_RepositorySyncDefinitionList_member
+
+var RepositorySyncEvent = &sRepositorySyncEvent
+var RepositorySyncEvent_type = &sRepositorySyncEvent_type
+var RepositorySyncEvent_externalId = &sRepositorySyncEvent_externalId
+var RepositorySyncEvent_time = &sRepositorySyncEvent_time
+var RepositorySyncEvent_event = &sRepositorySyncEvent_event
+
+var _RepositorySyncEvents = &s_RepositorySyncEvents
+var _RepositorySyncEvents_member = &s_RepositorySyncEvents_member
+
+var _RepositorySyncStatus = &s_RepositorySyncStatus
+
+var ResourceCountsSummary = &sResourceCountsSummary
+var ResourceCountsSummary_total = &sResourceCountsSummary_total
+var ResourceCountsSummary_failed = &sResourceCountsSummary_failed
+var ResourceCountsSummary_upToDate = &sResourceCountsSummary_upToDate
+var ResourceCountsSummary_behindMajor = &sResourceCountsSummary_behindMajor
+var ResourceCountsSummary_behindMinor = &sResourceCountsSummary_behindMinor
+
+var _ResourceDeploymentStatus = &s_ResourceDeploymentStatus
+
+var _ResourceName = &s_ResourceName
+
+var _ResourceNameOrEmpty = &s_ResourceNameOrEmpty
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceSyncAttempt = &sResourceSyncAttempt
+var ResourceSyncAttempt_initialRevision = &sResourceSyncAttempt_initialRevision
+var ResourceSyncAttempt_targetRevision = &sResourceSyncAttempt_targetRevision
+var ResourceSyncAttempt_target = &sResourceSyncAttempt_target
+var ResourceSyncAttempt_startedAt = &sResourceSyncAttempt_startedAt
+var ResourceSyncAttempt_status = &sResourceSyncAttempt_status
+var ResourceSyncAttempt_events = &sResourceSyncAttempt_events
+
+var ResourceSyncEvent = &sResourceSyncEvent
+var ResourceSyncEvent_type = &sResourceSyncEvent_type
+var ResourceSyncEvent_externalId = &sResourceSyncEvent_externalId
+var ResourceSyncEvent_time = &sResourceSyncEvent_time
+var ResourceSyncEvent_event = &sResourceSyncEvent_event
+
+var _ResourceSyncEvents = &s_ResourceSyncEvents
+var _ResourceSyncEvents_member = &s_ResourceSyncEvents_member
+
+var _ResourceSyncStatus = &s_ResourceSyncStatus
+
+var Revision = &sRevision
+var Revision_repositoryName = &sRevision_repositoryName
+var Revision_repositoryProvider = &sRevision_repositoryProvider
+var Revision_sha = &sRevision_sha
+var Revision_directory = &sRevision_directory
+var Revision_branch = &sRevision_branch
+
+var _RoleArn = &s_RoleArn
+
+var _RoleArnOrEmptyString = &s_RoleArnOrEmptyString
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Key = &s_S3Key
+
+var S3ObjectSource = &sS3ObjectSource
+var S3ObjectSource_bucket = &sS3ObjectSource_bucket
+var S3ObjectSource_key = &sS3ObjectSource_key
+
+var Service = &sService
+var Service_name = &sService_name
+var Service_description = &sService_description
+var Service_arn = &sService_arn
+var Service_templateName = &sService_templateName
+var Service_createdAt = &sService_createdAt
+var Service_lastModifiedAt = &sService_lastModifiedAt
+var Service_status = &sService_status
+var Service_statusMessage = &sService_statusMessage
+var Service_spec = &sService_spec
+var Service_pipeline = &sService_pipeline
+var Service_repositoryConnectionArn = &sService_repositoryConnectionArn
+var Service_repositoryId = &sService_repositoryId
+var Service_branchName = &sService_branchName
+
+var _ServiceArn = &s_ServiceArn
+
+var ServiceInstance = &sServiceInstance
+var ServiceInstance_name = &sServiceInstance_name
+var ServiceInstance_arn = &sServiceInstance_arn
+var ServiceInstance_createdAt = &sServiceInstance_createdAt
+var ServiceInstance_lastDeploymentAttemptedAt = &sServiceInstance_lastDeploymentAttemptedAt
+var ServiceInstance_lastDeploymentSucceededAt = &sServiceInstance_lastDeploymentSucceededAt
+var ServiceInstance_serviceName = &sServiceInstance_serviceName
+var ServiceInstance_environmentName = &sServiceInstance_environmentName
+var ServiceInstance_templateName = &sServiceInstance_templateName
+var ServiceInstance_templateMajorVersion = &sServiceInstance_templateMajorVersion
+var ServiceInstance_templateMinorVersion = &sServiceInstance_templateMinorVersion
+var ServiceInstance_deploymentStatus = &sServiceInstance_deploymentStatus
+var ServiceInstance_deploymentStatusMessage = &sServiceInstance_deploymentStatusMessage
+var ServiceInstance_spec = &sServiceInstance_spec
+var ServiceInstance_lastClientRequestToken = &sServiceInstance_lastClientRequestToken
+var ServiceInstance_lastAttemptedDeploymentId = &sServiceInstance_lastAttemptedDeploymentId
+var ServiceInstance_lastSucceededDeploymentId = &sServiceInstance_lastSucceededDeploymentId
+
+var _ServiceInstanceArn = &s_ServiceInstanceArn
+
+var ServiceInstanceState = &sServiceInstanceState
+var ServiceInstanceState_spec = &sServiceInstanceState_spec
+var ServiceInstanceState_templateName = &sServiceInstanceState_templateName
+var ServiceInstanceState_templateMajorVersion = &sServiceInstanceState_templateMajorVersion
+var ServiceInstanceState_templateMinorVersion = &sServiceInstanceState_templateMinorVersion
+var ServiceInstanceState_lastSuccessfulComponentDeploymentIds = &sServiceInstanceState_lastSuccessfulComponentDeploymentIds
+var ServiceInstanceState_lastSuccessfulEnvironmentDeploymentId = &sServiceInstanceState_lastSuccessfulEnvironmentDeploymentId
+var ServiceInstanceState_lastSuccessfulServicePipelineDeploymentId = &sServiceInstanceState_lastSuccessfulServicePipelineDeploymentId
+
+var ServiceInstanceSummary = &sServiceInstanceSummary
+var ServiceInstanceSummary_name = &sServiceInstanceSummary_name
+var ServiceInstanceSummary_arn = &sServiceInstanceSummary_arn
+var ServiceInstanceSummary_createdAt = &sServiceInstanceSummary_createdAt
+var ServiceInstanceSummary_lastDeploymentAttemptedAt = &sServiceInstanceSummary_lastDeploymentAttemptedAt
+var ServiceInstanceSummary_lastDeploymentSucceededAt = &sServiceInstanceSummary_lastDeploymentSucceededAt
+var ServiceInstanceSummary_serviceName = &sServiceInstanceSummary_serviceName
+var ServiceInstanceSummary_environmentName = &sServiceInstanceSummary_environmentName
+var ServiceInstanceSummary_templateName = &sServiceInstanceSummary_templateName
+var ServiceInstanceSummary_templateMajorVersion = &sServiceInstanceSummary_templateMajorVersion
+var ServiceInstanceSummary_templateMinorVersion = &sServiceInstanceSummary_templateMinorVersion
+var ServiceInstanceSummary_deploymentStatus = &sServiceInstanceSummary_deploymentStatus
+var ServiceInstanceSummary_deploymentStatusMessage = &sServiceInstanceSummary_deploymentStatusMessage
+var ServiceInstanceSummary_lastAttemptedDeploymentId = &sServiceInstanceSummary_lastAttemptedDeploymentId
+var ServiceInstanceSummary_lastSucceededDeploymentId = &sServiceInstanceSummary_lastSucceededDeploymentId
+
+var _ServiceInstanceSummaryList = &s_ServiceInstanceSummaryList
+var _ServiceInstanceSummaryList_member = &s_ServiceInstanceSummaryList_member
+
+var ServicePipeline = &sServicePipeline
+var ServicePipeline_arn = &sServicePipeline_arn
+var ServicePipeline_createdAt = &sServicePipeline_createdAt
+var ServicePipeline_lastDeploymentAttemptedAt = &sServicePipeline_lastDeploymentAttemptedAt
+var ServicePipeline_lastDeploymentSucceededAt = &sServicePipeline_lastDeploymentSucceededAt
+var ServicePipeline_templateName = &sServicePipeline_templateName
+var ServicePipeline_templateMajorVersion = &sServicePipeline_templateMajorVersion
+var ServicePipeline_templateMinorVersion = &sServicePipeline_templateMinorVersion
+var ServicePipeline_deploymentStatus = &sServicePipeline_deploymentStatus
+var ServicePipeline_deploymentStatusMessage = &sServicePipeline_deploymentStatusMessage
+var ServicePipeline_spec = &sServicePipeline_spec
+var ServicePipeline_lastAttemptedDeploymentId = &sServicePipeline_lastAttemptedDeploymentId
+var ServicePipeline_lastSucceededDeploymentId = &sServicePipeline_lastSucceededDeploymentId
+
+var ServicePipelineState = &sServicePipelineState
+var ServicePipelineState_spec = &sServicePipelineState_spec
+var ServicePipelineState_templateName = &sServicePipelineState_templateName
+var ServicePipelineState_templateMajorVersion = &sServicePipelineState_templateMajorVersion
+var ServicePipelineState_templateMinorVersion = &sServicePipelineState_templateMinorVersion
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _ServiceStatus = &s_ServiceStatus
+
+var ServiceSummary = &sServiceSummary
+var ServiceSummary_name = &sServiceSummary_name
+var ServiceSummary_description = &sServiceSummary_description
+var ServiceSummary_arn = &sServiceSummary_arn
+var ServiceSummary_templateName = &sServiceSummary_templateName
+var ServiceSummary_createdAt = &sServiceSummary_createdAt
+var ServiceSummary_lastModifiedAt = &sServiceSummary_lastModifiedAt
+var ServiceSummary_status = &sServiceSummary_status
+var ServiceSummary_statusMessage = &sServiceSummary_statusMessage
+
+var _ServiceSummaryList = &s_ServiceSummaryList
+var _ServiceSummaryList_member = &s_ServiceSummaryList_member
+
+var ServiceSyncBlockerSummary = &sServiceSyncBlockerSummary
+var ServiceSyncBlockerSummary_serviceName = &sServiceSyncBlockerSummary_serviceName
+var ServiceSyncBlockerSummary_serviceInstanceName = &sServiceSyncBlockerSummary_serviceInstanceName
+var ServiceSyncBlockerSummary_latestBlockers = &sServiceSyncBlockerSummary_latestBlockers
+
+var ServiceSyncConfig = &sServiceSyncConfig
+var ServiceSyncConfig_serviceName = &sServiceSyncConfig_serviceName
+var ServiceSyncConfig_repositoryProvider = &sServiceSyncConfig_repositoryProvider
+var ServiceSyncConfig_repositoryName = &sServiceSyncConfig_repositoryName
+var ServiceSyncConfig_branch = &sServiceSyncConfig_branch
+var ServiceSyncConfig_filePath = &sServiceSyncConfig_filePath
+
+var ServiceTemplate = &sServiceTemplate
+var ServiceTemplate_name = &sServiceTemplate_name
+var ServiceTemplate_arn = &sServiceTemplate_arn
+var ServiceTemplate_createdAt = &sServiceTemplate_createdAt
+var ServiceTemplate_lastModifiedAt = &sServiceTemplate_lastModifiedAt
+var ServiceTemplate_displayName = &sServiceTemplate_displayName
+var ServiceTemplate_description = &sServiceTemplate_description
+var ServiceTemplate_recommendedVersion = &sServiceTemplate_recommendedVersion
+var ServiceTemplate_encryptionKey = &sServiceTemplate_encryptionKey
+var ServiceTemplate_pipelineProvisioning = &sServiceTemplate_pipelineProvisioning
+
+var _ServiceTemplateArn = &s_ServiceTemplateArn
+
+var ServiceTemplateSummary = &sServiceTemplateSummary
+var ServiceTemplateSummary_name = &sServiceTemplateSummary_name
+var ServiceTemplateSummary_arn = &sServiceTemplateSummary_arn
+var ServiceTemplateSummary_createdAt = &sServiceTemplateSummary_createdAt
+var ServiceTemplateSummary_lastModifiedAt = &sServiceTemplateSummary_lastModifiedAt
+var ServiceTemplateSummary_displayName = &sServiceTemplateSummary_displayName
+var ServiceTemplateSummary_description = &sServiceTemplateSummary_description
+var ServiceTemplateSummary_recommendedVersion = &sServiceTemplateSummary_recommendedVersion
+var ServiceTemplateSummary_pipelineProvisioning = &sServiceTemplateSummary_pipelineProvisioning
+
+var _ServiceTemplateSummaryList = &s_ServiceTemplateSummaryList
+var _ServiceTemplateSummaryList_member = &s_ServiceTemplateSummaryList_member
+
+var _ServiceTemplateSupportedComponentSourceInputList = &s_ServiceTemplateSupportedComponentSourceInputList
+var _ServiceTemplateSupportedComponentSourceInputList_member = &s_ServiceTemplateSupportedComponentSourceInputList_member
+
+var _ServiceTemplateSupportedComponentSourceType = &s_ServiceTemplateSupportedComponentSourceType
+
+var ServiceTemplateVersion = &sServiceTemplateVersion
+var ServiceTemplateVersion_templateName = &sServiceTemplateVersion_templateName
+var ServiceTemplateVersion_majorVersion = &sServiceTemplateVersion_majorVersion
+var ServiceTemplateVersion_minorVersion = &sServiceTemplateVersion_minorVersion
+var ServiceTemplateVersion_recommendedMinorVersion = &sServiceTemplateVersion_recommendedMinorVersion
+var ServiceTemplateVersion_status = &sServiceTemplateVersion_status
+var ServiceTemplateVersion_statusMessage = &sServiceTemplateVersion_statusMessage
+var ServiceTemplateVersion_description = &sServiceTemplateVersion_description
+var ServiceTemplateVersion_arn = &sServiceTemplateVersion_arn
+var ServiceTemplateVersion_createdAt = &sServiceTemplateVersion_createdAt
+var ServiceTemplateVersion_lastModifiedAt = &sServiceTemplateVersion_lastModifiedAt
+var ServiceTemplateVersion_compatibleEnvironmentTemplates = &sServiceTemplateVersion_compatibleEnvironmentTemplates
+var ServiceTemplateVersion_schema = &sServiceTemplateVersion_schema
+var ServiceTemplateVersion_supportedComponentSources = &sServiceTemplateVersion_supportedComponentSources
+
+var _ServiceTemplateVersionArn = &s_ServiceTemplateVersionArn
+
+var ServiceTemplateVersionSummary = &sServiceTemplateVersionSummary
+var ServiceTemplateVersionSummary_templateName = &sServiceTemplateVersionSummary_templateName
+var ServiceTemplateVersionSummary_majorVersion = &sServiceTemplateVersionSummary_majorVersion
+var ServiceTemplateVersionSummary_minorVersion = &sServiceTemplateVersionSummary_minorVersion
+var ServiceTemplateVersionSummary_recommendedMinorVersion = &sServiceTemplateVersionSummary_recommendedMinorVersion
+var ServiceTemplateVersionSummary_status = &sServiceTemplateVersionSummary_status
+var ServiceTemplateVersionSummary_statusMessage = &sServiceTemplateVersionSummary_statusMessage
+var ServiceTemplateVersionSummary_description = &sServiceTemplateVersionSummary_description
+var ServiceTemplateVersionSummary_arn = &sServiceTemplateVersionSummary_arn
+var ServiceTemplateVersionSummary_createdAt = &sServiceTemplateVersionSummary_createdAt
+var ServiceTemplateVersionSummary_lastModifiedAt = &sServiceTemplateVersionSummary_lastModifiedAt
+
+var _ServiceTemplateVersionSummaryList = &s_ServiceTemplateVersionSummaryList
+var _ServiceTemplateVersionSummaryList_member = &s_ServiceTemplateVersionSummaryList_member
+
+var _SHA = &s_SHA
+
+var _SortOrder = &s_SortOrder
+
+var _SpecContents = &s_SpecContents
+
+var _StatusMessage = &s_StatusMessage
+
+var _Subdirectory = &s_Subdirectory
+
+var SyncBlocker = &sSyncBlocker
+var SyncBlocker_id = &sSyncBlocker_id
+var SyncBlocker_type = &sSyncBlocker_type
+var SyncBlocker_status = &sSyncBlocker_status
+var SyncBlocker_createdReason = &sSyncBlocker_createdReason
+var SyncBlocker_createdAt = &sSyncBlocker_createdAt
+var SyncBlocker_contexts = &sSyncBlocker_contexts
+var SyncBlocker_resolvedReason = &sSyncBlocker_resolvedReason
+var SyncBlocker_resolvedAt = &sSyncBlocker_resolvedAt
+
+var SyncBlockerContext = &sSyncBlockerContext
+var SyncBlockerContext_key = &sSyncBlockerContext_key
+var SyncBlockerContext_value = &sSyncBlockerContext_value
+
+var _SyncBlockerContexts = &s_SyncBlockerContexts
+var _SyncBlockerContexts_member = &s_SyncBlockerContexts_member
+
+var _SyncType = &s_SyncType
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TemplateFileContents = &s_TemplateFileContents
+
+var _TemplateManifestContents = &s_TemplateManifestContents
+
+var _TemplateSchema = &s_TemplateSchema
+
+var TemplateSyncConfig = &sTemplateSyncConfig
+var TemplateSyncConfig_templateName = &sTemplateSyncConfig_templateName
+var TemplateSyncConfig_templateType = &sTemplateSyncConfig_templateType
+var TemplateSyncConfig_repositoryProvider = &sTemplateSyncConfig_repositoryProvider
+var TemplateSyncConfig_repositoryName = &sTemplateSyncConfig_repositoryName
+var TemplateSyncConfig_branch = &sTemplateSyncConfig_branch
+var TemplateSyncConfig_subdirectory = &sTemplateSyncConfig_subdirectory
+
+var _TemplateType = &s_TemplateType
+
+var _TemplateVersionPart = &s_TemplateVersionPart
+
+var TemplateVersionSourceInput = &sTemplateVersionSourceInput
+var TemplateVersionSourceInput_s3 = &sTemplateVersionSourceInput_s3
+
+var _TemplateVersionStatus = &s_TemplateVersionStatus
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var AcceptEnvironmentAccountConnectionInput = &sAcceptEnvironmentAccountConnectionInput
+var AcceptEnvironmentAccountConnectionInput_id = &sAcceptEnvironmentAccountConnectionInput_id
+
+var AcceptEnvironmentAccountConnectionOutput = &sAcceptEnvironmentAccountConnectionOutput
+var AcceptEnvironmentAccountConnectionOutput_environmentAccountConnection = &sAcceptEnvironmentAccountConnectionOutput_environmentAccountConnection
+
+var CancelComponentDeploymentInput = &sCancelComponentDeploymentInput
+var CancelComponentDeploymentInput_componentName = &sCancelComponentDeploymentInput_componentName
+
+var CancelComponentDeploymentOutput = &sCancelComponentDeploymentOutput
+var CancelComponentDeploymentOutput_component = &sCancelComponentDeploymentOutput_component
+
+var CancelEnvironmentDeploymentInput = &sCancelEnvironmentDeploymentInput
+var CancelEnvironmentDeploymentInput_environmentName = &sCancelEnvironmentDeploymentInput_environmentName
+
+var CancelEnvironmentDeploymentOutput = &sCancelEnvironmentDeploymentOutput
+var CancelEnvironmentDeploymentOutput_environment = &sCancelEnvironmentDeploymentOutput_environment
+
+var CancelServiceInstanceDeploymentInput = &sCancelServiceInstanceDeploymentInput
+var CancelServiceInstanceDeploymentInput_serviceInstanceName = &sCancelServiceInstanceDeploymentInput_serviceInstanceName
+var CancelServiceInstanceDeploymentInput_serviceName = &sCancelServiceInstanceDeploymentInput_serviceName
+
+var CancelServiceInstanceDeploymentOutput = &sCancelServiceInstanceDeploymentOutput
+var CancelServiceInstanceDeploymentOutput_serviceInstance = &sCancelServiceInstanceDeploymentOutput_serviceInstance
+
+var CancelServicePipelineDeploymentInput = &sCancelServicePipelineDeploymentInput
+var CancelServicePipelineDeploymentInput_serviceName = &sCancelServicePipelineDeploymentInput_serviceName
+
+var CancelServicePipelineDeploymentOutput = &sCancelServicePipelineDeploymentOutput
+var CancelServicePipelineDeploymentOutput_pipeline = &sCancelServicePipelineDeploymentOutput_pipeline
+
+var CreateComponentInput = &sCreateComponentInput
+var CreateComponentInput_name = &sCreateComponentInput_name
+var CreateComponentInput_description = &sCreateComponentInput_description
+var CreateComponentInput_serviceName = &sCreateComponentInput_serviceName
+var CreateComponentInput_serviceInstanceName = &sCreateComponentInput_serviceInstanceName
+var CreateComponentInput_environmentName = &sCreateComponentInput_environmentName
+var CreateComponentInput_templateFile = &sCreateComponentInput_templateFile
+var CreateComponentInput_manifest = &sCreateComponentInput_manifest
+var CreateComponentInput_serviceSpec = &sCreateComponentInput_serviceSpec
+var CreateComponentInput_tags = &sCreateComponentInput_tags
+var CreateComponentInput_clientToken = &sCreateComponentInput_clientToken
+
+var CreateComponentOutput = &sCreateComponentOutput
+var CreateComponentOutput_component = &sCreateComponentOutput_component
+
+var CreateEnvironmentAccountConnectionInput = &sCreateEnvironmentAccountConnectionInput
+var CreateEnvironmentAccountConnectionInput_clientToken = &sCreateEnvironmentAccountConnectionInput_clientToken
+var CreateEnvironmentAccountConnectionInput_managementAccountId = &sCreateEnvironmentAccountConnectionInput_managementAccountId
+var CreateEnvironmentAccountConnectionInput_roleArn = &sCreateEnvironmentAccountConnectionInput_roleArn
+var CreateEnvironmentAccountConnectionInput_environmentName = &sCreateEnvironmentAccountConnectionInput_environmentName
+var CreateEnvironmentAccountConnectionInput_tags = &sCreateEnvironmentAccountConnectionInput_tags
+var CreateEnvironmentAccountConnectionInput_componentRoleArn = &sCreateEnvironmentAccountConnectionInput_componentRoleArn
+var CreateEnvironmentAccountConnectionInput_codebuildRoleArn = &sCreateEnvironmentAccountConnectionInput_codebuildRoleArn
+
+var CreateEnvironmentAccountConnectionOutput = &sCreateEnvironmentAccountConnectionOutput
+var CreateEnvironmentAccountConnectionOutput_environmentAccountConnection = &sCreateEnvironmentAccountConnectionOutput_environmentAccountConnection
+
+var CreateEnvironmentInput = &sCreateEnvironmentInput
+var CreateEnvironmentInput_name = &sCreateEnvironmentInput_name
+var CreateEnvironmentInput_templateName = &sCreateEnvironmentInput_templateName
+var CreateEnvironmentInput_templateMajorVersion = &sCreateEnvironmentInput_templateMajorVersion
+var CreateEnvironmentInput_templateMinorVersion = &sCreateEnvironmentInput_templateMinorVersion
+var CreateEnvironmentInput_description = &sCreateEnvironmentInput_description
+var CreateEnvironmentInput_spec = &sCreateEnvironmentInput_spec
+var CreateEnvironmentInput_protonServiceRoleArn = &sCreateEnvironmentInput_protonServiceRoleArn
+var CreateEnvironmentInput_environmentAccountConnectionId = &sCreateEnvironmentInput_environmentAccountConnectionId
+var CreateEnvironmentInput_tags = &sCreateEnvironmentInput_tags
+var CreateEnvironmentInput_provisioningRepository = &sCreateEnvironmentInput_provisioningRepository
+var CreateEnvironmentInput_componentRoleArn = &sCreateEnvironmentInput_componentRoleArn
+var CreateEnvironmentInput_codebuildRoleArn = &sCreateEnvironmentInput_codebuildRoleArn
+
+var CreateEnvironmentOutput = &sCreateEnvironmentOutput
+var CreateEnvironmentOutput_environment = &sCreateEnvironmentOutput_environment
+
+var CreateEnvironmentTemplateInput = &sCreateEnvironmentTemplateInput
+var CreateEnvironmentTemplateInput_name = &sCreateEnvironmentTemplateInput_name
+var CreateEnvironmentTemplateInput_displayName = &sCreateEnvironmentTemplateInput_displayName
+var CreateEnvironmentTemplateInput_description = &sCreateEnvironmentTemplateInput_description
+var CreateEnvironmentTemplateInput_encryptionKey = &sCreateEnvironmentTemplateInput_encryptionKey
+var CreateEnvironmentTemplateInput_provisioning = &sCreateEnvironmentTemplateInput_provisioning
+var CreateEnvironmentTemplateInput_tags = &sCreateEnvironmentTemplateInput_tags
+
+var CreateEnvironmentTemplateOutput = &sCreateEnvironmentTemplateOutput
+var CreateEnvironmentTemplateOutput_environmentTemplate = &sCreateEnvironmentTemplateOutput_environmentTemplate
+
+var CreateEnvironmentTemplateVersionInput = &sCreateEnvironmentTemplateVersionInput
+var CreateEnvironmentTemplateVersionInput_clientToken = &sCreateEnvironmentTemplateVersionInput_clientToken
+var CreateEnvironmentTemplateVersionInput_templateName = &sCreateEnvironmentTemplateVersionInput_templateName
+var CreateEnvironmentTemplateVersionInput_description = &sCreateEnvironmentTemplateVersionInput_description
+var CreateEnvironmentTemplateVersionInput_majorVersion = &sCreateEnvironmentTemplateVersionInput_majorVersion
+var CreateEnvironmentTemplateVersionInput_source = &sCreateEnvironmentTemplateVersionInput_source
+var CreateEnvironmentTemplateVersionInput_tags = &sCreateEnvironmentTemplateVersionInput_tags
+
+var CreateEnvironmentTemplateVersionOutput = &sCreateEnvironmentTemplateVersionOutput
+var CreateEnvironmentTemplateVersionOutput_environmentTemplateVersion = &sCreateEnvironmentTemplateVersionOutput_environmentTemplateVersion
+
+var CreateRepositoryInput = &sCreateRepositoryInput
+var CreateRepositoryInput_provider = &sCreateRepositoryInput_provider
+var CreateRepositoryInput_name = &sCreateRepositoryInput_name
+var CreateRepositoryInput_connectionArn = &sCreateRepositoryInput_connectionArn
+var CreateRepositoryInput_encryptionKey = &sCreateRepositoryInput_encryptionKey
+var CreateRepositoryInput_tags = &sCreateRepositoryInput_tags
+
+var CreateRepositoryOutput = &sCreateRepositoryOutput
+var CreateRepositoryOutput_repository = &sCreateRepositoryOutput_repository
+
+var CreateServiceInput = &sCreateServiceInput
+var CreateServiceInput_name = &sCreateServiceInput_name
+var CreateServiceInput_description = &sCreateServiceInput_description
+var CreateServiceInput_templateName = &sCreateServiceInput_templateName
+var CreateServiceInput_templateMajorVersion = &sCreateServiceInput_templateMajorVersion
+var CreateServiceInput_templateMinorVersion = &sCreateServiceInput_templateMinorVersion
+var CreateServiceInput_spec = &sCreateServiceInput_spec
+var CreateServiceInput_repositoryConnectionArn = &sCreateServiceInput_repositoryConnectionArn
+var CreateServiceInput_repositoryId = &sCreateServiceInput_repositoryId
+var CreateServiceInput_branchName = &sCreateServiceInput_branchName
+var CreateServiceInput_tags = &sCreateServiceInput_tags
+
+var CreateServiceInstanceInput = &sCreateServiceInstanceInput
+var CreateServiceInstanceInput_name = &sCreateServiceInstanceInput_name
+var CreateServiceInstanceInput_serviceName = &sCreateServiceInstanceInput_serviceName
+var CreateServiceInstanceInput_spec = &sCreateServiceInstanceInput_spec
+var CreateServiceInstanceInput_templateMajorVersion = &sCreateServiceInstanceInput_templateMajorVersion
+var CreateServiceInstanceInput_templateMinorVersion = &sCreateServiceInstanceInput_templateMinorVersion
+var CreateServiceInstanceInput_tags = &sCreateServiceInstanceInput_tags
+var CreateServiceInstanceInput_clientToken = &sCreateServiceInstanceInput_clientToken
+
+var CreateServiceInstanceOutput = &sCreateServiceInstanceOutput
+var CreateServiceInstanceOutput_serviceInstance = &sCreateServiceInstanceOutput_serviceInstance
+
+var CreateServiceOutput = &sCreateServiceOutput
+var CreateServiceOutput_service = &sCreateServiceOutput_service
+
+var CreateServiceSyncConfigInput = &sCreateServiceSyncConfigInput
+var CreateServiceSyncConfigInput_serviceName = &sCreateServiceSyncConfigInput_serviceName
+var CreateServiceSyncConfigInput_repositoryProvider = &sCreateServiceSyncConfigInput_repositoryProvider
+var CreateServiceSyncConfigInput_repositoryName = &sCreateServiceSyncConfigInput_repositoryName
+var CreateServiceSyncConfigInput_branch = &sCreateServiceSyncConfigInput_branch
+var CreateServiceSyncConfigInput_filePath = &sCreateServiceSyncConfigInput_filePath
+
+var CreateServiceSyncConfigOutput = &sCreateServiceSyncConfigOutput
+var CreateServiceSyncConfigOutput_serviceSyncConfig = &sCreateServiceSyncConfigOutput_serviceSyncConfig
+
+var CreateServiceTemplateInput = &sCreateServiceTemplateInput
+var CreateServiceTemplateInput_name = &sCreateServiceTemplateInput_name
+var CreateServiceTemplateInput_displayName = &sCreateServiceTemplateInput_displayName
+var CreateServiceTemplateInput_description = &sCreateServiceTemplateInput_description
+var CreateServiceTemplateInput_encryptionKey = &sCreateServiceTemplateInput_encryptionKey
+var CreateServiceTemplateInput_pipelineProvisioning = &sCreateServiceTemplateInput_pipelineProvisioning
+var CreateServiceTemplateInput_tags = &sCreateServiceTemplateInput_tags
+
+var CreateServiceTemplateOutput = &sCreateServiceTemplateOutput
+var CreateServiceTemplateOutput_serviceTemplate = &sCreateServiceTemplateOutput_serviceTemplate
+
+var CreateServiceTemplateVersionInput = &sCreateServiceTemplateVersionInput
+var CreateServiceTemplateVersionInput_clientToken = &sCreateServiceTemplateVersionInput_clientToken
+var CreateServiceTemplateVersionInput_templateName = &sCreateServiceTemplateVersionInput_templateName
+var CreateServiceTemplateVersionInput_description = &sCreateServiceTemplateVersionInput_description
+var CreateServiceTemplateVersionInput_majorVersion = &sCreateServiceTemplateVersionInput_majorVersion
+var CreateServiceTemplateVersionInput_source = &sCreateServiceTemplateVersionInput_source
+var CreateServiceTemplateVersionInput_compatibleEnvironmentTemplates = &sCreateServiceTemplateVersionInput_compatibleEnvironmentTemplates
+var CreateServiceTemplateVersionInput_tags = &sCreateServiceTemplateVersionInput_tags
+var CreateServiceTemplateVersionInput_supportedComponentSources = &sCreateServiceTemplateVersionInput_supportedComponentSources
+
+var CreateServiceTemplateVersionOutput = &sCreateServiceTemplateVersionOutput
+var CreateServiceTemplateVersionOutput_serviceTemplateVersion = &sCreateServiceTemplateVersionOutput_serviceTemplateVersion
+
+var CreateTemplateSyncConfigInput = &sCreateTemplateSyncConfigInput
+var CreateTemplateSyncConfigInput_templateName = &sCreateTemplateSyncConfigInput_templateName
+var CreateTemplateSyncConfigInput_templateType = &sCreateTemplateSyncConfigInput_templateType
+var CreateTemplateSyncConfigInput_repositoryProvider = &sCreateTemplateSyncConfigInput_repositoryProvider
+var CreateTemplateSyncConfigInput_repositoryName = &sCreateTemplateSyncConfigInput_repositoryName
+var CreateTemplateSyncConfigInput_branch = &sCreateTemplateSyncConfigInput_branch
+var CreateTemplateSyncConfigInput_subdirectory = &sCreateTemplateSyncConfigInput_subdirectory
+
+var CreateTemplateSyncConfigOutput = &sCreateTemplateSyncConfigOutput
+var CreateTemplateSyncConfigOutput_templateSyncConfig = &sCreateTemplateSyncConfigOutput_templateSyncConfig
+
+var DeleteComponentInput = &sDeleteComponentInput
+var DeleteComponentInput_name = &sDeleteComponentInput_name
+
+var DeleteComponentOutput = &sDeleteComponentOutput
+var DeleteComponentOutput_component = &sDeleteComponentOutput_component
+
+var DeleteDeploymentInput = &sDeleteDeploymentInput
+var DeleteDeploymentInput_id = &sDeleteDeploymentInput_id
+
+var DeleteDeploymentOutput = &sDeleteDeploymentOutput
+var DeleteDeploymentOutput_deployment = &sDeleteDeploymentOutput_deployment
+
+var DeleteEnvironmentAccountConnectionInput = &sDeleteEnvironmentAccountConnectionInput
+var DeleteEnvironmentAccountConnectionInput_id = &sDeleteEnvironmentAccountConnectionInput_id
+
+var DeleteEnvironmentAccountConnectionOutput = &sDeleteEnvironmentAccountConnectionOutput
+var DeleteEnvironmentAccountConnectionOutput_environmentAccountConnection = &sDeleteEnvironmentAccountConnectionOutput_environmentAccountConnection
+
+var DeleteEnvironmentInput = &sDeleteEnvironmentInput
+var DeleteEnvironmentInput_name = &sDeleteEnvironmentInput_name
+
+var DeleteEnvironmentOutput = &sDeleteEnvironmentOutput
+var DeleteEnvironmentOutput_environment = &sDeleteEnvironmentOutput_environment
+
+var DeleteEnvironmentTemplateInput = &sDeleteEnvironmentTemplateInput
+var DeleteEnvironmentTemplateInput_name = &sDeleteEnvironmentTemplateInput_name
+
+var DeleteEnvironmentTemplateOutput = &sDeleteEnvironmentTemplateOutput
+var DeleteEnvironmentTemplateOutput_environmentTemplate = &sDeleteEnvironmentTemplateOutput_environmentTemplate
+
+var DeleteEnvironmentTemplateVersionInput = &sDeleteEnvironmentTemplateVersionInput
+var DeleteEnvironmentTemplateVersionInput_templateName = &sDeleteEnvironmentTemplateVersionInput_templateName
+var DeleteEnvironmentTemplateVersionInput_majorVersion = &sDeleteEnvironmentTemplateVersionInput_majorVersion
+var DeleteEnvironmentTemplateVersionInput_minorVersion = &sDeleteEnvironmentTemplateVersionInput_minorVersion
+
+var DeleteEnvironmentTemplateVersionOutput = &sDeleteEnvironmentTemplateVersionOutput
+var DeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion = &sDeleteEnvironmentTemplateVersionOutput_environmentTemplateVersion
+
+var DeleteRepositoryInput = &sDeleteRepositoryInput
+var DeleteRepositoryInput_provider = &sDeleteRepositoryInput_provider
+var DeleteRepositoryInput_name = &sDeleteRepositoryInput_name
+
+var DeleteRepositoryOutput = &sDeleteRepositoryOutput
+var DeleteRepositoryOutput_repository = &sDeleteRepositoryOutput_repository
+
+var DeleteServiceInput = &sDeleteServiceInput
+var DeleteServiceInput_name = &sDeleteServiceInput_name
+
+var DeleteServiceOutput = &sDeleteServiceOutput
+var DeleteServiceOutput_service = &sDeleteServiceOutput_service
+
+var DeleteServiceSyncConfigInput = &sDeleteServiceSyncConfigInput
+var DeleteServiceSyncConfigInput_serviceName = &sDeleteServiceSyncConfigInput_serviceName
+
+var DeleteServiceSyncConfigOutput = &sDeleteServiceSyncConfigOutput
+var DeleteServiceSyncConfigOutput_serviceSyncConfig = &sDeleteServiceSyncConfigOutput_serviceSyncConfig
+
+var DeleteServiceTemplateInput = &sDeleteServiceTemplateInput
+var DeleteServiceTemplateInput_name = &sDeleteServiceTemplateInput_name
+
+var DeleteServiceTemplateOutput = &sDeleteServiceTemplateOutput
+var DeleteServiceTemplateOutput_serviceTemplate = &sDeleteServiceTemplateOutput_serviceTemplate
+
+var DeleteServiceTemplateVersionInput = &sDeleteServiceTemplateVersionInput
+var DeleteServiceTemplateVersionInput_templateName = &sDeleteServiceTemplateVersionInput_templateName
+var DeleteServiceTemplateVersionInput_majorVersion = &sDeleteServiceTemplateVersionInput_majorVersion
+var DeleteServiceTemplateVersionInput_minorVersion = &sDeleteServiceTemplateVersionInput_minorVersion
+
+var DeleteServiceTemplateVersionOutput = &sDeleteServiceTemplateVersionOutput
+var DeleteServiceTemplateVersionOutput_serviceTemplateVersion = &sDeleteServiceTemplateVersionOutput_serviceTemplateVersion
+
+var DeleteTemplateSyncConfigInput = &sDeleteTemplateSyncConfigInput
+var DeleteTemplateSyncConfigInput_templateName = &sDeleteTemplateSyncConfigInput_templateName
+var DeleteTemplateSyncConfigInput_templateType = &sDeleteTemplateSyncConfigInput_templateType
+
+var DeleteTemplateSyncConfigOutput = &sDeleteTemplateSyncConfigOutput
+var DeleteTemplateSyncConfigOutput_templateSyncConfig = &sDeleteTemplateSyncConfigOutput_templateSyncConfig
+
+var GetAccountSettingsInput = &sGetAccountSettingsInput
+
+var GetAccountSettingsOutput = &sGetAccountSettingsOutput
+var GetAccountSettingsOutput_accountSettings = &sGetAccountSettingsOutput_accountSettings
+
+var GetComponentInput = &sGetComponentInput
+var GetComponentInput_name = &sGetComponentInput_name
+
+var GetComponentOutput = &sGetComponentOutput
+var GetComponentOutput_component = &sGetComponentOutput_component
+
+var GetDeploymentInput = &sGetDeploymentInput
+var GetDeploymentInput_id = &sGetDeploymentInput_id
+var GetDeploymentInput_environmentName = &sGetDeploymentInput_environmentName
+var GetDeploymentInput_serviceName = &sGetDeploymentInput_serviceName
+var GetDeploymentInput_serviceInstanceName = &sGetDeploymentInput_serviceInstanceName
+var GetDeploymentInput_componentName = &sGetDeploymentInput_componentName
+
+var GetDeploymentOutput = &sGetDeploymentOutput
+var GetDeploymentOutput_deployment = &sGetDeploymentOutput_deployment
+
+var GetEnvironmentAccountConnectionInput = &sGetEnvironmentAccountConnectionInput
+var GetEnvironmentAccountConnectionInput_id = &sGetEnvironmentAccountConnectionInput_id
+
+var GetEnvironmentAccountConnectionOutput = &sGetEnvironmentAccountConnectionOutput
+var GetEnvironmentAccountConnectionOutput_environmentAccountConnection = &sGetEnvironmentAccountConnectionOutput_environmentAccountConnection
+
+var GetEnvironmentInput = &sGetEnvironmentInput
+var GetEnvironmentInput_name = &sGetEnvironmentInput_name
+
+var GetEnvironmentOutput = &sGetEnvironmentOutput
+var GetEnvironmentOutput_environment = &sGetEnvironmentOutput_environment
+
+var GetEnvironmentTemplateInput = &sGetEnvironmentTemplateInput
+var GetEnvironmentTemplateInput_name = &sGetEnvironmentTemplateInput_name
+
+var GetEnvironmentTemplateOutput = &sGetEnvironmentTemplateOutput
+var GetEnvironmentTemplateOutput_environmentTemplate = &sGetEnvironmentTemplateOutput_environmentTemplate
+
+var GetEnvironmentTemplateVersionInput = &sGetEnvironmentTemplateVersionInput
+var GetEnvironmentTemplateVersionInput_templateName = &sGetEnvironmentTemplateVersionInput_templateName
+var GetEnvironmentTemplateVersionInput_majorVersion = &sGetEnvironmentTemplateVersionInput_majorVersion
+var GetEnvironmentTemplateVersionInput_minorVersion = &sGetEnvironmentTemplateVersionInput_minorVersion
+
+var GetEnvironmentTemplateVersionOutput = &sGetEnvironmentTemplateVersionOutput
+var GetEnvironmentTemplateVersionOutput_environmentTemplateVersion = &sGetEnvironmentTemplateVersionOutput_environmentTemplateVersion
+
+var GetRepositoryInput = &sGetRepositoryInput
+var GetRepositoryInput_provider = &sGetRepositoryInput_provider
+var GetRepositoryInput_name = &sGetRepositoryInput_name
+
+var GetRepositoryOutput = &sGetRepositoryOutput
+var GetRepositoryOutput_repository = &sGetRepositoryOutput_repository
+
+var GetRepositorySyncStatusInput = &sGetRepositorySyncStatusInput
+var GetRepositorySyncStatusInput_repositoryName = &sGetRepositorySyncStatusInput_repositoryName
+var GetRepositorySyncStatusInput_repositoryProvider = &sGetRepositorySyncStatusInput_repositoryProvider
+var GetRepositorySyncStatusInput_branch = &sGetRepositorySyncStatusInput_branch
+var GetRepositorySyncStatusInput_syncType = &sGetRepositorySyncStatusInput_syncType
+
+var GetRepositorySyncStatusOutput = &sGetRepositorySyncStatusOutput
+var GetRepositorySyncStatusOutput_latestSync = &sGetRepositorySyncStatusOutput_latestSync
+
+var GetResourcesSummaryInput = &sGetResourcesSummaryInput
+
+var GetResourcesSummaryOutput = &sGetResourcesSummaryOutput
+var GetResourcesSummaryOutput_counts = &sGetResourcesSummaryOutput_counts
+
+var GetServiceInput = &sGetServiceInput
+var GetServiceInput_name = &sGetServiceInput_name
+
+var GetServiceInstanceInput = &sGetServiceInstanceInput
+var GetServiceInstanceInput_name = &sGetServiceInstanceInput_name
+var GetServiceInstanceInput_serviceName = &sGetServiceInstanceInput_serviceName
+
+var GetServiceInstanceOutput = &sGetServiceInstanceOutput
+var GetServiceInstanceOutput_serviceInstance = &sGetServiceInstanceOutput_serviceInstance
+
+var GetServiceInstanceSyncStatusInput = &sGetServiceInstanceSyncStatusInput
+var GetServiceInstanceSyncStatusInput_serviceName = &sGetServiceInstanceSyncStatusInput_serviceName
+var GetServiceInstanceSyncStatusInput_serviceInstanceName = &sGetServiceInstanceSyncStatusInput_serviceInstanceName
+
+var GetServiceInstanceSyncStatusOutput = &sGetServiceInstanceSyncStatusOutput
+var GetServiceInstanceSyncStatusOutput_latestSync = &sGetServiceInstanceSyncStatusOutput_latestSync
+var GetServiceInstanceSyncStatusOutput_latestSuccessfulSync = &sGetServiceInstanceSyncStatusOutput_latestSuccessfulSync
+var GetServiceInstanceSyncStatusOutput_desiredState = &sGetServiceInstanceSyncStatusOutput_desiredState
+
+var GetServiceOutput = &sGetServiceOutput
+var GetServiceOutput_service = &sGetServiceOutput_service
+
+var GetServiceSyncBlockerSummaryInput = &sGetServiceSyncBlockerSummaryInput
+var GetServiceSyncBlockerSummaryInput_serviceName = &sGetServiceSyncBlockerSummaryInput_serviceName
+var GetServiceSyncBlockerSummaryInput_serviceInstanceName = &sGetServiceSyncBlockerSummaryInput_serviceInstanceName
+
+var GetServiceSyncBlockerSummaryOutput = &sGetServiceSyncBlockerSummaryOutput
+var GetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary = &sGetServiceSyncBlockerSummaryOutput_serviceSyncBlockerSummary
+
+var GetServiceSyncConfigInput = &sGetServiceSyncConfigInput
+var GetServiceSyncConfigInput_serviceName = &sGetServiceSyncConfigInput_serviceName
+
+var GetServiceSyncConfigOutput = &sGetServiceSyncConfigOutput
+var GetServiceSyncConfigOutput_serviceSyncConfig = &sGetServiceSyncConfigOutput_serviceSyncConfig
+
+var GetServiceTemplateInput = &sGetServiceTemplateInput
+var GetServiceTemplateInput_name = &sGetServiceTemplateInput_name
+
+var GetServiceTemplateOutput = &sGetServiceTemplateOutput
+var GetServiceTemplateOutput_serviceTemplate = &sGetServiceTemplateOutput_serviceTemplate
+
+var GetServiceTemplateVersionInput = &sGetServiceTemplateVersionInput
+var GetServiceTemplateVersionInput_templateName = &sGetServiceTemplateVersionInput_templateName
+var GetServiceTemplateVersionInput_majorVersion = &sGetServiceTemplateVersionInput_majorVersion
+var GetServiceTemplateVersionInput_minorVersion = &sGetServiceTemplateVersionInput_minorVersion
+
+var GetServiceTemplateVersionOutput = &sGetServiceTemplateVersionOutput
+var GetServiceTemplateVersionOutput_serviceTemplateVersion = &sGetServiceTemplateVersionOutput_serviceTemplateVersion
+
+var GetTemplateSyncConfigInput = &sGetTemplateSyncConfigInput
+var GetTemplateSyncConfigInput_templateName = &sGetTemplateSyncConfigInput_templateName
+var GetTemplateSyncConfigInput_templateType = &sGetTemplateSyncConfigInput_templateType
+
+var GetTemplateSyncConfigOutput = &sGetTemplateSyncConfigOutput
+var GetTemplateSyncConfigOutput_templateSyncConfig = &sGetTemplateSyncConfigOutput_templateSyncConfig
+
+var GetTemplateSyncStatusInput = &sGetTemplateSyncStatusInput
+var GetTemplateSyncStatusInput_templateName = &sGetTemplateSyncStatusInput_templateName
+var GetTemplateSyncStatusInput_templateType = &sGetTemplateSyncStatusInput_templateType
+var GetTemplateSyncStatusInput_templateVersion = &sGetTemplateSyncStatusInput_templateVersion
+
+var GetTemplateSyncStatusOutput = &sGetTemplateSyncStatusOutput
+var GetTemplateSyncStatusOutput_latestSync = &sGetTemplateSyncStatusOutput_latestSync
+var GetTemplateSyncStatusOutput_latestSuccessfulSync = &sGetTemplateSyncStatusOutput_latestSuccessfulSync
+var GetTemplateSyncStatusOutput_desiredState = &sGetTemplateSyncStatusOutput_desiredState
+
+var ListComponentOutputsInput = &sListComponentOutputsInput
+var ListComponentOutputsInput_componentName = &sListComponentOutputsInput_componentName
+var ListComponentOutputsInput_nextToken = &sListComponentOutputsInput_nextToken
+var ListComponentOutputsInput_deploymentId = &sListComponentOutputsInput_deploymentId
+
+var ListComponentOutputsOutput = &sListComponentOutputsOutput
+var ListComponentOutputsOutput_nextToken = &sListComponentOutputsOutput_nextToken
+var ListComponentOutputsOutput_outputs = &sListComponentOutputsOutput_outputs
+
+var ListComponentProvisionedResourcesInput = &sListComponentProvisionedResourcesInput
+var ListComponentProvisionedResourcesInput_componentName = &sListComponentProvisionedResourcesInput_componentName
+var ListComponentProvisionedResourcesInput_nextToken = &sListComponentProvisionedResourcesInput_nextToken
+
+var ListComponentProvisionedResourcesOutput = &sListComponentProvisionedResourcesOutput
+var ListComponentProvisionedResourcesOutput_nextToken = &sListComponentProvisionedResourcesOutput_nextToken
+var ListComponentProvisionedResourcesOutput_provisionedResources = &sListComponentProvisionedResourcesOutput_provisionedResources
+
+var ListComponentsInput = &sListComponentsInput
+var ListComponentsInput_nextToken = &sListComponentsInput_nextToken
+var ListComponentsInput_environmentName = &sListComponentsInput_environmentName
+var ListComponentsInput_serviceName = &sListComponentsInput_serviceName
+var ListComponentsInput_serviceInstanceName = &sListComponentsInput_serviceInstanceName
+var ListComponentsInput_maxResults = &sListComponentsInput_maxResults
+
+var ListComponentsOutput = &sListComponentsOutput
+var ListComponentsOutput_nextToken = &sListComponentsOutput_nextToken
+var ListComponentsOutput_components = &sListComponentsOutput_components
+
+var ListDeploymentsInput = &sListDeploymentsInput
+var ListDeploymentsInput_nextToken = &sListDeploymentsInput_nextToken
+var ListDeploymentsInput_environmentName = &sListDeploymentsInput_environmentName
+var ListDeploymentsInput_serviceName = &sListDeploymentsInput_serviceName
+var ListDeploymentsInput_serviceInstanceName = &sListDeploymentsInput_serviceInstanceName
+var ListDeploymentsInput_componentName = &sListDeploymentsInput_componentName
+var ListDeploymentsInput_maxResults = &sListDeploymentsInput_maxResults
+
+var ListDeploymentsOutput = &sListDeploymentsOutput
+var ListDeploymentsOutput_nextToken = &sListDeploymentsOutput_nextToken
+var ListDeploymentsOutput_deployments = &sListDeploymentsOutput_deployments
+
+var ListEnvironmentAccountConnectionsInput = &sListEnvironmentAccountConnectionsInput
+var ListEnvironmentAccountConnectionsInput_requestedBy = &sListEnvironmentAccountConnectionsInput_requestedBy
+var ListEnvironmentAccountConnectionsInput_environmentName = &sListEnvironmentAccountConnectionsInput_environmentName
+var ListEnvironmentAccountConnectionsInput_statuses = &sListEnvironmentAccountConnectionsInput_statuses
+var ListEnvironmentAccountConnectionsInput_nextToken = &sListEnvironmentAccountConnectionsInput_nextToken
+var ListEnvironmentAccountConnectionsInput_maxResults = &sListEnvironmentAccountConnectionsInput_maxResults
+
+var ListEnvironmentAccountConnectionsOutput = &sListEnvironmentAccountConnectionsOutput
+var ListEnvironmentAccountConnectionsOutput_environmentAccountConnections = &sListEnvironmentAccountConnectionsOutput_environmentAccountConnections
+var ListEnvironmentAccountConnectionsOutput_nextToken = &sListEnvironmentAccountConnectionsOutput_nextToken
+
+var ListEnvironmentOutputsInput = &sListEnvironmentOutputsInput
+var ListEnvironmentOutputsInput_environmentName = &sListEnvironmentOutputsInput_environmentName
+var ListEnvironmentOutputsInput_nextToken = &sListEnvironmentOutputsInput_nextToken
+var ListEnvironmentOutputsInput_deploymentId = &sListEnvironmentOutputsInput_deploymentId
+
+var ListEnvironmentOutputsOutput = &sListEnvironmentOutputsOutput
+var ListEnvironmentOutputsOutput_nextToken = &sListEnvironmentOutputsOutput_nextToken
+var ListEnvironmentOutputsOutput_outputs = &sListEnvironmentOutputsOutput_outputs
+
+var ListEnvironmentProvisionedResourcesInput = &sListEnvironmentProvisionedResourcesInput
+var ListEnvironmentProvisionedResourcesInput_environmentName = &sListEnvironmentProvisionedResourcesInput_environmentName
+var ListEnvironmentProvisionedResourcesInput_nextToken = &sListEnvironmentProvisionedResourcesInput_nextToken
+
+var ListEnvironmentProvisionedResourcesOutput = &sListEnvironmentProvisionedResourcesOutput
+var ListEnvironmentProvisionedResourcesOutput_nextToken = &sListEnvironmentProvisionedResourcesOutput_nextToken
+var ListEnvironmentProvisionedResourcesOutput_provisionedResources = &sListEnvironmentProvisionedResourcesOutput_provisionedResources
+
+var ListEnvironmentsInput = &sListEnvironmentsInput
+var ListEnvironmentsInput_nextToken = &sListEnvironmentsInput_nextToken
+var ListEnvironmentsInput_maxResults = &sListEnvironmentsInput_maxResults
+var ListEnvironmentsInput_environmentTemplates = &sListEnvironmentsInput_environmentTemplates
+
+var ListEnvironmentsOutput = &sListEnvironmentsOutput
+var ListEnvironmentsOutput_nextToken = &sListEnvironmentsOutput_nextToken
+var ListEnvironmentsOutput_environments = &sListEnvironmentsOutput_environments
+
+var ListEnvironmentTemplatesInput = &sListEnvironmentTemplatesInput
+var ListEnvironmentTemplatesInput_nextToken = &sListEnvironmentTemplatesInput_nextToken
+var ListEnvironmentTemplatesInput_maxResults = &sListEnvironmentTemplatesInput_maxResults
+
+var ListEnvironmentTemplatesOutput = &sListEnvironmentTemplatesOutput
+var ListEnvironmentTemplatesOutput_nextToken = &sListEnvironmentTemplatesOutput_nextToken
+var ListEnvironmentTemplatesOutput_templates = &sListEnvironmentTemplatesOutput_templates
+
+var ListEnvironmentTemplateVersionsInput = &sListEnvironmentTemplateVersionsInput
+var ListEnvironmentTemplateVersionsInput_nextToken = &sListEnvironmentTemplateVersionsInput_nextToken
+var ListEnvironmentTemplateVersionsInput_maxResults = &sListEnvironmentTemplateVersionsInput_maxResults
+var ListEnvironmentTemplateVersionsInput_templateName = &sListEnvironmentTemplateVersionsInput_templateName
+var ListEnvironmentTemplateVersionsInput_majorVersion = &sListEnvironmentTemplateVersionsInput_majorVersion
+
+var ListEnvironmentTemplateVersionsOutput = &sListEnvironmentTemplateVersionsOutput
+var ListEnvironmentTemplateVersionsOutput_nextToken = &sListEnvironmentTemplateVersionsOutput_nextToken
+var ListEnvironmentTemplateVersionsOutput_templateVersions = &sListEnvironmentTemplateVersionsOutput_templateVersions
+
+var ListRepositoriesInput = &sListRepositoriesInput
+var ListRepositoriesInput_nextToken = &sListRepositoriesInput_nextToken
+var ListRepositoriesInput_maxResults = &sListRepositoriesInput_maxResults
+
+var ListRepositoriesOutput = &sListRepositoriesOutput
+var ListRepositoriesOutput_nextToken = &sListRepositoriesOutput_nextToken
+var ListRepositoriesOutput_repositories = &sListRepositoriesOutput_repositories
+
+var ListRepositorySyncDefinitionsInput = &sListRepositorySyncDefinitionsInput
+var ListRepositorySyncDefinitionsInput_repositoryName = &sListRepositorySyncDefinitionsInput_repositoryName
+var ListRepositorySyncDefinitionsInput_repositoryProvider = &sListRepositorySyncDefinitionsInput_repositoryProvider
+var ListRepositorySyncDefinitionsInput_syncType = &sListRepositorySyncDefinitionsInput_syncType
+var ListRepositorySyncDefinitionsInput_nextToken = &sListRepositorySyncDefinitionsInput_nextToken
+
+var ListRepositorySyncDefinitionsOutput = &sListRepositorySyncDefinitionsOutput
+var ListRepositorySyncDefinitionsOutput_nextToken = &sListRepositorySyncDefinitionsOutput_nextToken
+var ListRepositorySyncDefinitionsOutput_syncDefinitions = &sListRepositorySyncDefinitionsOutput_syncDefinitions
+
+var ListServiceInstanceOutputsInput = &sListServiceInstanceOutputsInput
+var ListServiceInstanceOutputsInput_serviceInstanceName = &sListServiceInstanceOutputsInput_serviceInstanceName
+var ListServiceInstanceOutputsInput_serviceName = &sListServiceInstanceOutputsInput_serviceName
+var ListServiceInstanceOutputsInput_nextToken = &sListServiceInstanceOutputsInput_nextToken
+var ListServiceInstanceOutputsInput_deploymentId = &sListServiceInstanceOutputsInput_deploymentId
+
+var ListServiceInstanceOutputsOutput = &sListServiceInstanceOutputsOutput
+var ListServiceInstanceOutputsOutput_nextToken = &sListServiceInstanceOutputsOutput_nextToken
+var ListServiceInstanceOutputsOutput_outputs = &sListServiceInstanceOutputsOutput_outputs
+
+var ListServiceInstanceProvisionedResourcesInput = &sListServiceInstanceProvisionedResourcesInput
+var ListServiceInstanceProvisionedResourcesInput_serviceName = &sListServiceInstanceProvisionedResourcesInput_serviceName
+var ListServiceInstanceProvisionedResourcesInput_serviceInstanceName = &sListServiceInstanceProvisionedResourcesInput_serviceInstanceName
+var ListServiceInstanceProvisionedResourcesInput_nextToken = &sListServiceInstanceProvisionedResourcesInput_nextToken
+
+var ListServiceInstanceProvisionedResourcesOutput = &sListServiceInstanceProvisionedResourcesOutput
+var ListServiceInstanceProvisionedResourcesOutput_nextToken = &sListServiceInstanceProvisionedResourcesOutput_nextToken
+var ListServiceInstanceProvisionedResourcesOutput_provisionedResources = &sListServiceInstanceProvisionedResourcesOutput_provisionedResources
+
+var ListServiceInstancesInput = &sListServiceInstancesInput
+var ListServiceInstancesInput_serviceName = &sListServiceInstancesInput_serviceName
+var ListServiceInstancesInput_nextToken = &sListServiceInstancesInput_nextToken
+var ListServiceInstancesInput_maxResults = &sListServiceInstancesInput_maxResults
+var ListServiceInstancesInput_filters = &sListServiceInstancesInput_filters
+var ListServiceInstancesInput_sortBy = &sListServiceInstancesInput_sortBy
+var ListServiceInstancesInput_sortOrder = &sListServiceInstancesInput_sortOrder
+
+var ListServiceInstancesOutput = &sListServiceInstancesOutput
+var ListServiceInstancesOutput_nextToken = &sListServiceInstancesOutput_nextToken
+var ListServiceInstancesOutput_serviceInstances = &sListServiceInstancesOutput_serviceInstances
+
+var ListServicePipelineOutputsInput = &sListServicePipelineOutputsInput
+var ListServicePipelineOutputsInput_serviceName = &sListServicePipelineOutputsInput_serviceName
+var ListServicePipelineOutputsInput_nextToken = &sListServicePipelineOutputsInput_nextToken
+var ListServicePipelineOutputsInput_deploymentId = &sListServicePipelineOutputsInput_deploymentId
+
+var ListServicePipelineOutputsOutput = &sListServicePipelineOutputsOutput
+var ListServicePipelineOutputsOutput_nextToken = &sListServicePipelineOutputsOutput_nextToken
+var ListServicePipelineOutputsOutput_outputs = &sListServicePipelineOutputsOutput_outputs
+
+var ListServicePipelineProvisionedResourcesInput = &sListServicePipelineProvisionedResourcesInput
+var ListServicePipelineProvisionedResourcesInput_serviceName = &sListServicePipelineProvisionedResourcesInput_serviceName
+var ListServicePipelineProvisionedResourcesInput_nextToken = &sListServicePipelineProvisionedResourcesInput_nextToken
+
+var ListServicePipelineProvisionedResourcesOutput = &sListServicePipelineProvisionedResourcesOutput
+var ListServicePipelineProvisionedResourcesOutput_nextToken = &sListServicePipelineProvisionedResourcesOutput_nextToken
+var ListServicePipelineProvisionedResourcesOutput_provisionedResources = &sListServicePipelineProvisionedResourcesOutput_provisionedResources
+
+var ListServicesInput = &sListServicesInput
+var ListServicesInput_nextToken = &sListServicesInput_nextToken
+var ListServicesInput_maxResults = &sListServicesInput_maxResults
+
+var ListServicesOutput = &sListServicesOutput
+var ListServicesOutput_nextToken = &sListServicesOutput_nextToken
+var ListServicesOutput_services = &sListServicesOutput_services
+
+var ListServiceTemplatesInput = &sListServiceTemplatesInput
+var ListServiceTemplatesInput_nextToken = &sListServiceTemplatesInput_nextToken
+var ListServiceTemplatesInput_maxResults = &sListServiceTemplatesInput_maxResults
+
+var ListServiceTemplatesOutput = &sListServiceTemplatesOutput
+var ListServiceTemplatesOutput_nextToken = &sListServiceTemplatesOutput_nextToken
+var ListServiceTemplatesOutput_templates = &sListServiceTemplatesOutput_templates
+
+var ListServiceTemplateVersionsInput = &sListServiceTemplateVersionsInput
+var ListServiceTemplateVersionsInput_nextToken = &sListServiceTemplateVersionsInput_nextToken
+var ListServiceTemplateVersionsInput_maxResults = &sListServiceTemplateVersionsInput_maxResults
+var ListServiceTemplateVersionsInput_templateName = &sListServiceTemplateVersionsInput_templateName
+var ListServiceTemplateVersionsInput_majorVersion = &sListServiceTemplateVersionsInput_majorVersion
+
+var ListServiceTemplateVersionsOutput = &sListServiceTemplateVersionsOutput
+var ListServiceTemplateVersionsOutput_nextToken = &sListServiceTemplateVersionsOutput_nextToken
+var ListServiceTemplateVersionsOutput_templateVersions = &sListServiceTemplateVersionsOutput_templateVersions
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+var ListTagsForResourceInput_nextToken = &sListTagsForResourceInput_nextToken
+var ListTagsForResourceInput_maxResults = &sListTagsForResourceInput_maxResults
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+var ListTagsForResourceOutput_nextToken = &sListTagsForResourceOutput_nextToken
+
+var NotifyResourceDeploymentStatusChangeInput = &sNotifyResourceDeploymentStatusChangeInput
+var NotifyResourceDeploymentStatusChangeInput_resourceArn = &sNotifyResourceDeploymentStatusChangeInput_resourceArn
+var NotifyResourceDeploymentStatusChangeInput_status = &sNotifyResourceDeploymentStatusChangeInput_status
+var NotifyResourceDeploymentStatusChangeInput_outputs = &sNotifyResourceDeploymentStatusChangeInput_outputs
+var NotifyResourceDeploymentStatusChangeInput_deploymentId = &sNotifyResourceDeploymentStatusChangeInput_deploymentId
+var NotifyResourceDeploymentStatusChangeInput_statusMessage = &sNotifyResourceDeploymentStatusChangeInput_statusMessage
+
+var NotifyResourceDeploymentStatusChangeOutput = &sNotifyResourceDeploymentStatusChangeOutput
+
+var RejectEnvironmentAccountConnectionInput = &sRejectEnvironmentAccountConnectionInput
+var RejectEnvironmentAccountConnectionInput_id = &sRejectEnvironmentAccountConnectionInput_id
+
+var RejectEnvironmentAccountConnectionOutput = &sRejectEnvironmentAccountConnectionOutput
+var RejectEnvironmentAccountConnectionOutput_environmentAccountConnection = &sRejectEnvironmentAccountConnectionOutput_environmentAccountConnection
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateAccountSettingsInput = &sUpdateAccountSettingsInput
+var UpdateAccountSettingsInput_pipelineServiceRoleArn = &sUpdateAccountSettingsInput_pipelineServiceRoleArn
+var UpdateAccountSettingsInput_pipelineProvisioningRepository = &sUpdateAccountSettingsInput_pipelineProvisioningRepository
+var UpdateAccountSettingsInput_deletePipelineProvisioningRepository = &sUpdateAccountSettingsInput_deletePipelineProvisioningRepository
+var UpdateAccountSettingsInput_pipelineCodebuildRoleArn = &sUpdateAccountSettingsInput_pipelineCodebuildRoleArn
+
+var UpdateAccountSettingsOutput = &sUpdateAccountSettingsOutput
+var UpdateAccountSettingsOutput_accountSettings = &sUpdateAccountSettingsOutput_accountSettings
+
+var UpdateComponentInput = &sUpdateComponentInput
+var UpdateComponentInput_name = &sUpdateComponentInput_name
+var UpdateComponentInput_deploymentType = &sUpdateComponentInput_deploymentType
+var UpdateComponentInput_description = &sUpdateComponentInput_description
+var UpdateComponentInput_serviceName = &sUpdateComponentInput_serviceName
+var UpdateComponentInput_serviceInstanceName = &sUpdateComponentInput_serviceInstanceName
+var UpdateComponentInput_serviceSpec = &sUpdateComponentInput_serviceSpec
+var UpdateComponentInput_templateFile = &sUpdateComponentInput_templateFile
+var UpdateComponentInput_clientToken = &sUpdateComponentInput_clientToken
+
+var UpdateComponentOutput = &sUpdateComponentOutput
+var UpdateComponentOutput_component = &sUpdateComponentOutput_component
+
+var UpdateEnvironmentAccountConnectionInput = &sUpdateEnvironmentAccountConnectionInput
+var UpdateEnvironmentAccountConnectionInput_id = &sUpdateEnvironmentAccountConnectionInput_id
+var UpdateEnvironmentAccountConnectionInput_roleArn = &sUpdateEnvironmentAccountConnectionInput_roleArn
+var UpdateEnvironmentAccountConnectionInput_componentRoleArn = &sUpdateEnvironmentAccountConnectionInput_componentRoleArn
+var UpdateEnvironmentAccountConnectionInput_codebuildRoleArn = &sUpdateEnvironmentAccountConnectionInput_codebuildRoleArn
+
+var UpdateEnvironmentAccountConnectionOutput = &sUpdateEnvironmentAccountConnectionOutput
+var UpdateEnvironmentAccountConnectionOutput_environmentAccountConnection = &sUpdateEnvironmentAccountConnectionOutput_environmentAccountConnection
+
+var UpdateEnvironmentInput = &sUpdateEnvironmentInput
+var UpdateEnvironmentInput_name = &sUpdateEnvironmentInput_name
+var UpdateEnvironmentInput_description = &sUpdateEnvironmentInput_description
+var UpdateEnvironmentInput_spec = &sUpdateEnvironmentInput_spec
+var UpdateEnvironmentInput_templateMajorVersion = &sUpdateEnvironmentInput_templateMajorVersion
+var UpdateEnvironmentInput_templateMinorVersion = &sUpdateEnvironmentInput_templateMinorVersion
+var UpdateEnvironmentInput_protonServiceRoleArn = &sUpdateEnvironmentInput_protonServiceRoleArn
+var UpdateEnvironmentInput_deploymentType = &sUpdateEnvironmentInput_deploymentType
+var UpdateEnvironmentInput_environmentAccountConnectionId = &sUpdateEnvironmentInput_environmentAccountConnectionId
+var UpdateEnvironmentInput_provisioningRepository = &sUpdateEnvironmentInput_provisioningRepository
+var UpdateEnvironmentInput_componentRoleArn = &sUpdateEnvironmentInput_componentRoleArn
+var UpdateEnvironmentInput_codebuildRoleArn = &sUpdateEnvironmentInput_codebuildRoleArn
+
+var UpdateEnvironmentOutput = &sUpdateEnvironmentOutput
+var UpdateEnvironmentOutput_environment = &sUpdateEnvironmentOutput_environment
+
+var UpdateEnvironmentTemplateInput = &sUpdateEnvironmentTemplateInput
+var UpdateEnvironmentTemplateInput_name = &sUpdateEnvironmentTemplateInput_name
+var UpdateEnvironmentTemplateInput_displayName = &sUpdateEnvironmentTemplateInput_displayName
+var UpdateEnvironmentTemplateInput_description = &sUpdateEnvironmentTemplateInput_description
+
+var UpdateEnvironmentTemplateOutput = &sUpdateEnvironmentTemplateOutput
+var UpdateEnvironmentTemplateOutput_environmentTemplate = &sUpdateEnvironmentTemplateOutput_environmentTemplate
+
+var UpdateEnvironmentTemplateVersionInput = &sUpdateEnvironmentTemplateVersionInput
+var UpdateEnvironmentTemplateVersionInput_templateName = &sUpdateEnvironmentTemplateVersionInput_templateName
+var UpdateEnvironmentTemplateVersionInput_majorVersion = &sUpdateEnvironmentTemplateVersionInput_majorVersion
+var UpdateEnvironmentTemplateVersionInput_minorVersion = &sUpdateEnvironmentTemplateVersionInput_minorVersion
+var UpdateEnvironmentTemplateVersionInput_description = &sUpdateEnvironmentTemplateVersionInput_description
+var UpdateEnvironmentTemplateVersionInput_status = &sUpdateEnvironmentTemplateVersionInput_status
+
+var UpdateEnvironmentTemplateVersionOutput = &sUpdateEnvironmentTemplateVersionOutput
+var UpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion = &sUpdateEnvironmentTemplateVersionOutput_environmentTemplateVersion
+
+var UpdateServiceInput = &sUpdateServiceInput
+var UpdateServiceInput_name = &sUpdateServiceInput_name
+var UpdateServiceInput_description = &sUpdateServiceInput_description
+var UpdateServiceInput_spec = &sUpdateServiceInput_spec
+
+var UpdateServiceInstanceInput = &sUpdateServiceInstanceInput
+var UpdateServiceInstanceInput_name = &sUpdateServiceInstanceInput_name
+var UpdateServiceInstanceInput_serviceName = &sUpdateServiceInstanceInput_serviceName
+var UpdateServiceInstanceInput_deploymentType = &sUpdateServiceInstanceInput_deploymentType
+var UpdateServiceInstanceInput_spec = &sUpdateServiceInstanceInput_spec
+var UpdateServiceInstanceInput_templateMajorVersion = &sUpdateServiceInstanceInput_templateMajorVersion
+var UpdateServiceInstanceInput_templateMinorVersion = &sUpdateServiceInstanceInput_templateMinorVersion
+var UpdateServiceInstanceInput_clientToken = &sUpdateServiceInstanceInput_clientToken
+
+var UpdateServiceInstanceOutput = &sUpdateServiceInstanceOutput
+var UpdateServiceInstanceOutput_serviceInstance = &sUpdateServiceInstanceOutput_serviceInstance
+
+var UpdateServiceOutput = &sUpdateServiceOutput
+var UpdateServiceOutput_service = &sUpdateServiceOutput_service
+
+var UpdateServicePipelineInput = &sUpdateServicePipelineInput
+var UpdateServicePipelineInput_serviceName = &sUpdateServicePipelineInput_serviceName
+var UpdateServicePipelineInput_spec = &sUpdateServicePipelineInput_spec
+var UpdateServicePipelineInput_deploymentType = &sUpdateServicePipelineInput_deploymentType
+var UpdateServicePipelineInput_templateMajorVersion = &sUpdateServicePipelineInput_templateMajorVersion
+var UpdateServicePipelineInput_templateMinorVersion = &sUpdateServicePipelineInput_templateMinorVersion
+
+var UpdateServicePipelineOutput = &sUpdateServicePipelineOutput
+var UpdateServicePipelineOutput_pipeline = &sUpdateServicePipelineOutput_pipeline
+
+var UpdateServiceSyncBlockerInput = &sUpdateServiceSyncBlockerInput
+var UpdateServiceSyncBlockerInput_id = &sUpdateServiceSyncBlockerInput_id
+var UpdateServiceSyncBlockerInput_resolvedReason = &sUpdateServiceSyncBlockerInput_resolvedReason
+
+var UpdateServiceSyncBlockerOutput = &sUpdateServiceSyncBlockerOutput
+var UpdateServiceSyncBlockerOutput_serviceName = &sUpdateServiceSyncBlockerOutput_serviceName
+var UpdateServiceSyncBlockerOutput_serviceInstanceName = &sUpdateServiceSyncBlockerOutput_serviceInstanceName
+var UpdateServiceSyncBlockerOutput_serviceSyncBlocker = &sUpdateServiceSyncBlockerOutput_serviceSyncBlocker
+
+var UpdateServiceSyncConfigInput = &sUpdateServiceSyncConfigInput
+var UpdateServiceSyncConfigInput_serviceName = &sUpdateServiceSyncConfigInput_serviceName
+var UpdateServiceSyncConfigInput_repositoryProvider = &sUpdateServiceSyncConfigInput_repositoryProvider
+var UpdateServiceSyncConfigInput_repositoryName = &sUpdateServiceSyncConfigInput_repositoryName
+var UpdateServiceSyncConfigInput_branch = &sUpdateServiceSyncConfigInput_branch
+var UpdateServiceSyncConfigInput_filePath = &sUpdateServiceSyncConfigInput_filePath
+
+var UpdateServiceSyncConfigOutput = &sUpdateServiceSyncConfigOutput
+var UpdateServiceSyncConfigOutput_serviceSyncConfig = &sUpdateServiceSyncConfigOutput_serviceSyncConfig
+
+var UpdateServiceTemplateInput = &sUpdateServiceTemplateInput
+var UpdateServiceTemplateInput_name = &sUpdateServiceTemplateInput_name
+var UpdateServiceTemplateInput_displayName = &sUpdateServiceTemplateInput_displayName
+var UpdateServiceTemplateInput_description = &sUpdateServiceTemplateInput_description
+
+var UpdateServiceTemplateOutput = &sUpdateServiceTemplateOutput
+var UpdateServiceTemplateOutput_serviceTemplate = &sUpdateServiceTemplateOutput_serviceTemplate
+
+var UpdateServiceTemplateVersionInput = &sUpdateServiceTemplateVersionInput
+var UpdateServiceTemplateVersionInput_templateName = &sUpdateServiceTemplateVersionInput_templateName
+var UpdateServiceTemplateVersionInput_majorVersion = &sUpdateServiceTemplateVersionInput_majorVersion
+var UpdateServiceTemplateVersionInput_minorVersion = &sUpdateServiceTemplateVersionInput_minorVersion
+var UpdateServiceTemplateVersionInput_description = &sUpdateServiceTemplateVersionInput_description
+var UpdateServiceTemplateVersionInput_status = &sUpdateServiceTemplateVersionInput_status
+var UpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates = &sUpdateServiceTemplateVersionInput_compatibleEnvironmentTemplates
+var UpdateServiceTemplateVersionInput_supportedComponentSources = &sUpdateServiceTemplateVersionInput_supportedComponentSources
+
+var UpdateServiceTemplateVersionOutput = &sUpdateServiceTemplateVersionOutput
+var UpdateServiceTemplateVersionOutput_serviceTemplateVersion = &sUpdateServiceTemplateVersionOutput_serviceTemplateVersion
+
+var UpdateTemplateSyncConfigInput = &sUpdateTemplateSyncConfigInput
+var UpdateTemplateSyncConfigInput_templateName = &sUpdateTemplateSyncConfigInput_templateName
+var UpdateTemplateSyncConfigInput_templateType = &sUpdateTemplateSyncConfigInput_templateType
+var UpdateTemplateSyncConfigInput_repositoryProvider = &sUpdateTemplateSyncConfigInput_repositoryProvider
+var UpdateTemplateSyncConfigInput_repositoryName = &sUpdateTemplateSyncConfigInput_repositoryName
+var UpdateTemplateSyncConfigInput_branch = &sUpdateTemplateSyncConfigInput_branch
+var UpdateTemplateSyncConfigInput_subdirectory = &sUpdateTemplateSyncConfigInput_subdirectory
+
+var UpdateTemplateSyncConfigOutput = &sUpdateTemplateSyncConfigOutput
+var UpdateTemplateSyncConfigOutput_templateSyncConfig = &sUpdateTemplateSyncConfigOutput_templateSyncConfig
+
+var AwsProton20200720 = &smithy.ServiceSchema{Schema: &s_AwsProton20200720, Version: "2020-07-20"}

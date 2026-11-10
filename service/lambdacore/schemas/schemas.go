@@ -4,861 +4,610 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateNetworkConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "CreateNetworkConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateNetworkConnector                     = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "CreateNetworkConnector"}
+	iDeleteNetworkConnector                     = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "DeleteNetworkConnector"}
+	iGetNetworkConnector                        = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "GetNetworkConnector"}
+	iListNetworkConnectors                      = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ListNetworkConnectors"}
+	iListNetworkConnectorVersions               = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ListNetworkConnectorVersions"}
+	iUpdateNetworkConnector                     = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "UpdateNetworkConnector"}
+	i_LambdaCoreApiService                      = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "LambdaCoreApiService"}
+	i_AssociatedComputeResourceTypesList        = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "AssociatedComputeResourceTypesList"}
+	i_ClientTokenString                         = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ClientTokenString"}
+	iComputeResourceType                        = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ComputeResourceType"}
+	i_CoreTimestamp                             = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "CoreTimestamp"}
+	iInvalidParameterValueException             = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "InvalidParameterValueException"}
+	i_MaxHundredListItems                       = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "MaxHundredListItems"}
+	i_NetworkConnectorArn                       = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorArn"}
+	iNetworkConnectorConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorConfiguration"}
+	i_NetworkConnectorId                        = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorId"}
+	i_NetworkConnectorIdentifier                = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorIdentifier"}
+	iNetworkConnectorLastUpdateStatus           = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorLastUpdateStatus"}
+	i_NetworkConnectorLastUpdateStatusReason    = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorLastUpdateStatusReason"}
+	iNetworkConnectorLastUpdateStatusReasonCode = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorLastUpdateStatusReasonCode"}
+	iNetworkConnectorLimitExceededException     = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorLimitExceededException"}
+	i_NetworkConnectorName                      = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorName"}
+	i_NetworkConnectorRoleArn                   = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorRoleArn"}
+	i_NetworkConnectorSecurityGroupId           = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorSecurityGroupId"}
+	i_NetworkConnectorSecurityGroupIds          = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorSecurityGroupIds"}
+	i_NetworkConnectorsList                     = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorsList"}
+	iNetworkConnectorState                      = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorState"}
+	iNetworkConnectorStateReasonCode            = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorStateReasonCode"}
+	i_NetworkConnectorSubnetId                  = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorSubnetId"}
+	i_NetworkConnectorSubnetIds                 = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorSubnetIds"}
+	iNetworkConnectorSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorSummary"}
+	i_NetworkConnectorTagKey                    = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorTagKey"}
+	i_NetworkConnectorTags                      = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorTags"}
+	i_NetworkConnectorTagValue                  = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorTagValue"}
+	iNetworkConnectorType                       = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorType"}
+	i_NetworkConnectorVersion                   = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorVersion"}
+	i_NetworkConnectorVersionsList              = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorVersionsList"}
+	iNetworkConnectorVersionSummary             = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorVersionSummary"}
+	iNetworkConnectorVpcEgressConfiguration     = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkConnectorVpcEgressConfiguration"}
+	iNetworkProtocol                            = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "NetworkProtocol"}
+	iResourceConflictException                  = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ResourceConflictException"}
+	iResourceNotFoundException                  = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ResourceNotFoundException"}
+	iServiceException                           = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ServiceException"}
+	i_String                                    = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "String"}
+	iThrottleReason                             = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ThrottleReason"}
+	iTooManyRequestsException                   = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "TooManyRequestsException"}
+	iCreateNetworkConnectorRequest              = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "CreateNetworkConnectorRequest"}
+	iCreateNetworkConnectorResponse             = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "CreateNetworkConnectorResponse"}
+	iDeleteNetworkConnectorRequest              = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "DeleteNetworkConnectorRequest"}
+	iDeleteNetworkConnectorResponse             = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "DeleteNetworkConnectorResponse"}
+	iGetNetworkConnectorRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "GetNetworkConnectorRequest"}
+	iGetNetworkConnectorResponse                = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "GetNetworkConnectorResponse"}
+	iListNetworkConnectorsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ListNetworkConnectorsRequest"}
+	iListNetworkConnectorsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ListNetworkConnectorsResponse"}
+	iListNetworkConnectorVersionsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ListNetworkConnectorVersionsRequest"}
+	iListNetworkConnectorVersionsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "ListNetworkConnectorVersionsResponse"}
+	iUpdateNetworkConnectorRequest              = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "UpdateNetworkConnectorRequest"}
+	iUpdateNetworkConnectorResponse             = smithy.ShapeID{Namespace: "com.amazonaws.lambdacore", Name: "UpdateNetworkConnectorResponse"}
+	pUnit                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/2026-04-04/network-connectors",
-	Code: 202})
-
-var DeleteNetworkConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "DeleteNetworkConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/2026-04-04/network-connectors/{Identifier}",
-	Code: 202})
-
-var GetNetworkConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "GetNetworkConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 202}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2026-04-04/network-connectors/{Identifier}",
-	Code: 200})
-
-var ListNetworkConnectors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ListNetworkConnectors",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2026-04-04/network-connectors",
-	Code: 200})
-
-var ListNetworkConnectorVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ListNetworkConnectorVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/2026-04-04/network-connectors/{Identifier}/versions",
-	Code: 200})
-
-var UpdateNetworkConnector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "UpdateNetworkConnector",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/2026-04-04/network-connectors/{Identifier}",
-	Code: 202})
-
-var _LambdaCoreApiService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "LambdaCoreApiService",
-}, smithy.ShapeTypeService, 0)
-
-var LambdaCoreApiService = smithy.NewServiceSchema(_LambdaCoreApiService, "2026-04-30")
-
-var _AssociatedComputeResourceTypesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "AssociatedComputeResourceTypesList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedComputeResourceTypesList_member *smithy.Schema
-
-var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ClientTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var ComputeResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ComputeResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ComputeResourceType_MicroVm *smithy.Schema
-
-var ComputeResourceType_WebFunction *smithy.Schema
-
-var _CoreTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "CoreTimestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterValueException_Type *smithy.Schema
-
-var InvalidParameterValueException_message *smithy.Schema
-
-var _MaxHundredListItems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "MaxHundredListItems",
-}, smithy.ShapeTypeInteger, 0)
-
-var _NetworkConnectorArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorArn",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var NetworkConnectorConfiguration_VpcEgressConfiguration *smithy.Schema
-
-var _NetworkConnectorId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorId",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkConnectorIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConnectorLastUpdateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorLastUpdateStatus",
-}, smithy.ShapeTypeEnum, 3)
-var NetworkConnectorLastUpdateStatus_Successful *smithy.Schema
-
-var NetworkConnectorLastUpdateStatus_Failed *smithy.Schema
-
-var NetworkConnectorLastUpdateStatus_InProgress *smithy.Schema
-
-var _NetworkConnectorLastUpdateStatusReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorLastUpdateStatusReason",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConnectorLastUpdateStatusReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorLastUpdateStatusReasonCode",
-}, smithy.ShapeTypeEnum, 8)
-var NetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
-
-var NetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded *smithy.Schema
-
-var NetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions *smithy.Schema
-
-var NetworkConnectorLastUpdateStatusReasonCode_InternalError *smithy.Schema
-
-var NetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup *smithy.Schema
-
-var NetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet *smithy.Schema
-
-var NetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded *smithy.Schema
-
-var NetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses *smithy.Schema
-
-var NetworkConnectorLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorLimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NetworkConnectorLimitExceededException_Type *smithy.Schema
-
-var NetworkConnectorLimitExceededException_message *smithy.Schema
-
-var _NetworkConnectorName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorName",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkConnectorRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkConnectorSecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorSecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkConnectorSecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorSecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _NetworkConnectorSecurityGroupIds_member *smithy.Schema
-
-var _NetworkConnectorsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorsList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkConnectorsList_member *smithy.Schema
-
-var NetworkConnectorState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorState",
-}, smithy.ShapeTypeEnum, 6)
-var NetworkConnectorState_PENDING *smithy.Schema
-
-var NetworkConnectorState_ACTIVE *smithy.Schema
-
-var NetworkConnectorState_INACTIVE *smithy.Schema
-
-var NetworkConnectorState_FAILED *smithy.Schema
-
-var NetworkConnectorState_DELETING *smithy.Schema
-
-var NetworkConnectorState_DELETE_FAILED *smithy.Schema
-
-var NetworkConnectorStateReasonCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorStateReasonCode",
-}, smithy.ShapeTypeEnum, 8)
-var NetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl *smithy.Schema
-
-var NetworkConnectorStateReasonCode_Ec2RequestLimitExceeded *smithy.Schema
-
-var NetworkConnectorStateReasonCode_InsufficientRolePermissions *smithy.Schema
-
-var NetworkConnectorStateReasonCode_InternalError *smithy.Schema
-
-var NetworkConnectorStateReasonCode_InvalidSecurityGroup *smithy.Schema
-
-var NetworkConnectorStateReasonCode_InvalidSubnet *smithy.Schema
-
-var NetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded *smithy.Schema
-
-var NetworkConnectorStateReasonCode_SubnetOutOfIPAddresses *smithy.Schema
-
-var _NetworkConnectorSubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorSubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkConnectorSubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorSubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _NetworkConnectorSubnetIds_member *smithy.Schema
-
-var NetworkConnectorSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorSummary",
-}, smithy.ShapeTypeStructure, 8)
-var NetworkConnectorSummary_Arn *smithy.Schema
-
-var NetworkConnectorSummary_Name *smithy.Schema
-
-var NetworkConnectorSummary_Id *smithy.Schema
-
-var NetworkConnectorSummary_Type *smithy.Schema
-
-var NetworkConnectorSummary_State *smithy.Schema
-
-var NetworkConnectorSummary_LastModified *smithy.Schema
-
-var NetworkConnectorSummary_LatestVersionArn *smithy.Schema
-
-var NetworkConnectorSummary_LatestVersion *smithy.Schema
-
-var _NetworkConnectorTagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorTagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkConnectorTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorTags",
-}, smithy.ShapeTypeMap, 2)
-var _NetworkConnectorTags_key *smithy.Schema
-
-var _NetworkConnectorTags_value *smithy.Schema
-
-var _NetworkConnectorTagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorTagValue",
-}, smithy.ShapeTypeString, 0)
-
-var NetworkConnectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorType",
-}, smithy.ShapeTypeEnum, 1)
-var NetworkConnectorType_VPC_EGRESS *smithy.Schema
-
-var _NetworkConnectorVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorVersion",
-}, smithy.ShapeTypeLong, 0)
-
-var _NetworkConnectorVersionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorVersionsList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkConnectorVersionsList_member *smithy.Schema
-
-var NetworkConnectorVersionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorVersionSummary",
-}, smithy.ShapeTypeStructure, 9)
-var NetworkConnectorVersionSummary_Arn *smithy.Schema
-
-var NetworkConnectorVersionSummary_VersionArn *smithy.Schema
-
-var NetworkConnectorVersionSummary_Name *smithy.Schema
-
-var NetworkConnectorVersionSummary_Id *smithy.Schema
-
-var NetworkConnectorVersionSummary_Version *smithy.Schema
-
-var NetworkConnectorVersionSummary_State *smithy.Schema
-
-var NetworkConnectorVersionSummary_StateReason *smithy.Schema
-
-var NetworkConnectorVersionSummary_StateReasonCode *smithy.Schema
-
-var NetworkConnectorVersionSummary_LastModified *smithy.Schema
-
-var NetworkConnectorVpcEgressConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkConnectorVpcEgressConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var NetworkConnectorVpcEgressConfiguration_SubnetIds *smithy.Schema
-
-var NetworkConnectorVpcEgressConfiguration_SecurityGroupIds *smithy.Schema
-
-var NetworkConnectorVpcEgressConfiguration_NetworkProtocol *smithy.Schema
-
-var NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes *smithy.Schema
-
-var NetworkProtocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "NetworkProtocol",
-}, smithy.ShapeTypeEnum, 2)
-var NetworkProtocol_IPv4 *smithy.Schema
-
-var NetworkProtocol_DualStack *smithy.Schema
-
-var ResourceConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ResourceConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceConflictException_Type *smithy.Schema
-
-var ResourceConflictException_message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Type *smithy.Schema
-
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ServiceException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceException_Type *smithy.Schema
-
-var ServiceException_Message *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottleReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ThrottleReason",
-}, smithy.ShapeTypeEnum, 6)
-var ThrottleReason_ConcurrentInvocationLimitExceeded *smithy.Schema
-
-var ThrottleReason_FunctionInvocationRateLimitExceeded *smithy.Schema
-
-var ThrottleReason_ReservedFunctionConcurrentInvocationLimitExceeded *smithy.Schema
-
-var ThrottleReason_ReservedFunctionInvocationRateLimitExceeded *smithy.Schema
-
-var ThrottleReason_CallerRateLimitExceeded *smithy.Schema
-
-var ThrottleReason_ConcurrentSnapshotCreateLimitExceeded *smithy.Schema
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_retryAfterSeconds *smithy.Schema
-
-var TooManyRequestsException_Type *smithy.Schema
-
-var TooManyRequestsException_message *smithy.Schema
-
-var TooManyRequestsException_Reason *smithy.Schema
-
-var CreateNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "CreateNetworkConnectorRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateNetworkConnectorRequest_Name *smithy.Schema
-
-var CreateNetworkConnectorRequest_Configuration *smithy.Schema
-
-var CreateNetworkConnectorRequest_OperatorRole *smithy.Schema
-
-var CreateNetworkConnectorRequest_ClientToken *smithy.Schema
-
-var CreateNetworkConnectorRequest_Tags *smithy.Schema
-
-var CreateNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "CreateNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateNetworkConnectorResponse_Arn *smithy.Schema
-
-var CreateNetworkConnectorResponse_Name *smithy.Schema
-
-var CreateNetworkConnectorResponse_Id *smithy.Schema
-
-var CreateNetworkConnectorResponse_VersionArn *smithy.Schema
-
-var CreateNetworkConnectorResponse_Version *smithy.Schema
-
-var CreateNetworkConnectorResponse_Configuration *smithy.Schema
-
-var CreateNetworkConnectorResponse_OperatorRole *smithy.Schema
-
-var CreateNetworkConnectorResponse_State *smithy.Schema
-
-var DeleteNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "DeleteNetworkConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteNetworkConnectorRequest_Identifier *smithy.Schema
-
-var DeleteNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "DeleteNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 8)
-var DeleteNetworkConnectorResponse_Arn *smithy.Schema
-
-var DeleteNetworkConnectorResponse_Name *smithy.Schema
-
-var DeleteNetworkConnectorResponse_Id *smithy.Schema
-
-var DeleteNetworkConnectorResponse_VersionArn *smithy.Schema
-
-var DeleteNetworkConnectorResponse_Version *smithy.Schema
-
-var DeleteNetworkConnectorResponse_Configuration *smithy.Schema
-
-var DeleteNetworkConnectorResponse_OperatorRole *smithy.Schema
-
-var DeleteNetworkConnectorResponse_State *smithy.Schema
-
-var GetNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "GetNetworkConnectorRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetNetworkConnectorRequest_Identifier *smithy.Schema
-
-var GetNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "GetNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 16)
-var GetNetworkConnectorResponse_Arn *smithy.Schema
-
-var GetNetworkConnectorResponse_Name *smithy.Schema
-
-var GetNetworkConnectorResponse_Id *smithy.Schema
-
-var GetNetworkConnectorResponse_VersionArn *smithy.Schema
-
-var GetNetworkConnectorResponse_Version *smithy.Schema
-
-var GetNetworkConnectorResponse_LatestVersionArn *smithy.Schema
-
-var GetNetworkConnectorResponse_LatestVersion *smithy.Schema
-
-var GetNetworkConnectorResponse_Configuration *smithy.Schema
-
-var GetNetworkConnectorResponse_OperatorRole *smithy.Schema
-
-var GetNetworkConnectorResponse_State *smithy.Schema
-
-var GetNetworkConnectorResponse_StateReason *smithy.Schema
-
-var GetNetworkConnectorResponse_StateReasonCode *smithy.Schema
-
-var GetNetworkConnectorResponse_LastUpdateStatus *smithy.Schema
-
-var GetNetworkConnectorResponse_LastUpdateStatusReason *smithy.Schema
-
-var GetNetworkConnectorResponse_LastUpdateStatusReasonCode *smithy.Schema
-
-var GetNetworkConnectorResponse_LastModified *smithy.Schema
-
-var ListNetworkConnectorsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ListNetworkConnectorsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListNetworkConnectorsRequest_State *smithy.Schema
-
-var ListNetworkConnectorsRequest_Marker *smithy.Schema
-
-var ListNetworkConnectorsRequest_MaxItems *smithy.Schema
-
-var ListNetworkConnectorsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ListNetworkConnectorsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNetworkConnectorsResponse_NetworkConnectors *smithy.Schema
-
-var ListNetworkConnectorsResponse_NextMarker *smithy.Schema
-
-var ListNetworkConnectorVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ListNetworkConnectorVersionsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListNetworkConnectorVersionsRequest_Identifier *smithy.Schema
-
-var ListNetworkConnectorVersionsRequest_State *smithy.Schema
-
-var ListNetworkConnectorVersionsRequest_Marker *smithy.Schema
-
-var ListNetworkConnectorVersionsRequest_MaxItems *smithy.Schema
-
-var ListNetworkConnectorVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "ListNetworkConnectorVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListNetworkConnectorVersionsResponse_NetworkConnectorVersions *smithy.Schema
-
-var ListNetworkConnectorVersionsResponse_NextMarker *smithy.Schema
-
-var UpdateNetworkConnectorRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "UpdateNetworkConnectorRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateNetworkConnectorRequest_Identifier *smithy.Schema
-
-var UpdateNetworkConnectorRequest_Configuration *smithy.Schema
-
-var UpdateNetworkConnectorRequest_OperatorRole *smithy.Schema
-
-var UpdateNetworkConnectorRequest_ClientToken *smithy.Schema
-
-var UpdateNetworkConnectorResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.lambdacore",
-	Name:      "UpdateNetworkConnectorResponse",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateNetworkConnectorResponse_Arn *smithy.Schema
-
-var UpdateNetworkConnectorResponse_Name *smithy.Schema
-
-var UpdateNetworkConnectorResponse_Id *smithy.Schema
-
-var UpdateNetworkConnectorResponse_VersionArn *smithy.Schema
-
-var UpdateNetworkConnectorResponse_Version *smithy.Schema
-
-var UpdateNetworkConnectorResponse_OperatorRole *smithy.Schema
-
-var UpdateNetworkConnectorResponse_Configuration *smithy.Schema
-
-var UpdateNetworkConnectorResponse_State *smithy.Schema
-
-var UpdateNetworkConnectorResponse_LastUpdateStatus *smithy.Schema
-
-var UpdateNetworkConnectorResponse_LastUpdateStatusReason *smithy.Schema
-
-var UpdateNetworkConnectorResponse_LastModified *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ComputeResourceType_MicroVm = ComputeResourceType.AddMember("MicroVm", smithyprelude.Unit)
-
-	ComputeResourceType_WebFunction = ComputeResourceType.AddMember("WebFunction", smithyprelude.Unit)
-
-	_AssociatedComputeResourceTypesList_member = _AssociatedComputeResourceTypesList.AddMember("member", ComputeResourceType)
-
-	InvalidParameterValueException_Type = InvalidParameterValueException.AddMember("Type", _String)
-
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", _String)
-
-	_NetworkConnectorSubnetIds_member = _NetworkConnectorSubnetIds.AddMember("member", _NetworkConnectorSubnetId)
-
-	_NetworkConnectorSecurityGroupIds_member = _NetworkConnectorSecurityGroupIds.AddMember("member", _NetworkConnectorSecurityGroupId)
-
-	NetworkProtocol_IPv4 = NetworkProtocol.AddMember("IPv4", smithyprelude.Unit)
-
-	NetworkProtocol_DualStack = NetworkProtocol.AddMember("DualStack", smithyprelude.Unit)
-
-	NetworkConnectorVpcEgressConfiguration_SubnetIds = NetworkConnectorVpcEgressConfiguration.AddMember("SubnetIds", _NetworkConnectorSubnetIds)
-
-	NetworkConnectorVpcEgressConfiguration_SecurityGroupIds = NetworkConnectorVpcEgressConfiguration.AddMember("SecurityGroupIds", _NetworkConnectorSecurityGroupIds)
-
-	NetworkConnectorVpcEgressConfiguration_NetworkProtocol = NetworkConnectorVpcEgressConfiguration.AddMember("NetworkProtocol", NetworkProtocol)
-
-	NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes = NetworkConnectorVpcEgressConfiguration.AddMember("AssociatedComputeResourceTypes", _AssociatedComputeResourceTypesList)
-
-	NetworkConnectorConfiguration_VpcEgressConfiguration = NetworkConnectorConfiguration.AddMember("VpcEgressConfiguration", NetworkConnectorVpcEgressConfiguration)
-
-	NetworkConnectorLastUpdateStatus_Successful = NetworkConnectorLastUpdateStatus.AddMember("Successful", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatus_Failed = NetworkConnectorLastUpdateStatus.AddMember("Failed", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatus_InProgress = NetworkConnectorLastUpdateStatus.AddMember("InProgress", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl = NetworkConnectorLastUpdateStatusReasonCode.AddMember("DisallowedByVpcEncryptionControl", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded = NetworkConnectorLastUpdateStatusReasonCode.AddMember("Ec2RequestLimitExceeded", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InsufficientRolePermissions", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_InternalError = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InternalError", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InvalidSecurityGroup", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet = NetworkConnectorLastUpdateStatusReasonCode.AddMember("InvalidSubnet", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded = NetworkConnectorLastUpdateStatusReasonCode.AddMember("SecurityGroupsPerInterfaceLimitExceeded", smithyprelude.Unit)
-
-	NetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses = NetworkConnectorLastUpdateStatusReasonCode.AddMember("SubnetOutOfIPAddresses", smithyprelude.Unit)
-
-	NetworkConnectorLimitExceededException_Type = NetworkConnectorLimitExceededException.AddMember("Type", _String)
-
-	NetworkConnectorLimitExceededException_message = NetworkConnectorLimitExceededException.AddMember("message", _String)
-
-	NetworkConnectorType_VPC_EGRESS = NetworkConnectorType.AddMember("VPC_EGRESS", smithyprelude.Unit)
-
-	NetworkConnectorState_PENDING = NetworkConnectorState.AddMember("PENDING", smithyprelude.Unit)
-
-	NetworkConnectorState_ACTIVE = NetworkConnectorState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	NetworkConnectorState_INACTIVE = NetworkConnectorState.AddMember("INACTIVE", smithyprelude.Unit)
-
-	NetworkConnectorState_FAILED = NetworkConnectorState.AddMember("FAILED", smithyprelude.Unit)
-
-	NetworkConnectorState_DELETING = NetworkConnectorState.AddMember("DELETING", smithyprelude.Unit)
-
-	NetworkConnectorState_DELETE_FAILED = NetworkConnectorState.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	NetworkConnectorSummary_Arn = NetworkConnectorSummary.AddMember("Arn", _NetworkConnectorArn)
-
-	NetworkConnectorSummary_Name = NetworkConnectorSummary.AddMember("Name", _NetworkConnectorName)
-
-	NetworkConnectorSummary_Id = NetworkConnectorSummary.AddMember("Id", _NetworkConnectorId)
-
-	NetworkConnectorSummary_Type = NetworkConnectorSummary.AddMember("Type", NetworkConnectorType)
-
-	NetworkConnectorSummary_State = NetworkConnectorSummary.AddMember("State", NetworkConnectorState)
-
-	NetworkConnectorSummary_LastModified = NetworkConnectorSummary.AddMember("LastModified", _CoreTimestamp)
-
-	NetworkConnectorSummary_LatestVersionArn = NetworkConnectorSummary.AddMember("LatestVersionArn", _NetworkConnectorArn)
-
-	NetworkConnectorSummary_LatestVersion = NetworkConnectorSummary.AddMember("LatestVersion", _NetworkConnectorVersion)
-
-	_NetworkConnectorsList_member = _NetworkConnectorsList.AddMember("member", NetworkConnectorSummary)
-
-	NetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl = NetworkConnectorStateReasonCode.AddMember("DisallowedByVpcEncryptionControl", smithyprelude.Unit)
-
-	NetworkConnectorStateReasonCode_Ec2RequestLimitExceeded = NetworkConnectorStateReasonCode.AddMember("Ec2RequestLimitExceeded", smithyprelude.Unit)
-
-	NetworkConnectorStateReasonCode_InsufficientRolePermissions = NetworkConnectorStateReasonCode.AddMember("InsufficientRolePermissions", smithyprelude.Unit)
-
-	NetworkConnectorStateReasonCode_InternalError = NetworkConnectorStateReasonCode.AddMember("InternalError", smithyprelude.Unit)
-
-	NetworkConnectorStateReasonCode_InvalidSecurityGroup = NetworkConnectorStateReasonCode.AddMember("InvalidSecurityGroup", smithyprelude.Unit)
-
-	NetworkConnectorStateReasonCode_InvalidSubnet = NetworkConnectorStateReasonCode.AddMember("InvalidSubnet", smithyprelude.Unit)
-
-	NetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded = NetworkConnectorStateReasonCode.AddMember("SecurityGroupsPerInterfaceLimitExceeded", smithyprelude.Unit)
-
-	NetworkConnectorStateReasonCode_SubnetOutOfIPAddresses = NetworkConnectorStateReasonCode.AddMember("SubnetOutOfIPAddresses", smithyprelude.Unit)
-
-	_NetworkConnectorTags_key = _NetworkConnectorTags.AddMember("key", _NetworkConnectorTagKey)
-
-	_NetworkConnectorTags_value = _NetworkConnectorTags.AddMember("value", _NetworkConnectorTagValue)
-
-	NetworkConnectorVersionSummary_Arn = NetworkConnectorVersionSummary.AddMember("Arn", _NetworkConnectorArn)
-
-	NetworkConnectorVersionSummary_VersionArn = NetworkConnectorVersionSummary.AddMember("VersionArn", _NetworkConnectorArn)
-
-	NetworkConnectorVersionSummary_Name = NetworkConnectorVersionSummary.AddMember("Name", _NetworkConnectorName)
-
-	NetworkConnectorVersionSummary_Id = NetworkConnectorVersionSummary.AddMember("Id", _NetworkConnectorId)
-
-	NetworkConnectorVersionSummary_Version = NetworkConnectorVersionSummary.AddMember("Version", _NetworkConnectorVersion)
-
-	NetworkConnectorVersionSummary_State = NetworkConnectorVersionSummary.AddMember("State", NetworkConnectorState)
-
-	NetworkConnectorVersionSummary_StateReason = NetworkConnectorVersionSummary.AddMember("StateReason", _String)
-
-	NetworkConnectorVersionSummary_StateReasonCode = NetworkConnectorVersionSummary.AddMember("StateReasonCode", NetworkConnectorStateReasonCode)
-
-	NetworkConnectorVersionSummary_LastModified = NetworkConnectorVersionSummary.AddMember("LastModified", _CoreTimestamp)
-
-	_NetworkConnectorVersionsList_member = _NetworkConnectorVersionsList.AddMember("member", NetworkConnectorVersionSummary)
-
-	ResourceConflictException_Type = ResourceConflictException.AddMember("Type", _String)
-
-	ResourceConflictException_message = ResourceConflictException.AddMember("message", _String)
-
-	ResourceNotFoundException_Type = ResourceNotFoundException.AddMember("Type", _String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	ServiceException_Type = ServiceException.AddMember("Type", _String)
-
-	ServiceException_Message = ServiceException.AddMember("Message", _String)
-
-	ThrottleReason_ConcurrentInvocationLimitExceeded = ThrottleReason.AddMember("ConcurrentInvocationLimitExceeded", smithyprelude.Unit)
-
-	ThrottleReason_FunctionInvocationRateLimitExceeded = ThrottleReason.AddMember("FunctionInvocationRateLimitExceeded", smithyprelude.Unit)
-
-	ThrottleReason_ReservedFunctionConcurrentInvocationLimitExceeded = ThrottleReason.AddMember("ReservedFunctionConcurrentInvocationLimitExceeded", smithyprelude.Unit)
-
-	ThrottleReason_ReservedFunctionInvocationRateLimitExceeded = ThrottleReason.AddMember("ReservedFunctionInvocationRateLimitExceeded", smithyprelude.Unit)
-
-	ThrottleReason_CallerRateLimitExceeded = ThrottleReason.AddMember("CallerRateLimitExceeded", smithyprelude.Unit)
-
-	ThrottleReason_ConcurrentSnapshotCreateLimitExceeded = ThrottleReason.AddMember("ConcurrentSnapshotCreateLimitExceeded", smithyprelude.Unit)
-
-	TooManyRequestsException_retryAfterSeconds = TooManyRequestsException.AddMember("retryAfterSeconds", _String, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	TooManyRequestsException_Type = TooManyRequestsException.AddMember("Type", _String)
-
-	TooManyRequestsException_message = TooManyRequestsException.AddMember("message", _String)
-
-	TooManyRequestsException_Reason = TooManyRequestsException.AddMember("Reason", ThrottleReason)
-
-	CreateNetworkConnectorRequest_Name = CreateNetworkConnectorRequest.AddMember("Name", _NetworkConnectorName)
-
-	CreateNetworkConnectorRequest_Configuration = CreateNetworkConnectorRequest.AddMember("Configuration", NetworkConnectorConfiguration)
-
-	CreateNetworkConnectorRequest_OperatorRole = CreateNetworkConnectorRequest.AddMember("OperatorRole", _NetworkConnectorRoleArn)
-
-	CreateNetworkConnectorRequest_ClientToken = CreateNetworkConnectorRequest.AddMember("ClientToken", _ClientTokenString)
-
-	CreateNetworkConnectorRequest_Tags = CreateNetworkConnectorRequest.AddMember("Tags", _NetworkConnectorTags)
-
-	CreateNetworkConnectorResponse_Arn = CreateNetworkConnectorResponse.AddMember("Arn", _NetworkConnectorArn)
-
-	CreateNetworkConnectorResponse_Name = CreateNetworkConnectorResponse.AddMember("Name", _NetworkConnectorName)
-
-	CreateNetworkConnectorResponse_Id = CreateNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
-
-	CreateNetworkConnectorResponse_VersionArn = CreateNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
-
-	CreateNetworkConnectorResponse_Version = CreateNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
-
-	CreateNetworkConnectorResponse_Configuration = CreateNetworkConnectorResponse.AddMember("Configuration", NetworkConnectorConfiguration)
-
-	CreateNetworkConnectorResponse_OperatorRole = CreateNetworkConnectorResponse.AddMember("OperatorRole", _NetworkConnectorRoleArn)
-
-	CreateNetworkConnectorResponse_State = CreateNetworkConnectorResponse.AddMember("State", NetworkConnectorState)
-
-	DeleteNetworkConnectorRequest_Identifier = DeleteNetworkConnectorRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
-
-	DeleteNetworkConnectorResponse_Arn = DeleteNetworkConnectorResponse.AddMember("Arn", _NetworkConnectorArn)
-
-	DeleteNetworkConnectorResponse_Name = DeleteNetworkConnectorResponse.AddMember("Name", _NetworkConnectorName)
-
-	DeleteNetworkConnectorResponse_Id = DeleteNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
-
-	DeleteNetworkConnectorResponse_VersionArn = DeleteNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
-
-	DeleteNetworkConnectorResponse_Version = DeleteNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
-
-	DeleteNetworkConnectorResponse_Configuration = DeleteNetworkConnectorResponse.AddMember("Configuration", NetworkConnectorConfiguration)
-
-	DeleteNetworkConnectorResponse_OperatorRole = DeleteNetworkConnectorResponse.AddMember("OperatorRole", _NetworkConnectorRoleArn)
-
-	DeleteNetworkConnectorResponse_State = DeleteNetworkConnectorResponse.AddMember("State", NetworkConnectorState)
-
-	GetNetworkConnectorRequest_Identifier = GetNetworkConnectorRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
-
-	GetNetworkConnectorResponse_Arn = GetNetworkConnectorResponse.AddMember("Arn", _NetworkConnectorArn)
-
-	GetNetworkConnectorResponse_Name = GetNetworkConnectorResponse.AddMember("Name", _NetworkConnectorName)
-
-	GetNetworkConnectorResponse_Id = GetNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
-
-	GetNetworkConnectorResponse_VersionArn = GetNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
-
-	GetNetworkConnectorResponse_Version = GetNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
-
-	GetNetworkConnectorResponse_LatestVersionArn = GetNetworkConnectorResponse.AddMember("LatestVersionArn", _NetworkConnectorArn)
-
-	GetNetworkConnectorResponse_LatestVersion = GetNetworkConnectorResponse.AddMember("LatestVersion", _NetworkConnectorVersion)
-
-	GetNetworkConnectorResponse_Configuration = GetNetworkConnectorResponse.AddMember("Configuration", NetworkConnectorConfiguration)
-
-	GetNetworkConnectorResponse_OperatorRole = GetNetworkConnectorResponse.AddMember("OperatorRole", _NetworkConnectorRoleArn)
-
-	GetNetworkConnectorResponse_State = GetNetworkConnectorResponse.AddMember("State", NetworkConnectorState)
-
-	GetNetworkConnectorResponse_StateReason = GetNetworkConnectorResponse.AddMember("StateReason", _String)
-
-	GetNetworkConnectorResponse_StateReasonCode = GetNetworkConnectorResponse.AddMember("StateReasonCode", NetworkConnectorStateReasonCode)
-
-	GetNetworkConnectorResponse_LastUpdateStatus = GetNetworkConnectorResponse.AddMember("LastUpdateStatus", NetworkConnectorLastUpdateStatus)
-
-	GetNetworkConnectorResponse_LastUpdateStatusReason = GetNetworkConnectorResponse.AddMember("LastUpdateStatusReason", _NetworkConnectorLastUpdateStatusReason)
-
-	GetNetworkConnectorResponse_LastUpdateStatusReasonCode = GetNetworkConnectorResponse.AddMember("LastUpdateStatusReasonCode", NetworkConnectorLastUpdateStatusReasonCode)
-
-	GetNetworkConnectorResponse_LastModified = GetNetworkConnectorResponse.AddMember("LastModified", _CoreTimestamp)
-
-	ListNetworkConnectorsRequest_State = ListNetworkConnectorsRequest.AddMember("State", NetworkConnectorState, &smithytraits.HTTPQuery{Name: "State"})
-
-	ListNetworkConnectorsRequest_Marker = ListNetworkConnectorsRequest.AddMember("Marker", _String, &smithytraits.HTTPQuery{Name: "Marker"})
-
-	ListNetworkConnectorsRequest_MaxItems = ListNetworkConnectorsRequest.AddMember("MaxItems", _MaxHundredListItems, &smithytraits.HTTPQuery{Name: "MaxItems"})
-
-	ListNetworkConnectorsResponse_NetworkConnectors = ListNetworkConnectorsResponse.AddMember("NetworkConnectors", _NetworkConnectorsList)
-
-	ListNetworkConnectorsResponse_NextMarker = ListNetworkConnectorsResponse.AddMember("NextMarker", _String)
-
-	ListNetworkConnectorVersionsRequest_Identifier = ListNetworkConnectorVersionsRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
-
-	ListNetworkConnectorVersionsRequest_State = ListNetworkConnectorVersionsRequest.AddMember("State", NetworkConnectorState, &smithytraits.HTTPQuery{Name: "State"})
-
-	ListNetworkConnectorVersionsRequest_Marker = ListNetworkConnectorVersionsRequest.AddMember("Marker", _String, &smithytraits.HTTPQuery{Name: "Marker"})
-
-	ListNetworkConnectorVersionsRequest_MaxItems = ListNetworkConnectorVersionsRequest.AddMember("MaxItems", _MaxHundredListItems, &smithytraits.HTTPQuery{Name: "MaxItems"})
-
-	ListNetworkConnectorVersionsResponse_NetworkConnectorVersions = ListNetworkConnectorVersionsResponse.AddMember("NetworkConnectorVersions", _NetworkConnectorVersionsList)
-
-	ListNetworkConnectorVersionsResponse_NextMarker = ListNetworkConnectorVersionsResponse.AddMember("NextMarker", _String)
-
-	UpdateNetworkConnectorRequest_Identifier = UpdateNetworkConnectorRequest.AddMember("Identifier", _NetworkConnectorIdentifier, &smithytraits.HTTPLabel{})
-
-	UpdateNetworkConnectorRequest_Configuration = UpdateNetworkConnectorRequest.AddMember("Configuration", NetworkConnectorConfiguration)
-
-	UpdateNetworkConnectorRequest_OperatorRole = UpdateNetworkConnectorRequest.AddMember("OperatorRole", _NetworkConnectorRoleArn)
-
-	UpdateNetworkConnectorRequest_ClientToken = UpdateNetworkConnectorRequest.AddMember("ClientToken", _ClientTokenString)
-
-	UpdateNetworkConnectorResponse_Arn = UpdateNetworkConnectorResponse.AddMember("Arn", _NetworkConnectorArn)
-
-	UpdateNetworkConnectorResponse_Name = UpdateNetworkConnectorResponse.AddMember("Name", _NetworkConnectorName)
-
-	UpdateNetworkConnectorResponse_Id = UpdateNetworkConnectorResponse.AddMember("Id", _NetworkConnectorId)
-
-	UpdateNetworkConnectorResponse_VersionArn = UpdateNetworkConnectorResponse.AddMember("VersionArn", _NetworkConnectorArn)
-
-	UpdateNetworkConnectorResponse_Version = UpdateNetworkConnectorResponse.AddMember("Version", _NetworkConnectorVersion)
-
-	UpdateNetworkConnectorResponse_OperatorRole = UpdateNetworkConnectorResponse.AddMember("OperatorRole", _NetworkConnectorRoleArn)
-
-	UpdateNetworkConnectorResponse_Configuration = UpdateNetworkConnectorResponse.AddMember("Configuration", NetworkConnectorConfiguration)
-
-	UpdateNetworkConnectorResponse_State = UpdateNetworkConnectorResponse.AddMember("State", NetworkConnectorState)
-
-	UpdateNetworkConnectorResponse_LastUpdateStatus = UpdateNetworkConnectorResponse.AddMember("LastUpdateStatus", NetworkConnectorLastUpdateStatus)
-
-	UpdateNetworkConnectorResponse_LastUpdateStatusReason = UpdateNetworkConnectorResponse.AddMember("LastUpdateStatusReason", _NetworkConnectorLastUpdateStatusReason)
-
-	UpdateNetworkConnectorResponse_LastModified = UpdateNetworkConnectorResponse.AddMember("LastModified", _CoreTimestamp)
-
-}
+	Code: 202}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "State"}}, DirectMask: 0x10}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "Marker"}}, DirectMask: 0x10}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "MaxItems"}}, DirectMask: 0x10}
+
+var m_AssociatedComputeResourceTypesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedComputeResourceTypesList_member}}
+var mComputeResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeResourceType_MicroVm, &sComputeResourceType_WebFunction}}
+var mInvalidParameterValueException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterValueException_Type, &sInvalidParameterValueException_message}}
+var mNetworkConnectorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorConfiguration_VpcEgressConfiguration}}
+var mNetworkConnectorLastUpdateStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorLastUpdateStatus_Successful, &sNetworkConnectorLastUpdateStatus_Failed, &sNetworkConnectorLastUpdateStatus_InProgress}}
+var mNetworkConnectorLastUpdateStatusReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl, &sNetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded, &sNetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions, &sNetworkConnectorLastUpdateStatusReasonCode_InternalError, &sNetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup, &sNetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet, &sNetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded, &sNetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses}}
+var mNetworkConnectorLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorLimitExceededException_Type, &sNetworkConnectorLimitExceededException_message}}
+var m_NetworkConnectorSecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkConnectorSecurityGroupIds_member}}
+var m_NetworkConnectorsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkConnectorsList_member}}
+var mNetworkConnectorState = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorState_PENDING, &sNetworkConnectorState_ACTIVE, &sNetworkConnectorState_INACTIVE, &sNetworkConnectorState_FAILED, &sNetworkConnectorState_DELETING, &sNetworkConnectorState_DELETE_FAILED}}
+var mNetworkConnectorStateReasonCode = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl, &sNetworkConnectorStateReasonCode_Ec2RequestLimitExceeded, &sNetworkConnectorStateReasonCode_InsufficientRolePermissions, &sNetworkConnectorStateReasonCode_InternalError, &sNetworkConnectorStateReasonCode_InvalidSecurityGroup, &sNetworkConnectorStateReasonCode_InvalidSubnet, &sNetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded, &sNetworkConnectorStateReasonCode_SubnetOutOfIPAddresses}}
+var m_NetworkConnectorSubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkConnectorSubnetIds_member}}
+var mNetworkConnectorSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorSummary_Arn, &sNetworkConnectorSummary_Name, &sNetworkConnectorSummary_Id, &sNetworkConnectorSummary_Type, &sNetworkConnectorSummary_State, &sNetworkConnectorSummary_LastModified, &sNetworkConnectorSummary_LatestVersionArn, &sNetworkConnectorSummary_LatestVersion}}
+var m_NetworkConnectorTags = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkConnectorTags_key, &s_NetworkConnectorTags_value}}
+var mNetworkConnectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorType_VPC_EGRESS}}
+var m_NetworkConnectorVersionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkConnectorVersionsList_member}}
+var mNetworkConnectorVersionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorVersionSummary_Arn, &sNetworkConnectorVersionSummary_VersionArn, &sNetworkConnectorVersionSummary_Name, &sNetworkConnectorVersionSummary_Id, &sNetworkConnectorVersionSummary_Version, &sNetworkConnectorVersionSummary_State, &sNetworkConnectorVersionSummary_StateReason, &sNetworkConnectorVersionSummary_StateReasonCode, &sNetworkConnectorVersionSummary_LastModified}, Seed: 4, Slots: []uint16{
+	2, 0, 0, 4, 3, 8, 0, 0, 0, 5, 9, 0, 0, 0, 0, 6, 0, 1, 0, 0, 0, 7, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mNetworkConnectorVpcEgressConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConnectorVpcEgressConfiguration_SubnetIds, &sNetworkConnectorVpcEgressConfiguration_SecurityGroupIds, &sNetworkConnectorVpcEgressConfiguration_NetworkProtocol, &sNetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes}}
+var mNetworkProtocol = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkProtocol_IPv4, &sNetworkProtocol_DualStack}}
+var mResourceConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceConflictException_Type, &sResourceConflictException_message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Type, &sResourceNotFoundException_Message}}
+var mServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceException_Type, &sServiceException_Message}}
+var mThrottleReason = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottleReason_ConcurrentInvocationLimitExceeded, &sThrottleReason_FunctionInvocationRateLimitExceeded, &sThrottleReason_ReservedFunctionConcurrentInvocationLimitExceeded, &sThrottleReason_ReservedFunctionInvocationRateLimitExceeded, &sThrottleReason_CallerRateLimitExceeded, &sThrottleReason_ConcurrentSnapshotCreateLimitExceeded}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_retryAfterSeconds, &sTooManyRequestsException_Type, &sTooManyRequestsException_message, &sTooManyRequestsException_Reason}}
+var mCreateNetworkConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkConnectorRequest_Name, &sCreateNetworkConnectorRequest_Configuration, &sCreateNetworkConnectorRequest_OperatorRole, &sCreateNetworkConnectorRequest_ClientToken, &sCreateNetworkConnectorRequest_Tags}}
+var mCreateNetworkConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateNetworkConnectorResponse_Arn, &sCreateNetworkConnectorResponse_Name, &sCreateNetworkConnectorResponse_Id, &sCreateNetworkConnectorResponse_VersionArn, &sCreateNetworkConnectorResponse_Version, &sCreateNetworkConnectorResponse_Configuration, &sCreateNetworkConnectorResponse_OperatorRole, &sCreateNetworkConnectorResponse_State}}
+var mDeleteNetworkConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNetworkConnectorRequest_Identifier}}
+var mDeleteNetworkConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteNetworkConnectorResponse_Arn, &sDeleteNetworkConnectorResponse_Name, &sDeleteNetworkConnectorResponse_Id, &sDeleteNetworkConnectorResponse_VersionArn, &sDeleteNetworkConnectorResponse_Version, &sDeleteNetworkConnectorResponse_Configuration, &sDeleteNetworkConnectorResponse_OperatorRole, &sDeleteNetworkConnectorResponse_State}}
+var mGetNetworkConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkConnectorRequest_Identifier}}
+var mGetNetworkConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetNetworkConnectorResponse_Arn, &sGetNetworkConnectorResponse_Name, &sGetNetworkConnectorResponse_Id, &sGetNetworkConnectorResponse_VersionArn, &sGetNetworkConnectorResponse_Version, &sGetNetworkConnectorResponse_LatestVersionArn, &sGetNetworkConnectorResponse_LatestVersion, &sGetNetworkConnectorResponse_Configuration, &sGetNetworkConnectorResponse_OperatorRole, &sGetNetworkConnectorResponse_State, &sGetNetworkConnectorResponse_StateReason, &sGetNetworkConnectorResponse_StateReasonCode, &sGetNetworkConnectorResponse_LastUpdateStatus, &sGetNetworkConnectorResponse_LastUpdateStatusReason, &sGetNetworkConnectorResponse_LastUpdateStatusReasonCode, &sGetNetworkConnectorResponse_LastModified}, Seed: 84, Slots: []uint16{
+	0, 3, 0, 1, 0, 8, 0, 0, 0, 15, 0, 0, 0, 10, 0, 14, 0, 11, 9, 7, 16, 0, 2, 13,
+	12, 0, 0, 5, 6, 0, 4, 0,
+}}
+var mListNetworkConnectorsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworkConnectorsRequest_State, &sListNetworkConnectorsRequest_Marker, &sListNetworkConnectorsRequest_MaxItems}}
+var mListNetworkConnectorsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworkConnectorsResponse_NetworkConnectors, &sListNetworkConnectorsResponse_NextMarker}}
+var mListNetworkConnectorVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworkConnectorVersionsRequest_Identifier, &sListNetworkConnectorVersionsRequest_State, &sListNetworkConnectorVersionsRequest_Marker, &sListNetworkConnectorVersionsRequest_MaxItems}}
+var mListNetworkConnectorVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListNetworkConnectorVersionsResponse_NetworkConnectorVersions, &sListNetworkConnectorVersionsResponse_NextMarker}}
+var mUpdateNetworkConnectorRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkConnectorRequest_Identifier, &sUpdateNetworkConnectorRequest_Configuration, &sUpdateNetworkConnectorRequest_OperatorRole, &sUpdateNetworkConnectorRequest_ClientToken}}
+var mUpdateNetworkConnectorResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateNetworkConnectorResponse_Arn, &sUpdateNetworkConnectorResponse_Name, &sUpdateNetworkConnectorResponse_Id, &sUpdateNetworkConnectorResponse_VersionArn, &sUpdateNetworkConnectorResponse_Version, &sUpdateNetworkConnectorResponse_OperatorRole, &sUpdateNetworkConnectorResponse_Configuration, &sUpdateNetworkConnectorResponse_State, &sUpdateNetworkConnectorResponse_LastUpdateStatus, &sUpdateNetworkConnectorResponse_LastUpdateStatusReason, &sUpdateNetworkConnectorResponse_LastModified}, Seed: 23, Slots: []uint16{
+	9, 0, 2, 0, 10, 0, 5, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 1, 0,
+	0, 0, 0, 11, 7, 3, 0, 6,
+}}
+
+var sCreateNetworkConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkConnector, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sDeleteNetworkConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkConnector, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sGetNetworkConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkConnector, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sListNetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkConnectors, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sListNetworkConnectorVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkConnectorVersions, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sUpdateNetworkConnector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkConnector, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var s_LambdaCoreApiService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaCoreApiService, Type: smithy.ShapeTypeService})
+var s_AssociatedComputeResourceTypesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedComputeResourceTypesList, Members: &m_AssociatedComputeResourceTypesList, Type: smithy.ShapeTypeList})
+var s_ClientTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenString, Type: smithy.ShapeTypeString})
+var sComputeResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeResourceType, Members: &mComputeResourceType, Type: smithy.ShapeTypeEnum})
+var s_CoreTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreTimestamp, Traits: &t6, Type: smithy.ShapeTypeTimestamp})
+var sInvalidParameterValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterValueException, Members: &mInvalidParameterValueException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_MaxHundredListItems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxHundredListItems, Type: smithy.ShapeTypeInteger})
+var s_NetworkConnectorArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sNetworkConnectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorConfiguration, Members: &mNetworkConnectorConfiguration, Type: smithy.ShapeTypeUnion})
+var s_NetworkConnectorId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorId, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorIdentifier, Type: smithy.ShapeTypeString})
+var sNetworkConnectorLastUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorLastUpdateStatus, Members: &mNetworkConnectorLastUpdateStatus, Type: smithy.ShapeTypeEnum})
+var s_NetworkConnectorLastUpdateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorLastUpdateStatusReason, Type: smithy.ShapeTypeString})
+var sNetworkConnectorLastUpdateStatusReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorLastUpdateStatusReasonCode, Members: &mNetworkConnectorLastUpdateStatusReasonCode, Type: smithy.ShapeTypeEnum})
+var sNetworkConnectorLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorLimitExceededException, Members: &mNetworkConnectorLimitExceededException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_NetworkConnectorName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorRoleArn, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorSecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorSecurityGroupId, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorSecurityGroupIds, Members: &m_NetworkConnectorSecurityGroupIds, Type: smithy.ShapeTypeList})
+var s_NetworkConnectorsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorsList, Members: &m_NetworkConnectorsList, Type: smithy.ShapeTypeList})
+var sNetworkConnectorState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Type: smithy.ShapeTypeEnum})
+var sNetworkConnectorStateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorStateReasonCode, Members: &mNetworkConnectorStateReasonCode, Type: smithy.ShapeTypeEnum})
+var s_NetworkConnectorSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorSubnetId, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorSubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorSubnetIds, Members: &m_NetworkConnectorSubnetIds, Type: smithy.ShapeTypeList})
+var sNetworkConnectorSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorSummary, Members: &mNetworkConnectorSummary, Type: smithy.ShapeTypeStructure})
+var s_NetworkConnectorTagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorTagKey, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorTags, Members: &m_NetworkConnectorTags, Type: smithy.ShapeTypeMap})
+var s_NetworkConnectorTagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorTagValue, Type: smithy.ShapeTypeString})
+var sNetworkConnectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorType, Members: &mNetworkConnectorType, Type: smithy.ShapeTypeEnum})
+var s_NetworkConnectorVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var s_NetworkConnectorVersionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkConnectorVersionsList, Members: &m_NetworkConnectorVersionsList, Type: smithy.ShapeTypeList})
+var sNetworkConnectorVersionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorVersionSummary, Members: &mNetworkConnectorVersionSummary, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorVpcEgressConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConnectorVpcEgressConfiguration, Members: &mNetworkConnectorVpcEgressConfiguration, Type: smithy.ShapeTypeStructure})
+var sNetworkProtocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkProtocol, Members: &mNetworkProtocol, Type: smithy.ShapeTypeEnum})
+var sResourceConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceConflictException, Members: &mResourceConflictException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceException, Members: &mServiceException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottleReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottleReason, Members: &mThrottleReason, Type: smithy.ShapeTypeEnum})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkConnectorRequest, Members: &mCreateNetworkConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sCreateNetworkConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateNetworkConnectorResponse, Members: &mCreateNetworkConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkConnectorRequest, Members: &mDeleteNetworkConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteNetworkConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteNetworkConnectorResponse, Members: &mDeleteNetworkConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sGetNetworkConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkConnectorRequest, Members: &mGetNetworkConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sGetNetworkConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetNetworkConnectorResponse, Members: &mGetNetworkConnectorResponse, Type: smithy.ShapeTypeStructure})
+var sListNetworkConnectorsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkConnectorsRequest, Members: &mListNetworkConnectorsRequest, Type: smithy.ShapeTypeStructure})
+var sListNetworkConnectorsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkConnectorsResponse, Members: &mListNetworkConnectorsResponse, Type: smithy.ShapeTypeStructure})
+var sListNetworkConnectorVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkConnectorVersionsRequest, Members: &mListNetworkConnectorVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListNetworkConnectorVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListNetworkConnectorVersionsResponse, Members: &mListNetworkConnectorVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkConnectorRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkConnectorRequest, Members: &mUpdateNetworkConnectorRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateNetworkConnectorResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateNetworkConnectorResponse, Members: &mUpdateNetworkConnectorResponse, Type: smithy.ShapeTypeStructure})
+
+var s_AssociatedComputeResourceTypesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComputeResourceType, Members: &mComputeResourceType, Type: smithy.ShapeTypeEnum})
+var sComputeResourceType_MicroVm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MicroVm", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComputeResourceType_WebFunction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WebFunction", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterValueException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidParameterValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNetworkConnectorConfiguration_VpcEgressConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcEgressConfiguration", ID: &iNetworkConnectorVpcEgressConfiguration, Members: &mNetworkConnectorVpcEgressConfiguration, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatus_Successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Successful", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisallowedByVpcEncryptionControl", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2RequestLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientRolePermissions", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_InternalError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalError", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSecurityGroup", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSubnet", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupsPerInterfaceLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetOutOfIPAddresses", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorLimitExceededException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNetworkConnectorLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorSecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkConnectorSecurityGroupId, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkConnectorSummary, Members: &mNetworkConnectorSummary, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorState_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorState_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisallowedByVpcEncryptionControl", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_Ec2RequestLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ec2RequestLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_InsufficientRolePermissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsufficientRolePermissions", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_InternalError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalError", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_InvalidSecurityGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSecurityGroup", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_InvalidSubnet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSubnet", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupsPerInterfaceLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorStateReasonCode_SubnetOutOfIPAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetOutOfIPAddresses", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_NetworkConnectorSubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkConnectorSubnetId, Type: smithy.ShapeTypeString})
+var sNetworkConnectorSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sNetworkConnectorSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var sNetworkConnectorSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NetworkConnectorId, Type: smithy.ShapeTypeString})
+var sNetworkConnectorSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iNetworkConnectorType, Members: &mNetworkConnectorType, Type: smithy.ShapeTypeEnum})
+var sNetworkConnectorSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Type: smithy.ShapeTypeEnum})
+var sNetworkConnectorSummary_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_CoreTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp})
+var sNetworkConnectorSummary_LatestVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersionArn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sNetworkConnectorSummary_LatestVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersion", ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var s_NetworkConnectorTags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NetworkConnectorTagKey, Type: smithy.ShapeTypeString})
+var s_NetworkConnectorTags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NetworkConnectorTagValue, Type: smithy.ShapeTypeString})
+var sNetworkConnectorType_VPC_EGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VPC_EGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_NetworkConnectorVersionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkConnectorVersionSummary, Members: &mNetworkConnectorVersionSummary, Type: smithy.ShapeTypeStructure})
+var sNetworkConnectorVersionSummary_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sNetworkConnectorVersionSummary_VersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionArn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sNetworkConnectorVersionSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var sNetworkConnectorVersionSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NetworkConnectorId, Type: smithy.ShapeTypeString})
+var sNetworkConnectorVersionSummary_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var sNetworkConnectorVersionSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Type: smithy.ShapeTypeEnum})
+var sNetworkConnectorVersionSummary_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNetworkConnectorVersionSummary_StateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonCode", ID: &iNetworkConnectorStateReasonCode, Members: &mNetworkConnectorStateReasonCode, Type: smithy.ShapeTypeEnum})
+var sNetworkConnectorVersionSummary_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_CoreTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp})
+var sNetworkConnectorVpcEgressConfiguration_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_NetworkConnectorSubnetIds, Members: &m_NetworkConnectorSubnetIds, Type: smithy.ShapeTypeList})
+var sNetworkConnectorVpcEgressConfiguration_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_NetworkConnectorSecurityGroupIds, Members: &m_NetworkConnectorSecurityGroupIds, Type: smithy.ShapeTypeList})
+var sNetworkConnectorVpcEgressConfiguration_NetworkProtocol = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkProtocol", ID: &iNetworkProtocol, Members: &mNetworkProtocol, Type: smithy.ShapeTypeEnum})
+var sNetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedComputeResourceTypes", ID: &i_AssociatedComputeResourceTypesList, Members: &m_AssociatedComputeResourceTypesList, Type: smithy.ShapeTypeList})
+var sNetworkProtocol_IPv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPv4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkProtocol_DualStack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualStack", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceConflictException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottleReason_ConcurrentInvocationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConcurrentInvocationLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottleReason_FunctionInvocationRateLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FunctionInvocationRateLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottleReason_ReservedFunctionConcurrentInvocationLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedFunctionConcurrentInvocationLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottleReason_ReservedFunctionInvocationRateLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedFunctionInvocationRateLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottleReason_CallerRateLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallerRateLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottleReason_ConcurrentSnapshotCreateLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConcurrentSnapshotCreateLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTooManyRequestsException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_String, Traits: &t13, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iThrottleReason, Members: &mThrottleReason, Type: smithy.ShapeTypeEnum})
+var sCreateNetworkConnectorRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iNetworkConnectorConfiguration, Members: &mNetworkConnectorConfiguration, Type: smithy.ShapeTypeUnion})
+var sCreateNetworkConnectorRequest_OperatorRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatorRole", ID: &i_NetworkConnectorRoleArn, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_NetworkConnectorTags, Members: &m_NetworkConnectorTags, Type: smithy.ShapeTypeMap})
+var sCreateNetworkConnectorResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NetworkConnectorId, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorResponse_VersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionArn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var sCreateNetworkConnectorResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iNetworkConnectorConfiguration, Members: &mNetworkConnectorConfiguration, Type: smithy.ShapeTypeUnion})
+var sCreateNetworkConnectorResponse_OperatorRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatorRole", ID: &i_NetworkConnectorRoleArn, Type: smithy.ShapeTypeString})
+var sCreateNetworkConnectorResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Type: smithy.ShapeTypeEnum})
+var sDeleteNetworkConnectorRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NetworkConnectorIdentifier, Traits: &t14, Type: smithy.ShapeTypeString})
+var sDeleteNetworkConnectorResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sDeleteNetworkConnectorResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var sDeleteNetworkConnectorResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NetworkConnectorId, Type: smithy.ShapeTypeString})
+var sDeleteNetworkConnectorResponse_VersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionArn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sDeleteNetworkConnectorResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var sDeleteNetworkConnectorResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iNetworkConnectorConfiguration, Members: &mNetworkConnectorConfiguration, Type: smithy.ShapeTypeUnion})
+var sDeleteNetworkConnectorResponse_OperatorRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatorRole", ID: &i_NetworkConnectorRoleArn, Type: smithy.ShapeTypeString})
+var sDeleteNetworkConnectorResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Type: smithy.ShapeTypeEnum})
+var sGetNetworkConnectorRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NetworkConnectorIdentifier, Traits: &t14, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NetworkConnectorId, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_VersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionArn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var sGetNetworkConnectorResponse_LatestVersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersionArn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_LatestVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersion", ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var sGetNetworkConnectorResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iNetworkConnectorConfiguration, Members: &mNetworkConnectorConfiguration, Type: smithy.ShapeTypeUnion})
+var sGetNetworkConnectorResponse_OperatorRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatorRole", ID: &i_NetworkConnectorRoleArn, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Type: smithy.ShapeTypeEnum})
+var sGetNetworkConnectorResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_StateReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReasonCode", ID: &iNetworkConnectorStateReasonCode, Members: &mNetworkConnectorStateReasonCode, Type: smithy.ShapeTypeEnum})
+var sGetNetworkConnectorResponse_LastUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateStatus", ID: &iNetworkConnectorLastUpdateStatus, Members: &mNetworkConnectorLastUpdateStatus, Type: smithy.ShapeTypeEnum})
+var sGetNetworkConnectorResponse_LastUpdateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateStatusReason", ID: &i_NetworkConnectorLastUpdateStatusReason, Type: smithy.ShapeTypeString})
+var sGetNetworkConnectorResponse_LastUpdateStatusReasonCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateStatusReasonCode", ID: &iNetworkConnectorLastUpdateStatusReasonCode, Members: &mNetworkConnectorLastUpdateStatusReasonCode, Type: smithy.ShapeTypeEnum})
+var sGetNetworkConnectorResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_CoreTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp})
+var sListNetworkConnectorsRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Traits: &t15, Type: smithy.ShapeTypeEnum})
+var sListNetworkConnectorsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Traits: &t16, Type: smithy.ShapeTypeString})
+var sListNetworkConnectorsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_MaxHundredListItems, Traits: &t17, Type: smithy.ShapeTypeInteger})
+var sListNetworkConnectorsResponse_NetworkConnectors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConnectors", ID: &i_NetworkConnectorsList, Members: &m_NetworkConnectorsList, Type: smithy.ShapeTypeList})
+var sListNetworkConnectorsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListNetworkConnectorVersionsRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NetworkConnectorIdentifier, Traits: &t14, Type: smithy.ShapeTypeString})
+var sListNetworkConnectorVersionsRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Traits: &t15, Type: smithy.ShapeTypeEnum})
+var sListNetworkConnectorVersionsRequest_Marker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Marker", ID: &i_String, Traits: &t16, Type: smithy.ShapeTypeString})
+var sListNetworkConnectorVersionsRequest_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &i_MaxHundredListItems, Traits: &t17, Type: smithy.ShapeTypeInteger})
+var sListNetworkConnectorVersionsResponse_NetworkConnectorVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkConnectorVersions", ID: &i_NetworkConnectorVersionsList, Members: &m_NetworkConnectorVersionsList, Type: smithy.ShapeTypeList})
+var sListNetworkConnectorVersionsResponse_NextMarker = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextMarker", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NetworkConnectorIdentifier, Traits: &t14, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iNetworkConnectorConfiguration, Members: &mNetworkConnectorConfiguration, Type: smithy.ShapeTypeUnion})
+var sUpdateNetworkConnectorRequest_OperatorRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatorRole", ID: &i_NetworkConnectorRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_NetworkConnectorName, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorResponse_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_NetworkConnectorId, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorResponse_VersionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionArn", ID: &i_NetworkConnectorArn, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorResponse_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &i_NetworkConnectorVersion, Type: smithy.ShapeTypeLong})
+var sUpdateNetworkConnectorResponse_OperatorRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OperatorRole", ID: &i_NetworkConnectorRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iNetworkConnectorConfiguration, Members: &mNetworkConnectorConfiguration, Type: smithy.ShapeTypeUnion})
+var sUpdateNetworkConnectorResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iNetworkConnectorState, Members: &mNetworkConnectorState, Type: smithy.ShapeTypeEnum})
+var sUpdateNetworkConnectorResponse_LastUpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateStatus", ID: &iNetworkConnectorLastUpdateStatus, Members: &mNetworkConnectorLastUpdateStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateNetworkConnectorResponse_LastUpdateStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdateStatusReason", ID: &i_NetworkConnectorLastUpdateStatusReason, Type: smithy.ShapeTypeString})
+var sUpdateNetworkConnectorResponse_LastModified = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModified", ID: &i_CoreTimestamp, Traits: &t8, Type: smithy.ShapeTypeTimestamp})
+
+var CreateNetworkConnector = &sCreateNetworkConnector
+
+var DeleteNetworkConnector = &sDeleteNetworkConnector
+
+var GetNetworkConnector = &sGetNetworkConnector
+
+var ListNetworkConnectors = &sListNetworkConnectors
+
+var ListNetworkConnectorVersions = &sListNetworkConnectorVersions
+
+var UpdateNetworkConnector = &sUpdateNetworkConnector
+
+var _LambdaCoreApiService = &s_LambdaCoreApiService
+
+var _AssociatedComputeResourceTypesList = &s_AssociatedComputeResourceTypesList
+var _AssociatedComputeResourceTypesList_member = &s_AssociatedComputeResourceTypesList_member
+
+var _ClientTokenString = &s_ClientTokenString
+
+var ComputeResourceType = &sComputeResourceType
+var ComputeResourceType_MicroVm = &sComputeResourceType_MicroVm
+var ComputeResourceType_WebFunction = &sComputeResourceType_WebFunction
+
+var _CoreTimestamp = &s_CoreTimestamp
+
+var InvalidParameterValueException = &sInvalidParameterValueException
+var InvalidParameterValueException_Type = &sInvalidParameterValueException_Type
+var InvalidParameterValueException_message = &sInvalidParameterValueException_message
+
+var _MaxHundredListItems = &s_MaxHundredListItems
+
+var _NetworkConnectorArn = &s_NetworkConnectorArn
+
+var NetworkConnectorConfiguration = &sNetworkConnectorConfiguration
+var NetworkConnectorConfiguration_VpcEgressConfiguration = &sNetworkConnectorConfiguration_VpcEgressConfiguration
+
+var _NetworkConnectorId = &s_NetworkConnectorId
+
+var _NetworkConnectorIdentifier = &s_NetworkConnectorIdentifier
+
+var NetworkConnectorLastUpdateStatus = &sNetworkConnectorLastUpdateStatus
+var NetworkConnectorLastUpdateStatus_Successful = &sNetworkConnectorLastUpdateStatus_Successful
+var NetworkConnectorLastUpdateStatus_Failed = &sNetworkConnectorLastUpdateStatus_Failed
+var NetworkConnectorLastUpdateStatus_InProgress = &sNetworkConnectorLastUpdateStatus_InProgress
+
+var _NetworkConnectorLastUpdateStatusReason = &s_NetworkConnectorLastUpdateStatusReason
+
+var NetworkConnectorLastUpdateStatusReasonCode = &sNetworkConnectorLastUpdateStatusReasonCode
+var NetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl = &sNetworkConnectorLastUpdateStatusReasonCode_DisallowedByVpcEncryptionControl
+var NetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded = &sNetworkConnectorLastUpdateStatusReasonCode_Ec2RequestLimitExceeded
+var NetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions = &sNetworkConnectorLastUpdateStatusReasonCode_InsufficientRolePermissions
+var NetworkConnectorLastUpdateStatusReasonCode_InternalError = &sNetworkConnectorLastUpdateStatusReasonCode_InternalError
+var NetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup = &sNetworkConnectorLastUpdateStatusReasonCode_InvalidSecurityGroup
+var NetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet = &sNetworkConnectorLastUpdateStatusReasonCode_InvalidSubnet
+var NetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded = &sNetworkConnectorLastUpdateStatusReasonCode_SecurityGroupsPerInterfaceLimitExceeded
+var NetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses = &sNetworkConnectorLastUpdateStatusReasonCode_SubnetOutOfIPAddresses
+
+var NetworkConnectorLimitExceededException = &sNetworkConnectorLimitExceededException
+var NetworkConnectorLimitExceededException_Type = &sNetworkConnectorLimitExceededException_Type
+var NetworkConnectorLimitExceededException_message = &sNetworkConnectorLimitExceededException_message
+
+var _NetworkConnectorName = &s_NetworkConnectorName
+
+var _NetworkConnectorRoleArn = &s_NetworkConnectorRoleArn
+
+var _NetworkConnectorSecurityGroupId = &s_NetworkConnectorSecurityGroupId
+
+var _NetworkConnectorSecurityGroupIds = &s_NetworkConnectorSecurityGroupIds
+var _NetworkConnectorSecurityGroupIds_member = &s_NetworkConnectorSecurityGroupIds_member
+
+var _NetworkConnectorsList = &s_NetworkConnectorsList
+var _NetworkConnectorsList_member = &s_NetworkConnectorsList_member
+
+var NetworkConnectorState = &sNetworkConnectorState
+var NetworkConnectorState_PENDING = &sNetworkConnectorState_PENDING
+var NetworkConnectorState_ACTIVE = &sNetworkConnectorState_ACTIVE
+var NetworkConnectorState_INACTIVE = &sNetworkConnectorState_INACTIVE
+var NetworkConnectorState_FAILED = &sNetworkConnectorState_FAILED
+var NetworkConnectorState_DELETING = &sNetworkConnectorState_DELETING
+var NetworkConnectorState_DELETE_FAILED = &sNetworkConnectorState_DELETE_FAILED
+
+var NetworkConnectorStateReasonCode = &sNetworkConnectorStateReasonCode
+var NetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl = &sNetworkConnectorStateReasonCode_DisallowedByVpcEncryptionControl
+var NetworkConnectorStateReasonCode_Ec2RequestLimitExceeded = &sNetworkConnectorStateReasonCode_Ec2RequestLimitExceeded
+var NetworkConnectorStateReasonCode_InsufficientRolePermissions = &sNetworkConnectorStateReasonCode_InsufficientRolePermissions
+var NetworkConnectorStateReasonCode_InternalError = &sNetworkConnectorStateReasonCode_InternalError
+var NetworkConnectorStateReasonCode_InvalidSecurityGroup = &sNetworkConnectorStateReasonCode_InvalidSecurityGroup
+var NetworkConnectorStateReasonCode_InvalidSubnet = &sNetworkConnectorStateReasonCode_InvalidSubnet
+var NetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded = &sNetworkConnectorStateReasonCode_SecurityGroupsPerInterfaceLimitExceeded
+var NetworkConnectorStateReasonCode_SubnetOutOfIPAddresses = &sNetworkConnectorStateReasonCode_SubnetOutOfIPAddresses
+
+var _NetworkConnectorSubnetId = &s_NetworkConnectorSubnetId
+
+var _NetworkConnectorSubnetIds = &s_NetworkConnectorSubnetIds
+var _NetworkConnectorSubnetIds_member = &s_NetworkConnectorSubnetIds_member
+
+var NetworkConnectorSummary = &sNetworkConnectorSummary
+var NetworkConnectorSummary_Arn = &sNetworkConnectorSummary_Arn
+var NetworkConnectorSummary_Name = &sNetworkConnectorSummary_Name
+var NetworkConnectorSummary_Id = &sNetworkConnectorSummary_Id
+var NetworkConnectorSummary_Type = &sNetworkConnectorSummary_Type
+var NetworkConnectorSummary_State = &sNetworkConnectorSummary_State
+var NetworkConnectorSummary_LastModified = &sNetworkConnectorSummary_LastModified
+var NetworkConnectorSummary_LatestVersionArn = &sNetworkConnectorSummary_LatestVersionArn
+var NetworkConnectorSummary_LatestVersion = &sNetworkConnectorSummary_LatestVersion
+
+var _NetworkConnectorTagKey = &s_NetworkConnectorTagKey
+
+var _NetworkConnectorTags = &s_NetworkConnectorTags
+var _NetworkConnectorTags_key = &s_NetworkConnectorTags_key
+var _NetworkConnectorTags_value = &s_NetworkConnectorTags_value
+
+var _NetworkConnectorTagValue = &s_NetworkConnectorTagValue
+
+var NetworkConnectorType = &sNetworkConnectorType
+var NetworkConnectorType_VPC_EGRESS = &sNetworkConnectorType_VPC_EGRESS
+
+var _NetworkConnectorVersion = &s_NetworkConnectorVersion
+
+var _NetworkConnectorVersionsList = &s_NetworkConnectorVersionsList
+var _NetworkConnectorVersionsList_member = &s_NetworkConnectorVersionsList_member
+
+var NetworkConnectorVersionSummary = &sNetworkConnectorVersionSummary
+var NetworkConnectorVersionSummary_Arn = &sNetworkConnectorVersionSummary_Arn
+var NetworkConnectorVersionSummary_VersionArn = &sNetworkConnectorVersionSummary_VersionArn
+var NetworkConnectorVersionSummary_Name = &sNetworkConnectorVersionSummary_Name
+var NetworkConnectorVersionSummary_Id = &sNetworkConnectorVersionSummary_Id
+var NetworkConnectorVersionSummary_Version = &sNetworkConnectorVersionSummary_Version
+var NetworkConnectorVersionSummary_State = &sNetworkConnectorVersionSummary_State
+var NetworkConnectorVersionSummary_StateReason = &sNetworkConnectorVersionSummary_StateReason
+var NetworkConnectorVersionSummary_StateReasonCode = &sNetworkConnectorVersionSummary_StateReasonCode
+var NetworkConnectorVersionSummary_LastModified = &sNetworkConnectorVersionSummary_LastModified
+
+var NetworkConnectorVpcEgressConfiguration = &sNetworkConnectorVpcEgressConfiguration
+var NetworkConnectorVpcEgressConfiguration_SubnetIds = &sNetworkConnectorVpcEgressConfiguration_SubnetIds
+var NetworkConnectorVpcEgressConfiguration_SecurityGroupIds = &sNetworkConnectorVpcEgressConfiguration_SecurityGroupIds
+var NetworkConnectorVpcEgressConfiguration_NetworkProtocol = &sNetworkConnectorVpcEgressConfiguration_NetworkProtocol
+var NetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes = &sNetworkConnectorVpcEgressConfiguration_AssociatedComputeResourceTypes
+
+var NetworkProtocol = &sNetworkProtocol
+var NetworkProtocol_IPv4 = &sNetworkProtocol_IPv4
+var NetworkProtocol_DualStack = &sNetworkProtocol_DualStack
+
+var ResourceConflictException = &sResourceConflictException
+var ResourceConflictException_Type = &sResourceConflictException_Type
+var ResourceConflictException_message = &sResourceConflictException_message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Type = &sResourceNotFoundException_Type
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ServiceException = &sServiceException
+var ServiceException_Type = &sServiceException_Type
+var ServiceException_Message = &sServiceException_Message
+
+var _String = &s_String
+
+var ThrottleReason = &sThrottleReason
+var ThrottleReason_ConcurrentInvocationLimitExceeded = &sThrottleReason_ConcurrentInvocationLimitExceeded
+var ThrottleReason_FunctionInvocationRateLimitExceeded = &sThrottleReason_FunctionInvocationRateLimitExceeded
+var ThrottleReason_ReservedFunctionConcurrentInvocationLimitExceeded = &sThrottleReason_ReservedFunctionConcurrentInvocationLimitExceeded
+var ThrottleReason_ReservedFunctionInvocationRateLimitExceeded = &sThrottleReason_ReservedFunctionInvocationRateLimitExceeded
+var ThrottleReason_CallerRateLimitExceeded = &sThrottleReason_CallerRateLimitExceeded
+var ThrottleReason_ConcurrentSnapshotCreateLimitExceeded = &sThrottleReason_ConcurrentSnapshotCreateLimitExceeded
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_retryAfterSeconds = &sTooManyRequestsException_retryAfterSeconds
+var TooManyRequestsException_Type = &sTooManyRequestsException_Type
+var TooManyRequestsException_message = &sTooManyRequestsException_message
+var TooManyRequestsException_Reason = &sTooManyRequestsException_Reason
+
+var CreateNetworkConnectorRequest = &sCreateNetworkConnectorRequest
+var CreateNetworkConnectorRequest_Name = &sCreateNetworkConnectorRequest_Name
+var CreateNetworkConnectorRequest_Configuration = &sCreateNetworkConnectorRequest_Configuration
+var CreateNetworkConnectorRequest_OperatorRole = &sCreateNetworkConnectorRequest_OperatorRole
+var CreateNetworkConnectorRequest_ClientToken = &sCreateNetworkConnectorRequest_ClientToken
+var CreateNetworkConnectorRequest_Tags = &sCreateNetworkConnectorRequest_Tags
+
+var CreateNetworkConnectorResponse = &sCreateNetworkConnectorResponse
+var CreateNetworkConnectorResponse_Arn = &sCreateNetworkConnectorResponse_Arn
+var CreateNetworkConnectorResponse_Name = &sCreateNetworkConnectorResponse_Name
+var CreateNetworkConnectorResponse_Id = &sCreateNetworkConnectorResponse_Id
+var CreateNetworkConnectorResponse_VersionArn = &sCreateNetworkConnectorResponse_VersionArn
+var CreateNetworkConnectorResponse_Version = &sCreateNetworkConnectorResponse_Version
+var CreateNetworkConnectorResponse_Configuration = &sCreateNetworkConnectorResponse_Configuration
+var CreateNetworkConnectorResponse_OperatorRole = &sCreateNetworkConnectorResponse_OperatorRole
+var CreateNetworkConnectorResponse_State = &sCreateNetworkConnectorResponse_State
+
+var DeleteNetworkConnectorRequest = &sDeleteNetworkConnectorRequest
+var DeleteNetworkConnectorRequest_Identifier = &sDeleteNetworkConnectorRequest_Identifier
+
+var DeleteNetworkConnectorResponse = &sDeleteNetworkConnectorResponse
+var DeleteNetworkConnectorResponse_Arn = &sDeleteNetworkConnectorResponse_Arn
+var DeleteNetworkConnectorResponse_Name = &sDeleteNetworkConnectorResponse_Name
+var DeleteNetworkConnectorResponse_Id = &sDeleteNetworkConnectorResponse_Id
+var DeleteNetworkConnectorResponse_VersionArn = &sDeleteNetworkConnectorResponse_VersionArn
+var DeleteNetworkConnectorResponse_Version = &sDeleteNetworkConnectorResponse_Version
+var DeleteNetworkConnectorResponse_Configuration = &sDeleteNetworkConnectorResponse_Configuration
+var DeleteNetworkConnectorResponse_OperatorRole = &sDeleteNetworkConnectorResponse_OperatorRole
+var DeleteNetworkConnectorResponse_State = &sDeleteNetworkConnectorResponse_State
+
+var GetNetworkConnectorRequest = &sGetNetworkConnectorRequest
+var GetNetworkConnectorRequest_Identifier = &sGetNetworkConnectorRequest_Identifier
+
+var GetNetworkConnectorResponse = &sGetNetworkConnectorResponse
+var GetNetworkConnectorResponse_Arn = &sGetNetworkConnectorResponse_Arn
+var GetNetworkConnectorResponse_Name = &sGetNetworkConnectorResponse_Name
+var GetNetworkConnectorResponse_Id = &sGetNetworkConnectorResponse_Id
+var GetNetworkConnectorResponse_VersionArn = &sGetNetworkConnectorResponse_VersionArn
+var GetNetworkConnectorResponse_Version = &sGetNetworkConnectorResponse_Version
+var GetNetworkConnectorResponse_LatestVersionArn = &sGetNetworkConnectorResponse_LatestVersionArn
+var GetNetworkConnectorResponse_LatestVersion = &sGetNetworkConnectorResponse_LatestVersion
+var GetNetworkConnectorResponse_Configuration = &sGetNetworkConnectorResponse_Configuration
+var GetNetworkConnectorResponse_OperatorRole = &sGetNetworkConnectorResponse_OperatorRole
+var GetNetworkConnectorResponse_State = &sGetNetworkConnectorResponse_State
+var GetNetworkConnectorResponse_StateReason = &sGetNetworkConnectorResponse_StateReason
+var GetNetworkConnectorResponse_StateReasonCode = &sGetNetworkConnectorResponse_StateReasonCode
+var GetNetworkConnectorResponse_LastUpdateStatus = &sGetNetworkConnectorResponse_LastUpdateStatus
+var GetNetworkConnectorResponse_LastUpdateStatusReason = &sGetNetworkConnectorResponse_LastUpdateStatusReason
+var GetNetworkConnectorResponse_LastUpdateStatusReasonCode = &sGetNetworkConnectorResponse_LastUpdateStatusReasonCode
+var GetNetworkConnectorResponse_LastModified = &sGetNetworkConnectorResponse_LastModified
+
+var ListNetworkConnectorsRequest = &sListNetworkConnectorsRequest
+var ListNetworkConnectorsRequest_State = &sListNetworkConnectorsRequest_State
+var ListNetworkConnectorsRequest_Marker = &sListNetworkConnectorsRequest_Marker
+var ListNetworkConnectorsRequest_MaxItems = &sListNetworkConnectorsRequest_MaxItems
+
+var ListNetworkConnectorsResponse = &sListNetworkConnectorsResponse
+var ListNetworkConnectorsResponse_NetworkConnectors = &sListNetworkConnectorsResponse_NetworkConnectors
+var ListNetworkConnectorsResponse_NextMarker = &sListNetworkConnectorsResponse_NextMarker
+
+var ListNetworkConnectorVersionsRequest = &sListNetworkConnectorVersionsRequest
+var ListNetworkConnectorVersionsRequest_Identifier = &sListNetworkConnectorVersionsRequest_Identifier
+var ListNetworkConnectorVersionsRequest_State = &sListNetworkConnectorVersionsRequest_State
+var ListNetworkConnectorVersionsRequest_Marker = &sListNetworkConnectorVersionsRequest_Marker
+var ListNetworkConnectorVersionsRequest_MaxItems = &sListNetworkConnectorVersionsRequest_MaxItems
+
+var ListNetworkConnectorVersionsResponse = &sListNetworkConnectorVersionsResponse
+var ListNetworkConnectorVersionsResponse_NetworkConnectorVersions = &sListNetworkConnectorVersionsResponse_NetworkConnectorVersions
+var ListNetworkConnectorVersionsResponse_NextMarker = &sListNetworkConnectorVersionsResponse_NextMarker
+
+var UpdateNetworkConnectorRequest = &sUpdateNetworkConnectorRequest
+var UpdateNetworkConnectorRequest_Identifier = &sUpdateNetworkConnectorRequest_Identifier
+var UpdateNetworkConnectorRequest_Configuration = &sUpdateNetworkConnectorRequest_Configuration
+var UpdateNetworkConnectorRequest_OperatorRole = &sUpdateNetworkConnectorRequest_OperatorRole
+var UpdateNetworkConnectorRequest_ClientToken = &sUpdateNetworkConnectorRequest_ClientToken
+
+var UpdateNetworkConnectorResponse = &sUpdateNetworkConnectorResponse
+var UpdateNetworkConnectorResponse_Arn = &sUpdateNetworkConnectorResponse_Arn
+var UpdateNetworkConnectorResponse_Name = &sUpdateNetworkConnectorResponse_Name
+var UpdateNetworkConnectorResponse_Id = &sUpdateNetworkConnectorResponse_Id
+var UpdateNetworkConnectorResponse_VersionArn = &sUpdateNetworkConnectorResponse_VersionArn
+var UpdateNetworkConnectorResponse_Version = &sUpdateNetworkConnectorResponse_Version
+var UpdateNetworkConnectorResponse_OperatorRole = &sUpdateNetworkConnectorResponse_OperatorRole
+var UpdateNetworkConnectorResponse_Configuration = &sUpdateNetworkConnectorResponse_Configuration
+var UpdateNetworkConnectorResponse_State = &sUpdateNetworkConnectorResponse_State
+var UpdateNetworkConnectorResponse_LastUpdateStatus = &sUpdateNetworkConnectorResponse_LastUpdateStatus
+var UpdateNetworkConnectorResponse_LastUpdateStatusReason = &sUpdateNetworkConnectorResponse_LastUpdateStatusReason
+var UpdateNetworkConnectorResponse_LastModified = &sUpdateNetworkConnectorResponse_LastModified
+
+var LambdaCoreApiService = &smithy.ServiceSchema{Schema: &s_LambdaCoreApiService, Version: "2026-04-30"}

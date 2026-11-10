@@ -4,7453 +4,5232 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateFileSystemAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AssociateFileSystemAliases",
-}, smithy.ShapeTypeOperation, 0)
-
-var CancelDataRepositoryTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CancelDataRepositoryTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var CopyBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CopyBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CopySnapshotAndUpdateVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CopySnapshotAndUpdateVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAndAttachS3AccessPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateAndAttachS3AccessPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateDataRepositoryAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDataRepositoryTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateDataRepositoryTask",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateFileCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystem",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateFileSystemFromBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemFromBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateStorageVirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateStorageVirtualMachine",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateVolumeFromBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateVolumeFromBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBackup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteBackup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteDataRepositoryAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteFileCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystem",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteStorageVirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteStorageVirtualMachine",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBackups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeBackups",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDataRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeDataRepositoryAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDataRepositoryTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeDataRepositoryTasks",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFileCaches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileCaches",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFileSystemAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileSystemAliases",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeFileSystems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileSystems",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeS3AccessPointAttachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeS3AccessPointAttachments",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSharedVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeSharedVpcConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSnapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeSnapshots",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeStorageVirtualMachines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeStorageVirtualMachines",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeVolumes",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetachAndDeleteS3AccessPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DetachAndDeleteS3AccessPoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateFileSystemAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DisassociateFileSystemAliases",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var ReleaseFileSystemNfsV3Locks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReleaseFileSystemNfsV3Locks",
-}, smithy.ShapeTypeOperation, 0)
-
-var RestoreVolumeFromSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RestoreVolumeFromSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartMisconfiguredStateRecovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StartMisconfiguredStateRecovery",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateDataRepositoryAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateFileCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileCache",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystem",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSharedVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSharedVpcConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSnapshot",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateStorageVirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateStorageVirtualMachine",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateVolume",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSSimbaAPIService_v20180301 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AWSSimbaAPIService_v20180301",
-}, smithy.ShapeTypeService, 0)
-
-var AWSSimbaAPIService_v20180301 = smithy.NewServiceSchema(_AWSSimbaAPIService_v20180301, "2018-03-01")
-
-var AccessPointAlreadyOwnedByYou = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AccessPointAlreadyOwnedByYou",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
-
-	&smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var AccessPointAlreadyOwnedByYou_ErrorCode *smithy.Schema
-
-var AccessPointAlreadyOwnedByYou_Message *smithy.Schema
-
-var _AccessPointPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AccessPointPolicy",
-}, smithy.ShapeTypeString, 0)
-
-var ActiveDirectoryBackupAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ActiveDirectoryBackupAttributes",
-}, smithy.ShapeTypeStructure, 3)
-var ActiveDirectoryBackupAttributes_DomainName *smithy.Schema
-
-var ActiveDirectoryBackupAttributes_ActiveDirectoryId *smithy.Schema
-
-var ActiveDirectoryBackupAttributes_ResourceARN *smithy.Schema
-
-var ActiveDirectoryError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ActiveDirectoryError",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"})
-var ActiveDirectoryError_ActiveDirectoryId *smithy.Schema
-
-var ActiveDirectoryError_Type *smithy.Schema
-
-var ActiveDirectoryError_Message *smithy.Schema
-
-var ActiveDirectoryErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ActiveDirectoryErrorType",
-}, smithy.ShapeTypeEnum, 5)
-var ActiveDirectoryErrorType_DOMAIN_NOT_FOUND *smithy.Schema
-
-var ActiveDirectoryErrorType_INCOMPATIBLE_DOMAIN_MODE *smithy.Schema
-
-var ActiveDirectoryErrorType_WRONG_VPC *smithy.Schema
-
-var ActiveDirectoryErrorType_INVALID_NETWORK_TYPE *smithy.Schema
-
-var ActiveDirectoryErrorType_INVALID_DOMAIN_STAGE *smithy.Schema
-
-var _ActiveDirectoryFullyQualifiedName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ActiveDirectoryFullyQualifiedName",
-}, smithy.ShapeTypeString, 0)
-
-var AdministrativeAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AdministrativeAction",
-}, smithy.ShapeTypeStructure, 11)
-var AdministrativeAction_AdministrativeActionType *smithy.Schema
-
-var AdministrativeAction_ProgressPercent *smithy.Schema
-
-var AdministrativeAction_RequestTime *smithy.Schema
-
-var AdministrativeAction_Status *smithy.Schema
-
-var AdministrativeAction_TargetFileSystemValues *smithy.Schema
-
-var AdministrativeAction_FailureDetails *smithy.Schema
-
-var AdministrativeAction_TargetVolumeValues *smithy.Schema
-
-var AdministrativeAction_TargetSnapshotValues *smithy.Schema
-
-var AdministrativeAction_TotalTransferBytes *smithy.Schema
-
-var AdministrativeAction_RemainingTransferBytes *smithy.Schema
-
-var AdministrativeAction_Message *smithy.Schema
-
-var AdministrativeActionFailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AdministrativeActionFailureDetails",
-}, smithy.ShapeTypeStructure, 1)
-var AdministrativeActionFailureDetails_Message *smithy.Schema
-
-var _AdministrativeActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AdministrativeActions",
-}, smithy.ShapeTypeList, 1)
-var _AdministrativeActions_member *smithy.Schema
-
-var AdministrativeActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AdministrativeActionType",
-}, smithy.ShapeTypeEnum, 15)
-var AdministrativeActionType_FILE_SYSTEM_UPDATE *smithy.Schema
-
-var AdministrativeActionType_STORAGE_OPTIMIZATION *smithy.Schema
-
-var AdministrativeActionType_FILE_SYSTEM_ALIAS_ASSOCIATION *smithy.Schema
-
-var AdministrativeActionType_FILE_SYSTEM_ALIAS_DISASSOCIATION *smithy.Schema
-
-var AdministrativeActionType_VOLUME_UPDATE *smithy.Schema
-
-var AdministrativeActionType_SNAPSHOT_UPDATE *smithy.Schema
-
-var AdministrativeActionType_RELEASE_NFS_V3_LOCKS *smithy.Schema
-
-var AdministrativeActionType_VOLUME_RESTORE *smithy.Schema
-
-var AdministrativeActionType_THROUGHPUT_OPTIMIZATION *smithy.Schema
-
-var AdministrativeActionType_IOPS_OPTIMIZATION *smithy.Schema
-
-var AdministrativeActionType_STORAGE_TYPE_OPTIMIZATION *smithy.Schema
-
-var AdministrativeActionType_MISCONFIGURED_STATE_RECOVERY *smithy.Schema
-
-var AdministrativeActionType_VOLUME_UPDATE_WITH_SNAPSHOT *smithy.Schema
-
-var AdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT *smithy.Schema
-
-var AdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP *smithy.Schema
-
-var _AdminPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AdminPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _Aggregate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Aggregate",
-}, smithy.ShapeTypeString, 0)
-
-var AggregateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AggregateConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var AggregateConfiguration_Aggregates *smithy.Schema
-
-var AggregateConfiguration_TotalConstituents *smithy.Schema
-
-var _AggregateListMultiplier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AggregateListMultiplier",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Aggregates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Aggregates",
-}, smithy.ShapeTypeList, 1)
-var _Aggregates_member *smithy.Schema
-
-var Alias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Alias",
-}, smithy.ShapeTypeStructure, 2)
-var Alias_Name *smithy.Schema
-
-var Alias_Lifecycle *smithy.Schema
-
-var _Aliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Aliases",
-}, smithy.ShapeTypeList, 1)
-var _Aliases_member *smithy.Schema
-
-var AliasLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AliasLifecycle",
-}, smithy.ShapeTypeEnum, 5)
-var AliasLifecycle_AVAILABLE *smithy.Schema
-
-var AliasLifecycle_CREATING *smithy.Schema
-
-var AliasLifecycle_DELETING *smithy.Schema
-
-var AliasLifecycle_CREATE_FAILED *smithy.Schema
-
-var AliasLifecycle_DELETE_FAILED *smithy.Schema
-
-var _AlternateDNSName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AlternateDNSName",
-}, smithy.ShapeTypeString, 0)
-
-var _AlternateDNSNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AlternateDNSNames",
-}, smithy.ShapeTypeList, 1)
-var _AlternateDNSNames_member *smithy.Schema
-
-var _ArchivePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ArchivePath",
-}, smithy.ShapeTypeString, 0)
-
-var AutocommitPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AutocommitPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var AutocommitPeriod_Type *smithy.Schema
-
-var AutocommitPeriod_Value *smithy.Schema
-
-var AutocommitPeriodType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AutocommitPeriodType",
-}, smithy.ShapeTypeEnum, 6)
-var AutocommitPeriodType_MINUTES *smithy.Schema
-
-var AutocommitPeriodType_HOURS *smithy.Schema
-
-var AutocommitPeriodType_DAYS *smithy.Schema
-
-var AutocommitPeriodType_MONTHS *smithy.Schema
-
-var AutocommitPeriodType_YEARS *smithy.Schema
-
-var AutocommitPeriodType_NONE *smithy.Schema
-
-var _AutocommitPeriodValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AutocommitPeriodValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var AutoExportPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AutoExportPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var AutoExportPolicy_Events *smithy.Schema
-
-var AutoImportPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AutoImportPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var AutoImportPolicy_Events *smithy.Schema
-
-var AutoImportPolicyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AutoImportPolicyType",
-}, smithy.ShapeTypeEnum, 4)
-var AutoImportPolicyType_NONE *smithy.Schema
-
-var AutoImportPolicyType_NEW *smithy.Schema
-
-var AutoImportPolicyType_NEW_CHANGED *smithy.Schema
-
-var AutoImportPolicyType_NEW_CHANGED_DELETED *smithy.Schema
-
-var _AutomaticBackupRetentionDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AutomaticBackupRetentionDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AWSAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AWSAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var Backup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Backup",
-}, smithy.ShapeTypeStructure, 17)
-var Backup_BackupId *smithy.Schema
-
-var Backup_Lifecycle *smithy.Schema
-
-var Backup_FailureDetails *smithy.Schema
-
-var Backup_Type *smithy.Schema
-
-var Backup_ProgressPercent *smithy.Schema
-
-var Backup_CreationTime *smithy.Schema
-
-var Backup_KmsKeyId *smithy.Schema
-
-var Backup_ResourceARN *smithy.Schema
-
-var Backup_Tags *smithy.Schema
-
-var Backup_FileSystem *smithy.Schema
-
-var Backup_DirectoryInformation *smithy.Schema
-
-var Backup_OwnerId *smithy.Schema
-
-var Backup_SourceBackupId *smithy.Schema
-
-var Backup_SourceBackupRegion *smithy.Schema
-
-var Backup_ResourceType *smithy.Schema
-
-var Backup_Volume *smithy.Schema
-
-var Backup_SizeInBytes *smithy.Schema
-
-var BackupBeingCopied = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupBeingCopied",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var BackupBeingCopied_Message *smithy.Schema
-
-var BackupBeingCopied_BackupId *smithy.Schema
-
-var BackupFailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupFailureDetails",
-}, smithy.ShapeTypeStructure, 1)
-var BackupFailureDetails_Message *smithy.Schema
-
-var _BackupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupId",
-}, smithy.ShapeTypeString, 0)
-
-var _BackupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupIds",
-}, smithy.ShapeTypeList, 1)
-var _BackupIds_member *smithy.Schema
-
-var BackupInProgress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupInProgress",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var BackupInProgress_Message *smithy.Schema
-
-var BackupLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupLifecycle",
-}, smithy.ShapeTypeEnum, 7)
-var BackupLifecycle_AVAILABLE *smithy.Schema
-
-var BackupLifecycle_CREATING *smithy.Schema
-
-var BackupLifecycle_TRANSFERRING *smithy.Schema
-
-var BackupLifecycle_DELETED *smithy.Schema
-
-var BackupLifecycle_FAILED *smithy.Schema
-
-var BackupLifecycle_PENDING *smithy.Schema
-
-var BackupLifecycle_COPYING *smithy.Schema
-
-var BackupNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var BackupNotFound_Message *smithy.Schema
-
-var BackupRestoring = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupRestoring",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var BackupRestoring_Message *smithy.Schema
-
-var BackupRestoring_FileSystemId *smithy.Schema
-
-var _Backups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Backups",
-}, smithy.ShapeTypeList, 1)
-var _Backups_member *smithy.Schema
-
-var BackupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BackupType",
-}, smithy.ShapeTypeEnum, 3)
-var BackupType_AUTOMATIC *smithy.Schema
-
-var BackupType_USER_INITIATED *smithy.Schema
-
-var BackupType_AWS_BACKUP *smithy.Schema
-
-var BadRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BadRequest",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var BadRequest_Message *smithy.Schema
-
-var _BatchImportMetaDataOnCreate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "BatchImportMetaDataOnCreate",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _CapacityToRelease = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CapacityToRelease",
-}, smithy.ShapeTypeLong, 0)
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var CompletionReport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CompletionReport",
-}, smithy.ShapeTypeStructure, 4)
-var CompletionReport_Enabled *smithy.Schema
-
-var CompletionReport_Path *smithy.Schema
-
-var CompletionReport_Format *smithy.Schema
-
-var CompletionReport_Scope *smithy.Schema
-
-var _CoolingPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CoolingPeriod",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CopyTagsToDataRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CopyTagsToDataRepositoryAssociations",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CreateAggregateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateAggregateConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAggregateConfiguration_Aggregates *smithy.Schema
-
-var CreateAggregateConfiguration_ConstituentsPerAggregate *smithy.Schema
-
-var CreateAndAttachS3AccessPointOntapConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateAndAttachS3AccessPointOntapConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAndAttachS3AccessPointOntapConfiguration_VolumeId *smithy.Schema
-
-var CreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity *smithy.Schema
-
-var CreateAndAttachS3AccessPointOpenZFSConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateAndAttachS3AccessPointOpenZFSConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId *smithy.Schema
-
-var CreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity *smithy.Schema
-
-var CreateAndAttachS3AccessPointS3Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateAndAttachS3AccessPointS3Configuration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateAndAttachS3AccessPointS3Configuration_VpcConfiguration *smithy.Schema
-
-var CreateAndAttachS3AccessPointS3Configuration_Policy *smithy.Schema
-
-var _CreateFileCacheDataRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileCacheDataRepositoryAssociations",
-}, smithy.ShapeTypeList, 1)
-var _CreateFileCacheDataRepositoryAssociations_member *smithy.Schema
-
-var CreateFileCacheLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileCacheLustreConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var CreateFileCacheLustreConfiguration_PerUnitStorageThroughput *smithy.Schema
-
-var CreateFileCacheLustreConfiguration_DeploymentType *smithy.Schema
-
-var CreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var CreateFileCacheLustreConfiguration_MetadataConfiguration *smithy.Schema
-
-var CreateFileSystemLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemLustreConfiguration",
-}, smithy.ShapeTypeStructure, 18)
-var CreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_ImportPath *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_ExportPath *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_ImportedFileChunkSize *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_DeploymentType *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_AutoImportPolicy *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_PerUnitStorageThroughput *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_CopyTagsToBackups *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_DriveCacheType *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_DataCompressionType *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_EfaEnabled *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_LogConfiguration *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_RootSquashConfiguration *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_MetadataConfiguration *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_ThroughputCapacity *smithy.Schema
-
-var CreateFileSystemLustreConfiguration_DataReadCacheConfiguration *smithy.Schema
-
-var CreateFileSystemLustreMetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemLustreMetadataConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateFileSystemLustreMetadataConfiguration_Iops *smithy.Schema
-
-var CreateFileSystemLustreMetadataConfiguration_Mode *smithy.Schema
-
-var CreateFileSystemOntapConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemOntapConfiguration",
-}, smithy.ShapeTypeStructure, 13)
-var CreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_DeploymentType *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_EndpointIpAddressRange *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_FsxAdminPassword *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_PreferredSubnetId *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_RouteTableIds *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_ThroughputCapacity *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_HAPairs *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair *smithy.Schema
-
-var CreateFileSystemOntapConfiguration_EndpointIpv6AddressRange *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemOpenZFSConfiguration",
-}, smithy.ShapeTypeStructure, 14)
-var CreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_CopyTagsToBackups *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_DeploymentType *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_ThroughputCapacity *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_PreferredSubnetId *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_RouteTableIds *smithy.Schema
-
-var CreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemWindowsConfiguration",
-}, smithy.ShapeTypeStructure, 13)
-var CreateFileSystemWindowsConfiguration_ActiveDirectoryId *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_DeploymentType *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_PreferredSubnetId *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_ThroughputCapacity *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_CopyTagsToBackups *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_Aliases *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_AuditLogConfiguration *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var CreateFileSystemWindowsConfiguration_FsrmConfiguration *smithy.Schema
-
-var CreateOntapVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateOntapVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 13)
-var CreateOntapVolumeConfiguration_JunctionPath *smithy.Schema
-
-var CreateOntapVolumeConfiguration_SecurityStyle *smithy.Schema
-
-var CreateOntapVolumeConfiguration_SizeInMegabytes *smithy.Schema
-
-var CreateOntapVolumeConfiguration_StorageEfficiencyEnabled *smithy.Schema
-
-var CreateOntapVolumeConfiguration_StorageVirtualMachineId *smithy.Schema
-
-var CreateOntapVolumeConfiguration_TieringPolicy *smithy.Schema
-
-var CreateOntapVolumeConfiguration_OntapVolumeType *smithy.Schema
-
-var CreateOntapVolumeConfiguration_SnapshotPolicy *smithy.Schema
-
-var CreateOntapVolumeConfiguration_CopyTagsToBackups *smithy.Schema
-
-var CreateOntapVolumeConfiguration_SnaplockConfiguration *smithy.Schema
-
-var CreateOntapVolumeConfiguration_VolumeStyle *smithy.Schema
-
-var CreateOntapVolumeConfiguration_AggregateConfiguration *smithy.Schema
-
-var CreateOntapVolumeConfiguration_SizeInBytes *smithy.Schema
-
-var CreateOpenZFSOriginSnapshotConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateOpenZFSOriginSnapshotConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateOpenZFSOriginSnapshotConfiguration_SnapshotARN *smithy.Schema
-
-var CreateOpenZFSOriginSnapshotConfiguration_CopyStrategy *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateOpenZFSVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 10)
-var CreateOpenZFSVolumeConfiguration_ParentVolumeId *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_RecordSizeKiB *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_DataCompressionType *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_OriginSnapshot *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_ReadOnly *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_NfsExports *smithy.Schema
-
-var CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas *smithy.Schema
-
-var CreateSnaplockConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateSnaplockConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var CreateSnaplockConfiguration_AuditLogVolume *smithy.Schema
-
-var CreateSnaplockConfiguration_AutocommitPeriod *smithy.Schema
-
-var CreateSnaplockConfiguration_PrivilegedDelete *smithy.Schema
-
-var CreateSnaplockConfiguration_RetentionPeriod *smithy.Schema
-
-var CreateSnaplockConfiguration_SnaplockType *smithy.Schema
-
-var CreateSnaplockConfiguration_VolumeAppendModeEnabled *smithy.Schema
-
-var CreateSvmActiveDirectoryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateSvmActiveDirectoryConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSvmActiveDirectoryConfiguration_NetBiosName *smithy.Schema
-
-var CreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration *smithy.Schema
-
-var _CreationTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreationTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _CustomerSecretsManagerARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CustomerSecretsManagerARN",
-}, smithy.ShapeTypeString, 0)
-
-var _DailyTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DailyTime",
-}, smithy.ShapeTypeString, 0)
-
-var DataCompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataCompressionType",
-}, smithy.ShapeTypeEnum, 2)
-var DataCompressionType_NONE *smithy.Schema
-
-var DataCompressionType_LZ4 *smithy.Schema
-
-var DataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryAssociation",
-}, smithy.ShapeTypeStructure, 16)
-var DataRepositoryAssociation_AssociationId *smithy.Schema
-
-var DataRepositoryAssociation_ResourceARN *smithy.Schema
-
-var DataRepositoryAssociation_FileSystemId *smithy.Schema
-
-var DataRepositoryAssociation_Lifecycle *smithy.Schema
-
-var DataRepositoryAssociation_FailureDetails *smithy.Schema
-
-var DataRepositoryAssociation_FileSystemPath *smithy.Schema
-
-var DataRepositoryAssociation_DataRepositoryPath *smithy.Schema
-
-var DataRepositoryAssociation_BatchImportMetaDataOnCreate *smithy.Schema
-
-var DataRepositoryAssociation_ImportedFileChunkSize *smithy.Schema
-
-var DataRepositoryAssociation_S3 *smithy.Schema
-
-var DataRepositoryAssociation_Tags *smithy.Schema
-
-var DataRepositoryAssociation_CreationTime *smithy.Schema
-
-var DataRepositoryAssociation_FileCacheId *smithy.Schema
-
-var DataRepositoryAssociation_FileCachePath *smithy.Schema
-
-var DataRepositoryAssociation_DataRepositorySubdirectories *smithy.Schema
-
-var DataRepositoryAssociation_NFS *smithy.Schema
-
-var _DataRepositoryAssociationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryAssociationId",
-}, smithy.ShapeTypeString, 0)
-
-var _DataRepositoryAssociationIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryAssociationIds",
-}, smithy.ShapeTypeList, 1)
-var _DataRepositoryAssociationIds_member *smithy.Schema
-
-var DataRepositoryAssociationNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryAssociationNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DataRepositoryAssociationNotFound_Message *smithy.Schema
-
-var _DataRepositoryAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryAssociations",
-}, smithy.ShapeTypeList, 1)
-var _DataRepositoryAssociations_member *smithy.Schema
-
-var DataRepositoryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var DataRepositoryConfiguration_Lifecycle *smithy.Schema
-
-var DataRepositoryConfiguration_ImportPath *smithy.Schema
-
-var DataRepositoryConfiguration_ExportPath *smithy.Schema
-
-var DataRepositoryConfiguration_ImportedFileChunkSize *smithy.Schema
-
-var DataRepositoryConfiguration_AutoImportPolicy *smithy.Schema
-
-var DataRepositoryConfiguration_FailureDetails *smithy.Schema
-
-var DataRepositoryFailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryFailureDetails",
-}, smithy.ShapeTypeStructure, 1)
-var DataRepositoryFailureDetails_Message *smithy.Schema
-
-var DataRepositoryLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryLifecycle",
-}, smithy.ShapeTypeEnum, 6)
-var DataRepositoryLifecycle_CREATING *smithy.Schema
-
-var DataRepositoryLifecycle_AVAILABLE *smithy.Schema
-
-var DataRepositoryLifecycle_MISCONFIGURED *smithy.Schema
-
-var DataRepositoryLifecycle_UPDATING *smithy.Schema
-
-var DataRepositoryLifecycle_DELETING *smithy.Schema
-
-var DataRepositoryLifecycle_FAILED *smithy.Schema
-
-var DataRepositoryTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTask",
-}, smithy.ShapeTypeStructure, 16)
-var DataRepositoryTask_TaskId *smithy.Schema
-
-var DataRepositoryTask_Lifecycle *smithy.Schema
-
-var DataRepositoryTask_Type *smithy.Schema
-
-var DataRepositoryTask_CreationTime *smithy.Schema
-
-var DataRepositoryTask_StartTime *smithy.Schema
-
-var DataRepositoryTask_EndTime *smithy.Schema
-
-var DataRepositoryTask_ResourceARN *smithy.Schema
-
-var DataRepositoryTask_Tags *smithy.Schema
-
-var DataRepositoryTask_FileSystemId *smithy.Schema
-
-var DataRepositoryTask_Paths *smithy.Schema
-
-var DataRepositoryTask_FailureDetails *smithy.Schema
-
-var DataRepositoryTask_Status *smithy.Schema
-
-var DataRepositoryTask_Report *smithy.Schema
-
-var DataRepositoryTask_CapacityToRelease *smithy.Schema
-
-var DataRepositoryTask_FileCacheId *smithy.Schema
-
-var DataRepositoryTask_ReleaseConfiguration *smithy.Schema
-
-var DataRepositoryTaskEnded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskEnded",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DataRepositoryTaskEnded_Message *smithy.Schema
-
-var DataRepositoryTaskExecuting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskExecuting",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DataRepositoryTaskExecuting_Message *smithy.Schema
-
-var DataRepositoryTaskFailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskFailureDetails",
-}, smithy.ShapeTypeStructure, 1)
-var DataRepositoryTaskFailureDetails_Message *smithy.Schema
-
-var DataRepositoryTaskFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DataRepositoryTaskFilter_Name *smithy.Schema
-
-var DataRepositoryTaskFilter_Values *smithy.Schema
-
-var DataRepositoryTaskFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskFilterName",
-}, smithy.ShapeTypeEnum, 4)
-var DataRepositoryTaskFilterName_FILE_SYSTEM_ID *smithy.Schema
-
-var DataRepositoryTaskFilterName_TASK_LIFECYCLE *smithy.Schema
-
-var DataRepositoryTaskFilterName_DATA_REPO_ASSOCIATION_ID *smithy.Schema
-
-var DataRepositoryTaskFilterName_FILE_CACHE_ID *smithy.Schema
-
-var _DataRepositoryTaskFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskFilters",
-}, smithy.ShapeTypeList, 1)
-var _DataRepositoryTaskFilters_member *smithy.Schema
-
-var _DataRepositoryTaskFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _DataRepositoryTaskFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _DataRepositoryTaskFilterValues_member *smithy.Schema
-
-var DataRepositoryTaskLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskLifecycle",
-}, smithy.ShapeTypeEnum, 6)
-var DataRepositoryTaskLifecycle_PENDING *smithy.Schema
-
-var DataRepositoryTaskLifecycle_EXECUTING *smithy.Schema
-
-var DataRepositoryTaskLifecycle_FAILED *smithy.Schema
-
-var DataRepositoryTaskLifecycle_SUCCEEDED *smithy.Schema
-
-var DataRepositoryTaskLifecycle_CANCELED *smithy.Schema
-
-var DataRepositoryTaskLifecycle_CANCELING *smithy.Schema
-
-var DataRepositoryTaskNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DataRepositoryTaskNotFound_Message *smithy.Schema
-
-var _DataRepositoryTaskPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskPath",
-}, smithy.ShapeTypeString, 0)
-
-var _DataRepositoryTaskPaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskPaths",
-}, smithy.ShapeTypeList, 1)
-var _DataRepositoryTaskPaths_member *smithy.Schema
-
-var _DataRepositoryTasks = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTasks",
-}, smithy.ShapeTypeList, 1)
-var _DataRepositoryTasks_member *smithy.Schema
-
-var DataRepositoryTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskStatus",
-}, smithy.ShapeTypeStructure, 5)
-var DataRepositoryTaskStatus_TotalCount *smithy.Schema
-
-var DataRepositoryTaskStatus_SucceededCount *smithy.Schema
-
-var DataRepositoryTaskStatus_FailedCount *smithy.Schema
-
-var DataRepositoryTaskStatus_LastUpdatedTime *smithy.Schema
-
-var DataRepositoryTaskStatus_ReleasedCapacity *smithy.Schema
-
-var DataRepositoryTaskType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DataRepositoryTaskType",
-}, smithy.ShapeTypeEnum, 4)
-var DataRepositoryTaskType_EXPORT *smithy.Schema
-
-var DataRepositoryTaskType_IMPORT *smithy.Schema
-
-var DataRepositoryTaskType_EVICTION *smithy.Schema
-
-var DataRepositoryTaskType_AUTO_TRIGGERED_EVICTION *smithy.Schema
-
-var _DeleteDataInFileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteDataInFileSystem",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DeleteFileSystemLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemLustreConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileSystemLustreConfiguration_SkipFinalBackup *smithy.Schema
-
-var DeleteFileSystemLustreConfiguration_FinalBackupTags *smithy.Schema
-
-var DeleteFileSystemLustreResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemLustreResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileSystemLustreResponse_FinalBackupId *smithy.Schema
-
-var DeleteFileSystemLustreResponse_FinalBackupTags *smithy.Schema
-
-var DeleteFileSystemOpenZFSConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemOpenZFSConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteFileSystemOpenZFSConfiguration_SkipFinalBackup *smithy.Schema
-
-var DeleteFileSystemOpenZFSConfiguration_FinalBackupTags *smithy.Schema
-
-var DeleteFileSystemOpenZFSConfiguration_Options *smithy.Schema
-
-var DeleteFileSystemOpenZFSOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemOpenZFSOption",
-}, smithy.ShapeTypeEnum, 1)
-var DeleteFileSystemOpenZFSOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS *smithy.Schema
-
-var _DeleteFileSystemOpenZFSOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemOpenZFSOptions",
-}, smithy.ShapeTypeList, 1)
-var _DeleteFileSystemOpenZFSOptions_member *smithy.Schema
-
-var DeleteFileSystemOpenZFSResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemOpenZFSResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileSystemOpenZFSResponse_FinalBackupId *smithy.Schema
-
-var DeleteFileSystemOpenZFSResponse_FinalBackupTags *smithy.Schema
-
-var DeleteFileSystemWindowsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemWindowsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileSystemWindowsConfiguration_SkipFinalBackup *smithy.Schema
-
-var DeleteFileSystemWindowsConfiguration_FinalBackupTags *smithy.Schema
-
-var DeleteFileSystemWindowsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemWindowsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileSystemWindowsResponse_FinalBackupId *smithy.Schema
-
-var DeleteFileSystemWindowsResponse_FinalBackupTags *smithy.Schema
-
-var DeleteOpenZFSVolumeOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteOpenZFSVolumeOption",
-}, smithy.ShapeTypeEnum, 1)
-var DeleteOpenZFSVolumeOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS *smithy.Schema
-
-var _DeleteOpenZFSVolumeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteOpenZFSVolumeOptions",
-}, smithy.ShapeTypeList, 1)
-var _DeleteOpenZFSVolumeOptions_member *smithy.Schema
-
-var DeleteVolumeOntapConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteVolumeOntapConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteVolumeOntapConfiguration_SkipFinalBackup *smithy.Schema
-
-var DeleteVolumeOntapConfiguration_FinalBackupTags *smithy.Schema
-
-var DeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention *smithy.Schema
-
-var DeleteVolumeOntapResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteVolumeOntapResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteVolumeOntapResponse_FinalBackupId *smithy.Schema
-
-var DeleteVolumeOntapResponse_FinalBackupTags *smithy.Schema
-
-var DeleteVolumeOpenZFSConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteVolumeOpenZFSConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVolumeOpenZFSConfiguration_Options *smithy.Schema
-
-var _DirectoryId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DirectoryId",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectoryPassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DirectoryPassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _DirectoryUserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DirectoryUserName",
-}, smithy.ShapeTypeString, 0)
-
-var DiskIopsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DiskIopsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var DiskIopsConfiguration_Mode *smithy.Schema
-
-var DiskIopsConfiguration_Iops *smithy.Schema
-
-var DiskIopsConfigurationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DiskIopsConfigurationMode",
-}, smithy.ShapeTypeEnum, 2)
-var DiskIopsConfigurationMode_AUTOMATIC *smithy.Schema
-
-var DiskIopsConfigurationMode_USER_PROVISIONED *smithy.Schema
-
-var _DnsIps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DnsIps",
-}, smithy.ShapeTypeList, 1)
-var _DnsIps_member *smithy.Schema
-
-var _DNSName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DNSName",
-}, smithy.ShapeTypeString, 0)
-
-var DriveCacheType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DriveCacheType",
-}, smithy.ShapeTypeEnum, 2)
-var DriveCacheType_NONE *smithy.Schema
-
-var DriveCacheType_READ *smithy.Schema
-
-var DurationSinceLastAccess = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DurationSinceLastAccess",
-}, smithy.ShapeTypeStructure, 2)
-var DurationSinceLastAccess_Unit *smithy.Schema
-
-var DurationSinceLastAccess_Value *smithy.Schema
-
-var _EndTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "EndTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "EventType",
-}, smithy.ShapeTypeEnum, 3)
-var EventType_NEW *smithy.Schema
-
-var EventType_CHANGED *smithy.Schema
-
-var EventType_DELETED *smithy.Schema
-
-var _EventTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "EventTypes",
-}, smithy.ShapeTypeList, 1)
-var _EventTypes_member *smithy.Schema
-
-var _FailedCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FailedCount",
-}, smithy.ShapeTypeLong, 0)
-
-var FileCache = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCache",
-}, smithy.ShapeTypeStructure, 16)
-var FileCache_OwnerId *smithy.Schema
-
-var FileCache_CreationTime *smithy.Schema
-
-var FileCache_FileCacheId *smithy.Schema
-
-var FileCache_FileCacheType *smithy.Schema
-
-var FileCache_FileCacheTypeVersion *smithy.Schema
-
-var FileCache_Lifecycle *smithy.Schema
-
-var FileCache_FailureDetails *smithy.Schema
-
-var FileCache_StorageCapacity *smithy.Schema
-
-var FileCache_VpcId *smithy.Schema
-
-var FileCache_SubnetIds *smithy.Schema
-
-var FileCache_NetworkInterfaceIds *smithy.Schema
-
-var FileCache_DNSName *smithy.Schema
-
-var FileCache_KmsKeyId *smithy.Schema
-
-var FileCache_ResourceARN *smithy.Schema
-
-var FileCache_LustreConfiguration *smithy.Schema
-
-var FileCache_DataRepositoryAssociationIds *smithy.Schema
-
-var FileCacheCreating = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheCreating",
-}, smithy.ShapeTypeStructure, 18)
-var FileCacheCreating_OwnerId *smithy.Schema
-
-var FileCacheCreating_CreationTime *smithy.Schema
-
-var FileCacheCreating_FileCacheId *smithy.Schema
-
-var FileCacheCreating_FileCacheType *smithy.Schema
-
-var FileCacheCreating_FileCacheTypeVersion *smithy.Schema
-
-var FileCacheCreating_Lifecycle *smithy.Schema
-
-var FileCacheCreating_FailureDetails *smithy.Schema
-
-var FileCacheCreating_StorageCapacity *smithy.Schema
-
-var FileCacheCreating_VpcId *smithy.Schema
-
-var FileCacheCreating_SubnetIds *smithy.Schema
-
-var FileCacheCreating_NetworkInterfaceIds *smithy.Schema
-
-var FileCacheCreating_DNSName *smithy.Schema
-
-var FileCacheCreating_KmsKeyId *smithy.Schema
-
-var FileCacheCreating_ResourceARN *smithy.Schema
-
-var FileCacheCreating_Tags *smithy.Schema
-
-var FileCacheCreating_CopyTagsToDataRepositoryAssociations *smithy.Schema
-
-var FileCacheCreating_LustreConfiguration *smithy.Schema
-
-var FileCacheCreating_DataRepositoryAssociationIds *smithy.Schema
-
-var FileCacheDataRepositoryAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheDataRepositoryAssociation",
-}, smithy.ShapeTypeStructure, 4)
-var FileCacheDataRepositoryAssociation_FileCachePath *smithy.Schema
-
-var FileCacheDataRepositoryAssociation_DataRepositoryPath *smithy.Schema
-
-var FileCacheDataRepositoryAssociation_DataRepositorySubdirectories *smithy.Schema
-
-var FileCacheDataRepositoryAssociation_NFS *smithy.Schema
-
-var FileCacheFailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheFailureDetails",
-}, smithy.ShapeTypeStructure, 1)
-var FileCacheFailureDetails_Message *smithy.Schema
-
-var _FileCacheId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheId",
-}, smithy.ShapeTypeString, 0)
-
-var _FileCacheIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheIds",
-}, smithy.ShapeTypeList, 1)
-var _FileCacheIds_member *smithy.Schema
-
-var FileCacheLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheLifecycle",
-}, smithy.ShapeTypeEnum, 5)
-var FileCacheLifecycle_AVAILABLE *smithy.Schema
-
-var FileCacheLifecycle_CREATING *smithy.Schema
-
-var FileCacheLifecycle_DELETING *smithy.Schema
-
-var FileCacheLifecycle_UPDATING *smithy.Schema
-
-var FileCacheLifecycle_FAILED *smithy.Schema
-
-var FileCacheLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheLustreConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var FileCacheLustreConfiguration_PerUnitStorageThroughput *smithy.Schema
-
-var FileCacheLustreConfiguration_DeploymentType *smithy.Schema
-
-var FileCacheLustreConfiguration_MountName *smithy.Schema
-
-var FileCacheLustreConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var FileCacheLustreConfiguration_MetadataConfiguration *smithy.Schema
-
-var FileCacheLustreConfiguration_LogConfiguration *smithy.Schema
-
-var FileCacheLustreDeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheLustreDeploymentType",
-}, smithy.ShapeTypeEnum, 1)
-var FileCacheLustreDeploymentType_CACHE_1 *smithy.Schema
-
-var FileCacheLustreMetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheLustreMetadataConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var FileCacheLustreMetadataConfiguration_StorageCapacity *smithy.Schema
-
-var FileCacheNFSConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheNFSConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var FileCacheNFSConfiguration_Version *smithy.Schema
-
-var FileCacheNFSConfiguration_DnsIps *smithy.Schema
-
-var FileCacheNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var FileCacheNotFound_Message *smithy.Schema
-
-var _FileCaches = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCaches",
-}, smithy.ShapeTypeList, 1)
-var _FileCaches_member *smithy.Schema
-
-var FileCacheType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileCacheType",
-}, smithy.ShapeTypeEnum, 1)
-var FileCacheType_LUSTRE *smithy.Schema
-
-var FileSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystem",
-}, smithy.ShapeTypeStructure, 22)
-var FileSystem_OwnerId *smithy.Schema
-
-var FileSystem_CreationTime *smithy.Schema
-
-var FileSystem_FileSystemId *smithy.Schema
-
-var FileSystem_FileSystemType *smithy.Schema
-
-var FileSystem_Lifecycle *smithy.Schema
-
-var FileSystem_FailureDetails *smithy.Schema
-
-var FileSystem_StorageCapacity *smithy.Schema
-
-var FileSystem_StorageType *smithy.Schema
-
-var FileSystem_VpcId *smithy.Schema
-
-var FileSystem_SubnetIds *smithy.Schema
-
-var FileSystem_NetworkInterfaceIds *smithy.Schema
-
-var FileSystem_DNSName *smithy.Schema
-
-var FileSystem_KmsKeyId *smithy.Schema
-
-var FileSystem_ResourceARN *smithy.Schema
-
-var FileSystem_Tags *smithy.Schema
-
-var FileSystem_WindowsConfiguration *smithy.Schema
-
-var FileSystem_LustreConfiguration *smithy.Schema
-
-var FileSystem_AdministrativeActions *smithy.Schema
-
-var FileSystem_OntapConfiguration *smithy.Schema
-
-var FileSystem_FileSystemTypeVersion *smithy.Schema
-
-var FileSystem_OpenZFSConfiguration *smithy.Schema
-
-var FileSystem_NetworkType *smithy.Schema
-
-var _FileSystemAdministratorsGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemAdministratorsGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var FileSystemEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemEndpoint",
-}, smithy.ShapeTypeStructure, 3)
-var FileSystemEndpoint_DNSName *smithy.Schema
-
-var FileSystemEndpoint_IpAddresses *smithy.Schema
-
-var FileSystemEndpoint_Ipv6Addresses *smithy.Schema
-
-var FileSystemEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemEndpoints",
-}, smithy.ShapeTypeStructure, 2)
-var FileSystemEndpoints_Intercluster *smithy.Schema
-
-var FileSystemEndpoints_Management *smithy.Schema
-
-var FileSystemFailureDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemFailureDetails",
-}, smithy.ShapeTypeStructure, 1)
-var FileSystemFailureDetails_Message *smithy.Schema
-
-var _FileSystemGID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemGID",
-}, smithy.ShapeTypeLong, 0)
-
-var _FileSystemId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemId",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystemIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemIds",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemIds_member *smithy.Schema
-
-var FileSystemLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemLifecycle",
-}, smithy.ShapeTypeEnum, 7)
-var FileSystemLifecycle_AVAILABLE *smithy.Schema
-
-var FileSystemLifecycle_CREATING *smithy.Schema
-
-var FileSystemLifecycle_FAILED *smithy.Schema
-
-var FileSystemLifecycle_DELETING *smithy.Schema
-
-var FileSystemLifecycle_MISCONFIGURED *smithy.Schema
-
-var FileSystemLifecycle_UPDATING *smithy.Schema
-
-var FileSystemLifecycle_MISCONFIGURED_UNAVAILABLE *smithy.Schema
-
-var FileSystemLustreMetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemLustreMetadataConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var FileSystemLustreMetadataConfiguration_Iops *smithy.Schema
-
-var FileSystemLustreMetadataConfiguration_Mode *smithy.Schema
-
-var FileSystemMaintenanceOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemMaintenanceOperation",
-}, smithy.ShapeTypeEnum, 2)
-var FileSystemMaintenanceOperation_PATCHING *smithy.Schema
-
-var FileSystemMaintenanceOperation_BACKING_UP *smithy.Schema
-
-var _FileSystemMaintenanceOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemMaintenanceOperations",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemMaintenanceOperations_member *smithy.Schema
-
-var FileSystemNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var FileSystemNotFound_Message *smithy.Schema
-
-var _FileSystems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystems",
-}, smithy.ShapeTypeList, 1)
-var _FileSystems_member *smithy.Schema
-
-var _FileSystemSecondaryGIDs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemSecondaryGIDs",
-}, smithy.ShapeTypeList, 1)
-var _FileSystemSecondaryGIDs_member *smithy.Schema
-
-var FileSystemType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemType",
-}, smithy.ShapeTypeEnum, 4)
-var FileSystemType_WINDOWS *smithy.Schema
-
-var FileSystemType_LUSTRE *smithy.Schema
-
-var FileSystemType_ONTAP *smithy.Schema
-
-var FileSystemType_OPENZFS *smithy.Schema
-
-var _FileSystemTypeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemTypeVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _FileSystemUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FileSystemUID",
-}, smithy.ShapeTypeLong, 0)
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Name *smithy.Schema
-
-var Filter_Values *smithy.Schema
-
-var FilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FilterName",
-}, smithy.ShapeTypeEnum, 7)
-var FilterName_FILE_SYSTEM_ID *smithy.Schema
-
-var FilterName_BACKUP_TYPE *smithy.Schema
-
-var FilterName_FILE_SYSTEM_TYPE *smithy.Schema
-
-var FilterName_VOLUME_ID *smithy.Schema
-
-var FilterName_DATA_REPOSITORY_TYPE *smithy.Schema
-
-var FilterName_FILE_CACHE_ID *smithy.Schema
-
-var FilterName_FILE_CACHE_TYPE *smithy.Schema
-
-var _Filters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Filters",
-}, smithy.ShapeTypeList, 1)
-var _Filters_member *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var _Flag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Flag",
-}, smithy.ShapeTypeBoolean, 0)
-
-var FlexCacheEndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "FlexCacheEndpointType",
-}, smithy.ShapeTypeEnum, 3)
-var FlexCacheEndpointType_NONE *smithy.Schema
-
-var FlexCacheEndpointType_ORIGIN *smithy.Schema
-
-var FlexCacheEndpointType_CACHE *smithy.Schema
-
-var _GeneralARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "GeneralARN",
-}, smithy.ShapeTypeString, 0)
-
-var _HAPairs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "HAPairs",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IncludeShared = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IncludeShared",
-}, smithy.ShapeTypeBoolean, 0)
-
-var IncompatibleParameterError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IncompatibleParameterError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var IncompatibleParameterError_Parameter *smithy.Schema
-
-var IncompatibleParameterError_Message *smithy.Schema
-
-var IncompatibleRegionForMultiAZ = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IncompatibleRegionForMultiAZ",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var IncompatibleRegionForMultiAZ_Message *smithy.Schema
-
-var InputOntapVolumeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InputOntapVolumeType",
-}, smithy.ShapeTypeEnum, 2)
-var InputOntapVolumeType_RW *smithy.Schema
-
-var InputOntapVolumeType_DP *smithy.Schema
-
-var _IntegerNoMax = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IntegerNoMax",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerNoMaxFromNegativeOne = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IntegerNoMaxFromNegativeOne",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IntegerRecordSizeKiB = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IntegerRecordSizeKiB",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerError_Message *smithy.Schema
-
-var InvalidAccessPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidAccessPoint",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
-
-	&smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidAccessPoint_ErrorCode *smithy.Schema
-
-var InvalidAccessPoint_Message *smithy.Schema
-
-var InvalidDataRepositoryType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidDataRepositoryType",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidDataRepositoryType_Message *smithy.Schema
-
-var InvalidDestinationKmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidDestinationKmsKey",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidDestinationKmsKey_Message *smithy.Schema
-
-var InvalidExportPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidExportPath",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidExportPath_Message *smithy.Schema
-
-var InvalidImportPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidImportPath",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidImportPath_Message *smithy.Schema
-
-var InvalidNetworkSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidNetworkSettings",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"})
-var InvalidNetworkSettings_Message *smithy.Schema
-
-var InvalidNetworkSettings_InvalidSubnetId *smithy.Schema
-
-var InvalidNetworkSettings_InvalidSecurityGroupId *smithy.Schema
-
-var InvalidNetworkSettings_InvalidRouteTableId *smithy.Schema
-
-var InvalidPerUnitStorageThroughput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidPerUnitStorageThroughput",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidPerUnitStorageThroughput_Message *smithy.Schema
-
-var InvalidRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidRegion",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidRegion_Message *smithy.Schema
-
-var InvalidRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidRequest",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
-
-	&smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequest_ErrorCode *smithy.Schema
-
-var InvalidRequest_Message *smithy.Schema
-
-var InvalidSourceKmsKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "InvalidSourceKmsKey",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidSourceKmsKey_Message *smithy.Schema
-
-var _Iops = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Iops",
-}, smithy.ShapeTypeLong, 0)
-
-var _IpAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IpAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _IpAddressRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "IpAddressRange",
-}, smithy.ShapeTypeString, 0)
-
-var _Ipv6AddressRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Ipv6AddressRange",
-}, smithy.ShapeTypeString, 0)
-
-var _JunctionPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "JunctionPath",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "KmsKeyId",
-}, smithy.ShapeTypeString, 0)
-
-var _LastUpdatedTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LastUpdatedTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var LifecycleTransitionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LifecycleTransitionReason",
-}, smithy.ShapeTypeStructure, 1)
-var LifecycleTransitionReason_Message *smithy.Schema
-
-var _LimitedMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LimitedMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var LustreAccessAuditLogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreAccessAuditLogLevel",
-}, smithy.ShapeTypeEnum, 4)
-var LustreAccessAuditLogLevel_DISABLED *smithy.Schema
-
-var LustreAccessAuditLogLevel_WARN_ONLY *smithy.Schema
-
-var LustreAccessAuditLogLevel_ERROR_ONLY *smithy.Schema
-
-var LustreAccessAuditLogLevel_WARN_ERROR *smithy.Schema
-
-var LustreDeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreDeploymentType",
-}, smithy.ShapeTypeEnum, 4)
-var LustreDeploymentType_SCRATCH_1 *smithy.Schema
-
-var LustreDeploymentType_SCRATCH_2 *smithy.Schema
-
-var LustreDeploymentType_PERSISTENT_1 *smithy.Schema
-
-var LustreDeploymentType_PERSISTENT_2 *smithy.Schema
-
-var LustreFileSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreFileSystemConfiguration",
-}, smithy.ShapeTypeStructure, 16)
-var LustreFileSystemConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var LustreFileSystemConfiguration_DataRepositoryConfiguration *smithy.Schema
-
-var LustreFileSystemConfiguration_DeploymentType *smithy.Schema
-
-var LustreFileSystemConfiguration_PerUnitStorageThroughput *smithy.Schema
-
-var LustreFileSystemConfiguration_MountName *smithy.Schema
-
-var LustreFileSystemConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var LustreFileSystemConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var LustreFileSystemConfiguration_CopyTagsToBackups *smithy.Schema
-
-var LustreFileSystemConfiguration_DriveCacheType *smithy.Schema
-
-var LustreFileSystemConfiguration_DataCompressionType *smithy.Schema
-
-var LustreFileSystemConfiguration_LogConfiguration *smithy.Schema
-
-var LustreFileSystemConfiguration_RootSquashConfiguration *smithy.Schema
-
-var LustreFileSystemConfiguration_MetadataConfiguration *smithy.Schema
-
-var LustreFileSystemConfiguration_EfaEnabled *smithy.Schema
-
-var LustreFileSystemConfiguration_ThroughputCapacity *smithy.Schema
-
-var LustreFileSystemConfiguration_DataReadCacheConfiguration *smithy.Schema
-
-var _LustreFileSystemMountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreFileSystemMountName",
-}, smithy.ShapeTypeString, 0)
-
-var LustreLogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreLogConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LustreLogConfiguration_Level *smithy.Schema
-
-var LustreLogConfiguration_Destination *smithy.Schema
-
-var LustreLogCreateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreLogCreateConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LustreLogCreateConfiguration_Level *smithy.Schema
-
-var LustreLogCreateConfiguration_Destination *smithy.Schema
-
-var _LustreNoSquashNid = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreNoSquashNid",
-}, smithy.ShapeTypeString, 0)
-
-var _LustreNoSquashNids = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreNoSquashNids",
-}, smithy.ShapeTypeList, 1)
-var _LustreNoSquashNids_member *smithy.Schema
-
-var LustreReadCacheConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreReadCacheConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LustreReadCacheConfiguration_SizingMode *smithy.Schema
-
-var LustreReadCacheConfiguration_SizeGiB *smithy.Schema
-
-var LustreReadCacheSizingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreReadCacheSizingMode",
-}, smithy.ShapeTypeEnum, 3)
-var LustreReadCacheSizingMode_NO_CACHE *smithy.Schema
-
-var LustreReadCacheSizingMode_USER_PROVISIONED *smithy.Schema
-
-var LustreReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY *smithy.Schema
-
-var _LustreRootSquash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreRootSquash",
-}, smithy.ShapeTypeString, 0)
-
-var LustreRootSquashConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "LustreRootSquashConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LustreRootSquashConfiguration_RootSquash *smithy.Schema
-
-var LustreRootSquashConfiguration_NoSquashNids *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Megabytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Megabytes",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MegabytesPerSecond = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MegabytesPerSecond",
-}, smithy.ShapeTypeInteger, 0)
-
-var MetadataConfigurationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MetadataConfigurationMode",
-}, smithy.ShapeTypeEnum, 2)
-var MetadataConfigurationMode_AUTOMATIC *smithy.Schema
-
-var MetadataConfigurationMode_USER_PROVISIONED *smithy.Schema
-
-var _MetadataIops = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MetadataIops",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetadataStorageCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MetadataStorageCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var MissingFileCacheConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MissingFileCacheConfiguration",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var MissingFileCacheConfiguration_Message *smithy.Schema
-
-var MissingFileSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MissingFileSystemConfiguration",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var MissingFileSystemConfiguration_Message *smithy.Schema
-
-var MissingVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "MissingVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var MissingVolumeConfiguration_Message *smithy.Schema
-
-var _Namespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Namespace",
-}, smithy.ShapeTypeString, 0)
-
-var _NetBiosAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NetBiosAlias",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkInterfaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NetworkInterfaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _NetworkInterfaceIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NetworkInterfaceIds",
-}, smithy.ShapeTypeList, 1)
-var _NetworkInterfaceIds_member *smithy.Schema
-
-var NetworkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NetworkType",
-}, smithy.ShapeTypeEnum, 2)
-var NetworkType_IPV4 *smithy.Schema
-
-var NetworkType_DUAL *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NFSDataRepositoryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NFSDataRepositoryConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var NFSDataRepositoryConfiguration_Version *smithy.Schema
-
-var NFSDataRepositoryConfiguration_DnsIps *smithy.Schema
-
-var NFSDataRepositoryConfiguration_AutoExportPolicy *smithy.Schema
-
-var NfsVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NfsVersion",
-}, smithy.ShapeTypeEnum, 1)
-var NfsVersion_NFS3 *smithy.Schema
-
-var NotServiceResourceError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "NotServiceResourceError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var NotServiceResourceError_ResourceARN *smithy.Schema
-
-var NotServiceResourceError_Message *smithy.Schema
-
-var OntapDeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapDeploymentType",
-}, smithy.ShapeTypeEnum, 4)
-var OntapDeploymentType_MULTI_AZ_1 *smithy.Schema
-
-var OntapDeploymentType_SINGLE_AZ_1 *smithy.Schema
-
-var OntapDeploymentType_SINGLE_AZ_2 *smithy.Schema
-
-var OntapDeploymentType_MULTI_AZ_2 *smithy.Schema
-
-var _OntapEndpointIpAddresses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapEndpointIpAddresses",
-}, smithy.ShapeTypeList, 1)
-var _OntapEndpointIpAddresses_member *smithy.Schema
-
-var OntapFileSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapFileSystemConfiguration",
-}, smithy.ShapeTypeStructure, 14)
-var OntapFileSystemConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var OntapFileSystemConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var OntapFileSystemConfiguration_DeploymentType *smithy.Schema
-
-var OntapFileSystemConfiguration_EndpointIpAddressRange *smithy.Schema
-
-var OntapFileSystemConfiguration_Endpoints *smithy.Schema
-
-var OntapFileSystemConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var OntapFileSystemConfiguration_PreferredSubnetId *smithy.Schema
-
-var OntapFileSystemConfiguration_RouteTableIds *smithy.Schema
-
-var OntapFileSystemConfiguration_ThroughputCapacity *smithy.Schema
-
-var OntapFileSystemConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var OntapFileSystemConfiguration_FsxAdminPassword *smithy.Schema
-
-var OntapFileSystemConfiguration_HAPairs *smithy.Schema
-
-var OntapFileSystemConfiguration_ThroughputCapacityPerHAPair *smithy.Schema
-
-var OntapFileSystemConfiguration_EndpointIpv6AddressRange *smithy.Schema
-
-var OntapFileSystemIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapFileSystemIdentity",
-}, smithy.ShapeTypeStructure, 3)
-var OntapFileSystemIdentity_Type *smithy.Schema
-
-var OntapFileSystemIdentity_UnixUser *smithy.Schema
-
-var OntapFileSystemIdentity_WindowsUser *smithy.Schema
-
-var _OntapFileSystemUserName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapFileSystemUserName",
-}, smithy.ShapeTypeString, 0)
-
-var OntapFileSystemUserType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapFileSystemUserType",
-}, smithy.ShapeTypeEnum, 2)
-var OntapFileSystemUserType_UNIX *smithy.Schema
-
-var OntapFileSystemUserType_WINDOWS *smithy.Schema
-
-var OntapUnixFileSystemUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapUnixFileSystemUser",
-}, smithy.ShapeTypeStructure, 1)
-var OntapUnixFileSystemUser_Name *smithy.Schema
-
-var OntapVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 16)
-var OntapVolumeConfiguration_FlexCacheEndpointType *smithy.Schema
-
-var OntapVolumeConfiguration_JunctionPath *smithy.Schema
-
-var OntapVolumeConfiguration_SecurityStyle *smithy.Schema
-
-var OntapVolumeConfiguration_SizeInMegabytes *smithy.Schema
-
-var OntapVolumeConfiguration_StorageEfficiencyEnabled *smithy.Schema
-
-var OntapVolumeConfiguration_StorageVirtualMachineId *smithy.Schema
-
-var OntapVolumeConfiguration_StorageVirtualMachineRoot *smithy.Schema
-
-var OntapVolumeConfiguration_TieringPolicy *smithy.Schema
-
-var OntapVolumeConfiguration_UUID *smithy.Schema
-
-var OntapVolumeConfiguration_OntapVolumeType *smithy.Schema
-
-var OntapVolumeConfiguration_SnapshotPolicy *smithy.Schema
-
-var OntapVolumeConfiguration_CopyTagsToBackups *smithy.Schema
-
-var OntapVolumeConfiguration_SnaplockConfiguration *smithy.Schema
-
-var OntapVolumeConfiguration_VolumeStyle *smithy.Schema
-
-var OntapVolumeConfiguration_AggregateConfiguration *smithy.Schema
-
-var OntapVolumeConfiguration_SizeInBytes *smithy.Schema
-
-var OntapVolumeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapVolumeType",
-}, smithy.ShapeTypeEnum, 3)
-var OntapVolumeType_RW *smithy.Schema
-
-var OntapVolumeType_DP *smithy.Schema
-
-var OntapVolumeType_LS *smithy.Schema
-
-var OntapWindowsFileSystemUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OntapWindowsFileSystemUser",
-}, smithy.ShapeTypeStructure, 1)
-var OntapWindowsFileSystemUser_Name *smithy.Schema
-
-var OpenZFSClientConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSClientConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OpenZFSClientConfiguration_Clients *smithy.Schema
-
-var OpenZFSClientConfiguration_Options *smithy.Schema
-
-var _OpenZFSClientConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSClientConfigurations",
-}, smithy.ShapeTypeList, 1)
-var _OpenZFSClientConfigurations_member *smithy.Schema
-
-var _OpenZFSClients = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSClients",
-}, smithy.ShapeTypeString, 0)
-
-var OpenZFSCopyStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSCopyStrategy",
-}, smithy.ShapeTypeEnum, 3)
-var OpenZFSCopyStrategy_CLONE *smithy.Schema
-
-var OpenZFSCopyStrategy_FULL_COPY *smithy.Schema
-
-var OpenZFSCopyStrategy_INCREMENTAL_COPY *smithy.Schema
-
-var OpenZFSCreateRootVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSCreateRootVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var OpenZFSCreateRootVolumeConfiguration_RecordSizeKiB *smithy.Schema
-
-var OpenZFSCreateRootVolumeConfiguration_DataCompressionType *smithy.Schema
-
-var OpenZFSCreateRootVolumeConfiguration_NfsExports *smithy.Schema
-
-var OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas *smithy.Schema
-
-var OpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots *smithy.Schema
-
-var OpenZFSCreateRootVolumeConfiguration_ReadOnly *smithy.Schema
-
-var OpenZFSDataCompressionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSDataCompressionType",
-}, smithy.ShapeTypeEnum, 3)
-var OpenZFSDataCompressionType_NONE *smithy.Schema
-
-var OpenZFSDataCompressionType_ZSTD *smithy.Schema
-
-var OpenZFSDataCompressionType_LZ4 *smithy.Schema
-
-var OpenZFSDeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSDeploymentType",
-}, smithy.ShapeTypeEnum, 5)
-var OpenZFSDeploymentType_SINGLE_AZ_1 *smithy.Schema
-
-var OpenZFSDeploymentType_SINGLE_AZ_2 *smithy.Schema
-
-var OpenZFSDeploymentType_SINGLE_AZ_HA_1 *smithy.Schema
-
-var OpenZFSDeploymentType_SINGLE_AZ_HA_2 *smithy.Schema
-
-var OpenZFSDeploymentType_MULTI_AZ_1 *smithy.Schema
-
-var OpenZFSFileSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSFileSystemConfiguration",
-}, smithy.ShapeTypeStructure, 16)
-var OpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_CopyTagsToBackups *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_CopyTagsToVolumes *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_DeploymentType *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_ThroughputCapacity *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_RootVolumeId *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_PreferredSubnetId *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_EndpointIpAddressRange *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_EndpointIpv6AddressRange *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_RouteTableIds *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_EndpointIpAddress *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_EndpointIpv6Address *smithy.Schema
-
-var OpenZFSFileSystemConfiguration_ReadCacheConfiguration *smithy.Schema
-
-var OpenZFSFileSystemIdentity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSFileSystemIdentity",
-}, smithy.ShapeTypeStructure, 2)
-var OpenZFSFileSystemIdentity_Type *smithy.Schema
-
-var OpenZFSFileSystemIdentity_PosixUser *smithy.Schema
-
-var OpenZFSFileSystemUserType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSFileSystemUserType",
-}, smithy.ShapeTypeEnum, 1)
-var OpenZFSFileSystemUserType_POSIX *smithy.Schema
-
-var OpenZFSNfsExport = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSNfsExport",
-}, smithy.ShapeTypeStructure, 1)
-var OpenZFSNfsExport_ClientConfigurations *smithy.Schema
-
-var _OpenZFSNfsExportOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSNfsExportOption",
-}, smithy.ShapeTypeString, 0)
-
-var _OpenZFSNfsExportOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSNfsExportOptions",
-}, smithy.ShapeTypeList, 1)
-var _OpenZFSNfsExportOptions_member *smithy.Schema
-
-var _OpenZFSNfsExports = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSNfsExports",
-}, smithy.ShapeTypeList, 1)
-var _OpenZFSNfsExports_member *smithy.Schema
-
-var OpenZFSOriginSnapshotConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSOriginSnapshotConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OpenZFSOriginSnapshotConfiguration_SnapshotARN *smithy.Schema
-
-var OpenZFSOriginSnapshotConfiguration_CopyStrategy *smithy.Schema
-
-var OpenZFSPosixFileSystemUser = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSPosixFileSystemUser",
-}, smithy.ShapeTypeStructure, 3)
-var OpenZFSPosixFileSystemUser_Uid *smithy.Schema
-
-var OpenZFSPosixFileSystemUser_Gid *smithy.Schema
-
-var OpenZFSPosixFileSystemUser_SecondaryGids *smithy.Schema
-
-var OpenZFSQuotaType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSQuotaType",
-}, smithy.ShapeTypeEnum, 2)
-var OpenZFSQuotaType_USER *smithy.Schema
-
-var OpenZFSQuotaType_GROUP *smithy.Schema
-
-var OpenZFSReadCacheConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSReadCacheConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OpenZFSReadCacheConfiguration_SizingMode *smithy.Schema
-
-var OpenZFSReadCacheConfiguration_SizeGiB *smithy.Schema
-
-var OpenZFSReadCacheSizingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSReadCacheSizingMode",
-}, smithy.ShapeTypeEnum, 3)
-var OpenZFSReadCacheSizingMode_NO_CACHE *smithy.Schema
-
-var OpenZFSReadCacheSizingMode_USER_PROVISIONED *smithy.Schema
-
-var OpenZFSReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY *smithy.Schema
-
-var _OpenZFSUserAndGroupQuotas = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSUserAndGroupQuotas",
-}, smithy.ShapeTypeList, 1)
-var _OpenZFSUserAndGroupQuotas_member *smithy.Schema
-
-var OpenZFSUserOrGroupQuota = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSUserOrGroupQuota",
-}, smithy.ShapeTypeStructure, 3)
-var OpenZFSUserOrGroupQuota_Type *smithy.Schema
-
-var OpenZFSUserOrGroupQuota_Id *smithy.Schema
-
-var OpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB *smithy.Schema
-
-var OpenZFSVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OpenZFSVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 18)
-var OpenZFSVolumeConfiguration_ParentVolumeId *smithy.Schema
-
-var OpenZFSVolumeConfiguration_VolumePath *smithy.Schema
-
-var OpenZFSVolumeConfiguration_StorageCapacityReservationGiB *smithy.Schema
-
-var OpenZFSVolumeConfiguration_StorageCapacityQuotaGiB *smithy.Schema
-
-var OpenZFSVolumeConfiguration_RecordSizeKiB *smithy.Schema
-
-var OpenZFSVolumeConfiguration_DataCompressionType *smithy.Schema
-
-var OpenZFSVolumeConfiguration_CopyTagsToSnapshots *smithy.Schema
-
-var OpenZFSVolumeConfiguration_OriginSnapshot *smithy.Schema
-
-var OpenZFSVolumeConfiguration_ReadOnly *smithy.Schema
-
-var OpenZFSVolumeConfiguration_NfsExports *smithy.Schema
-
-var OpenZFSVolumeConfiguration_UserAndGroupQuotas *smithy.Schema
-
-var OpenZFSVolumeConfiguration_RestoreToSnapshot *smithy.Schema
-
-var OpenZFSVolumeConfiguration_DeleteIntermediateSnaphots *smithy.Schema
-
-var OpenZFSVolumeConfiguration_DeleteClonedVolumes *smithy.Schema
-
-var OpenZFSVolumeConfiguration_DeleteIntermediateData *smithy.Schema
-
-var OpenZFSVolumeConfiguration_SourceSnapshotARN *smithy.Schema
-
-var OpenZFSVolumeConfiguration_DestinationSnapshot *smithy.Schema
-
-var OpenZFSVolumeConfiguration_CopyStrategy *smithy.Schema
-
-var _OrganizationalUnitDistinguishedName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "OrganizationalUnitDistinguishedName",
-}, smithy.ShapeTypeString, 0)
-
-var _Parameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Parameter",
-}, smithy.ShapeTypeString, 0)
-
-var _PerUnitStorageThroughput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "PerUnitStorageThroughput",
-}, smithy.ShapeTypeInteger, 0)
-
-var PrivilegedDelete = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "PrivilegedDelete",
-}, smithy.ShapeTypeEnum, 3)
-var PrivilegedDelete_DISABLED *smithy.Schema
-
-var PrivilegedDelete_ENABLED *smithy.Schema
-
-var PrivilegedDelete_PERMANENTLY_DISABLED *smithy.Schema
-
-var _ProgressPercent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ProgressPercent",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ReadOnly = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReadOnly",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var ReleaseConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReleaseConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ReleaseConfiguration_DurationSinceLastAccess *smithy.Schema
-
-var _ReleasedCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReleasedCapacity",
-}, smithy.ShapeTypeLong, 0)
-
-var _RemainingTransferBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RemainingTransferBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var ReportFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReportFormat",
-}, smithy.ShapeTypeEnum, 1)
-var ReportFormat_REPORT_CSV_20191124 *smithy.Schema
-
-var ReportScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReportScope",
-}, smithy.ShapeTypeEnum, 1)
-var ReportScope_FAILED_FILES_ONLY *smithy.Schema
-
-var _RepositoryDnsIps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RepositoryDnsIps",
-}, smithy.ShapeTypeList, 1)
-var _RepositoryDnsIps_member *smithy.Schema
-
-var _RequestTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RequestTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceDoesNotSupportTagging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ResourceDoesNotSupportTagging",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ResourceDoesNotSupportTagging_ResourceARN *smithy.Schema
-
-var ResourceDoesNotSupportTagging_Message *smithy.Schema
-
-var ResourceNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ResourceNotFound",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ResourceNotFound_ResourceARN *smithy.Schema
-
-var ResourceNotFound_Message *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 2)
-var ResourceType_FILE_SYSTEM *smithy.Schema
-
-var ResourceType_VOLUME *smithy.Schema
-
-var RestoreOpenZFSVolumeOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RestoreOpenZFSVolumeOption",
-}, smithy.ShapeTypeEnum, 2)
-var RestoreOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS *smithy.Schema
-
-var RestoreOpenZFSVolumeOption_DELETE_CLONED_VOLUMES *smithy.Schema
-
-var _RestoreOpenZFSVolumeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RestoreOpenZFSVolumeOptions",
-}, smithy.ShapeTypeList, 1)
-var _RestoreOpenZFSVolumeOptions_member *smithy.Schema
-
-var RetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RetentionPeriod",
-}, smithy.ShapeTypeStructure, 2)
-var RetentionPeriod_Type *smithy.Schema
-
-var RetentionPeriod_Value *smithy.Schema
-
-var RetentionPeriodType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RetentionPeriodType",
-}, smithy.ShapeTypeEnum, 8)
-var RetentionPeriodType_SECONDS *smithy.Schema
-
-var RetentionPeriodType_MINUTES *smithy.Schema
-
-var RetentionPeriodType_HOURS *smithy.Schema
-
-var RetentionPeriodType_DAYS *smithy.Schema
-
-var RetentionPeriodType_MONTHS *smithy.Schema
-
-var RetentionPeriodType_YEARS *smithy.Schema
-
-var RetentionPeriodType_INFINITE *smithy.Schema
-
-var RetentionPeriodType_UNSPECIFIED *smithy.Schema
-
-var _RetentionPeriodValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RetentionPeriodValue",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RouteTableId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RouteTableId",
-}, smithy.ShapeTypeString, 0)
-
-var _RouteTableIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RouteTableIds",
-}, smithy.ShapeTypeList, 1)
-var _RouteTableIds_member *smithy.Schema
-
-var S3AccessPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPoint",
-}, smithy.ShapeTypeStructure, 3)
-var S3AccessPoint_ResourceARN *smithy.Schema
-
-var S3AccessPoint_Alias *smithy.Schema
-
-var S3AccessPoint_VpcConfiguration *smithy.Schema
-
-var _S3AccessPointAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAlias",
-}, smithy.ShapeTypeString, 0)
-
-var S3AccessPointAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachment",
-}, smithy.ShapeTypeStructure, 8)
-var S3AccessPointAttachment_Lifecycle *smithy.Schema
-
-var S3AccessPointAttachment_LifecycleTransitionReason *smithy.Schema
-
-var S3AccessPointAttachment_CreationTime *smithy.Schema
-
-var S3AccessPointAttachment_Name *smithy.Schema
-
-var S3AccessPointAttachment_Type *smithy.Schema
-
-var S3AccessPointAttachment_OpenZFSConfiguration *smithy.Schema
-
-var S3AccessPointAttachment_OntapConfiguration *smithy.Schema
-
-var S3AccessPointAttachment_S3AccessPoint *smithy.Schema
-
-var S3AccessPointAttachmentLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentLifecycle",
-}, smithy.ShapeTypeEnum, 6)
-var S3AccessPointAttachmentLifecycle_AVAILABLE *smithy.Schema
-
-var S3AccessPointAttachmentLifecycle_CREATING *smithy.Schema
-
-var S3AccessPointAttachmentLifecycle_DELETING *smithy.Schema
-
-var S3AccessPointAttachmentLifecycle_UPDATING *smithy.Schema
-
-var S3AccessPointAttachmentLifecycle_FAILED *smithy.Schema
-
-var S3AccessPointAttachmentLifecycle_MISCONFIGURED *smithy.Schema
-
-var _S3AccessPointAttachmentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3AccessPointAttachmentNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentNames",
-}, smithy.ShapeTypeList, 1)
-var _S3AccessPointAttachmentNames_member *smithy.Schema
-
-var S3AccessPointAttachmentNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var S3AccessPointAttachmentNotFound_Message *smithy.Schema
-
-var _S3AccessPointAttachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachments",
-}, smithy.ShapeTypeList, 1)
-var _S3AccessPointAttachments_member *smithy.Schema
-
-var S3AccessPointAttachmentsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentsFilter",
-}, smithy.ShapeTypeStructure, 2)
-var S3AccessPointAttachmentsFilter_Name *smithy.Schema
-
-var S3AccessPointAttachmentsFilter_Values *smithy.Schema
-
-var S3AccessPointAttachmentsFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentsFilterName",
-}, smithy.ShapeTypeEnum, 3)
-var S3AccessPointAttachmentsFilterName_FILE_SYSTEM_ID *smithy.Schema
-
-var S3AccessPointAttachmentsFilterName_VOLUME_ID *smithy.Schema
-
-var S3AccessPointAttachmentsFilterName_TYPE *smithy.Schema
-
-var _S3AccessPointAttachmentsFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentsFilters",
-}, smithy.ShapeTypeList, 1)
-var _S3AccessPointAttachmentsFilters_member *smithy.Schema
-
-var _S3AccessPointAttachmentsFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentsFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _S3AccessPointAttachmentsFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentsFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _S3AccessPointAttachmentsFilterValues_member *smithy.Schema
-
-var S3AccessPointAttachmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointAttachmentType",
-}, smithy.ShapeTypeEnum, 2)
-var S3AccessPointAttachmentType_OPENZFS *smithy.Schema
-
-var S3AccessPointAttachmentType_ONTAP *smithy.Schema
-
-var S3AccessPointOntapConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointOntapConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var S3AccessPointOntapConfiguration_VolumeId *smithy.Schema
-
-var S3AccessPointOntapConfiguration_FileSystemIdentity *smithy.Schema
-
-var S3AccessPointOpenZFSConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointOpenZFSConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var S3AccessPointOpenZFSConfiguration_VolumeId *smithy.Schema
-
-var S3AccessPointOpenZFSConfiguration_FileSystemIdentity *smithy.Schema
-
-var S3AccessPointVpcConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3AccessPointVpcConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var S3AccessPointVpcConfiguration_VpcId *smithy.Schema
-
-var S3DataRepositoryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "S3DataRepositoryConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var S3DataRepositoryConfiguration_AutoImportPolicy *smithy.Schema
-
-var S3DataRepositoryConfiguration_AutoExportPolicy *smithy.Schema
-
-var _SecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _SecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _SecurityGroupIds_member *smithy.Schema
-
-var SecurityStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SecurityStyle",
-}, smithy.ShapeTypeEnum, 3)
-var SecurityStyle_UNIX *smithy.Schema
-
-var SecurityStyle_NTFS *smithy.Schema
-
-var SecurityStyle_MIXED *smithy.Schema
-
-var SelfManagedActiveDirectoryAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SelfManagedActiveDirectoryAttributes",
-}, smithy.ShapeTypeStructure, 6)
-var SelfManagedActiveDirectoryAttributes_DomainName *smithy.Schema
-
-var SelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName *smithy.Schema
-
-var SelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup *smithy.Schema
-
-var SelfManagedActiveDirectoryAttributes_UserName *smithy.Schema
-
-var SelfManagedActiveDirectoryAttributes_DnsIps *smithy.Schema
-
-var SelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret *smithy.Schema
-
-var SelfManagedActiveDirectoryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SelfManagedActiveDirectoryConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var SelfManagedActiveDirectoryConfiguration_DomainName *smithy.Schema
-
-var SelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName *smithy.Schema
-
-var SelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup *smithy.Schema
-
-var SelfManagedActiveDirectoryConfiguration_UserName *smithy.Schema
-
-var SelfManagedActiveDirectoryConfiguration_Password *smithy.Schema
-
-var SelfManagedActiveDirectoryConfiguration_DnsIps *smithy.Schema
-
-var SelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret *smithy.Schema
-
-var SelfManagedActiveDirectoryConfigurationUpdates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SelfManagedActiveDirectoryConfigurationUpdates",
-}, smithy.ShapeTypeStructure, 7)
-var SelfManagedActiveDirectoryConfigurationUpdates_UserName *smithy.Schema
-
-var SelfManagedActiveDirectoryConfigurationUpdates_Password *smithy.Schema
-
-var SelfManagedActiveDirectoryConfigurationUpdates_DnsIps *smithy.Schema
-
-var SelfManagedActiveDirectoryConfigurationUpdates_DomainName *smithy.Schema
-
-var SelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName *smithy.Schema
-
-var SelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup *smithy.Schema
-
-var SelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret *smithy.Schema
-
-var ServiceLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ServiceLimit",
-}, smithy.ShapeTypeEnum, 10)
-var ServiceLimit_FILE_SYSTEM_COUNT *smithy.Schema
-
-var ServiceLimit_TOTAL_THROUGHPUT_CAPACITY *smithy.Schema
-
-var ServiceLimit_TOTAL_STORAGE *smithy.Schema
-
-var ServiceLimit_TOTAL_USER_INITIATED_BACKUPS *smithy.Schema
-
-var ServiceLimit_TOTAL_USER_TAGS *smithy.Schema
-
-var ServiceLimit_TOTAL_IN_PROGRESS_COPY_BACKUPS *smithy.Schema
-
-var ServiceLimit_STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM *smithy.Schema
-
-var ServiceLimit_VOLUMES_PER_FILE_SYSTEM *smithy.Schema
-
-var ServiceLimit_TOTAL_SSD_IOPS *smithy.Schema
-
-var ServiceLimit_FILE_CACHE_COUNT *smithy.Schema
-
-var ServiceLimitExceeded = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ServiceLimitExceeded",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ServiceLimitExceeded_Limit *smithy.Schema
-
-var ServiceLimitExceeded_Message *smithy.Schema
-
-var _SizeInBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SizeInBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var SnaplockConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnaplockConfiguration",
-}, smithy.ShapeTypeStructure, 6)
-var SnaplockConfiguration_AuditLogVolume *smithy.Schema
-
-var SnaplockConfiguration_AutocommitPeriod *smithy.Schema
-
-var SnaplockConfiguration_PrivilegedDelete *smithy.Schema
-
-var SnaplockConfiguration_RetentionPeriod *smithy.Schema
-
-var SnaplockConfiguration_SnaplockType *smithy.Schema
-
-var SnaplockConfiguration_VolumeAppendModeEnabled *smithy.Schema
-
-var SnaplockRetentionPeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnaplockRetentionPeriod",
-}, smithy.ShapeTypeStructure, 3)
-var SnaplockRetentionPeriod_DefaultRetention *smithy.Schema
-
-var SnaplockRetentionPeriod_MinimumRetention *smithy.Schema
-
-var SnaplockRetentionPeriod_MaximumRetention *smithy.Schema
-
-var SnaplockType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnaplockType",
-}, smithy.ShapeTypeEnum, 2)
-var SnaplockType_COMPLIANCE *smithy.Schema
-
-var SnaplockType_ENTERPRISE *smithy.Schema
-
-var Snapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Snapshot",
-}, smithy.ShapeTypeStructure, 9)
-var Snapshot_ResourceARN *smithy.Schema
-
-var Snapshot_SnapshotId *smithy.Schema
-
-var Snapshot_Name *smithy.Schema
-
-var Snapshot_VolumeId *smithy.Schema
-
-var Snapshot_CreationTime *smithy.Schema
-
-var Snapshot_Lifecycle *smithy.Schema
-
-var Snapshot_LifecycleTransitionReason *smithy.Schema
-
-var Snapshot_Tags *smithy.Schema
-
-var Snapshot_AdministrativeActions *smithy.Schema
-
-var SnapshotFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SnapshotFilter_Name *smithy.Schema
-
-var SnapshotFilter_Values *smithy.Schema
-
-var SnapshotFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var SnapshotFilterName_FILE_SYSTEM_ID *smithy.Schema
-
-var SnapshotFilterName_VOLUME_ID *smithy.Schema
-
-var _SnapshotFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotFilters",
-}, smithy.ShapeTypeList, 1)
-var _SnapshotFilters_member *smithy.Schema
-
-var _SnapshotFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _SnapshotFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _SnapshotFilterValues_member *smithy.Schema
-
-var _SnapshotId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotId",
-}, smithy.ShapeTypeString, 0)
-
-var _SnapshotIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotIds",
-}, smithy.ShapeTypeList, 1)
-var _SnapshotIds_member *smithy.Schema
-
-var SnapshotLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotLifecycle",
-}, smithy.ShapeTypeEnum, 4)
-var SnapshotLifecycle_PENDING *smithy.Schema
-
-var SnapshotLifecycle_CREATING *smithy.Schema
-
-var SnapshotLifecycle_DELETING *smithy.Schema
-
-var SnapshotLifecycle_AVAILABLE *smithy.Schema
-
-var _SnapshotName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotName",
-}, smithy.ShapeTypeString, 0)
-
-var SnapshotNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var SnapshotNotFound_Message *smithy.Schema
-
-var _SnapshotPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SnapshotPolicy",
-}, smithy.ShapeTypeString, 0)
-
-var _Snapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Snapshots",
-}, smithy.ShapeTypeList, 1)
-var _Snapshots_member *smithy.Schema
-
-var _SourceBackupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SourceBackupId",
-}, smithy.ShapeTypeString, 0)
-
-var SourceBackupUnavailable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SourceBackupUnavailable",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var SourceBackupUnavailable_Message *smithy.Schema
-
-var SourceBackupUnavailable_BackupId *smithy.Schema
-
-var _StartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StartTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 8)
-var Status_FAILED *smithy.Schema
-
-var Status_IN_PROGRESS *smithy.Schema
-
-var Status_PENDING *smithy.Schema
-
-var Status_COMPLETED *smithy.Schema
-
-var Status_UPDATED_OPTIMIZING *smithy.Schema
-
-var Status_OPTIMIZING *smithy.Schema
-
-var Status_PAUSED *smithy.Schema
-
-var Status_CANCELLED *smithy.Schema
-
-var _StorageCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var StorageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageType",
-}, smithy.ShapeTypeEnum, 3)
-var StorageType_SSD *smithy.Schema
-
-var StorageType_HDD *smithy.Schema
-
-var StorageType_INTELLIGENT_TIERING *smithy.Schema
-
-var StorageVirtualMachine = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachine",
-}, smithy.ShapeTypeStructure, 13)
-var StorageVirtualMachine_ActiveDirectoryConfiguration *smithy.Schema
-
-var StorageVirtualMachine_CreationTime *smithy.Schema
-
-var StorageVirtualMachine_Endpoints *smithy.Schema
-
-var StorageVirtualMachine_FileSystemId *smithy.Schema
-
-var StorageVirtualMachine_Lifecycle *smithy.Schema
-
-var StorageVirtualMachine_Name *smithy.Schema
-
-var StorageVirtualMachine_ResourceARN *smithy.Schema
-
-var StorageVirtualMachine_StorageVirtualMachineId *smithy.Schema
-
-var StorageVirtualMachine_Subtype *smithy.Schema
-
-var StorageVirtualMachine_UUID *smithy.Schema
-
-var StorageVirtualMachine_Tags *smithy.Schema
-
-var StorageVirtualMachine_LifecycleTransitionReason *smithy.Schema
-
-var StorageVirtualMachine_RootVolumeSecurityStyle *smithy.Schema
-
-var StorageVirtualMachineFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineFilter",
-}, smithy.ShapeTypeStructure, 2)
-var StorageVirtualMachineFilter_Name *smithy.Schema
-
-var StorageVirtualMachineFilter_Values *smithy.Schema
-
-var StorageVirtualMachineFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineFilterName",
-}, smithy.ShapeTypeEnum, 1)
-var StorageVirtualMachineFilterName_FILE_SYSTEM_ID *smithy.Schema
-
-var _StorageVirtualMachineFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineFilters",
-}, smithy.ShapeTypeList, 1)
-var _StorageVirtualMachineFilters_member *smithy.Schema
-
-var _StorageVirtualMachineFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageVirtualMachineFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _StorageVirtualMachineFilterValues_member *smithy.Schema
-
-var _StorageVirtualMachineId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineId",
-}, smithy.ShapeTypeString, 0)
-
-var _StorageVirtualMachineIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineIds",
-}, smithy.ShapeTypeList, 1)
-var _StorageVirtualMachineIds_member *smithy.Schema
-
-var StorageVirtualMachineLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineLifecycle",
-}, smithy.ShapeTypeEnum, 6)
-var StorageVirtualMachineLifecycle_CREATED *smithy.Schema
-
-var StorageVirtualMachineLifecycle_CREATING *smithy.Schema
-
-var StorageVirtualMachineLifecycle_DELETING *smithy.Schema
-
-var StorageVirtualMachineLifecycle_FAILED *smithy.Schema
-
-var StorageVirtualMachineLifecycle_MISCONFIGURED *smithy.Schema
-
-var StorageVirtualMachineLifecycle_PENDING *smithy.Schema
-
-var _StorageVirtualMachineName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineName",
-}, smithy.ShapeTypeString, 0)
-
-var StorageVirtualMachineNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var StorageVirtualMachineNotFound_Message *smithy.Schema
-
-var StorageVirtualMachineRootVolumeSecurityStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineRootVolumeSecurityStyle",
-}, smithy.ShapeTypeEnum, 3)
-var StorageVirtualMachineRootVolumeSecurityStyle_UNIX *smithy.Schema
-
-var StorageVirtualMachineRootVolumeSecurityStyle_NTFS *smithy.Schema
-
-var StorageVirtualMachineRootVolumeSecurityStyle_MIXED *smithy.Schema
-
-var _StorageVirtualMachines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachines",
-}, smithy.ShapeTypeList, 1)
-var _StorageVirtualMachines_member *smithy.Schema
-
-var StorageVirtualMachineSubtype = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StorageVirtualMachineSubtype",
-}, smithy.ShapeTypeEnum, 4)
-var StorageVirtualMachineSubtype_DEFAULT *smithy.Schema
-
-var StorageVirtualMachineSubtype_DP_DESTINATION *smithy.Schema
-
-var StorageVirtualMachineSubtype_SYNC_DESTINATION *smithy.Schema
-
-var StorageVirtualMachineSubtype_SYNC_SOURCE *smithy.Schema
-
-var _SubDirectoriesPaths = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SubDirectoriesPaths",
-}, smithy.ShapeTypeList, 1)
-var _SubDirectoriesPaths_member *smithy.Schema
-
-var _SubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _SubnetIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SubnetIds",
-}, smithy.ShapeTypeList, 1)
-var _SubnetIds_member *smithy.Schema
-
-var _SucceededCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SucceededCount",
-}, smithy.ShapeTypeLong, 0)
-
-var SvmActiveDirectoryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SvmActiveDirectoryConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SvmActiveDirectoryConfiguration_NetBiosName *smithy.Schema
-
-var SvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration *smithy.Schema
-
-var SvmEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SvmEndpoint",
-}, smithy.ShapeTypeStructure, 3)
-var SvmEndpoint_DNSName *smithy.Schema
-
-var SvmEndpoint_IpAddresses *smithy.Schema
-
-var SvmEndpoint_Ipv6Addresses *smithy.Schema
-
-var SvmEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "SvmEndpoints",
-}, smithy.ShapeTypeStructure, 4)
-var SvmEndpoints_Iscsi *smithy.Schema
-
-var SvmEndpoints_Management *smithy.Schema
-
-var SvmEndpoints_Nfs *smithy.Schema
-
-var SvmEndpoints_Smb *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1)
-var _Tags_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TaskId",
-}, smithy.ShapeTypeString, 0)
-
-var _TaskIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TaskIds",
-}, smithy.ShapeTypeList, 1)
-var _TaskIds_member *smithy.Schema
-
-var _ThroughputCapacityMbps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ThroughputCapacityMbps",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ThroughputCapacityPerHAPair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ThroughputCapacityPerHAPair",
-}, smithy.ShapeTypeInteger, 0)
-
-var TieringPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TieringPolicy",
-}, smithy.ShapeTypeStructure, 2)
-var TieringPolicy_CoolingPeriod *smithy.Schema
-
-var TieringPolicy_Name *smithy.Schema
-
-var TieringPolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TieringPolicyName",
-}, smithy.ShapeTypeEnum, 4)
-var TieringPolicyName_SNAPSHOT_ONLY *smithy.Schema
-
-var TieringPolicyName_AUTO *smithy.Schema
-
-var TieringPolicyName_ALL *smithy.Schema
-
-var TieringPolicyName_NONE *smithy.Schema
-
-var TooManyAccessPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TooManyAccessPoints",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.XMLName{Name: "Error"},
-
-	&smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TooManyAccessPoints_ErrorCode *smithy.Schema
-
-var TooManyAccessPoints_Message *smithy.Schema
-
-var _TotalConstituents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TotalConstituents",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TotalCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TotalCount",
-}, smithy.ShapeTypeLong, 0)
-
-var _TotalTransferBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TotalTransferBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var Unit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Unit",
-}, smithy.ShapeTypeEnum, 1)
-var Unit_DAYS *smithy.Schema
-
-var UnsupportedOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UnsupportedOperation",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var UnsupportedOperation_Message *smithy.Schema
-
-var UpdateFileCacheLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileCacheLustreConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystemLustreConfiguration",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_AutoImportPolicy *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_DataCompressionType *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_LogConfiguration *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_RootSquashConfiguration *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_PerUnitStorageThroughput *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_MetadataConfiguration *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_ThroughputCapacity *smithy.Schema
-
-var UpdateFileSystemLustreConfiguration_DataReadCacheConfiguration *smithy.Schema
-
-var UpdateFileSystemLustreMetadataConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystemLustreMetadataConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateFileSystemLustreMetadataConfiguration_Iops *smithy.Schema
-
-var UpdateFileSystemLustreMetadataConfiguration_Mode *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystemOntapConfiguration",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_FsxAdminPassword *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_ThroughputCapacity *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_AddRouteTableIds *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_RemoveRouteTableIds *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_HAPairs *smithy.Schema
-
-var UpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystemOpenZFSConfiguration",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_ThroughputCapacity *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration *smithy.Schema
-
-var UpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystemWindowsConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration_ThroughputCapacity *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration_AuditLogConfiguration *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var UpdateFileSystemWindowsConfiguration_FsrmConfiguration *smithy.Schema
-
-var UpdateOntapVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateOntapVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateOntapVolumeConfiguration_JunctionPath *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_SecurityStyle *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_SizeInMegabytes *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_StorageEfficiencyEnabled *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_TieringPolicy *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_SnapshotPolicy *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_CopyTagsToBackups *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_SnaplockConfiguration *smithy.Schema
-
-var UpdateOntapVolumeConfiguration_SizeInBytes *smithy.Schema
-
-var UpdateOpenZFSVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateOpenZFSVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB *smithy.Schema
-
-var UpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB *smithy.Schema
-
-var UpdateOpenZFSVolumeConfiguration_RecordSizeKiB *smithy.Schema
-
-var UpdateOpenZFSVolumeConfiguration_DataCompressionType *smithy.Schema
-
-var UpdateOpenZFSVolumeConfiguration_NfsExports *smithy.Schema
-
-var UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas *smithy.Schema
-
-var UpdateOpenZFSVolumeConfiguration_ReadOnly *smithy.Schema
-
-var UpdateOpenZFSVolumeOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateOpenZFSVolumeOption",
-}, smithy.ShapeTypeEnum, 3)
-var UpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS *smithy.Schema
-
-var UpdateOpenZFSVolumeOption_DELETE_CLONED_VOLUMES *smithy.Schema
-
-var UpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_DATA *smithy.Schema
-
-var _UpdateOpenZFSVolumeOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateOpenZFSVolumeOptions",
-}, smithy.ShapeTypeList, 1)
-var _UpdateOpenZFSVolumeOptions_member *smithy.Schema
-
-var UpdateSnaplockConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSnaplockConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateSnaplockConfiguration_AuditLogVolume *smithy.Schema
-
-var UpdateSnaplockConfiguration_AutocommitPeriod *smithy.Schema
-
-var UpdateSnaplockConfiguration_PrivilegedDelete *smithy.Schema
-
-var UpdateSnaplockConfiguration_RetentionPeriod *smithy.Schema
-
-var UpdateSnaplockConfiguration_VolumeAppendModeEnabled *smithy.Schema
-
-var UpdateSvmActiveDirectoryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSvmActiveDirectoryConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration *smithy.Schema
-
-var UpdateSvmActiveDirectoryConfiguration_NetBiosName *smithy.Schema
-
-var _UUID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UUID",
-}, smithy.ShapeTypeString, 0)
-
-var _Value = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Value",
-}, smithy.ShapeTypeLong, 0)
-
-var _VerboseFlag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VerboseFlag",
-}, smithy.ShapeTypeString, 0)
-
-var Volume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Volume",
-}, smithy.ShapeTypeStructure, 12)
-var Volume_CreationTime *smithy.Schema
-
-var Volume_FileSystemId *smithy.Schema
-
-var Volume_Lifecycle *smithy.Schema
-
-var Volume_Name *smithy.Schema
-
-var Volume_OntapConfiguration *smithy.Schema
-
-var Volume_ResourceARN *smithy.Schema
-
-var Volume_Tags *smithy.Schema
-
-var Volume_VolumeId *smithy.Schema
-
-var Volume_VolumeType *smithy.Schema
-
-var Volume_LifecycleTransitionReason *smithy.Schema
-
-var Volume_AdministrativeActions *smithy.Schema
-
-var Volume_OpenZFSConfiguration *smithy.Schema
-
-var _VolumeCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var _VolumeCapacityBytes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeCapacityBytes",
-}, smithy.ShapeTypeLong, 0)
-
-var VolumeFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeFilter",
-}, smithy.ShapeTypeStructure, 2)
-var VolumeFilter_Name *smithy.Schema
-
-var VolumeFilter_Values *smithy.Schema
-
-var VolumeFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeFilterName",
-}, smithy.ShapeTypeEnum, 2)
-var VolumeFilterName_FILE_SYSTEM_ID *smithy.Schema
-
-var VolumeFilterName_STORAGE_VIRTUAL_MACHINE_ID *smithy.Schema
-
-var _VolumeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeFilters",
-}, smithy.ShapeTypeList, 1)
-var _VolumeFilters_member *smithy.Schema
-
-var _VolumeFilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeFilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeFilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeFilterValues",
-}, smithy.ShapeTypeList, 1)
-var _VolumeFilterValues_member *smithy.Schema
-
-var _VolumeId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeId",
-}, smithy.ShapeTypeString, 0)
-
-var _VolumeIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeIds",
-}, smithy.ShapeTypeList, 1)
-var _VolumeIds_member *smithy.Schema
-
-var VolumeLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeLifecycle",
-}, smithy.ShapeTypeEnum, 7)
-var VolumeLifecycle_CREATING *smithy.Schema
-
-var VolumeLifecycle_CREATED *smithy.Schema
-
-var VolumeLifecycle_DELETING *smithy.Schema
-
-var VolumeLifecycle_FAILED *smithy.Schema
-
-var VolumeLifecycle_MISCONFIGURED *smithy.Schema
-
-var VolumeLifecycle_PENDING *smithy.Schema
-
-var VolumeLifecycle_AVAILABLE *smithy.Schema
-
-var _VolumeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeName",
-}, smithy.ShapeTypeString, 0)
-
-var VolumeNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeNotFound",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var VolumeNotFound_Message *smithy.Schema
-
-var _VolumePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumePath",
-}, smithy.ShapeTypeString, 0)
-
-var _Volumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "Volumes",
-}, smithy.ShapeTypeList, 1)
-var _Volumes_member *smithy.Schema
-
-var VolumeStyle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeStyle",
-}, smithy.ShapeTypeEnum, 2)
-var VolumeStyle_FLEXVOL *smithy.Schema
-
-var VolumeStyle_FLEXGROUP *smithy.Schema
-
-var VolumeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VolumeType",
-}, smithy.ShapeTypeEnum, 2)
-var VolumeType_ONTAP *smithy.Schema
-
-var VolumeType_OPENZFS *smithy.Schema
-
-var _VpcId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "VpcId",
-}, smithy.ShapeTypeString, 0)
-
-var _WeeklyTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "WeeklyTime",
-}, smithy.ShapeTypeString, 0)
-
-var WindowsAccessAuditLogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "WindowsAccessAuditLogLevel",
-}, smithy.ShapeTypeEnum, 4)
-var WindowsAccessAuditLogLevel_DISABLED *smithy.Schema
-
-var WindowsAccessAuditLogLevel_SUCCESS_ONLY *smithy.Schema
-
-var WindowsAccessAuditLogLevel_FAILURE_ONLY *smithy.Schema
-
-var WindowsAccessAuditLogLevel_SUCCESS_AND_FAILURE *smithy.Schema
-
-var WindowsAuditLogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "WindowsAuditLogConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var WindowsAuditLogConfiguration_FileAccessAuditLogLevel *smithy.Schema
-
-var WindowsAuditLogConfiguration_FileShareAccessAuditLogLevel *smithy.Schema
-
-var WindowsAuditLogConfiguration_AuditLogDestination *smithy.Schema
-
-var WindowsAuditLogCreateConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "WindowsAuditLogCreateConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var WindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel *smithy.Schema
-
-var WindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel *smithy.Schema
-
-var WindowsAuditLogCreateConfiguration_AuditLogDestination *smithy.Schema
-
-var WindowsDeploymentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "WindowsDeploymentType",
-}, smithy.ShapeTypeEnum, 3)
-var WindowsDeploymentType_MULTI_AZ_1 *smithy.Schema
-
-var WindowsDeploymentType_SINGLE_AZ_1 *smithy.Schema
-
-var WindowsDeploymentType_SINGLE_AZ_2 *smithy.Schema
-
-var WindowsFileSystemConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "WindowsFileSystemConfiguration",
-}, smithy.ShapeTypeStructure, 17)
-var WindowsFileSystemConfiguration_ActiveDirectoryId *smithy.Schema
-
-var WindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration *smithy.Schema
-
-var WindowsFileSystemConfiguration_DeploymentType *smithy.Schema
-
-var WindowsFileSystemConfiguration_RemoteAdministrationEndpoint *smithy.Schema
-
-var WindowsFileSystemConfiguration_PreferredSubnetId *smithy.Schema
-
-var WindowsFileSystemConfiguration_PreferredFileServerIp *smithy.Schema
-
-var WindowsFileSystemConfiguration_ThroughputCapacity *smithy.Schema
-
-var WindowsFileSystemConfiguration_MaintenanceOperationsInProgress *smithy.Schema
-
-var WindowsFileSystemConfiguration_WeeklyMaintenanceStartTime *smithy.Schema
-
-var WindowsFileSystemConfiguration_DailyAutomaticBackupStartTime *smithy.Schema
-
-var WindowsFileSystemConfiguration_AutomaticBackupRetentionDays *smithy.Schema
-
-var WindowsFileSystemConfiguration_CopyTagsToBackups *smithy.Schema
-
-var WindowsFileSystemConfiguration_Aliases *smithy.Schema
-
-var WindowsFileSystemConfiguration_AuditLogConfiguration *smithy.Schema
-
-var WindowsFileSystemConfiguration_DiskIopsConfiguration *smithy.Schema
-
-var WindowsFileSystemConfiguration_PreferredFileServerIpv6 *smithy.Schema
-
-var WindowsFileSystemConfiguration_FsrmConfiguration *smithy.Schema
-
-var WindowsFsrmConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "WindowsFsrmConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var WindowsFsrmConfiguration_FsrmServiceEnabled *smithy.Schema
-
-var WindowsFsrmConfiguration_EventLogDestination *smithy.Schema
-
-var AssociateFileSystemAliasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AssociateFileSystemAliasesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateFileSystemAliasesRequest_ClientRequestToken *smithy.Schema
-
-var AssociateFileSystemAliasesRequest_FileSystemId *smithy.Schema
-
-var AssociateFileSystemAliasesRequest_Aliases *smithy.Schema
-
-var AssociateFileSystemAliasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "AssociateFileSystemAliasesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateFileSystemAliasesResponse_Aliases *smithy.Schema
-
-var CancelDataRepositoryTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CancelDataRepositoryTaskRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelDataRepositoryTaskRequest_TaskId *smithy.Schema
-
-var CancelDataRepositoryTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CancelDataRepositoryTaskResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CancelDataRepositoryTaskResponse_Lifecycle *smithy.Schema
-
-var CancelDataRepositoryTaskResponse_TaskId *smithy.Schema
-
-var CopyBackupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CopyBackupRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CopyBackupRequest_ClientRequestToken *smithy.Schema
-
-var CopyBackupRequest_SourceBackupId *smithy.Schema
-
-var CopyBackupRequest_SourceRegion *smithy.Schema
-
-var CopyBackupRequest_KmsKeyId *smithy.Schema
-
-var CopyBackupRequest_CopyTags *smithy.Schema
-
-var CopyBackupRequest_Tags *smithy.Schema
-
-var CopyBackupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CopyBackupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CopyBackupResponse_Backup *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CopySnapshotAndUpdateVolumeRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CopySnapshotAndUpdateVolumeRequest_ClientRequestToken *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeRequest_VolumeId *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeRequest_CopyStrategy *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeRequest_Options *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CopySnapshotAndUpdateVolumeResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CopySnapshotAndUpdateVolumeResponse_VolumeId *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeResponse_Lifecycle *smithy.Schema
-
-var CopySnapshotAndUpdateVolumeResponse_AdministrativeActions *smithy.Schema
-
-var CreateAndAttachS3AccessPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateAndAttachS3AccessPointRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateAndAttachS3AccessPointRequest_ClientRequestToken *smithy.Schema
-
-var CreateAndAttachS3AccessPointRequest_Name *smithy.Schema
-
-var CreateAndAttachS3AccessPointRequest_Type *smithy.Schema
-
-var CreateAndAttachS3AccessPointRequest_OpenZFSConfiguration *smithy.Schema
-
-var CreateAndAttachS3AccessPointRequest_OntapConfiguration *smithy.Schema
-
-var CreateAndAttachS3AccessPointRequest_S3AccessPoint *smithy.Schema
-
-var CreateAndAttachS3AccessPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateAndAttachS3AccessPointResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateAndAttachS3AccessPointResponse_S3AccessPointAttachment *smithy.Schema
-
-var CreateBackupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateBackupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateBackupRequest_FileSystemId *smithy.Schema
-
-var CreateBackupRequest_ClientRequestToken *smithy.Schema
-
-var CreateBackupRequest_Tags *smithy.Schema
-
-var CreateBackupRequest_VolumeId *smithy.Schema
-
-var CreateBackupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateBackupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBackupResponse_Backup *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateDataRepositoryAssociationRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateDataRepositoryAssociationRequest_FileSystemId *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest_FileSystemPath *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest_DataRepositoryPath *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest_BatchImportMetaDataOnCreate *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest_ImportedFileChunkSize *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest_S3 *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest_ClientRequestToken *smithy.Schema
-
-var CreateDataRepositoryAssociationRequest_Tags *smithy.Schema
-
-var CreateDataRepositoryAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateDataRepositoryAssociationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataRepositoryAssociationResponse_Association *smithy.Schema
-
-var CreateDataRepositoryTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateDataRepositoryTaskRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateDataRepositoryTaskRequest_Type *smithy.Schema
-
-var CreateDataRepositoryTaskRequest_Paths *smithy.Schema
-
-var CreateDataRepositoryTaskRequest_FileSystemId *smithy.Schema
-
-var CreateDataRepositoryTaskRequest_Report *smithy.Schema
-
-var CreateDataRepositoryTaskRequest_ClientRequestToken *smithy.Schema
-
-var CreateDataRepositoryTaskRequest_Tags *smithy.Schema
-
-var CreateDataRepositoryTaskRequest_CapacityToRelease *smithy.Schema
-
-var CreateDataRepositoryTaskRequest_ReleaseConfiguration *smithy.Schema
-
-var CreateDataRepositoryTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateDataRepositoryTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataRepositoryTaskResponse_DataRepositoryTask *smithy.Schema
-
-var CreateFileCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileCacheRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateFileCacheRequest_ClientRequestToken *smithy.Schema
-
-var CreateFileCacheRequest_FileCacheType *smithy.Schema
-
-var CreateFileCacheRequest_FileCacheTypeVersion *smithy.Schema
-
-var CreateFileCacheRequest_StorageCapacity *smithy.Schema
-
-var CreateFileCacheRequest_SubnetIds *smithy.Schema
-
-var CreateFileCacheRequest_SecurityGroupIds *smithy.Schema
-
-var CreateFileCacheRequest_Tags *smithy.Schema
-
-var CreateFileCacheRequest_CopyTagsToDataRepositoryAssociations *smithy.Schema
-
-var CreateFileCacheRequest_KmsKeyId *smithy.Schema
-
-var CreateFileCacheRequest_LustreConfiguration *smithy.Schema
-
-var CreateFileCacheRequest_DataRepositoryAssociations *smithy.Schema
-
-var CreateFileCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileCacheResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFileCacheResponse_FileCache *smithy.Schema
-
-var CreateFileSystemFromBackupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemFromBackupRequest",
-}, smithy.ShapeTypeStructure, 13)
-var CreateFileSystemFromBackupRequest_BackupId *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_ClientRequestToken *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_SubnetIds *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_SecurityGroupIds *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_Tags *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_WindowsConfiguration *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_LustreConfiguration *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_StorageType *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_KmsKeyId *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_FileSystemTypeVersion *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_OpenZFSConfiguration *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_StorageCapacity *smithy.Schema
-
-var CreateFileSystemFromBackupRequest_NetworkType *smithy.Schema
-
-var CreateFileSystemFromBackupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemFromBackupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFileSystemFromBackupResponse_FileSystem *smithy.Schema
-
-var CreateFileSystemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemRequest",
-}, smithy.ShapeTypeStructure, 14)
-var CreateFileSystemRequest_ClientRequestToken *smithy.Schema
-
-var CreateFileSystemRequest_FileSystemType *smithy.Schema
-
-var CreateFileSystemRequest_StorageCapacity *smithy.Schema
-
-var CreateFileSystemRequest_StorageType *smithy.Schema
-
-var CreateFileSystemRequest_SubnetIds *smithy.Schema
-
-var CreateFileSystemRequest_SecurityGroupIds *smithy.Schema
-
-var CreateFileSystemRequest_Tags *smithy.Schema
-
-var CreateFileSystemRequest_KmsKeyId *smithy.Schema
-
-var CreateFileSystemRequest_WindowsConfiguration *smithy.Schema
-
-var CreateFileSystemRequest_LustreConfiguration *smithy.Schema
-
-var CreateFileSystemRequest_OntapConfiguration *smithy.Schema
-
-var CreateFileSystemRequest_FileSystemTypeVersion *smithy.Schema
-
-var CreateFileSystemRequest_OpenZFSConfiguration *smithy.Schema
-
-var CreateFileSystemRequest_NetworkType *smithy.Schema
-
-var CreateFileSystemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateFileSystemResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateFileSystemResponse_FileSystem *smithy.Schema
-
-var CreateSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateSnapshotRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSnapshotRequest_ClientRequestToken *smithy.Schema
-
-var CreateSnapshotRequest_Name *smithy.Schema
-
-var CreateSnapshotRequest_VolumeId *smithy.Schema
-
-var CreateSnapshotRequest_Tags *smithy.Schema
-
-var CreateSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateSnapshotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSnapshotResponse_Snapshot *smithy.Schema
-
-var CreateStorageVirtualMachineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateStorageVirtualMachineRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateStorageVirtualMachineRequest_ActiveDirectoryConfiguration *smithy.Schema
-
-var CreateStorageVirtualMachineRequest_ClientRequestToken *smithy.Schema
-
-var CreateStorageVirtualMachineRequest_FileSystemId *smithy.Schema
-
-var CreateStorageVirtualMachineRequest_Name *smithy.Schema
-
-var CreateStorageVirtualMachineRequest_SvmAdminPassword *smithy.Schema
-
-var CreateStorageVirtualMachineRequest_Tags *smithy.Schema
-
-var CreateStorageVirtualMachineRequest_RootVolumeSecurityStyle *smithy.Schema
-
-var CreateStorageVirtualMachineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateStorageVirtualMachineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateStorageVirtualMachineResponse_StorageVirtualMachine *smithy.Schema
-
-var CreateVolumeFromBackupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateVolumeFromBackupRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateVolumeFromBackupRequest_BackupId *smithy.Schema
-
-var CreateVolumeFromBackupRequest_ClientRequestToken *smithy.Schema
-
-var CreateVolumeFromBackupRequest_Name *smithy.Schema
-
-var CreateVolumeFromBackupRequest_OntapConfiguration *smithy.Schema
-
-var CreateVolumeFromBackupRequest_Tags *smithy.Schema
-
-var CreateVolumeFromBackupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateVolumeFromBackupResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVolumeFromBackupResponse_Volume *smithy.Schema
-
-var CreateVolumeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateVolumeRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateVolumeRequest_ClientRequestToken *smithy.Schema
-
-var CreateVolumeRequest_VolumeType *smithy.Schema
-
-var CreateVolumeRequest_Name *smithy.Schema
-
-var CreateVolumeRequest_OntapConfiguration *smithy.Schema
-
-var CreateVolumeRequest_Tags *smithy.Schema
-
-var CreateVolumeRequest_OpenZFSConfiguration *smithy.Schema
-
-var CreateVolumeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "CreateVolumeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateVolumeResponse_Volume *smithy.Schema
-
-var DeleteBackupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteBackupRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBackupRequest_BackupId *smithy.Schema
-
-var DeleteBackupRequest_ClientRequestToken *smithy.Schema
-
-var DeleteBackupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteBackupResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteBackupResponse_BackupId *smithy.Schema
-
-var DeleteBackupResponse_Lifecycle *smithy.Schema
-
-var DeleteDataRepositoryAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteDataRepositoryAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDataRepositoryAssociationRequest_AssociationId *smithy.Schema
-
-var DeleteDataRepositoryAssociationRequest_ClientRequestToken *smithy.Schema
-
-var DeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem *smithy.Schema
-
-var DeleteDataRepositoryAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteDataRepositoryAssociationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDataRepositoryAssociationResponse_AssociationId *smithy.Schema
-
-var DeleteDataRepositoryAssociationResponse_Lifecycle *smithy.Schema
-
-var DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem *smithy.Schema
-
-var DeleteFileCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileCacheRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileCacheRequest_FileCacheId *smithy.Schema
-
-var DeleteFileCacheRequest_ClientRequestToken *smithy.Schema
-
-var DeleteFileCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileCacheResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteFileCacheResponse_FileCacheId *smithy.Schema
-
-var DeleteFileCacheResponse_Lifecycle *smithy.Schema
-
-var DeleteFileSystemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteFileSystemRequest_FileSystemId *smithy.Schema
-
-var DeleteFileSystemRequest_ClientRequestToken *smithy.Schema
-
-var DeleteFileSystemRequest_WindowsConfiguration *smithy.Schema
-
-var DeleteFileSystemRequest_LustreConfiguration *smithy.Schema
-
-var DeleteFileSystemRequest_OpenZFSConfiguration *smithy.Schema
-
-var DeleteFileSystemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteFileSystemResponse",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteFileSystemResponse_FileSystemId *smithy.Schema
-
-var DeleteFileSystemResponse_Lifecycle *smithy.Schema
-
-var DeleteFileSystemResponse_WindowsResponse *smithy.Schema
-
-var DeleteFileSystemResponse_LustreResponse *smithy.Schema
-
-var DeleteFileSystemResponse_OpenZFSResponse *smithy.Schema
-
-var DeleteSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteSnapshotRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSnapshotRequest_ClientRequestToken *smithy.Schema
-
-var DeleteSnapshotRequest_SnapshotId *smithy.Schema
-
-var DeleteSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteSnapshotResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteSnapshotResponse_SnapshotId *smithy.Schema
-
-var DeleteSnapshotResponse_Lifecycle *smithy.Schema
-
-var DeleteStorageVirtualMachineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteStorageVirtualMachineRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteStorageVirtualMachineRequest_ClientRequestToken *smithy.Schema
-
-var DeleteStorageVirtualMachineRequest_StorageVirtualMachineId *smithy.Schema
-
-var DeleteStorageVirtualMachineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteStorageVirtualMachineResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteStorageVirtualMachineResponse_StorageVirtualMachineId *smithy.Schema
-
-var DeleteStorageVirtualMachineResponse_Lifecycle *smithy.Schema
-
-var DeleteVolumeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteVolumeRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteVolumeRequest_ClientRequestToken *smithy.Schema
-
-var DeleteVolumeRequest_VolumeId *smithy.Schema
-
-var DeleteVolumeRequest_OntapConfiguration *smithy.Schema
-
-var DeleteVolumeRequest_OpenZFSConfiguration *smithy.Schema
-
-var DeleteVolumeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DeleteVolumeResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteVolumeResponse_VolumeId *smithy.Schema
-
-var DeleteVolumeResponse_Lifecycle *smithy.Schema
-
-var DeleteVolumeResponse_OntapResponse *smithy.Schema
-
-var DescribeBackupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeBackupsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeBackupsRequest_BackupIds *smithy.Schema
-
-var DescribeBackupsRequest_Filters *smithy.Schema
-
-var DescribeBackupsRequest_MaxResults *smithy.Schema
-
-var DescribeBackupsRequest_NextToken *smithy.Schema
-
-var DescribeBackupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeBackupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeBackupsResponse_Backups *smithy.Schema
-
-var DescribeBackupsResponse_NextToken *smithy.Schema
-
-var DescribeDataRepositoryAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeDataRepositoryAssociationsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDataRepositoryAssociationsRequest_AssociationIds *smithy.Schema
-
-var DescribeDataRepositoryAssociationsRequest_Filters *smithy.Schema
-
-var DescribeDataRepositoryAssociationsRequest_MaxResults *smithy.Schema
-
-var DescribeDataRepositoryAssociationsRequest_NextToken *smithy.Schema
-
-var DescribeDataRepositoryAssociationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeDataRepositoryAssociationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDataRepositoryAssociationsResponse_Associations *smithy.Schema
-
-var DescribeDataRepositoryAssociationsResponse_NextToken *smithy.Schema
-
-var DescribeDataRepositoryTasksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeDataRepositoryTasksRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDataRepositoryTasksRequest_TaskIds *smithy.Schema
-
-var DescribeDataRepositoryTasksRequest_Filters *smithy.Schema
-
-var DescribeDataRepositoryTasksRequest_MaxResults *smithy.Schema
-
-var DescribeDataRepositoryTasksRequest_NextToken *smithy.Schema
-
-var DescribeDataRepositoryTasksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeDataRepositoryTasksResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDataRepositoryTasksResponse_DataRepositoryTasks *smithy.Schema
-
-var DescribeDataRepositoryTasksResponse_NextToken *smithy.Schema
-
-var DescribeFileCachesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileCachesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeFileCachesRequest_FileCacheIds *smithy.Schema
-
-var DescribeFileCachesRequest_MaxResults *smithy.Schema
-
-var DescribeFileCachesRequest_NextToken *smithy.Schema
-
-var DescribeFileCachesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileCachesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFileCachesResponse_FileCaches *smithy.Schema
-
-var DescribeFileCachesResponse_NextToken *smithy.Schema
-
-var DescribeFileSystemAliasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileSystemAliasesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeFileSystemAliasesRequest_ClientRequestToken *smithy.Schema
-
-var DescribeFileSystemAliasesRequest_FileSystemId *smithy.Schema
-
-var DescribeFileSystemAliasesRequest_MaxResults *smithy.Schema
-
-var DescribeFileSystemAliasesRequest_NextToken *smithy.Schema
-
-var DescribeFileSystemAliasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileSystemAliasesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFileSystemAliasesResponse_Aliases *smithy.Schema
-
-var DescribeFileSystemAliasesResponse_NextToken *smithy.Schema
-
-var DescribeFileSystemsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileSystemsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeFileSystemsRequest_FileSystemIds *smithy.Schema
-
-var DescribeFileSystemsRequest_MaxResults *smithy.Schema
-
-var DescribeFileSystemsRequest_NextToken *smithy.Schema
-
-var DescribeFileSystemsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeFileSystemsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeFileSystemsResponse_FileSystems *smithy.Schema
-
-var DescribeFileSystemsResponse_NextToken *smithy.Schema
-
-var DescribeS3AccessPointAttachmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeS3AccessPointAttachmentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeS3AccessPointAttachmentsRequest_Names *smithy.Schema
-
-var DescribeS3AccessPointAttachmentsRequest_Filters *smithy.Schema
-
-var DescribeS3AccessPointAttachmentsRequest_MaxResults *smithy.Schema
-
-var DescribeS3AccessPointAttachmentsRequest_NextToken *smithy.Schema
-
-var DescribeS3AccessPointAttachmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeS3AccessPointAttachmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments *smithy.Schema
-
-var DescribeS3AccessPointAttachmentsResponse_NextToken *smithy.Schema
-
-var DescribeSharedVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeSharedVpcConfigurationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeSharedVpcConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeSharedVpcConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts *smithy.Schema
-
-var DescribeSnapshotsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeSnapshotsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeSnapshotsRequest_SnapshotIds *smithy.Schema
-
-var DescribeSnapshotsRequest_Filters *smithy.Schema
-
-var DescribeSnapshotsRequest_MaxResults *smithy.Schema
-
-var DescribeSnapshotsRequest_NextToken *smithy.Schema
-
-var DescribeSnapshotsRequest_IncludeShared *smithy.Schema
-
-var DescribeSnapshotsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeSnapshotsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeSnapshotsResponse_Snapshots *smithy.Schema
-
-var DescribeSnapshotsResponse_NextToken *smithy.Schema
-
-var DescribeStorageVirtualMachinesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeStorageVirtualMachinesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds *smithy.Schema
-
-var DescribeStorageVirtualMachinesRequest_Filters *smithy.Schema
-
-var DescribeStorageVirtualMachinesRequest_MaxResults *smithy.Schema
-
-var DescribeStorageVirtualMachinesRequest_NextToken *smithy.Schema
-
-var DescribeStorageVirtualMachinesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeStorageVirtualMachinesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeStorageVirtualMachinesResponse_StorageVirtualMachines *smithy.Schema
-
-var DescribeStorageVirtualMachinesResponse_NextToken *smithy.Schema
-
-var DescribeVolumesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeVolumesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeVolumesRequest_VolumeIds *smithy.Schema
-
-var DescribeVolumesRequest_Filters *smithy.Schema
-
-var DescribeVolumesRequest_MaxResults *smithy.Schema
-
-var DescribeVolumesRequest_NextToken *smithy.Schema
-
-var DescribeVolumesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DescribeVolumesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeVolumesResponse_Volumes *smithy.Schema
-
-var DescribeVolumesResponse_NextToken *smithy.Schema
-
-var DetachAndDeleteS3AccessPointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DetachAndDeleteS3AccessPointRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DetachAndDeleteS3AccessPointRequest_ClientRequestToken *smithy.Schema
-
-var DetachAndDeleteS3AccessPointRequest_Name *smithy.Schema
-
-var DetachAndDeleteS3AccessPointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DetachAndDeleteS3AccessPointResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DetachAndDeleteS3AccessPointResponse_Lifecycle *smithy.Schema
-
-var DetachAndDeleteS3AccessPointResponse_Name *smithy.Schema
-
-var DisassociateFileSystemAliasesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DisassociateFileSystemAliasesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateFileSystemAliasesRequest_ClientRequestToken *smithy.Schema
-
-var DisassociateFileSystemAliasesRequest_FileSystemId *smithy.Schema
-
-var DisassociateFileSystemAliasesRequest_Aliases *smithy.Schema
-
-var DisassociateFileSystemAliasesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "DisassociateFileSystemAliasesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateFileSystemAliasesResponse_Aliases *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceRequest_MaxResults *smithy.Schema
-
-var ListTagsForResourceRequest_NextToken *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var ListTagsForResourceResponse_NextToken *smithy.Schema
-
-var ReleaseFileSystemNfsV3LocksRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReleaseFileSystemNfsV3LocksRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ReleaseFileSystemNfsV3LocksRequest_FileSystemId *smithy.Schema
-
-var ReleaseFileSystemNfsV3LocksRequest_ClientRequestToken *smithy.Schema
-
-var ReleaseFileSystemNfsV3LocksResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "ReleaseFileSystemNfsV3LocksResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ReleaseFileSystemNfsV3LocksResponse_FileSystem *smithy.Schema
-
-var RestoreVolumeFromSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RestoreVolumeFromSnapshotRequest",
-}, smithy.ShapeTypeStructure, 4)
-var RestoreVolumeFromSnapshotRequest_ClientRequestToken *smithy.Schema
-
-var RestoreVolumeFromSnapshotRequest_VolumeId *smithy.Schema
-
-var RestoreVolumeFromSnapshotRequest_SnapshotId *smithy.Schema
-
-var RestoreVolumeFromSnapshotRequest_Options *smithy.Schema
-
-var RestoreVolumeFromSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "RestoreVolumeFromSnapshotResponse",
-}, smithy.ShapeTypeStructure, 3)
-var RestoreVolumeFromSnapshotResponse_VolumeId *smithy.Schema
-
-var RestoreVolumeFromSnapshotResponse_Lifecycle *smithy.Schema
-
-var RestoreVolumeFromSnapshotResponse_AdministrativeActions *smithy.Schema
-
-var StartMisconfiguredStateRecoveryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StartMisconfiguredStateRecoveryRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartMisconfiguredStateRecoveryRequest_ClientRequestToken *smithy.Schema
-
-var StartMisconfiguredStateRecoveryRequest_FileSystemId *smithy.Schema
-
-var StartMisconfiguredStateRecoveryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "StartMisconfiguredStateRecoveryResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartMisconfiguredStateRecoveryResponse_FileSystem *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateDataRepositoryAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateDataRepositoryAssociationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateDataRepositoryAssociationRequest_AssociationId *smithy.Schema
-
-var UpdateDataRepositoryAssociationRequest_ClientRequestToken *smithy.Schema
-
-var UpdateDataRepositoryAssociationRequest_ImportedFileChunkSize *smithy.Schema
-
-var UpdateDataRepositoryAssociationRequest_S3 *smithy.Schema
-
-var UpdateDataRepositoryAssociationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateDataRepositoryAssociationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDataRepositoryAssociationResponse_Association *smithy.Schema
-
-var UpdateFileCacheRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileCacheRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateFileCacheRequest_FileCacheId *smithy.Schema
-
-var UpdateFileCacheRequest_ClientRequestToken *smithy.Schema
-
-var UpdateFileCacheRequest_LustreConfiguration *smithy.Schema
-
-var UpdateFileCacheResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileCacheResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFileCacheResponse_FileCache *smithy.Schema
-
-var UpdateFileSystemRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystemRequest",
-}, smithy.ShapeTypeStructure, 10)
-var UpdateFileSystemRequest_FileSystemId *smithy.Schema
-
-var UpdateFileSystemRequest_ClientRequestToken *smithy.Schema
-
-var UpdateFileSystemRequest_StorageCapacity *smithy.Schema
-
-var UpdateFileSystemRequest_WindowsConfiguration *smithy.Schema
-
-var UpdateFileSystemRequest_LustreConfiguration *smithy.Schema
-
-var UpdateFileSystemRequest_OntapConfiguration *smithy.Schema
-
-var UpdateFileSystemRequest_OpenZFSConfiguration *smithy.Schema
-
-var UpdateFileSystemRequest_StorageType *smithy.Schema
-
-var UpdateFileSystemRequest_FileSystemTypeVersion *smithy.Schema
-
-var UpdateFileSystemRequest_NetworkType *smithy.Schema
-
-var UpdateFileSystemResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateFileSystemResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateFileSystemResponse_FileSystem *smithy.Schema
-
-var UpdateSharedVpcConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSharedVpcConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateSharedVpcConfigurationRequest_EnableFsxRouteTableUpdatesFromParticipantAccounts *smithy.Schema
-
-var UpdateSharedVpcConfigurationRequest_ClientRequestToken *smithy.Schema
-
-var UpdateSharedVpcConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSharedVpcConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts *smithy.Schema
-
-var UpdateSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSnapshotRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSnapshotRequest_ClientRequestToken *smithy.Schema
-
-var UpdateSnapshotRequest_Name *smithy.Schema
-
-var UpdateSnapshotRequest_SnapshotId *smithy.Schema
-
-var UpdateSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateSnapshotResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateSnapshotResponse_Snapshot *smithy.Schema
-
-var UpdateStorageVirtualMachineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateStorageVirtualMachineRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration *smithy.Schema
-
-var UpdateStorageVirtualMachineRequest_ClientRequestToken *smithy.Schema
-
-var UpdateStorageVirtualMachineRequest_StorageVirtualMachineId *smithy.Schema
-
-var UpdateStorageVirtualMachineRequest_SvmAdminPassword *smithy.Schema
-
-var UpdateStorageVirtualMachineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateStorageVirtualMachineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateStorageVirtualMachineResponse_StorageVirtualMachine *smithy.Schema
-
-var UpdateVolumeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateVolumeRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateVolumeRequest_ClientRequestToken *smithy.Schema
-
-var UpdateVolumeRequest_VolumeId *smithy.Schema
-
-var UpdateVolumeRequest_OntapConfiguration *smithy.Schema
-
-var UpdateVolumeRequest_Name *smithy.Schema
-
-var UpdateVolumeRequest_OpenZFSConfiguration *smithy.Schema
-
-var UpdateVolumeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.fsx",
-	Name:      "UpdateVolumeResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateVolumeResponse_Volume *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
+var (
+	iAssociateFileSystemAliases                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AssociateFileSystemAliases"}
+	iCancelDataRepositoryTask                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CancelDataRepositoryTask"}
+	iCopyBackup                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CopyBackup"}
+	iCopySnapshotAndUpdateVolume                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CopySnapshotAndUpdateVolume"}
+	iCreateAndAttachS3AccessPoint                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateAndAttachS3AccessPoint"}
+	iCreateBackup                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateBackup"}
+	iCreateDataRepositoryAssociation                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateDataRepositoryAssociation"}
+	iCreateDataRepositoryTask                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateDataRepositoryTask"}
+	iCreateFileCache                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileCache"}
+	iCreateFileSystem                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystem"}
+	iCreateFileSystemFromBackup                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemFromBackup"}
+	iCreateSnapshot                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateSnapshot"}
+	iCreateStorageVirtualMachine                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateStorageVirtualMachine"}
+	iCreateVolume                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateVolume"}
+	iCreateVolumeFromBackup                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateVolumeFromBackup"}
+	iDeleteBackup                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteBackup"}
+	iDeleteDataRepositoryAssociation                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteDataRepositoryAssociation"}
+	iDeleteFileCache                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileCache"}
+	iDeleteFileSystem                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystem"}
+	iDeleteSnapshot                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteSnapshot"}
+	iDeleteStorageVirtualMachine                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteStorageVirtualMachine"}
+	iDeleteVolume                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteVolume"}
+	iDescribeBackups                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeBackups"}
+	iDescribeDataRepositoryAssociations               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeDataRepositoryAssociations"}
+	iDescribeDataRepositoryTasks                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeDataRepositoryTasks"}
+	iDescribeFileCaches                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileCaches"}
+	iDescribeFileSystemAliases                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileSystemAliases"}
+	iDescribeFileSystems                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileSystems"}
+	iDescribeS3AccessPointAttachments                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeS3AccessPointAttachments"}
+	iDescribeSharedVpcConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeSharedVpcConfiguration"}
+	iDescribeSnapshots                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeSnapshots"}
+	iDescribeStorageVirtualMachines                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeStorageVirtualMachines"}
+	iDescribeVolumes                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeVolumes"}
+	iDetachAndDeleteS3AccessPoint                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DetachAndDeleteS3AccessPoint"}
+	iDisassociateFileSystemAliases                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DisassociateFileSystemAliases"}
+	iListTagsForResource                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ListTagsForResource"}
+	iReleaseFileSystemNfsV3Locks                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReleaseFileSystemNfsV3Locks"}
+	iRestoreVolumeFromSnapshot                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RestoreVolumeFromSnapshot"}
+	iStartMisconfiguredStateRecovery                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StartMisconfiguredStateRecovery"}
+	iTagResource                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TagResource"}
+	iUntagResource                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UntagResource"}
+	iUpdateDataRepositoryAssociation                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateDataRepositoryAssociation"}
+	iUpdateFileCache                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileCache"}
+	iUpdateFileSystem                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystem"}
+	iUpdateSharedVpcConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSharedVpcConfiguration"}
+	iUpdateSnapshot                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSnapshot"}
+	iUpdateStorageVirtualMachine                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateStorageVirtualMachine"}
+	iUpdateVolume                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateVolume"}
+	i_AWSSimbaAPIService_v20180301                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AWSSimbaAPIService_v20180301"}
+	iAccessPointAlreadyOwnedByYou                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AccessPointAlreadyOwnedByYou"}
+	i_AccessPointPolicy                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AccessPointPolicy"}
+	iActiveDirectoryBackupAttributes                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ActiveDirectoryBackupAttributes"}
+	iActiveDirectoryError                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ActiveDirectoryError"}
+	iActiveDirectoryErrorType                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ActiveDirectoryErrorType"}
+	i_ActiveDirectoryFullyQualifiedName               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ActiveDirectoryFullyQualifiedName"}
+	iAdministrativeAction                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AdministrativeAction"}
+	iAdministrativeActionFailureDetails               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AdministrativeActionFailureDetails"}
+	i_AdministrativeActions                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AdministrativeActions"}
+	iAdministrativeActionType                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AdministrativeActionType"}
+	i_AdminPassword                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AdminPassword"}
+	i_Aggregate                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Aggregate"}
+	iAggregateConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AggregateConfiguration"}
+	i_AggregateListMultiplier                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AggregateListMultiplier"}
+	i_Aggregates                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Aggregates"}
+	iAlias                                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Alias"}
+	i_Aliases                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Aliases"}
+	iAliasLifecycle                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AliasLifecycle"}
+	i_AlternateDNSName                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AlternateDNSName"}
+	i_AlternateDNSNames                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AlternateDNSNames"}
+	i_ArchivePath                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ArchivePath"}
+	iAutocommitPeriod                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AutocommitPeriod"}
+	iAutocommitPeriodType                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AutocommitPeriodType"}
+	i_AutocommitPeriodValue                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AutocommitPeriodValue"}
+	iAutoExportPolicy                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AutoExportPolicy"}
+	iAutoImportPolicy                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AutoImportPolicy"}
+	iAutoImportPolicyType                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AutoImportPolicyType"}
+	i_AutomaticBackupRetentionDays                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AutomaticBackupRetentionDays"}
+	i_AWSAccountId                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AWSAccountId"}
+	iBackup                                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Backup"}
+	iBackupBeingCopied                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupBeingCopied"}
+	iBackupFailureDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupFailureDetails"}
+	i_BackupId                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupId"}
+	i_BackupIds                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupIds"}
+	iBackupInProgress                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupInProgress"}
+	iBackupLifecycle                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupLifecycle"}
+	iBackupNotFound                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupNotFound"}
+	iBackupRestoring                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupRestoring"}
+	i_Backups                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Backups"}
+	iBackupType                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BackupType"}
+	iBadRequest                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BadRequest"}
+	i_BatchImportMetaDataOnCreate                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "BatchImportMetaDataOnCreate"}
+	i_CapacityToRelease                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CapacityToRelease"}
+	i_ClientRequestToken                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ClientRequestToken"}
+	iCompletionReport                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CompletionReport"}
+	i_CoolingPeriod                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CoolingPeriod"}
+	i_CopyTagsToDataRepositoryAssociations            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CopyTagsToDataRepositoryAssociations"}
+	iCreateAggregateConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateAggregateConfiguration"}
+	iCreateAndAttachS3AccessPointOntapConfiguration   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateAndAttachS3AccessPointOntapConfiguration"}
+	iCreateAndAttachS3AccessPointOpenZFSConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateAndAttachS3AccessPointOpenZFSConfiguration"}
+	iCreateAndAttachS3AccessPointS3Configuration      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateAndAttachS3AccessPointS3Configuration"}
+	i_CreateFileCacheDataRepositoryAssociations       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileCacheDataRepositoryAssociations"}
+	iCreateFileCacheLustreConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileCacheLustreConfiguration"}
+	iCreateFileSystemLustreConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemLustreConfiguration"}
+	iCreateFileSystemLustreMetadataConfiguration      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemLustreMetadataConfiguration"}
+	iCreateFileSystemOntapConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemOntapConfiguration"}
+	iCreateFileSystemOpenZFSConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemOpenZFSConfiguration"}
+	iCreateFileSystemWindowsConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemWindowsConfiguration"}
+	iCreateOntapVolumeConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateOntapVolumeConfiguration"}
+	iCreateOpenZFSOriginSnapshotConfiguration         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateOpenZFSOriginSnapshotConfiguration"}
+	iCreateOpenZFSVolumeConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateOpenZFSVolumeConfiguration"}
+	iCreateSnaplockConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateSnaplockConfiguration"}
+	iCreateSvmActiveDirectoryConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateSvmActiveDirectoryConfiguration"}
+	i_CreationTime                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreationTime"}
+	i_CustomerSecretsManagerARN                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CustomerSecretsManagerARN"}
+	i_DailyTime                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DailyTime"}
+	iDataCompressionType                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataCompressionType"}
+	iDataRepositoryAssociation                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryAssociation"}
+	i_DataRepositoryAssociationId                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryAssociationId"}
+	i_DataRepositoryAssociationIds                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryAssociationIds"}
+	iDataRepositoryAssociationNotFound                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryAssociationNotFound"}
+	i_DataRepositoryAssociations                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryAssociations"}
+	iDataRepositoryConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryConfiguration"}
+	iDataRepositoryFailureDetails                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryFailureDetails"}
+	iDataRepositoryLifecycle                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryLifecycle"}
+	iDataRepositoryTask                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTask"}
+	iDataRepositoryTaskEnded                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskEnded"}
+	iDataRepositoryTaskExecuting                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskExecuting"}
+	iDataRepositoryTaskFailureDetails                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskFailureDetails"}
+	iDataRepositoryTaskFilter                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskFilter"}
+	iDataRepositoryTaskFilterName                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskFilterName"}
+	i_DataRepositoryTaskFilters                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskFilters"}
+	i_DataRepositoryTaskFilterValue                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskFilterValue"}
+	i_DataRepositoryTaskFilterValues                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskFilterValues"}
+	iDataRepositoryTaskLifecycle                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskLifecycle"}
+	iDataRepositoryTaskNotFound                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskNotFound"}
+	i_DataRepositoryTaskPath                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskPath"}
+	i_DataRepositoryTaskPaths                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskPaths"}
+	i_DataRepositoryTasks                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTasks"}
+	iDataRepositoryTaskStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskStatus"}
+	iDataRepositoryTaskType                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DataRepositoryTaskType"}
+	i_DeleteDataInFileSystem                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteDataInFileSystem"}
+	iDeleteFileSystemLustreConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemLustreConfiguration"}
+	iDeleteFileSystemLustreResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemLustreResponse"}
+	iDeleteFileSystemOpenZFSConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemOpenZFSConfiguration"}
+	iDeleteFileSystemOpenZFSOption                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemOpenZFSOption"}
+	i_DeleteFileSystemOpenZFSOptions                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemOpenZFSOptions"}
+	iDeleteFileSystemOpenZFSResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemOpenZFSResponse"}
+	iDeleteFileSystemWindowsConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemWindowsConfiguration"}
+	iDeleteFileSystemWindowsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemWindowsResponse"}
+	iDeleteOpenZFSVolumeOption                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteOpenZFSVolumeOption"}
+	i_DeleteOpenZFSVolumeOptions                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteOpenZFSVolumeOptions"}
+	iDeleteVolumeOntapConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteVolumeOntapConfiguration"}
+	iDeleteVolumeOntapResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteVolumeOntapResponse"}
+	iDeleteVolumeOpenZFSConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteVolumeOpenZFSConfiguration"}
+	i_DirectoryId                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DirectoryId"}
+	i_DirectoryPassword                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DirectoryPassword"}
+	i_DirectoryUserName                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DirectoryUserName"}
+	iDiskIopsConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DiskIopsConfiguration"}
+	iDiskIopsConfigurationMode                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DiskIopsConfigurationMode"}
+	i_DnsIps                                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DnsIps"}
+	i_DNSName                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DNSName"}
+	iDriveCacheType                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DriveCacheType"}
+	iDurationSinceLastAccess                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DurationSinceLastAccess"}
+	i_EndTime                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "EndTime"}
+	i_ErrorCode                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ErrorCode"}
+	i_ErrorMessage                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ErrorMessage"}
+	iEventType                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "EventType"}
+	i_EventTypes                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "EventTypes"}
+	i_FailedCount                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FailedCount"}
+	iFileCache                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCache"}
+	iFileCacheCreating                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheCreating"}
+	iFileCacheDataRepositoryAssociation               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheDataRepositoryAssociation"}
+	iFileCacheFailureDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheFailureDetails"}
+	i_FileCacheId                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheId"}
+	i_FileCacheIds                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheIds"}
+	iFileCacheLifecycle                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheLifecycle"}
+	iFileCacheLustreConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheLustreConfiguration"}
+	iFileCacheLustreDeploymentType                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheLustreDeploymentType"}
+	iFileCacheLustreMetadataConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheLustreMetadataConfiguration"}
+	iFileCacheNFSConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheNFSConfiguration"}
+	iFileCacheNotFound                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheNotFound"}
+	i_FileCaches                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCaches"}
+	iFileCacheType                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileCacheType"}
+	iFileSystem                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystem"}
+	i_FileSystemAdministratorsGroupName               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemAdministratorsGroupName"}
+	iFileSystemEndpoint                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemEndpoint"}
+	iFileSystemEndpoints                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemEndpoints"}
+	iFileSystemFailureDetails                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemFailureDetails"}
+	i_FileSystemGID                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemGID"}
+	i_FileSystemId                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemId"}
+	i_FileSystemIds                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemIds"}
+	iFileSystemLifecycle                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemLifecycle"}
+	iFileSystemLustreMetadataConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemLustreMetadataConfiguration"}
+	iFileSystemMaintenanceOperation                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemMaintenanceOperation"}
+	i_FileSystemMaintenanceOperations                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemMaintenanceOperations"}
+	iFileSystemNotFound                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemNotFound"}
+	i_FileSystems                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystems"}
+	i_FileSystemSecondaryGIDs                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemSecondaryGIDs"}
+	iFileSystemType                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemType"}
+	i_FileSystemTypeVersion                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemTypeVersion"}
+	i_FileSystemUID                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FileSystemUID"}
+	iFilter                                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Filter"}
+	iFilterName                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FilterName"}
+	i_Filters                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Filters"}
+	i_FilterValue                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FilterValue"}
+	i_FilterValues                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FilterValues"}
+	i_Flag                                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Flag"}
+	iFlexCacheEndpointType                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "FlexCacheEndpointType"}
+	i_GeneralARN                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "GeneralARN"}
+	i_HAPairs                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "HAPairs"}
+	i_IncludeShared                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IncludeShared"}
+	iIncompatibleParameterError                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IncompatibleParameterError"}
+	iIncompatibleRegionForMultiAZ                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IncompatibleRegionForMultiAZ"}
+	iInputOntapVolumeType                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InputOntapVolumeType"}
+	i_IntegerNoMax                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IntegerNoMax"}
+	i_IntegerNoMaxFromNegativeOne                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IntegerNoMaxFromNegativeOne"}
+	i_IntegerRecordSizeKiB                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IntegerRecordSizeKiB"}
+	iInternalServerError                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InternalServerError"}
+	iInvalidAccessPoint                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidAccessPoint"}
+	iInvalidDataRepositoryType                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidDataRepositoryType"}
+	iInvalidDestinationKmsKey                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidDestinationKmsKey"}
+	iInvalidExportPath                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidExportPath"}
+	iInvalidImportPath                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidImportPath"}
+	iInvalidNetworkSettings                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidNetworkSettings"}
+	iInvalidPerUnitStorageThroughput                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidPerUnitStorageThroughput"}
+	iInvalidRegion                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidRegion"}
+	iInvalidRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidRequest"}
+	iInvalidSourceKmsKey                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "InvalidSourceKmsKey"}
+	i_Iops                                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Iops"}
+	i_IpAddress                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IpAddress"}
+	i_IpAddressRange                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "IpAddressRange"}
+	i_Ipv6AddressRange                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Ipv6AddressRange"}
+	i_JunctionPath                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "JunctionPath"}
+	i_KmsKeyId                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "KmsKeyId"}
+	i_LastUpdatedTime                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LastUpdatedTime"}
+	iLifecycleTransitionReason                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LifecycleTransitionReason"}
+	i_LimitedMaxResults                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LimitedMaxResults"}
+	iLustreAccessAuditLogLevel                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreAccessAuditLogLevel"}
+	iLustreDeploymentType                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreDeploymentType"}
+	iLustreFileSystemConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreFileSystemConfiguration"}
+	i_LustreFileSystemMountName                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreFileSystemMountName"}
+	iLustreLogConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreLogConfiguration"}
+	iLustreLogCreateConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreLogCreateConfiguration"}
+	i_LustreNoSquashNid                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreNoSquashNid"}
+	i_LustreNoSquashNids                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreNoSquashNids"}
+	iLustreReadCacheConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreReadCacheConfiguration"}
+	iLustreReadCacheSizingMode                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreReadCacheSizingMode"}
+	i_LustreRootSquash                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreRootSquash"}
+	iLustreRootSquashConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "LustreRootSquashConfiguration"}
+	i_MaxResults                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MaxResults"}
+	i_Megabytes                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Megabytes"}
+	i_MegabytesPerSecond                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MegabytesPerSecond"}
+	iMetadataConfigurationMode                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MetadataConfigurationMode"}
+	i_MetadataIops                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MetadataIops"}
+	i_MetadataStorageCapacity                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MetadataStorageCapacity"}
+	iMissingFileCacheConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MissingFileCacheConfiguration"}
+	iMissingFileSystemConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MissingFileSystemConfiguration"}
+	iMissingVolumeConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "MissingVolumeConfiguration"}
+	i_Namespace                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Namespace"}
+	i_NetBiosAlias                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NetBiosAlias"}
+	i_NetworkInterfaceId                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NetworkInterfaceId"}
+	i_NetworkInterfaceIds                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NetworkInterfaceIds"}
+	iNetworkType                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NetworkType"}
+	i_NextToken                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NextToken"}
+	iNFSDataRepositoryConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NFSDataRepositoryConfiguration"}
+	iNfsVersion                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NfsVersion"}
+	iNotServiceResourceError                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "NotServiceResourceError"}
+	iOntapDeploymentType                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapDeploymentType"}
+	i_OntapEndpointIpAddresses                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapEndpointIpAddresses"}
+	iOntapFileSystemConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapFileSystemConfiguration"}
+	iOntapFileSystemIdentity                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapFileSystemIdentity"}
+	i_OntapFileSystemUserName                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapFileSystemUserName"}
+	iOntapFileSystemUserType                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapFileSystemUserType"}
+	iOntapUnixFileSystemUser                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapUnixFileSystemUser"}
+	iOntapVolumeConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapVolumeConfiguration"}
+	iOntapVolumeType                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapVolumeType"}
+	iOntapWindowsFileSystemUser                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OntapWindowsFileSystemUser"}
+	iOpenZFSClientConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSClientConfiguration"}
+	i_OpenZFSClientConfigurations                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSClientConfigurations"}
+	i_OpenZFSClients                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSClients"}
+	iOpenZFSCopyStrategy                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSCopyStrategy"}
+	iOpenZFSCreateRootVolumeConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSCreateRootVolumeConfiguration"}
+	iOpenZFSDataCompressionType                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSDataCompressionType"}
+	iOpenZFSDeploymentType                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSDeploymentType"}
+	iOpenZFSFileSystemConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSFileSystemConfiguration"}
+	iOpenZFSFileSystemIdentity                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSFileSystemIdentity"}
+	iOpenZFSFileSystemUserType                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSFileSystemUserType"}
+	iOpenZFSNfsExport                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSNfsExport"}
+	i_OpenZFSNfsExportOption                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSNfsExportOption"}
+	i_OpenZFSNfsExportOptions                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSNfsExportOptions"}
+	i_OpenZFSNfsExports                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSNfsExports"}
+	iOpenZFSOriginSnapshotConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSOriginSnapshotConfiguration"}
+	iOpenZFSPosixFileSystemUser                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSPosixFileSystemUser"}
+	iOpenZFSQuotaType                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSQuotaType"}
+	iOpenZFSReadCacheConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSReadCacheConfiguration"}
+	iOpenZFSReadCacheSizingMode                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSReadCacheSizingMode"}
+	i_OpenZFSUserAndGroupQuotas                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSUserAndGroupQuotas"}
+	iOpenZFSUserOrGroupQuota                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSUserOrGroupQuota"}
+	iOpenZFSVolumeConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OpenZFSVolumeConfiguration"}
+	i_OrganizationalUnitDistinguishedName             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "OrganizationalUnitDistinguishedName"}
+	i_Parameter                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Parameter"}
+	i_PerUnitStorageThroughput                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "PerUnitStorageThroughput"}
+	iPrivilegedDelete                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "PrivilegedDelete"}
+	i_ProgressPercent                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ProgressPercent"}
+	i_ReadOnly                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReadOnly"}
+	i_Region                                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Region"}
+	iReleaseConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReleaseConfiguration"}
+	i_ReleasedCapacity                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReleasedCapacity"}
+	i_RemainingTransferBytes                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RemainingTransferBytes"}
+	iReportFormat                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReportFormat"}
+	iReportScope                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReportScope"}
+	i_RepositoryDnsIps                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RepositoryDnsIps"}
+	i_RequestTime                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RequestTime"}
+	i_ResourceARN                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ResourceARN"}
+	iResourceDoesNotSupportTagging                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ResourceDoesNotSupportTagging"}
+	iResourceNotFound                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ResourceNotFound"}
+	iResourceType                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ResourceType"}
+	iRestoreOpenZFSVolumeOption                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RestoreOpenZFSVolumeOption"}
+	i_RestoreOpenZFSVolumeOptions                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RestoreOpenZFSVolumeOptions"}
+	iRetentionPeriod                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RetentionPeriod"}
+	iRetentionPeriodType                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RetentionPeriodType"}
+	i_RetentionPeriodValue                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RetentionPeriodValue"}
+	i_RouteTableId                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RouteTableId"}
+	i_RouteTableIds                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RouteTableIds"}
+	iS3AccessPoint                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPoint"}
+	i_S3AccessPointAlias                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAlias"}
+	iS3AccessPointAttachment                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachment"}
+	iS3AccessPointAttachmentLifecycle                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentLifecycle"}
+	i_S3AccessPointAttachmentName                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentName"}
+	i_S3AccessPointAttachmentNames                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentNames"}
+	iS3AccessPointAttachmentNotFound                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentNotFound"}
+	i_S3AccessPointAttachments                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachments"}
+	iS3AccessPointAttachmentsFilter                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentsFilter"}
+	iS3AccessPointAttachmentsFilterName               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentsFilterName"}
+	i_S3AccessPointAttachmentsFilters                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentsFilters"}
+	i_S3AccessPointAttachmentsFilterValue             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentsFilterValue"}
+	i_S3AccessPointAttachmentsFilterValues            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentsFilterValues"}
+	iS3AccessPointAttachmentType                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointAttachmentType"}
+	iS3AccessPointOntapConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointOntapConfiguration"}
+	iS3AccessPointOpenZFSConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointOpenZFSConfiguration"}
+	iS3AccessPointVpcConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3AccessPointVpcConfiguration"}
+	iS3DataRepositoryConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "S3DataRepositoryConfiguration"}
+	i_SecurityGroupId                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SecurityGroupId"}
+	i_SecurityGroupIds                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SecurityGroupIds"}
+	iSecurityStyle                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SecurityStyle"}
+	iSelfManagedActiveDirectoryAttributes             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SelfManagedActiveDirectoryAttributes"}
+	iSelfManagedActiveDirectoryConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SelfManagedActiveDirectoryConfiguration"}
+	iSelfManagedActiveDirectoryConfigurationUpdates   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SelfManagedActiveDirectoryConfigurationUpdates"}
+	iServiceLimit                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ServiceLimit"}
+	iServiceLimitExceeded                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ServiceLimitExceeded"}
+	i_SizeInBytes                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SizeInBytes"}
+	iSnaplockConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnaplockConfiguration"}
+	iSnaplockRetentionPeriod                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnaplockRetentionPeriod"}
+	iSnaplockType                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnaplockType"}
+	iSnapshot                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Snapshot"}
+	iSnapshotFilter                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotFilter"}
+	iSnapshotFilterName                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotFilterName"}
+	i_SnapshotFilters                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotFilters"}
+	i_SnapshotFilterValue                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotFilterValue"}
+	i_SnapshotFilterValues                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotFilterValues"}
+	i_SnapshotId                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotId"}
+	i_SnapshotIds                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotIds"}
+	iSnapshotLifecycle                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotLifecycle"}
+	i_SnapshotName                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotName"}
+	iSnapshotNotFound                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotNotFound"}
+	i_SnapshotPolicy                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SnapshotPolicy"}
+	i_Snapshots                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Snapshots"}
+	i_SourceBackupId                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SourceBackupId"}
+	iSourceBackupUnavailable                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SourceBackupUnavailable"}
+	i_StartTime                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StartTime"}
+	iStatus                                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Status"}
+	i_StorageCapacity                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageCapacity"}
+	iStorageType                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageType"}
+	iStorageVirtualMachine                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachine"}
+	iStorageVirtualMachineFilter                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineFilter"}
+	iStorageVirtualMachineFilterName                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineFilterName"}
+	i_StorageVirtualMachineFilters                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineFilters"}
+	i_StorageVirtualMachineFilterValue                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineFilterValue"}
+	i_StorageVirtualMachineFilterValues               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineFilterValues"}
+	i_StorageVirtualMachineId                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineId"}
+	i_StorageVirtualMachineIds                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineIds"}
+	iStorageVirtualMachineLifecycle                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineLifecycle"}
+	i_StorageVirtualMachineName                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineName"}
+	iStorageVirtualMachineNotFound                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineNotFound"}
+	iStorageVirtualMachineRootVolumeSecurityStyle     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineRootVolumeSecurityStyle"}
+	i_StorageVirtualMachines                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachines"}
+	iStorageVirtualMachineSubtype                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StorageVirtualMachineSubtype"}
+	i_SubDirectoriesPaths                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SubDirectoriesPaths"}
+	i_SubnetId                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SubnetId"}
+	i_SubnetIds                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SubnetIds"}
+	i_SucceededCount                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SucceededCount"}
+	iSvmActiveDirectoryConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SvmActiveDirectoryConfiguration"}
+	iSvmEndpoint                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SvmEndpoint"}
+	iSvmEndpoints                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "SvmEndpoints"}
+	iTag                                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Tag"}
+	i_TagKey                                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TagKey"}
+	i_TagKeys                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TagKeys"}
+	i_Tags                                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Tags"}
+	i_TagValue                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TagValue"}
+	i_TaskId                                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TaskId"}
+	i_TaskIds                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TaskIds"}
+	i_ThroughputCapacityMbps                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ThroughputCapacityMbps"}
+	i_ThroughputCapacityPerHAPair                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ThroughputCapacityPerHAPair"}
+	iTieringPolicy                                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TieringPolicy"}
+	iTieringPolicyName                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TieringPolicyName"}
+	iTooManyAccessPoints                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TooManyAccessPoints"}
+	i_TotalConstituents                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TotalConstituents"}
+	i_TotalCount                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TotalCount"}
+	i_TotalTransferBytes                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TotalTransferBytes"}
+	iUnit                                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Unit"}
+	iUnsupportedOperation                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UnsupportedOperation"}
+	iUpdateFileCacheLustreConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileCacheLustreConfiguration"}
+	iUpdateFileSystemLustreConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystemLustreConfiguration"}
+	iUpdateFileSystemLustreMetadataConfiguration      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystemLustreMetadataConfiguration"}
+	iUpdateFileSystemOntapConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystemOntapConfiguration"}
+	iUpdateFileSystemOpenZFSConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystemOpenZFSConfiguration"}
+	iUpdateFileSystemWindowsConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystemWindowsConfiguration"}
+	iUpdateOntapVolumeConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateOntapVolumeConfiguration"}
+	iUpdateOpenZFSVolumeConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateOpenZFSVolumeConfiguration"}
+	iUpdateOpenZFSVolumeOption                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateOpenZFSVolumeOption"}
+	i_UpdateOpenZFSVolumeOptions                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateOpenZFSVolumeOptions"}
+	iUpdateSnaplockConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSnaplockConfiguration"}
+	iUpdateSvmActiveDirectoryConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSvmActiveDirectoryConfiguration"}
+	i_UUID                                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UUID"}
+	i_Value                                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Value"}
+	i_VerboseFlag                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VerboseFlag"}
+	iVolume                                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Volume"}
+	i_VolumeCapacity                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeCapacity"}
+	i_VolumeCapacityBytes                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeCapacityBytes"}
+	iVolumeFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeFilter"}
+	iVolumeFilterName                                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeFilterName"}
+	i_VolumeFilters                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeFilters"}
+	i_VolumeFilterValue                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeFilterValue"}
+	i_VolumeFilterValues                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeFilterValues"}
+	i_VolumeId                                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeId"}
+	i_VolumeIds                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeIds"}
+	iVolumeLifecycle                                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeLifecycle"}
+	i_VolumeName                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeName"}
+	iVolumeNotFound                                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeNotFound"}
+	i_VolumePath                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumePath"}
+	i_Volumes                                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "Volumes"}
+	iVolumeStyle                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeStyle"}
+	iVolumeType                                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VolumeType"}
+	i_VpcId                                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "VpcId"}
+	i_WeeklyTime                                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "WeeklyTime"}
+	iWindowsAccessAuditLogLevel                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "WindowsAccessAuditLogLevel"}
+	iWindowsAuditLogConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "WindowsAuditLogConfiguration"}
+	iWindowsAuditLogCreateConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "WindowsAuditLogCreateConfiguration"}
+	iWindowsDeploymentType                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "WindowsDeploymentType"}
+	iWindowsFileSystemConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "WindowsFileSystemConfiguration"}
+	iWindowsFsrmConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "WindowsFsrmConfiguration"}
+	iAssociateFileSystemAliasesRequest                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AssociateFileSystemAliasesRequest"}
+	iAssociateFileSystemAliasesResponse               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "AssociateFileSystemAliasesResponse"}
+	iCancelDataRepositoryTaskRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CancelDataRepositoryTaskRequest"}
+	iCancelDataRepositoryTaskResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CancelDataRepositoryTaskResponse"}
+	iCopyBackupRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CopyBackupRequest"}
+	iCopyBackupResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CopyBackupResponse"}
+	iCopySnapshotAndUpdateVolumeRequest               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CopySnapshotAndUpdateVolumeRequest"}
+	iCopySnapshotAndUpdateVolumeResponse              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CopySnapshotAndUpdateVolumeResponse"}
+	iCreateAndAttachS3AccessPointRequest              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateAndAttachS3AccessPointRequest"}
+	iCreateAndAttachS3AccessPointResponse             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateAndAttachS3AccessPointResponse"}
+	iCreateBackupRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateBackupRequest"}
+	iCreateBackupResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateBackupResponse"}
+	iCreateDataRepositoryAssociationRequest           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateDataRepositoryAssociationRequest"}
+	iCreateDataRepositoryAssociationResponse          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateDataRepositoryAssociationResponse"}
+	iCreateDataRepositoryTaskRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateDataRepositoryTaskRequest"}
+	iCreateDataRepositoryTaskResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateDataRepositoryTaskResponse"}
+	iCreateFileCacheRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileCacheRequest"}
+	iCreateFileCacheResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileCacheResponse"}
+	iCreateFileSystemFromBackupRequest                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemFromBackupRequest"}
+	iCreateFileSystemFromBackupResponse               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemFromBackupResponse"}
+	iCreateFileSystemRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemRequest"}
+	iCreateFileSystemResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateFileSystemResponse"}
+	iCreateSnapshotRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateSnapshotRequest"}
+	iCreateSnapshotResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateSnapshotResponse"}
+	iCreateStorageVirtualMachineRequest               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateStorageVirtualMachineRequest"}
+	iCreateStorageVirtualMachineResponse              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateStorageVirtualMachineResponse"}
+	iCreateVolumeFromBackupRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateVolumeFromBackupRequest"}
+	iCreateVolumeFromBackupResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateVolumeFromBackupResponse"}
+	iCreateVolumeRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateVolumeRequest"}
+	iCreateVolumeResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "CreateVolumeResponse"}
+	iDeleteBackupRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteBackupRequest"}
+	iDeleteBackupResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteBackupResponse"}
+	iDeleteDataRepositoryAssociationRequest           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteDataRepositoryAssociationRequest"}
+	iDeleteDataRepositoryAssociationResponse          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteDataRepositoryAssociationResponse"}
+	iDeleteFileCacheRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileCacheRequest"}
+	iDeleteFileCacheResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileCacheResponse"}
+	iDeleteFileSystemRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemRequest"}
+	iDeleteFileSystemResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteFileSystemResponse"}
+	iDeleteSnapshotRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteSnapshotRequest"}
+	iDeleteSnapshotResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteSnapshotResponse"}
+	iDeleteStorageVirtualMachineRequest               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteStorageVirtualMachineRequest"}
+	iDeleteStorageVirtualMachineResponse              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteStorageVirtualMachineResponse"}
+	iDeleteVolumeRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteVolumeRequest"}
+	iDeleteVolumeResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DeleteVolumeResponse"}
+	iDescribeBackupsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeBackupsRequest"}
+	iDescribeBackupsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeBackupsResponse"}
+	iDescribeDataRepositoryAssociationsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeDataRepositoryAssociationsRequest"}
+	iDescribeDataRepositoryAssociationsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeDataRepositoryAssociationsResponse"}
+	iDescribeDataRepositoryTasksRequest               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeDataRepositoryTasksRequest"}
+	iDescribeDataRepositoryTasksResponse              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeDataRepositoryTasksResponse"}
+	iDescribeFileCachesRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileCachesRequest"}
+	iDescribeFileCachesResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileCachesResponse"}
+	iDescribeFileSystemAliasesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileSystemAliasesRequest"}
+	iDescribeFileSystemAliasesResponse                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileSystemAliasesResponse"}
+	iDescribeFileSystemsRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileSystemsRequest"}
+	iDescribeFileSystemsResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeFileSystemsResponse"}
+	iDescribeS3AccessPointAttachmentsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeS3AccessPointAttachmentsRequest"}
+	iDescribeS3AccessPointAttachmentsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeS3AccessPointAttachmentsResponse"}
+	iDescribeSharedVpcConfigurationRequest            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeSharedVpcConfigurationRequest"}
+	iDescribeSharedVpcConfigurationResponse           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeSharedVpcConfigurationResponse"}
+	iDescribeSnapshotsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeSnapshotsRequest"}
+	iDescribeSnapshotsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeSnapshotsResponse"}
+	iDescribeStorageVirtualMachinesRequest            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeStorageVirtualMachinesRequest"}
+	iDescribeStorageVirtualMachinesResponse           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeStorageVirtualMachinesResponse"}
+	iDescribeVolumesRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeVolumesRequest"}
+	iDescribeVolumesResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DescribeVolumesResponse"}
+	iDetachAndDeleteS3AccessPointRequest              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DetachAndDeleteS3AccessPointRequest"}
+	iDetachAndDeleteS3AccessPointResponse             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DetachAndDeleteS3AccessPointResponse"}
+	iDisassociateFileSystemAliasesRequest             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DisassociateFileSystemAliasesRequest"}
+	iDisassociateFileSystemAliasesResponse            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "DisassociateFileSystemAliasesResponse"}
+	iListTagsForResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ListTagsForResourceResponse"}
+	iReleaseFileSystemNfsV3LocksRequest               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReleaseFileSystemNfsV3LocksRequest"}
+	iReleaseFileSystemNfsV3LocksResponse              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "ReleaseFileSystemNfsV3LocksResponse"}
+	iRestoreVolumeFromSnapshotRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RestoreVolumeFromSnapshotRequest"}
+	iRestoreVolumeFromSnapshotResponse                = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "RestoreVolumeFromSnapshotResponse"}
+	iStartMisconfiguredStateRecoveryRequest           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StartMisconfiguredStateRecoveryRequest"}
+	iStartMisconfiguredStateRecoveryResponse          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "StartMisconfiguredStateRecoveryResponse"}
+	iTagResourceRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TagResourceRequest"}
+	iTagResourceResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "TagResourceResponse"}
+	iUntagResourceRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UntagResourceResponse"}
+	iUpdateDataRepositoryAssociationRequest           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateDataRepositoryAssociationRequest"}
+	iUpdateDataRepositoryAssociationResponse          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateDataRepositoryAssociationResponse"}
+	iUpdateFileCacheRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileCacheRequest"}
+	iUpdateFileCacheResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileCacheResponse"}
+	iUpdateFileSystemRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystemRequest"}
+	iUpdateFileSystemResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateFileSystemResponse"}
+	iUpdateSharedVpcConfigurationRequest              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSharedVpcConfigurationRequest"}
+	iUpdateSharedVpcConfigurationResponse             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSharedVpcConfigurationResponse"}
+	iUpdateSnapshotRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSnapshotRequest"}
+	iUpdateSnapshotResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateSnapshotResponse"}
+	iUpdateStorageVirtualMachineRequest               = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateStorageVirtualMachineRequest"}
+	iUpdateStorageVirtualMachineResponse              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateStorageVirtualMachineResponse"}
+	iUpdateVolumeRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateVolumeRequest"}
+	iUpdateVolumeResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.fsx", Name: "UpdateVolumeResponse"}
+	pUnit                                             = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Error"}, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x48}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t4 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, &smithytraits.XMLName{Name: "Error"}, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x48}
+
+var mAccessPointAlreadyOwnedByYou = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessPointAlreadyOwnedByYou_ErrorCode, &sAccessPointAlreadyOwnedByYou_Message}}
+var mActiveDirectoryBackupAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveDirectoryBackupAttributes_DomainName, &sActiveDirectoryBackupAttributes_ActiveDirectoryId, &sActiveDirectoryBackupAttributes_ResourceARN}}
+var mActiveDirectoryError = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveDirectoryError_ActiveDirectoryId, &sActiveDirectoryError_Type, &sActiveDirectoryError_Message}}
+var mActiveDirectoryErrorType = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveDirectoryErrorType_DOMAIN_NOT_FOUND, &sActiveDirectoryErrorType_INCOMPATIBLE_DOMAIN_MODE, &sActiveDirectoryErrorType_WRONG_VPC, &sActiveDirectoryErrorType_INVALID_NETWORK_TYPE, &sActiveDirectoryErrorType_INVALID_DOMAIN_STAGE}}
+var mAdministrativeAction = smithy.SchemaMembers{List: []*smithy.Schema{&sAdministrativeAction_AdministrativeActionType, &sAdministrativeAction_ProgressPercent, &sAdministrativeAction_RequestTime, &sAdministrativeAction_Status, &sAdministrativeAction_TargetFileSystemValues, &sAdministrativeAction_FailureDetails, &sAdministrativeAction_TargetVolumeValues, &sAdministrativeAction_TargetSnapshotValues, &sAdministrativeAction_TotalTransferBytes, &sAdministrativeAction_RemainingTransferBytes, &sAdministrativeAction_Message}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 5, 8, 0, 0, 0, 2, 10, 6, 1, 0, 0, 0, 3, 0, 0, 11, 0, 0, 0, 0, 0,
+	4, 0, 0, 9, 0, 0, 0, 7,
+}}
+var mAdministrativeActionFailureDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAdministrativeActionFailureDetails_Message}}
+var m_AdministrativeActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_AdministrativeActions_member}}
+var mAdministrativeActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sAdministrativeActionType_FILE_SYSTEM_UPDATE, &sAdministrativeActionType_STORAGE_OPTIMIZATION, &sAdministrativeActionType_FILE_SYSTEM_ALIAS_ASSOCIATION, &sAdministrativeActionType_FILE_SYSTEM_ALIAS_DISASSOCIATION, &sAdministrativeActionType_VOLUME_UPDATE, &sAdministrativeActionType_SNAPSHOT_UPDATE, &sAdministrativeActionType_RELEASE_NFS_V3_LOCKS, &sAdministrativeActionType_VOLUME_RESTORE, &sAdministrativeActionType_THROUGHPUT_OPTIMIZATION, &sAdministrativeActionType_IOPS_OPTIMIZATION, &sAdministrativeActionType_STORAGE_TYPE_OPTIMIZATION, &sAdministrativeActionType_MISCONFIGURED_STATE_RECOVERY, &sAdministrativeActionType_VOLUME_UPDATE_WITH_SNAPSHOT, &sAdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT, &sAdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP}, Seed: 5, Slots: []uint16{
+	3, 15, 0, 4, 0, 14, 0, 0, 7, 11, 8, 1, 0, 0, 2, 0, 0, 9, 10, 0, 0, 0, 0, 6,
+	0, 0, 13, 0, 5, 12, 0, 0,
+}}
+var mAggregateConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAggregateConfiguration_Aggregates, &sAggregateConfiguration_TotalConstituents}}
+var m_Aggregates = smithy.SchemaMembers{List: []*smithy.Schema{&s_Aggregates_member}}
+var mAlias = smithy.SchemaMembers{List: []*smithy.Schema{&sAlias_Name, &sAlias_Lifecycle}}
+var m_Aliases = smithy.SchemaMembers{List: []*smithy.Schema{&s_Aliases_member}}
+var mAliasLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sAliasLifecycle_AVAILABLE, &sAliasLifecycle_CREATING, &sAliasLifecycle_DELETING, &sAliasLifecycle_CREATE_FAILED, &sAliasLifecycle_DELETE_FAILED}}
+var m_AlternateDNSNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_AlternateDNSNames_member}}
+var mAutocommitPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sAutocommitPeriod_Type, &sAutocommitPeriod_Value}}
+var mAutocommitPeriodType = smithy.SchemaMembers{List: []*smithy.Schema{&sAutocommitPeriodType_MINUTES, &sAutocommitPeriodType_HOURS, &sAutocommitPeriodType_DAYS, &sAutocommitPeriodType_MONTHS, &sAutocommitPeriodType_YEARS, &sAutocommitPeriodType_NONE}}
+var mAutoExportPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoExportPolicy_Events}}
+var mAutoImportPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoImportPolicy_Events}}
+var mAutoImportPolicyType = smithy.SchemaMembers{List: []*smithy.Schema{&sAutoImportPolicyType_NONE, &sAutoImportPolicyType_NEW, &sAutoImportPolicyType_NEW_CHANGED, &sAutoImportPolicyType_NEW_CHANGED_DELETED}}
+var mBackup = smithy.SchemaMembers{List: []*smithy.Schema{&sBackup_BackupId, &sBackup_Lifecycle, &sBackup_FailureDetails, &sBackup_Type, &sBackup_ProgressPercent, &sBackup_CreationTime, &sBackup_KmsKeyId, &sBackup_ResourceARN, &sBackup_Tags, &sBackup_FileSystem, &sBackup_DirectoryInformation, &sBackup_OwnerId, &sBackup_SourceBackupId, &sBackup_SourceBackupRegion, &sBackup_ResourceType, &sBackup_Volume, &sBackup_SizeInBytes}, Seed: 1, Slots: []uint16{
+	0, 0, 15, 0, 0, 0, 14, 7, 0, 0, 0, 17, 12, 0, 6, 0, 0, 0, 0, 10, 0, 13, 0, 0,
+	0, 2, 0, 0, 0, 0, 0, 0, 0, 9, 0, 8, 0, 0, 11, 4, 0, 5, 0, 1, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 16, 0, 0, 0,
+}}
+var mBackupBeingCopied = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupBeingCopied_Message, &sBackupBeingCopied_BackupId}}
+var mBackupFailureDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupFailureDetails_Message}}
+var m_BackupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_BackupIds_member}}
+var mBackupInProgress = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupInProgress_Message}}
+var mBackupLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupLifecycle_AVAILABLE, &sBackupLifecycle_CREATING, &sBackupLifecycle_TRANSFERRING, &sBackupLifecycle_DELETED, &sBackupLifecycle_FAILED, &sBackupLifecycle_PENDING, &sBackupLifecycle_COPYING}}
+var mBackupNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupNotFound_Message}}
+var mBackupRestoring = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupRestoring_Message, &sBackupRestoring_FileSystemId}}
+var m_Backups = smithy.SchemaMembers{List: []*smithy.Schema{&s_Backups_member}}
+var mBackupType = smithy.SchemaMembers{List: []*smithy.Schema{&sBackupType_AUTOMATIC, &sBackupType_USER_INITIATED, &sBackupType_AWS_BACKUP}}
+var mBadRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequest_Message}}
+var mCompletionReport = smithy.SchemaMembers{List: []*smithy.Schema{&sCompletionReport_Enabled, &sCompletionReport_Path, &sCompletionReport_Format, &sCompletionReport_Scope}}
+var mCreateAggregateConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAggregateConfiguration_Aggregates, &sCreateAggregateConfiguration_ConstituentsPerAggregate}}
+var mCreateAndAttachS3AccessPointOntapConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAndAttachS3AccessPointOntapConfiguration_VolumeId, &sCreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity}}
+var mCreateAndAttachS3AccessPointOpenZFSConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId, &sCreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity}}
+var mCreateAndAttachS3AccessPointS3Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAndAttachS3AccessPointS3Configuration_VpcConfiguration, &sCreateAndAttachS3AccessPointS3Configuration_Policy}}
+var m_CreateFileCacheDataRepositoryAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateFileCacheDataRepositoryAssociations_member}}
+var mCreateFileCacheLustreConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileCacheLustreConfiguration_PerUnitStorageThroughput, &sCreateFileCacheLustreConfiguration_DeploymentType, &sCreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime, &sCreateFileCacheLustreConfiguration_MetadataConfiguration}}
+var mCreateFileSystemLustreConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime, &sCreateFileSystemLustreConfiguration_ImportPath, &sCreateFileSystemLustreConfiguration_ExportPath, &sCreateFileSystemLustreConfiguration_ImportedFileChunkSize, &sCreateFileSystemLustreConfiguration_DeploymentType, &sCreateFileSystemLustreConfiguration_AutoImportPolicy, &sCreateFileSystemLustreConfiguration_PerUnitStorageThroughput, &sCreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime, &sCreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays, &sCreateFileSystemLustreConfiguration_CopyTagsToBackups, &sCreateFileSystemLustreConfiguration_DriveCacheType, &sCreateFileSystemLustreConfiguration_DataCompressionType, &sCreateFileSystemLustreConfiguration_EfaEnabled, &sCreateFileSystemLustreConfiguration_LogConfiguration, &sCreateFileSystemLustreConfiguration_RootSquashConfiguration, &sCreateFileSystemLustreConfiguration_MetadataConfiguration, &sCreateFileSystemLustreConfiguration_ThroughputCapacity, &sCreateFileSystemLustreConfiguration_DataReadCacheConfiguration}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 12, 1, 0, 0, 0, 0, 0, 6, 7, 0, 0, 0, 13, 0, 14, 0, 0, 0, 0, 5,
+	0, 0, 0, 11, 0, 0, 0, 15, 0, 4, 0, 18, 0, 0, 0, 17, 2, 0, 3, 0, 0, 0, 10, 0,
+	0, 0, 0, 0, 9, 0, 0, 0, 0, 0, 0, 8, 0, 16, 0, 0,
+}}
+var mCreateFileSystemLustreMetadataConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemLustreMetadataConfiguration_Iops, &sCreateFileSystemLustreMetadataConfiguration_Mode}}
+var mCreateFileSystemOntapConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays, &sCreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime, &sCreateFileSystemOntapConfiguration_DeploymentType, &sCreateFileSystemOntapConfiguration_EndpointIpAddressRange, &sCreateFileSystemOntapConfiguration_FsxAdminPassword, &sCreateFileSystemOntapConfiguration_DiskIopsConfiguration, &sCreateFileSystemOntapConfiguration_PreferredSubnetId, &sCreateFileSystemOntapConfiguration_RouteTableIds, &sCreateFileSystemOntapConfiguration_ThroughputCapacity, &sCreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime, &sCreateFileSystemOntapConfiguration_HAPairs, &sCreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair, &sCreateFileSystemOntapConfiguration_EndpointIpv6AddressRange}, Seed: 20, Slots: []uint16{
+	0, 9, 0, 0, 5, 0, 0, 2, 0, 10, 0, 0, 1, 13, 0, 8, 0, 0, 0, 0, 0, 12, 7, 4,
+	0, 0, 0, 0, 3, 0, 11, 6,
+}}
+var mCreateFileSystemOpenZFSConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays, &sCreateFileSystemOpenZFSConfiguration_CopyTagsToBackups, &sCreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes, &sCreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime, &sCreateFileSystemOpenZFSConfiguration_DeploymentType, &sCreateFileSystemOpenZFSConfiguration_ThroughputCapacity, &sCreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime, &sCreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration, &sCreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration, &sCreateFileSystemOpenZFSConfiguration_PreferredSubnetId, &sCreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange, &sCreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange, &sCreateFileSystemOpenZFSConfiguration_RouteTableIds, &sCreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration}, Seed: 16, Slots: []uint16{
+	0, 1, 0, 0, 13, 0, 0, 9, 0, 0, 0, 4, 0, 11, 0, 5, 0, 2, 14, 10, 6, 8, 0, 0,
+	0, 0, 3, 0, 0, 7, 12, 0,
+}}
+var mCreateFileSystemWindowsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemWindowsConfiguration_ActiveDirectoryId, &sCreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration, &sCreateFileSystemWindowsConfiguration_DeploymentType, &sCreateFileSystemWindowsConfiguration_PreferredSubnetId, &sCreateFileSystemWindowsConfiguration_ThroughputCapacity, &sCreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime, &sCreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime, &sCreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays, &sCreateFileSystemWindowsConfiguration_CopyTagsToBackups, &sCreateFileSystemWindowsConfiguration_Aliases, &sCreateFileSystemWindowsConfiguration_AuditLogConfiguration, &sCreateFileSystemWindowsConfiguration_DiskIopsConfiguration, &sCreateFileSystemWindowsConfiguration_FsrmConfiguration}, Seed: 33, Slots: []uint16{
+	0, 2, 6, 0, 9, 0, 0, 11, 13, 12, 0, 10, 1, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 7,
+	0, 5, 0, 0, 3, 0, 0, 4,
+}}
+var mCreateOntapVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOntapVolumeConfiguration_JunctionPath, &sCreateOntapVolumeConfiguration_SecurityStyle, &sCreateOntapVolumeConfiguration_SizeInMegabytes, &sCreateOntapVolumeConfiguration_StorageEfficiencyEnabled, &sCreateOntapVolumeConfiguration_StorageVirtualMachineId, &sCreateOntapVolumeConfiguration_TieringPolicy, &sCreateOntapVolumeConfiguration_OntapVolumeType, &sCreateOntapVolumeConfiguration_SnapshotPolicy, &sCreateOntapVolumeConfiguration_CopyTagsToBackups, &sCreateOntapVolumeConfiguration_SnaplockConfiguration, &sCreateOntapVolumeConfiguration_VolumeStyle, &sCreateOntapVolumeConfiguration_AggregateConfiguration, &sCreateOntapVolumeConfiguration_SizeInBytes}, Seed: 3, Slots: []uint16{
+	0, 13, 0, 0, 0, 0, 0, 7, 0, 0, 2, 0, 9, 6, 11, 8, 0, 0, 0, 5, 0, 0, 1, 4,
+	0, 12, 0, 0, 3, 10, 0, 0,
+}}
+var mCreateOpenZFSOriginSnapshotConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOpenZFSOriginSnapshotConfiguration_SnapshotARN, &sCreateOpenZFSOriginSnapshotConfiguration_CopyStrategy}}
+var mCreateOpenZFSVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOpenZFSVolumeConfiguration_ParentVolumeId, &sCreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, &sCreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, &sCreateOpenZFSVolumeConfiguration_RecordSizeKiB, &sCreateOpenZFSVolumeConfiguration_DataCompressionType, &sCreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots, &sCreateOpenZFSVolumeConfiguration_OriginSnapshot, &sCreateOpenZFSVolumeConfiguration_ReadOnly, &sCreateOpenZFSVolumeConfiguration_NfsExports, &sCreateOpenZFSVolumeConfiguration_UserAndGroupQuotas}, Seed: 9, Slots: []uint16{
+	0, 1, 0, 0, 7, 8, 10, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 5, 0, 0, 0, 0, 0, 3,
+	9, 0, 6, 0, 0, 4, 0, 0,
+}}
+var mCreateSnaplockConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnaplockConfiguration_AuditLogVolume, &sCreateSnaplockConfiguration_AutocommitPeriod, &sCreateSnaplockConfiguration_PrivilegedDelete, &sCreateSnaplockConfiguration_RetentionPeriod, &sCreateSnaplockConfiguration_SnaplockType, &sCreateSnaplockConfiguration_VolumeAppendModeEnabled}}
+var mCreateSvmActiveDirectoryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSvmActiveDirectoryConfiguration_NetBiosName, &sCreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration}}
+var mDataCompressionType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataCompressionType_NONE, &sDataCompressionType_LZ4}}
+var mDataRepositoryAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryAssociation_AssociationId, &sDataRepositoryAssociation_ResourceARN, &sDataRepositoryAssociation_FileSystemId, &sDataRepositoryAssociation_Lifecycle, &sDataRepositoryAssociation_FailureDetails, &sDataRepositoryAssociation_FileSystemPath, &sDataRepositoryAssociation_DataRepositoryPath, &sDataRepositoryAssociation_BatchImportMetaDataOnCreate, &sDataRepositoryAssociation_ImportedFileChunkSize, &sDataRepositoryAssociation_S3, &sDataRepositoryAssociation_Tags, &sDataRepositoryAssociation_CreationTime, &sDataRepositoryAssociation_FileCacheId, &sDataRepositoryAssociation_FileCachePath, &sDataRepositoryAssociation_DataRepositorySubdirectories, &sDataRepositoryAssociation_NFS}, Seed: 9, Slots: []uint16{
+	3, 9, 0, 10, 0, 0, 0, 0, 0, 1, 0, 0, 11, 0, 15, 0, 12, 5, 14, 0, 0, 0, 0, 16,
+	13, 0, 8, 4, 6, 2, 7, 0,
+}}
+var m_DataRepositoryAssociationIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataRepositoryAssociationIds_member}}
+var mDataRepositoryAssociationNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryAssociationNotFound_Message}}
+var m_DataRepositoryAssociations = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataRepositoryAssociations_member}}
+var mDataRepositoryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryConfiguration_Lifecycle, &sDataRepositoryConfiguration_ImportPath, &sDataRepositoryConfiguration_ExportPath, &sDataRepositoryConfiguration_ImportedFileChunkSize, &sDataRepositoryConfiguration_AutoImportPolicy, &sDataRepositoryConfiguration_FailureDetails}}
+var mDataRepositoryFailureDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryFailureDetails_Message}}
+var mDataRepositoryLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryLifecycle_CREATING, &sDataRepositoryLifecycle_AVAILABLE, &sDataRepositoryLifecycle_MISCONFIGURED, &sDataRepositoryLifecycle_UPDATING, &sDataRepositoryLifecycle_DELETING, &sDataRepositoryLifecycle_FAILED}}
+var mDataRepositoryTask = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTask_TaskId, &sDataRepositoryTask_Lifecycle, &sDataRepositoryTask_Type, &sDataRepositoryTask_CreationTime, &sDataRepositoryTask_StartTime, &sDataRepositoryTask_EndTime, &sDataRepositoryTask_ResourceARN, &sDataRepositoryTask_Tags, &sDataRepositoryTask_FileSystemId, &sDataRepositoryTask_Paths, &sDataRepositoryTask_FailureDetails, &sDataRepositoryTask_Status, &sDataRepositoryTask_Report, &sDataRepositoryTask_CapacityToRelease, &sDataRepositoryTask_FileCacheId, &sDataRepositoryTask_ReleaseConfiguration}, Seed: 66, Slots: []uint16{
+	0, 0, 0, 11, 9, 15, 1, 16, 6, 0, 0, 0, 0, 0, 0, 4, 0, 12, 13, 3, 0, 8, 2, 0,
+	5, 0, 7, 0, 14, 10, 0, 0,
+}}
+var mDataRepositoryTaskEnded = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskEnded_Message}}
+var mDataRepositoryTaskExecuting = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskExecuting_Message}}
+var mDataRepositoryTaskFailureDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskFailureDetails_Message}}
+var mDataRepositoryTaskFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskFilter_Name, &sDataRepositoryTaskFilter_Values}}
+var mDataRepositoryTaskFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskFilterName_FILE_SYSTEM_ID, &sDataRepositoryTaskFilterName_TASK_LIFECYCLE, &sDataRepositoryTaskFilterName_DATA_REPO_ASSOCIATION_ID, &sDataRepositoryTaskFilterName_FILE_CACHE_ID}}
+var m_DataRepositoryTaskFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataRepositoryTaskFilters_member}}
+var m_DataRepositoryTaskFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataRepositoryTaskFilterValues_member}}
+var mDataRepositoryTaskLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskLifecycle_PENDING, &sDataRepositoryTaskLifecycle_EXECUTING, &sDataRepositoryTaskLifecycle_FAILED, &sDataRepositoryTaskLifecycle_SUCCEEDED, &sDataRepositoryTaskLifecycle_CANCELED, &sDataRepositoryTaskLifecycle_CANCELING}}
+var mDataRepositoryTaskNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskNotFound_Message}}
+var m_DataRepositoryTaskPaths = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataRepositoryTaskPaths_member}}
+var m_DataRepositoryTasks = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataRepositoryTasks_member}}
+var mDataRepositoryTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskStatus_TotalCount, &sDataRepositoryTaskStatus_SucceededCount, &sDataRepositoryTaskStatus_FailedCount, &sDataRepositoryTaskStatus_LastUpdatedTime, &sDataRepositoryTaskStatus_ReleasedCapacity}}
+var mDataRepositoryTaskType = smithy.SchemaMembers{List: []*smithy.Schema{&sDataRepositoryTaskType_EXPORT, &sDataRepositoryTaskType_IMPORT, &sDataRepositoryTaskType_EVICTION, &sDataRepositoryTaskType_AUTO_TRIGGERED_EVICTION}}
+var mDeleteFileSystemLustreConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemLustreConfiguration_SkipFinalBackup, &sDeleteFileSystemLustreConfiguration_FinalBackupTags}}
+var mDeleteFileSystemLustreResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemLustreResponse_FinalBackupId, &sDeleteFileSystemLustreResponse_FinalBackupTags}}
+var mDeleteFileSystemOpenZFSConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemOpenZFSConfiguration_SkipFinalBackup, &sDeleteFileSystemOpenZFSConfiguration_FinalBackupTags, &sDeleteFileSystemOpenZFSConfiguration_Options}}
+var mDeleteFileSystemOpenZFSOption = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemOpenZFSOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS}}
+var m_DeleteFileSystemOpenZFSOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeleteFileSystemOpenZFSOptions_member}}
+var mDeleteFileSystemOpenZFSResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemOpenZFSResponse_FinalBackupId, &sDeleteFileSystemOpenZFSResponse_FinalBackupTags}}
+var mDeleteFileSystemWindowsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemWindowsConfiguration_SkipFinalBackup, &sDeleteFileSystemWindowsConfiguration_FinalBackupTags}}
+var mDeleteFileSystemWindowsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemWindowsResponse_FinalBackupId, &sDeleteFileSystemWindowsResponse_FinalBackupTags}}
+var mDeleteOpenZFSVolumeOption = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOpenZFSVolumeOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS}}
+var m_DeleteOpenZFSVolumeOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeleteOpenZFSVolumeOptions_member}}
+var mDeleteVolumeOntapConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVolumeOntapConfiguration_SkipFinalBackup, &sDeleteVolumeOntapConfiguration_FinalBackupTags, &sDeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention}}
+var mDeleteVolumeOntapResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVolumeOntapResponse_FinalBackupId, &sDeleteVolumeOntapResponse_FinalBackupTags}}
+var mDeleteVolumeOpenZFSConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVolumeOpenZFSConfiguration_Options}}
+var mDiskIopsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDiskIopsConfiguration_Mode, &sDiskIopsConfiguration_Iops}}
+var mDiskIopsConfigurationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDiskIopsConfigurationMode_AUTOMATIC, &sDiskIopsConfigurationMode_USER_PROVISIONED}}
+var m_DnsIps = smithy.SchemaMembers{List: []*smithy.Schema{&s_DnsIps_member}}
+var mDriveCacheType = smithy.SchemaMembers{List: []*smithy.Schema{&sDriveCacheType_NONE, &sDriveCacheType_READ}}
+var mDurationSinceLastAccess = smithy.SchemaMembers{List: []*smithy.Schema{&sDurationSinceLastAccess_Unit, &sDurationSinceLastAccess_Value}}
+var mEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sEventType_NEW, &sEventType_CHANGED, &sEventType_DELETED}}
+var m_EventTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventTypes_member}}
+var mFileCache = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCache_OwnerId, &sFileCache_CreationTime, &sFileCache_FileCacheId, &sFileCache_FileCacheType, &sFileCache_FileCacheTypeVersion, &sFileCache_Lifecycle, &sFileCache_FailureDetails, &sFileCache_StorageCapacity, &sFileCache_VpcId, &sFileCache_SubnetIds, &sFileCache_NetworkInterfaceIds, &sFileCache_DNSName, &sFileCache_KmsKeyId, &sFileCache_ResourceARN, &sFileCache_LustreConfiguration, &sFileCache_DataRepositoryAssociationIds}, Seed: 109, Slots: []uint16{
+	0, 0, 0, 0, 0, 4, 9, 0, 10, 0, 0, 11, 7, 3, 8, 0, 2, 0, 0, 1, 0, 0, 12, 13,
+	15, 0, 0, 6, 14, 5, 0, 16,
+}}
+var mFileCacheCreating = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheCreating_OwnerId, &sFileCacheCreating_CreationTime, &sFileCacheCreating_FileCacheId, &sFileCacheCreating_FileCacheType, &sFileCacheCreating_FileCacheTypeVersion, &sFileCacheCreating_Lifecycle, &sFileCacheCreating_FailureDetails, &sFileCacheCreating_StorageCapacity, &sFileCacheCreating_VpcId, &sFileCacheCreating_SubnetIds, &sFileCacheCreating_NetworkInterfaceIds, &sFileCacheCreating_DNSName, &sFileCacheCreating_KmsKeyId, &sFileCacheCreating_ResourceARN, &sFileCacheCreating_Tags, &sFileCacheCreating_CopyTagsToDataRepositoryAssociations, &sFileCacheCreating_LustreConfiguration, &sFileCacheCreating_DataRepositoryAssociationIds}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 8, 6, 0, 0, 0, 0, 7, 11, 0, 5, 0, 0, 0, 0, 0, 3, 0, 0, 12, 0,
+	9, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 17, 0, 14, 0, 0, 0, 0, 13, 1, 18, 15, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 2, 0, 0, 16, 0,
+}}
+var mFileCacheDataRepositoryAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheDataRepositoryAssociation_FileCachePath, &sFileCacheDataRepositoryAssociation_DataRepositoryPath, &sFileCacheDataRepositoryAssociation_DataRepositorySubdirectories, &sFileCacheDataRepositoryAssociation_NFS}}
+var mFileCacheFailureDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheFailureDetails_Message}}
+var m_FileCacheIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileCacheIds_member}}
+var mFileCacheLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheLifecycle_AVAILABLE, &sFileCacheLifecycle_CREATING, &sFileCacheLifecycle_DELETING, &sFileCacheLifecycle_UPDATING, &sFileCacheLifecycle_FAILED}}
+var mFileCacheLustreConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheLustreConfiguration_PerUnitStorageThroughput, &sFileCacheLustreConfiguration_DeploymentType, &sFileCacheLustreConfiguration_MountName, &sFileCacheLustreConfiguration_WeeklyMaintenanceStartTime, &sFileCacheLustreConfiguration_MetadataConfiguration, &sFileCacheLustreConfiguration_LogConfiguration}}
+var mFileCacheLustreDeploymentType = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheLustreDeploymentType_CACHE_1}}
+var mFileCacheLustreMetadataConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheLustreMetadataConfiguration_StorageCapacity}}
+var mFileCacheNFSConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheNFSConfiguration_Version, &sFileCacheNFSConfiguration_DnsIps}}
+var mFileCacheNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheNotFound_Message}}
+var m_FileCaches = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileCaches_member}}
+var mFileCacheType = smithy.SchemaMembers{List: []*smithy.Schema{&sFileCacheType_LUSTRE}}
+var mFileSystem = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystem_OwnerId, &sFileSystem_CreationTime, &sFileSystem_FileSystemId, &sFileSystem_FileSystemType, &sFileSystem_Lifecycle, &sFileSystem_FailureDetails, &sFileSystem_StorageCapacity, &sFileSystem_StorageType, &sFileSystem_VpcId, &sFileSystem_SubnetIds, &sFileSystem_NetworkInterfaceIds, &sFileSystem_DNSName, &sFileSystem_KmsKeyId, &sFileSystem_ResourceARN, &sFileSystem_Tags, &sFileSystem_WindowsConfiguration, &sFileSystem_LustreConfiguration, &sFileSystem_AdministrativeActions, &sFileSystem_OntapConfiguration, &sFileSystem_FileSystemTypeVersion, &sFileSystem_OpenZFSConfiguration, &sFileSystem_NetworkType}, Seed: 7, Slots: []uint16{
+	20, 13, 6, 15, 0, 0, 0, 0, 0, 1, 0, 0, 17, 0, 0, 0, 0, 8, 22, 2, 0, 0, 19, 0,
+	14, 0, 0, 0, 0, 5, 0, 0, 10, 0, 0, 18, 7, 0, 0, 16, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 9, 0, 11, 4, 0, 0, 0, 0, 0, 0, 21, 0, 12, 3,
+}}
+var mFileSystemEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemEndpoint_DNSName, &sFileSystemEndpoint_IpAddresses, &sFileSystemEndpoint_Ipv6Addresses}}
+var mFileSystemEndpoints = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemEndpoints_Intercluster, &sFileSystemEndpoints_Management}}
+var mFileSystemFailureDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemFailureDetails_Message}}
+var m_FileSystemIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystemIds_member}}
+var mFileSystemLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemLifecycle_AVAILABLE, &sFileSystemLifecycle_CREATING, &sFileSystemLifecycle_FAILED, &sFileSystemLifecycle_DELETING, &sFileSystemLifecycle_MISCONFIGURED, &sFileSystemLifecycle_UPDATING, &sFileSystemLifecycle_MISCONFIGURED_UNAVAILABLE}}
+var mFileSystemLustreMetadataConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemLustreMetadataConfiguration_Iops, &sFileSystemLustreMetadataConfiguration_Mode}}
+var mFileSystemMaintenanceOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemMaintenanceOperation_PATCHING, &sFileSystemMaintenanceOperation_BACKING_UP}}
+var m_FileSystemMaintenanceOperations = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystemMaintenanceOperations_member}}
+var mFileSystemNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemNotFound_Message}}
+var m_FileSystems = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystems_member}}
+var m_FileSystemSecondaryGIDs = smithy.SchemaMembers{List: []*smithy.Schema{&s_FileSystemSecondaryGIDs_member}}
+var mFileSystemType = smithy.SchemaMembers{List: []*smithy.Schema{&sFileSystemType_WINDOWS, &sFileSystemType_LUSTRE, &sFileSystemType_ONTAP, &sFileSystemType_OPENZFS}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Name, &sFilter_Values}}
+var mFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterName_FILE_SYSTEM_ID, &sFilterName_BACKUP_TYPE, &sFilterName_FILE_SYSTEM_TYPE, &sFilterName_VOLUME_ID, &sFilterName_DATA_REPOSITORY_TYPE, &sFilterName_FILE_CACHE_ID, &sFilterName_FILE_CACHE_TYPE}}
+var m_Filters = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filters_member}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mFlexCacheEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sFlexCacheEndpointType_NONE, &sFlexCacheEndpointType_ORIGIN, &sFlexCacheEndpointType_CACHE}}
+var mIncompatibleParameterError = smithy.SchemaMembers{List: []*smithy.Schema{&sIncompatibleParameterError_Parameter, &sIncompatibleParameterError_Message}}
+var mIncompatibleRegionForMultiAZ = smithy.SchemaMembers{List: []*smithy.Schema{&sIncompatibleRegionForMultiAZ_Message}}
+var mInputOntapVolumeType = smithy.SchemaMembers{List: []*smithy.Schema{&sInputOntapVolumeType_RW, &sInputOntapVolumeType_DP}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_Message}}
+var mInvalidAccessPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidAccessPoint_ErrorCode, &sInvalidAccessPoint_Message}}
+var mInvalidDataRepositoryType = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDataRepositoryType_Message}}
+var mInvalidDestinationKmsKey = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidDestinationKmsKey_Message}}
+var mInvalidExportPath = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidExportPath_Message}}
+var mInvalidImportPath = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidImportPath_Message}}
+var mInvalidNetworkSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidNetworkSettings_Message, &sInvalidNetworkSettings_InvalidSubnetId, &sInvalidNetworkSettings_InvalidSecurityGroupId, &sInvalidNetworkSettings_InvalidRouteTableId}}
+var mInvalidPerUnitStorageThroughput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidPerUnitStorageThroughput_Message}}
+var mInvalidRegion = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRegion_Message}}
+var mInvalidRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequest_ErrorCode, &sInvalidRequest_Message}}
+var mInvalidSourceKmsKey = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidSourceKmsKey_Message}}
+var mLifecycleTransitionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sLifecycleTransitionReason_Message}}
+var mLustreAccessAuditLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreAccessAuditLogLevel_DISABLED, &sLustreAccessAuditLogLevel_WARN_ONLY, &sLustreAccessAuditLogLevel_ERROR_ONLY, &sLustreAccessAuditLogLevel_WARN_ERROR}}
+var mLustreDeploymentType = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreDeploymentType_SCRATCH_1, &sLustreDeploymentType_SCRATCH_2, &sLustreDeploymentType_PERSISTENT_1, &sLustreDeploymentType_PERSISTENT_2}}
+var mLustreFileSystemConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreFileSystemConfiguration_WeeklyMaintenanceStartTime, &sLustreFileSystemConfiguration_DataRepositoryConfiguration, &sLustreFileSystemConfiguration_DeploymentType, &sLustreFileSystemConfiguration_PerUnitStorageThroughput, &sLustreFileSystemConfiguration_MountName, &sLustreFileSystemConfiguration_DailyAutomaticBackupStartTime, &sLustreFileSystemConfiguration_AutomaticBackupRetentionDays, &sLustreFileSystemConfiguration_CopyTagsToBackups, &sLustreFileSystemConfiguration_DriveCacheType, &sLustreFileSystemConfiguration_DataCompressionType, &sLustreFileSystemConfiguration_LogConfiguration, &sLustreFileSystemConfiguration_RootSquashConfiguration, &sLustreFileSystemConfiguration_MetadataConfiguration, &sLustreFileSystemConfiguration_EfaEnabled, &sLustreFileSystemConfiguration_ThroughputCapacity, &sLustreFileSystemConfiguration_DataReadCacheConfiguration}, Seed: 103, Slots: []uint16{
+	0, 0, 8, 7, 0, 15, 3, 0, 0, 0, 16, 5, 1, 0, 4, 0, 0, 0, 12, 0, 11, 13, 0, 14,
+	0, 0, 2, 0, 9, 0, 6, 10,
+}}
+var mLustreLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreLogConfiguration_Level, &sLustreLogConfiguration_Destination}}
+var mLustreLogCreateConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreLogCreateConfiguration_Level, &sLustreLogCreateConfiguration_Destination}}
+var m_LustreNoSquashNids = smithy.SchemaMembers{List: []*smithy.Schema{&s_LustreNoSquashNids_member}}
+var mLustreReadCacheConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreReadCacheConfiguration_SizingMode, &sLustreReadCacheConfiguration_SizeGiB}}
+var mLustreReadCacheSizingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreReadCacheSizingMode_NO_CACHE, &sLustreReadCacheSizingMode_USER_PROVISIONED, &sLustreReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY}}
+var mLustreRootSquashConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLustreRootSquashConfiguration_RootSquash, &sLustreRootSquashConfiguration_NoSquashNids}}
+var mMetadataConfigurationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sMetadataConfigurationMode_AUTOMATIC, &sMetadataConfigurationMode_USER_PROVISIONED}}
+var mMissingFileCacheConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingFileCacheConfiguration_Message}}
+var mMissingFileSystemConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingFileSystemConfiguration_Message}}
+var mMissingVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingVolumeConfiguration_Message}}
+var m_NetworkInterfaceIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkInterfaceIds_member}}
+var mNetworkType = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkType_IPV4, &sNetworkType_DUAL}}
+var mNFSDataRepositoryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNFSDataRepositoryConfiguration_Version, &sNFSDataRepositoryConfiguration_DnsIps, &sNFSDataRepositoryConfiguration_AutoExportPolicy}}
+var mNfsVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sNfsVersion_NFS3}}
+var mNotServiceResourceError = smithy.SchemaMembers{List: []*smithy.Schema{&sNotServiceResourceError_ResourceARN, &sNotServiceResourceError_Message}}
+var mOntapDeploymentType = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapDeploymentType_MULTI_AZ_1, &sOntapDeploymentType_SINGLE_AZ_1, &sOntapDeploymentType_SINGLE_AZ_2, &sOntapDeploymentType_MULTI_AZ_2}}
+var m_OntapEndpointIpAddresses = smithy.SchemaMembers{List: []*smithy.Schema{&s_OntapEndpointIpAddresses_member}}
+var mOntapFileSystemConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapFileSystemConfiguration_AutomaticBackupRetentionDays, &sOntapFileSystemConfiguration_DailyAutomaticBackupStartTime, &sOntapFileSystemConfiguration_DeploymentType, &sOntapFileSystemConfiguration_EndpointIpAddressRange, &sOntapFileSystemConfiguration_Endpoints, &sOntapFileSystemConfiguration_DiskIopsConfiguration, &sOntapFileSystemConfiguration_PreferredSubnetId, &sOntapFileSystemConfiguration_RouteTableIds, &sOntapFileSystemConfiguration_ThroughputCapacity, &sOntapFileSystemConfiguration_WeeklyMaintenanceStartTime, &sOntapFileSystemConfiguration_FsxAdminPassword, &sOntapFileSystemConfiguration_HAPairs, &sOntapFileSystemConfiguration_ThroughputCapacityPerHAPair, &sOntapFileSystemConfiguration_EndpointIpv6AddressRange}, Seed: 27, Slots: []uint16{
+	13, 10, 0, 7, 14, 11, 4, 2, 6, 12, 8, 0, 9, 1, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 5, 0, 0, 0, 0,
+}}
+var mOntapFileSystemIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapFileSystemIdentity_Type, &sOntapFileSystemIdentity_UnixUser, &sOntapFileSystemIdentity_WindowsUser}}
+var mOntapFileSystemUserType = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapFileSystemUserType_UNIX, &sOntapFileSystemUserType_WINDOWS}}
+var mOntapUnixFileSystemUser = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapUnixFileSystemUser_Name}}
+var mOntapVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapVolumeConfiguration_FlexCacheEndpointType, &sOntapVolumeConfiguration_JunctionPath, &sOntapVolumeConfiguration_SecurityStyle, &sOntapVolumeConfiguration_SizeInMegabytes, &sOntapVolumeConfiguration_StorageEfficiencyEnabled, &sOntapVolumeConfiguration_StorageVirtualMachineId, &sOntapVolumeConfiguration_StorageVirtualMachineRoot, &sOntapVolumeConfiguration_TieringPolicy, &sOntapVolumeConfiguration_UUID, &sOntapVolumeConfiguration_OntapVolumeType, &sOntapVolumeConfiguration_SnapshotPolicy, &sOntapVolumeConfiguration_CopyTagsToBackups, &sOntapVolumeConfiguration_SnaplockConfiguration, &sOntapVolumeConfiguration_VolumeStyle, &sOntapVolumeConfiguration_AggregateConfiguration, &sOntapVolumeConfiguration_SizeInBytes}, Seed: 114, Slots: []uint16{
+	0, 1, 10, 15, 9, 0, 3, 0, 14, 0, 0, 0, 5, 0, 8, 0, 13, 0, 0, 12, 0, 0, 6, 0,
+	2, 7, 4, 0, 16, 0, 11, 0,
+}}
+var mOntapVolumeType = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapVolumeType_RW, &sOntapVolumeType_DP, &sOntapVolumeType_LS}}
+var mOntapWindowsFileSystemUser = smithy.SchemaMembers{List: []*smithy.Schema{&sOntapWindowsFileSystemUser_Name}}
+var mOpenZFSClientConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSClientConfiguration_Clients, &sOpenZFSClientConfiguration_Options}}
+var m_OpenZFSClientConfigurations = smithy.SchemaMembers{List: []*smithy.Schema{&s_OpenZFSClientConfigurations_member}}
+var mOpenZFSCopyStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSCopyStrategy_CLONE, &sOpenZFSCopyStrategy_FULL_COPY, &sOpenZFSCopyStrategy_INCREMENTAL_COPY}}
+var mOpenZFSCreateRootVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSCreateRootVolumeConfiguration_RecordSizeKiB, &sOpenZFSCreateRootVolumeConfiguration_DataCompressionType, &sOpenZFSCreateRootVolumeConfiguration_NfsExports, &sOpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas, &sOpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots, &sOpenZFSCreateRootVolumeConfiguration_ReadOnly}}
+var mOpenZFSDataCompressionType = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSDataCompressionType_NONE, &sOpenZFSDataCompressionType_ZSTD, &sOpenZFSDataCompressionType_LZ4}}
+var mOpenZFSDeploymentType = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSDeploymentType_SINGLE_AZ_1, &sOpenZFSDeploymentType_SINGLE_AZ_2, &sOpenZFSDeploymentType_SINGLE_AZ_HA_1, &sOpenZFSDeploymentType_SINGLE_AZ_HA_2, &sOpenZFSDeploymentType_MULTI_AZ_1}}
+var mOpenZFSFileSystemConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays, &sOpenZFSFileSystemConfiguration_CopyTagsToBackups, &sOpenZFSFileSystemConfiguration_CopyTagsToVolumes, &sOpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime, &sOpenZFSFileSystemConfiguration_DeploymentType, &sOpenZFSFileSystemConfiguration_ThroughputCapacity, &sOpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime, &sOpenZFSFileSystemConfiguration_DiskIopsConfiguration, &sOpenZFSFileSystemConfiguration_RootVolumeId, &sOpenZFSFileSystemConfiguration_PreferredSubnetId, &sOpenZFSFileSystemConfiguration_EndpointIpAddressRange, &sOpenZFSFileSystemConfiguration_EndpointIpv6AddressRange, &sOpenZFSFileSystemConfiguration_RouteTableIds, &sOpenZFSFileSystemConfiguration_EndpointIpAddress, &sOpenZFSFileSystemConfiguration_EndpointIpv6Address, &sOpenZFSFileSystemConfiguration_ReadCacheConfiguration}, Seed: 177, Slots: []uint16{
+	0, 0, 16, 12, 0, 8, 11, 0, 0, 0, 0, 0, 6, 2, 0, 10, 15, 3, 0, 0, 0, 0, 0, 9,
+	0, 13, 4, 14, 1, 0, 7, 5,
+}}
+var mOpenZFSFileSystemIdentity = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSFileSystemIdentity_Type, &sOpenZFSFileSystemIdentity_PosixUser}}
+var mOpenZFSFileSystemUserType = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSFileSystemUserType_POSIX}}
+var mOpenZFSNfsExport = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSNfsExport_ClientConfigurations}}
+var m_OpenZFSNfsExportOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_OpenZFSNfsExportOptions_member}}
+var m_OpenZFSNfsExports = smithy.SchemaMembers{List: []*smithy.Schema{&s_OpenZFSNfsExports_member}}
+var mOpenZFSOriginSnapshotConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSOriginSnapshotConfiguration_SnapshotARN, &sOpenZFSOriginSnapshotConfiguration_CopyStrategy}}
+var mOpenZFSPosixFileSystemUser = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSPosixFileSystemUser_Uid, &sOpenZFSPosixFileSystemUser_Gid, &sOpenZFSPosixFileSystemUser_SecondaryGids}}
+var mOpenZFSQuotaType = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSQuotaType_USER, &sOpenZFSQuotaType_GROUP}}
+var mOpenZFSReadCacheConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSReadCacheConfiguration_SizingMode, &sOpenZFSReadCacheConfiguration_SizeGiB}}
+var mOpenZFSReadCacheSizingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSReadCacheSizingMode_NO_CACHE, &sOpenZFSReadCacheSizingMode_USER_PROVISIONED, &sOpenZFSReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY}}
+var m_OpenZFSUserAndGroupQuotas = smithy.SchemaMembers{List: []*smithy.Schema{&s_OpenZFSUserAndGroupQuotas_member}}
+var mOpenZFSUserOrGroupQuota = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSUserOrGroupQuota_Type, &sOpenZFSUserOrGroupQuota_Id, &sOpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB}}
+var mOpenZFSVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOpenZFSVolumeConfiguration_ParentVolumeId, &sOpenZFSVolumeConfiguration_VolumePath, &sOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, &sOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, &sOpenZFSVolumeConfiguration_RecordSizeKiB, &sOpenZFSVolumeConfiguration_DataCompressionType, &sOpenZFSVolumeConfiguration_CopyTagsToSnapshots, &sOpenZFSVolumeConfiguration_OriginSnapshot, &sOpenZFSVolumeConfiguration_ReadOnly, &sOpenZFSVolumeConfiguration_NfsExports, &sOpenZFSVolumeConfiguration_UserAndGroupQuotas, &sOpenZFSVolumeConfiguration_RestoreToSnapshot, &sOpenZFSVolumeConfiguration_DeleteIntermediateSnaphots, &sOpenZFSVolumeConfiguration_DeleteClonedVolumes, &sOpenZFSVolumeConfiguration_DeleteIntermediateData, &sOpenZFSVolumeConfiguration_SourceSnapshotARN, &sOpenZFSVolumeConfiguration_DestinationSnapshot, &sOpenZFSVolumeConfiguration_CopyStrategy}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 18, 0, 0, 0, 0, 0, 16, 12, 10, 11, 9, 0, 15, 0, 0, 0, 6, 0, 0, 0, 14,
+	0, 17, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 3, 5, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0,
+	0, 0, 7, 2, 0, 0, 0, 0, 0, 0, 13, 4, 0, 0, 0, 0,
+}}
+var mPrivilegedDelete = smithy.SchemaMembers{List: []*smithy.Schema{&sPrivilegedDelete_DISABLED, &sPrivilegedDelete_ENABLED, &sPrivilegedDelete_PERMANENTLY_DISABLED}}
+var mReleaseConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sReleaseConfiguration_DurationSinceLastAccess}}
+var mReportFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sReportFormat_REPORT_CSV_20191124}}
+var mReportScope = smithy.SchemaMembers{List: []*smithy.Schema{&sReportScope_FAILED_FILES_ONLY}}
+var m_RepositoryDnsIps = smithy.SchemaMembers{List: []*smithy.Schema{&s_RepositoryDnsIps_member}}
+var mResourceDoesNotSupportTagging = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceDoesNotSupportTagging_ResourceARN, &sResourceDoesNotSupportTagging_Message}}
+var mResourceNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFound_ResourceARN, &sResourceNotFound_Message}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_FILE_SYSTEM, &sResourceType_VOLUME}}
+var mRestoreOpenZFSVolumeOption = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS, &sRestoreOpenZFSVolumeOption_DELETE_CLONED_VOLUMES}}
+var m_RestoreOpenZFSVolumeOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_RestoreOpenZFSVolumeOptions_member}}
+var mRetentionPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionPeriod_Type, &sRetentionPeriod_Value}}
+var mRetentionPeriodType = smithy.SchemaMembers{List: []*smithy.Schema{&sRetentionPeriodType_SECONDS, &sRetentionPeriodType_MINUTES, &sRetentionPeriodType_HOURS, &sRetentionPeriodType_DAYS, &sRetentionPeriodType_MONTHS, &sRetentionPeriodType_YEARS, &sRetentionPeriodType_INFINITE, &sRetentionPeriodType_UNSPECIFIED}}
+var m_RouteTableIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteTableIds_member}}
+var mS3AccessPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPoint_ResourceARN, &sS3AccessPoint_Alias, &sS3AccessPoint_VpcConfiguration}}
+var mS3AccessPointAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointAttachment_Lifecycle, &sS3AccessPointAttachment_LifecycleTransitionReason, &sS3AccessPointAttachment_CreationTime, &sS3AccessPointAttachment_Name, &sS3AccessPointAttachment_Type, &sS3AccessPointAttachment_OpenZFSConfiguration, &sS3AccessPointAttachment_OntapConfiguration, &sS3AccessPointAttachment_S3AccessPoint}}
+var mS3AccessPointAttachmentLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointAttachmentLifecycle_AVAILABLE, &sS3AccessPointAttachmentLifecycle_CREATING, &sS3AccessPointAttachmentLifecycle_DELETING, &sS3AccessPointAttachmentLifecycle_UPDATING, &sS3AccessPointAttachmentLifecycle_FAILED, &sS3AccessPointAttachmentLifecycle_MISCONFIGURED}}
+var m_S3AccessPointAttachmentNames = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3AccessPointAttachmentNames_member}}
+var mS3AccessPointAttachmentNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointAttachmentNotFound_Message}}
+var m_S3AccessPointAttachments = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3AccessPointAttachments_member}}
+var mS3AccessPointAttachmentsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointAttachmentsFilter_Name, &sS3AccessPointAttachmentsFilter_Values}}
+var mS3AccessPointAttachmentsFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointAttachmentsFilterName_FILE_SYSTEM_ID, &sS3AccessPointAttachmentsFilterName_VOLUME_ID, &sS3AccessPointAttachmentsFilterName_TYPE}}
+var m_S3AccessPointAttachmentsFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3AccessPointAttachmentsFilters_member}}
+var m_S3AccessPointAttachmentsFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_S3AccessPointAttachmentsFilterValues_member}}
+var mS3AccessPointAttachmentType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointAttachmentType_OPENZFS, &sS3AccessPointAttachmentType_ONTAP}}
+var mS3AccessPointOntapConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointOntapConfiguration_VolumeId, &sS3AccessPointOntapConfiguration_FileSystemIdentity}}
+var mS3AccessPointOpenZFSConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointOpenZFSConfiguration_VolumeId, &sS3AccessPointOpenZFSConfiguration_FileSystemIdentity}}
+var mS3AccessPointVpcConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3AccessPointVpcConfiguration_VpcId}}
+var mS3DataRepositoryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DataRepositoryConfiguration_AutoImportPolicy, &sS3DataRepositoryConfiguration_AutoExportPolicy}}
+var m_SecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecurityGroupIds_member}}
+var mSecurityStyle = smithy.SchemaMembers{List: []*smithy.Schema{&sSecurityStyle_UNIX, &sSecurityStyle_NTFS, &sSecurityStyle_MIXED}}
+var mSelfManagedActiveDirectoryAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sSelfManagedActiveDirectoryAttributes_DomainName, &sSelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName, &sSelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup, &sSelfManagedActiveDirectoryAttributes_UserName, &sSelfManagedActiveDirectoryAttributes_DnsIps, &sSelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret}}
+var mSelfManagedActiveDirectoryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSelfManagedActiveDirectoryConfiguration_DomainName, &sSelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName, &sSelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup, &sSelfManagedActiveDirectoryConfiguration_UserName, &sSelfManagedActiveDirectoryConfiguration_Password, &sSelfManagedActiveDirectoryConfiguration_DnsIps, &sSelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret}}
+var mSelfManagedActiveDirectoryConfigurationUpdates = smithy.SchemaMembers{List: []*smithy.Schema{&sSelfManagedActiveDirectoryConfigurationUpdates_UserName, &sSelfManagedActiveDirectoryConfigurationUpdates_Password, &sSelfManagedActiveDirectoryConfigurationUpdates_DnsIps, &sSelfManagedActiveDirectoryConfigurationUpdates_DomainName, &sSelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName, &sSelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup, &sSelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret}}
+var mServiceLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLimit_FILE_SYSTEM_COUNT, &sServiceLimit_TOTAL_THROUGHPUT_CAPACITY, &sServiceLimit_TOTAL_STORAGE, &sServiceLimit_TOTAL_USER_INITIATED_BACKUPS, &sServiceLimit_TOTAL_USER_TAGS, &sServiceLimit_TOTAL_IN_PROGRESS_COPY_BACKUPS, &sServiceLimit_STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM, &sServiceLimit_VOLUMES_PER_FILE_SYSTEM, &sServiceLimit_TOTAL_SSD_IOPS, &sServiceLimit_FILE_CACHE_COUNT}, Seed: 6, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 3, 5, 10, 0, 0, 0, 0, 0, 0, 0, 7, 8,
+	6, 0, 0, 0, 2, 9, 4, 0,
+}}
+var mServiceLimitExceeded = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceLimitExceeded_Limit, &sServiceLimitExceeded_Message}}
+var mSnaplockConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSnaplockConfiguration_AuditLogVolume, &sSnaplockConfiguration_AutocommitPeriod, &sSnaplockConfiguration_PrivilegedDelete, &sSnaplockConfiguration_RetentionPeriod, &sSnaplockConfiguration_SnaplockType, &sSnaplockConfiguration_VolumeAppendModeEnabled}}
+var mSnaplockRetentionPeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sSnaplockRetentionPeriod_DefaultRetention, &sSnaplockRetentionPeriod_MinimumRetention, &sSnaplockRetentionPeriod_MaximumRetention}}
+var mSnaplockType = smithy.SchemaMembers{List: []*smithy.Schema{&sSnaplockType_COMPLIANCE, &sSnaplockType_ENTERPRISE}}
+var mSnapshot = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshot_ResourceARN, &sSnapshot_SnapshotId, &sSnapshot_Name, &sSnapshot_VolumeId, &sSnapshot_CreationTime, &sSnapshot_Lifecycle, &sSnapshot_LifecycleTransitionReason, &sSnapshot_Tags, &sSnapshot_AdministrativeActions}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 3, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 4, 8, 0, 6, 0, 1, 5, 0, 0,
+	2, 9, 0, 0, 0, 0, 0, 0,
+}}
+var mSnapshotFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotFilter_Name, &sSnapshotFilter_Values}}
+var mSnapshotFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotFilterName_FILE_SYSTEM_ID, &sSnapshotFilterName_VOLUME_ID}}
+var m_SnapshotFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_SnapshotFilters_member}}
+var m_SnapshotFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_SnapshotFilterValues_member}}
+var m_SnapshotIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SnapshotIds_member}}
+var mSnapshotLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotLifecycle_PENDING, &sSnapshotLifecycle_CREATING, &sSnapshotLifecycle_DELETING, &sSnapshotLifecycle_AVAILABLE}}
+var mSnapshotNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sSnapshotNotFound_Message}}
+var m_Snapshots = smithy.SchemaMembers{List: []*smithy.Schema{&s_Snapshots_member}}
+var mSourceBackupUnavailable = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceBackupUnavailable_Message, &sSourceBackupUnavailable_BackupId}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_FAILED, &sStatus_IN_PROGRESS, &sStatus_PENDING, &sStatus_COMPLETED, &sStatus_UPDATED_OPTIMIZING, &sStatus_OPTIMIZING, &sStatus_PAUSED, &sStatus_CANCELLED}}
+var mStorageType = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageType_SSD, &sStorageType_HDD, &sStorageType_INTELLIGENT_TIERING}}
+var mStorageVirtualMachine = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageVirtualMachine_ActiveDirectoryConfiguration, &sStorageVirtualMachine_CreationTime, &sStorageVirtualMachine_Endpoints, &sStorageVirtualMachine_FileSystemId, &sStorageVirtualMachine_Lifecycle, &sStorageVirtualMachine_Name, &sStorageVirtualMachine_ResourceARN, &sStorageVirtualMachine_StorageVirtualMachineId, &sStorageVirtualMachine_Subtype, &sStorageVirtualMachine_UUID, &sStorageVirtualMachine_Tags, &sStorageVirtualMachine_LifecycleTransitionReason, &sStorageVirtualMachine_RootVolumeSecurityStyle}, Seed: 28, Slots: []uint16{
+	0, 0, 0, 0, 5, 0, 10, 3, 13, 8, 4, 7, 0, 6, 0, 0, 0, 12, 0, 0, 0, 0, 9, 0,
+	0, 0, 1, 2, 0, 0, 0, 11,
+}}
+var mStorageVirtualMachineFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageVirtualMachineFilter_Name, &sStorageVirtualMachineFilter_Values}}
+var mStorageVirtualMachineFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageVirtualMachineFilterName_FILE_SYSTEM_ID}}
+var m_StorageVirtualMachineFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorageVirtualMachineFilters_member}}
+var m_StorageVirtualMachineFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorageVirtualMachineFilterValues_member}}
+var m_StorageVirtualMachineIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorageVirtualMachineIds_member}}
+var mStorageVirtualMachineLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageVirtualMachineLifecycle_CREATED, &sStorageVirtualMachineLifecycle_CREATING, &sStorageVirtualMachineLifecycle_DELETING, &sStorageVirtualMachineLifecycle_FAILED, &sStorageVirtualMachineLifecycle_MISCONFIGURED, &sStorageVirtualMachineLifecycle_PENDING}}
+var mStorageVirtualMachineNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageVirtualMachineNotFound_Message}}
+var mStorageVirtualMachineRootVolumeSecurityStyle = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageVirtualMachineRootVolumeSecurityStyle_UNIX, &sStorageVirtualMachineRootVolumeSecurityStyle_NTFS, &sStorageVirtualMachineRootVolumeSecurityStyle_MIXED}}
+var m_StorageVirtualMachines = smithy.SchemaMembers{List: []*smithy.Schema{&s_StorageVirtualMachines_member}}
+var mStorageVirtualMachineSubtype = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageVirtualMachineSubtype_DEFAULT, &sStorageVirtualMachineSubtype_DP_DESTINATION, &sStorageVirtualMachineSubtype_SYNC_DESTINATION, &sStorageVirtualMachineSubtype_SYNC_SOURCE}}
+var m_SubDirectoriesPaths = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubDirectoriesPaths_member}}
+var m_SubnetIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubnetIds_member}}
+var mSvmActiveDirectoryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSvmActiveDirectoryConfiguration_NetBiosName, &sSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration}}
+var mSvmEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sSvmEndpoint_DNSName, &sSvmEndpoint_IpAddresses, &sSvmEndpoint_Ipv6Addresses}}
+var mSvmEndpoints = smithy.SchemaMembers{List: []*smithy.Schema{&sSvmEndpoints_Iscsi, &sSvmEndpoints_Management, &sSvmEndpoints_Nfs, &sSvmEndpoints_Smb}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var m_TaskIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskIds_member}}
+var mTieringPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sTieringPolicy_CoolingPeriod, &sTieringPolicy_Name}}
+var mTieringPolicyName = smithy.SchemaMembers{List: []*smithy.Schema{&sTieringPolicyName_SNAPSHOT_ONLY, &sTieringPolicyName_AUTO, &sTieringPolicyName_ALL, &sTieringPolicyName_NONE}}
+var mTooManyAccessPoints = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyAccessPoints_ErrorCode, &sTooManyAccessPoints_Message}}
+var mUnit = smithy.SchemaMembers{List: []*smithy.Schema{&sUnit_DAYS}}
+var mUnsupportedOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedOperation_Message}}
+var mUpdateFileCacheLustreConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime}}
+var mUpdateFileSystemLustreConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime, &sUpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime, &sUpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays, &sUpdateFileSystemLustreConfiguration_AutoImportPolicy, &sUpdateFileSystemLustreConfiguration_DataCompressionType, &sUpdateFileSystemLustreConfiguration_LogConfiguration, &sUpdateFileSystemLustreConfiguration_RootSquashConfiguration, &sUpdateFileSystemLustreConfiguration_PerUnitStorageThroughput, &sUpdateFileSystemLustreConfiguration_MetadataConfiguration, &sUpdateFileSystemLustreConfiguration_ThroughputCapacity, &sUpdateFileSystemLustreConfiguration_DataReadCacheConfiguration}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 11, 5, 1, 0, 10, 0, 0, 0, 4, 8, 0, 0, 0, 0, 0, 6, 0, 3, 0, 0, 0,
+	0, 0, 0, 2, 0, 9, 0, 7,
+}}
+var mUpdateFileSystemLustreMetadataConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemLustreMetadataConfiguration_Iops, &sUpdateFileSystemLustreMetadataConfiguration_Mode}}
+var mUpdateFileSystemOntapConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays, &sUpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime, &sUpdateFileSystemOntapConfiguration_FsxAdminPassword, &sUpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime, &sUpdateFileSystemOntapConfiguration_DiskIopsConfiguration, &sUpdateFileSystemOntapConfiguration_ThroughputCapacity, &sUpdateFileSystemOntapConfiguration_AddRouteTableIds, &sUpdateFileSystemOntapConfiguration_RemoveRouteTableIds, &sUpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair, &sUpdateFileSystemOntapConfiguration_HAPairs, &sUpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 4, 5, 6, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 1, 7, 0, 0,
+	0, 10, 0, 2, 0, 9, 11, 0,
+}}
+var mUpdateFileSystemOpenZFSConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays, &sUpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups, &sUpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes, &sUpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime, &sUpdateFileSystemOpenZFSConfiguration_ThroughputCapacity, &sUpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime, &sUpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration, &sUpdateFileSystemOpenZFSConfiguration_AddRouteTableIds, &sUpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds, &sUpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration, &sUpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 0, 6, 7, 5, 0, 3, 0, 0, 0, 0, 2, 10, 0, 0, 0, 9, 1, 8, 0, 0,
+	0, 0, 0, 4, 0, 0, 11, 0,
+}}
+var mUpdateFileSystemWindowsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime, &sUpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime, &sUpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays, &sUpdateFileSystemWindowsConfiguration_ThroughputCapacity, &sUpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration, &sUpdateFileSystemWindowsConfiguration_AuditLogConfiguration, &sUpdateFileSystemWindowsConfiguration_DiskIopsConfiguration, &sUpdateFileSystemWindowsConfiguration_FsrmConfiguration}}
+var mUpdateOntapVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOntapVolumeConfiguration_JunctionPath, &sUpdateOntapVolumeConfiguration_SecurityStyle, &sUpdateOntapVolumeConfiguration_SizeInMegabytes, &sUpdateOntapVolumeConfiguration_StorageEfficiencyEnabled, &sUpdateOntapVolumeConfiguration_TieringPolicy, &sUpdateOntapVolumeConfiguration_SnapshotPolicy, &sUpdateOntapVolumeConfiguration_CopyTagsToBackups, &sUpdateOntapVolumeConfiguration_SnaplockConfiguration, &sUpdateOntapVolumeConfiguration_SizeInBytes}, Seed: 3, Slots: []uint16{
+	0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 7, 5, 0, 6, 0, 0, 0, 0, 0, 0, 1, 4,
+	0, 0, 0, 0, 3, 8, 0, 0,
+}}
+var mUpdateOpenZFSVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB, &sUpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB, &sUpdateOpenZFSVolumeConfiguration_RecordSizeKiB, &sUpdateOpenZFSVolumeConfiguration_DataCompressionType, &sUpdateOpenZFSVolumeConfiguration_NfsExports, &sUpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas, &sUpdateOpenZFSVolumeConfiguration_ReadOnly}}
+var mUpdateOpenZFSVolumeOption = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS, &sUpdateOpenZFSVolumeOption_DELETE_CLONED_VOLUMES, &sUpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_DATA}}
+var m_UpdateOpenZFSVolumeOptions = smithy.SchemaMembers{List: []*smithy.Schema{&s_UpdateOpenZFSVolumeOptions_member}}
+var mUpdateSnaplockConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSnaplockConfiguration_AuditLogVolume, &sUpdateSnaplockConfiguration_AutocommitPeriod, &sUpdateSnaplockConfiguration_PrivilegedDelete, &sUpdateSnaplockConfiguration_RetentionPeriod, &sUpdateSnaplockConfiguration_VolumeAppendModeEnabled}}
+var mUpdateSvmActiveDirectoryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration, &sUpdateSvmActiveDirectoryConfiguration_NetBiosName}}
+var mVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sVolume_CreationTime, &sVolume_FileSystemId, &sVolume_Lifecycle, &sVolume_Name, &sVolume_OntapConfiguration, &sVolume_ResourceARN, &sVolume_Tags, &sVolume_VolumeId, &sVolume_VolumeType, &sVolume_LifecycleTransitionReason, &sVolume_AdministrativeActions, &sVolume_OpenZFSConfiguration}, Seed: 8, Slots: []uint16{
+	12, 4, 0, 9, 8, 0, 0, 7, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, 10, 0, 11, 0,
+	3, 0, 0, 1, 0, 0, 0, 6,
+}}
+var mVolumeFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeFilter_Name, &sVolumeFilter_Values}}
+var mVolumeFilterName = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeFilterName_FILE_SYSTEM_ID, &sVolumeFilterName_STORAGE_VIRTUAL_MACHINE_ID}}
+var m_VolumeFilters = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeFilters_member}}
+var m_VolumeFilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeFilterValues_member}}
+var m_VolumeIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_VolumeIds_member}}
+var mVolumeLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeLifecycle_CREATING, &sVolumeLifecycle_CREATED, &sVolumeLifecycle_DELETING, &sVolumeLifecycle_FAILED, &sVolumeLifecycle_MISCONFIGURED, &sVolumeLifecycle_PENDING, &sVolumeLifecycle_AVAILABLE}}
+var mVolumeNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeNotFound_Message}}
+var m_Volumes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Volumes_member}}
+var mVolumeStyle = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeStyle_FLEXVOL, &sVolumeStyle_FLEXGROUP}}
+var mVolumeType = smithy.SchemaMembers{List: []*smithy.Schema{&sVolumeType_ONTAP, &sVolumeType_OPENZFS}}
+var mWindowsAccessAuditLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sWindowsAccessAuditLogLevel_DISABLED, &sWindowsAccessAuditLogLevel_SUCCESS_ONLY, &sWindowsAccessAuditLogLevel_FAILURE_ONLY, &sWindowsAccessAuditLogLevel_SUCCESS_AND_FAILURE}}
+var mWindowsAuditLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWindowsAuditLogConfiguration_FileAccessAuditLogLevel, &sWindowsAuditLogConfiguration_FileShareAccessAuditLogLevel, &sWindowsAuditLogConfiguration_AuditLogDestination}}
+var mWindowsAuditLogCreateConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel, &sWindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel, &sWindowsAuditLogCreateConfiguration_AuditLogDestination}}
+var mWindowsDeploymentType = smithy.SchemaMembers{List: []*smithy.Schema{&sWindowsDeploymentType_MULTI_AZ_1, &sWindowsDeploymentType_SINGLE_AZ_1, &sWindowsDeploymentType_SINGLE_AZ_2}}
+var mWindowsFileSystemConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWindowsFileSystemConfiguration_ActiveDirectoryId, &sWindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration, &sWindowsFileSystemConfiguration_DeploymentType, &sWindowsFileSystemConfiguration_RemoteAdministrationEndpoint, &sWindowsFileSystemConfiguration_PreferredSubnetId, &sWindowsFileSystemConfiguration_PreferredFileServerIp, &sWindowsFileSystemConfiguration_ThroughputCapacity, &sWindowsFileSystemConfiguration_MaintenanceOperationsInProgress, &sWindowsFileSystemConfiguration_WeeklyMaintenanceStartTime, &sWindowsFileSystemConfiguration_DailyAutomaticBackupStartTime, &sWindowsFileSystemConfiguration_AutomaticBackupRetentionDays, &sWindowsFileSystemConfiguration_CopyTagsToBackups, &sWindowsFileSystemConfiguration_Aliases, &sWindowsFileSystemConfiguration_AuditLogConfiguration, &sWindowsFileSystemConfiguration_DiskIopsConfiguration, &sWindowsFileSystemConfiguration_PreferredFileServerIpv6, &sWindowsFileSystemConfiguration_FsrmConfiguration}, Seed: 10, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 17, 0, 13, 0, 15, 11, 0, 0, 0, 0, 6, 0, 0, 0, 0, 16, 0, 0,
+	0, 3, 14, 12, 0, 0, 0, 0, 5, 0, 8, 0, 0, 0, 7, 0, 0, 9, 2, 10, 0, 0, 0, 0,
+	0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0,
+}}
+var mWindowsFsrmConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sWindowsFsrmConfiguration_FsrmServiceEnabled, &sWindowsFsrmConfiguration_EventLogDestination}}
+var mAssociateFileSystemAliasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateFileSystemAliasesRequest_ClientRequestToken, &sAssociateFileSystemAliasesRequest_FileSystemId, &sAssociateFileSystemAliasesRequest_Aliases}}
+var mAssociateFileSystemAliasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateFileSystemAliasesResponse_Aliases}}
+var mCancelDataRepositoryTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelDataRepositoryTaskRequest_TaskId}}
+var mCancelDataRepositoryTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelDataRepositoryTaskResponse_Lifecycle, &sCancelDataRepositoryTaskResponse_TaskId}}
+var mCopyBackupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyBackupRequest_ClientRequestToken, &sCopyBackupRequest_SourceBackupId, &sCopyBackupRequest_SourceRegion, &sCopyBackupRequest_KmsKeyId, &sCopyBackupRequest_CopyTags, &sCopyBackupRequest_Tags}}
+var mCopyBackupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyBackupResponse_Backup}}
+var mCopySnapshotAndUpdateVolumeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCopySnapshotAndUpdateVolumeRequest_ClientRequestToken, &sCopySnapshotAndUpdateVolumeRequest_VolumeId, &sCopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN, &sCopySnapshotAndUpdateVolumeRequest_CopyStrategy, &sCopySnapshotAndUpdateVolumeRequest_Options}}
+var mCopySnapshotAndUpdateVolumeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCopySnapshotAndUpdateVolumeResponse_VolumeId, &sCopySnapshotAndUpdateVolumeResponse_Lifecycle, &sCopySnapshotAndUpdateVolumeResponse_AdministrativeActions}}
+var mCreateAndAttachS3AccessPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAndAttachS3AccessPointRequest_ClientRequestToken, &sCreateAndAttachS3AccessPointRequest_Name, &sCreateAndAttachS3AccessPointRequest_Type, &sCreateAndAttachS3AccessPointRequest_OpenZFSConfiguration, &sCreateAndAttachS3AccessPointRequest_OntapConfiguration, &sCreateAndAttachS3AccessPointRequest_S3AccessPoint}}
+var mCreateAndAttachS3AccessPointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAndAttachS3AccessPointResponse_S3AccessPointAttachment}}
+var mCreateBackupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackupRequest_FileSystemId, &sCreateBackupRequest_ClientRequestToken, &sCreateBackupRequest_Tags, &sCreateBackupRequest_VolumeId}}
+var mCreateBackupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBackupResponse_Backup}}
+var mCreateDataRepositoryAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRepositoryAssociationRequest_FileSystemId, &sCreateDataRepositoryAssociationRequest_FileSystemPath, &sCreateDataRepositoryAssociationRequest_DataRepositoryPath, &sCreateDataRepositoryAssociationRequest_BatchImportMetaDataOnCreate, &sCreateDataRepositoryAssociationRequest_ImportedFileChunkSize, &sCreateDataRepositoryAssociationRequest_S3, &sCreateDataRepositoryAssociationRequest_ClientRequestToken, &sCreateDataRepositoryAssociationRequest_Tags}}
+var mCreateDataRepositoryAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRepositoryAssociationResponse_Association}}
+var mCreateDataRepositoryTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRepositoryTaskRequest_Type, &sCreateDataRepositoryTaskRequest_Paths, &sCreateDataRepositoryTaskRequest_FileSystemId, &sCreateDataRepositoryTaskRequest_Report, &sCreateDataRepositoryTaskRequest_ClientRequestToken, &sCreateDataRepositoryTaskRequest_Tags, &sCreateDataRepositoryTaskRequest_CapacityToRelease, &sCreateDataRepositoryTaskRequest_ReleaseConfiguration}}
+var mCreateDataRepositoryTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataRepositoryTaskResponse_DataRepositoryTask}}
+var mCreateFileCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileCacheRequest_ClientRequestToken, &sCreateFileCacheRequest_FileCacheType, &sCreateFileCacheRequest_FileCacheTypeVersion, &sCreateFileCacheRequest_StorageCapacity, &sCreateFileCacheRequest_SubnetIds, &sCreateFileCacheRequest_SecurityGroupIds, &sCreateFileCacheRequest_Tags, &sCreateFileCacheRequest_CopyTagsToDataRepositoryAssociations, &sCreateFileCacheRequest_KmsKeyId, &sCreateFileCacheRequest_LustreConfiguration, &sCreateFileCacheRequest_DataRepositoryAssociations}, Seed: 5, Slots: []uint16{
+	0, 0, 10, 0, 0, 0, 3, 0, 0, 0, 9, 0, 0, 0, 0, 5, 0, 0, 4, 0, 6, 0, 0, 1,
+	2, 0, 7, 11, 8, 0, 0, 0,
+}}
+var mCreateFileCacheResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileCacheResponse_FileCache}}
+var mCreateFileSystemFromBackupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemFromBackupRequest_BackupId, &sCreateFileSystemFromBackupRequest_ClientRequestToken, &sCreateFileSystemFromBackupRequest_SubnetIds, &sCreateFileSystemFromBackupRequest_SecurityGroupIds, &sCreateFileSystemFromBackupRequest_Tags, &sCreateFileSystemFromBackupRequest_WindowsConfiguration, &sCreateFileSystemFromBackupRequest_LustreConfiguration, &sCreateFileSystemFromBackupRequest_StorageType, &sCreateFileSystemFromBackupRequest_KmsKeyId, &sCreateFileSystemFromBackupRequest_FileSystemTypeVersion, &sCreateFileSystemFromBackupRequest_OpenZFSConfiguration, &sCreateFileSystemFromBackupRequest_StorageCapacity, &sCreateFileSystemFromBackupRequest_NetworkType}, Seed: 5, Slots: []uint16{
+	0, 0, 7, 0, 1, 0, 6, 8, 0, 0, 9, 0, 0, 0, 0, 3, 0, 0, 12, 0, 4, 10, 13, 2,
+	0, 0, 5, 0, 0, 0, 11, 0,
+}}
+var mCreateFileSystemFromBackupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemFromBackupResponse_FileSystem}}
+var mCreateFileSystemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemRequest_ClientRequestToken, &sCreateFileSystemRequest_FileSystemType, &sCreateFileSystemRequest_StorageCapacity, &sCreateFileSystemRequest_StorageType, &sCreateFileSystemRequest_SubnetIds, &sCreateFileSystemRequest_SecurityGroupIds, &sCreateFileSystemRequest_Tags, &sCreateFileSystemRequest_KmsKeyId, &sCreateFileSystemRequest_WindowsConfiguration, &sCreateFileSystemRequest_LustreConfiguration, &sCreateFileSystemRequest_OntapConfiguration, &sCreateFileSystemRequest_FileSystemTypeVersion, &sCreateFileSystemRequest_OpenZFSConfiguration, &sCreateFileSystemRequest_NetworkType}, Seed: 13, Slots: []uint16{
+	8, 12, 11, 0, 2, 1, 0, 9, 0, 0, 0, 6, 0, 13, 4, 0, 0, 5, 0, 0, 0, 0, 0, 14,
+	0, 0, 0, 3, 10, 7, 0, 0,
+}}
+var mCreateFileSystemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateFileSystemResponse_FileSystem}}
+var mCreateSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotRequest_ClientRequestToken, &sCreateSnapshotRequest_Name, &sCreateSnapshotRequest_VolumeId, &sCreateSnapshotRequest_Tags}}
+var mCreateSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSnapshotResponse_Snapshot}}
+var mCreateStorageVirtualMachineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStorageVirtualMachineRequest_ActiveDirectoryConfiguration, &sCreateStorageVirtualMachineRequest_ClientRequestToken, &sCreateStorageVirtualMachineRequest_FileSystemId, &sCreateStorageVirtualMachineRequest_Name, &sCreateStorageVirtualMachineRequest_SvmAdminPassword, &sCreateStorageVirtualMachineRequest_Tags, &sCreateStorageVirtualMachineRequest_RootVolumeSecurityStyle}}
+var mCreateStorageVirtualMachineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateStorageVirtualMachineResponse_StorageVirtualMachine}}
+var mCreateVolumeFromBackupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVolumeFromBackupRequest_BackupId, &sCreateVolumeFromBackupRequest_ClientRequestToken, &sCreateVolumeFromBackupRequest_Name, &sCreateVolumeFromBackupRequest_OntapConfiguration, &sCreateVolumeFromBackupRequest_Tags}}
+var mCreateVolumeFromBackupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVolumeFromBackupResponse_Volume}}
+var mCreateVolumeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVolumeRequest_ClientRequestToken, &sCreateVolumeRequest_VolumeType, &sCreateVolumeRequest_Name, &sCreateVolumeRequest_OntapConfiguration, &sCreateVolumeRequest_Tags, &sCreateVolumeRequest_OpenZFSConfiguration}}
+var mCreateVolumeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateVolumeResponse_Volume}}
+var mDeleteBackupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackupRequest_BackupId, &sDeleteBackupRequest_ClientRequestToken}}
+var mDeleteBackupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBackupResponse_BackupId, &sDeleteBackupResponse_Lifecycle}}
+var mDeleteDataRepositoryAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataRepositoryAssociationRequest_AssociationId, &sDeleteDataRepositoryAssociationRequest_ClientRequestToken, &sDeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem}}
+var mDeleteDataRepositoryAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataRepositoryAssociationResponse_AssociationId, &sDeleteDataRepositoryAssociationResponse_Lifecycle, &sDeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem}}
+var mDeleteFileCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileCacheRequest_FileCacheId, &sDeleteFileCacheRequest_ClientRequestToken}}
+var mDeleteFileCacheResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileCacheResponse_FileCacheId, &sDeleteFileCacheResponse_Lifecycle}}
+var mDeleteFileSystemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemRequest_FileSystemId, &sDeleteFileSystemRequest_ClientRequestToken, &sDeleteFileSystemRequest_WindowsConfiguration, &sDeleteFileSystemRequest_LustreConfiguration, &sDeleteFileSystemRequest_OpenZFSConfiguration}}
+var mDeleteFileSystemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteFileSystemResponse_FileSystemId, &sDeleteFileSystemResponse_Lifecycle, &sDeleteFileSystemResponse_WindowsResponse, &sDeleteFileSystemResponse_LustreResponse, &sDeleteFileSystemResponse_OpenZFSResponse}}
+var mDeleteSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSnapshotRequest_ClientRequestToken, &sDeleteSnapshotRequest_SnapshotId}}
+var mDeleteSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSnapshotResponse_SnapshotId, &sDeleteSnapshotResponse_Lifecycle}}
+var mDeleteStorageVirtualMachineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStorageVirtualMachineRequest_ClientRequestToken, &sDeleteStorageVirtualMachineRequest_StorageVirtualMachineId}}
+var mDeleteStorageVirtualMachineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteStorageVirtualMachineResponse_StorageVirtualMachineId, &sDeleteStorageVirtualMachineResponse_Lifecycle}}
+var mDeleteVolumeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVolumeRequest_ClientRequestToken, &sDeleteVolumeRequest_VolumeId, &sDeleteVolumeRequest_OntapConfiguration, &sDeleteVolumeRequest_OpenZFSConfiguration}}
+var mDeleteVolumeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVolumeResponse_VolumeId, &sDeleteVolumeResponse_Lifecycle, &sDeleteVolumeResponse_OntapResponse}}
+var mDescribeBackupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBackupsRequest_BackupIds, &sDescribeBackupsRequest_Filters, &sDescribeBackupsRequest_MaxResults, &sDescribeBackupsRequest_NextToken}}
+var mDescribeBackupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBackupsResponse_Backups, &sDescribeBackupsResponse_NextToken}}
+var mDescribeDataRepositoryAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataRepositoryAssociationsRequest_AssociationIds, &sDescribeDataRepositoryAssociationsRequest_Filters, &sDescribeDataRepositoryAssociationsRequest_MaxResults, &sDescribeDataRepositoryAssociationsRequest_NextToken}}
+var mDescribeDataRepositoryAssociationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataRepositoryAssociationsResponse_Associations, &sDescribeDataRepositoryAssociationsResponse_NextToken}}
+var mDescribeDataRepositoryTasksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataRepositoryTasksRequest_TaskIds, &sDescribeDataRepositoryTasksRequest_Filters, &sDescribeDataRepositoryTasksRequest_MaxResults, &sDescribeDataRepositoryTasksRequest_NextToken}}
+var mDescribeDataRepositoryTasksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataRepositoryTasksResponse_DataRepositoryTasks, &sDescribeDataRepositoryTasksResponse_NextToken}}
+var mDescribeFileCachesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileCachesRequest_FileCacheIds, &sDescribeFileCachesRequest_MaxResults, &sDescribeFileCachesRequest_NextToken}}
+var mDescribeFileCachesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileCachesResponse_FileCaches, &sDescribeFileCachesResponse_NextToken}}
+var mDescribeFileSystemAliasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileSystemAliasesRequest_ClientRequestToken, &sDescribeFileSystemAliasesRequest_FileSystemId, &sDescribeFileSystemAliasesRequest_MaxResults, &sDescribeFileSystemAliasesRequest_NextToken}}
+var mDescribeFileSystemAliasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileSystemAliasesResponse_Aliases, &sDescribeFileSystemAliasesResponse_NextToken}}
+var mDescribeFileSystemsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileSystemsRequest_FileSystemIds, &sDescribeFileSystemsRequest_MaxResults, &sDescribeFileSystemsRequest_NextToken}}
+var mDescribeFileSystemsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeFileSystemsResponse_FileSystems, &sDescribeFileSystemsResponse_NextToken}}
+var mDescribeS3AccessPointAttachmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeS3AccessPointAttachmentsRequest_Names, &sDescribeS3AccessPointAttachmentsRequest_Filters, &sDescribeS3AccessPointAttachmentsRequest_MaxResults, &sDescribeS3AccessPointAttachmentsRequest_NextToken}}
+var mDescribeS3AccessPointAttachmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments, &sDescribeS3AccessPointAttachmentsResponse_NextToken}}
+var mDescribeSharedVpcConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts}}
+var mDescribeSnapshotsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSnapshotsRequest_SnapshotIds, &sDescribeSnapshotsRequest_Filters, &sDescribeSnapshotsRequest_MaxResults, &sDescribeSnapshotsRequest_NextToken, &sDescribeSnapshotsRequest_IncludeShared}}
+var mDescribeSnapshotsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSnapshotsResponse_Snapshots, &sDescribeSnapshotsResponse_NextToken}}
+var mDescribeStorageVirtualMachinesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds, &sDescribeStorageVirtualMachinesRequest_Filters, &sDescribeStorageVirtualMachinesRequest_MaxResults, &sDescribeStorageVirtualMachinesRequest_NextToken}}
+var mDescribeStorageVirtualMachinesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeStorageVirtualMachinesResponse_StorageVirtualMachines, &sDescribeStorageVirtualMachinesResponse_NextToken}}
+var mDescribeVolumesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVolumesRequest_VolumeIds, &sDescribeVolumesRequest_Filters, &sDescribeVolumesRequest_MaxResults, &sDescribeVolumesRequest_NextToken}}
+var mDescribeVolumesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVolumesResponse_Volumes, &sDescribeVolumesResponse_NextToken}}
+var mDetachAndDeleteS3AccessPointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachAndDeleteS3AccessPointRequest_ClientRequestToken, &sDetachAndDeleteS3AccessPointRequest_Name}}
+var mDetachAndDeleteS3AccessPointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDetachAndDeleteS3AccessPointResponse_Lifecycle, &sDetachAndDeleteS3AccessPointResponse_Name}}
+var mDisassociateFileSystemAliasesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateFileSystemAliasesRequest_ClientRequestToken, &sDisassociateFileSystemAliasesRequest_FileSystemId, &sDisassociateFileSystemAliasesRequest_Aliases}}
+var mDisassociateFileSystemAliasesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateFileSystemAliasesResponse_Aliases}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN, &sListTagsForResourceRequest_MaxResults, &sListTagsForResourceRequest_NextToken}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags, &sListTagsForResourceResponse_NextToken}}
+var mReleaseFileSystemNfsV3LocksRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sReleaseFileSystemNfsV3LocksRequest_FileSystemId, &sReleaseFileSystemNfsV3LocksRequest_ClientRequestToken}}
+var mReleaseFileSystemNfsV3LocksResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sReleaseFileSystemNfsV3LocksResponse_FileSystem}}
+var mRestoreVolumeFromSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreVolumeFromSnapshotRequest_ClientRequestToken, &sRestoreVolumeFromSnapshotRequest_VolumeId, &sRestoreVolumeFromSnapshotRequest_SnapshotId, &sRestoreVolumeFromSnapshotRequest_Options}}
+var mRestoreVolumeFromSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreVolumeFromSnapshotResponse_VolumeId, &sRestoreVolumeFromSnapshotResponse_Lifecycle, &sRestoreVolumeFromSnapshotResponse_AdministrativeActions}}
+var mStartMisconfiguredStateRecoveryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMisconfiguredStateRecoveryRequest_ClientRequestToken, &sStartMisconfiguredStateRecoveryRequest_FileSystemId}}
+var mStartMisconfiguredStateRecoveryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartMisconfiguredStateRecoveryResponse_FileSystem}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateDataRepositoryAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataRepositoryAssociationRequest_AssociationId, &sUpdateDataRepositoryAssociationRequest_ClientRequestToken, &sUpdateDataRepositoryAssociationRequest_ImportedFileChunkSize, &sUpdateDataRepositoryAssociationRequest_S3}}
+var mUpdateDataRepositoryAssociationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataRepositoryAssociationResponse_Association}}
+var mUpdateFileCacheRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileCacheRequest_FileCacheId, &sUpdateFileCacheRequest_ClientRequestToken, &sUpdateFileCacheRequest_LustreConfiguration}}
+var mUpdateFileCacheResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileCacheResponse_FileCache}}
+var mUpdateFileSystemRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemRequest_FileSystemId, &sUpdateFileSystemRequest_ClientRequestToken, &sUpdateFileSystemRequest_StorageCapacity, &sUpdateFileSystemRequest_WindowsConfiguration, &sUpdateFileSystemRequest_LustreConfiguration, &sUpdateFileSystemRequest_OntapConfiguration, &sUpdateFileSystemRequest_OpenZFSConfiguration, &sUpdateFileSystemRequest_StorageType, &sUpdateFileSystemRequest_FileSystemTypeVersion, &sUpdateFileSystemRequest_NetworkType}, Seed: 7, Slots: []uint16{
+	9, 0, 0, 0, 3, 0, 0, 4, 0, 0, 0, 0, 5, 2, 0, 0, 0, 8, 10, 0, 0, 0, 6, 0,
+	0, 0, 0, 0, 7, 0, 0, 1,
+}}
+var mUpdateFileSystemResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateFileSystemResponse_FileSystem}}
+var mUpdateSharedVpcConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSharedVpcConfigurationRequest_EnableFsxRouteTableUpdatesFromParticipantAccounts, &sUpdateSharedVpcConfigurationRequest_ClientRequestToken}}
+var mUpdateSharedVpcConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts}}
+var mUpdateSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSnapshotRequest_ClientRequestToken, &sUpdateSnapshotRequest_Name, &sUpdateSnapshotRequest_SnapshotId}}
+var mUpdateSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSnapshotResponse_Snapshot}}
+var mUpdateStorageVirtualMachineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration, &sUpdateStorageVirtualMachineRequest_ClientRequestToken, &sUpdateStorageVirtualMachineRequest_StorageVirtualMachineId, &sUpdateStorageVirtualMachineRequest_SvmAdminPassword}}
+var mUpdateStorageVirtualMachineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateStorageVirtualMachineResponse_StorageVirtualMachine}}
+var mUpdateVolumeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVolumeRequest_ClientRequestToken, &sUpdateVolumeRequest_VolumeId, &sUpdateVolumeRequest_OntapConfiguration, &sUpdateVolumeRequest_Name, &sUpdateVolumeRequest_OpenZFSConfiguration}}
+var mUpdateVolumeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVolumeResponse_Volume}}
+
+var sAssociateFileSystemAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFileSystemAliases, Type: smithy.ShapeTypeOperation})
+var sCancelDataRepositoryTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDataRepositoryTask, Type: smithy.ShapeTypeOperation})
+var sCopyBackup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyBackup, Type: smithy.ShapeTypeOperation})
+var sCopySnapshotAndUpdateVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopySnapshotAndUpdateVolume, Type: smithy.ShapeTypeOperation})
+var sCreateAndAttachS3AccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAndAttachS3AccessPoint, Type: smithy.ShapeTypeOperation})
+var sCreateBackup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackup, Type: smithy.ShapeTypeOperation})
+var sCreateDataRepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRepositoryAssociation, Type: smithy.ShapeTypeOperation})
+var sCreateDataRepositoryTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRepositoryTask, Type: smithy.ShapeTypeOperation})
+var sCreateFileCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileCache, Type: smithy.ShapeTypeOperation})
+var sCreateFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystem, Type: smithy.ShapeTypeOperation})
+var sCreateFileSystemFromBackup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemFromBackup, Type: smithy.ShapeTypeOperation})
+var sCreateSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshot, Type: smithy.ShapeTypeOperation})
+var sCreateStorageVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorageVirtualMachine, Type: smithy.ShapeTypeOperation})
+var sCreateVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVolume, Type: smithy.ShapeTypeOperation})
+var sCreateVolumeFromBackup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVolumeFromBackup, Type: smithy.ShapeTypeOperation})
+var sDeleteBackup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackup, Type: smithy.ShapeTypeOperation})
+var sDeleteDataRepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataRepositoryAssociation, Type: smithy.ShapeTypeOperation})
+var sDeleteFileCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileCache, Type: smithy.ShapeTypeOperation})
+var sDeleteFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystem, Type: smithy.ShapeTypeOperation})
+var sDeleteSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshot, Type: smithy.ShapeTypeOperation})
+var sDeleteStorageVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStorageVirtualMachine, Type: smithy.ShapeTypeOperation})
+var sDeleteVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolume, Type: smithy.ShapeTypeOperation})
+var sDescribeBackups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBackups, Type: smithy.ShapeTypeOperation})
+var sDescribeDataRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataRepositoryAssociations, Type: smithy.ShapeTypeOperation})
+var sDescribeDataRepositoryTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataRepositoryTasks, Type: smithy.ShapeTypeOperation})
+var sDescribeFileCaches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileCaches, Type: smithy.ShapeTypeOperation})
+var sDescribeFileSystemAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemAliases, Type: smithy.ShapeTypeOperation})
+var sDescribeFileSystems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystems, Type: smithy.ShapeTypeOperation})
+var sDescribeS3AccessPointAttachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeS3AccessPointAttachments, Type: smithy.ShapeTypeOperation})
+var sDescribeSharedVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedVpcConfiguration, Type: smithy.ShapeTypeOperation})
+var sDescribeSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshots, Type: smithy.ShapeTypeOperation})
+var sDescribeStorageVirtualMachines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStorageVirtualMachines, Type: smithy.ShapeTypeOperation})
+var sDescribeVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVolumes, Type: smithy.ShapeTypeOperation})
+var sDetachAndDeleteS3AccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachAndDeleteS3AccessPoint, Type: smithy.ShapeTypeOperation})
+var sDisassociateFileSystemAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFileSystemAliases, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sReleaseFileSystemNfsV3Locks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReleaseFileSystemNfsV3Locks, Type: smithy.ShapeTypeOperation})
+var sRestoreVolumeFromSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreVolumeFromSnapshot, Type: smithy.ShapeTypeOperation})
+var sStartMisconfiguredStateRecovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMisconfiguredStateRecovery, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateDataRepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRepositoryAssociation, Type: smithy.ShapeTypeOperation})
+var sUpdateFileCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileCache, Type: smithy.ShapeTypeOperation})
+var sUpdateFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystem, Type: smithy.ShapeTypeOperation})
+var sUpdateSharedVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSharedVpcConfiguration, Type: smithy.ShapeTypeOperation})
+var sUpdateSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSnapshot, Type: smithy.ShapeTypeOperation})
+var sUpdateStorageVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStorageVirtualMachine, Type: smithy.ShapeTypeOperation})
+var sUpdateVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVolume, Type: smithy.ShapeTypeOperation})
+var s_AWSSimbaAPIService_v20180301 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSSimbaAPIService_v20180301, Type: smithy.ShapeTypeService})
+var sAccessPointAlreadyOwnedByYou = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessPointAlreadyOwnedByYou, Members: &mAccessPointAlreadyOwnedByYou, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_AccessPointPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccessPointPolicy, Type: smithy.ShapeTypeString})
+var sActiveDirectoryBackupAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveDirectoryBackupAttributes, Members: &mActiveDirectoryBackupAttributes, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveDirectoryError, Members: &mActiveDirectoryError, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveDirectoryErrorType, Members: &mActiveDirectoryErrorType, Type: smithy.ShapeTypeEnum})
+var s_ActiveDirectoryFullyQualifiedName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActiveDirectoryFullyQualifiedName, Type: smithy.ShapeTypeString})
+var sAdministrativeAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdministrativeAction, Members: &mAdministrativeAction, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdministrativeActionFailureDetails, Members: &mAdministrativeActionFailureDetails, Type: smithy.ShapeTypeStructure})
+var s_AdministrativeActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdministrativeActions, Members: &m_AdministrativeActions, Type: smithy.ShapeTypeList})
+var sAdministrativeActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdministrativeActionType, Members: &mAdministrativeActionType, Type: smithy.ShapeTypeEnum})
+var s_AdminPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AdminPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_Aggregate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Aggregate, Type: smithy.ShapeTypeString})
+var sAggregateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAggregateConfiguration, Members: &mAggregateConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AggregateListMultiplier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AggregateListMultiplier, Type: smithy.ShapeTypeInteger})
+var s_Aggregates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Aggregates, Members: &m_Aggregates, Type: smithy.ShapeTypeList})
+var sAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlias, Members: &mAlias, Type: smithy.ShapeTypeStructure})
+var s_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var sAliasLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAliasLifecycle, Members: &mAliasLifecycle, Type: smithy.ShapeTypeEnum})
+var s_AlternateDNSName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlternateDNSName, Type: smithy.ShapeTypeString})
+var s_AlternateDNSNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AlternateDNSNames, Members: &m_AlternateDNSNames, Type: smithy.ShapeTypeList})
+var s_ArchivePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sAutocommitPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocommitPeriod, Members: &mAutocommitPeriod, Type: smithy.ShapeTypeStructure})
+var sAutocommitPeriodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutocommitPeriodType, Members: &mAutocommitPeriodType, Type: smithy.ShapeTypeEnum})
+var s_AutocommitPeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutocommitPeriodValue, Type: smithy.ShapeTypeInteger})
+var sAutoExportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoExportPolicy, Members: &mAutoExportPolicy, Type: smithy.ShapeTypeStructure})
+var sAutoImportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoImportPolicy, Members: &mAutoImportPolicy, Type: smithy.ShapeTypeStructure})
+var sAutoImportPolicyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutoImportPolicyType, Members: &mAutoImportPolicyType, Type: smithy.ShapeTypeEnum})
+var s_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var s_AWSAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sBackup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackup, Members: &mBackup, Type: smithy.ShapeTypeStructure})
+var sBackupBeingCopied = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupBeingCopied, Members: &mBackupBeingCopied, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sBackupFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupFailureDetails, Members: &mBackupFailureDetails, Type: smithy.ShapeTypeStructure})
+var s_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var s_BackupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BackupIds, Members: &m_BackupIds, Type: smithy.ShapeTypeList})
+var sBackupInProgress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupInProgress, Members: &mBackupInProgress, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sBackupLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupLifecycle, Members: &mBackupLifecycle, Type: smithy.ShapeTypeEnum})
+var sBackupNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupNotFound, Members: &mBackupNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sBackupRestoring = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupRestoring, Members: &mBackupRestoring, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Backups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Backups, Members: &m_Backups, Type: smithy.ShapeTypeList})
+var sBackupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBackupType, Members: &mBackupType, Type: smithy.ShapeTypeEnum})
+var sBadRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequest, Members: &mBadRequest, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_BatchImportMetaDataOnCreate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchImportMetaDataOnCreate, Type: smithy.ShapeTypeBoolean})
+var s_CapacityToRelease = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityToRelease, Type: smithy.ShapeTypeLong})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCompletionReport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompletionReport, Members: &mCompletionReport, Type: smithy.ShapeTypeStructure})
+var s_CoolingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoolingPeriod, Type: smithy.ShapeTypeInteger})
+var s_CopyTagsToDataRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CopyTagsToDataRepositoryAssociations, Type: smithy.ShapeTypeBoolean})
+var sCreateAggregateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAggregateConfiguration, Members: &mCreateAggregateConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointOntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAndAttachS3AccessPointOntapConfiguration, Members: &mCreateAndAttachS3AccessPointOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointOpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAndAttachS3AccessPointOpenZFSConfiguration, Members: &mCreateAndAttachS3AccessPointOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointS3Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAndAttachS3AccessPointS3Configuration, Members: &mCreateAndAttachS3AccessPointS3Configuration, Type: smithy.ShapeTypeStructure})
+var s_CreateFileCacheDataRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateFileCacheDataRepositoryAssociations, Members: &m_CreateFileCacheDataRepositoryAssociations, Type: smithy.ShapeTypeList})
+var sCreateFileCacheLustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileCacheLustreConfiguration, Members: &mCreateFileCacheLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemLustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemLustreConfiguration, Members: &mCreateFileSystemLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemLustreMetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemLustreMetadataConfiguration, Members: &mCreateFileSystemLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemOntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemOntapConfiguration, Members: &mCreateFileSystemOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemOpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemOpenZFSConfiguration, Members: &mCreateFileSystemOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemWindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemWindowsConfiguration, Members: &mCreateFileSystemWindowsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOntapVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOntapVolumeConfiguration, Members: &mCreateOntapVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOpenZFSOriginSnapshotConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOpenZFSOriginSnapshotConfiguration, Members: &mCreateOpenZFSOriginSnapshotConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOpenZFSVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOpenZFSVolumeConfiguration, Members: &mCreateOpenZFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSnaplockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnaplockConfiguration, Members: &mCreateSnaplockConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSvmActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSvmActiveDirectoryConfiguration, Members: &mCreateSvmActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var s_CustomerSecretsManagerARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerSecretsManagerARN, Type: smithy.ShapeTypeString})
+var s_DailyTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sDataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataCompressionType, Members: &mDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryAssociation, Members: &mDataRepositoryAssociation, Type: smithy.ShapeTypeStructure})
+var s_DataRepositoryAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryAssociationId, Type: smithy.ShapeTypeString})
+var s_DataRepositoryAssociationIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryAssociationIds, Members: &m_DataRepositoryAssociationIds, Type: smithy.ShapeTypeList})
+var sDataRepositoryAssociationNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryAssociationNotFound, Members: &mDataRepositoryAssociationNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_DataRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryAssociations, Members: &m_DataRepositoryAssociations, Type: smithy.ShapeTypeList})
+var sDataRepositoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryConfiguration, Members: &mDataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryFailureDetails, Members: &mDataRepositoryFailureDetails, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryLifecycle, Members: &mDataRepositoryLifecycle, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTask, Members: &mDataRepositoryTask, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskEnded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskEnded, Members: &mDataRepositoryTaskEnded, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskExecuting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskExecuting, Members: &mDataRepositoryTaskExecuting, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskFailureDetails, Members: &mDataRepositoryTaskFailureDetails, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskFilter, Members: &mDataRepositoryTaskFilter, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskFilterName, Members: &mDataRepositoryTaskFilterName, Type: smithy.ShapeTypeEnum})
+var s_DataRepositoryTaskFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryTaskFilters, Members: &m_DataRepositoryTaskFilters, Type: smithy.ShapeTypeList})
+var s_DataRepositoryTaskFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryTaskFilterValue, Type: smithy.ShapeTypeString})
+var s_DataRepositoryTaskFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryTaskFilterValues, Members: &m_DataRepositoryTaskFilterValues, Type: smithy.ShapeTypeList})
+var sDataRepositoryTaskLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskLifecycle, Members: &mDataRepositoryTaskLifecycle, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryTaskNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskNotFound, Members: &mDataRepositoryTaskNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_DataRepositoryTaskPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryTaskPath, Type: smithy.ShapeTypeString})
+var s_DataRepositoryTaskPaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryTaskPaths, Members: &m_DataRepositoryTaskPaths, Type: smithy.ShapeTypeList})
+var s_DataRepositoryTasks = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRepositoryTasks, Members: &m_DataRepositoryTasks, Type: smithy.ShapeTypeList})
+var sDataRepositoryTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskStatus, Members: &mDataRepositoryTaskStatus, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataRepositoryTaskType, Members: &mDataRepositoryTaskType, Type: smithy.ShapeTypeEnum})
+var s_DeleteDataInFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteDataInFileSystem, Type: smithy.ShapeTypeBoolean})
+var sDeleteFileSystemLustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemLustreConfiguration, Members: &mDeleteFileSystemLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemLustreResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemLustreResponse, Members: &mDeleteFileSystemLustreResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemOpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemOpenZFSConfiguration, Members: &mDeleteFileSystemOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemOpenZFSOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemOpenZFSOption, Members: &mDeleteFileSystemOpenZFSOption, Type: smithy.ShapeTypeEnum})
+var s_DeleteFileSystemOpenZFSOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteFileSystemOpenZFSOptions, Members: &m_DeleteFileSystemOpenZFSOptions, Type: smithy.ShapeTypeList})
+var sDeleteFileSystemOpenZFSResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemOpenZFSResponse, Members: &mDeleteFileSystemOpenZFSResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemWindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemWindowsConfiguration, Members: &mDeleteFileSystemWindowsConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemWindowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemWindowsResponse, Members: &mDeleteFileSystemWindowsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteOpenZFSVolumeOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOpenZFSVolumeOption, Members: &mDeleteOpenZFSVolumeOption, Type: smithy.ShapeTypeEnum})
+var s_DeleteOpenZFSVolumeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteOpenZFSVolumeOptions, Members: &m_DeleteOpenZFSVolumeOptions, Type: smithy.ShapeTypeList})
+var sDeleteVolumeOntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolumeOntapConfiguration, Members: &mDeleteVolumeOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeOntapResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolumeOntapResponse, Members: &mDeleteVolumeOntapResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeOpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolumeOpenZFSConfiguration, Members: &mDeleteVolumeOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var s_DirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var s_DirectoryPassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryPassword, Traits: &t2, Type: smithy.ShapeTypeString})
+var s_DirectoryUserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectoryUserName, Type: smithy.ShapeTypeString})
+var sDiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sDiskIopsConfigurationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDiskIopsConfigurationMode, Members: &mDiskIopsConfigurationMode, Type: smithy.ShapeTypeEnum})
+var s_DnsIps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DnsIps, Members: &m_DnsIps, Type: smithy.ShapeTypeList})
+var s_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DNSName, Type: smithy.ShapeTypeString})
+var sDriveCacheType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDriveCacheType, Members: &mDriveCacheType, Type: smithy.ShapeTypeEnum})
+var sDurationSinceLastAccess = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDurationSinceLastAccess, Members: &mDurationSinceLastAccess, Type: smithy.ShapeTypeStructure})
+var s_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var s_EventTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList})
+var s_FailedCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailedCount, Type: smithy.ShapeTypeLong})
+var sFileCache = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCache, Members: &mFileCache, Type: smithy.ShapeTypeStructure})
+var sFileCacheCreating = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheCreating, Members: &mFileCacheCreating, Type: smithy.ShapeTypeStructure})
+var sFileCacheDataRepositoryAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheDataRepositoryAssociation, Members: &mFileCacheDataRepositoryAssociation, Type: smithy.ShapeTypeStructure})
+var sFileCacheFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheFailureDetails, Members: &mFileCacheFailureDetails, Type: smithy.ShapeTypeStructure})
+var s_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var s_FileCacheIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileCacheIds, Members: &m_FileCacheIds, Type: smithy.ShapeTypeList})
+var sFileCacheLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheLifecycle, Members: &mFileCacheLifecycle, Type: smithy.ShapeTypeEnum})
+var sFileCacheLustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheLustreConfiguration, Members: &mFileCacheLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCacheLustreDeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheLustreDeploymentType, Members: &mFileCacheLustreDeploymentType, Type: smithy.ShapeTypeEnum})
+var sFileCacheLustreMetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheLustreMetadataConfiguration, Members: &mFileCacheLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCacheNFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheNFSConfiguration, Members: &mFileCacheNFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCacheNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheNotFound, Members: &mFileCacheNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_FileCaches = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileCaches, Members: &m_FileCaches, Type: smithy.ShapeTypeList})
+var sFileCacheType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileCacheType, Members: &mFileCacheType, Type: smithy.ShapeTypeEnum})
+var sFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var s_FileSystemAdministratorsGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemAdministratorsGroupName, Type: smithy.ShapeTypeString})
+var sFileSystemEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemEndpoint, Members: &mFileSystemEndpoint, Type: smithy.ShapeTypeStructure})
+var sFileSystemEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemEndpoints, Members: &mFileSystemEndpoints, Type: smithy.ShapeTypeStructure})
+var sFileSystemFailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemFailureDetails, Members: &mFileSystemFailureDetails, Type: smithy.ShapeTypeStructure})
+var s_FileSystemGID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemGID, Type: smithy.ShapeTypeLong})
+var s_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var s_FileSystemIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemIds, Members: &m_FileSystemIds, Type: smithy.ShapeTypeList})
+var sFileSystemLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemLifecycle, Members: &mFileSystemLifecycle, Type: smithy.ShapeTypeEnum})
+var sFileSystemLustreMetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemLustreMetadataConfiguration, Members: &mFileSystemLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileSystemMaintenanceOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemMaintenanceOperation, Members: &mFileSystemMaintenanceOperation, Type: smithy.ShapeTypeEnum})
+var s_FileSystemMaintenanceOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemMaintenanceOperations, Members: &m_FileSystemMaintenanceOperations, Type: smithy.ShapeTypeList})
+var sFileSystemNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemNotFound, Members: &mFileSystemNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_FileSystems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystems, Members: &m_FileSystems, Type: smithy.ShapeTypeList})
+var s_FileSystemSecondaryGIDs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemSecondaryGIDs, Members: &m_FileSystemSecondaryGIDs, Type: smithy.ShapeTypeList})
+var sFileSystemType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFileSystemType, Members: &mFileSystemType, Type: smithy.ShapeTypeEnum})
+var s_FileSystemTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var s_FileSystemUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemUID, Type: smithy.ShapeTypeLong})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterName, Members: &mFilterName, Type: smithy.ShapeTypeEnum})
+var s_Filters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var s_Flag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sFlexCacheEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFlexCacheEndpointType, Members: &mFlexCacheEndpointType, Type: smithy.ShapeTypeEnum})
+var s_GeneralARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GeneralARN, Type: smithy.ShapeTypeString})
+var s_HAPairs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HAPairs, Type: smithy.ShapeTypeInteger})
+var s_IncludeShared = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludeShared, Type: smithy.ShapeTypeBoolean})
+var sIncompatibleParameterError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncompatibleParameterError, Members: &mIncompatibleParameterError, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sIncompatibleRegionForMultiAZ = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncompatibleRegionForMultiAZ, Members: &mIncompatibleRegionForMultiAZ, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInputOntapVolumeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputOntapVolumeType, Members: &mInputOntapVolumeType, Type: smithy.ShapeTypeEnum})
+var s_IntegerNoMax = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerNoMax, Type: smithy.ShapeTypeInteger})
+var s_IntegerNoMaxFromNegativeOne = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerNoMaxFromNegativeOne, Type: smithy.ShapeTypeInteger})
+var s_IntegerRecordSizeKiB = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerRecordSizeKiB, Type: smithy.ShapeTypeInteger})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sInvalidAccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidAccessPoint, Members: &mInvalidAccessPoint, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sInvalidDataRepositoryType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDataRepositoryType, Members: &mInvalidDataRepositoryType, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidDestinationKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidDestinationKmsKey, Members: &mInvalidDestinationKmsKey, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidExportPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidExportPath, Members: &mInvalidExportPath, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidImportPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidImportPath, Members: &mInvalidImportPath, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidNetworkSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidNetworkSettings, Members: &mInvalidNetworkSettings, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidPerUnitStorageThroughput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidPerUnitStorageThroughput, Members: &mInvalidPerUnitStorageThroughput, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRegion, Members: &mInvalidRegion, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequest, Members: &mInvalidRequest, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sInvalidSourceKmsKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidSourceKmsKey, Members: &mInvalidSourceKmsKey, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Iops = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iops, Type: smithy.ShapeTypeLong})
+var s_IpAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var s_IpAddressRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IpAddressRange, Type: smithy.ShapeTypeString})
+var s_Ipv6AddressRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ipv6AddressRange, Type: smithy.ShapeTypeString})
+var s_JunctionPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JunctionPath, Type: smithy.ShapeTypeString})
+var s_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var s_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LastUpdatedTime, Type: smithy.ShapeTypeTimestamp})
+var sLifecycleTransitionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLifecycleTransitionReason, Members: &mLifecycleTransitionReason, Type: smithy.ShapeTypeStructure})
+var s_LimitedMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LimitedMaxResults, Type: smithy.ShapeTypeInteger})
+var sLustreAccessAuditLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreAccessAuditLogLevel, Members: &mLustreAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sLustreDeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreDeploymentType, Members: &mLustreDeploymentType, Type: smithy.ShapeTypeEnum})
+var sLustreFileSystemConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreFileSystemConfiguration, Members: &mLustreFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LustreFileSystemMountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LustreFileSystemMountName, Type: smithy.ShapeTypeString})
+var sLustreLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreLogConfiguration, Members: &mLustreLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sLustreLogCreateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreLogCreateConfiguration, Members: &mLustreLogCreateConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LustreNoSquashNid = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LustreNoSquashNid, Type: smithy.ShapeTypeString})
+var s_LustreNoSquashNids = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LustreNoSquashNids, Members: &m_LustreNoSquashNids, Type: smithy.ShapeTypeList})
+var sLustreReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreReadCacheConfiguration, Members: &mLustreReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sLustreReadCacheSizingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreReadCacheSizingMode, Members: &mLustreReadCacheSizingMode, Type: smithy.ShapeTypeEnum})
+var s_LustreRootSquash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LustreRootSquash, Type: smithy.ShapeTypeString})
+var sLustreRootSquashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLustreRootSquashConfiguration, Members: &mLustreRootSquashConfiguration, Type: smithy.ShapeTypeStructure})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_Megabytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Megabytes, Type: smithy.ShapeTypeInteger})
+var s_MegabytesPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sMetadataConfigurationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetadataConfigurationMode, Members: &mMetadataConfigurationMode, Type: smithy.ShapeTypeEnum})
+var s_MetadataIops = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataIops, Type: smithy.ShapeTypeInteger})
+var s_MetadataStorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetadataStorageCapacity, Type: smithy.ShapeTypeInteger})
+var sMissingFileCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingFileCacheConfiguration, Members: &mMissingFileCacheConfiguration, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sMissingFileSystemConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingFileSystemConfiguration, Members: &mMissingFileSystemConfiguration, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sMissingVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingVolumeConfiguration, Members: &mMissingVolumeConfiguration, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Namespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var s_NetBiosAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetBiosAlias, Type: smithy.ShapeTypeString})
+var s_NetworkInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var s_NetworkInterfaceIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceIds, Members: &m_NetworkInterfaceIds, Type: smithy.ShapeTypeList})
+var sNetworkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNFSDataRepositoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNFSDataRepositoryConfiguration, Members: &mNFSDataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sNfsVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNfsVersion, Members: &mNfsVersion, Type: smithy.ShapeTypeEnum})
+var sNotServiceResourceError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotServiceResourceError, Members: &mNotServiceResourceError, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sOntapDeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapDeploymentType, Members: &mOntapDeploymentType, Type: smithy.ShapeTypeEnum})
+var s_OntapEndpointIpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OntapEndpointIpAddresses, Members: &m_OntapEndpointIpAddresses, Type: smithy.ShapeTypeList})
+var sOntapFileSystemConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapFileSystemConfiguration, Members: &mOntapFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var sOntapFileSystemIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapFileSystemIdentity, Members: &mOntapFileSystemIdentity, Type: smithy.ShapeTypeStructure})
+var s_OntapFileSystemUserName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OntapFileSystemUserName, Type: smithy.ShapeTypeString})
+var sOntapFileSystemUserType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapFileSystemUserType, Members: &mOntapFileSystemUserType, Type: smithy.ShapeTypeEnum})
+var sOntapUnixFileSystemUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapUnixFileSystemUser, Members: &mOntapUnixFileSystemUser, Type: smithy.ShapeTypeStructure})
+var sOntapVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapVolumeConfiguration, Members: &mOntapVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sOntapVolumeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapVolumeType, Members: &mOntapVolumeType, Type: smithy.ShapeTypeEnum})
+var sOntapWindowsFileSystemUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOntapWindowsFileSystemUser, Members: &mOntapWindowsFileSystemUser, Type: smithy.ShapeTypeStructure})
+var sOpenZFSClientConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSClientConfiguration, Members: &mOpenZFSClientConfiguration, Type: smithy.ShapeTypeStructure})
+var s_OpenZFSClientConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenZFSClientConfigurations, Members: &m_OpenZFSClientConfigurations, Type: smithy.ShapeTypeList})
+var s_OpenZFSClients = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenZFSClients, Type: smithy.ShapeTypeString})
+var sOpenZFSCopyStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSCopyStrategy, Members: &mOpenZFSCopyStrategy, Type: smithy.ShapeTypeEnum})
+var sOpenZFSCreateRootVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSCreateRootVolumeConfiguration, Members: &mOpenZFSCreateRootVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSDataCompressionType, Members: &mOpenZFSDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSDeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSDeploymentType, Members: &mOpenZFSDeploymentType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSFileSystemConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSFileSystemConfiguration, Members: &mOpenZFSFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSFileSystemIdentity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSFileSystemIdentity, Members: &mOpenZFSFileSystemIdentity, Type: smithy.ShapeTypeStructure})
+var sOpenZFSFileSystemUserType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSFileSystemUserType, Members: &mOpenZFSFileSystemUserType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSNfsExport = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSNfsExport, Members: &mOpenZFSNfsExport, Type: smithy.ShapeTypeStructure})
+var s_OpenZFSNfsExportOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenZFSNfsExportOption, Type: smithy.ShapeTypeString})
+var s_OpenZFSNfsExportOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenZFSNfsExportOptions, Members: &m_OpenZFSNfsExportOptions, Type: smithy.ShapeTypeList})
+var s_OpenZFSNfsExports = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenZFSNfsExports, Members: &m_OpenZFSNfsExports, Type: smithy.ShapeTypeList})
+var sOpenZFSOriginSnapshotConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSOriginSnapshotConfiguration, Members: &mOpenZFSOriginSnapshotConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSPosixFileSystemUser = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSPosixFileSystemUser, Members: &mOpenZFSPosixFileSystemUser, Type: smithy.ShapeTypeStructure})
+var sOpenZFSQuotaType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSQuotaType, Members: &mOpenZFSQuotaType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSReadCacheConfiguration, Members: &mOpenZFSReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSReadCacheSizingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSReadCacheSizingMode, Members: &mOpenZFSReadCacheSizingMode, Type: smithy.ShapeTypeEnum})
+var s_OpenZFSUserAndGroupQuotas = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OpenZFSUserAndGroupQuotas, Members: &m_OpenZFSUserAndGroupQuotas, Type: smithy.ShapeTypeList})
+var sOpenZFSUserOrGroupQuota = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSUserOrGroupQuota, Members: &mOpenZFSUserOrGroupQuota, Type: smithy.ShapeTypeStructure})
+var sOpenZFSVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOpenZFSVolumeConfiguration, Members: &mOpenZFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var s_OrganizationalUnitDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationalUnitDistinguishedName, Type: smithy.ShapeTypeString})
+var s_Parameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Parameter, Type: smithy.ShapeTypeString})
+var s_PerUnitStorageThroughput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PerUnitStorageThroughput, Type: smithy.ShapeTypeInteger})
+var sPrivilegedDelete = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrivilegedDelete, Members: &mPrivilegedDelete, Type: smithy.ShapeTypeEnum})
+var s_ProgressPercent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProgressPercent, Type: smithy.ShapeTypeInteger})
+var s_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReadOnly, Type: smithy.ShapeTypeBoolean})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString})
+var sReleaseConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReleaseConfiguration, Members: &mReleaseConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ReleasedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReleasedCapacity, Type: smithy.ShapeTypeLong})
+var s_RemainingTransferBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemainingTransferBytes, Type: smithy.ShapeTypeLong})
+var sReportFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportFormat, Members: &mReportFormat, Type: smithy.ShapeTypeEnum})
+var sReportScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReportScope, Members: &mReportScope, Type: smithy.ShapeTypeEnum})
+var s_RepositoryDnsIps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RepositoryDnsIps, Members: &m_RepositoryDnsIps, Type: smithy.ShapeTypeList})
+var s_RequestTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestTime, Type: smithy.ShapeTypeTimestamp})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sResourceDoesNotSupportTagging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceDoesNotSupportTagging, Members: &mResourceDoesNotSupportTagging, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sResourceNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFound, Members: &mResourceNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sRestoreOpenZFSVolumeOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreOpenZFSVolumeOption, Members: &mRestoreOpenZFSVolumeOption, Type: smithy.ShapeTypeEnum})
+var s_RestoreOpenZFSVolumeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RestoreOpenZFSVolumeOptions, Members: &m_RestoreOpenZFSVolumeOptions, Type: smithy.ShapeTypeList})
+var sRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetentionPeriodType, Members: &mRetentionPeriodType, Type: smithy.ShapeTypeEnum})
+var s_RetentionPeriodValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionPeriodValue, Type: smithy.ShapeTypeInteger})
+var s_RouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteTableId, Type: smithy.ShapeTypeString})
+var s_RouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sS3AccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPoint, Members: &mS3AccessPoint, Type: smithy.ShapeTypeStructure})
+var s_S3AccessPointAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3AccessPointAlias, Type: smithy.ShapeTypeString})
+var sS3AccessPointAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointAttachment, Members: &mS3AccessPointAttachment, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointAttachmentLifecycle, Members: &mS3AccessPointAttachmentLifecycle, Type: smithy.ShapeTypeEnum})
+var s_S3AccessPointAttachmentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3AccessPointAttachmentName, Type: smithy.ShapeTypeString})
+var s_S3AccessPointAttachmentNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3AccessPointAttachmentNames, Members: &m_S3AccessPointAttachmentNames, Type: smithy.ShapeTypeList})
+var sS3AccessPointAttachmentNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointAttachmentNotFound, Members: &mS3AccessPointAttachmentNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_S3AccessPointAttachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3AccessPointAttachments, Members: &m_S3AccessPointAttachments, Type: smithy.ShapeTypeList})
+var sS3AccessPointAttachmentsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointAttachmentsFilter, Members: &mS3AccessPointAttachmentsFilter, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentsFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointAttachmentsFilterName, Members: &mS3AccessPointAttachmentsFilterName, Type: smithy.ShapeTypeEnum})
+var s_S3AccessPointAttachmentsFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3AccessPointAttachmentsFilters, Members: &m_S3AccessPointAttachmentsFilters, Type: smithy.ShapeTypeList})
+var s_S3AccessPointAttachmentsFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3AccessPointAttachmentsFilterValue, Type: smithy.ShapeTypeString})
+var s_S3AccessPointAttachmentsFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3AccessPointAttachmentsFilterValues, Members: &m_S3AccessPointAttachmentsFilterValues, Type: smithy.ShapeTypeList})
+var sS3AccessPointAttachmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointAttachmentType, Members: &mS3AccessPointAttachmentType, Type: smithy.ShapeTypeEnum})
+var sS3AccessPointOntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointOntapConfiguration, Members: &mS3AccessPointOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointOpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointOpenZFSConfiguration, Members: &mS3AccessPointOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointVpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3AccessPointVpcConfiguration, Members: &mS3AccessPointVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3DataRepositoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DataRepositoryConfiguration, Members: &mS3DataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var s_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sSecurityStyle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecurityStyle, Members: &mSecurityStyle, Type: smithy.ShapeTypeEnum})
+var sSelfManagedActiveDirectoryAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelfManagedActiveDirectoryAttributes, Members: &mSelfManagedActiveDirectoryAttributes, Type: smithy.ShapeTypeStructure})
+var sSelfManagedActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelfManagedActiveDirectoryConfiguration, Members: &mSelfManagedActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sSelfManagedActiveDirectoryConfigurationUpdates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelfManagedActiveDirectoryConfigurationUpdates, Members: &mSelfManagedActiveDirectoryConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var sServiceLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimit, Members: &mServiceLimit, Type: smithy.ShapeTypeEnum})
+var sServiceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceLimitExceeded, Members: &mServiceLimitExceeded, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_SizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SizeInBytes, Type: smithy.ShapeTypeLong})
+var sSnaplockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnaplockConfiguration, Members: &mSnaplockConfiguration, Type: smithy.ShapeTypeStructure})
+var sSnaplockRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnaplockRetentionPeriod, Members: &mSnaplockRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sSnaplockType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnaplockType, Members: &mSnaplockType, Type: smithy.ShapeTypeEnum})
+var sSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshot, Members: &mSnapshot, Type: smithy.ShapeTypeStructure})
+var sSnapshotFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotFilter, Members: &mSnapshotFilter, Type: smithy.ShapeTypeStructure})
+var sSnapshotFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotFilterName, Members: &mSnapshotFilterName, Type: smithy.ShapeTypeEnum})
+var s_SnapshotFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotFilters, Members: &m_SnapshotFilters, Type: smithy.ShapeTypeList})
+var s_SnapshotFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotFilterValue, Type: smithy.ShapeTypeString})
+var s_SnapshotFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotFilterValues, Members: &m_SnapshotFilterValues, Type: smithy.ShapeTypeList})
+var s_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var s_SnapshotIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotIds, Members: &m_SnapshotIds, Type: smithy.ShapeTypeList})
+var sSnapshotLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotLifecycle, Members: &mSnapshotLifecycle, Type: smithy.ShapeTypeEnum})
+var s_SnapshotName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotName, Type: smithy.ShapeTypeString})
+var sSnapshotNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnapshotNotFound, Members: &mSnapshotNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_SnapshotPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotPolicy, Type: smithy.ShapeTypeString})
+var s_Snapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Snapshots, Members: &m_Snapshots, Type: smithy.ShapeTypeList})
+var s_SourceBackupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SourceBackupId, Type: smithy.ShapeTypeString})
+var sSourceBackupUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceBackupUnavailable, Members: &mSourceBackupUnavailable, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var s_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sStorageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageType, Members: &mStorageType, Type: smithy.ShapeTypeEnum})
+var sStorageVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageVirtualMachine, Members: &mStorageVirtualMachine, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageVirtualMachineFilter, Members: &mStorageVirtualMachineFilter, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageVirtualMachineFilterName, Members: &mStorageVirtualMachineFilterName, Type: smithy.ShapeTypeEnum})
+var s_StorageVirtualMachineFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachineFilters, Members: &m_StorageVirtualMachineFilters, Type: smithy.ShapeTypeList})
+var s_StorageVirtualMachineFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachineFilterValue, Type: smithy.ShapeTypeString})
+var s_StorageVirtualMachineFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachineFilterValues, Members: &m_StorageVirtualMachineFilterValues, Type: smithy.ShapeTypeList})
+var s_StorageVirtualMachineId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var s_StorageVirtualMachineIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachineIds, Members: &m_StorageVirtualMachineIds, Type: smithy.ShapeTypeList})
+var sStorageVirtualMachineLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageVirtualMachineLifecycle, Members: &mStorageVirtualMachineLifecycle, Type: smithy.ShapeTypeEnum})
+var s_StorageVirtualMachineName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachineName, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachineNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageVirtualMachineNotFound, Members: &mStorageVirtualMachineNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineRootVolumeSecurityStyle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageVirtualMachineRootVolumeSecurityStyle, Members: &mStorageVirtualMachineRootVolumeSecurityStyle, Type: smithy.ShapeTypeEnum})
+var s_StorageVirtualMachines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StorageVirtualMachines, Members: &m_StorageVirtualMachines, Type: smithy.ShapeTypeList})
+var sStorageVirtualMachineSubtype = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageVirtualMachineSubtype, Members: &mStorageVirtualMachineSubtype, Type: smithy.ShapeTypeEnum})
+var s_SubDirectoriesPaths = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubDirectoriesPaths, Members: &m_SubDirectoriesPaths, Type: smithy.ShapeTypeList})
+var s_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var s_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var s_SucceededCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SucceededCount, Type: smithy.ShapeTypeLong})
+var sSvmActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSvmActiveDirectoryConfiguration, Members: &mSvmActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sSvmEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSvmEndpoint, Members: &mSvmEndpoint, Type: smithy.ShapeTypeStructure})
+var sSvmEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSvmEndpoints, Members: &mSvmEndpoints, Type: smithy.ShapeTypeStructure})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskId, Type: smithy.ShapeTypeString})
+var s_TaskIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskIds, Members: &m_TaskIds, Type: smithy.ShapeTypeList})
+var s_ThroughputCapacityMbps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThroughputCapacityMbps, Type: smithy.ShapeTypeInteger})
+var s_ThroughputCapacityPerHAPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThroughputCapacityPerHAPair, Type: smithy.ShapeTypeInteger})
+var sTieringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTieringPolicy, Members: &mTieringPolicy, Type: smithy.ShapeTypeStructure})
+var sTieringPolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTieringPolicyName, Members: &mTieringPolicyName, Type: smithy.ShapeTypeEnum})
+var sTooManyAccessPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyAccessPoints, Members: &mTooManyAccessPoints, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var s_TotalConstituents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalConstituents, Type: smithy.ShapeTypeInteger})
+var s_TotalCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalCount, Type: smithy.ShapeTypeLong})
+var s_TotalTransferBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TotalTransferBytes, Type: smithy.ShapeTypeLong})
+var sUnit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnit, Members: &mUnit, Type: smithy.ShapeTypeEnum})
+var sUnsupportedOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedOperation, Members: &mUnsupportedOperation, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sUpdateFileCacheLustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileCacheLustreConfiguration, Members: &mUpdateFileCacheLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemLustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemLustreConfiguration, Members: &mUpdateFileSystemLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemLustreMetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemLustreMetadataConfiguration, Members: &mUpdateFileSystemLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemOntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemOntapConfiguration, Members: &mUpdateFileSystemOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemOpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemOpenZFSConfiguration, Members: &mUpdateFileSystemOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemWindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemWindowsConfiguration, Members: &mUpdateFileSystemWindowsConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateOntapVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOntapVolumeConfiguration, Members: &mUpdateOntapVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateOpenZFSVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpenZFSVolumeConfiguration, Members: &mUpdateOpenZFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateOpenZFSVolumeOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOpenZFSVolumeOption, Members: &mUpdateOpenZFSVolumeOption, Type: smithy.ShapeTypeEnum})
+var s_UpdateOpenZFSVolumeOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UpdateOpenZFSVolumeOptions, Members: &m_UpdateOpenZFSVolumeOptions, Type: smithy.ShapeTypeList})
+var sUpdateSnaplockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSnaplockConfiguration, Members: &mUpdateSnaplockConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSvmActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSvmActiveDirectoryConfiguration, Members: &mUpdateSvmActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_UUID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UUID, Type: smithy.ShapeTypeString})
+var s_Value = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Value, Type: smithy.ShapeTypeLong})
+var s_VerboseFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VerboseFlag, Type: smithy.ShapeTypeString})
+var sVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var s_VolumeCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeCapacity, Type: smithy.ShapeTypeInteger})
+var s_VolumeCapacityBytes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeCapacityBytes, Type: smithy.ShapeTypeLong})
+var sVolumeFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeFilter, Members: &mVolumeFilter, Type: smithy.ShapeTypeStructure})
+var sVolumeFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeFilterName, Members: &mVolumeFilterName, Type: smithy.ShapeTypeEnum})
+var s_VolumeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeFilters, Members: &m_VolumeFilters, Type: smithy.ShapeTypeList})
+var s_VolumeFilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeFilterValue, Type: smithy.ShapeTypeString})
+var s_VolumeFilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeFilterValues, Members: &m_VolumeFilterValues, Type: smithy.ShapeTypeList})
+var s_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var s_VolumeIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeIds, Members: &m_VolumeIds, Type: smithy.ShapeTypeList})
+var sVolumeLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeLifecycle, Members: &mVolumeLifecycle, Type: smithy.ShapeTypeEnum})
+var s_VolumeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumeName, Type: smithy.ShapeTypeString})
+var sVolumeNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeNotFound, Members: &mVolumeNotFound, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_VolumePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VolumePath, Type: smithy.ShapeTypeString})
+var s_Volumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Volumes, Members: &m_Volumes, Type: smithy.ShapeTypeList})
+var sVolumeStyle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeStyle, Members: &mVolumeStyle, Type: smithy.ShapeTypeEnum})
+var sVolumeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolumeType, Members: &mVolumeType, Type: smithy.ShapeTypeEnum})
+var s_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var s_WeeklyTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sWindowsAccessAuditLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindowsAccessAuditLogLevel, Members: &mWindowsAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sWindowsAuditLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindowsAuditLogConfiguration, Members: &mWindowsAuditLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sWindowsAuditLogCreateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindowsAuditLogCreateConfiguration, Members: &mWindowsAuditLogCreateConfiguration, Type: smithy.ShapeTypeStructure})
+var sWindowsDeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindowsDeploymentType, Members: &mWindowsDeploymentType, Type: smithy.ShapeTypeEnum})
+var sWindowsFileSystemConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindowsFileSystemConfiguration, Members: &mWindowsFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var sWindowsFsrmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWindowsFsrmConfiguration, Members: &mWindowsFsrmConfiguration, Type: smithy.ShapeTypeStructure})
+var sAssociateFileSystemAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFileSystemAliasesRequest, Members: &mAssociateFileSystemAliasesRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateFileSystemAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateFileSystemAliasesResponse, Members: &mAssociateFileSystemAliasesResponse, Type: smithy.ShapeTypeStructure})
+var sCancelDataRepositoryTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDataRepositoryTaskRequest, Members: &mCancelDataRepositoryTaskRequest, Type: smithy.ShapeTypeStructure})
+var sCancelDataRepositoryTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDataRepositoryTaskResponse, Members: &mCancelDataRepositoryTaskResponse, Type: smithy.ShapeTypeStructure})
+var sCopyBackupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyBackupRequest, Members: &mCopyBackupRequest, Type: smithy.ShapeTypeStructure})
+var sCopyBackupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyBackupResponse, Members: &mCopyBackupResponse, Type: smithy.ShapeTypeStructure})
+var sCopySnapshotAndUpdateVolumeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopySnapshotAndUpdateVolumeRequest, Members: &mCopySnapshotAndUpdateVolumeRequest, Type: smithy.ShapeTypeStructure})
+var sCopySnapshotAndUpdateVolumeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopySnapshotAndUpdateVolumeResponse, Members: &mCopySnapshotAndUpdateVolumeResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAndAttachS3AccessPointRequest, Members: &mCreateAndAttachS3AccessPointRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAndAttachS3AccessPointResponse, Members: &mCreateAndAttachS3AccessPointResponse, Type: smithy.ShapeTypeStructure})
+var sCreateBackupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackupRequest, Members: &mCreateBackupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateBackupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBackupResponse, Members: &mCreateBackupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRepositoryAssociationRequest, Members: &mCreateDataRepositoryAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRepositoryAssociationResponse, Members: &mCreateDataRepositoryAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRepositoryTaskRequest, Members: &mCreateDataRepositoryTaskRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataRepositoryTaskResponse, Members: &mCreateDataRepositoryTaskResponse, Type: smithy.ShapeTypeStructure})
+var sCreateFileCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileCacheRequest, Members: &mCreateFileCacheRequest, Type: smithy.ShapeTypeStructure})
+var sCreateFileCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileCacheResponse, Members: &mCreateFileCacheResponse, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemFromBackupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemFromBackupRequest, Members: &mCreateFileSystemFromBackupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemFromBackupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemFromBackupResponse, Members: &mCreateFileSystemFromBackupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemRequest, Members: &mCreateFileSystemRequest, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateFileSystemResponse, Members: &mCreateFileSystemResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotRequest, Members: &mCreateSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSnapshotResponse, Members: &mCreateSnapshotResponse, Type: smithy.ShapeTypeStructure})
+var sCreateStorageVirtualMachineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorageVirtualMachineRequest, Members: &mCreateStorageVirtualMachineRequest, Type: smithy.ShapeTypeStructure})
+var sCreateStorageVirtualMachineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateStorageVirtualMachineResponse, Members: &mCreateStorageVirtualMachineResponse, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeFromBackupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVolumeFromBackupRequest, Members: &mCreateVolumeFromBackupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeFromBackupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVolumeFromBackupResponse, Members: &mCreateVolumeFromBackupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVolumeRequest, Members: &mCreateVolumeRequest, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateVolumeResponse, Members: &mCreateVolumeResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteBackupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackupRequest, Members: &mDeleteBackupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteBackupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBackupResponse, Members: &mDeleteBackupResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteDataRepositoryAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataRepositoryAssociationRequest, Members: &mDeleteDataRepositoryAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDataRepositoryAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataRepositoryAssociationResponse, Members: &mDeleteDataRepositoryAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFileCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileCacheRequest, Members: &mDeleteFileCacheRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteFileCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileCacheResponse, Members: &mDeleteFileCacheResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemRequest, Members: &mDeleteFileSystemRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteFileSystemResponse, Members: &mDeleteFileSystemResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshotRequest, Members: &mDeleteSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSnapshotResponse, Members: &mDeleteSnapshotResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteStorageVirtualMachineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStorageVirtualMachineRequest, Members: &mDeleteStorageVirtualMachineRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteStorageVirtualMachineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteStorageVirtualMachineResponse, Members: &mDeleteStorageVirtualMachineResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolumeRequest, Members: &mDeleteVolumeRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVolumeResponse, Members: &mDeleteVolumeResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeBackupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBackupsRequest, Members: &mDescribeBackupsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeBackupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBackupsResponse, Members: &mDescribeBackupsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeDataRepositoryAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataRepositoryAssociationsRequest, Members: &mDescribeDataRepositoryAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDataRepositoryAssociationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataRepositoryAssociationsResponse, Members: &mDescribeDataRepositoryAssociationsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeDataRepositoryTasksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataRepositoryTasksRequest, Members: &mDescribeDataRepositoryTasksRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDataRepositoryTasksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataRepositoryTasksResponse, Members: &mDescribeDataRepositoryTasksResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeFileCachesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileCachesRequest, Members: &mDescribeFileCachesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeFileCachesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileCachesResponse, Members: &mDescribeFileCachesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeFileSystemAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemAliasesRequest, Members: &mDescribeFileSystemAliasesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeFileSystemAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemAliasesResponse, Members: &mDescribeFileSystemAliasesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeFileSystemsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemsRequest, Members: &mDescribeFileSystemsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeFileSystemsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeFileSystemsResponse, Members: &mDescribeFileSystemsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeS3AccessPointAttachmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeS3AccessPointAttachmentsRequest, Members: &mDescribeS3AccessPointAttachmentsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeS3AccessPointAttachmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeS3AccessPointAttachmentsResponse, Members: &mDescribeS3AccessPointAttachmentsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSharedVpcConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedVpcConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSharedVpcConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSharedVpcConfigurationResponse, Members: &mDescribeSharedVpcConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSnapshotsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshotsRequest, Members: &mDescribeSnapshotsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSnapshotsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSnapshotsResponse, Members: &mDescribeSnapshotsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeStorageVirtualMachinesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStorageVirtualMachinesRequest, Members: &mDescribeStorageVirtualMachinesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeStorageVirtualMachinesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeStorageVirtualMachinesResponse, Members: &mDescribeStorageVirtualMachinesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeVolumesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVolumesRequest, Members: &mDescribeVolumesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeVolumesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVolumesResponse, Members: &mDescribeVolumesResponse, Type: smithy.ShapeTypeStructure})
+var sDetachAndDeleteS3AccessPointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachAndDeleteS3AccessPointRequest, Members: &mDetachAndDeleteS3AccessPointRequest, Type: smithy.ShapeTypeStructure})
+var sDetachAndDeleteS3AccessPointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetachAndDeleteS3AccessPointResponse, Members: &mDetachAndDeleteS3AccessPointResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateFileSystemAliasesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFileSystemAliasesRequest, Members: &mDisassociateFileSystemAliasesRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateFileSystemAliasesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateFileSystemAliasesResponse, Members: &mDisassociateFileSystemAliasesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sReleaseFileSystemNfsV3LocksRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReleaseFileSystemNfsV3LocksRequest, Members: &mReleaseFileSystemNfsV3LocksRequest, Type: smithy.ShapeTypeStructure})
+var sReleaseFileSystemNfsV3LocksResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iReleaseFileSystemNfsV3LocksResponse, Members: &mReleaseFileSystemNfsV3LocksResponse, Type: smithy.ShapeTypeStructure})
+var sRestoreVolumeFromSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreVolumeFromSnapshotRequest, Members: &mRestoreVolumeFromSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sRestoreVolumeFromSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreVolumeFromSnapshotResponse, Members: &mRestoreVolumeFromSnapshotResponse, Type: smithy.ShapeTypeStructure})
+var sStartMisconfiguredStateRecoveryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMisconfiguredStateRecoveryRequest, Members: &mStartMisconfiguredStateRecoveryRequest, Type: smithy.ShapeTypeStructure})
+var sStartMisconfiguredStateRecoveryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartMisconfiguredStateRecoveryResponse, Members: &mStartMisconfiguredStateRecoveryResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRepositoryAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRepositoryAssociationRequest, Members: &mUpdateDataRepositoryAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRepositoryAssociationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataRepositoryAssociationResponse, Members: &mUpdateDataRepositoryAssociationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateFileCacheRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileCacheRequest, Members: &mUpdateFileCacheRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateFileCacheResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileCacheResponse, Members: &mUpdateFileCacheResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemRequest, Members: &mUpdateFileSystemRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateFileSystemResponse, Members: &mUpdateFileSystemResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSharedVpcConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSharedVpcConfigurationRequest, Members: &mUpdateSharedVpcConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSharedVpcConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSharedVpcConfigurationResponse, Members: &mUpdateSharedVpcConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSnapshotRequest, Members: &mUpdateSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSnapshotResponse, Members: &mUpdateSnapshotResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateStorageVirtualMachineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStorageVirtualMachineRequest, Members: &mUpdateStorageVirtualMachineRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateStorageVirtualMachineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateStorageVirtualMachineResponse, Members: &mUpdateStorageVirtualMachineResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateVolumeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVolumeRequest, Members: &mUpdateVolumeRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateVolumeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVolumeResponse, Members: &mUpdateVolumeResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessPointAlreadyOwnedByYou_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sAccessPointAlreadyOwnedByYou_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sActiveDirectoryBackupAttributes_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_ActiveDirectoryFullyQualifiedName, Type: smithy.ShapeTypeString})
+var sActiveDirectoryBackupAttributes_ActiveDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sActiveDirectoryBackupAttributes_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sActiveDirectoryError_ActiveDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sActiveDirectoryError_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iActiveDirectoryErrorType, Members: &mActiveDirectoryErrorType, Type: smithy.ShapeTypeEnum})
+var sActiveDirectoryError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sActiveDirectoryErrorType_DOMAIN_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOMAIN_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryErrorType_INCOMPATIBLE_DOMAIN_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPATIBLE_DOMAIN_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryErrorType_WRONG_VPC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRONG_VPC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryErrorType_INVALID_NETWORK_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_NETWORK_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveDirectoryErrorType_INVALID_DOMAIN_STAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DOMAIN_STAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeAction_AdministrativeActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministrativeActionType", ID: &iAdministrativeActionType, Members: &mAdministrativeActionType, Type: smithy.ShapeTypeEnum})
+var sAdministrativeAction_ProgressPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressPercent", ID: &i_ProgressPercent, Type: smithy.ShapeTypeInteger})
+var sAdministrativeAction_RequestTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestTime", ID: &i_RequestTime, Type: smithy.ShapeTypeTimestamp})
+var sAdministrativeAction_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sAdministrativeAction_TargetFileSystemValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetFileSystemValues", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var sAdministrativeAction_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iAdministrativeActionFailureDetails, Members: &mAdministrativeActionFailureDetails, Type: smithy.ShapeTypeStructure})
+var sAdministrativeAction_TargetVolumeValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVolumeValues", ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var sAdministrativeAction_TargetSnapshotValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetSnapshotValues", ID: &iSnapshot, Members: &mSnapshot, Type: smithy.ShapeTypeStructure})
+var sAdministrativeAction_TotalTransferBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalTransferBytes", ID: &i_TotalTransferBytes, Type: smithy.ShapeTypeLong})
+var sAdministrativeAction_RemainingTransferBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemainingTransferBytes", ID: &i_RemainingTransferBytes, Type: smithy.ShapeTypeLong})
+var sAdministrativeAction_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAdministrativeActionFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_AdministrativeActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdministrativeAction, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_FILE_SYSTEM_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_STORAGE_OPTIMIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_OPTIMIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_FILE_SYSTEM_ALIAS_ASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ALIAS_ASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_FILE_SYSTEM_ALIAS_DISASSOCIATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ALIAS_DISASSOCIATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_VOLUME_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_SNAPSHOT_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT_UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_RELEASE_NFS_V3_LOCKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RELEASE_NFS_V3_LOCKS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_VOLUME_RESTORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_RESTORE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_THROUGHPUT_OPTIMIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THROUGHPUT_OPTIMIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_IOPS_OPTIMIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IOPS_OPTIMIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_STORAGE_TYPE_OPTIMIZATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_TYPE_OPTIMIZATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_MISCONFIGURED_STATE_RECOVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED_STATE_RECOVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_VOLUME_UPDATE_WITH_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_UPDATE_WITH_SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_INITIALIZE_WITH_SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOWNLOAD_DATA_FROM_BACKUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAggregateConfiguration_Aggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aggregates", ID: &i_Aggregates, Members: &m_Aggregates, Type: smithy.ShapeTypeList})
+var sAggregateConfiguration_TotalConstituents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalConstituents", ID: &i_TotalConstituents, Type: smithy.ShapeTypeInteger})
+var s_Aggregates_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Aggregate, Type: smithy.ShapeTypeString})
+var sAlias_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_AlternateDNSName, Type: smithy.ShapeTypeString})
+var sAlias_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iAliasLifecycle, Members: &mAliasLifecycle, Type: smithy.ShapeTypeEnum})
+var s_Aliases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAlias, Members: &mAlias, Type: smithy.ShapeTypeStructure})
+var sAliasLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAliasLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAliasLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAliasLifecycle_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAliasLifecycle_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AlternateDNSNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AlternateDNSName, Type: smithy.ShapeTypeString})
+var sAutocommitPeriod_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iAutocommitPeriodType, Members: &mAutocommitPeriodType, Type: smithy.ShapeTypeEnum})
+var sAutocommitPeriod_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_AutocommitPeriodValue, Type: smithy.ShapeTypeInteger})
+var sAutocommitPeriodType_MINUTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutocommitPeriodType_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutocommitPeriodType_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutocommitPeriodType_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutocommitPeriodType_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutocommitPeriodType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoExportPolicy_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList})
+var sAutoImportPolicy_Events = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Events", ID: &i_EventTypes, Members: &m_EventTypes, Type: smithy.ShapeTypeList})
+var sAutoImportPolicyType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoImportPolicyType_NEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoImportPolicyType_NEW_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAutoImportPolicyType_NEW_CHANGED_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW_CHANGED_DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackup_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sBackup_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iBackupLifecycle, Members: &mBackupLifecycle, Type: smithy.ShapeTypeEnum})
+var sBackup_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iBackupFailureDetails, Members: &mBackupFailureDetails, Type: smithy.ShapeTypeStructure})
+var sBackup_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iBackupType, Members: &mBackupType, Type: smithy.ShapeTypeEnum})
+var sBackup_ProgressPercent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgressPercent", ID: &i_ProgressPercent, Type: smithy.ShapeTypeInteger})
+var sBackup_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sBackup_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sBackup_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sBackup_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sBackup_FileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystem", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var sBackup_DirectoryInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DirectoryInformation", ID: &iActiveDirectoryBackupAttributes, Members: &mActiveDirectoryBackupAttributes, Type: smithy.ShapeTypeStructure})
+var sBackup_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sBackup_SourceBackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sBackup_SourceBackupRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBackupRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sBackup_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sBackup_Volume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Volume", ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var sBackup_SizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInBytes", ID: &i_SizeInBytes, Type: smithy.ShapeTypeLong})
+var sBackupBeingCopied_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBackupBeingCopied_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sBackupFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_BackupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sBackupInProgress_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBackupLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupLifecycle_TRANSFERRING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRANSFERRING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupLifecycle_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupLifecycle_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupLifecycle_COPYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COPYING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBackupRestoring_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sBackupRestoring_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var s_Backups_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBackup, Members: &mBackup, Type: smithy.ShapeTypeStructure})
+var sBackupType_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupType_USER_INITIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_INITIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBackupType_AWS_BACKUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_BACKUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBadRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sCompletionReport_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCompletionReport_Path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Path", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sCompletionReport_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iReportFormat, Members: &mReportFormat, Type: smithy.ShapeTypeEnum})
+var sCompletionReport_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iReportScope, Members: &mReportScope, Type: smithy.ShapeTypeEnum})
+var sCreateAggregateConfiguration_Aggregates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aggregates", ID: &i_Aggregates, Members: &m_Aggregates, Type: smithy.ShapeTypeList})
+var sCreateAggregateConfiguration_ConstituentsPerAggregate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConstituentsPerAggregate", ID: &i_AggregateListMultiplier, Type: smithy.ShapeTypeInteger})
+var sCreateAndAttachS3AccessPointOntapConfiguration_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemIdentity", ID: &iOntapFileSystemIdentity, Members: &mOntapFileSystemIdentity, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemIdentity", ID: &iOpenZFSFileSystemIdentity, Members: &mOpenZFSFileSystemIdentity, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointS3Configuration_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iS3AccessPointVpcConfiguration, Members: &mS3AccessPointVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointS3Configuration_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_AccessPointPolicy, Type: smithy.ShapeTypeString})
+var s_CreateFileCacheDataRepositoryAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileCacheDataRepositoryAssociation, Members: &mFileCacheDataRepositoryAssociation, Type: smithy.ShapeTypeStructure})
+var sCreateFileCacheLustreConfiguration_PerUnitStorageThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerUnitStorageThroughput", ID: &i_PerUnitStorageThroughput, Type: smithy.ShapeTypeInteger})
+var sCreateFileCacheLustreConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iFileCacheLustreDeploymentType, Members: &mFileCacheLustreDeploymentType, Type: smithy.ShapeTypeEnum})
+var sCreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sCreateFileCacheLustreConfiguration_MetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataConfiguration", ID: &iFileCacheLustreMetadataConfiguration, Members: &mFileCacheLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemLustreConfiguration_ImportPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportPath", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sCreateFileSystemLustreConfiguration_ExportPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportPath", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sCreateFileSystemLustreConfiguration_ImportedFileChunkSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedFileChunkSize", ID: &i_Megabytes, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemLustreConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iLustreDeploymentType, Members: &mLustreDeploymentType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemLustreConfiguration_AutoImportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoImportPolicy", ID: &iAutoImportPolicyType, Members: &mAutoImportPolicyType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemLustreConfiguration_PerUnitStorageThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerUnitStorageThroughput", ID: &i_PerUnitStorageThroughput, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemLustreConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateFileSystemLustreConfiguration_DriveCacheType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DriveCacheType", ID: &iDriveCacheType, Members: &mDriveCacheType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemLustreConfiguration_DataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCompressionType", ID: &iDataCompressionType, Members: &mDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemLustreConfiguration_EfaEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EfaEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateFileSystemLustreConfiguration_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLustreLogCreateConfiguration, Members: &mLustreLogCreateConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemLustreConfiguration_RootSquashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootSquashConfiguration", ID: &iLustreRootSquashConfiguration, Members: &mLustreRootSquashConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemLustreConfiguration_MetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataConfiguration", ID: &iCreateFileSystemLustreMetadataConfiguration, Members: &mCreateFileSystemLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemLustreConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_ThroughputCapacityMbps, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemLustreConfiguration_DataReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReadCacheConfiguration", ID: &iLustreReadCacheConfiguration, Members: &mLustreReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemLustreMetadataConfiguration_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_MetadataIops, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemLustreMetadataConfiguration_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iMetadataConfigurationMode, Members: &mMetadataConfigurationMode, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOntapConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iOntapDeploymentType, Members: &mOntapDeploymentType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemOntapConfiguration_EndpointIpAddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpAddressRange", ID: &i_IpAddressRange, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOntapConfiguration_FsxAdminPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsxAdminPassword", ID: &i_AdminPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOntapConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemOntapConfiguration_PreferredSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOntapConfiguration_RouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sCreateFileSystemOntapConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOntapConfiguration_HAPairs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAPairs", ID: &i_HAPairs, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacityPerHAPair", ID: &i_ThroughputCapacityPerHAPair, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemOntapConfiguration_EndpointIpv6AddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpv6AddressRange", ID: &i_Ipv6AddressRange, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemOpenZFSConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToVolumes", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOpenZFSConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iOpenZFSDeploymentType, Members: &mOpenZFSDeploymentType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemOpenZFSConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeConfiguration", ID: &iOpenZFSCreateRootVolumeConfiguration, Members: &mOpenZFSCreateRootVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemOpenZFSConfiguration_PreferredSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpAddressRange", ID: &i_IpAddressRange, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpv6AddressRange", ID: &i_Ipv6AddressRange, Type: smithy.ShapeTypeString})
+var sCreateFileSystemOpenZFSConfiguration_RouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sCreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadCacheConfiguration", ID: &iOpenZFSReadCacheConfiguration, Members: &mOpenZFSReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemWindowsConfiguration_ActiveDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sCreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedActiveDirectoryConfiguration", ID: &iSelfManagedActiveDirectoryConfiguration, Members: &mSelfManagedActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemWindowsConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iWindowsDeploymentType, Members: &mWindowsDeploymentType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemWindowsConfiguration_PreferredSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sCreateFileSystemWindowsConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sCreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemWindowsConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateFileSystemWindowsConfiguration_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_AlternateDNSNames, Members: &m_AlternateDNSNames, Type: smithy.ShapeTypeList})
+var sCreateFileSystemWindowsConfiguration_AuditLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogConfiguration", ID: &iWindowsAuditLogCreateConfiguration, Members: &mWindowsAuditLogCreateConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemWindowsConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemWindowsConfiguration_FsrmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsrmConfiguration", ID: &iWindowsFsrmConfiguration, Members: &mWindowsFsrmConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOntapVolumeConfiguration_JunctionPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JunctionPath", ID: &i_JunctionPath, Type: smithy.ShapeTypeString})
+var sCreateOntapVolumeConfiguration_SecurityStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityStyle", ID: &iSecurityStyle, Members: &mSecurityStyle, Type: smithy.ShapeTypeEnum})
+var sCreateOntapVolumeConfiguration_SizeInMegabytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMegabytes", ID: &i_VolumeCapacity, Type: smithy.ShapeTypeInteger})
+var sCreateOntapVolumeConfiguration_StorageEfficiencyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEfficiencyEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateOntapVolumeConfiguration_StorageVirtualMachineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineId", ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var sCreateOntapVolumeConfiguration_TieringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TieringPolicy", ID: &iTieringPolicy, Members: &mTieringPolicy, Type: smithy.ShapeTypeStructure})
+var sCreateOntapVolumeConfiguration_OntapVolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapVolumeType", ID: &iInputOntapVolumeType, Members: &mInputOntapVolumeType, Type: smithy.ShapeTypeEnum})
+var sCreateOntapVolumeConfiguration_SnapshotPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotPolicy", ID: &i_SnapshotPolicy, Type: smithy.ShapeTypeString})
+var sCreateOntapVolumeConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateOntapVolumeConfiguration_SnaplockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnaplockConfiguration", ID: &iCreateSnaplockConfiguration, Members: &mCreateSnaplockConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOntapVolumeConfiguration_VolumeStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStyle", ID: &iVolumeStyle, Members: &mVolumeStyle, Type: smithy.ShapeTypeEnum})
+var sCreateOntapVolumeConfiguration_AggregateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregateConfiguration", ID: &iCreateAggregateConfiguration, Members: &mCreateAggregateConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOntapVolumeConfiguration_SizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInBytes", ID: &i_VolumeCapacityBytes, Type: smithy.ShapeTypeLong})
+var sCreateOpenZFSOriginSnapshotConfiguration_SnapshotARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sCreateOpenZFSOriginSnapshotConfiguration_CopyStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyStrategy", ID: &iOpenZFSCopyStrategy, Members: &mOpenZFSCopyStrategy, Type: smithy.ShapeTypeEnum})
+var sCreateOpenZFSVolumeConfiguration_ParentVolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentVolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacityReservationGiB", ID: &i_IntegerNoMaxFromNegativeOne, Type: smithy.ShapeTypeInteger})
+var sCreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacityQuotaGiB", ID: &i_IntegerNoMaxFromNegativeOne, Type: smithy.ShapeTypeInteger})
+var sCreateOpenZFSVolumeConfiguration_RecordSizeKiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordSizeKiB", ID: &i_IntegerRecordSizeKiB, Type: smithy.ShapeTypeInteger})
+var sCreateOpenZFSVolumeConfiguration_DataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCompressionType", ID: &iOpenZFSDataCompressionType, Members: &mOpenZFSDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sCreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshots", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateOpenZFSVolumeConfiguration_OriginSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginSnapshot", ID: &iCreateOpenZFSOriginSnapshotConfiguration, Members: &mCreateOpenZFSOriginSnapshotConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOpenZFSVolumeConfiguration_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_ReadOnly, Type: smithy.ShapeTypeBoolean})
+var sCreateOpenZFSVolumeConfiguration_NfsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NfsExports", ID: &i_OpenZFSNfsExports, Members: &m_OpenZFSNfsExports, Type: smithy.ShapeTypeList})
+var sCreateOpenZFSVolumeConfiguration_UserAndGroupQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAndGroupQuotas", ID: &i_OpenZFSUserAndGroupQuotas, Members: &m_OpenZFSUserAndGroupQuotas, Type: smithy.ShapeTypeList})
+var sCreateSnaplockConfiguration_AuditLogVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogVolume", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateSnaplockConfiguration_AutocommitPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutocommitPeriod", ID: &iAutocommitPeriod, Members: &mAutocommitPeriod, Type: smithy.ShapeTypeStructure})
+var sCreateSnaplockConfiguration_PrivilegedDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivilegedDelete", ID: &iPrivilegedDelete, Members: &mPrivilegedDelete, Type: smithy.ShapeTypeEnum})
+var sCreateSnaplockConfiguration_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iSnaplockRetentionPeriod, Members: &mSnaplockRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sCreateSnaplockConfiguration_SnaplockType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnaplockType", ID: &iSnaplockType, Members: &mSnaplockType, Type: smithy.ShapeTypeEnum})
+var sCreateSnaplockConfiguration_VolumeAppendModeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeAppendModeEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCreateSvmActiveDirectoryConfiguration_NetBiosName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetBiosName", ID: &i_NetBiosAlias, Type: smithy.ShapeTypeString})
+var sCreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedActiveDirectoryConfiguration", ID: &iSelfManagedActiveDirectoryConfiguration, Members: &mSelfManagedActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sDataCompressionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataCompressionType_LZ4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LZ4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryAssociation_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &i_DataRepositoryAssociationId, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociation_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociation_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociation_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iDataRepositoryLifecycle, Members: &mDataRepositoryLifecycle, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryAssociation_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iDataRepositoryFailureDetails, Members: &mDataRepositoryFailureDetails, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryAssociation_FileSystemPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemPath", ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociation_DataRepositoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryPath", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociation_BatchImportMetaDataOnCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchImportMetaDataOnCreate", ID: &i_BatchImportMetaDataOnCreate, Type: smithy.ShapeTypeBoolean})
+var sDataRepositoryAssociation_ImportedFileChunkSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedFileChunkSize", ID: &i_Megabytes, Type: smithy.ShapeTypeInteger})
+var sDataRepositoryAssociation_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3DataRepositoryConfiguration, Members: &mS3DataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryAssociation_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDataRepositoryAssociation_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sDataRepositoryAssociation_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheId", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociation_FileCachePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCachePath", ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociation_DataRepositorySubdirectories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositorySubdirectories", ID: &i_SubDirectoriesPaths, Members: &m_SubDirectoriesPaths, Type: smithy.ShapeTypeList})
+var sDataRepositoryAssociation_NFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS", ID: &iNFSDataRepositoryConfiguration, Members: &mNFSDataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_DataRepositoryAssociationIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DataRepositoryAssociationId, Type: smithy.ShapeTypeString})
+var sDataRepositoryAssociationNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_DataRepositoryAssociations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataRepositoryAssociation, Members: &mDataRepositoryAssociation, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryConfiguration_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iDataRepositoryLifecycle, Members: &mDataRepositoryLifecycle, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryConfiguration_ImportPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportPath", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sDataRepositoryConfiguration_ExportPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExportPath", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sDataRepositoryConfiguration_ImportedFileChunkSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedFileChunkSize", ID: &i_Megabytes, Type: smithy.ShapeTypeInteger})
+var sDataRepositoryConfiguration_AutoImportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoImportPolicy", ID: &iAutoImportPolicyType, Members: &mAutoImportPolicyType, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryConfiguration_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iDataRepositoryFailureDetails, Members: &mDataRepositoryFailureDetails, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDataRepositoryLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryLifecycle_MISCONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryLifecycle_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTask_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskId, Type: smithy.ShapeTypeString})
+var sDataRepositoryTask_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iDataRepositoryTaskLifecycle, Members: &mDataRepositoryTaskLifecycle, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryTask_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDataRepositoryTaskType, Members: &mDataRepositoryTaskType, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryTask_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sDataRepositoryTask_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp})
+var sDataRepositoryTask_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp})
+var sDataRepositoryTask_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sDataRepositoryTask_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDataRepositoryTask_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sDataRepositoryTask_Paths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Paths", ID: &i_DataRepositoryTaskPaths, Members: &m_DataRepositoryTaskPaths, Type: smithy.ShapeTypeList})
+var sDataRepositoryTask_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iDataRepositoryTaskFailureDetails, Members: &mDataRepositoryTaskFailureDetails, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTask_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iDataRepositoryTaskStatus, Members: &mDataRepositoryTaskStatus, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTask_Report = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Report", ID: &iCompletionReport, Members: &mCompletionReport, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTask_CapacityToRelease = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityToRelease", ID: &i_CapacityToRelease, Type: smithy.ShapeTypeLong})
+var sDataRepositoryTask_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheId", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sDataRepositoryTask_ReleaseConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseConfiguration", ID: &iReleaseConfiguration, Members: &mReleaseConfiguration, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskEnded_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDataRepositoryTaskExecuting_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDataRepositoryTaskFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDataRepositoryTaskFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iDataRepositoryTaskFilterName, Members: &mDataRepositoryTaskFilterName, Type: smithy.ShapeTypeEnum})
+var sDataRepositoryTaskFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_DataRepositoryTaskFilterValues, Members: &m_DataRepositoryTaskFilterValues, Type: smithy.ShapeTypeList})
+var sDataRepositoryTaskFilterName_FILE_SYSTEM_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskFilterName_TASK_LIFECYCLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TASK_LIFECYCLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskFilterName_DATA_REPO_ASSOCIATION_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_REPO_ASSOCIATION_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskFilterName_FILE_CACHE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_CACHE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DataRepositoryTaskFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataRepositoryTaskFilter, Members: &mDataRepositoryTaskFilter, Type: smithy.ShapeTypeStructure})
+var s_DataRepositoryTaskFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DataRepositoryTaskFilterValue, Type: smithy.ShapeTypeString})
+var sDataRepositoryTaskLifecycle_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskLifecycle_EXECUTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXECUTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskLifecycle_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskLifecycle_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskLifecycle_CANCELING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_DataRepositoryTaskPaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DataRepositoryTaskPath, Type: smithy.ShapeTypeString})
+var s_DataRepositoryTasks_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataRepositoryTask, Members: &mDataRepositoryTask, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskStatus_TotalCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalCount", ID: &i_TotalCount, Type: smithy.ShapeTypeLong})
+var sDataRepositoryTaskStatus_SucceededCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SucceededCount", ID: &i_SucceededCount, Type: smithy.ShapeTypeLong})
+var sDataRepositoryTaskStatus_FailedCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedCount", ID: &i_FailedCount, Type: smithy.ShapeTypeLong})
+var sDataRepositoryTaskStatus_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &i_LastUpdatedTime, Type: smithy.ShapeTypeTimestamp})
+var sDataRepositoryTaskStatus_ReleasedCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleasedCapacity", ID: &i_ReleasedCapacity, Type: smithy.ShapeTypeLong})
+var sDataRepositoryTaskType_EXPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskType_IMPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskType_EVICTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVICTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataRepositoryTaskType_AUTO_TRIGGERED_EVICTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO_TRIGGERED_EVICTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemLustreConfiguration_SkipFinalBackup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkipFinalBackup", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sDeleteFileSystemLustreConfiguration_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteFileSystemLustreResponse_FinalBackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sDeleteFileSystemLustreResponse_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteFileSystemOpenZFSConfiguration_SkipFinalBackup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkipFinalBackup", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sDeleteFileSystemOpenZFSConfiguration_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteFileSystemOpenZFSConfiguration_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_DeleteFileSystemOpenZFSOptions, Members: &m_DeleteFileSystemOpenZFSOptions, Type: smithy.ShapeTypeList})
+var sDeleteFileSystemOpenZFSOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DeleteFileSystemOpenZFSOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeleteFileSystemOpenZFSOption, Members: &mDeleteFileSystemOpenZFSOption, Type: smithy.ShapeTypeEnum})
+var sDeleteFileSystemOpenZFSResponse_FinalBackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sDeleteFileSystemOpenZFSResponse_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteFileSystemWindowsConfiguration_SkipFinalBackup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkipFinalBackup", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sDeleteFileSystemWindowsConfiguration_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteFileSystemWindowsResponse_FinalBackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sDeleteFileSystemWindowsResponse_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteOpenZFSVolumeOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DeleteOpenZFSVolumeOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeleteOpenZFSVolumeOption, Members: &mDeleteOpenZFSVolumeOption, Type: smithy.ShapeTypeEnum})
+var sDeleteVolumeOntapConfiguration_SkipFinalBackup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SkipFinalBackup", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sDeleteVolumeOntapConfiguration_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BypassSnaplockEnterpriseRetention", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sDeleteVolumeOntapResponse_FinalBackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sDeleteVolumeOntapResponse_FinalBackupTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinalBackupTags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sDeleteVolumeOpenZFSConfiguration_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_DeleteOpenZFSVolumeOptions, Members: &m_DeleteOpenZFSVolumeOptions, Type: smithy.ShapeTypeList})
+var sDiskIopsConfiguration_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iDiskIopsConfigurationMode, Members: &mDiskIopsConfigurationMode, Type: smithy.ShapeTypeEnum})
+var sDiskIopsConfiguration_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_Iops, Type: smithy.ShapeTypeLong})
+var sDiskIopsConfigurationMode_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDiskIopsConfigurationMode_USER_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DnsIps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sDriveCacheType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDriveCacheType_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDurationSinceLastAccess_Unit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unit", ID: &iUnit, Members: &mUnit, Type: smithy.ShapeTypeEnum})
+var sDurationSinceLastAccess_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_Value, Type: smithy.ShapeTypeLong})
+var sEventType_NEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_CHANGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EventTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var sFileCache_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sFileCache_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sFileCache_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheId", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sFileCache_FileCacheType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheType", ID: &iFileCacheType, Members: &mFileCacheType, Type: smithy.ShapeTypeEnum})
+var sFileCache_FileCacheTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheTypeVersion", ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var sFileCache_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iFileCacheLifecycle, Members: &mFileCacheLifecycle, Type: smithy.ShapeTypeEnum})
+var sFileCache_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFileCacheFailureDetails, Members: &mFileCacheFailureDetails, Type: smithy.ShapeTypeStructure})
+var sFileCache_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sFileCache_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sFileCache_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sFileCache_NetworkInterfaceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceIds", ID: &i_NetworkInterfaceIds, Members: &m_NetworkInterfaceIds, Type: smithy.ShapeTypeList})
+var sFileCache_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString})
+var sFileCache_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sFileCache_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sFileCache_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iFileCacheLustreConfiguration, Members: &mFileCacheLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCache_DataRepositoryAssociationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryAssociationIds", ID: &i_DataRepositoryAssociationIds, Members: &m_DataRepositoryAssociationIds, Type: smithy.ShapeTypeList})
+var sFileCacheCreating_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sFileCacheCreating_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sFileCacheCreating_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheId", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sFileCacheCreating_FileCacheType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheType", ID: &iFileCacheType, Members: &mFileCacheType, Type: smithy.ShapeTypeEnum})
+var sFileCacheCreating_FileCacheTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheTypeVersion", ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var sFileCacheCreating_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iFileCacheLifecycle, Members: &mFileCacheLifecycle, Type: smithy.ShapeTypeEnum})
+var sFileCacheCreating_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFileCacheFailureDetails, Members: &mFileCacheFailureDetails, Type: smithy.ShapeTypeStructure})
+var sFileCacheCreating_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sFileCacheCreating_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sFileCacheCreating_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sFileCacheCreating_NetworkInterfaceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceIds", ID: &i_NetworkInterfaceIds, Members: &m_NetworkInterfaceIds, Type: smithy.ShapeTypeList})
+var sFileCacheCreating_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString})
+var sFileCacheCreating_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sFileCacheCreating_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sFileCacheCreating_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sFileCacheCreating_CopyTagsToDataRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToDataRepositoryAssociations", ID: &i_CopyTagsToDataRepositoryAssociations, Type: smithy.ShapeTypeBoolean})
+var sFileCacheCreating_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iFileCacheLustreConfiguration, Members: &mFileCacheLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCacheCreating_DataRepositoryAssociationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryAssociationIds", ID: &i_DataRepositoryAssociationIds, Members: &m_DataRepositoryAssociationIds, Type: smithy.ShapeTypeList})
+var sFileCacheDataRepositoryAssociation_FileCachePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCachePath", ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var sFileCacheDataRepositoryAssociation_DataRepositoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryPath", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sFileCacheDataRepositoryAssociation_DataRepositorySubdirectories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositorySubdirectories", ID: &i_SubDirectoriesPaths, Members: &m_SubDirectoriesPaths, Type: smithy.ShapeTypeList})
+var sFileCacheDataRepositoryAssociation_NFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS", ID: &iFileCacheNFSConfiguration, Members: &mFileCacheNFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCacheFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_FileCacheIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sFileCacheLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileCacheLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileCacheLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileCacheLifecycle_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileCacheLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileCacheLustreConfiguration_PerUnitStorageThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerUnitStorageThroughput", ID: &i_PerUnitStorageThroughput, Type: smithy.ShapeTypeInteger})
+var sFileCacheLustreConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iFileCacheLustreDeploymentType, Members: &mFileCacheLustreDeploymentType, Type: smithy.ShapeTypeEnum})
+var sFileCacheLustreConfiguration_MountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountName", ID: &i_LustreFileSystemMountName, Type: smithy.ShapeTypeString})
+var sFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sFileCacheLustreConfiguration_MetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataConfiguration", ID: &iFileCacheLustreMetadataConfiguration, Members: &mFileCacheLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCacheLustreConfiguration_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLustreLogConfiguration, Members: &mLustreLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileCacheLustreDeploymentType_CACHE_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACHE_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileCacheLustreMetadataConfiguration_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_MetadataStorageCapacity, Type: smithy.ShapeTypeInteger})
+var sFileCacheNFSConfiguration_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &iNfsVersion, Members: &mNfsVersion, Type: smithy.ShapeTypeEnum})
+var sFileCacheNFSConfiguration_DnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIps", ID: &i_RepositoryDnsIps, Members: &m_RepositoryDnsIps, Type: smithy.ShapeTypeList})
+var sFileCacheNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_FileCaches_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileCache, Members: &mFileCache, Type: smithy.ShapeTypeStructure})
+var sFileCacheType_LUSTRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LUSTRE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystem_OwnerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnerId", ID: &i_AWSAccountId, Type: smithy.ShapeTypeString})
+var sFileSystem_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sFileSystem_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sFileSystem_FileSystemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemType", ID: &iFileSystemType, Members: &mFileSystemType, Type: smithy.ShapeTypeEnum})
+var sFileSystem_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iFileSystemLifecycle, Members: &mFileSystemLifecycle, Type: smithy.ShapeTypeEnum})
+var sFileSystem_FailureDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDetails", ID: &iFileSystemFailureDetails, Members: &mFileSystemFailureDetails, Type: smithy.ShapeTypeStructure})
+var sFileSystem_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sFileSystem_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iStorageType, Members: &mStorageType, Type: smithy.ShapeTypeEnum})
+var sFileSystem_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sFileSystem_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sFileSystem_NetworkInterfaceIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkInterfaceIds", ID: &i_NetworkInterfaceIds, Members: &m_NetworkInterfaceIds, Type: smithy.ShapeTypeList})
+var sFileSystem_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString})
+var sFileSystem_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sFileSystem_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sFileSystem_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sFileSystem_WindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowsConfiguration", ID: &iWindowsFileSystemConfiguration, Members: &mWindowsFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileSystem_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iLustreFileSystemConfiguration, Members: &mLustreFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileSystem_AdministrativeActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministrativeActions", ID: &i_AdministrativeActions, Members: &m_AdministrativeActions, Type: smithy.ShapeTypeList})
+var sFileSystem_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iOntapFileSystemConfiguration, Members: &mOntapFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileSystem_FileSystemTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemTypeVersion", ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var sFileSystem_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iOpenZFSFileSystemConfiguration, Members: &mOpenZFSFileSystemConfiguration, Type: smithy.ShapeTypeStructure})
+var sFileSystem_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sFileSystemEndpoint_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString})
+var sFileSystemEndpoint_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_OntapEndpointIpAddresses, Members: &m_OntapEndpointIpAddresses, Type: smithy.ShapeTypeList})
+var sFileSystemEndpoint_Ipv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6Addresses", ID: &i_OntapEndpointIpAddresses, Members: &m_OntapEndpointIpAddresses, Type: smithy.ShapeTypeList})
+var sFileSystemEndpoints_Intercluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intercluster", ID: &iFileSystemEndpoint, Members: &mFileSystemEndpoint, Type: smithy.ShapeTypeStructure})
+var sFileSystemEndpoints_Management = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Management", ID: &iFileSystemEndpoint, Members: &mFileSystemEndpoint, Type: smithy.ShapeTypeStructure})
+var sFileSystemFailureDetails_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_FileSystemIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sFileSystemLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemLifecycle_MISCONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemLifecycle_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemLifecycle_MISCONFIGURED_UNAVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED_UNAVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemLustreMetadataConfiguration_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_MetadataIops, Type: smithy.ShapeTypeInteger})
+var sFileSystemLustreMetadataConfiguration_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iMetadataConfigurationMode, Members: &mMetadataConfigurationMode, Type: smithy.ShapeTypeEnum})
+var sFileSystemMaintenanceOperation_PATCHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATCHING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemMaintenanceOperation_BACKING_UP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BACKING_UP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FileSystemMaintenanceOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileSystemMaintenanceOperation, Members: &mFileSystemMaintenanceOperation, Type: smithy.ShapeTypeEnum})
+var sFileSystemNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_FileSystems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var s_FileSystemSecondaryGIDs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FileSystemGID, Type: smithy.ShapeTypeLong})
+var sFileSystemType_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemType_LUSTRE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LUSTRE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemType_ONTAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONTAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFileSystemType_OPENZFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENZFS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iFilterName, Members: &mFilterName, Type: smithy.ShapeTypeEnum})
+var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var sFilterName_FILE_SYSTEM_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterName_BACKUP_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BACKUP_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterName_FILE_SYSTEM_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterName_VOLUME_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterName_DATA_REPOSITORY_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_REPOSITORY_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterName_FILE_CACHE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_CACHE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterName_FILE_CACHE_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_CACHE_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Filters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var sFlexCacheEndpointType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlexCacheEndpointType_ORIGIN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORIGIN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFlexCacheEndpointType_CACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIncompatibleParameterError_Parameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameter", ID: &i_Parameter, Type: smithy.ShapeTypeString})
+var sIncompatibleParameterError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sIncompatibleRegionForMultiAZ_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInputOntapVolumeType_RW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputOntapVolumeType_DP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidAccessPoint_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sInvalidAccessPoint_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidDataRepositoryType_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidDestinationKmsKey_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidExportPath_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidImportPath_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidNetworkSettings_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidNetworkSettings_InvalidSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sInvalidNetworkSettings_InvalidSecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidSecurityGroupId", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sInvalidNetworkSettings_InvalidRouteTableId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidRouteTableId", ID: &i_RouteTableId, Type: smithy.ShapeTypeString})
+var sInvalidPerUnitStorageThroughput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidRegion_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidRequest_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sInvalidRequest_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidSourceKmsKey_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLifecycleTransitionReason_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLustreAccessAuditLogLevel_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreAccessAuditLogLevel_WARN_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreAccessAuditLogLevel_ERROR_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreAccessAuditLogLevel_WARN_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WARN_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreDeploymentType_SCRATCH_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCRATCH_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreDeploymentType_SCRATCH_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCRATCH_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreDeploymentType_PERSISTENT_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERSISTENT_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreDeploymentType_PERSISTENT_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERSISTENT_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreFileSystemConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sLustreFileSystemConfiguration_DataRepositoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryConfiguration", ID: &iDataRepositoryConfiguration, Members: &mDataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sLustreFileSystemConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iLustreDeploymentType, Members: &mLustreDeploymentType, Type: smithy.ShapeTypeEnum})
+var sLustreFileSystemConfiguration_PerUnitStorageThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerUnitStorageThroughput", ID: &i_PerUnitStorageThroughput, Type: smithy.ShapeTypeInteger})
+var sLustreFileSystemConfiguration_MountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MountName", ID: &i_LustreFileSystemMountName, Type: smithy.ShapeTypeString})
+var sLustreFileSystemConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sLustreFileSystemConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sLustreFileSystemConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sLustreFileSystemConfiguration_DriveCacheType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DriveCacheType", ID: &iDriveCacheType, Members: &mDriveCacheType, Type: smithy.ShapeTypeEnum})
+var sLustreFileSystemConfiguration_DataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCompressionType", ID: &iDataCompressionType, Members: &mDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sLustreFileSystemConfiguration_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLustreLogConfiguration, Members: &mLustreLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sLustreFileSystemConfiguration_RootSquashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootSquashConfiguration", ID: &iLustreRootSquashConfiguration, Members: &mLustreRootSquashConfiguration, Type: smithy.ShapeTypeStructure})
+var sLustreFileSystemConfiguration_MetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataConfiguration", ID: &iFileSystemLustreMetadataConfiguration, Members: &mFileSystemLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sLustreFileSystemConfiguration_EfaEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EfaEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sLustreFileSystemConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_ThroughputCapacityMbps, Type: smithy.ShapeTypeInteger})
+var sLustreFileSystemConfiguration_DataReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReadCacheConfiguration", ID: &iLustreReadCacheConfiguration, Members: &mLustreReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sLustreLogConfiguration_Level = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Level", ID: &iLustreAccessAuditLogLevel, Members: &mLustreAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sLustreLogConfiguration_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_GeneralARN, Type: smithy.ShapeTypeString})
+var sLustreLogCreateConfiguration_Level = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Level", ID: &iLustreAccessAuditLogLevel, Members: &mLustreAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sLustreLogCreateConfiguration_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_GeneralARN, Type: smithy.ShapeTypeString})
+var s_LustreNoSquashNids_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LustreNoSquashNid, Type: smithy.ShapeTypeString})
+var sLustreReadCacheConfiguration_SizingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizingMode", ID: &iLustreReadCacheSizingMode, Members: &mLustreReadCacheSizingMode, Type: smithy.ShapeTypeEnum})
+var sLustreReadCacheConfiguration_SizeGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeGiB", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sLustreReadCacheSizingMode_NO_CACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreReadCacheSizingMode_USER_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROPORTIONAL_TO_THROUGHPUT_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLustreRootSquashConfiguration_RootSquash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootSquash", ID: &i_LustreRootSquash, Type: smithy.ShapeTypeString})
+var sLustreRootSquashConfiguration_NoSquashNids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NoSquashNids", ID: &i_LustreNoSquashNids, Members: &m_LustreNoSquashNids, Type: smithy.ShapeTypeList})
+var sMetadataConfigurationMode_AUTOMATIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTOMATIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetadataConfigurationMode_USER_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMissingFileCacheConfiguration_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMissingFileSystemConfiguration_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMissingVolumeConfiguration_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_NetworkInterfaceIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_NetworkInterfaceId, Type: smithy.ShapeTypeString})
+var sNetworkType_IPV4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPV4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNetworkType_DUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNFSDataRepositoryConfiguration_Version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Version", ID: &iNfsVersion, Members: &mNfsVersion, Type: smithy.ShapeTypeEnum})
+var sNFSDataRepositoryConfiguration_DnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIps", ID: &i_RepositoryDnsIps, Members: &m_RepositoryDnsIps, Type: smithy.ShapeTypeList})
+var sNFSDataRepositoryConfiguration_AutoExportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoExportPolicy", ID: &iAutoExportPolicy, Members: &mAutoExportPolicy, Type: smithy.ShapeTypeStructure})
+var sNfsVersion_NFS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NFS3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNotServiceResourceError_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sNotServiceResourceError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sOntapDeploymentType_MULTI_AZ_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_AZ_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapDeploymentType_SINGLE_AZ_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapDeploymentType_SINGLE_AZ_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapDeploymentType_MULTI_AZ_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_AZ_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_OntapEndpointIpAddresses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sOntapFileSystemConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sOntapFileSystemConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sOntapFileSystemConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iOntapDeploymentType, Members: &mOntapDeploymentType, Type: smithy.ShapeTypeEnum})
+var sOntapFileSystemConfiguration_EndpointIpAddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpAddressRange", ID: &i_IpAddressRange, Type: smithy.ShapeTypeString})
+var sOntapFileSystemConfiguration_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &iFileSystemEndpoints, Members: &mFileSystemEndpoints, Type: smithy.ShapeTypeStructure})
+var sOntapFileSystemConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sOntapFileSystemConfiguration_PreferredSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sOntapFileSystemConfiguration_RouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sOntapFileSystemConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sOntapFileSystemConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sOntapFileSystemConfiguration_FsxAdminPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsxAdminPassword", ID: &i_AdminPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sOntapFileSystemConfiguration_HAPairs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAPairs", ID: &i_HAPairs, Type: smithy.ShapeTypeInteger})
+var sOntapFileSystemConfiguration_ThroughputCapacityPerHAPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacityPerHAPair", ID: &i_ThroughputCapacityPerHAPair, Type: smithy.ShapeTypeInteger})
+var sOntapFileSystemConfiguration_EndpointIpv6AddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpv6AddressRange", ID: &i_Ipv6AddressRange, Type: smithy.ShapeTypeString})
+var sOntapFileSystemIdentity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOntapFileSystemUserType, Members: &mOntapFileSystemUserType, Type: smithy.ShapeTypeEnum})
+var sOntapFileSystemIdentity_UnixUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnixUser", ID: &iOntapUnixFileSystemUser, Members: &mOntapUnixFileSystemUser, Type: smithy.ShapeTypeStructure})
+var sOntapFileSystemIdentity_WindowsUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowsUser", ID: &iOntapWindowsFileSystemUser, Members: &mOntapWindowsFileSystemUser, Type: smithy.ShapeTypeStructure})
+var sOntapFileSystemUserType_UNIX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapFileSystemUserType_WINDOWS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WINDOWS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapUnixFileSystemUser_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_OntapFileSystemUserName, Type: smithy.ShapeTypeString})
+var sOntapVolumeConfiguration_FlexCacheEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlexCacheEndpointType", ID: &iFlexCacheEndpointType, Members: &mFlexCacheEndpointType, Type: smithy.ShapeTypeEnum})
+var sOntapVolumeConfiguration_JunctionPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JunctionPath", ID: &i_JunctionPath, Type: smithy.ShapeTypeString})
+var sOntapVolumeConfiguration_SecurityStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityStyle", ID: &iSecurityStyle, Members: &mSecurityStyle, Type: smithy.ShapeTypeEnum})
+var sOntapVolumeConfiguration_SizeInMegabytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMegabytes", ID: &i_VolumeCapacity, Type: smithy.ShapeTypeInteger})
+var sOntapVolumeConfiguration_StorageEfficiencyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEfficiencyEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOntapVolumeConfiguration_StorageVirtualMachineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineId", ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var sOntapVolumeConfiguration_StorageVirtualMachineRoot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineRoot", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOntapVolumeConfiguration_TieringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TieringPolicy", ID: &iTieringPolicy, Members: &mTieringPolicy, Type: smithy.ShapeTypeStructure})
+var sOntapVolumeConfiguration_UUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UUID", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sOntapVolumeConfiguration_OntapVolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapVolumeType", ID: &iOntapVolumeType, Members: &mOntapVolumeType, Type: smithy.ShapeTypeEnum})
+var sOntapVolumeConfiguration_SnapshotPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotPolicy", ID: &i_SnapshotPolicy, Type: smithy.ShapeTypeString})
+var sOntapVolumeConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOntapVolumeConfiguration_SnaplockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnaplockConfiguration", ID: &iSnaplockConfiguration, Members: &mSnaplockConfiguration, Type: smithy.ShapeTypeStructure})
+var sOntapVolumeConfiguration_VolumeStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeStyle", ID: &iVolumeStyle, Members: &mVolumeStyle, Type: smithy.ShapeTypeEnum})
+var sOntapVolumeConfiguration_AggregateConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AggregateConfiguration", ID: &iAggregateConfiguration, Members: &mAggregateConfiguration, Type: smithy.ShapeTypeStructure})
+var sOntapVolumeConfiguration_SizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInBytes", ID: &i_VolumeCapacityBytes, Type: smithy.ShapeTypeLong})
+var sOntapVolumeType_RW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapVolumeType_DP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapVolumeType_LS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOntapWindowsFileSystemUser_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_OntapFileSystemUserName, Type: smithy.ShapeTypeString})
+var sOpenZFSClientConfiguration_Clients = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Clients", ID: &i_OpenZFSClients, Type: smithy.ShapeTypeString})
+var sOpenZFSClientConfiguration_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_OpenZFSNfsExportOptions, Members: &m_OpenZFSNfsExportOptions, Type: smithy.ShapeTypeList})
+var s_OpenZFSClientConfigurations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpenZFSClientConfiguration, Members: &mOpenZFSClientConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSCopyStrategy_CLONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSCopyStrategy_FULL_COPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL_COPY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSCopyStrategy_INCREMENTAL_COPY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCREMENTAL_COPY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSCreateRootVolumeConfiguration_RecordSizeKiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordSizeKiB", ID: &i_IntegerRecordSizeKiB, Type: smithy.ShapeTypeInteger})
+var sOpenZFSCreateRootVolumeConfiguration_DataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCompressionType", ID: &iOpenZFSDataCompressionType, Members: &mOpenZFSDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSCreateRootVolumeConfiguration_NfsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NfsExports", ID: &i_OpenZFSNfsExports, Members: &m_OpenZFSNfsExports, Type: smithy.ShapeTypeList})
+var sOpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAndGroupQuotas", ID: &i_OpenZFSUserAndGroupQuotas, Members: &m_OpenZFSUserAndGroupQuotas, Type: smithy.ShapeTypeList})
+var sOpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshots", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSCreateRootVolumeConfiguration_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_ReadOnly, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSDataCompressionType_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDataCompressionType_ZSTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ZSTD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDataCompressionType_LZ4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LZ4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDeploymentType_SINGLE_AZ_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDeploymentType_SINGLE_AZ_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDeploymentType_SINGLE_AZ_HA_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_HA_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDeploymentType_SINGLE_AZ_HA_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_HA_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSDeploymentType_MULTI_AZ_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_AZ_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sOpenZFSFileSystemConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSFileSystemConfiguration_CopyTagsToVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToVolumes", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iOpenZFSDeploymentType, Members: &mOpenZFSDeploymentType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSFileSystemConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sOpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSFileSystemConfiguration_RootVolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_PreferredSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_EndpointIpAddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpAddressRange", ID: &i_IpAddressRange, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_EndpointIpv6AddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpv6AddressRange", ID: &i_Ipv6AddressRange, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_RouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sOpenZFSFileSystemConfiguration_EndpointIpAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpAddress", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_EndpointIpv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpv6Address", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sOpenZFSFileSystemConfiguration_ReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadCacheConfiguration", ID: &iOpenZFSReadCacheConfiguration, Members: &mOpenZFSReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSFileSystemIdentity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOpenZFSFileSystemUserType, Members: &mOpenZFSFileSystemUserType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSFileSystemIdentity_PosixUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PosixUser", ID: &iOpenZFSPosixFileSystemUser, Members: &mOpenZFSPosixFileSystemUser, Type: smithy.ShapeTypeStructure})
+var sOpenZFSFileSystemUserType_POSIX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POSIX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSNfsExport_ClientConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientConfigurations", ID: &i_OpenZFSClientConfigurations, Members: &m_OpenZFSClientConfigurations, Type: smithy.ShapeTypeList})
+var s_OpenZFSNfsExportOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OpenZFSNfsExportOption, Type: smithy.ShapeTypeString})
+var s_OpenZFSNfsExports_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpenZFSNfsExport, Members: &mOpenZFSNfsExport, Type: smithy.ShapeTypeStructure})
+var sOpenZFSOriginSnapshotConfiguration_SnapshotARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sOpenZFSOriginSnapshotConfiguration_CopyStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyStrategy", ID: &iOpenZFSCopyStrategy, Members: &mOpenZFSCopyStrategy, Type: smithy.ShapeTypeEnum})
+var sOpenZFSPosixFileSystemUser_Uid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Uid", ID: &i_FileSystemUID, Type: smithy.ShapeTypeLong})
+var sOpenZFSPosixFileSystemUser_Gid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Gid", ID: &i_FileSystemGID, Type: smithy.ShapeTypeLong})
+var sOpenZFSPosixFileSystemUser_SecondaryGids = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecondaryGids", ID: &i_FileSystemSecondaryGIDs, Members: &m_FileSystemSecondaryGIDs, Type: smithy.ShapeTypeList})
+var sOpenZFSQuotaType_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSQuotaType_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSReadCacheConfiguration_SizingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizingMode", ID: &iOpenZFSReadCacheSizingMode, Members: &mOpenZFSReadCacheSizingMode, Type: smithy.ShapeTypeEnum})
+var sOpenZFSReadCacheConfiguration_SizeGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeGiB", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sOpenZFSReadCacheSizingMode_NO_CACHE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CACHE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSReadCacheSizingMode_USER_PROVISIONED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USER_PROVISIONED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOpenZFSReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROPORTIONAL_TO_THROUGHPUT_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_OpenZFSUserAndGroupQuotas_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOpenZFSUserOrGroupQuota, Members: &mOpenZFSUserOrGroupQuota, Type: smithy.ShapeTypeStructure})
+var sOpenZFSUserOrGroupQuota_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOpenZFSQuotaType, Members: &mOpenZFSQuotaType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSUserOrGroupQuota_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_IntegerNoMax, Type: smithy.ShapeTypeInteger})
+var sOpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacityQuotaGiB", ID: &i_IntegerNoMax, Type: smithy.ShapeTypeInteger})
+var sOpenZFSVolumeConfiguration_ParentVolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParentVolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sOpenZFSVolumeConfiguration_VolumePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumePath", ID: &i_VolumePath, Type: smithy.ShapeTypeString})
+var sOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacityReservationGiB", ID: &i_IntegerNoMax, Type: smithy.ShapeTypeInteger})
+var sOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacityQuotaGiB", ID: &i_IntegerNoMax, Type: smithy.ShapeTypeInteger})
+var sOpenZFSVolumeConfiguration_RecordSizeKiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordSizeKiB", ID: &i_IntegerRecordSizeKiB, Type: smithy.ShapeTypeInteger})
+var sOpenZFSVolumeConfiguration_DataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCompressionType", ID: &iOpenZFSDataCompressionType, Members: &mOpenZFSDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sOpenZFSVolumeConfiguration_CopyTagsToSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToSnapshots", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSVolumeConfiguration_OriginSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginSnapshot", ID: &iOpenZFSOriginSnapshotConfiguration, Members: &mOpenZFSOriginSnapshotConfiguration, Type: smithy.ShapeTypeStructure})
+var sOpenZFSVolumeConfiguration_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_ReadOnly, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSVolumeConfiguration_NfsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NfsExports", ID: &i_OpenZFSNfsExports, Members: &m_OpenZFSNfsExports, Type: smithy.ShapeTypeList})
+var sOpenZFSVolumeConfiguration_UserAndGroupQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAndGroupQuotas", ID: &i_OpenZFSUserAndGroupQuotas, Members: &m_OpenZFSUserAndGroupQuotas, Type: smithy.ShapeTypeList})
+var sOpenZFSVolumeConfiguration_RestoreToSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RestoreToSnapshot", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sOpenZFSVolumeConfiguration_DeleteIntermediateSnaphots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteIntermediateSnaphots", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSVolumeConfiguration_DeleteClonedVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteClonedVolumes", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSVolumeConfiguration_DeleteIntermediateData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteIntermediateData", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sOpenZFSVolumeConfiguration_SourceSnapshotARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceSnapshotARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sOpenZFSVolumeConfiguration_DestinationSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationSnapshot", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sOpenZFSVolumeConfiguration_CopyStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyStrategy", ID: &iOpenZFSCopyStrategy, Members: &mOpenZFSCopyStrategy, Type: smithy.ShapeTypeEnum})
+var sPrivilegedDelete_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivilegedDelete_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPrivilegedDelete_PERMANENTLY_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERMANENTLY_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReleaseConfiguration_DurationSinceLastAccess = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurationSinceLastAccess", ID: &iDurationSinceLastAccess, Members: &mDurationSinceLastAccess, Type: smithy.ShapeTypeStructure})
+var sReportFormat_REPORT_CSV_20191124 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REPORT_CSV_20191124", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sReportScope_FAILED_FILES_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED_FILES_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RepositoryDnsIps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sResourceDoesNotSupportTagging_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sResourceDoesNotSupportTagging_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFound_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sResourceNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceType_FILE_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRestoreOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_INTERMEDIATE_SNAPSHOTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRestoreOpenZFSVolumeOption_DELETE_CLONED_VOLUMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_CLONED_VOLUMES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RestoreOpenZFSVolumeOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRestoreOpenZFSVolumeOption, Members: &mRestoreOpenZFSVolumeOption, Type: smithy.ShapeTypeEnum})
+var sRetentionPeriod_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRetentionPeriodType, Members: &mRetentionPeriodType, Type: smithy.ShapeTypeEnum})
+var sRetentionPeriod_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_RetentionPeriodValue, Type: smithy.ShapeTypeInteger})
+var sRetentionPeriodType_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType_MINUTES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MINUTES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType_HOURS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HOURS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType_MONTHS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONTHS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType_YEARS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YEARS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType_INFINITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFINITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetentionPeriodType_UNSPECIFIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSPECIFIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RouteTableIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RouteTableId, Type: smithy.ShapeTypeString})
+var sS3AccessPoint_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_GeneralARN, Type: smithy.ShapeTypeString})
+var sS3AccessPoint_Alias = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Alias", ID: &i_S3AccessPointAlias, Type: smithy.ShapeTypeString})
+var sS3AccessPoint_VpcConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcConfiguration", ID: &iS3AccessPointVpcConfiguration, Members: &mS3AccessPointVpcConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachment_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iS3AccessPointAttachmentLifecycle, Members: &mS3AccessPointAttachmentLifecycle, Type: smithy.ShapeTypeEnum})
+var sS3AccessPointAttachment_LifecycleTransitionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecycleTransitionReason", ID: &iLifecycleTransitionReason, Members: &mLifecycleTransitionReason, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachment_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sS3AccessPointAttachment_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_S3AccessPointAttachmentName, Type: smithy.ShapeTypeString})
+var sS3AccessPointAttachment_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iS3AccessPointAttachmentType, Members: &mS3AccessPointAttachmentType, Type: smithy.ShapeTypeEnum})
+var sS3AccessPointAttachment_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iS3AccessPointOpenZFSConfiguration, Members: &mS3AccessPointOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachment_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iS3AccessPointOntapConfiguration, Members: &mS3AccessPointOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachment_S3AccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3AccessPoint", ID: &iS3AccessPoint, Members: &mS3AccessPoint, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentLifecycle_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentLifecycle_MISCONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_S3AccessPointAttachmentNames_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_S3AccessPointAttachmentName, Type: smithy.ShapeTypeString})
+var sS3AccessPointAttachmentNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_S3AccessPointAttachments_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3AccessPointAttachment, Members: &mS3AccessPointAttachment, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentsFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iS3AccessPointAttachmentsFilterName, Members: &mS3AccessPointAttachmentsFilterName, Type: smithy.ShapeTypeEnum})
+var sS3AccessPointAttachmentsFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_S3AccessPointAttachmentsFilterValues, Members: &m_S3AccessPointAttachmentsFilterValues, Type: smithy.ShapeTypeList})
+var sS3AccessPointAttachmentsFilterName_FILE_SYSTEM_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentsFilterName_VOLUME_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentsFilterName_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_S3AccessPointAttachmentsFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iS3AccessPointAttachmentsFilter, Members: &mS3AccessPointAttachmentsFilter, Type: smithy.ShapeTypeStructure})
+var s_S3AccessPointAttachmentsFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_S3AccessPointAttachmentsFilterValue, Type: smithy.ShapeTypeString})
+var sS3AccessPointAttachmentType_OPENZFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENZFS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointAttachmentType_ONTAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONTAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointOntapConfiguration_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sS3AccessPointOntapConfiguration_FileSystemIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemIdentity", ID: &iOntapFileSystemIdentity, Members: &mOntapFileSystemIdentity, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointOpenZFSConfiguration_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sS3AccessPointOpenZFSConfiguration_FileSystemIdentity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemIdentity", ID: &iOpenZFSFileSystemIdentity, Members: &mOpenZFSFileSystemIdentity, Type: smithy.ShapeTypeStructure})
+var sS3AccessPointVpcConfiguration_VpcId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VpcId", ID: &i_VpcId, Type: smithy.ShapeTypeString})
+var sS3DataRepositoryConfiguration_AutoImportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoImportPolicy", ID: &iAutoImportPolicy, Members: &mAutoImportPolicy, Type: smithy.ShapeTypeStructure})
+var sS3DataRepositoryConfiguration_AutoExportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoExportPolicy", ID: &iAutoExportPolicy, Members: &mAutoExportPolicy, Type: smithy.ShapeTypeStructure})
+var s_SecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SecurityGroupId, Type: smithy.ShapeTypeString})
+var sSecurityStyle_UNIX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityStyle_NTFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NTFS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSecurityStyle_MIXED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIXED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSelfManagedActiveDirectoryAttributes_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_ActiveDirectoryFullyQualifiedName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedName", ID: &i_OrganizationalUnitDistinguishedName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAdministratorsGroup", ID: &i_FileSystemAdministratorsGroupName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryAttributes_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_DirectoryUserName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryAttributes_DnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIps", ID: &i_DnsIps, Members: &m_DnsIps, Type: smithy.ShapeTypeList})
+var sSelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinServiceAccountSecret", ID: &i_CustomerSecretsManagerARN, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfiguration_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_ActiveDirectoryFullyQualifiedName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedName", ID: &i_OrganizationalUnitDistinguishedName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAdministratorsGroup", ID: &i_FileSystemAdministratorsGroupName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfiguration_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_DirectoryUserName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfiguration_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_DirectoryPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfiguration_DnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIps", ID: &i_DnsIps, Members: &m_DnsIps, Type: smithy.ShapeTypeList})
+var sSelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinServiceAccountSecret", ID: &i_CustomerSecretsManagerARN, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfigurationUpdates_UserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserName", ID: &i_DirectoryUserName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfigurationUpdates_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_DirectoryPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfigurationUpdates_DnsIps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DnsIps", ID: &i_DnsIps, Members: &m_DnsIps, Type: smithy.ShapeTypeList})
+var sSelfManagedActiveDirectoryConfigurationUpdates_DomainName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainName", ID: &i_ActiveDirectoryFullyQualifiedName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationalUnitDistinguishedName", ID: &i_OrganizationalUnitDistinguishedName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemAdministratorsGroup", ID: &i_FileSystemAdministratorsGroupName, Type: smithy.ShapeTypeString})
+var sSelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DomainJoinServiceAccountSecret", ID: &i_CustomerSecretsManagerARN, Type: smithy.ShapeTypeString})
+var sServiceLimit_FILE_SYSTEM_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_TOTAL_THROUGHPUT_CAPACITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_THROUGHPUT_CAPACITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_TOTAL_STORAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_STORAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_TOTAL_USER_INITIATED_BACKUPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_USER_INITIATED_BACKUPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_TOTAL_USER_TAGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_USER_TAGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_TOTAL_IN_PROGRESS_COPY_BACKUPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_IN_PROGRESS_COPY_BACKUPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_VOLUMES_PER_FILE_SYSTEM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUMES_PER_FILE_SYSTEM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_TOTAL_SSD_IOPS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOTAL_SSD_IOPS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimit_FILE_CACHE_COUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_CACHE_COUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceLimitExceeded_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &iServiceLimit, Members: &mServiceLimit, Type: smithy.ShapeTypeEnum})
+var sServiceLimitExceeded_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSnaplockConfiguration_AuditLogVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogVolume", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sSnaplockConfiguration_AutocommitPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutocommitPeriod", ID: &iAutocommitPeriod, Members: &mAutocommitPeriod, Type: smithy.ShapeTypeStructure})
+var sSnaplockConfiguration_PrivilegedDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivilegedDelete", ID: &iPrivilegedDelete, Members: &mPrivilegedDelete, Type: smithy.ShapeTypeEnum})
+var sSnaplockConfiguration_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iSnaplockRetentionPeriod, Members: &mSnaplockRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sSnaplockConfiguration_SnaplockType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnaplockType", ID: &iSnaplockType, Members: &mSnaplockType, Type: smithy.ShapeTypeEnum})
+var sSnaplockConfiguration_VolumeAppendModeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeAppendModeEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sSnaplockRetentionPeriod_DefaultRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DefaultRetention", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sSnaplockRetentionPeriod_MinimumRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinimumRetention", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sSnaplockRetentionPeriod_MaximumRetention = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumRetention", ID: &iRetentionPeriod, Members: &mRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sSnaplockType_COMPLIANCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLIANCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnaplockType_ENTERPRISE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENTERPRISE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshot_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sSnapshot_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sSnapshot_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SnapshotName, Type: smithy.ShapeTypeString})
+var sSnapshot_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sSnapshot_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sSnapshot_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iSnapshotLifecycle, Members: &mSnapshotLifecycle, Type: smithy.ShapeTypeEnum})
+var sSnapshot_LifecycleTransitionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecycleTransitionReason", ID: &iLifecycleTransitionReason, Members: &mLifecycleTransitionReason, Type: smithy.ShapeTypeStructure})
+var sSnapshot_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sSnapshot_AdministrativeActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministrativeActions", ID: &i_AdministrativeActions, Members: &m_AdministrativeActions, Type: smithy.ShapeTypeList})
+var sSnapshotFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iSnapshotFilterName, Members: &mSnapshotFilterName, Type: smithy.ShapeTypeEnum})
+var sSnapshotFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_SnapshotFilterValues, Members: &m_SnapshotFilterValues, Type: smithy.ShapeTypeList})
+var sSnapshotFilterName_FILE_SYSTEM_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotFilterName_VOLUME_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOLUME_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SnapshotFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSnapshotFilter, Members: &mSnapshotFilter, Type: smithy.ShapeTypeStructure})
+var s_SnapshotFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SnapshotFilterValue, Type: smithy.ShapeTypeString})
+var s_SnapshotIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sSnapshotLifecycle_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSnapshotNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Snapshots_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSnapshot, Members: &mSnapshot, Type: smithy.ShapeTypeStructure})
+var sSourceBackupUnavailable_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sSourceBackupUnavailable_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_UPDATED_OPTIMIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATED_OPTIMIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_OPTIMIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPTIMIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_PAUSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAUSED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageType_SSD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SSD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageType_HDD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HDD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageType_INTELLIGENT_TIERING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INTELLIGENT_TIERING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachine_ActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryConfiguration", ID: &iSvmActiveDirectoryConfiguration, Members: &mSvmActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachine_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sStorageVirtualMachine_Endpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Endpoints", ID: &iSvmEndpoints, Members: &mSvmEndpoints, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachine_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachine_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iStorageVirtualMachineLifecycle, Members: &mStorageVirtualMachineLifecycle, Type: smithy.ShapeTypeEnum})
+var sStorageVirtualMachine_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StorageVirtualMachineName, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachine_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachine_StorageVirtualMachineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineId", ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachine_Subtype = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subtype", ID: &iStorageVirtualMachineSubtype, Members: &mStorageVirtualMachineSubtype, Type: smithy.ShapeTypeEnum})
+var sStorageVirtualMachine_UUID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UUID", ID: &i_UUID, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachine_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sStorageVirtualMachine_LifecycleTransitionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecycleTransitionReason", ID: &iLifecycleTransitionReason, Members: &mLifecycleTransitionReason, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachine_RootVolumeSecurityStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeSecurityStyle", ID: &iStorageVirtualMachineRootVolumeSecurityStyle, Members: &mStorageVirtualMachineRootVolumeSecurityStyle, Type: smithy.ShapeTypeEnum})
+var sStorageVirtualMachineFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iStorageVirtualMachineFilterName, Members: &mStorageVirtualMachineFilterName, Type: smithy.ShapeTypeEnum})
+var sStorageVirtualMachineFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StorageVirtualMachineFilterValues, Members: &m_StorageVirtualMachineFilterValues, Type: smithy.ShapeTypeList})
+var sStorageVirtualMachineFilterName_FILE_SYSTEM_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StorageVirtualMachineFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStorageVirtualMachineFilter, Members: &mStorageVirtualMachineFilter, Type: smithy.ShapeTypeStructure})
+var s_StorageVirtualMachineFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StorageVirtualMachineFilterValue, Type: smithy.ShapeTypeString})
+var s_StorageVirtualMachineIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachineLifecycle_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineLifecycle_MISCONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineLifecycle_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sStorageVirtualMachineRootVolumeSecurityStyle_UNIX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNIX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineRootVolumeSecurityStyle_NTFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NTFS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineRootVolumeSecurityStyle_MIXED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MIXED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StorageVirtualMachines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStorageVirtualMachine, Members: &mStorageVirtualMachine, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineSubtype_DEFAULT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEFAULT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineSubtype_DP_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DP_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineSubtype_SYNC_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStorageVirtualMachineSubtype_SYNC_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYNC_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SubDirectoriesPaths_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var s_SubnetIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sSvmActiveDirectoryConfiguration_NetBiosName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetBiosName", ID: &i_NetBiosAlias, Type: smithy.ShapeTypeString})
+var sSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedActiveDirectoryConfiguration", ID: &iSelfManagedActiveDirectoryAttributes, Members: &mSelfManagedActiveDirectoryAttributes, Type: smithy.ShapeTypeStructure})
+var sSvmEndpoint_DNSName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DNSName", ID: &i_DNSName, Type: smithy.ShapeTypeString})
+var sSvmEndpoint_IpAddresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IpAddresses", ID: &i_OntapEndpointIpAddresses, Members: &m_OntapEndpointIpAddresses, Type: smithy.ShapeTypeList})
+var sSvmEndpoint_Ipv6Addresses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Ipv6Addresses", ID: &i_OntapEndpointIpAddresses, Members: &m_OntapEndpointIpAddresses, Type: smithy.ShapeTypeList})
+var sSvmEndpoints_Iscsi = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iscsi", ID: &iSvmEndpoint, Members: &mSvmEndpoint, Type: smithy.ShapeTypeStructure})
+var sSvmEndpoints_Management = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Management", ID: &iSvmEndpoint, Members: &mSvmEndpoint, Type: smithy.ShapeTypeStructure})
+var sSvmEndpoints_Nfs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Nfs", ID: &iSvmEndpoint, Members: &mSvmEndpoint, Type: smithy.ShapeTypeStructure})
+var sSvmEndpoints_Smb = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Smb", ID: &iSvmEndpoint, Members: &mSvmEndpoint, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TaskIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TaskId, Type: smithy.ShapeTypeString})
+var sTieringPolicy_CoolingPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CoolingPeriod", ID: &i_CoolingPeriod, Type: smithy.ShapeTypeInteger})
+var sTieringPolicy_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iTieringPolicyName, Members: &mTieringPolicyName, Type: smithy.ShapeTypeEnum})
+var sTieringPolicyName_SNAPSHOT_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTieringPolicyName_AUTO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AUTO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTieringPolicyName_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTieringPolicyName_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTooManyAccessPoints_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sTooManyAccessPoints_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUnit_DAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUnsupportedOperation_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sUpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemLustreConfiguration_AutoImportPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutoImportPolicy", ID: &iAutoImportPolicyType, Members: &mAutoImportPolicyType, Type: smithy.ShapeTypeEnum})
+var sUpdateFileSystemLustreConfiguration_DataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCompressionType", ID: &iDataCompressionType, Members: &mDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sUpdateFileSystemLustreConfiguration_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLustreLogCreateConfiguration, Members: &mLustreLogCreateConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemLustreConfiguration_RootSquashConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootSquashConfiguration", ID: &iLustreRootSquashConfiguration, Members: &mLustreRootSquashConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemLustreConfiguration_PerUnitStorageThroughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerUnitStorageThroughput", ID: &i_PerUnitStorageThroughput, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemLustreConfiguration_MetadataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MetadataConfiguration", ID: &iUpdateFileSystemLustreMetadataConfiguration, Members: &mUpdateFileSystemLustreMetadataConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemLustreConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_ThroughputCapacityMbps, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemLustreConfiguration_DataReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataReadCacheConfiguration", ID: &iLustreReadCacheConfiguration, Members: &mLustreReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemLustreMetadataConfiguration_Iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Iops", ID: &i_MetadataIops, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemLustreMetadataConfiguration_Mode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mode", ID: &iMetadataConfigurationMode, Members: &mMetadataConfigurationMode, Type: smithy.ShapeTypeEnum})
+var sUpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemOntapConfiguration_FsxAdminPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsxAdminPassword", ID: &i_AdminPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemOntapConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemOntapConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemOntapConfiguration_AddRouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddRouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sUpdateFileSystemOntapConfiguration_RemoveRouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveRouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sUpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacityPerHAPair", ID: &i_ThroughputCapacityPerHAPair, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemOntapConfiguration_HAPairs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HAPairs", ID: &i_HAPairs, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpv6AddressRange", ID: &i_Ipv6AddressRange, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sUpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToVolumes", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sUpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemOpenZFSConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemOpenZFSConfiguration_AddRouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AddRouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sUpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoveRouteTableIds", ID: &i_RouteTableIds, Members: &m_RouteTableIds, Type: smithy.ShapeTypeList})
+var sUpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadCacheConfiguration", ID: &iOpenZFSReadCacheConfiguration, Members: &mOpenZFSReadCacheConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointIpv6AddressRange", ID: &i_Ipv6AddressRange, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemWindowsConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedActiveDirectoryConfiguration", ID: &iSelfManagedActiveDirectoryConfigurationUpdates, Members: &mSelfManagedActiveDirectoryConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemWindowsConfiguration_AuditLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogConfiguration", ID: &iWindowsAuditLogCreateConfiguration, Members: &mWindowsAuditLogCreateConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemWindowsConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemWindowsConfiguration_FsrmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsrmConfiguration", ID: &iWindowsFsrmConfiguration, Members: &mWindowsFsrmConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateOntapVolumeConfiguration_JunctionPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JunctionPath", ID: &i_JunctionPath, Type: smithy.ShapeTypeString})
+var sUpdateOntapVolumeConfiguration_SecurityStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityStyle", ID: &iSecurityStyle, Members: &mSecurityStyle, Type: smithy.ShapeTypeEnum})
+var sUpdateOntapVolumeConfiguration_SizeInMegabytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInMegabytes", ID: &i_VolumeCapacity, Type: smithy.ShapeTypeInteger})
+var sUpdateOntapVolumeConfiguration_StorageEfficiencyEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageEfficiencyEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sUpdateOntapVolumeConfiguration_TieringPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TieringPolicy", ID: &iTieringPolicy, Members: &mTieringPolicy, Type: smithy.ShapeTypeStructure})
+var sUpdateOntapVolumeConfiguration_SnapshotPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotPolicy", ID: &i_SnapshotPolicy, Type: smithy.ShapeTypeString})
+var sUpdateOntapVolumeConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sUpdateOntapVolumeConfiguration_SnaplockConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnaplockConfiguration", ID: &iUpdateSnaplockConfiguration, Members: &mUpdateSnaplockConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateOntapVolumeConfiguration_SizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInBytes", ID: &i_VolumeCapacityBytes, Type: smithy.ShapeTypeLong})
+var sUpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacityReservationGiB", ID: &i_IntegerNoMaxFromNegativeOne, Type: smithy.ShapeTypeInteger})
+var sUpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacityQuotaGiB", ID: &i_IntegerNoMaxFromNegativeOne, Type: smithy.ShapeTypeInteger})
+var sUpdateOpenZFSVolumeConfiguration_RecordSizeKiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordSizeKiB", ID: &i_IntegerRecordSizeKiB, Type: smithy.ShapeTypeInteger})
+var sUpdateOpenZFSVolumeConfiguration_DataCompressionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataCompressionType", ID: &iOpenZFSDataCompressionType, Members: &mOpenZFSDataCompressionType, Type: smithy.ShapeTypeEnum})
+var sUpdateOpenZFSVolumeConfiguration_NfsExports = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NfsExports", ID: &i_OpenZFSNfsExports, Members: &m_OpenZFSNfsExports, Type: smithy.ShapeTypeList})
+var sUpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UserAndGroupQuotas", ID: &i_OpenZFSUserAndGroupQuotas, Members: &m_OpenZFSUserAndGroupQuotas, Type: smithy.ShapeTypeList})
+var sUpdateOpenZFSVolumeConfiguration_ReadOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReadOnly", ID: &i_ReadOnly, Type: smithy.ShapeTypeBoolean})
+var sUpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_INTERMEDIATE_SNAPSHOTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateOpenZFSVolumeOption_DELETE_CLONED_VOLUMES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_CLONED_VOLUMES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_INTERMEDIATE_DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_UpdateOpenZFSVolumeOptions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUpdateOpenZFSVolumeOption, Members: &mUpdateOpenZFSVolumeOption, Type: smithy.ShapeTypeEnum})
+var sUpdateSnaplockConfiguration_AuditLogVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogVolume", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sUpdateSnaplockConfiguration_AutocommitPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutocommitPeriod", ID: &iAutocommitPeriod, Members: &mAutocommitPeriod, Type: smithy.ShapeTypeStructure})
+var sUpdateSnaplockConfiguration_PrivilegedDelete = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivilegedDelete", ID: &iPrivilegedDelete, Members: &mPrivilegedDelete, Type: smithy.ShapeTypeEnum})
+var sUpdateSnaplockConfiguration_RetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriod", ID: &iSnaplockRetentionPeriod, Members: &mSnaplockRetentionPeriod, Type: smithy.ShapeTypeStructure})
+var sUpdateSnaplockConfiguration_VolumeAppendModeEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeAppendModeEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sUpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedActiveDirectoryConfiguration", ID: &iSelfManagedActiveDirectoryConfigurationUpdates, Members: &mSelfManagedActiveDirectoryConfigurationUpdates, Type: smithy.ShapeTypeStructure})
+var sUpdateSvmActiveDirectoryConfiguration_NetBiosName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetBiosName", ID: &i_NetBiosAlias, Type: smithy.ShapeTypeString})
+var sVolume_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_CreationTime, Type: smithy.ShapeTypeTimestamp})
+var sVolume_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sVolume_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iVolumeLifecycle, Members: &mVolumeLifecycle, Type: smithy.ShapeTypeEnum})
+var sVolume_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VolumeName, Type: smithy.ShapeTypeString})
+var sVolume_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iOntapVolumeConfiguration, Members: &mOntapVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sVolume_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sVolume_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sVolume_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sVolume_VolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeType", ID: &iVolumeType, Members: &mVolumeType, Type: smithy.ShapeTypeEnum})
+var sVolume_LifecycleTransitionReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LifecycleTransitionReason", ID: &iLifecycleTransitionReason, Members: &mLifecycleTransitionReason, Type: smithy.ShapeTypeStructure})
+var sVolume_AdministrativeActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministrativeActions", ID: &i_AdministrativeActions, Members: &m_AdministrativeActions, Type: smithy.ShapeTypeList})
+var sVolume_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iOpenZFSVolumeConfiguration, Members: &mOpenZFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sVolumeFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iVolumeFilterName, Members: &mVolumeFilterName, Type: smithy.ShapeTypeEnum})
+var sVolumeFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_VolumeFilterValues, Members: &m_VolumeFilterValues, Type: smithy.ShapeTypeList})
+var sVolumeFilterName_FILE_SYSTEM_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FILE_SYSTEM_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeFilterName_STORAGE_VIRTUAL_MACHINE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STORAGE_VIRTUAL_MACHINE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_VolumeFilters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVolumeFilter, Members: &mVolumeFilter, Type: smithy.ShapeTypeStructure})
+var s_VolumeFilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VolumeFilterValue, Type: smithy.ShapeTypeString})
+var s_VolumeIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sVolumeLifecycle_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeLifecycle_CREATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeLifecycle_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeLifecycle_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeLifecycle_MISCONFIGURED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISCONFIGURED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeLifecycle_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeLifecycle_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeNotFound_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Volumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var sVolumeStyle_FLEXVOL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLEXVOL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeStyle_FLEXGROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLEXGROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeType_ONTAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONTAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolumeType_OPENZFS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OPENZFS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsAccessAuditLogLevel_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsAccessAuditLogLevel_SUCCESS_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsAccessAuditLogLevel_FAILURE_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILURE_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsAccessAuditLogLevel_SUCCESS_AND_FAILURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCESS_AND_FAILURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsAuditLogConfiguration_FileAccessAuditLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileAccessAuditLogLevel", ID: &iWindowsAccessAuditLogLevel, Members: &mWindowsAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sWindowsAuditLogConfiguration_FileShareAccessAuditLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareAccessAuditLogLevel", ID: &iWindowsAccessAuditLogLevel, Members: &mWindowsAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sWindowsAuditLogConfiguration_AuditLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogDestination", ID: &i_GeneralARN, Type: smithy.ShapeTypeString})
+var sWindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileAccessAuditLogLevel", ID: &iWindowsAccessAuditLogLevel, Members: &mWindowsAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sWindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileShareAccessAuditLogLevel", ID: &iWindowsAccessAuditLogLevel, Members: &mWindowsAccessAuditLogLevel, Type: smithy.ShapeTypeEnum})
+var sWindowsAuditLogCreateConfiguration_AuditLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogDestination", ID: &i_GeneralARN, Type: smithy.ShapeTypeString})
+var sWindowsDeploymentType_MULTI_AZ_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTI_AZ_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsDeploymentType_SINGLE_AZ_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsDeploymentType_SINGLE_AZ_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SINGLE_AZ_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWindowsFileSystemConfiguration_ActiveDirectoryId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryId", ID: &i_DirectoryId, Type: smithy.ShapeTypeString})
+var sWindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelfManagedActiveDirectoryConfiguration", ID: &iSelfManagedActiveDirectoryAttributes, Members: &mSelfManagedActiveDirectoryAttributes, Type: smithy.ShapeTypeStructure})
+var sWindowsFileSystemConfiguration_DeploymentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeploymentType", ID: &iWindowsDeploymentType, Members: &mWindowsDeploymentType, Type: smithy.ShapeTypeEnum})
+var sWindowsFileSystemConfiguration_RemoteAdministrationEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RemoteAdministrationEndpoint", ID: &i_DNSName, Type: smithy.ShapeTypeString})
+var sWindowsFileSystemConfiguration_PreferredSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredSubnetId", ID: &i_SubnetId, Type: smithy.ShapeTypeString})
+var sWindowsFileSystemConfiguration_PreferredFileServerIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredFileServerIp", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sWindowsFileSystemConfiguration_ThroughputCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ThroughputCapacity", ID: &i_MegabytesPerSecond, Type: smithy.ShapeTypeInteger})
+var sWindowsFileSystemConfiguration_MaintenanceOperationsInProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaintenanceOperationsInProgress", ID: &i_FileSystemMaintenanceOperations, Members: &m_FileSystemMaintenanceOperations, Type: smithy.ShapeTypeList})
+var sWindowsFileSystemConfiguration_WeeklyMaintenanceStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WeeklyMaintenanceStartTime", ID: &i_WeeklyTime, Type: smithy.ShapeTypeString})
+var sWindowsFileSystemConfiguration_DailyAutomaticBackupStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DailyAutomaticBackupStartTime", ID: &i_DailyTime, Type: smithy.ShapeTypeString})
+var sWindowsFileSystemConfiguration_AutomaticBackupRetentionDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AutomaticBackupRetentionDays", ID: &i_AutomaticBackupRetentionDays, Type: smithy.ShapeTypeInteger})
+var sWindowsFileSystemConfiguration_CopyTagsToBackups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToBackups", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sWindowsFileSystemConfiguration_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var sWindowsFileSystemConfiguration_AuditLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AuditLogConfiguration", ID: &iWindowsAuditLogConfiguration, Members: &mWindowsAuditLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sWindowsFileSystemConfiguration_DiskIopsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiskIopsConfiguration", ID: &iDiskIopsConfiguration, Members: &mDiskIopsConfiguration, Type: smithy.ShapeTypeStructure})
+var sWindowsFileSystemConfiguration_PreferredFileServerIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredFileServerIpv6", ID: &i_IpAddress, Type: smithy.ShapeTypeString})
+var sWindowsFileSystemConfiguration_FsrmConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsrmConfiguration", ID: &iWindowsFsrmConfiguration, Members: &mWindowsFsrmConfiguration, Type: smithy.ShapeTypeStructure})
+var sWindowsFsrmConfiguration_FsrmServiceEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FsrmServiceEnabled", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sWindowsFsrmConfiguration_EventLogDestination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventLogDestination", ID: &i_GeneralARN, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemAliasesRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemAliasesRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sAssociateFileSystemAliasesRequest_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_AlternateDNSNames, Members: &m_AlternateDNSNames, Type: smithy.ShapeTypeList})
+var sAssociateFileSystemAliasesResponse_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var sCancelDataRepositoryTaskRequest_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskId, Type: smithy.ShapeTypeString})
+var sCancelDataRepositoryTaskResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iDataRepositoryTaskLifecycle, Members: &mDataRepositoryTaskLifecycle, Type: smithy.ShapeTypeEnum})
+var sCancelDataRepositoryTaskResponse_TaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskId", ID: &i_TaskId, Type: smithy.ShapeTypeString})
+var sCopyBackupRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCopyBackupRequest_SourceBackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceBackupId", ID: &i_SourceBackupId, Type: smithy.ShapeTypeString})
+var sCopyBackupRequest_SourceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceRegion", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sCopyBackupRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sCopyBackupRequest_CopyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTags", ID: &i_Flag, Type: smithy.ShapeTypeBoolean})
+var sCopyBackupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCopyBackupResponse_Backup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Backup", ID: &iBackup, Members: &mBackup, Type: smithy.ShapeTypeStructure})
+var sCopySnapshotAndUpdateVolumeRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCopySnapshotAndUpdateVolumeRequest_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceSnapshotARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sCopySnapshotAndUpdateVolumeRequest_CopyStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyStrategy", ID: &iOpenZFSCopyStrategy, Members: &mOpenZFSCopyStrategy, Type: smithy.ShapeTypeEnum})
+var sCopySnapshotAndUpdateVolumeRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_UpdateOpenZFSVolumeOptions, Members: &m_UpdateOpenZFSVolumeOptions, Type: smithy.ShapeTypeList})
+var sCopySnapshotAndUpdateVolumeResponse_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCopySnapshotAndUpdateVolumeResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iVolumeLifecycle, Members: &mVolumeLifecycle, Type: smithy.ShapeTypeEnum})
+var sCopySnapshotAndUpdateVolumeResponse_AdministrativeActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministrativeActions", ID: &i_AdministrativeActions, Members: &m_AdministrativeActions, Type: smithy.ShapeTypeList})
+var sCreateAndAttachS3AccessPointRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateAndAttachS3AccessPointRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_S3AccessPointAttachmentName, Type: smithy.ShapeTypeString})
+var sCreateAndAttachS3AccessPointRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iS3AccessPointAttachmentType, Members: &mS3AccessPointAttachmentType, Type: smithy.ShapeTypeEnum})
+var sCreateAndAttachS3AccessPointRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iCreateAndAttachS3AccessPointOpenZFSConfiguration, Members: &mCreateAndAttachS3AccessPointOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointRequest_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iCreateAndAttachS3AccessPointOntapConfiguration, Members: &mCreateAndAttachS3AccessPointOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointRequest_S3AccessPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3AccessPoint", ID: &iCreateAndAttachS3AccessPointS3Configuration, Members: &mCreateAndAttachS3AccessPointS3Configuration, Type: smithy.ShapeTypeStructure})
+var sCreateAndAttachS3AccessPointResponse_S3AccessPointAttachment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3AccessPointAttachment", ID: &iS3AccessPointAttachment, Members: &mS3AccessPointAttachment, Type: smithy.ShapeTypeStructure})
+var sCreateBackupRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sCreateBackupRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateBackupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateBackupRequest_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCreateBackupResponse_Backup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Backup", ID: &iBackup, Members: &mBackup, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryAssociationRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sCreateDataRepositoryAssociationRequest_FileSystemPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemPath", ID: &i_Namespace, Type: smithy.ShapeTypeString})
+var sCreateDataRepositoryAssociationRequest_DataRepositoryPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryPath", ID: &i_ArchivePath, Type: smithy.ShapeTypeString})
+var sCreateDataRepositoryAssociationRequest_BatchImportMetaDataOnCreate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchImportMetaDataOnCreate", ID: &i_BatchImportMetaDataOnCreate, Type: smithy.ShapeTypeBoolean})
+var sCreateDataRepositoryAssociationRequest_ImportedFileChunkSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedFileChunkSize", ID: &i_Megabytes, Type: smithy.ShapeTypeInteger})
+var sCreateDataRepositoryAssociationRequest_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3DataRepositoryConfiguration, Members: &mS3DataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryAssociationRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateDataRepositoryAssociationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateDataRepositoryAssociationResponse_Association = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Association", ID: &iDataRepositoryAssociation, Members: &mDataRepositoryAssociation, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryTaskRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iDataRepositoryTaskType, Members: &mDataRepositoryTaskType, Type: smithy.ShapeTypeEnum})
+var sCreateDataRepositoryTaskRequest_Paths = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Paths", ID: &i_DataRepositoryTaskPaths, Members: &m_DataRepositoryTaskPaths, Type: smithy.ShapeTypeList})
+var sCreateDataRepositoryTaskRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sCreateDataRepositoryTaskRequest_Report = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Report", ID: &iCompletionReport, Members: &mCompletionReport, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryTaskRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateDataRepositoryTaskRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateDataRepositoryTaskRequest_CapacityToRelease = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CapacityToRelease", ID: &i_CapacityToRelease, Type: smithy.ShapeTypeLong})
+var sCreateDataRepositoryTaskRequest_ReleaseConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseConfiguration", ID: &iReleaseConfiguration, Members: &mReleaseConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateDataRepositoryTaskResponse_DataRepositoryTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryTask", ID: &iDataRepositoryTask, Members: &mDataRepositoryTask, Type: smithy.ShapeTypeStructure})
+var sCreateFileCacheRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateFileCacheRequest_FileCacheType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheType", ID: &iFileCacheType, Members: &mFileCacheType, Type: smithy.ShapeTypeEnum})
+var sCreateFileCacheRequest_FileCacheTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheTypeVersion", ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var sCreateFileCacheRequest_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sCreateFileCacheRequest_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sCreateFileCacheRequest_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sCreateFileCacheRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateFileCacheRequest_CopyTagsToDataRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CopyTagsToDataRepositoryAssociations", ID: &i_CopyTagsToDataRepositoryAssociations, Type: smithy.ShapeTypeBoolean})
+var sCreateFileCacheRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sCreateFileCacheRequest_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iCreateFileCacheLustreConfiguration, Members: &mCreateFileCacheLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileCacheRequest_DataRepositoryAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryAssociations", ID: &i_CreateFileCacheDataRepositoryAssociations, Members: &m_CreateFileCacheDataRepositoryAssociations, Type: smithy.ShapeTypeList})
+var sCreateFileCacheResponse_FileCache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCache", ID: &iFileCacheCreating, Members: &mFileCacheCreating, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemFromBackupRequest_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sCreateFileSystemFromBackupRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateFileSystemFromBackupRequest_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sCreateFileSystemFromBackupRequest_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sCreateFileSystemFromBackupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateFileSystemFromBackupRequest_WindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowsConfiguration", ID: &iCreateFileSystemWindowsConfiguration, Members: &mCreateFileSystemWindowsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemFromBackupRequest_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iCreateFileSystemLustreConfiguration, Members: &mCreateFileSystemLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemFromBackupRequest_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iStorageType, Members: &mStorageType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemFromBackupRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sCreateFileSystemFromBackupRequest_FileSystemTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemTypeVersion", ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var sCreateFileSystemFromBackupRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iCreateFileSystemOpenZFSConfiguration, Members: &mCreateFileSystemOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemFromBackupRequest_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemFromBackupRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemFromBackupResponse_FileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystem", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateFileSystemRequest_FileSystemType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemType", ID: &iFileSystemType, Members: &mFileSystemType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemRequest_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sCreateFileSystemRequest_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iStorageType, Members: &mStorageType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemRequest_SubnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetIds", ID: &i_SubnetIds, Members: &m_SubnetIds, Type: smithy.ShapeTypeList})
+var sCreateFileSystemRequest_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_SecurityGroupIds, Members: &m_SecurityGroupIds, Type: smithy.ShapeTypeList})
+var sCreateFileSystemRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateFileSystemRequest_KmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyId", ID: &i_KmsKeyId, Type: smithy.ShapeTypeString})
+var sCreateFileSystemRequest_WindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowsConfiguration", ID: &iCreateFileSystemWindowsConfiguration, Members: &mCreateFileSystemWindowsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemRequest_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iCreateFileSystemLustreConfiguration, Members: &mCreateFileSystemLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemRequest_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iCreateFileSystemOntapConfiguration, Members: &mCreateFileSystemOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemRequest_FileSystemTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemTypeVersion", ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var sCreateFileSystemRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iCreateFileSystemOpenZFSConfiguration, Members: &mCreateFileSystemOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateFileSystemRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sCreateFileSystemResponse_FileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystem", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var sCreateSnapshotRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateSnapshotRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SnapshotName, Type: smithy.ShapeTypeString})
+var sCreateSnapshotRequest_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sCreateSnapshotRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateSnapshotResponse_Snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snapshot", ID: &iSnapshot, Members: &mSnapshot, Type: smithy.ShapeTypeStructure})
+var sCreateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryConfiguration", ID: &iCreateSvmActiveDirectoryConfiguration, Members: &mCreateSvmActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateStorageVirtualMachineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateStorageVirtualMachineRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sCreateStorageVirtualMachineRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_StorageVirtualMachineName, Type: smithy.ShapeTypeString})
+var sCreateStorageVirtualMachineRequest_SvmAdminPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SvmAdminPassword", ID: &i_AdminPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sCreateStorageVirtualMachineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateStorageVirtualMachineRequest_RootVolumeSecurityStyle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RootVolumeSecurityStyle", ID: &iStorageVirtualMachineRootVolumeSecurityStyle, Members: &mStorageVirtualMachineRootVolumeSecurityStyle, Type: smithy.ShapeTypeEnum})
+var sCreateStorageVirtualMachineResponse_StorageVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachine", ID: &iStorageVirtualMachine, Members: &mStorageVirtualMachine, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeFromBackupRequest_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sCreateVolumeFromBackupRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateVolumeFromBackupRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VolumeName, Type: smithy.ShapeTypeString})
+var sCreateVolumeFromBackupRequest_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iCreateOntapVolumeConfiguration, Members: &mCreateOntapVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeFromBackupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateVolumeFromBackupResponse_Volume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Volume", ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sCreateVolumeRequest_VolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeType", ID: &iVolumeType, Members: &mVolumeType, Type: smithy.ShapeTypeEnum})
+var sCreateVolumeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VolumeName, Type: smithy.ShapeTypeString})
+var sCreateVolumeRequest_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iCreateOntapVolumeConfiguration, Members: &mCreateOntapVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sCreateVolumeRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iCreateOpenZFSVolumeConfiguration, Members: &mCreateOpenZFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateVolumeResponse_Volume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Volume", ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var sDeleteBackupRequest_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sDeleteBackupRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDeleteBackupResponse_BackupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupId", ID: &i_BackupId, Type: smithy.ShapeTypeString})
+var sDeleteBackupResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iBackupLifecycle, Members: &mBackupLifecycle, Type: smithy.ShapeTypeEnum})
+var sDeleteDataRepositoryAssociationRequest_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &i_DataRepositoryAssociationId, Type: smithy.ShapeTypeString})
+var sDeleteDataRepositoryAssociationRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteDataInFileSystem", ID: &i_DeleteDataInFileSystem, Type: smithy.ShapeTypeBoolean})
+var sDeleteDataRepositoryAssociationResponse_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &i_DataRepositoryAssociationId, Type: smithy.ShapeTypeString})
+var sDeleteDataRepositoryAssociationResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iDataRepositoryLifecycle, Members: &mDataRepositoryLifecycle, Type: smithy.ShapeTypeEnum})
+var sDeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeleteDataInFileSystem", ID: &i_DeleteDataInFileSystem, Type: smithy.ShapeTypeBoolean})
+var sDeleteFileCacheRequest_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheId", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sDeleteFileCacheRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDeleteFileCacheResponse_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheId", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sDeleteFileCacheResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iFileCacheLifecycle, Members: &mFileCacheLifecycle, Type: smithy.ShapeTypeEnum})
+var sDeleteFileSystemRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sDeleteFileSystemRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDeleteFileSystemRequest_WindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowsConfiguration", ID: &iDeleteFileSystemWindowsConfiguration, Members: &mDeleteFileSystemWindowsConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemRequest_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iDeleteFileSystemLustreConfiguration, Members: &mDeleteFileSystemLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iDeleteFileSystemOpenZFSConfiguration, Members: &mDeleteFileSystemOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemResponse_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sDeleteFileSystemResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iFileSystemLifecycle, Members: &mFileSystemLifecycle, Type: smithy.ShapeTypeEnum})
+var sDeleteFileSystemResponse_WindowsResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowsResponse", ID: &iDeleteFileSystemWindowsResponse, Members: &mDeleteFileSystemWindowsResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemResponse_LustreResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreResponse", ID: &iDeleteFileSystemLustreResponse, Members: &mDeleteFileSystemLustreResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteFileSystemResponse_OpenZFSResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSResponse", ID: &iDeleteFileSystemOpenZFSResponse, Members: &mDeleteFileSystemOpenZFSResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSnapshotRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDeleteSnapshotRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sDeleteSnapshotResponse_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sDeleteSnapshotResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iSnapshotLifecycle, Members: &mSnapshotLifecycle, Type: smithy.ShapeTypeEnum})
+var sDeleteStorageVirtualMachineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDeleteStorageVirtualMachineRequest_StorageVirtualMachineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineId", ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var sDeleteStorageVirtualMachineResponse_StorageVirtualMachineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineId", ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var sDeleteStorageVirtualMachineResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iStorageVirtualMachineLifecycle, Members: &mStorageVirtualMachineLifecycle, Type: smithy.ShapeTypeEnum})
+var sDeleteVolumeRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDeleteVolumeRequest_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sDeleteVolumeRequest_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iDeleteVolumeOntapConfiguration, Members: &mDeleteVolumeOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iDeleteVolumeOpenZFSConfiguration, Members: &mDeleteVolumeOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeleteVolumeResponse_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sDeleteVolumeResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iVolumeLifecycle, Members: &mVolumeLifecycle, Type: smithy.ShapeTypeEnum})
+var sDeleteVolumeResponse_OntapResponse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapResponse", ID: &iDeleteVolumeOntapResponse, Members: &mDeleteVolumeOntapResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeBackupsRequest_BackupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BackupIds", ID: &i_BackupIds, Members: &m_BackupIds, Type: smithy.ShapeTypeList})
+var sDescribeBackupsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList})
+var sDescribeBackupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeBackupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeBackupsResponse_Backups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Backups", ID: &i_Backups, Members: &m_Backups, Type: smithy.ShapeTypeList})
+var sDescribeBackupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeDataRepositoryAssociationsRequest_AssociationIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationIds", ID: &i_DataRepositoryAssociationIds, Members: &m_DataRepositoryAssociationIds, Type: smithy.ShapeTypeList})
+var sDescribeDataRepositoryAssociationsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_Filters, Members: &m_Filters, Type: smithy.ShapeTypeList})
+var sDescribeDataRepositoryAssociationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_LimitedMaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeDataRepositoryAssociationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeDataRepositoryAssociationsResponse_Associations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Associations", ID: &i_DataRepositoryAssociations, Members: &m_DataRepositoryAssociations, Type: smithy.ShapeTypeList})
+var sDescribeDataRepositoryAssociationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeDataRepositoryTasksRequest_TaskIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TaskIds", ID: &i_TaskIds, Members: &m_TaskIds, Type: smithy.ShapeTypeList})
+var sDescribeDataRepositoryTasksRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_DataRepositoryTaskFilters, Members: &m_DataRepositoryTaskFilters, Type: smithy.ShapeTypeList})
+var sDescribeDataRepositoryTasksRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeDataRepositoryTasksRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeDataRepositoryTasksResponse_DataRepositoryTasks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRepositoryTasks", ID: &i_DataRepositoryTasks, Members: &m_DataRepositoryTasks, Type: smithy.ShapeTypeList})
+var sDescribeDataRepositoryTasksResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFileCachesRequest_FileCacheIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheIds", ID: &i_FileCacheIds, Members: &m_FileCacheIds, Type: smithy.ShapeTypeList})
+var sDescribeFileCachesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeFileCachesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFileCachesResponse_FileCaches = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCaches", ID: &i_FileCaches, Members: &m_FileCaches, Type: smithy.ShapeTypeList})
+var sDescribeFileCachesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFileSystemAliasesRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDescribeFileSystemAliasesRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sDescribeFileSystemAliasesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeFileSystemAliasesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFileSystemAliasesResponse_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var sDescribeFileSystemAliasesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFileSystemsRequest_FileSystemIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemIds", ID: &i_FileSystemIds, Members: &m_FileSystemIds, Type: smithy.ShapeTypeList})
+var sDescribeFileSystemsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeFileSystemsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeFileSystemsResponse_FileSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystems", ID: &i_FileSystems, Members: &m_FileSystems, Type: smithy.ShapeTypeList})
+var sDescribeFileSystemsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeS3AccessPointAttachmentsRequest_Names = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Names", ID: &i_S3AccessPointAttachmentNames, Members: &m_S3AccessPointAttachmentNames, Type: smithy.ShapeTypeList})
+var sDescribeS3AccessPointAttachmentsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_S3AccessPointAttachmentsFilters, Members: &m_S3AccessPointAttachmentsFilters, Type: smithy.ShapeTypeList})
+var sDescribeS3AccessPointAttachmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeS3AccessPointAttachmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3AccessPointAttachments", ID: &i_S3AccessPointAttachments, Members: &m_S3AccessPointAttachments, Type: smithy.ShapeTypeList})
+var sDescribeS3AccessPointAttachmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableFsxRouteTableUpdatesFromParticipantAccounts", ID: &i_VerboseFlag, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotsRequest_SnapshotIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotIds", ID: &i_SnapshotIds, Members: &m_SnapshotIds, Type: smithy.ShapeTypeList})
+var sDescribeSnapshotsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_SnapshotFilters, Members: &m_SnapshotFilters, Type: smithy.ShapeTypeList})
+var sDescribeSnapshotsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeSnapshotsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeSnapshotsRequest_IncludeShared = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeShared", ID: &i_IncludeShared, Type: smithy.ShapeTypeBoolean})
+var sDescribeSnapshotsResponse_Snapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snapshots", ID: &i_Snapshots, Members: &m_Snapshots, Type: smithy.ShapeTypeList})
+var sDescribeSnapshotsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineIds", ID: &i_StorageVirtualMachineIds, Members: &m_StorageVirtualMachineIds, Type: smithy.ShapeTypeList})
+var sDescribeStorageVirtualMachinesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_StorageVirtualMachineFilters, Members: &m_StorageVirtualMachineFilters, Type: smithy.ShapeTypeList})
+var sDescribeStorageVirtualMachinesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeStorageVirtualMachinesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeStorageVirtualMachinesResponse_StorageVirtualMachines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachines", ID: &i_StorageVirtualMachines, Members: &m_StorageVirtualMachines, Type: smithy.ShapeTypeList})
+var sDescribeStorageVirtualMachinesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeVolumesRequest_VolumeIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeIds", ID: &i_VolumeIds, Members: &m_VolumeIds, Type: smithy.ShapeTypeList})
+var sDescribeVolumesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_VolumeFilters, Members: &m_VolumeFilters, Type: smithy.ShapeTypeList})
+var sDescribeVolumesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sDescribeVolumesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeVolumesResponse_Volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Volumes", ID: &i_Volumes, Members: &m_Volumes, Type: smithy.ShapeTypeList})
+var sDescribeVolumesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDetachAndDeleteS3AccessPointRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDetachAndDeleteS3AccessPointRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_S3AccessPointAttachmentName, Type: smithy.ShapeTypeString})
+var sDetachAndDeleteS3AccessPointResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iS3AccessPointAttachmentLifecycle, Members: &mS3AccessPointAttachmentLifecycle, Type: smithy.ShapeTypeEnum})
+var sDetachAndDeleteS3AccessPointResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_S3AccessPointAttachmentName, Type: smithy.ShapeTypeString})
+var sDisassociateFileSystemAliasesRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sDisassociateFileSystemAliasesRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sDisassociateFileSystemAliasesRequest_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_AlternateDNSNames, Members: &m_AlternateDNSNames, Type: smithy.ShapeTypeList})
+var sDisassociateFileSystemAliasesResponse_Aliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Aliases", ID: &i_Aliases, Members: &m_Aliases, Type: smithy.ShapeTypeList})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sListTagsForResourceResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sReleaseFileSystemNfsV3LocksRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sReleaseFileSystemNfsV3LocksRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sReleaseFileSystemNfsV3LocksResponse_FileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystem", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var sRestoreVolumeFromSnapshotRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sRestoreVolumeFromSnapshotRequest_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sRestoreVolumeFromSnapshotRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sRestoreVolumeFromSnapshotRequest_Options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Options", ID: &i_RestoreOpenZFSVolumeOptions, Members: &m_RestoreOpenZFSVolumeOptions, Type: smithy.ShapeTypeList})
+var sRestoreVolumeFromSnapshotResponse_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sRestoreVolumeFromSnapshotResponse_Lifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Lifecycle", ID: &iVolumeLifecycle, Members: &mVolumeLifecycle, Type: smithy.ShapeTypeEnum})
+var sRestoreVolumeFromSnapshotResponse_AdministrativeActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdministrativeActions", ID: &i_AdministrativeActions, Members: &m_AdministrativeActions, Type: smithy.ShapeTypeList})
+var sStartMisconfiguredStateRecoveryRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sStartMisconfiguredStateRecoveryRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sStartMisconfiguredStateRecoveryResponse_FileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystem", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var sUpdateDataRepositoryAssociationRequest_AssociationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociationId", ID: &i_DataRepositoryAssociationId, Type: smithy.ShapeTypeString})
+var sUpdateDataRepositoryAssociationRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateDataRepositoryAssociationRequest_ImportedFileChunkSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImportedFileChunkSize", ID: &i_Megabytes, Type: smithy.ShapeTypeInteger})
+var sUpdateDataRepositoryAssociationRequest_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &iS3DataRepositoryConfiguration, Members: &mS3DataRepositoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateDataRepositoryAssociationResponse_Association = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Association", ID: &iDataRepositoryAssociation, Members: &mDataRepositoryAssociation, Type: smithy.ShapeTypeStructure})
+var sUpdateFileCacheRequest_FileCacheId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCacheId", ID: &i_FileCacheId, Type: smithy.ShapeTypeString})
+var sUpdateFileCacheRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateFileCacheRequest_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iUpdateFileCacheLustreConfiguration, Members: &mUpdateFileCacheLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileCacheResponse_FileCache = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileCache", ID: &iFileCache, Members: &mFileCache, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemRequest_FileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemId", ID: &i_FileSystemId, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemRequest_StorageCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageCapacity", ID: &i_StorageCapacity, Type: smithy.ShapeTypeInteger})
+var sUpdateFileSystemRequest_WindowsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WindowsConfiguration", ID: &iUpdateFileSystemWindowsConfiguration, Members: &mUpdateFileSystemWindowsConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemRequest_LustreConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LustreConfiguration", ID: &iUpdateFileSystemLustreConfiguration, Members: &mUpdateFileSystemLustreConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemRequest_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iUpdateFileSystemOntapConfiguration, Members: &mUpdateFileSystemOntapConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iUpdateFileSystemOpenZFSConfiguration, Members: &mUpdateFileSystemOpenZFSConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateFileSystemRequest_StorageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageType", ID: &iStorageType, Members: &mStorageType, Type: smithy.ShapeTypeEnum})
+var sUpdateFileSystemRequest_FileSystemTypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystemTypeVersion", ID: &i_FileSystemTypeVersion, Type: smithy.ShapeTypeString})
+var sUpdateFileSystemRequest_NetworkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NetworkType", ID: &iNetworkType, Members: &mNetworkType, Type: smithy.ShapeTypeEnum})
+var sUpdateFileSystemResponse_FileSystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FileSystem", ID: &iFileSystem, Members: &mFileSystem, Type: smithy.ShapeTypeStructure})
+var sUpdateSharedVpcConfigurationRequest_EnableFsxRouteTableUpdatesFromParticipantAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableFsxRouteTableUpdatesFromParticipantAccounts", ID: &i_VerboseFlag, Type: smithy.ShapeTypeString})
+var sUpdateSharedVpcConfigurationRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnableFsxRouteTableUpdatesFromParticipantAccounts", ID: &i_VerboseFlag, Type: smithy.ShapeTypeString})
+var sUpdateSnapshotRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateSnapshotRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SnapshotName, Type: smithy.ShapeTypeString})
+var sUpdateSnapshotRequest_SnapshotId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnapshotId", ID: &i_SnapshotId, Type: smithy.ShapeTypeString})
+var sUpdateSnapshotResponse_Snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Snapshot", ID: &iSnapshot, Members: &mSnapshot, Type: smithy.ShapeTypeStructure})
+var sUpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveDirectoryConfiguration", ID: &iUpdateSvmActiveDirectoryConfiguration, Members: &mUpdateSvmActiveDirectoryConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateStorageVirtualMachineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateStorageVirtualMachineRequest_StorageVirtualMachineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachineId", ID: &i_StorageVirtualMachineId, Type: smithy.ShapeTypeString})
+var sUpdateStorageVirtualMachineRequest_SvmAdminPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SvmAdminPassword", ID: &i_AdminPassword, Traits: &t3, Type: smithy.ShapeTypeString})
+var sUpdateStorageVirtualMachineResponse_StorageVirtualMachine = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageVirtualMachine", ID: &iStorageVirtualMachine, Members: &mStorageVirtualMachine, Type: smithy.ShapeTypeStructure})
+var sUpdateVolumeRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateVolumeRequest_VolumeId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VolumeId", ID: &i_VolumeId, Type: smithy.ShapeTypeString})
+var sUpdateVolumeRequest_OntapConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OntapConfiguration", ID: &iUpdateOntapVolumeConfiguration, Members: &mUpdateOntapVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateVolumeRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_VolumeName, Type: smithy.ShapeTypeString})
+var sUpdateVolumeRequest_OpenZFSConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OpenZFSConfiguration", ID: &iUpdateOpenZFSVolumeConfiguration, Members: &mUpdateOpenZFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateVolumeResponse_Volume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Volume", ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+
+// Members of recursive shapes would make the variables' initializers refer to
+// each other in a cycle, which Go rejects, so they are completed here.
 func init() {
-	AccessPointAlreadyOwnedByYou_ErrorCode = AccessPointAlreadyOwnedByYou.AddMember("ErrorCode", _ErrorCode)
-
-	AccessPointAlreadyOwnedByYou_Message = AccessPointAlreadyOwnedByYou.AddMember("Message", _ErrorMessage)
-
-	ActiveDirectoryBackupAttributes_DomainName = ActiveDirectoryBackupAttributes.AddMember("DomainName", _ActiveDirectoryFullyQualifiedName)
-
-	ActiveDirectoryBackupAttributes_ActiveDirectoryId = ActiveDirectoryBackupAttributes.AddMember("ActiveDirectoryId", _DirectoryId)
-
-	ActiveDirectoryBackupAttributes_ResourceARN = ActiveDirectoryBackupAttributes.AddMember("ResourceARN", _ResourceARN)
-
-	ActiveDirectoryErrorType_DOMAIN_NOT_FOUND = ActiveDirectoryErrorType.AddMember("DOMAIN_NOT_FOUND", smithyprelude.Unit)
-
-	ActiveDirectoryErrorType_INCOMPATIBLE_DOMAIN_MODE = ActiveDirectoryErrorType.AddMember("INCOMPATIBLE_DOMAIN_MODE", smithyprelude.Unit)
-
-	ActiveDirectoryErrorType_WRONG_VPC = ActiveDirectoryErrorType.AddMember("WRONG_VPC", smithyprelude.Unit)
-
-	ActiveDirectoryErrorType_INVALID_NETWORK_TYPE = ActiveDirectoryErrorType.AddMember("INVALID_NETWORK_TYPE", smithyprelude.Unit)
-
-	ActiveDirectoryErrorType_INVALID_DOMAIN_STAGE = ActiveDirectoryErrorType.AddMember("INVALID_DOMAIN_STAGE", smithyprelude.Unit)
-
-	ActiveDirectoryError_ActiveDirectoryId = ActiveDirectoryError.AddMember("ActiveDirectoryId", _DirectoryId)
-
-	ActiveDirectoryError_Type = ActiveDirectoryError.AddMember("Type", ActiveDirectoryErrorType)
-
-	ActiveDirectoryError_Message = ActiveDirectoryError.AddMember("Message", _ErrorMessage)
-
-	AdministrativeActionType_FILE_SYSTEM_UPDATE = AdministrativeActionType.AddMember("FILE_SYSTEM_UPDATE", smithyprelude.Unit)
-
-	AdministrativeActionType_STORAGE_OPTIMIZATION = AdministrativeActionType.AddMember("STORAGE_OPTIMIZATION", smithyprelude.Unit)
-
-	AdministrativeActionType_FILE_SYSTEM_ALIAS_ASSOCIATION = AdministrativeActionType.AddMember("FILE_SYSTEM_ALIAS_ASSOCIATION", smithyprelude.Unit)
-
-	AdministrativeActionType_FILE_SYSTEM_ALIAS_DISASSOCIATION = AdministrativeActionType.AddMember("FILE_SYSTEM_ALIAS_DISASSOCIATION", smithyprelude.Unit)
-
-	AdministrativeActionType_VOLUME_UPDATE = AdministrativeActionType.AddMember("VOLUME_UPDATE", smithyprelude.Unit)
-
-	AdministrativeActionType_SNAPSHOT_UPDATE = AdministrativeActionType.AddMember("SNAPSHOT_UPDATE", smithyprelude.Unit)
-
-	AdministrativeActionType_RELEASE_NFS_V3_LOCKS = AdministrativeActionType.AddMember("RELEASE_NFS_V3_LOCKS", smithyprelude.Unit)
-
-	AdministrativeActionType_VOLUME_RESTORE = AdministrativeActionType.AddMember("VOLUME_RESTORE", smithyprelude.Unit)
-
-	AdministrativeActionType_THROUGHPUT_OPTIMIZATION = AdministrativeActionType.AddMember("THROUGHPUT_OPTIMIZATION", smithyprelude.Unit)
-
-	AdministrativeActionType_IOPS_OPTIMIZATION = AdministrativeActionType.AddMember("IOPS_OPTIMIZATION", smithyprelude.Unit)
-
-	AdministrativeActionType_STORAGE_TYPE_OPTIMIZATION = AdministrativeActionType.AddMember("STORAGE_TYPE_OPTIMIZATION", smithyprelude.Unit)
-
-	AdministrativeActionType_MISCONFIGURED_STATE_RECOVERY = AdministrativeActionType.AddMember("MISCONFIGURED_STATE_RECOVERY", smithyprelude.Unit)
-
-	AdministrativeActionType_VOLUME_UPDATE_WITH_SNAPSHOT = AdministrativeActionType.AddMember("VOLUME_UPDATE_WITH_SNAPSHOT", smithyprelude.Unit)
-
-	AdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT = AdministrativeActionType.AddMember("VOLUME_INITIALIZE_WITH_SNAPSHOT", smithyprelude.Unit)
-
-	AdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP = AdministrativeActionType.AddMember("DOWNLOAD_DATA_FROM_BACKUP", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	Status_IN_PROGRESS = Status.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	Status_PENDING = Status.AddMember("PENDING", smithyprelude.Unit)
-
-	Status_COMPLETED = Status.AddMember("COMPLETED", smithyprelude.Unit)
-
-	Status_UPDATED_OPTIMIZING = Status.AddMember("UPDATED_OPTIMIZING", smithyprelude.Unit)
-
-	Status_OPTIMIZING = Status.AddMember("OPTIMIZING", smithyprelude.Unit)
-
-	Status_PAUSED = Status.AddMember("PAUSED", smithyprelude.Unit)
-
-	Status_CANCELLED = Status.AddMember("CANCELLED", smithyprelude.Unit)
-
-	FileSystemType_WINDOWS = FileSystemType.AddMember("WINDOWS", smithyprelude.Unit)
-
-	FileSystemType_LUSTRE = FileSystemType.AddMember("LUSTRE", smithyprelude.Unit)
-
-	FileSystemType_ONTAP = FileSystemType.AddMember("ONTAP", smithyprelude.Unit)
-
-	FileSystemType_OPENZFS = FileSystemType.AddMember("OPENZFS", smithyprelude.Unit)
-
-	FileSystemLifecycle_AVAILABLE = FileSystemLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	FileSystemLifecycle_CREATING = FileSystemLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	FileSystemLifecycle_FAILED = FileSystemLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	FileSystemLifecycle_DELETING = FileSystemLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	FileSystemLifecycle_MISCONFIGURED = FileSystemLifecycle.AddMember("MISCONFIGURED", smithyprelude.Unit)
-
-	FileSystemLifecycle_UPDATING = FileSystemLifecycle.AddMember("UPDATING", smithyprelude.Unit)
-
-	FileSystemLifecycle_MISCONFIGURED_UNAVAILABLE = FileSystemLifecycle.AddMember("MISCONFIGURED_UNAVAILABLE", smithyprelude.Unit)
-
-	FileSystemFailureDetails_Message = FileSystemFailureDetails.AddMember("Message", _ErrorMessage)
-
-	StorageType_SSD = StorageType.AddMember("SSD", smithyprelude.Unit)
-
-	StorageType_HDD = StorageType.AddMember("HDD", smithyprelude.Unit)
-
-	StorageType_INTELLIGENT_TIERING = StorageType.AddMember("INTELLIGENT_TIERING", smithyprelude.Unit)
-
-	_SubnetIds_member = _SubnetIds.AddMember("member", _SubnetId)
-
-	_NetworkInterfaceIds_member = _NetworkInterfaceIds.AddMember("member", _NetworkInterfaceId)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_Tags_member = _Tags.AddMember("member", Tag)
-
-	_DnsIps_member = _DnsIps.AddMember("member", _IpAddress)
-
-	SelfManagedActiveDirectoryAttributes_DomainName = SelfManagedActiveDirectoryAttributes.AddMember("DomainName", _ActiveDirectoryFullyQualifiedName)
-
-	SelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName = SelfManagedActiveDirectoryAttributes.AddMember("OrganizationalUnitDistinguishedName", _OrganizationalUnitDistinguishedName)
-
-	SelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup = SelfManagedActiveDirectoryAttributes.AddMember("FileSystemAdministratorsGroup", _FileSystemAdministratorsGroupName)
-
-	SelfManagedActiveDirectoryAttributes_UserName = SelfManagedActiveDirectoryAttributes.AddMember("UserName", _DirectoryUserName)
-
-	SelfManagedActiveDirectoryAttributes_DnsIps = SelfManagedActiveDirectoryAttributes.AddMember("DnsIps", _DnsIps)
-
-	SelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret = SelfManagedActiveDirectoryAttributes.AddMember("DomainJoinServiceAccountSecret", _CustomerSecretsManagerARN)
-
-	WindowsDeploymentType_MULTI_AZ_1 = WindowsDeploymentType.AddMember("MULTI_AZ_1", smithyprelude.Unit)
-
-	WindowsDeploymentType_SINGLE_AZ_1 = WindowsDeploymentType.AddMember("SINGLE_AZ_1", smithyprelude.Unit)
-
-	WindowsDeploymentType_SINGLE_AZ_2 = WindowsDeploymentType.AddMember("SINGLE_AZ_2", smithyprelude.Unit)
-
-	FileSystemMaintenanceOperation_PATCHING = FileSystemMaintenanceOperation.AddMember("PATCHING", smithyprelude.Unit)
-
-	FileSystemMaintenanceOperation_BACKING_UP = FileSystemMaintenanceOperation.AddMember("BACKING_UP", smithyprelude.Unit)
-
-	_FileSystemMaintenanceOperations_member = _FileSystemMaintenanceOperations.AddMember("member", FileSystemMaintenanceOperation)
-
-	AliasLifecycle_AVAILABLE = AliasLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	AliasLifecycle_CREATING = AliasLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	AliasLifecycle_DELETING = AliasLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	AliasLifecycle_CREATE_FAILED = AliasLifecycle.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	AliasLifecycle_DELETE_FAILED = AliasLifecycle.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	Alias_Name = Alias.AddMember("Name", _AlternateDNSName)
-
-	Alias_Lifecycle = Alias.AddMember("Lifecycle", AliasLifecycle)
-
-	_Aliases_member = _Aliases.AddMember("member", Alias)
-
-	WindowsAccessAuditLogLevel_DISABLED = WindowsAccessAuditLogLevel.AddMember("DISABLED", smithyprelude.Unit)
-
-	WindowsAccessAuditLogLevel_SUCCESS_ONLY = WindowsAccessAuditLogLevel.AddMember("SUCCESS_ONLY", smithyprelude.Unit)
-
-	WindowsAccessAuditLogLevel_FAILURE_ONLY = WindowsAccessAuditLogLevel.AddMember("FAILURE_ONLY", smithyprelude.Unit)
-
-	WindowsAccessAuditLogLevel_SUCCESS_AND_FAILURE = WindowsAccessAuditLogLevel.AddMember("SUCCESS_AND_FAILURE", smithyprelude.Unit)
-
-	WindowsAuditLogConfiguration_FileAccessAuditLogLevel = WindowsAuditLogConfiguration.AddMember("FileAccessAuditLogLevel", WindowsAccessAuditLogLevel)
-
-	WindowsAuditLogConfiguration_FileShareAccessAuditLogLevel = WindowsAuditLogConfiguration.AddMember("FileShareAccessAuditLogLevel", WindowsAccessAuditLogLevel)
-
-	WindowsAuditLogConfiguration_AuditLogDestination = WindowsAuditLogConfiguration.AddMember("AuditLogDestination", _GeneralARN)
-
-	DiskIopsConfigurationMode_AUTOMATIC = DiskIopsConfigurationMode.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	DiskIopsConfigurationMode_USER_PROVISIONED = DiskIopsConfigurationMode.AddMember("USER_PROVISIONED", smithyprelude.Unit)
-
-	DiskIopsConfiguration_Mode = DiskIopsConfiguration.AddMember("Mode", DiskIopsConfigurationMode)
-
-	DiskIopsConfiguration_Iops = DiskIopsConfiguration.AddMember("Iops", _Iops)
-
-	WindowsFsrmConfiguration_FsrmServiceEnabled = WindowsFsrmConfiguration.AddMember("FsrmServiceEnabled", _Flag)
-
-	WindowsFsrmConfiguration_EventLogDestination = WindowsFsrmConfiguration.AddMember("EventLogDestination", _GeneralARN)
-
-	WindowsFileSystemConfiguration_ActiveDirectoryId = WindowsFileSystemConfiguration.AddMember("ActiveDirectoryId", _DirectoryId)
-
-	WindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration = WindowsFileSystemConfiguration.AddMember("SelfManagedActiveDirectoryConfiguration", SelfManagedActiveDirectoryAttributes)
-
-	WindowsFileSystemConfiguration_DeploymentType = WindowsFileSystemConfiguration.AddMember("DeploymentType", WindowsDeploymentType)
-
-	WindowsFileSystemConfiguration_RemoteAdministrationEndpoint = WindowsFileSystemConfiguration.AddMember("RemoteAdministrationEndpoint", _DNSName)
-
-	WindowsFileSystemConfiguration_PreferredSubnetId = WindowsFileSystemConfiguration.AddMember("PreferredSubnetId", _SubnetId)
-
-	WindowsFileSystemConfiguration_PreferredFileServerIp = WindowsFileSystemConfiguration.AddMember("PreferredFileServerIp", _IpAddress)
-
-	WindowsFileSystemConfiguration_ThroughputCapacity = WindowsFileSystemConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	WindowsFileSystemConfiguration_MaintenanceOperationsInProgress = WindowsFileSystemConfiguration.AddMember("MaintenanceOperationsInProgress", _FileSystemMaintenanceOperations)
-
-	WindowsFileSystemConfiguration_WeeklyMaintenanceStartTime = WindowsFileSystemConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	WindowsFileSystemConfiguration_DailyAutomaticBackupStartTime = WindowsFileSystemConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	WindowsFileSystemConfiguration_AutomaticBackupRetentionDays = WindowsFileSystemConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	WindowsFileSystemConfiguration_CopyTagsToBackups = WindowsFileSystemConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	WindowsFileSystemConfiguration_Aliases = WindowsFileSystemConfiguration.AddMember("Aliases", _Aliases)
-
-	WindowsFileSystemConfiguration_AuditLogConfiguration = WindowsFileSystemConfiguration.AddMember("AuditLogConfiguration", WindowsAuditLogConfiguration)
-
-	WindowsFileSystemConfiguration_DiskIopsConfiguration = WindowsFileSystemConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	WindowsFileSystemConfiguration_PreferredFileServerIpv6 = WindowsFileSystemConfiguration.AddMember("PreferredFileServerIpv6", _IpAddress)
-
-	WindowsFileSystemConfiguration_FsrmConfiguration = WindowsFileSystemConfiguration.AddMember("FsrmConfiguration", WindowsFsrmConfiguration)
-
-	DataRepositoryLifecycle_CREATING = DataRepositoryLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	DataRepositoryLifecycle_AVAILABLE = DataRepositoryLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	DataRepositoryLifecycle_MISCONFIGURED = DataRepositoryLifecycle.AddMember("MISCONFIGURED", smithyprelude.Unit)
-
-	DataRepositoryLifecycle_UPDATING = DataRepositoryLifecycle.AddMember("UPDATING", smithyprelude.Unit)
-
-	DataRepositoryLifecycle_DELETING = DataRepositoryLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	DataRepositoryLifecycle_FAILED = DataRepositoryLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	AutoImportPolicyType_NONE = AutoImportPolicyType.AddMember("NONE", smithyprelude.Unit)
-
-	AutoImportPolicyType_NEW = AutoImportPolicyType.AddMember("NEW", smithyprelude.Unit)
-
-	AutoImportPolicyType_NEW_CHANGED = AutoImportPolicyType.AddMember("NEW_CHANGED", smithyprelude.Unit)
-
-	AutoImportPolicyType_NEW_CHANGED_DELETED = AutoImportPolicyType.AddMember("NEW_CHANGED_DELETED", smithyprelude.Unit)
-
-	DataRepositoryFailureDetails_Message = DataRepositoryFailureDetails.AddMember("Message", _ErrorMessage)
-
-	DataRepositoryConfiguration_Lifecycle = DataRepositoryConfiguration.AddMember("Lifecycle", DataRepositoryLifecycle)
-
-	DataRepositoryConfiguration_ImportPath = DataRepositoryConfiguration.AddMember("ImportPath", _ArchivePath)
-
-	DataRepositoryConfiguration_ExportPath = DataRepositoryConfiguration.AddMember("ExportPath", _ArchivePath)
-
-	DataRepositoryConfiguration_ImportedFileChunkSize = DataRepositoryConfiguration.AddMember("ImportedFileChunkSize", _Megabytes)
-
-	DataRepositoryConfiguration_AutoImportPolicy = DataRepositoryConfiguration.AddMember("AutoImportPolicy", AutoImportPolicyType)
-
-	DataRepositoryConfiguration_FailureDetails = DataRepositoryConfiguration.AddMember("FailureDetails", DataRepositoryFailureDetails)
-
-	LustreDeploymentType_SCRATCH_1 = LustreDeploymentType.AddMember("SCRATCH_1", smithyprelude.Unit)
-
-	LustreDeploymentType_SCRATCH_2 = LustreDeploymentType.AddMember("SCRATCH_2", smithyprelude.Unit)
-
-	LustreDeploymentType_PERSISTENT_1 = LustreDeploymentType.AddMember("PERSISTENT_1", smithyprelude.Unit)
-
-	LustreDeploymentType_PERSISTENT_2 = LustreDeploymentType.AddMember("PERSISTENT_2", smithyprelude.Unit)
-
-	DriveCacheType_NONE = DriveCacheType.AddMember("NONE", smithyprelude.Unit)
-
-	DriveCacheType_READ = DriveCacheType.AddMember("READ", smithyprelude.Unit)
-
-	DataCompressionType_NONE = DataCompressionType.AddMember("NONE", smithyprelude.Unit)
-
-	DataCompressionType_LZ4 = DataCompressionType.AddMember("LZ4", smithyprelude.Unit)
-
-	LustreAccessAuditLogLevel_DISABLED = LustreAccessAuditLogLevel.AddMember("DISABLED", smithyprelude.Unit)
-
-	LustreAccessAuditLogLevel_WARN_ONLY = LustreAccessAuditLogLevel.AddMember("WARN_ONLY", smithyprelude.Unit)
-
-	LustreAccessAuditLogLevel_ERROR_ONLY = LustreAccessAuditLogLevel.AddMember("ERROR_ONLY", smithyprelude.Unit)
-
-	LustreAccessAuditLogLevel_WARN_ERROR = LustreAccessAuditLogLevel.AddMember("WARN_ERROR", smithyprelude.Unit)
-
-	LustreLogConfiguration_Level = LustreLogConfiguration.AddMember("Level", LustreAccessAuditLogLevel)
-
-	LustreLogConfiguration_Destination = LustreLogConfiguration.AddMember("Destination", _GeneralARN)
-
-	_LustreNoSquashNids_member = _LustreNoSquashNids.AddMember("member", _LustreNoSquashNid)
-
-	LustreRootSquashConfiguration_RootSquash = LustreRootSquashConfiguration.AddMember("RootSquash", _LustreRootSquash)
-
-	LustreRootSquashConfiguration_NoSquashNids = LustreRootSquashConfiguration.AddMember("NoSquashNids", _LustreNoSquashNids)
-
-	MetadataConfigurationMode_AUTOMATIC = MetadataConfigurationMode.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	MetadataConfigurationMode_USER_PROVISIONED = MetadataConfigurationMode.AddMember("USER_PROVISIONED", smithyprelude.Unit)
-
-	FileSystemLustreMetadataConfiguration_Iops = FileSystemLustreMetadataConfiguration.AddMember("Iops", _MetadataIops)
-
-	FileSystemLustreMetadataConfiguration_Mode = FileSystemLustreMetadataConfiguration.AddMember("Mode", MetadataConfigurationMode)
-
-	LustreReadCacheSizingMode_NO_CACHE = LustreReadCacheSizingMode.AddMember("NO_CACHE", smithyprelude.Unit)
-
-	LustreReadCacheSizingMode_USER_PROVISIONED = LustreReadCacheSizingMode.AddMember("USER_PROVISIONED", smithyprelude.Unit)
-
-	LustreReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY = LustreReadCacheSizingMode.AddMember("PROPORTIONAL_TO_THROUGHPUT_CAPACITY", smithyprelude.Unit)
-
-	LustreReadCacheConfiguration_SizingMode = LustreReadCacheConfiguration.AddMember("SizingMode", LustreReadCacheSizingMode)
-
-	LustreReadCacheConfiguration_SizeGiB = LustreReadCacheConfiguration.AddMember("SizeGiB", _StorageCapacity)
-
-	LustreFileSystemConfiguration_WeeklyMaintenanceStartTime = LustreFileSystemConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	LustreFileSystemConfiguration_DataRepositoryConfiguration = LustreFileSystemConfiguration.AddMember("DataRepositoryConfiguration", DataRepositoryConfiguration)
-
-	LustreFileSystemConfiguration_DeploymentType = LustreFileSystemConfiguration.AddMember("DeploymentType", LustreDeploymentType)
-
-	LustreFileSystemConfiguration_PerUnitStorageThroughput = LustreFileSystemConfiguration.AddMember("PerUnitStorageThroughput", _PerUnitStorageThroughput)
-
-	LustreFileSystemConfiguration_MountName = LustreFileSystemConfiguration.AddMember("MountName", _LustreFileSystemMountName)
-
-	LustreFileSystemConfiguration_DailyAutomaticBackupStartTime = LustreFileSystemConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	LustreFileSystemConfiguration_AutomaticBackupRetentionDays = LustreFileSystemConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	LustreFileSystemConfiguration_CopyTagsToBackups = LustreFileSystemConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	LustreFileSystemConfiguration_DriveCacheType = LustreFileSystemConfiguration.AddMember("DriveCacheType", DriveCacheType)
-
-	LustreFileSystemConfiguration_DataCompressionType = LustreFileSystemConfiguration.AddMember("DataCompressionType", DataCompressionType)
-
-	LustreFileSystemConfiguration_LogConfiguration = LustreFileSystemConfiguration.AddMember("LogConfiguration", LustreLogConfiguration)
-
-	LustreFileSystemConfiguration_RootSquashConfiguration = LustreFileSystemConfiguration.AddMember("RootSquashConfiguration", LustreRootSquashConfiguration)
-
-	LustreFileSystemConfiguration_MetadataConfiguration = LustreFileSystemConfiguration.AddMember("MetadataConfiguration", FileSystemLustreMetadataConfiguration)
-
-	LustreFileSystemConfiguration_EfaEnabled = LustreFileSystemConfiguration.AddMember("EfaEnabled", _Flag)
-
-	LustreFileSystemConfiguration_ThroughputCapacity = LustreFileSystemConfiguration.AddMember("ThroughputCapacity", _ThroughputCapacityMbps)
-
-	LustreFileSystemConfiguration_DataReadCacheConfiguration = LustreFileSystemConfiguration.AddMember("DataReadCacheConfiguration", LustreReadCacheConfiguration)
-
-	_AdministrativeActions_member = _AdministrativeActions.AddMember("member", AdministrativeAction)
-
-	OntapDeploymentType_MULTI_AZ_1 = OntapDeploymentType.AddMember("MULTI_AZ_1", smithyprelude.Unit)
-
-	OntapDeploymentType_SINGLE_AZ_1 = OntapDeploymentType.AddMember("SINGLE_AZ_1", smithyprelude.Unit)
-
-	OntapDeploymentType_SINGLE_AZ_2 = OntapDeploymentType.AddMember("SINGLE_AZ_2", smithyprelude.Unit)
-
-	OntapDeploymentType_MULTI_AZ_2 = OntapDeploymentType.AddMember("MULTI_AZ_2", smithyprelude.Unit)
-
-	_OntapEndpointIpAddresses_member = _OntapEndpointIpAddresses.AddMember("member", _IpAddress)
-
-	FileSystemEndpoint_DNSName = FileSystemEndpoint.AddMember("DNSName", _DNSName)
-
-	FileSystemEndpoint_IpAddresses = FileSystemEndpoint.AddMember("IpAddresses", _OntapEndpointIpAddresses)
-
-	FileSystemEndpoint_Ipv6Addresses = FileSystemEndpoint.AddMember("Ipv6Addresses", _OntapEndpointIpAddresses)
-
-	FileSystemEndpoints_Intercluster = FileSystemEndpoints.AddMember("Intercluster", FileSystemEndpoint)
-
-	FileSystemEndpoints_Management = FileSystemEndpoints.AddMember("Management", FileSystemEndpoint)
-
-	_RouteTableIds_member = _RouteTableIds.AddMember("member", _RouteTableId)
-
-	OntapFileSystemConfiguration_AutomaticBackupRetentionDays = OntapFileSystemConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	OntapFileSystemConfiguration_DailyAutomaticBackupStartTime = OntapFileSystemConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	OntapFileSystemConfiguration_DeploymentType = OntapFileSystemConfiguration.AddMember("DeploymentType", OntapDeploymentType)
-
-	OntapFileSystemConfiguration_EndpointIpAddressRange = OntapFileSystemConfiguration.AddMember("EndpointIpAddressRange", _IpAddressRange)
-
-	OntapFileSystemConfiguration_Endpoints = OntapFileSystemConfiguration.AddMember("Endpoints", FileSystemEndpoints)
-
-	OntapFileSystemConfiguration_DiskIopsConfiguration = OntapFileSystemConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	OntapFileSystemConfiguration_PreferredSubnetId = OntapFileSystemConfiguration.AddMember("PreferredSubnetId", _SubnetId)
-
-	OntapFileSystemConfiguration_RouteTableIds = OntapFileSystemConfiguration.AddMember("RouteTableIds", _RouteTableIds)
-
-	OntapFileSystemConfiguration_ThroughputCapacity = OntapFileSystemConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	OntapFileSystemConfiguration_WeeklyMaintenanceStartTime = OntapFileSystemConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	OntapFileSystemConfiguration_FsxAdminPassword = OntapFileSystemConfiguration.AddMember("FsxAdminPassword", _AdminPassword)
-
-	OntapFileSystemConfiguration_HAPairs = OntapFileSystemConfiguration.AddMember("HAPairs", _HAPairs)
-
-	OntapFileSystemConfiguration_ThroughputCapacityPerHAPair = OntapFileSystemConfiguration.AddMember("ThroughputCapacityPerHAPair", _ThroughputCapacityPerHAPair)
-
-	OntapFileSystemConfiguration_EndpointIpv6AddressRange = OntapFileSystemConfiguration.AddMember("EndpointIpv6AddressRange", _Ipv6AddressRange)
-
-	OpenZFSDeploymentType_SINGLE_AZ_1 = OpenZFSDeploymentType.AddMember("SINGLE_AZ_1", smithyprelude.Unit)
-
-	OpenZFSDeploymentType_SINGLE_AZ_2 = OpenZFSDeploymentType.AddMember("SINGLE_AZ_2", smithyprelude.Unit)
-
-	OpenZFSDeploymentType_SINGLE_AZ_HA_1 = OpenZFSDeploymentType.AddMember("SINGLE_AZ_HA_1", smithyprelude.Unit)
-
-	OpenZFSDeploymentType_SINGLE_AZ_HA_2 = OpenZFSDeploymentType.AddMember("SINGLE_AZ_HA_2", smithyprelude.Unit)
-
-	OpenZFSDeploymentType_MULTI_AZ_1 = OpenZFSDeploymentType.AddMember("MULTI_AZ_1", smithyprelude.Unit)
-
-	OpenZFSReadCacheSizingMode_NO_CACHE = OpenZFSReadCacheSizingMode.AddMember("NO_CACHE", smithyprelude.Unit)
-
-	OpenZFSReadCacheSizingMode_USER_PROVISIONED = OpenZFSReadCacheSizingMode.AddMember("USER_PROVISIONED", smithyprelude.Unit)
-
-	OpenZFSReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY = OpenZFSReadCacheSizingMode.AddMember("PROPORTIONAL_TO_THROUGHPUT_CAPACITY", smithyprelude.Unit)
-
-	OpenZFSReadCacheConfiguration_SizingMode = OpenZFSReadCacheConfiguration.AddMember("SizingMode", OpenZFSReadCacheSizingMode)
-
-	OpenZFSReadCacheConfiguration_SizeGiB = OpenZFSReadCacheConfiguration.AddMember("SizeGiB", _StorageCapacity)
-
-	OpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays = OpenZFSFileSystemConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	OpenZFSFileSystemConfiguration_CopyTagsToBackups = OpenZFSFileSystemConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	OpenZFSFileSystemConfiguration_CopyTagsToVolumes = OpenZFSFileSystemConfiguration.AddMember("CopyTagsToVolumes", _Flag)
-
-	OpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime = OpenZFSFileSystemConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	OpenZFSFileSystemConfiguration_DeploymentType = OpenZFSFileSystemConfiguration.AddMember("DeploymentType", OpenZFSDeploymentType)
-
-	OpenZFSFileSystemConfiguration_ThroughputCapacity = OpenZFSFileSystemConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	OpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime = OpenZFSFileSystemConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	OpenZFSFileSystemConfiguration_DiskIopsConfiguration = OpenZFSFileSystemConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	OpenZFSFileSystemConfiguration_RootVolumeId = OpenZFSFileSystemConfiguration.AddMember("RootVolumeId", _VolumeId)
-
-	OpenZFSFileSystemConfiguration_PreferredSubnetId = OpenZFSFileSystemConfiguration.AddMember("PreferredSubnetId", _SubnetId)
-
-	OpenZFSFileSystemConfiguration_EndpointIpAddressRange = OpenZFSFileSystemConfiguration.AddMember("EndpointIpAddressRange", _IpAddressRange)
-
-	OpenZFSFileSystemConfiguration_EndpointIpv6AddressRange = OpenZFSFileSystemConfiguration.AddMember("EndpointIpv6AddressRange", _Ipv6AddressRange)
-
-	OpenZFSFileSystemConfiguration_RouteTableIds = OpenZFSFileSystemConfiguration.AddMember("RouteTableIds", _RouteTableIds)
-
-	OpenZFSFileSystemConfiguration_EndpointIpAddress = OpenZFSFileSystemConfiguration.AddMember("EndpointIpAddress", _IpAddress)
-
-	OpenZFSFileSystemConfiguration_EndpointIpv6Address = OpenZFSFileSystemConfiguration.AddMember("EndpointIpv6Address", _IpAddress)
-
-	OpenZFSFileSystemConfiguration_ReadCacheConfiguration = OpenZFSFileSystemConfiguration.AddMember("ReadCacheConfiguration", OpenZFSReadCacheConfiguration)
-
-	NetworkType_IPV4 = NetworkType.AddMember("IPV4", smithyprelude.Unit)
-
-	NetworkType_DUAL = NetworkType.AddMember("DUAL", smithyprelude.Unit)
-
-	FileSystem_OwnerId = FileSystem.AddMember("OwnerId", _AWSAccountId)
-
-	FileSystem_CreationTime = FileSystem.AddMember("CreationTime", _CreationTime)
-
-	FileSystem_FileSystemId = FileSystem.AddMember("FileSystemId", _FileSystemId)
-
-	FileSystem_FileSystemType = FileSystem.AddMember("FileSystemType", FileSystemType)
-
-	FileSystem_Lifecycle = FileSystem.AddMember("Lifecycle", FileSystemLifecycle)
-
-	FileSystem_FailureDetails = FileSystem.AddMember("FailureDetails", FileSystemFailureDetails)
-
-	FileSystem_StorageCapacity = FileSystem.AddMember("StorageCapacity", _StorageCapacity)
-
-	FileSystem_StorageType = FileSystem.AddMember("StorageType", StorageType)
-
-	FileSystem_VpcId = FileSystem.AddMember("VpcId", _VpcId)
-
-	FileSystem_SubnetIds = FileSystem.AddMember("SubnetIds", _SubnetIds)
-
-	FileSystem_NetworkInterfaceIds = FileSystem.AddMember("NetworkInterfaceIds", _NetworkInterfaceIds)
-
-	FileSystem_DNSName = FileSystem.AddMember("DNSName", _DNSName)
-
-	FileSystem_KmsKeyId = FileSystem.AddMember("KmsKeyId", _KmsKeyId)
-
-	FileSystem_ResourceARN = FileSystem.AddMember("ResourceARN", _ResourceARN)
-
-	FileSystem_Tags = FileSystem.AddMember("Tags", _Tags)
-
-	FileSystem_WindowsConfiguration = FileSystem.AddMember("WindowsConfiguration", WindowsFileSystemConfiguration)
-
-	FileSystem_LustreConfiguration = FileSystem.AddMember("LustreConfiguration", LustreFileSystemConfiguration)
-
-	FileSystem_AdministrativeActions = FileSystem.AddMember("AdministrativeActions", _AdministrativeActions)
-
-	FileSystem_OntapConfiguration = FileSystem.AddMember("OntapConfiguration", OntapFileSystemConfiguration)
-
-	FileSystem_FileSystemTypeVersion = FileSystem.AddMember("FileSystemTypeVersion", _FileSystemTypeVersion)
-
-	FileSystem_OpenZFSConfiguration = FileSystem.AddMember("OpenZFSConfiguration", OpenZFSFileSystemConfiguration)
-
-	FileSystem_NetworkType = FileSystem.AddMember("NetworkType", NetworkType)
-
-	AdministrativeActionFailureDetails_Message = AdministrativeActionFailureDetails.AddMember("Message", _ErrorMessage)
-
-	VolumeLifecycle_CREATING = VolumeLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	VolumeLifecycle_CREATED = VolumeLifecycle.AddMember("CREATED", smithyprelude.Unit)
-
-	VolumeLifecycle_DELETING = VolumeLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	VolumeLifecycle_FAILED = VolumeLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	VolumeLifecycle_MISCONFIGURED = VolumeLifecycle.AddMember("MISCONFIGURED", smithyprelude.Unit)
-
-	VolumeLifecycle_PENDING = VolumeLifecycle.AddMember("PENDING", smithyprelude.Unit)
-
-	VolumeLifecycle_AVAILABLE = VolumeLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	FlexCacheEndpointType_NONE = FlexCacheEndpointType.AddMember("NONE", smithyprelude.Unit)
-
-	FlexCacheEndpointType_ORIGIN = FlexCacheEndpointType.AddMember("ORIGIN", smithyprelude.Unit)
-
-	FlexCacheEndpointType_CACHE = FlexCacheEndpointType.AddMember("CACHE", smithyprelude.Unit)
-
-	SecurityStyle_UNIX = SecurityStyle.AddMember("UNIX", smithyprelude.Unit)
-
-	SecurityStyle_NTFS = SecurityStyle.AddMember("NTFS", smithyprelude.Unit)
-
-	SecurityStyle_MIXED = SecurityStyle.AddMember("MIXED", smithyprelude.Unit)
-
-	TieringPolicyName_SNAPSHOT_ONLY = TieringPolicyName.AddMember("SNAPSHOT_ONLY", smithyprelude.Unit)
-
-	TieringPolicyName_AUTO = TieringPolicyName.AddMember("AUTO", smithyprelude.Unit)
-
-	TieringPolicyName_ALL = TieringPolicyName.AddMember("ALL", smithyprelude.Unit)
-
-	TieringPolicyName_NONE = TieringPolicyName.AddMember("NONE", smithyprelude.Unit)
-
-	TieringPolicy_CoolingPeriod = TieringPolicy.AddMember("CoolingPeriod", _CoolingPeriod)
-
-	TieringPolicy_Name = TieringPolicy.AddMember("Name", TieringPolicyName)
-
-	OntapVolumeType_RW = OntapVolumeType.AddMember("RW", smithyprelude.Unit)
-
-	OntapVolumeType_DP = OntapVolumeType.AddMember("DP", smithyprelude.Unit)
-
-	OntapVolumeType_LS = OntapVolumeType.AddMember("LS", smithyprelude.Unit)
-
-	AutocommitPeriodType_MINUTES = AutocommitPeriodType.AddMember("MINUTES", smithyprelude.Unit)
-
-	AutocommitPeriodType_HOURS = AutocommitPeriodType.AddMember("HOURS", smithyprelude.Unit)
-
-	AutocommitPeriodType_DAYS = AutocommitPeriodType.AddMember("DAYS", smithyprelude.Unit)
-
-	AutocommitPeriodType_MONTHS = AutocommitPeriodType.AddMember("MONTHS", smithyprelude.Unit)
-
-	AutocommitPeriodType_YEARS = AutocommitPeriodType.AddMember("YEARS", smithyprelude.Unit)
-
-	AutocommitPeriodType_NONE = AutocommitPeriodType.AddMember("NONE", smithyprelude.Unit)
-
-	AutocommitPeriod_Type = AutocommitPeriod.AddMember("Type", AutocommitPeriodType)
-
-	AutocommitPeriod_Value = AutocommitPeriod.AddMember("Value", _AutocommitPeriodValue)
-
-	PrivilegedDelete_DISABLED = PrivilegedDelete.AddMember("DISABLED", smithyprelude.Unit)
-
-	PrivilegedDelete_ENABLED = PrivilegedDelete.AddMember("ENABLED", smithyprelude.Unit)
-
-	PrivilegedDelete_PERMANENTLY_DISABLED = PrivilegedDelete.AddMember("PERMANENTLY_DISABLED", smithyprelude.Unit)
-
-	RetentionPeriodType_SECONDS = RetentionPeriodType.AddMember("SECONDS", smithyprelude.Unit)
-
-	RetentionPeriodType_MINUTES = RetentionPeriodType.AddMember("MINUTES", smithyprelude.Unit)
-
-	RetentionPeriodType_HOURS = RetentionPeriodType.AddMember("HOURS", smithyprelude.Unit)
-
-	RetentionPeriodType_DAYS = RetentionPeriodType.AddMember("DAYS", smithyprelude.Unit)
-
-	RetentionPeriodType_MONTHS = RetentionPeriodType.AddMember("MONTHS", smithyprelude.Unit)
-
-	RetentionPeriodType_YEARS = RetentionPeriodType.AddMember("YEARS", smithyprelude.Unit)
-
-	RetentionPeriodType_INFINITE = RetentionPeriodType.AddMember("INFINITE", smithyprelude.Unit)
-
-	RetentionPeriodType_UNSPECIFIED = RetentionPeriodType.AddMember("UNSPECIFIED", smithyprelude.Unit)
-
-	RetentionPeriod_Type = RetentionPeriod.AddMember("Type", RetentionPeriodType)
-
-	RetentionPeriod_Value = RetentionPeriod.AddMember("Value", _RetentionPeriodValue)
-
-	SnaplockRetentionPeriod_DefaultRetention = SnaplockRetentionPeriod.AddMember("DefaultRetention", RetentionPeriod)
-
-	SnaplockRetentionPeriod_MinimumRetention = SnaplockRetentionPeriod.AddMember("MinimumRetention", RetentionPeriod)
-
-	SnaplockRetentionPeriod_MaximumRetention = SnaplockRetentionPeriod.AddMember("MaximumRetention", RetentionPeriod)
-
-	SnaplockType_COMPLIANCE = SnaplockType.AddMember("COMPLIANCE", smithyprelude.Unit)
-
-	SnaplockType_ENTERPRISE = SnaplockType.AddMember("ENTERPRISE", smithyprelude.Unit)
-
-	SnaplockConfiguration_AuditLogVolume = SnaplockConfiguration.AddMember("AuditLogVolume", _Flag)
-
-	SnaplockConfiguration_AutocommitPeriod = SnaplockConfiguration.AddMember("AutocommitPeriod", AutocommitPeriod)
-
-	SnaplockConfiguration_PrivilegedDelete = SnaplockConfiguration.AddMember("PrivilegedDelete", PrivilegedDelete)
-
-	SnaplockConfiguration_RetentionPeriod = SnaplockConfiguration.AddMember("RetentionPeriod", SnaplockRetentionPeriod)
-
-	SnaplockConfiguration_SnaplockType = SnaplockConfiguration.AddMember("SnaplockType", SnaplockType)
-
-	SnaplockConfiguration_VolumeAppendModeEnabled = SnaplockConfiguration.AddMember("VolumeAppendModeEnabled", _Flag)
-
-	VolumeStyle_FLEXVOL = VolumeStyle.AddMember("FLEXVOL", smithyprelude.Unit)
-
-	VolumeStyle_FLEXGROUP = VolumeStyle.AddMember("FLEXGROUP", smithyprelude.Unit)
-
-	_Aggregates_member = _Aggregates.AddMember("member", _Aggregate)
-
-	AggregateConfiguration_Aggregates = AggregateConfiguration.AddMember("Aggregates", _Aggregates)
-
-	AggregateConfiguration_TotalConstituents = AggregateConfiguration.AddMember("TotalConstituents", _TotalConstituents)
-
-	OntapVolumeConfiguration_FlexCacheEndpointType = OntapVolumeConfiguration.AddMember("FlexCacheEndpointType", FlexCacheEndpointType)
-
-	OntapVolumeConfiguration_JunctionPath = OntapVolumeConfiguration.AddMember("JunctionPath", _JunctionPath)
-
-	OntapVolumeConfiguration_SecurityStyle = OntapVolumeConfiguration.AddMember("SecurityStyle", SecurityStyle)
-
-	OntapVolumeConfiguration_SizeInMegabytes = OntapVolumeConfiguration.AddMember("SizeInMegabytes", _VolumeCapacity)
-
-	OntapVolumeConfiguration_StorageEfficiencyEnabled = OntapVolumeConfiguration.AddMember("StorageEfficiencyEnabled", _Flag)
-
-	OntapVolumeConfiguration_StorageVirtualMachineId = OntapVolumeConfiguration.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
-
-	OntapVolumeConfiguration_StorageVirtualMachineRoot = OntapVolumeConfiguration.AddMember("StorageVirtualMachineRoot", _Flag)
-
-	OntapVolumeConfiguration_TieringPolicy = OntapVolumeConfiguration.AddMember("TieringPolicy", TieringPolicy)
-
-	OntapVolumeConfiguration_UUID = OntapVolumeConfiguration.AddMember("UUID", _UUID)
-
-	OntapVolumeConfiguration_OntapVolumeType = OntapVolumeConfiguration.AddMember("OntapVolumeType", OntapVolumeType)
-
-	OntapVolumeConfiguration_SnapshotPolicy = OntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicy)
-
-	OntapVolumeConfiguration_CopyTagsToBackups = OntapVolumeConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	OntapVolumeConfiguration_SnaplockConfiguration = OntapVolumeConfiguration.AddMember("SnaplockConfiguration", SnaplockConfiguration)
-
-	OntapVolumeConfiguration_VolumeStyle = OntapVolumeConfiguration.AddMember("VolumeStyle", VolumeStyle)
-
-	OntapVolumeConfiguration_AggregateConfiguration = OntapVolumeConfiguration.AddMember("AggregateConfiguration", AggregateConfiguration)
-
-	OntapVolumeConfiguration_SizeInBytes = OntapVolumeConfiguration.AddMember("SizeInBytes", _VolumeCapacityBytes)
-
-	VolumeType_ONTAP = VolumeType.AddMember("ONTAP", smithyprelude.Unit)
-
-	VolumeType_OPENZFS = VolumeType.AddMember("OPENZFS", smithyprelude.Unit)
-
-	LifecycleTransitionReason_Message = LifecycleTransitionReason.AddMember("Message", _ErrorMessage)
-
-	OpenZFSDataCompressionType_NONE = OpenZFSDataCompressionType.AddMember("NONE", smithyprelude.Unit)
-
-	OpenZFSDataCompressionType_ZSTD = OpenZFSDataCompressionType.AddMember("ZSTD", smithyprelude.Unit)
-
-	OpenZFSDataCompressionType_LZ4 = OpenZFSDataCompressionType.AddMember("LZ4", smithyprelude.Unit)
-
-	OpenZFSCopyStrategy_CLONE = OpenZFSCopyStrategy.AddMember("CLONE", smithyprelude.Unit)
-
-	OpenZFSCopyStrategy_FULL_COPY = OpenZFSCopyStrategy.AddMember("FULL_COPY", smithyprelude.Unit)
-
-	OpenZFSCopyStrategy_INCREMENTAL_COPY = OpenZFSCopyStrategy.AddMember("INCREMENTAL_COPY", smithyprelude.Unit)
-
-	OpenZFSOriginSnapshotConfiguration_SnapshotARN = OpenZFSOriginSnapshotConfiguration.AddMember("SnapshotARN", _ResourceARN)
-
-	OpenZFSOriginSnapshotConfiguration_CopyStrategy = OpenZFSOriginSnapshotConfiguration.AddMember("CopyStrategy", OpenZFSCopyStrategy)
-
-	_OpenZFSNfsExportOptions_member = _OpenZFSNfsExportOptions.AddMember("member", _OpenZFSNfsExportOption)
-
-	OpenZFSClientConfiguration_Clients = OpenZFSClientConfiguration.AddMember("Clients", _OpenZFSClients)
-
-	OpenZFSClientConfiguration_Options = OpenZFSClientConfiguration.AddMember("Options", _OpenZFSNfsExportOptions)
-
-	_OpenZFSClientConfigurations_member = _OpenZFSClientConfigurations.AddMember("member", OpenZFSClientConfiguration)
-
-	OpenZFSNfsExport_ClientConfigurations = OpenZFSNfsExport.AddMember("ClientConfigurations", _OpenZFSClientConfigurations)
-
-	_OpenZFSNfsExports_member = _OpenZFSNfsExports.AddMember("member", OpenZFSNfsExport)
-
-	OpenZFSQuotaType_USER = OpenZFSQuotaType.AddMember("USER", smithyprelude.Unit)
-
-	OpenZFSQuotaType_GROUP = OpenZFSQuotaType.AddMember("GROUP", smithyprelude.Unit)
-
-	OpenZFSUserOrGroupQuota_Type = OpenZFSUserOrGroupQuota.AddMember("Type", OpenZFSQuotaType)
-
-	OpenZFSUserOrGroupQuota_Id = OpenZFSUserOrGroupQuota.AddMember("Id", _IntegerNoMax)
-
-	OpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB = OpenZFSUserOrGroupQuota.AddMember("StorageCapacityQuotaGiB", _IntegerNoMax)
-
-	_OpenZFSUserAndGroupQuotas_member = _OpenZFSUserAndGroupQuotas.AddMember("member", OpenZFSUserOrGroupQuota)
-
-	OpenZFSVolumeConfiguration_ParentVolumeId = OpenZFSVolumeConfiguration.AddMember("ParentVolumeId", _VolumeId)
-
-	OpenZFSVolumeConfiguration_VolumePath = OpenZFSVolumeConfiguration.AddMember("VolumePath", _VolumePath)
-
-	OpenZFSVolumeConfiguration_StorageCapacityReservationGiB = OpenZFSVolumeConfiguration.AddMember("StorageCapacityReservationGiB", _IntegerNoMax)
-
-	OpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = OpenZFSVolumeConfiguration.AddMember("StorageCapacityQuotaGiB", _IntegerNoMax)
-
-	OpenZFSVolumeConfiguration_RecordSizeKiB = OpenZFSVolumeConfiguration.AddMember("RecordSizeKiB", _IntegerRecordSizeKiB)
-
-	OpenZFSVolumeConfiguration_DataCompressionType = OpenZFSVolumeConfiguration.AddMember("DataCompressionType", OpenZFSDataCompressionType)
-
-	OpenZFSVolumeConfiguration_CopyTagsToSnapshots = OpenZFSVolumeConfiguration.AddMember("CopyTagsToSnapshots", _Flag)
-
-	OpenZFSVolumeConfiguration_OriginSnapshot = OpenZFSVolumeConfiguration.AddMember("OriginSnapshot", OpenZFSOriginSnapshotConfiguration)
-
-	OpenZFSVolumeConfiguration_ReadOnly = OpenZFSVolumeConfiguration.AddMember("ReadOnly", _ReadOnly)
-
-	OpenZFSVolumeConfiguration_NfsExports = OpenZFSVolumeConfiguration.AddMember("NfsExports", _OpenZFSNfsExports)
-
-	OpenZFSVolumeConfiguration_UserAndGroupQuotas = OpenZFSVolumeConfiguration.AddMember("UserAndGroupQuotas", _OpenZFSUserAndGroupQuotas)
-
-	OpenZFSVolumeConfiguration_RestoreToSnapshot = OpenZFSVolumeConfiguration.AddMember("RestoreToSnapshot", _SnapshotId)
-
-	OpenZFSVolumeConfiguration_DeleteIntermediateSnaphots = OpenZFSVolumeConfiguration.AddMember("DeleteIntermediateSnaphots", _Flag)
-
-	OpenZFSVolumeConfiguration_DeleteClonedVolumes = OpenZFSVolumeConfiguration.AddMember("DeleteClonedVolumes", _Flag)
-
-	OpenZFSVolumeConfiguration_DeleteIntermediateData = OpenZFSVolumeConfiguration.AddMember("DeleteIntermediateData", _Flag)
-
-	OpenZFSVolumeConfiguration_SourceSnapshotARN = OpenZFSVolumeConfiguration.AddMember("SourceSnapshotARN", _ResourceARN)
-
-	OpenZFSVolumeConfiguration_DestinationSnapshot = OpenZFSVolumeConfiguration.AddMember("DestinationSnapshot", _SnapshotId)
-
-	OpenZFSVolumeConfiguration_CopyStrategy = OpenZFSVolumeConfiguration.AddMember("CopyStrategy", OpenZFSCopyStrategy)
-
-	Volume_CreationTime = Volume.AddMember("CreationTime", _CreationTime)
-
-	Volume_FileSystemId = Volume.AddMember("FileSystemId", _FileSystemId)
-
-	Volume_Lifecycle = Volume.AddMember("Lifecycle", VolumeLifecycle)
-
-	Volume_Name = Volume.AddMember("Name", _VolumeName)
-
-	Volume_OntapConfiguration = Volume.AddMember("OntapConfiguration", OntapVolumeConfiguration)
-
-	Volume_ResourceARN = Volume.AddMember("ResourceARN", _ResourceARN)
-
-	Volume_Tags = Volume.AddMember("Tags", _Tags)
-
-	Volume_VolumeId = Volume.AddMember("VolumeId", _VolumeId)
-
-	Volume_VolumeType = Volume.AddMember("VolumeType", VolumeType)
-
-	Volume_LifecycleTransitionReason = Volume.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
-
-	Volume_AdministrativeActions = Volume.AddMember("AdministrativeActions", _AdministrativeActions)
-
-	Volume_OpenZFSConfiguration = Volume.AddMember("OpenZFSConfiguration", OpenZFSVolumeConfiguration)
-
-	SnapshotLifecycle_PENDING = SnapshotLifecycle.AddMember("PENDING", smithyprelude.Unit)
-
-	SnapshotLifecycle_CREATING = SnapshotLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	SnapshotLifecycle_DELETING = SnapshotLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	SnapshotLifecycle_AVAILABLE = SnapshotLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	Snapshot_ResourceARN = Snapshot.AddMember("ResourceARN", _ResourceARN)
-
-	Snapshot_SnapshotId = Snapshot.AddMember("SnapshotId", _SnapshotId)
-
-	Snapshot_Name = Snapshot.AddMember("Name", _SnapshotName)
-
-	Snapshot_VolumeId = Snapshot.AddMember("VolumeId", _VolumeId)
-
-	Snapshot_CreationTime = Snapshot.AddMember("CreationTime", _CreationTime)
-
-	Snapshot_Lifecycle = Snapshot.AddMember("Lifecycle", SnapshotLifecycle)
-
-	Snapshot_LifecycleTransitionReason = Snapshot.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
-
-	Snapshot_Tags = Snapshot.AddMember("Tags", _Tags)
-
-	Snapshot_AdministrativeActions = Snapshot.AddMember("AdministrativeActions", _AdministrativeActions)
-
-	AdministrativeAction_AdministrativeActionType = AdministrativeAction.AddMember("AdministrativeActionType", AdministrativeActionType)
-
-	AdministrativeAction_ProgressPercent = AdministrativeAction.AddMember("ProgressPercent", _ProgressPercent)
-
-	AdministrativeAction_RequestTime = AdministrativeAction.AddMember("RequestTime", _RequestTime)
-
-	AdministrativeAction_Status = AdministrativeAction.AddMember("Status", Status)
-
-	AdministrativeAction_TargetFileSystemValues = AdministrativeAction.AddMember("TargetFileSystemValues", FileSystem)
-
-	AdministrativeAction_FailureDetails = AdministrativeAction.AddMember("FailureDetails", AdministrativeActionFailureDetails)
-
-	AdministrativeAction_TargetVolumeValues = AdministrativeAction.AddMember("TargetVolumeValues", Volume)
-
-	AdministrativeAction_TargetSnapshotValues = AdministrativeAction.AddMember("TargetSnapshotValues", Snapshot)
-
-	AdministrativeAction_TotalTransferBytes = AdministrativeAction.AddMember("TotalTransferBytes", _TotalTransferBytes)
-
-	AdministrativeAction_RemainingTransferBytes = AdministrativeAction.AddMember("RemainingTransferBytes", _RemainingTransferBytes)
-
-	AdministrativeAction_Message = AdministrativeAction.AddMember("Message", _ErrorMessage)
-
-	_AlternateDNSNames_member = _AlternateDNSNames.AddMember("member", _AlternateDNSName)
-
-	EventType_NEW = EventType.AddMember("NEW", smithyprelude.Unit)
-
-	EventType_CHANGED = EventType.AddMember("CHANGED", smithyprelude.Unit)
-
-	EventType_DELETED = EventType.AddMember("DELETED", smithyprelude.Unit)
-
-	_EventTypes_member = _EventTypes.AddMember("member", EventType)
-
-	AutoExportPolicy_Events = AutoExportPolicy.AddMember("Events", _EventTypes)
-
-	AutoImportPolicy_Events = AutoImportPolicy.AddMember("Events", _EventTypes)
-
-	BackupLifecycle_AVAILABLE = BackupLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	BackupLifecycle_CREATING = BackupLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	BackupLifecycle_TRANSFERRING = BackupLifecycle.AddMember("TRANSFERRING", smithyprelude.Unit)
-
-	BackupLifecycle_DELETED = BackupLifecycle.AddMember("DELETED", smithyprelude.Unit)
-
-	BackupLifecycle_FAILED = BackupLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	BackupLifecycle_PENDING = BackupLifecycle.AddMember("PENDING", smithyprelude.Unit)
-
-	BackupLifecycle_COPYING = BackupLifecycle.AddMember("COPYING", smithyprelude.Unit)
-
-	BackupFailureDetails_Message = BackupFailureDetails.AddMember("Message", _ErrorMessage)
-
-	BackupType_AUTOMATIC = BackupType.AddMember("AUTOMATIC", smithyprelude.Unit)
-
-	BackupType_USER_INITIATED = BackupType.AddMember("USER_INITIATED", smithyprelude.Unit)
-
-	BackupType_AWS_BACKUP = BackupType.AddMember("AWS_BACKUP", smithyprelude.Unit)
-
-	ResourceType_FILE_SYSTEM = ResourceType.AddMember("FILE_SYSTEM", smithyprelude.Unit)
-
-	ResourceType_VOLUME = ResourceType.AddMember("VOLUME", smithyprelude.Unit)
-
-	Backup_BackupId = Backup.AddMember("BackupId", _BackupId)
-
-	Backup_Lifecycle = Backup.AddMember("Lifecycle", BackupLifecycle)
-
-	Backup_FailureDetails = Backup.AddMember("FailureDetails", BackupFailureDetails)
-
-	Backup_Type = Backup.AddMember("Type", BackupType)
-
-	Backup_ProgressPercent = Backup.AddMember("ProgressPercent", _ProgressPercent)
-
-	Backup_CreationTime = Backup.AddMember("CreationTime", _CreationTime)
-
-	Backup_KmsKeyId = Backup.AddMember("KmsKeyId", _KmsKeyId)
-
-	Backup_ResourceARN = Backup.AddMember("ResourceARN", _ResourceARN)
-
-	Backup_Tags = Backup.AddMember("Tags", _Tags)
-
-	Backup_FileSystem = Backup.AddMember("FileSystem", FileSystem)
-
-	Backup_DirectoryInformation = Backup.AddMember("DirectoryInformation", ActiveDirectoryBackupAttributes)
-
-	Backup_OwnerId = Backup.AddMember("OwnerId", _AWSAccountId)
-
-	Backup_SourceBackupId = Backup.AddMember("SourceBackupId", _BackupId)
-
-	Backup_SourceBackupRegion = Backup.AddMember("SourceBackupRegion", _Region)
-
-	Backup_ResourceType = Backup.AddMember("ResourceType", ResourceType)
-
-	Backup_Volume = Backup.AddMember("Volume", Volume)
-
-	Backup_SizeInBytes = Backup.AddMember("SizeInBytes", _SizeInBytes)
-
-	BackupBeingCopied_Message = BackupBeingCopied.AddMember("Message", _ErrorMessage)
-
-	BackupBeingCopied_BackupId = BackupBeingCopied.AddMember("BackupId", _BackupId)
-
-	_BackupIds_member = _BackupIds.AddMember("member", _BackupId)
-
-	BackupInProgress_Message = BackupInProgress.AddMember("Message", _ErrorMessage)
-
-	BackupNotFound_Message = BackupNotFound.AddMember("Message", _ErrorMessage)
-
-	BackupRestoring_Message = BackupRestoring.AddMember("Message", _ErrorMessage)
-
-	BackupRestoring_FileSystemId = BackupRestoring.AddMember("FileSystemId", _FileSystemId)
-
-	_Backups_member = _Backups.AddMember("member", Backup)
-
-	BadRequest_Message = BadRequest.AddMember("Message", _ErrorMessage)
-
-	ReportFormat_REPORT_CSV_20191124 = ReportFormat.AddMember("REPORT_CSV_20191124", smithyprelude.Unit)
-
-	ReportScope_FAILED_FILES_ONLY = ReportScope.AddMember("FAILED_FILES_ONLY", smithyprelude.Unit)
-
-	CompletionReport_Enabled = CompletionReport.AddMember("Enabled", _Flag)
-
-	CompletionReport_Path = CompletionReport.AddMember("Path", _ArchivePath)
-
-	CompletionReport_Format = CompletionReport.AddMember("Format", ReportFormat)
-
-	CompletionReport_Scope = CompletionReport.AddMember("Scope", ReportScope)
-
-	CreateAggregateConfiguration_Aggregates = CreateAggregateConfiguration.AddMember("Aggregates", _Aggregates)
-
-	CreateAggregateConfiguration_ConstituentsPerAggregate = CreateAggregateConfiguration.AddMember("ConstituentsPerAggregate", _AggregateListMultiplier)
-
-	OntapFileSystemUserType_UNIX = OntapFileSystemUserType.AddMember("UNIX", smithyprelude.Unit)
-
-	OntapFileSystemUserType_WINDOWS = OntapFileSystemUserType.AddMember("WINDOWS", smithyprelude.Unit)
-
-	OntapUnixFileSystemUser_Name = OntapUnixFileSystemUser.AddMember("Name", _OntapFileSystemUserName)
-
-	OntapWindowsFileSystemUser_Name = OntapWindowsFileSystemUser.AddMember("Name", _OntapFileSystemUserName)
-
-	OntapFileSystemIdentity_Type = OntapFileSystemIdentity.AddMember("Type", OntapFileSystemUserType)
-
-	OntapFileSystemIdentity_UnixUser = OntapFileSystemIdentity.AddMember("UnixUser", OntapUnixFileSystemUser)
-
-	OntapFileSystemIdentity_WindowsUser = OntapFileSystemIdentity.AddMember("WindowsUser", OntapWindowsFileSystemUser)
-
-	CreateAndAttachS3AccessPointOntapConfiguration_VolumeId = CreateAndAttachS3AccessPointOntapConfiguration.AddMember("VolumeId", _VolumeId)
-
-	CreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity = CreateAndAttachS3AccessPointOntapConfiguration.AddMember("FileSystemIdentity", OntapFileSystemIdentity)
-
-	OpenZFSFileSystemUserType_POSIX = OpenZFSFileSystemUserType.AddMember("POSIX", smithyprelude.Unit)
-
-	_FileSystemSecondaryGIDs_member = _FileSystemSecondaryGIDs.AddMember("member", _FileSystemGID)
-
-	OpenZFSPosixFileSystemUser_Uid = OpenZFSPosixFileSystemUser.AddMember("Uid", _FileSystemUID)
-
-	OpenZFSPosixFileSystemUser_Gid = OpenZFSPosixFileSystemUser.AddMember("Gid", _FileSystemGID)
-
-	OpenZFSPosixFileSystemUser_SecondaryGids = OpenZFSPosixFileSystemUser.AddMember("SecondaryGids", _FileSystemSecondaryGIDs)
-
-	OpenZFSFileSystemIdentity_Type = OpenZFSFileSystemIdentity.AddMember("Type", OpenZFSFileSystemUserType)
-
-	OpenZFSFileSystemIdentity_PosixUser = OpenZFSFileSystemIdentity.AddMember("PosixUser", OpenZFSPosixFileSystemUser)
-
-	CreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId = CreateAndAttachS3AccessPointOpenZFSConfiguration.AddMember("VolumeId", _VolumeId)
-
-	CreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity = CreateAndAttachS3AccessPointOpenZFSConfiguration.AddMember("FileSystemIdentity", OpenZFSFileSystemIdentity)
-
-	S3AccessPointVpcConfiguration_VpcId = S3AccessPointVpcConfiguration.AddMember("VpcId", _VpcId)
-
-	CreateAndAttachS3AccessPointS3Configuration_VpcConfiguration = CreateAndAttachS3AccessPointS3Configuration.AddMember("VpcConfiguration", S3AccessPointVpcConfiguration)
-
-	CreateAndAttachS3AccessPointS3Configuration_Policy = CreateAndAttachS3AccessPointS3Configuration.AddMember("Policy", _AccessPointPolicy)
-
-	_SubDirectoriesPaths_member = _SubDirectoriesPaths.AddMember("member", _Namespace)
-
-	NfsVersion_NFS3 = NfsVersion.AddMember("NFS3", smithyprelude.Unit)
-
-	_RepositoryDnsIps_member = _RepositoryDnsIps.AddMember("member", _IpAddress)
-
-	FileCacheNFSConfiguration_Version = FileCacheNFSConfiguration.AddMember("Version", NfsVersion)
-
-	FileCacheNFSConfiguration_DnsIps = FileCacheNFSConfiguration.AddMember("DnsIps", _RepositoryDnsIps)
-
-	FileCacheDataRepositoryAssociation_FileCachePath = FileCacheDataRepositoryAssociation.AddMember("FileCachePath", _Namespace)
-
-	FileCacheDataRepositoryAssociation_DataRepositoryPath = FileCacheDataRepositoryAssociation.AddMember("DataRepositoryPath", _ArchivePath)
-
-	FileCacheDataRepositoryAssociation_DataRepositorySubdirectories = FileCacheDataRepositoryAssociation.AddMember("DataRepositorySubdirectories", _SubDirectoriesPaths)
-
-	FileCacheDataRepositoryAssociation_NFS = FileCacheDataRepositoryAssociation.AddMember("NFS", FileCacheNFSConfiguration)
-
-	_CreateFileCacheDataRepositoryAssociations_member = _CreateFileCacheDataRepositoryAssociations.AddMember("member", FileCacheDataRepositoryAssociation)
-
-	FileCacheLustreDeploymentType_CACHE_1 = FileCacheLustreDeploymentType.AddMember("CACHE_1", smithyprelude.Unit)
-
-	FileCacheLustreMetadataConfiguration_StorageCapacity = FileCacheLustreMetadataConfiguration.AddMember("StorageCapacity", _MetadataStorageCapacity)
-
-	CreateFileCacheLustreConfiguration_PerUnitStorageThroughput = CreateFileCacheLustreConfiguration.AddMember("PerUnitStorageThroughput", _PerUnitStorageThroughput)
-
-	CreateFileCacheLustreConfiguration_DeploymentType = CreateFileCacheLustreConfiguration.AddMember("DeploymentType", FileCacheLustreDeploymentType)
-
-	CreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = CreateFileCacheLustreConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	CreateFileCacheLustreConfiguration_MetadataConfiguration = CreateFileCacheLustreConfiguration.AddMember("MetadataConfiguration", FileCacheLustreMetadataConfiguration)
-
-	LustreLogCreateConfiguration_Level = LustreLogCreateConfiguration.AddMember("Level", LustreAccessAuditLogLevel)
-
-	LustreLogCreateConfiguration_Destination = LustreLogCreateConfiguration.AddMember("Destination", _GeneralARN)
-
-	CreateFileSystemLustreMetadataConfiguration_Iops = CreateFileSystemLustreMetadataConfiguration.AddMember("Iops", _MetadataIops)
-
-	CreateFileSystemLustreMetadataConfiguration_Mode = CreateFileSystemLustreMetadataConfiguration.AddMember("Mode", MetadataConfigurationMode)
-
-	CreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime = CreateFileSystemLustreConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	CreateFileSystemLustreConfiguration_ImportPath = CreateFileSystemLustreConfiguration.AddMember("ImportPath", _ArchivePath)
-
-	CreateFileSystemLustreConfiguration_ExportPath = CreateFileSystemLustreConfiguration.AddMember("ExportPath", _ArchivePath)
-
-	CreateFileSystemLustreConfiguration_ImportedFileChunkSize = CreateFileSystemLustreConfiguration.AddMember("ImportedFileChunkSize", _Megabytes)
-
-	CreateFileSystemLustreConfiguration_DeploymentType = CreateFileSystemLustreConfiguration.AddMember("DeploymentType", LustreDeploymentType)
-
-	CreateFileSystemLustreConfiguration_AutoImportPolicy = CreateFileSystemLustreConfiguration.AddMember("AutoImportPolicy", AutoImportPolicyType)
-
-	CreateFileSystemLustreConfiguration_PerUnitStorageThroughput = CreateFileSystemLustreConfiguration.AddMember("PerUnitStorageThroughput", _PerUnitStorageThroughput)
-
-	CreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime = CreateFileSystemLustreConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	CreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays = CreateFileSystemLustreConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	CreateFileSystemLustreConfiguration_CopyTagsToBackups = CreateFileSystemLustreConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	CreateFileSystemLustreConfiguration_DriveCacheType = CreateFileSystemLustreConfiguration.AddMember("DriveCacheType", DriveCacheType)
-
-	CreateFileSystemLustreConfiguration_DataCompressionType = CreateFileSystemLustreConfiguration.AddMember("DataCompressionType", DataCompressionType)
-
-	CreateFileSystemLustreConfiguration_EfaEnabled = CreateFileSystemLustreConfiguration.AddMember("EfaEnabled", _Flag)
-
-	CreateFileSystemLustreConfiguration_LogConfiguration = CreateFileSystemLustreConfiguration.AddMember("LogConfiguration", LustreLogCreateConfiguration)
-
-	CreateFileSystemLustreConfiguration_RootSquashConfiguration = CreateFileSystemLustreConfiguration.AddMember("RootSquashConfiguration", LustreRootSquashConfiguration)
-
-	CreateFileSystemLustreConfiguration_MetadataConfiguration = CreateFileSystemLustreConfiguration.AddMember("MetadataConfiguration", CreateFileSystemLustreMetadataConfiguration)
-
-	CreateFileSystemLustreConfiguration_ThroughputCapacity = CreateFileSystemLustreConfiguration.AddMember("ThroughputCapacity", _ThroughputCapacityMbps)
-
-	CreateFileSystemLustreConfiguration_DataReadCacheConfiguration = CreateFileSystemLustreConfiguration.AddMember("DataReadCacheConfiguration", LustreReadCacheConfiguration)
-
-	CreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays = CreateFileSystemOntapConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	CreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime = CreateFileSystemOntapConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	CreateFileSystemOntapConfiguration_DeploymentType = CreateFileSystemOntapConfiguration.AddMember("DeploymentType", OntapDeploymentType)
-
-	CreateFileSystemOntapConfiguration_EndpointIpAddressRange = CreateFileSystemOntapConfiguration.AddMember("EndpointIpAddressRange", _IpAddressRange)
-
-	CreateFileSystemOntapConfiguration_FsxAdminPassword = CreateFileSystemOntapConfiguration.AddMember("FsxAdminPassword", _AdminPassword)
-
-	CreateFileSystemOntapConfiguration_DiskIopsConfiguration = CreateFileSystemOntapConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	CreateFileSystemOntapConfiguration_PreferredSubnetId = CreateFileSystemOntapConfiguration.AddMember("PreferredSubnetId", _SubnetId)
-
-	CreateFileSystemOntapConfiguration_RouteTableIds = CreateFileSystemOntapConfiguration.AddMember("RouteTableIds", _RouteTableIds)
-
-	CreateFileSystemOntapConfiguration_ThroughputCapacity = CreateFileSystemOntapConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	CreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime = CreateFileSystemOntapConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	CreateFileSystemOntapConfiguration_HAPairs = CreateFileSystemOntapConfiguration.AddMember("HAPairs", _HAPairs)
-
-	CreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair = CreateFileSystemOntapConfiguration.AddMember("ThroughputCapacityPerHAPair", _ThroughputCapacityPerHAPair)
-
-	CreateFileSystemOntapConfiguration_EndpointIpv6AddressRange = CreateFileSystemOntapConfiguration.AddMember("EndpointIpv6AddressRange", _Ipv6AddressRange)
-
-	OpenZFSCreateRootVolumeConfiguration_RecordSizeKiB = OpenZFSCreateRootVolumeConfiguration.AddMember("RecordSizeKiB", _IntegerRecordSizeKiB)
-
-	OpenZFSCreateRootVolumeConfiguration_DataCompressionType = OpenZFSCreateRootVolumeConfiguration.AddMember("DataCompressionType", OpenZFSDataCompressionType)
-
-	OpenZFSCreateRootVolumeConfiguration_NfsExports = OpenZFSCreateRootVolumeConfiguration.AddMember("NfsExports", _OpenZFSNfsExports)
-
-	OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas = OpenZFSCreateRootVolumeConfiguration.AddMember("UserAndGroupQuotas", _OpenZFSUserAndGroupQuotas)
-
-	OpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots = OpenZFSCreateRootVolumeConfiguration.AddMember("CopyTagsToSnapshots", _Flag)
-
-	OpenZFSCreateRootVolumeConfiguration_ReadOnly = OpenZFSCreateRootVolumeConfiguration.AddMember("ReadOnly", _ReadOnly)
-
-	CreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays = CreateFileSystemOpenZFSConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	CreateFileSystemOpenZFSConfiguration_CopyTagsToBackups = CreateFileSystemOpenZFSConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	CreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes = CreateFileSystemOpenZFSConfiguration.AddMember("CopyTagsToVolumes", _Flag)
-
-	CreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime = CreateFileSystemOpenZFSConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	CreateFileSystemOpenZFSConfiguration_DeploymentType = CreateFileSystemOpenZFSConfiguration.AddMember("DeploymentType", OpenZFSDeploymentType)
-
-	CreateFileSystemOpenZFSConfiguration_ThroughputCapacity = CreateFileSystemOpenZFSConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	CreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime = CreateFileSystemOpenZFSConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	CreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration = CreateFileSystemOpenZFSConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	CreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration = CreateFileSystemOpenZFSConfiguration.AddMember("RootVolumeConfiguration", OpenZFSCreateRootVolumeConfiguration)
-
-	CreateFileSystemOpenZFSConfiguration_PreferredSubnetId = CreateFileSystemOpenZFSConfiguration.AddMember("PreferredSubnetId", _SubnetId)
-
-	CreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange = CreateFileSystemOpenZFSConfiguration.AddMember("EndpointIpAddressRange", _IpAddressRange)
-
-	CreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange = CreateFileSystemOpenZFSConfiguration.AddMember("EndpointIpv6AddressRange", _Ipv6AddressRange)
-
-	CreateFileSystemOpenZFSConfiguration_RouteTableIds = CreateFileSystemOpenZFSConfiguration.AddMember("RouteTableIds", _RouteTableIds)
-
-	CreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration = CreateFileSystemOpenZFSConfiguration.AddMember("ReadCacheConfiguration", OpenZFSReadCacheConfiguration)
-
-	SelfManagedActiveDirectoryConfiguration_DomainName = SelfManagedActiveDirectoryConfiguration.AddMember("DomainName", _ActiveDirectoryFullyQualifiedName)
-
-	SelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName = SelfManagedActiveDirectoryConfiguration.AddMember("OrganizationalUnitDistinguishedName", _OrganizationalUnitDistinguishedName)
-
-	SelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup = SelfManagedActiveDirectoryConfiguration.AddMember("FileSystemAdministratorsGroup", _FileSystemAdministratorsGroupName)
-
-	SelfManagedActiveDirectoryConfiguration_UserName = SelfManagedActiveDirectoryConfiguration.AddMember("UserName", _DirectoryUserName)
-
-	SelfManagedActiveDirectoryConfiguration_Password = SelfManagedActiveDirectoryConfiguration.AddMember("Password", _DirectoryPassword)
-
-	SelfManagedActiveDirectoryConfiguration_DnsIps = SelfManagedActiveDirectoryConfiguration.AddMember("DnsIps", _DnsIps)
-
-	SelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret = SelfManagedActiveDirectoryConfiguration.AddMember("DomainJoinServiceAccountSecret", _CustomerSecretsManagerARN)
-
-	WindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel = WindowsAuditLogCreateConfiguration.AddMember("FileAccessAuditLogLevel", WindowsAccessAuditLogLevel)
-
-	WindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel = WindowsAuditLogCreateConfiguration.AddMember("FileShareAccessAuditLogLevel", WindowsAccessAuditLogLevel)
-
-	WindowsAuditLogCreateConfiguration_AuditLogDestination = WindowsAuditLogCreateConfiguration.AddMember("AuditLogDestination", _GeneralARN)
-
-	CreateFileSystemWindowsConfiguration_ActiveDirectoryId = CreateFileSystemWindowsConfiguration.AddMember("ActiveDirectoryId", _DirectoryId)
-
-	CreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration = CreateFileSystemWindowsConfiguration.AddMember("SelfManagedActiveDirectoryConfiguration", SelfManagedActiveDirectoryConfiguration)
-
-	CreateFileSystemWindowsConfiguration_DeploymentType = CreateFileSystemWindowsConfiguration.AddMember("DeploymentType", WindowsDeploymentType)
-
-	CreateFileSystemWindowsConfiguration_PreferredSubnetId = CreateFileSystemWindowsConfiguration.AddMember("PreferredSubnetId", _SubnetId)
-
-	CreateFileSystemWindowsConfiguration_ThroughputCapacity = CreateFileSystemWindowsConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	CreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime = CreateFileSystemWindowsConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	CreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime = CreateFileSystemWindowsConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	CreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays = CreateFileSystemWindowsConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	CreateFileSystemWindowsConfiguration_CopyTagsToBackups = CreateFileSystemWindowsConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	CreateFileSystemWindowsConfiguration_Aliases = CreateFileSystemWindowsConfiguration.AddMember("Aliases", _AlternateDNSNames)
-
-	CreateFileSystemWindowsConfiguration_AuditLogConfiguration = CreateFileSystemWindowsConfiguration.AddMember("AuditLogConfiguration", WindowsAuditLogCreateConfiguration)
-
-	CreateFileSystemWindowsConfiguration_DiskIopsConfiguration = CreateFileSystemWindowsConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	CreateFileSystemWindowsConfiguration_FsrmConfiguration = CreateFileSystemWindowsConfiguration.AddMember("FsrmConfiguration", WindowsFsrmConfiguration)
-
-	InputOntapVolumeType_RW = InputOntapVolumeType.AddMember("RW", smithyprelude.Unit)
-
-	InputOntapVolumeType_DP = InputOntapVolumeType.AddMember("DP", smithyprelude.Unit)
-
-	CreateSnaplockConfiguration_AuditLogVolume = CreateSnaplockConfiguration.AddMember("AuditLogVolume", _Flag)
-
-	CreateSnaplockConfiguration_AutocommitPeriod = CreateSnaplockConfiguration.AddMember("AutocommitPeriod", AutocommitPeriod)
-
-	CreateSnaplockConfiguration_PrivilegedDelete = CreateSnaplockConfiguration.AddMember("PrivilegedDelete", PrivilegedDelete)
-
-	CreateSnaplockConfiguration_RetentionPeriod = CreateSnaplockConfiguration.AddMember("RetentionPeriod", SnaplockRetentionPeriod)
-
-	CreateSnaplockConfiguration_SnaplockType = CreateSnaplockConfiguration.AddMember("SnaplockType", SnaplockType)
-
-	CreateSnaplockConfiguration_VolumeAppendModeEnabled = CreateSnaplockConfiguration.AddMember("VolumeAppendModeEnabled", _Flag)
-
-	CreateOntapVolumeConfiguration_JunctionPath = CreateOntapVolumeConfiguration.AddMember("JunctionPath", _JunctionPath)
-
-	CreateOntapVolumeConfiguration_SecurityStyle = CreateOntapVolumeConfiguration.AddMember("SecurityStyle", SecurityStyle)
-
-	CreateOntapVolumeConfiguration_SizeInMegabytes = CreateOntapVolumeConfiguration.AddMember("SizeInMegabytes", _VolumeCapacity)
-
-	CreateOntapVolumeConfiguration_StorageEfficiencyEnabled = CreateOntapVolumeConfiguration.AddMember("StorageEfficiencyEnabled", _Flag)
-
-	CreateOntapVolumeConfiguration_StorageVirtualMachineId = CreateOntapVolumeConfiguration.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
-
-	CreateOntapVolumeConfiguration_TieringPolicy = CreateOntapVolumeConfiguration.AddMember("TieringPolicy", TieringPolicy)
-
-	CreateOntapVolumeConfiguration_OntapVolumeType = CreateOntapVolumeConfiguration.AddMember("OntapVolumeType", InputOntapVolumeType)
-
-	CreateOntapVolumeConfiguration_SnapshotPolicy = CreateOntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicy)
-
-	CreateOntapVolumeConfiguration_CopyTagsToBackups = CreateOntapVolumeConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	CreateOntapVolumeConfiguration_SnaplockConfiguration = CreateOntapVolumeConfiguration.AddMember("SnaplockConfiguration", CreateSnaplockConfiguration)
-
-	CreateOntapVolumeConfiguration_VolumeStyle = CreateOntapVolumeConfiguration.AddMember("VolumeStyle", VolumeStyle)
-
-	CreateOntapVolumeConfiguration_AggregateConfiguration = CreateOntapVolumeConfiguration.AddMember("AggregateConfiguration", CreateAggregateConfiguration)
-
-	CreateOntapVolumeConfiguration_SizeInBytes = CreateOntapVolumeConfiguration.AddMember("SizeInBytes", _VolumeCapacityBytes)
-
-	CreateOpenZFSOriginSnapshotConfiguration_SnapshotARN = CreateOpenZFSOriginSnapshotConfiguration.AddMember("SnapshotARN", _ResourceARN)
-
-	CreateOpenZFSOriginSnapshotConfiguration_CopyStrategy = CreateOpenZFSOriginSnapshotConfiguration.AddMember("CopyStrategy", OpenZFSCopyStrategy)
-
-	CreateOpenZFSVolumeConfiguration_ParentVolumeId = CreateOpenZFSVolumeConfiguration.AddMember("ParentVolumeId", _VolumeId)
-
-	CreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = CreateOpenZFSVolumeConfiguration.AddMember("StorageCapacityReservationGiB", _IntegerNoMaxFromNegativeOne)
-
-	CreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = CreateOpenZFSVolumeConfiguration.AddMember("StorageCapacityQuotaGiB", _IntegerNoMaxFromNegativeOne)
-
-	CreateOpenZFSVolumeConfiguration_RecordSizeKiB = CreateOpenZFSVolumeConfiguration.AddMember("RecordSizeKiB", _IntegerRecordSizeKiB)
-
-	CreateOpenZFSVolumeConfiguration_DataCompressionType = CreateOpenZFSVolumeConfiguration.AddMember("DataCompressionType", OpenZFSDataCompressionType)
-
-	CreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots = CreateOpenZFSVolumeConfiguration.AddMember("CopyTagsToSnapshots", _Flag)
-
-	CreateOpenZFSVolumeConfiguration_OriginSnapshot = CreateOpenZFSVolumeConfiguration.AddMember("OriginSnapshot", CreateOpenZFSOriginSnapshotConfiguration)
-
-	CreateOpenZFSVolumeConfiguration_ReadOnly = CreateOpenZFSVolumeConfiguration.AddMember("ReadOnly", _ReadOnly)
-
-	CreateOpenZFSVolumeConfiguration_NfsExports = CreateOpenZFSVolumeConfiguration.AddMember("NfsExports", _OpenZFSNfsExports)
-
-	CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas = CreateOpenZFSVolumeConfiguration.AddMember("UserAndGroupQuotas", _OpenZFSUserAndGroupQuotas)
-
-	CreateSvmActiveDirectoryConfiguration_NetBiosName = CreateSvmActiveDirectoryConfiguration.AddMember("NetBiosName", _NetBiosAlias)
-
-	CreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = CreateSvmActiveDirectoryConfiguration.AddMember("SelfManagedActiveDirectoryConfiguration", SelfManagedActiveDirectoryConfiguration)
-
-	S3DataRepositoryConfiguration_AutoImportPolicy = S3DataRepositoryConfiguration.AddMember("AutoImportPolicy", AutoImportPolicy)
-
-	S3DataRepositoryConfiguration_AutoExportPolicy = S3DataRepositoryConfiguration.AddMember("AutoExportPolicy", AutoExportPolicy)
-
-	NFSDataRepositoryConfiguration_Version = NFSDataRepositoryConfiguration.AddMember("Version", NfsVersion)
-
-	NFSDataRepositoryConfiguration_DnsIps = NFSDataRepositoryConfiguration.AddMember("DnsIps", _RepositoryDnsIps)
-
-	NFSDataRepositoryConfiguration_AutoExportPolicy = NFSDataRepositoryConfiguration.AddMember("AutoExportPolicy", AutoExportPolicy)
-
-	DataRepositoryAssociation_AssociationId = DataRepositoryAssociation.AddMember("AssociationId", _DataRepositoryAssociationId)
-
-	DataRepositoryAssociation_ResourceARN = DataRepositoryAssociation.AddMember("ResourceARN", _ResourceARN)
-
-	DataRepositoryAssociation_FileSystemId = DataRepositoryAssociation.AddMember("FileSystemId", _FileSystemId)
-
-	DataRepositoryAssociation_Lifecycle = DataRepositoryAssociation.AddMember("Lifecycle", DataRepositoryLifecycle)
-
-	DataRepositoryAssociation_FailureDetails = DataRepositoryAssociation.AddMember("FailureDetails", DataRepositoryFailureDetails)
-
-	DataRepositoryAssociation_FileSystemPath = DataRepositoryAssociation.AddMember("FileSystemPath", _Namespace)
-
-	DataRepositoryAssociation_DataRepositoryPath = DataRepositoryAssociation.AddMember("DataRepositoryPath", _ArchivePath)
-
-	DataRepositoryAssociation_BatchImportMetaDataOnCreate = DataRepositoryAssociation.AddMember("BatchImportMetaDataOnCreate", _BatchImportMetaDataOnCreate)
-
-	DataRepositoryAssociation_ImportedFileChunkSize = DataRepositoryAssociation.AddMember("ImportedFileChunkSize", _Megabytes)
-
-	DataRepositoryAssociation_S3 = DataRepositoryAssociation.AddMember("S3", S3DataRepositoryConfiguration)
-
-	DataRepositoryAssociation_Tags = DataRepositoryAssociation.AddMember("Tags", _Tags)
-
-	DataRepositoryAssociation_CreationTime = DataRepositoryAssociation.AddMember("CreationTime", _CreationTime)
-
-	DataRepositoryAssociation_FileCacheId = DataRepositoryAssociation.AddMember("FileCacheId", _FileCacheId)
-
-	DataRepositoryAssociation_FileCachePath = DataRepositoryAssociation.AddMember("FileCachePath", _Namespace)
-
-	DataRepositoryAssociation_DataRepositorySubdirectories = DataRepositoryAssociation.AddMember("DataRepositorySubdirectories", _SubDirectoriesPaths)
-
-	DataRepositoryAssociation_NFS = DataRepositoryAssociation.AddMember("NFS", NFSDataRepositoryConfiguration)
-
-	_DataRepositoryAssociationIds_member = _DataRepositoryAssociationIds.AddMember("member", _DataRepositoryAssociationId)
-
-	DataRepositoryAssociationNotFound_Message = DataRepositoryAssociationNotFound.AddMember("Message", _ErrorMessage)
-
-	_DataRepositoryAssociations_member = _DataRepositoryAssociations.AddMember("member", DataRepositoryAssociation)
-
-	DataRepositoryTaskLifecycle_PENDING = DataRepositoryTaskLifecycle.AddMember("PENDING", smithyprelude.Unit)
-
-	DataRepositoryTaskLifecycle_EXECUTING = DataRepositoryTaskLifecycle.AddMember("EXECUTING", smithyprelude.Unit)
-
-	DataRepositoryTaskLifecycle_FAILED = DataRepositoryTaskLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	DataRepositoryTaskLifecycle_SUCCEEDED = DataRepositoryTaskLifecycle.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	DataRepositoryTaskLifecycle_CANCELED = DataRepositoryTaskLifecycle.AddMember("CANCELED", smithyprelude.Unit)
-
-	DataRepositoryTaskLifecycle_CANCELING = DataRepositoryTaskLifecycle.AddMember("CANCELING", smithyprelude.Unit)
-
-	DataRepositoryTaskType_EXPORT = DataRepositoryTaskType.AddMember("EXPORT", smithyprelude.Unit)
-
-	DataRepositoryTaskType_IMPORT = DataRepositoryTaskType.AddMember("IMPORT", smithyprelude.Unit)
-
-	DataRepositoryTaskType_EVICTION = DataRepositoryTaskType.AddMember("EVICTION", smithyprelude.Unit)
-
-	DataRepositoryTaskType_AUTO_TRIGGERED_EVICTION = DataRepositoryTaskType.AddMember("AUTO_TRIGGERED_EVICTION", smithyprelude.Unit)
-
-	_DataRepositoryTaskPaths_member = _DataRepositoryTaskPaths.AddMember("member", _DataRepositoryTaskPath)
-
-	DataRepositoryTaskFailureDetails_Message = DataRepositoryTaskFailureDetails.AddMember("Message", _ErrorMessage)
-
-	DataRepositoryTaskStatus_TotalCount = DataRepositoryTaskStatus.AddMember("TotalCount", _TotalCount)
-
-	DataRepositoryTaskStatus_SucceededCount = DataRepositoryTaskStatus.AddMember("SucceededCount", _SucceededCount)
-
-	DataRepositoryTaskStatus_FailedCount = DataRepositoryTaskStatus.AddMember("FailedCount", _FailedCount)
-
-	DataRepositoryTaskStatus_LastUpdatedTime = DataRepositoryTaskStatus.AddMember("LastUpdatedTime", _LastUpdatedTime)
-
-	DataRepositoryTaskStatus_ReleasedCapacity = DataRepositoryTaskStatus.AddMember("ReleasedCapacity", _ReleasedCapacity)
-
-	Unit_DAYS = Unit.AddMember("DAYS", smithyprelude.Unit)
-
-	DurationSinceLastAccess_Unit = DurationSinceLastAccess.AddMember("Unit", Unit)
-
-	DurationSinceLastAccess_Value = DurationSinceLastAccess.AddMember("Value", _Value)
-
-	ReleaseConfiguration_DurationSinceLastAccess = ReleaseConfiguration.AddMember("DurationSinceLastAccess", DurationSinceLastAccess)
-
-	DataRepositoryTask_TaskId = DataRepositoryTask.AddMember("TaskId", _TaskId)
-
-	DataRepositoryTask_Lifecycle = DataRepositoryTask.AddMember("Lifecycle", DataRepositoryTaskLifecycle)
-
-	DataRepositoryTask_Type = DataRepositoryTask.AddMember("Type", DataRepositoryTaskType)
-
-	DataRepositoryTask_CreationTime = DataRepositoryTask.AddMember("CreationTime", _CreationTime)
-
-	DataRepositoryTask_StartTime = DataRepositoryTask.AddMember("StartTime", _StartTime)
-
-	DataRepositoryTask_EndTime = DataRepositoryTask.AddMember("EndTime", _EndTime)
-
-	DataRepositoryTask_ResourceARN = DataRepositoryTask.AddMember("ResourceARN", _ResourceARN)
-
-	DataRepositoryTask_Tags = DataRepositoryTask.AddMember("Tags", _Tags)
-
-	DataRepositoryTask_FileSystemId = DataRepositoryTask.AddMember("FileSystemId", _FileSystemId)
-
-	DataRepositoryTask_Paths = DataRepositoryTask.AddMember("Paths", _DataRepositoryTaskPaths)
-
-	DataRepositoryTask_FailureDetails = DataRepositoryTask.AddMember("FailureDetails", DataRepositoryTaskFailureDetails)
-
-	DataRepositoryTask_Status = DataRepositoryTask.AddMember("Status", DataRepositoryTaskStatus)
-
-	DataRepositoryTask_Report = DataRepositoryTask.AddMember("Report", CompletionReport)
-
-	DataRepositoryTask_CapacityToRelease = DataRepositoryTask.AddMember("CapacityToRelease", _CapacityToRelease)
-
-	DataRepositoryTask_FileCacheId = DataRepositoryTask.AddMember("FileCacheId", _FileCacheId)
-
-	DataRepositoryTask_ReleaseConfiguration = DataRepositoryTask.AddMember("ReleaseConfiguration", ReleaseConfiguration)
-
-	DataRepositoryTaskEnded_Message = DataRepositoryTaskEnded.AddMember("Message", _ErrorMessage)
-
-	DataRepositoryTaskExecuting_Message = DataRepositoryTaskExecuting.AddMember("Message", _ErrorMessage)
-
-	DataRepositoryTaskFilterName_FILE_SYSTEM_ID = DataRepositoryTaskFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
-
-	DataRepositoryTaskFilterName_TASK_LIFECYCLE = DataRepositoryTaskFilterName.AddMember("TASK_LIFECYCLE", smithyprelude.Unit)
-
-	DataRepositoryTaskFilterName_DATA_REPO_ASSOCIATION_ID = DataRepositoryTaskFilterName.AddMember("DATA_REPO_ASSOCIATION_ID", smithyprelude.Unit)
-
-	DataRepositoryTaskFilterName_FILE_CACHE_ID = DataRepositoryTaskFilterName.AddMember("FILE_CACHE_ID", smithyprelude.Unit)
-
-	_DataRepositoryTaskFilterValues_member = _DataRepositoryTaskFilterValues.AddMember("member", _DataRepositoryTaskFilterValue)
-
-	DataRepositoryTaskFilter_Name = DataRepositoryTaskFilter.AddMember("Name", DataRepositoryTaskFilterName)
-
-	DataRepositoryTaskFilter_Values = DataRepositoryTaskFilter.AddMember("Values", _DataRepositoryTaskFilterValues)
-
-	_DataRepositoryTaskFilters_member = _DataRepositoryTaskFilters.AddMember("member", DataRepositoryTaskFilter)
-
-	DataRepositoryTaskNotFound_Message = DataRepositoryTaskNotFound.AddMember("Message", _ErrorMessage)
-
-	_DataRepositoryTasks_member = _DataRepositoryTasks.AddMember("member", DataRepositoryTask)
-
-	DeleteFileSystemLustreConfiguration_SkipFinalBackup = DeleteFileSystemLustreConfiguration.AddMember("SkipFinalBackup", _Flag)
-
-	DeleteFileSystemLustreConfiguration_FinalBackupTags = DeleteFileSystemLustreConfiguration.AddMember("FinalBackupTags", _Tags)
-
-	DeleteFileSystemLustreResponse_FinalBackupId = DeleteFileSystemLustreResponse.AddMember("FinalBackupId", _BackupId)
-
-	DeleteFileSystemLustreResponse_FinalBackupTags = DeleteFileSystemLustreResponse.AddMember("FinalBackupTags", _Tags)
-
-	DeleteFileSystemOpenZFSOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = DeleteFileSystemOpenZFSOption.AddMember("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", smithyprelude.Unit)
-
-	_DeleteFileSystemOpenZFSOptions_member = _DeleteFileSystemOpenZFSOptions.AddMember("member", DeleteFileSystemOpenZFSOption)
-
-	DeleteFileSystemOpenZFSConfiguration_SkipFinalBackup = DeleteFileSystemOpenZFSConfiguration.AddMember("SkipFinalBackup", _Flag)
-
-	DeleteFileSystemOpenZFSConfiguration_FinalBackupTags = DeleteFileSystemOpenZFSConfiguration.AddMember("FinalBackupTags", _Tags)
-
-	DeleteFileSystemOpenZFSConfiguration_Options = DeleteFileSystemOpenZFSConfiguration.AddMember("Options", _DeleteFileSystemOpenZFSOptions)
-
-	DeleteFileSystemOpenZFSResponse_FinalBackupId = DeleteFileSystemOpenZFSResponse.AddMember("FinalBackupId", _BackupId)
-
-	DeleteFileSystemOpenZFSResponse_FinalBackupTags = DeleteFileSystemOpenZFSResponse.AddMember("FinalBackupTags", _Tags)
-
-	DeleteFileSystemWindowsConfiguration_SkipFinalBackup = DeleteFileSystemWindowsConfiguration.AddMember("SkipFinalBackup", _Flag)
-
-	DeleteFileSystemWindowsConfiguration_FinalBackupTags = DeleteFileSystemWindowsConfiguration.AddMember("FinalBackupTags", _Tags)
-
-	DeleteFileSystemWindowsResponse_FinalBackupId = DeleteFileSystemWindowsResponse.AddMember("FinalBackupId", _BackupId)
-
-	DeleteFileSystemWindowsResponse_FinalBackupTags = DeleteFileSystemWindowsResponse.AddMember("FinalBackupTags", _Tags)
-
-	DeleteOpenZFSVolumeOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = DeleteOpenZFSVolumeOption.AddMember("DELETE_CHILD_VOLUMES_AND_SNAPSHOTS", smithyprelude.Unit)
-
-	_DeleteOpenZFSVolumeOptions_member = _DeleteOpenZFSVolumeOptions.AddMember("member", DeleteOpenZFSVolumeOption)
-
-	DeleteVolumeOntapConfiguration_SkipFinalBackup = DeleteVolumeOntapConfiguration.AddMember("SkipFinalBackup", _Flag)
-
-	DeleteVolumeOntapConfiguration_FinalBackupTags = DeleteVolumeOntapConfiguration.AddMember("FinalBackupTags", _Tags)
-
-	DeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention = DeleteVolumeOntapConfiguration.AddMember("BypassSnaplockEnterpriseRetention", _Flag)
-
-	DeleteVolumeOntapResponse_FinalBackupId = DeleteVolumeOntapResponse.AddMember("FinalBackupId", _BackupId)
-
-	DeleteVolumeOntapResponse_FinalBackupTags = DeleteVolumeOntapResponse.AddMember("FinalBackupTags", _Tags)
-
-	DeleteVolumeOpenZFSConfiguration_Options = DeleteVolumeOpenZFSConfiguration.AddMember("Options", _DeleteOpenZFSVolumeOptions)
-
-	FileCacheType_LUSTRE = FileCacheType.AddMember("LUSTRE", smithyprelude.Unit)
-
-	FileCacheLifecycle_AVAILABLE = FileCacheLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	FileCacheLifecycle_CREATING = FileCacheLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	FileCacheLifecycle_DELETING = FileCacheLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	FileCacheLifecycle_UPDATING = FileCacheLifecycle.AddMember("UPDATING", smithyprelude.Unit)
-
-	FileCacheLifecycle_FAILED = FileCacheLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	FileCacheFailureDetails_Message = FileCacheFailureDetails.AddMember("Message", _ErrorMessage)
-
-	FileCacheLustreConfiguration_PerUnitStorageThroughput = FileCacheLustreConfiguration.AddMember("PerUnitStorageThroughput", _PerUnitStorageThroughput)
-
-	FileCacheLustreConfiguration_DeploymentType = FileCacheLustreConfiguration.AddMember("DeploymentType", FileCacheLustreDeploymentType)
-
-	FileCacheLustreConfiguration_MountName = FileCacheLustreConfiguration.AddMember("MountName", _LustreFileSystemMountName)
-
-	FileCacheLustreConfiguration_WeeklyMaintenanceStartTime = FileCacheLustreConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	FileCacheLustreConfiguration_MetadataConfiguration = FileCacheLustreConfiguration.AddMember("MetadataConfiguration", FileCacheLustreMetadataConfiguration)
-
-	FileCacheLustreConfiguration_LogConfiguration = FileCacheLustreConfiguration.AddMember("LogConfiguration", LustreLogConfiguration)
-
-	FileCache_OwnerId = FileCache.AddMember("OwnerId", _AWSAccountId)
-
-	FileCache_CreationTime = FileCache.AddMember("CreationTime", _CreationTime)
-
-	FileCache_FileCacheId = FileCache.AddMember("FileCacheId", _FileCacheId)
-
-	FileCache_FileCacheType = FileCache.AddMember("FileCacheType", FileCacheType)
-
-	FileCache_FileCacheTypeVersion = FileCache.AddMember("FileCacheTypeVersion", _FileSystemTypeVersion)
-
-	FileCache_Lifecycle = FileCache.AddMember("Lifecycle", FileCacheLifecycle)
-
-	FileCache_FailureDetails = FileCache.AddMember("FailureDetails", FileCacheFailureDetails)
-
-	FileCache_StorageCapacity = FileCache.AddMember("StorageCapacity", _StorageCapacity)
-
-	FileCache_VpcId = FileCache.AddMember("VpcId", _VpcId)
-
-	FileCache_SubnetIds = FileCache.AddMember("SubnetIds", _SubnetIds)
-
-	FileCache_NetworkInterfaceIds = FileCache.AddMember("NetworkInterfaceIds", _NetworkInterfaceIds)
-
-	FileCache_DNSName = FileCache.AddMember("DNSName", _DNSName)
-
-	FileCache_KmsKeyId = FileCache.AddMember("KmsKeyId", _KmsKeyId)
-
-	FileCache_ResourceARN = FileCache.AddMember("ResourceARN", _ResourceARN)
-
-	FileCache_LustreConfiguration = FileCache.AddMember("LustreConfiguration", FileCacheLustreConfiguration)
-
-	FileCache_DataRepositoryAssociationIds = FileCache.AddMember("DataRepositoryAssociationIds", _DataRepositoryAssociationIds)
-
-	FileCacheCreating_OwnerId = FileCacheCreating.AddMember("OwnerId", _AWSAccountId)
-
-	FileCacheCreating_CreationTime = FileCacheCreating.AddMember("CreationTime", _CreationTime)
-
-	FileCacheCreating_FileCacheId = FileCacheCreating.AddMember("FileCacheId", _FileCacheId)
-
-	FileCacheCreating_FileCacheType = FileCacheCreating.AddMember("FileCacheType", FileCacheType)
-
-	FileCacheCreating_FileCacheTypeVersion = FileCacheCreating.AddMember("FileCacheTypeVersion", _FileSystemTypeVersion)
-
-	FileCacheCreating_Lifecycle = FileCacheCreating.AddMember("Lifecycle", FileCacheLifecycle)
-
-	FileCacheCreating_FailureDetails = FileCacheCreating.AddMember("FailureDetails", FileCacheFailureDetails)
-
-	FileCacheCreating_StorageCapacity = FileCacheCreating.AddMember("StorageCapacity", _StorageCapacity)
-
-	FileCacheCreating_VpcId = FileCacheCreating.AddMember("VpcId", _VpcId)
-
-	FileCacheCreating_SubnetIds = FileCacheCreating.AddMember("SubnetIds", _SubnetIds)
-
-	FileCacheCreating_NetworkInterfaceIds = FileCacheCreating.AddMember("NetworkInterfaceIds", _NetworkInterfaceIds)
-
-	FileCacheCreating_DNSName = FileCacheCreating.AddMember("DNSName", _DNSName)
-
-	FileCacheCreating_KmsKeyId = FileCacheCreating.AddMember("KmsKeyId", _KmsKeyId)
-
-	FileCacheCreating_ResourceARN = FileCacheCreating.AddMember("ResourceARN", _ResourceARN)
-
-	FileCacheCreating_Tags = FileCacheCreating.AddMember("Tags", _Tags)
-
-	FileCacheCreating_CopyTagsToDataRepositoryAssociations = FileCacheCreating.AddMember("CopyTagsToDataRepositoryAssociations", _CopyTagsToDataRepositoryAssociations)
-
-	FileCacheCreating_LustreConfiguration = FileCacheCreating.AddMember("LustreConfiguration", FileCacheLustreConfiguration)
-
-	FileCacheCreating_DataRepositoryAssociationIds = FileCacheCreating.AddMember("DataRepositoryAssociationIds", _DataRepositoryAssociationIds)
-
-	_FileCacheIds_member = _FileCacheIds.AddMember("member", _FileCacheId)
-
-	FileCacheNotFound_Message = FileCacheNotFound.AddMember("Message", _ErrorMessage)
-
-	_FileCaches_member = _FileCaches.AddMember("member", FileCache)
-
-	_FileSystemIds_member = _FileSystemIds.AddMember("member", _FileSystemId)
-
-	FileSystemNotFound_Message = FileSystemNotFound.AddMember("Message", _ErrorMessage)
-
-	_FileSystems_member = _FileSystems.AddMember("member", FileSystem)
-
-	FilterName_FILE_SYSTEM_ID = FilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
-
-	FilterName_BACKUP_TYPE = FilterName.AddMember("BACKUP_TYPE", smithyprelude.Unit)
-
-	FilterName_FILE_SYSTEM_TYPE = FilterName.AddMember("FILE_SYSTEM_TYPE", smithyprelude.Unit)
-
-	FilterName_VOLUME_ID = FilterName.AddMember("VOLUME_ID", smithyprelude.Unit)
-
-	FilterName_DATA_REPOSITORY_TYPE = FilterName.AddMember("DATA_REPOSITORY_TYPE", smithyprelude.Unit)
-
-	FilterName_FILE_CACHE_ID = FilterName.AddMember("FILE_CACHE_ID", smithyprelude.Unit)
-
-	FilterName_FILE_CACHE_TYPE = FilterName.AddMember("FILE_CACHE_TYPE", smithyprelude.Unit)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
-
-	Filter_Name = Filter.AddMember("Name", FilterName)
-
-	Filter_Values = Filter.AddMember("Values", _FilterValues)
-
-	_Filters_member = _Filters.AddMember("member", Filter)
-
-	IncompatibleParameterError_Parameter = IncompatibleParameterError.AddMember("Parameter", _Parameter)
-
-	IncompatibleParameterError_Message = IncompatibleParameterError.AddMember("Message", _ErrorMessage)
-
-	IncompatibleRegionForMultiAZ_Message = IncompatibleRegionForMultiAZ.AddMember("Message", _ErrorMessage)
-
-	InternalServerError_Message = InternalServerError.AddMember("Message", _ErrorMessage)
-
-	InvalidAccessPoint_ErrorCode = InvalidAccessPoint.AddMember("ErrorCode", _ErrorCode)
-
-	InvalidAccessPoint_Message = InvalidAccessPoint.AddMember("Message", _ErrorMessage)
-
-	InvalidDataRepositoryType_Message = InvalidDataRepositoryType.AddMember("Message", _ErrorMessage)
-
-	InvalidDestinationKmsKey_Message = InvalidDestinationKmsKey.AddMember("Message", _ErrorMessage)
-
-	InvalidExportPath_Message = InvalidExportPath.AddMember("Message", _ErrorMessage)
-
-	InvalidImportPath_Message = InvalidImportPath.AddMember("Message", _ErrorMessage)
-
-	InvalidNetworkSettings_Message = InvalidNetworkSettings.AddMember("Message", _ErrorMessage)
-
-	InvalidNetworkSettings_InvalidSubnetId = InvalidNetworkSettings.AddMember("InvalidSubnetId", _SubnetId)
-
-	InvalidNetworkSettings_InvalidSecurityGroupId = InvalidNetworkSettings.AddMember("InvalidSecurityGroupId", _SecurityGroupId)
-
-	InvalidNetworkSettings_InvalidRouteTableId = InvalidNetworkSettings.AddMember("InvalidRouteTableId", _RouteTableId)
-
-	InvalidPerUnitStorageThroughput_Message = InvalidPerUnitStorageThroughput.AddMember("Message", _ErrorMessage)
-
-	InvalidRegion_Message = InvalidRegion.AddMember("Message", _ErrorMessage)
-
-	InvalidRequest_ErrorCode = InvalidRequest.AddMember("ErrorCode", _ErrorCode)
-
-	InvalidRequest_Message = InvalidRequest.AddMember("Message", _ErrorMessage)
-
-	InvalidSourceKmsKey_Message = InvalidSourceKmsKey.AddMember("Message", _ErrorMessage)
-
-	MissingFileCacheConfiguration_Message = MissingFileCacheConfiguration.AddMember("Message", _ErrorMessage)
-
-	MissingFileSystemConfiguration_Message = MissingFileSystemConfiguration.AddMember("Message", _ErrorMessage)
-
-	MissingVolumeConfiguration_Message = MissingVolumeConfiguration.AddMember("Message", _ErrorMessage)
-
-	NotServiceResourceError_ResourceARN = NotServiceResourceError.AddMember("ResourceARN", _ResourceARN)
-
-	NotServiceResourceError_Message = NotServiceResourceError.AddMember("Message", _ErrorMessage)
-
-	ResourceDoesNotSupportTagging_ResourceARN = ResourceDoesNotSupportTagging.AddMember("ResourceARN", _ResourceARN)
-
-	ResourceDoesNotSupportTagging_Message = ResourceDoesNotSupportTagging.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFound_ResourceARN = ResourceNotFound.AddMember("ResourceARN", _ResourceARN)
-
-	ResourceNotFound_Message = ResourceNotFound.AddMember("Message", _ErrorMessage)
-
-	RestoreOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS = RestoreOpenZFSVolumeOption.AddMember("DELETE_INTERMEDIATE_SNAPSHOTS", smithyprelude.Unit)
-
-	RestoreOpenZFSVolumeOption_DELETE_CLONED_VOLUMES = RestoreOpenZFSVolumeOption.AddMember("DELETE_CLONED_VOLUMES", smithyprelude.Unit)
-
-	_RestoreOpenZFSVolumeOptions_member = _RestoreOpenZFSVolumeOptions.AddMember("member", RestoreOpenZFSVolumeOption)
-
-	S3AccessPoint_ResourceARN = S3AccessPoint.AddMember("ResourceARN", _GeneralARN)
-
-	S3AccessPoint_Alias = S3AccessPoint.AddMember("Alias", _S3AccessPointAlias)
-
-	S3AccessPoint_VpcConfiguration = S3AccessPoint.AddMember("VpcConfiguration", S3AccessPointVpcConfiguration)
-
-	S3AccessPointAttachmentLifecycle_AVAILABLE = S3AccessPointAttachmentLifecycle.AddMember("AVAILABLE", smithyprelude.Unit)
-
-	S3AccessPointAttachmentLifecycle_CREATING = S3AccessPointAttachmentLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	S3AccessPointAttachmentLifecycle_DELETING = S3AccessPointAttachmentLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	S3AccessPointAttachmentLifecycle_UPDATING = S3AccessPointAttachmentLifecycle.AddMember("UPDATING", smithyprelude.Unit)
-
-	S3AccessPointAttachmentLifecycle_FAILED = S3AccessPointAttachmentLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	S3AccessPointAttachmentLifecycle_MISCONFIGURED = S3AccessPointAttachmentLifecycle.AddMember("MISCONFIGURED", smithyprelude.Unit)
-
-	S3AccessPointAttachmentType_OPENZFS = S3AccessPointAttachmentType.AddMember("OPENZFS", smithyprelude.Unit)
-
-	S3AccessPointAttachmentType_ONTAP = S3AccessPointAttachmentType.AddMember("ONTAP", smithyprelude.Unit)
-
-	S3AccessPointOpenZFSConfiguration_VolumeId = S3AccessPointOpenZFSConfiguration.AddMember("VolumeId", _VolumeId)
-
-	S3AccessPointOpenZFSConfiguration_FileSystemIdentity = S3AccessPointOpenZFSConfiguration.AddMember("FileSystemIdentity", OpenZFSFileSystemIdentity)
-
-	S3AccessPointOntapConfiguration_VolumeId = S3AccessPointOntapConfiguration.AddMember("VolumeId", _VolumeId)
-
-	S3AccessPointOntapConfiguration_FileSystemIdentity = S3AccessPointOntapConfiguration.AddMember("FileSystemIdentity", OntapFileSystemIdentity)
-
-	S3AccessPointAttachment_Lifecycle = S3AccessPointAttachment.AddMember("Lifecycle", S3AccessPointAttachmentLifecycle)
-
-	S3AccessPointAttachment_LifecycleTransitionReason = S3AccessPointAttachment.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
-
-	S3AccessPointAttachment_CreationTime = S3AccessPointAttachment.AddMember("CreationTime", _CreationTime)
-
-	S3AccessPointAttachment_Name = S3AccessPointAttachment.AddMember("Name", _S3AccessPointAttachmentName)
-
-	S3AccessPointAttachment_Type = S3AccessPointAttachment.AddMember("Type", S3AccessPointAttachmentType)
-
-	S3AccessPointAttachment_OpenZFSConfiguration = S3AccessPointAttachment.AddMember("OpenZFSConfiguration", S3AccessPointOpenZFSConfiguration)
-
-	S3AccessPointAttachment_OntapConfiguration = S3AccessPointAttachment.AddMember("OntapConfiguration", S3AccessPointOntapConfiguration)
-
-	S3AccessPointAttachment_S3AccessPoint = S3AccessPointAttachment.AddMember("S3AccessPoint", S3AccessPoint)
-
-	_S3AccessPointAttachmentNames_member = _S3AccessPointAttachmentNames.AddMember("member", _S3AccessPointAttachmentName)
-
-	S3AccessPointAttachmentNotFound_Message = S3AccessPointAttachmentNotFound.AddMember("Message", _ErrorMessage)
-
-	_S3AccessPointAttachments_member = _S3AccessPointAttachments.AddMember("member", S3AccessPointAttachment)
-
-	S3AccessPointAttachmentsFilterName_FILE_SYSTEM_ID = S3AccessPointAttachmentsFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
-
-	S3AccessPointAttachmentsFilterName_VOLUME_ID = S3AccessPointAttachmentsFilterName.AddMember("VOLUME_ID", smithyprelude.Unit)
-
-	S3AccessPointAttachmentsFilterName_TYPE = S3AccessPointAttachmentsFilterName.AddMember("TYPE", smithyprelude.Unit)
-
-	_S3AccessPointAttachmentsFilterValues_member = _S3AccessPointAttachmentsFilterValues.AddMember("member", _S3AccessPointAttachmentsFilterValue)
-
-	S3AccessPointAttachmentsFilter_Name = S3AccessPointAttachmentsFilter.AddMember("Name", S3AccessPointAttachmentsFilterName)
-
-	S3AccessPointAttachmentsFilter_Values = S3AccessPointAttachmentsFilter.AddMember("Values", _S3AccessPointAttachmentsFilterValues)
-
-	_S3AccessPointAttachmentsFilters_member = _S3AccessPointAttachmentsFilters.AddMember("member", S3AccessPointAttachmentsFilter)
-
-	_SecurityGroupIds_member = _SecurityGroupIds.AddMember("member", _SecurityGroupId)
-
-	SelfManagedActiveDirectoryConfigurationUpdates_UserName = SelfManagedActiveDirectoryConfigurationUpdates.AddMember("UserName", _DirectoryUserName)
-
-	SelfManagedActiveDirectoryConfigurationUpdates_Password = SelfManagedActiveDirectoryConfigurationUpdates.AddMember("Password", _DirectoryPassword)
-
-	SelfManagedActiveDirectoryConfigurationUpdates_DnsIps = SelfManagedActiveDirectoryConfigurationUpdates.AddMember("DnsIps", _DnsIps)
-
-	SelfManagedActiveDirectoryConfigurationUpdates_DomainName = SelfManagedActiveDirectoryConfigurationUpdates.AddMember("DomainName", _ActiveDirectoryFullyQualifiedName)
-
-	SelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName = SelfManagedActiveDirectoryConfigurationUpdates.AddMember("OrganizationalUnitDistinguishedName", _OrganizationalUnitDistinguishedName)
-
-	SelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup = SelfManagedActiveDirectoryConfigurationUpdates.AddMember("FileSystemAdministratorsGroup", _FileSystemAdministratorsGroupName)
-
-	SelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret = SelfManagedActiveDirectoryConfigurationUpdates.AddMember("DomainJoinServiceAccountSecret", _CustomerSecretsManagerARN)
-
-	ServiceLimit_FILE_SYSTEM_COUNT = ServiceLimit.AddMember("FILE_SYSTEM_COUNT", smithyprelude.Unit)
-
-	ServiceLimit_TOTAL_THROUGHPUT_CAPACITY = ServiceLimit.AddMember("TOTAL_THROUGHPUT_CAPACITY", smithyprelude.Unit)
-
-	ServiceLimit_TOTAL_STORAGE = ServiceLimit.AddMember("TOTAL_STORAGE", smithyprelude.Unit)
-
-	ServiceLimit_TOTAL_USER_INITIATED_BACKUPS = ServiceLimit.AddMember("TOTAL_USER_INITIATED_BACKUPS", smithyprelude.Unit)
-
-	ServiceLimit_TOTAL_USER_TAGS = ServiceLimit.AddMember("TOTAL_USER_TAGS", smithyprelude.Unit)
-
-	ServiceLimit_TOTAL_IN_PROGRESS_COPY_BACKUPS = ServiceLimit.AddMember("TOTAL_IN_PROGRESS_COPY_BACKUPS", smithyprelude.Unit)
-
-	ServiceLimit_STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM = ServiceLimit.AddMember("STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM", smithyprelude.Unit)
-
-	ServiceLimit_VOLUMES_PER_FILE_SYSTEM = ServiceLimit.AddMember("VOLUMES_PER_FILE_SYSTEM", smithyprelude.Unit)
-
-	ServiceLimit_TOTAL_SSD_IOPS = ServiceLimit.AddMember("TOTAL_SSD_IOPS", smithyprelude.Unit)
-
-	ServiceLimit_FILE_CACHE_COUNT = ServiceLimit.AddMember("FILE_CACHE_COUNT", smithyprelude.Unit)
-
-	ServiceLimitExceeded_Limit = ServiceLimitExceeded.AddMember("Limit", ServiceLimit)
-
-	ServiceLimitExceeded_Message = ServiceLimitExceeded.AddMember("Message", _ErrorMessage)
-
-	SnapshotFilterName_FILE_SYSTEM_ID = SnapshotFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
-
-	SnapshotFilterName_VOLUME_ID = SnapshotFilterName.AddMember("VOLUME_ID", smithyprelude.Unit)
-
-	_SnapshotFilterValues_member = _SnapshotFilterValues.AddMember("member", _SnapshotFilterValue)
-
-	SnapshotFilter_Name = SnapshotFilter.AddMember("Name", SnapshotFilterName)
-
-	SnapshotFilter_Values = SnapshotFilter.AddMember("Values", _SnapshotFilterValues)
-
-	_SnapshotFilters_member = _SnapshotFilters.AddMember("member", SnapshotFilter)
-
-	_SnapshotIds_member = _SnapshotIds.AddMember("member", _SnapshotId)
-
-	SnapshotNotFound_Message = SnapshotNotFound.AddMember("Message", _ErrorMessage)
-
-	_Snapshots_member = _Snapshots.AddMember("member", Snapshot)
-
-	SourceBackupUnavailable_Message = SourceBackupUnavailable.AddMember("Message", _ErrorMessage)
-
-	SourceBackupUnavailable_BackupId = SourceBackupUnavailable.AddMember("BackupId", _BackupId)
-
-	SvmActiveDirectoryConfiguration_NetBiosName = SvmActiveDirectoryConfiguration.AddMember("NetBiosName", _NetBiosAlias)
-
-	SvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = SvmActiveDirectoryConfiguration.AddMember("SelfManagedActiveDirectoryConfiguration", SelfManagedActiveDirectoryAttributes)
-
-	SvmEndpoint_DNSName = SvmEndpoint.AddMember("DNSName", _DNSName)
-
-	SvmEndpoint_IpAddresses = SvmEndpoint.AddMember("IpAddresses", _OntapEndpointIpAddresses)
-
-	SvmEndpoint_Ipv6Addresses = SvmEndpoint.AddMember("Ipv6Addresses", _OntapEndpointIpAddresses)
-
-	SvmEndpoints_Iscsi = SvmEndpoints.AddMember("Iscsi", SvmEndpoint)
-
-	SvmEndpoints_Management = SvmEndpoints.AddMember("Management", SvmEndpoint)
-
-	SvmEndpoints_Nfs = SvmEndpoints.AddMember("Nfs", SvmEndpoint)
-
-	SvmEndpoints_Smb = SvmEndpoints.AddMember("Smb", SvmEndpoint)
-
-	StorageVirtualMachineLifecycle_CREATED = StorageVirtualMachineLifecycle.AddMember("CREATED", smithyprelude.Unit)
-
-	StorageVirtualMachineLifecycle_CREATING = StorageVirtualMachineLifecycle.AddMember("CREATING", smithyprelude.Unit)
-
-	StorageVirtualMachineLifecycle_DELETING = StorageVirtualMachineLifecycle.AddMember("DELETING", smithyprelude.Unit)
-
-	StorageVirtualMachineLifecycle_FAILED = StorageVirtualMachineLifecycle.AddMember("FAILED", smithyprelude.Unit)
-
-	StorageVirtualMachineLifecycle_MISCONFIGURED = StorageVirtualMachineLifecycle.AddMember("MISCONFIGURED", smithyprelude.Unit)
-
-	StorageVirtualMachineLifecycle_PENDING = StorageVirtualMachineLifecycle.AddMember("PENDING", smithyprelude.Unit)
-
-	StorageVirtualMachineSubtype_DEFAULT = StorageVirtualMachineSubtype.AddMember("DEFAULT", smithyprelude.Unit)
-
-	StorageVirtualMachineSubtype_DP_DESTINATION = StorageVirtualMachineSubtype.AddMember("DP_DESTINATION", smithyprelude.Unit)
-
-	StorageVirtualMachineSubtype_SYNC_DESTINATION = StorageVirtualMachineSubtype.AddMember("SYNC_DESTINATION", smithyprelude.Unit)
-
-	StorageVirtualMachineSubtype_SYNC_SOURCE = StorageVirtualMachineSubtype.AddMember("SYNC_SOURCE", smithyprelude.Unit)
-
-	StorageVirtualMachineRootVolumeSecurityStyle_UNIX = StorageVirtualMachineRootVolumeSecurityStyle.AddMember("UNIX", smithyprelude.Unit)
-
-	StorageVirtualMachineRootVolumeSecurityStyle_NTFS = StorageVirtualMachineRootVolumeSecurityStyle.AddMember("NTFS", smithyprelude.Unit)
-
-	StorageVirtualMachineRootVolumeSecurityStyle_MIXED = StorageVirtualMachineRootVolumeSecurityStyle.AddMember("MIXED", smithyprelude.Unit)
-
-	StorageVirtualMachine_ActiveDirectoryConfiguration = StorageVirtualMachine.AddMember("ActiveDirectoryConfiguration", SvmActiveDirectoryConfiguration)
-
-	StorageVirtualMachine_CreationTime = StorageVirtualMachine.AddMember("CreationTime", _CreationTime)
-
-	StorageVirtualMachine_Endpoints = StorageVirtualMachine.AddMember("Endpoints", SvmEndpoints)
-
-	StorageVirtualMachine_FileSystemId = StorageVirtualMachine.AddMember("FileSystemId", _FileSystemId)
-
-	StorageVirtualMachine_Lifecycle = StorageVirtualMachine.AddMember("Lifecycle", StorageVirtualMachineLifecycle)
-
-	StorageVirtualMachine_Name = StorageVirtualMachine.AddMember("Name", _StorageVirtualMachineName)
-
-	StorageVirtualMachine_ResourceARN = StorageVirtualMachine.AddMember("ResourceARN", _ResourceARN)
-
-	StorageVirtualMachine_StorageVirtualMachineId = StorageVirtualMachine.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
-
-	StorageVirtualMachine_Subtype = StorageVirtualMachine.AddMember("Subtype", StorageVirtualMachineSubtype)
-
-	StorageVirtualMachine_UUID = StorageVirtualMachine.AddMember("UUID", _UUID)
-
-	StorageVirtualMachine_Tags = StorageVirtualMachine.AddMember("Tags", _Tags)
-
-	StorageVirtualMachine_LifecycleTransitionReason = StorageVirtualMachine.AddMember("LifecycleTransitionReason", LifecycleTransitionReason)
-
-	StorageVirtualMachine_RootVolumeSecurityStyle = StorageVirtualMachine.AddMember("RootVolumeSecurityStyle", StorageVirtualMachineRootVolumeSecurityStyle)
-
-	StorageVirtualMachineFilterName_FILE_SYSTEM_ID = StorageVirtualMachineFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
-
-	_StorageVirtualMachineFilterValues_member = _StorageVirtualMachineFilterValues.AddMember("member", _StorageVirtualMachineFilterValue)
-
-	StorageVirtualMachineFilter_Name = StorageVirtualMachineFilter.AddMember("Name", StorageVirtualMachineFilterName)
-
-	StorageVirtualMachineFilter_Values = StorageVirtualMachineFilter.AddMember("Values", _StorageVirtualMachineFilterValues)
-
-	_StorageVirtualMachineFilters_member = _StorageVirtualMachineFilters.AddMember("member", StorageVirtualMachineFilter)
-
-	_StorageVirtualMachineIds_member = _StorageVirtualMachineIds.AddMember("member", _StorageVirtualMachineId)
-
-	StorageVirtualMachineNotFound_Message = StorageVirtualMachineNotFound.AddMember("Message", _ErrorMessage)
-
-	_StorageVirtualMachines_member = _StorageVirtualMachines.AddMember("member", StorageVirtualMachine)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TaskIds_member = _TaskIds.AddMember("member", _TaskId)
-
-	TooManyAccessPoints_ErrorCode = TooManyAccessPoints.AddMember("ErrorCode", _ErrorCode)
-
-	TooManyAccessPoints_Message = TooManyAccessPoints.AddMember("Message", _ErrorMessage)
-
-	UnsupportedOperation_Message = UnsupportedOperation.AddMember("Message", _ErrorMessage)
-
-	UpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = UpdateFileCacheLustreConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	UpdateFileSystemLustreMetadataConfiguration_Iops = UpdateFileSystemLustreMetadataConfiguration.AddMember("Iops", _MetadataIops)
-
-	UpdateFileSystemLustreMetadataConfiguration_Mode = UpdateFileSystemLustreMetadataConfiguration.AddMember("Mode", MetadataConfigurationMode)
-
-	UpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime = UpdateFileSystemLustreConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	UpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime = UpdateFileSystemLustreConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	UpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays = UpdateFileSystemLustreConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	UpdateFileSystemLustreConfiguration_AutoImportPolicy = UpdateFileSystemLustreConfiguration.AddMember("AutoImportPolicy", AutoImportPolicyType)
-
-	UpdateFileSystemLustreConfiguration_DataCompressionType = UpdateFileSystemLustreConfiguration.AddMember("DataCompressionType", DataCompressionType)
-
-	UpdateFileSystemLustreConfiguration_LogConfiguration = UpdateFileSystemLustreConfiguration.AddMember("LogConfiguration", LustreLogCreateConfiguration)
-
-	UpdateFileSystemLustreConfiguration_RootSquashConfiguration = UpdateFileSystemLustreConfiguration.AddMember("RootSquashConfiguration", LustreRootSquashConfiguration)
-
-	UpdateFileSystemLustreConfiguration_PerUnitStorageThroughput = UpdateFileSystemLustreConfiguration.AddMember("PerUnitStorageThroughput", _PerUnitStorageThroughput)
-
-	UpdateFileSystemLustreConfiguration_MetadataConfiguration = UpdateFileSystemLustreConfiguration.AddMember("MetadataConfiguration", UpdateFileSystemLustreMetadataConfiguration)
-
-	UpdateFileSystemLustreConfiguration_ThroughputCapacity = UpdateFileSystemLustreConfiguration.AddMember("ThroughputCapacity", _ThroughputCapacityMbps)
-
-	UpdateFileSystemLustreConfiguration_DataReadCacheConfiguration = UpdateFileSystemLustreConfiguration.AddMember("DataReadCacheConfiguration", LustreReadCacheConfiguration)
-
-	UpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays = UpdateFileSystemOntapConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	UpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime = UpdateFileSystemOntapConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	UpdateFileSystemOntapConfiguration_FsxAdminPassword = UpdateFileSystemOntapConfiguration.AddMember("FsxAdminPassword", _AdminPassword)
-
-	UpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime = UpdateFileSystemOntapConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	UpdateFileSystemOntapConfiguration_DiskIopsConfiguration = UpdateFileSystemOntapConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	UpdateFileSystemOntapConfiguration_ThroughputCapacity = UpdateFileSystemOntapConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	UpdateFileSystemOntapConfiguration_AddRouteTableIds = UpdateFileSystemOntapConfiguration.AddMember("AddRouteTableIds", _RouteTableIds)
-
-	UpdateFileSystemOntapConfiguration_RemoveRouteTableIds = UpdateFileSystemOntapConfiguration.AddMember("RemoveRouteTableIds", _RouteTableIds)
-
-	UpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair = UpdateFileSystemOntapConfiguration.AddMember("ThroughputCapacityPerHAPair", _ThroughputCapacityPerHAPair)
-
-	UpdateFileSystemOntapConfiguration_HAPairs = UpdateFileSystemOntapConfiguration.AddMember("HAPairs", _HAPairs)
-
-	UpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange = UpdateFileSystemOntapConfiguration.AddMember("EndpointIpv6AddressRange", _Ipv6AddressRange)
-
-	UpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays = UpdateFileSystemOpenZFSConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	UpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups = UpdateFileSystemOpenZFSConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	UpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes = UpdateFileSystemOpenZFSConfiguration.AddMember("CopyTagsToVolumes", _Flag)
-
-	UpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime = UpdateFileSystemOpenZFSConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	UpdateFileSystemOpenZFSConfiguration_ThroughputCapacity = UpdateFileSystemOpenZFSConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	UpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime = UpdateFileSystemOpenZFSConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	UpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration = UpdateFileSystemOpenZFSConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds = UpdateFileSystemOpenZFSConfiguration.AddMember("AddRouteTableIds", _RouteTableIds)
-
-	UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds = UpdateFileSystemOpenZFSConfiguration.AddMember("RemoveRouteTableIds", _RouteTableIds)
-
-	UpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration = UpdateFileSystemOpenZFSConfiguration.AddMember("ReadCacheConfiguration", OpenZFSReadCacheConfiguration)
-
-	UpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange = UpdateFileSystemOpenZFSConfiguration.AddMember("EndpointIpv6AddressRange", _Ipv6AddressRange)
-
-	UpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime = UpdateFileSystemWindowsConfiguration.AddMember("WeeklyMaintenanceStartTime", _WeeklyTime)
-
-	UpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime = UpdateFileSystemWindowsConfiguration.AddMember("DailyAutomaticBackupStartTime", _DailyTime)
-
-	UpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays = UpdateFileSystemWindowsConfiguration.AddMember("AutomaticBackupRetentionDays", _AutomaticBackupRetentionDays)
-
-	UpdateFileSystemWindowsConfiguration_ThroughputCapacity = UpdateFileSystemWindowsConfiguration.AddMember("ThroughputCapacity", _MegabytesPerSecond)
-
-	UpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration = UpdateFileSystemWindowsConfiguration.AddMember("SelfManagedActiveDirectoryConfiguration", SelfManagedActiveDirectoryConfigurationUpdates)
-
-	UpdateFileSystemWindowsConfiguration_AuditLogConfiguration = UpdateFileSystemWindowsConfiguration.AddMember("AuditLogConfiguration", WindowsAuditLogCreateConfiguration)
-
-	UpdateFileSystemWindowsConfiguration_DiskIopsConfiguration = UpdateFileSystemWindowsConfiguration.AddMember("DiskIopsConfiguration", DiskIopsConfiguration)
-
-	UpdateFileSystemWindowsConfiguration_FsrmConfiguration = UpdateFileSystemWindowsConfiguration.AddMember("FsrmConfiguration", WindowsFsrmConfiguration)
-
-	UpdateSnaplockConfiguration_AuditLogVolume = UpdateSnaplockConfiguration.AddMember("AuditLogVolume", _Flag)
-
-	UpdateSnaplockConfiguration_AutocommitPeriod = UpdateSnaplockConfiguration.AddMember("AutocommitPeriod", AutocommitPeriod)
-
-	UpdateSnaplockConfiguration_PrivilegedDelete = UpdateSnaplockConfiguration.AddMember("PrivilegedDelete", PrivilegedDelete)
-
-	UpdateSnaplockConfiguration_RetentionPeriod = UpdateSnaplockConfiguration.AddMember("RetentionPeriod", SnaplockRetentionPeriod)
-
-	UpdateSnaplockConfiguration_VolumeAppendModeEnabled = UpdateSnaplockConfiguration.AddMember("VolumeAppendModeEnabled", _Flag)
-
-	UpdateOntapVolumeConfiguration_JunctionPath = UpdateOntapVolumeConfiguration.AddMember("JunctionPath", _JunctionPath)
-
-	UpdateOntapVolumeConfiguration_SecurityStyle = UpdateOntapVolumeConfiguration.AddMember("SecurityStyle", SecurityStyle)
-
-	UpdateOntapVolumeConfiguration_SizeInMegabytes = UpdateOntapVolumeConfiguration.AddMember("SizeInMegabytes", _VolumeCapacity)
-
-	UpdateOntapVolumeConfiguration_StorageEfficiencyEnabled = UpdateOntapVolumeConfiguration.AddMember("StorageEfficiencyEnabled", _Flag)
-
-	UpdateOntapVolumeConfiguration_TieringPolicy = UpdateOntapVolumeConfiguration.AddMember("TieringPolicy", TieringPolicy)
-
-	UpdateOntapVolumeConfiguration_SnapshotPolicy = UpdateOntapVolumeConfiguration.AddMember("SnapshotPolicy", _SnapshotPolicy)
-
-	UpdateOntapVolumeConfiguration_CopyTagsToBackups = UpdateOntapVolumeConfiguration.AddMember("CopyTagsToBackups", _Flag)
-
-	UpdateOntapVolumeConfiguration_SnaplockConfiguration = UpdateOntapVolumeConfiguration.AddMember("SnaplockConfiguration", UpdateSnaplockConfiguration)
-
-	UpdateOntapVolumeConfiguration_SizeInBytes = UpdateOntapVolumeConfiguration.AddMember("SizeInBytes", _VolumeCapacityBytes)
-
-	UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = UpdateOpenZFSVolumeConfiguration.AddMember("StorageCapacityReservationGiB", _IntegerNoMaxFromNegativeOne)
-
-	UpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = UpdateOpenZFSVolumeConfiguration.AddMember("StorageCapacityQuotaGiB", _IntegerNoMaxFromNegativeOne)
-
-	UpdateOpenZFSVolumeConfiguration_RecordSizeKiB = UpdateOpenZFSVolumeConfiguration.AddMember("RecordSizeKiB", _IntegerRecordSizeKiB)
-
-	UpdateOpenZFSVolumeConfiguration_DataCompressionType = UpdateOpenZFSVolumeConfiguration.AddMember("DataCompressionType", OpenZFSDataCompressionType)
-
-	UpdateOpenZFSVolumeConfiguration_NfsExports = UpdateOpenZFSVolumeConfiguration.AddMember("NfsExports", _OpenZFSNfsExports)
-
-	UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas = UpdateOpenZFSVolumeConfiguration.AddMember("UserAndGroupQuotas", _OpenZFSUserAndGroupQuotas)
-
-	UpdateOpenZFSVolumeConfiguration_ReadOnly = UpdateOpenZFSVolumeConfiguration.AddMember("ReadOnly", _ReadOnly)
-
-	UpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS = UpdateOpenZFSVolumeOption.AddMember("DELETE_INTERMEDIATE_SNAPSHOTS", smithyprelude.Unit)
-
-	UpdateOpenZFSVolumeOption_DELETE_CLONED_VOLUMES = UpdateOpenZFSVolumeOption.AddMember("DELETE_CLONED_VOLUMES", smithyprelude.Unit)
-
-	UpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_DATA = UpdateOpenZFSVolumeOption.AddMember("DELETE_INTERMEDIATE_DATA", smithyprelude.Unit)
-
-	_UpdateOpenZFSVolumeOptions_member = _UpdateOpenZFSVolumeOptions.AddMember("member", UpdateOpenZFSVolumeOption)
-
-	UpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = UpdateSvmActiveDirectoryConfiguration.AddMember("SelfManagedActiveDirectoryConfiguration", SelfManagedActiveDirectoryConfigurationUpdates)
-
-	UpdateSvmActiveDirectoryConfiguration_NetBiosName = UpdateSvmActiveDirectoryConfiguration.AddMember("NetBiosName", _NetBiosAlias)
-
-	VolumeFilterName_FILE_SYSTEM_ID = VolumeFilterName.AddMember("FILE_SYSTEM_ID", smithyprelude.Unit)
-
-	VolumeFilterName_STORAGE_VIRTUAL_MACHINE_ID = VolumeFilterName.AddMember("STORAGE_VIRTUAL_MACHINE_ID", smithyprelude.Unit)
-
-	_VolumeFilterValues_member = _VolumeFilterValues.AddMember("member", _VolumeFilterValue)
-
-	VolumeFilter_Name = VolumeFilter.AddMember("Name", VolumeFilterName)
-
-	VolumeFilter_Values = VolumeFilter.AddMember("Values", _VolumeFilterValues)
-
-	_VolumeFilters_member = _VolumeFilters.AddMember("member", VolumeFilter)
-
-	_VolumeIds_member = _VolumeIds.AddMember("member", _VolumeId)
-
-	VolumeNotFound_Message = VolumeNotFound.AddMember("Message", _ErrorMessage)
-
-	_Volumes_member = _Volumes.AddMember("member", Volume)
-
-	AssociateFileSystemAliasesRequest_ClientRequestToken = AssociateFileSystemAliasesRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	AssociateFileSystemAliasesRequest_FileSystemId = AssociateFileSystemAliasesRequest.AddMember("FileSystemId", _FileSystemId)
-
-	AssociateFileSystemAliasesRequest_Aliases = AssociateFileSystemAliasesRequest.AddMember("Aliases", _AlternateDNSNames)
-
-	AssociateFileSystemAliasesResponse_Aliases = AssociateFileSystemAliasesResponse.AddMember("Aliases", _Aliases)
-
-	CancelDataRepositoryTaskRequest_TaskId = CancelDataRepositoryTaskRequest.AddMember("TaskId", _TaskId)
-
-	CancelDataRepositoryTaskResponse_Lifecycle = CancelDataRepositoryTaskResponse.AddMember("Lifecycle", DataRepositoryTaskLifecycle)
-
-	CancelDataRepositoryTaskResponse_TaskId = CancelDataRepositoryTaskResponse.AddMember("TaskId", _TaskId)
-
-	CopyBackupRequest_ClientRequestToken = CopyBackupRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CopyBackupRequest_SourceBackupId = CopyBackupRequest.AddMember("SourceBackupId", _SourceBackupId)
-
-	CopyBackupRequest_SourceRegion = CopyBackupRequest.AddMember("SourceRegion", _Region)
-
-	CopyBackupRequest_KmsKeyId = CopyBackupRequest.AddMember("KmsKeyId", _KmsKeyId)
-
-	CopyBackupRequest_CopyTags = CopyBackupRequest.AddMember("CopyTags", _Flag)
-
-	CopyBackupRequest_Tags = CopyBackupRequest.AddMember("Tags", _Tags)
-
-	CopyBackupResponse_Backup = CopyBackupResponse.AddMember("Backup", Backup)
-
-	CopySnapshotAndUpdateVolumeRequest_ClientRequestToken = CopySnapshotAndUpdateVolumeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CopySnapshotAndUpdateVolumeRequest_VolumeId = CopySnapshotAndUpdateVolumeRequest.AddMember("VolumeId", _VolumeId)
-
-	CopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN = CopySnapshotAndUpdateVolumeRequest.AddMember("SourceSnapshotARN", _ResourceARN)
-
-	CopySnapshotAndUpdateVolumeRequest_CopyStrategy = CopySnapshotAndUpdateVolumeRequest.AddMember("CopyStrategy", OpenZFSCopyStrategy)
-
-	CopySnapshotAndUpdateVolumeRequest_Options = CopySnapshotAndUpdateVolumeRequest.AddMember("Options", _UpdateOpenZFSVolumeOptions)
-
-	CopySnapshotAndUpdateVolumeResponse_VolumeId = CopySnapshotAndUpdateVolumeResponse.AddMember("VolumeId", _VolumeId)
-
-	CopySnapshotAndUpdateVolumeResponse_Lifecycle = CopySnapshotAndUpdateVolumeResponse.AddMember("Lifecycle", VolumeLifecycle)
-
-	CopySnapshotAndUpdateVolumeResponse_AdministrativeActions = CopySnapshotAndUpdateVolumeResponse.AddMember("AdministrativeActions", _AdministrativeActions)
-
-	CreateAndAttachS3AccessPointRequest_ClientRequestToken = CreateAndAttachS3AccessPointRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateAndAttachS3AccessPointRequest_Name = CreateAndAttachS3AccessPointRequest.AddMember("Name", _S3AccessPointAttachmentName)
-
-	CreateAndAttachS3AccessPointRequest_Type = CreateAndAttachS3AccessPointRequest.AddMember("Type", S3AccessPointAttachmentType)
-
-	CreateAndAttachS3AccessPointRequest_OpenZFSConfiguration = CreateAndAttachS3AccessPointRequest.AddMember("OpenZFSConfiguration", CreateAndAttachS3AccessPointOpenZFSConfiguration)
-
-	CreateAndAttachS3AccessPointRequest_OntapConfiguration = CreateAndAttachS3AccessPointRequest.AddMember("OntapConfiguration", CreateAndAttachS3AccessPointOntapConfiguration)
-
-	CreateAndAttachS3AccessPointRequest_S3AccessPoint = CreateAndAttachS3AccessPointRequest.AddMember("S3AccessPoint", CreateAndAttachS3AccessPointS3Configuration)
-
-	CreateAndAttachS3AccessPointResponse_S3AccessPointAttachment = CreateAndAttachS3AccessPointResponse.AddMember("S3AccessPointAttachment", S3AccessPointAttachment)
-
-	CreateBackupRequest_FileSystemId = CreateBackupRequest.AddMember("FileSystemId", _FileSystemId)
-
-	CreateBackupRequest_ClientRequestToken = CreateBackupRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateBackupRequest_Tags = CreateBackupRequest.AddMember("Tags", _Tags)
-
-	CreateBackupRequest_VolumeId = CreateBackupRequest.AddMember("VolumeId", _VolumeId)
-
-	CreateBackupResponse_Backup = CreateBackupResponse.AddMember("Backup", Backup)
-
-	CreateDataRepositoryAssociationRequest_FileSystemId = CreateDataRepositoryAssociationRequest.AddMember("FileSystemId", _FileSystemId)
-
-	CreateDataRepositoryAssociationRequest_FileSystemPath = CreateDataRepositoryAssociationRequest.AddMember("FileSystemPath", _Namespace)
-
-	CreateDataRepositoryAssociationRequest_DataRepositoryPath = CreateDataRepositoryAssociationRequest.AddMember("DataRepositoryPath", _ArchivePath)
-
-	CreateDataRepositoryAssociationRequest_BatchImportMetaDataOnCreate = CreateDataRepositoryAssociationRequest.AddMember("BatchImportMetaDataOnCreate", _BatchImportMetaDataOnCreate)
-
-	CreateDataRepositoryAssociationRequest_ImportedFileChunkSize = CreateDataRepositoryAssociationRequest.AddMember("ImportedFileChunkSize", _Megabytes)
-
-	CreateDataRepositoryAssociationRequest_S3 = CreateDataRepositoryAssociationRequest.AddMember("S3", S3DataRepositoryConfiguration)
-
-	CreateDataRepositoryAssociationRequest_ClientRequestToken = CreateDataRepositoryAssociationRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateDataRepositoryAssociationRequest_Tags = CreateDataRepositoryAssociationRequest.AddMember("Tags", _Tags)
-
-	CreateDataRepositoryAssociationResponse_Association = CreateDataRepositoryAssociationResponse.AddMember("Association", DataRepositoryAssociation)
-
-	CreateDataRepositoryTaskRequest_Type = CreateDataRepositoryTaskRequest.AddMember("Type", DataRepositoryTaskType)
-
-	CreateDataRepositoryTaskRequest_Paths = CreateDataRepositoryTaskRequest.AddMember("Paths", _DataRepositoryTaskPaths)
-
-	CreateDataRepositoryTaskRequest_FileSystemId = CreateDataRepositoryTaskRequest.AddMember("FileSystemId", _FileSystemId)
-
-	CreateDataRepositoryTaskRequest_Report = CreateDataRepositoryTaskRequest.AddMember("Report", CompletionReport)
-
-	CreateDataRepositoryTaskRequest_ClientRequestToken = CreateDataRepositoryTaskRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateDataRepositoryTaskRequest_Tags = CreateDataRepositoryTaskRequest.AddMember("Tags", _Tags)
-
-	CreateDataRepositoryTaskRequest_CapacityToRelease = CreateDataRepositoryTaskRequest.AddMember("CapacityToRelease", _CapacityToRelease)
-
-	CreateDataRepositoryTaskRequest_ReleaseConfiguration = CreateDataRepositoryTaskRequest.AddMember("ReleaseConfiguration", ReleaseConfiguration)
-
-	CreateDataRepositoryTaskResponse_DataRepositoryTask = CreateDataRepositoryTaskResponse.AddMember("DataRepositoryTask", DataRepositoryTask)
-
-	CreateFileCacheRequest_ClientRequestToken = CreateFileCacheRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateFileCacheRequest_FileCacheType = CreateFileCacheRequest.AddMember("FileCacheType", FileCacheType)
-
-	CreateFileCacheRequest_FileCacheTypeVersion = CreateFileCacheRequest.AddMember("FileCacheTypeVersion", _FileSystemTypeVersion)
-
-	CreateFileCacheRequest_StorageCapacity = CreateFileCacheRequest.AddMember("StorageCapacity", _StorageCapacity)
-
-	CreateFileCacheRequest_SubnetIds = CreateFileCacheRequest.AddMember("SubnetIds", _SubnetIds)
-
-	CreateFileCacheRequest_SecurityGroupIds = CreateFileCacheRequest.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	CreateFileCacheRequest_Tags = CreateFileCacheRequest.AddMember("Tags", _Tags)
-
-	CreateFileCacheRequest_CopyTagsToDataRepositoryAssociations = CreateFileCacheRequest.AddMember("CopyTagsToDataRepositoryAssociations", _CopyTagsToDataRepositoryAssociations)
-
-	CreateFileCacheRequest_KmsKeyId = CreateFileCacheRequest.AddMember("KmsKeyId", _KmsKeyId)
-
-	CreateFileCacheRequest_LustreConfiguration = CreateFileCacheRequest.AddMember("LustreConfiguration", CreateFileCacheLustreConfiguration)
-
-	CreateFileCacheRequest_DataRepositoryAssociations = CreateFileCacheRequest.AddMember("DataRepositoryAssociations", _CreateFileCacheDataRepositoryAssociations)
-
-	CreateFileCacheResponse_FileCache = CreateFileCacheResponse.AddMember("FileCache", FileCacheCreating)
-
-	CreateFileSystemFromBackupRequest_BackupId = CreateFileSystemFromBackupRequest.AddMember("BackupId", _BackupId)
-
-	CreateFileSystemFromBackupRequest_ClientRequestToken = CreateFileSystemFromBackupRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateFileSystemFromBackupRequest_SubnetIds = CreateFileSystemFromBackupRequest.AddMember("SubnetIds", _SubnetIds)
-
-	CreateFileSystemFromBackupRequest_SecurityGroupIds = CreateFileSystemFromBackupRequest.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	CreateFileSystemFromBackupRequest_Tags = CreateFileSystemFromBackupRequest.AddMember("Tags", _Tags)
-
-	CreateFileSystemFromBackupRequest_WindowsConfiguration = CreateFileSystemFromBackupRequest.AddMember("WindowsConfiguration", CreateFileSystemWindowsConfiguration)
-
-	CreateFileSystemFromBackupRequest_LustreConfiguration = CreateFileSystemFromBackupRequest.AddMember("LustreConfiguration", CreateFileSystemLustreConfiguration)
-
-	CreateFileSystemFromBackupRequest_StorageType = CreateFileSystemFromBackupRequest.AddMember("StorageType", StorageType)
-
-	CreateFileSystemFromBackupRequest_KmsKeyId = CreateFileSystemFromBackupRequest.AddMember("KmsKeyId", _KmsKeyId)
-
-	CreateFileSystemFromBackupRequest_FileSystemTypeVersion = CreateFileSystemFromBackupRequest.AddMember("FileSystemTypeVersion", _FileSystemTypeVersion)
-
-	CreateFileSystemFromBackupRequest_OpenZFSConfiguration = CreateFileSystemFromBackupRequest.AddMember("OpenZFSConfiguration", CreateFileSystemOpenZFSConfiguration)
-
-	CreateFileSystemFromBackupRequest_StorageCapacity = CreateFileSystemFromBackupRequest.AddMember("StorageCapacity", _StorageCapacity)
-
-	CreateFileSystemFromBackupRequest_NetworkType = CreateFileSystemFromBackupRequest.AddMember("NetworkType", NetworkType)
-
-	CreateFileSystemFromBackupResponse_FileSystem = CreateFileSystemFromBackupResponse.AddMember("FileSystem", FileSystem)
-
-	CreateFileSystemRequest_ClientRequestToken = CreateFileSystemRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateFileSystemRequest_FileSystemType = CreateFileSystemRequest.AddMember("FileSystemType", FileSystemType)
-
-	CreateFileSystemRequest_StorageCapacity = CreateFileSystemRequest.AddMember("StorageCapacity", _StorageCapacity)
-
-	CreateFileSystemRequest_StorageType = CreateFileSystemRequest.AddMember("StorageType", StorageType)
-
-	CreateFileSystemRequest_SubnetIds = CreateFileSystemRequest.AddMember("SubnetIds", _SubnetIds)
-
-	CreateFileSystemRequest_SecurityGroupIds = CreateFileSystemRequest.AddMember("SecurityGroupIds", _SecurityGroupIds)
-
-	CreateFileSystemRequest_Tags = CreateFileSystemRequest.AddMember("Tags", _Tags)
-
-	CreateFileSystemRequest_KmsKeyId = CreateFileSystemRequest.AddMember("KmsKeyId", _KmsKeyId)
-
-	CreateFileSystemRequest_WindowsConfiguration = CreateFileSystemRequest.AddMember("WindowsConfiguration", CreateFileSystemWindowsConfiguration)
-
-	CreateFileSystemRequest_LustreConfiguration = CreateFileSystemRequest.AddMember("LustreConfiguration", CreateFileSystemLustreConfiguration)
-
-	CreateFileSystemRequest_OntapConfiguration = CreateFileSystemRequest.AddMember("OntapConfiguration", CreateFileSystemOntapConfiguration)
-
-	CreateFileSystemRequest_FileSystemTypeVersion = CreateFileSystemRequest.AddMember("FileSystemTypeVersion", _FileSystemTypeVersion)
-
-	CreateFileSystemRequest_OpenZFSConfiguration = CreateFileSystemRequest.AddMember("OpenZFSConfiguration", CreateFileSystemOpenZFSConfiguration)
-
-	CreateFileSystemRequest_NetworkType = CreateFileSystemRequest.AddMember("NetworkType", NetworkType)
-
-	CreateFileSystemResponse_FileSystem = CreateFileSystemResponse.AddMember("FileSystem", FileSystem)
-
-	CreateSnapshotRequest_ClientRequestToken = CreateSnapshotRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateSnapshotRequest_Name = CreateSnapshotRequest.AddMember("Name", _SnapshotName)
-
-	CreateSnapshotRequest_VolumeId = CreateSnapshotRequest.AddMember("VolumeId", _VolumeId)
-
-	CreateSnapshotRequest_Tags = CreateSnapshotRequest.AddMember("Tags", _Tags)
-
-	CreateSnapshotResponse_Snapshot = CreateSnapshotResponse.AddMember("Snapshot", Snapshot)
-
-	CreateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = CreateStorageVirtualMachineRequest.AddMember("ActiveDirectoryConfiguration", CreateSvmActiveDirectoryConfiguration)
-
-	CreateStorageVirtualMachineRequest_ClientRequestToken = CreateStorageVirtualMachineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateStorageVirtualMachineRequest_FileSystemId = CreateStorageVirtualMachineRequest.AddMember("FileSystemId", _FileSystemId)
-
-	CreateStorageVirtualMachineRequest_Name = CreateStorageVirtualMachineRequest.AddMember("Name", _StorageVirtualMachineName)
-
-	CreateStorageVirtualMachineRequest_SvmAdminPassword = CreateStorageVirtualMachineRequest.AddMember("SvmAdminPassword", _AdminPassword)
-
-	CreateStorageVirtualMachineRequest_Tags = CreateStorageVirtualMachineRequest.AddMember("Tags", _Tags)
-
-	CreateStorageVirtualMachineRequest_RootVolumeSecurityStyle = CreateStorageVirtualMachineRequest.AddMember("RootVolumeSecurityStyle", StorageVirtualMachineRootVolumeSecurityStyle)
-
-	CreateStorageVirtualMachineResponse_StorageVirtualMachine = CreateStorageVirtualMachineResponse.AddMember("StorageVirtualMachine", StorageVirtualMachine)
-
-	CreateVolumeFromBackupRequest_BackupId = CreateVolumeFromBackupRequest.AddMember("BackupId", _BackupId)
-
-	CreateVolumeFromBackupRequest_ClientRequestToken = CreateVolumeFromBackupRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateVolumeFromBackupRequest_Name = CreateVolumeFromBackupRequest.AddMember("Name", _VolumeName)
-
-	CreateVolumeFromBackupRequest_OntapConfiguration = CreateVolumeFromBackupRequest.AddMember("OntapConfiguration", CreateOntapVolumeConfiguration)
-
-	CreateVolumeFromBackupRequest_Tags = CreateVolumeFromBackupRequest.AddMember("Tags", _Tags)
-
-	CreateVolumeFromBackupResponse_Volume = CreateVolumeFromBackupResponse.AddMember("Volume", Volume)
-
-	CreateVolumeRequest_ClientRequestToken = CreateVolumeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateVolumeRequest_VolumeType = CreateVolumeRequest.AddMember("VolumeType", VolumeType)
-
-	CreateVolumeRequest_Name = CreateVolumeRequest.AddMember("Name", _VolumeName)
-
-	CreateVolumeRequest_OntapConfiguration = CreateVolumeRequest.AddMember("OntapConfiguration", CreateOntapVolumeConfiguration)
-
-	CreateVolumeRequest_Tags = CreateVolumeRequest.AddMember("Tags", _Tags)
-
-	CreateVolumeRequest_OpenZFSConfiguration = CreateVolumeRequest.AddMember("OpenZFSConfiguration", CreateOpenZFSVolumeConfiguration)
-
-	CreateVolumeResponse_Volume = CreateVolumeResponse.AddMember("Volume", Volume)
-
-	DeleteBackupRequest_BackupId = DeleteBackupRequest.AddMember("BackupId", _BackupId)
-
-	DeleteBackupRequest_ClientRequestToken = DeleteBackupRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DeleteBackupResponse_BackupId = DeleteBackupResponse.AddMember("BackupId", _BackupId)
-
-	DeleteBackupResponse_Lifecycle = DeleteBackupResponse.AddMember("Lifecycle", BackupLifecycle)
-
-	DeleteDataRepositoryAssociationRequest_AssociationId = DeleteDataRepositoryAssociationRequest.AddMember("AssociationId", _DataRepositoryAssociationId)
-
-	DeleteDataRepositoryAssociationRequest_ClientRequestToken = DeleteDataRepositoryAssociationRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem = DeleteDataRepositoryAssociationRequest.AddMember("DeleteDataInFileSystem", _DeleteDataInFileSystem)
-
-	DeleteDataRepositoryAssociationResponse_AssociationId = DeleteDataRepositoryAssociationResponse.AddMember("AssociationId", _DataRepositoryAssociationId)
-
-	DeleteDataRepositoryAssociationResponse_Lifecycle = DeleteDataRepositoryAssociationResponse.AddMember("Lifecycle", DataRepositoryLifecycle)
-
-	DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem = DeleteDataRepositoryAssociationResponse.AddMember("DeleteDataInFileSystem", _DeleteDataInFileSystem)
-
-	DeleteFileCacheRequest_FileCacheId = DeleteFileCacheRequest.AddMember("FileCacheId", _FileCacheId)
-
-	DeleteFileCacheRequest_ClientRequestToken = DeleteFileCacheRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DeleteFileCacheResponse_FileCacheId = DeleteFileCacheResponse.AddMember("FileCacheId", _FileCacheId)
-
-	DeleteFileCacheResponse_Lifecycle = DeleteFileCacheResponse.AddMember("Lifecycle", FileCacheLifecycle)
-
-	DeleteFileSystemRequest_FileSystemId = DeleteFileSystemRequest.AddMember("FileSystemId", _FileSystemId)
-
-	DeleteFileSystemRequest_ClientRequestToken = DeleteFileSystemRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DeleteFileSystemRequest_WindowsConfiguration = DeleteFileSystemRequest.AddMember("WindowsConfiguration", DeleteFileSystemWindowsConfiguration)
-
-	DeleteFileSystemRequest_LustreConfiguration = DeleteFileSystemRequest.AddMember("LustreConfiguration", DeleteFileSystemLustreConfiguration)
-
-	DeleteFileSystemRequest_OpenZFSConfiguration = DeleteFileSystemRequest.AddMember("OpenZFSConfiguration", DeleteFileSystemOpenZFSConfiguration)
-
-	DeleteFileSystemResponse_FileSystemId = DeleteFileSystemResponse.AddMember("FileSystemId", _FileSystemId)
-
-	DeleteFileSystemResponse_Lifecycle = DeleteFileSystemResponse.AddMember("Lifecycle", FileSystemLifecycle)
-
-	DeleteFileSystemResponse_WindowsResponse = DeleteFileSystemResponse.AddMember("WindowsResponse", DeleteFileSystemWindowsResponse)
-
-	DeleteFileSystemResponse_LustreResponse = DeleteFileSystemResponse.AddMember("LustreResponse", DeleteFileSystemLustreResponse)
-
-	DeleteFileSystemResponse_OpenZFSResponse = DeleteFileSystemResponse.AddMember("OpenZFSResponse", DeleteFileSystemOpenZFSResponse)
-
-	DeleteSnapshotRequest_ClientRequestToken = DeleteSnapshotRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DeleteSnapshotRequest_SnapshotId = DeleteSnapshotRequest.AddMember("SnapshotId", _SnapshotId)
-
-	DeleteSnapshotResponse_SnapshotId = DeleteSnapshotResponse.AddMember("SnapshotId", _SnapshotId)
-
-	DeleteSnapshotResponse_Lifecycle = DeleteSnapshotResponse.AddMember("Lifecycle", SnapshotLifecycle)
-
-	DeleteStorageVirtualMachineRequest_ClientRequestToken = DeleteStorageVirtualMachineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DeleteStorageVirtualMachineRequest_StorageVirtualMachineId = DeleteStorageVirtualMachineRequest.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
-
-	DeleteStorageVirtualMachineResponse_StorageVirtualMachineId = DeleteStorageVirtualMachineResponse.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
-
-	DeleteStorageVirtualMachineResponse_Lifecycle = DeleteStorageVirtualMachineResponse.AddMember("Lifecycle", StorageVirtualMachineLifecycle)
-
-	DeleteVolumeRequest_ClientRequestToken = DeleteVolumeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DeleteVolumeRequest_VolumeId = DeleteVolumeRequest.AddMember("VolumeId", _VolumeId)
-
-	DeleteVolumeRequest_OntapConfiguration = DeleteVolumeRequest.AddMember("OntapConfiguration", DeleteVolumeOntapConfiguration)
-
-	DeleteVolumeRequest_OpenZFSConfiguration = DeleteVolumeRequest.AddMember("OpenZFSConfiguration", DeleteVolumeOpenZFSConfiguration)
-
-	DeleteVolumeResponse_VolumeId = DeleteVolumeResponse.AddMember("VolumeId", _VolumeId)
-
-	DeleteVolumeResponse_Lifecycle = DeleteVolumeResponse.AddMember("Lifecycle", VolumeLifecycle)
-
-	DeleteVolumeResponse_OntapResponse = DeleteVolumeResponse.AddMember("OntapResponse", DeleteVolumeOntapResponse)
-
-	DescribeBackupsRequest_BackupIds = DescribeBackupsRequest.AddMember("BackupIds", _BackupIds)
-
-	DescribeBackupsRequest_Filters = DescribeBackupsRequest.AddMember("Filters", _Filters)
-
-	DescribeBackupsRequest_MaxResults = DescribeBackupsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeBackupsRequest_NextToken = DescribeBackupsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeBackupsResponse_Backups = DescribeBackupsResponse.AddMember("Backups", _Backups)
-
-	DescribeBackupsResponse_NextToken = DescribeBackupsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeDataRepositoryAssociationsRequest_AssociationIds = DescribeDataRepositoryAssociationsRequest.AddMember("AssociationIds", _DataRepositoryAssociationIds)
-
-	DescribeDataRepositoryAssociationsRequest_Filters = DescribeDataRepositoryAssociationsRequest.AddMember("Filters", _Filters)
-
-	DescribeDataRepositoryAssociationsRequest_MaxResults = DescribeDataRepositoryAssociationsRequest.AddMember("MaxResults", _LimitedMaxResults)
-
-	DescribeDataRepositoryAssociationsRequest_NextToken = DescribeDataRepositoryAssociationsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeDataRepositoryAssociationsResponse_Associations = DescribeDataRepositoryAssociationsResponse.AddMember("Associations", _DataRepositoryAssociations)
-
-	DescribeDataRepositoryAssociationsResponse_NextToken = DescribeDataRepositoryAssociationsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeDataRepositoryTasksRequest_TaskIds = DescribeDataRepositoryTasksRequest.AddMember("TaskIds", _TaskIds)
-
-	DescribeDataRepositoryTasksRequest_Filters = DescribeDataRepositoryTasksRequest.AddMember("Filters", _DataRepositoryTaskFilters)
-
-	DescribeDataRepositoryTasksRequest_MaxResults = DescribeDataRepositoryTasksRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeDataRepositoryTasksRequest_NextToken = DescribeDataRepositoryTasksRequest.AddMember("NextToken", _NextToken)
-
-	DescribeDataRepositoryTasksResponse_DataRepositoryTasks = DescribeDataRepositoryTasksResponse.AddMember("DataRepositoryTasks", _DataRepositoryTasks)
-
-	DescribeDataRepositoryTasksResponse_NextToken = DescribeDataRepositoryTasksResponse.AddMember("NextToken", _NextToken)
-
-	DescribeFileCachesRequest_FileCacheIds = DescribeFileCachesRequest.AddMember("FileCacheIds", _FileCacheIds)
-
-	DescribeFileCachesRequest_MaxResults = DescribeFileCachesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeFileCachesRequest_NextToken = DescribeFileCachesRequest.AddMember("NextToken", _NextToken)
-
-	DescribeFileCachesResponse_FileCaches = DescribeFileCachesResponse.AddMember("FileCaches", _FileCaches)
-
-	DescribeFileCachesResponse_NextToken = DescribeFileCachesResponse.AddMember("NextToken", _NextToken)
-
-	DescribeFileSystemAliasesRequest_ClientRequestToken = DescribeFileSystemAliasesRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DescribeFileSystemAliasesRequest_FileSystemId = DescribeFileSystemAliasesRequest.AddMember("FileSystemId", _FileSystemId)
-
-	DescribeFileSystemAliasesRequest_MaxResults = DescribeFileSystemAliasesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeFileSystemAliasesRequest_NextToken = DescribeFileSystemAliasesRequest.AddMember("NextToken", _NextToken)
-
-	DescribeFileSystemAliasesResponse_Aliases = DescribeFileSystemAliasesResponse.AddMember("Aliases", _Aliases)
-
-	DescribeFileSystemAliasesResponse_NextToken = DescribeFileSystemAliasesResponse.AddMember("NextToken", _NextToken)
-
-	DescribeFileSystemsRequest_FileSystemIds = DescribeFileSystemsRequest.AddMember("FileSystemIds", _FileSystemIds)
-
-	DescribeFileSystemsRequest_MaxResults = DescribeFileSystemsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeFileSystemsRequest_NextToken = DescribeFileSystemsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeFileSystemsResponse_FileSystems = DescribeFileSystemsResponse.AddMember("FileSystems", _FileSystems)
-
-	DescribeFileSystemsResponse_NextToken = DescribeFileSystemsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeS3AccessPointAttachmentsRequest_Names = DescribeS3AccessPointAttachmentsRequest.AddMember("Names", _S3AccessPointAttachmentNames)
-
-	DescribeS3AccessPointAttachmentsRequest_Filters = DescribeS3AccessPointAttachmentsRequest.AddMember("Filters", _S3AccessPointAttachmentsFilters)
-
-	DescribeS3AccessPointAttachmentsRequest_MaxResults = DescribeS3AccessPointAttachmentsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeS3AccessPointAttachmentsRequest_NextToken = DescribeS3AccessPointAttachmentsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments = DescribeS3AccessPointAttachmentsResponse.AddMember("S3AccessPointAttachments", _S3AccessPointAttachments)
-
-	DescribeS3AccessPointAttachmentsResponse_NextToken = DescribeS3AccessPointAttachmentsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = DescribeSharedVpcConfigurationResponse.AddMember("EnableFsxRouteTableUpdatesFromParticipantAccounts", _VerboseFlag)
-
-	DescribeSnapshotsRequest_SnapshotIds = DescribeSnapshotsRequest.AddMember("SnapshotIds", _SnapshotIds)
-
-	DescribeSnapshotsRequest_Filters = DescribeSnapshotsRequest.AddMember("Filters", _SnapshotFilters)
-
-	DescribeSnapshotsRequest_MaxResults = DescribeSnapshotsRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeSnapshotsRequest_NextToken = DescribeSnapshotsRequest.AddMember("NextToken", _NextToken)
-
-	DescribeSnapshotsRequest_IncludeShared = DescribeSnapshotsRequest.AddMember("IncludeShared", _IncludeShared)
-
-	DescribeSnapshotsResponse_Snapshots = DescribeSnapshotsResponse.AddMember("Snapshots", _Snapshots)
-
-	DescribeSnapshotsResponse_NextToken = DescribeSnapshotsResponse.AddMember("NextToken", _NextToken)
-
-	DescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds = DescribeStorageVirtualMachinesRequest.AddMember("StorageVirtualMachineIds", _StorageVirtualMachineIds)
-
-	DescribeStorageVirtualMachinesRequest_Filters = DescribeStorageVirtualMachinesRequest.AddMember("Filters", _StorageVirtualMachineFilters)
-
-	DescribeStorageVirtualMachinesRequest_MaxResults = DescribeStorageVirtualMachinesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeStorageVirtualMachinesRequest_NextToken = DescribeStorageVirtualMachinesRequest.AddMember("NextToken", _NextToken)
-
-	DescribeStorageVirtualMachinesResponse_StorageVirtualMachines = DescribeStorageVirtualMachinesResponse.AddMember("StorageVirtualMachines", _StorageVirtualMachines)
-
-	DescribeStorageVirtualMachinesResponse_NextToken = DescribeStorageVirtualMachinesResponse.AddMember("NextToken", _NextToken)
-
-	DescribeVolumesRequest_VolumeIds = DescribeVolumesRequest.AddMember("VolumeIds", _VolumeIds)
-
-	DescribeVolumesRequest_Filters = DescribeVolumesRequest.AddMember("Filters", _VolumeFilters)
-
-	DescribeVolumesRequest_MaxResults = DescribeVolumesRequest.AddMember("MaxResults", _MaxResults)
-
-	DescribeVolumesRequest_NextToken = DescribeVolumesRequest.AddMember("NextToken", _NextToken)
-
-	DescribeVolumesResponse_Volumes = DescribeVolumesResponse.AddMember("Volumes", _Volumes)
-
-	DescribeVolumesResponse_NextToken = DescribeVolumesResponse.AddMember("NextToken", _NextToken)
-
-	DetachAndDeleteS3AccessPointRequest_ClientRequestToken = DetachAndDeleteS3AccessPointRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DetachAndDeleteS3AccessPointRequest_Name = DetachAndDeleteS3AccessPointRequest.AddMember("Name", _S3AccessPointAttachmentName)
-
-	DetachAndDeleteS3AccessPointResponse_Lifecycle = DetachAndDeleteS3AccessPointResponse.AddMember("Lifecycle", S3AccessPointAttachmentLifecycle)
-
-	DetachAndDeleteS3AccessPointResponse_Name = DetachAndDeleteS3AccessPointResponse.AddMember("Name", _S3AccessPointAttachmentName)
-
-	DisassociateFileSystemAliasesRequest_ClientRequestToken = DisassociateFileSystemAliasesRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	DisassociateFileSystemAliasesRequest_FileSystemId = DisassociateFileSystemAliasesRequest.AddMember("FileSystemId", _FileSystemId)
-
-	DisassociateFileSystemAliasesRequest_Aliases = DisassociateFileSystemAliasesRequest.AddMember("Aliases", _AlternateDNSNames)
-
-	DisassociateFileSystemAliasesResponse_Aliases = DisassociateFileSystemAliasesResponse.AddMember("Aliases", _Aliases)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _ResourceARN)
-
-	ListTagsForResourceRequest_MaxResults = ListTagsForResourceRequest.AddMember("MaxResults", _MaxResults)
-
-	ListTagsForResourceRequest_NextToken = ListTagsForResourceRequest.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	ListTagsForResourceResponse_NextToken = ListTagsForResourceResponse.AddMember("NextToken", _NextToken)
-
-	ReleaseFileSystemNfsV3LocksRequest_FileSystemId = ReleaseFileSystemNfsV3LocksRequest.AddMember("FileSystemId", _FileSystemId)
-
-	ReleaseFileSystemNfsV3LocksRequest_ClientRequestToken = ReleaseFileSystemNfsV3LocksRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	ReleaseFileSystemNfsV3LocksResponse_FileSystem = ReleaseFileSystemNfsV3LocksResponse.AddMember("FileSystem", FileSystem)
-
-	RestoreVolumeFromSnapshotRequest_ClientRequestToken = RestoreVolumeFromSnapshotRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	RestoreVolumeFromSnapshotRequest_VolumeId = RestoreVolumeFromSnapshotRequest.AddMember("VolumeId", _VolumeId)
-
-	RestoreVolumeFromSnapshotRequest_SnapshotId = RestoreVolumeFromSnapshotRequest.AddMember("SnapshotId", _SnapshotId)
-
-	RestoreVolumeFromSnapshotRequest_Options = RestoreVolumeFromSnapshotRequest.AddMember("Options", _RestoreOpenZFSVolumeOptions)
-
-	RestoreVolumeFromSnapshotResponse_VolumeId = RestoreVolumeFromSnapshotResponse.AddMember("VolumeId", _VolumeId)
-
-	RestoreVolumeFromSnapshotResponse_Lifecycle = RestoreVolumeFromSnapshotResponse.AddMember("Lifecycle", VolumeLifecycle)
-
-	RestoreVolumeFromSnapshotResponse_AdministrativeActions = RestoreVolumeFromSnapshotResponse.AddMember("AdministrativeActions", _AdministrativeActions)
-
-	StartMisconfiguredStateRecoveryRequest_ClientRequestToken = StartMisconfiguredStateRecoveryRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartMisconfiguredStateRecoveryRequest_FileSystemId = StartMisconfiguredStateRecoveryRequest.AddMember("FileSystemId", _FileSystemId)
-
-	StartMisconfiguredStateRecoveryResponse_FileSystem = StartMisconfiguredStateRecoveryResponse.AddMember("FileSystem", FileSystem)
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _ResourceARN)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _Tags)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _ResourceARN)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeys)
-
-	UpdateDataRepositoryAssociationRequest_AssociationId = UpdateDataRepositoryAssociationRequest.AddMember("AssociationId", _DataRepositoryAssociationId)
-
-	UpdateDataRepositoryAssociationRequest_ClientRequestToken = UpdateDataRepositoryAssociationRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateDataRepositoryAssociationRequest_ImportedFileChunkSize = UpdateDataRepositoryAssociationRequest.AddMember("ImportedFileChunkSize", _Megabytes)
-
-	UpdateDataRepositoryAssociationRequest_S3 = UpdateDataRepositoryAssociationRequest.AddMember("S3", S3DataRepositoryConfiguration)
-
-	UpdateDataRepositoryAssociationResponse_Association = UpdateDataRepositoryAssociationResponse.AddMember("Association", DataRepositoryAssociation)
-
-	UpdateFileCacheRequest_FileCacheId = UpdateFileCacheRequest.AddMember("FileCacheId", _FileCacheId)
-
-	UpdateFileCacheRequest_ClientRequestToken = UpdateFileCacheRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateFileCacheRequest_LustreConfiguration = UpdateFileCacheRequest.AddMember("LustreConfiguration", UpdateFileCacheLustreConfiguration)
-
-	UpdateFileCacheResponse_FileCache = UpdateFileCacheResponse.AddMember("FileCache", FileCache)
-
-	UpdateFileSystemRequest_FileSystemId = UpdateFileSystemRequest.AddMember("FileSystemId", _FileSystemId)
-
-	UpdateFileSystemRequest_ClientRequestToken = UpdateFileSystemRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateFileSystemRequest_StorageCapacity = UpdateFileSystemRequest.AddMember("StorageCapacity", _StorageCapacity)
-
-	UpdateFileSystemRequest_WindowsConfiguration = UpdateFileSystemRequest.AddMember("WindowsConfiguration", UpdateFileSystemWindowsConfiguration)
-
-	UpdateFileSystemRequest_LustreConfiguration = UpdateFileSystemRequest.AddMember("LustreConfiguration", UpdateFileSystemLustreConfiguration)
-
-	UpdateFileSystemRequest_OntapConfiguration = UpdateFileSystemRequest.AddMember("OntapConfiguration", UpdateFileSystemOntapConfiguration)
-
-	UpdateFileSystemRequest_OpenZFSConfiguration = UpdateFileSystemRequest.AddMember("OpenZFSConfiguration", UpdateFileSystemOpenZFSConfiguration)
-
-	UpdateFileSystemRequest_StorageType = UpdateFileSystemRequest.AddMember("StorageType", StorageType)
-
-	UpdateFileSystemRequest_FileSystemTypeVersion = UpdateFileSystemRequest.AddMember("FileSystemTypeVersion", _FileSystemTypeVersion)
-
-	UpdateFileSystemRequest_NetworkType = UpdateFileSystemRequest.AddMember("NetworkType", NetworkType)
-
-	UpdateFileSystemResponse_FileSystem = UpdateFileSystemResponse.AddMember("FileSystem", FileSystem)
-
-	UpdateSharedVpcConfigurationRequest_EnableFsxRouteTableUpdatesFromParticipantAccounts = UpdateSharedVpcConfigurationRequest.AddMember("EnableFsxRouteTableUpdatesFromParticipantAccounts", _VerboseFlag)
-
-	UpdateSharedVpcConfigurationRequest_ClientRequestToken = UpdateSharedVpcConfigurationRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = UpdateSharedVpcConfigurationResponse.AddMember("EnableFsxRouteTableUpdatesFromParticipantAccounts", _VerboseFlag)
-
-	UpdateSnapshotRequest_ClientRequestToken = UpdateSnapshotRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateSnapshotRequest_Name = UpdateSnapshotRequest.AddMember("Name", _SnapshotName)
-
-	UpdateSnapshotRequest_SnapshotId = UpdateSnapshotRequest.AddMember("SnapshotId", _SnapshotId)
-
-	UpdateSnapshotResponse_Snapshot = UpdateSnapshotResponse.AddMember("Snapshot", Snapshot)
-
-	UpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = UpdateStorageVirtualMachineRequest.AddMember("ActiveDirectoryConfiguration", UpdateSvmActiveDirectoryConfiguration)
-
-	UpdateStorageVirtualMachineRequest_ClientRequestToken = UpdateStorageVirtualMachineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateStorageVirtualMachineRequest_StorageVirtualMachineId = UpdateStorageVirtualMachineRequest.AddMember("StorageVirtualMachineId", _StorageVirtualMachineId)
-
-	UpdateStorageVirtualMachineRequest_SvmAdminPassword = UpdateStorageVirtualMachineRequest.AddMember("SvmAdminPassword", _AdminPassword)
-
-	UpdateStorageVirtualMachineResponse_StorageVirtualMachine = UpdateStorageVirtualMachineResponse.AddMember("StorageVirtualMachine", StorageVirtualMachine)
-
-	UpdateVolumeRequest_ClientRequestToken = UpdateVolumeRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	UpdateVolumeRequest_VolumeId = UpdateVolumeRequest.AddMember("VolumeId", _VolumeId)
-
-	UpdateVolumeRequest_OntapConfiguration = UpdateVolumeRequest.AddMember("OntapConfiguration", UpdateOntapVolumeConfiguration)
-
-	UpdateVolumeRequest_Name = UpdateVolumeRequest.AddMember("Name", _VolumeName)
-
-	UpdateVolumeRequest_OpenZFSConfiguration = UpdateVolumeRequest.AddMember("OpenZFSConfiguration", UpdateOpenZFSVolumeConfiguration)
-
-	UpdateVolumeResponse_Volume = UpdateVolumeResponse.AddMember("Volume", Volume)
-
+	s_AdministrativeActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAdministrativeAction, Members: &mAdministrativeAction, Type: smithy.ShapeTypeStructure})
 }
+
+var AssociateFileSystemAliases = &sAssociateFileSystemAliases
+
+var CancelDataRepositoryTask = &sCancelDataRepositoryTask
+
+var CopyBackup = &sCopyBackup
+
+var CopySnapshotAndUpdateVolume = &sCopySnapshotAndUpdateVolume
+
+var CreateAndAttachS3AccessPoint = &sCreateAndAttachS3AccessPoint
+
+var CreateBackup = &sCreateBackup
+
+var CreateDataRepositoryAssociation = &sCreateDataRepositoryAssociation
+
+var CreateDataRepositoryTask = &sCreateDataRepositoryTask
+
+var CreateFileCache = &sCreateFileCache
+
+var CreateFileSystem = &sCreateFileSystem
+
+var CreateFileSystemFromBackup = &sCreateFileSystemFromBackup
+
+var CreateSnapshot = &sCreateSnapshot
+
+var CreateStorageVirtualMachine = &sCreateStorageVirtualMachine
+
+var CreateVolume = &sCreateVolume
+
+var CreateVolumeFromBackup = &sCreateVolumeFromBackup
+
+var DeleteBackup = &sDeleteBackup
+
+var DeleteDataRepositoryAssociation = &sDeleteDataRepositoryAssociation
+
+var DeleteFileCache = &sDeleteFileCache
+
+var DeleteFileSystem = &sDeleteFileSystem
+
+var DeleteSnapshot = &sDeleteSnapshot
+
+var DeleteStorageVirtualMachine = &sDeleteStorageVirtualMachine
+
+var DeleteVolume = &sDeleteVolume
+
+var DescribeBackups = &sDescribeBackups
+
+var DescribeDataRepositoryAssociations = &sDescribeDataRepositoryAssociations
+
+var DescribeDataRepositoryTasks = &sDescribeDataRepositoryTasks
+
+var DescribeFileCaches = &sDescribeFileCaches
+
+var DescribeFileSystemAliases = &sDescribeFileSystemAliases
+
+var DescribeFileSystems = &sDescribeFileSystems
+
+var DescribeS3AccessPointAttachments = &sDescribeS3AccessPointAttachments
+
+var DescribeSharedVpcConfiguration = &sDescribeSharedVpcConfiguration
+
+var DescribeSnapshots = &sDescribeSnapshots
+
+var DescribeStorageVirtualMachines = &sDescribeStorageVirtualMachines
+
+var DescribeVolumes = &sDescribeVolumes
+
+var DetachAndDeleteS3AccessPoint = &sDetachAndDeleteS3AccessPoint
+
+var DisassociateFileSystemAliases = &sDisassociateFileSystemAliases
+
+var ListTagsForResource = &sListTagsForResource
+
+var ReleaseFileSystemNfsV3Locks = &sReleaseFileSystemNfsV3Locks
+
+var RestoreVolumeFromSnapshot = &sRestoreVolumeFromSnapshot
+
+var StartMisconfiguredStateRecovery = &sStartMisconfiguredStateRecovery
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateDataRepositoryAssociation = &sUpdateDataRepositoryAssociation
+
+var UpdateFileCache = &sUpdateFileCache
+
+var UpdateFileSystem = &sUpdateFileSystem
+
+var UpdateSharedVpcConfiguration = &sUpdateSharedVpcConfiguration
+
+var UpdateSnapshot = &sUpdateSnapshot
+
+var UpdateStorageVirtualMachine = &sUpdateStorageVirtualMachine
+
+var UpdateVolume = &sUpdateVolume
+
+var _AWSSimbaAPIService_v20180301 = &s_AWSSimbaAPIService_v20180301
+
+var AccessPointAlreadyOwnedByYou = &sAccessPointAlreadyOwnedByYou
+var AccessPointAlreadyOwnedByYou_ErrorCode = &sAccessPointAlreadyOwnedByYou_ErrorCode
+var AccessPointAlreadyOwnedByYou_Message = &sAccessPointAlreadyOwnedByYou_Message
+
+var _AccessPointPolicy = &s_AccessPointPolicy
+
+var ActiveDirectoryBackupAttributes = &sActiveDirectoryBackupAttributes
+var ActiveDirectoryBackupAttributes_DomainName = &sActiveDirectoryBackupAttributes_DomainName
+var ActiveDirectoryBackupAttributes_ActiveDirectoryId = &sActiveDirectoryBackupAttributes_ActiveDirectoryId
+var ActiveDirectoryBackupAttributes_ResourceARN = &sActiveDirectoryBackupAttributes_ResourceARN
+
+var ActiveDirectoryError = &sActiveDirectoryError
+var ActiveDirectoryError_ActiveDirectoryId = &sActiveDirectoryError_ActiveDirectoryId
+var ActiveDirectoryError_Type = &sActiveDirectoryError_Type
+var ActiveDirectoryError_Message = &sActiveDirectoryError_Message
+
+var ActiveDirectoryErrorType = &sActiveDirectoryErrorType
+var ActiveDirectoryErrorType_DOMAIN_NOT_FOUND = &sActiveDirectoryErrorType_DOMAIN_NOT_FOUND
+var ActiveDirectoryErrorType_INCOMPATIBLE_DOMAIN_MODE = &sActiveDirectoryErrorType_INCOMPATIBLE_DOMAIN_MODE
+var ActiveDirectoryErrorType_WRONG_VPC = &sActiveDirectoryErrorType_WRONG_VPC
+var ActiveDirectoryErrorType_INVALID_NETWORK_TYPE = &sActiveDirectoryErrorType_INVALID_NETWORK_TYPE
+var ActiveDirectoryErrorType_INVALID_DOMAIN_STAGE = &sActiveDirectoryErrorType_INVALID_DOMAIN_STAGE
+
+var _ActiveDirectoryFullyQualifiedName = &s_ActiveDirectoryFullyQualifiedName
+
+var AdministrativeAction = &sAdministrativeAction
+var AdministrativeAction_AdministrativeActionType = &sAdministrativeAction_AdministrativeActionType
+var AdministrativeAction_ProgressPercent = &sAdministrativeAction_ProgressPercent
+var AdministrativeAction_RequestTime = &sAdministrativeAction_RequestTime
+var AdministrativeAction_Status = &sAdministrativeAction_Status
+var AdministrativeAction_TargetFileSystemValues = &sAdministrativeAction_TargetFileSystemValues
+var AdministrativeAction_FailureDetails = &sAdministrativeAction_FailureDetails
+var AdministrativeAction_TargetVolumeValues = &sAdministrativeAction_TargetVolumeValues
+var AdministrativeAction_TargetSnapshotValues = &sAdministrativeAction_TargetSnapshotValues
+var AdministrativeAction_TotalTransferBytes = &sAdministrativeAction_TotalTransferBytes
+var AdministrativeAction_RemainingTransferBytes = &sAdministrativeAction_RemainingTransferBytes
+var AdministrativeAction_Message = &sAdministrativeAction_Message
+
+var AdministrativeActionFailureDetails = &sAdministrativeActionFailureDetails
+var AdministrativeActionFailureDetails_Message = &sAdministrativeActionFailureDetails_Message
+
+var _AdministrativeActions = &s_AdministrativeActions
+var _AdministrativeActions_member = &s_AdministrativeActions_member
+
+var AdministrativeActionType = &sAdministrativeActionType
+var AdministrativeActionType_FILE_SYSTEM_UPDATE = &sAdministrativeActionType_FILE_SYSTEM_UPDATE
+var AdministrativeActionType_STORAGE_OPTIMIZATION = &sAdministrativeActionType_STORAGE_OPTIMIZATION
+var AdministrativeActionType_FILE_SYSTEM_ALIAS_ASSOCIATION = &sAdministrativeActionType_FILE_SYSTEM_ALIAS_ASSOCIATION
+var AdministrativeActionType_FILE_SYSTEM_ALIAS_DISASSOCIATION = &sAdministrativeActionType_FILE_SYSTEM_ALIAS_DISASSOCIATION
+var AdministrativeActionType_VOLUME_UPDATE = &sAdministrativeActionType_VOLUME_UPDATE
+var AdministrativeActionType_SNAPSHOT_UPDATE = &sAdministrativeActionType_SNAPSHOT_UPDATE
+var AdministrativeActionType_RELEASE_NFS_V3_LOCKS = &sAdministrativeActionType_RELEASE_NFS_V3_LOCKS
+var AdministrativeActionType_VOLUME_RESTORE = &sAdministrativeActionType_VOLUME_RESTORE
+var AdministrativeActionType_THROUGHPUT_OPTIMIZATION = &sAdministrativeActionType_THROUGHPUT_OPTIMIZATION
+var AdministrativeActionType_IOPS_OPTIMIZATION = &sAdministrativeActionType_IOPS_OPTIMIZATION
+var AdministrativeActionType_STORAGE_TYPE_OPTIMIZATION = &sAdministrativeActionType_STORAGE_TYPE_OPTIMIZATION
+var AdministrativeActionType_MISCONFIGURED_STATE_RECOVERY = &sAdministrativeActionType_MISCONFIGURED_STATE_RECOVERY
+var AdministrativeActionType_VOLUME_UPDATE_WITH_SNAPSHOT = &sAdministrativeActionType_VOLUME_UPDATE_WITH_SNAPSHOT
+var AdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT = &sAdministrativeActionType_VOLUME_INITIALIZE_WITH_SNAPSHOT
+var AdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP = &sAdministrativeActionType_DOWNLOAD_DATA_FROM_BACKUP
+
+var _AdminPassword = &s_AdminPassword
+
+var _Aggregate = &s_Aggregate
+
+var AggregateConfiguration = &sAggregateConfiguration
+var AggregateConfiguration_Aggregates = &sAggregateConfiguration_Aggregates
+var AggregateConfiguration_TotalConstituents = &sAggregateConfiguration_TotalConstituents
+
+var _AggregateListMultiplier = &s_AggregateListMultiplier
+
+var _Aggregates = &s_Aggregates
+var _Aggregates_member = &s_Aggregates_member
+
+var Alias = &sAlias
+var Alias_Name = &sAlias_Name
+var Alias_Lifecycle = &sAlias_Lifecycle
+
+var _Aliases = &s_Aliases
+var _Aliases_member = &s_Aliases_member
+
+var AliasLifecycle = &sAliasLifecycle
+var AliasLifecycle_AVAILABLE = &sAliasLifecycle_AVAILABLE
+var AliasLifecycle_CREATING = &sAliasLifecycle_CREATING
+var AliasLifecycle_DELETING = &sAliasLifecycle_DELETING
+var AliasLifecycle_CREATE_FAILED = &sAliasLifecycle_CREATE_FAILED
+var AliasLifecycle_DELETE_FAILED = &sAliasLifecycle_DELETE_FAILED
+
+var _AlternateDNSName = &s_AlternateDNSName
+
+var _AlternateDNSNames = &s_AlternateDNSNames
+var _AlternateDNSNames_member = &s_AlternateDNSNames_member
+
+var _ArchivePath = &s_ArchivePath
+
+var AutocommitPeriod = &sAutocommitPeriod
+var AutocommitPeriod_Type = &sAutocommitPeriod_Type
+var AutocommitPeriod_Value = &sAutocommitPeriod_Value
+
+var AutocommitPeriodType = &sAutocommitPeriodType
+var AutocommitPeriodType_MINUTES = &sAutocommitPeriodType_MINUTES
+var AutocommitPeriodType_HOURS = &sAutocommitPeriodType_HOURS
+var AutocommitPeriodType_DAYS = &sAutocommitPeriodType_DAYS
+var AutocommitPeriodType_MONTHS = &sAutocommitPeriodType_MONTHS
+var AutocommitPeriodType_YEARS = &sAutocommitPeriodType_YEARS
+var AutocommitPeriodType_NONE = &sAutocommitPeriodType_NONE
+
+var _AutocommitPeriodValue = &s_AutocommitPeriodValue
+
+var AutoExportPolicy = &sAutoExportPolicy
+var AutoExportPolicy_Events = &sAutoExportPolicy_Events
+
+var AutoImportPolicy = &sAutoImportPolicy
+var AutoImportPolicy_Events = &sAutoImportPolicy_Events
+
+var AutoImportPolicyType = &sAutoImportPolicyType
+var AutoImportPolicyType_NONE = &sAutoImportPolicyType_NONE
+var AutoImportPolicyType_NEW = &sAutoImportPolicyType_NEW
+var AutoImportPolicyType_NEW_CHANGED = &sAutoImportPolicyType_NEW_CHANGED
+var AutoImportPolicyType_NEW_CHANGED_DELETED = &sAutoImportPolicyType_NEW_CHANGED_DELETED
+
+var _AutomaticBackupRetentionDays = &s_AutomaticBackupRetentionDays
+
+var _AWSAccountId = &s_AWSAccountId
+
+var Backup = &sBackup
+var Backup_BackupId = &sBackup_BackupId
+var Backup_Lifecycle = &sBackup_Lifecycle
+var Backup_FailureDetails = &sBackup_FailureDetails
+var Backup_Type = &sBackup_Type
+var Backup_ProgressPercent = &sBackup_ProgressPercent
+var Backup_CreationTime = &sBackup_CreationTime
+var Backup_KmsKeyId = &sBackup_KmsKeyId
+var Backup_ResourceARN = &sBackup_ResourceARN
+var Backup_Tags = &sBackup_Tags
+var Backup_FileSystem = &sBackup_FileSystem
+var Backup_DirectoryInformation = &sBackup_DirectoryInformation
+var Backup_OwnerId = &sBackup_OwnerId
+var Backup_SourceBackupId = &sBackup_SourceBackupId
+var Backup_SourceBackupRegion = &sBackup_SourceBackupRegion
+var Backup_ResourceType = &sBackup_ResourceType
+var Backup_Volume = &sBackup_Volume
+var Backup_SizeInBytes = &sBackup_SizeInBytes
+
+var BackupBeingCopied = &sBackupBeingCopied
+var BackupBeingCopied_Message = &sBackupBeingCopied_Message
+var BackupBeingCopied_BackupId = &sBackupBeingCopied_BackupId
+
+var BackupFailureDetails = &sBackupFailureDetails
+var BackupFailureDetails_Message = &sBackupFailureDetails_Message
+
+var _BackupId = &s_BackupId
+
+var _BackupIds = &s_BackupIds
+var _BackupIds_member = &s_BackupIds_member
+
+var BackupInProgress = &sBackupInProgress
+var BackupInProgress_Message = &sBackupInProgress_Message
+
+var BackupLifecycle = &sBackupLifecycle
+var BackupLifecycle_AVAILABLE = &sBackupLifecycle_AVAILABLE
+var BackupLifecycle_CREATING = &sBackupLifecycle_CREATING
+var BackupLifecycle_TRANSFERRING = &sBackupLifecycle_TRANSFERRING
+var BackupLifecycle_DELETED = &sBackupLifecycle_DELETED
+var BackupLifecycle_FAILED = &sBackupLifecycle_FAILED
+var BackupLifecycle_PENDING = &sBackupLifecycle_PENDING
+var BackupLifecycle_COPYING = &sBackupLifecycle_COPYING
+
+var BackupNotFound = &sBackupNotFound
+var BackupNotFound_Message = &sBackupNotFound_Message
+
+var BackupRestoring = &sBackupRestoring
+var BackupRestoring_Message = &sBackupRestoring_Message
+var BackupRestoring_FileSystemId = &sBackupRestoring_FileSystemId
+
+var _Backups = &s_Backups
+var _Backups_member = &s_Backups_member
+
+var BackupType = &sBackupType
+var BackupType_AUTOMATIC = &sBackupType_AUTOMATIC
+var BackupType_USER_INITIATED = &sBackupType_USER_INITIATED
+var BackupType_AWS_BACKUP = &sBackupType_AWS_BACKUP
+
+var BadRequest = &sBadRequest
+var BadRequest_Message = &sBadRequest_Message
+
+var _BatchImportMetaDataOnCreate = &s_BatchImportMetaDataOnCreate
+
+var _CapacityToRelease = &s_CapacityToRelease
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var CompletionReport = &sCompletionReport
+var CompletionReport_Enabled = &sCompletionReport_Enabled
+var CompletionReport_Path = &sCompletionReport_Path
+var CompletionReport_Format = &sCompletionReport_Format
+var CompletionReport_Scope = &sCompletionReport_Scope
+
+var _CoolingPeriod = &s_CoolingPeriod
+
+var _CopyTagsToDataRepositoryAssociations = &s_CopyTagsToDataRepositoryAssociations
+
+var CreateAggregateConfiguration = &sCreateAggregateConfiguration
+var CreateAggregateConfiguration_Aggregates = &sCreateAggregateConfiguration_Aggregates
+var CreateAggregateConfiguration_ConstituentsPerAggregate = &sCreateAggregateConfiguration_ConstituentsPerAggregate
+
+var CreateAndAttachS3AccessPointOntapConfiguration = &sCreateAndAttachS3AccessPointOntapConfiguration
+var CreateAndAttachS3AccessPointOntapConfiguration_VolumeId = &sCreateAndAttachS3AccessPointOntapConfiguration_VolumeId
+var CreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity = &sCreateAndAttachS3AccessPointOntapConfiguration_FileSystemIdentity
+
+var CreateAndAttachS3AccessPointOpenZFSConfiguration = &sCreateAndAttachS3AccessPointOpenZFSConfiguration
+var CreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId = &sCreateAndAttachS3AccessPointOpenZFSConfiguration_VolumeId
+var CreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity = &sCreateAndAttachS3AccessPointOpenZFSConfiguration_FileSystemIdentity
+
+var CreateAndAttachS3AccessPointS3Configuration = &sCreateAndAttachS3AccessPointS3Configuration
+var CreateAndAttachS3AccessPointS3Configuration_VpcConfiguration = &sCreateAndAttachS3AccessPointS3Configuration_VpcConfiguration
+var CreateAndAttachS3AccessPointS3Configuration_Policy = &sCreateAndAttachS3AccessPointS3Configuration_Policy
+
+var _CreateFileCacheDataRepositoryAssociations = &s_CreateFileCacheDataRepositoryAssociations
+var _CreateFileCacheDataRepositoryAssociations_member = &s_CreateFileCacheDataRepositoryAssociations_member
+
+var CreateFileCacheLustreConfiguration = &sCreateFileCacheLustreConfiguration
+var CreateFileCacheLustreConfiguration_PerUnitStorageThroughput = &sCreateFileCacheLustreConfiguration_PerUnitStorageThroughput
+var CreateFileCacheLustreConfiguration_DeploymentType = &sCreateFileCacheLustreConfiguration_DeploymentType
+var CreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = &sCreateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime
+var CreateFileCacheLustreConfiguration_MetadataConfiguration = &sCreateFileCacheLustreConfiguration_MetadataConfiguration
+
+var CreateFileSystemLustreConfiguration = &sCreateFileSystemLustreConfiguration
+var CreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime = &sCreateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime
+var CreateFileSystemLustreConfiguration_ImportPath = &sCreateFileSystemLustreConfiguration_ImportPath
+var CreateFileSystemLustreConfiguration_ExportPath = &sCreateFileSystemLustreConfiguration_ExportPath
+var CreateFileSystemLustreConfiguration_ImportedFileChunkSize = &sCreateFileSystemLustreConfiguration_ImportedFileChunkSize
+var CreateFileSystemLustreConfiguration_DeploymentType = &sCreateFileSystemLustreConfiguration_DeploymentType
+var CreateFileSystemLustreConfiguration_AutoImportPolicy = &sCreateFileSystemLustreConfiguration_AutoImportPolicy
+var CreateFileSystemLustreConfiguration_PerUnitStorageThroughput = &sCreateFileSystemLustreConfiguration_PerUnitStorageThroughput
+var CreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime = &sCreateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime
+var CreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays = &sCreateFileSystemLustreConfiguration_AutomaticBackupRetentionDays
+var CreateFileSystemLustreConfiguration_CopyTagsToBackups = &sCreateFileSystemLustreConfiguration_CopyTagsToBackups
+var CreateFileSystemLustreConfiguration_DriveCacheType = &sCreateFileSystemLustreConfiguration_DriveCacheType
+var CreateFileSystemLustreConfiguration_DataCompressionType = &sCreateFileSystemLustreConfiguration_DataCompressionType
+var CreateFileSystemLustreConfiguration_EfaEnabled = &sCreateFileSystemLustreConfiguration_EfaEnabled
+var CreateFileSystemLustreConfiguration_LogConfiguration = &sCreateFileSystemLustreConfiguration_LogConfiguration
+var CreateFileSystemLustreConfiguration_RootSquashConfiguration = &sCreateFileSystemLustreConfiguration_RootSquashConfiguration
+var CreateFileSystemLustreConfiguration_MetadataConfiguration = &sCreateFileSystemLustreConfiguration_MetadataConfiguration
+var CreateFileSystemLustreConfiguration_ThroughputCapacity = &sCreateFileSystemLustreConfiguration_ThroughputCapacity
+var CreateFileSystemLustreConfiguration_DataReadCacheConfiguration = &sCreateFileSystemLustreConfiguration_DataReadCacheConfiguration
+
+var CreateFileSystemLustreMetadataConfiguration = &sCreateFileSystemLustreMetadataConfiguration
+var CreateFileSystemLustreMetadataConfiguration_Iops = &sCreateFileSystemLustreMetadataConfiguration_Iops
+var CreateFileSystemLustreMetadataConfiguration_Mode = &sCreateFileSystemLustreMetadataConfiguration_Mode
+
+var CreateFileSystemOntapConfiguration = &sCreateFileSystemOntapConfiguration
+var CreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays = &sCreateFileSystemOntapConfiguration_AutomaticBackupRetentionDays
+var CreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime = &sCreateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime
+var CreateFileSystemOntapConfiguration_DeploymentType = &sCreateFileSystemOntapConfiguration_DeploymentType
+var CreateFileSystemOntapConfiguration_EndpointIpAddressRange = &sCreateFileSystemOntapConfiguration_EndpointIpAddressRange
+var CreateFileSystemOntapConfiguration_FsxAdminPassword = &sCreateFileSystemOntapConfiguration_FsxAdminPassword
+var CreateFileSystemOntapConfiguration_DiskIopsConfiguration = &sCreateFileSystemOntapConfiguration_DiskIopsConfiguration
+var CreateFileSystemOntapConfiguration_PreferredSubnetId = &sCreateFileSystemOntapConfiguration_PreferredSubnetId
+var CreateFileSystemOntapConfiguration_RouteTableIds = &sCreateFileSystemOntapConfiguration_RouteTableIds
+var CreateFileSystemOntapConfiguration_ThroughputCapacity = &sCreateFileSystemOntapConfiguration_ThroughputCapacity
+var CreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime = &sCreateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime
+var CreateFileSystemOntapConfiguration_HAPairs = &sCreateFileSystemOntapConfiguration_HAPairs
+var CreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair = &sCreateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair
+var CreateFileSystemOntapConfiguration_EndpointIpv6AddressRange = &sCreateFileSystemOntapConfiguration_EndpointIpv6AddressRange
+
+var CreateFileSystemOpenZFSConfiguration = &sCreateFileSystemOpenZFSConfiguration
+var CreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays = &sCreateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays
+var CreateFileSystemOpenZFSConfiguration_CopyTagsToBackups = &sCreateFileSystemOpenZFSConfiguration_CopyTagsToBackups
+var CreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes = &sCreateFileSystemOpenZFSConfiguration_CopyTagsToVolumes
+var CreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime = &sCreateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime
+var CreateFileSystemOpenZFSConfiguration_DeploymentType = &sCreateFileSystemOpenZFSConfiguration_DeploymentType
+var CreateFileSystemOpenZFSConfiguration_ThroughputCapacity = &sCreateFileSystemOpenZFSConfiguration_ThroughputCapacity
+var CreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime = &sCreateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime
+var CreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration = &sCreateFileSystemOpenZFSConfiguration_DiskIopsConfiguration
+var CreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration = &sCreateFileSystemOpenZFSConfiguration_RootVolumeConfiguration
+var CreateFileSystemOpenZFSConfiguration_PreferredSubnetId = &sCreateFileSystemOpenZFSConfiguration_PreferredSubnetId
+var CreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange = &sCreateFileSystemOpenZFSConfiguration_EndpointIpAddressRange
+var CreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange = &sCreateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange
+var CreateFileSystemOpenZFSConfiguration_RouteTableIds = &sCreateFileSystemOpenZFSConfiguration_RouteTableIds
+var CreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration = &sCreateFileSystemOpenZFSConfiguration_ReadCacheConfiguration
+
+var CreateFileSystemWindowsConfiguration = &sCreateFileSystemWindowsConfiguration
+var CreateFileSystemWindowsConfiguration_ActiveDirectoryId = &sCreateFileSystemWindowsConfiguration_ActiveDirectoryId
+var CreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration = &sCreateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration
+var CreateFileSystemWindowsConfiguration_DeploymentType = &sCreateFileSystemWindowsConfiguration_DeploymentType
+var CreateFileSystemWindowsConfiguration_PreferredSubnetId = &sCreateFileSystemWindowsConfiguration_PreferredSubnetId
+var CreateFileSystemWindowsConfiguration_ThroughputCapacity = &sCreateFileSystemWindowsConfiguration_ThroughputCapacity
+var CreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime = &sCreateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime
+var CreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime = &sCreateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime
+var CreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays = &sCreateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays
+var CreateFileSystemWindowsConfiguration_CopyTagsToBackups = &sCreateFileSystemWindowsConfiguration_CopyTagsToBackups
+var CreateFileSystemWindowsConfiguration_Aliases = &sCreateFileSystemWindowsConfiguration_Aliases
+var CreateFileSystemWindowsConfiguration_AuditLogConfiguration = &sCreateFileSystemWindowsConfiguration_AuditLogConfiguration
+var CreateFileSystemWindowsConfiguration_DiskIopsConfiguration = &sCreateFileSystemWindowsConfiguration_DiskIopsConfiguration
+var CreateFileSystemWindowsConfiguration_FsrmConfiguration = &sCreateFileSystemWindowsConfiguration_FsrmConfiguration
+
+var CreateOntapVolumeConfiguration = &sCreateOntapVolumeConfiguration
+var CreateOntapVolumeConfiguration_JunctionPath = &sCreateOntapVolumeConfiguration_JunctionPath
+var CreateOntapVolumeConfiguration_SecurityStyle = &sCreateOntapVolumeConfiguration_SecurityStyle
+var CreateOntapVolumeConfiguration_SizeInMegabytes = &sCreateOntapVolumeConfiguration_SizeInMegabytes
+var CreateOntapVolumeConfiguration_StorageEfficiencyEnabled = &sCreateOntapVolumeConfiguration_StorageEfficiencyEnabled
+var CreateOntapVolumeConfiguration_StorageVirtualMachineId = &sCreateOntapVolumeConfiguration_StorageVirtualMachineId
+var CreateOntapVolumeConfiguration_TieringPolicy = &sCreateOntapVolumeConfiguration_TieringPolicy
+var CreateOntapVolumeConfiguration_OntapVolumeType = &sCreateOntapVolumeConfiguration_OntapVolumeType
+var CreateOntapVolumeConfiguration_SnapshotPolicy = &sCreateOntapVolumeConfiguration_SnapshotPolicy
+var CreateOntapVolumeConfiguration_CopyTagsToBackups = &sCreateOntapVolumeConfiguration_CopyTagsToBackups
+var CreateOntapVolumeConfiguration_SnaplockConfiguration = &sCreateOntapVolumeConfiguration_SnaplockConfiguration
+var CreateOntapVolumeConfiguration_VolumeStyle = &sCreateOntapVolumeConfiguration_VolumeStyle
+var CreateOntapVolumeConfiguration_AggregateConfiguration = &sCreateOntapVolumeConfiguration_AggregateConfiguration
+var CreateOntapVolumeConfiguration_SizeInBytes = &sCreateOntapVolumeConfiguration_SizeInBytes
+
+var CreateOpenZFSOriginSnapshotConfiguration = &sCreateOpenZFSOriginSnapshotConfiguration
+var CreateOpenZFSOriginSnapshotConfiguration_SnapshotARN = &sCreateOpenZFSOriginSnapshotConfiguration_SnapshotARN
+var CreateOpenZFSOriginSnapshotConfiguration_CopyStrategy = &sCreateOpenZFSOriginSnapshotConfiguration_CopyStrategy
+
+var CreateOpenZFSVolumeConfiguration = &sCreateOpenZFSVolumeConfiguration
+var CreateOpenZFSVolumeConfiguration_ParentVolumeId = &sCreateOpenZFSVolumeConfiguration_ParentVolumeId
+var CreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = &sCreateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB
+var CreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = &sCreateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB
+var CreateOpenZFSVolumeConfiguration_RecordSizeKiB = &sCreateOpenZFSVolumeConfiguration_RecordSizeKiB
+var CreateOpenZFSVolumeConfiguration_DataCompressionType = &sCreateOpenZFSVolumeConfiguration_DataCompressionType
+var CreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots = &sCreateOpenZFSVolumeConfiguration_CopyTagsToSnapshots
+var CreateOpenZFSVolumeConfiguration_OriginSnapshot = &sCreateOpenZFSVolumeConfiguration_OriginSnapshot
+var CreateOpenZFSVolumeConfiguration_ReadOnly = &sCreateOpenZFSVolumeConfiguration_ReadOnly
+var CreateOpenZFSVolumeConfiguration_NfsExports = &sCreateOpenZFSVolumeConfiguration_NfsExports
+var CreateOpenZFSVolumeConfiguration_UserAndGroupQuotas = &sCreateOpenZFSVolumeConfiguration_UserAndGroupQuotas
+
+var CreateSnaplockConfiguration = &sCreateSnaplockConfiguration
+var CreateSnaplockConfiguration_AuditLogVolume = &sCreateSnaplockConfiguration_AuditLogVolume
+var CreateSnaplockConfiguration_AutocommitPeriod = &sCreateSnaplockConfiguration_AutocommitPeriod
+var CreateSnaplockConfiguration_PrivilegedDelete = &sCreateSnaplockConfiguration_PrivilegedDelete
+var CreateSnaplockConfiguration_RetentionPeriod = &sCreateSnaplockConfiguration_RetentionPeriod
+var CreateSnaplockConfiguration_SnaplockType = &sCreateSnaplockConfiguration_SnaplockType
+var CreateSnaplockConfiguration_VolumeAppendModeEnabled = &sCreateSnaplockConfiguration_VolumeAppendModeEnabled
+
+var CreateSvmActiveDirectoryConfiguration = &sCreateSvmActiveDirectoryConfiguration
+var CreateSvmActiveDirectoryConfiguration_NetBiosName = &sCreateSvmActiveDirectoryConfiguration_NetBiosName
+var CreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = &sCreateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration
+
+var _CreationTime = &s_CreationTime
+
+var _CustomerSecretsManagerARN = &s_CustomerSecretsManagerARN
+
+var _DailyTime = &s_DailyTime
+
+var DataCompressionType = &sDataCompressionType
+var DataCompressionType_NONE = &sDataCompressionType_NONE
+var DataCompressionType_LZ4 = &sDataCompressionType_LZ4
+
+var DataRepositoryAssociation = &sDataRepositoryAssociation
+var DataRepositoryAssociation_AssociationId = &sDataRepositoryAssociation_AssociationId
+var DataRepositoryAssociation_ResourceARN = &sDataRepositoryAssociation_ResourceARN
+var DataRepositoryAssociation_FileSystemId = &sDataRepositoryAssociation_FileSystemId
+var DataRepositoryAssociation_Lifecycle = &sDataRepositoryAssociation_Lifecycle
+var DataRepositoryAssociation_FailureDetails = &sDataRepositoryAssociation_FailureDetails
+var DataRepositoryAssociation_FileSystemPath = &sDataRepositoryAssociation_FileSystemPath
+var DataRepositoryAssociation_DataRepositoryPath = &sDataRepositoryAssociation_DataRepositoryPath
+var DataRepositoryAssociation_BatchImportMetaDataOnCreate = &sDataRepositoryAssociation_BatchImportMetaDataOnCreate
+var DataRepositoryAssociation_ImportedFileChunkSize = &sDataRepositoryAssociation_ImportedFileChunkSize
+var DataRepositoryAssociation_S3 = &sDataRepositoryAssociation_S3
+var DataRepositoryAssociation_Tags = &sDataRepositoryAssociation_Tags
+var DataRepositoryAssociation_CreationTime = &sDataRepositoryAssociation_CreationTime
+var DataRepositoryAssociation_FileCacheId = &sDataRepositoryAssociation_FileCacheId
+var DataRepositoryAssociation_FileCachePath = &sDataRepositoryAssociation_FileCachePath
+var DataRepositoryAssociation_DataRepositorySubdirectories = &sDataRepositoryAssociation_DataRepositorySubdirectories
+var DataRepositoryAssociation_NFS = &sDataRepositoryAssociation_NFS
+
+var _DataRepositoryAssociationId = &s_DataRepositoryAssociationId
+
+var _DataRepositoryAssociationIds = &s_DataRepositoryAssociationIds
+var _DataRepositoryAssociationIds_member = &s_DataRepositoryAssociationIds_member
+
+var DataRepositoryAssociationNotFound = &sDataRepositoryAssociationNotFound
+var DataRepositoryAssociationNotFound_Message = &sDataRepositoryAssociationNotFound_Message
+
+var _DataRepositoryAssociations = &s_DataRepositoryAssociations
+var _DataRepositoryAssociations_member = &s_DataRepositoryAssociations_member
+
+var DataRepositoryConfiguration = &sDataRepositoryConfiguration
+var DataRepositoryConfiguration_Lifecycle = &sDataRepositoryConfiguration_Lifecycle
+var DataRepositoryConfiguration_ImportPath = &sDataRepositoryConfiguration_ImportPath
+var DataRepositoryConfiguration_ExportPath = &sDataRepositoryConfiguration_ExportPath
+var DataRepositoryConfiguration_ImportedFileChunkSize = &sDataRepositoryConfiguration_ImportedFileChunkSize
+var DataRepositoryConfiguration_AutoImportPolicy = &sDataRepositoryConfiguration_AutoImportPolicy
+var DataRepositoryConfiguration_FailureDetails = &sDataRepositoryConfiguration_FailureDetails
+
+var DataRepositoryFailureDetails = &sDataRepositoryFailureDetails
+var DataRepositoryFailureDetails_Message = &sDataRepositoryFailureDetails_Message
+
+var DataRepositoryLifecycle = &sDataRepositoryLifecycle
+var DataRepositoryLifecycle_CREATING = &sDataRepositoryLifecycle_CREATING
+var DataRepositoryLifecycle_AVAILABLE = &sDataRepositoryLifecycle_AVAILABLE
+var DataRepositoryLifecycle_MISCONFIGURED = &sDataRepositoryLifecycle_MISCONFIGURED
+var DataRepositoryLifecycle_UPDATING = &sDataRepositoryLifecycle_UPDATING
+var DataRepositoryLifecycle_DELETING = &sDataRepositoryLifecycle_DELETING
+var DataRepositoryLifecycle_FAILED = &sDataRepositoryLifecycle_FAILED
+
+var DataRepositoryTask = &sDataRepositoryTask
+var DataRepositoryTask_TaskId = &sDataRepositoryTask_TaskId
+var DataRepositoryTask_Lifecycle = &sDataRepositoryTask_Lifecycle
+var DataRepositoryTask_Type = &sDataRepositoryTask_Type
+var DataRepositoryTask_CreationTime = &sDataRepositoryTask_CreationTime
+var DataRepositoryTask_StartTime = &sDataRepositoryTask_StartTime
+var DataRepositoryTask_EndTime = &sDataRepositoryTask_EndTime
+var DataRepositoryTask_ResourceARN = &sDataRepositoryTask_ResourceARN
+var DataRepositoryTask_Tags = &sDataRepositoryTask_Tags
+var DataRepositoryTask_FileSystemId = &sDataRepositoryTask_FileSystemId
+var DataRepositoryTask_Paths = &sDataRepositoryTask_Paths
+var DataRepositoryTask_FailureDetails = &sDataRepositoryTask_FailureDetails
+var DataRepositoryTask_Status = &sDataRepositoryTask_Status
+var DataRepositoryTask_Report = &sDataRepositoryTask_Report
+var DataRepositoryTask_CapacityToRelease = &sDataRepositoryTask_CapacityToRelease
+var DataRepositoryTask_FileCacheId = &sDataRepositoryTask_FileCacheId
+var DataRepositoryTask_ReleaseConfiguration = &sDataRepositoryTask_ReleaseConfiguration
+
+var DataRepositoryTaskEnded = &sDataRepositoryTaskEnded
+var DataRepositoryTaskEnded_Message = &sDataRepositoryTaskEnded_Message
+
+var DataRepositoryTaskExecuting = &sDataRepositoryTaskExecuting
+var DataRepositoryTaskExecuting_Message = &sDataRepositoryTaskExecuting_Message
+
+var DataRepositoryTaskFailureDetails = &sDataRepositoryTaskFailureDetails
+var DataRepositoryTaskFailureDetails_Message = &sDataRepositoryTaskFailureDetails_Message
+
+var DataRepositoryTaskFilter = &sDataRepositoryTaskFilter
+var DataRepositoryTaskFilter_Name = &sDataRepositoryTaskFilter_Name
+var DataRepositoryTaskFilter_Values = &sDataRepositoryTaskFilter_Values
+
+var DataRepositoryTaskFilterName = &sDataRepositoryTaskFilterName
+var DataRepositoryTaskFilterName_FILE_SYSTEM_ID = &sDataRepositoryTaskFilterName_FILE_SYSTEM_ID
+var DataRepositoryTaskFilterName_TASK_LIFECYCLE = &sDataRepositoryTaskFilterName_TASK_LIFECYCLE
+var DataRepositoryTaskFilterName_DATA_REPO_ASSOCIATION_ID = &sDataRepositoryTaskFilterName_DATA_REPO_ASSOCIATION_ID
+var DataRepositoryTaskFilterName_FILE_CACHE_ID = &sDataRepositoryTaskFilterName_FILE_CACHE_ID
+
+var _DataRepositoryTaskFilters = &s_DataRepositoryTaskFilters
+var _DataRepositoryTaskFilters_member = &s_DataRepositoryTaskFilters_member
+
+var _DataRepositoryTaskFilterValue = &s_DataRepositoryTaskFilterValue
+
+var _DataRepositoryTaskFilterValues = &s_DataRepositoryTaskFilterValues
+var _DataRepositoryTaskFilterValues_member = &s_DataRepositoryTaskFilterValues_member
+
+var DataRepositoryTaskLifecycle = &sDataRepositoryTaskLifecycle
+var DataRepositoryTaskLifecycle_PENDING = &sDataRepositoryTaskLifecycle_PENDING
+var DataRepositoryTaskLifecycle_EXECUTING = &sDataRepositoryTaskLifecycle_EXECUTING
+var DataRepositoryTaskLifecycle_FAILED = &sDataRepositoryTaskLifecycle_FAILED
+var DataRepositoryTaskLifecycle_SUCCEEDED = &sDataRepositoryTaskLifecycle_SUCCEEDED
+var DataRepositoryTaskLifecycle_CANCELED = &sDataRepositoryTaskLifecycle_CANCELED
+var DataRepositoryTaskLifecycle_CANCELING = &sDataRepositoryTaskLifecycle_CANCELING
+
+var DataRepositoryTaskNotFound = &sDataRepositoryTaskNotFound
+var DataRepositoryTaskNotFound_Message = &sDataRepositoryTaskNotFound_Message
+
+var _DataRepositoryTaskPath = &s_DataRepositoryTaskPath
+
+var _DataRepositoryTaskPaths = &s_DataRepositoryTaskPaths
+var _DataRepositoryTaskPaths_member = &s_DataRepositoryTaskPaths_member
+
+var _DataRepositoryTasks = &s_DataRepositoryTasks
+var _DataRepositoryTasks_member = &s_DataRepositoryTasks_member
+
+var DataRepositoryTaskStatus = &sDataRepositoryTaskStatus
+var DataRepositoryTaskStatus_TotalCount = &sDataRepositoryTaskStatus_TotalCount
+var DataRepositoryTaskStatus_SucceededCount = &sDataRepositoryTaskStatus_SucceededCount
+var DataRepositoryTaskStatus_FailedCount = &sDataRepositoryTaskStatus_FailedCount
+var DataRepositoryTaskStatus_LastUpdatedTime = &sDataRepositoryTaskStatus_LastUpdatedTime
+var DataRepositoryTaskStatus_ReleasedCapacity = &sDataRepositoryTaskStatus_ReleasedCapacity
+
+var DataRepositoryTaskType = &sDataRepositoryTaskType
+var DataRepositoryTaskType_EXPORT = &sDataRepositoryTaskType_EXPORT
+var DataRepositoryTaskType_IMPORT = &sDataRepositoryTaskType_IMPORT
+var DataRepositoryTaskType_EVICTION = &sDataRepositoryTaskType_EVICTION
+var DataRepositoryTaskType_AUTO_TRIGGERED_EVICTION = &sDataRepositoryTaskType_AUTO_TRIGGERED_EVICTION
+
+var _DeleteDataInFileSystem = &s_DeleteDataInFileSystem
+
+var DeleteFileSystemLustreConfiguration = &sDeleteFileSystemLustreConfiguration
+var DeleteFileSystemLustreConfiguration_SkipFinalBackup = &sDeleteFileSystemLustreConfiguration_SkipFinalBackup
+var DeleteFileSystemLustreConfiguration_FinalBackupTags = &sDeleteFileSystemLustreConfiguration_FinalBackupTags
+
+var DeleteFileSystemLustreResponse = &sDeleteFileSystemLustreResponse
+var DeleteFileSystemLustreResponse_FinalBackupId = &sDeleteFileSystemLustreResponse_FinalBackupId
+var DeleteFileSystemLustreResponse_FinalBackupTags = &sDeleteFileSystemLustreResponse_FinalBackupTags
+
+var DeleteFileSystemOpenZFSConfiguration = &sDeleteFileSystemOpenZFSConfiguration
+var DeleteFileSystemOpenZFSConfiguration_SkipFinalBackup = &sDeleteFileSystemOpenZFSConfiguration_SkipFinalBackup
+var DeleteFileSystemOpenZFSConfiguration_FinalBackupTags = &sDeleteFileSystemOpenZFSConfiguration_FinalBackupTags
+var DeleteFileSystemOpenZFSConfiguration_Options = &sDeleteFileSystemOpenZFSConfiguration_Options
+
+var DeleteFileSystemOpenZFSOption = &sDeleteFileSystemOpenZFSOption
+var DeleteFileSystemOpenZFSOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = &sDeleteFileSystemOpenZFSOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
+
+var _DeleteFileSystemOpenZFSOptions = &s_DeleteFileSystemOpenZFSOptions
+var _DeleteFileSystemOpenZFSOptions_member = &s_DeleteFileSystemOpenZFSOptions_member
+
+var DeleteFileSystemOpenZFSResponse = &sDeleteFileSystemOpenZFSResponse
+var DeleteFileSystemOpenZFSResponse_FinalBackupId = &sDeleteFileSystemOpenZFSResponse_FinalBackupId
+var DeleteFileSystemOpenZFSResponse_FinalBackupTags = &sDeleteFileSystemOpenZFSResponse_FinalBackupTags
+
+var DeleteFileSystemWindowsConfiguration = &sDeleteFileSystemWindowsConfiguration
+var DeleteFileSystemWindowsConfiguration_SkipFinalBackup = &sDeleteFileSystemWindowsConfiguration_SkipFinalBackup
+var DeleteFileSystemWindowsConfiguration_FinalBackupTags = &sDeleteFileSystemWindowsConfiguration_FinalBackupTags
+
+var DeleteFileSystemWindowsResponse = &sDeleteFileSystemWindowsResponse
+var DeleteFileSystemWindowsResponse_FinalBackupId = &sDeleteFileSystemWindowsResponse_FinalBackupId
+var DeleteFileSystemWindowsResponse_FinalBackupTags = &sDeleteFileSystemWindowsResponse_FinalBackupTags
+
+var DeleteOpenZFSVolumeOption = &sDeleteOpenZFSVolumeOption
+var DeleteOpenZFSVolumeOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS = &sDeleteOpenZFSVolumeOption_DELETE_CHILD_VOLUMES_AND_SNAPSHOTS
+
+var _DeleteOpenZFSVolumeOptions = &s_DeleteOpenZFSVolumeOptions
+var _DeleteOpenZFSVolumeOptions_member = &s_DeleteOpenZFSVolumeOptions_member
+
+var DeleteVolumeOntapConfiguration = &sDeleteVolumeOntapConfiguration
+var DeleteVolumeOntapConfiguration_SkipFinalBackup = &sDeleteVolumeOntapConfiguration_SkipFinalBackup
+var DeleteVolumeOntapConfiguration_FinalBackupTags = &sDeleteVolumeOntapConfiguration_FinalBackupTags
+var DeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention = &sDeleteVolumeOntapConfiguration_BypassSnaplockEnterpriseRetention
+
+var DeleteVolumeOntapResponse = &sDeleteVolumeOntapResponse
+var DeleteVolumeOntapResponse_FinalBackupId = &sDeleteVolumeOntapResponse_FinalBackupId
+var DeleteVolumeOntapResponse_FinalBackupTags = &sDeleteVolumeOntapResponse_FinalBackupTags
+
+var DeleteVolumeOpenZFSConfiguration = &sDeleteVolumeOpenZFSConfiguration
+var DeleteVolumeOpenZFSConfiguration_Options = &sDeleteVolumeOpenZFSConfiguration_Options
+
+var _DirectoryId = &s_DirectoryId
+
+var _DirectoryPassword = &s_DirectoryPassword
+
+var _DirectoryUserName = &s_DirectoryUserName
+
+var DiskIopsConfiguration = &sDiskIopsConfiguration
+var DiskIopsConfiguration_Mode = &sDiskIopsConfiguration_Mode
+var DiskIopsConfiguration_Iops = &sDiskIopsConfiguration_Iops
+
+var DiskIopsConfigurationMode = &sDiskIopsConfigurationMode
+var DiskIopsConfigurationMode_AUTOMATIC = &sDiskIopsConfigurationMode_AUTOMATIC
+var DiskIopsConfigurationMode_USER_PROVISIONED = &sDiskIopsConfigurationMode_USER_PROVISIONED
+
+var _DnsIps = &s_DnsIps
+var _DnsIps_member = &s_DnsIps_member
+
+var _DNSName = &s_DNSName
+
+var DriveCacheType = &sDriveCacheType
+var DriveCacheType_NONE = &sDriveCacheType_NONE
+var DriveCacheType_READ = &sDriveCacheType_READ
+
+var DurationSinceLastAccess = &sDurationSinceLastAccess
+var DurationSinceLastAccess_Unit = &sDurationSinceLastAccess_Unit
+var DurationSinceLastAccess_Value = &sDurationSinceLastAccess_Value
+
+var _EndTime = &s_EndTime
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var EventType = &sEventType
+var EventType_NEW = &sEventType_NEW
+var EventType_CHANGED = &sEventType_CHANGED
+var EventType_DELETED = &sEventType_DELETED
+
+var _EventTypes = &s_EventTypes
+var _EventTypes_member = &s_EventTypes_member
+
+var _FailedCount = &s_FailedCount
+
+var FileCache = &sFileCache
+var FileCache_OwnerId = &sFileCache_OwnerId
+var FileCache_CreationTime = &sFileCache_CreationTime
+var FileCache_FileCacheId = &sFileCache_FileCacheId
+var FileCache_FileCacheType = &sFileCache_FileCacheType
+var FileCache_FileCacheTypeVersion = &sFileCache_FileCacheTypeVersion
+var FileCache_Lifecycle = &sFileCache_Lifecycle
+var FileCache_FailureDetails = &sFileCache_FailureDetails
+var FileCache_StorageCapacity = &sFileCache_StorageCapacity
+var FileCache_VpcId = &sFileCache_VpcId
+var FileCache_SubnetIds = &sFileCache_SubnetIds
+var FileCache_NetworkInterfaceIds = &sFileCache_NetworkInterfaceIds
+var FileCache_DNSName = &sFileCache_DNSName
+var FileCache_KmsKeyId = &sFileCache_KmsKeyId
+var FileCache_ResourceARN = &sFileCache_ResourceARN
+var FileCache_LustreConfiguration = &sFileCache_LustreConfiguration
+var FileCache_DataRepositoryAssociationIds = &sFileCache_DataRepositoryAssociationIds
+
+var FileCacheCreating = &sFileCacheCreating
+var FileCacheCreating_OwnerId = &sFileCacheCreating_OwnerId
+var FileCacheCreating_CreationTime = &sFileCacheCreating_CreationTime
+var FileCacheCreating_FileCacheId = &sFileCacheCreating_FileCacheId
+var FileCacheCreating_FileCacheType = &sFileCacheCreating_FileCacheType
+var FileCacheCreating_FileCacheTypeVersion = &sFileCacheCreating_FileCacheTypeVersion
+var FileCacheCreating_Lifecycle = &sFileCacheCreating_Lifecycle
+var FileCacheCreating_FailureDetails = &sFileCacheCreating_FailureDetails
+var FileCacheCreating_StorageCapacity = &sFileCacheCreating_StorageCapacity
+var FileCacheCreating_VpcId = &sFileCacheCreating_VpcId
+var FileCacheCreating_SubnetIds = &sFileCacheCreating_SubnetIds
+var FileCacheCreating_NetworkInterfaceIds = &sFileCacheCreating_NetworkInterfaceIds
+var FileCacheCreating_DNSName = &sFileCacheCreating_DNSName
+var FileCacheCreating_KmsKeyId = &sFileCacheCreating_KmsKeyId
+var FileCacheCreating_ResourceARN = &sFileCacheCreating_ResourceARN
+var FileCacheCreating_Tags = &sFileCacheCreating_Tags
+var FileCacheCreating_CopyTagsToDataRepositoryAssociations = &sFileCacheCreating_CopyTagsToDataRepositoryAssociations
+var FileCacheCreating_LustreConfiguration = &sFileCacheCreating_LustreConfiguration
+var FileCacheCreating_DataRepositoryAssociationIds = &sFileCacheCreating_DataRepositoryAssociationIds
+
+var FileCacheDataRepositoryAssociation = &sFileCacheDataRepositoryAssociation
+var FileCacheDataRepositoryAssociation_FileCachePath = &sFileCacheDataRepositoryAssociation_FileCachePath
+var FileCacheDataRepositoryAssociation_DataRepositoryPath = &sFileCacheDataRepositoryAssociation_DataRepositoryPath
+var FileCacheDataRepositoryAssociation_DataRepositorySubdirectories = &sFileCacheDataRepositoryAssociation_DataRepositorySubdirectories
+var FileCacheDataRepositoryAssociation_NFS = &sFileCacheDataRepositoryAssociation_NFS
+
+var FileCacheFailureDetails = &sFileCacheFailureDetails
+var FileCacheFailureDetails_Message = &sFileCacheFailureDetails_Message
+
+var _FileCacheId = &s_FileCacheId
+
+var _FileCacheIds = &s_FileCacheIds
+var _FileCacheIds_member = &s_FileCacheIds_member
+
+var FileCacheLifecycle = &sFileCacheLifecycle
+var FileCacheLifecycle_AVAILABLE = &sFileCacheLifecycle_AVAILABLE
+var FileCacheLifecycle_CREATING = &sFileCacheLifecycle_CREATING
+var FileCacheLifecycle_DELETING = &sFileCacheLifecycle_DELETING
+var FileCacheLifecycle_UPDATING = &sFileCacheLifecycle_UPDATING
+var FileCacheLifecycle_FAILED = &sFileCacheLifecycle_FAILED
+
+var FileCacheLustreConfiguration = &sFileCacheLustreConfiguration
+var FileCacheLustreConfiguration_PerUnitStorageThroughput = &sFileCacheLustreConfiguration_PerUnitStorageThroughput
+var FileCacheLustreConfiguration_DeploymentType = &sFileCacheLustreConfiguration_DeploymentType
+var FileCacheLustreConfiguration_MountName = &sFileCacheLustreConfiguration_MountName
+var FileCacheLustreConfiguration_WeeklyMaintenanceStartTime = &sFileCacheLustreConfiguration_WeeklyMaintenanceStartTime
+var FileCacheLustreConfiguration_MetadataConfiguration = &sFileCacheLustreConfiguration_MetadataConfiguration
+var FileCacheLustreConfiguration_LogConfiguration = &sFileCacheLustreConfiguration_LogConfiguration
+
+var FileCacheLustreDeploymentType = &sFileCacheLustreDeploymentType
+var FileCacheLustreDeploymentType_CACHE_1 = &sFileCacheLustreDeploymentType_CACHE_1
+
+var FileCacheLustreMetadataConfiguration = &sFileCacheLustreMetadataConfiguration
+var FileCacheLustreMetadataConfiguration_StorageCapacity = &sFileCacheLustreMetadataConfiguration_StorageCapacity
+
+var FileCacheNFSConfiguration = &sFileCacheNFSConfiguration
+var FileCacheNFSConfiguration_Version = &sFileCacheNFSConfiguration_Version
+var FileCacheNFSConfiguration_DnsIps = &sFileCacheNFSConfiguration_DnsIps
+
+var FileCacheNotFound = &sFileCacheNotFound
+var FileCacheNotFound_Message = &sFileCacheNotFound_Message
+
+var _FileCaches = &s_FileCaches
+var _FileCaches_member = &s_FileCaches_member
+
+var FileCacheType = &sFileCacheType
+var FileCacheType_LUSTRE = &sFileCacheType_LUSTRE
+
+var FileSystem = &sFileSystem
+var FileSystem_OwnerId = &sFileSystem_OwnerId
+var FileSystem_CreationTime = &sFileSystem_CreationTime
+var FileSystem_FileSystemId = &sFileSystem_FileSystemId
+var FileSystem_FileSystemType = &sFileSystem_FileSystemType
+var FileSystem_Lifecycle = &sFileSystem_Lifecycle
+var FileSystem_FailureDetails = &sFileSystem_FailureDetails
+var FileSystem_StorageCapacity = &sFileSystem_StorageCapacity
+var FileSystem_StorageType = &sFileSystem_StorageType
+var FileSystem_VpcId = &sFileSystem_VpcId
+var FileSystem_SubnetIds = &sFileSystem_SubnetIds
+var FileSystem_NetworkInterfaceIds = &sFileSystem_NetworkInterfaceIds
+var FileSystem_DNSName = &sFileSystem_DNSName
+var FileSystem_KmsKeyId = &sFileSystem_KmsKeyId
+var FileSystem_ResourceARN = &sFileSystem_ResourceARN
+var FileSystem_Tags = &sFileSystem_Tags
+var FileSystem_WindowsConfiguration = &sFileSystem_WindowsConfiguration
+var FileSystem_LustreConfiguration = &sFileSystem_LustreConfiguration
+var FileSystem_AdministrativeActions = &sFileSystem_AdministrativeActions
+var FileSystem_OntapConfiguration = &sFileSystem_OntapConfiguration
+var FileSystem_FileSystemTypeVersion = &sFileSystem_FileSystemTypeVersion
+var FileSystem_OpenZFSConfiguration = &sFileSystem_OpenZFSConfiguration
+var FileSystem_NetworkType = &sFileSystem_NetworkType
+
+var _FileSystemAdministratorsGroupName = &s_FileSystemAdministratorsGroupName
+
+var FileSystemEndpoint = &sFileSystemEndpoint
+var FileSystemEndpoint_DNSName = &sFileSystemEndpoint_DNSName
+var FileSystemEndpoint_IpAddresses = &sFileSystemEndpoint_IpAddresses
+var FileSystemEndpoint_Ipv6Addresses = &sFileSystemEndpoint_Ipv6Addresses
+
+var FileSystemEndpoints = &sFileSystemEndpoints
+var FileSystemEndpoints_Intercluster = &sFileSystemEndpoints_Intercluster
+var FileSystemEndpoints_Management = &sFileSystemEndpoints_Management
+
+var FileSystemFailureDetails = &sFileSystemFailureDetails
+var FileSystemFailureDetails_Message = &sFileSystemFailureDetails_Message
+
+var _FileSystemGID = &s_FileSystemGID
+
+var _FileSystemId = &s_FileSystemId
+
+var _FileSystemIds = &s_FileSystemIds
+var _FileSystemIds_member = &s_FileSystemIds_member
+
+var FileSystemLifecycle = &sFileSystemLifecycle
+var FileSystemLifecycle_AVAILABLE = &sFileSystemLifecycle_AVAILABLE
+var FileSystemLifecycle_CREATING = &sFileSystemLifecycle_CREATING
+var FileSystemLifecycle_FAILED = &sFileSystemLifecycle_FAILED
+var FileSystemLifecycle_DELETING = &sFileSystemLifecycle_DELETING
+var FileSystemLifecycle_MISCONFIGURED = &sFileSystemLifecycle_MISCONFIGURED
+var FileSystemLifecycle_UPDATING = &sFileSystemLifecycle_UPDATING
+var FileSystemLifecycle_MISCONFIGURED_UNAVAILABLE = &sFileSystemLifecycle_MISCONFIGURED_UNAVAILABLE
+
+var FileSystemLustreMetadataConfiguration = &sFileSystemLustreMetadataConfiguration
+var FileSystemLustreMetadataConfiguration_Iops = &sFileSystemLustreMetadataConfiguration_Iops
+var FileSystemLustreMetadataConfiguration_Mode = &sFileSystemLustreMetadataConfiguration_Mode
+
+var FileSystemMaintenanceOperation = &sFileSystemMaintenanceOperation
+var FileSystemMaintenanceOperation_PATCHING = &sFileSystemMaintenanceOperation_PATCHING
+var FileSystemMaintenanceOperation_BACKING_UP = &sFileSystemMaintenanceOperation_BACKING_UP
+
+var _FileSystemMaintenanceOperations = &s_FileSystemMaintenanceOperations
+var _FileSystemMaintenanceOperations_member = &s_FileSystemMaintenanceOperations_member
+
+var FileSystemNotFound = &sFileSystemNotFound
+var FileSystemNotFound_Message = &sFileSystemNotFound_Message
+
+var _FileSystems = &s_FileSystems
+var _FileSystems_member = &s_FileSystems_member
+
+var _FileSystemSecondaryGIDs = &s_FileSystemSecondaryGIDs
+var _FileSystemSecondaryGIDs_member = &s_FileSystemSecondaryGIDs_member
+
+var FileSystemType = &sFileSystemType
+var FileSystemType_WINDOWS = &sFileSystemType_WINDOWS
+var FileSystemType_LUSTRE = &sFileSystemType_LUSTRE
+var FileSystemType_ONTAP = &sFileSystemType_ONTAP
+var FileSystemType_OPENZFS = &sFileSystemType_OPENZFS
+
+var _FileSystemTypeVersion = &s_FileSystemTypeVersion
+
+var _FileSystemUID = &s_FileSystemUID
+
+var Filter = &sFilter
+var Filter_Name = &sFilter_Name
+var Filter_Values = &sFilter_Values
+
+var FilterName = &sFilterName
+var FilterName_FILE_SYSTEM_ID = &sFilterName_FILE_SYSTEM_ID
+var FilterName_BACKUP_TYPE = &sFilterName_BACKUP_TYPE
+var FilterName_FILE_SYSTEM_TYPE = &sFilterName_FILE_SYSTEM_TYPE
+var FilterName_VOLUME_ID = &sFilterName_VOLUME_ID
+var FilterName_DATA_REPOSITORY_TYPE = &sFilterName_DATA_REPOSITORY_TYPE
+var FilterName_FILE_CACHE_ID = &sFilterName_FILE_CACHE_ID
+var FilterName_FILE_CACHE_TYPE = &sFilterName_FILE_CACHE_TYPE
+
+var _Filters = &s_Filters
+var _Filters_member = &s_Filters_member
+
+var _FilterValue = &s_FilterValue
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var _Flag = &s_Flag
+
+var FlexCacheEndpointType = &sFlexCacheEndpointType
+var FlexCacheEndpointType_NONE = &sFlexCacheEndpointType_NONE
+var FlexCacheEndpointType_ORIGIN = &sFlexCacheEndpointType_ORIGIN
+var FlexCacheEndpointType_CACHE = &sFlexCacheEndpointType_CACHE
+
+var _GeneralARN = &s_GeneralARN
+
+var _HAPairs = &s_HAPairs
+
+var _IncludeShared = &s_IncludeShared
+
+var IncompatibleParameterError = &sIncompatibleParameterError
+var IncompatibleParameterError_Parameter = &sIncompatibleParameterError_Parameter
+var IncompatibleParameterError_Message = &sIncompatibleParameterError_Message
+
+var IncompatibleRegionForMultiAZ = &sIncompatibleRegionForMultiAZ
+var IncompatibleRegionForMultiAZ_Message = &sIncompatibleRegionForMultiAZ_Message
+
+var InputOntapVolumeType = &sInputOntapVolumeType
+var InputOntapVolumeType_RW = &sInputOntapVolumeType_RW
+var InputOntapVolumeType_DP = &sInputOntapVolumeType_DP
+
+var _IntegerNoMax = &s_IntegerNoMax
+
+var _IntegerNoMaxFromNegativeOne = &s_IntegerNoMaxFromNegativeOne
+
+var _IntegerRecordSizeKiB = &s_IntegerRecordSizeKiB
+
+var InternalServerError = &sInternalServerError
+var InternalServerError_Message = &sInternalServerError_Message
+
+var InvalidAccessPoint = &sInvalidAccessPoint
+var InvalidAccessPoint_ErrorCode = &sInvalidAccessPoint_ErrorCode
+var InvalidAccessPoint_Message = &sInvalidAccessPoint_Message
+
+var InvalidDataRepositoryType = &sInvalidDataRepositoryType
+var InvalidDataRepositoryType_Message = &sInvalidDataRepositoryType_Message
+
+var InvalidDestinationKmsKey = &sInvalidDestinationKmsKey
+var InvalidDestinationKmsKey_Message = &sInvalidDestinationKmsKey_Message
+
+var InvalidExportPath = &sInvalidExportPath
+var InvalidExportPath_Message = &sInvalidExportPath_Message
+
+var InvalidImportPath = &sInvalidImportPath
+var InvalidImportPath_Message = &sInvalidImportPath_Message
+
+var InvalidNetworkSettings = &sInvalidNetworkSettings
+var InvalidNetworkSettings_Message = &sInvalidNetworkSettings_Message
+var InvalidNetworkSettings_InvalidSubnetId = &sInvalidNetworkSettings_InvalidSubnetId
+var InvalidNetworkSettings_InvalidSecurityGroupId = &sInvalidNetworkSettings_InvalidSecurityGroupId
+var InvalidNetworkSettings_InvalidRouteTableId = &sInvalidNetworkSettings_InvalidRouteTableId
+
+var InvalidPerUnitStorageThroughput = &sInvalidPerUnitStorageThroughput
+var InvalidPerUnitStorageThroughput_Message = &sInvalidPerUnitStorageThroughput_Message
+
+var InvalidRegion = &sInvalidRegion
+var InvalidRegion_Message = &sInvalidRegion_Message
+
+var InvalidRequest = &sInvalidRequest
+var InvalidRequest_ErrorCode = &sInvalidRequest_ErrorCode
+var InvalidRequest_Message = &sInvalidRequest_Message
+
+var InvalidSourceKmsKey = &sInvalidSourceKmsKey
+var InvalidSourceKmsKey_Message = &sInvalidSourceKmsKey_Message
+
+var _Iops = &s_Iops
+
+var _IpAddress = &s_IpAddress
+
+var _IpAddressRange = &s_IpAddressRange
+
+var _Ipv6AddressRange = &s_Ipv6AddressRange
+
+var _JunctionPath = &s_JunctionPath
+
+var _KmsKeyId = &s_KmsKeyId
+
+var _LastUpdatedTime = &s_LastUpdatedTime
+
+var LifecycleTransitionReason = &sLifecycleTransitionReason
+var LifecycleTransitionReason_Message = &sLifecycleTransitionReason_Message
+
+var _LimitedMaxResults = &s_LimitedMaxResults
+
+var LustreAccessAuditLogLevel = &sLustreAccessAuditLogLevel
+var LustreAccessAuditLogLevel_DISABLED = &sLustreAccessAuditLogLevel_DISABLED
+var LustreAccessAuditLogLevel_WARN_ONLY = &sLustreAccessAuditLogLevel_WARN_ONLY
+var LustreAccessAuditLogLevel_ERROR_ONLY = &sLustreAccessAuditLogLevel_ERROR_ONLY
+var LustreAccessAuditLogLevel_WARN_ERROR = &sLustreAccessAuditLogLevel_WARN_ERROR
+
+var LustreDeploymentType = &sLustreDeploymentType
+var LustreDeploymentType_SCRATCH_1 = &sLustreDeploymentType_SCRATCH_1
+var LustreDeploymentType_SCRATCH_2 = &sLustreDeploymentType_SCRATCH_2
+var LustreDeploymentType_PERSISTENT_1 = &sLustreDeploymentType_PERSISTENT_1
+var LustreDeploymentType_PERSISTENT_2 = &sLustreDeploymentType_PERSISTENT_2
+
+var LustreFileSystemConfiguration = &sLustreFileSystemConfiguration
+var LustreFileSystemConfiguration_WeeklyMaintenanceStartTime = &sLustreFileSystemConfiguration_WeeklyMaintenanceStartTime
+var LustreFileSystemConfiguration_DataRepositoryConfiguration = &sLustreFileSystemConfiguration_DataRepositoryConfiguration
+var LustreFileSystemConfiguration_DeploymentType = &sLustreFileSystemConfiguration_DeploymentType
+var LustreFileSystemConfiguration_PerUnitStorageThroughput = &sLustreFileSystemConfiguration_PerUnitStorageThroughput
+var LustreFileSystemConfiguration_MountName = &sLustreFileSystemConfiguration_MountName
+var LustreFileSystemConfiguration_DailyAutomaticBackupStartTime = &sLustreFileSystemConfiguration_DailyAutomaticBackupStartTime
+var LustreFileSystemConfiguration_AutomaticBackupRetentionDays = &sLustreFileSystemConfiguration_AutomaticBackupRetentionDays
+var LustreFileSystemConfiguration_CopyTagsToBackups = &sLustreFileSystemConfiguration_CopyTagsToBackups
+var LustreFileSystemConfiguration_DriveCacheType = &sLustreFileSystemConfiguration_DriveCacheType
+var LustreFileSystemConfiguration_DataCompressionType = &sLustreFileSystemConfiguration_DataCompressionType
+var LustreFileSystemConfiguration_LogConfiguration = &sLustreFileSystemConfiguration_LogConfiguration
+var LustreFileSystemConfiguration_RootSquashConfiguration = &sLustreFileSystemConfiguration_RootSquashConfiguration
+var LustreFileSystemConfiguration_MetadataConfiguration = &sLustreFileSystemConfiguration_MetadataConfiguration
+var LustreFileSystemConfiguration_EfaEnabled = &sLustreFileSystemConfiguration_EfaEnabled
+var LustreFileSystemConfiguration_ThroughputCapacity = &sLustreFileSystemConfiguration_ThroughputCapacity
+var LustreFileSystemConfiguration_DataReadCacheConfiguration = &sLustreFileSystemConfiguration_DataReadCacheConfiguration
+
+var _LustreFileSystemMountName = &s_LustreFileSystemMountName
+
+var LustreLogConfiguration = &sLustreLogConfiguration
+var LustreLogConfiguration_Level = &sLustreLogConfiguration_Level
+var LustreLogConfiguration_Destination = &sLustreLogConfiguration_Destination
+
+var LustreLogCreateConfiguration = &sLustreLogCreateConfiguration
+var LustreLogCreateConfiguration_Level = &sLustreLogCreateConfiguration_Level
+var LustreLogCreateConfiguration_Destination = &sLustreLogCreateConfiguration_Destination
+
+var _LustreNoSquashNid = &s_LustreNoSquashNid
+
+var _LustreNoSquashNids = &s_LustreNoSquashNids
+var _LustreNoSquashNids_member = &s_LustreNoSquashNids_member
+
+var LustreReadCacheConfiguration = &sLustreReadCacheConfiguration
+var LustreReadCacheConfiguration_SizingMode = &sLustreReadCacheConfiguration_SizingMode
+var LustreReadCacheConfiguration_SizeGiB = &sLustreReadCacheConfiguration_SizeGiB
+
+var LustreReadCacheSizingMode = &sLustreReadCacheSizingMode
+var LustreReadCacheSizingMode_NO_CACHE = &sLustreReadCacheSizingMode_NO_CACHE
+var LustreReadCacheSizingMode_USER_PROVISIONED = &sLustreReadCacheSizingMode_USER_PROVISIONED
+var LustreReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY = &sLustreReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY
+
+var _LustreRootSquash = &s_LustreRootSquash
+
+var LustreRootSquashConfiguration = &sLustreRootSquashConfiguration
+var LustreRootSquashConfiguration_RootSquash = &sLustreRootSquashConfiguration_RootSquash
+var LustreRootSquashConfiguration_NoSquashNids = &sLustreRootSquashConfiguration_NoSquashNids
+
+var _MaxResults = &s_MaxResults
+
+var _Megabytes = &s_Megabytes
+
+var _MegabytesPerSecond = &s_MegabytesPerSecond
+
+var MetadataConfigurationMode = &sMetadataConfigurationMode
+var MetadataConfigurationMode_AUTOMATIC = &sMetadataConfigurationMode_AUTOMATIC
+var MetadataConfigurationMode_USER_PROVISIONED = &sMetadataConfigurationMode_USER_PROVISIONED
+
+var _MetadataIops = &s_MetadataIops
+
+var _MetadataStorageCapacity = &s_MetadataStorageCapacity
+
+var MissingFileCacheConfiguration = &sMissingFileCacheConfiguration
+var MissingFileCacheConfiguration_Message = &sMissingFileCacheConfiguration_Message
+
+var MissingFileSystemConfiguration = &sMissingFileSystemConfiguration
+var MissingFileSystemConfiguration_Message = &sMissingFileSystemConfiguration_Message
+
+var MissingVolumeConfiguration = &sMissingVolumeConfiguration
+var MissingVolumeConfiguration_Message = &sMissingVolumeConfiguration_Message
+
+var _Namespace = &s_Namespace
+
+var _NetBiosAlias = &s_NetBiosAlias
+
+var _NetworkInterfaceId = &s_NetworkInterfaceId
+
+var _NetworkInterfaceIds = &s_NetworkInterfaceIds
+var _NetworkInterfaceIds_member = &s_NetworkInterfaceIds_member
+
+var NetworkType = &sNetworkType
+var NetworkType_IPV4 = &sNetworkType_IPV4
+var NetworkType_DUAL = &sNetworkType_DUAL
+
+var _NextToken = &s_NextToken
+
+var NFSDataRepositoryConfiguration = &sNFSDataRepositoryConfiguration
+var NFSDataRepositoryConfiguration_Version = &sNFSDataRepositoryConfiguration_Version
+var NFSDataRepositoryConfiguration_DnsIps = &sNFSDataRepositoryConfiguration_DnsIps
+var NFSDataRepositoryConfiguration_AutoExportPolicy = &sNFSDataRepositoryConfiguration_AutoExportPolicy
+
+var NfsVersion = &sNfsVersion
+var NfsVersion_NFS3 = &sNfsVersion_NFS3
+
+var NotServiceResourceError = &sNotServiceResourceError
+var NotServiceResourceError_ResourceARN = &sNotServiceResourceError_ResourceARN
+var NotServiceResourceError_Message = &sNotServiceResourceError_Message
+
+var OntapDeploymentType = &sOntapDeploymentType
+var OntapDeploymentType_MULTI_AZ_1 = &sOntapDeploymentType_MULTI_AZ_1
+var OntapDeploymentType_SINGLE_AZ_1 = &sOntapDeploymentType_SINGLE_AZ_1
+var OntapDeploymentType_SINGLE_AZ_2 = &sOntapDeploymentType_SINGLE_AZ_2
+var OntapDeploymentType_MULTI_AZ_2 = &sOntapDeploymentType_MULTI_AZ_2
+
+var _OntapEndpointIpAddresses = &s_OntapEndpointIpAddresses
+var _OntapEndpointIpAddresses_member = &s_OntapEndpointIpAddresses_member
+
+var OntapFileSystemConfiguration = &sOntapFileSystemConfiguration
+var OntapFileSystemConfiguration_AutomaticBackupRetentionDays = &sOntapFileSystemConfiguration_AutomaticBackupRetentionDays
+var OntapFileSystemConfiguration_DailyAutomaticBackupStartTime = &sOntapFileSystemConfiguration_DailyAutomaticBackupStartTime
+var OntapFileSystemConfiguration_DeploymentType = &sOntapFileSystemConfiguration_DeploymentType
+var OntapFileSystemConfiguration_EndpointIpAddressRange = &sOntapFileSystemConfiguration_EndpointIpAddressRange
+var OntapFileSystemConfiguration_Endpoints = &sOntapFileSystemConfiguration_Endpoints
+var OntapFileSystemConfiguration_DiskIopsConfiguration = &sOntapFileSystemConfiguration_DiskIopsConfiguration
+var OntapFileSystemConfiguration_PreferredSubnetId = &sOntapFileSystemConfiguration_PreferredSubnetId
+var OntapFileSystemConfiguration_RouteTableIds = &sOntapFileSystemConfiguration_RouteTableIds
+var OntapFileSystemConfiguration_ThroughputCapacity = &sOntapFileSystemConfiguration_ThroughputCapacity
+var OntapFileSystemConfiguration_WeeklyMaintenanceStartTime = &sOntapFileSystemConfiguration_WeeklyMaintenanceStartTime
+var OntapFileSystemConfiguration_FsxAdminPassword = &sOntapFileSystemConfiguration_FsxAdminPassword
+var OntapFileSystemConfiguration_HAPairs = &sOntapFileSystemConfiguration_HAPairs
+var OntapFileSystemConfiguration_ThroughputCapacityPerHAPair = &sOntapFileSystemConfiguration_ThroughputCapacityPerHAPair
+var OntapFileSystemConfiguration_EndpointIpv6AddressRange = &sOntapFileSystemConfiguration_EndpointIpv6AddressRange
+
+var OntapFileSystemIdentity = &sOntapFileSystemIdentity
+var OntapFileSystemIdentity_Type = &sOntapFileSystemIdentity_Type
+var OntapFileSystemIdentity_UnixUser = &sOntapFileSystemIdentity_UnixUser
+var OntapFileSystemIdentity_WindowsUser = &sOntapFileSystemIdentity_WindowsUser
+
+var _OntapFileSystemUserName = &s_OntapFileSystemUserName
+
+var OntapFileSystemUserType = &sOntapFileSystemUserType
+var OntapFileSystemUserType_UNIX = &sOntapFileSystemUserType_UNIX
+var OntapFileSystemUserType_WINDOWS = &sOntapFileSystemUserType_WINDOWS
+
+var OntapUnixFileSystemUser = &sOntapUnixFileSystemUser
+var OntapUnixFileSystemUser_Name = &sOntapUnixFileSystemUser_Name
+
+var OntapVolumeConfiguration = &sOntapVolumeConfiguration
+var OntapVolumeConfiguration_FlexCacheEndpointType = &sOntapVolumeConfiguration_FlexCacheEndpointType
+var OntapVolumeConfiguration_JunctionPath = &sOntapVolumeConfiguration_JunctionPath
+var OntapVolumeConfiguration_SecurityStyle = &sOntapVolumeConfiguration_SecurityStyle
+var OntapVolumeConfiguration_SizeInMegabytes = &sOntapVolumeConfiguration_SizeInMegabytes
+var OntapVolumeConfiguration_StorageEfficiencyEnabled = &sOntapVolumeConfiguration_StorageEfficiencyEnabled
+var OntapVolumeConfiguration_StorageVirtualMachineId = &sOntapVolumeConfiguration_StorageVirtualMachineId
+var OntapVolumeConfiguration_StorageVirtualMachineRoot = &sOntapVolumeConfiguration_StorageVirtualMachineRoot
+var OntapVolumeConfiguration_TieringPolicy = &sOntapVolumeConfiguration_TieringPolicy
+var OntapVolumeConfiguration_UUID = &sOntapVolumeConfiguration_UUID
+var OntapVolumeConfiguration_OntapVolumeType = &sOntapVolumeConfiguration_OntapVolumeType
+var OntapVolumeConfiguration_SnapshotPolicy = &sOntapVolumeConfiguration_SnapshotPolicy
+var OntapVolumeConfiguration_CopyTagsToBackups = &sOntapVolumeConfiguration_CopyTagsToBackups
+var OntapVolumeConfiguration_SnaplockConfiguration = &sOntapVolumeConfiguration_SnaplockConfiguration
+var OntapVolumeConfiguration_VolumeStyle = &sOntapVolumeConfiguration_VolumeStyle
+var OntapVolumeConfiguration_AggregateConfiguration = &sOntapVolumeConfiguration_AggregateConfiguration
+var OntapVolumeConfiguration_SizeInBytes = &sOntapVolumeConfiguration_SizeInBytes
+
+var OntapVolumeType = &sOntapVolumeType
+var OntapVolumeType_RW = &sOntapVolumeType_RW
+var OntapVolumeType_DP = &sOntapVolumeType_DP
+var OntapVolumeType_LS = &sOntapVolumeType_LS
+
+var OntapWindowsFileSystemUser = &sOntapWindowsFileSystemUser
+var OntapWindowsFileSystemUser_Name = &sOntapWindowsFileSystemUser_Name
+
+var OpenZFSClientConfiguration = &sOpenZFSClientConfiguration
+var OpenZFSClientConfiguration_Clients = &sOpenZFSClientConfiguration_Clients
+var OpenZFSClientConfiguration_Options = &sOpenZFSClientConfiguration_Options
+
+var _OpenZFSClientConfigurations = &s_OpenZFSClientConfigurations
+var _OpenZFSClientConfigurations_member = &s_OpenZFSClientConfigurations_member
+
+var _OpenZFSClients = &s_OpenZFSClients
+
+var OpenZFSCopyStrategy = &sOpenZFSCopyStrategy
+var OpenZFSCopyStrategy_CLONE = &sOpenZFSCopyStrategy_CLONE
+var OpenZFSCopyStrategy_FULL_COPY = &sOpenZFSCopyStrategy_FULL_COPY
+var OpenZFSCopyStrategy_INCREMENTAL_COPY = &sOpenZFSCopyStrategy_INCREMENTAL_COPY
+
+var OpenZFSCreateRootVolumeConfiguration = &sOpenZFSCreateRootVolumeConfiguration
+var OpenZFSCreateRootVolumeConfiguration_RecordSizeKiB = &sOpenZFSCreateRootVolumeConfiguration_RecordSizeKiB
+var OpenZFSCreateRootVolumeConfiguration_DataCompressionType = &sOpenZFSCreateRootVolumeConfiguration_DataCompressionType
+var OpenZFSCreateRootVolumeConfiguration_NfsExports = &sOpenZFSCreateRootVolumeConfiguration_NfsExports
+var OpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas = &sOpenZFSCreateRootVolumeConfiguration_UserAndGroupQuotas
+var OpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots = &sOpenZFSCreateRootVolumeConfiguration_CopyTagsToSnapshots
+var OpenZFSCreateRootVolumeConfiguration_ReadOnly = &sOpenZFSCreateRootVolumeConfiguration_ReadOnly
+
+var OpenZFSDataCompressionType = &sOpenZFSDataCompressionType
+var OpenZFSDataCompressionType_NONE = &sOpenZFSDataCompressionType_NONE
+var OpenZFSDataCompressionType_ZSTD = &sOpenZFSDataCompressionType_ZSTD
+var OpenZFSDataCompressionType_LZ4 = &sOpenZFSDataCompressionType_LZ4
+
+var OpenZFSDeploymentType = &sOpenZFSDeploymentType
+var OpenZFSDeploymentType_SINGLE_AZ_1 = &sOpenZFSDeploymentType_SINGLE_AZ_1
+var OpenZFSDeploymentType_SINGLE_AZ_2 = &sOpenZFSDeploymentType_SINGLE_AZ_2
+var OpenZFSDeploymentType_SINGLE_AZ_HA_1 = &sOpenZFSDeploymentType_SINGLE_AZ_HA_1
+var OpenZFSDeploymentType_SINGLE_AZ_HA_2 = &sOpenZFSDeploymentType_SINGLE_AZ_HA_2
+var OpenZFSDeploymentType_MULTI_AZ_1 = &sOpenZFSDeploymentType_MULTI_AZ_1
+
+var OpenZFSFileSystemConfiguration = &sOpenZFSFileSystemConfiguration
+var OpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays = &sOpenZFSFileSystemConfiguration_AutomaticBackupRetentionDays
+var OpenZFSFileSystemConfiguration_CopyTagsToBackups = &sOpenZFSFileSystemConfiguration_CopyTagsToBackups
+var OpenZFSFileSystemConfiguration_CopyTagsToVolumes = &sOpenZFSFileSystemConfiguration_CopyTagsToVolumes
+var OpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime = &sOpenZFSFileSystemConfiguration_DailyAutomaticBackupStartTime
+var OpenZFSFileSystemConfiguration_DeploymentType = &sOpenZFSFileSystemConfiguration_DeploymentType
+var OpenZFSFileSystemConfiguration_ThroughputCapacity = &sOpenZFSFileSystemConfiguration_ThroughputCapacity
+var OpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime = &sOpenZFSFileSystemConfiguration_WeeklyMaintenanceStartTime
+var OpenZFSFileSystemConfiguration_DiskIopsConfiguration = &sOpenZFSFileSystemConfiguration_DiskIopsConfiguration
+var OpenZFSFileSystemConfiguration_RootVolumeId = &sOpenZFSFileSystemConfiguration_RootVolumeId
+var OpenZFSFileSystemConfiguration_PreferredSubnetId = &sOpenZFSFileSystemConfiguration_PreferredSubnetId
+var OpenZFSFileSystemConfiguration_EndpointIpAddressRange = &sOpenZFSFileSystemConfiguration_EndpointIpAddressRange
+var OpenZFSFileSystemConfiguration_EndpointIpv6AddressRange = &sOpenZFSFileSystemConfiguration_EndpointIpv6AddressRange
+var OpenZFSFileSystemConfiguration_RouteTableIds = &sOpenZFSFileSystemConfiguration_RouteTableIds
+var OpenZFSFileSystemConfiguration_EndpointIpAddress = &sOpenZFSFileSystemConfiguration_EndpointIpAddress
+var OpenZFSFileSystemConfiguration_EndpointIpv6Address = &sOpenZFSFileSystemConfiguration_EndpointIpv6Address
+var OpenZFSFileSystemConfiguration_ReadCacheConfiguration = &sOpenZFSFileSystemConfiguration_ReadCacheConfiguration
+
+var OpenZFSFileSystemIdentity = &sOpenZFSFileSystemIdentity
+var OpenZFSFileSystemIdentity_Type = &sOpenZFSFileSystemIdentity_Type
+var OpenZFSFileSystemIdentity_PosixUser = &sOpenZFSFileSystemIdentity_PosixUser
+
+var OpenZFSFileSystemUserType = &sOpenZFSFileSystemUserType
+var OpenZFSFileSystemUserType_POSIX = &sOpenZFSFileSystemUserType_POSIX
+
+var OpenZFSNfsExport = &sOpenZFSNfsExport
+var OpenZFSNfsExport_ClientConfigurations = &sOpenZFSNfsExport_ClientConfigurations
+
+var _OpenZFSNfsExportOption = &s_OpenZFSNfsExportOption
+
+var _OpenZFSNfsExportOptions = &s_OpenZFSNfsExportOptions
+var _OpenZFSNfsExportOptions_member = &s_OpenZFSNfsExportOptions_member
+
+var _OpenZFSNfsExports = &s_OpenZFSNfsExports
+var _OpenZFSNfsExports_member = &s_OpenZFSNfsExports_member
+
+var OpenZFSOriginSnapshotConfiguration = &sOpenZFSOriginSnapshotConfiguration
+var OpenZFSOriginSnapshotConfiguration_SnapshotARN = &sOpenZFSOriginSnapshotConfiguration_SnapshotARN
+var OpenZFSOriginSnapshotConfiguration_CopyStrategy = &sOpenZFSOriginSnapshotConfiguration_CopyStrategy
+
+var OpenZFSPosixFileSystemUser = &sOpenZFSPosixFileSystemUser
+var OpenZFSPosixFileSystemUser_Uid = &sOpenZFSPosixFileSystemUser_Uid
+var OpenZFSPosixFileSystemUser_Gid = &sOpenZFSPosixFileSystemUser_Gid
+var OpenZFSPosixFileSystemUser_SecondaryGids = &sOpenZFSPosixFileSystemUser_SecondaryGids
+
+var OpenZFSQuotaType = &sOpenZFSQuotaType
+var OpenZFSQuotaType_USER = &sOpenZFSQuotaType_USER
+var OpenZFSQuotaType_GROUP = &sOpenZFSQuotaType_GROUP
+
+var OpenZFSReadCacheConfiguration = &sOpenZFSReadCacheConfiguration
+var OpenZFSReadCacheConfiguration_SizingMode = &sOpenZFSReadCacheConfiguration_SizingMode
+var OpenZFSReadCacheConfiguration_SizeGiB = &sOpenZFSReadCacheConfiguration_SizeGiB
+
+var OpenZFSReadCacheSizingMode = &sOpenZFSReadCacheSizingMode
+var OpenZFSReadCacheSizingMode_NO_CACHE = &sOpenZFSReadCacheSizingMode_NO_CACHE
+var OpenZFSReadCacheSizingMode_USER_PROVISIONED = &sOpenZFSReadCacheSizingMode_USER_PROVISIONED
+var OpenZFSReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY = &sOpenZFSReadCacheSizingMode_PROPORTIONAL_TO_THROUGHPUT_CAPACITY
+
+var _OpenZFSUserAndGroupQuotas = &s_OpenZFSUserAndGroupQuotas
+var _OpenZFSUserAndGroupQuotas_member = &s_OpenZFSUserAndGroupQuotas_member
+
+var OpenZFSUserOrGroupQuota = &sOpenZFSUserOrGroupQuota
+var OpenZFSUserOrGroupQuota_Type = &sOpenZFSUserOrGroupQuota_Type
+var OpenZFSUserOrGroupQuota_Id = &sOpenZFSUserOrGroupQuota_Id
+var OpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB = &sOpenZFSUserOrGroupQuota_StorageCapacityQuotaGiB
+
+var OpenZFSVolumeConfiguration = &sOpenZFSVolumeConfiguration
+var OpenZFSVolumeConfiguration_ParentVolumeId = &sOpenZFSVolumeConfiguration_ParentVolumeId
+var OpenZFSVolumeConfiguration_VolumePath = &sOpenZFSVolumeConfiguration_VolumePath
+var OpenZFSVolumeConfiguration_StorageCapacityReservationGiB = &sOpenZFSVolumeConfiguration_StorageCapacityReservationGiB
+var OpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = &sOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB
+var OpenZFSVolumeConfiguration_RecordSizeKiB = &sOpenZFSVolumeConfiguration_RecordSizeKiB
+var OpenZFSVolumeConfiguration_DataCompressionType = &sOpenZFSVolumeConfiguration_DataCompressionType
+var OpenZFSVolumeConfiguration_CopyTagsToSnapshots = &sOpenZFSVolumeConfiguration_CopyTagsToSnapshots
+var OpenZFSVolumeConfiguration_OriginSnapshot = &sOpenZFSVolumeConfiguration_OriginSnapshot
+var OpenZFSVolumeConfiguration_ReadOnly = &sOpenZFSVolumeConfiguration_ReadOnly
+var OpenZFSVolumeConfiguration_NfsExports = &sOpenZFSVolumeConfiguration_NfsExports
+var OpenZFSVolumeConfiguration_UserAndGroupQuotas = &sOpenZFSVolumeConfiguration_UserAndGroupQuotas
+var OpenZFSVolumeConfiguration_RestoreToSnapshot = &sOpenZFSVolumeConfiguration_RestoreToSnapshot
+var OpenZFSVolumeConfiguration_DeleteIntermediateSnaphots = &sOpenZFSVolumeConfiguration_DeleteIntermediateSnaphots
+var OpenZFSVolumeConfiguration_DeleteClonedVolumes = &sOpenZFSVolumeConfiguration_DeleteClonedVolumes
+var OpenZFSVolumeConfiguration_DeleteIntermediateData = &sOpenZFSVolumeConfiguration_DeleteIntermediateData
+var OpenZFSVolumeConfiguration_SourceSnapshotARN = &sOpenZFSVolumeConfiguration_SourceSnapshotARN
+var OpenZFSVolumeConfiguration_DestinationSnapshot = &sOpenZFSVolumeConfiguration_DestinationSnapshot
+var OpenZFSVolumeConfiguration_CopyStrategy = &sOpenZFSVolumeConfiguration_CopyStrategy
+
+var _OrganizationalUnitDistinguishedName = &s_OrganizationalUnitDistinguishedName
+
+var _Parameter = &s_Parameter
+
+var _PerUnitStorageThroughput = &s_PerUnitStorageThroughput
+
+var PrivilegedDelete = &sPrivilegedDelete
+var PrivilegedDelete_DISABLED = &sPrivilegedDelete_DISABLED
+var PrivilegedDelete_ENABLED = &sPrivilegedDelete_ENABLED
+var PrivilegedDelete_PERMANENTLY_DISABLED = &sPrivilegedDelete_PERMANENTLY_DISABLED
+
+var _ProgressPercent = &s_ProgressPercent
+
+var _ReadOnly = &s_ReadOnly
+
+var _Region = &s_Region
+
+var ReleaseConfiguration = &sReleaseConfiguration
+var ReleaseConfiguration_DurationSinceLastAccess = &sReleaseConfiguration_DurationSinceLastAccess
+
+var _ReleasedCapacity = &s_ReleasedCapacity
+
+var _RemainingTransferBytes = &s_RemainingTransferBytes
+
+var ReportFormat = &sReportFormat
+var ReportFormat_REPORT_CSV_20191124 = &sReportFormat_REPORT_CSV_20191124
+
+var ReportScope = &sReportScope
+var ReportScope_FAILED_FILES_ONLY = &sReportScope_FAILED_FILES_ONLY
+
+var _RepositoryDnsIps = &s_RepositoryDnsIps
+var _RepositoryDnsIps_member = &s_RepositoryDnsIps_member
+
+var _RequestTime = &s_RequestTime
+
+var _ResourceARN = &s_ResourceARN
+
+var ResourceDoesNotSupportTagging = &sResourceDoesNotSupportTagging
+var ResourceDoesNotSupportTagging_ResourceARN = &sResourceDoesNotSupportTagging_ResourceARN
+var ResourceDoesNotSupportTagging_Message = &sResourceDoesNotSupportTagging_Message
+
+var ResourceNotFound = &sResourceNotFound
+var ResourceNotFound_ResourceARN = &sResourceNotFound_ResourceARN
+var ResourceNotFound_Message = &sResourceNotFound_Message
+
+var ResourceType = &sResourceType
+var ResourceType_FILE_SYSTEM = &sResourceType_FILE_SYSTEM
+var ResourceType_VOLUME = &sResourceType_VOLUME
+
+var RestoreOpenZFSVolumeOption = &sRestoreOpenZFSVolumeOption
+var RestoreOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS = &sRestoreOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS
+var RestoreOpenZFSVolumeOption_DELETE_CLONED_VOLUMES = &sRestoreOpenZFSVolumeOption_DELETE_CLONED_VOLUMES
+
+var _RestoreOpenZFSVolumeOptions = &s_RestoreOpenZFSVolumeOptions
+var _RestoreOpenZFSVolumeOptions_member = &s_RestoreOpenZFSVolumeOptions_member
+
+var RetentionPeriod = &sRetentionPeriod
+var RetentionPeriod_Type = &sRetentionPeriod_Type
+var RetentionPeriod_Value = &sRetentionPeriod_Value
+
+var RetentionPeriodType = &sRetentionPeriodType
+var RetentionPeriodType_SECONDS = &sRetentionPeriodType_SECONDS
+var RetentionPeriodType_MINUTES = &sRetentionPeriodType_MINUTES
+var RetentionPeriodType_HOURS = &sRetentionPeriodType_HOURS
+var RetentionPeriodType_DAYS = &sRetentionPeriodType_DAYS
+var RetentionPeriodType_MONTHS = &sRetentionPeriodType_MONTHS
+var RetentionPeriodType_YEARS = &sRetentionPeriodType_YEARS
+var RetentionPeriodType_INFINITE = &sRetentionPeriodType_INFINITE
+var RetentionPeriodType_UNSPECIFIED = &sRetentionPeriodType_UNSPECIFIED
+
+var _RetentionPeriodValue = &s_RetentionPeriodValue
+
+var _RouteTableId = &s_RouteTableId
+
+var _RouteTableIds = &s_RouteTableIds
+var _RouteTableIds_member = &s_RouteTableIds_member
+
+var S3AccessPoint = &sS3AccessPoint
+var S3AccessPoint_ResourceARN = &sS3AccessPoint_ResourceARN
+var S3AccessPoint_Alias = &sS3AccessPoint_Alias
+var S3AccessPoint_VpcConfiguration = &sS3AccessPoint_VpcConfiguration
+
+var _S3AccessPointAlias = &s_S3AccessPointAlias
+
+var S3AccessPointAttachment = &sS3AccessPointAttachment
+var S3AccessPointAttachment_Lifecycle = &sS3AccessPointAttachment_Lifecycle
+var S3AccessPointAttachment_LifecycleTransitionReason = &sS3AccessPointAttachment_LifecycleTransitionReason
+var S3AccessPointAttachment_CreationTime = &sS3AccessPointAttachment_CreationTime
+var S3AccessPointAttachment_Name = &sS3AccessPointAttachment_Name
+var S3AccessPointAttachment_Type = &sS3AccessPointAttachment_Type
+var S3AccessPointAttachment_OpenZFSConfiguration = &sS3AccessPointAttachment_OpenZFSConfiguration
+var S3AccessPointAttachment_OntapConfiguration = &sS3AccessPointAttachment_OntapConfiguration
+var S3AccessPointAttachment_S3AccessPoint = &sS3AccessPointAttachment_S3AccessPoint
+
+var S3AccessPointAttachmentLifecycle = &sS3AccessPointAttachmentLifecycle
+var S3AccessPointAttachmentLifecycle_AVAILABLE = &sS3AccessPointAttachmentLifecycle_AVAILABLE
+var S3AccessPointAttachmentLifecycle_CREATING = &sS3AccessPointAttachmentLifecycle_CREATING
+var S3AccessPointAttachmentLifecycle_DELETING = &sS3AccessPointAttachmentLifecycle_DELETING
+var S3AccessPointAttachmentLifecycle_UPDATING = &sS3AccessPointAttachmentLifecycle_UPDATING
+var S3AccessPointAttachmentLifecycle_FAILED = &sS3AccessPointAttachmentLifecycle_FAILED
+var S3AccessPointAttachmentLifecycle_MISCONFIGURED = &sS3AccessPointAttachmentLifecycle_MISCONFIGURED
+
+var _S3AccessPointAttachmentName = &s_S3AccessPointAttachmentName
+
+var _S3AccessPointAttachmentNames = &s_S3AccessPointAttachmentNames
+var _S3AccessPointAttachmentNames_member = &s_S3AccessPointAttachmentNames_member
+
+var S3AccessPointAttachmentNotFound = &sS3AccessPointAttachmentNotFound
+var S3AccessPointAttachmentNotFound_Message = &sS3AccessPointAttachmentNotFound_Message
+
+var _S3AccessPointAttachments = &s_S3AccessPointAttachments
+var _S3AccessPointAttachments_member = &s_S3AccessPointAttachments_member
+
+var S3AccessPointAttachmentsFilter = &sS3AccessPointAttachmentsFilter
+var S3AccessPointAttachmentsFilter_Name = &sS3AccessPointAttachmentsFilter_Name
+var S3AccessPointAttachmentsFilter_Values = &sS3AccessPointAttachmentsFilter_Values
+
+var S3AccessPointAttachmentsFilterName = &sS3AccessPointAttachmentsFilterName
+var S3AccessPointAttachmentsFilterName_FILE_SYSTEM_ID = &sS3AccessPointAttachmentsFilterName_FILE_SYSTEM_ID
+var S3AccessPointAttachmentsFilterName_VOLUME_ID = &sS3AccessPointAttachmentsFilterName_VOLUME_ID
+var S3AccessPointAttachmentsFilterName_TYPE = &sS3AccessPointAttachmentsFilterName_TYPE
+
+var _S3AccessPointAttachmentsFilters = &s_S3AccessPointAttachmentsFilters
+var _S3AccessPointAttachmentsFilters_member = &s_S3AccessPointAttachmentsFilters_member
+
+var _S3AccessPointAttachmentsFilterValue = &s_S3AccessPointAttachmentsFilterValue
+
+var _S3AccessPointAttachmentsFilterValues = &s_S3AccessPointAttachmentsFilterValues
+var _S3AccessPointAttachmentsFilterValues_member = &s_S3AccessPointAttachmentsFilterValues_member
+
+var S3AccessPointAttachmentType = &sS3AccessPointAttachmentType
+var S3AccessPointAttachmentType_OPENZFS = &sS3AccessPointAttachmentType_OPENZFS
+var S3AccessPointAttachmentType_ONTAP = &sS3AccessPointAttachmentType_ONTAP
+
+var S3AccessPointOntapConfiguration = &sS3AccessPointOntapConfiguration
+var S3AccessPointOntapConfiguration_VolumeId = &sS3AccessPointOntapConfiguration_VolumeId
+var S3AccessPointOntapConfiguration_FileSystemIdentity = &sS3AccessPointOntapConfiguration_FileSystemIdentity
+
+var S3AccessPointOpenZFSConfiguration = &sS3AccessPointOpenZFSConfiguration
+var S3AccessPointOpenZFSConfiguration_VolumeId = &sS3AccessPointOpenZFSConfiguration_VolumeId
+var S3AccessPointOpenZFSConfiguration_FileSystemIdentity = &sS3AccessPointOpenZFSConfiguration_FileSystemIdentity
+
+var S3AccessPointVpcConfiguration = &sS3AccessPointVpcConfiguration
+var S3AccessPointVpcConfiguration_VpcId = &sS3AccessPointVpcConfiguration_VpcId
+
+var S3DataRepositoryConfiguration = &sS3DataRepositoryConfiguration
+var S3DataRepositoryConfiguration_AutoImportPolicy = &sS3DataRepositoryConfiguration_AutoImportPolicy
+var S3DataRepositoryConfiguration_AutoExportPolicy = &sS3DataRepositoryConfiguration_AutoExportPolicy
+
+var _SecurityGroupId = &s_SecurityGroupId
+
+var _SecurityGroupIds = &s_SecurityGroupIds
+var _SecurityGroupIds_member = &s_SecurityGroupIds_member
+
+var SecurityStyle = &sSecurityStyle
+var SecurityStyle_UNIX = &sSecurityStyle_UNIX
+var SecurityStyle_NTFS = &sSecurityStyle_NTFS
+var SecurityStyle_MIXED = &sSecurityStyle_MIXED
+
+var SelfManagedActiveDirectoryAttributes = &sSelfManagedActiveDirectoryAttributes
+var SelfManagedActiveDirectoryAttributes_DomainName = &sSelfManagedActiveDirectoryAttributes_DomainName
+var SelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName = &sSelfManagedActiveDirectoryAttributes_OrganizationalUnitDistinguishedName
+var SelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup = &sSelfManagedActiveDirectoryAttributes_FileSystemAdministratorsGroup
+var SelfManagedActiveDirectoryAttributes_UserName = &sSelfManagedActiveDirectoryAttributes_UserName
+var SelfManagedActiveDirectoryAttributes_DnsIps = &sSelfManagedActiveDirectoryAttributes_DnsIps
+var SelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret = &sSelfManagedActiveDirectoryAttributes_DomainJoinServiceAccountSecret
+
+var SelfManagedActiveDirectoryConfiguration = &sSelfManagedActiveDirectoryConfiguration
+var SelfManagedActiveDirectoryConfiguration_DomainName = &sSelfManagedActiveDirectoryConfiguration_DomainName
+var SelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName = &sSelfManagedActiveDirectoryConfiguration_OrganizationalUnitDistinguishedName
+var SelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup = &sSelfManagedActiveDirectoryConfiguration_FileSystemAdministratorsGroup
+var SelfManagedActiveDirectoryConfiguration_UserName = &sSelfManagedActiveDirectoryConfiguration_UserName
+var SelfManagedActiveDirectoryConfiguration_Password = &sSelfManagedActiveDirectoryConfiguration_Password
+var SelfManagedActiveDirectoryConfiguration_DnsIps = &sSelfManagedActiveDirectoryConfiguration_DnsIps
+var SelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret = &sSelfManagedActiveDirectoryConfiguration_DomainJoinServiceAccountSecret
+
+var SelfManagedActiveDirectoryConfigurationUpdates = &sSelfManagedActiveDirectoryConfigurationUpdates
+var SelfManagedActiveDirectoryConfigurationUpdates_UserName = &sSelfManagedActiveDirectoryConfigurationUpdates_UserName
+var SelfManagedActiveDirectoryConfigurationUpdates_Password = &sSelfManagedActiveDirectoryConfigurationUpdates_Password
+var SelfManagedActiveDirectoryConfigurationUpdates_DnsIps = &sSelfManagedActiveDirectoryConfigurationUpdates_DnsIps
+var SelfManagedActiveDirectoryConfigurationUpdates_DomainName = &sSelfManagedActiveDirectoryConfigurationUpdates_DomainName
+var SelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName = &sSelfManagedActiveDirectoryConfigurationUpdates_OrganizationalUnitDistinguishedName
+var SelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup = &sSelfManagedActiveDirectoryConfigurationUpdates_FileSystemAdministratorsGroup
+var SelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret = &sSelfManagedActiveDirectoryConfigurationUpdates_DomainJoinServiceAccountSecret
+
+var ServiceLimit = &sServiceLimit
+var ServiceLimit_FILE_SYSTEM_COUNT = &sServiceLimit_FILE_SYSTEM_COUNT
+var ServiceLimit_TOTAL_THROUGHPUT_CAPACITY = &sServiceLimit_TOTAL_THROUGHPUT_CAPACITY
+var ServiceLimit_TOTAL_STORAGE = &sServiceLimit_TOTAL_STORAGE
+var ServiceLimit_TOTAL_USER_INITIATED_BACKUPS = &sServiceLimit_TOTAL_USER_INITIATED_BACKUPS
+var ServiceLimit_TOTAL_USER_TAGS = &sServiceLimit_TOTAL_USER_TAGS
+var ServiceLimit_TOTAL_IN_PROGRESS_COPY_BACKUPS = &sServiceLimit_TOTAL_IN_PROGRESS_COPY_BACKUPS
+var ServiceLimit_STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM = &sServiceLimit_STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM
+var ServiceLimit_VOLUMES_PER_FILE_SYSTEM = &sServiceLimit_VOLUMES_PER_FILE_SYSTEM
+var ServiceLimit_TOTAL_SSD_IOPS = &sServiceLimit_TOTAL_SSD_IOPS
+var ServiceLimit_FILE_CACHE_COUNT = &sServiceLimit_FILE_CACHE_COUNT
+
+var ServiceLimitExceeded = &sServiceLimitExceeded
+var ServiceLimitExceeded_Limit = &sServiceLimitExceeded_Limit
+var ServiceLimitExceeded_Message = &sServiceLimitExceeded_Message
+
+var _SizeInBytes = &s_SizeInBytes
+
+var SnaplockConfiguration = &sSnaplockConfiguration
+var SnaplockConfiguration_AuditLogVolume = &sSnaplockConfiguration_AuditLogVolume
+var SnaplockConfiguration_AutocommitPeriod = &sSnaplockConfiguration_AutocommitPeriod
+var SnaplockConfiguration_PrivilegedDelete = &sSnaplockConfiguration_PrivilegedDelete
+var SnaplockConfiguration_RetentionPeriod = &sSnaplockConfiguration_RetentionPeriod
+var SnaplockConfiguration_SnaplockType = &sSnaplockConfiguration_SnaplockType
+var SnaplockConfiguration_VolumeAppendModeEnabled = &sSnaplockConfiguration_VolumeAppendModeEnabled
+
+var SnaplockRetentionPeriod = &sSnaplockRetentionPeriod
+var SnaplockRetentionPeriod_DefaultRetention = &sSnaplockRetentionPeriod_DefaultRetention
+var SnaplockRetentionPeriod_MinimumRetention = &sSnaplockRetentionPeriod_MinimumRetention
+var SnaplockRetentionPeriod_MaximumRetention = &sSnaplockRetentionPeriod_MaximumRetention
+
+var SnaplockType = &sSnaplockType
+var SnaplockType_COMPLIANCE = &sSnaplockType_COMPLIANCE
+var SnaplockType_ENTERPRISE = &sSnaplockType_ENTERPRISE
+
+var Snapshot = &sSnapshot
+var Snapshot_ResourceARN = &sSnapshot_ResourceARN
+var Snapshot_SnapshotId = &sSnapshot_SnapshotId
+var Snapshot_Name = &sSnapshot_Name
+var Snapshot_VolumeId = &sSnapshot_VolumeId
+var Snapshot_CreationTime = &sSnapshot_CreationTime
+var Snapshot_Lifecycle = &sSnapshot_Lifecycle
+var Snapshot_LifecycleTransitionReason = &sSnapshot_LifecycleTransitionReason
+var Snapshot_Tags = &sSnapshot_Tags
+var Snapshot_AdministrativeActions = &sSnapshot_AdministrativeActions
+
+var SnapshotFilter = &sSnapshotFilter
+var SnapshotFilter_Name = &sSnapshotFilter_Name
+var SnapshotFilter_Values = &sSnapshotFilter_Values
+
+var SnapshotFilterName = &sSnapshotFilterName
+var SnapshotFilterName_FILE_SYSTEM_ID = &sSnapshotFilterName_FILE_SYSTEM_ID
+var SnapshotFilterName_VOLUME_ID = &sSnapshotFilterName_VOLUME_ID
+
+var _SnapshotFilters = &s_SnapshotFilters
+var _SnapshotFilters_member = &s_SnapshotFilters_member
+
+var _SnapshotFilterValue = &s_SnapshotFilterValue
+
+var _SnapshotFilterValues = &s_SnapshotFilterValues
+var _SnapshotFilterValues_member = &s_SnapshotFilterValues_member
+
+var _SnapshotId = &s_SnapshotId
+
+var _SnapshotIds = &s_SnapshotIds
+var _SnapshotIds_member = &s_SnapshotIds_member
+
+var SnapshotLifecycle = &sSnapshotLifecycle
+var SnapshotLifecycle_PENDING = &sSnapshotLifecycle_PENDING
+var SnapshotLifecycle_CREATING = &sSnapshotLifecycle_CREATING
+var SnapshotLifecycle_DELETING = &sSnapshotLifecycle_DELETING
+var SnapshotLifecycle_AVAILABLE = &sSnapshotLifecycle_AVAILABLE
+
+var _SnapshotName = &s_SnapshotName
+
+var SnapshotNotFound = &sSnapshotNotFound
+var SnapshotNotFound_Message = &sSnapshotNotFound_Message
+
+var _SnapshotPolicy = &s_SnapshotPolicy
+
+var _Snapshots = &s_Snapshots
+var _Snapshots_member = &s_Snapshots_member
+
+var _SourceBackupId = &s_SourceBackupId
+
+var SourceBackupUnavailable = &sSourceBackupUnavailable
+var SourceBackupUnavailable_Message = &sSourceBackupUnavailable_Message
+var SourceBackupUnavailable_BackupId = &sSourceBackupUnavailable_BackupId
+
+var _StartTime = &s_StartTime
+
+var Status = &sStatus
+var Status_FAILED = &sStatus_FAILED
+var Status_IN_PROGRESS = &sStatus_IN_PROGRESS
+var Status_PENDING = &sStatus_PENDING
+var Status_COMPLETED = &sStatus_COMPLETED
+var Status_UPDATED_OPTIMIZING = &sStatus_UPDATED_OPTIMIZING
+var Status_OPTIMIZING = &sStatus_OPTIMIZING
+var Status_PAUSED = &sStatus_PAUSED
+var Status_CANCELLED = &sStatus_CANCELLED
+
+var _StorageCapacity = &s_StorageCapacity
+
+var StorageType = &sStorageType
+var StorageType_SSD = &sStorageType_SSD
+var StorageType_HDD = &sStorageType_HDD
+var StorageType_INTELLIGENT_TIERING = &sStorageType_INTELLIGENT_TIERING
+
+var StorageVirtualMachine = &sStorageVirtualMachine
+var StorageVirtualMachine_ActiveDirectoryConfiguration = &sStorageVirtualMachine_ActiveDirectoryConfiguration
+var StorageVirtualMachine_CreationTime = &sStorageVirtualMachine_CreationTime
+var StorageVirtualMachine_Endpoints = &sStorageVirtualMachine_Endpoints
+var StorageVirtualMachine_FileSystemId = &sStorageVirtualMachine_FileSystemId
+var StorageVirtualMachine_Lifecycle = &sStorageVirtualMachine_Lifecycle
+var StorageVirtualMachine_Name = &sStorageVirtualMachine_Name
+var StorageVirtualMachine_ResourceARN = &sStorageVirtualMachine_ResourceARN
+var StorageVirtualMachine_StorageVirtualMachineId = &sStorageVirtualMachine_StorageVirtualMachineId
+var StorageVirtualMachine_Subtype = &sStorageVirtualMachine_Subtype
+var StorageVirtualMachine_UUID = &sStorageVirtualMachine_UUID
+var StorageVirtualMachine_Tags = &sStorageVirtualMachine_Tags
+var StorageVirtualMachine_LifecycleTransitionReason = &sStorageVirtualMachine_LifecycleTransitionReason
+var StorageVirtualMachine_RootVolumeSecurityStyle = &sStorageVirtualMachine_RootVolumeSecurityStyle
+
+var StorageVirtualMachineFilter = &sStorageVirtualMachineFilter
+var StorageVirtualMachineFilter_Name = &sStorageVirtualMachineFilter_Name
+var StorageVirtualMachineFilter_Values = &sStorageVirtualMachineFilter_Values
+
+var StorageVirtualMachineFilterName = &sStorageVirtualMachineFilterName
+var StorageVirtualMachineFilterName_FILE_SYSTEM_ID = &sStorageVirtualMachineFilterName_FILE_SYSTEM_ID
+
+var _StorageVirtualMachineFilters = &s_StorageVirtualMachineFilters
+var _StorageVirtualMachineFilters_member = &s_StorageVirtualMachineFilters_member
+
+var _StorageVirtualMachineFilterValue = &s_StorageVirtualMachineFilterValue
+
+var _StorageVirtualMachineFilterValues = &s_StorageVirtualMachineFilterValues
+var _StorageVirtualMachineFilterValues_member = &s_StorageVirtualMachineFilterValues_member
+
+var _StorageVirtualMachineId = &s_StorageVirtualMachineId
+
+var _StorageVirtualMachineIds = &s_StorageVirtualMachineIds
+var _StorageVirtualMachineIds_member = &s_StorageVirtualMachineIds_member
+
+var StorageVirtualMachineLifecycle = &sStorageVirtualMachineLifecycle
+var StorageVirtualMachineLifecycle_CREATED = &sStorageVirtualMachineLifecycle_CREATED
+var StorageVirtualMachineLifecycle_CREATING = &sStorageVirtualMachineLifecycle_CREATING
+var StorageVirtualMachineLifecycle_DELETING = &sStorageVirtualMachineLifecycle_DELETING
+var StorageVirtualMachineLifecycle_FAILED = &sStorageVirtualMachineLifecycle_FAILED
+var StorageVirtualMachineLifecycle_MISCONFIGURED = &sStorageVirtualMachineLifecycle_MISCONFIGURED
+var StorageVirtualMachineLifecycle_PENDING = &sStorageVirtualMachineLifecycle_PENDING
+
+var _StorageVirtualMachineName = &s_StorageVirtualMachineName
+
+var StorageVirtualMachineNotFound = &sStorageVirtualMachineNotFound
+var StorageVirtualMachineNotFound_Message = &sStorageVirtualMachineNotFound_Message
+
+var StorageVirtualMachineRootVolumeSecurityStyle = &sStorageVirtualMachineRootVolumeSecurityStyle
+var StorageVirtualMachineRootVolumeSecurityStyle_UNIX = &sStorageVirtualMachineRootVolumeSecurityStyle_UNIX
+var StorageVirtualMachineRootVolumeSecurityStyle_NTFS = &sStorageVirtualMachineRootVolumeSecurityStyle_NTFS
+var StorageVirtualMachineRootVolumeSecurityStyle_MIXED = &sStorageVirtualMachineRootVolumeSecurityStyle_MIXED
+
+var _StorageVirtualMachines = &s_StorageVirtualMachines
+var _StorageVirtualMachines_member = &s_StorageVirtualMachines_member
+
+var StorageVirtualMachineSubtype = &sStorageVirtualMachineSubtype
+var StorageVirtualMachineSubtype_DEFAULT = &sStorageVirtualMachineSubtype_DEFAULT
+var StorageVirtualMachineSubtype_DP_DESTINATION = &sStorageVirtualMachineSubtype_DP_DESTINATION
+var StorageVirtualMachineSubtype_SYNC_DESTINATION = &sStorageVirtualMachineSubtype_SYNC_DESTINATION
+var StorageVirtualMachineSubtype_SYNC_SOURCE = &sStorageVirtualMachineSubtype_SYNC_SOURCE
+
+var _SubDirectoriesPaths = &s_SubDirectoriesPaths
+var _SubDirectoriesPaths_member = &s_SubDirectoriesPaths_member
+
+var _SubnetId = &s_SubnetId
+
+var _SubnetIds = &s_SubnetIds
+var _SubnetIds_member = &s_SubnetIds_member
+
+var _SucceededCount = &s_SucceededCount
+
+var SvmActiveDirectoryConfiguration = &sSvmActiveDirectoryConfiguration
+var SvmActiveDirectoryConfiguration_NetBiosName = &sSvmActiveDirectoryConfiguration_NetBiosName
+var SvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = &sSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration
+
+var SvmEndpoint = &sSvmEndpoint
+var SvmEndpoint_DNSName = &sSvmEndpoint_DNSName
+var SvmEndpoint_IpAddresses = &sSvmEndpoint_IpAddresses
+var SvmEndpoint_Ipv6Addresses = &sSvmEndpoint_Ipv6Addresses
+
+var SvmEndpoints = &sSvmEndpoints
+var SvmEndpoints_Iscsi = &sSvmEndpoints_Iscsi
+var SvmEndpoints_Management = &sSvmEndpoints_Management
+var SvmEndpoints_Nfs = &sSvmEndpoints_Nfs
+var SvmEndpoints_Smb = &sSvmEndpoints_Smb
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagValue = &s_TagValue
+
+var _TaskId = &s_TaskId
+
+var _TaskIds = &s_TaskIds
+var _TaskIds_member = &s_TaskIds_member
+
+var _ThroughputCapacityMbps = &s_ThroughputCapacityMbps
+
+var _ThroughputCapacityPerHAPair = &s_ThroughputCapacityPerHAPair
+
+var TieringPolicy = &sTieringPolicy
+var TieringPolicy_CoolingPeriod = &sTieringPolicy_CoolingPeriod
+var TieringPolicy_Name = &sTieringPolicy_Name
+
+var TieringPolicyName = &sTieringPolicyName
+var TieringPolicyName_SNAPSHOT_ONLY = &sTieringPolicyName_SNAPSHOT_ONLY
+var TieringPolicyName_AUTO = &sTieringPolicyName_AUTO
+var TieringPolicyName_ALL = &sTieringPolicyName_ALL
+var TieringPolicyName_NONE = &sTieringPolicyName_NONE
+
+var TooManyAccessPoints = &sTooManyAccessPoints
+var TooManyAccessPoints_ErrorCode = &sTooManyAccessPoints_ErrorCode
+var TooManyAccessPoints_Message = &sTooManyAccessPoints_Message
+
+var _TotalConstituents = &s_TotalConstituents
+
+var _TotalCount = &s_TotalCount
+
+var _TotalTransferBytes = &s_TotalTransferBytes
+
+var Unit = &sUnit
+var Unit_DAYS = &sUnit_DAYS
+
+var UnsupportedOperation = &sUnsupportedOperation
+var UnsupportedOperation_Message = &sUnsupportedOperation_Message
+
+var UpdateFileCacheLustreConfiguration = &sUpdateFileCacheLustreConfiguration
+var UpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime = &sUpdateFileCacheLustreConfiguration_WeeklyMaintenanceStartTime
+
+var UpdateFileSystemLustreConfiguration = &sUpdateFileSystemLustreConfiguration
+var UpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime = &sUpdateFileSystemLustreConfiguration_WeeklyMaintenanceStartTime
+var UpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime = &sUpdateFileSystemLustreConfiguration_DailyAutomaticBackupStartTime
+var UpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays = &sUpdateFileSystemLustreConfiguration_AutomaticBackupRetentionDays
+var UpdateFileSystemLustreConfiguration_AutoImportPolicy = &sUpdateFileSystemLustreConfiguration_AutoImportPolicy
+var UpdateFileSystemLustreConfiguration_DataCompressionType = &sUpdateFileSystemLustreConfiguration_DataCompressionType
+var UpdateFileSystemLustreConfiguration_LogConfiguration = &sUpdateFileSystemLustreConfiguration_LogConfiguration
+var UpdateFileSystemLustreConfiguration_RootSquashConfiguration = &sUpdateFileSystemLustreConfiguration_RootSquashConfiguration
+var UpdateFileSystemLustreConfiguration_PerUnitStorageThroughput = &sUpdateFileSystemLustreConfiguration_PerUnitStorageThroughput
+var UpdateFileSystemLustreConfiguration_MetadataConfiguration = &sUpdateFileSystemLustreConfiguration_MetadataConfiguration
+var UpdateFileSystemLustreConfiguration_ThroughputCapacity = &sUpdateFileSystemLustreConfiguration_ThroughputCapacity
+var UpdateFileSystemLustreConfiguration_DataReadCacheConfiguration = &sUpdateFileSystemLustreConfiguration_DataReadCacheConfiguration
+
+var UpdateFileSystemLustreMetadataConfiguration = &sUpdateFileSystemLustreMetadataConfiguration
+var UpdateFileSystemLustreMetadataConfiguration_Iops = &sUpdateFileSystemLustreMetadataConfiguration_Iops
+var UpdateFileSystemLustreMetadataConfiguration_Mode = &sUpdateFileSystemLustreMetadataConfiguration_Mode
+
+var UpdateFileSystemOntapConfiguration = &sUpdateFileSystemOntapConfiguration
+var UpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays = &sUpdateFileSystemOntapConfiguration_AutomaticBackupRetentionDays
+var UpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime = &sUpdateFileSystemOntapConfiguration_DailyAutomaticBackupStartTime
+var UpdateFileSystemOntapConfiguration_FsxAdminPassword = &sUpdateFileSystemOntapConfiguration_FsxAdminPassword
+var UpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime = &sUpdateFileSystemOntapConfiguration_WeeklyMaintenanceStartTime
+var UpdateFileSystemOntapConfiguration_DiskIopsConfiguration = &sUpdateFileSystemOntapConfiguration_DiskIopsConfiguration
+var UpdateFileSystemOntapConfiguration_ThroughputCapacity = &sUpdateFileSystemOntapConfiguration_ThroughputCapacity
+var UpdateFileSystemOntapConfiguration_AddRouteTableIds = &sUpdateFileSystemOntapConfiguration_AddRouteTableIds
+var UpdateFileSystemOntapConfiguration_RemoveRouteTableIds = &sUpdateFileSystemOntapConfiguration_RemoveRouteTableIds
+var UpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair = &sUpdateFileSystemOntapConfiguration_ThroughputCapacityPerHAPair
+var UpdateFileSystemOntapConfiguration_HAPairs = &sUpdateFileSystemOntapConfiguration_HAPairs
+var UpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange = &sUpdateFileSystemOntapConfiguration_EndpointIpv6AddressRange
+
+var UpdateFileSystemOpenZFSConfiguration = &sUpdateFileSystemOpenZFSConfiguration
+var UpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays = &sUpdateFileSystemOpenZFSConfiguration_AutomaticBackupRetentionDays
+var UpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups = &sUpdateFileSystemOpenZFSConfiguration_CopyTagsToBackups
+var UpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes = &sUpdateFileSystemOpenZFSConfiguration_CopyTagsToVolumes
+var UpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime = &sUpdateFileSystemOpenZFSConfiguration_DailyAutomaticBackupStartTime
+var UpdateFileSystemOpenZFSConfiguration_ThroughputCapacity = &sUpdateFileSystemOpenZFSConfiguration_ThroughputCapacity
+var UpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime = &sUpdateFileSystemOpenZFSConfiguration_WeeklyMaintenanceStartTime
+var UpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration = &sUpdateFileSystemOpenZFSConfiguration_DiskIopsConfiguration
+var UpdateFileSystemOpenZFSConfiguration_AddRouteTableIds = &sUpdateFileSystemOpenZFSConfiguration_AddRouteTableIds
+var UpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds = &sUpdateFileSystemOpenZFSConfiguration_RemoveRouteTableIds
+var UpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration = &sUpdateFileSystemOpenZFSConfiguration_ReadCacheConfiguration
+var UpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange = &sUpdateFileSystemOpenZFSConfiguration_EndpointIpv6AddressRange
+
+var UpdateFileSystemWindowsConfiguration = &sUpdateFileSystemWindowsConfiguration
+var UpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime = &sUpdateFileSystemWindowsConfiguration_WeeklyMaintenanceStartTime
+var UpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime = &sUpdateFileSystemWindowsConfiguration_DailyAutomaticBackupStartTime
+var UpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays = &sUpdateFileSystemWindowsConfiguration_AutomaticBackupRetentionDays
+var UpdateFileSystemWindowsConfiguration_ThroughputCapacity = &sUpdateFileSystemWindowsConfiguration_ThroughputCapacity
+var UpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration = &sUpdateFileSystemWindowsConfiguration_SelfManagedActiveDirectoryConfiguration
+var UpdateFileSystemWindowsConfiguration_AuditLogConfiguration = &sUpdateFileSystemWindowsConfiguration_AuditLogConfiguration
+var UpdateFileSystemWindowsConfiguration_DiskIopsConfiguration = &sUpdateFileSystemWindowsConfiguration_DiskIopsConfiguration
+var UpdateFileSystemWindowsConfiguration_FsrmConfiguration = &sUpdateFileSystemWindowsConfiguration_FsrmConfiguration
+
+var UpdateOntapVolumeConfiguration = &sUpdateOntapVolumeConfiguration
+var UpdateOntapVolumeConfiguration_JunctionPath = &sUpdateOntapVolumeConfiguration_JunctionPath
+var UpdateOntapVolumeConfiguration_SecurityStyle = &sUpdateOntapVolumeConfiguration_SecurityStyle
+var UpdateOntapVolumeConfiguration_SizeInMegabytes = &sUpdateOntapVolumeConfiguration_SizeInMegabytes
+var UpdateOntapVolumeConfiguration_StorageEfficiencyEnabled = &sUpdateOntapVolumeConfiguration_StorageEfficiencyEnabled
+var UpdateOntapVolumeConfiguration_TieringPolicy = &sUpdateOntapVolumeConfiguration_TieringPolicy
+var UpdateOntapVolumeConfiguration_SnapshotPolicy = &sUpdateOntapVolumeConfiguration_SnapshotPolicy
+var UpdateOntapVolumeConfiguration_CopyTagsToBackups = &sUpdateOntapVolumeConfiguration_CopyTagsToBackups
+var UpdateOntapVolumeConfiguration_SnaplockConfiguration = &sUpdateOntapVolumeConfiguration_SnaplockConfiguration
+var UpdateOntapVolumeConfiguration_SizeInBytes = &sUpdateOntapVolumeConfiguration_SizeInBytes
+
+var UpdateOpenZFSVolumeConfiguration = &sUpdateOpenZFSVolumeConfiguration
+var UpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB = &sUpdateOpenZFSVolumeConfiguration_StorageCapacityReservationGiB
+var UpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB = &sUpdateOpenZFSVolumeConfiguration_StorageCapacityQuotaGiB
+var UpdateOpenZFSVolumeConfiguration_RecordSizeKiB = &sUpdateOpenZFSVolumeConfiguration_RecordSizeKiB
+var UpdateOpenZFSVolumeConfiguration_DataCompressionType = &sUpdateOpenZFSVolumeConfiguration_DataCompressionType
+var UpdateOpenZFSVolumeConfiguration_NfsExports = &sUpdateOpenZFSVolumeConfiguration_NfsExports
+var UpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas = &sUpdateOpenZFSVolumeConfiguration_UserAndGroupQuotas
+var UpdateOpenZFSVolumeConfiguration_ReadOnly = &sUpdateOpenZFSVolumeConfiguration_ReadOnly
+
+var UpdateOpenZFSVolumeOption = &sUpdateOpenZFSVolumeOption
+var UpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS = &sUpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_SNAPSHOTS
+var UpdateOpenZFSVolumeOption_DELETE_CLONED_VOLUMES = &sUpdateOpenZFSVolumeOption_DELETE_CLONED_VOLUMES
+var UpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_DATA = &sUpdateOpenZFSVolumeOption_DELETE_INTERMEDIATE_DATA
+
+var _UpdateOpenZFSVolumeOptions = &s_UpdateOpenZFSVolumeOptions
+var _UpdateOpenZFSVolumeOptions_member = &s_UpdateOpenZFSVolumeOptions_member
+
+var UpdateSnaplockConfiguration = &sUpdateSnaplockConfiguration
+var UpdateSnaplockConfiguration_AuditLogVolume = &sUpdateSnaplockConfiguration_AuditLogVolume
+var UpdateSnaplockConfiguration_AutocommitPeriod = &sUpdateSnaplockConfiguration_AutocommitPeriod
+var UpdateSnaplockConfiguration_PrivilegedDelete = &sUpdateSnaplockConfiguration_PrivilegedDelete
+var UpdateSnaplockConfiguration_RetentionPeriod = &sUpdateSnaplockConfiguration_RetentionPeriod
+var UpdateSnaplockConfiguration_VolumeAppendModeEnabled = &sUpdateSnaplockConfiguration_VolumeAppendModeEnabled
+
+var UpdateSvmActiveDirectoryConfiguration = &sUpdateSvmActiveDirectoryConfiguration
+var UpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration = &sUpdateSvmActiveDirectoryConfiguration_SelfManagedActiveDirectoryConfiguration
+var UpdateSvmActiveDirectoryConfiguration_NetBiosName = &sUpdateSvmActiveDirectoryConfiguration_NetBiosName
+
+var _UUID = &s_UUID
+
+var _Value = &s_Value
+
+var _VerboseFlag = &s_VerboseFlag
+
+var Volume = &sVolume
+var Volume_CreationTime = &sVolume_CreationTime
+var Volume_FileSystemId = &sVolume_FileSystemId
+var Volume_Lifecycle = &sVolume_Lifecycle
+var Volume_Name = &sVolume_Name
+var Volume_OntapConfiguration = &sVolume_OntapConfiguration
+var Volume_ResourceARN = &sVolume_ResourceARN
+var Volume_Tags = &sVolume_Tags
+var Volume_VolumeId = &sVolume_VolumeId
+var Volume_VolumeType = &sVolume_VolumeType
+var Volume_LifecycleTransitionReason = &sVolume_LifecycleTransitionReason
+var Volume_AdministrativeActions = &sVolume_AdministrativeActions
+var Volume_OpenZFSConfiguration = &sVolume_OpenZFSConfiguration
+
+var _VolumeCapacity = &s_VolumeCapacity
+
+var _VolumeCapacityBytes = &s_VolumeCapacityBytes
+
+var VolumeFilter = &sVolumeFilter
+var VolumeFilter_Name = &sVolumeFilter_Name
+var VolumeFilter_Values = &sVolumeFilter_Values
+
+var VolumeFilterName = &sVolumeFilterName
+var VolumeFilterName_FILE_SYSTEM_ID = &sVolumeFilterName_FILE_SYSTEM_ID
+var VolumeFilterName_STORAGE_VIRTUAL_MACHINE_ID = &sVolumeFilterName_STORAGE_VIRTUAL_MACHINE_ID
+
+var _VolumeFilters = &s_VolumeFilters
+var _VolumeFilters_member = &s_VolumeFilters_member
+
+var _VolumeFilterValue = &s_VolumeFilterValue
+
+var _VolumeFilterValues = &s_VolumeFilterValues
+var _VolumeFilterValues_member = &s_VolumeFilterValues_member
+
+var _VolumeId = &s_VolumeId
+
+var _VolumeIds = &s_VolumeIds
+var _VolumeIds_member = &s_VolumeIds_member
+
+var VolumeLifecycle = &sVolumeLifecycle
+var VolumeLifecycle_CREATING = &sVolumeLifecycle_CREATING
+var VolumeLifecycle_CREATED = &sVolumeLifecycle_CREATED
+var VolumeLifecycle_DELETING = &sVolumeLifecycle_DELETING
+var VolumeLifecycle_FAILED = &sVolumeLifecycle_FAILED
+var VolumeLifecycle_MISCONFIGURED = &sVolumeLifecycle_MISCONFIGURED
+var VolumeLifecycle_PENDING = &sVolumeLifecycle_PENDING
+var VolumeLifecycle_AVAILABLE = &sVolumeLifecycle_AVAILABLE
+
+var _VolumeName = &s_VolumeName
+
+var VolumeNotFound = &sVolumeNotFound
+var VolumeNotFound_Message = &sVolumeNotFound_Message
+
+var _VolumePath = &s_VolumePath
+
+var _Volumes = &s_Volumes
+var _Volumes_member = &s_Volumes_member
+
+var VolumeStyle = &sVolumeStyle
+var VolumeStyle_FLEXVOL = &sVolumeStyle_FLEXVOL
+var VolumeStyle_FLEXGROUP = &sVolumeStyle_FLEXGROUP
+
+var VolumeType = &sVolumeType
+var VolumeType_ONTAP = &sVolumeType_ONTAP
+var VolumeType_OPENZFS = &sVolumeType_OPENZFS
+
+var _VpcId = &s_VpcId
+
+var _WeeklyTime = &s_WeeklyTime
+
+var WindowsAccessAuditLogLevel = &sWindowsAccessAuditLogLevel
+var WindowsAccessAuditLogLevel_DISABLED = &sWindowsAccessAuditLogLevel_DISABLED
+var WindowsAccessAuditLogLevel_SUCCESS_ONLY = &sWindowsAccessAuditLogLevel_SUCCESS_ONLY
+var WindowsAccessAuditLogLevel_FAILURE_ONLY = &sWindowsAccessAuditLogLevel_FAILURE_ONLY
+var WindowsAccessAuditLogLevel_SUCCESS_AND_FAILURE = &sWindowsAccessAuditLogLevel_SUCCESS_AND_FAILURE
+
+var WindowsAuditLogConfiguration = &sWindowsAuditLogConfiguration
+var WindowsAuditLogConfiguration_FileAccessAuditLogLevel = &sWindowsAuditLogConfiguration_FileAccessAuditLogLevel
+var WindowsAuditLogConfiguration_FileShareAccessAuditLogLevel = &sWindowsAuditLogConfiguration_FileShareAccessAuditLogLevel
+var WindowsAuditLogConfiguration_AuditLogDestination = &sWindowsAuditLogConfiguration_AuditLogDestination
+
+var WindowsAuditLogCreateConfiguration = &sWindowsAuditLogCreateConfiguration
+var WindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel = &sWindowsAuditLogCreateConfiguration_FileAccessAuditLogLevel
+var WindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel = &sWindowsAuditLogCreateConfiguration_FileShareAccessAuditLogLevel
+var WindowsAuditLogCreateConfiguration_AuditLogDestination = &sWindowsAuditLogCreateConfiguration_AuditLogDestination
+
+var WindowsDeploymentType = &sWindowsDeploymentType
+var WindowsDeploymentType_MULTI_AZ_1 = &sWindowsDeploymentType_MULTI_AZ_1
+var WindowsDeploymentType_SINGLE_AZ_1 = &sWindowsDeploymentType_SINGLE_AZ_1
+var WindowsDeploymentType_SINGLE_AZ_2 = &sWindowsDeploymentType_SINGLE_AZ_2
+
+var WindowsFileSystemConfiguration = &sWindowsFileSystemConfiguration
+var WindowsFileSystemConfiguration_ActiveDirectoryId = &sWindowsFileSystemConfiguration_ActiveDirectoryId
+var WindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration = &sWindowsFileSystemConfiguration_SelfManagedActiveDirectoryConfiguration
+var WindowsFileSystemConfiguration_DeploymentType = &sWindowsFileSystemConfiguration_DeploymentType
+var WindowsFileSystemConfiguration_RemoteAdministrationEndpoint = &sWindowsFileSystemConfiguration_RemoteAdministrationEndpoint
+var WindowsFileSystemConfiguration_PreferredSubnetId = &sWindowsFileSystemConfiguration_PreferredSubnetId
+var WindowsFileSystemConfiguration_PreferredFileServerIp = &sWindowsFileSystemConfiguration_PreferredFileServerIp
+var WindowsFileSystemConfiguration_ThroughputCapacity = &sWindowsFileSystemConfiguration_ThroughputCapacity
+var WindowsFileSystemConfiguration_MaintenanceOperationsInProgress = &sWindowsFileSystemConfiguration_MaintenanceOperationsInProgress
+var WindowsFileSystemConfiguration_WeeklyMaintenanceStartTime = &sWindowsFileSystemConfiguration_WeeklyMaintenanceStartTime
+var WindowsFileSystemConfiguration_DailyAutomaticBackupStartTime = &sWindowsFileSystemConfiguration_DailyAutomaticBackupStartTime
+var WindowsFileSystemConfiguration_AutomaticBackupRetentionDays = &sWindowsFileSystemConfiguration_AutomaticBackupRetentionDays
+var WindowsFileSystemConfiguration_CopyTagsToBackups = &sWindowsFileSystemConfiguration_CopyTagsToBackups
+var WindowsFileSystemConfiguration_Aliases = &sWindowsFileSystemConfiguration_Aliases
+var WindowsFileSystemConfiguration_AuditLogConfiguration = &sWindowsFileSystemConfiguration_AuditLogConfiguration
+var WindowsFileSystemConfiguration_DiskIopsConfiguration = &sWindowsFileSystemConfiguration_DiskIopsConfiguration
+var WindowsFileSystemConfiguration_PreferredFileServerIpv6 = &sWindowsFileSystemConfiguration_PreferredFileServerIpv6
+var WindowsFileSystemConfiguration_FsrmConfiguration = &sWindowsFileSystemConfiguration_FsrmConfiguration
+
+var WindowsFsrmConfiguration = &sWindowsFsrmConfiguration
+var WindowsFsrmConfiguration_FsrmServiceEnabled = &sWindowsFsrmConfiguration_FsrmServiceEnabled
+var WindowsFsrmConfiguration_EventLogDestination = &sWindowsFsrmConfiguration_EventLogDestination
+
+var AssociateFileSystemAliasesRequest = &sAssociateFileSystemAliasesRequest
+var AssociateFileSystemAliasesRequest_ClientRequestToken = &sAssociateFileSystemAliasesRequest_ClientRequestToken
+var AssociateFileSystemAliasesRequest_FileSystemId = &sAssociateFileSystemAliasesRequest_FileSystemId
+var AssociateFileSystemAliasesRequest_Aliases = &sAssociateFileSystemAliasesRequest_Aliases
+
+var AssociateFileSystemAliasesResponse = &sAssociateFileSystemAliasesResponse
+var AssociateFileSystemAliasesResponse_Aliases = &sAssociateFileSystemAliasesResponse_Aliases
+
+var CancelDataRepositoryTaskRequest = &sCancelDataRepositoryTaskRequest
+var CancelDataRepositoryTaskRequest_TaskId = &sCancelDataRepositoryTaskRequest_TaskId
+
+var CancelDataRepositoryTaskResponse = &sCancelDataRepositoryTaskResponse
+var CancelDataRepositoryTaskResponse_Lifecycle = &sCancelDataRepositoryTaskResponse_Lifecycle
+var CancelDataRepositoryTaskResponse_TaskId = &sCancelDataRepositoryTaskResponse_TaskId
+
+var CopyBackupRequest = &sCopyBackupRequest
+var CopyBackupRequest_ClientRequestToken = &sCopyBackupRequest_ClientRequestToken
+var CopyBackupRequest_SourceBackupId = &sCopyBackupRequest_SourceBackupId
+var CopyBackupRequest_SourceRegion = &sCopyBackupRequest_SourceRegion
+var CopyBackupRequest_KmsKeyId = &sCopyBackupRequest_KmsKeyId
+var CopyBackupRequest_CopyTags = &sCopyBackupRequest_CopyTags
+var CopyBackupRequest_Tags = &sCopyBackupRequest_Tags
+
+var CopyBackupResponse = &sCopyBackupResponse
+var CopyBackupResponse_Backup = &sCopyBackupResponse_Backup
+
+var CopySnapshotAndUpdateVolumeRequest = &sCopySnapshotAndUpdateVolumeRequest
+var CopySnapshotAndUpdateVolumeRequest_ClientRequestToken = &sCopySnapshotAndUpdateVolumeRequest_ClientRequestToken
+var CopySnapshotAndUpdateVolumeRequest_VolumeId = &sCopySnapshotAndUpdateVolumeRequest_VolumeId
+var CopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN = &sCopySnapshotAndUpdateVolumeRequest_SourceSnapshotARN
+var CopySnapshotAndUpdateVolumeRequest_CopyStrategy = &sCopySnapshotAndUpdateVolumeRequest_CopyStrategy
+var CopySnapshotAndUpdateVolumeRequest_Options = &sCopySnapshotAndUpdateVolumeRequest_Options
+
+var CopySnapshotAndUpdateVolumeResponse = &sCopySnapshotAndUpdateVolumeResponse
+var CopySnapshotAndUpdateVolumeResponse_VolumeId = &sCopySnapshotAndUpdateVolumeResponse_VolumeId
+var CopySnapshotAndUpdateVolumeResponse_Lifecycle = &sCopySnapshotAndUpdateVolumeResponse_Lifecycle
+var CopySnapshotAndUpdateVolumeResponse_AdministrativeActions = &sCopySnapshotAndUpdateVolumeResponse_AdministrativeActions
+
+var CreateAndAttachS3AccessPointRequest = &sCreateAndAttachS3AccessPointRequest
+var CreateAndAttachS3AccessPointRequest_ClientRequestToken = &sCreateAndAttachS3AccessPointRequest_ClientRequestToken
+var CreateAndAttachS3AccessPointRequest_Name = &sCreateAndAttachS3AccessPointRequest_Name
+var CreateAndAttachS3AccessPointRequest_Type = &sCreateAndAttachS3AccessPointRequest_Type
+var CreateAndAttachS3AccessPointRequest_OpenZFSConfiguration = &sCreateAndAttachS3AccessPointRequest_OpenZFSConfiguration
+var CreateAndAttachS3AccessPointRequest_OntapConfiguration = &sCreateAndAttachS3AccessPointRequest_OntapConfiguration
+var CreateAndAttachS3AccessPointRequest_S3AccessPoint = &sCreateAndAttachS3AccessPointRequest_S3AccessPoint
+
+var CreateAndAttachS3AccessPointResponse = &sCreateAndAttachS3AccessPointResponse
+var CreateAndAttachS3AccessPointResponse_S3AccessPointAttachment = &sCreateAndAttachS3AccessPointResponse_S3AccessPointAttachment
+
+var CreateBackupRequest = &sCreateBackupRequest
+var CreateBackupRequest_FileSystemId = &sCreateBackupRequest_FileSystemId
+var CreateBackupRequest_ClientRequestToken = &sCreateBackupRequest_ClientRequestToken
+var CreateBackupRequest_Tags = &sCreateBackupRequest_Tags
+var CreateBackupRequest_VolumeId = &sCreateBackupRequest_VolumeId
+
+var CreateBackupResponse = &sCreateBackupResponse
+var CreateBackupResponse_Backup = &sCreateBackupResponse_Backup
+
+var CreateDataRepositoryAssociationRequest = &sCreateDataRepositoryAssociationRequest
+var CreateDataRepositoryAssociationRequest_FileSystemId = &sCreateDataRepositoryAssociationRequest_FileSystemId
+var CreateDataRepositoryAssociationRequest_FileSystemPath = &sCreateDataRepositoryAssociationRequest_FileSystemPath
+var CreateDataRepositoryAssociationRequest_DataRepositoryPath = &sCreateDataRepositoryAssociationRequest_DataRepositoryPath
+var CreateDataRepositoryAssociationRequest_BatchImportMetaDataOnCreate = &sCreateDataRepositoryAssociationRequest_BatchImportMetaDataOnCreate
+var CreateDataRepositoryAssociationRequest_ImportedFileChunkSize = &sCreateDataRepositoryAssociationRequest_ImportedFileChunkSize
+var CreateDataRepositoryAssociationRequest_S3 = &sCreateDataRepositoryAssociationRequest_S3
+var CreateDataRepositoryAssociationRequest_ClientRequestToken = &sCreateDataRepositoryAssociationRequest_ClientRequestToken
+var CreateDataRepositoryAssociationRequest_Tags = &sCreateDataRepositoryAssociationRequest_Tags
+
+var CreateDataRepositoryAssociationResponse = &sCreateDataRepositoryAssociationResponse
+var CreateDataRepositoryAssociationResponse_Association = &sCreateDataRepositoryAssociationResponse_Association
+
+var CreateDataRepositoryTaskRequest = &sCreateDataRepositoryTaskRequest
+var CreateDataRepositoryTaskRequest_Type = &sCreateDataRepositoryTaskRequest_Type
+var CreateDataRepositoryTaskRequest_Paths = &sCreateDataRepositoryTaskRequest_Paths
+var CreateDataRepositoryTaskRequest_FileSystemId = &sCreateDataRepositoryTaskRequest_FileSystemId
+var CreateDataRepositoryTaskRequest_Report = &sCreateDataRepositoryTaskRequest_Report
+var CreateDataRepositoryTaskRequest_ClientRequestToken = &sCreateDataRepositoryTaskRequest_ClientRequestToken
+var CreateDataRepositoryTaskRequest_Tags = &sCreateDataRepositoryTaskRequest_Tags
+var CreateDataRepositoryTaskRequest_CapacityToRelease = &sCreateDataRepositoryTaskRequest_CapacityToRelease
+var CreateDataRepositoryTaskRequest_ReleaseConfiguration = &sCreateDataRepositoryTaskRequest_ReleaseConfiguration
+
+var CreateDataRepositoryTaskResponse = &sCreateDataRepositoryTaskResponse
+var CreateDataRepositoryTaskResponse_DataRepositoryTask = &sCreateDataRepositoryTaskResponse_DataRepositoryTask
+
+var CreateFileCacheRequest = &sCreateFileCacheRequest
+var CreateFileCacheRequest_ClientRequestToken = &sCreateFileCacheRequest_ClientRequestToken
+var CreateFileCacheRequest_FileCacheType = &sCreateFileCacheRequest_FileCacheType
+var CreateFileCacheRequest_FileCacheTypeVersion = &sCreateFileCacheRequest_FileCacheTypeVersion
+var CreateFileCacheRequest_StorageCapacity = &sCreateFileCacheRequest_StorageCapacity
+var CreateFileCacheRequest_SubnetIds = &sCreateFileCacheRequest_SubnetIds
+var CreateFileCacheRequest_SecurityGroupIds = &sCreateFileCacheRequest_SecurityGroupIds
+var CreateFileCacheRequest_Tags = &sCreateFileCacheRequest_Tags
+var CreateFileCacheRequest_CopyTagsToDataRepositoryAssociations = &sCreateFileCacheRequest_CopyTagsToDataRepositoryAssociations
+var CreateFileCacheRequest_KmsKeyId = &sCreateFileCacheRequest_KmsKeyId
+var CreateFileCacheRequest_LustreConfiguration = &sCreateFileCacheRequest_LustreConfiguration
+var CreateFileCacheRequest_DataRepositoryAssociations = &sCreateFileCacheRequest_DataRepositoryAssociations
+
+var CreateFileCacheResponse = &sCreateFileCacheResponse
+var CreateFileCacheResponse_FileCache = &sCreateFileCacheResponse_FileCache
+
+var CreateFileSystemFromBackupRequest = &sCreateFileSystemFromBackupRequest
+var CreateFileSystemFromBackupRequest_BackupId = &sCreateFileSystemFromBackupRequest_BackupId
+var CreateFileSystemFromBackupRequest_ClientRequestToken = &sCreateFileSystemFromBackupRequest_ClientRequestToken
+var CreateFileSystemFromBackupRequest_SubnetIds = &sCreateFileSystemFromBackupRequest_SubnetIds
+var CreateFileSystemFromBackupRequest_SecurityGroupIds = &sCreateFileSystemFromBackupRequest_SecurityGroupIds
+var CreateFileSystemFromBackupRequest_Tags = &sCreateFileSystemFromBackupRequest_Tags
+var CreateFileSystemFromBackupRequest_WindowsConfiguration = &sCreateFileSystemFromBackupRequest_WindowsConfiguration
+var CreateFileSystemFromBackupRequest_LustreConfiguration = &sCreateFileSystemFromBackupRequest_LustreConfiguration
+var CreateFileSystemFromBackupRequest_StorageType = &sCreateFileSystemFromBackupRequest_StorageType
+var CreateFileSystemFromBackupRequest_KmsKeyId = &sCreateFileSystemFromBackupRequest_KmsKeyId
+var CreateFileSystemFromBackupRequest_FileSystemTypeVersion = &sCreateFileSystemFromBackupRequest_FileSystemTypeVersion
+var CreateFileSystemFromBackupRequest_OpenZFSConfiguration = &sCreateFileSystemFromBackupRequest_OpenZFSConfiguration
+var CreateFileSystemFromBackupRequest_StorageCapacity = &sCreateFileSystemFromBackupRequest_StorageCapacity
+var CreateFileSystemFromBackupRequest_NetworkType = &sCreateFileSystemFromBackupRequest_NetworkType
+
+var CreateFileSystemFromBackupResponse = &sCreateFileSystemFromBackupResponse
+var CreateFileSystemFromBackupResponse_FileSystem = &sCreateFileSystemFromBackupResponse_FileSystem
+
+var CreateFileSystemRequest = &sCreateFileSystemRequest
+var CreateFileSystemRequest_ClientRequestToken = &sCreateFileSystemRequest_ClientRequestToken
+var CreateFileSystemRequest_FileSystemType = &sCreateFileSystemRequest_FileSystemType
+var CreateFileSystemRequest_StorageCapacity = &sCreateFileSystemRequest_StorageCapacity
+var CreateFileSystemRequest_StorageType = &sCreateFileSystemRequest_StorageType
+var CreateFileSystemRequest_SubnetIds = &sCreateFileSystemRequest_SubnetIds
+var CreateFileSystemRequest_SecurityGroupIds = &sCreateFileSystemRequest_SecurityGroupIds
+var CreateFileSystemRequest_Tags = &sCreateFileSystemRequest_Tags
+var CreateFileSystemRequest_KmsKeyId = &sCreateFileSystemRequest_KmsKeyId
+var CreateFileSystemRequest_WindowsConfiguration = &sCreateFileSystemRequest_WindowsConfiguration
+var CreateFileSystemRequest_LustreConfiguration = &sCreateFileSystemRequest_LustreConfiguration
+var CreateFileSystemRequest_OntapConfiguration = &sCreateFileSystemRequest_OntapConfiguration
+var CreateFileSystemRequest_FileSystemTypeVersion = &sCreateFileSystemRequest_FileSystemTypeVersion
+var CreateFileSystemRequest_OpenZFSConfiguration = &sCreateFileSystemRequest_OpenZFSConfiguration
+var CreateFileSystemRequest_NetworkType = &sCreateFileSystemRequest_NetworkType
+
+var CreateFileSystemResponse = &sCreateFileSystemResponse
+var CreateFileSystemResponse_FileSystem = &sCreateFileSystemResponse_FileSystem
+
+var CreateSnapshotRequest = &sCreateSnapshotRequest
+var CreateSnapshotRequest_ClientRequestToken = &sCreateSnapshotRequest_ClientRequestToken
+var CreateSnapshotRequest_Name = &sCreateSnapshotRequest_Name
+var CreateSnapshotRequest_VolumeId = &sCreateSnapshotRequest_VolumeId
+var CreateSnapshotRequest_Tags = &sCreateSnapshotRequest_Tags
+
+var CreateSnapshotResponse = &sCreateSnapshotResponse
+var CreateSnapshotResponse_Snapshot = &sCreateSnapshotResponse_Snapshot
+
+var CreateStorageVirtualMachineRequest = &sCreateStorageVirtualMachineRequest
+var CreateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = &sCreateStorageVirtualMachineRequest_ActiveDirectoryConfiguration
+var CreateStorageVirtualMachineRequest_ClientRequestToken = &sCreateStorageVirtualMachineRequest_ClientRequestToken
+var CreateStorageVirtualMachineRequest_FileSystemId = &sCreateStorageVirtualMachineRequest_FileSystemId
+var CreateStorageVirtualMachineRequest_Name = &sCreateStorageVirtualMachineRequest_Name
+var CreateStorageVirtualMachineRequest_SvmAdminPassword = &sCreateStorageVirtualMachineRequest_SvmAdminPassword
+var CreateStorageVirtualMachineRequest_Tags = &sCreateStorageVirtualMachineRequest_Tags
+var CreateStorageVirtualMachineRequest_RootVolumeSecurityStyle = &sCreateStorageVirtualMachineRequest_RootVolumeSecurityStyle
+
+var CreateStorageVirtualMachineResponse = &sCreateStorageVirtualMachineResponse
+var CreateStorageVirtualMachineResponse_StorageVirtualMachine = &sCreateStorageVirtualMachineResponse_StorageVirtualMachine
+
+var CreateVolumeFromBackupRequest = &sCreateVolumeFromBackupRequest
+var CreateVolumeFromBackupRequest_BackupId = &sCreateVolumeFromBackupRequest_BackupId
+var CreateVolumeFromBackupRequest_ClientRequestToken = &sCreateVolumeFromBackupRequest_ClientRequestToken
+var CreateVolumeFromBackupRequest_Name = &sCreateVolumeFromBackupRequest_Name
+var CreateVolumeFromBackupRequest_OntapConfiguration = &sCreateVolumeFromBackupRequest_OntapConfiguration
+var CreateVolumeFromBackupRequest_Tags = &sCreateVolumeFromBackupRequest_Tags
+
+var CreateVolumeFromBackupResponse = &sCreateVolumeFromBackupResponse
+var CreateVolumeFromBackupResponse_Volume = &sCreateVolumeFromBackupResponse_Volume
+
+var CreateVolumeRequest = &sCreateVolumeRequest
+var CreateVolumeRequest_ClientRequestToken = &sCreateVolumeRequest_ClientRequestToken
+var CreateVolumeRequest_VolumeType = &sCreateVolumeRequest_VolumeType
+var CreateVolumeRequest_Name = &sCreateVolumeRequest_Name
+var CreateVolumeRequest_OntapConfiguration = &sCreateVolumeRequest_OntapConfiguration
+var CreateVolumeRequest_Tags = &sCreateVolumeRequest_Tags
+var CreateVolumeRequest_OpenZFSConfiguration = &sCreateVolumeRequest_OpenZFSConfiguration
+
+var CreateVolumeResponse = &sCreateVolumeResponse
+var CreateVolumeResponse_Volume = &sCreateVolumeResponse_Volume
+
+var DeleteBackupRequest = &sDeleteBackupRequest
+var DeleteBackupRequest_BackupId = &sDeleteBackupRequest_BackupId
+var DeleteBackupRequest_ClientRequestToken = &sDeleteBackupRequest_ClientRequestToken
+
+var DeleteBackupResponse = &sDeleteBackupResponse
+var DeleteBackupResponse_BackupId = &sDeleteBackupResponse_BackupId
+var DeleteBackupResponse_Lifecycle = &sDeleteBackupResponse_Lifecycle
+
+var DeleteDataRepositoryAssociationRequest = &sDeleteDataRepositoryAssociationRequest
+var DeleteDataRepositoryAssociationRequest_AssociationId = &sDeleteDataRepositoryAssociationRequest_AssociationId
+var DeleteDataRepositoryAssociationRequest_ClientRequestToken = &sDeleteDataRepositoryAssociationRequest_ClientRequestToken
+var DeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem = &sDeleteDataRepositoryAssociationRequest_DeleteDataInFileSystem
+
+var DeleteDataRepositoryAssociationResponse = &sDeleteDataRepositoryAssociationResponse
+var DeleteDataRepositoryAssociationResponse_AssociationId = &sDeleteDataRepositoryAssociationResponse_AssociationId
+var DeleteDataRepositoryAssociationResponse_Lifecycle = &sDeleteDataRepositoryAssociationResponse_Lifecycle
+var DeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem = &sDeleteDataRepositoryAssociationResponse_DeleteDataInFileSystem
+
+var DeleteFileCacheRequest = &sDeleteFileCacheRequest
+var DeleteFileCacheRequest_FileCacheId = &sDeleteFileCacheRequest_FileCacheId
+var DeleteFileCacheRequest_ClientRequestToken = &sDeleteFileCacheRequest_ClientRequestToken
+
+var DeleteFileCacheResponse = &sDeleteFileCacheResponse
+var DeleteFileCacheResponse_FileCacheId = &sDeleteFileCacheResponse_FileCacheId
+var DeleteFileCacheResponse_Lifecycle = &sDeleteFileCacheResponse_Lifecycle
+
+var DeleteFileSystemRequest = &sDeleteFileSystemRequest
+var DeleteFileSystemRequest_FileSystemId = &sDeleteFileSystemRequest_FileSystemId
+var DeleteFileSystemRequest_ClientRequestToken = &sDeleteFileSystemRequest_ClientRequestToken
+var DeleteFileSystemRequest_WindowsConfiguration = &sDeleteFileSystemRequest_WindowsConfiguration
+var DeleteFileSystemRequest_LustreConfiguration = &sDeleteFileSystemRequest_LustreConfiguration
+var DeleteFileSystemRequest_OpenZFSConfiguration = &sDeleteFileSystemRequest_OpenZFSConfiguration
+
+var DeleteFileSystemResponse = &sDeleteFileSystemResponse
+var DeleteFileSystemResponse_FileSystemId = &sDeleteFileSystemResponse_FileSystemId
+var DeleteFileSystemResponse_Lifecycle = &sDeleteFileSystemResponse_Lifecycle
+var DeleteFileSystemResponse_WindowsResponse = &sDeleteFileSystemResponse_WindowsResponse
+var DeleteFileSystemResponse_LustreResponse = &sDeleteFileSystemResponse_LustreResponse
+var DeleteFileSystemResponse_OpenZFSResponse = &sDeleteFileSystemResponse_OpenZFSResponse
+
+var DeleteSnapshotRequest = &sDeleteSnapshotRequest
+var DeleteSnapshotRequest_ClientRequestToken = &sDeleteSnapshotRequest_ClientRequestToken
+var DeleteSnapshotRequest_SnapshotId = &sDeleteSnapshotRequest_SnapshotId
+
+var DeleteSnapshotResponse = &sDeleteSnapshotResponse
+var DeleteSnapshotResponse_SnapshotId = &sDeleteSnapshotResponse_SnapshotId
+var DeleteSnapshotResponse_Lifecycle = &sDeleteSnapshotResponse_Lifecycle
+
+var DeleteStorageVirtualMachineRequest = &sDeleteStorageVirtualMachineRequest
+var DeleteStorageVirtualMachineRequest_ClientRequestToken = &sDeleteStorageVirtualMachineRequest_ClientRequestToken
+var DeleteStorageVirtualMachineRequest_StorageVirtualMachineId = &sDeleteStorageVirtualMachineRequest_StorageVirtualMachineId
+
+var DeleteStorageVirtualMachineResponse = &sDeleteStorageVirtualMachineResponse
+var DeleteStorageVirtualMachineResponse_StorageVirtualMachineId = &sDeleteStorageVirtualMachineResponse_StorageVirtualMachineId
+var DeleteStorageVirtualMachineResponse_Lifecycle = &sDeleteStorageVirtualMachineResponse_Lifecycle
+
+var DeleteVolumeRequest = &sDeleteVolumeRequest
+var DeleteVolumeRequest_ClientRequestToken = &sDeleteVolumeRequest_ClientRequestToken
+var DeleteVolumeRequest_VolumeId = &sDeleteVolumeRequest_VolumeId
+var DeleteVolumeRequest_OntapConfiguration = &sDeleteVolumeRequest_OntapConfiguration
+var DeleteVolumeRequest_OpenZFSConfiguration = &sDeleteVolumeRequest_OpenZFSConfiguration
+
+var DeleteVolumeResponse = &sDeleteVolumeResponse
+var DeleteVolumeResponse_VolumeId = &sDeleteVolumeResponse_VolumeId
+var DeleteVolumeResponse_Lifecycle = &sDeleteVolumeResponse_Lifecycle
+var DeleteVolumeResponse_OntapResponse = &sDeleteVolumeResponse_OntapResponse
+
+var DescribeBackupsRequest = &sDescribeBackupsRequest
+var DescribeBackupsRequest_BackupIds = &sDescribeBackupsRequest_BackupIds
+var DescribeBackupsRequest_Filters = &sDescribeBackupsRequest_Filters
+var DescribeBackupsRequest_MaxResults = &sDescribeBackupsRequest_MaxResults
+var DescribeBackupsRequest_NextToken = &sDescribeBackupsRequest_NextToken
+
+var DescribeBackupsResponse = &sDescribeBackupsResponse
+var DescribeBackupsResponse_Backups = &sDescribeBackupsResponse_Backups
+var DescribeBackupsResponse_NextToken = &sDescribeBackupsResponse_NextToken
+
+var DescribeDataRepositoryAssociationsRequest = &sDescribeDataRepositoryAssociationsRequest
+var DescribeDataRepositoryAssociationsRequest_AssociationIds = &sDescribeDataRepositoryAssociationsRequest_AssociationIds
+var DescribeDataRepositoryAssociationsRequest_Filters = &sDescribeDataRepositoryAssociationsRequest_Filters
+var DescribeDataRepositoryAssociationsRequest_MaxResults = &sDescribeDataRepositoryAssociationsRequest_MaxResults
+var DescribeDataRepositoryAssociationsRequest_NextToken = &sDescribeDataRepositoryAssociationsRequest_NextToken
+
+var DescribeDataRepositoryAssociationsResponse = &sDescribeDataRepositoryAssociationsResponse
+var DescribeDataRepositoryAssociationsResponse_Associations = &sDescribeDataRepositoryAssociationsResponse_Associations
+var DescribeDataRepositoryAssociationsResponse_NextToken = &sDescribeDataRepositoryAssociationsResponse_NextToken
+
+var DescribeDataRepositoryTasksRequest = &sDescribeDataRepositoryTasksRequest
+var DescribeDataRepositoryTasksRequest_TaskIds = &sDescribeDataRepositoryTasksRequest_TaskIds
+var DescribeDataRepositoryTasksRequest_Filters = &sDescribeDataRepositoryTasksRequest_Filters
+var DescribeDataRepositoryTasksRequest_MaxResults = &sDescribeDataRepositoryTasksRequest_MaxResults
+var DescribeDataRepositoryTasksRequest_NextToken = &sDescribeDataRepositoryTasksRequest_NextToken
+
+var DescribeDataRepositoryTasksResponse = &sDescribeDataRepositoryTasksResponse
+var DescribeDataRepositoryTasksResponse_DataRepositoryTasks = &sDescribeDataRepositoryTasksResponse_DataRepositoryTasks
+var DescribeDataRepositoryTasksResponse_NextToken = &sDescribeDataRepositoryTasksResponse_NextToken
+
+var DescribeFileCachesRequest = &sDescribeFileCachesRequest
+var DescribeFileCachesRequest_FileCacheIds = &sDescribeFileCachesRequest_FileCacheIds
+var DescribeFileCachesRequest_MaxResults = &sDescribeFileCachesRequest_MaxResults
+var DescribeFileCachesRequest_NextToken = &sDescribeFileCachesRequest_NextToken
+
+var DescribeFileCachesResponse = &sDescribeFileCachesResponse
+var DescribeFileCachesResponse_FileCaches = &sDescribeFileCachesResponse_FileCaches
+var DescribeFileCachesResponse_NextToken = &sDescribeFileCachesResponse_NextToken
+
+var DescribeFileSystemAliasesRequest = &sDescribeFileSystemAliasesRequest
+var DescribeFileSystemAliasesRequest_ClientRequestToken = &sDescribeFileSystemAliasesRequest_ClientRequestToken
+var DescribeFileSystemAliasesRequest_FileSystemId = &sDescribeFileSystemAliasesRequest_FileSystemId
+var DescribeFileSystemAliasesRequest_MaxResults = &sDescribeFileSystemAliasesRequest_MaxResults
+var DescribeFileSystemAliasesRequest_NextToken = &sDescribeFileSystemAliasesRequest_NextToken
+
+var DescribeFileSystemAliasesResponse = &sDescribeFileSystemAliasesResponse
+var DescribeFileSystemAliasesResponse_Aliases = &sDescribeFileSystemAliasesResponse_Aliases
+var DescribeFileSystemAliasesResponse_NextToken = &sDescribeFileSystemAliasesResponse_NextToken
+
+var DescribeFileSystemsRequest = &sDescribeFileSystemsRequest
+var DescribeFileSystemsRequest_FileSystemIds = &sDescribeFileSystemsRequest_FileSystemIds
+var DescribeFileSystemsRequest_MaxResults = &sDescribeFileSystemsRequest_MaxResults
+var DescribeFileSystemsRequest_NextToken = &sDescribeFileSystemsRequest_NextToken
+
+var DescribeFileSystemsResponse = &sDescribeFileSystemsResponse
+var DescribeFileSystemsResponse_FileSystems = &sDescribeFileSystemsResponse_FileSystems
+var DescribeFileSystemsResponse_NextToken = &sDescribeFileSystemsResponse_NextToken
+
+var DescribeS3AccessPointAttachmentsRequest = &sDescribeS3AccessPointAttachmentsRequest
+var DescribeS3AccessPointAttachmentsRequest_Names = &sDescribeS3AccessPointAttachmentsRequest_Names
+var DescribeS3AccessPointAttachmentsRequest_Filters = &sDescribeS3AccessPointAttachmentsRequest_Filters
+var DescribeS3AccessPointAttachmentsRequest_MaxResults = &sDescribeS3AccessPointAttachmentsRequest_MaxResults
+var DescribeS3AccessPointAttachmentsRequest_NextToken = &sDescribeS3AccessPointAttachmentsRequest_NextToken
+
+var DescribeS3AccessPointAttachmentsResponse = &sDescribeS3AccessPointAttachmentsResponse
+var DescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments = &sDescribeS3AccessPointAttachmentsResponse_S3AccessPointAttachments
+var DescribeS3AccessPointAttachmentsResponse_NextToken = &sDescribeS3AccessPointAttachmentsResponse_NextToken
+
+var DescribeSharedVpcConfigurationRequest = &sDescribeSharedVpcConfigurationRequest
+
+var DescribeSharedVpcConfigurationResponse = &sDescribeSharedVpcConfigurationResponse
+var DescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = &sDescribeSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts
+
+var DescribeSnapshotsRequest = &sDescribeSnapshotsRequest
+var DescribeSnapshotsRequest_SnapshotIds = &sDescribeSnapshotsRequest_SnapshotIds
+var DescribeSnapshotsRequest_Filters = &sDescribeSnapshotsRequest_Filters
+var DescribeSnapshotsRequest_MaxResults = &sDescribeSnapshotsRequest_MaxResults
+var DescribeSnapshotsRequest_NextToken = &sDescribeSnapshotsRequest_NextToken
+var DescribeSnapshotsRequest_IncludeShared = &sDescribeSnapshotsRequest_IncludeShared
+
+var DescribeSnapshotsResponse = &sDescribeSnapshotsResponse
+var DescribeSnapshotsResponse_Snapshots = &sDescribeSnapshotsResponse_Snapshots
+var DescribeSnapshotsResponse_NextToken = &sDescribeSnapshotsResponse_NextToken
+
+var DescribeStorageVirtualMachinesRequest = &sDescribeStorageVirtualMachinesRequest
+var DescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds = &sDescribeStorageVirtualMachinesRequest_StorageVirtualMachineIds
+var DescribeStorageVirtualMachinesRequest_Filters = &sDescribeStorageVirtualMachinesRequest_Filters
+var DescribeStorageVirtualMachinesRequest_MaxResults = &sDescribeStorageVirtualMachinesRequest_MaxResults
+var DescribeStorageVirtualMachinesRequest_NextToken = &sDescribeStorageVirtualMachinesRequest_NextToken
+
+var DescribeStorageVirtualMachinesResponse = &sDescribeStorageVirtualMachinesResponse
+var DescribeStorageVirtualMachinesResponse_StorageVirtualMachines = &sDescribeStorageVirtualMachinesResponse_StorageVirtualMachines
+var DescribeStorageVirtualMachinesResponse_NextToken = &sDescribeStorageVirtualMachinesResponse_NextToken
+
+var DescribeVolumesRequest = &sDescribeVolumesRequest
+var DescribeVolumesRequest_VolumeIds = &sDescribeVolumesRequest_VolumeIds
+var DescribeVolumesRequest_Filters = &sDescribeVolumesRequest_Filters
+var DescribeVolumesRequest_MaxResults = &sDescribeVolumesRequest_MaxResults
+var DescribeVolumesRequest_NextToken = &sDescribeVolumesRequest_NextToken
+
+var DescribeVolumesResponse = &sDescribeVolumesResponse
+var DescribeVolumesResponse_Volumes = &sDescribeVolumesResponse_Volumes
+var DescribeVolumesResponse_NextToken = &sDescribeVolumesResponse_NextToken
+
+var DetachAndDeleteS3AccessPointRequest = &sDetachAndDeleteS3AccessPointRequest
+var DetachAndDeleteS3AccessPointRequest_ClientRequestToken = &sDetachAndDeleteS3AccessPointRequest_ClientRequestToken
+var DetachAndDeleteS3AccessPointRequest_Name = &sDetachAndDeleteS3AccessPointRequest_Name
+
+var DetachAndDeleteS3AccessPointResponse = &sDetachAndDeleteS3AccessPointResponse
+var DetachAndDeleteS3AccessPointResponse_Lifecycle = &sDetachAndDeleteS3AccessPointResponse_Lifecycle
+var DetachAndDeleteS3AccessPointResponse_Name = &sDetachAndDeleteS3AccessPointResponse_Name
+
+var DisassociateFileSystemAliasesRequest = &sDisassociateFileSystemAliasesRequest
+var DisassociateFileSystemAliasesRequest_ClientRequestToken = &sDisassociateFileSystemAliasesRequest_ClientRequestToken
+var DisassociateFileSystemAliasesRequest_FileSystemId = &sDisassociateFileSystemAliasesRequest_FileSystemId
+var DisassociateFileSystemAliasesRequest_Aliases = &sDisassociateFileSystemAliasesRequest_Aliases
+
+var DisassociateFileSystemAliasesResponse = &sDisassociateFileSystemAliasesResponse
+var DisassociateFileSystemAliasesResponse_Aliases = &sDisassociateFileSystemAliasesResponse_Aliases
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+var ListTagsForResourceRequest_MaxResults = &sListTagsForResourceRequest_MaxResults
+var ListTagsForResourceRequest_NextToken = &sListTagsForResourceRequest_NextToken
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+var ListTagsForResourceResponse_NextToken = &sListTagsForResourceResponse_NextToken
+
+var ReleaseFileSystemNfsV3LocksRequest = &sReleaseFileSystemNfsV3LocksRequest
+var ReleaseFileSystemNfsV3LocksRequest_FileSystemId = &sReleaseFileSystemNfsV3LocksRequest_FileSystemId
+var ReleaseFileSystemNfsV3LocksRequest_ClientRequestToken = &sReleaseFileSystemNfsV3LocksRequest_ClientRequestToken
+
+var ReleaseFileSystemNfsV3LocksResponse = &sReleaseFileSystemNfsV3LocksResponse
+var ReleaseFileSystemNfsV3LocksResponse_FileSystem = &sReleaseFileSystemNfsV3LocksResponse_FileSystem
+
+var RestoreVolumeFromSnapshotRequest = &sRestoreVolumeFromSnapshotRequest
+var RestoreVolumeFromSnapshotRequest_ClientRequestToken = &sRestoreVolumeFromSnapshotRequest_ClientRequestToken
+var RestoreVolumeFromSnapshotRequest_VolumeId = &sRestoreVolumeFromSnapshotRequest_VolumeId
+var RestoreVolumeFromSnapshotRequest_SnapshotId = &sRestoreVolumeFromSnapshotRequest_SnapshotId
+var RestoreVolumeFromSnapshotRequest_Options = &sRestoreVolumeFromSnapshotRequest_Options
+
+var RestoreVolumeFromSnapshotResponse = &sRestoreVolumeFromSnapshotResponse
+var RestoreVolumeFromSnapshotResponse_VolumeId = &sRestoreVolumeFromSnapshotResponse_VolumeId
+var RestoreVolumeFromSnapshotResponse_Lifecycle = &sRestoreVolumeFromSnapshotResponse_Lifecycle
+var RestoreVolumeFromSnapshotResponse_AdministrativeActions = &sRestoreVolumeFromSnapshotResponse_AdministrativeActions
+
+var StartMisconfiguredStateRecoveryRequest = &sStartMisconfiguredStateRecoveryRequest
+var StartMisconfiguredStateRecoveryRequest_ClientRequestToken = &sStartMisconfiguredStateRecoveryRequest_ClientRequestToken
+var StartMisconfiguredStateRecoveryRequest_FileSystemId = &sStartMisconfiguredStateRecoveryRequest_FileSystemId
+
+var StartMisconfiguredStateRecoveryResponse = &sStartMisconfiguredStateRecoveryResponse
+var StartMisconfiguredStateRecoveryResponse_FileSystem = &sStartMisconfiguredStateRecoveryResponse_FileSystem
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateDataRepositoryAssociationRequest = &sUpdateDataRepositoryAssociationRequest
+var UpdateDataRepositoryAssociationRequest_AssociationId = &sUpdateDataRepositoryAssociationRequest_AssociationId
+var UpdateDataRepositoryAssociationRequest_ClientRequestToken = &sUpdateDataRepositoryAssociationRequest_ClientRequestToken
+var UpdateDataRepositoryAssociationRequest_ImportedFileChunkSize = &sUpdateDataRepositoryAssociationRequest_ImportedFileChunkSize
+var UpdateDataRepositoryAssociationRequest_S3 = &sUpdateDataRepositoryAssociationRequest_S3
+
+var UpdateDataRepositoryAssociationResponse = &sUpdateDataRepositoryAssociationResponse
+var UpdateDataRepositoryAssociationResponse_Association = &sUpdateDataRepositoryAssociationResponse_Association
+
+var UpdateFileCacheRequest = &sUpdateFileCacheRequest
+var UpdateFileCacheRequest_FileCacheId = &sUpdateFileCacheRequest_FileCacheId
+var UpdateFileCacheRequest_ClientRequestToken = &sUpdateFileCacheRequest_ClientRequestToken
+var UpdateFileCacheRequest_LustreConfiguration = &sUpdateFileCacheRequest_LustreConfiguration
+
+var UpdateFileCacheResponse = &sUpdateFileCacheResponse
+var UpdateFileCacheResponse_FileCache = &sUpdateFileCacheResponse_FileCache
+
+var UpdateFileSystemRequest = &sUpdateFileSystemRequest
+var UpdateFileSystemRequest_FileSystemId = &sUpdateFileSystemRequest_FileSystemId
+var UpdateFileSystemRequest_ClientRequestToken = &sUpdateFileSystemRequest_ClientRequestToken
+var UpdateFileSystemRequest_StorageCapacity = &sUpdateFileSystemRequest_StorageCapacity
+var UpdateFileSystemRequest_WindowsConfiguration = &sUpdateFileSystemRequest_WindowsConfiguration
+var UpdateFileSystemRequest_LustreConfiguration = &sUpdateFileSystemRequest_LustreConfiguration
+var UpdateFileSystemRequest_OntapConfiguration = &sUpdateFileSystemRequest_OntapConfiguration
+var UpdateFileSystemRequest_OpenZFSConfiguration = &sUpdateFileSystemRequest_OpenZFSConfiguration
+var UpdateFileSystemRequest_StorageType = &sUpdateFileSystemRequest_StorageType
+var UpdateFileSystemRequest_FileSystemTypeVersion = &sUpdateFileSystemRequest_FileSystemTypeVersion
+var UpdateFileSystemRequest_NetworkType = &sUpdateFileSystemRequest_NetworkType
+
+var UpdateFileSystemResponse = &sUpdateFileSystemResponse
+var UpdateFileSystemResponse_FileSystem = &sUpdateFileSystemResponse_FileSystem
+
+var UpdateSharedVpcConfigurationRequest = &sUpdateSharedVpcConfigurationRequest
+var UpdateSharedVpcConfigurationRequest_EnableFsxRouteTableUpdatesFromParticipantAccounts = &sUpdateSharedVpcConfigurationRequest_EnableFsxRouteTableUpdatesFromParticipantAccounts
+var UpdateSharedVpcConfigurationRequest_ClientRequestToken = &sUpdateSharedVpcConfigurationRequest_ClientRequestToken
+
+var UpdateSharedVpcConfigurationResponse = &sUpdateSharedVpcConfigurationResponse
+var UpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts = &sUpdateSharedVpcConfigurationResponse_EnableFsxRouteTableUpdatesFromParticipantAccounts
+
+var UpdateSnapshotRequest = &sUpdateSnapshotRequest
+var UpdateSnapshotRequest_ClientRequestToken = &sUpdateSnapshotRequest_ClientRequestToken
+var UpdateSnapshotRequest_Name = &sUpdateSnapshotRequest_Name
+var UpdateSnapshotRequest_SnapshotId = &sUpdateSnapshotRequest_SnapshotId
+
+var UpdateSnapshotResponse = &sUpdateSnapshotResponse
+var UpdateSnapshotResponse_Snapshot = &sUpdateSnapshotResponse_Snapshot
+
+var UpdateStorageVirtualMachineRequest = &sUpdateStorageVirtualMachineRequest
+var UpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration = &sUpdateStorageVirtualMachineRequest_ActiveDirectoryConfiguration
+var UpdateStorageVirtualMachineRequest_ClientRequestToken = &sUpdateStorageVirtualMachineRequest_ClientRequestToken
+var UpdateStorageVirtualMachineRequest_StorageVirtualMachineId = &sUpdateStorageVirtualMachineRequest_StorageVirtualMachineId
+var UpdateStorageVirtualMachineRequest_SvmAdminPassword = &sUpdateStorageVirtualMachineRequest_SvmAdminPassword
+
+var UpdateStorageVirtualMachineResponse = &sUpdateStorageVirtualMachineResponse
+var UpdateStorageVirtualMachineResponse_StorageVirtualMachine = &sUpdateStorageVirtualMachineResponse_StorageVirtualMachine
+
+var UpdateVolumeRequest = &sUpdateVolumeRequest
+var UpdateVolumeRequest_ClientRequestToken = &sUpdateVolumeRequest_ClientRequestToken
+var UpdateVolumeRequest_VolumeId = &sUpdateVolumeRequest_VolumeId
+var UpdateVolumeRequest_OntapConfiguration = &sUpdateVolumeRequest_OntapConfiguration
+var UpdateVolumeRequest_Name = &sUpdateVolumeRequest_Name
+var UpdateVolumeRequest_OpenZFSConfiguration = &sUpdateVolumeRequest_OpenZFSConfiguration
+
+var UpdateVolumeResponse = &sUpdateVolumeResponse
+var UpdateVolumeResponse_Volume = &sUpdateVolumeResponse_Volume
+
+var AWSSimbaAPIService_v20180301 = &smithy.ServiceSchema{Schema: &s_AWSSimbaAPIService_v20180301, Version: "2018-03-01"}

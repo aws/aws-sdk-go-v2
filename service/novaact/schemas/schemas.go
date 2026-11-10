@@ -4,1348 +4,1016 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateAct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateAct",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	iCreateAct                        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateAct"}
+	iCreateSession                    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateSession"}
+	iCreateWorkflowDefinition         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateWorkflowDefinition"}
+	iCreateWorkflowRun                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateWorkflowRun"}
+	iDeleteWorkflowDefinition         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "DeleteWorkflowDefinition"}
+	iDeleteWorkflowRun                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "DeleteWorkflowRun"}
+	iGetWorkflowDefinition            = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "GetWorkflowDefinition"}
+	iGetWorkflowRun                   = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "GetWorkflowRun"}
+	iInvokeActStep                    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "InvokeActStep"}
+	iListActs                         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListActs"}
+	iListModels                       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListModels"}
+	iListSessions                     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListSessions"}
+	iListWorkflowDefinitions          = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListWorkflowDefinitions"}
+	iListWorkflowRuns                 = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListWorkflowRuns"}
+	iUpdateAct                        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "UpdateAct"}
+	iUpdateWorkflowRun                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "UpdateWorkflowRun"}
+	i_AmazonNovaAgentsDataPlane       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "AmazonNovaAgentsDataPlane"}
+	iAccessDeniedException            = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "AccessDeniedException"}
+	iActError                         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ActError"}
+	iActStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ActStatus"}
+	i_ActSummaries                    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ActSummaries"}
+	iActSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ActSummary"}
+	iCall                             = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "Call"}
+	i_CallId                          = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CallId"}
+	iCallResult                       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CallResult"}
+	iCallResultContent                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CallResultContent"}
+	i_CallResultContents              = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CallResultContents"}
+	i_CallResults                     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CallResults"}
+	i_Calls                           = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "Calls"}
+	iClientInfo                       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ClientInfo"}
+	i_ClientToken                     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ClientToken"}
+	i_CloudWatchLogGroupName          = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CloudWatchLogGroupName"}
+	iCompatibilityInformation         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CompatibilityInformation"}
+	iConflictException                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ConflictException"}
+	i_DateTimestamp                   = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "DateTimestamp"}
+	iInternalServerException          = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "InternalServerException"}
+	iInternalServerExceptionReason    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "InternalServerExceptionReason"}
+	i_MaxResults                      = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "MaxResults"}
+	iModelAlias                       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelAlias"}
+	i_ModelAliases                    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelAliases"}
+	i_ModelId                         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelId"}
+	i_ModelIdList                     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelIdList"}
+	iModelLifecycle                   = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelLifecycle"}
+	iModelStatus                      = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelStatus"}
+	i_ModelSummaries                  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelSummaries"}
+	iModelSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ModelSummary"}
+	i_NextToken                       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "NextToken"}
+	i_NonBlankString                  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "NonBlankString"}
+	iResourceNotFoundException        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ResourceNotFoundException"}
+	i_S3BucketName                    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "S3BucketName"}
+	i_S3KeyPrefix                     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "S3KeyPrefix"}
+	i_SensitiveDocument               = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "SensitiveDocument"}
+	i_SensitiveString                 = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "SensitiveString"}
+	iServiceQuotaExceededException    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ServiceQuotaExceededException"}
+	i_SessionSummaries                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "SessionSummaries"}
+	iSessionSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "SessionSummary"}
+	iSortOrder                        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "SortOrder"}
+	i_Task                            = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "Task"}
+	iThrottlingException              = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ThrottlingException"}
+	i_ToolDescription                 = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ToolDescription"}
+	iToolInputSchema                  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ToolInputSchema"}
+	i_ToolInputSchemaDocument         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ToolInputSchemaDocument"}
+	i_ToolName                        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ToolName"}
+	iToolSpec                         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ToolSpec"}
+	i_ToolSpecs                       = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ToolSpecs"}
+	iTraceLocation                    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "TraceLocation"}
+	iTraceLocationType                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "TraceLocationType"}
+	i_UuidString                      = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "UuidString"}
+	iValidationException              = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ValidationException"}
+	iValidationExceptionField         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ValidationExceptionReason"}
+	i_WorkflowDefinitionArn           = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowDefinitionArn"}
+	i_WorkflowDefinitionName          = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowDefinitionName"}
+	iWorkflowDefinitionStatus         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowDefinitionStatus"}
+	i_WorkflowDefinitionSummaries     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowDefinitionSummaries"}
+	iWorkflowDefinitionSummary        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowDefinitionSummary"}
+	i_WorkflowDescription             = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowDescription"}
+	iWorkflowExportConfig             = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowExportConfig"}
+	i_WorkflowRunArn                  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowRunArn"}
+	iWorkflowRunStatus                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowRunStatus"}
+	i_WorkflowRunSummaries            = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowRunSummaries"}
+	iWorkflowRunSummary               = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "WorkflowRunSummary"}
+	iCreateActRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateActRequest"}
+	iCreateActResponse                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateActResponse"}
+	iCreateSessionRequest             = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateSessionRequest"}
+	iCreateSessionResponse            = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateSessionResponse"}
+	iCreateWorkflowDefinitionRequest  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateWorkflowDefinitionRequest"}
+	iCreateWorkflowDefinitionResponse = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateWorkflowDefinitionResponse"}
+	iCreateWorkflowRunRequest         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateWorkflowRunRequest"}
+	iCreateWorkflowRunResponse        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "CreateWorkflowRunResponse"}
+	iDeleteWorkflowDefinitionRequest  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "DeleteWorkflowDefinitionRequest"}
+	iDeleteWorkflowDefinitionResponse = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "DeleteWorkflowDefinitionResponse"}
+	iDeleteWorkflowRunRequest         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "DeleteWorkflowRunRequest"}
+	iDeleteWorkflowRunResponse        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "DeleteWorkflowRunResponse"}
+	iGetWorkflowDefinitionRequest     = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "GetWorkflowDefinitionRequest"}
+	iGetWorkflowDefinitionResponse    = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "GetWorkflowDefinitionResponse"}
+	iGetWorkflowRunRequest            = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "GetWorkflowRunRequest"}
+	iGetWorkflowRunResponse           = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "GetWorkflowRunResponse"}
+	iInvokeActStepRequest             = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "InvokeActStepRequest"}
+	iInvokeActStepResponse            = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "InvokeActStepResponse"}
+	iListActsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListActsRequest"}
+	iListActsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListActsResponse"}
+	iListModelsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListModelsRequest"}
+	iListModelsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListModelsResponse"}
+	iListSessionsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListSessionsRequest"}
+	iListSessionsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListSessionsResponse"}
+	iListWorkflowDefinitionsRequest   = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListWorkflowDefinitionsRequest"}
+	iListWorkflowDefinitionsResponse  = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListWorkflowDefinitionsResponse"}
+	iListWorkflowRunsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListWorkflowRunsRequest"}
+	iListWorkflowRunsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "ListWorkflowRunsResponse"}
+	iUpdateActRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "UpdateActRequest"}
+	iUpdateActResponse                = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "UpdateActResponse"}
+	iUpdateWorkflowRunRequest         = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "UpdateWorkflowRunRequest"}
+	iUpdateWorkflowRunResponse        = smithy.ShapeID{Namespace: "com.amazonaws.novaact", Name: "UpdateWorkflowRunResponse"}
+	pString                           = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                             = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                          = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}/sessions/{sessionId}/acts",
-	Code: 201})
-
-var CreateSession = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateSession",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}/sessions",
-	Code: 201})
-
-var CreateWorkflowDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateWorkflowDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workflow-definitions",
-	Code: 201})
-
-var CreateWorkflowRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateWorkflowRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs",
-	Code: 201})
-
-var DeleteWorkflowDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "DeleteWorkflowDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workflow-definitions/{workflowDefinitionName}",
-	Code: 202})
-
-var DeleteWorkflowRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "DeleteWorkflowRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 202}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}",
-	Code: 202})
-
-var GetWorkflowDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "GetWorkflowDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 202}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workflow-definitions/{workflowDefinitionName}",
-	Code: 200})
-
-var GetWorkflowRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "GetWorkflowRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}",
-	Code: 200})
-
-var InvokeActStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "InvokeActStep",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}/sessions/{sessionId}/acts/{actId}/invoke-step/",
-	Code: 200})
-
-var ListActs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListActs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/acts",
-	Code: 200})
-
-var ListModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListModels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/models",
-	Code: 200})
-
-var ListSessions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListSessions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}",
-	Code: 200})
-
-var ListWorkflowDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListWorkflowDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workflow-definitions",
-	Code: 200})
-
-var ListWorkflowRuns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListWorkflowRuns",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs",
-	Code: 200})
-
-var UpdateAct = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "UpdateAct",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}/sessions/{sessionId}/acts/{actId}",
-	Code: 200})
-
-var UpdateWorkflowRun = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "UpdateWorkflowRun",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/workflow-definitions/{workflowDefinitionName}/workflow-runs/{workflowRunId}",
-	Code: 200})
-
-var _AmazonNovaAgentsDataPlane = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "AmazonNovaAgentsDataPlane",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonNovaAgentsDataPlane = smithy.NewServiceSchema(_AmazonNovaAgentsDataPlane, "2025-08-22")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var ActError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ActError",
-}, smithy.ShapeTypeStructure, 2)
-var ActError_message *smithy.Schema
-
-var ActError_type *smithy.Schema
-
-var ActStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ActStatus",
-}, smithy.ShapeTypeEnum, 6)
-var ActStatus_RUNNING *smithy.Schema
-
-var ActStatus_PENDING_CLIENT_ACTION *smithy.Schema
-
-var ActStatus_PENDING_HUMAN_ACTION *smithy.Schema
-
-var ActStatus_SUCCEEDED *smithy.Schema
-
-var ActStatus_FAILED *smithy.Schema
-
-var ActStatus_TIMED_OUT *smithy.Schema
-
-var _ActSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ActSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ActSummaries_member *smithy.Schema
-
-var ActSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ActSummary",
-}, smithy.ShapeTypeStructure, 7)
-var ActSummary_workflowRunId *smithy.Schema
-
-var ActSummary_sessionId *smithy.Schema
-
-var ActSummary_actId *smithy.Schema
-
-var ActSummary_status *smithy.Schema
-
-var ActSummary_startedAt *smithy.Schema
-
-var ActSummary_endedAt *smithy.Schema
-
-var ActSummary_traceLocation *smithy.Schema
-
-var Call = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "Call",
-}, smithy.ShapeTypeStructure, 3)
-var Call_callId *smithy.Schema
-
-var Call_input *smithy.Schema
-
-var Call_name *smithy.Schema
-
-var _CallId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CallId",
-}, smithy.ShapeTypeString, 0)
-
-var CallResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CallResult",
-}, smithy.ShapeTypeStructure, 2)
-var CallResult_callId *smithy.Schema
-
-var CallResult_content *smithy.Schema
-
-var CallResultContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CallResultContent",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Sensitive{})
-var CallResultContent_text *smithy.Schema
-
-var _CallResultContents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CallResultContents",
-}, smithy.ShapeTypeList, 1)
-var _CallResultContents_member *smithy.Schema
-
-var _CallResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CallResults",
-}, smithy.ShapeTypeList, 1)
-var _CallResults_member *smithy.Schema
-
-var _Calls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "Calls",
-}, smithy.ShapeTypeList, 1)
-var _Calls_member *smithy.Schema
-
-var ClientInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ClientInfo",
-}, smithy.ShapeTypeStructure, 2)
-var ClientInfo_compatibilityVersion *smithy.Schema
-
-var ClientInfo_sdkVersion *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var _CloudWatchLogGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CloudWatchLogGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var CompatibilityInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CompatibilityInformation",
-}, smithy.ShapeTypeStructure, 3)
-var CompatibilityInformation_clientCompatibilityVersion *smithy.Schema
-
-var CompatibilityInformation_supportedModelIds *smithy.Schema
-
-var CompatibilityInformation_message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _DateTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "DateTimestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var InternalServerException_reason *smithy.Schema
-
-var InternalServerExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "InternalServerExceptionReason",
-}, smithy.ShapeTypeEnum, 2)
-var InternalServerExceptionReason_INVALID_MODEL_GENERATION *smithy.Schema
-
-var InternalServerExceptionReason_TOKEN_LIMIT_EXCEEDED *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var ModelAlias = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelAlias",
-}, smithy.ShapeTypeStructure, 3)
-var ModelAlias_aliasName *smithy.Schema
-
-var ModelAlias_latestModelId *smithy.Schema
-
-var ModelAlias_resolvedModelId *smithy.Schema
-
-var _ModelAliases = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelAliases",
-}, smithy.ShapeTypeList, 1)
-var _ModelAliases_member *smithy.Schema
-
-var _ModelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelId",
-}, smithy.ShapeTypeString, 0)
-
-var _ModelIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelIdList",
-}, smithy.ShapeTypeList, 1)
-var _ModelIdList_member *smithy.Schema
-
-var ModelLifecycle = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelLifecycle",
-}, smithy.ShapeTypeStructure, 1)
-var ModelLifecycle_status *smithy.Schema
-
-var ModelStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelStatus",
-}, smithy.ShapeTypeEnum, 4)
-var ModelStatus_ACTIVE *smithy.Schema
-
-var ModelStatus_LEGACY *smithy.Schema
-
-var ModelStatus_DEPRECATED *smithy.Schema
-
-var ModelStatus_PREVIEW *smithy.Schema
-
-var _ModelSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelSummaries",
-}, smithy.ShapeTypeList, 1)
-var _ModelSummaries_member *smithy.Schema
-
-var ModelSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ModelSummary",
-}, smithy.ShapeTypeStructure, 3)
-var ModelSummary_modelId *smithy.Schema
-
-var ModelSummary_modelLifecycle *smithy.Schema
-
-var ModelSummary_minimumCompatibilityVersion *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NonBlankString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "NonBlankString",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var _S3KeyPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "S3KeyPrefix",
-}, smithy.ShapeTypeString, 0)
-
-var _SensitiveDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "SensitiveDocument",
-}, smithy.ShapeTypeDocument, 0, &smithytraits.Sensitive{})
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var _SessionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "SessionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _SessionSummaries_member *smithy.Schema
-
-var SessionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "SessionSummary",
-}, smithy.ShapeTypeStructure, 1)
-var SessionSummary_sessionId *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASC *smithy.Schema
-
-var SortOrder_DESC *smithy.Schema
-
-var _Task = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "Task",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _ToolDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ToolDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ToolInputSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ToolInputSchema",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Sensitive{})
-var ToolInputSchema_json *smithy.Schema
-
-var _ToolInputSchemaDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ToolInputSchemaDocument",
-}, smithy.ShapeTypeDocument, 0)
-
-var _ToolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ToolName",
-}, smithy.ShapeTypeString, 0)
-
-var ToolSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ToolSpec",
-}, smithy.ShapeTypeStructure, 3)
-var ToolSpec_name *smithy.Schema
-
-var ToolSpec_description *smithy.Schema
-
-var ToolSpec_inputSchema *smithy.Schema
-
-var _ToolSpecs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ToolSpecs",
-}, smithy.ShapeTypeList, 1)
-var _ToolSpecs_member *smithy.Schema
-
-var TraceLocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "TraceLocation",
-}, smithy.ShapeTypeStructure, 2)
-var TraceLocation_locationType *smithy.Schema
-
-var TraceLocation_location *smithy.Schema
-
-var TraceLocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "TraceLocationType",
-}, smithy.ShapeTypeEnum, 1)
-var TraceLocationType_S3 *smithy.Schema
-
-var _UuidString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "UuidString",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 3)
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_INVALID_STATUS *smithy.Schema
-
-var ValidationExceptionReason_GUARDRAIL_INTERVENED *smithy.Schema
-
-var _WorkflowDefinitionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowDefinitionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _WorkflowDefinitionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowDefinitionName",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowDefinitionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowDefinitionStatus",
-}, smithy.ShapeTypeEnum, 2)
-var WorkflowDefinitionStatus_ACTIVE *smithy.Schema
-
-var WorkflowDefinitionStatus_DELETING *smithy.Schema
-
-var _WorkflowDefinitionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowDefinitionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowDefinitionSummaries_member *smithy.Schema
-
-var WorkflowDefinitionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowDefinitionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var WorkflowDefinitionSummary_workflowDefinitionArn *smithy.Schema
-
-var WorkflowDefinitionSummary_workflowDefinitionName *smithy.Schema
-
-var WorkflowDefinitionSummary_createdAt *smithy.Schema
-
-var WorkflowDefinitionSummary_status *smithy.Schema
-
-var _WorkflowDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowDescription",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var WorkflowExportConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowExportConfig",
-}, smithy.ShapeTypeStructure, 2)
-var WorkflowExportConfig_s3BucketName *smithy.Schema
-
-var WorkflowExportConfig_s3KeyPrefix *smithy.Schema
-
-var _WorkflowRunArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowRunArn",
-}, smithy.ShapeTypeString, 0)
-
-var WorkflowRunStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowRunStatus",
-}, smithy.ShapeTypeEnum, 5)
-var WorkflowRunStatus_RUNNING *smithy.Schema
-
-var WorkflowRunStatus_SUCCEEDED *smithy.Schema
-
-var WorkflowRunStatus_FAILED *smithy.Schema
-
-var WorkflowRunStatus_TIMED_OUT *smithy.Schema
-
-var WorkflowRunStatus_DELETING *smithy.Schema
-
-var _WorkflowRunSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowRunSummaries",
-}, smithy.ShapeTypeList, 1)
-var _WorkflowRunSummaries_member *smithy.Schema
-
-var WorkflowRunSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "WorkflowRunSummary",
-}, smithy.ShapeTypeStructure, 6)
-var WorkflowRunSummary_workflowRunArn *smithy.Schema
-
-var WorkflowRunSummary_workflowRunId *smithy.Schema
-
-var WorkflowRunSummary_status *smithy.Schema
-
-var WorkflowRunSummary_startedAt *smithy.Schema
-
-var WorkflowRunSummary_endedAt *smithy.Schema
-
-var WorkflowRunSummary_traceLocation *smithy.Schema
-
-var CreateActRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateActRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateActRequest_workflowDefinitionName *smithy.Schema
-
-var CreateActRequest_workflowRunId *smithy.Schema
-
-var CreateActRequest_sessionId *smithy.Schema
-
-var CreateActRequest_task *smithy.Schema
-
-var CreateActRequest_toolSpecs *smithy.Schema
-
-var CreateActRequest_clientToken *smithy.Schema
-
-var CreateActResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateActResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateActResponse_actId *smithy.Schema
-
-var CreateActResponse_status *smithy.Schema
-
-var CreateSessionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateSessionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateSessionRequest_workflowDefinitionName *smithy.Schema
-
-var CreateSessionRequest_workflowRunId *smithy.Schema
-
-var CreateSessionRequest_clientToken *smithy.Schema
-
-var CreateSessionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateSessionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateSessionResponse_sessionId *smithy.Schema
-
-var CreateWorkflowDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateWorkflowDefinitionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateWorkflowDefinitionRequest_name *smithy.Schema
-
-var CreateWorkflowDefinitionRequest_description *smithy.Schema
-
-var CreateWorkflowDefinitionRequest_exportConfig *smithy.Schema
-
-var CreateWorkflowDefinitionRequest_clientToken *smithy.Schema
-
-var CreateWorkflowDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateWorkflowDefinitionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWorkflowDefinitionResponse_status *smithy.Schema
-
-var CreateWorkflowRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateWorkflowRunRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateWorkflowRunRequest_workflowDefinitionName *smithy.Schema
-
-var CreateWorkflowRunRequest_modelId *smithy.Schema
-
-var CreateWorkflowRunRequest_clientToken *smithy.Schema
-
-var CreateWorkflowRunRequest_logGroupName *smithy.Schema
-
-var CreateWorkflowRunRequest_clientInfo *smithy.Schema
-
-var CreateWorkflowRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "CreateWorkflowRunResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWorkflowRunResponse_workflowRunId *smithy.Schema
-
-var CreateWorkflowRunResponse_status *smithy.Schema
-
-var DeleteWorkflowDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "DeleteWorkflowDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkflowDefinitionRequest_workflowDefinitionName *smithy.Schema
-
-var DeleteWorkflowDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "DeleteWorkflowDefinitionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkflowDefinitionResponse_status *smithy.Schema
-
-var DeleteWorkflowRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "DeleteWorkflowRunRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWorkflowRunRequest_workflowDefinitionName *smithy.Schema
-
-var DeleteWorkflowRunRequest_workflowRunId *smithy.Schema
-
-var DeleteWorkflowRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "DeleteWorkflowRunResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWorkflowRunResponse_status *smithy.Schema
-
-var GetWorkflowDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "GetWorkflowDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetWorkflowDefinitionRequest_workflowDefinitionName *smithy.Schema
-
-var GetWorkflowDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "GetWorkflowDefinitionResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetWorkflowDefinitionResponse_name *smithy.Schema
-
-var GetWorkflowDefinitionResponse_arn *smithy.Schema
-
-var GetWorkflowDefinitionResponse_createdAt *smithy.Schema
-
-var GetWorkflowDefinitionResponse_description *smithy.Schema
-
-var GetWorkflowDefinitionResponse_exportConfig *smithy.Schema
-
-var GetWorkflowDefinitionResponse_status *smithy.Schema
-
-var GetWorkflowRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "GetWorkflowRunRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetWorkflowRunRequest_workflowDefinitionName *smithy.Schema
-
-var GetWorkflowRunRequest_workflowRunId *smithy.Schema
-
-var GetWorkflowRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "GetWorkflowRunResponse",
-}, smithy.ShapeTypeStructure, 7)
-var GetWorkflowRunResponse_workflowRunArn *smithy.Schema
-
-var GetWorkflowRunResponse_workflowRunId *smithy.Schema
-
-var GetWorkflowRunResponse_status *smithy.Schema
-
-var GetWorkflowRunResponse_startedAt *smithy.Schema
-
-var GetWorkflowRunResponse_endedAt *smithy.Schema
-
-var GetWorkflowRunResponse_modelId *smithy.Schema
-
-var GetWorkflowRunResponse_logGroupName *smithy.Schema
-
-var InvokeActStepRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "InvokeActStepRequest",
-}, smithy.ShapeTypeStructure, 6)
-var InvokeActStepRequest_workflowDefinitionName *smithy.Schema
-
-var InvokeActStepRequest_workflowRunId *smithy.Schema
-
-var InvokeActStepRequest_sessionId *smithy.Schema
-
-var InvokeActStepRequest_actId *smithy.Schema
-
-var InvokeActStepRequest_callResults *smithy.Schema
-
-var InvokeActStepRequest_previousStepId *smithy.Schema
-
-var InvokeActStepResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "InvokeActStepResponse",
-}, smithy.ShapeTypeStructure, 2)
-var InvokeActStepResponse_calls *smithy.Schema
-
-var InvokeActStepResponse_stepId *smithy.Schema
-
-var ListActsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListActsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListActsRequest_workflowDefinitionName *smithy.Schema
-
-var ListActsRequest_workflowRunId *smithy.Schema
-
-var ListActsRequest_sessionId *smithy.Schema
-
-var ListActsRequest_maxResults *smithy.Schema
-
-var ListActsRequest_nextToken *smithy.Schema
-
-var ListActsRequest_sortOrder *smithy.Schema
-
-var ListActsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListActsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListActsResponse_actSummaries *smithy.Schema
-
-var ListActsResponse_nextToken *smithy.Schema
-
-var ListModelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListModelsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListModelsRequest_clientCompatibilityVersion *smithy.Schema
-
-var ListModelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListModelsResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListModelsResponse_modelSummaries *smithy.Schema
-
-var ListModelsResponse_modelAliases *smithy.Schema
-
-var ListModelsResponse_compatibilityInformation *smithy.Schema
-
-var ListSessionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListSessionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListSessionsRequest_workflowDefinitionName *smithy.Schema
-
-var ListSessionsRequest_workflowRunId *smithy.Schema
-
-var ListSessionsRequest_maxResults *smithy.Schema
-
-var ListSessionsRequest_nextToken *smithy.Schema
-
-var ListSessionsRequest_sortOrder *smithy.Schema
-
-var ListSessionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListSessionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSessionsResponse_sessionSummaries *smithy.Schema
-
-var ListSessionsResponse_nextToken *smithy.Schema
-
-var ListWorkflowDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListWorkflowDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListWorkflowDefinitionsRequest_maxResults *smithy.Schema
-
-var ListWorkflowDefinitionsRequest_nextToken *smithy.Schema
-
-var ListWorkflowDefinitionsRequest_sortOrder *smithy.Schema
-
-var ListWorkflowDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListWorkflowDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowDefinitionsResponse_workflowDefinitionSummaries *smithy.Schema
-
-var ListWorkflowDefinitionsResponse_nextToken *smithy.Schema
-
-var ListWorkflowRunsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListWorkflowRunsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListWorkflowRunsRequest_workflowDefinitionName *smithy.Schema
-
-var ListWorkflowRunsRequest_maxResults *smithy.Schema
-
-var ListWorkflowRunsRequest_nextToken *smithy.Schema
-
-var ListWorkflowRunsRequest_sortOrder *smithy.Schema
-
-var ListWorkflowRunsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "ListWorkflowRunsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListWorkflowRunsResponse_workflowRunSummaries *smithy.Schema
-
-var ListWorkflowRunsResponse_nextToken *smithy.Schema
-
-var UpdateActRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "UpdateActRequest",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateActRequest_workflowDefinitionName *smithy.Schema
-
-var UpdateActRequest_workflowRunId *smithy.Schema
-
-var UpdateActRequest_sessionId *smithy.Schema
-
-var UpdateActRequest_actId *smithy.Schema
-
-var UpdateActRequest_status *smithy.Schema
-
-var UpdateActRequest_error *smithy.Schema
-
-var UpdateActResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "UpdateActResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateWorkflowRunRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "UpdateWorkflowRunRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateWorkflowRunRequest_workflowDefinitionName *smithy.Schema
-
-var UpdateWorkflowRunRequest_workflowRunId *smithy.Schema
-
-var UpdateWorkflowRunRequest_status *smithy.Schema
-
-var UpdateWorkflowRunResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.novaact",
-	Name:      "UpdateWorkflowRunResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _NonBlankString)
-
-	ActError_message = ActError.AddMember("message", _SensitiveString)
-
-	ActError_type = ActError.AddMember("type", smithyprelude.String)
-
-	ActStatus_RUNNING = ActStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	ActStatus_PENDING_CLIENT_ACTION = ActStatus.AddMember("PENDING_CLIENT_ACTION", smithyprelude.Unit)
-
-	ActStatus_PENDING_HUMAN_ACTION = ActStatus.AddMember("PENDING_HUMAN_ACTION", smithyprelude.Unit)
-
-	ActStatus_SUCCEEDED = ActStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ActStatus_FAILED = ActStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ActStatus_TIMED_OUT = ActStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	TraceLocationType_S3 = TraceLocationType.AddMember("S3", smithyprelude.Unit)
-
-	TraceLocation_locationType = TraceLocation.AddMember("locationType", TraceLocationType)
-
-	TraceLocation_location = TraceLocation.AddMember("location", _NonBlankString)
-
-	ActSummary_workflowRunId = ActSummary.AddMember("workflowRunId", _UuidString)
-
-	ActSummary_sessionId = ActSummary.AddMember("sessionId", _UuidString)
-
-	ActSummary_actId = ActSummary.AddMember("actId", _UuidString)
-
-	ActSummary_status = ActSummary.AddMember("status", ActStatus)
-
-	ActSummary_startedAt = ActSummary.AddMember("startedAt", _DateTimestamp)
-
-	ActSummary_endedAt = ActSummary.AddMember("endedAt", _DateTimestamp)
-
-	ActSummary_traceLocation = ActSummary.AddMember("traceLocation", TraceLocation)
-
-	_ActSummaries_member = _ActSummaries.AddMember("member", ActSummary)
-
-	Call_callId = Call.AddMember("callId", _CallId)
-
-	Call_input = Call.AddMember("input", _SensitiveDocument)
-
-	Call_name = Call.AddMember("name", smithyprelude.String)
-
-	CallResultContent_text = CallResultContent.AddMember("text", smithyprelude.String)
-
-	_CallResultContents_member = _CallResultContents.AddMember("member", CallResultContent)
-
-	CallResult_callId = CallResult.AddMember("callId", _CallId)
-
-	CallResult_content = CallResult.AddMember("content", _CallResultContents)
-
-	_CallResults_member = _CallResults.AddMember("member", CallResult)
-
-	_Calls_member = _Calls.AddMember("member", Call)
-
-	ClientInfo_compatibilityVersion = ClientInfo.AddMember("compatibilityVersion", smithyprelude.Integer)
-
-	ClientInfo_sdkVersion = ClientInfo.AddMember("sdkVersion", _NonBlankString)
-
-	_ModelIdList_member = _ModelIdList.AddMember("member", _ModelId)
-
-	CompatibilityInformation_clientCompatibilityVersion = CompatibilityInformation.AddMember("clientCompatibilityVersion", smithyprelude.Integer)
-
-	CompatibilityInformation_supportedModelIds = CompatibilityInformation.AddMember("supportedModelIds", _ModelIdList)
-
-	CompatibilityInformation_message = CompatibilityInformation.AddMember("message", _NonBlankString)
-
-	ConflictException_message = ConflictException.AddMember("message", _NonBlankString)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _NonBlankString)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _NonBlankString)
-
-	InternalServerExceptionReason_INVALID_MODEL_GENERATION = InternalServerExceptionReason.AddMember("INVALID_MODEL_GENERATION", smithyprelude.Unit)
-
-	InternalServerExceptionReason_TOKEN_LIMIT_EXCEEDED = InternalServerExceptionReason.AddMember("TOKEN_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _NonBlankString)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	InternalServerException_reason = InternalServerException.AddMember("reason", InternalServerExceptionReason)
-
-	ModelAlias_aliasName = ModelAlias.AddMember("aliasName", _ModelId)
-
-	ModelAlias_latestModelId = ModelAlias.AddMember("latestModelId", _ModelId)
-
-	ModelAlias_resolvedModelId = ModelAlias.AddMember("resolvedModelId", _ModelId)
-
-	_ModelAliases_member = _ModelAliases.AddMember("member", ModelAlias)
-
-	ModelStatus_ACTIVE = ModelStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ModelStatus_LEGACY = ModelStatus.AddMember("LEGACY", smithyprelude.Unit)
-
-	ModelStatus_DEPRECATED = ModelStatus.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	ModelStatus_PREVIEW = ModelStatus.AddMember("PREVIEW", smithyprelude.Unit)
-
-	ModelLifecycle_status = ModelLifecycle.AddMember("status", ModelStatus)
-
-	ModelSummary_modelId = ModelSummary.AddMember("modelId", _ModelId)
-
-	ModelSummary_modelLifecycle = ModelSummary.AddMember("modelLifecycle", ModelLifecycle)
-
-	ModelSummary_minimumCompatibilityVersion = ModelSummary.AddMember("minimumCompatibilityVersion", smithyprelude.Integer)
-
-	_ModelSummaries_member = _ModelSummaries.AddMember("member", ModelSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _NonBlankString)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _NonBlankString)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _NonBlankString)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _NonBlankString)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _NonBlankString)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _NonBlankString)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _NonBlankString)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _NonBlankString)
-
-	SessionSummary_sessionId = SessionSummary.AddMember("sessionId", _UuidString)
-
-	_SessionSummaries_member = _SessionSummaries.AddMember("member", SessionSummary)
-
-	SortOrder_ASC = SortOrder.AddMember("ASC", smithyprelude.Unit)
-
-	SortOrder_DESC = SortOrder.AddMember("DESC", smithyprelude.Unit)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _NonBlankString)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _NonBlankString)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _NonBlankString)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ToolInputSchema_json = ToolInputSchema.AddMember("json", _ToolInputSchemaDocument)
-
-	ToolSpec_name = ToolSpec.AddMember("name", _ToolName)
-
-	ToolSpec_description = ToolSpec.AddMember("description", _ToolDescription)
-
-	ToolSpec_inputSchema = ToolSpec.AddMember("inputSchema", ToolInputSchema)
-
-	_ToolSpecs_member = _ToolSpecs.AddMember("member", ToolSpec)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_INVALID_STATUS = ValidationExceptionReason.AddMember("INVALID_STATUS", smithyprelude.Unit)
-
-	ValidationExceptionReason_GUARDRAIL_INTERVENED = ValidationExceptionReason.AddMember("GUARDRAIL_INTERVENED", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _NonBlankString)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _NonBlankString)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _NonBlankString)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	WorkflowDefinitionStatus_ACTIVE = WorkflowDefinitionStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	WorkflowDefinitionStatus_DELETING = WorkflowDefinitionStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	WorkflowDefinitionSummary_workflowDefinitionArn = WorkflowDefinitionSummary.AddMember("workflowDefinitionArn", _WorkflowDefinitionArn)
-
-	WorkflowDefinitionSummary_workflowDefinitionName = WorkflowDefinitionSummary.AddMember("workflowDefinitionName", _WorkflowDefinitionName)
-
-	WorkflowDefinitionSummary_createdAt = WorkflowDefinitionSummary.AddMember("createdAt", _DateTimestamp)
-
-	WorkflowDefinitionSummary_status = WorkflowDefinitionSummary.AddMember("status", WorkflowDefinitionStatus)
-
-	_WorkflowDefinitionSummaries_member = _WorkflowDefinitionSummaries.AddMember("member", WorkflowDefinitionSummary)
-
-	WorkflowExportConfig_s3BucketName = WorkflowExportConfig.AddMember("s3BucketName", _S3BucketName)
-
-	WorkflowExportConfig_s3KeyPrefix = WorkflowExportConfig.AddMember("s3KeyPrefix", _S3KeyPrefix)
-
-	WorkflowRunStatus_RUNNING = WorkflowRunStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	WorkflowRunStatus_SUCCEEDED = WorkflowRunStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	WorkflowRunStatus_FAILED = WorkflowRunStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	WorkflowRunStatus_TIMED_OUT = WorkflowRunStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	WorkflowRunStatus_DELETING = WorkflowRunStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	WorkflowRunSummary_workflowRunArn = WorkflowRunSummary.AddMember("workflowRunArn", _WorkflowRunArn)
-
-	WorkflowRunSummary_workflowRunId = WorkflowRunSummary.AddMember("workflowRunId", _UuidString)
-
-	WorkflowRunSummary_status = WorkflowRunSummary.AddMember("status", WorkflowRunStatus)
-
-	WorkflowRunSummary_startedAt = WorkflowRunSummary.AddMember("startedAt", _DateTimestamp)
-
-	WorkflowRunSummary_endedAt = WorkflowRunSummary.AddMember("endedAt", _DateTimestamp)
-
-	WorkflowRunSummary_traceLocation = WorkflowRunSummary.AddMember("traceLocation", TraceLocation)
-
-	_WorkflowRunSummaries_member = _WorkflowRunSummaries.AddMember("member", WorkflowRunSummary)
-
-	CreateActRequest_workflowDefinitionName = CreateActRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	CreateActRequest_workflowRunId = CreateActRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	CreateActRequest_sessionId = CreateActRequest.AddMember("sessionId", _UuidString, &smithytraits.HTTPLabel{})
-
-	CreateActRequest_task = CreateActRequest.AddMember("task", _Task)
-
-	CreateActRequest_toolSpecs = CreateActRequest.AddMember("toolSpecs", _ToolSpecs)
-
-	CreateActRequest_clientToken = CreateActRequest.AddMember("clientToken", _ClientToken)
-
-	CreateActResponse_actId = CreateActResponse.AddMember("actId", _UuidString)
-
-	CreateActResponse_status = CreateActResponse.AddMember("status", ActStatus)
-
-	CreateSessionRequest_workflowDefinitionName = CreateSessionRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	CreateSessionRequest_workflowRunId = CreateSessionRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	CreateSessionRequest_clientToken = CreateSessionRequest.AddMember("clientToken", _ClientToken)
-
-	CreateSessionResponse_sessionId = CreateSessionResponse.AddMember("sessionId", _UuidString)
-
-	CreateWorkflowDefinitionRequest_name = CreateWorkflowDefinitionRequest.AddMember("name", _WorkflowDefinitionName)
-
-	CreateWorkflowDefinitionRequest_description = CreateWorkflowDefinitionRequest.AddMember("description", _WorkflowDescription)
-
-	CreateWorkflowDefinitionRequest_exportConfig = CreateWorkflowDefinitionRequest.AddMember("exportConfig", WorkflowExportConfig)
-
-	CreateWorkflowDefinitionRequest_clientToken = CreateWorkflowDefinitionRequest.AddMember("clientToken", _ClientToken)
-
-	CreateWorkflowDefinitionResponse_status = CreateWorkflowDefinitionResponse.AddMember("status", WorkflowDefinitionStatus)
-
-	CreateWorkflowRunRequest_workflowDefinitionName = CreateWorkflowRunRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	CreateWorkflowRunRequest_modelId = CreateWorkflowRunRequest.AddMember("modelId", _ModelId)
-
-	CreateWorkflowRunRequest_clientToken = CreateWorkflowRunRequest.AddMember("clientToken", _ClientToken)
-
-	CreateWorkflowRunRequest_logGroupName = CreateWorkflowRunRequest.AddMember("logGroupName", _CloudWatchLogGroupName)
-
-	CreateWorkflowRunRequest_clientInfo = CreateWorkflowRunRequest.AddMember("clientInfo", ClientInfo)
-
-	CreateWorkflowRunResponse_workflowRunId = CreateWorkflowRunResponse.AddMember("workflowRunId", _UuidString)
-
-	CreateWorkflowRunResponse_status = CreateWorkflowRunResponse.AddMember("status", WorkflowRunStatus)
-
-	DeleteWorkflowDefinitionRequest_workflowDefinitionName = DeleteWorkflowDefinitionRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	DeleteWorkflowDefinitionResponse_status = DeleteWorkflowDefinitionResponse.AddMember("status", WorkflowDefinitionStatus)
-
-	DeleteWorkflowRunRequest_workflowDefinitionName = DeleteWorkflowRunRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	DeleteWorkflowRunRequest_workflowRunId = DeleteWorkflowRunRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	DeleteWorkflowRunResponse_status = DeleteWorkflowRunResponse.AddMember("status", WorkflowRunStatus)
-
-	GetWorkflowDefinitionRequest_workflowDefinitionName = GetWorkflowDefinitionRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	GetWorkflowDefinitionResponse_name = GetWorkflowDefinitionResponse.AddMember("name", _WorkflowDefinitionName)
-
-	GetWorkflowDefinitionResponse_arn = GetWorkflowDefinitionResponse.AddMember("arn", _WorkflowDefinitionArn)
-
-	GetWorkflowDefinitionResponse_createdAt = GetWorkflowDefinitionResponse.AddMember("createdAt", _DateTimestamp)
-
-	GetWorkflowDefinitionResponse_description = GetWorkflowDefinitionResponse.AddMember("description", _WorkflowDescription)
-
-	GetWorkflowDefinitionResponse_exportConfig = GetWorkflowDefinitionResponse.AddMember("exportConfig", WorkflowExportConfig)
-
-	GetWorkflowDefinitionResponse_status = GetWorkflowDefinitionResponse.AddMember("status", WorkflowDefinitionStatus)
-
-	GetWorkflowRunRequest_workflowDefinitionName = GetWorkflowRunRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	GetWorkflowRunRequest_workflowRunId = GetWorkflowRunRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	GetWorkflowRunResponse_workflowRunArn = GetWorkflowRunResponse.AddMember("workflowRunArn", _WorkflowRunArn)
-
-	GetWorkflowRunResponse_workflowRunId = GetWorkflowRunResponse.AddMember("workflowRunId", _UuidString)
-
-	GetWorkflowRunResponse_status = GetWorkflowRunResponse.AddMember("status", WorkflowRunStatus)
-
-	GetWorkflowRunResponse_startedAt = GetWorkflowRunResponse.AddMember("startedAt", _DateTimestamp)
-
-	GetWorkflowRunResponse_endedAt = GetWorkflowRunResponse.AddMember("endedAt", _DateTimestamp)
-
-	GetWorkflowRunResponse_modelId = GetWorkflowRunResponse.AddMember("modelId", _ModelId)
-
-	GetWorkflowRunResponse_logGroupName = GetWorkflowRunResponse.AddMember("logGroupName", _CloudWatchLogGroupName)
-
-	InvokeActStepRequest_workflowDefinitionName = InvokeActStepRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	InvokeActStepRequest_workflowRunId = InvokeActStepRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	InvokeActStepRequest_sessionId = InvokeActStepRequest.AddMember("sessionId", _UuidString, &smithytraits.HTTPLabel{})
-
-	InvokeActStepRequest_actId = InvokeActStepRequest.AddMember("actId", _UuidString, &smithytraits.HTTPLabel{})
-
-	InvokeActStepRequest_callResults = InvokeActStepRequest.AddMember("callResults", _CallResults)
-
-	InvokeActStepRequest_previousStepId = InvokeActStepRequest.AddMember("previousStepId", _UuidString)
-
-	InvokeActStepResponse_calls = InvokeActStepResponse.AddMember("calls", _Calls)
-
-	InvokeActStepResponse_stepId = InvokeActStepResponse.AddMember("stepId", _UuidString)
-
-	ListActsRequest_workflowDefinitionName = ListActsRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	ListActsRequest_workflowRunId = ListActsRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPQuery{Name: "workflowRunId"})
-
-	ListActsRequest_sessionId = ListActsRequest.AddMember("sessionId", _UuidString, &smithytraits.HTTPQuery{Name: "sessionId"})
-
-	ListActsRequest_maxResults = ListActsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListActsRequest_nextToken = ListActsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListActsRequest_sortOrder = ListActsRequest.AddMember("sortOrder", SortOrder)
-
-	ListActsResponse_actSummaries = ListActsResponse.AddMember("actSummaries", _ActSummaries)
-
-	ListActsResponse_nextToken = ListActsResponse.AddMember("nextToken", _NextToken)
-
-	ListModelsRequest_clientCompatibilityVersion = ListModelsRequest.AddMember("clientCompatibilityVersion", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "clientCompatibilityVersion"})
-
-	ListModelsResponse_modelSummaries = ListModelsResponse.AddMember("modelSummaries", _ModelSummaries)
-
-	ListModelsResponse_modelAliases = ListModelsResponse.AddMember("modelAliases", _ModelAliases)
-
-	ListModelsResponse_compatibilityInformation = ListModelsResponse.AddMember("compatibilityInformation", CompatibilityInformation)
-
-	ListSessionsRequest_workflowDefinitionName = ListSessionsRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	ListSessionsRequest_workflowRunId = ListSessionsRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	ListSessionsRequest_maxResults = ListSessionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListSessionsRequest_nextToken = ListSessionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListSessionsRequest_sortOrder = ListSessionsRequest.AddMember("sortOrder", SortOrder)
-
-	ListSessionsResponse_sessionSummaries = ListSessionsResponse.AddMember("sessionSummaries", _SessionSummaries)
-
-	ListSessionsResponse_nextToken = ListSessionsResponse.AddMember("nextToken", _NextToken)
-
-	ListWorkflowDefinitionsRequest_maxResults = ListWorkflowDefinitionsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkflowDefinitionsRequest_nextToken = ListWorkflowDefinitionsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkflowDefinitionsRequest_sortOrder = ListWorkflowDefinitionsRequest.AddMember("sortOrder", SortOrder)
-
-	ListWorkflowDefinitionsResponse_workflowDefinitionSummaries = ListWorkflowDefinitionsResponse.AddMember("workflowDefinitionSummaries", _WorkflowDefinitionSummaries)
-
-	ListWorkflowDefinitionsResponse_nextToken = ListWorkflowDefinitionsResponse.AddMember("nextToken", _NextToken)
-
-	ListWorkflowRunsRequest_workflowDefinitionName = ListWorkflowRunsRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	ListWorkflowRunsRequest_maxResults = ListWorkflowRunsRequest.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWorkflowRunsRequest_nextToken = ListWorkflowRunsRequest.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWorkflowRunsRequest_sortOrder = ListWorkflowRunsRequest.AddMember("sortOrder", SortOrder)
-
-	ListWorkflowRunsResponse_workflowRunSummaries = ListWorkflowRunsResponse.AddMember("workflowRunSummaries", _WorkflowRunSummaries)
-
-	ListWorkflowRunsResponse_nextToken = ListWorkflowRunsResponse.AddMember("nextToken", _NextToken)
-
-	UpdateActRequest_workflowDefinitionName = UpdateActRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	UpdateActRequest_workflowRunId = UpdateActRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	UpdateActRequest_sessionId = UpdateActRequest.AddMember("sessionId", _UuidString, &smithytraits.HTTPLabel{})
-
-	UpdateActRequest_actId = UpdateActRequest.AddMember("actId", _UuidString, &smithytraits.HTTPLabel{})
-
-	UpdateActRequest_status = UpdateActRequest.AddMember("status", ActStatus)
-
-	UpdateActRequest_error = UpdateActRequest.AddMember("error", ActError)
-
-	UpdateWorkflowRunRequest_workflowDefinitionName = UpdateWorkflowRunRequest.AddMember("workflowDefinitionName", _WorkflowDefinitionName, &smithytraits.HTTPLabel{})
-
-	UpdateWorkflowRunRequest_workflowRunId = UpdateWorkflowRunRequest.AddMember("workflowRunId", _UuidString, &smithytraits.HTTPLabel{})
-
-	UpdateWorkflowRunRequest_status = UpdateWorkflowRunRequest.AddMember("status", WorkflowRunStatus)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "workflowRunId"}}, DirectMask: 0x10}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "sessionId"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clientCompatibilityVersion"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mActError = smithy.SchemaMembers{List: []*smithy.Schema{&sActError_message, &sActError_type}}
+var mActStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sActStatus_RUNNING, &sActStatus_PENDING_CLIENT_ACTION, &sActStatus_PENDING_HUMAN_ACTION, &sActStatus_SUCCEEDED, &sActStatus_FAILED, &sActStatus_TIMED_OUT}}
+var m_ActSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ActSummaries_member}}
+var mActSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sActSummary_workflowRunId, &sActSummary_sessionId, &sActSummary_actId, &sActSummary_status, &sActSummary_startedAt, &sActSummary_endedAt, &sActSummary_traceLocation}}
+var mCall = smithy.SchemaMembers{List: []*smithy.Schema{&sCall_callId, &sCall_input, &sCall_name}}
+var mCallResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCallResult_callId, &sCallResult_content}}
+var mCallResultContent = smithy.SchemaMembers{List: []*smithy.Schema{&sCallResultContent_text}}
+var m_CallResultContents = smithy.SchemaMembers{List: []*smithy.Schema{&s_CallResultContents_member}}
+var m_CallResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_CallResults_member}}
+var m_Calls = smithy.SchemaMembers{List: []*smithy.Schema{&s_Calls_member}}
+var mClientInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sClientInfo_compatibilityVersion, &sClientInfo_sdkVersion}}
+var mCompatibilityInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sCompatibilityInformation_clientCompatibilityVersion, &sCompatibilityInformation_supportedModelIds, &sCompatibilityInformation_message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds, &sInternalServerException_reason}}
+var mInternalServerExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerExceptionReason_INVALID_MODEL_GENERATION, &sInternalServerExceptionReason_TOKEN_LIMIT_EXCEEDED}}
+var mModelAlias = smithy.SchemaMembers{List: []*smithy.Schema{&sModelAlias_aliasName, &sModelAlias_latestModelId, &sModelAlias_resolvedModelId}}
+var m_ModelAliases = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelAliases_member}}
+var m_ModelIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelIdList_member}}
+var mModelLifecycle = smithy.SchemaMembers{List: []*smithy.Schema{&sModelLifecycle_status}}
+var mModelStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sModelStatus_ACTIVE, &sModelStatus_LEGACY, &sModelStatus_DEPRECATED, &sModelStatus_PREVIEW}}
+var m_ModelSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_ModelSummaries_member}}
+var mModelSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sModelSummary_modelId, &sModelSummary_modelLifecycle, &sModelSummary_minimumCompatibilityVersion}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_serviceCode, &sServiceQuotaExceededException_quotaCode}}
+var m_SessionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_SessionSummaries_member}}
+var mSessionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSessionSummary_sessionId}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASC, &sSortOrder_DESC}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mToolInputSchema = smithy.SchemaMembers{List: []*smithy.Schema{&sToolInputSchema_json}}
+var mToolSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sToolSpec_name, &sToolSpec_description, &sToolSpec_inputSchema}}
+var m_ToolSpecs = smithy.SchemaMembers{List: []*smithy.Schema{&s_ToolSpecs_member}}
+var mTraceLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sTraceLocation_locationType, &sTraceLocation_location}}
+var mTraceLocationType = smithy.SchemaMembers{List: []*smithy.Schema{&sTraceLocationType_S3}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_INVALID_STATUS, &sValidationExceptionReason_GUARDRAIL_INTERVENED}}
+var mWorkflowDefinitionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowDefinitionStatus_ACTIVE, &sWorkflowDefinitionStatus_DELETING}}
+var m_WorkflowDefinitionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowDefinitionSummaries_member}}
+var mWorkflowDefinitionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowDefinitionSummary_workflowDefinitionArn, &sWorkflowDefinitionSummary_workflowDefinitionName, &sWorkflowDefinitionSummary_createdAt, &sWorkflowDefinitionSummary_status}}
+var mWorkflowExportConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowExportConfig_s3BucketName, &sWorkflowExportConfig_s3KeyPrefix}}
+var mWorkflowRunStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowRunStatus_RUNNING, &sWorkflowRunStatus_SUCCEEDED, &sWorkflowRunStatus_FAILED, &sWorkflowRunStatus_TIMED_OUT, &sWorkflowRunStatus_DELETING}}
+var m_WorkflowRunSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_WorkflowRunSummaries_member}}
+var mWorkflowRunSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWorkflowRunSummary_workflowRunArn, &sWorkflowRunSummary_workflowRunId, &sWorkflowRunSummary_status, &sWorkflowRunSummary_startedAt, &sWorkflowRunSummary_endedAt, &sWorkflowRunSummary_traceLocation}}
+var mCreateActRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateActRequest_workflowDefinitionName, &sCreateActRequest_workflowRunId, &sCreateActRequest_sessionId, &sCreateActRequest_task, &sCreateActRequest_toolSpecs, &sCreateActRequest_clientToken}}
+var mCreateActResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateActResponse_actId, &sCreateActResponse_status}}
+var mCreateSessionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSessionRequest_workflowDefinitionName, &sCreateSessionRequest_workflowRunId, &sCreateSessionRequest_clientToken}}
+var mCreateSessionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSessionResponse_sessionId}}
+var mCreateWorkflowDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkflowDefinitionRequest_name, &sCreateWorkflowDefinitionRequest_description, &sCreateWorkflowDefinitionRequest_exportConfig, &sCreateWorkflowDefinitionRequest_clientToken}}
+var mCreateWorkflowDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkflowDefinitionResponse_status}}
+var mCreateWorkflowRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkflowRunRequest_workflowDefinitionName, &sCreateWorkflowRunRequest_modelId, &sCreateWorkflowRunRequest_clientToken, &sCreateWorkflowRunRequest_logGroupName, &sCreateWorkflowRunRequest_clientInfo}}
+var mCreateWorkflowRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWorkflowRunResponse_workflowRunId, &sCreateWorkflowRunResponse_status}}
+var mDeleteWorkflowDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkflowDefinitionRequest_workflowDefinitionName}}
+var mDeleteWorkflowDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkflowDefinitionResponse_status}}
+var mDeleteWorkflowRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkflowRunRequest_workflowDefinitionName, &sDeleteWorkflowRunRequest_workflowRunId}}
+var mDeleteWorkflowRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWorkflowRunResponse_status}}
+var mGetWorkflowDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowDefinitionRequest_workflowDefinitionName}}
+var mGetWorkflowDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowDefinitionResponse_name, &sGetWorkflowDefinitionResponse_arn, &sGetWorkflowDefinitionResponse_createdAt, &sGetWorkflowDefinitionResponse_description, &sGetWorkflowDefinitionResponse_exportConfig, &sGetWorkflowDefinitionResponse_status}}
+var mGetWorkflowRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowRunRequest_workflowDefinitionName, &sGetWorkflowRunRequest_workflowRunId}}
+var mGetWorkflowRunResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWorkflowRunResponse_workflowRunArn, &sGetWorkflowRunResponse_workflowRunId, &sGetWorkflowRunResponse_status, &sGetWorkflowRunResponse_startedAt, &sGetWorkflowRunResponse_endedAt, &sGetWorkflowRunResponse_modelId, &sGetWorkflowRunResponse_logGroupName}}
+var mInvokeActStepRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeActStepRequest_workflowDefinitionName, &sInvokeActStepRequest_workflowRunId, &sInvokeActStepRequest_sessionId, &sInvokeActStepRequest_actId, &sInvokeActStepRequest_callResults, &sInvokeActStepRequest_previousStepId}}
+var mInvokeActStepResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeActStepResponse_calls, &sInvokeActStepResponse_stepId}}
+var mListActsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListActsRequest_workflowDefinitionName, &sListActsRequest_workflowRunId, &sListActsRequest_sessionId, &sListActsRequest_maxResults, &sListActsRequest_nextToken, &sListActsRequest_sortOrder}}
+var mListActsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListActsResponse_actSummaries, &sListActsResponse_nextToken}}
+var mListModelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelsRequest_clientCompatibilityVersion}}
+var mListModelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListModelsResponse_modelSummaries, &sListModelsResponse_modelAliases, &sListModelsResponse_compatibilityInformation}}
+var mListSessionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsRequest_workflowDefinitionName, &sListSessionsRequest_workflowRunId, &sListSessionsRequest_maxResults, &sListSessionsRequest_nextToken, &sListSessionsRequest_sortOrder}}
+var mListSessionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSessionsResponse_sessionSummaries, &sListSessionsResponse_nextToken}}
+var mListWorkflowDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowDefinitionsRequest_maxResults, &sListWorkflowDefinitionsRequest_nextToken, &sListWorkflowDefinitionsRequest_sortOrder}}
+var mListWorkflowDefinitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowDefinitionsResponse_workflowDefinitionSummaries, &sListWorkflowDefinitionsResponse_nextToken}}
+var mListWorkflowRunsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowRunsRequest_workflowDefinitionName, &sListWorkflowRunsRequest_maxResults, &sListWorkflowRunsRequest_nextToken, &sListWorkflowRunsRequest_sortOrder}}
+var mListWorkflowRunsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListWorkflowRunsResponse_workflowRunSummaries, &sListWorkflowRunsResponse_nextToken}}
+var mUpdateActRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateActRequest_workflowDefinitionName, &sUpdateActRequest_workflowRunId, &sUpdateActRequest_sessionId, &sUpdateActRequest_actId, &sUpdateActRequest_status, &sUpdateActRequest_error}}
+var mUpdateWorkflowRunRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWorkflowRunRequest_workflowDefinitionName, &sUpdateWorkflowRunRequest_workflowRunId, &sUpdateWorkflowRunRequest_status}}
+
+var sCreateAct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAct, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateSession = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSession, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateWorkflowDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowDefinition, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateWorkflowRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowRun, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteWorkflowDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowDefinition, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteWorkflowRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowRun, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetWorkflowDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowDefinition, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sGetWorkflowRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowRun, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sInvokeActStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeActStep, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sListActs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActs, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModels, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sListSessions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessions, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListWorkflowDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowDefinitions, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sListWorkflowRuns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowRuns, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sUpdateAct = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAct, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sUpdateWorkflowRun = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowRun, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var s_AmazonNovaAgentsDataPlane = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonNovaAgentsDataPlane, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sActError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActError, Members: &mActError, Type: smithy.ShapeTypeStructure})
+var sActStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActStatus, Members: &mActStatus, Type: smithy.ShapeTypeEnum})
+var s_ActSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ActSummaries, Members: &m_ActSummaries, Type: smithy.ShapeTypeList})
+var sActSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActSummary, Members: &mActSummary, Type: smithy.ShapeTypeStructure})
+var sCall = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCall, Members: &mCall, Type: smithy.ShapeTypeStructure})
+var s_CallId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallId, Type: smithy.ShapeTypeString})
+var sCallResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallResult, Members: &mCallResult, Type: smithy.ShapeTypeStructure})
+var sCallResultContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallResultContent, Members: &mCallResultContent, Traits: &t19, Type: smithy.ShapeTypeUnion})
+var s_CallResultContents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallResultContents, Members: &m_CallResultContents, Type: smithy.ShapeTypeList})
+var s_CallResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CallResults, Members: &m_CallResults, Type: smithy.ShapeTypeList})
+var s_Calls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Calls, Members: &m_Calls, Type: smithy.ShapeTypeList})
+var sClientInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientInfo, Members: &mClientInfo, Type: smithy.ShapeTypeStructure})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var s_CloudWatchLogGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString})
+var sCompatibilityInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompatibilityInformation, Members: &mCompatibilityInformation, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var s_DateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTimestamp, Traits: &t21, Type: smithy.ShapeTypeTimestamp})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var sInternalServerExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerExceptionReason, Members: &mInternalServerExceptionReason, Type: smithy.ShapeTypeEnum})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sModelAlias = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelAlias, Members: &mModelAlias, Type: smithy.ShapeTypeStructure})
+var s_ModelAliases = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelAliases, Members: &m_ModelAliases, Type: smithy.ShapeTypeList})
+var s_ModelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var s_ModelIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelIdList, Members: &m_ModelIdList, Type: smithy.ShapeTypeList})
+var sModelLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelLifecycle, Members: &mModelLifecycle, Type: smithy.ShapeTypeStructure})
+var sModelStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelStatus, Members: &mModelStatus, Type: smithy.ShapeTypeEnum})
+var s_ModelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelSummaries, Members: &m_ModelSummaries, Type: smithy.ShapeTypeList})
+var sModelSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelSummary, Members: &mModelSummary, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_NonBlankString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var s_S3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3KeyPrefix, Type: smithy.ShapeTypeString})
+var s_SensitiveDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveDocument, Traits: &t19, Type: smithy.ShapeTypeDocument})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t19, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var s_SessionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SessionSummaries, Members: &m_SessionSummaries, Type: smithy.ShapeTypeList})
+var sSessionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSessionSummary, Members: &mSessionSummary, Type: smithy.ShapeTypeStructure})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var s_Task = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Task, Traits: &t19, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t26, Type: smithy.ShapeTypeStructure})
+var s_ToolDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolDescription, Traits: &t19, Type: smithy.ShapeTypeString})
+var sToolInputSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolInputSchema, Members: &mToolInputSchema, Traits: &t19, Type: smithy.ShapeTypeUnion})
+var s_ToolInputSchemaDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolInputSchemaDocument, Type: smithy.ShapeTypeDocument})
+var s_ToolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolName, Type: smithy.ShapeTypeString})
+var sToolSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iToolSpec, Members: &mToolSpec, Type: smithy.ShapeTypeStructure})
+var s_ToolSpecs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ToolSpecs, Members: &m_ToolSpecs, Type: smithy.ShapeTypeList})
+var sTraceLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTraceLocation, Members: &mTraceLocation, Type: smithy.ShapeTypeStructure})
+var sTraceLocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTraceLocationType, Members: &mTraceLocationType, Type: smithy.ShapeTypeEnum})
+var s_UuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var s_WorkflowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowDefinitionArn, Type: smithy.ShapeTypeString})
+var s_WorkflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowDefinitionName, Type: smithy.ShapeTypeString})
+var sWorkflowDefinitionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowDefinitionStatus, Members: &mWorkflowDefinitionStatus, Type: smithy.ShapeTypeEnum})
+var s_WorkflowDefinitionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowDefinitionSummaries, Members: &m_WorkflowDefinitionSummaries, Type: smithy.ShapeTypeList})
+var sWorkflowDefinitionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowDefinitionSummary, Members: &mWorkflowDefinitionSummary, Type: smithy.ShapeTypeStructure})
+var s_WorkflowDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowDescription, Traits: &t19, Type: smithy.ShapeTypeString})
+var sWorkflowExportConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowExportConfig, Members: &mWorkflowExportConfig, Type: smithy.ShapeTypeStructure})
+var s_WorkflowRunArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunArn, Type: smithy.ShapeTypeString})
+var sWorkflowRunStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowRunStatus, Members: &mWorkflowRunStatus, Type: smithy.ShapeTypeEnum})
+var s_WorkflowRunSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WorkflowRunSummaries, Members: &m_WorkflowRunSummaries, Type: smithy.ShapeTypeList})
+var sWorkflowRunSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWorkflowRunSummary, Members: &mWorkflowRunSummary, Type: smithy.ShapeTypeStructure})
+var sCreateActRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateActRequest, Members: &mCreateActRequest, Type: smithy.ShapeTypeStructure})
+var sCreateActResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateActResponse, Members: &mCreateActResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSessionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSessionRequest, Members: &mCreateSessionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSessionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSessionResponse, Members: &mCreateSessionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowDefinitionRequest, Members: &mCreateWorkflowDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowDefinitionResponse, Members: &mCreateWorkflowDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowRunRequest, Members: &mCreateWorkflowRunRequest, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWorkflowRunResponse, Members: &mCreateWorkflowRunResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkflowDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowDefinitionRequest, Members: &mDeleteWorkflowDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkflowDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowDefinitionResponse, Members: &mDeleteWorkflowDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkflowRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowRunRequest, Members: &mDeleteWorkflowRunRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteWorkflowRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWorkflowRunResponse, Members: &mDeleteWorkflowRunResponse, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowDefinitionRequest, Members: &mGetWorkflowDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowDefinitionResponse, Members: &mGetWorkflowDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowRunRequest, Members: &mGetWorkflowRunRequest, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWorkflowRunResponse, Members: &mGetWorkflowRunResponse, Type: smithy.ShapeTypeStructure})
+var sInvokeActStepRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeActStepRequest, Members: &mInvokeActStepRequest, Type: smithy.ShapeTypeStructure})
+var sInvokeActStepResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeActStepResponse, Members: &mInvokeActStepResponse, Type: smithy.ShapeTypeStructure})
+var sListActsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActsRequest, Members: &mListActsRequest, Type: smithy.ShapeTypeStructure})
+var sListActsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListActsResponse, Members: &mListActsResponse, Type: smithy.ShapeTypeStructure})
+var sListModelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelsRequest, Members: &mListModelsRequest, Type: smithy.ShapeTypeStructure})
+var sListModelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListModelsResponse, Members: &mListModelsResponse, Type: smithy.ShapeTypeStructure})
+var sListSessionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsRequest, Members: &mListSessionsRequest, Type: smithy.ShapeTypeStructure})
+var sListSessionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSessionsResponse, Members: &mListSessionsResponse, Type: smithy.ShapeTypeStructure})
+var sListWorkflowDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowDefinitionsRequest, Members: &mListWorkflowDefinitionsRequest, Type: smithy.ShapeTypeStructure})
+var sListWorkflowDefinitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowDefinitionsResponse, Members: &mListWorkflowDefinitionsResponse, Type: smithy.ShapeTypeStructure})
+var sListWorkflowRunsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowRunsRequest, Members: &mListWorkflowRunsRequest, Type: smithy.ShapeTypeStructure})
+var sListWorkflowRunsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWorkflowRunsResponse, Members: &mListWorkflowRunsResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateActRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActRequest, Members: &mUpdateActRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateActResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateActResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkflowRunRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowRunRequest, Members: &mUpdateWorkflowRunRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkflowRunResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWorkflowRunResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sActError_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_SensitiveString, Traits: &t17, Type: smithy.ShapeTypeString})
+var sActError_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString})
+var sActStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActStatus_PENDING_CLIENT_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_CLIENT_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActStatus_PENDING_HUMAN_ACTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING_HUMAN_ACTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ActSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iActSummary, Members: &mActSummary, Type: smithy.ShapeTypeStructure})
+var sActSummary_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sActSummary_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sActSummary_actId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sActSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActStatus, Members: &mActStatus, Type: smithy.ShapeTypeEnum})
+var sActSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sActSummary_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sActSummary_traceLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "traceLocation", ID: &iTraceLocation, Members: &mTraceLocation, Type: smithy.ShapeTypeStructure})
+var sCall_callId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callId", ID: &i_CallId, Type: smithy.ShapeTypeString})
+var sCall_input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "input", ID: &i_SensitiveDocument, Traits: &t17, Type: smithy.ShapeTypeDocument})
+var sCall_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sCallResult_callId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callId", ID: &i_CallId, Type: smithy.ShapeTypeString})
+var sCallResult_content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "content", ID: &i_CallResultContents, Members: &m_CallResultContents, Type: smithy.ShapeTypeList})
+var sCallResultContent_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &pString, Type: smithy.ShapeTypeString})
+var s_CallResultContents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCallResultContent, Members: &mCallResultContent, Traits: &t17, Type: smithy.ShapeTypeUnion})
+var s_CallResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCallResult, Members: &mCallResult, Type: smithy.ShapeTypeStructure})
+var s_Calls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCall, Members: &mCall, Type: smithy.ShapeTypeStructure})
+var sClientInfo_compatibilityVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compatibilityVersion", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sClientInfo_sdkVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sdkVersion", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sCompatibilityInformation_clientCompatibilityVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientCompatibilityVersion", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCompatibilityInformation_supportedModelIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedModelIds", ID: &i_ModelIdList, Members: &m_ModelIdList, Type: smithy.ShapeTypeList})
+var sCompatibilityInformation_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger})
+var sInternalServerException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iInternalServerExceptionReason, Members: &mInternalServerExceptionReason, Type: smithy.ShapeTypeEnum})
+var sInternalServerExceptionReason_INVALID_MODEL_GENERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_MODEL_GENERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerExceptionReason_TOKEN_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOKEN_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelAlias_aliasName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "aliasName", ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var sModelAlias_latestModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestModelId", ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var sModelAlias_resolvedModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedModelId", ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var s_ModelAliases_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelAlias, Members: &mModelAlias, Type: smithy.ShapeTypeStructure})
+var s_ModelIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var sModelLifecycle_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iModelStatus, Members: &mModelStatus, Type: smithy.ShapeTypeEnum})
+var sModelStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelStatus_LEGACY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEGACY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelStatus_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sModelStatus_PREVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ModelSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iModelSummary, Members: &mModelSummary, Type: smithy.ShapeTypeStructure})
+var sModelSummary_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var sModelSummary_modelLifecycle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelLifecycle", ID: &iModelLifecycle, Members: &mModelLifecycle, Type: smithy.ShapeTypeStructure})
+var sModelSummary_minimumCompatibilityVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumCompatibilityVersion", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var s_SessionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSessionSummary, Members: &mSessionSummary, Type: smithy.ShapeTypeStructure})
+var sSessionSummary_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sSortOrder_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortOrder_DESC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t23, Type: smithy.ShapeTypeInteger})
+var sToolInputSchema_json = smithy.NewStaticSchema(smithy.StaticSchema{Member: "json", ID: &i_ToolInputSchemaDocument, Type: smithy.ShapeTypeDocument})
+var sToolSpec_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_ToolName, Type: smithy.ShapeTypeString})
+var sToolSpec_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_ToolDescription, Traits: &t17, Type: smithy.ShapeTypeString})
+var sToolSpec_inputSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputSchema", ID: &iToolInputSchema, Members: &mToolInputSchema, Traits: &t17, Type: smithy.ShapeTypeUnion})
+var s_ToolSpecs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iToolSpec, Members: &mToolSpec, Type: smithy.ShapeTypeStructure})
+var sTraceLocation_locationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locationType", ID: &iTraceLocationType, Members: &mTraceLocationType, Type: smithy.ShapeTypeEnum})
+var sTraceLocation_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sTraceLocationType_S3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonBlankString, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_INVALID_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_GUARDRAIL_INTERVENED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GUARDRAIL_INTERVENED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowDefinitionStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowDefinitionStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_WorkflowDefinitionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowDefinitionSummary, Members: &mWorkflowDefinitionSummary, Type: smithy.ShapeTypeStructure})
+var sWorkflowDefinitionSummary_workflowDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionArn", ID: &i_WorkflowDefinitionArn, Type: smithy.ShapeTypeString})
+var sWorkflowDefinitionSummary_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Type: smithy.ShapeTypeString})
+var sWorkflowDefinitionSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sWorkflowDefinitionSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowDefinitionStatus, Members: &mWorkflowDefinitionStatus, Type: smithy.ShapeTypeEnum})
+var sWorkflowExportConfig_s3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var sWorkflowExportConfig_s3KeyPrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3KeyPrefix", ID: &i_S3KeyPrefix, Type: smithy.ShapeTypeString})
+var sWorkflowRunStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowRunStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowRunStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowRunStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWorkflowRunStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_WorkflowRunSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWorkflowRunSummary, Members: &mWorkflowRunSummary, Type: smithy.ShapeTypeStructure})
+var sWorkflowRunSummary_workflowRunArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunArn", ID: &i_WorkflowRunArn, Type: smithy.ShapeTypeString})
+var sWorkflowRunSummary_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sWorkflowRunSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowRunStatus, Members: &mWorkflowRunStatus, Type: smithy.ShapeTypeEnum})
+var sWorkflowRunSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sWorkflowRunSummary_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sWorkflowRunSummary_traceLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "traceLocation", ID: &iTraceLocation, Members: &mTraceLocation, Type: smithy.ShapeTypeStructure})
+var sCreateActRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sCreateActRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sCreateActRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sCreateActRequest_task = smithy.NewStaticSchema(smithy.StaticSchema{Member: "task", ID: &i_Task, Traits: &t17, Type: smithy.ShapeTypeString})
+var sCreateActRequest_toolSpecs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "toolSpecs", ID: &i_ToolSpecs, Members: &m_ToolSpecs, Type: smithy.ShapeTypeList})
+var sCreateActRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateActResponse_actId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sCreateActResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActStatus, Members: &mActStatus, Type: smithy.ShapeTypeEnum})
+var sCreateSessionRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sCreateSessionRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sCreateSessionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSessionResponse_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sCreateWorkflowDefinitionRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WorkflowDefinitionName, Type: smithy.ShapeTypeString})
+var sCreateWorkflowDefinitionRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_WorkflowDescription, Traits: &t17, Type: smithy.ShapeTypeString})
+var sCreateWorkflowDefinitionRequest_exportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportConfig", ID: &iWorkflowExportConfig, Members: &mWorkflowExportConfig, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowDefinitionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateWorkflowDefinitionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowDefinitionStatus, Members: &mWorkflowDefinitionStatus, Type: smithy.ShapeTypeEnum})
+var sCreateWorkflowRunRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sCreateWorkflowRunRequest_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var sCreateWorkflowRunRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateWorkflowRunRequest_logGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupName", ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString})
+var sCreateWorkflowRunRequest_clientInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientInfo", ID: &iClientInfo, Members: &mClientInfo, Type: smithy.ShapeTypeStructure})
+var sCreateWorkflowRunResponse_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sCreateWorkflowRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowRunStatus, Members: &mWorkflowRunStatus, Type: smithy.ShapeTypeEnum})
+var sDeleteWorkflowDefinitionRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sDeleteWorkflowDefinitionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowDefinitionStatus, Members: &mWorkflowDefinitionStatus, Type: smithy.ShapeTypeEnum})
+var sDeleteWorkflowRunRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sDeleteWorkflowRunRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sDeleteWorkflowRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowRunStatus, Members: &mWorkflowRunStatus, Type: smithy.ShapeTypeEnum})
+var sGetWorkflowDefinitionRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetWorkflowDefinitionResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WorkflowDefinitionName, Type: smithy.ShapeTypeString})
+var sGetWorkflowDefinitionResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_WorkflowDefinitionArn, Type: smithy.ShapeTypeString})
+var sGetWorkflowDefinitionResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sGetWorkflowDefinitionResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_WorkflowDescription, Traits: &t17, Type: smithy.ShapeTypeString})
+var sGetWorkflowDefinitionResponse_exportConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exportConfig", ID: &iWorkflowExportConfig, Members: &mWorkflowExportConfig, Type: smithy.ShapeTypeStructure})
+var sGetWorkflowDefinitionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowDefinitionStatus, Members: &mWorkflowDefinitionStatus, Type: smithy.ShapeTypeEnum})
+var sGetWorkflowRunRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetWorkflowRunRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetWorkflowRunResponse_workflowRunArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunArn", ID: &i_WorkflowRunArn, Type: smithy.ShapeTypeString})
+var sGetWorkflowRunResponse_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sGetWorkflowRunResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowRunStatus, Members: &mWorkflowRunStatus, Type: smithy.ShapeTypeEnum})
+var sGetWorkflowRunResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sGetWorkflowRunResponse_endedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endedAt", ID: &i_DateTimestamp, Traits: &t18, Type: smithy.ShapeTypeTimestamp})
+var sGetWorkflowRunResponse_modelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelId", ID: &i_ModelId, Type: smithy.ShapeTypeString})
+var sGetWorkflowRunResponse_logGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logGroupName", ID: &i_CloudWatchLogGroupName, Type: smithy.ShapeTypeString})
+var sInvokeActStepRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sInvokeActStepRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sInvokeActStepRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sInvokeActStepRequest_actId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sInvokeActStepRequest_callResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callResults", ID: &i_CallResults, Members: &m_CallResults, Type: smithy.ShapeTypeList})
+var sInvokeActStepRequest_previousStepId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previousStepId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sInvokeActStepResponse_calls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "calls", ID: &i_Calls, Members: &m_Calls, Type: smithy.ShapeTypeList})
+var sInvokeActStepResponse_stepId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepId", ID: &i_UuidString, Type: smithy.ShapeTypeString})
+var sListActsRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListActsRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t29, Type: smithy.ShapeTypeString})
+var sListActsRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_UuidString, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListActsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sListActsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListActsRequest_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sListActsResponse_actSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actSummaries", ID: &i_ActSummaries, Members: &m_ActSummaries, Type: smithy.ShapeTypeList})
+var sListActsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListModelsRequest_clientCompatibilityVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientCompatibilityVersion", ID: &pInteger, Traits: &t33, Type: smithy.ShapeTypeInteger})
+var sListModelsResponse_modelSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelSummaries", ID: &i_ModelSummaries, Members: &m_ModelSummaries, Type: smithy.ShapeTypeList})
+var sListModelsResponse_modelAliases = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modelAliases", ID: &i_ModelAliases, Members: &m_ModelAliases, Type: smithy.ShapeTypeList})
+var sListModelsResponse_compatibilityInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "compatibilityInformation", ID: &iCompatibilityInformation, Members: &mCompatibilityInformation, Type: smithy.ShapeTypeStructure})
+var sListSessionsRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sListSessionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListSessionsRequest_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sListSessionsResponse_sessionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionSummaries", ID: &i_SessionSummaries, Members: &m_SessionSummaries, Type: smithy.ShapeTypeList})
+var sListSessionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWorkflowDefinitionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sListWorkflowDefinitionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListWorkflowDefinitionsRequest_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sListWorkflowDefinitionsResponse_workflowDefinitionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionSummaries", ID: &i_WorkflowDefinitionSummaries, Members: &m_WorkflowDefinitionSummaries, Type: smithy.ShapeTypeList})
+var sListWorkflowDefinitionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWorkflowRunsRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListWorkflowRunsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sListWorkflowRunsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListWorkflowRunsRequest_sortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sListWorkflowRunsResponse_workflowRunSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunSummaries", ID: &i_WorkflowRunSummaries, Members: &m_WorkflowRunSummaries, Type: smithy.ShapeTypeList})
+var sListWorkflowRunsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sUpdateActRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUpdateActRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUpdateActRequest_sessionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sessionId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUpdateActRequest_actId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUpdateActRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iActStatus, Members: &mActStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateActRequest_error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "error", ID: &iActError, Members: &mActError, Type: smithy.ShapeTypeStructure})
+var sUpdateWorkflowRunRequest_workflowDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowDefinitionName", ID: &i_WorkflowDefinitionName, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUpdateWorkflowRunRequest_workflowRunId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "workflowRunId", ID: &i_UuidString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUpdateWorkflowRunRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iWorkflowRunStatus, Members: &mWorkflowRunStatus, Type: smithy.ShapeTypeEnum})
+
+var CreateAct = &sCreateAct
+
+var CreateSession = &sCreateSession
+
+var CreateWorkflowDefinition = &sCreateWorkflowDefinition
+
+var CreateWorkflowRun = &sCreateWorkflowRun
+
+var DeleteWorkflowDefinition = &sDeleteWorkflowDefinition
+
+var DeleteWorkflowRun = &sDeleteWorkflowRun
+
+var GetWorkflowDefinition = &sGetWorkflowDefinition
+
+var GetWorkflowRun = &sGetWorkflowRun
+
+var InvokeActStep = &sInvokeActStep
+
+var ListActs = &sListActs
+
+var ListModels = &sListModels
+
+var ListSessions = &sListSessions
+
+var ListWorkflowDefinitions = &sListWorkflowDefinitions
+
+var ListWorkflowRuns = &sListWorkflowRuns
+
+var UpdateAct = &sUpdateAct
+
+var UpdateWorkflowRun = &sUpdateWorkflowRun
+
+var _AmazonNovaAgentsDataPlane = &s_AmazonNovaAgentsDataPlane
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var ActError = &sActError
+var ActError_message = &sActError_message
+var ActError_type = &sActError_type
+
+var ActStatus = &sActStatus
+var ActStatus_RUNNING = &sActStatus_RUNNING
+var ActStatus_PENDING_CLIENT_ACTION = &sActStatus_PENDING_CLIENT_ACTION
+var ActStatus_PENDING_HUMAN_ACTION = &sActStatus_PENDING_HUMAN_ACTION
+var ActStatus_SUCCEEDED = &sActStatus_SUCCEEDED
+var ActStatus_FAILED = &sActStatus_FAILED
+var ActStatus_TIMED_OUT = &sActStatus_TIMED_OUT
+
+var _ActSummaries = &s_ActSummaries
+var _ActSummaries_member = &s_ActSummaries_member
+
+var ActSummary = &sActSummary
+var ActSummary_workflowRunId = &sActSummary_workflowRunId
+var ActSummary_sessionId = &sActSummary_sessionId
+var ActSummary_actId = &sActSummary_actId
+var ActSummary_status = &sActSummary_status
+var ActSummary_startedAt = &sActSummary_startedAt
+var ActSummary_endedAt = &sActSummary_endedAt
+var ActSummary_traceLocation = &sActSummary_traceLocation
+
+var Call = &sCall
+var Call_callId = &sCall_callId
+var Call_input = &sCall_input
+var Call_name = &sCall_name
+
+var _CallId = &s_CallId
+
+var CallResult = &sCallResult
+var CallResult_callId = &sCallResult_callId
+var CallResult_content = &sCallResult_content
+
+var CallResultContent = &sCallResultContent
+var CallResultContent_text = &sCallResultContent_text
+
+var _CallResultContents = &s_CallResultContents
+var _CallResultContents_member = &s_CallResultContents_member
+
+var _CallResults = &s_CallResults
+var _CallResults_member = &s_CallResults_member
+
+var _Calls = &s_Calls
+var _Calls_member = &s_Calls_member
+
+var ClientInfo = &sClientInfo
+var ClientInfo_compatibilityVersion = &sClientInfo_compatibilityVersion
+var ClientInfo_sdkVersion = &sClientInfo_sdkVersion
+
+var _ClientToken = &s_ClientToken
+
+var _CloudWatchLogGroupName = &s_CloudWatchLogGroupName
+
+var CompatibilityInformation = &sCompatibilityInformation
+var CompatibilityInformation_clientCompatibilityVersion = &sCompatibilityInformation_clientCompatibilityVersion
+var CompatibilityInformation_supportedModelIds = &sCompatibilityInformation_supportedModelIds
+var CompatibilityInformation_message = &sCompatibilityInformation_message
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _DateTimestamp = &s_DateTimestamp
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+var InternalServerException_reason = &sInternalServerException_reason
+
+var InternalServerExceptionReason = &sInternalServerExceptionReason
+var InternalServerExceptionReason_INVALID_MODEL_GENERATION = &sInternalServerExceptionReason_INVALID_MODEL_GENERATION
+var InternalServerExceptionReason_TOKEN_LIMIT_EXCEEDED = &sInternalServerExceptionReason_TOKEN_LIMIT_EXCEEDED
+
+var _MaxResults = &s_MaxResults
+
+var ModelAlias = &sModelAlias
+var ModelAlias_aliasName = &sModelAlias_aliasName
+var ModelAlias_latestModelId = &sModelAlias_latestModelId
+var ModelAlias_resolvedModelId = &sModelAlias_resolvedModelId
+
+var _ModelAliases = &s_ModelAliases
+var _ModelAliases_member = &s_ModelAliases_member
+
+var _ModelId = &s_ModelId
+
+var _ModelIdList = &s_ModelIdList
+var _ModelIdList_member = &s_ModelIdList_member
+
+var ModelLifecycle = &sModelLifecycle
+var ModelLifecycle_status = &sModelLifecycle_status
+
+var ModelStatus = &sModelStatus
+var ModelStatus_ACTIVE = &sModelStatus_ACTIVE
+var ModelStatus_LEGACY = &sModelStatus_LEGACY
+var ModelStatus_DEPRECATED = &sModelStatus_DEPRECATED
+var ModelStatus_PREVIEW = &sModelStatus_PREVIEW
+
+var _ModelSummaries = &s_ModelSummaries
+var _ModelSummaries_member = &s_ModelSummaries_member
+
+var ModelSummary = &sModelSummary
+var ModelSummary_modelId = &sModelSummary_modelId
+var ModelSummary_modelLifecycle = &sModelSummary_modelLifecycle
+var ModelSummary_minimumCompatibilityVersion = &sModelSummary_minimumCompatibilityVersion
+
+var _NextToken = &s_NextToken
+
+var _NonBlankString = &s_NonBlankString
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _S3BucketName = &s_S3BucketName
+
+var _S3KeyPrefix = &s_S3KeyPrefix
+
+var _SensitiveDocument = &s_SensitiveDocument
+
+var _SensitiveString = &s_SensitiveString
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+
+var _SessionSummaries = &s_SessionSummaries
+var _SessionSummaries_member = &s_SessionSummaries_member
+
+var SessionSummary = &sSessionSummary
+var SessionSummary_sessionId = &sSessionSummary_sessionId
+
+var SortOrder = &sSortOrder
+var SortOrder_ASC = &sSortOrder_ASC
+var SortOrder_DESC = &sSortOrder_DESC
+
+var _Task = &s_Task
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _ToolDescription = &s_ToolDescription
+
+var ToolInputSchema = &sToolInputSchema
+var ToolInputSchema_json = &sToolInputSchema_json
+
+var _ToolInputSchemaDocument = &s_ToolInputSchemaDocument
+
+var _ToolName = &s_ToolName
+
+var ToolSpec = &sToolSpec
+var ToolSpec_name = &sToolSpec_name
+var ToolSpec_description = &sToolSpec_description
+var ToolSpec_inputSchema = &sToolSpec_inputSchema
+
+var _ToolSpecs = &s_ToolSpecs
+var _ToolSpecs_member = &s_ToolSpecs_member
+
+var TraceLocation = &sTraceLocation
+var TraceLocation_locationType = &sTraceLocation_locationType
+var TraceLocation_location = &sTraceLocation_location
+
+var TraceLocationType = &sTraceLocationType
+var TraceLocationType_S3 = &sTraceLocationType_S3
+
+var _UuidString = &s_UuidString
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_INVALID_STATUS = &sValidationExceptionReason_INVALID_STATUS
+var ValidationExceptionReason_GUARDRAIL_INTERVENED = &sValidationExceptionReason_GUARDRAIL_INTERVENED
+
+var _WorkflowDefinitionArn = &s_WorkflowDefinitionArn
+
+var _WorkflowDefinitionName = &s_WorkflowDefinitionName
+
+var WorkflowDefinitionStatus = &sWorkflowDefinitionStatus
+var WorkflowDefinitionStatus_ACTIVE = &sWorkflowDefinitionStatus_ACTIVE
+var WorkflowDefinitionStatus_DELETING = &sWorkflowDefinitionStatus_DELETING
+
+var _WorkflowDefinitionSummaries = &s_WorkflowDefinitionSummaries
+var _WorkflowDefinitionSummaries_member = &s_WorkflowDefinitionSummaries_member
+
+var WorkflowDefinitionSummary = &sWorkflowDefinitionSummary
+var WorkflowDefinitionSummary_workflowDefinitionArn = &sWorkflowDefinitionSummary_workflowDefinitionArn
+var WorkflowDefinitionSummary_workflowDefinitionName = &sWorkflowDefinitionSummary_workflowDefinitionName
+var WorkflowDefinitionSummary_createdAt = &sWorkflowDefinitionSummary_createdAt
+var WorkflowDefinitionSummary_status = &sWorkflowDefinitionSummary_status
+
+var _WorkflowDescription = &s_WorkflowDescription
+
+var WorkflowExportConfig = &sWorkflowExportConfig
+var WorkflowExportConfig_s3BucketName = &sWorkflowExportConfig_s3BucketName
+var WorkflowExportConfig_s3KeyPrefix = &sWorkflowExportConfig_s3KeyPrefix
+
+var _WorkflowRunArn = &s_WorkflowRunArn
+
+var WorkflowRunStatus = &sWorkflowRunStatus
+var WorkflowRunStatus_RUNNING = &sWorkflowRunStatus_RUNNING
+var WorkflowRunStatus_SUCCEEDED = &sWorkflowRunStatus_SUCCEEDED
+var WorkflowRunStatus_FAILED = &sWorkflowRunStatus_FAILED
+var WorkflowRunStatus_TIMED_OUT = &sWorkflowRunStatus_TIMED_OUT
+var WorkflowRunStatus_DELETING = &sWorkflowRunStatus_DELETING
+
+var _WorkflowRunSummaries = &s_WorkflowRunSummaries
+var _WorkflowRunSummaries_member = &s_WorkflowRunSummaries_member
+
+var WorkflowRunSummary = &sWorkflowRunSummary
+var WorkflowRunSummary_workflowRunArn = &sWorkflowRunSummary_workflowRunArn
+var WorkflowRunSummary_workflowRunId = &sWorkflowRunSummary_workflowRunId
+var WorkflowRunSummary_status = &sWorkflowRunSummary_status
+var WorkflowRunSummary_startedAt = &sWorkflowRunSummary_startedAt
+var WorkflowRunSummary_endedAt = &sWorkflowRunSummary_endedAt
+var WorkflowRunSummary_traceLocation = &sWorkflowRunSummary_traceLocation
+
+var CreateActRequest = &sCreateActRequest
+var CreateActRequest_workflowDefinitionName = &sCreateActRequest_workflowDefinitionName
+var CreateActRequest_workflowRunId = &sCreateActRequest_workflowRunId
+var CreateActRequest_sessionId = &sCreateActRequest_sessionId
+var CreateActRequest_task = &sCreateActRequest_task
+var CreateActRequest_toolSpecs = &sCreateActRequest_toolSpecs
+var CreateActRequest_clientToken = &sCreateActRequest_clientToken
+
+var CreateActResponse = &sCreateActResponse
+var CreateActResponse_actId = &sCreateActResponse_actId
+var CreateActResponse_status = &sCreateActResponse_status
+
+var CreateSessionRequest = &sCreateSessionRequest
+var CreateSessionRequest_workflowDefinitionName = &sCreateSessionRequest_workflowDefinitionName
+var CreateSessionRequest_workflowRunId = &sCreateSessionRequest_workflowRunId
+var CreateSessionRequest_clientToken = &sCreateSessionRequest_clientToken
+
+var CreateSessionResponse = &sCreateSessionResponse
+var CreateSessionResponse_sessionId = &sCreateSessionResponse_sessionId
+
+var CreateWorkflowDefinitionRequest = &sCreateWorkflowDefinitionRequest
+var CreateWorkflowDefinitionRequest_name = &sCreateWorkflowDefinitionRequest_name
+var CreateWorkflowDefinitionRequest_description = &sCreateWorkflowDefinitionRequest_description
+var CreateWorkflowDefinitionRequest_exportConfig = &sCreateWorkflowDefinitionRequest_exportConfig
+var CreateWorkflowDefinitionRequest_clientToken = &sCreateWorkflowDefinitionRequest_clientToken
+
+var CreateWorkflowDefinitionResponse = &sCreateWorkflowDefinitionResponse
+var CreateWorkflowDefinitionResponse_status = &sCreateWorkflowDefinitionResponse_status
+
+var CreateWorkflowRunRequest = &sCreateWorkflowRunRequest
+var CreateWorkflowRunRequest_workflowDefinitionName = &sCreateWorkflowRunRequest_workflowDefinitionName
+var CreateWorkflowRunRequest_modelId = &sCreateWorkflowRunRequest_modelId
+var CreateWorkflowRunRequest_clientToken = &sCreateWorkflowRunRequest_clientToken
+var CreateWorkflowRunRequest_logGroupName = &sCreateWorkflowRunRequest_logGroupName
+var CreateWorkflowRunRequest_clientInfo = &sCreateWorkflowRunRequest_clientInfo
+
+var CreateWorkflowRunResponse = &sCreateWorkflowRunResponse
+var CreateWorkflowRunResponse_workflowRunId = &sCreateWorkflowRunResponse_workflowRunId
+var CreateWorkflowRunResponse_status = &sCreateWorkflowRunResponse_status
+
+var DeleteWorkflowDefinitionRequest = &sDeleteWorkflowDefinitionRequest
+var DeleteWorkflowDefinitionRequest_workflowDefinitionName = &sDeleteWorkflowDefinitionRequest_workflowDefinitionName
+
+var DeleteWorkflowDefinitionResponse = &sDeleteWorkflowDefinitionResponse
+var DeleteWorkflowDefinitionResponse_status = &sDeleteWorkflowDefinitionResponse_status
+
+var DeleteWorkflowRunRequest = &sDeleteWorkflowRunRequest
+var DeleteWorkflowRunRequest_workflowDefinitionName = &sDeleteWorkflowRunRequest_workflowDefinitionName
+var DeleteWorkflowRunRequest_workflowRunId = &sDeleteWorkflowRunRequest_workflowRunId
+
+var DeleteWorkflowRunResponse = &sDeleteWorkflowRunResponse
+var DeleteWorkflowRunResponse_status = &sDeleteWorkflowRunResponse_status
+
+var GetWorkflowDefinitionRequest = &sGetWorkflowDefinitionRequest
+var GetWorkflowDefinitionRequest_workflowDefinitionName = &sGetWorkflowDefinitionRequest_workflowDefinitionName
+
+var GetWorkflowDefinitionResponse = &sGetWorkflowDefinitionResponse
+var GetWorkflowDefinitionResponse_name = &sGetWorkflowDefinitionResponse_name
+var GetWorkflowDefinitionResponse_arn = &sGetWorkflowDefinitionResponse_arn
+var GetWorkflowDefinitionResponse_createdAt = &sGetWorkflowDefinitionResponse_createdAt
+var GetWorkflowDefinitionResponse_description = &sGetWorkflowDefinitionResponse_description
+var GetWorkflowDefinitionResponse_exportConfig = &sGetWorkflowDefinitionResponse_exportConfig
+var GetWorkflowDefinitionResponse_status = &sGetWorkflowDefinitionResponse_status
+
+var GetWorkflowRunRequest = &sGetWorkflowRunRequest
+var GetWorkflowRunRequest_workflowDefinitionName = &sGetWorkflowRunRequest_workflowDefinitionName
+var GetWorkflowRunRequest_workflowRunId = &sGetWorkflowRunRequest_workflowRunId
+
+var GetWorkflowRunResponse = &sGetWorkflowRunResponse
+var GetWorkflowRunResponse_workflowRunArn = &sGetWorkflowRunResponse_workflowRunArn
+var GetWorkflowRunResponse_workflowRunId = &sGetWorkflowRunResponse_workflowRunId
+var GetWorkflowRunResponse_status = &sGetWorkflowRunResponse_status
+var GetWorkflowRunResponse_startedAt = &sGetWorkflowRunResponse_startedAt
+var GetWorkflowRunResponse_endedAt = &sGetWorkflowRunResponse_endedAt
+var GetWorkflowRunResponse_modelId = &sGetWorkflowRunResponse_modelId
+var GetWorkflowRunResponse_logGroupName = &sGetWorkflowRunResponse_logGroupName
+
+var InvokeActStepRequest = &sInvokeActStepRequest
+var InvokeActStepRequest_workflowDefinitionName = &sInvokeActStepRequest_workflowDefinitionName
+var InvokeActStepRequest_workflowRunId = &sInvokeActStepRequest_workflowRunId
+var InvokeActStepRequest_sessionId = &sInvokeActStepRequest_sessionId
+var InvokeActStepRequest_actId = &sInvokeActStepRequest_actId
+var InvokeActStepRequest_callResults = &sInvokeActStepRequest_callResults
+var InvokeActStepRequest_previousStepId = &sInvokeActStepRequest_previousStepId
+
+var InvokeActStepResponse = &sInvokeActStepResponse
+var InvokeActStepResponse_calls = &sInvokeActStepResponse_calls
+var InvokeActStepResponse_stepId = &sInvokeActStepResponse_stepId
+
+var ListActsRequest = &sListActsRequest
+var ListActsRequest_workflowDefinitionName = &sListActsRequest_workflowDefinitionName
+var ListActsRequest_workflowRunId = &sListActsRequest_workflowRunId
+var ListActsRequest_sessionId = &sListActsRequest_sessionId
+var ListActsRequest_maxResults = &sListActsRequest_maxResults
+var ListActsRequest_nextToken = &sListActsRequest_nextToken
+var ListActsRequest_sortOrder = &sListActsRequest_sortOrder
+
+var ListActsResponse = &sListActsResponse
+var ListActsResponse_actSummaries = &sListActsResponse_actSummaries
+var ListActsResponse_nextToken = &sListActsResponse_nextToken
+
+var ListModelsRequest = &sListModelsRequest
+var ListModelsRequest_clientCompatibilityVersion = &sListModelsRequest_clientCompatibilityVersion
+
+var ListModelsResponse = &sListModelsResponse
+var ListModelsResponse_modelSummaries = &sListModelsResponse_modelSummaries
+var ListModelsResponse_modelAliases = &sListModelsResponse_modelAliases
+var ListModelsResponse_compatibilityInformation = &sListModelsResponse_compatibilityInformation
+
+var ListSessionsRequest = &sListSessionsRequest
+var ListSessionsRequest_workflowDefinitionName = &sListSessionsRequest_workflowDefinitionName
+var ListSessionsRequest_workflowRunId = &sListSessionsRequest_workflowRunId
+var ListSessionsRequest_maxResults = &sListSessionsRequest_maxResults
+var ListSessionsRequest_nextToken = &sListSessionsRequest_nextToken
+var ListSessionsRequest_sortOrder = &sListSessionsRequest_sortOrder
+
+var ListSessionsResponse = &sListSessionsResponse
+var ListSessionsResponse_sessionSummaries = &sListSessionsResponse_sessionSummaries
+var ListSessionsResponse_nextToken = &sListSessionsResponse_nextToken
+
+var ListWorkflowDefinitionsRequest = &sListWorkflowDefinitionsRequest
+var ListWorkflowDefinitionsRequest_maxResults = &sListWorkflowDefinitionsRequest_maxResults
+var ListWorkflowDefinitionsRequest_nextToken = &sListWorkflowDefinitionsRequest_nextToken
+var ListWorkflowDefinitionsRequest_sortOrder = &sListWorkflowDefinitionsRequest_sortOrder
+
+var ListWorkflowDefinitionsResponse = &sListWorkflowDefinitionsResponse
+var ListWorkflowDefinitionsResponse_workflowDefinitionSummaries = &sListWorkflowDefinitionsResponse_workflowDefinitionSummaries
+var ListWorkflowDefinitionsResponse_nextToken = &sListWorkflowDefinitionsResponse_nextToken
+
+var ListWorkflowRunsRequest = &sListWorkflowRunsRequest
+var ListWorkflowRunsRequest_workflowDefinitionName = &sListWorkflowRunsRequest_workflowDefinitionName
+var ListWorkflowRunsRequest_maxResults = &sListWorkflowRunsRequest_maxResults
+var ListWorkflowRunsRequest_nextToken = &sListWorkflowRunsRequest_nextToken
+var ListWorkflowRunsRequest_sortOrder = &sListWorkflowRunsRequest_sortOrder
+
+var ListWorkflowRunsResponse = &sListWorkflowRunsResponse
+var ListWorkflowRunsResponse_workflowRunSummaries = &sListWorkflowRunsResponse_workflowRunSummaries
+var ListWorkflowRunsResponse_nextToken = &sListWorkflowRunsResponse_nextToken
+
+var UpdateActRequest = &sUpdateActRequest
+var UpdateActRequest_workflowDefinitionName = &sUpdateActRequest_workflowDefinitionName
+var UpdateActRequest_workflowRunId = &sUpdateActRequest_workflowRunId
+var UpdateActRequest_sessionId = &sUpdateActRequest_sessionId
+var UpdateActRequest_actId = &sUpdateActRequest_actId
+var UpdateActRequest_status = &sUpdateActRequest_status
+var UpdateActRequest_error = &sUpdateActRequest_error
+
+var UpdateActResponse = &sUpdateActResponse
+
+var UpdateWorkflowRunRequest = &sUpdateWorkflowRunRequest
+var UpdateWorkflowRunRequest_workflowDefinitionName = &sUpdateWorkflowRunRequest_workflowDefinitionName
+var UpdateWorkflowRunRequest_workflowRunId = &sUpdateWorkflowRunRequest_workflowRunId
+var UpdateWorkflowRunRequest_status = &sUpdateWorkflowRunRequest_status
+
+var UpdateWorkflowRunResponse = &sUpdateWorkflowRunResponse
+
+var AmazonNovaAgentsDataPlane = &smithy.ServiceSchema{Schema: &s_AmazonNovaAgentsDataPlane, Version: "2025-08-22"}

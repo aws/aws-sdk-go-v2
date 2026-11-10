@@ -4,4408 +4,3299 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var BatchDescribeEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeEntities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iBatchDescribeEntities                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "BatchDescribeEntities"}
+	iCancelChangeSet                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "CancelChangeSet"}
+	iDeleteResourcePolicy                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DeleteResourcePolicy"}
+	iDescribeAssessment                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeAssessment"}
+	iDescribeChangeSet                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeChangeSet"}
+	iDescribeEntity                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeEntity"}
+	iGetResourcePolicy                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "GetResourcePolicy"}
+	iListAssessments                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListAssessments"}
+	iListChangeSets                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListChangeSets"}
+	iListEntities                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListEntities"}
+	iListTagsForResource                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListTagsForResource"}
+	iPutResourcePolicy                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "PutResourcePolicy"}
+	iStartChangeSet                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "StartChangeSet"}
+	iTagResource                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "TagResource"}
+	iUntagResource                                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "UntagResource"}
+	i_AWSMPSeymour                                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AWSMPSeymour"}
+	iAccessDeniedException                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AccessDeniedException"}
+	iAmiProductEntityIdFilter                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductEntityIdFilter"}
+	i_AmiProductEntityIdFilterValueList                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductEntityIdFilterValueList"}
+	i_AmiProductEntityIdString                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductEntityIdString"}
+	iAmiProductFilters                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductFilters"}
+	iAmiProductLastModifiedDateFilter                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductLastModifiedDateFilter"}
+	iAmiProductLastModifiedDateFilterDateRange                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductLastModifiedDateFilterDateRange"}
+	iAmiProductSort                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductSort"}
+	iAmiProductSortBy                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductSortBy"}
+	iAmiProductSummary                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductSummary"}
+	iAmiProductTitleFilter                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductTitleFilter"}
+	i_AmiProductTitleFilterValueList                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductTitleFilterValueList"}
+	i_AmiProductTitleString                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductTitleString"}
+	iAmiProductVisibilityFilter                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductVisibilityFilter"}
+	i_AmiProductVisibilityFilterValueList                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductVisibilityFilterValueList"}
+	iAmiProductVisibilityString                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AmiProductVisibilityString"}
+	iAMISecurityFilters                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AMISecurityFilters"}
+	iAMISecuritySummary                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AMISecuritySummary"}
+	i_ARN                                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ARN"}
+	i_AssessmentIdentifier                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AssessmentIdentifier"}
+	iAssessmentResult                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AssessmentResult"}
+	iAssessmentSummary                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AssessmentSummary"}
+	i_AssessmentSummaryList                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AssessmentSummaryList"}
+	iAssessmentTargetFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AssessmentTargetFilter"}
+	iAssessmentTargetSummary                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "AssessmentTargetSummary"}
+	i_BatchDescribeErrorCodeString                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "BatchDescribeErrorCodeString"}
+	iBatchDescribeErrorDetail                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "BatchDescribeErrorDetail"}
+	i_BatchDescribeErrorMessageContent                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "BatchDescribeErrorMessageContent"}
+	i_Catalog                                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Catalog"}
+	iChange                                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Change"}
+	i_ChangeName                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeName"}
+	i_ChangeSetDescription                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeSetDescription"}
+	i_ChangeSetName                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeSetName"}
+	i_ChangeSetSummaryList                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeSetSummaryList"}
+	iChangeSetSummaryListItem                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeSetSummaryListItem"}
+	iChangeStatus                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeStatus"}
+	iChangeSummary                                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeSummary"}
+	i_ChangeType                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ChangeType"}
+	i_ClientRequestToken                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ClientRequestToken"}
+	iContainerProductEntityIdFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductEntityIdFilter"}
+	i_ContainerProductEntityIdFilterValueList                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductEntityIdFilterValueList"}
+	i_ContainerProductEntityIdString                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductEntityIdString"}
+	iContainerProductFilters                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductFilters"}
+	iContainerProductLastModifiedDateFilter                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductLastModifiedDateFilter"}
+	iContainerProductLastModifiedDateFilterDateRange            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductLastModifiedDateFilterDateRange"}
+	iContainerProductSort                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductSort"}
+	iContainerProductSortBy                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductSortBy"}
+	iContainerProductSummary                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductSummary"}
+	iContainerProductTitleFilter                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductTitleFilter"}
+	i_ContainerProductTitleFilterValueList                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductTitleFilterValueList"}
+	i_ContainerProductTitleString                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductTitleString"}
+	iContainerProductVisibilityFilter                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductVisibilityFilter"}
+	i_ContainerProductVisibilityFilterValueList                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductVisibilityFilterValueList"}
+	iContainerProductVisibilityString                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerProductVisibilityString"}
+	iContainerSecurityFilters                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerSecurityFilters"}
+	iContainerSecuritySummary                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ContainerSecuritySummary"}
+	iControlAssessment                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ControlAssessment"}
+	i_ControlAssessmentList                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ControlAssessmentList"}
+	iControlAssessmentResult                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ControlAssessmentResult"}
+	iControlError                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ControlError"}
+	i_ControlErrorList                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ControlErrorList"}
+	iDataProductEntityIdFilter                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductEntityIdFilter"}
+	i_DataProductEntityIdFilterValueList                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductEntityIdFilterValueList"}
+	i_DataProductEntityIdString                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductEntityIdString"}
+	iDataProductFilters                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductFilters"}
+	iDataProductLastModifiedDateFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductLastModifiedDateFilter"}
+	iDataProductLastModifiedDateFilterDateRange                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductLastModifiedDateFilterDateRange"}
+	iDataProductSort                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductSort"}
+	iDataProductSortBy                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductSortBy"}
+	iDataProductSummary                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductSummary"}
+	iDataProductTitleFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductTitleFilter"}
+	i_DataProductTitleFilterValueList                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductTitleFilterValueList"}
+	i_DataProductTitleString                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductTitleString"}
+	iDataProductVisibilityFilter                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductVisibilityFilter"}
+	i_DataProductVisibilityFilterValueList                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductVisibilityFilterValueList"}
+	iDataProductVisibilityString                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DataProductVisibilityString"}
+	i_DateTimeISO8601                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DateTimeISO8601"}
+	i_DescribeAssessmentMaxResultInteger                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeAssessmentMaxResultInteger"}
+	iEntity                                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Entity"}
+	iEntityDetail                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityDetail"}
+	i_EntityDetails                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityDetails"}
+	i_EntityId                                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityId"}
+	i_EntityNameString                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityNameString"}
+	iEntityRequest                                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityRequest"}
+	i_EntityRequestList                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityRequestList"}
+	iEntitySummary                                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntitySummary"}
+	i_EntitySummaryList                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntitySummaryList"}
+	i_EntityType                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityType"}
+	iEntityTypeFilters                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityTypeFilters"}
+	iEntityTypeSort                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "EntityTypeSort"}
+	i_ErrorCode                                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ErrorCode"}
+	i_ErrorCodeString                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ErrorCodeString"}
+	iErrorDetail                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ErrorDetail"}
+	i_ErrorDetailList                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ErrorDetailList"}
+	i_ErrorMessage                                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ErrorMessage"}
+	i_Errors                                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Errors"}
+	iErrorScope                                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ErrorScope"}
+	i_ErrorScopeList                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ErrorScopeList"}
+	i_ExceptionMessageContent                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExceptionMessageContent"}
+	iExpressPrivateOfferConfigurationEntityIdFilter             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationEntityIdFilter"}
+	i_ExpressPrivateOfferConfigurationEntityIdFilterValueList   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationEntityIdFilterValueList"}
+	i_ExpressPrivateOfferConfigurationEntityIdString            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationEntityIdString"}
+	iExpressPrivateOfferConfigurationFilters                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationFilters"}
+	iExpressPrivateOfferConfigurationProductIdFilter            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationProductIdFilter"}
+	i_ExpressPrivateOfferConfigurationProductIdFilterValueList  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationProductIdFilterValueList"}
+	i_ExpressPrivateOfferConfigurationProductIdString           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationProductIdString"}
+	iExpressPrivateOfferConfigurationSort                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationSort"}
+	iExpressPrivateOfferConfigurationSortBy                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationSortBy"}
+	iExpressPrivateOfferConfigurationStateFilter                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationStateFilter"}
+	i_ExpressPrivateOfferConfigurationStateFilterValueList      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationStateFilterValueList"}
+	iExpressPrivateOfferConfigurationStateString                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationStateString"}
+	iExpressPrivateOfferConfigurationSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ExpressPrivateOfferConfigurationSummary"}
+	iFailureCode                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FailureCode"}
+	i_FieldName                                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FieldName"}
+	iFilter                                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Filter"}
+	i_FilterList                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FilterList"}
+	i_FilterName                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FilterName"}
+	i_FilterValueContent                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FilterValueContent"}
+	iFrameworkFilters                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FrameworkFilters"}
+	i_FrameworkId                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FrameworkId"}
+	iFrameworkSummary                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "FrameworkSummary"}
+	i_Identifier                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Identifier"}
+	iIntent                                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Intent"}
+	iInternalServiceException                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "InternalServiceException"}
+	i_Json                                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Json"}
+	i_JsonDocumentType                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "JsonDocumentType"}
+	i_ListAssessmentsMaxResultInteger                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListAssessmentsMaxResultInteger"}
+	i_ListChangeSetsMaxResultInteger                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListChangeSetsMaxResultInteger"}
+	i_ListEntitiesMaxResultInteger                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListEntitiesMaxResultInteger"}
+	iMachineLearningProductEntityIdFilter                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductEntityIdFilter"}
+	i_MachineLearningProductEntityIdFilterValueList             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductEntityIdFilterValueList"}
+	i_MachineLearningProductEntityIdString                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductEntityIdString"}
+	iMachineLearningProductFilters                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductFilters"}
+	iMachineLearningProductLastModifiedDateFilter               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductLastModifiedDateFilter"}
+	iMachineLearningProductLastModifiedDateFilterDateRange      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductLastModifiedDateFilterDateRange"}
+	iMachineLearningProductSort                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductSort"}
+	iMachineLearningProductSortBy                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductSortBy"}
+	iMachineLearningProductSummary                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductSummary"}
+	iMachineLearningProductTitleFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductTitleFilter"}
+	i_MachineLearningProductTitleFilterValueList                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductTitleFilterValueList"}
+	i_MachineLearningProductTitleString                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductTitleString"}
+	iMachineLearningProductVisibilityFilter                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductVisibilityFilter"}
+	i_MachineLearningProductVisibilityFilterValueList           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductVisibilityFilterValueList"}
+	iMachineLearningProductVisibilityString                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "MachineLearningProductVisibilityString"}
+	i_NextToken                                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "NextToken"}
+	iOfferAvailabilityEndDateFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferAvailabilityEndDateFilter"}
+	iOfferAvailabilityEndDateFilterDateRange                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferAvailabilityEndDateFilterDateRange"}
+	iOfferBuyerAccountsFilter                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferBuyerAccountsFilter"}
+	i_OfferBuyerAccountsFilterWildcard                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferBuyerAccountsFilterWildcard"}
+	i_OfferBuyerAccountsList                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferBuyerAccountsList"}
+	i_OfferBuyerAccountsString                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferBuyerAccountsString"}
+	iOfferCreatedBySourceFilter                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferCreatedBySourceFilter"}
+	i_OfferCreatedBySourceFilterValueList                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferCreatedBySourceFilterValueList"}
+	iOfferCreatedBySourceString                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferCreatedBySourceString"}
+	iOfferEntityIdFilter                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferEntityIdFilter"}
+	i_OfferEntityIdFilterValueList                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferEntityIdFilterValueList"}
+	i_OfferEntityIdString                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferEntityIdString"}
+	iOfferFilters                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferFilters"}
+	iOfferLastModifiedDateFilter                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferLastModifiedDateFilter"}
+	iOfferLastModifiedDateFilterDateRange                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferLastModifiedDateFilterDateRange"}
+	iOfferNameFilter                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferNameFilter"}
+	i_OfferNameFilterValueList                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferNameFilterValueList"}
+	i_OfferNameString                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferNameString"}
+	iOfferProductIdFilter                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferProductIdFilter"}
+	i_OfferProductIdFilterValueList                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferProductIdFilterValueList"}
+	i_OfferProductIdString                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferProductIdString"}
+	iOfferReleaseDateFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferReleaseDateFilter"}
+	iOfferReleaseDateFilterDateRange                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferReleaseDateFilterDateRange"}
+	iOfferResaleAuthorizationIdFilter                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferResaleAuthorizationIdFilter"}
+	i_OfferResaleAuthorizationIdFilterValueList                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferResaleAuthorizationIdFilterValueList"}
+	i_OfferResaleAuthorizationIdString                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferResaleAuthorizationIdString"}
+	iOfferSetAssociatedOfferIdsFilter                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetAssociatedOfferIdsFilter"}
+	i_OfferSetAssociatedOfferIdsFilterValueList                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetAssociatedOfferIdsFilterValueList"}
+	i_OfferSetAssociatedOfferIdsList                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetAssociatedOfferIdsList"}
+	i_OfferSetAssociatedOfferIdsString                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetAssociatedOfferIdsString"}
+	iOfferSetEntityIdFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetEntityIdFilter"}
+	i_OfferSetEntityIdFilterValueList                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetEntityIdFilterValueList"}
+	i_OfferSetEntityIdString                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetEntityIdString"}
+	iOfferSetFilters                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetFilters"}
+	iOfferSetIdFilter                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetIdFilter"}
+	i_OfferSetIdFilterValueList                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetIdFilterValueList"}
+	i_OfferSetIdString                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetIdString"}
+	iOfferSetLastModifiedDateFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetLastModifiedDateFilter"}
+	iOfferSetLastModifiedDateFilterDateRange                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetLastModifiedDateFilterDateRange"}
+	iOfferSetNameFilter                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetNameFilter"}
+	i_OfferSetNameFilterValueList                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetNameFilterValueList"}
+	i_OfferSetNameString                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetNameString"}
+	iOfferSetReleaseDateFilter                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetReleaseDateFilter"}
+	iOfferSetReleaseDateFilterDateRange                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetReleaseDateFilterDateRange"}
+	iOfferSetSolutionIdFilter                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetSolutionIdFilter"}
+	i_OfferSetSolutionIdFilterValueList                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetSolutionIdFilterValueList"}
+	i_OfferSetSolutionIdString                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetSolutionIdString"}
+	iOfferSetSort                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetSort"}
+	iOfferSetSortBy                                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetSortBy"}
+	iOfferSetStateFilter                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetStateFilter"}
+	i_OfferSetStateFilterValueList                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetStateFilterValueList"}
+	iOfferSetStateString                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetStateString"}
+	iOfferSetSummary                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSetSummary"}
+	iOfferSort                                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSort"}
+	iOfferSortBy                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSortBy"}
+	iOfferStateFilter                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferStateFilter"}
+	i_OfferStateFilterValueList                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferStateFilterValueList"}
+	iOfferStateString                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferStateString"}
+	iOfferSummary                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferSummary"}
+	iOfferTargetAgreementIdFilter                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetAgreementIdFilter"}
+	i_OfferTargetAgreementIdFilterValueList                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetAgreementIdFilterValueList"}
+	i_OfferTargetAgreementIdString                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetAgreementIdString"}
+	iOfferTargetAgreementIntentFilter                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetAgreementIntentFilter"}
+	i_OfferTargetAgreementIntentFilterValueList                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetAgreementIntentFilterValueList"}
+	iOfferTargetAgreementIntentString                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetAgreementIntentString"}
+	iOfferTargetingFilter                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetingFilter"}
+	i_OfferTargetingFilterValueList                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetingFilterValueList"}
+	i_OfferTargetingList                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetingList"}
+	iOfferTargetingString                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OfferTargetingString"}
+	iOwnershipType                                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "OwnershipType"}
+	i_RequestedChangeList                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "RequestedChangeList"}
+	iResaleAuthorizationAvailabilityEndDateFilter               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationAvailabilityEndDateFilter"}
+	iResaleAuthorizationAvailabilityEndDateFilterDateRange      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationAvailabilityEndDateFilterDateRange"}
+	i_ResaleAuthorizationAvailabilityEndDateFilterValueList     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationAvailabilityEndDateFilterValueList"}
+	iResaleAuthorizationCreatedDateFilter                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationCreatedDateFilter"}
+	iResaleAuthorizationCreatedDateFilterDateRange              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationCreatedDateFilterDateRange"}
+	i_ResaleAuthorizationCreatedDateFilterValueList             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationCreatedDateFilterValueList"}
+	iResaleAuthorizationEntityIdFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationEntityIdFilter"}
+	i_ResaleAuthorizationEntityIdFilterValueList                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationEntityIdFilterValueList"}
+	i_ResaleAuthorizationEntityIdString                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationEntityIdString"}
+	iResaleAuthorizationFilters                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationFilters"}
+	iResaleAuthorizationIssuerAccountIdFilter                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationIssuerAccountIdFilter"}
+	i_ResaleAuthorizationIssuerAccountIdFilterValueList         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationIssuerAccountIdFilterValueList"}
+	i_ResaleAuthorizationIssuerAccountIdString                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationIssuerAccountIdString"}
+	iResaleAuthorizationLastModifiedDateFilter                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationLastModifiedDateFilter"}
+	iResaleAuthorizationLastModifiedDateFilterDateRange         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationLastModifiedDateFilterDateRange"}
+	iResaleAuthorizationManufacturerAccountIdFilter             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerAccountIdFilter"}
+	i_ResaleAuthorizationManufacturerAccountIdFilterValueList   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerAccountIdFilterValueList"}
+	i_ResaleAuthorizationManufacturerAccountIdFilterWildcard    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerAccountIdFilterWildcard"}
+	i_ResaleAuthorizationManufacturerAccountIdString            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerAccountIdString"}
+	iResaleAuthorizationManufacturerLegalNameFilter             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerLegalNameFilter"}
+	i_ResaleAuthorizationManufacturerLegalNameFilterValueList   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerLegalNameFilterValueList"}
+	i_ResaleAuthorizationManufacturerLegalNameFilterWildcard    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerLegalNameFilterWildcard"}
+	i_ResaleAuthorizationManufacturerLegalNameString            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationManufacturerLegalNameString"}
+	iResaleAuthorizationNameFilter                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationNameFilter"}
+	i_ResaleAuthorizationNameFilterValueList                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationNameFilterValueList"}
+	i_ResaleAuthorizationNameFilterWildcard                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationNameFilterWildcard"}
+	i_ResaleAuthorizationNameString                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationNameString"}
+	iResaleAuthorizationOfferExtendedStatusFilter               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationOfferExtendedStatusFilter"}
+	i_ResaleAuthorizationOfferExtendedStatusFilterValueList     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationOfferExtendedStatusFilterValueList"}
+	i_ResaleAuthorizationOfferExtendedStatusString              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationOfferExtendedStatusString"}
+	iResaleAuthorizationProductIdFilter                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductIdFilter"}
+	i_ResaleAuthorizationProductIdFilterValueList               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductIdFilterValueList"}
+	i_ResaleAuthorizationProductIdFilterWildcard                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductIdFilterWildcard"}
+	i_ResaleAuthorizationProductIdString                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductIdString"}
+	iResaleAuthorizationProductNameFilter                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductNameFilter"}
+	i_ResaleAuthorizationProductNameFilterValueList             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductNameFilterValueList"}
+	i_ResaleAuthorizationProductNameFilterWildcard              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductNameFilterWildcard"}
+	i_ResaleAuthorizationProductNameString                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationProductNameString"}
+	iResaleAuthorizationResellerAccountIDFilter                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerAccountIDFilter"}
+	i_ResaleAuthorizationResellerAccountIDFilterValueList       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerAccountIDFilterValueList"}
+	i_ResaleAuthorizationResellerAccountIDFilterWildcard        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerAccountIDFilterWildcard"}
+	i_ResaleAuthorizationResellerAccountIDString                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerAccountIDString"}
+	iResaleAuthorizationResellerLegalNameFilter                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerLegalNameFilter"}
+	i_ResaleAuthorizationResellerLegalNameFilterValueList       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerLegalNameFilterValueList"}
+	i_ResaleAuthorizationResellerLegalNameFilterWildcard        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerLegalNameFilterWildcard"}
+	i_ResaleAuthorizationResellerLegalNameString                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerLegalNameString"}
+	iResaleAuthorizationResellerRoleFilter                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerRoleFilter"}
+	i_ResaleAuthorizationResellerRoleFilterValueList            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerRoleFilterValueList"}
+	iResaleAuthorizationResellerRoleString                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationResellerRoleString"}
+	iResaleAuthorizationSort                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationSort"}
+	iResaleAuthorizationSortBy                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationSortBy"}
+	iResaleAuthorizationSourceAuthorizationFilter               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationSourceAuthorizationFilter"}
+	i_ResaleAuthorizationSourceAuthorizationFilterValueList     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationSourceAuthorizationFilterValueList"}
+	i_ResaleAuthorizationSourceAuthorizationString              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationSourceAuthorizationString"}
+	iResaleAuthorizationStatusFilter                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationStatusFilter"}
+	i_ResaleAuthorizationStatusFilterValueList                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationStatusFilterValueList"}
+	iResaleAuthorizationStatusString                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationStatusString"}
+	iResaleAuthorizationSummary                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResaleAuthorizationSummary"}
+	i_ResourceARN                                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResourceARN"}
+	i_ResourceId                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResourceId"}
+	i_ResourceIdList                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResourceIdList"}
+	iResourceInUseException                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResourceInUseException"}
+	iResourceNotFoundException                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResourceNotFoundException"}
+	iResourceNotSupportedException                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResourceNotSupportedException"}
+	i_ResourcePolicyJson                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ResourcePolicyJson"}
+	iSaaSProductEntityIdFilter                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductEntityIdFilter"}
+	i_SaaSProductEntityIdFilterValueList                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductEntityIdFilterValueList"}
+	i_SaaSProductEntityIdString                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductEntityIdString"}
+	iSaaSProductFilters                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductFilters"}
+	iSaaSProductLastModifiedDateFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductLastModifiedDateFilter"}
+	iSaaSProductLastModifiedDateFilterDateRange                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductLastModifiedDateFilterDateRange"}
+	iSaaSProductSort                                            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductSort"}
+	iSaaSProductSortBy                                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductSortBy"}
+	iSaaSProductSummary                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductSummary"}
+	iSaaSProductTitleFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductTitleFilter"}
+	i_SaaSProductTitleFilterValueList                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductTitleFilterValueList"}
+	i_SaaSProductTitleString                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductTitleString"}
+	iSaaSProductVisibilityFilter                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductVisibilityFilter"}
+	i_SaaSProductVisibilityFilterValueList                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductVisibilityFilterValueList"}
+	iSaaSProductVisibilityString                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SaaSProductVisibilityString"}
+	i_ScopeName                                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ScopeName"}
+	i_ScopeValue                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ScopeValue"}
+	iServiceQuotaExceededException                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ServiceQuotaExceededException"}
+	iSort                                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Sort"}
+	i_SortBy                                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SortBy"}
+	iSortOrder                                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SortOrder"}
+	iSubsidiaryAuthorizationCreatedDateFilter                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationCreatedDateFilter"}
+	iSubsidiaryAuthorizationCreatedDateFilterDateRange          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationCreatedDateFilterDateRange"}
+	iSubsidiaryAuthorizationEntityIdFilter                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationEntityIdFilter"}
+	i_SubsidiaryAuthorizationEntityIdFilterValueList            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationEntityIdFilterValueList"}
+	i_SubsidiaryAuthorizationEntityIdString                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationEntityIdString"}
+	iSubsidiaryAuthorizationFilters                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationFilters"}
+	iSubsidiaryAuthorizationLastModifiedDateFilter              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationLastModifiedDateFilter"}
+	iSubsidiaryAuthorizationLastModifiedDateFilterDateRange     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationLastModifiedDateFilterDateRange"}
+	iSubsidiaryAuthorizationNameFilter                          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationNameFilter"}
+	i_SubsidiaryAuthorizationNameFilterValueList                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationNameFilterValueList"}
+	i_SubsidiaryAuthorizationNameFilterWildcard                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationNameFilterWildcard"}
+	i_SubsidiaryAuthorizationNameString                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationNameString"}
+	iSubsidiaryAuthorizationResourceIdFilter                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationResourceIdFilter"}
+	i_SubsidiaryAuthorizationResourceIdFilterValueList          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationResourceIdFilterValueList"}
+	i_SubsidiaryAuthorizationResourceIdString                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationResourceIdString"}
+	iSubsidiaryAuthorizationResourceNameFilter                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationResourceNameFilter"}
+	i_SubsidiaryAuthorizationResourceNameFilterValueList        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationResourceNameFilterValueList"}
+	i_SubsidiaryAuthorizationResourceNameFilterWildcard         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationResourceNameFilterWildcard"}
+	i_SubsidiaryAuthorizationResourceNameString                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationResourceNameString"}
+	iSubsidiaryAuthorizationSort                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSort"}
+	iSubsidiaryAuthorizationSortBy                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSortBy"}
+	iSubsidiaryAuthorizationStatusFilter                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationStatusFilter"}
+	i_SubsidiaryAuthorizationStatusFilterValueList              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationStatusFilterValueList"}
+	iSubsidiaryAuthorizationStatusString                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationStatusString"}
+	iSubsidiaryAuthorizationSubsidiaryAccountIdFilter           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSubsidiaryAccountIdFilter"}
+	i_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList"}
+	i_SubsidiaryAuthorizationSubsidiaryAccountIdString          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSubsidiaryAccountIdString"}
+	iSubsidiaryAuthorizationSummary                             = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSummary"}
+	i_SubsidiaryAuthorizationSummaryNameString                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSummaryNameString"}
+	i_SubsidiaryAuthorizationSummaryResourceIdString            = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSummaryResourceIdString"}
+	i_SubsidiaryAuthorizationSummaryResourceNameString          = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSummaryResourceNameString"}
+	i_SubsidiaryAuthorizationSummaryStatusString                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSummaryStatusString"}
+	i_SubsidiaryAuthorizationSummarySubsidiaryAccountIdString   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "SubsidiaryAuthorizationSummarySubsidiaryAccountIdString"}
+	iTag                                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "Tag"}
+	i_TagKey                                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "TagKey"}
+	i_TagKeyList                                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "TagKeyList"}
+	i_TagList                                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "TagList"}
+	i_TagValue                                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "TagValue"}
+	iThrottlingException                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ThrottlingException"}
+	iValidationException                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ValidationException"}
+	iValidationExceptionField                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ValidationExceptionReason"}
+	i_ValueList                                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ValueList"}
+	i_VersionedFrameworkId                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "VersionedFrameworkId"}
+	i_VisibilityValue                                           = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "VisibilityValue"}
+	iBatchDescribeEntitiesRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "BatchDescribeEntitiesRequest"}
+	iBatchDescribeEntitiesResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "BatchDescribeEntitiesResponse"}
+	iCancelChangeSetRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "CancelChangeSetRequest"}
+	iCancelChangeSetResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "CancelChangeSetResponse"}
+	iDeleteResourcePolicyRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DeleteResourcePolicyRequest"}
+	iDeleteResourcePolicyResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DeleteResourcePolicyResponse"}
+	iDescribeAssessmentRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeAssessmentRequest"}
+	iDescribeAssessmentResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeAssessmentResponse"}
+	iDescribeChangeSetRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeChangeSetRequest"}
+	iDescribeChangeSetResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeChangeSetResponse"}
+	iDescribeEntityRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeEntityRequest"}
+	iDescribeEntityResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "DescribeEntityResponse"}
+	iGetResourcePolicyRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "GetResourcePolicyResponse"}
+	iListAssessmentsRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListAssessmentsRequest"}
+	iListAssessmentsResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListAssessmentsResponse"}
+	iListChangeSetsRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListChangeSetsRequest"}
+	iListChangeSetsResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListChangeSetsResponse"}
+	iListEntitiesRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListEntitiesRequest"}
+	iListEntitiesResponse                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListEntitiesResponse"}
+	iListTagsForResourceRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "ListTagsForResourceResponse"}
+	iPutResourcePolicyRequest                                   = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse                                  = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "PutResourcePolicyResponse"}
+	iStartChangeSetRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "StartChangeSetRequest"}
+	iStartChangeSetResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "StartChangeSetResponse"}
+	iTagResourceRequest                                         = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "TagResourceRequest"}
+	iTagResourceResponse                                        = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                       = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                      = smithy.ShapeID{Namespace: "com.amazonaws.marketplacecatalog", Name: "UntagResourceResponse"}
+	pUnit                                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/BatchDescribeEntities",
-	Code: 200})
-
-var CancelChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "CancelChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PATCH",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PATCH",
 	URI:  "/CancelChangeSet",
-	Code: 200})
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/DeleteResourcePolicy",
-	Code: 200})
-
-var DescribeAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/DescribeAssessment",
-	Code: 200})
-
-var DescribeChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/DescribeChangeSet",
-	Code: 200})
-
-var DescribeEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeEntity",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/DescribeEntity",
-	Code: 200})
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/GetResourcePolicy",
-	Code: 200})
-
-var ListAssessments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListAssessments",
-	Code: 200})
-
-var ListChangeSets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListChangeSets",
-	Code: 200})
-
-var ListEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntities",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListEntities",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/ListTagsForResource",
-	Code: 200})
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/PutResourcePolicy",
-	Code: 200})
-
-var StartChangeSet = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "StartChangeSet",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/StartChangeSet",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/TagResource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/UntagResource",
-	Code: 200})
-
-var _AWSMPSeymour = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AWSMPSeymour",
-}, smithy.ShapeTypeService, 0)
-
-var AWSMPSeymour = smithy.NewServiceSchema(_AWSMPSeymour, "2018-09-17")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AmiProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AmiProductEntityIdFilter_ValueList *smithy.Schema
-
-var _AmiProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _AmiProductEntityIdFilterValueList_member *smithy.Schema
-
-var _AmiProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var AmiProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var AmiProductFilters_EntityId *smithy.Schema
-
-var AmiProductFilters_LastModifiedDate *smithy.Schema
-
-var AmiProductFilters_ProductTitle *smithy.Schema
-
-var AmiProductFilters_Visibility *smithy.Schema
-
-var AmiProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AmiProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var AmiProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var AmiProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var AmiProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductSort_SortBy *smithy.Schema
-
-var AmiProductSort_SortOrder *smithy.Schema
-
-var AmiProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var AmiProductSortBy_EntityId *smithy.Schema
-
-var AmiProductSortBy_LastModifiedDate *smithy.Schema
-
-var AmiProductSortBy_ProductTitle *smithy.Schema
-
-var AmiProductSortBy_Visibility *smithy.Schema
-
-var AmiProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductSummary_ProductTitle *smithy.Schema
-
-var AmiProductSummary_Visibility *smithy.Schema
-
-var AmiProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var AmiProductTitleFilter_ValueList *smithy.Schema
-
-var AmiProductTitleFilter_WildCardValue *smithy.Schema
-
-var _AmiProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _AmiProductTitleFilterValueList_member *smithy.Schema
-
-var _AmiProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var AmiProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var AmiProductVisibilityFilter_ValueList *smithy.Schema
-
-var _AmiProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _AmiProductVisibilityFilterValueList_member *smithy.Schema
-
-var AmiProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AmiProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var AmiProductVisibilityString_Limited *smithy.Schema
-
-var AmiProductVisibilityString_Public *smithy.Schema
-
-var AmiProductVisibilityString_Restricted *smithy.Schema
-
-var AmiProductVisibilityString_Draft *smithy.Schema
-
-var AMISecurityFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AMISecurityFilters",
-}, smithy.ShapeTypeStructure, 1)
-var AMISecurityFilters_DeliveryOptionId *smithy.Schema
-
-var AMISecuritySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AMISecuritySummary",
-}, smithy.ShapeTypeStructure, 1)
-var AMISecuritySummary_DeliveryOptionId *smithy.Schema
-
-var _ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _AssessmentIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var AssessmentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentResult",
-}, smithy.ShapeTypeEnum, 2)
-var AssessmentResult_PASS *smithy.Schema
-
-var AssessmentResult_FAIL *smithy.Schema
-
-var AssessmentSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentSummary",
-}, smithy.ShapeTypeStructure, 8)
-var AssessmentSummary_AssessmentArn *smithy.Schema
-
-var AssessmentSummary_AssessmentId *smithy.Schema
-
-var AssessmentSummary_FrameworkId *smithy.Schema
-
-var AssessmentSummary_AssessmentTargetSummary *smithy.Schema
-
-var AssessmentSummary_FrameworkSummary *smithy.Schema
-
-var AssessmentSummary_AssessmentResult *smithy.Schema
-
-var AssessmentSummary_CreatedAt *smithy.Schema
-
-var AssessmentSummary_ExpiresAt *smithy.Schema
-
-var _AssessmentSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AssessmentSummaryList_member *smithy.Schema
-
-var AssessmentTargetFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentTargetFilter",
-}, smithy.ShapeTypeStructure, 2)
-var AssessmentTargetFilter_EntityId *smithy.Schema
-
-var AssessmentTargetFilter_ChangeSetId *smithy.Schema
-
-var AssessmentTargetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "AssessmentTargetSummary",
-}, smithy.ShapeTypeStructure, 2)
-var AssessmentTargetSummary_EntityId *smithy.Schema
-
-var AssessmentTargetSummary_ChangeSetId *smithy.Schema
-
-var _BatchDescribeErrorCodeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeErrorCodeString",
-}, smithy.ShapeTypeString, 0)
-
-var BatchDescribeErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeErrorDetail",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDescribeErrorDetail_ErrorCode *smithy.Schema
-
-var BatchDescribeErrorDetail_ErrorMessage *smithy.Schema
-
-var _BatchDescribeErrorMessageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeErrorMessageContent",
-}, smithy.ShapeTypeString, 0)
-
-var _Catalog = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Catalog",
-}, smithy.ShapeTypeString, 0)
-
-var Change = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Change",
-}, smithy.ShapeTypeStructure, 6)
-var Change_ChangeType *smithy.Schema
-
-var Change_Entity *smithy.Schema
-
-var Change_EntityTags *smithy.Schema
-
-var Change_Details *smithy.Schema
-
-var Change_DetailsDocument *smithy.Schema
-
-var Change_ChangeName *smithy.Schema
-
-var _ChangeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChangeSetDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetDescription",
-}, smithy.ShapeTypeList, 1)
-var _ChangeSetDescription_member *smithy.Schema
-
-var _ChangeSetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetName",
-}, smithy.ShapeTypeString, 0)
-
-var _ChangeSetSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ChangeSetSummaryList_member *smithy.Schema
-
-var ChangeSetSummaryListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSetSummaryListItem",
-}, smithy.ShapeTypeStructure, 8)
-var ChangeSetSummaryListItem_ChangeSetId *smithy.Schema
-
-var ChangeSetSummaryListItem_ChangeSetArn *smithy.Schema
-
-var ChangeSetSummaryListItem_ChangeSetName *smithy.Schema
-
-var ChangeSetSummaryListItem_StartTime *smithy.Schema
-
-var ChangeSetSummaryListItem_EndTime *smithy.Schema
-
-var ChangeSetSummaryListItem_Status *smithy.Schema
-
-var ChangeSetSummaryListItem_EntityIdList *smithy.Schema
-
-var ChangeSetSummaryListItem_FailureCode *smithy.Schema
-
-var ChangeStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeStatus",
-}, smithy.ShapeTypeEnum, 5)
-var ChangeStatus_PREPARING *smithy.Schema
-
-var ChangeStatus_APPLYING *smithy.Schema
-
-var ChangeStatus_SUCCEEDED *smithy.Schema
-
-var ChangeStatus_CANCELLED *smithy.Schema
-
-var ChangeStatus_FAILED *smithy.Schema
-
-var ChangeSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ChangeSummary_ChangeType *smithy.Schema
-
-var ChangeSummary_Entity *smithy.Schema
-
-var ChangeSummary_Details *smithy.Schema
-
-var ChangeSummary_DetailsDocument *smithy.Schema
-
-var ChangeSummary_ErrorDetailList *smithy.Schema
-
-var ChangeSummary_ChangeName *smithy.Schema
-
-var _ChangeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ChangeType",
-}, smithy.ShapeTypeString, 0)
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerProductEntityIdFilter_ValueList *smithy.Schema
-
-var _ContainerProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ContainerProductEntityIdFilterValueList_member *smithy.Schema
-
-var _ContainerProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var ContainerProductFilters_EntityId *smithy.Schema
-
-var ContainerProductFilters_LastModifiedDate *smithy.Schema
-
-var ContainerProductFilters_ProductTitle *smithy.Schema
-
-var ContainerProductFilters_Visibility *smithy.Schema
-
-var ContainerProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var ContainerProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var ContainerProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var ContainerProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductSort_SortBy *smithy.Schema
-
-var ContainerProductSort_SortOrder *smithy.Schema
-
-var ContainerProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductSortBy",
-}, smithy.ShapeTypeEnum, 5)
-var ContainerProductSortBy_EntityId *smithy.Schema
-
-var ContainerProductSortBy_LastModifiedDate *smithy.Schema
-
-var ContainerProductSortBy_ProductTitle *smithy.Schema
-
-var ContainerProductSortBy_Visibility *smithy.Schema
-
-var ContainerProductSortBy_CompatibleAWSServices *smithy.Schema
-
-var ContainerProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductSummary_ProductTitle *smithy.Schema
-
-var ContainerProductSummary_Visibility *smithy.Schema
-
-var ContainerProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerProductTitleFilter_ValueList *smithy.Schema
-
-var ContainerProductTitleFilter_WildCardValue *smithy.Schema
-
-var _ContainerProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ContainerProductTitleFilterValueList_member *smithy.Schema
-
-var _ContainerProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var ContainerProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerProductVisibilityFilter_ValueList *smithy.Schema
-
-var _ContainerProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ContainerProductVisibilityFilterValueList_member *smithy.Schema
-
-var ContainerProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var ContainerProductVisibilityString_Limited *smithy.Schema
-
-var ContainerProductVisibilityString_Public *smithy.Schema
-
-var ContainerProductVisibilityString_Restricted *smithy.Schema
-
-var ContainerProductVisibilityString_Draft *smithy.Schema
-
-var ContainerSecurityFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerSecurityFilters",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerSecurityFilters_DeliveryOptionId *smithy.Schema
-
-var ContainerSecuritySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ContainerSecuritySummary",
-}, smithy.ShapeTypeStructure, 1)
-var ContainerSecuritySummary_DeliveryOptionId *smithy.Schema
-
-var ControlAssessment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlAssessment",
-}, smithy.ShapeTypeStructure, 3)
-var ControlAssessment_ControlId *smithy.Schema
-
-var ControlAssessment_ControlAssessmentResult *smithy.Schema
-
-var ControlAssessment_Errors *smithy.Schema
-
-var _ControlAssessmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlAssessmentList",
-}, smithy.ShapeTypeList, 1)
-var _ControlAssessmentList_member *smithy.Schema
-
-var ControlAssessmentResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlAssessmentResult",
-}, smithy.ShapeTypeEnum, 4)
-var ControlAssessmentResult_PASS *smithy.Schema
-
-var ControlAssessmentResult_FAIL *smithy.Schema
-
-var ControlAssessmentResult_NOT_EXECUTED *smithy.Schema
-
-var ControlAssessmentResult_EXEMPTION_PASS *smithy.Schema
-
-var ControlError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlError",
-}, smithy.ShapeTypeStructure, 3)
-var ControlError_Code *smithy.Schema
-
-var ControlError_Message *smithy.Schema
-
-var ControlError_Scope *smithy.Schema
-
-var _ControlErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ControlErrorList",
-}, smithy.ShapeTypeList, 1)
-var _ControlErrorList_member *smithy.Schema
-
-var DataProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var DataProductEntityIdFilter_ValueList *smithy.Schema
-
-var _DataProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _DataProductEntityIdFilterValueList_member *smithy.Schema
-
-var _DataProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var DataProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var DataProductFilters_EntityId *smithy.Schema
-
-var DataProductFilters_ProductTitle *smithy.Schema
-
-var DataProductFilters_Visibility *smithy.Schema
-
-var DataProductFilters_LastModifiedDate *smithy.Schema
-
-var DataProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var DataProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var DataProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var DataProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var DataProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductSort_SortBy *smithy.Schema
-
-var DataProductSort_SortOrder *smithy.Schema
-
-var DataProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var DataProductSortBy_EntityId *smithy.Schema
-
-var DataProductSortBy_ProductTitle *smithy.Schema
-
-var DataProductSortBy_Visibility *smithy.Schema
-
-var DataProductSortBy_LastModifiedDate *smithy.Schema
-
-var DataProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductSummary_ProductTitle *smithy.Schema
-
-var DataProductSummary_Visibility *smithy.Schema
-
-var DataProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var DataProductTitleFilter_ValueList *smithy.Schema
-
-var DataProductTitleFilter_WildCardValue *smithy.Schema
-
-var _DataProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _DataProductTitleFilterValueList_member *smithy.Schema
-
-var _DataProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var DataProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var DataProductVisibilityFilter_ValueList *smithy.Schema
-
-var _DataProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _DataProductVisibilityFilterValueList_member *smithy.Schema
-
-var DataProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DataProductVisibilityString",
-}, smithy.ShapeTypeEnum, 5)
-var DataProductVisibilityString_Limited *smithy.Schema
-
-var DataProductVisibilityString_Public *smithy.Schema
-
-var DataProductVisibilityString_Restricted *smithy.Schema
-
-var DataProductVisibilityString_Unavailable *smithy.Schema
-
-var DataProductVisibilityString_Draft *smithy.Schema
-
-var _DateTimeISO8601 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DateTimeISO8601",
-}, smithy.ShapeTypeString, 0)
-
-var _DescribeAssessmentMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessmentMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 2)
-var Entity_Type *smithy.Schema
-
-var Entity_Identifier *smithy.Schema
-
-var EntityDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityDetail",
-}, smithy.ShapeTypeStructure, 5)
-var EntityDetail_EntityType *smithy.Schema
-
-var EntityDetail_EntityArn *smithy.Schema
-
-var EntityDetail_EntityIdentifier *smithy.Schema
-
-var EntityDetail_LastModifiedDate *smithy.Schema
-
-var EntityDetail_DetailsDocument *smithy.Schema
-
-var _EntityDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityDetails",
-}, smithy.ShapeTypeMap, 2)
-var _EntityDetails_key *smithy.Schema
-
-var _EntityDetails_value *smithy.Schema
-
-var _EntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityId",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityNameString",
-}, smithy.ShapeTypeString, 0)
-
-var EntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var EntityRequest_Catalog *smithy.Schema
-
-var EntityRequest_EntityId *smithy.Schema
-
-var _EntityRequestList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityRequestList",
-}, smithy.ShapeTypeList, 1)
-var _EntityRequestList_member *smithy.Schema
-
-var EntitySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntitySummary",
-}, smithy.ShapeTypeStructure, 16)
-var EntitySummary_Name *smithy.Schema
-
-var EntitySummary_EntityType *smithy.Schema
-
-var EntitySummary_EntityId *smithy.Schema
-
-var EntitySummary_EntityArn *smithy.Schema
-
-var EntitySummary_LastModifiedDate *smithy.Schema
-
-var EntitySummary_Visibility *smithy.Schema
-
-var EntitySummary_AmiProductSummary *smithy.Schema
-
-var EntitySummary_ContainerProductSummary *smithy.Schema
-
-var EntitySummary_DataProductSummary *smithy.Schema
-
-var EntitySummary_SaaSProductSummary *smithy.Schema
-
-var EntitySummary_OfferSummary *smithy.Schema
-
-var EntitySummary_ResaleAuthorizationSummary *smithy.Schema
-
-var EntitySummary_MachineLearningProductSummary *smithy.Schema
-
-var EntitySummary_OfferSetSummary *smithy.Schema
-
-var EntitySummary_ExpressPrivateOfferConfigurationSummary *smithy.Schema
-
-var EntitySummary_SubsidiaryAuthorizationSummary *smithy.Schema
-
-var _EntitySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntitySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EntitySummaryList_member *smithy.Schema
-
-var _EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityType",
-}, smithy.ShapeTypeString, 0)
-
-var EntityTypeFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityTypeFilters",
-}, smithy.ShapeTypeUnion, 10)
-var EntityTypeFilters_DataProductFilters *smithy.Schema
-
-var EntityTypeFilters_SaaSProductFilters *smithy.Schema
-
-var EntityTypeFilters_AmiProductFilters *smithy.Schema
-
-var EntityTypeFilters_OfferFilters *smithy.Schema
-
-var EntityTypeFilters_ContainerProductFilters *smithy.Schema
-
-var EntityTypeFilters_ResaleAuthorizationFilters *smithy.Schema
-
-var EntityTypeFilters_MachineLearningProductFilters *smithy.Schema
-
-var EntityTypeFilters_OfferSetFilters *smithy.Schema
-
-var EntityTypeFilters_ExpressPrivateOfferConfigurationFilters *smithy.Schema
-
-var EntityTypeFilters_SubsidiaryAuthorizationFilters *smithy.Schema
-
-var EntityTypeSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "EntityTypeSort",
-}, smithy.ShapeTypeUnion, 10)
-var EntityTypeSort_DataProductSort *smithy.Schema
-
-var EntityTypeSort_SaaSProductSort *smithy.Schema
-
-var EntityTypeSort_AmiProductSort *smithy.Schema
-
-var EntityTypeSort_OfferSort *smithy.Schema
-
-var EntityTypeSort_ContainerProductSort *smithy.Schema
-
-var EntityTypeSort_ResaleAuthorizationSort *smithy.Schema
-
-var EntityTypeSort_MachineLearningProductSort *smithy.Schema
-
-var EntityTypeSort_OfferSetSort *smithy.Schema
-
-var EntityTypeSort_ExpressPrivateOfferConfigurationSort *smithy.Schema
-
-var EntityTypeSort_SubsidiaryAuthorizationSort *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorCodeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorCodeString",
-}, smithy.ShapeTypeString, 0)
-
-var ErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorDetail_ErrorCode *smithy.Schema
-
-var ErrorDetail_ErrorMessage *smithy.Schema
-
-var _ErrorDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorDetailList",
-}, smithy.ShapeTypeList, 1)
-var _ErrorDetailList_member *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Errors = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Errors",
-}, smithy.ShapeTypeMap, 2)
-var _Errors_key *smithy.Schema
-
-var _Errors_value *smithy.Schema
-
-var ErrorScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorScope",
-}, smithy.ShapeTypeStructure, 2)
-var ErrorScope_Name *smithy.Schema
-
-var ErrorScope_Value *smithy.Schema
-
-var _ErrorScopeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ErrorScopeList",
-}, smithy.ShapeTypeList, 1)
-var _ErrorScopeList_member *smithy.Schema
-
-var _ExceptionMessageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExceptionMessageContent",
-}, smithy.ShapeTypeString, 0)
-
-var ExpressPrivateOfferConfigurationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ExpressPrivateOfferConfigurationEntityIdFilter_ValueList *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ExpressPrivateOfferConfigurationEntityIdFilterValueList_member *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ExpressPrivateOfferConfigurationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationFilters",
-}, smithy.ShapeTypeStructure, 3)
-var ExpressPrivateOfferConfigurationFilters_EntityId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationFilters_ProductId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationFilters_State *smithy.Schema
-
-var ExpressPrivateOfferConfigurationProductIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationProductIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ExpressPrivateOfferConfigurationProductIdFilter_ValueList *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationProductIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationProductIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ExpressPrivateOfferConfigurationProductIdFilterValueList_member *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationProductIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationProductIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ExpressPrivateOfferConfigurationSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationSort",
-}, smithy.ShapeTypeStructure, 2)
-var ExpressPrivateOfferConfigurationSort_SortBy *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSort_SortOrder *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var ExpressPrivateOfferConfigurationSortBy_EntityId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy_LastModifiedDate *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy_ProductId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSortBy_State *smithy.Schema
-
-var ExpressPrivateOfferConfigurationStateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationStateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ExpressPrivateOfferConfigurationStateFilter_ValueList *smithy.Schema
-
-var _ExpressPrivateOfferConfigurationStateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationStateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ExpressPrivateOfferConfigurationStateFilterValueList_member *smithy.Schema
-
-var ExpressPrivateOfferConfigurationStateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationStateString",
-}, smithy.ShapeTypeEnum, 2)
-var ExpressPrivateOfferConfigurationStateString_ACTIVE *smithy.Schema
-
-var ExpressPrivateOfferConfigurationStateString_INACTIVE *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ExpressPrivateOfferConfigurationSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ExpressPrivateOfferConfigurationSummary_ProductId *smithy.Schema
-
-var ExpressPrivateOfferConfigurationSummary_State *smithy.Schema
-
-var FailureCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FailureCode",
-}, smithy.ShapeTypeEnum, 2)
-var FailureCode_ClientError *smithy.Schema
-
-var FailureCode_ServerFault *smithy.Schema
-
-var _FieldName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FieldName",
-}, smithy.ShapeTypeString, 0)
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Name *smithy.Schema
-
-var Filter_ValueList *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var _FilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValueContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FilterValueContent",
-}, smithy.ShapeTypeString, 0)
-
-var FrameworkFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FrameworkFilters",
-}, smithy.ShapeTypeUnion, 2)
-var FrameworkFilters_AMISecurityFilters *smithy.Schema
-
-var FrameworkFilters_ContainerSecurityFilters *smithy.Schema
-
-var _FrameworkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FrameworkId",
-}, smithy.ShapeTypeString, 0)
-
-var FrameworkSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "FrameworkSummary",
-}, smithy.ShapeTypeUnion, 2)
-var FrameworkSummary_AMISecuritySummary *smithy.Schema
-
-var FrameworkSummary_ContainerSecuritySummary *smithy.Schema
-
-var _Identifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Identifier",
-}, smithy.ShapeTypeString, 0)
-
-var Intent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Intent",
-}, smithy.ShapeTypeEnum, 2)
-var Intent_VALIDATE *smithy.Schema
-
-var Intent_APPLY *smithy.Schema
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_Message *smithy.Schema
-
-var _Json = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Json",
-}, smithy.ShapeTypeString, 0)
-
-var _JsonDocumentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "JsonDocumentType",
-}, smithy.ShapeTypeDocument, 0)
-
-var _ListAssessmentsMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessmentsMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListChangeSetsMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSetsMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListEntitiesMaxResultInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntitiesMaxResultInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var MachineLearningProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var MachineLearningProductEntityIdFilter_ValueList *smithy.Schema
-
-var _MachineLearningProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _MachineLearningProductEntityIdFilterValueList_member *smithy.Schema
-
-var _MachineLearningProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var MachineLearningProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var MachineLearningProductFilters_EntityId *smithy.Schema
-
-var MachineLearningProductFilters_LastModifiedDate *smithy.Schema
-
-var MachineLearningProductFilters_ProductTitle *smithy.Schema
-
-var MachineLearningProductFilters_Visibility *smithy.Schema
-
-var MachineLearningProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var MachineLearningProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var MachineLearningProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var MachineLearningProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductSort_SortBy *smithy.Schema
-
-var MachineLearningProductSort_SortOrder *smithy.Schema
-
-var MachineLearningProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductSortBy",
-}, smithy.ShapeTypeEnum, 4)
-var MachineLearningProductSortBy_EntityId *smithy.Schema
-
-var MachineLearningProductSortBy_LastModifiedDate *smithy.Schema
-
-var MachineLearningProductSortBy_ProductTitle *smithy.Schema
-
-var MachineLearningProductSortBy_Visibility *smithy.Schema
-
-var MachineLearningProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductSummary_ProductTitle *smithy.Schema
-
-var MachineLearningProductSummary_Visibility *smithy.Schema
-
-var MachineLearningProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var MachineLearningProductTitleFilter_ValueList *smithy.Schema
-
-var MachineLearningProductTitleFilter_WildCardValue *smithy.Schema
-
-var _MachineLearningProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _MachineLearningProductTitleFilterValueList_member *smithy.Schema
-
-var _MachineLearningProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var MachineLearningProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var MachineLearningProductVisibilityFilter_ValueList *smithy.Schema
-
-var _MachineLearningProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _MachineLearningProductVisibilityFilterValueList_member *smithy.Schema
-
-var MachineLearningProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "MachineLearningProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var MachineLearningProductVisibilityString_Limited *smithy.Schema
-
-var MachineLearningProductVisibilityString_Public *smithy.Schema
-
-var MachineLearningProductVisibilityString_Restricted *smithy.Schema
-
-var MachineLearningProductVisibilityString_Draft *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var OfferAvailabilityEndDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferAvailabilityEndDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferAvailabilityEndDateFilter_DateRange *smithy.Schema
-
-var OfferAvailabilityEndDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferAvailabilityEndDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferAvailabilityEndDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferAvailabilityEndDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferBuyerAccountsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferBuyerAccountsFilter_WildCardValue *smithy.Schema
-
-var _OfferBuyerAccountsFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _OfferBuyerAccountsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsList",
-}, smithy.ShapeTypeList, 1)
-var _OfferBuyerAccountsList_member *smithy.Schema
-
-var _OfferBuyerAccountsString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferBuyerAccountsString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferCreatedBySourceFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferCreatedBySourceFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferCreatedBySourceFilter_ValueList *smithy.Schema
-
-var _OfferCreatedBySourceFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferCreatedBySourceFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferCreatedBySourceFilterValueList_member *smithy.Schema
-
-var OfferCreatedBySourceString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferCreatedBySourceString",
-}, smithy.ShapeTypeEnum, 2)
-var OfferCreatedBySourceString_Seller *smithy.Schema
-
-var OfferCreatedBySourceString_AwsMarketplace *smithy.Schema
-
-var OfferEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferEntityIdFilter_ValueList *smithy.Schema
-
-var _OfferEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferEntityIdFilterValueList_member *smithy.Schema
-
-var _OfferEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferFilters",
-}, smithy.ShapeTypeStructure, 14)
-var OfferFilters_EntityId *smithy.Schema
-
-var OfferFilters_Name *smithy.Schema
-
-var OfferFilters_ProductId *smithy.Schema
-
-var OfferFilters_ResaleAuthorizationId *smithy.Schema
-
-var OfferFilters_ReleaseDate *smithy.Schema
-
-var OfferFilters_AvailabilityEndDate *smithy.Schema
-
-var OfferFilters_BuyerAccounts *smithy.Schema
-
-var OfferFilters_State *smithy.Schema
-
-var OfferFilters_Targeting *smithy.Schema
-
-var OfferFilters_LastModifiedDate *smithy.Schema
-
-var OfferFilters_OfferSetId *smithy.Schema
-
-var OfferFilters_TargetAgreementId *smithy.Schema
-
-var OfferFilters_TargetAgreementIntent *smithy.Schema
-
-var OfferFilters_CreatedBySource *smithy.Schema
-
-var OfferLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferLastModifiedDateFilter_DateRange *smithy.Schema
-
-var OfferLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var OfferNameFilter_ValueList *smithy.Schema
-
-var OfferNameFilter_WildCardValue *smithy.Schema
-
-var _OfferNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferNameFilterValueList_member *smithy.Schema
-
-var _OfferNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferNameString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferProductIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferProductIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferProductIdFilter_ValueList *smithy.Schema
-
-var _OfferProductIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferProductIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferProductIdFilterValueList_member *smithy.Schema
-
-var _OfferProductIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferProductIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferReleaseDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferReleaseDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferReleaseDateFilter_DateRange *smithy.Schema
-
-var OfferReleaseDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferReleaseDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferReleaseDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferReleaseDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferResaleAuthorizationIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferResaleAuthorizationIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferResaleAuthorizationIdFilter_ValueList *smithy.Schema
-
-var _OfferResaleAuthorizationIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferResaleAuthorizationIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferResaleAuthorizationIdFilterValueList_member *smithy.Schema
-
-var _OfferResaleAuthorizationIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferResaleAuthorizationIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetAssociatedOfferIdsFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetAssociatedOfferIdsFilter_ValueList *smithy.Schema
-
-var _OfferSetAssociatedOfferIdsFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetAssociatedOfferIdsFilterValueList_member *smithy.Schema
-
-var _OfferSetAssociatedOfferIdsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetAssociatedOfferIdsList_member *smithy.Schema
-
-var _OfferSetAssociatedOfferIdsString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetAssociatedOfferIdsString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetEntityIdFilter_ValueList *smithy.Schema
-
-var _OfferSetEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetEntityIdFilterValueList_member *smithy.Schema
-
-var _OfferSetEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetFilters",
-}, smithy.ShapeTypeStructure, 7)
-var OfferSetFilters_EntityId *smithy.Schema
-
-var OfferSetFilters_Name *smithy.Schema
-
-var OfferSetFilters_State *smithy.Schema
-
-var OfferSetFilters_ReleaseDate *smithy.Schema
-
-var OfferSetFilters_AssociatedOfferIds *smithy.Schema
-
-var OfferSetFilters_SolutionId *smithy.Schema
-
-var OfferSetFilters_LastModifiedDate *smithy.Schema
-
-var OfferSetIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetIdFilter_ValueList *smithy.Schema
-
-var _OfferSetIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetIdFilterValueList_member *smithy.Schema
-
-var _OfferSetIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetLastModifiedDateFilter_DateRange *smithy.Schema
-
-var OfferSetLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferSetLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferSetNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetNameFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetNameFilter_ValueList *smithy.Schema
-
-var _OfferSetNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetNameFilterValueList_member *smithy.Schema
-
-var _OfferSetNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetNameString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetReleaseDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetReleaseDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetReleaseDateFilter_DateRange *smithy.Schema
-
-var OfferSetReleaseDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetReleaseDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetReleaseDateFilterDateRange_AfterValue *smithy.Schema
-
-var OfferSetReleaseDateFilterDateRange_BeforeValue *smithy.Schema
-
-var OfferSetSolutionIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSolutionIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetSolutionIdFilter_ValueList *smithy.Schema
-
-var _OfferSetSolutionIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSolutionIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetSolutionIdFilterValueList_member *smithy.Schema
-
-var _OfferSetSolutionIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSolutionIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferSetSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSort",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSetSort_SortBy *smithy.Schema
-
-var OfferSetSort_SortOrder *smithy.Schema
-
-var OfferSetSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSortBy",
-}, smithy.ShapeTypeEnum, 6)
-var OfferSetSortBy_Name *smithy.Schema
-
-var OfferSetSortBy_State *smithy.Schema
-
-var OfferSetSortBy_ReleaseDate *smithy.Schema
-
-var OfferSetSortBy_SolutionId *smithy.Schema
-
-var OfferSetSortBy_EntityId *smithy.Schema
-
-var OfferSetSortBy_LastModifiedDate *smithy.Schema
-
-var OfferSetStateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetStateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferSetStateFilter_ValueList *smithy.Schema
-
-var _OfferSetStateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetStateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferSetStateFilterValueList_member *smithy.Schema
-
-var OfferSetStateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetStateString",
-}, smithy.ShapeTypeEnum, 2)
-var OfferSetStateString_Draft *smithy.Schema
-
-var OfferSetStateString_Released *smithy.Schema
-
-var OfferSetSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSetSummary",
-}, smithy.ShapeTypeStructure, 5)
-var OfferSetSummary_Name *smithy.Schema
-
-var OfferSetSummary_State *smithy.Schema
-
-var OfferSetSummary_ReleaseDate *smithy.Schema
-
-var OfferSetSummary_AssociatedOfferIds *smithy.Schema
-
-var OfferSetSummary_SolutionId *smithy.Schema
-
-var OfferSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSort",
-}, smithy.ShapeTypeStructure, 2)
-var OfferSort_SortBy *smithy.Schema
-
-var OfferSort_SortOrder *smithy.Schema
-
-var OfferSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSortBy",
-}, smithy.ShapeTypeEnum, 14)
-var OfferSortBy_EntityId *smithy.Schema
-
-var OfferSortBy_Name *smithy.Schema
-
-var OfferSortBy_ProductId *smithy.Schema
-
-var OfferSortBy_ResaleAuthorizationId *smithy.Schema
-
-var OfferSortBy_ReleaseDate *smithy.Schema
-
-var OfferSortBy_AvailabilityEndDate *smithy.Schema
-
-var OfferSortBy_BuyerAccounts *smithy.Schema
-
-var OfferSortBy_State *smithy.Schema
-
-var OfferSortBy_Targeting *smithy.Schema
-
-var OfferSortBy_LastModifiedDate *smithy.Schema
-
-var OfferSortBy_OfferSetId *smithy.Schema
-
-var OfferSortBy_TargetAgreementId *smithy.Schema
-
-var OfferSortBy_TargetAgreementIntent *smithy.Schema
-
-var OfferSortBy_CreatedBySource *smithy.Schema
-
-var OfferStateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferStateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferStateFilter_ValueList *smithy.Schema
-
-var _OfferStateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferStateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferStateFilterValueList_member *smithy.Schema
-
-var OfferStateString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferStateString",
-}, smithy.ShapeTypeEnum, 2)
-var OfferStateString_Draft *smithy.Schema
-
-var OfferStateString_Released *smithy.Schema
-
-var OfferSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferSummary",
-}, smithy.ShapeTypeStructure, 12)
-var OfferSummary_Name *smithy.Schema
-
-var OfferSummary_ProductId *smithy.Schema
-
-var OfferSummary_ResaleAuthorizationId *smithy.Schema
-
-var OfferSummary_ReleaseDate *smithy.Schema
-
-var OfferSummary_AvailabilityEndDate *smithy.Schema
-
-var OfferSummary_BuyerAccounts *smithy.Schema
-
-var OfferSummary_State *smithy.Schema
-
-var OfferSummary_Targeting *smithy.Schema
-
-var OfferSummary_OfferSetId *smithy.Schema
-
-var OfferSummary_TargetAgreementId *smithy.Schema
-
-var OfferSummary_TargetAgreementIntent *smithy.Schema
-
-var OfferSummary_CreatedBySource *smithy.Schema
-
-var OfferTargetAgreementIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferTargetAgreementIdFilter_ValueList *smithy.Schema
-
-var _OfferTargetAgreementIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetAgreementIdFilterValueList_member *smithy.Schema
-
-var _OfferTargetAgreementIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIdString",
-}, smithy.ShapeTypeString, 0)
-
-var OfferTargetAgreementIntentFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIntentFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferTargetAgreementIntentFilter_ValueList *smithy.Schema
-
-var _OfferTargetAgreementIntentFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIntentFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetAgreementIntentFilterValueList_member *smithy.Schema
-
-var OfferTargetAgreementIntentString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetAgreementIntentString",
-}, smithy.ShapeTypeEnum, 1)
-var OfferTargetAgreementIntentString_Renew *smithy.Schema
-
-var OfferTargetingFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingFilter",
-}, smithy.ShapeTypeStructure, 1)
-var OfferTargetingFilter_ValueList *smithy.Schema
-
-var _OfferTargetingFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetingFilterValueList_member *smithy.Schema
-
-var _OfferTargetingList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingList",
-}, smithy.ShapeTypeList, 1)
-var _OfferTargetingList_member *smithy.Schema
-
-var OfferTargetingString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OfferTargetingString",
-}, smithy.ShapeTypeEnum, 4)
-var OfferTargetingString_BuyerAccounts *smithy.Schema
-
-var OfferTargetingString_ParticipatingPrograms *smithy.Schema
-
-var OfferTargetingString_CountryCodes *smithy.Schema
-
-var OfferTargetingString_None *smithy.Schema
-
-var OwnershipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "OwnershipType",
-}, smithy.ShapeTypeEnum, 2)
-var OwnershipType_SELF *smithy.Schema
-
-var OwnershipType_SHARED *smithy.Schema
-
-var _RequestedChangeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "RequestedChangeList",
-}, smithy.ShapeTypeList, 1)
-var _RequestedChangeList_member *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationAvailabilityEndDateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationAvailabilityEndDateFilter_DateRange *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationAvailabilityEndDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue *smithy.Schema
-
-var ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue *smithy.Schema
-
-var _ResaleAuthorizationAvailabilityEndDateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationAvailabilityEndDateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationAvailabilityEndDateFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationCreatedDateFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationCreatedDateFilter_DateRange *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationCreatedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationCreatedDateFilterDateRange_AfterValue *smithy.Schema
-
-var ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var _ResaleAuthorizationCreatedDateFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationCreatedDateFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationCreatedDateFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationEntityIdFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationEntityIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationFilters",
-}, smithy.ShapeTypeStructure, 16)
-var ResaleAuthorizationFilters_EntityId *smithy.Schema
-
-var ResaleAuthorizationFilters_Name *smithy.Schema
-
-var ResaleAuthorizationFilters_ProductId *smithy.Schema
-
-var ResaleAuthorizationFilters_CreatedDate *smithy.Schema
-
-var ResaleAuthorizationFilters_AvailabilityEndDate *smithy.Schema
-
-var ResaleAuthorizationFilters_ManufacturerAccountId *smithy.Schema
-
-var ResaleAuthorizationFilters_ProductName *smithy.Schema
-
-var ResaleAuthorizationFilters_ManufacturerLegalName *smithy.Schema
-
-var ResaleAuthorizationFilters_ResellerAccountID *smithy.Schema
-
-var ResaleAuthorizationFilters_ResellerLegalName *smithy.Schema
-
-var ResaleAuthorizationFilters_Status *smithy.Schema
-
-var ResaleAuthorizationFilters_OfferExtendedStatus *smithy.Schema
-
-var ResaleAuthorizationFilters_LastModifiedDate *smithy.Schema
-
-var ResaleAuthorizationFilters_ResellerRole *smithy.Schema
-
-var ResaleAuthorizationFilters_SourceAuthorization *smithy.Schema
-
-var ResaleAuthorizationFilters_IssuerAccountId *smithy.Schema
-
-var ResaleAuthorizationIssuerAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationIssuerAccountIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationIssuerAccountIdFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationIssuerAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationIssuerAccountIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationIssuerAccountIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationIssuerAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationIssuerAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationLastModifiedDateFilter_DateRange *smithy.Schema
-
-var ResaleAuthorizationLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var ResaleAuthorizationManufacturerAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationManufacturerAccountIdFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationManufacturerAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationManufacturerAccountIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationManufacturerAccountIdFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationManufacturerAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationManufacturerLegalNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationManufacturerLegalNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationManufacturerLegalNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationManufacturerLegalNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationManufacturerLegalNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationManufacturerLegalNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationManufacturerLegalNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationOfferExtendedStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationOfferExtendedStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationOfferExtendedStatusFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationOfferExtendedStatusFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationOfferExtendedStatusFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationOfferExtendedStatusFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationOfferExtendedStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationOfferExtendedStatusString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationProductIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationProductIdFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationProductIdFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationProductIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationProductIdFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationProductIdFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationProductIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductIdString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationProductNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationProductNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationProductNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationProductNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationProductNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationProductNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationProductNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationProductNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationResellerAccountIDFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationResellerAccountIDFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationResellerAccountIDFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationResellerAccountIDFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationResellerAccountIDFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationResellerAccountIDFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationResellerAccountIDString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerAccountIDString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationResellerLegalNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationResellerLegalNameFilter_ValueList *smithy.Schema
-
-var ResaleAuthorizationResellerLegalNameFilter_WildCardValue *smithy.Schema
-
-var _ResaleAuthorizationResellerLegalNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationResellerLegalNameFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationResellerLegalNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _ResaleAuthorizationResellerLegalNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerLegalNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationResellerRoleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerRoleFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationResellerRoleFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationResellerRoleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerRoleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationResellerRoleFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationResellerRoleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationResellerRoleString",
-}, smithy.ShapeTypeEnum, 2)
-var ResaleAuthorizationResellerRoleString_ChannelPartner *smithy.Schema
-
-var ResaleAuthorizationResellerRoleString_Distributor *smithy.Schema
-
-var ResaleAuthorizationSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSort",
-}, smithy.ShapeTypeStructure, 2)
-var ResaleAuthorizationSort_SortBy *smithy.Schema
-
-var ResaleAuthorizationSort_SortOrder *smithy.Schema
-
-var ResaleAuthorizationSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSortBy",
-}, smithy.ShapeTypeEnum, 16)
-var ResaleAuthorizationSortBy_EntityId *smithy.Schema
-
-var ResaleAuthorizationSortBy_Name *smithy.Schema
-
-var ResaleAuthorizationSortBy_ProductId *smithy.Schema
-
-var ResaleAuthorizationSortBy_ProductName *smithy.Schema
-
-var ResaleAuthorizationSortBy_ManufacturerAccountId *smithy.Schema
-
-var ResaleAuthorizationSortBy_ManufacturerLegalName *smithy.Schema
-
-var ResaleAuthorizationSortBy_ResellerAccountID *smithy.Schema
-
-var ResaleAuthorizationSortBy_ResellerLegalName *smithy.Schema
-
-var ResaleAuthorizationSortBy_Status *smithy.Schema
-
-var ResaleAuthorizationSortBy_OfferExtendedStatus *smithy.Schema
-
-var ResaleAuthorizationSortBy_CreatedDate *smithy.Schema
-
-var ResaleAuthorizationSortBy_AvailabilityEndDate *smithy.Schema
-
-var ResaleAuthorizationSortBy_LastModifiedDate *smithy.Schema
-
-var ResaleAuthorizationSortBy_ResellerRole *smithy.Schema
-
-var ResaleAuthorizationSortBy_SourceAuthorization *smithy.Schema
-
-var ResaleAuthorizationSortBy_IssuerAccountId *smithy.Schema
-
-var ResaleAuthorizationSourceAuthorizationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSourceAuthorizationFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationSourceAuthorizationFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationSourceAuthorizationFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSourceAuthorizationFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationSourceAuthorizationFilterValueList_member *smithy.Schema
-
-var _ResaleAuthorizationSourceAuthorizationString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSourceAuthorizationString",
-}, smithy.ShapeTypeString, 0)
-
-var ResaleAuthorizationStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var ResaleAuthorizationStatusFilter_ValueList *smithy.Schema
-
-var _ResaleAuthorizationStatusFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationStatusFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _ResaleAuthorizationStatusFilterValueList_member *smithy.Schema
-
-var ResaleAuthorizationStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationStatusString",
-}, smithy.ShapeTypeEnum, 3)
-var ResaleAuthorizationStatusString_Draft *smithy.Schema
-
-var ResaleAuthorizationStatusString_Active *smithy.Schema
-
-var ResaleAuthorizationStatusString_Restricted *smithy.Schema
-
-var ResaleAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResaleAuthorizationSummary",
-}, smithy.ShapeTypeStructure, 14)
-var ResaleAuthorizationSummary_Name *smithy.Schema
-
-var ResaleAuthorizationSummary_ProductId *smithy.Schema
-
-var ResaleAuthorizationSummary_ProductName *smithy.Schema
-
-var ResaleAuthorizationSummary_ManufacturerAccountId *smithy.Schema
-
-var ResaleAuthorizationSummary_ManufacturerLegalName *smithy.Schema
-
-var ResaleAuthorizationSummary_ResellerAccountID *smithy.Schema
-
-var ResaleAuthorizationSummary_ResellerLegalName *smithy.Schema
-
-var ResaleAuthorizationSummary_Status *smithy.Schema
-
-var ResaleAuthorizationSummary_OfferExtendedStatus *smithy.Schema
-
-var ResaleAuthorizationSummary_CreatedDate *smithy.Schema
-
-var ResaleAuthorizationSummary_AvailabilityEndDate *smithy.Schema
-
-var ResaleAuthorizationSummary_ResellerRole *smithy.Schema
-
-var ResaleAuthorizationSummary_SourceAuthorization *smithy.Schema
-
-var ResaleAuthorizationSummary_IssuerAccountId *smithy.Schema
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceIdList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceIdList_member *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 423})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotSupportedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourceNotSupportedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 415})
-var ResourceNotSupportedException_Message *smithy.Schema
-
-var _ResourcePolicyJson = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ResourcePolicyJson",
-}, smithy.ShapeTypeString, 0)
-
-var SaaSProductEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SaaSProductEntityIdFilter_ValueList *smithy.Schema
-
-var _SaaSProductEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SaaSProductEntityIdFilterValueList_member *smithy.Schema
-
-var _SaaSProductEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SaaSProductFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductFilters",
-}, smithy.ShapeTypeStructure, 4)
-var SaaSProductFilters_EntityId *smithy.Schema
-
-var SaaSProductFilters_ProductTitle *smithy.Schema
-
-var SaaSProductFilters_Visibility *smithy.Schema
-
-var SaaSProductFilters_LastModifiedDate *smithy.Schema
-
-var SaaSProductLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SaaSProductLastModifiedDateFilter_DateRange *smithy.Schema
-
-var SaaSProductLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var SaaSProductLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var SaaSProductSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductSort",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductSort_SortBy *smithy.Schema
-
-var SaaSProductSort_SortOrder *smithy.Schema
-
-var SaaSProductSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductSortBy",
-}, smithy.ShapeTypeEnum, 5)
-var SaaSProductSortBy_EntityId *smithy.Schema
-
-var SaaSProductSortBy_ProductTitle *smithy.Schema
-
-var SaaSProductSortBy_Visibility *smithy.Schema
-
-var SaaSProductSortBy_LastModifiedDate *smithy.Schema
-
-var SaaSProductSortBy_DeliveryOptionTypes *smithy.Schema
-
-var SaaSProductSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductSummary",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductSummary_ProductTitle *smithy.Schema
-
-var SaaSProductSummary_Visibility *smithy.Schema
-
-var SaaSProductTitleFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductTitleFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SaaSProductTitleFilter_ValueList *smithy.Schema
-
-var SaaSProductTitleFilter_WildCardValue *smithy.Schema
-
-var _SaaSProductTitleFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductTitleFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SaaSProductTitleFilterValueList_member *smithy.Schema
-
-var _SaaSProductTitleString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductTitleString",
-}, smithy.ShapeTypeString, 0)
-
-var SaaSProductVisibilityFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductVisibilityFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SaaSProductVisibilityFilter_ValueList *smithy.Schema
-
-var _SaaSProductVisibilityFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductVisibilityFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SaaSProductVisibilityFilterValueList_member *smithy.Schema
-
-var SaaSProductVisibilityString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SaaSProductVisibilityString",
-}, smithy.ShapeTypeEnum, 4)
-var SaaSProductVisibilityString_Limited *smithy.Schema
-
-var SaaSProductVisibilityString_Public *smithy.Schema
-
-var SaaSProductVisibilityString_Restricted *smithy.Schema
-
-var SaaSProductVisibilityString_Draft *smithy.Schema
-
-var _ScopeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ScopeName",
-}, smithy.ShapeTypeString, 0)
-
-var _ScopeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ScopeValue",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var Sort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Sort",
-}, smithy.ShapeTypeStructure, 2)
-var Sort_SortBy *smithy.Schema
-
-var Sort_SortOrder *smithy.Schema
-
-var _SortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SortBy",
-}, smithy.ShapeTypeString, 0)
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASCENDING *smithy.Schema
-
-var SortOrder_DESCENDING *smithy.Schema
-
-var SubsidiaryAuthorizationCreatedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationCreatedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationCreatedDateFilter_DateRange *smithy.Schema
-
-var SubsidiaryAuthorizationCreatedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationCreatedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue *smithy.Schema
-
-var SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var SubsidiaryAuthorizationEntityIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationEntityIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationEntityIdFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationEntityIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationEntityIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationEntityIdFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationEntityIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationEntityIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationFilters",
-}, smithy.ShapeTypeStructure, 8)
-var SubsidiaryAuthorizationFilters_EntityId *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_Status *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_ResourceId *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_ResourceName *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_Name *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_SubsidiaryAccountId *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_CreatedDate *smithy.Schema
-
-var SubsidiaryAuthorizationFilters_LastModifiedDate *smithy.Schema
-
-var SubsidiaryAuthorizationLastModifiedDateFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationLastModifiedDateFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationLastModifiedDateFilter_DateRange *smithy.Schema
-
-var SubsidiaryAuthorizationLastModifiedDateFilterDateRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationLastModifiedDateFilterDateRange",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue *smithy.Schema
-
-var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue *smithy.Schema
-
-var SubsidiaryAuthorizationNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationNameFilter_ValueList *smithy.Schema
-
-var SubsidiaryAuthorizationNameFilter_WildCardValue *smithy.Schema
-
-var _SubsidiaryAuthorizationNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationNameFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationNameString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationResourceIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationResourceIdFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationResourceIdFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationResourceNameFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameFilter",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationResourceNameFilter_ValueList *smithy.Schema
-
-var SubsidiaryAuthorizationResourceNameFilter_WildCardValue *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceNameFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationResourceNameFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationResourceNameFilterWildcard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameFilterWildcard",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationResourceNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationResourceNameString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationSort = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSort",
-}, smithy.ShapeTypeStructure, 2)
-var SubsidiaryAuthorizationSort_SortBy *smithy.Schema
-
-var SubsidiaryAuthorizationSort_SortOrder *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSortBy",
-}, smithy.ShapeTypeEnum, 6)
-var SubsidiaryAuthorizationSortBy_EntityId *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_Status *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_ResourceId *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_SubsidiaryAccountId *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_CreatedDate *smithy.Schema
-
-var SubsidiaryAuthorizationSortBy_LastModifiedDate *smithy.Schema
-
-var SubsidiaryAuthorizationStatusFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationStatusFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationStatusFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationStatusFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationStatusFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationStatusFilterValueList_member *smithy.Schema
-
-var SubsidiaryAuthorizationStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationStatusString",
-}, smithy.ShapeTypeEnum, 3)
-var SubsidiaryAuthorizationStatusString_Draft *smithy.Schema
-
-var SubsidiaryAuthorizationStatusString_Active *smithy.Schema
-
-var SubsidiaryAuthorizationStatusString_Restricted *smithy.Schema
-
-var SubsidiaryAuthorizationSubsidiaryAccountIdFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdFilter",
-}, smithy.ShapeTypeStructure, 1)
-var SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList *smithy.Schema
-
-var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList",
-}, smithy.ShapeTypeList, 1)
-var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member *smithy.Schema
-
-var _SubsidiaryAuthorizationSubsidiaryAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSubsidiaryAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var SubsidiaryAuthorizationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummary",
-}, smithy.ShapeTypeStructure, 6)
-var SubsidiaryAuthorizationSummary_Name *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_Status *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_ResourceId *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_ResourceName *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_SubsidiaryAccountId *smithy.Schema
-
-var SubsidiaryAuthorizationSummary_CreatedDate *smithy.Schema
-
-var _SubsidiaryAuthorizationSummaryNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummaryResourceIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryResourceIdString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummaryResourceNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryResourceNameString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummaryStatusString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummaryStatusString",
-}, smithy.ShapeTypeString, 0)
-
-var _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "SubsidiaryAuthorizationSummarySubsidiaryAccountIdString",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 422})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_ValidationExceptionFieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 6)
-var ValidationExceptionField_Reason *smithy.Schema
-
-var ValidationExceptionField_EntityType *smithy.Schema
-
-var ValidationExceptionField_EntityId *smithy.Schema
-
-var ValidationExceptionField_ChangeType *smithy.Schema
-
-var ValidationExceptionField_Field *smithy.Schema
-
-var ValidationExceptionField_Message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var _ValueList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ValueList",
-}, smithy.ShapeTypeList, 1)
-var _ValueList_member *smithy.Schema
-
-var _VersionedFrameworkId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "VersionedFrameworkId",
-}, smithy.ShapeTypeString, 0)
-
-var _VisibilityValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "VisibilityValue",
-}, smithy.ShapeTypeString, 0)
-
-var BatchDescribeEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeEntitiesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDescribeEntitiesRequest_EntityRequestList *smithy.Schema
-
-var BatchDescribeEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "BatchDescribeEntitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDescribeEntitiesResponse_EntityDetails *smithy.Schema
-
-var BatchDescribeEntitiesResponse_Errors *smithy.Schema
-
-var CancelChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "CancelChangeSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelChangeSetRequest_Catalog *smithy.Schema
-
-var CancelChangeSetRequest_ChangeSetId *smithy.Schema
-
-var CancelChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "CancelChangeSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CancelChangeSetResponse_ChangeSetId *smithy.Schema
-
-var CancelChangeSetResponse_ChangeSetArn *smithy.Schema
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeAssessmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessmentRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeAssessmentRequest_Catalog *smithy.Schema
-
-var DescribeAssessmentRequest_AssessmentIdentifier *smithy.Schema
-
-var DescribeAssessmentRequest_MaxResults *smithy.Schema
-
-var DescribeAssessmentRequest_NextToken *smithy.Schema
-
-var DescribeAssessmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeAssessmentResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeAssessmentResponse_AssessmentArn *smithy.Schema
-
-var DescribeAssessmentResponse_AssessmentId *smithy.Schema
-
-var DescribeAssessmentResponse_FrameworkId *smithy.Schema
-
-var DescribeAssessmentResponse_AssessmentTargetSummary *smithy.Schema
-
-var DescribeAssessmentResponse_FrameworkSummary *smithy.Schema
-
-var DescribeAssessmentResponse_AssessmentResult *smithy.Schema
-
-var DescribeAssessmentResponse_CreatedAt *smithy.Schema
-
-var DescribeAssessmentResponse_ExpiresAt *smithy.Schema
-
-var DescribeAssessmentResponse_ControlAssessments *smithy.Schema
-
-var DescribeAssessmentResponse_NextToken *smithy.Schema
-
-var DescribeChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeChangeSetRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeChangeSetRequest_Catalog *smithy.Schema
-
-var DescribeChangeSetRequest_ChangeSetId *smithy.Schema
-
-var DescribeChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeChangeSetResponse",
-}, smithy.ShapeTypeStructure, 10)
-var DescribeChangeSetResponse_ChangeSetId *smithy.Schema
-
-var DescribeChangeSetResponse_ChangeSetArn *smithy.Schema
-
-var DescribeChangeSetResponse_ChangeSetName *smithy.Schema
-
-var DescribeChangeSetResponse_Intent *smithy.Schema
-
-var DescribeChangeSetResponse_StartTime *smithy.Schema
-
-var DescribeChangeSetResponse_EndTime *smithy.Schema
-
-var DescribeChangeSetResponse_Status *smithy.Schema
-
-var DescribeChangeSetResponse_FailureCode *smithy.Schema
-
-var DescribeChangeSetResponse_FailureDescription *smithy.Schema
-
-var DescribeChangeSetResponse_ChangeSet *smithy.Schema
-
-var DescribeEntityRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeEntityRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEntityRequest_Catalog *smithy.Schema
-
-var DescribeEntityRequest_EntityId *smithy.Schema
-
-var DescribeEntityResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "DescribeEntityResponse",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeEntityResponse_EntityType *smithy.Schema
-
-var DescribeEntityResponse_EntityIdentifier *smithy.Schema
-
-var DescribeEntityResponse_EntityArn *smithy.Schema
-
-var DescribeEntityResponse_LastModifiedDate *smithy.Schema
-
-var DescribeEntityResponse_Details *smithy.Schema
-
-var DescribeEntityResponse_DetailsDocument *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetResourcePolicyResponse_Policy *smithy.Schema
-
-var ListAssessmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessmentsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListAssessmentsRequest_Catalog *smithy.Schema
-
-var ListAssessmentsRequest_FrameworkId *smithy.Schema
-
-var ListAssessmentsRequest_AssessmentTargetFilter *smithy.Schema
-
-var ListAssessmentsRequest_FrameworkFilters *smithy.Schema
-
-var ListAssessmentsRequest_MaxResults *smithy.Schema
-
-var ListAssessmentsRequest_NextToken *smithy.Schema
-
-var ListAssessmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListAssessmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAssessmentsResponse_AssessmentSummaryList *smithy.Schema
-
-var ListAssessmentsResponse_NextToken *smithy.Schema
-
-var ListChangeSetsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSetsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListChangeSetsRequest_Catalog *smithy.Schema
-
-var ListChangeSetsRequest_FilterList *smithy.Schema
-
-var ListChangeSetsRequest_Sort *smithy.Schema
-
-var ListChangeSetsRequest_MaxResults *smithy.Schema
-
-var ListChangeSetsRequest_NextToken *smithy.Schema
-
-var ListChangeSetsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListChangeSetsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChangeSetsResponse_ChangeSetSummaryList *smithy.Schema
-
-var ListChangeSetsResponse_NextToken *smithy.Schema
-
-var ListEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntitiesRequest",
-}, smithy.ShapeTypeStructure, 9)
-var ListEntitiesRequest_Catalog *smithy.Schema
-
-var ListEntitiesRequest_EntityType *smithy.Schema
-
-var ListEntitiesRequest_FilterList *smithy.Schema
-
-var ListEntitiesRequest_Sort *smithy.Schema
-
-var ListEntitiesRequest_NextToken *smithy.Schema
-
-var ListEntitiesRequest_MaxResults *smithy.Schema
-
-var ListEntitiesRequest_OwnershipType *smithy.Schema
-
-var ListEntitiesRequest_EntityTypeFilters *smithy.Schema
-
-var ListEntitiesRequest_EntityTypeSort *smithy.Schema
-
-var ListEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListEntitiesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEntitiesResponse_EntitySummaryList *smithy.Schema
-
-var ListEntitiesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceResponse_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var PutResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var PutResourcePolicyRequest_Policy *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var StartChangeSetRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "StartChangeSetRequest",
-}, smithy.ShapeTypeStructure, 6)
-var StartChangeSetRequest_Catalog *smithy.Schema
-
-var StartChangeSetRequest_ChangeSet *smithy.Schema
-
-var StartChangeSetRequest_ChangeSetName *smithy.Schema
-
-var StartChangeSetRequest_ClientRequestToken *smithy.Schema
-
-var StartChangeSetRequest_ChangeSetTags *smithy.Schema
-
-var StartChangeSetRequest_Intent *smithy.Schema
-
-var StartChangeSetResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "StartChangeSetResponse",
-}, smithy.ShapeTypeStructure, 2)
-var StartChangeSetResponse_ChangeSetId *smithy.Schema
-
-var StartChangeSetResponse_ChangeSetArn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.marketplacecatalog",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", _ExceptionMessageContent)
-
-	_AmiProductEntityIdFilterValueList_member = _AmiProductEntityIdFilterValueList.AddMember("member", _AmiProductEntityIdString)
-
-	AmiProductEntityIdFilter_ValueList = AmiProductEntityIdFilter.AddMember("ValueList", _AmiProductEntityIdFilterValueList)
-
-	AmiProductLastModifiedDateFilterDateRange_AfterValue = AmiProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	AmiProductLastModifiedDateFilterDateRange_BeforeValue = AmiProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	AmiProductLastModifiedDateFilter_DateRange = AmiProductLastModifiedDateFilter.AddMember("DateRange", AmiProductLastModifiedDateFilterDateRange)
-
-	_AmiProductTitleFilterValueList_member = _AmiProductTitleFilterValueList.AddMember("member", _AmiProductTitleString)
-
-	AmiProductTitleFilter_ValueList = AmiProductTitleFilter.AddMember("ValueList", _AmiProductTitleFilterValueList)
-
-	AmiProductTitleFilter_WildCardValue = AmiProductTitleFilter.AddMember("WildCardValue", _AmiProductTitleString)
-
-	AmiProductVisibilityString_Limited = AmiProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	AmiProductVisibilityString_Public = AmiProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	AmiProductVisibilityString_Restricted = AmiProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	AmiProductVisibilityString_Draft = AmiProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	_AmiProductVisibilityFilterValueList_member = _AmiProductVisibilityFilterValueList.AddMember("member", AmiProductVisibilityString)
-
-	AmiProductVisibilityFilter_ValueList = AmiProductVisibilityFilter.AddMember("ValueList", _AmiProductVisibilityFilterValueList)
-
-	AmiProductFilters_EntityId = AmiProductFilters.AddMember("EntityId", AmiProductEntityIdFilter)
-
-	AmiProductFilters_LastModifiedDate = AmiProductFilters.AddMember("LastModifiedDate", AmiProductLastModifiedDateFilter)
-
-	AmiProductFilters_ProductTitle = AmiProductFilters.AddMember("ProductTitle", AmiProductTitleFilter)
-
-	AmiProductFilters_Visibility = AmiProductFilters.AddMember("Visibility", AmiProductVisibilityFilter)
-
-	AmiProductSortBy_EntityId = AmiProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	AmiProductSortBy_LastModifiedDate = AmiProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	AmiProductSortBy_ProductTitle = AmiProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	AmiProductSortBy_Visibility = AmiProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	SortOrder_ASCENDING = SortOrder.AddMember("ASCENDING", smithyprelude.Unit)
-
-	SortOrder_DESCENDING = SortOrder.AddMember("DESCENDING", smithyprelude.Unit)
-
-	AmiProductSort_SortBy = AmiProductSort.AddMember("SortBy", AmiProductSortBy)
-
-	AmiProductSort_SortOrder = AmiProductSort.AddMember("SortOrder", SortOrder)
-
-	AmiProductSummary_ProductTitle = AmiProductSummary.AddMember("ProductTitle", _AmiProductTitleString)
-
-	AmiProductSummary_Visibility = AmiProductSummary.AddMember("Visibility", AmiProductVisibilityString)
-
-	AMISecurityFilters_DeliveryOptionId = AMISecurityFilters.AddMember("DeliveryOptionId", _ResourceId)
-
-	AMISecuritySummary_DeliveryOptionId = AMISecuritySummary.AddMember("DeliveryOptionId", _ResourceId)
-
-	AssessmentResult_PASS = AssessmentResult.AddMember("PASS", smithyprelude.Unit)
-
-	AssessmentResult_FAIL = AssessmentResult.AddMember("FAIL", smithyprelude.Unit)
-
-	AssessmentTargetSummary_EntityId = AssessmentTargetSummary.AddMember("EntityId", _ResourceId)
-
-	AssessmentTargetSummary_ChangeSetId = AssessmentTargetSummary.AddMember("ChangeSetId", _ResourceId)
-
-	ContainerSecuritySummary_DeliveryOptionId = ContainerSecuritySummary.AddMember("DeliveryOptionId", _ResourceId)
-
-	FrameworkSummary_AMISecuritySummary = FrameworkSummary.AddMember("AMISecuritySummary", AMISecuritySummary)
-
-	FrameworkSummary_ContainerSecuritySummary = FrameworkSummary.AddMember("ContainerSecuritySummary", ContainerSecuritySummary)
-
-	AssessmentSummary_AssessmentArn = AssessmentSummary.AddMember("AssessmentArn", _ARN)
-
-	AssessmentSummary_AssessmentId = AssessmentSummary.AddMember("AssessmentId", _ResourceId)
-
-	AssessmentSummary_FrameworkId = AssessmentSummary.AddMember("FrameworkId", _VersionedFrameworkId)
-
-	AssessmentSummary_AssessmentTargetSummary = AssessmentSummary.AddMember("AssessmentTargetSummary", AssessmentTargetSummary)
-
-	AssessmentSummary_FrameworkSummary = AssessmentSummary.AddMember("FrameworkSummary", FrameworkSummary)
-
-	AssessmentSummary_AssessmentResult = AssessmentSummary.AddMember("AssessmentResult", AssessmentResult)
-
-	AssessmentSummary_CreatedAt = AssessmentSummary.AddMember("CreatedAt", _DateTimeISO8601)
-
-	AssessmentSummary_ExpiresAt = AssessmentSummary.AddMember("ExpiresAt", _DateTimeISO8601)
-
-	_AssessmentSummaryList_member = _AssessmentSummaryList.AddMember("member", AssessmentSummary)
-
-	AssessmentTargetFilter_EntityId = AssessmentTargetFilter.AddMember("EntityId", _ResourceId)
-
-	AssessmentTargetFilter_ChangeSetId = AssessmentTargetFilter.AddMember("ChangeSetId", _ResourceId)
-
-	BatchDescribeErrorDetail_ErrorCode = BatchDescribeErrorDetail.AddMember("ErrorCode", _BatchDescribeErrorCodeString)
-
-	BatchDescribeErrorDetail_ErrorMessage = BatchDescribeErrorDetail.AddMember("ErrorMessage", _BatchDescribeErrorMessageContent)
-
-	Entity_Type = Entity.AddMember("Type", _EntityType)
-
-	Entity_Identifier = Entity.AddMember("Identifier", _Identifier)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	Change_ChangeType = Change.AddMember("ChangeType", _ChangeType)
-
-	Change_Entity = Change.AddMember("Entity", Entity)
-
-	Change_EntityTags = Change.AddMember("EntityTags", _TagList)
-
-	Change_Details = Change.AddMember("Details", _Json)
-
-	Change_DetailsDocument = Change.AddMember("DetailsDocument", _JsonDocumentType)
-
-	Change_ChangeName = Change.AddMember("ChangeName", _ChangeName)
-
-	ErrorDetail_ErrorCode = ErrorDetail.AddMember("ErrorCode", _ErrorCodeString)
-
-	ErrorDetail_ErrorMessage = ErrorDetail.AddMember("ErrorMessage", _ExceptionMessageContent)
-
-	_ErrorDetailList_member = _ErrorDetailList.AddMember("member", ErrorDetail)
-
-	ChangeSummary_ChangeType = ChangeSummary.AddMember("ChangeType", _ChangeType)
-
-	ChangeSummary_Entity = ChangeSummary.AddMember("Entity", Entity)
-
-	ChangeSummary_Details = ChangeSummary.AddMember("Details", _Json)
-
-	ChangeSummary_DetailsDocument = ChangeSummary.AddMember("DetailsDocument", _JsonDocumentType)
-
-	ChangeSummary_ErrorDetailList = ChangeSummary.AddMember("ErrorDetailList", _ErrorDetailList)
-
-	ChangeSummary_ChangeName = ChangeSummary.AddMember("ChangeName", _ChangeName)
-
-	_ChangeSetDescription_member = _ChangeSetDescription.AddMember("member", ChangeSummary)
-
-	ChangeStatus_PREPARING = ChangeStatus.AddMember("PREPARING", smithyprelude.Unit)
-
-	ChangeStatus_APPLYING = ChangeStatus.AddMember("APPLYING", smithyprelude.Unit)
-
-	ChangeStatus_SUCCEEDED = ChangeStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ChangeStatus_CANCELLED = ChangeStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	ChangeStatus_FAILED = ChangeStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	_ResourceIdList_member = _ResourceIdList.AddMember("member", _ResourceId)
-
-	FailureCode_ClientError = FailureCode.AddMember("ClientError", smithyprelude.Unit)
-
-	FailureCode_ServerFault = FailureCode.AddMember("ServerFault", smithyprelude.Unit)
-
-	ChangeSetSummaryListItem_ChangeSetId = ChangeSetSummaryListItem.AddMember("ChangeSetId", _ResourceId)
-
-	ChangeSetSummaryListItem_ChangeSetArn = ChangeSetSummaryListItem.AddMember("ChangeSetArn", _ARN)
-
-	ChangeSetSummaryListItem_ChangeSetName = ChangeSetSummaryListItem.AddMember("ChangeSetName", _ChangeSetName)
-
-	ChangeSetSummaryListItem_StartTime = ChangeSetSummaryListItem.AddMember("StartTime", _DateTimeISO8601)
-
-	ChangeSetSummaryListItem_EndTime = ChangeSetSummaryListItem.AddMember("EndTime", _DateTimeISO8601)
-
-	ChangeSetSummaryListItem_Status = ChangeSetSummaryListItem.AddMember("Status", ChangeStatus)
-
-	ChangeSetSummaryListItem_EntityIdList = ChangeSetSummaryListItem.AddMember("EntityIdList", _ResourceIdList)
-
-	ChangeSetSummaryListItem_FailureCode = ChangeSetSummaryListItem.AddMember("FailureCode", FailureCode)
-
-	_ChangeSetSummaryList_member = _ChangeSetSummaryList.AddMember("member", ChangeSetSummaryListItem)
-
-	_ContainerProductEntityIdFilterValueList_member = _ContainerProductEntityIdFilterValueList.AddMember("member", _ContainerProductEntityIdString)
-
-	ContainerProductEntityIdFilter_ValueList = ContainerProductEntityIdFilter.AddMember("ValueList", _ContainerProductEntityIdFilterValueList)
-
-	ContainerProductLastModifiedDateFilterDateRange_AfterValue = ContainerProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ContainerProductLastModifiedDateFilterDateRange_BeforeValue = ContainerProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	ContainerProductLastModifiedDateFilter_DateRange = ContainerProductLastModifiedDateFilter.AddMember("DateRange", ContainerProductLastModifiedDateFilterDateRange)
-
-	_ContainerProductTitleFilterValueList_member = _ContainerProductTitleFilterValueList.AddMember("member", _ContainerProductTitleString)
-
-	ContainerProductTitleFilter_ValueList = ContainerProductTitleFilter.AddMember("ValueList", _ContainerProductTitleFilterValueList)
-
-	ContainerProductTitleFilter_WildCardValue = ContainerProductTitleFilter.AddMember("WildCardValue", _ContainerProductTitleString)
-
-	ContainerProductVisibilityString_Limited = ContainerProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	ContainerProductVisibilityString_Public = ContainerProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	ContainerProductVisibilityString_Restricted = ContainerProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	ContainerProductVisibilityString_Draft = ContainerProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	_ContainerProductVisibilityFilterValueList_member = _ContainerProductVisibilityFilterValueList.AddMember("member", ContainerProductVisibilityString)
-
-	ContainerProductVisibilityFilter_ValueList = ContainerProductVisibilityFilter.AddMember("ValueList", _ContainerProductVisibilityFilterValueList)
-
-	ContainerProductFilters_EntityId = ContainerProductFilters.AddMember("EntityId", ContainerProductEntityIdFilter)
-
-	ContainerProductFilters_LastModifiedDate = ContainerProductFilters.AddMember("LastModifiedDate", ContainerProductLastModifiedDateFilter)
-
-	ContainerProductFilters_ProductTitle = ContainerProductFilters.AddMember("ProductTitle", ContainerProductTitleFilter)
-
-	ContainerProductFilters_Visibility = ContainerProductFilters.AddMember("Visibility", ContainerProductVisibilityFilter)
-
-	ContainerProductSortBy_EntityId = ContainerProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	ContainerProductSortBy_LastModifiedDate = ContainerProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	ContainerProductSortBy_ProductTitle = ContainerProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	ContainerProductSortBy_Visibility = ContainerProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	ContainerProductSortBy_CompatibleAWSServices = ContainerProductSortBy.AddMember("CompatibleAWSServices", smithyprelude.Unit)
-
-	ContainerProductSort_SortBy = ContainerProductSort.AddMember("SortBy", ContainerProductSortBy)
-
-	ContainerProductSort_SortOrder = ContainerProductSort.AddMember("SortOrder", SortOrder)
-
-	ContainerProductSummary_ProductTitle = ContainerProductSummary.AddMember("ProductTitle", _ContainerProductTitleString)
-
-	ContainerProductSummary_Visibility = ContainerProductSummary.AddMember("Visibility", ContainerProductVisibilityString)
-
-	ContainerSecurityFilters_DeliveryOptionId = ContainerSecurityFilters.AddMember("DeliveryOptionId", _ResourceId)
-
-	ControlAssessmentResult_PASS = ControlAssessmentResult.AddMember("PASS", smithyprelude.Unit)
-
-	ControlAssessmentResult_FAIL = ControlAssessmentResult.AddMember("FAIL", smithyprelude.Unit)
-
-	ControlAssessmentResult_NOT_EXECUTED = ControlAssessmentResult.AddMember("NOT_EXECUTED", smithyprelude.Unit)
-
-	ControlAssessmentResult_EXEMPTION_PASS = ControlAssessmentResult.AddMember("EXEMPTION_PASS", smithyprelude.Unit)
-
-	ErrorScope_Name = ErrorScope.AddMember("Name", _ScopeName)
-
-	ErrorScope_Value = ErrorScope.AddMember("Value", _ScopeValue)
-
-	_ErrorScopeList_member = _ErrorScopeList.AddMember("member", ErrorScope)
-
-	ControlError_Code = ControlError.AddMember("Code", _ErrorCode)
-
-	ControlError_Message = ControlError.AddMember("Message", _ErrorMessage)
-
-	ControlError_Scope = ControlError.AddMember("Scope", _ErrorScopeList)
-
-	_ControlErrorList_member = _ControlErrorList.AddMember("member", ControlError)
-
-	ControlAssessment_ControlId = ControlAssessment.AddMember("ControlId", _ResourceId)
-
-	ControlAssessment_ControlAssessmentResult = ControlAssessment.AddMember("ControlAssessmentResult", ControlAssessmentResult)
-
-	ControlAssessment_Errors = ControlAssessment.AddMember("Errors", _ControlErrorList)
-
-	_ControlAssessmentList_member = _ControlAssessmentList.AddMember("member", ControlAssessment)
-
-	_DataProductEntityIdFilterValueList_member = _DataProductEntityIdFilterValueList.AddMember("member", _DataProductEntityIdString)
-
-	DataProductEntityIdFilter_ValueList = DataProductEntityIdFilter.AddMember("ValueList", _DataProductEntityIdFilterValueList)
-
-	_DataProductTitleFilterValueList_member = _DataProductTitleFilterValueList.AddMember("member", _DataProductTitleString)
-
-	DataProductTitleFilter_ValueList = DataProductTitleFilter.AddMember("ValueList", _DataProductTitleFilterValueList)
-
-	DataProductTitleFilter_WildCardValue = DataProductTitleFilter.AddMember("WildCardValue", _DataProductTitleString)
-
-	DataProductVisibilityString_Limited = DataProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	DataProductVisibilityString_Public = DataProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	DataProductVisibilityString_Restricted = DataProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	DataProductVisibilityString_Unavailable = DataProductVisibilityString.AddMember("Unavailable", smithyprelude.Unit)
-
-	DataProductVisibilityString_Draft = DataProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	_DataProductVisibilityFilterValueList_member = _DataProductVisibilityFilterValueList.AddMember("member", DataProductVisibilityString)
-
-	DataProductVisibilityFilter_ValueList = DataProductVisibilityFilter.AddMember("ValueList", _DataProductVisibilityFilterValueList)
-
-	DataProductLastModifiedDateFilterDateRange_AfterValue = DataProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	DataProductLastModifiedDateFilterDateRange_BeforeValue = DataProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	DataProductLastModifiedDateFilter_DateRange = DataProductLastModifiedDateFilter.AddMember("DateRange", DataProductLastModifiedDateFilterDateRange)
-
-	DataProductFilters_EntityId = DataProductFilters.AddMember("EntityId", DataProductEntityIdFilter)
-
-	DataProductFilters_ProductTitle = DataProductFilters.AddMember("ProductTitle", DataProductTitleFilter)
-
-	DataProductFilters_Visibility = DataProductFilters.AddMember("Visibility", DataProductVisibilityFilter)
-
-	DataProductFilters_LastModifiedDate = DataProductFilters.AddMember("LastModifiedDate", DataProductLastModifiedDateFilter)
-
-	DataProductSortBy_EntityId = DataProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	DataProductSortBy_ProductTitle = DataProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	DataProductSortBy_Visibility = DataProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	DataProductSortBy_LastModifiedDate = DataProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	DataProductSort_SortBy = DataProductSort.AddMember("SortBy", DataProductSortBy)
-
-	DataProductSort_SortOrder = DataProductSort.AddMember("SortOrder", SortOrder)
-
-	DataProductSummary_ProductTitle = DataProductSummary.AddMember("ProductTitle", _DataProductTitleString)
-
-	DataProductSummary_Visibility = DataProductSummary.AddMember("Visibility", DataProductVisibilityString)
-
-	EntityDetail_EntityType = EntityDetail.AddMember("EntityType", _EntityType)
-
-	EntityDetail_EntityArn = EntityDetail.AddMember("EntityArn", _ARN)
-
-	EntityDetail_EntityIdentifier = EntityDetail.AddMember("EntityIdentifier", _Identifier)
-
-	EntityDetail_LastModifiedDate = EntityDetail.AddMember("LastModifiedDate", _DateTimeISO8601)
-
-	EntityDetail_DetailsDocument = EntityDetail.AddMember("DetailsDocument", _JsonDocumentType)
-
-	_EntityDetails_key = _EntityDetails.AddMember("key", _EntityId)
-
-	_EntityDetails_value = _EntityDetails.AddMember("value", EntityDetail)
-
-	EntityRequest_Catalog = EntityRequest.AddMember("Catalog", _Catalog)
-
-	EntityRequest_EntityId = EntityRequest.AddMember("EntityId", _EntityId)
-
-	_EntityRequestList_member = _EntityRequestList.AddMember("member", EntityRequest)
-
-	SaaSProductVisibilityString_Limited = SaaSProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	SaaSProductVisibilityString_Public = SaaSProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	SaaSProductVisibilityString_Restricted = SaaSProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	SaaSProductVisibilityString_Draft = SaaSProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	SaaSProductSummary_ProductTitle = SaaSProductSummary.AddMember("ProductTitle", _SaaSProductTitleString)
-
-	SaaSProductSummary_Visibility = SaaSProductSummary.AddMember("Visibility", SaaSProductVisibilityString)
-
-	_OfferBuyerAccountsList_member = _OfferBuyerAccountsList.AddMember("member", _OfferBuyerAccountsString)
-
-	OfferStateString_Draft = OfferStateString.AddMember("Draft", smithyprelude.Unit)
-
-	OfferStateString_Released = OfferStateString.AddMember("Released", smithyprelude.Unit)
-
-	OfferTargetingString_BuyerAccounts = OfferTargetingString.AddMember("BuyerAccounts", smithyprelude.Unit)
-
-	OfferTargetingString_ParticipatingPrograms = OfferTargetingString.AddMember("ParticipatingPrograms", smithyprelude.Unit)
-
-	OfferTargetingString_CountryCodes = OfferTargetingString.AddMember("CountryCodes", smithyprelude.Unit)
-
-	OfferTargetingString_None = OfferTargetingString.AddMember("None", smithyprelude.Unit)
-
-	_OfferTargetingList_member = _OfferTargetingList.AddMember("member", OfferTargetingString)
-
-	OfferTargetAgreementIntentString_Renew = OfferTargetAgreementIntentString.AddMember("Renew", smithyprelude.Unit)
-
-	OfferCreatedBySourceString_Seller = OfferCreatedBySourceString.AddMember("Seller", smithyprelude.Unit)
-
-	OfferCreatedBySourceString_AwsMarketplace = OfferCreatedBySourceString.AddMember("AwsMarketplace", smithyprelude.Unit)
-
-	OfferSummary_Name = OfferSummary.AddMember("Name", _OfferNameString)
-
-	OfferSummary_ProductId = OfferSummary.AddMember("ProductId", _OfferProductIdString)
-
-	OfferSummary_ResaleAuthorizationId = OfferSummary.AddMember("ResaleAuthorizationId", _OfferResaleAuthorizationIdString)
-
-	OfferSummary_ReleaseDate = OfferSummary.AddMember("ReleaseDate", _DateTimeISO8601)
-
-	OfferSummary_AvailabilityEndDate = OfferSummary.AddMember("AvailabilityEndDate", _DateTimeISO8601)
-
-	OfferSummary_BuyerAccounts = OfferSummary.AddMember("BuyerAccounts", _OfferBuyerAccountsList)
-
-	OfferSummary_State = OfferSummary.AddMember("State", OfferStateString)
-
-	OfferSummary_Targeting = OfferSummary.AddMember("Targeting", _OfferTargetingList)
-
-	OfferSummary_OfferSetId = OfferSummary.AddMember("OfferSetId", _OfferSetIdString)
-
-	OfferSummary_TargetAgreementId = OfferSummary.AddMember("TargetAgreementId", _OfferTargetAgreementIdString)
-
-	OfferSummary_TargetAgreementIntent = OfferSummary.AddMember("TargetAgreementIntent", OfferTargetAgreementIntentString)
-
-	OfferSummary_CreatedBySource = OfferSummary.AddMember("CreatedBySource", OfferCreatedBySourceString)
-
-	ResaleAuthorizationStatusString_Draft = ResaleAuthorizationStatusString.AddMember("Draft", smithyprelude.Unit)
-
-	ResaleAuthorizationStatusString_Active = ResaleAuthorizationStatusString.AddMember("Active", smithyprelude.Unit)
-
-	ResaleAuthorizationStatusString_Restricted = ResaleAuthorizationStatusString.AddMember("Restricted", smithyprelude.Unit)
-
-	ResaleAuthorizationResellerRoleString_ChannelPartner = ResaleAuthorizationResellerRoleString.AddMember("ChannelPartner", smithyprelude.Unit)
-
-	ResaleAuthorizationResellerRoleString_Distributor = ResaleAuthorizationResellerRoleString.AddMember("Distributor", smithyprelude.Unit)
-
-	ResaleAuthorizationSummary_Name = ResaleAuthorizationSummary.AddMember("Name", _ResaleAuthorizationNameString)
-
-	ResaleAuthorizationSummary_ProductId = ResaleAuthorizationSummary.AddMember("ProductId", _ResaleAuthorizationProductIdString)
-
-	ResaleAuthorizationSummary_ProductName = ResaleAuthorizationSummary.AddMember("ProductName", _ResaleAuthorizationProductNameString)
-
-	ResaleAuthorizationSummary_ManufacturerAccountId = ResaleAuthorizationSummary.AddMember("ManufacturerAccountId", _ResaleAuthorizationManufacturerAccountIdString)
-
-	ResaleAuthorizationSummary_ManufacturerLegalName = ResaleAuthorizationSummary.AddMember("ManufacturerLegalName", _ResaleAuthorizationManufacturerLegalNameString)
-
-	ResaleAuthorizationSummary_ResellerAccountID = ResaleAuthorizationSummary.AddMember("ResellerAccountID", _ResaleAuthorizationResellerAccountIDString)
-
-	ResaleAuthorizationSummary_ResellerLegalName = ResaleAuthorizationSummary.AddMember("ResellerLegalName", _ResaleAuthorizationResellerLegalNameString)
-
-	ResaleAuthorizationSummary_Status = ResaleAuthorizationSummary.AddMember("Status", ResaleAuthorizationStatusString)
-
-	ResaleAuthorizationSummary_OfferExtendedStatus = ResaleAuthorizationSummary.AddMember("OfferExtendedStatus", _ResaleAuthorizationOfferExtendedStatusString)
-
-	ResaleAuthorizationSummary_CreatedDate = ResaleAuthorizationSummary.AddMember("CreatedDate", _DateTimeISO8601)
-
-	ResaleAuthorizationSummary_AvailabilityEndDate = ResaleAuthorizationSummary.AddMember("AvailabilityEndDate", _DateTimeISO8601)
-
-	ResaleAuthorizationSummary_ResellerRole = ResaleAuthorizationSummary.AddMember("ResellerRole", ResaleAuthorizationResellerRoleString)
-
-	ResaleAuthorizationSummary_SourceAuthorization = ResaleAuthorizationSummary.AddMember("SourceAuthorization", _ResaleAuthorizationSourceAuthorizationString)
-
-	ResaleAuthorizationSummary_IssuerAccountId = ResaleAuthorizationSummary.AddMember("IssuerAccountId", _ResaleAuthorizationIssuerAccountIdString)
-
-	MachineLearningProductVisibilityString_Limited = MachineLearningProductVisibilityString.AddMember("Limited", smithyprelude.Unit)
-
-	MachineLearningProductVisibilityString_Public = MachineLearningProductVisibilityString.AddMember("Public", smithyprelude.Unit)
-
-	MachineLearningProductVisibilityString_Restricted = MachineLearningProductVisibilityString.AddMember("Restricted", smithyprelude.Unit)
-
-	MachineLearningProductVisibilityString_Draft = MachineLearningProductVisibilityString.AddMember("Draft", smithyprelude.Unit)
-
-	MachineLearningProductSummary_ProductTitle = MachineLearningProductSummary.AddMember("ProductTitle", _MachineLearningProductTitleString)
-
-	MachineLearningProductSummary_Visibility = MachineLearningProductSummary.AddMember("Visibility", MachineLearningProductVisibilityString)
-
-	OfferSetStateString_Draft = OfferSetStateString.AddMember("Draft", smithyprelude.Unit)
-
-	OfferSetStateString_Released = OfferSetStateString.AddMember("Released", smithyprelude.Unit)
-
-	_OfferSetAssociatedOfferIdsList_member = _OfferSetAssociatedOfferIdsList.AddMember("member", _OfferSetAssociatedOfferIdsString)
-
-	OfferSetSummary_Name = OfferSetSummary.AddMember("Name", _OfferSetNameString)
-
-	OfferSetSummary_State = OfferSetSummary.AddMember("State", OfferSetStateString)
-
-	OfferSetSummary_ReleaseDate = OfferSetSummary.AddMember("ReleaseDate", _DateTimeISO8601)
-
-	OfferSetSummary_AssociatedOfferIds = OfferSetSummary.AddMember("AssociatedOfferIds", _OfferSetAssociatedOfferIdsList)
-
-	OfferSetSummary_SolutionId = OfferSetSummary.AddMember("SolutionId", _OfferSetSolutionIdString)
-
-	ExpressPrivateOfferConfigurationStateString_ACTIVE = ExpressPrivateOfferConfigurationStateString.AddMember("ACTIVE", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationStateString_INACTIVE = ExpressPrivateOfferConfigurationStateString.AddMember("INACTIVE", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSummary_ProductId = ExpressPrivateOfferConfigurationSummary.AddMember("ProductId", _ExpressPrivateOfferConfigurationProductIdString)
-
-	ExpressPrivateOfferConfigurationSummary_State = ExpressPrivateOfferConfigurationSummary.AddMember("State", ExpressPrivateOfferConfigurationStateString)
-
-	SubsidiaryAuthorizationSummary_Name = SubsidiaryAuthorizationSummary.AddMember("Name", _SubsidiaryAuthorizationSummaryNameString)
-
-	SubsidiaryAuthorizationSummary_Status = SubsidiaryAuthorizationSummary.AddMember("Status", _SubsidiaryAuthorizationSummaryStatusString)
-
-	SubsidiaryAuthorizationSummary_ResourceId = SubsidiaryAuthorizationSummary.AddMember("ResourceId", _SubsidiaryAuthorizationSummaryResourceIdString)
-
-	SubsidiaryAuthorizationSummary_ResourceName = SubsidiaryAuthorizationSummary.AddMember("ResourceName", _SubsidiaryAuthorizationSummaryResourceNameString)
-
-	SubsidiaryAuthorizationSummary_SubsidiaryAccountId = SubsidiaryAuthorizationSummary.AddMember("SubsidiaryAccountId", _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString)
-
-	SubsidiaryAuthorizationSummary_CreatedDate = SubsidiaryAuthorizationSummary.AddMember("CreatedDate", _DateTimeISO8601)
-
-	EntitySummary_Name = EntitySummary.AddMember("Name", _EntityNameString)
-
-	EntitySummary_EntityType = EntitySummary.AddMember("EntityType", _EntityType)
-
-	EntitySummary_EntityId = EntitySummary.AddMember("EntityId", _ResourceId)
-
-	EntitySummary_EntityArn = EntitySummary.AddMember("EntityArn", _ARN)
-
-	EntitySummary_LastModifiedDate = EntitySummary.AddMember("LastModifiedDate", _DateTimeISO8601)
-
-	EntitySummary_Visibility = EntitySummary.AddMember("Visibility", _VisibilityValue)
-
-	EntitySummary_AmiProductSummary = EntitySummary.AddMember("AmiProductSummary", AmiProductSummary)
-
-	EntitySummary_ContainerProductSummary = EntitySummary.AddMember("ContainerProductSummary", ContainerProductSummary)
-
-	EntitySummary_DataProductSummary = EntitySummary.AddMember("DataProductSummary", DataProductSummary)
-
-	EntitySummary_SaaSProductSummary = EntitySummary.AddMember("SaaSProductSummary", SaaSProductSummary)
-
-	EntitySummary_OfferSummary = EntitySummary.AddMember("OfferSummary", OfferSummary)
-
-	EntitySummary_ResaleAuthorizationSummary = EntitySummary.AddMember("ResaleAuthorizationSummary", ResaleAuthorizationSummary)
-
-	EntitySummary_MachineLearningProductSummary = EntitySummary.AddMember("MachineLearningProductSummary", MachineLearningProductSummary)
-
-	EntitySummary_OfferSetSummary = EntitySummary.AddMember("OfferSetSummary", OfferSetSummary)
-
-	EntitySummary_ExpressPrivateOfferConfigurationSummary = EntitySummary.AddMember("ExpressPrivateOfferConfigurationSummary", ExpressPrivateOfferConfigurationSummary)
-
-	EntitySummary_SubsidiaryAuthorizationSummary = EntitySummary.AddMember("SubsidiaryAuthorizationSummary", SubsidiaryAuthorizationSummary)
-
-	_EntitySummaryList_member = _EntitySummaryList.AddMember("member", EntitySummary)
-
-	_SaaSProductEntityIdFilterValueList_member = _SaaSProductEntityIdFilterValueList.AddMember("member", _SaaSProductEntityIdString)
-
-	SaaSProductEntityIdFilter_ValueList = SaaSProductEntityIdFilter.AddMember("ValueList", _SaaSProductEntityIdFilterValueList)
-
-	_SaaSProductTitleFilterValueList_member = _SaaSProductTitleFilterValueList.AddMember("member", _SaaSProductTitleString)
-
-	SaaSProductTitleFilter_ValueList = SaaSProductTitleFilter.AddMember("ValueList", _SaaSProductTitleFilterValueList)
-
-	SaaSProductTitleFilter_WildCardValue = SaaSProductTitleFilter.AddMember("WildCardValue", _SaaSProductTitleString)
-
-	_SaaSProductVisibilityFilterValueList_member = _SaaSProductVisibilityFilterValueList.AddMember("member", SaaSProductVisibilityString)
-
-	SaaSProductVisibilityFilter_ValueList = SaaSProductVisibilityFilter.AddMember("ValueList", _SaaSProductVisibilityFilterValueList)
-
-	SaaSProductLastModifiedDateFilterDateRange_AfterValue = SaaSProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	SaaSProductLastModifiedDateFilterDateRange_BeforeValue = SaaSProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	SaaSProductLastModifiedDateFilter_DateRange = SaaSProductLastModifiedDateFilter.AddMember("DateRange", SaaSProductLastModifiedDateFilterDateRange)
-
-	SaaSProductFilters_EntityId = SaaSProductFilters.AddMember("EntityId", SaaSProductEntityIdFilter)
-
-	SaaSProductFilters_ProductTitle = SaaSProductFilters.AddMember("ProductTitle", SaaSProductTitleFilter)
-
-	SaaSProductFilters_Visibility = SaaSProductFilters.AddMember("Visibility", SaaSProductVisibilityFilter)
-
-	SaaSProductFilters_LastModifiedDate = SaaSProductFilters.AddMember("LastModifiedDate", SaaSProductLastModifiedDateFilter)
-
-	_OfferEntityIdFilterValueList_member = _OfferEntityIdFilterValueList.AddMember("member", _OfferEntityIdString)
-
-	OfferEntityIdFilter_ValueList = OfferEntityIdFilter.AddMember("ValueList", _OfferEntityIdFilterValueList)
-
-	_OfferNameFilterValueList_member = _OfferNameFilterValueList.AddMember("member", _OfferNameString)
-
-	OfferNameFilter_ValueList = OfferNameFilter.AddMember("ValueList", _OfferNameFilterValueList)
-
-	OfferNameFilter_WildCardValue = OfferNameFilter.AddMember("WildCardValue", _OfferNameString)
-
-	_OfferProductIdFilterValueList_member = _OfferProductIdFilterValueList.AddMember("member", _OfferProductIdString)
-
-	OfferProductIdFilter_ValueList = OfferProductIdFilter.AddMember("ValueList", _OfferProductIdFilterValueList)
-
-	_OfferResaleAuthorizationIdFilterValueList_member = _OfferResaleAuthorizationIdFilterValueList.AddMember("member", _OfferResaleAuthorizationIdString)
-
-	OfferResaleAuthorizationIdFilter_ValueList = OfferResaleAuthorizationIdFilter.AddMember("ValueList", _OfferResaleAuthorizationIdFilterValueList)
-
-	OfferReleaseDateFilterDateRange_AfterValue = OfferReleaseDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferReleaseDateFilterDateRange_BeforeValue = OfferReleaseDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferReleaseDateFilter_DateRange = OfferReleaseDateFilter.AddMember("DateRange", OfferReleaseDateFilterDateRange)
-
-	OfferAvailabilityEndDateFilterDateRange_AfterValue = OfferAvailabilityEndDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferAvailabilityEndDateFilterDateRange_BeforeValue = OfferAvailabilityEndDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferAvailabilityEndDateFilter_DateRange = OfferAvailabilityEndDateFilter.AddMember("DateRange", OfferAvailabilityEndDateFilterDateRange)
-
-	OfferBuyerAccountsFilter_WildCardValue = OfferBuyerAccountsFilter.AddMember("WildCardValue", _OfferBuyerAccountsFilterWildcard)
-
-	_OfferStateFilterValueList_member = _OfferStateFilterValueList.AddMember("member", OfferStateString)
-
-	OfferStateFilter_ValueList = OfferStateFilter.AddMember("ValueList", _OfferStateFilterValueList)
-
-	_OfferTargetingFilterValueList_member = _OfferTargetingFilterValueList.AddMember("member", OfferTargetingString)
-
-	OfferTargetingFilter_ValueList = OfferTargetingFilter.AddMember("ValueList", _OfferTargetingFilterValueList)
-
-	OfferLastModifiedDateFilterDateRange_AfterValue = OfferLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferLastModifiedDateFilterDateRange_BeforeValue = OfferLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferLastModifiedDateFilter_DateRange = OfferLastModifiedDateFilter.AddMember("DateRange", OfferLastModifiedDateFilterDateRange)
-
-	_OfferSetIdFilterValueList_member = _OfferSetIdFilterValueList.AddMember("member", _OfferSetIdString)
-
-	OfferSetIdFilter_ValueList = OfferSetIdFilter.AddMember("ValueList", _OfferSetIdFilterValueList)
-
-	_OfferTargetAgreementIdFilterValueList_member = _OfferTargetAgreementIdFilterValueList.AddMember("member", _OfferTargetAgreementIdString)
-
-	OfferTargetAgreementIdFilter_ValueList = OfferTargetAgreementIdFilter.AddMember("ValueList", _OfferTargetAgreementIdFilterValueList)
-
-	_OfferTargetAgreementIntentFilterValueList_member = _OfferTargetAgreementIntentFilterValueList.AddMember("member", OfferTargetAgreementIntentString)
-
-	OfferTargetAgreementIntentFilter_ValueList = OfferTargetAgreementIntentFilter.AddMember("ValueList", _OfferTargetAgreementIntentFilterValueList)
-
-	_OfferCreatedBySourceFilterValueList_member = _OfferCreatedBySourceFilterValueList.AddMember("member", OfferCreatedBySourceString)
-
-	OfferCreatedBySourceFilter_ValueList = OfferCreatedBySourceFilter.AddMember("ValueList", _OfferCreatedBySourceFilterValueList)
-
-	OfferFilters_EntityId = OfferFilters.AddMember("EntityId", OfferEntityIdFilter)
-
-	OfferFilters_Name = OfferFilters.AddMember("Name", OfferNameFilter)
-
-	OfferFilters_ProductId = OfferFilters.AddMember("ProductId", OfferProductIdFilter)
-
-	OfferFilters_ResaleAuthorizationId = OfferFilters.AddMember("ResaleAuthorizationId", OfferResaleAuthorizationIdFilter)
-
-	OfferFilters_ReleaseDate = OfferFilters.AddMember("ReleaseDate", OfferReleaseDateFilter)
-
-	OfferFilters_AvailabilityEndDate = OfferFilters.AddMember("AvailabilityEndDate", OfferAvailabilityEndDateFilter)
-
-	OfferFilters_BuyerAccounts = OfferFilters.AddMember("BuyerAccounts", OfferBuyerAccountsFilter)
-
-	OfferFilters_State = OfferFilters.AddMember("State", OfferStateFilter)
-
-	OfferFilters_Targeting = OfferFilters.AddMember("Targeting", OfferTargetingFilter)
-
-	OfferFilters_LastModifiedDate = OfferFilters.AddMember("LastModifiedDate", OfferLastModifiedDateFilter)
-
-	OfferFilters_OfferSetId = OfferFilters.AddMember("OfferSetId", OfferSetIdFilter)
-
-	OfferFilters_TargetAgreementId = OfferFilters.AddMember("TargetAgreementId", OfferTargetAgreementIdFilter)
-
-	OfferFilters_TargetAgreementIntent = OfferFilters.AddMember("TargetAgreementIntent", OfferTargetAgreementIntentFilter)
-
-	OfferFilters_CreatedBySource = OfferFilters.AddMember("CreatedBySource", OfferCreatedBySourceFilter)
-
-	_ResaleAuthorizationEntityIdFilterValueList_member = _ResaleAuthorizationEntityIdFilterValueList.AddMember("member", _ResaleAuthorizationEntityIdString)
-
-	ResaleAuthorizationEntityIdFilter_ValueList = ResaleAuthorizationEntityIdFilter.AddMember("ValueList", _ResaleAuthorizationEntityIdFilterValueList)
-
-	_ResaleAuthorizationNameFilterValueList_member = _ResaleAuthorizationNameFilterValueList.AddMember("member", _ResaleAuthorizationNameString)
-
-	ResaleAuthorizationNameFilter_ValueList = ResaleAuthorizationNameFilter.AddMember("ValueList", _ResaleAuthorizationNameFilterValueList)
-
-	ResaleAuthorizationNameFilter_WildCardValue = ResaleAuthorizationNameFilter.AddMember("WildCardValue", _ResaleAuthorizationNameFilterWildcard)
-
-	_ResaleAuthorizationProductIdFilterValueList_member = _ResaleAuthorizationProductIdFilterValueList.AddMember("member", _ResaleAuthorizationProductIdString)
-
-	ResaleAuthorizationProductIdFilter_ValueList = ResaleAuthorizationProductIdFilter.AddMember("ValueList", _ResaleAuthorizationProductIdFilterValueList)
-
-	ResaleAuthorizationProductIdFilter_WildCardValue = ResaleAuthorizationProductIdFilter.AddMember("WildCardValue", _ResaleAuthorizationProductIdFilterWildcard)
-
-	ResaleAuthorizationCreatedDateFilterDateRange_AfterValue = ResaleAuthorizationCreatedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue = ResaleAuthorizationCreatedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	_ResaleAuthorizationCreatedDateFilterValueList_member = _ResaleAuthorizationCreatedDateFilterValueList.AddMember("member", _DateTimeISO8601)
-
-	ResaleAuthorizationCreatedDateFilter_DateRange = ResaleAuthorizationCreatedDateFilter.AddMember("DateRange", ResaleAuthorizationCreatedDateFilterDateRange)
-
-	ResaleAuthorizationCreatedDateFilter_ValueList = ResaleAuthorizationCreatedDateFilter.AddMember("ValueList", _ResaleAuthorizationCreatedDateFilterValueList)
-
-	ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue = ResaleAuthorizationAvailabilityEndDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue = ResaleAuthorizationAvailabilityEndDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	_ResaleAuthorizationAvailabilityEndDateFilterValueList_member = _ResaleAuthorizationAvailabilityEndDateFilterValueList.AddMember("member", _DateTimeISO8601)
-
-	ResaleAuthorizationAvailabilityEndDateFilter_DateRange = ResaleAuthorizationAvailabilityEndDateFilter.AddMember("DateRange", ResaleAuthorizationAvailabilityEndDateFilterDateRange)
-
-	ResaleAuthorizationAvailabilityEndDateFilter_ValueList = ResaleAuthorizationAvailabilityEndDateFilter.AddMember("ValueList", _ResaleAuthorizationAvailabilityEndDateFilterValueList)
-
-	_ResaleAuthorizationManufacturerAccountIdFilterValueList_member = _ResaleAuthorizationManufacturerAccountIdFilterValueList.AddMember("member", _ResaleAuthorizationManufacturerAccountIdString)
-
-	ResaleAuthorizationManufacturerAccountIdFilter_ValueList = ResaleAuthorizationManufacturerAccountIdFilter.AddMember("ValueList", _ResaleAuthorizationManufacturerAccountIdFilterValueList)
-
-	ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue = ResaleAuthorizationManufacturerAccountIdFilter.AddMember("WildCardValue", _ResaleAuthorizationManufacturerAccountIdFilterWildcard)
-
-	_ResaleAuthorizationProductNameFilterValueList_member = _ResaleAuthorizationProductNameFilterValueList.AddMember("member", _ResaleAuthorizationProductNameString)
-
-	ResaleAuthorizationProductNameFilter_ValueList = ResaleAuthorizationProductNameFilter.AddMember("ValueList", _ResaleAuthorizationProductNameFilterValueList)
-
-	ResaleAuthorizationProductNameFilter_WildCardValue = ResaleAuthorizationProductNameFilter.AddMember("WildCardValue", _ResaleAuthorizationProductNameFilterWildcard)
-
-	_ResaleAuthorizationManufacturerLegalNameFilterValueList_member = _ResaleAuthorizationManufacturerLegalNameFilterValueList.AddMember("member", _ResaleAuthorizationManufacturerLegalNameString)
-
-	ResaleAuthorizationManufacturerLegalNameFilter_ValueList = ResaleAuthorizationManufacturerLegalNameFilter.AddMember("ValueList", _ResaleAuthorizationManufacturerLegalNameFilterValueList)
-
-	ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue = ResaleAuthorizationManufacturerLegalNameFilter.AddMember("WildCardValue", _ResaleAuthorizationManufacturerLegalNameFilterWildcard)
-
-	_ResaleAuthorizationResellerAccountIDFilterValueList_member = _ResaleAuthorizationResellerAccountIDFilterValueList.AddMember("member", _ResaleAuthorizationResellerAccountIDString)
-
-	ResaleAuthorizationResellerAccountIDFilter_ValueList = ResaleAuthorizationResellerAccountIDFilter.AddMember("ValueList", _ResaleAuthorizationResellerAccountIDFilterValueList)
-
-	ResaleAuthorizationResellerAccountIDFilter_WildCardValue = ResaleAuthorizationResellerAccountIDFilter.AddMember("WildCardValue", _ResaleAuthorizationResellerAccountIDFilterWildcard)
-
-	_ResaleAuthorizationResellerLegalNameFilterValueList_member = _ResaleAuthorizationResellerLegalNameFilterValueList.AddMember("member", _ResaleAuthorizationResellerLegalNameString)
-
-	ResaleAuthorizationResellerLegalNameFilter_ValueList = ResaleAuthorizationResellerLegalNameFilter.AddMember("ValueList", _ResaleAuthorizationResellerLegalNameFilterValueList)
-
-	ResaleAuthorizationResellerLegalNameFilter_WildCardValue = ResaleAuthorizationResellerLegalNameFilter.AddMember("WildCardValue", _ResaleAuthorizationResellerLegalNameFilterWildcard)
-
-	_ResaleAuthorizationStatusFilterValueList_member = _ResaleAuthorizationStatusFilterValueList.AddMember("member", ResaleAuthorizationStatusString)
-
-	ResaleAuthorizationStatusFilter_ValueList = ResaleAuthorizationStatusFilter.AddMember("ValueList", _ResaleAuthorizationStatusFilterValueList)
-
-	_ResaleAuthorizationOfferExtendedStatusFilterValueList_member = _ResaleAuthorizationOfferExtendedStatusFilterValueList.AddMember("member", _ResaleAuthorizationOfferExtendedStatusString)
-
-	ResaleAuthorizationOfferExtendedStatusFilter_ValueList = ResaleAuthorizationOfferExtendedStatusFilter.AddMember("ValueList", _ResaleAuthorizationOfferExtendedStatusFilterValueList)
-
-	ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue = ResaleAuthorizationLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue = ResaleAuthorizationLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	ResaleAuthorizationLastModifiedDateFilter_DateRange = ResaleAuthorizationLastModifiedDateFilter.AddMember("DateRange", ResaleAuthorizationLastModifiedDateFilterDateRange)
-
-	_ResaleAuthorizationResellerRoleFilterValueList_member = _ResaleAuthorizationResellerRoleFilterValueList.AddMember("member", ResaleAuthorizationResellerRoleString)
-
-	ResaleAuthorizationResellerRoleFilter_ValueList = ResaleAuthorizationResellerRoleFilter.AddMember("ValueList", _ResaleAuthorizationResellerRoleFilterValueList)
-
-	_ResaleAuthorizationSourceAuthorizationFilterValueList_member = _ResaleAuthorizationSourceAuthorizationFilterValueList.AddMember("member", _ResaleAuthorizationSourceAuthorizationString)
-
-	ResaleAuthorizationSourceAuthorizationFilter_ValueList = ResaleAuthorizationSourceAuthorizationFilter.AddMember("ValueList", _ResaleAuthorizationSourceAuthorizationFilterValueList)
-
-	_ResaleAuthorizationIssuerAccountIdFilterValueList_member = _ResaleAuthorizationIssuerAccountIdFilterValueList.AddMember("member", _ResaleAuthorizationIssuerAccountIdString)
-
-	ResaleAuthorizationIssuerAccountIdFilter_ValueList = ResaleAuthorizationIssuerAccountIdFilter.AddMember("ValueList", _ResaleAuthorizationIssuerAccountIdFilterValueList)
-
-	ResaleAuthorizationFilters_EntityId = ResaleAuthorizationFilters.AddMember("EntityId", ResaleAuthorizationEntityIdFilter)
-
-	ResaleAuthorizationFilters_Name = ResaleAuthorizationFilters.AddMember("Name", ResaleAuthorizationNameFilter)
-
-	ResaleAuthorizationFilters_ProductId = ResaleAuthorizationFilters.AddMember("ProductId", ResaleAuthorizationProductIdFilter)
-
-	ResaleAuthorizationFilters_CreatedDate = ResaleAuthorizationFilters.AddMember("CreatedDate", ResaleAuthorizationCreatedDateFilter)
-
-	ResaleAuthorizationFilters_AvailabilityEndDate = ResaleAuthorizationFilters.AddMember("AvailabilityEndDate", ResaleAuthorizationAvailabilityEndDateFilter)
-
-	ResaleAuthorizationFilters_ManufacturerAccountId = ResaleAuthorizationFilters.AddMember("ManufacturerAccountId", ResaleAuthorizationManufacturerAccountIdFilter)
-
-	ResaleAuthorizationFilters_ProductName = ResaleAuthorizationFilters.AddMember("ProductName", ResaleAuthorizationProductNameFilter)
-
-	ResaleAuthorizationFilters_ManufacturerLegalName = ResaleAuthorizationFilters.AddMember("ManufacturerLegalName", ResaleAuthorizationManufacturerLegalNameFilter)
-
-	ResaleAuthorizationFilters_ResellerAccountID = ResaleAuthorizationFilters.AddMember("ResellerAccountID", ResaleAuthorizationResellerAccountIDFilter)
-
-	ResaleAuthorizationFilters_ResellerLegalName = ResaleAuthorizationFilters.AddMember("ResellerLegalName", ResaleAuthorizationResellerLegalNameFilter)
-
-	ResaleAuthorizationFilters_Status = ResaleAuthorizationFilters.AddMember("Status", ResaleAuthorizationStatusFilter)
-
-	ResaleAuthorizationFilters_OfferExtendedStatus = ResaleAuthorizationFilters.AddMember("OfferExtendedStatus", ResaleAuthorizationOfferExtendedStatusFilter)
-
-	ResaleAuthorizationFilters_LastModifiedDate = ResaleAuthorizationFilters.AddMember("LastModifiedDate", ResaleAuthorizationLastModifiedDateFilter)
-
-	ResaleAuthorizationFilters_ResellerRole = ResaleAuthorizationFilters.AddMember("ResellerRole", ResaleAuthorizationResellerRoleFilter)
-
-	ResaleAuthorizationFilters_SourceAuthorization = ResaleAuthorizationFilters.AddMember("SourceAuthorization", ResaleAuthorizationSourceAuthorizationFilter)
-
-	ResaleAuthorizationFilters_IssuerAccountId = ResaleAuthorizationFilters.AddMember("IssuerAccountId", ResaleAuthorizationIssuerAccountIdFilter)
-
-	_MachineLearningProductEntityIdFilterValueList_member = _MachineLearningProductEntityIdFilterValueList.AddMember("member", _MachineLearningProductEntityIdString)
-
-	MachineLearningProductEntityIdFilter_ValueList = MachineLearningProductEntityIdFilter.AddMember("ValueList", _MachineLearningProductEntityIdFilterValueList)
-
-	MachineLearningProductLastModifiedDateFilterDateRange_AfterValue = MachineLearningProductLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue = MachineLearningProductLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	MachineLearningProductLastModifiedDateFilter_DateRange = MachineLearningProductLastModifiedDateFilter.AddMember("DateRange", MachineLearningProductLastModifiedDateFilterDateRange)
-
-	_MachineLearningProductTitleFilterValueList_member = _MachineLearningProductTitleFilterValueList.AddMember("member", _MachineLearningProductTitleString)
-
-	MachineLearningProductTitleFilter_ValueList = MachineLearningProductTitleFilter.AddMember("ValueList", _MachineLearningProductTitleFilterValueList)
-
-	MachineLearningProductTitleFilter_WildCardValue = MachineLearningProductTitleFilter.AddMember("WildCardValue", _MachineLearningProductTitleString)
-
-	_MachineLearningProductVisibilityFilterValueList_member = _MachineLearningProductVisibilityFilterValueList.AddMember("member", MachineLearningProductVisibilityString)
-
-	MachineLearningProductVisibilityFilter_ValueList = MachineLearningProductVisibilityFilter.AddMember("ValueList", _MachineLearningProductVisibilityFilterValueList)
-
-	MachineLearningProductFilters_EntityId = MachineLearningProductFilters.AddMember("EntityId", MachineLearningProductEntityIdFilter)
-
-	MachineLearningProductFilters_LastModifiedDate = MachineLearningProductFilters.AddMember("LastModifiedDate", MachineLearningProductLastModifiedDateFilter)
-
-	MachineLearningProductFilters_ProductTitle = MachineLearningProductFilters.AddMember("ProductTitle", MachineLearningProductTitleFilter)
-
-	MachineLearningProductFilters_Visibility = MachineLearningProductFilters.AddMember("Visibility", MachineLearningProductVisibilityFilter)
-
-	_OfferSetEntityIdFilterValueList_member = _OfferSetEntityIdFilterValueList.AddMember("member", _OfferSetEntityIdString)
-
-	OfferSetEntityIdFilter_ValueList = OfferSetEntityIdFilter.AddMember("ValueList", _OfferSetEntityIdFilterValueList)
-
-	_OfferSetNameFilterValueList_member = _OfferSetNameFilterValueList.AddMember("member", _OfferSetNameString)
-
-	OfferSetNameFilter_ValueList = OfferSetNameFilter.AddMember("ValueList", _OfferSetNameFilterValueList)
-
-	_OfferSetStateFilterValueList_member = _OfferSetStateFilterValueList.AddMember("member", OfferSetStateString)
-
-	OfferSetStateFilter_ValueList = OfferSetStateFilter.AddMember("ValueList", _OfferSetStateFilterValueList)
-
-	OfferSetReleaseDateFilterDateRange_AfterValue = OfferSetReleaseDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferSetReleaseDateFilterDateRange_BeforeValue = OfferSetReleaseDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferSetReleaseDateFilter_DateRange = OfferSetReleaseDateFilter.AddMember("DateRange", OfferSetReleaseDateFilterDateRange)
-
-	_OfferSetAssociatedOfferIdsFilterValueList_member = _OfferSetAssociatedOfferIdsFilterValueList.AddMember("member", _OfferSetAssociatedOfferIdsString)
-
-	OfferSetAssociatedOfferIdsFilter_ValueList = OfferSetAssociatedOfferIdsFilter.AddMember("ValueList", _OfferSetAssociatedOfferIdsFilterValueList)
-
-	_OfferSetSolutionIdFilterValueList_member = _OfferSetSolutionIdFilterValueList.AddMember("member", _OfferSetSolutionIdString)
-
-	OfferSetSolutionIdFilter_ValueList = OfferSetSolutionIdFilter.AddMember("ValueList", _OfferSetSolutionIdFilterValueList)
-
-	OfferSetLastModifiedDateFilterDateRange_AfterValue = OfferSetLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	OfferSetLastModifiedDateFilterDateRange_BeforeValue = OfferSetLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	OfferSetLastModifiedDateFilter_DateRange = OfferSetLastModifiedDateFilter.AddMember("DateRange", OfferSetLastModifiedDateFilterDateRange)
-
-	OfferSetFilters_EntityId = OfferSetFilters.AddMember("EntityId", OfferSetEntityIdFilter)
-
-	OfferSetFilters_Name = OfferSetFilters.AddMember("Name", OfferSetNameFilter)
-
-	OfferSetFilters_State = OfferSetFilters.AddMember("State", OfferSetStateFilter)
-
-	OfferSetFilters_ReleaseDate = OfferSetFilters.AddMember("ReleaseDate", OfferSetReleaseDateFilter)
-
-	OfferSetFilters_AssociatedOfferIds = OfferSetFilters.AddMember("AssociatedOfferIds", OfferSetAssociatedOfferIdsFilter)
-
-	OfferSetFilters_SolutionId = OfferSetFilters.AddMember("SolutionId", OfferSetSolutionIdFilter)
-
-	OfferSetFilters_LastModifiedDate = OfferSetFilters.AddMember("LastModifiedDate", OfferSetLastModifiedDateFilter)
-
-	_ExpressPrivateOfferConfigurationEntityIdFilterValueList_member = _ExpressPrivateOfferConfigurationEntityIdFilterValueList.AddMember("member", _ExpressPrivateOfferConfigurationEntityIdString)
-
-	ExpressPrivateOfferConfigurationEntityIdFilter_ValueList = ExpressPrivateOfferConfigurationEntityIdFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationEntityIdFilterValueList)
-
-	_ExpressPrivateOfferConfigurationProductIdFilterValueList_member = _ExpressPrivateOfferConfigurationProductIdFilterValueList.AddMember("member", _ExpressPrivateOfferConfigurationProductIdString)
-
-	ExpressPrivateOfferConfigurationProductIdFilter_ValueList = ExpressPrivateOfferConfigurationProductIdFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationProductIdFilterValueList)
-
-	_ExpressPrivateOfferConfigurationStateFilterValueList_member = _ExpressPrivateOfferConfigurationStateFilterValueList.AddMember("member", ExpressPrivateOfferConfigurationStateString)
-
-	ExpressPrivateOfferConfigurationStateFilter_ValueList = ExpressPrivateOfferConfigurationStateFilter.AddMember("ValueList", _ExpressPrivateOfferConfigurationStateFilterValueList)
-
-	ExpressPrivateOfferConfigurationFilters_EntityId = ExpressPrivateOfferConfigurationFilters.AddMember("EntityId", ExpressPrivateOfferConfigurationEntityIdFilter)
-
-	ExpressPrivateOfferConfigurationFilters_ProductId = ExpressPrivateOfferConfigurationFilters.AddMember("ProductId", ExpressPrivateOfferConfigurationProductIdFilter)
-
-	ExpressPrivateOfferConfigurationFilters_State = ExpressPrivateOfferConfigurationFilters.AddMember("State", ExpressPrivateOfferConfigurationStateFilter)
-
-	_SubsidiaryAuthorizationEntityIdFilterValueList_member = _SubsidiaryAuthorizationEntityIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationEntityIdString)
-
-	SubsidiaryAuthorizationEntityIdFilter_ValueList = SubsidiaryAuthorizationEntityIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationEntityIdFilterValueList)
-
-	SubsidiaryAuthorizationStatusString_Draft = SubsidiaryAuthorizationStatusString.AddMember("Draft", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationStatusString_Active = SubsidiaryAuthorizationStatusString.AddMember("Active", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationStatusString_Restricted = SubsidiaryAuthorizationStatusString.AddMember("Restricted", smithyprelude.Unit)
-
-	_SubsidiaryAuthorizationStatusFilterValueList_member = _SubsidiaryAuthorizationStatusFilterValueList.AddMember("member", SubsidiaryAuthorizationStatusString)
-
-	SubsidiaryAuthorizationStatusFilter_ValueList = SubsidiaryAuthorizationStatusFilter.AddMember("ValueList", _SubsidiaryAuthorizationStatusFilterValueList)
-
-	_SubsidiaryAuthorizationResourceIdFilterValueList_member = _SubsidiaryAuthorizationResourceIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationResourceIdString)
-
-	SubsidiaryAuthorizationResourceIdFilter_ValueList = SubsidiaryAuthorizationResourceIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationResourceIdFilterValueList)
-
-	_SubsidiaryAuthorizationResourceNameFilterValueList_member = _SubsidiaryAuthorizationResourceNameFilterValueList.AddMember("member", _SubsidiaryAuthorizationResourceNameString)
-
-	SubsidiaryAuthorizationResourceNameFilter_ValueList = SubsidiaryAuthorizationResourceNameFilter.AddMember("ValueList", _SubsidiaryAuthorizationResourceNameFilterValueList)
-
-	SubsidiaryAuthorizationResourceNameFilter_WildCardValue = SubsidiaryAuthorizationResourceNameFilter.AddMember("WildCardValue", _SubsidiaryAuthorizationResourceNameFilterWildcard)
-
-	_SubsidiaryAuthorizationNameFilterValueList_member = _SubsidiaryAuthorizationNameFilterValueList.AddMember("member", _SubsidiaryAuthorizationNameString)
-
-	SubsidiaryAuthorizationNameFilter_ValueList = SubsidiaryAuthorizationNameFilter.AddMember("ValueList", _SubsidiaryAuthorizationNameFilterValueList)
-
-	SubsidiaryAuthorizationNameFilter_WildCardValue = SubsidiaryAuthorizationNameFilter.AddMember("WildCardValue", _SubsidiaryAuthorizationNameFilterWildcard)
-
-	_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member = _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList.AddMember("member", _SubsidiaryAuthorizationSubsidiaryAccountIdString)
-
-	SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList = SubsidiaryAuthorizationSubsidiaryAccountIdFilter.AddMember("ValueList", _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList)
-
-	SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue = SubsidiaryAuthorizationCreatedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue = SubsidiaryAuthorizationCreatedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationCreatedDateFilter_DateRange = SubsidiaryAuthorizationCreatedDateFilter.AddMember("DateRange", SubsidiaryAuthorizationCreatedDateFilterDateRange)
-
-	SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue = SubsidiaryAuthorizationLastModifiedDateFilterDateRange.AddMember("AfterValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue = SubsidiaryAuthorizationLastModifiedDateFilterDateRange.AddMember("BeforeValue", _DateTimeISO8601)
-
-	SubsidiaryAuthorizationLastModifiedDateFilter_DateRange = SubsidiaryAuthorizationLastModifiedDateFilter.AddMember("DateRange", SubsidiaryAuthorizationLastModifiedDateFilterDateRange)
-
-	SubsidiaryAuthorizationFilters_EntityId = SubsidiaryAuthorizationFilters.AddMember("EntityId", SubsidiaryAuthorizationEntityIdFilter)
-
-	SubsidiaryAuthorizationFilters_Status = SubsidiaryAuthorizationFilters.AddMember("Status", SubsidiaryAuthorizationStatusFilter)
-
-	SubsidiaryAuthorizationFilters_ResourceId = SubsidiaryAuthorizationFilters.AddMember("ResourceId", SubsidiaryAuthorizationResourceIdFilter)
-
-	SubsidiaryAuthorizationFilters_ResourceName = SubsidiaryAuthorizationFilters.AddMember("ResourceName", SubsidiaryAuthorizationResourceNameFilter)
-
-	SubsidiaryAuthorizationFilters_Name = SubsidiaryAuthorizationFilters.AddMember("Name", SubsidiaryAuthorizationNameFilter)
-
-	SubsidiaryAuthorizationFilters_SubsidiaryAccountId = SubsidiaryAuthorizationFilters.AddMember("SubsidiaryAccountId", SubsidiaryAuthorizationSubsidiaryAccountIdFilter)
-
-	SubsidiaryAuthorizationFilters_CreatedDate = SubsidiaryAuthorizationFilters.AddMember("CreatedDate", SubsidiaryAuthorizationCreatedDateFilter)
-
-	SubsidiaryAuthorizationFilters_LastModifiedDate = SubsidiaryAuthorizationFilters.AddMember("LastModifiedDate", SubsidiaryAuthorizationLastModifiedDateFilter)
-
-	EntityTypeFilters_DataProductFilters = EntityTypeFilters.AddMember("DataProductFilters", DataProductFilters)
-
-	EntityTypeFilters_SaaSProductFilters = EntityTypeFilters.AddMember("SaaSProductFilters", SaaSProductFilters)
-
-	EntityTypeFilters_AmiProductFilters = EntityTypeFilters.AddMember("AmiProductFilters", AmiProductFilters)
-
-	EntityTypeFilters_OfferFilters = EntityTypeFilters.AddMember("OfferFilters", OfferFilters)
-
-	EntityTypeFilters_ContainerProductFilters = EntityTypeFilters.AddMember("ContainerProductFilters", ContainerProductFilters)
-
-	EntityTypeFilters_ResaleAuthorizationFilters = EntityTypeFilters.AddMember("ResaleAuthorizationFilters", ResaleAuthorizationFilters)
-
-	EntityTypeFilters_MachineLearningProductFilters = EntityTypeFilters.AddMember("MachineLearningProductFilters", MachineLearningProductFilters)
-
-	EntityTypeFilters_OfferSetFilters = EntityTypeFilters.AddMember("OfferSetFilters", OfferSetFilters)
-
-	EntityTypeFilters_ExpressPrivateOfferConfigurationFilters = EntityTypeFilters.AddMember("ExpressPrivateOfferConfigurationFilters", ExpressPrivateOfferConfigurationFilters)
-
-	EntityTypeFilters_SubsidiaryAuthorizationFilters = EntityTypeFilters.AddMember("SubsidiaryAuthorizationFilters", SubsidiaryAuthorizationFilters)
-
-	SaaSProductSortBy_EntityId = SaaSProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	SaaSProductSortBy_ProductTitle = SaaSProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	SaaSProductSortBy_Visibility = SaaSProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	SaaSProductSortBy_LastModifiedDate = SaaSProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	SaaSProductSortBy_DeliveryOptionTypes = SaaSProductSortBy.AddMember("DeliveryOptionTypes", smithyprelude.Unit)
-
-	SaaSProductSort_SortBy = SaaSProductSort.AddMember("SortBy", SaaSProductSortBy)
-
-	SaaSProductSort_SortOrder = SaaSProductSort.AddMember("SortOrder", SortOrder)
-
-	OfferSortBy_EntityId = OfferSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	OfferSortBy_Name = OfferSortBy.AddMember("Name", smithyprelude.Unit)
-
-	OfferSortBy_ProductId = OfferSortBy.AddMember("ProductId", smithyprelude.Unit)
-
-	OfferSortBy_ResaleAuthorizationId = OfferSortBy.AddMember("ResaleAuthorizationId", smithyprelude.Unit)
-
-	OfferSortBy_ReleaseDate = OfferSortBy.AddMember("ReleaseDate", smithyprelude.Unit)
-
-	OfferSortBy_AvailabilityEndDate = OfferSortBy.AddMember("AvailabilityEndDate", smithyprelude.Unit)
-
-	OfferSortBy_BuyerAccounts = OfferSortBy.AddMember("BuyerAccounts", smithyprelude.Unit)
-
-	OfferSortBy_State = OfferSortBy.AddMember("State", smithyprelude.Unit)
-
-	OfferSortBy_Targeting = OfferSortBy.AddMember("Targeting", smithyprelude.Unit)
-
-	OfferSortBy_LastModifiedDate = OfferSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	OfferSortBy_OfferSetId = OfferSortBy.AddMember("OfferSetId", smithyprelude.Unit)
-
-	OfferSortBy_TargetAgreementId = OfferSortBy.AddMember("TargetAgreementId", smithyprelude.Unit)
-
-	OfferSortBy_TargetAgreementIntent = OfferSortBy.AddMember("TargetAgreementIntent", smithyprelude.Unit)
-
-	OfferSortBy_CreatedBySource = OfferSortBy.AddMember("CreatedBySource", smithyprelude.Unit)
-
-	OfferSort_SortBy = OfferSort.AddMember("SortBy", OfferSortBy)
-
-	OfferSort_SortOrder = OfferSort.AddMember("SortOrder", SortOrder)
-
-	ResaleAuthorizationSortBy_EntityId = ResaleAuthorizationSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_Name = ResaleAuthorizationSortBy.AddMember("Name", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ProductId = ResaleAuthorizationSortBy.AddMember("ProductId", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ProductName = ResaleAuthorizationSortBy.AddMember("ProductName", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ManufacturerAccountId = ResaleAuthorizationSortBy.AddMember("ManufacturerAccountId", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ManufacturerLegalName = ResaleAuthorizationSortBy.AddMember("ManufacturerLegalName", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ResellerAccountID = ResaleAuthorizationSortBy.AddMember("ResellerAccountID", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ResellerLegalName = ResaleAuthorizationSortBy.AddMember("ResellerLegalName", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_Status = ResaleAuthorizationSortBy.AddMember("Status", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_OfferExtendedStatus = ResaleAuthorizationSortBy.AddMember("OfferExtendedStatus", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_CreatedDate = ResaleAuthorizationSortBy.AddMember("CreatedDate", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_AvailabilityEndDate = ResaleAuthorizationSortBy.AddMember("AvailabilityEndDate", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_LastModifiedDate = ResaleAuthorizationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_ResellerRole = ResaleAuthorizationSortBy.AddMember("ResellerRole", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_SourceAuthorization = ResaleAuthorizationSortBy.AddMember("SourceAuthorization", smithyprelude.Unit)
-
-	ResaleAuthorizationSortBy_IssuerAccountId = ResaleAuthorizationSortBy.AddMember("IssuerAccountId", smithyprelude.Unit)
-
-	ResaleAuthorizationSort_SortBy = ResaleAuthorizationSort.AddMember("SortBy", ResaleAuthorizationSortBy)
-
-	ResaleAuthorizationSort_SortOrder = ResaleAuthorizationSort.AddMember("SortOrder", SortOrder)
-
-	MachineLearningProductSortBy_EntityId = MachineLearningProductSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	MachineLearningProductSortBy_LastModifiedDate = MachineLearningProductSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	MachineLearningProductSortBy_ProductTitle = MachineLearningProductSortBy.AddMember("ProductTitle", smithyprelude.Unit)
-
-	MachineLearningProductSortBy_Visibility = MachineLearningProductSortBy.AddMember("Visibility", smithyprelude.Unit)
-
-	MachineLearningProductSort_SortBy = MachineLearningProductSort.AddMember("SortBy", MachineLearningProductSortBy)
-
-	MachineLearningProductSort_SortOrder = MachineLearningProductSort.AddMember("SortOrder", SortOrder)
-
-	OfferSetSortBy_Name = OfferSetSortBy.AddMember("Name", smithyprelude.Unit)
-
-	OfferSetSortBy_State = OfferSetSortBy.AddMember("State", smithyprelude.Unit)
-
-	OfferSetSortBy_ReleaseDate = OfferSetSortBy.AddMember("ReleaseDate", smithyprelude.Unit)
-
-	OfferSetSortBy_SolutionId = OfferSetSortBy.AddMember("SolutionId", smithyprelude.Unit)
-
-	OfferSetSortBy_EntityId = OfferSetSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	OfferSetSortBy_LastModifiedDate = OfferSetSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	OfferSetSort_SortBy = OfferSetSort.AddMember("SortBy", OfferSetSortBy)
-
-	OfferSetSort_SortOrder = OfferSetSort.AddMember("SortOrder", SortOrder)
-
-	ExpressPrivateOfferConfigurationSortBy_EntityId = ExpressPrivateOfferConfigurationSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSortBy_LastModifiedDate = ExpressPrivateOfferConfigurationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSortBy_ProductId = ExpressPrivateOfferConfigurationSortBy.AddMember("ProductId", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSortBy_State = ExpressPrivateOfferConfigurationSortBy.AddMember("State", smithyprelude.Unit)
-
-	ExpressPrivateOfferConfigurationSort_SortBy = ExpressPrivateOfferConfigurationSort.AddMember("SortBy", ExpressPrivateOfferConfigurationSortBy)
-
-	ExpressPrivateOfferConfigurationSort_SortOrder = ExpressPrivateOfferConfigurationSort.AddMember("SortOrder", SortOrder)
-
-	SubsidiaryAuthorizationSortBy_EntityId = SubsidiaryAuthorizationSortBy.AddMember("EntityId", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_Status = SubsidiaryAuthorizationSortBy.AddMember("Status", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_ResourceId = SubsidiaryAuthorizationSortBy.AddMember("ResourceId", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_SubsidiaryAccountId = SubsidiaryAuthorizationSortBy.AddMember("SubsidiaryAccountId", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_CreatedDate = SubsidiaryAuthorizationSortBy.AddMember("CreatedDate", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSortBy_LastModifiedDate = SubsidiaryAuthorizationSortBy.AddMember("LastModifiedDate", smithyprelude.Unit)
-
-	SubsidiaryAuthorizationSort_SortBy = SubsidiaryAuthorizationSort.AddMember("SortBy", SubsidiaryAuthorizationSortBy)
-
-	SubsidiaryAuthorizationSort_SortOrder = SubsidiaryAuthorizationSort.AddMember("SortOrder", SortOrder)
-
-	EntityTypeSort_DataProductSort = EntityTypeSort.AddMember("DataProductSort", DataProductSort)
-
-	EntityTypeSort_SaaSProductSort = EntityTypeSort.AddMember("SaaSProductSort", SaaSProductSort)
-
-	EntityTypeSort_AmiProductSort = EntityTypeSort.AddMember("AmiProductSort", AmiProductSort)
-
-	EntityTypeSort_OfferSort = EntityTypeSort.AddMember("OfferSort", OfferSort)
-
-	EntityTypeSort_ContainerProductSort = EntityTypeSort.AddMember("ContainerProductSort", ContainerProductSort)
-
-	EntityTypeSort_ResaleAuthorizationSort = EntityTypeSort.AddMember("ResaleAuthorizationSort", ResaleAuthorizationSort)
-
-	EntityTypeSort_MachineLearningProductSort = EntityTypeSort.AddMember("MachineLearningProductSort", MachineLearningProductSort)
-
-	EntityTypeSort_OfferSetSort = EntityTypeSort.AddMember("OfferSetSort", OfferSetSort)
-
-	EntityTypeSort_ExpressPrivateOfferConfigurationSort = EntityTypeSort.AddMember("ExpressPrivateOfferConfigurationSort", ExpressPrivateOfferConfigurationSort)
-
-	EntityTypeSort_SubsidiaryAuthorizationSort = EntityTypeSort.AddMember("SubsidiaryAuthorizationSort", SubsidiaryAuthorizationSort)
-
-	_Errors_key = _Errors.AddMember("key", _EntityId)
-
-	_Errors_value = _Errors.AddMember("value", BatchDescribeErrorDetail)
-
-	_ValueList_member = _ValueList.AddMember("member", _FilterValueContent)
-
-	Filter_Name = Filter.AddMember("Name", _FilterName)
-
-	Filter_ValueList = Filter.AddMember("ValueList", _ValueList)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	FrameworkFilters_AMISecurityFilters = FrameworkFilters.AddMember("AMISecurityFilters", AMISecurityFilters)
-
-	FrameworkFilters_ContainerSecurityFilters = FrameworkFilters.AddMember("ContainerSecurityFilters", ContainerSecurityFilters)
-
-	Intent_VALIDATE = Intent.AddMember("VALIDATE", smithyprelude.Unit)
-
-	Intent_APPLY = Intent.AddMember("APPLY", smithyprelude.Unit)
-
-	InternalServiceException_Message = InternalServiceException.AddMember("Message", _ExceptionMessageContent)
-
-	OwnershipType_SELF = OwnershipType.AddMember("SELF", smithyprelude.Unit)
-
-	OwnershipType_SHARED = OwnershipType.AddMember("SHARED", smithyprelude.Unit)
-
-	_RequestedChangeList_member = _RequestedChangeList.AddMember("member", Change)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", _ExceptionMessageContent)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ExceptionMessageContent)
-
-	ResourceNotSupportedException_Message = ResourceNotSupportedException.AddMember("Message", _ExceptionMessageContent)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", _ExceptionMessageContent)
-
-	Sort_SortBy = Sort.AddMember("SortBy", _SortBy)
-
-	Sort_SortOrder = Sort.AddMember("SortOrder", SortOrder)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", _ExceptionMessageContent)
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_Reason = ValidationExceptionField.AddMember("Reason", ValidationExceptionReason)
-
-	ValidationExceptionField_EntityType = ValidationExceptionField.AddMember("EntityType", _EntityType)
-
-	ValidationExceptionField_EntityId = ValidationExceptionField.AddMember("EntityId", _EntityId)
-
-	ValidationExceptionField_ChangeType = ValidationExceptionField.AddMember("ChangeType", _ChangeType)
-
-	ValidationExceptionField_Field = ValidationExceptionField.AddMember("Field", _FieldName)
-
-	ValidationExceptionField_Message = ValidationExceptionField.AddMember("Message", _ExceptionMessageContent)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _ExceptionMessageContent)
-
-	ValidationException_ValidationExceptionFieldList = ValidationException.AddMember("ValidationExceptionFieldList", _ValidationExceptionFieldList)
-
-	BatchDescribeEntitiesRequest_EntityRequestList = BatchDescribeEntitiesRequest.AddMember("EntityRequestList", _EntityRequestList)
-
-	BatchDescribeEntitiesResponse_EntityDetails = BatchDescribeEntitiesResponse.AddMember("EntityDetails", _EntityDetails)
-
-	BatchDescribeEntitiesResponse_Errors = BatchDescribeEntitiesResponse.AddMember("Errors", _Errors)
-
-	CancelChangeSetRequest_Catalog = CancelChangeSetRequest.AddMember("Catalog", _Catalog, &smithytraits.HTTPQuery{Name: "catalog"})
-
-	CancelChangeSetRequest_ChangeSetId = CancelChangeSetRequest.AddMember("ChangeSetId", _ResourceId, &smithytraits.HTTPQuery{Name: "changeSetId"})
-
-	CancelChangeSetResponse_ChangeSetId = CancelChangeSetResponse.AddMember("ChangeSetId", _ResourceId)
-
-	CancelChangeSetResponse_ChangeSetArn = CancelChangeSetResponse.AddMember("ChangeSetArn", _ARN)
-
-	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _ResourceARN, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	DescribeAssessmentRequest_Catalog = DescribeAssessmentRequest.AddMember("Catalog", _Catalog)
-
-	DescribeAssessmentRequest_AssessmentIdentifier = DescribeAssessmentRequest.AddMember("AssessmentIdentifier", _AssessmentIdentifier)
-
-	DescribeAssessmentRequest_MaxResults = DescribeAssessmentRequest.AddMember("MaxResults", _DescribeAssessmentMaxResultInteger)
-
-	DescribeAssessmentRequest_NextToken = DescribeAssessmentRequest.AddMember("NextToken", _NextToken)
-
-	DescribeAssessmentResponse_AssessmentArn = DescribeAssessmentResponse.AddMember("AssessmentArn", _ARN)
-
-	DescribeAssessmentResponse_AssessmentId = DescribeAssessmentResponse.AddMember("AssessmentId", _ResourceId)
-
-	DescribeAssessmentResponse_FrameworkId = DescribeAssessmentResponse.AddMember("FrameworkId", _VersionedFrameworkId)
-
-	DescribeAssessmentResponse_AssessmentTargetSummary = DescribeAssessmentResponse.AddMember("AssessmentTargetSummary", AssessmentTargetSummary)
-
-	DescribeAssessmentResponse_FrameworkSummary = DescribeAssessmentResponse.AddMember("FrameworkSummary", FrameworkSummary)
-
-	DescribeAssessmentResponse_AssessmentResult = DescribeAssessmentResponse.AddMember("AssessmentResult", AssessmentResult)
-
-	DescribeAssessmentResponse_CreatedAt = DescribeAssessmentResponse.AddMember("CreatedAt", _DateTimeISO8601)
-
-	DescribeAssessmentResponse_ExpiresAt = DescribeAssessmentResponse.AddMember("ExpiresAt", _DateTimeISO8601)
-
-	DescribeAssessmentResponse_ControlAssessments = DescribeAssessmentResponse.AddMember("ControlAssessments", _ControlAssessmentList)
-
-	DescribeAssessmentResponse_NextToken = DescribeAssessmentResponse.AddMember("NextToken", _NextToken)
-
-	DescribeChangeSetRequest_Catalog = DescribeChangeSetRequest.AddMember("Catalog", _Catalog, &smithytraits.HTTPQuery{Name: "catalog"})
-
-	DescribeChangeSetRequest_ChangeSetId = DescribeChangeSetRequest.AddMember("ChangeSetId", _ResourceId, &smithytraits.HTTPQuery{Name: "changeSetId"})
-
-	DescribeChangeSetResponse_ChangeSetId = DescribeChangeSetResponse.AddMember("ChangeSetId", _ResourceId)
-
-	DescribeChangeSetResponse_ChangeSetArn = DescribeChangeSetResponse.AddMember("ChangeSetArn", _ARN)
-
-	DescribeChangeSetResponse_ChangeSetName = DescribeChangeSetResponse.AddMember("ChangeSetName", _ChangeSetName)
-
-	DescribeChangeSetResponse_Intent = DescribeChangeSetResponse.AddMember("Intent", Intent)
-
-	DescribeChangeSetResponse_StartTime = DescribeChangeSetResponse.AddMember("StartTime", _DateTimeISO8601)
-
-	DescribeChangeSetResponse_EndTime = DescribeChangeSetResponse.AddMember("EndTime", _DateTimeISO8601)
-
-	DescribeChangeSetResponse_Status = DescribeChangeSetResponse.AddMember("Status", ChangeStatus)
-
-	DescribeChangeSetResponse_FailureCode = DescribeChangeSetResponse.AddMember("FailureCode", FailureCode)
-
-	DescribeChangeSetResponse_FailureDescription = DescribeChangeSetResponse.AddMember("FailureDescription", _ExceptionMessageContent)
-
-	DescribeChangeSetResponse_ChangeSet = DescribeChangeSetResponse.AddMember("ChangeSet", _ChangeSetDescription)
-
-	DescribeEntityRequest_Catalog = DescribeEntityRequest.AddMember("Catalog", _Catalog, &smithytraits.HTTPQuery{Name: "catalog"})
-
-	DescribeEntityRequest_EntityId = DescribeEntityRequest.AddMember("EntityId", _ResourceId, &smithytraits.HTTPQuery{Name: "entityId"})
-
-	DescribeEntityResponse_EntityType = DescribeEntityResponse.AddMember("EntityType", _EntityType)
-
-	DescribeEntityResponse_EntityIdentifier = DescribeEntityResponse.AddMember("EntityIdentifier", _Identifier)
-
-	DescribeEntityResponse_EntityArn = DescribeEntityResponse.AddMember("EntityArn", _ARN)
-
-	DescribeEntityResponse_LastModifiedDate = DescribeEntityResponse.AddMember("LastModifiedDate", _DateTimeISO8601)
-
-	DescribeEntityResponse_Details = DescribeEntityResponse.AddMember("Details", _Json)
-
-	DescribeEntityResponse_DetailsDocument = DescribeEntityResponse.AddMember("DetailsDocument", _JsonDocumentType)
-
-	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _ResourceARN, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	GetResourcePolicyResponse_Policy = GetResourcePolicyResponse.AddMember("Policy", _ResourcePolicyJson)
-
-	ListAssessmentsRequest_Catalog = ListAssessmentsRequest.AddMember("Catalog", _Catalog)
-
-	ListAssessmentsRequest_FrameworkId = ListAssessmentsRequest.AddMember("FrameworkId", _FrameworkId)
-
-	ListAssessmentsRequest_AssessmentTargetFilter = ListAssessmentsRequest.AddMember("AssessmentTargetFilter", AssessmentTargetFilter)
-
-	ListAssessmentsRequest_FrameworkFilters = ListAssessmentsRequest.AddMember("FrameworkFilters", FrameworkFilters)
-
-	ListAssessmentsRequest_MaxResults = ListAssessmentsRequest.AddMember("MaxResults", _ListAssessmentsMaxResultInteger)
-
-	ListAssessmentsRequest_NextToken = ListAssessmentsRequest.AddMember("NextToken", _NextToken)
-
-	ListAssessmentsResponse_AssessmentSummaryList = ListAssessmentsResponse.AddMember("AssessmentSummaryList", _AssessmentSummaryList)
-
-	ListAssessmentsResponse_NextToken = ListAssessmentsResponse.AddMember("NextToken", _NextToken)
-
-	ListChangeSetsRequest_Catalog = ListChangeSetsRequest.AddMember("Catalog", _Catalog)
-
-	ListChangeSetsRequest_FilterList = ListChangeSetsRequest.AddMember("FilterList", _FilterList)
-
-	ListChangeSetsRequest_Sort = ListChangeSetsRequest.AddMember("Sort", Sort)
-
-	ListChangeSetsRequest_MaxResults = ListChangeSetsRequest.AddMember("MaxResults", _ListChangeSetsMaxResultInteger)
-
-	ListChangeSetsRequest_NextToken = ListChangeSetsRequest.AddMember("NextToken", _NextToken)
-
-	ListChangeSetsResponse_ChangeSetSummaryList = ListChangeSetsResponse.AddMember("ChangeSetSummaryList", _ChangeSetSummaryList)
-
-	ListChangeSetsResponse_NextToken = ListChangeSetsResponse.AddMember("NextToken", _NextToken)
-
-	ListEntitiesRequest_Catalog = ListEntitiesRequest.AddMember("Catalog", _Catalog)
-
-	ListEntitiesRequest_EntityType = ListEntitiesRequest.AddMember("EntityType", _EntityType)
-
-	ListEntitiesRequest_FilterList = ListEntitiesRequest.AddMember("FilterList", _FilterList)
-
-	ListEntitiesRequest_Sort = ListEntitiesRequest.AddMember("Sort", Sort)
-
-	ListEntitiesRequest_NextToken = ListEntitiesRequest.AddMember("NextToken", _NextToken)
-
-	ListEntitiesRequest_MaxResults = ListEntitiesRequest.AddMember("MaxResults", _ListEntitiesMaxResultInteger)
-
-	ListEntitiesRequest_OwnershipType = ListEntitiesRequest.AddMember("OwnershipType", OwnershipType)
-
-	ListEntitiesRequest_EntityTypeFilters = ListEntitiesRequest.AddMember("EntityTypeFilters", EntityTypeFilters)
-
-	ListEntitiesRequest_EntityTypeSort = ListEntitiesRequest.AddMember("EntityTypeSort", EntityTypeSort)
-
-	ListEntitiesResponse_EntitySummaryList = ListEntitiesResponse.AddMember("EntitySummaryList", _EntitySummaryList)
-
-	ListEntitiesResponse_NextToken = ListEntitiesResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _ResourceARN)
-
-	ListTagsForResourceResponse_ResourceArn = ListTagsForResourceResponse.AddMember("ResourceArn", _ResourceARN)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _ResourceARN)
-
-	PutResourcePolicyRequest_Policy = PutResourcePolicyRequest.AddMember("Policy", _ResourcePolicyJson)
-
-	StartChangeSetRequest_Catalog = StartChangeSetRequest.AddMember("Catalog", _Catalog)
-
-	StartChangeSetRequest_ChangeSet = StartChangeSetRequest.AddMember("ChangeSet", _RequestedChangeList)
-
-	StartChangeSetRequest_ChangeSetName = StartChangeSetRequest.AddMember("ChangeSetName", _ChangeSetName)
-
-	StartChangeSetRequest_ClientRequestToken = StartChangeSetRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartChangeSetRequest_ChangeSetTags = StartChangeSetRequest.AddMember("ChangeSetTags", _TagList)
-
-	StartChangeSetRequest_Intent = StartChangeSetRequest.AddMember("Intent", Intent)
-
-	StartChangeSetResponse_ChangeSetId = StartChangeSetResponse.AddMember("ChangeSetId", _ResourceId)
-
-	StartChangeSetResponse_ChangeSetArn = StartChangeSetResponse.AddMember("ChangeSetArn", _ARN)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _ResourceARN)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _ResourceARN)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 423}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 415}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 422}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "catalog"}}, DirectMask: 0x10}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "changeSetId"}}, DirectMask: 0x10}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "entityId"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAmiProductEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductEntityIdFilter_ValueList}}
+var m_AmiProductEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmiProductEntityIdFilterValueList_member}}
+var mAmiProductFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductFilters_EntityId, &sAmiProductFilters_LastModifiedDate, &sAmiProductFilters_ProductTitle, &sAmiProductFilters_Visibility}}
+var mAmiProductLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductLastModifiedDateFilter_DateRange}}
+var mAmiProductLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductLastModifiedDateFilterDateRange_AfterValue, &sAmiProductLastModifiedDateFilterDateRange_BeforeValue}}
+var mAmiProductSort = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductSort_SortBy, &sAmiProductSort_SortOrder}}
+var mAmiProductSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductSortBy_EntityId, &sAmiProductSortBy_LastModifiedDate, &sAmiProductSortBy_ProductTitle, &sAmiProductSortBy_Visibility}}
+var mAmiProductSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductSummary_ProductTitle, &sAmiProductSummary_Visibility}}
+var mAmiProductTitleFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductTitleFilter_ValueList, &sAmiProductTitleFilter_WildCardValue}}
+var m_AmiProductTitleFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmiProductTitleFilterValueList_member}}
+var mAmiProductVisibilityFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductVisibilityFilter_ValueList}}
+var m_AmiProductVisibilityFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AmiProductVisibilityFilterValueList_member}}
+var mAmiProductVisibilityString = smithy.SchemaMembers{List: []*smithy.Schema{&sAmiProductVisibilityString_Limited, &sAmiProductVisibilityString_Public, &sAmiProductVisibilityString_Restricted, &sAmiProductVisibilityString_Draft}}
+var mAMISecurityFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sAMISecurityFilters_DeliveryOptionId}}
+var mAMISecuritySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAMISecuritySummary_DeliveryOptionId}}
+var mAssessmentResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentResult_PASS, &sAssessmentResult_FAIL}}
+var mAssessmentSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentSummary_AssessmentArn, &sAssessmentSummary_AssessmentId, &sAssessmentSummary_FrameworkId, &sAssessmentSummary_AssessmentTargetSummary, &sAssessmentSummary_FrameworkSummary, &sAssessmentSummary_AssessmentResult, &sAssessmentSummary_CreatedAt, &sAssessmentSummary_ExpiresAt}}
+var m_AssessmentSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssessmentSummaryList_member}}
+var mAssessmentTargetFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentTargetFilter_EntityId, &sAssessmentTargetFilter_ChangeSetId}}
+var mAssessmentTargetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAssessmentTargetSummary_EntityId, &sAssessmentTargetSummary_ChangeSetId}}
+var mBatchDescribeErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDescribeErrorDetail_ErrorCode, &sBatchDescribeErrorDetail_ErrorMessage}}
+var mChange = smithy.SchemaMembers{List: []*smithy.Schema{&sChange_ChangeType, &sChange_Entity, &sChange_EntityTags, &sChange_Details, &sChange_DetailsDocument, &sChange_ChangeName}}
+var m_ChangeSetDescription = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChangeSetDescription_member}}
+var m_ChangeSetSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChangeSetSummaryList_member}}
+var mChangeSetSummaryListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeSetSummaryListItem_ChangeSetId, &sChangeSetSummaryListItem_ChangeSetArn, &sChangeSetSummaryListItem_ChangeSetName, &sChangeSetSummaryListItem_StartTime, &sChangeSetSummaryListItem_EndTime, &sChangeSetSummaryListItem_Status, &sChangeSetSummaryListItem_EntityIdList, &sChangeSetSummaryListItem_FailureCode}}
+var mChangeStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeStatus_PREPARING, &sChangeStatus_APPLYING, &sChangeStatus_SUCCEEDED, &sChangeStatus_CANCELLED, &sChangeStatus_FAILED}}
+var mChangeSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sChangeSummary_ChangeType, &sChangeSummary_Entity, &sChangeSummary_Details, &sChangeSummary_DetailsDocument, &sChangeSummary_ErrorDetailList, &sChangeSummary_ChangeName}}
+var mContainerProductEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductEntityIdFilter_ValueList}}
+var m_ContainerProductEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContainerProductEntityIdFilterValueList_member}}
+var mContainerProductFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductFilters_EntityId, &sContainerProductFilters_LastModifiedDate, &sContainerProductFilters_ProductTitle, &sContainerProductFilters_Visibility}}
+var mContainerProductLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductLastModifiedDateFilter_DateRange}}
+var mContainerProductLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductLastModifiedDateFilterDateRange_AfterValue, &sContainerProductLastModifiedDateFilterDateRange_BeforeValue}}
+var mContainerProductSort = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductSort_SortBy, &sContainerProductSort_SortOrder}}
+var mContainerProductSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductSortBy_EntityId, &sContainerProductSortBy_LastModifiedDate, &sContainerProductSortBy_ProductTitle, &sContainerProductSortBy_Visibility, &sContainerProductSortBy_CompatibleAWSServices}}
+var mContainerProductSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductSummary_ProductTitle, &sContainerProductSummary_Visibility}}
+var mContainerProductTitleFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductTitleFilter_ValueList, &sContainerProductTitleFilter_WildCardValue}}
+var m_ContainerProductTitleFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContainerProductTitleFilterValueList_member}}
+var mContainerProductVisibilityFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductVisibilityFilter_ValueList}}
+var m_ContainerProductVisibilityFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ContainerProductVisibilityFilterValueList_member}}
+var mContainerProductVisibilityString = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProductVisibilityString_Limited, &sContainerProductVisibilityString_Public, &sContainerProductVisibilityString_Restricted, &sContainerProductVisibilityString_Draft}}
+var mContainerSecurityFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerSecurityFilters_DeliveryOptionId}}
+var mContainerSecuritySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerSecuritySummary_DeliveryOptionId}}
+var mControlAssessment = smithy.SchemaMembers{List: []*smithy.Schema{&sControlAssessment_ControlId, &sControlAssessment_ControlAssessmentResult, &sControlAssessment_Errors}}
+var m_ControlAssessmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlAssessmentList_member}}
+var mControlAssessmentResult = smithy.SchemaMembers{List: []*smithy.Schema{&sControlAssessmentResult_PASS, &sControlAssessmentResult_FAIL, &sControlAssessmentResult_NOT_EXECUTED, &sControlAssessmentResult_EXEMPTION_PASS}}
+var mControlError = smithy.SchemaMembers{List: []*smithy.Schema{&sControlError_Code, &sControlError_Message, &sControlError_Scope}}
+var m_ControlErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlErrorList_member}}
+var mDataProductEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductEntityIdFilter_ValueList}}
+var m_DataProductEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataProductEntityIdFilterValueList_member}}
+var mDataProductFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductFilters_EntityId, &sDataProductFilters_ProductTitle, &sDataProductFilters_Visibility, &sDataProductFilters_LastModifiedDate}}
+var mDataProductLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductLastModifiedDateFilter_DateRange}}
+var mDataProductLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductLastModifiedDateFilterDateRange_AfterValue, &sDataProductLastModifiedDateFilterDateRange_BeforeValue}}
+var mDataProductSort = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductSort_SortBy, &sDataProductSort_SortOrder}}
+var mDataProductSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductSortBy_EntityId, &sDataProductSortBy_ProductTitle, &sDataProductSortBy_Visibility, &sDataProductSortBy_LastModifiedDate}}
+var mDataProductSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductSummary_ProductTitle, &sDataProductSummary_Visibility}}
+var mDataProductTitleFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductTitleFilter_ValueList, &sDataProductTitleFilter_WildCardValue}}
+var m_DataProductTitleFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataProductTitleFilterValueList_member}}
+var mDataProductVisibilityFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductVisibilityFilter_ValueList}}
+var m_DataProductVisibilityFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataProductVisibilityFilterValueList_member}}
+var mDataProductVisibilityString = smithy.SchemaMembers{List: []*smithy.Schema{&sDataProductVisibilityString_Limited, &sDataProductVisibilityString_Public, &sDataProductVisibilityString_Restricted, &sDataProductVisibilityString_Unavailable, &sDataProductVisibilityString_Draft}}
+var mEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sEntity_Type, &sEntity_Identifier}}
+var mEntityDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityDetail_EntityType, &sEntityDetail_EntityArn, &sEntityDetail_EntityIdentifier, &sEntityDetail_LastModifiedDate, &sEntityDetail_DetailsDocument}}
+var m_EntityDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityDetails_key, &s_EntityDetails_value}}
+var mEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityRequest_Catalog, &sEntityRequest_EntityId}}
+var m_EntityRequestList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityRequestList_member}}
+var mEntitySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitySummary_Name, &sEntitySummary_EntityType, &sEntitySummary_EntityId, &sEntitySummary_EntityArn, &sEntitySummary_LastModifiedDate, &sEntitySummary_Visibility, &sEntitySummary_AmiProductSummary, &sEntitySummary_ContainerProductSummary, &sEntitySummary_DataProductSummary, &sEntitySummary_SaaSProductSummary, &sEntitySummary_OfferSummary, &sEntitySummary_ResaleAuthorizationSummary, &sEntitySummary_MachineLearningProductSummary, &sEntitySummary_OfferSetSummary, &sEntitySummary_ExpressPrivateOfferConfigurationSummary, &sEntitySummary_SubsidiaryAuthorizationSummary}, Seed: 9, Slots: []uint16{
+	1, 10, 9, 0, 0, 0, 0, 4, 0, 3, 0, 0, 14, 0, 0, 6, 0, 0, 8, 0, 5, 0, 2, 0,
+	15, 11, 16, 12, 0, 0, 7, 13,
+}}
+var m_EntitySummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntitySummaryList_member}}
+var mEntityTypeFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityTypeFilters_DataProductFilters, &sEntityTypeFilters_SaaSProductFilters, &sEntityTypeFilters_AmiProductFilters, &sEntityTypeFilters_OfferFilters, &sEntityTypeFilters_ContainerProductFilters, &sEntityTypeFilters_ResaleAuthorizationFilters, &sEntityTypeFilters_MachineLearningProductFilters, &sEntityTypeFilters_OfferSetFilters, &sEntityTypeFilters_ExpressPrivateOfferConfigurationFilters, &sEntityTypeFilters_SubsidiaryAuthorizationFilters}, Seed: 14, Slots: []uint16{
+	0, 0, 8, 0, 0, 4, 0, 9, 0, 3, 10, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	6, 0, 0, 7, 5, 1, 0, 0,
+}}
+var mEntityTypeSort = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityTypeSort_DataProductSort, &sEntityTypeSort_SaaSProductSort, &sEntityTypeSort_AmiProductSort, &sEntityTypeSort_OfferSort, &sEntityTypeSort_ContainerProductSort, &sEntityTypeSort_ResaleAuthorizationSort, &sEntityTypeSort_MachineLearningProductSort, &sEntityTypeSort_OfferSetSort, &sEntityTypeSort_ExpressPrivateOfferConfigurationSort, &sEntityTypeSort_SubsidiaryAuthorizationSort}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 0, 8, 0, 0, 7, 0, 0, 3, 2, 0, 0, 4, 0, 0, 0, 0, 9, 1, 0, 0, 0,
+	0, 0, 0, 0, 6, 5, 0, 10,
+}}
+var mErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorDetail_ErrorCode, &sErrorDetail_ErrorMessage}}
+var m_ErrorDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ErrorDetailList_member}}
+var m_Errors = smithy.SchemaMembers{List: []*smithy.Schema{&s_Errors_key, &s_Errors_value}}
+var mErrorScope = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorScope_Name, &sErrorScope_Value}}
+var m_ErrorScopeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ErrorScopeList_member}}
+var mExpressPrivateOfferConfigurationEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationEntityIdFilter_ValueList}}
+var m_ExpressPrivateOfferConfigurationEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpressPrivateOfferConfigurationEntityIdFilterValueList_member}}
+var mExpressPrivateOfferConfigurationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationFilters_EntityId, &sExpressPrivateOfferConfigurationFilters_ProductId, &sExpressPrivateOfferConfigurationFilters_State}}
+var mExpressPrivateOfferConfigurationProductIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationProductIdFilter_ValueList}}
+var m_ExpressPrivateOfferConfigurationProductIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpressPrivateOfferConfigurationProductIdFilterValueList_member}}
+var mExpressPrivateOfferConfigurationSort = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationSort_SortBy, &sExpressPrivateOfferConfigurationSort_SortOrder}}
+var mExpressPrivateOfferConfigurationSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationSortBy_EntityId, &sExpressPrivateOfferConfigurationSortBy_LastModifiedDate, &sExpressPrivateOfferConfigurationSortBy_ProductId, &sExpressPrivateOfferConfigurationSortBy_State}}
+var mExpressPrivateOfferConfigurationStateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationStateFilter_ValueList}}
+var m_ExpressPrivateOfferConfigurationStateFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExpressPrivateOfferConfigurationStateFilterValueList_member}}
+var mExpressPrivateOfferConfigurationStateString = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationStateString_ACTIVE, &sExpressPrivateOfferConfigurationStateString_INACTIVE}}
+var mExpressPrivateOfferConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sExpressPrivateOfferConfigurationSummary_ProductId, &sExpressPrivateOfferConfigurationSummary_State}}
+var mFailureCode = smithy.SchemaMembers{List: []*smithy.Schema{&sFailureCode_ClientError, &sFailureCode_ServerFault}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Name, &sFilter_ValueList}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mFrameworkFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sFrameworkFilters_AMISecurityFilters, &sFrameworkFilters_ContainerSecurityFilters}}
+var mFrameworkSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFrameworkSummary_AMISecuritySummary, &sFrameworkSummary_ContainerSecuritySummary}}
+var mIntent = smithy.SchemaMembers{List: []*smithy.Schema{&sIntent_VALIDATE, &sIntent_APPLY}}
+var mInternalServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceException_Message}}
+var mMachineLearningProductEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductEntityIdFilter_ValueList}}
+var m_MachineLearningProductEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MachineLearningProductEntityIdFilterValueList_member}}
+var mMachineLearningProductFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductFilters_EntityId, &sMachineLearningProductFilters_LastModifiedDate, &sMachineLearningProductFilters_ProductTitle, &sMachineLearningProductFilters_Visibility}}
+var mMachineLearningProductLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductLastModifiedDateFilter_DateRange}}
+var mMachineLearningProductLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductLastModifiedDateFilterDateRange_AfterValue, &sMachineLearningProductLastModifiedDateFilterDateRange_BeforeValue}}
+var mMachineLearningProductSort = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductSort_SortBy, &sMachineLearningProductSort_SortOrder}}
+var mMachineLearningProductSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductSortBy_EntityId, &sMachineLearningProductSortBy_LastModifiedDate, &sMachineLearningProductSortBy_ProductTitle, &sMachineLearningProductSortBy_Visibility}}
+var mMachineLearningProductSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductSummary_ProductTitle, &sMachineLearningProductSummary_Visibility}}
+var mMachineLearningProductTitleFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductTitleFilter_ValueList, &sMachineLearningProductTitleFilter_WildCardValue}}
+var m_MachineLearningProductTitleFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MachineLearningProductTitleFilterValueList_member}}
+var mMachineLearningProductVisibilityFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductVisibilityFilter_ValueList}}
+var m_MachineLearningProductVisibilityFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MachineLearningProductVisibilityFilterValueList_member}}
+var mMachineLearningProductVisibilityString = smithy.SchemaMembers{List: []*smithy.Schema{&sMachineLearningProductVisibilityString_Limited, &sMachineLearningProductVisibilityString_Public, &sMachineLearningProductVisibilityString_Restricted, &sMachineLearningProductVisibilityString_Draft}}
+var mOfferAvailabilityEndDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferAvailabilityEndDateFilter_DateRange}}
+var mOfferAvailabilityEndDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferAvailabilityEndDateFilterDateRange_AfterValue, &sOfferAvailabilityEndDateFilterDateRange_BeforeValue}}
+var mOfferBuyerAccountsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferBuyerAccountsFilter_WildCardValue}}
+var m_OfferBuyerAccountsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferBuyerAccountsList_member}}
+var mOfferCreatedBySourceFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferCreatedBySourceFilter_ValueList}}
+var m_OfferCreatedBySourceFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferCreatedBySourceFilterValueList_member}}
+var mOfferCreatedBySourceString = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferCreatedBySourceString_Seller, &sOfferCreatedBySourceString_AwsMarketplace}}
+var mOfferEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferEntityIdFilter_ValueList}}
+var m_OfferEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferEntityIdFilterValueList_member}}
+var mOfferFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferFilters_EntityId, &sOfferFilters_Name, &sOfferFilters_ProductId, &sOfferFilters_ResaleAuthorizationId, &sOfferFilters_ReleaseDate, &sOfferFilters_AvailabilityEndDate, &sOfferFilters_BuyerAccounts, &sOfferFilters_State, &sOfferFilters_Targeting, &sOfferFilters_LastModifiedDate, &sOfferFilters_OfferSetId, &sOfferFilters_TargetAgreementId, &sOfferFilters_TargetAgreementIntent, &sOfferFilters_CreatedBySource}, Seed: 31, Slots: []uint16{
+	4, 0, 0, 10, 0, 13, 0, 0, 12, 0, 0, 5, 0, 14, 0, 2, 7, 0, 9, 0, 6, 0, 0, 0,
+	1, 3, 0, 0, 0, 8, 0, 11,
+}}
+var mOfferLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferLastModifiedDateFilter_DateRange}}
+var mOfferLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferLastModifiedDateFilterDateRange_AfterValue, &sOfferLastModifiedDateFilterDateRange_BeforeValue}}
+var mOfferNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferNameFilter_ValueList, &sOfferNameFilter_WildCardValue}}
+var m_OfferNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferNameFilterValueList_member}}
+var mOfferProductIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferProductIdFilter_ValueList}}
+var m_OfferProductIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferProductIdFilterValueList_member}}
+var mOfferReleaseDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferReleaseDateFilter_DateRange}}
+var mOfferReleaseDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferReleaseDateFilterDateRange_AfterValue, &sOfferReleaseDateFilterDateRange_BeforeValue}}
+var mOfferResaleAuthorizationIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferResaleAuthorizationIdFilter_ValueList}}
+var m_OfferResaleAuthorizationIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferResaleAuthorizationIdFilterValueList_member}}
+var mOfferSetAssociatedOfferIdsFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetAssociatedOfferIdsFilter_ValueList}}
+var m_OfferSetAssociatedOfferIdsFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetAssociatedOfferIdsFilterValueList_member}}
+var m_OfferSetAssociatedOfferIdsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetAssociatedOfferIdsList_member}}
+var mOfferSetEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetEntityIdFilter_ValueList}}
+var m_OfferSetEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetEntityIdFilterValueList_member}}
+var mOfferSetFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetFilters_EntityId, &sOfferSetFilters_Name, &sOfferSetFilters_State, &sOfferSetFilters_ReleaseDate, &sOfferSetFilters_AssociatedOfferIds, &sOfferSetFilters_SolutionId, &sOfferSetFilters_LastModifiedDate}}
+var mOfferSetIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetIdFilter_ValueList}}
+var m_OfferSetIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetIdFilterValueList_member}}
+var mOfferSetLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetLastModifiedDateFilter_DateRange}}
+var mOfferSetLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetLastModifiedDateFilterDateRange_AfterValue, &sOfferSetLastModifiedDateFilterDateRange_BeforeValue}}
+var mOfferSetNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetNameFilter_ValueList}}
+var m_OfferSetNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetNameFilterValueList_member}}
+var mOfferSetReleaseDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetReleaseDateFilter_DateRange}}
+var mOfferSetReleaseDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetReleaseDateFilterDateRange_AfterValue, &sOfferSetReleaseDateFilterDateRange_BeforeValue}}
+var mOfferSetSolutionIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetSolutionIdFilter_ValueList}}
+var m_OfferSetSolutionIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetSolutionIdFilterValueList_member}}
+var mOfferSetSort = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetSort_SortBy, &sOfferSetSort_SortOrder}}
+var mOfferSetSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetSortBy_Name, &sOfferSetSortBy_State, &sOfferSetSortBy_ReleaseDate, &sOfferSetSortBy_SolutionId, &sOfferSetSortBy_EntityId, &sOfferSetSortBy_LastModifiedDate}}
+var mOfferSetStateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetStateFilter_ValueList}}
+var m_OfferSetStateFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferSetStateFilterValueList_member}}
+var mOfferSetStateString = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetStateString_Draft, &sOfferSetStateString_Released}}
+var mOfferSetSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSetSummary_Name, &sOfferSetSummary_State, &sOfferSetSummary_ReleaseDate, &sOfferSetSummary_AssociatedOfferIds, &sOfferSetSummary_SolutionId}}
+var mOfferSort = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSort_SortBy, &sOfferSort_SortOrder}}
+var mOfferSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSortBy_EntityId, &sOfferSortBy_Name, &sOfferSortBy_ProductId, &sOfferSortBy_ResaleAuthorizationId, &sOfferSortBy_ReleaseDate, &sOfferSortBy_AvailabilityEndDate, &sOfferSortBy_BuyerAccounts, &sOfferSortBy_State, &sOfferSortBy_Targeting, &sOfferSortBy_LastModifiedDate, &sOfferSortBy_OfferSetId, &sOfferSortBy_TargetAgreementId, &sOfferSortBy_TargetAgreementIntent, &sOfferSortBy_CreatedBySource}, Seed: 31, Slots: []uint16{
+	4, 0, 0, 10, 0, 13, 0, 0, 12, 0, 0, 5, 0, 14, 0, 2, 7, 0, 9, 0, 6, 0, 0, 0,
+	1, 3, 0, 0, 0, 8, 0, 11,
+}}
+var mOfferStateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferStateFilter_ValueList}}
+var m_OfferStateFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferStateFilterValueList_member}}
+var mOfferStateString = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferStateString_Draft, &sOfferStateString_Released}}
+var mOfferSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferSummary_Name, &sOfferSummary_ProductId, &sOfferSummary_ResaleAuthorizationId, &sOfferSummary_ReleaseDate, &sOfferSummary_AvailabilityEndDate, &sOfferSummary_BuyerAccounts, &sOfferSummary_State, &sOfferSummary_Targeting, &sOfferSummary_OfferSetId, &sOfferSummary_TargetAgreementId, &sOfferSummary_TargetAgreementIntent, &sOfferSummary_CreatedBySource}, Seed: 3, Slots: []uint16{
+	0, 6, 0, 0, 0, 0, 0, 0, 0, 9, 0, 0, 0, 0, 1, 12, 0, 2, 0, 0, 4, 10, 11, 0,
+	0, 3, 0, 0, 0, 5, 7, 8,
+}}
+var mOfferTargetAgreementIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferTargetAgreementIdFilter_ValueList}}
+var m_OfferTargetAgreementIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferTargetAgreementIdFilterValueList_member}}
+var mOfferTargetAgreementIntentFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferTargetAgreementIntentFilter_ValueList}}
+var m_OfferTargetAgreementIntentFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferTargetAgreementIntentFilterValueList_member}}
+var mOfferTargetAgreementIntentString = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferTargetAgreementIntentString_Renew}}
+var mOfferTargetingFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferTargetingFilter_ValueList}}
+var m_OfferTargetingFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferTargetingFilterValueList_member}}
+var m_OfferTargetingList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OfferTargetingList_member}}
+var mOfferTargetingString = smithy.SchemaMembers{List: []*smithy.Schema{&sOfferTargetingString_BuyerAccounts, &sOfferTargetingString_ParticipatingPrograms, &sOfferTargetingString_CountryCodes, &sOfferTargetingString_None}}
+var mOwnershipType = smithy.SchemaMembers{List: []*smithy.Schema{&sOwnershipType_SELF, &sOwnershipType_SHARED}}
+var m_RequestedChangeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RequestedChangeList_member}}
+var mResaleAuthorizationAvailabilityEndDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationAvailabilityEndDateFilter_DateRange, &sResaleAuthorizationAvailabilityEndDateFilter_ValueList}}
+var mResaleAuthorizationAvailabilityEndDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue, &sResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue}}
+var m_ResaleAuthorizationAvailabilityEndDateFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationAvailabilityEndDateFilterValueList_member}}
+var mResaleAuthorizationCreatedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationCreatedDateFilter_DateRange, &sResaleAuthorizationCreatedDateFilter_ValueList}}
+var mResaleAuthorizationCreatedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationCreatedDateFilterDateRange_AfterValue, &sResaleAuthorizationCreatedDateFilterDateRange_BeforeValue}}
+var m_ResaleAuthorizationCreatedDateFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationCreatedDateFilterValueList_member}}
+var mResaleAuthorizationEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationEntityIdFilter_ValueList}}
+var m_ResaleAuthorizationEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationEntityIdFilterValueList_member}}
+var mResaleAuthorizationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationFilters_EntityId, &sResaleAuthorizationFilters_Name, &sResaleAuthorizationFilters_ProductId, &sResaleAuthorizationFilters_CreatedDate, &sResaleAuthorizationFilters_AvailabilityEndDate, &sResaleAuthorizationFilters_ManufacturerAccountId, &sResaleAuthorizationFilters_ProductName, &sResaleAuthorizationFilters_ManufacturerLegalName, &sResaleAuthorizationFilters_ResellerAccountID, &sResaleAuthorizationFilters_ResellerLegalName, &sResaleAuthorizationFilters_Status, &sResaleAuthorizationFilters_OfferExtendedStatus, &sResaleAuthorizationFilters_LastModifiedDate, &sResaleAuthorizationFilters_ResellerRole, &sResaleAuthorizationFilters_SourceAuthorization, &sResaleAuthorizationFilters_IssuerAccountId}, Seed: 154, Slots: []uint16{
+	5, 0, 0, 4, 8, 10, 0, 0, 1, 0, 0, 14, 0, 0, 0, 7, 0, 0, 3, 12, 0, 0, 6, 15,
+	2, 0, 11, 13, 0, 9, 0, 16,
+}}
+var mResaleAuthorizationIssuerAccountIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationIssuerAccountIdFilter_ValueList}}
+var m_ResaleAuthorizationIssuerAccountIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationIssuerAccountIdFilterValueList_member}}
+var mResaleAuthorizationLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationLastModifiedDateFilter_DateRange}}
+var mResaleAuthorizationLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue, &sResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue}}
+var mResaleAuthorizationManufacturerAccountIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationManufacturerAccountIdFilter_ValueList, &sResaleAuthorizationManufacturerAccountIdFilter_WildCardValue}}
+var m_ResaleAuthorizationManufacturerAccountIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationManufacturerAccountIdFilterValueList_member}}
+var mResaleAuthorizationManufacturerLegalNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationManufacturerLegalNameFilter_ValueList, &sResaleAuthorizationManufacturerLegalNameFilter_WildCardValue}}
+var m_ResaleAuthorizationManufacturerLegalNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationManufacturerLegalNameFilterValueList_member}}
+var mResaleAuthorizationNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationNameFilter_ValueList, &sResaleAuthorizationNameFilter_WildCardValue}}
+var m_ResaleAuthorizationNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationNameFilterValueList_member}}
+var mResaleAuthorizationOfferExtendedStatusFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationOfferExtendedStatusFilter_ValueList}}
+var m_ResaleAuthorizationOfferExtendedStatusFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationOfferExtendedStatusFilterValueList_member}}
+var mResaleAuthorizationProductIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationProductIdFilter_ValueList, &sResaleAuthorizationProductIdFilter_WildCardValue}}
+var m_ResaleAuthorizationProductIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationProductIdFilterValueList_member}}
+var mResaleAuthorizationProductNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationProductNameFilter_ValueList, &sResaleAuthorizationProductNameFilter_WildCardValue}}
+var m_ResaleAuthorizationProductNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationProductNameFilterValueList_member}}
+var mResaleAuthorizationResellerAccountIDFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationResellerAccountIDFilter_ValueList, &sResaleAuthorizationResellerAccountIDFilter_WildCardValue}}
+var m_ResaleAuthorizationResellerAccountIDFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationResellerAccountIDFilterValueList_member}}
+var mResaleAuthorizationResellerLegalNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationResellerLegalNameFilter_ValueList, &sResaleAuthorizationResellerLegalNameFilter_WildCardValue}}
+var m_ResaleAuthorizationResellerLegalNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationResellerLegalNameFilterValueList_member}}
+var mResaleAuthorizationResellerRoleFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationResellerRoleFilter_ValueList}}
+var m_ResaleAuthorizationResellerRoleFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationResellerRoleFilterValueList_member}}
+var mResaleAuthorizationResellerRoleString = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationResellerRoleString_ChannelPartner, &sResaleAuthorizationResellerRoleString_Distributor}}
+var mResaleAuthorizationSort = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationSort_SortBy, &sResaleAuthorizationSort_SortOrder}}
+var mResaleAuthorizationSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationSortBy_EntityId, &sResaleAuthorizationSortBy_Name, &sResaleAuthorizationSortBy_ProductId, &sResaleAuthorizationSortBy_ProductName, &sResaleAuthorizationSortBy_ManufacturerAccountId, &sResaleAuthorizationSortBy_ManufacturerLegalName, &sResaleAuthorizationSortBy_ResellerAccountID, &sResaleAuthorizationSortBy_ResellerLegalName, &sResaleAuthorizationSortBy_Status, &sResaleAuthorizationSortBy_OfferExtendedStatus, &sResaleAuthorizationSortBy_CreatedDate, &sResaleAuthorizationSortBy_AvailabilityEndDate, &sResaleAuthorizationSortBy_LastModifiedDate, &sResaleAuthorizationSortBy_ResellerRole, &sResaleAuthorizationSortBy_SourceAuthorization, &sResaleAuthorizationSortBy_IssuerAccountId}, Seed: 154, Slots: []uint16{
+	12, 0, 0, 11, 6, 8, 0, 0, 1, 0, 0, 14, 0, 0, 0, 4, 0, 0, 3, 10, 0, 0, 5, 15,
+	2, 0, 9, 13, 0, 7, 0, 16,
+}}
+var mResaleAuthorizationSourceAuthorizationFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationSourceAuthorizationFilter_ValueList}}
+var m_ResaleAuthorizationSourceAuthorizationFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationSourceAuthorizationFilterValueList_member}}
+var mResaleAuthorizationStatusFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationStatusFilter_ValueList}}
+var m_ResaleAuthorizationStatusFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResaleAuthorizationStatusFilterValueList_member}}
+var mResaleAuthorizationStatusString = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationStatusString_Draft, &sResaleAuthorizationStatusString_Active, &sResaleAuthorizationStatusString_Restricted}}
+var mResaleAuthorizationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResaleAuthorizationSummary_Name, &sResaleAuthorizationSummary_ProductId, &sResaleAuthorizationSummary_ProductName, &sResaleAuthorizationSummary_ManufacturerAccountId, &sResaleAuthorizationSummary_ManufacturerLegalName, &sResaleAuthorizationSummary_ResellerAccountID, &sResaleAuthorizationSummary_ResellerLegalName, &sResaleAuthorizationSummary_Status, &sResaleAuthorizationSummary_OfferExtendedStatus, &sResaleAuthorizationSummary_CreatedDate, &sResaleAuthorizationSummary_AvailabilityEndDate, &sResaleAuthorizationSummary_ResellerRole, &sResaleAuthorizationSummary_SourceAuthorization, &sResaleAuthorizationSummary_IssuerAccountId}, Seed: 75, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 1, 0, 10, 4, 0, 9, 11, 3, 0, 7, 0, 0, 0,
+	2, 0, 12, 13, 14, 5, 6, 0,
+}}
+var m_ResourceIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceIdList_member}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourceNotSupportedException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotSupportedException_Message}}
+var mSaaSProductEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductEntityIdFilter_ValueList}}
+var m_SaaSProductEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SaaSProductEntityIdFilterValueList_member}}
+var mSaaSProductFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductFilters_EntityId, &sSaaSProductFilters_ProductTitle, &sSaaSProductFilters_Visibility, &sSaaSProductFilters_LastModifiedDate}}
+var mSaaSProductLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductLastModifiedDateFilter_DateRange}}
+var mSaaSProductLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductLastModifiedDateFilterDateRange_AfterValue, &sSaaSProductLastModifiedDateFilterDateRange_BeforeValue}}
+var mSaaSProductSort = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductSort_SortBy, &sSaaSProductSort_SortOrder}}
+var mSaaSProductSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductSortBy_EntityId, &sSaaSProductSortBy_ProductTitle, &sSaaSProductSortBy_Visibility, &sSaaSProductSortBy_LastModifiedDate, &sSaaSProductSortBy_DeliveryOptionTypes}}
+var mSaaSProductSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductSummary_ProductTitle, &sSaaSProductSummary_Visibility}}
+var mSaaSProductTitleFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductTitleFilter_ValueList, &sSaaSProductTitleFilter_WildCardValue}}
+var m_SaaSProductTitleFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SaaSProductTitleFilterValueList_member}}
+var mSaaSProductVisibilityFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductVisibilityFilter_ValueList}}
+var m_SaaSProductVisibilityFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SaaSProductVisibilityFilterValueList_member}}
+var mSaaSProductVisibilityString = smithy.SchemaMembers{List: []*smithy.Schema{&sSaaSProductVisibilityString_Limited, &sSaaSProductVisibilityString_Public, &sSaaSProductVisibilityString_Restricted, &sSaaSProductVisibilityString_Draft}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSort = smithy.SchemaMembers{List: []*smithy.Schema{&sSort_SortBy, &sSort_SortOrder}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASCENDING, &sSortOrder_DESCENDING}}
+var mSubsidiaryAuthorizationCreatedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationCreatedDateFilter_DateRange}}
+var mSubsidiaryAuthorizationCreatedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue, &sSubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue}}
+var mSubsidiaryAuthorizationEntityIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationEntityIdFilter_ValueList}}
+var m_SubsidiaryAuthorizationEntityIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubsidiaryAuthorizationEntityIdFilterValueList_member}}
+var mSubsidiaryAuthorizationFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationFilters_EntityId, &sSubsidiaryAuthorizationFilters_Status, &sSubsidiaryAuthorizationFilters_ResourceId, &sSubsidiaryAuthorizationFilters_ResourceName, &sSubsidiaryAuthorizationFilters_Name, &sSubsidiaryAuthorizationFilters_SubsidiaryAccountId, &sSubsidiaryAuthorizationFilters_CreatedDate, &sSubsidiaryAuthorizationFilters_LastModifiedDate}}
+var mSubsidiaryAuthorizationLastModifiedDateFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationLastModifiedDateFilter_DateRange}}
+var mSubsidiaryAuthorizationLastModifiedDateFilterDateRange = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue, &sSubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue}}
+var mSubsidiaryAuthorizationNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationNameFilter_ValueList, &sSubsidiaryAuthorizationNameFilter_WildCardValue}}
+var m_SubsidiaryAuthorizationNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubsidiaryAuthorizationNameFilterValueList_member}}
+var mSubsidiaryAuthorizationResourceIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationResourceIdFilter_ValueList}}
+var m_SubsidiaryAuthorizationResourceIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubsidiaryAuthorizationResourceIdFilterValueList_member}}
+var mSubsidiaryAuthorizationResourceNameFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationResourceNameFilter_ValueList, &sSubsidiaryAuthorizationResourceNameFilter_WildCardValue}}
+var m_SubsidiaryAuthorizationResourceNameFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubsidiaryAuthorizationResourceNameFilterValueList_member}}
+var mSubsidiaryAuthorizationSort = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationSort_SortBy, &sSubsidiaryAuthorizationSort_SortOrder}}
+var mSubsidiaryAuthorizationSortBy = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationSortBy_EntityId, &sSubsidiaryAuthorizationSortBy_Status, &sSubsidiaryAuthorizationSortBy_ResourceId, &sSubsidiaryAuthorizationSortBy_SubsidiaryAccountId, &sSubsidiaryAuthorizationSortBy_CreatedDate, &sSubsidiaryAuthorizationSortBy_LastModifiedDate}}
+var mSubsidiaryAuthorizationStatusFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationStatusFilter_ValueList}}
+var m_SubsidiaryAuthorizationStatusFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubsidiaryAuthorizationStatusFilterValueList_member}}
+var mSubsidiaryAuthorizationStatusString = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationStatusString_Draft, &sSubsidiaryAuthorizationStatusString_Active, &sSubsidiaryAuthorizationStatusString_Restricted}}
+var mSubsidiaryAuthorizationSubsidiaryAccountIdFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList}}
+var m_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member}}
+var mSubsidiaryAuthorizationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSubsidiaryAuthorizationSummary_Name, &sSubsidiaryAuthorizationSummary_Status, &sSubsidiaryAuthorizationSummary_ResourceId, &sSubsidiaryAuthorizationSummary_ResourceName, &sSubsidiaryAuthorizationSummary_SubsidiaryAccountId, &sSubsidiaryAuthorizationSummary_CreatedDate}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_ValidationExceptionFieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_Reason, &sValidationExceptionField_EntityType, &sValidationExceptionField_EntityId, &sValidationExceptionField_ChangeType, &sValidationExceptionField_Field, &sValidationExceptionField_Message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var m_ValueList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValueList_member}}
+var mBatchDescribeEntitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDescribeEntitiesRequest_EntityRequestList}}
+var mBatchDescribeEntitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDescribeEntitiesResponse_EntityDetails, &sBatchDescribeEntitiesResponse_Errors}}
+var mCancelChangeSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelChangeSetRequest_Catalog, &sCancelChangeSetRequest_ChangeSetId}}
+var mCancelChangeSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelChangeSetResponse_ChangeSetId, &sCancelChangeSetResponse_ChangeSetArn}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_ResourceArn}}
+var mDescribeAssessmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAssessmentRequest_Catalog, &sDescribeAssessmentRequest_AssessmentIdentifier, &sDescribeAssessmentRequest_MaxResults, &sDescribeAssessmentRequest_NextToken}}
+var mDescribeAssessmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeAssessmentResponse_AssessmentArn, &sDescribeAssessmentResponse_AssessmentId, &sDescribeAssessmentResponse_FrameworkId, &sDescribeAssessmentResponse_AssessmentTargetSummary, &sDescribeAssessmentResponse_FrameworkSummary, &sDescribeAssessmentResponse_AssessmentResult, &sDescribeAssessmentResponse_CreatedAt, &sDescribeAssessmentResponse_ExpiresAt, &sDescribeAssessmentResponse_ControlAssessments, &sDescribeAssessmentResponse_NextToken}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 0, 6, 5, 0, 0, 0, 0, 0, 8, 0, 0, 2, 0, 0, 0, 0, 1, 0, 4, 0,
+	3, 9, 0, 0, 10, 0, 0, 7,
+}}
+var mDescribeChangeSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChangeSetRequest_Catalog, &sDescribeChangeSetRequest_ChangeSetId}}
+var mDescribeChangeSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeChangeSetResponse_ChangeSetId, &sDescribeChangeSetResponse_ChangeSetArn, &sDescribeChangeSetResponse_ChangeSetName, &sDescribeChangeSetResponse_Intent, &sDescribeChangeSetResponse_StartTime, &sDescribeChangeSetResponse_EndTime, &sDescribeChangeSetResponse_Status, &sDescribeChangeSetResponse_FailureCode, &sDescribeChangeSetResponse_FailureDescription, &sDescribeChangeSetResponse_ChangeSet}, Seed: 3, Slots: []uint16{
+	0, 10, 0, 0, 7, 0, 0, 5, 0, 0, 6, 0, 4, 0, 0, 3, 1, 0, 0, 0, 0, 0, 0, 0,
+	2, 8, 0, 0, 0, 0, 9, 0,
+}}
+var mDescribeEntityRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityRequest_Catalog, &sDescribeEntityRequest_EntityId}}
+var mDescribeEntityResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntityResponse_EntityType, &sDescribeEntityResponse_EntityIdentifier, &sDescribeEntityResponse_EntityArn, &sDescribeEntityResponse_LastModifiedDate, &sDescribeEntityResponse_Details, &sDescribeEntityResponse_DetailsDocument}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_ResourceArn}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_Policy}}
+var mListAssessmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentsRequest_Catalog, &sListAssessmentsRequest_FrameworkId, &sListAssessmentsRequest_AssessmentTargetFilter, &sListAssessmentsRequest_FrameworkFilters, &sListAssessmentsRequest_MaxResults, &sListAssessmentsRequest_NextToken}}
+var mListAssessmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAssessmentsResponse_AssessmentSummaryList, &sListAssessmentsResponse_NextToken}}
+var mListChangeSetsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChangeSetsRequest_Catalog, &sListChangeSetsRequest_FilterList, &sListChangeSetsRequest_Sort, &sListChangeSetsRequest_MaxResults, &sListChangeSetsRequest_NextToken}}
+var mListChangeSetsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChangeSetsResponse_ChangeSetSummaryList, &sListChangeSetsResponse_NextToken}}
+var mListEntitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitiesRequest_Catalog, &sListEntitiesRequest_EntityType, &sListEntitiesRequest_FilterList, &sListEntitiesRequest_Sort, &sListEntitiesRequest_NextToken, &sListEntitiesRequest_MaxResults, &sListEntitiesRequest_OwnershipType, &sListEntitiesRequest_EntityTypeFilters, &sListEntitiesRequest_EntityTypeSort}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 3, 0, 0, 9, 5, 0, 0, 7, 0, 4, 8, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 2, 6, 0, 0,
+}}
+var mListEntitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitiesResponse_EntitySummaryList, &sListEntitiesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_ResourceArn, &sListTagsForResourceResponse_Tags}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_ResourceArn, &sPutResourcePolicyRequest_Policy}}
+var mStartChangeSetRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartChangeSetRequest_Catalog, &sStartChangeSetRequest_ChangeSet, &sStartChangeSetRequest_ChangeSetName, &sStartChangeSetRequest_ClientRequestToken, &sStartChangeSetRequest_ChangeSetTags, &sStartChangeSetRequest_Intent}}
+var mStartChangeSetResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartChangeSetResponse_ChangeSetId, &sStartChangeSetResponse_ChangeSetArn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+
+var sBatchDescribeEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeEntities, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCancelChangeSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChangeSet, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDescribeAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAssessment, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDescribeChangeSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChangeSet, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDescribeEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntity, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListAssessments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessments, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sListChangeSets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangeSets, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sListEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntities, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sStartChangeSet = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChangeSet, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var s_AWSMPSeymour = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSMPSeymour, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t15, Type: smithy.ShapeTypeStructure})
+var sAmiProductEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductEntityIdFilter, Members: &mAmiProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_AmiProductEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiProductEntityIdFilterValueList, Members: &m_AmiProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_AmiProductEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiProductEntityIdString, Type: smithy.ShapeTypeString})
+var sAmiProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductFilters, Members: &mAmiProductFilters, Type: smithy.ShapeTypeStructure})
+var sAmiProductLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductLastModifiedDateFilter, Members: &mAmiProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sAmiProductLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductLastModifiedDateFilterDateRange, Members: &mAmiProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sAmiProductSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductSort, Members: &mAmiProductSort, Type: smithy.ShapeTypeStructure})
+var sAmiProductSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductSortBy, Members: &mAmiProductSortBy, Type: smithy.ShapeTypeEnum})
+var sAmiProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductSummary, Members: &mAmiProductSummary, Type: smithy.ShapeTypeStructure})
+var sAmiProductTitleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductTitleFilter, Members: &mAmiProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var s_AmiProductTitleFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiProductTitleFilterValueList, Members: &m_AmiProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var s_AmiProductTitleString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiProductTitleString, Type: smithy.ShapeTypeString})
+var sAmiProductVisibilityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductVisibilityFilter, Members: &mAmiProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var s_AmiProductVisibilityFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmiProductVisibilityFilterValueList, Members: &m_AmiProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var sAmiProductVisibilityString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmiProductVisibilityString, Members: &mAmiProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sAMISecurityFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAMISecurityFilters, Members: &mAMISecurityFilters, Type: smithy.ShapeTypeStructure})
+var sAMISecuritySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAMISecuritySummary, Members: &mAMISecuritySummary, Type: smithy.ShapeTypeStructure})
+var s_ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ARN, Type: smithy.ShapeTypeString})
+var s_AssessmentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentIdentifier, Type: smithy.ShapeTypeString})
+var sAssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentResult, Members: &mAssessmentResult, Type: smithy.ShapeTypeEnum})
+var sAssessmentSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentSummary, Members: &mAssessmentSummary, Type: smithy.ShapeTypeStructure})
+var s_AssessmentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssessmentSummaryList, Members: &m_AssessmentSummaryList, Type: smithy.ShapeTypeList})
+var sAssessmentTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentTargetFilter, Members: &mAssessmentTargetFilter, Type: smithy.ShapeTypeStructure})
+var sAssessmentTargetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssessmentTargetSummary, Members: &mAssessmentTargetSummary, Type: smithy.ShapeTypeStructure})
+var s_BatchDescribeErrorCodeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDescribeErrorCodeString, Type: smithy.ShapeTypeString})
+var sBatchDescribeErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeErrorDetail, Members: &mBatchDescribeErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_BatchDescribeErrorMessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchDescribeErrorMessageContent, Type: smithy.ShapeTypeString})
+var s_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Catalog, Type: smithy.ShapeTypeString})
+var sChange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChange, Members: &mChange, Type: smithy.ShapeTypeStructure})
+var s_ChangeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeName, Type: smithy.ShapeTypeString})
+var s_ChangeSetDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeSetDescription, Members: &m_ChangeSetDescription, Type: smithy.ShapeTypeList})
+var s_ChangeSetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeSetName, Type: smithy.ShapeTypeString})
+var s_ChangeSetSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeSetSummaryList, Members: &m_ChangeSetSummaryList, Type: smithy.ShapeTypeList})
+var sChangeSetSummaryListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeSetSummaryListItem, Members: &mChangeSetSummaryListItem, Type: smithy.ShapeTypeStructure})
+var sChangeStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeStatus, Members: &mChangeStatus, Type: smithy.ShapeTypeEnum})
+var sChangeSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChangeSummary, Members: &mChangeSummary, Type: smithy.ShapeTypeStructure})
+var s_ChangeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChangeType, Type: smithy.ShapeTypeString})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sContainerProductEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductEntityIdFilter, Members: &mContainerProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_ContainerProductEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerProductEntityIdFilterValueList, Members: &m_ContainerProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ContainerProductEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerProductEntityIdString, Type: smithy.ShapeTypeString})
+var sContainerProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductFilters, Members: &mContainerProductFilters, Type: smithy.ShapeTypeStructure})
+var sContainerProductLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductLastModifiedDateFilter, Members: &mContainerProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sContainerProductLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductLastModifiedDateFilterDateRange, Members: &mContainerProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sContainerProductSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductSort, Members: &mContainerProductSort, Type: smithy.ShapeTypeStructure})
+var sContainerProductSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductSortBy, Members: &mContainerProductSortBy, Type: smithy.ShapeTypeEnum})
+var sContainerProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductSummary, Members: &mContainerProductSummary, Type: smithy.ShapeTypeStructure})
+var sContainerProductTitleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductTitleFilter, Members: &mContainerProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var s_ContainerProductTitleFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerProductTitleFilterValueList, Members: &m_ContainerProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var s_ContainerProductTitleString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerProductTitleString, Type: smithy.ShapeTypeString})
+var sContainerProductVisibilityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductVisibilityFilter, Members: &mContainerProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var s_ContainerProductVisibilityFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContainerProductVisibilityFilterValueList, Members: &m_ContainerProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var sContainerProductVisibilityString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProductVisibilityString, Members: &mContainerProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sContainerSecurityFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerSecurityFilters, Members: &mContainerSecurityFilters, Type: smithy.ShapeTypeStructure})
+var sContainerSecuritySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerSecuritySummary, Members: &mContainerSecuritySummary, Type: smithy.ShapeTypeStructure})
+var sControlAssessment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlAssessment, Members: &mControlAssessment, Type: smithy.ShapeTypeStructure})
+var s_ControlAssessmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlAssessmentList, Members: &m_ControlAssessmentList, Type: smithy.ShapeTypeList})
+var sControlAssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlAssessmentResult, Members: &mControlAssessmentResult, Type: smithy.ShapeTypeEnum})
+var sControlError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlError, Members: &mControlError, Type: smithy.ShapeTypeStructure})
+var s_ControlErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlErrorList, Members: &m_ControlErrorList, Type: smithy.ShapeTypeList})
+var sDataProductEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductEntityIdFilter, Members: &mDataProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_DataProductEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataProductEntityIdFilterValueList, Members: &m_DataProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_DataProductEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataProductEntityIdString, Type: smithy.ShapeTypeString})
+var sDataProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductFilters, Members: &mDataProductFilters, Type: smithy.ShapeTypeStructure})
+var sDataProductLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductLastModifiedDateFilter, Members: &mDataProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sDataProductLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductLastModifiedDateFilterDateRange, Members: &mDataProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sDataProductSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductSort, Members: &mDataProductSort, Type: smithy.ShapeTypeStructure})
+var sDataProductSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductSortBy, Members: &mDataProductSortBy, Type: smithy.ShapeTypeEnum})
+var sDataProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductSummary, Members: &mDataProductSummary, Type: smithy.ShapeTypeStructure})
+var sDataProductTitleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductTitleFilter, Members: &mDataProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var s_DataProductTitleFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataProductTitleFilterValueList, Members: &m_DataProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var s_DataProductTitleString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataProductTitleString, Type: smithy.ShapeTypeString})
+var sDataProductVisibilityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductVisibilityFilter, Members: &mDataProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var s_DataProductVisibilityFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataProductVisibilityFilterValueList, Members: &m_DataProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var sDataProductVisibilityString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataProductVisibilityString, Members: &mDataProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var s_DateTimeISO8601 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var s_DescribeAssessmentMaxResultInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescribeAssessmentMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var sEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure})
+var sEntityDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityDetail, Members: &mEntityDetail, Type: smithy.ShapeTypeStructure})
+var s_EntityDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityDetails, Members: &m_EntityDetails, Type: smithy.ShapeTypeMap})
+var s_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var s_EntityNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityNameString, Type: smithy.ShapeTypeString})
+var sEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityRequest, Members: &mEntityRequest, Type: smithy.ShapeTypeStructure})
+var s_EntityRequestList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityRequestList, Members: &m_EntityRequestList, Type: smithy.ShapeTypeList})
+var sEntitySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitySummary, Members: &mEntitySummary, Type: smithy.ShapeTypeStructure})
+var s_EntitySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntitySummaryList, Members: &m_EntitySummaryList, Type: smithy.ShapeTypeList})
+var s_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sEntityTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityTypeFilters, Members: &mEntityTypeFilters, Type: smithy.ShapeTypeUnion})
+var sEntityTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityTypeSort, Members: &mEntityTypeSort, Type: smithy.ShapeTypeUnion})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorCodeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCodeString, Type: smithy.ShapeTypeString})
+var sErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_ErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorDetailList, Members: &m_ErrorDetailList, Type: smithy.ShapeTypeList})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Errors = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Errors, Members: &m_Errors, Type: smithy.ShapeTypeMap})
+var sErrorScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorScope, Members: &mErrorScope, Type: smithy.ShapeTypeStructure})
+var s_ErrorScopeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorScopeList, Members: &m_ErrorScopeList, Type: smithy.ShapeTypeList})
+var s_ExceptionMessageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sExpressPrivateOfferConfigurationEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationEntityIdFilter, Members: &mExpressPrivateOfferConfigurationEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_ExpressPrivateOfferConfigurationEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressPrivateOfferConfigurationEntityIdFilterValueList, Members: &m_ExpressPrivateOfferConfigurationEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ExpressPrivateOfferConfigurationEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressPrivateOfferConfigurationEntityIdString, Type: smithy.ShapeTypeString})
+var sExpressPrivateOfferConfigurationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationFilters, Members: &mExpressPrivateOfferConfigurationFilters, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationProductIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationProductIdFilter, Members: &mExpressPrivateOfferConfigurationProductIdFilter, Type: smithy.ShapeTypeStructure})
+var s_ExpressPrivateOfferConfigurationProductIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressPrivateOfferConfigurationProductIdFilterValueList, Members: &m_ExpressPrivateOfferConfigurationProductIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ExpressPrivateOfferConfigurationProductIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressPrivateOfferConfigurationProductIdString, Type: smithy.ShapeTypeString})
+var sExpressPrivateOfferConfigurationSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationSort, Members: &mExpressPrivateOfferConfigurationSort, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationSortBy, Members: &mExpressPrivateOfferConfigurationSortBy, Type: smithy.ShapeTypeEnum})
+var sExpressPrivateOfferConfigurationStateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationStateFilter, Members: &mExpressPrivateOfferConfigurationStateFilter, Type: smithy.ShapeTypeStructure})
+var s_ExpressPrivateOfferConfigurationStateFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExpressPrivateOfferConfigurationStateFilterValueList, Members: &m_ExpressPrivateOfferConfigurationStateFilterValueList, Type: smithy.ShapeTypeList})
+var sExpressPrivateOfferConfigurationStateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationStateString, Members: &mExpressPrivateOfferConfigurationStateString, Type: smithy.ShapeTypeEnum})
+var sExpressPrivateOfferConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iExpressPrivateOfferConfigurationSummary, Members: &mExpressPrivateOfferConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sFailureCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFailureCode, Members: &mFailureCode, Type: smithy.ShapeTypeEnum})
+var s_FieldName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var s_FilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterName, Type: smithy.ShapeTypeString})
+var s_FilterValueContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValueContent, Type: smithy.ShapeTypeString})
+var sFrameworkFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrameworkFilters, Members: &mFrameworkFilters, Type: smithy.ShapeTypeUnion})
+var s_FrameworkId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrameworkId, Type: smithy.ShapeTypeString})
+var sFrameworkSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrameworkSummary, Members: &mFrameworkSummary, Type: smithy.ShapeTypeUnion})
+var s_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sIntent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeEnum})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var s_Json = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Json, Type: smithy.ShapeTypeString})
+var s_JsonDocumentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JsonDocumentType, Type: smithy.ShapeTypeDocument})
+var s_ListAssessmentsMaxResultInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAssessmentsMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var s_ListChangeSetsMaxResultInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListChangeSetsMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var s_ListEntitiesMaxResultInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEntitiesMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var sMachineLearningProductEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductEntityIdFilter, Members: &mMachineLearningProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_MachineLearningProductEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MachineLearningProductEntityIdFilterValueList, Members: &m_MachineLearningProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_MachineLearningProductEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MachineLearningProductEntityIdString, Type: smithy.ShapeTypeString})
+var sMachineLearningProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductFilters, Members: &mMachineLearningProductFilters, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductLastModifiedDateFilter, Members: &mMachineLearningProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductLastModifiedDateFilterDateRange, Members: &mMachineLearningProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductSort, Members: &mMachineLearningProductSort, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductSortBy, Members: &mMachineLearningProductSortBy, Type: smithy.ShapeTypeEnum})
+var sMachineLearningProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductSummary, Members: &mMachineLearningProductSummary, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductTitleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductTitleFilter, Members: &mMachineLearningProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var s_MachineLearningProductTitleFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MachineLearningProductTitleFilterValueList, Members: &m_MachineLearningProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var s_MachineLearningProductTitleString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MachineLearningProductTitleString, Type: smithy.ShapeTypeString})
+var sMachineLearningProductVisibilityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductVisibilityFilter, Members: &mMachineLearningProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var s_MachineLearningProductVisibilityFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MachineLearningProductVisibilityFilterValueList, Members: &m_MachineLearningProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var sMachineLearningProductVisibilityString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMachineLearningProductVisibilityString, Members: &mMachineLearningProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sOfferAvailabilityEndDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferAvailabilityEndDateFilter, Members: &mOfferAvailabilityEndDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferAvailabilityEndDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferAvailabilityEndDateFilterDateRange, Members: &mOfferAvailabilityEndDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferBuyerAccountsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferBuyerAccountsFilter, Members: &mOfferBuyerAccountsFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferBuyerAccountsFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferBuyerAccountsFilterWildcard, Type: smithy.ShapeTypeString})
+var s_OfferBuyerAccountsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferBuyerAccountsList, Members: &m_OfferBuyerAccountsList, Type: smithy.ShapeTypeList})
+var s_OfferBuyerAccountsString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferBuyerAccountsString, Type: smithy.ShapeTypeString})
+var sOfferCreatedBySourceFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferCreatedBySourceFilter, Members: &mOfferCreatedBySourceFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferCreatedBySourceFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferCreatedBySourceFilterValueList, Members: &m_OfferCreatedBySourceFilterValueList, Type: smithy.ShapeTypeList})
+var sOfferCreatedBySourceString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferCreatedBySourceString, Members: &mOfferCreatedBySourceString, Type: smithy.ShapeTypeEnum})
+var sOfferEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferEntityIdFilter, Members: &mOfferEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferEntityIdFilterValueList, Members: &m_OfferEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferEntityIdString, Type: smithy.ShapeTypeString})
+var sOfferFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferFilters, Members: &mOfferFilters, Type: smithy.ShapeTypeStructure})
+var sOfferLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferLastModifiedDateFilter, Members: &mOfferLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferLastModifiedDateFilterDateRange, Members: &mOfferLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferNameFilter, Members: &mOfferNameFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferNameFilterValueList, Members: &m_OfferNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferNameString, Type: smithy.ShapeTypeString})
+var sOfferProductIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferProductIdFilter, Members: &mOfferProductIdFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferProductIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferProductIdFilterValueList, Members: &m_OfferProductIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferProductIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferProductIdString, Type: smithy.ShapeTypeString})
+var sOfferReleaseDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferReleaseDateFilter, Members: &mOfferReleaseDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferReleaseDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferReleaseDateFilterDateRange, Members: &mOfferReleaseDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferResaleAuthorizationIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferResaleAuthorizationIdFilter, Members: &mOfferResaleAuthorizationIdFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferResaleAuthorizationIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferResaleAuthorizationIdFilterValueList, Members: &m_OfferResaleAuthorizationIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferResaleAuthorizationIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferResaleAuthorizationIdString, Type: smithy.ShapeTypeString})
+var sOfferSetAssociatedOfferIdsFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetAssociatedOfferIdsFilter, Members: &mOfferSetAssociatedOfferIdsFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferSetAssociatedOfferIdsFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetAssociatedOfferIdsFilterValueList, Members: &m_OfferSetAssociatedOfferIdsFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetAssociatedOfferIdsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetAssociatedOfferIdsList, Members: &m_OfferSetAssociatedOfferIdsList, Type: smithy.ShapeTypeList})
+var s_OfferSetAssociatedOfferIdsString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetAssociatedOfferIdsString, Type: smithy.ShapeTypeString})
+var sOfferSetEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetEntityIdFilter, Members: &mOfferSetEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferSetEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetEntityIdFilterValueList, Members: &m_OfferSetEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetEntityIdString, Type: smithy.ShapeTypeString})
+var sOfferSetFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetFilters, Members: &mOfferSetFilters, Type: smithy.ShapeTypeStructure})
+var sOfferSetIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetIdFilter, Members: &mOfferSetIdFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferSetIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetIdFilterValueList, Members: &m_OfferSetIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetIdString, Type: smithy.ShapeTypeString})
+var sOfferSetLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetLastModifiedDateFilter, Members: &mOfferSetLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetLastModifiedDateFilterDateRange, Members: &mOfferSetLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferSetNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetNameFilter, Members: &mOfferSetNameFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferSetNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetNameFilterValueList, Members: &m_OfferSetNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetNameString, Type: smithy.ShapeTypeString})
+var sOfferSetReleaseDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetReleaseDateFilter, Members: &mOfferSetReleaseDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetReleaseDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetReleaseDateFilterDateRange, Members: &mOfferSetReleaseDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferSetSolutionIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetSolutionIdFilter, Members: &mOfferSetSolutionIdFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferSetSolutionIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetSolutionIdFilterValueList, Members: &m_OfferSetSolutionIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetSolutionIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetSolutionIdString, Type: smithy.ShapeTypeString})
+var sOfferSetSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetSort, Members: &mOfferSetSort, Type: smithy.ShapeTypeStructure})
+var sOfferSetSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetSortBy, Members: &mOfferSetSortBy, Type: smithy.ShapeTypeEnum})
+var sOfferSetStateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetStateFilter, Members: &mOfferSetStateFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferSetStateFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferSetStateFilterValueList, Members: &m_OfferSetStateFilterValueList, Type: smithy.ShapeTypeList})
+var sOfferSetStateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetStateString, Members: &mOfferSetStateString, Type: smithy.ShapeTypeEnum})
+var sOfferSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSetSummary, Members: &mOfferSetSummary, Type: smithy.ShapeTypeStructure})
+var sOfferSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSort, Members: &mOfferSort, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSortBy, Members: &mOfferSortBy, Type: smithy.ShapeTypeEnum})
+var sOfferStateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferStateFilter, Members: &mOfferStateFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferStateFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferStateFilterValueList, Members: &m_OfferStateFilterValueList, Type: smithy.ShapeTypeList})
+var sOfferStateString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferStateString, Members: &mOfferStateString, Type: smithy.ShapeTypeEnum})
+var sOfferSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferSummary, Members: &mOfferSummary, Type: smithy.ShapeTypeStructure})
+var sOfferTargetAgreementIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferTargetAgreementIdFilter, Members: &mOfferTargetAgreementIdFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferTargetAgreementIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferTargetAgreementIdFilterValueList, Members: &m_OfferTargetAgreementIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferTargetAgreementIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferTargetAgreementIdString, Type: smithy.ShapeTypeString})
+var sOfferTargetAgreementIntentFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferTargetAgreementIntentFilter, Members: &mOfferTargetAgreementIntentFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferTargetAgreementIntentFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferTargetAgreementIntentFilterValueList, Members: &m_OfferTargetAgreementIntentFilterValueList, Type: smithy.ShapeTypeList})
+var sOfferTargetAgreementIntentString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferTargetAgreementIntentString, Members: &mOfferTargetAgreementIntentString, Type: smithy.ShapeTypeEnum})
+var sOfferTargetingFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferTargetingFilter, Members: &mOfferTargetingFilter, Type: smithy.ShapeTypeStructure})
+var s_OfferTargetingFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferTargetingFilterValueList, Members: &m_OfferTargetingFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferTargetingList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OfferTargetingList, Members: &m_OfferTargetingList, Type: smithy.ShapeTypeList})
+var sOfferTargetingString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOfferTargetingString, Members: &mOfferTargetingString, Type: smithy.ShapeTypeEnum})
+var sOwnershipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOwnershipType, Members: &mOwnershipType, Type: smithy.ShapeTypeEnum})
+var s_RequestedChangeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestedChangeList, Members: &m_RequestedChangeList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationAvailabilityEndDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationAvailabilityEndDateFilter, Members: &mResaleAuthorizationAvailabilityEndDateFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationAvailabilityEndDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationAvailabilityEndDateFilterDateRange, Members: &mResaleAuthorizationAvailabilityEndDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationAvailabilityEndDateFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationAvailabilityEndDateFilterValueList, Members: &m_ResaleAuthorizationAvailabilityEndDateFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationCreatedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationCreatedDateFilter, Members: &mResaleAuthorizationCreatedDateFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationCreatedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationCreatedDateFilterDateRange, Members: &mResaleAuthorizationCreatedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationCreatedDateFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationCreatedDateFilterValueList, Members: &m_ResaleAuthorizationCreatedDateFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationEntityIdFilter, Members: &mResaleAuthorizationEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationEntityIdFilterValueList, Members: &m_ResaleAuthorizationEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationEntityIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationFilters, Members: &mResaleAuthorizationFilters, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationIssuerAccountIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationIssuerAccountIdFilter, Members: &mResaleAuthorizationIssuerAccountIdFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationIssuerAccountIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationIssuerAccountIdFilterValueList, Members: &m_ResaleAuthorizationIssuerAccountIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationIssuerAccountIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationIssuerAccountIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationLastModifiedDateFilter, Members: &mResaleAuthorizationLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationLastModifiedDateFilterDateRange, Members: &mResaleAuthorizationLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationManufacturerAccountIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationManufacturerAccountIdFilter, Members: &mResaleAuthorizationManufacturerAccountIdFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationManufacturerAccountIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationManufacturerAccountIdFilterValueList, Members: &m_ResaleAuthorizationManufacturerAccountIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationManufacturerAccountIdFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationManufacturerAccountIdFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationManufacturerAccountIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationManufacturerAccountIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationManufacturerLegalNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationManufacturerLegalNameFilter, Members: &mResaleAuthorizationManufacturerLegalNameFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationManufacturerLegalNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationManufacturerLegalNameFilterValueList, Members: &m_ResaleAuthorizationManufacturerLegalNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationManufacturerLegalNameFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationManufacturerLegalNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationManufacturerLegalNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationManufacturerLegalNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationNameFilter, Members: &mResaleAuthorizationNameFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationNameFilterValueList, Members: &m_ResaleAuthorizationNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationNameFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationOfferExtendedStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationOfferExtendedStatusFilter, Members: &mResaleAuthorizationOfferExtendedStatusFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationOfferExtendedStatusFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationOfferExtendedStatusFilterValueList, Members: &m_ResaleAuthorizationOfferExtendedStatusFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationOfferExtendedStatusString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationOfferExtendedStatusString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationProductIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationProductIdFilter, Members: &mResaleAuthorizationProductIdFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationProductIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationProductIdFilterValueList, Members: &m_ResaleAuthorizationProductIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationProductIdFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationProductIdFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationProductIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationProductIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationProductNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationProductNameFilter, Members: &mResaleAuthorizationProductNameFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationProductNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationProductNameFilterValueList, Members: &m_ResaleAuthorizationProductNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationProductNameFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationProductNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationProductNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationProductNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationResellerAccountIDFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationResellerAccountIDFilter, Members: &mResaleAuthorizationResellerAccountIDFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationResellerAccountIDFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationResellerAccountIDFilterValueList, Members: &m_ResaleAuthorizationResellerAccountIDFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationResellerAccountIDFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationResellerAccountIDFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationResellerAccountIDString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationResellerAccountIDString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationResellerLegalNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationResellerLegalNameFilter, Members: &mResaleAuthorizationResellerLegalNameFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationResellerLegalNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationResellerLegalNameFilterValueList, Members: &m_ResaleAuthorizationResellerLegalNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationResellerLegalNameFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationResellerLegalNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationResellerLegalNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationResellerLegalNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationResellerRoleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationResellerRoleFilter, Members: &mResaleAuthorizationResellerRoleFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationResellerRoleFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationResellerRoleFilterValueList, Members: &m_ResaleAuthorizationResellerRoleFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationResellerRoleString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationResellerRoleString, Members: &mResaleAuthorizationResellerRoleString, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationSort, Members: &mResaleAuthorizationSort, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationSortBy, Members: &mResaleAuthorizationSortBy, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationSourceAuthorizationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationSourceAuthorizationFilter, Members: &mResaleAuthorizationSourceAuthorizationFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationSourceAuthorizationFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationSourceAuthorizationFilterValueList, Members: &m_ResaleAuthorizationSourceAuthorizationFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationSourceAuthorizationString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationSourceAuthorizationString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationStatusFilter, Members: &mResaleAuthorizationStatusFilter, Type: smithy.ShapeTypeStructure})
+var s_ResaleAuthorizationStatusFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResaleAuthorizationStatusFilterValueList, Members: &m_ResaleAuthorizationStatusFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationStatusString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationStatusString, Members: &mResaleAuthorizationStatusString, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResaleAuthorizationSummary, Members: &mResaleAuthorizationSummary, Type: smithy.ShapeTypeStructure})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var s_ResourceIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sResourceNotSupportedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotSupportedException, Members: &mResourceNotSupportedException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var s_ResourcePolicyJson = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicyJson, Type: smithy.ShapeTypeString})
+var sSaaSProductEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductEntityIdFilter, Members: &mSaaSProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_SaaSProductEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SaaSProductEntityIdFilterValueList, Members: &m_SaaSProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SaaSProductEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SaaSProductEntityIdString, Type: smithy.ShapeTypeString})
+var sSaaSProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductFilters, Members: &mSaaSProductFilters, Type: smithy.ShapeTypeStructure})
+var sSaaSProductLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductLastModifiedDateFilter, Members: &mSaaSProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sSaaSProductLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductLastModifiedDateFilterDateRange, Members: &mSaaSProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sSaaSProductSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductSort, Members: &mSaaSProductSort, Type: smithy.ShapeTypeStructure})
+var sSaaSProductSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductSortBy, Members: &mSaaSProductSortBy, Type: smithy.ShapeTypeEnum})
+var sSaaSProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductSummary, Members: &mSaaSProductSummary, Type: smithy.ShapeTypeStructure})
+var sSaaSProductTitleFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductTitleFilter, Members: &mSaaSProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var s_SaaSProductTitleFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SaaSProductTitleFilterValueList, Members: &m_SaaSProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var s_SaaSProductTitleString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SaaSProductTitleString, Type: smithy.ShapeTypeString})
+var sSaaSProductVisibilityFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductVisibilityFilter, Members: &mSaaSProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var s_SaaSProductVisibilityFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SaaSProductVisibilityFilterValueList, Members: &m_SaaSProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var sSaaSProductVisibilityString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSaaSProductVisibilityString, Members: &mSaaSProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var s_ScopeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScopeName, Type: smithy.ShapeTypeString})
+var s_ScopeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScopeValue, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var sSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure})
+var s_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SortBy, Type: smithy.ShapeTypeString})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sSubsidiaryAuthorizationCreatedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationCreatedDateFilter, Members: &mSubsidiaryAuthorizationCreatedDateFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationCreatedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationCreatedDateFilterDateRange, Members: &mSubsidiaryAuthorizationCreatedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationEntityIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationEntityIdFilter, Members: &mSubsidiaryAuthorizationEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var s_SubsidiaryAuthorizationEntityIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationEntityIdFilterValueList, Members: &m_SubsidiaryAuthorizationEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationEntityIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationEntityIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationFilters, Members: &mSubsidiaryAuthorizationFilters, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationLastModifiedDateFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationLastModifiedDateFilter, Members: &mSubsidiaryAuthorizationLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationLastModifiedDateFilterDateRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationLastModifiedDateFilterDateRange, Members: &mSubsidiaryAuthorizationLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationNameFilter, Members: &mSubsidiaryAuthorizationNameFilter, Type: smithy.ShapeTypeStructure})
+var s_SubsidiaryAuthorizationNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationNameFilterValueList, Members: &m_SubsidiaryAuthorizationNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationNameFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationNameString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationResourceIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationResourceIdFilter, Members: &mSubsidiaryAuthorizationResourceIdFilter, Type: smithy.ShapeTypeStructure})
+var s_SubsidiaryAuthorizationResourceIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationResourceIdFilterValueList, Members: &m_SubsidiaryAuthorizationResourceIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationResourceIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationResourceIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationResourceNameFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationResourceNameFilter, Members: &mSubsidiaryAuthorizationResourceNameFilter, Type: smithy.ShapeTypeStructure})
+var s_SubsidiaryAuthorizationResourceNameFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationResourceNameFilterValueList, Members: &m_SubsidiaryAuthorizationResourceNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationResourceNameFilterWildcard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationResourceNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationResourceNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationResourceNameString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSort = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationSort, Members: &mSubsidiaryAuthorizationSort, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationSortBy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationSortBy, Members: &mSubsidiaryAuthorizationSortBy, Type: smithy.ShapeTypeEnum})
+var sSubsidiaryAuthorizationStatusFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationStatusFilter, Members: &mSubsidiaryAuthorizationStatusFilter, Type: smithy.ShapeTypeStructure})
+var s_SubsidiaryAuthorizationStatusFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationStatusFilterValueList, Members: &m_SubsidiaryAuthorizationStatusFilterValueList, Type: smithy.ShapeTypeList})
+var sSubsidiaryAuthorizationStatusString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationStatusString, Members: &mSubsidiaryAuthorizationStatusString, Type: smithy.ShapeTypeEnum})
+var sSubsidiaryAuthorizationSubsidiaryAccountIdFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationSubsidiaryAccountIdFilter, Members: &mSubsidiaryAuthorizationSubsidiaryAccountIdFilter, Type: smithy.ShapeTypeStructure})
+var s_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList, Members: &m_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationSubsidiaryAccountIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationSubsidiaryAccountIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubsidiaryAuthorizationSummary, Members: &mSubsidiaryAuthorizationSummary, Type: smithy.ShapeTypeStructure})
+var s_SubsidiaryAuthorizationSummaryNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationSummaryNameString, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationSummaryResourceIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationSummaryResourceIdString, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationSummaryResourceNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationSummaryResourceNameString, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationSummaryStatusString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationSummaryStatusString, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationSummarySubsidiaryAccountIdString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubsidiaryAuthorizationSummarySubsidiaryAccountIdString, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var s_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValueList, Members: &m_ValueList, Type: smithy.ShapeTypeList})
+var s_VersionedFrameworkId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VersionedFrameworkId, Type: smithy.ShapeTypeString})
+var s_VisibilityValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VisibilityValue, Type: smithy.ShapeTypeString})
+var sBatchDescribeEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeEntitiesRequest, Members: &mBatchDescribeEntitiesRequest, Type: smithy.ShapeTypeStructure})
+var sBatchDescribeEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDescribeEntitiesResponse, Members: &mBatchDescribeEntitiesResponse, Type: smithy.ShapeTypeStructure})
+var sCancelChangeSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChangeSetRequest, Members: &mCancelChangeSetRequest, Type: smithy.ShapeTypeStructure})
+var sCancelChangeSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelChangeSetResponse, Members: &mCancelChangeSetResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeAssessmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAssessmentRequest, Members: &mDescribeAssessmentRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeAssessmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeAssessmentResponse, Members: &mDescribeAssessmentResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeChangeSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChangeSetRequest, Members: &mDescribeChangeSetRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeChangeSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeChangeSetResponse, Members: &mDescribeChangeSetResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityRequest, Members: &mDescribeEntityRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEntityResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntityResponse, Members: &mDescribeEntityResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sListAssessmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentsRequest, Members: &mListAssessmentsRequest, Type: smithy.ShapeTypeStructure})
+var sListAssessmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAssessmentsResponse, Members: &mListAssessmentsResponse, Type: smithy.ShapeTypeStructure})
+var sListChangeSetsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangeSetsRequest, Members: &mListChangeSetsRequest, Type: smithy.ShapeTypeStructure})
+var sListChangeSetsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChangeSetsResponse, Members: &mListChangeSetsResponse, Type: smithy.ShapeTypeStructure})
+var sListEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesRequest, Members: &mListEntitiesRequest, Type: smithy.ShapeTypeStructure})
+var sListEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesResponse, Members: &mListEntitiesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sStartChangeSetRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChangeSetRequest, Members: &mStartChangeSetRequest, Type: smithy.ShapeTypeStructure})
+var sStartChangeSetResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartChangeSetResponse, Members: &mStartChangeSetResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sAmiProductEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_AmiProductEntityIdFilterValueList, Members: &m_AmiProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_AmiProductEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AmiProductEntityIdString, Type: smithy.ShapeTypeString})
+var sAmiProductFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iAmiProductEntityIdFilter, Members: &mAmiProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sAmiProductFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iAmiProductLastModifiedDateFilter, Members: &mAmiProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sAmiProductFilters_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &iAmiProductTitleFilter, Members: &mAmiProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var sAmiProductFilters_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iAmiProductVisibilityFilter, Members: &mAmiProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var sAmiProductLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iAmiProductLastModifiedDateFilterDateRange, Members: &mAmiProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sAmiProductLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sAmiProductLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sAmiProductSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iAmiProductSortBy, Members: &mAmiProductSortBy, Type: smithy.ShapeTypeEnum})
+var sAmiProductSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sAmiProductSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmiProductSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmiProductSortBy_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmiProductSortBy_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmiProductSummary_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &i_AmiProductTitleString, Type: smithy.ShapeTypeString})
+var sAmiProductSummary_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iAmiProductVisibilityString, Members: &mAmiProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sAmiProductTitleFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_AmiProductTitleFilterValueList, Members: &m_AmiProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var sAmiProductTitleFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_AmiProductTitleString, Type: smithy.ShapeTypeString})
+var s_AmiProductTitleFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AmiProductTitleString, Type: smithy.ShapeTypeString})
+var sAmiProductVisibilityFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_AmiProductVisibilityFilterValueList, Members: &m_AmiProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var s_AmiProductVisibilityFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAmiProductVisibilityString, Members: &mAmiProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sAmiProductVisibilityString_Limited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limited", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmiProductVisibilityString_Public = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Public", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmiProductVisibilityString_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmiProductVisibilityString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAMISecurityFilters_DeliveryOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptionId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAMISecuritySummary_DeliveryOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptionId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAssessmentResult_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssessmentResult_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssessmentSummary_AssessmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_FrameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkId", ID: &i_VersionedFrameworkId, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_AssessmentTargetSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentTargetSummary", ID: &iAssessmentTargetSummary, Members: &mAssessmentTargetSummary, Type: smithy.ShapeTypeStructure})
+var sAssessmentSummary_FrameworkSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkSummary", ID: &iFrameworkSummary, Members: &mFrameworkSummary, Type: smithy.ShapeTypeUnion})
+var sAssessmentSummary_AssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentResult", ID: &iAssessmentResult, Members: &mAssessmentResult, Type: smithy.ShapeTypeEnum})
+var sAssessmentSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sAssessmentSummary_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var s_AssessmentSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssessmentSummary, Members: &mAssessmentSummary, Type: smithy.ShapeTypeStructure})
+var sAssessmentTargetFilter_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAssessmentTargetFilter_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAssessmentTargetSummary_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAssessmentTargetSummary_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sBatchDescribeErrorDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_BatchDescribeErrorCodeString, Type: smithy.ShapeTypeString})
+var sBatchDescribeErrorDetail_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_BatchDescribeErrorMessageContent, Type: smithy.ShapeTypeString})
+var sChange_ChangeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeType", ID: &i_ChangeType, Type: smithy.ShapeTypeString})
+var sChange_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure})
+var sChange_EntityTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sChange_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &i_Json, Type: smithy.ShapeTypeString})
+var sChange_DetailsDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailsDocument", ID: &i_JsonDocumentType, Type: smithy.ShapeTypeDocument})
+var sChange_ChangeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeName", ID: &i_ChangeName, Type: smithy.ShapeTypeString})
+var s_ChangeSetDescription_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeSummary, Members: &mChangeSummary, Type: smithy.ShapeTypeStructure})
+var s_ChangeSetSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChangeSetSummaryListItem, Members: &mChangeSetSummaryListItem, Type: smithy.ShapeTypeStructure})
+var sChangeSetSummaryListItem_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sChangeSetSummaryListItem_ChangeSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sChangeSetSummaryListItem_ChangeSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetName", ID: &i_ChangeSetName, Type: smithy.ShapeTypeString})
+var sChangeSetSummaryListItem_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sChangeSetSummaryListItem_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sChangeSetSummaryListItem_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChangeStatus, Members: &mChangeStatus, Type: smithy.ShapeTypeEnum})
+var sChangeSetSummaryListItem_EntityIdList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdList", ID: &i_ResourceIdList, Members: &m_ResourceIdList, Type: smithy.ShapeTypeList})
+var sChangeSetSummaryListItem_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &iFailureCode, Members: &mFailureCode, Type: smithy.ShapeTypeEnum})
+var sChangeStatus_PREPARING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREPARING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_APPLYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLYING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sChangeSummary_ChangeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeType", ID: &i_ChangeType, Type: smithy.ShapeTypeString})
+var sChangeSummary_Entity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entity", ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure})
+var sChangeSummary_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &i_Json, Type: smithy.ShapeTypeString})
+var sChangeSummary_DetailsDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailsDocument", ID: &i_JsonDocumentType, Type: smithy.ShapeTypeDocument})
+var sChangeSummary_ErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorDetailList", ID: &i_ErrorDetailList, Members: &m_ErrorDetailList, Type: smithy.ShapeTypeList})
+var sChangeSummary_ChangeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeName", ID: &i_ChangeName, Type: smithy.ShapeTypeString})
+var sContainerProductEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ContainerProductEntityIdFilterValueList, Members: &m_ContainerProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ContainerProductEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ContainerProductEntityIdString, Type: smithy.ShapeTypeString})
+var sContainerProductFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iContainerProductEntityIdFilter, Members: &mContainerProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sContainerProductFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iContainerProductLastModifiedDateFilter, Members: &mContainerProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sContainerProductFilters_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &iContainerProductTitleFilter, Members: &mContainerProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var sContainerProductFilters_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iContainerProductVisibilityFilter, Members: &mContainerProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var sContainerProductLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iContainerProductLastModifiedDateFilterDateRange, Members: &mContainerProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sContainerProductLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sContainerProductLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sContainerProductSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iContainerProductSortBy, Members: &mContainerProductSortBy, Type: smithy.ShapeTypeEnum})
+var sContainerProductSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sContainerProductSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductSortBy_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductSortBy_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductSortBy_CompatibleAWSServices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompatibleAWSServices", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductSummary_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &i_ContainerProductTitleString, Type: smithy.ShapeTypeString})
+var sContainerProductSummary_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iContainerProductVisibilityString, Members: &mContainerProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sContainerProductTitleFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ContainerProductTitleFilterValueList, Members: &m_ContainerProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var sContainerProductTitleFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ContainerProductTitleString, Type: smithy.ShapeTypeString})
+var s_ContainerProductTitleFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ContainerProductTitleString, Type: smithy.ShapeTypeString})
+var sContainerProductVisibilityFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ContainerProductVisibilityFilterValueList, Members: &m_ContainerProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var s_ContainerProductVisibilityFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iContainerProductVisibilityString, Members: &mContainerProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sContainerProductVisibilityString_Limited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limited", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductVisibilityString_Public = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Public", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductVisibilityString_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerProductVisibilityString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerSecurityFilters_DeliveryOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptionId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sContainerSecuritySummary_DeliveryOptionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptionId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sControlAssessment_ControlId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sControlAssessment_ControlAssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlAssessmentResult", ID: &iControlAssessmentResult, Members: &mControlAssessmentResult, Type: smithy.ShapeTypeEnum})
+var sControlAssessment_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_ControlErrorList, Members: &m_ControlErrorList, Type: smithy.ShapeTypeList})
+var s_ControlAssessmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlAssessment, Members: &mControlAssessment, Type: smithy.ShapeTypeStructure})
+var sControlAssessmentResult_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlAssessmentResult_FAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlAssessmentResult_NOT_EXECUTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_EXECUTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlAssessmentResult_EXEMPTION_PASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXEMPTION_PASS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlError_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sControlError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sControlError_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &i_ErrorScopeList, Members: &m_ErrorScopeList, Type: smithy.ShapeTypeList})
+var s_ControlErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlError, Members: &mControlError, Type: smithy.ShapeTypeStructure})
+var sDataProductEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_DataProductEntityIdFilterValueList, Members: &m_DataProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_DataProductEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DataProductEntityIdString, Type: smithy.ShapeTypeString})
+var sDataProductFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iDataProductEntityIdFilter, Members: &mDataProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sDataProductFilters_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &iDataProductTitleFilter, Members: &mDataProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var sDataProductFilters_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iDataProductVisibilityFilter, Members: &mDataProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var sDataProductFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iDataProductLastModifiedDateFilter, Members: &mDataProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sDataProductLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iDataProductLastModifiedDateFilterDateRange, Members: &mDataProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sDataProductLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sDataProductLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sDataProductSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iDataProductSortBy, Members: &mDataProductSortBy, Type: smithy.ShapeTypeEnum})
+var sDataProductSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sDataProductSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductSortBy_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductSortBy_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductSummary_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &i_DataProductTitleString, Type: smithy.ShapeTypeString})
+var sDataProductSummary_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iDataProductVisibilityString, Members: &mDataProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sDataProductTitleFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_DataProductTitleFilterValueList, Members: &m_DataProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var sDataProductTitleFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_DataProductTitleString, Type: smithy.ShapeTypeString})
+var s_DataProductTitleFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DataProductTitleString, Type: smithy.ShapeTypeString})
+var sDataProductVisibilityFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_DataProductVisibilityFilterValueList, Members: &m_DataProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var s_DataProductVisibilityFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataProductVisibilityString, Members: &mDataProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sDataProductVisibilityString_Limited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limited", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductVisibilityString_Public = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Public", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductVisibilityString_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductVisibilityString_Unavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataProductVisibilityString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sEntity_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sEntityDetail_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sEntityDetail_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sEntityDetail_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sEntityDetail_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sEntityDetail_DetailsDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailsDocument", ID: &i_JsonDocumentType, Type: smithy.ShapeTypeDocument})
+var s_EntityDetails_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var s_EntityDetails_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iEntityDetail, Members: &mEntityDetail, Type: smithy.ShapeTypeStructure})
+var sEntityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString})
+var sEntityRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var s_EntityRequestList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntityRequest, Members: &mEntityRequest, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EntityNameString, Type: smithy.ShapeTypeString})
+var sEntitySummary_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sEntitySummary_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sEntitySummary_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sEntitySummary_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sEntitySummary_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &i_VisibilityValue, Type: smithy.ShapeTypeString})
+var sEntitySummary_AmiProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiProductSummary", ID: &iAmiProductSummary, Members: &mAmiProductSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_ContainerProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerProductSummary", ID: &iContainerProductSummary, Members: &mContainerProductSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_DataProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataProductSummary", ID: &iDataProductSummary, Members: &mDataProductSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_SaaSProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaaSProductSummary", ID: &iSaaSProductSummary, Members: &mSaaSProductSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_OfferSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSummary", ID: &iOfferSummary, Members: &mOfferSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_ResaleAuthorizationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResaleAuthorizationSummary", ID: &iResaleAuthorizationSummary, Members: &mResaleAuthorizationSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_MachineLearningProductSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MachineLearningProductSummary", ID: &iMachineLearningProductSummary, Members: &mMachineLearningProductSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_OfferSetSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSetSummary", ID: &iOfferSetSummary, Members: &mOfferSetSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_ExpressPrivateOfferConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpressPrivateOfferConfigurationSummary", ID: &iExpressPrivateOfferConfigurationSummary, Members: &mExpressPrivateOfferConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sEntitySummary_SubsidiaryAuthorizationSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubsidiaryAuthorizationSummary", ID: &iSubsidiaryAuthorizationSummary, Members: &mSubsidiaryAuthorizationSummary, Type: smithy.ShapeTypeStructure})
+var s_EntitySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntitySummary, Members: &mEntitySummary, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_DataProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataProductFilters", ID: &iDataProductFilters, Members: &mDataProductFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_SaaSProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaaSProductFilters", ID: &iSaaSProductFilters, Members: &mSaaSProductFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_AmiProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiProductFilters", ID: &iAmiProductFilters, Members: &mAmiProductFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_OfferFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferFilters", ID: &iOfferFilters, Members: &mOfferFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_ContainerProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerProductFilters", ID: &iContainerProductFilters, Members: &mContainerProductFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_ResaleAuthorizationFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResaleAuthorizationFilters", ID: &iResaleAuthorizationFilters, Members: &mResaleAuthorizationFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_MachineLearningProductFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MachineLearningProductFilters", ID: &iMachineLearningProductFilters, Members: &mMachineLearningProductFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_OfferSetFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSetFilters", ID: &iOfferSetFilters, Members: &mOfferSetFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_ExpressPrivateOfferConfigurationFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpressPrivateOfferConfigurationFilters", ID: &iExpressPrivateOfferConfigurationFilters, Members: &mExpressPrivateOfferConfigurationFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeFilters_SubsidiaryAuthorizationFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubsidiaryAuthorizationFilters", ID: &iSubsidiaryAuthorizationFilters, Members: &mSubsidiaryAuthorizationFilters, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_DataProductSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataProductSort", ID: &iDataProductSort, Members: &mDataProductSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_SaaSProductSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SaaSProductSort", ID: &iSaaSProductSort, Members: &mSaaSProductSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_AmiProductSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiProductSort", ID: &iAmiProductSort, Members: &mAmiProductSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_OfferSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSort", ID: &iOfferSort, Members: &mOfferSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_ContainerProductSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerProductSort", ID: &iContainerProductSort, Members: &mContainerProductSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_ResaleAuthorizationSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResaleAuthorizationSort", ID: &iResaleAuthorizationSort, Members: &mResaleAuthorizationSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_MachineLearningProductSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MachineLearningProductSort", ID: &iMachineLearningProductSort, Members: &mMachineLearningProductSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_OfferSetSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSetSort", ID: &iOfferSetSort, Members: &mOfferSetSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_ExpressPrivateOfferConfigurationSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpressPrivateOfferConfigurationSort", ID: &iExpressPrivateOfferConfigurationSort, Members: &mExpressPrivateOfferConfigurationSort, Type: smithy.ShapeTypeStructure})
+var sEntityTypeSort_SubsidiaryAuthorizationSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubsidiaryAuthorizationSort", ID: &iSubsidiaryAuthorizationSort, Members: &mSubsidiaryAuthorizationSort, Type: smithy.ShapeTypeStructure})
+var sErrorDetail_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCodeString, Type: smithy.ShapeTypeString})
+var sErrorDetail_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var s_ErrorDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iErrorDetail, Members: &mErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_Errors_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var s_Errors_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iBatchDescribeErrorDetail, Members: &mBatchDescribeErrorDetail, Type: smithy.ShapeTypeStructure})
+var sErrorScope_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ScopeName, Type: smithy.ShapeTypeString})
+var sErrorScope_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_ScopeValue, Type: smithy.ShapeTypeString})
+var s_ErrorScopeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iErrorScope, Members: &mErrorScope, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ExpressPrivateOfferConfigurationEntityIdFilterValueList, Members: &m_ExpressPrivateOfferConfigurationEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ExpressPrivateOfferConfigurationEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExpressPrivateOfferConfigurationEntityIdString, Type: smithy.ShapeTypeString})
+var sExpressPrivateOfferConfigurationFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iExpressPrivateOfferConfigurationEntityIdFilter, Members: &mExpressPrivateOfferConfigurationEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationFilters_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &iExpressPrivateOfferConfigurationProductIdFilter, Members: &mExpressPrivateOfferConfigurationProductIdFilter, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationFilters_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iExpressPrivateOfferConfigurationStateFilter, Members: &mExpressPrivateOfferConfigurationStateFilter, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationProductIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ExpressPrivateOfferConfigurationProductIdFilterValueList, Members: &m_ExpressPrivateOfferConfigurationProductIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ExpressPrivateOfferConfigurationProductIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExpressPrivateOfferConfigurationProductIdString, Type: smithy.ShapeTypeString})
+var sExpressPrivateOfferConfigurationSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iExpressPrivateOfferConfigurationSortBy, Members: &mExpressPrivateOfferConfigurationSortBy, Type: smithy.ShapeTypeEnum})
+var sExpressPrivateOfferConfigurationSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sExpressPrivateOfferConfigurationSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationSortBy_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationSortBy_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationStateFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ExpressPrivateOfferConfigurationStateFilterValueList, Members: &m_ExpressPrivateOfferConfigurationStateFilterValueList, Type: smithy.ShapeTypeList})
+var s_ExpressPrivateOfferConfigurationStateFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iExpressPrivateOfferConfigurationStateString, Members: &mExpressPrivateOfferConfigurationStateString, Type: smithy.ShapeTypeEnum})
+var sExpressPrivateOfferConfigurationStateString_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationStateString_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sExpressPrivateOfferConfigurationSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_ExpressPrivateOfferConfigurationProductIdString, Type: smithy.ShapeTypeString})
+var sExpressPrivateOfferConfigurationSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iExpressPrivateOfferConfigurationStateString, Members: &mExpressPrivateOfferConfigurationStateString, Type: smithy.ShapeTypeEnum})
+var sFailureCode_ClientError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientError", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFailureCode_ServerFault = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerFault", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_FilterName, Type: smithy.ShapeTypeString})
+var sFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ValueList, Members: &m_ValueList, Type: smithy.ShapeTypeList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFrameworkFilters_AMISecurityFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMISecurityFilters", ID: &iAMISecurityFilters, Members: &mAMISecurityFilters, Type: smithy.ShapeTypeStructure})
+var sFrameworkFilters_ContainerSecurityFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerSecurityFilters", ID: &iContainerSecurityFilters, Members: &mContainerSecurityFilters, Type: smithy.ShapeTypeStructure})
+var sFrameworkSummary_AMISecuritySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMISecuritySummary", ID: &iAMISecuritySummary, Members: &mAMISecuritySummary, Type: smithy.ShapeTypeStructure})
+var sFrameworkSummary_ContainerSecuritySummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerSecuritySummary", ID: &iContainerSecuritySummary, Members: &mContainerSecuritySummary, Type: smithy.ShapeTypeStructure})
+var sIntent_VALIDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALIDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIntent_APPLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServiceException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sMachineLearningProductEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_MachineLearningProductEntityIdFilterValueList, Members: &m_MachineLearningProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_MachineLearningProductEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MachineLearningProductEntityIdString, Type: smithy.ShapeTypeString})
+var sMachineLearningProductFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iMachineLearningProductEntityIdFilter, Members: &mMachineLearningProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iMachineLearningProductLastModifiedDateFilter, Members: &mMachineLearningProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductFilters_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &iMachineLearningProductTitleFilter, Members: &mMachineLearningProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductFilters_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iMachineLearningProductVisibilityFilter, Members: &mMachineLearningProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iMachineLearningProductLastModifiedDateFilterDateRange, Members: &mMachineLearningProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sMachineLearningProductLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sMachineLearningProductSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iMachineLearningProductSortBy, Members: &mMachineLearningProductSortBy, Type: smithy.ShapeTypeEnum})
+var sMachineLearningProductSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sMachineLearningProductSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductSortBy_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductSortBy_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductSummary_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &i_MachineLearningProductTitleString, Type: smithy.ShapeTypeString})
+var sMachineLearningProductSummary_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iMachineLearningProductVisibilityString, Members: &mMachineLearningProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sMachineLearningProductTitleFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_MachineLearningProductTitleFilterValueList, Members: &m_MachineLearningProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var sMachineLearningProductTitleFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_MachineLearningProductTitleString, Type: smithy.ShapeTypeString})
+var s_MachineLearningProductTitleFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MachineLearningProductTitleString, Type: smithy.ShapeTypeString})
+var sMachineLearningProductVisibilityFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_MachineLearningProductVisibilityFilterValueList, Members: &m_MachineLearningProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var s_MachineLearningProductVisibilityFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMachineLearningProductVisibilityString, Members: &mMachineLearningProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sMachineLearningProductVisibilityString_Limited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limited", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductVisibilityString_Public = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Public", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductVisibilityString_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMachineLearningProductVisibilityString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferAvailabilityEndDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iOfferAvailabilityEndDateFilterDateRange, Members: &mOfferAvailabilityEndDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferAvailabilityEndDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferAvailabilityEndDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferBuyerAccountsFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_OfferBuyerAccountsFilterWildcard, Type: smithy.ShapeTypeString})
+var s_OfferBuyerAccountsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferBuyerAccountsString, Type: smithy.ShapeTypeString})
+var sOfferCreatedBySourceFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferCreatedBySourceFilterValueList, Members: &m_OfferCreatedBySourceFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferCreatedBySourceFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferCreatedBySourceString, Members: &mOfferCreatedBySourceString, Type: smithy.ShapeTypeEnum})
+var sOfferCreatedBySourceString_Seller = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Seller", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferCreatedBySourceString_AwsMarketplace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsMarketplace", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferEntityIdFilterValueList, Members: &m_OfferEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferEntityIdString, Type: smithy.ShapeTypeString})
+var sOfferFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iOfferEntityIdFilter, Members: &mOfferEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iOfferNameFilter, Members: &mOfferNameFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &iOfferProductIdFilter, Members: &mOfferProductIdFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_ResaleAuthorizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResaleAuthorizationId", ID: &iOfferResaleAuthorizationIdFilter, Members: &mOfferResaleAuthorizationIdFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_ReleaseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseDate", ID: &iOfferReleaseDateFilter, Members: &mOfferReleaseDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_AvailabilityEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityEndDate", ID: &iOfferAvailabilityEndDateFilter, Members: &mOfferAvailabilityEndDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_BuyerAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerAccounts", ID: &iOfferBuyerAccountsFilter, Members: &mOfferBuyerAccountsFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iOfferStateFilter, Members: &mOfferStateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_Targeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targeting", ID: &iOfferTargetingFilter, Members: &mOfferTargetingFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iOfferLastModifiedDateFilter, Members: &mOfferLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_OfferSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSetId", ID: &iOfferSetIdFilter, Members: &mOfferSetIdFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_TargetAgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAgreementId", ID: &iOfferTargetAgreementIdFilter, Members: &mOfferTargetAgreementIdFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_TargetAgreementIntent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAgreementIntent", ID: &iOfferTargetAgreementIntentFilter, Members: &mOfferTargetAgreementIntentFilter, Type: smithy.ShapeTypeStructure})
+var sOfferFilters_CreatedBySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBySource", ID: &iOfferCreatedBySourceFilter, Members: &mOfferCreatedBySourceFilter, Type: smithy.ShapeTypeStructure})
+var sOfferLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iOfferLastModifiedDateFilterDateRange, Members: &mOfferLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferNameFilterValueList, Members: &m_OfferNameFilterValueList, Type: smithy.ShapeTypeList})
+var sOfferNameFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_OfferNameString, Type: smithy.ShapeTypeString})
+var s_OfferNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferNameString, Type: smithy.ShapeTypeString})
+var sOfferProductIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferProductIdFilterValueList, Members: &m_OfferProductIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferProductIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferProductIdString, Type: smithy.ShapeTypeString})
+var sOfferReleaseDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iOfferReleaseDateFilterDateRange, Members: &mOfferReleaseDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferReleaseDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferReleaseDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferResaleAuthorizationIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferResaleAuthorizationIdFilterValueList, Members: &m_OfferResaleAuthorizationIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferResaleAuthorizationIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferResaleAuthorizationIdString, Type: smithy.ShapeTypeString})
+var sOfferSetAssociatedOfferIdsFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferSetAssociatedOfferIdsFilterValueList, Members: &m_OfferSetAssociatedOfferIdsFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetAssociatedOfferIdsFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferSetAssociatedOfferIdsString, Type: smithy.ShapeTypeString})
+var s_OfferSetAssociatedOfferIdsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferSetAssociatedOfferIdsString, Type: smithy.ShapeTypeString})
+var sOfferSetEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferSetEntityIdFilterValueList, Members: &m_OfferSetEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferSetEntityIdString, Type: smithy.ShapeTypeString})
+var sOfferSetFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iOfferSetEntityIdFilter, Members: &mOfferSetEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetFilters_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iOfferSetNameFilter, Members: &mOfferSetNameFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetFilters_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iOfferSetStateFilter, Members: &mOfferSetStateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetFilters_ReleaseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseDate", ID: &iOfferSetReleaseDateFilter, Members: &mOfferSetReleaseDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetFilters_AssociatedOfferIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedOfferIds", ID: &iOfferSetAssociatedOfferIdsFilter, Members: &mOfferSetAssociatedOfferIdsFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetFilters_SolutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionId", ID: &iOfferSetSolutionIdFilter, Members: &mOfferSetSolutionIdFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iOfferSetLastModifiedDateFilter, Members: &mOfferSetLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sOfferSetIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferSetIdFilterValueList, Members: &m_OfferSetIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferSetIdString, Type: smithy.ShapeTypeString})
+var sOfferSetLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iOfferSetLastModifiedDateFilterDateRange, Members: &mOfferSetLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferSetLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferSetLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferSetNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferSetNameFilterValueList, Members: &m_OfferSetNameFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferSetNameString, Type: smithy.ShapeTypeString})
+var sOfferSetReleaseDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iOfferSetReleaseDateFilterDateRange, Members: &mOfferSetReleaseDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sOfferSetReleaseDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferSetReleaseDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferSetSolutionIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferSetSolutionIdFilterValueList, Members: &m_OfferSetSolutionIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetSolutionIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferSetSolutionIdString, Type: smithy.ShapeTypeString})
+var sOfferSetSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iOfferSetSortBy, Members: &mOfferSetSortBy, Type: smithy.ShapeTypeEnum})
+var sOfferSetSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sOfferSetSortBy_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetSortBy_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetSortBy_ReleaseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetSortBy_SolutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetStateFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferSetStateFilterValueList, Members: &m_OfferSetStateFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferSetStateFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferSetStateString, Members: &mOfferSetStateString, Type: smithy.ShapeTypeEnum})
+var sOfferSetStateString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetStateString_Released = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Released", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSetSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_OfferSetNameString, Type: smithy.ShapeTypeString})
+var sOfferSetSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iOfferSetStateString, Members: &mOfferSetStateString, Type: smithy.ShapeTypeEnum})
+var sOfferSetSummary_ReleaseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferSetSummary_AssociatedOfferIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssociatedOfferIds", ID: &i_OfferSetAssociatedOfferIdsList, Members: &m_OfferSetAssociatedOfferIdsList, Type: smithy.ShapeTypeList})
+var sOfferSetSummary_SolutionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SolutionId", ID: &i_OfferSetSolutionIdString, Type: smithy.ShapeTypeString})
+var sOfferSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iOfferSortBy, Members: &mOfferSortBy, Type: smithy.ShapeTypeEnum})
+var sOfferSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sOfferSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_ResaleAuthorizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResaleAuthorizationId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_ReleaseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_AvailabilityEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityEndDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_BuyerAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerAccounts", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_Targeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targeting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_OfferSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSetId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_TargetAgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAgreementId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_TargetAgreementIntent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAgreementIntent", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSortBy_CreatedBySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBySource", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferStateFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferStateFilterValueList, Members: &m_OfferStateFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferStateFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferStateString, Members: &mOfferStateString, Type: smithy.ShapeTypeEnum})
+var sOfferStateString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferStateString_Released = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Released", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_OfferNameString, Type: smithy.ShapeTypeString})
+var sOfferSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_OfferProductIdString, Type: smithy.ShapeTypeString})
+var sOfferSummary_ResaleAuthorizationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResaleAuthorizationId", ID: &i_OfferResaleAuthorizationIdString, Type: smithy.ShapeTypeString})
+var sOfferSummary_ReleaseDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReleaseDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferSummary_AvailabilityEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityEndDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sOfferSummary_BuyerAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerAccounts", ID: &i_OfferBuyerAccountsList, Members: &m_OfferBuyerAccountsList, Type: smithy.ShapeTypeList})
+var sOfferSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iOfferStateString, Members: &mOfferStateString, Type: smithy.ShapeTypeEnum})
+var sOfferSummary_Targeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Targeting", ID: &i_OfferTargetingList, Members: &m_OfferTargetingList, Type: smithy.ShapeTypeList})
+var sOfferSummary_OfferSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferSetId", ID: &i_OfferSetIdString, Type: smithy.ShapeTypeString})
+var sOfferSummary_TargetAgreementId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAgreementId", ID: &i_OfferTargetAgreementIdString, Type: smithy.ShapeTypeString})
+var sOfferSummary_TargetAgreementIntent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetAgreementIntent", ID: &iOfferTargetAgreementIntentString, Members: &mOfferTargetAgreementIntentString, Type: smithy.ShapeTypeEnum})
+var sOfferSummary_CreatedBySource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedBySource", ID: &iOfferCreatedBySourceString, Members: &mOfferCreatedBySourceString, Type: smithy.ShapeTypeEnum})
+var sOfferTargetAgreementIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferTargetAgreementIdFilterValueList, Members: &m_OfferTargetAgreementIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferTargetAgreementIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_OfferTargetAgreementIdString, Type: smithy.ShapeTypeString})
+var sOfferTargetAgreementIntentFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferTargetAgreementIntentFilterValueList, Members: &m_OfferTargetAgreementIntentFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferTargetAgreementIntentFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferTargetAgreementIntentString, Members: &mOfferTargetAgreementIntentString, Type: smithy.ShapeTypeEnum})
+var sOfferTargetAgreementIntentString_Renew = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Renew", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferTargetingFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_OfferTargetingFilterValueList, Members: &m_OfferTargetingFilterValueList, Type: smithy.ShapeTypeList})
+var s_OfferTargetingFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferTargetingString, Members: &mOfferTargetingString, Type: smithy.ShapeTypeEnum})
+var s_OfferTargetingList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOfferTargetingString, Members: &mOfferTargetingString, Type: smithy.ShapeTypeEnum})
+var sOfferTargetingString_BuyerAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BuyerAccounts", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferTargetingString_ParticipatingPrograms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipatingPrograms", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferTargetingString_CountryCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CountryCodes", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOfferTargetingString_None = smithy.NewStaticSchema(smithy.StaticSchema{Member: "None", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOwnershipType_SELF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SELF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOwnershipType_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RequestedChangeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChange, Members: &mChange, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationAvailabilityEndDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iResaleAuthorizationAvailabilityEndDateFilterDateRange, Members: &mResaleAuthorizationAvailabilityEndDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationAvailabilityEndDateFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationAvailabilityEndDateFilterValueList, Members: &m_ResaleAuthorizationAvailabilityEndDateFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationAvailabilityEndDateFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationCreatedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iResaleAuthorizationCreatedDateFilterDateRange, Members: &mResaleAuthorizationCreatedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationCreatedDateFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationCreatedDateFilterValueList, Members: &m_ResaleAuthorizationCreatedDateFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationCreatedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationCreatedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationCreatedDateFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationEntityIdFilterValueList, Members: &m_ResaleAuthorizationEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationEntityIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iResaleAuthorizationEntityIdFilter, Members: &mResaleAuthorizationEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iResaleAuthorizationNameFilter, Members: &mResaleAuthorizationNameFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &iResaleAuthorizationProductIdFilter, Members: &mResaleAuthorizationProductIdFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &iResaleAuthorizationCreatedDateFilter, Members: &mResaleAuthorizationCreatedDateFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_AvailabilityEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityEndDate", ID: &iResaleAuthorizationAvailabilityEndDateFilter, Members: &mResaleAuthorizationAvailabilityEndDateFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_ManufacturerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManufacturerAccountId", ID: &iResaleAuthorizationManufacturerAccountIdFilter, Members: &mResaleAuthorizationManufacturerAccountIdFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &iResaleAuthorizationProductNameFilter, Members: &mResaleAuthorizationProductNameFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_ManufacturerLegalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManufacturerLegalName", ID: &iResaleAuthorizationManufacturerLegalNameFilter, Members: &mResaleAuthorizationManufacturerLegalNameFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_ResellerAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerAccountID", ID: &iResaleAuthorizationResellerAccountIDFilter, Members: &mResaleAuthorizationResellerAccountIDFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_ResellerLegalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerLegalName", ID: &iResaleAuthorizationResellerLegalNameFilter, Members: &mResaleAuthorizationResellerLegalNameFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iResaleAuthorizationStatusFilter, Members: &mResaleAuthorizationStatusFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_OfferExtendedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferExtendedStatus", ID: &iResaleAuthorizationOfferExtendedStatusFilter, Members: &mResaleAuthorizationOfferExtendedStatusFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iResaleAuthorizationLastModifiedDateFilter, Members: &mResaleAuthorizationLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_ResellerRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerRole", ID: &iResaleAuthorizationResellerRoleFilter, Members: &mResaleAuthorizationResellerRoleFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_SourceAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAuthorization", ID: &iResaleAuthorizationSourceAuthorizationFilter, Members: &mResaleAuthorizationSourceAuthorizationFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationFilters_IssuerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuerAccountId", ID: &iResaleAuthorizationIssuerAccountIdFilter, Members: &mResaleAuthorizationIssuerAccountIdFilter, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationIssuerAccountIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationIssuerAccountIdFilterValueList, Members: &m_ResaleAuthorizationIssuerAccountIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationIssuerAccountIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationIssuerAccountIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iResaleAuthorizationLastModifiedDateFilterDateRange, Members: &mResaleAuthorizationLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationManufacturerAccountIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationManufacturerAccountIdFilterValueList, Members: &m_ResaleAuthorizationManufacturerAccountIdFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationManufacturerAccountIdFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ResaleAuthorizationManufacturerAccountIdFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationManufacturerAccountIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationManufacturerAccountIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationManufacturerLegalNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationManufacturerLegalNameFilterValueList, Members: &m_ResaleAuthorizationManufacturerLegalNameFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationManufacturerLegalNameFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ResaleAuthorizationManufacturerLegalNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationManufacturerLegalNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationManufacturerLegalNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationNameFilterValueList, Members: &m_ResaleAuthorizationNameFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationNameFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ResaleAuthorizationNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationOfferExtendedStatusFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationOfferExtendedStatusFilterValueList, Members: &m_ResaleAuthorizationOfferExtendedStatusFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationOfferExtendedStatusFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationOfferExtendedStatusString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationProductIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationProductIdFilterValueList, Members: &m_ResaleAuthorizationProductIdFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationProductIdFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ResaleAuthorizationProductIdFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationProductIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationProductIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationProductNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationProductNameFilterValueList, Members: &m_ResaleAuthorizationProductNameFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationProductNameFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ResaleAuthorizationProductNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationProductNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationProductNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationResellerAccountIDFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationResellerAccountIDFilterValueList, Members: &m_ResaleAuthorizationResellerAccountIDFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationResellerAccountIDFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ResaleAuthorizationResellerAccountIDFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationResellerAccountIDFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationResellerAccountIDString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationResellerLegalNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationResellerLegalNameFilterValueList, Members: &m_ResaleAuthorizationResellerLegalNameFilterValueList, Type: smithy.ShapeTypeList})
+var sResaleAuthorizationResellerLegalNameFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_ResaleAuthorizationResellerLegalNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_ResaleAuthorizationResellerLegalNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationResellerLegalNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationResellerRoleFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationResellerRoleFilterValueList, Members: &m_ResaleAuthorizationResellerRoleFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationResellerRoleFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResaleAuthorizationResellerRoleString, Members: &mResaleAuthorizationResellerRoleString, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationResellerRoleString_ChannelPartner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelPartner", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationResellerRoleString_Distributor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Distributor", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iResaleAuthorizationSortBy, Members: &mResaleAuthorizationSortBy, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_ManufacturerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManufacturerAccountId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_ManufacturerLegalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManufacturerLegalName", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_ResellerAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerAccountID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_ResellerLegalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerLegalName", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_OfferExtendedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferExtendedStatus", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_AvailabilityEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityEndDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_ResellerRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerRole", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_SourceAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAuthorization", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSortBy_IssuerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuerAccountId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSourceAuthorizationFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationSourceAuthorizationFilterValueList, Members: &m_ResaleAuthorizationSourceAuthorizationFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationSourceAuthorizationFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResaleAuthorizationSourceAuthorizationString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationStatusFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_ResaleAuthorizationStatusFilterValueList, Members: &m_ResaleAuthorizationStatusFilterValueList, Type: smithy.ShapeTypeList})
+var s_ResaleAuthorizationStatusFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResaleAuthorizationStatusString, Members: &mResaleAuthorizationStatusString, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationStatusString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationStatusString_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationStatusString_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResaleAuthorizationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_ResaleAuthorizationNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_ProductId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductId", ID: &i_ResaleAuthorizationProductIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_ProductName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductName", ID: &i_ResaleAuthorizationProductNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_ManufacturerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManufacturerAccountId", ID: &i_ResaleAuthorizationManufacturerAccountIdString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_ManufacturerLegalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManufacturerLegalName", ID: &i_ResaleAuthorizationManufacturerLegalNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_ResellerAccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerAccountID", ID: &i_ResaleAuthorizationResellerAccountIDString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_ResellerLegalName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerLegalName", ID: &i_ResaleAuthorizationResellerLegalNameString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iResaleAuthorizationStatusString, Members: &mResaleAuthorizationStatusString, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationSummary_OfferExtendedStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OfferExtendedStatus", ID: &i_ResaleAuthorizationOfferExtendedStatusString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_AvailabilityEndDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityEndDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_ResellerRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResellerRole", ID: &iResaleAuthorizationResellerRoleString, Members: &mResaleAuthorizationResellerRoleString, Type: smithy.ShapeTypeEnum})
+var sResaleAuthorizationSummary_SourceAuthorization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceAuthorization", ID: &i_ResaleAuthorizationSourceAuthorizationString, Type: smithy.ShapeTypeString})
+var sResaleAuthorizationSummary_IssuerAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssuerAccountId", ID: &i_ResaleAuthorizationIssuerAccountIdString, Type: smithy.ShapeTypeString})
+var s_ResourceIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sResourceNotSupportedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sSaaSProductEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SaaSProductEntityIdFilterValueList, Members: &m_SaaSProductEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SaaSProductEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SaaSProductEntityIdString, Type: smithy.ShapeTypeString})
+var sSaaSProductFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iSaaSProductEntityIdFilter, Members: &mSaaSProductEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sSaaSProductFilters_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &iSaaSProductTitleFilter, Members: &mSaaSProductTitleFilter, Type: smithy.ShapeTypeStructure})
+var sSaaSProductFilters_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iSaaSProductVisibilityFilter, Members: &mSaaSProductVisibilityFilter, Type: smithy.ShapeTypeStructure})
+var sSaaSProductFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iSaaSProductLastModifiedDateFilter, Members: &mSaaSProductLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sSaaSProductLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iSaaSProductLastModifiedDateFilterDateRange, Members: &mSaaSProductLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sSaaSProductLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sSaaSProductLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sSaaSProductSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSaaSProductSortBy, Members: &mSaaSProductSortBy, Type: smithy.ShapeTypeEnum})
+var sSaaSProductSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sSaaSProductSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductSortBy_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductSortBy_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductSortBy_DeliveryOptionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeliveryOptionTypes", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductSummary_ProductTitle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductTitle", ID: &i_SaaSProductTitleString, Type: smithy.ShapeTypeString})
+var sSaaSProductSummary_Visibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Visibility", ID: &iSaaSProductVisibilityString, Members: &mSaaSProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sSaaSProductTitleFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SaaSProductTitleFilterValueList, Members: &m_SaaSProductTitleFilterValueList, Type: smithy.ShapeTypeList})
+var sSaaSProductTitleFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_SaaSProductTitleString, Type: smithy.ShapeTypeString})
+var s_SaaSProductTitleFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SaaSProductTitleString, Type: smithy.ShapeTypeString})
+var sSaaSProductVisibilityFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SaaSProductVisibilityFilterValueList, Members: &m_SaaSProductVisibilityFilterValueList, Type: smithy.ShapeTypeList})
+var s_SaaSProductVisibilityFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSaaSProductVisibilityString, Members: &mSaaSProductVisibilityString, Type: smithy.ShapeTypeEnum})
+var sSaaSProductVisibilityString_Limited = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limited", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductVisibilityString_Public = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Public", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductVisibilityString_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSaaSProductVisibilityString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &i_SortBy, Type: smithy.ShapeTypeString})
+var sSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sSortOrder_ASCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortOrder_DESCENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationCreatedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iSubsidiaryAuthorizationCreatedDateFilterDateRange, Members: &mSubsidiaryAuthorizationCreatedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationEntityIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SubsidiaryAuthorizationEntityIdFilterValueList, Members: &m_SubsidiaryAuthorizationEntityIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationEntityIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubsidiaryAuthorizationEntityIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationFilters_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &iSubsidiaryAuthorizationEntityIdFilter, Members: &mSubsidiaryAuthorizationEntityIdFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationFilters_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iSubsidiaryAuthorizationStatusFilter, Members: &mSubsidiaryAuthorizationStatusFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationFilters_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &iSubsidiaryAuthorizationResourceIdFilter, Members: &mSubsidiaryAuthorizationResourceIdFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationFilters_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &iSubsidiaryAuthorizationResourceNameFilter, Members: &mSubsidiaryAuthorizationResourceNameFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationFilters_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iSubsidiaryAuthorizationNameFilter, Members: &mSubsidiaryAuthorizationNameFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationFilters_SubsidiaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubsidiaryAccountId", ID: &iSubsidiaryAuthorizationSubsidiaryAccountIdFilter, Members: &mSubsidiaryAuthorizationSubsidiaryAccountIdFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationFilters_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &iSubsidiaryAuthorizationCreatedDateFilter, Members: &mSubsidiaryAuthorizationCreatedDateFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationFilters_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &iSubsidiaryAuthorizationLastModifiedDateFilter, Members: &mSubsidiaryAuthorizationLastModifiedDateFilter, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationLastModifiedDateFilter_DateRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DateRange", ID: &iSubsidiaryAuthorizationLastModifiedDateFilterDateRange, Members: &mSubsidiaryAuthorizationLastModifiedDateFilterDateRange, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AfterValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeforeValue", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SubsidiaryAuthorizationNameFilterValueList, Members: &m_SubsidiaryAuthorizationNameFilterValueList, Type: smithy.ShapeTypeList})
+var sSubsidiaryAuthorizationNameFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_SubsidiaryAuthorizationNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubsidiaryAuthorizationNameString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationResourceIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SubsidiaryAuthorizationResourceIdFilterValueList, Members: &m_SubsidiaryAuthorizationResourceIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationResourceIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubsidiaryAuthorizationResourceIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationResourceNameFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SubsidiaryAuthorizationResourceNameFilterValueList, Members: &m_SubsidiaryAuthorizationResourceNameFilterValueList, Type: smithy.ShapeTypeList})
+var sSubsidiaryAuthorizationResourceNameFilter_WildCardValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WildCardValue", ID: &i_SubsidiaryAuthorizationResourceNameFilterWildcard, Type: smithy.ShapeTypeString})
+var s_SubsidiaryAuthorizationResourceNameFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubsidiaryAuthorizationResourceNameString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSort_SortBy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortBy", ID: &iSubsidiaryAuthorizationSortBy, Members: &mSubsidiaryAuthorizationSortBy, Type: smithy.ShapeTypeEnum})
+var sSubsidiaryAuthorizationSort_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sSubsidiaryAuthorizationSortBy_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationSortBy_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationSortBy_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationSortBy_SubsidiaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubsidiaryAccountId", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationSortBy_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationSortBy_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationStatusFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SubsidiaryAuthorizationStatusFilterValueList, Members: &m_SubsidiaryAuthorizationStatusFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationStatusFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubsidiaryAuthorizationStatusString, Members: &mSubsidiaryAuthorizationStatusString, Type: smithy.ShapeTypeEnum})
+var sSubsidiaryAuthorizationStatusString_Draft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Draft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationStatusString_Active = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Active", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationStatusString_Restricted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Restricted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValueList", ID: &i_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList, Members: &m_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList, Type: smithy.ShapeTypeList})
+var s_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubsidiaryAuthorizationSubsidiaryAccountIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SubsidiaryAuthorizationSummaryNameString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_SubsidiaryAuthorizationSummaryStatusString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSummary_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_SubsidiaryAuthorizationSummaryResourceIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSummary_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceName", ID: &i_SubsidiaryAuthorizationSummaryResourceNameString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSummary_SubsidiaryAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubsidiaryAccountId", ID: &i_SubsidiaryAuthorizationSummarySubsidiaryAccountIdString, Type: smithy.ShapeTypeString})
+var sSubsidiaryAuthorizationSummary_CreatedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sValidationException_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationExceptionFieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_Reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationExceptionField_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_ChangeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeType", ID: &i_ChangeType, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_Field = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Field", ID: &i_FieldName, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ValueList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValueContent, Type: smithy.ShapeTypeString})
+var sBatchDescribeEntitiesRequest_EntityRequestList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityRequestList", ID: &i_EntityRequestList, Members: &m_EntityRequestList, Type: smithy.ShapeTypeList})
+var sBatchDescribeEntitiesResponse_EntityDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityDetails", ID: &i_EntityDetails, Members: &m_EntityDetails, Type: smithy.ShapeTypeMap})
+var sBatchDescribeEntitiesResponse_Errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Errors", ID: &i_Errors, Members: &m_Errors, Type: smithy.ShapeTypeMap})
+var sCancelChangeSetRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Traits: &t23, Type: smithy.ShapeTypeString})
+var sCancelChangeSetRequest_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Traits: &t24, Type: smithy.ShapeTypeString})
+var sCancelChangeSetResponse_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sCancelChangeSetResponse_ChangeSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceARN, Traits: &t25, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentRequest_AssessmentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentIdentifier", ID: &i_AssessmentIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_DescribeAssessmentMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var sDescribeAssessmentRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentResponse_AssessmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentResponse_AssessmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentResponse_FrameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkId", ID: &i_VersionedFrameworkId, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentResponse_AssessmentTargetSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentTargetSummary", ID: &iAssessmentTargetSummary, Members: &mAssessmentTargetSummary, Type: smithy.ShapeTypeStructure})
+var sDescribeAssessmentResponse_FrameworkSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkSummary", ID: &iFrameworkSummary, Members: &mFrameworkSummary, Type: smithy.ShapeTypeUnion})
+var sDescribeAssessmentResponse_AssessmentResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentResult", ID: &iAssessmentResult, Members: &mAssessmentResult, Type: smithy.ShapeTypeEnum})
+var sDescribeAssessmentResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentResponse_ExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpiresAt", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sDescribeAssessmentResponse_ControlAssessments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ControlAssessments", ID: &i_ControlAssessmentList, Members: &m_ControlAssessmentList, Type: smithy.ShapeTypeList})
+var sDescribeAssessmentResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Traits: &t23, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetRequest_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Traits: &t24, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetResponse_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetResponse_ChangeSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetResponse_ChangeSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetName", ID: &i_ChangeSetName, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetResponse_Intent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intent", ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeEnum})
+var sDescribeChangeSetResponse_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetResponse_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iChangeStatus, Members: &mChangeStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeChangeSetResponse_FailureCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureCode", ID: &iFailureCode, Members: &mFailureCode, Type: smithy.ShapeTypeEnum})
+var sDescribeChangeSetResponse_FailureDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailureDescription", ID: &i_ExceptionMessageContent, Type: smithy.ShapeTypeString})
+var sDescribeChangeSetResponse_ChangeSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSet", ID: &i_ChangeSetDescription, Members: &m_ChangeSetDescription, Type: smithy.ShapeTypeList})
+var sDescribeEntityRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Traits: &t23, Type: smithy.ShapeTypeString})
+var sDescribeEntityRequest_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityId", ID: &i_ResourceId, Traits: &t26, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_EntityIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityIdentifier", ID: &i_Identifier, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_EntityArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_LastModifiedDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedDate", ID: &i_DateTimeISO8601, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_Details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Details", ID: &i_Json, Type: smithy.ShapeTypeString})
+var sDescribeEntityResponse_DetailsDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailsDocument", ID: &i_JsonDocumentType, Type: smithy.ShapeTypeDocument})
+var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceARN, Traits: &t25, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicyJson, Type: smithy.ShapeTypeString})
+var sListAssessmentsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString})
+var sListAssessmentsRequest_FrameworkId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkId", ID: &i_FrameworkId, Type: smithy.ShapeTypeString})
+var sListAssessmentsRequest_AssessmentTargetFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentTargetFilter", ID: &iAssessmentTargetFilter, Members: &mAssessmentTargetFilter, Type: smithy.ShapeTypeStructure})
+var sListAssessmentsRequest_FrameworkFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FrameworkFilters", ID: &iFrameworkFilters, Members: &mFrameworkFilters, Type: smithy.ShapeTypeUnion})
+var sListAssessmentsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListAssessmentsMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var sListAssessmentsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAssessmentsResponse_AssessmentSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AssessmentSummaryList", ID: &i_AssessmentSummaryList, Members: &m_AssessmentSummaryList, Type: smithy.ShapeTypeList})
+var sListAssessmentsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListChangeSetsRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString})
+var sListChangeSetsRequest_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterList", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sListChangeSetsRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure})
+var sListChangeSetsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListChangeSetsMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var sListChangeSetsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListChangeSetsResponse_ChangeSetSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetSummaryList", ID: &i_ChangeSetSummaryList, Members: &m_ChangeSetSummaryList, Type: smithy.ShapeTypeList})
+var sListChangeSetsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEntitiesRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString})
+var sListEntitiesRequest_EntityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityType", ID: &i_EntityType, Type: smithy.ShapeTypeString})
+var sListEntitiesRequest_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterList", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sListEntitiesRequest_Sort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sort", ID: &iSort, Members: &mSort, Type: smithy.ShapeTypeStructure})
+var sListEntitiesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEntitiesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListEntitiesMaxResultInteger, Type: smithy.ShapeTypeInteger})
+var sListEntitiesRequest_OwnershipType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OwnershipType", ID: &iOwnershipType, Members: &mOwnershipType, Type: smithy.ShapeTypeEnum})
+var sListEntitiesRequest_EntityTypeFilters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityTypeFilters", ID: &iEntityTypeFilters, Members: &mEntityTypeFilters, Type: smithy.ShapeTypeUnion})
+var sListEntitiesRequest_EntityTypeSort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntityTypeSort", ID: &iEntityTypeSort, Members: &mEntityTypeSort, Type: smithy.ShapeTypeUnion})
+var sListEntitiesResponse_EntitySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EntitySummaryList", ID: &i_EntitySummaryList, Members: &m_EntitySummaryList, Type: smithy.ShapeTypeList})
+var sListEntitiesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_ResourcePolicyJson, Type: smithy.ShapeTypeString})
+var sStartChangeSetRequest_Catalog = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Catalog", ID: &i_Catalog, Type: smithy.ShapeTypeString})
+var sStartChangeSetRequest_ChangeSet = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSet", ID: &i_RequestedChangeList, Members: &m_RequestedChangeList, Type: smithy.ShapeTypeList})
+var sStartChangeSetRequest_ChangeSetName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetName", ID: &i_ChangeSetName, Type: smithy.ShapeTypeString})
+var sStartChangeSetRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sStartChangeSetRequest_ChangeSetTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartChangeSetRequest_Intent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Intent", ID: &iIntent, Members: &mIntent, Type: smithy.ShapeTypeEnum})
+var sStartChangeSetResponse_ChangeSetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sStartChangeSetResponse_ChangeSetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChangeSetArn", ID: &i_ARN, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+
+var BatchDescribeEntities = &sBatchDescribeEntities
+
+var CancelChangeSet = &sCancelChangeSet
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DescribeAssessment = &sDescribeAssessment
+
+var DescribeChangeSet = &sDescribeChangeSet
+
+var DescribeEntity = &sDescribeEntity
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var ListAssessments = &sListAssessments
+
+var ListChangeSets = &sListChangeSets
+
+var ListEntities = &sListEntities
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var StartChangeSet = &sStartChangeSet
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var _AWSMPSeymour = &s_AWSMPSeymour
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AmiProductEntityIdFilter = &sAmiProductEntityIdFilter
+var AmiProductEntityIdFilter_ValueList = &sAmiProductEntityIdFilter_ValueList
+
+var _AmiProductEntityIdFilterValueList = &s_AmiProductEntityIdFilterValueList
+var _AmiProductEntityIdFilterValueList_member = &s_AmiProductEntityIdFilterValueList_member
+
+var _AmiProductEntityIdString = &s_AmiProductEntityIdString
+
+var AmiProductFilters = &sAmiProductFilters
+var AmiProductFilters_EntityId = &sAmiProductFilters_EntityId
+var AmiProductFilters_LastModifiedDate = &sAmiProductFilters_LastModifiedDate
+var AmiProductFilters_ProductTitle = &sAmiProductFilters_ProductTitle
+var AmiProductFilters_Visibility = &sAmiProductFilters_Visibility
+
+var AmiProductLastModifiedDateFilter = &sAmiProductLastModifiedDateFilter
+var AmiProductLastModifiedDateFilter_DateRange = &sAmiProductLastModifiedDateFilter_DateRange
+
+var AmiProductLastModifiedDateFilterDateRange = &sAmiProductLastModifiedDateFilterDateRange
+var AmiProductLastModifiedDateFilterDateRange_AfterValue = &sAmiProductLastModifiedDateFilterDateRange_AfterValue
+var AmiProductLastModifiedDateFilterDateRange_BeforeValue = &sAmiProductLastModifiedDateFilterDateRange_BeforeValue
+
+var AmiProductSort = &sAmiProductSort
+var AmiProductSort_SortBy = &sAmiProductSort_SortBy
+var AmiProductSort_SortOrder = &sAmiProductSort_SortOrder
+
+var AmiProductSortBy = &sAmiProductSortBy
+var AmiProductSortBy_EntityId = &sAmiProductSortBy_EntityId
+var AmiProductSortBy_LastModifiedDate = &sAmiProductSortBy_LastModifiedDate
+var AmiProductSortBy_ProductTitle = &sAmiProductSortBy_ProductTitle
+var AmiProductSortBy_Visibility = &sAmiProductSortBy_Visibility
+
+var AmiProductSummary = &sAmiProductSummary
+var AmiProductSummary_ProductTitle = &sAmiProductSummary_ProductTitle
+var AmiProductSummary_Visibility = &sAmiProductSummary_Visibility
+
+var AmiProductTitleFilter = &sAmiProductTitleFilter
+var AmiProductTitleFilter_ValueList = &sAmiProductTitleFilter_ValueList
+var AmiProductTitleFilter_WildCardValue = &sAmiProductTitleFilter_WildCardValue
+
+var _AmiProductTitleFilterValueList = &s_AmiProductTitleFilterValueList
+var _AmiProductTitleFilterValueList_member = &s_AmiProductTitleFilterValueList_member
+
+var _AmiProductTitleString = &s_AmiProductTitleString
+
+var AmiProductVisibilityFilter = &sAmiProductVisibilityFilter
+var AmiProductVisibilityFilter_ValueList = &sAmiProductVisibilityFilter_ValueList
+
+var _AmiProductVisibilityFilterValueList = &s_AmiProductVisibilityFilterValueList
+var _AmiProductVisibilityFilterValueList_member = &s_AmiProductVisibilityFilterValueList_member
+
+var AmiProductVisibilityString = &sAmiProductVisibilityString
+var AmiProductVisibilityString_Limited = &sAmiProductVisibilityString_Limited
+var AmiProductVisibilityString_Public = &sAmiProductVisibilityString_Public
+var AmiProductVisibilityString_Restricted = &sAmiProductVisibilityString_Restricted
+var AmiProductVisibilityString_Draft = &sAmiProductVisibilityString_Draft
+
+var AMISecurityFilters = &sAMISecurityFilters
+var AMISecurityFilters_DeliveryOptionId = &sAMISecurityFilters_DeliveryOptionId
+
+var AMISecuritySummary = &sAMISecuritySummary
+var AMISecuritySummary_DeliveryOptionId = &sAMISecuritySummary_DeliveryOptionId
+
+var _ARN = &s_ARN
+
+var _AssessmentIdentifier = &s_AssessmentIdentifier
+
+var AssessmentResult = &sAssessmentResult
+var AssessmentResult_PASS = &sAssessmentResult_PASS
+var AssessmentResult_FAIL = &sAssessmentResult_FAIL
+
+var AssessmentSummary = &sAssessmentSummary
+var AssessmentSummary_AssessmentArn = &sAssessmentSummary_AssessmentArn
+var AssessmentSummary_AssessmentId = &sAssessmentSummary_AssessmentId
+var AssessmentSummary_FrameworkId = &sAssessmentSummary_FrameworkId
+var AssessmentSummary_AssessmentTargetSummary = &sAssessmentSummary_AssessmentTargetSummary
+var AssessmentSummary_FrameworkSummary = &sAssessmentSummary_FrameworkSummary
+var AssessmentSummary_AssessmentResult = &sAssessmentSummary_AssessmentResult
+var AssessmentSummary_CreatedAt = &sAssessmentSummary_CreatedAt
+var AssessmentSummary_ExpiresAt = &sAssessmentSummary_ExpiresAt
+
+var _AssessmentSummaryList = &s_AssessmentSummaryList
+var _AssessmentSummaryList_member = &s_AssessmentSummaryList_member
+
+var AssessmentTargetFilter = &sAssessmentTargetFilter
+var AssessmentTargetFilter_EntityId = &sAssessmentTargetFilter_EntityId
+var AssessmentTargetFilter_ChangeSetId = &sAssessmentTargetFilter_ChangeSetId
+
+var AssessmentTargetSummary = &sAssessmentTargetSummary
+var AssessmentTargetSummary_EntityId = &sAssessmentTargetSummary_EntityId
+var AssessmentTargetSummary_ChangeSetId = &sAssessmentTargetSummary_ChangeSetId
+
+var _BatchDescribeErrorCodeString = &s_BatchDescribeErrorCodeString
+
+var BatchDescribeErrorDetail = &sBatchDescribeErrorDetail
+var BatchDescribeErrorDetail_ErrorCode = &sBatchDescribeErrorDetail_ErrorCode
+var BatchDescribeErrorDetail_ErrorMessage = &sBatchDescribeErrorDetail_ErrorMessage
+
+var _BatchDescribeErrorMessageContent = &s_BatchDescribeErrorMessageContent
+
+var _Catalog = &s_Catalog
+
+var Change = &sChange
+var Change_ChangeType = &sChange_ChangeType
+var Change_Entity = &sChange_Entity
+var Change_EntityTags = &sChange_EntityTags
+var Change_Details = &sChange_Details
+var Change_DetailsDocument = &sChange_DetailsDocument
+var Change_ChangeName = &sChange_ChangeName
+
+var _ChangeName = &s_ChangeName
+
+var _ChangeSetDescription = &s_ChangeSetDescription
+var _ChangeSetDescription_member = &s_ChangeSetDescription_member
+
+var _ChangeSetName = &s_ChangeSetName
+
+var _ChangeSetSummaryList = &s_ChangeSetSummaryList
+var _ChangeSetSummaryList_member = &s_ChangeSetSummaryList_member
+
+var ChangeSetSummaryListItem = &sChangeSetSummaryListItem
+var ChangeSetSummaryListItem_ChangeSetId = &sChangeSetSummaryListItem_ChangeSetId
+var ChangeSetSummaryListItem_ChangeSetArn = &sChangeSetSummaryListItem_ChangeSetArn
+var ChangeSetSummaryListItem_ChangeSetName = &sChangeSetSummaryListItem_ChangeSetName
+var ChangeSetSummaryListItem_StartTime = &sChangeSetSummaryListItem_StartTime
+var ChangeSetSummaryListItem_EndTime = &sChangeSetSummaryListItem_EndTime
+var ChangeSetSummaryListItem_Status = &sChangeSetSummaryListItem_Status
+var ChangeSetSummaryListItem_EntityIdList = &sChangeSetSummaryListItem_EntityIdList
+var ChangeSetSummaryListItem_FailureCode = &sChangeSetSummaryListItem_FailureCode
+
+var ChangeStatus = &sChangeStatus
+var ChangeStatus_PREPARING = &sChangeStatus_PREPARING
+var ChangeStatus_APPLYING = &sChangeStatus_APPLYING
+var ChangeStatus_SUCCEEDED = &sChangeStatus_SUCCEEDED
+var ChangeStatus_CANCELLED = &sChangeStatus_CANCELLED
+var ChangeStatus_FAILED = &sChangeStatus_FAILED
+
+var ChangeSummary = &sChangeSummary
+var ChangeSummary_ChangeType = &sChangeSummary_ChangeType
+var ChangeSummary_Entity = &sChangeSummary_Entity
+var ChangeSummary_Details = &sChangeSummary_Details
+var ChangeSummary_DetailsDocument = &sChangeSummary_DetailsDocument
+var ChangeSummary_ErrorDetailList = &sChangeSummary_ErrorDetailList
+var ChangeSummary_ChangeName = &sChangeSummary_ChangeName
+
+var _ChangeType = &s_ChangeType
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ContainerProductEntityIdFilter = &sContainerProductEntityIdFilter
+var ContainerProductEntityIdFilter_ValueList = &sContainerProductEntityIdFilter_ValueList
+
+var _ContainerProductEntityIdFilterValueList = &s_ContainerProductEntityIdFilterValueList
+var _ContainerProductEntityIdFilterValueList_member = &s_ContainerProductEntityIdFilterValueList_member
+
+var _ContainerProductEntityIdString = &s_ContainerProductEntityIdString
+
+var ContainerProductFilters = &sContainerProductFilters
+var ContainerProductFilters_EntityId = &sContainerProductFilters_EntityId
+var ContainerProductFilters_LastModifiedDate = &sContainerProductFilters_LastModifiedDate
+var ContainerProductFilters_ProductTitle = &sContainerProductFilters_ProductTitle
+var ContainerProductFilters_Visibility = &sContainerProductFilters_Visibility
+
+var ContainerProductLastModifiedDateFilter = &sContainerProductLastModifiedDateFilter
+var ContainerProductLastModifiedDateFilter_DateRange = &sContainerProductLastModifiedDateFilter_DateRange
+
+var ContainerProductLastModifiedDateFilterDateRange = &sContainerProductLastModifiedDateFilterDateRange
+var ContainerProductLastModifiedDateFilterDateRange_AfterValue = &sContainerProductLastModifiedDateFilterDateRange_AfterValue
+var ContainerProductLastModifiedDateFilterDateRange_BeforeValue = &sContainerProductLastModifiedDateFilterDateRange_BeforeValue
+
+var ContainerProductSort = &sContainerProductSort
+var ContainerProductSort_SortBy = &sContainerProductSort_SortBy
+var ContainerProductSort_SortOrder = &sContainerProductSort_SortOrder
+
+var ContainerProductSortBy = &sContainerProductSortBy
+var ContainerProductSortBy_EntityId = &sContainerProductSortBy_EntityId
+var ContainerProductSortBy_LastModifiedDate = &sContainerProductSortBy_LastModifiedDate
+var ContainerProductSortBy_ProductTitle = &sContainerProductSortBy_ProductTitle
+var ContainerProductSortBy_Visibility = &sContainerProductSortBy_Visibility
+var ContainerProductSortBy_CompatibleAWSServices = &sContainerProductSortBy_CompatibleAWSServices
+
+var ContainerProductSummary = &sContainerProductSummary
+var ContainerProductSummary_ProductTitle = &sContainerProductSummary_ProductTitle
+var ContainerProductSummary_Visibility = &sContainerProductSummary_Visibility
+
+var ContainerProductTitleFilter = &sContainerProductTitleFilter
+var ContainerProductTitleFilter_ValueList = &sContainerProductTitleFilter_ValueList
+var ContainerProductTitleFilter_WildCardValue = &sContainerProductTitleFilter_WildCardValue
+
+var _ContainerProductTitleFilterValueList = &s_ContainerProductTitleFilterValueList
+var _ContainerProductTitleFilterValueList_member = &s_ContainerProductTitleFilterValueList_member
+
+var _ContainerProductTitleString = &s_ContainerProductTitleString
+
+var ContainerProductVisibilityFilter = &sContainerProductVisibilityFilter
+var ContainerProductVisibilityFilter_ValueList = &sContainerProductVisibilityFilter_ValueList
+
+var _ContainerProductVisibilityFilterValueList = &s_ContainerProductVisibilityFilterValueList
+var _ContainerProductVisibilityFilterValueList_member = &s_ContainerProductVisibilityFilterValueList_member
+
+var ContainerProductVisibilityString = &sContainerProductVisibilityString
+var ContainerProductVisibilityString_Limited = &sContainerProductVisibilityString_Limited
+var ContainerProductVisibilityString_Public = &sContainerProductVisibilityString_Public
+var ContainerProductVisibilityString_Restricted = &sContainerProductVisibilityString_Restricted
+var ContainerProductVisibilityString_Draft = &sContainerProductVisibilityString_Draft
+
+var ContainerSecurityFilters = &sContainerSecurityFilters
+var ContainerSecurityFilters_DeliveryOptionId = &sContainerSecurityFilters_DeliveryOptionId
+
+var ContainerSecuritySummary = &sContainerSecuritySummary
+var ContainerSecuritySummary_DeliveryOptionId = &sContainerSecuritySummary_DeliveryOptionId
+
+var ControlAssessment = &sControlAssessment
+var ControlAssessment_ControlId = &sControlAssessment_ControlId
+var ControlAssessment_ControlAssessmentResult = &sControlAssessment_ControlAssessmentResult
+var ControlAssessment_Errors = &sControlAssessment_Errors
+
+var _ControlAssessmentList = &s_ControlAssessmentList
+var _ControlAssessmentList_member = &s_ControlAssessmentList_member
+
+var ControlAssessmentResult = &sControlAssessmentResult
+var ControlAssessmentResult_PASS = &sControlAssessmentResult_PASS
+var ControlAssessmentResult_FAIL = &sControlAssessmentResult_FAIL
+var ControlAssessmentResult_NOT_EXECUTED = &sControlAssessmentResult_NOT_EXECUTED
+var ControlAssessmentResult_EXEMPTION_PASS = &sControlAssessmentResult_EXEMPTION_PASS
+
+var ControlError = &sControlError
+var ControlError_Code = &sControlError_Code
+var ControlError_Message = &sControlError_Message
+var ControlError_Scope = &sControlError_Scope
+
+var _ControlErrorList = &s_ControlErrorList
+var _ControlErrorList_member = &s_ControlErrorList_member
+
+var DataProductEntityIdFilter = &sDataProductEntityIdFilter
+var DataProductEntityIdFilter_ValueList = &sDataProductEntityIdFilter_ValueList
+
+var _DataProductEntityIdFilterValueList = &s_DataProductEntityIdFilterValueList
+var _DataProductEntityIdFilterValueList_member = &s_DataProductEntityIdFilterValueList_member
+
+var _DataProductEntityIdString = &s_DataProductEntityIdString
+
+var DataProductFilters = &sDataProductFilters
+var DataProductFilters_EntityId = &sDataProductFilters_EntityId
+var DataProductFilters_ProductTitle = &sDataProductFilters_ProductTitle
+var DataProductFilters_Visibility = &sDataProductFilters_Visibility
+var DataProductFilters_LastModifiedDate = &sDataProductFilters_LastModifiedDate
+
+var DataProductLastModifiedDateFilter = &sDataProductLastModifiedDateFilter
+var DataProductLastModifiedDateFilter_DateRange = &sDataProductLastModifiedDateFilter_DateRange
+
+var DataProductLastModifiedDateFilterDateRange = &sDataProductLastModifiedDateFilterDateRange
+var DataProductLastModifiedDateFilterDateRange_AfterValue = &sDataProductLastModifiedDateFilterDateRange_AfterValue
+var DataProductLastModifiedDateFilterDateRange_BeforeValue = &sDataProductLastModifiedDateFilterDateRange_BeforeValue
+
+var DataProductSort = &sDataProductSort
+var DataProductSort_SortBy = &sDataProductSort_SortBy
+var DataProductSort_SortOrder = &sDataProductSort_SortOrder
+
+var DataProductSortBy = &sDataProductSortBy
+var DataProductSortBy_EntityId = &sDataProductSortBy_EntityId
+var DataProductSortBy_ProductTitle = &sDataProductSortBy_ProductTitle
+var DataProductSortBy_Visibility = &sDataProductSortBy_Visibility
+var DataProductSortBy_LastModifiedDate = &sDataProductSortBy_LastModifiedDate
+
+var DataProductSummary = &sDataProductSummary
+var DataProductSummary_ProductTitle = &sDataProductSummary_ProductTitle
+var DataProductSummary_Visibility = &sDataProductSummary_Visibility
+
+var DataProductTitleFilter = &sDataProductTitleFilter
+var DataProductTitleFilter_ValueList = &sDataProductTitleFilter_ValueList
+var DataProductTitleFilter_WildCardValue = &sDataProductTitleFilter_WildCardValue
+
+var _DataProductTitleFilterValueList = &s_DataProductTitleFilterValueList
+var _DataProductTitleFilterValueList_member = &s_DataProductTitleFilterValueList_member
+
+var _DataProductTitleString = &s_DataProductTitleString
+
+var DataProductVisibilityFilter = &sDataProductVisibilityFilter
+var DataProductVisibilityFilter_ValueList = &sDataProductVisibilityFilter_ValueList
+
+var _DataProductVisibilityFilterValueList = &s_DataProductVisibilityFilterValueList
+var _DataProductVisibilityFilterValueList_member = &s_DataProductVisibilityFilterValueList_member
+
+var DataProductVisibilityString = &sDataProductVisibilityString
+var DataProductVisibilityString_Limited = &sDataProductVisibilityString_Limited
+var DataProductVisibilityString_Public = &sDataProductVisibilityString_Public
+var DataProductVisibilityString_Restricted = &sDataProductVisibilityString_Restricted
+var DataProductVisibilityString_Unavailable = &sDataProductVisibilityString_Unavailable
+var DataProductVisibilityString_Draft = &sDataProductVisibilityString_Draft
+
+var _DateTimeISO8601 = &s_DateTimeISO8601
+
+var _DescribeAssessmentMaxResultInteger = &s_DescribeAssessmentMaxResultInteger
+
+var Entity = &sEntity
+var Entity_Type = &sEntity_Type
+var Entity_Identifier = &sEntity_Identifier
+
+var EntityDetail = &sEntityDetail
+var EntityDetail_EntityType = &sEntityDetail_EntityType
+var EntityDetail_EntityArn = &sEntityDetail_EntityArn
+var EntityDetail_EntityIdentifier = &sEntityDetail_EntityIdentifier
+var EntityDetail_LastModifiedDate = &sEntityDetail_LastModifiedDate
+var EntityDetail_DetailsDocument = &sEntityDetail_DetailsDocument
+
+var _EntityDetails = &s_EntityDetails
+var _EntityDetails_key = &s_EntityDetails_key
+var _EntityDetails_value = &s_EntityDetails_value
+
+var _EntityId = &s_EntityId
+
+var _EntityNameString = &s_EntityNameString
+
+var EntityRequest = &sEntityRequest
+var EntityRequest_Catalog = &sEntityRequest_Catalog
+var EntityRequest_EntityId = &sEntityRequest_EntityId
+
+var _EntityRequestList = &s_EntityRequestList
+var _EntityRequestList_member = &s_EntityRequestList_member
+
+var EntitySummary = &sEntitySummary
+var EntitySummary_Name = &sEntitySummary_Name
+var EntitySummary_EntityType = &sEntitySummary_EntityType
+var EntitySummary_EntityId = &sEntitySummary_EntityId
+var EntitySummary_EntityArn = &sEntitySummary_EntityArn
+var EntitySummary_LastModifiedDate = &sEntitySummary_LastModifiedDate
+var EntitySummary_Visibility = &sEntitySummary_Visibility
+var EntitySummary_AmiProductSummary = &sEntitySummary_AmiProductSummary
+var EntitySummary_ContainerProductSummary = &sEntitySummary_ContainerProductSummary
+var EntitySummary_DataProductSummary = &sEntitySummary_DataProductSummary
+var EntitySummary_SaaSProductSummary = &sEntitySummary_SaaSProductSummary
+var EntitySummary_OfferSummary = &sEntitySummary_OfferSummary
+var EntitySummary_ResaleAuthorizationSummary = &sEntitySummary_ResaleAuthorizationSummary
+var EntitySummary_MachineLearningProductSummary = &sEntitySummary_MachineLearningProductSummary
+var EntitySummary_OfferSetSummary = &sEntitySummary_OfferSetSummary
+var EntitySummary_ExpressPrivateOfferConfigurationSummary = &sEntitySummary_ExpressPrivateOfferConfigurationSummary
+var EntitySummary_SubsidiaryAuthorizationSummary = &sEntitySummary_SubsidiaryAuthorizationSummary
+
+var _EntitySummaryList = &s_EntitySummaryList
+var _EntitySummaryList_member = &s_EntitySummaryList_member
+
+var _EntityType = &s_EntityType
+
+var EntityTypeFilters = &sEntityTypeFilters
+var EntityTypeFilters_DataProductFilters = &sEntityTypeFilters_DataProductFilters
+var EntityTypeFilters_SaaSProductFilters = &sEntityTypeFilters_SaaSProductFilters
+var EntityTypeFilters_AmiProductFilters = &sEntityTypeFilters_AmiProductFilters
+var EntityTypeFilters_OfferFilters = &sEntityTypeFilters_OfferFilters
+var EntityTypeFilters_ContainerProductFilters = &sEntityTypeFilters_ContainerProductFilters
+var EntityTypeFilters_ResaleAuthorizationFilters = &sEntityTypeFilters_ResaleAuthorizationFilters
+var EntityTypeFilters_MachineLearningProductFilters = &sEntityTypeFilters_MachineLearningProductFilters
+var EntityTypeFilters_OfferSetFilters = &sEntityTypeFilters_OfferSetFilters
+var EntityTypeFilters_ExpressPrivateOfferConfigurationFilters = &sEntityTypeFilters_ExpressPrivateOfferConfigurationFilters
+var EntityTypeFilters_SubsidiaryAuthorizationFilters = &sEntityTypeFilters_SubsidiaryAuthorizationFilters
+
+var EntityTypeSort = &sEntityTypeSort
+var EntityTypeSort_DataProductSort = &sEntityTypeSort_DataProductSort
+var EntityTypeSort_SaaSProductSort = &sEntityTypeSort_SaaSProductSort
+var EntityTypeSort_AmiProductSort = &sEntityTypeSort_AmiProductSort
+var EntityTypeSort_OfferSort = &sEntityTypeSort_OfferSort
+var EntityTypeSort_ContainerProductSort = &sEntityTypeSort_ContainerProductSort
+var EntityTypeSort_ResaleAuthorizationSort = &sEntityTypeSort_ResaleAuthorizationSort
+var EntityTypeSort_MachineLearningProductSort = &sEntityTypeSort_MachineLearningProductSort
+var EntityTypeSort_OfferSetSort = &sEntityTypeSort_OfferSetSort
+var EntityTypeSort_ExpressPrivateOfferConfigurationSort = &sEntityTypeSort_ExpressPrivateOfferConfigurationSort
+var EntityTypeSort_SubsidiaryAuthorizationSort = &sEntityTypeSort_SubsidiaryAuthorizationSort
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorCodeString = &s_ErrorCodeString
+
+var ErrorDetail = &sErrorDetail
+var ErrorDetail_ErrorCode = &sErrorDetail_ErrorCode
+var ErrorDetail_ErrorMessage = &sErrorDetail_ErrorMessage
+
+var _ErrorDetailList = &s_ErrorDetailList
+var _ErrorDetailList_member = &s_ErrorDetailList_member
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Errors = &s_Errors
+var _Errors_key = &s_Errors_key
+var _Errors_value = &s_Errors_value
+
+var ErrorScope = &sErrorScope
+var ErrorScope_Name = &sErrorScope_Name
+var ErrorScope_Value = &sErrorScope_Value
+
+var _ErrorScopeList = &s_ErrorScopeList
+var _ErrorScopeList_member = &s_ErrorScopeList_member
+
+var _ExceptionMessageContent = &s_ExceptionMessageContent
+
+var ExpressPrivateOfferConfigurationEntityIdFilter = &sExpressPrivateOfferConfigurationEntityIdFilter
+var ExpressPrivateOfferConfigurationEntityIdFilter_ValueList = &sExpressPrivateOfferConfigurationEntityIdFilter_ValueList
+
+var _ExpressPrivateOfferConfigurationEntityIdFilterValueList = &s_ExpressPrivateOfferConfigurationEntityIdFilterValueList
+var _ExpressPrivateOfferConfigurationEntityIdFilterValueList_member = &s_ExpressPrivateOfferConfigurationEntityIdFilterValueList_member
+
+var _ExpressPrivateOfferConfigurationEntityIdString = &s_ExpressPrivateOfferConfigurationEntityIdString
+
+var ExpressPrivateOfferConfigurationFilters = &sExpressPrivateOfferConfigurationFilters
+var ExpressPrivateOfferConfigurationFilters_EntityId = &sExpressPrivateOfferConfigurationFilters_EntityId
+var ExpressPrivateOfferConfigurationFilters_ProductId = &sExpressPrivateOfferConfigurationFilters_ProductId
+var ExpressPrivateOfferConfigurationFilters_State = &sExpressPrivateOfferConfigurationFilters_State
+
+var ExpressPrivateOfferConfigurationProductIdFilter = &sExpressPrivateOfferConfigurationProductIdFilter
+var ExpressPrivateOfferConfigurationProductIdFilter_ValueList = &sExpressPrivateOfferConfigurationProductIdFilter_ValueList
+
+var _ExpressPrivateOfferConfigurationProductIdFilterValueList = &s_ExpressPrivateOfferConfigurationProductIdFilterValueList
+var _ExpressPrivateOfferConfigurationProductIdFilterValueList_member = &s_ExpressPrivateOfferConfigurationProductIdFilterValueList_member
+
+var _ExpressPrivateOfferConfigurationProductIdString = &s_ExpressPrivateOfferConfigurationProductIdString
+
+var ExpressPrivateOfferConfigurationSort = &sExpressPrivateOfferConfigurationSort
+var ExpressPrivateOfferConfigurationSort_SortBy = &sExpressPrivateOfferConfigurationSort_SortBy
+var ExpressPrivateOfferConfigurationSort_SortOrder = &sExpressPrivateOfferConfigurationSort_SortOrder
+
+var ExpressPrivateOfferConfigurationSortBy = &sExpressPrivateOfferConfigurationSortBy
+var ExpressPrivateOfferConfigurationSortBy_EntityId = &sExpressPrivateOfferConfigurationSortBy_EntityId
+var ExpressPrivateOfferConfigurationSortBy_LastModifiedDate = &sExpressPrivateOfferConfigurationSortBy_LastModifiedDate
+var ExpressPrivateOfferConfigurationSortBy_ProductId = &sExpressPrivateOfferConfigurationSortBy_ProductId
+var ExpressPrivateOfferConfigurationSortBy_State = &sExpressPrivateOfferConfigurationSortBy_State
+
+var ExpressPrivateOfferConfigurationStateFilter = &sExpressPrivateOfferConfigurationStateFilter
+var ExpressPrivateOfferConfigurationStateFilter_ValueList = &sExpressPrivateOfferConfigurationStateFilter_ValueList
+
+var _ExpressPrivateOfferConfigurationStateFilterValueList = &s_ExpressPrivateOfferConfigurationStateFilterValueList
+var _ExpressPrivateOfferConfigurationStateFilterValueList_member = &s_ExpressPrivateOfferConfigurationStateFilterValueList_member
+
+var ExpressPrivateOfferConfigurationStateString = &sExpressPrivateOfferConfigurationStateString
+var ExpressPrivateOfferConfigurationStateString_ACTIVE = &sExpressPrivateOfferConfigurationStateString_ACTIVE
+var ExpressPrivateOfferConfigurationStateString_INACTIVE = &sExpressPrivateOfferConfigurationStateString_INACTIVE
+
+var ExpressPrivateOfferConfigurationSummary = &sExpressPrivateOfferConfigurationSummary
+var ExpressPrivateOfferConfigurationSummary_ProductId = &sExpressPrivateOfferConfigurationSummary_ProductId
+var ExpressPrivateOfferConfigurationSummary_State = &sExpressPrivateOfferConfigurationSummary_State
+
+var FailureCode = &sFailureCode
+var FailureCode_ClientError = &sFailureCode_ClientError
+var FailureCode_ServerFault = &sFailureCode_ServerFault
+
+var _FieldName = &s_FieldName
+
+var Filter = &sFilter
+var Filter_Name = &sFilter_Name
+var Filter_ValueList = &sFilter_ValueList
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var _FilterName = &s_FilterName
+
+var _FilterValueContent = &s_FilterValueContent
+
+var FrameworkFilters = &sFrameworkFilters
+var FrameworkFilters_AMISecurityFilters = &sFrameworkFilters_AMISecurityFilters
+var FrameworkFilters_ContainerSecurityFilters = &sFrameworkFilters_ContainerSecurityFilters
+
+var _FrameworkId = &s_FrameworkId
+
+var FrameworkSummary = &sFrameworkSummary
+var FrameworkSummary_AMISecuritySummary = &sFrameworkSummary_AMISecuritySummary
+var FrameworkSummary_ContainerSecuritySummary = &sFrameworkSummary_ContainerSecuritySummary
+
+var _Identifier = &s_Identifier
+
+var Intent = &sIntent
+var Intent_VALIDATE = &sIntent_VALIDATE
+var Intent_APPLY = &sIntent_APPLY
+
+var InternalServiceException = &sInternalServiceException
+var InternalServiceException_Message = &sInternalServiceException_Message
+
+var _Json = &s_Json
+
+var _JsonDocumentType = &s_JsonDocumentType
+
+var _ListAssessmentsMaxResultInteger = &s_ListAssessmentsMaxResultInteger
+
+var _ListChangeSetsMaxResultInteger = &s_ListChangeSetsMaxResultInteger
+
+var _ListEntitiesMaxResultInteger = &s_ListEntitiesMaxResultInteger
+
+var MachineLearningProductEntityIdFilter = &sMachineLearningProductEntityIdFilter
+var MachineLearningProductEntityIdFilter_ValueList = &sMachineLearningProductEntityIdFilter_ValueList
+
+var _MachineLearningProductEntityIdFilterValueList = &s_MachineLearningProductEntityIdFilterValueList
+var _MachineLearningProductEntityIdFilterValueList_member = &s_MachineLearningProductEntityIdFilterValueList_member
+
+var _MachineLearningProductEntityIdString = &s_MachineLearningProductEntityIdString
+
+var MachineLearningProductFilters = &sMachineLearningProductFilters
+var MachineLearningProductFilters_EntityId = &sMachineLearningProductFilters_EntityId
+var MachineLearningProductFilters_LastModifiedDate = &sMachineLearningProductFilters_LastModifiedDate
+var MachineLearningProductFilters_ProductTitle = &sMachineLearningProductFilters_ProductTitle
+var MachineLearningProductFilters_Visibility = &sMachineLearningProductFilters_Visibility
+
+var MachineLearningProductLastModifiedDateFilter = &sMachineLearningProductLastModifiedDateFilter
+var MachineLearningProductLastModifiedDateFilter_DateRange = &sMachineLearningProductLastModifiedDateFilter_DateRange
+
+var MachineLearningProductLastModifiedDateFilterDateRange = &sMachineLearningProductLastModifiedDateFilterDateRange
+var MachineLearningProductLastModifiedDateFilterDateRange_AfterValue = &sMachineLearningProductLastModifiedDateFilterDateRange_AfterValue
+var MachineLearningProductLastModifiedDateFilterDateRange_BeforeValue = &sMachineLearningProductLastModifiedDateFilterDateRange_BeforeValue
+
+var MachineLearningProductSort = &sMachineLearningProductSort
+var MachineLearningProductSort_SortBy = &sMachineLearningProductSort_SortBy
+var MachineLearningProductSort_SortOrder = &sMachineLearningProductSort_SortOrder
+
+var MachineLearningProductSortBy = &sMachineLearningProductSortBy
+var MachineLearningProductSortBy_EntityId = &sMachineLearningProductSortBy_EntityId
+var MachineLearningProductSortBy_LastModifiedDate = &sMachineLearningProductSortBy_LastModifiedDate
+var MachineLearningProductSortBy_ProductTitle = &sMachineLearningProductSortBy_ProductTitle
+var MachineLearningProductSortBy_Visibility = &sMachineLearningProductSortBy_Visibility
+
+var MachineLearningProductSummary = &sMachineLearningProductSummary
+var MachineLearningProductSummary_ProductTitle = &sMachineLearningProductSummary_ProductTitle
+var MachineLearningProductSummary_Visibility = &sMachineLearningProductSummary_Visibility
+
+var MachineLearningProductTitleFilter = &sMachineLearningProductTitleFilter
+var MachineLearningProductTitleFilter_ValueList = &sMachineLearningProductTitleFilter_ValueList
+var MachineLearningProductTitleFilter_WildCardValue = &sMachineLearningProductTitleFilter_WildCardValue
+
+var _MachineLearningProductTitleFilterValueList = &s_MachineLearningProductTitleFilterValueList
+var _MachineLearningProductTitleFilterValueList_member = &s_MachineLearningProductTitleFilterValueList_member
+
+var _MachineLearningProductTitleString = &s_MachineLearningProductTitleString
+
+var MachineLearningProductVisibilityFilter = &sMachineLearningProductVisibilityFilter
+var MachineLearningProductVisibilityFilter_ValueList = &sMachineLearningProductVisibilityFilter_ValueList
+
+var _MachineLearningProductVisibilityFilterValueList = &s_MachineLearningProductVisibilityFilterValueList
+var _MachineLearningProductVisibilityFilterValueList_member = &s_MachineLearningProductVisibilityFilterValueList_member
+
+var MachineLearningProductVisibilityString = &sMachineLearningProductVisibilityString
+var MachineLearningProductVisibilityString_Limited = &sMachineLearningProductVisibilityString_Limited
+var MachineLearningProductVisibilityString_Public = &sMachineLearningProductVisibilityString_Public
+var MachineLearningProductVisibilityString_Restricted = &sMachineLearningProductVisibilityString_Restricted
+var MachineLearningProductVisibilityString_Draft = &sMachineLearningProductVisibilityString_Draft
+
+var _NextToken = &s_NextToken
+
+var OfferAvailabilityEndDateFilter = &sOfferAvailabilityEndDateFilter
+var OfferAvailabilityEndDateFilter_DateRange = &sOfferAvailabilityEndDateFilter_DateRange
+
+var OfferAvailabilityEndDateFilterDateRange = &sOfferAvailabilityEndDateFilterDateRange
+var OfferAvailabilityEndDateFilterDateRange_AfterValue = &sOfferAvailabilityEndDateFilterDateRange_AfterValue
+var OfferAvailabilityEndDateFilterDateRange_BeforeValue = &sOfferAvailabilityEndDateFilterDateRange_BeforeValue
+
+var OfferBuyerAccountsFilter = &sOfferBuyerAccountsFilter
+var OfferBuyerAccountsFilter_WildCardValue = &sOfferBuyerAccountsFilter_WildCardValue
+
+var _OfferBuyerAccountsFilterWildcard = &s_OfferBuyerAccountsFilterWildcard
+
+var _OfferBuyerAccountsList = &s_OfferBuyerAccountsList
+var _OfferBuyerAccountsList_member = &s_OfferBuyerAccountsList_member
+
+var _OfferBuyerAccountsString = &s_OfferBuyerAccountsString
+
+var OfferCreatedBySourceFilter = &sOfferCreatedBySourceFilter
+var OfferCreatedBySourceFilter_ValueList = &sOfferCreatedBySourceFilter_ValueList
+
+var _OfferCreatedBySourceFilterValueList = &s_OfferCreatedBySourceFilterValueList
+var _OfferCreatedBySourceFilterValueList_member = &s_OfferCreatedBySourceFilterValueList_member
+
+var OfferCreatedBySourceString = &sOfferCreatedBySourceString
+var OfferCreatedBySourceString_Seller = &sOfferCreatedBySourceString_Seller
+var OfferCreatedBySourceString_AwsMarketplace = &sOfferCreatedBySourceString_AwsMarketplace
+
+var OfferEntityIdFilter = &sOfferEntityIdFilter
+var OfferEntityIdFilter_ValueList = &sOfferEntityIdFilter_ValueList
+
+var _OfferEntityIdFilterValueList = &s_OfferEntityIdFilterValueList
+var _OfferEntityIdFilterValueList_member = &s_OfferEntityIdFilterValueList_member
+
+var _OfferEntityIdString = &s_OfferEntityIdString
+
+var OfferFilters = &sOfferFilters
+var OfferFilters_EntityId = &sOfferFilters_EntityId
+var OfferFilters_Name = &sOfferFilters_Name
+var OfferFilters_ProductId = &sOfferFilters_ProductId
+var OfferFilters_ResaleAuthorizationId = &sOfferFilters_ResaleAuthorizationId
+var OfferFilters_ReleaseDate = &sOfferFilters_ReleaseDate
+var OfferFilters_AvailabilityEndDate = &sOfferFilters_AvailabilityEndDate
+var OfferFilters_BuyerAccounts = &sOfferFilters_BuyerAccounts
+var OfferFilters_State = &sOfferFilters_State
+var OfferFilters_Targeting = &sOfferFilters_Targeting
+var OfferFilters_LastModifiedDate = &sOfferFilters_LastModifiedDate
+var OfferFilters_OfferSetId = &sOfferFilters_OfferSetId
+var OfferFilters_TargetAgreementId = &sOfferFilters_TargetAgreementId
+var OfferFilters_TargetAgreementIntent = &sOfferFilters_TargetAgreementIntent
+var OfferFilters_CreatedBySource = &sOfferFilters_CreatedBySource
+
+var OfferLastModifiedDateFilter = &sOfferLastModifiedDateFilter
+var OfferLastModifiedDateFilter_DateRange = &sOfferLastModifiedDateFilter_DateRange
+
+var OfferLastModifiedDateFilterDateRange = &sOfferLastModifiedDateFilterDateRange
+var OfferLastModifiedDateFilterDateRange_AfterValue = &sOfferLastModifiedDateFilterDateRange_AfterValue
+var OfferLastModifiedDateFilterDateRange_BeforeValue = &sOfferLastModifiedDateFilterDateRange_BeforeValue
+
+var OfferNameFilter = &sOfferNameFilter
+var OfferNameFilter_ValueList = &sOfferNameFilter_ValueList
+var OfferNameFilter_WildCardValue = &sOfferNameFilter_WildCardValue
+
+var _OfferNameFilterValueList = &s_OfferNameFilterValueList
+var _OfferNameFilterValueList_member = &s_OfferNameFilterValueList_member
+
+var _OfferNameString = &s_OfferNameString
+
+var OfferProductIdFilter = &sOfferProductIdFilter
+var OfferProductIdFilter_ValueList = &sOfferProductIdFilter_ValueList
+
+var _OfferProductIdFilterValueList = &s_OfferProductIdFilterValueList
+var _OfferProductIdFilterValueList_member = &s_OfferProductIdFilterValueList_member
+
+var _OfferProductIdString = &s_OfferProductIdString
+
+var OfferReleaseDateFilter = &sOfferReleaseDateFilter
+var OfferReleaseDateFilter_DateRange = &sOfferReleaseDateFilter_DateRange
+
+var OfferReleaseDateFilterDateRange = &sOfferReleaseDateFilterDateRange
+var OfferReleaseDateFilterDateRange_AfterValue = &sOfferReleaseDateFilterDateRange_AfterValue
+var OfferReleaseDateFilterDateRange_BeforeValue = &sOfferReleaseDateFilterDateRange_BeforeValue
+
+var OfferResaleAuthorizationIdFilter = &sOfferResaleAuthorizationIdFilter
+var OfferResaleAuthorizationIdFilter_ValueList = &sOfferResaleAuthorizationIdFilter_ValueList
+
+var _OfferResaleAuthorizationIdFilterValueList = &s_OfferResaleAuthorizationIdFilterValueList
+var _OfferResaleAuthorizationIdFilterValueList_member = &s_OfferResaleAuthorizationIdFilterValueList_member
+
+var _OfferResaleAuthorizationIdString = &s_OfferResaleAuthorizationIdString
+
+var OfferSetAssociatedOfferIdsFilter = &sOfferSetAssociatedOfferIdsFilter
+var OfferSetAssociatedOfferIdsFilter_ValueList = &sOfferSetAssociatedOfferIdsFilter_ValueList
+
+var _OfferSetAssociatedOfferIdsFilterValueList = &s_OfferSetAssociatedOfferIdsFilterValueList
+var _OfferSetAssociatedOfferIdsFilterValueList_member = &s_OfferSetAssociatedOfferIdsFilterValueList_member
+
+var _OfferSetAssociatedOfferIdsList = &s_OfferSetAssociatedOfferIdsList
+var _OfferSetAssociatedOfferIdsList_member = &s_OfferSetAssociatedOfferIdsList_member
+
+var _OfferSetAssociatedOfferIdsString = &s_OfferSetAssociatedOfferIdsString
+
+var OfferSetEntityIdFilter = &sOfferSetEntityIdFilter
+var OfferSetEntityIdFilter_ValueList = &sOfferSetEntityIdFilter_ValueList
+
+var _OfferSetEntityIdFilterValueList = &s_OfferSetEntityIdFilterValueList
+var _OfferSetEntityIdFilterValueList_member = &s_OfferSetEntityIdFilterValueList_member
+
+var _OfferSetEntityIdString = &s_OfferSetEntityIdString
+
+var OfferSetFilters = &sOfferSetFilters
+var OfferSetFilters_EntityId = &sOfferSetFilters_EntityId
+var OfferSetFilters_Name = &sOfferSetFilters_Name
+var OfferSetFilters_State = &sOfferSetFilters_State
+var OfferSetFilters_ReleaseDate = &sOfferSetFilters_ReleaseDate
+var OfferSetFilters_AssociatedOfferIds = &sOfferSetFilters_AssociatedOfferIds
+var OfferSetFilters_SolutionId = &sOfferSetFilters_SolutionId
+var OfferSetFilters_LastModifiedDate = &sOfferSetFilters_LastModifiedDate
+
+var OfferSetIdFilter = &sOfferSetIdFilter
+var OfferSetIdFilter_ValueList = &sOfferSetIdFilter_ValueList
+
+var _OfferSetIdFilterValueList = &s_OfferSetIdFilterValueList
+var _OfferSetIdFilterValueList_member = &s_OfferSetIdFilterValueList_member
+
+var _OfferSetIdString = &s_OfferSetIdString
+
+var OfferSetLastModifiedDateFilter = &sOfferSetLastModifiedDateFilter
+var OfferSetLastModifiedDateFilter_DateRange = &sOfferSetLastModifiedDateFilter_DateRange
+
+var OfferSetLastModifiedDateFilterDateRange = &sOfferSetLastModifiedDateFilterDateRange
+var OfferSetLastModifiedDateFilterDateRange_AfterValue = &sOfferSetLastModifiedDateFilterDateRange_AfterValue
+var OfferSetLastModifiedDateFilterDateRange_BeforeValue = &sOfferSetLastModifiedDateFilterDateRange_BeforeValue
+
+var OfferSetNameFilter = &sOfferSetNameFilter
+var OfferSetNameFilter_ValueList = &sOfferSetNameFilter_ValueList
+
+var _OfferSetNameFilterValueList = &s_OfferSetNameFilterValueList
+var _OfferSetNameFilterValueList_member = &s_OfferSetNameFilterValueList_member
+
+var _OfferSetNameString = &s_OfferSetNameString
+
+var OfferSetReleaseDateFilter = &sOfferSetReleaseDateFilter
+var OfferSetReleaseDateFilter_DateRange = &sOfferSetReleaseDateFilter_DateRange
+
+var OfferSetReleaseDateFilterDateRange = &sOfferSetReleaseDateFilterDateRange
+var OfferSetReleaseDateFilterDateRange_AfterValue = &sOfferSetReleaseDateFilterDateRange_AfterValue
+var OfferSetReleaseDateFilterDateRange_BeforeValue = &sOfferSetReleaseDateFilterDateRange_BeforeValue
+
+var OfferSetSolutionIdFilter = &sOfferSetSolutionIdFilter
+var OfferSetSolutionIdFilter_ValueList = &sOfferSetSolutionIdFilter_ValueList
+
+var _OfferSetSolutionIdFilterValueList = &s_OfferSetSolutionIdFilterValueList
+var _OfferSetSolutionIdFilterValueList_member = &s_OfferSetSolutionIdFilterValueList_member
+
+var _OfferSetSolutionIdString = &s_OfferSetSolutionIdString
+
+var OfferSetSort = &sOfferSetSort
+var OfferSetSort_SortBy = &sOfferSetSort_SortBy
+var OfferSetSort_SortOrder = &sOfferSetSort_SortOrder
+
+var OfferSetSortBy = &sOfferSetSortBy
+var OfferSetSortBy_Name = &sOfferSetSortBy_Name
+var OfferSetSortBy_State = &sOfferSetSortBy_State
+var OfferSetSortBy_ReleaseDate = &sOfferSetSortBy_ReleaseDate
+var OfferSetSortBy_SolutionId = &sOfferSetSortBy_SolutionId
+var OfferSetSortBy_EntityId = &sOfferSetSortBy_EntityId
+var OfferSetSortBy_LastModifiedDate = &sOfferSetSortBy_LastModifiedDate
+
+var OfferSetStateFilter = &sOfferSetStateFilter
+var OfferSetStateFilter_ValueList = &sOfferSetStateFilter_ValueList
+
+var _OfferSetStateFilterValueList = &s_OfferSetStateFilterValueList
+var _OfferSetStateFilterValueList_member = &s_OfferSetStateFilterValueList_member
+
+var OfferSetStateString = &sOfferSetStateString
+var OfferSetStateString_Draft = &sOfferSetStateString_Draft
+var OfferSetStateString_Released = &sOfferSetStateString_Released
+
+var OfferSetSummary = &sOfferSetSummary
+var OfferSetSummary_Name = &sOfferSetSummary_Name
+var OfferSetSummary_State = &sOfferSetSummary_State
+var OfferSetSummary_ReleaseDate = &sOfferSetSummary_ReleaseDate
+var OfferSetSummary_AssociatedOfferIds = &sOfferSetSummary_AssociatedOfferIds
+var OfferSetSummary_SolutionId = &sOfferSetSummary_SolutionId
+
+var OfferSort = &sOfferSort
+var OfferSort_SortBy = &sOfferSort_SortBy
+var OfferSort_SortOrder = &sOfferSort_SortOrder
+
+var OfferSortBy = &sOfferSortBy
+var OfferSortBy_EntityId = &sOfferSortBy_EntityId
+var OfferSortBy_Name = &sOfferSortBy_Name
+var OfferSortBy_ProductId = &sOfferSortBy_ProductId
+var OfferSortBy_ResaleAuthorizationId = &sOfferSortBy_ResaleAuthorizationId
+var OfferSortBy_ReleaseDate = &sOfferSortBy_ReleaseDate
+var OfferSortBy_AvailabilityEndDate = &sOfferSortBy_AvailabilityEndDate
+var OfferSortBy_BuyerAccounts = &sOfferSortBy_BuyerAccounts
+var OfferSortBy_State = &sOfferSortBy_State
+var OfferSortBy_Targeting = &sOfferSortBy_Targeting
+var OfferSortBy_LastModifiedDate = &sOfferSortBy_LastModifiedDate
+var OfferSortBy_OfferSetId = &sOfferSortBy_OfferSetId
+var OfferSortBy_TargetAgreementId = &sOfferSortBy_TargetAgreementId
+var OfferSortBy_TargetAgreementIntent = &sOfferSortBy_TargetAgreementIntent
+var OfferSortBy_CreatedBySource = &sOfferSortBy_CreatedBySource
+
+var OfferStateFilter = &sOfferStateFilter
+var OfferStateFilter_ValueList = &sOfferStateFilter_ValueList
+
+var _OfferStateFilterValueList = &s_OfferStateFilterValueList
+var _OfferStateFilterValueList_member = &s_OfferStateFilterValueList_member
+
+var OfferStateString = &sOfferStateString
+var OfferStateString_Draft = &sOfferStateString_Draft
+var OfferStateString_Released = &sOfferStateString_Released
+
+var OfferSummary = &sOfferSummary
+var OfferSummary_Name = &sOfferSummary_Name
+var OfferSummary_ProductId = &sOfferSummary_ProductId
+var OfferSummary_ResaleAuthorizationId = &sOfferSummary_ResaleAuthorizationId
+var OfferSummary_ReleaseDate = &sOfferSummary_ReleaseDate
+var OfferSummary_AvailabilityEndDate = &sOfferSummary_AvailabilityEndDate
+var OfferSummary_BuyerAccounts = &sOfferSummary_BuyerAccounts
+var OfferSummary_State = &sOfferSummary_State
+var OfferSummary_Targeting = &sOfferSummary_Targeting
+var OfferSummary_OfferSetId = &sOfferSummary_OfferSetId
+var OfferSummary_TargetAgreementId = &sOfferSummary_TargetAgreementId
+var OfferSummary_TargetAgreementIntent = &sOfferSummary_TargetAgreementIntent
+var OfferSummary_CreatedBySource = &sOfferSummary_CreatedBySource
+
+var OfferTargetAgreementIdFilter = &sOfferTargetAgreementIdFilter
+var OfferTargetAgreementIdFilter_ValueList = &sOfferTargetAgreementIdFilter_ValueList
+
+var _OfferTargetAgreementIdFilterValueList = &s_OfferTargetAgreementIdFilterValueList
+var _OfferTargetAgreementIdFilterValueList_member = &s_OfferTargetAgreementIdFilterValueList_member
+
+var _OfferTargetAgreementIdString = &s_OfferTargetAgreementIdString
+
+var OfferTargetAgreementIntentFilter = &sOfferTargetAgreementIntentFilter
+var OfferTargetAgreementIntentFilter_ValueList = &sOfferTargetAgreementIntentFilter_ValueList
+
+var _OfferTargetAgreementIntentFilterValueList = &s_OfferTargetAgreementIntentFilterValueList
+var _OfferTargetAgreementIntentFilterValueList_member = &s_OfferTargetAgreementIntentFilterValueList_member
+
+var OfferTargetAgreementIntentString = &sOfferTargetAgreementIntentString
+var OfferTargetAgreementIntentString_Renew = &sOfferTargetAgreementIntentString_Renew
+
+var OfferTargetingFilter = &sOfferTargetingFilter
+var OfferTargetingFilter_ValueList = &sOfferTargetingFilter_ValueList
+
+var _OfferTargetingFilterValueList = &s_OfferTargetingFilterValueList
+var _OfferTargetingFilterValueList_member = &s_OfferTargetingFilterValueList_member
+
+var _OfferTargetingList = &s_OfferTargetingList
+var _OfferTargetingList_member = &s_OfferTargetingList_member
+
+var OfferTargetingString = &sOfferTargetingString
+var OfferTargetingString_BuyerAccounts = &sOfferTargetingString_BuyerAccounts
+var OfferTargetingString_ParticipatingPrograms = &sOfferTargetingString_ParticipatingPrograms
+var OfferTargetingString_CountryCodes = &sOfferTargetingString_CountryCodes
+var OfferTargetingString_None = &sOfferTargetingString_None
+
+var OwnershipType = &sOwnershipType
+var OwnershipType_SELF = &sOwnershipType_SELF
+var OwnershipType_SHARED = &sOwnershipType_SHARED
+
+var _RequestedChangeList = &s_RequestedChangeList
+var _RequestedChangeList_member = &s_RequestedChangeList_member
+
+var ResaleAuthorizationAvailabilityEndDateFilter = &sResaleAuthorizationAvailabilityEndDateFilter
+var ResaleAuthorizationAvailabilityEndDateFilter_DateRange = &sResaleAuthorizationAvailabilityEndDateFilter_DateRange
+var ResaleAuthorizationAvailabilityEndDateFilter_ValueList = &sResaleAuthorizationAvailabilityEndDateFilter_ValueList
+
+var ResaleAuthorizationAvailabilityEndDateFilterDateRange = &sResaleAuthorizationAvailabilityEndDateFilterDateRange
+var ResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue = &sResaleAuthorizationAvailabilityEndDateFilterDateRange_AfterValue
+var ResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue = &sResaleAuthorizationAvailabilityEndDateFilterDateRange_BeforeValue
+
+var _ResaleAuthorizationAvailabilityEndDateFilterValueList = &s_ResaleAuthorizationAvailabilityEndDateFilterValueList
+var _ResaleAuthorizationAvailabilityEndDateFilterValueList_member = &s_ResaleAuthorizationAvailabilityEndDateFilterValueList_member
+
+var ResaleAuthorizationCreatedDateFilter = &sResaleAuthorizationCreatedDateFilter
+var ResaleAuthorizationCreatedDateFilter_DateRange = &sResaleAuthorizationCreatedDateFilter_DateRange
+var ResaleAuthorizationCreatedDateFilter_ValueList = &sResaleAuthorizationCreatedDateFilter_ValueList
+
+var ResaleAuthorizationCreatedDateFilterDateRange = &sResaleAuthorizationCreatedDateFilterDateRange
+var ResaleAuthorizationCreatedDateFilterDateRange_AfterValue = &sResaleAuthorizationCreatedDateFilterDateRange_AfterValue
+var ResaleAuthorizationCreatedDateFilterDateRange_BeforeValue = &sResaleAuthorizationCreatedDateFilterDateRange_BeforeValue
+
+var _ResaleAuthorizationCreatedDateFilterValueList = &s_ResaleAuthorizationCreatedDateFilterValueList
+var _ResaleAuthorizationCreatedDateFilterValueList_member = &s_ResaleAuthorizationCreatedDateFilterValueList_member
+
+var ResaleAuthorizationEntityIdFilter = &sResaleAuthorizationEntityIdFilter
+var ResaleAuthorizationEntityIdFilter_ValueList = &sResaleAuthorizationEntityIdFilter_ValueList
+
+var _ResaleAuthorizationEntityIdFilterValueList = &s_ResaleAuthorizationEntityIdFilterValueList
+var _ResaleAuthorizationEntityIdFilterValueList_member = &s_ResaleAuthorizationEntityIdFilterValueList_member
+
+var _ResaleAuthorizationEntityIdString = &s_ResaleAuthorizationEntityIdString
+
+var ResaleAuthorizationFilters = &sResaleAuthorizationFilters
+var ResaleAuthorizationFilters_EntityId = &sResaleAuthorizationFilters_EntityId
+var ResaleAuthorizationFilters_Name = &sResaleAuthorizationFilters_Name
+var ResaleAuthorizationFilters_ProductId = &sResaleAuthorizationFilters_ProductId
+var ResaleAuthorizationFilters_CreatedDate = &sResaleAuthorizationFilters_CreatedDate
+var ResaleAuthorizationFilters_AvailabilityEndDate = &sResaleAuthorizationFilters_AvailabilityEndDate
+var ResaleAuthorizationFilters_ManufacturerAccountId = &sResaleAuthorizationFilters_ManufacturerAccountId
+var ResaleAuthorizationFilters_ProductName = &sResaleAuthorizationFilters_ProductName
+var ResaleAuthorizationFilters_ManufacturerLegalName = &sResaleAuthorizationFilters_ManufacturerLegalName
+var ResaleAuthorizationFilters_ResellerAccountID = &sResaleAuthorizationFilters_ResellerAccountID
+var ResaleAuthorizationFilters_ResellerLegalName = &sResaleAuthorizationFilters_ResellerLegalName
+var ResaleAuthorizationFilters_Status = &sResaleAuthorizationFilters_Status
+var ResaleAuthorizationFilters_OfferExtendedStatus = &sResaleAuthorizationFilters_OfferExtendedStatus
+var ResaleAuthorizationFilters_LastModifiedDate = &sResaleAuthorizationFilters_LastModifiedDate
+var ResaleAuthorizationFilters_ResellerRole = &sResaleAuthorizationFilters_ResellerRole
+var ResaleAuthorizationFilters_SourceAuthorization = &sResaleAuthorizationFilters_SourceAuthorization
+var ResaleAuthorizationFilters_IssuerAccountId = &sResaleAuthorizationFilters_IssuerAccountId
+
+var ResaleAuthorizationIssuerAccountIdFilter = &sResaleAuthorizationIssuerAccountIdFilter
+var ResaleAuthorizationIssuerAccountIdFilter_ValueList = &sResaleAuthorizationIssuerAccountIdFilter_ValueList
+
+var _ResaleAuthorizationIssuerAccountIdFilterValueList = &s_ResaleAuthorizationIssuerAccountIdFilterValueList
+var _ResaleAuthorizationIssuerAccountIdFilterValueList_member = &s_ResaleAuthorizationIssuerAccountIdFilterValueList_member
+
+var _ResaleAuthorizationIssuerAccountIdString = &s_ResaleAuthorizationIssuerAccountIdString
+
+var ResaleAuthorizationLastModifiedDateFilter = &sResaleAuthorizationLastModifiedDateFilter
+var ResaleAuthorizationLastModifiedDateFilter_DateRange = &sResaleAuthorizationLastModifiedDateFilter_DateRange
+
+var ResaleAuthorizationLastModifiedDateFilterDateRange = &sResaleAuthorizationLastModifiedDateFilterDateRange
+var ResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue = &sResaleAuthorizationLastModifiedDateFilterDateRange_AfterValue
+var ResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue = &sResaleAuthorizationLastModifiedDateFilterDateRange_BeforeValue
+
+var ResaleAuthorizationManufacturerAccountIdFilter = &sResaleAuthorizationManufacturerAccountIdFilter
+var ResaleAuthorizationManufacturerAccountIdFilter_ValueList = &sResaleAuthorizationManufacturerAccountIdFilter_ValueList
+var ResaleAuthorizationManufacturerAccountIdFilter_WildCardValue = &sResaleAuthorizationManufacturerAccountIdFilter_WildCardValue
+
+var _ResaleAuthorizationManufacturerAccountIdFilterValueList = &s_ResaleAuthorizationManufacturerAccountIdFilterValueList
+var _ResaleAuthorizationManufacturerAccountIdFilterValueList_member = &s_ResaleAuthorizationManufacturerAccountIdFilterValueList_member
+
+var _ResaleAuthorizationManufacturerAccountIdFilterWildcard = &s_ResaleAuthorizationManufacturerAccountIdFilterWildcard
+
+var _ResaleAuthorizationManufacturerAccountIdString = &s_ResaleAuthorizationManufacturerAccountIdString
+
+var ResaleAuthorizationManufacturerLegalNameFilter = &sResaleAuthorizationManufacturerLegalNameFilter
+var ResaleAuthorizationManufacturerLegalNameFilter_ValueList = &sResaleAuthorizationManufacturerLegalNameFilter_ValueList
+var ResaleAuthorizationManufacturerLegalNameFilter_WildCardValue = &sResaleAuthorizationManufacturerLegalNameFilter_WildCardValue
+
+var _ResaleAuthorizationManufacturerLegalNameFilterValueList = &s_ResaleAuthorizationManufacturerLegalNameFilterValueList
+var _ResaleAuthorizationManufacturerLegalNameFilterValueList_member = &s_ResaleAuthorizationManufacturerLegalNameFilterValueList_member
+
+var _ResaleAuthorizationManufacturerLegalNameFilterWildcard = &s_ResaleAuthorizationManufacturerLegalNameFilterWildcard
+
+var _ResaleAuthorizationManufacturerLegalNameString = &s_ResaleAuthorizationManufacturerLegalNameString
+
+var ResaleAuthorizationNameFilter = &sResaleAuthorizationNameFilter
+var ResaleAuthorizationNameFilter_ValueList = &sResaleAuthorizationNameFilter_ValueList
+var ResaleAuthorizationNameFilter_WildCardValue = &sResaleAuthorizationNameFilter_WildCardValue
+
+var _ResaleAuthorizationNameFilterValueList = &s_ResaleAuthorizationNameFilterValueList
+var _ResaleAuthorizationNameFilterValueList_member = &s_ResaleAuthorizationNameFilterValueList_member
+
+var _ResaleAuthorizationNameFilterWildcard = &s_ResaleAuthorizationNameFilterWildcard
+
+var _ResaleAuthorizationNameString = &s_ResaleAuthorizationNameString
+
+var ResaleAuthorizationOfferExtendedStatusFilter = &sResaleAuthorizationOfferExtendedStatusFilter
+var ResaleAuthorizationOfferExtendedStatusFilter_ValueList = &sResaleAuthorizationOfferExtendedStatusFilter_ValueList
+
+var _ResaleAuthorizationOfferExtendedStatusFilterValueList = &s_ResaleAuthorizationOfferExtendedStatusFilterValueList
+var _ResaleAuthorizationOfferExtendedStatusFilterValueList_member = &s_ResaleAuthorizationOfferExtendedStatusFilterValueList_member
+
+var _ResaleAuthorizationOfferExtendedStatusString = &s_ResaleAuthorizationOfferExtendedStatusString
+
+var ResaleAuthorizationProductIdFilter = &sResaleAuthorizationProductIdFilter
+var ResaleAuthorizationProductIdFilter_ValueList = &sResaleAuthorizationProductIdFilter_ValueList
+var ResaleAuthorizationProductIdFilter_WildCardValue = &sResaleAuthorizationProductIdFilter_WildCardValue
+
+var _ResaleAuthorizationProductIdFilterValueList = &s_ResaleAuthorizationProductIdFilterValueList
+var _ResaleAuthorizationProductIdFilterValueList_member = &s_ResaleAuthorizationProductIdFilterValueList_member
+
+var _ResaleAuthorizationProductIdFilterWildcard = &s_ResaleAuthorizationProductIdFilterWildcard
+
+var _ResaleAuthorizationProductIdString = &s_ResaleAuthorizationProductIdString
+
+var ResaleAuthorizationProductNameFilter = &sResaleAuthorizationProductNameFilter
+var ResaleAuthorizationProductNameFilter_ValueList = &sResaleAuthorizationProductNameFilter_ValueList
+var ResaleAuthorizationProductNameFilter_WildCardValue = &sResaleAuthorizationProductNameFilter_WildCardValue
+
+var _ResaleAuthorizationProductNameFilterValueList = &s_ResaleAuthorizationProductNameFilterValueList
+var _ResaleAuthorizationProductNameFilterValueList_member = &s_ResaleAuthorizationProductNameFilterValueList_member
+
+var _ResaleAuthorizationProductNameFilterWildcard = &s_ResaleAuthorizationProductNameFilterWildcard
+
+var _ResaleAuthorizationProductNameString = &s_ResaleAuthorizationProductNameString
+
+var ResaleAuthorizationResellerAccountIDFilter = &sResaleAuthorizationResellerAccountIDFilter
+var ResaleAuthorizationResellerAccountIDFilter_ValueList = &sResaleAuthorizationResellerAccountIDFilter_ValueList
+var ResaleAuthorizationResellerAccountIDFilter_WildCardValue = &sResaleAuthorizationResellerAccountIDFilter_WildCardValue
+
+var _ResaleAuthorizationResellerAccountIDFilterValueList = &s_ResaleAuthorizationResellerAccountIDFilterValueList
+var _ResaleAuthorizationResellerAccountIDFilterValueList_member = &s_ResaleAuthorizationResellerAccountIDFilterValueList_member
+
+var _ResaleAuthorizationResellerAccountIDFilterWildcard = &s_ResaleAuthorizationResellerAccountIDFilterWildcard
+
+var _ResaleAuthorizationResellerAccountIDString = &s_ResaleAuthorizationResellerAccountIDString
+
+var ResaleAuthorizationResellerLegalNameFilter = &sResaleAuthorizationResellerLegalNameFilter
+var ResaleAuthorizationResellerLegalNameFilter_ValueList = &sResaleAuthorizationResellerLegalNameFilter_ValueList
+var ResaleAuthorizationResellerLegalNameFilter_WildCardValue = &sResaleAuthorizationResellerLegalNameFilter_WildCardValue
+
+var _ResaleAuthorizationResellerLegalNameFilterValueList = &s_ResaleAuthorizationResellerLegalNameFilterValueList
+var _ResaleAuthorizationResellerLegalNameFilterValueList_member = &s_ResaleAuthorizationResellerLegalNameFilterValueList_member
+
+var _ResaleAuthorizationResellerLegalNameFilterWildcard = &s_ResaleAuthorizationResellerLegalNameFilterWildcard
+
+var _ResaleAuthorizationResellerLegalNameString = &s_ResaleAuthorizationResellerLegalNameString
+
+var ResaleAuthorizationResellerRoleFilter = &sResaleAuthorizationResellerRoleFilter
+var ResaleAuthorizationResellerRoleFilter_ValueList = &sResaleAuthorizationResellerRoleFilter_ValueList
+
+var _ResaleAuthorizationResellerRoleFilterValueList = &s_ResaleAuthorizationResellerRoleFilterValueList
+var _ResaleAuthorizationResellerRoleFilterValueList_member = &s_ResaleAuthorizationResellerRoleFilterValueList_member
+
+var ResaleAuthorizationResellerRoleString = &sResaleAuthorizationResellerRoleString
+var ResaleAuthorizationResellerRoleString_ChannelPartner = &sResaleAuthorizationResellerRoleString_ChannelPartner
+var ResaleAuthorizationResellerRoleString_Distributor = &sResaleAuthorizationResellerRoleString_Distributor
+
+var ResaleAuthorizationSort = &sResaleAuthorizationSort
+var ResaleAuthorizationSort_SortBy = &sResaleAuthorizationSort_SortBy
+var ResaleAuthorizationSort_SortOrder = &sResaleAuthorizationSort_SortOrder
+
+var ResaleAuthorizationSortBy = &sResaleAuthorizationSortBy
+var ResaleAuthorizationSortBy_EntityId = &sResaleAuthorizationSortBy_EntityId
+var ResaleAuthorizationSortBy_Name = &sResaleAuthorizationSortBy_Name
+var ResaleAuthorizationSortBy_ProductId = &sResaleAuthorizationSortBy_ProductId
+var ResaleAuthorizationSortBy_ProductName = &sResaleAuthorizationSortBy_ProductName
+var ResaleAuthorizationSortBy_ManufacturerAccountId = &sResaleAuthorizationSortBy_ManufacturerAccountId
+var ResaleAuthorizationSortBy_ManufacturerLegalName = &sResaleAuthorizationSortBy_ManufacturerLegalName
+var ResaleAuthorizationSortBy_ResellerAccountID = &sResaleAuthorizationSortBy_ResellerAccountID
+var ResaleAuthorizationSortBy_ResellerLegalName = &sResaleAuthorizationSortBy_ResellerLegalName
+var ResaleAuthorizationSortBy_Status = &sResaleAuthorizationSortBy_Status
+var ResaleAuthorizationSortBy_OfferExtendedStatus = &sResaleAuthorizationSortBy_OfferExtendedStatus
+var ResaleAuthorizationSortBy_CreatedDate = &sResaleAuthorizationSortBy_CreatedDate
+var ResaleAuthorizationSortBy_AvailabilityEndDate = &sResaleAuthorizationSortBy_AvailabilityEndDate
+var ResaleAuthorizationSortBy_LastModifiedDate = &sResaleAuthorizationSortBy_LastModifiedDate
+var ResaleAuthorizationSortBy_ResellerRole = &sResaleAuthorizationSortBy_ResellerRole
+var ResaleAuthorizationSortBy_SourceAuthorization = &sResaleAuthorizationSortBy_SourceAuthorization
+var ResaleAuthorizationSortBy_IssuerAccountId = &sResaleAuthorizationSortBy_IssuerAccountId
+
+var ResaleAuthorizationSourceAuthorizationFilter = &sResaleAuthorizationSourceAuthorizationFilter
+var ResaleAuthorizationSourceAuthorizationFilter_ValueList = &sResaleAuthorizationSourceAuthorizationFilter_ValueList
+
+var _ResaleAuthorizationSourceAuthorizationFilterValueList = &s_ResaleAuthorizationSourceAuthorizationFilterValueList
+var _ResaleAuthorizationSourceAuthorizationFilterValueList_member = &s_ResaleAuthorizationSourceAuthorizationFilterValueList_member
+
+var _ResaleAuthorizationSourceAuthorizationString = &s_ResaleAuthorizationSourceAuthorizationString
+
+var ResaleAuthorizationStatusFilter = &sResaleAuthorizationStatusFilter
+var ResaleAuthorizationStatusFilter_ValueList = &sResaleAuthorizationStatusFilter_ValueList
+
+var _ResaleAuthorizationStatusFilterValueList = &s_ResaleAuthorizationStatusFilterValueList
+var _ResaleAuthorizationStatusFilterValueList_member = &s_ResaleAuthorizationStatusFilterValueList_member
+
+var ResaleAuthorizationStatusString = &sResaleAuthorizationStatusString
+var ResaleAuthorizationStatusString_Draft = &sResaleAuthorizationStatusString_Draft
+var ResaleAuthorizationStatusString_Active = &sResaleAuthorizationStatusString_Active
+var ResaleAuthorizationStatusString_Restricted = &sResaleAuthorizationStatusString_Restricted
+
+var ResaleAuthorizationSummary = &sResaleAuthorizationSummary
+var ResaleAuthorizationSummary_Name = &sResaleAuthorizationSummary_Name
+var ResaleAuthorizationSummary_ProductId = &sResaleAuthorizationSummary_ProductId
+var ResaleAuthorizationSummary_ProductName = &sResaleAuthorizationSummary_ProductName
+var ResaleAuthorizationSummary_ManufacturerAccountId = &sResaleAuthorizationSummary_ManufacturerAccountId
+var ResaleAuthorizationSummary_ManufacturerLegalName = &sResaleAuthorizationSummary_ManufacturerLegalName
+var ResaleAuthorizationSummary_ResellerAccountID = &sResaleAuthorizationSummary_ResellerAccountID
+var ResaleAuthorizationSummary_ResellerLegalName = &sResaleAuthorizationSummary_ResellerLegalName
+var ResaleAuthorizationSummary_Status = &sResaleAuthorizationSummary_Status
+var ResaleAuthorizationSummary_OfferExtendedStatus = &sResaleAuthorizationSummary_OfferExtendedStatus
+var ResaleAuthorizationSummary_CreatedDate = &sResaleAuthorizationSummary_CreatedDate
+var ResaleAuthorizationSummary_AvailabilityEndDate = &sResaleAuthorizationSummary_AvailabilityEndDate
+var ResaleAuthorizationSummary_ResellerRole = &sResaleAuthorizationSummary_ResellerRole
+var ResaleAuthorizationSummary_SourceAuthorization = &sResaleAuthorizationSummary_SourceAuthorization
+var ResaleAuthorizationSummary_IssuerAccountId = &sResaleAuthorizationSummary_IssuerAccountId
+
+var _ResourceARN = &s_ResourceARN
+
+var _ResourceId = &s_ResourceId
+
+var _ResourceIdList = &s_ResourceIdList
+var _ResourceIdList_member = &s_ResourceIdList_member
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_Message = &sResourceInUseException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourceNotSupportedException = &sResourceNotSupportedException
+var ResourceNotSupportedException_Message = &sResourceNotSupportedException_Message
+
+var _ResourcePolicyJson = &s_ResourcePolicyJson
+
+var SaaSProductEntityIdFilter = &sSaaSProductEntityIdFilter
+var SaaSProductEntityIdFilter_ValueList = &sSaaSProductEntityIdFilter_ValueList
+
+var _SaaSProductEntityIdFilterValueList = &s_SaaSProductEntityIdFilterValueList
+var _SaaSProductEntityIdFilterValueList_member = &s_SaaSProductEntityIdFilterValueList_member
+
+var _SaaSProductEntityIdString = &s_SaaSProductEntityIdString
+
+var SaaSProductFilters = &sSaaSProductFilters
+var SaaSProductFilters_EntityId = &sSaaSProductFilters_EntityId
+var SaaSProductFilters_ProductTitle = &sSaaSProductFilters_ProductTitle
+var SaaSProductFilters_Visibility = &sSaaSProductFilters_Visibility
+var SaaSProductFilters_LastModifiedDate = &sSaaSProductFilters_LastModifiedDate
+
+var SaaSProductLastModifiedDateFilter = &sSaaSProductLastModifiedDateFilter
+var SaaSProductLastModifiedDateFilter_DateRange = &sSaaSProductLastModifiedDateFilter_DateRange
+
+var SaaSProductLastModifiedDateFilterDateRange = &sSaaSProductLastModifiedDateFilterDateRange
+var SaaSProductLastModifiedDateFilterDateRange_AfterValue = &sSaaSProductLastModifiedDateFilterDateRange_AfterValue
+var SaaSProductLastModifiedDateFilterDateRange_BeforeValue = &sSaaSProductLastModifiedDateFilterDateRange_BeforeValue
+
+var SaaSProductSort = &sSaaSProductSort
+var SaaSProductSort_SortBy = &sSaaSProductSort_SortBy
+var SaaSProductSort_SortOrder = &sSaaSProductSort_SortOrder
+
+var SaaSProductSortBy = &sSaaSProductSortBy
+var SaaSProductSortBy_EntityId = &sSaaSProductSortBy_EntityId
+var SaaSProductSortBy_ProductTitle = &sSaaSProductSortBy_ProductTitle
+var SaaSProductSortBy_Visibility = &sSaaSProductSortBy_Visibility
+var SaaSProductSortBy_LastModifiedDate = &sSaaSProductSortBy_LastModifiedDate
+var SaaSProductSortBy_DeliveryOptionTypes = &sSaaSProductSortBy_DeliveryOptionTypes
+
+var SaaSProductSummary = &sSaaSProductSummary
+var SaaSProductSummary_ProductTitle = &sSaaSProductSummary_ProductTitle
+var SaaSProductSummary_Visibility = &sSaaSProductSummary_Visibility
+
+var SaaSProductTitleFilter = &sSaaSProductTitleFilter
+var SaaSProductTitleFilter_ValueList = &sSaaSProductTitleFilter_ValueList
+var SaaSProductTitleFilter_WildCardValue = &sSaaSProductTitleFilter_WildCardValue
+
+var _SaaSProductTitleFilterValueList = &s_SaaSProductTitleFilterValueList
+var _SaaSProductTitleFilterValueList_member = &s_SaaSProductTitleFilterValueList_member
+
+var _SaaSProductTitleString = &s_SaaSProductTitleString
+
+var SaaSProductVisibilityFilter = &sSaaSProductVisibilityFilter
+var SaaSProductVisibilityFilter_ValueList = &sSaaSProductVisibilityFilter_ValueList
+
+var _SaaSProductVisibilityFilterValueList = &s_SaaSProductVisibilityFilterValueList
+var _SaaSProductVisibilityFilterValueList_member = &s_SaaSProductVisibilityFilterValueList_member
+
+var SaaSProductVisibilityString = &sSaaSProductVisibilityString
+var SaaSProductVisibilityString_Limited = &sSaaSProductVisibilityString_Limited
+var SaaSProductVisibilityString_Public = &sSaaSProductVisibilityString_Public
+var SaaSProductVisibilityString_Restricted = &sSaaSProductVisibilityString_Restricted
+var SaaSProductVisibilityString_Draft = &sSaaSProductVisibilityString_Draft
+
+var _ScopeName = &s_ScopeName
+
+var _ScopeValue = &s_ScopeValue
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var Sort = &sSort
+var Sort_SortBy = &sSort_SortBy
+var Sort_SortOrder = &sSort_SortOrder
+
+var _SortBy = &s_SortBy
+
+var SortOrder = &sSortOrder
+var SortOrder_ASCENDING = &sSortOrder_ASCENDING
+var SortOrder_DESCENDING = &sSortOrder_DESCENDING
+
+var SubsidiaryAuthorizationCreatedDateFilter = &sSubsidiaryAuthorizationCreatedDateFilter
+var SubsidiaryAuthorizationCreatedDateFilter_DateRange = &sSubsidiaryAuthorizationCreatedDateFilter_DateRange
+
+var SubsidiaryAuthorizationCreatedDateFilterDateRange = &sSubsidiaryAuthorizationCreatedDateFilterDateRange
+var SubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue = &sSubsidiaryAuthorizationCreatedDateFilterDateRange_AfterValue
+var SubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue = &sSubsidiaryAuthorizationCreatedDateFilterDateRange_BeforeValue
+
+var SubsidiaryAuthorizationEntityIdFilter = &sSubsidiaryAuthorizationEntityIdFilter
+var SubsidiaryAuthorizationEntityIdFilter_ValueList = &sSubsidiaryAuthorizationEntityIdFilter_ValueList
+
+var _SubsidiaryAuthorizationEntityIdFilterValueList = &s_SubsidiaryAuthorizationEntityIdFilterValueList
+var _SubsidiaryAuthorizationEntityIdFilterValueList_member = &s_SubsidiaryAuthorizationEntityIdFilterValueList_member
+
+var _SubsidiaryAuthorizationEntityIdString = &s_SubsidiaryAuthorizationEntityIdString
+
+var SubsidiaryAuthorizationFilters = &sSubsidiaryAuthorizationFilters
+var SubsidiaryAuthorizationFilters_EntityId = &sSubsidiaryAuthorizationFilters_EntityId
+var SubsidiaryAuthorizationFilters_Status = &sSubsidiaryAuthorizationFilters_Status
+var SubsidiaryAuthorizationFilters_ResourceId = &sSubsidiaryAuthorizationFilters_ResourceId
+var SubsidiaryAuthorizationFilters_ResourceName = &sSubsidiaryAuthorizationFilters_ResourceName
+var SubsidiaryAuthorizationFilters_Name = &sSubsidiaryAuthorizationFilters_Name
+var SubsidiaryAuthorizationFilters_SubsidiaryAccountId = &sSubsidiaryAuthorizationFilters_SubsidiaryAccountId
+var SubsidiaryAuthorizationFilters_CreatedDate = &sSubsidiaryAuthorizationFilters_CreatedDate
+var SubsidiaryAuthorizationFilters_LastModifiedDate = &sSubsidiaryAuthorizationFilters_LastModifiedDate
+
+var SubsidiaryAuthorizationLastModifiedDateFilter = &sSubsidiaryAuthorizationLastModifiedDateFilter
+var SubsidiaryAuthorizationLastModifiedDateFilter_DateRange = &sSubsidiaryAuthorizationLastModifiedDateFilter_DateRange
+
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange = &sSubsidiaryAuthorizationLastModifiedDateFilterDateRange
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue = &sSubsidiaryAuthorizationLastModifiedDateFilterDateRange_AfterValue
+var SubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue = &sSubsidiaryAuthorizationLastModifiedDateFilterDateRange_BeforeValue
+
+var SubsidiaryAuthorizationNameFilter = &sSubsidiaryAuthorizationNameFilter
+var SubsidiaryAuthorizationNameFilter_ValueList = &sSubsidiaryAuthorizationNameFilter_ValueList
+var SubsidiaryAuthorizationNameFilter_WildCardValue = &sSubsidiaryAuthorizationNameFilter_WildCardValue
+
+var _SubsidiaryAuthorizationNameFilterValueList = &s_SubsidiaryAuthorizationNameFilterValueList
+var _SubsidiaryAuthorizationNameFilterValueList_member = &s_SubsidiaryAuthorizationNameFilterValueList_member
+
+var _SubsidiaryAuthorizationNameFilterWildcard = &s_SubsidiaryAuthorizationNameFilterWildcard
+
+var _SubsidiaryAuthorizationNameString = &s_SubsidiaryAuthorizationNameString
+
+var SubsidiaryAuthorizationResourceIdFilter = &sSubsidiaryAuthorizationResourceIdFilter
+var SubsidiaryAuthorizationResourceIdFilter_ValueList = &sSubsidiaryAuthorizationResourceIdFilter_ValueList
+
+var _SubsidiaryAuthorizationResourceIdFilterValueList = &s_SubsidiaryAuthorizationResourceIdFilterValueList
+var _SubsidiaryAuthorizationResourceIdFilterValueList_member = &s_SubsidiaryAuthorizationResourceIdFilterValueList_member
+
+var _SubsidiaryAuthorizationResourceIdString = &s_SubsidiaryAuthorizationResourceIdString
+
+var SubsidiaryAuthorizationResourceNameFilter = &sSubsidiaryAuthorizationResourceNameFilter
+var SubsidiaryAuthorizationResourceNameFilter_ValueList = &sSubsidiaryAuthorizationResourceNameFilter_ValueList
+var SubsidiaryAuthorizationResourceNameFilter_WildCardValue = &sSubsidiaryAuthorizationResourceNameFilter_WildCardValue
+
+var _SubsidiaryAuthorizationResourceNameFilterValueList = &s_SubsidiaryAuthorizationResourceNameFilterValueList
+var _SubsidiaryAuthorizationResourceNameFilterValueList_member = &s_SubsidiaryAuthorizationResourceNameFilterValueList_member
+
+var _SubsidiaryAuthorizationResourceNameFilterWildcard = &s_SubsidiaryAuthorizationResourceNameFilterWildcard
+
+var _SubsidiaryAuthorizationResourceNameString = &s_SubsidiaryAuthorizationResourceNameString
+
+var SubsidiaryAuthorizationSort = &sSubsidiaryAuthorizationSort
+var SubsidiaryAuthorizationSort_SortBy = &sSubsidiaryAuthorizationSort_SortBy
+var SubsidiaryAuthorizationSort_SortOrder = &sSubsidiaryAuthorizationSort_SortOrder
+
+var SubsidiaryAuthorizationSortBy = &sSubsidiaryAuthorizationSortBy
+var SubsidiaryAuthorizationSortBy_EntityId = &sSubsidiaryAuthorizationSortBy_EntityId
+var SubsidiaryAuthorizationSortBy_Status = &sSubsidiaryAuthorizationSortBy_Status
+var SubsidiaryAuthorizationSortBy_ResourceId = &sSubsidiaryAuthorizationSortBy_ResourceId
+var SubsidiaryAuthorizationSortBy_SubsidiaryAccountId = &sSubsidiaryAuthorizationSortBy_SubsidiaryAccountId
+var SubsidiaryAuthorizationSortBy_CreatedDate = &sSubsidiaryAuthorizationSortBy_CreatedDate
+var SubsidiaryAuthorizationSortBy_LastModifiedDate = &sSubsidiaryAuthorizationSortBy_LastModifiedDate
+
+var SubsidiaryAuthorizationStatusFilter = &sSubsidiaryAuthorizationStatusFilter
+var SubsidiaryAuthorizationStatusFilter_ValueList = &sSubsidiaryAuthorizationStatusFilter_ValueList
+
+var _SubsidiaryAuthorizationStatusFilterValueList = &s_SubsidiaryAuthorizationStatusFilterValueList
+var _SubsidiaryAuthorizationStatusFilterValueList_member = &s_SubsidiaryAuthorizationStatusFilterValueList_member
+
+var SubsidiaryAuthorizationStatusString = &sSubsidiaryAuthorizationStatusString
+var SubsidiaryAuthorizationStatusString_Draft = &sSubsidiaryAuthorizationStatusString_Draft
+var SubsidiaryAuthorizationStatusString_Active = &sSubsidiaryAuthorizationStatusString_Active
+var SubsidiaryAuthorizationStatusString_Restricted = &sSubsidiaryAuthorizationStatusString_Restricted
+
+var SubsidiaryAuthorizationSubsidiaryAccountIdFilter = &sSubsidiaryAuthorizationSubsidiaryAccountIdFilter
+var SubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList = &sSubsidiaryAuthorizationSubsidiaryAccountIdFilter_ValueList
+
+var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList = &s_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList
+var _SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member = &s_SubsidiaryAuthorizationSubsidiaryAccountIdFilterValueList_member
+
+var _SubsidiaryAuthorizationSubsidiaryAccountIdString = &s_SubsidiaryAuthorizationSubsidiaryAccountIdString
+
+var SubsidiaryAuthorizationSummary = &sSubsidiaryAuthorizationSummary
+var SubsidiaryAuthorizationSummary_Name = &sSubsidiaryAuthorizationSummary_Name
+var SubsidiaryAuthorizationSummary_Status = &sSubsidiaryAuthorizationSummary_Status
+var SubsidiaryAuthorizationSummary_ResourceId = &sSubsidiaryAuthorizationSummary_ResourceId
+var SubsidiaryAuthorizationSummary_ResourceName = &sSubsidiaryAuthorizationSummary_ResourceName
+var SubsidiaryAuthorizationSummary_SubsidiaryAccountId = &sSubsidiaryAuthorizationSummary_SubsidiaryAccountId
+var SubsidiaryAuthorizationSummary_CreatedDate = &sSubsidiaryAuthorizationSummary_CreatedDate
+
+var _SubsidiaryAuthorizationSummaryNameString = &s_SubsidiaryAuthorizationSummaryNameString
+
+var _SubsidiaryAuthorizationSummaryResourceIdString = &s_SubsidiaryAuthorizationSummaryResourceIdString
+
+var _SubsidiaryAuthorizationSummaryResourceNameString = &s_SubsidiaryAuthorizationSummaryResourceNameString
+
+var _SubsidiaryAuthorizationSummaryStatusString = &s_SubsidiaryAuthorizationSummaryStatusString
+
+var _SubsidiaryAuthorizationSummarySubsidiaryAccountIdString = &s_SubsidiaryAuthorizationSummarySubsidiaryAccountIdString
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_ValidationExceptionFieldList = &sValidationException_ValidationExceptionFieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_Reason = &sValidationExceptionField_Reason
+var ValidationExceptionField_EntityType = &sValidationExceptionField_EntityType
+var ValidationExceptionField_EntityId = &sValidationExceptionField_EntityId
+var ValidationExceptionField_ChangeType = &sValidationExceptionField_ChangeType
+var ValidationExceptionField_Field = &sValidationExceptionField_Field
+var ValidationExceptionField_Message = &sValidationExceptionField_Message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var _ValueList = &s_ValueList
+var _ValueList_member = &s_ValueList_member
+
+var _VersionedFrameworkId = &s_VersionedFrameworkId
+
+var _VisibilityValue = &s_VisibilityValue
+
+var BatchDescribeEntitiesRequest = &sBatchDescribeEntitiesRequest
+var BatchDescribeEntitiesRequest_EntityRequestList = &sBatchDescribeEntitiesRequest_EntityRequestList
+
+var BatchDescribeEntitiesResponse = &sBatchDescribeEntitiesResponse
+var BatchDescribeEntitiesResponse_EntityDetails = &sBatchDescribeEntitiesResponse_EntityDetails
+var BatchDescribeEntitiesResponse_Errors = &sBatchDescribeEntitiesResponse_Errors
+
+var CancelChangeSetRequest = &sCancelChangeSetRequest
+var CancelChangeSetRequest_Catalog = &sCancelChangeSetRequest_Catalog
+var CancelChangeSetRequest_ChangeSetId = &sCancelChangeSetRequest_ChangeSetId
+
+var CancelChangeSetResponse = &sCancelChangeSetResponse
+var CancelChangeSetResponse_ChangeSetId = &sCancelChangeSetResponse_ChangeSetId
+var CancelChangeSetResponse_ChangeSetArn = &sCancelChangeSetResponse_ChangeSetArn
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_ResourceArn = &sDeleteResourcePolicyRequest_ResourceArn
+
+var DeleteResourcePolicyResponse = &sDeleteResourcePolicyResponse
+
+var DescribeAssessmentRequest = &sDescribeAssessmentRequest
+var DescribeAssessmentRequest_Catalog = &sDescribeAssessmentRequest_Catalog
+var DescribeAssessmentRequest_AssessmentIdentifier = &sDescribeAssessmentRequest_AssessmentIdentifier
+var DescribeAssessmentRequest_MaxResults = &sDescribeAssessmentRequest_MaxResults
+var DescribeAssessmentRequest_NextToken = &sDescribeAssessmentRequest_NextToken
+
+var DescribeAssessmentResponse = &sDescribeAssessmentResponse
+var DescribeAssessmentResponse_AssessmentArn = &sDescribeAssessmentResponse_AssessmentArn
+var DescribeAssessmentResponse_AssessmentId = &sDescribeAssessmentResponse_AssessmentId
+var DescribeAssessmentResponse_FrameworkId = &sDescribeAssessmentResponse_FrameworkId
+var DescribeAssessmentResponse_AssessmentTargetSummary = &sDescribeAssessmentResponse_AssessmentTargetSummary
+var DescribeAssessmentResponse_FrameworkSummary = &sDescribeAssessmentResponse_FrameworkSummary
+var DescribeAssessmentResponse_AssessmentResult = &sDescribeAssessmentResponse_AssessmentResult
+var DescribeAssessmentResponse_CreatedAt = &sDescribeAssessmentResponse_CreatedAt
+var DescribeAssessmentResponse_ExpiresAt = &sDescribeAssessmentResponse_ExpiresAt
+var DescribeAssessmentResponse_ControlAssessments = &sDescribeAssessmentResponse_ControlAssessments
+var DescribeAssessmentResponse_NextToken = &sDescribeAssessmentResponse_NextToken
+
+var DescribeChangeSetRequest = &sDescribeChangeSetRequest
+var DescribeChangeSetRequest_Catalog = &sDescribeChangeSetRequest_Catalog
+var DescribeChangeSetRequest_ChangeSetId = &sDescribeChangeSetRequest_ChangeSetId
+
+var DescribeChangeSetResponse = &sDescribeChangeSetResponse
+var DescribeChangeSetResponse_ChangeSetId = &sDescribeChangeSetResponse_ChangeSetId
+var DescribeChangeSetResponse_ChangeSetArn = &sDescribeChangeSetResponse_ChangeSetArn
+var DescribeChangeSetResponse_ChangeSetName = &sDescribeChangeSetResponse_ChangeSetName
+var DescribeChangeSetResponse_Intent = &sDescribeChangeSetResponse_Intent
+var DescribeChangeSetResponse_StartTime = &sDescribeChangeSetResponse_StartTime
+var DescribeChangeSetResponse_EndTime = &sDescribeChangeSetResponse_EndTime
+var DescribeChangeSetResponse_Status = &sDescribeChangeSetResponse_Status
+var DescribeChangeSetResponse_FailureCode = &sDescribeChangeSetResponse_FailureCode
+var DescribeChangeSetResponse_FailureDescription = &sDescribeChangeSetResponse_FailureDescription
+var DescribeChangeSetResponse_ChangeSet = &sDescribeChangeSetResponse_ChangeSet
+
+var DescribeEntityRequest = &sDescribeEntityRequest
+var DescribeEntityRequest_Catalog = &sDescribeEntityRequest_Catalog
+var DescribeEntityRequest_EntityId = &sDescribeEntityRequest_EntityId
+
+var DescribeEntityResponse = &sDescribeEntityResponse
+var DescribeEntityResponse_EntityType = &sDescribeEntityResponse_EntityType
+var DescribeEntityResponse_EntityIdentifier = &sDescribeEntityResponse_EntityIdentifier
+var DescribeEntityResponse_EntityArn = &sDescribeEntityResponse_EntityArn
+var DescribeEntityResponse_LastModifiedDate = &sDescribeEntityResponse_LastModifiedDate
+var DescribeEntityResponse_Details = &sDescribeEntityResponse_Details
+var DescribeEntityResponse_DetailsDocument = &sDescribeEntityResponse_DetailsDocument
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_ResourceArn = &sGetResourcePolicyRequest_ResourceArn
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_Policy = &sGetResourcePolicyResponse_Policy
+
+var ListAssessmentsRequest = &sListAssessmentsRequest
+var ListAssessmentsRequest_Catalog = &sListAssessmentsRequest_Catalog
+var ListAssessmentsRequest_FrameworkId = &sListAssessmentsRequest_FrameworkId
+var ListAssessmentsRequest_AssessmentTargetFilter = &sListAssessmentsRequest_AssessmentTargetFilter
+var ListAssessmentsRequest_FrameworkFilters = &sListAssessmentsRequest_FrameworkFilters
+var ListAssessmentsRequest_MaxResults = &sListAssessmentsRequest_MaxResults
+var ListAssessmentsRequest_NextToken = &sListAssessmentsRequest_NextToken
+
+var ListAssessmentsResponse = &sListAssessmentsResponse
+var ListAssessmentsResponse_AssessmentSummaryList = &sListAssessmentsResponse_AssessmentSummaryList
+var ListAssessmentsResponse_NextToken = &sListAssessmentsResponse_NextToken
+
+var ListChangeSetsRequest = &sListChangeSetsRequest
+var ListChangeSetsRequest_Catalog = &sListChangeSetsRequest_Catalog
+var ListChangeSetsRequest_FilterList = &sListChangeSetsRequest_FilterList
+var ListChangeSetsRequest_Sort = &sListChangeSetsRequest_Sort
+var ListChangeSetsRequest_MaxResults = &sListChangeSetsRequest_MaxResults
+var ListChangeSetsRequest_NextToken = &sListChangeSetsRequest_NextToken
+
+var ListChangeSetsResponse = &sListChangeSetsResponse
+var ListChangeSetsResponse_ChangeSetSummaryList = &sListChangeSetsResponse_ChangeSetSummaryList
+var ListChangeSetsResponse_NextToken = &sListChangeSetsResponse_NextToken
+
+var ListEntitiesRequest = &sListEntitiesRequest
+var ListEntitiesRequest_Catalog = &sListEntitiesRequest_Catalog
+var ListEntitiesRequest_EntityType = &sListEntitiesRequest_EntityType
+var ListEntitiesRequest_FilterList = &sListEntitiesRequest_FilterList
+var ListEntitiesRequest_Sort = &sListEntitiesRequest_Sort
+var ListEntitiesRequest_NextToken = &sListEntitiesRequest_NextToken
+var ListEntitiesRequest_MaxResults = &sListEntitiesRequest_MaxResults
+var ListEntitiesRequest_OwnershipType = &sListEntitiesRequest_OwnershipType
+var ListEntitiesRequest_EntityTypeFilters = &sListEntitiesRequest_EntityTypeFilters
+var ListEntitiesRequest_EntityTypeSort = &sListEntitiesRequest_EntityTypeSort
+
+var ListEntitiesResponse = &sListEntitiesResponse
+var ListEntitiesResponse_EntitySummaryList = &sListEntitiesResponse_EntitySummaryList
+var ListEntitiesResponse_NextToken = &sListEntitiesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_ResourceArn = &sListTagsForResourceResponse_ResourceArn
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_ResourceArn = &sPutResourcePolicyRequest_ResourceArn
+var PutResourcePolicyRequest_Policy = &sPutResourcePolicyRequest_Policy
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+
+var StartChangeSetRequest = &sStartChangeSetRequest
+var StartChangeSetRequest_Catalog = &sStartChangeSetRequest_Catalog
+var StartChangeSetRequest_ChangeSet = &sStartChangeSetRequest_ChangeSet
+var StartChangeSetRequest_ChangeSetName = &sStartChangeSetRequest_ChangeSetName
+var StartChangeSetRequest_ClientRequestToken = &sStartChangeSetRequest_ClientRequestToken
+var StartChangeSetRequest_ChangeSetTags = &sStartChangeSetRequest_ChangeSetTags
+var StartChangeSetRequest_Intent = &sStartChangeSetRequest_Intent
+
+var StartChangeSetResponse = &sStartChangeSetResponse
+var StartChangeSetResponse_ChangeSetId = &sStartChangeSetResponse_ChangeSetId
+var StartChangeSetResponse_ChangeSetArn = &sStartChangeSetResponse_ChangeSetArn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var AWSMPSeymour = &smithy.ServiceSchema{Schema: &s_AWSMPSeymour, Version: "2018-09-17"}

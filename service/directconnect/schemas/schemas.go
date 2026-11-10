@@ -4,4673 +4,3312 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AcceptDirectConnectGatewayAssociationProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AcceptDirectConnectGatewayAssociationProposal",
-}, smithy.ShapeTypeOperation, 0)
-
-var AllocateConnectionOnInterconnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocateConnectionOnInterconnect",
-}, smithy.ShapeTypeOperation, 0)
-
-var AllocateHostedConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocateHostedConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var AllocatePrivateVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocatePrivateVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var AllocatePublicVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocatePublicVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var AllocateTransitVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocateTransitVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateConnectionsToResiliencyGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateConnectionsToResiliencyGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateConnectionWithLag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateConnectionWithLag",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateHostedConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateHostedConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateMacSecKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateMacSecKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var AssociateVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConfirmConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConfirmCustomerAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmCustomerAgreement",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConfirmPrivateVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmPrivateVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConfirmPublicVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmPublicVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var ConfirmTransitVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmTransitVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateBGPPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateBGPPeer",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDirectConnectGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDirectConnectGatewayAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDirectConnectGatewayAssociationProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayAssociationProposal",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateInterconnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateInterconnect",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateLag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateLag",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePrivateVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreatePrivateVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreatePublicVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreatePublicVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateResiliencyGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateResiliencyGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateTransitVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateTransitVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBGPPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteBGPPeer",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDirectConnectGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDirectConnectGatewayAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDirectConnectGatewayAssociationProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayAssociationProposal",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteInterconnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteInterconnect",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteLag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteLag",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResiliencyGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteResiliencyGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteVirtualInterface",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConnectionLoa = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeConnectionLoa",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeConnectionsOnInterconnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeConnectionsOnInterconnect",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeCustomerMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeCustomerMetadata",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDirectConnectGatewayAssociationProposals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAssociationProposals",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDirectConnectGatewayAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDirectConnectGatewayAttachments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAttachments",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDirectConnectGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGateways",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeHostedConnections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeHostedConnections",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeInterconnectLoa = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeInterconnectLoa",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeInterconnects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeInterconnects",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeLags",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLoa = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeLoa",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeLocations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeLocations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRouterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeRouterConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeVirtualGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeVirtualGateways",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeVirtualInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeVirtualInterfaces",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateConnectionFromLag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateConnectionFromLag",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateConnectionsFromResiliencyGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateConnectionsFromResiliencyGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateMacSecKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateMacSecKey",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResiliencyGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "GetResiliencyGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResiliencyGroupAssociations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListResiliencyGroupAssociations",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResiliencyGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListResiliencyGroups",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVirtualInterfaceRoutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListVirtualInterfaceRoutes",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListVirtualInterfaceTestHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListVirtualInterfaceTestHistory",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartBgpFailoverTest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StartBgpFailoverTest",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopBgpFailoverTest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StopBgpFailoverTest",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateConnection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateConnection",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateConnectionsBillingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateConnectionsBillingMode",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDirectConnectGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateDirectConnectGateway",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDirectConnectGatewayAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateDirectConnectGatewayAssociation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateLag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateLag",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateResiliencyGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateResiliencyGroup",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateVirtualInterfaceAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateVirtualInterfaceAttributes",
-}, smithy.ShapeTypeOperation, 0)
-
-var _OvertureService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "OvertureService",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://directconnect.amazonaws.com/doc/2012-10-25/"})
-
-var OvertureService = smithy.NewServiceSchema(_OvertureService, "2012-10-25")
-
-var AddressFamily = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AddressFamily",
-}, smithy.ShapeTypeEnum, 2)
-var AddressFamily_IPv4 *smithy.Schema
-
-var AddressFamily_IPv6 *smithy.Schema
-
-var _AgreementList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AgreementList",
-}, smithy.ShapeTypeList, 1)
-var _AgreementList_member *smithy.Schema
-
-var _AgreementName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AgreementName",
-}, smithy.ShapeTypeString, 0)
-
-var _AmazonAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AmazonAddress",
-}, smithy.ShapeTypeString, 0)
-
-var _ASN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ASN",
-}, smithy.ShapeTypeInteger, 0)
-
-var _AsPathList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AsPathList",
-}, smithy.ShapeTypeList, 1)
-var _AsPathList_member *smithy.Schema
-
-var AsPathSegment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AsPathSegment",
-}, smithy.ShapeTypeStructure, 2)
-var AsPathSegment_pathType *smithy.Schema
-
-var AsPathSegment_path *smithy.Schema
-
-var _AsPathSegmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AsPathSegmentList",
-}, smithy.ShapeTypeList, 1)
-var _AsPathSegmentList_member *smithy.Schema
-
-var AsPathType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AsPathType",
-}, smithy.ShapeTypeEnum, 2)
-var AsPathType_Seq *smithy.Schema
-
-var AsPathType_Set *smithy.Schema
-
-var AssociatedCoreNetwork = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociatedCoreNetwork",
-}, smithy.ShapeTypeStructure, 3)
-var AssociatedCoreNetwork_id *smithy.Schema
-
-var AssociatedCoreNetwork_ownerAccount *smithy.Schema
-
-var AssociatedCoreNetwork_attachmentId *smithy.Schema
-
-var AssociatedGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociatedGateway",
-}, smithy.ShapeTypeStructure, 4)
-var AssociatedGateway_id *smithy.Schema
-
-var AssociatedGateway_type *smithy.Schema
-
-var AssociatedGateway_ownerAccount *smithy.Schema
-
-var AssociatedGateway_region *smithy.Schema
-
-var _AssociatedGatewayId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociatedGatewayId",
-}, smithy.ShapeTypeString, 0)
-
-var AvailableBillingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AvailableBillingMode",
-}, smithy.ShapeTypeStructure, 3)
-var AvailableBillingMode_billingMode *smithy.Schema
-
-var AvailableBillingMode_availablePortSpeeds *smithy.Schema
-
-var AvailableBillingMode_includedRegions *smithy.Schema
-
-var _AvailableBillingModeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AvailableBillingModeList",
-}, smithy.ShapeTypeList, 1)
-var _AvailableBillingModeList_member *smithy.Schema
-
-var _AvailableMacSecPortSpeeds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AvailableMacSecPortSpeeds",
-}, smithy.ShapeTypeList, 1)
-var _AvailableMacSecPortSpeeds_member *smithy.Schema
-
-var _AvailablePortSpeeds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AvailablePortSpeeds",
-}, smithy.ShapeTypeList, 1)
-var _AvailablePortSpeeds_member *smithy.Schema
-
-var _AwsDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AwsDevice",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsDeviceV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AwsDeviceV2",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsLogicalDeviceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AwsLogicalDeviceId",
-}, smithy.ShapeTypeString, 0)
-
-var _Bandwidth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Bandwidth",
-}, smithy.ShapeTypeString, 0)
-
-var _BGPAuthKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BGPAuthKey",
-}, smithy.ShapeTypeString, 0)
-
-var BGPPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BGPPeer",
-}, smithy.ShapeTypeStructure, 11)
-var BGPPeer_bgpPeerId *smithy.Schema
-
-var BGPPeer_asn *smithy.Schema
-
-var BGPPeer_asnLong *smithy.Schema
-
-var BGPPeer_authKey *smithy.Schema
-
-var BGPPeer_addressFamily *smithy.Schema
-
-var BGPPeer_amazonAddress *smithy.Schema
-
-var BGPPeer_customerAddress *smithy.Schema
-
-var BGPPeer_bgpPeerState *smithy.Schema
-
-var BGPPeer_bgpStatus *smithy.Schema
-
-var BGPPeer_awsDeviceV2 *smithy.Schema
-
-var BGPPeer_awsLogicalDeviceId *smithy.Schema
-
-var _BGPPeerId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BGPPeerId",
-}, smithy.ShapeTypeString, 0)
-
-var _BGPPeerIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BGPPeerIdList",
-}, smithy.ShapeTypeList, 1)
-var _BGPPeerIdList_member *smithy.Schema
-
-var _BGPPeerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BGPPeerList",
-}, smithy.ShapeTypeList, 1)
-var _BGPPeerList_member *smithy.Schema
-
-var BGPPeerState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BGPPeerState",
-}, smithy.ShapeTypeEnum, 5)
-var BGPPeerState_Verifying *smithy.Schema
-
-var BGPPeerState_Pending *smithy.Schema
-
-var BGPPeerState_Available *smithy.Schema
-
-var BGPPeerState_Deleting *smithy.Schema
-
-var BGPPeerState_Deleted *smithy.Schema
-
-var BGPStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BGPStatus",
-}, smithy.ShapeTypeEnum, 3)
-var BGPStatus_Up *smithy.Schema
-
-var BGPStatus_Down *smithy.Schema
-
-var BGPStatus_Unknown *smithy.Schema
-
-var BillingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BillingMode",
-}, smithy.ShapeTypeEnum, 11)
-var BillingMode_PayAsYouGo *smithy.Schema
-
-var BillingMode_FlatRateTier1 *smithy.Schema
-
-var BillingMode_FlatRateTier2 *smithy.Schema
-
-var BillingMode_FlatRateTier3 *smithy.Schema
-
-var BillingMode_FlatRateTier4 *smithy.Schema
-
-var BillingMode_FlatRateTier5 *smithy.Schema
-
-var BillingMode_PortPairFlatRateTier1 *smithy.Schema
-
-var BillingMode_PortPairFlatRateTier2 *smithy.Schema
-
-var BillingMode_PortPairFlatRateTier3 *smithy.Schema
-
-var BillingMode_PortPairFlatRateTier4 *smithy.Schema
-
-var BillingMode_PortPairFlatRateTier5 *smithy.Schema
-
-var _BooleanFlag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "BooleanFlag",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Cak = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Cak",
-}, smithy.ShapeTypeString, 0)
-
-var _CIDR = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CIDR",
-}, smithy.ShapeTypeString, 0)
-
-var _Ckn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Ckn",
-}, smithy.ShapeTypeString, 0)
-
-var _CommunityEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CommunityEntry",
-}, smithy.ShapeTypeString, 0)
-
-var _CommunityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CommunityList",
-}, smithy.ShapeTypeList, 1)
-var _CommunityList_member *smithy.Schema
-
-var Connection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Connection",
-}, smithy.ShapeTypeStructure, 29)
-var Connection_ownerAccount *smithy.Schema
-
-var Connection_connectionId *smithy.Schema
-
-var Connection_connectionName *smithy.Schema
-
-var Connection_connectionState *smithy.Schema
-
-var Connection_region *smithy.Schema
-
-var Connection_location *smithy.Schema
-
-var Connection_bandwidth *smithy.Schema
-
-var Connection_vlan *smithy.Schema
-
-var Connection_partnerName *smithy.Schema
-
-var Connection_loaIssueTime *smithy.Schema
-
-var Connection_lagId *smithy.Schema
-
-var Connection_awsDevice *smithy.Schema
-
-var Connection_jumboFrameCapable *smithy.Schema
-
-var Connection_awsDeviceV2 *smithy.Schema
-
-var Connection_awsLogicalDeviceId *smithy.Schema
-
-var Connection_hasLogicalRedundancy *smithy.Schema
-
-var Connection_tags *smithy.Schema
-
-var Connection_providerName *smithy.Schema
-
-var Connection_macSecCapable *smithy.Schema
-
-var Connection_portEncryptionStatus *smithy.Schema
-
-var Connection_encryptionMode *smithy.Schema
-
-var Connection_macSecKeys *smithy.Schema
-
-var Connection_rateLimiterStatus *smithy.Schema
-
-var Connection_partnerInterconnectMacSecCapable *smithy.Schema
-
-var Connection_prefixPoolSizeIpv4 *smithy.Schema
-
-var Connection_prefixPoolSizeIpv6 *smithy.Schema
-
-var Connection_prefixPoolUnallocatedCountIpv4 *smithy.Schema
-
-var Connection_prefixPoolUnallocatedCountIpv6 *smithy.Schema
-
-var Connection_billingMode *smithy.Schema
-
-var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionId",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ConnectionIdentifierList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionIdentifierList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionIdentifierList_member *smithy.Schema
-
-var _ConnectionIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionIdList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionIdList_member *smithy.Schema
-
-var _ConnectionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionList",
-}, smithy.ShapeTypeList, 1)
-var _ConnectionList_member *smithy.Schema
-
-var _ConnectionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionName",
-}, smithy.ShapeTypeString, 0)
-
-var ConnectionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConnectionState",
-}, smithy.ShapeTypeEnum, 9)
-var ConnectionState_ordering *smithy.Schema
-
-var ConnectionState_requested *smithy.Schema
-
-var ConnectionState_pending *smithy.Schema
-
-var ConnectionState_available *smithy.Schema
-
-var ConnectionState_down *smithy.Schema
-
-var ConnectionState_deleting *smithy.Schema
-
-var ConnectionState_deleted *smithy.Schema
-
-var ConnectionState_rejected *smithy.Schema
-
-var ConnectionState_unknown *smithy.Schema
-
-var _CoreNetworkAttachmentId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CoreNetworkAttachmentId",
-}, smithy.ShapeTypeString, 0)
-
-var _CoreNetworkIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CoreNetworkIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _Count = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Count",
-}, smithy.ShapeTypeInteger, 0)
-
-var _CustomerAddress = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CustomerAddress",
-}, smithy.ShapeTypeString, 0)
-
-var CustomerAgreement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CustomerAgreement",
-}, smithy.ShapeTypeStructure, 2)
-var CustomerAgreement_agreementName *smithy.Schema
-
-var CustomerAgreement_status *smithy.Schema
-
-var DirectConnectClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectClientException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DirectConnectClientException_message *smithy.Schema
-
-var DirectConnectGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGateway",
-}, smithy.ShapeTypeStructure, 8)
-var DirectConnectGateway_directConnectGatewayId *smithy.Schema
-
-var DirectConnectGateway_directConnectGatewayName *smithy.Schema
-
-var DirectConnectGateway_amazonSideAsn *smithy.Schema
-
-var DirectConnectGateway_ownerAccount *smithy.Schema
-
-var DirectConnectGateway_directConnectGatewayState *smithy.Schema
-
-var DirectConnectGateway_stateChangeError *smithy.Schema
-
-var DirectConnectGateway_totalPrefixPoolAllocations *smithy.Schema
-
-var DirectConnectGateway_tags *smithy.Schema
-
-var DirectConnectGatewayAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociation",
-}, smithy.ShapeTypeStructure, 11)
-var DirectConnectGatewayAssociation_directConnectGatewayId *smithy.Schema
-
-var DirectConnectGatewayAssociation_directConnectGatewayOwnerAccount *smithy.Schema
-
-var DirectConnectGatewayAssociation_associationState *smithy.Schema
-
-var DirectConnectGatewayAssociation_stateChangeError *smithy.Schema
-
-var DirectConnectGatewayAssociation_associatedGateway *smithy.Schema
-
-var DirectConnectGatewayAssociation_associationId *smithy.Schema
-
-var DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var DirectConnectGatewayAssociation_associatedCoreNetwork *smithy.Schema
-
-var DirectConnectGatewayAssociation_virtualGatewayId *smithy.Schema
-
-var DirectConnectGatewayAssociation_virtualGatewayRegion *smithy.Schema
-
-var DirectConnectGatewayAssociation_virtualGatewayOwnerAccount *smithy.Schema
-
-var _DirectConnectGatewayAssociationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociationId",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectConnectGatewayAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _DirectConnectGatewayAssociationList_member *smithy.Schema
-
-var DirectConnectGatewayAssociationProposal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociationProposal",
-}, smithy.ShapeTypeStructure, 7)
-var DirectConnectGatewayAssociationProposal_proposalId *smithy.Schema
-
-var DirectConnectGatewayAssociationProposal_directConnectGatewayId *smithy.Schema
-
-var DirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount *smithy.Schema
-
-var DirectConnectGatewayAssociationProposal_proposalState *smithy.Schema
-
-var DirectConnectGatewayAssociationProposal_associatedGateway *smithy.Schema
-
-var DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var _DirectConnectGatewayAssociationProposalId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociationProposalId",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectConnectGatewayAssociationProposalList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociationProposalList",
-}, smithy.ShapeTypeList, 1)
-var _DirectConnectGatewayAssociationProposalList_member *smithy.Schema
-
-var DirectConnectGatewayAssociationProposalState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociationProposalState",
-}, smithy.ShapeTypeEnum, 3)
-var DirectConnectGatewayAssociationProposalState_requested *smithy.Schema
-
-var DirectConnectGatewayAssociationProposalState_accepted *smithy.Schema
-
-var DirectConnectGatewayAssociationProposalState_deleted *smithy.Schema
-
-var DirectConnectGatewayAssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAssociationState",
-}, smithy.ShapeTypeEnum, 5)
-var DirectConnectGatewayAssociationState_associating *smithy.Schema
-
-var DirectConnectGatewayAssociationState_associated *smithy.Schema
-
-var DirectConnectGatewayAssociationState_disassociating *smithy.Schema
-
-var DirectConnectGatewayAssociationState_disassociated *smithy.Schema
-
-var DirectConnectGatewayAssociationState_updating *smithy.Schema
-
-var DirectConnectGatewayAttachment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAttachment",
-}, smithy.ShapeTypeStructure, 7)
-var DirectConnectGatewayAttachment_directConnectGatewayId *smithy.Schema
-
-var DirectConnectGatewayAttachment_virtualInterfaceId *smithy.Schema
-
-var DirectConnectGatewayAttachment_virtualInterfaceRegion *smithy.Schema
-
-var DirectConnectGatewayAttachment_virtualInterfaceOwnerAccount *smithy.Schema
-
-var DirectConnectGatewayAttachment_attachmentState *smithy.Schema
-
-var DirectConnectGatewayAttachment_attachmentType *smithy.Schema
-
-var DirectConnectGatewayAttachment_stateChangeError *smithy.Schema
-
-var _DirectConnectGatewayAttachmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAttachmentList",
-}, smithy.ShapeTypeList, 1)
-var _DirectConnectGatewayAttachmentList_member *smithy.Schema
-
-var DirectConnectGatewayAttachmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAttachmentState",
-}, smithy.ShapeTypeEnum, 4)
-var DirectConnectGatewayAttachmentState_attaching *smithy.Schema
-
-var DirectConnectGatewayAttachmentState_attached *smithy.Schema
-
-var DirectConnectGatewayAttachmentState_detaching *smithy.Schema
-
-var DirectConnectGatewayAttachmentState_detached *smithy.Schema
-
-var DirectConnectGatewayAttachmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayAttachmentType",
-}, smithy.ShapeTypeEnum, 2)
-var DirectConnectGatewayAttachmentType_TransitVirtualInterface *smithy.Schema
-
-var DirectConnectGatewayAttachmentType_PrivateVirtualInterface *smithy.Schema
-
-var _DirectConnectGatewayId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayId",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectConnectGatewayList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayList",
-}, smithy.ShapeTypeList, 1)
-var _DirectConnectGatewayList_member *smithy.Schema
-
-var _DirectConnectGatewayName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayName",
-}, smithy.ShapeTypeString, 0)
-
-var DirectConnectGatewayState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectGatewayState",
-}, smithy.ShapeTypeEnum, 4)
-var DirectConnectGatewayState_pending *smithy.Schema
-
-var DirectConnectGatewayState_available *smithy.Schema
-
-var DirectConnectGatewayState_deleting *smithy.Schema
-
-var DirectConnectGatewayState_deleted *smithy.Schema
-
-var DirectConnectServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DirectConnectServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var DirectConnectServerException_message *smithy.Schema
-
-var DuplicateTagKeysException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DuplicateTagKeysException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var DuplicateTagKeysException_message *smithy.Schema
-
-var _EnableSiteLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "EnableSiteLink",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _EncryptionMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "EncryptionMode",
-}, smithy.ShapeTypeString, 0)
-
-var _EndTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "EndTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _FailureTestHistoryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "FailureTestHistoryStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "GatewayIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _GatewayIdToAssociate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "GatewayIdToAssociate",
-}, smithy.ShapeTypeString, 0)
-
-var GatewayType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "GatewayType",
-}, smithy.ShapeTypeEnum, 2)
-var GatewayType_VirtualPrivateGateway *smithy.Schema
-
-var GatewayType_TransitGateway *smithy.Schema
-
-var HasLogicalRedundancy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "HasLogicalRedundancy",
-}, smithy.ShapeTypeEnum, 3)
-var HasLogicalRedundancy_Unknown *smithy.Schema
-
-var HasLogicalRedundancy_Yes *smithy.Schema
-
-var HasLogicalRedundancy_No *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var _IncludedRegionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "IncludedRegionList",
-}, smithy.ShapeTypeList, 1)
-var _IncludedRegionList_member *smithy.Schema
-
-var Interconnect = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Interconnect",
-}, smithy.ShapeTypeStructure, 19)
-var Interconnect_interconnectId *smithy.Schema
-
-var Interconnect_interconnectName *smithy.Schema
-
-var Interconnect_interconnectState *smithy.Schema
-
-var Interconnect_region *smithy.Schema
-
-var Interconnect_location *smithy.Schema
-
-var Interconnect_bandwidth *smithy.Schema
-
-var Interconnect_loaIssueTime *smithy.Schema
-
-var Interconnect_lagId *smithy.Schema
-
-var Interconnect_awsDevice *smithy.Schema
-
-var Interconnect_jumboFrameCapable *smithy.Schema
-
-var Interconnect_awsDeviceV2 *smithy.Schema
-
-var Interconnect_awsLogicalDeviceId *smithy.Schema
-
-var Interconnect_hasLogicalRedundancy *smithy.Schema
-
-var Interconnect_tags *smithy.Schema
-
-var Interconnect_providerName *smithy.Schema
-
-var Interconnect_macSecCapable *smithy.Schema
-
-var Interconnect_portEncryptionStatus *smithy.Schema
-
-var Interconnect_encryptionMode *smithy.Schema
-
-var Interconnect_macSecKeys *smithy.Schema
-
-var _InterconnectId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "InterconnectId",
-}, smithy.ShapeTypeString, 0)
-
-var _InterconnectList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "InterconnectList",
-}, smithy.ShapeTypeList, 1)
-var _InterconnectList_member *smithy.Schema
-
-var _InterconnectName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "InterconnectName",
-}, smithy.ShapeTypeString, 0)
-
-var InterconnectState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "InterconnectState",
-}, smithy.ShapeTypeEnum, 7)
-var InterconnectState_requested *smithy.Schema
-
-var InterconnectState_pending *smithy.Schema
-
-var InterconnectState_available *smithy.Schema
-
-var InterconnectState_down *smithy.Schema
-
-var InterconnectState_deleting *smithy.Schema
-
-var InterconnectState_deleted *smithy.Schema
-
-var InterconnectState_unknown *smithy.Schema
-
-var _JumboFrameCapable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "JumboFrameCapable",
-}, smithy.ShapeTypeBoolean, 0)
-
-var Lag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Lag",
-}, smithy.ShapeTypeStructure, 27)
-var Lag_connectionsBandwidth *smithy.Schema
-
-var Lag_numberOfConnections *smithy.Schema
-
-var Lag_lagId *smithy.Schema
-
-var Lag_ownerAccount *smithy.Schema
-
-var Lag_lagName *smithy.Schema
-
-var Lag_lagState *smithy.Schema
-
-var Lag_location *smithy.Schema
-
-var Lag_region *smithy.Schema
-
-var Lag_minimumLinks *smithy.Schema
-
-var Lag_awsDevice *smithy.Schema
-
-var Lag_awsDeviceV2 *smithy.Schema
-
-var Lag_awsLogicalDeviceId *smithy.Schema
-
-var Lag_connections *smithy.Schema
-
-var Lag_allowsHostedConnections *smithy.Schema
-
-var Lag_jumboFrameCapable *smithy.Schema
-
-var Lag_hasLogicalRedundancy *smithy.Schema
-
-var Lag_tags *smithy.Schema
-
-var Lag_providerName *smithy.Schema
-
-var Lag_macSecCapable *smithy.Schema
-
-var Lag_encryptionMode *smithy.Schema
-
-var Lag_macSecKeys *smithy.Schema
-
-var Lag_prefixPoolSizeIpv4 *smithy.Schema
-
-var Lag_prefixPoolSizeIpv6 *smithy.Schema
-
-var Lag_prefixPoolUnallocatedCountIpv4 *smithy.Schema
-
-var Lag_prefixPoolUnallocatedCountIpv6 *smithy.Schema
-
-var Lag_rateLimiterStatus *smithy.Schema
-
-var Lag_billingMode *smithy.Schema
-
-var _LagId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LagId",
-}, smithy.ShapeTypeString, 0)
-
-var _LagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LagList",
-}, smithy.ShapeTypeList, 1)
-var _LagList_member *smithy.Schema
-
-var _LagName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LagName",
-}, smithy.ShapeTypeString, 0)
-
-var LagState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LagState",
-}, smithy.ShapeTypeEnum, 7)
-var LagState_requested *smithy.Schema
-
-var LagState_pending *smithy.Schema
-
-var LagState_available *smithy.Schema
-
-var LagState_down *smithy.Schema
-
-var LagState_deleting *smithy.Schema
-
-var LagState_deleted *smithy.Schema
-
-var LagState_unknown *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_message *smithy.Schema
-
-var Loa = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Loa",
-}, smithy.ShapeTypeStructure, 2)
-var Loa_loaContent *smithy.Schema
-
-var Loa_loaContentType *smithy.Schema
-
-var _LoaContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LoaContent",
-}, smithy.ShapeTypeBlob, 0)
-
-var LoaContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LoaContentType",
-}, smithy.ShapeTypeEnum, 1)
-var LoaContentType_PDF *smithy.Schema
-
-var _LoaIssueTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LoaIssueTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Location = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Location",
-}, smithy.ShapeTypeStructure, 7)
-var Location_locationCode *smithy.Schema
-
-var Location_locationName *smithy.Schema
-
-var Location_region *smithy.Schema
-
-var Location_availablePortSpeeds *smithy.Schema
-
-var Location_availableProviders *smithy.Schema
-
-var Location_availableMacSecPortSpeeds *smithy.Schema
-
-var Location_availableBillingModes *smithy.Schema
-
-var _LocationCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LocationCode",
-}, smithy.ShapeTypeString, 0)
-
-var _LocationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LocationList",
-}, smithy.ShapeTypeList, 1)
-var _LocationList_member *smithy.Schema
-
-var _LocationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LocationName",
-}, smithy.ShapeTypeString, 0)
-
-var _LongAsn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "LongAsn",
-}, smithy.ShapeTypeLong, 0)
-
-var _MacSecCapable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "MacSecCapable",
-}, smithy.ShapeTypeBoolean, 0)
-
-var MacSecKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "MacSecKey",
-}, smithy.ShapeTypeStructure, 4)
-var MacSecKey_secretARN *smithy.Schema
-
-var MacSecKey_ckn *smithy.Schema
-
-var MacSecKey_state *smithy.Schema
-
-var MacSecKey_startOn *smithy.Schema
-
-var _MacSecKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "MacSecKeyList",
-}, smithy.ShapeTypeList, 1)
-var _MacSecKeyList_member *smithy.Schema
-
-var _MaxResultSetSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "MaxResultSetSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MTU = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "MTU",
-}, smithy.ShapeTypeInteger, 0)
-
-var NewBGPPeer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NewBGPPeer",
-}, smithy.ShapeTypeStructure, 6)
-var NewBGPPeer_asn *smithy.Schema
-
-var NewBGPPeer_asnLong *smithy.Schema
-
-var NewBGPPeer_authKey *smithy.Schema
-
-var NewBGPPeer_addressFamily *smithy.Schema
-
-var NewBGPPeer_amazonAddress *smithy.Schema
-
-var NewBGPPeer_customerAddress *smithy.Schema
-
-var NewPrivateVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NewPrivateVirtualInterface",
-}, smithy.ShapeTypeStructure, 16)
-var NewPrivateVirtualInterface_virtualInterfaceName *smithy.Schema
-
-var NewPrivateVirtualInterface_vlan *smithy.Schema
-
-var NewPrivateVirtualInterface_asn *smithy.Schema
-
-var NewPrivateVirtualInterface_asnLong *smithy.Schema
-
-var NewPrivateVirtualInterface_mtu *smithy.Schema
-
-var NewPrivateVirtualInterface_authKey *smithy.Schema
-
-var NewPrivateVirtualInterface_amazonAddress *smithy.Schema
-
-var NewPrivateVirtualInterface_customerAddress *smithy.Schema
-
-var NewPrivateVirtualInterface_addressFamily *smithy.Schema
-
-var NewPrivateVirtualInterface_virtualGatewayId *smithy.Schema
-
-var NewPrivateVirtualInterface_directConnectGatewayId *smithy.Schema
-
-var NewPrivateVirtualInterface_tags *smithy.Schema
-
-var NewPrivateVirtualInterface_enableSiteLink *smithy.Schema
-
-var NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4 *smithy.Schema
-
-var NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6 *smithy.Schema
-
-var NewPrivateVirtualInterface_rateLimit *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NewPrivateVirtualInterfaceAllocation",
-}, smithy.ShapeTypeStructure, 11)
-var NewPrivateVirtualInterfaceAllocation_virtualInterfaceName *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_vlan *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_asn *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_asnLong *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_mtu *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_authKey *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_amazonAddress *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_addressFamily *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_customerAddress *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_tags *smithy.Schema
-
-var NewPrivateVirtualInterfaceAllocation_rateLimit *smithy.Schema
-
-var NewPublicVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NewPublicVirtualInterface",
-}, smithy.ShapeTypeStructure, 11)
-var NewPublicVirtualInterface_virtualInterfaceName *smithy.Schema
-
-var NewPublicVirtualInterface_vlan *smithy.Schema
-
-var NewPublicVirtualInterface_asn *smithy.Schema
-
-var NewPublicVirtualInterface_asnLong *smithy.Schema
-
-var NewPublicVirtualInterface_authKey *smithy.Schema
-
-var NewPublicVirtualInterface_amazonAddress *smithy.Schema
-
-var NewPublicVirtualInterface_customerAddress *smithy.Schema
-
-var NewPublicVirtualInterface_addressFamily *smithy.Schema
-
-var NewPublicVirtualInterface_routeFilterPrefixes *smithy.Schema
-
-var NewPublicVirtualInterface_tags *smithy.Schema
-
-var NewPublicVirtualInterface_rateLimit *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NewPublicVirtualInterfaceAllocation",
-}, smithy.ShapeTypeStructure, 11)
-var NewPublicVirtualInterfaceAllocation_virtualInterfaceName *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_vlan *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_asn *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_asnLong *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_authKey *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_amazonAddress *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_customerAddress *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_addressFamily *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_routeFilterPrefixes *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_tags *smithy.Schema
-
-var NewPublicVirtualInterfaceAllocation_rateLimit *smithy.Schema
-
-var NewTransitVirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NewTransitVirtualInterface",
-}, smithy.ShapeTypeStructure, 15)
-var NewTransitVirtualInterface_virtualInterfaceName *smithy.Schema
-
-var NewTransitVirtualInterface_vlan *smithy.Schema
-
-var NewTransitVirtualInterface_asn *smithy.Schema
-
-var NewTransitVirtualInterface_asnLong *smithy.Schema
-
-var NewTransitVirtualInterface_mtu *smithy.Schema
-
-var NewTransitVirtualInterface_authKey *smithy.Schema
-
-var NewTransitVirtualInterface_amazonAddress *smithy.Schema
-
-var NewTransitVirtualInterface_customerAddress *smithy.Schema
-
-var NewTransitVirtualInterface_addressFamily *smithy.Schema
-
-var NewTransitVirtualInterface_directConnectGatewayId *smithy.Schema
-
-var NewTransitVirtualInterface_tags *smithy.Schema
-
-var NewTransitVirtualInterface_enableSiteLink *smithy.Schema
-
-var NewTransitVirtualInterface_prefixPoolAllocatedCountIpv4 *smithy.Schema
-
-var NewTransitVirtualInterface_prefixPoolAllocatedCountIpv6 *smithy.Schema
-
-var NewTransitVirtualInterface_rateLimit *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NewTransitVirtualInterfaceAllocation",
-}, smithy.ShapeTypeStructure, 11)
-var NewTransitVirtualInterfaceAllocation_virtualInterfaceName *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_vlan *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_asn *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_asnLong *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_mtu *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_authKey *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_amazonAddress *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_customerAddress *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_addressFamily *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_tags *smithy.Schema
-
-var NewTransitVirtualInterfaceAllocation_rateLimit *smithy.Schema
-
-var NniPartnerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "NniPartnerType",
-}, smithy.ShapeTypeEnum, 3)
-var NniPartnerType_V1 *smithy.Schema
-
-var NniPartnerType_V2 *smithy.Schema
-
-var NniPartnerType_NonPartner *smithy.Schema
-
-var _OwnerAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "OwnerAccount",
-}, smithy.ShapeTypeString, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _PartnerInterconnectMacSecCapable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PartnerInterconnectMacSecCapable",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _PartnerName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PartnerName",
-}, smithy.ShapeTypeString, 0)
-
-var _Platform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Platform",
-}, smithy.ShapeTypeString, 0)
-
-var _PortEncryptionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PortEncryptionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _PortSpeed = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PortSpeed",
-}, smithy.ShapeTypeString, 0)
-
-var _PrefixPoolAllocatedCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PrefixPoolAllocatedCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PrefixPoolSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PrefixPoolSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PrefixPoolUnallocatedCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "PrefixPoolUnallocatedCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ProviderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ProviderList",
-}, smithy.ShapeTypeList, 1)
-var _ProviderList_member *smithy.Schema
-
-var _ProviderName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ProviderName",
-}, smithy.ShapeTypeString, 0)
-
-var _RateLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RateLimit",
-}, smithy.ShapeTypeString, 0)
-
-var RateLimiterStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RateLimiterStatus",
-}, smithy.ShapeTypeStructure, 4)
-var RateLimiterStatus_maxAllowed *smithy.Schema
-
-var RateLimiterStatus_inUse *smithy.Schema
-
-var RateLimiterStatus_remaining *smithy.Schema
-
-var RateLimiterStatus_totalBandwidth *smithy.Schema
-
-var _Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Region",
-}, smithy.ShapeTypeString, 0)
-
-var RequestBillingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RequestBillingMode",
-}, smithy.ShapeTypeEnum, 6)
-var RequestBillingMode_PayAsYouGo *smithy.Schema
-
-var RequestBillingMode_FlatRateTier1 *smithy.Schema
-
-var RequestBillingMode_FlatRateTier2 *smithy.Schema
-
-var RequestBillingMode_FlatRateTier3 *smithy.Schema
-
-var RequestBillingMode_FlatRateTier4 *smithy.Schema
-
-var RequestBillingMode_FlatRateTier5 *smithy.Schema
-
-var _RequestMACSec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RequestMACSec",
-}, smithy.ShapeTypeBoolean, 0)
-
-var ResiliencyGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroup",
-}, smithy.ShapeTypeStructure, 7)
-var ResiliencyGroup_resiliencyGroupId *smithy.Schema
-
-var ResiliencyGroup_resiliencyGroupArn *smithy.Schema
-
-var ResiliencyGroup_resiliencyGroupName *smithy.Schema
-
-var ResiliencyGroup_resiliencyGroupType *smithy.Schema
-
-var ResiliencyGroup_ownerAccount *smithy.Schema
-
-var ResiliencyGroup_state *smithy.Schema
-
-var ResiliencyGroup_tags *smithy.Schema
-
-var _ResiliencyGroupArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResiliencyGroupAssociation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupAssociation",
-}, smithy.ShapeTypeStructure, 3)
-var ResiliencyGroupAssociation_resiliencyGroupId *smithy.Schema
-
-var ResiliencyGroupAssociation_connectionArn *smithy.Schema
-
-var ResiliencyGroupAssociation_state *smithy.Schema
-
-var _ResiliencyGroupAssociationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupAssociationList",
-}, smithy.ShapeTypeList, 1)
-var _ResiliencyGroupAssociationList_member *smithy.Schema
-
-var ResiliencyGroupAssociationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupAssociationState",
-}, smithy.ShapeTypeEnum, 4)
-var ResiliencyGroupAssociationState_Associating *smithy.Schema
-
-var ResiliencyGroupAssociationState_Associated *smithy.Schema
-
-var ResiliencyGroupAssociationState_Disassociating *smithy.Schema
-
-var ResiliencyGroupAssociationState_Disassociated *smithy.Schema
-
-var _ResiliencyGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _ResiliencyGroupName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupName",
-}, smithy.ShapeTypeString, 0)
-
-var ResiliencyGroupState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupState",
-}, smithy.ShapeTypeEnum, 4)
-var ResiliencyGroupState_Pending *smithy.Schema
-
-var ResiliencyGroupState_Available *smithy.Schema
-
-var ResiliencyGroupState_Deleting *smithy.Schema
-
-var ResiliencyGroupState_Deleted *smithy.Schema
-
-var ResiliencyGroupSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupSummary",
-}, smithy.ShapeTypeStructure, 6)
-var ResiliencyGroupSummary_resiliencyGroupId *smithy.Schema
-
-var ResiliencyGroupSummary_resiliencyGroupArn *smithy.Schema
-
-var ResiliencyGroupSummary_resiliencyGroupName *smithy.Schema
-
-var ResiliencyGroupSummary_resiliencyGroupType *smithy.Schema
-
-var ResiliencyGroupSummary_ownerAccount *smithy.Schema
-
-var ResiliencyGroupSummary_state *smithy.Schema
-
-var _ResiliencyGroupSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ResiliencyGroupSummaryList_member *smithy.Schema
-
-var ResiliencyGroupType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyGroupType",
-}, smithy.ShapeTypeEnum, 1)
-var ResiliencyGroupType_Managed *smithy.Schema
-
-var ResiliencyModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResiliencyModel",
-}, smithy.ShapeTypeEnum, 3)
-var ResiliencyModel_MaximumResiliency *smithy.Schema
-
-var ResiliencyModel_HighResiliency *smithy.Schema
-
-var ResiliencyModel_BasicResiliency *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceArnList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResourceArnList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceArnList_member *smithy.Schema
-
-var ResourceTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResourceTag",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceTag_resourceArn *smithy.Schema
-
-var ResourceTag_tags *smithy.Schema
-
-var _ResourceTagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ResourceTagList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagList_member *smithy.Schema
-
-var Route = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Route",
-}, smithy.ShapeTypeStructure, 7)
-var Route_cidr *smithy.Schema
-
-var Route_routeDirection *smithy.Schema
-
-var Route_addressFamily *smithy.Schema
-
-var Route_asPath *smithy.Schema
-
-var Route_communities *smithy.Schema
-
-var Route_awsLogicalDeviceId *smithy.Schema
-
-var Route_routeInstalledAt *smithy.Schema
-
-var _RouteCidr = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteCidr",
-}, smithy.ShapeTypeString, 0)
-
-var RouteDirection = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteDirection",
-}, smithy.ShapeTypeEnum, 2)
-var RouteDirection_Accepted *smithy.Schema
-
-var RouteDirection_Advertised *smithy.Schema
-
-var _RouteFilterCidrString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteFilterCidrString",
-}, smithy.ShapeTypeString, 0)
-
-var _RouteFilterCidrStringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteFilterCidrStringList",
-}, smithy.ShapeTypeList, 1)
-var _RouteFilterCidrStringList_member *smithy.Schema
-
-var RouteFilterPrefix = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteFilterPrefix",
-}, smithy.ShapeTypeStructure, 1)
-var RouteFilterPrefix_cidr *smithy.Schema
-
-var _RouteFilterPrefixList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteFilterPrefixList",
-}, smithy.ShapeTypeList, 1)
-var _RouteFilterPrefixList_member *smithy.Schema
-
-var RouteFilters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteFilters",
-}, smithy.ShapeTypeStructure, 5)
-var RouteFilters_routeDirection *smithy.Schema
-
-var RouteFilters_addressFamily *smithy.Schema
-
-var RouteFilters_cidrs *smithy.Schema
-
-var RouteFilters_asPath *smithy.Schema
-
-var RouteFilters_communities *smithy.Schema
-
-var _RouteInstalledAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteInstalledAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _RouteList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouteList",
-}, smithy.ShapeTypeList, 1)
-var _RouteList_member *smithy.Schema
-
-var _RouterConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouterConfig",
-}, smithy.ShapeTypeString, 0)
-
-var RouterType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouterType",
-}, smithy.ShapeTypeStructure, 6)
-var RouterType_vendor *smithy.Schema
-
-var RouterType_platform *smithy.Schema
-
-var RouterType_software *smithy.Schema
-
-var RouterType_xsltTemplateName *smithy.Schema
-
-var RouterType_xsltTemplateNameForMacSec *smithy.Schema
-
-var RouterType_routerTypeIdentifier *smithy.Schema
-
-var _RouterTypeIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "RouterTypeIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _SecretARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "SecretARN",
-}, smithy.ShapeTypeString, 0)
-
-var _SiteLinkEnabled = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "SiteLinkEnabled",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Software = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Software",
-}, smithy.ShapeTypeString, 0)
-
-var _StartOnDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StartOnDate",
-}, smithy.ShapeTypeString, 0)
-
-var _StartTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StartTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _State = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "State",
-}, smithy.ShapeTypeString, 0)
-
-var _StateChangeError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StateChangeError",
-}, smithy.ShapeTypeString, 0)
-
-var _Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Status",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TestDuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TestDuration",
-}, smithy.ShapeTypeInteger, 0)
-
-var _TestId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TestId",
-}, smithy.ShapeTypeString, 0)
-
-var TooManyTagsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TooManyTagsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TooManyTagsException_message *smithy.Schema
-
-var _Vendor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Vendor",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualGateway = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualGateway",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualGateway_virtualGatewayId *smithy.Schema
-
-var VirtualGateway_virtualGatewayState *smithy.Schema
-
-var _VirtualGatewayId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualGatewayId",
-}, smithy.ShapeTypeString, 0)
-
-var _VirtualGatewayList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualGatewayList",
-}, smithy.ShapeTypeList, 1)
-var _VirtualGatewayList_member *smithy.Schema
-
-var _VirtualGatewayRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualGatewayRegion",
-}, smithy.ShapeTypeString, 0)
-
-var _VirtualGatewayState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualGatewayState",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterface",
-}, smithy.ShapeTypeStructure, 30)
-var VirtualInterface_ownerAccount *smithy.Schema
-
-var VirtualInterface_virtualInterfaceId *smithy.Schema
-
-var VirtualInterface_location *smithy.Schema
-
-var VirtualInterface_connectionId *smithy.Schema
-
-var VirtualInterface_virtualInterfaceType *smithy.Schema
-
-var VirtualInterface_virtualInterfaceName *smithy.Schema
-
-var VirtualInterface_vlan *smithy.Schema
-
-var VirtualInterface_asn *smithy.Schema
-
-var VirtualInterface_asnLong *smithy.Schema
-
-var VirtualInterface_amazonSideAsn *smithy.Schema
-
-var VirtualInterface_authKey *smithy.Schema
-
-var VirtualInterface_amazonAddress *smithy.Schema
-
-var VirtualInterface_customerAddress *smithy.Schema
-
-var VirtualInterface_addressFamily *smithy.Schema
-
-var VirtualInterface_virtualInterfaceState *smithy.Schema
-
-var VirtualInterface_customerRouterConfig *smithy.Schema
-
-var VirtualInterface_mtu *smithy.Schema
-
-var VirtualInterface_jumboFrameCapable *smithy.Schema
-
-var VirtualInterface_virtualGatewayId *smithy.Schema
-
-var VirtualInterface_directConnectGatewayId *smithy.Schema
-
-var VirtualInterface_routeFilterPrefixes *smithy.Schema
-
-var VirtualInterface_bgpPeers *smithy.Schema
-
-var VirtualInterface_region *smithy.Schema
-
-var VirtualInterface_awsDeviceV2 *smithy.Schema
-
-var VirtualInterface_awsLogicalDeviceId *smithy.Schema
-
-var VirtualInterface_tags *smithy.Schema
-
-var VirtualInterface_siteLinkEnabled *smithy.Schema
-
-var VirtualInterface_prefixPoolAllocatedCountIpv4 *smithy.Schema
-
-var VirtualInterface_prefixPoolAllocatedCountIpv6 *smithy.Schema
-
-var VirtualInterface_rateLimit *smithy.Schema
-
-var _VirtualInterfaceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceId",
-}, smithy.ShapeTypeString, 0)
-
-var _VirtualInterfaceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceList",
-}, smithy.ShapeTypeList, 1)
-var _VirtualInterfaceList_member *smithy.Schema
-
-var _VirtualInterfaceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceName",
-}, smithy.ShapeTypeString, 0)
-
-var _VirtualInterfaceRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceRegion",
-}, smithy.ShapeTypeString, 0)
-
-var VirtualInterfaceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceState",
-}, smithy.ShapeTypeEnum, 10)
-var VirtualInterfaceState_confirming *smithy.Schema
-
-var VirtualInterfaceState_verifying *smithy.Schema
-
-var VirtualInterfaceState_pending *smithy.Schema
-
-var VirtualInterfaceState_available *smithy.Schema
-
-var VirtualInterfaceState_down *smithy.Schema
-
-var VirtualInterfaceState_testing *smithy.Schema
-
-var VirtualInterfaceState_deleting *smithy.Schema
-
-var VirtualInterfaceState_deleted *smithy.Schema
-
-var VirtualInterfaceState_rejected *smithy.Schema
-
-var VirtualInterfaceState_unknown *smithy.Schema
-
-var VirtualInterfaceTestHistory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceTestHistory",
-}, smithy.ShapeTypeStructure, 8)
-var VirtualInterfaceTestHistory_testId *smithy.Schema
-
-var VirtualInterfaceTestHistory_virtualInterfaceId *smithy.Schema
-
-var VirtualInterfaceTestHistory_bgpPeers *smithy.Schema
-
-var VirtualInterfaceTestHistory_status *smithy.Schema
-
-var VirtualInterfaceTestHistory_ownerAccount *smithy.Schema
-
-var VirtualInterfaceTestHistory_testDurationInMinutes *smithy.Schema
-
-var VirtualInterfaceTestHistory_startTime *smithy.Schema
-
-var VirtualInterfaceTestHistory_endTime *smithy.Schema
-
-var _VirtualInterfaceTestHistoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceTestHistoryList",
-}, smithy.ShapeTypeList, 1)
-var _VirtualInterfaceTestHistoryList_member *smithy.Schema
-
-var _VirtualInterfaceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaceType",
-}, smithy.ShapeTypeString, 0)
-
-var _VLAN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VLAN",
-}, smithy.ShapeTypeInteger, 0)
-
-var _XsltTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "XsltTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var _XsltTemplateNameForMacSec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "XsltTemplateNameForMacSec",
-}, smithy.ShapeTypeString, 0)
-
-var AcceptDirectConnectGatewayAssociationProposalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AcceptDirectConnectGatewayAssociationProposalRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AcceptDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId *smithy.Schema
-
-var AcceptDirectConnectGatewayAssociationProposalRequest_proposalId *smithy.Schema
-
-var AcceptDirectConnectGatewayAssociationProposalRequest_associatedGatewayOwnerAccount *smithy.Schema
-
-var AcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var AcceptDirectConnectGatewayAssociationProposalResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AcceptDirectConnectGatewayAssociationProposalResult",
-}, smithy.ShapeTypeStructure, 1)
-var AcceptDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociation *smithy.Schema
-
-var AllocateConnectionOnInterconnectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocateConnectionOnInterconnectRequest",
-}, smithy.ShapeTypeStructure, 5)
-var AllocateConnectionOnInterconnectRequest_bandwidth *smithy.Schema
-
-var AllocateConnectionOnInterconnectRequest_connectionName *smithy.Schema
-
-var AllocateConnectionOnInterconnectRequest_ownerAccount *smithy.Schema
-
-var AllocateConnectionOnInterconnectRequest_interconnectId *smithy.Schema
-
-var AllocateConnectionOnInterconnectRequest_vlan *smithy.Schema
-
-var AllocateHostedConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocateHostedConnectionRequest",
-}, smithy.ShapeTypeStructure, 6)
-var AllocateHostedConnectionRequest_connectionId *smithy.Schema
-
-var AllocateHostedConnectionRequest_ownerAccount *smithy.Schema
-
-var AllocateHostedConnectionRequest_bandwidth *smithy.Schema
-
-var AllocateHostedConnectionRequest_connectionName *smithy.Schema
-
-var AllocateHostedConnectionRequest_vlan *smithy.Schema
-
-var AllocateHostedConnectionRequest_tags *smithy.Schema
-
-var AllocatePrivateVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocatePrivateVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AllocatePrivateVirtualInterfaceRequest_connectionId *smithy.Schema
-
-var AllocatePrivateVirtualInterfaceRequest_ownerAccount *smithy.Schema
-
-var AllocatePrivateVirtualInterfaceRequest_newPrivateVirtualInterfaceAllocation *smithy.Schema
-
-var AllocatePublicVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocatePublicVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AllocatePublicVirtualInterfaceRequest_connectionId *smithy.Schema
-
-var AllocatePublicVirtualInterfaceRequest_ownerAccount *smithy.Schema
-
-var AllocatePublicVirtualInterfaceRequest_newPublicVirtualInterfaceAllocation *smithy.Schema
-
-var AllocateTransitVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocateTransitVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AllocateTransitVirtualInterfaceRequest_connectionId *smithy.Schema
-
-var AllocateTransitVirtualInterfaceRequest_ownerAccount *smithy.Schema
-
-var AllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation *smithy.Schema
-
-var AllocateTransitVirtualInterfaceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AllocateTransitVirtualInterfaceResult",
-}, smithy.ShapeTypeStructure, 1)
-var AllocateTransitVirtualInterfaceResult_virtualInterface *smithy.Schema
-
-var AssociateConnectionsToResiliencyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateConnectionsToResiliencyGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateConnectionsToResiliencyGroupRequest_connectionIdentifiers *smithy.Schema
-
-var AssociateConnectionsToResiliencyGroupRequest_resiliencyGroupId *smithy.Schema
-
-var AssociateConnectionsToResiliencyGroupRequest_clientToken *smithy.Schema
-
-var AssociateConnectionsToResiliencyGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateConnectionsToResiliencyGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateConnectionsToResiliencyGroupResult_resiliencyGroupAssociations *smithy.Schema
-
-var AssociateConnectionWithLagRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateConnectionWithLagRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateConnectionWithLagRequest_connectionId *smithy.Schema
-
-var AssociateConnectionWithLagRequest_lagId *smithy.Schema
-
-var AssociateHostedConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateHostedConnectionRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateHostedConnectionRequest_connectionId *smithy.Schema
-
-var AssociateHostedConnectionRequest_parentConnectionId *smithy.Schema
-
-var AssociateMacSecKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateMacSecKeyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var AssociateMacSecKeyRequest_connectionId *smithy.Schema
-
-var AssociateMacSecKeyRequest_secretARN *smithy.Schema
-
-var AssociateMacSecKeyRequest_ckn *smithy.Schema
-
-var AssociateMacSecKeyRequest_cak *smithy.Schema
-
-var AssociateMacSecKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateMacSecKeyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateMacSecKeyResponse_connectionId *smithy.Schema
-
-var AssociateMacSecKeyResponse_macSecKeys *smithy.Schema
-
-var AssociateVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "AssociateVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateVirtualInterfaceRequest_virtualInterfaceId *smithy.Schema
-
-var AssociateVirtualInterfaceRequest_connectionId *smithy.Schema
-
-var ConfirmConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmConnectionRequest_connectionId *smithy.Schema
-
-var ConfirmConnectionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmConnectionResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmConnectionResponse_connectionState *smithy.Schema
-
-var ConfirmCustomerAgreementRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmCustomerAgreementRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmCustomerAgreementRequest_agreementName *smithy.Schema
-
-var ConfirmCustomerAgreementResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmCustomerAgreementResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmCustomerAgreementResponse_status *smithy.Schema
-
-var ConfirmPrivateVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmPrivateVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ConfirmPrivateVirtualInterfaceRequest_virtualInterfaceId *smithy.Schema
-
-var ConfirmPrivateVirtualInterfaceRequest_virtualGatewayId *smithy.Schema
-
-var ConfirmPrivateVirtualInterfaceRequest_directConnectGatewayId *smithy.Schema
-
-var ConfirmPrivateVirtualInterfaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmPrivateVirtualInterfaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmPrivateVirtualInterfaceResponse_virtualInterfaceState *smithy.Schema
-
-var ConfirmPublicVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmPublicVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmPublicVirtualInterfaceRequest_virtualInterfaceId *smithy.Schema
-
-var ConfirmPublicVirtualInterfaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmPublicVirtualInterfaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState *smithy.Schema
-
-var ConfirmTransitVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmTransitVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ConfirmTransitVirtualInterfaceRequest_virtualInterfaceId *smithy.Schema
-
-var ConfirmTransitVirtualInterfaceRequest_directConnectGatewayId *smithy.Schema
-
-var ConfirmTransitVirtualInterfaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ConfirmTransitVirtualInterfaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ConfirmTransitVirtualInterfaceResponse_virtualInterfaceState *smithy.Schema
-
-var CreateBGPPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateBGPPeerRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateBGPPeerRequest_virtualInterfaceId *smithy.Schema
-
-var CreateBGPPeerRequest_newBGPPeer *smithy.Schema
-
-var CreateBGPPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateBGPPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBGPPeerResponse_virtualInterface *smithy.Schema
-
-var CreateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateConnectionRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateConnectionRequest_location *smithy.Schema
-
-var CreateConnectionRequest_bandwidth *smithy.Schema
-
-var CreateConnectionRequest_connectionName *smithy.Schema
-
-var CreateConnectionRequest_lagId *smithy.Schema
-
-var CreateConnectionRequest_tags *smithy.Schema
-
-var CreateConnectionRequest_providerName *smithy.Schema
-
-var CreateConnectionRequest_requestMACSec *smithy.Schema
-
-var CreateConnectionRequest_billingMode *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayAssociationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDirectConnectGatewayAssociationRequest_directConnectGatewayId *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationRequest_gatewayId *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationRequest_virtualGatewayId *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayAssociationResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationProposalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayAssociationProposalRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayOwnerAccount *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationProposalRequest_gatewayId *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var CreateDirectConnectGatewayAssociationProposalResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayAssociationProposalResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal *smithy.Schema
-
-var CreateDirectConnectGatewayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayRequest",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDirectConnectGatewayRequest_directConnectGatewayName *smithy.Schema
-
-var CreateDirectConnectGatewayRequest_tags *smithy.Schema
-
-var CreateDirectConnectGatewayRequest_amazonSideAsn *smithy.Schema
-
-var CreateDirectConnectGatewayResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateDirectConnectGatewayResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDirectConnectGatewayResult_directConnectGateway *smithy.Schema
-
-var CreateInterconnectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateInterconnectRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateInterconnectRequest_interconnectName *smithy.Schema
-
-var CreateInterconnectRequest_bandwidth *smithy.Schema
-
-var CreateInterconnectRequest_location *smithy.Schema
-
-var CreateInterconnectRequest_lagId *smithy.Schema
-
-var CreateInterconnectRequest_tags *smithy.Schema
-
-var CreateInterconnectRequest_providerName *smithy.Schema
-
-var CreateInterconnectRequest_requestMACSec *smithy.Schema
-
-var CreateLagRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateLagRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateLagRequest_numberOfConnections *smithy.Schema
-
-var CreateLagRequest_location *smithy.Schema
-
-var CreateLagRequest_connectionsBandwidth *smithy.Schema
-
-var CreateLagRequest_lagName *smithy.Schema
-
-var CreateLagRequest_connectionId *smithy.Schema
-
-var CreateLagRequest_tags *smithy.Schema
-
-var CreateLagRequest_childConnectionTags *smithy.Schema
-
-var CreateLagRequest_providerName *smithy.Schema
-
-var CreateLagRequest_requestMACSec *smithy.Schema
-
-var CreateLagRequest_billingMode *smithy.Schema
-
-var CreatePrivateVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreatePrivateVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePrivateVirtualInterfaceRequest_connectionId *smithy.Schema
-
-var CreatePrivateVirtualInterfaceRequest_newPrivateVirtualInterface *smithy.Schema
-
-var CreatePublicVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreatePublicVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreatePublicVirtualInterfaceRequest_connectionId *smithy.Schema
-
-var CreatePublicVirtualInterfaceRequest_newPublicVirtualInterface *smithy.Schema
-
-var CreateResiliencyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateResiliencyGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateResiliencyGroupRequest_resiliencyGroupName *smithy.Schema
-
-var CreateResiliencyGroupRequest_intendedResiliencyModel *smithy.Schema
-
-var CreateResiliencyGroupRequest_clientToken *smithy.Schema
-
-var CreateResiliencyGroupRequest_tags *smithy.Schema
-
-var CreateResiliencyGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateResiliencyGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateResiliencyGroupResult_resiliencyGroup *smithy.Schema
-
-var CreateTransitVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateTransitVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CreateTransitVirtualInterfaceRequest_connectionId *smithy.Schema
-
-var CreateTransitVirtualInterfaceRequest_newTransitVirtualInterface *smithy.Schema
-
-var CreateTransitVirtualInterfaceResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "CreateTransitVirtualInterfaceResult",
-}, smithy.ShapeTypeStructure, 1)
-var CreateTransitVirtualInterfaceResult_virtualInterface *smithy.Schema
-
-var DeleteBGPPeerRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteBGPPeerRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DeleteBGPPeerRequest_virtualInterfaceId *smithy.Schema
-
-var DeleteBGPPeerRequest_asn *smithy.Schema
-
-var DeleteBGPPeerRequest_asnLong *smithy.Schema
-
-var DeleteBGPPeerRequest_customerAddress *smithy.Schema
-
-var DeleteBGPPeerRequest_bgpPeerId *smithy.Schema
-
-var DeleteBGPPeerResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteBGPPeerResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBGPPeerResponse_virtualInterface *smithy.Schema
-
-var DeleteConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteConnectionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConnectionRequest_connectionId *smithy.Schema
-
-var DeleteDirectConnectGatewayAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteDirectConnectGatewayAssociationRequest_associationId *smithy.Schema
-
-var DeleteDirectConnectGatewayAssociationRequest_directConnectGatewayId *smithy.Schema
-
-var DeleteDirectConnectGatewayAssociationRequest_virtualGatewayId *smithy.Schema
-
-var DeleteDirectConnectGatewayAssociationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayAssociationResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation *smithy.Schema
-
-var DeleteDirectConnectGatewayAssociationProposalRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayAssociationProposalRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectConnectGatewayAssociationProposalRequest_proposalId *smithy.Schema
-
-var DeleteDirectConnectGatewayAssociationProposalResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayAssociationProposalResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal *smithy.Schema
-
-var DeleteDirectConnectGatewayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectConnectGatewayRequest_directConnectGatewayId *smithy.Schema
-
-var DeleteDirectConnectGatewayResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteDirectConnectGatewayResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDirectConnectGatewayResult_directConnectGateway *smithy.Schema
-
-var DeleteInterconnectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteInterconnectRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInterconnectRequest_interconnectId *smithy.Schema
-
-var DeleteInterconnectResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteInterconnectResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteInterconnectResponse_interconnectState *smithy.Schema
-
-var DeleteLagRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteLagRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLagRequest_lagId *smithy.Schema
-
-var DeleteResiliencyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteResiliencyGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResiliencyGroupRequest_resiliencyGroupId *smithy.Schema
-
-var DeleteResiliencyGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteResiliencyGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResiliencyGroupResult_resiliencyGroup *smithy.Schema
-
-var DeleteVirtualInterfaceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteVirtualInterfaceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVirtualInterfaceRequest_virtualInterfaceId *smithy.Schema
-
-var DeleteVirtualInterfaceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DeleteVirtualInterfaceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteVirtualInterfaceResponse_virtualInterfaceState *smithy.Schema
-
-var DescribeConnectionLoaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeConnectionLoaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeConnectionLoaRequest_connectionId *smithy.Schema
-
-var DescribeConnectionLoaRequest_providerName *smithy.Schema
-
-var DescribeConnectionLoaRequest_loaContentType *smithy.Schema
-
-var DescribeConnectionLoaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeConnectionLoaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectionLoaResponse_loa *smithy.Schema
-
-var DescribeConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeConnectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeConnectionsRequest_connectionId *smithy.Schema
-
-var DescribeConnectionsRequest_maxResults *smithy.Schema
-
-var DescribeConnectionsRequest_nextToken *smithy.Schema
-
-var DescribeConnectionsOnInterconnectRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeConnectionsOnInterconnectRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConnectionsOnInterconnectRequest_interconnectId *smithy.Schema
-
-var Connections = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Connections",
-}, smithy.ShapeTypeStructure, 2)
-var Connections_connections *smithy.Schema
-
-var Connections_nextToken *smithy.Schema
-
-var DescribeCustomerMetadataResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeCustomerMetadataResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeCustomerMetadataResponse_agreements *smithy.Schema
-
-var DescribeCustomerMetadataResponse_nniPartnerType *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationProposalsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAssociationProposalsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeDirectConnectGatewayAssociationProposalsRequest_directConnectGatewayId *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationProposalsRequest_proposalId *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationProposalsRequest_associatedGatewayId *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationProposalsRequest_maxResults *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationProposalsRequest_nextToken *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationProposalsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAssociationProposalsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationProposalsResult_nextToken *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAssociationsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var DescribeDirectConnectGatewayAssociationsRequest_associationId *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsRequest_associatedGatewayId *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsRequest_directConnectGatewayId *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsRequest_maxResults *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsRequest_nextToken *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsRequest_virtualGatewayId *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAssociationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations *smithy.Schema
-
-var DescribeDirectConnectGatewayAssociationsResult_nextToken *smithy.Schema
-
-var DescribeDirectConnectGatewayAttachmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAttachmentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeDirectConnectGatewayAttachmentsRequest_directConnectGatewayId *smithy.Schema
-
-var DescribeDirectConnectGatewayAttachmentsRequest_virtualInterfaceId *smithy.Schema
-
-var DescribeDirectConnectGatewayAttachmentsRequest_maxResults *smithy.Schema
-
-var DescribeDirectConnectGatewayAttachmentsRequest_nextToken *smithy.Schema
-
-var DescribeDirectConnectGatewayAttachmentsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewayAttachmentsResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments *smithy.Schema
-
-var DescribeDirectConnectGatewayAttachmentsResult_nextToken *smithy.Schema
-
-var DescribeDirectConnectGatewaysRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewaysRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeDirectConnectGatewaysRequest_directConnectGatewayId *smithy.Schema
-
-var DescribeDirectConnectGatewaysRequest_maxResults *smithy.Schema
-
-var DescribeDirectConnectGatewaysRequest_nextToken *smithy.Schema
-
-var DescribeDirectConnectGatewaysResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeDirectConnectGatewaysResult",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDirectConnectGatewaysResult_directConnectGateways *smithy.Schema
-
-var DescribeDirectConnectGatewaysResult_nextToken *smithy.Schema
-
-var DescribeHostedConnectionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeHostedConnectionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeHostedConnectionsRequest_connectionId *smithy.Schema
-
-var DescribeHostedConnectionsRequest_maxResults *smithy.Schema
-
-var DescribeHostedConnectionsRequest_nextToken *smithy.Schema
-
-var DescribeInterconnectLoaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeInterconnectLoaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeInterconnectLoaRequest_interconnectId *smithy.Schema
-
-var DescribeInterconnectLoaRequest_providerName *smithy.Schema
-
-var DescribeInterconnectLoaRequest_loaContentType *smithy.Schema
-
-var DescribeInterconnectLoaResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeInterconnectLoaResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeInterconnectLoaResponse_loa *smithy.Schema
-
-var DescribeInterconnectsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeInterconnectsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeInterconnectsRequest_interconnectId *smithy.Schema
-
-var DescribeInterconnectsRequest_maxResults *smithy.Schema
-
-var DescribeInterconnectsRequest_nextToken *smithy.Schema
-
-var Interconnects = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Interconnects",
-}, smithy.ShapeTypeStructure, 2)
-var Interconnects_interconnects *smithy.Schema
-
-var Interconnects_nextToken *smithy.Schema
-
-var DescribeLagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeLagsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeLagsRequest_lagId *smithy.Schema
-
-var DescribeLagsRequest_maxResults *smithy.Schema
-
-var DescribeLagsRequest_nextToken *smithy.Schema
-
-var Lags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Lags",
-}, smithy.ShapeTypeStructure, 2)
-var Lags_lags *smithy.Schema
-
-var Lags_nextToken *smithy.Schema
-
-var DescribeLoaRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeLoaRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeLoaRequest_connectionId *smithy.Schema
-
-var DescribeLoaRequest_providerName *smithy.Schema
-
-var DescribeLoaRequest_loaContentType *smithy.Schema
-
-var Locations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "Locations",
-}, smithy.ShapeTypeStructure, 1)
-var Locations_locations *smithy.Schema
-
-var DescribeRouterConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeRouterConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeRouterConfigurationRequest_virtualInterfaceId *smithy.Schema
-
-var DescribeRouterConfigurationRequest_routerTypeIdentifier *smithy.Schema
-
-var DescribeRouterConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeRouterConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeRouterConfigurationResponse_customerRouterConfig *smithy.Schema
-
-var DescribeRouterConfigurationResponse_router *smithy.Schema
-
-var DescribeRouterConfigurationResponse_virtualInterfaceId *smithy.Schema
-
-var DescribeRouterConfigurationResponse_virtualInterfaceName *smithy.Schema
-
-var DescribeTagsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeTagsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTagsRequest_resourceArns *smithy.Schema
-
-var DescribeTagsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeTagsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeTagsResponse_resourceTags *smithy.Schema
-
-var VirtualGateways = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualGateways",
-}, smithy.ShapeTypeStructure, 1)
-var VirtualGateways_virtualGateways *smithy.Schema
-
-var DescribeVirtualInterfacesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DescribeVirtualInterfacesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var DescribeVirtualInterfacesRequest_connectionId *smithy.Schema
-
-var DescribeVirtualInterfacesRequest_virtualInterfaceId *smithy.Schema
-
-var DescribeVirtualInterfacesRequest_maxResults *smithy.Schema
-
-var DescribeVirtualInterfacesRequest_nextToken *smithy.Schema
-
-var VirtualInterfaces = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "VirtualInterfaces",
-}, smithy.ShapeTypeStructure, 2)
-var VirtualInterfaces_virtualInterfaces *smithy.Schema
-
-var VirtualInterfaces_nextToken *smithy.Schema
-
-var DisassociateConnectionFromLagRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateConnectionFromLagRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateConnectionFromLagRequest_connectionId *smithy.Schema
-
-var DisassociateConnectionFromLagRequest_lagId *smithy.Schema
-
-var DisassociateConnectionsFromResiliencyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateConnectionsFromResiliencyGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers *smithy.Schema
-
-var DisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId *smithy.Schema
-
-var DisassociateConnectionsFromResiliencyGroupRequest_clientToken *smithy.Schema
-
-var DisassociateConnectionsFromResiliencyGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateConnectionsFromResiliencyGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations *smithy.Schema
-
-var DisassociateMacSecKeyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateMacSecKeyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateMacSecKeyRequest_connectionId *smithy.Schema
-
-var DisassociateMacSecKeyRequest_secretARN *smithy.Schema
-
-var DisassociateMacSecKeyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "DisassociateMacSecKeyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateMacSecKeyResponse_connectionId *smithy.Schema
-
-var DisassociateMacSecKeyResponse_macSecKeys *smithy.Schema
-
-var GetResiliencyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "GetResiliencyGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetResiliencyGroupRequest_resiliencyGroupId *smithy.Schema
-
-var GetResiliencyGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "GetResiliencyGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var GetResiliencyGroupResult_resiliencyGroup *smithy.Schema
-
-var ListResiliencyGroupAssociationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListResiliencyGroupAssociationsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListResiliencyGroupAssociationsRequest_resiliencyGroupId *smithy.Schema
-
-var ListResiliencyGroupAssociationsRequest_maxResults *smithy.Schema
-
-var ListResiliencyGroupAssociationsRequest_nextToken *smithy.Schema
-
-var ListResiliencyGroupAssociationsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListResiliencyGroupAssociationsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListResiliencyGroupAssociationsResult_items *smithy.Schema
-
-var ListResiliencyGroupAssociationsResult_nextToken *smithy.Schema
-
-var ListResiliencyGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListResiliencyGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListResiliencyGroupsRequest_maxResults *smithy.Schema
-
-var ListResiliencyGroupsRequest_nextToken *smithy.Schema
-
-var ListResiliencyGroupsResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListResiliencyGroupsResult",
-}, smithy.ShapeTypeStructure, 2)
-var ListResiliencyGroupsResult_items *smithy.Schema
-
-var ListResiliencyGroupsResult_nextToken *smithy.Schema
-
-var ListVirtualInterfaceRoutesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListVirtualInterfaceRoutesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListVirtualInterfaceRoutesRequest_virtualInterfaceId *smithy.Schema
-
-var ListVirtualInterfaceRoutesRequest_filters *smithy.Schema
-
-var ListVirtualInterfaceRoutesRequest_maxResults *smithy.Schema
-
-var ListVirtualInterfaceRoutesRequest_nextToken *smithy.Schema
-
-var ListVirtualInterfaceRoutesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListVirtualInterfaceRoutesResponse",
-}, smithy.ShapeTypeStructure, 3)
-var ListVirtualInterfaceRoutesResponse_virtualInterfaceId *smithy.Schema
-
-var ListVirtualInterfaceRoutesResponse_routes *smithy.Schema
-
-var ListVirtualInterfaceRoutesResponse_nextToken *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListVirtualInterfaceTestHistoryRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListVirtualInterfaceTestHistoryRequest_testId *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryRequest_virtualInterfaceId *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryRequest_bgpPeers *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryRequest_status *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryRequest_maxResults *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryRequest_nextToken *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "ListVirtualInterfaceTestHistoryResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory *smithy.Schema
-
-var ListVirtualInterfaceTestHistoryResponse_nextToken *smithy.Schema
-
-var StartBgpFailoverTestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StartBgpFailoverTestRequest",
-}, smithy.ShapeTypeStructure, 3)
-var StartBgpFailoverTestRequest_virtualInterfaceId *smithy.Schema
-
-var StartBgpFailoverTestRequest_bgpPeers *smithy.Schema
-
-var StartBgpFailoverTestRequest_testDurationInMinutes *smithy.Schema
-
-var StartBgpFailoverTestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StartBgpFailoverTestResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartBgpFailoverTestResponse_virtualInterfaceTest *smithy.Schema
-
-var StopBgpFailoverTestRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StopBgpFailoverTestRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopBgpFailoverTestRequest_virtualInterfaceId *smithy.Schema
-
-var StopBgpFailoverTestResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "StopBgpFailoverTestResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopBgpFailoverTestResponse_virtualInterfaceTest *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConnectionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateConnectionRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConnectionRequest_connectionId *smithy.Schema
-
-var UpdateConnectionRequest_connectionName *smithy.Schema
-
-var UpdateConnectionRequest_encryptionMode *smithy.Schema
-
-var UpdateConnectionsBillingModeRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateConnectionsBillingModeRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectionsBillingModeRequest_connectionIds *smithy.Schema
-
-var UpdateConnectionsBillingModeRequest_billingMode *smithy.Schema
-
-var UpdateConnectionsBillingModeResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateConnectionsBillingModeResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectionsBillingModeResponse_billingMode *smithy.Schema
-
-var UpdateConnectionsBillingModeResponse_connections *smithy.Schema
-
-var UpdateDirectConnectGatewayAssociationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateDirectConnectGatewayAssociationRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateDirectConnectGatewayAssociationRequest_associationId *smithy.Schema
-
-var UpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var UpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway *smithy.Schema
-
-var UpdateDirectConnectGatewayAssociationResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateDirectConnectGatewayAssociationResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation *smithy.Schema
-
-var UpdateDirectConnectGatewayRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateDirectConnectGatewayRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDirectConnectGatewayRequest_directConnectGatewayId *smithy.Schema
-
-var UpdateDirectConnectGatewayRequest_newDirectConnectGatewayName *smithy.Schema
-
-var UpdateDirectConnectGatewayResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateDirectConnectGatewayResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDirectConnectGatewayResponse_directConnectGateway *smithy.Schema
-
-var UpdateLagRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateLagRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateLagRequest_lagId *smithy.Schema
-
-var UpdateLagRequest_lagName *smithy.Schema
-
-var UpdateLagRequest_minimumLinks *smithy.Schema
-
-var UpdateLagRequest_encryptionMode *smithy.Schema
-
-var UpdateResiliencyGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateResiliencyGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateResiliencyGroupRequest_resiliencyGroupId *smithy.Schema
-
-var UpdateResiliencyGroupRequest_resiliencyGroupName *smithy.Schema
-
-var UpdateResiliencyGroupRequest_clientToken *smithy.Schema
-
-var UpdateResiliencyGroupResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateResiliencyGroupResult",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateResiliencyGroupResult_resiliencyGroup *smithy.Schema
-
-var UpdateVirtualInterfaceAttributesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.directconnect",
-	Name:      "UpdateVirtualInterfaceAttributesRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateVirtualInterfaceAttributesRequest_virtualInterfaceId *smithy.Schema
-
-var UpdateVirtualInterfaceAttributesRequest_mtu *smithy.Schema
-
-var UpdateVirtualInterfaceAttributesRequest_enableSiteLink *smithy.Schema
-
-var UpdateVirtualInterfaceAttributesRequest_virtualInterfaceName *smithy.Schema
-
-var UpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv4 *smithy.Schema
-
-var UpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv6 *smithy.Schema
-
-var UpdateVirtualInterfaceAttributesRequest_rateLimit *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AddressFamily_IPv4 = AddressFamily.AddMember("IPv4", smithyprelude.Unit)
-
-	AddressFamily_IPv6 = AddressFamily.AddMember("IPv6", smithyprelude.Unit)
-
-	CustomerAgreement_agreementName = CustomerAgreement.AddMember("agreementName", _AgreementName)
-
-	CustomerAgreement_status = CustomerAgreement.AddMember("status", _Status)
-
-	_AgreementList_member = _AgreementList.AddMember("member", CustomerAgreement)
-
-	_AsPathList_member = _AsPathList.AddMember("member", _LongAsn)
-
-	AsPathType_Seq = AsPathType.AddMember("Seq", smithyprelude.Unit)
-
-	AsPathType_Set = AsPathType.AddMember("Set", smithyprelude.Unit)
-
-	AsPathSegment_pathType = AsPathSegment.AddMember("pathType", AsPathType)
-
-	AsPathSegment_path = AsPathSegment.AddMember("path", _AsPathList)
-
-	_AsPathSegmentList_member = _AsPathSegmentList.AddMember("member", AsPathSegment)
-
-	AssociatedCoreNetwork_id = AssociatedCoreNetwork.AddMember("id", _CoreNetworkIdentifier)
-
-	AssociatedCoreNetwork_ownerAccount = AssociatedCoreNetwork.AddMember("ownerAccount", _OwnerAccount)
-
-	AssociatedCoreNetwork_attachmentId = AssociatedCoreNetwork.AddMember("attachmentId", _CoreNetworkAttachmentId)
-
-	GatewayType_VirtualPrivateGateway = GatewayType.AddMember("VirtualPrivateGateway", smithyprelude.Unit)
-
-	GatewayType_TransitGateway = GatewayType.AddMember("TransitGateway", smithyprelude.Unit)
-
-	AssociatedGateway_id = AssociatedGateway.AddMember("id", _GatewayIdentifier)
-
-	AssociatedGateway_type = AssociatedGateway.AddMember("type", GatewayType)
-
-	AssociatedGateway_ownerAccount = AssociatedGateway.AddMember("ownerAccount", _OwnerAccount)
-
-	AssociatedGateway_region = AssociatedGateway.AddMember("region", _Region)
-
-	BillingMode_PayAsYouGo = BillingMode.AddMember("PayAsYouGo", smithyprelude.Unit)
-
-	BillingMode_FlatRateTier1 = BillingMode.AddMember("FlatRateTier1", smithyprelude.Unit)
-
-	BillingMode_FlatRateTier2 = BillingMode.AddMember("FlatRateTier2", smithyprelude.Unit)
-
-	BillingMode_FlatRateTier3 = BillingMode.AddMember("FlatRateTier3", smithyprelude.Unit)
-
-	BillingMode_FlatRateTier4 = BillingMode.AddMember("FlatRateTier4", smithyprelude.Unit)
-
-	BillingMode_FlatRateTier5 = BillingMode.AddMember("FlatRateTier5", smithyprelude.Unit)
-
-	BillingMode_PortPairFlatRateTier1 = BillingMode.AddMember("PortPairFlatRateTier1", smithyprelude.Unit)
-
-	BillingMode_PortPairFlatRateTier2 = BillingMode.AddMember("PortPairFlatRateTier2", smithyprelude.Unit)
-
-	BillingMode_PortPairFlatRateTier3 = BillingMode.AddMember("PortPairFlatRateTier3", smithyprelude.Unit)
-
-	BillingMode_PortPairFlatRateTier4 = BillingMode.AddMember("PortPairFlatRateTier4", smithyprelude.Unit)
-
-	BillingMode_PortPairFlatRateTier5 = BillingMode.AddMember("PortPairFlatRateTier5", smithyprelude.Unit)
-
-	_AvailablePortSpeeds_member = _AvailablePortSpeeds.AddMember("member", _PortSpeed)
-
-	_IncludedRegionList_member = _IncludedRegionList.AddMember("member", _Region)
-
-	AvailableBillingMode_billingMode = AvailableBillingMode.AddMember("billingMode", BillingMode)
-
-	AvailableBillingMode_availablePortSpeeds = AvailableBillingMode.AddMember("availablePortSpeeds", _AvailablePortSpeeds)
-
-	AvailableBillingMode_includedRegions = AvailableBillingMode.AddMember("includedRegions", _IncludedRegionList)
-
-	_AvailableBillingModeList_member = _AvailableBillingModeList.AddMember("member", AvailableBillingMode)
-
-	_AvailableMacSecPortSpeeds_member = _AvailableMacSecPortSpeeds.AddMember("member", _PortSpeed)
-
-	BGPPeerState_Verifying = BGPPeerState.AddMember("Verifying", smithyprelude.Unit)
-
-	BGPPeerState_Pending = BGPPeerState.AddMember("Pending", smithyprelude.Unit)
-
-	BGPPeerState_Available = BGPPeerState.AddMember("Available", smithyprelude.Unit)
-
-	BGPPeerState_Deleting = BGPPeerState.AddMember("Deleting", smithyprelude.Unit)
-
-	BGPPeerState_Deleted = BGPPeerState.AddMember("Deleted", smithyprelude.Unit)
-
-	BGPStatus_Up = BGPStatus.AddMember("Up", smithyprelude.Unit)
-
-	BGPStatus_Down = BGPStatus.AddMember("Down", smithyprelude.Unit)
-
-	BGPStatus_Unknown = BGPStatus.AddMember("Unknown", smithyprelude.Unit)
-
-	BGPPeer_bgpPeerId = BGPPeer.AddMember("bgpPeerId", _BGPPeerId)
-
-	BGPPeer_asn = BGPPeer.AddMember("asn", _ASN)
-
-	BGPPeer_asnLong = BGPPeer.AddMember("asnLong", _LongAsn)
-
-	BGPPeer_authKey = BGPPeer.AddMember("authKey", _BGPAuthKey)
-
-	BGPPeer_addressFamily = BGPPeer.AddMember("addressFamily", AddressFamily)
-
-	BGPPeer_amazonAddress = BGPPeer.AddMember("amazonAddress", _AmazonAddress)
-
-	BGPPeer_customerAddress = BGPPeer.AddMember("customerAddress", _CustomerAddress)
-
-	BGPPeer_bgpPeerState = BGPPeer.AddMember("bgpPeerState", BGPPeerState)
-
-	BGPPeer_bgpStatus = BGPPeer.AddMember("bgpStatus", BGPStatus)
-
-	BGPPeer_awsDeviceV2 = BGPPeer.AddMember("awsDeviceV2", _AwsDeviceV2)
-
-	BGPPeer_awsLogicalDeviceId = BGPPeer.AddMember("awsLogicalDeviceId", _AwsLogicalDeviceId)
-
-	_BGPPeerIdList_member = _BGPPeerIdList.AddMember("member", _BGPPeerId)
-
-	_BGPPeerList_member = _BGPPeerList.AddMember("member", BGPPeer)
-
-	_CommunityList_member = _CommunityList.AddMember("member", _CommunityEntry)
-
-	ConnectionState_ordering = ConnectionState.AddMember("ordering", smithyprelude.Unit)
-
-	ConnectionState_requested = ConnectionState.AddMember("requested", smithyprelude.Unit)
-
-	ConnectionState_pending = ConnectionState.AddMember("pending", smithyprelude.Unit)
-
-	ConnectionState_available = ConnectionState.AddMember("available", smithyprelude.Unit)
-
-	ConnectionState_down = ConnectionState.AddMember("down", smithyprelude.Unit)
-
-	ConnectionState_deleting = ConnectionState.AddMember("deleting", smithyprelude.Unit)
-
-	ConnectionState_deleted = ConnectionState.AddMember("deleted", smithyprelude.Unit)
-
-	ConnectionState_rejected = ConnectionState.AddMember("rejected", smithyprelude.Unit)
-
-	ConnectionState_unknown = ConnectionState.AddMember("unknown", smithyprelude.Unit)
-
-	HasLogicalRedundancy_Unknown = HasLogicalRedundancy.AddMember("Unknown", smithyprelude.Unit)
-
-	HasLogicalRedundancy_Yes = HasLogicalRedundancy.AddMember("Yes", smithyprelude.Unit)
-
-	HasLogicalRedundancy_No = HasLogicalRedundancy.AddMember("No", smithyprelude.Unit)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	MacSecKey_secretARN = MacSecKey.AddMember("secretARN", _SecretARN)
-
-	MacSecKey_ckn = MacSecKey.AddMember("ckn", _Ckn)
-
-	MacSecKey_state = MacSecKey.AddMember("state", _State)
-
-	MacSecKey_startOn = MacSecKey.AddMember("startOn", _StartOnDate)
-
-	_MacSecKeyList_member = _MacSecKeyList.AddMember("member", MacSecKey)
-
-	RateLimiterStatus_maxAllowed = RateLimiterStatus.AddMember("maxAllowed", _Count)
-
-	RateLimiterStatus_inUse = RateLimiterStatus.AddMember("inUse", _Count)
-
-	RateLimiterStatus_remaining = RateLimiterStatus.AddMember("remaining", _Count)
-
-	RateLimiterStatus_totalBandwidth = RateLimiterStatus.AddMember("totalBandwidth", _Bandwidth)
-
-	Connection_ownerAccount = Connection.AddMember("ownerAccount", _OwnerAccount)
-
-	Connection_connectionId = Connection.AddMember("connectionId", _ConnectionId)
-
-	Connection_connectionName = Connection.AddMember("connectionName", _ConnectionName)
-
-	Connection_connectionState = Connection.AddMember("connectionState", ConnectionState)
-
-	Connection_region = Connection.AddMember("region", _Region)
-
-	Connection_location = Connection.AddMember("location", _LocationCode)
-
-	Connection_bandwidth = Connection.AddMember("bandwidth", _Bandwidth)
-
-	Connection_vlan = Connection.AddMember("vlan", _VLAN)
-
-	Connection_partnerName = Connection.AddMember("partnerName", _PartnerName)
-
-	Connection_loaIssueTime = Connection.AddMember("loaIssueTime", _LoaIssueTime)
-
-	Connection_lagId = Connection.AddMember("lagId", _LagId)
-
-	Connection_awsDevice = Connection.AddMember("awsDevice", _AwsDevice)
-
-	Connection_jumboFrameCapable = Connection.AddMember("jumboFrameCapable", _JumboFrameCapable)
-
-	Connection_awsDeviceV2 = Connection.AddMember("awsDeviceV2", _AwsDeviceV2)
-
-	Connection_awsLogicalDeviceId = Connection.AddMember("awsLogicalDeviceId", _AwsLogicalDeviceId)
-
-	Connection_hasLogicalRedundancy = Connection.AddMember("hasLogicalRedundancy", HasLogicalRedundancy)
-
-	Connection_tags = Connection.AddMember("tags", _TagList)
-
-	Connection_providerName = Connection.AddMember("providerName", _ProviderName)
-
-	Connection_macSecCapable = Connection.AddMember("macSecCapable", _MacSecCapable)
-
-	Connection_portEncryptionStatus = Connection.AddMember("portEncryptionStatus", _PortEncryptionStatus)
-
-	Connection_encryptionMode = Connection.AddMember("encryptionMode", _EncryptionMode)
-
-	Connection_macSecKeys = Connection.AddMember("macSecKeys", _MacSecKeyList)
-
-	Connection_rateLimiterStatus = Connection.AddMember("rateLimiterStatus", RateLimiterStatus)
-
-	Connection_partnerInterconnectMacSecCapable = Connection.AddMember("partnerInterconnectMacSecCapable", _PartnerInterconnectMacSecCapable)
-
-	Connection_prefixPoolSizeIpv4 = Connection.AddMember("prefixPoolSizeIpv4", _PrefixPoolSize)
-
-	Connection_prefixPoolSizeIpv6 = Connection.AddMember("prefixPoolSizeIpv6", _PrefixPoolSize)
-
-	Connection_prefixPoolUnallocatedCountIpv4 = Connection.AddMember("prefixPoolUnallocatedCountIpv4", _PrefixPoolUnallocatedCount)
-
-	Connection_prefixPoolUnallocatedCountIpv6 = Connection.AddMember("prefixPoolUnallocatedCountIpv6", _PrefixPoolUnallocatedCount)
-
-	Connection_billingMode = Connection.AddMember("billingMode", BillingMode)
-
-	_ConnectionIdentifierList_member = _ConnectionIdentifierList.AddMember("member", _ConnectionIdentifier)
-
-	_ConnectionIdList_member = _ConnectionIdList.AddMember("member", _ConnectionId)
-
-	_ConnectionList_member = _ConnectionList.AddMember("member", Connection)
-
-	DirectConnectClientException_message = DirectConnectClientException.AddMember("message", _ErrorMessage)
-
-	DirectConnectGatewayState_pending = DirectConnectGatewayState.AddMember("pending", smithyprelude.Unit)
-
-	DirectConnectGatewayState_available = DirectConnectGatewayState.AddMember("available", smithyprelude.Unit)
-
-	DirectConnectGatewayState_deleting = DirectConnectGatewayState.AddMember("deleting", smithyprelude.Unit)
-
-	DirectConnectGatewayState_deleted = DirectConnectGatewayState.AddMember("deleted", smithyprelude.Unit)
-
-	DirectConnectGateway_directConnectGatewayId = DirectConnectGateway.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DirectConnectGateway_directConnectGatewayName = DirectConnectGateway.AddMember("directConnectGatewayName", _DirectConnectGatewayName)
-
-	DirectConnectGateway_amazonSideAsn = DirectConnectGateway.AddMember("amazonSideAsn", _LongAsn)
-
-	DirectConnectGateway_ownerAccount = DirectConnectGateway.AddMember("ownerAccount", _OwnerAccount)
-
-	DirectConnectGateway_directConnectGatewayState = DirectConnectGateway.AddMember("directConnectGatewayState", DirectConnectGatewayState)
-
-	DirectConnectGateway_stateChangeError = DirectConnectGateway.AddMember("stateChangeError", _StateChangeError)
-
-	DirectConnectGateway_totalPrefixPoolAllocations = DirectConnectGateway.AddMember("totalPrefixPoolAllocations", _PrefixPoolAllocatedCount)
-
-	DirectConnectGateway_tags = DirectConnectGateway.AddMember("tags", _TagList)
-
-	DirectConnectGatewayAssociationState_associating = DirectConnectGatewayAssociationState.AddMember("associating", smithyprelude.Unit)
-
-	DirectConnectGatewayAssociationState_associated = DirectConnectGatewayAssociationState.AddMember("associated", smithyprelude.Unit)
-
-	DirectConnectGatewayAssociationState_disassociating = DirectConnectGatewayAssociationState.AddMember("disassociating", smithyprelude.Unit)
-
-	DirectConnectGatewayAssociationState_disassociated = DirectConnectGatewayAssociationState.AddMember("disassociated", smithyprelude.Unit)
-
-	DirectConnectGatewayAssociationState_updating = DirectConnectGatewayAssociationState.AddMember("updating", smithyprelude.Unit)
-
-	RouteFilterPrefix_cidr = RouteFilterPrefix.AddMember("cidr", _CIDR)
-
-	_RouteFilterPrefixList_member = _RouteFilterPrefixList.AddMember("member", RouteFilterPrefix)
-
-	DirectConnectGatewayAssociation_directConnectGatewayId = DirectConnectGatewayAssociation.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DirectConnectGatewayAssociation_directConnectGatewayOwnerAccount = DirectConnectGatewayAssociation.AddMember("directConnectGatewayOwnerAccount", _OwnerAccount)
-
-	DirectConnectGatewayAssociation_associationState = DirectConnectGatewayAssociation.AddMember("associationState", DirectConnectGatewayAssociationState)
-
-	DirectConnectGatewayAssociation_stateChangeError = DirectConnectGatewayAssociation.AddMember("stateChangeError", _StateChangeError)
-
-	DirectConnectGatewayAssociation_associatedGateway = DirectConnectGatewayAssociation.AddMember("associatedGateway", AssociatedGateway)
-
-	DirectConnectGatewayAssociation_associationId = DirectConnectGatewayAssociation.AddMember("associationId", _DirectConnectGatewayAssociationId)
-
-	DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway = DirectConnectGatewayAssociation.AddMember("allowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	DirectConnectGatewayAssociation_associatedCoreNetwork = DirectConnectGatewayAssociation.AddMember("associatedCoreNetwork", AssociatedCoreNetwork)
-
-	DirectConnectGatewayAssociation_virtualGatewayId = DirectConnectGatewayAssociation.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	DirectConnectGatewayAssociation_virtualGatewayRegion = DirectConnectGatewayAssociation.AddMember("virtualGatewayRegion", _VirtualGatewayRegion)
-
-	DirectConnectGatewayAssociation_virtualGatewayOwnerAccount = DirectConnectGatewayAssociation.AddMember("virtualGatewayOwnerAccount", _OwnerAccount)
-
-	_DirectConnectGatewayAssociationList_member = _DirectConnectGatewayAssociationList.AddMember("member", DirectConnectGatewayAssociation)
-
-	DirectConnectGatewayAssociationProposalState_requested = DirectConnectGatewayAssociationProposalState.AddMember("requested", smithyprelude.Unit)
-
-	DirectConnectGatewayAssociationProposalState_accepted = DirectConnectGatewayAssociationProposalState.AddMember("accepted", smithyprelude.Unit)
-
-	DirectConnectGatewayAssociationProposalState_deleted = DirectConnectGatewayAssociationProposalState.AddMember("deleted", smithyprelude.Unit)
-
-	DirectConnectGatewayAssociationProposal_proposalId = DirectConnectGatewayAssociationProposal.AddMember("proposalId", _DirectConnectGatewayAssociationProposalId)
-
-	DirectConnectGatewayAssociationProposal_directConnectGatewayId = DirectConnectGatewayAssociationProposal.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount = DirectConnectGatewayAssociationProposal.AddMember("directConnectGatewayOwnerAccount", _OwnerAccount)
-
-	DirectConnectGatewayAssociationProposal_proposalState = DirectConnectGatewayAssociationProposal.AddMember("proposalState", DirectConnectGatewayAssociationProposalState)
-
-	DirectConnectGatewayAssociationProposal_associatedGateway = DirectConnectGatewayAssociationProposal.AddMember("associatedGateway", AssociatedGateway)
-
-	DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway = DirectConnectGatewayAssociationProposal.AddMember("existingAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway = DirectConnectGatewayAssociationProposal.AddMember("requestedAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	_DirectConnectGatewayAssociationProposalList_member = _DirectConnectGatewayAssociationProposalList.AddMember("member", DirectConnectGatewayAssociationProposal)
-
-	DirectConnectGatewayAttachmentState_attaching = DirectConnectGatewayAttachmentState.AddMember("attaching", smithyprelude.Unit)
-
-	DirectConnectGatewayAttachmentState_attached = DirectConnectGatewayAttachmentState.AddMember("attached", smithyprelude.Unit)
-
-	DirectConnectGatewayAttachmentState_detaching = DirectConnectGatewayAttachmentState.AddMember("detaching", smithyprelude.Unit)
-
-	DirectConnectGatewayAttachmentState_detached = DirectConnectGatewayAttachmentState.AddMember("detached", smithyprelude.Unit)
-
-	DirectConnectGatewayAttachmentType_TransitVirtualInterface = DirectConnectGatewayAttachmentType.AddMember("TransitVirtualInterface", smithyprelude.Unit)
-
-	DirectConnectGatewayAttachmentType_PrivateVirtualInterface = DirectConnectGatewayAttachmentType.AddMember("PrivateVirtualInterface", smithyprelude.Unit)
-
-	DirectConnectGatewayAttachment_directConnectGatewayId = DirectConnectGatewayAttachment.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DirectConnectGatewayAttachment_virtualInterfaceId = DirectConnectGatewayAttachment.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	DirectConnectGatewayAttachment_virtualInterfaceRegion = DirectConnectGatewayAttachment.AddMember("virtualInterfaceRegion", _VirtualInterfaceRegion)
-
-	DirectConnectGatewayAttachment_virtualInterfaceOwnerAccount = DirectConnectGatewayAttachment.AddMember("virtualInterfaceOwnerAccount", _OwnerAccount)
-
-	DirectConnectGatewayAttachment_attachmentState = DirectConnectGatewayAttachment.AddMember("attachmentState", DirectConnectGatewayAttachmentState)
-
-	DirectConnectGatewayAttachment_attachmentType = DirectConnectGatewayAttachment.AddMember("attachmentType", DirectConnectGatewayAttachmentType)
-
-	DirectConnectGatewayAttachment_stateChangeError = DirectConnectGatewayAttachment.AddMember("stateChangeError", _StateChangeError)
-
-	_DirectConnectGatewayAttachmentList_member = _DirectConnectGatewayAttachmentList.AddMember("member", DirectConnectGatewayAttachment)
-
-	_DirectConnectGatewayList_member = _DirectConnectGatewayList.AddMember("member", DirectConnectGateway)
-
-	DirectConnectServerException_message = DirectConnectServerException.AddMember("message", _ErrorMessage)
-
-	DuplicateTagKeysException_message = DuplicateTagKeysException.AddMember("message", _ErrorMessage)
-
-	InterconnectState_requested = InterconnectState.AddMember("requested", smithyprelude.Unit)
-
-	InterconnectState_pending = InterconnectState.AddMember("pending", smithyprelude.Unit)
-
-	InterconnectState_available = InterconnectState.AddMember("available", smithyprelude.Unit)
-
-	InterconnectState_down = InterconnectState.AddMember("down", smithyprelude.Unit)
-
-	InterconnectState_deleting = InterconnectState.AddMember("deleting", smithyprelude.Unit)
-
-	InterconnectState_deleted = InterconnectState.AddMember("deleted", smithyprelude.Unit)
-
-	InterconnectState_unknown = InterconnectState.AddMember("unknown", smithyprelude.Unit)
-
-	Interconnect_interconnectId = Interconnect.AddMember("interconnectId", _InterconnectId)
-
-	Interconnect_interconnectName = Interconnect.AddMember("interconnectName", _InterconnectName)
-
-	Interconnect_interconnectState = Interconnect.AddMember("interconnectState", InterconnectState)
-
-	Interconnect_region = Interconnect.AddMember("region", _Region)
-
-	Interconnect_location = Interconnect.AddMember("location", _LocationCode)
-
-	Interconnect_bandwidth = Interconnect.AddMember("bandwidth", _Bandwidth)
-
-	Interconnect_loaIssueTime = Interconnect.AddMember("loaIssueTime", _LoaIssueTime)
-
-	Interconnect_lagId = Interconnect.AddMember("lagId", _LagId)
-
-	Interconnect_awsDevice = Interconnect.AddMember("awsDevice", _AwsDevice)
-
-	Interconnect_jumboFrameCapable = Interconnect.AddMember("jumboFrameCapable", _JumboFrameCapable)
-
-	Interconnect_awsDeviceV2 = Interconnect.AddMember("awsDeviceV2", _AwsDeviceV2)
-
-	Interconnect_awsLogicalDeviceId = Interconnect.AddMember("awsLogicalDeviceId", _AwsLogicalDeviceId)
-
-	Interconnect_hasLogicalRedundancy = Interconnect.AddMember("hasLogicalRedundancy", HasLogicalRedundancy)
-
-	Interconnect_tags = Interconnect.AddMember("tags", _TagList)
-
-	Interconnect_providerName = Interconnect.AddMember("providerName", _ProviderName)
-
-	Interconnect_macSecCapable = Interconnect.AddMember("macSecCapable", _MacSecCapable)
-
-	Interconnect_portEncryptionStatus = Interconnect.AddMember("portEncryptionStatus", _PortEncryptionStatus)
-
-	Interconnect_encryptionMode = Interconnect.AddMember("encryptionMode", _EncryptionMode)
-
-	Interconnect_macSecKeys = Interconnect.AddMember("macSecKeys", _MacSecKeyList)
-
-	_InterconnectList_member = _InterconnectList.AddMember("member", Interconnect)
-
-	LagState_requested = LagState.AddMember("requested", smithyprelude.Unit)
-
-	LagState_pending = LagState.AddMember("pending", smithyprelude.Unit)
-
-	LagState_available = LagState.AddMember("available", smithyprelude.Unit)
-
-	LagState_down = LagState.AddMember("down", smithyprelude.Unit)
-
-	LagState_deleting = LagState.AddMember("deleting", smithyprelude.Unit)
-
-	LagState_deleted = LagState.AddMember("deleted", smithyprelude.Unit)
-
-	LagState_unknown = LagState.AddMember("unknown", smithyprelude.Unit)
-
-	Lag_connectionsBandwidth = Lag.AddMember("connectionsBandwidth", _Bandwidth)
-
-	Lag_numberOfConnections = Lag.AddMember("numberOfConnections", _Count)
-
-	Lag_lagId = Lag.AddMember("lagId", _LagId)
-
-	Lag_ownerAccount = Lag.AddMember("ownerAccount", _OwnerAccount)
-
-	Lag_lagName = Lag.AddMember("lagName", _LagName)
-
-	Lag_lagState = Lag.AddMember("lagState", LagState)
-
-	Lag_location = Lag.AddMember("location", _LocationCode)
-
-	Lag_region = Lag.AddMember("region", _Region)
-
-	Lag_minimumLinks = Lag.AddMember("minimumLinks", _Count)
-
-	Lag_awsDevice = Lag.AddMember("awsDevice", _AwsDevice)
-
-	Lag_awsDeviceV2 = Lag.AddMember("awsDeviceV2", _AwsDeviceV2)
-
-	Lag_awsLogicalDeviceId = Lag.AddMember("awsLogicalDeviceId", _AwsLogicalDeviceId)
-
-	Lag_connections = Lag.AddMember("connections", _ConnectionList)
-
-	Lag_allowsHostedConnections = Lag.AddMember("allowsHostedConnections", _BooleanFlag)
-
-	Lag_jumboFrameCapable = Lag.AddMember("jumboFrameCapable", _JumboFrameCapable)
-
-	Lag_hasLogicalRedundancy = Lag.AddMember("hasLogicalRedundancy", HasLogicalRedundancy)
-
-	Lag_tags = Lag.AddMember("tags", _TagList)
-
-	Lag_providerName = Lag.AddMember("providerName", _ProviderName)
-
-	Lag_macSecCapable = Lag.AddMember("macSecCapable", _MacSecCapable)
-
-	Lag_encryptionMode = Lag.AddMember("encryptionMode", _EncryptionMode)
-
-	Lag_macSecKeys = Lag.AddMember("macSecKeys", _MacSecKeyList)
-
-	Lag_prefixPoolSizeIpv4 = Lag.AddMember("prefixPoolSizeIpv4", _PrefixPoolSize)
-
-	Lag_prefixPoolSizeIpv6 = Lag.AddMember("prefixPoolSizeIpv6", _PrefixPoolSize)
-
-	Lag_prefixPoolUnallocatedCountIpv4 = Lag.AddMember("prefixPoolUnallocatedCountIpv4", _PrefixPoolUnallocatedCount)
-
-	Lag_prefixPoolUnallocatedCountIpv6 = Lag.AddMember("prefixPoolUnallocatedCountIpv6", _PrefixPoolUnallocatedCount)
-
-	Lag_rateLimiterStatus = Lag.AddMember("rateLimiterStatus", RateLimiterStatus)
-
-	Lag_billingMode = Lag.AddMember("billingMode", BillingMode)
-
-	_LagList_member = _LagList.AddMember("member", Lag)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	LoaContentType_PDF = LoaContentType.AddMember("PDF", smithyprelude.Unit)
-
-	Loa_loaContent = Loa.AddMember("loaContent", _LoaContent)
-
-	Loa_loaContentType = Loa.AddMember("loaContentType", LoaContentType)
-
-	_ProviderList_member = _ProviderList.AddMember("member", _ProviderName)
-
-	Location_locationCode = Location.AddMember("locationCode", _LocationCode)
-
-	Location_locationName = Location.AddMember("locationName", _LocationName)
-
-	Location_region = Location.AddMember("region", _Region)
-
-	Location_availablePortSpeeds = Location.AddMember("availablePortSpeeds", _AvailablePortSpeeds)
-
-	Location_availableProviders = Location.AddMember("availableProviders", _ProviderList)
-
-	Location_availableMacSecPortSpeeds = Location.AddMember("availableMacSecPortSpeeds", _AvailableMacSecPortSpeeds)
-
-	Location_availableBillingModes = Location.AddMember("availableBillingModes", _AvailableBillingModeList)
-
-	_LocationList_member = _LocationList.AddMember("member", Location)
-
-	NewBGPPeer_asn = NewBGPPeer.AddMember("asn", _ASN)
-
-	NewBGPPeer_asnLong = NewBGPPeer.AddMember("asnLong", _LongAsn)
-
-	NewBGPPeer_authKey = NewBGPPeer.AddMember("authKey", _BGPAuthKey)
-
-	NewBGPPeer_addressFamily = NewBGPPeer.AddMember("addressFamily", AddressFamily)
-
-	NewBGPPeer_amazonAddress = NewBGPPeer.AddMember("amazonAddress", _AmazonAddress)
-
-	NewBGPPeer_customerAddress = NewBGPPeer.AddMember("customerAddress", _CustomerAddress)
-
-	NewPrivateVirtualInterface_virtualInterfaceName = NewPrivateVirtualInterface.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	NewPrivateVirtualInterface_vlan = NewPrivateVirtualInterface.AddMember("vlan", _VLAN)
-
-	NewPrivateVirtualInterface_asn = NewPrivateVirtualInterface.AddMember("asn", _ASN)
-
-	NewPrivateVirtualInterface_asnLong = NewPrivateVirtualInterface.AddMember("asnLong", _LongAsn)
-
-	NewPrivateVirtualInterface_mtu = NewPrivateVirtualInterface.AddMember("mtu", _MTU)
-
-	NewPrivateVirtualInterface_authKey = NewPrivateVirtualInterface.AddMember("authKey", _BGPAuthKey)
-
-	NewPrivateVirtualInterface_amazonAddress = NewPrivateVirtualInterface.AddMember("amazonAddress", _AmazonAddress)
-
-	NewPrivateVirtualInterface_customerAddress = NewPrivateVirtualInterface.AddMember("customerAddress", _CustomerAddress)
-
-	NewPrivateVirtualInterface_addressFamily = NewPrivateVirtualInterface.AddMember("addressFamily", AddressFamily)
-
-	NewPrivateVirtualInterface_virtualGatewayId = NewPrivateVirtualInterface.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	NewPrivateVirtualInterface_directConnectGatewayId = NewPrivateVirtualInterface.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	NewPrivateVirtualInterface_tags = NewPrivateVirtualInterface.AddMember("tags", _TagList)
-
-	NewPrivateVirtualInterface_enableSiteLink = NewPrivateVirtualInterface.AddMember("enableSiteLink", _EnableSiteLink)
-
-	NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4 = NewPrivateVirtualInterface.AddMember("prefixPoolAllocatedCountIpv4", _PrefixPoolAllocatedCount)
-
-	NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6 = NewPrivateVirtualInterface.AddMember("prefixPoolAllocatedCountIpv6", _PrefixPoolAllocatedCount)
-
-	NewPrivateVirtualInterface_rateLimit = NewPrivateVirtualInterface.AddMember("rateLimit", _RateLimit)
-
-	NewPrivateVirtualInterfaceAllocation_virtualInterfaceName = NewPrivateVirtualInterfaceAllocation.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	NewPrivateVirtualInterfaceAllocation_vlan = NewPrivateVirtualInterfaceAllocation.AddMember("vlan", _VLAN)
-
-	NewPrivateVirtualInterfaceAllocation_asn = NewPrivateVirtualInterfaceAllocation.AddMember("asn", _ASN)
-
-	NewPrivateVirtualInterfaceAllocation_asnLong = NewPrivateVirtualInterfaceAllocation.AddMember("asnLong", _LongAsn)
-
-	NewPrivateVirtualInterfaceAllocation_mtu = NewPrivateVirtualInterfaceAllocation.AddMember("mtu", _MTU)
-
-	NewPrivateVirtualInterfaceAllocation_authKey = NewPrivateVirtualInterfaceAllocation.AddMember("authKey", _BGPAuthKey)
-
-	NewPrivateVirtualInterfaceAllocation_amazonAddress = NewPrivateVirtualInterfaceAllocation.AddMember("amazonAddress", _AmazonAddress)
-
-	NewPrivateVirtualInterfaceAllocation_addressFamily = NewPrivateVirtualInterfaceAllocation.AddMember("addressFamily", AddressFamily)
-
-	NewPrivateVirtualInterfaceAllocation_customerAddress = NewPrivateVirtualInterfaceAllocation.AddMember("customerAddress", _CustomerAddress)
-
-	NewPrivateVirtualInterfaceAllocation_tags = NewPrivateVirtualInterfaceAllocation.AddMember("tags", _TagList)
-
-	NewPrivateVirtualInterfaceAllocation_rateLimit = NewPrivateVirtualInterfaceAllocation.AddMember("rateLimit", _RateLimit)
-
-	NewPublicVirtualInterface_virtualInterfaceName = NewPublicVirtualInterface.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	NewPublicVirtualInterface_vlan = NewPublicVirtualInterface.AddMember("vlan", _VLAN)
-
-	NewPublicVirtualInterface_asn = NewPublicVirtualInterface.AddMember("asn", _ASN)
-
-	NewPublicVirtualInterface_asnLong = NewPublicVirtualInterface.AddMember("asnLong", _LongAsn)
-
-	NewPublicVirtualInterface_authKey = NewPublicVirtualInterface.AddMember("authKey", _BGPAuthKey)
-
-	NewPublicVirtualInterface_amazonAddress = NewPublicVirtualInterface.AddMember("amazonAddress", _AmazonAddress)
-
-	NewPublicVirtualInterface_customerAddress = NewPublicVirtualInterface.AddMember("customerAddress", _CustomerAddress)
-
-	NewPublicVirtualInterface_addressFamily = NewPublicVirtualInterface.AddMember("addressFamily", AddressFamily)
-
-	NewPublicVirtualInterface_routeFilterPrefixes = NewPublicVirtualInterface.AddMember("routeFilterPrefixes", _RouteFilterPrefixList)
-
-	NewPublicVirtualInterface_tags = NewPublicVirtualInterface.AddMember("tags", _TagList)
-
-	NewPublicVirtualInterface_rateLimit = NewPublicVirtualInterface.AddMember("rateLimit", _RateLimit)
-
-	NewPublicVirtualInterfaceAllocation_virtualInterfaceName = NewPublicVirtualInterfaceAllocation.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	NewPublicVirtualInterfaceAllocation_vlan = NewPublicVirtualInterfaceAllocation.AddMember("vlan", _VLAN)
-
-	NewPublicVirtualInterfaceAllocation_asn = NewPublicVirtualInterfaceAllocation.AddMember("asn", _ASN)
-
-	NewPublicVirtualInterfaceAllocation_asnLong = NewPublicVirtualInterfaceAllocation.AddMember("asnLong", _LongAsn)
-
-	NewPublicVirtualInterfaceAllocation_authKey = NewPublicVirtualInterfaceAllocation.AddMember("authKey", _BGPAuthKey)
-
-	NewPublicVirtualInterfaceAllocation_amazonAddress = NewPublicVirtualInterfaceAllocation.AddMember("amazonAddress", _AmazonAddress)
-
-	NewPublicVirtualInterfaceAllocation_customerAddress = NewPublicVirtualInterfaceAllocation.AddMember("customerAddress", _CustomerAddress)
-
-	NewPublicVirtualInterfaceAllocation_addressFamily = NewPublicVirtualInterfaceAllocation.AddMember("addressFamily", AddressFamily)
-
-	NewPublicVirtualInterfaceAllocation_routeFilterPrefixes = NewPublicVirtualInterfaceAllocation.AddMember("routeFilterPrefixes", _RouteFilterPrefixList)
-
-	NewPublicVirtualInterfaceAllocation_tags = NewPublicVirtualInterfaceAllocation.AddMember("tags", _TagList)
-
-	NewPublicVirtualInterfaceAllocation_rateLimit = NewPublicVirtualInterfaceAllocation.AddMember("rateLimit", _RateLimit)
-
-	NewTransitVirtualInterface_virtualInterfaceName = NewTransitVirtualInterface.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	NewTransitVirtualInterface_vlan = NewTransitVirtualInterface.AddMember("vlan", _VLAN)
-
-	NewTransitVirtualInterface_asn = NewTransitVirtualInterface.AddMember("asn", _ASN)
-
-	NewTransitVirtualInterface_asnLong = NewTransitVirtualInterface.AddMember("asnLong", _LongAsn)
-
-	NewTransitVirtualInterface_mtu = NewTransitVirtualInterface.AddMember("mtu", _MTU)
-
-	NewTransitVirtualInterface_authKey = NewTransitVirtualInterface.AddMember("authKey", _BGPAuthKey)
-
-	NewTransitVirtualInterface_amazonAddress = NewTransitVirtualInterface.AddMember("amazonAddress", _AmazonAddress)
-
-	NewTransitVirtualInterface_customerAddress = NewTransitVirtualInterface.AddMember("customerAddress", _CustomerAddress)
-
-	NewTransitVirtualInterface_addressFamily = NewTransitVirtualInterface.AddMember("addressFamily", AddressFamily)
-
-	NewTransitVirtualInterface_directConnectGatewayId = NewTransitVirtualInterface.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	NewTransitVirtualInterface_tags = NewTransitVirtualInterface.AddMember("tags", _TagList)
-
-	NewTransitVirtualInterface_enableSiteLink = NewTransitVirtualInterface.AddMember("enableSiteLink", _EnableSiteLink)
-
-	NewTransitVirtualInterface_prefixPoolAllocatedCountIpv4 = NewTransitVirtualInterface.AddMember("prefixPoolAllocatedCountIpv4", _PrefixPoolAllocatedCount)
-
-	NewTransitVirtualInterface_prefixPoolAllocatedCountIpv6 = NewTransitVirtualInterface.AddMember("prefixPoolAllocatedCountIpv6", _PrefixPoolAllocatedCount)
-
-	NewTransitVirtualInterface_rateLimit = NewTransitVirtualInterface.AddMember("rateLimit", _RateLimit)
-
-	NewTransitVirtualInterfaceAllocation_virtualInterfaceName = NewTransitVirtualInterfaceAllocation.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	NewTransitVirtualInterfaceAllocation_vlan = NewTransitVirtualInterfaceAllocation.AddMember("vlan", _VLAN)
-
-	NewTransitVirtualInterfaceAllocation_asn = NewTransitVirtualInterfaceAllocation.AddMember("asn", _ASN)
-
-	NewTransitVirtualInterfaceAllocation_asnLong = NewTransitVirtualInterfaceAllocation.AddMember("asnLong", _LongAsn)
-
-	NewTransitVirtualInterfaceAllocation_mtu = NewTransitVirtualInterfaceAllocation.AddMember("mtu", _MTU)
-
-	NewTransitVirtualInterfaceAllocation_authKey = NewTransitVirtualInterfaceAllocation.AddMember("authKey", _BGPAuthKey)
-
-	NewTransitVirtualInterfaceAllocation_amazonAddress = NewTransitVirtualInterfaceAllocation.AddMember("amazonAddress", _AmazonAddress)
-
-	NewTransitVirtualInterfaceAllocation_customerAddress = NewTransitVirtualInterfaceAllocation.AddMember("customerAddress", _CustomerAddress)
-
-	NewTransitVirtualInterfaceAllocation_addressFamily = NewTransitVirtualInterfaceAllocation.AddMember("addressFamily", AddressFamily)
-
-	NewTransitVirtualInterfaceAllocation_tags = NewTransitVirtualInterfaceAllocation.AddMember("tags", _TagList)
-
-	NewTransitVirtualInterfaceAllocation_rateLimit = NewTransitVirtualInterfaceAllocation.AddMember("rateLimit", _RateLimit)
-
-	NniPartnerType_V1 = NniPartnerType.AddMember("V1", smithyprelude.Unit)
-
-	NniPartnerType_V2 = NniPartnerType.AddMember("V2", smithyprelude.Unit)
-
-	NniPartnerType_NonPartner = NniPartnerType.AddMember("NonPartner", smithyprelude.Unit)
-
-	RequestBillingMode_PayAsYouGo = RequestBillingMode.AddMember("PayAsYouGo", smithyprelude.Unit)
-
-	RequestBillingMode_FlatRateTier1 = RequestBillingMode.AddMember("FlatRateTier1", smithyprelude.Unit)
-
-	RequestBillingMode_FlatRateTier2 = RequestBillingMode.AddMember("FlatRateTier2", smithyprelude.Unit)
-
-	RequestBillingMode_FlatRateTier3 = RequestBillingMode.AddMember("FlatRateTier3", smithyprelude.Unit)
-
-	RequestBillingMode_FlatRateTier4 = RequestBillingMode.AddMember("FlatRateTier4", smithyprelude.Unit)
-
-	RequestBillingMode_FlatRateTier5 = RequestBillingMode.AddMember("FlatRateTier5", smithyprelude.Unit)
-
-	ResiliencyGroupType_Managed = ResiliencyGroupType.AddMember("Managed", smithyprelude.Unit)
-
-	ResiliencyGroupState_Pending = ResiliencyGroupState.AddMember("Pending", smithyprelude.Unit)
-
-	ResiliencyGroupState_Available = ResiliencyGroupState.AddMember("Available", smithyprelude.Unit)
-
-	ResiliencyGroupState_Deleting = ResiliencyGroupState.AddMember("Deleting", smithyprelude.Unit)
-
-	ResiliencyGroupState_Deleted = ResiliencyGroupState.AddMember("Deleted", smithyprelude.Unit)
-
-	ResiliencyGroup_resiliencyGroupId = ResiliencyGroup.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	ResiliencyGroup_resiliencyGroupArn = ResiliencyGroup.AddMember("resiliencyGroupArn", _ResiliencyGroupArn)
-
-	ResiliencyGroup_resiliencyGroupName = ResiliencyGroup.AddMember("resiliencyGroupName", _ResiliencyGroupName)
-
-	ResiliencyGroup_resiliencyGroupType = ResiliencyGroup.AddMember("resiliencyGroupType", ResiliencyGroupType)
-
-	ResiliencyGroup_ownerAccount = ResiliencyGroup.AddMember("ownerAccount", _OwnerAccount)
-
-	ResiliencyGroup_state = ResiliencyGroup.AddMember("state", ResiliencyGroupState)
-
-	ResiliencyGroup_tags = ResiliencyGroup.AddMember("tags", _TagList)
-
-	ResiliencyGroupAssociationState_Associating = ResiliencyGroupAssociationState.AddMember("Associating", smithyprelude.Unit)
-
-	ResiliencyGroupAssociationState_Associated = ResiliencyGroupAssociationState.AddMember("Associated", smithyprelude.Unit)
-
-	ResiliencyGroupAssociationState_Disassociating = ResiliencyGroupAssociationState.AddMember("Disassociating", smithyprelude.Unit)
-
-	ResiliencyGroupAssociationState_Disassociated = ResiliencyGroupAssociationState.AddMember("Disassociated", smithyprelude.Unit)
-
-	ResiliencyGroupAssociation_resiliencyGroupId = ResiliencyGroupAssociation.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	ResiliencyGroupAssociation_connectionArn = ResiliencyGroupAssociation.AddMember("connectionArn", _ConnectionArn)
-
-	ResiliencyGroupAssociation_state = ResiliencyGroupAssociation.AddMember("state", ResiliencyGroupAssociationState)
-
-	_ResiliencyGroupAssociationList_member = _ResiliencyGroupAssociationList.AddMember("member", ResiliencyGroupAssociation)
-
-	ResiliencyGroupSummary_resiliencyGroupId = ResiliencyGroupSummary.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	ResiliencyGroupSummary_resiliencyGroupArn = ResiliencyGroupSummary.AddMember("resiliencyGroupArn", _ResiliencyGroupArn)
-
-	ResiliencyGroupSummary_resiliencyGroupName = ResiliencyGroupSummary.AddMember("resiliencyGroupName", _ResiliencyGroupName)
-
-	ResiliencyGroupSummary_resiliencyGroupType = ResiliencyGroupSummary.AddMember("resiliencyGroupType", ResiliencyGroupType)
-
-	ResiliencyGroupSummary_ownerAccount = ResiliencyGroupSummary.AddMember("ownerAccount", _OwnerAccount)
-
-	ResiliencyGroupSummary_state = ResiliencyGroupSummary.AddMember("state", ResiliencyGroupState)
-
-	_ResiliencyGroupSummaryList_member = _ResiliencyGroupSummaryList.AddMember("member", ResiliencyGroupSummary)
-
-	ResiliencyModel_MaximumResiliency = ResiliencyModel.AddMember("MaximumResiliency", smithyprelude.Unit)
-
-	ResiliencyModel_HighResiliency = ResiliencyModel.AddMember("HighResiliency", smithyprelude.Unit)
-
-	ResiliencyModel_BasicResiliency = ResiliencyModel.AddMember("BasicResiliency", smithyprelude.Unit)
-
-	_ResourceArnList_member = _ResourceArnList.AddMember("member", _ResourceArn)
-
-	ResourceTag_resourceArn = ResourceTag.AddMember("resourceArn", _ResourceArn)
-
-	ResourceTag_tags = ResourceTag.AddMember("tags", _TagList)
-
-	_ResourceTagList_member = _ResourceTagList.AddMember("member", ResourceTag)
-
-	RouteDirection_Accepted = RouteDirection.AddMember("Accepted", smithyprelude.Unit)
-
-	RouteDirection_Advertised = RouteDirection.AddMember("Advertised", smithyprelude.Unit)
-
-	Route_cidr = Route.AddMember("cidr", _RouteCidr)
-
-	Route_routeDirection = Route.AddMember("routeDirection", RouteDirection)
-
-	Route_addressFamily = Route.AddMember("addressFamily", AddressFamily)
-
-	Route_asPath = Route.AddMember("asPath", _AsPathSegmentList)
-
-	Route_communities = Route.AddMember("communities", _CommunityList)
-
-	Route_awsLogicalDeviceId = Route.AddMember("awsLogicalDeviceId", _AwsLogicalDeviceId)
-
-	Route_routeInstalledAt = Route.AddMember("routeInstalledAt", _RouteInstalledAt)
-
-	_RouteFilterCidrStringList_member = _RouteFilterCidrStringList.AddMember("member", _RouteFilterCidrString)
-
-	RouteFilters_routeDirection = RouteFilters.AddMember("routeDirection", RouteDirection)
-
-	RouteFilters_addressFamily = RouteFilters.AddMember("addressFamily", AddressFamily)
-
-	RouteFilters_cidrs = RouteFilters.AddMember("cidrs", _RouteFilterCidrStringList)
-
-	RouteFilters_asPath = RouteFilters.AddMember("asPath", _AsPathList)
-
-	RouteFilters_communities = RouteFilters.AddMember("communities", _CommunityList)
-
-	_RouteList_member = _RouteList.AddMember("member", Route)
-
-	RouterType_vendor = RouterType.AddMember("vendor", _Vendor)
-
-	RouterType_platform = RouterType.AddMember("platform", _Platform)
-
-	RouterType_software = RouterType.AddMember("software", _Software)
-
-	RouterType_xsltTemplateName = RouterType.AddMember("xsltTemplateName", _XsltTemplateName)
-
-	RouterType_xsltTemplateNameForMacSec = RouterType.AddMember("xsltTemplateNameForMacSec", _XsltTemplateNameForMacSec)
-
-	RouterType_routerTypeIdentifier = RouterType.AddMember("routerTypeIdentifier", _RouterTypeIdentifier)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TooManyTagsException_message = TooManyTagsException.AddMember("message", _ErrorMessage)
-
-	VirtualGateway_virtualGatewayId = VirtualGateway.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	VirtualGateway_virtualGatewayState = VirtualGateway.AddMember("virtualGatewayState", _VirtualGatewayState)
-
-	_VirtualGatewayList_member = _VirtualGatewayList.AddMember("member", VirtualGateway)
-
-	VirtualInterfaceState_confirming = VirtualInterfaceState.AddMember("confirming", smithyprelude.Unit)
-
-	VirtualInterfaceState_verifying = VirtualInterfaceState.AddMember("verifying", smithyprelude.Unit)
-
-	VirtualInterfaceState_pending = VirtualInterfaceState.AddMember("pending", smithyprelude.Unit)
-
-	VirtualInterfaceState_available = VirtualInterfaceState.AddMember("available", smithyprelude.Unit)
-
-	VirtualInterfaceState_down = VirtualInterfaceState.AddMember("down", smithyprelude.Unit)
-
-	VirtualInterfaceState_testing = VirtualInterfaceState.AddMember("testing", smithyprelude.Unit)
-
-	VirtualInterfaceState_deleting = VirtualInterfaceState.AddMember("deleting", smithyprelude.Unit)
-
-	VirtualInterfaceState_deleted = VirtualInterfaceState.AddMember("deleted", smithyprelude.Unit)
-
-	VirtualInterfaceState_rejected = VirtualInterfaceState.AddMember("rejected", smithyprelude.Unit)
-
-	VirtualInterfaceState_unknown = VirtualInterfaceState.AddMember("unknown", smithyprelude.Unit)
-
-	VirtualInterface_ownerAccount = VirtualInterface.AddMember("ownerAccount", _OwnerAccount)
-
-	VirtualInterface_virtualInterfaceId = VirtualInterface.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	VirtualInterface_location = VirtualInterface.AddMember("location", _LocationCode)
-
-	VirtualInterface_connectionId = VirtualInterface.AddMember("connectionId", _ConnectionId)
-
-	VirtualInterface_virtualInterfaceType = VirtualInterface.AddMember("virtualInterfaceType", _VirtualInterfaceType)
-
-	VirtualInterface_virtualInterfaceName = VirtualInterface.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	VirtualInterface_vlan = VirtualInterface.AddMember("vlan", _VLAN)
-
-	VirtualInterface_asn = VirtualInterface.AddMember("asn", _ASN)
-
-	VirtualInterface_asnLong = VirtualInterface.AddMember("asnLong", _LongAsn)
-
-	VirtualInterface_amazonSideAsn = VirtualInterface.AddMember("amazonSideAsn", _LongAsn)
-
-	VirtualInterface_authKey = VirtualInterface.AddMember("authKey", _BGPAuthKey)
-
-	VirtualInterface_amazonAddress = VirtualInterface.AddMember("amazonAddress", _AmazonAddress)
-
-	VirtualInterface_customerAddress = VirtualInterface.AddMember("customerAddress", _CustomerAddress)
-
-	VirtualInterface_addressFamily = VirtualInterface.AddMember("addressFamily", AddressFamily)
-
-	VirtualInterface_virtualInterfaceState = VirtualInterface.AddMember("virtualInterfaceState", VirtualInterfaceState)
-
-	VirtualInterface_customerRouterConfig = VirtualInterface.AddMember("customerRouterConfig", _RouterConfig)
-
-	VirtualInterface_mtu = VirtualInterface.AddMember("mtu", _MTU)
-
-	VirtualInterface_jumboFrameCapable = VirtualInterface.AddMember("jumboFrameCapable", _JumboFrameCapable)
-
-	VirtualInterface_virtualGatewayId = VirtualInterface.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	VirtualInterface_directConnectGatewayId = VirtualInterface.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	VirtualInterface_routeFilterPrefixes = VirtualInterface.AddMember("routeFilterPrefixes", _RouteFilterPrefixList)
-
-	VirtualInterface_bgpPeers = VirtualInterface.AddMember("bgpPeers", _BGPPeerList)
-
-	VirtualInterface_region = VirtualInterface.AddMember("region", _Region)
-
-	VirtualInterface_awsDeviceV2 = VirtualInterface.AddMember("awsDeviceV2", _AwsDeviceV2)
-
-	VirtualInterface_awsLogicalDeviceId = VirtualInterface.AddMember("awsLogicalDeviceId", _AwsLogicalDeviceId)
-
-	VirtualInterface_tags = VirtualInterface.AddMember("tags", _TagList)
-
-	VirtualInterface_siteLinkEnabled = VirtualInterface.AddMember("siteLinkEnabled", _SiteLinkEnabled)
-
-	VirtualInterface_prefixPoolAllocatedCountIpv4 = VirtualInterface.AddMember("prefixPoolAllocatedCountIpv4", _PrefixPoolAllocatedCount)
-
-	VirtualInterface_prefixPoolAllocatedCountIpv6 = VirtualInterface.AddMember("prefixPoolAllocatedCountIpv6", _PrefixPoolAllocatedCount)
-
-	VirtualInterface_rateLimit = VirtualInterface.AddMember("rateLimit", _RateLimit)
-
-	_VirtualInterfaceList_member = _VirtualInterfaceList.AddMember("member", VirtualInterface)
-
-	VirtualInterfaceTestHistory_testId = VirtualInterfaceTestHistory.AddMember("testId", _TestId)
-
-	VirtualInterfaceTestHistory_virtualInterfaceId = VirtualInterfaceTestHistory.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	VirtualInterfaceTestHistory_bgpPeers = VirtualInterfaceTestHistory.AddMember("bgpPeers", _BGPPeerIdList)
-
-	VirtualInterfaceTestHistory_status = VirtualInterfaceTestHistory.AddMember("status", _FailureTestHistoryStatus)
-
-	VirtualInterfaceTestHistory_ownerAccount = VirtualInterfaceTestHistory.AddMember("ownerAccount", _OwnerAccount)
-
-	VirtualInterfaceTestHistory_testDurationInMinutes = VirtualInterfaceTestHistory.AddMember("testDurationInMinutes", _TestDuration)
-
-	VirtualInterfaceTestHistory_startTime = VirtualInterfaceTestHistory.AddMember("startTime", _StartTime)
-
-	VirtualInterfaceTestHistory_endTime = VirtualInterfaceTestHistory.AddMember("endTime", _EndTime)
-
-	_VirtualInterfaceTestHistoryList_member = _VirtualInterfaceTestHistoryList.AddMember("member", VirtualInterfaceTestHistory)
-
-	AcceptDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId = AcceptDirectConnectGatewayAssociationProposalRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	AcceptDirectConnectGatewayAssociationProposalRequest_proposalId = AcceptDirectConnectGatewayAssociationProposalRequest.AddMember("proposalId", _DirectConnectGatewayAssociationProposalId)
-
-	AcceptDirectConnectGatewayAssociationProposalRequest_associatedGatewayOwnerAccount = AcceptDirectConnectGatewayAssociationProposalRequest.AddMember("associatedGatewayOwnerAccount", _OwnerAccount)
-
-	AcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway = AcceptDirectConnectGatewayAssociationProposalRequest.AddMember("overrideAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	AcceptDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociation = AcceptDirectConnectGatewayAssociationProposalResult.AddMember("directConnectGatewayAssociation", DirectConnectGatewayAssociation)
-
-	AllocateConnectionOnInterconnectRequest_bandwidth = AllocateConnectionOnInterconnectRequest.AddMember("bandwidth", _Bandwidth)
-
-	AllocateConnectionOnInterconnectRequest_connectionName = AllocateConnectionOnInterconnectRequest.AddMember("connectionName", _ConnectionName)
-
-	AllocateConnectionOnInterconnectRequest_ownerAccount = AllocateConnectionOnInterconnectRequest.AddMember("ownerAccount", _OwnerAccount)
-
-	AllocateConnectionOnInterconnectRequest_interconnectId = AllocateConnectionOnInterconnectRequest.AddMember("interconnectId", _InterconnectId)
-
-	AllocateConnectionOnInterconnectRequest_vlan = AllocateConnectionOnInterconnectRequest.AddMember("vlan", _VLAN)
-
-	AllocateHostedConnectionRequest_connectionId = AllocateHostedConnectionRequest.AddMember("connectionId", _ConnectionId)
-
-	AllocateHostedConnectionRequest_ownerAccount = AllocateHostedConnectionRequest.AddMember("ownerAccount", _OwnerAccount)
-
-	AllocateHostedConnectionRequest_bandwidth = AllocateHostedConnectionRequest.AddMember("bandwidth", _Bandwidth)
-
-	AllocateHostedConnectionRequest_connectionName = AllocateHostedConnectionRequest.AddMember("connectionName", _ConnectionName)
-
-	AllocateHostedConnectionRequest_vlan = AllocateHostedConnectionRequest.AddMember("vlan", _VLAN)
-
-	AllocateHostedConnectionRequest_tags = AllocateHostedConnectionRequest.AddMember("tags", _TagList)
-
-	AllocatePrivateVirtualInterfaceRequest_connectionId = AllocatePrivateVirtualInterfaceRequest.AddMember("connectionId", _ConnectionId)
-
-	AllocatePrivateVirtualInterfaceRequest_ownerAccount = AllocatePrivateVirtualInterfaceRequest.AddMember("ownerAccount", _OwnerAccount)
-
-	AllocatePrivateVirtualInterfaceRequest_newPrivateVirtualInterfaceAllocation = AllocatePrivateVirtualInterfaceRequest.AddMember("newPrivateVirtualInterfaceAllocation", NewPrivateVirtualInterfaceAllocation)
-
-	AllocatePublicVirtualInterfaceRequest_connectionId = AllocatePublicVirtualInterfaceRequest.AddMember("connectionId", _ConnectionId)
-
-	AllocatePublicVirtualInterfaceRequest_ownerAccount = AllocatePublicVirtualInterfaceRequest.AddMember("ownerAccount", _OwnerAccount)
-
-	AllocatePublicVirtualInterfaceRequest_newPublicVirtualInterfaceAllocation = AllocatePublicVirtualInterfaceRequest.AddMember("newPublicVirtualInterfaceAllocation", NewPublicVirtualInterfaceAllocation)
-
-	AllocateTransitVirtualInterfaceRequest_connectionId = AllocateTransitVirtualInterfaceRequest.AddMember("connectionId", _ConnectionId)
-
-	AllocateTransitVirtualInterfaceRequest_ownerAccount = AllocateTransitVirtualInterfaceRequest.AddMember("ownerAccount", _OwnerAccount)
-
-	AllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation = AllocateTransitVirtualInterfaceRequest.AddMember("newTransitVirtualInterfaceAllocation", NewTransitVirtualInterfaceAllocation)
-
-	AllocateTransitVirtualInterfaceResult_virtualInterface = AllocateTransitVirtualInterfaceResult.AddMember("virtualInterface", VirtualInterface)
-
-	AssociateConnectionsToResiliencyGroupRequest_connectionIdentifiers = AssociateConnectionsToResiliencyGroupRequest.AddMember("connectionIdentifiers", _ConnectionIdentifierList)
-
-	AssociateConnectionsToResiliencyGroupRequest_resiliencyGroupId = AssociateConnectionsToResiliencyGroupRequest.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	AssociateConnectionsToResiliencyGroupRequest_clientToken = AssociateConnectionsToResiliencyGroupRequest.AddMember("clientToken", _IdempotencyToken)
-
-	AssociateConnectionsToResiliencyGroupResult_resiliencyGroupAssociations = AssociateConnectionsToResiliencyGroupResult.AddMember("resiliencyGroupAssociations", _ResiliencyGroupAssociationList)
-
-	AssociateConnectionWithLagRequest_connectionId = AssociateConnectionWithLagRequest.AddMember("connectionId", _ConnectionId)
-
-	AssociateConnectionWithLagRequest_lagId = AssociateConnectionWithLagRequest.AddMember("lagId", _LagId)
-
-	AssociateHostedConnectionRequest_connectionId = AssociateHostedConnectionRequest.AddMember("connectionId", _ConnectionId)
-
-	AssociateHostedConnectionRequest_parentConnectionId = AssociateHostedConnectionRequest.AddMember("parentConnectionId", _ConnectionId)
-
-	AssociateMacSecKeyRequest_connectionId = AssociateMacSecKeyRequest.AddMember("connectionId", _ConnectionId)
-
-	AssociateMacSecKeyRequest_secretARN = AssociateMacSecKeyRequest.AddMember("secretARN", _SecretARN)
-
-	AssociateMacSecKeyRequest_ckn = AssociateMacSecKeyRequest.AddMember("ckn", _Ckn)
-
-	AssociateMacSecKeyRequest_cak = AssociateMacSecKeyRequest.AddMember("cak", _Cak)
-
-	AssociateMacSecKeyResponse_connectionId = AssociateMacSecKeyResponse.AddMember("connectionId", _ConnectionId)
-
-	AssociateMacSecKeyResponse_macSecKeys = AssociateMacSecKeyResponse.AddMember("macSecKeys", _MacSecKeyList)
-
-	AssociateVirtualInterfaceRequest_virtualInterfaceId = AssociateVirtualInterfaceRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	AssociateVirtualInterfaceRequest_connectionId = AssociateVirtualInterfaceRequest.AddMember("connectionId", _ConnectionId)
-
-	ConfirmConnectionRequest_connectionId = ConfirmConnectionRequest.AddMember("connectionId", _ConnectionId)
-
-	ConfirmConnectionResponse_connectionState = ConfirmConnectionResponse.AddMember("connectionState", ConnectionState)
-
-	ConfirmCustomerAgreementRequest_agreementName = ConfirmCustomerAgreementRequest.AddMember("agreementName", _AgreementName)
-
-	ConfirmCustomerAgreementResponse_status = ConfirmCustomerAgreementResponse.AddMember("status", _Status)
-
-	ConfirmPrivateVirtualInterfaceRequest_virtualInterfaceId = ConfirmPrivateVirtualInterfaceRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	ConfirmPrivateVirtualInterfaceRequest_virtualGatewayId = ConfirmPrivateVirtualInterfaceRequest.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	ConfirmPrivateVirtualInterfaceRequest_directConnectGatewayId = ConfirmPrivateVirtualInterfaceRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	ConfirmPrivateVirtualInterfaceResponse_virtualInterfaceState = ConfirmPrivateVirtualInterfaceResponse.AddMember("virtualInterfaceState", VirtualInterfaceState)
-
-	ConfirmPublicVirtualInterfaceRequest_virtualInterfaceId = ConfirmPublicVirtualInterfaceRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState = ConfirmPublicVirtualInterfaceResponse.AddMember("virtualInterfaceState", VirtualInterfaceState)
-
-	ConfirmTransitVirtualInterfaceRequest_virtualInterfaceId = ConfirmTransitVirtualInterfaceRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	ConfirmTransitVirtualInterfaceRequest_directConnectGatewayId = ConfirmTransitVirtualInterfaceRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	ConfirmTransitVirtualInterfaceResponse_virtualInterfaceState = ConfirmTransitVirtualInterfaceResponse.AddMember("virtualInterfaceState", VirtualInterfaceState)
-
-	CreateBGPPeerRequest_virtualInterfaceId = CreateBGPPeerRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	CreateBGPPeerRequest_newBGPPeer = CreateBGPPeerRequest.AddMember("newBGPPeer", NewBGPPeer)
-
-	CreateBGPPeerResponse_virtualInterface = CreateBGPPeerResponse.AddMember("virtualInterface", VirtualInterface)
-
-	CreateConnectionRequest_location = CreateConnectionRequest.AddMember("location", _LocationCode)
-
-	CreateConnectionRequest_bandwidth = CreateConnectionRequest.AddMember("bandwidth", _Bandwidth)
-
-	CreateConnectionRequest_connectionName = CreateConnectionRequest.AddMember("connectionName", _ConnectionName)
-
-	CreateConnectionRequest_lagId = CreateConnectionRequest.AddMember("lagId", _LagId)
-
-	CreateConnectionRequest_tags = CreateConnectionRequest.AddMember("tags", _TagList)
-
-	CreateConnectionRequest_providerName = CreateConnectionRequest.AddMember("providerName", _ProviderName)
-
-	CreateConnectionRequest_requestMACSec = CreateConnectionRequest.AddMember("requestMACSec", _RequestMACSec)
-
-	CreateConnectionRequest_billingMode = CreateConnectionRequest.AddMember("billingMode", RequestBillingMode)
-
-	CreateDirectConnectGatewayAssociationRequest_directConnectGatewayId = CreateDirectConnectGatewayAssociationRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	CreateDirectConnectGatewayAssociationRequest_gatewayId = CreateDirectConnectGatewayAssociationRequest.AddMember("gatewayId", _GatewayIdToAssociate)
-
-	CreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway = CreateDirectConnectGatewayAssociationRequest.AddMember("addAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	CreateDirectConnectGatewayAssociationRequest_virtualGatewayId = CreateDirectConnectGatewayAssociationRequest.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	CreateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = CreateDirectConnectGatewayAssociationResult.AddMember("directConnectGatewayAssociation", DirectConnectGatewayAssociation)
-
-	CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId = CreateDirectConnectGatewayAssociationProposalRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayOwnerAccount = CreateDirectConnectGatewayAssociationProposalRequest.AddMember("directConnectGatewayOwnerAccount", _OwnerAccount)
-
-	CreateDirectConnectGatewayAssociationProposalRequest_gatewayId = CreateDirectConnectGatewayAssociationProposalRequest.AddMember("gatewayId", _GatewayIdToAssociate)
-
-	CreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway = CreateDirectConnectGatewayAssociationProposalRequest.AddMember("addAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	CreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway = CreateDirectConnectGatewayAssociationProposalRequest.AddMember("removeAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	CreateDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal = CreateDirectConnectGatewayAssociationProposalResult.AddMember("directConnectGatewayAssociationProposal", DirectConnectGatewayAssociationProposal)
-
-	CreateDirectConnectGatewayRequest_directConnectGatewayName = CreateDirectConnectGatewayRequest.AddMember("directConnectGatewayName", _DirectConnectGatewayName)
-
-	CreateDirectConnectGatewayRequest_tags = CreateDirectConnectGatewayRequest.AddMember("tags", _TagList)
-
-	CreateDirectConnectGatewayRequest_amazonSideAsn = CreateDirectConnectGatewayRequest.AddMember("amazonSideAsn", _LongAsn)
-
-	CreateDirectConnectGatewayResult_directConnectGateway = CreateDirectConnectGatewayResult.AddMember("directConnectGateway", DirectConnectGateway)
-
-	CreateInterconnectRequest_interconnectName = CreateInterconnectRequest.AddMember("interconnectName", _InterconnectName)
-
-	CreateInterconnectRequest_bandwidth = CreateInterconnectRequest.AddMember("bandwidth", _Bandwidth)
-
-	CreateInterconnectRequest_location = CreateInterconnectRequest.AddMember("location", _LocationCode)
-
-	CreateInterconnectRequest_lagId = CreateInterconnectRequest.AddMember("lagId", _LagId)
-
-	CreateInterconnectRequest_tags = CreateInterconnectRequest.AddMember("tags", _TagList)
-
-	CreateInterconnectRequest_providerName = CreateInterconnectRequest.AddMember("providerName", _ProviderName)
-
-	CreateInterconnectRequest_requestMACSec = CreateInterconnectRequest.AddMember("requestMACSec", _RequestMACSec)
-
-	CreateLagRequest_numberOfConnections = CreateLagRequest.AddMember("numberOfConnections", _Count)
-
-	CreateLagRequest_location = CreateLagRequest.AddMember("location", _LocationCode)
-
-	CreateLagRequest_connectionsBandwidth = CreateLagRequest.AddMember("connectionsBandwidth", _Bandwidth)
-
-	CreateLagRequest_lagName = CreateLagRequest.AddMember("lagName", _LagName)
-
-	CreateLagRequest_connectionId = CreateLagRequest.AddMember("connectionId", _ConnectionId)
-
-	CreateLagRequest_tags = CreateLagRequest.AddMember("tags", _TagList)
-
-	CreateLagRequest_childConnectionTags = CreateLagRequest.AddMember("childConnectionTags", _TagList)
-
-	CreateLagRequest_providerName = CreateLagRequest.AddMember("providerName", _ProviderName)
-
-	CreateLagRequest_requestMACSec = CreateLagRequest.AddMember("requestMACSec", _RequestMACSec)
-
-	CreateLagRequest_billingMode = CreateLagRequest.AddMember("billingMode", RequestBillingMode)
-
-	CreatePrivateVirtualInterfaceRequest_connectionId = CreatePrivateVirtualInterfaceRequest.AddMember("connectionId", _ConnectionId)
-
-	CreatePrivateVirtualInterfaceRequest_newPrivateVirtualInterface = CreatePrivateVirtualInterfaceRequest.AddMember("newPrivateVirtualInterface", NewPrivateVirtualInterface)
-
-	CreatePublicVirtualInterfaceRequest_connectionId = CreatePublicVirtualInterfaceRequest.AddMember("connectionId", _ConnectionId)
-
-	CreatePublicVirtualInterfaceRequest_newPublicVirtualInterface = CreatePublicVirtualInterfaceRequest.AddMember("newPublicVirtualInterface", NewPublicVirtualInterface)
-
-	CreateResiliencyGroupRequest_resiliencyGroupName = CreateResiliencyGroupRequest.AddMember("resiliencyGroupName", _ResiliencyGroupName)
-
-	CreateResiliencyGroupRequest_intendedResiliencyModel = CreateResiliencyGroupRequest.AddMember("intendedResiliencyModel", ResiliencyModel)
-
-	CreateResiliencyGroupRequest_clientToken = CreateResiliencyGroupRequest.AddMember("clientToken", _IdempotencyToken)
-
-	CreateResiliencyGroupRequest_tags = CreateResiliencyGroupRequest.AddMember("tags", _TagList)
-
-	CreateResiliencyGroupResult_resiliencyGroup = CreateResiliencyGroupResult.AddMember("resiliencyGroup", ResiliencyGroup)
-
-	CreateTransitVirtualInterfaceRequest_connectionId = CreateTransitVirtualInterfaceRequest.AddMember("connectionId", _ConnectionId)
-
-	CreateTransitVirtualInterfaceRequest_newTransitVirtualInterface = CreateTransitVirtualInterfaceRequest.AddMember("newTransitVirtualInterface", NewTransitVirtualInterface)
-
-	CreateTransitVirtualInterfaceResult_virtualInterface = CreateTransitVirtualInterfaceResult.AddMember("virtualInterface", VirtualInterface)
-
-	DeleteBGPPeerRequest_virtualInterfaceId = DeleteBGPPeerRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	DeleteBGPPeerRequest_asn = DeleteBGPPeerRequest.AddMember("asn", _ASN)
-
-	DeleteBGPPeerRequest_asnLong = DeleteBGPPeerRequest.AddMember("asnLong", _LongAsn)
-
-	DeleteBGPPeerRequest_customerAddress = DeleteBGPPeerRequest.AddMember("customerAddress", _CustomerAddress)
-
-	DeleteBGPPeerRequest_bgpPeerId = DeleteBGPPeerRequest.AddMember("bgpPeerId", _BGPPeerId)
-
-	DeleteBGPPeerResponse_virtualInterface = DeleteBGPPeerResponse.AddMember("virtualInterface", VirtualInterface)
-
-	DeleteConnectionRequest_connectionId = DeleteConnectionRequest.AddMember("connectionId", _ConnectionId)
-
-	DeleteDirectConnectGatewayAssociationRequest_associationId = DeleteDirectConnectGatewayAssociationRequest.AddMember("associationId", _DirectConnectGatewayAssociationId)
-
-	DeleteDirectConnectGatewayAssociationRequest_directConnectGatewayId = DeleteDirectConnectGatewayAssociationRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DeleteDirectConnectGatewayAssociationRequest_virtualGatewayId = DeleteDirectConnectGatewayAssociationRequest.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	DeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = DeleteDirectConnectGatewayAssociationResult.AddMember("directConnectGatewayAssociation", DirectConnectGatewayAssociation)
-
-	DeleteDirectConnectGatewayAssociationProposalRequest_proposalId = DeleteDirectConnectGatewayAssociationProposalRequest.AddMember("proposalId", _DirectConnectGatewayAssociationProposalId)
-
-	DeleteDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal = DeleteDirectConnectGatewayAssociationProposalResult.AddMember("directConnectGatewayAssociationProposal", DirectConnectGatewayAssociationProposal)
-
-	DeleteDirectConnectGatewayRequest_directConnectGatewayId = DeleteDirectConnectGatewayRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DeleteDirectConnectGatewayResult_directConnectGateway = DeleteDirectConnectGatewayResult.AddMember("directConnectGateway", DirectConnectGateway)
-
-	DeleteInterconnectRequest_interconnectId = DeleteInterconnectRequest.AddMember("interconnectId", _InterconnectId)
-
-	DeleteInterconnectResponse_interconnectState = DeleteInterconnectResponse.AddMember("interconnectState", InterconnectState)
-
-	DeleteLagRequest_lagId = DeleteLagRequest.AddMember("lagId", _LagId)
-
-	DeleteResiliencyGroupRequest_resiliencyGroupId = DeleteResiliencyGroupRequest.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	DeleteResiliencyGroupResult_resiliencyGroup = DeleteResiliencyGroupResult.AddMember("resiliencyGroup", ResiliencyGroup)
-
-	DeleteVirtualInterfaceRequest_virtualInterfaceId = DeleteVirtualInterfaceRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	DeleteVirtualInterfaceResponse_virtualInterfaceState = DeleteVirtualInterfaceResponse.AddMember("virtualInterfaceState", VirtualInterfaceState)
-
-	DescribeConnectionLoaRequest_connectionId = DescribeConnectionLoaRequest.AddMember("connectionId", _ConnectionId)
-
-	DescribeConnectionLoaRequest_providerName = DescribeConnectionLoaRequest.AddMember("providerName", _ProviderName)
-
-	DescribeConnectionLoaRequest_loaContentType = DescribeConnectionLoaRequest.AddMember("loaContentType", LoaContentType)
-
-	DescribeConnectionLoaResponse_loa = DescribeConnectionLoaResponse.AddMember("loa", Loa)
-
-	DescribeConnectionsRequest_connectionId = DescribeConnectionsRequest.AddMember("connectionId", _ConnectionId)
-
-	DescribeConnectionsRequest_maxResults = DescribeConnectionsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeConnectionsRequest_nextToken = DescribeConnectionsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeConnectionsOnInterconnectRequest_interconnectId = DescribeConnectionsOnInterconnectRequest.AddMember("interconnectId", _InterconnectId)
-
-	Connections_connections = Connections.AddMember("connections", _ConnectionList)
-
-	Connections_nextToken = Connections.AddMember("nextToken", _PaginationToken)
-
-	DescribeCustomerMetadataResponse_agreements = DescribeCustomerMetadataResponse.AddMember("agreements", _AgreementList)
-
-	DescribeCustomerMetadataResponse_nniPartnerType = DescribeCustomerMetadataResponse.AddMember("nniPartnerType", NniPartnerType)
-
-	DescribeDirectConnectGatewayAssociationProposalsRequest_directConnectGatewayId = DescribeDirectConnectGatewayAssociationProposalsRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DescribeDirectConnectGatewayAssociationProposalsRequest_proposalId = DescribeDirectConnectGatewayAssociationProposalsRequest.AddMember("proposalId", _DirectConnectGatewayAssociationProposalId)
-
-	DescribeDirectConnectGatewayAssociationProposalsRequest_associatedGatewayId = DescribeDirectConnectGatewayAssociationProposalsRequest.AddMember("associatedGatewayId", _AssociatedGatewayId)
-
-	DescribeDirectConnectGatewayAssociationProposalsRequest_maxResults = DescribeDirectConnectGatewayAssociationProposalsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeDirectConnectGatewayAssociationProposalsRequest_nextToken = DescribeDirectConnectGatewayAssociationProposalsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals = DescribeDirectConnectGatewayAssociationProposalsResult.AddMember("directConnectGatewayAssociationProposals", _DirectConnectGatewayAssociationProposalList)
-
-	DescribeDirectConnectGatewayAssociationProposalsResult_nextToken = DescribeDirectConnectGatewayAssociationProposalsResult.AddMember("nextToken", _PaginationToken)
-
-	DescribeDirectConnectGatewayAssociationsRequest_associationId = DescribeDirectConnectGatewayAssociationsRequest.AddMember("associationId", _DirectConnectGatewayAssociationId)
-
-	DescribeDirectConnectGatewayAssociationsRequest_associatedGatewayId = DescribeDirectConnectGatewayAssociationsRequest.AddMember("associatedGatewayId", _AssociatedGatewayId)
-
-	DescribeDirectConnectGatewayAssociationsRequest_directConnectGatewayId = DescribeDirectConnectGatewayAssociationsRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DescribeDirectConnectGatewayAssociationsRequest_maxResults = DescribeDirectConnectGatewayAssociationsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeDirectConnectGatewayAssociationsRequest_nextToken = DescribeDirectConnectGatewayAssociationsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeDirectConnectGatewayAssociationsRequest_virtualGatewayId = DescribeDirectConnectGatewayAssociationsRequest.AddMember("virtualGatewayId", _VirtualGatewayId)
-
-	DescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations = DescribeDirectConnectGatewayAssociationsResult.AddMember("directConnectGatewayAssociations", _DirectConnectGatewayAssociationList)
-
-	DescribeDirectConnectGatewayAssociationsResult_nextToken = DescribeDirectConnectGatewayAssociationsResult.AddMember("nextToken", _PaginationToken)
-
-	DescribeDirectConnectGatewayAttachmentsRequest_directConnectGatewayId = DescribeDirectConnectGatewayAttachmentsRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DescribeDirectConnectGatewayAttachmentsRequest_virtualInterfaceId = DescribeDirectConnectGatewayAttachmentsRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	DescribeDirectConnectGatewayAttachmentsRequest_maxResults = DescribeDirectConnectGatewayAttachmentsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeDirectConnectGatewayAttachmentsRequest_nextToken = DescribeDirectConnectGatewayAttachmentsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments = DescribeDirectConnectGatewayAttachmentsResult.AddMember("directConnectGatewayAttachments", _DirectConnectGatewayAttachmentList)
-
-	DescribeDirectConnectGatewayAttachmentsResult_nextToken = DescribeDirectConnectGatewayAttachmentsResult.AddMember("nextToken", _PaginationToken)
-
-	DescribeDirectConnectGatewaysRequest_directConnectGatewayId = DescribeDirectConnectGatewaysRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	DescribeDirectConnectGatewaysRequest_maxResults = DescribeDirectConnectGatewaysRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeDirectConnectGatewaysRequest_nextToken = DescribeDirectConnectGatewaysRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeDirectConnectGatewaysResult_directConnectGateways = DescribeDirectConnectGatewaysResult.AddMember("directConnectGateways", _DirectConnectGatewayList)
-
-	DescribeDirectConnectGatewaysResult_nextToken = DescribeDirectConnectGatewaysResult.AddMember("nextToken", _PaginationToken)
-
-	DescribeHostedConnectionsRequest_connectionId = DescribeHostedConnectionsRequest.AddMember("connectionId", _ConnectionId)
-
-	DescribeHostedConnectionsRequest_maxResults = DescribeHostedConnectionsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeHostedConnectionsRequest_nextToken = DescribeHostedConnectionsRequest.AddMember("nextToken", _PaginationToken)
-
-	DescribeInterconnectLoaRequest_interconnectId = DescribeInterconnectLoaRequest.AddMember("interconnectId", _InterconnectId)
-
-	DescribeInterconnectLoaRequest_providerName = DescribeInterconnectLoaRequest.AddMember("providerName", _ProviderName)
-
-	DescribeInterconnectLoaRequest_loaContentType = DescribeInterconnectLoaRequest.AddMember("loaContentType", LoaContentType)
-
-	DescribeInterconnectLoaResponse_loa = DescribeInterconnectLoaResponse.AddMember("loa", Loa)
-
-	DescribeInterconnectsRequest_interconnectId = DescribeInterconnectsRequest.AddMember("interconnectId", _InterconnectId)
-
-	DescribeInterconnectsRequest_maxResults = DescribeInterconnectsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeInterconnectsRequest_nextToken = DescribeInterconnectsRequest.AddMember("nextToken", _PaginationToken)
-
-	Interconnects_interconnects = Interconnects.AddMember("interconnects", _InterconnectList)
-
-	Interconnects_nextToken = Interconnects.AddMember("nextToken", _PaginationToken)
-
-	DescribeLagsRequest_lagId = DescribeLagsRequest.AddMember("lagId", _LagId)
-
-	DescribeLagsRequest_maxResults = DescribeLagsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeLagsRequest_nextToken = DescribeLagsRequest.AddMember("nextToken", _PaginationToken)
-
-	Lags_lags = Lags.AddMember("lags", _LagList)
-
-	Lags_nextToken = Lags.AddMember("nextToken", _PaginationToken)
-
-	DescribeLoaRequest_connectionId = DescribeLoaRequest.AddMember("connectionId", _ConnectionId)
-
-	DescribeLoaRequest_providerName = DescribeLoaRequest.AddMember("providerName", _ProviderName)
-
-	DescribeLoaRequest_loaContentType = DescribeLoaRequest.AddMember("loaContentType", LoaContentType)
-
-	Locations_locations = Locations.AddMember("locations", _LocationList)
-
-	DescribeRouterConfigurationRequest_virtualInterfaceId = DescribeRouterConfigurationRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	DescribeRouterConfigurationRequest_routerTypeIdentifier = DescribeRouterConfigurationRequest.AddMember("routerTypeIdentifier", _RouterTypeIdentifier)
-
-	DescribeRouterConfigurationResponse_customerRouterConfig = DescribeRouterConfigurationResponse.AddMember("customerRouterConfig", _RouterConfig)
-
-	DescribeRouterConfigurationResponse_router = DescribeRouterConfigurationResponse.AddMember("router", RouterType)
-
-	DescribeRouterConfigurationResponse_virtualInterfaceId = DescribeRouterConfigurationResponse.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	DescribeRouterConfigurationResponse_virtualInterfaceName = DescribeRouterConfigurationResponse.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	DescribeTagsRequest_resourceArns = DescribeTagsRequest.AddMember("resourceArns", _ResourceArnList)
-
-	DescribeTagsResponse_resourceTags = DescribeTagsResponse.AddMember("resourceTags", _ResourceTagList)
-
-	VirtualGateways_virtualGateways = VirtualGateways.AddMember("virtualGateways", _VirtualGatewayList)
-
-	DescribeVirtualInterfacesRequest_connectionId = DescribeVirtualInterfacesRequest.AddMember("connectionId", _ConnectionId)
-
-	DescribeVirtualInterfacesRequest_virtualInterfaceId = DescribeVirtualInterfacesRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	DescribeVirtualInterfacesRequest_maxResults = DescribeVirtualInterfacesRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	DescribeVirtualInterfacesRequest_nextToken = DescribeVirtualInterfacesRequest.AddMember("nextToken", _PaginationToken)
-
-	VirtualInterfaces_virtualInterfaces = VirtualInterfaces.AddMember("virtualInterfaces", _VirtualInterfaceList)
-
-	VirtualInterfaces_nextToken = VirtualInterfaces.AddMember("nextToken", _PaginationToken)
-
-	DisassociateConnectionFromLagRequest_connectionId = DisassociateConnectionFromLagRequest.AddMember("connectionId", _ConnectionId)
-
-	DisassociateConnectionFromLagRequest_lagId = DisassociateConnectionFromLagRequest.AddMember("lagId", _LagId)
-
-	DisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers = DisassociateConnectionsFromResiliencyGroupRequest.AddMember("connectionIdentifiers", _ConnectionIdentifierList)
-
-	DisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId = DisassociateConnectionsFromResiliencyGroupRequest.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	DisassociateConnectionsFromResiliencyGroupRequest_clientToken = DisassociateConnectionsFromResiliencyGroupRequest.AddMember("clientToken", _IdempotencyToken)
-
-	DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations = DisassociateConnectionsFromResiliencyGroupResult.AddMember("resiliencyGroupAssociations", _ResiliencyGroupAssociationList)
-
-	DisassociateMacSecKeyRequest_connectionId = DisassociateMacSecKeyRequest.AddMember("connectionId", _ConnectionId)
-
-	DisassociateMacSecKeyRequest_secretARN = DisassociateMacSecKeyRequest.AddMember("secretARN", _SecretARN)
-
-	DisassociateMacSecKeyResponse_connectionId = DisassociateMacSecKeyResponse.AddMember("connectionId", _ConnectionId)
-
-	DisassociateMacSecKeyResponse_macSecKeys = DisassociateMacSecKeyResponse.AddMember("macSecKeys", _MacSecKeyList)
-
-	GetResiliencyGroupRequest_resiliencyGroupId = GetResiliencyGroupRequest.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	GetResiliencyGroupResult_resiliencyGroup = GetResiliencyGroupResult.AddMember("resiliencyGroup", ResiliencyGroup)
-
-	ListResiliencyGroupAssociationsRequest_resiliencyGroupId = ListResiliencyGroupAssociationsRequest.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	ListResiliencyGroupAssociationsRequest_maxResults = ListResiliencyGroupAssociationsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	ListResiliencyGroupAssociationsRequest_nextToken = ListResiliencyGroupAssociationsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListResiliencyGroupAssociationsResult_items = ListResiliencyGroupAssociationsResult.AddMember("items", _ResiliencyGroupAssociationList)
-
-	ListResiliencyGroupAssociationsResult_nextToken = ListResiliencyGroupAssociationsResult.AddMember("nextToken", _PaginationToken)
-
-	ListResiliencyGroupsRequest_maxResults = ListResiliencyGroupsRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	ListResiliencyGroupsRequest_nextToken = ListResiliencyGroupsRequest.AddMember("nextToken", _PaginationToken)
-
-	ListResiliencyGroupsResult_items = ListResiliencyGroupsResult.AddMember("items", _ResiliencyGroupSummaryList)
-
-	ListResiliencyGroupsResult_nextToken = ListResiliencyGroupsResult.AddMember("nextToken", _PaginationToken)
-
-	ListVirtualInterfaceRoutesRequest_virtualInterfaceId = ListVirtualInterfaceRoutesRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	ListVirtualInterfaceRoutesRequest_filters = ListVirtualInterfaceRoutesRequest.AddMember("filters", RouteFilters)
-
-	ListVirtualInterfaceRoutesRequest_maxResults = ListVirtualInterfaceRoutesRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	ListVirtualInterfaceRoutesRequest_nextToken = ListVirtualInterfaceRoutesRequest.AddMember("nextToken", _PaginationToken)
-
-	ListVirtualInterfaceRoutesResponse_virtualInterfaceId = ListVirtualInterfaceRoutesResponse.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	ListVirtualInterfaceRoutesResponse_routes = ListVirtualInterfaceRoutesResponse.AddMember("routes", _RouteList)
-
-	ListVirtualInterfaceRoutesResponse_nextToken = ListVirtualInterfaceRoutesResponse.AddMember("nextToken", _PaginationToken)
-
-	ListVirtualInterfaceTestHistoryRequest_testId = ListVirtualInterfaceTestHistoryRequest.AddMember("testId", _TestId)
-
-	ListVirtualInterfaceTestHistoryRequest_virtualInterfaceId = ListVirtualInterfaceTestHistoryRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	ListVirtualInterfaceTestHistoryRequest_bgpPeers = ListVirtualInterfaceTestHistoryRequest.AddMember("bgpPeers", _BGPPeerIdList)
-
-	ListVirtualInterfaceTestHistoryRequest_status = ListVirtualInterfaceTestHistoryRequest.AddMember("status", _FailureTestHistoryStatus)
-
-	ListVirtualInterfaceTestHistoryRequest_maxResults = ListVirtualInterfaceTestHistoryRequest.AddMember("maxResults", _MaxResultSetSize)
-
-	ListVirtualInterfaceTestHistoryRequest_nextToken = ListVirtualInterfaceTestHistoryRequest.AddMember("nextToken", _PaginationToken)
-
-	ListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory = ListVirtualInterfaceTestHistoryResponse.AddMember("virtualInterfaceTestHistory", _VirtualInterfaceTestHistoryList)
-
-	ListVirtualInterfaceTestHistoryResponse_nextToken = ListVirtualInterfaceTestHistoryResponse.AddMember("nextToken", _PaginationToken)
-
-	StartBgpFailoverTestRequest_virtualInterfaceId = StartBgpFailoverTestRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	StartBgpFailoverTestRequest_bgpPeers = StartBgpFailoverTestRequest.AddMember("bgpPeers", _BGPPeerIdList)
-
-	StartBgpFailoverTestRequest_testDurationInMinutes = StartBgpFailoverTestRequest.AddMember("testDurationInMinutes", _TestDuration)
-
-	StartBgpFailoverTestResponse_virtualInterfaceTest = StartBgpFailoverTestResponse.AddMember("virtualInterfaceTest", VirtualInterfaceTestHistory)
-
-	StopBgpFailoverTestRequest_virtualInterfaceId = StopBgpFailoverTestRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	StopBgpFailoverTestResponse_virtualInterfaceTest = StopBgpFailoverTestResponse.AddMember("virtualInterfaceTest", VirtualInterfaceTestHistory)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _ResourceArn)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UpdateConnectionRequest_connectionId = UpdateConnectionRequest.AddMember("connectionId", _ConnectionId)
-
-	UpdateConnectionRequest_connectionName = UpdateConnectionRequest.AddMember("connectionName", _ConnectionName)
-
-	UpdateConnectionRequest_encryptionMode = UpdateConnectionRequest.AddMember("encryptionMode", _EncryptionMode)
-
-	UpdateConnectionsBillingModeRequest_connectionIds = UpdateConnectionsBillingModeRequest.AddMember("connectionIds", _ConnectionIdList)
-
-	UpdateConnectionsBillingModeRequest_billingMode = UpdateConnectionsBillingModeRequest.AddMember("billingMode", RequestBillingMode)
-
-	UpdateConnectionsBillingModeResponse_billingMode = UpdateConnectionsBillingModeResponse.AddMember("billingMode", BillingMode)
-
-	UpdateConnectionsBillingModeResponse_connections = UpdateConnectionsBillingModeResponse.AddMember("connections", _ConnectionList)
-
-	UpdateDirectConnectGatewayAssociationRequest_associationId = UpdateDirectConnectGatewayAssociationRequest.AddMember("associationId", _DirectConnectGatewayAssociationId)
-
-	UpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway = UpdateDirectConnectGatewayAssociationRequest.AddMember("addAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	UpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway = UpdateDirectConnectGatewayAssociationRequest.AddMember("removeAllowedPrefixesToDirectConnectGateway", _RouteFilterPrefixList)
-
-	UpdateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = UpdateDirectConnectGatewayAssociationResult.AddMember("directConnectGatewayAssociation", DirectConnectGatewayAssociation)
-
-	UpdateDirectConnectGatewayRequest_directConnectGatewayId = UpdateDirectConnectGatewayRequest.AddMember("directConnectGatewayId", _DirectConnectGatewayId)
-
-	UpdateDirectConnectGatewayRequest_newDirectConnectGatewayName = UpdateDirectConnectGatewayRequest.AddMember("newDirectConnectGatewayName", _DirectConnectGatewayName)
-
-	UpdateDirectConnectGatewayResponse_directConnectGateway = UpdateDirectConnectGatewayResponse.AddMember("directConnectGateway", DirectConnectGateway)
-
-	UpdateLagRequest_lagId = UpdateLagRequest.AddMember("lagId", _LagId)
-
-	UpdateLagRequest_lagName = UpdateLagRequest.AddMember("lagName", _LagName)
-
-	UpdateLagRequest_minimumLinks = UpdateLagRequest.AddMember("minimumLinks", _Count)
-
-	UpdateLagRequest_encryptionMode = UpdateLagRequest.AddMember("encryptionMode", _EncryptionMode)
-
-	UpdateResiliencyGroupRequest_resiliencyGroupId = UpdateResiliencyGroupRequest.AddMember("resiliencyGroupId", _ResiliencyGroupId)
-
-	UpdateResiliencyGroupRequest_resiliencyGroupName = UpdateResiliencyGroupRequest.AddMember("resiliencyGroupName", _ResiliencyGroupName)
-
-	UpdateResiliencyGroupRequest_clientToken = UpdateResiliencyGroupRequest.AddMember("clientToken", _IdempotencyToken)
-
-	UpdateResiliencyGroupResult_resiliencyGroup = UpdateResiliencyGroupResult.AddMember("resiliencyGroup", ResiliencyGroup)
-
-	UpdateVirtualInterfaceAttributesRequest_virtualInterfaceId = UpdateVirtualInterfaceAttributesRequest.AddMember("virtualInterfaceId", _VirtualInterfaceId)
-
-	UpdateVirtualInterfaceAttributesRequest_mtu = UpdateVirtualInterfaceAttributesRequest.AddMember("mtu", _MTU)
-
-	UpdateVirtualInterfaceAttributesRequest_enableSiteLink = UpdateVirtualInterfaceAttributesRequest.AddMember("enableSiteLink", _EnableSiteLink)
-
-	UpdateVirtualInterfaceAttributesRequest_virtualInterfaceName = UpdateVirtualInterfaceAttributesRequest.AddMember("virtualInterfaceName", _VirtualInterfaceName)
-
-	UpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv4 = UpdateVirtualInterfaceAttributesRequest.AddMember("prefixPoolAllocatedCountIpv4", _PrefixPoolAllocatedCount)
-
-	UpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv6 = UpdateVirtualInterfaceAttributesRequest.AddMember("prefixPoolAllocatedCountIpv6", _PrefixPoolAllocatedCount)
-
-	UpdateVirtualInterfaceAttributesRequest_rateLimit = UpdateVirtualInterfaceAttributesRequest.AddMember("rateLimit", _RateLimit)
-
-}
+var (
+	iAcceptDirectConnectGatewayAssociationProposal           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AcceptDirectConnectGatewayAssociationProposal"}
+	iAllocateConnectionOnInterconnect                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocateConnectionOnInterconnect"}
+	iAllocateHostedConnection                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocateHostedConnection"}
+	iAllocatePrivateVirtualInterface                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocatePrivateVirtualInterface"}
+	iAllocatePublicVirtualInterface                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocatePublicVirtualInterface"}
+	iAllocateTransitVirtualInterface                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocateTransitVirtualInterface"}
+	iAssociateConnectionsToResiliencyGroup                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateConnectionsToResiliencyGroup"}
+	iAssociateConnectionWithLag                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateConnectionWithLag"}
+	iAssociateHostedConnection                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateHostedConnection"}
+	iAssociateMacSecKey                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateMacSecKey"}
+	iAssociateVirtualInterface                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateVirtualInterface"}
+	iConfirmConnection                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmConnection"}
+	iConfirmCustomerAgreement                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmCustomerAgreement"}
+	iConfirmPrivateVirtualInterface                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmPrivateVirtualInterface"}
+	iConfirmPublicVirtualInterface                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmPublicVirtualInterface"}
+	iConfirmTransitVirtualInterface                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmTransitVirtualInterface"}
+	iCreateBGPPeer                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateBGPPeer"}
+	iCreateConnection                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateConnection"}
+	iCreateDirectConnectGateway                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGateway"}
+	iCreateDirectConnectGatewayAssociation                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayAssociation"}
+	iCreateDirectConnectGatewayAssociationProposal           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayAssociationProposal"}
+	iCreateInterconnect                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateInterconnect"}
+	iCreateLag                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateLag"}
+	iCreatePrivateVirtualInterface                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreatePrivateVirtualInterface"}
+	iCreatePublicVirtualInterface                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreatePublicVirtualInterface"}
+	iCreateResiliencyGroup                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateResiliencyGroup"}
+	iCreateTransitVirtualInterface                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateTransitVirtualInterface"}
+	iDeleteBGPPeer                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteBGPPeer"}
+	iDeleteConnection                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteConnection"}
+	iDeleteDirectConnectGateway                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGateway"}
+	iDeleteDirectConnectGatewayAssociation                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayAssociation"}
+	iDeleteDirectConnectGatewayAssociationProposal           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayAssociationProposal"}
+	iDeleteInterconnect                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteInterconnect"}
+	iDeleteLag                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteLag"}
+	iDeleteResiliencyGroup                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteResiliencyGroup"}
+	iDeleteVirtualInterface                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteVirtualInterface"}
+	iDescribeConnectionLoa                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeConnectionLoa"}
+	iDescribeConnections                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeConnections"}
+	iDescribeConnectionsOnInterconnect                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeConnectionsOnInterconnect"}
+	iDescribeCustomerMetadata                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeCustomerMetadata"}
+	iDescribeDirectConnectGatewayAssociationProposals        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAssociationProposals"}
+	iDescribeDirectConnectGatewayAssociations                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAssociations"}
+	iDescribeDirectConnectGatewayAttachments                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAttachments"}
+	iDescribeDirectConnectGateways                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGateways"}
+	iDescribeHostedConnections                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeHostedConnections"}
+	iDescribeInterconnectLoa                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeInterconnectLoa"}
+	iDescribeInterconnects                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeInterconnects"}
+	iDescribeLags                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeLags"}
+	iDescribeLoa                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeLoa"}
+	iDescribeLocations                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeLocations"}
+	iDescribeRouterConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeRouterConfiguration"}
+	iDescribeTags                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeTags"}
+	iDescribeVirtualGateways                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeVirtualGateways"}
+	iDescribeVirtualInterfaces                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeVirtualInterfaces"}
+	iDisassociateConnectionFromLag                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateConnectionFromLag"}
+	iDisassociateConnectionsFromResiliencyGroup              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateConnectionsFromResiliencyGroup"}
+	iDisassociateMacSecKey                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateMacSecKey"}
+	iGetResiliencyGroup                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "GetResiliencyGroup"}
+	iListResiliencyGroupAssociations                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListResiliencyGroupAssociations"}
+	iListResiliencyGroups                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListResiliencyGroups"}
+	iListVirtualInterfaceRoutes                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListVirtualInterfaceRoutes"}
+	iListVirtualInterfaceTestHistory                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListVirtualInterfaceTestHistory"}
+	iStartBgpFailoverTest                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StartBgpFailoverTest"}
+	iStopBgpFailoverTest                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StopBgpFailoverTest"}
+	iTagResource                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TagResource"}
+	iUntagResource                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UntagResource"}
+	iUpdateConnection                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateConnection"}
+	iUpdateConnectionsBillingMode                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateConnectionsBillingMode"}
+	iUpdateDirectConnectGateway                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateDirectConnectGateway"}
+	iUpdateDirectConnectGatewayAssociation                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateDirectConnectGatewayAssociation"}
+	iUpdateLag                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateLag"}
+	iUpdateResiliencyGroup                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateResiliencyGroup"}
+	iUpdateVirtualInterfaceAttributes                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateVirtualInterfaceAttributes"}
+	i_OvertureService                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "OvertureService"}
+	iAddressFamily                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AddressFamily"}
+	i_AgreementList                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AgreementList"}
+	i_AgreementName                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AgreementName"}
+	i_AmazonAddress                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AmazonAddress"}
+	i_ASN                                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ASN"}
+	i_AsPathList                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AsPathList"}
+	iAsPathSegment                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AsPathSegment"}
+	i_AsPathSegmentList                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AsPathSegmentList"}
+	iAsPathType                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AsPathType"}
+	iAssociatedCoreNetwork                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociatedCoreNetwork"}
+	iAssociatedGateway                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociatedGateway"}
+	i_AssociatedGatewayId                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociatedGatewayId"}
+	iAvailableBillingMode                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AvailableBillingMode"}
+	i_AvailableBillingModeList                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AvailableBillingModeList"}
+	i_AvailableMacSecPortSpeeds                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AvailableMacSecPortSpeeds"}
+	i_AvailablePortSpeeds                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AvailablePortSpeeds"}
+	i_AwsDevice                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AwsDevice"}
+	i_AwsDeviceV2                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AwsDeviceV2"}
+	i_AwsLogicalDeviceId                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AwsLogicalDeviceId"}
+	i_Bandwidth                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Bandwidth"}
+	i_BGPAuthKey                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BGPAuthKey"}
+	iBGPPeer                                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BGPPeer"}
+	i_BGPPeerId                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BGPPeerId"}
+	i_BGPPeerIdList                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BGPPeerIdList"}
+	i_BGPPeerList                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BGPPeerList"}
+	iBGPPeerState                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BGPPeerState"}
+	iBGPStatus                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BGPStatus"}
+	iBillingMode                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BillingMode"}
+	i_BooleanFlag                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "BooleanFlag"}
+	i_Cak                                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Cak"}
+	i_CIDR                                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CIDR"}
+	i_Ckn                                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Ckn"}
+	i_CommunityEntry                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CommunityEntry"}
+	i_CommunityList                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CommunityList"}
+	iConnection                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Connection"}
+	i_ConnectionArn                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionArn"}
+	i_ConnectionId                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionId"}
+	i_ConnectionIdentifier                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionIdentifier"}
+	i_ConnectionIdentifierList                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionIdentifierList"}
+	i_ConnectionIdList                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionIdList"}
+	i_ConnectionList                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionList"}
+	i_ConnectionName                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionName"}
+	iConnectionState                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConnectionState"}
+	i_CoreNetworkAttachmentId                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CoreNetworkAttachmentId"}
+	i_CoreNetworkIdentifier                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CoreNetworkIdentifier"}
+	i_Count                                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Count"}
+	i_CustomerAddress                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CustomerAddress"}
+	iCustomerAgreement                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CustomerAgreement"}
+	iDirectConnectClientException                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectClientException"}
+	iDirectConnectGateway                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGateway"}
+	iDirectConnectGatewayAssociation                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociation"}
+	i_DirectConnectGatewayAssociationId                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociationId"}
+	i_DirectConnectGatewayAssociationList                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociationList"}
+	iDirectConnectGatewayAssociationProposal                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociationProposal"}
+	i_DirectConnectGatewayAssociationProposalId              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociationProposalId"}
+	i_DirectConnectGatewayAssociationProposalList            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociationProposalList"}
+	iDirectConnectGatewayAssociationProposalState            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociationProposalState"}
+	iDirectConnectGatewayAssociationState                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAssociationState"}
+	iDirectConnectGatewayAttachment                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAttachment"}
+	i_DirectConnectGatewayAttachmentList                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAttachmentList"}
+	iDirectConnectGatewayAttachmentState                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAttachmentState"}
+	iDirectConnectGatewayAttachmentType                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayAttachmentType"}
+	i_DirectConnectGatewayId                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayId"}
+	i_DirectConnectGatewayList                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayList"}
+	i_DirectConnectGatewayName                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayName"}
+	iDirectConnectGatewayState                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectGatewayState"}
+	iDirectConnectServerException                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DirectConnectServerException"}
+	iDuplicateTagKeysException                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DuplicateTagKeysException"}
+	i_EnableSiteLink                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "EnableSiteLink"}
+	i_EncryptionMode                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "EncryptionMode"}
+	i_EndTime                                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "EndTime"}
+	i_ErrorMessage                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ErrorMessage"}
+	i_FailureTestHistoryStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "FailureTestHistoryStatus"}
+	i_GatewayIdentifier                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "GatewayIdentifier"}
+	i_GatewayIdToAssociate                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "GatewayIdToAssociate"}
+	iGatewayType                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "GatewayType"}
+	iHasLogicalRedundancy                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "HasLogicalRedundancy"}
+	i_IdempotencyToken                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "IdempotencyToken"}
+	i_IncludedRegionList                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "IncludedRegionList"}
+	iInterconnect                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Interconnect"}
+	i_InterconnectId                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "InterconnectId"}
+	i_InterconnectList                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "InterconnectList"}
+	i_InterconnectName                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "InterconnectName"}
+	iInterconnectState                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "InterconnectState"}
+	i_JumboFrameCapable                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "JumboFrameCapable"}
+	iLag                                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Lag"}
+	i_LagId                                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LagId"}
+	i_LagList                                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LagList"}
+	i_LagName                                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LagName"}
+	iLagState                                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LagState"}
+	iLimitExceededException                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LimitExceededException"}
+	iLoa                                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Loa"}
+	i_LoaContent                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LoaContent"}
+	iLoaContentType                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LoaContentType"}
+	i_LoaIssueTime                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LoaIssueTime"}
+	iLocation                                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Location"}
+	i_LocationCode                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LocationCode"}
+	i_LocationList                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LocationList"}
+	i_LocationName                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LocationName"}
+	i_LongAsn                                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "LongAsn"}
+	i_MacSecCapable                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "MacSecCapable"}
+	iMacSecKey                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "MacSecKey"}
+	i_MacSecKeyList                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "MacSecKeyList"}
+	i_MaxResultSetSize                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "MaxResultSetSize"}
+	i_MTU                                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "MTU"}
+	iNewBGPPeer                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NewBGPPeer"}
+	iNewPrivateVirtualInterface                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NewPrivateVirtualInterface"}
+	iNewPrivateVirtualInterfaceAllocation                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NewPrivateVirtualInterfaceAllocation"}
+	iNewPublicVirtualInterface                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NewPublicVirtualInterface"}
+	iNewPublicVirtualInterfaceAllocation                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NewPublicVirtualInterfaceAllocation"}
+	iNewTransitVirtualInterface                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NewTransitVirtualInterface"}
+	iNewTransitVirtualInterfaceAllocation                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NewTransitVirtualInterfaceAllocation"}
+	iNniPartnerType                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "NniPartnerType"}
+	i_OwnerAccount                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "OwnerAccount"}
+	i_PaginationToken                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PaginationToken"}
+	i_PartnerInterconnectMacSecCapable                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PartnerInterconnectMacSecCapable"}
+	i_PartnerName                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PartnerName"}
+	i_Platform                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Platform"}
+	i_PortEncryptionStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PortEncryptionStatus"}
+	i_PortSpeed                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PortSpeed"}
+	i_PrefixPoolAllocatedCount                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PrefixPoolAllocatedCount"}
+	i_PrefixPoolSize                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PrefixPoolSize"}
+	i_PrefixPoolUnallocatedCount                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "PrefixPoolUnallocatedCount"}
+	i_ProviderList                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ProviderList"}
+	i_ProviderName                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ProviderName"}
+	i_RateLimit                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RateLimit"}
+	iRateLimiterStatus                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RateLimiterStatus"}
+	i_Region                                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Region"}
+	iRequestBillingMode                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RequestBillingMode"}
+	i_RequestMACSec                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RequestMACSec"}
+	iResiliencyGroup                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroup"}
+	i_ResiliencyGroupArn                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupArn"}
+	iResiliencyGroupAssociation                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupAssociation"}
+	i_ResiliencyGroupAssociationList                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupAssociationList"}
+	iResiliencyGroupAssociationState                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupAssociationState"}
+	i_ResiliencyGroupId                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupId"}
+	i_ResiliencyGroupName                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupName"}
+	iResiliencyGroupState                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupState"}
+	iResiliencyGroupSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupSummary"}
+	i_ResiliencyGroupSummaryList                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupSummaryList"}
+	iResiliencyGroupType                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyGroupType"}
+	iResiliencyModel                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResiliencyModel"}
+	i_ResourceArn                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResourceArn"}
+	i_ResourceArnList                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResourceArnList"}
+	iResourceTag                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResourceTag"}
+	i_ResourceTagList                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ResourceTagList"}
+	iRoute                                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Route"}
+	i_RouteCidr                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteCidr"}
+	iRouteDirection                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteDirection"}
+	i_RouteFilterCidrString                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteFilterCidrString"}
+	i_RouteFilterCidrStringList                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteFilterCidrStringList"}
+	iRouteFilterPrefix                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteFilterPrefix"}
+	i_RouteFilterPrefixList                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteFilterPrefixList"}
+	iRouteFilters                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteFilters"}
+	i_RouteInstalledAt                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteInstalledAt"}
+	i_RouteList                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouteList"}
+	i_RouterConfig                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouterConfig"}
+	iRouterType                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouterType"}
+	i_RouterTypeIdentifier                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "RouterTypeIdentifier"}
+	i_SecretARN                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "SecretARN"}
+	i_SiteLinkEnabled                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "SiteLinkEnabled"}
+	i_Software                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Software"}
+	i_StartOnDate                                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StartOnDate"}
+	i_StartTime                                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StartTime"}
+	i_State                                                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "State"}
+	i_StateChangeError                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StateChangeError"}
+	i_Status                                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Status"}
+	iTag                                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Tag"}
+	i_TagKey                                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TagKey"}
+	i_TagKeyList                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TagKeyList"}
+	i_TagList                                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TagList"}
+	i_TagValue                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TagValue"}
+	i_TestDuration                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TestDuration"}
+	i_TestId                                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TestId"}
+	iTooManyTagsException                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TooManyTagsException"}
+	i_Vendor                                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Vendor"}
+	iVirtualGateway                                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualGateway"}
+	i_VirtualGatewayId                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualGatewayId"}
+	i_VirtualGatewayList                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualGatewayList"}
+	i_VirtualGatewayRegion                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualGatewayRegion"}
+	i_VirtualGatewayState                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualGatewayState"}
+	iVirtualInterface                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterface"}
+	i_VirtualInterfaceId                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceId"}
+	i_VirtualInterfaceList                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceList"}
+	i_VirtualInterfaceName                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceName"}
+	i_VirtualInterfaceRegion                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceRegion"}
+	iVirtualInterfaceState                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceState"}
+	iVirtualInterfaceTestHistory                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceTestHistory"}
+	i_VirtualInterfaceTestHistoryList                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceTestHistoryList"}
+	i_VirtualInterfaceType                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaceType"}
+	i_VLAN                                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VLAN"}
+	i_XsltTemplateName                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "XsltTemplateName"}
+	i_XsltTemplateNameForMacSec                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "XsltTemplateNameForMacSec"}
+	iAcceptDirectConnectGatewayAssociationProposalRequest    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AcceptDirectConnectGatewayAssociationProposalRequest"}
+	iAcceptDirectConnectGatewayAssociationProposalResult     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AcceptDirectConnectGatewayAssociationProposalResult"}
+	iAllocateConnectionOnInterconnectRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocateConnectionOnInterconnectRequest"}
+	iAllocateHostedConnectionRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocateHostedConnectionRequest"}
+	iAllocatePrivateVirtualInterfaceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocatePrivateVirtualInterfaceRequest"}
+	iAllocatePublicVirtualInterfaceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocatePublicVirtualInterfaceRequest"}
+	iAllocateTransitVirtualInterfaceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocateTransitVirtualInterfaceRequest"}
+	iAllocateTransitVirtualInterfaceResult                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AllocateTransitVirtualInterfaceResult"}
+	iAssociateConnectionsToResiliencyGroupRequest            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateConnectionsToResiliencyGroupRequest"}
+	iAssociateConnectionsToResiliencyGroupResult             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateConnectionsToResiliencyGroupResult"}
+	iAssociateConnectionWithLagRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateConnectionWithLagRequest"}
+	iAssociateHostedConnectionRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateHostedConnectionRequest"}
+	iAssociateMacSecKeyRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateMacSecKeyRequest"}
+	iAssociateMacSecKeyResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateMacSecKeyResponse"}
+	iAssociateVirtualInterfaceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "AssociateVirtualInterfaceRequest"}
+	iConfirmConnectionRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmConnectionRequest"}
+	iConfirmConnectionResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmConnectionResponse"}
+	iConfirmCustomerAgreementRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmCustomerAgreementRequest"}
+	iConfirmCustomerAgreementResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmCustomerAgreementResponse"}
+	iConfirmPrivateVirtualInterfaceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmPrivateVirtualInterfaceRequest"}
+	iConfirmPrivateVirtualInterfaceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmPrivateVirtualInterfaceResponse"}
+	iConfirmPublicVirtualInterfaceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmPublicVirtualInterfaceRequest"}
+	iConfirmPublicVirtualInterfaceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmPublicVirtualInterfaceResponse"}
+	iConfirmTransitVirtualInterfaceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmTransitVirtualInterfaceRequest"}
+	iConfirmTransitVirtualInterfaceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ConfirmTransitVirtualInterfaceResponse"}
+	iCreateBGPPeerRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateBGPPeerRequest"}
+	iCreateBGPPeerResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateBGPPeerResponse"}
+	iCreateConnectionRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateConnectionRequest"}
+	iCreateDirectConnectGatewayAssociationRequest            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayAssociationRequest"}
+	iCreateDirectConnectGatewayAssociationResult             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayAssociationResult"}
+	iCreateDirectConnectGatewayAssociationProposalRequest    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayAssociationProposalRequest"}
+	iCreateDirectConnectGatewayAssociationProposalResult     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayAssociationProposalResult"}
+	iCreateDirectConnectGatewayRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayRequest"}
+	iCreateDirectConnectGatewayResult                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateDirectConnectGatewayResult"}
+	iCreateInterconnectRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateInterconnectRequest"}
+	iCreateLagRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateLagRequest"}
+	iCreatePrivateVirtualInterfaceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreatePrivateVirtualInterfaceRequest"}
+	iCreatePublicVirtualInterfaceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreatePublicVirtualInterfaceRequest"}
+	iCreateResiliencyGroupRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateResiliencyGroupRequest"}
+	iCreateResiliencyGroupResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateResiliencyGroupResult"}
+	iCreateTransitVirtualInterfaceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateTransitVirtualInterfaceRequest"}
+	iCreateTransitVirtualInterfaceResult                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "CreateTransitVirtualInterfaceResult"}
+	iDeleteBGPPeerRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteBGPPeerRequest"}
+	iDeleteBGPPeerResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteBGPPeerResponse"}
+	iDeleteConnectionRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteConnectionRequest"}
+	iDeleteDirectConnectGatewayAssociationRequest            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayAssociationRequest"}
+	iDeleteDirectConnectGatewayAssociationResult             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayAssociationResult"}
+	iDeleteDirectConnectGatewayAssociationProposalRequest    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayAssociationProposalRequest"}
+	iDeleteDirectConnectGatewayAssociationProposalResult     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayAssociationProposalResult"}
+	iDeleteDirectConnectGatewayRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayRequest"}
+	iDeleteDirectConnectGatewayResult                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteDirectConnectGatewayResult"}
+	iDeleteInterconnectRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteInterconnectRequest"}
+	iDeleteInterconnectResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteInterconnectResponse"}
+	iDeleteLagRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteLagRequest"}
+	iDeleteResiliencyGroupRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteResiliencyGroupRequest"}
+	iDeleteResiliencyGroupResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteResiliencyGroupResult"}
+	iDeleteVirtualInterfaceRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteVirtualInterfaceRequest"}
+	iDeleteVirtualInterfaceResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DeleteVirtualInterfaceResponse"}
+	iDescribeConnectionLoaRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeConnectionLoaRequest"}
+	iDescribeConnectionLoaResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeConnectionLoaResponse"}
+	iDescribeConnectionsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeConnectionsRequest"}
+	iDescribeConnectionsOnInterconnectRequest                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeConnectionsOnInterconnectRequest"}
+	iConnections                                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Connections"}
+	iDescribeCustomerMetadataResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeCustomerMetadataResponse"}
+	iDescribeDirectConnectGatewayAssociationProposalsRequest = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAssociationProposalsRequest"}
+	iDescribeDirectConnectGatewayAssociationProposalsResult  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAssociationProposalsResult"}
+	iDescribeDirectConnectGatewayAssociationsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAssociationsRequest"}
+	iDescribeDirectConnectGatewayAssociationsResult          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAssociationsResult"}
+	iDescribeDirectConnectGatewayAttachmentsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAttachmentsRequest"}
+	iDescribeDirectConnectGatewayAttachmentsResult           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewayAttachmentsResult"}
+	iDescribeDirectConnectGatewaysRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewaysRequest"}
+	iDescribeDirectConnectGatewaysResult                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeDirectConnectGatewaysResult"}
+	iDescribeHostedConnectionsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeHostedConnectionsRequest"}
+	iDescribeInterconnectLoaRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeInterconnectLoaRequest"}
+	iDescribeInterconnectLoaResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeInterconnectLoaResponse"}
+	iDescribeInterconnectsRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeInterconnectsRequest"}
+	iInterconnects                                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Interconnects"}
+	iDescribeLagsRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeLagsRequest"}
+	iLags                                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Lags"}
+	iDescribeLoaRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeLoaRequest"}
+	iLocations                                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "Locations"}
+	iDescribeRouterConfigurationRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeRouterConfigurationRequest"}
+	iDescribeRouterConfigurationResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeRouterConfigurationResponse"}
+	iDescribeTagsRequest                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeTagsRequest"}
+	iDescribeTagsResponse                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeTagsResponse"}
+	iVirtualGateways                                         = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualGateways"}
+	iDescribeVirtualInterfacesRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DescribeVirtualInterfacesRequest"}
+	iVirtualInterfaces                                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "VirtualInterfaces"}
+	iDisassociateConnectionFromLagRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateConnectionFromLagRequest"}
+	iDisassociateConnectionsFromResiliencyGroupRequest       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateConnectionsFromResiliencyGroupRequest"}
+	iDisassociateConnectionsFromResiliencyGroupResult        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateConnectionsFromResiliencyGroupResult"}
+	iDisassociateMacSecKeyRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateMacSecKeyRequest"}
+	iDisassociateMacSecKeyResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "DisassociateMacSecKeyResponse"}
+	iGetResiliencyGroupRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "GetResiliencyGroupRequest"}
+	iGetResiliencyGroupResult                                = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "GetResiliencyGroupResult"}
+	iListResiliencyGroupAssociationsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListResiliencyGroupAssociationsRequest"}
+	iListResiliencyGroupAssociationsResult                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListResiliencyGroupAssociationsResult"}
+	iListResiliencyGroupsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListResiliencyGroupsRequest"}
+	iListResiliencyGroupsResult                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListResiliencyGroupsResult"}
+	iListVirtualInterfaceRoutesRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListVirtualInterfaceRoutesRequest"}
+	iListVirtualInterfaceRoutesResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListVirtualInterfaceRoutesResponse"}
+	iListVirtualInterfaceTestHistoryRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListVirtualInterfaceTestHistoryRequest"}
+	iListVirtualInterfaceTestHistoryResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "ListVirtualInterfaceTestHistoryResponse"}
+	iStartBgpFailoverTestRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StartBgpFailoverTestRequest"}
+	iStartBgpFailoverTestResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StartBgpFailoverTestResponse"}
+	iStopBgpFailoverTestRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StopBgpFailoverTestRequest"}
+	iStopBgpFailoverTestResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "StopBgpFailoverTestResponse"}
+	iTagResourceRequest                                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TagResourceRequest"}
+	iTagResourceResponse                                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UntagResourceResponse"}
+	iUpdateConnectionRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateConnectionRequest"}
+	iUpdateConnectionsBillingModeRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateConnectionsBillingModeRequest"}
+	iUpdateConnectionsBillingModeResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateConnectionsBillingModeResponse"}
+	iUpdateDirectConnectGatewayAssociationRequest            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateDirectConnectGatewayAssociationRequest"}
+	iUpdateDirectConnectGatewayAssociationResult             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateDirectConnectGatewayAssociationResult"}
+	iUpdateDirectConnectGatewayRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateDirectConnectGatewayRequest"}
+	iUpdateDirectConnectGatewayResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateDirectConnectGatewayResponse"}
+	iUpdateLagRequest                                        = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateLagRequest"}
+	iUpdateResiliencyGroupRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateResiliencyGroupRequest"}
+	iUpdateResiliencyGroupResult                             = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateResiliencyGroupResult"}
+	iUpdateVirtualInterfaceAttributesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.directconnect", Name: "UpdateVirtualInterfaceAttributesRequest"}
+	pUnit                                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://directconnect.amazonaws.com/doc/2012-10-25/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAddressFamily = smithy.SchemaMembers{List: []*smithy.Schema{&sAddressFamily_IPv4, &sAddressFamily_IPv6}}
+var m_AgreementList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AgreementList_member}}
+var m_AsPathList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AsPathList_member}}
+var mAsPathSegment = smithy.SchemaMembers{List: []*smithy.Schema{&sAsPathSegment_pathType, &sAsPathSegment_path}}
+var m_AsPathSegmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AsPathSegmentList_member}}
+var mAsPathType = smithy.SchemaMembers{List: []*smithy.Schema{&sAsPathType_Seq, &sAsPathType_Set}}
+var mAssociatedCoreNetwork = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedCoreNetwork_id, &sAssociatedCoreNetwork_ownerAccount, &sAssociatedCoreNetwork_attachmentId}}
+var mAssociatedGateway = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedGateway_id, &sAssociatedGateway_type, &sAssociatedGateway_ownerAccount, &sAssociatedGateway_region}}
+var mAvailableBillingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sAvailableBillingMode_billingMode, &sAvailableBillingMode_availablePortSpeeds, &sAvailableBillingMode_includedRegions}}
+var m_AvailableBillingModeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailableBillingModeList_member}}
+var m_AvailableMacSecPortSpeeds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailableMacSecPortSpeeds_member}}
+var m_AvailablePortSpeeds = smithy.SchemaMembers{List: []*smithy.Schema{&s_AvailablePortSpeeds_member}}
+var mBGPPeer = smithy.SchemaMembers{List: []*smithy.Schema{&sBGPPeer_bgpPeerId, &sBGPPeer_asn, &sBGPPeer_asnLong, &sBGPPeer_authKey, &sBGPPeer_addressFamily, &sBGPPeer_amazonAddress, &sBGPPeer_customerAddress, &sBGPPeer_bgpPeerState, &sBGPPeer_bgpStatus, &sBGPPeer_awsDeviceV2, &sBGPPeer_awsLogicalDeviceId}, Seed: 5, Slots: []uint16{
+	0, 0, 7, 9, 6, 0, 0, 0, 0, 0, 10, 0, 2, 0, 11, 0, 0, 1, 8, 0, 0, 5, 0, 0,
+	0, 0, 0, 0, 4, 3, 0, 0,
+}}
+var m_BGPPeerIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BGPPeerIdList_member}}
+var m_BGPPeerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_BGPPeerList_member}}
+var mBGPPeerState = smithy.SchemaMembers{List: []*smithy.Schema{&sBGPPeerState_Verifying, &sBGPPeerState_Pending, &sBGPPeerState_Available, &sBGPPeerState_Deleting, &sBGPPeerState_Deleted}}
+var mBGPStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sBGPStatus_Up, &sBGPStatus_Down, &sBGPStatus_Unknown}}
+var mBillingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sBillingMode_PayAsYouGo, &sBillingMode_FlatRateTier1, &sBillingMode_FlatRateTier2, &sBillingMode_FlatRateTier3, &sBillingMode_FlatRateTier4, &sBillingMode_FlatRateTier5, &sBillingMode_PortPairFlatRateTier1, &sBillingMode_PortPairFlatRateTier2, &sBillingMode_PortPairFlatRateTier3, &sBillingMode_PortPairFlatRateTier4, &sBillingMode_PortPairFlatRateTier5}, Seed: 4, Slots: []uint16{
+	9, 3, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 10, 1, 7, 11, 0, 5, 0, 0, 0, 0, 0,
+	0, 2, 6, 0, 0, 8, 0, 0,
+}}
+var m_CommunityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CommunityList_member}}
+var mConnection = smithy.SchemaMembers{List: []*smithy.Schema{&sConnection_ownerAccount, &sConnection_connectionId, &sConnection_connectionName, &sConnection_connectionState, &sConnection_region, &sConnection_location, &sConnection_bandwidth, &sConnection_vlan, &sConnection_partnerName, &sConnection_loaIssueTime, &sConnection_lagId, &sConnection_awsDevice, &sConnection_jumboFrameCapable, &sConnection_awsDeviceV2, &sConnection_awsLogicalDeviceId, &sConnection_hasLogicalRedundancy, &sConnection_tags, &sConnection_providerName, &sConnection_macSecCapable, &sConnection_portEncryptionStatus, &sConnection_encryptionMode, &sConnection_macSecKeys, &sConnection_rateLimiterStatus, &sConnection_partnerInterconnectMacSecCapable, &sConnection_prefixPoolSizeIpv4, &sConnection_prefixPoolSizeIpv6, &sConnection_prefixPoolUnallocatedCountIpv4, &sConnection_prefixPoolUnallocatedCountIpv6, &sConnection_billingMode}, Seed: 922, Slots: []uint16{
+	9, 7, 28, 18, 0, 12, 0, 0, 0, 0, 20, 29, 22, 24, 0, 0, 0, 0, 26, 0, 0, 0, 0, 4,
+	6, 0, 13, 0, 8, 0, 15, 0, 0, 0, 1, 0, 23, 0, 0, 0, 27, 0, 0, 19, 2, 0, 25, 16,
+	14, 0, 0, 0, 3, 0, 21, 5, 0, 0, 10, 11, 0, 0, 17, 0,
+}}
+var m_ConnectionIdentifierList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionIdentifierList_member}}
+var m_ConnectionIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionIdList_member}}
+var m_ConnectionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConnectionList_member}}
+var mConnectionState = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectionState_ordering, &sConnectionState_requested, &sConnectionState_pending, &sConnectionState_available, &sConnectionState_down, &sConnectionState_deleting, &sConnectionState_deleted, &sConnectionState_rejected, &sConnectionState_unknown}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 1, 0, 0, 5, 0, 6, 0, 2, 0, 0, 0, 0, 0, 0, 3, 0, 8, 0, 0, 9, 0,
+	0, 0, 7, 0, 0, 0, 4, 0,
+}}
+var mCustomerAgreement = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomerAgreement_agreementName, &sCustomerAgreement_status}}
+var mDirectConnectClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectClientException_message}}
+var mDirectConnectGateway = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGateway_directConnectGatewayId, &sDirectConnectGateway_directConnectGatewayName, &sDirectConnectGateway_amazonSideAsn, &sDirectConnectGateway_ownerAccount, &sDirectConnectGateway_directConnectGatewayState, &sDirectConnectGateway_stateChangeError, &sDirectConnectGateway_totalPrefixPoolAllocations, &sDirectConnectGateway_tags}}
+var mDirectConnectGatewayAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAssociation_directConnectGatewayId, &sDirectConnectGatewayAssociation_directConnectGatewayOwnerAccount, &sDirectConnectGatewayAssociation_associationState, &sDirectConnectGatewayAssociation_stateChangeError, &sDirectConnectGatewayAssociation_associatedGateway, &sDirectConnectGatewayAssociation_associationId, &sDirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway, &sDirectConnectGatewayAssociation_associatedCoreNetwork, &sDirectConnectGatewayAssociation_virtualGatewayId, &sDirectConnectGatewayAssociation_virtualGatewayRegion, &sDirectConnectGatewayAssociation_virtualGatewayOwnerAccount}, Seed: 30, Slots: []uint16{
+	7, 0, 8, 0, 1, 6, 0, 0, 9, 0, 10, 3, 0, 0, 11, 2, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 5, 4, 0,
+}}
+var m_DirectConnectGatewayAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectConnectGatewayAssociationList_member}}
+var mDirectConnectGatewayAssociationProposal = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAssociationProposal_proposalId, &sDirectConnectGatewayAssociationProposal_directConnectGatewayId, &sDirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount, &sDirectConnectGatewayAssociationProposal_proposalState, &sDirectConnectGatewayAssociationProposal_associatedGateway, &sDirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway, &sDirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway}}
+var m_DirectConnectGatewayAssociationProposalList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectConnectGatewayAssociationProposalList_member}}
+var mDirectConnectGatewayAssociationProposalState = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAssociationProposalState_requested, &sDirectConnectGatewayAssociationProposalState_accepted, &sDirectConnectGatewayAssociationProposalState_deleted}}
+var mDirectConnectGatewayAssociationState = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAssociationState_associating, &sDirectConnectGatewayAssociationState_associated, &sDirectConnectGatewayAssociationState_disassociating, &sDirectConnectGatewayAssociationState_disassociated, &sDirectConnectGatewayAssociationState_updating}}
+var mDirectConnectGatewayAttachment = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAttachment_directConnectGatewayId, &sDirectConnectGatewayAttachment_virtualInterfaceId, &sDirectConnectGatewayAttachment_virtualInterfaceRegion, &sDirectConnectGatewayAttachment_virtualInterfaceOwnerAccount, &sDirectConnectGatewayAttachment_attachmentState, &sDirectConnectGatewayAttachment_attachmentType, &sDirectConnectGatewayAttachment_stateChangeError}}
+var m_DirectConnectGatewayAttachmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectConnectGatewayAttachmentList_member}}
+var mDirectConnectGatewayAttachmentState = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAttachmentState_attaching, &sDirectConnectGatewayAttachmentState_attached, &sDirectConnectGatewayAttachmentState_detaching, &sDirectConnectGatewayAttachmentState_detached}}
+var mDirectConnectGatewayAttachmentType = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayAttachmentType_TransitVirtualInterface, &sDirectConnectGatewayAttachmentType_PrivateVirtualInterface}}
+var m_DirectConnectGatewayList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DirectConnectGatewayList_member}}
+var mDirectConnectGatewayState = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectGatewayState_pending, &sDirectConnectGatewayState_available, &sDirectConnectGatewayState_deleting, &sDirectConnectGatewayState_deleted}}
+var mDirectConnectServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sDirectConnectServerException_message}}
+var mDuplicateTagKeysException = smithy.SchemaMembers{List: []*smithy.Schema{&sDuplicateTagKeysException_message}}
+var mGatewayType = smithy.SchemaMembers{List: []*smithy.Schema{&sGatewayType_VirtualPrivateGateway, &sGatewayType_TransitGateway}}
+var mHasLogicalRedundancy = smithy.SchemaMembers{List: []*smithy.Schema{&sHasLogicalRedundancy_Unknown, &sHasLogicalRedundancy_Yes, &sHasLogicalRedundancy_No}}
+var m_IncludedRegionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IncludedRegionList_member}}
+var mInterconnect = smithy.SchemaMembers{List: []*smithy.Schema{&sInterconnect_interconnectId, &sInterconnect_interconnectName, &sInterconnect_interconnectState, &sInterconnect_region, &sInterconnect_location, &sInterconnect_bandwidth, &sInterconnect_loaIssueTime, &sInterconnect_lagId, &sInterconnect_awsDevice, &sInterconnect_jumboFrameCapable, &sInterconnect_awsDeviceV2, &sInterconnect_awsLogicalDeviceId, &sInterconnect_hasLogicalRedundancy, &sInterconnect_tags, &sInterconnect_providerName, &sInterconnect_macSecCapable, &sInterconnect_portEncryptionStatus, &sInterconnect_encryptionMode, &sInterconnect_macSecKeys}, Seed: 11, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 10, 9, 0, 1, 18, 11, 0, 0, 0, 13, 0, 12, 0, 0,
+	3, 0, 0, 16, 8, 2, 0, 0, 0, 17, 0, 0, 0, 7, 0, 0, 0, 0, 5, 0, 19, 0, 0, 14,
+	6, 0, 4, 15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var m_InterconnectList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InterconnectList_member}}
+var mInterconnectState = smithy.SchemaMembers{List: []*smithy.Schema{&sInterconnectState_requested, &sInterconnectState_pending, &sInterconnectState_available, &sInterconnectState_down, &sInterconnectState_deleting, &sInterconnectState_deleted, &sInterconnectState_unknown}}
+var mLag = smithy.SchemaMembers{List: []*smithy.Schema{&sLag_connectionsBandwidth, &sLag_numberOfConnections, &sLag_lagId, &sLag_ownerAccount, &sLag_lagName, &sLag_lagState, &sLag_location, &sLag_region, &sLag_minimumLinks, &sLag_awsDevice, &sLag_awsDeviceV2, &sLag_awsLogicalDeviceId, &sLag_connections, &sLag_allowsHostedConnections, &sLag_jumboFrameCapable, &sLag_hasLogicalRedundancy, &sLag_tags, &sLag_providerName, &sLag_macSecCapable, &sLag_encryptionMode, &sLag_macSecKeys, &sLag_prefixPoolSizeIpv4, &sLag_prefixPoolSizeIpv6, &sLag_prefixPoolUnallocatedCountIpv4, &sLag_prefixPoolUnallocatedCountIpv6, &sLag_rateLimiterStatus, &sLag_billingMode}, Seed: 1854, Slots: []uint16{
+	0, 0, 0, 8, 0, 0, 12, 0, 0, 0, 16, 27, 0, 6, 10, 0, 11, 0, 0, 0, 2, 0, 1, 0,
+	0, 19, 0, 0, 0, 25, 0, 15, 0, 26, 21, 0, 0, 4, 5, 24, 0, 7, 17, 0, 0, 0, 14, 0,
+	0, 0, 23, 0, 0, 0, 22, 3, 0, 0, 20, 0, 9, 13, 0, 18,
+}}
+var m_LagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LagList_member}}
+var mLagState = smithy.SchemaMembers{List: []*smithy.Schema{&sLagState_requested, &sLagState_pending, &sLagState_available, &sLagState_down, &sLagState_deleting, &sLagState_deleted, &sLagState_unknown}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var mLoa = smithy.SchemaMembers{List: []*smithy.Schema{&sLoa_loaContent, &sLoa_loaContentType}}
+var mLoaContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sLoaContentType_PDF}}
+var mLocation = smithy.SchemaMembers{List: []*smithy.Schema{&sLocation_locationCode, &sLocation_locationName, &sLocation_region, &sLocation_availablePortSpeeds, &sLocation_availableProviders, &sLocation_availableMacSecPortSpeeds, &sLocation_availableBillingModes}}
+var m_LocationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LocationList_member}}
+var mMacSecKey = smithy.SchemaMembers{List: []*smithy.Schema{&sMacSecKey_secretARN, &sMacSecKey_ckn, &sMacSecKey_state, &sMacSecKey_startOn}}
+var m_MacSecKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MacSecKeyList_member}}
+var mNewBGPPeer = smithy.SchemaMembers{List: []*smithy.Schema{&sNewBGPPeer_asn, &sNewBGPPeer_asnLong, &sNewBGPPeer_authKey, &sNewBGPPeer_addressFamily, &sNewBGPPeer_amazonAddress, &sNewBGPPeer_customerAddress}}
+var mNewPrivateVirtualInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNewPrivateVirtualInterface_virtualInterfaceName, &sNewPrivateVirtualInterface_vlan, &sNewPrivateVirtualInterface_asn, &sNewPrivateVirtualInterface_asnLong, &sNewPrivateVirtualInterface_mtu, &sNewPrivateVirtualInterface_authKey, &sNewPrivateVirtualInterface_amazonAddress, &sNewPrivateVirtualInterface_customerAddress, &sNewPrivateVirtualInterface_addressFamily, &sNewPrivateVirtualInterface_virtualGatewayId, &sNewPrivateVirtualInterface_directConnectGatewayId, &sNewPrivateVirtualInterface_tags, &sNewPrivateVirtualInterface_enableSiteLink, &sNewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4, &sNewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6, &sNewPrivateVirtualInterface_rateLimit}, Seed: 5, Slots: []uint16{
+	5, 15, 8, 0, 7, 12, 0, 2, 14, 11, 0, 0, 3, 0, 16, 0, 0, 0, 0, 13, 0, 9, 0, 10,
+	0, 1, 0, 0, 6, 4, 0, 0,
+}}
+var mNewPrivateVirtualInterfaceAllocation = smithy.SchemaMembers{List: []*smithy.Schema{&sNewPrivateVirtualInterfaceAllocation_virtualInterfaceName, &sNewPrivateVirtualInterfaceAllocation_vlan, &sNewPrivateVirtualInterfaceAllocation_asn, &sNewPrivateVirtualInterfaceAllocation_asnLong, &sNewPrivateVirtualInterfaceAllocation_mtu, &sNewPrivateVirtualInterfaceAllocation_authKey, &sNewPrivateVirtualInterfaceAllocation_amazonAddress, &sNewPrivateVirtualInterfaceAllocation_addressFamily, &sNewPrivateVirtualInterfaceAllocation_customerAddress, &sNewPrivateVirtualInterfaceAllocation_tags, &sNewPrivateVirtualInterfaceAllocation_rateLimit}, Seed: 4, Slots: []uint16{
+	0, 0, 8, 11, 0, 0, 0, 0, 4, 0, 0, 6, 3, 10, 9, 0, 1, 2, 0, 7, 0, 0, 0, 0,
+	0, 0, 5, 0, 0, 0, 0, 0,
+}}
+var mNewPublicVirtualInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNewPublicVirtualInterface_virtualInterfaceName, &sNewPublicVirtualInterface_vlan, &sNewPublicVirtualInterface_asn, &sNewPublicVirtualInterface_asnLong, &sNewPublicVirtualInterface_authKey, &sNewPublicVirtualInterface_amazonAddress, &sNewPublicVirtualInterface_customerAddress, &sNewPublicVirtualInterface_addressFamily, &sNewPublicVirtualInterface_routeFilterPrefixes, &sNewPublicVirtualInterface_tags, &sNewPublicVirtualInterface_rateLimit}, Seed: 4, Slots: []uint16{
+	0, 0, 8, 11, 0, 0, 0, 0, 4, 0, 0, 5, 3, 10, 7, 0, 1, 2, 0, 6, 0, 0, 0, 0,
+	0, 0, 0, 9, 0, 0, 0, 0,
+}}
+var mNewPublicVirtualInterfaceAllocation = smithy.SchemaMembers{List: []*smithy.Schema{&sNewPublicVirtualInterfaceAllocation_virtualInterfaceName, &sNewPublicVirtualInterfaceAllocation_vlan, &sNewPublicVirtualInterfaceAllocation_asn, &sNewPublicVirtualInterfaceAllocation_asnLong, &sNewPublicVirtualInterfaceAllocation_authKey, &sNewPublicVirtualInterfaceAllocation_amazonAddress, &sNewPublicVirtualInterfaceAllocation_customerAddress, &sNewPublicVirtualInterfaceAllocation_addressFamily, &sNewPublicVirtualInterfaceAllocation_routeFilterPrefixes, &sNewPublicVirtualInterfaceAllocation_tags, &sNewPublicVirtualInterfaceAllocation_rateLimit}, Seed: 4, Slots: []uint16{
+	0, 0, 8, 11, 0, 0, 0, 0, 4, 0, 0, 5, 3, 10, 7, 0, 1, 2, 0, 6, 0, 0, 0, 0,
+	0, 0, 0, 9, 0, 0, 0, 0,
+}}
+var mNewTransitVirtualInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNewTransitVirtualInterface_virtualInterfaceName, &sNewTransitVirtualInterface_vlan, &sNewTransitVirtualInterface_asn, &sNewTransitVirtualInterface_asnLong, &sNewTransitVirtualInterface_mtu, &sNewTransitVirtualInterface_authKey, &sNewTransitVirtualInterface_amazonAddress, &sNewTransitVirtualInterface_customerAddress, &sNewTransitVirtualInterface_addressFamily, &sNewTransitVirtualInterface_directConnectGatewayId, &sNewTransitVirtualInterface_tags, &sNewTransitVirtualInterface_enableSiteLink, &sNewTransitVirtualInterface_prefixPoolAllocatedCountIpv4, &sNewTransitVirtualInterface_prefixPoolAllocatedCountIpv6, &sNewTransitVirtualInterface_rateLimit}, Seed: 5, Slots: []uint16{
+	5, 14, 8, 0, 7, 11, 0, 2, 13, 10, 0, 0, 3, 0, 15, 0, 0, 0, 0, 12, 0, 9, 0, 0,
+	0, 1, 0, 0, 6, 4, 0, 0,
+}}
+var mNewTransitVirtualInterfaceAllocation = smithy.SchemaMembers{List: []*smithy.Schema{&sNewTransitVirtualInterfaceAllocation_virtualInterfaceName, &sNewTransitVirtualInterfaceAllocation_vlan, &sNewTransitVirtualInterfaceAllocation_asn, &sNewTransitVirtualInterfaceAllocation_asnLong, &sNewTransitVirtualInterfaceAllocation_mtu, &sNewTransitVirtualInterfaceAllocation_authKey, &sNewTransitVirtualInterfaceAllocation_amazonAddress, &sNewTransitVirtualInterfaceAllocation_customerAddress, &sNewTransitVirtualInterfaceAllocation_addressFamily, &sNewTransitVirtualInterfaceAllocation_tags, &sNewTransitVirtualInterfaceAllocation_rateLimit}, Seed: 4, Slots: []uint16{
+	0, 0, 9, 11, 0, 0, 0, 0, 4, 0, 0, 6, 3, 10, 8, 0, 1, 2, 0, 7, 0, 0, 0, 0,
+	0, 0, 5, 0, 0, 0, 0, 0,
+}}
+var mNniPartnerType = smithy.SchemaMembers{List: []*smithy.Schema{&sNniPartnerType_V1, &sNniPartnerType_V2, &sNniPartnerType_NonPartner}}
+var m_ProviderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProviderList_member}}
+var mRateLimiterStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRateLimiterStatus_maxAllowed, &sRateLimiterStatus_inUse, &sRateLimiterStatus_remaining, &sRateLimiterStatus_totalBandwidth}}
+var mRequestBillingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestBillingMode_PayAsYouGo, &sRequestBillingMode_FlatRateTier1, &sRequestBillingMode_FlatRateTier2, &sRequestBillingMode_FlatRateTier3, &sRequestBillingMode_FlatRateTier4, &sRequestBillingMode_FlatRateTier5}}
+var mResiliencyGroup = smithy.SchemaMembers{List: []*smithy.Schema{&sResiliencyGroup_resiliencyGroupId, &sResiliencyGroup_resiliencyGroupArn, &sResiliencyGroup_resiliencyGroupName, &sResiliencyGroup_resiliencyGroupType, &sResiliencyGroup_ownerAccount, &sResiliencyGroup_state, &sResiliencyGroup_tags}}
+var mResiliencyGroupAssociation = smithy.SchemaMembers{List: []*smithy.Schema{&sResiliencyGroupAssociation_resiliencyGroupId, &sResiliencyGroupAssociation_connectionArn, &sResiliencyGroupAssociation_state}}
+var m_ResiliencyGroupAssociationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResiliencyGroupAssociationList_member}}
+var mResiliencyGroupAssociationState = smithy.SchemaMembers{List: []*smithy.Schema{&sResiliencyGroupAssociationState_Associating, &sResiliencyGroupAssociationState_Associated, &sResiliencyGroupAssociationState_Disassociating, &sResiliencyGroupAssociationState_Disassociated}}
+var mResiliencyGroupState = smithy.SchemaMembers{List: []*smithy.Schema{&sResiliencyGroupState_Pending, &sResiliencyGroupState_Available, &sResiliencyGroupState_Deleting, &sResiliencyGroupState_Deleted}}
+var mResiliencyGroupSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResiliencyGroupSummary_resiliencyGroupId, &sResiliencyGroupSummary_resiliencyGroupArn, &sResiliencyGroupSummary_resiliencyGroupName, &sResiliencyGroupSummary_resiliencyGroupType, &sResiliencyGroupSummary_ownerAccount, &sResiliencyGroupSummary_state}}
+var m_ResiliencyGroupSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResiliencyGroupSummaryList_member}}
+var mResiliencyGroupType = smithy.SchemaMembers{List: []*smithy.Schema{&sResiliencyGroupType_Managed}}
+var mResiliencyModel = smithy.SchemaMembers{List: []*smithy.Schema{&sResiliencyModel_MaximumResiliency, &sResiliencyModel_HighResiliency, &sResiliencyModel_BasicResiliency}}
+var m_ResourceArnList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceArnList_member}}
+var mResourceTag = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTag_resourceArn, &sResourceTag_tags}}
+var m_ResourceTagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagList_member}}
+var mRoute = smithy.SchemaMembers{List: []*smithy.Schema{&sRoute_cidr, &sRoute_routeDirection, &sRoute_addressFamily, &sRoute_asPath, &sRoute_communities, &sRoute_awsLogicalDeviceId, &sRoute_routeInstalledAt}}
+var mRouteDirection = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteDirection_Accepted, &sRouteDirection_Advertised}}
+var m_RouteFilterCidrStringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteFilterCidrStringList_member}}
+var mRouteFilterPrefix = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteFilterPrefix_cidr}}
+var m_RouteFilterPrefixList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteFilterPrefixList_member}}
+var mRouteFilters = smithy.SchemaMembers{List: []*smithy.Schema{&sRouteFilters_routeDirection, &sRouteFilters_addressFamily, &sRouteFilters_cidrs, &sRouteFilters_asPath, &sRouteFilters_communities}}
+var m_RouteList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RouteList_member}}
+var mRouterType = smithy.SchemaMembers{List: []*smithy.Schema{&sRouterType_vendor, &sRouterType_platform, &sRouterType_software, &sRouterType_xsltTemplateName, &sRouterType_xsltTemplateNameForMacSec, &sRouterType_routerTypeIdentifier}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTooManyTagsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyTagsException_message}}
+var mVirtualGateway = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGateway_virtualGatewayId, &sVirtualGateway_virtualGatewayState}}
+var m_VirtualGatewayList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualGatewayList_member}}
+var mVirtualInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualInterface_ownerAccount, &sVirtualInterface_virtualInterfaceId, &sVirtualInterface_location, &sVirtualInterface_connectionId, &sVirtualInterface_virtualInterfaceType, &sVirtualInterface_virtualInterfaceName, &sVirtualInterface_vlan, &sVirtualInterface_asn, &sVirtualInterface_asnLong, &sVirtualInterface_amazonSideAsn, &sVirtualInterface_authKey, &sVirtualInterface_amazonAddress, &sVirtualInterface_customerAddress, &sVirtualInterface_addressFamily, &sVirtualInterface_virtualInterfaceState, &sVirtualInterface_customerRouterConfig, &sVirtualInterface_mtu, &sVirtualInterface_jumboFrameCapable, &sVirtualInterface_virtualGatewayId, &sVirtualInterface_directConnectGatewayId, &sVirtualInterface_routeFilterPrefixes, &sVirtualInterface_bgpPeers, &sVirtualInterface_region, &sVirtualInterface_awsDeviceV2, &sVirtualInterface_awsLogicalDeviceId, &sVirtualInterface_tags, &sVirtualInterface_siteLinkEnabled, &sVirtualInterface_prefixPoolAllocatedCountIpv4, &sVirtualInterface_prefixPoolAllocatedCountIpv6, &sVirtualInterface_rateLimit}, Seed: 3688, Slots: []uint16{
+	0, 16, 28, 7, 18, 0, 0, 0, 30, 0, 0, 0, 6, 27, 0, 22, 12, 10, 0, 0, 0, 5, 25, 13,
+	0, 0, 0, 9, 0, 0, 0, 24, 0, 0, 3, 14, 11, 2, 26, 0, 15, 0, 1, 29, 0, 20, 0, 17,
+	0, 0, 0, 0, 4, 0, 0, 23, 21, 0, 0, 0, 8, 0, 19, 0,
+}}
+var m_VirtualInterfaceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualInterfaceList_member}}
+var mVirtualInterfaceState = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualInterfaceState_confirming, &sVirtualInterfaceState_verifying, &sVirtualInterfaceState_pending, &sVirtualInterfaceState_available, &sVirtualInterfaceState_down, &sVirtualInterfaceState_testing, &sVirtualInterfaceState_deleting, &sVirtualInterfaceState_deleted, &sVirtualInterfaceState_rejected, &sVirtualInterfaceState_unknown}, Seed: 6, Slots: []uint16{
+	0, 7, 9, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 10, 5, 4, 8, 0, 0, 0, 0,
+	3, 0, 0, 0, 0, 0, 0, 1,
+}}
+var mVirtualInterfaceTestHistory = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualInterfaceTestHistory_testId, &sVirtualInterfaceTestHistory_virtualInterfaceId, &sVirtualInterfaceTestHistory_bgpPeers, &sVirtualInterfaceTestHistory_status, &sVirtualInterfaceTestHistory_ownerAccount, &sVirtualInterfaceTestHistory_testDurationInMinutes, &sVirtualInterfaceTestHistory_startTime, &sVirtualInterfaceTestHistory_endTime}}
+var m_VirtualInterfaceTestHistoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_VirtualInterfaceTestHistoryList_member}}
+var mAcceptDirectConnectGatewayAssociationProposalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId, &sAcceptDirectConnectGatewayAssociationProposalRequest_proposalId, &sAcceptDirectConnectGatewayAssociationProposalRequest_associatedGatewayOwnerAccount, &sAcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway}}
+var mAcceptDirectConnectGatewayAssociationProposalResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAcceptDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociation}}
+var mAllocateConnectionOnInterconnectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAllocateConnectionOnInterconnectRequest_bandwidth, &sAllocateConnectionOnInterconnectRequest_connectionName, &sAllocateConnectionOnInterconnectRequest_ownerAccount, &sAllocateConnectionOnInterconnectRequest_interconnectId, &sAllocateConnectionOnInterconnectRequest_vlan}}
+var mAllocateHostedConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAllocateHostedConnectionRequest_connectionId, &sAllocateHostedConnectionRequest_ownerAccount, &sAllocateHostedConnectionRequest_bandwidth, &sAllocateHostedConnectionRequest_connectionName, &sAllocateHostedConnectionRequest_vlan, &sAllocateHostedConnectionRequest_tags}}
+var mAllocatePrivateVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAllocatePrivateVirtualInterfaceRequest_connectionId, &sAllocatePrivateVirtualInterfaceRequest_ownerAccount, &sAllocatePrivateVirtualInterfaceRequest_newPrivateVirtualInterfaceAllocation}}
+var mAllocatePublicVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAllocatePublicVirtualInterfaceRequest_connectionId, &sAllocatePublicVirtualInterfaceRequest_ownerAccount, &sAllocatePublicVirtualInterfaceRequest_newPublicVirtualInterfaceAllocation}}
+var mAllocateTransitVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAllocateTransitVirtualInterfaceRequest_connectionId, &sAllocateTransitVirtualInterfaceRequest_ownerAccount, &sAllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation}}
+var mAllocateTransitVirtualInterfaceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAllocateTransitVirtualInterfaceResult_virtualInterface}}
+var mAssociateConnectionsToResiliencyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateConnectionsToResiliencyGroupRequest_connectionIdentifiers, &sAssociateConnectionsToResiliencyGroupRequest_resiliencyGroupId, &sAssociateConnectionsToResiliencyGroupRequest_clientToken}}
+var mAssociateConnectionsToResiliencyGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateConnectionsToResiliencyGroupResult_resiliencyGroupAssociations}}
+var mAssociateConnectionWithLagRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateConnectionWithLagRequest_connectionId, &sAssociateConnectionWithLagRequest_lagId}}
+var mAssociateHostedConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateHostedConnectionRequest_connectionId, &sAssociateHostedConnectionRequest_parentConnectionId}}
+var mAssociateMacSecKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateMacSecKeyRequest_connectionId, &sAssociateMacSecKeyRequest_secretARN, &sAssociateMacSecKeyRequest_ckn, &sAssociateMacSecKeyRequest_cak}}
+var mAssociateMacSecKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateMacSecKeyResponse_connectionId, &sAssociateMacSecKeyResponse_macSecKeys}}
+var mAssociateVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateVirtualInterfaceRequest_virtualInterfaceId, &sAssociateVirtualInterfaceRequest_connectionId}}
+var mConfirmConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmConnectionRequest_connectionId}}
+var mConfirmConnectionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmConnectionResponse_connectionState}}
+var mConfirmCustomerAgreementRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmCustomerAgreementRequest_agreementName}}
+var mConfirmCustomerAgreementResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmCustomerAgreementResponse_status}}
+var mConfirmPrivateVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmPrivateVirtualInterfaceRequest_virtualInterfaceId, &sConfirmPrivateVirtualInterfaceRequest_virtualGatewayId, &sConfirmPrivateVirtualInterfaceRequest_directConnectGatewayId}}
+var mConfirmPrivateVirtualInterfaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmPrivateVirtualInterfaceResponse_virtualInterfaceState}}
+var mConfirmPublicVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmPublicVirtualInterfaceRequest_virtualInterfaceId}}
+var mConfirmPublicVirtualInterfaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmPublicVirtualInterfaceResponse_virtualInterfaceState}}
+var mConfirmTransitVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmTransitVirtualInterfaceRequest_virtualInterfaceId, &sConfirmTransitVirtualInterfaceRequest_directConnectGatewayId}}
+var mConfirmTransitVirtualInterfaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sConfirmTransitVirtualInterfaceResponse_virtualInterfaceState}}
+var mCreateBGPPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBGPPeerRequest_virtualInterfaceId, &sCreateBGPPeerRequest_newBGPPeer}}
+var mCreateBGPPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBGPPeerResponse_virtualInterface}}
+var mCreateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConnectionRequest_location, &sCreateConnectionRequest_bandwidth, &sCreateConnectionRequest_connectionName, &sCreateConnectionRequest_lagId, &sCreateConnectionRequest_tags, &sCreateConnectionRequest_providerName, &sCreateConnectionRequest_requestMACSec, &sCreateConnectionRequest_billingMode}}
+var mCreateDirectConnectGatewayAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayAssociationRequest_directConnectGatewayId, &sCreateDirectConnectGatewayAssociationRequest_gatewayId, &sCreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway, &sCreateDirectConnectGatewayAssociationRequest_virtualGatewayId}}
+var mCreateDirectConnectGatewayAssociationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation}}
+var mCreateDirectConnectGatewayAssociationProposalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId, &sCreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayOwnerAccount, &sCreateDirectConnectGatewayAssociationProposalRequest_gatewayId, &sCreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway, &sCreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway}}
+var mCreateDirectConnectGatewayAssociationProposalResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal}}
+var mCreateDirectConnectGatewayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayRequest_directConnectGatewayName, &sCreateDirectConnectGatewayRequest_tags, &sCreateDirectConnectGatewayRequest_amazonSideAsn}}
+var mCreateDirectConnectGatewayResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDirectConnectGatewayResult_directConnectGateway}}
+var mCreateInterconnectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateInterconnectRequest_interconnectName, &sCreateInterconnectRequest_bandwidth, &sCreateInterconnectRequest_location, &sCreateInterconnectRequest_lagId, &sCreateInterconnectRequest_tags, &sCreateInterconnectRequest_providerName, &sCreateInterconnectRequest_requestMACSec}}
+var mCreateLagRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLagRequest_numberOfConnections, &sCreateLagRequest_location, &sCreateLagRequest_connectionsBandwidth, &sCreateLagRequest_lagName, &sCreateLagRequest_connectionId, &sCreateLagRequest_tags, &sCreateLagRequest_childConnectionTags, &sCreateLagRequest_providerName, &sCreateLagRequest_requestMACSec, &sCreateLagRequest_billingMode}, Seed: 17, Slots: []uint16{
+	8, 0, 6, 0, 0, 0, 4, 0, 1, 0, 0, 5, 0, 0, 0, 0, 0, 3, 0, 2, 0, 0, 0, 0,
+	0, 9, 10, 0, 0, 0, 0, 7,
+}}
+var mCreatePrivateVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePrivateVirtualInterfaceRequest_connectionId, &sCreatePrivateVirtualInterfaceRequest_newPrivateVirtualInterface}}
+var mCreatePublicVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreatePublicVirtualInterfaceRequest_connectionId, &sCreatePublicVirtualInterfaceRequest_newPublicVirtualInterface}}
+var mCreateResiliencyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResiliencyGroupRequest_resiliencyGroupName, &sCreateResiliencyGroupRequest_intendedResiliencyModel, &sCreateResiliencyGroupRequest_clientToken, &sCreateResiliencyGroupRequest_tags}}
+var mCreateResiliencyGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateResiliencyGroupResult_resiliencyGroup}}
+var mCreateTransitVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTransitVirtualInterfaceRequest_connectionId, &sCreateTransitVirtualInterfaceRequest_newTransitVirtualInterface}}
+var mCreateTransitVirtualInterfaceResult = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateTransitVirtualInterfaceResult_virtualInterface}}
+var mDeleteBGPPeerRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBGPPeerRequest_virtualInterfaceId, &sDeleteBGPPeerRequest_asn, &sDeleteBGPPeerRequest_asnLong, &sDeleteBGPPeerRequest_customerAddress, &sDeleteBGPPeerRequest_bgpPeerId}}
+var mDeleteBGPPeerResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBGPPeerResponse_virtualInterface}}
+var mDeleteConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConnectionRequest_connectionId}}
+var mDeleteDirectConnectGatewayAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectConnectGatewayAssociationRequest_associationId, &sDeleteDirectConnectGatewayAssociationRequest_directConnectGatewayId, &sDeleteDirectConnectGatewayAssociationRequest_virtualGatewayId}}
+var mDeleteDirectConnectGatewayAssociationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation}}
+var mDeleteDirectConnectGatewayAssociationProposalRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectConnectGatewayAssociationProposalRequest_proposalId}}
+var mDeleteDirectConnectGatewayAssociationProposalResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal}}
+var mDeleteDirectConnectGatewayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectConnectGatewayRequest_directConnectGatewayId}}
+var mDeleteDirectConnectGatewayResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDirectConnectGatewayResult_directConnectGateway}}
+var mDeleteInterconnectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInterconnectRequest_interconnectId}}
+var mDeleteInterconnectResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteInterconnectResponse_interconnectState}}
+var mDeleteLagRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLagRequest_lagId}}
+var mDeleteResiliencyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResiliencyGroupRequest_resiliencyGroupId}}
+var mDeleteResiliencyGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResiliencyGroupResult_resiliencyGroup}}
+var mDeleteVirtualInterfaceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualInterfaceRequest_virtualInterfaceId}}
+var mDeleteVirtualInterfaceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteVirtualInterfaceResponse_virtualInterfaceState}}
+var mDescribeConnectionLoaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectionLoaRequest_connectionId, &sDescribeConnectionLoaRequest_providerName, &sDescribeConnectionLoaRequest_loaContentType}}
+var mDescribeConnectionLoaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectionLoaResponse_loa}}
+var mDescribeConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectionsRequest_connectionId, &sDescribeConnectionsRequest_maxResults, &sDescribeConnectionsRequest_nextToken}}
+var mDescribeConnectionsOnInterconnectRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConnectionsOnInterconnectRequest_interconnectId}}
+var mConnections = smithy.SchemaMembers{List: []*smithy.Schema{&sConnections_connections, &sConnections_nextToken}}
+var mDescribeCustomerMetadataResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeCustomerMetadataResponse_agreements, &sDescribeCustomerMetadataResponse_nniPartnerType}}
+var mDescribeDirectConnectGatewayAssociationProposalsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewayAssociationProposalsRequest_directConnectGatewayId, &sDescribeDirectConnectGatewayAssociationProposalsRequest_proposalId, &sDescribeDirectConnectGatewayAssociationProposalsRequest_associatedGatewayId, &sDescribeDirectConnectGatewayAssociationProposalsRequest_maxResults, &sDescribeDirectConnectGatewayAssociationProposalsRequest_nextToken}}
+var mDescribeDirectConnectGatewayAssociationProposalsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals, &sDescribeDirectConnectGatewayAssociationProposalsResult_nextToken}}
+var mDescribeDirectConnectGatewayAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewayAssociationsRequest_associationId, &sDescribeDirectConnectGatewayAssociationsRequest_associatedGatewayId, &sDescribeDirectConnectGatewayAssociationsRequest_directConnectGatewayId, &sDescribeDirectConnectGatewayAssociationsRequest_maxResults, &sDescribeDirectConnectGatewayAssociationsRequest_nextToken, &sDescribeDirectConnectGatewayAssociationsRequest_virtualGatewayId}}
+var mDescribeDirectConnectGatewayAssociationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations, &sDescribeDirectConnectGatewayAssociationsResult_nextToken}}
+var mDescribeDirectConnectGatewayAttachmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewayAttachmentsRequest_directConnectGatewayId, &sDescribeDirectConnectGatewayAttachmentsRequest_virtualInterfaceId, &sDescribeDirectConnectGatewayAttachmentsRequest_maxResults, &sDescribeDirectConnectGatewayAttachmentsRequest_nextToken}}
+var mDescribeDirectConnectGatewayAttachmentsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments, &sDescribeDirectConnectGatewayAttachmentsResult_nextToken}}
+var mDescribeDirectConnectGatewaysRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewaysRequest_directConnectGatewayId, &sDescribeDirectConnectGatewaysRequest_maxResults, &sDescribeDirectConnectGatewaysRequest_nextToken}}
+var mDescribeDirectConnectGatewaysResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDirectConnectGatewaysResult_directConnectGateways, &sDescribeDirectConnectGatewaysResult_nextToken}}
+var mDescribeHostedConnectionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeHostedConnectionsRequest_connectionId, &sDescribeHostedConnectionsRequest_maxResults, &sDescribeHostedConnectionsRequest_nextToken}}
+var mDescribeInterconnectLoaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInterconnectLoaRequest_interconnectId, &sDescribeInterconnectLoaRequest_providerName, &sDescribeInterconnectLoaRequest_loaContentType}}
+var mDescribeInterconnectLoaResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInterconnectLoaResponse_loa}}
+var mDescribeInterconnectsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeInterconnectsRequest_interconnectId, &sDescribeInterconnectsRequest_maxResults, &sDescribeInterconnectsRequest_nextToken}}
+var mInterconnects = smithy.SchemaMembers{List: []*smithy.Schema{&sInterconnects_interconnects, &sInterconnects_nextToken}}
+var mDescribeLagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLagsRequest_lagId, &sDescribeLagsRequest_maxResults, &sDescribeLagsRequest_nextToken}}
+var mLags = smithy.SchemaMembers{List: []*smithy.Schema{&sLags_lags, &sLags_nextToken}}
+var mDescribeLoaRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeLoaRequest_connectionId, &sDescribeLoaRequest_providerName, &sDescribeLoaRequest_loaContentType}}
+var mLocations = smithy.SchemaMembers{List: []*smithy.Schema{&sLocations_locations}}
+var mDescribeRouterConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRouterConfigurationRequest_virtualInterfaceId, &sDescribeRouterConfigurationRequest_routerTypeIdentifier}}
+var mDescribeRouterConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRouterConfigurationResponse_customerRouterConfig, &sDescribeRouterConfigurationResponse_router, &sDescribeRouterConfigurationResponse_virtualInterfaceId, &sDescribeRouterConfigurationResponse_virtualInterfaceName}}
+var mDescribeTagsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsRequest_resourceArns}}
+var mDescribeTagsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsResponse_resourceTags}}
+var mVirtualGateways = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualGateways_virtualGateways}}
+var mDescribeVirtualInterfacesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeVirtualInterfacesRequest_connectionId, &sDescribeVirtualInterfacesRequest_virtualInterfaceId, &sDescribeVirtualInterfacesRequest_maxResults, &sDescribeVirtualInterfacesRequest_nextToken}}
+var mVirtualInterfaces = smithy.SchemaMembers{List: []*smithy.Schema{&sVirtualInterfaces_virtualInterfaces, &sVirtualInterfaces_nextToken}}
+var mDisassociateConnectionFromLagRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateConnectionFromLagRequest_connectionId, &sDisassociateConnectionFromLagRequest_lagId}}
+var mDisassociateConnectionsFromResiliencyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers, &sDisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId, &sDisassociateConnectionsFromResiliencyGroupRequest_clientToken}}
+var mDisassociateConnectionsFromResiliencyGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations}}
+var mDisassociateMacSecKeyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMacSecKeyRequest_connectionId, &sDisassociateMacSecKeyRequest_secretARN}}
+var mDisassociateMacSecKeyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateMacSecKeyResponse_connectionId, &sDisassociateMacSecKeyResponse_macSecKeys}}
+var mGetResiliencyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResiliencyGroupRequest_resiliencyGroupId}}
+var mGetResiliencyGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResiliencyGroupResult_resiliencyGroup}}
+var mListResiliencyGroupAssociationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResiliencyGroupAssociationsRequest_resiliencyGroupId, &sListResiliencyGroupAssociationsRequest_maxResults, &sListResiliencyGroupAssociationsRequest_nextToken}}
+var mListResiliencyGroupAssociationsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListResiliencyGroupAssociationsResult_items, &sListResiliencyGroupAssociationsResult_nextToken}}
+var mListResiliencyGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResiliencyGroupsRequest_maxResults, &sListResiliencyGroupsRequest_nextToken}}
+var mListResiliencyGroupsResult = smithy.SchemaMembers{List: []*smithy.Schema{&sListResiliencyGroupsResult_items, &sListResiliencyGroupsResult_nextToken}}
+var mListVirtualInterfaceRoutesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualInterfaceRoutesRequest_virtualInterfaceId, &sListVirtualInterfaceRoutesRequest_filters, &sListVirtualInterfaceRoutesRequest_maxResults, &sListVirtualInterfaceRoutesRequest_nextToken}}
+var mListVirtualInterfaceRoutesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualInterfaceRoutesResponse_virtualInterfaceId, &sListVirtualInterfaceRoutesResponse_routes, &sListVirtualInterfaceRoutesResponse_nextToken}}
+var mListVirtualInterfaceTestHistoryRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualInterfaceTestHistoryRequest_testId, &sListVirtualInterfaceTestHistoryRequest_virtualInterfaceId, &sListVirtualInterfaceTestHistoryRequest_bgpPeers, &sListVirtualInterfaceTestHistoryRequest_status, &sListVirtualInterfaceTestHistoryRequest_maxResults, &sListVirtualInterfaceTestHistoryRequest_nextToken}}
+var mListVirtualInterfaceTestHistoryResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory, &sListVirtualInterfaceTestHistoryResponse_nextToken}}
+var mStartBgpFailoverTestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartBgpFailoverTestRequest_virtualInterfaceId, &sStartBgpFailoverTestRequest_bgpPeers, &sStartBgpFailoverTestRequest_testDurationInMinutes}}
+var mStartBgpFailoverTestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartBgpFailoverTestResponse_virtualInterfaceTest}}
+var mStopBgpFailoverTestRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopBgpFailoverTestRequest_virtualInterfaceId}}
+var mStopBgpFailoverTestResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopBgpFailoverTestResponse_virtualInterfaceTest}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateConnectionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionRequest_connectionId, &sUpdateConnectionRequest_connectionName, &sUpdateConnectionRequest_encryptionMode}}
+var mUpdateConnectionsBillingModeRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionsBillingModeRequest_connectionIds, &sUpdateConnectionsBillingModeRequest_billingMode}}
+var mUpdateConnectionsBillingModeResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectionsBillingModeResponse_billingMode, &sUpdateConnectionsBillingModeResponse_connections}}
+var mUpdateDirectConnectGatewayAssociationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectConnectGatewayAssociationRequest_associationId, &sUpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway, &sUpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway}}
+var mUpdateDirectConnectGatewayAssociationResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation}}
+var mUpdateDirectConnectGatewayRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectConnectGatewayRequest_directConnectGatewayId, &sUpdateDirectConnectGatewayRequest_newDirectConnectGatewayName}}
+var mUpdateDirectConnectGatewayResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDirectConnectGatewayResponse_directConnectGateway}}
+var mUpdateLagRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLagRequest_lagId, &sUpdateLagRequest_lagName, &sUpdateLagRequest_minimumLinks, &sUpdateLagRequest_encryptionMode}}
+var mUpdateResiliencyGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResiliencyGroupRequest_resiliencyGroupId, &sUpdateResiliencyGroupRequest_resiliencyGroupName, &sUpdateResiliencyGroupRequest_clientToken}}
+var mUpdateResiliencyGroupResult = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateResiliencyGroupResult_resiliencyGroup}}
+var mUpdateVirtualInterfaceAttributesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateVirtualInterfaceAttributesRequest_virtualInterfaceId, &sUpdateVirtualInterfaceAttributesRequest_mtu, &sUpdateVirtualInterfaceAttributesRequest_enableSiteLink, &sUpdateVirtualInterfaceAttributesRequest_virtualInterfaceName, &sUpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv4, &sUpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv6, &sUpdateVirtualInterfaceAttributesRequest_rateLimit}}
+
+var sAcceptDirectConnectGatewayAssociationProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDirectConnectGatewayAssociationProposal, Type: smithy.ShapeTypeOperation})
+var sAllocateConnectionOnInterconnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocateConnectionOnInterconnect, Type: smithy.ShapeTypeOperation})
+var sAllocateHostedConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocateHostedConnection, Type: smithy.ShapeTypeOperation})
+var sAllocatePrivateVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocatePrivateVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sAllocatePublicVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocatePublicVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sAllocateTransitVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocateTransitVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sAssociateConnectionsToResiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectionsToResiliencyGroup, Type: smithy.ShapeTypeOperation})
+var sAssociateConnectionWithLag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectionWithLag, Type: smithy.ShapeTypeOperation})
+var sAssociateHostedConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateHostedConnection, Type: smithy.ShapeTypeOperation})
+var sAssociateMacSecKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMacSecKey, Type: smithy.ShapeTypeOperation})
+var sAssociateVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sConfirmConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmConnection, Type: smithy.ShapeTypeOperation})
+var sConfirmCustomerAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmCustomerAgreement, Type: smithy.ShapeTypeOperation})
+var sConfirmPrivateVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmPrivateVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sConfirmPublicVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmPublicVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sConfirmTransitVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmTransitVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sCreateBGPPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBGPPeer, Type: smithy.ShapeTypeOperation})
+var sCreateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnection, Type: smithy.ShapeTypeOperation})
+var sCreateDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGateway, Type: smithy.ShapeTypeOperation})
+var sCreateDirectConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAssociation, Type: smithy.ShapeTypeOperation})
+var sCreateDirectConnectGatewayAssociationProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAssociationProposal, Type: smithy.ShapeTypeOperation})
+var sCreateInterconnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInterconnect, Type: smithy.ShapeTypeOperation})
+var sCreateLag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLag, Type: smithy.ShapeTypeOperation})
+var sCreatePrivateVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrivateVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sCreatePublicVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePublicVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sCreateResiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResiliencyGroup, Type: smithy.ShapeTypeOperation})
+var sCreateTransitVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sDeleteBGPPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBGPPeer, Type: smithy.ShapeTypeOperation})
+var sDeleteConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnection, Type: smithy.ShapeTypeOperation})
+var sDeleteDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGateway, Type: smithy.ShapeTypeOperation})
+var sDeleteDirectConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayAssociation, Type: smithy.ShapeTypeOperation})
+var sDeleteDirectConnectGatewayAssociationProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayAssociationProposal, Type: smithy.ShapeTypeOperation})
+var sDeleteInterconnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInterconnect, Type: smithy.ShapeTypeOperation})
+var sDeleteLag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLag, Type: smithy.ShapeTypeOperation})
+var sDeleteResiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResiliencyGroup, Type: smithy.ShapeTypeOperation})
+var sDeleteVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualInterface, Type: smithy.ShapeTypeOperation})
+var sDescribeConnectionLoa = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionLoa, Type: smithy.ShapeTypeOperation})
+var sDescribeConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnections, Type: smithy.ShapeTypeOperation})
+var sDescribeConnectionsOnInterconnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionsOnInterconnect, Type: smithy.ShapeTypeOperation})
+var sDescribeCustomerMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomerMetadata, Type: smithy.ShapeTypeOperation})
+var sDescribeDirectConnectGatewayAssociationProposals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAssociationProposals, Type: smithy.ShapeTypeOperation})
+var sDescribeDirectConnectGatewayAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAssociations, Type: smithy.ShapeTypeOperation})
+var sDescribeDirectConnectGatewayAttachments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAttachments, Type: smithy.ShapeTypeOperation})
+var sDescribeDirectConnectGateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGateways, Type: smithy.ShapeTypeOperation})
+var sDescribeHostedConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHostedConnections, Type: smithy.ShapeTypeOperation})
+var sDescribeInterconnectLoa = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInterconnectLoa, Type: smithy.ShapeTypeOperation})
+var sDescribeInterconnects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInterconnects, Type: smithy.ShapeTypeOperation})
+var sDescribeLags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLags, Type: smithy.ShapeTypeOperation})
+var sDescribeLoa = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoa, Type: smithy.ShapeTypeOperation})
+var sDescribeLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLocations, Type: smithy.ShapeTypeOperation})
+var sDescribeRouterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRouterConfiguration, Type: smithy.ShapeTypeOperation})
+var sDescribeTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTags, Type: smithy.ShapeTypeOperation})
+var sDescribeVirtualGateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualGateways, Type: smithy.ShapeTypeOperation})
+var sDescribeVirtualInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualInterfaces, Type: smithy.ShapeTypeOperation})
+var sDisassociateConnectionFromLag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectionFromLag, Type: smithy.ShapeTypeOperation})
+var sDisassociateConnectionsFromResiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectionsFromResiliencyGroup, Type: smithy.ShapeTypeOperation})
+var sDisassociateMacSecKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMacSecKey, Type: smithy.ShapeTypeOperation})
+var sGetResiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResiliencyGroup, Type: smithy.ShapeTypeOperation})
+var sListResiliencyGroupAssociations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResiliencyGroupAssociations, Type: smithy.ShapeTypeOperation})
+var sListResiliencyGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResiliencyGroups, Type: smithy.ShapeTypeOperation})
+var sListVirtualInterfaceRoutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualInterfaceRoutes, Type: smithy.ShapeTypeOperation})
+var sListVirtualInterfaceTestHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualInterfaceTestHistory, Type: smithy.ShapeTypeOperation})
+var sStartBgpFailoverTest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBgpFailoverTest, Type: smithy.ShapeTypeOperation})
+var sStopBgpFailoverTest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBgpFailoverTest, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnection, Type: smithy.ShapeTypeOperation})
+var sUpdateConnectionsBillingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionsBillingMode, Type: smithy.ShapeTypeOperation})
+var sUpdateDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGateway, Type: smithy.ShapeTypeOperation})
+var sUpdateDirectConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayAssociation, Type: smithy.ShapeTypeOperation})
+var sUpdateLag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLag, Type: smithy.ShapeTypeOperation})
+var sUpdateResiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResiliencyGroup, Type: smithy.ShapeTypeOperation})
+var sUpdateVirtualInterfaceAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualInterfaceAttributes, Type: smithy.ShapeTypeOperation})
+var s_OvertureService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OvertureService, Traits: &t0, Type: smithy.ShapeTypeService})
+var sAddressFamily = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var s_AgreementList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgreementList, Members: &m_AgreementList, Type: smithy.ShapeTypeList})
+var s_AgreementName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AgreementName, Type: smithy.ShapeTypeString})
+var s_AmazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var s_ASN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var s_AsPathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsPathList, Members: &m_AsPathList, Type: smithy.ShapeTypeList})
+var sAsPathSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAsPathSegment, Members: &mAsPathSegment, Type: smithy.ShapeTypeStructure})
+var s_AsPathSegmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AsPathSegmentList, Members: &m_AsPathSegmentList, Type: smithy.ShapeTypeList})
+var sAsPathType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAsPathType, Members: &mAsPathType, Type: smithy.ShapeTypeEnum})
+var sAssociatedCoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedCoreNetwork, Members: &mAssociatedCoreNetwork, Type: smithy.ShapeTypeStructure})
+var sAssociatedGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedGateway, Members: &mAssociatedGateway, Type: smithy.ShapeTypeStructure})
+var s_AssociatedGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedGatewayId, Type: smithy.ShapeTypeString})
+var sAvailableBillingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAvailableBillingMode, Members: &mAvailableBillingMode, Type: smithy.ShapeTypeStructure})
+var s_AvailableBillingModeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailableBillingModeList, Members: &m_AvailableBillingModeList, Type: smithy.ShapeTypeList})
+var s_AvailableMacSecPortSpeeds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailableMacSecPortSpeeds, Members: &m_AvailableMacSecPortSpeeds, Type: smithy.ShapeTypeList})
+var s_AvailablePortSpeeds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AvailablePortSpeeds, Members: &m_AvailablePortSpeeds, Type: smithy.ShapeTypeList})
+var s_AwsDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsDevice, Type: smithy.ShapeTypeString})
+var s_AwsDeviceV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsDeviceV2, Type: smithy.ShapeTypeString})
+var s_AwsLogicalDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsLogicalDeviceId, Type: smithy.ShapeTypeString})
+var s_Bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var s_BGPAuthKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sBGPPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBGPPeer, Members: &mBGPPeer, Type: smithy.ShapeTypeStructure})
+var s_BGPPeerId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BGPPeerId, Type: smithy.ShapeTypeString})
+var s_BGPPeerIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BGPPeerIdList, Members: &m_BGPPeerIdList, Type: smithy.ShapeTypeList})
+var s_BGPPeerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BGPPeerList, Members: &m_BGPPeerList, Type: smithy.ShapeTypeList})
+var sBGPPeerState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBGPPeerState, Members: &mBGPPeerState, Type: smithy.ShapeTypeEnum})
+var sBGPStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBGPStatus, Members: &mBGPStatus, Type: smithy.ShapeTypeEnum})
+var sBillingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var s_BooleanFlag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BooleanFlag, Type: smithy.ShapeTypeBoolean})
+var s_Cak = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Cak, Type: smithy.ShapeTypeString})
+var s_CIDR = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var s_Ckn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ckn, Type: smithy.ShapeTypeString})
+var s_CommunityEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunityEntry, Type: smithy.ShapeTypeString})
+var s_CommunityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CommunityList, Members: &m_CommunityList, Type: smithy.ShapeTypeList})
+var sConnection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var s_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var s_ConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var s_ConnectionIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionIdentifier, Type: smithy.ShapeTypeString})
+var s_ConnectionIdentifierList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionIdentifierList, Members: &m_ConnectionIdentifierList, Type: smithy.ShapeTypeList})
+var s_ConnectionIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionIdList, Members: &m_ConnectionIdList, Type: smithy.ShapeTypeList})
+var s_ConnectionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var s_ConnectionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnectionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var s_CoreNetworkAttachmentId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkAttachmentId, Type: smithy.ShapeTypeString})
+var s_CoreNetworkIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreNetworkIdentifier, Type: smithy.ShapeTypeString})
+var s_Count = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var s_CustomerAddress = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sCustomerAgreement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomerAgreement, Members: &mCustomerAgreement, Type: smithy.ShapeTypeStructure})
+var sDirectConnectClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectClientException, Members: &mDirectConnectClientException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGateway, Members: &mDirectConnectGateway, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAssociation, Members: &mDirectConnectGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var s_DirectConnectGatewayAssociationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayAssociationId, Type: smithy.ShapeTypeString})
+var s_DirectConnectGatewayAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayAssociationList, Members: &m_DirectConnectGatewayAssociationList, Type: smithy.ShapeTypeList})
+var sDirectConnectGatewayAssociationProposal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAssociationProposal, Members: &mDirectConnectGatewayAssociationProposal, Type: smithy.ShapeTypeStructure})
+var s_DirectConnectGatewayAssociationProposalId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayAssociationProposalId, Type: smithy.ShapeTypeString})
+var s_DirectConnectGatewayAssociationProposalList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayAssociationProposalList, Members: &m_DirectConnectGatewayAssociationProposalList, Type: smithy.ShapeTypeList})
+var sDirectConnectGatewayAssociationProposalState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAssociationProposalState, Members: &mDirectConnectGatewayAssociationProposalState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGatewayAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAssociationState, Members: &mDirectConnectGatewayAssociationState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGatewayAttachment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAttachment, Members: &mDirectConnectGatewayAttachment, Type: smithy.ShapeTypeStructure})
+var s_DirectConnectGatewayAttachmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayAttachmentList, Members: &m_DirectConnectGatewayAttachmentList, Type: smithy.ShapeTypeList})
+var sDirectConnectGatewayAttachmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAttachmentState, Members: &mDirectConnectGatewayAttachmentState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGatewayAttachmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayAttachmentType, Members: &mDirectConnectGatewayAttachmentType, Type: smithy.ShapeTypeEnum})
+var s_DirectConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var s_DirectConnectGatewayList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayList, Members: &m_DirectConnectGatewayList, Type: smithy.ShapeTypeList})
+var s_DirectConnectGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectConnectGatewayName, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectGatewayState, Members: &mDirectConnectGatewayState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDirectConnectServerException, Members: &mDirectConnectServerException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sDuplicateTagKeysException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDuplicateTagKeysException, Members: &mDuplicateTagKeysException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_EnableSiteLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnableSiteLink, Type: smithy.ShapeTypeBoolean})
+var s_EncryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EncryptionMode, Type: smithy.ShapeTypeString})
+var s_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_FailureTestHistoryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FailureTestHistoryStatus, Type: smithy.ShapeTypeString})
+var s_GatewayIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayIdentifier, Type: smithy.ShapeTypeString})
+var s_GatewayIdToAssociate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GatewayIdToAssociate, Type: smithy.ShapeTypeString})
+var sGatewayType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGatewayType, Members: &mGatewayType, Type: smithy.ShapeTypeEnum})
+var sHasLogicalRedundancy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHasLogicalRedundancy, Members: &mHasLogicalRedundancy, Type: smithy.ShapeTypeEnum})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var s_IncludedRegionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IncludedRegionList, Members: &m_IncludedRegionList, Type: smithy.ShapeTypeList})
+var sInterconnect = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnect, Members: &mInterconnect, Type: smithy.ShapeTypeStructure})
+var s_InterconnectId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InterconnectId, Type: smithy.ShapeTypeString})
+var s_InterconnectList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InterconnectList, Members: &m_InterconnectList, Type: smithy.ShapeTypeList})
+var s_InterconnectName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InterconnectName, Type: smithy.ShapeTypeString})
+var sInterconnectState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnectState, Members: &mInterconnectState, Type: smithy.ShapeTypeEnum})
+var s_JumboFrameCapable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JumboFrameCapable, Type: smithy.ShapeTypeBoolean})
+var sLag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLag, Members: &mLag, Type: smithy.ShapeTypeStructure})
+var s_LagId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LagId, Type: smithy.ShapeTypeString})
+var s_LagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LagList, Members: &m_LagList, Type: smithy.ShapeTypeList})
+var s_LagName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LagName, Type: smithy.ShapeTypeString})
+var sLagState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLagState, Members: &mLagState, Type: smithy.ShapeTypeEnum})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sLoa = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoa, Members: &mLoa, Type: smithy.ShapeTypeStructure})
+var s_LoaContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoaContent, Type: smithy.ShapeTypeBlob})
+var sLoaContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLoaContentType, Members: &mLoaContentType, Type: smithy.ShapeTypeEnum})
+var s_LoaIssueTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LoaIssueTime, Type: smithy.ShapeTypeTimestamp})
+var sLocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure})
+var s_LocationCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var s_LocationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList})
+var s_LocationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LocationName, Type: smithy.ShapeTypeString})
+var s_LongAsn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var s_MacSecCapable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MacSecCapable, Type: smithy.ShapeTypeBoolean})
+var sMacSecKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMacSecKey, Members: &mMacSecKey, Type: smithy.ShapeTypeStructure})
+var s_MacSecKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MacSecKeyList, Members: &m_MacSecKeyList, Type: smithy.ShapeTypeList})
+var s_MaxResultSetSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var s_MTU = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MTU, Type: smithy.ShapeTypeInteger})
+var sNewBGPPeer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewBGPPeer, Members: &mNewBGPPeer, Type: smithy.ShapeTypeStructure})
+var sNewPrivateVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewPrivateVirtualInterface, Members: &mNewPrivateVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sNewPrivateVirtualInterfaceAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewPrivateVirtualInterfaceAllocation, Members: &mNewPrivateVirtualInterfaceAllocation, Type: smithy.ShapeTypeStructure})
+var sNewPublicVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewPublicVirtualInterface, Members: &mNewPublicVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sNewPublicVirtualInterfaceAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewPublicVirtualInterfaceAllocation, Members: &mNewPublicVirtualInterfaceAllocation, Type: smithy.ShapeTypeStructure})
+var sNewTransitVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewTransitVirtualInterface, Members: &mNewTransitVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sNewTransitVirtualInterfaceAllocation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNewTransitVirtualInterfaceAllocation, Members: &mNewTransitVirtualInterfaceAllocation, Type: smithy.ShapeTypeStructure})
+var sNniPartnerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNniPartnerType, Members: &mNniPartnerType, Type: smithy.ShapeTypeEnum})
+var s_OwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_PartnerInterconnectMacSecCapable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerInterconnectMacSecCapable, Type: smithy.ShapeTypeBoolean})
+var s_PartnerName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerName, Type: smithy.ShapeTypeString})
+var s_Platform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Platform, Type: smithy.ShapeTypeString})
+var s_PortEncryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortEncryptionStatus, Type: smithy.ShapeTypeString})
+var s_PortSpeed = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortSpeed, Type: smithy.ShapeTypeString})
+var s_PrefixPoolAllocatedCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var s_PrefixPoolSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrefixPoolSize, Type: smithy.ShapeTypeInteger})
+var s_PrefixPoolUnallocatedCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PrefixPoolUnallocatedCount, Type: smithy.ShapeTypeInteger})
+var s_ProviderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProviderList, Members: &m_ProviderList, Type: smithy.ShapeTypeList})
+var s_ProviderName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var s_RateLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var sRateLimiterStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRateLimiterStatus, Members: &mRateLimiterStatus, Type: smithy.ShapeTypeStructure})
+var s_Region = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Region, Type: smithy.ShapeTypeString})
+var sRequestBillingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestBillingMode, Members: &mRequestBillingMode, Type: smithy.ShapeTypeEnum})
+var s_RequestMACSec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RequestMACSec, Type: smithy.ShapeTypeBoolean})
+var sResiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResiliencyGroup, Members: &mResiliencyGroup, Type: smithy.ShapeTypeStructure})
+var s_ResiliencyGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResiliencyGroupArn, Type: smithy.ShapeTypeString})
+var sResiliencyGroupAssociation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResiliencyGroupAssociation, Members: &mResiliencyGroupAssociation, Type: smithy.ShapeTypeStructure})
+var s_ResiliencyGroupAssociationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResiliencyGroupAssociationList, Members: &m_ResiliencyGroupAssociationList, Type: smithy.ShapeTypeList})
+var sResiliencyGroupAssociationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResiliencyGroupAssociationState, Members: &mResiliencyGroupAssociationState, Type: smithy.ShapeTypeEnum})
+var s_ResiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var s_ResiliencyGroupName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResiliencyGroupName, Type: smithy.ShapeTypeString})
+var sResiliencyGroupState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResiliencyGroupState, Members: &mResiliencyGroupState, Type: smithy.ShapeTypeEnum})
+var sResiliencyGroupSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResiliencyGroupSummary, Members: &mResiliencyGroupSummary, Type: smithy.ShapeTypeStructure})
+var s_ResiliencyGroupSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResiliencyGroupSummaryList, Members: &m_ResiliencyGroupSummaryList, Type: smithy.ShapeTypeList})
+var sResiliencyGroupType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResiliencyGroupType, Members: &mResiliencyGroupType, Type: smithy.ShapeTypeEnum})
+var sResiliencyModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResiliencyModel, Members: &mResiliencyModel, Type: smithy.ShapeTypeEnum})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var s_ResourceArnList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList})
+var sResourceTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var s_ResourceTagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sRoute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRoute, Members: &mRoute, Type: smithy.ShapeTypeStructure})
+var s_RouteCidr = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteCidr, Type: smithy.ShapeTypeString})
+var sRouteDirection = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteDirection, Members: &mRouteDirection, Type: smithy.ShapeTypeEnum})
+var s_RouteFilterCidrString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteFilterCidrString, Type: smithy.ShapeTypeString})
+var s_RouteFilterCidrStringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteFilterCidrStringList, Members: &m_RouteFilterCidrStringList, Type: smithy.ShapeTypeList})
+var sRouteFilterPrefix = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteFilterPrefix, Members: &mRouteFilterPrefix, Type: smithy.ShapeTypeStructure})
+var s_RouteFilterPrefixList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sRouteFilters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouteFilters, Members: &mRouteFilters, Type: smithy.ShapeTypeStructure})
+var s_RouteInstalledAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteInstalledAt, Type: smithy.ShapeTypeTimestamp})
+var s_RouteList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouteList, Members: &m_RouteList, Type: smithy.ShapeTypeList})
+var s_RouterConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouterConfig, Type: smithy.ShapeTypeString})
+var sRouterType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRouterType, Members: &mRouterType, Type: smithy.ShapeTypeStructure})
+var s_RouterTypeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RouterTypeIdentifier, Type: smithy.ShapeTypeString})
+var s_SecretARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretARN, Type: smithy.ShapeTypeString})
+var s_SiteLinkEnabled = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SiteLinkEnabled, Type: smithy.ShapeTypeBoolean})
+var s_Software = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Software, Type: smithy.ShapeTypeString})
+var s_StartOnDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartOnDate, Type: smithy.ShapeTypeString})
+var s_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp})
+var s_State = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_State, Type: smithy.ShapeTypeString})
+var s_StateChangeError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateChangeError, Type: smithy.ShapeTypeString})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TestDuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestDuration, Type: smithy.ShapeTypeInteger})
+var s_TestId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TestId, Type: smithy.ShapeTypeString})
+var sTooManyTagsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyTagsException, Members: &mTooManyTagsException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Vendor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Vendor, Type: smithy.ShapeTypeString})
+var sVirtualGateway = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGateway, Members: &mVirtualGateway, Type: smithy.ShapeTypeStructure})
+var s_VirtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var s_VirtualGatewayList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayList, Members: &m_VirtualGatewayList, Type: smithy.ShapeTypeList})
+var s_VirtualGatewayRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayRegion, Type: smithy.ShapeTypeString})
+var s_VirtualGatewayState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualGatewayState, Type: smithy.ShapeTypeString})
+var sVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualInterface, Members: &mVirtualInterface, Type: smithy.ShapeTypeStructure})
+var s_VirtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var s_VirtualInterfaceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualInterfaceList, Members: &m_VirtualInterfaceList, Type: smithy.ShapeTypeList})
+var s_VirtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var s_VirtualInterfaceRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualInterfaceRegion, Type: smithy.ShapeTypeString})
+var sVirtualInterfaceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualInterfaceState, Members: &mVirtualInterfaceState, Type: smithy.ShapeTypeEnum})
+var sVirtualInterfaceTestHistory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualInterfaceTestHistory, Members: &mVirtualInterfaceTestHistory, Type: smithy.ShapeTypeStructure})
+var s_VirtualInterfaceTestHistoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualInterfaceTestHistoryList, Members: &m_VirtualInterfaceTestHistoryList, Type: smithy.ShapeTypeList})
+var s_VirtualInterfaceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VirtualInterfaceType, Type: smithy.ShapeTypeString})
+var s_VLAN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var s_XsltTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XsltTemplateName, Type: smithy.ShapeTypeString})
+var s_XsltTemplateNameForMacSec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_XsltTemplateNameForMacSec, Type: smithy.ShapeTypeString})
+var sAcceptDirectConnectGatewayAssociationProposalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDirectConnectGatewayAssociationProposalRequest, Members: &mAcceptDirectConnectGatewayAssociationProposalRequest, Type: smithy.ShapeTypeStructure})
+var sAcceptDirectConnectGatewayAssociationProposalResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAcceptDirectConnectGatewayAssociationProposalResult, Members: &mAcceptDirectConnectGatewayAssociationProposalResult, Type: smithy.ShapeTypeStructure})
+var sAllocateConnectionOnInterconnectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocateConnectionOnInterconnectRequest, Members: &mAllocateConnectionOnInterconnectRequest, Type: smithy.ShapeTypeStructure})
+var sAllocateHostedConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocateHostedConnectionRequest, Members: &mAllocateHostedConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sAllocatePrivateVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocatePrivateVirtualInterfaceRequest, Members: &mAllocatePrivateVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sAllocatePublicVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocatePublicVirtualInterfaceRequest, Members: &mAllocatePublicVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sAllocateTransitVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocateTransitVirtualInterfaceRequest, Members: &mAllocateTransitVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sAllocateTransitVirtualInterfaceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAllocateTransitVirtualInterfaceResult, Members: &mAllocateTransitVirtualInterfaceResult, Type: smithy.ShapeTypeStructure})
+var sAssociateConnectionsToResiliencyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectionsToResiliencyGroupRequest, Members: &mAssociateConnectionsToResiliencyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateConnectionsToResiliencyGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectionsToResiliencyGroupResult, Members: &mAssociateConnectionsToResiliencyGroupResult, Type: smithy.ShapeTypeStructure})
+var sAssociateConnectionWithLagRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateConnectionWithLagRequest, Members: &mAssociateConnectionWithLagRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateHostedConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateHostedConnectionRequest, Members: &mAssociateHostedConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateMacSecKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMacSecKeyRequest, Members: &mAssociateMacSecKeyRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateMacSecKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateMacSecKeyResponse, Members: &mAssociateMacSecKeyResponse, Type: smithy.ShapeTypeStructure})
+var sAssociateVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateVirtualInterfaceRequest, Members: &mAssociateVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sConfirmConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmConnectionRequest, Members: &mConfirmConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sConfirmConnectionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmConnectionResponse, Members: &mConfirmConnectionResponse, Type: smithy.ShapeTypeStructure})
+var sConfirmCustomerAgreementRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmCustomerAgreementRequest, Members: &mConfirmCustomerAgreementRequest, Type: smithy.ShapeTypeStructure})
+var sConfirmCustomerAgreementResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmCustomerAgreementResponse, Members: &mConfirmCustomerAgreementResponse, Type: smithy.ShapeTypeStructure})
+var sConfirmPrivateVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmPrivateVirtualInterfaceRequest, Members: &mConfirmPrivateVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sConfirmPrivateVirtualInterfaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmPrivateVirtualInterfaceResponse, Members: &mConfirmPrivateVirtualInterfaceResponse, Type: smithy.ShapeTypeStructure})
+var sConfirmPublicVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmPublicVirtualInterfaceRequest, Members: &mConfirmPublicVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sConfirmPublicVirtualInterfaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmPublicVirtualInterfaceResponse, Members: &mConfirmPublicVirtualInterfaceResponse, Type: smithy.ShapeTypeStructure})
+var sConfirmTransitVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmTransitVirtualInterfaceRequest, Members: &mConfirmTransitVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sConfirmTransitVirtualInterfaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfirmTransitVirtualInterfaceResponse, Members: &mConfirmTransitVirtualInterfaceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateBGPPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBGPPeerRequest, Members: &mCreateBGPPeerRequest, Type: smithy.ShapeTypeStructure})
+var sCreateBGPPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBGPPeerResponse, Members: &mCreateBGPPeerResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConnectionRequest, Members: &mCreateConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAssociationRequest, Members: &mCreateDirectConnectGatewayAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAssociationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAssociationResult, Members: &mCreateDirectConnectGatewayAssociationResult, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAssociationProposalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAssociationProposalRequest, Members: &mCreateDirectConnectGatewayAssociationProposalRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAssociationProposalResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayAssociationProposalResult, Members: &mCreateDirectConnectGatewayAssociationProposalResult, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayRequest, Members: &mCreateDirectConnectGatewayRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDirectConnectGatewayResult, Members: &mCreateDirectConnectGatewayResult, Type: smithy.ShapeTypeStructure})
+var sCreateInterconnectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateInterconnectRequest, Members: &mCreateInterconnectRequest, Type: smithy.ShapeTypeStructure})
+var sCreateLagRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLagRequest, Members: &mCreateLagRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePrivateVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePrivateVirtualInterfaceRequest, Members: &mCreatePrivateVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sCreatePublicVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreatePublicVirtualInterfaceRequest, Members: &mCreatePublicVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateResiliencyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResiliencyGroupRequest, Members: &mCreateResiliencyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateResiliencyGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateResiliencyGroupResult, Members: &mCreateResiliencyGroupResult, Type: smithy.ShapeTypeStructure})
+var sCreateTransitVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitVirtualInterfaceRequest, Members: &mCreateTransitVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateTransitVirtualInterfaceResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateTransitVirtualInterfaceResult, Members: &mCreateTransitVirtualInterfaceResult, Type: smithy.ShapeTypeStructure})
+var sDeleteBGPPeerRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBGPPeerRequest, Members: &mDeleteBGPPeerRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteBGPPeerResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBGPPeerResponse, Members: &mDeleteBGPPeerResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConnectionRequest, Members: &mDeleteConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayAssociationRequest, Members: &mDeleteDirectConnectGatewayAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayAssociationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayAssociationResult, Members: &mDeleteDirectConnectGatewayAssociationResult, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayAssociationProposalRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayAssociationProposalRequest, Members: &mDeleteDirectConnectGatewayAssociationProposalRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayAssociationProposalResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayAssociationProposalResult, Members: &mDeleteDirectConnectGatewayAssociationProposalResult, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayRequest, Members: &mDeleteDirectConnectGatewayRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDirectConnectGatewayResult, Members: &mDeleteDirectConnectGatewayResult, Type: smithy.ShapeTypeStructure})
+var sDeleteInterconnectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInterconnectRequest, Members: &mDeleteInterconnectRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteInterconnectResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteInterconnectResponse, Members: &mDeleteInterconnectResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteLagRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLagRequest, Members: &mDeleteLagRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResiliencyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResiliencyGroupRequest, Members: &mDeleteResiliencyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResiliencyGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResiliencyGroupResult, Members: &mDeleteResiliencyGroupResult, Type: smithy.ShapeTypeStructure})
+var sDeleteVirtualInterfaceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualInterfaceRequest, Members: &mDeleteVirtualInterfaceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteVirtualInterfaceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteVirtualInterfaceResponse, Members: &mDeleteVirtualInterfaceResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionLoaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionLoaRequest, Members: &mDescribeConnectionLoaRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionLoaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionLoaResponse, Members: &mDescribeConnectionLoaResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionsRequest, Members: &mDescribeConnectionsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionsOnInterconnectRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConnectionsOnInterconnectRequest, Members: &mDescribeConnectionsOnInterconnectRequest, Type: smithy.ShapeTypeStructure})
+var sConnections = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnections, Members: &mConnections, Type: smithy.ShapeTypeStructure})
+var sDescribeCustomerMetadataResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeCustomerMetadataResponse, Members: &mDescribeCustomerMetadataResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewayAssociationProposalsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAssociationProposalsRequest, Members: &mDescribeDirectConnectGatewayAssociationProposalsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewayAssociationProposalsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAssociationProposalsResult, Members: &mDescribeDirectConnectGatewayAssociationProposalsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewayAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAssociationsRequest, Members: &mDescribeDirectConnectGatewayAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewayAssociationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAssociationsResult, Members: &mDescribeDirectConnectGatewayAssociationsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewayAttachmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAttachmentsRequest, Members: &mDescribeDirectConnectGatewayAttachmentsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewayAttachmentsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewayAttachmentsResult, Members: &mDescribeDirectConnectGatewayAttachmentsResult, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewaysRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewaysRequest, Members: &mDescribeDirectConnectGatewaysRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeDirectConnectGatewaysResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDirectConnectGatewaysResult, Members: &mDescribeDirectConnectGatewaysResult, Type: smithy.ShapeTypeStructure})
+var sDescribeHostedConnectionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeHostedConnectionsRequest, Members: &mDescribeHostedConnectionsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeInterconnectLoaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInterconnectLoaRequest, Members: &mDescribeInterconnectLoaRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeInterconnectLoaResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInterconnectLoaResponse, Members: &mDescribeInterconnectLoaResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeInterconnectsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeInterconnectsRequest, Members: &mDescribeInterconnectsRequest, Type: smithy.ShapeTypeStructure})
+var sInterconnects = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInterconnects, Members: &mInterconnects, Type: smithy.ShapeTypeStructure})
+var sDescribeLagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLagsRequest, Members: &mDescribeLagsRequest, Type: smithy.ShapeTypeStructure})
+var sLags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLags, Members: &mLags, Type: smithy.ShapeTypeStructure})
+var sDescribeLoaRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeLoaRequest, Members: &mDescribeLoaRequest, Type: smithy.ShapeTypeStructure})
+var sLocations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLocations, Members: &mLocations, Type: smithy.ShapeTypeStructure})
+var sDescribeRouterConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRouterConfigurationRequest, Members: &mDescribeRouterConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRouterConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRouterConfigurationResponse, Members: &mDescribeRouterConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeTagsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsRequest, Members: &mDescribeTagsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeTagsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsResponse, Members: &mDescribeTagsResponse, Type: smithy.ShapeTypeStructure})
+var sVirtualGateways = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualGateways, Members: &mVirtualGateways, Type: smithy.ShapeTypeStructure})
+var sDescribeVirtualInterfacesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeVirtualInterfacesRequest, Members: &mDescribeVirtualInterfacesRequest, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVirtualInterfaces, Members: &mVirtualInterfaces, Type: smithy.ShapeTypeStructure})
+var sDisassociateConnectionFromLagRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectionFromLagRequest, Members: &mDisassociateConnectionFromLagRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateConnectionsFromResiliencyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectionsFromResiliencyGroupRequest, Members: &mDisassociateConnectionsFromResiliencyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateConnectionsFromResiliencyGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateConnectionsFromResiliencyGroupResult, Members: &mDisassociateConnectionsFromResiliencyGroupResult, Type: smithy.ShapeTypeStructure})
+var sDisassociateMacSecKeyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMacSecKeyRequest, Members: &mDisassociateMacSecKeyRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateMacSecKeyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateMacSecKeyResponse, Members: &mDisassociateMacSecKeyResponse, Type: smithy.ShapeTypeStructure})
+var sGetResiliencyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResiliencyGroupRequest, Members: &mGetResiliencyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sGetResiliencyGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResiliencyGroupResult, Members: &mGetResiliencyGroupResult, Type: smithy.ShapeTypeStructure})
+var sListResiliencyGroupAssociationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResiliencyGroupAssociationsRequest, Members: &mListResiliencyGroupAssociationsRequest, Type: smithy.ShapeTypeStructure})
+var sListResiliencyGroupAssociationsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResiliencyGroupAssociationsResult, Members: &mListResiliencyGroupAssociationsResult, Type: smithy.ShapeTypeStructure})
+var sListResiliencyGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResiliencyGroupsRequest, Members: &mListResiliencyGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListResiliencyGroupsResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResiliencyGroupsResult, Members: &mListResiliencyGroupsResult, Type: smithy.ShapeTypeStructure})
+var sListVirtualInterfaceRoutesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualInterfaceRoutesRequest, Members: &mListVirtualInterfaceRoutesRequest, Type: smithy.ShapeTypeStructure})
+var sListVirtualInterfaceRoutesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualInterfaceRoutesResponse, Members: &mListVirtualInterfaceRoutesResponse, Type: smithy.ShapeTypeStructure})
+var sListVirtualInterfaceTestHistoryRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualInterfaceTestHistoryRequest, Members: &mListVirtualInterfaceTestHistoryRequest, Type: smithy.ShapeTypeStructure})
+var sListVirtualInterfaceTestHistoryResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListVirtualInterfaceTestHistoryResponse, Members: &mListVirtualInterfaceTestHistoryResponse, Type: smithy.ShapeTypeStructure})
+var sStartBgpFailoverTestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBgpFailoverTestRequest, Members: &mStartBgpFailoverTestRequest, Type: smithy.ShapeTypeStructure})
+var sStartBgpFailoverTestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartBgpFailoverTestResponse, Members: &mStartBgpFailoverTestResponse, Type: smithy.ShapeTypeStructure})
+var sStopBgpFailoverTestRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBgpFailoverTestRequest, Members: &mStopBgpFailoverTestRequest, Type: smithy.ShapeTypeStructure})
+var sStopBgpFailoverTestResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopBgpFailoverTestResponse, Members: &mStopBgpFailoverTestResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionRequest, Members: &mUpdateConnectionRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionsBillingModeRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionsBillingModeRequest, Members: &mUpdateConnectionsBillingModeRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectionsBillingModeResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectionsBillingModeResponse, Members: &mUpdateConnectionsBillingModeResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayAssociationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayAssociationRequest, Members: &mUpdateDirectConnectGatewayAssociationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayAssociationResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayAssociationResult, Members: &mUpdateDirectConnectGatewayAssociationResult, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayRequest, Members: &mUpdateDirectConnectGatewayRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDirectConnectGatewayResponse, Members: &mUpdateDirectConnectGatewayResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateLagRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLagRequest, Members: &mUpdateLagRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateResiliencyGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResiliencyGroupRequest, Members: &mUpdateResiliencyGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateResiliencyGroupResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateResiliencyGroupResult, Members: &mUpdateResiliencyGroupResult, Type: smithy.ShapeTypeStructure})
+var sUpdateVirtualInterfaceAttributesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateVirtualInterfaceAttributesRequest, Members: &mUpdateVirtualInterfaceAttributesRequest, Type: smithy.ShapeTypeStructure})
+
+var sAddressFamily_IPv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPv4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAddressFamily_IPv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IPv6", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AgreementList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomerAgreement, Members: &mCustomerAgreement, Type: smithy.ShapeTypeStructure})
+var s_AsPathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sAsPathSegment_pathType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pathType", ID: &iAsPathType, Members: &mAsPathType, Type: smithy.ShapeTypeEnum})
+var sAsPathSegment_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_AsPathList, Members: &m_AsPathList, Type: smithy.ShapeTypeList})
+var s_AsPathSegmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAsPathSegment, Members: &mAsPathSegment, Type: smithy.ShapeTypeStructure})
+var sAsPathType_Seq = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Seq", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAsPathType_Set = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Set", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssociatedCoreNetwork_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_CoreNetworkIdentifier, Type: smithy.ShapeTypeString})
+var sAssociatedCoreNetwork_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAssociatedCoreNetwork_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_CoreNetworkAttachmentId, Type: smithy.ShapeTypeString})
+var sAssociatedGateway_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_GatewayIdentifier, Type: smithy.ShapeTypeString})
+var sAssociatedGateway_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iGatewayType, Members: &mGatewayType, Type: smithy.ShapeTypeEnum})
+var sAssociatedGateway_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAssociatedGateway_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sAvailableBillingMode_billingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sAvailableBillingMode_availablePortSpeeds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availablePortSpeeds", ID: &i_AvailablePortSpeeds, Members: &m_AvailablePortSpeeds, Type: smithy.ShapeTypeList})
+var sAvailableBillingMode_includedRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includedRegions", ID: &i_IncludedRegionList, Members: &m_IncludedRegionList, Type: smithy.ShapeTypeList})
+var s_AvailableBillingModeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAvailableBillingMode, Members: &mAvailableBillingMode, Type: smithy.ShapeTypeStructure})
+var s_AvailableMacSecPortSpeeds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PortSpeed, Type: smithy.ShapeTypeString})
+var s_AvailablePortSpeeds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PortSpeed, Type: smithy.ShapeTypeString})
+var sBGPPeer_bgpPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpPeerId", ID: &i_BGPPeerId, Type: smithy.ShapeTypeString})
+var sBGPPeer_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sBGPPeer_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sBGPPeer_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sBGPPeer_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sBGPPeer_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sBGPPeer_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sBGPPeer_bgpPeerState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpPeerState", ID: &iBGPPeerState, Members: &mBGPPeerState, Type: smithy.ShapeTypeEnum})
+var sBGPPeer_bgpStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpStatus", ID: &iBGPStatus, Members: &mBGPStatus, Type: smithy.ShapeTypeEnum})
+var sBGPPeer_awsDeviceV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDeviceV2", ID: &i_AwsDeviceV2, Type: smithy.ShapeTypeString})
+var sBGPPeer_awsLogicalDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsLogicalDeviceId", ID: &i_AwsLogicalDeviceId, Type: smithy.ShapeTypeString})
+var s_BGPPeerIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_BGPPeerId, Type: smithy.ShapeTypeString})
+var s_BGPPeerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBGPPeer, Members: &mBGPPeer, Type: smithy.ShapeTypeStructure})
+var sBGPPeerState_Verifying = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verifying", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBGPPeerState_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBGPPeerState_Available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBGPPeerState_Deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBGPPeerState_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBGPStatus_Up = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Up", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBGPStatus_Down = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Down", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBGPStatus_Unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_PayAsYouGo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayAsYouGo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_FlatRateTier1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_FlatRateTier2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_FlatRateTier3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_FlatRateTier4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_FlatRateTier5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier5", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_PortPairFlatRateTier1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortPairFlatRateTier1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_PortPairFlatRateTier2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortPairFlatRateTier2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_PortPairFlatRateTier3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortPairFlatRateTier3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_PortPairFlatRateTier4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortPairFlatRateTier4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBillingMode_PortPairFlatRateTier5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PortPairFlatRateTier5", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CommunityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CommunityEntry, Type: smithy.ShapeTypeString})
+var sConnection_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sConnection_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sConnection_connectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sConnection_connectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sConnection_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sConnection_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sConnection_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sConnection_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sConnection_partnerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partnerName", ID: &i_PartnerName, Type: smithy.ShapeTypeString})
+var sConnection_loaIssueTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loaIssueTime", ID: &i_LoaIssueTime, Type: smithy.ShapeTypeTimestamp})
+var sConnection_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sConnection_awsDevice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDevice", ID: &i_AwsDevice, Type: smithy.ShapeTypeString})
+var sConnection_jumboFrameCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jumboFrameCapable", ID: &i_JumboFrameCapable, Type: smithy.ShapeTypeBoolean})
+var sConnection_awsDeviceV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDeviceV2", ID: &i_AwsDeviceV2, Type: smithy.ShapeTypeString})
+var sConnection_awsLogicalDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsLogicalDeviceId", ID: &i_AwsLogicalDeviceId, Type: smithy.ShapeTypeString})
+var sConnection_hasLogicalRedundancy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasLogicalRedundancy", ID: &iHasLogicalRedundancy, Members: &mHasLogicalRedundancy, Type: smithy.ShapeTypeEnum})
+var sConnection_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sConnection_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sConnection_macSecCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecCapable", ID: &i_MacSecCapable, Type: smithy.ShapeTypeBoolean})
+var sConnection_portEncryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portEncryptionStatus", ID: &i_PortEncryptionStatus, Type: smithy.ShapeTypeString})
+var sConnection_encryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionMode", ID: &i_EncryptionMode, Type: smithy.ShapeTypeString})
+var sConnection_macSecKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecKeys", ID: &i_MacSecKeyList, Members: &m_MacSecKeyList, Type: smithy.ShapeTypeList})
+var sConnection_rateLimiterStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimiterStatus", ID: &iRateLimiterStatus, Members: &mRateLimiterStatus, Type: smithy.ShapeTypeStructure})
+var sConnection_partnerInterconnectMacSecCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "partnerInterconnectMacSecCapable", ID: &i_PartnerInterconnectMacSecCapable, Type: smithy.ShapeTypeBoolean})
+var sConnection_prefixPoolSizeIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolSizeIpv4", ID: &i_PrefixPoolSize, Type: smithy.ShapeTypeInteger})
+var sConnection_prefixPoolSizeIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolSizeIpv6", ID: &i_PrefixPoolSize, Type: smithy.ShapeTypeInteger})
+var sConnection_prefixPoolUnallocatedCountIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolUnallocatedCountIpv4", ID: &i_PrefixPoolUnallocatedCount, Type: smithy.ShapeTypeInteger})
+var sConnection_prefixPoolUnallocatedCountIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolUnallocatedCountIpv6", ID: &i_PrefixPoolUnallocatedCount, Type: smithy.ShapeTypeInteger})
+var sConnection_billingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var s_ConnectionIdentifierList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectionIdentifier, Type: smithy.ShapeTypeString})
+var s_ConnectionIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var s_ConnectionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnection, Members: &mConnection, Type: smithy.ShapeTypeStructure})
+var sConnectionState_ordering = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ordering", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_requested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requested", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_down = smithy.NewStaticSchema(smithy.StaticSchema{Member: "down", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_rejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejected", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConnectionState_unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomerAgreement_agreementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agreementName", ID: &i_AgreementName, Type: smithy.ShapeTypeString})
+var sCustomerAgreement_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sDirectConnectClientException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDirectConnectGateway_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDirectConnectGateway_directConnectGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayName", ID: &i_DirectConnectGatewayName, Type: smithy.ShapeTypeString})
+var sDirectConnectGateway_amazonSideAsn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonSideAsn", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sDirectConnectGateway_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sDirectConnectGateway_directConnectGatewayState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayState", ID: &iDirectConnectGatewayState, Members: &mDirectConnectGatewayState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGateway_stateChangeError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateChangeError", ID: &i_StateChangeError, Type: smithy.ShapeTypeString})
+var sDirectConnectGateway_totalPrefixPoolAllocations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalPrefixPoolAllocations", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sDirectConnectGateway_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sDirectConnectGatewayAssociation_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociation_directConnectGatewayOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayOwnerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociation_associationState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationState", ID: &iDirectConnectGatewayAssociationState, Members: &mDirectConnectGatewayAssociationState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGatewayAssociation_stateChangeError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateChangeError", ID: &i_StateChangeError, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociation_associatedGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedGateway", ID: &iAssociatedGateway, Members: &mAssociatedGateway, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociation_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_DirectConnectGatewayAssociationId, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sDirectConnectGatewayAssociation_associatedCoreNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedCoreNetwork", ID: &iAssociatedCoreNetwork, Members: &mAssociatedCoreNetwork, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociation_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociation_virtualGatewayRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayRegion", ID: &i_VirtualGatewayRegion, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociation_virtualGatewayOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayOwnerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var s_DirectConnectGatewayAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectConnectGatewayAssociation, Members: &mDirectConnectGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationProposal_proposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proposalId", ID: &i_DirectConnectGatewayAssociationProposalId, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociationProposal_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayOwnerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAssociationProposal_proposalState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proposalState", ID: &iDirectConnectGatewayAssociationProposalState, Members: &mDirectConnectGatewayAssociationProposalState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGatewayAssociationProposal_associatedGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedGateway", ID: &iAssociatedGateway, Members: &mAssociatedGateway, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "existingAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sDirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestedAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var s_DirectConnectGatewayAssociationProposalList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectConnectGatewayAssociationProposal, Members: &mDirectConnectGatewayAssociationProposal, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationProposalState_requested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requested", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationProposalState_accepted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accepted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationProposalState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationState_associating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationState_associated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationState_disassociating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disassociating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationState_disassociated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disassociated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAssociationState_updating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachment_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAttachment_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAttachment_virtualInterfaceRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceRegion", ID: &i_VirtualInterfaceRegion, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAttachment_virtualInterfaceOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceOwnerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sDirectConnectGatewayAttachment_attachmentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentState", ID: &iDirectConnectGatewayAttachmentState, Members: &mDirectConnectGatewayAttachmentState, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGatewayAttachment_attachmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentType", ID: &iDirectConnectGatewayAttachmentType, Members: &mDirectConnectGatewayAttachmentType, Type: smithy.ShapeTypeEnum})
+var sDirectConnectGatewayAttachment_stateChangeError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stateChangeError", ID: &i_StateChangeError, Type: smithy.ShapeTypeString})
+var s_DirectConnectGatewayAttachmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectConnectGatewayAttachment, Members: &mDirectConnectGatewayAttachment, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachmentState_attaching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attaching", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachmentState_attached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attached", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachmentState_detaching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detaching", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachmentState_detached = smithy.NewStaticSchema(smithy.StaticSchema{Member: "detached", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachmentType_TransitVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitVirtualInterface", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayAttachmentType_PrivateVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PrivateVirtualInterface", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DirectConnectGatewayList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDirectConnectGateway, Members: &mDirectConnectGateway, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectGatewayState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDirectConnectServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDuplicateTagKeysException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGatewayType_VirtualPrivateGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VirtualPrivateGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGatewayType_TransitGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TransitGateway", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHasLogicalRedundancy_Unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHasLogicalRedundancy_Yes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Yes", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHasLogicalRedundancy_No = smithy.NewStaticSchema(smithy.StaticSchema{Member: "No", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_IncludedRegionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sInterconnect_interconnectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectId", ID: &i_InterconnectId, Type: smithy.ShapeTypeString})
+var sInterconnect_interconnectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectName", ID: &i_InterconnectName, Type: smithy.ShapeTypeString})
+var sInterconnect_interconnectState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectState", ID: &iInterconnectState, Members: &mInterconnectState, Type: smithy.ShapeTypeEnum})
+var sInterconnect_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sInterconnect_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sInterconnect_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sInterconnect_loaIssueTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loaIssueTime", ID: &i_LoaIssueTime, Type: smithy.ShapeTypeTimestamp})
+var sInterconnect_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sInterconnect_awsDevice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDevice", ID: &i_AwsDevice, Type: smithy.ShapeTypeString})
+var sInterconnect_jumboFrameCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jumboFrameCapable", ID: &i_JumboFrameCapable, Type: smithy.ShapeTypeBoolean})
+var sInterconnect_awsDeviceV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDeviceV2", ID: &i_AwsDeviceV2, Type: smithy.ShapeTypeString})
+var sInterconnect_awsLogicalDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsLogicalDeviceId", ID: &i_AwsLogicalDeviceId, Type: smithy.ShapeTypeString})
+var sInterconnect_hasLogicalRedundancy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasLogicalRedundancy", ID: &iHasLogicalRedundancy, Members: &mHasLogicalRedundancy, Type: smithy.ShapeTypeEnum})
+var sInterconnect_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sInterconnect_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sInterconnect_macSecCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecCapable", ID: &i_MacSecCapable, Type: smithy.ShapeTypeBoolean})
+var sInterconnect_portEncryptionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portEncryptionStatus", ID: &i_PortEncryptionStatus, Type: smithy.ShapeTypeString})
+var sInterconnect_encryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionMode", ID: &i_EncryptionMode, Type: smithy.ShapeTypeString})
+var sInterconnect_macSecKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecKeys", ID: &i_MacSecKeyList, Members: &m_MacSecKeyList, Type: smithy.ShapeTypeList})
+var s_InterconnectList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInterconnect, Members: &mInterconnect, Type: smithy.ShapeTypeStructure})
+var sInterconnectState_requested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requested", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInterconnectState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInterconnectState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInterconnectState_down = smithy.NewStaticSchema(smithy.StaticSchema{Member: "down", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInterconnectState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInterconnectState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInterconnectState_unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLag_connectionsBandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionsBandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sLag_numberOfConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfConnections", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sLag_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sLag_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sLag_lagName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagName", ID: &i_LagName, Type: smithy.ShapeTypeString})
+var sLag_lagState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagState", ID: &iLagState, Members: &mLagState, Type: smithy.ShapeTypeEnum})
+var sLag_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sLag_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sLag_minimumLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumLinks", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sLag_awsDevice = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDevice", ID: &i_AwsDevice, Type: smithy.ShapeTypeString})
+var sLag_awsDeviceV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDeviceV2", ID: &i_AwsDeviceV2, Type: smithy.ShapeTypeString})
+var sLag_awsLogicalDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsLogicalDeviceId", ID: &i_AwsLogicalDeviceId, Type: smithy.ShapeTypeString})
+var sLag_connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connections", ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var sLag_allowsHostedConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowsHostedConnections", ID: &i_BooleanFlag, Type: smithy.ShapeTypeBoolean})
+var sLag_jumboFrameCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jumboFrameCapable", ID: &i_JumboFrameCapable, Type: smithy.ShapeTypeBoolean})
+var sLag_hasLogicalRedundancy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hasLogicalRedundancy", ID: &iHasLogicalRedundancy, Members: &mHasLogicalRedundancy, Type: smithy.ShapeTypeEnum})
+var sLag_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sLag_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sLag_macSecCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecCapable", ID: &i_MacSecCapable, Type: smithy.ShapeTypeBoolean})
+var sLag_encryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionMode", ID: &i_EncryptionMode, Type: smithy.ShapeTypeString})
+var sLag_macSecKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecKeys", ID: &i_MacSecKeyList, Members: &m_MacSecKeyList, Type: smithy.ShapeTypeList})
+var sLag_prefixPoolSizeIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolSizeIpv4", ID: &i_PrefixPoolSize, Type: smithy.ShapeTypeInteger})
+var sLag_prefixPoolSizeIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolSizeIpv6", ID: &i_PrefixPoolSize, Type: smithy.ShapeTypeInteger})
+var sLag_prefixPoolUnallocatedCountIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolUnallocatedCountIpv4", ID: &i_PrefixPoolUnallocatedCount, Type: smithy.ShapeTypeInteger})
+var sLag_prefixPoolUnallocatedCountIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolUnallocatedCountIpv6", ID: &i_PrefixPoolUnallocatedCount, Type: smithy.ShapeTypeInteger})
+var sLag_rateLimiterStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimiterStatus", ID: &iRateLimiterStatus, Members: &mRateLimiterStatus, Type: smithy.ShapeTypeStructure})
+var sLag_billingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var s_LagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLag, Members: &mLag, Type: smithy.ShapeTypeStructure})
+var sLagState_requested = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requested", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLagState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLagState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLagState_down = smithy.NewStaticSchema(smithy.StaticSchema{Member: "down", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLagState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLagState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLagState_unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLoa_loaContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loaContent", ID: &i_LoaContent, Type: smithy.ShapeTypeBlob})
+var sLoa_loaContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loaContentType", ID: &iLoaContentType, Members: &mLoaContentType, Type: smithy.ShapeTypeEnum})
+var sLoaContentType_PDF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PDF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLocation_locationCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locationCode", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sLocation_locationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locationName", ID: &i_LocationName, Type: smithy.ShapeTypeString})
+var sLocation_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sLocation_availablePortSpeeds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availablePortSpeeds", ID: &i_AvailablePortSpeeds, Members: &m_AvailablePortSpeeds, Type: smithy.ShapeTypeList})
+var sLocation_availableProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableProviders", ID: &i_ProviderList, Members: &m_ProviderList, Type: smithy.ShapeTypeList})
+var sLocation_availableMacSecPortSpeeds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableMacSecPortSpeeds", ID: &i_AvailableMacSecPortSpeeds, Members: &m_AvailableMacSecPortSpeeds, Type: smithy.ShapeTypeList})
+var sLocation_availableBillingModes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableBillingModes", ID: &i_AvailableBillingModeList, Members: &m_AvailableBillingModeList, Type: smithy.ShapeTypeList})
+var s_LocationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLocation, Members: &mLocation, Type: smithy.ShapeTypeStructure})
+var sMacSecKey_secretARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretARN", ID: &i_SecretARN, Type: smithy.ShapeTypeString})
+var sMacSecKey_ckn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ckn", ID: &i_Ckn, Type: smithy.ShapeTypeString})
+var sMacSecKey_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &i_State, Type: smithy.ShapeTypeString})
+var sMacSecKey_startOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startOn", ID: &i_StartOnDate, Type: smithy.ShapeTypeString})
+var s_MacSecKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMacSecKey, Members: &mMacSecKey, Type: smithy.ShapeTypeStructure})
+var sNewBGPPeer_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sNewBGPPeer_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sNewBGPPeer_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sNewBGPPeer_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sNewBGPPeer_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sNewBGPPeer_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterface_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterface_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterface_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterface_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sNewPrivateVirtualInterface_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &i_MTU, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterface_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterface_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterface_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterface_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sNewPrivateVirtualInterface_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterface_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterface_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sNewPrivateVirtualInterface_enableSiteLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableSiteLink", ID: &i_EnableSiteLink, Type: smithy.ShapeTypeBoolean})
+var sNewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv4", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv6", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterface_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterfaceAllocation_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterfaceAllocation_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterfaceAllocation_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterfaceAllocation_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sNewPrivateVirtualInterfaceAllocation_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &i_MTU, Type: smithy.ShapeTypeInteger})
+var sNewPrivateVirtualInterfaceAllocation_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterfaceAllocation_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterfaceAllocation_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sNewPrivateVirtualInterfaceAllocation_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sNewPrivateVirtualInterfaceAllocation_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sNewPrivateVirtualInterfaceAllocation_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterface_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterface_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sNewPublicVirtualInterface_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sNewPublicVirtualInterface_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sNewPublicVirtualInterface_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterface_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterface_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterface_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sNewPublicVirtualInterface_routeFilterPrefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeFilterPrefixes", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sNewPublicVirtualInterface_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sNewPublicVirtualInterface_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterfaceAllocation_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterfaceAllocation_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sNewPublicVirtualInterfaceAllocation_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sNewPublicVirtualInterfaceAllocation_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sNewPublicVirtualInterfaceAllocation_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterfaceAllocation_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterfaceAllocation_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sNewPublicVirtualInterfaceAllocation_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sNewPublicVirtualInterfaceAllocation_routeFilterPrefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeFilterPrefixes", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sNewPublicVirtualInterfaceAllocation_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sNewPublicVirtualInterfaceAllocation_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterface_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterface_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterface_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterface_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sNewTransitVirtualInterface_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &i_MTU, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterface_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterface_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterface_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterface_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sNewTransitVirtualInterface_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterface_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sNewTransitVirtualInterface_enableSiteLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableSiteLink", ID: &i_EnableSiteLink, Type: smithy.ShapeTypeBoolean})
+var sNewTransitVirtualInterface_prefixPoolAllocatedCountIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv4", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterface_prefixPoolAllocatedCountIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv6", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterface_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterfaceAllocation_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterfaceAllocation_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterfaceAllocation_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterfaceAllocation_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sNewTransitVirtualInterfaceAllocation_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &i_MTU, Type: smithy.ShapeTypeInteger})
+var sNewTransitVirtualInterfaceAllocation_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterfaceAllocation_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterfaceAllocation_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sNewTransitVirtualInterfaceAllocation_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sNewTransitVirtualInterfaceAllocation_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sNewTransitVirtualInterfaceAllocation_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var sNniPartnerType_V1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNniPartnerType_V2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sNniPartnerType_NonPartner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NonPartner", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ProviderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sRateLimiterStatus_maxAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAllowed", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sRateLimiterStatus_inUse = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inUse", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sRateLimiterStatus_remaining = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remaining", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sRateLimiterStatus_totalBandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalBandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sRequestBillingMode_PayAsYouGo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayAsYouGo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestBillingMode_FlatRateTier1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestBillingMode_FlatRateTier2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestBillingMode_FlatRateTier3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestBillingMode_FlatRateTier4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestBillingMode_FlatRateTier5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FlatRateTier5", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroup_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sResiliencyGroup_resiliencyGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupArn", ID: &i_ResiliencyGroupArn, Type: smithy.ShapeTypeString})
+var sResiliencyGroup_resiliencyGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupName", ID: &i_ResiliencyGroupName, Type: smithy.ShapeTypeString})
+var sResiliencyGroup_resiliencyGroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupType", ID: &iResiliencyGroupType, Members: &mResiliencyGroupType, Type: smithy.ShapeTypeEnum})
+var sResiliencyGroup_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sResiliencyGroup_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iResiliencyGroupState, Members: &mResiliencyGroupState, Type: smithy.ShapeTypeEnum})
+var sResiliencyGroup_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sResiliencyGroupAssociation_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sResiliencyGroupAssociation_connectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sResiliencyGroupAssociation_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iResiliencyGroupAssociationState, Members: &mResiliencyGroupAssociationState, Type: smithy.ShapeTypeEnum})
+var s_ResiliencyGroupAssociationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResiliencyGroupAssociation, Members: &mResiliencyGroupAssociation, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupAssociationState_Associating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Associating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupAssociationState_Associated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Associated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupAssociationState_Disassociating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disassociating", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupAssociationState_Disassociated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disassociated", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupState_Pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupState_Available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupState_Deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupState_Deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupSummary_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sResiliencyGroupSummary_resiliencyGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupArn", ID: &i_ResiliencyGroupArn, Type: smithy.ShapeTypeString})
+var sResiliencyGroupSummary_resiliencyGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupName", ID: &i_ResiliencyGroupName, Type: smithy.ShapeTypeString})
+var sResiliencyGroupSummary_resiliencyGroupType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupType", ID: &iResiliencyGroupType, Members: &mResiliencyGroupType, Type: smithy.ShapeTypeEnum})
+var sResiliencyGroupSummary_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sResiliencyGroupSummary_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iResiliencyGroupState, Members: &mResiliencyGroupState, Type: smithy.ShapeTypeEnum})
+var s_ResiliencyGroupSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResiliencyGroupSummary, Members: &mResiliencyGroupSummary, Type: smithy.ShapeTypeStructure})
+var sResiliencyGroupType_Managed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Managed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyModel_MaximumResiliency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaximumResiliency", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyModel_HighResiliency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HighResiliency", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResiliencyModel_BasicResiliency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BasicResiliency", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ResourceArnList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceTag_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceTag_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_ResourceTagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTag, Members: &mResourceTag, Type: smithy.ShapeTypeStructure})
+var sRoute_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_RouteCidr, Type: smithy.ShapeTypeString})
+var sRoute_routeDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeDirection", ID: &iRouteDirection, Members: &mRouteDirection, Type: smithy.ShapeTypeEnum})
+var sRoute_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sRoute_asPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asPath", ID: &i_AsPathSegmentList, Members: &m_AsPathSegmentList, Type: smithy.ShapeTypeList})
+var sRoute_communities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communities", ID: &i_CommunityList, Members: &m_CommunityList, Type: smithy.ShapeTypeList})
+var sRoute_awsLogicalDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsLogicalDeviceId", ID: &i_AwsLogicalDeviceId, Type: smithy.ShapeTypeString})
+var sRoute_routeInstalledAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeInstalledAt", ID: &i_RouteInstalledAt, Type: smithy.ShapeTypeTimestamp})
+var sRouteDirection_Accepted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Accepted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRouteDirection_Advertised = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Advertised", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RouteFilterCidrStringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_RouteFilterCidrString, Type: smithy.ShapeTypeString})
+var sRouteFilterPrefix_cidr = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidr", ID: &i_CIDR, Type: smithy.ShapeTypeString})
+var s_RouteFilterPrefixList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRouteFilterPrefix, Members: &mRouteFilterPrefix, Type: smithy.ShapeTypeStructure})
+var sRouteFilters_routeDirection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeDirection", ID: &iRouteDirection, Members: &mRouteDirection, Type: smithy.ShapeTypeEnum})
+var sRouteFilters_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sRouteFilters_cidrs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cidrs", ID: &i_RouteFilterCidrStringList, Members: &m_RouteFilterCidrStringList, Type: smithy.ShapeTypeList})
+var sRouteFilters_asPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asPath", ID: &i_AsPathList, Members: &m_AsPathList, Type: smithy.ShapeTypeList})
+var sRouteFilters_communities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "communities", ID: &i_CommunityList, Members: &m_CommunityList, Type: smithy.ShapeTypeList})
+var s_RouteList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRoute, Members: &mRoute, Type: smithy.ShapeTypeStructure})
+var sRouterType_vendor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vendor", ID: &i_Vendor, Type: smithy.ShapeTypeString})
+var sRouterType_platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platform", ID: &i_Platform, Type: smithy.ShapeTypeString})
+var sRouterType_software = smithy.NewStaticSchema(smithy.StaticSchema{Member: "software", ID: &i_Software, Type: smithy.ShapeTypeString})
+var sRouterType_xsltTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xsltTemplateName", ID: &i_XsltTemplateName, Type: smithy.ShapeTypeString})
+var sRouterType_xsltTemplateNameForMacSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "xsltTemplateNameForMacSec", ID: &i_XsltTemplateNameForMacSec, Type: smithy.ShapeTypeString})
+var sRouterType_routerTypeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routerTypeIdentifier", ID: &i_RouterTypeIdentifier, Type: smithy.ShapeTypeString})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTooManyTagsException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sVirtualGateway_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sVirtualGateway_virtualGatewayState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayState", ID: &i_VirtualGatewayState, Type: smithy.ShapeTypeString})
+var s_VirtualGatewayList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualGateway, Members: &mVirtualGateway, Type: smithy.ShapeTypeStructure})
+var sVirtualInterface_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sVirtualInterface_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sVirtualInterface_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sVirtualInterface_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sVirtualInterface_virtualInterfaceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceType", ID: &i_VirtualInterfaceType, Type: smithy.ShapeTypeString})
+var sVirtualInterface_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sVirtualInterface_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sVirtualInterface_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sVirtualInterface_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sVirtualInterface_amazonSideAsn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonSideAsn", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sVirtualInterface_authKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authKey", ID: &i_BGPAuthKey, Type: smithy.ShapeTypeString})
+var sVirtualInterface_amazonAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonAddress", ID: &i_AmazonAddress, Type: smithy.ShapeTypeString})
+var sVirtualInterface_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sVirtualInterface_addressFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addressFamily", ID: &iAddressFamily, Members: &mAddressFamily, Type: smithy.ShapeTypeEnum})
+var sVirtualInterface_virtualInterfaceState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceState", ID: &iVirtualInterfaceState, Members: &mVirtualInterfaceState, Type: smithy.ShapeTypeEnum})
+var sVirtualInterface_customerRouterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerRouterConfig", ID: &i_RouterConfig, Type: smithy.ShapeTypeString})
+var sVirtualInterface_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &i_MTU, Type: smithy.ShapeTypeInteger})
+var sVirtualInterface_jumboFrameCapable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jumboFrameCapable", ID: &i_JumboFrameCapable, Type: smithy.ShapeTypeBoolean})
+var sVirtualInterface_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sVirtualInterface_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sVirtualInterface_routeFilterPrefixes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routeFilterPrefixes", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sVirtualInterface_bgpPeers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpPeers", ID: &i_BGPPeerList, Members: &m_BGPPeerList, Type: smithy.ShapeTypeList})
+var sVirtualInterface_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_Region, Type: smithy.ShapeTypeString})
+var sVirtualInterface_awsDeviceV2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsDeviceV2", ID: &i_AwsDeviceV2, Type: smithy.ShapeTypeString})
+var sVirtualInterface_awsLogicalDeviceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "awsLogicalDeviceId", ID: &i_AwsLogicalDeviceId, Type: smithy.ShapeTypeString})
+var sVirtualInterface_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sVirtualInterface_siteLinkEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "siteLinkEnabled", ID: &i_SiteLinkEnabled, Type: smithy.ShapeTypeBoolean})
+var sVirtualInterface_prefixPoolAllocatedCountIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv4", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sVirtualInterface_prefixPoolAllocatedCountIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv6", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sVirtualInterface_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+var s_VirtualInterfaceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualInterface, Members: &mVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_confirming = smithy.NewStaticSchema(smithy.StaticSchema{Member: "confirming", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_verifying = smithy.NewStaticSchema(smithy.StaticSchema{Member: "verifying", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_pending = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pending", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_available = smithy.NewStaticSchema(smithy.StaticSchema{Member: "available", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_down = smithy.NewStaticSchema(smithy.StaticSchema{Member: "down", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_testing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testing", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_deleting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_deleted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_rejected = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rejected", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceState_unknown = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unknown", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVirtualInterfaceTestHistory_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &i_TestId, Type: smithy.ShapeTypeString})
+var sVirtualInterfaceTestHistory_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sVirtualInterfaceTestHistory_bgpPeers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpPeers", ID: &i_BGPPeerIdList, Members: &m_BGPPeerIdList, Type: smithy.ShapeTypeList})
+var sVirtualInterfaceTestHistory_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_FailureTestHistoryStatus, Type: smithy.ShapeTypeString})
+var sVirtualInterfaceTestHistory_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sVirtualInterfaceTestHistory_testDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testDurationInMinutes", ID: &i_TestDuration, Type: smithy.ShapeTypeInteger})
+var sVirtualInterfaceTestHistory_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_StartTime, Type: smithy.ShapeTypeTimestamp})
+var sVirtualInterfaceTestHistory_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_EndTime, Type: smithy.ShapeTypeTimestamp})
+var s_VirtualInterfaceTestHistoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVirtualInterfaceTestHistory, Members: &mVirtualInterfaceTestHistory, Type: smithy.ShapeTypeStructure})
+var sAcceptDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sAcceptDirectConnectGatewayAssociationProposalRequest_proposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proposalId", ID: &i_DirectConnectGatewayAssociationProposalId, Type: smithy.ShapeTypeString})
+var sAcceptDirectConnectGatewayAssociationProposalRequest_associatedGatewayOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedGatewayOwnerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrideAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sAcceptDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociation", ID: &iDirectConnectGatewayAssociation, Members: &mDirectConnectGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sAllocateConnectionOnInterconnectRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sAllocateConnectionOnInterconnectRequest_connectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sAllocateConnectionOnInterconnectRequest_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAllocateConnectionOnInterconnectRequest_interconnectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectId", ID: &i_InterconnectId, Type: smithy.ShapeTypeString})
+var sAllocateConnectionOnInterconnectRequest_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sAllocateHostedConnectionRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAllocateHostedConnectionRequest_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAllocateHostedConnectionRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sAllocateHostedConnectionRequest_connectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sAllocateHostedConnectionRequest_vlan = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vlan", ID: &i_VLAN, Type: smithy.ShapeTypeInteger})
+var sAllocateHostedConnectionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sAllocatePrivateVirtualInterfaceRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAllocatePrivateVirtualInterfaceRequest_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAllocatePrivateVirtualInterfaceRequest_newPrivateVirtualInterfaceAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newPrivateVirtualInterfaceAllocation", ID: &iNewPrivateVirtualInterfaceAllocation, Members: &mNewPrivateVirtualInterfaceAllocation, Type: smithy.ShapeTypeStructure})
+var sAllocatePublicVirtualInterfaceRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAllocatePublicVirtualInterfaceRequest_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAllocatePublicVirtualInterfaceRequest_newPublicVirtualInterfaceAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newPublicVirtualInterfaceAllocation", ID: &iNewPublicVirtualInterfaceAllocation, Members: &mNewPublicVirtualInterfaceAllocation, Type: smithy.ShapeTypeStructure})
+var sAllocateTransitVirtualInterfaceRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAllocateTransitVirtualInterfaceRequest_ownerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ownerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sAllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newTransitVirtualInterfaceAllocation", ID: &iNewTransitVirtualInterfaceAllocation, Members: &mNewTransitVirtualInterfaceAllocation, Type: smithy.ShapeTypeStructure})
+var sAllocateTransitVirtualInterfaceResult_virtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterface", ID: &iVirtualInterface, Members: &mVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sAssociateConnectionsToResiliencyGroupRequest_connectionIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionIdentifiers", ID: &i_ConnectionIdentifierList, Members: &m_ConnectionIdentifierList, Type: smithy.ShapeTypeList})
+var sAssociateConnectionsToResiliencyGroupRequest_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sAssociateConnectionsToResiliencyGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sAssociateConnectionsToResiliencyGroupResult_resiliencyGroupAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupAssociations", ID: &i_ResiliencyGroupAssociationList, Members: &m_ResiliencyGroupAssociationList, Type: smithy.ShapeTypeList})
+var sAssociateConnectionWithLagRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAssociateConnectionWithLagRequest_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sAssociateHostedConnectionRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAssociateHostedConnectionRequest_parentConnectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentConnectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAssociateMacSecKeyRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAssociateMacSecKeyRequest_secretARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretARN", ID: &i_SecretARN, Type: smithy.ShapeTypeString})
+var sAssociateMacSecKeyRequest_ckn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ckn", ID: &i_Ckn, Type: smithy.ShapeTypeString})
+var sAssociateMacSecKeyRequest_cak = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cak", ID: &i_Cak, Type: smithy.ShapeTypeString})
+var sAssociateMacSecKeyResponse_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sAssociateMacSecKeyResponse_macSecKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecKeys", ID: &i_MacSecKeyList, Members: &m_MacSecKeyList, Type: smithy.ShapeTypeList})
+var sAssociateVirtualInterfaceRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sAssociateVirtualInterfaceRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sConfirmConnectionRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sConfirmConnectionResponse_connectionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionState", ID: &iConnectionState, Members: &mConnectionState, Type: smithy.ShapeTypeEnum})
+var sConfirmCustomerAgreementRequest_agreementName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agreementName", ID: &i_AgreementName, Type: smithy.ShapeTypeString})
+var sConfirmCustomerAgreementResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sConfirmPrivateVirtualInterfaceRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sConfirmPrivateVirtualInterfaceRequest_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sConfirmPrivateVirtualInterfaceRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sConfirmPrivateVirtualInterfaceResponse_virtualInterfaceState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceState", ID: &iVirtualInterfaceState, Members: &mVirtualInterfaceState, Type: smithy.ShapeTypeEnum})
+var sConfirmPublicVirtualInterfaceRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sConfirmPublicVirtualInterfaceResponse_virtualInterfaceState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceState", ID: &iVirtualInterfaceState, Members: &mVirtualInterfaceState, Type: smithy.ShapeTypeEnum})
+var sConfirmTransitVirtualInterfaceRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sConfirmTransitVirtualInterfaceRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sConfirmTransitVirtualInterfaceResponse_virtualInterfaceState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceState", ID: &iVirtualInterfaceState, Members: &mVirtualInterfaceState, Type: smithy.ShapeTypeEnum})
+var sCreateBGPPeerRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sCreateBGPPeerRequest_newBGPPeer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newBGPPeer", ID: &iNewBGPPeer, Members: &mNewBGPPeer, Type: smithy.ShapeTypeStructure})
+var sCreateBGPPeerResponse_virtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterface", ID: &iVirtualInterface, Members: &mVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sCreateConnectionRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_connectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateConnectionRequest_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sCreateConnectionRequest_requestMACSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMACSec", ID: &i_RequestMACSec, Type: smithy.ShapeTypeBoolean})
+var sCreateConnectionRequest_billingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingMode", ID: &iRequestBillingMode, Members: &mRequestBillingMode, Type: smithy.ShapeTypeEnum})
+var sCreateDirectConnectGatewayAssociationRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAssociationRequest_gatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayId", ID: &i_GatewayIdToAssociate, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sCreateDirectConnectGatewayAssociationRequest_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociation", ID: &iDirectConnectGatewayAssociation, Members: &mDirectConnectGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayOwnerAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayOwnerAccount", ID: &i_OwnerAccount, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAssociationProposalRequest_gatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "gatewayId", ID: &i_GatewayIdToAssociate, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sCreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removeAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sCreateDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociationProposal", ID: &iDirectConnectGatewayAssociationProposal, Members: &mDirectConnectGatewayAssociationProposal, Type: smithy.ShapeTypeStructure})
+var sCreateDirectConnectGatewayRequest_directConnectGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayName", ID: &i_DirectConnectGatewayName, Type: smithy.ShapeTypeString})
+var sCreateDirectConnectGatewayRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateDirectConnectGatewayRequest_amazonSideAsn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "amazonSideAsn", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sCreateDirectConnectGatewayResult_directConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGateway", ID: &iDirectConnectGateway, Members: &mDirectConnectGateway, Type: smithy.ShapeTypeStructure})
+var sCreateInterconnectRequest_interconnectName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectName", ID: &i_InterconnectName, Type: smithy.ShapeTypeString})
+var sCreateInterconnectRequest_bandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sCreateInterconnectRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sCreateInterconnectRequest_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sCreateInterconnectRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateInterconnectRequest_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sCreateInterconnectRequest_requestMACSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMACSec", ID: &i_RequestMACSec, Type: smithy.ShapeTypeBoolean})
+var sCreateLagRequest_numberOfConnections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfConnections", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sCreateLagRequest_location = smithy.NewStaticSchema(smithy.StaticSchema{Member: "location", ID: &i_LocationCode, Type: smithy.ShapeTypeString})
+var sCreateLagRequest_connectionsBandwidth = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionsBandwidth", ID: &i_Bandwidth, Type: smithy.ShapeTypeString})
+var sCreateLagRequest_lagName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagName", ID: &i_LagName, Type: smithy.ShapeTypeString})
+var sCreateLagRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sCreateLagRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateLagRequest_childConnectionTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "childConnectionTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateLagRequest_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sCreateLagRequest_requestMACSec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestMACSec", ID: &i_RequestMACSec, Type: smithy.ShapeTypeBoolean})
+var sCreateLagRequest_billingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingMode", ID: &iRequestBillingMode, Members: &mRequestBillingMode, Type: smithy.ShapeTypeEnum})
+var sCreatePrivateVirtualInterfaceRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sCreatePrivateVirtualInterfaceRequest_newPrivateVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newPrivateVirtualInterface", ID: &iNewPrivateVirtualInterface, Members: &mNewPrivateVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sCreatePublicVirtualInterfaceRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sCreatePublicVirtualInterfaceRequest_newPublicVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newPublicVirtualInterface", ID: &iNewPublicVirtualInterface, Members: &mNewPublicVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sCreateResiliencyGroupRequest_resiliencyGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupName", ID: &i_ResiliencyGroupName, Type: smithy.ShapeTypeString})
+var sCreateResiliencyGroupRequest_intendedResiliencyModel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "intendedResiliencyModel", ID: &iResiliencyModel, Members: &mResiliencyModel, Type: smithy.ShapeTypeEnum})
+var sCreateResiliencyGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sCreateResiliencyGroupRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateResiliencyGroupResult_resiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroup", ID: &iResiliencyGroup, Members: &mResiliencyGroup, Type: smithy.ShapeTypeStructure})
+var sCreateTransitVirtualInterfaceRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sCreateTransitVirtualInterfaceRequest_newTransitVirtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newTransitVirtualInterface", ID: &iNewTransitVirtualInterface, Members: &mNewTransitVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sCreateTransitVirtualInterfaceResult_virtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterface", ID: &iVirtualInterface, Members: &mVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sDeleteBGPPeerRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sDeleteBGPPeerRequest_asn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asn", ID: &i_ASN, Type: smithy.ShapeTypeInteger})
+var sDeleteBGPPeerRequest_asnLong = smithy.NewStaticSchema(smithy.StaticSchema{Member: "asnLong", ID: &i_LongAsn, Type: smithy.ShapeTypeLong})
+var sDeleteBGPPeerRequest_customerAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerAddress", ID: &i_CustomerAddress, Type: smithy.ShapeTypeString})
+var sDeleteBGPPeerRequest_bgpPeerId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpPeerId", ID: &i_BGPPeerId, Type: smithy.ShapeTypeString})
+var sDeleteBGPPeerResponse_virtualInterface = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterface", ID: &iVirtualInterface, Members: &mVirtualInterface, Type: smithy.ShapeTypeStructure})
+var sDeleteConnectionRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDeleteDirectConnectGatewayAssociationRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_DirectConnectGatewayAssociationId, Type: smithy.ShapeTypeString})
+var sDeleteDirectConnectGatewayAssociationRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDeleteDirectConnectGatewayAssociationRequest_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sDeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociation", ID: &iDirectConnectGatewayAssociation, Members: &mDirectConnectGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayAssociationProposalRequest_proposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proposalId", ID: &i_DirectConnectGatewayAssociationProposalId, Type: smithy.ShapeTypeString})
+var sDeleteDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociationProposal", ID: &iDirectConnectGatewayAssociationProposal, Members: &mDirectConnectGatewayAssociationProposal, Type: smithy.ShapeTypeStructure})
+var sDeleteDirectConnectGatewayRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDeleteDirectConnectGatewayResult_directConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGateway", ID: &iDirectConnectGateway, Members: &mDirectConnectGateway, Type: smithy.ShapeTypeStructure})
+var sDeleteInterconnectRequest_interconnectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectId", ID: &i_InterconnectId, Type: smithy.ShapeTypeString})
+var sDeleteInterconnectResponse_interconnectState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectState", ID: &iInterconnectState, Members: &mInterconnectState, Type: smithy.ShapeTypeEnum})
+var sDeleteLagRequest_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sDeleteResiliencyGroupRequest_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sDeleteResiliencyGroupResult_resiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroup", ID: &iResiliencyGroup, Members: &mResiliencyGroup, Type: smithy.ShapeTypeStructure})
+var sDeleteVirtualInterfaceRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sDeleteVirtualInterfaceResponse_virtualInterfaceState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceState", ID: &iVirtualInterfaceState, Members: &mVirtualInterfaceState, Type: smithy.ShapeTypeEnum})
+var sDescribeConnectionLoaRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDescribeConnectionLoaRequest_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sDescribeConnectionLoaRequest_loaContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loaContentType", ID: &iLoaContentType, Members: &mLoaContentType, Type: smithy.ShapeTypeEnum})
+var sDescribeConnectionLoaResponse_loa = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loa", ID: &iLoa, Members: &mLoa, Type: smithy.ShapeTypeStructure})
+var sDescribeConnectionsRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDescribeConnectionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeConnectionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeConnectionsOnInterconnectRequest_interconnectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectId", ID: &i_InterconnectId, Type: smithy.ShapeTypeString})
+var sConnections_connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connections", ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var sConnections_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeCustomerMetadataResponse_agreements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "agreements", ID: &i_AgreementList, Members: &m_AgreementList, Type: smithy.ShapeTypeList})
+var sDescribeCustomerMetadataResponse_nniPartnerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nniPartnerType", ID: &iNniPartnerType, Members: &mNniPartnerType, Type: smithy.ShapeTypeEnum})
+var sDescribeDirectConnectGatewayAssociationProposalsRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationProposalsRequest_proposalId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "proposalId", ID: &i_DirectConnectGatewayAssociationProposalId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationProposalsRequest_associatedGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedGatewayId", ID: &i_AssociatedGatewayId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationProposalsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeDirectConnectGatewayAssociationProposalsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociationProposals", ID: &i_DirectConnectGatewayAssociationProposalList, Members: &m_DirectConnectGatewayAssociationProposalList, Type: smithy.ShapeTypeList})
+var sDescribeDirectConnectGatewayAssociationProposalsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationsRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_DirectConnectGatewayAssociationId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationsRequest_associatedGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedGatewayId", ID: &i_AssociatedGatewayId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationsRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeDirectConnectGatewayAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationsRequest_virtualGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGatewayId", ID: &i_VirtualGatewayId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociations", ID: &i_DirectConnectGatewayAssociationList, Members: &m_DirectConnectGatewayAssociationList, Type: smithy.ShapeTypeList})
+var sDescribeDirectConnectGatewayAssociationsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAttachmentsRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAttachmentsRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAttachmentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeDirectConnectGatewayAttachmentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAttachments", ID: &i_DirectConnectGatewayAttachmentList, Members: &m_DirectConnectGatewayAttachmentList, Type: smithy.ShapeTypeList})
+var sDescribeDirectConnectGatewayAttachmentsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewaysRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewaysRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeDirectConnectGatewaysRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeDirectConnectGatewaysResult_directConnectGateways = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGateways", ID: &i_DirectConnectGatewayList, Members: &m_DirectConnectGatewayList, Type: smithy.ShapeTypeList})
+var sDescribeDirectConnectGatewaysResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeHostedConnectionsRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDescribeHostedConnectionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeHostedConnectionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeInterconnectLoaRequest_interconnectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectId", ID: &i_InterconnectId, Type: smithy.ShapeTypeString})
+var sDescribeInterconnectLoaRequest_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sDescribeInterconnectLoaRequest_loaContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loaContentType", ID: &iLoaContentType, Members: &mLoaContentType, Type: smithy.ShapeTypeEnum})
+var sDescribeInterconnectLoaResponse_loa = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loa", ID: &iLoa, Members: &mLoa, Type: smithy.ShapeTypeStructure})
+var sDescribeInterconnectsRequest_interconnectId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnectId", ID: &i_InterconnectId, Type: smithy.ShapeTypeString})
+var sDescribeInterconnectsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeInterconnectsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sInterconnects_interconnects = smithy.NewStaticSchema(smithy.StaticSchema{Member: "interconnects", ID: &i_InterconnectList, Members: &m_InterconnectList, Type: smithy.ShapeTypeList})
+var sInterconnects_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeLagsRequest_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sDescribeLagsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeLagsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sLags_lags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lags", ID: &i_LagList, Members: &m_LagList, Type: smithy.ShapeTypeList})
+var sLags_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDescribeLoaRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDescribeLoaRequest_providerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "providerName", ID: &i_ProviderName, Type: smithy.ShapeTypeString})
+var sDescribeLoaRequest_loaContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "loaContentType", ID: &iLoaContentType, Members: &mLoaContentType, Type: smithy.ShapeTypeEnum})
+var sLocations_locations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "locations", ID: &i_LocationList, Members: &m_LocationList, Type: smithy.ShapeTypeList})
+var sDescribeRouterConfigurationRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sDescribeRouterConfigurationRequest_routerTypeIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routerTypeIdentifier", ID: &i_RouterTypeIdentifier, Type: smithy.ShapeTypeString})
+var sDescribeRouterConfigurationResponse_customerRouterConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "customerRouterConfig", ID: &i_RouterConfig, Type: smithy.ShapeTypeString})
+var sDescribeRouterConfigurationResponse_router = smithy.NewStaticSchema(smithy.StaticSchema{Member: "router", ID: &iRouterType, Members: &mRouterType, Type: smithy.ShapeTypeStructure})
+var sDescribeRouterConfigurationResponse_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sDescribeRouterConfigurationResponse_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sDescribeTagsRequest_resourceArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArns", ID: &i_ResourceArnList, Members: &m_ResourceArnList, Type: smithy.ShapeTypeList})
+var sDescribeTagsResponse_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_ResourceTagList, Members: &m_ResourceTagList, Type: smithy.ShapeTypeList})
+var sVirtualGateways_virtualGateways = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualGateways", ID: &i_VirtualGatewayList, Members: &m_VirtualGatewayList, Type: smithy.ShapeTypeList})
+var sDescribeVirtualInterfacesRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDescribeVirtualInterfacesRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sDescribeVirtualInterfacesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sDescribeVirtualInterfacesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sVirtualInterfaces_virtualInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaces", ID: &i_VirtualInterfaceList, Members: &m_VirtualInterfaceList, Type: smithy.ShapeTypeList})
+var sVirtualInterfaces_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sDisassociateConnectionFromLagRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDisassociateConnectionFromLagRequest_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sDisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionIdentifiers", ID: &i_ConnectionIdentifierList, Members: &m_ConnectionIdentifierList, Type: smithy.ShapeTypeList})
+var sDisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sDisassociateConnectionsFromResiliencyGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sDisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupAssociations", ID: &i_ResiliencyGroupAssociationList, Members: &m_ResiliencyGroupAssociationList, Type: smithy.ShapeTypeList})
+var sDisassociateMacSecKeyRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDisassociateMacSecKeyRequest_secretARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretARN", ID: &i_SecretARN, Type: smithy.ShapeTypeString})
+var sDisassociateMacSecKeyResponse_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sDisassociateMacSecKeyResponse_macSecKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "macSecKeys", ID: &i_MacSecKeyList, Members: &m_MacSecKeyList, Type: smithy.ShapeTypeList})
+var sGetResiliencyGroupRequest_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sGetResiliencyGroupResult_resiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroup", ID: &iResiliencyGroup, Members: &mResiliencyGroup, Type: smithy.ShapeTypeStructure})
+var sListResiliencyGroupAssociationsRequest_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sListResiliencyGroupAssociationsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sListResiliencyGroupAssociationsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListResiliencyGroupAssociationsResult_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ResiliencyGroupAssociationList, Members: &m_ResiliencyGroupAssociationList, Type: smithy.ShapeTypeList})
+var sListResiliencyGroupAssociationsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListResiliencyGroupsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sListResiliencyGroupsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListResiliencyGroupsResult_items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "items", ID: &i_ResiliencyGroupSummaryList, Members: &m_ResiliencyGroupSummaryList, Type: smithy.ShapeTypeList})
+var sListResiliencyGroupsResult_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceRoutesRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceRoutesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &iRouteFilters, Members: &mRouteFilters, Type: smithy.ShapeTypeStructure})
+var sListVirtualInterfaceRoutesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sListVirtualInterfaceRoutesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceRoutesResponse_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceRoutesResponse_routes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "routes", ID: &i_RouteList, Members: &m_RouteList, Type: smithy.ShapeTypeList})
+var sListVirtualInterfaceRoutesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceTestHistoryRequest_testId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testId", ID: &i_TestId, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceTestHistoryRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceTestHistoryRequest_bgpPeers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpPeers", ID: &i_BGPPeerIdList, Members: &m_BGPPeerIdList, Type: smithy.ShapeTypeList})
+var sListVirtualInterfaceTestHistoryRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_FailureTestHistoryStatus, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceTestHistoryRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResultSetSize, Type: smithy.ShapeTypeInteger})
+var sListVirtualInterfaceTestHistoryRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceTestHistory", ID: &i_VirtualInterfaceTestHistoryList, Members: &m_VirtualInterfaceTestHistoryList, Type: smithy.ShapeTypeList})
+var sListVirtualInterfaceTestHistoryResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sStartBgpFailoverTestRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sStartBgpFailoverTestRequest_bgpPeers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bgpPeers", ID: &i_BGPPeerIdList, Members: &m_BGPPeerIdList, Type: smithy.ShapeTypeList})
+var sStartBgpFailoverTestRequest_testDurationInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "testDurationInMinutes", ID: &i_TestDuration, Type: smithy.ShapeTypeInteger})
+var sStartBgpFailoverTestResponse_virtualInterfaceTest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceTest", ID: &iVirtualInterfaceTestHistory, Members: &mVirtualInterfaceTestHistory, Type: smithy.ShapeTypeStructure})
+var sStopBgpFailoverTestRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sStopBgpFailoverTestResponse_virtualInterfaceTest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceTest", ID: &iVirtualInterfaceTestHistory, Members: &mVirtualInterfaceTestHistory, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateConnectionRequest_connectionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionId", ID: &i_ConnectionId, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_connectionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionName", ID: &i_ConnectionName, Type: smithy.ShapeTypeString})
+var sUpdateConnectionRequest_encryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionMode", ID: &i_EncryptionMode, Type: smithy.ShapeTypeString})
+var sUpdateConnectionsBillingModeRequest_connectionIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectionIds", ID: &i_ConnectionIdList, Members: &m_ConnectionIdList, Type: smithy.ShapeTypeList})
+var sUpdateConnectionsBillingModeRequest_billingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingMode", ID: &iRequestBillingMode, Members: &mRequestBillingMode, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectionsBillingModeResponse_billingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "billingMode", ID: &iBillingMode, Members: &mBillingMode, Type: smithy.ShapeTypeEnum})
+var sUpdateConnectionsBillingModeResponse_connections = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connections", ID: &i_ConnectionList, Members: &m_ConnectionList, Type: smithy.ShapeTypeList})
+var sUpdateDirectConnectGatewayAssociationRequest_associationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationId", ID: &i_DirectConnectGatewayAssociationId, Type: smithy.ShapeTypeString})
+var sUpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sUpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "removeAllowedPrefixesToDirectConnectGateway", ID: &i_RouteFilterPrefixList, Members: &m_RouteFilterPrefixList, Type: smithy.ShapeTypeList})
+var sUpdateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayAssociation", ID: &iDirectConnectGatewayAssociation, Members: &mDirectConnectGatewayAssociation, Type: smithy.ShapeTypeStructure})
+var sUpdateDirectConnectGatewayRequest_directConnectGatewayId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGatewayId", ID: &i_DirectConnectGatewayId, Type: smithy.ShapeTypeString})
+var sUpdateDirectConnectGatewayRequest_newDirectConnectGatewayName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "newDirectConnectGatewayName", ID: &i_DirectConnectGatewayName, Type: smithy.ShapeTypeString})
+var sUpdateDirectConnectGatewayResponse_directConnectGateway = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directConnectGateway", ID: &iDirectConnectGateway, Members: &mDirectConnectGateway, Type: smithy.ShapeTypeStructure})
+var sUpdateLagRequest_lagId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagId", ID: &i_LagId, Type: smithy.ShapeTypeString})
+var sUpdateLagRequest_lagName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lagName", ID: &i_LagName, Type: smithy.ShapeTypeString})
+var sUpdateLagRequest_minimumLinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minimumLinks", ID: &i_Count, Type: smithy.ShapeTypeInteger})
+var sUpdateLagRequest_encryptionMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "encryptionMode", ID: &i_EncryptionMode, Type: smithy.ShapeTypeString})
+var sUpdateResiliencyGroupRequest_resiliencyGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupId", ID: &i_ResiliencyGroupId, Type: smithy.ShapeTypeString})
+var sUpdateResiliencyGroupRequest_resiliencyGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroupName", ID: &i_ResiliencyGroupName, Type: smithy.ShapeTypeString})
+var sUpdateResiliencyGroupRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sUpdateResiliencyGroupResult_resiliencyGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resiliencyGroup", ID: &iResiliencyGroup, Members: &mResiliencyGroup, Type: smithy.ShapeTypeStructure})
+var sUpdateVirtualInterfaceAttributesRequest_virtualInterfaceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceId", ID: &i_VirtualInterfaceId, Type: smithy.ShapeTypeString})
+var sUpdateVirtualInterfaceAttributesRequest_mtu = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mtu", ID: &i_MTU, Type: smithy.ShapeTypeInteger})
+var sUpdateVirtualInterfaceAttributesRequest_enableSiteLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableSiteLink", ID: &i_EnableSiteLink, Type: smithy.ShapeTypeBoolean})
+var sUpdateVirtualInterfaceAttributesRequest_virtualInterfaceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "virtualInterfaceName", ID: &i_VirtualInterfaceName, Type: smithy.ShapeTypeString})
+var sUpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv4", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sUpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "prefixPoolAllocatedCountIpv6", ID: &i_PrefixPoolAllocatedCount, Type: smithy.ShapeTypeInteger})
+var sUpdateVirtualInterfaceAttributesRequest_rateLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateLimit", ID: &i_RateLimit, Type: smithy.ShapeTypeString})
+
+var AcceptDirectConnectGatewayAssociationProposal = &sAcceptDirectConnectGatewayAssociationProposal
+
+var AllocateConnectionOnInterconnect = &sAllocateConnectionOnInterconnect
+
+var AllocateHostedConnection = &sAllocateHostedConnection
+
+var AllocatePrivateVirtualInterface = &sAllocatePrivateVirtualInterface
+
+var AllocatePublicVirtualInterface = &sAllocatePublicVirtualInterface
+
+var AllocateTransitVirtualInterface = &sAllocateTransitVirtualInterface
+
+var AssociateConnectionsToResiliencyGroup = &sAssociateConnectionsToResiliencyGroup
+
+var AssociateConnectionWithLag = &sAssociateConnectionWithLag
+
+var AssociateHostedConnection = &sAssociateHostedConnection
+
+var AssociateMacSecKey = &sAssociateMacSecKey
+
+var AssociateVirtualInterface = &sAssociateVirtualInterface
+
+var ConfirmConnection = &sConfirmConnection
+
+var ConfirmCustomerAgreement = &sConfirmCustomerAgreement
+
+var ConfirmPrivateVirtualInterface = &sConfirmPrivateVirtualInterface
+
+var ConfirmPublicVirtualInterface = &sConfirmPublicVirtualInterface
+
+var ConfirmTransitVirtualInterface = &sConfirmTransitVirtualInterface
+
+var CreateBGPPeer = &sCreateBGPPeer
+
+var CreateConnection = &sCreateConnection
+
+var CreateDirectConnectGateway = &sCreateDirectConnectGateway
+
+var CreateDirectConnectGatewayAssociation = &sCreateDirectConnectGatewayAssociation
+
+var CreateDirectConnectGatewayAssociationProposal = &sCreateDirectConnectGatewayAssociationProposal
+
+var CreateInterconnect = &sCreateInterconnect
+
+var CreateLag = &sCreateLag
+
+var CreatePrivateVirtualInterface = &sCreatePrivateVirtualInterface
+
+var CreatePublicVirtualInterface = &sCreatePublicVirtualInterface
+
+var CreateResiliencyGroup = &sCreateResiliencyGroup
+
+var CreateTransitVirtualInterface = &sCreateTransitVirtualInterface
+
+var DeleteBGPPeer = &sDeleteBGPPeer
+
+var DeleteConnection = &sDeleteConnection
+
+var DeleteDirectConnectGateway = &sDeleteDirectConnectGateway
+
+var DeleteDirectConnectGatewayAssociation = &sDeleteDirectConnectGatewayAssociation
+
+var DeleteDirectConnectGatewayAssociationProposal = &sDeleteDirectConnectGatewayAssociationProposal
+
+var DeleteInterconnect = &sDeleteInterconnect
+
+var DeleteLag = &sDeleteLag
+
+var DeleteResiliencyGroup = &sDeleteResiliencyGroup
+
+var DeleteVirtualInterface = &sDeleteVirtualInterface
+
+var DescribeConnectionLoa = &sDescribeConnectionLoa
+
+var DescribeConnections = &sDescribeConnections
+
+var DescribeConnectionsOnInterconnect = &sDescribeConnectionsOnInterconnect
+
+var DescribeCustomerMetadata = &sDescribeCustomerMetadata
+
+var DescribeDirectConnectGatewayAssociationProposals = &sDescribeDirectConnectGatewayAssociationProposals
+
+var DescribeDirectConnectGatewayAssociations = &sDescribeDirectConnectGatewayAssociations
+
+var DescribeDirectConnectGatewayAttachments = &sDescribeDirectConnectGatewayAttachments
+
+var DescribeDirectConnectGateways = &sDescribeDirectConnectGateways
+
+var DescribeHostedConnections = &sDescribeHostedConnections
+
+var DescribeInterconnectLoa = &sDescribeInterconnectLoa
+
+var DescribeInterconnects = &sDescribeInterconnects
+
+var DescribeLags = &sDescribeLags
+
+var DescribeLoa = &sDescribeLoa
+
+var DescribeLocations = &sDescribeLocations
+
+var DescribeRouterConfiguration = &sDescribeRouterConfiguration
+
+var DescribeTags = &sDescribeTags
+
+var DescribeVirtualGateways = &sDescribeVirtualGateways
+
+var DescribeVirtualInterfaces = &sDescribeVirtualInterfaces
+
+var DisassociateConnectionFromLag = &sDisassociateConnectionFromLag
+
+var DisassociateConnectionsFromResiliencyGroup = &sDisassociateConnectionsFromResiliencyGroup
+
+var DisassociateMacSecKey = &sDisassociateMacSecKey
+
+var GetResiliencyGroup = &sGetResiliencyGroup
+
+var ListResiliencyGroupAssociations = &sListResiliencyGroupAssociations
+
+var ListResiliencyGroups = &sListResiliencyGroups
+
+var ListVirtualInterfaceRoutes = &sListVirtualInterfaceRoutes
+
+var ListVirtualInterfaceTestHistory = &sListVirtualInterfaceTestHistory
+
+var StartBgpFailoverTest = &sStartBgpFailoverTest
+
+var StopBgpFailoverTest = &sStopBgpFailoverTest
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateConnection = &sUpdateConnection
+
+var UpdateConnectionsBillingMode = &sUpdateConnectionsBillingMode
+
+var UpdateDirectConnectGateway = &sUpdateDirectConnectGateway
+
+var UpdateDirectConnectGatewayAssociation = &sUpdateDirectConnectGatewayAssociation
+
+var UpdateLag = &sUpdateLag
+
+var UpdateResiliencyGroup = &sUpdateResiliencyGroup
+
+var UpdateVirtualInterfaceAttributes = &sUpdateVirtualInterfaceAttributes
+
+var _OvertureService = &s_OvertureService
+
+var AddressFamily = &sAddressFamily
+var AddressFamily_IPv4 = &sAddressFamily_IPv4
+var AddressFamily_IPv6 = &sAddressFamily_IPv6
+
+var _AgreementList = &s_AgreementList
+var _AgreementList_member = &s_AgreementList_member
+
+var _AgreementName = &s_AgreementName
+
+var _AmazonAddress = &s_AmazonAddress
+
+var _ASN = &s_ASN
+
+var _AsPathList = &s_AsPathList
+var _AsPathList_member = &s_AsPathList_member
+
+var AsPathSegment = &sAsPathSegment
+var AsPathSegment_pathType = &sAsPathSegment_pathType
+var AsPathSegment_path = &sAsPathSegment_path
+
+var _AsPathSegmentList = &s_AsPathSegmentList
+var _AsPathSegmentList_member = &s_AsPathSegmentList_member
+
+var AsPathType = &sAsPathType
+var AsPathType_Seq = &sAsPathType_Seq
+var AsPathType_Set = &sAsPathType_Set
+
+var AssociatedCoreNetwork = &sAssociatedCoreNetwork
+var AssociatedCoreNetwork_id = &sAssociatedCoreNetwork_id
+var AssociatedCoreNetwork_ownerAccount = &sAssociatedCoreNetwork_ownerAccount
+var AssociatedCoreNetwork_attachmentId = &sAssociatedCoreNetwork_attachmentId
+
+var AssociatedGateway = &sAssociatedGateway
+var AssociatedGateway_id = &sAssociatedGateway_id
+var AssociatedGateway_type = &sAssociatedGateway_type
+var AssociatedGateway_ownerAccount = &sAssociatedGateway_ownerAccount
+var AssociatedGateway_region = &sAssociatedGateway_region
+
+var _AssociatedGatewayId = &s_AssociatedGatewayId
+
+var AvailableBillingMode = &sAvailableBillingMode
+var AvailableBillingMode_billingMode = &sAvailableBillingMode_billingMode
+var AvailableBillingMode_availablePortSpeeds = &sAvailableBillingMode_availablePortSpeeds
+var AvailableBillingMode_includedRegions = &sAvailableBillingMode_includedRegions
+
+var _AvailableBillingModeList = &s_AvailableBillingModeList
+var _AvailableBillingModeList_member = &s_AvailableBillingModeList_member
+
+var _AvailableMacSecPortSpeeds = &s_AvailableMacSecPortSpeeds
+var _AvailableMacSecPortSpeeds_member = &s_AvailableMacSecPortSpeeds_member
+
+var _AvailablePortSpeeds = &s_AvailablePortSpeeds
+var _AvailablePortSpeeds_member = &s_AvailablePortSpeeds_member
+
+var _AwsDevice = &s_AwsDevice
+
+var _AwsDeviceV2 = &s_AwsDeviceV2
+
+var _AwsLogicalDeviceId = &s_AwsLogicalDeviceId
+
+var _Bandwidth = &s_Bandwidth
+
+var _BGPAuthKey = &s_BGPAuthKey
+
+var BGPPeer = &sBGPPeer
+var BGPPeer_bgpPeerId = &sBGPPeer_bgpPeerId
+var BGPPeer_asn = &sBGPPeer_asn
+var BGPPeer_asnLong = &sBGPPeer_asnLong
+var BGPPeer_authKey = &sBGPPeer_authKey
+var BGPPeer_addressFamily = &sBGPPeer_addressFamily
+var BGPPeer_amazonAddress = &sBGPPeer_amazonAddress
+var BGPPeer_customerAddress = &sBGPPeer_customerAddress
+var BGPPeer_bgpPeerState = &sBGPPeer_bgpPeerState
+var BGPPeer_bgpStatus = &sBGPPeer_bgpStatus
+var BGPPeer_awsDeviceV2 = &sBGPPeer_awsDeviceV2
+var BGPPeer_awsLogicalDeviceId = &sBGPPeer_awsLogicalDeviceId
+
+var _BGPPeerId = &s_BGPPeerId
+
+var _BGPPeerIdList = &s_BGPPeerIdList
+var _BGPPeerIdList_member = &s_BGPPeerIdList_member
+
+var _BGPPeerList = &s_BGPPeerList
+var _BGPPeerList_member = &s_BGPPeerList_member
+
+var BGPPeerState = &sBGPPeerState
+var BGPPeerState_Verifying = &sBGPPeerState_Verifying
+var BGPPeerState_Pending = &sBGPPeerState_Pending
+var BGPPeerState_Available = &sBGPPeerState_Available
+var BGPPeerState_Deleting = &sBGPPeerState_Deleting
+var BGPPeerState_Deleted = &sBGPPeerState_Deleted
+
+var BGPStatus = &sBGPStatus
+var BGPStatus_Up = &sBGPStatus_Up
+var BGPStatus_Down = &sBGPStatus_Down
+var BGPStatus_Unknown = &sBGPStatus_Unknown
+
+var BillingMode = &sBillingMode
+var BillingMode_PayAsYouGo = &sBillingMode_PayAsYouGo
+var BillingMode_FlatRateTier1 = &sBillingMode_FlatRateTier1
+var BillingMode_FlatRateTier2 = &sBillingMode_FlatRateTier2
+var BillingMode_FlatRateTier3 = &sBillingMode_FlatRateTier3
+var BillingMode_FlatRateTier4 = &sBillingMode_FlatRateTier4
+var BillingMode_FlatRateTier5 = &sBillingMode_FlatRateTier5
+var BillingMode_PortPairFlatRateTier1 = &sBillingMode_PortPairFlatRateTier1
+var BillingMode_PortPairFlatRateTier2 = &sBillingMode_PortPairFlatRateTier2
+var BillingMode_PortPairFlatRateTier3 = &sBillingMode_PortPairFlatRateTier3
+var BillingMode_PortPairFlatRateTier4 = &sBillingMode_PortPairFlatRateTier4
+var BillingMode_PortPairFlatRateTier5 = &sBillingMode_PortPairFlatRateTier5
+
+var _BooleanFlag = &s_BooleanFlag
+
+var _Cak = &s_Cak
+
+var _CIDR = &s_CIDR
+
+var _Ckn = &s_Ckn
+
+var _CommunityEntry = &s_CommunityEntry
+
+var _CommunityList = &s_CommunityList
+var _CommunityList_member = &s_CommunityList_member
+
+var Connection = &sConnection
+var Connection_ownerAccount = &sConnection_ownerAccount
+var Connection_connectionId = &sConnection_connectionId
+var Connection_connectionName = &sConnection_connectionName
+var Connection_connectionState = &sConnection_connectionState
+var Connection_region = &sConnection_region
+var Connection_location = &sConnection_location
+var Connection_bandwidth = &sConnection_bandwidth
+var Connection_vlan = &sConnection_vlan
+var Connection_partnerName = &sConnection_partnerName
+var Connection_loaIssueTime = &sConnection_loaIssueTime
+var Connection_lagId = &sConnection_lagId
+var Connection_awsDevice = &sConnection_awsDevice
+var Connection_jumboFrameCapable = &sConnection_jumboFrameCapable
+var Connection_awsDeviceV2 = &sConnection_awsDeviceV2
+var Connection_awsLogicalDeviceId = &sConnection_awsLogicalDeviceId
+var Connection_hasLogicalRedundancy = &sConnection_hasLogicalRedundancy
+var Connection_tags = &sConnection_tags
+var Connection_providerName = &sConnection_providerName
+var Connection_macSecCapable = &sConnection_macSecCapable
+var Connection_portEncryptionStatus = &sConnection_portEncryptionStatus
+var Connection_encryptionMode = &sConnection_encryptionMode
+var Connection_macSecKeys = &sConnection_macSecKeys
+var Connection_rateLimiterStatus = &sConnection_rateLimiterStatus
+var Connection_partnerInterconnectMacSecCapable = &sConnection_partnerInterconnectMacSecCapable
+var Connection_prefixPoolSizeIpv4 = &sConnection_prefixPoolSizeIpv4
+var Connection_prefixPoolSizeIpv6 = &sConnection_prefixPoolSizeIpv6
+var Connection_prefixPoolUnallocatedCountIpv4 = &sConnection_prefixPoolUnallocatedCountIpv4
+var Connection_prefixPoolUnallocatedCountIpv6 = &sConnection_prefixPoolUnallocatedCountIpv6
+var Connection_billingMode = &sConnection_billingMode
+
+var _ConnectionArn = &s_ConnectionArn
+
+var _ConnectionId = &s_ConnectionId
+
+var _ConnectionIdentifier = &s_ConnectionIdentifier
+
+var _ConnectionIdentifierList = &s_ConnectionIdentifierList
+var _ConnectionIdentifierList_member = &s_ConnectionIdentifierList_member
+
+var _ConnectionIdList = &s_ConnectionIdList
+var _ConnectionIdList_member = &s_ConnectionIdList_member
+
+var _ConnectionList = &s_ConnectionList
+var _ConnectionList_member = &s_ConnectionList_member
+
+var _ConnectionName = &s_ConnectionName
+
+var ConnectionState = &sConnectionState
+var ConnectionState_ordering = &sConnectionState_ordering
+var ConnectionState_requested = &sConnectionState_requested
+var ConnectionState_pending = &sConnectionState_pending
+var ConnectionState_available = &sConnectionState_available
+var ConnectionState_down = &sConnectionState_down
+var ConnectionState_deleting = &sConnectionState_deleting
+var ConnectionState_deleted = &sConnectionState_deleted
+var ConnectionState_rejected = &sConnectionState_rejected
+var ConnectionState_unknown = &sConnectionState_unknown
+
+var _CoreNetworkAttachmentId = &s_CoreNetworkAttachmentId
+
+var _CoreNetworkIdentifier = &s_CoreNetworkIdentifier
+
+var _Count = &s_Count
+
+var _CustomerAddress = &s_CustomerAddress
+
+var CustomerAgreement = &sCustomerAgreement
+var CustomerAgreement_agreementName = &sCustomerAgreement_agreementName
+var CustomerAgreement_status = &sCustomerAgreement_status
+
+var DirectConnectClientException = &sDirectConnectClientException
+var DirectConnectClientException_message = &sDirectConnectClientException_message
+
+var DirectConnectGateway = &sDirectConnectGateway
+var DirectConnectGateway_directConnectGatewayId = &sDirectConnectGateway_directConnectGatewayId
+var DirectConnectGateway_directConnectGatewayName = &sDirectConnectGateway_directConnectGatewayName
+var DirectConnectGateway_amazonSideAsn = &sDirectConnectGateway_amazonSideAsn
+var DirectConnectGateway_ownerAccount = &sDirectConnectGateway_ownerAccount
+var DirectConnectGateway_directConnectGatewayState = &sDirectConnectGateway_directConnectGatewayState
+var DirectConnectGateway_stateChangeError = &sDirectConnectGateway_stateChangeError
+var DirectConnectGateway_totalPrefixPoolAllocations = &sDirectConnectGateway_totalPrefixPoolAllocations
+var DirectConnectGateway_tags = &sDirectConnectGateway_tags
+
+var DirectConnectGatewayAssociation = &sDirectConnectGatewayAssociation
+var DirectConnectGatewayAssociation_directConnectGatewayId = &sDirectConnectGatewayAssociation_directConnectGatewayId
+var DirectConnectGatewayAssociation_directConnectGatewayOwnerAccount = &sDirectConnectGatewayAssociation_directConnectGatewayOwnerAccount
+var DirectConnectGatewayAssociation_associationState = &sDirectConnectGatewayAssociation_associationState
+var DirectConnectGatewayAssociation_stateChangeError = &sDirectConnectGatewayAssociation_stateChangeError
+var DirectConnectGatewayAssociation_associatedGateway = &sDirectConnectGatewayAssociation_associatedGateway
+var DirectConnectGatewayAssociation_associationId = &sDirectConnectGatewayAssociation_associationId
+var DirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway = &sDirectConnectGatewayAssociation_allowedPrefixesToDirectConnectGateway
+var DirectConnectGatewayAssociation_associatedCoreNetwork = &sDirectConnectGatewayAssociation_associatedCoreNetwork
+var DirectConnectGatewayAssociation_virtualGatewayId = &sDirectConnectGatewayAssociation_virtualGatewayId
+var DirectConnectGatewayAssociation_virtualGatewayRegion = &sDirectConnectGatewayAssociation_virtualGatewayRegion
+var DirectConnectGatewayAssociation_virtualGatewayOwnerAccount = &sDirectConnectGatewayAssociation_virtualGatewayOwnerAccount
+
+var _DirectConnectGatewayAssociationId = &s_DirectConnectGatewayAssociationId
+
+var _DirectConnectGatewayAssociationList = &s_DirectConnectGatewayAssociationList
+var _DirectConnectGatewayAssociationList_member = &s_DirectConnectGatewayAssociationList_member
+
+var DirectConnectGatewayAssociationProposal = &sDirectConnectGatewayAssociationProposal
+var DirectConnectGatewayAssociationProposal_proposalId = &sDirectConnectGatewayAssociationProposal_proposalId
+var DirectConnectGatewayAssociationProposal_directConnectGatewayId = &sDirectConnectGatewayAssociationProposal_directConnectGatewayId
+var DirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount = &sDirectConnectGatewayAssociationProposal_directConnectGatewayOwnerAccount
+var DirectConnectGatewayAssociationProposal_proposalState = &sDirectConnectGatewayAssociationProposal_proposalState
+var DirectConnectGatewayAssociationProposal_associatedGateway = &sDirectConnectGatewayAssociationProposal_associatedGateway
+var DirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway = &sDirectConnectGatewayAssociationProposal_existingAllowedPrefixesToDirectConnectGateway
+var DirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway = &sDirectConnectGatewayAssociationProposal_requestedAllowedPrefixesToDirectConnectGateway
+
+var _DirectConnectGatewayAssociationProposalId = &s_DirectConnectGatewayAssociationProposalId
+
+var _DirectConnectGatewayAssociationProposalList = &s_DirectConnectGatewayAssociationProposalList
+var _DirectConnectGatewayAssociationProposalList_member = &s_DirectConnectGatewayAssociationProposalList_member
+
+var DirectConnectGatewayAssociationProposalState = &sDirectConnectGatewayAssociationProposalState
+var DirectConnectGatewayAssociationProposalState_requested = &sDirectConnectGatewayAssociationProposalState_requested
+var DirectConnectGatewayAssociationProposalState_accepted = &sDirectConnectGatewayAssociationProposalState_accepted
+var DirectConnectGatewayAssociationProposalState_deleted = &sDirectConnectGatewayAssociationProposalState_deleted
+
+var DirectConnectGatewayAssociationState = &sDirectConnectGatewayAssociationState
+var DirectConnectGatewayAssociationState_associating = &sDirectConnectGatewayAssociationState_associating
+var DirectConnectGatewayAssociationState_associated = &sDirectConnectGatewayAssociationState_associated
+var DirectConnectGatewayAssociationState_disassociating = &sDirectConnectGatewayAssociationState_disassociating
+var DirectConnectGatewayAssociationState_disassociated = &sDirectConnectGatewayAssociationState_disassociated
+var DirectConnectGatewayAssociationState_updating = &sDirectConnectGatewayAssociationState_updating
+
+var DirectConnectGatewayAttachment = &sDirectConnectGatewayAttachment
+var DirectConnectGatewayAttachment_directConnectGatewayId = &sDirectConnectGatewayAttachment_directConnectGatewayId
+var DirectConnectGatewayAttachment_virtualInterfaceId = &sDirectConnectGatewayAttachment_virtualInterfaceId
+var DirectConnectGatewayAttachment_virtualInterfaceRegion = &sDirectConnectGatewayAttachment_virtualInterfaceRegion
+var DirectConnectGatewayAttachment_virtualInterfaceOwnerAccount = &sDirectConnectGatewayAttachment_virtualInterfaceOwnerAccount
+var DirectConnectGatewayAttachment_attachmentState = &sDirectConnectGatewayAttachment_attachmentState
+var DirectConnectGatewayAttachment_attachmentType = &sDirectConnectGatewayAttachment_attachmentType
+var DirectConnectGatewayAttachment_stateChangeError = &sDirectConnectGatewayAttachment_stateChangeError
+
+var _DirectConnectGatewayAttachmentList = &s_DirectConnectGatewayAttachmentList
+var _DirectConnectGatewayAttachmentList_member = &s_DirectConnectGatewayAttachmentList_member
+
+var DirectConnectGatewayAttachmentState = &sDirectConnectGatewayAttachmentState
+var DirectConnectGatewayAttachmentState_attaching = &sDirectConnectGatewayAttachmentState_attaching
+var DirectConnectGatewayAttachmentState_attached = &sDirectConnectGatewayAttachmentState_attached
+var DirectConnectGatewayAttachmentState_detaching = &sDirectConnectGatewayAttachmentState_detaching
+var DirectConnectGatewayAttachmentState_detached = &sDirectConnectGatewayAttachmentState_detached
+
+var DirectConnectGatewayAttachmentType = &sDirectConnectGatewayAttachmentType
+var DirectConnectGatewayAttachmentType_TransitVirtualInterface = &sDirectConnectGatewayAttachmentType_TransitVirtualInterface
+var DirectConnectGatewayAttachmentType_PrivateVirtualInterface = &sDirectConnectGatewayAttachmentType_PrivateVirtualInterface
+
+var _DirectConnectGatewayId = &s_DirectConnectGatewayId
+
+var _DirectConnectGatewayList = &s_DirectConnectGatewayList
+var _DirectConnectGatewayList_member = &s_DirectConnectGatewayList_member
+
+var _DirectConnectGatewayName = &s_DirectConnectGatewayName
+
+var DirectConnectGatewayState = &sDirectConnectGatewayState
+var DirectConnectGatewayState_pending = &sDirectConnectGatewayState_pending
+var DirectConnectGatewayState_available = &sDirectConnectGatewayState_available
+var DirectConnectGatewayState_deleting = &sDirectConnectGatewayState_deleting
+var DirectConnectGatewayState_deleted = &sDirectConnectGatewayState_deleted
+
+var DirectConnectServerException = &sDirectConnectServerException
+var DirectConnectServerException_message = &sDirectConnectServerException_message
+
+var DuplicateTagKeysException = &sDuplicateTagKeysException
+var DuplicateTagKeysException_message = &sDuplicateTagKeysException_message
+
+var _EnableSiteLink = &s_EnableSiteLink
+
+var _EncryptionMode = &s_EncryptionMode
+
+var _EndTime = &s_EndTime
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _FailureTestHistoryStatus = &s_FailureTestHistoryStatus
+
+var _GatewayIdentifier = &s_GatewayIdentifier
+
+var _GatewayIdToAssociate = &s_GatewayIdToAssociate
+
+var GatewayType = &sGatewayType
+var GatewayType_VirtualPrivateGateway = &sGatewayType_VirtualPrivateGateway
+var GatewayType_TransitGateway = &sGatewayType_TransitGateway
+
+var HasLogicalRedundancy = &sHasLogicalRedundancy
+var HasLogicalRedundancy_Unknown = &sHasLogicalRedundancy_Unknown
+var HasLogicalRedundancy_Yes = &sHasLogicalRedundancy_Yes
+var HasLogicalRedundancy_No = &sHasLogicalRedundancy_No
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var _IncludedRegionList = &s_IncludedRegionList
+var _IncludedRegionList_member = &s_IncludedRegionList_member
+
+var Interconnect = &sInterconnect
+var Interconnect_interconnectId = &sInterconnect_interconnectId
+var Interconnect_interconnectName = &sInterconnect_interconnectName
+var Interconnect_interconnectState = &sInterconnect_interconnectState
+var Interconnect_region = &sInterconnect_region
+var Interconnect_location = &sInterconnect_location
+var Interconnect_bandwidth = &sInterconnect_bandwidth
+var Interconnect_loaIssueTime = &sInterconnect_loaIssueTime
+var Interconnect_lagId = &sInterconnect_lagId
+var Interconnect_awsDevice = &sInterconnect_awsDevice
+var Interconnect_jumboFrameCapable = &sInterconnect_jumboFrameCapable
+var Interconnect_awsDeviceV2 = &sInterconnect_awsDeviceV2
+var Interconnect_awsLogicalDeviceId = &sInterconnect_awsLogicalDeviceId
+var Interconnect_hasLogicalRedundancy = &sInterconnect_hasLogicalRedundancy
+var Interconnect_tags = &sInterconnect_tags
+var Interconnect_providerName = &sInterconnect_providerName
+var Interconnect_macSecCapable = &sInterconnect_macSecCapable
+var Interconnect_portEncryptionStatus = &sInterconnect_portEncryptionStatus
+var Interconnect_encryptionMode = &sInterconnect_encryptionMode
+var Interconnect_macSecKeys = &sInterconnect_macSecKeys
+
+var _InterconnectId = &s_InterconnectId
+
+var _InterconnectList = &s_InterconnectList
+var _InterconnectList_member = &s_InterconnectList_member
+
+var _InterconnectName = &s_InterconnectName
+
+var InterconnectState = &sInterconnectState
+var InterconnectState_requested = &sInterconnectState_requested
+var InterconnectState_pending = &sInterconnectState_pending
+var InterconnectState_available = &sInterconnectState_available
+var InterconnectState_down = &sInterconnectState_down
+var InterconnectState_deleting = &sInterconnectState_deleting
+var InterconnectState_deleted = &sInterconnectState_deleted
+var InterconnectState_unknown = &sInterconnectState_unknown
+
+var _JumboFrameCapable = &s_JumboFrameCapable
+
+var Lag = &sLag
+var Lag_connectionsBandwidth = &sLag_connectionsBandwidth
+var Lag_numberOfConnections = &sLag_numberOfConnections
+var Lag_lagId = &sLag_lagId
+var Lag_ownerAccount = &sLag_ownerAccount
+var Lag_lagName = &sLag_lagName
+var Lag_lagState = &sLag_lagState
+var Lag_location = &sLag_location
+var Lag_region = &sLag_region
+var Lag_minimumLinks = &sLag_minimumLinks
+var Lag_awsDevice = &sLag_awsDevice
+var Lag_awsDeviceV2 = &sLag_awsDeviceV2
+var Lag_awsLogicalDeviceId = &sLag_awsLogicalDeviceId
+var Lag_connections = &sLag_connections
+var Lag_allowsHostedConnections = &sLag_allowsHostedConnections
+var Lag_jumboFrameCapable = &sLag_jumboFrameCapable
+var Lag_hasLogicalRedundancy = &sLag_hasLogicalRedundancy
+var Lag_tags = &sLag_tags
+var Lag_providerName = &sLag_providerName
+var Lag_macSecCapable = &sLag_macSecCapable
+var Lag_encryptionMode = &sLag_encryptionMode
+var Lag_macSecKeys = &sLag_macSecKeys
+var Lag_prefixPoolSizeIpv4 = &sLag_prefixPoolSizeIpv4
+var Lag_prefixPoolSizeIpv6 = &sLag_prefixPoolSizeIpv6
+var Lag_prefixPoolUnallocatedCountIpv4 = &sLag_prefixPoolUnallocatedCountIpv4
+var Lag_prefixPoolUnallocatedCountIpv6 = &sLag_prefixPoolUnallocatedCountIpv6
+var Lag_rateLimiterStatus = &sLag_rateLimiterStatus
+var Lag_billingMode = &sLag_billingMode
+
+var _LagId = &s_LagId
+
+var _LagList = &s_LagList
+var _LagList_member = &s_LagList_member
+
+var _LagName = &s_LagName
+
+var LagState = &sLagState
+var LagState_requested = &sLagState_requested
+var LagState_pending = &sLagState_pending
+var LagState_available = &sLagState_available
+var LagState_down = &sLagState_down
+var LagState_deleting = &sLagState_deleting
+var LagState_deleted = &sLagState_deleted
+var LagState_unknown = &sLagState_unknown
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var Loa = &sLoa
+var Loa_loaContent = &sLoa_loaContent
+var Loa_loaContentType = &sLoa_loaContentType
+
+var _LoaContent = &s_LoaContent
+
+var LoaContentType = &sLoaContentType
+var LoaContentType_PDF = &sLoaContentType_PDF
+
+var _LoaIssueTime = &s_LoaIssueTime
+
+var Location = &sLocation
+var Location_locationCode = &sLocation_locationCode
+var Location_locationName = &sLocation_locationName
+var Location_region = &sLocation_region
+var Location_availablePortSpeeds = &sLocation_availablePortSpeeds
+var Location_availableProviders = &sLocation_availableProviders
+var Location_availableMacSecPortSpeeds = &sLocation_availableMacSecPortSpeeds
+var Location_availableBillingModes = &sLocation_availableBillingModes
+
+var _LocationCode = &s_LocationCode
+
+var _LocationList = &s_LocationList
+var _LocationList_member = &s_LocationList_member
+
+var _LocationName = &s_LocationName
+
+var _LongAsn = &s_LongAsn
+
+var _MacSecCapable = &s_MacSecCapable
+
+var MacSecKey = &sMacSecKey
+var MacSecKey_secretARN = &sMacSecKey_secretARN
+var MacSecKey_ckn = &sMacSecKey_ckn
+var MacSecKey_state = &sMacSecKey_state
+var MacSecKey_startOn = &sMacSecKey_startOn
+
+var _MacSecKeyList = &s_MacSecKeyList
+var _MacSecKeyList_member = &s_MacSecKeyList_member
+
+var _MaxResultSetSize = &s_MaxResultSetSize
+
+var _MTU = &s_MTU
+
+var NewBGPPeer = &sNewBGPPeer
+var NewBGPPeer_asn = &sNewBGPPeer_asn
+var NewBGPPeer_asnLong = &sNewBGPPeer_asnLong
+var NewBGPPeer_authKey = &sNewBGPPeer_authKey
+var NewBGPPeer_addressFamily = &sNewBGPPeer_addressFamily
+var NewBGPPeer_amazonAddress = &sNewBGPPeer_amazonAddress
+var NewBGPPeer_customerAddress = &sNewBGPPeer_customerAddress
+
+var NewPrivateVirtualInterface = &sNewPrivateVirtualInterface
+var NewPrivateVirtualInterface_virtualInterfaceName = &sNewPrivateVirtualInterface_virtualInterfaceName
+var NewPrivateVirtualInterface_vlan = &sNewPrivateVirtualInterface_vlan
+var NewPrivateVirtualInterface_asn = &sNewPrivateVirtualInterface_asn
+var NewPrivateVirtualInterface_asnLong = &sNewPrivateVirtualInterface_asnLong
+var NewPrivateVirtualInterface_mtu = &sNewPrivateVirtualInterface_mtu
+var NewPrivateVirtualInterface_authKey = &sNewPrivateVirtualInterface_authKey
+var NewPrivateVirtualInterface_amazonAddress = &sNewPrivateVirtualInterface_amazonAddress
+var NewPrivateVirtualInterface_customerAddress = &sNewPrivateVirtualInterface_customerAddress
+var NewPrivateVirtualInterface_addressFamily = &sNewPrivateVirtualInterface_addressFamily
+var NewPrivateVirtualInterface_virtualGatewayId = &sNewPrivateVirtualInterface_virtualGatewayId
+var NewPrivateVirtualInterface_directConnectGatewayId = &sNewPrivateVirtualInterface_directConnectGatewayId
+var NewPrivateVirtualInterface_tags = &sNewPrivateVirtualInterface_tags
+var NewPrivateVirtualInterface_enableSiteLink = &sNewPrivateVirtualInterface_enableSiteLink
+var NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4 = &sNewPrivateVirtualInterface_prefixPoolAllocatedCountIpv4
+var NewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6 = &sNewPrivateVirtualInterface_prefixPoolAllocatedCountIpv6
+var NewPrivateVirtualInterface_rateLimit = &sNewPrivateVirtualInterface_rateLimit
+
+var NewPrivateVirtualInterfaceAllocation = &sNewPrivateVirtualInterfaceAllocation
+var NewPrivateVirtualInterfaceAllocation_virtualInterfaceName = &sNewPrivateVirtualInterfaceAllocation_virtualInterfaceName
+var NewPrivateVirtualInterfaceAllocation_vlan = &sNewPrivateVirtualInterfaceAllocation_vlan
+var NewPrivateVirtualInterfaceAllocation_asn = &sNewPrivateVirtualInterfaceAllocation_asn
+var NewPrivateVirtualInterfaceAllocation_asnLong = &sNewPrivateVirtualInterfaceAllocation_asnLong
+var NewPrivateVirtualInterfaceAllocation_mtu = &sNewPrivateVirtualInterfaceAllocation_mtu
+var NewPrivateVirtualInterfaceAllocation_authKey = &sNewPrivateVirtualInterfaceAllocation_authKey
+var NewPrivateVirtualInterfaceAllocation_amazonAddress = &sNewPrivateVirtualInterfaceAllocation_amazonAddress
+var NewPrivateVirtualInterfaceAllocation_addressFamily = &sNewPrivateVirtualInterfaceAllocation_addressFamily
+var NewPrivateVirtualInterfaceAllocation_customerAddress = &sNewPrivateVirtualInterfaceAllocation_customerAddress
+var NewPrivateVirtualInterfaceAllocation_tags = &sNewPrivateVirtualInterfaceAllocation_tags
+var NewPrivateVirtualInterfaceAllocation_rateLimit = &sNewPrivateVirtualInterfaceAllocation_rateLimit
+
+var NewPublicVirtualInterface = &sNewPublicVirtualInterface
+var NewPublicVirtualInterface_virtualInterfaceName = &sNewPublicVirtualInterface_virtualInterfaceName
+var NewPublicVirtualInterface_vlan = &sNewPublicVirtualInterface_vlan
+var NewPublicVirtualInterface_asn = &sNewPublicVirtualInterface_asn
+var NewPublicVirtualInterface_asnLong = &sNewPublicVirtualInterface_asnLong
+var NewPublicVirtualInterface_authKey = &sNewPublicVirtualInterface_authKey
+var NewPublicVirtualInterface_amazonAddress = &sNewPublicVirtualInterface_amazonAddress
+var NewPublicVirtualInterface_customerAddress = &sNewPublicVirtualInterface_customerAddress
+var NewPublicVirtualInterface_addressFamily = &sNewPublicVirtualInterface_addressFamily
+var NewPublicVirtualInterface_routeFilterPrefixes = &sNewPublicVirtualInterface_routeFilterPrefixes
+var NewPublicVirtualInterface_tags = &sNewPublicVirtualInterface_tags
+var NewPublicVirtualInterface_rateLimit = &sNewPublicVirtualInterface_rateLimit
+
+var NewPublicVirtualInterfaceAllocation = &sNewPublicVirtualInterfaceAllocation
+var NewPublicVirtualInterfaceAllocation_virtualInterfaceName = &sNewPublicVirtualInterfaceAllocation_virtualInterfaceName
+var NewPublicVirtualInterfaceAllocation_vlan = &sNewPublicVirtualInterfaceAllocation_vlan
+var NewPublicVirtualInterfaceAllocation_asn = &sNewPublicVirtualInterfaceAllocation_asn
+var NewPublicVirtualInterfaceAllocation_asnLong = &sNewPublicVirtualInterfaceAllocation_asnLong
+var NewPublicVirtualInterfaceAllocation_authKey = &sNewPublicVirtualInterfaceAllocation_authKey
+var NewPublicVirtualInterfaceAllocation_amazonAddress = &sNewPublicVirtualInterfaceAllocation_amazonAddress
+var NewPublicVirtualInterfaceAllocation_customerAddress = &sNewPublicVirtualInterfaceAllocation_customerAddress
+var NewPublicVirtualInterfaceAllocation_addressFamily = &sNewPublicVirtualInterfaceAllocation_addressFamily
+var NewPublicVirtualInterfaceAllocation_routeFilterPrefixes = &sNewPublicVirtualInterfaceAllocation_routeFilterPrefixes
+var NewPublicVirtualInterfaceAllocation_tags = &sNewPublicVirtualInterfaceAllocation_tags
+var NewPublicVirtualInterfaceAllocation_rateLimit = &sNewPublicVirtualInterfaceAllocation_rateLimit
+
+var NewTransitVirtualInterface = &sNewTransitVirtualInterface
+var NewTransitVirtualInterface_virtualInterfaceName = &sNewTransitVirtualInterface_virtualInterfaceName
+var NewTransitVirtualInterface_vlan = &sNewTransitVirtualInterface_vlan
+var NewTransitVirtualInterface_asn = &sNewTransitVirtualInterface_asn
+var NewTransitVirtualInterface_asnLong = &sNewTransitVirtualInterface_asnLong
+var NewTransitVirtualInterface_mtu = &sNewTransitVirtualInterface_mtu
+var NewTransitVirtualInterface_authKey = &sNewTransitVirtualInterface_authKey
+var NewTransitVirtualInterface_amazonAddress = &sNewTransitVirtualInterface_amazonAddress
+var NewTransitVirtualInterface_customerAddress = &sNewTransitVirtualInterface_customerAddress
+var NewTransitVirtualInterface_addressFamily = &sNewTransitVirtualInterface_addressFamily
+var NewTransitVirtualInterface_directConnectGatewayId = &sNewTransitVirtualInterface_directConnectGatewayId
+var NewTransitVirtualInterface_tags = &sNewTransitVirtualInterface_tags
+var NewTransitVirtualInterface_enableSiteLink = &sNewTransitVirtualInterface_enableSiteLink
+var NewTransitVirtualInterface_prefixPoolAllocatedCountIpv4 = &sNewTransitVirtualInterface_prefixPoolAllocatedCountIpv4
+var NewTransitVirtualInterface_prefixPoolAllocatedCountIpv6 = &sNewTransitVirtualInterface_prefixPoolAllocatedCountIpv6
+var NewTransitVirtualInterface_rateLimit = &sNewTransitVirtualInterface_rateLimit
+
+var NewTransitVirtualInterfaceAllocation = &sNewTransitVirtualInterfaceAllocation
+var NewTransitVirtualInterfaceAllocation_virtualInterfaceName = &sNewTransitVirtualInterfaceAllocation_virtualInterfaceName
+var NewTransitVirtualInterfaceAllocation_vlan = &sNewTransitVirtualInterfaceAllocation_vlan
+var NewTransitVirtualInterfaceAllocation_asn = &sNewTransitVirtualInterfaceAllocation_asn
+var NewTransitVirtualInterfaceAllocation_asnLong = &sNewTransitVirtualInterfaceAllocation_asnLong
+var NewTransitVirtualInterfaceAllocation_mtu = &sNewTransitVirtualInterfaceAllocation_mtu
+var NewTransitVirtualInterfaceAllocation_authKey = &sNewTransitVirtualInterfaceAllocation_authKey
+var NewTransitVirtualInterfaceAllocation_amazonAddress = &sNewTransitVirtualInterfaceAllocation_amazonAddress
+var NewTransitVirtualInterfaceAllocation_customerAddress = &sNewTransitVirtualInterfaceAllocation_customerAddress
+var NewTransitVirtualInterfaceAllocation_addressFamily = &sNewTransitVirtualInterfaceAllocation_addressFamily
+var NewTransitVirtualInterfaceAllocation_tags = &sNewTransitVirtualInterfaceAllocation_tags
+var NewTransitVirtualInterfaceAllocation_rateLimit = &sNewTransitVirtualInterfaceAllocation_rateLimit
+
+var NniPartnerType = &sNniPartnerType
+var NniPartnerType_V1 = &sNniPartnerType_V1
+var NniPartnerType_V2 = &sNniPartnerType_V2
+var NniPartnerType_NonPartner = &sNniPartnerType_NonPartner
+
+var _OwnerAccount = &s_OwnerAccount
+
+var _PaginationToken = &s_PaginationToken
+
+var _PartnerInterconnectMacSecCapable = &s_PartnerInterconnectMacSecCapable
+
+var _PartnerName = &s_PartnerName
+
+var _Platform = &s_Platform
+
+var _PortEncryptionStatus = &s_PortEncryptionStatus
+
+var _PortSpeed = &s_PortSpeed
+
+var _PrefixPoolAllocatedCount = &s_PrefixPoolAllocatedCount
+
+var _PrefixPoolSize = &s_PrefixPoolSize
+
+var _PrefixPoolUnallocatedCount = &s_PrefixPoolUnallocatedCount
+
+var _ProviderList = &s_ProviderList
+var _ProviderList_member = &s_ProviderList_member
+
+var _ProviderName = &s_ProviderName
+
+var _RateLimit = &s_RateLimit
+
+var RateLimiterStatus = &sRateLimiterStatus
+var RateLimiterStatus_maxAllowed = &sRateLimiterStatus_maxAllowed
+var RateLimiterStatus_inUse = &sRateLimiterStatus_inUse
+var RateLimiterStatus_remaining = &sRateLimiterStatus_remaining
+var RateLimiterStatus_totalBandwidth = &sRateLimiterStatus_totalBandwidth
+
+var _Region = &s_Region
+
+var RequestBillingMode = &sRequestBillingMode
+var RequestBillingMode_PayAsYouGo = &sRequestBillingMode_PayAsYouGo
+var RequestBillingMode_FlatRateTier1 = &sRequestBillingMode_FlatRateTier1
+var RequestBillingMode_FlatRateTier2 = &sRequestBillingMode_FlatRateTier2
+var RequestBillingMode_FlatRateTier3 = &sRequestBillingMode_FlatRateTier3
+var RequestBillingMode_FlatRateTier4 = &sRequestBillingMode_FlatRateTier4
+var RequestBillingMode_FlatRateTier5 = &sRequestBillingMode_FlatRateTier5
+
+var _RequestMACSec = &s_RequestMACSec
+
+var ResiliencyGroup = &sResiliencyGroup
+var ResiliencyGroup_resiliencyGroupId = &sResiliencyGroup_resiliencyGroupId
+var ResiliencyGroup_resiliencyGroupArn = &sResiliencyGroup_resiliencyGroupArn
+var ResiliencyGroup_resiliencyGroupName = &sResiliencyGroup_resiliencyGroupName
+var ResiliencyGroup_resiliencyGroupType = &sResiliencyGroup_resiliencyGroupType
+var ResiliencyGroup_ownerAccount = &sResiliencyGroup_ownerAccount
+var ResiliencyGroup_state = &sResiliencyGroup_state
+var ResiliencyGroup_tags = &sResiliencyGroup_tags
+
+var _ResiliencyGroupArn = &s_ResiliencyGroupArn
+
+var ResiliencyGroupAssociation = &sResiliencyGroupAssociation
+var ResiliencyGroupAssociation_resiliencyGroupId = &sResiliencyGroupAssociation_resiliencyGroupId
+var ResiliencyGroupAssociation_connectionArn = &sResiliencyGroupAssociation_connectionArn
+var ResiliencyGroupAssociation_state = &sResiliencyGroupAssociation_state
+
+var _ResiliencyGroupAssociationList = &s_ResiliencyGroupAssociationList
+var _ResiliencyGroupAssociationList_member = &s_ResiliencyGroupAssociationList_member
+
+var ResiliencyGroupAssociationState = &sResiliencyGroupAssociationState
+var ResiliencyGroupAssociationState_Associating = &sResiliencyGroupAssociationState_Associating
+var ResiliencyGroupAssociationState_Associated = &sResiliencyGroupAssociationState_Associated
+var ResiliencyGroupAssociationState_Disassociating = &sResiliencyGroupAssociationState_Disassociating
+var ResiliencyGroupAssociationState_Disassociated = &sResiliencyGroupAssociationState_Disassociated
+
+var _ResiliencyGroupId = &s_ResiliencyGroupId
+
+var _ResiliencyGroupName = &s_ResiliencyGroupName
+
+var ResiliencyGroupState = &sResiliencyGroupState
+var ResiliencyGroupState_Pending = &sResiliencyGroupState_Pending
+var ResiliencyGroupState_Available = &sResiliencyGroupState_Available
+var ResiliencyGroupState_Deleting = &sResiliencyGroupState_Deleting
+var ResiliencyGroupState_Deleted = &sResiliencyGroupState_Deleted
+
+var ResiliencyGroupSummary = &sResiliencyGroupSummary
+var ResiliencyGroupSummary_resiliencyGroupId = &sResiliencyGroupSummary_resiliencyGroupId
+var ResiliencyGroupSummary_resiliencyGroupArn = &sResiliencyGroupSummary_resiliencyGroupArn
+var ResiliencyGroupSummary_resiliencyGroupName = &sResiliencyGroupSummary_resiliencyGroupName
+var ResiliencyGroupSummary_resiliencyGroupType = &sResiliencyGroupSummary_resiliencyGroupType
+var ResiliencyGroupSummary_ownerAccount = &sResiliencyGroupSummary_ownerAccount
+var ResiliencyGroupSummary_state = &sResiliencyGroupSummary_state
+
+var _ResiliencyGroupSummaryList = &s_ResiliencyGroupSummaryList
+var _ResiliencyGroupSummaryList_member = &s_ResiliencyGroupSummaryList_member
+
+var ResiliencyGroupType = &sResiliencyGroupType
+var ResiliencyGroupType_Managed = &sResiliencyGroupType_Managed
+
+var ResiliencyModel = &sResiliencyModel
+var ResiliencyModel_MaximumResiliency = &sResiliencyModel_MaximumResiliency
+var ResiliencyModel_HighResiliency = &sResiliencyModel_HighResiliency
+var ResiliencyModel_BasicResiliency = &sResiliencyModel_BasicResiliency
+
+var _ResourceArn = &s_ResourceArn
+
+var _ResourceArnList = &s_ResourceArnList
+var _ResourceArnList_member = &s_ResourceArnList_member
+
+var ResourceTag = &sResourceTag
+var ResourceTag_resourceArn = &sResourceTag_resourceArn
+var ResourceTag_tags = &sResourceTag_tags
+
+var _ResourceTagList = &s_ResourceTagList
+var _ResourceTagList_member = &s_ResourceTagList_member
+
+var Route = &sRoute
+var Route_cidr = &sRoute_cidr
+var Route_routeDirection = &sRoute_routeDirection
+var Route_addressFamily = &sRoute_addressFamily
+var Route_asPath = &sRoute_asPath
+var Route_communities = &sRoute_communities
+var Route_awsLogicalDeviceId = &sRoute_awsLogicalDeviceId
+var Route_routeInstalledAt = &sRoute_routeInstalledAt
+
+var _RouteCidr = &s_RouteCidr
+
+var RouteDirection = &sRouteDirection
+var RouteDirection_Accepted = &sRouteDirection_Accepted
+var RouteDirection_Advertised = &sRouteDirection_Advertised
+
+var _RouteFilterCidrString = &s_RouteFilterCidrString
+
+var _RouteFilterCidrStringList = &s_RouteFilterCidrStringList
+var _RouteFilterCidrStringList_member = &s_RouteFilterCidrStringList_member
+
+var RouteFilterPrefix = &sRouteFilterPrefix
+var RouteFilterPrefix_cidr = &sRouteFilterPrefix_cidr
+
+var _RouteFilterPrefixList = &s_RouteFilterPrefixList
+var _RouteFilterPrefixList_member = &s_RouteFilterPrefixList_member
+
+var RouteFilters = &sRouteFilters
+var RouteFilters_routeDirection = &sRouteFilters_routeDirection
+var RouteFilters_addressFamily = &sRouteFilters_addressFamily
+var RouteFilters_cidrs = &sRouteFilters_cidrs
+var RouteFilters_asPath = &sRouteFilters_asPath
+var RouteFilters_communities = &sRouteFilters_communities
+
+var _RouteInstalledAt = &s_RouteInstalledAt
+
+var _RouteList = &s_RouteList
+var _RouteList_member = &s_RouteList_member
+
+var _RouterConfig = &s_RouterConfig
+
+var RouterType = &sRouterType
+var RouterType_vendor = &sRouterType_vendor
+var RouterType_platform = &sRouterType_platform
+var RouterType_software = &sRouterType_software
+var RouterType_xsltTemplateName = &sRouterType_xsltTemplateName
+var RouterType_xsltTemplateNameForMacSec = &sRouterType_xsltTemplateNameForMacSec
+var RouterType_routerTypeIdentifier = &sRouterType_routerTypeIdentifier
+
+var _RouterTypeIdentifier = &s_RouterTypeIdentifier
+
+var _SecretARN = &s_SecretARN
+
+var _SiteLinkEnabled = &s_SiteLinkEnabled
+
+var _Software = &s_Software
+
+var _StartOnDate = &s_StartOnDate
+
+var _StartTime = &s_StartTime
+
+var _State = &s_State
+
+var _StateChangeError = &s_StateChangeError
+
+var _Status = &s_Status
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TestDuration = &s_TestDuration
+
+var _TestId = &s_TestId
+
+var TooManyTagsException = &sTooManyTagsException
+var TooManyTagsException_message = &sTooManyTagsException_message
+
+var _Vendor = &s_Vendor
+
+var VirtualGateway = &sVirtualGateway
+var VirtualGateway_virtualGatewayId = &sVirtualGateway_virtualGatewayId
+var VirtualGateway_virtualGatewayState = &sVirtualGateway_virtualGatewayState
+
+var _VirtualGatewayId = &s_VirtualGatewayId
+
+var _VirtualGatewayList = &s_VirtualGatewayList
+var _VirtualGatewayList_member = &s_VirtualGatewayList_member
+
+var _VirtualGatewayRegion = &s_VirtualGatewayRegion
+
+var _VirtualGatewayState = &s_VirtualGatewayState
+
+var VirtualInterface = &sVirtualInterface
+var VirtualInterface_ownerAccount = &sVirtualInterface_ownerAccount
+var VirtualInterface_virtualInterfaceId = &sVirtualInterface_virtualInterfaceId
+var VirtualInterface_location = &sVirtualInterface_location
+var VirtualInterface_connectionId = &sVirtualInterface_connectionId
+var VirtualInterface_virtualInterfaceType = &sVirtualInterface_virtualInterfaceType
+var VirtualInterface_virtualInterfaceName = &sVirtualInterface_virtualInterfaceName
+var VirtualInterface_vlan = &sVirtualInterface_vlan
+var VirtualInterface_asn = &sVirtualInterface_asn
+var VirtualInterface_asnLong = &sVirtualInterface_asnLong
+var VirtualInterface_amazonSideAsn = &sVirtualInterface_amazonSideAsn
+var VirtualInterface_authKey = &sVirtualInterface_authKey
+var VirtualInterface_amazonAddress = &sVirtualInterface_amazonAddress
+var VirtualInterface_customerAddress = &sVirtualInterface_customerAddress
+var VirtualInterface_addressFamily = &sVirtualInterface_addressFamily
+var VirtualInterface_virtualInterfaceState = &sVirtualInterface_virtualInterfaceState
+var VirtualInterface_customerRouterConfig = &sVirtualInterface_customerRouterConfig
+var VirtualInterface_mtu = &sVirtualInterface_mtu
+var VirtualInterface_jumboFrameCapable = &sVirtualInterface_jumboFrameCapable
+var VirtualInterface_virtualGatewayId = &sVirtualInterface_virtualGatewayId
+var VirtualInterface_directConnectGatewayId = &sVirtualInterface_directConnectGatewayId
+var VirtualInterface_routeFilterPrefixes = &sVirtualInterface_routeFilterPrefixes
+var VirtualInterface_bgpPeers = &sVirtualInterface_bgpPeers
+var VirtualInterface_region = &sVirtualInterface_region
+var VirtualInterface_awsDeviceV2 = &sVirtualInterface_awsDeviceV2
+var VirtualInterface_awsLogicalDeviceId = &sVirtualInterface_awsLogicalDeviceId
+var VirtualInterface_tags = &sVirtualInterface_tags
+var VirtualInterface_siteLinkEnabled = &sVirtualInterface_siteLinkEnabled
+var VirtualInterface_prefixPoolAllocatedCountIpv4 = &sVirtualInterface_prefixPoolAllocatedCountIpv4
+var VirtualInterface_prefixPoolAllocatedCountIpv6 = &sVirtualInterface_prefixPoolAllocatedCountIpv6
+var VirtualInterface_rateLimit = &sVirtualInterface_rateLimit
+
+var _VirtualInterfaceId = &s_VirtualInterfaceId
+
+var _VirtualInterfaceList = &s_VirtualInterfaceList
+var _VirtualInterfaceList_member = &s_VirtualInterfaceList_member
+
+var _VirtualInterfaceName = &s_VirtualInterfaceName
+
+var _VirtualInterfaceRegion = &s_VirtualInterfaceRegion
+
+var VirtualInterfaceState = &sVirtualInterfaceState
+var VirtualInterfaceState_confirming = &sVirtualInterfaceState_confirming
+var VirtualInterfaceState_verifying = &sVirtualInterfaceState_verifying
+var VirtualInterfaceState_pending = &sVirtualInterfaceState_pending
+var VirtualInterfaceState_available = &sVirtualInterfaceState_available
+var VirtualInterfaceState_down = &sVirtualInterfaceState_down
+var VirtualInterfaceState_testing = &sVirtualInterfaceState_testing
+var VirtualInterfaceState_deleting = &sVirtualInterfaceState_deleting
+var VirtualInterfaceState_deleted = &sVirtualInterfaceState_deleted
+var VirtualInterfaceState_rejected = &sVirtualInterfaceState_rejected
+var VirtualInterfaceState_unknown = &sVirtualInterfaceState_unknown
+
+var VirtualInterfaceTestHistory = &sVirtualInterfaceTestHistory
+var VirtualInterfaceTestHistory_testId = &sVirtualInterfaceTestHistory_testId
+var VirtualInterfaceTestHistory_virtualInterfaceId = &sVirtualInterfaceTestHistory_virtualInterfaceId
+var VirtualInterfaceTestHistory_bgpPeers = &sVirtualInterfaceTestHistory_bgpPeers
+var VirtualInterfaceTestHistory_status = &sVirtualInterfaceTestHistory_status
+var VirtualInterfaceTestHistory_ownerAccount = &sVirtualInterfaceTestHistory_ownerAccount
+var VirtualInterfaceTestHistory_testDurationInMinutes = &sVirtualInterfaceTestHistory_testDurationInMinutes
+var VirtualInterfaceTestHistory_startTime = &sVirtualInterfaceTestHistory_startTime
+var VirtualInterfaceTestHistory_endTime = &sVirtualInterfaceTestHistory_endTime
+
+var _VirtualInterfaceTestHistoryList = &s_VirtualInterfaceTestHistoryList
+var _VirtualInterfaceTestHistoryList_member = &s_VirtualInterfaceTestHistoryList_member
+
+var _VirtualInterfaceType = &s_VirtualInterfaceType
+
+var _VLAN = &s_VLAN
+
+var _XsltTemplateName = &s_XsltTemplateName
+
+var _XsltTemplateNameForMacSec = &s_XsltTemplateNameForMacSec
+
+var AcceptDirectConnectGatewayAssociationProposalRequest = &sAcceptDirectConnectGatewayAssociationProposalRequest
+var AcceptDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId = &sAcceptDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId
+var AcceptDirectConnectGatewayAssociationProposalRequest_proposalId = &sAcceptDirectConnectGatewayAssociationProposalRequest_proposalId
+var AcceptDirectConnectGatewayAssociationProposalRequest_associatedGatewayOwnerAccount = &sAcceptDirectConnectGatewayAssociationProposalRequest_associatedGatewayOwnerAccount
+var AcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway = &sAcceptDirectConnectGatewayAssociationProposalRequest_overrideAllowedPrefixesToDirectConnectGateway
+
+var AcceptDirectConnectGatewayAssociationProposalResult = &sAcceptDirectConnectGatewayAssociationProposalResult
+var AcceptDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociation = &sAcceptDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociation
+
+var AllocateConnectionOnInterconnectRequest = &sAllocateConnectionOnInterconnectRequest
+var AllocateConnectionOnInterconnectRequest_bandwidth = &sAllocateConnectionOnInterconnectRequest_bandwidth
+var AllocateConnectionOnInterconnectRequest_connectionName = &sAllocateConnectionOnInterconnectRequest_connectionName
+var AllocateConnectionOnInterconnectRequest_ownerAccount = &sAllocateConnectionOnInterconnectRequest_ownerAccount
+var AllocateConnectionOnInterconnectRequest_interconnectId = &sAllocateConnectionOnInterconnectRequest_interconnectId
+var AllocateConnectionOnInterconnectRequest_vlan = &sAllocateConnectionOnInterconnectRequest_vlan
+
+var AllocateHostedConnectionRequest = &sAllocateHostedConnectionRequest
+var AllocateHostedConnectionRequest_connectionId = &sAllocateHostedConnectionRequest_connectionId
+var AllocateHostedConnectionRequest_ownerAccount = &sAllocateHostedConnectionRequest_ownerAccount
+var AllocateHostedConnectionRequest_bandwidth = &sAllocateHostedConnectionRequest_bandwidth
+var AllocateHostedConnectionRequest_connectionName = &sAllocateHostedConnectionRequest_connectionName
+var AllocateHostedConnectionRequest_vlan = &sAllocateHostedConnectionRequest_vlan
+var AllocateHostedConnectionRequest_tags = &sAllocateHostedConnectionRequest_tags
+
+var AllocatePrivateVirtualInterfaceRequest = &sAllocatePrivateVirtualInterfaceRequest
+var AllocatePrivateVirtualInterfaceRequest_connectionId = &sAllocatePrivateVirtualInterfaceRequest_connectionId
+var AllocatePrivateVirtualInterfaceRequest_ownerAccount = &sAllocatePrivateVirtualInterfaceRequest_ownerAccount
+var AllocatePrivateVirtualInterfaceRequest_newPrivateVirtualInterfaceAllocation = &sAllocatePrivateVirtualInterfaceRequest_newPrivateVirtualInterfaceAllocation
+
+var AllocatePublicVirtualInterfaceRequest = &sAllocatePublicVirtualInterfaceRequest
+var AllocatePublicVirtualInterfaceRequest_connectionId = &sAllocatePublicVirtualInterfaceRequest_connectionId
+var AllocatePublicVirtualInterfaceRequest_ownerAccount = &sAllocatePublicVirtualInterfaceRequest_ownerAccount
+var AllocatePublicVirtualInterfaceRequest_newPublicVirtualInterfaceAllocation = &sAllocatePublicVirtualInterfaceRequest_newPublicVirtualInterfaceAllocation
+
+var AllocateTransitVirtualInterfaceRequest = &sAllocateTransitVirtualInterfaceRequest
+var AllocateTransitVirtualInterfaceRequest_connectionId = &sAllocateTransitVirtualInterfaceRequest_connectionId
+var AllocateTransitVirtualInterfaceRequest_ownerAccount = &sAllocateTransitVirtualInterfaceRequest_ownerAccount
+var AllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation = &sAllocateTransitVirtualInterfaceRequest_newTransitVirtualInterfaceAllocation
+
+var AllocateTransitVirtualInterfaceResult = &sAllocateTransitVirtualInterfaceResult
+var AllocateTransitVirtualInterfaceResult_virtualInterface = &sAllocateTransitVirtualInterfaceResult_virtualInterface
+
+var AssociateConnectionsToResiliencyGroupRequest = &sAssociateConnectionsToResiliencyGroupRequest
+var AssociateConnectionsToResiliencyGroupRequest_connectionIdentifiers = &sAssociateConnectionsToResiliencyGroupRequest_connectionIdentifiers
+var AssociateConnectionsToResiliencyGroupRequest_resiliencyGroupId = &sAssociateConnectionsToResiliencyGroupRequest_resiliencyGroupId
+var AssociateConnectionsToResiliencyGroupRequest_clientToken = &sAssociateConnectionsToResiliencyGroupRequest_clientToken
+
+var AssociateConnectionsToResiliencyGroupResult = &sAssociateConnectionsToResiliencyGroupResult
+var AssociateConnectionsToResiliencyGroupResult_resiliencyGroupAssociations = &sAssociateConnectionsToResiliencyGroupResult_resiliencyGroupAssociations
+
+var AssociateConnectionWithLagRequest = &sAssociateConnectionWithLagRequest
+var AssociateConnectionWithLagRequest_connectionId = &sAssociateConnectionWithLagRequest_connectionId
+var AssociateConnectionWithLagRequest_lagId = &sAssociateConnectionWithLagRequest_lagId
+
+var AssociateHostedConnectionRequest = &sAssociateHostedConnectionRequest
+var AssociateHostedConnectionRequest_connectionId = &sAssociateHostedConnectionRequest_connectionId
+var AssociateHostedConnectionRequest_parentConnectionId = &sAssociateHostedConnectionRequest_parentConnectionId
+
+var AssociateMacSecKeyRequest = &sAssociateMacSecKeyRequest
+var AssociateMacSecKeyRequest_connectionId = &sAssociateMacSecKeyRequest_connectionId
+var AssociateMacSecKeyRequest_secretARN = &sAssociateMacSecKeyRequest_secretARN
+var AssociateMacSecKeyRequest_ckn = &sAssociateMacSecKeyRequest_ckn
+var AssociateMacSecKeyRequest_cak = &sAssociateMacSecKeyRequest_cak
+
+var AssociateMacSecKeyResponse = &sAssociateMacSecKeyResponse
+var AssociateMacSecKeyResponse_connectionId = &sAssociateMacSecKeyResponse_connectionId
+var AssociateMacSecKeyResponse_macSecKeys = &sAssociateMacSecKeyResponse_macSecKeys
+
+var AssociateVirtualInterfaceRequest = &sAssociateVirtualInterfaceRequest
+var AssociateVirtualInterfaceRequest_virtualInterfaceId = &sAssociateVirtualInterfaceRequest_virtualInterfaceId
+var AssociateVirtualInterfaceRequest_connectionId = &sAssociateVirtualInterfaceRequest_connectionId
+
+var ConfirmConnectionRequest = &sConfirmConnectionRequest
+var ConfirmConnectionRequest_connectionId = &sConfirmConnectionRequest_connectionId
+
+var ConfirmConnectionResponse = &sConfirmConnectionResponse
+var ConfirmConnectionResponse_connectionState = &sConfirmConnectionResponse_connectionState
+
+var ConfirmCustomerAgreementRequest = &sConfirmCustomerAgreementRequest
+var ConfirmCustomerAgreementRequest_agreementName = &sConfirmCustomerAgreementRequest_agreementName
+
+var ConfirmCustomerAgreementResponse = &sConfirmCustomerAgreementResponse
+var ConfirmCustomerAgreementResponse_status = &sConfirmCustomerAgreementResponse_status
+
+var ConfirmPrivateVirtualInterfaceRequest = &sConfirmPrivateVirtualInterfaceRequest
+var ConfirmPrivateVirtualInterfaceRequest_virtualInterfaceId = &sConfirmPrivateVirtualInterfaceRequest_virtualInterfaceId
+var ConfirmPrivateVirtualInterfaceRequest_virtualGatewayId = &sConfirmPrivateVirtualInterfaceRequest_virtualGatewayId
+var ConfirmPrivateVirtualInterfaceRequest_directConnectGatewayId = &sConfirmPrivateVirtualInterfaceRequest_directConnectGatewayId
+
+var ConfirmPrivateVirtualInterfaceResponse = &sConfirmPrivateVirtualInterfaceResponse
+var ConfirmPrivateVirtualInterfaceResponse_virtualInterfaceState = &sConfirmPrivateVirtualInterfaceResponse_virtualInterfaceState
+
+var ConfirmPublicVirtualInterfaceRequest = &sConfirmPublicVirtualInterfaceRequest
+var ConfirmPublicVirtualInterfaceRequest_virtualInterfaceId = &sConfirmPublicVirtualInterfaceRequest_virtualInterfaceId
+
+var ConfirmPublicVirtualInterfaceResponse = &sConfirmPublicVirtualInterfaceResponse
+var ConfirmPublicVirtualInterfaceResponse_virtualInterfaceState = &sConfirmPublicVirtualInterfaceResponse_virtualInterfaceState
+
+var ConfirmTransitVirtualInterfaceRequest = &sConfirmTransitVirtualInterfaceRequest
+var ConfirmTransitVirtualInterfaceRequest_virtualInterfaceId = &sConfirmTransitVirtualInterfaceRequest_virtualInterfaceId
+var ConfirmTransitVirtualInterfaceRequest_directConnectGatewayId = &sConfirmTransitVirtualInterfaceRequest_directConnectGatewayId
+
+var ConfirmTransitVirtualInterfaceResponse = &sConfirmTransitVirtualInterfaceResponse
+var ConfirmTransitVirtualInterfaceResponse_virtualInterfaceState = &sConfirmTransitVirtualInterfaceResponse_virtualInterfaceState
+
+var CreateBGPPeerRequest = &sCreateBGPPeerRequest
+var CreateBGPPeerRequest_virtualInterfaceId = &sCreateBGPPeerRequest_virtualInterfaceId
+var CreateBGPPeerRequest_newBGPPeer = &sCreateBGPPeerRequest_newBGPPeer
+
+var CreateBGPPeerResponse = &sCreateBGPPeerResponse
+var CreateBGPPeerResponse_virtualInterface = &sCreateBGPPeerResponse_virtualInterface
+
+var CreateConnectionRequest = &sCreateConnectionRequest
+var CreateConnectionRequest_location = &sCreateConnectionRequest_location
+var CreateConnectionRequest_bandwidth = &sCreateConnectionRequest_bandwidth
+var CreateConnectionRequest_connectionName = &sCreateConnectionRequest_connectionName
+var CreateConnectionRequest_lagId = &sCreateConnectionRequest_lagId
+var CreateConnectionRequest_tags = &sCreateConnectionRequest_tags
+var CreateConnectionRequest_providerName = &sCreateConnectionRequest_providerName
+var CreateConnectionRequest_requestMACSec = &sCreateConnectionRequest_requestMACSec
+var CreateConnectionRequest_billingMode = &sCreateConnectionRequest_billingMode
+
+var CreateDirectConnectGatewayAssociationRequest = &sCreateDirectConnectGatewayAssociationRequest
+var CreateDirectConnectGatewayAssociationRequest_directConnectGatewayId = &sCreateDirectConnectGatewayAssociationRequest_directConnectGatewayId
+var CreateDirectConnectGatewayAssociationRequest_gatewayId = &sCreateDirectConnectGatewayAssociationRequest_gatewayId
+var CreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway = &sCreateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway
+var CreateDirectConnectGatewayAssociationRequest_virtualGatewayId = &sCreateDirectConnectGatewayAssociationRequest_virtualGatewayId
+
+var CreateDirectConnectGatewayAssociationResult = &sCreateDirectConnectGatewayAssociationResult
+var CreateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = &sCreateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation
+
+var CreateDirectConnectGatewayAssociationProposalRequest = &sCreateDirectConnectGatewayAssociationProposalRequest
+var CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId = &sCreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayId
+var CreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayOwnerAccount = &sCreateDirectConnectGatewayAssociationProposalRequest_directConnectGatewayOwnerAccount
+var CreateDirectConnectGatewayAssociationProposalRequest_gatewayId = &sCreateDirectConnectGatewayAssociationProposalRequest_gatewayId
+var CreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway = &sCreateDirectConnectGatewayAssociationProposalRequest_addAllowedPrefixesToDirectConnectGateway
+var CreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway = &sCreateDirectConnectGatewayAssociationProposalRequest_removeAllowedPrefixesToDirectConnectGateway
+
+var CreateDirectConnectGatewayAssociationProposalResult = &sCreateDirectConnectGatewayAssociationProposalResult
+var CreateDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal = &sCreateDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal
+
+var CreateDirectConnectGatewayRequest = &sCreateDirectConnectGatewayRequest
+var CreateDirectConnectGatewayRequest_directConnectGatewayName = &sCreateDirectConnectGatewayRequest_directConnectGatewayName
+var CreateDirectConnectGatewayRequest_tags = &sCreateDirectConnectGatewayRequest_tags
+var CreateDirectConnectGatewayRequest_amazonSideAsn = &sCreateDirectConnectGatewayRequest_amazonSideAsn
+
+var CreateDirectConnectGatewayResult = &sCreateDirectConnectGatewayResult
+var CreateDirectConnectGatewayResult_directConnectGateway = &sCreateDirectConnectGatewayResult_directConnectGateway
+
+var CreateInterconnectRequest = &sCreateInterconnectRequest
+var CreateInterconnectRequest_interconnectName = &sCreateInterconnectRequest_interconnectName
+var CreateInterconnectRequest_bandwidth = &sCreateInterconnectRequest_bandwidth
+var CreateInterconnectRequest_location = &sCreateInterconnectRequest_location
+var CreateInterconnectRequest_lagId = &sCreateInterconnectRequest_lagId
+var CreateInterconnectRequest_tags = &sCreateInterconnectRequest_tags
+var CreateInterconnectRequest_providerName = &sCreateInterconnectRequest_providerName
+var CreateInterconnectRequest_requestMACSec = &sCreateInterconnectRequest_requestMACSec
+
+var CreateLagRequest = &sCreateLagRequest
+var CreateLagRequest_numberOfConnections = &sCreateLagRequest_numberOfConnections
+var CreateLagRequest_location = &sCreateLagRequest_location
+var CreateLagRequest_connectionsBandwidth = &sCreateLagRequest_connectionsBandwidth
+var CreateLagRequest_lagName = &sCreateLagRequest_lagName
+var CreateLagRequest_connectionId = &sCreateLagRequest_connectionId
+var CreateLagRequest_tags = &sCreateLagRequest_tags
+var CreateLagRequest_childConnectionTags = &sCreateLagRequest_childConnectionTags
+var CreateLagRequest_providerName = &sCreateLagRequest_providerName
+var CreateLagRequest_requestMACSec = &sCreateLagRequest_requestMACSec
+var CreateLagRequest_billingMode = &sCreateLagRequest_billingMode
+
+var CreatePrivateVirtualInterfaceRequest = &sCreatePrivateVirtualInterfaceRequest
+var CreatePrivateVirtualInterfaceRequest_connectionId = &sCreatePrivateVirtualInterfaceRequest_connectionId
+var CreatePrivateVirtualInterfaceRequest_newPrivateVirtualInterface = &sCreatePrivateVirtualInterfaceRequest_newPrivateVirtualInterface
+
+var CreatePublicVirtualInterfaceRequest = &sCreatePublicVirtualInterfaceRequest
+var CreatePublicVirtualInterfaceRequest_connectionId = &sCreatePublicVirtualInterfaceRequest_connectionId
+var CreatePublicVirtualInterfaceRequest_newPublicVirtualInterface = &sCreatePublicVirtualInterfaceRequest_newPublicVirtualInterface
+
+var CreateResiliencyGroupRequest = &sCreateResiliencyGroupRequest
+var CreateResiliencyGroupRequest_resiliencyGroupName = &sCreateResiliencyGroupRequest_resiliencyGroupName
+var CreateResiliencyGroupRequest_intendedResiliencyModel = &sCreateResiliencyGroupRequest_intendedResiliencyModel
+var CreateResiliencyGroupRequest_clientToken = &sCreateResiliencyGroupRequest_clientToken
+var CreateResiliencyGroupRequest_tags = &sCreateResiliencyGroupRequest_tags
+
+var CreateResiliencyGroupResult = &sCreateResiliencyGroupResult
+var CreateResiliencyGroupResult_resiliencyGroup = &sCreateResiliencyGroupResult_resiliencyGroup
+
+var CreateTransitVirtualInterfaceRequest = &sCreateTransitVirtualInterfaceRequest
+var CreateTransitVirtualInterfaceRequest_connectionId = &sCreateTransitVirtualInterfaceRequest_connectionId
+var CreateTransitVirtualInterfaceRequest_newTransitVirtualInterface = &sCreateTransitVirtualInterfaceRequest_newTransitVirtualInterface
+
+var CreateTransitVirtualInterfaceResult = &sCreateTransitVirtualInterfaceResult
+var CreateTransitVirtualInterfaceResult_virtualInterface = &sCreateTransitVirtualInterfaceResult_virtualInterface
+
+var DeleteBGPPeerRequest = &sDeleteBGPPeerRequest
+var DeleteBGPPeerRequest_virtualInterfaceId = &sDeleteBGPPeerRequest_virtualInterfaceId
+var DeleteBGPPeerRequest_asn = &sDeleteBGPPeerRequest_asn
+var DeleteBGPPeerRequest_asnLong = &sDeleteBGPPeerRequest_asnLong
+var DeleteBGPPeerRequest_customerAddress = &sDeleteBGPPeerRequest_customerAddress
+var DeleteBGPPeerRequest_bgpPeerId = &sDeleteBGPPeerRequest_bgpPeerId
+
+var DeleteBGPPeerResponse = &sDeleteBGPPeerResponse
+var DeleteBGPPeerResponse_virtualInterface = &sDeleteBGPPeerResponse_virtualInterface
+
+var DeleteConnectionRequest = &sDeleteConnectionRequest
+var DeleteConnectionRequest_connectionId = &sDeleteConnectionRequest_connectionId
+
+var DeleteDirectConnectGatewayAssociationRequest = &sDeleteDirectConnectGatewayAssociationRequest
+var DeleteDirectConnectGatewayAssociationRequest_associationId = &sDeleteDirectConnectGatewayAssociationRequest_associationId
+var DeleteDirectConnectGatewayAssociationRequest_directConnectGatewayId = &sDeleteDirectConnectGatewayAssociationRequest_directConnectGatewayId
+var DeleteDirectConnectGatewayAssociationRequest_virtualGatewayId = &sDeleteDirectConnectGatewayAssociationRequest_virtualGatewayId
+
+var DeleteDirectConnectGatewayAssociationResult = &sDeleteDirectConnectGatewayAssociationResult
+var DeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = &sDeleteDirectConnectGatewayAssociationResult_directConnectGatewayAssociation
+
+var DeleteDirectConnectGatewayAssociationProposalRequest = &sDeleteDirectConnectGatewayAssociationProposalRequest
+var DeleteDirectConnectGatewayAssociationProposalRequest_proposalId = &sDeleteDirectConnectGatewayAssociationProposalRequest_proposalId
+
+var DeleteDirectConnectGatewayAssociationProposalResult = &sDeleteDirectConnectGatewayAssociationProposalResult
+var DeleteDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal = &sDeleteDirectConnectGatewayAssociationProposalResult_directConnectGatewayAssociationProposal
+
+var DeleteDirectConnectGatewayRequest = &sDeleteDirectConnectGatewayRequest
+var DeleteDirectConnectGatewayRequest_directConnectGatewayId = &sDeleteDirectConnectGatewayRequest_directConnectGatewayId
+
+var DeleteDirectConnectGatewayResult = &sDeleteDirectConnectGatewayResult
+var DeleteDirectConnectGatewayResult_directConnectGateway = &sDeleteDirectConnectGatewayResult_directConnectGateway
+
+var DeleteInterconnectRequest = &sDeleteInterconnectRequest
+var DeleteInterconnectRequest_interconnectId = &sDeleteInterconnectRequest_interconnectId
+
+var DeleteInterconnectResponse = &sDeleteInterconnectResponse
+var DeleteInterconnectResponse_interconnectState = &sDeleteInterconnectResponse_interconnectState
+
+var DeleteLagRequest = &sDeleteLagRequest
+var DeleteLagRequest_lagId = &sDeleteLagRequest_lagId
+
+var DeleteResiliencyGroupRequest = &sDeleteResiliencyGroupRequest
+var DeleteResiliencyGroupRequest_resiliencyGroupId = &sDeleteResiliencyGroupRequest_resiliencyGroupId
+
+var DeleteResiliencyGroupResult = &sDeleteResiliencyGroupResult
+var DeleteResiliencyGroupResult_resiliencyGroup = &sDeleteResiliencyGroupResult_resiliencyGroup
+
+var DeleteVirtualInterfaceRequest = &sDeleteVirtualInterfaceRequest
+var DeleteVirtualInterfaceRequest_virtualInterfaceId = &sDeleteVirtualInterfaceRequest_virtualInterfaceId
+
+var DeleteVirtualInterfaceResponse = &sDeleteVirtualInterfaceResponse
+var DeleteVirtualInterfaceResponse_virtualInterfaceState = &sDeleteVirtualInterfaceResponse_virtualInterfaceState
+
+var DescribeConnectionLoaRequest = &sDescribeConnectionLoaRequest
+var DescribeConnectionLoaRequest_connectionId = &sDescribeConnectionLoaRequest_connectionId
+var DescribeConnectionLoaRequest_providerName = &sDescribeConnectionLoaRequest_providerName
+var DescribeConnectionLoaRequest_loaContentType = &sDescribeConnectionLoaRequest_loaContentType
+
+var DescribeConnectionLoaResponse = &sDescribeConnectionLoaResponse
+var DescribeConnectionLoaResponse_loa = &sDescribeConnectionLoaResponse_loa
+
+var DescribeConnectionsRequest = &sDescribeConnectionsRequest
+var DescribeConnectionsRequest_connectionId = &sDescribeConnectionsRequest_connectionId
+var DescribeConnectionsRequest_maxResults = &sDescribeConnectionsRequest_maxResults
+var DescribeConnectionsRequest_nextToken = &sDescribeConnectionsRequest_nextToken
+
+var DescribeConnectionsOnInterconnectRequest = &sDescribeConnectionsOnInterconnectRequest
+var DescribeConnectionsOnInterconnectRequest_interconnectId = &sDescribeConnectionsOnInterconnectRequest_interconnectId
+
+var Connections = &sConnections
+var Connections_connections = &sConnections_connections
+var Connections_nextToken = &sConnections_nextToken
+
+var DescribeCustomerMetadataResponse = &sDescribeCustomerMetadataResponse
+var DescribeCustomerMetadataResponse_agreements = &sDescribeCustomerMetadataResponse_agreements
+var DescribeCustomerMetadataResponse_nniPartnerType = &sDescribeCustomerMetadataResponse_nniPartnerType
+
+var DescribeDirectConnectGatewayAssociationProposalsRequest = &sDescribeDirectConnectGatewayAssociationProposalsRequest
+var DescribeDirectConnectGatewayAssociationProposalsRequest_directConnectGatewayId = &sDescribeDirectConnectGatewayAssociationProposalsRequest_directConnectGatewayId
+var DescribeDirectConnectGatewayAssociationProposalsRequest_proposalId = &sDescribeDirectConnectGatewayAssociationProposalsRequest_proposalId
+var DescribeDirectConnectGatewayAssociationProposalsRequest_associatedGatewayId = &sDescribeDirectConnectGatewayAssociationProposalsRequest_associatedGatewayId
+var DescribeDirectConnectGatewayAssociationProposalsRequest_maxResults = &sDescribeDirectConnectGatewayAssociationProposalsRequest_maxResults
+var DescribeDirectConnectGatewayAssociationProposalsRequest_nextToken = &sDescribeDirectConnectGatewayAssociationProposalsRequest_nextToken
+
+var DescribeDirectConnectGatewayAssociationProposalsResult = &sDescribeDirectConnectGatewayAssociationProposalsResult
+var DescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals = &sDescribeDirectConnectGatewayAssociationProposalsResult_directConnectGatewayAssociationProposals
+var DescribeDirectConnectGatewayAssociationProposalsResult_nextToken = &sDescribeDirectConnectGatewayAssociationProposalsResult_nextToken
+
+var DescribeDirectConnectGatewayAssociationsRequest = &sDescribeDirectConnectGatewayAssociationsRequest
+var DescribeDirectConnectGatewayAssociationsRequest_associationId = &sDescribeDirectConnectGatewayAssociationsRequest_associationId
+var DescribeDirectConnectGatewayAssociationsRequest_associatedGatewayId = &sDescribeDirectConnectGatewayAssociationsRequest_associatedGatewayId
+var DescribeDirectConnectGatewayAssociationsRequest_directConnectGatewayId = &sDescribeDirectConnectGatewayAssociationsRequest_directConnectGatewayId
+var DescribeDirectConnectGatewayAssociationsRequest_maxResults = &sDescribeDirectConnectGatewayAssociationsRequest_maxResults
+var DescribeDirectConnectGatewayAssociationsRequest_nextToken = &sDescribeDirectConnectGatewayAssociationsRequest_nextToken
+var DescribeDirectConnectGatewayAssociationsRequest_virtualGatewayId = &sDescribeDirectConnectGatewayAssociationsRequest_virtualGatewayId
+
+var DescribeDirectConnectGatewayAssociationsResult = &sDescribeDirectConnectGatewayAssociationsResult
+var DescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations = &sDescribeDirectConnectGatewayAssociationsResult_directConnectGatewayAssociations
+var DescribeDirectConnectGatewayAssociationsResult_nextToken = &sDescribeDirectConnectGatewayAssociationsResult_nextToken
+
+var DescribeDirectConnectGatewayAttachmentsRequest = &sDescribeDirectConnectGatewayAttachmentsRequest
+var DescribeDirectConnectGatewayAttachmentsRequest_directConnectGatewayId = &sDescribeDirectConnectGatewayAttachmentsRequest_directConnectGatewayId
+var DescribeDirectConnectGatewayAttachmentsRequest_virtualInterfaceId = &sDescribeDirectConnectGatewayAttachmentsRequest_virtualInterfaceId
+var DescribeDirectConnectGatewayAttachmentsRequest_maxResults = &sDescribeDirectConnectGatewayAttachmentsRequest_maxResults
+var DescribeDirectConnectGatewayAttachmentsRequest_nextToken = &sDescribeDirectConnectGatewayAttachmentsRequest_nextToken
+
+var DescribeDirectConnectGatewayAttachmentsResult = &sDescribeDirectConnectGatewayAttachmentsResult
+var DescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments = &sDescribeDirectConnectGatewayAttachmentsResult_directConnectGatewayAttachments
+var DescribeDirectConnectGatewayAttachmentsResult_nextToken = &sDescribeDirectConnectGatewayAttachmentsResult_nextToken
+
+var DescribeDirectConnectGatewaysRequest = &sDescribeDirectConnectGatewaysRequest
+var DescribeDirectConnectGatewaysRequest_directConnectGatewayId = &sDescribeDirectConnectGatewaysRequest_directConnectGatewayId
+var DescribeDirectConnectGatewaysRequest_maxResults = &sDescribeDirectConnectGatewaysRequest_maxResults
+var DescribeDirectConnectGatewaysRequest_nextToken = &sDescribeDirectConnectGatewaysRequest_nextToken
+
+var DescribeDirectConnectGatewaysResult = &sDescribeDirectConnectGatewaysResult
+var DescribeDirectConnectGatewaysResult_directConnectGateways = &sDescribeDirectConnectGatewaysResult_directConnectGateways
+var DescribeDirectConnectGatewaysResult_nextToken = &sDescribeDirectConnectGatewaysResult_nextToken
+
+var DescribeHostedConnectionsRequest = &sDescribeHostedConnectionsRequest
+var DescribeHostedConnectionsRequest_connectionId = &sDescribeHostedConnectionsRequest_connectionId
+var DescribeHostedConnectionsRequest_maxResults = &sDescribeHostedConnectionsRequest_maxResults
+var DescribeHostedConnectionsRequest_nextToken = &sDescribeHostedConnectionsRequest_nextToken
+
+var DescribeInterconnectLoaRequest = &sDescribeInterconnectLoaRequest
+var DescribeInterconnectLoaRequest_interconnectId = &sDescribeInterconnectLoaRequest_interconnectId
+var DescribeInterconnectLoaRequest_providerName = &sDescribeInterconnectLoaRequest_providerName
+var DescribeInterconnectLoaRequest_loaContentType = &sDescribeInterconnectLoaRequest_loaContentType
+
+var DescribeInterconnectLoaResponse = &sDescribeInterconnectLoaResponse
+var DescribeInterconnectLoaResponse_loa = &sDescribeInterconnectLoaResponse_loa
+
+var DescribeInterconnectsRequest = &sDescribeInterconnectsRequest
+var DescribeInterconnectsRequest_interconnectId = &sDescribeInterconnectsRequest_interconnectId
+var DescribeInterconnectsRequest_maxResults = &sDescribeInterconnectsRequest_maxResults
+var DescribeInterconnectsRequest_nextToken = &sDescribeInterconnectsRequest_nextToken
+
+var Interconnects = &sInterconnects
+var Interconnects_interconnects = &sInterconnects_interconnects
+var Interconnects_nextToken = &sInterconnects_nextToken
+
+var DescribeLagsRequest = &sDescribeLagsRequest
+var DescribeLagsRequest_lagId = &sDescribeLagsRequest_lagId
+var DescribeLagsRequest_maxResults = &sDescribeLagsRequest_maxResults
+var DescribeLagsRequest_nextToken = &sDescribeLagsRequest_nextToken
+
+var Lags = &sLags
+var Lags_lags = &sLags_lags
+var Lags_nextToken = &sLags_nextToken
+
+var DescribeLoaRequest = &sDescribeLoaRequest
+var DescribeLoaRequest_connectionId = &sDescribeLoaRequest_connectionId
+var DescribeLoaRequest_providerName = &sDescribeLoaRequest_providerName
+var DescribeLoaRequest_loaContentType = &sDescribeLoaRequest_loaContentType
+
+var Locations = &sLocations
+var Locations_locations = &sLocations_locations
+
+var DescribeRouterConfigurationRequest = &sDescribeRouterConfigurationRequest
+var DescribeRouterConfigurationRequest_virtualInterfaceId = &sDescribeRouterConfigurationRequest_virtualInterfaceId
+var DescribeRouterConfigurationRequest_routerTypeIdentifier = &sDescribeRouterConfigurationRequest_routerTypeIdentifier
+
+var DescribeRouterConfigurationResponse = &sDescribeRouterConfigurationResponse
+var DescribeRouterConfigurationResponse_customerRouterConfig = &sDescribeRouterConfigurationResponse_customerRouterConfig
+var DescribeRouterConfigurationResponse_router = &sDescribeRouterConfigurationResponse_router
+var DescribeRouterConfigurationResponse_virtualInterfaceId = &sDescribeRouterConfigurationResponse_virtualInterfaceId
+var DescribeRouterConfigurationResponse_virtualInterfaceName = &sDescribeRouterConfigurationResponse_virtualInterfaceName
+
+var DescribeTagsRequest = &sDescribeTagsRequest
+var DescribeTagsRequest_resourceArns = &sDescribeTagsRequest_resourceArns
+
+var DescribeTagsResponse = &sDescribeTagsResponse
+var DescribeTagsResponse_resourceTags = &sDescribeTagsResponse_resourceTags
+
+var VirtualGateways = &sVirtualGateways
+var VirtualGateways_virtualGateways = &sVirtualGateways_virtualGateways
+
+var DescribeVirtualInterfacesRequest = &sDescribeVirtualInterfacesRequest
+var DescribeVirtualInterfacesRequest_connectionId = &sDescribeVirtualInterfacesRequest_connectionId
+var DescribeVirtualInterfacesRequest_virtualInterfaceId = &sDescribeVirtualInterfacesRequest_virtualInterfaceId
+var DescribeVirtualInterfacesRequest_maxResults = &sDescribeVirtualInterfacesRequest_maxResults
+var DescribeVirtualInterfacesRequest_nextToken = &sDescribeVirtualInterfacesRequest_nextToken
+
+var VirtualInterfaces = &sVirtualInterfaces
+var VirtualInterfaces_virtualInterfaces = &sVirtualInterfaces_virtualInterfaces
+var VirtualInterfaces_nextToken = &sVirtualInterfaces_nextToken
+
+var DisassociateConnectionFromLagRequest = &sDisassociateConnectionFromLagRequest
+var DisassociateConnectionFromLagRequest_connectionId = &sDisassociateConnectionFromLagRequest_connectionId
+var DisassociateConnectionFromLagRequest_lagId = &sDisassociateConnectionFromLagRequest_lagId
+
+var DisassociateConnectionsFromResiliencyGroupRequest = &sDisassociateConnectionsFromResiliencyGroupRequest
+var DisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers = &sDisassociateConnectionsFromResiliencyGroupRequest_connectionIdentifiers
+var DisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId = &sDisassociateConnectionsFromResiliencyGroupRequest_resiliencyGroupId
+var DisassociateConnectionsFromResiliencyGroupRequest_clientToken = &sDisassociateConnectionsFromResiliencyGroupRequest_clientToken
+
+var DisassociateConnectionsFromResiliencyGroupResult = &sDisassociateConnectionsFromResiliencyGroupResult
+var DisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations = &sDisassociateConnectionsFromResiliencyGroupResult_resiliencyGroupAssociations
+
+var DisassociateMacSecKeyRequest = &sDisassociateMacSecKeyRequest
+var DisassociateMacSecKeyRequest_connectionId = &sDisassociateMacSecKeyRequest_connectionId
+var DisassociateMacSecKeyRequest_secretARN = &sDisassociateMacSecKeyRequest_secretARN
+
+var DisassociateMacSecKeyResponse = &sDisassociateMacSecKeyResponse
+var DisassociateMacSecKeyResponse_connectionId = &sDisassociateMacSecKeyResponse_connectionId
+var DisassociateMacSecKeyResponse_macSecKeys = &sDisassociateMacSecKeyResponse_macSecKeys
+
+var GetResiliencyGroupRequest = &sGetResiliencyGroupRequest
+var GetResiliencyGroupRequest_resiliencyGroupId = &sGetResiliencyGroupRequest_resiliencyGroupId
+
+var GetResiliencyGroupResult = &sGetResiliencyGroupResult
+var GetResiliencyGroupResult_resiliencyGroup = &sGetResiliencyGroupResult_resiliencyGroup
+
+var ListResiliencyGroupAssociationsRequest = &sListResiliencyGroupAssociationsRequest
+var ListResiliencyGroupAssociationsRequest_resiliencyGroupId = &sListResiliencyGroupAssociationsRequest_resiliencyGroupId
+var ListResiliencyGroupAssociationsRequest_maxResults = &sListResiliencyGroupAssociationsRequest_maxResults
+var ListResiliencyGroupAssociationsRequest_nextToken = &sListResiliencyGroupAssociationsRequest_nextToken
+
+var ListResiliencyGroupAssociationsResult = &sListResiliencyGroupAssociationsResult
+var ListResiliencyGroupAssociationsResult_items = &sListResiliencyGroupAssociationsResult_items
+var ListResiliencyGroupAssociationsResult_nextToken = &sListResiliencyGroupAssociationsResult_nextToken
+
+var ListResiliencyGroupsRequest = &sListResiliencyGroupsRequest
+var ListResiliencyGroupsRequest_maxResults = &sListResiliencyGroupsRequest_maxResults
+var ListResiliencyGroupsRequest_nextToken = &sListResiliencyGroupsRequest_nextToken
+
+var ListResiliencyGroupsResult = &sListResiliencyGroupsResult
+var ListResiliencyGroupsResult_items = &sListResiliencyGroupsResult_items
+var ListResiliencyGroupsResult_nextToken = &sListResiliencyGroupsResult_nextToken
+
+var ListVirtualInterfaceRoutesRequest = &sListVirtualInterfaceRoutesRequest
+var ListVirtualInterfaceRoutesRequest_virtualInterfaceId = &sListVirtualInterfaceRoutesRequest_virtualInterfaceId
+var ListVirtualInterfaceRoutesRequest_filters = &sListVirtualInterfaceRoutesRequest_filters
+var ListVirtualInterfaceRoutesRequest_maxResults = &sListVirtualInterfaceRoutesRequest_maxResults
+var ListVirtualInterfaceRoutesRequest_nextToken = &sListVirtualInterfaceRoutesRequest_nextToken
+
+var ListVirtualInterfaceRoutesResponse = &sListVirtualInterfaceRoutesResponse
+var ListVirtualInterfaceRoutesResponse_virtualInterfaceId = &sListVirtualInterfaceRoutesResponse_virtualInterfaceId
+var ListVirtualInterfaceRoutesResponse_routes = &sListVirtualInterfaceRoutesResponse_routes
+var ListVirtualInterfaceRoutesResponse_nextToken = &sListVirtualInterfaceRoutesResponse_nextToken
+
+var ListVirtualInterfaceTestHistoryRequest = &sListVirtualInterfaceTestHistoryRequest
+var ListVirtualInterfaceTestHistoryRequest_testId = &sListVirtualInterfaceTestHistoryRequest_testId
+var ListVirtualInterfaceTestHistoryRequest_virtualInterfaceId = &sListVirtualInterfaceTestHistoryRequest_virtualInterfaceId
+var ListVirtualInterfaceTestHistoryRequest_bgpPeers = &sListVirtualInterfaceTestHistoryRequest_bgpPeers
+var ListVirtualInterfaceTestHistoryRequest_status = &sListVirtualInterfaceTestHistoryRequest_status
+var ListVirtualInterfaceTestHistoryRequest_maxResults = &sListVirtualInterfaceTestHistoryRequest_maxResults
+var ListVirtualInterfaceTestHistoryRequest_nextToken = &sListVirtualInterfaceTestHistoryRequest_nextToken
+
+var ListVirtualInterfaceTestHistoryResponse = &sListVirtualInterfaceTestHistoryResponse
+var ListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory = &sListVirtualInterfaceTestHistoryResponse_virtualInterfaceTestHistory
+var ListVirtualInterfaceTestHistoryResponse_nextToken = &sListVirtualInterfaceTestHistoryResponse_nextToken
+
+var StartBgpFailoverTestRequest = &sStartBgpFailoverTestRequest
+var StartBgpFailoverTestRequest_virtualInterfaceId = &sStartBgpFailoverTestRequest_virtualInterfaceId
+var StartBgpFailoverTestRequest_bgpPeers = &sStartBgpFailoverTestRequest_bgpPeers
+var StartBgpFailoverTestRequest_testDurationInMinutes = &sStartBgpFailoverTestRequest_testDurationInMinutes
+
+var StartBgpFailoverTestResponse = &sStartBgpFailoverTestResponse
+var StartBgpFailoverTestResponse_virtualInterfaceTest = &sStartBgpFailoverTestResponse_virtualInterfaceTest
+
+var StopBgpFailoverTestRequest = &sStopBgpFailoverTestRequest
+var StopBgpFailoverTestRequest_virtualInterfaceId = &sStopBgpFailoverTestRequest_virtualInterfaceId
+
+var StopBgpFailoverTestResponse = &sStopBgpFailoverTestResponse
+var StopBgpFailoverTestResponse_virtualInterfaceTest = &sStopBgpFailoverTestResponse_virtualInterfaceTest
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateConnectionRequest = &sUpdateConnectionRequest
+var UpdateConnectionRequest_connectionId = &sUpdateConnectionRequest_connectionId
+var UpdateConnectionRequest_connectionName = &sUpdateConnectionRequest_connectionName
+var UpdateConnectionRequest_encryptionMode = &sUpdateConnectionRequest_encryptionMode
+
+var UpdateConnectionsBillingModeRequest = &sUpdateConnectionsBillingModeRequest
+var UpdateConnectionsBillingModeRequest_connectionIds = &sUpdateConnectionsBillingModeRequest_connectionIds
+var UpdateConnectionsBillingModeRequest_billingMode = &sUpdateConnectionsBillingModeRequest_billingMode
+
+var UpdateConnectionsBillingModeResponse = &sUpdateConnectionsBillingModeResponse
+var UpdateConnectionsBillingModeResponse_billingMode = &sUpdateConnectionsBillingModeResponse_billingMode
+var UpdateConnectionsBillingModeResponse_connections = &sUpdateConnectionsBillingModeResponse_connections
+
+var UpdateDirectConnectGatewayAssociationRequest = &sUpdateDirectConnectGatewayAssociationRequest
+var UpdateDirectConnectGatewayAssociationRequest_associationId = &sUpdateDirectConnectGatewayAssociationRequest_associationId
+var UpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway = &sUpdateDirectConnectGatewayAssociationRequest_addAllowedPrefixesToDirectConnectGateway
+var UpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway = &sUpdateDirectConnectGatewayAssociationRequest_removeAllowedPrefixesToDirectConnectGateway
+
+var UpdateDirectConnectGatewayAssociationResult = &sUpdateDirectConnectGatewayAssociationResult
+var UpdateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation = &sUpdateDirectConnectGatewayAssociationResult_directConnectGatewayAssociation
+
+var UpdateDirectConnectGatewayRequest = &sUpdateDirectConnectGatewayRequest
+var UpdateDirectConnectGatewayRequest_directConnectGatewayId = &sUpdateDirectConnectGatewayRequest_directConnectGatewayId
+var UpdateDirectConnectGatewayRequest_newDirectConnectGatewayName = &sUpdateDirectConnectGatewayRequest_newDirectConnectGatewayName
+
+var UpdateDirectConnectGatewayResponse = &sUpdateDirectConnectGatewayResponse
+var UpdateDirectConnectGatewayResponse_directConnectGateway = &sUpdateDirectConnectGatewayResponse_directConnectGateway
+
+var UpdateLagRequest = &sUpdateLagRequest
+var UpdateLagRequest_lagId = &sUpdateLagRequest_lagId
+var UpdateLagRequest_lagName = &sUpdateLagRequest_lagName
+var UpdateLagRequest_minimumLinks = &sUpdateLagRequest_minimumLinks
+var UpdateLagRequest_encryptionMode = &sUpdateLagRequest_encryptionMode
+
+var UpdateResiliencyGroupRequest = &sUpdateResiliencyGroupRequest
+var UpdateResiliencyGroupRequest_resiliencyGroupId = &sUpdateResiliencyGroupRequest_resiliencyGroupId
+var UpdateResiliencyGroupRequest_resiliencyGroupName = &sUpdateResiliencyGroupRequest_resiliencyGroupName
+var UpdateResiliencyGroupRequest_clientToken = &sUpdateResiliencyGroupRequest_clientToken
+
+var UpdateResiliencyGroupResult = &sUpdateResiliencyGroupResult
+var UpdateResiliencyGroupResult_resiliencyGroup = &sUpdateResiliencyGroupResult_resiliencyGroup
+
+var UpdateVirtualInterfaceAttributesRequest = &sUpdateVirtualInterfaceAttributesRequest
+var UpdateVirtualInterfaceAttributesRequest_virtualInterfaceId = &sUpdateVirtualInterfaceAttributesRequest_virtualInterfaceId
+var UpdateVirtualInterfaceAttributesRequest_mtu = &sUpdateVirtualInterfaceAttributesRequest_mtu
+var UpdateVirtualInterfaceAttributesRequest_enableSiteLink = &sUpdateVirtualInterfaceAttributesRequest_enableSiteLink
+var UpdateVirtualInterfaceAttributesRequest_virtualInterfaceName = &sUpdateVirtualInterfaceAttributesRequest_virtualInterfaceName
+var UpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv4 = &sUpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv4
+var UpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv6 = &sUpdateVirtualInterfaceAttributesRequest_prefixPoolAllocatedCountIpv6
+var UpdateVirtualInterfaceAttributesRequest_rateLimit = &sUpdateVirtualInterfaceAttributesRequest_rateLimit
+
+var OvertureService = &smithy.ServiceSchema{Schema: &s_OvertureService, Version: "2012-10-25"}

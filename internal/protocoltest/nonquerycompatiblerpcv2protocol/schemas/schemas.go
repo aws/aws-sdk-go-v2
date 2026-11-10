@@ -6,19 +6,16 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-var NonQueryCompatibleOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "NonQueryCompatibleOperation",
-}, smithy.ShapeTypeOperation, 0)
+var (
+	iNonQueryCompatibleOperation      = smithy.ShapeID{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleOperation"}
+	i_NonQueryCompatibleRpcV2Protocol = smithy.ShapeID{Namespace: "aws.protocoltests.rpcv2cbor", Name: "NonQueryCompatibleRpcV2Protocol"}
+)
 
-var _NonQueryCompatibleRpcV2Protocol = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "aws.protocoltests.rpcv2cbor",
-	Name:      "NonQueryCompatibleRpcV2Protocol",
-}, smithy.ShapeTypeService, 0)
+var sNonQueryCompatibleOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNonQueryCompatibleOperation, Type: smithy.ShapeTypeOperation})
+var s_NonQueryCompatibleRpcV2Protocol = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonQueryCompatibleRpcV2Protocol, Type: smithy.ShapeTypeService})
 
-var NonQueryCompatibleRpcV2Protocol = smithy.NewServiceSchema(_NonQueryCompatibleRpcV2Protocol, "2025-06-20")
+var NonQueryCompatibleOperation = &sNonQueryCompatibleOperation
 
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-}
+var _NonQueryCompatibleRpcV2Protocol = &s_NonQueryCompatibleRpcV2Protocol
+
+var NonQueryCompatibleRpcV2Protocol = &smithy.ServiceSchema{Schema: &s_NonQueryCompatibleRpcV2Protocol, Version: "2025-06-20"}

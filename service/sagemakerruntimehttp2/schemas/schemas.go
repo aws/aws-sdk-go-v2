@@ -4,214 +4,173 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var InvokeEndpointWithBidirectionalStream = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InvokeEndpointWithBidirectionalStream",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iInvokeEndpointWithBidirectionalStream       = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "InvokeEndpointWithBidirectionalStream"}
+	i_AmazonSageMakerRuntimeHttp2                = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "AmazonSageMakerRuntimeHttp2"}
+	iInputValidationError                        = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "InputValidationError"}
+	iInternalServerError                         = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "InternalServerError"}
+	iInternalStreamFailure                       = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "InternalStreamFailure"}
+	iModelError                                  = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "ModelError"}
+	iModelStreamError                            = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "ModelStreamError"}
+	iRequestPayloadPart                          = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "RequestPayloadPart"}
+	iRequestStreamEvent                          = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "RequestStreamEvent"}
+	iResponsePayloadPart                         = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "ResponsePayloadPart"}
+	iResponseStreamEvent                         = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "ResponseStreamEvent"}
+	i_SensitiveBlob                              = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "SensitiveBlob"}
+	iServiceUnavailableError                     = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "ServiceUnavailableError"}
+	iInvokeEndpointWithBidirectionalStreamInput  = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "InvokeEndpointWithBidirectionalStreamInput"}
+	iInvokeEndpointWithBidirectionalStreamOutput = smithy.ShapeID{Namespace: "com.amazonaws.sagemakerruntimehttp2", Name: "InvokeEndpointWithBidirectionalStreamOutput"}
+	pString                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pInteger                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/endpoints/{EndpointName}/invocations-bidirectional-stream",
-	Code: 200})
-
-var _AmazonSageMakerRuntimeHttp2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "AmazonSageMakerRuntimeHttp2",
-}, smithy.ShapeTypeService, 0)
-
-var AmazonSageMakerRuntimeHttp2 = smithy.NewServiceSchema(_AmazonSageMakerRuntimeHttp2, "2025-10-01")
-
-var InputValidationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InputValidationError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InputValidationError_Message *smithy.Schema
-
-var InputValidationError_ErrorCode *smithy.Schema
-
-var InternalServerError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InternalServerError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerError_Message *smithy.Schema
-
-var InternalServerError_ErrorCode *smithy.Schema
-
-var InternalStreamFailure = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InternalStreamFailure",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalStreamFailure_Message *smithy.Schema
-
-var ModelError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ModelError",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 424})
-var ModelError_Message *smithy.Schema
-
-var ModelError_OriginalStatusCode *smithy.Schema
-
-var ModelError_OriginalMessage *smithy.Schema
-
-var ModelError_LogStreamArn *smithy.Schema
-
-var ModelError_ErrorCode *smithy.Schema
-
-var ModelStreamError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ModelStreamError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ModelStreamError_Message *smithy.Schema
-
-var ModelStreamError_ErrorCode *smithy.Schema
-
-var RequestPayloadPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "RequestPayloadPart",
-}, smithy.ShapeTypeStructure, 4)
-var RequestPayloadPart_Bytes *smithy.Schema
-
-var RequestPayloadPart_DataType *smithy.Schema
-
-var RequestPayloadPart_CompletionState *smithy.Schema
-
-var RequestPayloadPart_P *smithy.Schema
-
-var RequestStreamEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "RequestStreamEvent",
-}, smithy.ShapeTypeUnion, 1, &smithytraits.Streaming{})
-var RequestStreamEvent_PayloadPart *smithy.Schema
-
-var ResponsePayloadPart = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ResponsePayloadPart",
-}, smithy.ShapeTypeStructure, 4)
-var ResponsePayloadPart_Bytes *smithy.Schema
-
-var ResponsePayloadPart_DataType *smithy.Schema
-
-var ResponsePayloadPart_CompletionState *smithy.Schema
-
-var ResponsePayloadPart_P *smithy.Schema
-
-var ResponseStreamEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ResponseStreamEvent",
-}, smithy.ShapeTypeUnion, 3, &smithytraits.Streaming{})
-var ResponseStreamEvent_PayloadPart *smithy.Schema
-
-var ResponseStreamEvent_ModelStreamError *smithy.Schema
-
-var ResponseStreamEvent_InternalStreamFailure *smithy.Schema
-
-var _SensitiveBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "SensitiveBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var ServiceUnavailableError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "ServiceUnavailableError",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableError_Message *smithy.Schema
-
-var ServiceUnavailableError_ErrorCode *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InvokeEndpointWithBidirectionalStreamInput",
-}, smithy.ShapeTypeStructure, 5)
-var InvokeEndpointWithBidirectionalStreamInput_EndpointName *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_Body *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_TargetVariant *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamInput_ModelQueryString *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.sagemakerruntimehttp2",
-	Name:      "InvokeEndpointWithBidirectionalStreamOutput",
-}, smithy.ShapeTypeStructure, 2)
-var InvokeEndpointWithBidirectionalStreamOutput_Body *smithy.Schema
-
-var InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	InputValidationError_Message = InputValidationError.AddMember("Message", smithyprelude.String)
-
-	InputValidationError_ErrorCode = InputValidationError.AddMember("ErrorCode", smithyprelude.String)
-
-	InternalServerError_Message = InternalServerError.AddMember("Message", smithyprelude.String)
-
-	InternalServerError_ErrorCode = InternalServerError.AddMember("ErrorCode", smithyprelude.String)
-
-	InternalStreamFailure_Message = InternalStreamFailure.AddMember("Message", smithyprelude.String)
-
-	ModelError_Message = ModelError.AddMember("Message", smithyprelude.String)
-
-	ModelError_OriginalStatusCode = ModelError.AddMember("OriginalStatusCode", smithyprelude.Integer)
-
-	ModelError_OriginalMessage = ModelError.AddMember("OriginalMessage", smithyprelude.String)
-
-	ModelError_LogStreamArn = ModelError.AddMember("LogStreamArn", smithyprelude.String)
-
-	ModelError_ErrorCode = ModelError.AddMember("ErrorCode", smithyprelude.String)
-
-	ModelStreamError_Message = ModelStreamError.AddMember("Message", smithyprelude.String)
-
-	ModelStreamError_ErrorCode = ModelStreamError.AddMember("ErrorCode", smithyprelude.String)
-
-	RequestPayloadPart_Bytes = RequestPayloadPart.AddMember("Bytes", _SensitiveBlob, &smithytraits.EventPayload{})
-
-	RequestPayloadPart_DataType = RequestPayloadPart.AddMember("DataType", smithyprelude.String, &smithytraits.EventHeader{})
-
-	RequestPayloadPart_CompletionState = RequestPayloadPart.AddMember("CompletionState", smithyprelude.String, &smithytraits.EventHeader{})
-
-	RequestPayloadPart_P = RequestPayloadPart.AddMember("P", smithyprelude.String, &smithytraits.EventHeader{})
-
-	RequestStreamEvent_PayloadPart = RequestStreamEvent.AddMember("PayloadPart", RequestPayloadPart)
-
-	ResponsePayloadPart_Bytes = ResponsePayloadPart.AddMember("Bytes", _SensitiveBlob, &smithytraits.EventPayload{})
-
-	ResponsePayloadPart_DataType = ResponsePayloadPart.AddMember("DataType", smithyprelude.String, &smithytraits.EventHeader{})
-
-	ResponsePayloadPart_CompletionState = ResponsePayloadPart.AddMember("CompletionState", smithyprelude.String, &smithytraits.EventHeader{})
-
-	ResponsePayloadPart_P = ResponsePayloadPart.AddMember("P", smithyprelude.String, &smithytraits.EventHeader{})
-
-	ResponseStreamEvent_PayloadPart = ResponseStreamEvent.AddMember("PayloadPart", ResponsePayloadPart)
-
-	ResponseStreamEvent_ModelStreamError = ResponseStreamEvent.AddMember("ModelStreamError", ModelStreamError)
-
-	ResponseStreamEvent_InternalStreamFailure = ResponseStreamEvent.AddMember("InternalStreamFailure", InternalStreamFailure)
-
-	ServiceUnavailableError_Message = ServiceUnavailableError.AddMember("Message", smithyprelude.String)
-
-	ServiceUnavailableError_ErrorCode = ServiceUnavailableError.AddMember("ErrorCode", smithyprelude.String)
-
-	InvokeEndpointWithBidirectionalStreamInput_EndpointName = InvokeEndpointWithBidirectionalStreamInput.AddMember("EndpointName", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	InvokeEndpointWithBidirectionalStreamInput_Body = InvokeEndpointWithBidirectionalStreamInput.AddMember("Body", RequestStreamEvent, &smithytraits.HTTPPayload{})
-
-	InvokeEndpointWithBidirectionalStreamInput_TargetVariant = InvokeEndpointWithBidirectionalStreamInput.AddMember("TargetVariant", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Target-Variant"})
-
-	InvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath = InvokeEndpointWithBidirectionalStreamInput.AddMember("ModelInvocationPath", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Invocation-Path"})
-
-	InvokeEndpointWithBidirectionalStreamInput_ModelQueryString = InvokeEndpointWithBidirectionalStreamInput.AddMember("ModelQueryString", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Query-String"})
-
-	InvokeEndpointWithBidirectionalStreamOutput_Body = InvokeEndpointWithBidirectionalStreamOutput.AddMember("Body", ResponseStreamEvent, &smithytraits.HTTPPayload{})
-
-	InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant = InvokeEndpointWithBidirectionalStreamOutput.AddMember("InvokedProductionVariant", smithyprelude.String, &smithytraits.HTTPHeader{Name: "X-Amzn-Invoked-Production-Variant"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 424}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.EventPayload{}}, DirectMask: 0x100000}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.EventHeader{}}, DirectMask: 0x400000}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Target-Variant"}}, DirectMask: 0x80}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Invocation-Path"}}, DirectMask: 0x80}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-SageMaker-Model-Query-String"}}, DirectMask: 0x80}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "X-Amzn-Invoked-Production-Variant"}}, DirectMask: 0x80}
+
+var mInputValidationError = smithy.SchemaMembers{List: []*smithy.Schema{&sInputValidationError_Message, &sInputValidationError_ErrorCode}}
+var mInternalServerError = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerError_Message, &sInternalServerError_ErrorCode}}
+var mInternalStreamFailure = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalStreamFailure_Message}}
+var mModelError = smithy.SchemaMembers{List: []*smithy.Schema{&sModelError_Message, &sModelError_OriginalStatusCode, &sModelError_OriginalMessage, &sModelError_LogStreamArn, &sModelError_ErrorCode}}
+var mModelStreamError = smithy.SchemaMembers{List: []*smithy.Schema{&sModelStreamError_Message, &sModelStreamError_ErrorCode}}
+var mRequestPayloadPart = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestPayloadPart_Bytes, &sRequestPayloadPart_DataType, &sRequestPayloadPart_CompletionState, &sRequestPayloadPart_P}}
+var mRequestStreamEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestStreamEvent_PayloadPart}}
+var mResponsePayloadPart = smithy.SchemaMembers{List: []*smithy.Schema{&sResponsePayloadPart_Bytes, &sResponsePayloadPart_DataType, &sResponsePayloadPart_CompletionState, &sResponsePayloadPart_P}}
+var mResponseStreamEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sResponseStreamEvent_PayloadPart, &sResponseStreamEvent_ModelStreamError, &sResponseStreamEvent_InternalStreamFailure}}
+var mServiceUnavailableError = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableError_Message, &sServiceUnavailableError_ErrorCode}}
+var mInvokeEndpointWithBidirectionalStreamInput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeEndpointWithBidirectionalStreamInput_EndpointName, &sInvokeEndpointWithBidirectionalStreamInput_Body, &sInvokeEndpointWithBidirectionalStreamInput_TargetVariant, &sInvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath, &sInvokeEndpointWithBidirectionalStreamInput_ModelQueryString}}
+var mInvokeEndpointWithBidirectionalStreamOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeEndpointWithBidirectionalStreamOutput_Body, &sInvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant}}
+
+var sInvokeEndpointWithBidirectionalStream = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithBidirectionalStream, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var s_AmazonSageMakerRuntimeHttp2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonSageMakerRuntimeHttp2, Type: smithy.ShapeTypeService})
+var sInputValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputValidationError, Members: &mInputValidationError, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInternalServerError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerError, Members: &mInternalServerError, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInternalStreamFailure = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalStreamFailure, Members: &mInternalStreamFailure, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sModelError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelError, Members: &mModelError, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sModelStreamError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iModelStreamError, Members: &mModelStreamError, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sRequestPayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestPayloadPart, Members: &mRequestPayloadPart, Type: smithy.ShapeTypeStructure})
+var sRequestStreamEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestStreamEvent, Members: &mRequestStreamEvent, Traits: &t8, Type: smithy.ShapeTypeUnion})
+var sResponsePayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponsePayloadPart, Members: &mResponsePayloadPart, Type: smithy.ShapeTypeStructure})
+var sResponseStreamEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResponseStreamEvent, Members: &mResponseStreamEvent, Traits: &t8, Type: smithy.ShapeTypeUnion})
+var s_SensitiveBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveBlob, Traits: &t9, Type: smithy.ShapeTypeBlob})
+var sServiceUnavailableError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableError, Members: &mServiceUnavailableError, Traits: &t10, Type: smithy.ShapeTypeStructure})
+var sInvokeEndpointWithBidirectionalStreamInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithBidirectionalStreamInput, Members: &mInvokeEndpointWithBidirectionalStreamInput, Type: smithy.ShapeTypeStructure})
+var sInvokeEndpointWithBidirectionalStreamOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeEndpointWithBidirectionalStreamOutput, Members: &mInvokeEndpointWithBidirectionalStreamOutput, Type: smithy.ShapeTypeStructure})
+
+var sInputValidationError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInputValidationError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalStreamFailure_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sModelError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sModelError_OriginalStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalStatusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sModelError_OriginalMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sModelError_LogStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogStreamArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sModelError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sModelStreamError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sModelStreamError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sRequestPayloadPart_Bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bytes", ID: &i_SensitiveBlob, Traits: &t6, Type: smithy.ShapeTypeBlob})
+var sRequestPayloadPart_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sRequestPayloadPart_CompletionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionState", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sRequestPayloadPart_P = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sRequestStreamEvent_PayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadPart", ID: &iRequestPayloadPart, Members: &mRequestPayloadPart, Type: smithy.ShapeTypeStructure})
+var sResponsePayloadPart_Bytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bytes", ID: &i_SensitiveBlob, Traits: &t6, Type: smithy.ShapeTypeBlob})
+var sResponsePayloadPart_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sResponsePayloadPart_CompletionState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompletionState", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sResponsePayloadPart_P = smithy.NewStaticSchema(smithy.StaticSchema{Member: "P", ID: &pString, Traits: &t7, Type: smithy.ShapeTypeString})
+var sResponseStreamEvent_PayloadPart = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PayloadPart", ID: &iResponsePayloadPart, Members: &mResponsePayloadPart, Type: smithy.ShapeTypeStructure})
+var sResponseStreamEvent_ModelStreamError = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelStreamError", ID: &iModelStreamError, Members: &mModelStreamError, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sResponseStreamEvent_InternalStreamFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InternalStreamFailure", ID: &iInternalStreamFailure, Members: &mInternalStreamFailure, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableError_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceUnavailableError_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvokeEndpointWithBidirectionalStreamInput_EndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointName", ID: &pString, Traits: &t11, Type: smithy.ShapeTypeString})
+var sInvokeEndpointWithBidirectionalStreamInput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iRequestStreamEvent, Members: &mRequestStreamEvent, Traits: &t12, Type: smithy.ShapeTypeUnion})
+var sInvokeEndpointWithBidirectionalStreamInput_TargetVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetVariant", ID: &pString, Traits: &t13, Type: smithy.ShapeTypeString})
+var sInvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelInvocationPath", ID: &pString, Traits: &t14, Type: smithy.ShapeTypeString})
+var sInvokeEndpointWithBidirectionalStreamInput_ModelQueryString = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelQueryString", ID: &pString, Traits: &t15, Type: smithy.ShapeTypeString})
+var sInvokeEndpointWithBidirectionalStreamOutput_Body = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Body", ID: &iResponseStreamEvent, Members: &mResponseStreamEvent, Traits: &t12, Type: smithy.ShapeTypeUnion})
+var sInvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokedProductionVariant", ID: &pString, Traits: &t16, Type: smithy.ShapeTypeString})
+
+var InvokeEndpointWithBidirectionalStream = &sInvokeEndpointWithBidirectionalStream
+
+var _AmazonSageMakerRuntimeHttp2 = &s_AmazonSageMakerRuntimeHttp2
+
+var InputValidationError = &sInputValidationError
+var InputValidationError_Message = &sInputValidationError_Message
+var InputValidationError_ErrorCode = &sInputValidationError_ErrorCode
+
+var InternalServerError = &sInternalServerError
+var InternalServerError_Message = &sInternalServerError_Message
+var InternalServerError_ErrorCode = &sInternalServerError_ErrorCode
+
+var InternalStreamFailure = &sInternalStreamFailure
+var InternalStreamFailure_Message = &sInternalStreamFailure_Message
+
+var ModelError = &sModelError
+var ModelError_Message = &sModelError_Message
+var ModelError_OriginalStatusCode = &sModelError_OriginalStatusCode
+var ModelError_OriginalMessage = &sModelError_OriginalMessage
+var ModelError_LogStreamArn = &sModelError_LogStreamArn
+var ModelError_ErrorCode = &sModelError_ErrorCode
+
+var ModelStreamError = &sModelStreamError
+var ModelStreamError_Message = &sModelStreamError_Message
+var ModelStreamError_ErrorCode = &sModelStreamError_ErrorCode
+
+var RequestPayloadPart = &sRequestPayloadPart
+var RequestPayloadPart_Bytes = &sRequestPayloadPart_Bytes
+var RequestPayloadPart_DataType = &sRequestPayloadPart_DataType
+var RequestPayloadPart_CompletionState = &sRequestPayloadPart_CompletionState
+var RequestPayloadPart_P = &sRequestPayloadPart_P
+
+var RequestStreamEvent = &sRequestStreamEvent
+var RequestStreamEvent_PayloadPart = &sRequestStreamEvent_PayloadPart
+
+var ResponsePayloadPart = &sResponsePayloadPart
+var ResponsePayloadPart_Bytes = &sResponsePayloadPart_Bytes
+var ResponsePayloadPart_DataType = &sResponsePayloadPart_DataType
+var ResponsePayloadPart_CompletionState = &sResponsePayloadPart_CompletionState
+var ResponsePayloadPart_P = &sResponsePayloadPart_P
+
+var ResponseStreamEvent = &sResponseStreamEvent
+var ResponseStreamEvent_PayloadPart = &sResponseStreamEvent_PayloadPart
+var ResponseStreamEvent_ModelStreamError = &sResponseStreamEvent_ModelStreamError
+var ResponseStreamEvent_InternalStreamFailure = &sResponseStreamEvent_InternalStreamFailure
+
+var _SensitiveBlob = &s_SensitiveBlob
+
+var ServiceUnavailableError = &sServiceUnavailableError
+var ServiceUnavailableError_Message = &sServiceUnavailableError_Message
+var ServiceUnavailableError_ErrorCode = &sServiceUnavailableError_ErrorCode
+
+var InvokeEndpointWithBidirectionalStreamInput = &sInvokeEndpointWithBidirectionalStreamInput
+var InvokeEndpointWithBidirectionalStreamInput_EndpointName = &sInvokeEndpointWithBidirectionalStreamInput_EndpointName
+var InvokeEndpointWithBidirectionalStreamInput_Body = &sInvokeEndpointWithBidirectionalStreamInput_Body
+var InvokeEndpointWithBidirectionalStreamInput_TargetVariant = &sInvokeEndpointWithBidirectionalStreamInput_TargetVariant
+var InvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath = &sInvokeEndpointWithBidirectionalStreamInput_ModelInvocationPath
+var InvokeEndpointWithBidirectionalStreamInput_ModelQueryString = &sInvokeEndpointWithBidirectionalStreamInput_ModelQueryString
+
+var InvokeEndpointWithBidirectionalStreamOutput = &sInvokeEndpointWithBidirectionalStreamOutput
+var InvokeEndpointWithBidirectionalStreamOutput_Body = &sInvokeEndpointWithBidirectionalStreamOutput_Body
+var InvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant = &sInvokeEndpointWithBidirectionalStreamOutput_InvokedProductionVariant
+
+var AmazonSageMakerRuntimeHttp2 = &smithy.ServiceSchema{Schema: &s_AmazonSageMakerRuntimeHttp2, Version: "2025-10-01"}

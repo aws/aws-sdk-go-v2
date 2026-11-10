@@ -4,6703 +4,4750 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCancelJob                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJob"}
+	iCancelJobs                                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJobs"}
+	iCreateComputeEnvironment                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateComputeEnvironment"}
+	iCreateConsumableResource                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateConsumableResource"}
+	iCreateJobQueue                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateJobQueue"}
+	iCreateQuotaShare                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateQuotaShare"}
+	iCreateSchedulingPolicy                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateSchedulingPolicy"}
+	iCreateServiceEnvironment                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateServiceEnvironment"}
+	iDeleteComputeEnvironment                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteComputeEnvironment"}
+	iDeleteConsumableResource                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteConsumableResource"}
+	iDeleteJobQueue                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteJobQueue"}
+	iDeleteQuotaShare                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteQuotaShare"}
+	iDeleteSchedulingPolicy                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteSchedulingPolicy"}
+	iDeleteServiceEnvironment                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteServiceEnvironment"}
+	iDeregisterJobDefinition                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeregisterJobDefinition"}
+	iDescribeComputeEnvironments                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeComputeEnvironments"}
+	iDescribeConsumableResource                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeConsumableResource"}
+	iDescribeJobDefinitions                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobDefinitions"}
+	iDescribeJobQueues                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobQueues"}
+	iDescribeJobs                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobs"}
+	iDescribeQuotaShare                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeQuotaShare"}
+	iDescribeSchedulingPolicies                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeSchedulingPolicies"}
+	iDescribeServiceEnvironments                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeServiceEnvironments"}
+	iDescribeServiceJob                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeServiceJob"}
+	iGetJobQueueSnapshot                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "GetJobQueueSnapshot"}
+	iListConsumableResources                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListConsumableResources"}
+	iListJobs                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobs"}
+	iListJobsByConsumableResource                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsByConsumableResource"}
+	iListQuotaShares                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListQuotaShares"}
+	iListSchedulingPolicies                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListSchedulingPolicies"}
+	iListServiceJobs                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListServiceJobs"}
+	iListTagsForResource                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListTagsForResource"}
+	iRegisterJobDefinition                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "RegisterJobDefinition"}
+	iSubmitJob                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SubmitJob"}
+	iSubmitServiceJob                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SubmitServiceJob"}
+	iTagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagResource"}
+	iTerminateJob                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJob"}
+	iTerminateJobs                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJobs"}
+	iTerminateServiceJob                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJob"}
+	iTerminateServiceJobs                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJobs"}
+	iUntagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UntagResource"}
+	iUpdateComputeEnvironment                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateComputeEnvironment"}
+	iUpdateConsumableResource                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateConsumableResource"}
+	iUpdateJobQueue                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateJobQueue"}
+	iUpdateQuotaShare                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateQuotaShare"}
+	iUpdateSchedulingPolicy                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateSchedulingPolicy"}
+	iUpdateServiceEnvironment                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateServiceEnvironment"}
+	iUpdateServiceJob                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateServiceJob"}
+	i_AWSBatchV20160810                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "AWSBatchV20160810"}
+	iArrayJobDependency                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ArrayJobDependency"}
+	i_ArrayJobStatusSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ArrayJobStatusSummary"}
+	iArrayProperties                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ArrayProperties"}
+	iArrayPropertiesDetail                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ArrayPropertiesDetail"}
+	iArrayPropertiesSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ArrayPropertiesSummary"}
+	iAssignPublicIp                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "AssignPublicIp"}
+	iAttemptContainerDetail                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "AttemptContainerDetail"}
+	iAttemptDetail                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "AttemptDetail"}
+	i_AttemptDetails                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "AttemptDetails"}
+	iAttemptEcsTaskDetails                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "AttemptEcsTaskDetails"}
+	iAttemptTaskContainerDetails                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "AttemptTaskContainerDetails"}
+	i_Boolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Boolean"}
+	iCancelJobsErrorDetail                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJobsErrorDetail"}
+	i_CancelJobsErrorDetailList                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJobsErrorDetailList"}
+	iCapacityLimit                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CapacityLimit"}
+	i_CapacityLimits                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CapacityLimits"}
+	iCapacityReservationRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CapacityReservationRequest"}
+	iCEState                                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CEState"}
+	iCEStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CEStatus"}
+	iCEType                                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CEType"}
+	iClientException                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ClientException"}
+	i_ClientRequestToken                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ClientRequestToken"}
+	iComputeEnvironmentDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ComputeEnvironmentDetail"}
+	i_ComputeEnvironmentDetailList               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ComputeEnvironmentDetailList"}
+	iComputeEnvironmentOrder                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ComputeEnvironmentOrder"}
+	i_ComputeEnvironmentOrders                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ComputeEnvironmentOrders"}
+	iComputeResource                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ComputeResource"}
+	iComputeResourceUpdate                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ComputeResourceUpdate"}
+	iComputeScalingPolicy                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ComputeScalingPolicy"}
+	i_ConsumableResourceList                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ConsumableResourceList"}
+	iConsumableResourceProperties                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ConsumableResourceProperties"}
+	iConsumableResourceRequirement               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ConsumableResourceRequirement"}
+	iConsumableResourceSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ConsumableResourceSummary"}
+	i_ConsumableResourceSummaryList              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ConsumableResourceSummaryList"}
+	iContainerDetail                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ContainerDetail"}
+	iContainerInsights                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ContainerInsights"}
+	iContainerOverrides                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ContainerOverrides"}
+	iContainerProperties                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ContainerProperties"}
+	iContainerSummary                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ContainerSummary"}
+	iCRAllocationStrategy                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CRAllocationStrategy"}
+	iCRType                                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CRType"}
+	iCRUpdateAllocationStrategy                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CRUpdateAllocationStrategy"}
+	iDevice                                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Device"}
+	iDeviceCgroupPermission                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeviceCgroupPermission"}
+	i_DeviceCgroupPermissions                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeviceCgroupPermissions"}
+	i_DevicesList                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DevicesList"}
+	i_Double                                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Double"}
+	iEc2Configuration                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Ec2Configuration"}
+	i_Ec2ConfigurationList                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Ec2ConfigurationList"}
+	iEcsProperties                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EcsProperties"}
+	iEcsPropertiesDetail                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EcsPropertiesDetail"}
+	iEcsPropertiesOverride                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EcsPropertiesOverride"}
+	iEcsSettings                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EcsSettings"}
+	iEcsTaskDetails                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EcsTaskDetails"}
+	iEcsTaskProperties                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EcsTaskProperties"}
+	iEFSAuthorizationConfig                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EFSAuthorizationConfig"}
+	iEFSAuthorizationConfigIAM                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EFSAuthorizationConfigIAM"}
+	iEFSTransitEncryption                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EFSTransitEncryption"}
+	iEFSVolumeConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EFSVolumeConfiguration"}
+	iEksAccessEntry                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAccessEntry"}
+	iEksAccessEntryDesiredState                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAccessEntryDesiredState"}
+	iEksAccessEntryStatus                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAccessEntryStatus"}
+	i_EksAnnotationsMap                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAnnotationsMap"}
+	iEksAttemptContainerDetail                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAttemptContainerDetail"}
+	i_EksAttemptContainerDetails                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAttemptContainerDetails"}
+	iEksAttemptDetail                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAttemptDetail"}
+	i_EksAttemptDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksAttemptDetails"}
+	iEksConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksConfiguration"}
+	iEksConfigurationUpdate                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksConfigurationUpdate"}
+	iEksContainer                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainer"}
+	iEksContainerDetail                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerDetail"}
+	i_EksContainerDetails                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerDetails"}
+	iEksContainerEnvironmentVariable             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerEnvironmentVariable"}
+	i_EksContainerEnvironmentVariables           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerEnvironmentVariables"}
+	iEksContainerOverride                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerOverride"}
+	i_EksContainerOverrideList                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerOverrideList"}
+	iEksContainerResourceRequirements            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerResourceRequirements"}
+	i_EksContainers                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainers"}
+	iEksContainerSecurityContext                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerSecurityContext"}
+	iEksContainerVolumeMount                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerVolumeMount"}
+	i_EksContainerVolumeMounts                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksContainerVolumeMounts"}
+	iEksEmptyDir                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksEmptyDir"}
+	iEksHostPath                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksHostPath"}
+	i_EksLabelsMap                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksLabelsMap"}
+	i_EksLimits                                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksLimits"}
+	iEksMetadata                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksMetadata"}
+	iEksPersistentVolumeClaim                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksPersistentVolumeClaim"}
+	iEksPodProperties                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksPodProperties"}
+	iEksPodPropertiesDetail                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksPodPropertiesDetail"}
+	iEksPodPropertiesOverride                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksPodPropertiesOverride"}
+	iEksProperties                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksProperties"}
+	iEksPropertiesDetail                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksPropertiesDetail"}
+	iEksPropertiesOverride                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksPropertiesOverride"}
+	i_EksRequests                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksRequests"}
+	iEksSecret                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksSecret"}
+	iEksVolume                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksVolume"}
+	i_EksVolumes                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EksVolumes"}
+	i_EnvironmentVariables                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EnvironmentVariables"}
+	iEphemeralStorage                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EphemeralStorage"}
+	iEvaluateOnExit                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EvaluateOnExit"}
+	i_EvaluateOnExitList                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "EvaluateOnExitList"}
+	iFairshareCapacityUsage                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FairshareCapacityUsage"}
+	i_FairshareCapacityUsageList                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FairshareCapacityUsageList"}
+	iFairshareCapacityUtilization                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FairshareCapacityUtilization"}
+	i_FairshareCapacityUtilizationList           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FairshareCapacityUtilizationList"}
+	iFairsharePolicy                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FairsharePolicy"}
+	iFairshareUtilizationDetail                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FairshareUtilizationDetail"}
+	iFargatePlatformConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FargatePlatformConfiguration"}
+	iFirelensConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FirelensConfiguration"}
+	i_FirelensConfigurationOptionsMap            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FirelensConfigurationOptionsMap"}
+	iFirelensConfigurationType                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FirelensConfigurationType"}
+	i_Float                                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Float"}
+	iFrontOfQueueDetail                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FrontOfQueueDetail"}
+	iFrontOfQueueJobSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FrontOfQueueJobSummary"}
+	i_FrontOfQueueJobSummaryList                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FrontOfQueueJobSummaryList"}
+	iFrontOfQuotaShareJobSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FrontOfQuotaShareJobSummary"}
+	i_FrontOfQuotaShareJobSummaryList            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FrontOfQuotaShareJobSummaryList"}
+	iFrontOfQuotaSharesDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FrontOfQuotaSharesDetail"}
+	i_FrontOfQuotaSharesJobSummaryMap            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "FrontOfQuotaSharesJobSummaryMap"}
+	iHost                                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Host"}
+	i_ImageIdOverride                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ImageIdOverride"}
+	iImagePullSecret                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ImagePullSecret"}
+	i_ImagePullSecrets                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ImagePullSecrets"}
+	i_ImageType                                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ImageType"}
+	iInfrastructureOptimization                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "InfrastructureOptimization"}
+	iInstanceLaunchTemplate                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "InstanceLaunchTemplate"}
+	iInstanceLaunchTemplateUpdate                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "InstanceLaunchTemplateUpdate"}
+	iInstanceRequirementsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "InstanceRequirementsRequest"}
+	i_Integer                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Integer"}
+	iJobCapacityUsageSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobCapacityUsageSummary"}
+	i_JobCapacityUsageSummaryList                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobCapacityUsageSummaryList"}
+	iJobDefinition                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobDefinition"}
+	i_JobDefinitionList                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobDefinitionList"}
+	iJobDefinitionType                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobDefinitionType"}
+	iJobDependency                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobDependency"}
+	i_JobDependencyList                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobDependencyList"}
+	iJobDetail                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobDetail"}
+	i_JobDetailList                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobDetailList"}
+	i_JobExecutionTimeoutMinutes                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobExecutionTimeoutMinutes"}
+	iJobQueueDetail                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobQueueDetail"}
+	i_JobQueueDetailList                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobQueueDetailList"}
+	iJobQueueType                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobQueueType"}
+	iJobStateTimeLimitAction                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobStateTimeLimitAction"}
+	i_JobStateTimeLimitActions                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobStateTimeLimitActions"}
+	iJobStateTimeLimitActionsAction              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobStateTimeLimitActionsAction"}
+	iJobStateTimeLimitActionsState               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobStateTimeLimitActionsState"}
+	iJobStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobStatus"}
+	iJobSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobSummary"}
+	i_JobSummaryList                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobSummaryList"}
+	iJobTimeout                                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JobTimeout"}
+	iJQState                                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JQState"}
+	iJQStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "JQStatus"}
+	iKeyValuePair                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "KeyValuePair"}
+	iKeyValuesPair                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "KeyValuesPair"}
+	i_KubernetesVersion                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "KubernetesVersion"}
+	iLatestServiceJobAttempt                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LatestServiceJobAttempt"}
+	iLaunchTemplateSpecification                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LaunchTemplateSpecification"}
+	iLaunchTemplateSpecificationOverride         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LaunchTemplateSpecificationOverride"}
+	i_LaunchTemplateSpecificationOverrideList    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LaunchTemplateSpecificationOverrideList"}
+	iLinuxParameters                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LinuxParameters"}
+	i_ListAttemptEcsTaskDetails                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListAttemptEcsTaskDetails"}
+	i_ListAttemptTaskContainerDetails            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListAttemptTaskContainerDetails"}
+	i_ListConsumableResourcesFilterList          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListConsumableResourcesFilterList"}
+	i_ListEcsTaskDetails                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListEcsTaskDetails"}
+	i_ListEcsTaskProperties                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListEcsTaskProperties"}
+	i_ListJobsByConsumableResourceFilterList     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsByConsumableResourceFilterList"}
+	iListJobsByConsumableResourceSummary         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsByConsumableResourceSummary"}
+	i_ListJobsByConsumableResourceSummaryList    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsByConsumableResourceSummaryList"}
+	i_ListJobsFilterList                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsFilterList"}
+	i_ListTaskContainerDetails                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListTaskContainerDetails"}
+	i_ListTaskContainerOverrides                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListTaskContainerOverrides"}
+	i_ListTaskContainerProperties                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListTaskContainerProperties"}
+	i_ListTaskPropertiesOverride                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListTaskPropertiesOverride"}
+	iLogConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LogConfiguration"}
+	i_LogConfigurationOptionsMap                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LogConfigurationOptionsMap"}
+	iLogDriver                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "LogDriver"}
+	i_Long                                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Long"}
+	iManagedInstancesLocalStorageConfiguration   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ManagedInstancesLocalStorageConfiguration"}
+	iManagedInstancesNetworkConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ManagedInstancesNetworkConfiguration"}
+	iManagedInstancesProvider                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ManagedInstancesProvider"}
+	iManagedInstancesStorageConfiguration        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ManagedInstancesStorageConfiguration"}
+	iMountPoint                                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "MountPoint"}
+	i_MountPoints                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "MountPoints"}
+	iNetworkConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NetworkConfiguration"}
+	iNetworkInterface                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NetworkInterface"}
+	i_NetworkInterfaceList                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NetworkInterfaceList"}
+	iNodeDetails                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodeDetails"}
+	iNodeOverrides                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodeOverrides"}
+	iNodeProperties                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodeProperties"}
+	iNodePropertiesSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodePropertiesSummary"}
+	iNodePropertyOverride                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodePropertyOverride"}
+	i_NodePropertyOverrides                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodePropertyOverrides"}
+	i_NodeRangeProperties                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodeRangeProperties"}
+	iNodeRangeProperty                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "NodeRangeProperty"}
+	iOrchestrationType                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "OrchestrationType"}
+	i_ParametersMap                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ParametersMap"}
+	iPlatformCapability                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "PlatformCapability"}
+	i_PlatformCapabilityList                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "PlatformCapabilityList"}
+	i_Quantity                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Quantity"}
+	iQueueSnapshotCapacityUsage                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QueueSnapshotCapacityUsage"}
+	i_QueueSnapshotCapacityUsageList             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QueueSnapshotCapacityUsageList"}
+	iQueueSnapshotUtilizationDetail              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QueueSnapshotUtilizationDetail"}
+	iQuotaShareCapacityLimit                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareCapacityLimit"}
+	i_QuotaShareCapacityLimits                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareCapacityLimits"}
+	iQuotaShareCapacityUsage                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareCapacityUsage"}
+	i_QuotaShareCapacityUsageList                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareCapacityUsageList"}
+	iQuotaShareCapacityUtilization               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareCapacityUtilization"}
+	i_QuotaShareCapacityUtilizationList          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareCapacityUtilizationList"}
+	iQuotaShareDetail                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareDetail"}
+	iQuotaShareIdleResourceAssignmentStrategy    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareIdleResourceAssignmentStrategy"}
+	iQuotaShareInSharePreemptionState            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareInSharePreemptionState"}
+	i_QuotaShareList                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareList"}
+	iQuotaSharePolicy                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaSharePolicy"}
+	iQuotaSharePreemptionConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaSharePreemptionConfiguration"}
+	iQuotaShareResourceSharingConfiguration      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareResourceSharingConfiguration"}
+	iQuotaShareResourceSharingStrategy           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareResourceSharingStrategy"}
+	iQuotaShareState                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareState"}
+	iQuotaShareStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareStatus"}
+	iQuotaShareUtilizationDetail                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "QuotaShareUtilizationDetail"}
+	iRepositoryCredentials                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "RepositoryCredentials"}
+	iResourceRequirement                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ResourceRequirement"}
+	i_ResourceRequirements                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ResourceRequirements"}
+	iResourceType                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ResourceType"}
+	iRetryAction                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "RetryAction"}
+	iRetryStrategy                               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "RetryStrategy"}
+	iRuntimePlatform                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "RuntimePlatform"}
+	iS3FilesVolumeConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "S3FilesVolumeConfiguration"}
+	iSchedulingPolicyDetail                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SchedulingPolicyDetail"}
+	i_SchedulingPolicyDetailList                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SchedulingPolicyDetailList"}
+	iSchedulingPolicyListingDetail               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SchedulingPolicyListingDetail"}
+	i_SchedulingPolicyListingDetailList          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SchedulingPolicyListingDetailList"}
+	iSecret                                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Secret"}
+	i_SecretList                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SecretList"}
+	iServerException                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServerException"}
+	iServiceEnvironmentDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceEnvironmentDetail"}
+	i_ServiceEnvironmentDetailList               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceEnvironmentDetailList"}
+	iServiceEnvironmentOrder                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceEnvironmentOrder"}
+	i_ServiceEnvironmentOrders                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceEnvironmentOrders"}
+	iServiceEnvironmentState                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceEnvironmentState"}
+	iServiceEnvironmentStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceEnvironmentStatus"}
+	iServiceEnvironmentType                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceEnvironmentType"}
+	iServiceJobAttemptDetail                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobAttemptDetail"}
+	i_ServiceJobAttemptDetails                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobAttemptDetails"}
+	iServiceJobCapacityUsageDetail               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobCapacityUsageDetail"}
+	i_ServiceJobCapacityUsageDetailList          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobCapacityUsageDetailList"}
+	iServiceJobCapacityUsageSummary              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobCapacityUsageSummary"}
+	i_ServiceJobCapacityUsageSummaryList         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobCapacityUsageSummaryList"}
+	iServiceJobEvaluateOnExit                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobEvaluateOnExit"}
+	i_ServiceJobEvaluateOnExitList               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobEvaluateOnExitList"}
+	iServiceJobPreemptedAttempt                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobPreemptedAttempt"}
+	iServiceJobPreemptionConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobPreemptionConfiguration"}
+	iServiceJobPreemptionSummary                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobPreemptionSummary"}
+	i_ServiceJobRecentPreemptedAttemptList       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobRecentPreemptedAttemptList"}
+	iServiceJobRetryAction                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobRetryAction"}
+	iServiceJobRetryStrategy                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobRetryStrategy"}
+	iServiceJobStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobStatus"}
+	iServiceJobSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobSummary"}
+	i_ServiceJobSummaryList                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobSummaryList"}
+	iServiceJobTimeout                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobTimeout"}
+	iServiceJobType                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceJobType"}
+	iServiceResourceId                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceResourceId"}
+	iServiceResourceIdName                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ServiceResourceIdName"}
+	iShareAttributes                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ShareAttributes"}
+	i_ShareAttributesList                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ShareAttributesList"}
+	i_String                                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "String"}
+	i_StringList                                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "StringList"}
+	i_TagKey                                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagKey"}
+	i_TagKeysList                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagKeysList"}
+	i_TagrisTagsMap                              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagrisTagsMap"}
+	i_TagsMap                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagsMap"}
+	i_TagValue                                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagValue"}
+	iTaskContainerDependency                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TaskContainerDependency"}
+	i_TaskContainerDependencyList                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TaskContainerDependencyList"}
+	iTaskContainerDetails                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TaskContainerDetails"}
+	iTaskContainerOverrides                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TaskContainerOverrides"}
+	iTaskContainerProperties                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TaskContainerProperties"}
+	iTaskPropertiesOverride                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TaskPropertiesOverride"}
+	iTerminateJobsErrorDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJobsErrorDetail"}
+	i_TerminateJobsErrorDetailList               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJobsErrorDetailList"}
+	iTerminateServiceJobsErrorDetail             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJobsErrorDetail"}
+	i_TerminateServiceJobsErrorDetailList        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJobsErrorDetailList"}
+	iTmpfs                                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Tmpfs"}
+	i_TmpfsList                                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TmpfsList"}
+	iUlimit                                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Ulimit"}
+	i_Ulimits                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Ulimits"}
+	iUpdateManagedInstancesProviderConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateManagedInstancesProviderConfiguration"}
+	iUpdatePolicy                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdatePolicy"}
+	iUserdataType                                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UserdataType"}
+	iVolume                                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Volume"}
+	i_Volumes                                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "Volumes"}
+	iCancelJobRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJobRequest"}
+	iCancelJobResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJobResponse"}
+	iCancelJobsRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJobsRequest"}
+	iCancelJobsResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CancelJobsResponse"}
+	iCreateComputeEnvironmentRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateComputeEnvironmentRequest"}
+	iCreateComputeEnvironmentResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateComputeEnvironmentResponse"}
+	iCreateConsumableResourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateConsumableResourceRequest"}
+	iCreateConsumableResourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateConsumableResourceResponse"}
+	iCreateJobQueueRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateJobQueueRequest"}
+	iCreateJobQueueResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateJobQueueResponse"}
+	iCreateQuotaShareRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateQuotaShareRequest"}
+	iCreateQuotaShareResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateQuotaShareResponse"}
+	iCreateSchedulingPolicyRequest               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateSchedulingPolicyRequest"}
+	iCreateSchedulingPolicyResponse              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateSchedulingPolicyResponse"}
+	iCreateServiceEnvironmentRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateServiceEnvironmentRequest"}
+	iCreateServiceEnvironmentResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "CreateServiceEnvironmentResponse"}
+	iDeleteComputeEnvironmentRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteComputeEnvironmentRequest"}
+	iDeleteComputeEnvironmentResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteComputeEnvironmentResponse"}
+	iDeleteConsumableResourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteConsumableResourceRequest"}
+	iDeleteConsumableResourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteConsumableResourceResponse"}
+	iDeleteJobQueueRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteJobQueueRequest"}
+	iDeleteJobQueueResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteJobQueueResponse"}
+	iDeleteQuotaShareRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteQuotaShareRequest"}
+	iDeleteQuotaShareResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteQuotaShareResponse"}
+	iDeleteSchedulingPolicyRequest               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteSchedulingPolicyRequest"}
+	iDeleteSchedulingPolicyResponse              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteSchedulingPolicyResponse"}
+	iDeleteServiceEnvironmentRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteServiceEnvironmentRequest"}
+	iDeleteServiceEnvironmentResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeleteServiceEnvironmentResponse"}
+	iDeregisterJobDefinitionRequest              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeregisterJobDefinitionRequest"}
+	iDeregisterJobDefinitionResponse             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DeregisterJobDefinitionResponse"}
+	iDescribeComputeEnvironmentsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeComputeEnvironmentsRequest"}
+	iDescribeComputeEnvironmentsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeComputeEnvironmentsResponse"}
+	iDescribeConsumableResourceRequest           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeConsumableResourceRequest"}
+	iDescribeConsumableResourceResponse          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeConsumableResourceResponse"}
+	iDescribeJobDefinitionsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobDefinitionsRequest"}
+	iDescribeJobDefinitionsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobDefinitionsResponse"}
+	iDescribeJobQueuesRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobQueuesRequest"}
+	iDescribeJobQueuesResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobQueuesResponse"}
+	iDescribeJobsRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobsRequest"}
+	iDescribeJobsResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeJobsResponse"}
+	iDescribeQuotaShareRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeQuotaShareRequest"}
+	iDescribeQuotaShareResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeQuotaShareResponse"}
+	iDescribeSchedulingPoliciesRequest           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeSchedulingPoliciesRequest"}
+	iDescribeSchedulingPoliciesResponse          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeSchedulingPoliciesResponse"}
+	iDescribeServiceEnvironmentsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeServiceEnvironmentsRequest"}
+	iDescribeServiceEnvironmentsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeServiceEnvironmentsResponse"}
+	iDescribeServiceJobRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeServiceJobRequest"}
+	iDescribeServiceJobResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "DescribeServiceJobResponse"}
+	iGetJobQueueSnapshotRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "GetJobQueueSnapshotRequest"}
+	iGetJobQueueSnapshotResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "GetJobQueueSnapshotResponse"}
+	iListConsumableResourcesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListConsumableResourcesRequest"}
+	iListConsumableResourcesResponse             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListConsumableResourcesResponse"}
+	iListJobsByConsumableResourceRequest         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsByConsumableResourceRequest"}
+	iListJobsByConsumableResourceResponse        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsByConsumableResourceResponse"}
+	iListJobsRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsRequest"}
+	iListJobsResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListJobsResponse"}
+	iListQuotaSharesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListQuotaSharesRequest"}
+	iListQuotaSharesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListQuotaSharesResponse"}
+	iListSchedulingPoliciesRequest               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListSchedulingPoliciesRequest"}
+	iListSchedulingPoliciesResponse              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListSchedulingPoliciesResponse"}
+	iListServiceJobsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListServiceJobsRequest"}
+	iListServiceJobsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListServiceJobsResponse"}
+	iListTagsForResourceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "ListTagsForResourceResponse"}
+	iRegisterJobDefinitionRequest                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "RegisterJobDefinitionRequest"}
+	iRegisterJobDefinitionResponse               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "RegisterJobDefinitionResponse"}
+	iSubmitJobRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SubmitJobRequest"}
+	iSubmitJobResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SubmitJobResponse"}
+	iSubmitServiceJobRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SubmitServiceJobRequest"}
+	iSubmitServiceJobResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "SubmitServiceJobResponse"}
+	iTagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagResourceRequest"}
+	iTagResourceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TagResourceResponse"}
+	iTerminateJobRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJobRequest"}
+	iTerminateJobResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJobResponse"}
+	iTerminateJobsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJobsRequest"}
+	iTerminateJobsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateJobsResponse"}
+	iTerminateServiceJobRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJobRequest"}
+	iTerminateServiceJobResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJobResponse"}
+	iTerminateServiceJobsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJobsRequest"}
+	iTerminateServiceJobsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "TerminateServiceJobsResponse"}
+	iUntagResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UntagResourceResponse"}
+	iUpdateComputeEnvironmentRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateComputeEnvironmentRequest"}
+	iUpdateComputeEnvironmentResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateComputeEnvironmentResponse"}
+	iUpdateConsumableResourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateConsumableResourceRequest"}
+	iUpdateConsumableResourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateConsumableResourceResponse"}
+	iUpdateJobQueueRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateJobQueueRequest"}
+	iUpdateJobQueueResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateJobQueueResponse"}
+	iUpdateQuotaShareRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateQuotaShareRequest"}
+	iUpdateQuotaShareResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateQuotaShareResponse"}
+	iUpdateSchedulingPolicyRequest               = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateSchedulingPolicyRequest"}
+	iUpdateSchedulingPolicyResponse              = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateSchedulingPolicyResponse"}
+	iUpdateServiceEnvironmentRequest             = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateServiceEnvironmentRequest"}
+	iUpdateServiceEnvironmentResponse            = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateServiceEnvironmentResponse"}
+	iUpdateServiceJobRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateServiceJobRequest"}
+	iUpdateServiceJobResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.batch", Name: "UpdateServiceJobResponse"}
+	pUnit                                        = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/canceljob",
-	Code: 200})
-
-var CancelJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/canceljobs",
-	Code: 200})
-
-var CreateComputeEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateComputeEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/createcomputeenvironment",
-	Code: 200})
-
-var CreateConsumableResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateConsumableResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/createconsumableresource",
-	Code: 200})
-
-var CreateJobQueue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateJobQueue",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/createjobqueue",
-	Code: 200})
-
-var CreateQuotaShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateQuotaShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/createquotashare",
-	Code: 200})
-
-var CreateSchedulingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateSchedulingPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/createschedulingpolicy",
-	Code: 200})
-
-var CreateServiceEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateServiceEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/createserviceenvironment",
-	Code: 200})
-
-var DeleteComputeEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteComputeEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/deletecomputeenvironment",
-	Code: 200})
-
-var DeleteConsumableResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteConsumableResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/deleteconsumableresource",
-	Code: 200})
-
-var DeleteJobQueue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteJobQueue",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/deletejobqueue",
-	Code: 200})
-
-var DeleteQuotaShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteQuotaShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/deletequotashare",
-	Code: 200})
-
-var DeleteSchedulingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteSchedulingPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/deleteschedulingpolicy",
-	Code: 200})
-
-var DeleteServiceEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteServiceEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/deleteserviceenvironment",
-	Code: 200})
-
-var DeregisterJobDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeregisterJobDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/deregisterjobdefinition",
-	Code: 200})
-
-var DescribeComputeEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeComputeEnvironments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describecomputeenvironments",
-	Code: 200})
-
-var DescribeConsumableResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeConsumableResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describeconsumableresource",
-	Code: 200})
-
-var DescribeJobDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobDefinitions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describejobdefinitions",
-	Code: 200})
-
-var DescribeJobQueues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobQueues",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describejobqueues",
-	Code: 200})
-
-var DescribeJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describejobs",
-	Code: 200})
-
-var DescribeQuotaShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeQuotaShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describequotashare",
-	Code: 200})
-
-var DescribeSchedulingPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeSchedulingPolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describeschedulingpolicies",
-	Code: 200})
-
-var DescribeServiceEnvironments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeServiceEnvironments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describeserviceenvironments",
-	Code: 200})
-
-var DescribeServiceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeServiceJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/describeservicejob",
-	Code: 200})
-
-var GetJobQueueSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "GetJobQueueSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/getjobqueuesnapshot",
-	Code: 200})
-
-var ListConsumableResources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListConsumableResources",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/listconsumableresources",
-	Code: 200})
-
-var ListJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/listjobs",
-	Code: 200})
-
-var ListJobsByConsumableResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsByConsumableResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/listjobsbyconsumableresource",
-	Code: 200})
-
-var ListQuotaShares = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListQuotaShares",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/listquotashares",
-	Code: 200})
-
-var ListSchedulingPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListSchedulingPolicies",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/listschedulingpolicies",
-	Code: 200})
-
-var ListServiceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListServiceJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/listservicejobs",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterJobDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "RegisterJobDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/registerjobdefinition",
-	Code: 200})
-
-var SubmitJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SubmitJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/submitjob",
-	Code: 200})
-
-var SubmitServiceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SubmitServiceJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/submitservicejob",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var TerminateJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/terminatejob",
-	Code: 200})
-
-var TerminateJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/terminatejobs",
-	Code: 200})
-
-var TerminateServiceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/terminateservicejob",
-	Code: 200})
-
-var TerminateServiceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/terminateservicejobs",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateComputeEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateComputeEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/updatecomputeenvironment",
-	Code: 200})
-
-var UpdateConsumableResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateConsumableResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/updateconsumableresource",
-	Code: 200})
-
-var UpdateJobQueue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateJobQueue",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/updatejobqueue",
-	Code: 200})
-
-var UpdateQuotaShare = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateQuotaShare",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/updatequotashare",
-	Code: 200})
-
-var UpdateSchedulingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateSchedulingPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/updateschedulingpolicy",
-	Code: 200})
-
-var UpdateServiceEnvironment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateServiceEnvironment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/updateserviceenvironment",
-	Code: 200})
-
-var UpdateServiceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateServiceJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/updateservicejob",
-	Code: 200})
-
-var _AWSBatchV20160810 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "AWSBatchV20160810",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://batch.amazonaws.com/doc/2016-08-10/"})
-
-var AWSBatchV20160810 = smithy.NewServiceSchema(_AWSBatchV20160810, "2016-08-10")
-
-var ArrayJobDependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ArrayJobDependency",
-}, smithy.ShapeTypeEnum, 2)
-var ArrayJobDependency_N_TO_N *smithy.Schema
-
-var ArrayJobDependency_SEQUENTIAL *smithy.Schema
-
-var _ArrayJobStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ArrayJobStatusSummary",
-}, smithy.ShapeTypeMap, 2)
-var _ArrayJobStatusSummary_key *smithy.Schema
-
-var _ArrayJobStatusSummary_value *smithy.Schema
-
-var ArrayProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ArrayProperties",
-}, smithy.ShapeTypeStructure, 1)
-var ArrayProperties_size *smithy.Schema
-
-var ArrayPropertiesDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ArrayPropertiesDetail",
-}, smithy.ShapeTypeStructure, 4)
-var ArrayPropertiesDetail_statusSummary *smithy.Schema
-
-var ArrayPropertiesDetail_statusSummaryLastUpdatedAt *smithy.Schema
-
-var ArrayPropertiesDetail_size *smithy.Schema
-
-var ArrayPropertiesDetail_index *smithy.Schema
-
-var ArrayPropertiesSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ArrayPropertiesSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ArrayPropertiesSummary_size *smithy.Schema
-
-var ArrayPropertiesSummary_index *smithy.Schema
-
-var ArrayPropertiesSummary_statusSummary *smithy.Schema
-
-var ArrayPropertiesSummary_statusSummaryLastUpdatedAt *smithy.Schema
-
-var AssignPublicIp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "AssignPublicIp",
-}, smithy.ShapeTypeEnum, 2)
-var AssignPublicIp_ENABLED *smithy.Schema
-
-var AssignPublicIp_DISABLED *smithy.Schema
-
-var AttemptContainerDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "AttemptContainerDetail",
-}, smithy.ShapeTypeStructure, 6)
-var AttemptContainerDetail_containerInstanceArn *smithy.Schema
-
-var AttemptContainerDetail_taskArn *smithy.Schema
-
-var AttemptContainerDetail_exitCode *smithy.Schema
-
-var AttemptContainerDetail_reason *smithy.Schema
-
-var AttemptContainerDetail_logStreamName *smithy.Schema
-
-var AttemptContainerDetail_networkInterfaces *smithy.Schema
-
-var AttemptDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "AttemptDetail",
-}, smithy.ShapeTypeStructure, 5)
-var AttemptDetail_container *smithy.Schema
-
-var AttemptDetail_startedAt *smithy.Schema
-
-var AttemptDetail_stoppedAt *smithy.Schema
-
-var AttemptDetail_statusReason *smithy.Schema
-
-var AttemptDetail_taskProperties *smithy.Schema
-
-var _AttemptDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "AttemptDetails",
-}, smithy.ShapeTypeList, 1)
-var _AttemptDetails_member *smithy.Schema
-
-var AttemptEcsTaskDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "AttemptEcsTaskDetails",
-}, smithy.ShapeTypeStructure, 3)
-var AttemptEcsTaskDetails_containerInstanceArn *smithy.Schema
-
-var AttemptEcsTaskDetails_taskArn *smithy.Schema
-
-var AttemptEcsTaskDetails_containers *smithy.Schema
-
-var AttemptTaskContainerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "AttemptTaskContainerDetails",
-}, smithy.ShapeTypeStructure, 5)
-var AttemptTaskContainerDetails_exitCode *smithy.Schema
-
-var AttemptTaskContainerDetails_name *smithy.Schema
-
-var AttemptTaskContainerDetails_reason *smithy.Schema
-
-var AttemptTaskContainerDetails_logStreamName *smithy.Schema
-
-var AttemptTaskContainerDetails_networkInterfaces *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var CancelJobsErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJobsErrorDetail",
-}, smithy.ShapeTypeStructure, 3)
-var CancelJobsErrorDetail_job *smithy.Schema
-
-var CancelJobsErrorDetail_code *smithy.Schema
-
-var CancelJobsErrorDetail_message *smithy.Schema
-
-var _CancelJobsErrorDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJobsErrorDetailList",
-}, smithy.ShapeTypeList, 1)
-var _CancelJobsErrorDetailList_member *smithy.Schema
-
-var CapacityLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CapacityLimit",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityLimit_maxCapacity *smithy.Schema
-
-var CapacityLimit_capacityUnit *smithy.Schema
-
-var _CapacityLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CapacityLimits",
-}, smithy.ShapeTypeList, 1)
-var _CapacityLimits_member *smithy.Schema
-
-var CapacityReservationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CapacityReservationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CapacityReservationRequest_reservationGroupArn *smithy.Schema
-
-var CapacityReservationRequest_reservationPreference *smithy.Schema
-
-var CEState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CEState",
-}, smithy.ShapeTypeEnum, 2)
-var CEState_ENABLED *smithy.Schema
-
-var CEState_DISABLED *smithy.Schema
-
-var CEStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CEStatus",
-}, smithy.ShapeTypeEnum, 6)
-var CEStatus_CREATING *smithy.Schema
-
-var CEStatus_UPDATING *smithy.Schema
-
-var CEStatus_DELETING *smithy.Schema
-
-var CEStatus_DELETED *smithy.Schema
-
-var CEStatus_VALID *smithy.Schema
-
-var CEStatus_INVALID *smithy.Schema
-
-var CEType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CEType",
-}, smithy.ShapeTypeEnum, 2)
-var CEType_MANAGED *smithy.Schema
-
-var CEType_UNMANAGED *smithy.Schema
-
-var ClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ClientException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ClientException_message *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0)
-
-var ComputeEnvironmentDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ComputeEnvironmentDetail",
-}, smithy.ShapeTypeStructure, 17)
-var ComputeEnvironmentDetail_computeEnvironmentName *smithy.Schema
-
-var ComputeEnvironmentDetail_computeEnvironmentArn *smithy.Schema
-
-var ComputeEnvironmentDetail_unmanagedvCpus *smithy.Schema
-
-var ComputeEnvironmentDetail_ecsClusterArn *smithy.Schema
-
-var ComputeEnvironmentDetail_tags *smithy.Schema
-
-var ComputeEnvironmentDetail_type *smithy.Schema
-
-var ComputeEnvironmentDetail_state *smithy.Schema
-
-var ComputeEnvironmentDetail_status *smithy.Schema
-
-var ComputeEnvironmentDetail_statusReason *smithy.Schema
-
-var ComputeEnvironmentDetail_computeResources *smithy.Schema
-
-var ComputeEnvironmentDetail_serviceRole *smithy.Schema
-
-var ComputeEnvironmentDetail_updatePolicy *smithy.Schema
-
-var ComputeEnvironmentDetail_eksConfiguration *smithy.Schema
-
-var ComputeEnvironmentDetail_containerOrchestrationType *smithy.Schema
-
-var ComputeEnvironmentDetail_uuid *smithy.Schema
-
-var ComputeEnvironmentDetail_context *smithy.Schema
-
-var ComputeEnvironmentDetail_ecsSettings *smithy.Schema
-
-var _ComputeEnvironmentDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ComputeEnvironmentDetailList",
-}, smithy.ShapeTypeList, 1)
-var _ComputeEnvironmentDetailList_member *smithy.Schema
-
-var ComputeEnvironmentOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ComputeEnvironmentOrder",
-}, smithy.ShapeTypeStructure, 2)
-var ComputeEnvironmentOrder_order *smithy.Schema
-
-var ComputeEnvironmentOrder_computeEnvironment *smithy.Schema
-
-var _ComputeEnvironmentOrders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ComputeEnvironmentOrders",
-}, smithy.ShapeTypeList, 1)
-var _ComputeEnvironmentOrders_member *smithy.Schema
-
-var ComputeResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ComputeResource",
-}, smithy.ShapeTypeStructure, 20)
-var ComputeResource_type *smithy.Schema
-
-var ComputeResource_allocationStrategy *smithy.Schema
-
-var ComputeResource_minvCpus *smithy.Schema
-
-var ComputeResource_maxvCpus *smithy.Schema
-
-var ComputeResource_desiredvCpus *smithy.Schema
-
-var ComputeResource_instanceTypes *smithy.Schema
-
-var ComputeResource_imageId *smithy.Schema
-
-var ComputeResource_subnets *smithy.Schema
-
-var ComputeResource_securityGroupIds *smithy.Schema
-
-var ComputeResource_ec2KeyPair *smithy.Schema
-
-var ComputeResource_instanceRole *smithy.Schema
-
-var ComputeResource_tags *smithy.Schema
-
-var ComputeResource_placementGroup *smithy.Schema
-
-var ComputeResource_bidPercentage *smithy.Schema
-
-var ComputeResource_spotIamFleetRole *smithy.Schema
-
-var ComputeResource_launchTemplate *smithy.Schema
-
-var ComputeResource_ec2Configuration *smithy.Schema
-
-var ComputeResource_scalingPolicy *smithy.Schema
-
-var ComputeResource_managedInstancesProvider *smithy.Schema
-
-var ComputeResource_capacityTags *smithy.Schema
-
-var ComputeResourceUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ComputeResourceUpdate",
-}, smithy.ShapeTypeStructure, 20)
-var ComputeResourceUpdate_minvCpus *smithy.Schema
-
-var ComputeResourceUpdate_maxvCpus *smithy.Schema
-
-var ComputeResourceUpdate_desiredvCpus *smithy.Schema
-
-var ComputeResourceUpdate_subnets *smithy.Schema
-
-var ComputeResourceUpdate_securityGroupIds *smithy.Schema
-
-var ComputeResourceUpdate_allocationStrategy *smithy.Schema
-
-var ComputeResourceUpdate_instanceTypes *smithy.Schema
-
-var ComputeResourceUpdate_ec2KeyPair *smithy.Schema
-
-var ComputeResourceUpdate_instanceRole *smithy.Schema
-
-var ComputeResourceUpdate_tags *smithy.Schema
-
-var ComputeResourceUpdate_placementGroup *smithy.Schema
-
-var ComputeResourceUpdate_bidPercentage *smithy.Schema
-
-var ComputeResourceUpdate_launchTemplate *smithy.Schema
-
-var ComputeResourceUpdate_ec2Configuration *smithy.Schema
-
-var ComputeResourceUpdate_updateToLatestImageVersion *smithy.Schema
-
-var ComputeResourceUpdate_type *smithy.Schema
-
-var ComputeResourceUpdate_imageId *smithy.Schema
-
-var ComputeResourceUpdate_scalingPolicy *smithy.Schema
-
-var ComputeResourceUpdate_managedInstancesProvider *smithy.Schema
-
-var ComputeResourceUpdate_capacityTags *smithy.Schema
-
-var ComputeScalingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ComputeScalingPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var ComputeScalingPolicy_minScaleDownDelayMinutes *smithy.Schema
-
-var _ConsumableResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ConsumableResourceList",
-}, smithy.ShapeTypeList, 1)
-var _ConsumableResourceList_member *smithy.Schema
-
-var ConsumableResourceProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ConsumableResourceProperties",
-}, smithy.ShapeTypeStructure, 1)
-var ConsumableResourceProperties_consumableResourceList *smithy.Schema
-
-var ConsumableResourceRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ConsumableResourceRequirement",
-}, smithy.ShapeTypeStructure, 2)
-var ConsumableResourceRequirement_consumableResource *smithy.Schema
-
-var ConsumableResourceRequirement_quantity *smithy.Schema
-
-var ConsumableResourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ConsumableResourceSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConsumableResourceSummary_consumableResourceArn *smithy.Schema
-
-var ConsumableResourceSummary_consumableResourceName *smithy.Schema
-
-var ConsumableResourceSummary_totalQuantity *smithy.Schema
-
-var ConsumableResourceSummary_inUseQuantity *smithy.Schema
-
-var ConsumableResourceSummary_resourceType *smithy.Schema
-
-var _ConsumableResourceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ConsumableResourceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ConsumableResourceSummaryList_member *smithy.Schema
-
-var ContainerDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ContainerDetail",
-}, smithy.ShapeTypeStructure, 30)
-var ContainerDetail_image *smithy.Schema
-
-var ContainerDetail_vcpus *smithy.Schema
-
-var ContainerDetail_memory *smithy.Schema
-
-var ContainerDetail_command *smithy.Schema
-
-var ContainerDetail_jobRoleArn *smithy.Schema
-
-var ContainerDetail_executionRoleArn *smithy.Schema
-
-var ContainerDetail_volumes *smithy.Schema
-
-var ContainerDetail_environment *smithy.Schema
-
-var ContainerDetail_mountPoints *smithy.Schema
-
-var ContainerDetail_readonlyRootFilesystem *smithy.Schema
-
-var ContainerDetail_ulimits *smithy.Schema
-
-var ContainerDetail_privileged *smithy.Schema
-
-var ContainerDetail_user *smithy.Schema
-
-var ContainerDetail_exitCode *smithy.Schema
-
-var ContainerDetail_reason *smithy.Schema
-
-var ContainerDetail_containerInstanceArn *smithy.Schema
-
-var ContainerDetail_taskArn *smithy.Schema
-
-var ContainerDetail_logStreamName *smithy.Schema
-
-var ContainerDetail_instanceType *smithy.Schema
-
-var ContainerDetail_networkInterfaces *smithy.Schema
-
-var ContainerDetail_resourceRequirements *smithy.Schema
-
-var ContainerDetail_linuxParameters *smithy.Schema
-
-var ContainerDetail_logConfiguration *smithy.Schema
-
-var ContainerDetail_secrets *smithy.Schema
-
-var ContainerDetail_networkConfiguration *smithy.Schema
-
-var ContainerDetail_fargatePlatformConfiguration *smithy.Schema
-
-var ContainerDetail_ephemeralStorage *smithy.Schema
-
-var ContainerDetail_runtimePlatform *smithy.Schema
-
-var ContainerDetail_repositoryCredentials *smithy.Schema
-
-var ContainerDetail_enableExecuteCommand *smithy.Schema
-
-var ContainerInsights = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ContainerInsights",
-}, smithy.ShapeTypeEnum, 3)
-var ContainerInsights_ENABLED *smithy.Schema
-
-var ContainerInsights_ENHANCED *smithy.Schema
-
-var ContainerInsights_DISABLED *smithy.Schema
-
-var ContainerOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ContainerOverrides",
-}, smithy.ShapeTypeStructure, 6)
-var ContainerOverrides_vcpus *smithy.Schema
-
-var ContainerOverrides_memory *smithy.Schema
-
-var ContainerOverrides_command *smithy.Schema
-
-var ContainerOverrides_instanceType *smithy.Schema
-
-var ContainerOverrides_environment *smithy.Schema
-
-var ContainerOverrides_resourceRequirements *smithy.Schema
-
-var ContainerProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ContainerProperties",
-}, smithy.ShapeTypeStructure, 24)
-var ContainerProperties_image *smithy.Schema
-
-var ContainerProperties_vcpus *smithy.Schema
-
-var ContainerProperties_memory *smithy.Schema
-
-var ContainerProperties_command *smithy.Schema
-
-var ContainerProperties_jobRoleArn *smithy.Schema
-
-var ContainerProperties_executionRoleArn *smithy.Schema
-
-var ContainerProperties_volumes *smithy.Schema
-
-var ContainerProperties_environment *smithy.Schema
-
-var ContainerProperties_mountPoints *smithy.Schema
-
-var ContainerProperties_readonlyRootFilesystem *smithy.Schema
-
-var ContainerProperties_privileged *smithy.Schema
-
-var ContainerProperties_ulimits *smithy.Schema
-
-var ContainerProperties_user *smithy.Schema
-
-var ContainerProperties_instanceType *smithy.Schema
-
-var ContainerProperties_resourceRequirements *smithy.Schema
-
-var ContainerProperties_linuxParameters *smithy.Schema
-
-var ContainerProperties_logConfiguration *smithy.Schema
-
-var ContainerProperties_secrets *smithy.Schema
-
-var ContainerProperties_networkConfiguration *smithy.Schema
-
-var ContainerProperties_fargatePlatformConfiguration *smithy.Schema
-
-var ContainerProperties_enableExecuteCommand *smithy.Schema
-
-var ContainerProperties_ephemeralStorage *smithy.Schema
-
-var ContainerProperties_runtimePlatform *smithy.Schema
-
-var ContainerProperties_repositoryCredentials *smithy.Schema
-
-var ContainerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ContainerSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ContainerSummary_exitCode *smithy.Schema
-
-var ContainerSummary_reason *smithy.Schema
-
-var CRAllocationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CRAllocationStrategy",
-}, smithy.ShapeTypeEnum, 6)
-var CRAllocationStrategy_BEST_FIT *smithy.Schema
-
-var CRAllocationStrategy_BEST_FIT_PROGRESSIVE *smithy.Schema
-
-var CRAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED *smithy.Schema
-
-var CRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED *smithy.Schema
-
-var CRAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED *smithy.Schema
-
-var CRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED *smithy.Schema
-
-var CRType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CRType",
-}, smithy.ShapeTypeEnum, 5)
-var CRType_EC2 *smithy.Schema
-
-var CRType_SPOT *smithy.Schema
-
-var CRType_FARGATE *smithy.Schema
-
-var CRType_FARGATE_SPOT *smithy.Schema
-
-var CRType_ECS_MANAGED_INSTANCES *smithy.Schema
-
-var CRUpdateAllocationStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CRUpdateAllocationStrategy",
-}, smithy.ShapeTypeEnum, 5)
-var CRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE *smithy.Schema
-
-var CRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED *smithy.Schema
-
-var CRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED *smithy.Schema
-
-var CRUpdateAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED *smithy.Schema
-
-var CRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED *smithy.Schema
-
-var Device = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Device",
-}, smithy.ShapeTypeStructure, 3)
-var Device_hostPath *smithy.Schema
-
-var Device_containerPath *smithy.Schema
-
-var Device_permissions *smithy.Schema
-
-var DeviceCgroupPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeviceCgroupPermission",
-}, smithy.ShapeTypeEnum, 3)
-var DeviceCgroupPermission_READ *smithy.Schema
-
-var DeviceCgroupPermission_WRITE *smithy.Schema
-
-var DeviceCgroupPermission_MKNOD *smithy.Schema
-
-var _DeviceCgroupPermissions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeviceCgroupPermissions",
-}, smithy.ShapeTypeList, 1)
-var _DeviceCgroupPermissions_member *smithy.Schema
-
-var _DevicesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DevicesList",
-}, smithy.ShapeTypeList, 1)
-var _DevicesList_member *smithy.Schema
-
-var _Double = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Double",
-}, smithy.ShapeTypeDouble, 0)
-
-var Ec2Configuration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Ec2Configuration",
-}, smithy.ShapeTypeStructure, 4)
-var Ec2Configuration_imageType *smithy.Schema
-
-var Ec2Configuration_imageIdOverride *smithy.Schema
-
-var Ec2Configuration_batchImageStatus *smithy.Schema
-
-var Ec2Configuration_imageKubernetesVersion *smithy.Schema
-
-var _Ec2ConfigurationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Ec2ConfigurationList",
-}, smithy.ShapeTypeList, 1)
-var _Ec2ConfigurationList_member *smithy.Schema
-
-var EcsProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EcsProperties",
-}, smithy.ShapeTypeStructure, 1)
-var EcsProperties_taskProperties *smithy.Schema
-
-var EcsPropertiesDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EcsPropertiesDetail",
-}, smithy.ShapeTypeStructure, 1)
-var EcsPropertiesDetail_taskProperties *smithy.Schema
-
-var EcsPropertiesOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EcsPropertiesOverride",
-}, smithy.ShapeTypeStructure, 1)
-var EcsPropertiesOverride_taskProperties *smithy.Schema
-
-var EcsSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EcsSettings",
-}, smithy.ShapeTypeStructure, 1)
-var EcsSettings_containerInsights *smithy.Schema
-
-var EcsTaskDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EcsTaskDetails",
-}, smithy.ShapeTypeStructure, 14)
-var EcsTaskDetails_containers *smithy.Schema
-
-var EcsTaskDetails_containerInstanceArn *smithy.Schema
-
-var EcsTaskDetails_taskArn *smithy.Schema
-
-var EcsTaskDetails_ephemeralStorage *smithy.Schema
-
-var EcsTaskDetails_executionRoleArn *smithy.Schema
-
-var EcsTaskDetails_platformVersion *smithy.Schema
-
-var EcsTaskDetails_ipcMode *smithy.Schema
-
-var EcsTaskDetails_taskRoleArn *smithy.Schema
-
-var EcsTaskDetails_pidMode *smithy.Schema
-
-var EcsTaskDetails_networkConfiguration *smithy.Schema
-
-var EcsTaskDetails_runtimePlatform *smithy.Schema
-
-var EcsTaskDetails_volumes *smithy.Schema
-
-var EcsTaskDetails_enableExecuteCommand *smithy.Schema
-
-var EcsTaskDetails_networkMode *smithy.Schema
-
-var EcsTaskProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EcsTaskProperties",
-}, smithy.ShapeTypeStructure, 12)
-var EcsTaskProperties_containers *smithy.Schema
-
-var EcsTaskProperties_ephemeralStorage *smithy.Schema
-
-var EcsTaskProperties_executionRoleArn *smithy.Schema
-
-var EcsTaskProperties_platformVersion *smithy.Schema
-
-var EcsTaskProperties_ipcMode *smithy.Schema
-
-var EcsTaskProperties_taskRoleArn *smithy.Schema
-
-var EcsTaskProperties_pidMode *smithy.Schema
-
-var EcsTaskProperties_networkConfiguration *smithy.Schema
-
-var EcsTaskProperties_runtimePlatform *smithy.Schema
-
-var EcsTaskProperties_volumes *smithy.Schema
-
-var EcsTaskProperties_enableExecuteCommand *smithy.Schema
-
-var EcsTaskProperties_networkMode *smithy.Schema
-
-var EFSAuthorizationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EFSAuthorizationConfig",
-}, smithy.ShapeTypeStructure, 2)
-var EFSAuthorizationConfig_accessPointId *smithy.Schema
-
-var EFSAuthorizationConfig_iam *smithy.Schema
-
-var EFSAuthorizationConfigIAM = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EFSAuthorizationConfigIAM",
-}, smithy.ShapeTypeEnum, 2)
-var EFSAuthorizationConfigIAM_ENABLED *smithy.Schema
-
-var EFSAuthorizationConfigIAM_DISABLED *smithy.Schema
-
-var EFSTransitEncryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EFSTransitEncryption",
-}, smithy.ShapeTypeEnum, 2)
-var EFSTransitEncryption_ENABLED *smithy.Schema
-
-var EFSTransitEncryption_DISABLED *smithy.Schema
-
-var EFSVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EFSVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var EFSVolumeConfiguration_fileSystemId *smithy.Schema
-
-var EFSVolumeConfiguration_rootDirectory *smithy.Schema
-
-var EFSVolumeConfiguration_transitEncryption *smithy.Schema
-
-var EFSVolumeConfiguration_transitEncryptionPort *smithy.Schema
-
-var EFSVolumeConfiguration_authorizationConfig *smithy.Schema
-
-var EksAccessEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAccessEntry",
-}, smithy.ShapeTypeStructure, 2)
-var EksAccessEntry_desiredState *smithy.Schema
-
-var EksAccessEntry_status *smithy.Schema
-
-var EksAccessEntryDesiredState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAccessEntryDesiredState",
-}, smithy.ShapeTypeEnum, 3)
-var EksAccessEntryDesiredState_ENABLED *smithy.Schema
-
-var EksAccessEntryDesiredState_DISABLED *smithy.Schema
-
-var EksAccessEntryDesiredState_INHERIT_FROM_CLUSTER *smithy.Schema
-
-var EksAccessEntryStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAccessEntryStatus",
-}, smithy.ShapeTypeEnum, 2)
-var EksAccessEntryStatus_ACTIVE *smithy.Schema
-
-var EksAccessEntryStatus_INACTIVE *smithy.Schema
-
-var _EksAnnotationsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAnnotationsMap",
-}, smithy.ShapeTypeMap, 2)
-var _EksAnnotationsMap_key *smithy.Schema
-
-var _EksAnnotationsMap_value *smithy.Schema
-
-var EksAttemptContainerDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAttemptContainerDetail",
-}, smithy.ShapeTypeStructure, 4)
-var EksAttemptContainerDetail_name *smithy.Schema
-
-var EksAttemptContainerDetail_containerID *smithy.Schema
-
-var EksAttemptContainerDetail_exitCode *smithy.Schema
-
-var EksAttemptContainerDetail_reason *smithy.Schema
-
-var _EksAttemptContainerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAttemptContainerDetails",
-}, smithy.ShapeTypeList, 1)
-var _EksAttemptContainerDetails_member *smithy.Schema
-
-var EksAttemptDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAttemptDetail",
-}, smithy.ShapeTypeStructure, 9)
-var EksAttemptDetail_containers *smithy.Schema
-
-var EksAttemptDetail_initContainers *smithy.Schema
-
-var EksAttemptDetail_eksClusterArn *smithy.Schema
-
-var EksAttemptDetail_podName *smithy.Schema
-
-var EksAttemptDetail_podNamespace *smithy.Schema
-
-var EksAttemptDetail_nodeName *smithy.Schema
-
-var EksAttemptDetail_startedAt *smithy.Schema
-
-var EksAttemptDetail_stoppedAt *smithy.Schema
-
-var EksAttemptDetail_statusReason *smithy.Schema
-
-var _EksAttemptDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksAttemptDetails",
-}, smithy.ShapeTypeList, 1)
-var _EksAttemptDetails_member *smithy.Schema
-
-var EksConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var EksConfiguration_eksClusterArn *smithy.Schema
-
-var EksConfiguration_kubernetesNamespace *smithy.Schema
-
-var EksConfiguration_accessEntry *smithy.Schema
-
-var EksConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksConfigurationUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var EksConfigurationUpdate_accessEntry *smithy.Schema
-
-var EksContainer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainer",
-}, smithy.ShapeTypeStructure, 9)
-var EksContainer_name *smithy.Schema
-
-var EksContainer_image *smithy.Schema
-
-var EksContainer_imagePullPolicy *smithy.Schema
-
-var EksContainer_command *smithy.Schema
-
-var EksContainer_args *smithy.Schema
-
-var EksContainer_env *smithy.Schema
-
-var EksContainer_resources *smithy.Schema
-
-var EksContainer_volumeMounts *smithy.Schema
-
-var EksContainer_securityContext *smithy.Schema
-
-var EksContainerDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerDetail",
-}, smithy.ShapeTypeStructure, 11)
-var EksContainerDetail_name *smithy.Schema
-
-var EksContainerDetail_image *smithy.Schema
-
-var EksContainerDetail_imagePullPolicy *smithy.Schema
-
-var EksContainerDetail_command *smithy.Schema
-
-var EksContainerDetail_args *smithy.Schema
-
-var EksContainerDetail_env *smithy.Schema
-
-var EksContainerDetail_resources *smithy.Schema
-
-var EksContainerDetail_exitCode *smithy.Schema
-
-var EksContainerDetail_reason *smithy.Schema
-
-var EksContainerDetail_volumeMounts *smithy.Schema
-
-var EksContainerDetail_securityContext *smithy.Schema
-
-var _EksContainerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerDetails",
-}, smithy.ShapeTypeList, 1)
-var _EksContainerDetails_member *smithy.Schema
-
-var EksContainerEnvironmentVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerEnvironmentVariable",
-}, smithy.ShapeTypeStructure, 2)
-var EksContainerEnvironmentVariable_name *smithy.Schema
-
-var EksContainerEnvironmentVariable_value *smithy.Schema
-
-var _EksContainerEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerEnvironmentVariables",
-}, smithy.ShapeTypeList, 1)
-var _EksContainerEnvironmentVariables_member *smithy.Schema
-
-var EksContainerOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerOverride",
-}, smithy.ShapeTypeStructure, 6)
-var EksContainerOverride_name *smithy.Schema
-
-var EksContainerOverride_image *smithy.Schema
-
-var EksContainerOverride_command *smithy.Schema
-
-var EksContainerOverride_args *smithy.Schema
-
-var EksContainerOverride_env *smithy.Schema
-
-var EksContainerOverride_resources *smithy.Schema
-
-var _EksContainerOverrideList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerOverrideList",
-}, smithy.ShapeTypeList, 1)
-var _EksContainerOverrideList_member *smithy.Schema
-
-var EksContainerResourceRequirements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerResourceRequirements",
-}, smithy.ShapeTypeStructure, 2)
-var EksContainerResourceRequirements_limits *smithy.Schema
-
-var EksContainerResourceRequirements_requests *smithy.Schema
-
-var _EksContainers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainers",
-}, smithy.ShapeTypeList, 1)
-var _EksContainers_member *smithy.Schema
-
-var EksContainerSecurityContext = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerSecurityContext",
-}, smithy.ShapeTypeStructure, 6)
-var EksContainerSecurityContext_runAsUser *smithy.Schema
-
-var EksContainerSecurityContext_runAsGroup *smithy.Schema
-
-var EksContainerSecurityContext_privileged *smithy.Schema
-
-var EksContainerSecurityContext_allowPrivilegeEscalation *smithy.Schema
-
-var EksContainerSecurityContext_readOnlyRootFilesystem *smithy.Schema
-
-var EksContainerSecurityContext_runAsNonRoot *smithy.Schema
-
-var EksContainerVolumeMount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerVolumeMount",
-}, smithy.ShapeTypeStructure, 4)
-var EksContainerVolumeMount_name *smithy.Schema
-
-var EksContainerVolumeMount_mountPath *smithy.Schema
-
-var EksContainerVolumeMount_subPath *smithy.Schema
-
-var EksContainerVolumeMount_readOnly *smithy.Schema
-
-var _EksContainerVolumeMounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksContainerVolumeMounts",
-}, smithy.ShapeTypeList, 1)
-var _EksContainerVolumeMounts_member *smithy.Schema
-
-var EksEmptyDir = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksEmptyDir",
-}, smithy.ShapeTypeStructure, 2)
-var EksEmptyDir_medium *smithy.Schema
-
-var EksEmptyDir_sizeLimit *smithy.Schema
-
-var EksHostPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksHostPath",
-}, smithy.ShapeTypeStructure, 1)
-var EksHostPath_path *smithy.Schema
-
-var _EksLabelsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksLabelsMap",
-}, smithy.ShapeTypeMap, 2)
-var _EksLabelsMap_key *smithy.Schema
-
-var _EksLabelsMap_value *smithy.Schema
-
-var _EksLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksLimits",
-}, smithy.ShapeTypeMap, 2)
-var _EksLimits_key *smithy.Schema
-
-var _EksLimits_value *smithy.Schema
-
-var EksMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var EksMetadata_labels *smithy.Schema
-
-var EksMetadata_annotations *smithy.Schema
-
-var EksMetadata_namespace *smithy.Schema
-
-var EksPersistentVolumeClaim = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksPersistentVolumeClaim",
-}, smithy.ShapeTypeStructure, 2)
-var EksPersistentVolumeClaim_claimName *smithy.Schema
-
-var EksPersistentVolumeClaim_readOnly *smithy.Schema
-
-var EksPodProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksPodProperties",
-}, smithy.ShapeTypeStructure, 9)
-var EksPodProperties_serviceAccountName *smithy.Schema
-
-var EksPodProperties_hostNetwork *smithy.Schema
-
-var EksPodProperties_dnsPolicy *smithy.Schema
-
-var EksPodProperties_imagePullSecrets *smithy.Schema
-
-var EksPodProperties_containers *smithy.Schema
-
-var EksPodProperties_initContainers *smithy.Schema
-
-var EksPodProperties_volumes *smithy.Schema
-
-var EksPodProperties_metadata *smithy.Schema
-
-var EksPodProperties_shareProcessNamespace *smithy.Schema
-
-var EksPodPropertiesDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksPodPropertiesDetail",
-}, smithy.ShapeTypeStructure, 11)
-var EksPodPropertiesDetail_serviceAccountName *smithy.Schema
-
-var EksPodPropertiesDetail_hostNetwork *smithy.Schema
-
-var EksPodPropertiesDetail_dnsPolicy *smithy.Schema
-
-var EksPodPropertiesDetail_imagePullSecrets *smithy.Schema
-
-var EksPodPropertiesDetail_containers *smithy.Schema
-
-var EksPodPropertiesDetail_initContainers *smithy.Schema
-
-var EksPodPropertiesDetail_volumes *smithy.Schema
-
-var EksPodPropertiesDetail_podName *smithy.Schema
-
-var EksPodPropertiesDetail_nodeName *smithy.Schema
-
-var EksPodPropertiesDetail_metadata *smithy.Schema
-
-var EksPodPropertiesDetail_shareProcessNamespace *smithy.Schema
-
-var EksPodPropertiesOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksPodPropertiesOverride",
-}, smithy.ShapeTypeStructure, 3)
-var EksPodPropertiesOverride_containers *smithy.Schema
-
-var EksPodPropertiesOverride_initContainers *smithy.Schema
-
-var EksPodPropertiesOverride_metadata *smithy.Schema
-
-var EksProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksProperties",
-}, smithy.ShapeTypeStructure, 1)
-var EksProperties_podProperties *smithy.Schema
-
-var EksPropertiesDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksPropertiesDetail",
-}, smithy.ShapeTypeStructure, 1)
-var EksPropertiesDetail_podProperties *smithy.Schema
-
-var EksPropertiesOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksPropertiesOverride",
-}, smithy.ShapeTypeStructure, 1)
-var EksPropertiesOverride_podProperties *smithy.Schema
-
-var _EksRequests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksRequests",
-}, smithy.ShapeTypeMap, 2)
-var _EksRequests_key *smithy.Schema
-
-var _EksRequests_value *smithy.Schema
-
-var EksSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksSecret",
-}, smithy.ShapeTypeStructure, 2)
-var EksSecret_secretName *smithy.Schema
-
-var EksSecret_optional *smithy.Schema
-
-var EksVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksVolume",
-}, smithy.ShapeTypeStructure, 5)
-var EksVolume_name *smithy.Schema
-
-var EksVolume_hostPath *smithy.Schema
-
-var EksVolume_emptyDir *smithy.Schema
-
-var EksVolume_secret *smithy.Schema
-
-var EksVolume_persistentVolumeClaim *smithy.Schema
-
-var _EksVolumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EksVolumes",
-}, smithy.ShapeTypeList, 1)
-var _EksVolumes_member *smithy.Schema
-
-var _EnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EnvironmentVariables",
-}, smithy.ShapeTypeList, 1)
-var _EnvironmentVariables_member *smithy.Schema
-
-var EphemeralStorage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EphemeralStorage",
-}, smithy.ShapeTypeStructure, 1)
-var EphemeralStorage_sizeInGiB *smithy.Schema
-
-var EvaluateOnExit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EvaluateOnExit",
-}, smithy.ShapeTypeStructure, 4)
-var EvaluateOnExit_onStatusReason *smithy.Schema
-
-var EvaluateOnExit_onReason *smithy.Schema
-
-var EvaluateOnExit_onExitCode *smithy.Schema
-
-var EvaluateOnExit_action *smithy.Schema
-
-var _EvaluateOnExitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "EvaluateOnExitList",
-}, smithy.ShapeTypeList, 1)
-var _EvaluateOnExitList_member *smithy.Schema
-
-var FairshareCapacityUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FairshareCapacityUsage",
-}, smithy.ShapeTypeStructure, 2)
-var FairshareCapacityUsage_capacityUnit *smithy.Schema
-
-var FairshareCapacityUsage_quantity *smithy.Schema
-
-var _FairshareCapacityUsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FairshareCapacityUsageList",
-}, smithy.ShapeTypeList, 1)
-var _FairshareCapacityUsageList_member *smithy.Schema
-
-var FairshareCapacityUtilization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FairshareCapacityUtilization",
-}, smithy.ShapeTypeStructure, 2)
-var FairshareCapacityUtilization_shareIdentifier *smithy.Schema
-
-var FairshareCapacityUtilization_capacityUsage *smithy.Schema
-
-var _FairshareCapacityUtilizationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FairshareCapacityUtilizationList",
-}, smithy.ShapeTypeList, 1)
-var _FairshareCapacityUtilizationList_member *smithy.Schema
-
-var FairsharePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FairsharePolicy",
-}, smithy.ShapeTypeStructure, 3)
-var FairsharePolicy_shareDecaySeconds *smithy.Schema
-
-var FairsharePolicy_computeReservation *smithy.Schema
-
-var FairsharePolicy_shareDistribution *smithy.Schema
-
-var FairshareUtilizationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FairshareUtilizationDetail",
-}, smithy.ShapeTypeStructure, 2)
-var FairshareUtilizationDetail_activeShareCount *smithy.Schema
-
-var FairshareUtilizationDetail_topCapacityUtilization *smithy.Schema
-
-var FargatePlatformConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FargatePlatformConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var FargatePlatformConfiguration_platformVersion *smithy.Schema
-
-var FirelensConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FirelensConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var FirelensConfiguration_type *smithy.Schema
-
-var FirelensConfiguration_options *smithy.Schema
-
-var _FirelensConfigurationOptionsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FirelensConfigurationOptionsMap",
-}, smithy.ShapeTypeMap, 2)
-var _FirelensConfigurationOptionsMap_key *smithy.Schema
-
-var _FirelensConfigurationOptionsMap_value *smithy.Schema
-
-var FirelensConfigurationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FirelensConfigurationType",
-}, smithy.ShapeTypeEnum, 2)
-var FirelensConfigurationType_FLUENTD *smithy.Schema
-
-var FirelensConfigurationType_FLUENTBIT *smithy.Schema
-
-var _Float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Float",
-}, smithy.ShapeTypeFloat, 0)
-
-var FrontOfQueueDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FrontOfQueueDetail",
-}, smithy.ShapeTypeStructure, 2)
-var FrontOfQueueDetail_jobs *smithy.Schema
-
-var FrontOfQueueDetail_lastUpdatedAt *smithy.Schema
-
-var FrontOfQueueJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FrontOfQueueJobSummary",
-}, smithy.ShapeTypeStructure, 2)
-var FrontOfQueueJobSummary_jobArn *smithy.Schema
-
-var FrontOfQueueJobSummary_earliestTimeAtPosition *smithy.Schema
-
-var _FrontOfQueueJobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FrontOfQueueJobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FrontOfQueueJobSummaryList_member *smithy.Schema
-
-var FrontOfQuotaShareJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FrontOfQuotaShareJobSummary",
-}, smithy.ShapeTypeStructure, 2)
-var FrontOfQuotaShareJobSummary_jobArn *smithy.Schema
-
-var FrontOfQuotaShareJobSummary_earliestTimeAtPosition *smithy.Schema
-
-var _FrontOfQuotaShareJobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FrontOfQuotaShareJobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _FrontOfQuotaShareJobSummaryList_member *smithy.Schema
-
-var FrontOfQuotaSharesDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FrontOfQuotaSharesDetail",
-}, smithy.ShapeTypeStructure, 2)
-var FrontOfQuotaSharesDetail_quotaShares *smithy.Schema
-
-var FrontOfQuotaSharesDetail_lastUpdatedAt *smithy.Schema
-
-var _FrontOfQuotaSharesJobSummaryMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "FrontOfQuotaSharesJobSummaryMap",
-}, smithy.ShapeTypeMap, 2)
-var _FrontOfQuotaSharesJobSummaryMap_key *smithy.Schema
-
-var _FrontOfQuotaSharesJobSummaryMap_value *smithy.Schema
-
-var Host = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Host",
-}, smithy.ShapeTypeStructure, 1)
-var Host_sourcePath *smithy.Schema
-
-var _ImageIdOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ImageIdOverride",
-}, smithy.ShapeTypeString, 0)
-
-var ImagePullSecret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ImagePullSecret",
-}, smithy.ShapeTypeStructure, 1)
-var ImagePullSecret_name *smithy.Schema
-
-var _ImagePullSecrets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ImagePullSecrets",
-}, smithy.ShapeTypeList, 1)
-var _ImagePullSecrets_member *smithy.Schema
-
-var _ImageType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ImageType",
-}, smithy.ShapeTypeString, 0)
-
-var InfrastructureOptimization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "InfrastructureOptimization",
-}, smithy.ShapeTypeStructure, 1)
-var InfrastructureOptimization_scaleInAfter *smithy.Schema
-
-var InstanceLaunchTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "InstanceLaunchTemplate",
-}, smithy.ShapeTypeStructure, 10)
-var InstanceLaunchTemplate_ec2InstanceProfileArn *smithy.Schema
-
-var InstanceLaunchTemplate_networkConfiguration *smithy.Schema
-
-var InstanceLaunchTemplate_instanceRequirements *smithy.Schema
-
-var InstanceLaunchTemplate_capacityOptionType *smithy.Schema
-
-var InstanceLaunchTemplate_storageConfiguration *smithy.Schema
-
-var InstanceLaunchTemplate_monitoring *smithy.Schema
-
-var InstanceLaunchTemplate_fipsEnabled *smithy.Schema
-
-var InstanceLaunchTemplate_capacityReservations *smithy.Schema
-
-var InstanceLaunchTemplate_instanceMetadataTagsPropagation *smithy.Schema
-
-var InstanceLaunchTemplate_localStorageConfiguration *smithy.Schema
-
-var InstanceLaunchTemplateUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "InstanceLaunchTemplateUpdate",
-}, smithy.ShapeTypeStructure, 8)
-var InstanceLaunchTemplateUpdate_ec2InstanceProfileArn *smithy.Schema
-
-var InstanceLaunchTemplateUpdate_networkConfiguration *smithy.Schema
-
-var InstanceLaunchTemplateUpdate_instanceRequirements *smithy.Schema
-
-var InstanceLaunchTemplateUpdate_storageConfiguration *smithy.Schema
-
-var InstanceLaunchTemplateUpdate_monitoring *smithy.Schema
-
-var InstanceLaunchTemplateUpdate_capacityReservations *smithy.Schema
-
-var InstanceLaunchTemplateUpdate_instanceMetadataTagsPropagation *smithy.Schema
-
-var InstanceLaunchTemplateUpdate_localStorageConfiguration *smithy.Schema
-
-var InstanceRequirementsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "InstanceRequirementsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InstanceRequirementsRequest_allowedInstanceTypes *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var JobCapacityUsageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobCapacityUsageSummary",
-}, smithy.ShapeTypeStructure, 2)
-var JobCapacityUsageSummary_capacityUnit *smithy.Schema
-
-var JobCapacityUsageSummary_quantity *smithy.Schema
-
-var _JobCapacityUsageSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobCapacityUsageSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _JobCapacityUsageSummaryList_member *smithy.Schema
-
-var JobDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobDefinition",
-}, smithy.ShapeTypeStructure, 18)
-var JobDefinition_jobDefinitionName *smithy.Schema
-
-var JobDefinition_jobDefinitionArn *smithy.Schema
-
-var JobDefinition_revision *smithy.Schema
-
-var JobDefinition_status *smithy.Schema
-
-var JobDefinition_type *smithy.Schema
-
-var JobDefinition_schedulingPriority *smithy.Schema
-
-var JobDefinition_parameters *smithy.Schema
-
-var JobDefinition_retryStrategy *smithy.Schema
-
-var JobDefinition_containerProperties *smithy.Schema
-
-var JobDefinition_timeout *smithy.Schema
-
-var JobDefinition_nodeProperties *smithy.Schema
-
-var JobDefinition_tags *smithy.Schema
-
-var JobDefinition_propagateTags *smithy.Schema
-
-var JobDefinition_platformCapabilities *smithy.Schema
-
-var JobDefinition_ecsProperties *smithy.Schema
-
-var JobDefinition_eksProperties *smithy.Schema
-
-var JobDefinition_containerOrchestrationType *smithy.Schema
-
-var JobDefinition_consumableResourceProperties *smithy.Schema
-
-var _JobDefinitionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobDefinitionList",
-}, smithy.ShapeTypeList, 1)
-var _JobDefinitionList_member *smithy.Schema
-
-var JobDefinitionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobDefinitionType",
-}, smithy.ShapeTypeEnum, 2)
-var JobDefinitionType_Container *smithy.Schema
-
-var JobDefinitionType_Multinode *smithy.Schema
-
-var JobDependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobDependency",
-}, smithy.ShapeTypeStructure, 2)
-var JobDependency_jobId *smithy.Schema
-
-var JobDependency_type *smithy.Schema
-
-var _JobDependencyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobDependencyList",
-}, smithy.ShapeTypeList, 1)
-var _JobDependencyList_member *smithy.Schema
-
-var JobDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobDetail",
-}, smithy.ShapeTypeStructure, 30)
-var JobDetail_jobArn *smithy.Schema
-
-var JobDetail_jobName *smithy.Schema
-
-var JobDetail_jobId *smithy.Schema
-
-var JobDetail_jobQueue *smithy.Schema
-
-var JobDetail_status *smithy.Schema
-
-var JobDetail_shareIdentifier *smithy.Schema
-
-var JobDetail_schedulingPriority *smithy.Schema
-
-var JobDetail_attempts *smithy.Schema
-
-var JobDetail_statusReason *smithy.Schema
-
-var JobDetail_createdAt *smithy.Schema
-
-var JobDetail_retryStrategy *smithy.Schema
-
-var JobDetail_startedAt *smithy.Schema
-
-var JobDetail_stoppedAt *smithy.Schema
-
-var JobDetail_dependsOn *smithy.Schema
-
-var JobDetail_jobDefinition *smithy.Schema
-
-var JobDetail_parameters *smithy.Schema
-
-var JobDetail_container *smithy.Schema
-
-var JobDetail_nodeDetails *smithy.Schema
-
-var JobDetail_nodeProperties *smithy.Schema
-
-var JobDetail_arrayProperties *smithy.Schema
-
-var JobDetail_timeout *smithy.Schema
-
-var JobDetail_tags *smithy.Schema
-
-var JobDetail_propagateTags *smithy.Schema
-
-var JobDetail_platformCapabilities *smithy.Schema
-
-var JobDetail_eksProperties *smithy.Schema
-
-var JobDetail_eksAttempts *smithy.Schema
-
-var JobDetail_ecsProperties *smithy.Schema
-
-var JobDetail_isCancelled *smithy.Schema
-
-var JobDetail_isTerminated *smithy.Schema
-
-var JobDetail_consumableResourceProperties *smithy.Schema
-
-var _JobDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobDetailList",
-}, smithy.ShapeTypeList, 1)
-var _JobDetailList_member *smithy.Schema
-
-var _JobExecutionTimeoutMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobExecutionTimeoutMinutes",
-}, smithy.ShapeTypeLong, 0)
-
-var JobQueueDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobQueueDetail",
-}, smithy.ShapeTypeStructure, 12)
-var JobQueueDetail_jobQueueName *smithy.Schema
-
-var JobQueueDetail_jobQueueArn *smithy.Schema
-
-var JobQueueDetail_state *smithy.Schema
-
-var JobQueueDetail_schedulingPolicyArn *smithy.Schema
-
-var JobQueueDetail_status *smithy.Schema
-
-var JobQueueDetail_statusReason *smithy.Schema
-
-var JobQueueDetail_priority *smithy.Schema
-
-var JobQueueDetail_computeEnvironmentOrder *smithy.Schema
-
-var JobQueueDetail_serviceEnvironmentOrder *smithy.Schema
-
-var JobQueueDetail_jobQueueType *smithy.Schema
-
-var JobQueueDetail_tags *smithy.Schema
-
-var JobQueueDetail_jobStateTimeLimitActions *smithy.Schema
-
-var _JobQueueDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobQueueDetailList",
-}, smithy.ShapeTypeList, 1)
-var _JobQueueDetailList_member *smithy.Schema
-
-var JobQueueType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobQueueType",
-}, smithy.ShapeTypeEnum, 5)
-var JobQueueType_EKS *smithy.Schema
-
-var JobQueueType_ECS *smithy.Schema
-
-var JobQueueType_ECS_FARGATE *smithy.Schema
-
-var JobQueueType_SAGEMAKER_TRAINING *smithy.Schema
-
-var JobQueueType_ECS_MANAGED_INSTANCES *smithy.Schema
-
-var JobStateTimeLimitAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobStateTimeLimitAction",
-}, smithy.ShapeTypeStructure, 4)
-var JobStateTimeLimitAction_reason *smithy.Schema
-
-var JobStateTimeLimitAction_state *smithy.Schema
-
-var JobStateTimeLimitAction_maxTimeSeconds *smithy.Schema
-
-var JobStateTimeLimitAction_action *smithy.Schema
-
-var _JobStateTimeLimitActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobStateTimeLimitActions",
-}, smithy.ShapeTypeList, 1)
-var _JobStateTimeLimitActions_member *smithy.Schema
-
-var JobStateTimeLimitActionsAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobStateTimeLimitActionsAction",
-}, smithy.ShapeTypeEnum, 2)
-var JobStateTimeLimitActionsAction_CANCEL *smithy.Schema
-
-var JobStateTimeLimitActionsAction_TERMINATE *smithy.Schema
-
-var JobStateTimeLimitActionsState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobStateTimeLimitActionsState",
-}, smithy.ShapeTypeEnum, 1)
-var JobStateTimeLimitActionsState_RUNNABLE *smithy.Schema
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 7)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_PENDING *smithy.Schema
-
-var JobStatus_RUNNABLE *smithy.Schema
-
-var JobStatus_STARTING *smithy.Schema
-
-var JobStatus_RUNNING *smithy.Schema
-
-var JobStatus_SUCCEEDED *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobSummary",
-}, smithy.ShapeTypeStructure, 17)
-var JobSummary_jobArn *smithy.Schema
-
-var JobSummary_jobId *smithy.Schema
-
-var JobSummary_jobName *smithy.Schema
-
-var JobSummary_capacityUsage *smithy.Schema
-
-var JobSummary_createdAt *smithy.Schema
-
-var JobSummary_scheduledAt *smithy.Schema
-
-var JobSummary_shareIdentifier *smithy.Schema
-
-var JobSummary_status *smithy.Schema
-
-var JobSummary_statusReason *smithy.Schema
-
-var JobSummary_startedAt *smithy.Schema
-
-var JobSummary_stoppedAt *smithy.Schema
-
-var JobSummary_container *smithy.Schema
-
-var JobSummary_arrayProperties *smithy.Schema
-
-var JobSummary_nodeProperties *smithy.Schema
-
-var JobSummary_jobDefinition *smithy.Schema
-
-var JobSummary_isCancelled *smithy.Schema
-
-var JobSummary_isTerminated *smithy.Schema
-
-var _JobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _JobSummaryList_member *smithy.Schema
-
-var JobTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JobTimeout",
-}, smithy.ShapeTypeStructure, 1)
-var JobTimeout_attemptDurationSeconds *smithy.Schema
-
-var JQState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JQState",
-}, smithy.ShapeTypeEnum, 2)
-var JQState_ENABLED *smithy.Schema
-
-var JQState_DISABLED *smithy.Schema
-
-var JQStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "JQStatus",
-}, smithy.ShapeTypeEnum, 6)
-var JQStatus_CREATING *smithy.Schema
-
-var JQStatus_UPDATING *smithy.Schema
-
-var JQStatus_DELETING *smithy.Schema
-
-var JQStatus_DELETED *smithy.Schema
-
-var JQStatus_VALID *smithy.Schema
-
-var JQStatus_INVALID *smithy.Schema
-
-var KeyValuePair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "KeyValuePair",
-}, smithy.ShapeTypeStructure, 2)
-var KeyValuePair_name *smithy.Schema
-
-var KeyValuePair_value *smithy.Schema
-
-var KeyValuesPair = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "KeyValuesPair",
-}, smithy.ShapeTypeStructure, 2)
-var KeyValuesPair_name *smithy.Schema
-
-var KeyValuesPair_values *smithy.Schema
-
-var _KubernetesVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "KubernetesVersion",
-}, smithy.ShapeTypeString, 0)
-
-var LatestServiceJobAttempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LatestServiceJobAttempt",
-}, smithy.ShapeTypeStructure, 1)
-var LatestServiceJobAttempt_serviceResourceId *smithy.Schema
-
-var LaunchTemplateSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LaunchTemplateSpecification",
-}, smithy.ShapeTypeStructure, 5)
-var LaunchTemplateSpecification_launchTemplateId *smithy.Schema
-
-var LaunchTemplateSpecification_launchTemplateName *smithy.Schema
-
-var LaunchTemplateSpecification_version *smithy.Schema
-
-var LaunchTemplateSpecification_overrides *smithy.Schema
-
-var LaunchTemplateSpecification_userdataType *smithy.Schema
-
-var LaunchTemplateSpecificationOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LaunchTemplateSpecificationOverride",
-}, smithy.ShapeTypeStructure, 5)
-var LaunchTemplateSpecificationOverride_launchTemplateId *smithy.Schema
-
-var LaunchTemplateSpecificationOverride_launchTemplateName *smithy.Schema
-
-var LaunchTemplateSpecificationOverride_version *smithy.Schema
-
-var LaunchTemplateSpecificationOverride_targetInstanceTypes *smithy.Schema
-
-var LaunchTemplateSpecificationOverride_userdataType *smithy.Schema
-
-var _LaunchTemplateSpecificationOverrideList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LaunchTemplateSpecificationOverrideList",
-}, smithy.ShapeTypeList, 1)
-var _LaunchTemplateSpecificationOverrideList_member *smithy.Schema
-
-var LinuxParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LinuxParameters",
-}, smithy.ShapeTypeStructure, 6)
-var LinuxParameters_devices *smithy.Schema
-
-var LinuxParameters_initProcessEnabled *smithy.Schema
-
-var LinuxParameters_sharedMemorySize *smithy.Schema
-
-var LinuxParameters_tmpfs *smithy.Schema
-
-var LinuxParameters_maxSwap *smithy.Schema
-
-var LinuxParameters_swappiness *smithy.Schema
-
-var _ListAttemptEcsTaskDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListAttemptEcsTaskDetails",
-}, smithy.ShapeTypeList, 1)
-var _ListAttemptEcsTaskDetails_member *smithy.Schema
-
-var _ListAttemptTaskContainerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListAttemptTaskContainerDetails",
-}, smithy.ShapeTypeList, 1)
-var _ListAttemptTaskContainerDetails_member *smithy.Schema
-
-var _ListConsumableResourcesFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListConsumableResourcesFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ListConsumableResourcesFilterList_member *smithy.Schema
-
-var _ListEcsTaskDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListEcsTaskDetails",
-}, smithy.ShapeTypeList, 1)
-var _ListEcsTaskDetails_member *smithy.Schema
-
-var _ListEcsTaskProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListEcsTaskProperties",
-}, smithy.ShapeTypeList, 1)
-var _ListEcsTaskProperties_member *smithy.Schema
-
-var _ListJobsByConsumableResourceFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsByConsumableResourceFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ListJobsByConsumableResourceFilterList_member *smithy.Schema
-
-var ListJobsByConsumableResourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsByConsumableResourceSummary",
-}, smithy.ShapeTypeStructure, 11)
-var ListJobsByConsumableResourceSummary_jobArn *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_jobQueueArn *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_jobName *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_jobDefinitionArn *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_shareIdentifier *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_jobStatus *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_quantity *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_statusReason *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_startedAt *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_createdAt *smithy.Schema
-
-var ListJobsByConsumableResourceSummary_consumableResourceProperties *smithy.Schema
-
-var _ListJobsByConsumableResourceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsByConsumableResourceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ListJobsByConsumableResourceSummaryList_member *smithy.Schema
-
-var _ListJobsFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ListJobsFilterList_member *smithy.Schema
-
-var _ListTaskContainerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListTaskContainerDetails",
-}, smithy.ShapeTypeList, 1)
-var _ListTaskContainerDetails_member *smithy.Schema
-
-var _ListTaskContainerOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListTaskContainerOverrides",
-}, smithy.ShapeTypeList, 1)
-var _ListTaskContainerOverrides_member *smithy.Schema
-
-var _ListTaskContainerProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListTaskContainerProperties",
-}, smithy.ShapeTypeList, 1)
-var _ListTaskContainerProperties_member *smithy.Schema
-
-var _ListTaskPropertiesOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListTaskPropertiesOverride",
-}, smithy.ShapeTypeList, 1)
-var _ListTaskPropertiesOverride_member *smithy.Schema
-
-var LogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LogConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var LogConfiguration_logDriver *smithy.Schema
-
-var LogConfiguration_options *smithy.Schema
-
-var LogConfiguration_secretOptions *smithy.Schema
-
-var _LogConfigurationOptionsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LogConfigurationOptionsMap",
-}, smithy.ShapeTypeMap, 2)
-var _LogConfigurationOptionsMap_key *smithy.Schema
-
-var _LogConfigurationOptionsMap_value *smithy.Schema
-
-var LogDriver = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "LogDriver",
-}, smithy.ShapeTypeEnum, 8)
-var LogDriver_JSON_FILE *smithy.Schema
-
-var LogDriver_SYSLOG *smithy.Schema
-
-var LogDriver_JOURNALD *smithy.Schema
-
-var LogDriver_GELF *smithy.Schema
-
-var LogDriver_FLUENTD *smithy.Schema
-
-var LogDriver_AWSLOGS *smithy.Schema
-
-var LogDriver_SPLUNK *smithy.Schema
-
-var LogDriver_AWSFIRELENS *smithy.Schema
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var ManagedInstancesLocalStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ManagedInstancesLocalStorageConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedInstancesLocalStorageConfiguration_useLocalStorage *smithy.Schema
-
-var ManagedInstancesNetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ManagedInstancesNetworkConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ManagedInstancesNetworkConfiguration_subnets *smithy.Schema
-
-var ManagedInstancesNetworkConfiguration_securityGroups *smithy.Schema
-
-var ManagedInstancesProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ManagedInstancesProvider",
-}, smithy.ShapeTypeStructure, 4)
-var ManagedInstancesProvider_propagateTags *smithy.Schema
-
-var ManagedInstancesProvider_infrastructureRoleArn *smithy.Schema
-
-var ManagedInstancesProvider_instanceLaunchTemplate *smithy.Schema
-
-var ManagedInstancesProvider_infrastructureOptimization *smithy.Schema
-
-var ManagedInstancesStorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ManagedInstancesStorageConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ManagedInstancesStorageConfiguration_storageSizeGiB *smithy.Schema
-
-var MountPoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "MountPoint",
-}, smithy.ShapeTypeStructure, 3)
-var MountPoint_containerPath *smithy.Schema
-
-var MountPoint_readOnly *smithy.Schema
-
-var MountPoint_sourceVolume *smithy.Schema
-
-var _MountPoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "MountPoints",
-}, smithy.ShapeTypeList, 1)
-var _MountPoints_member *smithy.Schema
-
-var NetworkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NetworkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var NetworkConfiguration_assignPublicIp *smithy.Schema
-
-var NetworkInterface = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NetworkInterface",
-}, smithy.ShapeTypeStructure, 3)
-var NetworkInterface_attachmentId *smithy.Schema
-
-var NetworkInterface_ipv6Address *smithy.Schema
-
-var NetworkInterface_privateIpv4Address *smithy.Schema
-
-var _NetworkInterfaceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NetworkInterfaceList",
-}, smithy.ShapeTypeList, 1)
-var _NetworkInterfaceList_member *smithy.Schema
-
-var NodeDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodeDetails",
-}, smithy.ShapeTypeStructure, 2)
-var NodeDetails_nodeIndex *smithy.Schema
-
-var NodeDetails_isMainNode *smithy.Schema
-
-var NodeOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodeOverrides",
-}, smithy.ShapeTypeStructure, 2)
-var NodeOverrides_numNodes *smithy.Schema
-
-var NodeOverrides_nodePropertyOverrides *smithy.Schema
-
-var NodeProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodeProperties",
-}, smithy.ShapeTypeStructure, 3)
-var NodeProperties_numNodes *smithy.Schema
-
-var NodeProperties_mainNode *smithy.Schema
-
-var NodeProperties_nodeRangeProperties *smithy.Schema
-
-var NodePropertiesSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodePropertiesSummary",
-}, smithy.ShapeTypeStructure, 3)
-var NodePropertiesSummary_isMainNode *smithy.Schema
-
-var NodePropertiesSummary_numNodes *smithy.Schema
-
-var NodePropertiesSummary_nodeIndex *smithy.Schema
-
-var NodePropertyOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodePropertyOverride",
-}, smithy.ShapeTypeStructure, 6)
-var NodePropertyOverride_targetNodes *smithy.Schema
-
-var NodePropertyOverride_containerOverrides *smithy.Schema
-
-var NodePropertyOverride_ecsPropertiesOverride *smithy.Schema
-
-var NodePropertyOverride_instanceTypes *smithy.Schema
-
-var NodePropertyOverride_eksPropertiesOverride *smithy.Schema
-
-var NodePropertyOverride_consumableResourcePropertiesOverride *smithy.Schema
-
-var _NodePropertyOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodePropertyOverrides",
-}, smithy.ShapeTypeList, 1)
-var _NodePropertyOverrides_member *smithy.Schema
-
-var _NodeRangeProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodeRangeProperties",
-}, smithy.ShapeTypeList, 1)
-var _NodeRangeProperties_member *smithy.Schema
-
-var NodeRangeProperty = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "NodeRangeProperty",
-}, smithy.ShapeTypeStructure, 6)
-var NodeRangeProperty_targetNodes *smithy.Schema
-
-var NodeRangeProperty_container *smithy.Schema
-
-var NodeRangeProperty_instanceTypes *smithy.Schema
-
-var NodeRangeProperty_ecsProperties *smithy.Schema
-
-var NodeRangeProperty_eksProperties *smithy.Schema
-
-var NodeRangeProperty_consumableResourceProperties *smithy.Schema
-
-var OrchestrationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "OrchestrationType",
-}, smithy.ShapeTypeEnum, 2)
-var OrchestrationType_ECS *smithy.Schema
-
-var OrchestrationType_EKS *smithy.Schema
-
-var _ParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _ParametersMap_key *smithy.Schema
-
-var _ParametersMap_value *smithy.Schema
-
-var PlatformCapability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "PlatformCapability",
-}, smithy.ShapeTypeEnum, 3)
-var PlatformCapability_EC2 *smithy.Schema
-
-var PlatformCapability_FARGATE *smithy.Schema
-
-var PlatformCapability_MANAGED_INSTANCES *smithy.Schema
-
-var _PlatformCapabilityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "PlatformCapabilityList",
-}, smithy.ShapeTypeList, 1)
-var _PlatformCapabilityList_member *smithy.Schema
-
-var _Quantity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Quantity",
-}, smithy.ShapeTypeString, 0)
-
-var QueueSnapshotCapacityUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QueueSnapshotCapacityUsage",
-}, smithy.ShapeTypeStructure, 2)
-var QueueSnapshotCapacityUsage_capacityUnit *smithy.Schema
-
-var QueueSnapshotCapacityUsage_quantity *smithy.Schema
-
-var _QueueSnapshotCapacityUsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QueueSnapshotCapacityUsageList",
-}, smithy.ShapeTypeList, 1)
-var _QueueSnapshotCapacityUsageList_member *smithy.Schema
-
-var QueueSnapshotUtilizationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QueueSnapshotUtilizationDetail",
-}, smithy.ShapeTypeStructure, 4)
-var QueueSnapshotUtilizationDetail_totalCapacityUsage *smithy.Schema
-
-var QueueSnapshotUtilizationDetail_fairshareUtilization *smithy.Schema
-
-var QueueSnapshotUtilizationDetail_quotaShareUtilization *smithy.Schema
-
-var QueueSnapshotUtilizationDetail_lastUpdatedAt *smithy.Schema
-
-var QuotaShareCapacityLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareCapacityLimit",
-}, smithy.ShapeTypeStructure, 2)
-var QuotaShareCapacityLimit_maxCapacity *smithy.Schema
-
-var QuotaShareCapacityLimit_capacityUnit *smithy.Schema
-
-var _QuotaShareCapacityLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareCapacityLimits",
-}, smithy.ShapeTypeList, 1)
-var _QuotaShareCapacityLimits_member *smithy.Schema
-
-var QuotaShareCapacityUsage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareCapacityUsage",
-}, smithy.ShapeTypeStructure, 2)
-var QuotaShareCapacityUsage_capacityUnit *smithy.Schema
-
-var QuotaShareCapacityUsage_quantity *smithy.Schema
-
-var _QuotaShareCapacityUsageList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareCapacityUsageList",
-}, smithy.ShapeTypeList, 1)
-var _QuotaShareCapacityUsageList_member *smithy.Schema
-
-var QuotaShareCapacityUtilization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareCapacityUtilization",
-}, smithy.ShapeTypeStructure, 2)
-var QuotaShareCapacityUtilization_quotaShareName *smithy.Schema
-
-var QuotaShareCapacityUtilization_capacityUsage *smithy.Schema
-
-var _QuotaShareCapacityUtilizationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareCapacityUtilizationList",
-}, smithy.ShapeTypeList, 1)
-var _QuotaShareCapacityUtilizationList_member *smithy.Schema
-
-var QuotaShareDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareDetail",
-}, smithy.ShapeTypeStructure, 8)
-var QuotaShareDetail_quotaShareName *smithy.Schema
-
-var QuotaShareDetail_quotaShareArn *smithy.Schema
-
-var QuotaShareDetail_jobQueueArn *smithy.Schema
-
-var QuotaShareDetail_capacityLimits *smithy.Schema
-
-var QuotaShareDetail_resourceSharingConfiguration *smithy.Schema
-
-var QuotaShareDetail_preemptionConfiguration *smithy.Schema
-
-var QuotaShareDetail_state *smithy.Schema
-
-var QuotaShareDetail_status *smithy.Schema
-
-var QuotaShareIdleResourceAssignmentStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareIdleResourceAssignmentStrategy",
-}, smithy.ShapeTypeEnum, 1)
-var QuotaShareIdleResourceAssignmentStrategy_FIFO *smithy.Schema
-
-var QuotaShareInSharePreemptionState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareInSharePreemptionState",
-}, smithy.ShapeTypeEnum, 2)
-var QuotaShareInSharePreemptionState_ENABLED *smithy.Schema
-
-var QuotaShareInSharePreemptionState_DISABLED *smithy.Schema
-
-var _QuotaShareList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareList",
-}, smithy.ShapeTypeList, 1)
-var _QuotaShareList_member *smithy.Schema
-
-var QuotaSharePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaSharePolicy",
-}, smithy.ShapeTypeStructure, 1)
-var QuotaSharePolicy_idleResourceAssignmentStrategy *smithy.Schema
-
-var QuotaSharePreemptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaSharePreemptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var QuotaSharePreemptionConfiguration_inSharePreemption *smithy.Schema
-
-var QuotaShareResourceSharingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareResourceSharingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var QuotaShareResourceSharingConfiguration_strategy *smithy.Schema
-
-var QuotaShareResourceSharingConfiguration_borrowLimit *smithy.Schema
-
-var QuotaShareResourceSharingStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareResourceSharingStrategy",
-}, smithy.ShapeTypeEnum, 3)
-var QuotaShareResourceSharingStrategy_RESERVE *smithy.Schema
-
-var QuotaShareResourceSharingStrategy_LEND *smithy.Schema
-
-var QuotaShareResourceSharingStrategy_LEND_AND_BORROW *smithy.Schema
-
-var QuotaShareState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareState",
-}, smithy.ShapeTypeEnum, 2)
-var QuotaShareState_ENABLED *smithy.Schema
-
-var QuotaShareState_DISABLED *smithy.Schema
-
-var QuotaShareStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareStatus",
-}, smithy.ShapeTypeEnum, 5)
-var QuotaShareStatus_CREATING *smithy.Schema
-
-var QuotaShareStatus_VALID *smithy.Schema
-
-var QuotaShareStatus_INVALID *smithy.Schema
-
-var QuotaShareStatus_UPDATING *smithy.Schema
-
-var QuotaShareStatus_DELETING *smithy.Schema
-
-var QuotaShareUtilizationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "QuotaShareUtilizationDetail",
-}, smithy.ShapeTypeStructure, 1)
-var QuotaShareUtilizationDetail_topCapacityUtilization *smithy.Schema
-
-var RepositoryCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "RepositoryCredentials",
-}, smithy.ShapeTypeStructure, 1)
-var RepositoryCredentials_credentialsParameter *smithy.Schema
-
-var ResourceRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ResourceRequirement",
-}, smithy.ShapeTypeStructure, 2)
-var ResourceRequirement_value *smithy.Schema
-
-var ResourceRequirement_type *smithy.Schema
-
-var _ResourceRequirements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ResourceRequirements",
-}, smithy.ShapeTypeList, 1)
-var _ResourceRequirements_member *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 3)
-var ResourceType_GPU *smithy.Schema
-
-var ResourceType_VCPU *smithy.Schema
-
-var ResourceType_MEMORY *smithy.Schema
-
-var RetryAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "RetryAction",
-}, smithy.ShapeTypeEnum, 2)
-var RetryAction_RETRY *smithy.Schema
-
-var RetryAction_EXIT *smithy.Schema
-
-var RetryStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "RetryStrategy",
-}, smithy.ShapeTypeStructure, 2)
-var RetryStrategy_attempts *smithy.Schema
-
-var RetryStrategy_evaluateOnExit *smithy.Schema
-
-var RuntimePlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "RuntimePlatform",
-}, smithy.ShapeTypeStructure, 2)
-var RuntimePlatform_operatingSystemFamily *smithy.Schema
-
-var RuntimePlatform_cpuArchitecture *smithy.Schema
-
-var S3FilesVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "S3FilesVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var S3FilesVolumeConfiguration_fileSystemArn *smithy.Schema
-
-var S3FilesVolumeConfiguration_rootDirectory *smithy.Schema
-
-var S3FilesVolumeConfiguration_transitEncryptionPort *smithy.Schema
-
-var S3FilesVolumeConfiguration_accessPointArn *smithy.Schema
-
-var SchedulingPolicyDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SchedulingPolicyDetail",
-}, smithy.ShapeTypeStructure, 5)
-var SchedulingPolicyDetail_name *smithy.Schema
-
-var SchedulingPolicyDetail_arn *smithy.Schema
-
-var SchedulingPolicyDetail_quotaSharePolicy *smithy.Schema
-
-var SchedulingPolicyDetail_fairsharePolicy *smithy.Schema
-
-var SchedulingPolicyDetail_tags *smithy.Schema
-
-var _SchedulingPolicyDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SchedulingPolicyDetailList",
-}, smithy.ShapeTypeList, 1)
-var _SchedulingPolicyDetailList_member *smithy.Schema
-
-var SchedulingPolicyListingDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SchedulingPolicyListingDetail",
-}, smithy.ShapeTypeStructure, 1)
-var SchedulingPolicyListingDetail_arn *smithy.Schema
-
-var _SchedulingPolicyListingDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SchedulingPolicyListingDetailList",
-}, smithy.ShapeTypeList, 1)
-var _SchedulingPolicyListingDetailList_member *smithy.Schema
-
-var Secret = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Secret",
-}, smithy.ShapeTypeStructure, 2)
-var Secret_name *smithy.Schema
-
-var Secret_valueFrom *smithy.Schema
-
-var _SecretList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SecretList",
-}, smithy.ShapeTypeList, 1)
-var _SecretList_member *smithy.Schema
-
-var ServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServerException_message *smithy.Schema
-
-var ServiceEnvironmentDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceEnvironmentDetail",
-}, smithy.ShapeTypeStructure, 7)
-var ServiceEnvironmentDetail_serviceEnvironmentName *smithy.Schema
-
-var ServiceEnvironmentDetail_serviceEnvironmentArn *smithy.Schema
-
-var ServiceEnvironmentDetail_serviceEnvironmentType *smithy.Schema
-
-var ServiceEnvironmentDetail_state *smithy.Schema
-
-var ServiceEnvironmentDetail_status *smithy.Schema
-
-var ServiceEnvironmentDetail_capacityLimits *smithy.Schema
-
-var ServiceEnvironmentDetail_tags *smithy.Schema
-
-var _ServiceEnvironmentDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceEnvironmentDetailList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceEnvironmentDetailList_member *smithy.Schema
-
-var ServiceEnvironmentOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceEnvironmentOrder",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceEnvironmentOrder_order *smithy.Schema
-
-var ServiceEnvironmentOrder_serviceEnvironment *smithy.Schema
-
-var _ServiceEnvironmentOrders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceEnvironmentOrders",
-}, smithy.ShapeTypeList, 1)
-var _ServiceEnvironmentOrders_member *smithy.Schema
-
-var ServiceEnvironmentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceEnvironmentState",
-}, smithy.ShapeTypeEnum, 2)
-var ServiceEnvironmentState_ENABLED *smithy.Schema
-
-var ServiceEnvironmentState_DISABLED *smithy.Schema
-
-var ServiceEnvironmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceEnvironmentStatus",
-}, smithy.ShapeTypeEnum, 6)
-var ServiceEnvironmentStatus_CREATING *smithy.Schema
-
-var ServiceEnvironmentStatus_UPDATING *smithy.Schema
-
-var ServiceEnvironmentStatus_DELETING *smithy.Schema
-
-var ServiceEnvironmentStatus_DELETED *smithy.Schema
-
-var ServiceEnvironmentStatus_VALID *smithy.Schema
-
-var ServiceEnvironmentStatus_INVALID *smithy.Schema
-
-var ServiceEnvironmentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceEnvironmentType",
-}, smithy.ShapeTypeEnum, 1)
-var ServiceEnvironmentType_SAGEMAKER_TRAINING *smithy.Schema
-
-var ServiceJobAttemptDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobAttemptDetail",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceJobAttemptDetail_serviceResourceId *smithy.Schema
-
-var ServiceJobAttemptDetail_startedAt *smithy.Schema
-
-var ServiceJobAttemptDetail_stoppedAt *smithy.Schema
-
-var ServiceJobAttemptDetail_statusReason *smithy.Schema
-
-var _ServiceJobAttemptDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobAttemptDetails",
-}, smithy.ShapeTypeList, 1)
-var _ServiceJobAttemptDetails_member *smithy.Schema
-
-var ServiceJobCapacityUsageDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobCapacityUsageDetail",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceJobCapacityUsageDetail_capacityUnit *smithy.Schema
-
-var ServiceJobCapacityUsageDetail_quantity *smithy.Schema
-
-var _ServiceJobCapacityUsageDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobCapacityUsageDetailList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceJobCapacityUsageDetailList_member *smithy.Schema
-
-var ServiceJobCapacityUsageSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobCapacityUsageSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceJobCapacityUsageSummary_capacityUnit *smithy.Schema
-
-var ServiceJobCapacityUsageSummary_quantity *smithy.Schema
-
-var _ServiceJobCapacityUsageSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobCapacityUsageSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceJobCapacityUsageSummaryList_member *smithy.Schema
-
-var ServiceJobEvaluateOnExit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobEvaluateOnExit",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceJobEvaluateOnExit_action *smithy.Schema
-
-var ServiceJobEvaluateOnExit_onStatusReason *smithy.Schema
-
-var _ServiceJobEvaluateOnExitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobEvaluateOnExitList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceJobEvaluateOnExitList_member *smithy.Schema
-
-var ServiceJobPreemptedAttempt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobPreemptedAttempt",
-}, smithy.ShapeTypeStructure, 4)
-var ServiceJobPreemptedAttempt_serviceResourceId *smithy.Schema
-
-var ServiceJobPreemptedAttempt_startedAt *smithy.Schema
-
-var ServiceJobPreemptedAttempt_stoppedAt *smithy.Schema
-
-var ServiceJobPreemptedAttempt_statusReason *smithy.Schema
-
-var ServiceJobPreemptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobPreemptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceJobPreemptionConfiguration_preemptionRetriesBeforeTermination *smithy.Schema
-
-var ServiceJobPreemptionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobPreemptionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceJobPreemptionSummary_preemptedAttemptCount *smithy.Schema
-
-var ServiceJobPreemptionSummary_recentPreemptedAttempts *smithy.Schema
-
-var _ServiceJobRecentPreemptedAttemptList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobRecentPreemptedAttemptList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceJobRecentPreemptedAttemptList_member *smithy.Schema
-
-var ServiceJobRetryAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobRetryAction",
-}, smithy.ShapeTypeEnum, 2)
-var ServiceJobRetryAction_RETRY *smithy.Schema
-
-var ServiceJobRetryAction_EXIT *smithy.Schema
-
-var ServiceJobRetryStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobRetryStrategy",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceJobRetryStrategy_attempts *smithy.Schema
-
-var ServiceJobRetryStrategy_evaluateOnExit *smithy.Schema
-
-var ServiceJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobStatus",
-}, smithy.ShapeTypeEnum, 8)
-var ServiceJobStatus_SUBMITTED *smithy.Schema
-
-var ServiceJobStatus_PENDING *smithy.Schema
-
-var ServiceJobStatus_RUNNABLE *smithy.Schema
-
-var ServiceJobStatus_SCHEDULED *smithy.Schema
-
-var ServiceJobStatus_STARTING *smithy.Schema
-
-var ServiceJobStatus_RUNNING *smithy.Schema
-
-var ServiceJobStatus_SUCCEEDED *smithy.Schema
-
-var ServiceJobStatus_FAILED *smithy.Schema
-
-var ServiceJobSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobSummary",
-}, smithy.ShapeTypeStructure, 15)
-var ServiceJobSummary_latestAttempt *smithy.Schema
-
-var ServiceJobSummary_capacityUsage *smithy.Schema
-
-var ServiceJobSummary_createdAt *smithy.Schema
-
-var ServiceJobSummary_jobArn *smithy.Schema
-
-var ServiceJobSummary_jobId *smithy.Schema
-
-var ServiceJobSummary_jobName *smithy.Schema
-
-var ServiceJobSummary_scheduledAt *smithy.Schema
-
-var ServiceJobSummary_serviceJobType *smithy.Schema
-
-var ServiceJobSummary_shareIdentifier *smithy.Schema
-
-var ServiceJobSummary_quotaShareName *smithy.Schema
-
-var ServiceJobSummary_status *smithy.Schema
-
-var ServiceJobSummary_statusReason *smithy.Schema
-
-var ServiceJobSummary_startedAt *smithy.Schema
-
-var ServiceJobSummary_stoppedAt *smithy.Schema
-
-var ServiceJobSummary_isTerminated *smithy.Schema
-
-var _ServiceJobSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ServiceJobSummaryList_member *smithy.Schema
-
-var ServiceJobTimeout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobTimeout",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceJobTimeout_attemptDurationSeconds *smithy.Schema
-
-var ServiceJobType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceJobType",
-}, smithy.ShapeTypeEnum, 1)
-var ServiceJobType_SAGEMAKER_TRAINING *smithy.Schema
-
-var ServiceResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceResourceId",
-}, smithy.ShapeTypeStructure, 2)
-var ServiceResourceId_name *smithy.Schema
-
-var ServiceResourceId_value *smithy.Schema
-
-var ServiceResourceIdName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ServiceResourceIdName",
-}, smithy.ShapeTypeEnum, 1)
-var ServiceResourceIdName_SAGEMAKER_TRAINING_JOB_ARN *smithy.Schema
-
-var ShareAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ShareAttributes",
-}, smithy.ShapeTypeStructure, 2)
-var ShareAttributes_shareIdentifier *smithy.Schema
-
-var ShareAttributes_weightFactor *smithy.Schema
-
-var _ShareAttributesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ShareAttributesList",
-}, smithy.ShapeTypeList, 1)
-var _ShareAttributesList_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeysList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagKeysList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeysList_member *smithy.Schema
-
-var _TagrisTagsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagrisTagsMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagrisTagsMap_key *smithy.Schema
-
-var _TagrisTagsMap_value *smithy.Schema
-
-var _TagsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagsMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagsMap_key *smithy.Schema
-
-var _TagsMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var TaskContainerDependency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TaskContainerDependency",
-}, smithy.ShapeTypeStructure, 2)
-var TaskContainerDependency_containerName *smithy.Schema
-
-var TaskContainerDependency_condition *smithy.Schema
-
-var _TaskContainerDependencyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TaskContainerDependencyList",
-}, smithy.ShapeTypeList, 1)
-var _TaskContainerDependencyList_member *smithy.Schema
-
-var TaskContainerDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TaskContainerDetails",
-}, smithy.ShapeTypeStructure, 23)
-var TaskContainerDetails_command *smithy.Schema
-
-var TaskContainerDetails_dependsOn *smithy.Schema
-
-var TaskContainerDetails_environment *smithy.Schema
-
-var TaskContainerDetails_essential *smithy.Schema
-
-var TaskContainerDetails_firelensConfiguration *smithy.Schema
-
-var TaskContainerDetails_image *smithy.Schema
-
-var TaskContainerDetails_linuxParameters *smithy.Schema
-
-var TaskContainerDetails_logConfiguration *smithy.Schema
-
-var TaskContainerDetails_mountPoints *smithy.Schema
-
-var TaskContainerDetails_name *smithy.Schema
-
-var TaskContainerDetails_privileged *smithy.Schema
-
-var TaskContainerDetails_readonlyRootFilesystem *smithy.Schema
-
-var TaskContainerDetails_repositoryCredentials *smithy.Schema
-
-var TaskContainerDetails_resourceRequirements *smithy.Schema
-
-var TaskContainerDetails_secrets *smithy.Schema
-
-var TaskContainerDetails_ulimits *smithy.Schema
-
-var TaskContainerDetails_user *smithy.Schema
-
-var TaskContainerDetails_startTimeout *smithy.Schema
-
-var TaskContainerDetails_stopTimeout *smithy.Schema
-
-var TaskContainerDetails_exitCode *smithy.Schema
-
-var TaskContainerDetails_reason *smithy.Schema
-
-var TaskContainerDetails_logStreamName *smithy.Schema
-
-var TaskContainerDetails_networkInterfaces *smithy.Schema
-
-var TaskContainerOverrides = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TaskContainerOverrides",
-}, smithy.ShapeTypeStructure, 4)
-var TaskContainerOverrides_command *smithy.Schema
-
-var TaskContainerOverrides_environment *smithy.Schema
-
-var TaskContainerOverrides_name *smithy.Schema
-
-var TaskContainerOverrides_resourceRequirements *smithy.Schema
-
-var TaskContainerProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TaskContainerProperties",
-}, smithy.ShapeTypeStructure, 19)
-var TaskContainerProperties_command *smithy.Schema
-
-var TaskContainerProperties_dependsOn *smithy.Schema
-
-var TaskContainerProperties_environment *smithy.Schema
-
-var TaskContainerProperties_essential *smithy.Schema
-
-var TaskContainerProperties_firelensConfiguration *smithy.Schema
-
-var TaskContainerProperties_image *smithy.Schema
-
-var TaskContainerProperties_linuxParameters *smithy.Schema
-
-var TaskContainerProperties_logConfiguration *smithy.Schema
-
-var TaskContainerProperties_mountPoints *smithy.Schema
-
-var TaskContainerProperties_name *smithy.Schema
-
-var TaskContainerProperties_privileged *smithy.Schema
-
-var TaskContainerProperties_readonlyRootFilesystem *smithy.Schema
-
-var TaskContainerProperties_repositoryCredentials *smithy.Schema
-
-var TaskContainerProperties_resourceRequirements *smithy.Schema
-
-var TaskContainerProperties_secrets *smithy.Schema
-
-var TaskContainerProperties_ulimits *smithy.Schema
-
-var TaskContainerProperties_user *smithy.Schema
-
-var TaskContainerProperties_startTimeout *smithy.Schema
-
-var TaskContainerProperties_stopTimeout *smithy.Schema
-
-var TaskPropertiesOverride = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TaskPropertiesOverride",
-}, smithy.ShapeTypeStructure, 1)
-var TaskPropertiesOverride_containers *smithy.Schema
-
-var TerminateJobsErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJobsErrorDetail",
-}, smithy.ShapeTypeStructure, 3)
-var TerminateJobsErrorDetail_job *smithy.Schema
-
-var TerminateJobsErrorDetail_code *smithy.Schema
-
-var TerminateJobsErrorDetail_message *smithy.Schema
-
-var _TerminateJobsErrorDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJobsErrorDetailList",
-}, smithy.ShapeTypeList, 1)
-var _TerminateJobsErrorDetailList_member *smithy.Schema
-
-var TerminateServiceJobsErrorDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJobsErrorDetail",
-}, smithy.ShapeTypeStructure, 3)
-var TerminateServiceJobsErrorDetail_job *smithy.Schema
-
-var TerminateServiceJobsErrorDetail_code *smithy.Schema
-
-var TerminateServiceJobsErrorDetail_message *smithy.Schema
-
-var _TerminateServiceJobsErrorDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJobsErrorDetailList",
-}, smithy.ShapeTypeList, 1)
-var _TerminateServiceJobsErrorDetailList_member *smithy.Schema
-
-var Tmpfs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Tmpfs",
-}, smithy.ShapeTypeStructure, 3)
-var Tmpfs_containerPath *smithy.Schema
-
-var Tmpfs_size *smithy.Schema
-
-var Tmpfs_mountOptions *smithy.Schema
-
-var _TmpfsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TmpfsList",
-}, smithy.ShapeTypeList, 1)
-var _TmpfsList_member *smithy.Schema
-
-var Ulimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Ulimit",
-}, smithy.ShapeTypeStructure, 3)
-var Ulimit_hardLimit *smithy.Schema
-
-var Ulimit_name *smithy.Schema
-
-var Ulimit_softLimit *smithy.Schema
-
-var _Ulimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Ulimits",
-}, smithy.ShapeTypeList, 1)
-var _Ulimits_member *smithy.Schema
-
-var UpdateManagedInstancesProviderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateManagedInstancesProviderConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateManagedInstancesProviderConfiguration_propagateTags *smithy.Schema
-
-var UpdateManagedInstancesProviderConfiguration_infrastructureRoleArn *smithy.Schema
-
-var UpdateManagedInstancesProviderConfiguration_instanceLaunchTemplate *smithy.Schema
-
-var UpdateManagedInstancesProviderConfiguration_infrastructureOptimization *smithy.Schema
-
-var UpdatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdatePolicy",
-}, smithy.ShapeTypeStructure, 2)
-var UpdatePolicy_terminateJobsOnUpdate *smithy.Schema
-
-var UpdatePolicy_jobExecutionTimeoutMinutes *smithy.Schema
-
-var UserdataType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UserdataType",
-}, smithy.ShapeTypeEnum, 2)
-var UserdataType_EKS_BOOTSTRAP_SH *smithy.Schema
-
-var UserdataType_EKS_NODEADM *smithy.Schema
-
-var Volume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Volume",
-}, smithy.ShapeTypeStructure, 4)
-var Volume_host *smithy.Schema
-
-var Volume_name *smithy.Schema
-
-var Volume_efsVolumeConfiguration *smithy.Schema
-
-var Volume_s3filesVolumeConfiguration *smithy.Schema
-
-var _Volumes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "Volumes",
-}, smithy.ShapeTypeList, 1)
-var _Volumes_member *smithy.Schema
-
-var CancelJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelJobRequest_jobId *smithy.Schema
-
-var CancelJobRequest_reason *smithy.Schema
-
-var CancelJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CancelJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJobsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var CancelJobsRequest_jobs *smithy.Schema
-
-var CancelJobsRequest_reason *smithy.Schema
-
-var CancelJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CancelJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CancelJobsResponse_successful *smithy.Schema
-
-var CancelJobsResponse_errors *smithy.Schema
-
-var CreateComputeEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateComputeEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateComputeEnvironmentRequest_computeEnvironmentName *smithy.Schema
-
-var CreateComputeEnvironmentRequest_type *smithy.Schema
-
-var CreateComputeEnvironmentRequest_state *smithy.Schema
-
-var CreateComputeEnvironmentRequest_unmanagedvCpus *smithy.Schema
-
-var CreateComputeEnvironmentRequest_computeResources *smithy.Schema
-
-var CreateComputeEnvironmentRequest_serviceRole *smithy.Schema
-
-var CreateComputeEnvironmentRequest_tags *smithy.Schema
-
-var CreateComputeEnvironmentRequest_eksConfiguration *smithy.Schema
-
-var CreateComputeEnvironmentRequest_context *smithy.Schema
-
-var CreateComputeEnvironmentRequest_ecsSettings *smithy.Schema
-
-var CreateComputeEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateComputeEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateComputeEnvironmentResponse_computeEnvironmentName *smithy.Schema
-
-var CreateComputeEnvironmentResponse_computeEnvironmentArn *smithy.Schema
-
-var CreateConsumableResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateConsumableResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConsumableResourceRequest_consumableResourceName *smithy.Schema
-
-var CreateConsumableResourceRequest_totalQuantity *smithy.Schema
-
-var CreateConsumableResourceRequest_resourceType *smithy.Schema
-
-var CreateConsumableResourceRequest_tags *smithy.Schema
-
-var CreateConsumableResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateConsumableResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateConsumableResourceResponse_consumableResourceName *smithy.Schema
-
-var CreateConsumableResourceResponse_consumableResourceArn *smithy.Schema
-
-var CreateJobQueueRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateJobQueueRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateJobQueueRequest_jobQueueName *smithy.Schema
-
-var CreateJobQueueRequest_state *smithy.Schema
-
-var CreateJobQueueRequest_schedulingPolicyArn *smithy.Schema
-
-var CreateJobQueueRequest_priority *smithy.Schema
-
-var CreateJobQueueRequest_computeEnvironmentOrder *smithy.Schema
-
-var CreateJobQueueRequest_serviceEnvironmentOrder *smithy.Schema
-
-var CreateJobQueueRequest_jobQueueType *smithy.Schema
-
-var CreateJobQueueRequest_tags *smithy.Schema
-
-var CreateJobQueueRequest_jobStateTimeLimitActions *smithy.Schema
-
-var CreateJobQueueResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateJobQueueResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateJobQueueResponse_jobQueueName *smithy.Schema
-
-var CreateJobQueueResponse_jobQueueArn *smithy.Schema
-
-var CreateQuotaShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateQuotaShareRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateQuotaShareRequest_quotaShareName *smithy.Schema
-
-var CreateQuotaShareRequest_jobQueue *smithy.Schema
-
-var CreateQuotaShareRequest_capacityLimits *smithy.Schema
-
-var CreateQuotaShareRequest_resourceSharingConfiguration *smithy.Schema
-
-var CreateQuotaShareRequest_preemptionConfiguration *smithy.Schema
-
-var CreateQuotaShareRequest_state *smithy.Schema
-
-var CreateQuotaShareRequest_tags *smithy.Schema
-
-var CreateQuotaShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateQuotaShareResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateQuotaShareResponse_quotaShareName *smithy.Schema
-
-var CreateQuotaShareResponse_quotaShareArn *smithy.Schema
-
-var CreateSchedulingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateSchedulingPolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateSchedulingPolicyRequest_name *smithy.Schema
-
-var CreateSchedulingPolicyRequest_quotaSharePolicy *smithy.Schema
-
-var CreateSchedulingPolicyRequest_fairsharePolicy *smithy.Schema
-
-var CreateSchedulingPolicyRequest_tags *smithy.Schema
-
-var CreateSchedulingPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateSchedulingPolicyResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateSchedulingPolicyResponse_name *smithy.Schema
-
-var CreateSchedulingPolicyResponse_arn *smithy.Schema
-
-var CreateServiceEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateServiceEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CreateServiceEnvironmentRequest_serviceEnvironmentName *smithy.Schema
-
-var CreateServiceEnvironmentRequest_serviceEnvironmentType *smithy.Schema
-
-var CreateServiceEnvironmentRequest_state *smithy.Schema
-
-var CreateServiceEnvironmentRequest_capacityLimits *smithy.Schema
-
-var CreateServiceEnvironmentRequest_tags *smithy.Schema
-
-var CreateServiceEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "CreateServiceEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var CreateServiceEnvironmentResponse_serviceEnvironmentName *smithy.Schema
-
-var CreateServiceEnvironmentResponse_serviceEnvironmentArn *smithy.Schema
-
-var DeleteComputeEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteComputeEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteComputeEnvironmentRequest_computeEnvironment *smithy.Schema
-
-var DeleteComputeEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteComputeEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteConsumableResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteConsumableResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConsumableResourceRequest_consumableResource *smithy.Schema
-
-var DeleteConsumableResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteConsumableResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteJobQueueRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteJobQueueRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteJobQueueRequest_jobQueue *smithy.Schema
-
-var DeleteJobQueueResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteJobQueueResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteQuotaShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteQuotaShareRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteQuotaShareRequest_quotaShareArn *smithy.Schema
-
-var DeleteQuotaShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteQuotaShareResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteSchedulingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteSchedulingPolicyRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSchedulingPolicyRequest_arn *smithy.Schema
-
-var DeleteSchedulingPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteSchedulingPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteServiceEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteServiceEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteServiceEnvironmentRequest_serviceEnvironment *smithy.Schema
-
-var DeleteServiceEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeleteServiceEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeregisterJobDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeregisterJobDefinitionRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterJobDefinitionRequest_jobDefinition *smithy.Schema
-
-var DeregisterJobDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DeregisterJobDefinitionResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeComputeEnvironmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeComputeEnvironmentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeComputeEnvironmentsRequest_computeEnvironments *smithy.Schema
-
-var DescribeComputeEnvironmentsRequest_maxResults *smithy.Schema
-
-var DescribeComputeEnvironmentsRequest_nextToken *smithy.Schema
-
-var DescribeComputeEnvironmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeComputeEnvironmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeComputeEnvironmentsResponse_computeEnvironments *smithy.Schema
-
-var DescribeComputeEnvironmentsResponse_nextToken *smithy.Schema
-
-var DescribeConsumableResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeConsumableResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeConsumableResourceRequest_consumableResource *smithy.Schema
-
-var DescribeConsumableResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeConsumableResourceResponse",
-}, smithy.ShapeTypeStructure, 8)
-var DescribeConsumableResourceResponse_consumableResourceName *smithy.Schema
-
-var DescribeConsumableResourceResponse_consumableResourceArn *smithy.Schema
-
-var DescribeConsumableResourceResponse_totalQuantity *smithy.Schema
-
-var DescribeConsumableResourceResponse_inUseQuantity *smithy.Schema
-
-var DescribeConsumableResourceResponse_availableQuantity *smithy.Schema
-
-var DescribeConsumableResourceResponse_resourceType *smithy.Schema
-
-var DescribeConsumableResourceResponse_createdAt *smithy.Schema
-
-var DescribeConsumableResourceResponse_tags *smithy.Schema
-
-var DescribeJobDefinitionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobDefinitionsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var DescribeJobDefinitionsRequest_jobDefinitions *smithy.Schema
-
-var DescribeJobDefinitionsRequest_maxResults *smithy.Schema
-
-var DescribeJobDefinitionsRequest_jobDefinitionName *smithy.Schema
-
-var DescribeJobDefinitionsRequest_status *smithy.Schema
-
-var DescribeJobDefinitionsRequest_nextToken *smithy.Schema
-
-var DescribeJobDefinitionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobDefinitionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeJobDefinitionsResponse_jobDefinitions *smithy.Schema
-
-var DescribeJobDefinitionsResponse_nextToken *smithy.Schema
-
-var DescribeJobQueuesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobQueuesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeJobQueuesRequest_jobQueues *smithy.Schema
-
-var DescribeJobQueuesRequest_maxResults *smithy.Schema
-
-var DescribeJobQueuesRequest_nextToken *smithy.Schema
-
-var DescribeJobQueuesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobQueuesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeJobQueuesResponse_jobQueues *smithy.Schema
-
-var DescribeJobQueuesResponse_nextToken *smithy.Schema
-
-var DescribeJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobsRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeJobsRequest_jobs *smithy.Schema
-
-var DescribeJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeJobsResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeJobsResponse_jobs *smithy.Schema
-
-var DescribeQuotaShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeQuotaShareRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeQuotaShareRequest_quotaShareArn *smithy.Schema
-
-var DescribeQuotaShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeQuotaShareResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeQuotaShareResponse_quotaShareName *smithy.Schema
-
-var DescribeQuotaShareResponse_quotaShareArn *smithy.Schema
-
-var DescribeQuotaShareResponse_jobQueueArn *smithy.Schema
-
-var DescribeQuotaShareResponse_capacityLimits *smithy.Schema
-
-var DescribeQuotaShareResponse_resourceSharingConfiguration *smithy.Schema
-
-var DescribeQuotaShareResponse_preemptionConfiguration *smithy.Schema
-
-var DescribeQuotaShareResponse_state *smithy.Schema
-
-var DescribeQuotaShareResponse_status *smithy.Schema
-
-var DescribeQuotaShareResponse_tags *smithy.Schema
-
-var DescribeSchedulingPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeSchedulingPoliciesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSchedulingPoliciesRequest_arns *smithy.Schema
-
-var DescribeSchedulingPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeSchedulingPoliciesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSchedulingPoliciesResponse_schedulingPolicies *smithy.Schema
-
-var DescribeServiceEnvironmentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeServiceEnvironmentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeServiceEnvironmentsRequest_serviceEnvironments *smithy.Schema
-
-var DescribeServiceEnvironmentsRequest_maxResults *smithy.Schema
-
-var DescribeServiceEnvironmentsRequest_nextToken *smithy.Schema
-
-var DescribeServiceEnvironmentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeServiceEnvironmentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeServiceEnvironmentsResponse_serviceEnvironments *smithy.Schema
-
-var DescribeServiceEnvironmentsResponse_nextToken *smithy.Schema
-
-var DescribeServiceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeServiceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeServiceJobRequest_jobId *smithy.Schema
-
-var DescribeServiceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "DescribeServiceJobResponse",
-}, smithy.ShapeTypeStructure, 24)
-var DescribeServiceJobResponse_attempts *smithy.Schema
-
-var DescribeServiceJobResponse_capacityUsage *smithy.Schema
-
-var DescribeServiceJobResponse_createdAt *smithy.Schema
-
-var DescribeServiceJobResponse_isTerminated *smithy.Schema
-
-var DescribeServiceJobResponse_jobArn *smithy.Schema
-
-var DescribeServiceJobResponse_jobId *smithy.Schema
-
-var DescribeServiceJobResponse_jobName *smithy.Schema
-
-var DescribeServiceJobResponse_jobQueue *smithy.Schema
-
-var DescribeServiceJobResponse_latestAttempt *smithy.Schema
-
-var DescribeServiceJobResponse_retryStrategy *smithy.Schema
-
-var DescribeServiceJobResponse_scheduledAt *smithy.Schema
-
-var DescribeServiceJobResponse_schedulingPriority *smithy.Schema
-
-var DescribeServiceJobResponse_serviceRequestPayload *smithy.Schema
-
-var DescribeServiceJobResponse_serviceJobType *smithy.Schema
-
-var DescribeServiceJobResponse_shareIdentifier *smithy.Schema
-
-var DescribeServiceJobResponse_quotaShareName *smithy.Schema
-
-var DescribeServiceJobResponse_preemptionConfiguration *smithy.Schema
-
-var DescribeServiceJobResponse_preemptionSummary *smithy.Schema
-
-var DescribeServiceJobResponse_startedAt *smithy.Schema
-
-var DescribeServiceJobResponse_status *smithy.Schema
-
-var DescribeServiceJobResponse_statusReason *smithy.Schema
-
-var DescribeServiceJobResponse_stoppedAt *smithy.Schema
-
-var DescribeServiceJobResponse_tags *smithy.Schema
-
-var DescribeServiceJobResponse_timeoutConfig *smithy.Schema
-
-var GetJobQueueSnapshotRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "GetJobQueueSnapshotRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetJobQueueSnapshotRequest_jobQueue *smithy.Schema
-
-var GetJobQueueSnapshotResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "GetJobQueueSnapshotResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetJobQueueSnapshotResponse_frontOfQueue *smithy.Schema
-
-var GetJobQueueSnapshotResponse_frontOfQuotaShares *smithy.Schema
-
-var GetJobQueueSnapshotResponse_queueUtilization *smithy.Schema
-
-var ListConsumableResourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListConsumableResourcesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListConsumableResourcesRequest_filters *smithy.Schema
-
-var ListConsumableResourcesRequest_maxResults *smithy.Schema
-
-var ListConsumableResourcesRequest_nextToken *smithy.Schema
-
-var ListConsumableResourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListConsumableResourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListConsumableResourcesResponse_consumableResources *smithy.Schema
-
-var ListConsumableResourcesResponse_nextToken *smithy.Schema
-
-var ListJobsByConsumableResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsByConsumableResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListJobsByConsumableResourceRequest_consumableResource *smithy.Schema
-
-var ListJobsByConsumableResourceRequest_filters *smithy.Schema
-
-var ListJobsByConsumableResourceRequest_maxResults *smithy.Schema
-
-var ListJobsByConsumableResourceRequest_nextToken *smithy.Schema
-
-var ListJobsByConsumableResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsByConsumableResourceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListJobsByConsumableResourceResponse_jobs *smithy.Schema
-
-var ListJobsByConsumableResourceResponse_nextToken *smithy.Schema
-
-var ListJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsRequest",
-}, smithy.ShapeTypeStructure, 7)
-var ListJobsRequest_jobQueue *smithy.Schema
-
-var ListJobsRequest_arrayJobId *smithy.Schema
-
-var ListJobsRequest_multiNodeJobId *smithy.Schema
-
-var ListJobsRequest_jobStatus *smithy.Schema
-
-var ListJobsRequest_maxResults *smithy.Schema
-
-var ListJobsRequest_nextToken *smithy.Schema
-
-var ListJobsRequest_filters *smithy.Schema
-
-var ListJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListJobsResponse_jobSummaryList *smithy.Schema
-
-var ListJobsResponse_nextToken *smithy.Schema
-
-var ListQuotaSharesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListQuotaSharesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListQuotaSharesRequest_jobQueue *smithy.Schema
-
-var ListQuotaSharesRequest_maxResults *smithy.Schema
-
-var ListQuotaSharesRequest_nextToken *smithy.Schema
-
-var ListQuotaSharesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListQuotaSharesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListQuotaSharesResponse_quotaShares *smithy.Schema
-
-var ListQuotaSharesResponse_nextToken *smithy.Schema
-
-var ListSchedulingPoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListSchedulingPoliciesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListSchedulingPoliciesRequest_maxResults *smithy.Schema
-
-var ListSchedulingPoliciesRequest_nextToken *smithy.Schema
-
-var ListSchedulingPoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListSchedulingPoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSchedulingPoliciesResponse_schedulingPolicies *smithy.Schema
-
-var ListSchedulingPoliciesResponse_nextToken *smithy.Schema
-
-var ListServiceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListServiceJobsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListServiceJobsRequest_jobQueue *smithy.Schema
-
-var ListServiceJobsRequest_jobStatus *smithy.Schema
-
-var ListServiceJobsRequest_maxResults *smithy.Schema
-
-var ListServiceJobsRequest_nextToken *smithy.Schema
-
-var ListServiceJobsRequest_filters *smithy.Schema
-
-var ListServiceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListServiceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListServiceJobsResponse_jobSummaryList *smithy.Schema
-
-var ListServiceJobsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterJobDefinitionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "RegisterJobDefinitionRequest",
-}, smithy.ShapeTypeStructure, 14)
-var RegisterJobDefinitionRequest_jobDefinitionName *smithy.Schema
-
-var RegisterJobDefinitionRequest_type *smithy.Schema
-
-var RegisterJobDefinitionRequest_parameters *smithy.Schema
-
-var RegisterJobDefinitionRequest_schedulingPriority *smithy.Schema
-
-var RegisterJobDefinitionRequest_containerProperties *smithy.Schema
-
-var RegisterJobDefinitionRequest_nodeProperties *smithy.Schema
-
-var RegisterJobDefinitionRequest_retryStrategy *smithy.Schema
-
-var RegisterJobDefinitionRequest_propagateTags *smithy.Schema
-
-var RegisterJobDefinitionRequest_timeout *smithy.Schema
-
-var RegisterJobDefinitionRequest_tags *smithy.Schema
-
-var RegisterJobDefinitionRequest_platformCapabilities *smithy.Schema
-
-var RegisterJobDefinitionRequest_eksProperties *smithy.Schema
-
-var RegisterJobDefinitionRequest_ecsProperties *smithy.Schema
-
-var RegisterJobDefinitionRequest_consumableResourceProperties *smithy.Schema
-
-var RegisterJobDefinitionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "RegisterJobDefinitionResponse",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterJobDefinitionResponse_jobDefinitionName *smithy.Schema
-
-var RegisterJobDefinitionResponse_jobDefinitionArn *smithy.Schema
-
-var RegisterJobDefinitionResponse_revision *smithy.Schema
-
-var SubmitJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SubmitJobRequest",
-}, smithy.ShapeTypeStructure, 17)
-var SubmitJobRequest_jobName *smithy.Schema
-
-var SubmitJobRequest_jobQueue *smithy.Schema
-
-var SubmitJobRequest_shareIdentifier *smithy.Schema
-
-var SubmitJobRequest_schedulingPriorityOverride *smithy.Schema
-
-var SubmitJobRequest_arrayProperties *smithy.Schema
-
-var SubmitJobRequest_dependsOn *smithy.Schema
-
-var SubmitJobRequest_jobDefinition *smithy.Schema
-
-var SubmitJobRequest_parameters *smithy.Schema
-
-var SubmitJobRequest_containerOverrides *smithy.Schema
-
-var SubmitJobRequest_nodeOverrides *smithy.Schema
-
-var SubmitJobRequest_retryStrategy *smithy.Schema
-
-var SubmitJobRequest_propagateTags *smithy.Schema
-
-var SubmitJobRequest_timeout *smithy.Schema
-
-var SubmitJobRequest_tags *smithy.Schema
-
-var SubmitJobRequest_eksPropertiesOverride *smithy.Schema
-
-var SubmitJobRequest_ecsPropertiesOverride *smithy.Schema
-
-var SubmitJobRequest_consumableResourcePropertiesOverride *smithy.Schema
-
-var SubmitJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SubmitJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var SubmitJobResponse_jobArn *smithy.Schema
-
-var SubmitJobResponse_jobName *smithy.Schema
-
-var SubmitJobResponse_jobId *smithy.Schema
-
-var SubmitServiceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SubmitServiceJobRequest",
-}, smithy.ShapeTypeStructure, 12)
-var SubmitServiceJobRequest_jobName *smithy.Schema
-
-var SubmitServiceJobRequest_jobQueue *smithy.Schema
-
-var SubmitServiceJobRequest_retryStrategy *smithy.Schema
-
-var SubmitServiceJobRequest_schedulingPriority *smithy.Schema
-
-var SubmitServiceJobRequest_serviceRequestPayload *smithy.Schema
-
-var SubmitServiceJobRequest_serviceJobType *smithy.Schema
-
-var SubmitServiceJobRequest_shareIdentifier *smithy.Schema
-
-var SubmitServiceJobRequest_quotaShareName *smithy.Schema
-
-var SubmitServiceJobRequest_preemptionConfiguration *smithy.Schema
-
-var SubmitServiceJobRequest_timeoutConfig *smithy.Schema
-
-var SubmitServiceJobRequest_tags *smithy.Schema
-
-var SubmitServiceJobRequest_clientToken *smithy.Schema
-
-var SubmitServiceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "SubmitServiceJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var SubmitServiceJobResponse_jobArn *smithy.Schema
-
-var SubmitServiceJobResponse_jobName *smithy.Schema
-
-var SubmitServiceJobResponse_jobId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TerminateJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TerminateJobRequest_jobId *smithy.Schema
-
-var TerminateJobRequest_reason *smithy.Schema
-
-var TerminateJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TerminateJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJobsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TerminateJobsRequest_jobs *smithy.Schema
-
-var TerminateJobsRequest_reason *smithy.Schema
-
-var TerminateJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var TerminateJobsResponse_successful *smithy.Schema
-
-var TerminateJobsResponse_errors *smithy.Schema
-
-var TerminateServiceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TerminateServiceJobRequest_jobId *smithy.Schema
-
-var TerminateServiceJobRequest_reason *smithy.Schema
-
-var TerminateServiceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var TerminateServiceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJobsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TerminateServiceJobsRequest_jobs *smithy.Schema
-
-var TerminateServiceJobsRequest_reason *smithy.Schema
-
-var TerminateServiceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "TerminateServiceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var TerminateServiceJobsResponse_successful *smithy.Schema
-
-var TerminateServiceJobsResponse_errors *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateComputeEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateComputeEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateComputeEnvironmentRequest_computeEnvironment *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_state *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_unmanagedvCpus *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_computeResources *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_serviceRole *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_updatePolicy *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_context *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_ecsSettings *smithy.Schema
-
-var UpdateComputeEnvironmentRequest_eksConfiguration *smithy.Schema
-
-var UpdateComputeEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateComputeEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateComputeEnvironmentResponse_computeEnvironmentName *smithy.Schema
-
-var UpdateComputeEnvironmentResponse_computeEnvironmentArn *smithy.Schema
-
-var UpdateConsumableResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateConsumableResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateConsumableResourceRequest_consumableResource *smithy.Schema
-
-var UpdateConsumableResourceRequest_operation *smithy.Schema
-
-var UpdateConsumableResourceRequest_quantity *smithy.Schema
-
-var UpdateConsumableResourceRequest_clientToken *smithy.Schema
-
-var UpdateConsumableResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateConsumableResourceResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConsumableResourceResponse_consumableResourceName *smithy.Schema
-
-var UpdateConsumableResourceResponse_consumableResourceArn *smithy.Schema
-
-var UpdateConsumableResourceResponse_totalQuantity *smithy.Schema
-
-var UpdateJobQueueRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateJobQueueRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateJobQueueRequest_jobQueue *smithy.Schema
-
-var UpdateJobQueueRequest_state *smithy.Schema
-
-var UpdateJobQueueRequest_schedulingPolicyArn *smithy.Schema
-
-var UpdateJobQueueRequest_priority *smithy.Schema
-
-var UpdateJobQueueRequest_computeEnvironmentOrder *smithy.Schema
-
-var UpdateJobQueueRequest_serviceEnvironmentOrder *smithy.Schema
-
-var UpdateJobQueueRequest_jobStateTimeLimitActions *smithy.Schema
-
-var UpdateJobQueueResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateJobQueueResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateJobQueueResponse_jobQueueName *smithy.Schema
-
-var UpdateJobQueueResponse_jobQueueArn *smithy.Schema
-
-var UpdateQuotaShareRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateQuotaShareRequest",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateQuotaShareRequest_quotaShareArn *smithy.Schema
-
-var UpdateQuotaShareRequest_capacityLimits *smithy.Schema
-
-var UpdateQuotaShareRequest_resourceSharingConfiguration *smithy.Schema
-
-var UpdateQuotaShareRequest_preemptionConfiguration *smithy.Schema
-
-var UpdateQuotaShareRequest_state *smithy.Schema
-
-var UpdateQuotaShareResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateQuotaShareResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateQuotaShareResponse_quotaShareName *smithy.Schema
-
-var UpdateQuotaShareResponse_quotaShareArn *smithy.Schema
-
-var UpdateSchedulingPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateSchedulingPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateSchedulingPolicyRequest_arn *smithy.Schema
-
-var UpdateSchedulingPolicyRequest_quotaSharePolicy *smithy.Schema
-
-var UpdateSchedulingPolicyRequest_fairsharePolicy *smithy.Schema
-
-var UpdateSchedulingPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateSchedulingPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateServiceEnvironmentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateServiceEnvironmentRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateServiceEnvironmentRequest_serviceEnvironment *smithy.Schema
-
-var UpdateServiceEnvironmentRequest_state *smithy.Schema
-
-var UpdateServiceEnvironmentRequest_capacityLimits *smithy.Schema
-
-var UpdateServiceEnvironmentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateServiceEnvironmentResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServiceEnvironmentResponse_serviceEnvironmentName *smithy.Schema
-
-var UpdateServiceEnvironmentResponse_serviceEnvironmentArn *smithy.Schema
-
-var UpdateServiceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateServiceJobRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateServiceJobRequest_jobId *smithy.Schema
-
-var UpdateServiceJobRequest_schedulingPriority *smithy.Schema
-
-var UpdateServiceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.batch",
-	Name:      "UpdateServiceJobResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateServiceJobResponse_jobArn *smithy.Schema
-
-var UpdateServiceJobResponse_jobName *smithy.Schema
-
-var UpdateServiceJobResponse_jobId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ArrayJobDependency_N_TO_N = ArrayJobDependency.AddMember("N_TO_N", smithyprelude.Unit)
-
-	ArrayJobDependency_SEQUENTIAL = ArrayJobDependency.AddMember("SEQUENTIAL", smithyprelude.Unit)
-
-	_ArrayJobStatusSummary_key = _ArrayJobStatusSummary.AddMember("key", _String)
-
-	_ArrayJobStatusSummary_value = _ArrayJobStatusSummary.AddMember("value", _Integer)
-
-	ArrayProperties_size = ArrayProperties.AddMember("size", _Integer)
-
-	ArrayPropertiesDetail_statusSummary = ArrayPropertiesDetail.AddMember("statusSummary", _ArrayJobStatusSummary)
-
-	ArrayPropertiesDetail_statusSummaryLastUpdatedAt = ArrayPropertiesDetail.AddMember("statusSummaryLastUpdatedAt", _Long)
-
-	ArrayPropertiesDetail_size = ArrayPropertiesDetail.AddMember("size", _Integer)
-
-	ArrayPropertiesDetail_index = ArrayPropertiesDetail.AddMember("index", _Integer)
-
-	ArrayPropertiesSummary_size = ArrayPropertiesSummary.AddMember("size", _Integer)
-
-	ArrayPropertiesSummary_index = ArrayPropertiesSummary.AddMember("index", _Integer)
-
-	ArrayPropertiesSummary_statusSummary = ArrayPropertiesSummary.AddMember("statusSummary", _ArrayJobStatusSummary)
-
-	ArrayPropertiesSummary_statusSummaryLastUpdatedAt = ArrayPropertiesSummary.AddMember("statusSummaryLastUpdatedAt", _Long)
-
-	AssignPublicIp_ENABLED = AssignPublicIp.AddMember("ENABLED", smithyprelude.Unit)
-
-	AssignPublicIp_DISABLED = AssignPublicIp.AddMember("DISABLED", smithyprelude.Unit)
-
-	NetworkInterface_attachmentId = NetworkInterface.AddMember("attachmentId", _String)
-
-	NetworkInterface_ipv6Address = NetworkInterface.AddMember("ipv6Address", _String)
-
-	NetworkInterface_privateIpv4Address = NetworkInterface.AddMember("privateIpv4Address", _String)
-
-	_NetworkInterfaceList_member = _NetworkInterfaceList.AddMember("member", NetworkInterface)
-
-	AttemptContainerDetail_containerInstanceArn = AttemptContainerDetail.AddMember("containerInstanceArn", _String)
-
-	AttemptContainerDetail_taskArn = AttemptContainerDetail.AddMember("taskArn", _String)
-
-	AttemptContainerDetail_exitCode = AttemptContainerDetail.AddMember("exitCode", _Integer)
-
-	AttemptContainerDetail_reason = AttemptContainerDetail.AddMember("reason", _String)
-
-	AttemptContainerDetail_logStreamName = AttemptContainerDetail.AddMember("logStreamName", _String)
-
-	AttemptContainerDetail_networkInterfaces = AttemptContainerDetail.AddMember("networkInterfaces", _NetworkInterfaceList)
-
-	AttemptTaskContainerDetails_exitCode = AttemptTaskContainerDetails.AddMember("exitCode", _Integer)
-
-	AttemptTaskContainerDetails_name = AttemptTaskContainerDetails.AddMember("name", _String)
-
-	AttemptTaskContainerDetails_reason = AttemptTaskContainerDetails.AddMember("reason", _String)
-
-	AttemptTaskContainerDetails_logStreamName = AttemptTaskContainerDetails.AddMember("logStreamName", _String)
-
-	AttemptTaskContainerDetails_networkInterfaces = AttemptTaskContainerDetails.AddMember("networkInterfaces", _NetworkInterfaceList)
-
-	_ListAttemptTaskContainerDetails_member = _ListAttemptTaskContainerDetails.AddMember("member", AttemptTaskContainerDetails)
-
-	AttemptEcsTaskDetails_containerInstanceArn = AttemptEcsTaskDetails.AddMember("containerInstanceArn", _String)
-
-	AttemptEcsTaskDetails_taskArn = AttemptEcsTaskDetails.AddMember("taskArn", _String)
-
-	AttemptEcsTaskDetails_containers = AttemptEcsTaskDetails.AddMember("containers", _ListAttemptTaskContainerDetails)
-
-	_ListAttemptEcsTaskDetails_member = _ListAttemptEcsTaskDetails.AddMember("member", AttemptEcsTaskDetails)
-
-	AttemptDetail_container = AttemptDetail.AddMember("container", AttemptContainerDetail)
-
-	AttemptDetail_startedAt = AttemptDetail.AddMember("startedAt", _Long)
-
-	AttemptDetail_stoppedAt = AttemptDetail.AddMember("stoppedAt", _Long)
-
-	AttemptDetail_statusReason = AttemptDetail.AddMember("statusReason", _String)
-
-	AttemptDetail_taskProperties = AttemptDetail.AddMember("taskProperties", _ListAttemptEcsTaskDetails)
-
-	_AttemptDetails_member = _AttemptDetails.AddMember("member", AttemptDetail)
-
-	CancelJobsErrorDetail_job = CancelJobsErrorDetail.AddMember("job", _String)
-
-	CancelJobsErrorDetail_code = CancelJobsErrorDetail.AddMember("code", _String)
-
-	CancelJobsErrorDetail_message = CancelJobsErrorDetail.AddMember("message", _String)
-
-	_CancelJobsErrorDetailList_member = _CancelJobsErrorDetailList.AddMember("member", CancelJobsErrorDetail)
-
-	CapacityLimit_maxCapacity = CapacityLimit.AddMember("maxCapacity", _Integer)
-
-	CapacityLimit_capacityUnit = CapacityLimit.AddMember("capacityUnit", _String)
-
-	_CapacityLimits_member = _CapacityLimits.AddMember("member", CapacityLimit)
-
-	CapacityReservationRequest_reservationGroupArn = CapacityReservationRequest.AddMember("reservationGroupArn", _String)
-
-	CapacityReservationRequest_reservationPreference = CapacityReservationRequest.AddMember("reservationPreference", _String)
-
-	CEState_ENABLED = CEState.AddMember("ENABLED", smithyprelude.Unit)
-
-	CEState_DISABLED = CEState.AddMember("DISABLED", smithyprelude.Unit)
-
-	CEStatus_CREATING = CEStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	CEStatus_UPDATING = CEStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	CEStatus_DELETING = CEStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	CEStatus_DELETED = CEStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	CEStatus_VALID = CEStatus.AddMember("VALID", smithyprelude.Unit)
-
-	CEStatus_INVALID = CEStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	CEType_MANAGED = CEType.AddMember("MANAGED", smithyprelude.Unit)
-
-	CEType_UNMANAGED = CEType.AddMember("UNMANAGED", smithyprelude.Unit)
-
-	ClientException_message = ClientException.AddMember("message", _String)
-
-	_TagrisTagsMap_key = _TagrisTagsMap.AddMember("key", _TagKey)
-
-	_TagrisTagsMap_value = _TagrisTagsMap.AddMember("value", _TagValue)
-
-	CRType_EC2 = CRType.AddMember("EC2", smithyprelude.Unit)
-
-	CRType_SPOT = CRType.AddMember("SPOT", smithyprelude.Unit)
-
-	CRType_FARGATE = CRType.AddMember("FARGATE", smithyprelude.Unit)
-
-	CRType_FARGATE_SPOT = CRType.AddMember("FARGATE_SPOT", smithyprelude.Unit)
-
-	CRType_ECS_MANAGED_INSTANCES = CRType.AddMember("ECS_MANAGED_INSTANCES", smithyprelude.Unit)
-
-	CRAllocationStrategy_BEST_FIT = CRAllocationStrategy.AddMember("BEST_FIT", smithyprelude.Unit)
-
-	CRAllocationStrategy_BEST_FIT_PROGRESSIVE = CRAllocationStrategy.AddMember("BEST_FIT_PROGRESSIVE", smithyprelude.Unit)
-
-	CRAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED = CRAllocationStrategy.AddMember("BEST_FIT_PROGRESSIVE_ORDERED", smithyprelude.Unit)
-
-	CRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED = CRAllocationStrategy.AddMember("SPOT_CAPACITY_OPTIMIZED", smithyprelude.Unit)
-
-	CRAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED = CRAllocationStrategy.AddMember("SPOT_PRICE_CAPACITY_OPTIMIZED", smithyprelude.Unit)
-
-	CRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED = CRAllocationStrategy.AddMember("SPOT_CAPACITY_OPTIMIZED_PRIORITIZED", smithyprelude.Unit)
-
-	_StringList_member = _StringList.AddMember("member", _String)
-
-	_TagsMap_key = _TagsMap.AddMember("key", _String)
-
-	_TagsMap_value = _TagsMap.AddMember("value", _String)
-
-	UserdataType_EKS_BOOTSTRAP_SH = UserdataType.AddMember("EKS_BOOTSTRAP_SH", smithyprelude.Unit)
-
-	UserdataType_EKS_NODEADM = UserdataType.AddMember("EKS_NODEADM", smithyprelude.Unit)
-
-	LaunchTemplateSpecificationOverride_launchTemplateId = LaunchTemplateSpecificationOverride.AddMember("launchTemplateId", _String)
-
-	LaunchTemplateSpecificationOverride_launchTemplateName = LaunchTemplateSpecificationOverride.AddMember("launchTemplateName", _String)
-
-	LaunchTemplateSpecificationOverride_version = LaunchTemplateSpecificationOverride.AddMember("version", _String)
-
-	LaunchTemplateSpecificationOverride_targetInstanceTypes = LaunchTemplateSpecificationOverride.AddMember("targetInstanceTypes", _StringList)
-
-	LaunchTemplateSpecificationOverride_userdataType = LaunchTemplateSpecificationOverride.AddMember("userdataType", UserdataType)
-
-	_LaunchTemplateSpecificationOverrideList_member = _LaunchTemplateSpecificationOverrideList.AddMember("member", LaunchTemplateSpecificationOverride)
-
-	LaunchTemplateSpecification_launchTemplateId = LaunchTemplateSpecification.AddMember("launchTemplateId", _String)
-
-	LaunchTemplateSpecification_launchTemplateName = LaunchTemplateSpecification.AddMember("launchTemplateName", _String)
-
-	LaunchTemplateSpecification_version = LaunchTemplateSpecification.AddMember("version", _String)
-
-	LaunchTemplateSpecification_overrides = LaunchTemplateSpecification.AddMember("overrides", _LaunchTemplateSpecificationOverrideList)
-
-	LaunchTemplateSpecification_userdataType = LaunchTemplateSpecification.AddMember("userdataType", UserdataType)
-
-	Ec2Configuration_imageType = Ec2Configuration.AddMember("imageType", _ImageType)
-
-	Ec2Configuration_imageIdOverride = Ec2Configuration.AddMember("imageIdOverride", _ImageIdOverride)
-
-	Ec2Configuration_batchImageStatus = Ec2Configuration.AddMember("batchImageStatus", _String)
-
-	Ec2Configuration_imageKubernetesVersion = Ec2Configuration.AddMember("imageKubernetesVersion", _KubernetesVersion)
-
-	_Ec2ConfigurationList_member = _Ec2ConfigurationList.AddMember("member", Ec2Configuration)
-
-	ComputeScalingPolicy_minScaleDownDelayMinutes = ComputeScalingPolicy.AddMember("minScaleDownDelayMinutes", _Integer)
-
-	ManagedInstancesNetworkConfiguration_subnets = ManagedInstancesNetworkConfiguration.AddMember("subnets", _StringList)
-
-	ManagedInstancesNetworkConfiguration_securityGroups = ManagedInstancesNetworkConfiguration.AddMember("securityGroups", _StringList)
-
-	InstanceRequirementsRequest_allowedInstanceTypes = InstanceRequirementsRequest.AddMember("allowedInstanceTypes", _StringList)
-
-	ManagedInstancesStorageConfiguration_storageSizeGiB = ManagedInstancesStorageConfiguration.AddMember("storageSizeGiB", _Integer)
-
-	ManagedInstancesLocalStorageConfiguration_useLocalStorage = ManagedInstancesLocalStorageConfiguration.AddMember("useLocalStorage", _Boolean)
-
-	InstanceLaunchTemplate_ec2InstanceProfileArn = InstanceLaunchTemplate.AddMember("ec2InstanceProfileArn", _String)
-
-	InstanceLaunchTemplate_networkConfiguration = InstanceLaunchTemplate.AddMember("networkConfiguration", ManagedInstancesNetworkConfiguration)
-
-	InstanceLaunchTemplate_instanceRequirements = InstanceLaunchTemplate.AddMember("instanceRequirements", InstanceRequirementsRequest)
-
-	InstanceLaunchTemplate_capacityOptionType = InstanceLaunchTemplate.AddMember("capacityOptionType", _String)
-
-	InstanceLaunchTemplate_storageConfiguration = InstanceLaunchTemplate.AddMember("storageConfiguration", ManagedInstancesStorageConfiguration)
-
-	InstanceLaunchTemplate_monitoring = InstanceLaunchTemplate.AddMember("monitoring", _String)
-
-	InstanceLaunchTemplate_fipsEnabled = InstanceLaunchTemplate.AddMember("fipsEnabled", _Boolean)
-
-	InstanceLaunchTemplate_capacityReservations = InstanceLaunchTemplate.AddMember("capacityReservations", CapacityReservationRequest)
-
-	InstanceLaunchTemplate_instanceMetadataTagsPropagation = InstanceLaunchTemplate.AddMember("instanceMetadataTagsPropagation", _Boolean)
-
-	InstanceLaunchTemplate_localStorageConfiguration = InstanceLaunchTemplate.AddMember("localStorageConfiguration", ManagedInstancesLocalStorageConfiguration)
-
-	InfrastructureOptimization_scaleInAfter = InfrastructureOptimization.AddMember("scaleInAfter", _Integer)
-
-	ManagedInstancesProvider_propagateTags = ManagedInstancesProvider.AddMember("propagateTags", _String)
-
-	ManagedInstancesProvider_infrastructureRoleArn = ManagedInstancesProvider.AddMember("infrastructureRoleArn", _String)
-
-	ManagedInstancesProvider_instanceLaunchTemplate = ManagedInstancesProvider.AddMember("instanceLaunchTemplate", InstanceLaunchTemplate)
-
-	ManagedInstancesProvider_infrastructureOptimization = ManagedInstancesProvider.AddMember("infrastructureOptimization", InfrastructureOptimization)
-
-	ComputeResource_type = ComputeResource.AddMember("type", CRType)
-
-	ComputeResource_allocationStrategy = ComputeResource.AddMember("allocationStrategy", CRAllocationStrategy)
-
-	ComputeResource_minvCpus = ComputeResource.AddMember("minvCpus", _Integer)
-
-	ComputeResource_maxvCpus = ComputeResource.AddMember("maxvCpus", _Integer)
-
-	ComputeResource_desiredvCpus = ComputeResource.AddMember("desiredvCpus", _Integer)
-
-	ComputeResource_instanceTypes = ComputeResource.AddMember("instanceTypes", _StringList)
-
-	ComputeResource_imageId = ComputeResource.AddMember("imageId", _String)
-
-	ComputeResource_subnets = ComputeResource.AddMember("subnets", _StringList)
-
-	ComputeResource_securityGroupIds = ComputeResource.AddMember("securityGroupIds", _StringList)
-
-	ComputeResource_ec2KeyPair = ComputeResource.AddMember("ec2KeyPair", _String)
-
-	ComputeResource_instanceRole = ComputeResource.AddMember("instanceRole", _String)
-
-	ComputeResource_tags = ComputeResource.AddMember("tags", _TagsMap)
-
-	ComputeResource_placementGroup = ComputeResource.AddMember("placementGroup", _String)
-
-	ComputeResource_bidPercentage = ComputeResource.AddMember("bidPercentage", _Integer)
-
-	ComputeResource_spotIamFleetRole = ComputeResource.AddMember("spotIamFleetRole", _String)
-
-	ComputeResource_launchTemplate = ComputeResource.AddMember("launchTemplate", LaunchTemplateSpecification)
-
-	ComputeResource_ec2Configuration = ComputeResource.AddMember("ec2Configuration", _Ec2ConfigurationList)
-
-	ComputeResource_scalingPolicy = ComputeResource.AddMember("scalingPolicy", ComputeScalingPolicy)
-
-	ComputeResource_managedInstancesProvider = ComputeResource.AddMember("managedInstancesProvider", ManagedInstancesProvider)
-
-	ComputeResource_capacityTags = ComputeResource.AddMember("capacityTags", _TagrisTagsMap)
-
-	UpdatePolicy_terminateJobsOnUpdate = UpdatePolicy.AddMember("terminateJobsOnUpdate", _Boolean)
-
-	UpdatePolicy_jobExecutionTimeoutMinutes = UpdatePolicy.AddMember("jobExecutionTimeoutMinutes", _JobExecutionTimeoutMinutes)
-
-	EksAccessEntryDesiredState_ENABLED = EksAccessEntryDesiredState.AddMember("ENABLED", smithyprelude.Unit)
-
-	EksAccessEntryDesiredState_DISABLED = EksAccessEntryDesiredState.AddMember("DISABLED", smithyprelude.Unit)
-
-	EksAccessEntryDesiredState_INHERIT_FROM_CLUSTER = EksAccessEntryDesiredState.AddMember("INHERIT_FROM_CLUSTER", smithyprelude.Unit)
-
-	EksAccessEntryStatus_ACTIVE = EksAccessEntryStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	EksAccessEntryStatus_INACTIVE = EksAccessEntryStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	EksAccessEntry_desiredState = EksAccessEntry.AddMember("desiredState", EksAccessEntryDesiredState)
-
-	EksAccessEntry_status = EksAccessEntry.AddMember("status", EksAccessEntryStatus)
-
-	EksConfiguration_eksClusterArn = EksConfiguration.AddMember("eksClusterArn", _String)
-
-	EksConfiguration_kubernetesNamespace = EksConfiguration.AddMember("kubernetesNamespace", _String)
-
-	EksConfiguration_accessEntry = EksConfiguration.AddMember("accessEntry", EksAccessEntry)
-
-	OrchestrationType_ECS = OrchestrationType.AddMember("ECS", smithyprelude.Unit)
-
-	OrchestrationType_EKS = OrchestrationType.AddMember("EKS", smithyprelude.Unit)
-
-	ContainerInsights_ENABLED = ContainerInsights.AddMember("ENABLED", smithyprelude.Unit)
-
-	ContainerInsights_ENHANCED = ContainerInsights.AddMember("ENHANCED", smithyprelude.Unit)
-
-	ContainerInsights_DISABLED = ContainerInsights.AddMember("DISABLED", smithyprelude.Unit)
-
-	EcsSettings_containerInsights = EcsSettings.AddMember("containerInsights", ContainerInsights)
-
-	ComputeEnvironmentDetail_computeEnvironmentName = ComputeEnvironmentDetail.AddMember("computeEnvironmentName", _String)
-
-	ComputeEnvironmentDetail_computeEnvironmentArn = ComputeEnvironmentDetail.AddMember("computeEnvironmentArn", _String)
-
-	ComputeEnvironmentDetail_unmanagedvCpus = ComputeEnvironmentDetail.AddMember("unmanagedvCpus", _Integer)
-
-	ComputeEnvironmentDetail_ecsClusterArn = ComputeEnvironmentDetail.AddMember("ecsClusterArn", _String)
-
-	ComputeEnvironmentDetail_tags = ComputeEnvironmentDetail.AddMember("tags", _TagrisTagsMap)
-
-	ComputeEnvironmentDetail_type = ComputeEnvironmentDetail.AddMember("type", CEType)
-
-	ComputeEnvironmentDetail_state = ComputeEnvironmentDetail.AddMember("state", CEState)
-
-	ComputeEnvironmentDetail_status = ComputeEnvironmentDetail.AddMember("status", CEStatus)
-
-	ComputeEnvironmentDetail_statusReason = ComputeEnvironmentDetail.AddMember("statusReason", _String)
-
-	ComputeEnvironmentDetail_computeResources = ComputeEnvironmentDetail.AddMember("computeResources", ComputeResource)
-
-	ComputeEnvironmentDetail_serviceRole = ComputeEnvironmentDetail.AddMember("serviceRole", _String)
-
-	ComputeEnvironmentDetail_updatePolicy = ComputeEnvironmentDetail.AddMember("updatePolicy", UpdatePolicy)
-
-	ComputeEnvironmentDetail_eksConfiguration = ComputeEnvironmentDetail.AddMember("eksConfiguration", EksConfiguration)
-
-	ComputeEnvironmentDetail_containerOrchestrationType = ComputeEnvironmentDetail.AddMember("containerOrchestrationType", OrchestrationType)
-
-	ComputeEnvironmentDetail_uuid = ComputeEnvironmentDetail.AddMember("uuid", _String)
-
-	ComputeEnvironmentDetail_context = ComputeEnvironmentDetail.AddMember("context", _String)
-
-	ComputeEnvironmentDetail_ecsSettings = ComputeEnvironmentDetail.AddMember("ecsSettings", EcsSettings)
-
-	_ComputeEnvironmentDetailList_member = _ComputeEnvironmentDetailList.AddMember("member", ComputeEnvironmentDetail)
-
-	ComputeEnvironmentOrder_order = ComputeEnvironmentOrder.AddMember("order", _Integer)
-
-	ComputeEnvironmentOrder_computeEnvironment = ComputeEnvironmentOrder.AddMember("computeEnvironment", _String)
-
-	_ComputeEnvironmentOrders_member = _ComputeEnvironmentOrders.AddMember("member", ComputeEnvironmentOrder)
-
-	CRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE = CRUpdateAllocationStrategy.AddMember("BEST_FIT_PROGRESSIVE", smithyprelude.Unit)
-
-	CRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED = CRUpdateAllocationStrategy.AddMember("BEST_FIT_PROGRESSIVE_ORDERED", smithyprelude.Unit)
-
-	CRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED = CRUpdateAllocationStrategy.AddMember("SPOT_CAPACITY_OPTIMIZED", smithyprelude.Unit)
-
-	CRUpdateAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED = CRUpdateAllocationStrategy.AddMember("SPOT_PRICE_CAPACITY_OPTIMIZED", smithyprelude.Unit)
-
-	CRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED = CRUpdateAllocationStrategy.AddMember("SPOT_CAPACITY_OPTIMIZED_PRIORITIZED", smithyprelude.Unit)
-
-	InstanceLaunchTemplateUpdate_ec2InstanceProfileArn = InstanceLaunchTemplateUpdate.AddMember("ec2InstanceProfileArn", _String)
-
-	InstanceLaunchTemplateUpdate_networkConfiguration = InstanceLaunchTemplateUpdate.AddMember("networkConfiguration", ManagedInstancesNetworkConfiguration)
-
-	InstanceLaunchTemplateUpdate_instanceRequirements = InstanceLaunchTemplateUpdate.AddMember("instanceRequirements", InstanceRequirementsRequest)
-
-	InstanceLaunchTemplateUpdate_storageConfiguration = InstanceLaunchTemplateUpdate.AddMember("storageConfiguration", ManagedInstancesStorageConfiguration)
-
-	InstanceLaunchTemplateUpdate_monitoring = InstanceLaunchTemplateUpdate.AddMember("monitoring", _String)
-
-	InstanceLaunchTemplateUpdate_capacityReservations = InstanceLaunchTemplateUpdate.AddMember("capacityReservations", CapacityReservationRequest)
-
-	InstanceLaunchTemplateUpdate_instanceMetadataTagsPropagation = InstanceLaunchTemplateUpdate.AddMember("instanceMetadataTagsPropagation", _Boolean)
-
-	InstanceLaunchTemplateUpdate_localStorageConfiguration = InstanceLaunchTemplateUpdate.AddMember("localStorageConfiguration", ManagedInstancesLocalStorageConfiguration)
-
-	UpdateManagedInstancesProviderConfiguration_propagateTags = UpdateManagedInstancesProviderConfiguration.AddMember("propagateTags", _String)
-
-	UpdateManagedInstancesProviderConfiguration_infrastructureRoleArn = UpdateManagedInstancesProviderConfiguration.AddMember("infrastructureRoleArn", _String)
-
-	UpdateManagedInstancesProviderConfiguration_instanceLaunchTemplate = UpdateManagedInstancesProviderConfiguration.AddMember("instanceLaunchTemplate", InstanceLaunchTemplateUpdate)
-
-	UpdateManagedInstancesProviderConfiguration_infrastructureOptimization = UpdateManagedInstancesProviderConfiguration.AddMember("infrastructureOptimization", InfrastructureOptimization)
-
-	ComputeResourceUpdate_minvCpus = ComputeResourceUpdate.AddMember("minvCpus", _Integer)
-
-	ComputeResourceUpdate_maxvCpus = ComputeResourceUpdate.AddMember("maxvCpus", _Integer)
-
-	ComputeResourceUpdate_desiredvCpus = ComputeResourceUpdate.AddMember("desiredvCpus", _Integer)
-
-	ComputeResourceUpdate_subnets = ComputeResourceUpdate.AddMember("subnets", _StringList)
-
-	ComputeResourceUpdate_securityGroupIds = ComputeResourceUpdate.AddMember("securityGroupIds", _StringList)
-
-	ComputeResourceUpdate_allocationStrategy = ComputeResourceUpdate.AddMember("allocationStrategy", CRUpdateAllocationStrategy)
-
-	ComputeResourceUpdate_instanceTypes = ComputeResourceUpdate.AddMember("instanceTypes", _StringList)
-
-	ComputeResourceUpdate_ec2KeyPair = ComputeResourceUpdate.AddMember("ec2KeyPair", _String)
-
-	ComputeResourceUpdate_instanceRole = ComputeResourceUpdate.AddMember("instanceRole", _String)
-
-	ComputeResourceUpdate_tags = ComputeResourceUpdate.AddMember("tags", _TagsMap)
-
-	ComputeResourceUpdate_placementGroup = ComputeResourceUpdate.AddMember("placementGroup", _String)
-
-	ComputeResourceUpdate_bidPercentage = ComputeResourceUpdate.AddMember("bidPercentage", _Integer)
-
-	ComputeResourceUpdate_launchTemplate = ComputeResourceUpdate.AddMember("launchTemplate", LaunchTemplateSpecification)
-
-	ComputeResourceUpdate_ec2Configuration = ComputeResourceUpdate.AddMember("ec2Configuration", _Ec2ConfigurationList)
-
-	ComputeResourceUpdate_updateToLatestImageVersion = ComputeResourceUpdate.AddMember("updateToLatestImageVersion", _Boolean)
-
-	ComputeResourceUpdate_type = ComputeResourceUpdate.AddMember("type", CRType)
-
-	ComputeResourceUpdate_imageId = ComputeResourceUpdate.AddMember("imageId", _String)
-
-	ComputeResourceUpdate_scalingPolicy = ComputeResourceUpdate.AddMember("scalingPolicy", ComputeScalingPolicy)
-
-	ComputeResourceUpdate_managedInstancesProvider = ComputeResourceUpdate.AddMember("managedInstancesProvider", UpdateManagedInstancesProviderConfiguration)
-
-	ComputeResourceUpdate_capacityTags = ComputeResourceUpdate.AddMember("capacityTags", _TagrisTagsMap)
-
-	ConsumableResourceRequirement_consumableResource = ConsumableResourceRequirement.AddMember("consumableResource", _String)
-
-	ConsumableResourceRequirement_quantity = ConsumableResourceRequirement.AddMember("quantity", _Long)
-
-	_ConsumableResourceList_member = _ConsumableResourceList.AddMember("member", ConsumableResourceRequirement)
-
-	ConsumableResourceProperties_consumableResourceList = ConsumableResourceProperties.AddMember("consumableResourceList", _ConsumableResourceList)
-
-	ConsumableResourceSummary_consumableResourceArn = ConsumableResourceSummary.AddMember("consumableResourceArn", _String)
-
-	ConsumableResourceSummary_consumableResourceName = ConsumableResourceSummary.AddMember("consumableResourceName", _String)
-
-	ConsumableResourceSummary_totalQuantity = ConsumableResourceSummary.AddMember("totalQuantity", _Long)
-
-	ConsumableResourceSummary_inUseQuantity = ConsumableResourceSummary.AddMember("inUseQuantity", _Long)
-
-	ConsumableResourceSummary_resourceType = ConsumableResourceSummary.AddMember("resourceType", _String)
-
-	_ConsumableResourceSummaryList_member = _ConsumableResourceSummaryList.AddMember("member", ConsumableResourceSummary)
-
-	Host_sourcePath = Host.AddMember("sourcePath", _String)
-
-	EFSTransitEncryption_ENABLED = EFSTransitEncryption.AddMember("ENABLED", smithyprelude.Unit)
-
-	EFSTransitEncryption_DISABLED = EFSTransitEncryption.AddMember("DISABLED", smithyprelude.Unit)
-
-	EFSAuthorizationConfigIAM_ENABLED = EFSAuthorizationConfigIAM.AddMember("ENABLED", smithyprelude.Unit)
-
-	EFSAuthorizationConfigIAM_DISABLED = EFSAuthorizationConfigIAM.AddMember("DISABLED", smithyprelude.Unit)
-
-	EFSAuthorizationConfig_accessPointId = EFSAuthorizationConfig.AddMember("accessPointId", _String)
-
-	EFSAuthorizationConfig_iam = EFSAuthorizationConfig.AddMember("iam", EFSAuthorizationConfigIAM)
-
-	EFSVolumeConfiguration_fileSystemId = EFSVolumeConfiguration.AddMember("fileSystemId", _String)
-
-	EFSVolumeConfiguration_rootDirectory = EFSVolumeConfiguration.AddMember("rootDirectory", _String)
-
-	EFSVolumeConfiguration_transitEncryption = EFSVolumeConfiguration.AddMember("transitEncryption", EFSTransitEncryption)
-
-	EFSVolumeConfiguration_transitEncryptionPort = EFSVolumeConfiguration.AddMember("transitEncryptionPort", _Integer)
-
-	EFSVolumeConfiguration_authorizationConfig = EFSVolumeConfiguration.AddMember("authorizationConfig", EFSAuthorizationConfig)
-
-	S3FilesVolumeConfiguration_fileSystemArn = S3FilesVolumeConfiguration.AddMember("fileSystemArn", _String)
-
-	S3FilesVolumeConfiguration_rootDirectory = S3FilesVolumeConfiguration.AddMember("rootDirectory", _String)
-
-	S3FilesVolumeConfiguration_transitEncryptionPort = S3FilesVolumeConfiguration.AddMember("transitEncryptionPort", _Integer)
-
-	S3FilesVolumeConfiguration_accessPointArn = S3FilesVolumeConfiguration.AddMember("accessPointArn", _String)
-
-	Volume_host = Volume.AddMember("host", Host)
-
-	Volume_name = Volume.AddMember("name", _String)
-
-	Volume_efsVolumeConfiguration = Volume.AddMember("efsVolumeConfiguration", EFSVolumeConfiguration)
-
-	Volume_s3filesVolumeConfiguration = Volume.AddMember("s3filesVolumeConfiguration", S3FilesVolumeConfiguration)
-
-	_Volumes_member = _Volumes.AddMember("member", Volume)
-
-	KeyValuePair_name = KeyValuePair.AddMember("name", _String)
-
-	KeyValuePair_value = KeyValuePair.AddMember("value", _String)
-
-	_EnvironmentVariables_member = _EnvironmentVariables.AddMember("member", KeyValuePair)
-
-	MountPoint_containerPath = MountPoint.AddMember("containerPath", _String)
-
-	MountPoint_readOnly = MountPoint.AddMember("readOnly", _Boolean)
-
-	MountPoint_sourceVolume = MountPoint.AddMember("sourceVolume", _String)
-
-	_MountPoints_member = _MountPoints.AddMember("member", MountPoint)
-
-	Ulimit_hardLimit = Ulimit.AddMember("hardLimit", _Integer)
-
-	Ulimit_name = Ulimit.AddMember("name", _String)
-
-	Ulimit_softLimit = Ulimit.AddMember("softLimit", _Integer)
-
-	_Ulimits_member = _Ulimits.AddMember("member", Ulimit)
-
-	ResourceType_GPU = ResourceType.AddMember("GPU", smithyprelude.Unit)
-
-	ResourceType_VCPU = ResourceType.AddMember("VCPU", smithyprelude.Unit)
-
-	ResourceType_MEMORY = ResourceType.AddMember("MEMORY", smithyprelude.Unit)
-
-	ResourceRequirement_value = ResourceRequirement.AddMember("value", _String)
-
-	ResourceRequirement_type = ResourceRequirement.AddMember("type", ResourceType)
-
-	_ResourceRequirements_member = _ResourceRequirements.AddMember("member", ResourceRequirement)
-
-	DeviceCgroupPermission_READ = DeviceCgroupPermission.AddMember("READ", smithyprelude.Unit)
-
-	DeviceCgroupPermission_WRITE = DeviceCgroupPermission.AddMember("WRITE", smithyprelude.Unit)
-
-	DeviceCgroupPermission_MKNOD = DeviceCgroupPermission.AddMember("MKNOD", smithyprelude.Unit)
-
-	_DeviceCgroupPermissions_member = _DeviceCgroupPermissions.AddMember("member", DeviceCgroupPermission)
-
-	Device_hostPath = Device.AddMember("hostPath", _String)
-
-	Device_containerPath = Device.AddMember("containerPath", _String)
-
-	Device_permissions = Device.AddMember("permissions", _DeviceCgroupPermissions)
-
-	_DevicesList_member = _DevicesList.AddMember("member", Device)
-
-	Tmpfs_containerPath = Tmpfs.AddMember("containerPath", _String)
-
-	Tmpfs_size = Tmpfs.AddMember("size", _Integer)
-
-	Tmpfs_mountOptions = Tmpfs.AddMember("mountOptions", _StringList)
-
-	_TmpfsList_member = _TmpfsList.AddMember("member", Tmpfs)
-
-	LinuxParameters_devices = LinuxParameters.AddMember("devices", _DevicesList)
-
-	LinuxParameters_initProcessEnabled = LinuxParameters.AddMember("initProcessEnabled", _Boolean)
-
-	LinuxParameters_sharedMemorySize = LinuxParameters.AddMember("sharedMemorySize", _Integer)
-
-	LinuxParameters_tmpfs = LinuxParameters.AddMember("tmpfs", _TmpfsList)
-
-	LinuxParameters_maxSwap = LinuxParameters.AddMember("maxSwap", _Integer)
-
-	LinuxParameters_swappiness = LinuxParameters.AddMember("swappiness", _Integer)
-
-	LogDriver_JSON_FILE = LogDriver.AddMember("JSON_FILE", smithyprelude.Unit)
-
-	LogDriver_SYSLOG = LogDriver.AddMember("SYSLOG", smithyprelude.Unit)
-
-	LogDriver_JOURNALD = LogDriver.AddMember("JOURNALD", smithyprelude.Unit)
-
-	LogDriver_GELF = LogDriver.AddMember("GELF", smithyprelude.Unit)
-
-	LogDriver_FLUENTD = LogDriver.AddMember("FLUENTD", smithyprelude.Unit)
-
-	LogDriver_AWSLOGS = LogDriver.AddMember("AWSLOGS", smithyprelude.Unit)
-
-	LogDriver_SPLUNK = LogDriver.AddMember("SPLUNK", smithyprelude.Unit)
-
-	LogDriver_AWSFIRELENS = LogDriver.AddMember("AWSFIRELENS", smithyprelude.Unit)
-
-	_LogConfigurationOptionsMap_key = _LogConfigurationOptionsMap.AddMember("key", _String)
-
-	_LogConfigurationOptionsMap_value = _LogConfigurationOptionsMap.AddMember("value", _String)
-
-	Secret_name = Secret.AddMember("name", _String)
-
-	Secret_valueFrom = Secret.AddMember("valueFrom", _String)
-
-	_SecretList_member = _SecretList.AddMember("member", Secret)
-
-	LogConfiguration_logDriver = LogConfiguration.AddMember("logDriver", LogDriver)
-
-	LogConfiguration_options = LogConfiguration.AddMember("options", _LogConfigurationOptionsMap)
-
-	LogConfiguration_secretOptions = LogConfiguration.AddMember("secretOptions", _SecretList)
-
-	NetworkConfiguration_assignPublicIp = NetworkConfiguration.AddMember("assignPublicIp", AssignPublicIp)
-
-	FargatePlatformConfiguration_platformVersion = FargatePlatformConfiguration.AddMember("platformVersion", _String)
-
-	EphemeralStorage_sizeInGiB = EphemeralStorage.AddMember("sizeInGiB", _Integer)
-
-	RuntimePlatform_operatingSystemFamily = RuntimePlatform.AddMember("operatingSystemFamily", _String)
-
-	RuntimePlatform_cpuArchitecture = RuntimePlatform.AddMember("cpuArchitecture", _String)
-
-	RepositoryCredentials_credentialsParameter = RepositoryCredentials.AddMember("credentialsParameter", _String)
-
-	ContainerDetail_image = ContainerDetail.AddMember("image", _String)
-
-	ContainerDetail_vcpus = ContainerDetail.AddMember("vcpus", _Integer)
-
-	ContainerDetail_memory = ContainerDetail.AddMember("memory", _Integer)
-
-	ContainerDetail_command = ContainerDetail.AddMember("command", _StringList)
-
-	ContainerDetail_jobRoleArn = ContainerDetail.AddMember("jobRoleArn", _String)
-
-	ContainerDetail_executionRoleArn = ContainerDetail.AddMember("executionRoleArn", _String)
-
-	ContainerDetail_volumes = ContainerDetail.AddMember("volumes", _Volumes)
-
-	ContainerDetail_environment = ContainerDetail.AddMember("environment", _EnvironmentVariables)
-
-	ContainerDetail_mountPoints = ContainerDetail.AddMember("mountPoints", _MountPoints)
-
-	ContainerDetail_readonlyRootFilesystem = ContainerDetail.AddMember("readonlyRootFilesystem", _Boolean)
-
-	ContainerDetail_ulimits = ContainerDetail.AddMember("ulimits", _Ulimits)
-
-	ContainerDetail_privileged = ContainerDetail.AddMember("privileged", _Boolean)
-
-	ContainerDetail_user = ContainerDetail.AddMember("user", _String)
-
-	ContainerDetail_exitCode = ContainerDetail.AddMember("exitCode", _Integer)
-
-	ContainerDetail_reason = ContainerDetail.AddMember("reason", _String)
-
-	ContainerDetail_containerInstanceArn = ContainerDetail.AddMember("containerInstanceArn", _String)
-
-	ContainerDetail_taskArn = ContainerDetail.AddMember("taskArn", _String)
-
-	ContainerDetail_logStreamName = ContainerDetail.AddMember("logStreamName", _String)
-
-	ContainerDetail_instanceType = ContainerDetail.AddMember("instanceType", _String)
-
-	ContainerDetail_networkInterfaces = ContainerDetail.AddMember("networkInterfaces", _NetworkInterfaceList)
-
-	ContainerDetail_resourceRequirements = ContainerDetail.AddMember("resourceRequirements", _ResourceRequirements)
-
-	ContainerDetail_linuxParameters = ContainerDetail.AddMember("linuxParameters", LinuxParameters)
-
-	ContainerDetail_logConfiguration = ContainerDetail.AddMember("logConfiguration", LogConfiguration)
-
-	ContainerDetail_secrets = ContainerDetail.AddMember("secrets", _SecretList)
-
-	ContainerDetail_networkConfiguration = ContainerDetail.AddMember("networkConfiguration", NetworkConfiguration)
-
-	ContainerDetail_fargatePlatformConfiguration = ContainerDetail.AddMember("fargatePlatformConfiguration", FargatePlatformConfiguration)
-
-	ContainerDetail_ephemeralStorage = ContainerDetail.AddMember("ephemeralStorage", EphemeralStorage)
-
-	ContainerDetail_runtimePlatform = ContainerDetail.AddMember("runtimePlatform", RuntimePlatform)
-
-	ContainerDetail_repositoryCredentials = ContainerDetail.AddMember("repositoryCredentials", RepositoryCredentials)
-
-	ContainerDetail_enableExecuteCommand = ContainerDetail.AddMember("enableExecuteCommand", _Boolean)
-
-	ContainerOverrides_vcpus = ContainerOverrides.AddMember("vcpus", _Integer)
-
-	ContainerOverrides_memory = ContainerOverrides.AddMember("memory", _Integer)
-
-	ContainerOverrides_command = ContainerOverrides.AddMember("command", _StringList)
-
-	ContainerOverrides_instanceType = ContainerOverrides.AddMember("instanceType", _String)
-
-	ContainerOverrides_environment = ContainerOverrides.AddMember("environment", _EnvironmentVariables)
-
-	ContainerOverrides_resourceRequirements = ContainerOverrides.AddMember("resourceRequirements", _ResourceRequirements)
-
-	ContainerProperties_image = ContainerProperties.AddMember("image", _String)
-
-	ContainerProperties_vcpus = ContainerProperties.AddMember("vcpus", _Integer)
-
-	ContainerProperties_memory = ContainerProperties.AddMember("memory", _Integer)
-
-	ContainerProperties_command = ContainerProperties.AddMember("command", _StringList)
-
-	ContainerProperties_jobRoleArn = ContainerProperties.AddMember("jobRoleArn", _String)
-
-	ContainerProperties_executionRoleArn = ContainerProperties.AddMember("executionRoleArn", _String)
-
-	ContainerProperties_volumes = ContainerProperties.AddMember("volumes", _Volumes)
-
-	ContainerProperties_environment = ContainerProperties.AddMember("environment", _EnvironmentVariables)
-
-	ContainerProperties_mountPoints = ContainerProperties.AddMember("mountPoints", _MountPoints)
-
-	ContainerProperties_readonlyRootFilesystem = ContainerProperties.AddMember("readonlyRootFilesystem", _Boolean)
-
-	ContainerProperties_privileged = ContainerProperties.AddMember("privileged", _Boolean)
-
-	ContainerProperties_ulimits = ContainerProperties.AddMember("ulimits", _Ulimits)
-
-	ContainerProperties_user = ContainerProperties.AddMember("user", _String)
-
-	ContainerProperties_instanceType = ContainerProperties.AddMember("instanceType", _String)
-
-	ContainerProperties_resourceRequirements = ContainerProperties.AddMember("resourceRequirements", _ResourceRequirements)
-
-	ContainerProperties_linuxParameters = ContainerProperties.AddMember("linuxParameters", LinuxParameters)
-
-	ContainerProperties_logConfiguration = ContainerProperties.AddMember("logConfiguration", LogConfiguration)
-
-	ContainerProperties_secrets = ContainerProperties.AddMember("secrets", _SecretList)
-
-	ContainerProperties_networkConfiguration = ContainerProperties.AddMember("networkConfiguration", NetworkConfiguration)
-
-	ContainerProperties_fargatePlatformConfiguration = ContainerProperties.AddMember("fargatePlatformConfiguration", FargatePlatformConfiguration)
-
-	ContainerProperties_enableExecuteCommand = ContainerProperties.AddMember("enableExecuteCommand", _Boolean)
-
-	ContainerProperties_ephemeralStorage = ContainerProperties.AddMember("ephemeralStorage", EphemeralStorage)
-
-	ContainerProperties_runtimePlatform = ContainerProperties.AddMember("runtimePlatform", RuntimePlatform)
-
-	ContainerProperties_repositoryCredentials = ContainerProperties.AddMember("repositoryCredentials", RepositoryCredentials)
-
-	ContainerSummary_exitCode = ContainerSummary.AddMember("exitCode", _Integer)
-
-	ContainerSummary_reason = ContainerSummary.AddMember("reason", _String)
-
-	TaskContainerDependency_containerName = TaskContainerDependency.AddMember("containerName", _String)
-
-	TaskContainerDependency_condition = TaskContainerDependency.AddMember("condition", _String)
-
-	_TaskContainerDependencyList_member = _TaskContainerDependencyList.AddMember("member", TaskContainerDependency)
-
-	FirelensConfigurationType_FLUENTD = FirelensConfigurationType.AddMember("FLUENTD", smithyprelude.Unit)
-
-	FirelensConfigurationType_FLUENTBIT = FirelensConfigurationType.AddMember("FLUENTBIT", smithyprelude.Unit)
-
-	_FirelensConfigurationOptionsMap_key = _FirelensConfigurationOptionsMap.AddMember("key", _String)
-
-	_FirelensConfigurationOptionsMap_value = _FirelensConfigurationOptionsMap.AddMember("value", _String)
-
-	FirelensConfiguration_type = FirelensConfiguration.AddMember("type", FirelensConfigurationType)
-
-	FirelensConfiguration_options = FirelensConfiguration.AddMember("options", _FirelensConfigurationOptionsMap)
-
-	TaskContainerProperties_command = TaskContainerProperties.AddMember("command", _StringList)
-
-	TaskContainerProperties_dependsOn = TaskContainerProperties.AddMember("dependsOn", _TaskContainerDependencyList)
-
-	TaskContainerProperties_environment = TaskContainerProperties.AddMember("environment", _EnvironmentVariables)
-
-	TaskContainerProperties_essential = TaskContainerProperties.AddMember("essential", _Boolean)
-
-	TaskContainerProperties_firelensConfiguration = TaskContainerProperties.AddMember("firelensConfiguration", FirelensConfiguration)
-
-	TaskContainerProperties_image = TaskContainerProperties.AddMember("image", _String)
-
-	TaskContainerProperties_linuxParameters = TaskContainerProperties.AddMember("linuxParameters", LinuxParameters)
-
-	TaskContainerProperties_logConfiguration = TaskContainerProperties.AddMember("logConfiguration", LogConfiguration)
-
-	TaskContainerProperties_mountPoints = TaskContainerProperties.AddMember("mountPoints", _MountPoints)
-
-	TaskContainerProperties_name = TaskContainerProperties.AddMember("name", _String)
-
-	TaskContainerProperties_privileged = TaskContainerProperties.AddMember("privileged", _Boolean)
-
-	TaskContainerProperties_readonlyRootFilesystem = TaskContainerProperties.AddMember("readonlyRootFilesystem", _Boolean)
-
-	TaskContainerProperties_repositoryCredentials = TaskContainerProperties.AddMember("repositoryCredentials", RepositoryCredentials)
-
-	TaskContainerProperties_resourceRequirements = TaskContainerProperties.AddMember("resourceRequirements", _ResourceRequirements)
-
-	TaskContainerProperties_secrets = TaskContainerProperties.AddMember("secrets", _SecretList)
-
-	TaskContainerProperties_ulimits = TaskContainerProperties.AddMember("ulimits", _Ulimits)
-
-	TaskContainerProperties_user = TaskContainerProperties.AddMember("user", _String)
-
-	TaskContainerProperties_startTimeout = TaskContainerProperties.AddMember("startTimeout", _Integer)
-
-	TaskContainerProperties_stopTimeout = TaskContainerProperties.AddMember("stopTimeout", _Integer)
-
-	_ListTaskContainerProperties_member = _ListTaskContainerProperties.AddMember("member", TaskContainerProperties)
-
-	EcsTaskProperties_containers = EcsTaskProperties.AddMember("containers", _ListTaskContainerProperties)
-
-	EcsTaskProperties_ephemeralStorage = EcsTaskProperties.AddMember("ephemeralStorage", EphemeralStorage)
-
-	EcsTaskProperties_executionRoleArn = EcsTaskProperties.AddMember("executionRoleArn", _String)
-
-	EcsTaskProperties_platformVersion = EcsTaskProperties.AddMember("platformVersion", _String)
-
-	EcsTaskProperties_ipcMode = EcsTaskProperties.AddMember("ipcMode", _String)
-
-	EcsTaskProperties_taskRoleArn = EcsTaskProperties.AddMember("taskRoleArn", _String)
-
-	EcsTaskProperties_pidMode = EcsTaskProperties.AddMember("pidMode", _String)
-
-	EcsTaskProperties_networkConfiguration = EcsTaskProperties.AddMember("networkConfiguration", NetworkConfiguration)
-
-	EcsTaskProperties_runtimePlatform = EcsTaskProperties.AddMember("runtimePlatform", RuntimePlatform)
-
-	EcsTaskProperties_volumes = EcsTaskProperties.AddMember("volumes", _Volumes)
-
-	EcsTaskProperties_enableExecuteCommand = EcsTaskProperties.AddMember("enableExecuteCommand", _Boolean)
-
-	EcsTaskProperties_networkMode = EcsTaskProperties.AddMember("networkMode", _String)
-
-	_ListEcsTaskProperties_member = _ListEcsTaskProperties.AddMember("member", EcsTaskProperties)
-
-	EcsProperties_taskProperties = EcsProperties.AddMember("taskProperties", _ListEcsTaskProperties)
-
-	TaskContainerDetails_command = TaskContainerDetails.AddMember("command", _StringList)
-
-	TaskContainerDetails_dependsOn = TaskContainerDetails.AddMember("dependsOn", _TaskContainerDependencyList)
-
-	TaskContainerDetails_environment = TaskContainerDetails.AddMember("environment", _EnvironmentVariables)
-
-	TaskContainerDetails_essential = TaskContainerDetails.AddMember("essential", _Boolean)
-
-	TaskContainerDetails_firelensConfiguration = TaskContainerDetails.AddMember("firelensConfiguration", FirelensConfiguration)
-
-	TaskContainerDetails_image = TaskContainerDetails.AddMember("image", _String)
-
-	TaskContainerDetails_linuxParameters = TaskContainerDetails.AddMember("linuxParameters", LinuxParameters)
-
-	TaskContainerDetails_logConfiguration = TaskContainerDetails.AddMember("logConfiguration", LogConfiguration)
-
-	TaskContainerDetails_mountPoints = TaskContainerDetails.AddMember("mountPoints", _MountPoints)
-
-	TaskContainerDetails_name = TaskContainerDetails.AddMember("name", _String)
-
-	TaskContainerDetails_privileged = TaskContainerDetails.AddMember("privileged", _Boolean)
-
-	TaskContainerDetails_readonlyRootFilesystem = TaskContainerDetails.AddMember("readonlyRootFilesystem", _Boolean)
-
-	TaskContainerDetails_repositoryCredentials = TaskContainerDetails.AddMember("repositoryCredentials", RepositoryCredentials)
-
-	TaskContainerDetails_resourceRequirements = TaskContainerDetails.AddMember("resourceRequirements", _ResourceRequirements)
-
-	TaskContainerDetails_secrets = TaskContainerDetails.AddMember("secrets", _SecretList)
-
-	TaskContainerDetails_ulimits = TaskContainerDetails.AddMember("ulimits", _Ulimits)
-
-	TaskContainerDetails_user = TaskContainerDetails.AddMember("user", _String)
-
-	TaskContainerDetails_startTimeout = TaskContainerDetails.AddMember("startTimeout", _Integer)
-
-	TaskContainerDetails_stopTimeout = TaskContainerDetails.AddMember("stopTimeout", _Integer)
-
-	TaskContainerDetails_exitCode = TaskContainerDetails.AddMember("exitCode", _Integer)
-
-	TaskContainerDetails_reason = TaskContainerDetails.AddMember("reason", _String)
-
-	TaskContainerDetails_logStreamName = TaskContainerDetails.AddMember("logStreamName", _String)
-
-	TaskContainerDetails_networkInterfaces = TaskContainerDetails.AddMember("networkInterfaces", _NetworkInterfaceList)
-
-	_ListTaskContainerDetails_member = _ListTaskContainerDetails.AddMember("member", TaskContainerDetails)
-
-	EcsTaskDetails_containers = EcsTaskDetails.AddMember("containers", _ListTaskContainerDetails)
-
-	EcsTaskDetails_containerInstanceArn = EcsTaskDetails.AddMember("containerInstanceArn", _String)
-
-	EcsTaskDetails_taskArn = EcsTaskDetails.AddMember("taskArn", _String)
-
-	EcsTaskDetails_ephemeralStorage = EcsTaskDetails.AddMember("ephemeralStorage", EphemeralStorage)
-
-	EcsTaskDetails_executionRoleArn = EcsTaskDetails.AddMember("executionRoleArn", _String)
-
-	EcsTaskDetails_platformVersion = EcsTaskDetails.AddMember("platformVersion", _String)
-
-	EcsTaskDetails_ipcMode = EcsTaskDetails.AddMember("ipcMode", _String)
-
-	EcsTaskDetails_taskRoleArn = EcsTaskDetails.AddMember("taskRoleArn", _String)
-
-	EcsTaskDetails_pidMode = EcsTaskDetails.AddMember("pidMode", _String)
-
-	EcsTaskDetails_networkConfiguration = EcsTaskDetails.AddMember("networkConfiguration", NetworkConfiguration)
-
-	EcsTaskDetails_runtimePlatform = EcsTaskDetails.AddMember("runtimePlatform", RuntimePlatform)
-
-	EcsTaskDetails_volumes = EcsTaskDetails.AddMember("volumes", _Volumes)
-
-	EcsTaskDetails_enableExecuteCommand = EcsTaskDetails.AddMember("enableExecuteCommand", _Boolean)
-
-	EcsTaskDetails_networkMode = EcsTaskDetails.AddMember("networkMode", _String)
-
-	_ListEcsTaskDetails_member = _ListEcsTaskDetails.AddMember("member", EcsTaskDetails)
-
-	EcsPropertiesDetail_taskProperties = EcsPropertiesDetail.AddMember("taskProperties", _ListEcsTaskDetails)
-
-	TaskContainerOverrides_command = TaskContainerOverrides.AddMember("command", _StringList)
-
-	TaskContainerOverrides_environment = TaskContainerOverrides.AddMember("environment", _EnvironmentVariables)
-
-	TaskContainerOverrides_name = TaskContainerOverrides.AddMember("name", _String)
-
-	TaskContainerOverrides_resourceRequirements = TaskContainerOverrides.AddMember("resourceRequirements", _ResourceRequirements)
-
-	_ListTaskContainerOverrides_member = _ListTaskContainerOverrides.AddMember("member", TaskContainerOverrides)
-
-	TaskPropertiesOverride_containers = TaskPropertiesOverride.AddMember("containers", _ListTaskContainerOverrides)
-
-	_ListTaskPropertiesOverride_member = _ListTaskPropertiesOverride.AddMember("member", TaskPropertiesOverride)
-
-	EcsPropertiesOverride_taskProperties = EcsPropertiesOverride.AddMember("taskProperties", _ListTaskPropertiesOverride)
-
-	_EksAnnotationsMap_key = _EksAnnotationsMap.AddMember("key", _String)
-
-	_EksAnnotationsMap_value = _EksAnnotationsMap.AddMember("value", _String)
-
-	EksAttemptContainerDetail_name = EksAttemptContainerDetail.AddMember("name", _String)
-
-	EksAttemptContainerDetail_containerID = EksAttemptContainerDetail.AddMember("containerID", _String)
-
-	EksAttemptContainerDetail_exitCode = EksAttemptContainerDetail.AddMember("exitCode", _Integer)
-
-	EksAttemptContainerDetail_reason = EksAttemptContainerDetail.AddMember("reason", _String)
-
-	_EksAttemptContainerDetails_member = _EksAttemptContainerDetails.AddMember("member", EksAttemptContainerDetail)
-
-	EksAttemptDetail_containers = EksAttemptDetail.AddMember("containers", _EksAttemptContainerDetails)
-
-	EksAttemptDetail_initContainers = EksAttemptDetail.AddMember("initContainers", _EksAttemptContainerDetails)
-
-	EksAttemptDetail_eksClusterArn = EksAttemptDetail.AddMember("eksClusterArn", _String)
-
-	EksAttemptDetail_podName = EksAttemptDetail.AddMember("podName", _String)
-
-	EksAttemptDetail_podNamespace = EksAttemptDetail.AddMember("podNamespace", _String)
-
-	EksAttemptDetail_nodeName = EksAttemptDetail.AddMember("nodeName", _String)
-
-	EksAttemptDetail_startedAt = EksAttemptDetail.AddMember("startedAt", _Long)
-
-	EksAttemptDetail_stoppedAt = EksAttemptDetail.AddMember("stoppedAt", _Long)
-
-	EksAttemptDetail_statusReason = EksAttemptDetail.AddMember("statusReason", _String)
-
-	_EksAttemptDetails_member = _EksAttemptDetails.AddMember("member", EksAttemptDetail)
-
-	EksConfigurationUpdate_accessEntry = EksConfigurationUpdate.AddMember("accessEntry", EksAccessEntry)
-
-	EksContainerEnvironmentVariable_name = EksContainerEnvironmentVariable.AddMember("name", _String)
-
-	EksContainerEnvironmentVariable_value = EksContainerEnvironmentVariable.AddMember("value", _String)
-
-	_EksContainerEnvironmentVariables_member = _EksContainerEnvironmentVariables.AddMember("member", EksContainerEnvironmentVariable)
-
-	_EksLimits_key = _EksLimits.AddMember("key", _String)
-
-	_EksLimits_value = _EksLimits.AddMember("value", _Quantity)
-
-	_EksRequests_key = _EksRequests.AddMember("key", _String)
-
-	_EksRequests_value = _EksRequests.AddMember("value", _Quantity)
-
-	EksContainerResourceRequirements_limits = EksContainerResourceRequirements.AddMember("limits", _EksLimits)
-
-	EksContainerResourceRequirements_requests = EksContainerResourceRequirements.AddMember("requests", _EksRequests)
-
-	EksContainerVolumeMount_name = EksContainerVolumeMount.AddMember("name", _String)
-
-	EksContainerVolumeMount_mountPath = EksContainerVolumeMount.AddMember("mountPath", _String)
-
-	EksContainerVolumeMount_subPath = EksContainerVolumeMount.AddMember("subPath", _String)
-
-	EksContainerVolumeMount_readOnly = EksContainerVolumeMount.AddMember("readOnly", _Boolean)
-
-	_EksContainerVolumeMounts_member = _EksContainerVolumeMounts.AddMember("member", EksContainerVolumeMount)
-
-	EksContainerSecurityContext_runAsUser = EksContainerSecurityContext.AddMember("runAsUser", _Long)
-
-	EksContainerSecurityContext_runAsGroup = EksContainerSecurityContext.AddMember("runAsGroup", _Long)
-
-	EksContainerSecurityContext_privileged = EksContainerSecurityContext.AddMember("privileged", _Boolean)
-
-	EksContainerSecurityContext_allowPrivilegeEscalation = EksContainerSecurityContext.AddMember("allowPrivilegeEscalation", _Boolean)
-
-	EksContainerSecurityContext_readOnlyRootFilesystem = EksContainerSecurityContext.AddMember("readOnlyRootFilesystem", _Boolean)
-
-	EksContainerSecurityContext_runAsNonRoot = EksContainerSecurityContext.AddMember("runAsNonRoot", _Boolean)
-
-	EksContainer_name = EksContainer.AddMember("name", _String)
-
-	EksContainer_image = EksContainer.AddMember("image", _String)
-
-	EksContainer_imagePullPolicy = EksContainer.AddMember("imagePullPolicy", _String)
-
-	EksContainer_command = EksContainer.AddMember("command", _StringList)
-
-	EksContainer_args = EksContainer.AddMember("args", _StringList)
-
-	EksContainer_env = EksContainer.AddMember("env", _EksContainerEnvironmentVariables)
-
-	EksContainer_resources = EksContainer.AddMember("resources", EksContainerResourceRequirements)
-
-	EksContainer_volumeMounts = EksContainer.AddMember("volumeMounts", _EksContainerVolumeMounts)
-
-	EksContainer_securityContext = EksContainer.AddMember("securityContext", EksContainerSecurityContext)
-
-	EksContainerDetail_name = EksContainerDetail.AddMember("name", _String)
-
-	EksContainerDetail_image = EksContainerDetail.AddMember("image", _String)
-
-	EksContainerDetail_imagePullPolicy = EksContainerDetail.AddMember("imagePullPolicy", _String)
-
-	EksContainerDetail_command = EksContainerDetail.AddMember("command", _StringList)
-
-	EksContainerDetail_args = EksContainerDetail.AddMember("args", _StringList)
-
-	EksContainerDetail_env = EksContainerDetail.AddMember("env", _EksContainerEnvironmentVariables)
-
-	EksContainerDetail_resources = EksContainerDetail.AddMember("resources", EksContainerResourceRequirements)
-
-	EksContainerDetail_exitCode = EksContainerDetail.AddMember("exitCode", _Integer)
-
-	EksContainerDetail_reason = EksContainerDetail.AddMember("reason", _String)
-
-	EksContainerDetail_volumeMounts = EksContainerDetail.AddMember("volumeMounts", _EksContainerVolumeMounts)
-
-	EksContainerDetail_securityContext = EksContainerDetail.AddMember("securityContext", EksContainerSecurityContext)
-
-	_EksContainerDetails_member = _EksContainerDetails.AddMember("member", EksContainerDetail)
-
-	EksContainerOverride_name = EksContainerOverride.AddMember("name", _String)
-
-	EksContainerOverride_image = EksContainerOverride.AddMember("image", _String)
-
-	EksContainerOverride_command = EksContainerOverride.AddMember("command", _StringList)
-
-	EksContainerOverride_args = EksContainerOverride.AddMember("args", _StringList)
-
-	EksContainerOverride_env = EksContainerOverride.AddMember("env", _EksContainerEnvironmentVariables)
-
-	EksContainerOverride_resources = EksContainerOverride.AddMember("resources", EksContainerResourceRequirements)
-
-	_EksContainerOverrideList_member = _EksContainerOverrideList.AddMember("member", EksContainerOverride)
-
-	_EksContainers_member = _EksContainers.AddMember("member", EksContainer)
-
-	EksEmptyDir_medium = EksEmptyDir.AddMember("medium", _String)
-
-	EksEmptyDir_sizeLimit = EksEmptyDir.AddMember("sizeLimit", _Quantity)
-
-	EksHostPath_path = EksHostPath.AddMember("path", _String)
-
-	_EksLabelsMap_key = _EksLabelsMap.AddMember("key", _String)
-
-	_EksLabelsMap_value = _EksLabelsMap.AddMember("value", _String)
-
-	EksMetadata_labels = EksMetadata.AddMember("labels", _EksLabelsMap)
-
-	EksMetadata_annotations = EksMetadata.AddMember("annotations", _EksAnnotationsMap)
-
-	EksMetadata_namespace = EksMetadata.AddMember("namespace", _String)
-
-	EksPersistentVolumeClaim_claimName = EksPersistentVolumeClaim.AddMember("claimName", _String)
-
-	EksPersistentVolumeClaim_readOnly = EksPersistentVolumeClaim.AddMember("readOnly", _Boolean)
-
-	ImagePullSecret_name = ImagePullSecret.AddMember("name", _String)
-
-	_ImagePullSecrets_member = _ImagePullSecrets.AddMember("member", ImagePullSecret)
-
-	EksSecret_secretName = EksSecret.AddMember("secretName", _String)
-
-	EksSecret_optional = EksSecret.AddMember("optional", _Boolean)
-
-	EksVolume_name = EksVolume.AddMember("name", _String)
-
-	EksVolume_hostPath = EksVolume.AddMember("hostPath", EksHostPath)
-
-	EksVolume_emptyDir = EksVolume.AddMember("emptyDir", EksEmptyDir)
-
-	EksVolume_secret = EksVolume.AddMember("secret", EksSecret)
-
-	EksVolume_persistentVolumeClaim = EksVolume.AddMember("persistentVolumeClaim", EksPersistentVolumeClaim)
-
-	_EksVolumes_member = _EksVolumes.AddMember("member", EksVolume)
-
-	EksPodProperties_serviceAccountName = EksPodProperties.AddMember("serviceAccountName", _String)
-
-	EksPodProperties_hostNetwork = EksPodProperties.AddMember("hostNetwork", _Boolean)
-
-	EksPodProperties_dnsPolicy = EksPodProperties.AddMember("dnsPolicy", _String)
-
-	EksPodProperties_imagePullSecrets = EksPodProperties.AddMember("imagePullSecrets", _ImagePullSecrets)
-
-	EksPodProperties_containers = EksPodProperties.AddMember("containers", _EksContainers)
-
-	EksPodProperties_initContainers = EksPodProperties.AddMember("initContainers", _EksContainers)
-
-	EksPodProperties_volumes = EksPodProperties.AddMember("volumes", _EksVolumes)
-
-	EksPodProperties_metadata = EksPodProperties.AddMember("metadata", EksMetadata)
-
-	EksPodProperties_shareProcessNamespace = EksPodProperties.AddMember("shareProcessNamespace", _Boolean)
-
-	EksPodPropertiesDetail_serviceAccountName = EksPodPropertiesDetail.AddMember("serviceAccountName", _String)
-
-	EksPodPropertiesDetail_hostNetwork = EksPodPropertiesDetail.AddMember("hostNetwork", _Boolean)
-
-	EksPodPropertiesDetail_dnsPolicy = EksPodPropertiesDetail.AddMember("dnsPolicy", _String)
-
-	EksPodPropertiesDetail_imagePullSecrets = EksPodPropertiesDetail.AddMember("imagePullSecrets", _ImagePullSecrets)
-
-	EksPodPropertiesDetail_containers = EksPodPropertiesDetail.AddMember("containers", _EksContainerDetails)
-
-	EksPodPropertiesDetail_initContainers = EksPodPropertiesDetail.AddMember("initContainers", _EksContainerDetails)
-
-	EksPodPropertiesDetail_volumes = EksPodPropertiesDetail.AddMember("volumes", _EksVolumes)
-
-	EksPodPropertiesDetail_podName = EksPodPropertiesDetail.AddMember("podName", _String)
-
-	EksPodPropertiesDetail_nodeName = EksPodPropertiesDetail.AddMember("nodeName", _String)
-
-	EksPodPropertiesDetail_metadata = EksPodPropertiesDetail.AddMember("metadata", EksMetadata)
-
-	EksPodPropertiesDetail_shareProcessNamespace = EksPodPropertiesDetail.AddMember("shareProcessNamespace", _Boolean)
-
-	EksPodPropertiesOverride_containers = EksPodPropertiesOverride.AddMember("containers", _EksContainerOverrideList)
-
-	EksPodPropertiesOverride_initContainers = EksPodPropertiesOverride.AddMember("initContainers", _EksContainerOverrideList)
-
-	EksPodPropertiesOverride_metadata = EksPodPropertiesOverride.AddMember("metadata", EksMetadata)
-
-	EksProperties_podProperties = EksProperties.AddMember("podProperties", EksPodProperties)
-
-	EksPropertiesDetail_podProperties = EksPropertiesDetail.AddMember("podProperties", EksPodPropertiesDetail)
-
-	EksPropertiesOverride_podProperties = EksPropertiesOverride.AddMember("podProperties", EksPodPropertiesOverride)
-
-	RetryAction_RETRY = RetryAction.AddMember("RETRY", smithyprelude.Unit)
-
-	RetryAction_EXIT = RetryAction.AddMember("EXIT", smithyprelude.Unit)
-
-	EvaluateOnExit_onStatusReason = EvaluateOnExit.AddMember("onStatusReason", _String)
-
-	EvaluateOnExit_onReason = EvaluateOnExit.AddMember("onReason", _String)
-
-	EvaluateOnExit_onExitCode = EvaluateOnExit.AddMember("onExitCode", _String)
-
-	EvaluateOnExit_action = EvaluateOnExit.AddMember("action", RetryAction)
-
-	_EvaluateOnExitList_member = _EvaluateOnExitList.AddMember("member", EvaluateOnExit)
-
-	FairshareCapacityUsage_capacityUnit = FairshareCapacityUsage.AddMember("capacityUnit", _String)
-
-	FairshareCapacityUsage_quantity = FairshareCapacityUsage.AddMember("quantity", _Double)
-
-	_FairshareCapacityUsageList_member = _FairshareCapacityUsageList.AddMember("member", FairshareCapacityUsage)
-
-	FairshareCapacityUtilization_shareIdentifier = FairshareCapacityUtilization.AddMember("shareIdentifier", _String)
-
-	FairshareCapacityUtilization_capacityUsage = FairshareCapacityUtilization.AddMember("capacityUsage", _FairshareCapacityUsageList)
-
-	_FairshareCapacityUtilizationList_member = _FairshareCapacityUtilizationList.AddMember("member", FairshareCapacityUtilization)
-
-	ShareAttributes_shareIdentifier = ShareAttributes.AddMember("shareIdentifier", _String)
-
-	ShareAttributes_weightFactor = ShareAttributes.AddMember("weightFactor", _Float)
-
-	_ShareAttributesList_member = _ShareAttributesList.AddMember("member", ShareAttributes)
-
-	FairsharePolicy_shareDecaySeconds = FairsharePolicy.AddMember("shareDecaySeconds", _Integer)
-
-	FairsharePolicy_computeReservation = FairsharePolicy.AddMember("computeReservation", _Integer)
-
-	FairsharePolicy_shareDistribution = FairsharePolicy.AddMember("shareDistribution", _ShareAttributesList)
-
-	FairshareUtilizationDetail_activeShareCount = FairshareUtilizationDetail.AddMember("activeShareCount", _Long)
-
-	FairshareUtilizationDetail_topCapacityUtilization = FairshareUtilizationDetail.AddMember("topCapacityUtilization", _FairshareCapacityUtilizationList)
-
-	FrontOfQueueJobSummary_jobArn = FrontOfQueueJobSummary.AddMember("jobArn", _String)
-
-	FrontOfQueueJobSummary_earliestTimeAtPosition = FrontOfQueueJobSummary.AddMember("earliestTimeAtPosition", _Long)
-
-	_FrontOfQueueJobSummaryList_member = _FrontOfQueueJobSummaryList.AddMember("member", FrontOfQueueJobSummary)
-
-	FrontOfQueueDetail_jobs = FrontOfQueueDetail.AddMember("jobs", _FrontOfQueueJobSummaryList)
-
-	FrontOfQueueDetail_lastUpdatedAt = FrontOfQueueDetail.AddMember("lastUpdatedAt", _Long)
-
-	FrontOfQuotaShareJobSummary_jobArn = FrontOfQuotaShareJobSummary.AddMember("jobArn", _String)
-
-	FrontOfQuotaShareJobSummary_earliestTimeAtPosition = FrontOfQuotaShareJobSummary.AddMember("earliestTimeAtPosition", _Long)
-
-	_FrontOfQuotaShareJobSummaryList_member = _FrontOfQuotaShareJobSummaryList.AddMember("member", FrontOfQuotaShareJobSummary)
-
-	_FrontOfQuotaSharesJobSummaryMap_key = _FrontOfQuotaSharesJobSummaryMap.AddMember("key", _String)
-
-	_FrontOfQuotaSharesJobSummaryMap_value = _FrontOfQuotaSharesJobSummaryMap.AddMember("value", _FrontOfQuotaShareJobSummaryList)
-
-	FrontOfQuotaSharesDetail_quotaShares = FrontOfQuotaSharesDetail.AddMember("quotaShares", _FrontOfQuotaSharesJobSummaryMap)
-
-	FrontOfQuotaSharesDetail_lastUpdatedAt = FrontOfQuotaSharesDetail.AddMember("lastUpdatedAt", _Long)
-
-	JobCapacityUsageSummary_capacityUnit = JobCapacityUsageSummary.AddMember("capacityUnit", _String)
-
-	JobCapacityUsageSummary_quantity = JobCapacityUsageSummary.AddMember("quantity", _Double)
-
-	_JobCapacityUsageSummaryList_member = _JobCapacityUsageSummaryList.AddMember("member", JobCapacityUsageSummary)
-
-	_ParametersMap_key = _ParametersMap.AddMember("key", _String)
-
-	_ParametersMap_value = _ParametersMap.AddMember("value", _String)
-
-	RetryStrategy_attempts = RetryStrategy.AddMember("attempts", _Integer)
-
-	RetryStrategy_evaluateOnExit = RetryStrategy.AddMember("evaluateOnExit", _EvaluateOnExitList)
-
-	JobTimeout_attemptDurationSeconds = JobTimeout.AddMember("attemptDurationSeconds", _Integer)
-
-	NodeRangeProperty_targetNodes = NodeRangeProperty.AddMember("targetNodes", _String)
-
-	NodeRangeProperty_container = NodeRangeProperty.AddMember("container", ContainerProperties)
-
-	NodeRangeProperty_instanceTypes = NodeRangeProperty.AddMember("instanceTypes", _StringList)
-
-	NodeRangeProperty_ecsProperties = NodeRangeProperty.AddMember("ecsProperties", EcsProperties)
-
-	NodeRangeProperty_eksProperties = NodeRangeProperty.AddMember("eksProperties", EksProperties)
-
-	NodeRangeProperty_consumableResourceProperties = NodeRangeProperty.AddMember("consumableResourceProperties", ConsumableResourceProperties)
-
-	_NodeRangeProperties_member = _NodeRangeProperties.AddMember("member", NodeRangeProperty)
-
-	NodeProperties_numNodes = NodeProperties.AddMember("numNodes", _Integer)
-
-	NodeProperties_mainNode = NodeProperties.AddMember("mainNode", _Integer)
-
-	NodeProperties_nodeRangeProperties = NodeProperties.AddMember("nodeRangeProperties", _NodeRangeProperties)
-
-	PlatformCapability_EC2 = PlatformCapability.AddMember("EC2", smithyprelude.Unit)
-
-	PlatformCapability_FARGATE = PlatformCapability.AddMember("FARGATE", smithyprelude.Unit)
-
-	PlatformCapability_MANAGED_INSTANCES = PlatformCapability.AddMember("MANAGED_INSTANCES", smithyprelude.Unit)
-
-	_PlatformCapabilityList_member = _PlatformCapabilityList.AddMember("member", PlatformCapability)
-
-	JobDefinition_jobDefinitionName = JobDefinition.AddMember("jobDefinitionName", _String)
-
-	JobDefinition_jobDefinitionArn = JobDefinition.AddMember("jobDefinitionArn", _String)
-
-	JobDefinition_revision = JobDefinition.AddMember("revision", _Integer)
-
-	JobDefinition_status = JobDefinition.AddMember("status", _String)
-
-	JobDefinition_type = JobDefinition.AddMember("type", _String)
-
-	JobDefinition_schedulingPriority = JobDefinition.AddMember("schedulingPriority", _Integer)
-
-	JobDefinition_parameters = JobDefinition.AddMember("parameters", _ParametersMap)
-
-	JobDefinition_retryStrategy = JobDefinition.AddMember("retryStrategy", RetryStrategy)
-
-	JobDefinition_containerProperties = JobDefinition.AddMember("containerProperties", ContainerProperties)
-
-	JobDefinition_timeout = JobDefinition.AddMember("timeout", JobTimeout)
-
-	JobDefinition_nodeProperties = JobDefinition.AddMember("nodeProperties", NodeProperties)
-
-	JobDefinition_tags = JobDefinition.AddMember("tags", _TagrisTagsMap)
-
-	JobDefinition_propagateTags = JobDefinition.AddMember("propagateTags", _Boolean)
-
-	JobDefinition_platformCapabilities = JobDefinition.AddMember("platformCapabilities", _PlatformCapabilityList)
-
-	JobDefinition_ecsProperties = JobDefinition.AddMember("ecsProperties", EcsProperties)
-
-	JobDefinition_eksProperties = JobDefinition.AddMember("eksProperties", EksProperties)
-
-	JobDefinition_containerOrchestrationType = JobDefinition.AddMember("containerOrchestrationType", OrchestrationType)
-
-	JobDefinition_consumableResourceProperties = JobDefinition.AddMember("consumableResourceProperties", ConsumableResourceProperties)
-
-	_JobDefinitionList_member = _JobDefinitionList.AddMember("member", JobDefinition)
-
-	JobDefinitionType_Container = JobDefinitionType.AddMember("Container", smithyprelude.Unit)
-
-	JobDefinitionType_Multinode = JobDefinitionType.AddMember("Multinode", smithyprelude.Unit)
-
-	JobDependency_jobId = JobDependency.AddMember("jobId", _String)
-
-	JobDependency_type = JobDependency.AddMember("type", ArrayJobDependency)
-
-	_JobDependencyList_member = _JobDependencyList.AddMember("member", JobDependency)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_PENDING = JobStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	JobStatus_RUNNABLE = JobStatus.AddMember("RUNNABLE", smithyprelude.Unit)
-
-	JobStatus_STARTING = JobStatus.AddMember("STARTING", smithyprelude.Unit)
-
-	JobStatus_RUNNING = JobStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	JobStatus_SUCCEEDED = JobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	NodeDetails_nodeIndex = NodeDetails.AddMember("nodeIndex", _Integer)
-
-	NodeDetails_isMainNode = NodeDetails.AddMember("isMainNode", _Boolean)
-
-	JobDetail_jobArn = JobDetail.AddMember("jobArn", _String)
-
-	JobDetail_jobName = JobDetail.AddMember("jobName", _String)
-
-	JobDetail_jobId = JobDetail.AddMember("jobId", _String)
-
-	JobDetail_jobQueue = JobDetail.AddMember("jobQueue", _String)
-
-	JobDetail_status = JobDetail.AddMember("status", JobStatus)
-
-	JobDetail_shareIdentifier = JobDetail.AddMember("shareIdentifier", _String)
-
-	JobDetail_schedulingPriority = JobDetail.AddMember("schedulingPriority", _Integer)
-
-	JobDetail_attempts = JobDetail.AddMember("attempts", _AttemptDetails)
-
-	JobDetail_statusReason = JobDetail.AddMember("statusReason", _String)
-
-	JobDetail_createdAt = JobDetail.AddMember("createdAt", _Long)
-
-	JobDetail_retryStrategy = JobDetail.AddMember("retryStrategy", RetryStrategy)
-
-	JobDetail_startedAt = JobDetail.AddMember("startedAt", _Long)
-
-	JobDetail_stoppedAt = JobDetail.AddMember("stoppedAt", _Long)
-
-	JobDetail_dependsOn = JobDetail.AddMember("dependsOn", _JobDependencyList)
-
-	JobDetail_jobDefinition = JobDetail.AddMember("jobDefinition", _String)
-
-	JobDetail_parameters = JobDetail.AddMember("parameters", _ParametersMap)
-
-	JobDetail_container = JobDetail.AddMember("container", ContainerDetail)
-
-	JobDetail_nodeDetails = JobDetail.AddMember("nodeDetails", NodeDetails)
-
-	JobDetail_nodeProperties = JobDetail.AddMember("nodeProperties", NodeProperties)
-
-	JobDetail_arrayProperties = JobDetail.AddMember("arrayProperties", ArrayPropertiesDetail)
-
-	JobDetail_timeout = JobDetail.AddMember("timeout", JobTimeout)
-
-	JobDetail_tags = JobDetail.AddMember("tags", _TagrisTagsMap)
-
-	JobDetail_propagateTags = JobDetail.AddMember("propagateTags", _Boolean)
-
-	JobDetail_platformCapabilities = JobDetail.AddMember("platformCapabilities", _PlatformCapabilityList)
-
-	JobDetail_eksProperties = JobDetail.AddMember("eksProperties", EksPropertiesDetail)
-
-	JobDetail_eksAttempts = JobDetail.AddMember("eksAttempts", _EksAttemptDetails)
-
-	JobDetail_ecsProperties = JobDetail.AddMember("ecsProperties", EcsPropertiesDetail)
-
-	JobDetail_isCancelled = JobDetail.AddMember("isCancelled", _Boolean)
-
-	JobDetail_isTerminated = JobDetail.AddMember("isTerminated", _Boolean)
-
-	JobDetail_consumableResourceProperties = JobDetail.AddMember("consumableResourceProperties", ConsumableResourceProperties)
-
-	_JobDetailList_member = _JobDetailList.AddMember("member", JobDetail)
-
-	JQState_ENABLED = JQState.AddMember("ENABLED", smithyprelude.Unit)
-
-	JQState_DISABLED = JQState.AddMember("DISABLED", smithyprelude.Unit)
-
-	JQStatus_CREATING = JQStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	JQStatus_UPDATING = JQStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	JQStatus_DELETING = JQStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	JQStatus_DELETED = JQStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	JQStatus_VALID = JQStatus.AddMember("VALID", smithyprelude.Unit)
-
-	JQStatus_INVALID = JQStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	ServiceEnvironmentOrder_order = ServiceEnvironmentOrder.AddMember("order", _Integer)
-
-	ServiceEnvironmentOrder_serviceEnvironment = ServiceEnvironmentOrder.AddMember("serviceEnvironment", _String)
-
-	_ServiceEnvironmentOrders_member = _ServiceEnvironmentOrders.AddMember("member", ServiceEnvironmentOrder)
-
-	JobQueueType_EKS = JobQueueType.AddMember("EKS", smithyprelude.Unit)
-
-	JobQueueType_ECS = JobQueueType.AddMember("ECS", smithyprelude.Unit)
-
-	JobQueueType_ECS_FARGATE = JobQueueType.AddMember("ECS_FARGATE", smithyprelude.Unit)
-
-	JobQueueType_SAGEMAKER_TRAINING = JobQueueType.AddMember("SAGEMAKER_TRAINING", smithyprelude.Unit)
-
-	JobQueueType_ECS_MANAGED_INSTANCES = JobQueueType.AddMember("ECS_MANAGED_INSTANCES", smithyprelude.Unit)
-
-	JobStateTimeLimitActionsState_RUNNABLE = JobStateTimeLimitActionsState.AddMember("RUNNABLE", smithyprelude.Unit)
-
-	JobStateTimeLimitActionsAction_CANCEL = JobStateTimeLimitActionsAction.AddMember("CANCEL", smithyprelude.Unit)
-
-	JobStateTimeLimitActionsAction_TERMINATE = JobStateTimeLimitActionsAction.AddMember("TERMINATE", smithyprelude.Unit)
-
-	JobStateTimeLimitAction_reason = JobStateTimeLimitAction.AddMember("reason", _String)
-
-	JobStateTimeLimitAction_state = JobStateTimeLimitAction.AddMember("state", JobStateTimeLimitActionsState)
-
-	JobStateTimeLimitAction_maxTimeSeconds = JobStateTimeLimitAction.AddMember("maxTimeSeconds", _Integer)
-
-	JobStateTimeLimitAction_action = JobStateTimeLimitAction.AddMember("action", JobStateTimeLimitActionsAction)
-
-	_JobStateTimeLimitActions_member = _JobStateTimeLimitActions.AddMember("member", JobStateTimeLimitAction)
-
-	JobQueueDetail_jobQueueName = JobQueueDetail.AddMember("jobQueueName", _String)
-
-	JobQueueDetail_jobQueueArn = JobQueueDetail.AddMember("jobQueueArn", _String)
-
-	JobQueueDetail_state = JobQueueDetail.AddMember("state", JQState)
-
-	JobQueueDetail_schedulingPolicyArn = JobQueueDetail.AddMember("schedulingPolicyArn", _String)
-
-	JobQueueDetail_status = JobQueueDetail.AddMember("status", JQStatus)
-
-	JobQueueDetail_statusReason = JobQueueDetail.AddMember("statusReason", _String)
-
-	JobQueueDetail_priority = JobQueueDetail.AddMember("priority", _Integer)
-
-	JobQueueDetail_computeEnvironmentOrder = JobQueueDetail.AddMember("computeEnvironmentOrder", _ComputeEnvironmentOrders)
-
-	JobQueueDetail_serviceEnvironmentOrder = JobQueueDetail.AddMember("serviceEnvironmentOrder", _ServiceEnvironmentOrders)
-
-	JobQueueDetail_jobQueueType = JobQueueDetail.AddMember("jobQueueType", JobQueueType)
-
-	JobQueueDetail_tags = JobQueueDetail.AddMember("tags", _TagrisTagsMap)
-
-	JobQueueDetail_jobStateTimeLimitActions = JobQueueDetail.AddMember("jobStateTimeLimitActions", _JobStateTimeLimitActions)
-
-	_JobQueueDetailList_member = _JobQueueDetailList.AddMember("member", JobQueueDetail)
-
-	NodePropertiesSummary_isMainNode = NodePropertiesSummary.AddMember("isMainNode", _Boolean)
-
-	NodePropertiesSummary_numNodes = NodePropertiesSummary.AddMember("numNodes", _Integer)
-
-	NodePropertiesSummary_nodeIndex = NodePropertiesSummary.AddMember("nodeIndex", _Integer)
-
-	JobSummary_jobArn = JobSummary.AddMember("jobArn", _String)
-
-	JobSummary_jobId = JobSummary.AddMember("jobId", _String)
-
-	JobSummary_jobName = JobSummary.AddMember("jobName", _String)
-
-	JobSummary_capacityUsage = JobSummary.AddMember("capacityUsage", _JobCapacityUsageSummaryList)
-
-	JobSummary_createdAt = JobSummary.AddMember("createdAt", _Long)
-
-	JobSummary_scheduledAt = JobSummary.AddMember("scheduledAt", _Long)
-
-	JobSummary_shareIdentifier = JobSummary.AddMember("shareIdentifier", _String)
-
-	JobSummary_status = JobSummary.AddMember("status", JobStatus)
-
-	JobSummary_statusReason = JobSummary.AddMember("statusReason", _String)
-
-	JobSummary_startedAt = JobSummary.AddMember("startedAt", _Long)
-
-	JobSummary_stoppedAt = JobSummary.AddMember("stoppedAt", _Long)
-
-	JobSummary_container = JobSummary.AddMember("container", ContainerSummary)
-
-	JobSummary_arrayProperties = JobSummary.AddMember("arrayProperties", ArrayPropertiesSummary)
-
-	JobSummary_nodeProperties = JobSummary.AddMember("nodeProperties", NodePropertiesSummary)
-
-	JobSummary_jobDefinition = JobSummary.AddMember("jobDefinition", _String)
-
-	JobSummary_isCancelled = JobSummary.AddMember("isCancelled", _Boolean)
-
-	JobSummary_isTerminated = JobSummary.AddMember("isTerminated", _Boolean)
-
-	_JobSummaryList_member = _JobSummaryList.AddMember("member", JobSummary)
-
-	KeyValuesPair_name = KeyValuesPair.AddMember("name", _String)
-
-	KeyValuesPair_values = KeyValuesPair.AddMember("values", _StringList)
-
-	ServiceResourceIdName_SAGEMAKER_TRAINING_JOB_ARN = ServiceResourceIdName.AddMember("SAGEMAKER_TRAINING_JOB_ARN", smithyprelude.Unit)
-
-	ServiceResourceId_name = ServiceResourceId.AddMember("name", ServiceResourceIdName)
-
-	ServiceResourceId_value = ServiceResourceId.AddMember("value", _String)
-
-	LatestServiceJobAttempt_serviceResourceId = LatestServiceJobAttempt.AddMember("serviceResourceId", ServiceResourceId)
-
-	_ListConsumableResourcesFilterList_member = _ListConsumableResourcesFilterList.AddMember("member", KeyValuesPair)
-
-	_ListJobsByConsumableResourceFilterList_member = _ListJobsByConsumableResourceFilterList.AddMember("member", KeyValuesPair)
-
-	ListJobsByConsumableResourceSummary_jobArn = ListJobsByConsumableResourceSummary.AddMember("jobArn", _String)
-
-	ListJobsByConsumableResourceSummary_jobQueueArn = ListJobsByConsumableResourceSummary.AddMember("jobQueueArn", _String)
-
-	ListJobsByConsumableResourceSummary_jobName = ListJobsByConsumableResourceSummary.AddMember("jobName", _String)
-
-	ListJobsByConsumableResourceSummary_jobDefinitionArn = ListJobsByConsumableResourceSummary.AddMember("jobDefinitionArn", _String)
-
-	ListJobsByConsumableResourceSummary_shareIdentifier = ListJobsByConsumableResourceSummary.AddMember("shareIdentifier", _String)
-
-	ListJobsByConsumableResourceSummary_jobStatus = ListJobsByConsumableResourceSummary.AddMember("jobStatus", _String)
-
-	ListJobsByConsumableResourceSummary_quantity = ListJobsByConsumableResourceSummary.AddMember("quantity", _Long)
-
-	ListJobsByConsumableResourceSummary_statusReason = ListJobsByConsumableResourceSummary.AddMember("statusReason", _String)
-
-	ListJobsByConsumableResourceSummary_startedAt = ListJobsByConsumableResourceSummary.AddMember("startedAt", _Long)
-
-	ListJobsByConsumableResourceSummary_createdAt = ListJobsByConsumableResourceSummary.AddMember("createdAt", _Long)
-
-	ListJobsByConsumableResourceSummary_consumableResourceProperties = ListJobsByConsumableResourceSummary.AddMember("consumableResourceProperties", ConsumableResourceProperties)
-
-	_ListJobsByConsumableResourceSummaryList_member = _ListJobsByConsumableResourceSummaryList.AddMember("member", ListJobsByConsumableResourceSummary)
-
-	_ListJobsFilterList_member = _ListJobsFilterList.AddMember("member", KeyValuesPair)
-
-	NodePropertyOverride_targetNodes = NodePropertyOverride.AddMember("targetNodes", _String)
-
-	NodePropertyOverride_containerOverrides = NodePropertyOverride.AddMember("containerOverrides", ContainerOverrides)
-
-	NodePropertyOverride_ecsPropertiesOverride = NodePropertyOverride.AddMember("ecsPropertiesOverride", EcsPropertiesOverride)
-
-	NodePropertyOverride_instanceTypes = NodePropertyOverride.AddMember("instanceTypes", _StringList)
-
-	NodePropertyOverride_eksPropertiesOverride = NodePropertyOverride.AddMember("eksPropertiesOverride", EksPropertiesOverride)
-
-	NodePropertyOverride_consumableResourcePropertiesOverride = NodePropertyOverride.AddMember("consumableResourcePropertiesOverride", ConsumableResourceProperties)
-
-	_NodePropertyOverrides_member = _NodePropertyOverrides.AddMember("member", NodePropertyOverride)
-
-	NodeOverrides_numNodes = NodeOverrides.AddMember("numNodes", _Integer)
-
-	NodeOverrides_nodePropertyOverrides = NodeOverrides.AddMember("nodePropertyOverrides", _NodePropertyOverrides)
-
-	QueueSnapshotCapacityUsage_capacityUnit = QueueSnapshotCapacityUsage.AddMember("capacityUnit", _String)
-
-	QueueSnapshotCapacityUsage_quantity = QueueSnapshotCapacityUsage.AddMember("quantity", _Double)
-
-	_QueueSnapshotCapacityUsageList_member = _QueueSnapshotCapacityUsageList.AddMember("member", QueueSnapshotCapacityUsage)
-
-	QuotaShareCapacityUsage_capacityUnit = QuotaShareCapacityUsage.AddMember("capacityUnit", _String)
-
-	QuotaShareCapacityUsage_quantity = QuotaShareCapacityUsage.AddMember("quantity", _Double)
-
-	_QuotaShareCapacityUsageList_member = _QuotaShareCapacityUsageList.AddMember("member", QuotaShareCapacityUsage)
-
-	QuotaShareCapacityUtilization_quotaShareName = QuotaShareCapacityUtilization.AddMember("quotaShareName", _String)
-
-	QuotaShareCapacityUtilization_capacityUsage = QuotaShareCapacityUtilization.AddMember("capacityUsage", _QuotaShareCapacityUsageList)
-
-	_QuotaShareCapacityUtilizationList_member = _QuotaShareCapacityUtilizationList.AddMember("member", QuotaShareCapacityUtilization)
-
-	QuotaShareUtilizationDetail_topCapacityUtilization = QuotaShareUtilizationDetail.AddMember("topCapacityUtilization", _QuotaShareCapacityUtilizationList)
-
-	QueueSnapshotUtilizationDetail_totalCapacityUsage = QueueSnapshotUtilizationDetail.AddMember("totalCapacityUsage", _QueueSnapshotCapacityUsageList)
-
-	QueueSnapshotUtilizationDetail_fairshareUtilization = QueueSnapshotUtilizationDetail.AddMember("fairshareUtilization", FairshareUtilizationDetail)
-
-	QueueSnapshotUtilizationDetail_quotaShareUtilization = QueueSnapshotUtilizationDetail.AddMember("quotaShareUtilization", QuotaShareUtilizationDetail)
-
-	QueueSnapshotUtilizationDetail_lastUpdatedAt = QueueSnapshotUtilizationDetail.AddMember("lastUpdatedAt", _Long)
-
-	QuotaShareCapacityLimit_maxCapacity = QuotaShareCapacityLimit.AddMember("maxCapacity", _Integer)
-
-	QuotaShareCapacityLimit_capacityUnit = QuotaShareCapacityLimit.AddMember("capacityUnit", _String)
-
-	_QuotaShareCapacityLimits_member = _QuotaShareCapacityLimits.AddMember("member", QuotaShareCapacityLimit)
-
-	QuotaShareResourceSharingStrategy_RESERVE = QuotaShareResourceSharingStrategy.AddMember("RESERVE", smithyprelude.Unit)
-
-	QuotaShareResourceSharingStrategy_LEND = QuotaShareResourceSharingStrategy.AddMember("LEND", smithyprelude.Unit)
-
-	QuotaShareResourceSharingStrategy_LEND_AND_BORROW = QuotaShareResourceSharingStrategy.AddMember("LEND_AND_BORROW", smithyprelude.Unit)
-
-	QuotaShareResourceSharingConfiguration_strategy = QuotaShareResourceSharingConfiguration.AddMember("strategy", QuotaShareResourceSharingStrategy)
-
-	QuotaShareResourceSharingConfiguration_borrowLimit = QuotaShareResourceSharingConfiguration.AddMember("borrowLimit", _Integer)
-
-	QuotaShareInSharePreemptionState_ENABLED = QuotaShareInSharePreemptionState.AddMember("ENABLED", smithyprelude.Unit)
-
-	QuotaShareInSharePreemptionState_DISABLED = QuotaShareInSharePreemptionState.AddMember("DISABLED", smithyprelude.Unit)
-
-	QuotaSharePreemptionConfiguration_inSharePreemption = QuotaSharePreemptionConfiguration.AddMember("inSharePreemption", QuotaShareInSharePreemptionState)
-
-	QuotaShareState_ENABLED = QuotaShareState.AddMember("ENABLED", smithyprelude.Unit)
-
-	QuotaShareState_DISABLED = QuotaShareState.AddMember("DISABLED", smithyprelude.Unit)
-
-	QuotaShareStatus_CREATING = QuotaShareStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	QuotaShareStatus_VALID = QuotaShareStatus.AddMember("VALID", smithyprelude.Unit)
-
-	QuotaShareStatus_INVALID = QuotaShareStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	QuotaShareStatus_UPDATING = QuotaShareStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	QuotaShareStatus_DELETING = QuotaShareStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	QuotaShareDetail_quotaShareName = QuotaShareDetail.AddMember("quotaShareName", _String)
-
-	QuotaShareDetail_quotaShareArn = QuotaShareDetail.AddMember("quotaShareArn", _String)
-
-	QuotaShareDetail_jobQueueArn = QuotaShareDetail.AddMember("jobQueueArn", _String)
-
-	QuotaShareDetail_capacityLimits = QuotaShareDetail.AddMember("capacityLimits", _QuotaShareCapacityLimits)
-
-	QuotaShareDetail_resourceSharingConfiguration = QuotaShareDetail.AddMember("resourceSharingConfiguration", QuotaShareResourceSharingConfiguration)
-
-	QuotaShareDetail_preemptionConfiguration = QuotaShareDetail.AddMember("preemptionConfiguration", QuotaSharePreemptionConfiguration)
-
-	QuotaShareDetail_state = QuotaShareDetail.AddMember("state", QuotaShareState)
-
-	QuotaShareDetail_status = QuotaShareDetail.AddMember("status", QuotaShareStatus)
-
-	QuotaShareIdleResourceAssignmentStrategy_FIFO = QuotaShareIdleResourceAssignmentStrategy.AddMember("FIFO", smithyprelude.Unit)
-
-	_QuotaShareList_member = _QuotaShareList.AddMember("member", QuotaShareDetail)
-
-	QuotaSharePolicy_idleResourceAssignmentStrategy = QuotaSharePolicy.AddMember("idleResourceAssignmentStrategy", QuotaShareIdleResourceAssignmentStrategy)
-
-	SchedulingPolicyDetail_name = SchedulingPolicyDetail.AddMember("name", _String)
-
-	SchedulingPolicyDetail_arn = SchedulingPolicyDetail.AddMember("arn", _String)
-
-	SchedulingPolicyDetail_quotaSharePolicy = SchedulingPolicyDetail.AddMember("quotaSharePolicy", QuotaSharePolicy)
-
-	SchedulingPolicyDetail_fairsharePolicy = SchedulingPolicyDetail.AddMember("fairsharePolicy", FairsharePolicy)
-
-	SchedulingPolicyDetail_tags = SchedulingPolicyDetail.AddMember("tags", _TagrisTagsMap)
-
-	_SchedulingPolicyDetailList_member = _SchedulingPolicyDetailList.AddMember("member", SchedulingPolicyDetail)
-
-	SchedulingPolicyListingDetail_arn = SchedulingPolicyListingDetail.AddMember("arn", _String)
-
-	_SchedulingPolicyListingDetailList_member = _SchedulingPolicyListingDetailList.AddMember("member", SchedulingPolicyListingDetail)
-
-	ServerException_message = ServerException.AddMember("message", _String)
-
-	ServiceEnvironmentType_SAGEMAKER_TRAINING = ServiceEnvironmentType.AddMember("SAGEMAKER_TRAINING", smithyprelude.Unit)
-
-	ServiceEnvironmentState_ENABLED = ServiceEnvironmentState.AddMember("ENABLED", smithyprelude.Unit)
-
-	ServiceEnvironmentState_DISABLED = ServiceEnvironmentState.AddMember("DISABLED", smithyprelude.Unit)
-
-	ServiceEnvironmentStatus_CREATING = ServiceEnvironmentStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	ServiceEnvironmentStatus_UPDATING = ServiceEnvironmentStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	ServiceEnvironmentStatus_DELETING = ServiceEnvironmentStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	ServiceEnvironmentStatus_DELETED = ServiceEnvironmentStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	ServiceEnvironmentStatus_VALID = ServiceEnvironmentStatus.AddMember("VALID", smithyprelude.Unit)
-
-	ServiceEnvironmentStatus_INVALID = ServiceEnvironmentStatus.AddMember("INVALID", smithyprelude.Unit)
-
-	ServiceEnvironmentDetail_serviceEnvironmentName = ServiceEnvironmentDetail.AddMember("serviceEnvironmentName", _String)
-
-	ServiceEnvironmentDetail_serviceEnvironmentArn = ServiceEnvironmentDetail.AddMember("serviceEnvironmentArn", _String)
-
-	ServiceEnvironmentDetail_serviceEnvironmentType = ServiceEnvironmentDetail.AddMember("serviceEnvironmentType", ServiceEnvironmentType)
-
-	ServiceEnvironmentDetail_state = ServiceEnvironmentDetail.AddMember("state", ServiceEnvironmentState)
-
-	ServiceEnvironmentDetail_status = ServiceEnvironmentDetail.AddMember("status", ServiceEnvironmentStatus)
-
-	ServiceEnvironmentDetail_capacityLimits = ServiceEnvironmentDetail.AddMember("capacityLimits", _CapacityLimits)
-
-	ServiceEnvironmentDetail_tags = ServiceEnvironmentDetail.AddMember("tags", _TagrisTagsMap)
-
-	_ServiceEnvironmentDetailList_member = _ServiceEnvironmentDetailList.AddMember("member", ServiceEnvironmentDetail)
-
-	ServiceJobAttemptDetail_serviceResourceId = ServiceJobAttemptDetail.AddMember("serviceResourceId", ServiceResourceId)
-
-	ServiceJobAttemptDetail_startedAt = ServiceJobAttemptDetail.AddMember("startedAt", _Long)
-
-	ServiceJobAttemptDetail_stoppedAt = ServiceJobAttemptDetail.AddMember("stoppedAt", _Long)
-
-	ServiceJobAttemptDetail_statusReason = ServiceJobAttemptDetail.AddMember("statusReason", _String)
-
-	_ServiceJobAttemptDetails_member = _ServiceJobAttemptDetails.AddMember("member", ServiceJobAttemptDetail)
-
-	ServiceJobCapacityUsageDetail_capacityUnit = ServiceJobCapacityUsageDetail.AddMember("capacityUnit", _String)
-
-	ServiceJobCapacityUsageDetail_quantity = ServiceJobCapacityUsageDetail.AddMember("quantity", _Double)
-
-	_ServiceJobCapacityUsageDetailList_member = _ServiceJobCapacityUsageDetailList.AddMember("member", ServiceJobCapacityUsageDetail)
-
-	ServiceJobCapacityUsageSummary_capacityUnit = ServiceJobCapacityUsageSummary.AddMember("capacityUnit", _String)
-
-	ServiceJobCapacityUsageSummary_quantity = ServiceJobCapacityUsageSummary.AddMember("quantity", _Double)
-
-	_ServiceJobCapacityUsageSummaryList_member = _ServiceJobCapacityUsageSummaryList.AddMember("member", ServiceJobCapacityUsageSummary)
-
-	ServiceJobRetryAction_RETRY = ServiceJobRetryAction.AddMember("RETRY", smithyprelude.Unit)
-
-	ServiceJobRetryAction_EXIT = ServiceJobRetryAction.AddMember("EXIT", smithyprelude.Unit)
-
-	ServiceJobEvaluateOnExit_action = ServiceJobEvaluateOnExit.AddMember("action", ServiceJobRetryAction)
-
-	ServiceJobEvaluateOnExit_onStatusReason = ServiceJobEvaluateOnExit.AddMember("onStatusReason", _String)
-
-	_ServiceJobEvaluateOnExitList_member = _ServiceJobEvaluateOnExitList.AddMember("member", ServiceJobEvaluateOnExit)
-
-	ServiceJobPreemptedAttempt_serviceResourceId = ServiceJobPreemptedAttempt.AddMember("serviceResourceId", ServiceResourceId)
-
-	ServiceJobPreemptedAttempt_startedAt = ServiceJobPreemptedAttempt.AddMember("startedAt", _Long)
-
-	ServiceJobPreemptedAttempt_stoppedAt = ServiceJobPreemptedAttempt.AddMember("stoppedAt", _Long)
-
-	ServiceJobPreemptedAttempt_statusReason = ServiceJobPreemptedAttempt.AddMember("statusReason", _String)
-
-	ServiceJobPreemptionConfiguration_preemptionRetriesBeforeTermination = ServiceJobPreemptionConfiguration.AddMember("preemptionRetriesBeforeTermination", _Integer)
-
-	_ServiceJobRecentPreemptedAttemptList_member = _ServiceJobRecentPreemptedAttemptList.AddMember("member", ServiceJobPreemptedAttempt)
-
-	ServiceJobPreemptionSummary_preemptedAttemptCount = ServiceJobPreemptionSummary.AddMember("preemptedAttemptCount", _Integer)
-
-	ServiceJobPreemptionSummary_recentPreemptedAttempts = ServiceJobPreemptionSummary.AddMember("recentPreemptedAttempts", _ServiceJobRecentPreemptedAttemptList)
-
-	ServiceJobRetryStrategy_attempts = ServiceJobRetryStrategy.AddMember("attempts", _Integer)
-
-	ServiceJobRetryStrategy_evaluateOnExit = ServiceJobRetryStrategy.AddMember("evaluateOnExit", _ServiceJobEvaluateOnExitList)
-
-	ServiceJobStatus_SUBMITTED = ServiceJobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	ServiceJobStatus_PENDING = ServiceJobStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	ServiceJobStatus_RUNNABLE = ServiceJobStatus.AddMember("RUNNABLE", smithyprelude.Unit)
-
-	ServiceJobStatus_SCHEDULED = ServiceJobStatus.AddMember("SCHEDULED", smithyprelude.Unit)
-
-	ServiceJobStatus_STARTING = ServiceJobStatus.AddMember("STARTING", smithyprelude.Unit)
-
-	ServiceJobStatus_RUNNING = ServiceJobStatus.AddMember("RUNNING", smithyprelude.Unit)
-
-	ServiceJobStatus_SUCCEEDED = ServiceJobStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ServiceJobStatus_FAILED = ServiceJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ServiceJobType_SAGEMAKER_TRAINING = ServiceJobType.AddMember("SAGEMAKER_TRAINING", smithyprelude.Unit)
-
-	ServiceJobSummary_latestAttempt = ServiceJobSummary.AddMember("latestAttempt", LatestServiceJobAttempt)
-
-	ServiceJobSummary_capacityUsage = ServiceJobSummary.AddMember("capacityUsage", _ServiceJobCapacityUsageSummaryList)
-
-	ServiceJobSummary_createdAt = ServiceJobSummary.AddMember("createdAt", _Long)
-
-	ServiceJobSummary_jobArn = ServiceJobSummary.AddMember("jobArn", _String)
-
-	ServiceJobSummary_jobId = ServiceJobSummary.AddMember("jobId", _String)
-
-	ServiceJobSummary_jobName = ServiceJobSummary.AddMember("jobName", _String)
-
-	ServiceJobSummary_scheduledAt = ServiceJobSummary.AddMember("scheduledAt", _Long)
-
-	ServiceJobSummary_serviceJobType = ServiceJobSummary.AddMember("serviceJobType", ServiceJobType)
-
-	ServiceJobSummary_shareIdentifier = ServiceJobSummary.AddMember("shareIdentifier", _String)
-
-	ServiceJobSummary_quotaShareName = ServiceJobSummary.AddMember("quotaShareName", _String)
-
-	ServiceJobSummary_status = ServiceJobSummary.AddMember("status", ServiceJobStatus)
-
-	ServiceJobSummary_statusReason = ServiceJobSummary.AddMember("statusReason", _String)
-
-	ServiceJobSummary_startedAt = ServiceJobSummary.AddMember("startedAt", _Long)
-
-	ServiceJobSummary_stoppedAt = ServiceJobSummary.AddMember("stoppedAt", _Long)
-
-	ServiceJobSummary_isTerminated = ServiceJobSummary.AddMember("isTerminated", _Boolean)
-
-	_ServiceJobSummaryList_member = _ServiceJobSummaryList.AddMember("member", ServiceJobSummary)
-
-	ServiceJobTimeout_attemptDurationSeconds = ServiceJobTimeout.AddMember("attemptDurationSeconds", _Integer)
-
-	_TagKeysList_member = _TagKeysList.AddMember("member", _TagKey)
-
-	TerminateJobsErrorDetail_job = TerminateJobsErrorDetail.AddMember("job", _String)
-
-	TerminateJobsErrorDetail_code = TerminateJobsErrorDetail.AddMember("code", _String)
-
-	TerminateJobsErrorDetail_message = TerminateJobsErrorDetail.AddMember("message", _String)
-
-	_TerminateJobsErrorDetailList_member = _TerminateJobsErrorDetailList.AddMember("member", TerminateJobsErrorDetail)
-
-	TerminateServiceJobsErrorDetail_job = TerminateServiceJobsErrorDetail.AddMember("job", _String)
-
-	TerminateServiceJobsErrorDetail_code = TerminateServiceJobsErrorDetail.AddMember("code", _String)
-
-	TerminateServiceJobsErrorDetail_message = TerminateServiceJobsErrorDetail.AddMember("message", _String)
-
-	_TerminateServiceJobsErrorDetailList_member = _TerminateServiceJobsErrorDetailList.AddMember("member", TerminateServiceJobsErrorDetail)
-
-	CancelJobRequest_jobId = CancelJobRequest.AddMember("jobId", _String)
-
-	CancelJobRequest_reason = CancelJobRequest.AddMember("reason", _String)
-
-	CancelJobsRequest_jobs = CancelJobsRequest.AddMember("jobs", _StringList)
-
-	CancelJobsRequest_reason = CancelJobsRequest.AddMember("reason", _String)
-
-	CancelJobsResponse_successful = CancelJobsResponse.AddMember("successful", _StringList)
-
-	CancelJobsResponse_errors = CancelJobsResponse.AddMember("errors", _CancelJobsErrorDetailList)
-
-	CreateComputeEnvironmentRequest_computeEnvironmentName = CreateComputeEnvironmentRequest.AddMember("computeEnvironmentName", _String)
-
-	CreateComputeEnvironmentRequest_type = CreateComputeEnvironmentRequest.AddMember("type", CEType)
-
-	CreateComputeEnvironmentRequest_state = CreateComputeEnvironmentRequest.AddMember("state", CEState)
-
-	CreateComputeEnvironmentRequest_unmanagedvCpus = CreateComputeEnvironmentRequest.AddMember("unmanagedvCpus", _Integer)
-
-	CreateComputeEnvironmentRequest_computeResources = CreateComputeEnvironmentRequest.AddMember("computeResources", ComputeResource)
-
-	CreateComputeEnvironmentRequest_serviceRole = CreateComputeEnvironmentRequest.AddMember("serviceRole", _String)
-
-	CreateComputeEnvironmentRequest_tags = CreateComputeEnvironmentRequest.AddMember("tags", _TagrisTagsMap)
-
-	CreateComputeEnvironmentRequest_eksConfiguration = CreateComputeEnvironmentRequest.AddMember("eksConfiguration", EksConfiguration)
-
-	CreateComputeEnvironmentRequest_context = CreateComputeEnvironmentRequest.AddMember("context", _String)
-
-	CreateComputeEnvironmentRequest_ecsSettings = CreateComputeEnvironmentRequest.AddMember("ecsSettings", EcsSettings)
-
-	CreateComputeEnvironmentResponse_computeEnvironmentName = CreateComputeEnvironmentResponse.AddMember("computeEnvironmentName", _String)
-
-	CreateComputeEnvironmentResponse_computeEnvironmentArn = CreateComputeEnvironmentResponse.AddMember("computeEnvironmentArn", _String)
-
-	CreateConsumableResourceRequest_consumableResourceName = CreateConsumableResourceRequest.AddMember("consumableResourceName", _String)
-
-	CreateConsumableResourceRequest_totalQuantity = CreateConsumableResourceRequest.AddMember("totalQuantity", _Long)
-
-	CreateConsumableResourceRequest_resourceType = CreateConsumableResourceRequest.AddMember("resourceType", _String)
-
-	CreateConsumableResourceRequest_tags = CreateConsumableResourceRequest.AddMember("tags", _TagrisTagsMap)
-
-	CreateConsumableResourceResponse_consumableResourceName = CreateConsumableResourceResponse.AddMember("consumableResourceName", _String)
-
-	CreateConsumableResourceResponse_consumableResourceArn = CreateConsumableResourceResponse.AddMember("consumableResourceArn", _String)
-
-	CreateJobQueueRequest_jobQueueName = CreateJobQueueRequest.AddMember("jobQueueName", _String)
-
-	CreateJobQueueRequest_state = CreateJobQueueRequest.AddMember("state", JQState)
-
-	CreateJobQueueRequest_schedulingPolicyArn = CreateJobQueueRequest.AddMember("schedulingPolicyArn", _String)
-
-	CreateJobQueueRequest_priority = CreateJobQueueRequest.AddMember("priority", _Integer)
-
-	CreateJobQueueRequest_computeEnvironmentOrder = CreateJobQueueRequest.AddMember("computeEnvironmentOrder", _ComputeEnvironmentOrders)
-
-	CreateJobQueueRequest_serviceEnvironmentOrder = CreateJobQueueRequest.AddMember("serviceEnvironmentOrder", _ServiceEnvironmentOrders)
-
-	CreateJobQueueRequest_jobQueueType = CreateJobQueueRequest.AddMember("jobQueueType", JobQueueType)
-
-	CreateJobQueueRequest_tags = CreateJobQueueRequest.AddMember("tags", _TagrisTagsMap)
-
-	CreateJobQueueRequest_jobStateTimeLimitActions = CreateJobQueueRequest.AddMember("jobStateTimeLimitActions", _JobStateTimeLimitActions)
-
-	CreateJobQueueResponse_jobQueueName = CreateJobQueueResponse.AddMember("jobQueueName", _String)
-
-	CreateJobQueueResponse_jobQueueArn = CreateJobQueueResponse.AddMember("jobQueueArn", _String)
-
-	CreateQuotaShareRequest_quotaShareName = CreateQuotaShareRequest.AddMember("quotaShareName", _String)
-
-	CreateQuotaShareRequest_jobQueue = CreateQuotaShareRequest.AddMember("jobQueue", _String)
-
-	CreateQuotaShareRequest_capacityLimits = CreateQuotaShareRequest.AddMember("capacityLimits", _QuotaShareCapacityLimits)
-
-	CreateQuotaShareRequest_resourceSharingConfiguration = CreateQuotaShareRequest.AddMember("resourceSharingConfiguration", QuotaShareResourceSharingConfiguration)
-
-	CreateQuotaShareRequest_preemptionConfiguration = CreateQuotaShareRequest.AddMember("preemptionConfiguration", QuotaSharePreemptionConfiguration)
-
-	CreateQuotaShareRequest_state = CreateQuotaShareRequest.AddMember("state", QuotaShareState)
-
-	CreateQuotaShareRequest_tags = CreateQuotaShareRequest.AddMember("tags", _TagrisTagsMap)
-
-	CreateQuotaShareResponse_quotaShareName = CreateQuotaShareResponse.AddMember("quotaShareName", _String)
-
-	CreateQuotaShareResponse_quotaShareArn = CreateQuotaShareResponse.AddMember("quotaShareArn", _String)
-
-	CreateSchedulingPolicyRequest_name = CreateSchedulingPolicyRequest.AddMember("name", _String)
-
-	CreateSchedulingPolicyRequest_quotaSharePolicy = CreateSchedulingPolicyRequest.AddMember("quotaSharePolicy", QuotaSharePolicy)
-
-	CreateSchedulingPolicyRequest_fairsharePolicy = CreateSchedulingPolicyRequest.AddMember("fairsharePolicy", FairsharePolicy)
-
-	CreateSchedulingPolicyRequest_tags = CreateSchedulingPolicyRequest.AddMember("tags", _TagrisTagsMap)
-
-	CreateSchedulingPolicyResponse_name = CreateSchedulingPolicyResponse.AddMember("name", _String)
-
-	CreateSchedulingPolicyResponse_arn = CreateSchedulingPolicyResponse.AddMember("arn", _String)
-
-	CreateServiceEnvironmentRequest_serviceEnvironmentName = CreateServiceEnvironmentRequest.AddMember("serviceEnvironmentName", _String)
-
-	CreateServiceEnvironmentRequest_serviceEnvironmentType = CreateServiceEnvironmentRequest.AddMember("serviceEnvironmentType", ServiceEnvironmentType)
-
-	CreateServiceEnvironmentRequest_state = CreateServiceEnvironmentRequest.AddMember("state", ServiceEnvironmentState)
-
-	CreateServiceEnvironmentRequest_capacityLimits = CreateServiceEnvironmentRequest.AddMember("capacityLimits", _CapacityLimits)
-
-	CreateServiceEnvironmentRequest_tags = CreateServiceEnvironmentRequest.AddMember("tags", _TagrisTagsMap)
-
-	CreateServiceEnvironmentResponse_serviceEnvironmentName = CreateServiceEnvironmentResponse.AddMember("serviceEnvironmentName", _String)
-
-	CreateServiceEnvironmentResponse_serviceEnvironmentArn = CreateServiceEnvironmentResponse.AddMember("serviceEnvironmentArn", _String)
-
-	DeleteComputeEnvironmentRequest_computeEnvironment = DeleteComputeEnvironmentRequest.AddMember("computeEnvironment", _String)
-
-	DeleteConsumableResourceRequest_consumableResource = DeleteConsumableResourceRequest.AddMember("consumableResource", _String)
-
-	DeleteJobQueueRequest_jobQueue = DeleteJobQueueRequest.AddMember("jobQueue", _String)
-
-	DeleteQuotaShareRequest_quotaShareArn = DeleteQuotaShareRequest.AddMember("quotaShareArn", _String)
-
-	DeleteSchedulingPolicyRequest_arn = DeleteSchedulingPolicyRequest.AddMember("arn", _String)
-
-	DeleteServiceEnvironmentRequest_serviceEnvironment = DeleteServiceEnvironmentRequest.AddMember("serviceEnvironment", _String)
-
-	DeregisterJobDefinitionRequest_jobDefinition = DeregisterJobDefinitionRequest.AddMember("jobDefinition", _String)
-
-	DescribeComputeEnvironmentsRequest_computeEnvironments = DescribeComputeEnvironmentsRequest.AddMember("computeEnvironments", _StringList)
-
-	DescribeComputeEnvironmentsRequest_maxResults = DescribeComputeEnvironmentsRequest.AddMember("maxResults", _Integer)
-
-	DescribeComputeEnvironmentsRequest_nextToken = DescribeComputeEnvironmentsRequest.AddMember("nextToken", _String)
-
-	DescribeComputeEnvironmentsResponse_computeEnvironments = DescribeComputeEnvironmentsResponse.AddMember("computeEnvironments", _ComputeEnvironmentDetailList)
-
-	DescribeComputeEnvironmentsResponse_nextToken = DescribeComputeEnvironmentsResponse.AddMember("nextToken", _String)
-
-	DescribeConsumableResourceRequest_consumableResource = DescribeConsumableResourceRequest.AddMember("consumableResource", _String)
-
-	DescribeConsumableResourceResponse_consumableResourceName = DescribeConsumableResourceResponse.AddMember("consumableResourceName", _String)
-
-	DescribeConsumableResourceResponse_consumableResourceArn = DescribeConsumableResourceResponse.AddMember("consumableResourceArn", _String)
-
-	DescribeConsumableResourceResponse_totalQuantity = DescribeConsumableResourceResponse.AddMember("totalQuantity", _Long)
-
-	DescribeConsumableResourceResponse_inUseQuantity = DescribeConsumableResourceResponse.AddMember("inUseQuantity", _Long)
-
-	DescribeConsumableResourceResponse_availableQuantity = DescribeConsumableResourceResponse.AddMember("availableQuantity", _Long)
-
-	DescribeConsumableResourceResponse_resourceType = DescribeConsumableResourceResponse.AddMember("resourceType", _String)
-
-	DescribeConsumableResourceResponse_createdAt = DescribeConsumableResourceResponse.AddMember("createdAt", _Long)
-
-	DescribeConsumableResourceResponse_tags = DescribeConsumableResourceResponse.AddMember("tags", _TagrisTagsMap)
-
-	DescribeJobDefinitionsRequest_jobDefinitions = DescribeJobDefinitionsRequest.AddMember("jobDefinitions", _StringList)
-
-	DescribeJobDefinitionsRequest_maxResults = DescribeJobDefinitionsRequest.AddMember("maxResults", _Integer)
-
-	DescribeJobDefinitionsRequest_jobDefinitionName = DescribeJobDefinitionsRequest.AddMember("jobDefinitionName", _String)
-
-	DescribeJobDefinitionsRequest_status = DescribeJobDefinitionsRequest.AddMember("status", _String)
-
-	DescribeJobDefinitionsRequest_nextToken = DescribeJobDefinitionsRequest.AddMember("nextToken", _String)
-
-	DescribeJobDefinitionsResponse_jobDefinitions = DescribeJobDefinitionsResponse.AddMember("jobDefinitions", _JobDefinitionList)
-
-	DescribeJobDefinitionsResponse_nextToken = DescribeJobDefinitionsResponse.AddMember("nextToken", _String)
-
-	DescribeJobQueuesRequest_jobQueues = DescribeJobQueuesRequest.AddMember("jobQueues", _StringList)
-
-	DescribeJobQueuesRequest_maxResults = DescribeJobQueuesRequest.AddMember("maxResults", _Integer)
-
-	DescribeJobQueuesRequest_nextToken = DescribeJobQueuesRequest.AddMember("nextToken", _String)
-
-	DescribeJobQueuesResponse_jobQueues = DescribeJobQueuesResponse.AddMember("jobQueues", _JobQueueDetailList)
-
-	DescribeJobQueuesResponse_nextToken = DescribeJobQueuesResponse.AddMember("nextToken", _String)
-
-	DescribeJobsRequest_jobs = DescribeJobsRequest.AddMember("jobs", _StringList)
-
-	DescribeJobsResponse_jobs = DescribeJobsResponse.AddMember("jobs", _JobDetailList)
-
-	DescribeQuotaShareRequest_quotaShareArn = DescribeQuotaShareRequest.AddMember("quotaShareArn", _String)
-
-	DescribeQuotaShareResponse_quotaShareName = DescribeQuotaShareResponse.AddMember("quotaShareName", _String)
-
-	DescribeQuotaShareResponse_quotaShareArn = DescribeQuotaShareResponse.AddMember("quotaShareArn", _String)
-
-	DescribeQuotaShareResponse_jobQueueArn = DescribeQuotaShareResponse.AddMember("jobQueueArn", _String)
-
-	DescribeQuotaShareResponse_capacityLimits = DescribeQuotaShareResponse.AddMember("capacityLimits", _QuotaShareCapacityLimits)
-
-	DescribeQuotaShareResponse_resourceSharingConfiguration = DescribeQuotaShareResponse.AddMember("resourceSharingConfiguration", QuotaShareResourceSharingConfiguration)
-
-	DescribeQuotaShareResponse_preemptionConfiguration = DescribeQuotaShareResponse.AddMember("preemptionConfiguration", QuotaSharePreemptionConfiguration)
-
-	DescribeQuotaShareResponse_state = DescribeQuotaShareResponse.AddMember("state", QuotaShareState)
-
-	DescribeQuotaShareResponse_status = DescribeQuotaShareResponse.AddMember("status", QuotaShareStatus)
-
-	DescribeQuotaShareResponse_tags = DescribeQuotaShareResponse.AddMember("tags", _TagrisTagsMap)
-
-	DescribeSchedulingPoliciesRequest_arns = DescribeSchedulingPoliciesRequest.AddMember("arns", _StringList)
-
-	DescribeSchedulingPoliciesResponse_schedulingPolicies = DescribeSchedulingPoliciesResponse.AddMember("schedulingPolicies", _SchedulingPolicyDetailList)
-
-	DescribeServiceEnvironmentsRequest_serviceEnvironments = DescribeServiceEnvironmentsRequest.AddMember("serviceEnvironments", _StringList)
-
-	DescribeServiceEnvironmentsRequest_maxResults = DescribeServiceEnvironmentsRequest.AddMember("maxResults", _Integer)
-
-	DescribeServiceEnvironmentsRequest_nextToken = DescribeServiceEnvironmentsRequest.AddMember("nextToken", _String)
-
-	DescribeServiceEnvironmentsResponse_serviceEnvironments = DescribeServiceEnvironmentsResponse.AddMember("serviceEnvironments", _ServiceEnvironmentDetailList)
-
-	DescribeServiceEnvironmentsResponse_nextToken = DescribeServiceEnvironmentsResponse.AddMember("nextToken", _String)
-
-	DescribeServiceJobRequest_jobId = DescribeServiceJobRequest.AddMember("jobId", _String)
-
-	DescribeServiceJobResponse_attempts = DescribeServiceJobResponse.AddMember("attempts", _ServiceJobAttemptDetails)
-
-	DescribeServiceJobResponse_capacityUsage = DescribeServiceJobResponse.AddMember("capacityUsage", _ServiceJobCapacityUsageDetailList)
-
-	DescribeServiceJobResponse_createdAt = DescribeServiceJobResponse.AddMember("createdAt", _Long)
-
-	DescribeServiceJobResponse_isTerminated = DescribeServiceJobResponse.AddMember("isTerminated", _Boolean)
-
-	DescribeServiceJobResponse_jobArn = DescribeServiceJobResponse.AddMember("jobArn", _String)
-
-	DescribeServiceJobResponse_jobId = DescribeServiceJobResponse.AddMember("jobId", _String)
-
-	DescribeServiceJobResponse_jobName = DescribeServiceJobResponse.AddMember("jobName", _String)
-
-	DescribeServiceJobResponse_jobQueue = DescribeServiceJobResponse.AddMember("jobQueue", _String)
-
-	DescribeServiceJobResponse_latestAttempt = DescribeServiceJobResponse.AddMember("latestAttempt", LatestServiceJobAttempt)
-
-	DescribeServiceJobResponse_retryStrategy = DescribeServiceJobResponse.AddMember("retryStrategy", ServiceJobRetryStrategy)
-
-	DescribeServiceJobResponse_scheduledAt = DescribeServiceJobResponse.AddMember("scheduledAt", _Long)
-
-	DescribeServiceJobResponse_schedulingPriority = DescribeServiceJobResponse.AddMember("schedulingPriority", _Integer)
-
-	DescribeServiceJobResponse_serviceRequestPayload = DescribeServiceJobResponse.AddMember("serviceRequestPayload", _String)
-
-	DescribeServiceJobResponse_serviceJobType = DescribeServiceJobResponse.AddMember("serviceJobType", ServiceJobType)
-
-	DescribeServiceJobResponse_shareIdentifier = DescribeServiceJobResponse.AddMember("shareIdentifier", _String)
-
-	DescribeServiceJobResponse_quotaShareName = DescribeServiceJobResponse.AddMember("quotaShareName", _String)
-
-	DescribeServiceJobResponse_preemptionConfiguration = DescribeServiceJobResponse.AddMember("preemptionConfiguration", ServiceJobPreemptionConfiguration)
-
-	DescribeServiceJobResponse_preemptionSummary = DescribeServiceJobResponse.AddMember("preemptionSummary", ServiceJobPreemptionSummary)
-
-	DescribeServiceJobResponse_startedAt = DescribeServiceJobResponse.AddMember("startedAt", _Long)
-
-	DescribeServiceJobResponse_status = DescribeServiceJobResponse.AddMember("status", ServiceJobStatus)
-
-	DescribeServiceJobResponse_statusReason = DescribeServiceJobResponse.AddMember("statusReason", _String)
-
-	DescribeServiceJobResponse_stoppedAt = DescribeServiceJobResponse.AddMember("stoppedAt", _Long)
-
-	DescribeServiceJobResponse_tags = DescribeServiceJobResponse.AddMember("tags", _TagrisTagsMap)
-
-	DescribeServiceJobResponse_timeoutConfig = DescribeServiceJobResponse.AddMember("timeoutConfig", ServiceJobTimeout)
-
-	GetJobQueueSnapshotRequest_jobQueue = GetJobQueueSnapshotRequest.AddMember("jobQueue", _String)
-
-	GetJobQueueSnapshotResponse_frontOfQueue = GetJobQueueSnapshotResponse.AddMember("frontOfQueue", FrontOfQueueDetail)
-
-	GetJobQueueSnapshotResponse_frontOfQuotaShares = GetJobQueueSnapshotResponse.AddMember("frontOfQuotaShares", FrontOfQuotaSharesDetail)
-
-	GetJobQueueSnapshotResponse_queueUtilization = GetJobQueueSnapshotResponse.AddMember("queueUtilization", QueueSnapshotUtilizationDetail)
-
-	ListConsumableResourcesRequest_filters = ListConsumableResourcesRequest.AddMember("filters", _ListConsumableResourcesFilterList)
-
-	ListConsumableResourcesRequest_maxResults = ListConsumableResourcesRequest.AddMember("maxResults", _Integer)
-
-	ListConsumableResourcesRequest_nextToken = ListConsumableResourcesRequest.AddMember("nextToken", _String)
-
-	ListConsumableResourcesResponse_consumableResources = ListConsumableResourcesResponse.AddMember("consumableResources", _ConsumableResourceSummaryList)
-
-	ListConsumableResourcesResponse_nextToken = ListConsumableResourcesResponse.AddMember("nextToken", _String)
-
-	ListJobsByConsumableResourceRequest_consumableResource = ListJobsByConsumableResourceRequest.AddMember("consumableResource", _String)
-
-	ListJobsByConsumableResourceRequest_filters = ListJobsByConsumableResourceRequest.AddMember("filters", _ListJobsByConsumableResourceFilterList)
-
-	ListJobsByConsumableResourceRequest_maxResults = ListJobsByConsumableResourceRequest.AddMember("maxResults", _Integer)
-
-	ListJobsByConsumableResourceRequest_nextToken = ListJobsByConsumableResourceRequest.AddMember("nextToken", _String)
-
-	ListJobsByConsumableResourceResponse_jobs = ListJobsByConsumableResourceResponse.AddMember("jobs", _ListJobsByConsumableResourceSummaryList)
-
-	ListJobsByConsumableResourceResponse_nextToken = ListJobsByConsumableResourceResponse.AddMember("nextToken", _String)
-
-	ListJobsRequest_jobQueue = ListJobsRequest.AddMember("jobQueue", _String)
-
-	ListJobsRequest_arrayJobId = ListJobsRequest.AddMember("arrayJobId", _String)
-
-	ListJobsRequest_multiNodeJobId = ListJobsRequest.AddMember("multiNodeJobId", _String)
-
-	ListJobsRequest_jobStatus = ListJobsRequest.AddMember("jobStatus", JobStatus)
-
-	ListJobsRequest_maxResults = ListJobsRequest.AddMember("maxResults", _Integer)
-
-	ListJobsRequest_nextToken = ListJobsRequest.AddMember("nextToken", _String)
-
-	ListJobsRequest_filters = ListJobsRequest.AddMember("filters", _ListJobsFilterList)
-
-	ListJobsResponse_jobSummaryList = ListJobsResponse.AddMember("jobSummaryList", _JobSummaryList)
-
-	ListJobsResponse_nextToken = ListJobsResponse.AddMember("nextToken", _String)
-
-	ListQuotaSharesRequest_jobQueue = ListQuotaSharesRequest.AddMember("jobQueue", _String)
-
-	ListQuotaSharesRequest_maxResults = ListQuotaSharesRequest.AddMember("maxResults", _Integer)
-
-	ListQuotaSharesRequest_nextToken = ListQuotaSharesRequest.AddMember("nextToken", _String)
-
-	ListQuotaSharesResponse_quotaShares = ListQuotaSharesResponse.AddMember("quotaShares", _QuotaShareList)
-
-	ListQuotaSharesResponse_nextToken = ListQuotaSharesResponse.AddMember("nextToken", _String)
-
-	ListSchedulingPoliciesRequest_maxResults = ListSchedulingPoliciesRequest.AddMember("maxResults", _Integer)
-
-	ListSchedulingPoliciesRequest_nextToken = ListSchedulingPoliciesRequest.AddMember("nextToken", _String)
-
-	ListSchedulingPoliciesResponse_schedulingPolicies = ListSchedulingPoliciesResponse.AddMember("schedulingPolicies", _SchedulingPolicyListingDetailList)
-
-	ListSchedulingPoliciesResponse_nextToken = ListSchedulingPoliciesResponse.AddMember("nextToken", _String)
-
-	ListServiceJobsRequest_jobQueue = ListServiceJobsRequest.AddMember("jobQueue", _String)
-
-	ListServiceJobsRequest_jobStatus = ListServiceJobsRequest.AddMember("jobStatus", ServiceJobStatus)
-
-	ListServiceJobsRequest_maxResults = ListServiceJobsRequest.AddMember("maxResults", _Integer)
-
-	ListServiceJobsRequest_nextToken = ListServiceJobsRequest.AddMember("nextToken", _String)
-
-	ListServiceJobsRequest_filters = ListServiceJobsRequest.AddMember("filters", _ListJobsFilterList)
-
-	ListServiceJobsResponse_jobSummaryList = ListServiceJobsResponse.AddMember("jobSummaryList", _ServiceJobSummaryList)
-
-	ListServiceJobsResponse_nextToken = ListServiceJobsResponse.AddMember("nextToken", _String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagrisTagsMap)
-
-	RegisterJobDefinitionRequest_jobDefinitionName = RegisterJobDefinitionRequest.AddMember("jobDefinitionName", _String)
-
-	RegisterJobDefinitionRequest_type = RegisterJobDefinitionRequest.AddMember("type", JobDefinitionType)
-
-	RegisterJobDefinitionRequest_parameters = RegisterJobDefinitionRequest.AddMember("parameters", _ParametersMap)
-
-	RegisterJobDefinitionRequest_schedulingPriority = RegisterJobDefinitionRequest.AddMember("schedulingPriority", _Integer)
-
-	RegisterJobDefinitionRequest_containerProperties = RegisterJobDefinitionRequest.AddMember("containerProperties", ContainerProperties)
-
-	RegisterJobDefinitionRequest_nodeProperties = RegisterJobDefinitionRequest.AddMember("nodeProperties", NodeProperties)
-
-	RegisterJobDefinitionRequest_retryStrategy = RegisterJobDefinitionRequest.AddMember("retryStrategy", RetryStrategy)
-
-	RegisterJobDefinitionRequest_propagateTags = RegisterJobDefinitionRequest.AddMember("propagateTags", _Boolean)
-
-	RegisterJobDefinitionRequest_timeout = RegisterJobDefinitionRequest.AddMember("timeout", JobTimeout)
-
-	RegisterJobDefinitionRequest_tags = RegisterJobDefinitionRequest.AddMember("tags", _TagrisTagsMap)
-
-	RegisterJobDefinitionRequest_platformCapabilities = RegisterJobDefinitionRequest.AddMember("platformCapabilities", _PlatformCapabilityList)
-
-	RegisterJobDefinitionRequest_eksProperties = RegisterJobDefinitionRequest.AddMember("eksProperties", EksProperties)
-
-	RegisterJobDefinitionRequest_ecsProperties = RegisterJobDefinitionRequest.AddMember("ecsProperties", EcsProperties)
-
-	RegisterJobDefinitionRequest_consumableResourceProperties = RegisterJobDefinitionRequest.AddMember("consumableResourceProperties", ConsumableResourceProperties)
-
-	RegisterJobDefinitionResponse_jobDefinitionName = RegisterJobDefinitionResponse.AddMember("jobDefinitionName", _String)
-
-	RegisterJobDefinitionResponse_jobDefinitionArn = RegisterJobDefinitionResponse.AddMember("jobDefinitionArn", _String)
-
-	RegisterJobDefinitionResponse_revision = RegisterJobDefinitionResponse.AddMember("revision", _Integer)
-
-	SubmitJobRequest_jobName = SubmitJobRequest.AddMember("jobName", _String)
-
-	SubmitJobRequest_jobQueue = SubmitJobRequest.AddMember("jobQueue", _String)
-
-	SubmitJobRequest_shareIdentifier = SubmitJobRequest.AddMember("shareIdentifier", _String)
-
-	SubmitJobRequest_schedulingPriorityOverride = SubmitJobRequest.AddMember("schedulingPriorityOverride", _Integer)
-
-	SubmitJobRequest_arrayProperties = SubmitJobRequest.AddMember("arrayProperties", ArrayProperties)
-
-	SubmitJobRequest_dependsOn = SubmitJobRequest.AddMember("dependsOn", _JobDependencyList)
-
-	SubmitJobRequest_jobDefinition = SubmitJobRequest.AddMember("jobDefinition", _String)
-
-	SubmitJobRequest_parameters = SubmitJobRequest.AddMember("parameters", _ParametersMap)
-
-	SubmitJobRequest_containerOverrides = SubmitJobRequest.AddMember("containerOverrides", ContainerOverrides)
-
-	SubmitJobRequest_nodeOverrides = SubmitJobRequest.AddMember("nodeOverrides", NodeOverrides)
-
-	SubmitJobRequest_retryStrategy = SubmitJobRequest.AddMember("retryStrategy", RetryStrategy)
-
-	SubmitJobRequest_propagateTags = SubmitJobRequest.AddMember("propagateTags", _Boolean)
-
-	SubmitJobRequest_timeout = SubmitJobRequest.AddMember("timeout", JobTimeout)
-
-	SubmitJobRequest_tags = SubmitJobRequest.AddMember("tags", _TagrisTagsMap)
-
-	SubmitJobRequest_eksPropertiesOverride = SubmitJobRequest.AddMember("eksPropertiesOverride", EksPropertiesOverride)
-
-	SubmitJobRequest_ecsPropertiesOverride = SubmitJobRequest.AddMember("ecsPropertiesOverride", EcsPropertiesOverride)
-
-	SubmitJobRequest_consumableResourcePropertiesOverride = SubmitJobRequest.AddMember("consumableResourcePropertiesOverride", ConsumableResourceProperties)
-
-	SubmitJobResponse_jobArn = SubmitJobResponse.AddMember("jobArn", _String)
-
-	SubmitJobResponse_jobName = SubmitJobResponse.AddMember("jobName", _String)
-
-	SubmitJobResponse_jobId = SubmitJobResponse.AddMember("jobId", _String)
-
-	SubmitServiceJobRequest_jobName = SubmitServiceJobRequest.AddMember("jobName", _String)
-
-	SubmitServiceJobRequest_jobQueue = SubmitServiceJobRequest.AddMember("jobQueue", _String)
-
-	SubmitServiceJobRequest_retryStrategy = SubmitServiceJobRequest.AddMember("retryStrategy", ServiceJobRetryStrategy)
-
-	SubmitServiceJobRequest_schedulingPriority = SubmitServiceJobRequest.AddMember("schedulingPriority", _Integer)
-
-	SubmitServiceJobRequest_serviceRequestPayload = SubmitServiceJobRequest.AddMember("serviceRequestPayload", _String)
-
-	SubmitServiceJobRequest_serviceJobType = SubmitServiceJobRequest.AddMember("serviceJobType", ServiceJobType)
-
-	SubmitServiceJobRequest_shareIdentifier = SubmitServiceJobRequest.AddMember("shareIdentifier", _String)
-
-	SubmitServiceJobRequest_quotaShareName = SubmitServiceJobRequest.AddMember("quotaShareName", _String)
-
-	SubmitServiceJobRequest_preemptionConfiguration = SubmitServiceJobRequest.AddMember("preemptionConfiguration", ServiceJobPreemptionConfiguration)
-
-	SubmitServiceJobRequest_timeoutConfig = SubmitServiceJobRequest.AddMember("timeoutConfig", ServiceJobTimeout)
-
-	SubmitServiceJobRequest_tags = SubmitServiceJobRequest.AddMember("tags", _TagrisTagsMap)
-
-	SubmitServiceJobRequest_clientToken = SubmitServiceJobRequest.AddMember("clientToken", _ClientRequestToken)
-
-	SubmitServiceJobResponse_jobArn = SubmitServiceJobResponse.AddMember("jobArn", _String)
-
-	SubmitServiceJobResponse_jobName = SubmitServiceJobResponse.AddMember("jobName", _String)
-
-	SubmitServiceJobResponse_jobId = SubmitServiceJobResponse.AddMember("jobId", _String)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagrisTagsMap)
-
-	TerminateJobRequest_jobId = TerminateJobRequest.AddMember("jobId", _String)
-
-	TerminateJobRequest_reason = TerminateJobRequest.AddMember("reason", _String)
-
-	TerminateJobsRequest_jobs = TerminateJobsRequest.AddMember("jobs", _StringList)
-
-	TerminateJobsRequest_reason = TerminateJobsRequest.AddMember("reason", _String)
-
-	TerminateJobsResponse_successful = TerminateJobsResponse.AddMember("successful", _StringList)
-
-	TerminateJobsResponse_errors = TerminateJobsResponse.AddMember("errors", _TerminateJobsErrorDetailList)
-
-	TerminateServiceJobRequest_jobId = TerminateServiceJobRequest.AddMember("jobId", _String)
-
-	TerminateServiceJobRequest_reason = TerminateServiceJobRequest.AddMember("reason", _String)
-
-	TerminateServiceJobsRequest_jobs = TerminateServiceJobsRequest.AddMember("jobs", _StringList)
-
-	TerminateServiceJobsRequest_reason = TerminateServiceJobsRequest.AddMember("reason", _String)
-
-	TerminateServiceJobsResponse_successful = TerminateServiceJobsResponse.AddMember("successful", _StringList)
-
-	TerminateServiceJobsResponse_errors = TerminateServiceJobsResponse.AddMember("errors", _TerminateServiceJobsErrorDetailList)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _String, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeysList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateComputeEnvironmentRequest_computeEnvironment = UpdateComputeEnvironmentRequest.AddMember("computeEnvironment", _String)
-
-	UpdateComputeEnvironmentRequest_state = UpdateComputeEnvironmentRequest.AddMember("state", CEState)
-
-	UpdateComputeEnvironmentRequest_unmanagedvCpus = UpdateComputeEnvironmentRequest.AddMember("unmanagedvCpus", _Integer)
-
-	UpdateComputeEnvironmentRequest_computeResources = UpdateComputeEnvironmentRequest.AddMember("computeResources", ComputeResourceUpdate)
-
-	UpdateComputeEnvironmentRequest_serviceRole = UpdateComputeEnvironmentRequest.AddMember("serviceRole", _String)
-
-	UpdateComputeEnvironmentRequest_updatePolicy = UpdateComputeEnvironmentRequest.AddMember("updatePolicy", UpdatePolicy)
-
-	UpdateComputeEnvironmentRequest_context = UpdateComputeEnvironmentRequest.AddMember("context", _String)
-
-	UpdateComputeEnvironmentRequest_ecsSettings = UpdateComputeEnvironmentRequest.AddMember("ecsSettings", EcsSettings)
-
-	UpdateComputeEnvironmentRequest_eksConfiguration = UpdateComputeEnvironmentRequest.AddMember("eksConfiguration", EksConfigurationUpdate)
-
-	UpdateComputeEnvironmentResponse_computeEnvironmentName = UpdateComputeEnvironmentResponse.AddMember("computeEnvironmentName", _String)
-
-	UpdateComputeEnvironmentResponse_computeEnvironmentArn = UpdateComputeEnvironmentResponse.AddMember("computeEnvironmentArn", _String)
-
-	UpdateConsumableResourceRequest_consumableResource = UpdateConsumableResourceRequest.AddMember("consumableResource", _String)
-
-	UpdateConsumableResourceRequest_operation = UpdateConsumableResourceRequest.AddMember("operation", _String)
-
-	UpdateConsumableResourceRequest_quantity = UpdateConsumableResourceRequest.AddMember("quantity", _Long)
-
-	UpdateConsumableResourceRequest_clientToken = UpdateConsumableResourceRequest.AddMember("clientToken", _ClientRequestToken)
-
-	UpdateConsumableResourceResponse_consumableResourceName = UpdateConsumableResourceResponse.AddMember("consumableResourceName", _String)
-
-	UpdateConsumableResourceResponse_consumableResourceArn = UpdateConsumableResourceResponse.AddMember("consumableResourceArn", _String)
-
-	UpdateConsumableResourceResponse_totalQuantity = UpdateConsumableResourceResponse.AddMember("totalQuantity", _Long)
-
-	UpdateJobQueueRequest_jobQueue = UpdateJobQueueRequest.AddMember("jobQueue", _String)
-
-	UpdateJobQueueRequest_state = UpdateJobQueueRequest.AddMember("state", JQState)
-
-	UpdateJobQueueRequest_schedulingPolicyArn = UpdateJobQueueRequest.AddMember("schedulingPolicyArn", _String)
-
-	UpdateJobQueueRequest_priority = UpdateJobQueueRequest.AddMember("priority", _Integer)
-
-	UpdateJobQueueRequest_computeEnvironmentOrder = UpdateJobQueueRequest.AddMember("computeEnvironmentOrder", _ComputeEnvironmentOrders)
-
-	UpdateJobQueueRequest_serviceEnvironmentOrder = UpdateJobQueueRequest.AddMember("serviceEnvironmentOrder", _ServiceEnvironmentOrders)
-
-	UpdateJobQueueRequest_jobStateTimeLimitActions = UpdateJobQueueRequest.AddMember("jobStateTimeLimitActions", _JobStateTimeLimitActions)
-
-	UpdateJobQueueResponse_jobQueueName = UpdateJobQueueResponse.AddMember("jobQueueName", _String)
-
-	UpdateJobQueueResponse_jobQueueArn = UpdateJobQueueResponse.AddMember("jobQueueArn", _String)
-
-	UpdateQuotaShareRequest_quotaShareArn = UpdateQuotaShareRequest.AddMember("quotaShareArn", _String)
-
-	UpdateQuotaShareRequest_capacityLimits = UpdateQuotaShareRequest.AddMember("capacityLimits", _QuotaShareCapacityLimits)
-
-	UpdateQuotaShareRequest_resourceSharingConfiguration = UpdateQuotaShareRequest.AddMember("resourceSharingConfiguration", QuotaShareResourceSharingConfiguration)
-
-	UpdateQuotaShareRequest_preemptionConfiguration = UpdateQuotaShareRequest.AddMember("preemptionConfiguration", QuotaSharePreemptionConfiguration)
-
-	UpdateQuotaShareRequest_state = UpdateQuotaShareRequest.AddMember("state", QuotaShareState)
-
-	UpdateQuotaShareResponse_quotaShareName = UpdateQuotaShareResponse.AddMember("quotaShareName", _String)
-
-	UpdateQuotaShareResponse_quotaShareArn = UpdateQuotaShareResponse.AddMember("quotaShareArn", _String)
-
-	UpdateSchedulingPolicyRequest_arn = UpdateSchedulingPolicyRequest.AddMember("arn", _String)
-
-	UpdateSchedulingPolicyRequest_quotaSharePolicy = UpdateSchedulingPolicyRequest.AddMember("quotaSharePolicy", QuotaSharePolicy)
-
-	UpdateSchedulingPolicyRequest_fairsharePolicy = UpdateSchedulingPolicyRequest.AddMember("fairsharePolicy", FairsharePolicy)
-
-	UpdateServiceEnvironmentRequest_serviceEnvironment = UpdateServiceEnvironmentRequest.AddMember("serviceEnvironment", _String)
-
-	UpdateServiceEnvironmentRequest_state = UpdateServiceEnvironmentRequest.AddMember("state", ServiceEnvironmentState)
-
-	UpdateServiceEnvironmentRequest_capacityLimits = UpdateServiceEnvironmentRequest.AddMember("capacityLimits", _CapacityLimits)
-
-	UpdateServiceEnvironmentResponse_serviceEnvironmentName = UpdateServiceEnvironmentResponse.AddMember("serviceEnvironmentName", _String)
-
-	UpdateServiceEnvironmentResponse_serviceEnvironmentArn = UpdateServiceEnvironmentResponse.AddMember("serviceEnvironmentArn", _String)
-
-	UpdateServiceJobRequest_jobId = UpdateServiceJobRequest.AddMember("jobId", _String)
-
-	UpdateServiceJobRequest_schedulingPriority = UpdateServiceJobRequest.AddMember("schedulingPriority", _Integer)
-
-	UpdateServiceJobResponse_jobArn = UpdateServiceJobResponse.AddMember("jobArn", _String)
-
-	UpdateServiceJobResponse_jobName = UpdateServiceJobResponse.AddMember("jobName", _String)
-
-	UpdateServiceJobResponse_jobId = UpdateServiceJobResponse.AddMember("jobId", _String)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://batch.amazonaws.com/doc/2016-08-10/"}}, DirectMask: 0x8000}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mArrayJobDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sArrayJobDependency_N_TO_N, &sArrayJobDependency_SEQUENTIAL}}
+var m_ArrayJobStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&s_ArrayJobStatusSummary_key, &s_ArrayJobStatusSummary_value}}
+var mArrayProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sArrayProperties_size}}
+var mArrayPropertiesDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sArrayPropertiesDetail_statusSummary, &sArrayPropertiesDetail_statusSummaryLastUpdatedAt, &sArrayPropertiesDetail_size, &sArrayPropertiesDetail_index}}
+var mArrayPropertiesSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sArrayPropertiesSummary_size, &sArrayPropertiesSummary_index, &sArrayPropertiesSummary_statusSummary, &sArrayPropertiesSummary_statusSummaryLastUpdatedAt}}
+var mAssignPublicIp = smithy.SchemaMembers{List: []*smithy.Schema{&sAssignPublicIp_ENABLED, &sAssignPublicIp_DISABLED}}
+var mAttemptContainerDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sAttemptContainerDetail_containerInstanceArn, &sAttemptContainerDetail_taskArn, &sAttemptContainerDetail_exitCode, &sAttemptContainerDetail_reason, &sAttemptContainerDetail_logStreamName, &sAttemptContainerDetail_networkInterfaces}}
+var mAttemptDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sAttemptDetail_container, &sAttemptDetail_startedAt, &sAttemptDetail_stoppedAt, &sAttemptDetail_statusReason, &sAttemptDetail_taskProperties}}
+var m_AttemptDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttemptDetails_member}}
+var mAttemptEcsTaskDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAttemptEcsTaskDetails_containerInstanceArn, &sAttemptEcsTaskDetails_taskArn, &sAttemptEcsTaskDetails_containers}}
+var mAttemptTaskContainerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sAttemptTaskContainerDetails_exitCode, &sAttemptTaskContainerDetails_name, &sAttemptTaskContainerDetails_reason, &sAttemptTaskContainerDetails_logStreamName, &sAttemptTaskContainerDetails_networkInterfaces}}
+var mCancelJobsErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelJobsErrorDetail_job, &sCancelJobsErrorDetail_code, &sCancelJobsErrorDetail_message}}
+var m_CancelJobsErrorDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CancelJobsErrorDetailList_member}}
+var mCapacityLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityLimit_maxCapacity, &sCapacityLimit_capacityUnit}}
+var m_CapacityLimits = smithy.SchemaMembers{List: []*smithy.Schema{&s_CapacityLimits_member}}
+var mCapacityReservationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCapacityReservationRequest_reservationGroupArn, &sCapacityReservationRequest_reservationPreference}}
+var mCEState = smithy.SchemaMembers{List: []*smithy.Schema{&sCEState_ENABLED, &sCEState_DISABLED}}
+var mCEStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCEStatus_CREATING, &sCEStatus_UPDATING, &sCEStatus_DELETING, &sCEStatus_DELETED, &sCEStatus_VALID, &sCEStatus_INVALID}}
+var mCEType = smithy.SchemaMembers{List: []*smithy.Schema{&sCEType_MANAGED, &sCEType_UNMANAGED}}
+var mClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sClientException_message}}
+var mComputeEnvironmentDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeEnvironmentDetail_computeEnvironmentName, &sComputeEnvironmentDetail_computeEnvironmentArn, &sComputeEnvironmentDetail_unmanagedvCpus, &sComputeEnvironmentDetail_ecsClusterArn, &sComputeEnvironmentDetail_tags, &sComputeEnvironmentDetail_type, &sComputeEnvironmentDetail_state, &sComputeEnvironmentDetail_status, &sComputeEnvironmentDetail_statusReason, &sComputeEnvironmentDetail_computeResources, &sComputeEnvironmentDetail_serviceRole, &sComputeEnvironmentDetail_updatePolicy, &sComputeEnvironmentDetail_eksConfiguration, &sComputeEnvironmentDetail_containerOrchestrationType, &sComputeEnvironmentDetail_uuid, &sComputeEnvironmentDetail_context, &sComputeEnvironmentDetail_ecsSettings}, Seed: 23, Slots: []uint16{
+	9, 3, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 16, 0, 17, 0, 0, 0, 0, 0, 0, 0, 0, 10,
+	0, 13, 0, 0, 12, 0, 0, 7, 5, 0, 6, 0, 0, 0, 0, 0, 2, 0, 0, 1, 0, 0, 0, 0,
+	0, 8, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 0, 14,
+}}
+var m_ComputeEnvironmentDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComputeEnvironmentDetailList_member}}
+var mComputeEnvironmentOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeEnvironmentOrder_order, &sComputeEnvironmentOrder_computeEnvironment}}
+var m_ComputeEnvironmentOrders = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComputeEnvironmentOrders_member}}
+var mComputeResource = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeResource_type, &sComputeResource_allocationStrategy, &sComputeResource_minvCpus, &sComputeResource_maxvCpus, &sComputeResource_desiredvCpus, &sComputeResource_instanceTypes, &sComputeResource_imageId, &sComputeResource_subnets, &sComputeResource_securityGroupIds, &sComputeResource_ec2KeyPair, &sComputeResource_instanceRole, &sComputeResource_tags, &sComputeResource_placementGroup, &sComputeResource_bidPercentage, &sComputeResource_spotIamFleetRole, &sComputeResource_launchTemplate, &sComputeResource_ec2Configuration, &sComputeResource_scalingPolicy, &sComputeResource_managedInstancesProvider, &sComputeResource_capacityTags}, Seed: 17, Slots: []uint16{
+	1, 19, 12, 0, 0, 0, 0, 0, 0, 0, 2, 18, 0, 4, 11, 0, 0, 0, 0, 0, 0, 0, 20, 14,
+	9, 10, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 8, 5, 17, 0,
+	16, 13, 0, 0, 0, 6, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mComputeResourceUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeResourceUpdate_minvCpus, &sComputeResourceUpdate_maxvCpus, &sComputeResourceUpdate_desiredvCpus, &sComputeResourceUpdate_subnets, &sComputeResourceUpdate_securityGroupIds, &sComputeResourceUpdate_allocationStrategy, &sComputeResourceUpdate_instanceTypes, &sComputeResourceUpdate_ec2KeyPair, &sComputeResourceUpdate_instanceRole, &sComputeResourceUpdate_tags, &sComputeResourceUpdate_placementGroup, &sComputeResourceUpdate_bidPercentage, &sComputeResourceUpdate_launchTemplate, &sComputeResourceUpdate_ec2Configuration, &sComputeResourceUpdate_updateToLatestImageVersion, &sComputeResourceUpdate_type, &sComputeResourceUpdate_imageId, &sComputeResourceUpdate_scalingPolicy, &sComputeResourceUpdate_managedInstancesProvider, &sComputeResourceUpdate_capacityTags}, Seed: 17, Slots: []uint16{
+	16, 19, 10, 0, 0, 0, 0, 0, 0, 0, 6, 18, 0, 2, 9, 0, 0, 0, 0, 0, 0, 0, 20, 12,
+	5, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 4, 3, 14, 0,
+	13, 11, 15, 0, 0, 7, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mComputeScalingPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sComputeScalingPolicy_minScaleDownDelayMinutes}}
+var m_ConsumableResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConsumableResourceList_member}}
+var mConsumableResourceProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumableResourceProperties_consumableResourceList}}
+var mConsumableResourceRequirement = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumableResourceRequirement_consumableResource, &sConsumableResourceRequirement_quantity}}
+var mConsumableResourceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConsumableResourceSummary_consumableResourceArn, &sConsumableResourceSummary_consumableResourceName, &sConsumableResourceSummary_totalQuantity, &sConsumableResourceSummary_inUseQuantity, &sConsumableResourceSummary_resourceType}}
+var m_ConsumableResourceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConsumableResourceSummaryList_member}}
+var mContainerDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerDetail_image, &sContainerDetail_vcpus, &sContainerDetail_memory, &sContainerDetail_command, &sContainerDetail_jobRoleArn, &sContainerDetail_executionRoleArn, &sContainerDetail_volumes, &sContainerDetail_environment, &sContainerDetail_mountPoints, &sContainerDetail_readonlyRootFilesystem, &sContainerDetail_ulimits, &sContainerDetail_privileged, &sContainerDetail_user, &sContainerDetail_exitCode, &sContainerDetail_reason, &sContainerDetail_containerInstanceArn, &sContainerDetail_taskArn, &sContainerDetail_logStreamName, &sContainerDetail_instanceType, &sContainerDetail_networkInterfaces, &sContainerDetail_resourceRequirements, &sContainerDetail_linuxParameters, &sContainerDetail_logConfiguration, &sContainerDetail_secrets, &sContainerDetail_networkConfiguration, &sContainerDetail_fargatePlatformConfiguration, &sContainerDetail_ephemeralStorage, &sContainerDetail_runtimePlatform, &sContainerDetail_repositoryCredentials, &sContainerDetail_enableExecuteCommand}, Seed: 5076, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 9, 16, 24, 0, 0, 0, 6, 26, 20, 25, 0, 0, 12, 0, 21, 0, 7, 1,
+	27, 23, 0, 0, 19, 0, 0, 0, 0, 0, 4, 30, 0, 0, 0, 0, 5, 0, 14, 10, 28, 0, 3, 0,
+	0, 22, 0, 13, 15, 8, 0, 0, 11, 0, 17, 18, 0, 0, 29, 0,
+}}
+var mContainerInsights = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerInsights_ENABLED, &sContainerInsights_ENHANCED, &sContainerInsights_DISABLED}}
+var mContainerOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerOverrides_vcpus, &sContainerOverrides_memory, &sContainerOverrides_command, &sContainerOverrides_instanceType, &sContainerOverrides_environment, &sContainerOverrides_resourceRequirements}}
+var mContainerProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerProperties_image, &sContainerProperties_vcpus, &sContainerProperties_memory, &sContainerProperties_command, &sContainerProperties_jobRoleArn, &sContainerProperties_executionRoleArn, &sContainerProperties_volumes, &sContainerProperties_environment, &sContainerProperties_mountPoints, &sContainerProperties_readonlyRootFilesystem, &sContainerProperties_privileged, &sContainerProperties_ulimits, &sContainerProperties_user, &sContainerProperties_instanceType, &sContainerProperties_resourceRequirements, &sContainerProperties_linuxParameters, &sContainerProperties_logConfiguration, &sContainerProperties_secrets, &sContainerProperties_networkConfiguration, &sContainerProperties_fargatePlatformConfiguration, &sContainerProperties_enableExecuteCommand, &sContainerProperties_ephemeralStorage, &sContainerProperties_runtimePlatform, &sContainerProperties_repositoryCredentials}, Seed: 294, Slots: []uint16{
+	13, 0, 0, 0, 7, 0, 9, 0, 0, 0, 0, 0, 0, 0, 1, 2, 12, 0, 0, 18, 3, 0, 0, 5,
+	0, 0, 0, 0, 0, 0, 15, 4, 0, 0, 0, 20, 0, 0, 24, 11, 8, 0, 0, 0, 19, 0, 0, 10,
+	0, 0, 21, 0, 0, 0, 0, 16, 0, 17, 23, 22, 14, 0, 0, 6,
+}}
+var mContainerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerSummary_exitCode, &sContainerSummary_reason}}
+var mCRAllocationStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sCRAllocationStrategy_BEST_FIT, &sCRAllocationStrategy_BEST_FIT_PROGRESSIVE, &sCRAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED, &sCRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED, &sCRAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED, &sCRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED}}
+var mCRType = smithy.SchemaMembers{List: []*smithy.Schema{&sCRType_EC2, &sCRType_SPOT, &sCRType_FARGATE, &sCRType_FARGATE_SPOT, &sCRType_ECS_MANAGED_INSTANCES}}
+var mCRUpdateAllocationStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sCRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE, &sCRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED, &sCRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED, &sCRUpdateAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED, &sCRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED}}
+var mDevice = smithy.SchemaMembers{List: []*smithy.Schema{&sDevice_hostPath, &sDevice_containerPath, &sDevice_permissions}}
+var mDeviceCgroupPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sDeviceCgroupPermission_READ, &sDeviceCgroupPermission_WRITE, &sDeviceCgroupPermission_MKNOD}}
+var m_DeviceCgroupPermissions = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeviceCgroupPermissions_member}}
+var m_DevicesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DevicesList_member}}
+var mEc2Configuration = smithy.SchemaMembers{List: []*smithy.Schema{&sEc2Configuration_imageType, &sEc2Configuration_imageIdOverride, &sEc2Configuration_batchImageStatus, &sEc2Configuration_imageKubernetesVersion}}
+var m_Ec2ConfigurationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ec2ConfigurationList_member}}
+var mEcsProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsProperties_taskProperties}}
+var mEcsPropertiesDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsPropertiesDetail_taskProperties}}
+var mEcsPropertiesOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsPropertiesOverride_taskProperties}}
+var mEcsSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsSettings_containerInsights}}
+var mEcsTaskDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsTaskDetails_containers, &sEcsTaskDetails_containerInstanceArn, &sEcsTaskDetails_taskArn, &sEcsTaskDetails_ephemeralStorage, &sEcsTaskDetails_executionRoleArn, &sEcsTaskDetails_platformVersion, &sEcsTaskDetails_ipcMode, &sEcsTaskDetails_taskRoleArn, &sEcsTaskDetails_pidMode, &sEcsTaskDetails_networkConfiguration, &sEcsTaskDetails_runtimePlatform, &sEcsTaskDetails_volumes, &sEcsTaskDetails_enableExecuteCommand, &sEcsTaskDetails_networkMode}, Seed: 13, Slots: []uint16{
+	6, 7, 0, 3, 11, 4, 0, 0, 0, 0, 5, 0, 2, 0, 0, 0, 9, 0, 0, 12, 0, 14, 0, 0,
+	0, 10, 8, 0, 0, 13, 0, 1,
+}}
+var mEcsTaskProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sEcsTaskProperties_containers, &sEcsTaskProperties_ephemeralStorage, &sEcsTaskProperties_executionRoleArn, &sEcsTaskProperties_platformVersion, &sEcsTaskProperties_ipcMode, &sEcsTaskProperties_taskRoleArn, &sEcsTaskProperties_pidMode, &sEcsTaskProperties_networkConfiguration, &sEcsTaskProperties_runtimePlatform, &sEcsTaskProperties_volumes, &sEcsTaskProperties_enableExecuteCommand, &sEcsTaskProperties_networkMode}, Seed: 13, Slots: []uint16{
+	4, 5, 0, 0, 9, 2, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 7, 0, 0, 10, 0, 12, 0, 0,
+	0, 8, 6, 0, 0, 11, 0, 1,
+}}
+var mEFSAuthorizationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sEFSAuthorizationConfig_accessPointId, &sEFSAuthorizationConfig_iam}}
+var mEFSAuthorizationConfigIAM = smithy.SchemaMembers{List: []*smithy.Schema{&sEFSAuthorizationConfigIAM_ENABLED, &sEFSAuthorizationConfigIAM_DISABLED}}
+var mEFSTransitEncryption = smithy.SchemaMembers{List: []*smithy.Schema{&sEFSTransitEncryption_ENABLED, &sEFSTransitEncryption_DISABLED}}
+var mEFSVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEFSVolumeConfiguration_fileSystemId, &sEFSVolumeConfiguration_rootDirectory, &sEFSVolumeConfiguration_transitEncryption, &sEFSVolumeConfiguration_transitEncryptionPort, &sEFSVolumeConfiguration_authorizationConfig}}
+var mEksAccessEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sEksAccessEntry_desiredState, &sEksAccessEntry_status}}
+var mEksAccessEntryDesiredState = smithy.SchemaMembers{List: []*smithy.Schema{&sEksAccessEntryDesiredState_ENABLED, &sEksAccessEntryDesiredState_DISABLED, &sEksAccessEntryDesiredState_INHERIT_FROM_CLUSTER}}
+var mEksAccessEntryStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEksAccessEntryStatus_ACTIVE, &sEksAccessEntryStatus_INACTIVE}}
+var m_EksAnnotationsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksAnnotationsMap_key, &s_EksAnnotationsMap_value}}
+var mEksAttemptContainerDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEksAttemptContainerDetail_name, &sEksAttemptContainerDetail_containerID, &sEksAttemptContainerDetail_exitCode, &sEksAttemptContainerDetail_reason}}
+var m_EksAttemptContainerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksAttemptContainerDetails_member}}
+var mEksAttemptDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEksAttemptDetail_containers, &sEksAttemptDetail_initContainers, &sEksAttemptDetail_eksClusterArn, &sEksAttemptDetail_podName, &sEksAttemptDetail_podNamespace, &sEksAttemptDetail_nodeName, &sEksAttemptDetail_startedAt, &sEksAttemptDetail_stoppedAt, &sEksAttemptDetail_statusReason}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 9, 0, 2, 0, 0, 7, 6, 0, 1, 0, 8,
+	0, 0, 3, 0, 0, 0, 0, 5,
+}}
+var m_EksAttemptDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksAttemptDetails_member}}
+var mEksConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEksConfiguration_eksClusterArn, &sEksConfiguration_kubernetesNamespace, &sEksConfiguration_accessEntry}}
+var mEksConfigurationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sEksConfigurationUpdate_accessEntry}}
+var mEksContainer = smithy.SchemaMembers{List: []*smithy.Schema{&sEksContainer_name, &sEksContainer_image, &sEksContainer_imagePullPolicy, &sEksContainer_command, &sEksContainer_args, &sEksContainer_env, &sEksContainer_resources, &sEksContainer_volumeMounts, &sEksContainer_securityContext}, Seed: 5, Slots: []uint16{
+	0, 0, 5, 0, 0, 0, 3, 0, 0, 0, 8, 2, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 9, 7,
+	0, 0, 0, 0, 6, 0, 0, 1,
+}}
+var mEksContainerDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEksContainerDetail_name, &sEksContainerDetail_image, &sEksContainerDetail_imagePullPolicy, &sEksContainerDetail_command, &sEksContainerDetail_args, &sEksContainerDetail_env, &sEksContainerDetail_resources, &sEksContainerDetail_exitCode, &sEksContainerDetail_reason, &sEksContainerDetail_volumeMounts, &sEksContainerDetail_securityContext}, Seed: 11, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 1, 6, 11, 10, 0, 8, 2, 0, 4, 5, 7, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 3, 0, 0, 0, 0, 0,
+}}
+var m_EksContainerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksContainerDetails_member}}
+var mEksContainerEnvironmentVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sEksContainerEnvironmentVariable_name, &sEksContainerEnvironmentVariable_value}}
+var m_EksContainerEnvironmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksContainerEnvironmentVariables_member}}
+var mEksContainerOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEksContainerOverride_name, &sEksContainerOverride_image, &sEksContainerOverride_command, &sEksContainerOverride_args, &sEksContainerOverride_env, &sEksContainerOverride_resources}}
+var m_EksContainerOverrideList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksContainerOverrideList_member}}
+var mEksContainerResourceRequirements = smithy.SchemaMembers{List: []*smithy.Schema{&sEksContainerResourceRequirements_limits, &sEksContainerResourceRequirements_requests}}
+var m_EksContainers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksContainers_member}}
+var mEksContainerSecurityContext = smithy.SchemaMembers{List: []*smithy.Schema{&sEksContainerSecurityContext_runAsUser, &sEksContainerSecurityContext_runAsGroup, &sEksContainerSecurityContext_privileged, &sEksContainerSecurityContext_allowPrivilegeEscalation, &sEksContainerSecurityContext_readOnlyRootFilesystem, &sEksContainerSecurityContext_runAsNonRoot}}
+var mEksContainerVolumeMount = smithy.SchemaMembers{List: []*smithy.Schema{&sEksContainerVolumeMount_name, &sEksContainerVolumeMount_mountPath, &sEksContainerVolumeMount_subPath, &sEksContainerVolumeMount_readOnly}}
+var m_EksContainerVolumeMounts = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksContainerVolumeMounts_member}}
+var mEksEmptyDir = smithy.SchemaMembers{List: []*smithy.Schema{&sEksEmptyDir_medium, &sEksEmptyDir_sizeLimit}}
+var mEksHostPath = smithy.SchemaMembers{List: []*smithy.Schema{&sEksHostPath_path}}
+var m_EksLabelsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksLabelsMap_key, &s_EksLabelsMap_value}}
+var m_EksLimits = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksLimits_key, &s_EksLimits_value}}
+var mEksMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sEksMetadata_labels, &sEksMetadata_annotations, &sEksMetadata_namespace}}
+var mEksPersistentVolumeClaim = smithy.SchemaMembers{List: []*smithy.Schema{&sEksPersistentVolumeClaim_claimName, &sEksPersistentVolumeClaim_readOnly}}
+var mEksPodProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sEksPodProperties_serviceAccountName, &sEksPodProperties_hostNetwork, &sEksPodProperties_dnsPolicy, &sEksPodProperties_imagePullSecrets, &sEksPodProperties_containers, &sEksPodProperties_initContainers, &sEksPodProperties_volumes, &sEksPodProperties_metadata, &sEksPodProperties_shareProcessNamespace}, Seed: 3, Slots: []uint16{
+	0, 7, 0, 0, 0, 1, 0, 0, 0, 0, 5, 0, 3, 0, 0, 2, 0, 9, 0, 0, 0, 0, 6, 0,
+	0, 0, 0, 4, 0, 0, 8, 0,
+}}
+var mEksPodPropertiesDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEksPodPropertiesDetail_serviceAccountName, &sEksPodPropertiesDetail_hostNetwork, &sEksPodPropertiesDetail_dnsPolicy, &sEksPodPropertiesDetail_imagePullSecrets, &sEksPodPropertiesDetail_containers, &sEksPodPropertiesDetail_initContainers, &sEksPodPropertiesDetail_volumes, &sEksPodPropertiesDetail_podName, &sEksPodPropertiesDetail_nodeName, &sEksPodPropertiesDetail_metadata, &sEksPodPropertiesDetail_shareProcessNamespace}, Seed: 7, Slots: []uint16{
+	7, 0, 8, 3, 0, 0, 11, 0, 0, 0, 0, 10, 0, 6, 2, 0, 0, 0, 0, 0, 9, 0, 0, 0,
+	0, 0, 1, 0, 4, 0, 0, 5,
+}}
+var mEksPodPropertiesOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEksPodPropertiesOverride_containers, &sEksPodPropertiesOverride_initContainers, &sEksPodPropertiesOverride_metadata}}
+var mEksProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sEksProperties_podProperties}}
+var mEksPropertiesDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sEksPropertiesDetail_podProperties}}
+var mEksPropertiesOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sEksPropertiesOverride_podProperties}}
+var m_EksRequests = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksRequests_key, &s_EksRequests_value}}
+var mEksSecret = smithy.SchemaMembers{List: []*smithy.Schema{&sEksSecret_secretName, &sEksSecret_optional}}
+var mEksVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sEksVolume_name, &sEksVolume_hostPath, &sEksVolume_emptyDir, &sEksVolume_secret, &sEksVolume_persistentVolumeClaim}}
+var m_EksVolumes = smithy.SchemaMembers{List: []*smithy.Schema{&s_EksVolumes_member}}
+var m_EnvironmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnvironmentVariables_member}}
+var mEphemeralStorage = smithy.SchemaMembers{List: []*smithy.Schema{&sEphemeralStorage_sizeInGiB}}
+var mEvaluateOnExit = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluateOnExit_onStatusReason, &sEvaluateOnExit_onReason, &sEvaluateOnExit_onExitCode, &sEvaluateOnExit_action}}
+var m_EvaluateOnExitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EvaluateOnExitList_member}}
+var mFairshareCapacityUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sFairshareCapacityUsage_capacityUnit, &sFairshareCapacityUsage_quantity}}
+var m_FairshareCapacityUsageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FairshareCapacityUsageList_member}}
+var mFairshareCapacityUtilization = smithy.SchemaMembers{List: []*smithy.Schema{&sFairshareCapacityUtilization_shareIdentifier, &sFairshareCapacityUtilization_capacityUsage}}
+var m_FairshareCapacityUtilizationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FairshareCapacityUtilizationList_member}}
+var mFairsharePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sFairsharePolicy_shareDecaySeconds, &sFairsharePolicy_computeReservation, &sFairsharePolicy_shareDistribution}}
+var mFairshareUtilizationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sFairshareUtilizationDetail_activeShareCount, &sFairshareUtilizationDetail_topCapacityUtilization}}
+var mFargatePlatformConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFargatePlatformConfiguration_platformVersion}}
+var mFirelensConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFirelensConfiguration_type, &sFirelensConfiguration_options}}
+var m_FirelensConfigurationOptionsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_FirelensConfigurationOptionsMap_key, &s_FirelensConfigurationOptionsMap_value}}
+var mFirelensConfigurationType = smithy.SchemaMembers{List: []*smithy.Schema{&sFirelensConfigurationType_FLUENTD, &sFirelensConfigurationType_FLUENTBIT}}
+var mFrontOfQueueDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sFrontOfQueueDetail_jobs, &sFrontOfQueueDetail_lastUpdatedAt}}
+var mFrontOfQueueJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFrontOfQueueJobSummary_jobArn, &sFrontOfQueueJobSummary_earliestTimeAtPosition}}
+var m_FrontOfQueueJobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FrontOfQueueJobSummaryList_member}}
+var mFrontOfQuotaShareJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sFrontOfQuotaShareJobSummary_jobArn, &sFrontOfQuotaShareJobSummary_earliestTimeAtPosition}}
+var m_FrontOfQuotaShareJobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FrontOfQuotaShareJobSummaryList_member}}
+var mFrontOfQuotaSharesDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sFrontOfQuotaSharesDetail_quotaShares, &sFrontOfQuotaSharesDetail_lastUpdatedAt}}
+var m_FrontOfQuotaSharesJobSummaryMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_FrontOfQuotaSharesJobSummaryMap_key, &s_FrontOfQuotaSharesJobSummaryMap_value}}
+var mHost = smithy.SchemaMembers{List: []*smithy.Schema{&sHost_sourcePath}}
+var mImagePullSecret = smithy.SchemaMembers{List: []*smithy.Schema{&sImagePullSecret_name}}
+var m_ImagePullSecrets = smithy.SchemaMembers{List: []*smithy.Schema{&s_ImagePullSecrets_member}}
+var mInfrastructureOptimization = smithy.SchemaMembers{List: []*smithy.Schema{&sInfrastructureOptimization_scaleInAfter}}
+var mInstanceLaunchTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceLaunchTemplate_ec2InstanceProfileArn, &sInstanceLaunchTemplate_networkConfiguration, &sInstanceLaunchTemplate_instanceRequirements, &sInstanceLaunchTemplate_capacityOptionType, &sInstanceLaunchTemplate_storageConfiguration, &sInstanceLaunchTemplate_monitoring, &sInstanceLaunchTemplate_fipsEnabled, &sInstanceLaunchTemplate_capacityReservations, &sInstanceLaunchTemplate_instanceMetadataTagsPropagation, &sInstanceLaunchTemplate_localStorageConfiguration}, Seed: 9, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 1, 6, 2, 0, 0, 7, 0, 0, 0, 0, 0, 0, 3, 0, 5, 10,
+	0, 8, 0, 9, 4, 0, 0, 0,
+}}
+var mInstanceLaunchTemplateUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceLaunchTemplateUpdate_ec2InstanceProfileArn, &sInstanceLaunchTemplateUpdate_networkConfiguration, &sInstanceLaunchTemplateUpdate_instanceRequirements, &sInstanceLaunchTemplateUpdate_storageConfiguration, &sInstanceLaunchTemplateUpdate_monitoring, &sInstanceLaunchTemplateUpdate_capacityReservations, &sInstanceLaunchTemplateUpdate_instanceMetadataTagsPropagation, &sInstanceLaunchTemplateUpdate_localStorageConfiguration}}
+var mInstanceRequirementsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInstanceRequirementsRequest_allowedInstanceTypes}}
+var mJobCapacityUsageSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sJobCapacityUsageSummary_capacityUnit, &sJobCapacityUsageSummary_quantity}}
+var m_JobCapacityUsageSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobCapacityUsageSummaryList_member}}
+var mJobDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sJobDefinition_jobDefinitionName, &sJobDefinition_jobDefinitionArn, &sJobDefinition_revision, &sJobDefinition_status, &sJobDefinition_type, &sJobDefinition_schedulingPriority, &sJobDefinition_parameters, &sJobDefinition_retryStrategy, &sJobDefinition_containerProperties, &sJobDefinition_timeout, &sJobDefinition_nodeProperties, &sJobDefinition_tags, &sJobDefinition_propagateTags, &sJobDefinition_platformCapabilities, &sJobDefinition_ecsProperties, &sJobDefinition_eksProperties, &sJobDefinition_containerOrchestrationType, &sJobDefinition_consumableResourceProperties}, Seed: 7, Slots: []uint16{
+	13, 0, 0, 0, 18, 3, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0,
+	0, 0, 0, 0, 14, 0, 11, 0, 0, 2, 0, 0, 9, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 6,
+	0, 0, 1, 10, 0, 7, 0, 0, 5, 0, 17, 4, 0, 0, 12, 0,
+}}
+var m_JobDefinitionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobDefinitionList_member}}
+var mJobDefinitionType = smithy.SchemaMembers{List: []*smithy.Schema{&sJobDefinitionType_Container, &sJobDefinitionType_Multinode}}
+var mJobDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sJobDependency_jobId, &sJobDependency_type}}
+var m_JobDependencyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobDependencyList_member}}
+var mJobDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sJobDetail_jobArn, &sJobDetail_jobName, &sJobDetail_jobId, &sJobDetail_jobQueue, &sJobDetail_status, &sJobDetail_shareIdentifier, &sJobDetail_schedulingPriority, &sJobDetail_attempts, &sJobDetail_statusReason, &sJobDetail_createdAt, &sJobDetail_retryStrategy, &sJobDetail_startedAt, &sJobDetail_stoppedAt, &sJobDetail_dependsOn, &sJobDetail_jobDefinition, &sJobDetail_parameters, &sJobDetail_container, &sJobDetail_nodeDetails, &sJobDetail_nodeProperties, &sJobDetail_arrayProperties, &sJobDetail_timeout, &sJobDetail_tags, &sJobDetail_propagateTags, &sJobDetail_platformCapabilities, &sJobDetail_eksProperties, &sJobDetail_eksAttempts, &sJobDetail_ecsProperties, &sJobDetail_isCancelled, &sJobDetail_isTerminated, &sJobDetail_consumableResourceProperties}, Seed: 2530, Slots: []uint16{
+	0, 0, 0, 2, 25, 0, 0, 0, 10, 0, 0, 0, 0, 7, 0, 6, 0, 22, 0, 23, 17, 24, 0, 0,
+	0, 0, 18, 0, 0, 0, 29, 14, 19, 0, 3, 11, 12, 0, 27, 0, 20, 0, 13, 5, 4, 0, 0, 16,
+	0, 9, 0, 0, 26, 0, 21, 0, 1, 28, 0, 15, 30, 0, 0, 8,
+}}
+var m_JobDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobDetailList_member}}
+var mJobQueueDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sJobQueueDetail_jobQueueName, &sJobQueueDetail_jobQueueArn, &sJobQueueDetail_state, &sJobQueueDetail_schedulingPolicyArn, &sJobQueueDetail_status, &sJobQueueDetail_statusReason, &sJobQueueDetail_priority, &sJobQueueDetail_computeEnvironmentOrder, &sJobQueueDetail_serviceEnvironmentOrder, &sJobQueueDetail_jobQueueType, &sJobQueueDetail_tags, &sJobQueueDetail_jobStateTimeLimitActions}, Seed: 4, Slots: []uint16{
+	12, 0, 0, 0, 0, 0, 0, 0, 4, 5, 0, 0, 3, 11, 0, 8, 0, 0, 2, 9, 0, 0, 0, 6,
+	10, 0, 0, 0, 7, 1, 0, 0,
+}}
+var m_JobQueueDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobQueueDetailList_member}}
+var mJobQueueType = smithy.SchemaMembers{List: []*smithy.Schema{&sJobQueueType_EKS, &sJobQueueType_ECS, &sJobQueueType_ECS_FARGATE, &sJobQueueType_SAGEMAKER_TRAINING, &sJobQueueType_ECS_MANAGED_INSTANCES}}
+var mJobStateTimeLimitAction = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStateTimeLimitAction_reason, &sJobStateTimeLimitAction_state, &sJobStateTimeLimitAction_maxTimeSeconds, &sJobStateTimeLimitAction_action}}
+var m_JobStateTimeLimitActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobStateTimeLimitActions_member}}
+var mJobStateTimeLimitActionsAction = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStateTimeLimitActionsAction_CANCEL, &sJobStateTimeLimitActionsAction_TERMINATE}}
+var mJobStateTimeLimitActionsState = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStateTimeLimitActionsState_RUNNABLE}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_SUBMITTED, &sJobStatus_PENDING, &sJobStatus_RUNNABLE, &sJobStatus_STARTING, &sJobStatus_RUNNING, &sJobStatus_SUCCEEDED, &sJobStatus_FAILED}}
+var mJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sJobSummary_jobArn, &sJobSummary_jobId, &sJobSummary_jobName, &sJobSummary_capacityUsage, &sJobSummary_createdAt, &sJobSummary_scheduledAt, &sJobSummary_shareIdentifier, &sJobSummary_status, &sJobSummary_statusReason, &sJobSummary_startedAt, &sJobSummary_stoppedAt, &sJobSummary_container, &sJobSummary_arrayProperties, &sJobSummary_nodeProperties, &sJobSummary_jobDefinition, &sJobSummary_isCancelled, &sJobSummary_isTerminated}, Seed: 38, Slots: []uint16{
+	13, 0, 10, 0, 14, 0, 0, 11, 0, 15, 0, 0, 6, 12, 0, 5, 0, 0, 0, 8, 0, 0, 0, 0,
+	0, 0, 1, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0,
+	0, 9, 0, 0, 0, 0, 17, 0, 0, 7, 0, 0, 4, 0, 0, 0,
+}}
+var m_JobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_JobSummaryList_member}}
+var mJobTimeout = smithy.SchemaMembers{List: []*smithy.Schema{&sJobTimeout_attemptDurationSeconds}}
+var mJQState = smithy.SchemaMembers{List: []*smithy.Schema{&sJQState_ENABLED, &sJQState_DISABLED}}
+var mJQStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJQStatus_CREATING, &sJQStatus_UPDATING, &sJQStatus_DELETING, &sJQStatus_DELETED, &sJQStatus_VALID, &sJQStatus_INVALID}}
+var mKeyValuePair = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyValuePair_name, &sKeyValuePair_value}}
+var mKeyValuesPair = smithy.SchemaMembers{List: []*smithy.Schema{&sKeyValuesPair_name, &sKeyValuesPair_values}}
+var mLatestServiceJobAttempt = smithy.SchemaMembers{List: []*smithy.Schema{&sLatestServiceJobAttempt_serviceResourceId}}
+var mLaunchTemplateSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchTemplateSpecification_launchTemplateId, &sLaunchTemplateSpecification_launchTemplateName, &sLaunchTemplateSpecification_version, &sLaunchTemplateSpecification_overrides, &sLaunchTemplateSpecification_userdataType}}
+var mLaunchTemplateSpecificationOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sLaunchTemplateSpecificationOverride_launchTemplateId, &sLaunchTemplateSpecificationOverride_launchTemplateName, &sLaunchTemplateSpecificationOverride_version, &sLaunchTemplateSpecificationOverride_targetInstanceTypes, &sLaunchTemplateSpecificationOverride_userdataType}}
+var m_LaunchTemplateSpecificationOverrideList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LaunchTemplateSpecificationOverrideList_member}}
+var mLinuxParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sLinuxParameters_devices, &sLinuxParameters_initProcessEnabled, &sLinuxParameters_sharedMemorySize, &sLinuxParameters_tmpfs, &sLinuxParameters_maxSwap, &sLinuxParameters_swappiness}}
+var m_ListAttemptEcsTaskDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListAttemptEcsTaskDetails_member}}
+var m_ListAttemptTaskContainerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListAttemptTaskContainerDetails_member}}
+var m_ListConsumableResourcesFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListConsumableResourcesFilterList_member}}
+var m_ListEcsTaskDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListEcsTaskDetails_member}}
+var m_ListEcsTaskProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListEcsTaskProperties_member}}
+var m_ListJobsByConsumableResourceFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListJobsByConsumableResourceFilterList_member}}
+var mListJobsByConsumableResourceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsByConsumableResourceSummary_jobArn, &sListJobsByConsumableResourceSummary_jobQueueArn, &sListJobsByConsumableResourceSummary_jobName, &sListJobsByConsumableResourceSummary_jobDefinitionArn, &sListJobsByConsumableResourceSummary_shareIdentifier, &sListJobsByConsumableResourceSummary_jobStatus, &sListJobsByConsumableResourceSummary_quantity, &sListJobsByConsumableResourceSummary_statusReason, &sListJobsByConsumableResourceSummary_startedAt, &sListJobsByConsumableResourceSummary_createdAt, &sListJobsByConsumableResourceSummary_consumableResourceProperties}, Seed: 11, Slots: []uint16{
+	2, 0, 0, 0, 0, 0, 9, 11, 0, 0, 8, 0, 6, 0, 0, 0, 0, 1, 5, 10, 0, 0, 0, 4,
+	0, 0, 7, 0, 0, 3, 0, 0,
+}}
+var m_ListJobsByConsumableResourceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListJobsByConsumableResourceSummaryList_member}}
+var m_ListJobsFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListJobsFilterList_member}}
+var m_ListTaskContainerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListTaskContainerDetails_member}}
+var m_ListTaskContainerOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListTaskContainerOverrides_member}}
+var m_ListTaskContainerProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListTaskContainerProperties_member}}
+var m_ListTaskPropertiesOverride = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListTaskPropertiesOverride_member}}
+var mLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfiguration_logDriver, &sLogConfiguration_options, &sLogConfiguration_secretOptions}}
+var m_LogConfigurationOptionsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_LogConfigurationOptionsMap_key, &s_LogConfigurationOptionsMap_value}}
+var mLogDriver = smithy.SchemaMembers{List: []*smithy.Schema{&sLogDriver_JSON_FILE, &sLogDriver_SYSLOG, &sLogDriver_JOURNALD, &sLogDriver_GELF, &sLogDriver_FLUENTD, &sLogDriver_AWSLOGS, &sLogDriver_SPLUNK, &sLogDriver_AWSFIRELENS}}
+var mManagedInstancesLocalStorageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedInstancesLocalStorageConfiguration_useLocalStorage}}
+var mManagedInstancesNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedInstancesNetworkConfiguration_subnets, &sManagedInstancesNetworkConfiguration_securityGroups}}
+var mManagedInstancesProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedInstancesProvider_propagateTags, &sManagedInstancesProvider_infrastructureRoleArn, &sManagedInstancesProvider_instanceLaunchTemplate, &sManagedInstancesProvider_infrastructureOptimization}}
+var mManagedInstancesStorageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sManagedInstancesStorageConfiguration_storageSizeGiB}}
+var mMountPoint = smithy.SchemaMembers{List: []*smithy.Schema{&sMountPoint_containerPath, &sMountPoint_readOnly, &sMountPoint_sourceVolume}}
+var m_MountPoints = smithy.SchemaMembers{List: []*smithy.Schema{&s_MountPoints_member}}
+var mNetworkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkConfiguration_assignPublicIp}}
+var mNetworkInterface = smithy.SchemaMembers{List: []*smithy.Schema{&sNetworkInterface_attachmentId, &sNetworkInterface_ipv6Address, &sNetworkInterface_privateIpv4Address}}
+var m_NetworkInterfaceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_NetworkInterfaceList_member}}
+var mNodeDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeDetails_nodeIndex, &sNodeDetails_isMainNode}}
+var mNodeOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeOverrides_numNodes, &sNodeOverrides_nodePropertyOverrides}}
+var mNodeProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeProperties_numNodes, &sNodeProperties_mainNode, &sNodeProperties_nodeRangeProperties}}
+var mNodePropertiesSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sNodePropertiesSummary_isMainNode, &sNodePropertiesSummary_numNodes, &sNodePropertiesSummary_nodeIndex}}
+var mNodePropertyOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sNodePropertyOverride_targetNodes, &sNodePropertyOverride_containerOverrides, &sNodePropertyOverride_ecsPropertiesOverride, &sNodePropertyOverride_instanceTypes, &sNodePropertyOverride_eksPropertiesOverride, &sNodePropertyOverride_consumableResourcePropertiesOverride}}
+var m_NodePropertyOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&s_NodePropertyOverrides_member}}
+var m_NodeRangeProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_NodeRangeProperties_member}}
+var mNodeRangeProperty = smithy.SchemaMembers{List: []*smithy.Schema{&sNodeRangeProperty_targetNodes, &sNodeRangeProperty_container, &sNodeRangeProperty_instanceTypes, &sNodeRangeProperty_ecsProperties, &sNodeRangeProperty_eksProperties, &sNodeRangeProperty_consumableResourceProperties}}
+var mOrchestrationType = smithy.SchemaMembers{List: []*smithy.Schema{&sOrchestrationType_ECS, &sOrchestrationType_EKS}}
+var m_ParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParametersMap_key, &s_ParametersMap_value}}
+var mPlatformCapability = smithy.SchemaMembers{List: []*smithy.Schema{&sPlatformCapability_EC2, &sPlatformCapability_FARGATE, &sPlatformCapability_MANAGED_INSTANCES}}
+var m_PlatformCapabilityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformCapabilityList_member}}
+var mQueueSnapshotCapacityUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sQueueSnapshotCapacityUsage_capacityUnit, &sQueueSnapshotCapacityUsage_quantity}}
+var m_QueueSnapshotCapacityUsageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueueSnapshotCapacityUsageList_member}}
+var mQueueSnapshotUtilizationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sQueueSnapshotUtilizationDetail_totalCapacityUsage, &sQueueSnapshotUtilizationDetail_fairshareUtilization, &sQueueSnapshotUtilizationDetail_quotaShareUtilization, &sQueueSnapshotUtilizationDetail_lastUpdatedAt}}
+var mQuotaShareCapacityLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareCapacityLimit_maxCapacity, &sQuotaShareCapacityLimit_capacityUnit}}
+var m_QuotaShareCapacityLimits = smithy.SchemaMembers{List: []*smithy.Schema{&s_QuotaShareCapacityLimits_member}}
+var mQuotaShareCapacityUsage = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareCapacityUsage_capacityUnit, &sQuotaShareCapacityUsage_quantity}}
+var m_QuotaShareCapacityUsageList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QuotaShareCapacityUsageList_member}}
+var mQuotaShareCapacityUtilization = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareCapacityUtilization_quotaShareName, &sQuotaShareCapacityUtilization_capacityUsage}}
+var m_QuotaShareCapacityUtilizationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QuotaShareCapacityUtilizationList_member}}
+var mQuotaShareDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareDetail_quotaShareName, &sQuotaShareDetail_quotaShareArn, &sQuotaShareDetail_jobQueueArn, &sQuotaShareDetail_capacityLimits, &sQuotaShareDetail_resourceSharingConfiguration, &sQuotaShareDetail_preemptionConfiguration, &sQuotaShareDetail_state, &sQuotaShareDetail_status}}
+var mQuotaShareIdleResourceAssignmentStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareIdleResourceAssignmentStrategy_FIFO}}
+var mQuotaShareInSharePreemptionState = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareInSharePreemptionState_ENABLED, &sQuotaShareInSharePreemptionState_DISABLED}}
+var m_QuotaShareList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QuotaShareList_member}}
+var mQuotaSharePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaSharePolicy_idleResourceAssignmentStrategy}}
+var mQuotaSharePreemptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaSharePreemptionConfiguration_inSharePreemption}}
+var mQuotaShareResourceSharingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareResourceSharingConfiguration_strategy, &sQuotaShareResourceSharingConfiguration_borrowLimit}}
+var mQuotaShareResourceSharingStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareResourceSharingStrategy_RESERVE, &sQuotaShareResourceSharingStrategy_LEND, &sQuotaShareResourceSharingStrategy_LEND_AND_BORROW}}
+var mQuotaShareState = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareState_ENABLED, &sQuotaShareState_DISABLED}}
+var mQuotaShareStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareStatus_CREATING, &sQuotaShareStatus_VALID, &sQuotaShareStatus_INVALID, &sQuotaShareStatus_UPDATING, &sQuotaShareStatus_DELETING}}
+var mQuotaShareUtilizationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sQuotaShareUtilizationDetail_topCapacityUtilization}}
+var mRepositoryCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sRepositoryCredentials_credentialsParameter}}
+var mResourceRequirement = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceRequirement_value, &sResourceRequirement_type}}
+var m_ResourceRequirements = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceRequirements_member}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_GPU, &sResourceType_VCPU, &sResourceType_MEMORY}}
+var mRetryAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryAction_RETRY, &sRetryAction_EXIT}}
+var mRetryStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryStrategy_attempts, &sRetryStrategy_evaluateOnExit}}
+var mRuntimePlatform = smithy.SchemaMembers{List: []*smithy.Schema{&sRuntimePlatform_operatingSystemFamily, &sRuntimePlatform_cpuArchitecture}}
+var mS3FilesVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3FilesVolumeConfiguration_fileSystemArn, &sS3FilesVolumeConfiguration_rootDirectory, &sS3FilesVolumeConfiguration_transitEncryptionPort, &sS3FilesVolumeConfiguration_accessPointArn}}
+var mSchedulingPolicyDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sSchedulingPolicyDetail_name, &sSchedulingPolicyDetail_arn, &sSchedulingPolicyDetail_quotaSharePolicy, &sSchedulingPolicyDetail_fairsharePolicy, &sSchedulingPolicyDetail_tags}}
+var m_SchedulingPolicyDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchedulingPolicyDetailList_member}}
+var mSchedulingPolicyListingDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sSchedulingPolicyListingDetail_arn}}
+var m_SchedulingPolicyListingDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SchedulingPolicyListingDetailList_member}}
+var mSecret = smithy.SchemaMembers{List: []*smithy.Schema{&sSecret_name, &sSecret_valueFrom}}
+var m_SecretList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SecretList_member}}
+var mServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sServerException_message}}
+var mServiceEnvironmentDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceEnvironmentDetail_serviceEnvironmentName, &sServiceEnvironmentDetail_serviceEnvironmentArn, &sServiceEnvironmentDetail_serviceEnvironmentType, &sServiceEnvironmentDetail_state, &sServiceEnvironmentDetail_status, &sServiceEnvironmentDetail_capacityLimits, &sServiceEnvironmentDetail_tags}}
+var m_ServiceEnvironmentDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceEnvironmentDetailList_member}}
+var mServiceEnvironmentOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceEnvironmentOrder_order, &sServiceEnvironmentOrder_serviceEnvironment}}
+var m_ServiceEnvironmentOrders = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceEnvironmentOrders_member}}
+var mServiceEnvironmentState = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceEnvironmentState_ENABLED, &sServiceEnvironmentState_DISABLED}}
+var mServiceEnvironmentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceEnvironmentStatus_CREATING, &sServiceEnvironmentStatus_UPDATING, &sServiceEnvironmentStatus_DELETING, &sServiceEnvironmentStatus_DELETED, &sServiceEnvironmentStatus_VALID, &sServiceEnvironmentStatus_INVALID}}
+var mServiceEnvironmentType = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceEnvironmentType_SAGEMAKER_TRAINING}}
+var mServiceJobAttemptDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobAttemptDetail_serviceResourceId, &sServiceJobAttemptDetail_startedAt, &sServiceJobAttemptDetail_stoppedAt, &sServiceJobAttemptDetail_statusReason}}
+var m_ServiceJobAttemptDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceJobAttemptDetails_member}}
+var mServiceJobCapacityUsageDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobCapacityUsageDetail_capacityUnit, &sServiceJobCapacityUsageDetail_quantity}}
+var m_ServiceJobCapacityUsageDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceJobCapacityUsageDetailList_member}}
+var mServiceJobCapacityUsageSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobCapacityUsageSummary_capacityUnit, &sServiceJobCapacityUsageSummary_quantity}}
+var m_ServiceJobCapacityUsageSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceJobCapacityUsageSummaryList_member}}
+var mServiceJobEvaluateOnExit = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobEvaluateOnExit_action, &sServiceJobEvaluateOnExit_onStatusReason}}
+var m_ServiceJobEvaluateOnExitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceJobEvaluateOnExitList_member}}
+var mServiceJobPreemptedAttempt = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobPreemptedAttempt_serviceResourceId, &sServiceJobPreemptedAttempt_startedAt, &sServiceJobPreemptedAttempt_stoppedAt, &sServiceJobPreemptedAttempt_statusReason}}
+var mServiceJobPreemptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobPreemptionConfiguration_preemptionRetriesBeforeTermination}}
+var mServiceJobPreemptionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobPreemptionSummary_preemptedAttemptCount, &sServiceJobPreemptionSummary_recentPreemptedAttempts}}
+var m_ServiceJobRecentPreemptedAttemptList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceJobRecentPreemptedAttemptList_member}}
+var mServiceJobRetryAction = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobRetryAction_RETRY, &sServiceJobRetryAction_EXIT}}
+var mServiceJobRetryStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobRetryStrategy_attempts, &sServiceJobRetryStrategy_evaluateOnExit}}
+var mServiceJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobStatus_SUBMITTED, &sServiceJobStatus_PENDING, &sServiceJobStatus_RUNNABLE, &sServiceJobStatus_SCHEDULED, &sServiceJobStatus_STARTING, &sServiceJobStatus_RUNNING, &sServiceJobStatus_SUCCEEDED, &sServiceJobStatus_FAILED}}
+var mServiceJobSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobSummary_latestAttempt, &sServiceJobSummary_capacityUsage, &sServiceJobSummary_createdAt, &sServiceJobSummary_jobArn, &sServiceJobSummary_jobId, &sServiceJobSummary_jobName, &sServiceJobSummary_scheduledAt, &sServiceJobSummary_serviceJobType, &sServiceJobSummary_shareIdentifier, &sServiceJobSummary_quotaShareName, &sServiceJobSummary_status, &sServiceJobSummary_statusReason, &sServiceJobSummary_startedAt, &sServiceJobSummary_stoppedAt, &sServiceJobSummary_isTerminated}, Seed: 109, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 15, 10, 0, 2, 11, 6, 0, 12, 4, 9, 14, 7, 0, 13, 0, 0, 0,
+	0, 0, 5, 8, 1, 3, 0, 0,
+}}
+var m_ServiceJobSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ServiceJobSummaryList_member}}
+var mServiceJobTimeout = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobTimeout_attemptDurationSeconds}}
+var mServiceJobType = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceJobType_SAGEMAKER_TRAINING}}
+var mServiceResourceId = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceResourceId_name, &sServiceResourceId_value}}
+var mServiceResourceIdName = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceResourceIdName_SAGEMAKER_TRAINING_JOB_ARN}}
+var mShareAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sShareAttributes_shareIdentifier, &sShareAttributes_weightFactor}}
+var m_ShareAttributesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShareAttributesList_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_TagKeysList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeysList_member}}
+var m_TagrisTagsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagrisTagsMap_key, &s_TagrisTagsMap_value}}
+var m_TagsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagsMap_key, &s_TagsMap_value}}
+var mTaskContainerDependency = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskContainerDependency_containerName, &sTaskContainerDependency_condition}}
+var m_TaskContainerDependencyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TaskContainerDependencyList_member}}
+var mTaskContainerDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskContainerDetails_command, &sTaskContainerDetails_dependsOn, &sTaskContainerDetails_environment, &sTaskContainerDetails_essential, &sTaskContainerDetails_firelensConfiguration, &sTaskContainerDetails_image, &sTaskContainerDetails_linuxParameters, &sTaskContainerDetails_logConfiguration, &sTaskContainerDetails_mountPoints, &sTaskContainerDetails_name, &sTaskContainerDetails_privileged, &sTaskContainerDetails_readonlyRootFilesystem, &sTaskContainerDetails_repositoryCredentials, &sTaskContainerDetails_resourceRequirements, &sTaskContainerDetails_secrets, &sTaskContainerDetails_ulimits, &sTaskContainerDetails_user, &sTaskContainerDetails_startTimeout, &sTaskContainerDetails_stopTimeout, &sTaskContainerDetails_exitCode, &sTaskContainerDetails_reason, &sTaskContainerDetails_logStreamName, &sTaskContainerDetails_networkInterfaces}, Seed: 117, Slots: []uint16{
+	4, 0, 0, 0, 0, 10, 0, 0, 0, 0, 7, 0, 0, 0, 17, 16, 0, 0, 0, 22, 0, 0, 0, 0,
+	0, 19, 0, 0, 0, 0, 0, 0, 0, 8, 0, 3, 0, 0, 0, 15, 0, 0, 0, 1, 13, 5, 0, 14,
+	23, 11, 6, 0, 9, 21, 0, 12, 0, 0, 2, 0, 20, 18, 0, 0,
+}}
+var mTaskContainerOverrides = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskContainerOverrides_command, &sTaskContainerOverrides_environment, &sTaskContainerOverrides_name, &sTaskContainerOverrides_resourceRequirements}}
+var mTaskContainerProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskContainerProperties_command, &sTaskContainerProperties_dependsOn, &sTaskContainerProperties_environment, &sTaskContainerProperties_essential, &sTaskContainerProperties_firelensConfiguration, &sTaskContainerProperties_image, &sTaskContainerProperties_linuxParameters, &sTaskContainerProperties_logConfiguration, &sTaskContainerProperties_mountPoints, &sTaskContainerProperties_name, &sTaskContainerProperties_privileged, &sTaskContainerProperties_readonlyRootFilesystem, &sTaskContainerProperties_repositoryCredentials, &sTaskContainerProperties_resourceRequirements, &sTaskContainerProperties_secrets, &sTaskContainerProperties_ulimits, &sTaskContainerProperties_user, &sTaskContainerProperties_startTimeout, &sTaskContainerProperties_stopTimeout}, Seed: 3, Slots: []uint16{
+	8, 18, 0, 0, 0, 10, 0, 0, 13, 0, 0, 0, 0, 0, 0, 0, 5, 14, 0, 17, 7, 19, 0, 3,
+	0, 0, 0, 0, 0, 0, 4, 0, 12, 0, 0, 0, 0, 0, 9, 0, 0, 2, 16, 1, 0, 0, 0, 0,
+	15, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 6, 0, 0, 0, 0,
+}}
+var mTaskPropertiesOverride = smithy.SchemaMembers{List: []*smithy.Schema{&sTaskPropertiesOverride_containers}}
+var mTerminateJobsErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateJobsErrorDetail_job, &sTerminateJobsErrorDetail_code, &sTerminateJobsErrorDetail_message}}
+var m_TerminateJobsErrorDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TerminateJobsErrorDetailList_member}}
+var mTerminateServiceJobsErrorDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateServiceJobsErrorDetail_job, &sTerminateServiceJobsErrorDetail_code, &sTerminateServiceJobsErrorDetail_message}}
+var m_TerminateServiceJobsErrorDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TerminateServiceJobsErrorDetailList_member}}
+var mTmpfs = smithy.SchemaMembers{List: []*smithy.Schema{&sTmpfs_containerPath, &sTmpfs_size, &sTmpfs_mountOptions}}
+var m_TmpfsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TmpfsList_member}}
+var mUlimit = smithy.SchemaMembers{List: []*smithy.Schema{&sUlimit_hardLimit, &sUlimit_name, &sUlimit_softLimit}}
+var m_Ulimits = smithy.SchemaMembers{List: []*smithy.Schema{&s_Ulimits_member}}
+var mUpdateManagedInstancesProviderConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateManagedInstancesProviderConfiguration_propagateTags, &sUpdateManagedInstancesProviderConfiguration_infrastructureRoleArn, &sUpdateManagedInstancesProviderConfiguration_instanceLaunchTemplate, &sUpdateManagedInstancesProviderConfiguration_infrastructureOptimization}}
+var mUpdatePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdatePolicy_terminateJobsOnUpdate, &sUpdatePolicy_jobExecutionTimeoutMinutes}}
+var mUserdataType = smithy.SchemaMembers{List: []*smithy.Schema{&sUserdataType_EKS_BOOTSTRAP_SH, &sUserdataType_EKS_NODEADM}}
+var mVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sVolume_host, &sVolume_name, &sVolume_efsVolumeConfiguration, &sVolume_s3filesVolumeConfiguration}}
+var m_Volumes = smithy.SchemaMembers{List: []*smithy.Schema{&s_Volumes_member}}
+var mCancelJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelJobRequest_jobId, &sCancelJobRequest_reason}}
+var mCancelJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelJobsRequest_jobs, &sCancelJobsRequest_reason}}
+var mCancelJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelJobsResponse_successful, &sCancelJobsResponse_errors}}
+var mCreateComputeEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComputeEnvironmentRequest_computeEnvironmentName, &sCreateComputeEnvironmentRequest_type, &sCreateComputeEnvironmentRequest_state, &sCreateComputeEnvironmentRequest_unmanagedvCpus, &sCreateComputeEnvironmentRequest_computeResources, &sCreateComputeEnvironmentRequest_serviceRole, &sCreateComputeEnvironmentRequest_tags, &sCreateComputeEnvironmentRequest_eksConfiguration, &sCreateComputeEnvironmentRequest_context, &sCreateComputeEnvironmentRequest_ecsSettings}, Seed: 3, Slots: []uint16{
+	0, 8, 1, 0, 0, 0, 10, 0, 0, 0, 5, 0, 0, 0, 0, 0, 7, 0, 0, 2, 9, 0, 0, 0,
+	0, 0, 4, 3, 0, 6, 0, 0,
+}}
+var mCreateComputeEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComputeEnvironmentResponse_computeEnvironmentName, &sCreateComputeEnvironmentResponse_computeEnvironmentArn}}
+var mCreateConsumableResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConsumableResourceRequest_consumableResourceName, &sCreateConsumableResourceRequest_totalQuantity, &sCreateConsumableResourceRequest_resourceType, &sCreateConsumableResourceRequest_tags}}
+var mCreateConsumableResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConsumableResourceResponse_consumableResourceName, &sCreateConsumableResourceResponse_consumableResourceArn}}
+var mCreateJobQueueRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateJobQueueRequest_jobQueueName, &sCreateJobQueueRequest_state, &sCreateJobQueueRequest_schedulingPolicyArn, &sCreateJobQueueRequest_priority, &sCreateJobQueueRequest_computeEnvironmentOrder, &sCreateJobQueueRequest_serviceEnvironmentOrder, &sCreateJobQueueRequest_jobQueueType, &sCreateJobQueueRequest_tags, &sCreateJobQueueRequest_jobStateTimeLimitActions}, Seed: 4, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 2, 8, 0, 5, 0, 0, 0, 6, 0, 0, 0, 0,
+	7, 0, 0, 0, 4, 1, 0, 0,
+}}
+var mCreateJobQueueResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateJobQueueResponse_jobQueueName, &sCreateJobQueueResponse_jobQueueArn}}
+var mCreateQuotaShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateQuotaShareRequest_quotaShareName, &sCreateQuotaShareRequest_jobQueue, &sCreateQuotaShareRequest_capacityLimits, &sCreateQuotaShareRequest_resourceSharingConfiguration, &sCreateQuotaShareRequest_preemptionConfiguration, &sCreateQuotaShareRequest_state, &sCreateQuotaShareRequest_tags}}
+var mCreateQuotaShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateQuotaShareResponse_quotaShareName, &sCreateQuotaShareResponse_quotaShareArn}}
+var mCreateSchedulingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSchedulingPolicyRequest_name, &sCreateSchedulingPolicyRequest_quotaSharePolicy, &sCreateSchedulingPolicyRequest_fairsharePolicy, &sCreateSchedulingPolicyRequest_tags}}
+var mCreateSchedulingPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSchedulingPolicyResponse_name, &sCreateSchedulingPolicyResponse_arn}}
+var mCreateServiceEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceEnvironmentRequest_serviceEnvironmentName, &sCreateServiceEnvironmentRequest_serviceEnvironmentType, &sCreateServiceEnvironmentRequest_state, &sCreateServiceEnvironmentRequest_capacityLimits, &sCreateServiceEnvironmentRequest_tags}}
+var mCreateServiceEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateServiceEnvironmentResponse_serviceEnvironmentName, &sCreateServiceEnvironmentResponse_serviceEnvironmentArn}}
+var mDeleteComputeEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComputeEnvironmentRequest_computeEnvironment}}
+var mDeleteConsumableResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConsumableResourceRequest_consumableResource}}
+var mDeleteJobQueueRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteJobQueueRequest_jobQueue}}
+var mDeleteQuotaShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteQuotaShareRequest_quotaShareArn}}
+var mDeleteSchedulingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSchedulingPolicyRequest_arn}}
+var mDeleteServiceEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteServiceEnvironmentRequest_serviceEnvironment}}
+var mDeregisterJobDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterJobDefinitionRequest_jobDefinition}}
+var mDescribeComputeEnvironmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComputeEnvironmentsRequest_computeEnvironments, &sDescribeComputeEnvironmentsRequest_maxResults, &sDescribeComputeEnvironmentsRequest_nextToken}}
+var mDescribeComputeEnvironmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComputeEnvironmentsResponse_computeEnvironments, &sDescribeComputeEnvironmentsResponse_nextToken}}
+var mDescribeConsumableResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConsumableResourceRequest_consumableResource}}
+var mDescribeConsumableResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeConsumableResourceResponse_consumableResourceName, &sDescribeConsumableResourceResponse_consumableResourceArn, &sDescribeConsumableResourceResponse_totalQuantity, &sDescribeConsumableResourceResponse_inUseQuantity, &sDescribeConsumableResourceResponse_availableQuantity, &sDescribeConsumableResourceResponse_resourceType, &sDescribeConsumableResourceResponse_createdAt, &sDescribeConsumableResourceResponse_tags}}
+var mDescribeJobDefinitionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobDefinitionsRequest_jobDefinitions, &sDescribeJobDefinitionsRequest_maxResults, &sDescribeJobDefinitionsRequest_jobDefinitionName, &sDescribeJobDefinitionsRequest_status, &sDescribeJobDefinitionsRequest_nextToken}}
+var mDescribeJobDefinitionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobDefinitionsResponse_jobDefinitions, &sDescribeJobDefinitionsResponse_nextToken}}
+var mDescribeJobQueuesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobQueuesRequest_jobQueues, &sDescribeJobQueuesRequest_maxResults, &sDescribeJobQueuesRequest_nextToken}}
+var mDescribeJobQueuesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobQueuesResponse_jobQueues, &sDescribeJobQueuesResponse_nextToken}}
+var mDescribeJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobsRequest_jobs}}
+var mDescribeJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeJobsResponse_jobs}}
+var mDescribeQuotaShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeQuotaShareRequest_quotaShareArn}}
+var mDescribeQuotaShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeQuotaShareResponse_quotaShareName, &sDescribeQuotaShareResponse_quotaShareArn, &sDescribeQuotaShareResponse_jobQueueArn, &sDescribeQuotaShareResponse_capacityLimits, &sDescribeQuotaShareResponse_resourceSharingConfiguration, &sDescribeQuotaShareResponse_preemptionConfiguration, &sDescribeQuotaShareResponse_state, &sDescribeQuotaShareResponse_status, &sDescribeQuotaShareResponse_tags}, Seed: 1, Slots: []uint16{
+	0, 0, 7, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0, 0, 8, 5,
+	0, 6, 0, 0, 0, 0, 4, 3,
+}}
+var mDescribeSchedulingPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSchedulingPoliciesRequest_arns}}
+var mDescribeSchedulingPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSchedulingPoliciesResponse_schedulingPolicies}}
+var mDescribeServiceEnvironmentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceEnvironmentsRequest_serviceEnvironments, &sDescribeServiceEnvironmentsRequest_maxResults, &sDescribeServiceEnvironmentsRequest_nextToken}}
+var mDescribeServiceEnvironmentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceEnvironmentsResponse_serviceEnvironments, &sDescribeServiceEnvironmentsResponse_nextToken}}
+var mDescribeServiceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceJobRequest_jobId}}
+var mDescribeServiceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeServiceJobResponse_attempts, &sDescribeServiceJobResponse_capacityUsage, &sDescribeServiceJobResponse_createdAt, &sDescribeServiceJobResponse_isTerminated, &sDescribeServiceJobResponse_jobArn, &sDescribeServiceJobResponse_jobId, &sDescribeServiceJobResponse_jobName, &sDescribeServiceJobResponse_jobQueue, &sDescribeServiceJobResponse_latestAttempt, &sDescribeServiceJobResponse_retryStrategy, &sDescribeServiceJobResponse_scheduledAt, &sDescribeServiceJobResponse_schedulingPriority, &sDescribeServiceJobResponse_serviceRequestPayload, &sDescribeServiceJobResponse_serviceJobType, &sDescribeServiceJobResponse_shareIdentifier, &sDescribeServiceJobResponse_quotaShareName, &sDescribeServiceJobResponse_preemptionConfiguration, &sDescribeServiceJobResponse_preemptionSummary, &sDescribeServiceJobResponse_startedAt, &sDescribeServiceJobResponse_status, &sDescribeServiceJobResponse_statusReason, &sDescribeServiceJobResponse_stoppedAt, &sDescribeServiceJobResponse_tags, &sDescribeServiceJobResponse_timeoutConfig}, Seed: 109, Slots: []uint16{
+	0, 0, 12, 0, 0, 0, 0, 0, 0, 0, 24, 0, 8, 0, 21, 0, 0, 22, 11, 0, 19, 18, 0, 0,
+	0, 17, 0, 10, 9, 0, 0, 0, 0, 0, 0, 0, 23, 0, 1, 4, 16, 0, 2, 20, 7, 0, 0, 5,
+	15, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 14, 0, 3, 13, 0,
+}}
+var mGetJobQueueSnapshotRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobQueueSnapshotRequest_jobQueue}}
+var mGetJobQueueSnapshotResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetJobQueueSnapshotResponse_frontOfQueue, &sGetJobQueueSnapshotResponse_frontOfQuotaShares, &sGetJobQueueSnapshotResponse_queueUtilization}}
+var mListConsumableResourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListConsumableResourcesRequest_filters, &sListConsumableResourcesRequest_maxResults, &sListConsumableResourcesRequest_nextToken}}
+var mListConsumableResourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListConsumableResourcesResponse_consumableResources, &sListConsumableResourcesResponse_nextToken}}
+var mListJobsByConsumableResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsByConsumableResourceRequest_consumableResource, &sListJobsByConsumableResourceRequest_filters, &sListJobsByConsumableResourceRequest_maxResults, &sListJobsByConsumableResourceRequest_nextToken}}
+var mListJobsByConsumableResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsByConsumableResourceResponse_jobs, &sListJobsByConsumableResourceResponse_nextToken}}
+var mListJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsRequest_jobQueue, &sListJobsRequest_arrayJobId, &sListJobsRequest_multiNodeJobId, &sListJobsRequest_jobStatus, &sListJobsRequest_maxResults, &sListJobsRequest_nextToken, &sListJobsRequest_filters}}
+var mListJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListJobsResponse_jobSummaryList, &sListJobsResponse_nextToken}}
+var mListQuotaSharesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListQuotaSharesRequest_jobQueue, &sListQuotaSharesRequest_maxResults, &sListQuotaSharesRequest_nextToken}}
+var mListQuotaSharesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListQuotaSharesResponse_quotaShares, &sListQuotaSharesResponse_nextToken}}
+var mListSchedulingPoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchedulingPoliciesRequest_maxResults, &sListSchedulingPoliciesRequest_nextToken}}
+var mListSchedulingPoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSchedulingPoliciesResponse_schedulingPolicies, &sListSchedulingPoliciesResponse_nextToken}}
+var mListServiceJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceJobsRequest_jobQueue, &sListServiceJobsRequest_jobStatus, &sListServiceJobsRequest_maxResults, &sListServiceJobsRequest_nextToken, &sListServiceJobsRequest_filters}}
+var mListServiceJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListServiceJobsResponse_jobSummaryList, &sListServiceJobsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterJobDefinitionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterJobDefinitionRequest_jobDefinitionName, &sRegisterJobDefinitionRequest_type, &sRegisterJobDefinitionRequest_parameters, &sRegisterJobDefinitionRequest_schedulingPriority, &sRegisterJobDefinitionRequest_containerProperties, &sRegisterJobDefinitionRequest_nodeProperties, &sRegisterJobDefinitionRequest_retryStrategy, &sRegisterJobDefinitionRequest_propagateTags, &sRegisterJobDefinitionRequest_timeout, &sRegisterJobDefinitionRequest_tags, &sRegisterJobDefinitionRequest_platformCapabilities, &sRegisterJobDefinitionRequest_eksProperties, &sRegisterJobDefinitionRequest_ecsProperties, &sRegisterJobDefinitionRequest_consumableResourceProperties}, Seed: 28, Slots: []uint16{
+	4, 0, 0, 6, 10, 0, 2, 0, 12, 7, 5, 13, 0, 0, 0, 14, 0, 11, 0, 0, 1, 0, 0, 0,
+	3, 0, 9, 0, 0, 0, 0, 8,
+}}
+var mRegisterJobDefinitionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterJobDefinitionResponse_jobDefinitionName, &sRegisterJobDefinitionResponse_jobDefinitionArn, &sRegisterJobDefinitionResponse_revision}}
+var mSubmitJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSubmitJobRequest_jobName, &sSubmitJobRequest_jobQueue, &sSubmitJobRequest_shareIdentifier, &sSubmitJobRequest_schedulingPriorityOverride, &sSubmitJobRequest_arrayProperties, &sSubmitJobRequest_dependsOn, &sSubmitJobRequest_jobDefinition, &sSubmitJobRequest_parameters, &sSubmitJobRequest_containerOverrides, &sSubmitJobRequest_nodeOverrides, &sSubmitJobRequest_retryStrategy, &sSubmitJobRequest_propagateTags, &sSubmitJobRequest_timeout, &sSubmitJobRequest_tags, &sSubmitJobRequest_eksPropertiesOverride, &sSubmitJobRequest_ecsPropertiesOverride, &sSubmitJobRequest_consumableResourcePropertiesOverride}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 5, 0, 0, 0, 17, 0, 0, 0, 16, 10, 0, 11, 0, 0, 13, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 12, 0, 0, 0, 0, 3, 0, 14, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0,
+	0, 9, 4, 0, 7, 15, 0, 8, 0, 2, 0, 1, 0, 0, 0, 0,
+}}
+var mSubmitJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSubmitJobResponse_jobArn, &sSubmitJobResponse_jobName, &sSubmitJobResponse_jobId}}
+var mSubmitServiceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sSubmitServiceJobRequest_jobName, &sSubmitServiceJobRequest_jobQueue, &sSubmitServiceJobRequest_retryStrategy, &sSubmitServiceJobRequest_schedulingPriority, &sSubmitServiceJobRequest_serviceRequestPayload, &sSubmitServiceJobRequest_serviceJobType, &sSubmitServiceJobRequest_shareIdentifier, &sSubmitServiceJobRequest_quotaShareName, &sSubmitServiceJobRequest_preemptionConfiguration, &sSubmitServiceJobRequest_timeoutConfig, &sSubmitServiceJobRequest_tags, &sSubmitServiceJobRequest_clientToken}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 0, 0, 9, 10, 2, 1, 0, 0, 0, 0, 11, 6, 12, 0, 0, 0, 0, 0, 3, 0, 4,
+	0, 0, 7, 0, 8, 5, 0, 0,
+}}
+var mSubmitServiceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sSubmitServiceJobResponse_jobArn, &sSubmitServiceJobResponse_jobName, &sSubmitServiceJobResponse_jobId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mTerminateJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateJobRequest_jobId, &sTerminateJobRequest_reason}}
+var mTerminateJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateJobsRequest_jobs, &sTerminateJobsRequest_reason}}
+var mTerminateJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateJobsResponse_successful, &sTerminateJobsResponse_errors}}
+var mTerminateServiceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateServiceJobRequest_jobId, &sTerminateServiceJobRequest_reason}}
+var mTerminateServiceJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateServiceJobsRequest_jobs, &sTerminateServiceJobsRequest_reason}}
+var mTerminateServiceJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sTerminateServiceJobsResponse_successful, &sTerminateServiceJobsResponse_errors}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateComputeEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComputeEnvironmentRequest_computeEnvironment, &sUpdateComputeEnvironmentRequest_state, &sUpdateComputeEnvironmentRequest_unmanagedvCpus, &sUpdateComputeEnvironmentRequest_computeResources, &sUpdateComputeEnvironmentRequest_serviceRole, &sUpdateComputeEnvironmentRequest_updatePolicy, &sUpdateComputeEnvironmentRequest_context, &sUpdateComputeEnvironmentRequest_ecsSettings, &sUpdateComputeEnvironmentRequest_eksConfiguration}, Seed: 2, Slots: []uint16{
+	0, 3, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 6, 0, 0, 2, 0, 5, 0, 0, 0, 0, 4,
+	9, 7, 0, 0, 0, 0, 1, 0,
+}}
+var mUpdateComputeEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateComputeEnvironmentResponse_computeEnvironmentName, &sUpdateComputeEnvironmentResponse_computeEnvironmentArn}}
+var mUpdateConsumableResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConsumableResourceRequest_consumableResource, &sUpdateConsumableResourceRequest_operation, &sUpdateConsumableResourceRequest_quantity, &sUpdateConsumableResourceRequest_clientToken}}
+var mUpdateConsumableResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConsumableResourceResponse_consumableResourceName, &sUpdateConsumableResourceResponse_consumableResourceArn, &sUpdateConsumableResourceResponse_totalQuantity}}
+var mUpdateJobQueueRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateJobQueueRequest_jobQueue, &sUpdateJobQueueRequest_state, &sUpdateJobQueueRequest_schedulingPolicyArn, &sUpdateJobQueueRequest_priority, &sUpdateJobQueueRequest_computeEnvironmentOrder, &sUpdateJobQueueRequest_serviceEnvironmentOrder, &sUpdateJobQueueRequest_jobStateTimeLimitActions}}
+var mUpdateJobQueueResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateJobQueueResponse_jobQueueName, &sUpdateJobQueueResponse_jobQueueArn}}
+var mUpdateQuotaShareRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateQuotaShareRequest_quotaShareArn, &sUpdateQuotaShareRequest_capacityLimits, &sUpdateQuotaShareRequest_resourceSharingConfiguration, &sUpdateQuotaShareRequest_preemptionConfiguration, &sUpdateQuotaShareRequest_state}}
+var mUpdateQuotaShareResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateQuotaShareResponse_quotaShareName, &sUpdateQuotaShareResponse_quotaShareArn}}
+var mUpdateSchedulingPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSchedulingPolicyRequest_arn, &sUpdateSchedulingPolicyRequest_quotaSharePolicy, &sUpdateSchedulingPolicyRequest_fairsharePolicy}}
+var mUpdateServiceEnvironmentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceEnvironmentRequest_serviceEnvironment, &sUpdateServiceEnvironmentRequest_state, &sUpdateServiceEnvironmentRequest_capacityLimits}}
+var mUpdateServiceEnvironmentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceEnvironmentResponse_serviceEnvironmentName, &sUpdateServiceEnvironmentResponse_serviceEnvironmentArn}}
+var mUpdateServiceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceJobRequest_jobId, &sUpdateServiceJobRequest_schedulingPriority}}
+var mUpdateServiceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceJobResponse_jobArn, &sUpdateServiceJobResponse_jobName, &sUpdateServiceJobResponse_jobId}}
+
+var sCancelJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJob, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCancelJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobs, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateComputeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeEnvironment, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateConsumableResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConsumableResource, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateJobQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJobQueue, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateQuotaShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQuotaShare, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateSchedulingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchedulingPolicy, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sCreateServiceEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceEnvironment, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteComputeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeEnvironment, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteConsumableResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsumableResource, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteJobQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJobQueue, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sDeleteQuotaShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQuotaShare, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sDeleteSchedulingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchedulingPolicy, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sDeleteServiceEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceEnvironment, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sDeregisterJobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterJobDefinition, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sDescribeComputeEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComputeEnvironments, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sDescribeConsumableResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConsumableResource, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sDescribeJobDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobDefinitions, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sDescribeJobQueues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobQueues, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sDescribeJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobs, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sDescribeQuotaShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQuotaShare, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sDescribeSchedulingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSchedulingPolicies, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sDescribeServiceEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceEnvironments, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sDescribeServiceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceJob, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sGetJobQueueSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobQueueSnapshot, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sListConsumableResources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConsumableResources, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sListJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobs, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sListJobsByConsumableResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsByConsumableResource, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sListQuotaShares = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQuotaShares, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sListSchedulingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedulingPolicies, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sListServiceJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceJobs, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sRegisterJobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterJobDefinition, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sSubmitJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitJob, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sSubmitServiceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitServiceJob, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sTerminateJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateJob, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sTerminateJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateJobs, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var sTerminateServiceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateServiceJob, Traits: &t38, Type: smithy.ShapeTypeOperation})
+var sTerminateServiceJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateServiceJobs, Traits: &t39, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t40, Type: smithy.ShapeTypeOperation})
+var sUpdateComputeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeEnvironment, Traits: &t41, Type: smithy.ShapeTypeOperation})
+var sUpdateConsumableResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConsumableResource, Traits: &t42, Type: smithy.ShapeTypeOperation})
+var sUpdateJobQueue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobQueue, Traits: &t43, Type: smithy.ShapeTypeOperation})
+var sUpdateQuotaShare = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQuotaShare, Traits: &t44, Type: smithy.ShapeTypeOperation})
+var sUpdateSchedulingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchedulingPolicy, Traits: &t45, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceEnvironment, Traits: &t46, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceJob, Traits: &t47, Type: smithy.ShapeTypeOperation})
+var s_AWSBatchV20160810 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSBatchV20160810, Traits: &t48, Type: smithy.ShapeTypeService})
+var sArrayJobDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArrayJobDependency, Members: &mArrayJobDependency, Type: smithy.ShapeTypeEnum})
+var s_ArrayJobStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ArrayJobStatusSummary, Members: &m_ArrayJobStatusSummary, Type: smithy.ShapeTypeMap})
+var sArrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArrayProperties, Members: &mArrayProperties, Type: smithy.ShapeTypeStructure})
+var sArrayPropertiesDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArrayPropertiesDetail, Members: &mArrayPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sArrayPropertiesSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArrayPropertiesSummary, Members: &mArrayPropertiesSummary, Type: smithy.ShapeTypeStructure})
+var sAssignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssignPublicIp, Members: &mAssignPublicIp, Type: smithy.ShapeTypeEnum})
+var sAttemptContainerDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttemptContainerDetail, Members: &mAttemptContainerDetail, Type: smithy.ShapeTypeStructure})
+var sAttemptDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttemptDetail, Members: &mAttemptDetail, Type: smithy.ShapeTypeStructure})
+var s_AttemptDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttemptDetails, Members: &m_AttemptDetails, Type: smithy.ShapeTypeList})
+var sAttemptEcsTaskDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttemptEcsTaskDetails, Members: &mAttemptEcsTaskDetails, Type: smithy.ShapeTypeStructure})
+var sAttemptTaskContainerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttemptTaskContainerDetails, Members: &mAttemptTaskContainerDetails, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sCancelJobsErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobsErrorDetail, Members: &mCancelJobsErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_CancelJobsErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CancelJobsErrorDetailList, Members: &m_CancelJobsErrorDetailList, Type: smithy.ShapeTypeList})
+var sCapacityLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityLimit, Members: &mCapacityLimit, Type: smithy.ShapeTypeStructure})
+var s_CapacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CapacityLimits, Members: &m_CapacityLimits, Type: smithy.ShapeTypeList})
+var sCapacityReservationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCapacityReservationRequest, Members: &mCapacityReservationRequest, Type: smithy.ShapeTypeStructure})
+var sCEState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCEState, Members: &mCEState, Type: smithy.ShapeTypeEnum})
+var sCEStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCEStatus, Members: &mCEStatus, Type: smithy.ShapeTypeEnum})
+var sCEType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCEType, Members: &mCEType, Type: smithy.ShapeTypeEnum})
+var sClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientException, Members: &mClientException, Traits: &t49, Type: smithy.ShapeTypeStructure})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeEnvironmentDetail, Members: &mComputeEnvironmentDetail, Type: smithy.ShapeTypeStructure})
+var s_ComputeEnvironmentDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeEnvironmentDetailList, Members: &m_ComputeEnvironmentDetailList, Type: smithy.ShapeTypeList})
+var sComputeEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeEnvironmentOrder, Members: &mComputeEnvironmentOrder, Type: smithy.ShapeTypeStructure})
+var s_ComputeEnvironmentOrders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeEnvironmentOrders, Members: &m_ComputeEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sComputeResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeResource, Members: &mComputeResource, Type: smithy.ShapeTypeStructure})
+var sComputeResourceUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeResourceUpdate, Members: &mComputeResourceUpdate, Type: smithy.ShapeTypeStructure})
+var sComputeScalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComputeScalingPolicy, Members: &mComputeScalingPolicy, Type: smithy.ShapeTypeStructure})
+var s_ConsumableResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsumableResourceList, Members: &m_ConsumableResourceList, Type: smithy.ShapeTypeList})
+var sConsumableResourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var sConsumableResourceRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumableResourceRequirement, Members: &mConsumableResourceRequirement, Type: smithy.ShapeTypeStructure})
+var sConsumableResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConsumableResourceSummary, Members: &mConsumableResourceSummary, Type: smithy.ShapeTypeStructure})
+var s_ConsumableResourceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConsumableResourceSummaryList, Members: &m_ConsumableResourceSummaryList, Type: smithy.ShapeTypeList})
+var sContainerDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerDetail, Members: &mContainerDetail, Type: smithy.ShapeTypeStructure})
+var sContainerInsights = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerInsights, Members: &mContainerInsights, Type: smithy.ShapeTypeEnum})
+var sContainerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerOverrides, Members: &mContainerOverrides, Type: smithy.ShapeTypeStructure})
+var sContainerProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerProperties, Members: &mContainerProperties, Type: smithy.ShapeTypeStructure})
+var sContainerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerSummary, Members: &mContainerSummary, Type: smithy.ShapeTypeStructure})
+var sCRAllocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCRAllocationStrategy, Members: &mCRAllocationStrategy, Type: smithy.ShapeTypeEnum})
+var sCRType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCRType, Members: &mCRType, Type: smithy.ShapeTypeEnum})
+var sCRUpdateAllocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCRUpdateAllocationStrategy, Members: &mCRUpdateAllocationStrategy, Type: smithy.ShapeTypeEnum})
+var sDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDevice, Members: &mDevice, Type: smithy.ShapeTypeStructure})
+var sDeviceCgroupPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeviceCgroupPermission, Members: &mDeviceCgroupPermission, Type: smithy.ShapeTypeEnum})
+var s_DeviceCgroupPermissions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeviceCgroupPermissions, Members: &m_DeviceCgroupPermissions, Type: smithy.ShapeTypeList})
+var s_DevicesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DevicesList, Members: &m_DevicesList, Type: smithy.ShapeTypeList})
+var s_Double = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var sEc2Configuration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEc2Configuration, Members: &mEc2Configuration, Type: smithy.ShapeTypeStructure})
+var s_Ec2ConfigurationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ec2ConfigurationList, Members: &m_Ec2ConfigurationList, Type: smithy.ShapeTypeList})
+var sEcsProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsProperties, Members: &mEcsProperties, Type: smithy.ShapeTypeStructure})
+var sEcsPropertiesDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsPropertiesDetail, Members: &mEcsPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sEcsPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsPropertiesOverride, Members: &mEcsPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sEcsSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsSettings, Members: &mEcsSettings, Type: smithy.ShapeTypeStructure})
+var sEcsTaskDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsTaskDetails, Members: &mEcsTaskDetails, Type: smithy.ShapeTypeStructure})
+var sEcsTaskProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEcsTaskProperties, Members: &mEcsTaskProperties, Type: smithy.ShapeTypeStructure})
+var sEFSAuthorizationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEFSAuthorizationConfig, Members: &mEFSAuthorizationConfig, Type: smithy.ShapeTypeStructure})
+var sEFSAuthorizationConfigIAM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEFSAuthorizationConfigIAM, Members: &mEFSAuthorizationConfigIAM, Type: smithy.ShapeTypeEnum})
+var sEFSTransitEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEFSTransitEncryption, Members: &mEFSTransitEncryption, Type: smithy.ShapeTypeEnum})
+var sEFSVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEFSVolumeConfiguration, Members: &mEFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sEksAccessEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksAccessEntry, Members: &mEksAccessEntry, Type: smithy.ShapeTypeStructure})
+var sEksAccessEntryDesiredState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksAccessEntryDesiredState, Members: &mEksAccessEntryDesiredState, Type: smithy.ShapeTypeEnum})
+var sEksAccessEntryStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksAccessEntryStatus, Members: &mEksAccessEntryStatus, Type: smithy.ShapeTypeEnum})
+var s_EksAnnotationsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksAnnotationsMap, Members: &m_EksAnnotationsMap, Type: smithy.ShapeTypeMap})
+var sEksAttemptContainerDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksAttemptContainerDetail, Members: &mEksAttemptContainerDetail, Type: smithy.ShapeTypeStructure})
+var s_EksAttemptContainerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksAttemptContainerDetails, Members: &m_EksAttemptContainerDetails, Type: smithy.ShapeTypeList})
+var sEksAttemptDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksAttemptDetail, Members: &mEksAttemptDetail, Type: smithy.ShapeTypeStructure})
+var s_EksAttemptDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksAttemptDetails, Members: &m_EksAttemptDetails, Type: smithy.ShapeTypeList})
+var sEksConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksConfiguration, Members: &mEksConfiguration, Type: smithy.ShapeTypeStructure})
+var sEksConfigurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksConfigurationUpdate, Members: &mEksConfigurationUpdate, Type: smithy.ShapeTypeStructure})
+var sEksContainer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksContainer, Members: &mEksContainer, Type: smithy.ShapeTypeStructure})
+var sEksContainerDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksContainerDetail, Members: &mEksContainerDetail, Type: smithy.ShapeTypeStructure})
+var s_EksContainerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksContainerDetails, Members: &m_EksContainerDetails, Type: smithy.ShapeTypeList})
+var sEksContainerEnvironmentVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksContainerEnvironmentVariable, Members: &mEksContainerEnvironmentVariable, Type: smithy.ShapeTypeStructure})
+var s_EksContainerEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksContainerEnvironmentVariables, Members: &m_EksContainerEnvironmentVariables, Type: smithy.ShapeTypeList})
+var sEksContainerOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksContainerOverride, Members: &mEksContainerOverride, Type: smithy.ShapeTypeStructure})
+var s_EksContainerOverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksContainerOverrideList, Members: &m_EksContainerOverrideList, Type: smithy.ShapeTypeList})
+var sEksContainerResourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksContainerResourceRequirements, Members: &mEksContainerResourceRequirements, Type: smithy.ShapeTypeStructure})
+var s_EksContainers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksContainers, Members: &m_EksContainers, Type: smithy.ShapeTypeList})
+var sEksContainerSecurityContext = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksContainerSecurityContext, Members: &mEksContainerSecurityContext, Type: smithy.ShapeTypeStructure})
+var sEksContainerVolumeMount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksContainerVolumeMount, Members: &mEksContainerVolumeMount, Type: smithy.ShapeTypeStructure})
+var s_EksContainerVolumeMounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksContainerVolumeMounts, Members: &m_EksContainerVolumeMounts, Type: smithy.ShapeTypeList})
+var sEksEmptyDir = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksEmptyDir, Members: &mEksEmptyDir, Type: smithy.ShapeTypeStructure})
+var sEksHostPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksHostPath, Members: &mEksHostPath, Type: smithy.ShapeTypeStructure})
+var s_EksLabelsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksLabelsMap, Members: &m_EksLabelsMap, Type: smithy.ShapeTypeMap})
+var s_EksLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksLimits, Members: &m_EksLimits, Type: smithy.ShapeTypeMap})
+var sEksMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksMetadata, Members: &mEksMetadata, Type: smithy.ShapeTypeStructure})
+var sEksPersistentVolumeClaim = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksPersistentVolumeClaim, Members: &mEksPersistentVolumeClaim, Type: smithy.ShapeTypeStructure})
+var sEksPodProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksPodProperties, Members: &mEksPodProperties, Type: smithy.ShapeTypeStructure})
+var sEksPodPropertiesDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksPodPropertiesDetail, Members: &mEksPodPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sEksPodPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksPodPropertiesOverride, Members: &mEksPodPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sEksProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksProperties, Members: &mEksProperties, Type: smithy.ShapeTypeStructure})
+var sEksPropertiesDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksPropertiesDetail, Members: &mEksPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sEksPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksPropertiesOverride, Members: &mEksPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var s_EksRequests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksRequests, Members: &m_EksRequests, Type: smithy.ShapeTypeMap})
+var sEksSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksSecret, Members: &mEksSecret, Type: smithy.ShapeTypeStructure})
+var sEksVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEksVolume, Members: &mEksVolume, Type: smithy.ShapeTypeStructure})
+var s_EksVolumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EksVolumes, Members: &m_EksVolumes, Type: smithy.ShapeTypeList})
+var s_EnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList})
+var sEphemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEphemeralStorage, Members: &mEphemeralStorage, Type: smithy.ShapeTypeStructure})
+var sEvaluateOnExit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluateOnExit, Members: &mEvaluateOnExit, Type: smithy.ShapeTypeStructure})
+var s_EvaluateOnExitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EvaluateOnExitList, Members: &m_EvaluateOnExitList, Type: smithy.ShapeTypeList})
+var sFairshareCapacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFairshareCapacityUsage, Members: &mFairshareCapacityUsage, Type: smithy.ShapeTypeStructure})
+var s_FairshareCapacityUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FairshareCapacityUsageList, Members: &m_FairshareCapacityUsageList, Type: smithy.ShapeTypeList})
+var sFairshareCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFairshareCapacityUtilization, Members: &mFairshareCapacityUtilization, Type: smithy.ShapeTypeStructure})
+var s_FairshareCapacityUtilizationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FairshareCapacityUtilizationList, Members: &m_FairshareCapacityUtilizationList, Type: smithy.ShapeTypeList})
+var sFairsharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFairsharePolicy, Members: &mFairsharePolicy, Type: smithy.ShapeTypeStructure})
+var sFairshareUtilizationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFairshareUtilizationDetail, Members: &mFairshareUtilizationDetail, Type: smithy.ShapeTypeStructure})
+var sFargatePlatformConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFargatePlatformConfiguration, Members: &mFargatePlatformConfiguration, Type: smithy.ShapeTypeStructure})
+var sFirelensConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirelensConfiguration, Members: &mFirelensConfiguration, Type: smithy.ShapeTypeStructure})
+var s_FirelensConfigurationOptionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FirelensConfigurationOptionsMap, Members: &m_FirelensConfigurationOptionsMap, Type: smithy.ShapeTypeMap})
+var sFirelensConfigurationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFirelensConfigurationType, Members: &mFirelensConfigurationType, Type: smithy.ShapeTypeEnum})
+var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sFrontOfQueueDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrontOfQueueDetail, Members: &mFrontOfQueueDetail, Type: smithy.ShapeTypeStructure})
+var sFrontOfQueueJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrontOfQueueJobSummary, Members: &mFrontOfQueueJobSummary, Type: smithy.ShapeTypeStructure})
+var s_FrontOfQueueJobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrontOfQueueJobSummaryList, Members: &m_FrontOfQueueJobSummaryList, Type: smithy.ShapeTypeList})
+var sFrontOfQuotaShareJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrontOfQuotaShareJobSummary, Members: &mFrontOfQuotaShareJobSummary, Type: smithy.ShapeTypeStructure})
+var s_FrontOfQuotaShareJobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrontOfQuotaShareJobSummaryList, Members: &m_FrontOfQuotaShareJobSummaryList, Type: smithy.ShapeTypeList})
+var sFrontOfQuotaSharesDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFrontOfQuotaSharesDetail, Members: &mFrontOfQuotaSharesDetail, Type: smithy.ShapeTypeStructure})
+var s_FrontOfQuotaSharesJobSummaryMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FrontOfQuotaSharesJobSummaryMap, Members: &m_FrontOfQuotaSharesJobSummaryMap, Type: smithy.ShapeTypeMap})
+var sHost = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHost, Members: &mHost, Type: smithy.ShapeTypeStructure})
+var s_ImageIdOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageIdOverride, Type: smithy.ShapeTypeString})
+var sImagePullSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImagePullSecret, Members: &mImagePullSecret, Type: smithy.ShapeTypeStructure})
+var s_ImagePullSecrets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImagePullSecrets, Members: &m_ImagePullSecrets, Type: smithy.ShapeTypeList})
+var s_ImageType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageType, Type: smithy.ShapeTypeString})
+var sInfrastructureOptimization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInfrastructureOptimization, Members: &mInfrastructureOptimization, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceLaunchTemplate, Members: &mInstanceLaunchTemplate, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplateUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceLaunchTemplateUpdate, Members: &mInstanceLaunchTemplateUpdate, Type: smithy.ShapeTypeStructure})
+var sInstanceRequirementsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstanceRequirementsRequest, Members: &mInstanceRequirementsRequest, Type: smithy.ShapeTypeStructure})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sJobCapacityUsageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobCapacityUsageSummary, Members: &mJobCapacityUsageSummary, Type: smithy.ShapeTypeStructure})
+var s_JobCapacityUsageSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobCapacityUsageSummaryList, Members: &m_JobCapacityUsageSummaryList, Type: smithy.ShapeTypeList})
+var sJobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobDefinition, Members: &mJobDefinition, Type: smithy.ShapeTypeStructure})
+var s_JobDefinitionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobDefinitionList, Members: &m_JobDefinitionList, Type: smithy.ShapeTypeList})
+var sJobDefinitionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobDefinitionType, Members: &mJobDefinitionType, Type: smithy.ShapeTypeEnum})
+var sJobDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobDependency, Members: &mJobDependency, Type: smithy.ShapeTypeStructure})
+var s_JobDependencyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobDependencyList, Members: &m_JobDependencyList, Type: smithy.ShapeTypeList})
+var sJobDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobDetail, Members: &mJobDetail, Type: smithy.ShapeTypeStructure})
+var s_JobDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobDetailList, Members: &m_JobDetailList, Type: smithy.ShapeTypeList})
+var s_JobExecutionTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobExecutionTimeoutMinutes, Type: smithy.ShapeTypeLong})
+var sJobQueueDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobQueueDetail, Members: &mJobQueueDetail, Type: smithy.ShapeTypeStructure})
+var s_JobQueueDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobQueueDetailList, Members: &m_JobQueueDetailList, Type: smithy.ShapeTypeList})
+var sJobQueueType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobQueueType, Members: &mJobQueueType, Type: smithy.ShapeTypeEnum})
+var sJobStateTimeLimitAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStateTimeLimitAction, Members: &mJobStateTimeLimitAction, Type: smithy.ShapeTypeStructure})
+var s_JobStateTimeLimitActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobStateTimeLimitActions, Members: &m_JobStateTimeLimitActions, Type: smithy.ShapeTypeList})
+var sJobStateTimeLimitActionsAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStateTimeLimitActionsAction, Members: &mJobStateTimeLimitActionsAction, Type: smithy.ShapeTypeEnum})
+var sJobStateTimeLimitActionsState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStateTimeLimitActionsState, Members: &mJobStateTimeLimitActionsState, Type: smithy.ShapeTypeEnum})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobSummary, Members: &mJobSummary, Type: smithy.ShapeTypeStructure})
+var s_JobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobSummaryList, Members: &m_JobSummaryList, Type: smithy.ShapeTypeList})
+var sJobTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobTimeout, Members: &mJobTimeout, Type: smithy.ShapeTypeStructure})
+var sJQState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJQState, Members: &mJQState, Type: smithy.ShapeTypeEnum})
+var sJQStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJQStatus, Members: &mJQStatus, Type: smithy.ShapeTypeEnum})
+var sKeyValuePair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyValuePair, Members: &mKeyValuePair, Type: smithy.ShapeTypeStructure})
+var sKeyValuesPair = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeyValuesPair, Members: &mKeyValuesPair, Type: smithy.ShapeTypeStructure})
+var s_KubernetesVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KubernetesVersion, Type: smithy.ShapeTypeString})
+var sLatestServiceJobAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLatestServiceJobAttempt, Members: &mLatestServiceJobAttempt, Type: smithy.ShapeTypeStructure})
+var sLaunchTemplateSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchTemplateSpecification, Members: &mLaunchTemplateSpecification, Type: smithy.ShapeTypeStructure})
+var sLaunchTemplateSpecificationOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLaunchTemplateSpecificationOverride, Members: &mLaunchTemplateSpecificationOverride, Type: smithy.ShapeTypeStructure})
+var s_LaunchTemplateSpecificationOverrideList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LaunchTemplateSpecificationOverrideList, Members: &m_LaunchTemplateSpecificationOverrideList, Type: smithy.ShapeTypeList})
+var sLinuxParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinuxParameters, Members: &mLinuxParameters, Type: smithy.ShapeTypeStructure})
+var s_ListAttemptEcsTaskDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAttemptEcsTaskDetails, Members: &m_ListAttemptEcsTaskDetails, Type: smithy.ShapeTypeList})
+var s_ListAttemptTaskContainerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListAttemptTaskContainerDetails, Members: &m_ListAttemptTaskContainerDetails, Type: smithy.ShapeTypeList})
+var s_ListConsumableResourcesFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListConsumableResourcesFilterList, Members: &m_ListConsumableResourcesFilterList, Type: smithy.ShapeTypeList})
+var s_ListEcsTaskDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEcsTaskDetails, Members: &m_ListEcsTaskDetails, Type: smithy.ShapeTypeList})
+var s_ListEcsTaskProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEcsTaskProperties, Members: &m_ListEcsTaskProperties, Type: smithy.ShapeTypeList})
+var s_ListJobsByConsumableResourceFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListJobsByConsumableResourceFilterList, Members: &m_ListJobsByConsumableResourceFilterList, Type: smithy.ShapeTypeList})
+var sListJobsByConsumableResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsByConsumableResourceSummary, Members: &mListJobsByConsumableResourceSummary, Type: smithy.ShapeTypeStructure})
+var s_ListJobsByConsumableResourceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListJobsByConsumableResourceSummaryList, Members: &m_ListJobsByConsumableResourceSummaryList, Type: smithy.ShapeTypeList})
+var s_ListJobsFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListJobsFilterList, Members: &m_ListJobsFilterList, Type: smithy.ShapeTypeList})
+var s_ListTaskContainerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTaskContainerDetails, Members: &m_ListTaskContainerDetails, Type: smithy.ShapeTypeList})
+var s_ListTaskContainerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTaskContainerOverrides, Members: &m_ListTaskContainerOverrides, Type: smithy.ShapeTypeList})
+var s_ListTaskContainerProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTaskContainerProperties, Members: &m_ListTaskContainerProperties, Type: smithy.ShapeTypeList})
+var s_ListTaskPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListTaskPropertiesOverride, Members: &m_ListTaskPropertiesOverride, Type: smithy.ShapeTypeList})
+var sLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LogConfigurationOptionsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LogConfigurationOptionsMap, Members: &m_LogConfigurationOptionsMap, Type: smithy.ShapeTypeMap})
+var sLogDriver = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogDriver, Members: &mLogDriver, Type: smithy.ShapeTypeEnum})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sManagedInstancesLocalStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedInstancesLocalStorageConfiguration, Members: &mManagedInstancesLocalStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sManagedInstancesNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedInstancesNetworkConfiguration, Members: &mManagedInstancesNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sManagedInstancesProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedInstancesProvider, Members: &mManagedInstancesProvider, Type: smithy.ShapeTypeStructure})
+var sManagedInstancesStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iManagedInstancesStorageConfiguration, Members: &mManagedInstancesStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sMountPoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMountPoint, Members: &mMountPoint, Type: smithy.ShapeTypeStructure})
+var s_MountPoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MountPoints, Members: &m_MountPoints, Type: smithy.ShapeTypeList})
+var sNetworkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sNetworkInterface = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure})
+var s_NetworkInterfaceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NetworkInterfaceList, Members: &m_NetworkInterfaceList, Type: smithy.ShapeTypeList})
+var sNodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeDetails, Members: &mNodeDetails, Type: smithy.ShapeTypeStructure})
+var sNodeOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeOverrides, Members: &mNodeOverrides, Type: smithy.ShapeTypeStructure})
+var sNodeProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeProperties, Members: &mNodeProperties, Type: smithy.ShapeTypeStructure})
+var sNodePropertiesSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodePropertiesSummary, Members: &mNodePropertiesSummary, Type: smithy.ShapeTypeStructure})
+var sNodePropertyOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodePropertyOverride, Members: &mNodePropertyOverride, Type: smithy.ShapeTypeStructure})
+var s_NodePropertyOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodePropertyOverrides, Members: &m_NodePropertyOverrides, Type: smithy.ShapeTypeList})
+var s_NodeRangeProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NodeRangeProperties, Members: &m_NodeRangeProperties, Type: smithy.ShapeTypeList})
+var sNodeRangeProperty = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNodeRangeProperty, Members: &mNodeRangeProperty, Type: smithy.ShapeTypeStructure})
+var sOrchestrationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrchestrationType, Members: &mOrchestrationType, Type: smithy.ShapeTypeEnum})
+var s_ParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sPlatformCapability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPlatformCapability, Members: &mPlatformCapability, Type: smithy.ShapeTypeEnum})
+var s_PlatformCapabilityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformCapabilityList, Members: &m_PlatformCapabilityList, Type: smithy.ShapeTypeList})
+var s_Quantity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Quantity, Type: smithy.ShapeTypeString})
+var sQueueSnapshotCapacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSnapshotCapacityUsage, Members: &mQueueSnapshotCapacityUsage, Type: smithy.ShapeTypeStructure})
+var s_QueueSnapshotCapacityUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueueSnapshotCapacityUsageList, Members: &m_QueueSnapshotCapacityUsageList, Type: smithy.ShapeTypeList})
+var sQueueSnapshotUtilizationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQueueSnapshotUtilizationDetail, Members: &mQueueSnapshotUtilizationDetail, Type: smithy.ShapeTypeStructure})
+var sQuotaShareCapacityLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareCapacityLimit, Members: &mQuotaShareCapacityLimit, Type: smithy.ShapeTypeStructure})
+var s_QuotaShareCapacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaShareCapacityLimits, Members: &m_QuotaShareCapacityLimits, Type: smithy.ShapeTypeList})
+var sQuotaShareCapacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareCapacityUsage, Members: &mQuotaShareCapacityUsage, Type: smithy.ShapeTypeStructure})
+var s_QuotaShareCapacityUsageList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaShareCapacityUsageList, Members: &m_QuotaShareCapacityUsageList, Type: smithy.ShapeTypeList})
+var sQuotaShareCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareCapacityUtilization, Members: &mQuotaShareCapacityUtilization, Type: smithy.ShapeTypeStructure})
+var s_QuotaShareCapacityUtilizationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaShareCapacityUtilizationList, Members: &m_QuotaShareCapacityUtilizationList, Type: smithy.ShapeTypeList})
+var sQuotaShareDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareDetail, Members: &mQuotaShareDetail, Type: smithy.ShapeTypeStructure})
+var sQuotaShareIdleResourceAssignmentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareIdleResourceAssignmentStrategy, Members: &mQuotaShareIdleResourceAssignmentStrategy, Type: smithy.ShapeTypeEnum})
+var sQuotaShareInSharePreemptionState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareInSharePreemptionState, Members: &mQuotaShareInSharePreemptionState, Type: smithy.ShapeTypeEnum})
+var s_QuotaShareList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuotaShareList, Members: &m_QuotaShareList, Type: smithy.ShapeTypeList})
+var sQuotaSharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaSharePolicy, Members: &mQuotaSharePolicy, Type: smithy.ShapeTypeStructure})
+var sQuotaSharePreemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaSharePreemptionConfiguration, Members: &mQuotaSharePreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sQuotaShareResourceSharingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareResourceSharingConfiguration, Members: &mQuotaShareResourceSharingConfiguration, Type: smithy.ShapeTypeStructure})
+var sQuotaShareResourceSharingStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareResourceSharingStrategy, Members: &mQuotaShareResourceSharingStrategy, Type: smithy.ShapeTypeEnum})
+var sQuotaShareState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareState, Members: &mQuotaShareState, Type: smithy.ShapeTypeEnum})
+var sQuotaShareStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareStatus, Members: &mQuotaShareStatus, Type: smithy.ShapeTypeEnum})
+var sQuotaShareUtilizationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuotaShareUtilizationDetail, Members: &mQuotaShareUtilizationDetail, Type: smithy.ShapeTypeStructure})
+var sRepositoryCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRepositoryCredentials, Members: &mRepositoryCredentials, Type: smithy.ShapeTypeStructure})
+var sResourceRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceRequirement, Members: &mResourceRequirement, Type: smithy.ShapeTypeStructure})
+var s_ResourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceRequirements, Members: &m_ResourceRequirements, Type: smithy.ShapeTypeList})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sRetryAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryAction, Members: &mRetryAction, Type: smithy.ShapeTypeEnum})
+var sRetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStrategy, Members: &mRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sRuntimePlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuntimePlatform, Members: &mRuntimePlatform, Type: smithy.ShapeTypeStructure})
+var sS3FilesVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3FilesVolumeConfiguration, Members: &mS3FilesVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sSchedulingPolicyDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedulingPolicyDetail, Members: &mSchedulingPolicyDetail, Type: smithy.ShapeTypeStructure})
+var s_SchedulingPolicyDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchedulingPolicyDetailList, Members: &m_SchedulingPolicyDetailList, Type: smithy.ShapeTypeList})
+var sSchedulingPolicyListingDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedulingPolicyListingDetail, Members: &mSchedulingPolicyListingDetail, Type: smithy.ShapeTypeStructure})
+var s_SchedulingPolicyListingDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchedulingPolicyListingDetailList, Members: &m_SchedulingPolicyListingDetailList, Type: smithy.ShapeTypeList})
+var sSecret = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSecret, Members: &mSecret, Type: smithy.ShapeTypeStructure})
+var s_SecretList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretList, Members: &m_SecretList, Type: smithy.ShapeTypeList})
+var sServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServerException, Members: &mServerException, Traits: &t50, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceEnvironmentDetail, Members: &mServiceEnvironmentDetail, Type: smithy.ShapeTypeStructure})
+var s_ServiceEnvironmentDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceEnvironmentDetailList, Members: &m_ServiceEnvironmentDetailList, Type: smithy.ShapeTypeList})
+var sServiceEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceEnvironmentOrder, Members: &mServiceEnvironmentOrder, Type: smithy.ShapeTypeStructure})
+var s_ServiceEnvironmentOrders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceEnvironmentOrders, Members: &m_ServiceEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sServiceEnvironmentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceEnvironmentState, Members: &mServiceEnvironmentState, Type: smithy.ShapeTypeEnum})
+var sServiceEnvironmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceEnvironmentStatus, Members: &mServiceEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var sServiceEnvironmentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceEnvironmentType, Members: &mServiceEnvironmentType, Type: smithy.ShapeTypeEnum})
+var sServiceJobAttemptDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobAttemptDetail, Members: &mServiceJobAttemptDetail, Type: smithy.ShapeTypeStructure})
+var s_ServiceJobAttemptDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceJobAttemptDetails, Members: &m_ServiceJobAttemptDetails, Type: smithy.ShapeTypeList})
+var sServiceJobCapacityUsageDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobCapacityUsageDetail, Members: &mServiceJobCapacityUsageDetail, Type: smithy.ShapeTypeStructure})
+var s_ServiceJobCapacityUsageDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceJobCapacityUsageDetailList, Members: &m_ServiceJobCapacityUsageDetailList, Type: smithy.ShapeTypeList})
+var sServiceJobCapacityUsageSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobCapacityUsageSummary, Members: &mServiceJobCapacityUsageSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceJobCapacityUsageSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceJobCapacityUsageSummaryList, Members: &m_ServiceJobCapacityUsageSummaryList, Type: smithy.ShapeTypeList})
+var sServiceJobEvaluateOnExit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobEvaluateOnExit, Members: &mServiceJobEvaluateOnExit, Type: smithy.ShapeTypeStructure})
+var s_ServiceJobEvaluateOnExitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceJobEvaluateOnExitList, Members: &m_ServiceJobEvaluateOnExitList, Type: smithy.ShapeTypeList})
+var sServiceJobPreemptedAttempt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobPreemptedAttempt, Members: &mServiceJobPreemptedAttempt, Type: smithy.ShapeTypeStructure})
+var sServiceJobPreemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobPreemptionConfiguration, Members: &mServiceJobPreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sServiceJobPreemptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobPreemptionSummary, Members: &mServiceJobPreemptionSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceJobRecentPreemptedAttemptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceJobRecentPreemptedAttemptList, Members: &m_ServiceJobRecentPreemptedAttemptList, Type: smithy.ShapeTypeList})
+var sServiceJobRetryAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobRetryAction, Members: &mServiceJobRetryAction, Type: smithy.ShapeTypeEnum})
+var sServiceJobRetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobRetryStrategy, Members: &mServiceJobRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobStatus, Members: &mServiceJobStatus, Type: smithy.ShapeTypeEnum})
+var sServiceJobSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobSummary, Members: &mServiceJobSummary, Type: smithy.ShapeTypeStructure})
+var s_ServiceJobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ServiceJobSummaryList, Members: &m_ServiceJobSummaryList, Type: smithy.ShapeTypeList})
+var sServiceJobTimeout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobTimeout, Members: &mServiceJobTimeout, Type: smithy.ShapeTypeStructure})
+var sServiceJobType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceJobType, Members: &mServiceJobType, Type: smithy.ShapeTypeEnum})
+var sServiceResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceResourceId, Members: &mServiceResourceId, Type: smithy.ShapeTypeStructure})
+var sServiceResourceIdName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceResourceIdName, Members: &mServiceResourceIdName, Type: smithy.ShapeTypeEnum})
+var sShareAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShareAttributes, Members: &mShareAttributes, Type: smithy.ShapeTypeStructure})
+var s_ShareAttributesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShareAttributesList, Members: &m_ShareAttributesList, Type: smithy.ShapeTypeList})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeysList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeysList, Members: &m_TagKeysList, Type: smithy.ShapeTypeList})
+var s_TagrisTagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTaskContainerDependency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskContainerDependency, Members: &mTaskContainerDependency, Type: smithy.ShapeTypeStructure})
+var s_TaskContainerDependencyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaskContainerDependencyList, Members: &m_TaskContainerDependencyList, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskContainerDetails, Members: &mTaskContainerDetails, Type: smithy.ShapeTypeStructure})
+var sTaskContainerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskContainerOverrides, Members: &mTaskContainerOverrides, Type: smithy.ShapeTypeStructure})
+var sTaskContainerProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskContainerProperties, Members: &mTaskContainerProperties, Type: smithy.ShapeTypeStructure})
+var sTaskPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaskPropertiesOverride, Members: &mTaskPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sTerminateJobsErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateJobsErrorDetail, Members: &mTerminateJobsErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_TerminateJobsErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminateJobsErrorDetailList, Members: &m_TerminateJobsErrorDetailList, Type: smithy.ShapeTypeList})
+var sTerminateServiceJobsErrorDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateServiceJobsErrorDetail, Members: &mTerminateServiceJobsErrorDetail, Type: smithy.ShapeTypeStructure})
+var s_TerminateServiceJobsErrorDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TerminateServiceJobsErrorDetailList, Members: &m_TerminateServiceJobsErrorDetailList, Type: smithy.ShapeTypeList})
+var sTmpfs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTmpfs, Members: &mTmpfs, Type: smithy.ShapeTypeStructure})
+var s_TmpfsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TmpfsList, Members: &m_TmpfsList, Type: smithy.ShapeTypeList})
+var sUlimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUlimit, Members: &mUlimit, Type: smithy.ShapeTypeStructure})
+var s_Ulimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Ulimits, Members: &m_Ulimits, Type: smithy.ShapeTypeList})
+var sUpdateManagedInstancesProviderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateManagedInstancesProviderConfiguration, Members: &mUpdateManagedInstancesProviderConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdatePolicy, Members: &mUpdatePolicy, Type: smithy.ShapeTypeStructure})
+var sUserdataType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUserdataType, Members: &mUserdataType, Type: smithy.ShapeTypeEnum})
+var sVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var s_Volumes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Volumes, Members: &m_Volumes, Type: smithy.ShapeTypeList})
+var sCancelJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobRequest, Members: &mCancelJobRequest, Type: smithy.ShapeTypeStructure})
+var sCancelJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobResponse, Type: smithy.ShapeTypeStructure})
+var sCancelJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobsRequest, Members: &mCancelJobsRequest, Type: smithy.ShapeTypeStructure})
+var sCancelJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelJobsResponse, Members: &mCancelJobsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateComputeEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeEnvironmentRequest, Members: &mCreateComputeEnvironmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateComputeEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComputeEnvironmentResponse, Members: &mCreateComputeEnvironmentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateConsumableResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConsumableResourceRequest, Members: &mCreateConsumableResourceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateConsumableResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConsumableResourceResponse, Members: &mCreateConsumableResourceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateJobQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJobQueueRequest, Members: &mCreateJobQueueRequest, Type: smithy.ShapeTypeStructure})
+var sCreateJobQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateJobQueueResponse, Members: &mCreateJobQueueResponse, Type: smithy.ShapeTypeStructure})
+var sCreateQuotaShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQuotaShareRequest, Members: &mCreateQuotaShareRequest, Type: smithy.ShapeTypeStructure})
+var sCreateQuotaShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateQuotaShareResponse, Members: &mCreateQuotaShareResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSchedulingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchedulingPolicyRequest, Members: &mCreateSchedulingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSchedulingPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSchedulingPolicyResponse, Members: &mCreateSchedulingPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sCreateServiceEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceEnvironmentRequest, Members: &mCreateServiceEnvironmentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateServiceEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateServiceEnvironmentResponse, Members: &mCreateServiceEnvironmentResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteComputeEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeEnvironmentRequest, Members: &mDeleteComputeEnvironmentRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteComputeEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComputeEnvironmentResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteConsumableResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsumableResourceRequest, Members: &mDeleteConsumableResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteConsumableResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConsumableResourceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteJobQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJobQueueRequest, Members: &mDeleteJobQueueRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteJobQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteJobQueueResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteQuotaShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQuotaShareRequest, Members: &mDeleteQuotaShareRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteQuotaShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteQuotaShareResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSchedulingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchedulingPolicyRequest, Members: &mDeleteSchedulingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSchedulingPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSchedulingPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceEnvironmentRequest, Members: &mDeleteServiceEnvironmentRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteServiceEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteServiceEnvironmentResponse, Type: smithy.ShapeTypeStructure})
+var sDeregisterJobDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterJobDefinitionRequest, Members: &mDeregisterJobDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterJobDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterJobDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeComputeEnvironmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComputeEnvironmentsRequest, Members: &mDescribeComputeEnvironmentsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeComputeEnvironmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComputeEnvironmentsResponse, Members: &mDescribeComputeEnvironmentsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeConsumableResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConsumableResourceRequest, Members: &mDescribeConsumableResourceRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeConsumableResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeConsumableResourceResponse, Members: &mDescribeConsumableResourceResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeJobDefinitionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobDefinitionsRequest, Members: &mDescribeJobDefinitionsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeJobDefinitionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobDefinitionsResponse, Members: &mDescribeJobDefinitionsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeJobQueuesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobQueuesRequest, Members: &mDescribeJobQueuesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeJobQueuesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobQueuesResponse, Members: &mDescribeJobQueuesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobsRequest, Members: &mDescribeJobsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeJobsResponse, Members: &mDescribeJobsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeQuotaShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQuotaShareRequest, Members: &mDescribeQuotaShareRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeQuotaShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeQuotaShareResponse, Members: &mDescribeQuotaShareResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSchedulingPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSchedulingPoliciesRequest, Members: &mDescribeSchedulingPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSchedulingPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSchedulingPoliciesResponse, Members: &mDescribeSchedulingPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceEnvironmentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceEnvironmentsRequest, Members: &mDescribeServiceEnvironmentsRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceEnvironmentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceEnvironmentsResponse, Members: &mDescribeServiceEnvironmentsResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceJobRequest, Members: &mDescribeServiceJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeServiceJobResponse, Members: &mDescribeServiceJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetJobQueueSnapshotRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobQueueSnapshotRequest, Members: &mGetJobQueueSnapshotRequest, Type: smithy.ShapeTypeStructure})
+var sGetJobQueueSnapshotResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetJobQueueSnapshotResponse, Members: &mGetJobQueueSnapshotResponse, Type: smithy.ShapeTypeStructure})
+var sListConsumableResourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConsumableResourcesRequest, Members: &mListConsumableResourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListConsumableResourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConsumableResourcesResponse, Members: &mListConsumableResourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListJobsByConsumableResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsByConsumableResourceRequest, Members: &mListJobsByConsumableResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListJobsByConsumableResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsByConsumableResourceResponse, Members: &mListJobsByConsumableResourceResponse, Type: smithy.ShapeTypeStructure})
+var sListJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsRequest, Members: &mListJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListJobsResponse, Members: &mListJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListQuotaSharesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQuotaSharesRequest, Members: &mListQuotaSharesRequest, Type: smithy.ShapeTypeStructure})
+var sListQuotaSharesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQuotaSharesResponse, Members: &mListQuotaSharesResponse, Type: smithy.ShapeTypeStructure})
+var sListSchedulingPoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedulingPoliciesRequest, Members: &mListSchedulingPoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListSchedulingPoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSchedulingPoliciesResponse, Members: &mListSchedulingPoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListServiceJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceJobsRequest, Members: &mListServiceJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListServiceJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListServiceJobsResponse, Members: &mListServiceJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterJobDefinitionRequest, Members: &mRegisterJobDefinitionRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterJobDefinitionResponse, Members: &mRegisterJobDefinitionResponse, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitJobRequest, Members: &mSubmitJobRequest, Type: smithy.ShapeTypeStructure})
+var sSubmitJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitJobResponse, Members: &mSubmitJobResponse, Type: smithy.ShapeTypeStructure})
+var sSubmitServiceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitServiceJobRequest, Members: &mSubmitServiceJobRequest, Type: smithy.ShapeTypeStructure})
+var sSubmitServiceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubmitServiceJobResponse, Members: &mSubmitServiceJobResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTerminateJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateJobRequest, Members: &mTerminateJobRequest, Type: smithy.ShapeTypeStructure})
+var sTerminateJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateJobResponse, Type: smithy.ShapeTypeStructure})
+var sTerminateJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateJobsRequest, Members: &mTerminateJobsRequest, Type: smithy.ShapeTypeStructure})
+var sTerminateJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateJobsResponse, Members: &mTerminateJobsResponse, Type: smithy.ShapeTypeStructure})
+var sTerminateServiceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateServiceJobRequest, Members: &mTerminateServiceJobRequest, Type: smithy.ShapeTypeStructure})
+var sTerminateServiceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateServiceJobResponse, Type: smithy.ShapeTypeStructure})
+var sTerminateServiceJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateServiceJobsRequest, Members: &mTerminateServiceJobsRequest, Type: smithy.ShapeTypeStructure})
+var sTerminateServiceJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTerminateServiceJobsResponse, Members: &mTerminateServiceJobsResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateComputeEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeEnvironmentRequest, Members: &mUpdateComputeEnvironmentRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateComputeEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateComputeEnvironmentResponse, Members: &mUpdateComputeEnvironmentResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConsumableResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConsumableResourceRequest, Members: &mUpdateConsumableResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConsumableResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConsumableResourceResponse, Members: &mUpdateConsumableResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateJobQueueRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobQueueRequest, Members: &mUpdateJobQueueRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateJobQueueResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateJobQueueResponse, Members: &mUpdateJobQueueResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateQuotaShareRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQuotaShareRequest, Members: &mUpdateQuotaShareRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateQuotaShareResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateQuotaShareResponse, Members: &mUpdateQuotaShareResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSchedulingPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchedulingPolicyRequest, Members: &mUpdateSchedulingPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSchedulingPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSchedulingPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceEnvironmentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceEnvironmentRequest, Members: &mUpdateServiceEnvironmentRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceEnvironmentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceEnvironmentResponse, Members: &mUpdateServiceEnvironmentResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceJobRequest, Members: &mUpdateServiceJobRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceJobResponse, Members: &mUpdateServiceJobResponse, Type: smithy.ShapeTypeStructure})
+
+var sArrayJobDependency_N_TO_N = smithy.NewStaticSchema(smithy.StaticSchema{Member: "N_TO_N", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArrayJobDependency_SEQUENTIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SEQUENTIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ArrayJobStatusSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ArrayJobStatusSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sArrayProperties_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sArrayPropertiesDetail_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &i_ArrayJobStatusSummary, Members: &m_ArrayJobStatusSummary, Type: smithy.ShapeTypeMap})
+var sArrayPropertiesDetail_statusSummaryLastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummaryLastUpdatedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sArrayPropertiesDetail_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sArrayPropertiesDetail_index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "index", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sArrayPropertiesSummary_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sArrayPropertiesSummary_index = smithy.NewStaticSchema(smithy.StaticSchema{Member: "index", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sArrayPropertiesSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &i_ArrayJobStatusSummary, Members: &m_ArrayJobStatusSummary, Type: smithy.ShapeTypeMap})
+var sArrayPropertiesSummary_statusSummaryLastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummaryLastUpdatedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sAssignPublicIp_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssignPublicIp_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttemptContainerDetail_containerInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerInstanceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptContainerDetail_taskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptContainerDetail_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sAttemptContainerDetail_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptContainerDetail_logStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptContainerDetail_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaceList, Members: &m_NetworkInterfaceList, Type: smithy.ShapeTypeList})
+var sAttemptDetail_container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "container", ID: &iAttemptContainerDetail, Members: &mAttemptContainerDetail, Type: smithy.ShapeTypeStructure})
+var sAttemptDetail_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sAttemptDetail_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sAttemptDetail_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptDetail_taskProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskProperties", ID: &i_ListAttemptEcsTaskDetails, Members: &m_ListAttemptEcsTaskDetails, Type: smithy.ShapeTypeList})
+var s_AttemptDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttemptDetail, Members: &mAttemptDetail, Type: smithy.ShapeTypeStructure})
+var sAttemptEcsTaskDetails_containerInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerInstanceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptEcsTaskDetails_taskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptEcsTaskDetails_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_ListAttemptTaskContainerDetails, Members: &m_ListAttemptTaskContainerDetails, Type: smithy.ShapeTypeList})
+var sAttemptTaskContainerDetails_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sAttemptTaskContainerDetails_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptTaskContainerDetails_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptTaskContainerDetails_logStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttemptTaskContainerDetails_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaceList, Members: &m_NetworkInterfaceList, Type: smithy.ShapeTypeList})
+var sCancelJobsErrorDetail_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCancelJobsErrorDetail_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCancelJobsErrorDetail_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_CancelJobsErrorDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCancelJobsErrorDetail, Members: &mCancelJobsErrorDetail, Type: smithy.ShapeTypeStructure})
+var sCapacityLimit_maxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxCapacity", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sCapacityLimit_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_CapacityLimits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCapacityLimit, Members: &mCapacityLimit, Type: smithy.ShapeTypeStructure})
+var sCapacityReservationRequest_reservationGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationGroupArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCapacityReservationRequest_reservationPreference = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reservationPreference", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCEState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEStatus_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEType_MANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCEType_UNMANAGED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNMANAGED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClientException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_computeEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_computeEnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_unmanagedvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unmanagedvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeEnvironmentDetail_ecsClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsClusterArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sComputeEnvironmentDetail_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCEType, Members: &mCEType, Type: smithy.ShapeTypeEnum})
+var sComputeEnvironmentDetail_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iCEState, Members: &mCEState, Type: smithy.ShapeTypeEnum})
+var sComputeEnvironmentDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCEStatus, Members: &mCEStatus, Type: smithy.ShapeTypeEnum})
+var sComputeEnvironmentDetail_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_computeResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeResources", ID: &iComputeResource, Members: &mComputeResource, Type: smithy.ShapeTypeStructure})
+var sComputeEnvironmentDetail_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_updatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatePolicy", ID: &iUpdatePolicy, Members: &mUpdatePolicy, Type: smithy.ShapeTypeStructure})
+var sComputeEnvironmentDetail_eksConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksConfiguration", ID: &iEksConfiguration, Members: &mEksConfiguration, Type: smithy.ShapeTypeStructure})
+var sComputeEnvironmentDetail_containerOrchestrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerOrchestrationType", ID: &iOrchestrationType, Members: &mOrchestrationType, Type: smithy.ShapeTypeEnum})
+var sComputeEnvironmentDetail_uuid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "uuid", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeEnvironmentDetail_ecsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsSettings", ID: &iEcsSettings, Members: &mEcsSettings, Type: smithy.ShapeTypeStructure})
+var s_ComputeEnvironmentDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComputeEnvironmentDetail, Members: &mComputeEnvironmentDetail, Type: smithy.ShapeTypeStructure})
+var sComputeEnvironmentOrder_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeEnvironmentOrder_computeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironment", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ComputeEnvironmentOrders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComputeEnvironmentOrder, Members: &mComputeEnvironmentOrder, Type: smithy.ShapeTypeStructure})
+var sComputeResource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCRType, Members: &mCRType, Type: smithy.ShapeTypeEnum})
+var sComputeResource_allocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allocationStrategy", ID: &iCRAllocationStrategy, Members: &mCRAllocationStrategy, Type: smithy.ShapeTypeEnum})
+var sComputeResource_minvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResource_maxvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResource_desiredvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desiredvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResource_instanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sComputeResource_imageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResource_subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sComputeResource_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sComputeResource_ec2KeyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2KeyPair", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResource_instanceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceRole", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResource_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap})
+var sComputeResource_placementGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "placementGroup", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResource_bidPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bidPercentage", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResource_spotIamFleetRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "spotIamFleetRole", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResource_launchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchTemplate", ID: &iLaunchTemplateSpecification, Members: &mLaunchTemplateSpecification, Type: smithy.ShapeTypeStructure})
+var sComputeResource_ec2Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2Configuration", ID: &i_Ec2ConfigurationList, Members: &m_Ec2ConfigurationList, Type: smithy.ShapeTypeList})
+var sComputeResource_scalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingPolicy", ID: &iComputeScalingPolicy, Members: &mComputeScalingPolicy, Type: smithy.ShapeTypeStructure})
+var sComputeResource_managedInstancesProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedInstancesProvider", ID: &iManagedInstancesProvider, Members: &mManagedInstancesProvider, Type: smithy.ShapeTypeStructure})
+var sComputeResource_capacityTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityTags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sComputeResourceUpdate_minvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResourceUpdate_maxvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResourceUpdate_desiredvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desiredvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResourceUpdate_subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sComputeResourceUpdate_securityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sComputeResourceUpdate_allocationStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allocationStrategy", ID: &iCRUpdateAllocationStrategy, Members: &mCRUpdateAllocationStrategy, Type: smithy.ShapeTypeEnum})
+var sComputeResourceUpdate_instanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sComputeResourceUpdate_ec2KeyPair = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2KeyPair", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResourceUpdate_instanceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceRole", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResourceUpdate_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagsMap, Members: &m_TagsMap, Type: smithy.ShapeTypeMap})
+var sComputeResourceUpdate_placementGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "placementGroup", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResourceUpdate_bidPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bidPercentage", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComputeResourceUpdate_launchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchTemplate", ID: &iLaunchTemplateSpecification, Members: &mLaunchTemplateSpecification, Type: smithy.ShapeTypeStructure})
+var sComputeResourceUpdate_ec2Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2Configuration", ID: &i_Ec2ConfigurationList, Members: &m_Ec2ConfigurationList, Type: smithy.ShapeTypeList})
+var sComputeResourceUpdate_updateToLatestImageVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updateToLatestImageVersion", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sComputeResourceUpdate_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCRType, Members: &mCRType, Type: smithy.ShapeTypeEnum})
+var sComputeResourceUpdate_imageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sComputeResourceUpdate_scalingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scalingPolicy", ID: &iComputeScalingPolicy, Members: &mComputeScalingPolicy, Type: smithy.ShapeTypeStructure})
+var sComputeResourceUpdate_managedInstancesProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "managedInstancesProvider", ID: &iUpdateManagedInstancesProviderConfiguration, Members: &mUpdateManagedInstancesProviderConfiguration, Type: smithy.ShapeTypeStructure})
+var sComputeResourceUpdate_capacityTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityTags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sComputeScalingPolicy_minScaleDownDelayMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minScaleDownDelayMinutes", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_ConsumableResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConsumableResourceRequirement, Members: &mConsumableResourceRequirement, Type: smithy.ShapeTypeStructure})
+var sConsumableResourceProperties_consumableResourceList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceList", ID: &i_ConsumableResourceList, Members: &m_ConsumableResourceList, Type: smithy.ShapeTypeList})
+var sConsumableResourceRequirement_consumableResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResource", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConsumableResourceRequirement_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sConsumableResourceSummary_consumableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConsumableResourceSummary_consumableResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConsumableResourceSummary_totalQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalQuantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sConsumableResourceSummary_inUseQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inUseQuantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sConsumableResourceSummary_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ConsumableResourceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConsumableResourceSummary, Members: &mConsumableResourceSummary, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_vcpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vcpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerDetail_memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memory", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerDetail_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sContainerDetail_jobRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumes", ID: &i_Volumes, Members: &m_Volumes, Type: smithy.ShapeTypeList})
+var sContainerDetail_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList})
+var sContainerDetail_mountPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountPoints", ID: &i_MountPoints, Members: &m_MountPoints, Type: smithy.ShapeTypeList})
+var sContainerDetail_readonlyRootFilesystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readonlyRootFilesystem", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sContainerDetail_ulimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ulimits", ID: &i_Ulimits, Members: &m_Ulimits, Type: smithy.ShapeTypeList})
+var sContainerDetail_privileged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privileged", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sContainerDetail_user = smithy.NewStaticSchema(smithy.StaticSchema{Member: "user", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerDetail_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_containerInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerInstanceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_taskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_logStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerDetail_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaceList, Members: &m_NetworkInterfaceList, Type: smithy.ShapeTypeList})
+var sContainerDetail_resourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRequirements", ID: &i_ResourceRequirements, Members: &m_ResourceRequirements, Type: smithy.ShapeTypeList})
+var sContainerDetail_linuxParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linuxParameters", ID: &iLinuxParameters, Members: &mLinuxParameters, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_secrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secrets", ID: &i_SecretList, Members: &m_SecretList, Type: smithy.ShapeTypeList})
+var sContainerDetail_networkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_fargatePlatformConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fargatePlatformConfiguration", ID: &iFargatePlatformConfiguration, Members: &mFargatePlatformConfiguration, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_ephemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeralStorage", ID: &iEphemeralStorage, Members: &mEphemeralStorage, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_runtimePlatform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimePlatform", ID: &iRuntimePlatform, Members: &mRuntimePlatform, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_repositoryCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryCredentials", ID: &iRepositoryCredentials, Members: &mRepositoryCredentials, Type: smithy.ShapeTypeStructure})
+var sContainerDetail_enableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableExecuteCommand", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sContainerInsights_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerInsights_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerInsights_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerOverrides_vcpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vcpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerOverrides_memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memory", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerOverrides_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sContainerOverrides_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerOverrides_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList})
+var sContainerOverrides_resourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRequirements", ID: &i_ResourceRequirements, Members: &m_ResourceRequirements, Type: smithy.ShapeTypeList})
+var sContainerProperties_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerProperties_vcpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vcpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerProperties_memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memory", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerProperties_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sContainerProperties_jobRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerProperties_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerProperties_volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumes", ID: &i_Volumes, Members: &m_Volumes, Type: smithy.ShapeTypeList})
+var sContainerProperties_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList})
+var sContainerProperties_mountPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountPoints", ID: &i_MountPoints, Members: &m_MountPoints, Type: smithy.ShapeTypeList})
+var sContainerProperties_readonlyRootFilesystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readonlyRootFilesystem", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sContainerProperties_privileged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privileged", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sContainerProperties_ulimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ulimits", ID: &i_Ulimits, Members: &m_Ulimits, Type: smithy.ShapeTypeList})
+var sContainerProperties_user = smithy.NewStaticSchema(smithy.StaticSchema{Member: "user", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerProperties_instanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContainerProperties_resourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRequirements", ID: &i_ResourceRequirements, Members: &m_ResourceRequirements, Type: smithy.ShapeTypeList})
+var sContainerProperties_linuxParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linuxParameters", ID: &iLinuxParameters, Members: &mLinuxParameters, Type: smithy.ShapeTypeStructure})
+var sContainerProperties_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sContainerProperties_secrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secrets", ID: &i_SecretList, Members: &m_SecretList, Type: smithy.ShapeTypeList})
+var sContainerProperties_networkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sContainerProperties_fargatePlatformConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fargatePlatformConfiguration", ID: &iFargatePlatformConfiguration, Members: &mFargatePlatformConfiguration, Type: smithy.ShapeTypeStructure})
+var sContainerProperties_enableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableExecuteCommand", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sContainerProperties_ephemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeralStorage", ID: &iEphemeralStorage, Members: &mEphemeralStorage, Type: smithy.ShapeTypeStructure})
+var sContainerProperties_runtimePlatform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimePlatform", ID: &iRuntimePlatform, Members: &mRuntimePlatform, Type: smithy.ShapeTypeStructure})
+var sContainerProperties_repositoryCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryCredentials", ID: &iRepositoryCredentials, Members: &mRepositoryCredentials, Type: smithy.ShapeTypeStructure})
+var sContainerSummary_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sContainerSummary_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCRAllocationStrategy_BEST_FIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEST_FIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRAllocationStrategy_BEST_FIT_PROGRESSIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEST_FIT_PROGRESSIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEST_FIT_PROGRESSIVE_ORDERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT_CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT_PRICE_CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRType_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRType_SPOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRType_FARGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FARGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRType_FARGATE_SPOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FARGATE_SPOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRType_ECS_MANAGED_INSTANCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS_MANAGED_INSTANCES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEST_FIT_PROGRESSIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEST_FIT_PROGRESSIVE_ORDERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT_CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRUpdateAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT_PRICE_CAPACITY_OPTIMIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPOT_CAPACITY_OPTIMIZED_PRIORITIZED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDevice_hostPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostPath", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDevice_containerPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerPath", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDevice_permissions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permissions", ID: &i_DeviceCgroupPermissions, Members: &m_DeviceCgroupPermissions, Type: smithy.ShapeTypeList})
+var sDeviceCgroupPermission_READ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READ", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeviceCgroupPermission_WRITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WRITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeviceCgroupPermission_MKNOD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MKNOD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DeviceCgroupPermissions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeviceCgroupPermission, Members: &mDeviceCgroupPermission, Type: smithy.ShapeTypeEnum})
+var s_DevicesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDevice, Members: &mDevice, Type: smithy.ShapeTypeStructure})
+var sEc2Configuration_imageType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageType", ID: &i_ImageType, Type: smithy.ShapeTypeString})
+var sEc2Configuration_imageIdOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageIdOverride", ID: &i_ImageIdOverride, Type: smithy.ShapeTypeString})
+var sEc2Configuration_batchImageStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "batchImageStatus", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEc2Configuration_imageKubernetesVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imageKubernetesVersion", ID: &i_KubernetesVersion, Type: smithy.ShapeTypeString})
+var s_Ec2ConfigurationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEc2Configuration, Members: &mEc2Configuration, Type: smithy.ShapeTypeStructure})
+var sEcsProperties_taskProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskProperties", ID: &i_ListEcsTaskProperties, Members: &m_ListEcsTaskProperties, Type: smithy.ShapeTypeList})
+var sEcsPropertiesDetail_taskProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskProperties", ID: &i_ListEcsTaskDetails, Members: &m_ListEcsTaskDetails, Type: smithy.ShapeTypeList})
+var sEcsPropertiesOverride_taskProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskProperties", ID: &i_ListTaskPropertiesOverride, Members: &m_ListTaskPropertiesOverride, Type: smithy.ShapeTypeList})
+var sEcsSettings_containerInsights = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerInsights", ID: &iContainerInsights, Members: &mContainerInsights, Type: smithy.ShapeTypeEnum})
+var sEcsTaskDetails_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_ListTaskContainerDetails, Members: &m_ListTaskContainerDetails, Type: smithy.ShapeTypeList})
+var sEcsTaskDetails_containerInstanceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerInstanceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskDetails_taskArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskDetails_ephemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeralStorage", ID: &iEphemeralStorage, Members: &mEphemeralStorage, Type: smithy.ShapeTypeStructure})
+var sEcsTaskDetails_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskDetails_platformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskDetails_ipcMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipcMode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskDetails_taskRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskDetails_pidMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pidMode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskDetails_networkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sEcsTaskDetails_runtimePlatform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimePlatform", ID: &iRuntimePlatform, Members: &mRuntimePlatform, Type: smithy.ShapeTypeStructure})
+var sEcsTaskDetails_volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumes", ID: &i_Volumes, Members: &m_Volumes, Type: smithy.ShapeTypeList})
+var sEcsTaskDetails_enableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableExecuteCommand", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEcsTaskDetails_networkMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkMode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskProperties_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_ListTaskContainerProperties, Members: &m_ListTaskContainerProperties, Type: smithy.ShapeTypeList})
+var sEcsTaskProperties_ephemeralStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ephemeralStorage", ID: &iEphemeralStorage, Members: &mEphemeralStorage, Type: smithy.ShapeTypeStructure})
+var sEcsTaskProperties_executionRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskProperties_platformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskProperties_ipcMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipcMode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskProperties_taskRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "taskRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskProperties_pidMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pidMode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEcsTaskProperties_networkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkConfiguration", ID: &iNetworkConfiguration, Members: &mNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sEcsTaskProperties_runtimePlatform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtimePlatform", ID: &iRuntimePlatform, Members: &mRuntimePlatform, Type: smithy.ShapeTypeStructure})
+var sEcsTaskProperties_volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumes", ID: &i_Volumes, Members: &m_Volumes, Type: smithy.ShapeTypeList})
+var sEcsTaskProperties_enableExecuteCommand = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enableExecuteCommand", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEcsTaskProperties_networkMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkMode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEFSAuthorizationConfig_accessPointId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEFSAuthorizationConfig_iam = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iam", ID: &iEFSAuthorizationConfigIAM, Members: &mEFSAuthorizationConfigIAM, Type: smithy.ShapeTypeEnum})
+var sEFSAuthorizationConfigIAM_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEFSAuthorizationConfigIAM_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEFSTransitEncryption_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEFSTransitEncryption_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEFSVolumeConfiguration_fileSystemId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEFSVolumeConfiguration_rootDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootDirectory", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEFSVolumeConfiguration_transitEncryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitEncryption", ID: &iEFSTransitEncryption, Members: &mEFSTransitEncryption, Type: smithy.ShapeTypeEnum})
+var sEFSVolumeConfiguration_transitEncryptionPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitEncryptionPort", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sEFSVolumeConfiguration_authorizationConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authorizationConfig", ID: &iEFSAuthorizationConfig, Members: &mEFSAuthorizationConfig, Type: smithy.ShapeTypeStructure})
+var sEksAccessEntry_desiredState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "desiredState", ID: &iEksAccessEntryDesiredState, Members: &mEksAccessEntryDesiredState, Type: smithy.ShapeTypeEnum})
+var sEksAccessEntry_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEksAccessEntryStatus, Members: &mEksAccessEntryStatus, Type: smithy.ShapeTypeEnum})
+var sEksAccessEntryDesiredState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEksAccessEntryDesiredState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEksAccessEntryDesiredState_INHERIT_FROM_CLUSTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INHERIT_FROM_CLUSTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEksAccessEntryStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEksAccessEntryStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EksAnnotationsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksAnnotationsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksAttemptContainerDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksAttemptContainerDetail_containerID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerID", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksAttemptContainerDetail_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sEksAttemptContainerDetail_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksAttemptContainerDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksAttemptContainerDetail, Members: &mEksAttemptContainerDetail, Type: smithy.ShapeTypeStructure})
+var sEksAttemptDetail_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_EksAttemptContainerDetails, Members: &m_EksAttemptContainerDetails, Type: smithy.ShapeTypeList})
+var sEksAttemptDetail_initContainers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initContainers", ID: &i_EksAttemptContainerDetails, Members: &m_EksAttemptContainerDetails, Type: smithy.ShapeTypeList})
+var sEksAttemptDetail_eksClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksClusterArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksAttemptDetail_podName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksAttemptDetail_podNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podNamespace", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksAttemptDetail_nodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksAttemptDetail_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sEksAttemptDetail_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sEksAttemptDetail_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksAttemptDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksAttemptDetail, Members: &mEksAttemptDetail, Type: smithy.ShapeTypeStructure})
+var sEksConfiguration_eksClusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksClusterArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksConfiguration_kubernetesNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kubernetesNamespace", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksConfiguration_accessEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessEntry", ID: &iEksAccessEntry, Members: &mEksAccessEntry, Type: smithy.ShapeTypeStructure})
+var sEksConfigurationUpdate_accessEntry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessEntry", ID: &iEksAccessEntry, Members: &mEksAccessEntry, Type: smithy.ShapeTypeStructure})
+var sEksContainer_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainer_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainer_imagePullPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePullPolicy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainer_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sEksContainer_args = smithy.NewStaticSchema(smithy.StaticSchema{Member: "args", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sEksContainer_env = smithy.NewStaticSchema(smithy.StaticSchema{Member: "env", ID: &i_EksContainerEnvironmentVariables, Members: &m_EksContainerEnvironmentVariables, Type: smithy.ShapeTypeList})
+var sEksContainer_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &iEksContainerResourceRequirements, Members: &mEksContainerResourceRequirements, Type: smithy.ShapeTypeStructure})
+var sEksContainer_volumeMounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeMounts", ID: &i_EksContainerVolumeMounts, Members: &m_EksContainerVolumeMounts, Type: smithy.ShapeTypeList})
+var sEksContainer_securityContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityContext", ID: &iEksContainerSecurityContext, Members: &mEksContainerSecurityContext, Type: smithy.ShapeTypeStructure})
+var sEksContainerDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerDetail_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerDetail_imagePullPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePullPolicy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerDetail_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sEksContainerDetail_args = smithy.NewStaticSchema(smithy.StaticSchema{Member: "args", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sEksContainerDetail_env = smithy.NewStaticSchema(smithy.StaticSchema{Member: "env", ID: &i_EksContainerEnvironmentVariables, Members: &m_EksContainerEnvironmentVariables, Type: smithy.ShapeTypeList})
+var sEksContainerDetail_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &iEksContainerResourceRequirements, Members: &mEksContainerResourceRequirements, Type: smithy.ShapeTypeStructure})
+var sEksContainerDetail_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sEksContainerDetail_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerDetail_volumeMounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumeMounts", ID: &i_EksContainerVolumeMounts, Members: &m_EksContainerVolumeMounts, Type: smithy.ShapeTypeList})
+var sEksContainerDetail_securityContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityContext", ID: &iEksContainerSecurityContext, Members: &mEksContainerSecurityContext, Type: smithy.ShapeTypeStructure})
+var s_EksContainerDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksContainerDetail, Members: &mEksContainerDetail, Type: smithy.ShapeTypeStructure})
+var sEksContainerEnvironmentVariable_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerEnvironmentVariable_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksContainerEnvironmentVariables_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksContainerEnvironmentVariable, Members: &mEksContainerEnvironmentVariable, Type: smithy.ShapeTypeStructure})
+var sEksContainerOverride_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerOverride_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerOverride_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sEksContainerOverride_args = smithy.NewStaticSchema(smithy.StaticSchema{Member: "args", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sEksContainerOverride_env = smithy.NewStaticSchema(smithy.StaticSchema{Member: "env", ID: &i_EksContainerEnvironmentVariables, Members: &m_EksContainerEnvironmentVariables, Type: smithy.ShapeTypeList})
+var sEksContainerOverride_resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resources", ID: &iEksContainerResourceRequirements, Members: &mEksContainerResourceRequirements, Type: smithy.ShapeTypeStructure})
+var s_EksContainerOverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksContainerOverride, Members: &mEksContainerOverride, Type: smithy.ShapeTypeStructure})
+var sEksContainerResourceRequirements_limits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limits", ID: &i_EksLimits, Members: &m_EksLimits, Type: smithy.ShapeTypeMap})
+var sEksContainerResourceRequirements_requests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requests", ID: &i_EksRequests, Members: &m_EksRequests, Type: smithy.ShapeTypeMap})
+var s_EksContainers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksContainer, Members: &mEksContainer, Type: smithy.ShapeTypeStructure})
+var sEksContainerSecurityContext_runAsUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runAsUser", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sEksContainerSecurityContext_runAsGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runAsGroup", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sEksContainerSecurityContext_privileged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privileged", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksContainerSecurityContext_allowPrivilegeEscalation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowPrivilegeEscalation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksContainerSecurityContext_readOnlyRootFilesystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readOnlyRootFilesystem", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksContainerSecurityContext_runAsNonRoot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runAsNonRoot", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksContainerVolumeMount_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerVolumeMount_mountPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountPath", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerVolumeMount_subPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subPath", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksContainerVolumeMount_readOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_EksContainerVolumeMounts_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksContainerVolumeMount, Members: &mEksContainerVolumeMount, Type: smithy.ShapeTypeStructure})
+var sEksEmptyDir_medium = smithy.NewStaticSchema(smithy.StaticSchema{Member: "medium", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksEmptyDir_sizeLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeLimit", ID: &i_Quantity, Type: smithy.ShapeTypeString})
+var sEksHostPath_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksLabelsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksLabelsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksLimits_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksLimits_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Quantity, Type: smithy.ShapeTypeString})
+var sEksMetadata_labels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "labels", ID: &i_EksLabelsMap, Members: &m_EksLabelsMap, Type: smithy.ShapeTypeMap})
+var sEksMetadata_annotations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "annotations", ID: &i_EksAnnotationsMap, Members: &m_EksAnnotationsMap, Type: smithy.ShapeTypeMap})
+var sEksMetadata_namespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "namespace", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPersistentVolumeClaim_claimName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "claimName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPersistentVolumeClaim_readOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksPodProperties_serviceAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceAccountName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPodProperties_hostNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostNetwork", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksPodProperties_dnsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsPolicy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPodProperties_imagePullSecrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePullSecrets", ID: &i_ImagePullSecrets, Members: &m_ImagePullSecrets, Type: smithy.ShapeTypeList})
+var sEksPodProperties_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_EksContainers, Members: &m_EksContainers, Type: smithy.ShapeTypeList})
+var sEksPodProperties_initContainers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initContainers", ID: &i_EksContainers, Members: &m_EksContainers, Type: smithy.ShapeTypeList})
+var sEksPodProperties_volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumes", ID: &i_EksVolumes, Members: &m_EksVolumes, Type: smithy.ShapeTypeList})
+var sEksPodProperties_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iEksMetadata, Members: &mEksMetadata, Type: smithy.ShapeTypeStructure})
+var sEksPodProperties_shareProcessNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareProcessNamespace", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksPodPropertiesDetail_serviceAccountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceAccountName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPodPropertiesDetail_hostNetwork = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostNetwork", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksPodPropertiesDetail_dnsPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dnsPolicy", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPodPropertiesDetail_imagePullSecrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "imagePullSecrets", ID: &i_ImagePullSecrets, Members: &m_ImagePullSecrets, Type: smithy.ShapeTypeList})
+var sEksPodPropertiesDetail_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_EksContainerDetails, Members: &m_EksContainerDetails, Type: smithy.ShapeTypeList})
+var sEksPodPropertiesDetail_initContainers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initContainers", ID: &i_EksContainerDetails, Members: &m_EksContainerDetails, Type: smithy.ShapeTypeList})
+var sEksPodPropertiesDetail_volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumes", ID: &i_EksVolumes, Members: &m_EksVolumes, Type: smithy.ShapeTypeList})
+var sEksPodPropertiesDetail_podName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPodPropertiesDetail_nodeName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksPodPropertiesDetail_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iEksMetadata, Members: &mEksMetadata, Type: smithy.ShapeTypeStructure})
+var sEksPodPropertiesDetail_shareProcessNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareProcessNamespace", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksPodPropertiesOverride_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_EksContainerOverrideList, Members: &m_EksContainerOverrideList, Type: smithy.ShapeTypeList})
+var sEksPodPropertiesOverride_initContainers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initContainers", ID: &i_EksContainerOverrideList, Members: &m_EksContainerOverrideList, Type: smithy.ShapeTypeList})
+var sEksPodPropertiesOverride_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &iEksMetadata, Members: &mEksMetadata, Type: smithy.ShapeTypeStructure})
+var sEksProperties_podProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podProperties", ID: &iEksPodProperties, Members: &mEksPodProperties, Type: smithy.ShapeTypeStructure})
+var sEksPropertiesDetail_podProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podProperties", ID: &iEksPodPropertiesDetail, Members: &mEksPodPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sEksPropertiesOverride_podProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "podProperties", ID: &iEksPodPropertiesOverride, Members: &mEksPodPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var s_EksRequests_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EksRequests_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_Quantity, Type: smithy.ShapeTypeString})
+var sEksSecret_secretName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksSecret_optional = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optional", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sEksVolume_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEksVolume_hostPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostPath", ID: &iEksHostPath, Members: &mEksHostPath, Type: smithy.ShapeTypeStructure})
+var sEksVolume_emptyDir = smithy.NewStaticSchema(smithy.StaticSchema{Member: "emptyDir", ID: &iEksEmptyDir, Members: &mEksEmptyDir, Type: smithy.ShapeTypeStructure})
+var sEksVolume_secret = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secret", ID: &iEksSecret, Members: &mEksSecret, Type: smithy.ShapeTypeStructure})
+var sEksVolume_persistentVolumeClaim = smithy.NewStaticSchema(smithy.StaticSchema{Member: "persistentVolumeClaim", ID: &iEksPersistentVolumeClaim, Members: &mEksPersistentVolumeClaim, Type: smithy.ShapeTypeStructure})
+var s_EksVolumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEksVolume, Members: &mEksVolume, Type: smithy.ShapeTypeStructure})
+var s_EnvironmentVariables_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyValuePair, Members: &mKeyValuePair, Type: smithy.ShapeTypeStructure})
+var sEphemeralStorage_sizeInGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeInGiB", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sEvaluateOnExit_onStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onStatusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvaluateOnExit_onReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvaluateOnExit_onExitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onExitCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEvaluateOnExit_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iRetryAction, Members: &mRetryAction, Type: smithy.ShapeTypeEnum})
+var s_EvaluateOnExitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluateOnExit, Members: &mEvaluateOnExit, Type: smithy.ShapeTypeStructure})
+var sFairshareCapacityUsage_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFairshareCapacityUsage_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_FairshareCapacityUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFairshareCapacityUsage, Members: &mFairshareCapacityUsage, Type: smithy.ShapeTypeStructure})
+var sFairshareCapacityUtilization_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFairshareCapacityUtilization_capacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUsage", ID: &i_FairshareCapacityUsageList, Members: &m_FairshareCapacityUsageList, Type: smithy.ShapeTypeList})
+var s_FairshareCapacityUtilizationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFairshareCapacityUtilization, Members: &mFairshareCapacityUtilization, Type: smithy.ShapeTypeStructure})
+var sFairsharePolicy_shareDecaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareDecaySeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sFairsharePolicy_computeReservation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeReservation", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sFairsharePolicy_shareDistribution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareDistribution", ID: &i_ShareAttributesList, Members: &m_ShareAttributesList, Type: smithy.ShapeTypeList})
+var sFairshareUtilizationDetail_activeShareCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "activeShareCount", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sFairshareUtilizationDetail_topCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topCapacityUtilization", ID: &i_FairshareCapacityUtilizationList, Members: &m_FairshareCapacityUtilizationList, Type: smithy.ShapeTypeList})
+var sFargatePlatformConfiguration_platformVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFirelensConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iFirelensConfigurationType, Members: &mFirelensConfigurationType, Type: smithy.ShapeTypeEnum})
+var sFirelensConfiguration_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_FirelensConfigurationOptionsMap, Members: &m_FirelensConfigurationOptionsMap, Type: smithy.ShapeTypeMap})
+var s_FirelensConfigurationOptionsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_FirelensConfigurationOptionsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFirelensConfigurationType_FLUENTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLUENTD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFirelensConfigurationType_FLUENTBIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLUENTBIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFrontOfQueueDetail_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_FrontOfQueueJobSummaryList, Members: &m_FrontOfQueueJobSummaryList, Type: smithy.ShapeTypeList})
+var sFrontOfQueueDetail_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sFrontOfQueueJobSummary_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFrontOfQueueJobSummary_earliestTimeAtPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "earliestTimeAtPosition", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_FrontOfQueueJobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFrontOfQueueJobSummary, Members: &mFrontOfQueueJobSummary, Type: smithy.ShapeTypeStructure})
+var sFrontOfQuotaShareJobSummary_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFrontOfQuotaShareJobSummary_earliestTimeAtPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "earliestTimeAtPosition", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_FrontOfQuotaShareJobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFrontOfQuotaShareJobSummary, Members: &mFrontOfQuotaShareJobSummary, Type: smithy.ShapeTypeStructure})
+var sFrontOfQuotaSharesDetail_quotaShares = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShares", ID: &i_FrontOfQuotaSharesJobSummaryMap, Members: &m_FrontOfQuotaSharesJobSummaryMap, Type: smithy.ShapeTypeMap})
+var sFrontOfQuotaSharesDetail_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_FrontOfQuotaSharesJobSummaryMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_FrontOfQuotaSharesJobSummaryMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FrontOfQuotaShareJobSummaryList, Members: &m_FrontOfQuotaShareJobSummaryList, Type: smithy.ShapeTypeList})
+var sHost_sourcePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourcePath", ID: &i_String, Type: smithy.ShapeTypeString})
+var sImagePullSecret_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ImagePullSecrets_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImagePullSecret, Members: &mImagePullSecret, Type: smithy.ShapeTypeStructure})
+var sInfrastructureOptimization_scaleInAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scaleInAfter", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInstanceLaunchTemplate_ec2InstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2InstanceProfileArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInstanceLaunchTemplate_networkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkConfiguration", ID: &iManagedInstancesNetworkConfiguration, Members: &mManagedInstancesNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplate_instanceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceRequirements", ID: &iInstanceRequirementsRequest, Members: &mInstanceRequirementsRequest, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplate_capacityOptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityOptionType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInstanceLaunchTemplate_storageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageConfiguration", ID: &iManagedInstancesStorageConfiguration, Members: &mManagedInstancesStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplate_monitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitoring", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInstanceLaunchTemplate_fipsEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fipsEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sInstanceLaunchTemplate_capacityReservations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityReservations", ID: &iCapacityReservationRequest, Members: &mCapacityReservationRequest, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplate_instanceMetadataTagsPropagation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceMetadataTagsPropagation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sInstanceLaunchTemplate_localStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localStorageConfiguration", ID: &iManagedInstancesLocalStorageConfiguration, Members: &mManagedInstancesLocalStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplateUpdate_ec2InstanceProfileArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ec2InstanceProfileArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInstanceLaunchTemplateUpdate_networkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkConfiguration", ID: &iManagedInstancesNetworkConfiguration, Members: &mManagedInstancesNetworkConfiguration, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplateUpdate_instanceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceRequirements", ID: &iInstanceRequirementsRequest, Members: &mInstanceRequirementsRequest, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplateUpdate_storageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageConfiguration", ID: &iManagedInstancesStorageConfiguration, Members: &mManagedInstancesStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplateUpdate_monitoring = smithy.NewStaticSchema(smithy.StaticSchema{Member: "monitoring", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInstanceLaunchTemplateUpdate_capacityReservations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityReservations", ID: &iCapacityReservationRequest, Members: &mCapacityReservationRequest, Type: smithy.ShapeTypeStructure})
+var sInstanceLaunchTemplateUpdate_instanceMetadataTagsPropagation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceMetadataTagsPropagation", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sInstanceLaunchTemplateUpdate_localStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "localStorageConfiguration", ID: &iManagedInstancesLocalStorageConfiguration, Members: &mManagedInstancesLocalStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sInstanceRequirementsRequest_allowedInstanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "allowedInstanceTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sJobCapacityUsageSummary_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobCapacityUsageSummary_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_JobCapacityUsageSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobCapacityUsageSummary, Members: &mJobCapacityUsageSummary, Type: smithy.ShapeTypeStructure})
+var sJobDefinition_jobDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitionName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDefinition_jobDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitionArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDefinition_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sJobDefinition_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDefinition_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDefinition_schedulingPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPriority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sJobDefinition_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sJobDefinition_retryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStrategy", ID: &iRetryStrategy, Members: &mRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sJobDefinition_containerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerProperties", ID: &iContainerProperties, Members: &mContainerProperties, Type: smithy.ShapeTypeStructure})
+var sJobDefinition_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iJobTimeout, Members: &mJobTimeout, Type: smithy.ShapeTypeStructure})
+var sJobDefinition_nodeProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeProperties", ID: &iNodeProperties, Members: &mNodeProperties, Type: smithy.ShapeTypeStructure})
+var sJobDefinition_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sJobDefinition_propagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propagateTags", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sJobDefinition_platformCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformCapabilities", ID: &i_PlatformCapabilityList, Members: &m_PlatformCapabilityList, Type: smithy.ShapeTypeList})
+var sJobDefinition_ecsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsProperties", ID: &iEcsProperties, Members: &mEcsProperties, Type: smithy.ShapeTypeStructure})
+var sJobDefinition_eksProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksProperties", ID: &iEksProperties, Members: &mEksProperties, Type: smithy.ShapeTypeStructure})
+var sJobDefinition_containerOrchestrationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerOrchestrationType", ID: &iOrchestrationType, Members: &mOrchestrationType, Type: smithy.ShapeTypeEnum})
+var sJobDefinition_consumableResourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceProperties", ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var s_JobDefinitionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobDefinition, Members: &mJobDefinition, Type: smithy.ShapeTypeStructure})
+var sJobDefinitionType_Container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Container", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobDefinitionType_Multinode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Multinode", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobDependency_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDependency_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iArrayJobDependency, Members: &mArrayJobDependency, Type: smithy.ShapeTypeEnum})
+var s_JobDependencyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobDependency, Members: &mJobDependency, Type: smithy.ShapeTypeStructure})
+var sJobDetail_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDetail_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDetail_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDetail_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sJobDetail_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDetail_schedulingPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPriority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sJobDetail_attempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attempts", ID: &i_AttemptDetails, Members: &m_AttemptDetails, Type: smithy.ShapeTypeList})
+var sJobDetail_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDetail_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sJobDetail_retryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStrategy", ID: &iRetryStrategy, Members: &mRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sJobDetail_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sJobDetail_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sJobDetail_dependsOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependsOn", ID: &i_JobDependencyList, Members: &m_JobDependencyList, Type: smithy.ShapeTypeList})
+var sJobDetail_jobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinition", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobDetail_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sJobDetail_container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "container", ID: &iContainerDetail, Members: &mContainerDetail, Type: smithy.ShapeTypeStructure})
+var sJobDetail_nodeDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeDetails", ID: &iNodeDetails, Members: &mNodeDetails, Type: smithy.ShapeTypeStructure})
+var sJobDetail_nodeProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeProperties", ID: &iNodeProperties, Members: &mNodeProperties, Type: smithy.ShapeTypeStructure})
+var sJobDetail_arrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayProperties", ID: &iArrayPropertiesDetail, Members: &mArrayPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sJobDetail_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iJobTimeout, Members: &mJobTimeout, Type: smithy.ShapeTypeStructure})
+var sJobDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sJobDetail_propagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propagateTags", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sJobDetail_platformCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformCapabilities", ID: &i_PlatformCapabilityList, Members: &m_PlatformCapabilityList, Type: smithy.ShapeTypeList})
+var sJobDetail_eksProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksProperties", ID: &iEksPropertiesDetail, Members: &mEksPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sJobDetail_eksAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksAttempts", ID: &i_EksAttemptDetails, Members: &m_EksAttemptDetails, Type: smithy.ShapeTypeList})
+var sJobDetail_ecsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsProperties", ID: &iEcsPropertiesDetail, Members: &mEcsPropertiesDetail, Type: smithy.ShapeTypeStructure})
+var sJobDetail_isCancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCancelled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sJobDetail_isTerminated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isTerminated", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sJobDetail_consumableResourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceProperties", ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var s_JobDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobDetail, Members: &mJobDetail, Type: smithy.ShapeTypeStructure})
+var sJobQueueDetail_jobQueueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobQueueDetail_jobQueueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobQueueDetail_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iJQState, Members: &mJQState, Type: smithy.ShapeTypeEnum})
+var sJobQueueDetail_schedulingPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPolicyArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobQueueDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJQStatus, Members: &mJQStatus, Type: smithy.ShapeTypeEnum})
+var sJobQueueDetail_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobQueueDetail_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sJobQueueDetail_computeEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentOrder", ID: &i_ComputeEnvironmentOrders, Members: &m_ComputeEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sJobQueueDetail_serviceEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentOrder", ID: &i_ServiceEnvironmentOrders, Members: &m_ServiceEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sJobQueueDetail_jobQueueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueType", ID: &iJobQueueType, Members: &mJobQueueType, Type: smithy.ShapeTypeEnum})
+var sJobQueueDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sJobQueueDetail_jobStateTimeLimitActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStateTimeLimitActions", ID: &i_JobStateTimeLimitActions, Members: &m_JobStateTimeLimitActions, Type: smithy.ShapeTypeList})
+var s_JobQueueDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobQueueDetail, Members: &mJobQueueDetail, Type: smithy.ShapeTypeStructure})
+var sJobQueueType_EKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobQueueType_ECS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobQueueType_ECS_FARGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS_FARGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobQueueType_SAGEMAKER_TRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER_TRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobQueueType_ECS_MANAGED_INSTANCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS_MANAGED_INSTANCES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStateTimeLimitAction_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobStateTimeLimitAction_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iJobStateTimeLimitActionsState, Members: &mJobStateTimeLimitActionsState, Type: smithy.ShapeTypeEnum})
+var sJobStateTimeLimitAction_maxTimeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxTimeSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sJobStateTimeLimitAction_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iJobStateTimeLimitActionsAction, Members: &mJobStateTimeLimitActionsAction, Type: smithy.ShapeTypeEnum})
+var s_JobStateTimeLimitActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobStateTimeLimitAction, Members: &mJobStateTimeLimitAction, Type: smithy.ShapeTypeStructure})
+var sJobStateTimeLimitActionsAction_CANCEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStateTimeLimitActionsAction_TERMINATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TERMINATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStateTimeLimitActionsState_RUNNABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_RUNNABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobSummary_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobSummary_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobSummary_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobSummary_capacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUsage", ID: &i_JobCapacityUsageSummaryList, Members: &m_JobCapacityUsageSummaryList, Type: smithy.ShapeTypeList})
+var sJobSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sJobSummary_scheduledAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sJobSummary_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sJobSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sJobSummary_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sJobSummary_container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "container", ID: &iContainerSummary, Members: &mContainerSummary, Type: smithy.ShapeTypeStructure})
+var sJobSummary_arrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayProperties", ID: &iArrayPropertiesSummary, Members: &mArrayPropertiesSummary, Type: smithy.ShapeTypeStructure})
+var sJobSummary_nodeProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeProperties", ID: &iNodePropertiesSummary, Members: &mNodePropertiesSummary, Type: smithy.ShapeTypeStructure})
+var sJobSummary_jobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinition", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobSummary_isCancelled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isCancelled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sJobSummary_isTerminated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isTerminated", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_JobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iJobSummary, Members: &mJobSummary, Type: smithy.ShapeTypeStructure})
+var sJobTimeout_attemptDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attemptDurationSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sJQState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJQState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJQStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJQStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJQStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJQStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJQStatus_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJQStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKeyValuePair_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sKeyValuePair_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sKeyValuesPair_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sKeyValuesPair_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sLatestServiceJobAttempt_serviceResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceResourceId", ID: &iServiceResourceId, Members: &mServiceResourceId, Type: smithy.ShapeTypeStructure})
+var sLaunchTemplateSpecification_launchTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchTemplateId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLaunchTemplateSpecification_launchTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchTemplateName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLaunchTemplateSpecification_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLaunchTemplateSpecification_overrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "overrides", ID: &i_LaunchTemplateSpecificationOverrideList, Members: &m_LaunchTemplateSpecificationOverrideList, Type: smithy.ShapeTypeList})
+var sLaunchTemplateSpecification_userdataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userdataType", ID: &iUserdataType, Members: &mUserdataType, Type: smithy.ShapeTypeEnum})
+var sLaunchTemplateSpecificationOverride_launchTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchTemplateId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLaunchTemplateSpecificationOverride_launchTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "launchTemplateName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLaunchTemplateSpecificationOverride_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLaunchTemplateSpecificationOverride_targetInstanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetInstanceTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sLaunchTemplateSpecificationOverride_userdataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "userdataType", ID: &iUserdataType, Members: &mUserdataType, Type: smithy.ShapeTypeEnum})
+var s_LaunchTemplateSpecificationOverrideList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLaunchTemplateSpecificationOverride, Members: &mLaunchTemplateSpecificationOverride, Type: smithy.ShapeTypeStructure})
+var sLinuxParameters_devices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "devices", ID: &i_DevicesList, Members: &m_DevicesList, Type: smithy.ShapeTypeList})
+var sLinuxParameters_initProcessEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "initProcessEnabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sLinuxParameters_sharedMemorySize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sharedMemorySize", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sLinuxParameters_tmpfs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tmpfs", ID: &i_TmpfsList, Members: &m_TmpfsList, Type: smithy.ShapeTypeList})
+var sLinuxParameters_maxSwap = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxSwap", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sLinuxParameters_swappiness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "swappiness", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_ListAttemptEcsTaskDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttemptEcsTaskDetails, Members: &mAttemptEcsTaskDetails, Type: smithy.ShapeTypeStructure})
+var s_ListAttemptTaskContainerDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttemptTaskContainerDetails, Members: &mAttemptTaskContainerDetails, Type: smithy.ShapeTypeStructure})
+var s_ListConsumableResourcesFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyValuesPair, Members: &mKeyValuesPair, Type: smithy.ShapeTypeStructure})
+var s_ListEcsTaskDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEcsTaskDetails, Members: &mEcsTaskDetails, Type: smithy.ShapeTypeStructure})
+var s_ListEcsTaskProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEcsTaskProperties, Members: &mEcsTaskProperties, Type: smithy.ShapeTypeStructure})
+var s_ListJobsByConsumableResourceFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyValuesPair, Members: &mKeyValuesPair, Type: smithy.ShapeTypeStructure})
+var sListJobsByConsumableResourceSummary_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceSummary_jobQueueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceSummary_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceSummary_jobDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitionArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceSummary_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceSummary_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceSummary_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sListJobsByConsumableResourceSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sListJobsByConsumableResourceSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sListJobsByConsumableResourceSummary_consumableResourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceProperties", ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var s_ListJobsByConsumableResourceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListJobsByConsumableResourceSummary, Members: &mListJobsByConsumableResourceSummary, Type: smithy.ShapeTypeStructure})
+var s_ListJobsFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKeyValuesPair, Members: &mKeyValuesPair, Type: smithy.ShapeTypeStructure})
+var s_ListTaskContainerDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskContainerDetails, Members: &mTaskContainerDetails, Type: smithy.ShapeTypeStructure})
+var s_ListTaskContainerOverrides_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskContainerOverrides, Members: &mTaskContainerOverrides, Type: smithy.ShapeTypeStructure})
+var s_ListTaskContainerProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskContainerProperties, Members: &mTaskContainerProperties, Type: smithy.ShapeTypeStructure})
+var s_ListTaskPropertiesOverride_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskPropertiesOverride, Members: &mTaskPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sLogConfiguration_logDriver = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logDriver", ID: &iLogDriver, Members: &mLogDriver, Type: smithy.ShapeTypeEnum})
+var sLogConfiguration_options = smithy.NewStaticSchema(smithy.StaticSchema{Member: "options", ID: &i_LogConfigurationOptionsMap, Members: &m_LogConfigurationOptionsMap, Type: smithy.ShapeTypeMap})
+var sLogConfiguration_secretOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secretOptions", ID: &i_SecretList, Members: &m_SecretList, Type: smithy.ShapeTypeList})
+var s_LogConfigurationOptionsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_LogConfigurationOptionsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLogDriver_JSON_FILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON_FILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogDriver_SYSLOG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSLOG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogDriver_JOURNALD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JOURNALD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogDriver_GELF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GELF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogDriver_FLUENTD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FLUENTD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogDriver_AWSLOGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSLOGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogDriver_SPLUNK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPLUNK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogDriver_AWSFIRELENS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWSFIRELENS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sManagedInstancesLocalStorageConfiguration_useLocalStorage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "useLocalStorage", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sManagedInstancesNetworkConfiguration_subnets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnets", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sManagedInstancesNetworkConfiguration_securityGroups = smithy.NewStaticSchema(smithy.StaticSchema{Member: "securityGroups", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sManagedInstancesProvider_propagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propagateTags", ID: &i_String, Type: smithy.ShapeTypeString})
+var sManagedInstancesProvider_infrastructureRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "infrastructureRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sManagedInstancesProvider_instanceLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceLaunchTemplate", ID: &iInstanceLaunchTemplate, Members: &mInstanceLaunchTemplate, Type: smithy.ShapeTypeStructure})
+var sManagedInstancesProvider_infrastructureOptimization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "infrastructureOptimization", ID: &iInfrastructureOptimization, Members: &mInfrastructureOptimization, Type: smithy.ShapeTypeStructure})
+var sManagedInstancesStorageConfiguration_storageSizeGiB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "storageSizeGiB", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sMountPoint_containerPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerPath", ID: &i_String, Type: smithy.ShapeTypeString})
+var sMountPoint_readOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readOnly", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sMountPoint_sourceVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceVolume", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_MountPoints_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMountPoint, Members: &mMountPoint, Type: smithy.ShapeTypeStructure})
+var sNetworkConfiguration_assignPublicIp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assignPublicIp", ID: &iAssignPublicIp, Members: &mAssignPublicIp, Type: smithy.ShapeTypeEnum})
+var sNetworkInterface_attachmentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attachmentId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNetworkInterface_ipv6Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ipv6Address", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNetworkInterface_privateIpv4Address = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privateIpv4Address", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_NetworkInterfaceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNetworkInterface, Members: &mNetworkInterface, Type: smithy.ShapeTypeStructure})
+var sNodeDetails_nodeIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sNodeDetails_isMainNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMainNode", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNodeOverrides_numNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numNodes", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sNodeOverrides_nodePropertyOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodePropertyOverrides", ID: &i_NodePropertyOverrides, Members: &m_NodePropertyOverrides, Type: smithy.ShapeTypeList})
+var sNodeProperties_numNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numNodes", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sNodeProperties_mainNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mainNode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sNodeProperties_nodeRangeProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeRangeProperties", ID: &i_NodeRangeProperties, Members: &m_NodeRangeProperties, Type: smithy.ShapeTypeList})
+var sNodePropertiesSummary_isMainNode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isMainNode", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sNodePropertiesSummary_numNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numNodes", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sNodePropertiesSummary_nodeIndex = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeIndex", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sNodePropertyOverride_targetNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetNodes", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNodePropertyOverride_containerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerOverrides", ID: &iContainerOverrides, Members: &mContainerOverrides, Type: smithy.ShapeTypeStructure})
+var sNodePropertyOverride_ecsPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsPropertiesOverride", ID: &iEcsPropertiesOverride, Members: &mEcsPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sNodePropertyOverride_instanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sNodePropertyOverride_eksPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksPropertiesOverride", ID: &iEksPropertiesOverride, Members: &mEksPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sNodePropertyOverride_consumableResourcePropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourcePropertiesOverride", ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var s_NodePropertyOverrides_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNodePropertyOverride, Members: &mNodePropertyOverride, Type: smithy.ShapeTypeStructure})
+var s_NodeRangeProperties_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iNodeRangeProperty, Members: &mNodeRangeProperty, Type: smithy.ShapeTypeStructure})
+var sNodeRangeProperty_targetNodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetNodes", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNodeRangeProperty_container = smithy.NewStaticSchema(smithy.StaticSchema{Member: "container", ID: &iContainerProperties, Members: &mContainerProperties, Type: smithy.ShapeTypeStructure})
+var sNodeRangeProperty_instanceTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceTypes", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sNodeRangeProperty_ecsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsProperties", ID: &iEcsProperties, Members: &mEcsProperties, Type: smithy.ShapeTypeStructure})
+var sNodeRangeProperty_eksProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksProperties", ID: &iEksProperties, Members: &mEksProperties, Type: smithy.ShapeTypeStructure})
+var sNodeRangeProperty_consumableResourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceProperties", ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var sOrchestrationType_ECS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ECS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrchestrationType_EKS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPlatformCapability_EC2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EC2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPlatformCapability_FARGATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FARGATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPlatformCapability_MANAGED_INSTANCES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANAGED_INSTANCES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_PlatformCapabilityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPlatformCapability, Members: &mPlatformCapability, Type: smithy.ShapeTypeEnum})
+var sQueueSnapshotCapacityUsage_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQueueSnapshotCapacityUsage_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_QueueSnapshotCapacityUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQueueSnapshotCapacityUsage, Members: &mQueueSnapshotCapacityUsage, Type: smithy.ShapeTypeStructure})
+var sQueueSnapshotUtilizationDetail_totalCapacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalCapacityUsage", ID: &i_QueueSnapshotCapacityUsageList, Members: &m_QueueSnapshotCapacityUsageList, Type: smithy.ShapeTypeList})
+var sQueueSnapshotUtilizationDetail_fairshareUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fairshareUtilization", ID: &iFairshareUtilizationDetail, Members: &mFairshareUtilizationDetail, Type: smithy.ShapeTypeStructure})
+var sQueueSnapshotUtilizationDetail_quotaShareUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareUtilization", ID: &iQuotaShareUtilizationDetail, Members: &mQuotaShareUtilizationDetail, Type: smithy.ShapeTypeStructure})
+var sQueueSnapshotUtilizationDetail_lastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sQuotaShareCapacityLimit_maxCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxCapacity", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sQuotaShareCapacityLimit_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_QuotaShareCapacityLimits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaShareCapacityLimit, Members: &mQuotaShareCapacityLimit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareCapacityUsage_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQuotaShareCapacityUsage_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_QuotaShareCapacityUsageList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaShareCapacityUsage, Members: &mQuotaShareCapacityUsage, Type: smithy.ShapeTypeStructure})
+var sQuotaShareCapacityUtilization_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQuotaShareCapacityUtilization_capacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUsage", ID: &i_QuotaShareCapacityUsageList, Members: &m_QuotaShareCapacityUsageList, Type: smithy.ShapeTypeList})
+var s_QuotaShareCapacityUtilizationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaShareCapacityUtilization, Members: &mQuotaShareCapacityUtilization, Type: smithy.ShapeTypeStructure})
+var sQuotaShareDetail_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQuotaShareDetail_quotaShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQuotaShareDetail_jobQueueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sQuotaShareDetail_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &i_QuotaShareCapacityLimits, Members: &m_QuotaShareCapacityLimits, Type: smithy.ShapeTypeList})
+var sQuotaShareDetail_resourceSharingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceSharingConfiguration", ID: &iQuotaShareResourceSharingConfiguration, Members: &mQuotaShareResourceSharingConfiguration, Type: smithy.ShapeTypeStructure})
+var sQuotaShareDetail_preemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionConfiguration", ID: &iQuotaSharePreemptionConfiguration, Members: &mQuotaSharePreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sQuotaShareDetail_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iQuotaShareState, Members: &mQuotaShareState, Type: smithy.ShapeTypeEnum})
+var sQuotaShareDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQuotaShareStatus, Members: &mQuotaShareStatus, Type: smithy.ShapeTypeEnum})
+var sQuotaShareIdleResourceAssignmentStrategy_FIFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIFO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareInSharePreemptionState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareInSharePreemptionState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_QuotaShareList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuotaShareDetail, Members: &mQuotaShareDetail, Type: smithy.ShapeTypeStructure})
+var sQuotaSharePolicy_idleResourceAssignmentStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "idleResourceAssignmentStrategy", ID: &iQuotaShareIdleResourceAssignmentStrategy, Members: &mQuotaShareIdleResourceAssignmentStrategy, Type: smithy.ShapeTypeEnum})
+var sQuotaSharePreemptionConfiguration_inSharePreemption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inSharePreemption", ID: &iQuotaShareInSharePreemptionState, Members: &mQuotaShareInSharePreemptionState, Type: smithy.ShapeTypeEnum})
+var sQuotaShareResourceSharingConfiguration_strategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "strategy", ID: &iQuotaShareResourceSharingStrategy, Members: &mQuotaShareResourceSharingStrategy, Type: smithy.ShapeTypeEnum})
+var sQuotaShareResourceSharingConfiguration_borrowLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "borrowLimit", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sQuotaShareResourceSharingStrategy_RESERVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESERVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareResourceSharingStrategy_LEND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareResourceSharingStrategy_LEND_AND_BORROW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEND_AND_BORROW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareStatus_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sQuotaShareUtilizationDetail_topCapacityUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topCapacityUtilization", ID: &i_QuotaShareCapacityUtilizationList, Members: &m_QuotaShareCapacityUtilizationList, Type: smithy.ShapeTypeList})
+var sRepositoryCredentials_credentialsParameter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "credentialsParameter", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceRequirement_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceRequirement_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var s_ResourceRequirements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceRequirement, Members: &mResourceRequirement, Type: smithy.ShapeTypeStructure})
+var sResourceType_GPU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GPU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_VCPU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VCPU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceType_MEMORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetryAction_RETRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetryAction_EXIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetryStrategy_attempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attempts", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRetryStrategy_evaluateOnExit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluateOnExit", ID: &i_EvaluateOnExitList, Members: &m_EvaluateOnExitList, Type: smithy.ShapeTypeList})
+var sRuntimePlatform_operatingSystemFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operatingSystemFamily", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRuntimePlatform_cpuArchitecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpuArchitecture", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3FilesVolumeConfiguration_fileSystemArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSystemArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3FilesVolumeConfiguration_rootDirectory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rootDirectory", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3FilesVolumeConfiguration_transitEncryptionPort = smithy.NewStaticSchema(smithy.StaticSchema{Member: "transitEncryptionPort", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sS3FilesVolumeConfiguration_accessPointArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessPointArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSchedulingPolicyDetail_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSchedulingPolicyDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSchedulingPolicyDetail_quotaSharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaSharePolicy", ID: &iQuotaSharePolicy, Members: &mQuotaSharePolicy, Type: smithy.ShapeTypeStructure})
+var sSchedulingPolicyDetail_fairsharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fairsharePolicy", ID: &iFairsharePolicy, Members: &mFairsharePolicy, Type: smithy.ShapeTypeStructure})
+var sSchedulingPolicyDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var s_SchedulingPolicyDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchedulingPolicyDetail, Members: &mSchedulingPolicyDetail, Type: smithy.ShapeTypeStructure})
+var sSchedulingPolicyListingDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SchedulingPolicyListingDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSchedulingPolicyListingDetail, Members: &mSchedulingPolicyListingDetail, Type: smithy.ShapeTypeStructure})
+var sSecret_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSecret_valueFrom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "valueFrom", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SecretList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSecret, Members: &mSecret, Type: smithy.ShapeTypeStructure})
+var sServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceEnvironmentDetail_serviceEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceEnvironmentDetail_serviceEnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceEnvironmentDetail_serviceEnvironmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentType", ID: &iServiceEnvironmentType, Members: &mServiceEnvironmentType, Type: smithy.ShapeTypeEnum})
+var sServiceEnvironmentDetail_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iServiceEnvironmentState, Members: &mServiceEnvironmentState, Type: smithy.ShapeTypeEnum})
+var sServiceEnvironmentDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iServiceEnvironmentStatus, Members: &mServiceEnvironmentStatus, Type: smithy.ShapeTypeEnum})
+var sServiceEnvironmentDetail_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &i_CapacityLimits, Members: &m_CapacityLimits, Type: smithy.ShapeTypeList})
+var sServiceEnvironmentDetail_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var s_ServiceEnvironmentDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceEnvironmentDetail, Members: &mServiceEnvironmentDetail, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentOrder_order = smithy.NewStaticSchema(smithy.StaticSchema{Member: "order", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServiceEnvironmentOrder_serviceEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironment", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ServiceEnvironmentOrders_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceEnvironmentOrder, Members: &mServiceEnvironmentOrder, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentState_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentState_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentStatus_VALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentStatus_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceEnvironmentType_SAGEMAKER_TRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER_TRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobAttemptDetail_serviceResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceResourceId", ID: &iServiceResourceId, Members: &mServiceResourceId, Type: smithy.ShapeTypeStructure})
+var sServiceJobAttemptDetail_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobAttemptDetail_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobAttemptDetail_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ServiceJobAttemptDetails_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceJobAttemptDetail, Members: &mServiceJobAttemptDetail, Type: smithy.ShapeTypeStructure})
+var sServiceJobCapacityUsageDetail_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobCapacityUsageDetail_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_ServiceJobCapacityUsageDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceJobCapacityUsageDetail, Members: &mServiceJobCapacityUsageDetail, Type: smithy.ShapeTypeStructure})
+var sServiceJobCapacityUsageSummary_capacityUnit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUnit", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobCapacityUsageSummary_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Double, Type: smithy.ShapeTypeDouble})
+var s_ServiceJobCapacityUsageSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceJobCapacityUsageSummary, Members: &mServiceJobCapacityUsageSummary, Type: smithy.ShapeTypeStructure})
+var sServiceJobEvaluateOnExit_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iServiceJobRetryAction, Members: &mServiceJobRetryAction, Type: smithy.ShapeTypeEnum})
+var sServiceJobEvaluateOnExit_onStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "onStatusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ServiceJobEvaluateOnExitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceJobEvaluateOnExit, Members: &mServiceJobEvaluateOnExit, Type: smithy.ShapeTypeStructure})
+var sServiceJobPreemptedAttempt_serviceResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceResourceId", ID: &iServiceResourceId, Members: &mServiceResourceId, Type: smithy.ShapeTypeStructure})
+var sServiceJobPreemptedAttempt_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobPreemptedAttempt_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobPreemptedAttempt_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobPreemptionConfiguration_preemptionRetriesBeforeTermination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionRetriesBeforeTermination", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServiceJobPreemptionSummary_preemptedAttemptCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptedAttemptCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServiceJobPreemptionSummary_recentPreemptedAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recentPreemptedAttempts", ID: &i_ServiceJobRecentPreemptedAttemptList, Members: &m_ServiceJobRecentPreemptedAttemptList, Type: smithy.ShapeTypeList})
+var s_ServiceJobRecentPreemptedAttemptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceJobPreemptedAttempt, Members: &mServiceJobPreemptedAttempt, Type: smithy.ShapeTypeStructure})
+var sServiceJobRetryAction_RETRY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RETRY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobRetryAction_EXIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EXIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobRetryStrategy_attempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attempts", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServiceJobRetryStrategy_evaluateOnExit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "evaluateOnExit", ID: &i_ServiceJobEvaluateOnExitList, Members: &m_ServiceJobEvaluateOnExitList, Type: smithy.ShapeTypeList})
+var sServiceJobStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus_RUNNABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus_SCHEDULED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCHEDULED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceJobSummary_latestAttempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestAttempt", ID: &iLatestServiceJobAttempt, Members: &mLatestServiceJobAttempt, Type: smithy.ShapeTypeStructure})
+var sServiceJobSummary_capacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUsage", ID: &i_ServiceJobCapacityUsageSummaryList, Members: &m_ServiceJobCapacityUsageSummaryList, Type: smithy.ShapeTypeList})
+var sServiceJobSummary_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobSummary_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobSummary_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobSummary_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobSummary_scheduledAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobSummary_serviceJobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceJobType", ID: &iServiceJobType, Members: &mServiceJobType, Type: smithy.ShapeTypeEnum})
+var sServiceJobSummary_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobSummary_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iServiceJobStatus, Members: &mServiceJobStatus, Type: smithy.ShapeTypeEnum})
+var sServiceJobSummary_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceJobSummary_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobSummary_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sServiceJobSummary_isTerminated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isTerminated", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_ServiceJobSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iServiceJobSummary, Members: &mServiceJobSummary, Type: smithy.ShapeTypeStructure})
+var sServiceJobTimeout_attemptDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attemptDurationSeconds", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sServiceJobType_SAGEMAKER_TRAINING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER_TRAINING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceResourceId_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &iServiceResourceIdName, Members: &mServiceResourceIdName, Type: smithy.ShapeTypeEnum})
+var sServiceResourceId_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceResourceIdName_SAGEMAKER_TRAINING_JOB_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAGEMAKER_TRAINING_JOB_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sShareAttributes_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sShareAttributes_weightFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weightFactor", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_ShareAttributesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShareAttributes, Members: &mShareAttributes, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TagKeysList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagrisTagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagrisTagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerDependency_containerName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerDependency_condition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "condition", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TaskContainerDependencyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTaskContainerDependency, Members: &mTaskContainerDependency, Type: smithy.ShapeTypeStructure})
+var sTaskContainerDetails_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails_dependsOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependsOn", ID: &i_TaskContainerDependencyList, Members: &m_TaskContainerDependencyList, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails_essential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "essential", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTaskContainerDetails_firelensConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firelensConfiguration", ID: &iFirelensConfiguration, Members: &mFirelensConfiguration, Type: smithy.ShapeTypeStructure})
+var sTaskContainerDetails_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerDetails_linuxParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linuxParameters", ID: &iLinuxParameters, Members: &mLinuxParameters, Type: smithy.ShapeTypeStructure})
+var sTaskContainerDetails_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sTaskContainerDetails_mountPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountPoints", ID: &i_MountPoints, Members: &m_MountPoints, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerDetails_privileged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privileged", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTaskContainerDetails_readonlyRootFilesystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readonlyRootFilesystem", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTaskContainerDetails_repositoryCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryCredentials", ID: &iRepositoryCredentials, Members: &mRepositoryCredentials, Type: smithy.ShapeTypeStructure})
+var sTaskContainerDetails_resourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRequirements", ID: &i_ResourceRequirements, Members: &m_ResourceRequirements, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails_secrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secrets", ID: &i_SecretList, Members: &m_SecretList, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails_ulimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ulimits", ID: &i_Ulimits, Members: &m_Ulimits, Type: smithy.ShapeTypeList})
+var sTaskContainerDetails_user = smithy.NewStaticSchema(smithy.StaticSchema{Member: "user", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerDetails_startTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeout", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sTaskContainerDetails_stopTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopTimeout", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sTaskContainerDetails_exitCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exitCode", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sTaskContainerDetails_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerDetails_logStreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logStreamName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerDetails_networkInterfaces = smithy.NewStaticSchema(smithy.StaticSchema{Member: "networkInterfaces", ID: &i_NetworkInterfaceList, Members: &m_NetworkInterfaceList, Type: smithy.ShapeTypeList})
+var sTaskContainerOverrides_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTaskContainerOverrides_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList})
+var sTaskContainerOverrides_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerOverrides_resourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRequirements", ID: &i_ResourceRequirements, Members: &m_ResourceRequirements, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_command = smithy.NewStaticSchema(smithy.StaticSchema{Member: "command", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_dependsOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependsOn", ID: &i_TaskContainerDependencyList, Members: &m_TaskContainerDependencyList, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_environment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environment", ID: &i_EnvironmentVariables, Members: &m_EnvironmentVariables, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_essential = smithy.NewStaticSchema(smithy.StaticSchema{Member: "essential", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTaskContainerProperties_firelensConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "firelensConfiguration", ID: &iFirelensConfiguration, Members: &mFirelensConfiguration, Type: smithy.ShapeTypeStructure})
+var sTaskContainerProperties_image = smithy.NewStaticSchema(smithy.StaticSchema{Member: "image", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerProperties_linuxParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linuxParameters", ID: &iLinuxParameters, Members: &mLinuxParameters, Type: smithy.ShapeTypeStructure})
+var sTaskContainerProperties_logConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "logConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sTaskContainerProperties_mountPoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountPoints", ID: &i_MountPoints, Members: &m_MountPoints, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerProperties_privileged = smithy.NewStaticSchema(smithy.StaticSchema{Member: "privileged", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTaskContainerProperties_readonlyRootFilesystem = smithy.NewStaticSchema(smithy.StaticSchema{Member: "readonlyRootFilesystem", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sTaskContainerProperties_repositoryCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "repositoryCredentials", ID: &iRepositoryCredentials, Members: &mRepositoryCredentials, Type: smithy.ShapeTypeStructure})
+var sTaskContainerProperties_resourceRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceRequirements", ID: &i_ResourceRequirements, Members: &m_ResourceRequirements, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_secrets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "secrets", ID: &i_SecretList, Members: &m_SecretList, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_ulimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ulimits", ID: &i_Ulimits, Members: &m_Ulimits, Type: smithy.ShapeTypeList})
+var sTaskContainerProperties_user = smithy.NewStaticSchema(smithy.StaticSchema{Member: "user", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTaskContainerProperties_startTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeout", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sTaskContainerProperties_stopTimeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stopTimeout", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sTaskPropertiesOverride_containers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containers", ID: &i_ListTaskContainerOverrides, Members: &m_ListTaskContainerOverrides, Type: smithy.ShapeTypeList})
+var sTerminateJobsErrorDetail_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateJobsErrorDetail_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateJobsErrorDetail_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TerminateJobsErrorDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTerminateJobsErrorDetail, Members: &mTerminateJobsErrorDetail, Type: smithy.ShapeTypeStructure})
+var sTerminateServiceJobsErrorDetail_job = smithy.NewStaticSchema(smithy.StaticSchema{Member: "job", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateServiceJobsErrorDetail_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateServiceJobsErrorDetail_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_TerminateServiceJobsErrorDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTerminateServiceJobsErrorDetail, Members: &mTerminateServiceJobsErrorDetail, Type: smithy.ShapeTypeStructure})
+var sTmpfs_containerPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerPath", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTmpfs_size = smithy.NewStaticSchema(smithy.StaticSchema{Member: "size", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sTmpfs_mountOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountOptions", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_TmpfsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTmpfs, Members: &mTmpfs, Type: smithy.ShapeTypeStructure})
+var sUlimit_hardLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hardLimit", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sUlimit_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUlimit_softLimit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "softLimit", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var s_Ulimits_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUlimit, Members: &mUlimit, Type: smithy.ShapeTypeStructure})
+var sUpdateManagedInstancesProviderConfiguration_propagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propagateTags", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateManagedInstancesProviderConfiguration_infrastructureRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "infrastructureRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateManagedInstancesProviderConfiguration_instanceLaunchTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "instanceLaunchTemplate", ID: &iInstanceLaunchTemplateUpdate, Members: &mInstanceLaunchTemplateUpdate, Type: smithy.ShapeTypeStructure})
+var sUpdateManagedInstancesProviderConfiguration_infrastructureOptimization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "infrastructureOptimization", ID: &iInfrastructureOptimization, Members: &mInfrastructureOptimization, Type: smithy.ShapeTypeStructure})
+var sUpdatePolicy_terminateJobsOnUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "terminateJobsOnUpdate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sUpdatePolicy_jobExecutionTimeoutMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobExecutionTimeoutMinutes", ID: &i_JobExecutionTimeoutMinutes, Type: smithy.ShapeTypeLong})
+var sUserdataType_EKS_BOOTSTRAP_SH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_BOOTSTRAP_SH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUserdataType_EKS_NODEADM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EKS_NODEADM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVolume_host = smithy.NewStaticSchema(smithy.StaticSchema{Member: "host", ID: &iHost, Members: &mHost, Type: smithy.ShapeTypeStructure})
+var sVolume_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sVolume_efsVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "efsVolumeConfiguration", ID: &iEFSVolumeConfiguration, Members: &mEFSVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sVolume_s3filesVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3filesVolumeConfiguration", ID: &iS3FilesVolumeConfiguration, Members: &mS3FilesVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Volumes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iVolume, Members: &mVolume, Type: smithy.ShapeTypeStructure})
+var sCancelJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCancelJobRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCancelJobsRequest_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCancelJobsRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCancelJobsResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCancelJobsResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_CancelJobsErrorDetailList, Members: &m_CancelJobsErrorDetailList, Type: smithy.ShapeTypeList})
+var sCreateComputeEnvironmentRequest_computeEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateComputeEnvironmentRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iCEType, Members: &mCEType, Type: smithy.ShapeTypeEnum})
+var sCreateComputeEnvironmentRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iCEState, Members: &mCEState, Type: smithy.ShapeTypeEnum})
+var sCreateComputeEnvironmentRequest_unmanagedvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unmanagedvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sCreateComputeEnvironmentRequest_computeResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeResources", ID: &iComputeResource, Members: &mComputeResource, Type: smithy.ShapeTypeStructure})
+var sCreateComputeEnvironmentRequest_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateComputeEnvironmentRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sCreateComputeEnvironmentRequest_eksConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksConfiguration", ID: &iEksConfiguration, Members: &mEksConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateComputeEnvironmentRequest_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateComputeEnvironmentRequest_ecsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsSettings", ID: &iEcsSettings, Members: &mEcsSettings, Type: smithy.ShapeTypeStructure})
+var sCreateComputeEnvironmentResponse_computeEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateComputeEnvironmentResponse_computeEnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateConsumableResourceRequest_consumableResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateConsumableResourceRequest_totalQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalQuantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sCreateConsumableResourceRequest_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateConsumableResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sCreateConsumableResourceResponse_consumableResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateConsumableResourceResponse_consumableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateJobQueueRequest_jobQueueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateJobQueueRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iJQState, Members: &mJQState, Type: smithy.ShapeTypeEnum})
+var sCreateJobQueueRequest_schedulingPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPolicyArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateJobQueueRequest_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sCreateJobQueueRequest_computeEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentOrder", ID: &i_ComputeEnvironmentOrders, Members: &m_ComputeEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sCreateJobQueueRequest_serviceEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentOrder", ID: &i_ServiceEnvironmentOrders, Members: &m_ServiceEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sCreateJobQueueRequest_jobQueueType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueType", ID: &iJobQueueType, Members: &mJobQueueType, Type: smithy.ShapeTypeEnum})
+var sCreateJobQueueRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sCreateJobQueueRequest_jobStateTimeLimitActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStateTimeLimitActions", ID: &i_JobStateTimeLimitActions, Members: &m_JobStateTimeLimitActions, Type: smithy.ShapeTypeList})
+var sCreateJobQueueResponse_jobQueueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateJobQueueResponse_jobQueueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateQuotaShareRequest_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateQuotaShareRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateQuotaShareRequest_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &i_QuotaShareCapacityLimits, Members: &m_QuotaShareCapacityLimits, Type: smithy.ShapeTypeList})
+var sCreateQuotaShareRequest_resourceSharingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceSharingConfiguration", ID: &iQuotaShareResourceSharingConfiguration, Members: &mQuotaShareResourceSharingConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateQuotaShareRequest_preemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionConfiguration", ID: &iQuotaSharePreemptionConfiguration, Members: &mQuotaSharePreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateQuotaShareRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iQuotaShareState, Members: &mQuotaShareState, Type: smithy.ShapeTypeEnum})
+var sCreateQuotaShareRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sCreateQuotaShareResponse_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateQuotaShareResponse_quotaShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateSchedulingPolicyRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateSchedulingPolicyRequest_quotaSharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaSharePolicy", ID: &iQuotaSharePolicy, Members: &mQuotaSharePolicy, Type: smithy.ShapeTypeStructure})
+var sCreateSchedulingPolicyRequest_fairsharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fairsharePolicy", ID: &iFairsharePolicy, Members: &mFairsharePolicy, Type: smithy.ShapeTypeStructure})
+var sCreateSchedulingPolicyRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sCreateSchedulingPolicyResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateSchedulingPolicyResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateServiceEnvironmentRequest_serviceEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateServiceEnvironmentRequest_serviceEnvironmentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentType", ID: &iServiceEnvironmentType, Members: &mServiceEnvironmentType, Type: smithy.ShapeTypeEnum})
+var sCreateServiceEnvironmentRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iServiceEnvironmentState, Members: &mServiceEnvironmentState, Type: smithy.ShapeTypeEnum})
+var sCreateServiceEnvironmentRequest_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &i_CapacityLimits, Members: &m_CapacityLimits, Type: smithy.ShapeTypeList})
+var sCreateServiceEnvironmentRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sCreateServiceEnvironmentResponse_serviceEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sCreateServiceEnvironmentResponse_serviceEnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteComputeEnvironmentRequest_computeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironment", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteConsumableResourceRequest_consumableResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResource", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteJobQueueRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteQuotaShareRequest_quotaShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteSchedulingPolicyRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeleteServiceEnvironmentRequest_serviceEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironment", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDeregisterJobDefinitionRequest_jobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinition", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeComputeEnvironmentsRequest_computeEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironments", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sDescribeComputeEnvironmentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDescribeComputeEnvironmentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeComputeEnvironmentsResponse_computeEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironments", ID: &i_ComputeEnvironmentDetailList, Members: &m_ComputeEnvironmentDetailList, Type: smithy.ShapeTypeList})
+var sDescribeComputeEnvironmentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeConsumableResourceRequest_consumableResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResource", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeConsumableResourceResponse_consumableResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeConsumableResourceResponse_consumableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeConsumableResourceResponse_totalQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalQuantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeConsumableResourceResponse_inUseQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inUseQuantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeConsumableResourceResponse_availableQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "availableQuantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeConsumableResourceResponse_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeConsumableResourceResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeConsumableResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sDescribeJobDefinitionsRequest_jobDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitions", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sDescribeJobDefinitionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDescribeJobDefinitionsRequest_jobDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitionName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeJobDefinitionsRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeJobDefinitionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeJobDefinitionsResponse_jobDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitions", ID: &i_JobDefinitionList, Members: &m_JobDefinitionList, Type: smithy.ShapeTypeList})
+var sDescribeJobDefinitionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeJobQueuesRequest_jobQueues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueues", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sDescribeJobQueuesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDescribeJobQueuesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeJobQueuesResponse_jobQueues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueues", ID: &i_JobQueueDetailList, Members: &m_JobQueueDetailList, Type: smithy.ShapeTypeList})
+var sDescribeJobQueuesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeJobsRequest_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sDescribeJobsResponse_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_JobDetailList, Members: &m_JobDetailList, Type: smithy.ShapeTypeList})
+var sDescribeQuotaShareRequest_quotaShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeQuotaShareResponse_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeQuotaShareResponse_quotaShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeQuotaShareResponse_jobQueueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeQuotaShareResponse_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &i_QuotaShareCapacityLimits, Members: &m_QuotaShareCapacityLimits, Type: smithy.ShapeTypeList})
+var sDescribeQuotaShareResponse_resourceSharingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceSharingConfiguration", ID: &iQuotaShareResourceSharingConfiguration, Members: &mQuotaShareResourceSharingConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeQuotaShareResponse_preemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionConfiguration", ID: &iQuotaSharePreemptionConfiguration, Members: &mQuotaSharePreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeQuotaShareResponse_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iQuotaShareState, Members: &mQuotaShareState, Type: smithy.ShapeTypeEnum})
+var sDescribeQuotaShareResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iQuotaShareStatus, Members: &mQuotaShareStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeQuotaShareResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sDescribeSchedulingPoliciesRequest_arns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arns", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sDescribeSchedulingPoliciesResponse_schedulingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPolicies", ID: &i_SchedulingPolicyDetailList, Members: &m_SchedulingPolicyDetailList, Type: smithy.ShapeTypeList})
+var sDescribeServiceEnvironmentsRequest_serviceEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironments", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sDescribeServiceEnvironmentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDescribeServiceEnvironmentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceEnvironmentsResponse_serviceEnvironments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironments", ID: &i_ServiceEnvironmentDetailList, Members: &m_ServiceEnvironmentDetailList, Type: smithy.ShapeTypeList})
+var sDescribeServiceEnvironmentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_attempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attempts", ID: &i_ServiceJobAttemptDetails, Members: &m_ServiceJobAttemptDetails, Type: smithy.ShapeTypeList})
+var sDescribeServiceJobResponse_capacityUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityUsage", ID: &i_ServiceJobCapacityUsageDetailList, Members: &m_ServiceJobCapacityUsageDetailList, Type: smithy.ShapeTypeList})
+var sDescribeServiceJobResponse_createdAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeServiceJobResponse_isTerminated = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isTerminated", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeServiceJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_latestAttempt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestAttempt", ID: &iLatestServiceJobAttempt, Members: &mLatestServiceJobAttempt, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceJobResponse_retryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStrategy", ID: &iServiceJobRetryStrategy, Members: &mServiceJobRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceJobResponse_scheduledAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduledAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeServiceJobResponse_schedulingPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPriority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sDescribeServiceJobResponse_serviceRequestPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRequestPayload", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_serviceJobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceJobType", ID: &iServiceJobType, Members: &mServiceJobType, Type: smithy.ShapeTypeEnum})
+var sDescribeServiceJobResponse_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_preemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionConfiguration", ID: &iServiceJobPreemptionConfiguration, Members: &mServiceJobPreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceJobResponse_preemptionSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionSummary", ID: &iServiceJobPreemptionSummary, Members: &mServiceJobPreemptionSummary, Type: smithy.ShapeTypeStructure})
+var sDescribeServiceJobResponse_startedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeServiceJobResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iServiceJobStatus, Members: &mServiceJobStatus, Type: smithy.ShapeTypeEnum})
+var sDescribeServiceJobResponse_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeServiceJobResponse_stoppedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stoppedAt", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sDescribeServiceJobResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sDescribeServiceJobResponse_timeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutConfig", ID: &iServiceJobTimeout, Members: &mServiceJobTimeout, Type: smithy.ShapeTypeStructure})
+var sGetJobQueueSnapshotRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sGetJobQueueSnapshotResponse_frontOfQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frontOfQueue", ID: &iFrontOfQueueDetail, Members: &mFrontOfQueueDetail, Type: smithy.ShapeTypeStructure})
+var sGetJobQueueSnapshotResponse_frontOfQuotaShares = smithy.NewStaticSchema(smithy.StaticSchema{Member: "frontOfQuotaShares", ID: &iFrontOfQuotaSharesDetail, Members: &mFrontOfQuotaSharesDetail, Type: smithy.ShapeTypeStructure})
+var sGetJobQueueSnapshotResponse_queueUtilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "queueUtilization", ID: &iQueueSnapshotUtilizationDetail, Members: &mQueueSnapshotUtilizationDetail, Type: smithy.ShapeTypeStructure})
+var sListConsumableResourcesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListConsumableResourcesFilterList, Members: &m_ListConsumableResourcesFilterList, Type: smithy.ShapeTypeList})
+var sListConsumableResourcesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sListConsumableResourcesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListConsumableResourcesResponse_consumableResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResources", ID: &i_ConsumableResourceSummaryList, Members: &m_ConsumableResourceSummaryList, Type: smithy.ShapeTypeList})
+var sListConsumableResourcesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceRequest_consumableResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResource", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListJobsByConsumableResourceFilterList, Members: &m_ListJobsByConsumableResourceFilterList, Type: smithy.ShapeTypeList})
+var sListJobsByConsumableResourceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sListJobsByConsumableResourceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsByConsumableResourceResponse_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_ListJobsByConsumableResourceSummaryList, Members: &m_ListJobsByConsumableResourceSummaryList, Type: smithy.ShapeTypeList})
+var sListJobsByConsumableResourceResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsRequest_arrayJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayJobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsRequest_multiNodeJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "multiNodeJobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsRequest_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sListJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sListJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListJobsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListJobsFilterList, Members: &m_ListJobsFilterList, Type: smithy.ShapeTypeList})
+var sListJobsResponse_jobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobSummaryList", ID: &i_JobSummaryList, Members: &m_JobSummaryList, Type: smithy.ShapeTypeList})
+var sListJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListQuotaSharesRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListQuotaSharesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sListQuotaSharesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListQuotaSharesResponse_quotaShares = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShares", ID: &i_QuotaShareList, Members: &m_QuotaShareList, Type: smithy.ShapeTypeList})
+var sListQuotaSharesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSchedulingPoliciesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sListSchedulingPoliciesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSchedulingPoliciesResponse_schedulingPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPolicies", ID: &i_SchedulingPolicyListingDetailList, Members: &m_SchedulingPolicyListingDetailList, Type: smithy.ShapeTypeList})
+var sListSchedulingPoliciesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListServiceJobsRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListServiceJobsRequest_jobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStatus", ID: &iServiceJobStatus, Members: &mServiceJobStatus, Type: smithy.ShapeTypeEnum})
+var sListServiceJobsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sListServiceJobsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListServiceJobsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_ListJobsFilterList, Members: &m_ListJobsFilterList, Type: smithy.ShapeTypeList})
+var sListServiceJobsResponse_jobSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobSummaryList", ID: &i_ServiceJobSummaryList, Members: &m_ServiceJobSummaryList, Type: smithy.ShapeTypeList})
+var sListServiceJobsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sRegisterJobDefinitionRequest_jobDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitionName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRegisterJobDefinitionRequest_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iJobDefinitionType, Members: &mJobDefinitionType, Type: smithy.ShapeTypeEnum})
+var sRegisterJobDefinitionRequest_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sRegisterJobDefinitionRequest_schedulingPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPriority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRegisterJobDefinitionRequest_containerProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerProperties", ID: &iContainerProperties, Members: &mContainerProperties, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionRequest_nodeProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeProperties", ID: &iNodeProperties, Members: &mNodeProperties, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionRequest_retryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStrategy", ID: &iRetryStrategy, Members: &mRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionRequest_propagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propagateTags", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRegisterJobDefinitionRequest_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iJobTimeout, Members: &mJobTimeout, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sRegisterJobDefinitionRequest_platformCapabilities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platformCapabilities", ID: &i_PlatformCapabilityList, Members: &m_PlatformCapabilityList, Type: smithy.ShapeTypeList})
+var sRegisterJobDefinitionRequest_eksProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksProperties", ID: &iEksProperties, Members: &mEksProperties, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionRequest_ecsProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsProperties", ID: &iEcsProperties, Members: &mEcsProperties, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionRequest_consumableResourceProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceProperties", ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var sRegisterJobDefinitionResponse_jobDefinitionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitionName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRegisterJobDefinitionResponse_jobDefinitionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinitionArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRegisterJobDefinitionResponse_revision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revision", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSubmitJobRequest_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitJobRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitJobRequest_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitJobRequest_schedulingPriorityOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPriorityOverride", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSubmitJobRequest_arrayProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arrayProperties", ID: &iArrayProperties, Members: &mArrayProperties, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest_dependsOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependsOn", ID: &i_JobDependencyList, Members: &m_JobDependencyList, Type: smithy.ShapeTypeList})
+var sSubmitJobRequest_jobDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobDefinition", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitJobRequest_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_ParametersMap, Members: &m_ParametersMap, Type: smithy.ShapeTypeMap})
+var sSubmitJobRequest_containerOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerOverrides", ID: &iContainerOverrides, Members: &mContainerOverrides, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest_nodeOverrides = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nodeOverrides", ID: &iNodeOverrides, Members: &mNodeOverrides, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest_retryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStrategy", ID: &iRetryStrategy, Members: &mRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest_propagateTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "propagateTags", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sSubmitJobRequest_timeout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeout", ID: &iJobTimeout, Members: &mJobTimeout, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sSubmitJobRequest_eksPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksPropertiesOverride", ID: &iEksPropertiesOverride, Members: &mEksPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest_ecsPropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsPropertiesOverride", ID: &iEcsPropertiesOverride, Members: &mEcsPropertiesOverride, Type: smithy.ShapeTypeStructure})
+var sSubmitJobRequest_consumableResourcePropertiesOverride = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourcePropertiesOverride", ID: &iConsumableResourceProperties, Members: &mConsumableResourceProperties, Type: smithy.ShapeTypeStructure})
+var sSubmitJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitJobResponse_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobRequest_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobRequest_retryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryStrategy", ID: &iServiceJobRetryStrategy, Members: &mServiceJobRetryStrategy, Type: smithy.ShapeTypeStructure})
+var sSubmitServiceJobRequest_schedulingPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPriority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSubmitServiceJobRequest_serviceRequestPayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRequestPayload", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobRequest_serviceJobType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceJobType", ID: &iServiceJobType, Members: &mServiceJobType, Type: smithy.ShapeTypeEnum})
+var sSubmitServiceJobRequest_shareIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shareIdentifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobRequest_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobRequest_preemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionConfiguration", ID: &iServiceJobPreemptionConfiguration, Members: &mServiceJobPreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sSubmitServiceJobRequest_timeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutConfig", ID: &iServiceJobTimeout, Members: &mServiceJobTimeout, Type: smithy.ShapeTypeStructure})
+var sSubmitServiceJobRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sSubmitServiceJobRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobResponse_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSubmitServiceJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagrisTagsMap, Members: &m_TagrisTagsMap, Type: smithy.ShapeTypeMap})
+var sTerminateJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateJobRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateJobsRequest_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTerminateJobsRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateJobsResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTerminateJobsResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_TerminateJobsErrorDetailList, Members: &m_TerminateJobsErrorDetailList, Type: smithy.ShapeTypeList})
+var sTerminateServiceJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateServiceJobRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateServiceJobsRequest_jobs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobs", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTerminateServiceJobsRequest_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTerminateServiceJobsResponse_successful = smithy.NewStaticSchema(smithy.StaticSchema{Member: "successful", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sTerminateServiceJobsResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_TerminateServiceJobsErrorDetailList, Members: &m_TerminateServiceJobsErrorDetailList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_String, Traits: &t51, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeysList, Members: &m_TagKeysList, Traits: &t52, Type: smithy.ShapeTypeList})
+var sUpdateComputeEnvironmentRequest_computeEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironment", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateComputeEnvironmentRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iCEState, Members: &mCEState, Type: smithy.ShapeTypeEnum})
+var sUpdateComputeEnvironmentRequest_unmanagedvCpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unmanagedvCpus", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sUpdateComputeEnvironmentRequest_computeResources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeResources", ID: &iComputeResourceUpdate, Members: &mComputeResourceUpdate, Type: smithy.ShapeTypeStructure})
+var sUpdateComputeEnvironmentRequest_serviceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceRole", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateComputeEnvironmentRequest_updatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "updatePolicy", ID: &iUpdatePolicy, Members: &mUpdatePolicy, Type: smithy.ShapeTypeStructure})
+var sUpdateComputeEnvironmentRequest_context = smithy.NewStaticSchema(smithy.StaticSchema{Member: "context", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateComputeEnvironmentRequest_ecsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ecsSettings", ID: &iEcsSettings, Members: &mEcsSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateComputeEnvironmentRequest_eksConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eksConfiguration", ID: &iEksConfigurationUpdate, Members: &mEksConfigurationUpdate, Type: smithy.ShapeTypeStructure})
+var sUpdateComputeEnvironmentResponse_computeEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateComputeEnvironmentResponse_computeEnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateConsumableResourceRequest_consumableResource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResource", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateConsumableResourceRequest_operation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operation", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateConsumableResourceRequest_quantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sUpdateConsumableResourceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientRequestToken, Type: smithy.ShapeTypeString})
+var sUpdateConsumableResourceResponse_consumableResourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateConsumableResourceResponse_consumableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "consumableResourceArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateConsumableResourceResponse_totalQuantity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "totalQuantity", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sUpdateJobQueueRequest_jobQueue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateJobQueueRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iJQState, Members: &mJQState, Type: smithy.ShapeTypeEnum})
+var sUpdateJobQueueRequest_schedulingPolicyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPolicyArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateJobQueueRequest_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sUpdateJobQueueRequest_computeEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "computeEnvironmentOrder", ID: &i_ComputeEnvironmentOrders, Members: &m_ComputeEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sUpdateJobQueueRequest_serviceEnvironmentOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentOrder", ID: &i_ServiceEnvironmentOrders, Members: &m_ServiceEnvironmentOrders, Type: smithy.ShapeTypeList})
+var sUpdateJobQueueRequest_jobStateTimeLimitActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobStateTimeLimitActions", ID: &i_JobStateTimeLimitActions, Members: &m_JobStateTimeLimitActions, Type: smithy.ShapeTypeList})
+var sUpdateJobQueueResponse_jobQueueName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateJobQueueResponse_jobQueueArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobQueueArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateQuotaShareRequest_quotaShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateQuotaShareRequest_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &i_QuotaShareCapacityLimits, Members: &m_QuotaShareCapacityLimits, Type: smithy.ShapeTypeList})
+var sUpdateQuotaShareRequest_resourceSharingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceSharingConfiguration", ID: &iQuotaShareResourceSharingConfiguration, Members: &mQuotaShareResourceSharingConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateQuotaShareRequest_preemptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preemptionConfiguration", ID: &iQuotaSharePreemptionConfiguration, Members: &mQuotaSharePreemptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateQuotaShareRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iQuotaShareState, Members: &mQuotaShareState, Type: smithy.ShapeTypeEnum})
+var sUpdateQuotaShareResponse_quotaShareName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateQuotaShareResponse_quotaShareArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaShareArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateSchedulingPolicyRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateSchedulingPolicyRequest_quotaSharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaSharePolicy", ID: &iQuotaSharePolicy, Members: &mQuotaSharePolicy, Type: smithy.ShapeTypeStructure})
+var sUpdateSchedulingPolicyRequest_fairsharePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fairsharePolicy", ID: &iFairsharePolicy, Members: &mFairsharePolicy, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceEnvironmentRequest_serviceEnvironment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironment", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateServiceEnvironmentRequest_state = smithy.NewStaticSchema(smithy.StaticSchema{Member: "state", ID: &iServiceEnvironmentState, Members: &mServiceEnvironmentState, Type: smithy.ShapeTypeEnum})
+var sUpdateServiceEnvironmentRequest_capacityLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "capacityLimits", ID: &i_CapacityLimits, Members: &m_CapacityLimits, Type: smithy.ShapeTypeList})
+var sUpdateServiceEnvironmentResponse_serviceEnvironmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateServiceEnvironmentResponse_serviceEnvironmentArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceEnvironmentArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateServiceJobRequest_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateServiceJobRequest_schedulingPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedulingPriority", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sUpdateServiceJobResponse_jobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateServiceJobResponse_jobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateServiceJobResponse_jobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobId", ID: &i_String, Type: smithy.ShapeTypeString})
+
+var CancelJob = &sCancelJob
+
+var CancelJobs = &sCancelJobs
+
+var CreateComputeEnvironment = &sCreateComputeEnvironment
+
+var CreateConsumableResource = &sCreateConsumableResource
+
+var CreateJobQueue = &sCreateJobQueue
+
+var CreateQuotaShare = &sCreateQuotaShare
+
+var CreateSchedulingPolicy = &sCreateSchedulingPolicy
+
+var CreateServiceEnvironment = &sCreateServiceEnvironment
+
+var DeleteComputeEnvironment = &sDeleteComputeEnvironment
+
+var DeleteConsumableResource = &sDeleteConsumableResource
+
+var DeleteJobQueue = &sDeleteJobQueue
+
+var DeleteQuotaShare = &sDeleteQuotaShare
+
+var DeleteSchedulingPolicy = &sDeleteSchedulingPolicy
+
+var DeleteServiceEnvironment = &sDeleteServiceEnvironment
+
+var DeregisterJobDefinition = &sDeregisterJobDefinition
+
+var DescribeComputeEnvironments = &sDescribeComputeEnvironments
+
+var DescribeConsumableResource = &sDescribeConsumableResource
+
+var DescribeJobDefinitions = &sDescribeJobDefinitions
+
+var DescribeJobQueues = &sDescribeJobQueues
+
+var DescribeJobs = &sDescribeJobs
+
+var DescribeQuotaShare = &sDescribeQuotaShare
+
+var DescribeSchedulingPolicies = &sDescribeSchedulingPolicies
+
+var DescribeServiceEnvironments = &sDescribeServiceEnvironments
+
+var DescribeServiceJob = &sDescribeServiceJob
+
+var GetJobQueueSnapshot = &sGetJobQueueSnapshot
+
+var ListConsumableResources = &sListConsumableResources
+
+var ListJobs = &sListJobs
+
+var ListJobsByConsumableResource = &sListJobsByConsumableResource
+
+var ListQuotaShares = &sListQuotaShares
+
+var ListSchedulingPolicies = &sListSchedulingPolicies
+
+var ListServiceJobs = &sListServiceJobs
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterJobDefinition = &sRegisterJobDefinition
+
+var SubmitJob = &sSubmitJob
+
+var SubmitServiceJob = &sSubmitServiceJob
+
+var TagResource = &sTagResource
+
+var TerminateJob = &sTerminateJob
+
+var TerminateJobs = &sTerminateJobs
+
+var TerminateServiceJob = &sTerminateServiceJob
+
+var TerminateServiceJobs = &sTerminateServiceJobs
+
+var UntagResource = &sUntagResource
+
+var UpdateComputeEnvironment = &sUpdateComputeEnvironment
+
+var UpdateConsumableResource = &sUpdateConsumableResource
+
+var UpdateJobQueue = &sUpdateJobQueue
+
+var UpdateQuotaShare = &sUpdateQuotaShare
+
+var UpdateSchedulingPolicy = &sUpdateSchedulingPolicy
+
+var UpdateServiceEnvironment = &sUpdateServiceEnvironment
+
+var UpdateServiceJob = &sUpdateServiceJob
+
+var _AWSBatchV20160810 = &s_AWSBatchV20160810
+
+var ArrayJobDependency = &sArrayJobDependency
+var ArrayJobDependency_N_TO_N = &sArrayJobDependency_N_TO_N
+var ArrayJobDependency_SEQUENTIAL = &sArrayJobDependency_SEQUENTIAL
+
+var _ArrayJobStatusSummary = &s_ArrayJobStatusSummary
+var _ArrayJobStatusSummary_key = &s_ArrayJobStatusSummary_key
+var _ArrayJobStatusSummary_value = &s_ArrayJobStatusSummary_value
+
+var ArrayProperties = &sArrayProperties
+var ArrayProperties_size = &sArrayProperties_size
+
+var ArrayPropertiesDetail = &sArrayPropertiesDetail
+var ArrayPropertiesDetail_statusSummary = &sArrayPropertiesDetail_statusSummary
+var ArrayPropertiesDetail_statusSummaryLastUpdatedAt = &sArrayPropertiesDetail_statusSummaryLastUpdatedAt
+var ArrayPropertiesDetail_size = &sArrayPropertiesDetail_size
+var ArrayPropertiesDetail_index = &sArrayPropertiesDetail_index
+
+var ArrayPropertiesSummary = &sArrayPropertiesSummary
+var ArrayPropertiesSummary_size = &sArrayPropertiesSummary_size
+var ArrayPropertiesSummary_index = &sArrayPropertiesSummary_index
+var ArrayPropertiesSummary_statusSummary = &sArrayPropertiesSummary_statusSummary
+var ArrayPropertiesSummary_statusSummaryLastUpdatedAt = &sArrayPropertiesSummary_statusSummaryLastUpdatedAt
+
+var AssignPublicIp = &sAssignPublicIp
+var AssignPublicIp_ENABLED = &sAssignPublicIp_ENABLED
+var AssignPublicIp_DISABLED = &sAssignPublicIp_DISABLED
+
+var AttemptContainerDetail = &sAttemptContainerDetail
+var AttemptContainerDetail_containerInstanceArn = &sAttemptContainerDetail_containerInstanceArn
+var AttemptContainerDetail_taskArn = &sAttemptContainerDetail_taskArn
+var AttemptContainerDetail_exitCode = &sAttemptContainerDetail_exitCode
+var AttemptContainerDetail_reason = &sAttemptContainerDetail_reason
+var AttemptContainerDetail_logStreamName = &sAttemptContainerDetail_logStreamName
+var AttemptContainerDetail_networkInterfaces = &sAttemptContainerDetail_networkInterfaces
+
+var AttemptDetail = &sAttemptDetail
+var AttemptDetail_container = &sAttemptDetail_container
+var AttemptDetail_startedAt = &sAttemptDetail_startedAt
+var AttemptDetail_stoppedAt = &sAttemptDetail_stoppedAt
+var AttemptDetail_statusReason = &sAttemptDetail_statusReason
+var AttemptDetail_taskProperties = &sAttemptDetail_taskProperties
+
+var _AttemptDetails = &s_AttemptDetails
+var _AttemptDetails_member = &s_AttemptDetails_member
+
+var AttemptEcsTaskDetails = &sAttemptEcsTaskDetails
+var AttemptEcsTaskDetails_containerInstanceArn = &sAttemptEcsTaskDetails_containerInstanceArn
+var AttemptEcsTaskDetails_taskArn = &sAttemptEcsTaskDetails_taskArn
+var AttemptEcsTaskDetails_containers = &sAttemptEcsTaskDetails_containers
+
+var AttemptTaskContainerDetails = &sAttemptTaskContainerDetails
+var AttemptTaskContainerDetails_exitCode = &sAttemptTaskContainerDetails_exitCode
+var AttemptTaskContainerDetails_name = &sAttemptTaskContainerDetails_name
+var AttemptTaskContainerDetails_reason = &sAttemptTaskContainerDetails_reason
+var AttemptTaskContainerDetails_logStreamName = &sAttemptTaskContainerDetails_logStreamName
+var AttemptTaskContainerDetails_networkInterfaces = &sAttemptTaskContainerDetails_networkInterfaces
+
+var _Boolean = &s_Boolean
+
+var CancelJobsErrorDetail = &sCancelJobsErrorDetail
+var CancelJobsErrorDetail_job = &sCancelJobsErrorDetail_job
+var CancelJobsErrorDetail_code = &sCancelJobsErrorDetail_code
+var CancelJobsErrorDetail_message = &sCancelJobsErrorDetail_message
+
+var _CancelJobsErrorDetailList = &s_CancelJobsErrorDetailList
+var _CancelJobsErrorDetailList_member = &s_CancelJobsErrorDetailList_member
+
+var CapacityLimit = &sCapacityLimit
+var CapacityLimit_maxCapacity = &sCapacityLimit_maxCapacity
+var CapacityLimit_capacityUnit = &sCapacityLimit_capacityUnit
+
+var _CapacityLimits = &s_CapacityLimits
+var _CapacityLimits_member = &s_CapacityLimits_member
+
+var CapacityReservationRequest = &sCapacityReservationRequest
+var CapacityReservationRequest_reservationGroupArn = &sCapacityReservationRequest_reservationGroupArn
+var CapacityReservationRequest_reservationPreference = &sCapacityReservationRequest_reservationPreference
+
+var CEState = &sCEState
+var CEState_ENABLED = &sCEState_ENABLED
+var CEState_DISABLED = &sCEState_DISABLED
+
+var CEStatus = &sCEStatus
+var CEStatus_CREATING = &sCEStatus_CREATING
+var CEStatus_UPDATING = &sCEStatus_UPDATING
+var CEStatus_DELETING = &sCEStatus_DELETING
+var CEStatus_DELETED = &sCEStatus_DELETED
+var CEStatus_VALID = &sCEStatus_VALID
+var CEStatus_INVALID = &sCEStatus_INVALID
+
+var CEType = &sCEType
+var CEType_MANAGED = &sCEType_MANAGED
+var CEType_UNMANAGED = &sCEType_UNMANAGED
+
+var ClientException = &sClientException
+var ClientException_message = &sClientException_message
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var ComputeEnvironmentDetail = &sComputeEnvironmentDetail
+var ComputeEnvironmentDetail_computeEnvironmentName = &sComputeEnvironmentDetail_computeEnvironmentName
+var ComputeEnvironmentDetail_computeEnvironmentArn = &sComputeEnvironmentDetail_computeEnvironmentArn
+var ComputeEnvironmentDetail_unmanagedvCpus = &sComputeEnvironmentDetail_unmanagedvCpus
+var ComputeEnvironmentDetail_ecsClusterArn = &sComputeEnvironmentDetail_ecsClusterArn
+var ComputeEnvironmentDetail_tags = &sComputeEnvironmentDetail_tags
+var ComputeEnvironmentDetail_type = &sComputeEnvironmentDetail_type
+var ComputeEnvironmentDetail_state = &sComputeEnvironmentDetail_state
+var ComputeEnvironmentDetail_status = &sComputeEnvironmentDetail_status
+var ComputeEnvironmentDetail_statusReason = &sComputeEnvironmentDetail_statusReason
+var ComputeEnvironmentDetail_computeResources = &sComputeEnvironmentDetail_computeResources
+var ComputeEnvironmentDetail_serviceRole = &sComputeEnvironmentDetail_serviceRole
+var ComputeEnvironmentDetail_updatePolicy = &sComputeEnvironmentDetail_updatePolicy
+var ComputeEnvironmentDetail_eksConfiguration = &sComputeEnvironmentDetail_eksConfiguration
+var ComputeEnvironmentDetail_containerOrchestrationType = &sComputeEnvironmentDetail_containerOrchestrationType
+var ComputeEnvironmentDetail_uuid = &sComputeEnvironmentDetail_uuid
+var ComputeEnvironmentDetail_context = &sComputeEnvironmentDetail_context
+var ComputeEnvironmentDetail_ecsSettings = &sComputeEnvironmentDetail_ecsSettings
+
+var _ComputeEnvironmentDetailList = &s_ComputeEnvironmentDetailList
+var _ComputeEnvironmentDetailList_member = &s_ComputeEnvironmentDetailList_member
+
+var ComputeEnvironmentOrder = &sComputeEnvironmentOrder
+var ComputeEnvironmentOrder_order = &sComputeEnvironmentOrder_order
+var ComputeEnvironmentOrder_computeEnvironment = &sComputeEnvironmentOrder_computeEnvironment
+
+var _ComputeEnvironmentOrders = &s_ComputeEnvironmentOrders
+var _ComputeEnvironmentOrders_member = &s_ComputeEnvironmentOrders_member
+
+var ComputeResource = &sComputeResource
+var ComputeResource_type = &sComputeResource_type
+var ComputeResource_allocationStrategy = &sComputeResource_allocationStrategy
+var ComputeResource_minvCpus = &sComputeResource_minvCpus
+var ComputeResource_maxvCpus = &sComputeResource_maxvCpus
+var ComputeResource_desiredvCpus = &sComputeResource_desiredvCpus
+var ComputeResource_instanceTypes = &sComputeResource_instanceTypes
+var ComputeResource_imageId = &sComputeResource_imageId
+var ComputeResource_subnets = &sComputeResource_subnets
+var ComputeResource_securityGroupIds = &sComputeResource_securityGroupIds
+var ComputeResource_ec2KeyPair = &sComputeResource_ec2KeyPair
+var ComputeResource_instanceRole = &sComputeResource_instanceRole
+var ComputeResource_tags = &sComputeResource_tags
+var ComputeResource_placementGroup = &sComputeResource_placementGroup
+var ComputeResource_bidPercentage = &sComputeResource_bidPercentage
+var ComputeResource_spotIamFleetRole = &sComputeResource_spotIamFleetRole
+var ComputeResource_launchTemplate = &sComputeResource_launchTemplate
+var ComputeResource_ec2Configuration = &sComputeResource_ec2Configuration
+var ComputeResource_scalingPolicy = &sComputeResource_scalingPolicy
+var ComputeResource_managedInstancesProvider = &sComputeResource_managedInstancesProvider
+var ComputeResource_capacityTags = &sComputeResource_capacityTags
+
+var ComputeResourceUpdate = &sComputeResourceUpdate
+var ComputeResourceUpdate_minvCpus = &sComputeResourceUpdate_minvCpus
+var ComputeResourceUpdate_maxvCpus = &sComputeResourceUpdate_maxvCpus
+var ComputeResourceUpdate_desiredvCpus = &sComputeResourceUpdate_desiredvCpus
+var ComputeResourceUpdate_subnets = &sComputeResourceUpdate_subnets
+var ComputeResourceUpdate_securityGroupIds = &sComputeResourceUpdate_securityGroupIds
+var ComputeResourceUpdate_allocationStrategy = &sComputeResourceUpdate_allocationStrategy
+var ComputeResourceUpdate_instanceTypes = &sComputeResourceUpdate_instanceTypes
+var ComputeResourceUpdate_ec2KeyPair = &sComputeResourceUpdate_ec2KeyPair
+var ComputeResourceUpdate_instanceRole = &sComputeResourceUpdate_instanceRole
+var ComputeResourceUpdate_tags = &sComputeResourceUpdate_tags
+var ComputeResourceUpdate_placementGroup = &sComputeResourceUpdate_placementGroup
+var ComputeResourceUpdate_bidPercentage = &sComputeResourceUpdate_bidPercentage
+var ComputeResourceUpdate_launchTemplate = &sComputeResourceUpdate_launchTemplate
+var ComputeResourceUpdate_ec2Configuration = &sComputeResourceUpdate_ec2Configuration
+var ComputeResourceUpdate_updateToLatestImageVersion = &sComputeResourceUpdate_updateToLatestImageVersion
+var ComputeResourceUpdate_type = &sComputeResourceUpdate_type
+var ComputeResourceUpdate_imageId = &sComputeResourceUpdate_imageId
+var ComputeResourceUpdate_scalingPolicy = &sComputeResourceUpdate_scalingPolicy
+var ComputeResourceUpdate_managedInstancesProvider = &sComputeResourceUpdate_managedInstancesProvider
+var ComputeResourceUpdate_capacityTags = &sComputeResourceUpdate_capacityTags
+
+var ComputeScalingPolicy = &sComputeScalingPolicy
+var ComputeScalingPolicy_minScaleDownDelayMinutes = &sComputeScalingPolicy_minScaleDownDelayMinutes
+
+var _ConsumableResourceList = &s_ConsumableResourceList
+var _ConsumableResourceList_member = &s_ConsumableResourceList_member
+
+var ConsumableResourceProperties = &sConsumableResourceProperties
+var ConsumableResourceProperties_consumableResourceList = &sConsumableResourceProperties_consumableResourceList
+
+var ConsumableResourceRequirement = &sConsumableResourceRequirement
+var ConsumableResourceRequirement_consumableResource = &sConsumableResourceRequirement_consumableResource
+var ConsumableResourceRequirement_quantity = &sConsumableResourceRequirement_quantity
+
+var ConsumableResourceSummary = &sConsumableResourceSummary
+var ConsumableResourceSummary_consumableResourceArn = &sConsumableResourceSummary_consumableResourceArn
+var ConsumableResourceSummary_consumableResourceName = &sConsumableResourceSummary_consumableResourceName
+var ConsumableResourceSummary_totalQuantity = &sConsumableResourceSummary_totalQuantity
+var ConsumableResourceSummary_inUseQuantity = &sConsumableResourceSummary_inUseQuantity
+var ConsumableResourceSummary_resourceType = &sConsumableResourceSummary_resourceType
+
+var _ConsumableResourceSummaryList = &s_ConsumableResourceSummaryList
+var _ConsumableResourceSummaryList_member = &s_ConsumableResourceSummaryList_member
+
+var ContainerDetail = &sContainerDetail
+var ContainerDetail_image = &sContainerDetail_image
+var ContainerDetail_vcpus = &sContainerDetail_vcpus
+var ContainerDetail_memory = &sContainerDetail_memory
+var ContainerDetail_command = &sContainerDetail_command
+var ContainerDetail_jobRoleArn = &sContainerDetail_jobRoleArn
+var ContainerDetail_executionRoleArn = &sContainerDetail_executionRoleArn
+var ContainerDetail_volumes = &sContainerDetail_volumes
+var ContainerDetail_environment = &sContainerDetail_environment
+var ContainerDetail_mountPoints = &sContainerDetail_mountPoints
+var ContainerDetail_readonlyRootFilesystem = &sContainerDetail_readonlyRootFilesystem
+var ContainerDetail_ulimits = &sContainerDetail_ulimits
+var ContainerDetail_privileged = &sContainerDetail_privileged
+var ContainerDetail_user = &sContainerDetail_user
+var ContainerDetail_exitCode = &sContainerDetail_exitCode
+var ContainerDetail_reason = &sContainerDetail_reason
+var ContainerDetail_containerInstanceArn = &sContainerDetail_containerInstanceArn
+var ContainerDetail_taskArn = &sContainerDetail_taskArn
+var ContainerDetail_logStreamName = &sContainerDetail_logStreamName
+var ContainerDetail_instanceType = &sContainerDetail_instanceType
+var ContainerDetail_networkInterfaces = &sContainerDetail_networkInterfaces
+var ContainerDetail_resourceRequirements = &sContainerDetail_resourceRequirements
+var ContainerDetail_linuxParameters = &sContainerDetail_linuxParameters
+var ContainerDetail_logConfiguration = &sContainerDetail_logConfiguration
+var ContainerDetail_secrets = &sContainerDetail_secrets
+var ContainerDetail_networkConfiguration = &sContainerDetail_networkConfiguration
+var ContainerDetail_fargatePlatformConfiguration = &sContainerDetail_fargatePlatformConfiguration
+var ContainerDetail_ephemeralStorage = &sContainerDetail_ephemeralStorage
+var ContainerDetail_runtimePlatform = &sContainerDetail_runtimePlatform
+var ContainerDetail_repositoryCredentials = &sContainerDetail_repositoryCredentials
+var ContainerDetail_enableExecuteCommand = &sContainerDetail_enableExecuteCommand
+
+var ContainerInsights = &sContainerInsights
+var ContainerInsights_ENABLED = &sContainerInsights_ENABLED
+var ContainerInsights_ENHANCED = &sContainerInsights_ENHANCED
+var ContainerInsights_DISABLED = &sContainerInsights_DISABLED
+
+var ContainerOverrides = &sContainerOverrides
+var ContainerOverrides_vcpus = &sContainerOverrides_vcpus
+var ContainerOverrides_memory = &sContainerOverrides_memory
+var ContainerOverrides_command = &sContainerOverrides_command
+var ContainerOverrides_instanceType = &sContainerOverrides_instanceType
+var ContainerOverrides_environment = &sContainerOverrides_environment
+var ContainerOverrides_resourceRequirements = &sContainerOverrides_resourceRequirements
+
+var ContainerProperties = &sContainerProperties
+var ContainerProperties_image = &sContainerProperties_image
+var ContainerProperties_vcpus = &sContainerProperties_vcpus
+var ContainerProperties_memory = &sContainerProperties_memory
+var ContainerProperties_command = &sContainerProperties_command
+var ContainerProperties_jobRoleArn = &sContainerProperties_jobRoleArn
+var ContainerProperties_executionRoleArn = &sContainerProperties_executionRoleArn
+var ContainerProperties_volumes = &sContainerProperties_volumes
+var ContainerProperties_environment = &sContainerProperties_environment
+var ContainerProperties_mountPoints = &sContainerProperties_mountPoints
+var ContainerProperties_readonlyRootFilesystem = &sContainerProperties_readonlyRootFilesystem
+var ContainerProperties_privileged = &sContainerProperties_privileged
+var ContainerProperties_ulimits = &sContainerProperties_ulimits
+var ContainerProperties_user = &sContainerProperties_user
+var ContainerProperties_instanceType = &sContainerProperties_instanceType
+var ContainerProperties_resourceRequirements = &sContainerProperties_resourceRequirements
+var ContainerProperties_linuxParameters = &sContainerProperties_linuxParameters
+var ContainerProperties_logConfiguration = &sContainerProperties_logConfiguration
+var ContainerProperties_secrets = &sContainerProperties_secrets
+var ContainerProperties_networkConfiguration = &sContainerProperties_networkConfiguration
+var ContainerProperties_fargatePlatformConfiguration = &sContainerProperties_fargatePlatformConfiguration
+var ContainerProperties_enableExecuteCommand = &sContainerProperties_enableExecuteCommand
+var ContainerProperties_ephemeralStorage = &sContainerProperties_ephemeralStorage
+var ContainerProperties_runtimePlatform = &sContainerProperties_runtimePlatform
+var ContainerProperties_repositoryCredentials = &sContainerProperties_repositoryCredentials
+
+var ContainerSummary = &sContainerSummary
+var ContainerSummary_exitCode = &sContainerSummary_exitCode
+var ContainerSummary_reason = &sContainerSummary_reason
+
+var CRAllocationStrategy = &sCRAllocationStrategy
+var CRAllocationStrategy_BEST_FIT = &sCRAllocationStrategy_BEST_FIT
+var CRAllocationStrategy_BEST_FIT_PROGRESSIVE = &sCRAllocationStrategy_BEST_FIT_PROGRESSIVE
+var CRAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED = &sCRAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED
+var CRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED = &sCRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED
+var CRAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED = &sCRAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED
+var CRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED = &sCRAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED
+
+var CRType = &sCRType
+var CRType_EC2 = &sCRType_EC2
+var CRType_SPOT = &sCRType_SPOT
+var CRType_FARGATE = &sCRType_FARGATE
+var CRType_FARGATE_SPOT = &sCRType_FARGATE_SPOT
+var CRType_ECS_MANAGED_INSTANCES = &sCRType_ECS_MANAGED_INSTANCES
+
+var CRUpdateAllocationStrategy = &sCRUpdateAllocationStrategy
+var CRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE = &sCRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE
+var CRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED = &sCRUpdateAllocationStrategy_BEST_FIT_PROGRESSIVE_ORDERED
+var CRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED = &sCRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED
+var CRUpdateAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED = &sCRUpdateAllocationStrategy_SPOT_PRICE_CAPACITY_OPTIMIZED
+var CRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED = &sCRUpdateAllocationStrategy_SPOT_CAPACITY_OPTIMIZED_PRIORITIZED
+
+var Device = &sDevice
+var Device_hostPath = &sDevice_hostPath
+var Device_containerPath = &sDevice_containerPath
+var Device_permissions = &sDevice_permissions
+
+var DeviceCgroupPermission = &sDeviceCgroupPermission
+var DeviceCgroupPermission_READ = &sDeviceCgroupPermission_READ
+var DeviceCgroupPermission_WRITE = &sDeviceCgroupPermission_WRITE
+var DeviceCgroupPermission_MKNOD = &sDeviceCgroupPermission_MKNOD
+
+var _DeviceCgroupPermissions = &s_DeviceCgroupPermissions
+var _DeviceCgroupPermissions_member = &s_DeviceCgroupPermissions_member
+
+var _DevicesList = &s_DevicesList
+var _DevicesList_member = &s_DevicesList_member
+
+var _Double = &s_Double
+
+var Ec2Configuration = &sEc2Configuration
+var Ec2Configuration_imageType = &sEc2Configuration_imageType
+var Ec2Configuration_imageIdOverride = &sEc2Configuration_imageIdOverride
+var Ec2Configuration_batchImageStatus = &sEc2Configuration_batchImageStatus
+var Ec2Configuration_imageKubernetesVersion = &sEc2Configuration_imageKubernetesVersion
+
+var _Ec2ConfigurationList = &s_Ec2ConfigurationList
+var _Ec2ConfigurationList_member = &s_Ec2ConfigurationList_member
+
+var EcsProperties = &sEcsProperties
+var EcsProperties_taskProperties = &sEcsProperties_taskProperties
+
+var EcsPropertiesDetail = &sEcsPropertiesDetail
+var EcsPropertiesDetail_taskProperties = &sEcsPropertiesDetail_taskProperties
+
+var EcsPropertiesOverride = &sEcsPropertiesOverride
+var EcsPropertiesOverride_taskProperties = &sEcsPropertiesOverride_taskProperties
+
+var EcsSettings = &sEcsSettings
+var EcsSettings_containerInsights = &sEcsSettings_containerInsights
+
+var EcsTaskDetails = &sEcsTaskDetails
+var EcsTaskDetails_containers = &sEcsTaskDetails_containers
+var EcsTaskDetails_containerInstanceArn = &sEcsTaskDetails_containerInstanceArn
+var EcsTaskDetails_taskArn = &sEcsTaskDetails_taskArn
+var EcsTaskDetails_ephemeralStorage = &sEcsTaskDetails_ephemeralStorage
+var EcsTaskDetails_executionRoleArn = &sEcsTaskDetails_executionRoleArn
+var EcsTaskDetails_platformVersion = &sEcsTaskDetails_platformVersion
+var EcsTaskDetails_ipcMode = &sEcsTaskDetails_ipcMode
+var EcsTaskDetails_taskRoleArn = &sEcsTaskDetails_taskRoleArn
+var EcsTaskDetails_pidMode = &sEcsTaskDetails_pidMode
+var EcsTaskDetails_networkConfiguration = &sEcsTaskDetails_networkConfiguration
+var EcsTaskDetails_runtimePlatform = &sEcsTaskDetails_runtimePlatform
+var EcsTaskDetails_volumes = &sEcsTaskDetails_volumes
+var EcsTaskDetails_enableExecuteCommand = &sEcsTaskDetails_enableExecuteCommand
+var EcsTaskDetails_networkMode = &sEcsTaskDetails_networkMode
+
+var EcsTaskProperties = &sEcsTaskProperties
+var EcsTaskProperties_containers = &sEcsTaskProperties_containers
+var EcsTaskProperties_ephemeralStorage = &sEcsTaskProperties_ephemeralStorage
+var EcsTaskProperties_executionRoleArn = &sEcsTaskProperties_executionRoleArn
+var EcsTaskProperties_platformVersion = &sEcsTaskProperties_platformVersion
+var EcsTaskProperties_ipcMode = &sEcsTaskProperties_ipcMode
+var EcsTaskProperties_taskRoleArn = &sEcsTaskProperties_taskRoleArn
+var EcsTaskProperties_pidMode = &sEcsTaskProperties_pidMode
+var EcsTaskProperties_networkConfiguration = &sEcsTaskProperties_networkConfiguration
+var EcsTaskProperties_runtimePlatform = &sEcsTaskProperties_runtimePlatform
+var EcsTaskProperties_volumes = &sEcsTaskProperties_volumes
+var EcsTaskProperties_enableExecuteCommand = &sEcsTaskProperties_enableExecuteCommand
+var EcsTaskProperties_networkMode = &sEcsTaskProperties_networkMode
+
+var EFSAuthorizationConfig = &sEFSAuthorizationConfig
+var EFSAuthorizationConfig_accessPointId = &sEFSAuthorizationConfig_accessPointId
+var EFSAuthorizationConfig_iam = &sEFSAuthorizationConfig_iam
+
+var EFSAuthorizationConfigIAM = &sEFSAuthorizationConfigIAM
+var EFSAuthorizationConfigIAM_ENABLED = &sEFSAuthorizationConfigIAM_ENABLED
+var EFSAuthorizationConfigIAM_DISABLED = &sEFSAuthorizationConfigIAM_DISABLED
+
+var EFSTransitEncryption = &sEFSTransitEncryption
+var EFSTransitEncryption_ENABLED = &sEFSTransitEncryption_ENABLED
+var EFSTransitEncryption_DISABLED = &sEFSTransitEncryption_DISABLED
+
+var EFSVolumeConfiguration = &sEFSVolumeConfiguration
+var EFSVolumeConfiguration_fileSystemId = &sEFSVolumeConfiguration_fileSystemId
+var EFSVolumeConfiguration_rootDirectory = &sEFSVolumeConfiguration_rootDirectory
+var EFSVolumeConfiguration_transitEncryption = &sEFSVolumeConfiguration_transitEncryption
+var EFSVolumeConfiguration_transitEncryptionPort = &sEFSVolumeConfiguration_transitEncryptionPort
+var EFSVolumeConfiguration_authorizationConfig = &sEFSVolumeConfiguration_authorizationConfig
+
+var EksAccessEntry = &sEksAccessEntry
+var EksAccessEntry_desiredState = &sEksAccessEntry_desiredState
+var EksAccessEntry_status = &sEksAccessEntry_status
+
+var EksAccessEntryDesiredState = &sEksAccessEntryDesiredState
+var EksAccessEntryDesiredState_ENABLED = &sEksAccessEntryDesiredState_ENABLED
+var EksAccessEntryDesiredState_DISABLED = &sEksAccessEntryDesiredState_DISABLED
+var EksAccessEntryDesiredState_INHERIT_FROM_CLUSTER = &sEksAccessEntryDesiredState_INHERIT_FROM_CLUSTER
+
+var EksAccessEntryStatus = &sEksAccessEntryStatus
+var EksAccessEntryStatus_ACTIVE = &sEksAccessEntryStatus_ACTIVE
+var EksAccessEntryStatus_INACTIVE = &sEksAccessEntryStatus_INACTIVE
+
+var _EksAnnotationsMap = &s_EksAnnotationsMap
+var _EksAnnotationsMap_key = &s_EksAnnotationsMap_key
+var _EksAnnotationsMap_value = &s_EksAnnotationsMap_value
+
+var EksAttemptContainerDetail = &sEksAttemptContainerDetail
+var EksAttemptContainerDetail_name = &sEksAttemptContainerDetail_name
+var EksAttemptContainerDetail_containerID = &sEksAttemptContainerDetail_containerID
+var EksAttemptContainerDetail_exitCode = &sEksAttemptContainerDetail_exitCode
+var EksAttemptContainerDetail_reason = &sEksAttemptContainerDetail_reason
+
+var _EksAttemptContainerDetails = &s_EksAttemptContainerDetails
+var _EksAttemptContainerDetails_member = &s_EksAttemptContainerDetails_member
+
+var EksAttemptDetail = &sEksAttemptDetail
+var EksAttemptDetail_containers = &sEksAttemptDetail_containers
+var EksAttemptDetail_initContainers = &sEksAttemptDetail_initContainers
+var EksAttemptDetail_eksClusterArn = &sEksAttemptDetail_eksClusterArn
+var EksAttemptDetail_podName = &sEksAttemptDetail_podName
+var EksAttemptDetail_podNamespace = &sEksAttemptDetail_podNamespace
+var EksAttemptDetail_nodeName = &sEksAttemptDetail_nodeName
+var EksAttemptDetail_startedAt = &sEksAttemptDetail_startedAt
+var EksAttemptDetail_stoppedAt = &sEksAttemptDetail_stoppedAt
+var EksAttemptDetail_statusReason = &sEksAttemptDetail_statusReason
+
+var _EksAttemptDetails = &s_EksAttemptDetails
+var _EksAttemptDetails_member = &s_EksAttemptDetails_member
+
+var EksConfiguration = &sEksConfiguration
+var EksConfiguration_eksClusterArn = &sEksConfiguration_eksClusterArn
+var EksConfiguration_kubernetesNamespace = &sEksConfiguration_kubernetesNamespace
+var EksConfiguration_accessEntry = &sEksConfiguration_accessEntry
+
+var EksConfigurationUpdate = &sEksConfigurationUpdate
+var EksConfigurationUpdate_accessEntry = &sEksConfigurationUpdate_accessEntry
+
+var EksContainer = &sEksContainer
+var EksContainer_name = &sEksContainer_name
+var EksContainer_image = &sEksContainer_image
+var EksContainer_imagePullPolicy = &sEksContainer_imagePullPolicy
+var EksContainer_command = &sEksContainer_command
+var EksContainer_args = &sEksContainer_args
+var EksContainer_env = &sEksContainer_env
+var EksContainer_resources = &sEksContainer_resources
+var EksContainer_volumeMounts = &sEksContainer_volumeMounts
+var EksContainer_securityContext = &sEksContainer_securityContext
+
+var EksContainerDetail = &sEksContainerDetail
+var EksContainerDetail_name = &sEksContainerDetail_name
+var EksContainerDetail_image = &sEksContainerDetail_image
+var EksContainerDetail_imagePullPolicy = &sEksContainerDetail_imagePullPolicy
+var EksContainerDetail_command = &sEksContainerDetail_command
+var EksContainerDetail_args = &sEksContainerDetail_args
+var EksContainerDetail_env = &sEksContainerDetail_env
+var EksContainerDetail_resources = &sEksContainerDetail_resources
+var EksContainerDetail_exitCode = &sEksContainerDetail_exitCode
+var EksContainerDetail_reason = &sEksContainerDetail_reason
+var EksContainerDetail_volumeMounts = &sEksContainerDetail_volumeMounts
+var EksContainerDetail_securityContext = &sEksContainerDetail_securityContext
+
+var _EksContainerDetails = &s_EksContainerDetails
+var _EksContainerDetails_member = &s_EksContainerDetails_member
+
+var EksContainerEnvironmentVariable = &sEksContainerEnvironmentVariable
+var EksContainerEnvironmentVariable_name = &sEksContainerEnvironmentVariable_name
+var EksContainerEnvironmentVariable_value = &sEksContainerEnvironmentVariable_value
+
+var _EksContainerEnvironmentVariables = &s_EksContainerEnvironmentVariables
+var _EksContainerEnvironmentVariables_member = &s_EksContainerEnvironmentVariables_member
+
+var EksContainerOverride = &sEksContainerOverride
+var EksContainerOverride_name = &sEksContainerOverride_name
+var EksContainerOverride_image = &sEksContainerOverride_image
+var EksContainerOverride_command = &sEksContainerOverride_command
+var EksContainerOverride_args = &sEksContainerOverride_args
+var EksContainerOverride_env = &sEksContainerOverride_env
+var EksContainerOverride_resources = &sEksContainerOverride_resources
+
+var _EksContainerOverrideList = &s_EksContainerOverrideList
+var _EksContainerOverrideList_member = &s_EksContainerOverrideList_member
+
+var EksContainerResourceRequirements = &sEksContainerResourceRequirements
+var EksContainerResourceRequirements_limits = &sEksContainerResourceRequirements_limits
+var EksContainerResourceRequirements_requests = &sEksContainerResourceRequirements_requests
+
+var _EksContainers = &s_EksContainers
+var _EksContainers_member = &s_EksContainers_member
+
+var EksContainerSecurityContext = &sEksContainerSecurityContext
+var EksContainerSecurityContext_runAsUser = &sEksContainerSecurityContext_runAsUser
+var EksContainerSecurityContext_runAsGroup = &sEksContainerSecurityContext_runAsGroup
+var EksContainerSecurityContext_privileged = &sEksContainerSecurityContext_privileged
+var EksContainerSecurityContext_allowPrivilegeEscalation = &sEksContainerSecurityContext_allowPrivilegeEscalation
+var EksContainerSecurityContext_readOnlyRootFilesystem = &sEksContainerSecurityContext_readOnlyRootFilesystem
+var EksContainerSecurityContext_runAsNonRoot = &sEksContainerSecurityContext_runAsNonRoot
+
+var EksContainerVolumeMount = &sEksContainerVolumeMount
+var EksContainerVolumeMount_name = &sEksContainerVolumeMount_name
+var EksContainerVolumeMount_mountPath = &sEksContainerVolumeMount_mountPath
+var EksContainerVolumeMount_subPath = &sEksContainerVolumeMount_subPath
+var EksContainerVolumeMount_readOnly = &sEksContainerVolumeMount_readOnly
+
+var _EksContainerVolumeMounts = &s_EksContainerVolumeMounts
+var _EksContainerVolumeMounts_member = &s_EksContainerVolumeMounts_member
+
+var EksEmptyDir = &sEksEmptyDir
+var EksEmptyDir_medium = &sEksEmptyDir_medium
+var EksEmptyDir_sizeLimit = &sEksEmptyDir_sizeLimit
+
+var EksHostPath = &sEksHostPath
+var EksHostPath_path = &sEksHostPath_path
+
+var _EksLabelsMap = &s_EksLabelsMap
+var _EksLabelsMap_key = &s_EksLabelsMap_key
+var _EksLabelsMap_value = &s_EksLabelsMap_value
+
+var _EksLimits = &s_EksLimits
+var _EksLimits_key = &s_EksLimits_key
+var _EksLimits_value = &s_EksLimits_value
+
+var EksMetadata = &sEksMetadata
+var EksMetadata_labels = &sEksMetadata_labels
+var EksMetadata_annotations = &sEksMetadata_annotations
+var EksMetadata_namespace = &sEksMetadata_namespace
+
+var EksPersistentVolumeClaim = &sEksPersistentVolumeClaim
+var EksPersistentVolumeClaim_claimName = &sEksPersistentVolumeClaim_claimName
+var EksPersistentVolumeClaim_readOnly = &sEksPersistentVolumeClaim_readOnly
+
+var EksPodProperties = &sEksPodProperties
+var EksPodProperties_serviceAccountName = &sEksPodProperties_serviceAccountName
+var EksPodProperties_hostNetwork = &sEksPodProperties_hostNetwork
+var EksPodProperties_dnsPolicy = &sEksPodProperties_dnsPolicy
+var EksPodProperties_imagePullSecrets = &sEksPodProperties_imagePullSecrets
+var EksPodProperties_containers = &sEksPodProperties_containers
+var EksPodProperties_initContainers = &sEksPodProperties_initContainers
+var EksPodProperties_volumes = &sEksPodProperties_volumes
+var EksPodProperties_metadata = &sEksPodProperties_metadata
+var EksPodProperties_shareProcessNamespace = &sEksPodProperties_shareProcessNamespace
+
+var EksPodPropertiesDetail = &sEksPodPropertiesDetail
+var EksPodPropertiesDetail_serviceAccountName = &sEksPodPropertiesDetail_serviceAccountName
+var EksPodPropertiesDetail_hostNetwork = &sEksPodPropertiesDetail_hostNetwork
+var EksPodPropertiesDetail_dnsPolicy = &sEksPodPropertiesDetail_dnsPolicy
+var EksPodPropertiesDetail_imagePullSecrets = &sEksPodPropertiesDetail_imagePullSecrets
+var EksPodPropertiesDetail_containers = &sEksPodPropertiesDetail_containers
+var EksPodPropertiesDetail_initContainers = &sEksPodPropertiesDetail_initContainers
+var EksPodPropertiesDetail_volumes = &sEksPodPropertiesDetail_volumes
+var EksPodPropertiesDetail_podName = &sEksPodPropertiesDetail_podName
+var EksPodPropertiesDetail_nodeName = &sEksPodPropertiesDetail_nodeName
+var EksPodPropertiesDetail_metadata = &sEksPodPropertiesDetail_metadata
+var EksPodPropertiesDetail_shareProcessNamespace = &sEksPodPropertiesDetail_shareProcessNamespace
+
+var EksPodPropertiesOverride = &sEksPodPropertiesOverride
+var EksPodPropertiesOverride_containers = &sEksPodPropertiesOverride_containers
+var EksPodPropertiesOverride_initContainers = &sEksPodPropertiesOverride_initContainers
+var EksPodPropertiesOverride_metadata = &sEksPodPropertiesOverride_metadata
+
+var EksProperties = &sEksProperties
+var EksProperties_podProperties = &sEksProperties_podProperties
+
+var EksPropertiesDetail = &sEksPropertiesDetail
+var EksPropertiesDetail_podProperties = &sEksPropertiesDetail_podProperties
+
+var EksPropertiesOverride = &sEksPropertiesOverride
+var EksPropertiesOverride_podProperties = &sEksPropertiesOverride_podProperties
+
+var _EksRequests = &s_EksRequests
+var _EksRequests_key = &s_EksRequests_key
+var _EksRequests_value = &s_EksRequests_value
+
+var EksSecret = &sEksSecret
+var EksSecret_secretName = &sEksSecret_secretName
+var EksSecret_optional = &sEksSecret_optional
+
+var EksVolume = &sEksVolume
+var EksVolume_name = &sEksVolume_name
+var EksVolume_hostPath = &sEksVolume_hostPath
+var EksVolume_emptyDir = &sEksVolume_emptyDir
+var EksVolume_secret = &sEksVolume_secret
+var EksVolume_persistentVolumeClaim = &sEksVolume_persistentVolumeClaim
+
+var _EksVolumes = &s_EksVolumes
+var _EksVolumes_member = &s_EksVolumes_member
+
+var _EnvironmentVariables = &s_EnvironmentVariables
+var _EnvironmentVariables_member = &s_EnvironmentVariables_member
+
+var EphemeralStorage = &sEphemeralStorage
+var EphemeralStorage_sizeInGiB = &sEphemeralStorage_sizeInGiB
+
+var EvaluateOnExit = &sEvaluateOnExit
+var EvaluateOnExit_onStatusReason = &sEvaluateOnExit_onStatusReason
+var EvaluateOnExit_onReason = &sEvaluateOnExit_onReason
+var EvaluateOnExit_onExitCode = &sEvaluateOnExit_onExitCode
+var EvaluateOnExit_action = &sEvaluateOnExit_action
+
+var _EvaluateOnExitList = &s_EvaluateOnExitList
+var _EvaluateOnExitList_member = &s_EvaluateOnExitList_member
+
+var FairshareCapacityUsage = &sFairshareCapacityUsage
+var FairshareCapacityUsage_capacityUnit = &sFairshareCapacityUsage_capacityUnit
+var FairshareCapacityUsage_quantity = &sFairshareCapacityUsage_quantity
+
+var _FairshareCapacityUsageList = &s_FairshareCapacityUsageList
+var _FairshareCapacityUsageList_member = &s_FairshareCapacityUsageList_member
+
+var FairshareCapacityUtilization = &sFairshareCapacityUtilization
+var FairshareCapacityUtilization_shareIdentifier = &sFairshareCapacityUtilization_shareIdentifier
+var FairshareCapacityUtilization_capacityUsage = &sFairshareCapacityUtilization_capacityUsage
+
+var _FairshareCapacityUtilizationList = &s_FairshareCapacityUtilizationList
+var _FairshareCapacityUtilizationList_member = &s_FairshareCapacityUtilizationList_member
+
+var FairsharePolicy = &sFairsharePolicy
+var FairsharePolicy_shareDecaySeconds = &sFairsharePolicy_shareDecaySeconds
+var FairsharePolicy_computeReservation = &sFairsharePolicy_computeReservation
+var FairsharePolicy_shareDistribution = &sFairsharePolicy_shareDistribution
+
+var FairshareUtilizationDetail = &sFairshareUtilizationDetail
+var FairshareUtilizationDetail_activeShareCount = &sFairshareUtilizationDetail_activeShareCount
+var FairshareUtilizationDetail_topCapacityUtilization = &sFairshareUtilizationDetail_topCapacityUtilization
+
+var FargatePlatformConfiguration = &sFargatePlatformConfiguration
+var FargatePlatformConfiguration_platformVersion = &sFargatePlatformConfiguration_platformVersion
+
+var FirelensConfiguration = &sFirelensConfiguration
+var FirelensConfiguration_type = &sFirelensConfiguration_type
+var FirelensConfiguration_options = &sFirelensConfiguration_options
+
+var _FirelensConfigurationOptionsMap = &s_FirelensConfigurationOptionsMap
+var _FirelensConfigurationOptionsMap_key = &s_FirelensConfigurationOptionsMap_key
+var _FirelensConfigurationOptionsMap_value = &s_FirelensConfigurationOptionsMap_value
+
+var FirelensConfigurationType = &sFirelensConfigurationType
+var FirelensConfigurationType_FLUENTD = &sFirelensConfigurationType_FLUENTD
+var FirelensConfigurationType_FLUENTBIT = &sFirelensConfigurationType_FLUENTBIT
+
+var _Float = &s_Float
+
+var FrontOfQueueDetail = &sFrontOfQueueDetail
+var FrontOfQueueDetail_jobs = &sFrontOfQueueDetail_jobs
+var FrontOfQueueDetail_lastUpdatedAt = &sFrontOfQueueDetail_lastUpdatedAt
+
+var FrontOfQueueJobSummary = &sFrontOfQueueJobSummary
+var FrontOfQueueJobSummary_jobArn = &sFrontOfQueueJobSummary_jobArn
+var FrontOfQueueJobSummary_earliestTimeAtPosition = &sFrontOfQueueJobSummary_earliestTimeAtPosition
+
+var _FrontOfQueueJobSummaryList = &s_FrontOfQueueJobSummaryList
+var _FrontOfQueueJobSummaryList_member = &s_FrontOfQueueJobSummaryList_member
+
+var FrontOfQuotaShareJobSummary = &sFrontOfQuotaShareJobSummary
+var FrontOfQuotaShareJobSummary_jobArn = &sFrontOfQuotaShareJobSummary_jobArn
+var FrontOfQuotaShareJobSummary_earliestTimeAtPosition = &sFrontOfQuotaShareJobSummary_earliestTimeAtPosition
+
+var _FrontOfQuotaShareJobSummaryList = &s_FrontOfQuotaShareJobSummaryList
+var _FrontOfQuotaShareJobSummaryList_member = &s_FrontOfQuotaShareJobSummaryList_member
+
+var FrontOfQuotaSharesDetail = &sFrontOfQuotaSharesDetail
+var FrontOfQuotaSharesDetail_quotaShares = &sFrontOfQuotaSharesDetail_quotaShares
+var FrontOfQuotaSharesDetail_lastUpdatedAt = &sFrontOfQuotaSharesDetail_lastUpdatedAt
+
+var _FrontOfQuotaSharesJobSummaryMap = &s_FrontOfQuotaSharesJobSummaryMap
+var _FrontOfQuotaSharesJobSummaryMap_key = &s_FrontOfQuotaSharesJobSummaryMap_key
+var _FrontOfQuotaSharesJobSummaryMap_value = &s_FrontOfQuotaSharesJobSummaryMap_value
+
+var Host = &sHost
+var Host_sourcePath = &sHost_sourcePath
+
+var _ImageIdOverride = &s_ImageIdOverride
+
+var ImagePullSecret = &sImagePullSecret
+var ImagePullSecret_name = &sImagePullSecret_name
+
+var _ImagePullSecrets = &s_ImagePullSecrets
+var _ImagePullSecrets_member = &s_ImagePullSecrets_member
+
+var _ImageType = &s_ImageType
+
+var InfrastructureOptimization = &sInfrastructureOptimization
+var InfrastructureOptimization_scaleInAfter = &sInfrastructureOptimization_scaleInAfter
+
+var InstanceLaunchTemplate = &sInstanceLaunchTemplate
+var InstanceLaunchTemplate_ec2InstanceProfileArn = &sInstanceLaunchTemplate_ec2InstanceProfileArn
+var InstanceLaunchTemplate_networkConfiguration = &sInstanceLaunchTemplate_networkConfiguration
+var InstanceLaunchTemplate_instanceRequirements = &sInstanceLaunchTemplate_instanceRequirements
+var InstanceLaunchTemplate_capacityOptionType = &sInstanceLaunchTemplate_capacityOptionType
+var InstanceLaunchTemplate_storageConfiguration = &sInstanceLaunchTemplate_storageConfiguration
+var InstanceLaunchTemplate_monitoring = &sInstanceLaunchTemplate_monitoring
+var InstanceLaunchTemplate_fipsEnabled = &sInstanceLaunchTemplate_fipsEnabled
+var InstanceLaunchTemplate_capacityReservations = &sInstanceLaunchTemplate_capacityReservations
+var InstanceLaunchTemplate_instanceMetadataTagsPropagation = &sInstanceLaunchTemplate_instanceMetadataTagsPropagation
+var InstanceLaunchTemplate_localStorageConfiguration = &sInstanceLaunchTemplate_localStorageConfiguration
+
+var InstanceLaunchTemplateUpdate = &sInstanceLaunchTemplateUpdate
+var InstanceLaunchTemplateUpdate_ec2InstanceProfileArn = &sInstanceLaunchTemplateUpdate_ec2InstanceProfileArn
+var InstanceLaunchTemplateUpdate_networkConfiguration = &sInstanceLaunchTemplateUpdate_networkConfiguration
+var InstanceLaunchTemplateUpdate_instanceRequirements = &sInstanceLaunchTemplateUpdate_instanceRequirements
+var InstanceLaunchTemplateUpdate_storageConfiguration = &sInstanceLaunchTemplateUpdate_storageConfiguration
+var InstanceLaunchTemplateUpdate_monitoring = &sInstanceLaunchTemplateUpdate_monitoring
+var InstanceLaunchTemplateUpdate_capacityReservations = &sInstanceLaunchTemplateUpdate_capacityReservations
+var InstanceLaunchTemplateUpdate_instanceMetadataTagsPropagation = &sInstanceLaunchTemplateUpdate_instanceMetadataTagsPropagation
+var InstanceLaunchTemplateUpdate_localStorageConfiguration = &sInstanceLaunchTemplateUpdate_localStorageConfiguration
+
+var InstanceRequirementsRequest = &sInstanceRequirementsRequest
+var InstanceRequirementsRequest_allowedInstanceTypes = &sInstanceRequirementsRequest_allowedInstanceTypes
+
+var _Integer = &s_Integer
+
+var JobCapacityUsageSummary = &sJobCapacityUsageSummary
+var JobCapacityUsageSummary_capacityUnit = &sJobCapacityUsageSummary_capacityUnit
+var JobCapacityUsageSummary_quantity = &sJobCapacityUsageSummary_quantity
+
+var _JobCapacityUsageSummaryList = &s_JobCapacityUsageSummaryList
+var _JobCapacityUsageSummaryList_member = &s_JobCapacityUsageSummaryList_member
+
+var JobDefinition = &sJobDefinition
+var JobDefinition_jobDefinitionName = &sJobDefinition_jobDefinitionName
+var JobDefinition_jobDefinitionArn = &sJobDefinition_jobDefinitionArn
+var JobDefinition_revision = &sJobDefinition_revision
+var JobDefinition_status = &sJobDefinition_status
+var JobDefinition_type = &sJobDefinition_type
+var JobDefinition_schedulingPriority = &sJobDefinition_schedulingPriority
+var JobDefinition_parameters = &sJobDefinition_parameters
+var JobDefinition_retryStrategy = &sJobDefinition_retryStrategy
+var JobDefinition_containerProperties = &sJobDefinition_containerProperties
+var JobDefinition_timeout = &sJobDefinition_timeout
+var JobDefinition_nodeProperties = &sJobDefinition_nodeProperties
+var JobDefinition_tags = &sJobDefinition_tags
+var JobDefinition_propagateTags = &sJobDefinition_propagateTags
+var JobDefinition_platformCapabilities = &sJobDefinition_platformCapabilities
+var JobDefinition_ecsProperties = &sJobDefinition_ecsProperties
+var JobDefinition_eksProperties = &sJobDefinition_eksProperties
+var JobDefinition_containerOrchestrationType = &sJobDefinition_containerOrchestrationType
+var JobDefinition_consumableResourceProperties = &sJobDefinition_consumableResourceProperties
+
+var _JobDefinitionList = &s_JobDefinitionList
+var _JobDefinitionList_member = &s_JobDefinitionList_member
+
+var JobDefinitionType = &sJobDefinitionType
+var JobDefinitionType_Container = &sJobDefinitionType_Container
+var JobDefinitionType_Multinode = &sJobDefinitionType_Multinode
+
+var JobDependency = &sJobDependency
+var JobDependency_jobId = &sJobDependency_jobId
+var JobDependency_type = &sJobDependency_type
+
+var _JobDependencyList = &s_JobDependencyList
+var _JobDependencyList_member = &s_JobDependencyList_member
+
+var JobDetail = &sJobDetail
+var JobDetail_jobArn = &sJobDetail_jobArn
+var JobDetail_jobName = &sJobDetail_jobName
+var JobDetail_jobId = &sJobDetail_jobId
+var JobDetail_jobQueue = &sJobDetail_jobQueue
+var JobDetail_status = &sJobDetail_status
+var JobDetail_shareIdentifier = &sJobDetail_shareIdentifier
+var JobDetail_schedulingPriority = &sJobDetail_schedulingPriority
+var JobDetail_attempts = &sJobDetail_attempts
+var JobDetail_statusReason = &sJobDetail_statusReason
+var JobDetail_createdAt = &sJobDetail_createdAt
+var JobDetail_retryStrategy = &sJobDetail_retryStrategy
+var JobDetail_startedAt = &sJobDetail_startedAt
+var JobDetail_stoppedAt = &sJobDetail_stoppedAt
+var JobDetail_dependsOn = &sJobDetail_dependsOn
+var JobDetail_jobDefinition = &sJobDetail_jobDefinition
+var JobDetail_parameters = &sJobDetail_parameters
+var JobDetail_container = &sJobDetail_container
+var JobDetail_nodeDetails = &sJobDetail_nodeDetails
+var JobDetail_nodeProperties = &sJobDetail_nodeProperties
+var JobDetail_arrayProperties = &sJobDetail_arrayProperties
+var JobDetail_timeout = &sJobDetail_timeout
+var JobDetail_tags = &sJobDetail_tags
+var JobDetail_propagateTags = &sJobDetail_propagateTags
+var JobDetail_platformCapabilities = &sJobDetail_platformCapabilities
+var JobDetail_eksProperties = &sJobDetail_eksProperties
+var JobDetail_eksAttempts = &sJobDetail_eksAttempts
+var JobDetail_ecsProperties = &sJobDetail_ecsProperties
+var JobDetail_isCancelled = &sJobDetail_isCancelled
+var JobDetail_isTerminated = &sJobDetail_isTerminated
+var JobDetail_consumableResourceProperties = &sJobDetail_consumableResourceProperties
+
+var _JobDetailList = &s_JobDetailList
+var _JobDetailList_member = &s_JobDetailList_member
+
+var _JobExecutionTimeoutMinutes = &s_JobExecutionTimeoutMinutes
+
+var JobQueueDetail = &sJobQueueDetail
+var JobQueueDetail_jobQueueName = &sJobQueueDetail_jobQueueName
+var JobQueueDetail_jobQueueArn = &sJobQueueDetail_jobQueueArn
+var JobQueueDetail_state = &sJobQueueDetail_state
+var JobQueueDetail_schedulingPolicyArn = &sJobQueueDetail_schedulingPolicyArn
+var JobQueueDetail_status = &sJobQueueDetail_status
+var JobQueueDetail_statusReason = &sJobQueueDetail_statusReason
+var JobQueueDetail_priority = &sJobQueueDetail_priority
+var JobQueueDetail_computeEnvironmentOrder = &sJobQueueDetail_computeEnvironmentOrder
+var JobQueueDetail_serviceEnvironmentOrder = &sJobQueueDetail_serviceEnvironmentOrder
+var JobQueueDetail_jobQueueType = &sJobQueueDetail_jobQueueType
+var JobQueueDetail_tags = &sJobQueueDetail_tags
+var JobQueueDetail_jobStateTimeLimitActions = &sJobQueueDetail_jobStateTimeLimitActions
+
+var _JobQueueDetailList = &s_JobQueueDetailList
+var _JobQueueDetailList_member = &s_JobQueueDetailList_member
+
+var JobQueueType = &sJobQueueType
+var JobQueueType_EKS = &sJobQueueType_EKS
+var JobQueueType_ECS = &sJobQueueType_ECS
+var JobQueueType_ECS_FARGATE = &sJobQueueType_ECS_FARGATE
+var JobQueueType_SAGEMAKER_TRAINING = &sJobQueueType_SAGEMAKER_TRAINING
+var JobQueueType_ECS_MANAGED_INSTANCES = &sJobQueueType_ECS_MANAGED_INSTANCES
+
+var JobStateTimeLimitAction = &sJobStateTimeLimitAction
+var JobStateTimeLimitAction_reason = &sJobStateTimeLimitAction_reason
+var JobStateTimeLimitAction_state = &sJobStateTimeLimitAction_state
+var JobStateTimeLimitAction_maxTimeSeconds = &sJobStateTimeLimitAction_maxTimeSeconds
+var JobStateTimeLimitAction_action = &sJobStateTimeLimitAction_action
+
+var _JobStateTimeLimitActions = &s_JobStateTimeLimitActions
+var _JobStateTimeLimitActions_member = &s_JobStateTimeLimitActions_member
+
+var JobStateTimeLimitActionsAction = &sJobStateTimeLimitActionsAction
+var JobStateTimeLimitActionsAction_CANCEL = &sJobStateTimeLimitActionsAction_CANCEL
+var JobStateTimeLimitActionsAction_TERMINATE = &sJobStateTimeLimitActionsAction_TERMINATE
+
+var JobStateTimeLimitActionsState = &sJobStateTimeLimitActionsState
+var JobStateTimeLimitActionsState_RUNNABLE = &sJobStateTimeLimitActionsState_RUNNABLE
+
+var JobStatus = &sJobStatus
+var JobStatus_SUBMITTED = &sJobStatus_SUBMITTED
+var JobStatus_PENDING = &sJobStatus_PENDING
+var JobStatus_RUNNABLE = &sJobStatus_RUNNABLE
+var JobStatus_STARTING = &sJobStatus_STARTING
+var JobStatus_RUNNING = &sJobStatus_RUNNING
+var JobStatus_SUCCEEDED = &sJobStatus_SUCCEEDED
+var JobStatus_FAILED = &sJobStatus_FAILED
+
+var JobSummary = &sJobSummary
+var JobSummary_jobArn = &sJobSummary_jobArn
+var JobSummary_jobId = &sJobSummary_jobId
+var JobSummary_jobName = &sJobSummary_jobName
+var JobSummary_capacityUsage = &sJobSummary_capacityUsage
+var JobSummary_createdAt = &sJobSummary_createdAt
+var JobSummary_scheduledAt = &sJobSummary_scheduledAt
+var JobSummary_shareIdentifier = &sJobSummary_shareIdentifier
+var JobSummary_status = &sJobSummary_status
+var JobSummary_statusReason = &sJobSummary_statusReason
+var JobSummary_startedAt = &sJobSummary_startedAt
+var JobSummary_stoppedAt = &sJobSummary_stoppedAt
+var JobSummary_container = &sJobSummary_container
+var JobSummary_arrayProperties = &sJobSummary_arrayProperties
+var JobSummary_nodeProperties = &sJobSummary_nodeProperties
+var JobSummary_jobDefinition = &sJobSummary_jobDefinition
+var JobSummary_isCancelled = &sJobSummary_isCancelled
+var JobSummary_isTerminated = &sJobSummary_isTerminated
+
+var _JobSummaryList = &s_JobSummaryList
+var _JobSummaryList_member = &s_JobSummaryList_member
+
+var JobTimeout = &sJobTimeout
+var JobTimeout_attemptDurationSeconds = &sJobTimeout_attemptDurationSeconds
+
+var JQState = &sJQState
+var JQState_ENABLED = &sJQState_ENABLED
+var JQState_DISABLED = &sJQState_DISABLED
+
+var JQStatus = &sJQStatus
+var JQStatus_CREATING = &sJQStatus_CREATING
+var JQStatus_UPDATING = &sJQStatus_UPDATING
+var JQStatus_DELETING = &sJQStatus_DELETING
+var JQStatus_DELETED = &sJQStatus_DELETED
+var JQStatus_VALID = &sJQStatus_VALID
+var JQStatus_INVALID = &sJQStatus_INVALID
+
+var KeyValuePair = &sKeyValuePair
+var KeyValuePair_name = &sKeyValuePair_name
+var KeyValuePair_value = &sKeyValuePair_value
+
+var KeyValuesPair = &sKeyValuesPair
+var KeyValuesPair_name = &sKeyValuesPair_name
+var KeyValuesPair_values = &sKeyValuesPair_values
+
+var _KubernetesVersion = &s_KubernetesVersion
+
+var LatestServiceJobAttempt = &sLatestServiceJobAttempt
+var LatestServiceJobAttempt_serviceResourceId = &sLatestServiceJobAttempt_serviceResourceId
+
+var LaunchTemplateSpecification = &sLaunchTemplateSpecification
+var LaunchTemplateSpecification_launchTemplateId = &sLaunchTemplateSpecification_launchTemplateId
+var LaunchTemplateSpecification_launchTemplateName = &sLaunchTemplateSpecification_launchTemplateName
+var LaunchTemplateSpecification_version = &sLaunchTemplateSpecification_version
+var LaunchTemplateSpecification_overrides = &sLaunchTemplateSpecification_overrides
+var LaunchTemplateSpecification_userdataType = &sLaunchTemplateSpecification_userdataType
+
+var LaunchTemplateSpecificationOverride = &sLaunchTemplateSpecificationOverride
+var LaunchTemplateSpecificationOverride_launchTemplateId = &sLaunchTemplateSpecificationOverride_launchTemplateId
+var LaunchTemplateSpecificationOverride_launchTemplateName = &sLaunchTemplateSpecificationOverride_launchTemplateName
+var LaunchTemplateSpecificationOverride_version = &sLaunchTemplateSpecificationOverride_version
+var LaunchTemplateSpecificationOverride_targetInstanceTypes = &sLaunchTemplateSpecificationOverride_targetInstanceTypes
+var LaunchTemplateSpecificationOverride_userdataType = &sLaunchTemplateSpecificationOverride_userdataType
+
+var _LaunchTemplateSpecificationOverrideList = &s_LaunchTemplateSpecificationOverrideList
+var _LaunchTemplateSpecificationOverrideList_member = &s_LaunchTemplateSpecificationOverrideList_member
+
+var LinuxParameters = &sLinuxParameters
+var LinuxParameters_devices = &sLinuxParameters_devices
+var LinuxParameters_initProcessEnabled = &sLinuxParameters_initProcessEnabled
+var LinuxParameters_sharedMemorySize = &sLinuxParameters_sharedMemorySize
+var LinuxParameters_tmpfs = &sLinuxParameters_tmpfs
+var LinuxParameters_maxSwap = &sLinuxParameters_maxSwap
+var LinuxParameters_swappiness = &sLinuxParameters_swappiness
+
+var _ListAttemptEcsTaskDetails = &s_ListAttemptEcsTaskDetails
+var _ListAttemptEcsTaskDetails_member = &s_ListAttemptEcsTaskDetails_member
+
+var _ListAttemptTaskContainerDetails = &s_ListAttemptTaskContainerDetails
+var _ListAttemptTaskContainerDetails_member = &s_ListAttemptTaskContainerDetails_member
+
+var _ListConsumableResourcesFilterList = &s_ListConsumableResourcesFilterList
+var _ListConsumableResourcesFilterList_member = &s_ListConsumableResourcesFilterList_member
+
+var _ListEcsTaskDetails = &s_ListEcsTaskDetails
+var _ListEcsTaskDetails_member = &s_ListEcsTaskDetails_member
+
+var _ListEcsTaskProperties = &s_ListEcsTaskProperties
+var _ListEcsTaskProperties_member = &s_ListEcsTaskProperties_member
+
+var _ListJobsByConsumableResourceFilterList = &s_ListJobsByConsumableResourceFilterList
+var _ListJobsByConsumableResourceFilterList_member = &s_ListJobsByConsumableResourceFilterList_member
+
+var ListJobsByConsumableResourceSummary = &sListJobsByConsumableResourceSummary
+var ListJobsByConsumableResourceSummary_jobArn = &sListJobsByConsumableResourceSummary_jobArn
+var ListJobsByConsumableResourceSummary_jobQueueArn = &sListJobsByConsumableResourceSummary_jobQueueArn
+var ListJobsByConsumableResourceSummary_jobName = &sListJobsByConsumableResourceSummary_jobName
+var ListJobsByConsumableResourceSummary_jobDefinitionArn = &sListJobsByConsumableResourceSummary_jobDefinitionArn
+var ListJobsByConsumableResourceSummary_shareIdentifier = &sListJobsByConsumableResourceSummary_shareIdentifier
+var ListJobsByConsumableResourceSummary_jobStatus = &sListJobsByConsumableResourceSummary_jobStatus
+var ListJobsByConsumableResourceSummary_quantity = &sListJobsByConsumableResourceSummary_quantity
+var ListJobsByConsumableResourceSummary_statusReason = &sListJobsByConsumableResourceSummary_statusReason
+var ListJobsByConsumableResourceSummary_startedAt = &sListJobsByConsumableResourceSummary_startedAt
+var ListJobsByConsumableResourceSummary_createdAt = &sListJobsByConsumableResourceSummary_createdAt
+var ListJobsByConsumableResourceSummary_consumableResourceProperties = &sListJobsByConsumableResourceSummary_consumableResourceProperties
+
+var _ListJobsByConsumableResourceSummaryList = &s_ListJobsByConsumableResourceSummaryList
+var _ListJobsByConsumableResourceSummaryList_member = &s_ListJobsByConsumableResourceSummaryList_member
+
+var _ListJobsFilterList = &s_ListJobsFilterList
+var _ListJobsFilterList_member = &s_ListJobsFilterList_member
+
+var _ListTaskContainerDetails = &s_ListTaskContainerDetails
+var _ListTaskContainerDetails_member = &s_ListTaskContainerDetails_member
+
+var _ListTaskContainerOverrides = &s_ListTaskContainerOverrides
+var _ListTaskContainerOverrides_member = &s_ListTaskContainerOverrides_member
+
+var _ListTaskContainerProperties = &s_ListTaskContainerProperties
+var _ListTaskContainerProperties_member = &s_ListTaskContainerProperties_member
+
+var _ListTaskPropertiesOverride = &s_ListTaskPropertiesOverride
+var _ListTaskPropertiesOverride_member = &s_ListTaskPropertiesOverride_member
+
+var LogConfiguration = &sLogConfiguration
+var LogConfiguration_logDriver = &sLogConfiguration_logDriver
+var LogConfiguration_options = &sLogConfiguration_options
+var LogConfiguration_secretOptions = &sLogConfiguration_secretOptions
+
+var _LogConfigurationOptionsMap = &s_LogConfigurationOptionsMap
+var _LogConfigurationOptionsMap_key = &s_LogConfigurationOptionsMap_key
+var _LogConfigurationOptionsMap_value = &s_LogConfigurationOptionsMap_value
+
+var LogDriver = &sLogDriver
+var LogDriver_JSON_FILE = &sLogDriver_JSON_FILE
+var LogDriver_SYSLOG = &sLogDriver_SYSLOG
+var LogDriver_JOURNALD = &sLogDriver_JOURNALD
+var LogDriver_GELF = &sLogDriver_GELF
+var LogDriver_FLUENTD = &sLogDriver_FLUENTD
+var LogDriver_AWSLOGS = &sLogDriver_AWSLOGS
+var LogDriver_SPLUNK = &sLogDriver_SPLUNK
+var LogDriver_AWSFIRELENS = &sLogDriver_AWSFIRELENS
+
+var _Long = &s_Long
+
+var ManagedInstancesLocalStorageConfiguration = &sManagedInstancesLocalStorageConfiguration
+var ManagedInstancesLocalStorageConfiguration_useLocalStorage = &sManagedInstancesLocalStorageConfiguration_useLocalStorage
+
+var ManagedInstancesNetworkConfiguration = &sManagedInstancesNetworkConfiguration
+var ManagedInstancesNetworkConfiguration_subnets = &sManagedInstancesNetworkConfiguration_subnets
+var ManagedInstancesNetworkConfiguration_securityGroups = &sManagedInstancesNetworkConfiguration_securityGroups
+
+var ManagedInstancesProvider = &sManagedInstancesProvider
+var ManagedInstancesProvider_propagateTags = &sManagedInstancesProvider_propagateTags
+var ManagedInstancesProvider_infrastructureRoleArn = &sManagedInstancesProvider_infrastructureRoleArn
+var ManagedInstancesProvider_instanceLaunchTemplate = &sManagedInstancesProvider_instanceLaunchTemplate
+var ManagedInstancesProvider_infrastructureOptimization = &sManagedInstancesProvider_infrastructureOptimization
+
+var ManagedInstancesStorageConfiguration = &sManagedInstancesStorageConfiguration
+var ManagedInstancesStorageConfiguration_storageSizeGiB = &sManagedInstancesStorageConfiguration_storageSizeGiB
+
+var MountPoint = &sMountPoint
+var MountPoint_containerPath = &sMountPoint_containerPath
+var MountPoint_readOnly = &sMountPoint_readOnly
+var MountPoint_sourceVolume = &sMountPoint_sourceVolume
+
+var _MountPoints = &s_MountPoints
+var _MountPoints_member = &s_MountPoints_member
+
+var NetworkConfiguration = &sNetworkConfiguration
+var NetworkConfiguration_assignPublicIp = &sNetworkConfiguration_assignPublicIp
+
+var NetworkInterface = &sNetworkInterface
+var NetworkInterface_attachmentId = &sNetworkInterface_attachmentId
+var NetworkInterface_ipv6Address = &sNetworkInterface_ipv6Address
+var NetworkInterface_privateIpv4Address = &sNetworkInterface_privateIpv4Address
+
+var _NetworkInterfaceList = &s_NetworkInterfaceList
+var _NetworkInterfaceList_member = &s_NetworkInterfaceList_member
+
+var NodeDetails = &sNodeDetails
+var NodeDetails_nodeIndex = &sNodeDetails_nodeIndex
+var NodeDetails_isMainNode = &sNodeDetails_isMainNode
+
+var NodeOverrides = &sNodeOverrides
+var NodeOverrides_numNodes = &sNodeOverrides_numNodes
+var NodeOverrides_nodePropertyOverrides = &sNodeOverrides_nodePropertyOverrides
+
+var NodeProperties = &sNodeProperties
+var NodeProperties_numNodes = &sNodeProperties_numNodes
+var NodeProperties_mainNode = &sNodeProperties_mainNode
+var NodeProperties_nodeRangeProperties = &sNodeProperties_nodeRangeProperties
+
+var NodePropertiesSummary = &sNodePropertiesSummary
+var NodePropertiesSummary_isMainNode = &sNodePropertiesSummary_isMainNode
+var NodePropertiesSummary_numNodes = &sNodePropertiesSummary_numNodes
+var NodePropertiesSummary_nodeIndex = &sNodePropertiesSummary_nodeIndex
+
+var NodePropertyOverride = &sNodePropertyOverride
+var NodePropertyOverride_targetNodes = &sNodePropertyOverride_targetNodes
+var NodePropertyOverride_containerOverrides = &sNodePropertyOverride_containerOverrides
+var NodePropertyOverride_ecsPropertiesOverride = &sNodePropertyOverride_ecsPropertiesOverride
+var NodePropertyOverride_instanceTypes = &sNodePropertyOverride_instanceTypes
+var NodePropertyOverride_eksPropertiesOverride = &sNodePropertyOverride_eksPropertiesOverride
+var NodePropertyOverride_consumableResourcePropertiesOverride = &sNodePropertyOverride_consumableResourcePropertiesOverride
+
+var _NodePropertyOverrides = &s_NodePropertyOverrides
+var _NodePropertyOverrides_member = &s_NodePropertyOverrides_member
+
+var _NodeRangeProperties = &s_NodeRangeProperties
+var _NodeRangeProperties_member = &s_NodeRangeProperties_member
+
+var NodeRangeProperty = &sNodeRangeProperty
+var NodeRangeProperty_targetNodes = &sNodeRangeProperty_targetNodes
+var NodeRangeProperty_container = &sNodeRangeProperty_container
+var NodeRangeProperty_instanceTypes = &sNodeRangeProperty_instanceTypes
+var NodeRangeProperty_ecsProperties = &sNodeRangeProperty_ecsProperties
+var NodeRangeProperty_eksProperties = &sNodeRangeProperty_eksProperties
+var NodeRangeProperty_consumableResourceProperties = &sNodeRangeProperty_consumableResourceProperties
+
+var OrchestrationType = &sOrchestrationType
+var OrchestrationType_ECS = &sOrchestrationType_ECS
+var OrchestrationType_EKS = &sOrchestrationType_EKS
+
+var _ParametersMap = &s_ParametersMap
+var _ParametersMap_key = &s_ParametersMap_key
+var _ParametersMap_value = &s_ParametersMap_value
+
+var PlatformCapability = &sPlatformCapability
+var PlatformCapability_EC2 = &sPlatformCapability_EC2
+var PlatformCapability_FARGATE = &sPlatformCapability_FARGATE
+var PlatformCapability_MANAGED_INSTANCES = &sPlatformCapability_MANAGED_INSTANCES
+
+var _PlatformCapabilityList = &s_PlatformCapabilityList
+var _PlatformCapabilityList_member = &s_PlatformCapabilityList_member
+
+var _Quantity = &s_Quantity
+
+var QueueSnapshotCapacityUsage = &sQueueSnapshotCapacityUsage
+var QueueSnapshotCapacityUsage_capacityUnit = &sQueueSnapshotCapacityUsage_capacityUnit
+var QueueSnapshotCapacityUsage_quantity = &sQueueSnapshotCapacityUsage_quantity
+
+var _QueueSnapshotCapacityUsageList = &s_QueueSnapshotCapacityUsageList
+var _QueueSnapshotCapacityUsageList_member = &s_QueueSnapshotCapacityUsageList_member
+
+var QueueSnapshotUtilizationDetail = &sQueueSnapshotUtilizationDetail
+var QueueSnapshotUtilizationDetail_totalCapacityUsage = &sQueueSnapshotUtilizationDetail_totalCapacityUsage
+var QueueSnapshotUtilizationDetail_fairshareUtilization = &sQueueSnapshotUtilizationDetail_fairshareUtilization
+var QueueSnapshotUtilizationDetail_quotaShareUtilization = &sQueueSnapshotUtilizationDetail_quotaShareUtilization
+var QueueSnapshotUtilizationDetail_lastUpdatedAt = &sQueueSnapshotUtilizationDetail_lastUpdatedAt
+
+var QuotaShareCapacityLimit = &sQuotaShareCapacityLimit
+var QuotaShareCapacityLimit_maxCapacity = &sQuotaShareCapacityLimit_maxCapacity
+var QuotaShareCapacityLimit_capacityUnit = &sQuotaShareCapacityLimit_capacityUnit
+
+var _QuotaShareCapacityLimits = &s_QuotaShareCapacityLimits
+var _QuotaShareCapacityLimits_member = &s_QuotaShareCapacityLimits_member
+
+var QuotaShareCapacityUsage = &sQuotaShareCapacityUsage
+var QuotaShareCapacityUsage_capacityUnit = &sQuotaShareCapacityUsage_capacityUnit
+var QuotaShareCapacityUsage_quantity = &sQuotaShareCapacityUsage_quantity
+
+var _QuotaShareCapacityUsageList = &s_QuotaShareCapacityUsageList
+var _QuotaShareCapacityUsageList_member = &s_QuotaShareCapacityUsageList_member
+
+var QuotaShareCapacityUtilization = &sQuotaShareCapacityUtilization
+var QuotaShareCapacityUtilization_quotaShareName = &sQuotaShareCapacityUtilization_quotaShareName
+var QuotaShareCapacityUtilization_capacityUsage = &sQuotaShareCapacityUtilization_capacityUsage
+
+var _QuotaShareCapacityUtilizationList = &s_QuotaShareCapacityUtilizationList
+var _QuotaShareCapacityUtilizationList_member = &s_QuotaShareCapacityUtilizationList_member
+
+var QuotaShareDetail = &sQuotaShareDetail
+var QuotaShareDetail_quotaShareName = &sQuotaShareDetail_quotaShareName
+var QuotaShareDetail_quotaShareArn = &sQuotaShareDetail_quotaShareArn
+var QuotaShareDetail_jobQueueArn = &sQuotaShareDetail_jobQueueArn
+var QuotaShareDetail_capacityLimits = &sQuotaShareDetail_capacityLimits
+var QuotaShareDetail_resourceSharingConfiguration = &sQuotaShareDetail_resourceSharingConfiguration
+var QuotaShareDetail_preemptionConfiguration = &sQuotaShareDetail_preemptionConfiguration
+var QuotaShareDetail_state = &sQuotaShareDetail_state
+var QuotaShareDetail_status = &sQuotaShareDetail_status
+
+var QuotaShareIdleResourceAssignmentStrategy = &sQuotaShareIdleResourceAssignmentStrategy
+var QuotaShareIdleResourceAssignmentStrategy_FIFO = &sQuotaShareIdleResourceAssignmentStrategy_FIFO
+
+var QuotaShareInSharePreemptionState = &sQuotaShareInSharePreemptionState
+var QuotaShareInSharePreemptionState_ENABLED = &sQuotaShareInSharePreemptionState_ENABLED
+var QuotaShareInSharePreemptionState_DISABLED = &sQuotaShareInSharePreemptionState_DISABLED
+
+var _QuotaShareList = &s_QuotaShareList
+var _QuotaShareList_member = &s_QuotaShareList_member
+
+var QuotaSharePolicy = &sQuotaSharePolicy
+var QuotaSharePolicy_idleResourceAssignmentStrategy = &sQuotaSharePolicy_idleResourceAssignmentStrategy
+
+var QuotaSharePreemptionConfiguration = &sQuotaSharePreemptionConfiguration
+var QuotaSharePreemptionConfiguration_inSharePreemption = &sQuotaSharePreemptionConfiguration_inSharePreemption
+
+var QuotaShareResourceSharingConfiguration = &sQuotaShareResourceSharingConfiguration
+var QuotaShareResourceSharingConfiguration_strategy = &sQuotaShareResourceSharingConfiguration_strategy
+var QuotaShareResourceSharingConfiguration_borrowLimit = &sQuotaShareResourceSharingConfiguration_borrowLimit
+
+var QuotaShareResourceSharingStrategy = &sQuotaShareResourceSharingStrategy
+var QuotaShareResourceSharingStrategy_RESERVE = &sQuotaShareResourceSharingStrategy_RESERVE
+var QuotaShareResourceSharingStrategy_LEND = &sQuotaShareResourceSharingStrategy_LEND
+var QuotaShareResourceSharingStrategy_LEND_AND_BORROW = &sQuotaShareResourceSharingStrategy_LEND_AND_BORROW
+
+var QuotaShareState = &sQuotaShareState
+var QuotaShareState_ENABLED = &sQuotaShareState_ENABLED
+var QuotaShareState_DISABLED = &sQuotaShareState_DISABLED
+
+var QuotaShareStatus = &sQuotaShareStatus
+var QuotaShareStatus_CREATING = &sQuotaShareStatus_CREATING
+var QuotaShareStatus_VALID = &sQuotaShareStatus_VALID
+var QuotaShareStatus_INVALID = &sQuotaShareStatus_INVALID
+var QuotaShareStatus_UPDATING = &sQuotaShareStatus_UPDATING
+var QuotaShareStatus_DELETING = &sQuotaShareStatus_DELETING
+
+var QuotaShareUtilizationDetail = &sQuotaShareUtilizationDetail
+var QuotaShareUtilizationDetail_topCapacityUtilization = &sQuotaShareUtilizationDetail_topCapacityUtilization
+
+var RepositoryCredentials = &sRepositoryCredentials
+var RepositoryCredentials_credentialsParameter = &sRepositoryCredentials_credentialsParameter
+
+var ResourceRequirement = &sResourceRequirement
+var ResourceRequirement_value = &sResourceRequirement_value
+var ResourceRequirement_type = &sResourceRequirement_type
+
+var _ResourceRequirements = &s_ResourceRequirements
+var _ResourceRequirements_member = &s_ResourceRequirements_member
+
+var ResourceType = &sResourceType
+var ResourceType_GPU = &sResourceType_GPU
+var ResourceType_VCPU = &sResourceType_VCPU
+var ResourceType_MEMORY = &sResourceType_MEMORY
+
+var RetryAction = &sRetryAction
+var RetryAction_RETRY = &sRetryAction_RETRY
+var RetryAction_EXIT = &sRetryAction_EXIT
+
+var RetryStrategy = &sRetryStrategy
+var RetryStrategy_attempts = &sRetryStrategy_attempts
+var RetryStrategy_evaluateOnExit = &sRetryStrategy_evaluateOnExit
+
+var RuntimePlatform = &sRuntimePlatform
+var RuntimePlatform_operatingSystemFamily = &sRuntimePlatform_operatingSystemFamily
+var RuntimePlatform_cpuArchitecture = &sRuntimePlatform_cpuArchitecture
+
+var S3FilesVolumeConfiguration = &sS3FilesVolumeConfiguration
+var S3FilesVolumeConfiguration_fileSystemArn = &sS3FilesVolumeConfiguration_fileSystemArn
+var S3FilesVolumeConfiguration_rootDirectory = &sS3FilesVolumeConfiguration_rootDirectory
+var S3FilesVolumeConfiguration_transitEncryptionPort = &sS3FilesVolumeConfiguration_transitEncryptionPort
+var S3FilesVolumeConfiguration_accessPointArn = &sS3FilesVolumeConfiguration_accessPointArn
+
+var SchedulingPolicyDetail = &sSchedulingPolicyDetail
+var SchedulingPolicyDetail_name = &sSchedulingPolicyDetail_name
+var SchedulingPolicyDetail_arn = &sSchedulingPolicyDetail_arn
+var SchedulingPolicyDetail_quotaSharePolicy = &sSchedulingPolicyDetail_quotaSharePolicy
+var SchedulingPolicyDetail_fairsharePolicy = &sSchedulingPolicyDetail_fairsharePolicy
+var SchedulingPolicyDetail_tags = &sSchedulingPolicyDetail_tags
+
+var _SchedulingPolicyDetailList = &s_SchedulingPolicyDetailList
+var _SchedulingPolicyDetailList_member = &s_SchedulingPolicyDetailList_member
+
+var SchedulingPolicyListingDetail = &sSchedulingPolicyListingDetail
+var SchedulingPolicyListingDetail_arn = &sSchedulingPolicyListingDetail_arn
+
+var _SchedulingPolicyListingDetailList = &s_SchedulingPolicyListingDetailList
+var _SchedulingPolicyListingDetailList_member = &s_SchedulingPolicyListingDetailList_member
+
+var Secret = &sSecret
+var Secret_name = &sSecret_name
+var Secret_valueFrom = &sSecret_valueFrom
+
+var _SecretList = &s_SecretList
+var _SecretList_member = &s_SecretList_member
+
+var ServerException = &sServerException
+var ServerException_message = &sServerException_message
+
+var ServiceEnvironmentDetail = &sServiceEnvironmentDetail
+var ServiceEnvironmentDetail_serviceEnvironmentName = &sServiceEnvironmentDetail_serviceEnvironmentName
+var ServiceEnvironmentDetail_serviceEnvironmentArn = &sServiceEnvironmentDetail_serviceEnvironmentArn
+var ServiceEnvironmentDetail_serviceEnvironmentType = &sServiceEnvironmentDetail_serviceEnvironmentType
+var ServiceEnvironmentDetail_state = &sServiceEnvironmentDetail_state
+var ServiceEnvironmentDetail_status = &sServiceEnvironmentDetail_status
+var ServiceEnvironmentDetail_capacityLimits = &sServiceEnvironmentDetail_capacityLimits
+var ServiceEnvironmentDetail_tags = &sServiceEnvironmentDetail_tags
+
+var _ServiceEnvironmentDetailList = &s_ServiceEnvironmentDetailList
+var _ServiceEnvironmentDetailList_member = &s_ServiceEnvironmentDetailList_member
+
+var ServiceEnvironmentOrder = &sServiceEnvironmentOrder
+var ServiceEnvironmentOrder_order = &sServiceEnvironmentOrder_order
+var ServiceEnvironmentOrder_serviceEnvironment = &sServiceEnvironmentOrder_serviceEnvironment
+
+var _ServiceEnvironmentOrders = &s_ServiceEnvironmentOrders
+var _ServiceEnvironmentOrders_member = &s_ServiceEnvironmentOrders_member
+
+var ServiceEnvironmentState = &sServiceEnvironmentState
+var ServiceEnvironmentState_ENABLED = &sServiceEnvironmentState_ENABLED
+var ServiceEnvironmentState_DISABLED = &sServiceEnvironmentState_DISABLED
+
+var ServiceEnvironmentStatus = &sServiceEnvironmentStatus
+var ServiceEnvironmentStatus_CREATING = &sServiceEnvironmentStatus_CREATING
+var ServiceEnvironmentStatus_UPDATING = &sServiceEnvironmentStatus_UPDATING
+var ServiceEnvironmentStatus_DELETING = &sServiceEnvironmentStatus_DELETING
+var ServiceEnvironmentStatus_DELETED = &sServiceEnvironmentStatus_DELETED
+var ServiceEnvironmentStatus_VALID = &sServiceEnvironmentStatus_VALID
+var ServiceEnvironmentStatus_INVALID = &sServiceEnvironmentStatus_INVALID
+
+var ServiceEnvironmentType = &sServiceEnvironmentType
+var ServiceEnvironmentType_SAGEMAKER_TRAINING = &sServiceEnvironmentType_SAGEMAKER_TRAINING
+
+var ServiceJobAttemptDetail = &sServiceJobAttemptDetail
+var ServiceJobAttemptDetail_serviceResourceId = &sServiceJobAttemptDetail_serviceResourceId
+var ServiceJobAttemptDetail_startedAt = &sServiceJobAttemptDetail_startedAt
+var ServiceJobAttemptDetail_stoppedAt = &sServiceJobAttemptDetail_stoppedAt
+var ServiceJobAttemptDetail_statusReason = &sServiceJobAttemptDetail_statusReason
+
+var _ServiceJobAttemptDetails = &s_ServiceJobAttemptDetails
+var _ServiceJobAttemptDetails_member = &s_ServiceJobAttemptDetails_member
+
+var ServiceJobCapacityUsageDetail = &sServiceJobCapacityUsageDetail
+var ServiceJobCapacityUsageDetail_capacityUnit = &sServiceJobCapacityUsageDetail_capacityUnit
+var ServiceJobCapacityUsageDetail_quantity = &sServiceJobCapacityUsageDetail_quantity
+
+var _ServiceJobCapacityUsageDetailList = &s_ServiceJobCapacityUsageDetailList
+var _ServiceJobCapacityUsageDetailList_member = &s_ServiceJobCapacityUsageDetailList_member
+
+var ServiceJobCapacityUsageSummary = &sServiceJobCapacityUsageSummary
+var ServiceJobCapacityUsageSummary_capacityUnit = &sServiceJobCapacityUsageSummary_capacityUnit
+var ServiceJobCapacityUsageSummary_quantity = &sServiceJobCapacityUsageSummary_quantity
+
+var _ServiceJobCapacityUsageSummaryList = &s_ServiceJobCapacityUsageSummaryList
+var _ServiceJobCapacityUsageSummaryList_member = &s_ServiceJobCapacityUsageSummaryList_member
+
+var ServiceJobEvaluateOnExit = &sServiceJobEvaluateOnExit
+var ServiceJobEvaluateOnExit_action = &sServiceJobEvaluateOnExit_action
+var ServiceJobEvaluateOnExit_onStatusReason = &sServiceJobEvaluateOnExit_onStatusReason
+
+var _ServiceJobEvaluateOnExitList = &s_ServiceJobEvaluateOnExitList
+var _ServiceJobEvaluateOnExitList_member = &s_ServiceJobEvaluateOnExitList_member
+
+var ServiceJobPreemptedAttempt = &sServiceJobPreemptedAttempt
+var ServiceJobPreemptedAttempt_serviceResourceId = &sServiceJobPreemptedAttempt_serviceResourceId
+var ServiceJobPreemptedAttempt_startedAt = &sServiceJobPreemptedAttempt_startedAt
+var ServiceJobPreemptedAttempt_stoppedAt = &sServiceJobPreemptedAttempt_stoppedAt
+var ServiceJobPreemptedAttempt_statusReason = &sServiceJobPreemptedAttempt_statusReason
+
+var ServiceJobPreemptionConfiguration = &sServiceJobPreemptionConfiguration
+var ServiceJobPreemptionConfiguration_preemptionRetriesBeforeTermination = &sServiceJobPreemptionConfiguration_preemptionRetriesBeforeTermination
+
+var ServiceJobPreemptionSummary = &sServiceJobPreemptionSummary
+var ServiceJobPreemptionSummary_preemptedAttemptCount = &sServiceJobPreemptionSummary_preemptedAttemptCount
+var ServiceJobPreemptionSummary_recentPreemptedAttempts = &sServiceJobPreemptionSummary_recentPreemptedAttempts
+
+var _ServiceJobRecentPreemptedAttemptList = &s_ServiceJobRecentPreemptedAttemptList
+var _ServiceJobRecentPreemptedAttemptList_member = &s_ServiceJobRecentPreemptedAttemptList_member
+
+var ServiceJobRetryAction = &sServiceJobRetryAction
+var ServiceJobRetryAction_RETRY = &sServiceJobRetryAction_RETRY
+var ServiceJobRetryAction_EXIT = &sServiceJobRetryAction_EXIT
+
+var ServiceJobRetryStrategy = &sServiceJobRetryStrategy
+var ServiceJobRetryStrategy_attempts = &sServiceJobRetryStrategy_attempts
+var ServiceJobRetryStrategy_evaluateOnExit = &sServiceJobRetryStrategy_evaluateOnExit
+
+var ServiceJobStatus = &sServiceJobStatus
+var ServiceJobStatus_SUBMITTED = &sServiceJobStatus_SUBMITTED
+var ServiceJobStatus_PENDING = &sServiceJobStatus_PENDING
+var ServiceJobStatus_RUNNABLE = &sServiceJobStatus_RUNNABLE
+var ServiceJobStatus_SCHEDULED = &sServiceJobStatus_SCHEDULED
+var ServiceJobStatus_STARTING = &sServiceJobStatus_STARTING
+var ServiceJobStatus_RUNNING = &sServiceJobStatus_RUNNING
+var ServiceJobStatus_SUCCEEDED = &sServiceJobStatus_SUCCEEDED
+var ServiceJobStatus_FAILED = &sServiceJobStatus_FAILED
+
+var ServiceJobSummary = &sServiceJobSummary
+var ServiceJobSummary_latestAttempt = &sServiceJobSummary_latestAttempt
+var ServiceJobSummary_capacityUsage = &sServiceJobSummary_capacityUsage
+var ServiceJobSummary_createdAt = &sServiceJobSummary_createdAt
+var ServiceJobSummary_jobArn = &sServiceJobSummary_jobArn
+var ServiceJobSummary_jobId = &sServiceJobSummary_jobId
+var ServiceJobSummary_jobName = &sServiceJobSummary_jobName
+var ServiceJobSummary_scheduledAt = &sServiceJobSummary_scheduledAt
+var ServiceJobSummary_serviceJobType = &sServiceJobSummary_serviceJobType
+var ServiceJobSummary_shareIdentifier = &sServiceJobSummary_shareIdentifier
+var ServiceJobSummary_quotaShareName = &sServiceJobSummary_quotaShareName
+var ServiceJobSummary_status = &sServiceJobSummary_status
+var ServiceJobSummary_statusReason = &sServiceJobSummary_statusReason
+var ServiceJobSummary_startedAt = &sServiceJobSummary_startedAt
+var ServiceJobSummary_stoppedAt = &sServiceJobSummary_stoppedAt
+var ServiceJobSummary_isTerminated = &sServiceJobSummary_isTerminated
+
+var _ServiceJobSummaryList = &s_ServiceJobSummaryList
+var _ServiceJobSummaryList_member = &s_ServiceJobSummaryList_member
+
+var ServiceJobTimeout = &sServiceJobTimeout
+var ServiceJobTimeout_attemptDurationSeconds = &sServiceJobTimeout_attemptDurationSeconds
+
+var ServiceJobType = &sServiceJobType
+var ServiceJobType_SAGEMAKER_TRAINING = &sServiceJobType_SAGEMAKER_TRAINING
+
+var ServiceResourceId = &sServiceResourceId
+var ServiceResourceId_name = &sServiceResourceId_name
+var ServiceResourceId_value = &sServiceResourceId_value
+
+var ServiceResourceIdName = &sServiceResourceIdName
+var ServiceResourceIdName_SAGEMAKER_TRAINING_JOB_ARN = &sServiceResourceIdName_SAGEMAKER_TRAINING_JOB_ARN
+
+var ShareAttributes = &sShareAttributes
+var ShareAttributes_shareIdentifier = &sShareAttributes_shareIdentifier
+var ShareAttributes_weightFactor = &sShareAttributes_weightFactor
+
+var _ShareAttributesList = &s_ShareAttributesList
+var _ShareAttributesList_member = &s_ShareAttributesList_member
+
+var _String = &s_String
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeysList = &s_TagKeysList
+var _TagKeysList_member = &s_TagKeysList_member
+
+var _TagrisTagsMap = &s_TagrisTagsMap
+var _TagrisTagsMap_key = &s_TagrisTagsMap_key
+var _TagrisTagsMap_value = &s_TagrisTagsMap_value
+
+var _TagsMap = &s_TagsMap
+var _TagsMap_key = &s_TagsMap_key
+var _TagsMap_value = &s_TagsMap_value
+
+var _TagValue = &s_TagValue
+
+var TaskContainerDependency = &sTaskContainerDependency
+var TaskContainerDependency_containerName = &sTaskContainerDependency_containerName
+var TaskContainerDependency_condition = &sTaskContainerDependency_condition
+
+var _TaskContainerDependencyList = &s_TaskContainerDependencyList
+var _TaskContainerDependencyList_member = &s_TaskContainerDependencyList_member
+
+var TaskContainerDetails = &sTaskContainerDetails
+var TaskContainerDetails_command = &sTaskContainerDetails_command
+var TaskContainerDetails_dependsOn = &sTaskContainerDetails_dependsOn
+var TaskContainerDetails_environment = &sTaskContainerDetails_environment
+var TaskContainerDetails_essential = &sTaskContainerDetails_essential
+var TaskContainerDetails_firelensConfiguration = &sTaskContainerDetails_firelensConfiguration
+var TaskContainerDetails_image = &sTaskContainerDetails_image
+var TaskContainerDetails_linuxParameters = &sTaskContainerDetails_linuxParameters
+var TaskContainerDetails_logConfiguration = &sTaskContainerDetails_logConfiguration
+var TaskContainerDetails_mountPoints = &sTaskContainerDetails_mountPoints
+var TaskContainerDetails_name = &sTaskContainerDetails_name
+var TaskContainerDetails_privileged = &sTaskContainerDetails_privileged
+var TaskContainerDetails_readonlyRootFilesystem = &sTaskContainerDetails_readonlyRootFilesystem
+var TaskContainerDetails_repositoryCredentials = &sTaskContainerDetails_repositoryCredentials
+var TaskContainerDetails_resourceRequirements = &sTaskContainerDetails_resourceRequirements
+var TaskContainerDetails_secrets = &sTaskContainerDetails_secrets
+var TaskContainerDetails_ulimits = &sTaskContainerDetails_ulimits
+var TaskContainerDetails_user = &sTaskContainerDetails_user
+var TaskContainerDetails_startTimeout = &sTaskContainerDetails_startTimeout
+var TaskContainerDetails_stopTimeout = &sTaskContainerDetails_stopTimeout
+var TaskContainerDetails_exitCode = &sTaskContainerDetails_exitCode
+var TaskContainerDetails_reason = &sTaskContainerDetails_reason
+var TaskContainerDetails_logStreamName = &sTaskContainerDetails_logStreamName
+var TaskContainerDetails_networkInterfaces = &sTaskContainerDetails_networkInterfaces
+
+var TaskContainerOverrides = &sTaskContainerOverrides
+var TaskContainerOverrides_command = &sTaskContainerOverrides_command
+var TaskContainerOverrides_environment = &sTaskContainerOverrides_environment
+var TaskContainerOverrides_name = &sTaskContainerOverrides_name
+var TaskContainerOverrides_resourceRequirements = &sTaskContainerOverrides_resourceRequirements
+
+var TaskContainerProperties = &sTaskContainerProperties
+var TaskContainerProperties_command = &sTaskContainerProperties_command
+var TaskContainerProperties_dependsOn = &sTaskContainerProperties_dependsOn
+var TaskContainerProperties_environment = &sTaskContainerProperties_environment
+var TaskContainerProperties_essential = &sTaskContainerProperties_essential
+var TaskContainerProperties_firelensConfiguration = &sTaskContainerProperties_firelensConfiguration
+var TaskContainerProperties_image = &sTaskContainerProperties_image
+var TaskContainerProperties_linuxParameters = &sTaskContainerProperties_linuxParameters
+var TaskContainerProperties_logConfiguration = &sTaskContainerProperties_logConfiguration
+var TaskContainerProperties_mountPoints = &sTaskContainerProperties_mountPoints
+var TaskContainerProperties_name = &sTaskContainerProperties_name
+var TaskContainerProperties_privileged = &sTaskContainerProperties_privileged
+var TaskContainerProperties_readonlyRootFilesystem = &sTaskContainerProperties_readonlyRootFilesystem
+var TaskContainerProperties_repositoryCredentials = &sTaskContainerProperties_repositoryCredentials
+var TaskContainerProperties_resourceRequirements = &sTaskContainerProperties_resourceRequirements
+var TaskContainerProperties_secrets = &sTaskContainerProperties_secrets
+var TaskContainerProperties_ulimits = &sTaskContainerProperties_ulimits
+var TaskContainerProperties_user = &sTaskContainerProperties_user
+var TaskContainerProperties_startTimeout = &sTaskContainerProperties_startTimeout
+var TaskContainerProperties_stopTimeout = &sTaskContainerProperties_stopTimeout
+
+var TaskPropertiesOverride = &sTaskPropertiesOverride
+var TaskPropertiesOverride_containers = &sTaskPropertiesOverride_containers
+
+var TerminateJobsErrorDetail = &sTerminateJobsErrorDetail
+var TerminateJobsErrorDetail_job = &sTerminateJobsErrorDetail_job
+var TerminateJobsErrorDetail_code = &sTerminateJobsErrorDetail_code
+var TerminateJobsErrorDetail_message = &sTerminateJobsErrorDetail_message
+
+var _TerminateJobsErrorDetailList = &s_TerminateJobsErrorDetailList
+var _TerminateJobsErrorDetailList_member = &s_TerminateJobsErrorDetailList_member
+
+var TerminateServiceJobsErrorDetail = &sTerminateServiceJobsErrorDetail
+var TerminateServiceJobsErrorDetail_job = &sTerminateServiceJobsErrorDetail_job
+var TerminateServiceJobsErrorDetail_code = &sTerminateServiceJobsErrorDetail_code
+var TerminateServiceJobsErrorDetail_message = &sTerminateServiceJobsErrorDetail_message
+
+var _TerminateServiceJobsErrorDetailList = &s_TerminateServiceJobsErrorDetailList
+var _TerminateServiceJobsErrorDetailList_member = &s_TerminateServiceJobsErrorDetailList_member
+
+var Tmpfs = &sTmpfs
+var Tmpfs_containerPath = &sTmpfs_containerPath
+var Tmpfs_size = &sTmpfs_size
+var Tmpfs_mountOptions = &sTmpfs_mountOptions
+
+var _TmpfsList = &s_TmpfsList
+var _TmpfsList_member = &s_TmpfsList_member
+
+var Ulimit = &sUlimit
+var Ulimit_hardLimit = &sUlimit_hardLimit
+var Ulimit_name = &sUlimit_name
+var Ulimit_softLimit = &sUlimit_softLimit
+
+var _Ulimits = &s_Ulimits
+var _Ulimits_member = &s_Ulimits_member
+
+var UpdateManagedInstancesProviderConfiguration = &sUpdateManagedInstancesProviderConfiguration
+var UpdateManagedInstancesProviderConfiguration_propagateTags = &sUpdateManagedInstancesProviderConfiguration_propagateTags
+var UpdateManagedInstancesProviderConfiguration_infrastructureRoleArn = &sUpdateManagedInstancesProviderConfiguration_infrastructureRoleArn
+var UpdateManagedInstancesProviderConfiguration_instanceLaunchTemplate = &sUpdateManagedInstancesProviderConfiguration_instanceLaunchTemplate
+var UpdateManagedInstancesProviderConfiguration_infrastructureOptimization = &sUpdateManagedInstancesProviderConfiguration_infrastructureOptimization
+
+var UpdatePolicy = &sUpdatePolicy
+var UpdatePolicy_terminateJobsOnUpdate = &sUpdatePolicy_terminateJobsOnUpdate
+var UpdatePolicy_jobExecutionTimeoutMinutes = &sUpdatePolicy_jobExecutionTimeoutMinutes
+
+var UserdataType = &sUserdataType
+var UserdataType_EKS_BOOTSTRAP_SH = &sUserdataType_EKS_BOOTSTRAP_SH
+var UserdataType_EKS_NODEADM = &sUserdataType_EKS_NODEADM
+
+var Volume = &sVolume
+var Volume_host = &sVolume_host
+var Volume_name = &sVolume_name
+var Volume_efsVolumeConfiguration = &sVolume_efsVolumeConfiguration
+var Volume_s3filesVolumeConfiguration = &sVolume_s3filesVolumeConfiguration
+
+var _Volumes = &s_Volumes
+var _Volumes_member = &s_Volumes_member
+
+var CancelJobRequest = &sCancelJobRequest
+var CancelJobRequest_jobId = &sCancelJobRequest_jobId
+var CancelJobRequest_reason = &sCancelJobRequest_reason
+
+var CancelJobResponse = &sCancelJobResponse
+
+var CancelJobsRequest = &sCancelJobsRequest
+var CancelJobsRequest_jobs = &sCancelJobsRequest_jobs
+var CancelJobsRequest_reason = &sCancelJobsRequest_reason
+
+var CancelJobsResponse = &sCancelJobsResponse
+var CancelJobsResponse_successful = &sCancelJobsResponse_successful
+var CancelJobsResponse_errors = &sCancelJobsResponse_errors
+
+var CreateComputeEnvironmentRequest = &sCreateComputeEnvironmentRequest
+var CreateComputeEnvironmentRequest_computeEnvironmentName = &sCreateComputeEnvironmentRequest_computeEnvironmentName
+var CreateComputeEnvironmentRequest_type = &sCreateComputeEnvironmentRequest_type
+var CreateComputeEnvironmentRequest_state = &sCreateComputeEnvironmentRequest_state
+var CreateComputeEnvironmentRequest_unmanagedvCpus = &sCreateComputeEnvironmentRequest_unmanagedvCpus
+var CreateComputeEnvironmentRequest_computeResources = &sCreateComputeEnvironmentRequest_computeResources
+var CreateComputeEnvironmentRequest_serviceRole = &sCreateComputeEnvironmentRequest_serviceRole
+var CreateComputeEnvironmentRequest_tags = &sCreateComputeEnvironmentRequest_tags
+var CreateComputeEnvironmentRequest_eksConfiguration = &sCreateComputeEnvironmentRequest_eksConfiguration
+var CreateComputeEnvironmentRequest_context = &sCreateComputeEnvironmentRequest_context
+var CreateComputeEnvironmentRequest_ecsSettings = &sCreateComputeEnvironmentRequest_ecsSettings
+
+var CreateComputeEnvironmentResponse = &sCreateComputeEnvironmentResponse
+var CreateComputeEnvironmentResponse_computeEnvironmentName = &sCreateComputeEnvironmentResponse_computeEnvironmentName
+var CreateComputeEnvironmentResponse_computeEnvironmentArn = &sCreateComputeEnvironmentResponse_computeEnvironmentArn
+
+var CreateConsumableResourceRequest = &sCreateConsumableResourceRequest
+var CreateConsumableResourceRequest_consumableResourceName = &sCreateConsumableResourceRequest_consumableResourceName
+var CreateConsumableResourceRequest_totalQuantity = &sCreateConsumableResourceRequest_totalQuantity
+var CreateConsumableResourceRequest_resourceType = &sCreateConsumableResourceRequest_resourceType
+var CreateConsumableResourceRequest_tags = &sCreateConsumableResourceRequest_tags
+
+var CreateConsumableResourceResponse = &sCreateConsumableResourceResponse
+var CreateConsumableResourceResponse_consumableResourceName = &sCreateConsumableResourceResponse_consumableResourceName
+var CreateConsumableResourceResponse_consumableResourceArn = &sCreateConsumableResourceResponse_consumableResourceArn
+
+var CreateJobQueueRequest = &sCreateJobQueueRequest
+var CreateJobQueueRequest_jobQueueName = &sCreateJobQueueRequest_jobQueueName
+var CreateJobQueueRequest_state = &sCreateJobQueueRequest_state
+var CreateJobQueueRequest_schedulingPolicyArn = &sCreateJobQueueRequest_schedulingPolicyArn
+var CreateJobQueueRequest_priority = &sCreateJobQueueRequest_priority
+var CreateJobQueueRequest_computeEnvironmentOrder = &sCreateJobQueueRequest_computeEnvironmentOrder
+var CreateJobQueueRequest_serviceEnvironmentOrder = &sCreateJobQueueRequest_serviceEnvironmentOrder
+var CreateJobQueueRequest_jobQueueType = &sCreateJobQueueRequest_jobQueueType
+var CreateJobQueueRequest_tags = &sCreateJobQueueRequest_tags
+var CreateJobQueueRequest_jobStateTimeLimitActions = &sCreateJobQueueRequest_jobStateTimeLimitActions
+
+var CreateJobQueueResponse = &sCreateJobQueueResponse
+var CreateJobQueueResponse_jobQueueName = &sCreateJobQueueResponse_jobQueueName
+var CreateJobQueueResponse_jobQueueArn = &sCreateJobQueueResponse_jobQueueArn
+
+var CreateQuotaShareRequest = &sCreateQuotaShareRequest
+var CreateQuotaShareRequest_quotaShareName = &sCreateQuotaShareRequest_quotaShareName
+var CreateQuotaShareRequest_jobQueue = &sCreateQuotaShareRequest_jobQueue
+var CreateQuotaShareRequest_capacityLimits = &sCreateQuotaShareRequest_capacityLimits
+var CreateQuotaShareRequest_resourceSharingConfiguration = &sCreateQuotaShareRequest_resourceSharingConfiguration
+var CreateQuotaShareRequest_preemptionConfiguration = &sCreateQuotaShareRequest_preemptionConfiguration
+var CreateQuotaShareRequest_state = &sCreateQuotaShareRequest_state
+var CreateQuotaShareRequest_tags = &sCreateQuotaShareRequest_tags
+
+var CreateQuotaShareResponse = &sCreateQuotaShareResponse
+var CreateQuotaShareResponse_quotaShareName = &sCreateQuotaShareResponse_quotaShareName
+var CreateQuotaShareResponse_quotaShareArn = &sCreateQuotaShareResponse_quotaShareArn
+
+var CreateSchedulingPolicyRequest = &sCreateSchedulingPolicyRequest
+var CreateSchedulingPolicyRequest_name = &sCreateSchedulingPolicyRequest_name
+var CreateSchedulingPolicyRequest_quotaSharePolicy = &sCreateSchedulingPolicyRequest_quotaSharePolicy
+var CreateSchedulingPolicyRequest_fairsharePolicy = &sCreateSchedulingPolicyRequest_fairsharePolicy
+var CreateSchedulingPolicyRequest_tags = &sCreateSchedulingPolicyRequest_tags
+
+var CreateSchedulingPolicyResponse = &sCreateSchedulingPolicyResponse
+var CreateSchedulingPolicyResponse_name = &sCreateSchedulingPolicyResponse_name
+var CreateSchedulingPolicyResponse_arn = &sCreateSchedulingPolicyResponse_arn
+
+var CreateServiceEnvironmentRequest = &sCreateServiceEnvironmentRequest
+var CreateServiceEnvironmentRequest_serviceEnvironmentName = &sCreateServiceEnvironmentRequest_serviceEnvironmentName
+var CreateServiceEnvironmentRequest_serviceEnvironmentType = &sCreateServiceEnvironmentRequest_serviceEnvironmentType
+var CreateServiceEnvironmentRequest_state = &sCreateServiceEnvironmentRequest_state
+var CreateServiceEnvironmentRequest_capacityLimits = &sCreateServiceEnvironmentRequest_capacityLimits
+var CreateServiceEnvironmentRequest_tags = &sCreateServiceEnvironmentRequest_tags
+
+var CreateServiceEnvironmentResponse = &sCreateServiceEnvironmentResponse
+var CreateServiceEnvironmentResponse_serviceEnvironmentName = &sCreateServiceEnvironmentResponse_serviceEnvironmentName
+var CreateServiceEnvironmentResponse_serviceEnvironmentArn = &sCreateServiceEnvironmentResponse_serviceEnvironmentArn
+
+var DeleteComputeEnvironmentRequest = &sDeleteComputeEnvironmentRequest
+var DeleteComputeEnvironmentRequest_computeEnvironment = &sDeleteComputeEnvironmentRequest_computeEnvironment
+
+var DeleteComputeEnvironmentResponse = &sDeleteComputeEnvironmentResponse
+
+var DeleteConsumableResourceRequest = &sDeleteConsumableResourceRequest
+var DeleteConsumableResourceRequest_consumableResource = &sDeleteConsumableResourceRequest_consumableResource
+
+var DeleteConsumableResourceResponse = &sDeleteConsumableResourceResponse
+
+var DeleteJobQueueRequest = &sDeleteJobQueueRequest
+var DeleteJobQueueRequest_jobQueue = &sDeleteJobQueueRequest_jobQueue
+
+var DeleteJobQueueResponse = &sDeleteJobQueueResponse
+
+var DeleteQuotaShareRequest = &sDeleteQuotaShareRequest
+var DeleteQuotaShareRequest_quotaShareArn = &sDeleteQuotaShareRequest_quotaShareArn
+
+var DeleteQuotaShareResponse = &sDeleteQuotaShareResponse
+
+var DeleteSchedulingPolicyRequest = &sDeleteSchedulingPolicyRequest
+var DeleteSchedulingPolicyRequest_arn = &sDeleteSchedulingPolicyRequest_arn
+
+var DeleteSchedulingPolicyResponse = &sDeleteSchedulingPolicyResponse
+
+var DeleteServiceEnvironmentRequest = &sDeleteServiceEnvironmentRequest
+var DeleteServiceEnvironmentRequest_serviceEnvironment = &sDeleteServiceEnvironmentRequest_serviceEnvironment
+
+var DeleteServiceEnvironmentResponse = &sDeleteServiceEnvironmentResponse
+
+var DeregisterJobDefinitionRequest = &sDeregisterJobDefinitionRequest
+var DeregisterJobDefinitionRequest_jobDefinition = &sDeregisterJobDefinitionRequest_jobDefinition
+
+var DeregisterJobDefinitionResponse = &sDeregisterJobDefinitionResponse
+
+var DescribeComputeEnvironmentsRequest = &sDescribeComputeEnvironmentsRequest
+var DescribeComputeEnvironmentsRequest_computeEnvironments = &sDescribeComputeEnvironmentsRequest_computeEnvironments
+var DescribeComputeEnvironmentsRequest_maxResults = &sDescribeComputeEnvironmentsRequest_maxResults
+var DescribeComputeEnvironmentsRequest_nextToken = &sDescribeComputeEnvironmentsRequest_nextToken
+
+var DescribeComputeEnvironmentsResponse = &sDescribeComputeEnvironmentsResponse
+var DescribeComputeEnvironmentsResponse_computeEnvironments = &sDescribeComputeEnvironmentsResponse_computeEnvironments
+var DescribeComputeEnvironmentsResponse_nextToken = &sDescribeComputeEnvironmentsResponse_nextToken
+
+var DescribeConsumableResourceRequest = &sDescribeConsumableResourceRequest
+var DescribeConsumableResourceRequest_consumableResource = &sDescribeConsumableResourceRequest_consumableResource
+
+var DescribeConsumableResourceResponse = &sDescribeConsumableResourceResponse
+var DescribeConsumableResourceResponse_consumableResourceName = &sDescribeConsumableResourceResponse_consumableResourceName
+var DescribeConsumableResourceResponse_consumableResourceArn = &sDescribeConsumableResourceResponse_consumableResourceArn
+var DescribeConsumableResourceResponse_totalQuantity = &sDescribeConsumableResourceResponse_totalQuantity
+var DescribeConsumableResourceResponse_inUseQuantity = &sDescribeConsumableResourceResponse_inUseQuantity
+var DescribeConsumableResourceResponse_availableQuantity = &sDescribeConsumableResourceResponse_availableQuantity
+var DescribeConsumableResourceResponse_resourceType = &sDescribeConsumableResourceResponse_resourceType
+var DescribeConsumableResourceResponse_createdAt = &sDescribeConsumableResourceResponse_createdAt
+var DescribeConsumableResourceResponse_tags = &sDescribeConsumableResourceResponse_tags
+
+var DescribeJobDefinitionsRequest = &sDescribeJobDefinitionsRequest
+var DescribeJobDefinitionsRequest_jobDefinitions = &sDescribeJobDefinitionsRequest_jobDefinitions
+var DescribeJobDefinitionsRequest_maxResults = &sDescribeJobDefinitionsRequest_maxResults
+var DescribeJobDefinitionsRequest_jobDefinitionName = &sDescribeJobDefinitionsRequest_jobDefinitionName
+var DescribeJobDefinitionsRequest_status = &sDescribeJobDefinitionsRequest_status
+var DescribeJobDefinitionsRequest_nextToken = &sDescribeJobDefinitionsRequest_nextToken
+
+var DescribeJobDefinitionsResponse = &sDescribeJobDefinitionsResponse
+var DescribeJobDefinitionsResponse_jobDefinitions = &sDescribeJobDefinitionsResponse_jobDefinitions
+var DescribeJobDefinitionsResponse_nextToken = &sDescribeJobDefinitionsResponse_nextToken
+
+var DescribeJobQueuesRequest = &sDescribeJobQueuesRequest
+var DescribeJobQueuesRequest_jobQueues = &sDescribeJobQueuesRequest_jobQueues
+var DescribeJobQueuesRequest_maxResults = &sDescribeJobQueuesRequest_maxResults
+var DescribeJobQueuesRequest_nextToken = &sDescribeJobQueuesRequest_nextToken
+
+var DescribeJobQueuesResponse = &sDescribeJobQueuesResponse
+var DescribeJobQueuesResponse_jobQueues = &sDescribeJobQueuesResponse_jobQueues
+var DescribeJobQueuesResponse_nextToken = &sDescribeJobQueuesResponse_nextToken
+
+var DescribeJobsRequest = &sDescribeJobsRequest
+var DescribeJobsRequest_jobs = &sDescribeJobsRequest_jobs
+
+var DescribeJobsResponse = &sDescribeJobsResponse
+var DescribeJobsResponse_jobs = &sDescribeJobsResponse_jobs
+
+var DescribeQuotaShareRequest = &sDescribeQuotaShareRequest
+var DescribeQuotaShareRequest_quotaShareArn = &sDescribeQuotaShareRequest_quotaShareArn
+
+var DescribeQuotaShareResponse = &sDescribeQuotaShareResponse
+var DescribeQuotaShareResponse_quotaShareName = &sDescribeQuotaShareResponse_quotaShareName
+var DescribeQuotaShareResponse_quotaShareArn = &sDescribeQuotaShareResponse_quotaShareArn
+var DescribeQuotaShareResponse_jobQueueArn = &sDescribeQuotaShareResponse_jobQueueArn
+var DescribeQuotaShareResponse_capacityLimits = &sDescribeQuotaShareResponse_capacityLimits
+var DescribeQuotaShareResponse_resourceSharingConfiguration = &sDescribeQuotaShareResponse_resourceSharingConfiguration
+var DescribeQuotaShareResponse_preemptionConfiguration = &sDescribeQuotaShareResponse_preemptionConfiguration
+var DescribeQuotaShareResponse_state = &sDescribeQuotaShareResponse_state
+var DescribeQuotaShareResponse_status = &sDescribeQuotaShareResponse_status
+var DescribeQuotaShareResponse_tags = &sDescribeQuotaShareResponse_tags
+
+var DescribeSchedulingPoliciesRequest = &sDescribeSchedulingPoliciesRequest
+var DescribeSchedulingPoliciesRequest_arns = &sDescribeSchedulingPoliciesRequest_arns
+
+var DescribeSchedulingPoliciesResponse = &sDescribeSchedulingPoliciesResponse
+var DescribeSchedulingPoliciesResponse_schedulingPolicies = &sDescribeSchedulingPoliciesResponse_schedulingPolicies
+
+var DescribeServiceEnvironmentsRequest = &sDescribeServiceEnvironmentsRequest
+var DescribeServiceEnvironmentsRequest_serviceEnvironments = &sDescribeServiceEnvironmentsRequest_serviceEnvironments
+var DescribeServiceEnvironmentsRequest_maxResults = &sDescribeServiceEnvironmentsRequest_maxResults
+var DescribeServiceEnvironmentsRequest_nextToken = &sDescribeServiceEnvironmentsRequest_nextToken
+
+var DescribeServiceEnvironmentsResponse = &sDescribeServiceEnvironmentsResponse
+var DescribeServiceEnvironmentsResponse_serviceEnvironments = &sDescribeServiceEnvironmentsResponse_serviceEnvironments
+var DescribeServiceEnvironmentsResponse_nextToken = &sDescribeServiceEnvironmentsResponse_nextToken
+
+var DescribeServiceJobRequest = &sDescribeServiceJobRequest
+var DescribeServiceJobRequest_jobId = &sDescribeServiceJobRequest_jobId
+
+var DescribeServiceJobResponse = &sDescribeServiceJobResponse
+var DescribeServiceJobResponse_attempts = &sDescribeServiceJobResponse_attempts
+var DescribeServiceJobResponse_capacityUsage = &sDescribeServiceJobResponse_capacityUsage
+var DescribeServiceJobResponse_createdAt = &sDescribeServiceJobResponse_createdAt
+var DescribeServiceJobResponse_isTerminated = &sDescribeServiceJobResponse_isTerminated
+var DescribeServiceJobResponse_jobArn = &sDescribeServiceJobResponse_jobArn
+var DescribeServiceJobResponse_jobId = &sDescribeServiceJobResponse_jobId
+var DescribeServiceJobResponse_jobName = &sDescribeServiceJobResponse_jobName
+var DescribeServiceJobResponse_jobQueue = &sDescribeServiceJobResponse_jobQueue
+var DescribeServiceJobResponse_latestAttempt = &sDescribeServiceJobResponse_latestAttempt
+var DescribeServiceJobResponse_retryStrategy = &sDescribeServiceJobResponse_retryStrategy
+var DescribeServiceJobResponse_scheduledAt = &sDescribeServiceJobResponse_scheduledAt
+var DescribeServiceJobResponse_schedulingPriority = &sDescribeServiceJobResponse_schedulingPriority
+var DescribeServiceJobResponse_serviceRequestPayload = &sDescribeServiceJobResponse_serviceRequestPayload
+var DescribeServiceJobResponse_serviceJobType = &sDescribeServiceJobResponse_serviceJobType
+var DescribeServiceJobResponse_shareIdentifier = &sDescribeServiceJobResponse_shareIdentifier
+var DescribeServiceJobResponse_quotaShareName = &sDescribeServiceJobResponse_quotaShareName
+var DescribeServiceJobResponse_preemptionConfiguration = &sDescribeServiceJobResponse_preemptionConfiguration
+var DescribeServiceJobResponse_preemptionSummary = &sDescribeServiceJobResponse_preemptionSummary
+var DescribeServiceJobResponse_startedAt = &sDescribeServiceJobResponse_startedAt
+var DescribeServiceJobResponse_status = &sDescribeServiceJobResponse_status
+var DescribeServiceJobResponse_statusReason = &sDescribeServiceJobResponse_statusReason
+var DescribeServiceJobResponse_stoppedAt = &sDescribeServiceJobResponse_stoppedAt
+var DescribeServiceJobResponse_tags = &sDescribeServiceJobResponse_tags
+var DescribeServiceJobResponse_timeoutConfig = &sDescribeServiceJobResponse_timeoutConfig
+
+var GetJobQueueSnapshotRequest = &sGetJobQueueSnapshotRequest
+var GetJobQueueSnapshotRequest_jobQueue = &sGetJobQueueSnapshotRequest_jobQueue
+
+var GetJobQueueSnapshotResponse = &sGetJobQueueSnapshotResponse
+var GetJobQueueSnapshotResponse_frontOfQueue = &sGetJobQueueSnapshotResponse_frontOfQueue
+var GetJobQueueSnapshotResponse_frontOfQuotaShares = &sGetJobQueueSnapshotResponse_frontOfQuotaShares
+var GetJobQueueSnapshotResponse_queueUtilization = &sGetJobQueueSnapshotResponse_queueUtilization
+
+var ListConsumableResourcesRequest = &sListConsumableResourcesRequest
+var ListConsumableResourcesRequest_filters = &sListConsumableResourcesRequest_filters
+var ListConsumableResourcesRequest_maxResults = &sListConsumableResourcesRequest_maxResults
+var ListConsumableResourcesRequest_nextToken = &sListConsumableResourcesRequest_nextToken
+
+var ListConsumableResourcesResponse = &sListConsumableResourcesResponse
+var ListConsumableResourcesResponse_consumableResources = &sListConsumableResourcesResponse_consumableResources
+var ListConsumableResourcesResponse_nextToken = &sListConsumableResourcesResponse_nextToken
+
+var ListJobsByConsumableResourceRequest = &sListJobsByConsumableResourceRequest
+var ListJobsByConsumableResourceRequest_consumableResource = &sListJobsByConsumableResourceRequest_consumableResource
+var ListJobsByConsumableResourceRequest_filters = &sListJobsByConsumableResourceRequest_filters
+var ListJobsByConsumableResourceRequest_maxResults = &sListJobsByConsumableResourceRequest_maxResults
+var ListJobsByConsumableResourceRequest_nextToken = &sListJobsByConsumableResourceRequest_nextToken
+
+var ListJobsByConsumableResourceResponse = &sListJobsByConsumableResourceResponse
+var ListJobsByConsumableResourceResponse_jobs = &sListJobsByConsumableResourceResponse_jobs
+var ListJobsByConsumableResourceResponse_nextToken = &sListJobsByConsumableResourceResponse_nextToken
+
+var ListJobsRequest = &sListJobsRequest
+var ListJobsRequest_jobQueue = &sListJobsRequest_jobQueue
+var ListJobsRequest_arrayJobId = &sListJobsRequest_arrayJobId
+var ListJobsRequest_multiNodeJobId = &sListJobsRequest_multiNodeJobId
+var ListJobsRequest_jobStatus = &sListJobsRequest_jobStatus
+var ListJobsRequest_maxResults = &sListJobsRequest_maxResults
+var ListJobsRequest_nextToken = &sListJobsRequest_nextToken
+var ListJobsRequest_filters = &sListJobsRequest_filters
+
+var ListJobsResponse = &sListJobsResponse
+var ListJobsResponse_jobSummaryList = &sListJobsResponse_jobSummaryList
+var ListJobsResponse_nextToken = &sListJobsResponse_nextToken
+
+var ListQuotaSharesRequest = &sListQuotaSharesRequest
+var ListQuotaSharesRequest_jobQueue = &sListQuotaSharesRequest_jobQueue
+var ListQuotaSharesRequest_maxResults = &sListQuotaSharesRequest_maxResults
+var ListQuotaSharesRequest_nextToken = &sListQuotaSharesRequest_nextToken
+
+var ListQuotaSharesResponse = &sListQuotaSharesResponse
+var ListQuotaSharesResponse_quotaShares = &sListQuotaSharesResponse_quotaShares
+var ListQuotaSharesResponse_nextToken = &sListQuotaSharesResponse_nextToken
+
+var ListSchedulingPoliciesRequest = &sListSchedulingPoliciesRequest
+var ListSchedulingPoliciesRequest_maxResults = &sListSchedulingPoliciesRequest_maxResults
+var ListSchedulingPoliciesRequest_nextToken = &sListSchedulingPoliciesRequest_nextToken
+
+var ListSchedulingPoliciesResponse = &sListSchedulingPoliciesResponse
+var ListSchedulingPoliciesResponse_schedulingPolicies = &sListSchedulingPoliciesResponse_schedulingPolicies
+var ListSchedulingPoliciesResponse_nextToken = &sListSchedulingPoliciesResponse_nextToken
+
+var ListServiceJobsRequest = &sListServiceJobsRequest
+var ListServiceJobsRequest_jobQueue = &sListServiceJobsRequest_jobQueue
+var ListServiceJobsRequest_jobStatus = &sListServiceJobsRequest_jobStatus
+var ListServiceJobsRequest_maxResults = &sListServiceJobsRequest_maxResults
+var ListServiceJobsRequest_nextToken = &sListServiceJobsRequest_nextToken
+var ListServiceJobsRequest_filters = &sListServiceJobsRequest_filters
+
+var ListServiceJobsResponse = &sListServiceJobsResponse
+var ListServiceJobsResponse_jobSummaryList = &sListServiceJobsResponse_jobSummaryList
+var ListServiceJobsResponse_nextToken = &sListServiceJobsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterJobDefinitionRequest = &sRegisterJobDefinitionRequest
+var RegisterJobDefinitionRequest_jobDefinitionName = &sRegisterJobDefinitionRequest_jobDefinitionName
+var RegisterJobDefinitionRequest_type = &sRegisterJobDefinitionRequest_type
+var RegisterJobDefinitionRequest_parameters = &sRegisterJobDefinitionRequest_parameters
+var RegisterJobDefinitionRequest_schedulingPriority = &sRegisterJobDefinitionRequest_schedulingPriority
+var RegisterJobDefinitionRequest_containerProperties = &sRegisterJobDefinitionRequest_containerProperties
+var RegisterJobDefinitionRequest_nodeProperties = &sRegisterJobDefinitionRequest_nodeProperties
+var RegisterJobDefinitionRequest_retryStrategy = &sRegisterJobDefinitionRequest_retryStrategy
+var RegisterJobDefinitionRequest_propagateTags = &sRegisterJobDefinitionRequest_propagateTags
+var RegisterJobDefinitionRequest_timeout = &sRegisterJobDefinitionRequest_timeout
+var RegisterJobDefinitionRequest_tags = &sRegisterJobDefinitionRequest_tags
+var RegisterJobDefinitionRequest_platformCapabilities = &sRegisterJobDefinitionRequest_platformCapabilities
+var RegisterJobDefinitionRequest_eksProperties = &sRegisterJobDefinitionRequest_eksProperties
+var RegisterJobDefinitionRequest_ecsProperties = &sRegisterJobDefinitionRequest_ecsProperties
+var RegisterJobDefinitionRequest_consumableResourceProperties = &sRegisterJobDefinitionRequest_consumableResourceProperties
+
+var RegisterJobDefinitionResponse = &sRegisterJobDefinitionResponse
+var RegisterJobDefinitionResponse_jobDefinitionName = &sRegisterJobDefinitionResponse_jobDefinitionName
+var RegisterJobDefinitionResponse_jobDefinitionArn = &sRegisterJobDefinitionResponse_jobDefinitionArn
+var RegisterJobDefinitionResponse_revision = &sRegisterJobDefinitionResponse_revision
+
+var SubmitJobRequest = &sSubmitJobRequest
+var SubmitJobRequest_jobName = &sSubmitJobRequest_jobName
+var SubmitJobRequest_jobQueue = &sSubmitJobRequest_jobQueue
+var SubmitJobRequest_shareIdentifier = &sSubmitJobRequest_shareIdentifier
+var SubmitJobRequest_schedulingPriorityOverride = &sSubmitJobRequest_schedulingPriorityOverride
+var SubmitJobRequest_arrayProperties = &sSubmitJobRequest_arrayProperties
+var SubmitJobRequest_dependsOn = &sSubmitJobRequest_dependsOn
+var SubmitJobRequest_jobDefinition = &sSubmitJobRequest_jobDefinition
+var SubmitJobRequest_parameters = &sSubmitJobRequest_parameters
+var SubmitJobRequest_containerOverrides = &sSubmitJobRequest_containerOverrides
+var SubmitJobRequest_nodeOverrides = &sSubmitJobRequest_nodeOverrides
+var SubmitJobRequest_retryStrategy = &sSubmitJobRequest_retryStrategy
+var SubmitJobRequest_propagateTags = &sSubmitJobRequest_propagateTags
+var SubmitJobRequest_timeout = &sSubmitJobRequest_timeout
+var SubmitJobRequest_tags = &sSubmitJobRequest_tags
+var SubmitJobRequest_eksPropertiesOverride = &sSubmitJobRequest_eksPropertiesOverride
+var SubmitJobRequest_ecsPropertiesOverride = &sSubmitJobRequest_ecsPropertiesOverride
+var SubmitJobRequest_consumableResourcePropertiesOverride = &sSubmitJobRequest_consumableResourcePropertiesOverride
+
+var SubmitJobResponse = &sSubmitJobResponse
+var SubmitJobResponse_jobArn = &sSubmitJobResponse_jobArn
+var SubmitJobResponse_jobName = &sSubmitJobResponse_jobName
+var SubmitJobResponse_jobId = &sSubmitJobResponse_jobId
+
+var SubmitServiceJobRequest = &sSubmitServiceJobRequest
+var SubmitServiceJobRequest_jobName = &sSubmitServiceJobRequest_jobName
+var SubmitServiceJobRequest_jobQueue = &sSubmitServiceJobRequest_jobQueue
+var SubmitServiceJobRequest_retryStrategy = &sSubmitServiceJobRequest_retryStrategy
+var SubmitServiceJobRequest_schedulingPriority = &sSubmitServiceJobRequest_schedulingPriority
+var SubmitServiceJobRequest_serviceRequestPayload = &sSubmitServiceJobRequest_serviceRequestPayload
+var SubmitServiceJobRequest_serviceJobType = &sSubmitServiceJobRequest_serviceJobType
+var SubmitServiceJobRequest_shareIdentifier = &sSubmitServiceJobRequest_shareIdentifier
+var SubmitServiceJobRequest_quotaShareName = &sSubmitServiceJobRequest_quotaShareName
+var SubmitServiceJobRequest_preemptionConfiguration = &sSubmitServiceJobRequest_preemptionConfiguration
+var SubmitServiceJobRequest_timeoutConfig = &sSubmitServiceJobRequest_timeoutConfig
+var SubmitServiceJobRequest_tags = &sSubmitServiceJobRequest_tags
+var SubmitServiceJobRequest_clientToken = &sSubmitServiceJobRequest_clientToken
+
+var SubmitServiceJobResponse = &sSubmitServiceJobResponse
+var SubmitServiceJobResponse_jobArn = &sSubmitServiceJobResponse_jobArn
+var SubmitServiceJobResponse_jobName = &sSubmitServiceJobResponse_jobName
+var SubmitServiceJobResponse_jobId = &sSubmitServiceJobResponse_jobId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var TerminateJobRequest = &sTerminateJobRequest
+var TerminateJobRequest_jobId = &sTerminateJobRequest_jobId
+var TerminateJobRequest_reason = &sTerminateJobRequest_reason
+
+var TerminateJobResponse = &sTerminateJobResponse
+
+var TerminateJobsRequest = &sTerminateJobsRequest
+var TerminateJobsRequest_jobs = &sTerminateJobsRequest_jobs
+var TerminateJobsRequest_reason = &sTerminateJobsRequest_reason
+
+var TerminateJobsResponse = &sTerminateJobsResponse
+var TerminateJobsResponse_successful = &sTerminateJobsResponse_successful
+var TerminateJobsResponse_errors = &sTerminateJobsResponse_errors
+
+var TerminateServiceJobRequest = &sTerminateServiceJobRequest
+var TerminateServiceJobRequest_jobId = &sTerminateServiceJobRequest_jobId
+var TerminateServiceJobRequest_reason = &sTerminateServiceJobRequest_reason
+
+var TerminateServiceJobResponse = &sTerminateServiceJobResponse
+
+var TerminateServiceJobsRequest = &sTerminateServiceJobsRequest
+var TerminateServiceJobsRequest_jobs = &sTerminateServiceJobsRequest_jobs
+var TerminateServiceJobsRequest_reason = &sTerminateServiceJobsRequest_reason
+
+var TerminateServiceJobsResponse = &sTerminateServiceJobsResponse
+var TerminateServiceJobsResponse_successful = &sTerminateServiceJobsResponse_successful
+var TerminateServiceJobsResponse_errors = &sTerminateServiceJobsResponse_errors
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateComputeEnvironmentRequest = &sUpdateComputeEnvironmentRequest
+var UpdateComputeEnvironmentRequest_computeEnvironment = &sUpdateComputeEnvironmentRequest_computeEnvironment
+var UpdateComputeEnvironmentRequest_state = &sUpdateComputeEnvironmentRequest_state
+var UpdateComputeEnvironmentRequest_unmanagedvCpus = &sUpdateComputeEnvironmentRequest_unmanagedvCpus
+var UpdateComputeEnvironmentRequest_computeResources = &sUpdateComputeEnvironmentRequest_computeResources
+var UpdateComputeEnvironmentRequest_serviceRole = &sUpdateComputeEnvironmentRequest_serviceRole
+var UpdateComputeEnvironmentRequest_updatePolicy = &sUpdateComputeEnvironmentRequest_updatePolicy
+var UpdateComputeEnvironmentRequest_context = &sUpdateComputeEnvironmentRequest_context
+var UpdateComputeEnvironmentRequest_ecsSettings = &sUpdateComputeEnvironmentRequest_ecsSettings
+var UpdateComputeEnvironmentRequest_eksConfiguration = &sUpdateComputeEnvironmentRequest_eksConfiguration
+
+var UpdateComputeEnvironmentResponse = &sUpdateComputeEnvironmentResponse
+var UpdateComputeEnvironmentResponse_computeEnvironmentName = &sUpdateComputeEnvironmentResponse_computeEnvironmentName
+var UpdateComputeEnvironmentResponse_computeEnvironmentArn = &sUpdateComputeEnvironmentResponse_computeEnvironmentArn
+
+var UpdateConsumableResourceRequest = &sUpdateConsumableResourceRequest
+var UpdateConsumableResourceRequest_consumableResource = &sUpdateConsumableResourceRequest_consumableResource
+var UpdateConsumableResourceRequest_operation = &sUpdateConsumableResourceRequest_operation
+var UpdateConsumableResourceRequest_quantity = &sUpdateConsumableResourceRequest_quantity
+var UpdateConsumableResourceRequest_clientToken = &sUpdateConsumableResourceRequest_clientToken
+
+var UpdateConsumableResourceResponse = &sUpdateConsumableResourceResponse
+var UpdateConsumableResourceResponse_consumableResourceName = &sUpdateConsumableResourceResponse_consumableResourceName
+var UpdateConsumableResourceResponse_consumableResourceArn = &sUpdateConsumableResourceResponse_consumableResourceArn
+var UpdateConsumableResourceResponse_totalQuantity = &sUpdateConsumableResourceResponse_totalQuantity
+
+var UpdateJobQueueRequest = &sUpdateJobQueueRequest
+var UpdateJobQueueRequest_jobQueue = &sUpdateJobQueueRequest_jobQueue
+var UpdateJobQueueRequest_state = &sUpdateJobQueueRequest_state
+var UpdateJobQueueRequest_schedulingPolicyArn = &sUpdateJobQueueRequest_schedulingPolicyArn
+var UpdateJobQueueRequest_priority = &sUpdateJobQueueRequest_priority
+var UpdateJobQueueRequest_computeEnvironmentOrder = &sUpdateJobQueueRequest_computeEnvironmentOrder
+var UpdateJobQueueRequest_serviceEnvironmentOrder = &sUpdateJobQueueRequest_serviceEnvironmentOrder
+var UpdateJobQueueRequest_jobStateTimeLimitActions = &sUpdateJobQueueRequest_jobStateTimeLimitActions
+
+var UpdateJobQueueResponse = &sUpdateJobQueueResponse
+var UpdateJobQueueResponse_jobQueueName = &sUpdateJobQueueResponse_jobQueueName
+var UpdateJobQueueResponse_jobQueueArn = &sUpdateJobQueueResponse_jobQueueArn
+
+var UpdateQuotaShareRequest = &sUpdateQuotaShareRequest
+var UpdateQuotaShareRequest_quotaShareArn = &sUpdateQuotaShareRequest_quotaShareArn
+var UpdateQuotaShareRequest_capacityLimits = &sUpdateQuotaShareRequest_capacityLimits
+var UpdateQuotaShareRequest_resourceSharingConfiguration = &sUpdateQuotaShareRequest_resourceSharingConfiguration
+var UpdateQuotaShareRequest_preemptionConfiguration = &sUpdateQuotaShareRequest_preemptionConfiguration
+var UpdateQuotaShareRequest_state = &sUpdateQuotaShareRequest_state
+
+var UpdateQuotaShareResponse = &sUpdateQuotaShareResponse
+var UpdateQuotaShareResponse_quotaShareName = &sUpdateQuotaShareResponse_quotaShareName
+var UpdateQuotaShareResponse_quotaShareArn = &sUpdateQuotaShareResponse_quotaShareArn
+
+var UpdateSchedulingPolicyRequest = &sUpdateSchedulingPolicyRequest
+var UpdateSchedulingPolicyRequest_arn = &sUpdateSchedulingPolicyRequest_arn
+var UpdateSchedulingPolicyRequest_quotaSharePolicy = &sUpdateSchedulingPolicyRequest_quotaSharePolicy
+var UpdateSchedulingPolicyRequest_fairsharePolicy = &sUpdateSchedulingPolicyRequest_fairsharePolicy
+
+var UpdateSchedulingPolicyResponse = &sUpdateSchedulingPolicyResponse
+
+var UpdateServiceEnvironmentRequest = &sUpdateServiceEnvironmentRequest
+var UpdateServiceEnvironmentRequest_serviceEnvironment = &sUpdateServiceEnvironmentRequest_serviceEnvironment
+var UpdateServiceEnvironmentRequest_state = &sUpdateServiceEnvironmentRequest_state
+var UpdateServiceEnvironmentRequest_capacityLimits = &sUpdateServiceEnvironmentRequest_capacityLimits
+
+var UpdateServiceEnvironmentResponse = &sUpdateServiceEnvironmentResponse
+var UpdateServiceEnvironmentResponse_serviceEnvironmentName = &sUpdateServiceEnvironmentResponse_serviceEnvironmentName
+var UpdateServiceEnvironmentResponse_serviceEnvironmentArn = &sUpdateServiceEnvironmentResponse_serviceEnvironmentArn
+
+var UpdateServiceJobRequest = &sUpdateServiceJobRequest
+var UpdateServiceJobRequest_jobId = &sUpdateServiceJobRequest_jobId
+var UpdateServiceJobRequest_schedulingPriority = &sUpdateServiceJobRequest_schedulingPriority
+
+var UpdateServiceJobResponse = &sUpdateServiceJobResponse
+var UpdateServiceJobResponse_jobArn = &sUpdateServiceJobResponse_jobArn
+var UpdateServiceJobResponse_jobName = &sUpdateServiceJobResponse_jobName
+var UpdateServiceJobResponse_jobId = &sUpdateServiceJobResponse_jobId
+
+var AWSBatchV20160810 = &smithy.ServiceSchema{Schema: &s_AWSBatchV20160810, Version: "2016-08-10"}

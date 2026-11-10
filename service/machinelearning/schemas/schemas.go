@@ -4,2472 +4,1724 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AddTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "AddTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateBatchPrediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateBatchPrediction",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDataSourceFromRDS = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromRDS",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDataSourceFromRedshift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromRedshift",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateDataSourceFromS3 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromS3",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateEvaluation",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateMLModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateMLModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateRealtimeEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateRealtimeEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteBatchPrediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteBatchPrediction",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteDataSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteEvaluation",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteMLModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteMLModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteRealtimeEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteRealtimeEndpoint",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeBatchPredictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeBatchPredictions",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeDataSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeDataSources",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEvaluations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeEvaluations",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeMLModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeMLModels",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeTags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeTags",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetBatchPrediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetBatchPrediction",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetDataSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetEvaluation",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetMLModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetMLModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var Predict = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Predict",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateBatchPrediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateBatchPrediction",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateDataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateDataSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEvaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateEvaluation",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateMLModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateMLModel",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AmazonML_20141212 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "AmazonML_20141212",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://machinelearning.amazonaws.com/doc/2014-12-12/"})
-
-var AmazonML_20141212 = smithy.NewServiceSchema(_AmazonML_20141212, "2014-12-12")
-
-var Algorithm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Algorithm",
-}, smithy.ShapeTypeEnum, 1)
-var Algorithm_SGD *smithy.Schema
-
-var _AwsUserArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "AwsUserArn",
-}, smithy.ShapeTypeString, 0)
-
-var BatchPrediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "BatchPrediction",
-}, smithy.ShapeTypeStructure, 16)
-var BatchPrediction_BatchPredictionId *smithy.Schema
-
-var BatchPrediction_MLModelId *smithy.Schema
-
-var BatchPrediction_BatchPredictionDataSourceId *smithy.Schema
-
-var BatchPrediction_InputDataLocationS3 *smithy.Schema
-
-var BatchPrediction_CreatedByIamUser *smithy.Schema
-
-var BatchPrediction_CreatedAt *smithy.Schema
-
-var BatchPrediction_LastUpdatedAt *smithy.Schema
-
-var BatchPrediction_Name *smithy.Schema
-
-var BatchPrediction_Status *smithy.Schema
-
-var BatchPrediction_OutputUri *smithy.Schema
-
-var BatchPrediction_Message *smithy.Schema
-
-var BatchPrediction_ComputeTime *smithy.Schema
-
-var BatchPrediction_FinishedAt *smithy.Schema
-
-var BatchPrediction_StartedAt *smithy.Schema
-
-var BatchPrediction_TotalRecordCount *smithy.Schema
-
-var BatchPrediction_InvalidRecordCount *smithy.Schema
-
-var BatchPredictionFilterVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "BatchPredictionFilterVariable",
-}, smithy.ShapeTypeEnum, 8)
-var BatchPredictionFilterVariable_CREATED_AT *smithy.Schema
-
-var BatchPredictionFilterVariable_LAST_UPDATED_AT *smithy.Schema
-
-var BatchPredictionFilterVariable_STATUS *smithy.Schema
-
-var BatchPredictionFilterVariable_NAME *smithy.Schema
-
-var BatchPredictionFilterVariable_IAM_USER *smithy.Schema
-
-var BatchPredictionFilterVariable_ML_MODEL_ID *smithy.Schema
-
-var BatchPredictionFilterVariable_DATASOURCE_ID *smithy.Schema
-
-var BatchPredictionFilterVariable_DATA_URI *smithy.Schema
-
-var _BatchPredictions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "BatchPredictions",
-}, smithy.ShapeTypeList, 1)
-var _BatchPredictions_member *smithy.Schema
-
-var _ComparatorValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ComparatorValue",
-}, smithy.ShapeTypeString, 0)
-
-var _ComputeStatistics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ComputeStatistics",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _DataRearrangement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DataRearrangement",
-}, smithy.ShapeTypeString, 0)
-
-var _DataSchema = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DataSchema",
-}, smithy.ShapeTypeString, 0)
-
-var DataSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DataSource",
-}, smithy.ShapeTypeStructure, 18)
-var DataSource_DataSourceId *smithy.Schema
-
-var DataSource_DataLocationS3 *smithy.Schema
-
-var DataSource_DataRearrangement *smithy.Schema
-
-var DataSource_CreatedByIamUser *smithy.Schema
-
-var DataSource_CreatedAt *smithy.Schema
-
-var DataSource_LastUpdatedAt *smithy.Schema
-
-var DataSource_DataSizeInBytes *smithy.Schema
-
-var DataSource_NumberOfFiles *smithy.Schema
-
-var DataSource_Name *smithy.Schema
-
-var DataSource_Status *smithy.Schema
-
-var DataSource_Message *smithy.Schema
-
-var DataSource_RedshiftMetadata *smithy.Schema
-
-var DataSource_RDSMetadata *smithy.Schema
-
-var DataSource_RoleARN *smithy.Schema
-
-var DataSource_ComputeStatistics *smithy.Schema
-
-var DataSource_ComputeTime *smithy.Schema
-
-var DataSource_FinishedAt *smithy.Schema
-
-var DataSource_StartedAt *smithy.Schema
-
-var DataSourceFilterVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DataSourceFilterVariable",
-}, smithy.ShapeTypeEnum, 6)
-var DataSourceFilterVariable_CREATED_AT *smithy.Schema
-
-var DataSourceFilterVariable_LAST_UPDATED_AT *smithy.Schema
-
-var DataSourceFilterVariable_STATUS *smithy.Schema
-
-var DataSourceFilterVariable_NAME *smithy.Schema
-
-var DataSourceFilterVariable_DATA_URI *smithy.Schema
-
-var DataSourceFilterVariable_IAM_USER *smithy.Schema
-
-var _DataSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DataSources",
-}, smithy.ShapeTypeList, 1)
-var _DataSources_member *smithy.Schema
-
-var DetailsAttributes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DetailsAttributes",
-}, smithy.ShapeTypeEnum, 2)
-var DetailsAttributes_PREDICTIVE_MODEL_TYPE *smithy.Schema
-
-var DetailsAttributes_ALGORITHM *smithy.Schema
-
-var _DetailsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DetailsMap",
-}, smithy.ShapeTypeMap, 2)
-var _DetailsMap_key *smithy.Schema
-
-var _DetailsMap_value *smithy.Schema
-
-var _DetailsValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DetailsValue",
-}, smithy.ShapeTypeString, 0)
-
-var _EDPPipelineId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EDPPipelineId",
-}, smithy.ShapeTypeString, 0)
-
-var _EDPResourceRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EDPResourceRole",
-}, smithy.ShapeTypeString, 0)
-
-var _EDPSecurityGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EDPSecurityGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _EDPSecurityGroupIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EDPSecurityGroupIds",
-}, smithy.ShapeTypeList, 1)
-var _EDPSecurityGroupIds_member *smithy.Schema
-
-var _EDPServiceRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EDPServiceRole",
-}, smithy.ShapeTypeString, 0)
-
-var _EDPSubnetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EDPSubnetId",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EntityId",
-}, smithy.ShapeTypeString, 0)
-
-var _EntityName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EntityName",
-}, smithy.ShapeTypeString, 0)
-
-var EntityStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EntityStatus",
-}, smithy.ShapeTypeEnum, 5)
-var EntityStatus_PENDING *smithy.Schema
-
-var EntityStatus_INPROGRESS *smithy.Schema
-
-var EntityStatus_FAILED *smithy.Schema
-
-var EntityStatus_COMPLETED *smithy.Schema
-
-var EntityStatus_DELETED *smithy.Schema
-
-var _EpochTime = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EpochTime",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var Evaluation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Evaluation",
-}, smithy.ShapeTypeStructure, 14)
-var Evaluation_EvaluationId *smithy.Schema
-
-var Evaluation_MLModelId *smithy.Schema
-
-var Evaluation_EvaluationDataSourceId *smithy.Schema
-
-var Evaluation_InputDataLocationS3 *smithy.Schema
-
-var Evaluation_CreatedByIamUser *smithy.Schema
-
-var Evaluation_CreatedAt *smithy.Schema
-
-var Evaluation_LastUpdatedAt *smithy.Schema
-
-var Evaluation_Name *smithy.Schema
-
-var Evaluation_Status *smithy.Schema
-
-var Evaluation_PerformanceMetrics *smithy.Schema
-
-var Evaluation_Message *smithy.Schema
-
-var Evaluation_ComputeTime *smithy.Schema
-
-var Evaluation_FinishedAt *smithy.Schema
-
-var Evaluation_StartedAt *smithy.Schema
-
-var EvaluationFilterVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "EvaluationFilterVariable",
-}, smithy.ShapeTypeEnum, 8)
-var EvaluationFilterVariable_CREATED_AT *smithy.Schema
-
-var EvaluationFilterVariable_LAST_UPDATED_AT *smithy.Schema
-
-var EvaluationFilterVariable_STATUS *smithy.Schema
-
-var EvaluationFilterVariable_NAME *smithy.Schema
-
-var EvaluationFilterVariable_IAM_USER *smithy.Schema
-
-var EvaluationFilterVariable_ML_MODEL_ID *smithy.Schema
-
-var EvaluationFilterVariable_DATASOURCE_ID *smithy.Schema
-
-var EvaluationFilterVariable_DATA_URI *smithy.Schema
-
-var _Evaluations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Evaluations",
-}, smithy.ShapeTypeList, 1)
-var _Evaluations_member *smithy.Schema
-
-var _floatLabel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "floatLabel",
-}, smithy.ShapeTypeFloat, 0)
-
-var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var IdempotentParameterMismatchException_message *smithy.Schema
-
-var IdempotentParameterMismatchException_code *smithy.Schema
-
-var _IntegerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "IntegerType",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_code *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_message *smithy.Schema
-
-var InvalidInputException_code *smithy.Schema
-
-var InvalidTagException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "InvalidTagException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var InvalidTagException_message *smithy.Schema
-
-var _Label = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Label",
-}, smithy.ShapeTypeString, 0)
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 417})
-var LimitExceededException_message *smithy.Schema
-
-var LimitExceededException_code *smithy.Schema
-
-var _LongType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "LongType",
-}, smithy.ShapeTypeLong, 0)
-
-var _Message = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Message",
-}, smithy.ShapeTypeString, 0)
-
-var MLModel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "MLModel",
-}, smithy.ShapeTypeStructure, 19)
-var MLModel_MLModelId *smithy.Schema
-
-var MLModel_TrainingDataSourceId *smithy.Schema
-
-var MLModel_CreatedByIamUser *smithy.Schema
-
-var MLModel_CreatedAt *smithy.Schema
-
-var MLModel_LastUpdatedAt *smithy.Schema
-
-var MLModel_Name *smithy.Schema
-
-var MLModel_Status *smithy.Schema
-
-var MLModel_SizeInBytes *smithy.Schema
-
-var MLModel_EndpointInfo *smithy.Schema
-
-var MLModel_TrainingParameters *smithy.Schema
-
-var MLModel_InputDataLocationS3 *smithy.Schema
-
-var MLModel_Algorithm *smithy.Schema
-
-var MLModel_MLModelType *smithy.Schema
-
-var MLModel_ScoreThreshold *smithy.Schema
-
-var MLModel_ScoreThresholdLastUpdatedAt *smithy.Schema
-
-var MLModel_Message *smithy.Schema
-
-var MLModel_ComputeTime *smithy.Schema
-
-var MLModel_FinishedAt *smithy.Schema
-
-var MLModel_StartedAt *smithy.Schema
-
-var MLModelFilterVariable = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "MLModelFilterVariable",
-}, smithy.ShapeTypeEnum, 10)
-var MLModelFilterVariable_CREATED_AT *smithy.Schema
-
-var MLModelFilterVariable_LAST_UPDATED_AT *smithy.Schema
-
-var MLModelFilterVariable_STATUS *smithy.Schema
-
-var MLModelFilterVariable_NAME *smithy.Schema
-
-var MLModelFilterVariable_IAM_USER *smithy.Schema
-
-var MLModelFilterVariable_TRAINING_DATASOURCE_ID *smithy.Schema
-
-var MLModelFilterVariable_REAL_TIME_ENDPOINT_STATUS *smithy.Schema
-
-var MLModelFilterVariable_ML_MODEL_TYPE *smithy.Schema
-
-var MLModelFilterVariable_ALGORITHM *smithy.Schema
-
-var MLModelFilterVariable_TRAINING_DATA_URI *smithy.Schema
-
-var _MLModelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "MLModelName",
-}, smithy.ShapeTypeString, 0)
-
-var _MLModels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "MLModels",
-}, smithy.ShapeTypeList, 1)
-var _MLModels_member *smithy.Schema
-
-var MLModelType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "MLModelType",
-}, smithy.ShapeTypeEnum, 3)
-var MLModelType_REGRESSION *smithy.Schema
-
-var MLModelType_BINARY *smithy.Schema
-
-var MLModelType_MULTICLASS *smithy.Schema
-
-var _PageLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PageLimit",
-}, smithy.ShapeTypeInteger, 0)
-
-var PerformanceMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PerformanceMetrics",
-}, smithy.ShapeTypeStructure, 1)
-var PerformanceMetrics_Properties *smithy.Schema
-
-var _PerformanceMetricsProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PerformanceMetricsProperties",
-}, smithy.ShapeTypeMap, 2)
-var _PerformanceMetricsProperties_key *smithy.Schema
-
-var _PerformanceMetricsProperties_value *smithy.Schema
-
-var _PerformanceMetricsPropertyKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PerformanceMetricsPropertyKey",
-}, smithy.ShapeTypeString, 0)
-
-var _PerformanceMetricsPropertyValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PerformanceMetricsPropertyValue",
-}, smithy.ShapeTypeString, 0)
-
-var Prediction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Prediction",
-}, smithy.ShapeTypeStructure, 4)
-var Prediction_predictedLabel *smithy.Schema
-
-var Prediction_predictedValue *smithy.Schema
-
-var Prediction_predictedScores *smithy.Schema
-
-var Prediction_details *smithy.Schema
-
-var PredictorNotMountedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PredictorNotMountedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var PredictorNotMountedException_message *smithy.Schema
-
-var _PresignedS3Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PresignedS3Url",
-}, smithy.ShapeTypeString, 0)
-
-var RDSDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSDatabase",
-}, smithy.ShapeTypeStructure, 2)
-var RDSDatabase_InstanceIdentifier *smithy.Schema
-
-var RDSDatabase_DatabaseName *smithy.Schema
-
-var RDSDatabaseCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSDatabaseCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var RDSDatabaseCredentials_Username *smithy.Schema
-
-var RDSDatabaseCredentials_Password *smithy.Schema
-
-var _RDSDatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSDatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var _RDSDatabasePassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSDatabasePassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RDSDatabaseUsername = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSDatabaseUsername",
-}, smithy.ShapeTypeString, 0)
-
-var RDSDataSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSDataSpec",
-}, smithy.ShapeTypeStructure, 11)
-var RDSDataSpec_DatabaseInformation *smithy.Schema
-
-var RDSDataSpec_SelectSqlQuery *smithy.Schema
-
-var RDSDataSpec_DatabaseCredentials *smithy.Schema
-
-var RDSDataSpec_S3StagingLocation *smithy.Schema
-
-var RDSDataSpec_DataRearrangement *smithy.Schema
-
-var RDSDataSpec_DataSchema *smithy.Schema
-
-var RDSDataSpec_DataSchemaUri *smithy.Schema
-
-var RDSDataSpec_ResourceRole *smithy.Schema
-
-var RDSDataSpec_ServiceRole *smithy.Schema
-
-var RDSDataSpec_SubnetId *smithy.Schema
-
-var RDSDataSpec_SecurityGroupIds *smithy.Schema
-
-var _RDSInstanceIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSInstanceIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var RDSMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSMetadata",
-}, smithy.ShapeTypeStructure, 6)
-var RDSMetadata_Database *smithy.Schema
-
-var RDSMetadata_DatabaseUserName *smithy.Schema
-
-var RDSMetadata_SelectSqlQuery *smithy.Schema
-
-var RDSMetadata_ResourceRole *smithy.Schema
-
-var RDSMetadata_ServiceRole *smithy.Schema
-
-var RDSMetadata_DataPipelineId *smithy.Schema
-
-var _RDSSelectSqlQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RDSSelectSqlQuery",
-}, smithy.ShapeTypeString, 0)
-
-var RealtimeEndpointInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RealtimeEndpointInfo",
-}, smithy.ShapeTypeStructure, 4)
-var RealtimeEndpointInfo_PeakRequestsPerSecond *smithy.Schema
-
-var RealtimeEndpointInfo_CreatedAt *smithy.Schema
-
-var RealtimeEndpointInfo_EndpointUrl *smithy.Schema
-
-var RealtimeEndpointInfo_EndpointStatus *smithy.Schema
-
-var RealtimeEndpointStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RealtimeEndpointStatus",
-}, smithy.ShapeTypeEnum, 4)
-var RealtimeEndpointStatus_NONE *smithy.Schema
-
-var RealtimeEndpointStatus_READY *smithy.Schema
-
-var RealtimeEndpointStatus_UPDATING *smithy.Schema
-
-var RealtimeEndpointStatus_FAILED *smithy.Schema
-
-var _Recipe = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Recipe",
-}, smithy.ShapeTypeString, 0)
-
-var _Record = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Record",
-}, smithy.ShapeTypeMap, 2)
-var _Record_key *smithy.Schema
-
-var _Record_value *smithy.Schema
-
-var _RedshiftClusterIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftClusterIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var RedshiftDatabase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftDatabase",
-}, smithy.ShapeTypeStructure, 2)
-var RedshiftDatabase_DatabaseName *smithy.Schema
-
-var RedshiftDatabase_ClusterIdentifier *smithy.Schema
-
-var RedshiftDatabaseCredentials = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftDatabaseCredentials",
-}, smithy.ShapeTypeStructure, 2)
-var RedshiftDatabaseCredentials_Username *smithy.Schema
-
-var RedshiftDatabaseCredentials_Password *smithy.Schema
-
-var _RedshiftDatabaseName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftDatabaseName",
-}, smithy.ShapeTypeString, 0)
-
-var _RedshiftDatabasePassword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftDatabasePassword",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _RedshiftDatabaseUsername = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftDatabaseUsername",
-}, smithy.ShapeTypeString, 0)
-
-var RedshiftDataSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftDataSpec",
-}, smithy.ShapeTypeStructure, 7)
-var RedshiftDataSpec_DatabaseInformation *smithy.Schema
-
-var RedshiftDataSpec_SelectSqlQuery *smithy.Schema
-
-var RedshiftDataSpec_DatabaseCredentials *smithy.Schema
-
-var RedshiftDataSpec_S3StagingLocation *smithy.Schema
-
-var RedshiftDataSpec_DataRearrangement *smithy.Schema
-
-var RedshiftDataSpec_DataSchema *smithy.Schema
-
-var RedshiftDataSpec_DataSchemaUri *smithy.Schema
-
-var RedshiftMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var RedshiftMetadata_RedshiftDatabase *smithy.Schema
-
-var RedshiftMetadata_DatabaseUserName *smithy.Schema
-
-var RedshiftMetadata_SelectSqlQuery *smithy.Schema
-
-var _RedshiftSelectSqlQuery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RedshiftSelectSqlQuery",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_code *smithy.Schema
-
-var _RoleARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "RoleARN",
-}, smithy.ShapeTypeString, 0)
-
-var S3DataSpec = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "S3DataSpec",
-}, smithy.ShapeTypeStructure, 4)
-var S3DataSpec_DataLocationS3 *smithy.Schema
-
-var S3DataSpec_DataRearrangement *smithy.Schema
-
-var S3DataSpec_DataSchema *smithy.Schema
-
-var S3DataSpec_DataSchemaLocationS3 *smithy.Schema
-
-var _S3Url = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "S3Url",
-}, smithy.ShapeTypeString, 0)
-
-var _ScoreThreshold = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ScoreThreshold",
-}, smithy.ShapeTypeFloat, 0)
-
-var _ScoreValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ScoreValue",
-}, smithy.ShapeTypeFloat, 0)
-
-var _ScoreValuePerLabelMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "ScoreValuePerLabelMap",
-}, smithy.ShapeTypeMap, 2)
-var _ScoreValuePerLabelMap_key *smithy.Schema
-
-var _ScoreValuePerLabelMap_value *smithy.Schema
-
-var SortOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "SortOrder",
-}, smithy.ShapeTypeEnum, 2)
-var SortOrder_ASC *smithy.Schema
-
-var SortOrder_DSC *smithy.Schema
-
-var _StringType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "StringType",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var TaggableResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "TaggableResourceType",
-}, smithy.ShapeTypeEnum, 4)
-var TaggableResourceType_BATCH_PREDICTION *smithy.Schema
-
-var TaggableResourceType_DATASOURCE *smithy.Schema
-
-var TaggableResourceType_EVALUATION *smithy.Schema
-
-var TaggableResourceType_ML_MODEL *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var TagLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "TagLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var TagLimitExceededException_message *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TrainingParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "TrainingParameters",
-}, smithy.ShapeTypeMap, 2)
-var _TrainingParameters_key *smithy.Schema
-
-var _TrainingParameters_value *smithy.Schema
-
-var _VariableName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "VariableName",
-}, smithy.ShapeTypeString, 0)
-
-var _VariableValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "VariableValue",
-}, smithy.ShapeTypeString, 0)
-
-var _Verbose = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "Verbose",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _VipURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "VipURL",
-}, smithy.ShapeTypeString, 0)
-
-var AddTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "AddTagsInput",
-}, smithy.ShapeTypeStructure, 3)
-var AddTagsInput_Tags *smithy.Schema
-
-var AddTagsInput_ResourceId *smithy.Schema
-
-var AddTagsInput_ResourceType *smithy.Schema
-
-var AddTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "AddTagsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var AddTagsOutput_ResourceId *smithy.Schema
-
-var AddTagsOutput_ResourceType *smithy.Schema
-
-var CreateBatchPredictionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateBatchPredictionInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateBatchPredictionInput_BatchPredictionId *smithy.Schema
-
-var CreateBatchPredictionInput_BatchPredictionName *smithy.Schema
-
-var CreateBatchPredictionInput_MLModelId *smithy.Schema
-
-var CreateBatchPredictionInput_BatchPredictionDataSourceId *smithy.Schema
-
-var CreateBatchPredictionInput_OutputUri *smithy.Schema
-
-var CreateBatchPredictionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateBatchPredictionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateBatchPredictionOutput_BatchPredictionId *smithy.Schema
-
-var CreateDataSourceFromRDSInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromRDSInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDataSourceFromRDSInput_DataSourceId *smithy.Schema
-
-var CreateDataSourceFromRDSInput_DataSourceName *smithy.Schema
-
-var CreateDataSourceFromRDSInput_RDSData *smithy.Schema
-
-var CreateDataSourceFromRDSInput_RoleARN *smithy.Schema
-
-var CreateDataSourceFromRDSInput_ComputeStatistics *smithy.Schema
-
-var CreateDataSourceFromRDSOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromRDSOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataSourceFromRDSOutput_DataSourceId *smithy.Schema
-
-var CreateDataSourceFromRedshiftInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromRedshiftInput",
-}, smithy.ShapeTypeStructure, 5)
-var CreateDataSourceFromRedshiftInput_DataSourceId *smithy.Schema
-
-var CreateDataSourceFromRedshiftInput_DataSourceName *smithy.Schema
-
-var CreateDataSourceFromRedshiftInput_DataSpec *smithy.Schema
-
-var CreateDataSourceFromRedshiftInput_RoleARN *smithy.Schema
-
-var CreateDataSourceFromRedshiftInput_ComputeStatistics *smithy.Schema
-
-var CreateDataSourceFromRedshiftOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromRedshiftOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataSourceFromRedshiftOutput_DataSourceId *smithy.Schema
-
-var CreateDataSourceFromS3Input = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromS3Input",
-}, smithy.ShapeTypeStructure, 4)
-var CreateDataSourceFromS3Input_DataSourceId *smithy.Schema
-
-var CreateDataSourceFromS3Input_DataSourceName *smithy.Schema
-
-var CreateDataSourceFromS3Input_DataSpec *smithy.Schema
-
-var CreateDataSourceFromS3Input_ComputeStatistics *smithy.Schema
-
-var CreateDataSourceFromS3Output = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateDataSourceFromS3Output",
-}, smithy.ShapeTypeStructure, 1)
-var CreateDataSourceFromS3Output_DataSourceId *smithy.Schema
-
-var CreateEvaluationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateEvaluationInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateEvaluationInput_EvaluationId *smithy.Schema
-
-var CreateEvaluationInput_EvaluationName *smithy.Schema
-
-var CreateEvaluationInput_MLModelId *smithy.Schema
-
-var CreateEvaluationInput_EvaluationDataSourceId *smithy.Schema
-
-var CreateEvaluationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateEvaluationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateEvaluationOutput_EvaluationId *smithy.Schema
-
-var CreateMLModelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateMLModelInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateMLModelInput_MLModelId *smithy.Schema
-
-var CreateMLModelInput_MLModelName *smithy.Schema
-
-var CreateMLModelInput_MLModelType *smithy.Schema
-
-var CreateMLModelInput_Parameters *smithy.Schema
-
-var CreateMLModelInput_TrainingDataSourceId *smithy.Schema
-
-var CreateMLModelInput_Recipe *smithy.Schema
-
-var CreateMLModelInput_RecipeUri *smithy.Schema
-
-var CreateMLModelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateMLModelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMLModelOutput_MLModelId *smithy.Schema
-
-var CreateRealtimeEndpointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateRealtimeEndpointInput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateRealtimeEndpointInput_MLModelId *smithy.Schema
-
-var CreateRealtimeEndpointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "CreateRealtimeEndpointOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateRealtimeEndpointOutput_MLModelId *smithy.Schema
-
-var CreateRealtimeEndpointOutput_RealtimeEndpointInfo *smithy.Schema
-
-var DeleteBatchPredictionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteBatchPredictionInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBatchPredictionInput_BatchPredictionId *smithy.Schema
-
-var DeleteBatchPredictionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteBatchPredictionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteBatchPredictionOutput_BatchPredictionId *smithy.Schema
-
-var DeleteDataSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteDataSourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataSourceInput_DataSourceId *smithy.Schema
-
-var DeleteDataSourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteDataSourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDataSourceOutput_DataSourceId *smithy.Schema
-
-var DeleteEvaluationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteEvaluationInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEvaluationInput_EvaluationId *smithy.Schema
-
-var DeleteEvaluationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteEvaluationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEvaluationOutput_EvaluationId *smithy.Schema
-
-var DeleteMLModelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteMLModelInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMLModelInput_MLModelId *smithy.Schema
-
-var DeleteMLModelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteMLModelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMLModelOutput_MLModelId *smithy.Schema
-
-var DeleteRealtimeEndpointInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteRealtimeEndpointInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteRealtimeEndpointInput_MLModelId *smithy.Schema
-
-var DeleteRealtimeEndpointOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteRealtimeEndpointOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteRealtimeEndpointOutput_MLModelId *smithy.Schema
-
-var DeleteRealtimeEndpointOutput_RealtimeEndpointInfo *smithy.Schema
-
-var DeleteTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteTagsInput",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteTagsInput_TagKeys *smithy.Schema
-
-var DeleteTagsInput_ResourceId *smithy.Schema
-
-var DeleteTagsInput_ResourceType *smithy.Schema
-
-var DeleteTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DeleteTagsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteTagsOutput_ResourceId *smithy.Schema
-
-var DeleteTagsOutput_ResourceType *smithy.Schema
-
-var DescribeBatchPredictionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeBatchPredictionsInput",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeBatchPredictionsInput_FilterVariable *smithy.Schema
-
-var DescribeBatchPredictionsInput_EQ *smithy.Schema
-
-var DescribeBatchPredictionsInput_GT *smithy.Schema
-
-var DescribeBatchPredictionsInput_LT *smithy.Schema
-
-var DescribeBatchPredictionsInput_GE *smithy.Schema
-
-var DescribeBatchPredictionsInput_LE *smithy.Schema
-
-var DescribeBatchPredictionsInput_NE *smithy.Schema
-
-var DescribeBatchPredictionsInput_Prefix *smithy.Schema
-
-var DescribeBatchPredictionsInput_SortOrder *smithy.Schema
-
-var DescribeBatchPredictionsInput_NextToken *smithy.Schema
-
-var DescribeBatchPredictionsInput_Limit *smithy.Schema
-
-var DescribeBatchPredictionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeBatchPredictionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeBatchPredictionsOutput_Results *smithy.Schema
-
-var DescribeBatchPredictionsOutput_NextToken *smithy.Schema
-
-var DescribeDataSourcesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeDataSourcesInput",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeDataSourcesInput_FilterVariable *smithy.Schema
-
-var DescribeDataSourcesInput_EQ *smithy.Schema
-
-var DescribeDataSourcesInput_GT *smithy.Schema
-
-var DescribeDataSourcesInput_LT *smithy.Schema
-
-var DescribeDataSourcesInput_GE *smithy.Schema
-
-var DescribeDataSourcesInput_LE *smithy.Schema
-
-var DescribeDataSourcesInput_NE *smithy.Schema
-
-var DescribeDataSourcesInput_Prefix *smithy.Schema
-
-var DescribeDataSourcesInput_SortOrder *smithy.Schema
-
-var DescribeDataSourcesInput_NextToken *smithy.Schema
-
-var DescribeDataSourcesInput_Limit *smithy.Schema
-
-var DescribeDataSourcesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeDataSourcesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeDataSourcesOutput_Results *smithy.Schema
-
-var DescribeDataSourcesOutput_NextToken *smithy.Schema
-
-var DescribeEvaluationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeEvaluationsInput",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeEvaluationsInput_FilterVariable *smithy.Schema
-
-var DescribeEvaluationsInput_EQ *smithy.Schema
-
-var DescribeEvaluationsInput_GT *smithy.Schema
-
-var DescribeEvaluationsInput_LT *smithy.Schema
-
-var DescribeEvaluationsInput_GE *smithy.Schema
-
-var DescribeEvaluationsInput_LE *smithy.Schema
-
-var DescribeEvaluationsInput_NE *smithy.Schema
-
-var DescribeEvaluationsInput_Prefix *smithy.Schema
-
-var DescribeEvaluationsInput_SortOrder *smithy.Schema
-
-var DescribeEvaluationsInput_NextToken *smithy.Schema
-
-var DescribeEvaluationsInput_Limit *smithy.Schema
-
-var DescribeEvaluationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeEvaluationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeEvaluationsOutput_Results *smithy.Schema
-
-var DescribeEvaluationsOutput_NextToken *smithy.Schema
-
-var DescribeMLModelsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeMLModelsInput",
-}, smithy.ShapeTypeStructure, 11)
-var DescribeMLModelsInput_FilterVariable *smithy.Schema
-
-var DescribeMLModelsInput_EQ *smithy.Schema
-
-var DescribeMLModelsInput_GT *smithy.Schema
-
-var DescribeMLModelsInput_LT *smithy.Schema
-
-var DescribeMLModelsInput_GE *smithy.Schema
-
-var DescribeMLModelsInput_LE *smithy.Schema
-
-var DescribeMLModelsInput_NE *smithy.Schema
-
-var DescribeMLModelsInput_Prefix *smithy.Schema
-
-var DescribeMLModelsInput_SortOrder *smithy.Schema
-
-var DescribeMLModelsInput_NextToken *smithy.Schema
-
-var DescribeMLModelsInput_Limit *smithy.Schema
-
-var DescribeMLModelsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeMLModelsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeMLModelsOutput_Results *smithy.Schema
-
-var DescribeMLModelsOutput_NextToken *smithy.Schema
-
-var DescribeTagsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeTagsInput",
-}, smithy.ShapeTypeStructure, 2)
-var DescribeTagsInput_ResourceId *smithy.Schema
-
-var DescribeTagsInput_ResourceType *smithy.Schema
-
-var DescribeTagsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "DescribeTagsOutput",
-}, smithy.ShapeTypeStructure, 3)
-var DescribeTagsOutput_ResourceId *smithy.Schema
-
-var DescribeTagsOutput_ResourceType *smithy.Schema
-
-var DescribeTagsOutput_Tags *smithy.Schema
-
-var GetBatchPredictionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetBatchPredictionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetBatchPredictionInput_BatchPredictionId *smithy.Schema
-
-var GetBatchPredictionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetBatchPredictionOutput",
-}, smithy.ShapeTypeStructure, 17)
-var GetBatchPredictionOutput_BatchPredictionId *smithy.Schema
-
-var GetBatchPredictionOutput_MLModelId *smithy.Schema
-
-var GetBatchPredictionOutput_BatchPredictionDataSourceId *smithy.Schema
-
-var GetBatchPredictionOutput_InputDataLocationS3 *smithy.Schema
-
-var GetBatchPredictionOutput_CreatedByIamUser *smithy.Schema
-
-var GetBatchPredictionOutput_CreatedAt *smithy.Schema
-
-var GetBatchPredictionOutput_LastUpdatedAt *smithy.Schema
-
-var GetBatchPredictionOutput_Name *smithy.Schema
-
-var GetBatchPredictionOutput_Status *smithy.Schema
-
-var GetBatchPredictionOutput_OutputUri *smithy.Schema
-
-var GetBatchPredictionOutput_LogUri *smithy.Schema
-
-var GetBatchPredictionOutput_Message *smithy.Schema
-
-var GetBatchPredictionOutput_ComputeTime *smithy.Schema
-
-var GetBatchPredictionOutput_FinishedAt *smithy.Schema
-
-var GetBatchPredictionOutput_StartedAt *smithy.Schema
-
-var GetBatchPredictionOutput_TotalRecordCount *smithy.Schema
-
-var GetBatchPredictionOutput_InvalidRecordCount *smithy.Schema
-
-var GetDataSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetDataSourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetDataSourceInput_DataSourceId *smithy.Schema
-
-var GetDataSourceInput_Verbose *smithy.Schema
-
-var GetDataSourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetDataSourceOutput",
-}, smithy.ShapeTypeStructure, 20)
-var GetDataSourceOutput_DataSourceId *smithy.Schema
-
-var GetDataSourceOutput_DataLocationS3 *smithy.Schema
-
-var GetDataSourceOutput_DataRearrangement *smithy.Schema
-
-var GetDataSourceOutput_CreatedByIamUser *smithy.Schema
-
-var GetDataSourceOutput_CreatedAt *smithy.Schema
-
-var GetDataSourceOutput_LastUpdatedAt *smithy.Schema
-
-var GetDataSourceOutput_DataSizeInBytes *smithy.Schema
-
-var GetDataSourceOutput_NumberOfFiles *smithy.Schema
-
-var GetDataSourceOutput_Name *smithy.Schema
-
-var GetDataSourceOutput_Status *smithy.Schema
-
-var GetDataSourceOutput_LogUri *smithy.Schema
-
-var GetDataSourceOutput_Message *smithy.Schema
-
-var GetDataSourceOutput_RedshiftMetadata *smithy.Schema
-
-var GetDataSourceOutput_RDSMetadata *smithy.Schema
-
-var GetDataSourceOutput_RoleARN *smithy.Schema
-
-var GetDataSourceOutput_ComputeStatistics *smithy.Schema
-
-var GetDataSourceOutput_ComputeTime *smithy.Schema
-
-var GetDataSourceOutput_FinishedAt *smithy.Schema
-
-var GetDataSourceOutput_StartedAt *smithy.Schema
-
-var GetDataSourceOutput_DataSourceSchema *smithy.Schema
-
-var GetEvaluationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetEvaluationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEvaluationInput_EvaluationId *smithy.Schema
-
-var GetEvaluationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetEvaluationOutput",
-}, smithy.ShapeTypeStructure, 15)
-var GetEvaluationOutput_EvaluationId *smithy.Schema
-
-var GetEvaluationOutput_MLModelId *smithy.Schema
-
-var GetEvaluationOutput_EvaluationDataSourceId *smithy.Schema
-
-var GetEvaluationOutput_InputDataLocationS3 *smithy.Schema
-
-var GetEvaluationOutput_CreatedByIamUser *smithy.Schema
-
-var GetEvaluationOutput_CreatedAt *smithy.Schema
-
-var GetEvaluationOutput_LastUpdatedAt *smithy.Schema
-
-var GetEvaluationOutput_Name *smithy.Schema
-
-var GetEvaluationOutput_Status *smithy.Schema
-
-var GetEvaluationOutput_PerformanceMetrics *smithy.Schema
-
-var GetEvaluationOutput_LogUri *smithy.Schema
-
-var GetEvaluationOutput_Message *smithy.Schema
-
-var GetEvaluationOutput_ComputeTime *smithy.Schema
-
-var GetEvaluationOutput_FinishedAt *smithy.Schema
-
-var GetEvaluationOutput_StartedAt *smithy.Schema
-
-var GetMLModelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetMLModelInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMLModelInput_MLModelId *smithy.Schema
-
-var GetMLModelInput_Verbose *smithy.Schema
-
-var GetMLModelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "GetMLModelOutput",
-}, smithy.ShapeTypeStructure, 21)
-var GetMLModelOutput_MLModelId *smithy.Schema
-
-var GetMLModelOutput_TrainingDataSourceId *smithy.Schema
-
-var GetMLModelOutput_CreatedByIamUser *smithy.Schema
-
-var GetMLModelOutput_CreatedAt *smithy.Schema
-
-var GetMLModelOutput_LastUpdatedAt *smithy.Schema
-
-var GetMLModelOutput_Name *smithy.Schema
-
-var GetMLModelOutput_Status *smithy.Schema
-
-var GetMLModelOutput_SizeInBytes *smithy.Schema
-
-var GetMLModelOutput_EndpointInfo *smithy.Schema
-
-var GetMLModelOutput_TrainingParameters *smithy.Schema
-
-var GetMLModelOutput_InputDataLocationS3 *smithy.Schema
-
-var GetMLModelOutput_MLModelType *smithy.Schema
-
-var GetMLModelOutput_ScoreThreshold *smithy.Schema
-
-var GetMLModelOutput_ScoreThresholdLastUpdatedAt *smithy.Schema
-
-var GetMLModelOutput_LogUri *smithy.Schema
-
-var GetMLModelOutput_Message *smithy.Schema
-
-var GetMLModelOutput_ComputeTime *smithy.Schema
-
-var GetMLModelOutput_FinishedAt *smithy.Schema
-
-var GetMLModelOutput_StartedAt *smithy.Schema
-
-var GetMLModelOutput_Recipe *smithy.Schema
-
-var GetMLModelOutput_Schema *smithy.Schema
-
-var PredictInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PredictInput",
-}, smithy.ShapeTypeStructure, 3)
-var PredictInput_MLModelId *smithy.Schema
-
-var PredictInput_Record *smithy.Schema
-
-var PredictInput_PredictEndpoint *smithy.Schema
-
-var PredictOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "PredictOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PredictOutput_Prediction *smithy.Schema
-
-var UpdateBatchPredictionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateBatchPredictionInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateBatchPredictionInput_BatchPredictionId *smithy.Schema
-
-var UpdateBatchPredictionInput_BatchPredictionName *smithy.Schema
-
-var UpdateBatchPredictionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateBatchPredictionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateBatchPredictionOutput_BatchPredictionId *smithy.Schema
-
-var UpdateDataSourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateDataSourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateDataSourceInput_DataSourceId *smithy.Schema
-
-var UpdateDataSourceInput_DataSourceName *smithy.Schema
-
-var UpdateDataSourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateDataSourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateDataSourceOutput_DataSourceId *smithy.Schema
-
-var UpdateEvaluationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateEvaluationInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateEvaluationInput_EvaluationId *smithy.Schema
-
-var UpdateEvaluationInput_EvaluationName *smithy.Schema
-
-var UpdateEvaluationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateEvaluationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEvaluationOutput_EvaluationId *smithy.Schema
-
-var UpdateMLModelInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateMLModelInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateMLModelInput_MLModelId *smithy.Schema
-
-var UpdateMLModelInput_MLModelName *smithy.Schema
-
-var UpdateMLModelInput_ScoreThreshold *smithy.Schema
-
-var UpdateMLModelOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.machinelearning",
-	Name:      "UpdateMLModelOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateMLModelOutput_MLModelId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	Algorithm_SGD = Algorithm.AddMember("SGD", smithyprelude.Unit)
-
-	EntityStatus_PENDING = EntityStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	EntityStatus_INPROGRESS = EntityStatus.AddMember("INPROGRESS", smithyprelude.Unit)
-
-	EntityStatus_FAILED = EntityStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	EntityStatus_COMPLETED = EntityStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	EntityStatus_DELETED = EntityStatus.AddMember("DELETED", smithyprelude.Unit)
-
-	BatchPrediction_BatchPredictionId = BatchPrediction.AddMember("BatchPredictionId", _EntityId)
-
-	BatchPrediction_MLModelId = BatchPrediction.AddMember("MLModelId", _EntityId)
-
-	BatchPrediction_BatchPredictionDataSourceId = BatchPrediction.AddMember("BatchPredictionDataSourceId", _EntityId)
-
-	BatchPrediction_InputDataLocationS3 = BatchPrediction.AddMember("InputDataLocationS3", _S3Url)
-
-	BatchPrediction_CreatedByIamUser = BatchPrediction.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	BatchPrediction_CreatedAt = BatchPrediction.AddMember("CreatedAt", _EpochTime)
-
-	BatchPrediction_LastUpdatedAt = BatchPrediction.AddMember("LastUpdatedAt", _EpochTime)
-
-	BatchPrediction_Name = BatchPrediction.AddMember("Name", _EntityName)
-
-	BatchPrediction_Status = BatchPrediction.AddMember("Status", EntityStatus)
-
-	BatchPrediction_OutputUri = BatchPrediction.AddMember("OutputUri", _S3Url)
-
-	BatchPrediction_Message = BatchPrediction.AddMember("Message", _Message)
-
-	BatchPrediction_ComputeTime = BatchPrediction.AddMember("ComputeTime", _LongType)
-
-	BatchPrediction_FinishedAt = BatchPrediction.AddMember("FinishedAt", _EpochTime)
-
-	BatchPrediction_StartedAt = BatchPrediction.AddMember("StartedAt", _EpochTime)
-
-	BatchPrediction_TotalRecordCount = BatchPrediction.AddMember("TotalRecordCount", _LongType)
-
-	BatchPrediction_InvalidRecordCount = BatchPrediction.AddMember("InvalidRecordCount", _LongType)
-
-	BatchPredictionFilterVariable_CREATED_AT = BatchPredictionFilterVariable.AddMember("CREATED_AT", smithyprelude.Unit)
-
-	BatchPredictionFilterVariable_LAST_UPDATED_AT = BatchPredictionFilterVariable.AddMember("LAST_UPDATED_AT", smithyprelude.Unit)
-
-	BatchPredictionFilterVariable_STATUS = BatchPredictionFilterVariable.AddMember("STATUS", smithyprelude.Unit)
-
-	BatchPredictionFilterVariable_NAME = BatchPredictionFilterVariable.AddMember("NAME", smithyprelude.Unit)
-
-	BatchPredictionFilterVariable_IAM_USER = BatchPredictionFilterVariable.AddMember("IAM_USER", smithyprelude.Unit)
-
-	BatchPredictionFilterVariable_ML_MODEL_ID = BatchPredictionFilterVariable.AddMember("ML_MODEL_ID", smithyprelude.Unit)
-
-	BatchPredictionFilterVariable_DATASOURCE_ID = BatchPredictionFilterVariable.AddMember("DATASOURCE_ID", smithyprelude.Unit)
-
-	BatchPredictionFilterVariable_DATA_URI = BatchPredictionFilterVariable.AddMember("DATA_URI", smithyprelude.Unit)
-
-	_BatchPredictions_member = _BatchPredictions.AddMember("member", BatchPrediction)
-
-	RedshiftDatabase_DatabaseName = RedshiftDatabase.AddMember("DatabaseName", _RedshiftDatabaseName)
-
-	RedshiftDatabase_ClusterIdentifier = RedshiftDatabase.AddMember("ClusterIdentifier", _RedshiftClusterIdentifier)
-
-	RedshiftMetadata_RedshiftDatabase = RedshiftMetadata.AddMember("RedshiftDatabase", RedshiftDatabase)
-
-	RedshiftMetadata_DatabaseUserName = RedshiftMetadata.AddMember("DatabaseUserName", _RedshiftDatabaseUsername)
-
-	RedshiftMetadata_SelectSqlQuery = RedshiftMetadata.AddMember("SelectSqlQuery", _RedshiftSelectSqlQuery)
-
-	RDSDatabase_InstanceIdentifier = RDSDatabase.AddMember("InstanceIdentifier", _RDSInstanceIdentifier)
-
-	RDSDatabase_DatabaseName = RDSDatabase.AddMember("DatabaseName", _RDSDatabaseName)
-
-	RDSMetadata_Database = RDSMetadata.AddMember("Database", RDSDatabase)
-
-	RDSMetadata_DatabaseUserName = RDSMetadata.AddMember("DatabaseUserName", _RDSDatabaseUsername)
-
-	RDSMetadata_SelectSqlQuery = RDSMetadata.AddMember("SelectSqlQuery", _RDSSelectSqlQuery)
-
-	RDSMetadata_ResourceRole = RDSMetadata.AddMember("ResourceRole", _EDPResourceRole)
-
-	RDSMetadata_ServiceRole = RDSMetadata.AddMember("ServiceRole", _EDPServiceRole)
-
-	RDSMetadata_DataPipelineId = RDSMetadata.AddMember("DataPipelineId", _EDPPipelineId)
-
-	DataSource_DataSourceId = DataSource.AddMember("DataSourceId", _EntityId)
-
-	DataSource_DataLocationS3 = DataSource.AddMember("DataLocationS3", _S3Url)
-
-	DataSource_DataRearrangement = DataSource.AddMember("DataRearrangement", _DataRearrangement)
-
-	DataSource_CreatedByIamUser = DataSource.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	DataSource_CreatedAt = DataSource.AddMember("CreatedAt", _EpochTime)
-
-	DataSource_LastUpdatedAt = DataSource.AddMember("LastUpdatedAt", _EpochTime)
-
-	DataSource_DataSizeInBytes = DataSource.AddMember("DataSizeInBytes", _LongType)
-
-	DataSource_NumberOfFiles = DataSource.AddMember("NumberOfFiles", _LongType)
-
-	DataSource_Name = DataSource.AddMember("Name", _EntityName)
-
-	DataSource_Status = DataSource.AddMember("Status", EntityStatus)
-
-	DataSource_Message = DataSource.AddMember("Message", _Message)
-
-	DataSource_RedshiftMetadata = DataSource.AddMember("RedshiftMetadata", RedshiftMetadata)
-
-	DataSource_RDSMetadata = DataSource.AddMember("RDSMetadata", RDSMetadata)
-
-	DataSource_RoleARN = DataSource.AddMember("RoleARN", _RoleARN)
-
-	DataSource_ComputeStatistics = DataSource.AddMember("ComputeStatistics", _ComputeStatistics)
-
-	DataSource_ComputeTime = DataSource.AddMember("ComputeTime", _LongType)
-
-	DataSource_FinishedAt = DataSource.AddMember("FinishedAt", _EpochTime)
-
-	DataSource_StartedAt = DataSource.AddMember("StartedAt", _EpochTime)
-
-	DataSourceFilterVariable_CREATED_AT = DataSourceFilterVariable.AddMember("CREATED_AT", smithyprelude.Unit)
-
-	DataSourceFilterVariable_LAST_UPDATED_AT = DataSourceFilterVariable.AddMember("LAST_UPDATED_AT", smithyprelude.Unit)
-
-	DataSourceFilterVariable_STATUS = DataSourceFilterVariable.AddMember("STATUS", smithyprelude.Unit)
-
-	DataSourceFilterVariable_NAME = DataSourceFilterVariable.AddMember("NAME", smithyprelude.Unit)
-
-	DataSourceFilterVariable_DATA_URI = DataSourceFilterVariable.AddMember("DATA_URI", smithyprelude.Unit)
-
-	DataSourceFilterVariable_IAM_USER = DataSourceFilterVariable.AddMember("IAM_USER", smithyprelude.Unit)
-
-	_DataSources_member = _DataSources.AddMember("member", DataSource)
-
-	DetailsAttributes_PREDICTIVE_MODEL_TYPE = DetailsAttributes.AddMember("PREDICTIVE_MODEL_TYPE", smithyprelude.Unit)
-
-	DetailsAttributes_ALGORITHM = DetailsAttributes.AddMember("ALGORITHM", smithyprelude.Unit)
-
-	_DetailsMap_key = _DetailsMap.AddMember("key", DetailsAttributes)
-
-	_DetailsMap_value = _DetailsMap.AddMember("value", _DetailsValue)
-
-	_EDPSecurityGroupIds_member = _EDPSecurityGroupIds.AddMember("member", _EDPSecurityGroupId)
-
-	_PerformanceMetricsProperties_key = _PerformanceMetricsProperties.AddMember("key", _PerformanceMetricsPropertyKey)
-
-	_PerformanceMetricsProperties_value = _PerformanceMetricsProperties.AddMember("value", _PerformanceMetricsPropertyValue)
-
-	PerformanceMetrics_Properties = PerformanceMetrics.AddMember("Properties", _PerformanceMetricsProperties)
-
-	Evaluation_EvaluationId = Evaluation.AddMember("EvaluationId", _EntityId)
-
-	Evaluation_MLModelId = Evaluation.AddMember("MLModelId", _EntityId)
-
-	Evaluation_EvaluationDataSourceId = Evaluation.AddMember("EvaluationDataSourceId", _EntityId)
-
-	Evaluation_InputDataLocationS3 = Evaluation.AddMember("InputDataLocationS3", _S3Url)
-
-	Evaluation_CreatedByIamUser = Evaluation.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	Evaluation_CreatedAt = Evaluation.AddMember("CreatedAt", _EpochTime)
-
-	Evaluation_LastUpdatedAt = Evaluation.AddMember("LastUpdatedAt", _EpochTime)
-
-	Evaluation_Name = Evaluation.AddMember("Name", _EntityName)
-
-	Evaluation_Status = Evaluation.AddMember("Status", EntityStatus)
-
-	Evaluation_PerformanceMetrics = Evaluation.AddMember("PerformanceMetrics", PerformanceMetrics)
-
-	Evaluation_Message = Evaluation.AddMember("Message", _Message)
-
-	Evaluation_ComputeTime = Evaluation.AddMember("ComputeTime", _LongType)
-
-	Evaluation_FinishedAt = Evaluation.AddMember("FinishedAt", _EpochTime)
-
-	Evaluation_StartedAt = Evaluation.AddMember("StartedAt", _EpochTime)
-
-	EvaluationFilterVariable_CREATED_AT = EvaluationFilterVariable.AddMember("CREATED_AT", smithyprelude.Unit)
-
-	EvaluationFilterVariable_LAST_UPDATED_AT = EvaluationFilterVariable.AddMember("LAST_UPDATED_AT", smithyprelude.Unit)
-
-	EvaluationFilterVariable_STATUS = EvaluationFilterVariable.AddMember("STATUS", smithyprelude.Unit)
-
-	EvaluationFilterVariable_NAME = EvaluationFilterVariable.AddMember("NAME", smithyprelude.Unit)
-
-	EvaluationFilterVariable_IAM_USER = EvaluationFilterVariable.AddMember("IAM_USER", smithyprelude.Unit)
-
-	EvaluationFilterVariable_ML_MODEL_ID = EvaluationFilterVariable.AddMember("ML_MODEL_ID", smithyprelude.Unit)
-
-	EvaluationFilterVariable_DATASOURCE_ID = EvaluationFilterVariable.AddMember("DATASOURCE_ID", smithyprelude.Unit)
-
-	EvaluationFilterVariable_DATA_URI = EvaluationFilterVariable.AddMember("DATA_URI", smithyprelude.Unit)
-
-	_Evaluations_member = _Evaluations.AddMember("member", Evaluation)
-
-	IdempotentParameterMismatchException_message = IdempotentParameterMismatchException.AddMember("message", _ErrorMessage)
-
-	IdempotentParameterMismatchException_code = IdempotentParameterMismatchException.AddMember("code", _ErrorCode)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _ErrorMessage)
-
-	InternalServerException_code = InternalServerException.AddMember("code", _ErrorCode)
-
-	InvalidInputException_message = InvalidInputException.AddMember("message", _ErrorMessage)
-
-	InvalidInputException_code = InvalidInputException.AddMember("code", _ErrorCode)
-
-	InvalidTagException_message = InvalidTagException.AddMember("message", _ErrorMessage)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	LimitExceededException_code = LimitExceededException.AddMember("code", _ErrorCode)
-
-	RealtimeEndpointStatus_NONE = RealtimeEndpointStatus.AddMember("NONE", smithyprelude.Unit)
-
-	RealtimeEndpointStatus_READY = RealtimeEndpointStatus.AddMember("READY", smithyprelude.Unit)
-
-	RealtimeEndpointStatus_UPDATING = RealtimeEndpointStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	RealtimeEndpointStatus_FAILED = RealtimeEndpointStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	RealtimeEndpointInfo_PeakRequestsPerSecond = RealtimeEndpointInfo.AddMember("PeakRequestsPerSecond", _IntegerType)
-
-	RealtimeEndpointInfo_CreatedAt = RealtimeEndpointInfo.AddMember("CreatedAt", _EpochTime)
-
-	RealtimeEndpointInfo_EndpointUrl = RealtimeEndpointInfo.AddMember("EndpointUrl", _VipURL)
-
-	RealtimeEndpointInfo_EndpointStatus = RealtimeEndpointInfo.AddMember("EndpointStatus", RealtimeEndpointStatus)
-
-	_TrainingParameters_key = _TrainingParameters.AddMember("key", _StringType)
-
-	_TrainingParameters_value = _TrainingParameters.AddMember("value", _StringType)
-
-	MLModelType_REGRESSION = MLModelType.AddMember("REGRESSION", smithyprelude.Unit)
-
-	MLModelType_BINARY = MLModelType.AddMember("BINARY", smithyprelude.Unit)
-
-	MLModelType_MULTICLASS = MLModelType.AddMember("MULTICLASS", smithyprelude.Unit)
-
-	MLModel_MLModelId = MLModel.AddMember("MLModelId", _EntityId)
-
-	MLModel_TrainingDataSourceId = MLModel.AddMember("TrainingDataSourceId", _EntityId)
-
-	MLModel_CreatedByIamUser = MLModel.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	MLModel_CreatedAt = MLModel.AddMember("CreatedAt", _EpochTime)
-
-	MLModel_LastUpdatedAt = MLModel.AddMember("LastUpdatedAt", _EpochTime)
-
-	MLModel_Name = MLModel.AddMember("Name", _MLModelName)
-
-	MLModel_Status = MLModel.AddMember("Status", EntityStatus)
-
-	MLModel_SizeInBytes = MLModel.AddMember("SizeInBytes", _LongType)
-
-	MLModel_EndpointInfo = MLModel.AddMember("EndpointInfo", RealtimeEndpointInfo)
-
-	MLModel_TrainingParameters = MLModel.AddMember("TrainingParameters", _TrainingParameters)
-
-	MLModel_InputDataLocationS3 = MLModel.AddMember("InputDataLocationS3", _S3Url)
-
-	MLModel_Algorithm = MLModel.AddMember("Algorithm", Algorithm)
-
-	MLModel_MLModelType = MLModel.AddMember("MLModelType", MLModelType)
-
-	MLModel_ScoreThreshold = MLModel.AddMember("ScoreThreshold", _ScoreThreshold)
-
-	MLModel_ScoreThresholdLastUpdatedAt = MLModel.AddMember("ScoreThresholdLastUpdatedAt", _EpochTime)
-
-	MLModel_Message = MLModel.AddMember("Message", _Message)
-
-	MLModel_ComputeTime = MLModel.AddMember("ComputeTime", _LongType)
-
-	MLModel_FinishedAt = MLModel.AddMember("FinishedAt", _EpochTime)
-
-	MLModel_StartedAt = MLModel.AddMember("StartedAt", _EpochTime)
-
-	MLModelFilterVariable_CREATED_AT = MLModelFilterVariable.AddMember("CREATED_AT", smithyprelude.Unit)
-
-	MLModelFilterVariable_LAST_UPDATED_AT = MLModelFilterVariable.AddMember("LAST_UPDATED_AT", smithyprelude.Unit)
-
-	MLModelFilterVariable_STATUS = MLModelFilterVariable.AddMember("STATUS", smithyprelude.Unit)
-
-	MLModelFilterVariable_NAME = MLModelFilterVariable.AddMember("NAME", smithyprelude.Unit)
-
-	MLModelFilterVariable_IAM_USER = MLModelFilterVariable.AddMember("IAM_USER", smithyprelude.Unit)
-
-	MLModelFilterVariable_TRAINING_DATASOURCE_ID = MLModelFilterVariable.AddMember("TRAINING_DATASOURCE_ID", smithyprelude.Unit)
-
-	MLModelFilterVariable_REAL_TIME_ENDPOINT_STATUS = MLModelFilterVariable.AddMember("REAL_TIME_ENDPOINT_STATUS", smithyprelude.Unit)
-
-	MLModelFilterVariable_ML_MODEL_TYPE = MLModelFilterVariable.AddMember("ML_MODEL_TYPE", smithyprelude.Unit)
-
-	MLModelFilterVariable_ALGORITHM = MLModelFilterVariable.AddMember("ALGORITHM", smithyprelude.Unit)
-
-	MLModelFilterVariable_TRAINING_DATA_URI = MLModelFilterVariable.AddMember("TRAINING_DATA_URI", smithyprelude.Unit)
-
-	_MLModels_member = _MLModels.AddMember("member", MLModel)
-
-	_ScoreValuePerLabelMap_key = _ScoreValuePerLabelMap.AddMember("key", _Label)
-
-	_ScoreValuePerLabelMap_value = _ScoreValuePerLabelMap.AddMember("value", _ScoreValue)
-
-	Prediction_predictedLabel = Prediction.AddMember("predictedLabel", _Label)
-
-	Prediction_predictedValue = Prediction.AddMember("predictedValue", _floatLabel)
-
-	Prediction_predictedScores = Prediction.AddMember("predictedScores", _ScoreValuePerLabelMap)
-
-	Prediction_details = Prediction.AddMember("details", _DetailsMap)
-
-	PredictorNotMountedException_message = PredictorNotMountedException.AddMember("message", _ErrorMessage)
-
-	RDSDatabaseCredentials_Username = RDSDatabaseCredentials.AddMember("Username", _RDSDatabaseUsername)
-
-	RDSDatabaseCredentials_Password = RDSDatabaseCredentials.AddMember("Password", _RDSDatabasePassword)
-
-	RDSDataSpec_DatabaseInformation = RDSDataSpec.AddMember("DatabaseInformation", RDSDatabase)
-
-	RDSDataSpec_SelectSqlQuery = RDSDataSpec.AddMember("SelectSqlQuery", _RDSSelectSqlQuery)
-
-	RDSDataSpec_DatabaseCredentials = RDSDataSpec.AddMember("DatabaseCredentials", RDSDatabaseCredentials)
-
-	RDSDataSpec_S3StagingLocation = RDSDataSpec.AddMember("S3StagingLocation", _S3Url)
-
-	RDSDataSpec_DataRearrangement = RDSDataSpec.AddMember("DataRearrangement", _DataRearrangement)
-
-	RDSDataSpec_DataSchema = RDSDataSpec.AddMember("DataSchema", _DataSchema)
-
-	RDSDataSpec_DataSchemaUri = RDSDataSpec.AddMember("DataSchemaUri", _S3Url)
-
-	RDSDataSpec_ResourceRole = RDSDataSpec.AddMember("ResourceRole", _EDPResourceRole)
-
-	RDSDataSpec_ServiceRole = RDSDataSpec.AddMember("ServiceRole", _EDPServiceRole)
-
-	RDSDataSpec_SubnetId = RDSDataSpec.AddMember("SubnetId", _EDPSubnetId)
-
-	RDSDataSpec_SecurityGroupIds = RDSDataSpec.AddMember("SecurityGroupIds", _EDPSecurityGroupIds)
-
-	_Record_key = _Record.AddMember("key", _VariableName)
-
-	_Record_value = _Record.AddMember("value", _VariableValue)
-
-	RedshiftDatabaseCredentials_Username = RedshiftDatabaseCredentials.AddMember("Username", _RedshiftDatabaseUsername)
-
-	RedshiftDatabaseCredentials_Password = RedshiftDatabaseCredentials.AddMember("Password", _RedshiftDatabasePassword)
-
-	RedshiftDataSpec_DatabaseInformation = RedshiftDataSpec.AddMember("DatabaseInformation", RedshiftDatabase)
-
-	RedshiftDataSpec_SelectSqlQuery = RedshiftDataSpec.AddMember("SelectSqlQuery", _RedshiftSelectSqlQuery)
-
-	RedshiftDataSpec_DatabaseCredentials = RedshiftDataSpec.AddMember("DatabaseCredentials", RedshiftDatabaseCredentials)
-
-	RedshiftDataSpec_S3StagingLocation = RedshiftDataSpec.AddMember("S3StagingLocation", _S3Url)
-
-	RedshiftDataSpec_DataRearrangement = RedshiftDataSpec.AddMember("DataRearrangement", _DataRearrangement)
-
-	RedshiftDataSpec_DataSchema = RedshiftDataSpec.AddMember("DataSchema", _DataSchema)
-
-	RedshiftDataSpec_DataSchemaUri = RedshiftDataSpec.AddMember("DataSchemaUri", _S3Url)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	ResourceNotFoundException_code = ResourceNotFoundException.AddMember("code", _ErrorCode)
-
-	S3DataSpec_DataLocationS3 = S3DataSpec.AddMember("DataLocationS3", _S3Url)
-
-	S3DataSpec_DataRearrangement = S3DataSpec.AddMember("DataRearrangement", _DataRearrangement)
-
-	S3DataSpec_DataSchema = S3DataSpec.AddMember("DataSchema", _DataSchema)
-
-	S3DataSpec_DataSchemaLocationS3 = S3DataSpec.AddMember("DataSchemaLocationS3", _S3Url)
-
-	SortOrder_ASC = SortOrder.AddMember("ASC", smithyprelude.Unit)
-
-	SortOrder_DSC = SortOrder.AddMember("DSC", smithyprelude.Unit)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	TaggableResourceType_BATCH_PREDICTION = TaggableResourceType.AddMember("BATCH_PREDICTION", smithyprelude.Unit)
-
-	TaggableResourceType_DATASOURCE = TaggableResourceType.AddMember("DATASOURCE", smithyprelude.Unit)
-
-	TaggableResourceType_EVALUATION = TaggableResourceType.AddMember("EVALUATION", smithyprelude.Unit)
-
-	TaggableResourceType_ML_MODEL = TaggableResourceType.AddMember("ML_MODEL", smithyprelude.Unit)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	TagLimitExceededException_message = TagLimitExceededException.AddMember("message", _ErrorMessage)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	AddTagsInput_Tags = AddTagsInput.AddMember("Tags", _TagList)
-
-	AddTagsInput_ResourceId = AddTagsInput.AddMember("ResourceId", _EntityId)
-
-	AddTagsInput_ResourceType = AddTagsInput.AddMember("ResourceType", TaggableResourceType)
-
-	AddTagsOutput_ResourceId = AddTagsOutput.AddMember("ResourceId", _EntityId)
-
-	AddTagsOutput_ResourceType = AddTagsOutput.AddMember("ResourceType", TaggableResourceType)
-
-	CreateBatchPredictionInput_BatchPredictionId = CreateBatchPredictionInput.AddMember("BatchPredictionId", _EntityId)
-
-	CreateBatchPredictionInput_BatchPredictionName = CreateBatchPredictionInput.AddMember("BatchPredictionName", _EntityName)
-
-	CreateBatchPredictionInput_MLModelId = CreateBatchPredictionInput.AddMember("MLModelId", _EntityId)
-
-	CreateBatchPredictionInput_BatchPredictionDataSourceId = CreateBatchPredictionInput.AddMember("BatchPredictionDataSourceId", _EntityId)
-
-	CreateBatchPredictionInput_OutputUri = CreateBatchPredictionInput.AddMember("OutputUri", _S3Url)
-
-	CreateBatchPredictionOutput_BatchPredictionId = CreateBatchPredictionOutput.AddMember("BatchPredictionId", _EntityId)
-
-	CreateDataSourceFromRDSInput_DataSourceId = CreateDataSourceFromRDSInput.AddMember("DataSourceId", _EntityId)
-
-	CreateDataSourceFromRDSInput_DataSourceName = CreateDataSourceFromRDSInput.AddMember("DataSourceName", _EntityName)
-
-	CreateDataSourceFromRDSInput_RDSData = CreateDataSourceFromRDSInput.AddMember("RDSData", RDSDataSpec)
-
-	CreateDataSourceFromRDSInput_RoleARN = CreateDataSourceFromRDSInput.AddMember("RoleARN", _RoleARN)
-
-	CreateDataSourceFromRDSInput_ComputeStatistics = CreateDataSourceFromRDSInput.AddMember("ComputeStatistics", _ComputeStatistics)
-
-	CreateDataSourceFromRDSOutput_DataSourceId = CreateDataSourceFromRDSOutput.AddMember("DataSourceId", _EntityId)
-
-	CreateDataSourceFromRedshiftInput_DataSourceId = CreateDataSourceFromRedshiftInput.AddMember("DataSourceId", _EntityId)
-
-	CreateDataSourceFromRedshiftInput_DataSourceName = CreateDataSourceFromRedshiftInput.AddMember("DataSourceName", _EntityName)
-
-	CreateDataSourceFromRedshiftInput_DataSpec = CreateDataSourceFromRedshiftInput.AddMember("DataSpec", RedshiftDataSpec)
-
-	CreateDataSourceFromRedshiftInput_RoleARN = CreateDataSourceFromRedshiftInput.AddMember("RoleARN", _RoleARN)
-
-	CreateDataSourceFromRedshiftInput_ComputeStatistics = CreateDataSourceFromRedshiftInput.AddMember("ComputeStatistics", _ComputeStatistics)
-
-	CreateDataSourceFromRedshiftOutput_DataSourceId = CreateDataSourceFromRedshiftOutput.AddMember("DataSourceId", _EntityId)
-
-	CreateDataSourceFromS3Input_DataSourceId = CreateDataSourceFromS3Input.AddMember("DataSourceId", _EntityId)
-
-	CreateDataSourceFromS3Input_DataSourceName = CreateDataSourceFromS3Input.AddMember("DataSourceName", _EntityName)
-
-	CreateDataSourceFromS3Input_DataSpec = CreateDataSourceFromS3Input.AddMember("DataSpec", S3DataSpec)
-
-	CreateDataSourceFromS3Input_ComputeStatistics = CreateDataSourceFromS3Input.AddMember("ComputeStatistics", _ComputeStatistics)
-
-	CreateDataSourceFromS3Output_DataSourceId = CreateDataSourceFromS3Output.AddMember("DataSourceId", _EntityId)
-
-	CreateEvaluationInput_EvaluationId = CreateEvaluationInput.AddMember("EvaluationId", _EntityId)
-
-	CreateEvaluationInput_EvaluationName = CreateEvaluationInput.AddMember("EvaluationName", _EntityName)
-
-	CreateEvaluationInput_MLModelId = CreateEvaluationInput.AddMember("MLModelId", _EntityId)
-
-	CreateEvaluationInput_EvaluationDataSourceId = CreateEvaluationInput.AddMember("EvaluationDataSourceId", _EntityId)
-
-	CreateEvaluationOutput_EvaluationId = CreateEvaluationOutput.AddMember("EvaluationId", _EntityId)
-
-	CreateMLModelInput_MLModelId = CreateMLModelInput.AddMember("MLModelId", _EntityId)
-
-	CreateMLModelInput_MLModelName = CreateMLModelInput.AddMember("MLModelName", _EntityName)
-
-	CreateMLModelInput_MLModelType = CreateMLModelInput.AddMember("MLModelType", MLModelType)
-
-	CreateMLModelInput_Parameters = CreateMLModelInput.AddMember("Parameters", _TrainingParameters)
-
-	CreateMLModelInput_TrainingDataSourceId = CreateMLModelInput.AddMember("TrainingDataSourceId", _EntityId)
-
-	CreateMLModelInput_Recipe = CreateMLModelInput.AddMember("Recipe", _Recipe)
-
-	CreateMLModelInput_RecipeUri = CreateMLModelInput.AddMember("RecipeUri", _S3Url)
-
-	CreateMLModelOutput_MLModelId = CreateMLModelOutput.AddMember("MLModelId", _EntityId)
-
-	CreateRealtimeEndpointInput_MLModelId = CreateRealtimeEndpointInput.AddMember("MLModelId", _EntityId)
-
-	CreateRealtimeEndpointOutput_MLModelId = CreateRealtimeEndpointOutput.AddMember("MLModelId", _EntityId)
-
-	CreateRealtimeEndpointOutput_RealtimeEndpointInfo = CreateRealtimeEndpointOutput.AddMember("RealtimeEndpointInfo", RealtimeEndpointInfo)
-
-	DeleteBatchPredictionInput_BatchPredictionId = DeleteBatchPredictionInput.AddMember("BatchPredictionId", _EntityId)
-
-	DeleteBatchPredictionOutput_BatchPredictionId = DeleteBatchPredictionOutput.AddMember("BatchPredictionId", _EntityId)
-
-	DeleteDataSourceInput_DataSourceId = DeleteDataSourceInput.AddMember("DataSourceId", _EntityId)
-
-	DeleteDataSourceOutput_DataSourceId = DeleteDataSourceOutput.AddMember("DataSourceId", _EntityId)
-
-	DeleteEvaluationInput_EvaluationId = DeleteEvaluationInput.AddMember("EvaluationId", _EntityId)
-
-	DeleteEvaluationOutput_EvaluationId = DeleteEvaluationOutput.AddMember("EvaluationId", _EntityId)
-
-	DeleteMLModelInput_MLModelId = DeleteMLModelInput.AddMember("MLModelId", _EntityId)
-
-	DeleteMLModelOutput_MLModelId = DeleteMLModelOutput.AddMember("MLModelId", _EntityId)
-
-	DeleteRealtimeEndpointInput_MLModelId = DeleteRealtimeEndpointInput.AddMember("MLModelId", _EntityId)
-
-	DeleteRealtimeEndpointOutput_MLModelId = DeleteRealtimeEndpointOutput.AddMember("MLModelId", _EntityId)
-
-	DeleteRealtimeEndpointOutput_RealtimeEndpointInfo = DeleteRealtimeEndpointOutput.AddMember("RealtimeEndpointInfo", RealtimeEndpointInfo)
-
-	DeleteTagsInput_TagKeys = DeleteTagsInput.AddMember("TagKeys", _TagKeyList)
-
-	DeleteTagsInput_ResourceId = DeleteTagsInput.AddMember("ResourceId", _EntityId)
-
-	DeleteTagsInput_ResourceType = DeleteTagsInput.AddMember("ResourceType", TaggableResourceType)
-
-	DeleteTagsOutput_ResourceId = DeleteTagsOutput.AddMember("ResourceId", _EntityId)
-
-	DeleteTagsOutput_ResourceType = DeleteTagsOutput.AddMember("ResourceType", TaggableResourceType)
-
-	DescribeBatchPredictionsInput_FilterVariable = DescribeBatchPredictionsInput.AddMember("FilterVariable", BatchPredictionFilterVariable)
-
-	DescribeBatchPredictionsInput_EQ = DescribeBatchPredictionsInput.AddMember("EQ", _ComparatorValue)
-
-	DescribeBatchPredictionsInput_GT = DescribeBatchPredictionsInput.AddMember("GT", _ComparatorValue)
-
-	DescribeBatchPredictionsInput_LT = DescribeBatchPredictionsInput.AddMember("LT", _ComparatorValue)
-
-	DescribeBatchPredictionsInput_GE = DescribeBatchPredictionsInput.AddMember("GE", _ComparatorValue)
-
-	DescribeBatchPredictionsInput_LE = DescribeBatchPredictionsInput.AddMember("LE", _ComparatorValue)
-
-	DescribeBatchPredictionsInput_NE = DescribeBatchPredictionsInput.AddMember("NE", _ComparatorValue)
-
-	DescribeBatchPredictionsInput_Prefix = DescribeBatchPredictionsInput.AddMember("Prefix", _ComparatorValue)
-
-	DescribeBatchPredictionsInput_SortOrder = DescribeBatchPredictionsInput.AddMember("SortOrder", SortOrder)
-
-	DescribeBatchPredictionsInput_NextToken = DescribeBatchPredictionsInput.AddMember("NextToken", _StringType)
-
-	DescribeBatchPredictionsInput_Limit = DescribeBatchPredictionsInput.AddMember("Limit", _PageLimit)
-
-	DescribeBatchPredictionsOutput_Results = DescribeBatchPredictionsOutput.AddMember("Results", _BatchPredictions)
-
-	DescribeBatchPredictionsOutput_NextToken = DescribeBatchPredictionsOutput.AddMember("NextToken", _StringType)
-
-	DescribeDataSourcesInput_FilterVariable = DescribeDataSourcesInput.AddMember("FilterVariable", DataSourceFilterVariable)
-
-	DescribeDataSourcesInput_EQ = DescribeDataSourcesInput.AddMember("EQ", _ComparatorValue)
-
-	DescribeDataSourcesInput_GT = DescribeDataSourcesInput.AddMember("GT", _ComparatorValue)
-
-	DescribeDataSourcesInput_LT = DescribeDataSourcesInput.AddMember("LT", _ComparatorValue)
-
-	DescribeDataSourcesInput_GE = DescribeDataSourcesInput.AddMember("GE", _ComparatorValue)
-
-	DescribeDataSourcesInput_LE = DescribeDataSourcesInput.AddMember("LE", _ComparatorValue)
-
-	DescribeDataSourcesInput_NE = DescribeDataSourcesInput.AddMember("NE", _ComparatorValue)
-
-	DescribeDataSourcesInput_Prefix = DescribeDataSourcesInput.AddMember("Prefix", _ComparatorValue)
-
-	DescribeDataSourcesInput_SortOrder = DescribeDataSourcesInput.AddMember("SortOrder", SortOrder)
-
-	DescribeDataSourcesInput_NextToken = DescribeDataSourcesInput.AddMember("NextToken", _StringType)
-
-	DescribeDataSourcesInput_Limit = DescribeDataSourcesInput.AddMember("Limit", _PageLimit)
-
-	DescribeDataSourcesOutput_Results = DescribeDataSourcesOutput.AddMember("Results", _DataSources)
-
-	DescribeDataSourcesOutput_NextToken = DescribeDataSourcesOutput.AddMember("NextToken", _StringType)
-
-	DescribeEvaluationsInput_FilterVariable = DescribeEvaluationsInput.AddMember("FilterVariable", EvaluationFilterVariable)
-
-	DescribeEvaluationsInput_EQ = DescribeEvaluationsInput.AddMember("EQ", _ComparatorValue)
-
-	DescribeEvaluationsInput_GT = DescribeEvaluationsInput.AddMember("GT", _ComparatorValue)
-
-	DescribeEvaluationsInput_LT = DescribeEvaluationsInput.AddMember("LT", _ComparatorValue)
-
-	DescribeEvaluationsInput_GE = DescribeEvaluationsInput.AddMember("GE", _ComparatorValue)
-
-	DescribeEvaluationsInput_LE = DescribeEvaluationsInput.AddMember("LE", _ComparatorValue)
-
-	DescribeEvaluationsInput_NE = DescribeEvaluationsInput.AddMember("NE", _ComparatorValue)
-
-	DescribeEvaluationsInput_Prefix = DescribeEvaluationsInput.AddMember("Prefix", _ComparatorValue)
-
-	DescribeEvaluationsInput_SortOrder = DescribeEvaluationsInput.AddMember("SortOrder", SortOrder)
-
-	DescribeEvaluationsInput_NextToken = DescribeEvaluationsInput.AddMember("NextToken", _StringType)
-
-	DescribeEvaluationsInput_Limit = DescribeEvaluationsInput.AddMember("Limit", _PageLimit)
-
-	DescribeEvaluationsOutput_Results = DescribeEvaluationsOutput.AddMember("Results", _Evaluations)
-
-	DescribeEvaluationsOutput_NextToken = DescribeEvaluationsOutput.AddMember("NextToken", _StringType)
-
-	DescribeMLModelsInput_FilterVariable = DescribeMLModelsInput.AddMember("FilterVariable", MLModelFilterVariable)
-
-	DescribeMLModelsInput_EQ = DescribeMLModelsInput.AddMember("EQ", _ComparatorValue)
-
-	DescribeMLModelsInput_GT = DescribeMLModelsInput.AddMember("GT", _ComparatorValue)
-
-	DescribeMLModelsInput_LT = DescribeMLModelsInput.AddMember("LT", _ComparatorValue)
-
-	DescribeMLModelsInput_GE = DescribeMLModelsInput.AddMember("GE", _ComparatorValue)
-
-	DescribeMLModelsInput_LE = DescribeMLModelsInput.AddMember("LE", _ComparatorValue)
-
-	DescribeMLModelsInput_NE = DescribeMLModelsInput.AddMember("NE", _ComparatorValue)
-
-	DescribeMLModelsInput_Prefix = DescribeMLModelsInput.AddMember("Prefix", _ComparatorValue)
-
-	DescribeMLModelsInput_SortOrder = DescribeMLModelsInput.AddMember("SortOrder", SortOrder)
-
-	DescribeMLModelsInput_NextToken = DescribeMLModelsInput.AddMember("NextToken", _StringType)
-
-	DescribeMLModelsInput_Limit = DescribeMLModelsInput.AddMember("Limit", _PageLimit)
-
-	DescribeMLModelsOutput_Results = DescribeMLModelsOutput.AddMember("Results", _MLModels)
-
-	DescribeMLModelsOutput_NextToken = DescribeMLModelsOutput.AddMember("NextToken", _StringType)
-
-	DescribeTagsInput_ResourceId = DescribeTagsInput.AddMember("ResourceId", _EntityId)
-
-	DescribeTagsInput_ResourceType = DescribeTagsInput.AddMember("ResourceType", TaggableResourceType)
-
-	DescribeTagsOutput_ResourceId = DescribeTagsOutput.AddMember("ResourceId", _EntityId)
-
-	DescribeTagsOutput_ResourceType = DescribeTagsOutput.AddMember("ResourceType", TaggableResourceType)
-
-	DescribeTagsOutput_Tags = DescribeTagsOutput.AddMember("Tags", _TagList)
-
-	GetBatchPredictionInput_BatchPredictionId = GetBatchPredictionInput.AddMember("BatchPredictionId", _EntityId)
-
-	GetBatchPredictionOutput_BatchPredictionId = GetBatchPredictionOutput.AddMember("BatchPredictionId", _EntityId)
-
-	GetBatchPredictionOutput_MLModelId = GetBatchPredictionOutput.AddMember("MLModelId", _EntityId)
-
-	GetBatchPredictionOutput_BatchPredictionDataSourceId = GetBatchPredictionOutput.AddMember("BatchPredictionDataSourceId", _EntityId)
-
-	GetBatchPredictionOutput_InputDataLocationS3 = GetBatchPredictionOutput.AddMember("InputDataLocationS3", _S3Url)
-
-	GetBatchPredictionOutput_CreatedByIamUser = GetBatchPredictionOutput.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	GetBatchPredictionOutput_CreatedAt = GetBatchPredictionOutput.AddMember("CreatedAt", _EpochTime)
-
-	GetBatchPredictionOutput_LastUpdatedAt = GetBatchPredictionOutput.AddMember("LastUpdatedAt", _EpochTime)
-
-	GetBatchPredictionOutput_Name = GetBatchPredictionOutput.AddMember("Name", _EntityName)
-
-	GetBatchPredictionOutput_Status = GetBatchPredictionOutput.AddMember("Status", EntityStatus)
-
-	GetBatchPredictionOutput_OutputUri = GetBatchPredictionOutput.AddMember("OutputUri", _S3Url)
-
-	GetBatchPredictionOutput_LogUri = GetBatchPredictionOutput.AddMember("LogUri", _PresignedS3Url)
-
-	GetBatchPredictionOutput_Message = GetBatchPredictionOutput.AddMember("Message", _Message)
-
-	GetBatchPredictionOutput_ComputeTime = GetBatchPredictionOutput.AddMember("ComputeTime", _LongType)
-
-	GetBatchPredictionOutput_FinishedAt = GetBatchPredictionOutput.AddMember("FinishedAt", _EpochTime)
-
-	GetBatchPredictionOutput_StartedAt = GetBatchPredictionOutput.AddMember("StartedAt", _EpochTime)
-
-	GetBatchPredictionOutput_TotalRecordCount = GetBatchPredictionOutput.AddMember("TotalRecordCount", _LongType)
-
-	GetBatchPredictionOutput_InvalidRecordCount = GetBatchPredictionOutput.AddMember("InvalidRecordCount", _LongType)
-
-	GetDataSourceInput_DataSourceId = GetDataSourceInput.AddMember("DataSourceId", _EntityId)
-
-	GetDataSourceInput_Verbose = GetDataSourceInput.AddMember("Verbose", _Verbose)
-
-	GetDataSourceOutput_DataSourceId = GetDataSourceOutput.AddMember("DataSourceId", _EntityId)
-
-	GetDataSourceOutput_DataLocationS3 = GetDataSourceOutput.AddMember("DataLocationS3", _S3Url)
-
-	GetDataSourceOutput_DataRearrangement = GetDataSourceOutput.AddMember("DataRearrangement", _DataRearrangement)
-
-	GetDataSourceOutput_CreatedByIamUser = GetDataSourceOutput.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	GetDataSourceOutput_CreatedAt = GetDataSourceOutput.AddMember("CreatedAt", _EpochTime)
-
-	GetDataSourceOutput_LastUpdatedAt = GetDataSourceOutput.AddMember("LastUpdatedAt", _EpochTime)
-
-	GetDataSourceOutput_DataSizeInBytes = GetDataSourceOutput.AddMember("DataSizeInBytes", _LongType)
-
-	GetDataSourceOutput_NumberOfFiles = GetDataSourceOutput.AddMember("NumberOfFiles", _LongType)
-
-	GetDataSourceOutput_Name = GetDataSourceOutput.AddMember("Name", _EntityName)
-
-	GetDataSourceOutput_Status = GetDataSourceOutput.AddMember("Status", EntityStatus)
-
-	GetDataSourceOutput_LogUri = GetDataSourceOutput.AddMember("LogUri", _PresignedS3Url)
-
-	GetDataSourceOutput_Message = GetDataSourceOutput.AddMember("Message", _Message)
-
-	GetDataSourceOutput_RedshiftMetadata = GetDataSourceOutput.AddMember("RedshiftMetadata", RedshiftMetadata)
-
-	GetDataSourceOutput_RDSMetadata = GetDataSourceOutput.AddMember("RDSMetadata", RDSMetadata)
-
-	GetDataSourceOutput_RoleARN = GetDataSourceOutput.AddMember("RoleARN", _RoleARN)
-
-	GetDataSourceOutput_ComputeStatistics = GetDataSourceOutput.AddMember("ComputeStatistics", _ComputeStatistics)
-
-	GetDataSourceOutput_ComputeTime = GetDataSourceOutput.AddMember("ComputeTime", _LongType)
-
-	GetDataSourceOutput_FinishedAt = GetDataSourceOutput.AddMember("FinishedAt", _EpochTime)
-
-	GetDataSourceOutput_StartedAt = GetDataSourceOutput.AddMember("StartedAt", _EpochTime)
-
-	GetDataSourceOutput_DataSourceSchema = GetDataSourceOutput.AddMember("DataSourceSchema", _DataSchema)
-
-	GetEvaluationInput_EvaluationId = GetEvaluationInput.AddMember("EvaluationId", _EntityId)
-
-	GetEvaluationOutput_EvaluationId = GetEvaluationOutput.AddMember("EvaluationId", _EntityId)
-
-	GetEvaluationOutput_MLModelId = GetEvaluationOutput.AddMember("MLModelId", _EntityId)
-
-	GetEvaluationOutput_EvaluationDataSourceId = GetEvaluationOutput.AddMember("EvaluationDataSourceId", _EntityId)
-
-	GetEvaluationOutput_InputDataLocationS3 = GetEvaluationOutput.AddMember("InputDataLocationS3", _S3Url)
-
-	GetEvaluationOutput_CreatedByIamUser = GetEvaluationOutput.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	GetEvaluationOutput_CreatedAt = GetEvaluationOutput.AddMember("CreatedAt", _EpochTime)
-
-	GetEvaluationOutput_LastUpdatedAt = GetEvaluationOutput.AddMember("LastUpdatedAt", _EpochTime)
-
-	GetEvaluationOutput_Name = GetEvaluationOutput.AddMember("Name", _EntityName)
-
-	GetEvaluationOutput_Status = GetEvaluationOutput.AddMember("Status", EntityStatus)
-
-	GetEvaluationOutput_PerformanceMetrics = GetEvaluationOutput.AddMember("PerformanceMetrics", PerformanceMetrics)
-
-	GetEvaluationOutput_LogUri = GetEvaluationOutput.AddMember("LogUri", _PresignedS3Url)
-
-	GetEvaluationOutput_Message = GetEvaluationOutput.AddMember("Message", _Message)
-
-	GetEvaluationOutput_ComputeTime = GetEvaluationOutput.AddMember("ComputeTime", _LongType)
-
-	GetEvaluationOutput_FinishedAt = GetEvaluationOutput.AddMember("FinishedAt", _EpochTime)
-
-	GetEvaluationOutput_StartedAt = GetEvaluationOutput.AddMember("StartedAt", _EpochTime)
-
-	GetMLModelInput_MLModelId = GetMLModelInput.AddMember("MLModelId", _EntityId)
-
-	GetMLModelInput_Verbose = GetMLModelInput.AddMember("Verbose", _Verbose)
-
-	GetMLModelOutput_MLModelId = GetMLModelOutput.AddMember("MLModelId", _EntityId)
-
-	GetMLModelOutput_TrainingDataSourceId = GetMLModelOutput.AddMember("TrainingDataSourceId", _EntityId)
-
-	GetMLModelOutput_CreatedByIamUser = GetMLModelOutput.AddMember("CreatedByIamUser", _AwsUserArn)
-
-	GetMLModelOutput_CreatedAt = GetMLModelOutput.AddMember("CreatedAt", _EpochTime)
-
-	GetMLModelOutput_LastUpdatedAt = GetMLModelOutput.AddMember("LastUpdatedAt", _EpochTime)
-
-	GetMLModelOutput_Name = GetMLModelOutput.AddMember("Name", _MLModelName)
-
-	GetMLModelOutput_Status = GetMLModelOutput.AddMember("Status", EntityStatus)
-
-	GetMLModelOutput_SizeInBytes = GetMLModelOutput.AddMember("SizeInBytes", _LongType)
-
-	GetMLModelOutput_EndpointInfo = GetMLModelOutput.AddMember("EndpointInfo", RealtimeEndpointInfo)
-
-	GetMLModelOutput_TrainingParameters = GetMLModelOutput.AddMember("TrainingParameters", _TrainingParameters)
-
-	GetMLModelOutput_InputDataLocationS3 = GetMLModelOutput.AddMember("InputDataLocationS3", _S3Url)
-
-	GetMLModelOutput_MLModelType = GetMLModelOutput.AddMember("MLModelType", MLModelType)
-
-	GetMLModelOutput_ScoreThreshold = GetMLModelOutput.AddMember("ScoreThreshold", _ScoreThreshold)
-
-	GetMLModelOutput_ScoreThresholdLastUpdatedAt = GetMLModelOutput.AddMember("ScoreThresholdLastUpdatedAt", _EpochTime)
-
-	GetMLModelOutput_LogUri = GetMLModelOutput.AddMember("LogUri", _PresignedS3Url)
-
-	GetMLModelOutput_Message = GetMLModelOutput.AddMember("Message", _Message)
-
-	GetMLModelOutput_ComputeTime = GetMLModelOutput.AddMember("ComputeTime", _LongType)
-
-	GetMLModelOutput_FinishedAt = GetMLModelOutput.AddMember("FinishedAt", _EpochTime)
-
-	GetMLModelOutput_StartedAt = GetMLModelOutput.AddMember("StartedAt", _EpochTime)
-
-	GetMLModelOutput_Recipe = GetMLModelOutput.AddMember("Recipe", _Recipe)
-
-	GetMLModelOutput_Schema = GetMLModelOutput.AddMember("Schema", _DataSchema)
-
-	PredictInput_MLModelId = PredictInput.AddMember("MLModelId", _EntityId)
-
-	PredictInput_Record = PredictInput.AddMember("Record", _Record)
-
-	PredictInput_PredictEndpoint = PredictInput.AddMember("PredictEndpoint", _VipURL)
-
-	PredictOutput_Prediction = PredictOutput.AddMember("Prediction", Prediction)
-
-	UpdateBatchPredictionInput_BatchPredictionId = UpdateBatchPredictionInput.AddMember("BatchPredictionId", _EntityId)
-
-	UpdateBatchPredictionInput_BatchPredictionName = UpdateBatchPredictionInput.AddMember("BatchPredictionName", _EntityName)
-
-	UpdateBatchPredictionOutput_BatchPredictionId = UpdateBatchPredictionOutput.AddMember("BatchPredictionId", _EntityId)
-
-	UpdateDataSourceInput_DataSourceId = UpdateDataSourceInput.AddMember("DataSourceId", _EntityId)
-
-	UpdateDataSourceInput_DataSourceName = UpdateDataSourceInput.AddMember("DataSourceName", _EntityName)
-
-	UpdateDataSourceOutput_DataSourceId = UpdateDataSourceOutput.AddMember("DataSourceId", _EntityId)
-
-	UpdateEvaluationInput_EvaluationId = UpdateEvaluationInput.AddMember("EvaluationId", _EntityId)
-
-	UpdateEvaluationInput_EvaluationName = UpdateEvaluationInput.AddMember("EvaluationName", _EntityName)
-
-	UpdateEvaluationOutput_EvaluationId = UpdateEvaluationOutput.AddMember("EvaluationId", _EntityId)
-
-	UpdateMLModelInput_MLModelId = UpdateMLModelInput.AddMember("MLModelId", _EntityId)
-
-	UpdateMLModelInput_MLModelName = UpdateMLModelInput.AddMember("MLModelName", _EntityName)
-
-	UpdateMLModelInput_ScoreThreshold = UpdateMLModelInput.AddMember("ScoreThreshold", _ScoreThreshold)
-
-	UpdateMLModelOutput_MLModelId = UpdateMLModelOutput.AddMember("MLModelId", _EntityId)
-
-}
+var (
+	iAddTags                              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "AddTags"}
+	iCreateBatchPrediction                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateBatchPrediction"}
+	iCreateDataSourceFromRDS              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromRDS"}
+	iCreateDataSourceFromRedshift         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromRedshift"}
+	iCreateDataSourceFromS3               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromS3"}
+	iCreateEvaluation                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateEvaluation"}
+	iCreateMLModel                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateMLModel"}
+	iCreateRealtimeEndpoint               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateRealtimeEndpoint"}
+	iDeleteBatchPrediction                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteBatchPrediction"}
+	iDeleteDataSource                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteDataSource"}
+	iDeleteEvaluation                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteEvaluation"}
+	iDeleteMLModel                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteMLModel"}
+	iDeleteRealtimeEndpoint               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteRealtimeEndpoint"}
+	iDeleteTags                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteTags"}
+	iDescribeBatchPredictions             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeBatchPredictions"}
+	iDescribeDataSources                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeDataSources"}
+	iDescribeEvaluations                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeEvaluations"}
+	iDescribeMLModels                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeMLModels"}
+	iDescribeTags                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeTags"}
+	iGetBatchPrediction                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetBatchPrediction"}
+	iGetDataSource                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetDataSource"}
+	iGetEvaluation                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetEvaluation"}
+	iGetMLModel                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetMLModel"}
+	iPredict                              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Predict"}
+	iUpdateBatchPrediction                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateBatchPrediction"}
+	iUpdateDataSource                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateDataSource"}
+	iUpdateEvaluation                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateEvaluation"}
+	iUpdateMLModel                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateMLModel"}
+	i_AmazonML_20141212                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "AmazonML_20141212"}
+	iAlgorithm                            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Algorithm"}
+	i_AwsUserArn                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "AwsUserArn"}
+	iBatchPrediction                      = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "BatchPrediction"}
+	iBatchPredictionFilterVariable        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "BatchPredictionFilterVariable"}
+	i_BatchPredictions                    = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "BatchPredictions"}
+	i_ComparatorValue                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ComparatorValue"}
+	i_ComputeStatistics                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ComputeStatistics"}
+	i_DataRearrangement                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DataRearrangement"}
+	i_DataSchema                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DataSchema"}
+	iDataSource                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DataSource"}
+	iDataSourceFilterVariable             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DataSourceFilterVariable"}
+	i_DataSources                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DataSources"}
+	iDetailsAttributes                    = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DetailsAttributes"}
+	i_DetailsMap                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DetailsMap"}
+	i_DetailsValue                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DetailsValue"}
+	i_EDPPipelineId                       = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EDPPipelineId"}
+	i_EDPResourceRole                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EDPResourceRole"}
+	i_EDPSecurityGroupId                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EDPSecurityGroupId"}
+	i_EDPSecurityGroupIds                 = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EDPSecurityGroupIds"}
+	i_EDPServiceRole                      = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EDPServiceRole"}
+	i_EDPSubnetId                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EDPSubnetId"}
+	i_EntityId                            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EntityId"}
+	i_EntityName                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EntityName"}
+	iEntityStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EntityStatus"}
+	i_EpochTime                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EpochTime"}
+	i_ErrorCode                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ErrorCode"}
+	i_ErrorMessage                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ErrorMessage"}
+	iEvaluation                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Evaluation"}
+	iEvaluationFilterVariable             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "EvaluationFilterVariable"}
+	i_Evaluations                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Evaluations"}
+	i_floatLabel                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "floatLabel"}
+	iIdempotentParameterMismatchException = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "IdempotentParameterMismatchException"}
+	i_IntegerType                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "IntegerType"}
+	iInternalServerException              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "InternalServerException"}
+	iInvalidInputException                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "InvalidInputException"}
+	iInvalidTagException                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "InvalidTagException"}
+	i_Label                               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Label"}
+	iLimitExceededException               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "LimitExceededException"}
+	i_LongType                            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "LongType"}
+	i_Message                             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Message"}
+	iMLModel                              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "MLModel"}
+	iMLModelFilterVariable                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "MLModelFilterVariable"}
+	i_MLModelName                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "MLModelName"}
+	i_MLModels                            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "MLModels"}
+	iMLModelType                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "MLModelType"}
+	i_PageLimit                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PageLimit"}
+	iPerformanceMetrics                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PerformanceMetrics"}
+	i_PerformanceMetricsProperties        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PerformanceMetricsProperties"}
+	i_PerformanceMetricsPropertyKey       = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PerformanceMetricsPropertyKey"}
+	i_PerformanceMetricsPropertyValue     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PerformanceMetricsPropertyValue"}
+	iPrediction                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Prediction"}
+	iPredictorNotMountedException         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PredictorNotMountedException"}
+	i_PresignedS3Url                      = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PresignedS3Url"}
+	iRDSDatabase                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSDatabase"}
+	iRDSDatabaseCredentials               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSDatabaseCredentials"}
+	i_RDSDatabaseName                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSDatabaseName"}
+	i_RDSDatabasePassword                 = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSDatabasePassword"}
+	i_RDSDatabaseUsername                 = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSDatabaseUsername"}
+	iRDSDataSpec                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSDataSpec"}
+	i_RDSInstanceIdentifier               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSInstanceIdentifier"}
+	iRDSMetadata                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSMetadata"}
+	i_RDSSelectSqlQuery                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RDSSelectSqlQuery"}
+	iRealtimeEndpointInfo                 = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RealtimeEndpointInfo"}
+	iRealtimeEndpointStatus               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RealtimeEndpointStatus"}
+	i_Recipe                              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Recipe"}
+	i_Record                              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Record"}
+	i_RedshiftClusterIdentifier           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftClusterIdentifier"}
+	iRedshiftDatabase                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftDatabase"}
+	iRedshiftDatabaseCredentials          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftDatabaseCredentials"}
+	i_RedshiftDatabaseName                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftDatabaseName"}
+	i_RedshiftDatabasePassword            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftDatabasePassword"}
+	i_RedshiftDatabaseUsername            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftDatabaseUsername"}
+	iRedshiftDataSpec                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftDataSpec"}
+	iRedshiftMetadata                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftMetadata"}
+	i_RedshiftSelectSqlQuery              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RedshiftSelectSqlQuery"}
+	iResourceNotFoundException            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ResourceNotFoundException"}
+	i_RoleARN                             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "RoleARN"}
+	iS3DataSpec                           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "S3DataSpec"}
+	i_S3Url                               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "S3Url"}
+	i_ScoreThreshold                      = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ScoreThreshold"}
+	i_ScoreValue                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ScoreValue"}
+	i_ScoreValuePerLabelMap               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "ScoreValuePerLabelMap"}
+	iSortOrder                            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "SortOrder"}
+	i_StringType                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "StringType"}
+	iTag                                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Tag"}
+	iTaggableResourceType                 = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "TaggableResourceType"}
+	i_TagKey                              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "TagKey"}
+	i_TagKeyList                          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "TagKeyList"}
+	iTagLimitExceededException            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "TagLimitExceededException"}
+	i_TagList                             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "TagList"}
+	i_TagValue                            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "TagValue"}
+	i_TrainingParameters                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "TrainingParameters"}
+	i_VariableName                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "VariableName"}
+	i_VariableValue                       = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "VariableValue"}
+	i_Verbose                             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "Verbose"}
+	i_VipURL                              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "VipURL"}
+	iAddTagsInput                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "AddTagsInput"}
+	iAddTagsOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "AddTagsOutput"}
+	iCreateBatchPredictionInput           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateBatchPredictionInput"}
+	iCreateBatchPredictionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateBatchPredictionOutput"}
+	iCreateDataSourceFromRDSInput         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromRDSInput"}
+	iCreateDataSourceFromRDSOutput        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromRDSOutput"}
+	iCreateDataSourceFromRedshiftInput    = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromRedshiftInput"}
+	iCreateDataSourceFromRedshiftOutput   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromRedshiftOutput"}
+	iCreateDataSourceFromS3Input          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromS3Input"}
+	iCreateDataSourceFromS3Output         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateDataSourceFromS3Output"}
+	iCreateEvaluationInput                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateEvaluationInput"}
+	iCreateEvaluationOutput               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateEvaluationOutput"}
+	iCreateMLModelInput                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateMLModelInput"}
+	iCreateMLModelOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateMLModelOutput"}
+	iCreateRealtimeEndpointInput          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateRealtimeEndpointInput"}
+	iCreateRealtimeEndpointOutput         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "CreateRealtimeEndpointOutput"}
+	iDeleteBatchPredictionInput           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteBatchPredictionInput"}
+	iDeleteBatchPredictionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteBatchPredictionOutput"}
+	iDeleteDataSourceInput                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteDataSourceInput"}
+	iDeleteDataSourceOutput               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteDataSourceOutput"}
+	iDeleteEvaluationInput                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteEvaluationInput"}
+	iDeleteEvaluationOutput               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteEvaluationOutput"}
+	iDeleteMLModelInput                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteMLModelInput"}
+	iDeleteMLModelOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteMLModelOutput"}
+	iDeleteRealtimeEndpointInput          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteRealtimeEndpointInput"}
+	iDeleteRealtimeEndpointOutput         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteRealtimeEndpointOutput"}
+	iDeleteTagsInput                      = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteTagsInput"}
+	iDeleteTagsOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DeleteTagsOutput"}
+	iDescribeBatchPredictionsInput        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeBatchPredictionsInput"}
+	iDescribeBatchPredictionsOutput       = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeBatchPredictionsOutput"}
+	iDescribeDataSourcesInput             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeDataSourcesInput"}
+	iDescribeDataSourcesOutput            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeDataSourcesOutput"}
+	iDescribeEvaluationsInput             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeEvaluationsInput"}
+	iDescribeEvaluationsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeEvaluationsOutput"}
+	iDescribeMLModelsInput                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeMLModelsInput"}
+	iDescribeMLModelsOutput               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeMLModelsOutput"}
+	iDescribeTagsInput                    = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeTagsInput"}
+	iDescribeTagsOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "DescribeTagsOutput"}
+	iGetBatchPredictionInput              = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetBatchPredictionInput"}
+	iGetBatchPredictionOutput             = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetBatchPredictionOutput"}
+	iGetDataSourceInput                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetDataSourceInput"}
+	iGetDataSourceOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetDataSourceOutput"}
+	iGetEvaluationInput                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetEvaluationInput"}
+	iGetEvaluationOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetEvaluationOutput"}
+	iGetMLModelInput                      = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetMLModelInput"}
+	iGetMLModelOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "GetMLModelOutput"}
+	iPredictInput                         = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PredictInput"}
+	iPredictOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "PredictOutput"}
+	iUpdateBatchPredictionInput           = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateBatchPredictionInput"}
+	iUpdateBatchPredictionOutput          = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateBatchPredictionOutput"}
+	iUpdateDataSourceInput                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateDataSourceInput"}
+	iUpdateDataSourceOutput               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateDataSourceOutput"}
+	iUpdateEvaluationInput                = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateEvaluationInput"}
+	iUpdateEvaluationOutput               = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateEvaluationOutput"}
+	iUpdateMLModelInput                   = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateMLModelInput"}
+	iUpdateMLModelOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.machinelearning", Name: "UpdateMLModelOutput"}
+	pUnit                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://machinelearning.amazonaws.com/doc/2014-12-12/"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 417}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAlgorithm = smithy.SchemaMembers{List: []*smithy.Schema{&sAlgorithm_SGD}}
+var mBatchPrediction = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPrediction_BatchPredictionId, &sBatchPrediction_MLModelId, &sBatchPrediction_BatchPredictionDataSourceId, &sBatchPrediction_InputDataLocationS3, &sBatchPrediction_CreatedByIamUser, &sBatchPrediction_CreatedAt, &sBatchPrediction_LastUpdatedAt, &sBatchPrediction_Name, &sBatchPrediction_Status, &sBatchPrediction_OutputUri, &sBatchPrediction_Message, &sBatchPrediction_ComputeTime, &sBatchPrediction_FinishedAt, &sBatchPrediction_StartedAt, &sBatchPrediction_TotalRecordCount, &sBatchPrediction_InvalidRecordCount}, Seed: 15, Slots: []uint16{
+	11, 8, 5, 0, 0, 0, 10, 0, 15, 14, 0, 0, 9, 3, 7, 0, 0, 1, 2, 0, 0, 0, 13, 0,
+	12, 16, 4, 0, 0, 0, 6, 0,
+}}
+var mBatchPredictionFilterVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchPredictionFilterVariable_CREATED_AT, &sBatchPredictionFilterVariable_LAST_UPDATED_AT, &sBatchPredictionFilterVariable_STATUS, &sBatchPredictionFilterVariable_NAME, &sBatchPredictionFilterVariable_IAM_USER, &sBatchPredictionFilterVariable_ML_MODEL_ID, &sBatchPredictionFilterVariable_DATASOURCE_ID, &sBatchPredictionFilterVariable_DATA_URI}}
+var m_BatchPredictions = smithy.SchemaMembers{List: []*smithy.Schema{&s_BatchPredictions_member}}
+var mDataSource = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSource_DataSourceId, &sDataSource_DataLocationS3, &sDataSource_DataRearrangement, &sDataSource_CreatedByIamUser, &sDataSource_CreatedAt, &sDataSource_LastUpdatedAt, &sDataSource_DataSizeInBytes, &sDataSource_NumberOfFiles, &sDataSource_Name, &sDataSource_Status, &sDataSource_Message, &sDataSource_RedshiftMetadata, &sDataSource_RDSMetadata, &sDataSource_RoleARN, &sDataSource_ComputeStatistics, &sDataSource_ComputeTime, &sDataSource_FinishedAt, &sDataSource_StartedAt}, Seed: 74, Slots: []uint16{
+	0, 0, 0, 14, 0, 0, 0, 11, 1, 9, 0, 0, 0, 0, 0, 0, 3, 0, 18, 6, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 16, 13, 0, 0, 15, 0, 0, 0, 7, 0,
+	0, 12, 0, 0, 10, 0, 17, 5, 0, 0, 0, 4, 0, 0, 2, 0,
+}}
+var mDataSourceFilterVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sDataSourceFilterVariable_CREATED_AT, &sDataSourceFilterVariable_LAST_UPDATED_AT, &sDataSourceFilterVariable_STATUS, &sDataSourceFilterVariable_NAME, &sDataSourceFilterVariable_DATA_URI, &sDataSourceFilterVariable_IAM_USER}}
+var m_DataSources = smithy.SchemaMembers{List: []*smithy.Schema{&s_DataSources_member}}
+var mDetailsAttributes = smithy.SchemaMembers{List: []*smithy.Schema{&sDetailsAttributes_PREDICTIVE_MODEL_TYPE, &sDetailsAttributes_ALGORITHM}}
+var m_DetailsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_DetailsMap_key, &s_DetailsMap_value}}
+var m_EDPSecurityGroupIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_EDPSecurityGroupIds_member}}
+var mEntityStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityStatus_PENDING, &sEntityStatus_INPROGRESS, &sEntityStatus_FAILED, &sEntityStatus_COMPLETED, &sEntityStatus_DELETED}}
+var mEvaluation = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluation_EvaluationId, &sEvaluation_MLModelId, &sEvaluation_EvaluationDataSourceId, &sEvaluation_InputDataLocationS3, &sEvaluation_CreatedByIamUser, &sEvaluation_CreatedAt, &sEvaluation_LastUpdatedAt, &sEvaluation_Name, &sEvaluation_Status, &sEvaluation_PerformanceMetrics, &sEvaluation_Message, &sEvaluation_ComputeTime, &sEvaluation_FinishedAt, &sEvaluation_StartedAt}, Seed: 15, Slots: []uint16{
+	11, 8, 5, 0, 0, 0, 0, 0, 0, 14, 0, 0, 9, 1, 7, 0, 0, 0, 2, 3, 0, 10, 13, 0,
+	12, 0, 4, 0, 0, 0, 6, 0,
+}}
+var mEvaluationFilterVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sEvaluationFilterVariable_CREATED_AT, &sEvaluationFilterVariable_LAST_UPDATED_AT, &sEvaluationFilterVariable_STATUS, &sEvaluationFilterVariable_NAME, &sEvaluationFilterVariable_IAM_USER, &sEvaluationFilterVariable_ML_MODEL_ID, &sEvaluationFilterVariable_DATASOURCE_ID, &sEvaluationFilterVariable_DATA_URI}}
+var m_Evaluations = smithy.SchemaMembers{List: []*smithy.Schema{&s_Evaluations_member}}
+var mIdempotentParameterMismatchException = smithy.SchemaMembers{List: []*smithy.Schema{&sIdempotentParameterMismatchException_message, &sIdempotentParameterMismatchException_code}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_code}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_message, &sInvalidInputException_code}}
+var mInvalidTagException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidTagException_message}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message, &sLimitExceededException_code}}
+var mMLModel = smithy.SchemaMembers{List: []*smithy.Schema{&sMLModel_MLModelId, &sMLModel_TrainingDataSourceId, &sMLModel_CreatedByIamUser, &sMLModel_CreatedAt, &sMLModel_LastUpdatedAt, &sMLModel_Name, &sMLModel_Status, &sMLModel_SizeInBytes, &sMLModel_EndpointInfo, &sMLModel_TrainingParameters, &sMLModel_InputDataLocationS3, &sMLModel_Algorithm, &sMLModel_MLModelType, &sMLModel_ScoreThreshold, &sMLModel_ScoreThresholdLastUpdatedAt, &sMLModel_Message, &sMLModel_ComputeTime, &sMLModel_FinishedAt, &sMLModel_StartedAt}, Seed: 28, Slots: []uint16{
+	0, 12, 19, 0, 0, 1, 0, 0, 0, 0, 0, 3, 0, 0, 0, 14, 7, 0, 0, 0, 0, 0, 0, 10,
+	2, 0, 15, 0, 0, 13, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 4, 0, 6, 18, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 5, 11, 0, 9, 0, 0, 16, 0,
+}}
+var mMLModelFilterVariable = smithy.SchemaMembers{List: []*smithy.Schema{&sMLModelFilterVariable_CREATED_AT, &sMLModelFilterVariable_LAST_UPDATED_AT, &sMLModelFilterVariable_STATUS, &sMLModelFilterVariable_NAME, &sMLModelFilterVariable_IAM_USER, &sMLModelFilterVariable_TRAINING_DATASOURCE_ID, &sMLModelFilterVariable_REAL_TIME_ENDPOINT_STATUS, &sMLModelFilterVariable_ML_MODEL_TYPE, &sMLModelFilterVariable_ALGORITHM, &sMLModelFilterVariable_TRAINING_DATA_URI}, Seed: 6, Slots: []uint16{
+	9, 6, 0, 10, 7, 0, 0, 0, 0, 3, 0, 2, 0, 5, 0, 0, 0, 4, 0, 0, 0, 0, 0, 1,
+	0, 0, 0, 0, 8, 0, 0, 0,
+}}
+var m_MLModels = smithy.SchemaMembers{List: []*smithy.Schema{&s_MLModels_member}}
+var mMLModelType = smithy.SchemaMembers{List: []*smithy.Schema{&sMLModelType_REGRESSION, &sMLModelType_BINARY, &sMLModelType_MULTICLASS}}
+var mPerformanceMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&sPerformanceMetrics_Properties}}
+var m_PerformanceMetricsProperties = smithy.SchemaMembers{List: []*smithy.Schema{&s_PerformanceMetricsProperties_key, &s_PerformanceMetricsProperties_value}}
+var mPrediction = smithy.SchemaMembers{List: []*smithy.Schema{&sPrediction_predictedLabel, &sPrediction_predictedValue, &sPrediction_predictedScores, &sPrediction_details}}
+var mPredictorNotMountedException = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictorNotMountedException_message}}
+var mRDSDatabase = smithy.SchemaMembers{List: []*smithy.Schema{&sRDSDatabase_InstanceIdentifier, &sRDSDatabase_DatabaseName}}
+var mRDSDatabaseCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sRDSDatabaseCredentials_Username, &sRDSDatabaseCredentials_Password}}
+var mRDSDataSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sRDSDataSpec_DatabaseInformation, &sRDSDataSpec_SelectSqlQuery, &sRDSDataSpec_DatabaseCredentials, &sRDSDataSpec_S3StagingLocation, &sRDSDataSpec_DataRearrangement, &sRDSDataSpec_DataSchema, &sRDSDataSpec_DataSchemaUri, &sRDSDataSpec_ResourceRole, &sRDSDataSpec_ServiceRole, &sRDSDataSpec_SubnetId, &sRDSDataSpec_SecurityGroupIds}, Seed: 7, Slots: []uint16{
+	0, 3, 4, 0, 1, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 10, 0, 8, 0, 9, 0,
+	5, 0, 2, 0, 0, 0, 7, 6,
+}}
+var mRDSMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sRDSMetadata_Database, &sRDSMetadata_DatabaseUserName, &sRDSMetadata_SelectSqlQuery, &sRDSMetadata_ResourceRole, &sRDSMetadata_ServiceRole, &sRDSMetadata_DataPipelineId}}
+var mRealtimeEndpointInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sRealtimeEndpointInfo_PeakRequestsPerSecond, &sRealtimeEndpointInfo_CreatedAt, &sRealtimeEndpointInfo_EndpointUrl, &sRealtimeEndpointInfo_EndpointStatus}}
+var mRealtimeEndpointStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRealtimeEndpointStatus_NONE, &sRealtimeEndpointStatus_READY, &sRealtimeEndpointStatus_UPDATING, &sRealtimeEndpointStatus_FAILED}}
+var m_Record = smithy.SchemaMembers{List: []*smithy.Schema{&s_Record_key, &s_Record_value}}
+var mRedshiftDatabase = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDatabase_DatabaseName, &sRedshiftDatabase_ClusterIdentifier}}
+var mRedshiftDatabaseCredentials = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDatabaseCredentials_Username, &sRedshiftDatabaseCredentials_Password}}
+var mRedshiftDataSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftDataSpec_DatabaseInformation, &sRedshiftDataSpec_SelectSqlQuery, &sRedshiftDataSpec_DatabaseCredentials, &sRedshiftDataSpec_S3StagingLocation, &sRedshiftDataSpec_DataRearrangement, &sRedshiftDataSpec_DataSchema, &sRedshiftDataSpec_DataSchemaUri}}
+var mRedshiftMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sRedshiftMetadata_RedshiftDatabase, &sRedshiftMetadata_DatabaseUserName, &sRedshiftMetadata_SelectSqlQuery}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_code}}
+var mS3DataSpec = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DataSpec_DataLocationS3, &sS3DataSpec_DataRearrangement, &sS3DataSpec_DataSchema, &sS3DataSpec_DataSchemaLocationS3}}
+var m_ScoreValuePerLabelMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScoreValuePerLabelMap_key, &s_ScoreValuePerLabelMap_value}}
+var mSortOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sSortOrder_ASC, &sSortOrder_DSC}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var mTaggableResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sTaggableResourceType_BATCH_PREDICTION, &sTaggableResourceType_DATASOURCE, &sTaggableResourceType_EVALUATION, &sTaggableResourceType_ML_MODEL}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var mTagLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTagLimitExceededException_message}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var m_TrainingParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_TrainingParameters_key, &s_TrainingParameters_value}}
+var mAddTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsInput_Tags, &sAddTagsInput_ResourceId, &sAddTagsInput_ResourceType}}
+var mAddTagsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAddTagsOutput_ResourceId, &sAddTagsOutput_ResourceType}}
+var mCreateBatchPredictionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBatchPredictionInput_BatchPredictionId, &sCreateBatchPredictionInput_BatchPredictionName, &sCreateBatchPredictionInput_MLModelId, &sCreateBatchPredictionInput_BatchPredictionDataSourceId, &sCreateBatchPredictionInput_OutputUri}}
+var mCreateBatchPredictionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateBatchPredictionOutput_BatchPredictionId}}
+var mCreateDataSourceFromRDSInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceFromRDSInput_DataSourceId, &sCreateDataSourceFromRDSInput_DataSourceName, &sCreateDataSourceFromRDSInput_RDSData, &sCreateDataSourceFromRDSInput_RoleARN, &sCreateDataSourceFromRDSInput_ComputeStatistics}}
+var mCreateDataSourceFromRDSOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceFromRDSOutput_DataSourceId}}
+var mCreateDataSourceFromRedshiftInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceFromRedshiftInput_DataSourceId, &sCreateDataSourceFromRedshiftInput_DataSourceName, &sCreateDataSourceFromRedshiftInput_DataSpec, &sCreateDataSourceFromRedshiftInput_RoleARN, &sCreateDataSourceFromRedshiftInput_ComputeStatistics}}
+var mCreateDataSourceFromRedshiftOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceFromRedshiftOutput_DataSourceId}}
+var mCreateDataSourceFromS3Input = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceFromS3Input_DataSourceId, &sCreateDataSourceFromS3Input_DataSourceName, &sCreateDataSourceFromS3Input_DataSpec, &sCreateDataSourceFromS3Input_ComputeStatistics}}
+var mCreateDataSourceFromS3Output = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDataSourceFromS3Output_DataSourceId}}
+var mCreateEvaluationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEvaluationInput_EvaluationId, &sCreateEvaluationInput_EvaluationName, &sCreateEvaluationInput_MLModelId, &sCreateEvaluationInput_EvaluationDataSourceId}}
+var mCreateEvaluationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEvaluationOutput_EvaluationId}}
+var mCreateMLModelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMLModelInput_MLModelId, &sCreateMLModelInput_MLModelName, &sCreateMLModelInput_MLModelType, &sCreateMLModelInput_Parameters, &sCreateMLModelInput_TrainingDataSourceId, &sCreateMLModelInput_Recipe, &sCreateMLModelInput_RecipeUri}}
+var mCreateMLModelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMLModelOutput_MLModelId}}
+var mCreateRealtimeEndpointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRealtimeEndpointInput_MLModelId}}
+var mCreateRealtimeEndpointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateRealtimeEndpointOutput_MLModelId, &sCreateRealtimeEndpointOutput_RealtimeEndpointInfo}}
+var mDeleteBatchPredictionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBatchPredictionInput_BatchPredictionId}}
+var mDeleteBatchPredictionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteBatchPredictionOutput_BatchPredictionId}}
+var mDeleteDataSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataSourceInput_DataSourceId}}
+var mDeleteDataSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDataSourceOutput_DataSourceId}}
+var mDeleteEvaluationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEvaluationInput_EvaluationId}}
+var mDeleteEvaluationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEvaluationOutput_EvaluationId}}
+var mDeleteMLModelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMLModelInput_MLModelId}}
+var mDeleteMLModelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMLModelOutput_MLModelId}}
+var mDeleteRealtimeEndpointInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRealtimeEndpointInput_MLModelId}}
+var mDeleteRealtimeEndpointOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteRealtimeEndpointOutput_MLModelId, &sDeleteRealtimeEndpointOutput_RealtimeEndpointInfo}}
+var mDeleteTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTagsInput_TagKeys, &sDeleteTagsInput_ResourceId, &sDeleteTagsInput_ResourceType}}
+var mDeleteTagsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteTagsOutput_ResourceId, &sDeleteTagsOutput_ResourceType}}
+var mDescribeBatchPredictionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBatchPredictionsInput_FilterVariable, &sDescribeBatchPredictionsInput_EQ, &sDescribeBatchPredictionsInput_GT, &sDescribeBatchPredictionsInput_LT, &sDescribeBatchPredictionsInput_GE, &sDescribeBatchPredictionsInput_LE, &sDescribeBatchPredictionsInput_NE, &sDescribeBatchPredictionsInput_Prefix, &sDescribeBatchPredictionsInput_SortOrder, &sDescribeBatchPredictionsInput_NextToken, &sDescribeBatchPredictionsInput_Limit}, Seed: 23, Slots: []uint16{
+	0, 1, 0, 0, 0, 6, 0, 7, 0, 0, 0, 2, 0, 9, 0, 5, 11, 0, 0, 3, 0, 0, 0, 8,
+	0, 10, 4, 0, 0, 0, 0, 0,
+}}
+var mDescribeBatchPredictionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeBatchPredictionsOutput_Results, &sDescribeBatchPredictionsOutput_NextToken}}
+var mDescribeDataSourcesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataSourcesInput_FilterVariable, &sDescribeDataSourcesInput_EQ, &sDescribeDataSourcesInput_GT, &sDescribeDataSourcesInput_LT, &sDescribeDataSourcesInput_GE, &sDescribeDataSourcesInput_LE, &sDescribeDataSourcesInput_NE, &sDescribeDataSourcesInput_Prefix, &sDescribeDataSourcesInput_SortOrder, &sDescribeDataSourcesInput_NextToken, &sDescribeDataSourcesInput_Limit}, Seed: 23, Slots: []uint16{
+	0, 1, 0, 0, 0, 6, 0, 7, 0, 0, 0, 2, 0, 9, 0, 5, 11, 0, 0, 3, 0, 0, 0, 8,
+	0, 10, 4, 0, 0, 0, 0, 0,
+}}
+var mDescribeDataSourcesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeDataSourcesOutput_Results, &sDescribeDataSourcesOutput_NextToken}}
+var mDescribeEvaluationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEvaluationsInput_FilterVariable, &sDescribeEvaluationsInput_EQ, &sDescribeEvaluationsInput_GT, &sDescribeEvaluationsInput_LT, &sDescribeEvaluationsInput_GE, &sDescribeEvaluationsInput_LE, &sDescribeEvaluationsInput_NE, &sDescribeEvaluationsInput_Prefix, &sDescribeEvaluationsInput_SortOrder, &sDescribeEvaluationsInput_NextToken, &sDescribeEvaluationsInput_Limit}, Seed: 23, Slots: []uint16{
+	0, 1, 0, 0, 0, 6, 0, 7, 0, 0, 0, 2, 0, 9, 0, 5, 11, 0, 0, 3, 0, 0, 0, 8,
+	0, 10, 4, 0, 0, 0, 0, 0,
+}}
+var mDescribeEvaluationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEvaluationsOutput_Results, &sDescribeEvaluationsOutput_NextToken}}
+var mDescribeMLModelsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMLModelsInput_FilterVariable, &sDescribeMLModelsInput_EQ, &sDescribeMLModelsInput_GT, &sDescribeMLModelsInput_LT, &sDescribeMLModelsInput_GE, &sDescribeMLModelsInput_LE, &sDescribeMLModelsInput_NE, &sDescribeMLModelsInput_Prefix, &sDescribeMLModelsInput_SortOrder, &sDescribeMLModelsInput_NextToken, &sDescribeMLModelsInput_Limit}, Seed: 23, Slots: []uint16{
+	0, 1, 0, 0, 0, 6, 0, 7, 0, 0, 0, 2, 0, 9, 0, 5, 11, 0, 0, 3, 0, 0, 0, 8,
+	0, 10, 4, 0, 0, 0, 0, 0,
+}}
+var mDescribeMLModelsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeMLModelsOutput_Results, &sDescribeMLModelsOutput_NextToken}}
+var mDescribeTagsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsInput_ResourceId, &sDescribeTagsInput_ResourceType}}
+var mDescribeTagsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeTagsOutput_ResourceId, &sDescribeTagsOutput_ResourceType, &sDescribeTagsOutput_Tags}}
+var mGetBatchPredictionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBatchPredictionInput_BatchPredictionId}}
+var mGetBatchPredictionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBatchPredictionOutput_BatchPredictionId, &sGetBatchPredictionOutput_MLModelId, &sGetBatchPredictionOutput_BatchPredictionDataSourceId, &sGetBatchPredictionOutput_InputDataLocationS3, &sGetBatchPredictionOutput_CreatedByIamUser, &sGetBatchPredictionOutput_CreatedAt, &sGetBatchPredictionOutput_LastUpdatedAt, &sGetBatchPredictionOutput_Name, &sGetBatchPredictionOutput_Status, &sGetBatchPredictionOutput_OutputUri, &sGetBatchPredictionOutput_LogUri, &sGetBatchPredictionOutput_Message, &sGetBatchPredictionOutput_ComputeTime, &sGetBatchPredictionOutput_FinishedAt, &sGetBatchPredictionOutput_StartedAt, &sGetBatchPredictionOutput_TotalRecordCount, &sGetBatchPredictionOutput_InvalidRecordCount}, Seed: 15, Slots: []uint16{
+	12, 8, 5, 0, 0, 0, 10, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0,
+	0, 17, 4, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 11, 0, 0, 9, 3, 7, 0,
+	0, 0, 2, 0, 0, 0, 14, 0, 13, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mGetDataSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataSourceInput_DataSourceId, &sGetDataSourceInput_Verbose}}
+var mGetDataSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDataSourceOutput_DataSourceId, &sGetDataSourceOutput_DataLocationS3, &sGetDataSourceOutput_DataRearrangement, &sGetDataSourceOutput_CreatedByIamUser, &sGetDataSourceOutput_CreatedAt, &sGetDataSourceOutput_LastUpdatedAt, &sGetDataSourceOutput_DataSizeInBytes, &sGetDataSourceOutput_NumberOfFiles, &sGetDataSourceOutput_Name, &sGetDataSourceOutput_Status, &sGetDataSourceOutput_LogUri, &sGetDataSourceOutput_Message, &sGetDataSourceOutput_RedshiftMetadata, &sGetDataSourceOutput_RDSMetadata, &sGetDataSourceOutput_RoleARN, &sGetDataSourceOutput_ComputeStatistics, &sGetDataSourceOutput_ComputeTime, &sGetDataSourceOutput_FinishedAt, &sGetDataSourceOutput_StartedAt, &sGetDataSourceOutput_DataSourceSchema}, Seed: 100, Slots: []uint16{
+	0, 0, 2, 0, 0, 0, 20, 19, 9, 0, 0, 0, 16, 0, 0, 0, 4, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 8, 0, 0, 0, 0, 0, 3, 18, 0, 0, 0, 0, 0, 0, 5, 0, 0, 17, 0, 0, 7, 14,
+	1, 0, 13, 12, 0, 0, 0, 0, 0, 0, 6, 10, 11, 0, 15, 0,
+}}
+var mGetEvaluationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvaluationInput_EvaluationId}}
+var mGetEvaluationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEvaluationOutput_EvaluationId, &sGetEvaluationOutput_MLModelId, &sGetEvaluationOutput_EvaluationDataSourceId, &sGetEvaluationOutput_InputDataLocationS3, &sGetEvaluationOutput_CreatedByIamUser, &sGetEvaluationOutput_CreatedAt, &sGetEvaluationOutput_LastUpdatedAt, &sGetEvaluationOutput_Name, &sGetEvaluationOutput_Status, &sGetEvaluationOutput_PerformanceMetrics, &sGetEvaluationOutput_LogUri, &sGetEvaluationOutput_Message, &sGetEvaluationOutput_ComputeTime, &sGetEvaluationOutput_FinishedAt, &sGetEvaluationOutput_StartedAt}, Seed: 47, Slots: []uint16{
+	9, 0, 0, 3, 0, 5, 7, 0, 0, 0, 0, 0, 4, 2, 0, 14, 0, 10, 0, 0, 12, 15, 1, 13,
+	0, 0, 0, 6, 8, 11, 0, 0,
+}}
+var mGetMLModelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMLModelInput_MLModelId, &sGetMLModelInput_Verbose}}
+var mGetMLModelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMLModelOutput_MLModelId, &sGetMLModelOutput_TrainingDataSourceId, &sGetMLModelOutput_CreatedByIamUser, &sGetMLModelOutput_CreatedAt, &sGetMLModelOutput_LastUpdatedAt, &sGetMLModelOutput_Name, &sGetMLModelOutput_Status, &sGetMLModelOutput_SizeInBytes, &sGetMLModelOutput_EndpointInfo, &sGetMLModelOutput_TrainingParameters, &sGetMLModelOutput_InputDataLocationS3, &sGetMLModelOutput_MLModelType, &sGetMLModelOutput_ScoreThreshold, &sGetMLModelOutput_ScoreThresholdLastUpdatedAt, &sGetMLModelOutput_LogUri, &sGetMLModelOutput_Message, &sGetMLModelOutput_ComputeTime, &sGetMLModelOutput_FinishedAt, &sGetMLModelOutput_StartedAt, &sGetMLModelOutput_Recipe, &sGetMLModelOutput_Schema}, Seed: 38, Slots: []uint16{
+	0, 19, 0, 0, 0, 0, 0, 14, 0, 11, 0, 0, 0, 20, 0, 4, 0, 0, 12, 0, 0, 0, 10, 0,
+	15, 0, 7, 0, 17, 0, 9, 0, 18, 3, 21, 0, 0, 1, 0, 0, 16, 13, 0, 8, 0, 0, 0, 0,
+	0, 6, 5, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mPredictInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictInput_MLModelId, &sPredictInput_Record, &sPredictInput_PredictEndpoint}}
+var mPredictOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPredictOutput_Prediction}}
+var mUpdateBatchPredictionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBatchPredictionInput_BatchPredictionId, &sUpdateBatchPredictionInput_BatchPredictionName}}
+var mUpdateBatchPredictionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateBatchPredictionOutput_BatchPredictionId}}
+var mUpdateDataSourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataSourceInput_DataSourceId, &sUpdateDataSourceInput_DataSourceName}}
+var mUpdateDataSourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateDataSourceOutput_DataSourceId}}
+var mUpdateEvaluationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEvaluationInput_EvaluationId, &sUpdateEvaluationInput_EvaluationName}}
+var mUpdateEvaluationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEvaluationOutput_EvaluationId}}
+var mUpdateMLModelInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMLModelInput_MLModelId, &sUpdateMLModelInput_MLModelName, &sUpdateMLModelInput_ScoreThreshold}}
+var mUpdateMLModelOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMLModelOutput_MLModelId}}
+
+var sAddTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTags, Type: smithy.ShapeTypeOperation})
+var sCreateBatchPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchPrediction, Type: smithy.ShapeTypeOperation})
+var sCreateDataSourceFromRDS = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromRDS, Type: smithy.ShapeTypeOperation})
+var sCreateDataSourceFromRedshift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromRedshift, Type: smithy.ShapeTypeOperation})
+var sCreateDataSourceFromS3 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromS3, Type: smithy.ShapeTypeOperation})
+var sCreateEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEvaluation, Type: smithy.ShapeTypeOperation})
+var sCreateMLModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMLModel, Type: smithy.ShapeTypeOperation})
+var sCreateRealtimeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRealtimeEndpoint, Type: smithy.ShapeTypeOperation})
+var sDeleteBatchPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchPrediction, Type: smithy.ShapeTypeOperation})
+var sDeleteDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataSource, Type: smithy.ShapeTypeOperation})
+var sDeleteEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEvaluation, Type: smithy.ShapeTypeOperation})
+var sDeleteMLModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMLModel, Type: smithy.ShapeTypeOperation})
+var sDeleteRealtimeEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRealtimeEndpoint, Type: smithy.ShapeTypeOperation})
+var sDeleteTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTags, Type: smithy.ShapeTypeOperation})
+var sDescribeBatchPredictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBatchPredictions, Type: smithy.ShapeTypeOperation})
+var sDescribeDataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataSources, Type: smithy.ShapeTypeOperation})
+var sDescribeEvaluations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvaluations, Type: smithy.ShapeTypeOperation})
+var sDescribeMLModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMLModels, Type: smithy.ShapeTypeOperation})
+var sDescribeTags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTags, Type: smithy.ShapeTypeOperation})
+var sGetBatchPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchPrediction, Type: smithy.ShapeTypeOperation})
+var sGetDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSource, Type: smithy.ShapeTypeOperation})
+var sGetEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvaluation, Type: smithy.ShapeTypeOperation})
+var sGetMLModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLModel, Type: smithy.ShapeTypeOperation})
+var sPredict = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredict, Type: smithy.ShapeTypeOperation})
+var sUpdateBatchPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBatchPrediction, Type: smithy.ShapeTypeOperation})
+var sUpdateDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataSource, Type: smithy.ShapeTypeOperation})
+var sUpdateEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEvaluation, Type: smithy.ShapeTypeOperation})
+var sUpdateMLModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMLModel, Type: smithy.ShapeTypeOperation})
+var s_AmazonML_20141212 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonML_20141212, Traits: &t0, Type: smithy.ShapeTypeService})
+var sAlgorithm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAlgorithm, Members: &mAlgorithm, Type: smithy.ShapeTypeEnum})
+var s_AwsUserArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sBatchPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPrediction, Members: &mBatchPrediction, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchPredictionFilterVariable, Members: &mBatchPredictionFilterVariable, Type: smithy.ShapeTypeEnum})
+var s_BatchPredictions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BatchPredictions, Members: &m_BatchPredictions, Type: smithy.ShapeTypeList})
+var s_ComparatorValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var s_ComputeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeStatistics, Type: smithy.ShapeTypeBoolean})
+var s_DataRearrangement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRearrangement, Type: smithy.ShapeTypeString})
+var s_DataSchema = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSchema, Type: smithy.ShapeTypeString})
+var sDataSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure})
+var sDataSourceFilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataSourceFilterVariable, Members: &mDataSourceFilterVariable, Type: smithy.ShapeTypeEnum})
+var s_DataSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataSources, Members: &m_DataSources, Type: smithy.ShapeTypeList})
+var sDetailsAttributes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetailsAttributes, Members: &mDetailsAttributes, Type: smithy.ShapeTypeEnum})
+var s_DetailsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailsMap, Members: &m_DetailsMap, Type: smithy.ShapeTypeMap})
+var s_DetailsValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailsValue, Type: smithy.ShapeTypeString})
+var s_EDPPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EDPPipelineId, Type: smithy.ShapeTypeString})
+var s_EDPResourceRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EDPResourceRole, Type: smithy.ShapeTypeString})
+var s_EDPSecurityGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EDPSecurityGroupId, Type: smithy.ShapeTypeString})
+var s_EDPSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EDPSecurityGroupIds, Members: &m_EDPSecurityGroupIds, Type: smithy.ShapeTypeList})
+var s_EDPServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EDPServiceRole, Type: smithy.ShapeTypeString})
+var s_EDPSubnetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EDPSubnetId, Type: smithy.ShapeTypeString})
+var s_EntityId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var s_EntityName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sEntityStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var s_EpochTime = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sEvaluation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEvaluationFilterVariable, Members: &mEvaluationFilterVariable, Type: smithy.ShapeTypeEnum})
+var s_Evaluations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Evaluations, Members: &m_Evaluations, Type: smithy.ShapeTypeList})
+var s_floatLabel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_floatLabel, Type: smithy.ShapeTypeFloat})
+var sIdempotentParameterMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotentParameterMismatchException, Members: &mIdempotentParameterMismatchException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_IntegerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerType, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidTagException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidTagException, Members: &mInvalidTagException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_Label = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Label, Type: smithy.ShapeTypeString})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_LongType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var s_Message = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Message, Type: smithy.ShapeTypeString})
+var sMLModel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMLModel, Members: &mMLModel, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMLModelFilterVariable, Members: &mMLModelFilterVariable, Type: smithy.ShapeTypeEnum})
+var s_MLModelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MLModelName, Type: smithy.ShapeTypeString})
+var s_MLModels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MLModels, Members: &m_MLModels, Type: smithy.ShapeTypeList})
+var sMLModelType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMLModelType, Members: &mMLModelType, Type: smithy.ShapeTypeEnum})
+var s_PageLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sPerformanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPerformanceMetrics, Members: &mPerformanceMetrics, Type: smithy.ShapeTypeStructure})
+var s_PerformanceMetricsProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PerformanceMetricsProperties, Members: &m_PerformanceMetricsProperties, Type: smithy.ShapeTypeMap})
+var s_PerformanceMetricsPropertyKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PerformanceMetricsPropertyKey, Type: smithy.ShapeTypeString})
+var s_PerformanceMetricsPropertyValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PerformanceMetricsPropertyValue, Type: smithy.ShapeTypeString})
+var sPrediction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPrediction, Members: &mPrediction, Type: smithy.ShapeTypeStructure})
+var sPredictorNotMountedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictorNotMountedException, Members: &mPredictorNotMountedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_PresignedS3Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PresignedS3Url, Type: smithy.ShapeTypeString})
+var sRDSDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRDSDatabase, Members: &mRDSDatabase, Type: smithy.ShapeTypeStructure})
+var sRDSDatabaseCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRDSDatabaseCredentials, Members: &mRDSDatabaseCredentials, Type: smithy.ShapeTypeStructure})
+var s_RDSDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RDSDatabaseName, Type: smithy.ShapeTypeString})
+var s_RDSDatabasePassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RDSDatabasePassword, Traits: &t6, Type: smithy.ShapeTypeString})
+var s_RDSDatabaseUsername = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RDSDatabaseUsername, Type: smithy.ShapeTypeString})
+var sRDSDataSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRDSDataSpec, Members: &mRDSDataSpec, Type: smithy.ShapeTypeStructure})
+var s_RDSInstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RDSInstanceIdentifier, Type: smithy.ShapeTypeString})
+var sRDSMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRDSMetadata, Members: &mRDSMetadata, Type: smithy.ShapeTypeStructure})
+var s_RDSSelectSqlQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RDSSelectSqlQuery, Type: smithy.ShapeTypeString})
+var sRealtimeEndpointInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRealtimeEndpointInfo, Members: &mRealtimeEndpointInfo, Type: smithy.ShapeTypeStructure})
+var sRealtimeEndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRealtimeEndpointStatus, Members: &mRealtimeEndpointStatus, Type: smithy.ShapeTypeEnum})
+var s_Recipe = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Recipe, Type: smithy.ShapeTypeString})
+var s_Record = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeMap})
+var s_RedshiftClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftClusterIdentifier, Type: smithy.ShapeTypeString})
+var sRedshiftDatabase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDatabase, Members: &mRedshiftDatabase, Type: smithy.ShapeTypeStructure})
+var sRedshiftDatabaseCredentials = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDatabaseCredentials, Members: &mRedshiftDatabaseCredentials, Type: smithy.ShapeTypeStructure})
+var s_RedshiftDatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftDatabaseName, Type: smithy.ShapeTypeString})
+var s_RedshiftDatabasePassword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftDatabasePassword, Traits: &t6, Type: smithy.ShapeTypeString})
+var s_RedshiftDatabaseUsername = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftDatabaseUsername, Type: smithy.ShapeTypeString})
+var sRedshiftDataSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftDataSpec, Members: &mRedshiftDataSpec, Type: smithy.ShapeTypeStructure})
+var sRedshiftMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRedshiftMetadata, Members: &mRedshiftMetadata, Type: smithy.ShapeTypeStructure})
+var s_RedshiftSelectSqlQuery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RedshiftSelectSqlQuery, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sS3DataSpec = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DataSpec, Members: &mS3DataSpec, Type: smithy.ShapeTypeStructure})
+var s_S3Url = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var s_ScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScoreThreshold, Type: smithy.ShapeTypeFloat})
+var s_ScoreValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScoreValue, Type: smithy.ShapeTypeFloat})
+var s_ScoreValuePerLabelMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScoreValuePerLabelMap, Members: &m_ScoreValuePerLabelMap, Type: smithy.ShapeTypeMap})
+var sSortOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var s_StringType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTaggableResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTaggableResourceType, Members: &mTaggableResourceType, Type: smithy.ShapeTypeEnum})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sTagLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagLimitExceededException, Members: &mTagLimitExceededException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TrainingParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TrainingParameters, Members: &m_TrainingParameters, Type: smithy.ShapeTypeMap})
+var s_VariableName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableName, Type: smithy.ShapeTypeString})
+var s_VariableValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VariableValue, Type: smithy.ShapeTypeString})
+var s_Verbose = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Verbose, Type: smithy.ShapeTypeBoolean})
+var s_VipURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VipURL, Type: smithy.ShapeTypeString})
+var sAddTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsInput, Members: &mAddTagsInput, Type: smithy.ShapeTypeStructure})
+var sAddTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAddTagsOutput, Members: &mAddTagsOutput, Type: smithy.ShapeTypeStructure})
+var sCreateBatchPredictionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchPredictionInput, Members: &mCreateBatchPredictionInput, Type: smithy.ShapeTypeStructure})
+var sCreateBatchPredictionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateBatchPredictionOutput, Members: &mCreateBatchPredictionOutput, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromRDSInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromRDSInput, Members: &mCreateDataSourceFromRDSInput, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromRDSOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromRDSOutput, Members: &mCreateDataSourceFromRDSOutput, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromRedshiftInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromRedshiftInput, Members: &mCreateDataSourceFromRedshiftInput, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromRedshiftOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromRedshiftOutput, Members: &mCreateDataSourceFromRedshiftOutput, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromS3Input = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromS3Input, Members: &mCreateDataSourceFromS3Input, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromS3Output = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDataSourceFromS3Output, Members: &mCreateDataSourceFromS3Output, Type: smithy.ShapeTypeStructure})
+var sCreateEvaluationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEvaluationInput, Members: &mCreateEvaluationInput, Type: smithy.ShapeTypeStructure})
+var sCreateEvaluationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEvaluationOutput, Members: &mCreateEvaluationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateMLModelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMLModelInput, Members: &mCreateMLModelInput, Type: smithy.ShapeTypeStructure})
+var sCreateMLModelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMLModelOutput, Members: &mCreateMLModelOutput, Type: smithy.ShapeTypeStructure})
+var sCreateRealtimeEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRealtimeEndpointInput, Members: &mCreateRealtimeEndpointInput, Type: smithy.ShapeTypeStructure})
+var sCreateRealtimeEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateRealtimeEndpointOutput, Members: &mCreateRealtimeEndpointOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteBatchPredictionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchPredictionInput, Members: &mDeleteBatchPredictionInput, Type: smithy.ShapeTypeStructure})
+var sDeleteBatchPredictionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteBatchPredictionOutput, Members: &mDeleteBatchPredictionOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteDataSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataSourceInput, Members: &mDeleteDataSourceInput, Type: smithy.ShapeTypeStructure})
+var sDeleteDataSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDataSourceOutput, Members: &mDeleteDataSourceOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteEvaluationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEvaluationInput, Members: &mDeleteEvaluationInput, Type: smithy.ShapeTypeStructure})
+var sDeleteEvaluationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEvaluationOutput, Members: &mDeleteEvaluationOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteMLModelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMLModelInput, Members: &mDeleteMLModelInput, Type: smithy.ShapeTypeStructure})
+var sDeleteMLModelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMLModelOutput, Members: &mDeleteMLModelOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteRealtimeEndpointInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRealtimeEndpointInput, Members: &mDeleteRealtimeEndpointInput, Type: smithy.ShapeTypeStructure})
+var sDeleteRealtimeEndpointOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteRealtimeEndpointOutput, Members: &mDeleteRealtimeEndpointOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsInput, Members: &mDeleteTagsInput, Type: smithy.ShapeTypeStructure})
+var sDeleteTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteTagsOutput, Members: &mDeleteTagsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeBatchPredictionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBatchPredictionsInput, Members: &mDescribeBatchPredictionsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeBatchPredictionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeBatchPredictionsOutput, Members: &mDescribeBatchPredictionsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeDataSourcesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataSourcesInput, Members: &mDescribeDataSourcesInput, Type: smithy.ShapeTypeStructure})
+var sDescribeDataSourcesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeDataSourcesOutput, Members: &mDescribeDataSourcesOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeEvaluationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvaluationsInput, Members: &mDescribeEvaluationsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeEvaluationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEvaluationsOutput, Members: &mDescribeEvaluationsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeMLModelsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMLModelsInput, Members: &mDescribeMLModelsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeMLModelsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeMLModelsOutput, Members: &mDescribeMLModelsOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeTagsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsInput, Members: &mDescribeTagsInput, Type: smithy.ShapeTypeStructure})
+var sDescribeTagsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeTagsOutput, Members: &mDescribeTagsOutput, Type: smithy.ShapeTypeStructure})
+var sGetBatchPredictionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchPredictionInput, Members: &mGetBatchPredictionInput, Type: smithy.ShapeTypeStructure})
+var sGetBatchPredictionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBatchPredictionOutput, Members: &mGetBatchPredictionOutput, Type: smithy.ShapeTypeStructure})
+var sGetDataSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSourceInput, Members: &mGetDataSourceInput, Type: smithy.ShapeTypeStructure})
+var sGetDataSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDataSourceOutput, Members: &mGetDataSourceOutput, Type: smithy.ShapeTypeStructure})
+var sGetEvaluationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvaluationInput, Members: &mGetEvaluationInput, Type: smithy.ShapeTypeStructure})
+var sGetEvaluationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEvaluationOutput, Members: &mGetEvaluationOutput, Type: smithy.ShapeTypeStructure})
+var sGetMLModelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLModelInput, Members: &mGetMLModelInput, Type: smithy.ShapeTypeStructure})
+var sGetMLModelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMLModelOutput, Members: &mGetMLModelOutput, Type: smithy.ShapeTypeStructure})
+var sPredictInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictInput, Members: &mPredictInput, Type: smithy.ShapeTypeStructure})
+var sPredictOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPredictOutput, Members: &mPredictOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateBatchPredictionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBatchPredictionInput, Members: &mUpdateBatchPredictionInput, Type: smithy.ShapeTypeStructure})
+var sUpdateBatchPredictionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateBatchPredictionOutput, Members: &mUpdateBatchPredictionOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateDataSourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataSourceInput, Members: &mUpdateDataSourceInput, Type: smithy.ShapeTypeStructure})
+var sUpdateDataSourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateDataSourceOutput, Members: &mUpdateDataSourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEvaluationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEvaluationInput, Members: &mUpdateEvaluationInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEvaluationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEvaluationOutput, Members: &mUpdateEvaluationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateMLModelInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMLModelInput, Members: &mUpdateMLModelInput, Type: smithy.ShapeTypeStructure})
+var sUpdateMLModelOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMLModelOutput, Members: &mUpdateMLModelOutput, Type: smithy.ShapeTypeStructure})
+
+var sAlgorithm_SGD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SGD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPrediction_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sBatchPrediction_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sBatchPrediction_BatchPredictionDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sBatchPrediction_InputDataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sBatchPrediction_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sBatchPrediction_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sBatchPrediction_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sBatchPrediction_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sBatchPrediction_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sBatchPrediction_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sBatchPrediction_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sBatchPrediction_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sBatchPrediction_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sBatchPrediction_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sBatchPrediction_TotalRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRecordCount", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sBatchPrediction_InvalidRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidRecordCount", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sBatchPredictionFilterVariable_CREATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable_LAST_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable_IAM_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable_ML_MODEL_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_MODEL_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable_DATASOURCE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATASOURCE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBatchPredictionFilterVariable_DATA_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_URI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_BatchPredictions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBatchPrediction, Members: &mBatchPrediction, Type: smithy.ShapeTypeStructure})
+var sDataSource_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDataSource_DataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sDataSource_DataRearrangement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRearrangement", ID: &i_DataRearrangement, Type: smithy.ShapeTypeString})
+var sDataSource_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sDataSource_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sDataSource_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sDataSource_DataSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSizeInBytes", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sDataSource_NumberOfFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfFiles", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sDataSource_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sDataSource_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sDataSource_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sDataSource_RedshiftMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedshiftMetadata", ID: &iRedshiftMetadata, Members: &mRedshiftMetadata, Type: smithy.ShapeTypeStructure})
+var sDataSource_RDSMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDSMetadata", ID: &iRDSMetadata, Members: &mRDSMetadata, Type: smithy.ShapeTypeStructure})
+var sDataSource_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sDataSource_ComputeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeStatistics", ID: &i_ComputeStatistics, Type: smithy.ShapeTypeBoolean})
+var sDataSource_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sDataSource_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sDataSource_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sDataSourceFilterVariable_CREATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataSourceFilterVariable_LAST_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataSourceFilterVariable_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataSourceFilterVariable_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataSourceFilterVariable_DATA_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_URI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataSourceFilterVariable_IAM_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DataSources_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDataSource, Members: &mDataSource, Type: smithy.ShapeTypeStructure})
+var sDetailsAttributes_PREDICTIVE_MODEL_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PREDICTIVE_MODEL_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDetailsAttributes_ALGORITHM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALGORITHM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DetailsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iDetailsAttributes, Members: &mDetailsAttributes, Type: smithy.ShapeTypeEnum})
+var s_DetailsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_DetailsValue, Type: smithy.ShapeTypeString})
+var s_EDPSecurityGroupIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EDPSecurityGroupId, Type: smithy.ShapeTypeString})
+var sEntityStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityStatus_INPROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INPROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityStatus_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluation_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sEvaluation_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sEvaluation_EvaluationDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sEvaluation_InputDataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sEvaluation_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sEvaluation_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sEvaluation_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sEvaluation_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sEvaluation_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sEvaluation_PerformanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceMetrics", ID: &iPerformanceMetrics, Members: &mPerformanceMetrics, Type: smithy.ShapeTypeStructure})
+var sEvaluation_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sEvaluation_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sEvaluation_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sEvaluation_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sEvaluationFilterVariable_CREATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable_LAST_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable_IAM_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable_ML_MODEL_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_MODEL_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable_DATASOURCE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATASOURCE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEvaluationFilterVariable_DATA_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA_URI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Evaluations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEvaluation, Members: &mEvaluation, Type: smithy.ShapeTypeStructure})
+var sIdempotentParameterMismatchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sIdempotentParameterMismatchException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInternalServerException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var sInvalidInputException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidInputException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var sInvalidTagException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLimitExceededException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var sMLModel_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sMLModel_TrainingDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sMLModel_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sMLModel_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sMLModel_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sMLModel_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MLModelName, Type: smithy.ShapeTypeString})
+var sMLModel_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sMLModel_SizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInBytes", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sMLModel_EndpointInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointInfo", ID: &iRealtimeEndpointInfo, Members: &mRealtimeEndpointInfo, Type: smithy.ShapeTypeStructure})
+var sMLModel_TrainingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingParameters", ID: &i_TrainingParameters, Members: &m_TrainingParameters, Type: smithy.ShapeTypeMap})
+var sMLModel_InputDataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sMLModel_Algorithm = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Algorithm", ID: &iAlgorithm, Members: &mAlgorithm, Type: smithy.ShapeTypeEnum})
+var sMLModel_MLModelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelType", ID: &iMLModelType, Members: &mMLModelType, Type: smithy.ShapeTypeEnum})
+var sMLModel_ScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScoreThreshold", ID: &i_ScoreThreshold, Type: smithy.ShapeTypeFloat})
+var sMLModel_ScoreThresholdLastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScoreThresholdLastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sMLModel_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sMLModel_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sMLModel_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sMLModel_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sMLModelFilterVariable_CREATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_LAST_UPDATED_AT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_UPDATED_AT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_IAM_USER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IAM_USER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_TRAINING_DATASOURCE_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINING_DATASOURCE_ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_REAL_TIME_ENDPOINT_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REAL_TIME_ENDPOINT_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_ML_MODEL_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_MODEL_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_ALGORITHM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALGORITHM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelFilterVariable_TRAINING_DATA_URI = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TRAINING_DATA_URI", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MLModels_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMLModel, Members: &mMLModel, Type: smithy.ShapeTypeStructure})
+var sMLModelType_REGRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelType_BINARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINARY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMLModelType_MULTICLASS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTICLASS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPerformanceMetrics_Properties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Properties", ID: &i_PerformanceMetricsProperties, Members: &m_PerformanceMetricsProperties, Type: smithy.ShapeTypeMap})
+var s_PerformanceMetricsProperties_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_PerformanceMetricsPropertyKey, Type: smithy.ShapeTypeString})
+var s_PerformanceMetricsProperties_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_PerformanceMetricsPropertyValue, Type: smithy.ShapeTypeString})
+var sPrediction_predictedLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictedLabel", ID: &i_Label, Type: smithy.ShapeTypeString})
+var sPrediction_predictedValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictedValue", ID: &i_floatLabel, Type: smithy.ShapeTypeFloat})
+var sPrediction_predictedScores = smithy.NewStaticSchema(smithy.StaticSchema{Member: "predictedScores", ID: &i_ScoreValuePerLabelMap, Members: &m_ScoreValuePerLabelMap, Type: smithy.ShapeTypeMap})
+var sPrediction_details = smithy.NewStaticSchema(smithy.StaticSchema{Member: "details", ID: &i_DetailsMap, Members: &m_DetailsMap, Type: smithy.ShapeTypeMap})
+var sPredictorNotMountedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sRDSDatabase_InstanceIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceIdentifier", ID: &i_RDSInstanceIdentifier, Type: smithy.ShapeTypeString})
+var sRDSDatabase_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_RDSDatabaseName, Type: smithy.ShapeTypeString})
+var sRDSDatabaseCredentials_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_RDSDatabaseUsername, Type: smithy.ShapeTypeString})
+var sRDSDatabaseCredentials_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_RDSDatabasePassword, Traits: &t5, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_DatabaseInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseInformation", ID: &iRDSDatabase, Members: &mRDSDatabase, Type: smithy.ShapeTypeStructure})
+var sRDSDataSpec_SelectSqlQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectSqlQuery", ID: &i_RDSSelectSqlQuery, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_DatabaseCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseCredentials", ID: &iRDSDatabaseCredentials, Members: &mRDSDatabaseCredentials, Type: smithy.ShapeTypeStructure})
+var sRDSDataSpec_S3StagingLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StagingLocation", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_DataRearrangement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRearrangement", ID: &i_DataRearrangement, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_DataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSchema", ID: &i_DataSchema, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_DataSchemaUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSchemaUri", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_ResourceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRole", ID: &i_EDPResourceRole, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_ServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceRole", ID: &i_EDPServiceRole, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_SubnetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubnetId", ID: &i_EDPSubnetId, Type: smithy.ShapeTypeString})
+var sRDSDataSpec_SecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecurityGroupIds", ID: &i_EDPSecurityGroupIds, Members: &m_EDPSecurityGroupIds, Type: smithy.ShapeTypeList})
+var sRDSMetadata_Database = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Database", ID: &iRDSDatabase, Members: &mRDSDatabase, Type: smithy.ShapeTypeStructure})
+var sRDSMetadata_DatabaseUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseUserName", ID: &i_RDSDatabaseUsername, Type: smithy.ShapeTypeString})
+var sRDSMetadata_SelectSqlQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectSqlQuery", ID: &i_RDSSelectSqlQuery, Type: smithy.ShapeTypeString})
+var sRDSMetadata_ResourceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceRole", ID: &i_EDPResourceRole, Type: smithy.ShapeTypeString})
+var sRDSMetadata_ServiceRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceRole", ID: &i_EDPServiceRole, Type: smithy.ShapeTypeString})
+var sRDSMetadata_DataPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataPipelineId", ID: &i_EDPPipelineId, Type: smithy.ShapeTypeString})
+var sRealtimeEndpointInfo_PeakRequestsPerSecond = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeakRequestsPerSecond", ID: &i_IntegerType, Type: smithy.ShapeTypeInteger})
+var sRealtimeEndpointInfo_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sRealtimeEndpointInfo_EndpointUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointUrl", ID: &i_VipURL, Type: smithy.ShapeTypeString})
+var sRealtimeEndpointInfo_EndpointStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointStatus", ID: &iRealtimeEndpointStatus, Members: &mRealtimeEndpointStatus, Type: smithy.ShapeTypeEnum})
+var sRealtimeEndpointStatus_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRealtimeEndpointStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRealtimeEndpointStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRealtimeEndpointStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Record_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_VariableName, Type: smithy.ShapeTypeString})
+var s_Record_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_VariableValue, Type: smithy.ShapeTypeString})
+var sRedshiftDatabase_DatabaseName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseName", ID: &i_RedshiftDatabaseName, Type: smithy.ShapeTypeString})
+var sRedshiftDatabase_ClusterIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClusterIdentifier", ID: &i_RedshiftClusterIdentifier, Type: smithy.ShapeTypeString})
+var sRedshiftDatabaseCredentials_Username = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Username", ID: &i_RedshiftDatabaseUsername, Type: smithy.ShapeTypeString})
+var sRedshiftDatabaseCredentials_Password = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Password", ID: &i_RedshiftDatabasePassword, Traits: &t5, Type: smithy.ShapeTypeString})
+var sRedshiftDataSpec_DatabaseInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseInformation", ID: &iRedshiftDatabase, Members: &mRedshiftDatabase, Type: smithy.ShapeTypeStructure})
+var sRedshiftDataSpec_SelectSqlQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectSqlQuery", ID: &i_RedshiftSelectSqlQuery, Type: smithy.ShapeTypeString})
+var sRedshiftDataSpec_DatabaseCredentials = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseCredentials", ID: &iRedshiftDatabaseCredentials, Members: &mRedshiftDatabaseCredentials, Type: smithy.ShapeTypeStructure})
+var sRedshiftDataSpec_S3StagingLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3StagingLocation", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sRedshiftDataSpec_DataRearrangement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRearrangement", ID: &i_DataRearrangement, Type: smithy.ShapeTypeString})
+var sRedshiftDataSpec_DataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSchema", ID: &i_DataSchema, Type: smithy.ShapeTypeString})
+var sRedshiftDataSpec_DataSchemaUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSchemaUri", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sRedshiftMetadata_RedshiftDatabase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedshiftDatabase", ID: &iRedshiftDatabase, Members: &mRedshiftDatabase, Type: smithy.ShapeTypeStructure})
+var sRedshiftMetadata_DatabaseUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DatabaseUserName", ID: &i_RedshiftDatabaseUsername, Type: smithy.ShapeTypeString})
+var sRedshiftMetadata_SelectSqlQuery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectSqlQuery", ID: &i_RedshiftSelectSqlQuery, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_ErrorCode, Type: smithy.ShapeTypeInteger})
+var sS3DataSpec_DataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sS3DataSpec_DataRearrangement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRearrangement", ID: &i_DataRearrangement, Type: smithy.ShapeTypeString})
+var sS3DataSpec_DataSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSchema", ID: &i_DataSchema, Type: smithy.ShapeTypeString})
+var sS3DataSpec_DataSchemaLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSchemaLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var s_ScoreValuePerLabelMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_Label, Type: smithy.ShapeTypeString})
+var s_ScoreValuePerLabelMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_ScoreValue, Type: smithy.ShapeTypeFloat})
+var sSortOrder_ASC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSortOrder_DSC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DSC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sTaggableResourceType_BATCH_PREDICTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BATCH_PREDICTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaggableResourceType_DATASOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATASOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaggableResourceType_EVALUATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVALUATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTaggableResourceType_ML_MODEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ML_MODEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTagLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TrainingParameters_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var s_TrainingParameters_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sAddTagsInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sAddTagsInput_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sAddTagsInput_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iTaggableResourceType, Members: &mTaggableResourceType, Type: smithy.ShapeTypeEnum})
+var sAddTagsOutput_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sAddTagsOutput_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iTaggableResourceType, Members: &mTaggableResourceType, Type: smithy.ShapeTypeEnum})
+var sCreateBatchPredictionInput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateBatchPredictionInput_BatchPredictionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCreateBatchPredictionInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateBatchPredictionInput_BatchPredictionDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateBatchPredictionInput_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sCreateBatchPredictionOutput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRDSInput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRDSInput_DataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRDSInput_RDSData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDSData", ID: &iRDSDataSpec, Members: &mRDSDataSpec, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromRDSInput_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRDSInput_ComputeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeStatistics", ID: &i_ComputeStatistics, Type: smithy.ShapeTypeBoolean})
+var sCreateDataSourceFromRDSOutput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRedshiftInput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRedshiftInput_DataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRedshiftInput_DataSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSpec", ID: &iRedshiftDataSpec, Members: &mRedshiftDataSpec, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromRedshiftInput_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromRedshiftInput_ComputeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeStatistics", ID: &i_ComputeStatistics, Type: smithy.ShapeTypeBoolean})
+var sCreateDataSourceFromRedshiftOutput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromS3Input_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromS3Input_DataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCreateDataSourceFromS3Input_DataSpec = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSpec", ID: &iS3DataSpec, Members: &mS3DataSpec, Type: smithy.ShapeTypeStructure})
+var sCreateDataSourceFromS3Input_ComputeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeStatistics", ID: &i_ComputeStatistics, Type: smithy.ShapeTypeBoolean})
+var sCreateDataSourceFromS3Output_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateEvaluationInput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateEvaluationInput_EvaluationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCreateEvaluationInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateEvaluationInput_EvaluationDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateEvaluationOutput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateMLModelInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateMLModelInput_MLModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sCreateMLModelInput_MLModelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelType", ID: &iMLModelType, Members: &mMLModelType, Type: smithy.ShapeTypeEnum})
+var sCreateMLModelInput_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_TrainingParameters, Members: &m_TrainingParameters, Type: smithy.ShapeTypeMap})
+var sCreateMLModelInput_TrainingDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateMLModelInput_Recipe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipe", ID: &i_Recipe, Type: smithy.ShapeTypeString})
+var sCreateMLModelInput_RecipeUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecipeUri", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sCreateMLModelOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateRealtimeEndpointInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateRealtimeEndpointOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sCreateRealtimeEndpointOutput_RealtimeEndpointInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RealtimeEndpointInfo", ID: &iRealtimeEndpointInfo, Members: &mRealtimeEndpointInfo, Type: smithy.ShapeTypeStructure})
+var sDeleteBatchPredictionInput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteBatchPredictionOutput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteDataSourceInput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteDataSourceOutput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteEvaluationInput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteEvaluationOutput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteMLModelInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteMLModelOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteRealtimeEndpointInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteRealtimeEndpointOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteRealtimeEndpointOutput_RealtimeEndpointInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RealtimeEndpointInfo", ID: &iRealtimeEndpointInfo, Members: &mRealtimeEndpointInfo, Type: smithy.ShapeTypeStructure})
+var sDeleteTagsInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sDeleteTagsInput_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteTagsInput_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iTaggableResourceType, Members: &mTaggableResourceType, Type: smithy.ShapeTypeEnum})
+var sDeleteTagsOutput_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDeleteTagsOutput_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iTaggableResourceType, Members: &mTaggableResourceType, Type: smithy.ShapeTypeEnum})
+var sDescribeBatchPredictionsInput_FilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterVariable", ID: &iBatchPredictionFilterVariable, Members: &mBatchPredictionFilterVariable, Type: smithy.ShapeTypeEnum})
+var sDescribeBatchPredictionsInput_EQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQ", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sDescribeBatchPredictionsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeBatchPredictionsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeBatchPredictionsOutput_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_BatchPredictions, Members: &m_BatchPredictions, Type: smithy.ShapeTypeList})
+var sDescribeBatchPredictionsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_FilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterVariable", ID: &iDataSourceFilterVariable, Members: &mDataSourceFilterVariable, Type: smithy.ShapeTypeEnum})
+var sDescribeDataSourcesInput_EQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQ", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sDescribeDataSourcesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeDataSourcesInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeDataSourcesOutput_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_DataSources, Members: &m_DataSources, Type: smithy.ShapeTypeList})
+var sDescribeDataSourcesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_FilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterVariable", ID: &iEvaluationFilterVariable, Members: &mEvaluationFilterVariable, Type: smithy.ShapeTypeEnum})
+var sDescribeEvaluationsInput_EQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQ", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sDescribeEvaluationsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeEvaluationsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeEvaluationsOutput_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_Evaluations, Members: &m_Evaluations, Type: smithy.ShapeTypeList})
+var sDescribeEvaluationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_FilterVariable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterVariable", ID: &iMLModelFilterVariable, Members: &mMLModelFilterVariable, Type: smithy.ShapeTypeEnum})
+var sDescribeMLModelsInput_EQ = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EQ", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_GT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_LT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LT", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_GE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_LE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_NE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NE", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_Prefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prefix", ID: &i_ComparatorValue, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_SortOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SortOrder", ID: &iSortOrder, Members: &mSortOrder, Type: smithy.ShapeTypeEnum})
+var sDescribeMLModelsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeMLModelsInput_Limit = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Limit", ID: &i_PageLimit, Type: smithy.ShapeTypeInteger})
+var sDescribeMLModelsOutput_Results = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Results", ID: &i_MLModels, Members: &m_MLModels, Type: smithy.ShapeTypeList})
+var sDescribeMLModelsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_StringType, Type: smithy.ShapeTypeString})
+var sDescribeTagsInput_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDescribeTagsInput_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iTaggableResourceType, Members: &mTaggableResourceType, Type: smithy.ShapeTypeEnum})
+var sDescribeTagsOutput_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sDescribeTagsOutput_ResourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceType", ID: &iTaggableResourceType, Members: &mTaggableResourceType, Type: smithy.ShapeTypeEnum})
+var sDescribeTagsOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sGetBatchPredictionInput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_BatchPredictionDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_InputDataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetBatchPredictionOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetBatchPredictionOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sGetBatchPredictionOutput_OutputUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputUri", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_LogUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogUri", ID: &i_PresignedS3Url, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sGetBatchPredictionOutput_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetBatchPredictionOutput_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetBatchPredictionOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetBatchPredictionOutput_TotalRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TotalRecordCount", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetBatchPredictionOutput_InvalidRecordCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvalidRecordCount", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetDataSourceInput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetDataSourceInput_Verbose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verbose", ID: &i_Verbose, Type: smithy.ShapeTypeBoolean})
+var sGetDataSourceOutput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_DataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_DataRearrangement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRearrangement", ID: &i_DataRearrangement, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetDataSourceOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetDataSourceOutput_DataSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSizeInBytes", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetDataSourceOutput_NumberOfFiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfFiles", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetDataSourceOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sGetDataSourceOutput_LogUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogUri", ID: &i_PresignedS3Url, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_RedshiftMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RedshiftMetadata", ID: &iRedshiftMetadata, Members: &mRedshiftMetadata, Type: smithy.ShapeTypeStructure})
+var sGetDataSourceOutput_RDSMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RDSMetadata", ID: &iRDSMetadata, Members: &mRDSMetadata, Type: smithy.ShapeTypeStructure})
+var sGetDataSourceOutput_RoleARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleARN", ID: &i_RoleARN, Type: smithy.ShapeTypeString})
+var sGetDataSourceOutput_ComputeStatistics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeStatistics", ID: &i_ComputeStatistics, Type: smithy.ShapeTypeBoolean})
+var sGetDataSourceOutput_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetDataSourceOutput_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetDataSourceOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetDataSourceOutput_DataSourceSchema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceSchema", ID: &i_DataSchema, Type: smithy.ShapeTypeString})
+var sGetEvaluationInput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_EvaluationDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_InputDataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetEvaluationOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetEvaluationOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sGetEvaluationOutput_PerformanceMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PerformanceMetrics", ID: &iPerformanceMetrics, Members: &mPerformanceMetrics, Type: smithy.ShapeTypeStructure})
+var sGetEvaluationOutput_LogUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogUri", ID: &i_PresignedS3Url, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sGetEvaluationOutput_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetEvaluationOutput_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetEvaluationOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetMLModelInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetMLModelInput_Verbose = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Verbose", ID: &i_Verbose, Type: smithy.ShapeTypeBoolean})
+var sGetMLModelOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_TrainingDataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingDataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_CreatedByIamUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedByIamUser", ID: &i_AwsUserArn, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetMLModelOutput_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetMLModelOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_MLModelName, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iEntityStatus, Members: &mEntityStatus, Type: smithy.ShapeTypeEnum})
+var sGetMLModelOutput_SizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SizeInBytes", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetMLModelOutput_EndpointInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointInfo", ID: &iRealtimeEndpointInfo, Members: &mRealtimeEndpointInfo, Type: smithy.ShapeTypeStructure})
+var sGetMLModelOutput_TrainingParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TrainingParameters", ID: &i_TrainingParameters, Members: &m_TrainingParameters, Type: smithy.ShapeTypeMap})
+var sGetMLModelOutput_InputDataLocationS3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataLocationS3", ID: &i_S3Url, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_MLModelType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelType", ID: &iMLModelType, Members: &mMLModelType, Type: smithy.ShapeTypeEnum})
+var sGetMLModelOutput_ScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScoreThreshold", ID: &i_ScoreThreshold, Type: smithy.ShapeTypeFloat})
+var sGetMLModelOutput_ScoreThresholdLastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScoreThresholdLastUpdatedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetMLModelOutput_LogUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogUri", ID: &i_PresignedS3Url, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_Message, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_ComputeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComputeTime", ID: &i_LongType, Type: smithy.ShapeTypeLong})
+var sGetMLModelOutput_FinishedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FinishedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetMLModelOutput_StartedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartedAt", ID: &i_EpochTime, Type: smithy.ShapeTypeTimestamp})
+var sGetMLModelOutput_Recipe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Recipe", ID: &i_Recipe, Type: smithy.ShapeTypeString})
+var sGetMLModelOutput_Schema = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Schema", ID: &i_DataSchema, Type: smithy.ShapeTypeString})
+var sPredictInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sPredictInput_Record = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Record", ID: &i_Record, Members: &m_Record, Type: smithy.ShapeTypeMap})
+var sPredictInput_PredictEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PredictEndpoint", ID: &i_VipURL, Type: smithy.ShapeTypeString})
+var sPredictOutput_Prediction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Prediction", ID: &iPrediction, Members: &mPrediction, Type: smithy.ShapeTypeStructure})
+var sUpdateBatchPredictionInput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sUpdateBatchPredictionInput_BatchPredictionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sUpdateBatchPredictionOutput_BatchPredictionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchPredictionId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sUpdateDataSourceInput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sUpdateDataSourceInput_DataSourceName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sUpdateDataSourceOutput_DataSourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataSourceId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sUpdateEvaluationInput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sUpdateEvaluationInput_EvaluationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sUpdateEvaluationOutput_EvaluationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EvaluationId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sUpdateMLModelInput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+var sUpdateMLModelInput_MLModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelName", ID: &i_EntityName, Type: smithy.ShapeTypeString})
+var sUpdateMLModelInput_ScoreThreshold = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScoreThreshold", ID: &i_ScoreThreshold, Type: smithy.ShapeTypeFloat})
+var sUpdateMLModelOutput_MLModelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MLModelId", ID: &i_EntityId, Type: smithy.ShapeTypeString})
+
+var AddTags = &sAddTags
+
+var CreateBatchPrediction = &sCreateBatchPrediction
+
+var CreateDataSourceFromRDS = &sCreateDataSourceFromRDS
+
+var CreateDataSourceFromRedshift = &sCreateDataSourceFromRedshift
+
+var CreateDataSourceFromS3 = &sCreateDataSourceFromS3
+
+var CreateEvaluation = &sCreateEvaluation
+
+var CreateMLModel = &sCreateMLModel
+
+var CreateRealtimeEndpoint = &sCreateRealtimeEndpoint
+
+var DeleteBatchPrediction = &sDeleteBatchPrediction
+
+var DeleteDataSource = &sDeleteDataSource
+
+var DeleteEvaluation = &sDeleteEvaluation
+
+var DeleteMLModel = &sDeleteMLModel
+
+var DeleteRealtimeEndpoint = &sDeleteRealtimeEndpoint
+
+var DeleteTags = &sDeleteTags
+
+var DescribeBatchPredictions = &sDescribeBatchPredictions
+
+var DescribeDataSources = &sDescribeDataSources
+
+var DescribeEvaluations = &sDescribeEvaluations
+
+var DescribeMLModels = &sDescribeMLModels
+
+var DescribeTags = &sDescribeTags
+
+var GetBatchPrediction = &sGetBatchPrediction
+
+var GetDataSource = &sGetDataSource
+
+var GetEvaluation = &sGetEvaluation
+
+var GetMLModel = &sGetMLModel
+
+var Predict = &sPredict
+
+var UpdateBatchPrediction = &sUpdateBatchPrediction
+
+var UpdateDataSource = &sUpdateDataSource
+
+var UpdateEvaluation = &sUpdateEvaluation
+
+var UpdateMLModel = &sUpdateMLModel
+
+var _AmazonML_20141212 = &s_AmazonML_20141212
+
+var Algorithm = &sAlgorithm
+var Algorithm_SGD = &sAlgorithm_SGD
+
+var _AwsUserArn = &s_AwsUserArn
+
+var BatchPrediction = &sBatchPrediction
+var BatchPrediction_BatchPredictionId = &sBatchPrediction_BatchPredictionId
+var BatchPrediction_MLModelId = &sBatchPrediction_MLModelId
+var BatchPrediction_BatchPredictionDataSourceId = &sBatchPrediction_BatchPredictionDataSourceId
+var BatchPrediction_InputDataLocationS3 = &sBatchPrediction_InputDataLocationS3
+var BatchPrediction_CreatedByIamUser = &sBatchPrediction_CreatedByIamUser
+var BatchPrediction_CreatedAt = &sBatchPrediction_CreatedAt
+var BatchPrediction_LastUpdatedAt = &sBatchPrediction_LastUpdatedAt
+var BatchPrediction_Name = &sBatchPrediction_Name
+var BatchPrediction_Status = &sBatchPrediction_Status
+var BatchPrediction_OutputUri = &sBatchPrediction_OutputUri
+var BatchPrediction_Message = &sBatchPrediction_Message
+var BatchPrediction_ComputeTime = &sBatchPrediction_ComputeTime
+var BatchPrediction_FinishedAt = &sBatchPrediction_FinishedAt
+var BatchPrediction_StartedAt = &sBatchPrediction_StartedAt
+var BatchPrediction_TotalRecordCount = &sBatchPrediction_TotalRecordCount
+var BatchPrediction_InvalidRecordCount = &sBatchPrediction_InvalidRecordCount
+
+var BatchPredictionFilterVariable = &sBatchPredictionFilterVariable
+var BatchPredictionFilterVariable_CREATED_AT = &sBatchPredictionFilterVariable_CREATED_AT
+var BatchPredictionFilterVariable_LAST_UPDATED_AT = &sBatchPredictionFilterVariable_LAST_UPDATED_AT
+var BatchPredictionFilterVariable_STATUS = &sBatchPredictionFilterVariable_STATUS
+var BatchPredictionFilterVariable_NAME = &sBatchPredictionFilterVariable_NAME
+var BatchPredictionFilterVariable_IAM_USER = &sBatchPredictionFilterVariable_IAM_USER
+var BatchPredictionFilterVariable_ML_MODEL_ID = &sBatchPredictionFilterVariable_ML_MODEL_ID
+var BatchPredictionFilterVariable_DATASOURCE_ID = &sBatchPredictionFilterVariable_DATASOURCE_ID
+var BatchPredictionFilterVariable_DATA_URI = &sBatchPredictionFilterVariable_DATA_URI
+
+var _BatchPredictions = &s_BatchPredictions
+var _BatchPredictions_member = &s_BatchPredictions_member
+
+var _ComparatorValue = &s_ComparatorValue
+
+var _ComputeStatistics = &s_ComputeStatistics
+
+var _DataRearrangement = &s_DataRearrangement
+
+var _DataSchema = &s_DataSchema
+
+var DataSource = &sDataSource
+var DataSource_DataSourceId = &sDataSource_DataSourceId
+var DataSource_DataLocationS3 = &sDataSource_DataLocationS3
+var DataSource_DataRearrangement = &sDataSource_DataRearrangement
+var DataSource_CreatedByIamUser = &sDataSource_CreatedByIamUser
+var DataSource_CreatedAt = &sDataSource_CreatedAt
+var DataSource_LastUpdatedAt = &sDataSource_LastUpdatedAt
+var DataSource_DataSizeInBytes = &sDataSource_DataSizeInBytes
+var DataSource_NumberOfFiles = &sDataSource_NumberOfFiles
+var DataSource_Name = &sDataSource_Name
+var DataSource_Status = &sDataSource_Status
+var DataSource_Message = &sDataSource_Message
+var DataSource_RedshiftMetadata = &sDataSource_RedshiftMetadata
+var DataSource_RDSMetadata = &sDataSource_RDSMetadata
+var DataSource_RoleARN = &sDataSource_RoleARN
+var DataSource_ComputeStatistics = &sDataSource_ComputeStatistics
+var DataSource_ComputeTime = &sDataSource_ComputeTime
+var DataSource_FinishedAt = &sDataSource_FinishedAt
+var DataSource_StartedAt = &sDataSource_StartedAt
+
+var DataSourceFilterVariable = &sDataSourceFilterVariable
+var DataSourceFilterVariable_CREATED_AT = &sDataSourceFilterVariable_CREATED_AT
+var DataSourceFilterVariable_LAST_UPDATED_AT = &sDataSourceFilterVariable_LAST_UPDATED_AT
+var DataSourceFilterVariable_STATUS = &sDataSourceFilterVariable_STATUS
+var DataSourceFilterVariable_NAME = &sDataSourceFilterVariable_NAME
+var DataSourceFilterVariable_DATA_URI = &sDataSourceFilterVariable_DATA_URI
+var DataSourceFilterVariable_IAM_USER = &sDataSourceFilterVariable_IAM_USER
+
+var _DataSources = &s_DataSources
+var _DataSources_member = &s_DataSources_member
+
+var DetailsAttributes = &sDetailsAttributes
+var DetailsAttributes_PREDICTIVE_MODEL_TYPE = &sDetailsAttributes_PREDICTIVE_MODEL_TYPE
+var DetailsAttributes_ALGORITHM = &sDetailsAttributes_ALGORITHM
+
+var _DetailsMap = &s_DetailsMap
+var _DetailsMap_key = &s_DetailsMap_key
+var _DetailsMap_value = &s_DetailsMap_value
+
+var _DetailsValue = &s_DetailsValue
+
+var _EDPPipelineId = &s_EDPPipelineId
+
+var _EDPResourceRole = &s_EDPResourceRole
+
+var _EDPSecurityGroupId = &s_EDPSecurityGroupId
+
+var _EDPSecurityGroupIds = &s_EDPSecurityGroupIds
+var _EDPSecurityGroupIds_member = &s_EDPSecurityGroupIds_member
+
+var _EDPServiceRole = &s_EDPServiceRole
+
+var _EDPSubnetId = &s_EDPSubnetId
+
+var _EntityId = &s_EntityId
+
+var _EntityName = &s_EntityName
+
+var EntityStatus = &sEntityStatus
+var EntityStatus_PENDING = &sEntityStatus_PENDING
+var EntityStatus_INPROGRESS = &sEntityStatus_INPROGRESS
+var EntityStatus_FAILED = &sEntityStatus_FAILED
+var EntityStatus_COMPLETED = &sEntityStatus_COMPLETED
+var EntityStatus_DELETED = &sEntityStatus_DELETED
+
+var _EpochTime = &s_EpochTime
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var Evaluation = &sEvaluation
+var Evaluation_EvaluationId = &sEvaluation_EvaluationId
+var Evaluation_MLModelId = &sEvaluation_MLModelId
+var Evaluation_EvaluationDataSourceId = &sEvaluation_EvaluationDataSourceId
+var Evaluation_InputDataLocationS3 = &sEvaluation_InputDataLocationS3
+var Evaluation_CreatedByIamUser = &sEvaluation_CreatedByIamUser
+var Evaluation_CreatedAt = &sEvaluation_CreatedAt
+var Evaluation_LastUpdatedAt = &sEvaluation_LastUpdatedAt
+var Evaluation_Name = &sEvaluation_Name
+var Evaluation_Status = &sEvaluation_Status
+var Evaluation_PerformanceMetrics = &sEvaluation_PerformanceMetrics
+var Evaluation_Message = &sEvaluation_Message
+var Evaluation_ComputeTime = &sEvaluation_ComputeTime
+var Evaluation_FinishedAt = &sEvaluation_FinishedAt
+var Evaluation_StartedAt = &sEvaluation_StartedAt
+
+var EvaluationFilterVariable = &sEvaluationFilterVariable
+var EvaluationFilterVariable_CREATED_AT = &sEvaluationFilterVariable_CREATED_AT
+var EvaluationFilterVariable_LAST_UPDATED_AT = &sEvaluationFilterVariable_LAST_UPDATED_AT
+var EvaluationFilterVariable_STATUS = &sEvaluationFilterVariable_STATUS
+var EvaluationFilterVariable_NAME = &sEvaluationFilterVariable_NAME
+var EvaluationFilterVariable_IAM_USER = &sEvaluationFilterVariable_IAM_USER
+var EvaluationFilterVariable_ML_MODEL_ID = &sEvaluationFilterVariable_ML_MODEL_ID
+var EvaluationFilterVariable_DATASOURCE_ID = &sEvaluationFilterVariable_DATASOURCE_ID
+var EvaluationFilterVariable_DATA_URI = &sEvaluationFilterVariable_DATA_URI
+
+var _Evaluations = &s_Evaluations
+var _Evaluations_member = &s_Evaluations_member
+
+var _floatLabel = &s_floatLabel
+
+var IdempotentParameterMismatchException = &sIdempotentParameterMismatchException
+var IdempotentParameterMismatchException_message = &sIdempotentParameterMismatchException_message
+var IdempotentParameterMismatchException_code = &sIdempotentParameterMismatchException_code
+
+var _IntegerType = &s_IntegerType
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_code = &sInternalServerException_code
+
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_message = &sInvalidInputException_message
+var InvalidInputException_code = &sInvalidInputException_code
+
+var InvalidTagException = &sInvalidTagException
+var InvalidTagException_message = &sInvalidTagException_message
+
+var _Label = &s_Label
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+var LimitExceededException_code = &sLimitExceededException_code
+
+var _LongType = &s_LongType
+
+var _Message = &s_Message
+
+var MLModel = &sMLModel
+var MLModel_MLModelId = &sMLModel_MLModelId
+var MLModel_TrainingDataSourceId = &sMLModel_TrainingDataSourceId
+var MLModel_CreatedByIamUser = &sMLModel_CreatedByIamUser
+var MLModel_CreatedAt = &sMLModel_CreatedAt
+var MLModel_LastUpdatedAt = &sMLModel_LastUpdatedAt
+var MLModel_Name = &sMLModel_Name
+var MLModel_Status = &sMLModel_Status
+var MLModel_SizeInBytes = &sMLModel_SizeInBytes
+var MLModel_EndpointInfo = &sMLModel_EndpointInfo
+var MLModel_TrainingParameters = &sMLModel_TrainingParameters
+var MLModel_InputDataLocationS3 = &sMLModel_InputDataLocationS3
+var MLModel_Algorithm = &sMLModel_Algorithm
+var MLModel_MLModelType = &sMLModel_MLModelType
+var MLModel_ScoreThreshold = &sMLModel_ScoreThreshold
+var MLModel_ScoreThresholdLastUpdatedAt = &sMLModel_ScoreThresholdLastUpdatedAt
+var MLModel_Message = &sMLModel_Message
+var MLModel_ComputeTime = &sMLModel_ComputeTime
+var MLModel_FinishedAt = &sMLModel_FinishedAt
+var MLModel_StartedAt = &sMLModel_StartedAt
+
+var MLModelFilterVariable = &sMLModelFilterVariable
+var MLModelFilterVariable_CREATED_AT = &sMLModelFilterVariable_CREATED_AT
+var MLModelFilterVariable_LAST_UPDATED_AT = &sMLModelFilterVariable_LAST_UPDATED_AT
+var MLModelFilterVariable_STATUS = &sMLModelFilterVariable_STATUS
+var MLModelFilterVariable_NAME = &sMLModelFilterVariable_NAME
+var MLModelFilterVariable_IAM_USER = &sMLModelFilterVariable_IAM_USER
+var MLModelFilterVariable_TRAINING_DATASOURCE_ID = &sMLModelFilterVariable_TRAINING_DATASOURCE_ID
+var MLModelFilterVariable_REAL_TIME_ENDPOINT_STATUS = &sMLModelFilterVariable_REAL_TIME_ENDPOINT_STATUS
+var MLModelFilterVariable_ML_MODEL_TYPE = &sMLModelFilterVariable_ML_MODEL_TYPE
+var MLModelFilterVariable_ALGORITHM = &sMLModelFilterVariable_ALGORITHM
+var MLModelFilterVariable_TRAINING_DATA_URI = &sMLModelFilterVariable_TRAINING_DATA_URI
+
+var _MLModelName = &s_MLModelName
+
+var _MLModels = &s_MLModels
+var _MLModels_member = &s_MLModels_member
+
+var MLModelType = &sMLModelType
+var MLModelType_REGRESSION = &sMLModelType_REGRESSION
+var MLModelType_BINARY = &sMLModelType_BINARY
+var MLModelType_MULTICLASS = &sMLModelType_MULTICLASS
+
+var _PageLimit = &s_PageLimit
+
+var PerformanceMetrics = &sPerformanceMetrics
+var PerformanceMetrics_Properties = &sPerformanceMetrics_Properties
+
+var _PerformanceMetricsProperties = &s_PerformanceMetricsProperties
+var _PerformanceMetricsProperties_key = &s_PerformanceMetricsProperties_key
+var _PerformanceMetricsProperties_value = &s_PerformanceMetricsProperties_value
+
+var _PerformanceMetricsPropertyKey = &s_PerformanceMetricsPropertyKey
+
+var _PerformanceMetricsPropertyValue = &s_PerformanceMetricsPropertyValue
+
+var Prediction = &sPrediction
+var Prediction_predictedLabel = &sPrediction_predictedLabel
+var Prediction_predictedValue = &sPrediction_predictedValue
+var Prediction_predictedScores = &sPrediction_predictedScores
+var Prediction_details = &sPrediction_details
+
+var PredictorNotMountedException = &sPredictorNotMountedException
+var PredictorNotMountedException_message = &sPredictorNotMountedException_message
+
+var _PresignedS3Url = &s_PresignedS3Url
+
+var RDSDatabase = &sRDSDatabase
+var RDSDatabase_InstanceIdentifier = &sRDSDatabase_InstanceIdentifier
+var RDSDatabase_DatabaseName = &sRDSDatabase_DatabaseName
+
+var RDSDatabaseCredentials = &sRDSDatabaseCredentials
+var RDSDatabaseCredentials_Username = &sRDSDatabaseCredentials_Username
+var RDSDatabaseCredentials_Password = &sRDSDatabaseCredentials_Password
+
+var _RDSDatabaseName = &s_RDSDatabaseName
+
+var _RDSDatabasePassword = &s_RDSDatabasePassword
+
+var _RDSDatabaseUsername = &s_RDSDatabaseUsername
+
+var RDSDataSpec = &sRDSDataSpec
+var RDSDataSpec_DatabaseInformation = &sRDSDataSpec_DatabaseInformation
+var RDSDataSpec_SelectSqlQuery = &sRDSDataSpec_SelectSqlQuery
+var RDSDataSpec_DatabaseCredentials = &sRDSDataSpec_DatabaseCredentials
+var RDSDataSpec_S3StagingLocation = &sRDSDataSpec_S3StagingLocation
+var RDSDataSpec_DataRearrangement = &sRDSDataSpec_DataRearrangement
+var RDSDataSpec_DataSchema = &sRDSDataSpec_DataSchema
+var RDSDataSpec_DataSchemaUri = &sRDSDataSpec_DataSchemaUri
+var RDSDataSpec_ResourceRole = &sRDSDataSpec_ResourceRole
+var RDSDataSpec_ServiceRole = &sRDSDataSpec_ServiceRole
+var RDSDataSpec_SubnetId = &sRDSDataSpec_SubnetId
+var RDSDataSpec_SecurityGroupIds = &sRDSDataSpec_SecurityGroupIds
+
+var _RDSInstanceIdentifier = &s_RDSInstanceIdentifier
+
+var RDSMetadata = &sRDSMetadata
+var RDSMetadata_Database = &sRDSMetadata_Database
+var RDSMetadata_DatabaseUserName = &sRDSMetadata_DatabaseUserName
+var RDSMetadata_SelectSqlQuery = &sRDSMetadata_SelectSqlQuery
+var RDSMetadata_ResourceRole = &sRDSMetadata_ResourceRole
+var RDSMetadata_ServiceRole = &sRDSMetadata_ServiceRole
+var RDSMetadata_DataPipelineId = &sRDSMetadata_DataPipelineId
+
+var _RDSSelectSqlQuery = &s_RDSSelectSqlQuery
+
+var RealtimeEndpointInfo = &sRealtimeEndpointInfo
+var RealtimeEndpointInfo_PeakRequestsPerSecond = &sRealtimeEndpointInfo_PeakRequestsPerSecond
+var RealtimeEndpointInfo_CreatedAt = &sRealtimeEndpointInfo_CreatedAt
+var RealtimeEndpointInfo_EndpointUrl = &sRealtimeEndpointInfo_EndpointUrl
+var RealtimeEndpointInfo_EndpointStatus = &sRealtimeEndpointInfo_EndpointStatus
+
+var RealtimeEndpointStatus = &sRealtimeEndpointStatus
+var RealtimeEndpointStatus_NONE = &sRealtimeEndpointStatus_NONE
+var RealtimeEndpointStatus_READY = &sRealtimeEndpointStatus_READY
+var RealtimeEndpointStatus_UPDATING = &sRealtimeEndpointStatus_UPDATING
+var RealtimeEndpointStatus_FAILED = &sRealtimeEndpointStatus_FAILED
+
+var _Recipe = &s_Recipe
+
+var _Record = &s_Record
+var _Record_key = &s_Record_key
+var _Record_value = &s_Record_value
+
+var _RedshiftClusterIdentifier = &s_RedshiftClusterIdentifier
+
+var RedshiftDatabase = &sRedshiftDatabase
+var RedshiftDatabase_DatabaseName = &sRedshiftDatabase_DatabaseName
+var RedshiftDatabase_ClusterIdentifier = &sRedshiftDatabase_ClusterIdentifier
+
+var RedshiftDatabaseCredentials = &sRedshiftDatabaseCredentials
+var RedshiftDatabaseCredentials_Username = &sRedshiftDatabaseCredentials_Username
+var RedshiftDatabaseCredentials_Password = &sRedshiftDatabaseCredentials_Password
+
+var _RedshiftDatabaseName = &s_RedshiftDatabaseName
+
+var _RedshiftDatabasePassword = &s_RedshiftDatabasePassword
+
+var _RedshiftDatabaseUsername = &s_RedshiftDatabaseUsername
+
+var RedshiftDataSpec = &sRedshiftDataSpec
+var RedshiftDataSpec_DatabaseInformation = &sRedshiftDataSpec_DatabaseInformation
+var RedshiftDataSpec_SelectSqlQuery = &sRedshiftDataSpec_SelectSqlQuery
+var RedshiftDataSpec_DatabaseCredentials = &sRedshiftDataSpec_DatabaseCredentials
+var RedshiftDataSpec_S3StagingLocation = &sRedshiftDataSpec_S3StagingLocation
+var RedshiftDataSpec_DataRearrangement = &sRedshiftDataSpec_DataRearrangement
+var RedshiftDataSpec_DataSchema = &sRedshiftDataSpec_DataSchema
+var RedshiftDataSpec_DataSchemaUri = &sRedshiftDataSpec_DataSchemaUri
+
+var RedshiftMetadata = &sRedshiftMetadata
+var RedshiftMetadata_RedshiftDatabase = &sRedshiftMetadata_RedshiftDatabase
+var RedshiftMetadata_DatabaseUserName = &sRedshiftMetadata_DatabaseUserName
+var RedshiftMetadata_SelectSqlQuery = &sRedshiftMetadata_SelectSqlQuery
+
+var _RedshiftSelectSqlQuery = &s_RedshiftSelectSqlQuery
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_code = &sResourceNotFoundException_code
+
+var _RoleARN = &s_RoleARN
+
+var S3DataSpec = &sS3DataSpec
+var S3DataSpec_DataLocationS3 = &sS3DataSpec_DataLocationS3
+var S3DataSpec_DataRearrangement = &sS3DataSpec_DataRearrangement
+var S3DataSpec_DataSchema = &sS3DataSpec_DataSchema
+var S3DataSpec_DataSchemaLocationS3 = &sS3DataSpec_DataSchemaLocationS3
+
+var _S3Url = &s_S3Url
+
+var _ScoreThreshold = &s_ScoreThreshold
+
+var _ScoreValue = &s_ScoreValue
+
+var _ScoreValuePerLabelMap = &s_ScoreValuePerLabelMap
+var _ScoreValuePerLabelMap_key = &s_ScoreValuePerLabelMap_key
+var _ScoreValuePerLabelMap_value = &s_ScoreValuePerLabelMap_value
+
+var SortOrder = &sSortOrder
+var SortOrder_ASC = &sSortOrder_ASC
+var SortOrder_DSC = &sSortOrder_DSC
+
+var _StringType = &s_StringType
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var TaggableResourceType = &sTaggableResourceType
+var TaggableResourceType_BATCH_PREDICTION = &sTaggableResourceType_BATCH_PREDICTION
+var TaggableResourceType_DATASOURCE = &sTaggableResourceType_DATASOURCE
+var TaggableResourceType_EVALUATION = &sTaggableResourceType_EVALUATION
+var TaggableResourceType_ML_MODEL = &sTaggableResourceType_ML_MODEL
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var TagLimitExceededException = &sTagLimitExceededException
+var TagLimitExceededException_message = &sTagLimitExceededException_message
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var _TrainingParameters = &s_TrainingParameters
+var _TrainingParameters_key = &s_TrainingParameters_key
+var _TrainingParameters_value = &s_TrainingParameters_value
+
+var _VariableName = &s_VariableName
+
+var _VariableValue = &s_VariableValue
+
+var _Verbose = &s_Verbose
+
+var _VipURL = &s_VipURL
+
+var AddTagsInput = &sAddTagsInput
+var AddTagsInput_Tags = &sAddTagsInput_Tags
+var AddTagsInput_ResourceId = &sAddTagsInput_ResourceId
+var AddTagsInput_ResourceType = &sAddTagsInput_ResourceType
+
+var AddTagsOutput = &sAddTagsOutput
+var AddTagsOutput_ResourceId = &sAddTagsOutput_ResourceId
+var AddTagsOutput_ResourceType = &sAddTagsOutput_ResourceType
+
+var CreateBatchPredictionInput = &sCreateBatchPredictionInput
+var CreateBatchPredictionInput_BatchPredictionId = &sCreateBatchPredictionInput_BatchPredictionId
+var CreateBatchPredictionInput_BatchPredictionName = &sCreateBatchPredictionInput_BatchPredictionName
+var CreateBatchPredictionInput_MLModelId = &sCreateBatchPredictionInput_MLModelId
+var CreateBatchPredictionInput_BatchPredictionDataSourceId = &sCreateBatchPredictionInput_BatchPredictionDataSourceId
+var CreateBatchPredictionInput_OutputUri = &sCreateBatchPredictionInput_OutputUri
+
+var CreateBatchPredictionOutput = &sCreateBatchPredictionOutput
+var CreateBatchPredictionOutput_BatchPredictionId = &sCreateBatchPredictionOutput_BatchPredictionId
+
+var CreateDataSourceFromRDSInput = &sCreateDataSourceFromRDSInput
+var CreateDataSourceFromRDSInput_DataSourceId = &sCreateDataSourceFromRDSInput_DataSourceId
+var CreateDataSourceFromRDSInput_DataSourceName = &sCreateDataSourceFromRDSInput_DataSourceName
+var CreateDataSourceFromRDSInput_RDSData = &sCreateDataSourceFromRDSInput_RDSData
+var CreateDataSourceFromRDSInput_RoleARN = &sCreateDataSourceFromRDSInput_RoleARN
+var CreateDataSourceFromRDSInput_ComputeStatistics = &sCreateDataSourceFromRDSInput_ComputeStatistics
+
+var CreateDataSourceFromRDSOutput = &sCreateDataSourceFromRDSOutput
+var CreateDataSourceFromRDSOutput_DataSourceId = &sCreateDataSourceFromRDSOutput_DataSourceId
+
+var CreateDataSourceFromRedshiftInput = &sCreateDataSourceFromRedshiftInput
+var CreateDataSourceFromRedshiftInput_DataSourceId = &sCreateDataSourceFromRedshiftInput_DataSourceId
+var CreateDataSourceFromRedshiftInput_DataSourceName = &sCreateDataSourceFromRedshiftInput_DataSourceName
+var CreateDataSourceFromRedshiftInput_DataSpec = &sCreateDataSourceFromRedshiftInput_DataSpec
+var CreateDataSourceFromRedshiftInput_RoleARN = &sCreateDataSourceFromRedshiftInput_RoleARN
+var CreateDataSourceFromRedshiftInput_ComputeStatistics = &sCreateDataSourceFromRedshiftInput_ComputeStatistics
+
+var CreateDataSourceFromRedshiftOutput = &sCreateDataSourceFromRedshiftOutput
+var CreateDataSourceFromRedshiftOutput_DataSourceId = &sCreateDataSourceFromRedshiftOutput_DataSourceId
+
+var CreateDataSourceFromS3Input = &sCreateDataSourceFromS3Input
+var CreateDataSourceFromS3Input_DataSourceId = &sCreateDataSourceFromS3Input_DataSourceId
+var CreateDataSourceFromS3Input_DataSourceName = &sCreateDataSourceFromS3Input_DataSourceName
+var CreateDataSourceFromS3Input_DataSpec = &sCreateDataSourceFromS3Input_DataSpec
+var CreateDataSourceFromS3Input_ComputeStatistics = &sCreateDataSourceFromS3Input_ComputeStatistics
+
+var CreateDataSourceFromS3Output = &sCreateDataSourceFromS3Output
+var CreateDataSourceFromS3Output_DataSourceId = &sCreateDataSourceFromS3Output_DataSourceId
+
+var CreateEvaluationInput = &sCreateEvaluationInput
+var CreateEvaluationInput_EvaluationId = &sCreateEvaluationInput_EvaluationId
+var CreateEvaluationInput_EvaluationName = &sCreateEvaluationInput_EvaluationName
+var CreateEvaluationInput_MLModelId = &sCreateEvaluationInput_MLModelId
+var CreateEvaluationInput_EvaluationDataSourceId = &sCreateEvaluationInput_EvaluationDataSourceId
+
+var CreateEvaluationOutput = &sCreateEvaluationOutput
+var CreateEvaluationOutput_EvaluationId = &sCreateEvaluationOutput_EvaluationId
+
+var CreateMLModelInput = &sCreateMLModelInput
+var CreateMLModelInput_MLModelId = &sCreateMLModelInput_MLModelId
+var CreateMLModelInput_MLModelName = &sCreateMLModelInput_MLModelName
+var CreateMLModelInput_MLModelType = &sCreateMLModelInput_MLModelType
+var CreateMLModelInput_Parameters = &sCreateMLModelInput_Parameters
+var CreateMLModelInput_TrainingDataSourceId = &sCreateMLModelInput_TrainingDataSourceId
+var CreateMLModelInput_Recipe = &sCreateMLModelInput_Recipe
+var CreateMLModelInput_RecipeUri = &sCreateMLModelInput_RecipeUri
+
+var CreateMLModelOutput = &sCreateMLModelOutput
+var CreateMLModelOutput_MLModelId = &sCreateMLModelOutput_MLModelId
+
+var CreateRealtimeEndpointInput = &sCreateRealtimeEndpointInput
+var CreateRealtimeEndpointInput_MLModelId = &sCreateRealtimeEndpointInput_MLModelId
+
+var CreateRealtimeEndpointOutput = &sCreateRealtimeEndpointOutput
+var CreateRealtimeEndpointOutput_MLModelId = &sCreateRealtimeEndpointOutput_MLModelId
+var CreateRealtimeEndpointOutput_RealtimeEndpointInfo = &sCreateRealtimeEndpointOutput_RealtimeEndpointInfo
+
+var DeleteBatchPredictionInput = &sDeleteBatchPredictionInput
+var DeleteBatchPredictionInput_BatchPredictionId = &sDeleteBatchPredictionInput_BatchPredictionId
+
+var DeleteBatchPredictionOutput = &sDeleteBatchPredictionOutput
+var DeleteBatchPredictionOutput_BatchPredictionId = &sDeleteBatchPredictionOutput_BatchPredictionId
+
+var DeleteDataSourceInput = &sDeleteDataSourceInput
+var DeleteDataSourceInput_DataSourceId = &sDeleteDataSourceInput_DataSourceId
+
+var DeleteDataSourceOutput = &sDeleteDataSourceOutput
+var DeleteDataSourceOutput_DataSourceId = &sDeleteDataSourceOutput_DataSourceId
+
+var DeleteEvaluationInput = &sDeleteEvaluationInput
+var DeleteEvaluationInput_EvaluationId = &sDeleteEvaluationInput_EvaluationId
+
+var DeleteEvaluationOutput = &sDeleteEvaluationOutput
+var DeleteEvaluationOutput_EvaluationId = &sDeleteEvaluationOutput_EvaluationId
+
+var DeleteMLModelInput = &sDeleteMLModelInput
+var DeleteMLModelInput_MLModelId = &sDeleteMLModelInput_MLModelId
+
+var DeleteMLModelOutput = &sDeleteMLModelOutput
+var DeleteMLModelOutput_MLModelId = &sDeleteMLModelOutput_MLModelId
+
+var DeleteRealtimeEndpointInput = &sDeleteRealtimeEndpointInput
+var DeleteRealtimeEndpointInput_MLModelId = &sDeleteRealtimeEndpointInput_MLModelId
+
+var DeleteRealtimeEndpointOutput = &sDeleteRealtimeEndpointOutput
+var DeleteRealtimeEndpointOutput_MLModelId = &sDeleteRealtimeEndpointOutput_MLModelId
+var DeleteRealtimeEndpointOutput_RealtimeEndpointInfo = &sDeleteRealtimeEndpointOutput_RealtimeEndpointInfo
+
+var DeleteTagsInput = &sDeleteTagsInput
+var DeleteTagsInput_TagKeys = &sDeleteTagsInput_TagKeys
+var DeleteTagsInput_ResourceId = &sDeleteTagsInput_ResourceId
+var DeleteTagsInput_ResourceType = &sDeleteTagsInput_ResourceType
+
+var DeleteTagsOutput = &sDeleteTagsOutput
+var DeleteTagsOutput_ResourceId = &sDeleteTagsOutput_ResourceId
+var DeleteTagsOutput_ResourceType = &sDeleteTagsOutput_ResourceType
+
+var DescribeBatchPredictionsInput = &sDescribeBatchPredictionsInput
+var DescribeBatchPredictionsInput_FilterVariable = &sDescribeBatchPredictionsInput_FilterVariable
+var DescribeBatchPredictionsInput_EQ = &sDescribeBatchPredictionsInput_EQ
+var DescribeBatchPredictionsInput_GT = &sDescribeBatchPredictionsInput_GT
+var DescribeBatchPredictionsInput_LT = &sDescribeBatchPredictionsInput_LT
+var DescribeBatchPredictionsInput_GE = &sDescribeBatchPredictionsInput_GE
+var DescribeBatchPredictionsInput_LE = &sDescribeBatchPredictionsInput_LE
+var DescribeBatchPredictionsInput_NE = &sDescribeBatchPredictionsInput_NE
+var DescribeBatchPredictionsInput_Prefix = &sDescribeBatchPredictionsInput_Prefix
+var DescribeBatchPredictionsInput_SortOrder = &sDescribeBatchPredictionsInput_SortOrder
+var DescribeBatchPredictionsInput_NextToken = &sDescribeBatchPredictionsInput_NextToken
+var DescribeBatchPredictionsInput_Limit = &sDescribeBatchPredictionsInput_Limit
+
+var DescribeBatchPredictionsOutput = &sDescribeBatchPredictionsOutput
+var DescribeBatchPredictionsOutput_Results = &sDescribeBatchPredictionsOutput_Results
+var DescribeBatchPredictionsOutput_NextToken = &sDescribeBatchPredictionsOutput_NextToken
+
+var DescribeDataSourcesInput = &sDescribeDataSourcesInput
+var DescribeDataSourcesInput_FilterVariable = &sDescribeDataSourcesInput_FilterVariable
+var DescribeDataSourcesInput_EQ = &sDescribeDataSourcesInput_EQ
+var DescribeDataSourcesInput_GT = &sDescribeDataSourcesInput_GT
+var DescribeDataSourcesInput_LT = &sDescribeDataSourcesInput_LT
+var DescribeDataSourcesInput_GE = &sDescribeDataSourcesInput_GE
+var DescribeDataSourcesInput_LE = &sDescribeDataSourcesInput_LE
+var DescribeDataSourcesInput_NE = &sDescribeDataSourcesInput_NE
+var DescribeDataSourcesInput_Prefix = &sDescribeDataSourcesInput_Prefix
+var DescribeDataSourcesInput_SortOrder = &sDescribeDataSourcesInput_SortOrder
+var DescribeDataSourcesInput_NextToken = &sDescribeDataSourcesInput_NextToken
+var DescribeDataSourcesInput_Limit = &sDescribeDataSourcesInput_Limit
+
+var DescribeDataSourcesOutput = &sDescribeDataSourcesOutput
+var DescribeDataSourcesOutput_Results = &sDescribeDataSourcesOutput_Results
+var DescribeDataSourcesOutput_NextToken = &sDescribeDataSourcesOutput_NextToken
+
+var DescribeEvaluationsInput = &sDescribeEvaluationsInput
+var DescribeEvaluationsInput_FilterVariable = &sDescribeEvaluationsInput_FilterVariable
+var DescribeEvaluationsInput_EQ = &sDescribeEvaluationsInput_EQ
+var DescribeEvaluationsInput_GT = &sDescribeEvaluationsInput_GT
+var DescribeEvaluationsInput_LT = &sDescribeEvaluationsInput_LT
+var DescribeEvaluationsInput_GE = &sDescribeEvaluationsInput_GE
+var DescribeEvaluationsInput_LE = &sDescribeEvaluationsInput_LE
+var DescribeEvaluationsInput_NE = &sDescribeEvaluationsInput_NE
+var DescribeEvaluationsInput_Prefix = &sDescribeEvaluationsInput_Prefix
+var DescribeEvaluationsInput_SortOrder = &sDescribeEvaluationsInput_SortOrder
+var DescribeEvaluationsInput_NextToken = &sDescribeEvaluationsInput_NextToken
+var DescribeEvaluationsInput_Limit = &sDescribeEvaluationsInput_Limit
+
+var DescribeEvaluationsOutput = &sDescribeEvaluationsOutput
+var DescribeEvaluationsOutput_Results = &sDescribeEvaluationsOutput_Results
+var DescribeEvaluationsOutput_NextToken = &sDescribeEvaluationsOutput_NextToken
+
+var DescribeMLModelsInput = &sDescribeMLModelsInput
+var DescribeMLModelsInput_FilterVariable = &sDescribeMLModelsInput_FilterVariable
+var DescribeMLModelsInput_EQ = &sDescribeMLModelsInput_EQ
+var DescribeMLModelsInput_GT = &sDescribeMLModelsInput_GT
+var DescribeMLModelsInput_LT = &sDescribeMLModelsInput_LT
+var DescribeMLModelsInput_GE = &sDescribeMLModelsInput_GE
+var DescribeMLModelsInput_LE = &sDescribeMLModelsInput_LE
+var DescribeMLModelsInput_NE = &sDescribeMLModelsInput_NE
+var DescribeMLModelsInput_Prefix = &sDescribeMLModelsInput_Prefix
+var DescribeMLModelsInput_SortOrder = &sDescribeMLModelsInput_SortOrder
+var DescribeMLModelsInput_NextToken = &sDescribeMLModelsInput_NextToken
+var DescribeMLModelsInput_Limit = &sDescribeMLModelsInput_Limit
+
+var DescribeMLModelsOutput = &sDescribeMLModelsOutput
+var DescribeMLModelsOutput_Results = &sDescribeMLModelsOutput_Results
+var DescribeMLModelsOutput_NextToken = &sDescribeMLModelsOutput_NextToken
+
+var DescribeTagsInput = &sDescribeTagsInput
+var DescribeTagsInput_ResourceId = &sDescribeTagsInput_ResourceId
+var DescribeTagsInput_ResourceType = &sDescribeTagsInput_ResourceType
+
+var DescribeTagsOutput = &sDescribeTagsOutput
+var DescribeTagsOutput_ResourceId = &sDescribeTagsOutput_ResourceId
+var DescribeTagsOutput_ResourceType = &sDescribeTagsOutput_ResourceType
+var DescribeTagsOutput_Tags = &sDescribeTagsOutput_Tags
+
+var GetBatchPredictionInput = &sGetBatchPredictionInput
+var GetBatchPredictionInput_BatchPredictionId = &sGetBatchPredictionInput_BatchPredictionId
+
+var GetBatchPredictionOutput = &sGetBatchPredictionOutput
+var GetBatchPredictionOutput_BatchPredictionId = &sGetBatchPredictionOutput_BatchPredictionId
+var GetBatchPredictionOutput_MLModelId = &sGetBatchPredictionOutput_MLModelId
+var GetBatchPredictionOutput_BatchPredictionDataSourceId = &sGetBatchPredictionOutput_BatchPredictionDataSourceId
+var GetBatchPredictionOutput_InputDataLocationS3 = &sGetBatchPredictionOutput_InputDataLocationS3
+var GetBatchPredictionOutput_CreatedByIamUser = &sGetBatchPredictionOutput_CreatedByIamUser
+var GetBatchPredictionOutput_CreatedAt = &sGetBatchPredictionOutput_CreatedAt
+var GetBatchPredictionOutput_LastUpdatedAt = &sGetBatchPredictionOutput_LastUpdatedAt
+var GetBatchPredictionOutput_Name = &sGetBatchPredictionOutput_Name
+var GetBatchPredictionOutput_Status = &sGetBatchPredictionOutput_Status
+var GetBatchPredictionOutput_OutputUri = &sGetBatchPredictionOutput_OutputUri
+var GetBatchPredictionOutput_LogUri = &sGetBatchPredictionOutput_LogUri
+var GetBatchPredictionOutput_Message = &sGetBatchPredictionOutput_Message
+var GetBatchPredictionOutput_ComputeTime = &sGetBatchPredictionOutput_ComputeTime
+var GetBatchPredictionOutput_FinishedAt = &sGetBatchPredictionOutput_FinishedAt
+var GetBatchPredictionOutput_StartedAt = &sGetBatchPredictionOutput_StartedAt
+var GetBatchPredictionOutput_TotalRecordCount = &sGetBatchPredictionOutput_TotalRecordCount
+var GetBatchPredictionOutput_InvalidRecordCount = &sGetBatchPredictionOutput_InvalidRecordCount
+
+var GetDataSourceInput = &sGetDataSourceInput
+var GetDataSourceInput_DataSourceId = &sGetDataSourceInput_DataSourceId
+var GetDataSourceInput_Verbose = &sGetDataSourceInput_Verbose
+
+var GetDataSourceOutput = &sGetDataSourceOutput
+var GetDataSourceOutput_DataSourceId = &sGetDataSourceOutput_DataSourceId
+var GetDataSourceOutput_DataLocationS3 = &sGetDataSourceOutput_DataLocationS3
+var GetDataSourceOutput_DataRearrangement = &sGetDataSourceOutput_DataRearrangement
+var GetDataSourceOutput_CreatedByIamUser = &sGetDataSourceOutput_CreatedByIamUser
+var GetDataSourceOutput_CreatedAt = &sGetDataSourceOutput_CreatedAt
+var GetDataSourceOutput_LastUpdatedAt = &sGetDataSourceOutput_LastUpdatedAt
+var GetDataSourceOutput_DataSizeInBytes = &sGetDataSourceOutput_DataSizeInBytes
+var GetDataSourceOutput_NumberOfFiles = &sGetDataSourceOutput_NumberOfFiles
+var GetDataSourceOutput_Name = &sGetDataSourceOutput_Name
+var GetDataSourceOutput_Status = &sGetDataSourceOutput_Status
+var GetDataSourceOutput_LogUri = &sGetDataSourceOutput_LogUri
+var GetDataSourceOutput_Message = &sGetDataSourceOutput_Message
+var GetDataSourceOutput_RedshiftMetadata = &sGetDataSourceOutput_RedshiftMetadata
+var GetDataSourceOutput_RDSMetadata = &sGetDataSourceOutput_RDSMetadata
+var GetDataSourceOutput_RoleARN = &sGetDataSourceOutput_RoleARN
+var GetDataSourceOutput_ComputeStatistics = &sGetDataSourceOutput_ComputeStatistics
+var GetDataSourceOutput_ComputeTime = &sGetDataSourceOutput_ComputeTime
+var GetDataSourceOutput_FinishedAt = &sGetDataSourceOutput_FinishedAt
+var GetDataSourceOutput_StartedAt = &sGetDataSourceOutput_StartedAt
+var GetDataSourceOutput_DataSourceSchema = &sGetDataSourceOutput_DataSourceSchema
+
+var GetEvaluationInput = &sGetEvaluationInput
+var GetEvaluationInput_EvaluationId = &sGetEvaluationInput_EvaluationId
+
+var GetEvaluationOutput = &sGetEvaluationOutput
+var GetEvaluationOutput_EvaluationId = &sGetEvaluationOutput_EvaluationId
+var GetEvaluationOutput_MLModelId = &sGetEvaluationOutput_MLModelId
+var GetEvaluationOutput_EvaluationDataSourceId = &sGetEvaluationOutput_EvaluationDataSourceId
+var GetEvaluationOutput_InputDataLocationS3 = &sGetEvaluationOutput_InputDataLocationS3
+var GetEvaluationOutput_CreatedByIamUser = &sGetEvaluationOutput_CreatedByIamUser
+var GetEvaluationOutput_CreatedAt = &sGetEvaluationOutput_CreatedAt
+var GetEvaluationOutput_LastUpdatedAt = &sGetEvaluationOutput_LastUpdatedAt
+var GetEvaluationOutput_Name = &sGetEvaluationOutput_Name
+var GetEvaluationOutput_Status = &sGetEvaluationOutput_Status
+var GetEvaluationOutput_PerformanceMetrics = &sGetEvaluationOutput_PerformanceMetrics
+var GetEvaluationOutput_LogUri = &sGetEvaluationOutput_LogUri
+var GetEvaluationOutput_Message = &sGetEvaluationOutput_Message
+var GetEvaluationOutput_ComputeTime = &sGetEvaluationOutput_ComputeTime
+var GetEvaluationOutput_FinishedAt = &sGetEvaluationOutput_FinishedAt
+var GetEvaluationOutput_StartedAt = &sGetEvaluationOutput_StartedAt
+
+var GetMLModelInput = &sGetMLModelInput
+var GetMLModelInput_MLModelId = &sGetMLModelInput_MLModelId
+var GetMLModelInput_Verbose = &sGetMLModelInput_Verbose
+
+var GetMLModelOutput = &sGetMLModelOutput
+var GetMLModelOutput_MLModelId = &sGetMLModelOutput_MLModelId
+var GetMLModelOutput_TrainingDataSourceId = &sGetMLModelOutput_TrainingDataSourceId
+var GetMLModelOutput_CreatedByIamUser = &sGetMLModelOutput_CreatedByIamUser
+var GetMLModelOutput_CreatedAt = &sGetMLModelOutput_CreatedAt
+var GetMLModelOutput_LastUpdatedAt = &sGetMLModelOutput_LastUpdatedAt
+var GetMLModelOutput_Name = &sGetMLModelOutput_Name
+var GetMLModelOutput_Status = &sGetMLModelOutput_Status
+var GetMLModelOutput_SizeInBytes = &sGetMLModelOutput_SizeInBytes
+var GetMLModelOutput_EndpointInfo = &sGetMLModelOutput_EndpointInfo
+var GetMLModelOutput_TrainingParameters = &sGetMLModelOutput_TrainingParameters
+var GetMLModelOutput_InputDataLocationS3 = &sGetMLModelOutput_InputDataLocationS3
+var GetMLModelOutput_MLModelType = &sGetMLModelOutput_MLModelType
+var GetMLModelOutput_ScoreThreshold = &sGetMLModelOutput_ScoreThreshold
+var GetMLModelOutput_ScoreThresholdLastUpdatedAt = &sGetMLModelOutput_ScoreThresholdLastUpdatedAt
+var GetMLModelOutput_LogUri = &sGetMLModelOutput_LogUri
+var GetMLModelOutput_Message = &sGetMLModelOutput_Message
+var GetMLModelOutput_ComputeTime = &sGetMLModelOutput_ComputeTime
+var GetMLModelOutput_FinishedAt = &sGetMLModelOutput_FinishedAt
+var GetMLModelOutput_StartedAt = &sGetMLModelOutput_StartedAt
+var GetMLModelOutput_Recipe = &sGetMLModelOutput_Recipe
+var GetMLModelOutput_Schema = &sGetMLModelOutput_Schema
+
+var PredictInput = &sPredictInput
+var PredictInput_MLModelId = &sPredictInput_MLModelId
+var PredictInput_Record = &sPredictInput_Record
+var PredictInput_PredictEndpoint = &sPredictInput_PredictEndpoint
+
+var PredictOutput = &sPredictOutput
+var PredictOutput_Prediction = &sPredictOutput_Prediction
+
+var UpdateBatchPredictionInput = &sUpdateBatchPredictionInput
+var UpdateBatchPredictionInput_BatchPredictionId = &sUpdateBatchPredictionInput_BatchPredictionId
+var UpdateBatchPredictionInput_BatchPredictionName = &sUpdateBatchPredictionInput_BatchPredictionName
+
+var UpdateBatchPredictionOutput = &sUpdateBatchPredictionOutput
+var UpdateBatchPredictionOutput_BatchPredictionId = &sUpdateBatchPredictionOutput_BatchPredictionId
+
+var UpdateDataSourceInput = &sUpdateDataSourceInput
+var UpdateDataSourceInput_DataSourceId = &sUpdateDataSourceInput_DataSourceId
+var UpdateDataSourceInput_DataSourceName = &sUpdateDataSourceInput_DataSourceName
+
+var UpdateDataSourceOutput = &sUpdateDataSourceOutput
+var UpdateDataSourceOutput_DataSourceId = &sUpdateDataSourceOutput_DataSourceId
+
+var UpdateEvaluationInput = &sUpdateEvaluationInput
+var UpdateEvaluationInput_EvaluationId = &sUpdateEvaluationInput_EvaluationId
+var UpdateEvaluationInput_EvaluationName = &sUpdateEvaluationInput_EvaluationName
+
+var UpdateEvaluationOutput = &sUpdateEvaluationOutput
+var UpdateEvaluationOutput_EvaluationId = &sUpdateEvaluationOutput_EvaluationId
+
+var UpdateMLModelInput = &sUpdateMLModelInput
+var UpdateMLModelInput_MLModelId = &sUpdateMLModelInput_MLModelId
+var UpdateMLModelInput_MLModelName = &sUpdateMLModelInput_MLModelName
+var UpdateMLModelInput_ScoreThreshold = &sUpdateMLModelInput_ScoreThreshold
+
+var UpdateMLModelOutput = &sUpdateMLModelOutput
+var UpdateMLModelOutput_MLModelId = &sUpdateMLModelOutput_MLModelId
+
+var AmazonML_20141212 = &smithy.ServiceSchema{Schema: &s_AmazonML_20141212, Version: "2014-12-12"}

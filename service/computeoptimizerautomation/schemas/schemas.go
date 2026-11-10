@@ -4,2385 +4,1690 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AssociateAccounts",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateAutomationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "CreateAutomationRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteAutomationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DeleteAutomationRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var DisassociateAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DisassociateAccounts",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAutomationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetAutomationEvent",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetAutomationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetAutomationRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetEnrollmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetEnrollmentConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAccounts",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomationEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomationEventSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventSteps",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomationEventSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventSummaries",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomationRulePreview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulePreview",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomationRulePreviewSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulePreviewSummaries",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListAutomationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRules",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRecommendedActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListRecommendedActions",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRecommendedActionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListRecommendedActionSummaries",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var RollbackAutomationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RollbackAutomationEvent",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartAutomationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StartAutomationEvent",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateAutomationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UpdateAutomationRule",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEnrollmentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UpdateEnrollmentConfiguration",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ComputeOptimizerAutomationService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ComputeOptimizerAutomationService",
-}, smithy.ShapeTypeService, 0)
-
-var ComputeOptimizerAutomationService = smithy.NewServiceSchema(_ComputeOptimizerAutomationService, "2025-09-22")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _AccountIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AccountIdList",
-}, smithy.ShapeTypeList, 1)
-var _AccountIdList_member *smithy.Schema
-
-var AccountInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AccountInfo",
-}, smithy.ShapeTypeStructure, 5)
-var AccountInfo_accountId *smithy.Schema
-
-var AccountInfo_status *smithy.Schema
-
-var AccountInfo_organizationRuleMode *smithy.Schema
-
-var AccountInfo_statusReason *smithy.Schema
-
-var AccountInfo_lastUpdatedTimestamp *smithy.Schema
-
-var _AccountInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AccountInfoList",
-}, smithy.ShapeTypeList, 1)
-var _AccountInfoList_member *smithy.Schema
-
-var AutomationEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEvent",
-}, smithy.ShapeTypeStructure, 15)
-var AutomationEvent_eventId *smithy.Schema
-
-var AutomationEvent_eventDescription *smithy.Schema
-
-var AutomationEvent_eventType *smithy.Schema
-
-var AutomationEvent_eventStatus *smithy.Schema
-
-var AutomationEvent_eventStatusReason *smithy.Schema
-
-var AutomationEvent_resourceArn *smithy.Schema
-
-var AutomationEvent_resourceId *smithy.Schema
-
-var AutomationEvent_recommendedActionId *smithy.Schema
-
-var AutomationEvent_accountId *smithy.Schema
-
-var AutomationEvent_region *smithy.Schema
-
-var AutomationEvent_ruleId *smithy.Schema
-
-var AutomationEvent_resourceType *smithy.Schema
-
-var AutomationEvent_createdTimestamp *smithy.Schema
-
-var AutomationEvent_completedTimestamp *smithy.Schema
-
-var AutomationEvent_estimatedMonthlySavings *smithy.Schema
-
-var AutomationEventFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEventFilter",
-}, smithy.ShapeTypeStructure, 2)
-var AutomationEventFilter_name *smithy.Schema
-
-var AutomationEventFilter_values *smithy.Schema
-
-var _AutomationEventFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEventFilterList",
-}, smithy.ShapeTypeList, 1)
-var _AutomationEventFilterList_member *smithy.Schema
-
-var _AutomationEventFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEventFilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _AutomationEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEvents",
-}, smithy.ShapeTypeList, 1)
-var _AutomationEvents_member *smithy.Schema
-
-var AutomationEventStep = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEventStep",
-}, smithy.ShapeTypeStructure, 8)
-var AutomationEventStep_eventId *smithy.Schema
-
-var AutomationEventStep_stepId *smithy.Schema
-
-var AutomationEventStep_stepType *smithy.Schema
-
-var AutomationEventStep_stepStatus *smithy.Schema
-
-var AutomationEventStep_resourceId *smithy.Schema
-
-var AutomationEventStep_startTimestamp *smithy.Schema
-
-var AutomationEventStep_completedTimestamp *smithy.Schema
-
-var AutomationEventStep_estimatedMonthlySavings *smithy.Schema
-
-var _AutomationEventSteps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEventSteps",
-}, smithy.ShapeTypeList, 1)
-var _AutomationEventSteps_member *smithy.Schema
-
-var AutomationEventSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEventSummary",
-}, smithy.ShapeTypeStructure, 4)
-var AutomationEventSummary_key *smithy.Schema
-
-var AutomationEventSummary_dimensions *smithy.Schema
-
-var AutomationEventSummary_timePeriod *smithy.Schema
-
-var AutomationEventSummary_total *smithy.Schema
-
-var _AutomationEventSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationEventSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _AutomationEventSummaryList_member *smithy.Schema
-
-var AutomationRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationRule",
-}, smithy.ShapeTypeStructure, 14)
-var AutomationRule_ruleArn *smithy.Schema
-
-var AutomationRule_ruleId *smithy.Schema
-
-var AutomationRule_name *smithy.Schema
-
-var AutomationRule_description *smithy.Schema
-
-var AutomationRule_ruleType *smithy.Schema
-
-var AutomationRule_ruleRevision *smithy.Schema
-
-var AutomationRule_accountId *smithy.Schema
-
-var AutomationRule_organizationConfiguration *smithy.Schema
-
-var AutomationRule_priority *smithy.Schema
-
-var AutomationRule_recommendedActionTypes *smithy.Schema
-
-var AutomationRule_schedule *smithy.Schema
-
-var AutomationRule_status *smithy.Schema
-
-var AutomationRule_createdTimestamp *smithy.Schema
-
-var AutomationRule_lastUpdatedTimestamp *smithy.Schema
-
-var _AutomationRuleFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationRuleFilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _AutomationRules = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AutomationRules",
-}, smithy.ShapeTypeList, 1)
-var _AutomationRules_member *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ComparisonOperator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ComparisonOperator",
-}, smithy.ShapeTypeEnum, 24)
-var ComparisonOperator_STRING_EQUALS *smithy.Schema
-
-var ComparisonOperator_STRING_NOT_EQUALS *smithy.Schema
-
-var ComparisonOperator_STRING_EQUALS_IGNORE_CASE *smithy.Schema
-
-var ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE *smithy.Schema
-
-var ComparisonOperator_STRING_LIKE *smithy.Schema
-
-var ComparisonOperator_STRING_NOT_LIKE *smithy.Schema
-
-var ComparisonOperator_NUMERIC_EQUALS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_NOT_EQUALS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_LESS_THAN *smithy.Schema
-
-var ComparisonOperator_NUMERIC_LESS_THAN_EQUALS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_GREATER_THAN *smithy.Schema
-
-var ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS *smithy.Schema
-
-var ComparisonOperator_STRING_EQUALS_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_STRING_LIKE_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_STRING_NOT_LIKE_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_EQUALS_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS *smithy.Schema
-
-var ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS *smithy.Schema
-
-var Criteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "Criteria",
-}, smithy.ShapeTypeStructure, 8)
-var Criteria_region *smithy.Schema
-
-var Criteria_resourceArn *smithy.Schema
-
-var Criteria_ebsVolumeType *smithy.Schema
-
-var Criteria_ebsVolumeSizeInGib *smithy.Schema
-
-var Criteria_estimatedMonthlySavings *smithy.Schema
-
-var Criteria_resourceTag *smithy.Schema
-
-var Criteria_lookBackPeriodInDays *smithy.Schema
-
-var Criteria_restartNeeded *smithy.Schema
-
-var DoubleCriteriaCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DoubleCriteriaCondition",
-}, smithy.ShapeTypeStructure, 2)
-var DoubleCriteriaCondition_comparison *smithy.Schema
-
-var DoubleCriteriaCondition_values *smithy.Schema
-
-var _DoubleCriteriaConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DoubleCriteriaConditionList",
-}, smithy.ShapeTypeList, 1)
-var _DoubleCriteriaConditionList_member *smithy.Schema
-
-var _DoubleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DoubleList",
-}, smithy.ShapeTypeList, 1)
-var _DoubleList_member *smithy.Schema
-
-var EbsVolume = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "EbsVolume",
-}, smithy.ShapeTypeStructure, 1)
-var EbsVolume_configuration *smithy.Schema
-
-var EbsVolumeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "EbsVolumeConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var EbsVolumeConfiguration_type *smithy.Schema
-
-var EbsVolumeConfiguration_sizeInGib *smithy.Schema
-
-var EbsVolumeConfiguration_iops *smithy.Schema
-
-var EbsVolumeConfiguration_throughput *smithy.Schema
-
-var EnrollmentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "EnrollmentStatus",
-}, smithy.ShapeTypeEnum, 4)
-var EnrollmentStatus_ACTIVE *smithy.Schema
-
-var EnrollmentStatus_INACTIVE *smithy.Schema
-
-var EnrollmentStatus_PENDING *smithy.Schema
-
-var EnrollmentStatus_FAILED *smithy.Schema
-
-var EstimatedMonthlySavings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "EstimatedMonthlySavings",
-}, smithy.ShapeTypeStructure, 4)
-var EstimatedMonthlySavings_currency *smithy.Schema
-
-var EstimatedMonthlySavings_beforeDiscountSavings *smithy.Schema
-
-var EstimatedMonthlySavings_afterDiscountSavings *smithy.Schema
-
-var EstimatedMonthlySavings_savingsEstimationMode *smithy.Schema
-
-var _EventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "EventId",
-}, smithy.ShapeTypeString, 0)
-
-var EventStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "EventStatus",
-}, smithy.ShapeTypeEnum, 9)
-var EventStatus_READY *smithy.Schema
-
-var EventStatus_IN_PROGRESS *smithy.Schema
-
-var EventStatus_COMPLETE *smithy.Schema
-
-var EventStatus_FAILED *smithy.Schema
-
-var EventStatus_CANCELLED *smithy.Schema
-
-var EventStatus_ROLLBACK_READY *smithy.Schema
-
-var EventStatus_ROLLBACK_IN_PROGRESS *smithy.Schema
-
-var EventStatus_ROLLBACK_COMPLETE *smithy.Schema
-
-var EventStatus_ROLLBACK_FAILED *smithy.Schema
-
-var EventType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "EventType",
-}, smithy.ShapeTypeEnum, 2)
-var EventType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME *smithy.Schema
-
-var EventType_UPGRADE_EBS_VOLUME_TYPE *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_name *smithy.Schema
-
-var Filter_values *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var _FilterValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "FilterValue",
-}, smithy.ShapeTypeString, 0)
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_message *smithy.Schema
-
-var IdempotencyTokenInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "IdempotencyTokenInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var IdempotencyTokenInUseException_message *smithy.Schema
-
-var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var IdempotentParameterMismatchException_message *smithy.Schema
-
-var IntegerCriteriaCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "IntegerCriteriaCondition",
-}, smithy.ShapeTypeStructure, 2)
-var IntegerCriteriaCondition_comparison *smithy.Schema
-
-var IntegerCriteriaCondition_values *smithy.Schema
-
-var _IntegerCriteriaConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "IntegerCriteriaConditionList",
-}, smithy.ShapeTypeList, 1)
-var _IntegerCriteriaConditionList_member *smithy.Schema
-
-var _IntegerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "IntegerList",
-}, smithy.ShapeTypeList, 1)
-var _IntegerList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InvalidParameterValueException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "InvalidParameterValueException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParameterValueException_message *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NotManagementAccountException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "NotManagementAccountException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NotManagementAccountException_message *smithy.Schema
-
-var OptInRequiredException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "OptInRequiredException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var OptInRequiredException_message *smithy.Schema
-
-var OrganizationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "OrganizationConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var OrganizationConfiguration_ruleApplyOrder *smithy.Schema
-
-var OrganizationConfiguration_accountIds *smithy.Schema
-
-var _OrganizationConfigurationAccountIds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "OrganizationConfigurationAccountIds",
-}, smithy.ShapeTypeList, 1)
-var _OrganizationConfigurationAccountIds_member *smithy.Schema
-
-var OrganizationRuleMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "OrganizationRuleMode",
-}, smithy.ShapeTypeEnum, 2)
-var OrganizationRuleMode_ANY_ALLOWED *smithy.Schema
-
-var OrganizationRuleMode_NONE_ALLOWED *smithy.Schema
-
-var OrganizationScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "OrganizationScope",
-}, smithy.ShapeTypeStructure, 1)
-var OrganizationScope_accountIds *smithy.Schema
-
-var PreviewResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "PreviewResult",
-}, smithy.ShapeTypeStructure, 15)
-var PreviewResult_recommendedActionId *smithy.Schema
-
-var PreviewResult_resourceArn *smithy.Schema
-
-var PreviewResult_resourceId *smithy.Schema
-
-var PreviewResult_accountId *smithy.Schema
-
-var PreviewResult_region *smithy.Schema
-
-var PreviewResult_resourceType *smithy.Schema
-
-var PreviewResult_lookBackPeriodInDays *smithy.Schema
-
-var PreviewResult_recommendedActionType *smithy.Schema
-
-var PreviewResult_currentResourceSummary *smithy.Schema
-
-var PreviewResult_currentResourceDetails *smithy.Schema
-
-var PreviewResult_recommendedResourceSummary *smithy.Schema
-
-var PreviewResult_recommendedResourceDetails *smithy.Schema
-
-var PreviewResult_restartNeeded *smithy.Schema
-
-var PreviewResult_estimatedMonthlySavings *smithy.Schema
-
-var PreviewResult_resourceTags *smithy.Schema
-
-var _PreviewResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "PreviewResults",
-}, smithy.ShapeTypeList, 1)
-var _PreviewResults_member *smithy.Schema
-
-var _PreviewResultSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "PreviewResultSummaries",
-}, smithy.ShapeTypeList, 1)
-var _PreviewResultSummaries_member *smithy.Schema
-
-var PreviewResultSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "PreviewResultSummary",
-}, smithy.ShapeTypeStructure, 2)
-var PreviewResultSummary_key *smithy.Schema
-
-var PreviewResultSummary_total *smithy.Schema
-
-var RecommendedAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedAction",
-}, smithy.ShapeTypeStructure, 15)
-var RecommendedAction_recommendedActionId *smithy.Schema
-
-var RecommendedAction_resourceArn *smithy.Schema
-
-var RecommendedAction_resourceId *smithy.Schema
-
-var RecommendedAction_accountId *smithy.Schema
-
-var RecommendedAction_region *smithy.Schema
-
-var RecommendedAction_resourceType *smithy.Schema
-
-var RecommendedAction_lookBackPeriodInDays *smithy.Schema
-
-var RecommendedAction_recommendedActionType *smithy.Schema
-
-var RecommendedAction_currentResourceSummary *smithy.Schema
-
-var RecommendedAction_currentResourceDetails *smithy.Schema
-
-var RecommendedAction_recommendedResourceSummary *smithy.Schema
-
-var RecommendedAction_recommendedResourceDetails *smithy.Schema
-
-var RecommendedAction_restartNeeded *smithy.Schema
-
-var RecommendedAction_estimatedMonthlySavings *smithy.Schema
-
-var RecommendedAction_resourceTags *smithy.Schema
-
-var RecommendedActionFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionFilter",
-}, smithy.ShapeTypeStructure, 2)
-var RecommendedActionFilter_name *smithy.Schema
-
-var RecommendedActionFilter_values *smithy.Schema
-
-var _RecommendedActionFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionFilterList",
-}, smithy.ShapeTypeList, 1)
-var _RecommendedActionFilterList_member *smithy.Schema
-
-var _RecommendedActionFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionFilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _RecommendedActionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionId",
-}, smithy.ShapeTypeString, 0)
-
-var _RecommendedActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActions",
-}, smithy.ShapeTypeList, 1)
-var _RecommendedActions_member *smithy.Schema
-
-var _RecommendedActionSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionSummaries",
-}, smithy.ShapeTypeList, 1)
-var _RecommendedActionSummaries_member *smithy.Schema
-
-var RecommendedActionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionSummary",
-}, smithy.ShapeTypeStructure, 2)
-var RecommendedActionSummary_key *smithy.Schema
-
-var RecommendedActionSummary_total *smithy.Schema
-
-var RecommendedActionTotal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionTotal",
-}, smithy.ShapeTypeStructure, 2)
-var RecommendedActionTotal_recommendedActionCount *smithy.Schema
-
-var RecommendedActionTotal_estimatedMonthlySavings *smithy.Schema
-
-var RecommendedActionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionType",
-}, smithy.ShapeTypeEnum, 2)
-var RecommendedActionType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME *smithy.Schema
-
-var RecommendedActionType_UPGRADE_EBS_VOLUME_TYPE *smithy.Schema
-
-var _RecommendedActionTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RecommendedActionTypeList",
-}, smithy.ShapeTypeList, 1)
-var _RecommendedActionTypeList_member *smithy.Schema
-
-var _ResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ResourceDetails",
-}, smithy.ShapeTypeUnion, 1)
-var ResourceDetails_ebsVolume *smithy.Schema
-
-var _ResourceId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ResourceId",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceTagsCriteriaCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ResourceTagsCriteriaCondition",
-}, smithy.ShapeTypeStructure, 3)
-var ResourceTagsCriteriaCondition_comparison *smithy.Schema
-
-var ResourceTagsCriteriaCondition_key *smithy.Schema
-
-var ResourceTagsCriteriaCondition_values *smithy.Schema
-
-var _ResourceTagsCriteriaConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ResourceTagsCriteriaConditionList",
-}, smithy.ShapeTypeList, 1)
-var _ResourceTagsCriteriaConditionList_member *smithy.Schema
-
-var ResourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ResourceType",
-}, smithy.ShapeTypeEnum, 1)
-var ResourceType_EBS_VOLUME *smithy.Schema
-
-var RuleApplyOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RuleApplyOrder",
-}, smithy.ShapeTypeEnum, 2)
-var RuleApplyOrder_BEFORE_ACCOUNT_RULES *smithy.Schema
-
-var RuleApplyOrder_AFTER_ACCOUNT_RULES *smithy.Schema
-
-var _RuleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RuleArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RuleDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RuleId",
-}, smithy.ShapeTypeString, 0)
-
-var _RuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RuleName",
-}, smithy.ShapeTypeString, 0)
-
-var RulePreviewTotal = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RulePreviewTotal",
-}, smithy.ShapeTypeStructure, 2)
-var RulePreviewTotal_recommendedActionCount *smithy.Schema
-
-var RulePreviewTotal_estimatedMonthlySavings *smithy.Schema
-
-var RuleStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RuleStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RuleStatus_ACTIVE *smithy.Schema
-
-var RuleStatus_INACTIVE *smithy.Schema
-
-var RuleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RuleType",
-}, smithy.ShapeTypeEnum, 2)
-var RuleType_ORGANIZATIONAL_RULE *smithy.Schema
-
-var RuleType_ACCOUNT_RULE *smithy.Schema
-
-var SavingsEstimationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "SavingsEstimationMode",
-}, smithy.ShapeTypeEnum, 2)
-var SavingsEstimationMode_BEFORE_DISCOUNT *smithy.Schema
-
-var SavingsEstimationMode_AFTER_DISCOUNT *smithy.Schema
-
-var Schedule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "Schedule",
-}, smithy.ShapeTypeStructure, 3)
-var Schedule_scheduleExpression *smithy.Schema
-
-var Schedule_scheduleExpressionTimezone *smithy.Schema
-
-var Schedule_executionWindowInMinutes *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_message *smithy.Schema
-
-var _StepId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StepId",
-}, smithy.ShapeTypeString, 0)
-
-var StepStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StepStatus",
-}, smithy.ShapeTypeEnum, 4)
-var StepStatus_READY *smithy.Schema
-
-var StepStatus_IN_PROGRESS *smithy.Schema
-
-var StepStatus_COMPLETE *smithy.Schema
-
-var StepStatus_FAILED *smithy.Schema
-
-var StepType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StepType",
-}, smithy.ShapeTypeEnum, 4)
-var StepType_CREATE_EBS_SNAPSHOT *smithy.Schema
-
-var StepType_DELETE_EBS_VOLUME *smithy.Schema
-
-var StepType_MODIFY_EBS_VOLUME *smithy.Schema
-
-var StepType_CREATE_EBS_VOLUME *smithy.Schema
-
-var StringCriteriaCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StringCriteriaCondition",
-}, smithy.ShapeTypeStructure, 2)
-var StringCriteriaCondition_comparison *smithy.Schema
-
-var StringCriteriaCondition_values *smithy.Schema
-
-var _StringCriteriaConditionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StringCriteriaConditionList",
-}, smithy.ShapeTypeList, 1)
-var _StringCriteriaConditionList_member *smithy.Schema
-
-var _StringCriteriaValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StringCriteriaValue",
-}, smithy.ShapeTypeString, 0)
-
-var _StringCriteriaValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StringCriteriaValues",
-}, smithy.ShapeTypeList, 1)
-var _StringCriteriaValues_member *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var SummaryDimension = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "SummaryDimension",
-}, smithy.ShapeTypeStructure, 2)
-var SummaryDimension_key *smithy.Schema
-
-var SummaryDimension_value *smithy.Schema
-
-var _SummaryDimensionKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "SummaryDimensionKey",
-}, smithy.ShapeTypeString, 0)
-
-var _SummaryDimensions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "SummaryDimensions",
-}, smithy.ShapeTypeList, 1)
-var _SummaryDimensions_member *smithy.Schema
-
-var SummaryTotals = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "SummaryTotals",
-}, smithy.ShapeTypeStructure, 2)
-var SummaryTotals_automationEventCount *smithy.Schema
-
-var SummaryTotals_estimatedMonthlySavings *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var TimePeriod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TimePeriod",
-}, smithy.ShapeTypeStructure, 2)
-var TimePeriod_startTimeInclusive *smithy.Schema
-
-var TimePeriod_endTimeExclusive *smithy.Schema
-
-var AssociateAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AssociateAccountsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateAccountsRequest_accountIds *smithy.Schema
-
-var AssociateAccountsRequest_clientToken *smithy.Schema
-
-var AssociateAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "AssociateAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateAccountsResponse_accountIds *smithy.Schema
-
-var AssociateAccountsResponse_errors *smithy.Schema
-
-var CreateAutomationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "CreateAutomationRuleRequest",
-}, smithy.ShapeTypeStructure, 11)
-var CreateAutomationRuleRequest_name *smithy.Schema
-
-var CreateAutomationRuleRequest_description *smithy.Schema
-
-var CreateAutomationRuleRequest_ruleType *smithy.Schema
-
-var CreateAutomationRuleRequest_organizationConfiguration *smithy.Schema
-
-var CreateAutomationRuleRequest_priority *smithy.Schema
-
-var CreateAutomationRuleRequest_recommendedActionTypes *smithy.Schema
-
-var CreateAutomationRuleRequest_criteria *smithy.Schema
-
-var CreateAutomationRuleRequest_schedule *smithy.Schema
-
-var CreateAutomationRuleRequest_status *smithy.Schema
-
-var CreateAutomationRuleRequest_tags *smithy.Schema
-
-var CreateAutomationRuleRequest_clientToken *smithy.Schema
-
-var CreateAutomationRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "CreateAutomationRuleResponse",
-}, smithy.ShapeTypeStructure, 14)
-var CreateAutomationRuleResponse_ruleArn *smithy.Schema
-
-var CreateAutomationRuleResponse_ruleId *smithy.Schema
-
-var CreateAutomationRuleResponse_name *smithy.Schema
-
-var CreateAutomationRuleResponse_description *smithy.Schema
-
-var CreateAutomationRuleResponse_ruleType *smithy.Schema
-
-var CreateAutomationRuleResponse_ruleRevision *smithy.Schema
-
-var CreateAutomationRuleResponse_organizationConfiguration *smithy.Schema
-
-var CreateAutomationRuleResponse_priority *smithy.Schema
-
-var CreateAutomationRuleResponse_recommendedActionTypes *smithy.Schema
-
-var CreateAutomationRuleResponse_criteria *smithy.Schema
-
-var CreateAutomationRuleResponse_schedule *smithy.Schema
-
-var CreateAutomationRuleResponse_status *smithy.Schema
-
-var CreateAutomationRuleResponse_tags *smithy.Schema
-
-var CreateAutomationRuleResponse_createdTimestamp *smithy.Schema
-
-var DeleteAutomationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DeleteAutomationRuleRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteAutomationRuleRequest_ruleArn *smithy.Schema
-
-var DeleteAutomationRuleRequest_ruleRevision *smithy.Schema
-
-var DeleteAutomationRuleRequest_clientToken *smithy.Schema
-
-var DeleteAutomationRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DeleteAutomationRuleResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DisassociateAccountsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateAccountsRequest_accountIds *smithy.Schema
-
-var DisassociateAccountsRequest_clientToken *smithy.Schema
-
-var DisassociateAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "DisassociateAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var DisassociateAccountsResponse_accountIds *smithy.Schema
-
-var DisassociateAccountsResponse_errors *smithy.Schema
-
-var GetAutomationEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetAutomationEventRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutomationEventRequest_eventId *smithy.Schema
-
-var GetAutomationEventResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetAutomationEventResponse",
-}, smithy.ShapeTypeStructure, 15)
-var GetAutomationEventResponse_eventId *smithy.Schema
-
-var GetAutomationEventResponse_eventDescription *smithy.Schema
-
-var GetAutomationEventResponse_eventType *smithy.Schema
-
-var GetAutomationEventResponse_eventStatus *smithy.Schema
-
-var GetAutomationEventResponse_eventStatusReason *smithy.Schema
-
-var GetAutomationEventResponse_resourceArn *smithy.Schema
-
-var GetAutomationEventResponse_resourceId *smithy.Schema
-
-var GetAutomationEventResponse_recommendedActionId *smithy.Schema
-
-var GetAutomationEventResponse_accountId *smithy.Schema
-
-var GetAutomationEventResponse_region *smithy.Schema
-
-var GetAutomationEventResponse_ruleId *smithy.Schema
-
-var GetAutomationEventResponse_resourceType *smithy.Schema
-
-var GetAutomationEventResponse_createdTimestamp *smithy.Schema
-
-var GetAutomationEventResponse_completedTimestamp *smithy.Schema
-
-var GetAutomationEventResponse_estimatedMonthlySavings *smithy.Schema
-
-var GetAutomationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetAutomationRuleRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetAutomationRuleRequest_ruleArn *smithy.Schema
-
-var GetAutomationRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetAutomationRuleResponse",
-}, smithy.ShapeTypeStructure, 16)
-var GetAutomationRuleResponse_ruleArn *smithy.Schema
-
-var GetAutomationRuleResponse_ruleId *smithy.Schema
-
-var GetAutomationRuleResponse_name *smithy.Schema
-
-var GetAutomationRuleResponse_description *smithy.Schema
-
-var GetAutomationRuleResponse_ruleType *smithy.Schema
-
-var GetAutomationRuleResponse_ruleRevision *smithy.Schema
-
-var GetAutomationRuleResponse_accountId *smithy.Schema
-
-var GetAutomationRuleResponse_organizationConfiguration *smithy.Schema
-
-var GetAutomationRuleResponse_priority *smithy.Schema
-
-var GetAutomationRuleResponse_recommendedActionTypes *smithy.Schema
-
-var GetAutomationRuleResponse_criteria *smithy.Schema
-
-var GetAutomationRuleResponse_schedule *smithy.Schema
-
-var GetAutomationRuleResponse_status *smithy.Schema
-
-var GetAutomationRuleResponse_tags *smithy.Schema
-
-var GetAutomationRuleResponse_createdTimestamp *smithy.Schema
-
-var GetAutomationRuleResponse_lastUpdatedTimestamp *smithy.Schema
-
-var GetEnrollmentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetEnrollmentConfigurationRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetEnrollmentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "GetEnrollmentConfigurationResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetEnrollmentConfigurationResponse_status *smithy.Schema
-
-var GetEnrollmentConfigurationResponse_statusReason *smithy.Schema
-
-var GetEnrollmentConfigurationResponse_organizationRuleMode *smithy.Schema
-
-var GetEnrollmentConfigurationResponse_lastUpdatedTimestamp *smithy.Schema
-
-var ListAccountsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAccountsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccountsRequest_maxResults *smithy.Schema
-
-var ListAccountsRequest_nextToken *smithy.Schema
-
-var ListAccountsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAccountsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAccountsResponse_accounts *smithy.Schema
-
-var ListAccountsResponse_nextToken *smithy.Schema
-
-var ListAutomationEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListAutomationEventsRequest_filters *smithy.Schema
-
-var ListAutomationEventsRequest_startTimeInclusive *smithy.Schema
-
-var ListAutomationEventsRequest_endTimeExclusive *smithy.Schema
-
-var ListAutomationEventsRequest_maxResults *smithy.Schema
-
-var ListAutomationEventsRequest_nextToken *smithy.Schema
-
-var ListAutomationEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutomationEventsResponse_automationEvents *smithy.Schema
-
-var ListAutomationEventsResponse_nextToken *smithy.Schema
-
-var ListAutomationEventStepsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventStepsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutomationEventStepsRequest_eventId *smithy.Schema
-
-var ListAutomationEventStepsRequest_maxResults *smithy.Schema
-
-var ListAutomationEventStepsRequest_nextToken *smithy.Schema
-
-var ListAutomationEventStepsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventStepsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutomationEventStepsResponse_automationEventSteps *smithy.Schema
-
-var ListAutomationEventStepsResponse_nextToken *smithy.Schema
-
-var ListAutomationEventSummariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventSummariesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListAutomationEventSummariesRequest_filters *smithy.Schema
-
-var ListAutomationEventSummariesRequest_startDateInclusive *smithy.Schema
-
-var ListAutomationEventSummariesRequest_endDateExclusive *smithy.Schema
-
-var ListAutomationEventSummariesRequest_maxResults *smithy.Schema
-
-var ListAutomationEventSummariesRequest_nextToken *smithy.Schema
-
-var ListAutomationEventSummariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationEventSummariesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutomationEventSummariesResponse_automationEventSummaries *smithy.Schema
-
-var ListAutomationEventSummariesResponse_nextToken *smithy.Schema
-
-var ListAutomationRulePreviewRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulePreviewRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListAutomationRulePreviewRequest_ruleType *smithy.Schema
-
-var ListAutomationRulePreviewRequest_organizationScope *smithy.Schema
-
-var ListAutomationRulePreviewRequest_recommendedActionTypes *smithy.Schema
-
-var ListAutomationRulePreviewRequest_criteria *smithy.Schema
-
-var ListAutomationRulePreviewRequest_maxResults *smithy.Schema
-
-var ListAutomationRulePreviewRequest_nextToken *smithy.Schema
-
-var ListAutomationRulePreviewResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulePreviewResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutomationRulePreviewResponse_previewResults *smithy.Schema
-
-var ListAutomationRulePreviewResponse_nextToken *smithy.Schema
-
-var ListAutomationRulePreviewSummariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulePreviewSummariesRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListAutomationRulePreviewSummariesRequest_ruleType *smithy.Schema
-
-var ListAutomationRulePreviewSummariesRequest_organizationScope *smithy.Schema
-
-var ListAutomationRulePreviewSummariesRequest_recommendedActionTypes *smithy.Schema
-
-var ListAutomationRulePreviewSummariesRequest_criteria *smithy.Schema
-
-var ListAutomationRulePreviewSummariesRequest_maxResults *smithy.Schema
-
-var ListAutomationRulePreviewSummariesRequest_nextToken *smithy.Schema
-
-var ListAutomationRulePreviewSummariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulePreviewSummariesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutomationRulePreviewSummariesResponse_previewResultSummaries *smithy.Schema
-
-var ListAutomationRulePreviewSummariesResponse_nextToken *smithy.Schema
-
-var ListAutomationRulesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListAutomationRulesRequest_filters *smithy.Schema
-
-var ListAutomationRulesRequest_maxResults *smithy.Schema
-
-var ListAutomationRulesRequest_nextToken *smithy.Schema
-
-var ListAutomationRulesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListAutomationRulesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListAutomationRulesResponse_automationRules *smithy.Schema
-
-var ListAutomationRulesResponse_nextToken *smithy.Schema
-
-var ListRecommendedActionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListRecommendedActionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRecommendedActionsRequest_filters *smithy.Schema
-
-var ListRecommendedActionsRequest_maxResults *smithy.Schema
-
-var ListRecommendedActionsRequest_nextToken *smithy.Schema
-
-var ListRecommendedActionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListRecommendedActionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecommendedActionsResponse_recommendedActions *smithy.Schema
-
-var ListRecommendedActionsResponse_nextToken *smithy.Schema
-
-var ListRecommendedActionSummariesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListRecommendedActionSummariesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRecommendedActionSummariesRequest_filters *smithy.Schema
-
-var ListRecommendedActionSummariesRequest_maxResults *smithy.Schema
-
-var ListRecommendedActionSummariesRequest_nextToken *smithy.Schema
-
-var ListRecommendedActionSummariesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListRecommendedActionSummariesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRecommendedActionSummariesResponse_recommendedActionSummaries *smithy.Schema
-
-var ListRecommendedActionSummariesResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RollbackAutomationEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RollbackAutomationEventRequest",
-}, smithy.ShapeTypeStructure, 2)
-var RollbackAutomationEventRequest_eventId *smithy.Schema
-
-var RollbackAutomationEventRequest_clientToken *smithy.Schema
-
-var RollbackAutomationEventResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "RollbackAutomationEventResponse",
-}, smithy.ShapeTypeStructure, 2)
-var RollbackAutomationEventResponse_eventId *smithy.Schema
-
-var RollbackAutomationEventResponse_eventStatus *smithy.Schema
-
-var StartAutomationEventRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StartAutomationEventRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StartAutomationEventRequest_recommendedActionId *smithy.Schema
-
-var StartAutomationEventRequest_clientToken *smithy.Schema
-
-var StartAutomationEventResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "StartAutomationEventResponse",
-}, smithy.ShapeTypeStructure, 3)
-var StartAutomationEventResponse_recommendedActionId *smithy.Schema
-
-var StartAutomationEventResponse_eventId *smithy.Schema
-
-var StartAutomationEventResponse_eventStatus *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_ruleRevision *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceRequest_clientToken *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_ruleRevision *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceRequest_clientToken *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateAutomationRuleRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UpdateAutomationRuleRequest",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateAutomationRuleRequest_ruleArn *smithy.Schema
-
-var UpdateAutomationRuleRequest_ruleRevision *smithy.Schema
-
-var UpdateAutomationRuleRequest_name *smithy.Schema
-
-var UpdateAutomationRuleRequest_description *smithy.Schema
-
-var UpdateAutomationRuleRequest_ruleType *smithy.Schema
-
-var UpdateAutomationRuleRequest_organizationConfiguration *smithy.Schema
-
-var UpdateAutomationRuleRequest_priority *smithy.Schema
-
-var UpdateAutomationRuleRequest_recommendedActionTypes *smithy.Schema
-
-var UpdateAutomationRuleRequest_criteria *smithy.Schema
-
-var UpdateAutomationRuleRequest_schedule *smithy.Schema
-
-var UpdateAutomationRuleRequest_status *smithy.Schema
-
-var UpdateAutomationRuleRequest_clientToken *smithy.Schema
-
-var UpdateAutomationRuleResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UpdateAutomationRuleResponse",
-}, smithy.ShapeTypeStructure, 13)
-var UpdateAutomationRuleResponse_ruleArn *smithy.Schema
-
-var UpdateAutomationRuleResponse_ruleRevision *smithy.Schema
-
-var UpdateAutomationRuleResponse_name *smithy.Schema
-
-var UpdateAutomationRuleResponse_description *smithy.Schema
-
-var UpdateAutomationRuleResponse_ruleType *smithy.Schema
-
-var UpdateAutomationRuleResponse_organizationConfiguration *smithy.Schema
-
-var UpdateAutomationRuleResponse_priority *smithy.Schema
-
-var UpdateAutomationRuleResponse_recommendedActionTypes *smithy.Schema
-
-var UpdateAutomationRuleResponse_criteria *smithy.Schema
-
-var UpdateAutomationRuleResponse_schedule *smithy.Schema
-
-var UpdateAutomationRuleResponse_status *smithy.Schema
-
-var UpdateAutomationRuleResponse_createdTimestamp *smithy.Schema
-
-var UpdateAutomationRuleResponse_lastUpdatedTimestamp *smithy.Schema
-
-var UpdateEnrollmentConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UpdateEnrollmentConfigurationRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateEnrollmentConfigurationRequest_status *smithy.Schema
-
-var UpdateEnrollmentConfigurationRequest_clientToken *smithy.Schema
-
-var UpdateEnrollmentConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.computeoptimizerautomation",
-	Name:      "UpdateEnrollmentConfigurationResponse",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateEnrollmentConfigurationResponse_status *smithy.Schema
-
-var UpdateEnrollmentConfigurationResponse_statusReason *smithy.Schema
-
-var UpdateEnrollmentConfigurationResponse_lastUpdatedTimestamp *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_AccountIdList_member = _AccountIdList.AddMember("member", _AccountId)
-
-	EnrollmentStatus_ACTIVE = EnrollmentStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	EnrollmentStatus_INACTIVE = EnrollmentStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	EnrollmentStatus_PENDING = EnrollmentStatus.AddMember("PENDING", smithyprelude.Unit)
-
-	EnrollmentStatus_FAILED = EnrollmentStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	OrganizationRuleMode_ANY_ALLOWED = OrganizationRuleMode.AddMember("ANY_ALLOWED", smithyprelude.Unit)
-
-	OrganizationRuleMode_NONE_ALLOWED = OrganizationRuleMode.AddMember("NONE_ALLOWED", smithyprelude.Unit)
-
-	AccountInfo_accountId = AccountInfo.AddMember("accountId", _AccountId)
-
-	AccountInfo_status = AccountInfo.AddMember("status", EnrollmentStatus)
-
-	AccountInfo_organizationRuleMode = AccountInfo.AddMember("organizationRuleMode", OrganizationRuleMode)
-
-	AccountInfo_statusReason = AccountInfo.AddMember("statusReason", smithyprelude.String)
-
-	AccountInfo_lastUpdatedTimestamp = AccountInfo.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	_AccountInfoList_member = _AccountInfoList.AddMember("member", AccountInfo)
-
-	EventType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = EventType.AddMember("SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME", smithyprelude.Unit)
-
-	EventType_UPGRADE_EBS_VOLUME_TYPE = EventType.AddMember("UPGRADE_EBS_VOLUME_TYPE", smithyprelude.Unit)
-
-	EventStatus_READY = EventStatus.AddMember("READY", smithyprelude.Unit)
-
-	EventStatus_IN_PROGRESS = EventStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	EventStatus_COMPLETE = EventStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	EventStatus_FAILED = EventStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	EventStatus_CANCELLED = EventStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	EventStatus_ROLLBACK_READY = EventStatus.AddMember("ROLLBACK_READY", smithyprelude.Unit)
-
-	EventStatus_ROLLBACK_IN_PROGRESS = EventStatus.AddMember("ROLLBACK_IN_PROGRESS", smithyprelude.Unit)
-
-	EventStatus_ROLLBACK_COMPLETE = EventStatus.AddMember("ROLLBACK_COMPLETE", smithyprelude.Unit)
-
-	EventStatus_ROLLBACK_FAILED = EventStatus.AddMember("ROLLBACK_FAILED", smithyprelude.Unit)
-
-	ResourceType_EBS_VOLUME = ResourceType.AddMember("EBS_VOLUME", smithyprelude.Unit)
-
-	SavingsEstimationMode_BEFORE_DISCOUNT = SavingsEstimationMode.AddMember("BEFORE_DISCOUNT", smithyprelude.Unit)
-
-	SavingsEstimationMode_AFTER_DISCOUNT = SavingsEstimationMode.AddMember("AFTER_DISCOUNT", smithyprelude.Unit)
-
-	EstimatedMonthlySavings_currency = EstimatedMonthlySavings.AddMember("currency", smithyprelude.String)
-
-	EstimatedMonthlySavings_beforeDiscountSavings = EstimatedMonthlySavings.AddMember("beforeDiscountSavings", smithyprelude.Double)
-
-	EstimatedMonthlySavings_afterDiscountSavings = EstimatedMonthlySavings.AddMember("afterDiscountSavings", smithyprelude.Double)
-
-	EstimatedMonthlySavings_savingsEstimationMode = EstimatedMonthlySavings.AddMember("savingsEstimationMode", SavingsEstimationMode)
-
-	AutomationEvent_eventId = AutomationEvent.AddMember("eventId", _EventId)
-
-	AutomationEvent_eventDescription = AutomationEvent.AddMember("eventDescription", smithyprelude.String)
-
-	AutomationEvent_eventType = AutomationEvent.AddMember("eventType", EventType)
-
-	AutomationEvent_eventStatus = AutomationEvent.AddMember("eventStatus", EventStatus)
-
-	AutomationEvent_eventStatusReason = AutomationEvent.AddMember("eventStatusReason", smithyprelude.String)
-
-	AutomationEvent_resourceArn = AutomationEvent.AddMember("resourceArn", _ResourceArn)
-
-	AutomationEvent_resourceId = AutomationEvent.AddMember("resourceId", _ResourceId)
-
-	AutomationEvent_recommendedActionId = AutomationEvent.AddMember("recommendedActionId", _RecommendedActionId)
-
-	AutomationEvent_accountId = AutomationEvent.AddMember("accountId", _AccountId)
-
-	AutomationEvent_region = AutomationEvent.AddMember("region", smithyprelude.String)
-
-	AutomationEvent_ruleId = AutomationEvent.AddMember("ruleId", _RuleId)
-
-	AutomationEvent_resourceType = AutomationEvent.AddMember("resourceType", ResourceType)
-
-	AutomationEvent_createdTimestamp = AutomationEvent.AddMember("createdTimestamp", smithyprelude.Timestamp)
-
-	AutomationEvent_completedTimestamp = AutomationEvent.AddMember("completedTimestamp", smithyprelude.Timestamp)
-
-	AutomationEvent_estimatedMonthlySavings = AutomationEvent.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	_FilterValues_member = _FilterValues.AddMember("member", _FilterValue)
-
-	AutomationEventFilter_name = AutomationEventFilter.AddMember("name", _AutomationEventFilterName)
-
-	AutomationEventFilter_values = AutomationEventFilter.AddMember("values", _FilterValues)
-
-	_AutomationEventFilterList_member = _AutomationEventFilterList.AddMember("member", AutomationEventFilter)
-
-	_AutomationEvents_member = _AutomationEvents.AddMember("member", AutomationEvent)
-
-	StepType_CREATE_EBS_SNAPSHOT = StepType.AddMember("CREATE_EBS_SNAPSHOT", smithyprelude.Unit)
-
-	StepType_DELETE_EBS_VOLUME = StepType.AddMember("DELETE_EBS_VOLUME", smithyprelude.Unit)
-
-	StepType_MODIFY_EBS_VOLUME = StepType.AddMember("MODIFY_EBS_VOLUME", smithyprelude.Unit)
-
-	StepType_CREATE_EBS_VOLUME = StepType.AddMember("CREATE_EBS_VOLUME", smithyprelude.Unit)
-
-	StepStatus_READY = StepStatus.AddMember("READY", smithyprelude.Unit)
-
-	StepStatus_IN_PROGRESS = StepStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	StepStatus_COMPLETE = StepStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	StepStatus_FAILED = StepStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	AutomationEventStep_eventId = AutomationEventStep.AddMember("eventId", _EventId)
-
-	AutomationEventStep_stepId = AutomationEventStep.AddMember("stepId", _StepId)
-
-	AutomationEventStep_stepType = AutomationEventStep.AddMember("stepType", StepType)
-
-	AutomationEventStep_stepStatus = AutomationEventStep.AddMember("stepStatus", StepStatus)
-
-	AutomationEventStep_resourceId = AutomationEventStep.AddMember("resourceId", _ResourceId)
-
-	AutomationEventStep_startTimestamp = AutomationEventStep.AddMember("startTimestamp", smithyprelude.Timestamp)
-
-	AutomationEventStep_completedTimestamp = AutomationEventStep.AddMember("completedTimestamp", smithyprelude.Timestamp)
-
-	AutomationEventStep_estimatedMonthlySavings = AutomationEventStep.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	_AutomationEventSteps_member = _AutomationEventSteps.AddMember("member", AutomationEventStep)
-
-	SummaryDimension_key = SummaryDimension.AddMember("key", _SummaryDimensionKey)
-
-	SummaryDimension_value = SummaryDimension.AddMember("value", smithyprelude.String)
-
-	_SummaryDimensions_member = _SummaryDimensions.AddMember("member", SummaryDimension)
-
-	TimePeriod_startTimeInclusive = TimePeriod.AddMember("startTimeInclusive", smithyprelude.Timestamp)
-
-	TimePeriod_endTimeExclusive = TimePeriod.AddMember("endTimeExclusive", smithyprelude.Timestamp)
-
-	SummaryTotals_automationEventCount = SummaryTotals.AddMember("automationEventCount", smithyprelude.Integer)
-
-	SummaryTotals_estimatedMonthlySavings = SummaryTotals.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	AutomationEventSummary_key = AutomationEventSummary.AddMember("key", smithyprelude.String)
-
-	AutomationEventSummary_dimensions = AutomationEventSummary.AddMember("dimensions", _SummaryDimensions)
-
-	AutomationEventSummary_timePeriod = AutomationEventSummary.AddMember("timePeriod", TimePeriod)
-
-	AutomationEventSummary_total = AutomationEventSummary.AddMember("total", SummaryTotals)
-
-	_AutomationEventSummaryList_member = _AutomationEventSummaryList.AddMember("member", AutomationEventSummary)
-
-	RuleType_ORGANIZATIONAL_RULE = RuleType.AddMember("ORGANIZATIONAL_RULE", smithyprelude.Unit)
-
-	RuleType_ACCOUNT_RULE = RuleType.AddMember("ACCOUNT_RULE", smithyprelude.Unit)
-
-	RuleApplyOrder_BEFORE_ACCOUNT_RULES = RuleApplyOrder.AddMember("BEFORE_ACCOUNT_RULES", smithyprelude.Unit)
-
-	RuleApplyOrder_AFTER_ACCOUNT_RULES = RuleApplyOrder.AddMember("AFTER_ACCOUNT_RULES", smithyprelude.Unit)
-
-	_OrganizationConfigurationAccountIds_member = _OrganizationConfigurationAccountIds.AddMember("member", _AccountId)
-
-	OrganizationConfiguration_ruleApplyOrder = OrganizationConfiguration.AddMember("ruleApplyOrder", RuleApplyOrder)
-
-	OrganizationConfiguration_accountIds = OrganizationConfiguration.AddMember("accountIds", _OrganizationConfigurationAccountIds)
-
-	RecommendedActionType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = RecommendedActionType.AddMember("SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME", smithyprelude.Unit)
-
-	RecommendedActionType_UPGRADE_EBS_VOLUME_TYPE = RecommendedActionType.AddMember("UPGRADE_EBS_VOLUME_TYPE", smithyprelude.Unit)
-
-	_RecommendedActionTypeList_member = _RecommendedActionTypeList.AddMember("member", RecommendedActionType)
-
-	Schedule_scheduleExpression = Schedule.AddMember("scheduleExpression", smithyprelude.String)
-
-	Schedule_scheduleExpressionTimezone = Schedule.AddMember("scheduleExpressionTimezone", smithyprelude.String)
-
-	Schedule_executionWindowInMinutes = Schedule.AddMember("executionWindowInMinutes", smithyprelude.Integer)
-
-	RuleStatus_ACTIVE = RuleStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	RuleStatus_INACTIVE = RuleStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	AutomationRule_ruleArn = AutomationRule.AddMember("ruleArn", _RuleArn)
-
-	AutomationRule_ruleId = AutomationRule.AddMember("ruleId", _RuleId)
-
-	AutomationRule_name = AutomationRule.AddMember("name", _RuleName)
-
-	AutomationRule_description = AutomationRule.AddMember("description", smithyprelude.String)
-
-	AutomationRule_ruleType = AutomationRule.AddMember("ruleType", RuleType)
-
-	AutomationRule_ruleRevision = AutomationRule.AddMember("ruleRevision", smithyprelude.Long)
-
-	AutomationRule_accountId = AutomationRule.AddMember("accountId", _AccountId)
-
-	AutomationRule_organizationConfiguration = AutomationRule.AddMember("organizationConfiguration", OrganizationConfiguration)
-
-	AutomationRule_priority = AutomationRule.AddMember("priority", smithyprelude.String)
-
-	AutomationRule_recommendedActionTypes = AutomationRule.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	AutomationRule_schedule = AutomationRule.AddMember("schedule", Schedule)
-
-	AutomationRule_status = AutomationRule.AddMember("status", RuleStatus)
-
-	AutomationRule_createdTimestamp = AutomationRule.AddMember("createdTimestamp", smithyprelude.Timestamp)
-
-	AutomationRule_lastUpdatedTimestamp = AutomationRule.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	_AutomationRules_member = _AutomationRules.AddMember("member", AutomationRule)
-
-	ComparisonOperator_STRING_EQUALS = ComparisonOperator.AddMember("STRING_EQUALS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_NOT_EQUALS = ComparisonOperator.AddMember("STRING_NOT_EQUALS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_EQUALS_IGNORE_CASE = ComparisonOperator.AddMember("STRING_EQUALS_IGNORE_CASE", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE = ComparisonOperator.AddMember("STRING_NOT_EQUALS_IGNORE_CASE", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_LIKE = ComparisonOperator.AddMember("STRING_LIKE", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_NOT_LIKE = ComparisonOperator.AddMember("STRING_NOT_LIKE", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_EQUALS = ComparisonOperator.AddMember("NUMERIC_EQUALS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_NOT_EQUALS = ComparisonOperator.AddMember("NUMERIC_NOT_EQUALS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_LESS_THAN = ComparisonOperator.AddMember("NUMERIC_LESS_THAN", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_LESS_THAN_EQUALS = ComparisonOperator.AddMember("NUMERIC_LESS_THAN_EQUALS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_GREATER_THAN = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN_EQUALS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("STRING_EQUALS_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("STRING_NOT_EQUALS_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS = ComparisonOperator.AddMember("STRING_EQUALS_IGNORE_CASE_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS = ComparisonOperator.AddMember("STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_LIKE_IF_EXISTS = ComparisonOperator.AddMember("STRING_LIKE_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_STRING_NOT_LIKE_IF_EXISTS = ComparisonOperator.AddMember("STRING_NOT_LIKE_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_EQUALS_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_NOT_EQUALS_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_LESS_THAN_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_LESS_THAN_EQUALS_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN_IF_EXISTS", smithyprelude.Unit)
-
-	ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS = ComparisonOperator.AddMember("NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS", smithyprelude.Unit)
-
-	_StringCriteriaValues_member = _StringCriteriaValues.AddMember("member", _StringCriteriaValue)
-
-	StringCriteriaCondition_comparison = StringCriteriaCondition.AddMember("comparison", ComparisonOperator)
-
-	StringCriteriaCondition_values = StringCriteriaCondition.AddMember("values", _StringCriteriaValues)
-
-	_StringCriteriaConditionList_member = _StringCriteriaConditionList.AddMember("member", StringCriteriaCondition)
-
-	_IntegerList_member = _IntegerList.AddMember("member", smithyprelude.Integer)
-
-	IntegerCriteriaCondition_comparison = IntegerCriteriaCondition.AddMember("comparison", ComparisonOperator)
-
-	IntegerCriteriaCondition_values = IntegerCriteriaCondition.AddMember("values", _IntegerList)
-
-	_IntegerCriteriaConditionList_member = _IntegerCriteriaConditionList.AddMember("member", IntegerCriteriaCondition)
-
-	_DoubleList_member = _DoubleList.AddMember("member", smithyprelude.Double)
-
-	DoubleCriteriaCondition_comparison = DoubleCriteriaCondition.AddMember("comparison", ComparisonOperator)
-
-	DoubleCriteriaCondition_values = DoubleCriteriaCondition.AddMember("values", _DoubleList)
-
-	_DoubleCriteriaConditionList_member = _DoubleCriteriaConditionList.AddMember("member", DoubleCriteriaCondition)
-
-	ResourceTagsCriteriaCondition_comparison = ResourceTagsCriteriaCondition.AddMember("comparison", ComparisonOperator)
-
-	ResourceTagsCriteriaCondition_key = ResourceTagsCriteriaCondition.AddMember("key", _StringCriteriaValue)
-
-	ResourceTagsCriteriaCondition_values = ResourceTagsCriteriaCondition.AddMember("values", _StringCriteriaValues)
-
-	_ResourceTagsCriteriaConditionList_member = _ResourceTagsCriteriaConditionList.AddMember("member", ResourceTagsCriteriaCondition)
-
-	Criteria_region = Criteria.AddMember("region", _StringCriteriaConditionList)
-
-	Criteria_resourceArn = Criteria.AddMember("resourceArn", _StringCriteriaConditionList)
-
-	Criteria_ebsVolumeType = Criteria.AddMember("ebsVolumeType", _StringCriteriaConditionList)
-
-	Criteria_ebsVolumeSizeInGib = Criteria.AddMember("ebsVolumeSizeInGib", _IntegerCriteriaConditionList)
-
-	Criteria_estimatedMonthlySavings = Criteria.AddMember("estimatedMonthlySavings", _DoubleCriteriaConditionList)
-
-	Criteria_resourceTag = Criteria.AddMember("resourceTag", _ResourceTagsCriteriaConditionList)
-
-	Criteria_lookBackPeriodInDays = Criteria.AddMember("lookBackPeriodInDays", _IntegerCriteriaConditionList)
-
-	Criteria_restartNeeded = Criteria.AddMember("restartNeeded", _StringCriteriaConditionList)
-
-	EbsVolumeConfiguration_type = EbsVolumeConfiguration.AddMember("type", smithyprelude.String)
-
-	EbsVolumeConfiguration_sizeInGib = EbsVolumeConfiguration.AddMember("sizeInGib", smithyprelude.Integer)
-
-	EbsVolumeConfiguration_iops = EbsVolumeConfiguration.AddMember("iops", smithyprelude.Integer)
-
-	EbsVolumeConfiguration_throughput = EbsVolumeConfiguration.AddMember("throughput", smithyprelude.Integer)
-
-	EbsVolume_configuration = EbsVolume.AddMember("configuration", EbsVolumeConfiguration)
-
-	Filter_name = Filter.AddMember("name", _AutomationRuleFilterName)
-
-	Filter_values = Filter.AddMember("values", _FilterValues)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	ForbiddenException_message = ForbiddenException.AddMember("message", smithyprelude.String)
-
-	IdempotencyTokenInUseException_message = IdempotencyTokenInUseException.AddMember("message", smithyprelude.String)
-
-	IdempotentParameterMismatchException_message = IdempotentParameterMismatchException.AddMember("message", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	InvalidParameterValueException_message = InvalidParameterValueException.AddMember("message", smithyprelude.String)
-
-	NotManagementAccountException_message = NotManagementAccountException.AddMember("message", smithyprelude.String)
-
-	OptInRequiredException_message = OptInRequiredException.AddMember("message", smithyprelude.String)
-
-	OrganizationScope_accountIds = OrganizationScope.AddMember("accountIds", _OrganizationConfigurationAccountIds)
-
-	ResourceDetails_ebsVolume = ResourceDetails.AddMember("ebsVolume", EbsVolume)
-
-	Tag_key = Tag.AddMember("key", _TagKey)
-
-	Tag_value = Tag.AddMember("value", _TagValue)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	PreviewResult_recommendedActionId = PreviewResult.AddMember("recommendedActionId", _RecommendedActionId)
-
-	PreviewResult_resourceArn = PreviewResult.AddMember("resourceArn", _ResourceArn)
-
-	PreviewResult_resourceId = PreviewResult.AddMember("resourceId", _ResourceId)
-
-	PreviewResult_accountId = PreviewResult.AddMember("accountId", _AccountId)
-
-	PreviewResult_region = PreviewResult.AddMember("region", smithyprelude.String)
-
-	PreviewResult_resourceType = PreviewResult.AddMember("resourceType", ResourceType)
-
-	PreviewResult_lookBackPeriodInDays = PreviewResult.AddMember("lookBackPeriodInDays", smithyprelude.Integer)
-
-	PreviewResult_recommendedActionType = PreviewResult.AddMember("recommendedActionType", RecommendedActionType)
-
-	PreviewResult_currentResourceSummary = PreviewResult.AddMember("currentResourceSummary", smithyprelude.String)
-
-	PreviewResult_currentResourceDetails = PreviewResult.AddMember("currentResourceDetails", ResourceDetails)
-
-	PreviewResult_recommendedResourceSummary = PreviewResult.AddMember("recommendedResourceSummary", smithyprelude.String)
-
-	PreviewResult_recommendedResourceDetails = PreviewResult.AddMember("recommendedResourceDetails", ResourceDetails)
-
-	PreviewResult_restartNeeded = PreviewResult.AddMember("restartNeeded", smithyprelude.Boolean)
-
-	PreviewResult_estimatedMonthlySavings = PreviewResult.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	PreviewResult_resourceTags = PreviewResult.AddMember("resourceTags", _TagList)
-
-	_PreviewResults_member = _PreviewResults.AddMember("member", PreviewResult)
-
-	RulePreviewTotal_recommendedActionCount = RulePreviewTotal.AddMember("recommendedActionCount", smithyprelude.Integer)
-
-	RulePreviewTotal_estimatedMonthlySavings = RulePreviewTotal.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	PreviewResultSummary_key = PreviewResultSummary.AddMember("key", smithyprelude.String)
-
-	PreviewResultSummary_total = PreviewResultSummary.AddMember("total", RulePreviewTotal)
-
-	_PreviewResultSummaries_member = _PreviewResultSummaries.AddMember("member", PreviewResultSummary)
-
-	RecommendedAction_recommendedActionId = RecommendedAction.AddMember("recommendedActionId", _RecommendedActionId)
-
-	RecommendedAction_resourceArn = RecommendedAction.AddMember("resourceArn", _ResourceArn)
-
-	RecommendedAction_resourceId = RecommendedAction.AddMember("resourceId", _ResourceId)
-
-	RecommendedAction_accountId = RecommendedAction.AddMember("accountId", _AccountId)
-
-	RecommendedAction_region = RecommendedAction.AddMember("region", smithyprelude.String)
-
-	RecommendedAction_resourceType = RecommendedAction.AddMember("resourceType", ResourceType)
-
-	RecommendedAction_lookBackPeriodInDays = RecommendedAction.AddMember("lookBackPeriodInDays", smithyprelude.Integer)
-
-	RecommendedAction_recommendedActionType = RecommendedAction.AddMember("recommendedActionType", RecommendedActionType)
-
-	RecommendedAction_currentResourceSummary = RecommendedAction.AddMember("currentResourceSummary", smithyprelude.String)
-
-	RecommendedAction_currentResourceDetails = RecommendedAction.AddMember("currentResourceDetails", ResourceDetails)
-
-	RecommendedAction_recommendedResourceSummary = RecommendedAction.AddMember("recommendedResourceSummary", smithyprelude.String)
-
-	RecommendedAction_recommendedResourceDetails = RecommendedAction.AddMember("recommendedResourceDetails", ResourceDetails)
-
-	RecommendedAction_restartNeeded = RecommendedAction.AddMember("restartNeeded", smithyprelude.Boolean)
-
-	RecommendedAction_estimatedMonthlySavings = RecommendedAction.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	RecommendedAction_resourceTags = RecommendedAction.AddMember("resourceTags", _TagList)
-
-	RecommendedActionFilter_name = RecommendedActionFilter.AddMember("name", _RecommendedActionFilterName)
-
-	RecommendedActionFilter_values = RecommendedActionFilter.AddMember("values", _FilterValues)
-
-	_RecommendedActionFilterList_member = _RecommendedActionFilterList.AddMember("member", RecommendedActionFilter)
-
-	_RecommendedActions_member = _RecommendedActions.AddMember("member", RecommendedAction)
-
-	RecommendedActionTotal_recommendedActionCount = RecommendedActionTotal.AddMember("recommendedActionCount", smithyprelude.Integer)
-
-	RecommendedActionTotal_estimatedMonthlySavings = RecommendedActionTotal.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	RecommendedActionSummary_key = RecommendedActionSummary.AddMember("key", smithyprelude.String)
-
-	RecommendedActionSummary_total = RecommendedActionSummary.AddMember("total", RecommendedActionTotal)
-
-	_RecommendedActionSummaries_member = _RecommendedActionSummaries.AddMember("member", RecommendedActionSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	ServiceUnavailableException_message = ServiceUnavailableException.AddMember("message", smithyprelude.String)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	AssociateAccountsRequest_accountIds = AssociateAccountsRequest.AddMember("accountIds", _AccountIdList)
-
-	AssociateAccountsRequest_clientToken = AssociateAccountsRequest.AddMember("clientToken", _ClientToken)
-
-	AssociateAccountsResponse_accountIds = AssociateAccountsResponse.AddMember("accountIds", _AccountIdList)
-
-	AssociateAccountsResponse_errors = AssociateAccountsResponse.AddMember("errors", _StringList)
-
-	CreateAutomationRuleRequest_name = CreateAutomationRuleRequest.AddMember("name", _RuleName)
-
-	CreateAutomationRuleRequest_description = CreateAutomationRuleRequest.AddMember("description", _RuleDescription)
-
-	CreateAutomationRuleRequest_ruleType = CreateAutomationRuleRequest.AddMember("ruleType", RuleType)
-
-	CreateAutomationRuleRequest_organizationConfiguration = CreateAutomationRuleRequest.AddMember("organizationConfiguration", OrganizationConfiguration)
-
-	CreateAutomationRuleRequest_priority = CreateAutomationRuleRequest.AddMember("priority", smithyprelude.String)
-
-	CreateAutomationRuleRequest_recommendedActionTypes = CreateAutomationRuleRequest.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	CreateAutomationRuleRequest_criteria = CreateAutomationRuleRequest.AddMember("criteria", Criteria)
-
-	CreateAutomationRuleRequest_schedule = CreateAutomationRuleRequest.AddMember("schedule", Schedule)
-
-	CreateAutomationRuleRequest_status = CreateAutomationRuleRequest.AddMember("status", RuleStatus)
-
-	CreateAutomationRuleRequest_tags = CreateAutomationRuleRequest.AddMember("tags", _TagList)
-
-	CreateAutomationRuleRequest_clientToken = CreateAutomationRuleRequest.AddMember("clientToken", _ClientToken)
-
-	CreateAutomationRuleResponse_ruleArn = CreateAutomationRuleResponse.AddMember("ruleArn", _RuleArn)
-
-	CreateAutomationRuleResponse_ruleId = CreateAutomationRuleResponse.AddMember("ruleId", _RuleId)
-
-	CreateAutomationRuleResponse_name = CreateAutomationRuleResponse.AddMember("name", _RuleName)
-
-	CreateAutomationRuleResponse_description = CreateAutomationRuleResponse.AddMember("description", smithyprelude.String)
-
-	CreateAutomationRuleResponse_ruleType = CreateAutomationRuleResponse.AddMember("ruleType", RuleType)
-
-	CreateAutomationRuleResponse_ruleRevision = CreateAutomationRuleResponse.AddMember("ruleRevision", smithyprelude.Long)
-
-	CreateAutomationRuleResponse_organizationConfiguration = CreateAutomationRuleResponse.AddMember("organizationConfiguration", OrganizationConfiguration)
-
-	CreateAutomationRuleResponse_priority = CreateAutomationRuleResponse.AddMember("priority", smithyprelude.String)
-
-	CreateAutomationRuleResponse_recommendedActionTypes = CreateAutomationRuleResponse.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	CreateAutomationRuleResponse_criteria = CreateAutomationRuleResponse.AddMember("criteria", Criteria)
-
-	CreateAutomationRuleResponse_schedule = CreateAutomationRuleResponse.AddMember("schedule", Schedule)
-
-	CreateAutomationRuleResponse_status = CreateAutomationRuleResponse.AddMember("status", RuleStatus)
-
-	CreateAutomationRuleResponse_tags = CreateAutomationRuleResponse.AddMember("tags", _TagList)
-
-	CreateAutomationRuleResponse_createdTimestamp = CreateAutomationRuleResponse.AddMember("createdTimestamp", smithyprelude.Timestamp)
-
-	DeleteAutomationRuleRequest_ruleArn = DeleteAutomationRuleRequest.AddMember("ruleArn", _RuleArn)
-
-	DeleteAutomationRuleRequest_ruleRevision = DeleteAutomationRuleRequest.AddMember("ruleRevision", smithyprelude.Long)
-
-	DeleteAutomationRuleRequest_clientToken = DeleteAutomationRuleRequest.AddMember("clientToken", _ClientToken)
-
-	DisassociateAccountsRequest_accountIds = DisassociateAccountsRequest.AddMember("accountIds", _AccountIdList)
-
-	DisassociateAccountsRequest_clientToken = DisassociateAccountsRequest.AddMember("clientToken", _ClientToken)
-
-	DisassociateAccountsResponse_accountIds = DisassociateAccountsResponse.AddMember("accountIds", _AccountIdList)
-
-	DisassociateAccountsResponse_errors = DisassociateAccountsResponse.AddMember("errors", _StringList)
-
-	GetAutomationEventRequest_eventId = GetAutomationEventRequest.AddMember("eventId", _EventId)
-
-	GetAutomationEventResponse_eventId = GetAutomationEventResponse.AddMember("eventId", _EventId)
-
-	GetAutomationEventResponse_eventDescription = GetAutomationEventResponse.AddMember("eventDescription", smithyprelude.String)
-
-	GetAutomationEventResponse_eventType = GetAutomationEventResponse.AddMember("eventType", EventType)
-
-	GetAutomationEventResponse_eventStatus = GetAutomationEventResponse.AddMember("eventStatus", EventStatus)
-
-	GetAutomationEventResponse_eventStatusReason = GetAutomationEventResponse.AddMember("eventStatusReason", smithyprelude.String)
-
-	GetAutomationEventResponse_resourceArn = GetAutomationEventResponse.AddMember("resourceArn", _ResourceArn)
-
-	GetAutomationEventResponse_resourceId = GetAutomationEventResponse.AddMember("resourceId", _ResourceId)
-
-	GetAutomationEventResponse_recommendedActionId = GetAutomationEventResponse.AddMember("recommendedActionId", _RecommendedActionId)
-
-	GetAutomationEventResponse_accountId = GetAutomationEventResponse.AddMember("accountId", _AccountId)
-
-	GetAutomationEventResponse_region = GetAutomationEventResponse.AddMember("region", smithyprelude.String)
-
-	GetAutomationEventResponse_ruleId = GetAutomationEventResponse.AddMember("ruleId", _RuleId)
-
-	GetAutomationEventResponse_resourceType = GetAutomationEventResponse.AddMember("resourceType", ResourceType)
-
-	GetAutomationEventResponse_createdTimestamp = GetAutomationEventResponse.AddMember("createdTimestamp", smithyprelude.Timestamp)
-
-	GetAutomationEventResponse_completedTimestamp = GetAutomationEventResponse.AddMember("completedTimestamp", smithyprelude.Timestamp)
-
-	GetAutomationEventResponse_estimatedMonthlySavings = GetAutomationEventResponse.AddMember("estimatedMonthlySavings", EstimatedMonthlySavings)
-
-	GetAutomationRuleRequest_ruleArn = GetAutomationRuleRequest.AddMember("ruleArn", _RuleArn)
-
-	GetAutomationRuleResponse_ruleArn = GetAutomationRuleResponse.AddMember("ruleArn", _RuleArn)
-
-	GetAutomationRuleResponse_ruleId = GetAutomationRuleResponse.AddMember("ruleId", _RuleId)
-
-	GetAutomationRuleResponse_name = GetAutomationRuleResponse.AddMember("name", _RuleName)
-
-	GetAutomationRuleResponse_description = GetAutomationRuleResponse.AddMember("description", smithyprelude.String)
-
-	GetAutomationRuleResponse_ruleType = GetAutomationRuleResponse.AddMember("ruleType", RuleType)
-
-	GetAutomationRuleResponse_ruleRevision = GetAutomationRuleResponse.AddMember("ruleRevision", smithyprelude.Long)
-
-	GetAutomationRuleResponse_accountId = GetAutomationRuleResponse.AddMember("accountId", _AccountId)
-
-	GetAutomationRuleResponse_organizationConfiguration = GetAutomationRuleResponse.AddMember("organizationConfiguration", OrganizationConfiguration)
-
-	GetAutomationRuleResponse_priority = GetAutomationRuleResponse.AddMember("priority", smithyprelude.String)
-
-	GetAutomationRuleResponse_recommendedActionTypes = GetAutomationRuleResponse.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	GetAutomationRuleResponse_criteria = GetAutomationRuleResponse.AddMember("criteria", Criteria)
-
-	GetAutomationRuleResponse_schedule = GetAutomationRuleResponse.AddMember("schedule", Schedule)
-
-	GetAutomationRuleResponse_status = GetAutomationRuleResponse.AddMember("status", RuleStatus)
-
-	GetAutomationRuleResponse_tags = GetAutomationRuleResponse.AddMember("tags", _TagList)
-
-	GetAutomationRuleResponse_createdTimestamp = GetAutomationRuleResponse.AddMember("createdTimestamp", smithyprelude.Timestamp)
-
-	GetAutomationRuleResponse_lastUpdatedTimestamp = GetAutomationRuleResponse.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	GetEnrollmentConfigurationResponse_status = GetEnrollmentConfigurationResponse.AddMember("status", EnrollmentStatus)
-
-	GetEnrollmentConfigurationResponse_statusReason = GetEnrollmentConfigurationResponse.AddMember("statusReason", smithyprelude.String)
-
-	GetEnrollmentConfigurationResponse_organizationRuleMode = GetEnrollmentConfigurationResponse.AddMember("organizationRuleMode", OrganizationRuleMode)
-
-	GetEnrollmentConfigurationResponse_lastUpdatedTimestamp = GetEnrollmentConfigurationResponse.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	ListAccountsRequest_maxResults = ListAccountsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAccountsRequest_nextToken = ListAccountsRequest.AddMember("nextToken", _NextToken)
-
-	ListAccountsResponse_accounts = ListAccountsResponse.AddMember("accounts", _AccountInfoList)
-
-	ListAccountsResponse_nextToken = ListAccountsResponse.AddMember("nextToken", _NextToken)
-
-	ListAutomationEventsRequest_filters = ListAutomationEventsRequest.AddMember("filters", _AutomationEventFilterList)
-
-	ListAutomationEventsRequest_startTimeInclusive = ListAutomationEventsRequest.AddMember("startTimeInclusive", smithyprelude.Timestamp)
-
-	ListAutomationEventsRequest_endTimeExclusive = ListAutomationEventsRequest.AddMember("endTimeExclusive", smithyprelude.Timestamp)
-
-	ListAutomationEventsRequest_maxResults = ListAutomationEventsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAutomationEventsRequest_nextToken = ListAutomationEventsRequest.AddMember("nextToken", _NextToken)
-
-	ListAutomationEventsResponse_automationEvents = ListAutomationEventsResponse.AddMember("automationEvents", _AutomationEvents)
-
-	ListAutomationEventsResponse_nextToken = ListAutomationEventsResponse.AddMember("nextToken", _NextToken)
-
-	ListAutomationEventStepsRequest_eventId = ListAutomationEventStepsRequest.AddMember("eventId", _EventId)
-
-	ListAutomationEventStepsRequest_maxResults = ListAutomationEventStepsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAutomationEventStepsRequest_nextToken = ListAutomationEventStepsRequest.AddMember("nextToken", _NextToken)
-
-	ListAutomationEventStepsResponse_automationEventSteps = ListAutomationEventStepsResponse.AddMember("automationEventSteps", _AutomationEventSteps)
-
-	ListAutomationEventStepsResponse_nextToken = ListAutomationEventStepsResponse.AddMember("nextToken", _NextToken)
-
-	ListAutomationEventSummariesRequest_filters = ListAutomationEventSummariesRequest.AddMember("filters", _AutomationEventFilterList)
-
-	ListAutomationEventSummariesRequest_startDateInclusive = ListAutomationEventSummariesRequest.AddMember("startDateInclusive", smithyprelude.String)
-
-	ListAutomationEventSummariesRequest_endDateExclusive = ListAutomationEventSummariesRequest.AddMember("endDateExclusive", smithyprelude.String)
-
-	ListAutomationEventSummariesRequest_maxResults = ListAutomationEventSummariesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAutomationEventSummariesRequest_nextToken = ListAutomationEventSummariesRequest.AddMember("nextToken", _NextToken)
-
-	ListAutomationEventSummariesResponse_automationEventSummaries = ListAutomationEventSummariesResponse.AddMember("automationEventSummaries", _AutomationEventSummaryList)
-
-	ListAutomationEventSummariesResponse_nextToken = ListAutomationEventSummariesResponse.AddMember("nextToken", _NextToken)
-
-	ListAutomationRulePreviewRequest_ruleType = ListAutomationRulePreviewRequest.AddMember("ruleType", RuleType)
-
-	ListAutomationRulePreviewRequest_organizationScope = ListAutomationRulePreviewRequest.AddMember("organizationScope", OrganizationScope)
-
-	ListAutomationRulePreviewRequest_recommendedActionTypes = ListAutomationRulePreviewRequest.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	ListAutomationRulePreviewRequest_criteria = ListAutomationRulePreviewRequest.AddMember("criteria", Criteria)
-
-	ListAutomationRulePreviewRequest_maxResults = ListAutomationRulePreviewRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAutomationRulePreviewRequest_nextToken = ListAutomationRulePreviewRequest.AddMember("nextToken", _NextToken)
-
-	ListAutomationRulePreviewResponse_previewResults = ListAutomationRulePreviewResponse.AddMember("previewResults", _PreviewResults)
-
-	ListAutomationRulePreviewResponse_nextToken = ListAutomationRulePreviewResponse.AddMember("nextToken", _NextToken)
-
-	ListAutomationRulePreviewSummariesRequest_ruleType = ListAutomationRulePreviewSummariesRequest.AddMember("ruleType", RuleType)
-
-	ListAutomationRulePreviewSummariesRequest_organizationScope = ListAutomationRulePreviewSummariesRequest.AddMember("organizationScope", OrganizationScope)
-
-	ListAutomationRulePreviewSummariesRequest_recommendedActionTypes = ListAutomationRulePreviewSummariesRequest.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	ListAutomationRulePreviewSummariesRequest_criteria = ListAutomationRulePreviewSummariesRequest.AddMember("criteria", Criteria)
-
-	ListAutomationRulePreviewSummariesRequest_maxResults = ListAutomationRulePreviewSummariesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAutomationRulePreviewSummariesRequest_nextToken = ListAutomationRulePreviewSummariesRequest.AddMember("nextToken", _NextToken)
-
-	ListAutomationRulePreviewSummariesResponse_previewResultSummaries = ListAutomationRulePreviewSummariesResponse.AddMember("previewResultSummaries", _PreviewResultSummaries)
-
-	ListAutomationRulePreviewSummariesResponse_nextToken = ListAutomationRulePreviewSummariesResponse.AddMember("nextToken", _NextToken)
-
-	ListAutomationRulesRequest_filters = ListAutomationRulesRequest.AddMember("filters", _FilterList)
-
-	ListAutomationRulesRequest_maxResults = ListAutomationRulesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListAutomationRulesRequest_nextToken = ListAutomationRulesRequest.AddMember("nextToken", _NextToken)
-
-	ListAutomationRulesResponse_automationRules = ListAutomationRulesResponse.AddMember("automationRules", _AutomationRules)
-
-	ListAutomationRulesResponse_nextToken = ListAutomationRulesResponse.AddMember("nextToken", _NextToken)
-
-	ListRecommendedActionsRequest_filters = ListRecommendedActionsRequest.AddMember("filters", _RecommendedActionFilterList)
-
-	ListRecommendedActionsRequest_maxResults = ListRecommendedActionsRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListRecommendedActionsRequest_nextToken = ListRecommendedActionsRequest.AddMember("nextToken", _NextToken)
-
-	ListRecommendedActionsResponse_recommendedActions = ListRecommendedActionsResponse.AddMember("recommendedActions", _RecommendedActions)
-
-	ListRecommendedActionsResponse_nextToken = ListRecommendedActionsResponse.AddMember("nextToken", _NextToken)
-
-	ListRecommendedActionSummariesRequest_filters = ListRecommendedActionSummariesRequest.AddMember("filters", _RecommendedActionFilterList)
-
-	ListRecommendedActionSummariesRequest_maxResults = ListRecommendedActionSummariesRequest.AddMember("maxResults", smithyprelude.Integer)
-
-	ListRecommendedActionSummariesRequest_nextToken = ListRecommendedActionSummariesRequest.AddMember("nextToken", _NextToken)
-
-	ListRecommendedActionSummariesResponse_recommendedActionSummaries = ListRecommendedActionSummariesResponse.AddMember("recommendedActionSummaries", _RecommendedActionSummaries)
-
-	ListRecommendedActionSummariesResponse_nextToken = ListRecommendedActionSummariesResponse.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _RuleArn)
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagList)
-
-	RollbackAutomationEventRequest_eventId = RollbackAutomationEventRequest.AddMember("eventId", _EventId)
-
-	RollbackAutomationEventRequest_clientToken = RollbackAutomationEventRequest.AddMember("clientToken", _ClientToken)
-
-	RollbackAutomationEventResponse_eventId = RollbackAutomationEventResponse.AddMember("eventId", _EventId)
-
-	RollbackAutomationEventResponse_eventStatus = RollbackAutomationEventResponse.AddMember("eventStatus", EventStatus)
-
-	StartAutomationEventRequest_recommendedActionId = StartAutomationEventRequest.AddMember("recommendedActionId", _RecommendedActionId)
-
-	StartAutomationEventRequest_clientToken = StartAutomationEventRequest.AddMember("clientToken", _ClientToken)
-
-	StartAutomationEventResponse_recommendedActionId = StartAutomationEventResponse.AddMember("recommendedActionId", _RecommendedActionId)
-
-	StartAutomationEventResponse_eventId = StartAutomationEventResponse.AddMember("eventId", _EventId)
-
-	StartAutomationEventResponse_eventStatus = StartAutomationEventResponse.AddMember("eventStatus", EventStatus)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _RuleArn)
-
-	TagResourceRequest_ruleRevision = TagResourceRequest.AddMember("ruleRevision", smithyprelude.Long)
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagList)
-
-	TagResourceRequest_clientToken = TagResourceRequest.AddMember("clientToken", _ClientToken)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _RuleArn)
-
-	UntagResourceRequest_ruleRevision = UntagResourceRequest.AddMember("ruleRevision", smithyprelude.Long)
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList)
-
-	UntagResourceRequest_clientToken = UntagResourceRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateAutomationRuleRequest_ruleArn = UpdateAutomationRuleRequest.AddMember("ruleArn", _RuleArn)
-
-	UpdateAutomationRuleRequest_ruleRevision = UpdateAutomationRuleRequest.AddMember("ruleRevision", smithyprelude.Long)
-
-	UpdateAutomationRuleRequest_name = UpdateAutomationRuleRequest.AddMember("name", _RuleName)
-
-	UpdateAutomationRuleRequest_description = UpdateAutomationRuleRequest.AddMember("description", _RuleDescription)
-
-	UpdateAutomationRuleRequest_ruleType = UpdateAutomationRuleRequest.AddMember("ruleType", RuleType)
-
-	UpdateAutomationRuleRequest_organizationConfiguration = UpdateAutomationRuleRequest.AddMember("organizationConfiguration", OrganizationConfiguration)
-
-	UpdateAutomationRuleRequest_priority = UpdateAutomationRuleRequest.AddMember("priority", smithyprelude.String)
-
-	UpdateAutomationRuleRequest_recommendedActionTypes = UpdateAutomationRuleRequest.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	UpdateAutomationRuleRequest_criteria = UpdateAutomationRuleRequest.AddMember("criteria", Criteria)
-
-	UpdateAutomationRuleRequest_schedule = UpdateAutomationRuleRequest.AddMember("schedule", Schedule)
-
-	UpdateAutomationRuleRequest_status = UpdateAutomationRuleRequest.AddMember("status", RuleStatus)
-
-	UpdateAutomationRuleRequest_clientToken = UpdateAutomationRuleRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateAutomationRuleResponse_ruleArn = UpdateAutomationRuleResponse.AddMember("ruleArn", _RuleArn)
-
-	UpdateAutomationRuleResponse_ruleRevision = UpdateAutomationRuleResponse.AddMember("ruleRevision", smithyprelude.Long)
-
-	UpdateAutomationRuleResponse_name = UpdateAutomationRuleResponse.AddMember("name", _RuleName)
-
-	UpdateAutomationRuleResponse_description = UpdateAutomationRuleResponse.AddMember("description", smithyprelude.String)
-
-	UpdateAutomationRuleResponse_ruleType = UpdateAutomationRuleResponse.AddMember("ruleType", RuleType)
-
-	UpdateAutomationRuleResponse_organizationConfiguration = UpdateAutomationRuleResponse.AddMember("organizationConfiguration", OrganizationConfiguration)
-
-	UpdateAutomationRuleResponse_priority = UpdateAutomationRuleResponse.AddMember("priority", smithyprelude.String)
-
-	UpdateAutomationRuleResponse_recommendedActionTypes = UpdateAutomationRuleResponse.AddMember("recommendedActionTypes", _RecommendedActionTypeList)
-
-	UpdateAutomationRuleResponse_criteria = UpdateAutomationRuleResponse.AddMember("criteria", Criteria)
-
-	UpdateAutomationRuleResponse_schedule = UpdateAutomationRuleResponse.AddMember("schedule", Schedule)
-
-	UpdateAutomationRuleResponse_status = UpdateAutomationRuleResponse.AddMember("status", RuleStatus)
-
-	UpdateAutomationRuleResponse_createdTimestamp = UpdateAutomationRuleResponse.AddMember("createdTimestamp", smithyprelude.Timestamp)
-
-	UpdateAutomationRuleResponse_lastUpdatedTimestamp = UpdateAutomationRuleResponse.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
-
-	UpdateEnrollmentConfigurationRequest_status = UpdateEnrollmentConfigurationRequest.AddMember("status", EnrollmentStatus)
-
-	UpdateEnrollmentConfigurationRequest_clientToken = UpdateEnrollmentConfigurationRequest.AddMember("clientToken", _ClientToken)
-
-	UpdateEnrollmentConfigurationResponse_status = UpdateEnrollmentConfigurationResponse.AddMember("status", EnrollmentStatus)
-
-	UpdateEnrollmentConfigurationResponse_statusReason = UpdateEnrollmentConfigurationResponse.AddMember("statusReason", smithyprelude.String)
-
-	UpdateEnrollmentConfigurationResponse_lastUpdatedTimestamp = UpdateEnrollmentConfigurationResponse.AddMember("lastUpdatedTimestamp", smithyprelude.Timestamp)
-
-}
+var (
+	iAssociateAccounts                          = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AssociateAccounts"}
+	iCreateAutomationRule                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "CreateAutomationRule"}
+	iDeleteAutomationRule                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DeleteAutomationRule"}
+	iDisassociateAccounts                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DisassociateAccounts"}
+	iGetAutomationEvent                         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetAutomationEvent"}
+	iGetAutomationRule                          = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetAutomationRule"}
+	iGetEnrollmentConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetEnrollmentConfiguration"}
+	iListAccounts                               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAccounts"}
+	iListAutomationEvents                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEvents"}
+	iListAutomationEventSteps                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventSteps"}
+	iListAutomationEventSummaries               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventSummaries"}
+	iListAutomationRulePreview                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulePreview"}
+	iListAutomationRulePreviewSummaries         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulePreviewSummaries"}
+	iListAutomationRules                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRules"}
+	iListRecommendedActions                     = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListRecommendedActions"}
+	iListRecommendedActionSummaries             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListRecommendedActionSummaries"}
+	iListTagsForResource                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListTagsForResource"}
+	iRollbackAutomationEvent                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RollbackAutomationEvent"}
+	iStartAutomationEvent                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StartAutomationEvent"}
+	iTagResource                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TagResource"}
+	iUntagResource                              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UntagResource"}
+	iUpdateAutomationRule                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UpdateAutomationRule"}
+	iUpdateEnrollmentConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UpdateEnrollmentConfiguration"}
+	i_ComputeOptimizerAutomationService         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ComputeOptimizerAutomationService"}
+	iAccessDeniedException                      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AccessDeniedException"}
+	i_AccountId                                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AccountId"}
+	i_AccountIdList                             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AccountIdList"}
+	iAccountInfo                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AccountInfo"}
+	i_AccountInfoList                           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AccountInfoList"}
+	iAutomationEvent                            = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEvent"}
+	iAutomationEventFilter                      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEventFilter"}
+	i_AutomationEventFilterList                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEventFilterList"}
+	i_AutomationEventFilterName                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEventFilterName"}
+	i_AutomationEvents                          = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEvents"}
+	iAutomationEventStep                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEventStep"}
+	i_AutomationEventSteps                      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEventSteps"}
+	iAutomationEventSummary                     = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEventSummary"}
+	i_AutomationEventSummaryList                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationEventSummaryList"}
+	iAutomationRule                             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationRule"}
+	i_AutomationRuleFilterName                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationRuleFilterName"}
+	i_AutomationRules                           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AutomationRules"}
+	i_ClientToken                               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ClientToken"}
+	iComparisonOperator                         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ComparisonOperator"}
+	iCriteria                                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "Criteria"}
+	iDoubleCriteriaCondition                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DoubleCriteriaCondition"}
+	i_DoubleCriteriaConditionList               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DoubleCriteriaConditionList"}
+	i_DoubleList                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DoubleList"}
+	iEbsVolume                                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "EbsVolume"}
+	iEbsVolumeConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "EbsVolumeConfiguration"}
+	iEnrollmentStatus                           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "EnrollmentStatus"}
+	iEstimatedMonthlySavings                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "EstimatedMonthlySavings"}
+	i_EventId                                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "EventId"}
+	iEventStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "EventStatus"}
+	iEventType                                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "EventType"}
+	iFilter                                     = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "Filter"}
+	i_FilterList                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "FilterList"}
+	i_FilterValue                               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "FilterValue"}
+	i_FilterValues                              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "FilterValues"}
+	iForbiddenException                         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ForbiddenException"}
+	iIdempotencyTokenInUseException             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "IdempotencyTokenInUseException"}
+	iIdempotentParameterMismatchException       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "IdempotentParameterMismatchException"}
+	iIntegerCriteriaCondition                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "IntegerCriteriaCondition"}
+	i_IntegerCriteriaConditionList              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "IntegerCriteriaConditionList"}
+	i_IntegerList                               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "IntegerList"}
+	iInternalServerException                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "InternalServerException"}
+	iInvalidParameterValueException             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "InvalidParameterValueException"}
+	i_NextToken                                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "NextToken"}
+	iNotManagementAccountException              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "NotManagementAccountException"}
+	iOptInRequiredException                     = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "OptInRequiredException"}
+	iOrganizationConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "OrganizationConfiguration"}
+	i_OrganizationConfigurationAccountIds       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "OrganizationConfigurationAccountIds"}
+	iOrganizationRuleMode                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "OrganizationRuleMode"}
+	iOrganizationScope                          = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "OrganizationScope"}
+	iPreviewResult                              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "PreviewResult"}
+	i_PreviewResults                            = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "PreviewResults"}
+	i_PreviewResultSummaries                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "PreviewResultSummaries"}
+	iPreviewResultSummary                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "PreviewResultSummary"}
+	iRecommendedAction                          = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedAction"}
+	iRecommendedActionFilter                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionFilter"}
+	i_RecommendedActionFilterList               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionFilterList"}
+	i_RecommendedActionFilterName               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionFilterName"}
+	i_RecommendedActionId                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionId"}
+	i_RecommendedActions                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActions"}
+	i_RecommendedActionSummaries                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionSummaries"}
+	iRecommendedActionSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionSummary"}
+	iRecommendedActionTotal                     = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionTotal"}
+	iRecommendedActionType                      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionType"}
+	i_RecommendedActionTypeList                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RecommendedActionTypeList"}
+	i_ResourceArn                               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ResourceArn"}
+	iResourceDetails                            = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ResourceDetails"}
+	i_ResourceId                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ResourceId"}
+	iResourceNotFoundException                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ResourceNotFoundException"}
+	iResourceTagsCriteriaCondition              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ResourceTagsCriteriaCondition"}
+	i_ResourceTagsCriteriaConditionList         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ResourceTagsCriteriaConditionList"}
+	iResourceType                               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ResourceType"}
+	iRuleApplyOrder                             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RuleApplyOrder"}
+	i_RuleArn                                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RuleArn"}
+	i_RuleDescription                           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RuleDescription"}
+	i_RuleId                                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RuleId"}
+	i_RuleName                                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RuleName"}
+	iRulePreviewTotal                           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RulePreviewTotal"}
+	iRuleStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RuleStatus"}
+	iRuleType                                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RuleType"}
+	iSavingsEstimationMode                      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "SavingsEstimationMode"}
+	iSchedule                                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "Schedule"}
+	iServiceQuotaExceededException              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ServiceQuotaExceededException"}
+	iServiceUnavailableException                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ServiceUnavailableException"}
+	i_StepId                                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StepId"}
+	iStepStatus                                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StepStatus"}
+	iStepType                                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StepType"}
+	iStringCriteriaCondition                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StringCriteriaCondition"}
+	i_StringCriteriaConditionList               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StringCriteriaConditionList"}
+	i_StringCriteriaValue                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StringCriteriaValue"}
+	i_StringCriteriaValues                      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StringCriteriaValues"}
+	i_StringList                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StringList"}
+	iSummaryDimension                           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "SummaryDimension"}
+	i_SummaryDimensionKey                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "SummaryDimensionKey"}
+	i_SummaryDimensions                         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "SummaryDimensions"}
+	iSummaryTotals                              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "SummaryTotals"}
+	iTag                                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "Tag"}
+	i_TagKey                                    = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TagKey"}
+	i_TagKeyList                                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TagKeyList"}
+	i_TagList                                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TagList"}
+	i_TagValue                                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TagValue"}
+	iThrottlingException                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ThrottlingException"}
+	iTimePeriod                                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TimePeriod"}
+	iAssociateAccountsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AssociateAccountsRequest"}
+	iAssociateAccountsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "AssociateAccountsResponse"}
+	iCreateAutomationRuleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "CreateAutomationRuleRequest"}
+	iCreateAutomationRuleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "CreateAutomationRuleResponse"}
+	iDeleteAutomationRuleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DeleteAutomationRuleRequest"}
+	iDeleteAutomationRuleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DeleteAutomationRuleResponse"}
+	iDisassociateAccountsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DisassociateAccountsRequest"}
+	iDisassociateAccountsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "DisassociateAccountsResponse"}
+	iGetAutomationEventRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetAutomationEventRequest"}
+	iGetAutomationEventResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetAutomationEventResponse"}
+	iGetAutomationRuleRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetAutomationRuleRequest"}
+	iGetAutomationRuleResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetAutomationRuleResponse"}
+	iGetEnrollmentConfigurationRequest          = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetEnrollmentConfigurationRequest"}
+	iGetEnrollmentConfigurationResponse         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "GetEnrollmentConfigurationResponse"}
+	iListAccountsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAccountsRequest"}
+	iListAccountsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAccountsResponse"}
+	iListAutomationEventsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventsRequest"}
+	iListAutomationEventsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventsResponse"}
+	iListAutomationEventStepsRequest            = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventStepsRequest"}
+	iListAutomationEventStepsResponse           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventStepsResponse"}
+	iListAutomationEventSummariesRequest        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventSummariesRequest"}
+	iListAutomationEventSummariesResponse       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationEventSummariesResponse"}
+	iListAutomationRulePreviewRequest           = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulePreviewRequest"}
+	iListAutomationRulePreviewResponse          = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulePreviewResponse"}
+	iListAutomationRulePreviewSummariesRequest  = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulePreviewSummariesRequest"}
+	iListAutomationRulePreviewSummariesResponse = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulePreviewSummariesResponse"}
+	iListAutomationRulesRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulesRequest"}
+	iListAutomationRulesResponse                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListAutomationRulesResponse"}
+	iListRecommendedActionsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListRecommendedActionsRequest"}
+	iListRecommendedActionsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListRecommendedActionsResponse"}
+	iListRecommendedActionSummariesRequest      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListRecommendedActionSummariesRequest"}
+	iListRecommendedActionSummariesResponse     = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListRecommendedActionSummariesResponse"}
+	iListTagsForResourceRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "ListTagsForResourceResponse"}
+	iRollbackAutomationEventRequest             = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RollbackAutomationEventRequest"}
+	iRollbackAutomationEventResponse            = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "RollbackAutomationEventResponse"}
+	iStartAutomationEventRequest                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StartAutomationEventRequest"}
+	iStartAutomationEventResponse               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "StartAutomationEventResponse"}
+	iTagResourceRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TagResourceRequest"}
+	iTagResourceResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "TagResourceResponse"}
+	iUntagResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UntagResourceResponse"}
+	iUpdateAutomationRuleRequest                = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UpdateAutomationRuleRequest"}
+	iUpdateAutomationRuleResponse               = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UpdateAutomationRuleResponse"}
+	iUpdateEnrollmentConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UpdateEnrollmentConfigurationRequest"}
+	iUpdateEnrollmentConfigurationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.computeoptimizerautomation", Name: "UpdateEnrollmentConfigurationResponse"}
+	pString                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pLong                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+	pUnit                                       = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pDouble                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Double"}
+	pInteger                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var m_AccountIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountIdList_member}}
+var mAccountInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sAccountInfo_accountId, &sAccountInfo_status, &sAccountInfo_organizationRuleMode, &sAccountInfo_statusReason, &sAccountInfo_lastUpdatedTimestamp}}
+var m_AccountInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AccountInfoList_member}}
+var mAutomationEvent = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomationEvent_eventId, &sAutomationEvent_eventDescription, &sAutomationEvent_eventType, &sAutomationEvent_eventStatus, &sAutomationEvent_eventStatusReason, &sAutomationEvent_resourceArn, &sAutomationEvent_resourceId, &sAutomationEvent_recommendedActionId, &sAutomationEvent_accountId, &sAutomationEvent_region, &sAutomationEvent_ruleId, &sAutomationEvent_resourceType, &sAutomationEvent_createdTimestamp, &sAutomationEvent_completedTimestamp, &sAutomationEvent_estimatedMonthlySavings}, Seed: 7, Slots: []uint16{
+	0, 0, 13, 8, 0, 7, 10, 15, 14, 0, 11, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 6, 9, 0,
+	2, 0, 0, 12, 0, 0, 1, 4,
+}}
+var mAutomationEventFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomationEventFilter_name, &sAutomationEventFilter_values}}
+var m_AutomationEventFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomationEventFilterList_member}}
+var m_AutomationEvents = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomationEvents_member}}
+var mAutomationEventStep = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomationEventStep_eventId, &sAutomationEventStep_stepId, &sAutomationEventStep_stepType, &sAutomationEventStep_stepStatus, &sAutomationEventStep_resourceId, &sAutomationEventStep_startTimestamp, &sAutomationEventStep_completedTimestamp, &sAutomationEventStep_estimatedMonthlySavings}}
+var m_AutomationEventSteps = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomationEventSteps_member}}
+var mAutomationEventSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomationEventSummary_key, &sAutomationEventSummary_dimensions, &sAutomationEventSummary_timePeriod, &sAutomationEventSummary_total}}
+var m_AutomationEventSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomationEventSummaryList_member}}
+var mAutomationRule = smithy.SchemaMembers{List: []*smithy.Schema{&sAutomationRule_ruleArn, &sAutomationRule_ruleId, &sAutomationRule_name, &sAutomationRule_description, &sAutomationRule_ruleType, &sAutomationRule_ruleRevision, &sAutomationRule_accountId, &sAutomationRule_organizationConfiguration, &sAutomationRule_priority, &sAutomationRule_recommendedActionTypes, &sAutomationRule_schedule, &sAutomationRule_status, &sAutomationRule_createdTimestamp, &sAutomationRule_lastUpdatedTimestamp}, Seed: 5, Slots: []uint16{
+	4, 0, 0, 0, 12, 8, 0, 0, 14, 0, 0, 0, 0, 11, 0, 0, 7, 0, 0, 5, 1, 0, 2, 0,
+	13, 6, 9, 10, 0, 0, 0, 3,
+}}
+var m_AutomationRules = smithy.SchemaMembers{List: []*smithy.Schema{&s_AutomationRules_member}}
+var mComparisonOperator = smithy.SchemaMembers{List: []*smithy.Schema{&sComparisonOperator_STRING_EQUALS, &sComparisonOperator_STRING_NOT_EQUALS, &sComparisonOperator_STRING_EQUALS_IGNORE_CASE, &sComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE, &sComparisonOperator_STRING_LIKE, &sComparisonOperator_STRING_NOT_LIKE, &sComparisonOperator_NUMERIC_EQUALS, &sComparisonOperator_NUMERIC_NOT_EQUALS, &sComparisonOperator_NUMERIC_LESS_THAN, &sComparisonOperator_NUMERIC_LESS_THAN_EQUALS, &sComparisonOperator_NUMERIC_GREATER_THAN, &sComparisonOperator_NUMERIC_GREATER_THAN_EQUALS, &sComparisonOperator_STRING_EQUALS_IF_EXISTS, &sComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS, &sComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS, &sComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS, &sComparisonOperator_STRING_LIKE_IF_EXISTS, &sComparisonOperator_STRING_NOT_LIKE_IF_EXISTS, &sComparisonOperator_NUMERIC_EQUALS_IF_EXISTS, &sComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS, &sComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS, &sComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS, &sComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS, &sComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS}, Seed: 16, Slots: []uint16{
+	4, 0, 1, 0, 10, 0, 0, 20, 13, 0, 15, 0, 0, 9, 0, 0, 2, 0, 0, 0, 22, 0, 0, 0,
+	0, 11, 0, 3, 0, 0, 0, 0, 0, 0, 17, 0, 16, 0, 0, 6, 0, 23, 0, 8, 0, 0, 7, 0,
+	0, 0, 0, 12, 18, 21, 19, 5, 0, 24, 0, 0, 0, 0, 14, 0,
+}}
+var mCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sCriteria_region, &sCriteria_resourceArn, &sCriteria_ebsVolumeType, &sCriteria_ebsVolumeSizeInGib, &sCriteria_estimatedMonthlySavings, &sCriteria_resourceTag, &sCriteria_lookBackPeriodInDays, &sCriteria_restartNeeded}}
+var mDoubleCriteriaCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sDoubleCriteriaCondition_comparison, &sDoubleCriteriaCondition_values}}
+var m_DoubleCriteriaConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DoubleCriteriaConditionList_member}}
+var m_DoubleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DoubleList_member}}
+var mEbsVolume = smithy.SchemaMembers{List: []*smithy.Schema{&sEbsVolume_configuration}}
+var mEbsVolumeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEbsVolumeConfiguration_type, &sEbsVolumeConfiguration_sizeInGib, &sEbsVolumeConfiguration_iops, &sEbsVolumeConfiguration_throughput}}
+var mEnrollmentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEnrollmentStatus_ACTIVE, &sEnrollmentStatus_INACTIVE, &sEnrollmentStatus_PENDING, &sEnrollmentStatus_FAILED}}
+var mEstimatedMonthlySavings = smithy.SchemaMembers{List: []*smithy.Schema{&sEstimatedMonthlySavings_currency, &sEstimatedMonthlySavings_beforeDiscountSavings, &sEstimatedMonthlySavings_afterDiscountSavings, &sEstimatedMonthlySavings_savingsEstimationMode}}
+var mEventStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEventStatus_READY, &sEventStatus_IN_PROGRESS, &sEventStatus_COMPLETE, &sEventStatus_FAILED, &sEventStatus_CANCELLED, &sEventStatus_ROLLBACK_READY, &sEventStatus_ROLLBACK_IN_PROGRESS, &sEventStatus_ROLLBACK_COMPLETE, &sEventStatus_ROLLBACK_FAILED}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 0, 8, 0, 0, 7, 1, 0, 9, 0, 0, 0, 0,
+	0, 0, 5, 0, 4, 3, 0, 0,
+}}
+var mEventType = smithy.SchemaMembers{List: []*smithy.Schema{&sEventType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME, &sEventType_UPGRADE_EBS_VOLUME_TYPE}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_name, &sFilter_values}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_message}}
+var mIdempotencyTokenInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sIdempotencyTokenInUseException_message}}
+var mIdempotentParameterMismatchException = smithy.SchemaMembers{List: []*smithy.Schema{&sIdempotentParameterMismatchException_message}}
+var mIntegerCriteriaCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sIntegerCriteriaCondition_comparison, &sIntegerCriteriaCondition_values}}
+var m_IntegerCriteriaConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegerCriteriaConditionList_member}}
+var m_IntegerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IntegerList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mInvalidParameterValueException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParameterValueException_message}}
+var mNotManagementAccountException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotManagementAccountException_message}}
+var mOptInRequiredException = smithy.SchemaMembers{List: []*smithy.Schema{&sOptInRequiredException_message}}
+var mOrganizationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationConfiguration_ruleApplyOrder, &sOrganizationConfiguration_accountIds}}
+var m_OrganizationConfigurationAccountIds = smithy.SchemaMembers{List: []*smithy.Schema{&s_OrganizationConfigurationAccountIds_member}}
+var mOrganizationRuleMode = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationRuleMode_ANY_ALLOWED, &sOrganizationRuleMode_NONE_ALLOWED}}
+var mOrganizationScope = smithy.SchemaMembers{List: []*smithy.Schema{&sOrganizationScope_accountIds}}
+var mPreviewResult = smithy.SchemaMembers{List: []*smithy.Schema{&sPreviewResult_recommendedActionId, &sPreviewResult_resourceArn, &sPreviewResult_resourceId, &sPreviewResult_accountId, &sPreviewResult_region, &sPreviewResult_resourceType, &sPreviewResult_lookBackPeriodInDays, &sPreviewResult_recommendedActionType, &sPreviewResult_currentResourceSummary, &sPreviewResult_currentResourceDetails, &sPreviewResult_recommendedResourceSummary, &sPreviewResult_recommendedResourceDetails, &sPreviewResult_restartNeeded, &sPreviewResult_estimatedMonthlySavings, &sPreviewResult_resourceTags}, Seed: 53, Slots: []uint16{
+	2, 0, 4, 0, 7, 14, 13, 0, 0, 0, 0, 0, 0, 0, 0, 15, 11, 0, 1, 0, 0, 5, 12, 0,
+	9, 3, 0, 8, 0, 6, 10, 0,
+}}
+var m_PreviewResults = smithy.SchemaMembers{List: []*smithy.Schema{&s_PreviewResults_member}}
+var m_PreviewResultSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_PreviewResultSummaries_member}}
+var mPreviewResultSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sPreviewResultSummary_key, &sPreviewResultSummary_total}}
+var mRecommendedAction = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendedAction_recommendedActionId, &sRecommendedAction_resourceArn, &sRecommendedAction_resourceId, &sRecommendedAction_accountId, &sRecommendedAction_region, &sRecommendedAction_resourceType, &sRecommendedAction_lookBackPeriodInDays, &sRecommendedAction_recommendedActionType, &sRecommendedAction_currentResourceSummary, &sRecommendedAction_currentResourceDetails, &sRecommendedAction_recommendedResourceSummary, &sRecommendedAction_recommendedResourceDetails, &sRecommendedAction_restartNeeded, &sRecommendedAction_estimatedMonthlySavings, &sRecommendedAction_resourceTags}, Seed: 53, Slots: []uint16{
+	2, 0, 4, 0, 7, 14, 13, 0, 0, 0, 0, 0, 0, 0, 0, 15, 11, 0, 1, 0, 0, 5, 12, 0,
+	9, 3, 0, 8, 0, 6, 10, 0,
+}}
+var mRecommendedActionFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendedActionFilter_name, &sRecommendedActionFilter_values}}
+var m_RecommendedActionFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendedActionFilterList_member}}
+var m_RecommendedActions = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendedActions_member}}
+var m_RecommendedActionSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendedActionSummaries_member}}
+var mRecommendedActionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendedActionSummary_key, &sRecommendedActionSummary_total}}
+var mRecommendedActionTotal = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendedActionTotal_recommendedActionCount, &sRecommendedActionTotal_estimatedMonthlySavings}}
+var mRecommendedActionType = smithy.SchemaMembers{List: []*smithy.Schema{&sRecommendedActionType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME, &sRecommendedActionType_UPGRADE_EBS_VOLUME_TYPE}}
+var m_RecommendedActionTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecommendedActionTypeList_member}}
+var mResourceDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceDetails_ebsVolume}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mResourceTagsCriteriaCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTagsCriteriaCondition_comparison, &sResourceTagsCriteriaCondition_key, &sResourceTagsCriteriaCondition_values}}
+var m_ResourceTagsCriteriaConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourceTagsCriteriaConditionList_member}}
+var mResourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceType_EBS_VOLUME}}
+var mRuleApplyOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleApplyOrder_BEFORE_ACCOUNT_RULES, &sRuleApplyOrder_AFTER_ACCOUNT_RULES}}
+var mRulePreviewTotal = smithy.SchemaMembers{List: []*smithy.Schema{&sRulePreviewTotal_recommendedActionCount, &sRulePreviewTotal_estimatedMonthlySavings}}
+var mRuleStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleStatus_ACTIVE, &sRuleStatus_INACTIVE}}
+var mRuleType = smithy.SchemaMembers{List: []*smithy.Schema{&sRuleType_ORGANIZATIONAL_RULE, &sRuleType_ACCOUNT_RULE}}
+var mSavingsEstimationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sSavingsEstimationMode_BEFORE_DISCOUNT, &sSavingsEstimationMode_AFTER_DISCOUNT}}
+var mSchedule = smithy.SchemaMembers{List: []*smithy.Schema{&sSchedule_scheduleExpression, &sSchedule_scheduleExpressionTimezone, &sSchedule_executionWindowInMinutes}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_message}}
+var mStepStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStepStatus_READY, &sStepStatus_IN_PROGRESS, &sStepStatus_COMPLETE, &sStepStatus_FAILED}}
+var mStepType = smithy.SchemaMembers{List: []*smithy.Schema{&sStepType_CREATE_EBS_SNAPSHOT, &sStepType_DELETE_EBS_VOLUME, &sStepType_MODIFY_EBS_VOLUME, &sStepType_CREATE_EBS_VOLUME}}
+var mStringCriteriaCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sStringCriteriaCondition_comparison, &sStringCriteriaCondition_values}}
+var m_StringCriteriaConditionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringCriteriaConditionList_member}}
+var m_StringCriteriaValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringCriteriaValues_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var mSummaryDimension = smithy.SchemaMembers{List: []*smithy.Schema{&sSummaryDimension_key, &sSummaryDimension_value}}
+var m_SummaryDimensions = smithy.SchemaMembers{List: []*smithy.Schema{&s_SummaryDimensions_member}}
+var mSummaryTotals = smithy.SchemaMembers{List: []*smithy.Schema{&sSummaryTotals_automationEventCount, &sSummaryTotals_estimatedMonthlySavings}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mTimePeriod = smithy.SchemaMembers{List: []*smithy.Schema{&sTimePeriod_startTimeInclusive, &sTimePeriod_endTimeExclusive}}
+var mAssociateAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAccountsRequest_accountIds, &sAssociateAccountsRequest_clientToken}}
+var mAssociateAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateAccountsResponse_accountIds, &sAssociateAccountsResponse_errors}}
+var mCreateAutomationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAutomationRuleRequest_name, &sCreateAutomationRuleRequest_description, &sCreateAutomationRuleRequest_ruleType, &sCreateAutomationRuleRequest_organizationConfiguration, &sCreateAutomationRuleRequest_priority, &sCreateAutomationRuleRequest_recommendedActionTypes, &sCreateAutomationRuleRequest_criteria, &sCreateAutomationRuleRequest_schedule, &sCreateAutomationRuleRequest_status, &sCreateAutomationRuleRequest_tags, &sCreateAutomationRuleRequest_clientToken}, Seed: 2, Slots: []uint16{
+	0, 0, 11, 1, 4, 0, 0, 0, 0, 0, 0, 6, 0, 2, 0, 0, 0, 5, 9, 3, 0, 0, 10, 7,
+	0, 0, 0, 0, 0, 8, 0, 0,
+}}
+var mCreateAutomationRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateAutomationRuleResponse_ruleArn, &sCreateAutomationRuleResponse_ruleId, &sCreateAutomationRuleResponse_name, &sCreateAutomationRuleResponse_description, &sCreateAutomationRuleResponse_ruleType, &sCreateAutomationRuleResponse_ruleRevision, &sCreateAutomationRuleResponse_organizationConfiguration, &sCreateAutomationRuleResponse_priority, &sCreateAutomationRuleResponse_recommendedActionTypes, &sCreateAutomationRuleResponse_criteria, &sCreateAutomationRuleResponse_schedule, &sCreateAutomationRuleResponse_status, &sCreateAutomationRuleResponse_tags, &sCreateAutomationRuleResponse_createdTimestamp}, Seed: 3, Slots: []uint16{
+	11, 7, 0, 0, 2, 3, 0, 0, 0, 0, 0, 0, 0, 12, 0, 0, 13, 0, 8, 0, 9, 1, 0, 0,
+	0, 5, 10, 0, 0, 4, 6, 14,
+}}
+var mDeleteAutomationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteAutomationRuleRequest_ruleArn, &sDeleteAutomationRuleRequest_ruleRevision, &sDeleteAutomationRuleRequest_clientToken}}
+var mDisassociateAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateAccountsRequest_accountIds, &sDisassociateAccountsRequest_clientToken}}
+var mDisassociateAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateAccountsResponse_accountIds, &sDisassociateAccountsResponse_errors}}
+var mGetAutomationEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAutomationEventRequest_eventId}}
+var mGetAutomationEventResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAutomationEventResponse_eventId, &sGetAutomationEventResponse_eventDescription, &sGetAutomationEventResponse_eventType, &sGetAutomationEventResponse_eventStatus, &sGetAutomationEventResponse_eventStatusReason, &sGetAutomationEventResponse_resourceArn, &sGetAutomationEventResponse_resourceId, &sGetAutomationEventResponse_recommendedActionId, &sGetAutomationEventResponse_accountId, &sGetAutomationEventResponse_region, &sGetAutomationEventResponse_ruleId, &sGetAutomationEventResponse_resourceType, &sGetAutomationEventResponse_createdTimestamp, &sGetAutomationEventResponse_completedTimestamp, &sGetAutomationEventResponse_estimatedMonthlySavings}, Seed: 7, Slots: []uint16{
+	0, 0, 13, 8, 0, 7, 10, 15, 14, 0, 11, 0, 0, 0, 0, 3, 0, 5, 0, 0, 0, 6, 9, 0,
+	2, 0, 0, 12, 0, 0, 1, 4,
+}}
+var mGetAutomationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAutomationRuleRequest_ruleArn}}
+var mGetAutomationRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetAutomationRuleResponse_ruleArn, &sGetAutomationRuleResponse_ruleId, &sGetAutomationRuleResponse_name, &sGetAutomationRuleResponse_description, &sGetAutomationRuleResponse_ruleType, &sGetAutomationRuleResponse_ruleRevision, &sGetAutomationRuleResponse_accountId, &sGetAutomationRuleResponse_organizationConfiguration, &sGetAutomationRuleResponse_priority, &sGetAutomationRuleResponse_recommendedActionTypes, &sGetAutomationRuleResponse_criteria, &sGetAutomationRuleResponse_schedule, &sGetAutomationRuleResponse_status, &sGetAutomationRuleResponse_tags, &sGetAutomationRuleResponse_createdTimestamp, &sGetAutomationRuleResponse_lastUpdatedTimestamp}, Seed: 226, Slots: []uint16{
+	8, 0, 0, 1, 15, 2, 13, 6, 5, 9, 0, 0, 0, 0, 11, 0, 10, 7, 14, 0, 0, 0, 0, 4,
+	3, 0, 12, 0, 16, 0, 0, 0,
+}}
+var mGetEnrollmentConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnrollmentConfigurationResponse_status, &sGetEnrollmentConfigurationResponse_statusReason, &sGetEnrollmentConfigurationResponse_organizationRuleMode, &sGetEnrollmentConfigurationResponse_lastUpdatedTimestamp}}
+var mListAccountsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccountsRequest_maxResults, &sListAccountsRequest_nextToken}}
+var mListAccountsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAccountsResponse_accounts, &sListAccountsResponse_nextToken}}
+var mListAutomationEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationEventsRequest_filters, &sListAutomationEventsRequest_startTimeInclusive, &sListAutomationEventsRequest_endTimeExclusive, &sListAutomationEventsRequest_maxResults, &sListAutomationEventsRequest_nextToken}}
+var mListAutomationEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationEventsResponse_automationEvents, &sListAutomationEventsResponse_nextToken}}
+var mListAutomationEventStepsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationEventStepsRequest_eventId, &sListAutomationEventStepsRequest_maxResults, &sListAutomationEventStepsRequest_nextToken}}
+var mListAutomationEventStepsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationEventStepsResponse_automationEventSteps, &sListAutomationEventStepsResponse_nextToken}}
+var mListAutomationEventSummariesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationEventSummariesRequest_filters, &sListAutomationEventSummariesRequest_startDateInclusive, &sListAutomationEventSummariesRequest_endDateExclusive, &sListAutomationEventSummariesRequest_maxResults, &sListAutomationEventSummariesRequest_nextToken}}
+var mListAutomationEventSummariesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationEventSummariesResponse_automationEventSummaries, &sListAutomationEventSummariesResponse_nextToken}}
+var mListAutomationRulePreviewRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationRulePreviewRequest_ruleType, &sListAutomationRulePreviewRequest_organizationScope, &sListAutomationRulePreviewRequest_recommendedActionTypes, &sListAutomationRulePreviewRequest_criteria, &sListAutomationRulePreviewRequest_maxResults, &sListAutomationRulePreviewRequest_nextToken}}
+var mListAutomationRulePreviewResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationRulePreviewResponse_previewResults, &sListAutomationRulePreviewResponse_nextToken}}
+var mListAutomationRulePreviewSummariesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationRulePreviewSummariesRequest_ruleType, &sListAutomationRulePreviewSummariesRequest_organizationScope, &sListAutomationRulePreviewSummariesRequest_recommendedActionTypes, &sListAutomationRulePreviewSummariesRequest_criteria, &sListAutomationRulePreviewSummariesRequest_maxResults, &sListAutomationRulePreviewSummariesRequest_nextToken}}
+var mListAutomationRulePreviewSummariesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationRulePreviewSummariesResponse_previewResultSummaries, &sListAutomationRulePreviewSummariesResponse_nextToken}}
+var mListAutomationRulesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationRulesRequest_filters, &sListAutomationRulesRequest_maxResults, &sListAutomationRulesRequest_nextToken}}
+var mListAutomationRulesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListAutomationRulesResponse_automationRules, &sListAutomationRulesResponse_nextToken}}
+var mListRecommendedActionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendedActionsRequest_filters, &sListRecommendedActionsRequest_maxResults, &sListRecommendedActionsRequest_nextToken}}
+var mListRecommendedActionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendedActionsResponse_recommendedActions, &sListRecommendedActionsResponse_nextToken}}
+var mListRecommendedActionSummariesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendedActionSummariesRequest_filters, &sListRecommendedActionSummariesRequest_maxResults, &sListRecommendedActionSummariesRequest_nextToken}}
+var mListRecommendedActionSummariesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRecommendedActionSummariesResponse_recommendedActionSummaries, &sListRecommendedActionSummariesResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRollbackAutomationEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRollbackAutomationEventRequest_eventId, &sRollbackAutomationEventRequest_clientToken}}
+var mRollbackAutomationEventResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRollbackAutomationEventResponse_eventId, &sRollbackAutomationEventResponse_eventStatus}}
+var mStartAutomationEventRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAutomationEventRequest_recommendedActionId, &sStartAutomationEventRequest_clientToken}}
+var mStartAutomationEventResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartAutomationEventResponse_recommendedActionId, &sStartAutomationEventResponse_eventId, &sStartAutomationEventResponse_eventStatus}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_ruleRevision, &sTagResourceRequest_tags, &sTagResourceRequest_clientToken}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_ruleRevision, &sUntagResourceRequest_tagKeys, &sUntagResourceRequest_clientToken}}
+var mUpdateAutomationRuleRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAutomationRuleRequest_ruleArn, &sUpdateAutomationRuleRequest_ruleRevision, &sUpdateAutomationRuleRequest_name, &sUpdateAutomationRuleRequest_description, &sUpdateAutomationRuleRequest_ruleType, &sUpdateAutomationRuleRequest_organizationConfiguration, &sUpdateAutomationRuleRequest_priority, &sUpdateAutomationRuleRequest_recommendedActionTypes, &sUpdateAutomationRuleRequest_criteria, &sUpdateAutomationRuleRequest_schedule, &sUpdateAutomationRuleRequest_status, &sUpdateAutomationRuleRequest_clientToken}, Seed: 2, Slots: []uint16{
+	0, 0, 12, 3, 6, 0, 0, 0, 0, 0, 0, 8, 0, 4, 0, 0, 1, 7, 11, 5, 0, 0, 0, 9,
+	0, 0, 0, 2, 0, 10, 0, 0,
+}}
+var mUpdateAutomationRuleResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateAutomationRuleResponse_ruleArn, &sUpdateAutomationRuleResponse_ruleRevision, &sUpdateAutomationRuleResponse_name, &sUpdateAutomationRuleResponse_description, &sUpdateAutomationRuleResponse_ruleType, &sUpdateAutomationRuleResponse_organizationConfiguration, &sUpdateAutomationRuleResponse_priority, &sUpdateAutomationRuleResponse_recommendedActionTypes, &sUpdateAutomationRuleResponse_criteria, &sUpdateAutomationRuleResponse_schedule, &sUpdateAutomationRuleResponse_status, &sUpdateAutomationRuleResponse_createdTimestamp, &sUpdateAutomationRuleResponse_lastUpdatedTimestamp}, Seed: 3, Slots: []uint16{
+	10, 6, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 11, 0, 0, 0, 0, 7, 0, 8, 1, 0, 13,
+	0, 5, 9, 0, 0, 4, 2, 12,
+}}
+var mUpdateEnrollmentConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnrollmentConfigurationRequest_status, &sUpdateEnrollmentConfigurationRequest_clientToken}}
+var mUpdateEnrollmentConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnrollmentConfigurationResponse_status, &sUpdateEnrollmentConfigurationResponse_statusReason, &sUpdateEnrollmentConfigurationResponse_lastUpdatedTimestamp}}
+
+var sAssociateAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccounts, Type: smithy.ShapeTypeOperation})
+var sCreateAutomationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutomationRule, Type: smithy.ShapeTypeOperation})
+var sDeleteAutomationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutomationRule, Type: smithy.ShapeTypeOperation})
+var sDisassociateAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccounts, Type: smithy.ShapeTypeOperation})
+var sGetAutomationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutomationEvent, Type: smithy.ShapeTypeOperation})
+var sGetAutomationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutomationRule, Type: smithy.ShapeTypeOperation})
+var sGetEnrollmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnrollmentConfiguration, Type: smithy.ShapeTypeOperation})
+var sListAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccounts, Type: smithy.ShapeTypeOperation})
+var sListAutomationEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEvents, Type: smithy.ShapeTypeOperation})
+var sListAutomationEventSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventSteps, Type: smithy.ShapeTypeOperation})
+var sListAutomationEventSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventSummaries, Type: smithy.ShapeTypeOperation})
+var sListAutomationRulePreview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulePreview, Type: smithy.ShapeTypeOperation})
+var sListAutomationRulePreviewSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulePreviewSummaries, Type: smithy.ShapeTypeOperation})
+var sListAutomationRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRules, Type: smithy.ShapeTypeOperation})
+var sListRecommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActions, Type: smithy.ShapeTypeOperation})
+var sListRecommendedActionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionSummaries, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sRollbackAutomationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackAutomationEvent, Type: smithy.ShapeTypeOperation})
+var sStartAutomationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutomationEvent, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateAutomationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutomationRule, Type: smithy.ShapeTypeOperation})
+var sUpdateEnrollmentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnrollmentConfiguration, Type: smithy.ShapeTypeOperation})
+var s_ComputeOptimizerAutomationService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComputeOptimizerAutomationService, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_AccountIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sAccountInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccountInfo, Members: &mAccountInfo, Type: smithy.ShapeTypeStructure})
+var s_AccountInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountInfoList, Members: &m_AccountInfoList, Type: smithy.ShapeTypeList})
+var sAutomationEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationEvent, Members: &mAutomationEvent, Type: smithy.ShapeTypeStructure})
+var sAutomationEventFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationEventFilter, Members: &mAutomationEventFilter, Type: smithy.ShapeTypeStructure})
+var s_AutomationEventFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationEventFilterList, Members: &m_AutomationEventFilterList, Type: smithy.ShapeTypeList})
+var s_AutomationEventFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationEventFilterName, Type: smithy.ShapeTypeString})
+var s_AutomationEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationEvents, Members: &m_AutomationEvents, Type: smithy.ShapeTypeList})
+var sAutomationEventStep = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationEventStep, Members: &mAutomationEventStep, Type: smithy.ShapeTypeStructure})
+var s_AutomationEventSteps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationEventSteps, Members: &m_AutomationEventSteps, Type: smithy.ShapeTypeList})
+var sAutomationEventSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationEventSummary, Members: &mAutomationEventSummary, Type: smithy.ShapeTypeStructure})
+var s_AutomationEventSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationEventSummaryList, Members: &m_AutomationEventSummaryList, Type: smithy.ShapeTypeList})
+var sAutomationRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAutomationRule, Members: &mAutomationRule, Type: smithy.ShapeTypeStructure})
+var s_AutomationRuleFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationRuleFilterName, Type: smithy.ShapeTypeString})
+var s_AutomationRules = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AutomationRules, Members: &m_AutomationRules, Type: smithy.ShapeTypeList})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sComparisonOperator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sDoubleCriteriaCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDoubleCriteriaCondition, Members: &mDoubleCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var s_DoubleCriteriaConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleCriteriaConditionList, Members: &m_DoubleCriteriaConditionList, Type: smithy.ShapeTypeList})
+var s_DoubleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList})
+var sEbsVolume = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEbsVolume, Members: &mEbsVolume, Type: smithy.ShapeTypeStructure})
+var sEbsVolumeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEbsVolumeConfiguration, Members: &mEbsVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sEnrollmentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnrollmentStatus, Members: &mEnrollmentStatus, Type: smithy.ShapeTypeEnum})
+var sEstimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var s_EventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sEventStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventStatus, Members: &mEventStatus, Type: smithy.ShapeTypeEnum})
+var sEventType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var s_FilterValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sIdempotencyTokenInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotencyTokenInUseException, Members: &mIdempotencyTokenInUseException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sIdempotentParameterMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotentParameterMismatchException, Members: &mIdempotentParameterMismatchException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sIntegerCriteriaCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIntegerCriteriaCondition, Members: &mIntegerCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var s_IntegerCriteriaConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerCriteriaConditionList, Members: &m_IntegerCriteriaConditionList, Type: smithy.ShapeTypeList})
+var s_IntegerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvalidParameterValueException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParameterValueException, Members: &mInvalidParameterValueException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNotManagementAccountException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotManagementAccountException, Members: &mNotManagementAccountException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sOptInRequiredException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOptInRequiredException, Members: &mOptInRequiredException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sOrganizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationConfiguration, Members: &mOrganizationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_OrganizationConfigurationAccountIds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationConfigurationAccountIds, Members: &m_OrganizationConfigurationAccountIds, Type: smithy.ShapeTypeList})
+var sOrganizationRuleMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationRuleMode, Members: &mOrganizationRuleMode, Type: smithy.ShapeTypeEnum})
+var sOrganizationScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrganizationScope, Members: &mOrganizationScope, Type: smithy.ShapeTypeStructure})
+var sPreviewResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreviewResult, Members: &mPreviewResult, Type: smithy.ShapeTypeStructure})
+var s_PreviewResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreviewResults, Members: &m_PreviewResults, Type: smithy.ShapeTypeList})
+var s_PreviewResultSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PreviewResultSummaries, Members: &m_PreviewResultSummaries, Type: smithy.ShapeTypeList})
+var sPreviewResultSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPreviewResultSummary, Members: &mPreviewResultSummary, Type: smithy.ShapeTypeStructure})
+var sRecommendedAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendedAction, Members: &mRecommendedAction, Type: smithy.ShapeTypeStructure})
+var sRecommendedActionFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendedActionFilter, Members: &mRecommendedActionFilter, Type: smithy.ShapeTypeStructure})
+var s_RecommendedActionFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActionFilterList, Members: &m_RecommendedActionFilterList, Type: smithy.ShapeTypeList})
+var s_RecommendedActionFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActionFilterName, Type: smithy.ShapeTypeString})
+var s_RecommendedActionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActionId, Type: smithy.ShapeTypeString})
+var s_RecommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActions, Members: &m_RecommendedActions, Type: smithy.ShapeTypeList})
+var s_RecommendedActionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActionSummaries, Members: &m_RecommendedActionSummaries, Type: smithy.ShapeTypeList})
+var sRecommendedActionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendedActionSummary, Members: &mRecommendedActionSummary, Type: smithy.ShapeTypeStructure})
+var sRecommendedActionTotal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendedActionTotal, Members: &mRecommendedActionTotal, Type: smithy.ShapeTypeStructure})
+var sRecommendedActionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecommendedActionType, Members: &mRecommendedActionType, Type: smithy.ShapeTypeEnum})
+var s_RecommendedActionTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var s_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sResourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceDetails, Members: &mResourceDetails, Type: smithy.ShapeTypeUnion})
+var s_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sResourceTagsCriteriaCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTagsCriteriaCondition, Members: &mResourceTagsCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var s_ResourceTagsCriteriaConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceTagsCriteriaConditionList, Members: &m_ResourceTagsCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sResourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sRuleApplyOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleApplyOrder, Members: &mRuleApplyOrder, Type: smithy.ShapeTypeEnum})
+var s_RuleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var s_RuleDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleDescription, Type: smithy.ShapeTypeString})
+var s_RuleId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleId, Type: smithy.ShapeTypeString})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sRulePreviewTotal = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRulePreviewTotal, Members: &mRulePreviewTotal, Type: smithy.ShapeTypeStructure})
+var sRuleStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum})
+var sRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sSavingsEstimationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSavingsEstimationMode, Members: &mSavingsEstimationMode, Type: smithy.ShapeTypeEnum})
+var sSchedule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_StepId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StepId, Type: smithy.ShapeTypeString})
+var sStepStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepStatus, Members: &mStepStatus, Type: smithy.ShapeTypeEnum})
+var sStepType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepType, Members: &mStepType, Type: smithy.ShapeTypeEnum})
+var sStringCriteriaCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStringCriteriaCondition, Members: &mStringCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var s_StringCriteriaConditionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringCriteriaConditionList, Members: &m_StringCriteriaConditionList, Type: smithy.ShapeTypeList})
+var s_StringCriteriaValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringCriteriaValue, Type: smithy.ShapeTypeString})
+var s_StringCriteriaValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringCriteriaValues, Members: &m_StringCriteriaValues, Type: smithy.ShapeTypeList})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sSummaryDimension = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummaryDimension, Members: &mSummaryDimension, Type: smithy.ShapeTypeStructure})
+var s_SummaryDimensionKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SummaryDimensionKey, Type: smithy.ShapeTypeString})
+var s_SummaryDimensions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SummaryDimensions, Members: &m_SummaryDimensions, Type: smithy.ShapeTypeList})
+var sSummaryTotals = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSummaryTotals, Members: &mSummaryTotals, Type: smithy.ShapeTypeStructure})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sTimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure})
+var sAssociateAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccountsRequest, Members: &mAssociateAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateAccountsResponse, Members: &mAssociateAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutomationRuleRequest, Members: &mCreateAutomationRuleRequest, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateAutomationRuleResponse, Members: &mCreateAutomationRuleResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteAutomationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutomationRuleRequest, Members: &mDeleteAutomationRuleRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteAutomationRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteAutomationRuleResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccountsRequest, Members: &mDisassociateAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateAccountsResponse, Members: &mDisassociateAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sGetAutomationEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutomationEventRequest, Members: &mGetAutomationEventRequest, Type: smithy.ShapeTypeStructure})
+var sGetAutomationEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutomationEventResponse, Members: &mGetAutomationEventResponse, Type: smithy.ShapeTypeStructure})
+var sGetAutomationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutomationRuleRequest, Members: &mGetAutomationRuleRequest, Type: smithy.ShapeTypeStructure})
+var sGetAutomationRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetAutomationRuleResponse, Members: &mGetAutomationRuleResponse, Type: smithy.ShapeTypeStructure})
+var sGetEnrollmentConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnrollmentConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetEnrollmentConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnrollmentConfigurationResponse, Members: &mGetEnrollmentConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sListAccountsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsRequest, Members: &mListAccountsRequest, Type: smithy.ShapeTypeStructure})
+var sListAccountsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAccountsResponse, Members: &mListAccountsResponse, Type: smithy.ShapeTypeStructure})
+var sListAutomationEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventsRequest, Members: &mListAutomationEventsRequest, Type: smithy.ShapeTypeStructure})
+var sListAutomationEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventsResponse, Members: &mListAutomationEventsResponse, Type: smithy.ShapeTypeStructure})
+var sListAutomationEventStepsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventStepsRequest, Members: &mListAutomationEventStepsRequest, Type: smithy.ShapeTypeStructure})
+var sListAutomationEventStepsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventStepsResponse, Members: &mListAutomationEventStepsResponse, Type: smithy.ShapeTypeStructure})
+var sListAutomationEventSummariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventSummariesRequest, Members: &mListAutomationEventSummariesRequest, Type: smithy.ShapeTypeStructure})
+var sListAutomationEventSummariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationEventSummariesResponse, Members: &mListAutomationEventSummariesResponse, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulePreviewRequest, Members: &mListAutomationRulePreviewRequest, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulePreviewResponse, Members: &mListAutomationRulePreviewResponse, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewSummariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulePreviewSummariesRequest, Members: &mListAutomationRulePreviewSummariesRequest, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewSummariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulePreviewSummariesResponse, Members: &mListAutomationRulePreviewSummariesResponse, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulesRequest, Members: &mListAutomationRulesRequest, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListAutomationRulesResponse, Members: &mListAutomationRulesResponse, Type: smithy.ShapeTypeStructure})
+var sListRecommendedActionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionsRequest, Members: &mListRecommendedActionsRequest, Type: smithy.ShapeTypeStructure})
+var sListRecommendedActionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionsResponse, Members: &mListRecommendedActionsResponse, Type: smithy.ShapeTypeStructure})
+var sListRecommendedActionSummariesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionSummariesRequest, Members: &mListRecommendedActionSummariesRequest, Type: smithy.ShapeTypeStructure})
+var sListRecommendedActionSummariesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRecommendedActionSummariesResponse, Members: &mListRecommendedActionSummariesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRollbackAutomationEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackAutomationEventRequest, Members: &mRollbackAutomationEventRequest, Type: smithy.ShapeTypeStructure})
+var sRollbackAutomationEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRollbackAutomationEventResponse, Members: &mRollbackAutomationEventResponse, Type: smithy.ShapeTypeStructure})
+var sStartAutomationEventRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutomationEventRequest, Members: &mStartAutomationEventRequest, Type: smithy.ShapeTypeStructure})
+var sStartAutomationEventResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartAutomationEventResponse, Members: &mStartAutomationEventResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutomationRuleRequest, Members: &mUpdateAutomationRuleRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateAutomationRuleResponse, Members: &mUpdateAutomationRuleResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateEnrollmentConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnrollmentConfigurationRequest, Members: &mUpdateEnrollmentConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEnrollmentConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnrollmentConfigurationResponse, Members: &mUpdateEnrollmentConfigurationResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_AccountIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAccountInfo_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAccountInfo_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnrollmentStatus, Members: &mEnrollmentStatus, Type: smithy.ShapeTypeEnum})
+var sAccountInfo_organizationRuleMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationRuleMode", ID: &iOrganizationRuleMode, Members: &mOrganizationRuleMode, Type: smithy.ShapeTypeEnum})
+var sAccountInfo_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sAccountInfo_lastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_AccountInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAccountInfo, Members: &mAccountInfo, Type: smithy.ShapeTypeStructure})
+var sAutomationEvent_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sAutomationEvent_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &pString, Type: smithy.ShapeTypeString})
+var sAutomationEvent_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var sAutomationEvent_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &iEventStatus, Members: &mEventStatus, Type: smithy.ShapeTypeEnum})
+var sAutomationEvent_eventStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sAutomationEvent_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sAutomationEvent_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAutomationEvent_recommendedActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionId", ID: &i_RecommendedActionId, Type: smithy.ShapeTypeString})
+var sAutomationEvent_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAutomationEvent_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pString, Type: smithy.ShapeTypeString})
+var sAutomationEvent_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_RuleId, Type: smithy.ShapeTypeString})
+var sAutomationEvent_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sAutomationEvent_createdTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutomationEvent_completedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutomationEvent_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var sAutomationEventFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AutomationEventFilterName, Type: smithy.ShapeTypeString})
+var sAutomationEventFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var s_AutomationEventFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomationEventFilter, Members: &mAutomationEventFilter, Type: smithy.ShapeTypeStructure})
+var s_AutomationEvents_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomationEvent, Members: &mAutomationEvent, Type: smithy.ShapeTypeStructure})
+var sAutomationEventStep_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sAutomationEventStep_stepId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepId", ID: &i_StepId, Type: smithy.ShapeTypeString})
+var sAutomationEventStep_stepType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepType", ID: &iStepType, Members: &mStepType, Type: smithy.ShapeTypeEnum})
+var sAutomationEventStep_stepStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "stepStatus", ID: &iStepStatus, Members: &mStepStatus, Type: smithy.ShapeTypeEnum})
+var sAutomationEventStep_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sAutomationEventStep_startTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutomationEventStep_completedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutomationEventStep_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var s_AutomationEventSteps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomationEventStep, Members: &mAutomationEventStep, Type: smithy.ShapeTypeStructure})
+var sAutomationEventSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sAutomationEventSummary_dimensions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dimensions", ID: &i_SummaryDimensions, Members: &m_SummaryDimensions, Type: smithy.ShapeTypeList})
+var sAutomationEventSummary_timePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timePeriod", ID: &iTimePeriod, Members: &mTimePeriod, Type: smithy.ShapeTypeStructure})
+var sAutomationEventSummary_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &iSummaryTotals, Members: &mSummaryTotals, Type: smithy.ShapeTypeStructure})
+var s_AutomationEventSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomationEventSummary, Members: &mAutomationEventSummary, Type: smithy.ShapeTypeStructure})
+var sAutomationRule_ruleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sAutomationRule_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_RuleId, Type: smithy.ShapeTypeString})
+var sAutomationRule_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sAutomationRule_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sAutomationRule_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sAutomationRule_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sAutomationRule_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAutomationRule_organizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationConfiguration", ID: &iOrganizationConfiguration, Members: &mOrganizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sAutomationRule_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &pString, Type: smithy.ShapeTypeString})
+var sAutomationRule_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sAutomationRule_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sAutomationRule_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum})
+var sAutomationRule_createdTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAutomationRule_lastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_AutomationRules_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAutomationRule, Members: &mAutomationRule, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_EQUALS_IGNORE_CASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_EQUALS_IGNORE_CASE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_NOT_EQUALS_IGNORE_CASE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_LIKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_LIKE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_NOT_LIKE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_NOT_LIKE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_NOT_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_NOT_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_LESS_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_LESS_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_LESS_THAN_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_LESS_THAN_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_GREATER_THAN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_GREATER_THAN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_GREATER_THAN_EQUALS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_GREATER_THAN_EQUALS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_EQUALS_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_EQUALS_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_NOT_EQUALS_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_EQUALS_IGNORE_CASE_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_LIKE_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_LIKE_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_STRING_NOT_LIKE_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRING_NOT_LIKE_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_EQUALS_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_EQUALS_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_NOT_EQUALS_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_LESS_THAN_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_LESS_THAN_EQUALS_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_GREATER_THAN_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCriteria_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &i_StringCriteriaConditionList, Members: &m_StringCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sCriteria_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_StringCriteriaConditionList, Members: &m_StringCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sCriteria_ebsVolumeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsVolumeType", ID: &i_StringCriteriaConditionList, Members: &m_StringCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sCriteria_ebsVolumeSizeInGib = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsVolumeSizeInGib", ID: &i_IntegerCriteriaConditionList, Members: &m_IntegerCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sCriteria_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &i_DoubleCriteriaConditionList, Members: &m_DoubleCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sCriteria_resourceTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTag", ID: &i_ResourceTagsCriteriaConditionList, Members: &m_ResourceTagsCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sCriteria_lookBackPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lookBackPeriodInDays", ID: &i_IntegerCriteriaConditionList, Members: &m_IntegerCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sCriteria_restartNeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restartNeeded", ID: &i_StringCriteriaConditionList, Members: &m_StringCriteriaConditionList, Type: smithy.ShapeTypeList})
+var sDoubleCriteriaCondition_comparison = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comparison", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sDoubleCriteriaCondition_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_DoubleList, Members: &m_DoubleList, Type: smithy.ShapeTypeList})
+var s_DoubleCriteriaConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDoubleCriteriaCondition, Members: &mDoubleCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var s_DoubleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sEbsVolume_configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configuration", ID: &iEbsVolumeConfiguration, Members: &mEbsVolumeConfiguration, Type: smithy.ShapeTypeStructure})
+var sEbsVolumeConfiguration_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &pString, Type: smithy.ShapeTypeString})
+var sEbsVolumeConfiguration_sizeInGib = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sizeInGib", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEbsVolumeConfiguration_iops = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iops", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEbsVolumeConfiguration_throughput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "throughput", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEnrollmentStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnrollmentStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnrollmentStatus_PENDING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PENDING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnrollmentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEstimatedMonthlySavings_currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currency", ID: &pString, Type: smithy.ShapeTypeString})
+var sEstimatedMonthlySavings_beforeDiscountSavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "beforeDiscountSavings", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sEstimatedMonthlySavings_afterDiscountSavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "afterDiscountSavings", ID: &pDouble, Type: smithy.ShapeTypeDouble})
+var sEstimatedMonthlySavings_savingsEstimationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "savingsEstimationMode", ID: &iSavingsEstimationMode, Members: &mSavingsEstimationMode, Type: smithy.ShapeTypeEnum})
+var sEventStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_ROLLBACK_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_ROLLBACK_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_ROLLBACK_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventStatus_ROLLBACK_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventType_UPGRADE_EBS_VOLUME_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPGRADE_EBS_VOLUME_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_AutomationRuleFilterName, Type: smithy.ShapeTypeString})
+var sFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FilterValue, Type: smithy.ShapeTypeString})
+var sForbiddenException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIdempotencyTokenInUseException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIdempotentParameterMismatchException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIntegerCriteriaCondition_comparison = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comparison", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sIntegerCriteriaCondition_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_IntegerList, Members: &m_IntegerList, Type: smithy.ShapeTypeList})
+var s_IntegerCriteriaConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIntegerCriteriaCondition, Members: &mIntegerCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var s_IntegerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvalidParameterValueException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sNotManagementAccountException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sOptInRequiredException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sOrganizationConfiguration_ruleApplyOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleApplyOrder", ID: &iRuleApplyOrder, Members: &mRuleApplyOrder, Type: smithy.ShapeTypeEnum})
+var sOrganizationConfiguration_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_OrganizationConfigurationAccountIds, Members: &m_OrganizationConfigurationAccountIds, Type: smithy.ShapeTypeList})
+var s_OrganizationConfigurationAccountIds_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sOrganizationRuleMode_ANY_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANY_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrganizationRuleMode_NONE_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrganizationScope_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_OrganizationConfigurationAccountIds, Members: &m_OrganizationConfigurationAccountIds, Type: smithy.ShapeTypeList})
+var sPreviewResult_recommendedActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionId", ID: &i_RecommendedActionId, Type: smithy.ShapeTypeString})
+var sPreviewResult_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sPreviewResult_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sPreviewResult_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sPreviewResult_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pString, Type: smithy.ShapeTypeString})
+var sPreviewResult_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sPreviewResult_lookBackPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lookBackPeriodInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sPreviewResult_recommendedActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionType", ID: &iRecommendedActionType, Members: &mRecommendedActionType, Type: smithy.ShapeTypeEnum})
+var sPreviewResult_currentResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentResourceSummary", ID: &pString, Type: smithy.ShapeTypeString})
+var sPreviewResult_currentResourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentResourceDetails", ID: &iResourceDetails, Members: &mResourceDetails, Type: smithy.ShapeTypeUnion})
+var sPreviewResult_recommendedResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedResourceSummary", ID: &pString, Type: smithy.ShapeTypeString})
+var sPreviewResult_recommendedResourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedResourceDetails", ID: &iResourceDetails, Members: &mResourceDetails, Type: smithy.ShapeTypeUnion})
+var sPreviewResult_restartNeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restartNeeded", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sPreviewResult_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var sPreviewResult_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_PreviewResults_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPreviewResult, Members: &mPreviewResult, Type: smithy.ShapeTypeStructure})
+var s_PreviewResultSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPreviewResultSummary, Members: &mPreviewResultSummary, Type: smithy.ShapeTypeStructure})
+var sPreviewResultSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sPreviewResultSummary_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &iRulePreviewTotal, Members: &mRulePreviewTotal, Type: smithy.ShapeTypeStructure})
+var sRecommendedAction_recommendedActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionId", ID: &i_RecommendedActionId, Type: smithy.ShapeTypeString})
+var sRecommendedAction_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sRecommendedAction_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sRecommendedAction_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sRecommendedAction_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecommendedAction_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sRecommendedAction_lookBackPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lookBackPeriodInDays", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRecommendedAction_recommendedActionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionType", ID: &iRecommendedActionType, Members: &mRecommendedActionType, Type: smithy.ShapeTypeEnum})
+var sRecommendedAction_currentResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentResourceSummary", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecommendedAction_currentResourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentResourceDetails", ID: &iResourceDetails, Members: &mResourceDetails, Type: smithy.ShapeTypeUnion})
+var sRecommendedAction_recommendedResourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedResourceSummary", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecommendedAction_recommendedResourceDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedResourceDetails", ID: &iResourceDetails, Members: &mResourceDetails, Type: smithy.ShapeTypeUnion})
+var sRecommendedAction_restartNeeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "restartNeeded", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sRecommendedAction_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var sRecommendedAction_resourceTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceTags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sRecommendedActionFilter_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RecommendedActionFilterName, Type: smithy.ShapeTypeString})
+var sRecommendedActionFilter_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var s_RecommendedActionFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendedActionFilter, Members: &mRecommendedActionFilter, Type: smithy.ShapeTypeStructure})
+var s_RecommendedActions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendedAction, Members: &mRecommendedAction, Type: smithy.ShapeTypeStructure})
+var s_RecommendedActionSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendedActionSummary, Members: &mRecommendedActionSummary, Type: smithy.ShapeTypeStructure})
+var sRecommendedActionSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sRecommendedActionSummary_total = smithy.NewStaticSchema(smithy.StaticSchema{Member: "total", ID: &iRecommendedActionTotal, Members: &mRecommendedActionTotal, Type: smithy.ShapeTypeStructure})
+var sRecommendedActionTotal_recommendedActionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRecommendedActionTotal_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var sRecommendedActionType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecommendedActionType_UPGRADE_EBS_VOLUME_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPGRADE_EBS_VOLUME_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RecommendedActionTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecommendedActionType, Members: &mRecommendedActionType, Type: smithy.ShapeTypeEnum})
+var sResourceDetails_ebsVolume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ebsVolume", ID: &iEbsVolume, Members: &mEbsVolume, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceTagsCriteriaCondition_comparison = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comparison", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sResourceTagsCriteriaCondition_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_StringCriteriaValue, Type: smithy.ShapeTypeString})
+var sResourceTagsCriteriaCondition_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringCriteriaValues, Members: &m_StringCriteriaValues, Type: smithy.ShapeTypeList})
+var s_ResourceTagsCriteriaConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourceTagsCriteriaCondition, Members: &mResourceTagsCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var sResourceType_EBS_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBS_VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleApplyOrder_BEFORE_ACCOUNT_RULES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE_ACCOUNT_RULES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleApplyOrder_AFTER_ACCOUNT_RULES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_ACCOUNT_RULES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRulePreviewTotal_recommendedActionCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRulePreviewTotal_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var sRuleStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleType_ORGANIZATIONAL_RULE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORGANIZATIONAL_RULE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRuleType_ACCOUNT_RULE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACCOUNT_RULE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsEstimationMode_BEFORE_DISCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEFORE_DISCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSavingsEstimationMode_AFTER_DISCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AFTER_DISCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchedule_scheduleExpression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleExpression", ID: &pString, Type: smithy.ShapeTypeString})
+var sSchedule_scheduleExpressionTimezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scheduleExpressionTimezone", ID: &pString, Type: smithy.ShapeTypeString})
+var sSchedule_executionWindowInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "executionWindowInMinutes", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sStepStatus_READY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "READY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepType_CREATE_EBS_SNAPSHOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_EBS_SNAPSHOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepType_DELETE_EBS_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_EBS_VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepType_MODIFY_EBS_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MODIFY_EBS_VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepType_CREATE_EBS_VOLUME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_EBS_VOLUME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStringCriteriaCondition_comparison = smithy.NewStaticSchema(smithy.StaticSchema{Member: "comparison", ID: &iComparisonOperator, Members: &mComparisonOperator, Type: smithy.ShapeTypeEnum})
+var sStringCriteriaCondition_values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "values", ID: &i_StringCriteriaValues, Members: &m_StringCriteriaValues, Type: smithy.ShapeTypeList})
+var s_StringCriteriaConditionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStringCriteriaCondition, Members: &mStringCriteriaCondition, Type: smithy.ShapeTypeStructure})
+var s_StringCriteriaValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_StringCriteriaValue, Type: smithy.ShapeTypeString})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sSummaryDimension_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_SummaryDimensionKey, Type: smithy.ShapeTypeString})
+var sSummaryDimension_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SummaryDimensions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSummaryDimension, Members: &mSummaryDimension, Type: smithy.ShapeTypeStructure})
+var sSummaryTotals_automationEventCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automationEventCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSummaryTotals_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sTimePeriod_startTimeInclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeInclusive", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sTimePeriod_endTimeExclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTimeExclusive", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sAssociateAccountsRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sAssociateAccountsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sAssociateAccountsResponse_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sAssociateAccountsResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCreateAutomationRuleRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_RuleDescription, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleRequest_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sCreateAutomationRuleRequest_organizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationConfiguration", ID: &iOrganizationConfiguration, Members: &mOrganizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleRequest_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleRequest_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sCreateAutomationRuleRequest_criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteria", ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleRequest_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum})
+var sCreateAutomationRuleRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateAutomationRuleRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleResponse_ruleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleResponse_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_RuleId, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleResponse_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sCreateAutomationRuleResponse_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sCreateAutomationRuleResponse_organizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationConfiguration", ID: &iOrganizationConfiguration, Members: &mOrganizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleResponse_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateAutomationRuleResponse_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sCreateAutomationRuleResponse_criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteria", ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleResponse_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sCreateAutomationRuleResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum})
+var sCreateAutomationRuleResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateAutomationRuleResponse_createdTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeleteAutomationRuleRequest_ruleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sDeleteAutomationRuleRequest_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sDeleteAutomationRuleRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDisassociateAccountsRequest_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sDisassociateAccountsRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sDisassociateAccountsResponse_accountIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountIds", ID: &i_AccountIdList, Members: &m_AccountIdList, Type: smithy.ShapeTypeList})
+var sDisassociateAccountsResponse_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sGetAutomationEventRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_eventDescription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDescription", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_eventType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventType", ID: &iEventType, Members: &mEventType, Type: smithy.ShapeTypeEnum})
+var sGetAutomationEventResponse_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &iEventStatus, Members: &mEventStatus, Type: smithy.ShapeTypeEnum})
+var sGetAutomationEventResponse_eventStatusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_ResourceArn, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_ResourceId, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_recommendedActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionId", ID: &i_RecommendedActionId, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "region", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_RuleId, Type: smithy.ShapeTypeString})
+var sGetAutomationEventResponse_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &iResourceType, Members: &mResourceType, Type: smithy.ShapeTypeEnum})
+var sGetAutomationEventResponse_createdTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetAutomationEventResponse_completedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "completedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetAutomationEventResponse_estimatedMonthlySavings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "estimatedMonthlySavings", ID: &iEstimatedMonthlySavings, Members: &mEstimatedMonthlySavings, Type: smithy.ShapeTypeStructure})
+var sGetAutomationRuleRequest_ruleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sGetAutomationRuleResponse_ruleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sGetAutomationRuleResponse_ruleId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleId", ID: &i_RuleId, Type: smithy.ShapeTypeString})
+var sGetAutomationRuleResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sGetAutomationRuleResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAutomationRuleResponse_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sGetAutomationRuleResponse_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetAutomationRuleResponse_accountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sGetAutomationRuleResponse_organizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationConfiguration", ID: &iOrganizationConfiguration, Members: &mOrganizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetAutomationRuleResponse_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetAutomationRuleResponse_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sGetAutomationRuleResponse_criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteria", ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sGetAutomationRuleResponse_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sGetAutomationRuleResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum})
+var sGetAutomationRuleResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sGetAutomationRuleResponse_createdTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetAutomationRuleResponse_lastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetEnrollmentConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnrollmentStatus, Members: &mEnrollmentStatus, Type: smithy.ShapeTypeEnum})
+var sGetEnrollmentConfigurationResponse_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetEnrollmentConfigurationResponse_organizationRuleMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationRuleMode", ID: &iOrganizationRuleMode, Members: &mOrganizationRuleMode, Type: smithy.ShapeTypeEnum})
+var sGetEnrollmentConfigurationResponse_lastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sListAccountsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAccountsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAccountsResponse_accounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accounts", ID: &i_AccountInfoList, Members: &m_AccountInfoList, Type: smithy.ShapeTypeList})
+var sListAccountsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationEventsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_AutomationEventFilterList, Members: &m_AutomationEventFilterList, Type: smithy.ShapeTypeList})
+var sListAutomationEventsRequest_startTimeInclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTimeInclusive", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sListAutomationEventsRequest_endTimeExclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTimeExclusive", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sListAutomationEventsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAutomationEventsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationEventsResponse_automationEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automationEvents", ID: &i_AutomationEvents, Members: &m_AutomationEvents, Type: smithy.ShapeTypeList})
+var sListAutomationEventsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationEventStepsRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sListAutomationEventStepsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAutomationEventStepsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationEventStepsResponse_automationEventSteps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automationEventSteps", ID: &i_AutomationEventSteps, Members: &m_AutomationEventSteps, Type: smithy.ShapeTypeList})
+var sListAutomationEventStepsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationEventSummariesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_AutomationEventFilterList, Members: &m_AutomationEventFilterList, Type: smithy.ShapeTypeList})
+var sListAutomationEventSummariesRequest_startDateInclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startDateInclusive", ID: &pString, Type: smithy.ShapeTypeString})
+var sListAutomationEventSummariesRequest_endDateExclusive = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endDateExclusive", ID: &pString, Type: smithy.ShapeTypeString})
+var sListAutomationEventSummariesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAutomationEventSummariesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationEventSummariesResponse_automationEventSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automationEventSummaries", ID: &i_AutomationEventSummaryList, Members: &m_AutomationEventSummaryList, Type: smithy.ShapeTypeList})
+var sListAutomationEventSummariesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationRulePreviewRequest_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sListAutomationRulePreviewRequest_organizationScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationScope", ID: &iOrganizationScope, Members: &mOrganizationScope, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewRequest_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sListAutomationRulePreviewRequest_criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteria", ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAutomationRulePreviewRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationRulePreviewResponse_previewResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previewResults", ID: &i_PreviewResults, Members: &m_PreviewResults, Type: smithy.ShapeTypeList})
+var sListAutomationRulePreviewResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationRulePreviewSummariesRequest_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sListAutomationRulePreviewSummariesRequest_organizationScope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationScope", ID: &iOrganizationScope, Members: &mOrganizationScope, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewSummariesRequest_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sListAutomationRulePreviewSummariesRequest_criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteria", ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sListAutomationRulePreviewSummariesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAutomationRulePreviewSummariesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationRulePreviewSummariesResponse_previewResultSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previewResultSummaries", ID: &i_PreviewResultSummaries, Members: &m_PreviewResultSummaries, Type: smithy.ShapeTypeList})
+var sListAutomationRulePreviewSummariesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationRulesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sListAutomationRulesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListAutomationRulesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListAutomationRulesResponse_automationRules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "automationRules", ID: &i_AutomationRules, Members: &m_AutomationRules, Type: smithy.ShapeTypeList})
+var sListAutomationRulesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRecommendedActionsRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_RecommendedActionFilterList, Members: &m_RecommendedActionFilterList, Type: smithy.ShapeTypeList})
+var sListRecommendedActionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListRecommendedActionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRecommendedActionsResponse_recommendedActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActions", ID: &i_RecommendedActions, Members: &m_RecommendedActions, Type: smithy.ShapeTypeList})
+var sListRecommendedActionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRecommendedActionSummariesRequest_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_RecommendedActionFilterList, Members: &m_RecommendedActionFilterList, Type: smithy.ShapeTypeList})
+var sListRecommendedActionSummariesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListRecommendedActionSummariesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListRecommendedActionSummariesResponse_recommendedActionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionSummaries", ID: &i_RecommendedActionSummaries, Members: &m_RecommendedActionSummaries, Type: smithy.ShapeTypeList})
+var sListRecommendedActionSummariesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sRollbackAutomationEventRequest_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sRollbackAutomationEventRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sRollbackAutomationEventResponse_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sRollbackAutomationEventResponse_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &iEventStatus, Members: &mEventStatus, Type: smithy.ShapeTypeEnum})
+var sStartAutomationEventRequest_recommendedActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionId", ID: &i_RecommendedActionId, Type: smithy.ShapeTypeString})
+var sStartAutomationEventRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sStartAutomationEventResponse_recommendedActionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionId", ID: &i_RecommendedActionId, Type: smithy.ShapeTypeString})
+var sStartAutomationEventResponse_eventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sStartAutomationEventResponse_eventStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventStatus", ID: &iEventStatus, Members: &mEventStatus, Type: smithy.ShapeTypeEnum})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTagResourceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleRequest_ruleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleRequest_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sUpdateAutomationRuleRequest_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleRequest_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_RuleDescription, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleRequest_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sUpdateAutomationRuleRequest_organizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationConfiguration", ID: &iOrganizationConfiguration, Members: &mOrganizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleRequest_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleRequest_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sUpdateAutomationRuleRequest_criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteria", ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleRequest_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateAutomationRuleRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleResponse_ruleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleArn", ID: &i_RuleArn, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleResponse_ruleRevision = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleRevision", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sUpdateAutomationRuleResponse_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleResponse_ruleType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ruleType", ID: &iRuleType, Members: &mRuleType, Type: smithy.ShapeTypeEnum})
+var sUpdateAutomationRuleResponse_organizationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "organizationConfiguration", ID: &iOrganizationConfiguration, Members: &mOrganizationConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleResponse_priority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "priority", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateAutomationRuleResponse_recommendedActionTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recommendedActionTypes", ID: &i_RecommendedActionTypeList, Members: &m_RecommendedActionTypeList, Type: smithy.ShapeTypeList})
+var sUpdateAutomationRuleResponse_criteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteria", ID: &iCriteria, Members: &mCriteria, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleResponse_schedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "schedule", ID: &iSchedule, Members: &mSchedule, Type: smithy.ShapeTypeStructure})
+var sUpdateAutomationRuleResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iRuleStatus, Members: &mRuleStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateAutomationRuleResponse_createdTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createdTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateAutomationRuleResponse_lastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEnrollmentConfigurationRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnrollmentStatus, Members: &mEnrollmentStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateEnrollmentConfigurationRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sUpdateEnrollmentConfigurationResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnrollmentStatus, Members: &mEnrollmentStatus, Type: smithy.ShapeTypeEnum})
+var sUpdateEnrollmentConfigurationResponse_statusReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusReason", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateEnrollmentConfigurationResponse_lastUpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastUpdatedTimestamp", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+
+var AssociateAccounts = &sAssociateAccounts
+
+var CreateAutomationRule = &sCreateAutomationRule
+
+var DeleteAutomationRule = &sDeleteAutomationRule
+
+var DisassociateAccounts = &sDisassociateAccounts
+
+var GetAutomationEvent = &sGetAutomationEvent
+
+var GetAutomationRule = &sGetAutomationRule
+
+var GetEnrollmentConfiguration = &sGetEnrollmentConfiguration
+
+var ListAccounts = &sListAccounts
+
+var ListAutomationEvents = &sListAutomationEvents
+
+var ListAutomationEventSteps = &sListAutomationEventSteps
+
+var ListAutomationEventSummaries = &sListAutomationEventSummaries
+
+var ListAutomationRulePreview = &sListAutomationRulePreview
+
+var ListAutomationRulePreviewSummaries = &sListAutomationRulePreviewSummaries
+
+var ListAutomationRules = &sListAutomationRules
+
+var ListRecommendedActions = &sListRecommendedActions
+
+var ListRecommendedActionSummaries = &sListRecommendedActionSummaries
+
+var ListTagsForResource = &sListTagsForResource
+
+var RollbackAutomationEvent = &sRollbackAutomationEvent
+
+var StartAutomationEvent = &sStartAutomationEvent
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateAutomationRule = &sUpdateAutomationRule
+
+var UpdateEnrollmentConfiguration = &sUpdateEnrollmentConfiguration
+
+var _ComputeOptimizerAutomationService = &s_ComputeOptimizerAutomationService
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AccountId = &s_AccountId
+
+var _AccountIdList = &s_AccountIdList
+var _AccountIdList_member = &s_AccountIdList_member
+
+var AccountInfo = &sAccountInfo
+var AccountInfo_accountId = &sAccountInfo_accountId
+var AccountInfo_status = &sAccountInfo_status
+var AccountInfo_organizationRuleMode = &sAccountInfo_organizationRuleMode
+var AccountInfo_statusReason = &sAccountInfo_statusReason
+var AccountInfo_lastUpdatedTimestamp = &sAccountInfo_lastUpdatedTimestamp
+
+var _AccountInfoList = &s_AccountInfoList
+var _AccountInfoList_member = &s_AccountInfoList_member
+
+var AutomationEvent = &sAutomationEvent
+var AutomationEvent_eventId = &sAutomationEvent_eventId
+var AutomationEvent_eventDescription = &sAutomationEvent_eventDescription
+var AutomationEvent_eventType = &sAutomationEvent_eventType
+var AutomationEvent_eventStatus = &sAutomationEvent_eventStatus
+var AutomationEvent_eventStatusReason = &sAutomationEvent_eventStatusReason
+var AutomationEvent_resourceArn = &sAutomationEvent_resourceArn
+var AutomationEvent_resourceId = &sAutomationEvent_resourceId
+var AutomationEvent_recommendedActionId = &sAutomationEvent_recommendedActionId
+var AutomationEvent_accountId = &sAutomationEvent_accountId
+var AutomationEvent_region = &sAutomationEvent_region
+var AutomationEvent_ruleId = &sAutomationEvent_ruleId
+var AutomationEvent_resourceType = &sAutomationEvent_resourceType
+var AutomationEvent_createdTimestamp = &sAutomationEvent_createdTimestamp
+var AutomationEvent_completedTimestamp = &sAutomationEvent_completedTimestamp
+var AutomationEvent_estimatedMonthlySavings = &sAutomationEvent_estimatedMonthlySavings
+
+var AutomationEventFilter = &sAutomationEventFilter
+var AutomationEventFilter_name = &sAutomationEventFilter_name
+var AutomationEventFilter_values = &sAutomationEventFilter_values
+
+var _AutomationEventFilterList = &s_AutomationEventFilterList
+var _AutomationEventFilterList_member = &s_AutomationEventFilterList_member
+
+var _AutomationEventFilterName = &s_AutomationEventFilterName
+
+var _AutomationEvents = &s_AutomationEvents
+var _AutomationEvents_member = &s_AutomationEvents_member
+
+var AutomationEventStep = &sAutomationEventStep
+var AutomationEventStep_eventId = &sAutomationEventStep_eventId
+var AutomationEventStep_stepId = &sAutomationEventStep_stepId
+var AutomationEventStep_stepType = &sAutomationEventStep_stepType
+var AutomationEventStep_stepStatus = &sAutomationEventStep_stepStatus
+var AutomationEventStep_resourceId = &sAutomationEventStep_resourceId
+var AutomationEventStep_startTimestamp = &sAutomationEventStep_startTimestamp
+var AutomationEventStep_completedTimestamp = &sAutomationEventStep_completedTimestamp
+var AutomationEventStep_estimatedMonthlySavings = &sAutomationEventStep_estimatedMonthlySavings
+
+var _AutomationEventSteps = &s_AutomationEventSteps
+var _AutomationEventSteps_member = &s_AutomationEventSteps_member
+
+var AutomationEventSummary = &sAutomationEventSummary
+var AutomationEventSummary_key = &sAutomationEventSummary_key
+var AutomationEventSummary_dimensions = &sAutomationEventSummary_dimensions
+var AutomationEventSummary_timePeriod = &sAutomationEventSummary_timePeriod
+var AutomationEventSummary_total = &sAutomationEventSummary_total
+
+var _AutomationEventSummaryList = &s_AutomationEventSummaryList
+var _AutomationEventSummaryList_member = &s_AutomationEventSummaryList_member
+
+var AutomationRule = &sAutomationRule
+var AutomationRule_ruleArn = &sAutomationRule_ruleArn
+var AutomationRule_ruleId = &sAutomationRule_ruleId
+var AutomationRule_name = &sAutomationRule_name
+var AutomationRule_description = &sAutomationRule_description
+var AutomationRule_ruleType = &sAutomationRule_ruleType
+var AutomationRule_ruleRevision = &sAutomationRule_ruleRevision
+var AutomationRule_accountId = &sAutomationRule_accountId
+var AutomationRule_organizationConfiguration = &sAutomationRule_organizationConfiguration
+var AutomationRule_priority = &sAutomationRule_priority
+var AutomationRule_recommendedActionTypes = &sAutomationRule_recommendedActionTypes
+var AutomationRule_schedule = &sAutomationRule_schedule
+var AutomationRule_status = &sAutomationRule_status
+var AutomationRule_createdTimestamp = &sAutomationRule_createdTimestamp
+var AutomationRule_lastUpdatedTimestamp = &sAutomationRule_lastUpdatedTimestamp
+
+var _AutomationRuleFilterName = &s_AutomationRuleFilterName
+
+var _AutomationRules = &s_AutomationRules
+var _AutomationRules_member = &s_AutomationRules_member
+
+var _ClientToken = &s_ClientToken
+
+var ComparisonOperator = &sComparisonOperator
+var ComparisonOperator_STRING_EQUALS = &sComparisonOperator_STRING_EQUALS
+var ComparisonOperator_STRING_NOT_EQUALS = &sComparisonOperator_STRING_NOT_EQUALS
+var ComparisonOperator_STRING_EQUALS_IGNORE_CASE = &sComparisonOperator_STRING_EQUALS_IGNORE_CASE
+var ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE = &sComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE
+var ComparisonOperator_STRING_LIKE = &sComparisonOperator_STRING_LIKE
+var ComparisonOperator_STRING_NOT_LIKE = &sComparisonOperator_STRING_NOT_LIKE
+var ComparisonOperator_NUMERIC_EQUALS = &sComparisonOperator_NUMERIC_EQUALS
+var ComparisonOperator_NUMERIC_NOT_EQUALS = &sComparisonOperator_NUMERIC_NOT_EQUALS
+var ComparisonOperator_NUMERIC_LESS_THAN = &sComparisonOperator_NUMERIC_LESS_THAN
+var ComparisonOperator_NUMERIC_LESS_THAN_EQUALS = &sComparisonOperator_NUMERIC_LESS_THAN_EQUALS
+var ComparisonOperator_NUMERIC_GREATER_THAN = &sComparisonOperator_NUMERIC_GREATER_THAN
+var ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS = &sComparisonOperator_NUMERIC_GREATER_THAN_EQUALS
+var ComparisonOperator_STRING_EQUALS_IF_EXISTS = &sComparisonOperator_STRING_EQUALS_IF_EXISTS
+var ComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS = &sComparisonOperator_STRING_NOT_EQUALS_IF_EXISTS
+var ComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS = &sComparisonOperator_STRING_EQUALS_IGNORE_CASE_IF_EXISTS
+var ComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS = &sComparisonOperator_STRING_NOT_EQUALS_IGNORE_CASE_IF_EXISTS
+var ComparisonOperator_STRING_LIKE_IF_EXISTS = &sComparisonOperator_STRING_LIKE_IF_EXISTS
+var ComparisonOperator_STRING_NOT_LIKE_IF_EXISTS = &sComparisonOperator_STRING_NOT_LIKE_IF_EXISTS
+var ComparisonOperator_NUMERIC_EQUALS_IF_EXISTS = &sComparisonOperator_NUMERIC_EQUALS_IF_EXISTS
+var ComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS = &sComparisonOperator_NUMERIC_NOT_EQUALS_IF_EXISTS
+var ComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS = &sComparisonOperator_NUMERIC_LESS_THAN_IF_EXISTS
+var ComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS = &sComparisonOperator_NUMERIC_LESS_THAN_EQUALS_IF_EXISTS
+var ComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS = &sComparisonOperator_NUMERIC_GREATER_THAN_IF_EXISTS
+var ComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS = &sComparisonOperator_NUMERIC_GREATER_THAN_EQUALS_IF_EXISTS
+
+var Criteria = &sCriteria
+var Criteria_region = &sCriteria_region
+var Criteria_resourceArn = &sCriteria_resourceArn
+var Criteria_ebsVolumeType = &sCriteria_ebsVolumeType
+var Criteria_ebsVolumeSizeInGib = &sCriteria_ebsVolumeSizeInGib
+var Criteria_estimatedMonthlySavings = &sCriteria_estimatedMonthlySavings
+var Criteria_resourceTag = &sCriteria_resourceTag
+var Criteria_lookBackPeriodInDays = &sCriteria_lookBackPeriodInDays
+var Criteria_restartNeeded = &sCriteria_restartNeeded
+
+var DoubleCriteriaCondition = &sDoubleCriteriaCondition
+var DoubleCriteriaCondition_comparison = &sDoubleCriteriaCondition_comparison
+var DoubleCriteriaCondition_values = &sDoubleCriteriaCondition_values
+
+var _DoubleCriteriaConditionList = &s_DoubleCriteriaConditionList
+var _DoubleCriteriaConditionList_member = &s_DoubleCriteriaConditionList_member
+
+var _DoubleList = &s_DoubleList
+var _DoubleList_member = &s_DoubleList_member
+
+var EbsVolume = &sEbsVolume
+var EbsVolume_configuration = &sEbsVolume_configuration
+
+var EbsVolumeConfiguration = &sEbsVolumeConfiguration
+var EbsVolumeConfiguration_type = &sEbsVolumeConfiguration_type
+var EbsVolumeConfiguration_sizeInGib = &sEbsVolumeConfiguration_sizeInGib
+var EbsVolumeConfiguration_iops = &sEbsVolumeConfiguration_iops
+var EbsVolumeConfiguration_throughput = &sEbsVolumeConfiguration_throughput
+
+var EnrollmentStatus = &sEnrollmentStatus
+var EnrollmentStatus_ACTIVE = &sEnrollmentStatus_ACTIVE
+var EnrollmentStatus_INACTIVE = &sEnrollmentStatus_INACTIVE
+var EnrollmentStatus_PENDING = &sEnrollmentStatus_PENDING
+var EnrollmentStatus_FAILED = &sEnrollmentStatus_FAILED
+
+var EstimatedMonthlySavings = &sEstimatedMonthlySavings
+var EstimatedMonthlySavings_currency = &sEstimatedMonthlySavings_currency
+var EstimatedMonthlySavings_beforeDiscountSavings = &sEstimatedMonthlySavings_beforeDiscountSavings
+var EstimatedMonthlySavings_afterDiscountSavings = &sEstimatedMonthlySavings_afterDiscountSavings
+var EstimatedMonthlySavings_savingsEstimationMode = &sEstimatedMonthlySavings_savingsEstimationMode
+
+var _EventId = &s_EventId
+
+var EventStatus = &sEventStatus
+var EventStatus_READY = &sEventStatus_READY
+var EventStatus_IN_PROGRESS = &sEventStatus_IN_PROGRESS
+var EventStatus_COMPLETE = &sEventStatus_COMPLETE
+var EventStatus_FAILED = &sEventStatus_FAILED
+var EventStatus_CANCELLED = &sEventStatus_CANCELLED
+var EventStatus_ROLLBACK_READY = &sEventStatus_ROLLBACK_READY
+var EventStatus_ROLLBACK_IN_PROGRESS = &sEventStatus_ROLLBACK_IN_PROGRESS
+var EventStatus_ROLLBACK_COMPLETE = &sEventStatus_ROLLBACK_COMPLETE
+var EventStatus_ROLLBACK_FAILED = &sEventStatus_ROLLBACK_FAILED
+
+var EventType = &sEventType
+var EventType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = &sEventType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME
+var EventType_UPGRADE_EBS_VOLUME_TYPE = &sEventType_UPGRADE_EBS_VOLUME_TYPE
+
+var Filter = &sFilter
+var Filter_name = &sFilter_name
+var Filter_values = &sFilter_values
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var _FilterValue = &s_FilterValue
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_message = &sForbiddenException_message
+
+var IdempotencyTokenInUseException = &sIdempotencyTokenInUseException
+var IdempotencyTokenInUseException_message = &sIdempotencyTokenInUseException_message
+
+var IdempotentParameterMismatchException = &sIdempotentParameterMismatchException
+var IdempotentParameterMismatchException_message = &sIdempotentParameterMismatchException_message
+
+var IntegerCriteriaCondition = &sIntegerCriteriaCondition
+var IntegerCriteriaCondition_comparison = &sIntegerCriteriaCondition_comparison
+var IntegerCriteriaCondition_values = &sIntegerCriteriaCondition_values
+
+var _IntegerCriteriaConditionList = &s_IntegerCriteriaConditionList
+var _IntegerCriteriaConditionList_member = &s_IntegerCriteriaConditionList_member
+
+var _IntegerList = &s_IntegerList
+var _IntegerList_member = &s_IntegerList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var InvalidParameterValueException = &sInvalidParameterValueException
+var InvalidParameterValueException_message = &sInvalidParameterValueException_message
+
+var _NextToken = &s_NextToken
+
+var NotManagementAccountException = &sNotManagementAccountException
+var NotManagementAccountException_message = &sNotManagementAccountException_message
+
+var OptInRequiredException = &sOptInRequiredException
+var OptInRequiredException_message = &sOptInRequiredException_message
+
+var OrganizationConfiguration = &sOrganizationConfiguration
+var OrganizationConfiguration_ruleApplyOrder = &sOrganizationConfiguration_ruleApplyOrder
+var OrganizationConfiguration_accountIds = &sOrganizationConfiguration_accountIds
+
+var _OrganizationConfigurationAccountIds = &s_OrganizationConfigurationAccountIds
+var _OrganizationConfigurationAccountIds_member = &s_OrganizationConfigurationAccountIds_member
+
+var OrganizationRuleMode = &sOrganizationRuleMode
+var OrganizationRuleMode_ANY_ALLOWED = &sOrganizationRuleMode_ANY_ALLOWED
+var OrganizationRuleMode_NONE_ALLOWED = &sOrganizationRuleMode_NONE_ALLOWED
+
+var OrganizationScope = &sOrganizationScope
+var OrganizationScope_accountIds = &sOrganizationScope_accountIds
+
+var PreviewResult = &sPreviewResult
+var PreviewResult_recommendedActionId = &sPreviewResult_recommendedActionId
+var PreviewResult_resourceArn = &sPreviewResult_resourceArn
+var PreviewResult_resourceId = &sPreviewResult_resourceId
+var PreviewResult_accountId = &sPreviewResult_accountId
+var PreviewResult_region = &sPreviewResult_region
+var PreviewResult_resourceType = &sPreviewResult_resourceType
+var PreviewResult_lookBackPeriodInDays = &sPreviewResult_lookBackPeriodInDays
+var PreviewResult_recommendedActionType = &sPreviewResult_recommendedActionType
+var PreviewResult_currentResourceSummary = &sPreviewResult_currentResourceSummary
+var PreviewResult_currentResourceDetails = &sPreviewResult_currentResourceDetails
+var PreviewResult_recommendedResourceSummary = &sPreviewResult_recommendedResourceSummary
+var PreviewResult_recommendedResourceDetails = &sPreviewResult_recommendedResourceDetails
+var PreviewResult_restartNeeded = &sPreviewResult_restartNeeded
+var PreviewResult_estimatedMonthlySavings = &sPreviewResult_estimatedMonthlySavings
+var PreviewResult_resourceTags = &sPreviewResult_resourceTags
+
+var _PreviewResults = &s_PreviewResults
+var _PreviewResults_member = &s_PreviewResults_member
+
+var _PreviewResultSummaries = &s_PreviewResultSummaries
+var _PreviewResultSummaries_member = &s_PreviewResultSummaries_member
+
+var PreviewResultSummary = &sPreviewResultSummary
+var PreviewResultSummary_key = &sPreviewResultSummary_key
+var PreviewResultSummary_total = &sPreviewResultSummary_total
+
+var RecommendedAction = &sRecommendedAction
+var RecommendedAction_recommendedActionId = &sRecommendedAction_recommendedActionId
+var RecommendedAction_resourceArn = &sRecommendedAction_resourceArn
+var RecommendedAction_resourceId = &sRecommendedAction_resourceId
+var RecommendedAction_accountId = &sRecommendedAction_accountId
+var RecommendedAction_region = &sRecommendedAction_region
+var RecommendedAction_resourceType = &sRecommendedAction_resourceType
+var RecommendedAction_lookBackPeriodInDays = &sRecommendedAction_lookBackPeriodInDays
+var RecommendedAction_recommendedActionType = &sRecommendedAction_recommendedActionType
+var RecommendedAction_currentResourceSummary = &sRecommendedAction_currentResourceSummary
+var RecommendedAction_currentResourceDetails = &sRecommendedAction_currentResourceDetails
+var RecommendedAction_recommendedResourceSummary = &sRecommendedAction_recommendedResourceSummary
+var RecommendedAction_recommendedResourceDetails = &sRecommendedAction_recommendedResourceDetails
+var RecommendedAction_restartNeeded = &sRecommendedAction_restartNeeded
+var RecommendedAction_estimatedMonthlySavings = &sRecommendedAction_estimatedMonthlySavings
+var RecommendedAction_resourceTags = &sRecommendedAction_resourceTags
+
+var RecommendedActionFilter = &sRecommendedActionFilter
+var RecommendedActionFilter_name = &sRecommendedActionFilter_name
+var RecommendedActionFilter_values = &sRecommendedActionFilter_values
+
+var _RecommendedActionFilterList = &s_RecommendedActionFilterList
+var _RecommendedActionFilterList_member = &s_RecommendedActionFilterList_member
+
+var _RecommendedActionFilterName = &s_RecommendedActionFilterName
+
+var _RecommendedActionId = &s_RecommendedActionId
+
+var _RecommendedActions = &s_RecommendedActions
+var _RecommendedActions_member = &s_RecommendedActions_member
+
+var _RecommendedActionSummaries = &s_RecommendedActionSummaries
+var _RecommendedActionSummaries_member = &s_RecommendedActionSummaries_member
+
+var RecommendedActionSummary = &sRecommendedActionSummary
+var RecommendedActionSummary_key = &sRecommendedActionSummary_key
+var RecommendedActionSummary_total = &sRecommendedActionSummary_total
+
+var RecommendedActionTotal = &sRecommendedActionTotal
+var RecommendedActionTotal_recommendedActionCount = &sRecommendedActionTotal_recommendedActionCount
+var RecommendedActionTotal_estimatedMonthlySavings = &sRecommendedActionTotal_estimatedMonthlySavings
+
+var RecommendedActionType = &sRecommendedActionType
+var RecommendedActionType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME = &sRecommendedActionType_SNAPSHOT_AND_DELETE_UNATTACHED_EBS_VOLUME
+var RecommendedActionType_UPGRADE_EBS_VOLUME_TYPE = &sRecommendedActionType_UPGRADE_EBS_VOLUME_TYPE
+
+var _RecommendedActionTypeList = &s_RecommendedActionTypeList
+var _RecommendedActionTypeList_member = &s_RecommendedActionTypeList_member
+
+var _ResourceArn = &s_ResourceArn
+
+var ResourceDetails = &sResourceDetails
+var ResourceDetails_ebsVolume = &sResourceDetails_ebsVolume
+
+var _ResourceId = &s_ResourceId
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ResourceTagsCriteriaCondition = &sResourceTagsCriteriaCondition
+var ResourceTagsCriteriaCondition_comparison = &sResourceTagsCriteriaCondition_comparison
+var ResourceTagsCriteriaCondition_key = &sResourceTagsCriteriaCondition_key
+var ResourceTagsCriteriaCondition_values = &sResourceTagsCriteriaCondition_values
+
+var _ResourceTagsCriteriaConditionList = &s_ResourceTagsCriteriaConditionList
+var _ResourceTagsCriteriaConditionList_member = &s_ResourceTagsCriteriaConditionList_member
+
+var ResourceType = &sResourceType
+var ResourceType_EBS_VOLUME = &sResourceType_EBS_VOLUME
+
+var RuleApplyOrder = &sRuleApplyOrder
+var RuleApplyOrder_BEFORE_ACCOUNT_RULES = &sRuleApplyOrder_BEFORE_ACCOUNT_RULES
+var RuleApplyOrder_AFTER_ACCOUNT_RULES = &sRuleApplyOrder_AFTER_ACCOUNT_RULES
+
+var _RuleArn = &s_RuleArn
+
+var _RuleDescription = &s_RuleDescription
+
+var _RuleId = &s_RuleId
+
+var _RuleName = &s_RuleName
+
+var RulePreviewTotal = &sRulePreviewTotal
+var RulePreviewTotal_recommendedActionCount = &sRulePreviewTotal_recommendedActionCount
+var RulePreviewTotal_estimatedMonthlySavings = &sRulePreviewTotal_estimatedMonthlySavings
+
+var RuleStatus = &sRuleStatus
+var RuleStatus_ACTIVE = &sRuleStatus_ACTIVE
+var RuleStatus_INACTIVE = &sRuleStatus_INACTIVE
+
+var RuleType = &sRuleType
+var RuleType_ORGANIZATIONAL_RULE = &sRuleType_ORGANIZATIONAL_RULE
+var RuleType_ACCOUNT_RULE = &sRuleType_ACCOUNT_RULE
+
+var SavingsEstimationMode = &sSavingsEstimationMode
+var SavingsEstimationMode_BEFORE_DISCOUNT = &sSavingsEstimationMode_BEFORE_DISCOUNT
+var SavingsEstimationMode_AFTER_DISCOUNT = &sSavingsEstimationMode_AFTER_DISCOUNT
+
+var Schedule = &sSchedule
+var Schedule_scheduleExpression = &sSchedule_scheduleExpression
+var Schedule_scheduleExpressionTimezone = &sSchedule_scheduleExpressionTimezone
+var Schedule_executionWindowInMinutes = &sSchedule_executionWindowInMinutes
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_message = &sServiceUnavailableException_message
+
+var _StepId = &s_StepId
+
+var StepStatus = &sStepStatus
+var StepStatus_READY = &sStepStatus_READY
+var StepStatus_IN_PROGRESS = &sStepStatus_IN_PROGRESS
+var StepStatus_COMPLETE = &sStepStatus_COMPLETE
+var StepStatus_FAILED = &sStepStatus_FAILED
+
+var StepType = &sStepType
+var StepType_CREATE_EBS_SNAPSHOT = &sStepType_CREATE_EBS_SNAPSHOT
+var StepType_DELETE_EBS_VOLUME = &sStepType_DELETE_EBS_VOLUME
+var StepType_MODIFY_EBS_VOLUME = &sStepType_MODIFY_EBS_VOLUME
+var StepType_CREATE_EBS_VOLUME = &sStepType_CREATE_EBS_VOLUME
+
+var StringCriteriaCondition = &sStringCriteriaCondition
+var StringCriteriaCondition_comparison = &sStringCriteriaCondition_comparison
+var StringCriteriaCondition_values = &sStringCriteriaCondition_values
+
+var _StringCriteriaConditionList = &s_StringCriteriaConditionList
+var _StringCriteriaConditionList_member = &s_StringCriteriaConditionList_member
+
+var _StringCriteriaValue = &s_StringCriteriaValue
+
+var _StringCriteriaValues = &s_StringCriteriaValues
+var _StringCriteriaValues_member = &s_StringCriteriaValues_member
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var SummaryDimension = &sSummaryDimension
+var SummaryDimension_key = &sSummaryDimension_key
+var SummaryDimension_value = &sSummaryDimension_value
+
+var _SummaryDimensionKey = &s_SummaryDimensionKey
+
+var _SummaryDimensions = &s_SummaryDimensions
+var _SummaryDimensions_member = &s_SummaryDimensions_member
+
+var SummaryTotals = &sSummaryTotals
+var SummaryTotals_automationEventCount = &sSummaryTotals_automationEventCount
+var SummaryTotals_estimatedMonthlySavings = &sSummaryTotals_estimatedMonthlySavings
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var TimePeriod = &sTimePeriod
+var TimePeriod_startTimeInclusive = &sTimePeriod_startTimeInclusive
+var TimePeriod_endTimeExclusive = &sTimePeriod_endTimeExclusive
+
+var AssociateAccountsRequest = &sAssociateAccountsRequest
+var AssociateAccountsRequest_accountIds = &sAssociateAccountsRequest_accountIds
+var AssociateAccountsRequest_clientToken = &sAssociateAccountsRequest_clientToken
+
+var AssociateAccountsResponse = &sAssociateAccountsResponse
+var AssociateAccountsResponse_accountIds = &sAssociateAccountsResponse_accountIds
+var AssociateAccountsResponse_errors = &sAssociateAccountsResponse_errors
+
+var CreateAutomationRuleRequest = &sCreateAutomationRuleRequest
+var CreateAutomationRuleRequest_name = &sCreateAutomationRuleRequest_name
+var CreateAutomationRuleRequest_description = &sCreateAutomationRuleRequest_description
+var CreateAutomationRuleRequest_ruleType = &sCreateAutomationRuleRequest_ruleType
+var CreateAutomationRuleRequest_organizationConfiguration = &sCreateAutomationRuleRequest_organizationConfiguration
+var CreateAutomationRuleRequest_priority = &sCreateAutomationRuleRequest_priority
+var CreateAutomationRuleRequest_recommendedActionTypes = &sCreateAutomationRuleRequest_recommendedActionTypes
+var CreateAutomationRuleRequest_criteria = &sCreateAutomationRuleRequest_criteria
+var CreateAutomationRuleRequest_schedule = &sCreateAutomationRuleRequest_schedule
+var CreateAutomationRuleRequest_status = &sCreateAutomationRuleRequest_status
+var CreateAutomationRuleRequest_tags = &sCreateAutomationRuleRequest_tags
+var CreateAutomationRuleRequest_clientToken = &sCreateAutomationRuleRequest_clientToken
+
+var CreateAutomationRuleResponse = &sCreateAutomationRuleResponse
+var CreateAutomationRuleResponse_ruleArn = &sCreateAutomationRuleResponse_ruleArn
+var CreateAutomationRuleResponse_ruleId = &sCreateAutomationRuleResponse_ruleId
+var CreateAutomationRuleResponse_name = &sCreateAutomationRuleResponse_name
+var CreateAutomationRuleResponse_description = &sCreateAutomationRuleResponse_description
+var CreateAutomationRuleResponse_ruleType = &sCreateAutomationRuleResponse_ruleType
+var CreateAutomationRuleResponse_ruleRevision = &sCreateAutomationRuleResponse_ruleRevision
+var CreateAutomationRuleResponse_organizationConfiguration = &sCreateAutomationRuleResponse_organizationConfiguration
+var CreateAutomationRuleResponse_priority = &sCreateAutomationRuleResponse_priority
+var CreateAutomationRuleResponse_recommendedActionTypes = &sCreateAutomationRuleResponse_recommendedActionTypes
+var CreateAutomationRuleResponse_criteria = &sCreateAutomationRuleResponse_criteria
+var CreateAutomationRuleResponse_schedule = &sCreateAutomationRuleResponse_schedule
+var CreateAutomationRuleResponse_status = &sCreateAutomationRuleResponse_status
+var CreateAutomationRuleResponse_tags = &sCreateAutomationRuleResponse_tags
+var CreateAutomationRuleResponse_createdTimestamp = &sCreateAutomationRuleResponse_createdTimestamp
+
+var DeleteAutomationRuleRequest = &sDeleteAutomationRuleRequest
+var DeleteAutomationRuleRequest_ruleArn = &sDeleteAutomationRuleRequest_ruleArn
+var DeleteAutomationRuleRequest_ruleRevision = &sDeleteAutomationRuleRequest_ruleRevision
+var DeleteAutomationRuleRequest_clientToken = &sDeleteAutomationRuleRequest_clientToken
+
+var DeleteAutomationRuleResponse = &sDeleteAutomationRuleResponse
+
+var DisassociateAccountsRequest = &sDisassociateAccountsRequest
+var DisassociateAccountsRequest_accountIds = &sDisassociateAccountsRequest_accountIds
+var DisassociateAccountsRequest_clientToken = &sDisassociateAccountsRequest_clientToken
+
+var DisassociateAccountsResponse = &sDisassociateAccountsResponse
+var DisassociateAccountsResponse_accountIds = &sDisassociateAccountsResponse_accountIds
+var DisassociateAccountsResponse_errors = &sDisassociateAccountsResponse_errors
+
+var GetAutomationEventRequest = &sGetAutomationEventRequest
+var GetAutomationEventRequest_eventId = &sGetAutomationEventRequest_eventId
+
+var GetAutomationEventResponse = &sGetAutomationEventResponse
+var GetAutomationEventResponse_eventId = &sGetAutomationEventResponse_eventId
+var GetAutomationEventResponse_eventDescription = &sGetAutomationEventResponse_eventDescription
+var GetAutomationEventResponse_eventType = &sGetAutomationEventResponse_eventType
+var GetAutomationEventResponse_eventStatus = &sGetAutomationEventResponse_eventStatus
+var GetAutomationEventResponse_eventStatusReason = &sGetAutomationEventResponse_eventStatusReason
+var GetAutomationEventResponse_resourceArn = &sGetAutomationEventResponse_resourceArn
+var GetAutomationEventResponse_resourceId = &sGetAutomationEventResponse_resourceId
+var GetAutomationEventResponse_recommendedActionId = &sGetAutomationEventResponse_recommendedActionId
+var GetAutomationEventResponse_accountId = &sGetAutomationEventResponse_accountId
+var GetAutomationEventResponse_region = &sGetAutomationEventResponse_region
+var GetAutomationEventResponse_ruleId = &sGetAutomationEventResponse_ruleId
+var GetAutomationEventResponse_resourceType = &sGetAutomationEventResponse_resourceType
+var GetAutomationEventResponse_createdTimestamp = &sGetAutomationEventResponse_createdTimestamp
+var GetAutomationEventResponse_completedTimestamp = &sGetAutomationEventResponse_completedTimestamp
+var GetAutomationEventResponse_estimatedMonthlySavings = &sGetAutomationEventResponse_estimatedMonthlySavings
+
+var GetAutomationRuleRequest = &sGetAutomationRuleRequest
+var GetAutomationRuleRequest_ruleArn = &sGetAutomationRuleRequest_ruleArn
+
+var GetAutomationRuleResponse = &sGetAutomationRuleResponse
+var GetAutomationRuleResponse_ruleArn = &sGetAutomationRuleResponse_ruleArn
+var GetAutomationRuleResponse_ruleId = &sGetAutomationRuleResponse_ruleId
+var GetAutomationRuleResponse_name = &sGetAutomationRuleResponse_name
+var GetAutomationRuleResponse_description = &sGetAutomationRuleResponse_description
+var GetAutomationRuleResponse_ruleType = &sGetAutomationRuleResponse_ruleType
+var GetAutomationRuleResponse_ruleRevision = &sGetAutomationRuleResponse_ruleRevision
+var GetAutomationRuleResponse_accountId = &sGetAutomationRuleResponse_accountId
+var GetAutomationRuleResponse_organizationConfiguration = &sGetAutomationRuleResponse_organizationConfiguration
+var GetAutomationRuleResponse_priority = &sGetAutomationRuleResponse_priority
+var GetAutomationRuleResponse_recommendedActionTypes = &sGetAutomationRuleResponse_recommendedActionTypes
+var GetAutomationRuleResponse_criteria = &sGetAutomationRuleResponse_criteria
+var GetAutomationRuleResponse_schedule = &sGetAutomationRuleResponse_schedule
+var GetAutomationRuleResponse_status = &sGetAutomationRuleResponse_status
+var GetAutomationRuleResponse_tags = &sGetAutomationRuleResponse_tags
+var GetAutomationRuleResponse_createdTimestamp = &sGetAutomationRuleResponse_createdTimestamp
+var GetAutomationRuleResponse_lastUpdatedTimestamp = &sGetAutomationRuleResponse_lastUpdatedTimestamp
+
+var GetEnrollmentConfigurationRequest = &sGetEnrollmentConfigurationRequest
+
+var GetEnrollmentConfigurationResponse = &sGetEnrollmentConfigurationResponse
+var GetEnrollmentConfigurationResponse_status = &sGetEnrollmentConfigurationResponse_status
+var GetEnrollmentConfigurationResponse_statusReason = &sGetEnrollmentConfigurationResponse_statusReason
+var GetEnrollmentConfigurationResponse_organizationRuleMode = &sGetEnrollmentConfigurationResponse_organizationRuleMode
+var GetEnrollmentConfigurationResponse_lastUpdatedTimestamp = &sGetEnrollmentConfigurationResponse_lastUpdatedTimestamp
+
+var ListAccountsRequest = &sListAccountsRequest
+var ListAccountsRequest_maxResults = &sListAccountsRequest_maxResults
+var ListAccountsRequest_nextToken = &sListAccountsRequest_nextToken
+
+var ListAccountsResponse = &sListAccountsResponse
+var ListAccountsResponse_accounts = &sListAccountsResponse_accounts
+var ListAccountsResponse_nextToken = &sListAccountsResponse_nextToken
+
+var ListAutomationEventsRequest = &sListAutomationEventsRequest
+var ListAutomationEventsRequest_filters = &sListAutomationEventsRequest_filters
+var ListAutomationEventsRequest_startTimeInclusive = &sListAutomationEventsRequest_startTimeInclusive
+var ListAutomationEventsRequest_endTimeExclusive = &sListAutomationEventsRequest_endTimeExclusive
+var ListAutomationEventsRequest_maxResults = &sListAutomationEventsRequest_maxResults
+var ListAutomationEventsRequest_nextToken = &sListAutomationEventsRequest_nextToken
+
+var ListAutomationEventsResponse = &sListAutomationEventsResponse
+var ListAutomationEventsResponse_automationEvents = &sListAutomationEventsResponse_automationEvents
+var ListAutomationEventsResponse_nextToken = &sListAutomationEventsResponse_nextToken
+
+var ListAutomationEventStepsRequest = &sListAutomationEventStepsRequest
+var ListAutomationEventStepsRequest_eventId = &sListAutomationEventStepsRequest_eventId
+var ListAutomationEventStepsRequest_maxResults = &sListAutomationEventStepsRequest_maxResults
+var ListAutomationEventStepsRequest_nextToken = &sListAutomationEventStepsRequest_nextToken
+
+var ListAutomationEventStepsResponse = &sListAutomationEventStepsResponse
+var ListAutomationEventStepsResponse_automationEventSteps = &sListAutomationEventStepsResponse_automationEventSteps
+var ListAutomationEventStepsResponse_nextToken = &sListAutomationEventStepsResponse_nextToken
+
+var ListAutomationEventSummariesRequest = &sListAutomationEventSummariesRequest
+var ListAutomationEventSummariesRequest_filters = &sListAutomationEventSummariesRequest_filters
+var ListAutomationEventSummariesRequest_startDateInclusive = &sListAutomationEventSummariesRequest_startDateInclusive
+var ListAutomationEventSummariesRequest_endDateExclusive = &sListAutomationEventSummariesRequest_endDateExclusive
+var ListAutomationEventSummariesRequest_maxResults = &sListAutomationEventSummariesRequest_maxResults
+var ListAutomationEventSummariesRequest_nextToken = &sListAutomationEventSummariesRequest_nextToken
+
+var ListAutomationEventSummariesResponse = &sListAutomationEventSummariesResponse
+var ListAutomationEventSummariesResponse_automationEventSummaries = &sListAutomationEventSummariesResponse_automationEventSummaries
+var ListAutomationEventSummariesResponse_nextToken = &sListAutomationEventSummariesResponse_nextToken
+
+var ListAutomationRulePreviewRequest = &sListAutomationRulePreviewRequest
+var ListAutomationRulePreviewRequest_ruleType = &sListAutomationRulePreviewRequest_ruleType
+var ListAutomationRulePreviewRequest_organizationScope = &sListAutomationRulePreviewRequest_organizationScope
+var ListAutomationRulePreviewRequest_recommendedActionTypes = &sListAutomationRulePreviewRequest_recommendedActionTypes
+var ListAutomationRulePreviewRequest_criteria = &sListAutomationRulePreviewRequest_criteria
+var ListAutomationRulePreviewRequest_maxResults = &sListAutomationRulePreviewRequest_maxResults
+var ListAutomationRulePreviewRequest_nextToken = &sListAutomationRulePreviewRequest_nextToken
+
+var ListAutomationRulePreviewResponse = &sListAutomationRulePreviewResponse
+var ListAutomationRulePreviewResponse_previewResults = &sListAutomationRulePreviewResponse_previewResults
+var ListAutomationRulePreviewResponse_nextToken = &sListAutomationRulePreviewResponse_nextToken
+
+var ListAutomationRulePreviewSummariesRequest = &sListAutomationRulePreviewSummariesRequest
+var ListAutomationRulePreviewSummariesRequest_ruleType = &sListAutomationRulePreviewSummariesRequest_ruleType
+var ListAutomationRulePreviewSummariesRequest_organizationScope = &sListAutomationRulePreviewSummariesRequest_organizationScope
+var ListAutomationRulePreviewSummariesRequest_recommendedActionTypes = &sListAutomationRulePreviewSummariesRequest_recommendedActionTypes
+var ListAutomationRulePreviewSummariesRequest_criteria = &sListAutomationRulePreviewSummariesRequest_criteria
+var ListAutomationRulePreviewSummariesRequest_maxResults = &sListAutomationRulePreviewSummariesRequest_maxResults
+var ListAutomationRulePreviewSummariesRequest_nextToken = &sListAutomationRulePreviewSummariesRequest_nextToken
+
+var ListAutomationRulePreviewSummariesResponse = &sListAutomationRulePreviewSummariesResponse
+var ListAutomationRulePreviewSummariesResponse_previewResultSummaries = &sListAutomationRulePreviewSummariesResponse_previewResultSummaries
+var ListAutomationRulePreviewSummariesResponse_nextToken = &sListAutomationRulePreviewSummariesResponse_nextToken
+
+var ListAutomationRulesRequest = &sListAutomationRulesRequest
+var ListAutomationRulesRequest_filters = &sListAutomationRulesRequest_filters
+var ListAutomationRulesRequest_maxResults = &sListAutomationRulesRequest_maxResults
+var ListAutomationRulesRequest_nextToken = &sListAutomationRulesRequest_nextToken
+
+var ListAutomationRulesResponse = &sListAutomationRulesResponse
+var ListAutomationRulesResponse_automationRules = &sListAutomationRulesResponse_automationRules
+var ListAutomationRulesResponse_nextToken = &sListAutomationRulesResponse_nextToken
+
+var ListRecommendedActionsRequest = &sListRecommendedActionsRequest
+var ListRecommendedActionsRequest_filters = &sListRecommendedActionsRequest_filters
+var ListRecommendedActionsRequest_maxResults = &sListRecommendedActionsRequest_maxResults
+var ListRecommendedActionsRequest_nextToken = &sListRecommendedActionsRequest_nextToken
+
+var ListRecommendedActionsResponse = &sListRecommendedActionsResponse
+var ListRecommendedActionsResponse_recommendedActions = &sListRecommendedActionsResponse_recommendedActions
+var ListRecommendedActionsResponse_nextToken = &sListRecommendedActionsResponse_nextToken
+
+var ListRecommendedActionSummariesRequest = &sListRecommendedActionSummariesRequest
+var ListRecommendedActionSummariesRequest_filters = &sListRecommendedActionSummariesRequest_filters
+var ListRecommendedActionSummariesRequest_maxResults = &sListRecommendedActionSummariesRequest_maxResults
+var ListRecommendedActionSummariesRequest_nextToken = &sListRecommendedActionSummariesRequest_nextToken
+
+var ListRecommendedActionSummariesResponse = &sListRecommendedActionSummariesResponse
+var ListRecommendedActionSummariesResponse_recommendedActionSummaries = &sListRecommendedActionSummariesResponse_recommendedActionSummaries
+var ListRecommendedActionSummariesResponse_nextToken = &sListRecommendedActionSummariesResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RollbackAutomationEventRequest = &sRollbackAutomationEventRequest
+var RollbackAutomationEventRequest_eventId = &sRollbackAutomationEventRequest_eventId
+var RollbackAutomationEventRequest_clientToken = &sRollbackAutomationEventRequest_clientToken
+
+var RollbackAutomationEventResponse = &sRollbackAutomationEventResponse
+var RollbackAutomationEventResponse_eventId = &sRollbackAutomationEventResponse_eventId
+var RollbackAutomationEventResponse_eventStatus = &sRollbackAutomationEventResponse_eventStatus
+
+var StartAutomationEventRequest = &sStartAutomationEventRequest
+var StartAutomationEventRequest_recommendedActionId = &sStartAutomationEventRequest_recommendedActionId
+var StartAutomationEventRequest_clientToken = &sStartAutomationEventRequest_clientToken
+
+var StartAutomationEventResponse = &sStartAutomationEventResponse
+var StartAutomationEventResponse_recommendedActionId = &sStartAutomationEventResponse_recommendedActionId
+var StartAutomationEventResponse_eventId = &sStartAutomationEventResponse_eventId
+var StartAutomationEventResponse_eventStatus = &sStartAutomationEventResponse_eventStatus
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_ruleRevision = &sTagResourceRequest_ruleRevision
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+var TagResourceRequest_clientToken = &sTagResourceRequest_clientToken
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_ruleRevision = &sUntagResourceRequest_ruleRevision
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+var UntagResourceRequest_clientToken = &sUntagResourceRequest_clientToken
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateAutomationRuleRequest = &sUpdateAutomationRuleRequest
+var UpdateAutomationRuleRequest_ruleArn = &sUpdateAutomationRuleRequest_ruleArn
+var UpdateAutomationRuleRequest_ruleRevision = &sUpdateAutomationRuleRequest_ruleRevision
+var UpdateAutomationRuleRequest_name = &sUpdateAutomationRuleRequest_name
+var UpdateAutomationRuleRequest_description = &sUpdateAutomationRuleRequest_description
+var UpdateAutomationRuleRequest_ruleType = &sUpdateAutomationRuleRequest_ruleType
+var UpdateAutomationRuleRequest_organizationConfiguration = &sUpdateAutomationRuleRequest_organizationConfiguration
+var UpdateAutomationRuleRequest_priority = &sUpdateAutomationRuleRequest_priority
+var UpdateAutomationRuleRequest_recommendedActionTypes = &sUpdateAutomationRuleRequest_recommendedActionTypes
+var UpdateAutomationRuleRequest_criteria = &sUpdateAutomationRuleRequest_criteria
+var UpdateAutomationRuleRequest_schedule = &sUpdateAutomationRuleRequest_schedule
+var UpdateAutomationRuleRequest_status = &sUpdateAutomationRuleRequest_status
+var UpdateAutomationRuleRequest_clientToken = &sUpdateAutomationRuleRequest_clientToken
+
+var UpdateAutomationRuleResponse = &sUpdateAutomationRuleResponse
+var UpdateAutomationRuleResponse_ruleArn = &sUpdateAutomationRuleResponse_ruleArn
+var UpdateAutomationRuleResponse_ruleRevision = &sUpdateAutomationRuleResponse_ruleRevision
+var UpdateAutomationRuleResponse_name = &sUpdateAutomationRuleResponse_name
+var UpdateAutomationRuleResponse_description = &sUpdateAutomationRuleResponse_description
+var UpdateAutomationRuleResponse_ruleType = &sUpdateAutomationRuleResponse_ruleType
+var UpdateAutomationRuleResponse_organizationConfiguration = &sUpdateAutomationRuleResponse_organizationConfiguration
+var UpdateAutomationRuleResponse_priority = &sUpdateAutomationRuleResponse_priority
+var UpdateAutomationRuleResponse_recommendedActionTypes = &sUpdateAutomationRuleResponse_recommendedActionTypes
+var UpdateAutomationRuleResponse_criteria = &sUpdateAutomationRuleResponse_criteria
+var UpdateAutomationRuleResponse_schedule = &sUpdateAutomationRuleResponse_schedule
+var UpdateAutomationRuleResponse_status = &sUpdateAutomationRuleResponse_status
+var UpdateAutomationRuleResponse_createdTimestamp = &sUpdateAutomationRuleResponse_createdTimestamp
+var UpdateAutomationRuleResponse_lastUpdatedTimestamp = &sUpdateAutomationRuleResponse_lastUpdatedTimestamp
+
+var UpdateEnrollmentConfigurationRequest = &sUpdateEnrollmentConfigurationRequest
+var UpdateEnrollmentConfigurationRequest_status = &sUpdateEnrollmentConfigurationRequest_status
+var UpdateEnrollmentConfigurationRequest_clientToken = &sUpdateEnrollmentConfigurationRequest_clientToken
+
+var UpdateEnrollmentConfigurationResponse = &sUpdateEnrollmentConfigurationResponse
+var UpdateEnrollmentConfigurationResponse_status = &sUpdateEnrollmentConfigurationResponse_status
+var UpdateEnrollmentConfigurationResponse_statusReason = &sUpdateEnrollmentConfigurationResponse_statusReason
+var UpdateEnrollmentConfigurationResponse_lastUpdatedTimestamp = &sUpdateEnrollmentConfigurationResponse_lastUpdatedTimestamp
+
+var ComputeOptimizerAutomationService = &smithy.ServiceSchema{Schema: &s_ComputeOptimizerAutomationService, Version: "2025-09-22"}

@@ -4,2369 +4,1658 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DescribeEntitiesDetectionV2Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeEntitiesDetectionV2Job",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeICD10CMInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeICD10CMInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribePHIDetectionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribePHIDetectionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeRxNormInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeRxNormInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSNOMEDCTInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeSNOMEDCTInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetectEntities = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntities",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetectEntitiesV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesV2",
-}, smithy.ShapeTypeOperation, 0)
-
-var DetectPHI = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectPHI",
-}, smithy.ShapeTypeOperation, 0)
-
-var InferICD10CM = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferICD10CM",
-}, smithy.ShapeTypeOperation, 0)
-
-var InferRxNorm = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferRxNorm",
-}, smithy.ShapeTypeOperation, 0)
-
-var InferSNOMEDCT = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferSNOMEDCT",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEntitiesDetectionV2Jobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListEntitiesDetectionV2Jobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListICD10CMInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListICD10CMInferenceJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListPHIDetectionJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListPHIDetectionJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListRxNormInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListRxNormInferenceJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSNOMEDCTInferenceJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListSNOMEDCTInferenceJobs",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartEntitiesDetectionV2Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartEntitiesDetectionV2Job",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartICD10CMInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartICD10CMInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartPHIDetectionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartPHIDetectionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartRxNormInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartRxNormInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StartSNOMEDCTInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartSNOMEDCTInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopEntitiesDetectionV2Job = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopEntitiesDetectionV2Job",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopICD10CMInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopICD10CMInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopPHIDetectionJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopPHIDetectionJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopRxNormInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopRxNormInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var StopSNOMEDCTInferenceJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopSNOMEDCTInferenceJob",
-}, smithy.ShapeTypeOperation, 0)
-
-var _ComprehendMedical_20181030 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedical_20181030",
-}, smithy.ShapeTypeService, 0)
-
-var ComprehendMedical_20181030 = smithy.NewServiceSchema(_ComprehendMedical_20181030, "2018-10-30")
-
-var _AnyLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "AnyLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var Attribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Attribute",
-}, smithy.ShapeTypeStructure, 10)
-var Attribute_Type *smithy.Schema
-
-var Attribute_Score *smithy.Schema
-
-var Attribute_RelationshipScore *smithy.Schema
-
-var Attribute_RelationshipType *smithy.Schema
-
-var Attribute_Id *smithy.Schema
-
-var Attribute_BeginOffset *smithy.Schema
-
-var Attribute_EndOffset *smithy.Schema
-
-var Attribute_Text *smithy.Schema
-
-var Attribute_Category *smithy.Schema
-
-var Attribute_Traits *smithy.Schema
-
-var _AttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "AttributeList",
-}, smithy.ShapeTypeList, 1)
-var _AttributeList_member *smithy.Schema
-
-var AttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "AttributeName",
-}, smithy.ShapeTypeEnum, 9)
-var AttributeName_SIGN *smithy.Schema
-
-var AttributeName_SYMPTOM *smithy.Schema
-
-var AttributeName_DIAGNOSIS *smithy.Schema
-
-var AttributeName_NEGATION *smithy.Schema
-
-var AttributeName_PERTAINS_TO_FAMILY *smithy.Schema
-
-var AttributeName_HYPOTHETICAL *smithy.Schema
-
-var AttributeName_LOW_CONFIDENCE *smithy.Schema
-
-var AttributeName_PAST_HISTORY *smithy.Schema
-
-var AttributeName_FUTURE *smithy.Schema
-
-var _BoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "BoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var Characters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Characters",
-}, smithy.ShapeTypeStructure, 1)
-var Characters_OriginalTextCharacters *smithy.Schema
-
-var _ClientRequestTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ClientRequestTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var ComprehendMedicalAsyncJobFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedicalAsyncJobFilter",
-}, smithy.ShapeTypeStructure, 4)
-var ComprehendMedicalAsyncJobFilter_JobName *smithy.Schema
-
-var ComprehendMedicalAsyncJobFilter_JobStatus *smithy.Schema
-
-var ComprehendMedicalAsyncJobFilter_SubmitTimeBefore *smithy.Schema
-
-var ComprehendMedicalAsyncJobFilter_SubmitTimeAfter *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedicalAsyncJobProperties",
-}, smithy.ShapeTypeStructure, 14)
-var ComprehendMedicalAsyncJobProperties_JobId *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_JobName *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_JobStatus *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_Message *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_SubmitTime *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_EndTime *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_ExpirationTime *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_InputDataConfig *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_OutputDataConfig *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_LanguageCode *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_DataAccessRoleArn *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_ManifestFilePath *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_KMSKey *smithy.Schema
-
-var ComprehendMedicalAsyncJobProperties_ModelVersion *smithy.Schema
-
-var _ComprehendMedicalAsyncJobPropertiesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ComprehendMedicalAsyncJobPropertiesList",
-}, smithy.ShapeTypeList, 1)
-var _ComprehendMedicalAsyncJobPropertiesList_member *smithy.Schema
-
-var Entity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Entity",
-}, smithy.ShapeTypeStructure, 9)
-var Entity_Id *smithy.Schema
-
-var Entity_BeginOffset *smithy.Schema
-
-var Entity_EndOffset *smithy.Schema
-
-var Entity_Score *smithy.Schema
-
-var Entity_Text *smithy.Schema
-
-var Entity_Category *smithy.Schema
-
-var Entity_Type *smithy.Schema
-
-var Entity_Traits *smithy.Schema
-
-var Entity_Attributes *smithy.Schema
-
-var _EntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "EntityList",
-}, smithy.ShapeTypeList, 1)
-var _EntityList_member *smithy.Schema
-
-var EntitySubType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "EntitySubType",
-}, smithy.ShapeTypeEnum, 45)
-var EntitySubType_NAME *smithy.Schema
-
-var EntitySubType_DX_NAME *smithy.Schema
-
-var EntitySubType_DOSAGE *smithy.Schema
-
-var EntitySubType_ROUTE_OR_MODE *smithy.Schema
-
-var EntitySubType_FORM *smithy.Schema
-
-var EntitySubType_FREQUENCY *smithy.Schema
-
-var EntitySubType_DURATION *smithy.Schema
-
-var EntitySubType_GENERIC_NAME *smithy.Schema
-
-var EntitySubType_BRAND_NAME *smithy.Schema
-
-var EntitySubType_STRENGTH *smithy.Schema
-
-var EntitySubType_RATE *smithy.Schema
-
-var EntitySubType_ACUITY *smithy.Schema
-
-var EntitySubType_TEST_NAME *smithy.Schema
-
-var EntitySubType_TEST_VALUE *smithy.Schema
-
-var EntitySubType_TEST_UNITS *smithy.Schema
-
-var EntitySubType_TEST_UNIT *smithy.Schema
-
-var EntitySubType_PROCEDURE_NAME *smithy.Schema
-
-var EntitySubType_TREATMENT_NAME *smithy.Schema
-
-var EntitySubType_DATE *smithy.Schema
-
-var EntitySubType_AGE *smithy.Schema
-
-var EntitySubType_CONTACT_POINT *smithy.Schema
-
-var EntitySubType_PHONE_OR_FAX *smithy.Schema
-
-var EntitySubType_EMAIL *smithy.Schema
-
-var EntitySubType_IDENTIFIER *smithy.Schema
-
-var EntitySubType_ID *smithy.Schema
-
-var EntitySubType_URL *smithy.Schema
-
-var EntitySubType_ADDRESS *smithy.Schema
-
-var EntitySubType_PROFESSION *smithy.Schema
-
-var EntitySubType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var EntitySubType_DIRECTION *smithy.Schema
-
-var EntitySubType_QUALITY *smithy.Schema
-
-var EntitySubType_QUANTITY *smithy.Schema
-
-var EntitySubType_TIME_EXPRESSION *smithy.Schema
-
-var EntitySubType_TIME_TO_MEDICATION_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_DX_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_TEST_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_PROCEDURE_NAME *smithy.Schema
-
-var EntitySubType_TIME_TO_TREATMENT_NAME *smithy.Schema
-
-var EntitySubType_AMOUNT *smithy.Schema
-
-var EntitySubType_GENDER *smithy.Schema
-
-var EntitySubType_RACE_ETHNICITY *smithy.Schema
-
-var EntitySubType_ALLERGIES *smithy.Schema
-
-var EntitySubType_TOBACCO_USE *smithy.Schema
-
-var EntitySubType_ALCOHOL_CONSUMPTION *smithy.Schema
-
-var EntitySubType_REC_DRUG_USE *smithy.Schema
-
-var EntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "EntityType",
-}, smithy.ShapeTypeEnum, 7)
-var EntityType_MEDICATION *smithy.Schema
-
-var EntityType_MEDICAL_CONDITION *smithy.Schema
-
-var EntityType_PROTECTED_HEALTH_INFORMATION *smithy.Schema
-
-var EntityType_TEST_TREATMENT_PROCEDURE *smithy.Schema
-
-var EntityType_ANATOMY *smithy.Schema
-
-var EntityType_TIME_EXPRESSION *smithy.Schema
-
-var EntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL *smithy.Schema
-
-var _Float = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Float",
-}, smithy.ShapeTypeFloat, 0)
-
-var _IamRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "IamRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var ICD10CMAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMAttribute",
-}, smithy.ShapeTypeStructure, 10)
-var ICD10CMAttribute_Type *smithy.Schema
-
-var ICD10CMAttribute_Score *smithy.Schema
-
-var ICD10CMAttribute_RelationshipScore *smithy.Schema
-
-var ICD10CMAttribute_Id *smithy.Schema
-
-var ICD10CMAttribute_BeginOffset *smithy.Schema
-
-var ICD10CMAttribute_EndOffset *smithy.Schema
-
-var ICD10CMAttribute_Text *smithy.Schema
-
-var ICD10CMAttribute_Traits *smithy.Schema
-
-var ICD10CMAttribute_Category *smithy.Schema
-
-var ICD10CMAttribute_RelationshipType *smithy.Schema
-
-var _ICD10CMAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMAttributeList_member *smithy.Schema
-
-var ICD10CMAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMAttributeType",
-}, smithy.ShapeTypeEnum, 7)
-var ICD10CMAttributeType_ACUITY *smithy.Schema
-
-var ICD10CMAttributeType_DIRECTION *smithy.Schema
-
-var ICD10CMAttributeType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var ICD10CMAttributeType_QUALITY *smithy.Schema
-
-var ICD10CMAttributeType_QUANTITY *smithy.Schema
-
-var ICD10CMAttributeType_TIME_TO_DX_NAME *smithy.Schema
-
-var ICD10CMAttributeType_TIME_EXPRESSION *smithy.Schema
-
-var ICD10CMConcept = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMConcept",
-}, smithy.ShapeTypeStructure, 3)
-var ICD10CMConcept_Description *smithy.Schema
-
-var ICD10CMConcept_Code *smithy.Schema
-
-var ICD10CMConcept_Score *smithy.Schema
-
-var _ICD10CMConceptList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMConceptList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMConceptList_member *smithy.Schema
-
-var ICD10CMEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntity",
-}, smithy.ShapeTypeStructure, 10)
-var ICD10CMEntity_Id *smithy.Schema
-
-var ICD10CMEntity_Text *smithy.Schema
-
-var ICD10CMEntity_Category *smithy.Schema
-
-var ICD10CMEntity_Type *smithy.Schema
-
-var ICD10CMEntity_Score *smithy.Schema
-
-var ICD10CMEntity_BeginOffset *smithy.Schema
-
-var ICD10CMEntity_EndOffset *smithy.Schema
-
-var ICD10CMEntity_Attributes *smithy.Schema
-
-var ICD10CMEntity_Traits *smithy.Schema
-
-var ICD10CMEntity_ICD10CMConcepts *smithy.Schema
-
-var ICD10CMEntityCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntityCategory",
-}, smithy.ShapeTypeEnum, 1)
-var ICD10CMEntityCategory_MEDICAL_CONDITION *smithy.Schema
-
-var _ICD10CMEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntityList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMEntityList_member *smithy.Schema
-
-var ICD10CMEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMEntityType",
-}, smithy.ShapeTypeEnum, 2)
-var ICD10CMEntityType_DX_NAME *smithy.Schema
-
-var ICD10CMEntityType_TIME_EXPRESSION *smithy.Schema
-
-var ICD10CMRelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMRelationshipType",
-}, smithy.ShapeTypeEnum, 3)
-var ICD10CMRelationshipType_OVERLAP *smithy.Schema
-
-var ICD10CMRelationshipType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var ICD10CMRelationshipType_QUALITY *smithy.Schema
-
-var ICD10CMTrait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMTrait",
-}, smithy.ShapeTypeStructure, 2)
-var ICD10CMTrait_Name *smithy.Schema
-
-var ICD10CMTrait_Score *smithy.Schema
-
-var _ICD10CMTraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMTraitList",
-}, smithy.ShapeTypeList, 1)
-var _ICD10CMTraitList_member *smithy.Schema
-
-var ICD10CMTraitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ICD10CMTraitName",
-}, smithy.ShapeTypeEnum, 7)
-var ICD10CMTraitName_NEGATION *smithy.Schema
-
-var ICD10CMTraitName_DIAGNOSIS *smithy.Schema
-
-var ICD10CMTraitName_SIGN *smithy.Schema
-
-var ICD10CMTraitName_SYMPTOM *smithy.Schema
-
-var ICD10CMTraitName_PERTAINS_TO_FAMILY *smithy.Schema
-
-var ICD10CMTraitName_HYPOTHETICAL *smithy.Schema
-
-var ICD10CMTraitName_LOW_CONFIDENCE *smithy.Schema
-
-var InputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var InputDataConfig_S3Bucket *smithy.Schema
-
-var InputDataConfig_S3Key *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var InvalidEncodingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InvalidEncodingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidEncodingException_Message *smithy.Schema
-
-var InvalidRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InvalidRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidRequestException_Message *smithy.Schema
-
-var _JobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "JobId",
-}, smithy.ShapeTypeString, 0)
-
-var _JobName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "JobName",
-}, smithy.ShapeTypeString, 0)
-
-var JobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "JobStatus",
-}, smithy.ShapeTypeEnum, 7)
-var JobStatus_SUBMITTED *smithy.Schema
-
-var JobStatus_IN_PROGRESS *smithy.Schema
-
-var JobStatus_COMPLETED *smithy.Schema
-
-var JobStatus_PARTIAL_SUCCESS *smithy.Schema
-
-var JobStatus_FAILED *smithy.Schema
-
-var JobStatus_STOP_REQUESTED *smithy.Schema
-
-var JobStatus_STOPPED *smithy.Schema
-
-var _KMSKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "KMSKey",
-}, smithy.ShapeTypeString, 0)
-
-var LanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "LanguageCode",
-}, smithy.ShapeTypeEnum, 1)
-var LanguageCode_EN *smithy.Schema
-
-var _ManifestFilePath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ManifestFilePath",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResultsInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "MaxResultsInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ModelVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ModelVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _OntologyLinkingBoundedLengthString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "OntologyLinkingBoundedLengthString",
-}, smithy.ShapeTypeString, 0)
-
-var OutputDataConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "OutputDataConfig",
-}, smithy.ShapeTypeStructure, 2)
-var OutputDataConfig_S3Bucket *smithy.Schema
-
-var OutputDataConfig_S3Key *smithy.Schema
-
-var RelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RelationshipType",
-}, smithy.ShapeTypeEnum, 22)
-var RelationshipType_EVERY *smithy.Schema
-
-var RelationshipType_WITH_DOSAGE *smithy.Schema
-
-var RelationshipType_ADMINISTERED_VIA *smithy.Schema
-
-var RelationshipType_FOR *smithy.Schema
-
-var RelationshipType_NEGATIVE *smithy.Schema
-
-var RelationshipType_OVERLAP *smithy.Schema
-
-var RelationshipType_DOSAGE *smithy.Schema
-
-var RelationshipType_ROUTE_OR_MODE *smithy.Schema
-
-var RelationshipType_FORM *smithy.Schema
-
-var RelationshipType_FREQUENCY *smithy.Schema
-
-var RelationshipType_DURATION *smithy.Schema
-
-var RelationshipType_STRENGTH *smithy.Schema
-
-var RelationshipType_RATE *smithy.Schema
-
-var RelationshipType_ACUITY *smithy.Schema
-
-var RelationshipType_TEST_VALUE *smithy.Schema
-
-var RelationshipType_TEST_UNITS *smithy.Schema
-
-var RelationshipType_TEST_UNIT *smithy.Schema
-
-var RelationshipType_DIRECTION *smithy.Schema
-
-var RelationshipType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var RelationshipType_AMOUNT *smithy.Schema
-
-var RelationshipType_USAGE *smithy.Schema
-
-var RelationshipType_QUALITY *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var RxNormAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormAttribute",
-}, smithy.ShapeTypeStructure, 8)
-var RxNormAttribute_Type *smithy.Schema
-
-var RxNormAttribute_Score *smithy.Schema
-
-var RxNormAttribute_RelationshipScore *smithy.Schema
-
-var RxNormAttribute_Id *smithy.Schema
-
-var RxNormAttribute_BeginOffset *smithy.Schema
-
-var RxNormAttribute_EndOffset *smithy.Schema
-
-var RxNormAttribute_Text *smithy.Schema
-
-var RxNormAttribute_Traits *smithy.Schema
-
-var _RxNormAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormAttributeList_member *smithy.Schema
-
-var RxNormAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormAttributeType",
-}, smithy.ShapeTypeEnum, 7)
-var RxNormAttributeType_DOSAGE *smithy.Schema
-
-var RxNormAttributeType_DURATION *smithy.Schema
-
-var RxNormAttributeType_FORM *smithy.Schema
-
-var RxNormAttributeType_FREQUENCY *smithy.Schema
-
-var RxNormAttributeType_RATE *smithy.Schema
-
-var RxNormAttributeType_ROUTE_OR_MODE *smithy.Schema
-
-var RxNormAttributeType_STRENGTH *smithy.Schema
-
-var RxNormConcept = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormConcept",
-}, smithy.ShapeTypeStructure, 3)
-var RxNormConcept_Description *smithy.Schema
-
-var RxNormConcept_Code *smithy.Schema
-
-var RxNormConcept_Score *smithy.Schema
-
-var _RxNormConceptList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormConceptList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormConceptList_member *smithy.Schema
-
-var RxNormEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntity",
-}, smithy.ShapeTypeStructure, 10)
-var RxNormEntity_Id *smithy.Schema
-
-var RxNormEntity_Text *smithy.Schema
-
-var RxNormEntity_Category *smithy.Schema
-
-var RxNormEntity_Type *smithy.Schema
-
-var RxNormEntity_Score *smithy.Schema
-
-var RxNormEntity_BeginOffset *smithy.Schema
-
-var RxNormEntity_EndOffset *smithy.Schema
-
-var RxNormEntity_Attributes *smithy.Schema
-
-var RxNormEntity_Traits *smithy.Schema
-
-var RxNormEntity_RxNormConcepts *smithy.Schema
-
-var RxNormEntityCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntityCategory",
-}, smithy.ShapeTypeEnum, 1)
-var RxNormEntityCategory_MEDICATION *smithy.Schema
-
-var _RxNormEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntityList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormEntityList_member *smithy.Schema
-
-var RxNormEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormEntityType",
-}, smithy.ShapeTypeEnum, 2)
-var RxNormEntityType_BRAND_NAME *smithy.Schema
-
-var RxNormEntityType_GENERIC_NAME *smithy.Schema
-
-var RxNormTrait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormTrait",
-}, smithy.ShapeTypeStructure, 2)
-var RxNormTrait_Name *smithy.Schema
-
-var RxNormTrait_Score *smithy.Schema
-
-var _RxNormTraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormTraitList",
-}, smithy.ShapeTypeList, 1)
-var _RxNormTraitList_member *smithy.Schema
-
-var RxNormTraitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "RxNormTraitName",
-}, smithy.ShapeTypeEnum, 2)
-var RxNormTraitName_NEGATION *smithy.Schema
-
-var RxNormTraitName_PAST_HISTORY *smithy.Schema
-
-var _S3Bucket = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "S3Bucket",
-}, smithy.ShapeTypeString, 0)
-
-var _S3Key = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "S3Key",
-}, smithy.ShapeTypeString, 0)
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Message *smithy.Schema
-
-var SNOMEDCTAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTAttribute",
-}, smithy.ShapeTypeStructure, 11)
-var SNOMEDCTAttribute_Category *smithy.Schema
-
-var SNOMEDCTAttribute_Type *smithy.Schema
-
-var SNOMEDCTAttribute_Score *smithy.Schema
-
-var SNOMEDCTAttribute_RelationshipScore *smithy.Schema
-
-var SNOMEDCTAttribute_RelationshipType *smithy.Schema
-
-var SNOMEDCTAttribute_Id *smithy.Schema
-
-var SNOMEDCTAttribute_BeginOffset *smithy.Schema
-
-var SNOMEDCTAttribute_EndOffset *smithy.Schema
-
-var SNOMEDCTAttribute_Text *smithy.Schema
-
-var SNOMEDCTAttribute_Traits *smithy.Schema
-
-var SNOMEDCTAttribute_SNOMEDCTConcepts *smithy.Schema
-
-var _SNOMEDCTAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTAttributeList_member *smithy.Schema
-
-var SNOMEDCTAttributeType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTAttributeType",
-}, smithy.ShapeTypeEnum, 6)
-var SNOMEDCTAttributeType_ACUITY *smithy.Schema
-
-var SNOMEDCTAttributeType_QUALITY *smithy.Schema
-
-var SNOMEDCTAttributeType_DIRECTION *smithy.Schema
-
-var SNOMEDCTAttributeType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var SNOMEDCTAttributeType_TEST_VALUE *smithy.Schema
-
-var SNOMEDCTAttributeType_TEST_UNIT *smithy.Schema
-
-var SNOMEDCTConcept = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTConcept",
-}, smithy.ShapeTypeStructure, 3)
-var SNOMEDCTConcept_Description *smithy.Schema
-
-var SNOMEDCTConcept_Code *smithy.Schema
-
-var SNOMEDCTConcept_Score *smithy.Schema
-
-var _SNOMEDCTConceptList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTConceptList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTConceptList_member *smithy.Schema
-
-var SNOMEDCTDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTDetails",
-}, smithy.ShapeTypeStructure, 3)
-var SNOMEDCTDetails_Edition *smithy.Schema
-
-var SNOMEDCTDetails_Language *smithy.Schema
-
-var SNOMEDCTDetails_VersionDate *smithy.Schema
-
-var SNOMEDCTEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntity",
-}, smithy.ShapeTypeStructure, 10)
-var SNOMEDCTEntity_Id *smithy.Schema
-
-var SNOMEDCTEntity_Text *smithy.Schema
-
-var SNOMEDCTEntity_Category *smithy.Schema
-
-var SNOMEDCTEntity_Type *smithy.Schema
-
-var SNOMEDCTEntity_Score *smithy.Schema
-
-var SNOMEDCTEntity_BeginOffset *smithy.Schema
-
-var SNOMEDCTEntity_EndOffset *smithy.Schema
-
-var SNOMEDCTEntity_Attributes *smithy.Schema
-
-var SNOMEDCTEntity_Traits *smithy.Schema
-
-var SNOMEDCTEntity_SNOMEDCTConcepts *smithy.Schema
-
-var SNOMEDCTEntityCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntityCategory",
-}, smithy.ShapeTypeEnum, 3)
-var SNOMEDCTEntityCategory_MEDICAL_CONDITION *smithy.Schema
-
-var SNOMEDCTEntityCategory_ANATOMY *smithy.Schema
-
-var SNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE *smithy.Schema
-
-var _SNOMEDCTEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntityList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTEntityList_member *smithy.Schema
-
-var SNOMEDCTEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTEntityType",
-}, smithy.ShapeTypeEnum, 4)
-var SNOMEDCTEntityType_DX_NAME *smithy.Schema
-
-var SNOMEDCTEntityType_TEST_NAME *smithy.Schema
-
-var SNOMEDCTEntityType_PROCEDURE_NAME *smithy.Schema
-
-var SNOMEDCTEntityType_TREATMENT_NAME *smithy.Schema
-
-var SNOMEDCTRelationshipType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTRelationshipType",
-}, smithy.ShapeTypeEnum, 7)
-var SNOMEDCTRelationshipType_ACUITY *smithy.Schema
-
-var SNOMEDCTRelationshipType_QUALITY *smithy.Schema
-
-var SNOMEDCTRelationshipType_TEST_VALUE *smithy.Schema
-
-var SNOMEDCTRelationshipType_TEST_UNITS *smithy.Schema
-
-var SNOMEDCTRelationshipType_DIRECTION *smithy.Schema
-
-var SNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE *smithy.Schema
-
-var SNOMEDCTRelationshipType_TEST_UNIT *smithy.Schema
-
-var SNOMEDCTTrait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTTrait",
-}, smithy.ShapeTypeStructure, 2)
-var SNOMEDCTTrait_Name *smithy.Schema
-
-var SNOMEDCTTrait_Score *smithy.Schema
-
-var _SNOMEDCTTraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTTraitList",
-}, smithy.ShapeTypeList, 1)
-var _SNOMEDCTTraitList_member *smithy.Schema
-
-var SNOMEDCTTraitName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "SNOMEDCTTraitName",
-}, smithy.ShapeTypeEnum, 9)
-var SNOMEDCTTraitName_NEGATION *smithy.Schema
-
-var SNOMEDCTTraitName_DIAGNOSIS *smithy.Schema
-
-var SNOMEDCTTraitName_SIGN *smithy.Schema
-
-var SNOMEDCTTraitName_SYMPTOM *smithy.Schema
-
-var SNOMEDCTTraitName_PERTAINS_TO_FAMILY *smithy.Schema
-
-var SNOMEDCTTraitName_HYPOTHETICAL *smithy.Schema
-
-var SNOMEDCTTraitName_LOW_CONFIDENCE *smithy.Schema
-
-var SNOMEDCTTraitName_PAST_HISTORY *smithy.Schema
-
-var SNOMEDCTTraitName_FUTURE *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var TextSizeLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "TextSizeLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var TextSizeLimitExceededException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TooManyRequestsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "TooManyRequestsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var TooManyRequestsException_Message *smithy.Schema
-
-var Trait = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "Trait",
-}, smithy.ShapeTypeStructure, 2)
-var Trait_Name *smithy.Schema
-
-var Trait_Score *smithy.Schema
-
-var _TraitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "TraitList",
-}, smithy.ShapeTypeList, 1)
-var _TraitList_member *smithy.Schema
-
-var UnmappedAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "UnmappedAttribute",
-}, smithy.ShapeTypeStructure, 2)
-var UnmappedAttribute_Type *smithy.Schema
-
-var UnmappedAttribute_Attribute *smithy.Schema
-
-var _UnmappedAttributeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "UnmappedAttributeList",
-}, smithy.ShapeTypeList, 1)
-var _UnmappedAttributeList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var DescribeEntitiesDetectionV2JobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeEntitiesDetectionV2JobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEntitiesDetectionV2JobRequest_JobId *smithy.Schema
-
-var DescribeEntitiesDetectionV2JobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeEntitiesDetectionV2JobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribeICD10CMInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeICD10CMInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeICD10CMInferenceJobRequest_JobId *smithy.Schema
-
-var DescribeICD10CMInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeICD10CMInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribePHIDetectionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribePHIDetectionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePHIDetectionJobRequest_JobId *smithy.Schema
-
-var DescribePHIDetectionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribePHIDetectionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribeRxNormInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeRxNormInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRxNormInferenceJobRequest_JobId *smithy.Schema
-
-var DescribeRxNormInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeRxNormInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DescribeSNOMEDCTInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeSNOMEDCTInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSNOMEDCTInferenceJobRequest_JobId *smithy.Schema
-
-var DescribeSNOMEDCTInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DescribeSNOMEDCTInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties *smithy.Schema
-
-var DetectEntitiesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DetectEntitiesRequest_Text *smithy.Schema
-
-var DetectEntitiesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesResponse",
-}, smithy.ShapeTypeStructure, 4)
-var DetectEntitiesResponse_Entities *smithy.Schema
-
-var DetectEntitiesResponse_UnmappedAttributes *smithy.Schema
-
-var DetectEntitiesResponse_PaginationToken *smithy.Schema
-
-var DetectEntitiesResponse_ModelVersion *smithy.Schema
-
-var DetectEntitiesV2Request = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesV2Request",
-}, smithy.ShapeTypeStructure, 1)
-var DetectEntitiesV2Request_Text *smithy.Schema
-
-var DetectEntitiesV2Response = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectEntitiesV2Response",
-}, smithy.ShapeTypeStructure, 4)
-var DetectEntitiesV2Response_Entities *smithy.Schema
-
-var DetectEntitiesV2Response_UnmappedAttributes *smithy.Schema
-
-var DetectEntitiesV2Response_PaginationToken *smithy.Schema
-
-var DetectEntitiesV2Response_ModelVersion *smithy.Schema
-
-var DetectPHIRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectPHIRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DetectPHIRequest_Text *smithy.Schema
-
-var DetectPHIResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "DetectPHIResponse",
-}, smithy.ShapeTypeStructure, 3)
-var DetectPHIResponse_Entities *smithy.Schema
-
-var DetectPHIResponse_PaginationToken *smithy.Schema
-
-var DetectPHIResponse_ModelVersion *smithy.Schema
-
-var InferICD10CMRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferICD10CMRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InferICD10CMRequest_Text *smithy.Schema
-
-var InferICD10CMResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferICD10CMResponse",
-}, smithy.ShapeTypeStructure, 3)
-var InferICD10CMResponse_Entities *smithy.Schema
-
-var InferICD10CMResponse_PaginationToken *smithy.Schema
-
-var InferICD10CMResponse_ModelVersion *smithy.Schema
-
-var InferRxNormRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferRxNormRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InferRxNormRequest_Text *smithy.Schema
-
-var InferRxNormResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferRxNormResponse",
-}, smithy.ShapeTypeStructure, 3)
-var InferRxNormResponse_Entities *smithy.Schema
-
-var InferRxNormResponse_PaginationToken *smithy.Schema
-
-var InferRxNormResponse_ModelVersion *smithy.Schema
-
-var InferSNOMEDCTRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferSNOMEDCTRequest",
-}, smithy.ShapeTypeStructure, 1)
-var InferSNOMEDCTRequest_Text *smithy.Schema
-
-var InferSNOMEDCTResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "InferSNOMEDCTResponse",
-}, smithy.ShapeTypeStructure, 5)
-var InferSNOMEDCTResponse_Entities *smithy.Schema
-
-var InferSNOMEDCTResponse_PaginationToken *smithy.Schema
-
-var InferSNOMEDCTResponse_ModelVersion *smithy.Schema
-
-var InferSNOMEDCTResponse_SNOMEDCTDetails *smithy.Schema
-
-var InferSNOMEDCTResponse_Characters *smithy.Schema
-
-var ListEntitiesDetectionV2JobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListEntitiesDetectionV2JobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEntitiesDetectionV2JobsRequest_Filter *smithy.Schema
-
-var ListEntitiesDetectionV2JobsRequest_NextToken *smithy.Schema
-
-var ListEntitiesDetectionV2JobsRequest_MaxResults *smithy.Schema
-
-var ListEntitiesDetectionV2JobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListEntitiesDetectionV2JobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListEntitiesDetectionV2JobsResponse_NextToken *smithy.Schema
-
-var ListICD10CMInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListICD10CMInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListICD10CMInferenceJobsRequest_Filter *smithy.Schema
-
-var ListICD10CMInferenceJobsRequest_NextToken *smithy.Schema
-
-var ListICD10CMInferenceJobsRequest_MaxResults *smithy.Schema
-
-var ListICD10CMInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListICD10CMInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListICD10CMInferenceJobsResponse_NextToken *smithy.Schema
-
-var ListPHIDetectionJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListPHIDetectionJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListPHIDetectionJobsRequest_Filter *smithy.Schema
-
-var ListPHIDetectionJobsRequest_NextToken *smithy.Schema
-
-var ListPHIDetectionJobsRequest_MaxResults *smithy.Schema
-
-var ListPHIDetectionJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListPHIDetectionJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListPHIDetectionJobsResponse_NextToken *smithy.Schema
-
-var ListRxNormInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListRxNormInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRxNormInferenceJobsRequest_Filter *smithy.Schema
-
-var ListRxNormInferenceJobsRequest_NextToken *smithy.Schema
-
-var ListRxNormInferenceJobsRequest_MaxResults *smithy.Schema
-
-var ListRxNormInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListRxNormInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListRxNormInferenceJobsResponse_NextToken *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListSNOMEDCTInferenceJobsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListSNOMEDCTInferenceJobsRequest_Filter *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsRequest_NextToken *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsRequest_MaxResults *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "ListSNOMEDCTInferenceJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList *smithy.Schema
-
-var ListSNOMEDCTInferenceJobsResponse_NextToken *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartEntitiesDetectionV2JobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartEntitiesDetectionV2JobRequest_InputDataConfig *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_OutputDataConfig *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_JobName *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_ClientRequestToken *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_KMSKey *smithy.Schema
-
-var StartEntitiesDetectionV2JobRequest_LanguageCode *smithy.Schema
-
-var StartEntitiesDetectionV2JobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartEntitiesDetectionV2JobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartEntitiesDetectionV2JobResponse_JobId *smithy.Schema
-
-var StartICD10CMInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartICD10CMInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartICD10CMInferenceJobRequest_InputDataConfig *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_OutputDataConfig *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_JobName *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_ClientRequestToken *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_KMSKey *smithy.Schema
-
-var StartICD10CMInferenceJobRequest_LanguageCode *smithy.Schema
-
-var StartICD10CMInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartICD10CMInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartICD10CMInferenceJobResponse_JobId *smithy.Schema
-
-var StartPHIDetectionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartPHIDetectionJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartPHIDetectionJobRequest_InputDataConfig *smithy.Schema
-
-var StartPHIDetectionJobRequest_OutputDataConfig *smithy.Schema
-
-var StartPHIDetectionJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartPHIDetectionJobRequest_JobName *smithy.Schema
-
-var StartPHIDetectionJobRequest_ClientRequestToken *smithy.Schema
-
-var StartPHIDetectionJobRequest_KMSKey *smithy.Schema
-
-var StartPHIDetectionJobRequest_LanguageCode *smithy.Schema
-
-var StartPHIDetectionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartPHIDetectionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartPHIDetectionJobResponse_JobId *smithy.Schema
-
-var StartRxNormInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartRxNormInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartRxNormInferenceJobRequest_InputDataConfig *smithy.Schema
-
-var StartRxNormInferenceJobRequest_OutputDataConfig *smithy.Schema
-
-var StartRxNormInferenceJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartRxNormInferenceJobRequest_JobName *smithy.Schema
-
-var StartRxNormInferenceJobRequest_ClientRequestToken *smithy.Schema
-
-var StartRxNormInferenceJobRequest_KMSKey *smithy.Schema
-
-var StartRxNormInferenceJobRequest_LanguageCode *smithy.Schema
-
-var StartRxNormInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartRxNormInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartRxNormInferenceJobResponse_JobId *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartSNOMEDCTInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 7)
-var StartSNOMEDCTInferenceJobRequest_InputDataConfig *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_OutputDataConfig *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_DataAccessRoleArn *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_JobName *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_ClientRequestToken *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_KMSKey *smithy.Schema
-
-var StartSNOMEDCTInferenceJobRequest_LanguageCode *smithy.Schema
-
-var StartSNOMEDCTInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StartSNOMEDCTInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSNOMEDCTInferenceJobResponse_JobId *smithy.Schema
-
-var StopEntitiesDetectionV2JobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopEntitiesDetectionV2JobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopEntitiesDetectionV2JobRequest_JobId *smithy.Schema
-
-var StopEntitiesDetectionV2JobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopEntitiesDetectionV2JobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopEntitiesDetectionV2JobResponse_JobId *smithy.Schema
-
-var StopICD10CMInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopICD10CMInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopICD10CMInferenceJobRequest_JobId *smithy.Schema
-
-var StopICD10CMInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopICD10CMInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopICD10CMInferenceJobResponse_JobId *smithy.Schema
-
-var StopPHIDetectionJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopPHIDetectionJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopPHIDetectionJobRequest_JobId *smithy.Schema
-
-var StopPHIDetectionJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopPHIDetectionJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopPHIDetectionJobResponse_JobId *smithy.Schema
-
-var StopRxNormInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopRxNormInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopRxNormInferenceJobRequest_JobId *smithy.Schema
-
-var StopRxNormInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopRxNormInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopRxNormInferenceJobResponse_JobId *smithy.Schema
-
-var StopSNOMEDCTInferenceJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopSNOMEDCTInferenceJobRequest",
-}, smithy.ShapeTypeStructure, 1)
-var StopSNOMEDCTInferenceJobRequest_JobId *smithy.Schema
-
-var StopSNOMEDCTInferenceJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.comprehendmedical",
-	Name:      "StopSNOMEDCTInferenceJobResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StopSNOMEDCTInferenceJobResponse_JobId *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	EntitySubType_NAME = EntitySubType.AddMember("NAME", smithyprelude.Unit)
-
-	EntitySubType_DX_NAME = EntitySubType.AddMember("DX_NAME", smithyprelude.Unit)
-
-	EntitySubType_DOSAGE = EntitySubType.AddMember("DOSAGE", smithyprelude.Unit)
-
-	EntitySubType_ROUTE_OR_MODE = EntitySubType.AddMember("ROUTE_OR_MODE", smithyprelude.Unit)
-
-	EntitySubType_FORM = EntitySubType.AddMember("FORM", smithyprelude.Unit)
-
-	EntitySubType_FREQUENCY = EntitySubType.AddMember("FREQUENCY", smithyprelude.Unit)
-
-	EntitySubType_DURATION = EntitySubType.AddMember("DURATION", smithyprelude.Unit)
-
-	EntitySubType_GENERIC_NAME = EntitySubType.AddMember("GENERIC_NAME", smithyprelude.Unit)
-
-	EntitySubType_BRAND_NAME = EntitySubType.AddMember("BRAND_NAME", smithyprelude.Unit)
-
-	EntitySubType_STRENGTH = EntitySubType.AddMember("STRENGTH", smithyprelude.Unit)
-
-	EntitySubType_RATE = EntitySubType.AddMember("RATE", smithyprelude.Unit)
-
-	EntitySubType_ACUITY = EntitySubType.AddMember("ACUITY", smithyprelude.Unit)
-
-	EntitySubType_TEST_NAME = EntitySubType.AddMember("TEST_NAME", smithyprelude.Unit)
-
-	EntitySubType_TEST_VALUE = EntitySubType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	EntitySubType_TEST_UNITS = EntitySubType.AddMember("TEST_UNITS", smithyprelude.Unit)
-
-	EntitySubType_TEST_UNIT = EntitySubType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	EntitySubType_PROCEDURE_NAME = EntitySubType.AddMember("PROCEDURE_NAME", smithyprelude.Unit)
-
-	EntitySubType_TREATMENT_NAME = EntitySubType.AddMember("TREATMENT_NAME", smithyprelude.Unit)
-
-	EntitySubType_DATE = EntitySubType.AddMember("DATE", smithyprelude.Unit)
-
-	EntitySubType_AGE = EntitySubType.AddMember("AGE", smithyprelude.Unit)
-
-	EntitySubType_CONTACT_POINT = EntitySubType.AddMember("CONTACT_POINT", smithyprelude.Unit)
-
-	EntitySubType_PHONE_OR_FAX = EntitySubType.AddMember("PHONE_OR_FAX", smithyprelude.Unit)
-
-	EntitySubType_EMAIL = EntitySubType.AddMember("EMAIL", smithyprelude.Unit)
-
-	EntitySubType_IDENTIFIER = EntitySubType.AddMember("IDENTIFIER", smithyprelude.Unit)
-
-	EntitySubType_ID = EntitySubType.AddMember("ID", smithyprelude.Unit)
-
-	EntitySubType_URL = EntitySubType.AddMember("URL", smithyprelude.Unit)
-
-	EntitySubType_ADDRESS = EntitySubType.AddMember("ADDRESS", smithyprelude.Unit)
-
-	EntitySubType_PROFESSION = EntitySubType.AddMember("PROFESSION", smithyprelude.Unit)
-
-	EntitySubType_SYSTEM_ORGAN_SITE = EntitySubType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	EntitySubType_DIRECTION = EntitySubType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	EntitySubType_QUALITY = EntitySubType.AddMember("QUALITY", smithyprelude.Unit)
-
-	EntitySubType_QUANTITY = EntitySubType.AddMember("QUANTITY", smithyprelude.Unit)
-
-	EntitySubType_TIME_EXPRESSION = EntitySubType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_MEDICATION_NAME = EntitySubType.AddMember("TIME_TO_MEDICATION_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_DX_NAME = EntitySubType.AddMember("TIME_TO_DX_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_TEST_NAME = EntitySubType.AddMember("TIME_TO_TEST_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_PROCEDURE_NAME = EntitySubType.AddMember("TIME_TO_PROCEDURE_NAME", smithyprelude.Unit)
-
-	EntitySubType_TIME_TO_TREATMENT_NAME = EntitySubType.AddMember("TIME_TO_TREATMENT_NAME", smithyprelude.Unit)
-
-	EntitySubType_AMOUNT = EntitySubType.AddMember("AMOUNT", smithyprelude.Unit)
-
-	EntitySubType_GENDER = EntitySubType.AddMember("GENDER", smithyprelude.Unit)
-
-	EntitySubType_RACE_ETHNICITY = EntitySubType.AddMember("RACE_ETHNICITY", smithyprelude.Unit)
-
-	EntitySubType_ALLERGIES = EntitySubType.AddMember("ALLERGIES", smithyprelude.Unit)
-
-	EntitySubType_TOBACCO_USE = EntitySubType.AddMember("TOBACCO_USE", smithyprelude.Unit)
-
-	EntitySubType_ALCOHOL_CONSUMPTION = EntitySubType.AddMember("ALCOHOL_CONSUMPTION", smithyprelude.Unit)
-
-	EntitySubType_REC_DRUG_USE = EntitySubType.AddMember("REC_DRUG_USE", smithyprelude.Unit)
-
-	RelationshipType_EVERY = RelationshipType.AddMember("EVERY", smithyprelude.Unit)
-
-	RelationshipType_WITH_DOSAGE = RelationshipType.AddMember("WITH_DOSAGE", smithyprelude.Unit)
-
-	RelationshipType_ADMINISTERED_VIA = RelationshipType.AddMember("ADMINISTERED_VIA", smithyprelude.Unit)
-
-	RelationshipType_FOR = RelationshipType.AddMember("FOR", smithyprelude.Unit)
-
-	RelationshipType_NEGATIVE = RelationshipType.AddMember("NEGATIVE", smithyprelude.Unit)
-
-	RelationshipType_OVERLAP = RelationshipType.AddMember("OVERLAP", smithyprelude.Unit)
-
-	RelationshipType_DOSAGE = RelationshipType.AddMember("DOSAGE", smithyprelude.Unit)
-
-	RelationshipType_ROUTE_OR_MODE = RelationshipType.AddMember("ROUTE_OR_MODE", smithyprelude.Unit)
-
-	RelationshipType_FORM = RelationshipType.AddMember("FORM", smithyprelude.Unit)
-
-	RelationshipType_FREQUENCY = RelationshipType.AddMember("FREQUENCY", smithyprelude.Unit)
-
-	RelationshipType_DURATION = RelationshipType.AddMember("DURATION", smithyprelude.Unit)
-
-	RelationshipType_STRENGTH = RelationshipType.AddMember("STRENGTH", smithyprelude.Unit)
-
-	RelationshipType_RATE = RelationshipType.AddMember("RATE", smithyprelude.Unit)
-
-	RelationshipType_ACUITY = RelationshipType.AddMember("ACUITY", smithyprelude.Unit)
-
-	RelationshipType_TEST_VALUE = RelationshipType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	RelationshipType_TEST_UNITS = RelationshipType.AddMember("TEST_UNITS", smithyprelude.Unit)
-
-	RelationshipType_TEST_UNIT = RelationshipType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	RelationshipType_DIRECTION = RelationshipType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	RelationshipType_SYSTEM_ORGAN_SITE = RelationshipType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	RelationshipType_AMOUNT = RelationshipType.AddMember("AMOUNT", smithyprelude.Unit)
-
-	RelationshipType_USAGE = RelationshipType.AddMember("USAGE", smithyprelude.Unit)
-
-	RelationshipType_QUALITY = RelationshipType.AddMember("QUALITY", smithyprelude.Unit)
-
-	EntityType_MEDICATION = EntityType.AddMember("MEDICATION", smithyprelude.Unit)
-
-	EntityType_MEDICAL_CONDITION = EntityType.AddMember("MEDICAL_CONDITION", smithyprelude.Unit)
-
-	EntityType_PROTECTED_HEALTH_INFORMATION = EntityType.AddMember("PROTECTED_HEALTH_INFORMATION", smithyprelude.Unit)
-
-	EntityType_TEST_TREATMENT_PROCEDURE = EntityType.AddMember("TEST_TREATMENT_PROCEDURE", smithyprelude.Unit)
-
-	EntityType_ANATOMY = EntityType.AddMember("ANATOMY", smithyprelude.Unit)
-
-	EntityType_TIME_EXPRESSION = EntityType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	EntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL = EntityType.AddMember("BEHAVIORAL_ENVIRONMENTAL_SOCIAL", smithyprelude.Unit)
-
-	AttributeName_SIGN = AttributeName.AddMember("SIGN", smithyprelude.Unit)
-
-	AttributeName_SYMPTOM = AttributeName.AddMember("SYMPTOM", smithyprelude.Unit)
-
-	AttributeName_DIAGNOSIS = AttributeName.AddMember("DIAGNOSIS", smithyprelude.Unit)
-
-	AttributeName_NEGATION = AttributeName.AddMember("NEGATION", smithyprelude.Unit)
-
-	AttributeName_PERTAINS_TO_FAMILY = AttributeName.AddMember("PERTAINS_TO_FAMILY", smithyprelude.Unit)
-
-	AttributeName_HYPOTHETICAL = AttributeName.AddMember("HYPOTHETICAL", smithyprelude.Unit)
-
-	AttributeName_LOW_CONFIDENCE = AttributeName.AddMember("LOW_CONFIDENCE", smithyprelude.Unit)
-
-	AttributeName_PAST_HISTORY = AttributeName.AddMember("PAST_HISTORY", smithyprelude.Unit)
-
-	AttributeName_FUTURE = AttributeName.AddMember("FUTURE", smithyprelude.Unit)
-
-	Trait_Name = Trait.AddMember("Name", AttributeName)
-
-	Trait_Score = Trait.AddMember("Score", _Float)
-
-	_TraitList_member = _TraitList.AddMember("member", Trait)
-
-	Attribute_Type = Attribute.AddMember("Type", EntitySubType)
-
-	Attribute_Score = Attribute.AddMember("Score", _Float)
-
-	Attribute_RelationshipScore = Attribute.AddMember("RelationshipScore", _Float)
-
-	Attribute_RelationshipType = Attribute.AddMember("RelationshipType", RelationshipType)
-
-	Attribute_Id = Attribute.AddMember("Id", _Integer)
-
-	Attribute_BeginOffset = Attribute.AddMember("BeginOffset", _Integer)
-
-	Attribute_EndOffset = Attribute.AddMember("EndOffset", _Integer)
-
-	Attribute_Text = Attribute.AddMember("Text", _String)
-
-	Attribute_Category = Attribute.AddMember("Category", EntityType)
-
-	Attribute_Traits = Attribute.AddMember("Traits", _TraitList)
-
-	_AttributeList_member = _AttributeList.AddMember("member", Attribute)
-
-	Characters_OriginalTextCharacters = Characters.AddMember("OriginalTextCharacters", _Integer)
-
-	JobStatus_SUBMITTED = JobStatus.AddMember("SUBMITTED", smithyprelude.Unit)
-
-	JobStatus_IN_PROGRESS = JobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	JobStatus_COMPLETED = JobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	JobStatus_PARTIAL_SUCCESS = JobStatus.AddMember("PARTIAL_SUCCESS", smithyprelude.Unit)
-
-	JobStatus_FAILED = JobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	JobStatus_STOP_REQUESTED = JobStatus.AddMember("STOP_REQUESTED", smithyprelude.Unit)
-
-	JobStatus_STOPPED = JobStatus.AddMember("STOPPED", smithyprelude.Unit)
-
-	ComprehendMedicalAsyncJobFilter_JobName = ComprehendMedicalAsyncJobFilter.AddMember("JobName", _JobName)
-
-	ComprehendMedicalAsyncJobFilter_JobStatus = ComprehendMedicalAsyncJobFilter.AddMember("JobStatus", JobStatus)
-
-	ComprehendMedicalAsyncJobFilter_SubmitTimeBefore = ComprehendMedicalAsyncJobFilter.AddMember("SubmitTimeBefore", _Timestamp)
-
-	ComprehendMedicalAsyncJobFilter_SubmitTimeAfter = ComprehendMedicalAsyncJobFilter.AddMember("SubmitTimeAfter", _Timestamp)
-
-	InputDataConfig_S3Bucket = InputDataConfig.AddMember("S3Bucket", _S3Bucket)
-
-	InputDataConfig_S3Key = InputDataConfig.AddMember("S3Key", _S3Key)
-
-	OutputDataConfig_S3Bucket = OutputDataConfig.AddMember("S3Bucket", _S3Bucket)
-
-	OutputDataConfig_S3Key = OutputDataConfig.AddMember("S3Key", _S3Key)
-
-	LanguageCode_EN = LanguageCode.AddMember("EN", smithyprelude.Unit)
-
-	ComprehendMedicalAsyncJobProperties_JobId = ComprehendMedicalAsyncJobProperties.AddMember("JobId", _JobId)
-
-	ComprehendMedicalAsyncJobProperties_JobName = ComprehendMedicalAsyncJobProperties.AddMember("JobName", _JobName)
-
-	ComprehendMedicalAsyncJobProperties_JobStatus = ComprehendMedicalAsyncJobProperties.AddMember("JobStatus", JobStatus)
-
-	ComprehendMedicalAsyncJobProperties_Message = ComprehendMedicalAsyncJobProperties.AddMember("Message", _AnyLengthString)
-
-	ComprehendMedicalAsyncJobProperties_SubmitTime = ComprehendMedicalAsyncJobProperties.AddMember("SubmitTime", _Timestamp)
-
-	ComprehendMedicalAsyncJobProperties_EndTime = ComprehendMedicalAsyncJobProperties.AddMember("EndTime", _Timestamp)
-
-	ComprehendMedicalAsyncJobProperties_ExpirationTime = ComprehendMedicalAsyncJobProperties.AddMember("ExpirationTime", _Timestamp)
-
-	ComprehendMedicalAsyncJobProperties_InputDataConfig = ComprehendMedicalAsyncJobProperties.AddMember("InputDataConfig", InputDataConfig)
-
-	ComprehendMedicalAsyncJobProperties_OutputDataConfig = ComprehendMedicalAsyncJobProperties.AddMember("OutputDataConfig", OutputDataConfig)
-
-	ComprehendMedicalAsyncJobProperties_LanguageCode = ComprehendMedicalAsyncJobProperties.AddMember("LanguageCode", LanguageCode)
-
-	ComprehendMedicalAsyncJobProperties_DataAccessRoleArn = ComprehendMedicalAsyncJobProperties.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	ComprehendMedicalAsyncJobProperties_ManifestFilePath = ComprehendMedicalAsyncJobProperties.AddMember("ManifestFilePath", _ManifestFilePath)
-
-	ComprehendMedicalAsyncJobProperties_KMSKey = ComprehendMedicalAsyncJobProperties.AddMember("KMSKey", _KMSKey)
-
-	ComprehendMedicalAsyncJobProperties_ModelVersion = ComprehendMedicalAsyncJobProperties.AddMember("ModelVersion", _ModelVersion)
-
-	_ComprehendMedicalAsyncJobPropertiesList_member = _ComprehendMedicalAsyncJobPropertiesList.AddMember("member", ComprehendMedicalAsyncJobProperties)
-
-	Entity_Id = Entity.AddMember("Id", _Integer)
-
-	Entity_BeginOffset = Entity.AddMember("BeginOffset", _Integer)
-
-	Entity_EndOffset = Entity.AddMember("EndOffset", _Integer)
-
-	Entity_Score = Entity.AddMember("Score", _Float)
-
-	Entity_Text = Entity.AddMember("Text", _String)
-
-	Entity_Category = Entity.AddMember("Category", EntityType)
-
-	Entity_Type = Entity.AddMember("Type", EntitySubType)
-
-	Entity_Traits = Entity.AddMember("Traits", _TraitList)
-
-	Entity_Attributes = Entity.AddMember("Attributes", _AttributeList)
-
-	_EntityList_member = _EntityList.AddMember("member", Entity)
-
-	ICD10CMAttributeType_ACUITY = ICD10CMAttributeType.AddMember("ACUITY", smithyprelude.Unit)
-
-	ICD10CMAttributeType_DIRECTION = ICD10CMAttributeType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	ICD10CMAttributeType_SYSTEM_ORGAN_SITE = ICD10CMAttributeType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	ICD10CMAttributeType_QUALITY = ICD10CMAttributeType.AddMember("QUALITY", smithyprelude.Unit)
-
-	ICD10CMAttributeType_QUANTITY = ICD10CMAttributeType.AddMember("QUANTITY", smithyprelude.Unit)
-
-	ICD10CMAttributeType_TIME_TO_DX_NAME = ICD10CMAttributeType.AddMember("TIME_TO_DX_NAME", smithyprelude.Unit)
-
-	ICD10CMAttributeType_TIME_EXPRESSION = ICD10CMAttributeType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	ICD10CMTraitName_NEGATION = ICD10CMTraitName.AddMember("NEGATION", smithyprelude.Unit)
-
-	ICD10CMTraitName_DIAGNOSIS = ICD10CMTraitName.AddMember("DIAGNOSIS", smithyprelude.Unit)
-
-	ICD10CMTraitName_SIGN = ICD10CMTraitName.AddMember("SIGN", smithyprelude.Unit)
-
-	ICD10CMTraitName_SYMPTOM = ICD10CMTraitName.AddMember("SYMPTOM", smithyprelude.Unit)
-
-	ICD10CMTraitName_PERTAINS_TO_FAMILY = ICD10CMTraitName.AddMember("PERTAINS_TO_FAMILY", smithyprelude.Unit)
-
-	ICD10CMTraitName_HYPOTHETICAL = ICD10CMTraitName.AddMember("HYPOTHETICAL", smithyprelude.Unit)
-
-	ICD10CMTraitName_LOW_CONFIDENCE = ICD10CMTraitName.AddMember("LOW_CONFIDENCE", smithyprelude.Unit)
-
-	ICD10CMTrait_Name = ICD10CMTrait.AddMember("Name", ICD10CMTraitName)
-
-	ICD10CMTrait_Score = ICD10CMTrait.AddMember("Score", _Float)
-
-	_ICD10CMTraitList_member = _ICD10CMTraitList.AddMember("member", ICD10CMTrait)
-
-	ICD10CMEntityType_DX_NAME = ICD10CMEntityType.AddMember("DX_NAME", smithyprelude.Unit)
-
-	ICD10CMEntityType_TIME_EXPRESSION = ICD10CMEntityType.AddMember("TIME_EXPRESSION", smithyprelude.Unit)
-
-	ICD10CMRelationshipType_OVERLAP = ICD10CMRelationshipType.AddMember("OVERLAP", smithyprelude.Unit)
-
-	ICD10CMRelationshipType_SYSTEM_ORGAN_SITE = ICD10CMRelationshipType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	ICD10CMRelationshipType_QUALITY = ICD10CMRelationshipType.AddMember("QUALITY", smithyprelude.Unit)
-
-	ICD10CMAttribute_Type = ICD10CMAttribute.AddMember("Type", ICD10CMAttributeType)
-
-	ICD10CMAttribute_Score = ICD10CMAttribute.AddMember("Score", _Float)
-
-	ICD10CMAttribute_RelationshipScore = ICD10CMAttribute.AddMember("RelationshipScore", _Float)
-
-	ICD10CMAttribute_Id = ICD10CMAttribute.AddMember("Id", _Integer)
-
-	ICD10CMAttribute_BeginOffset = ICD10CMAttribute.AddMember("BeginOffset", _Integer)
-
-	ICD10CMAttribute_EndOffset = ICD10CMAttribute.AddMember("EndOffset", _Integer)
-
-	ICD10CMAttribute_Text = ICD10CMAttribute.AddMember("Text", _String)
-
-	ICD10CMAttribute_Traits = ICD10CMAttribute.AddMember("Traits", _ICD10CMTraitList)
-
-	ICD10CMAttribute_Category = ICD10CMAttribute.AddMember("Category", ICD10CMEntityType)
-
-	ICD10CMAttribute_RelationshipType = ICD10CMAttribute.AddMember("RelationshipType", ICD10CMRelationshipType)
-
-	_ICD10CMAttributeList_member = _ICD10CMAttributeList.AddMember("member", ICD10CMAttribute)
-
-	ICD10CMConcept_Description = ICD10CMConcept.AddMember("Description", _String)
-
-	ICD10CMConcept_Code = ICD10CMConcept.AddMember("Code", _String)
-
-	ICD10CMConcept_Score = ICD10CMConcept.AddMember("Score", _Float)
-
-	_ICD10CMConceptList_member = _ICD10CMConceptList.AddMember("member", ICD10CMConcept)
-
-	ICD10CMEntityCategory_MEDICAL_CONDITION = ICD10CMEntityCategory.AddMember("MEDICAL_CONDITION", smithyprelude.Unit)
-
-	ICD10CMEntity_Id = ICD10CMEntity.AddMember("Id", _Integer)
-
-	ICD10CMEntity_Text = ICD10CMEntity.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	ICD10CMEntity_Category = ICD10CMEntity.AddMember("Category", ICD10CMEntityCategory)
-
-	ICD10CMEntity_Type = ICD10CMEntity.AddMember("Type", ICD10CMEntityType)
-
-	ICD10CMEntity_Score = ICD10CMEntity.AddMember("Score", _Float)
-
-	ICD10CMEntity_BeginOffset = ICD10CMEntity.AddMember("BeginOffset", _Integer)
-
-	ICD10CMEntity_EndOffset = ICD10CMEntity.AddMember("EndOffset", _Integer)
-
-	ICD10CMEntity_Attributes = ICD10CMEntity.AddMember("Attributes", _ICD10CMAttributeList)
-
-	ICD10CMEntity_Traits = ICD10CMEntity.AddMember("Traits", _ICD10CMTraitList)
-
-	ICD10CMEntity_ICD10CMConcepts = ICD10CMEntity.AddMember("ICD10CMConcepts", _ICD10CMConceptList)
-
-	_ICD10CMEntityList_member = _ICD10CMEntityList.AddMember("member", ICD10CMEntity)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", _String)
-
-	InvalidEncodingException_Message = InvalidEncodingException.AddMember("Message", _String)
-
-	InvalidRequestException_Message = InvalidRequestException.AddMember("Message", _String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _String)
-
-	RxNormAttributeType_DOSAGE = RxNormAttributeType.AddMember("DOSAGE", smithyprelude.Unit)
-
-	RxNormAttributeType_DURATION = RxNormAttributeType.AddMember("DURATION", smithyprelude.Unit)
-
-	RxNormAttributeType_FORM = RxNormAttributeType.AddMember("FORM", smithyprelude.Unit)
-
-	RxNormAttributeType_FREQUENCY = RxNormAttributeType.AddMember("FREQUENCY", smithyprelude.Unit)
-
-	RxNormAttributeType_RATE = RxNormAttributeType.AddMember("RATE", smithyprelude.Unit)
-
-	RxNormAttributeType_ROUTE_OR_MODE = RxNormAttributeType.AddMember("ROUTE_OR_MODE", smithyprelude.Unit)
-
-	RxNormAttributeType_STRENGTH = RxNormAttributeType.AddMember("STRENGTH", smithyprelude.Unit)
-
-	RxNormTraitName_NEGATION = RxNormTraitName.AddMember("NEGATION", smithyprelude.Unit)
-
-	RxNormTraitName_PAST_HISTORY = RxNormTraitName.AddMember("PAST_HISTORY", smithyprelude.Unit)
-
-	RxNormTrait_Name = RxNormTrait.AddMember("Name", RxNormTraitName)
-
-	RxNormTrait_Score = RxNormTrait.AddMember("Score", _Float)
-
-	_RxNormTraitList_member = _RxNormTraitList.AddMember("member", RxNormTrait)
-
-	RxNormAttribute_Type = RxNormAttribute.AddMember("Type", RxNormAttributeType)
-
-	RxNormAttribute_Score = RxNormAttribute.AddMember("Score", _Float)
-
-	RxNormAttribute_RelationshipScore = RxNormAttribute.AddMember("RelationshipScore", _Float)
-
-	RxNormAttribute_Id = RxNormAttribute.AddMember("Id", _Integer)
-
-	RxNormAttribute_BeginOffset = RxNormAttribute.AddMember("BeginOffset", _Integer)
-
-	RxNormAttribute_EndOffset = RxNormAttribute.AddMember("EndOffset", _Integer)
-
-	RxNormAttribute_Text = RxNormAttribute.AddMember("Text", _String)
-
-	RxNormAttribute_Traits = RxNormAttribute.AddMember("Traits", _RxNormTraitList)
-
-	_RxNormAttributeList_member = _RxNormAttributeList.AddMember("member", RxNormAttribute)
-
-	RxNormConcept_Description = RxNormConcept.AddMember("Description", _String)
-
-	RxNormConcept_Code = RxNormConcept.AddMember("Code", _String)
-
-	RxNormConcept_Score = RxNormConcept.AddMember("Score", _Float)
-
-	_RxNormConceptList_member = _RxNormConceptList.AddMember("member", RxNormConcept)
-
-	RxNormEntityCategory_MEDICATION = RxNormEntityCategory.AddMember("MEDICATION", smithyprelude.Unit)
-
-	RxNormEntityType_BRAND_NAME = RxNormEntityType.AddMember("BRAND_NAME", smithyprelude.Unit)
-
-	RxNormEntityType_GENERIC_NAME = RxNormEntityType.AddMember("GENERIC_NAME", smithyprelude.Unit)
-
-	RxNormEntity_Id = RxNormEntity.AddMember("Id", _Integer)
-
-	RxNormEntity_Text = RxNormEntity.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	RxNormEntity_Category = RxNormEntity.AddMember("Category", RxNormEntityCategory)
-
-	RxNormEntity_Type = RxNormEntity.AddMember("Type", RxNormEntityType)
-
-	RxNormEntity_Score = RxNormEntity.AddMember("Score", _Float)
-
-	RxNormEntity_BeginOffset = RxNormEntity.AddMember("BeginOffset", _Integer)
-
-	RxNormEntity_EndOffset = RxNormEntity.AddMember("EndOffset", _Integer)
-
-	RxNormEntity_Attributes = RxNormEntity.AddMember("Attributes", _RxNormAttributeList)
-
-	RxNormEntity_Traits = RxNormEntity.AddMember("Traits", _RxNormTraitList)
-
-	RxNormEntity_RxNormConcepts = RxNormEntity.AddMember("RxNormConcepts", _RxNormConceptList)
-
-	_RxNormEntityList_member = _RxNormEntityList.AddMember("member", RxNormEntity)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	SNOMEDCTEntityCategory_MEDICAL_CONDITION = SNOMEDCTEntityCategory.AddMember("MEDICAL_CONDITION", smithyprelude.Unit)
-
-	SNOMEDCTEntityCategory_ANATOMY = SNOMEDCTEntityCategory.AddMember("ANATOMY", smithyprelude.Unit)
-
-	SNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE = SNOMEDCTEntityCategory.AddMember("TEST_TREATMENT_PROCEDURE", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_ACUITY = SNOMEDCTAttributeType.AddMember("ACUITY", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_QUALITY = SNOMEDCTAttributeType.AddMember("QUALITY", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_DIRECTION = SNOMEDCTAttributeType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_SYSTEM_ORGAN_SITE = SNOMEDCTAttributeType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_TEST_VALUE = SNOMEDCTAttributeType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	SNOMEDCTAttributeType_TEST_UNIT = SNOMEDCTAttributeType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_ACUITY = SNOMEDCTRelationshipType.AddMember("ACUITY", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_QUALITY = SNOMEDCTRelationshipType.AddMember("QUALITY", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_TEST_VALUE = SNOMEDCTRelationshipType.AddMember("TEST_VALUE", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_TEST_UNITS = SNOMEDCTRelationshipType.AddMember("TEST_UNITS", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_DIRECTION = SNOMEDCTRelationshipType.AddMember("DIRECTION", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE = SNOMEDCTRelationshipType.AddMember("SYSTEM_ORGAN_SITE", smithyprelude.Unit)
-
-	SNOMEDCTRelationshipType_TEST_UNIT = SNOMEDCTRelationshipType.AddMember("TEST_UNIT", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_NEGATION = SNOMEDCTTraitName.AddMember("NEGATION", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_DIAGNOSIS = SNOMEDCTTraitName.AddMember("DIAGNOSIS", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_SIGN = SNOMEDCTTraitName.AddMember("SIGN", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_SYMPTOM = SNOMEDCTTraitName.AddMember("SYMPTOM", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_PERTAINS_TO_FAMILY = SNOMEDCTTraitName.AddMember("PERTAINS_TO_FAMILY", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_HYPOTHETICAL = SNOMEDCTTraitName.AddMember("HYPOTHETICAL", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_LOW_CONFIDENCE = SNOMEDCTTraitName.AddMember("LOW_CONFIDENCE", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_PAST_HISTORY = SNOMEDCTTraitName.AddMember("PAST_HISTORY", smithyprelude.Unit)
-
-	SNOMEDCTTraitName_FUTURE = SNOMEDCTTraitName.AddMember("FUTURE", smithyprelude.Unit)
-
-	SNOMEDCTTrait_Name = SNOMEDCTTrait.AddMember("Name", SNOMEDCTTraitName)
-
-	SNOMEDCTTrait_Score = SNOMEDCTTrait.AddMember("Score", _Float)
-
-	_SNOMEDCTTraitList_member = _SNOMEDCTTraitList.AddMember("member", SNOMEDCTTrait)
-
-	SNOMEDCTConcept_Description = SNOMEDCTConcept.AddMember("Description", _String)
-
-	SNOMEDCTConcept_Code = SNOMEDCTConcept.AddMember("Code", _String)
-
-	SNOMEDCTConcept_Score = SNOMEDCTConcept.AddMember("Score", _Float)
-
-	_SNOMEDCTConceptList_member = _SNOMEDCTConceptList.AddMember("member", SNOMEDCTConcept)
-
-	SNOMEDCTAttribute_Category = SNOMEDCTAttribute.AddMember("Category", SNOMEDCTEntityCategory)
-
-	SNOMEDCTAttribute_Type = SNOMEDCTAttribute.AddMember("Type", SNOMEDCTAttributeType)
-
-	SNOMEDCTAttribute_Score = SNOMEDCTAttribute.AddMember("Score", _Float)
-
-	SNOMEDCTAttribute_RelationshipScore = SNOMEDCTAttribute.AddMember("RelationshipScore", _Float)
-
-	SNOMEDCTAttribute_RelationshipType = SNOMEDCTAttribute.AddMember("RelationshipType", SNOMEDCTRelationshipType)
-
-	SNOMEDCTAttribute_Id = SNOMEDCTAttribute.AddMember("Id", _Integer)
-
-	SNOMEDCTAttribute_BeginOffset = SNOMEDCTAttribute.AddMember("BeginOffset", _Integer)
-
-	SNOMEDCTAttribute_EndOffset = SNOMEDCTAttribute.AddMember("EndOffset", _Integer)
-
-	SNOMEDCTAttribute_Text = SNOMEDCTAttribute.AddMember("Text", _String)
-
-	SNOMEDCTAttribute_Traits = SNOMEDCTAttribute.AddMember("Traits", _SNOMEDCTTraitList)
-
-	SNOMEDCTAttribute_SNOMEDCTConcepts = SNOMEDCTAttribute.AddMember("SNOMEDCTConcepts", _SNOMEDCTConceptList)
-
-	_SNOMEDCTAttributeList_member = _SNOMEDCTAttributeList.AddMember("member", SNOMEDCTAttribute)
-
-	SNOMEDCTDetails_Edition = SNOMEDCTDetails.AddMember("Edition", _String)
-
-	SNOMEDCTDetails_Language = SNOMEDCTDetails.AddMember("Language", _String)
-
-	SNOMEDCTDetails_VersionDate = SNOMEDCTDetails.AddMember("VersionDate", _String)
-
-	SNOMEDCTEntityType_DX_NAME = SNOMEDCTEntityType.AddMember("DX_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntityType_TEST_NAME = SNOMEDCTEntityType.AddMember("TEST_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntityType_PROCEDURE_NAME = SNOMEDCTEntityType.AddMember("PROCEDURE_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntityType_TREATMENT_NAME = SNOMEDCTEntityType.AddMember("TREATMENT_NAME", smithyprelude.Unit)
-
-	SNOMEDCTEntity_Id = SNOMEDCTEntity.AddMember("Id", _Integer)
-
-	SNOMEDCTEntity_Text = SNOMEDCTEntity.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	SNOMEDCTEntity_Category = SNOMEDCTEntity.AddMember("Category", SNOMEDCTEntityCategory)
-
-	SNOMEDCTEntity_Type = SNOMEDCTEntity.AddMember("Type", SNOMEDCTEntityType)
-
-	SNOMEDCTEntity_Score = SNOMEDCTEntity.AddMember("Score", _Float)
-
-	SNOMEDCTEntity_BeginOffset = SNOMEDCTEntity.AddMember("BeginOffset", _Integer)
-
-	SNOMEDCTEntity_EndOffset = SNOMEDCTEntity.AddMember("EndOffset", _Integer)
-
-	SNOMEDCTEntity_Attributes = SNOMEDCTEntity.AddMember("Attributes", _SNOMEDCTAttributeList)
-
-	SNOMEDCTEntity_Traits = SNOMEDCTEntity.AddMember("Traits", _SNOMEDCTTraitList)
-
-	SNOMEDCTEntity_SNOMEDCTConcepts = SNOMEDCTEntity.AddMember("SNOMEDCTConcepts", _SNOMEDCTConceptList)
-
-	_SNOMEDCTEntityList_member = _SNOMEDCTEntityList.AddMember("member", SNOMEDCTEntity)
-
-	TextSizeLimitExceededException_Message = TextSizeLimitExceededException.AddMember("Message", _String)
-
-	TooManyRequestsException_Message = TooManyRequestsException.AddMember("Message", _String)
-
-	UnmappedAttribute_Type = UnmappedAttribute.AddMember("Type", EntityType)
-
-	UnmappedAttribute_Attribute = UnmappedAttribute.AddMember("Attribute", Attribute)
-
-	_UnmappedAttributeList_member = _UnmappedAttributeList.AddMember("member", UnmappedAttribute)
-
-	ValidationException_Message = ValidationException.AddMember("Message", _String)
-
-	DescribeEntitiesDetectionV2JobRequest_JobId = DescribeEntitiesDetectionV2JobRequest.AddMember("JobId", _JobId)
-
-	DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties = DescribeEntitiesDetectionV2JobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribeICD10CMInferenceJobRequest_JobId = DescribeICD10CMInferenceJobRequest.AddMember("JobId", _JobId)
-
-	DescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties = DescribeICD10CMInferenceJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribePHIDetectionJobRequest_JobId = DescribePHIDetectionJobRequest.AddMember("JobId", _JobId)
-
-	DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties = DescribePHIDetectionJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribeRxNormInferenceJobRequest_JobId = DescribeRxNormInferenceJobRequest.AddMember("JobId", _JobId)
-
-	DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties = DescribeRxNormInferenceJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DescribeSNOMEDCTInferenceJobRequest_JobId = DescribeSNOMEDCTInferenceJobRequest.AddMember("JobId", _JobId)
-
-	DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties = DescribeSNOMEDCTInferenceJobResponse.AddMember("ComprehendMedicalAsyncJobProperties", ComprehendMedicalAsyncJobProperties)
-
-	DetectEntitiesRequest_Text = DetectEntitiesRequest.AddMember("Text", _BoundedLengthString)
-
-	DetectEntitiesResponse_Entities = DetectEntitiesResponse.AddMember("Entities", _EntityList)
-
-	DetectEntitiesResponse_UnmappedAttributes = DetectEntitiesResponse.AddMember("UnmappedAttributes", _UnmappedAttributeList)
-
-	DetectEntitiesResponse_PaginationToken = DetectEntitiesResponse.AddMember("PaginationToken", _String)
-
-	DetectEntitiesResponse_ModelVersion = DetectEntitiesResponse.AddMember("ModelVersion", _String)
-
-	DetectEntitiesV2Request_Text = DetectEntitiesV2Request.AddMember("Text", _BoundedLengthString)
-
-	DetectEntitiesV2Response_Entities = DetectEntitiesV2Response.AddMember("Entities", _EntityList)
-
-	DetectEntitiesV2Response_UnmappedAttributes = DetectEntitiesV2Response.AddMember("UnmappedAttributes", _UnmappedAttributeList)
-
-	DetectEntitiesV2Response_PaginationToken = DetectEntitiesV2Response.AddMember("PaginationToken", _String)
-
-	DetectEntitiesV2Response_ModelVersion = DetectEntitiesV2Response.AddMember("ModelVersion", _String)
-
-	DetectPHIRequest_Text = DetectPHIRequest.AddMember("Text", _BoundedLengthString)
-
-	DetectPHIResponse_Entities = DetectPHIResponse.AddMember("Entities", _EntityList)
-
-	DetectPHIResponse_PaginationToken = DetectPHIResponse.AddMember("PaginationToken", _String)
-
-	DetectPHIResponse_ModelVersion = DetectPHIResponse.AddMember("ModelVersion", _String)
-
-	InferICD10CMRequest_Text = InferICD10CMRequest.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	InferICD10CMResponse_Entities = InferICD10CMResponse.AddMember("Entities", _ICD10CMEntityList)
-
-	InferICD10CMResponse_PaginationToken = InferICD10CMResponse.AddMember("PaginationToken", _String)
-
-	InferICD10CMResponse_ModelVersion = InferICD10CMResponse.AddMember("ModelVersion", _String)
-
-	InferRxNormRequest_Text = InferRxNormRequest.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	InferRxNormResponse_Entities = InferRxNormResponse.AddMember("Entities", _RxNormEntityList)
-
-	InferRxNormResponse_PaginationToken = InferRxNormResponse.AddMember("PaginationToken", _String)
-
-	InferRxNormResponse_ModelVersion = InferRxNormResponse.AddMember("ModelVersion", _String)
-
-	InferSNOMEDCTRequest_Text = InferSNOMEDCTRequest.AddMember("Text", _OntologyLinkingBoundedLengthString)
-
-	InferSNOMEDCTResponse_Entities = InferSNOMEDCTResponse.AddMember("Entities", _SNOMEDCTEntityList)
-
-	InferSNOMEDCTResponse_PaginationToken = InferSNOMEDCTResponse.AddMember("PaginationToken", _String)
-
-	InferSNOMEDCTResponse_ModelVersion = InferSNOMEDCTResponse.AddMember("ModelVersion", _String)
-
-	InferSNOMEDCTResponse_SNOMEDCTDetails = InferSNOMEDCTResponse.AddMember("SNOMEDCTDetails", SNOMEDCTDetails)
-
-	InferSNOMEDCTResponse_Characters = InferSNOMEDCTResponse.AddMember("Characters", Characters)
-
-	ListEntitiesDetectionV2JobsRequest_Filter = ListEntitiesDetectionV2JobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListEntitiesDetectionV2JobsRequest_NextToken = ListEntitiesDetectionV2JobsRequest.AddMember("NextToken", _String)
-
-	ListEntitiesDetectionV2JobsRequest_MaxResults = ListEntitiesDetectionV2JobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListEntitiesDetectionV2JobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListEntitiesDetectionV2JobsResponse_NextToken = ListEntitiesDetectionV2JobsResponse.AddMember("NextToken", _String)
-
-	ListICD10CMInferenceJobsRequest_Filter = ListICD10CMInferenceJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListICD10CMInferenceJobsRequest_NextToken = ListICD10CMInferenceJobsRequest.AddMember("NextToken", _String)
-
-	ListICD10CMInferenceJobsRequest_MaxResults = ListICD10CMInferenceJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListICD10CMInferenceJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListICD10CMInferenceJobsResponse_NextToken = ListICD10CMInferenceJobsResponse.AddMember("NextToken", _String)
-
-	ListPHIDetectionJobsRequest_Filter = ListPHIDetectionJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListPHIDetectionJobsRequest_NextToken = ListPHIDetectionJobsRequest.AddMember("NextToken", _String)
-
-	ListPHIDetectionJobsRequest_MaxResults = ListPHIDetectionJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListPHIDetectionJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListPHIDetectionJobsResponse_NextToken = ListPHIDetectionJobsResponse.AddMember("NextToken", _String)
-
-	ListRxNormInferenceJobsRequest_Filter = ListRxNormInferenceJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListRxNormInferenceJobsRequest_NextToken = ListRxNormInferenceJobsRequest.AddMember("NextToken", _String)
-
-	ListRxNormInferenceJobsRequest_MaxResults = ListRxNormInferenceJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListRxNormInferenceJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListRxNormInferenceJobsResponse_NextToken = ListRxNormInferenceJobsResponse.AddMember("NextToken", _String)
-
-	ListSNOMEDCTInferenceJobsRequest_Filter = ListSNOMEDCTInferenceJobsRequest.AddMember("Filter", ComprehendMedicalAsyncJobFilter)
-
-	ListSNOMEDCTInferenceJobsRequest_NextToken = ListSNOMEDCTInferenceJobsRequest.AddMember("NextToken", _String)
-
-	ListSNOMEDCTInferenceJobsRequest_MaxResults = ListSNOMEDCTInferenceJobsRequest.AddMember("MaxResults", _MaxResultsInteger)
-
-	ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = ListSNOMEDCTInferenceJobsResponse.AddMember("ComprehendMedicalAsyncJobPropertiesList", _ComprehendMedicalAsyncJobPropertiesList)
-
-	ListSNOMEDCTInferenceJobsResponse_NextToken = ListSNOMEDCTInferenceJobsResponse.AddMember("NextToken", _String)
-
-	StartEntitiesDetectionV2JobRequest_InputDataConfig = StartEntitiesDetectionV2JobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartEntitiesDetectionV2JobRequest_OutputDataConfig = StartEntitiesDetectionV2JobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartEntitiesDetectionV2JobRequest_DataAccessRoleArn = StartEntitiesDetectionV2JobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartEntitiesDetectionV2JobRequest_JobName = StartEntitiesDetectionV2JobRequest.AddMember("JobName", _JobName)
-
-	StartEntitiesDetectionV2JobRequest_ClientRequestToken = StartEntitiesDetectionV2JobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartEntitiesDetectionV2JobRequest_KMSKey = StartEntitiesDetectionV2JobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartEntitiesDetectionV2JobRequest_LanguageCode = StartEntitiesDetectionV2JobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartEntitiesDetectionV2JobResponse_JobId = StartEntitiesDetectionV2JobResponse.AddMember("JobId", _JobId)
-
-	StartICD10CMInferenceJobRequest_InputDataConfig = StartICD10CMInferenceJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartICD10CMInferenceJobRequest_OutputDataConfig = StartICD10CMInferenceJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartICD10CMInferenceJobRequest_DataAccessRoleArn = StartICD10CMInferenceJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartICD10CMInferenceJobRequest_JobName = StartICD10CMInferenceJobRequest.AddMember("JobName", _JobName)
-
-	StartICD10CMInferenceJobRequest_ClientRequestToken = StartICD10CMInferenceJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartICD10CMInferenceJobRequest_KMSKey = StartICD10CMInferenceJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartICD10CMInferenceJobRequest_LanguageCode = StartICD10CMInferenceJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartICD10CMInferenceJobResponse_JobId = StartICD10CMInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StartPHIDetectionJobRequest_InputDataConfig = StartPHIDetectionJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartPHIDetectionJobRequest_OutputDataConfig = StartPHIDetectionJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartPHIDetectionJobRequest_DataAccessRoleArn = StartPHIDetectionJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartPHIDetectionJobRequest_JobName = StartPHIDetectionJobRequest.AddMember("JobName", _JobName)
-
-	StartPHIDetectionJobRequest_ClientRequestToken = StartPHIDetectionJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartPHIDetectionJobRequest_KMSKey = StartPHIDetectionJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartPHIDetectionJobRequest_LanguageCode = StartPHIDetectionJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartPHIDetectionJobResponse_JobId = StartPHIDetectionJobResponse.AddMember("JobId", _JobId)
-
-	StartRxNormInferenceJobRequest_InputDataConfig = StartRxNormInferenceJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartRxNormInferenceJobRequest_OutputDataConfig = StartRxNormInferenceJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartRxNormInferenceJobRequest_DataAccessRoleArn = StartRxNormInferenceJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartRxNormInferenceJobRequest_JobName = StartRxNormInferenceJobRequest.AddMember("JobName", _JobName)
-
-	StartRxNormInferenceJobRequest_ClientRequestToken = StartRxNormInferenceJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartRxNormInferenceJobRequest_KMSKey = StartRxNormInferenceJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartRxNormInferenceJobRequest_LanguageCode = StartRxNormInferenceJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartRxNormInferenceJobResponse_JobId = StartRxNormInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StartSNOMEDCTInferenceJobRequest_InputDataConfig = StartSNOMEDCTInferenceJobRequest.AddMember("InputDataConfig", InputDataConfig)
-
-	StartSNOMEDCTInferenceJobRequest_OutputDataConfig = StartSNOMEDCTInferenceJobRequest.AddMember("OutputDataConfig", OutputDataConfig)
-
-	StartSNOMEDCTInferenceJobRequest_DataAccessRoleArn = StartSNOMEDCTInferenceJobRequest.AddMember("DataAccessRoleArn", _IamRoleArn)
-
-	StartSNOMEDCTInferenceJobRequest_JobName = StartSNOMEDCTInferenceJobRequest.AddMember("JobName", _JobName)
-
-	StartSNOMEDCTInferenceJobRequest_ClientRequestToken = StartSNOMEDCTInferenceJobRequest.AddMember("ClientRequestToken", _ClientRequestTokenString)
-
-	StartSNOMEDCTInferenceJobRequest_KMSKey = StartSNOMEDCTInferenceJobRequest.AddMember("KMSKey", _KMSKey)
-
-	StartSNOMEDCTInferenceJobRequest_LanguageCode = StartSNOMEDCTInferenceJobRequest.AddMember("LanguageCode", LanguageCode)
-
-	StartSNOMEDCTInferenceJobResponse_JobId = StartSNOMEDCTInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StopEntitiesDetectionV2JobRequest_JobId = StopEntitiesDetectionV2JobRequest.AddMember("JobId", _JobId)
-
-	StopEntitiesDetectionV2JobResponse_JobId = StopEntitiesDetectionV2JobResponse.AddMember("JobId", _JobId)
-
-	StopICD10CMInferenceJobRequest_JobId = StopICD10CMInferenceJobRequest.AddMember("JobId", _JobId)
-
-	StopICD10CMInferenceJobResponse_JobId = StopICD10CMInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StopPHIDetectionJobRequest_JobId = StopPHIDetectionJobRequest.AddMember("JobId", _JobId)
-
-	StopPHIDetectionJobResponse_JobId = StopPHIDetectionJobResponse.AddMember("JobId", _JobId)
-
-	StopRxNormInferenceJobRequest_JobId = StopRxNormInferenceJobRequest.AddMember("JobId", _JobId)
-
-	StopRxNormInferenceJobResponse_JobId = StopRxNormInferenceJobResponse.AddMember("JobId", _JobId)
-
-	StopSNOMEDCTInferenceJobRequest_JobId = StopSNOMEDCTInferenceJobRequest.AddMember("JobId", _JobId)
-
-	StopSNOMEDCTInferenceJobResponse_JobId = StopSNOMEDCTInferenceJobResponse.AddMember("JobId", _JobId)
-
-}
+var (
+	iDescribeEntitiesDetectionV2Job           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeEntitiesDetectionV2Job"}
+	iDescribeICD10CMInferenceJob              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeICD10CMInferenceJob"}
+	iDescribePHIDetectionJob                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribePHIDetectionJob"}
+	iDescribeRxNormInferenceJob               = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeRxNormInferenceJob"}
+	iDescribeSNOMEDCTInferenceJob             = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeSNOMEDCTInferenceJob"}
+	iDetectEntities                           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectEntities"}
+	iDetectEntitiesV2                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectEntitiesV2"}
+	iDetectPHI                                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectPHI"}
+	iInferICD10CM                             = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferICD10CM"}
+	iInferRxNorm                              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferRxNorm"}
+	iInferSNOMEDCT                            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferSNOMEDCT"}
+	iListEntitiesDetectionV2Jobs              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListEntitiesDetectionV2Jobs"}
+	iListICD10CMInferenceJobs                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListICD10CMInferenceJobs"}
+	iListPHIDetectionJobs                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListPHIDetectionJobs"}
+	iListRxNormInferenceJobs                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListRxNormInferenceJobs"}
+	iListSNOMEDCTInferenceJobs                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListSNOMEDCTInferenceJobs"}
+	iStartEntitiesDetectionV2Job              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartEntitiesDetectionV2Job"}
+	iStartICD10CMInferenceJob                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartICD10CMInferenceJob"}
+	iStartPHIDetectionJob                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartPHIDetectionJob"}
+	iStartRxNormInferenceJob                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartRxNormInferenceJob"}
+	iStartSNOMEDCTInferenceJob                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartSNOMEDCTInferenceJob"}
+	iStopEntitiesDetectionV2Job               = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopEntitiesDetectionV2Job"}
+	iStopICD10CMInferenceJob                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopICD10CMInferenceJob"}
+	iStopPHIDetectionJob                      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopPHIDetectionJob"}
+	iStopRxNormInferenceJob                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopRxNormInferenceJob"}
+	iStopSNOMEDCTInferenceJob                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopSNOMEDCTInferenceJob"}
+	i_ComprehendMedical_20181030              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ComprehendMedical_20181030"}
+	i_AnyLengthString                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "AnyLengthString"}
+	iAttribute                                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "Attribute"}
+	i_AttributeList                           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "AttributeList"}
+	iAttributeName                            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "AttributeName"}
+	i_BoundedLengthString                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "BoundedLengthString"}
+	iCharacters                               = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "Characters"}
+	i_ClientRequestTokenString                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ClientRequestTokenString"}
+	iComprehendMedicalAsyncJobFilter          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ComprehendMedicalAsyncJobFilter"}
+	iComprehendMedicalAsyncJobProperties      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ComprehendMedicalAsyncJobProperties"}
+	i_ComprehendMedicalAsyncJobPropertiesList = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ComprehendMedicalAsyncJobPropertiesList"}
+	iEntity                                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "Entity"}
+	i_EntityList                              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "EntityList"}
+	iEntitySubType                            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "EntitySubType"}
+	iEntityType                               = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "EntityType"}
+	i_Float                                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "Float"}
+	i_IamRoleArn                              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "IamRoleArn"}
+	iICD10CMAttribute                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMAttribute"}
+	i_ICD10CMAttributeList                    = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMAttributeList"}
+	iICD10CMAttributeType                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMAttributeType"}
+	iICD10CMConcept                           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMConcept"}
+	i_ICD10CMConceptList                      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMConceptList"}
+	iICD10CMEntity                            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMEntity"}
+	iICD10CMEntityCategory                    = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMEntityCategory"}
+	i_ICD10CMEntityList                       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMEntityList"}
+	iICD10CMEntityType                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMEntityType"}
+	iICD10CMRelationshipType                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMRelationshipType"}
+	iICD10CMTrait                             = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMTrait"}
+	i_ICD10CMTraitList                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMTraitList"}
+	iICD10CMTraitName                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ICD10CMTraitName"}
+	iInputDataConfig                          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InputDataConfig"}
+	i_Integer                                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "Integer"}
+	iInternalServerException                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InternalServerException"}
+	iInvalidEncodingException                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InvalidEncodingException"}
+	iInvalidRequestException                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InvalidRequestException"}
+	i_JobId                                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "JobId"}
+	i_JobName                                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "JobName"}
+	iJobStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "JobStatus"}
+	i_KMSKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "KMSKey"}
+	iLanguageCode                             = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "LanguageCode"}
+	i_ManifestFilePath                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ManifestFilePath"}
+	i_MaxResultsInteger                       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "MaxResultsInteger"}
+	i_ModelVersion                            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ModelVersion"}
+	i_OntologyLinkingBoundedLengthString      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "OntologyLinkingBoundedLengthString"}
+	iOutputDataConfig                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "OutputDataConfig"}
+	iRelationshipType                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RelationshipType"}
+	iResourceNotFoundException                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ResourceNotFoundException"}
+	iRxNormAttribute                          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormAttribute"}
+	i_RxNormAttributeList                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormAttributeList"}
+	iRxNormAttributeType                      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormAttributeType"}
+	iRxNormConcept                            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormConcept"}
+	i_RxNormConceptList                       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormConceptList"}
+	iRxNormEntity                             = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormEntity"}
+	iRxNormEntityCategory                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormEntityCategory"}
+	i_RxNormEntityList                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormEntityList"}
+	iRxNormEntityType                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormEntityType"}
+	iRxNormTrait                              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormTrait"}
+	i_RxNormTraitList                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormTraitList"}
+	iRxNormTraitName                          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "RxNormTraitName"}
+	i_S3Bucket                                = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "S3Bucket"}
+	i_S3Key                                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "S3Key"}
+	iServiceUnavailableException              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ServiceUnavailableException"}
+	iSNOMEDCTAttribute                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTAttribute"}
+	i_SNOMEDCTAttributeList                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTAttributeList"}
+	iSNOMEDCTAttributeType                    = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTAttributeType"}
+	iSNOMEDCTConcept                          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTConcept"}
+	i_SNOMEDCTConceptList                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTConceptList"}
+	iSNOMEDCTDetails                          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTDetails"}
+	iSNOMEDCTEntity                           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTEntity"}
+	iSNOMEDCTEntityCategory                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTEntityCategory"}
+	i_SNOMEDCTEntityList                      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTEntityList"}
+	iSNOMEDCTEntityType                       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTEntityType"}
+	iSNOMEDCTRelationshipType                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTRelationshipType"}
+	iSNOMEDCTTrait                            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTTrait"}
+	i_SNOMEDCTTraitList                       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTTraitList"}
+	iSNOMEDCTTraitName                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "SNOMEDCTTraitName"}
+	i_String                                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "String"}
+	iTextSizeLimitExceededException           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "TextSizeLimitExceededException"}
+	i_Timestamp                               = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "Timestamp"}
+	iTooManyRequestsException                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "TooManyRequestsException"}
+	iTrait                                    = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "Trait"}
+	i_TraitList                               = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "TraitList"}
+	iUnmappedAttribute                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "UnmappedAttribute"}
+	i_UnmappedAttributeList                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "UnmappedAttributeList"}
+	iValidationException                      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ValidationException"}
+	iDescribeEntitiesDetectionV2JobRequest    = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeEntitiesDetectionV2JobRequest"}
+	iDescribeEntitiesDetectionV2JobResponse   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeEntitiesDetectionV2JobResponse"}
+	iDescribeICD10CMInferenceJobRequest       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeICD10CMInferenceJobRequest"}
+	iDescribeICD10CMInferenceJobResponse      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeICD10CMInferenceJobResponse"}
+	iDescribePHIDetectionJobRequest           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribePHIDetectionJobRequest"}
+	iDescribePHIDetectionJobResponse          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribePHIDetectionJobResponse"}
+	iDescribeRxNormInferenceJobRequest        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeRxNormInferenceJobRequest"}
+	iDescribeRxNormInferenceJobResponse       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeRxNormInferenceJobResponse"}
+	iDescribeSNOMEDCTInferenceJobRequest      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeSNOMEDCTInferenceJobRequest"}
+	iDescribeSNOMEDCTInferenceJobResponse     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DescribeSNOMEDCTInferenceJobResponse"}
+	iDetectEntitiesRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectEntitiesRequest"}
+	iDetectEntitiesResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectEntitiesResponse"}
+	iDetectEntitiesV2Request                  = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectEntitiesV2Request"}
+	iDetectEntitiesV2Response                 = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectEntitiesV2Response"}
+	iDetectPHIRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectPHIRequest"}
+	iDetectPHIResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "DetectPHIResponse"}
+	iInferICD10CMRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferICD10CMRequest"}
+	iInferICD10CMResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferICD10CMResponse"}
+	iInferRxNormRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferRxNormRequest"}
+	iInferRxNormResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferRxNormResponse"}
+	iInferSNOMEDCTRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferSNOMEDCTRequest"}
+	iInferSNOMEDCTResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "InferSNOMEDCTResponse"}
+	iListEntitiesDetectionV2JobsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListEntitiesDetectionV2JobsRequest"}
+	iListEntitiesDetectionV2JobsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListEntitiesDetectionV2JobsResponse"}
+	iListICD10CMInferenceJobsRequest          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListICD10CMInferenceJobsRequest"}
+	iListICD10CMInferenceJobsResponse         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListICD10CMInferenceJobsResponse"}
+	iListPHIDetectionJobsRequest              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListPHIDetectionJobsRequest"}
+	iListPHIDetectionJobsResponse             = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListPHIDetectionJobsResponse"}
+	iListRxNormInferenceJobsRequest           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListRxNormInferenceJobsRequest"}
+	iListRxNormInferenceJobsResponse          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListRxNormInferenceJobsResponse"}
+	iListSNOMEDCTInferenceJobsRequest         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListSNOMEDCTInferenceJobsRequest"}
+	iListSNOMEDCTInferenceJobsResponse        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "ListSNOMEDCTInferenceJobsResponse"}
+	iStartEntitiesDetectionV2JobRequest       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartEntitiesDetectionV2JobRequest"}
+	iStartEntitiesDetectionV2JobResponse      = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartEntitiesDetectionV2JobResponse"}
+	iStartICD10CMInferenceJobRequest          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartICD10CMInferenceJobRequest"}
+	iStartICD10CMInferenceJobResponse         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartICD10CMInferenceJobResponse"}
+	iStartPHIDetectionJobRequest              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartPHIDetectionJobRequest"}
+	iStartPHIDetectionJobResponse             = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartPHIDetectionJobResponse"}
+	iStartRxNormInferenceJobRequest           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartRxNormInferenceJobRequest"}
+	iStartRxNormInferenceJobResponse          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartRxNormInferenceJobResponse"}
+	iStartSNOMEDCTInferenceJobRequest         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartSNOMEDCTInferenceJobRequest"}
+	iStartSNOMEDCTInferenceJobResponse        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StartSNOMEDCTInferenceJobResponse"}
+	iStopEntitiesDetectionV2JobRequest        = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopEntitiesDetectionV2JobRequest"}
+	iStopEntitiesDetectionV2JobResponse       = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopEntitiesDetectionV2JobResponse"}
+	iStopICD10CMInferenceJobRequest           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopICD10CMInferenceJobRequest"}
+	iStopICD10CMInferenceJobResponse          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopICD10CMInferenceJobResponse"}
+	iStopPHIDetectionJobRequest               = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopPHIDetectionJobRequest"}
+	iStopPHIDetectionJobResponse              = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopPHIDetectionJobResponse"}
+	iStopRxNormInferenceJobRequest            = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopRxNormInferenceJobRequest"}
+	iStopRxNormInferenceJobResponse           = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopRxNormInferenceJobResponse"}
+	iStopSNOMEDCTInferenceJobRequest          = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopSNOMEDCTInferenceJobRequest"}
+	iStopSNOMEDCTInferenceJobResponse         = smithy.ShapeID{Namespace: "com.amazonaws.comprehendmedical", Name: "StopSNOMEDCTInferenceJobResponse"}
+	pUnit                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+
+var mAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sAttribute_Type, &sAttribute_Score, &sAttribute_RelationshipScore, &sAttribute_RelationshipType, &sAttribute_Id, &sAttribute_BeginOffset, &sAttribute_EndOffset, &sAttribute_Text, &sAttribute_Category, &sAttribute_Traits}, Seed: 2, Slots: []uint16{
+	7, 0, 2, 0, 0, 0, 0, 6, 0, 9, 8, 1, 0, 5, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0,
+	0, 0, 10, 0, 0, 3, 0, 0,
+}}
+var m_AttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttributeList_member}}
+var mAttributeName = smithy.SchemaMembers{List: []*smithy.Schema{&sAttributeName_SIGN, &sAttributeName_SYMPTOM, &sAttributeName_DIAGNOSIS, &sAttributeName_NEGATION, &sAttributeName_PERTAINS_TO_FAMILY, &sAttributeName_HYPOTHETICAL, &sAttributeName_LOW_CONFIDENCE, &sAttributeName_PAST_HISTORY, &sAttributeName_FUTURE}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 5, 4, 0, 0, 6, 7, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 1,
+	3, 0, 0, 0, 0, 9, 0, 0,
+}}
+var mCharacters = smithy.SchemaMembers{List: []*smithy.Schema{&sCharacters_OriginalTextCharacters}}
+var mComprehendMedicalAsyncJobFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sComprehendMedicalAsyncJobFilter_JobName, &sComprehendMedicalAsyncJobFilter_JobStatus, &sComprehendMedicalAsyncJobFilter_SubmitTimeBefore, &sComprehendMedicalAsyncJobFilter_SubmitTimeAfter}}
+var mComprehendMedicalAsyncJobProperties = smithy.SchemaMembers{List: []*smithy.Schema{&sComprehendMedicalAsyncJobProperties_JobId, &sComprehendMedicalAsyncJobProperties_JobName, &sComprehendMedicalAsyncJobProperties_JobStatus, &sComprehendMedicalAsyncJobProperties_Message, &sComprehendMedicalAsyncJobProperties_SubmitTime, &sComprehendMedicalAsyncJobProperties_EndTime, &sComprehendMedicalAsyncJobProperties_ExpirationTime, &sComprehendMedicalAsyncJobProperties_InputDataConfig, &sComprehendMedicalAsyncJobProperties_OutputDataConfig, &sComprehendMedicalAsyncJobProperties_LanguageCode, &sComprehendMedicalAsyncJobProperties_DataAccessRoleArn, &sComprehendMedicalAsyncJobProperties_ManifestFilePath, &sComprehendMedicalAsyncJobProperties_KMSKey, &sComprehendMedicalAsyncJobProperties_ModelVersion}, Seed: 47, Slots: []uint16{
+	8, 0, 0, 0, 11, 0, 0, 0, 6, 0, 1, 0, 0, 7, 0, 13, 9, 0, 0, 0, 4, 2, 0, 0,
+	14, 12, 5, 0, 0, 10, 3, 0,
+}}
+var m_ComprehendMedicalAsyncJobPropertiesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComprehendMedicalAsyncJobPropertiesList_member}}
+var mEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sEntity_Id, &sEntity_BeginOffset, &sEntity_EndOffset, &sEntity_Score, &sEntity_Text, &sEntity_Category, &sEntity_Type, &sEntity_Traits, &sEntity_Attributes}, Seed: 2, Slots: []uint16{
+	3, 9, 4, 0, 0, 0, 0, 2, 0, 6, 5, 7, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 8, 0, 0, 0, 0, 0,
+}}
+var m_EntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EntityList_member}}
+var mEntitySubType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntitySubType_NAME, &sEntitySubType_DX_NAME, &sEntitySubType_DOSAGE, &sEntitySubType_ROUTE_OR_MODE, &sEntitySubType_FORM, &sEntitySubType_FREQUENCY, &sEntitySubType_DURATION, &sEntitySubType_GENERIC_NAME, &sEntitySubType_BRAND_NAME, &sEntitySubType_STRENGTH, &sEntitySubType_RATE, &sEntitySubType_ACUITY, &sEntitySubType_TEST_NAME, &sEntitySubType_TEST_VALUE, &sEntitySubType_TEST_UNITS, &sEntitySubType_TEST_UNIT, &sEntitySubType_PROCEDURE_NAME, &sEntitySubType_TREATMENT_NAME, &sEntitySubType_DATE, &sEntitySubType_AGE, &sEntitySubType_CONTACT_POINT, &sEntitySubType_PHONE_OR_FAX, &sEntitySubType_EMAIL, &sEntitySubType_IDENTIFIER, &sEntitySubType_ID, &sEntitySubType_URL, &sEntitySubType_ADDRESS, &sEntitySubType_PROFESSION, &sEntitySubType_SYSTEM_ORGAN_SITE, &sEntitySubType_DIRECTION, &sEntitySubType_QUALITY, &sEntitySubType_QUANTITY, &sEntitySubType_TIME_EXPRESSION, &sEntitySubType_TIME_TO_MEDICATION_NAME, &sEntitySubType_TIME_TO_DX_NAME, &sEntitySubType_TIME_TO_TEST_NAME, &sEntitySubType_TIME_TO_PROCEDURE_NAME, &sEntitySubType_TIME_TO_TREATMENT_NAME, &sEntitySubType_AMOUNT, &sEntitySubType_GENDER, &sEntitySubType_RACE_ETHNICITY, &sEntitySubType_ALLERGIES, &sEntitySubType_TOBACCO_USE, &sEntitySubType_ALCOHOL_CONSUMPTION, &sEntitySubType_REC_DRUG_USE}, Seed: 1989, Slots: []uint16{
+	17, 0, 0, 0, 0, 9, 0, 19, 0, 13, 0, 24, 7, 28, 0, 25, 0, 0, 0, 43, 5, 10, 15, 42,
+	39, 0, 21, 0, 0, 0, 8, 0, 2, 45, 0, 0, 18, 0, 35, 0, 0, 0, 0, 12, 0, 0, 40, 0,
+	0, 4, 29, 0, 0, 0, 0, 27, 0, 0, 0, 16, 26, 0, 0, 0, 0, 32, 6, 23, 0, 0, 34, 0,
+	0, 14, 11, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 20, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 33, 38, 0, 1, 41, 0,
+	0, 0, 0, 31, 3, 37, 44, 0,
+}}
+var mEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sEntityType_MEDICATION, &sEntityType_MEDICAL_CONDITION, &sEntityType_PROTECTED_HEALTH_INFORMATION, &sEntityType_TEST_TREATMENT_PROCEDURE, &sEntityType_ANATOMY, &sEntityType_TIME_EXPRESSION, &sEntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL}}
+var mICD10CMAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMAttribute_Type, &sICD10CMAttribute_Score, &sICD10CMAttribute_RelationshipScore, &sICD10CMAttribute_Id, &sICD10CMAttribute_BeginOffset, &sICD10CMAttribute_EndOffset, &sICD10CMAttribute_Text, &sICD10CMAttribute_Traits, &sICD10CMAttribute_Category, &sICD10CMAttribute_RelationshipType}, Seed: 2, Slots: []uint16{
+	6, 0, 2, 0, 0, 0, 0, 5, 0, 9, 7, 1, 0, 4, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0,
+	0, 0, 8, 0, 0, 3, 0, 0,
+}}
+var m_ICD10CMAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ICD10CMAttributeList_member}}
+var mICD10CMAttributeType = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMAttributeType_ACUITY, &sICD10CMAttributeType_DIRECTION, &sICD10CMAttributeType_SYSTEM_ORGAN_SITE, &sICD10CMAttributeType_QUALITY, &sICD10CMAttributeType_QUANTITY, &sICD10CMAttributeType_TIME_TO_DX_NAME, &sICD10CMAttributeType_TIME_EXPRESSION}}
+var mICD10CMConcept = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMConcept_Description, &sICD10CMConcept_Code, &sICD10CMConcept_Score}}
+var m_ICD10CMConceptList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ICD10CMConceptList_member}}
+var mICD10CMEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMEntity_Id, &sICD10CMEntity_Text, &sICD10CMEntity_Category, &sICD10CMEntity_Type, &sICD10CMEntity_Score, &sICD10CMEntity_BeginOffset, &sICD10CMEntity_EndOffset, &sICD10CMEntity_Attributes, &sICD10CMEntity_Traits, &sICD10CMEntity_ICD10CMConcepts}, Seed: 2, Slots: []uint16{
+	7, 8, 5, 0, 0, 0, 0, 6, 0, 3, 2, 4, 0, 1, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0,
+	0, 0, 9, 0, 0, 0, 0, 0,
+}}
+var mICD10CMEntityCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMEntityCategory_MEDICAL_CONDITION}}
+var m_ICD10CMEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ICD10CMEntityList_member}}
+var mICD10CMEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMEntityType_DX_NAME, &sICD10CMEntityType_TIME_EXPRESSION}}
+var mICD10CMRelationshipType = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMRelationshipType_OVERLAP, &sICD10CMRelationshipType_SYSTEM_ORGAN_SITE, &sICD10CMRelationshipType_QUALITY}}
+var mICD10CMTrait = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMTrait_Name, &sICD10CMTrait_Score}}
+var m_ICD10CMTraitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ICD10CMTraitList_member}}
+var mICD10CMTraitName = smithy.SchemaMembers{List: []*smithy.Schema{&sICD10CMTraitName_NEGATION, &sICD10CMTraitName_DIAGNOSIS, &sICD10CMTraitName_SIGN, &sICD10CMTraitName_SYMPTOM, &sICD10CMTraitName_PERTAINS_TO_FAMILY, &sICD10CMTraitName_HYPOTHETICAL, &sICD10CMTraitName_LOW_CONFIDENCE}}
+var mInputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sInputDataConfig_S3Bucket, &sInputDataConfig_S3Key}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mInvalidEncodingException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidEncodingException_Message}}
+var mInvalidRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidRequestException_Message}}
+var mJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sJobStatus_SUBMITTED, &sJobStatus_IN_PROGRESS, &sJobStatus_COMPLETED, &sJobStatus_PARTIAL_SUCCESS, &sJobStatus_FAILED, &sJobStatus_STOP_REQUESTED, &sJobStatus_STOPPED}}
+var mLanguageCode = smithy.SchemaMembers{List: []*smithy.Schema{&sLanguageCode_EN}}
+var mOutputDataConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputDataConfig_S3Bucket, &sOutputDataConfig_S3Key}}
+var mRelationshipType = smithy.SchemaMembers{List: []*smithy.Schema{&sRelationshipType_EVERY, &sRelationshipType_WITH_DOSAGE, &sRelationshipType_ADMINISTERED_VIA, &sRelationshipType_FOR, &sRelationshipType_NEGATIVE, &sRelationshipType_OVERLAP, &sRelationshipType_DOSAGE, &sRelationshipType_ROUTE_OR_MODE, &sRelationshipType_FORM, &sRelationshipType_FREQUENCY, &sRelationshipType_DURATION, &sRelationshipType_STRENGTH, &sRelationshipType_RATE, &sRelationshipType_ACUITY, &sRelationshipType_TEST_VALUE, &sRelationshipType_TEST_UNITS, &sRelationshipType_TEST_UNIT, &sRelationshipType_DIRECTION, &sRelationshipType_SYSTEM_ORGAN_SITE, &sRelationshipType_AMOUNT, &sRelationshipType_USAGE, &sRelationshipType_QUALITY}, Seed: 142, Slots: []uint16{
+	0, 2, 0, 0, 0, 9, 16, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 15, 7, 0,
+	0, 11, 5, 12, 0, 0, 13, 0, 0, 0, 3, 0, 0, 22, 19, 0, 0, 0, 0, 1, 0, 0, 0, 21,
+	0, 10, 0, 18, 0, 0, 0, 0, 0, 14, 0, 17, 0, 4, 0, 6,
+}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mRxNormAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormAttribute_Type, &sRxNormAttribute_Score, &sRxNormAttribute_RelationshipScore, &sRxNormAttribute_Id, &sRxNormAttribute_BeginOffset, &sRxNormAttribute_EndOffset, &sRxNormAttribute_Text, &sRxNormAttribute_Traits}}
+var m_RxNormAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RxNormAttributeList_member}}
+var mRxNormAttributeType = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormAttributeType_DOSAGE, &sRxNormAttributeType_DURATION, &sRxNormAttributeType_FORM, &sRxNormAttributeType_FREQUENCY, &sRxNormAttributeType_RATE, &sRxNormAttributeType_ROUTE_OR_MODE, &sRxNormAttributeType_STRENGTH}}
+var mRxNormConcept = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormConcept_Description, &sRxNormConcept_Code, &sRxNormConcept_Score}}
+var m_RxNormConceptList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RxNormConceptList_member}}
+var mRxNormEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormEntity_Id, &sRxNormEntity_Text, &sRxNormEntity_Category, &sRxNormEntity_Type, &sRxNormEntity_Score, &sRxNormEntity_BeginOffset, &sRxNormEntity_EndOffset, &sRxNormEntity_Attributes, &sRxNormEntity_Traits, &sRxNormEntity_RxNormConcepts}, Seed: 2, Slots: []uint16{
+	7, 8, 5, 0, 0, 0, 0, 6, 0, 3, 2, 4, 0, 1, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0,
+	0, 0, 9, 0, 0, 0, 0, 0,
+}}
+var mRxNormEntityCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormEntityCategory_MEDICATION}}
+var m_RxNormEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RxNormEntityList_member}}
+var mRxNormEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormEntityType_BRAND_NAME, &sRxNormEntityType_GENERIC_NAME}}
+var mRxNormTrait = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormTrait_Name, &sRxNormTrait_Score}}
+var m_RxNormTraitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RxNormTraitList_member}}
+var mRxNormTraitName = smithy.SchemaMembers{List: []*smithy.Schema{&sRxNormTraitName_NEGATION, &sRxNormTraitName_PAST_HISTORY}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Message}}
+var mSNOMEDCTAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTAttribute_Category, &sSNOMEDCTAttribute_Type, &sSNOMEDCTAttribute_Score, &sSNOMEDCTAttribute_RelationshipScore, &sSNOMEDCTAttribute_RelationshipType, &sSNOMEDCTAttribute_Id, &sSNOMEDCTAttribute_BeginOffset, &sSNOMEDCTAttribute_EndOffset, &sSNOMEDCTAttribute_Text, &sSNOMEDCTAttribute_Traits, &sSNOMEDCTAttribute_SNOMEDCTConcepts}, Seed: 3, Slots: []uint16{
+	10, 0, 0, 0, 0, 1, 0, 11, 5, 8, 0, 0, 2, 9, 0, 0, 4, 0, 0, 0, 0, 7, 6, 0,
+	0, 0, 0, 0, 0, 0, 3, 0,
+}}
+var m_SNOMEDCTAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SNOMEDCTAttributeList_member}}
+var mSNOMEDCTAttributeType = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTAttributeType_ACUITY, &sSNOMEDCTAttributeType_QUALITY, &sSNOMEDCTAttributeType_DIRECTION, &sSNOMEDCTAttributeType_SYSTEM_ORGAN_SITE, &sSNOMEDCTAttributeType_TEST_VALUE, &sSNOMEDCTAttributeType_TEST_UNIT}}
+var mSNOMEDCTConcept = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTConcept_Description, &sSNOMEDCTConcept_Code, &sSNOMEDCTConcept_Score}}
+var m_SNOMEDCTConceptList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SNOMEDCTConceptList_member}}
+var mSNOMEDCTDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTDetails_Edition, &sSNOMEDCTDetails_Language, &sSNOMEDCTDetails_VersionDate}}
+var mSNOMEDCTEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTEntity_Id, &sSNOMEDCTEntity_Text, &sSNOMEDCTEntity_Category, &sSNOMEDCTEntity_Type, &sSNOMEDCTEntity_Score, &sSNOMEDCTEntity_BeginOffset, &sSNOMEDCTEntity_EndOffset, &sSNOMEDCTEntity_Attributes, &sSNOMEDCTEntity_Traits, &sSNOMEDCTEntity_SNOMEDCTConcepts}, Seed: 2, Slots: []uint16{
+	7, 8, 5, 0, 0, 0, 0, 6, 0, 3, 2, 4, 0, 1, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0,
+	0, 0, 9, 0, 0, 0, 0, 0,
+}}
+var mSNOMEDCTEntityCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTEntityCategory_MEDICAL_CONDITION, &sSNOMEDCTEntityCategory_ANATOMY, &sSNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE}}
+var m_SNOMEDCTEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SNOMEDCTEntityList_member}}
+var mSNOMEDCTEntityType = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTEntityType_DX_NAME, &sSNOMEDCTEntityType_TEST_NAME, &sSNOMEDCTEntityType_PROCEDURE_NAME, &sSNOMEDCTEntityType_TREATMENT_NAME}}
+var mSNOMEDCTRelationshipType = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTRelationshipType_ACUITY, &sSNOMEDCTRelationshipType_QUALITY, &sSNOMEDCTRelationshipType_TEST_VALUE, &sSNOMEDCTRelationshipType_TEST_UNITS, &sSNOMEDCTRelationshipType_DIRECTION, &sSNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE, &sSNOMEDCTRelationshipType_TEST_UNIT}}
+var mSNOMEDCTTrait = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTTrait_Name, &sSNOMEDCTTrait_Score}}
+var m_SNOMEDCTTraitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SNOMEDCTTraitList_member}}
+var mSNOMEDCTTraitName = smithy.SchemaMembers{List: []*smithy.Schema{&sSNOMEDCTTraitName_NEGATION, &sSNOMEDCTTraitName_DIAGNOSIS, &sSNOMEDCTTraitName_SIGN, &sSNOMEDCTTraitName_SYMPTOM, &sSNOMEDCTTraitName_PERTAINS_TO_FAMILY, &sSNOMEDCTTraitName_HYPOTHETICAL, &sSNOMEDCTTraitName_LOW_CONFIDENCE, &sSNOMEDCTTraitName_PAST_HISTORY, &sSNOMEDCTTraitName_FUTURE}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 5, 1, 0, 0, 6, 7, 4, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 3,
+	2, 0, 0, 0, 0, 9, 0, 0,
+}}
+var mTextSizeLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sTextSizeLimitExceededException_Message}}
+var mTooManyRequestsException = smithy.SchemaMembers{List: []*smithy.Schema{&sTooManyRequestsException_Message}}
+var mTrait = smithy.SchemaMembers{List: []*smithy.Schema{&sTrait_Name, &sTrait_Score}}
+var m_TraitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TraitList_member}}
+var mUnmappedAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sUnmappedAttribute_Type, &sUnmappedAttribute_Attribute}}
+var m_UnmappedAttributeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_UnmappedAttributeList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mDescribeEntitiesDetectionV2JobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntitiesDetectionV2JobRequest_JobId}}
+var mDescribeEntitiesDetectionV2JobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties}}
+var mDescribeICD10CMInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeICD10CMInferenceJobRequest_JobId}}
+var mDescribeICD10CMInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties}}
+var mDescribePHIDetectionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePHIDetectionJobRequest_JobId}}
+var mDescribePHIDetectionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties}}
+var mDescribeRxNormInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRxNormInferenceJobRequest_JobId}}
+var mDescribeRxNormInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties}}
+var mDescribeSNOMEDCTInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSNOMEDCTInferenceJobRequest_JobId}}
+var mDescribeSNOMEDCTInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties}}
+var mDetectEntitiesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectEntitiesRequest_Text}}
+var mDetectEntitiesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectEntitiesResponse_Entities, &sDetectEntitiesResponse_UnmappedAttributes, &sDetectEntitiesResponse_PaginationToken, &sDetectEntitiesResponse_ModelVersion}}
+var mDetectEntitiesV2Request = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectEntitiesV2Request_Text}}
+var mDetectEntitiesV2Response = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectEntitiesV2Response_Entities, &sDetectEntitiesV2Response_UnmappedAttributes, &sDetectEntitiesV2Response_PaginationToken, &sDetectEntitiesV2Response_ModelVersion}}
+var mDetectPHIRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectPHIRequest_Text}}
+var mDetectPHIResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDetectPHIResponse_Entities, &sDetectPHIResponse_PaginationToken, &sDetectPHIResponse_ModelVersion}}
+var mInferICD10CMRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInferICD10CMRequest_Text}}
+var mInferICD10CMResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInferICD10CMResponse_Entities, &sInferICD10CMResponse_PaginationToken, &sInferICD10CMResponse_ModelVersion}}
+var mInferRxNormRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInferRxNormRequest_Text}}
+var mInferRxNormResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInferRxNormResponse_Entities, &sInferRxNormResponse_PaginationToken, &sInferRxNormResponse_ModelVersion}}
+var mInferSNOMEDCTRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sInferSNOMEDCTRequest_Text}}
+var mInferSNOMEDCTResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sInferSNOMEDCTResponse_Entities, &sInferSNOMEDCTResponse_PaginationToken, &sInferSNOMEDCTResponse_ModelVersion, &sInferSNOMEDCTResponse_SNOMEDCTDetails, &sInferSNOMEDCTResponse_Characters}}
+var mListEntitiesDetectionV2JobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitiesDetectionV2JobsRequest_Filter, &sListEntitiesDetectionV2JobsRequest_NextToken, &sListEntitiesDetectionV2JobsRequest_MaxResults}}
+var mListEntitiesDetectionV2JobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList, &sListEntitiesDetectionV2JobsResponse_NextToken}}
+var mListICD10CMInferenceJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListICD10CMInferenceJobsRequest_Filter, &sListICD10CMInferenceJobsRequest_NextToken, &sListICD10CMInferenceJobsRequest_MaxResults}}
+var mListICD10CMInferenceJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, &sListICD10CMInferenceJobsResponse_NextToken}}
+var mListPHIDetectionJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListPHIDetectionJobsRequest_Filter, &sListPHIDetectionJobsRequest_NextToken, &sListPHIDetectionJobsRequest_MaxResults}}
+var mListPHIDetectionJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList, &sListPHIDetectionJobsResponse_NextToken}}
+var mListRxNormInferenceJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRxNormInferenceJobsRequest_Filter, &sListRxNormInferenceJobsRequest_NextToken, &sListRxNormInferenceJobsRequest_MaxResults}}
+var mListRxNormInferenceJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, &sListRxNormInferenceJobsResponse_NextToken}}
+var mListSNOMEDCTInferenceJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSNOMEDCTInferenceJobsRequest_Filter, &sListSNOMEDCTInferenceJobsRequest_NextToken, &sListSNOMEDCTInferenceJobsRequest_MaxResults}}
+var mListSNOMEDCTInferenceJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList, &sListSNOMEDCTInferenceJobsResponse_NextToken}}
+var mStartEntitiesDetectionV2JobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEntitiesDetectionV2JobRequest_InputDataConfig, &sStartEntitiesDetectionV2JobRequest_OutputDataConfig, &sStartEntitiesDetectionV2JobRequest_DataAccessRoleArn, &sStartEntitiesDetectionV2JobRequest_JobName, &sStartEntitiesDetectionV2JobRequest_ClientRequestToken, &sStartEntitiesDetectionV2JobRequest_KMSKey, &sStartEntitiesDetectionV2JobRequest_LanguageCode}}
+var mStartEntitiesDetectionV2JobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartEntitiesDetectionV2JobResponse_JobId}}
+var mStartICD10CMInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartICD10CMInferenceJobRequest_InputDataConfig, &sStartICD10CMInferenceJobRequest_OutputDataConfig, &sStartICD10CMInferenceJobRequest_DataAccessRoleArn, &sStartICD10CMInferenceJobRequest_JobName, &sStartICD10CMInferenceJobRequest_ClientRequestToken, &sStartICD10CMInferenceJobRequest_KMSKey, &sStartICD10CMInferenceJobRequest_LanguageCode}}
+var mStartICD10CMInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartICD10CMInferenceJobResponse_JobId}}
+var mStartPHIDetectionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartPHIDetectionJobRequest_InputDataConfig, &sStartPHIDetectionJobRequest_OutputDataConfig, &sStartPHIDetectionJobRequest_DataAccessRoleArn, &sStartPHIDetectionJobRequest_JobName, &sStartPHIDetectionJobRequest_ClientRequestToken, &sStartPHIDetectionJobRequest_KMSKey, &sStartPHIDetectionJobRequest_LanguageCode}}
+var mStartPHIDetectionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartPHIDetectionJobResponse_JobId}}
+var mStartRxNormInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRxNormInferenceJobRequest_InputDataConfig, &sStartRxNormInferenceJobRequest_OutputDataConfig, &sStartRxNormInferenceJobRequest_DataAccessRoleArn, &sStartRxNormInferenceJobRequest_JobName, &sStartRxNormInferenceJobRequest_ClientRequestToken, &sStartRxNormInferenceJobRequest_KMSKey, &sStartRxNormInferenceJobRequest_LanguageCode}}
+var mStartRxNormInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartRxNormInferenceJobResponse_JobId}}
+var mStartSNOMEDCTInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSNOMEDCTInferenceJobRequest_InputDataConfig, &sStartSNOMEDCTInferenceJobRequest_OutputDataConfig, &sStartSNOMEDCTInferenceJobRequest_DataAccessRoleArn, &sStartSNOMEDCTInferenceJobRequest_JobName, &sStartSNOMEDCTInferenceJobRequest_ClientRequestToken, &sStartSNOMEDCTInferenceJobRequest_KMSKey, &sStartSNOMEDCTInferenceJobRequest_LanguageCode}}
+var mStartSNOMEDCTInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSNOMEDCTInferenceJobResponse_JobId}}
+var mStopEntitiesDetectionV2JobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopEntitiesDetectionV2JobRequest_JobId}}
+var mStopEntitiesDetectionV2JobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopEntitiesDetectionV2JobResponse_JobId}}
+var mStopICD10CMInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopICD10CMInferenceJobRequest_JobId}}
+var mStopICD10CMInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopICD10CMInferenceJobResponse_JobId}}
+var mStopPHIDetectionJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopPHIDetectionJobRequest_JobId}}
+var mStopPHIDetectionJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopPHIDetectionJobResponse_JobId}}
+var mStopRxNormInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopRxNormInferenceJobRequest_JobId}}
+var mStopRxNormInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopRxNormInferenceJobResponse_JobId}}
+var mStopSNOMEDCTInferenceJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSNOMEDCTInferenceJobRequest_JobId}}
+var mStopSNOMEDCTInferenceJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSNOMEDCTInferenceJobResponse_JobId}}
+
+var sDescribeEntitiesDetectionV2Job = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntitiesDetectionV2Job, Type: smithy.ShapeTypeOperation})
+var sDescribeICD10CMInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeICD10CMInferenceJob, Type: smithy.ShapeTypeOperation})
+var sDescribePHIDetectionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePHIDetectionJob, Type: smithy.ShapeTypeOperation})
+var sDescribeRxNormInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRxNormInferenceJob, Type: smithy.ShapeTypeOperation})
+var sDescribeSNOMEDCTInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSNOMEDCTInferenceJob, Type: smithy.ShapeTypeOperation})
+var sDetectEntities = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectEntities, Type: smithy.ShapeTypeOperation})
+var sDetectEntitiesV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectEntitiesV2, Type: smithy.ShapeTypeOperation})
+var sDetectPHI = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectPHI, Type: smithy.ShapeTypeOperation})
+var sInferICD10CM = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferICD10CM, Type: smithy.ShapeTypeOperation})
+var sInferRxNorm = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferRxNorm, Type: smithy.ShapeTypeOperation})
+var sInferSNOMEDCT = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferSNOMEDCT, Type: smithy.ShapeTypeOperation})
+var sListEntitiesDetectionV2Jobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesDetectionV2Jobs, Type: smithy.ShapeTypeOperation})
+var sListICD10CMInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListICD10CMInferenceJobs, Type: smithy.ShapeTypeOperation})
+var sListPHIDetectionJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPHIDetectionJobs, Type: smithy.ShapeTypeOperation})
+var sListRxNormInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRxNormInferenceJobs, Type: smithy.ShapeTypeOperation})
+var sListSNOMEDCTInferenceJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSNOMEDCTInferenceJobs, Type: smithy.ShapeTypeOperation})
+var sStartEntitiesDetectionV2Job = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEntitiesDetectionV2Job, Type: smithy.ShapeTypeOperation})
+var sStartICD10CMInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartICD10CMInferenceJob, Type: smithy.ShapeTypeOperation})
+var sStartPHIDetectionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPHIDetectionJob, Type: smithy.ShapeTypeOperation})
+var sStartRxNormInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRxNormInferenceJob, Type: smithy.ShapeTypeOperation})
+var sStartSNOMEDCTInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSNOMEDCTInferenceJob, Type: smithy.ShapeTypeOperation})
+var sStopEntitiesDetectionV2Job = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEntitiesDetectionV2Job, Type: smithy.ShapeTypeOperation})
+var sStopICD10CMInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopICD10CMInferenceJob, Type: smithy.ShapeTypeOperation})
+var sStopPHIDetectionJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPHIDetectionJob, Type: smithy.ShapeTypeOperation})
+var sStopRxNormInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopRxNormInferenceJob, Type: smithy.ShapeTypeOperation})
+var sStopSNOMEDCTInferenceJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSNOMEDCTInferenceJob, Type: smithy.ShapeTypeOperation})
+var s_ComprehendMedical_20181030 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComprehendMedical_20181030, Type: smithy.ShapeTypeService})
+var s_AnyLengthString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AnyLengthString, Type: smithy.ShapeTypeString})
+var sAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure})
+var s_AttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttributeList, Members: &m_AttributeList, Type: smithy.ShapeTypeList})
+var sAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAttributeName, Members: &mAttributeName, Type: smithy.ShapeTypeEnum})
+var s_BoundedLengthString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sCharacters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCharacters, Members: &mCharacters, Type: smithy.ShapeTypeStructure})
+var s_ClientRequestTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComprehendMedicalAsyncJobFilter, Members: &mComprehendMedicalAsyncJobFilter, Type: smithy.ShapeTypeStructure})
+var sComprehendMedicalAsyncJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComprehendMedicalAsyncJobProperties, Members: &mComprehendMedicalAsyncJobProperties, Type: smithy.ShapeTypeStructure})
+var s_ComprehendMedicalAsyncJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComprehendMedicalAsyncJobPropertiesList, Members: &m_ComprehendMedicalAsyncJobPropertiesList, Type: smithy.ShapeTypeList})
+var sEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure})
+var s_EntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList})
+var sEntitySubType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntitySubType, Members: &mEntitySubType, Type: smithy.ShapeTypeEnum})
+var sEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var s_Float = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_IamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sICD10CMAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMAttribute, Members: &mICD10CMAttribute, Type: smithy.ShapeTypeStructure})
+var s_ICD10CMAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ICD10CMAttributeList, Members: &m_ICD10CMAttributeList, Type: smithy.ShapeTypeList})
+var sICD10CMAttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMAttributeType, Members: &mICD10CMAttributeType, Type: smithy.ShapeTypeEnum})
+var sICD10CMConcept = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMConcept, Members: &mICD10CMConcept, Type: smithy.ShapeTypeStructure})
+var s_ICD10CMConceptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ICD10CMConceptList, Members: &m_ICD10CMConceptList, Type: smithy.ShapeTypeList})
+var sICD10CMEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMEntity, Members: &mICD10CMEntity, Type: smithy.ShapeTypeStructure})
+var sICD10CMEntityCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMEntityCategory, Members: &mICD10CMEntityCategory, Type: smithy.ShapeTypeEnum})
+var s_ICD10CMEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ICD10CMEntityList, Members: &m_ICD10CMEntityList, Type: smithy.ShapeTypeList})
+var sICD10CMEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMEntityType, Members: &mICD10CMEntityType, Type: smithy.ShapeTypeEnum})
+var sICD10CMRelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMRelationshipType, Members: &mICD10CMRelationshipType, Type: smithy.ShapeTypeEnum})
+var sICD10CMTrait = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMTrait, Members: &mICD10CMTrait, Type: smithy.ShapeTypeStructure})
+var s_ICD10CMTraitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ICD10CMTraitList, Members: &m_ICD10CMTraitList, Type: smithy.ShapeTypeList})
+var sICD10CMTraitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iICD10CMTraitName, Members: &mICD10CMTraitName, Type: smithy.ShapeTypeEnum})
+var sInputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t0, Type: smithy.ShapeTypeStructure})
+var sInvalidEncodingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidEncodingException, Members: &mInvalidEncodingException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sInvalidRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidRequestException, Members: &mInvalidRequestException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_JobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobId, Type: smithy.ShapeTypeString})
+var s_JobName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var s_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum})
+var s_ManifestFilePath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManifestFilePath, Type: smithy.ShapeTypeString})
+var s_MaxResultsInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger})
+var s_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelVersion, Type: smithy.ShapeTypeString})
+var s_OntologyLinkingBoundedLengthString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OntologyLinkingBoundedLengthString, Type: smithy.ShapeTypeString})
+var sOutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure})
+var sRelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRelationshipType, Members: &mRelationshipType, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sRxNormAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormAttribute, Members: &mRxNormAttribute, Type: smithy.ShapeTypeStructure})
+var s_RxNormAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RxNormAttributeList, Members: &m_RxNormAttributeList, Type: smithy.ShapeTypeList})
+var sRxNormAttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormAttributeType, Members: &mRxNormAttributeType, Type: smithy.ShapeTypeEnum})
+var sRxNormConcept = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormConcept, Members: &mRxNormConcept, Type: smithy.ShapeTypeStructure})
+var s_RxNormConceptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RxNormConceptList, Members: &m_RxNormConceptList, Type: smithy.ShapeTypeList})
+var sRxNormEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormEntity, Members: &mRxNormEntity, Type: smithy.ShapeTypeStructure})
+var sRxNormEntityCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormEntityCategory, Members: &mRxNormEntityCategory, Type: smithy.ShapeTypeEnum})
+var s_RxNormEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RxNormEntityList, Members: &m_RxNormEntityList, Type: smithy.ShapeTypeList})
+var sRxNormEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormEntityType, Members: &mRxNormEntityType, Type: smithy.ShapeTypeEnum})
+var sRxNormTrait = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormTrait, Members: &mRxNormTrait, Type: smithy.ShapeTypeStructure})
+var s_RxNormTraitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RxNormTraitList, Members: &m_RxNormTraitList, Type: smithy.ShapeTypeList})
+var sRxNormTraitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRxNormTraitName, Members: &mRxNormTraitName, Type: smithy.ShapeTypeEnum})
+var s_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var s_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTAttribute, Members: &mSNOMEDCTAttribute, Type: smithy.ShapeTypeStructure})
+var s_SNOMEDCTAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNOMEDCTAttributeList, Members: &m_SNOMEDCTAttributeList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTAttributeType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTAttributeType, Members: &mSNOMEDCTAttributeType, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTConcept = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTConcept, Members: &mSNOMEDCTConcept, Type: smithy.ShapeTypeStructure})
+var s_SNOMEDCTConceptList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNOMEDCTConceptList, Members: &m_SNOMEDCTConceptList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTDetails, Members: &mSNOMEDCTDetails, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTEntity, Members: &mSNOMEDCTEntity, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntityCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTEntityCategory, Members: &mSNOMEDCTEntityCategory, Type: smithy.ShapeTypeEnum})
+var s_SNOMEDCTEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNOMEDCTEntityList, Members: &m_SNOMEDCTEntityList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTEntityType, Members: &mSNOMEDCTEntityType, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTRelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTRelationshipType, Members: &mSNOMEDCTRelationshipType, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTTrait = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTTrait, Members: &mSNOMEDCTTrait, Type: smithy.ShapeTypeStructure})
+var s_SNOMEDCTTraitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SNOMEDCTTraitList, Members: &m_SNOMEDCTTraitList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTTraitName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSNOMEDCTTraitName, Members: &mSNOMEDCTTraitName, Type: smithy.ShapeTypeEnum})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sTextSizeLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTextSizeLimitExceededException, Members: &mTextSizeLimitExceededException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTooManyRequestsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTooManyRequestsException, Members: &mTooManyRequestsException, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sTrait = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTrait, Members: &mTrait, Type: smithy.ShapeTypeStructure})
+var s_TraitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TraitList, Members: &m_TraitList, Type: smithy.ShapeTypeList})
+var sUnmappedAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnmappedAttribute, Members: &mUnmappedAttribute, Type: smithy.ShapeTypeStructure})
+var s_UnmappedAttributeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UnmappedAttributeList, Members: &m_UnmappedAttributeList, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var sDescribeEntitiesDetectionV2JobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntitiesDetectionV2JobRequest, Members: &mDescribeEntitiesDetectionV2JobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEntitiesDetectionV2JobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEntitiesDetectionV2JobResponse, Members: &mDescribeEntitiesDetectionV2JobResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeICD10CMInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeICD10CMInferenceJobRequest, Members: &mDescribeICD10CMInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeICD10CMInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeICD10CMInferenceJobResponse, Members: &mDescribeICD10CMInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sDescribePHIDetectionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePHIDetectionJobRequest, Members: &mDescribePHIDetectionJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribePHIDetectionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribePHIDetectionJobResponse, Members: &mDescribePHIDetectionJobResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeRxNormInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRxNormInferenceJobRequest, Members: &mDescribeRxNormInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeRxNormInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeRxNormInferenceJobResponse, Members: &mDescribeRxNormInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSNOMEDCTInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSNOMEDCTInferenceJobRequest, Members: &mDescribeSNOMEDCTInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSNOMEDCTInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSNOMEDCTInferenceJobResponse, Members: &mDescribeSNOMEDCTInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sDetectEntitiesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectEntitiesRequest, Members: &mDetectEntitiesRequest, Type: smithy.ShapeTypeStructure})
+var sDetectEntitiesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectEntitiesResponse, Members: &mDetectEntitiesResponse, Type: smithy.ShapeTypeStructure})
+var sDetectEntitiesV2Request = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectEntitiesV2Request, Members: &mDetectEntitiesV2Request, Type: smithy.ShapeTypeStructure})
+var sDetectEntitiesV2Response = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectEntitiesV2Response, Members: &mDetectEntitiesV2Response, Type: smithy.ShapeTypeStructure})
+var sDetectPHIRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectPHIRequest, Members: &mDetectPHIRequest, Type: smithy.ShapeTypeStructure})
+var sDetectPHIResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDetectPHIResponse, Members: &mDetectPHIResponse, Type: smithy.ShapeTypeStructure})
+var sInferICD10CMRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferICD10CMRequest, Members: &mInferICD10CMRequest, Type: smithy.ShapeTypeStructure})
+var sInferICD10CMResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferICD10CMResponse, Members: &mInferICD10CMResponse, Type: smithy.ShapeTypeStructure})
+var sInferRxNormRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferRxNormRequest, Members: &mInferRxNormRequest, Type: smithy.ShapeTypeStructure})
+var sInferRxNormResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferRxNormResponse, Members: &mInferRxNormResponse, Type: smithy.ShapeTypeStructure})
+var sInferSNOMEDCTRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferSNOMEDCTRequest, Members: &mInferSNOMEDCTRequest, Type: smithy.ShapeTypeStructure})
+var sInferSNOMEDCTResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInferSNOMEDCTResponse, Members: &mInferSNOMEDCTResponse, Type: smithy.ShapeTypeStructure})
+var sListEntitiesDetectionV2JobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesDetectionV2JobsRequest, Members: &mListEntitiesDetectionV2JobsRequest, Type: smithy.ShapeTypeStructure})
+var sListEntitiesDetectionV2JobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEntitiesDetectionV2JobsResponse, Members: &mListEntitiesDetectionV2JobsResponse, Type: smithy.ShapeTypeStructure})
+var sListICD10CMInferenceJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListICD10CMInferenceJobsRequest, Members: &mListICD10CMInferenceJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListICD10CMInferenceJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListICD10CMInferenceJobsResponse, Members: &mListICD10CMInferenceJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListPHIDetectionJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPHIDetectionJobsRequest, Members: &mListPHIDetectionJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListPHIDetectionJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPHIDetectionJobsResponse, Members: &mListPHIDetectionJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListRxNormInferenceJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRxNormInferenceJobsRequest, Members: &mListRxNormInferenceJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListRxNormInferenceJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRxNormInferenceJobsResponse, Members: &mListRxNormInferenceJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListSNOMEDCTInferenceJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSNOMEDCTInferenceJobsRequest, Members: &mListSNOMEDCTInferenceJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListSNOMEDCTInferenceJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSNOMEDCTInferenceJobsResponse, Members: &mListSNOMEDCTInferenceJobsResponse, Type: smithy.ShapeTypeStructure})
+var sStartEntitiesDetectionV2JobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEntitiesDetectionV2JobRequest, Members: &mStartEntitiesDetectionV2JobRequest, Type: smithy.ShapeTypeStructure})
+var sStartEntitiesDetectionV2JobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartEntitiesDetectionV2JobResponse, Members: &mStartEntitiesDetectionV2JobResponse, Type: smithy.ShapeTypeStructure})
+var sStartICD10CMInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartICD10CMInferenceJobRequest, Members: &mStartICD10CMInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartICD10CMInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartICD10CMInferenceJobResponse, Members: &mStartICD10CMInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sStartPHIDetectionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPHIDetectionJobRequest, Members: &mStartPHIDetectionJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartPHIDetectionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartPHIDetectionJobResponse, Members: &mStartPHIDetectionJobResponse, Type: smithy.ShapeTypeStructure})
+var sStartRxNormInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRxNormInferenceJobRequest, Members: &mStartRxNormInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartRxNormInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartRxNormInferenceJobResponse, Members: &mStartRxNormInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sStartSNOMEDCTInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSNOMEDCTInferenceJobRequest, Members: &mStartSNOMEDCTInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sStartSNOMEDCTInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSNOMEDCTInferenceJobResponse, Members: &mStartSNOMEDCTInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sStopEntitiesDetectionV2JobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEntitiesDetectionV2JobRequest, Members: &mStopEntitiesDetectionV2JobRequest, Type: smithy.ShapeTypeStructure})
+var sStopEntitiesDetectionV2JobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopEntitiesDetectionV2JobResponse, Members: &mStopEntitiesDetectionV2JobResponse, Type: smithy.ShapeTypeStructure})
+var sStopICD10CMInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopICD10CMInferenceJobRequest, Members: &mStopICD10CMInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sStopICD10CMInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopICD10CMInferenceJobResponse, Members: &mStopICD10CMInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sStopPHIDetectionJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPHIDetectionJobRequest, Members: &mStopPHIDetectionJobRequest, Type: smithy.ShapeTypeStructure})
+var sStopPHIDetectionJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopPHIDetectionJobResponse, Members: &mStopPHIDetectionJobResponse, Type: smithy.ShapeTypeStructure})
+var sStopRxNormInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopRxNormInferenceJobRequest, Members: &mStopRxNormInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sStopRxNormInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopRxNormInferenceJobResponse, Members: &mStopRxNormInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+var sStopSNOMEDCTInferenceJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSNOMEDCTInferenceJobRequest, Members: &mStopSNOMEDCTInferenceJobRequest, Type: smithy.ShapeTypeStructure})
+var sStopSNOMEDCTInferenceJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSNOMEDCTInferenceJobResponse, Members: &mStopSNOMEDCTInferenceJobResponse, Type: smithy.ShapeTypeStructure})
+
+var sAttribute_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEntitySubType, Members: &mEntitySubType, Type: smithy.ShapeTypeEnum})
+var sAttribute_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sAttribute_RelationshipScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationshipScore", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sAttribute_RelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationshipType", ID: &iRelationshipType, Members: &mRelationshipType, Type: smithy.ShapeTypeEnum})
+var sAttribute_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sAttribute_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sAttribute_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sAttribute_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAttribute_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sAttribute_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_TraitList, Members: &m_TraitList, Type: smithy.ShapeTypeList})
+var s_AttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure})
+var sAttributeName_SIGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_SYMPTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMPTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_DIAGNOSIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIAGNOSIS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_NEGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_PERTAINS_TO_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERTAINS_TO_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_HYPOTHETICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYPOTHETICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_LOW_CONFIDENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW_CONFIDENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_PAST_HISTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAST_HISTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAttributeName_FUTURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FUTURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCharacters_OriginalTextCharacters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginalTextCharacters", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sComprehendMedicalAsyncJobFilter_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobFilter_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sComprehendMedicalAsyncJobFilter_SubmitTimeBefore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmitTimeBefore", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComprehendMedicalAsyncJobFilter_SubmitTimeAfter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmitTimeAfter", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComprehendMedicalAsyncJobProperties_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobProperties_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobProperties_JobStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobStatus", ID: &iJobStatus, Members: &mJobStatus, Type: smithy.ShapeTypeEnum})
+var sComprehendMedicalAsyncJobProperties_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_AnyLengthString, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobProperties_SubmitTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubmitTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComprehendMedicalAsyncJobProperties_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComprehendMedicalAsyncJobProperties_ExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpirationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComprehendMedicalAsyncJobProperties_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure})
+var sComprehendMedicalAsyncJobProperties_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure})
+var sComprehendMedicalAsyncJobProperties_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum})
+var sComprehendMedicalAsyncJobProperties_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobProperties_ManifestFilePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestFilePath", ID: &i_ManifestFilePath, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobProperties_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sComprehendMedicalAsyncJobProperties_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_ModelVersion, Type: smithy.ShapeTypeString})
+var s_ComprehendMedicalAsyncJobPropertiesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComprehendMedicalAsyncJobProperties, Members: &mComprehendMedicalAsyncJobProperties, Type: smithy.ShapeTypeStructure})
+var sEntity_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sEntity_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sEntity_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sEntity_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sEntity_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEntity_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sEntity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEntitySubType, Members: &mEntitySubType, Type: smithy.ShapeTypeEnum})
+var sEntity_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_TraitList, Members: &m_TraitList, Type: smithy.ShapeTypeList})
+var sEntity_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_AttributeList, Members: &m_AttributeList, Type: smithy.ShapeTypeList})
+var s_EntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEntity, Members: &mEntity, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_DX_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DX_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_DOSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_ROUTE_OR_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE_OR_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_FORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_FREQUENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREQUENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_GENERIC_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERIC_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_BRAND_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRAND_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_STRENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_RATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_ACUITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACUITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TEST_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TEST_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TEST_UNITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_UNITS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TEST_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_PROCEDURE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCEDURE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TREATMENT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TREATMENT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_DATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_AGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_CONTACT_POINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT_POINT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_PHONE_OR_FAX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PHONE_OR_FAX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_EMAIL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EMAIL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_IDENTIFIER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDENTIFIER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_ID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_URL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_PROFESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROFESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_SYSTEM_ORGAN_SITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ORGAN_SITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_DIRECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_QUANTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUANTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TIME_EXPRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_EXPRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TIME_TO_MEDICATION_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_TO_MEDICATION_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TIME_TO_DX_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_TO_DX_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TIME_TO_TEST_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_TO_TEST_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TIME_TO_PROCEDURE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_TO_PROCEDURE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TIME_TO_TREATMENT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_TO_TREATMENT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_AMOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_GENDER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENDER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_RACE_ETHNICITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RACE_ETHNICITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_ALLERGIES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALLERGIES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_TOBACCO_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOBACCO_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_ALCOHOL_CONSUMPTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALCOHOL_CONSUMPTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntitySubType_REC_DRUG_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REC_DRUG_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_MEDICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_MEDICAL_CONDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDICAL_CONDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_PROTECTED_HEALTH_INFORMATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROTECTED_HEALTH_INFORMATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_TEST_TREATMENT_PROCEDURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_TREATMENT_PROCEDURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_ANATOMY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANATOMY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_TIME_EXPRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_EXPRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BEHAVIORAL_ENVIRONMENTAL_SOCIAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttribute_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iICD10CMAttributeType, Members: &mICD10CMAttributeType, Type: smithy.ShapeTypeEnum})
+var sICD10CMAttribute_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sICD10CMAttribute_RelationshipScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationshipScore", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sICD10CMAttribute_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sICD10CMAttribute_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sICD10CMAttribute_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sICD10CMAttribute_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sICD10CMAttribute_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_ICD10CMTraitList, Members: &m_ICD10CMTraitList, Type: smithy.ShapeTypeList})
+var sICD10CMAttribute_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iICD10CMEntityType, Members: &mICD10CMEntityType, Type: smithy.ShapeTypeEnum})
+var sICD10CMAttribute_RelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationshipType", ID: &iICD10CMRelationshipType, Members: &mICD10CMRelationshipType, Type: smithy.ShapeTypeEnum})
+var s_ICD10CMAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iICD10CMAttribute, Members: &mICD10CMAttribute, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttributeType_ACUITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACUITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttributeType_DIRECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttributeType_SYSTEM_ORGAN_SITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ORGAN_SITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttributeType_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttributeType_QUANTITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUANTITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttributeType_TIME_TO_DX_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_TO_DX_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMAttributeType_TIME_EXPRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_EXPRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMConcept_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString})
+var sICD10CMConcept_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sICD10CMConcept_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_ICD10CMConceptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iICD10CMConcept, Members: &mICD10CMConcept, Type: smithy.ShapeTypeStructure})
+var sICD10CMEntity_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sICD10CMEntity_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_OntologyLinkingBoundedLengthString, Type: smithy.ShapeTypeString})
+var sICD10CMEntity_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iICD10CMEntityCategory, Members: &mICD10CMEntityCategory, Type: smithy.ShapeTypeEnum})
+var sICD10CMEntity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iICD10CMEntityType, Members: &mICD10CMEntityType, Type: smithy.ShapeTypeEnum})
+var sICD10CMEntity_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sICD10CMEntity_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sICD10CMEntity_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sICD10CMEntity_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_ICD10CMAttributeList, Members: &m_ICD10CMAttributeList, Type: smithy.ShapeTypeList})
+var sICD10CMEntity_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_ICD10CMTraitList, Members: &m_ICD10CMTraitList, Type: smithy.ShapeTypeList})
+var sICD10CMEntity_ICD10CMConcepts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ICD10CMConcepts", ID: &i_ICD10CMConceptList, Members: &m_ICD10CMConceptList, Type: smithy.ShapeTypeList})
+var sICD10CMEntityCategory_MEDICAL_CONDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDICAL_CONDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ICD10CMEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iICD10CMEntity, Members: &mICD10CMEntity, Type: smithy.ShapeTypeStructure})
+var sICD10CMEntityType_DX_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DX_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMEntityType_TIME_EXPRESSION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIME_EXPRESSION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMRelationshipType_OVERLAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERLAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMRelationshipType_SYSTEM_ORGAN_SITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ORGAN_SITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMRelationshipType_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMTrait_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iICD10CMTraitName, Members: &mICD10CMTraitName, Type: smithy.ShapeTypeEnum})
+var sICD10CMTrait_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_ICD10CMTraitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iICD10CMTrait, Members: &mICD10CMTrait, Type: smithy.ShapeTypeStructure})
+var sICD10CMTraitName_NEGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMTraitName_DIAGNOSIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIAGNOSIS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMTraitName_SIGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMTraitName_SYMPTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMPTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMTraitName_PERTAINS_TO_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERTAINS_TO_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMTraitName_HYPOTHETICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYPOTHETICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sICD10CMTraitName_LOW_CONFIDENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW_CONFIDENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputDataConfig_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sInputDataConfig_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidEncodingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInvalidRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sJobStatus_SUBMITTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUBMITTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_PARTIAL_SUCCESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTIAL_SUCCESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_STOP_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sJobStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLanguageCode_EN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputDataConfig_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &i_S3Bucket, Type: smithy.ShapeTypeString})
+var sOutputDataConfig_S3Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Key", ID: &i_S3Key, Type: smithy.ShapeTypeString})
+var sRelationshipType_EVERY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVERY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_WITH_DOSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WITH_DOSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_ADMINISTERED_VIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ADMINISTERED_VIA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_FOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_OVERLAP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OVERLAP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_DOSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_ROUTE_OR_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE_OR_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_FORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_FREQUENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREQUENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_STRENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_RATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_ACUITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACUITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_TEST_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_TEST_UNITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_UNITS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_TEST_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_DIRECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_SYSTEM_ORGAN_SITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ORGAN_SITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_AMOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_USAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "USAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRelationshipType_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRxNormAttribute_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRxNormAttributeType, Members: &mRxNormAttributeType, Type: smithy.ShapeTypeEnum})
+var sRxNormAttribute_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sRxNormAttribute_RelationshipScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationshipScore", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sRxNormAttribute_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRxNormAttribute_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRxNormAttribute_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRxNormAttribute_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRxNormAttribute_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_RxNormTraitList, Members: &m_RxNormTraitList, Type: smithy.ShapeTypeList})
+var s_RxNormAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRxNormAttribute, Members: &mRxNormAttribute, Type: smithy.ShapeTypeStructure})
+var sRxNormAttributeType_DOSAGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DOSAGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormAttributeType_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormAttributeType_FORM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FORM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormAttributeType_FREQUENCY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FREQUENCY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormAttributeType_RATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormAttributeType_ROUTE_OR_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROUTE_OR_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormAttributeType_STRENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STRENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormConcept_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRxNormConcept_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sRxNormConcept_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_RxNormConceptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRxNormConcept, Members: &mRxNormConcept, Type: smithy.ShapeTypeStructure})
+var sRxNormEntity_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRxNormEntity_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_OntologyLinkingBoundedLengthString, Type: smithy.ShapeTypeString})
+var sRxNormEntity_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iRxNormEntityCategory, Members: &mRxNormEntityCategory, Type: smithy.ShapeTypeEnum})
+var sRxNormEntity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRxNormEntityType, Members: &mRxNormEntityType, Type: smithy.ShapeTypeEnum})
+var sRxNormEntity_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sRxNormEntity_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRxNormEntity_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sRxNormEntity_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_RxNormAttributeList, Members: &m_RxNormAttributeList, Type: smithy.ShapeTypeList})
+var sRxNormEntity_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_RxNormTraitList, Members: &m_RxNormTraitList, Type: smithy.ShapeTypeList})
+var sRxNormEntity_RxNormConcepts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RxNormConcepts", ID: &i_RxNormConceptList, Members: &m_RxNormConceptList, Type: smithy.ShapeTypeList})
+var sRxNormEntityCategory_MEDICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RxNormEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRxNormEntity, Members: &mRxNormEntity, Type: smithy.ShapeTypeStructure})
+var sRxNormEntityType_BRAND_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BRAND_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormEntityType_GENERIC_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GENERIC_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormTrait_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iRxNormTraitName, Members: &mRxNormTraitName, Type: smithy.ShapeTypeEnum})
+var sRxNormTrait_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_RxNormTraitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRxNormTrait, Members: &mRxNormTrait, Type: smithy.ShapeTypeStructure})
+var sRxNormTraitName_NEGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRxNormTraitName_PAST_HISTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAST_HISTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSNOMEDCTAttribute_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iSNOMEDCTEntityCategory, Members: &mSNOMEDCTEntityCategory, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTAttribute_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSNOMEDCTAttributeType, Members: &mSNOMEDCTAttributeType, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTAttribute_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sSNOMEDCTAttribute_RelationshipScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationshipScore", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sSNOMEDCTAttribute_RelationshipType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RelationshipType", ID: &iSNOMEDCTRelationshipType, Members: &mSNOMEDCTRelationshipType, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTAttribute_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSNOMEDCTAttribute_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSNOMEDCTAttribute_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSNOMEDCTAttribute_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSNOMEDCTAttribute_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_SNOMEDCTTraitList, Members: &m_SNOMEDCTTraitList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTAttribute_SNOMEDCTConcepts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNOMEDCTConcepts", ID: &i_SNOMEDCTConceptList, Members: &m_SNOMEDCTConceptList, Type: smithy.ShapeTypeList})
+var s_SNOMEDCTAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSNOMEDCTAttribute, Members: &mSNOMEDCTAttribute, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTAttributeType_ACUITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACUITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTAttributeType_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTAttributeType_DIRECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTAttributeType_SYSTEM_ORGAN_SITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ORGAN_SITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTAttributeType_TEST_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTAttributeType_TEST_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTConcept_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSNOMEDCTConcept_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSNOMEDCTConcept_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_SNOMEDCTConceptList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSNOMEDCTConcept, Members: &mSNOMEDCTConcept, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTDetails_Edition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Edition", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSNOMEDCTDetails_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSNOMEDCTDetails_VersionDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VersionDate", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSNOMEDCTEntity_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSNOMEDCTEntity_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_OntologyLinkingBoundedLengthString, Type: smithy.ShapeTypeString})
+var sSNOMEDCTEntity_Category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Category", ID: &iSNOMEDCTEntityCategory, Members: &mSNOMEDCTEntityCategory, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTEntity_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iSNOMEDCTEntityType, Members: &mSNOMEDCTEntityType, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTEntity_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var sSNOMEDCTEntity_BeginOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BeginOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSNOMEDCTEntity_EndOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndOffset", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sSNOMEDCTEntity_Attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attributes", ID: &i_SNOMEDCTAttributeList, Members: &m_SNOMEDCTAttributeList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTEntity_Traits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Traits", ID: &i_SNOMEDCTTraitList, Members: &m_SNOMEDCTTraitList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTEntity_SNOMEDCTConcepts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNOMEDCTConcepts", ID: &i_SNOMEDCTConceptList, Members: &m_SNOMEDCTConceptList, Type: smithy.ShapeTypeList})
+var sSNOMEDCTEntityCategory_MEDICAL_CONDITION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDICAL_CONDITION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntityCategory_ANATOMY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ANATOMY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_TREATMENT_PROCEDURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_SNOMEDCTEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSNOMEDCTEntity, Members: &mSNOMEDCTEntity, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntityType_DX_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DX_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntityType_TEST_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntityType_PROCEDURE_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCEDURE_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTEntityType_TREATMENT_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TREATMENT_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTRelationshipType_ACUITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACUITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTRelationshipType_QUALITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUALITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTRelationshipType_TEST_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTRelationshipType_TEST_UNITS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_UNITS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTRelationshipType_DIRECTION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECTION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_ORGAN_SITE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTRelationshipType_TEST_UNIT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TEST_UNIT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTrait_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iSNOMEDCTTraitName, Members: &mSNOMEDCTTraitName, Type: smithy.ShapeTypeEnum})
+var sSNOMEDCTTrait_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_SNOMEDCTTraitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSNOMEDCTTrait, Members: &mSNOMEDCTTrait, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_NEGATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_DIAGNOSIS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIAGNOSIS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_SIGN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_SYMPTOM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYMPTOM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_PERTAINS_TO_FAMILY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERTAINS_TO_FAMILY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_HYPOTHETICAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYPOTHETICAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_LOW_CONFIDENCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW_CONFIDENCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_PAST_HISTORY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PAST_HISTORY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSNOMEDCTTraitName_FUTURE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FUTURE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTextSizeLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTooManyRequestsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTrait_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &iAttributeName, Members: &mAttributeName, Type: smithy.ShapeTypeEnum})
+var sTrait_Score = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Score", ID: &i_Float, Type: smithy.ShapeTypeFloat})
+var s_TraitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTrait, Members: &mTrait, Type: smithy.ShapeTypeStructure})
+var sUnmappedAttribute_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEntityType, Members: &mEntityType, Type: smithy.ShapeTypeEnum})
+var sUnmappedAttribute_Attribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Attribute", ID: &iAttribute, Members: &mAttribute, Type: smithy.ShapeTypeStructure})
+var s_UnmappedAttributeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iUnmappedAttribute, Members: &mUnmappedAttribute, Type: smithy.ShapeTypeStructure})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDescribeEntitiesDetectionV2JobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sDescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobProperties", ID: &iComprehendMedicalAsyncJobProperties, Members: &mComprehendMedicalAsyncJobProperties, Type: smithy.ShapeTypeStructure})
+var sDescribeICD10CMInferenceJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sDescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobProperties", ID: &iComprehendMedicalAsyncJobProperties, Members: &mComprehendMedicalAsyncJobProperties, Type: smithy.ShapeTypeStructure})
+var sDescribePHIDetectionJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sDescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobProperties", ID: &iComprehendMedicalAsyncJobProperties, Members: &mComprehendMedicalAsyncJobProperties, Type: smithy.ShapeTypeStructure})
+var sDescribeRxNormInferenceJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sDescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobProperties", ID: &iComprehendMedicalAsyncJobProperties, Members: &mComprehendMedicalAsyncJobProperties, Type: smithy.ShapeTypeStructure})
+var sDescribeSNOMEDCTInferenceJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sDescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobProperties", ID: &iComprehendMedicalAsyncJobProperties, Members: &mComprehendMedicalAsyncJobProperties, Type: smithy.ShapeTypeStructure})
+var sDetectEntitiesRequest_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDetectEntitiesResponse_Entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList})
+var sDetectEntitiesResponse_UnmappedAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnmappedAttributes", ID: &i_UnmappedAttributeList, Members: &m_UnmappedAttributeList, Type: smithy.ShapeTypeList})
+var sDetectEntitiesResponse_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDetectEntitiesResponse_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDetectEntitiesV2Request_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDetectEntitiesV2Response_Entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList})
+var sDetectEntitiesV2Response_UnmappedAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UnmappedAttributes", ID: &i_UnmappedAttributeList, Members: &m_UnmappedAttributeList, Type: smithy.ShapeTypeList})
+var sDetectEntitiesV2Response_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDetectEntitiesV2Response_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDetectPHIRequest_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_BoundedLengthString, Type: smithy.ShapeTypeString})
+var sDetectPHIResponse_Entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entities", ID: &i_EntityList, Members: &m_EntityList, Type: smithy.ShapeTypeList})
+var sDetectPHIResponse_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sDetectPHIResponse_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInferICD10CMRequest_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_OntologyLinkingBoundedLengthString, Type: smithy.ShapeTypeString})
+var sInferICD10CMResponse_Entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entities", ID: &i_ICD10CMEntityList, Members: &m_ICD10CMEntityList, Type: smithy.ShapeTypeList})
+var sInferICD10CMResponse_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInferICD10CMResponse_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInferRxNormRequest_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_OntologyLinkingBoundedLengthString, Type: smithy.ShapeTypeString})
+var sInferRxNormResponse_Entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entities", ID: &i_RxNormEntityList, Members: &m_RxNormEntityList, Type: smithy.ShapeTypeList})
+var sInferRxNormResponse_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInferRxNormResponse_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInferSNOMEDCTRequest_Text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Text", ID: &i_OntologyLinkingBoundedLengthString, Type: smithy.ShapeTypeString})
+var sInferSNOMEDCTResponse_Entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entities", ID: &i_SNOMEDCTEntityList, Members: &m_SNOMEDCTEntityList, Type: smithy.ShapeTypeList})
+var sInferSNOMEDCTResponse_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PaginationToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInferSNOMEDCTResponse_ModelVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModelVersion", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInferSNOMEDCTResponse_SNOMEDCTDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNOMEDCTDetails", ID: &iSNOMEDCTDetails, Members: &mSNOMEDCTDetails, Type: smithy.ShapeTypeStructure})
+var sInferSNOMEDCTResponse_Characters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Characters", ID: &iCharacters, Members: &mCharacters, Type: smithy.ShapeTypeStructure})
+var sListEntitiesDetectionV2JobsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iComprehendMedicalAsyncJobFilter, Members: &mComprehendMedicalAsyncJobFilter, Type: smithy.ShapeTypeStructure})
+var sListEntitiesDetectionV2JobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListEntitiesDetectionV2JobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger})
+var sListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobPropertiesList", ID: &i_ComprehendMedicalAsyncJobPropertiesList, Members: &m_ComprehendMedicalAsyncJobPropertiesList, Type: smithy.ShapeTypeList})
+var sListEntitiesDetectionV2JobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListICD10CMInferenceJobsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iComprehendMedicalAsyncJobFilter, Members: &mComprehendMedicalAsyncJobFilter, Type: smithy.ShapeTypeStructure})
+var sListICD10CMInferenceJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListICD10CMInferenceJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger})
+var sListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobPropertiesList", ID: &i_ComprehendMedicalAsyncJobPropertiesList, Members: &m_ComprehendMedicalAsyncJobPropertiesList, Type: smithy.ShapeTypeList})
+var sListICD10CMInferenceJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListPHIDetectionJobsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iComprehendMedicalAsyncJobFilter, Members: &mComprehendMedicalAsyncJobFilter, Type: smithy.ShapeTypeStructure})
+var sListPHIDetectionJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListPHIDetectionJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger})
+var sListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobPropertiesList", ID: &i_ComprehendMedicalAsyncJobPropertiesList, Members: &m_ComprehendMedicalAsyncJobPropertiesList, Type: smithy.ShapeTypeList})
+var sListPHIDetectionJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListRxNormInferenceJobsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iComprehendMedicalAsyncJobFilter, Members: &mComprehendMedicalAsyncJobFilter, Type: smithy.ShapeTypeStructure})
+var sListRxNormInferenceJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListRxNormInferenceJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger})
+var sListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobPropertiesList", ID: &i_ComprehendMedicalAsyncJobPropertiesList, Members: &m_ComprehendMedicalAsyncJobPropertiesList, Type: smithy.ShapeTypeList})
+var sListRxNormInferenceJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSNOMEDCTInferenceJobsRequest_Filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filter", ID: &iComprehendMedicalAsyncJobFilter, Members: &mComprehendMedicalAsyncJobFilter, Type: smithy.ShapeTypeStructure})
+var sListSNOMEDCTInferenceJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListSNOMEDCTInferenceJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResultsInteger, Type: smithy.ShapeTypeInteger})
+var sListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ComprehendMedicalAsyncJobPropertiesList", ID: &i_ComprehendMedicalAsyncJobPropertiesList, Members: &m_ComprehendMedicalAsyncJobPropertiesList, Type: smithy.ShapeTypeList})
+var sListSNOMEDCTInferenceJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStartEntitiesDetectionV2JobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartEntitiesDetectionV2JobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartEntitiesDetectionV2JobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sStartEntitiesDetectionV2JobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sStartEntitiesDetectionV2JobRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString})
+var sStartEntitiesDetectionV2JobRequest_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sStartEntitiesDetectionV2JobRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum})
+var sStartEntitiesDetectionV2JobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartICD10CMInferenceJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartICD10CMInferenceJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartICD10CMInferenceJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sStartICD10CMInferenceJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sStartICD10CMInferenceJobRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString})
+var sStartICD10CMInferenceJobRequest_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sStartICD10CMInferenceJobRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum})
+var sStartICD10CMInferenceJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartPHIDetectionJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartPHIDetectionJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartPHIDetectionJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sStartPHIDetectionJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sStartPHIDetectionJobRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString})
+var sStartPHIDetectionJobRequest_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sStartPHIDetectionJobRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum})
+var sStartPHIDetectionJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartRxNormInferenceJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartRxNormInferenceJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartRxNormInferenceJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sStartRxNormInferenceJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sStartRxNormInferenceJobRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString})
+var sStartRxNormInferenceJobRequest_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sStartRxNormInferenceJobRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum})
+var sStartRxNormInferenceJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStartSNOMEDCTInferenceJobRequest_InputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputDataConfig", ID: &iInputDataConfig, Members: &mInputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartSNOMEDCTInferenceJobRequest_OutputDataConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputDataConfig", ID: &iOutputDataConfig, Members: &mOutputDataConfig, Type: smithy.ShapeTypeStructure})
+var sStartSNOMEDCTInferenceJobRequest_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_IamRoleArn, Type: smithy.ShapeTypeString})
+var sStartSNOMEDCTInferenceJobRequest_JobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobName", ID: &i_JobName, Type: smithy.ShapeTypeString})
+var sStartSNOMEDCTInferenceJobRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestTokenString, Type: smithy.ShapeTypeString})
+var sStartSNOMEDCTInferenceJobRequest_KMSKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KMSKey", ID: &i_KMSKey, Type: smithy.ShapeTypeString})
+var sStartSNOMEDCTInferenceJobRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iLanguageCode, Members: &mLanguageCode, Type: smithy.ShapeTypeEnum})
+var sStartSNOMEDCTInferenceJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopEntitiesDetectionV2JobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopEntitiesDetectionV2JobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopICD10CMInferenceJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopICD10CMInferenceJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopPHIDetectionJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopPHIDetectionJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopRxNormInferenceJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopRxNormInferenceJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopSNOMEDCTInferenceJobRequest_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+var sStopSNOMEDCTInferenceJobResponse_JobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JobId", ID: &i_JobId, Type: smithy.ShapeTypeString})
+
+var DescribeEntitiesDetectionV2Job = &sDescribeEntitiesDetectionV2Job
+
+var DescribeICD10CMInferenceJob = &sDescribeICD10CMInferenceJob
+
+var DescribePHIDetectionJob = &sDescribePHIDetectionJob
+
+var DescribeRxNormInferenceJob = &sDescribeRxNormInferenceJob
+
+var DescribeSNOMEDCTInferenceJob = &sDescribeSNOMEDCTInferenceJob
+
+var DetectEntities = &sDetectEntities
+
+var DetectEntitiesV2 = &sDetectEntitiesV2
+
+var DetectPHI = &sDetectPHI
+
+var InferICD10CM = &sInferICD10CM
+
+var InferRxNorm = &sInferRxNorm
+
+var InferSNOMEDCT = &sInferSNOMEDCT
+
+var ListEntitiesDetectionV2Jobs = &sListEntitiesDetectionV2Jobs
+
+var ListICD10CMInferenceJobs = &sListICD10CMInferenceJobs
+
+var ListPHIDetectionJobs = &sListPHIDetectionJobs
+
+var ListRxNormInferenceJobs = &sListRxNormInferenceJobs
+
+var ListSNOMEDCTInferenceJobs = &sListSNOMEDCTInferenceJobs
+
+var StartEntitiesDetectionV2Job = &sStartEntitiesDetectionV2Job
+
+var StartICD10CMInferenceJob = &sStartICD10CMInferenceJob
+
+var StartPHIDetectionJob = &sStartPHIDetectionJob
+
+var StartRxNormInferenceJob = &sStartRxNormInferenceJob
+
+var StartSNOMEDCTInferenceJob = &sStartSNOMEDCTInferenceJob
+
+var StopEntitiesDetectionV2Job = &sStopEntitiesDetectionV2Job
+
+var StopICD10CMInferenceJob = &sStopICD10CMInferenceJob
+
+var StopPHIDetectionJob = &sStopPHIDetectionJob
+
+var StopRxNormInferenceJob = &sStopRxNormInferenceJob
+
+var StopSNOMEDCTInferenceJob = &sStopSNOMEDCTInferenceJob
+
+var _ComprehendMedical_20181030 = &s_ComprehendMedical_20181030
+
+var _AnyLengthString = &s_AnyLengthString
+
+var Attribute = &sAttribute
+var Attribute_Type = &sAttribute_Type
+var Attribute_Score = &sAttribute_Score
+var Attribute_RelationshipScore = &sAttribute_RelationshipScore
+var Attribute_RelationshipType = &sAttribute_RelationshipType
+var Attribute_Id = &sAttribute_Id
+var Attribute_BeginOffset = &sAttribute_BeginOffset
+var Attribute_EndOffset = &sAttribute_EndOffset
+var Attribute_Text = &sAttribute_Text
+var Attribute_Category = &sAttribute_Category
+var Attribute_Traits = &sAttribute_Traits
+
+var _AttributeList = &s_AttributeList
+var _AttributeList_member = &s_AttributeList_member
+
+var AttributeName = &sAttributeName
+var AttributeName_SIGN = &sAttributeName_SIGN
+var AttributeName_SYMPTOM = &sAttributeName_SYMPTOM
+var AttributeName_DIAGNOSIS = &sAttributeName_DIAGNOSIS
+var AttributeName_NEGATION = &sAttributeName_NEGATION
+var AttributeName_PERTAINS_TO_FAMILY = &sAttributeName_PERTAINS_TO_FAMILY
+var AttributeName_HYPOTHETICAL = &sAttributeName_HYPOTHETICAL
+var AttributeName_LOW_CONFIDENCE = &sAttributeName_LOW_CONFIDENCE
+var AttributeName_PAST_HISTORY = &sAttributeName_PAST_HISTORY
+var AttributeName_FUTURE = &sAttributeName_FUTURE
+
+var _BoundedLengthString = &s_BoundedLengthString
+
+var Characters = &sCharacters
+var Characters_OriginalTextCharacters = &sCharacters_OriginalTextCharacters
+
+var _ClientRequestTokenString = &s_ClientRequestTokenString
+
+var ComprehendMedicalAsyncJobFilter = &sComprehendMedicalAsyncJobFilter
+var ComprehendMedicalAsyncJobFilter_JobName = &sComprehendMedicalAsyncJobFilter_JobName
+var ComprehendMedicalAsyncJobFilter_JobStatus = &sComprehendMedicalAsyncJobFilter_JobStatus
+var ComprehendMedicalAsyncJobFilter_SubmitTimeBefore = &sComprehendMedicalAsyncJobFilter_SubmitTimeBefore
+var ComprehendMedicalAsyncJobFilter_SubmitTimeAfter = &sComprehendMedicalAsyncJobFilter_SubmitTimeAfter
+
+var ComprehendMedicalAsyncJobProperties = &sComprehendMedicalAsyncJobProperties
+var ComprehendMedicalAsyncJobProperties_JobId = &sComprehendMedicalAsyncJobProperties_JobId
+var ComprehendMedicalAsyncJobProperties_JobName = &sComprehendMedicalAsyncJobProperties_JobName
+var ComprehendMedicalAsyncJobProperties_JobStatus = &sComprehendMedicalAsyncJobProperties_JobStatus
+var ComprehendMedicalAsyncJobProperties_Message = &sComprehendMedicalAsyncJobProperties_Message
+var ComprehendMedicalAsyncJobProperties_SubmitTime = &sComprehendMedicalAsyncJobProperties_SubmitTime
+var ComprehendMedicalAsyncJobProperties_EndTime = &sComprehendMedicalAsyncJobProperties_EndTime
+var ComprehendMedicalAsyncJobProperties_ExpirationTime = &sComprehendMedicalAsyncJobProperties_ExpirationTime
+var ComprehendMedicalAsyncJobProperties_InputDataConfig = &sComprehendMedicalAsyncJobProperties_InputDataConfig
+var ComprehendMedicalAsyncJobProperties_OutputDataConfig = &sComprehendMedicalAsyncJobProperties_OutputDataConfig
+var ComprehendMedicalAsyncJobProperties_LanguageCode = &sComprehendMedicalAsyncJobProperties_LanguageCode
+var ComprehendMedicalAsyncJobProperties_DataAccessRoleArn = &sComprehendMedicalAsyncJobProperties_DataAccessRoleArn
+var ComprehendMedicalAsyncJobProperties_ManifestFilePath = &sComprehendMedicalAsyncJobProperties_ManifestFilePath
+var ComprehendMedicalAsyncJobProperties_KMSKey = &sComprehendMedicalAsyncJobProperties_KMSKey
+var ComprehendMedicalAsyncJobProperties_ModelVersion = &sComprehendMedicalAsyncJobProperties_ModelVersion
+
+var _ComprehendMedicalAsyncJobPropertiesList = &s_ComprehendMedicalAsyncJobPropertiesList
+var _ComprehendMedicalAsyncJobPropertiesList_member = &s_ComprehendMedicalAsyncJobPropertiesList_member
+
+var Entity = &sEntity
+var Entity_Id = &sEntity_Id
+var Entity_BeginOffset = &sEntity_BeginOffset
+var Entity_EndOffset = &sEntity_EndOffset
+var Entity_Score = &sEntity_Score
+var Entity_Text = &sEntity_Text
+var Entity_Category = &sEntity_Category
+var Entity_Type = &sEntity_Type
+var Entity_Traits = &sEntity_Traits
+var Entity_Attributes = &sEntity_Attributes
+
+var _EntityList = &s_EntityList
+var _EntityList_member = &s_EntityList_member
+
+var EntitySubType = &sEntitySubType
+var EntitySubType_NAME = &sEntitySubType_NAME
+var EntitySubType_DX_NAME = &sEntitySubType_DX_NAME
+var EntitySubType_DOSAGE = &sEntitySubType_DOSAGE
+var EntitySubType_ROUTE_OR_MODE = &sEntitySubType_ROUTE_OR_MODE
+var EntitySubType_FORM = &sEntitySubType_FORM
+var EntitySubType_FREQUENCY = &sEntitySubType_FREQUENCY
+var EntitySubType_DURATION = &sEntitySubType_DURATION
+var EntitySubType_GENERIC_NAME = &sEntitySubType_GENERIC_NAME
+var EntitySubType_BRAND_NAME = &sEntitySubType_BRAND_NAME
+var EntitySubType_STRENGTH = &sEntitySubType_STRENGTH
+var EntitySubType_RATE = &sEntitySubType_RATE
+var EntitySubType_ACUITY = &sEntitySubType_ACUITY
+var EntitySubType_TEST_NAME = &sEntitySubType_TEST_NAME
+var EntitySubType_TEST_VALUE = &sEntitySubType_TEST_VALUE
+var EntitySubType_TEST_UNITS = &sEntitySubType_TEST_UNITS
+var EntitySubType_TEST_UNIT = &sEntitySubType_TEST_UNIT
+var EntitySubType_PROCEDURE_NAME = &sEntitySubType_PROCEDURE_NAME
+var EntitySubType_TREATMENT_NAME = &sEntitySubType_TREATMENT_NAME
+var EntitySubType_DATE = &sEntitySubType_DATE
+var EntitySubType_AGE = &sEntitySubType_AGE
+var EntitySubType_CONTACT_POINT = &sEntitySubType_CONTACT_POINT
+var EntitySubType_PHONE_OR_FAX = &sEntitySubType_PHONE_OR_FAX
+var EntitySubType_EMAIL = &sEntitySubType_EMAIL
+var EntitySubType_IDENTIFIER = &sEntitySubType_IDENTIFIER
+var EntitySubType_ID = &sEntitySubType_ID
+var EntitySubType_URL = &sEntitySubType_URL
+var EntitySubType_ADDRESS = &sEntitySubType_ADDRESS
+var EntitySubType_PROFESSION = &sEntitySubType_PROFESSION
+var EntitySubType_SYSTEM_ORGAN_SITE = &sEntitySubType_SYSTEM_ORGAN_SITE
+var EntitySubType_DIRECTION = &sEntitySubType_DIRECTION
+var EntitySubType_QUALITY = &sEntitySubType_QUALITY
+var EntitySubType_QUANTITY = &sEntitySubType_QUANTITY
+var EntitySubType_TIME_EXPRESSION = &sEntitySubType_TIME_EXPRESSION
+var EntitySubType_TIME_TO_MEDICATION_NAME = &sEntitySubType_TIME_TO_MEDICATION_NAME
+var EntitySubType_TIME_TO_DX_NAME = &sEntitySubType_TIME_TO_DX_NAME
+var EntitySubType_TIME_TO_TEST_NAME = &sEntitySubType_TIME_TO_TEST_NAME
+var EntitySubType_TIME_TO_PROCEDURE_NAME = &sEntitySubType_TIME_TO_PROCEDURE_NAME
+var EntitySubType_TIME_TO_TREATMENT_NAME = &sEntitySubType_TIME_TO_TREATMENT_NAME
+var EntitySubType_AMOUNT = &sEntitySubType_AMOUNT
+var EntitySubType_GENDER = &sEntitySubType_GENDER
+var EntitySubType_RACE_ETHNICITY = &sEntitySubType_RACE_ETHNICITY
+var EntitySubType_ALLERGIES = &sEntitySubType_ALLERGIES
+var EntitySubType_TOBACCO_USE = &sEntitySubType_TOBACCO_USE
+var EntitySubType_ALCOHOL_CONSUMPTION = &sEntitySubType_ALCOHOL_CONSUMPTION
+var EntitySubType_REC_DRUG_USE = &sEntitySubType_REC_DRUG_USE
+
+var EntityType = &sEntityType
+var EntityType_MEDICATION = &sEntityType_MEDICATION
+var EntityType_MEDICAL_CONDITION = &sEntityType_MEDICAL_CONDITION
+var EntityType_PROTECTED_HEALTH_INFORMATION = &sEntityType_PROTECTED_HEALTH_INFORMATION
+var EntityType_TEST_TREATMENT_PROCEDURE = &sEntityType_TEST_TREATMENT_PROCEDURE
+var EntityType_ANATOMY = &sEntityType_ANATOMY
+var EntityType_TIME_EXPRESSION = &sEntityType_TIME_EXPRESSION
+var EntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL = &sEntityType_BEHAVIORAL_ENVIRONMENTAL_SOCIAL
+
+var _Float = &s_Float
+
+var _IamRoleArn = &s_IamRoleArn
+
+var ICD10CMAttribute = &sICD10CMAttribute
+var ICD10CMAttribute_Type = &sICD10CMAttribute_Type
+var ICD10CMAttribute_Score = &sICD10CMAttribute_Score
+var ICD10CMAttribute_RelationshipScore = &sICD10CMAttribute_RelationshipScore
+var ICD10CMAttribute_Id = &sICD10CMAttribute_Id
+var ICD10CMAttribute_BeginOffset = &sICD10CMAttribute_BeginOffset
+var ICD10CMAttribute_EndOffset = &sICD10CMAttribute_EndOffset
+var ICD10CMAttribute_Text = &sICD10CMAttribute_Text
+var ICD10CMAttribute_Traits = &sICD10CMAttribute_Traits
+var ICD10CMAttribute_Category = &sICD10CMAttribute_Category
+var ICD10CMAttribute_RelationshipType = &sICD10CMAttribute_RelationshipType
+
+var _ICD10CMAttributeList = &s_ICD10CMAttributeList
+var _ICD10CMAttributeList_member = &s_ICD10CMAttributeList_member
+
+var ICD10CMAttributeType = &sICD10CMAttributeType
+var ICD10CMAttributeType_ACUITY = &sICD10CMAttributeType_ACUITY
+var ICD10CMAttributeType_DIRECTION = &sICD10CMAttributeType_DIRECTION
+var ICD10CMAttributeType_SYSTEM_ORGAN_SITE = &sICD10CMAttributeType_SYSTEM_ORGAN_SITE
+var ICD10CMAttributeType_QUALITY = &sICD10CMAttributeType_QUALITY
+var ICD10CMAttributeType_QUANTITY = &sICD10CMAttributeType_QUANTITY
+var ICD10CMAttributeType_TIME_TO_DX_NAME = &sICD10CMAttributeType_TIME_TO_DX_NAME
+var ICD10CMAttributeType_TIME_EXPRESSION = &sICD10CMAttributeType_TIME_EXPRESSION
+
+var ICD10CMConcept = &sICD10CMConcept
+var ICD10CMConcept_Description = &sICD10CMConcept_Description
+var ICD10CMConcept_Code = &sICD10CMConcept_Code
+var ICD10CMConcept_Score = &sICD10CMConcept_Score
+
+var _ICD10CMConceptList = &s_ICD10CMConceptList
+var _ICD10CMConceptList_member = &s_ICD10CMConceptList_member
+
+var ICD10CMEntity = &sICD10CMEntity
+var ICD10CMEntity_Id = &sICD10CMEntity_Id
+var ICD10CMEntity_Text = &sICD10CMEntity_Text
+var ICD10CMEntity_Category = &sICD10CMEntity_Category
+var ICD10CMEntity_Type = &sICD10CMEntity_Type
+var ICD10CMEntity_Score = &sICD10CMEntity_Score
+var ICD10CMEntity_BeginOffset = &sICD10CMEntity_BeginOffset
+var ICD10CMEntity_EndOffset = &sICD10CMEntity_EndOffset
+var ICD10CMEntity_Attributes = &sICD10CMEntity_Attributes
+var ICD10CMEntity_Traits = &sICD10CMEntity_Traits
+var ICD10CMEntity_ICD10CMConcepts = &sICD10CMEntity_ICD10CMConcepts
+
+var ICD10CMEntityCategory = &sICD10CMEntityCategory
+var ICD10CMEntityCategory_MEDICAL_CONDITION = &sICD10CMEntityCategory_MEDICAL_CONDITION
+
+var _ICD10CMEntityList = &s_ICD10CMEntityList
+var _ICD10CMEntityList_member = &s_ICD10CMEntityList_member
+
+var ICD10CMEntityType = &sICD10CMEntityType
+var ICD10CMEntityType_DX_NAME = &sICD10CMEntityType_DX_NAME
+var ICD10CMEntityType_TIME_EXPRESSION = &sICD10CMEntityType_TIME_EXPRESSION
+
+var ICD10CMRelationshipType = &sICD10CMRelationshipType
+var ICD10CMRelationshipType_OVERLAP = &sICD10CMRelationshipType_OVERLAP
+var ICD10CMRelationshipType_SYSTEM_ORGAN_SITE = &sICD10CMRelationshipType_SYSTEM_ORGAN_SITE
+var ICD10CMRelationshipType_QUALITY = &sICD10CMRelationshipType_QUALITY
+
+var ICD10CMTrait = &sICD10CMTrait
+var ICD10CMTrait_Name = &sICD10CMTrait_Name
+var ICD10CMTrait_Score = &sICD10CMTrait_Score
+
+var _ICD10CMTraitList = &s_ICD10CMTraitList
+var _ICD10CMTraitList_member = &s_ICD10CMTraitList_member
+
+var ICD10CMTraitName = &sICD10CMTraitName
+var ICD10CMTraitName_NEGATION = &sICD10CMTraitName_NEGATION
+var ICD10CMTraitName_DIAGNOSIS = &sICD10CMTraitName_DIAGNOSIS
+var ICD10CMTraitName_SIGN = &sICD10CMTraitName_SIGN
+var ICD10CMTraitName_SYMPTOM = &sICD10CMTraitName_SYMPTOM
+var ICD10CMTraitName_PERTAINS_TO_FAMILY = &sICD10CMTraitName_PERTAINS_TO_FAMILY
+var ICD10CMTraitName_HYPOTHETICAL = &sICD10CMTraitName_HYPOTHETICAL
+var ICD10CMTraitName_LOW_CONFIDENCE = &sICD10CMTraitName_LOW_CONFIDENCE
+
+var InputDataConfig = &sInputDataConfig
+var InputDataConfig_S3Bucket = &sInputDataConfig_S3Bucket
+var InputDataConfig_S3Key = &sInputDataConfig_S3Key
+
+var _Integer = &s_Integer
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var InvalidEncodingException = &sInvalidEncodingException
+var InvalidEncodingException_Message = &sInvalidEncodingException_Message
+
+var InvalidRequestException = &sInvalidRequestException
+var InvalidRequestException_Message = &sInvalidRequestException_Message
+
+var _JobId = &s_JobId
+
+var _JobName = &s_JobName
+
+var JobStatus = &sJobStatus
+var JobStatus_SUBMITTED = &sJobStatus_SUBMITTED
+var JobStatus_IN_PROGRESS = &sJobStatus_IN_PROGRESS
+var JobStatus_COMPLETED = &sJobStatus_COMPLETED
+var JobStatus_PARTIAL_SUCCESS = &sJobStatus_PARTIAL_SUCCESS
+var JobStatus_FAILED = &sJobStatus_FAILED
+var JobStatus_STOP_REQUESTED = &sJobStatus_STOP_REQUESTED
+var JobStatus_STOPPED = &sJobStatus_STOPPED
+
+var _KMSKey = &s_KMSKey
+
+var LanguageCode = &sLanguageCode
+var LanguageCode_EN = &sLanguageCode_EN
+
+var _ManifestFilePath = &s_ManifestFilePath
+
+var _MaxResultsInteger = &s_MaxResultsInteger
+
+var _ModelVersion = &s_ModelVersion
+
+var _OntologyLinkingBoundedLengthString = &s_OntologyLinkingBoundedLengthString
+
+var OutputDataConfig = &sOutputDataConfig
+var OutputDataConfig_S3Bucket = &sOutputDataConfig_S3Bucket
+var OutputDataConfig_S3Key = &sOutputDataConfig_S3Key
+
+var RelationshipType = &sRelationshipType
+var RelationshipType_EVERY = &sRelationshipType_EVERY
+var RelationshipType_WITH_DOSAGE = &sRelationshipType_WITH_DOSAGE
+var RelationshipType_ADMINISTERED_VIA = &sRelationshipType_ADMINISTERED_VIA
+var RelationshipType_FOR = &sRelationshipType_FOR
+var RelationshipType_NEGATIVE = &sRelationshipType_NEGATIVE
+var RelationshipType_OVERLAP = &sRelationshipType_OVERLAP
+var RelationshipType_DOSAGE = &sRelationshipType_DOSAGE
+var RelationshipType_ROUTE_OR_MODE = &sRelationshipType_ROUTE_OR_MODE
+var RelationshipType_FORM = &sRelationshipType_FORM
+var RelationshipType_FREQUENCY = &sRelationshipType_FREQUENCY
+var RelationshipType_DURATION = &sRelationshipType_DURATION
+var RelationshipType_STRENGTH = &sRelationshipType_STRENGTH
+var RelationshipType_RATE = &sRelationshipType_RATE
+var RelationshipType_ACUITY = &sRelationshipType_ACUITY
+var RelationshipType_TEST_VALUE = &sRelationshipType_TEST_VALUE
+var RelationshipType_TEST_UNITS = &sRelationshipType_TEST_UNITS
+var RelationshipType_TEST_UNIT = &sRelationshipType_TEST_UNIT
+var RelationshipType_DIRECTION = &sRelationshipType_DIRECTION
+var RelationshipType_SYSTEM_ORGAN_SITE = &sRelationshipType_SYSTEM_ORGAN_SITE
+var RelationshipType_AMOUNT = &sRelationshipType_AMOUNT
+var RelationshipType_USAGE = &sRelationshipType_USAGE
+var RelationshipType_QUALITY = &sRelationshipType_QUALITY
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var RxNormAttribute = &sRxNormAttribute
+var RxNormAttribute_Type = &sRxNormAttribute_Type
+var RxNormAttribute_Score = &sRxNormAttribute_Score
+var RxNormAttribute_RelationshipScore = &sRxNormAttribute_RelationshipScore
+var RxNormAttribute_Id = &sRxNormAttribute_Id
+var RxNormAttribute_BeginOffset = &sRxNormAttribute_BeginOffset
+var RxNormAttribute_EndOffset = &sRxNormAttribute_EndOffset
+var RxNormAttribute_Text = &sRxNormAttribute_Text
+var RxNormAttribute_Traits = &sRxNormAttribute_Traits
+
+var _RxNormAttributeList = &s_RxNormAttributeList
+var _RxNormAttributeList_member = &s_RxNormAttributeList_member
+
+var RxNormAttributeType = &sRxNormAttributeType
+var RxNormAttributeType_DOSAGE = &sRxNormAttributeType_DOSAGE
+var RxNormAttributeType_DURATION = &sRxNormAttributeType_DURATION
+var RxNormAttributeType_FORM = &sRxNormAttributeType_FORM
+var RxNormAttributeType_FREQUENCY = &sRxNormAttributeType_FREQUENCY
+var RxNormAttributeType_RATE = &sRxNormAttributeType_RATE
+var RxNormAttributeType_ROUTE_OR_MODE = &sRxNormAttributeType_ROUTE_OR_MODE
+var RxNormAttributeType_STRENGTH = &sRxNormAttributeType_STRENGTH
+
+var RxNormConcept = &sRxNormConcept
+var RxNormConcept_Description = &sRxNormConcept_Description
+var RxNormConcept_Code = &sRxNormConcept_Code
+var RxNormConcept_Score = &sRxNormConcept_Score
+
+var _RxNormConceptList = &s_RxNormConceptList
+var _RxNormConceptList_member = &s_RxNormConceptList_member
+
+var RxNormEntity = &sRxNormEntity
+var RxNormEntity_Id = &sRxNormEntity_Id
+var RxNormEntity_Text = &sRxNormEntity_Text
+var RxNormEntity_Category = &sRxNormEntity_Category
+var RxNormEntity_Type = &sRxNormEntity_Type
+var RxNormEntity_Score = &sRxNormEntity_Score
+var RxNormEntity_BeginOffset = &sRxNormEntity_BeginOffset
+var RxNormEntity_EndOffset = &sRxNormEntity_EndOffset
+var RxNormEntity_Attributes = &sRxNormEntity_Attributes
+var RxNormEntity_Traits = &sRxNormEntity_Traits
+var RxNormEntity_RxNormConcepts = &sRxNormEntity_RxNormConcepts
+
+var RxNormEntityCategory = &sRxNormEntityCategory
+var RxNormEntityCategory_MEDICATION = &sRxNormEntityCategory_MEDICATION
+
+var _RxNormEntityList = &s_RxNormEntityList
+var _RxNormEntityList_member = &s_RxNormEntityList_member
+
+var RxNormEntityType = &sRxNormEntityType
+var RxNormEntityType_BRAND_NAME = &sRxNormEntityType_BRAND_NAME
+var RxNormEntityType_GENERIC_NAME = &sRxNormEntityType_GENERIC_NAME
+
+var RxNormTrait = &sRxNormTrait
+var RxNormTrait_Name = &sRxNormTrait_Name
+var RxNormTrait_Score = &sRxNormTrait_Score
+
+var _RxNormTraitList = &s_RxNormTraitList
+var _RxNormTraitList_member = &s_RxNormTraitList_member
+
+var RxNormTraitName = &sRxNormTraitName
+var RxNormTraitName_NEGATION = &sRxNormTraitName_NEGATION
+var RxNormTraitName_PAST_HISTORY = &sRxNormTraitName_PAST_HISTORY
+
+var _S3Bucket = &s_S3Bucket
+
+var _S3Key = &s_S3Key
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+
+var SNOMEDCTAttribute = &sSNOMEDCTAttribute
+var SNOMEDCTAttribute_Category = &sSNOMEDCTAttribute_Category
+var SNOMEDCTAttribute_Type = &sSNOMEDCTAttribute_Type
+var SNOMEDCTAttribute_Score = &sSNOMEDCTAttribute_Score
+var SNOMEDCTAttribute_RelationshipScore = &sSNOMEDCTAttribute_RelationshipScore
+var SNOMEDCTAttribute_RelationshipType = &sSNOMEDCTAttribute_RelationshipType
+var SNOMEDCTAttribute_Id = &sSNOMEDCTAttribute_Id
+var SNOMEDCTAttribute_BeginOffset = &sSNOMEDCTAttribute_BeginOffset
+var SNOMEDCTAttribute_EndOffset = &sSNOMEDCTAttribute_EndOffset
+var SNOMEDCTAttribute_Text = &sSNOMEDCTAttribute_Text
+var SNOMEDCTAttribute_Traits = &sSNOMEDCTAttribute_Traits
+var SNOMEDCTAttribute_SNOMEDCTConcepts = &sSNOMEDCTAttribute_SNOMEDCTConcepts
+
+var _SNOMEDCTAttributeList = &s_SNOMEDCTAttributeList
+var _SNOMEDCTAttributeList_member = &s_SNOMEDCTAttributeList_member
+
+var SNOMEDCTAttributeType = &sSNOMEDCTAttributeType
+var SNOMEDCTAttributeType_ACUITY = &sSNOMEDCTAttributeType_ACUITY
+var SNOMEDCTAttributeType_QUALITY = &sSNOMEDCTAttributeType_QUALITY
+var SNOMEDCTAttributeType_DIRECTION = &sSNOMEDCTAttributeType_DIRECTION
+var SNOMEDCTAttributeType_SYSTEM_ORGAN_SITE = &sSNOMEDCTAttributeType_SYSTEM_ORGAN_SITE
+var SNOMEDCTAttributeType_TEST_VALUE = &sSNOMEDCTAttributeType_TEST_VALUE
+var SNOMEDCTAttributeType_TEST_UNIT = &sSNOMEDCTAttributeType_TEST_UNIT
+
+var SNOMEDCTConcept = &sSNOMEDCTConcept
+var SNOMEDCTConcept_Description = &sSNOMEDCTConcept_Description
+var SNOMEDCTConcept_Code = &sSNOMEDCTConcept_Code
+var SNOMEDCTConcept_Score = &sSNOMEDCTConcept_Score
+
+var _SNOMEDCTConceptList = &s_SNOMEDCTConceptList
+var _SNOMEDCTConceptList_member = &s_SNOMEDCTConceptList_member
+
+var SNOMEDCTDetails = &sSNOMEDCTDetails
+var SNOMEDCTDetails_Edition = &sSNOMEDCTDetails_Edition
+var SNOMEDCTDetails_Language = &sSNOMEDCTDetails_Language
+var SNOMEDCTDetails_VersionDate = &sSNOMEDCTDetails_VersionDate
+
+var SNOMEDCTEntity = &sSNOMEDCTEntity
+var SNOMEDCTEntity_Id = &sSNOMEDCTEntity_Id
+var SNOMEDCTEntity_Text = &sSNOMEDCTEntity_Text
+var SNOMEDCTEntity_Category = &sSNOMEDCTEntity_Category
+var SNOMEDCTEntity_Type = &sSNOMEDCTEntity_Type
+var SNOMEDCTEntity_Score = &sSNOMEDCTEntity_Score
+var SNOMEDCTEntity_BeginOffset = &sSNOMEDCTEntity_BeginOffset
+var SNOMEDCTEntity_EndOffset = &sSNOMEDCTEntity_EndOffset
+var SNOMEDCTEntity_Attributes = &sSNOMEDCTEntity_Attributes
+var SNOMEDCTEntity_Traits = &sSNOMEDCTEntity_Traits
+var SNOMEDCTEntity_SNOMEDCTConcepts = &sSNOMEDCTEntity_SNOMEDCTConcepts
+
+var SNOMEDCTEntityCategory = &sSNOMEDCTEntityCategory
+var SNOMEDCTEntityCategory_MEDICAL_CONDITION = &sSNOMEDCTEntityCategory_MEDICAL_CONDITION
+var SNOMEDCTEntityCategory_ANATOMY = &sSNOMEDCTEntityCategory_ANATOMY
+var SNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE = &sSNOMEDCTEntityCategory_TEST_TREATMENT_PROCEDURE
+
+var _SNOMEDCTEntityList = &s_SNOMEDCTEntityList
+var _SNOMEDCTEntityList_member = &s_SNOMEDCTEntityList_member
+
+var SNOMEDCTEntityType = &sSNOMEDCTEntityType
+var SNOMEDCTEntityType_DX_NAME = &sSNOMEDCTEntityType_DX_NAME
+var SNOMEDCTEntityType_TEST_NAME = &sSNOMEDCTEntityType_TEST_NAME
+var SNOMEDCTEntityType_PROCEDURE_NAME = &sSNOMEDCTEntityType_PROCEDURE_NAME
+var SNOMEDCTEntityType_TREATMENT_NAME = &sSNOMEDCTEntityType_TREATMENT_NAME
+
+var SNOMEDCTRelationshipType = &sSNOMEDCTRelationshipType
+var SNOMEDCTRelationshipType_ACUITY = &sSNOMEDCTRelationshipType_ACUITY
+var SNOMEDCTRelationshipType_QUALITY = &sSNOMEDCTRelationshipType_QUALITY
+var SNOMEDCTRelationshipType_TEST_VALUE = &sSNOMEDCTRelationshipType_TEST_VALUE
+var SNOMEDCTRelationshipType_TEST_UNITS = &sSNOMEDCTRelationshipType_TEST_UNITS
+var SNOMEDCTRelationshipType_DIRECTION = &sSNOMEDCTRelationshipType_DIRECTION
+var SNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE = &sSNOMEDCTRelationshipType_SYSTEM_ORGAN_SITE
+var SNOMEDCTRelationshipType_TEST_UNIT = &sSNOMEDCTRelationshipType_TEST_UNIT
+
+var SNOMEDCTTrait = &sSNOMEDCTTrait
+var SNOMEDCTTrait_Name = &sSNOMEDCTTrait_Name
+var SNOMEDCTTrait_Score = &sSNOMEDCTTrait_Score
+
+var _SNOMEDCTTraitList = &s_SNOMEDCTTraitList
+var _SNOMEDCTTraitList_member = &s_SNOMEDCTTraitList_member
+
+var SNOMEDCTTraitName = &sSNOMEDCTTraitName
+var SNOMEDCTTraitName_NEGATION = &sSNOMEDCTTraitName_NEGATION
+var SNOMEDCTTraitName_DIAGNOSIS = &sSNOMEDCTTraitName_DIAGNOSIS
+var SNOMEDCTTraitName_SIGN = &sSNOMEDCTTraitName_SIGN
+var SNOMEDCTTraitName_SYMPTOM = &sSNOMEDCTTraitName_SYMPTOM
+var SNOMEDCTTraitName_PERTAINS_TO_FAMILY = &sSNOMEDCTTraitName_PERTAINS_TO_FAMILY
+var SNOMEDCTTraitName_HYPOTHETICAL = &sSNOMEDCTTraitName_HYPOTHETICAL
+var SNOMEDCTTraitName_LOW_CONFIDENCE = &sSNOMEDCTTraitName_LOW_CONFIDENCE
+var SNOMEDCTTraitName_PAST_HISTORY = &sSNOMEDCTTraitName_PAST_HISTORY
+var SNOMEDCTTraitName_FUTURE = &sSNOMEDCTTraitName_FUTURE
+
+var _String = &s_String
+
+var TextSizeLimitExceededException = &sTextSizeLimitExceededException
+var TextSizeLimitExceededException_Message = &sTextSizeLimitExceededException_Message
+
+var _Timestamp = &s_Timestamp
+
+var TooManyRequestsException = &sTooManyRequestsException
+var TooManyRequestsException_Message = &sTooManyRequestsException_Message
+
+var Trait = &sTrait
+var Trait_Name = &sTrait_Name
+var Trait_Score = &sTrait_Score
+
+var _TraitList = &s_TraitList
+var _TraitList_member = &s_TraitList_member
+
+var UnmappedAttribute = &sUnmappedAttribute
+var UnmappedAttribute_Type = &sUnmappedAttribute_Type
+var UnmappedAttribute_Attribute = &sUnmappedAttribute_Attribute
+
+var _UnmappedAttributeList = &s_UnmappedAttributeList
+var _UnmappedAttributeList_member = &s_UnmappedAttributeList_member
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var DescribeEntitiesDetectionV2JobRequest = &sDescribeEntitiesDetectionV2JobRequest
+var DescribeEntitiesDetectionV2JobRequest_JobId = &sDescribeEntitiesDetectionV2JobRequest_JobId
+
+var DescribeEntitiesDetectionV2JobResponse = &sDescribeEntitiesDetectionV2JobResponse
+var DescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties = &sDescribeEntitiesDetectionV2JobResponse_ComprehendMedicalAsyncJobProperties
+
+var DescribeICD10CMInferenceJobRequest = &sDescribeICD10CMInferenceJobRequest
+var DescribeICD10CMInferenceJobRequest_JobId = &sDescribeICD10CMInferenceJobRequest_JobId
+
+var DescribeICD10CMInferenceJobResponse = &sDescribeICD10CMInferenceJobResponse
+var DescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties = &sDescribeICD10CMInferenceJobResponse_ComprehendMedicalAsyncJobProperties
+
+var DescribePHIDetectionJobRequest = &sDescribePHIDetectionJobRequest
+var DescribePHIDetectionJobRequest_JobId = &sDescribePHIDetectionJobRequest_JobId
+
+var DescribePHIDetectionJobResponse = &sDescribePHIDetectionJobResponse
+var DescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties = &sDescribePHIDetectionJobResponse_ComprehendMedicalAsyncJobProperties
+
+var DescribeRxNormInferenceJobRequest = &sDescribeRxNormInferenceJobRequest
+var DescribeRxNormInferenceJobRequest_JobId = &sDescribeRxNormInferenceJobRequest_JobId
+
+var DescribeRxNormInferenceJobResponse = &sDescribeRxNormInferenceJobResponse
+var DescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties = &sDescribeRxNormInferenceJobResponse_ComprehendMedicalAsyncJobProperties
+
+var DescribeSNOMEDCTInferenceJobRequest = &sDescribeSNOMEDCTInferenceJobRequest
+var DescribeSNOMEDCTInferenceJobRequest_JobId = &sDescribeSNOMEDCTInferenceJobRequest_JobId
+
+var DescribeSNOMEDCTInferenceJobResponse = &sDescribeSNOMEDCTInferenceJobResponse
+var DescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties = &sDescribeSNOMEDCTInferenceJobResponse_ComprehendMedicalAsyncJobProperties
+
+var DetectEntitiesRequest = &sDetectEntitiesRequest
+var DetectEntitiesRequest_Text = &sDetectEntitiesRequest_Text
+
+var DetectEntitiesResponse = &sDetectEntitiesResponse
+var DetectEntitiesResponse_Entities = &sDetectEntitiesResponse_Entities
+var DetectEntitiesResponse_UnmappedAttributes = &sDetectEntitiesResponse_UnmappedAttributes
+var DetectEntitiesResponse_PaginationToken = &sDetectEntitiesResponse_PaginationToken
+var DetectEntitiesResponse_ModelVersion = &sDetectEntitiesResponse_ModelVersion
+
+var DetectEntitiesV2Request = &sDetectEntitiesV2Request
+var DetectEntitiesV2Request_Text = &sDetectEntitiesV2Request_Text
+
+var DetectEntitiesV2Response = &sDetectEntitiesV2Response
+var DetectEntitiesV2Response_Entities = &sDetectEntitiesV2Response_Entities
+var DetectEntitiesV2Response_UnmappedAttributes = &sDetectEntitiesV2Response_UnmappedAttributes
+var DetectEntitiesV2Response_PaginationToken = &sDetectEntitiesV2Response_PaginationToken
+var DetectEntitiesV2Response_ModelVersion = &sDetectEntitiesV2Response_ModelVersion
+
+var DetectPHIRequest = &sDetectPHIRequest
+var DetectPHIRequest_Text = &sDetectPHIRequest_Text
+
+var DetectPHIResponse = &sDetectPHIResponse
+var DetectPHIResponse_Entities = &sDetectPHIResponse_Entities
+var DetectPHIResponse_PaginationToken = &sDetectPHIResponse_PaginationToken
+var DetectPHIResponse_ModelVersion = &sDetectPHIResponse_ModelVersion
+
+var InferICD10CMRequest = &sInferICD10CMRequest
+var InferICD10CMRequest_Text = &sInferICD10CMRequest_Text
+
+var InferICD10CMResponse = &sInferICD10CMResponse
+var InferICD10CMResponse_Entities = &sInferICD10CMResponse_Entities
+var InferICD10CMResponse_PaginationToken = &sInferICD10CMResponse_PaginationToken
+var InferICD10CMResponse_ModelVersion = &sInferICD10CMResponse_ModelVersion
+
+var InferRxNormRequest = &sInferRxNormRequest
+var InferRxNormRequest_Text = &sInferRxNormRequest_Text
+
+var InferRxNormResponse = &sInferRxNormResponse
+var InferRxNormResponse_Entities = &sInferRxNormResponse_Entities
+var InferRxNormResponse_PaginationToken = &sInferRxNormResponse_PaginationToken
+var InferRxNormResponse_ModelVersion = &sInferRxNormResponse_ModelVersion
+
+var InferSNOMEDCTRequest = &sInferSNOMEDCTRequest
+var InferSNOMEDCTRequest_Text = &sInferSNOMEDCTRequest_Text
+
+var InferSNOMEDCTResponse = &sInferSNOMEDCTResponse
+var InferSNOMEDCTResponse_Entities = &sInferSNOMEDCTResponse_Entities
+var InferSNOMEDCTResponse_PaginationToken = &sInferSNOMEDCTResponse_PaginationToken
+var InferSNOMEDCTResponse_ModelVersion = &sInferSNOMEDCTResponse_ModelVersion
+var InferSNOMEDCTResponse_SNOMEDCTDetails = &sInferSNOMEDCTResponse_SNOMEDCTDetails
+var InferSNOMEDCTResponse_Characters = &sInferSNOMEDCTResponse_Characters
+
+var ListEntitiesDetectionV2JobsRequest = &sListEntitiesDetectionV2JobsRequest
+var ListEntitiesDetectionV2JobsRequest_Filter = &sListEntitiesDetectionV2JobsRequest_Filter
+var ListEntitiesDetectionV2JobsRequest_NextToken = &sListEntitiesDetectionV2JobsRequest_NextToken
+var ListEntitiesDetectionV2JobsRequest_MaxResults = &sListEntitiesDetectionV2JobsRequest_MaxResults
+
+var ListEntitiesDetectionV2JobsResponse = &sListEntitiesDetectionV2JobsResponse
+var ListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList = &sListEntitiesDetectionV2JobsResponse_ComprehendMedicalAsyncJobPropertiesList
+var ListEntitiesDetectionV2JobsResponse_NextToken = &sListEntitiesDetectionV2JobsResponse_NextToken
+
+var ListICD10CMInferenceJobsRequest = &sListICD10CMInferenceJobsRequest
+var ListICD10CMInferenceJobsRequest_Filter = &sListICD10CMInferenceJobsRequest_Filter
+var ListICD10CMInferenceJobsRequest_NextToken = &sListICD10CMInferenceJobsRequest_NextToken
+var ListICD10CMInferenceJobsRequest_MaxResults = &sListICD10CMInferenceJobsRequest_MaxResults
+
+var ListICD10CMInferenceJobsResponse = &sListICD10CMInferenceJobsResponse
+var ListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &sListICD10CMInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList
+var ListICD10CMInferenceJobsResponse_NextToken = &sListICD10CMInferenceJobsResponse_NextToken
+
+var ListPHIDetectionJobsRequest = &sListPHIDetectionJobsRequest
+var ListPHIDetectionJobsRequest_Filter = &sListPHIDetectionJobsRequest_Filter
+var ListPHIDetectionJobsRequest_NextToken = &sListPHIDetectionJobsRequest_NextToken
+var ListPHIDetectionJobsRequest_MaxResults = &sListPHIDetectionJobsRequest_MaxResults
+
+var ListPHIDetectionJobsResponse = &sListPHIDetectionJobsResponse
+var ListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &sListPHIDetectionJobsResponse_ComprehendMedicalAsyncJobPropertiesList
+var ListPHIDetectionJobsResponse_NextToken = &sListPHIDetectionJobsResponse_NextToken
+
+var ListRxNormInferenceJobsRequest = &sListRxNormInferenceJobsRequest
+var ListRxNormInferenceJobsRequest_Filter = &sListRxNormInferenceJobsRequest_Filter
+var ListRxNormInferenceJobsRequest_NextToken = &sListRxNormInferenceJobsRequest_NextToken
+var ListRxNormInferenceJobsRequest_MaxResults = &sListRxNormInferenceJobsRequest_MaxResults
+
+var ListRxNormInferenceJobsResponse = &sListRxNormInferenceJobsResponse
+var ListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &sListRxNormInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList
+var ListRxNormInferenceJobsResponse_NextToken = &sListRxNormInferenceJobsResponse_NextToken
+
+var ListSNOMEDCTInferenceJobsRequest = &sListSNOMEDCTInferenceJobsRequest
+var ListSNOMEDCTInferenceJobsRequest_Filter = &sListSNOMEDCTInferenceJobsRequest_Filter
+var ListSNOMEDCTInferenceJobsRequest_NextToken = &sListSNOMEDCTInferenceJobsRequest_NextToken
+var ListSNOMEDCTInferenceJobsRequest_MaxResults = &sListSNOMEDCTInferenceJobsRequest_MaxResults
+
+var ListSNOMEDCTInferenceJobsResponse = &sListSNOMEDCTInferenceJobsResponse
+var ListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList = &sListSNOMEDCTInferenceJobsResponse_ComprehendMedicalAsyncJobPropertiesList
+var ListSNOMEDCTInferenceJobsResponse_NextToken = &sListSNOMEDCTInferenceJobsResponse_NextToken
+
+var StartEntitiesDetectionV2JobRequest = &sStartEntitiesDetectionV2JobRequest
+var StartEntitiesDetectionV2JobRequest_InputDataConfig = &sStartEntitiesDetectionV2JobRequest_InputDataConfig
+var StartEntitiesDetectionV2JobRequest_OutputDataConfig = &sStartEntitiesDetectionV2JobRequest_OutputDataConfig
+var StartEntitiesDetectionV2JobRequest_DataAccessRoleArn = &sStartEntitiesDetectionV2JobRequest_DataAccessRoleArn
+var StartEntitiesDetectionV2JobRequest_JobName = &sStartEntitiesDetectionV2JobRequest_JobName
+var StartEntitiesDetectionV2JobRequest_ClientRequestToken = &sStartEntitiesDetectionV2JobRequest_ClientRequestToken
+var StartEntitiesDetectionV2JobRequest_KMSKey = &sStartEntitiesDetectionV2JobRequest_KMSKey
+var StartEntitiesDetectionV2JobRequest_LanguageCode = &sStartEntitiesDetectionV2JobRequest_LanguageCode
+
+var StartEntitiesDetectionV2JobResponse = &sStartEntitiesDetectionV2JobResponse
+var StartEntitiesDetectionV2JobResponse_JobId = &sStartEntitiesDetectionV2JobResponse_JobId
+
+var StartICD10CMInferenceJobRequest = &sStartICD10CMInferenceJobRequest
+var StartICD10CMInferenceJobRequest_InputDataConfig = &sStartICD10CMInferenceJobRequest_InputDataConfig
+var StartICD10CMInferenceJobRequest_OutputDataConfig = &sStartICD10CMInferenceJobRequest_OutputDataConfig
+var StartICD10CMInferenceJobRequest_DataAccessRoleArn = &sStartICD10CMInferenceJobRequest_DataAccessRoleArn
+var StartICD10CMInferenceJobRequest_JobName = &sStartICD10CMInferenceJobRequest_JobName
+var StartICD10CMInferenceJobRequest_ClientRequestToken = &sStartICD10CMInferenceJobRequest_ClientRequestToken
+var StartICD10CMInferenceJobRequest_KMSKey = &sStartICD10CMInferenceJobRequest_KMSKey
+var StartICD10CMInferenceJobRequest_LanguageCode = &sStartICD10CMInferenceJobRequest_LanguageCode
+
+var StartICD10CMInferenceJobResponse = &sStartICD10CMInferenceJobResponse
+var StartICD10CMInferenceJobResponse_JobId = &sStartICD10CMInferenceJobResponse_JobId
+
+var StartPHIDetectionJobRequest = &sStartPHIDetectionJobRequest
+var StartPHIDetectionJobRequest_InputDataConfig = &sStartPHIDetectionJobRequest_InputDataConfig
+var StartPHIDetectionJobRequest_OutputDataConfig = &sStartPHIDetectionJobRequest_OutputDataConfig
+var StartPHIDetectionJobRequest_DataAccessRoleArn = &sStartPHIDetectionJobRequest_DataAccessRoleArn
+var StartPHIDetectionJobRequest_JobName = &sStartPHIDetectionJobRequest_JobName
+var StartPHIDetectionJobRequest_ClientRequestToken = &sStartPHIDetectionJobRequest_ClientRequestToken
+var StartPHIDetectionJobRequest_KMSKey = &sStartPHIDetectionJobRequest_KMSKey
+var StartPHIDetectionJobRequest_LanguageCode = &sStartPHIDetectionJobRequest_LanguageCode
+
+var StartPHIDetectionJobResponse = &sStartPHIDetectionJobResponse
+var StartPHIDetectionJobResponse_JobId = &sStartPHIDetectionJobResponse_JobId
+
+var StartRxNormInferenceJobRequest = &sStartRxNormInferenceJobRequest
+var StartRxNormInferenceJobRequest_InputDataConfig = &sStartRxNormInferenceJobRequest_InputDataConfig
+var StartRxNormInferenceJobRequest_OutputDataConfig = &sStartRxNormInferenceJobRequest_OutputDataConfig
+var StartRxNormInferenceJobRequest_DataAccessRoleArn = &sStartRxNormInferenceJobRequest_DataAccessRoleArn
+var StartRxNormInferenceJobRequest_JobName = &sStartRxNormInferenceJobRequest_JobName
+var StartRxNormInferenceJobRequest_ClientRequestToken = &sStartRxNormInferenceJobRequest_ClientRequestToken
+var StartRxNormInferenceJobRequest_KMSKey = &sStartRxNormInferenceJobRequest_KMSKey
+var StartRxNormInferenceJobRequest_LanguageCode = &sStartRxNormInferenceJobRequest_LanguageCode
+
+var StartRxNormInferenceJobResponse = &sStartRxNormInferenceJobResponse
+var StartRxNormInferenceJobResponse_JobId = &sStartRxNormInferenceJobResponse_JobId
+
+var StartSNOMEDCTInferenceJobRequest = &sStartSNOMEDCTInferenceJobRequest
+var StartSNOMEDCTInferenceJobRequest_InputDataConfig = &sStartSNOMEDCTInferenceJobRequest_InputDataConfig
+var StartSNOMEDCTInferenceJobRequest_OutputDataConfig = &sStartSNOMEDCTInferenceJobRequest_OutputDataConfig
+var StartSNOMEDCTInferenceJobRequest_DataAccessRoleArn = &sStartSNOMEDCTInferenceJobRequest_DataAccessRoleArn
+var StartSNOMEDCTInferenceJobRequest_JobName = &sStartSNOMEDCTInferenceJobRequest_JobName
+var StartSNOMEDCTInferenceJobRequest_ClientRequestToken = &sStartSNOMEDCTInferenceJobRequest_ClientRequestToken
+var StartSNOMEDCTInferenceJobRequest_KMSKey = &sStartSNOMEDCTInferenceJobRequest_KMSKey
+var StartSNOMEDCTInferenceJobRequest_LanguageCode = &sStartSNOMEDCTInferenceJobRequest_LanguageCode
+
+var StartSNOMEDCTInferenceJobResponse = &sStartSNOMEDCTInferenceJobResponse
+var StartSNOMEDCTInferenceJobResponse_JobId = &sStartSNOMEDCTInferenceJobResponse_JobId
+
+var StopEntitiesDetectionV2JobRequest = &sStopEntitiesDetectionV2JobRequest
+var StopEntitiesDetectionV2JobRequest_JobId = &sStopEntitiesDetectionV2JobRequest_JobId
+
+var StopEntitiesDetectionV2JobResponse = &sStopEntitiesDetectionV2JobResponse
+var StopEntitiesDetectionV2JobResponse_JobId = &sStopEntitiesDetectionV2JobResponse_JobId
+
+var StopICD10CMInferenceJobRequest = &sStopICD10CMInferenceJobRequest
+var StopICD10CMInferenceJobRequest_JobId = &sStopICD10CMInferenceJobRequest_JobId
+
+var StopICD10CMInferenceJobResponse = &sStopICD10CMInferenceJobResponse
+var StopICD10CMInferenceJobResponse_JobId = &sStopICD10CMInferenceJobResponse_JobId
+
+var StopPHIDetectionJobRequest = &sStopPHIDetectionJobRequest
+var StopPHIDetectionJobRequest_JobId = &sStopPHIDetectionJobRequest_JobId
+
+var StopPHIDetectionJobResponse = &sStopPHIDetectionJobResponse
+var StopPHIDetectionJobResponse_JobId = &sStopPHIDetectionJobResponse_JobId
+
+var StopRxNormInferenceJobRequest = &sStopRxNormInferenceJobRequest
+var StopRxNormInferenceJobRequest_JobId = &sStopRxNormInferenceJobRequest_JobId
+
+var StopRxNormInferenceJobResponse = &sStopRxNormInferenceJobResponse
+var StopRxNormInferenceJobResponse_JobId = &sStopRxNormInferenceJobResponse_JobId
+
+var StopSNOMEDCTInferenceJobRequest = &sStopSNOMEDCTInferenceJobRequest
+var StopSNOMEDCTInferenceJobRequest_JobId = &sStopSNOMEDCTInferenceJobRequest_JobId
+
+var StopSNOMEDCTInferenceJobResponse = &sStopSNOMEDCTInferenceJobResponse
+var StopSNOMEDCTInferenceJobResponse_JobId = &sStopSNOMEDCTInferenceJobResponse_JobId
+
+var ComprehendMedical_20181030 = &smithy.ServiceSchema{Schema: &s_ComprehendMedical_20181030, Version: "2018-10-30"}

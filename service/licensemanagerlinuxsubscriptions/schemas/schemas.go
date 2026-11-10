@@ -4,685 +4,533 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var DeregisterSubscriptionProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "DeregisterSubscriptionProvider",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iDeregisterSubscriptionProvider              = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "DeregisterSubscriptionProvider"}
+	iGetRegisteredSubscriptionProvider           = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "GetRegisteredSubscriptionProvider"}
+	iGetServiceSettings                          = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "GetServiceSettings"}
+	iListLinuxSubscriptionInstances              = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListLinuxSubscriptionInstances"}
+	iListLinuxSubscriptions                      = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListLinuxSubscriptions"}
+	iListRegisteredSubscriptionProviders         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListRegisteredSubscriptionProviders"}
+	iListTagsForResource                         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListTagsForResource"}
+	iRegisterSubscriptionProvider                = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "RegisterSubscriptionProvider"}
+	iTagResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "TagResource"}
+	iUntagResource                               = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "UntagResource"}
+	iUpdateServiceSettings                       = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "UpdateServiceSettings"}
+	i_LicenseManagerLinuxSubscriptions           = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "LicenseManagerLinuxSubscriptions"}
+	i_BoxInteger                                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "BoxInteger"}
+	i_BoxLong                                    = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "BoxLong"}
+	iFilter                                      = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "Filter"}
+	i_FilterList                                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "FilterList"}
+	iInstance                                    = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "Instance"}
+	i_InstanceList                               = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "InstanceList"}
+	iInternalServerException                     = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "InternalServerException"}
+	i_LinuxSubscriptionsDiscovery                = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "LinuxSubscriptionsDiscovery"}
+	iLinuxSubscriptionsDiscoverySettings         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "LinuxSubscriptionsDiscoverySettings"}
+	i_Operator                                   = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "Operator"}
+	i_OrganizationIntegration                    = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "OrganizationIntegration"}
+	i_ProductCodeList                            = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ProductCodeList"}
+	iRegisteredSubscriptionProvider              = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "RegisteredSubscriptionProvider"}
+	i_RegisteredSubscriptionProviderList         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "RegisteredSubscriptionProviderList"}
+	iResourceNotFoundException                   = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ResourceNotFoundException"}
+	i_SecretArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "SecretArn"}
+	i_Status                                     = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "Status"}
+	i_StringList                                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "StringList"}
+	i_StringMap                                  = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "StringMap"}
+	iSubscription                                = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "Subscription"}
+	i_SubscriptionList                           = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "SubscriptionList"}
+	i_SubscriptionProviderArn                    = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "SubscriptionProviderArn"}
+	i_SubscriptionProviderSource                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "SubscriptionProviderSource"}
+	i_SubscriptionProviderSourceList             = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "SubscriptionProviderSourceList"}
+	i_SubscriptionProviderStatus                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "SubscriptionProviderStatus"}
+	i_TagKeyList                                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "TagKeyList"}
+	i_Tags                                       = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "Tags"}
+	iThrottlingException                         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ThrottlingException"}
+	iValidationException                         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ValidationException"}
+	iDeregisterSubscriptionProviderRequest       = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "DeregisterSubscriptionProviderRequest"}
+	iDeregisterSubscriptionProviderResponse      = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "DeregisterSubscriptionProviderResponse"}
+	iGetRegisteredSubscriptionProviderRequest    = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "GetRegisteredSubscriptionProviderRequest"}
+	iGetRegisteredSubscriptionProviderResponse   = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "GetRegisteredSubscriptionProviderResponse"}
+	iGetServiceSettingsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "GetServiceSettingsRequest"}
+	iGetServiceSettingsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "GetServiceSettingsResponse"}
+	iListLinuxSubscriptionInstancesRequest       = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListLinuxSubscriptionInstancesRequest"}
+	iListLinuxSubscriptionInstancesResponse      = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListLinuxSubscriptionInstancesResponse"}
+	iListLinuxSubscriptionsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListLinuxSubscriptionsRequest"}
+	iListLinuxSubscriptionsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListLinuxSubscriptionsResponse"}
+	iListRegisteredSubscriptionProvidersRequest  = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListRegisteredSubscriptionProvidersRequest"}
+	iListRegisteredSubscriptionProvidersResponse = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListRegisteredSubscriptionProvidersResponse"}
+	iListTagsForResourceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "ListTagsForResourceResponse"}
+	iRegisterSubscriptionProviderRequest         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "RegisterSubscriptionProviderRequest"}
+	iRegisterSubscriptionProviderResponse        = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "RegisterSubscriptionProviderResponse"}
+	iTagResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "TagResourceRequest"}
+	iTagResourceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "TagResourceResponse"}
+	iUntagResourceRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "UntagResourceResponse"}
+	iUpdateServiceSettingsRequest                = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "UpdateServiceSettingsRequest"}
+	iUpdateServiceSettingsResponse               = smithy.ShapeID{Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions", Name: "UpdateServiceSettingsResponse"}
+	pString                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pBoolean                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/DeregisterSubscriptionProvider",
-	Code: 200})
-
-var GetRegisteredSubscriptionProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "GetRegisteredSubscriptionProvider",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/GetRegisteredSubscriptionProvider",
-	Code: 200})
-
-var GetServiceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "GetServiceSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/GetServiceSettings",
-	Code: 200})
-
-var ListLinuxSubscriptionInstances = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListLinuxSubscriptionInstances",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/ListLinuxSubscriptionInstances",
-	Code: 200})
-
-var ListLinuxSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListLinuxSubscriptions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/ListLinuxSubscriptions",
-	Code: 200})
-
-var ListRegisteredSubscriptionProviders = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListRegisteredSubscriptionProviders",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/ListRegisteredSubscriptionProviders",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RegisterSubscriptionProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "RegisterSubscriptionProvider",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/RegisterSubscriptionProvider",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateServiceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "UpdateServiceSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/subscription/UpdateServiceSettings",
-	Code: 200})
-
-var _LicenseManagerLinuxSubscriptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "LicenseManagerLinuxSubscriptions",
-}, smithy.ShapeTypeService, 0)
-
-var LicenseManagerLinuxSubscriptions = smithy.NewServiceSchema(_LicenseManagerLinuxSubscriptions, "2018-05-10")
-
-var _BoxInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "BoxInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _BoxLong = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "BoxLong",
-}, smithy.ShapeTypeLong, 0)
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 3)
-var Filter_Name *smithy.Schema
-
-var Filter_Values *smithy.Schema
-
-var Filter_Operator *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var Instance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "Instance",
-}, smithy.ShapeTypeStructure, 15)
-var Instance_AmiId *smithy.Schema
-
-var Instance_InstanceID *smithy.Schema
-
-var Instance_InstanceType *smithy.Schema
-
-var Instance_AccountID *smithy.Schema
-
-var Instance_Status *smithy.Schema
-
-var Instance_Region *smithy.Schema
-
-var Instance_UsageOperation *smithy.Schema
-
-var Instance_ProductCode *smithy.Schema
-
-var Instance_LastUpdatedTime *smithy.Schema
-
-var Instance_SubscriptionName *smithy.Schema
-
-var Instance_OsVersion *smithy.Schema
-
-var Instance_SubscriptionProviderCreateTime *smithy.Schema
-
-var Instance_SubscriptionProviderUpdateTime *smithy.Schema
-
-var Instance_DualSubscription *smithy.Schema
-
-var Instance_RegisteredWithSubscriptionProvider *smithy.Schema
-
-var _InstanceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "InstanceList",
-}, smithy.ShapeTypeList, 1)
-var _InstanceList_member *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"})
-var InternalServerException_message *smithy.Schema
-
-var _LinuxSubscriptionsDiscovery = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "LinuxSubscriptionsDiscovery",
-}, smithy.ShapeTypeString, 0)
-
-var LinuxSubscriptionsDiscoverySettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "LinuxSubscriptionsDiscoverySettings",
-}, smithy.ShapeTypeStructure, 2)
-var LinuxSubscriptionsDiscoverySettings_SourceRegions *smithy.Schema
-
-var LinuxSubscriptionsDiscoverySettings_OrganizationIntegration *smithy.Schema
-
-var _Operator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "Operator",
-}, smithy.ShapeTypeString, 0)
-
-var _OrganizationIntegration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "OrganizationIntegration",
-}, smithy.ShapeTypeString, 0)
-
-var _ProductCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ProductCodeList",
-}, smithy.ShapeTypeList, 1)
-var _ProductCodeList_member *smithy.Schema
-
-var RegisteredSubscriptionProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "RegisteredSubscriptionProvider",
-}, smithy.ShapeTypeStructure, 6)
-var RegisteredSubscriptionProvider_SubscriptionProviderArn *smithy.Schema
-
-var RegisteredSubscriptionProvider_SubscriptionProviderSource *smithy.Schema
-
-var RegisteredSubscriptionProvider_SecretArn *smithy.Schema
-
-var RegisteredSubscriptionProvider_SubscriptionProviderStatus *smithy.Schema
-
-var RegisteredSubscriptionProvider_SubscriptionProviderStatusMessage *smithy.Schema
-
-var RegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime *smithy.Schema
-
-var _RegisteredSubscriptionProviderList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "RegisteredSubscriptionProviderList",
-}, smithy.ShapeTypeList, 1)
-var _RegisteredSubscriptionProviderList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _SecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "SecretArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "Status",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var Subscription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "Subscription",
-}, smithy.ShapeTypeStructure, 3)
-var Subscription_Name *smithy.Schema
-
-var Subscription_Type *smithy.Schema
-
-var Subscription_InstanceCount *smithy.Schema
-
-var _SubscriptionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "SubscriptionList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionList_member *smithy.Schema
-
-var _SubscriptionProviderArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "SubscriptionProviderArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SubscriptionProviderSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "SubscriptionProviderSource",
-}, smithy.ShapeTypeString, 0)
-
-var _SubscriptionProviderSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "SubscriptionProviderSourceList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriptionProviderSourceList_member *smithy.Schema
-
-var _SubscriptionProviderStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "SubscriptionProviderStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _TagKeyList_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "Tags",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _Tags_key *smithy.Schema
-
-var _Tags_value *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ThrottlingException_message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"})
-var ValidationException_message *smithy.Schema
-
-var DeregisterSubscriptionProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "DeregisterSubscriptionProviderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeregisterSubscriptionProviderRequest_SubscriptionProviderArn *smithy.Schema
-
-var DeregisterSubscriptionProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "DeregisterSubscriptionProviderResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetRegisteredSubscriptionProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "GetRegisteredSubscriptionProviderRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetRegisteredSubscriptionProviderRequest_SubscriptionProviderArn *smithy.Schema
-
-var GetRegisteredSubscriptionProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "GetRegisteredSubscriptionProviderResponse",
-}, smithy.ShapeTypeStructure, 6)
-var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderArn *smithy.Schema
-
-var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderSource *smithy.Schema
-
-var GetRegisteredSubscriptionProviderResponse_SecretArn *smithy.Schema
-
-var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatus *smithy.Schema
-
-var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatusMessage *smithy.Schema
-
-var GetRegisteredSubscriptionProviderResponse_LastSuccessfulDataRetrievalTime *smithy.Schema
-
-var GetServiceSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "GetServiceSettingsRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetServiceSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "GetServiceSettingsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetServiceSettingsResponse_LinuxSubscriptionsDiscovery *smithy.Schema
-
-var GetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings *smithy.Schema
-
-var GetServiceSettingsResponse_Status *smithy.Schema
-
-var GetServiceSettingsResponse_StatusMessage *smithy.Schema
-
-var GetServiceSettingsResponse_HomeRegions *smithy.Schema
-
-var ListLinuxSubscriptionInstancesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListLinuxSubscriptionInstancesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLinuxSubscriptionInstancesRequest_Filters *smithy.Schema
-
-var ListLinuxSubscriptionInstancesRequest_MaxResults *smithy.Schema
-
-var ListLinuxSubscriptionInstancesRequest_NextToken *smithy.Schema
-
-var ListLinuxSubscriptionInstancesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListLinuxSubscriptionInstancesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinuxSubscriptionInstancesResponse_Instances *smithy.Schema
-
-var ListLinuxSubscriptionInstancesResponse_NextToken *smithy.Schema
-
-var ListLinuxSubscriptionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListLinuxSubscriptionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListLinuxSubscriptionsRequest_Filters *smithy.Schema
-
-var ListLinuxSubscriptionsRequest_MaxResults *smithy.Schema
-
-var ListLinuxSubscriptionsRequest_NextToken *smithy.Schema
-
-var ListLinuxSubscriptionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListLinuxSubscriptionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinuxSubscriptionsResponse_Subscriptions *smithy.Schema
-
-var ListLinuxSubscriptionsResponse_NextToken *smithy.Schema
-
-var ListRegisteredSubscriptionProvidersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListRegisteredSubscriptionProvidersRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources *smithy.Schema
-
-var ListRegisteredSubscriptionProvidersRequest_MaxResults *smithy.Schema
-
-var ListRegisteredSubscriptionProvidersRequest_NextToken *smithy.Schema
-
-var ListRegisteredSubscriptionProvidersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListRegisteredSubscriptionProvidersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders *smithy.Schema
-
-var ListRegisteredSubscriptionProvidersResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RegisterSubscriptionProviderRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "RegisterSubscriptionProviderRequest",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterSubscriptionProviderRequest_SubscriptionProviderSource *smithy.Schema
-
-var RegisterSubscriptionProviderRequest_SecretArn *smithy.Schema
-
-var RegisterSubscriptionProviderRequest_Tags *smithy.Schema
-
-var RegisterSubscriptionProviderResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "RegisterSubscriptionProviderResponse",
-}, smithy.ShapeTypeStructure, 3)
-var RegisterSubscriptionProviderResponse_SubscriptionProviderSource *smithy.Schema
-
-var RegisterSubscriptionProviderResponse_SubscriptionProviderArn *smithy.Schema
-
-var RegisterSubscriptionProviderResponse_SubscriptionProviderStatus *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateServiceSettingsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "UpdateServiceSettingsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery *smithy.Schema
-
-var UpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings *smithy.Schema
-
-var UpdateServiceSettingsRequest_AllowUpdate *smithy.Schema
-
-var UpdateServiceSettingsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.licensemanagerlinuxsubscriptions",
-	Name:      "UpdateServiceSettingsResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery *smithy.Schema
-
-var UpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings *smithy.Schema
-
-var UpdateServiceSettingsResponse_Status *smithy.Schema
-
-var UpdateServiceSettingsResponse_StatusMessage *smithy.Schema
-
-var UpdateServiceSettingsResponse_HomeRegions *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	Filter_Name = Filter.AddMember("Name", smithyprelude.String)
-
-	Filter_Values = Filter.AddMember("Values", _StringList)
-
-	Filter_Operator = Filter.AddMember("Operator", _Operator)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	_ProductCodeList_member = _ProductCodeList.AddMember("member", smithyprelude.String)
-
-	Instance_AmiId = Instance.AddMember("AmiId", smithyprelude.String)
-
-	Instance_InstanceID = Instance.AddMember("InstanceID", smithyprelude.String)
-
-	Instance_InstanceType = Instance.AddMember("InstanceType", smithyprelude.String)
-
-	Instance_AccountID = Instance.AddMember("AccountID", smithyprelude.String)
-
-	Instance_Status = Instance.AddMember("Status", smithyprelude.String)
-
-	Instance_Region = Instance.AddMember("Region", smithyprelude.String)
-
-	Instance_UsageOperation = Instance.AddMember("UsageOperation", smithyprelude.String)
-
-	Instance_ProductCode = Instance.AddMember("ProductCode", _ProductCodeList)
-
-	Instance_LastUpdatedTime = Instance.AddMember("LastUpdatedTime", smithyprelude.String)
-
-	Instance_SubscriptionName = Instance.AddMember("SubscriptionName", smithyprelude.String)
-
-	Instance_OsVersion = Instance.AddMember("OsVersion", smithyprelude.String)
-
-	Instance_SubscriptionProviderCreateTime = Instance.AddMember("SubscriptionProviderCreateTime", smithyprelude.String)
-
-	Instance_SubscriptionProviderUpdateTime = Instance.AddMember("SubscriptionProviderUpdateTime", smithyprelude.String)
-
-	Instance_DualSubscription = Instance.AddMember("DualSubscription", smithyprelude.String)
-
-	Instance_RegisteredWithSubscriptionProvider = Instance.AddMember("RegisteredWithSubscriptionProvider", smithyprelude.String)
-
-	_InstanceList_member = _InstanceList.AddMember("member", Instance)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	LinuxSubscriptionsDiscoverySettings_SourceRegions = LinuxSubscriptionsDiscoverySettings.AddMember("SourceRegions", _StringList)
-
-	LinuxSubscriptionsDiscoverySettings_OrganizationIntegration = LinuxSubscriptionsDiscoverySettings.AddMember("OrganizationIntegration", _OrganizationIntegration)
-
-	RegisteredSubscriptionProvider_SubscriptionProviderArn = RegisteredSubscriptionProvider.AddMember("SubscriptionProviderArn", _SubscriptionProviderArn)
-
-	RegisteredSubscriptionProvider_SubscriptionProviderSource = RegisteredSubscriptionProvider.AddMember("SubscriptionProviderSource", _SubscriptionProviderSource)
-
-	RegisteredSubscriptionProvider_SecretArn = RegisteredSubscriptionProvider.AddMember("SecretArn", _SecretArn)
-
-	RegisteredSubscriptionProvider_SubscriptionProviderStatus = RegisteredSubscriptionProvider.AddMember("SubscriptionProviderStatus", _SubscriptionProviderStatus)
-
-	RegisteredSubscriptionProvider_SubscriptionProviderStatusMessage = RegisteredSubscriptionProvider.AddMember("SubscriptionProviderStatusMessage", smithyprelude.String)
-
-	RegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime = RegisteredSubscriptionProvider.AddMember("LastSuccessfulDataRetrievalTime", smithyprelude.String)
-
-	_RegisteredSubscriptionProviderList_member = _RegisteredSubscriptionProviderList.AddMember("member", RegisteredSubscriptionProvider)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	_StringMap_key = _StringMap.AddMember("key", smithyprelude.String)
-
-	_StringMap_value = _StringMap.AddMember("value", smithyprelude.String)
-
-	Subscription_Name = Subscription.AddMember("Name", smithyprelude.String)
-
-	Subscription_Type = Subscription.AddMember("Type", smithyprelude.String)
-
-	Subscription_InstanceCount = Subscription.AddMember("InstanceCount", _BoxLong)
-
-	_SubscriptionList_member = _SubscriptionList.AddMember("member", Subscription)
-
-	_SubscriptionProviderSourceList_member = _SubscriptionProviderSourceList.AddMember("member", _SubscriptionProviderSource)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", smithyprelude.String)
-
-	_Tags_key = _Tags.AddMember("key", smithyprelude.String)
-
-	_Tags_value = _Tags.AddMember("value", smithyprelude.String)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	DeregisterSubscriptionProviderRequest_SubscriptionProviderArn = DeregisterSubscriptionProviderRequest.AddMember("SubscriptionProviderArn", _SubscriptionProviderArn)
-
-	GetRegisteredSubscriptionProviderRequest_SubscriptionProviderArn = GetRegisteredSubscriptionProviderRequest.AddMember("SubscriptionProviderArn", _SubscriptionProviderArn)
-
-	GetRegisteredSubscriptionProviderResponse_SubscriptionProviderArn = GetRegisteredSubscriptionProviderResponse.AddMember("SubscriptionProviderArn", _SubscriptionProviderArn)
-
-	GetRegisteredSubscriptionProviderResponse_SubscriptionProviderSource = GetRegisteredSubscriptionProviderResponse.AddMember("SubscriptionProviderSource", _SubscriptionProviderSource)
-
-	GetRegisteredSubscriptionProviderResponse_SecretArn = GetRegisteredSubscriptionProviderResponse.AddMember("SecretArn", _SecretArn)
-
-	GetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatus = GetRegisteredSubscriptionProviderResponse.AddMember("SubscriptionProviderStatus", _SubscriptionProviderStatus)
-
-	GetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatusMessage = GetRegisteredSubscriptionProviderResponse.AddMember("SubscriptionProviderStatusMessage", smithyprelude.String)
-
-	GetRegisteredSubscriptionProviderResponse_LastSuccessfulDataRetrievalTime = GetRegisteredSubscriptionProviderResponse.AddMember("LastSuccessfulDataRetrievalTime", smithyprelude.String)
-
-	GetServiceSettingsResponse_LinuxSubscriptionsDiscovery = GetServiceSettingsResponse.AddMember("LinuxSubscriptionsDiscovery", _LinuxSubscriptionsDiscovery)
-
-	GetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings = GetServiceSettingsResponse.AddMember("LinuxSubscriptionsDiscoverySettings", LinuxSubscriptionsDiscoverySettings)
-
-	GetServiceSettingsResponse_Status = GetServiceSettingsResponse.AddMember("Status", _Status)
-
-	GetServiceSettingsResponse_StatusMessage = GetServiceSettingsResponse.AddMember("StatusMessage", _StringMap)
-
-	GetServiceSettingsResponse_HomeRegions = GetServiceSettingsResponse.AddMember("HomeRegions", _StringList)
-
-	ListLinuxSubscriptionInstancesRequest_Filters = ListLinuxSubscriptionInstancesRequest.AddMember("Filters", _FilterList)
-
-	ListLinuxSubscriptionInstancesRequest_MaxResults = ListLinuxSubscriptionInstancesRequest.AddMember("MaxResults", _BoxInteger)
-
-	ListLinuxSubscriptionInstancesRequest_NextToken = ListLinuxSubscriptionInstancesRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListLinuxSubscriptionInstancesResponse_Instances = ListLinuxSubscriptionInstancesResponse.AddMember("Instances", _InstanceList)
-
-	ListLinuxSubscriptionInstancesResponse_NextToken = ListLinuxSubscriptionInstancesResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListLinuxSubscriptionsRequest_Filters = ListLinuxSubscriptionsRequest.AddMember("Filters", _FilterList)
-
-	ListLinuxSubscriptionsRequest_MaxResults = ListLinuxSubscriptionsRequest.AddMember("MaxResults", _BoxInteger)
-
-	ListLinuxSubscriptionsRequest_NextToken = ListLinuxSubscriptionsRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListLinuxSubscriptionsResponse_Subscriptions = ListLinuxSubscriptionsResponse.AddMember("Subscriptions", _SubscriptionList)
-
-	ListLinuxSubscriptionsResponse_NextToken = ListLinuxSubscriptionsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources = ListRegisteredSubscriptionProvidersRequest.AddMember("SubscriptionProviderSources", _SubscriptionProviderSourceList)
-
-	ListRegisteredSubscriptionProvidersRequest_MaxResults = ListRegisteredSubscriptionProvidersRequest.AddMember("MaxResults", _BoxInteger)
-
-	ListRegisteredSubscriptionProvidersRequest_NextToken = ListRegisteredSubscriptionProvidersRequest.AddMember("NextToken", smithyprelude.String)
-
-	ListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders = ListRegisteredSubscriptionProvidersResponse.AddMember("RegisteredSubscriptionProviders", _RegisteredSubscriptionProviderList)
-
-	ListRegisteredSubscriptionProvidersResponse_NextToken = ListRegisteredSubscriptionProvidersResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _SubscriptionProviderArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _Tags)
-
-	RegisterSubscriptionProviderRequest_SubscriptionProviderSource = RegisterSubscriptionProviderRequest.AddMember("SubscriptionProviderSource", _SubscriptionProviderSource)
-
-	RegisterSubscriptionProviderRequest_SecretArn = RegisterSubscriptionProviderRequest.AddMember("SecretArn", _SecretArn)
-
-	RegisterSubscriptionProviderRequest_Tags = RegisterSubscriptionProviderRequest.AddMember("Tags", _Tags)
-
-	RegisterSubscriptionProviderResponse_SubscriptionProviderSource = RegisterSubscriptionProviderResponse.AddMember("SubscriptionProviderSource", _SubscriptionProviderSource)
-
-	RegisterSubscriptionProviderResponse_SubscriptionProviderArn = RegisterSubscriptionProviderResponse.AddMember("SubscriptionProviderArn", smithyprelude.String)
-
-	RegisterSubscriptionProviderResponse_SubscriptionProviderStatus = RegisterSubscriptionProviderResponse.AddMember("SubscriptionProviderStatus", _SubscriptionProviderStatus)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _SubscriptionProviderArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _Tags)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _SubscriptionProviderArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery = UpdateServiceSettingsRequest.AddMember("LinuxSubscriptionsDiscovery", _LinuxSubscriptionsDiscovery)
-
-	UpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings = UpdateServiceSettingsRequest.AddMember("LinuxSubscriptionsDiscoverySettings", LinuxSubscriptionsDiscoverySettings)
-
-	UpdateServiceSettingsRequest_AllowUpdate = UpdateServiceSettingsRequest.AddMember("AllowUpdate", smithyprelude.Boolean)
-
-	UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery = UpdateServiceSettingsResponse.AddMember("LinuxSubscriptionsDiscovery", _LinuxSubscriptionsDiscovery)
-
-	UpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings = UpdateServiceSettingsResponse.AddMember("LinuxSubscriptionsDiscoverySettings", LinuxSubscriptionsDiscoverySettings)
-
-	UpdateServiceSettingsResponse_Status = UpdateServiceSettingsResponse.AddMember("Status", _Status)
-
-	UpdateServiceSettingsResponse_StatusMessage = UpdateServiceSettingsResponse.AddMember("StatusMessage", _StringMap)
-
-	UpdateServiceSettingsResponse_HomeRegions = UpdateServiceSettingsResponse.AddMember("HomeRegions", _StringList)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}}
+var t12 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x10}
+
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Name, &sFilter_Values, &sFilter_Operator}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mInstance = smithy.SchemaMembers{List: []*smithy.Schema{&sInstance_AmiId, &sInstance_InstanceID, &sInstance_InstanceType, &sInstance_AccountID, &sInstance_Status, &sInstance_Region, &sInstance_UsageOperation, &sInstance_ProductCode, &sInstance_LastUpdatedTime, &sInstance_SubscriptionName, &sInstance_OsVersion, &sInstance_SubscriptionProviderCreateTime, &sInstance_SubscriptionProviderUpdateTime, &sInstance_DualSubscription, &sInstance_RegisteredWithSubscriptionProvider}, Seed: 60, Slots: []uint16{
+	10, 3, 0, 1, 0, 9, 2, 0, 0, 12, 6, 0, 5, 0, 7, 0, 0, 14, 0, 13, 8, 11, 15, 0,
+	0, 0, 0, 0, 4, 0, 0, 0,
+}}
+var m_InstanceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstanceList_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLinuxSubscriptionsDiscoverySettings = smithy.SchemaMembers{List: []*smithy.Schema{&sLinuxSubscriptionsDiscoverySettings_SourceRegions, &sLinuxSubscriptionsDiscoverySettings_OrganizationIntegration}}
+var m_ProductCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ProductCodeList_member}}
+var mRegisteredSubscriptionProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisteredSubscriptionProvider_SubscriptionProviderArn, &sRegisteredSubscriptionProvider_SubscriptionProviderSource, &sRegisteredSubscriptionProvider_SecretArn, &sRegisteredSubscriptionProvider_SubscriptionProviderStatus, &sRegisteredSubscriptionProvider_SubscriptionProviderStatusMessage, &sRegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime}}
+var m_RegisteredSubscriptionProviderList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RegisteredSubscriptionProviderList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_StringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringMap_key, &s_StringMap_value}}
+var mSubscription = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscription_Name, &sSubscription_Type, &sSubscription_InstanceCount}}
+var m_SubscriptionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriptionList_member}}
+var m_SubscriptionProviderSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriptionProviderSourceList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_key, &s_Tags_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mDeregisterSubscriptionProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeregisterSubscriptionProviderRequest_SubscriptionProviderArn}}
+var mGetRegisteredSubscriptionProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRegisteredSubscriptionProviderRequest_SubscriptionProviderArn}}
+var mGetRegisteredSubscriptionProviderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderArn, &sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderSource, &sGetRegisteredSubscriptionProviderResponse_SecretArn, &sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatus, &sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatusMessage, &sGetRegisteredSubscriptionProviderResponse_LastSuccessfulDataRetrievalTime}}
+var mGetServiceSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceSettingsResponse_LinuxSubscriptionsDiscovery, &sGetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings, &sGetServiceSettingsResponse_Status, &sGetServiceSettingsResponse_StatusMessage, &sGetServiceSettingsResponse_HomeRegions}}
+var mListLinuxSubscriptionInstancesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinuxSubscriptionInstancesRequest_Filters, &sListLinuxSubscriptionInstancesRequest_MaxResults, &sListLinuxSubscriptionInstancesRequest_NextToken}}
+var mListLinuxSubscriptionInstancesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinuxSubscriptionInstancesResponse_Instances, &sListLinuxSubscriptionInstancesResponse_NextToken}}
+var mListLinuxSubscriptionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinuxSubscriptionsRequest_Filters, &sListLinuxSubscriptionsRequest_MaxResults, &sListLinuxSubscriptionsRequest_NextToken}}
+var mListLinuxSubscriptionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinuxSubscriptionsResponse_Subscriptions, &sListLinuxSubscriptionsResponse_NextToken}}
+var mListRegisteredSubscriptionProvidersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources, &sListRegisteredSubscriptionProvidersRequest_MaxResults, &sListRegisteredSubscriptionProvidersRequest_NextToken}}
+var mListRegisteredSubscriptionProvidersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders, &sListRegisteredSubscriptionProvidersResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRegisterSubscriptionProviderRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterSubscriptionProviderRequest_SubscriptionProviderSource, &sRegisterSubscriptionProviderRequest_SecretArn, &sRegisterSubscriptionProviderRequest_Tags}}
+var mRegisterSubscriptionProviderResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRegisterSubscriptionProviderResponse_SubscriptionProviderSource, &sRegisterSubscriptionProviderResponse_SubscriptionProviderArn, &sRegisterSubscriptionProviderResponse_SubscriptionProviderStatus}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateServiceSettingsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery, &sUpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings, &sUpdateServiceSettingsRequest_AllowUpdate}}
+var mUpdateServiceSettingsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery, &sUpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings, &sUpdateServiceSettingsResponse_Status, &sUpdateServiceSettingsResponse_StatusMessage, &sUpdateServiceSettingsResponse_HomeRegions}}
+
+var sDeregisterSubscriptionProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterSubscriptionProvider, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetRegisteredSubscriptionProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegisteredSubscriptionProvider, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sGetServiceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSettings, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sListLinuxSubscriptionInstances = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinuxSubscriptionInstances, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sListLinuxSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinuxSubscriptions, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sListRegisteredSubscriptionProviders = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegisteredSubscriptionProviders, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sRegisterSubscriptionProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterSubscriptionProvider, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSettings, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var s_LicenseManagerLinuxSubscriptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LicenseManagerLinuxSubscriptions, Type: smithy.ShapeTypeService})
+var s_BoxInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxInteger, Type: smithy.ShapeTypeInteger})
+var s_BoxLong = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BoxLong, Type: smithy.ShapeTypeLong})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sInstance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure})
+var s_InstanceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t11, Type: smithy.ShapeTypeStructure})
+var s_LinuxSubscriptionsDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinuxSubscriptionsDiscovery, Type: smithy.ShapeTypeString})
+var sLinuxSubscriptionsDiscoverySettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinuxSubscriptionsDiscoverySettings, Members: &mLinuxSubscriptionsDiscoverySettings, Type: smithy.ShapeTypeStructure})
+var s_Operator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Operator, Type: smithy.ShapeTypeString})
+var s_OrganizationIntegration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OrganizationIntegration, Type: smithy.ShapeTypeString})
+var s_ProductCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ProductCodeList, Members: &m_ProductCodeList, Type: smithy.ShapeTypeList})
+var sRegisteredSubscriptionProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisteredSubscriptionProvider, Members: &mRegisteredSubscriptionProvider, Type: smithy.ShapeTypeStructure})
+var s_RegisteredSubscriptionProviderList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegisteredSubscriptionProviderList, Members: &m_RegisteredSubscriptionProviderList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var s_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SecretArn, Type: smithy.ShapeTypeString})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sSubscription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscription, Members: &mSubscription, Type: smithy.ShapeTypeStructure})
+var s_SubscriptionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionList, Members: &m_SubscriptionList, Type: smithy.ShapeTypeList})
+var s_SubscriptionProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionProviderArn, Type: smithy.ShapeTypeString})
+var s_SubscriptionProviderSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionProviderSource, Type: smithy.ShapeTypeString})
+var s_SubscriptionProviderSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionProviderSourceList, Members: &m_SubscriptionProviderSourceList, Type: smithy.ShapeTypeList})
+var s_SubscriptionProviderStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriptionProviderStatus, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t13, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Traits: &t13, Type: smithy.ShapeTypeMap})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t12, Type: smithy.ShapeTypeStructure})
+var sDeregisterSubscriptionProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterSubscriptionProviderRequest, Members: &mDeregisterSubscriptionProviderRequest, Type: smithy.ShapeTypeStructure})
+var sDeregisterSubscriptionProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeregisterSubscriptionProviderResponse, Type: smithy.ShapeTypeStructure})
+var sGetRegisteredSubscriptionProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegisteredSubscriptionProviderRequest, Members: &mGetRegisteredSubscriptionProviderRequest, Type: smithy.ShapeTypeStructure})
+var sGetRegisteredSubscriptionProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetRegisteredSubscriptionProviderResponse, Members: &mGetRegisteredSubscriptionProviderResponse, Type: smithy.ShapeTypeStructure})
+var sGetServiceSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sGetServiceSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSettingsResponse, Members: &mGetServiceSettingsResponse, Type: smithy.ShapeTypeStructure})
+var sListLinuxSubscriptionInstancesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinuxSubscriptionInstancesRequest, Members: &mListLinuxSubscriptionInstancesRequest, Type: smithy.ShapeTypeStructure})
+var sListLinuxSubscriptionInstancesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinuxSubscriptionInstancesResponse, Members: &mListLinuxSubscriptionInstancesResponse, Type: smithy.ShapeTypeStructure})
+var sListLinuxSubscriptionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinuxSubscriptionsRequest, Members: &mListLinuxSubscriptionsRequest, Type: smithy.ShapeTypeStructure})
+var sListLinuxSubscriptionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinuxSubscriptionsResponse, Members: &mListLinuxSubscriptionsResponse, Type: smithy.ShapeTypeStructure})
+var sListRegisteredSubscriptionProvidersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegisteredSubscriptionProvidersRequest, Members: &mListRegisteredSubscriptionProvidersRequest, Type: smithy.ShapeTypeStructure})
+var sListRegisteredSubscriptionProvidersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListRegisteredSubscriptionProvidersResponse, Members: &mListRegisteredSubscriptionProvidersResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRegisterSubscriptionProviderRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterSubscriptionProviderRequest, Members: &mRegisterSubscriptionProviderRequest, Type: smithy.ShapeTypeStructure})
+var sRegisterSubscriptionProviderResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegisterSubscriptionProviderResponse, Members: &mRegisterSubscriptionProviderResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSettingsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSettingsRequest, Members: &mUpdateServiceSettingsRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSettingsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSettingsResponse, Members: &mUpdateServiceSettingsResponse, Type: smithy.ShapeTypeStructure})
+
+var sFilter_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sFilter_Operator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Operator", ID: &i_Operator, Type: smithy.ShapeTypeString})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sInstance_AmiId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmiId", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_InstanceID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceID", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_InstanceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_AccountID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AccountID", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_UsageOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UsageOperation", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_ProductCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProductCode", ID: &i_ProductCodeList, Members: &m_ProductCodeList, Type: smithy.ShapeTypeList})
+var sInstance_LastUpdatedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_SubscriptionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionName", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_OsVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OsVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_SubscriptionProviderCreateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderCreateTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_SubscriptionProviderUpdateTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderUpdateTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_DualSubscription = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DualSubscription", ID: &pString, Type: smithy.ShapeTypeString})
+var sInstance_RegisteredWithSubscriptionProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredWithSubscriptionProvider", ID: &pString, Type: smithy.ShapeTypeString})
+var s_InstanceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstance, Members: &mInstance, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sLinuxSubscriptionsDiscoverySettings_SourceRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceRegions", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sLinuxSubscriptionsDiscoverySettings_OrganizationIntegration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OrganizationIntegration", ID: &i_OrganizationIntegration, Type: smithy.ShapeTypeString})
+var s_ProductCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegisteredSubscriptionProvider_SubscriptionProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderArn", ID: &i_SubscriptionProviderArn, Type: smithy.ShapeTypeString})
+var sRegisteredSubscriptionProvider_SubscriptionProviderSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderSource", ID: &i_SubscriptionProviderSource, Type: smithy.ShapeTypeString})
+var sRegisteredSubscriptionProvider_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString})
+var sRegisteredSubscriptionProvider_SubscriptionProviderStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderStatus", ID: &i_SubscriptionProviderStatus, Type: smithy.ShapeTypeString})
+var sRegisteredSubscriptionProvider_SubscriptionProviderStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderStatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSuccessfulDataRetrievalTime", ID: &pString, Type: smithy.ShapeTypeString})
+var s_RegisteredSubscriptionProviderList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegisteredSubscriptionProvider, Members: &mRegisteredSubscriptionProvider, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscription_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscription_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sSubscription_InstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InstanceCount", ID: &i_BoxLong, Type: smithy.ShapeTypeLong})
+var s_SubscriptionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscription, Members: &mSubscription, Type: smithy.ShapeTypeStructure})
+var s_SubscriptionProviderSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SubscriptionProviderSource, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Tags_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Tags_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeregisterSubscriptionProviderRequest_SubscriptionProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderArn", ID: &i_SubscriptionProviderArn, Type: smithy.ShapeTypeString})
+var sGetRegisteredSubscriptionProviderRequest_SubscriptionProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderArn", ID: &i_SubscriptionProviderArn, Type: smithy.ShapeTypeString})
+var sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderArn", ID: &i_SubscriptionProviderArn, Type: smithy.ShapeTypeString})
+var sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderSource", ID: &i_SubscriptionProviderSource, Type: smithy.ShapeTypeString})
+var sGetRegisteredSubscriptionProviderResponse_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString})
+var sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderStatus", ID: &i_SubscriptionProviderStatus, Type: smithy.ShapeTypeString})
+var sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderStatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetRegisteredSubscriptionProviderResponse_LastSuccessfulDataRetrievalTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastSuccessfulDataRetrievalTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetServiceSettingsResponse_LinuxSubscriptionsDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinuxSubscriptionsDiscovery", ID: &i_LinuxSubscriptionsDiscovery, Type: smithy.ShapeTypeString})
+var sGetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinuxSubscriptionsDiscoverySettings", ID: &iLinuxSubscriptionsDiscoverySettings, Members: &mLinuxSubscriptionsDiscoverySettings, Type: smithy.ShapeTypeStructure})
+var sGetServiceSettingsResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sGetServiceSettingsResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sGetServiceSettingsResponse_HomeRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegions", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sListLinuxSubscriptionInstancesRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sListLinuxSubscriptionInstancesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_BoxInteger, Type: smithy.ShapeTypeInteger})
+var sListLinuxSubscriptionInstancesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLinuxSubscriptionInstancesResponse_Instances = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Instances", ID: &i_InstanceList, Members: &m_InstanceList, Type: smithy.ShapeTypeList})
+var sListLinuxSubscriptionInstancesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLinuxSubscriptionsRequest_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sListLinuxSubscriptionsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_BoxInteger, Type: smithy.ShapeTypeInteger})
+var sListLinuxSubscriptionsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLinuxSubscriptionsResponse_Subscriptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscriptions", ID: &i_SubscriptionList, Members: &m_SubscriptionList, Type: smithy.ShapeTypeList})
+var sListLinuxSubscriptionsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderSources", ID: &i_SubscriptionProviderSourceList, Members: &m_SubscriptionProviderSourceList, Type: smithy.ShapeTypeList})
+var sListRegisteredSubscriptionProvidersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_BoxInteger, Type: smithy.ShapeTypeInteger})
+var sListRegisteredSubscriptionProvidersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegisteredSubscriptionProviders", ID: &i_RegisteredSubscriptionProviderList, Members: &m_RegisteredSubscriptionProviderList, Type: smithy.ShapeTypeList})
+var sListRegisteredSubscriptionProvidersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_SubscriptionProviderArn, Traits: &t14, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Traits: &t15, Type: smithy.ShapeTypeMap})
+var sRegisterSubscriptionProviderRequest_SubscriptionProviderSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderSource", ID: &i_SubscriptionProviderSource, Type: smithy.ShapeTypeString})
+var sRegisterSubscriptionProviderRequest_SecretArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretArn", ID: &i_SecretArn, Type: smithy.ShapeTypeString})
+var sRegisterSubscriptionProviderRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t15, Type: smithy.ShapeTypeMap})
+var sRegisterSubscriptionProviderResponse_SubscriptionProviderSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderSource", ID: &i_SubscriptionProviderSource, Type: smithy.ShapeTypeString})
+var sRegisterSubscriptionProviderResponse_SubscriptionProviderArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegisterSubscriptionProviderResponse_SubscriptionProviderStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriptionProviderStatus", ID: &i_SubscriptionProviderStatus, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_SubscriptionProviderArn, Traits: &t14, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_Tags, Members: &m_Tags, Traits: &t15, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_SubscriptionProviderArn, Traits: &t14, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t16, Type: smithy.ShapeTypeList})
+var sUpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinuxSubscriptionsDiscovery", ID: &i_LinuxSubscriptionsDiscovery, Type: smithy.ShapeTypeString})
+var sUpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinuxSubscriptionsDiscoverySettings", ID: &iLinuxSubscriptionsDiscoverySettings, Members: &mLinuxSubscriptionsDiscoverySettings, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSettingsRequest_AllowUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AllowUpdate", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sUpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinuxSubscriptionsDiscovery", ID: &i_LinuxSubscriptionsDiscovery, Type: smithy.ShapeTypeString})
+var sUpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LinuxSubscriptionsDiscoverySettings", ID: &iLinuxSubscriptionsDiscoverySettings, Members: &mLinuxSubscriptionsDiscoverySettings, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSettingsResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sUpdateServiceSettingsResponse_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sUpdateServiceSettingsResponse_HomeRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HomeRegions", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+
+var DeregisterSubscriptionProvider = &sDeregisterSubscriptionProvider
+
+var GetRegisteredSubscriptionProvider = &sGetRegisteredSubscriptionProvider
+
+var GetServiceSettings = &sGetServiceSettings
+
+var ListLinuxSubscriptionInstances = &sListLinuxSubscriptionInstances
+
+var ListLinuxSubscriptions = &sListLinuxSubscriptions
+
+var ListRegisteredSubscriptionProviders = &sListRegisteredSubscriptionProviders
+
+var ListTagsForResource = &sListTagsForResource
+
+var RegisterSubscriptionProvider = &sRegisterSubscriptionProvider
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateServiceSettings = &sUpdateServiceSettings
+
+var _LicenseManagerLinuxSubscriptions = &s_LicenseManagerLinuxSubscriptions
+
+var _BoxInteger = &s_BoxInteger
+
+var _BoxLong = &s_BoxLong
+
+var Filter = &sFilter
+var Filter_Name = &sFilter_Name
+var Filter_Values = &sFilter_Values
+var Filter_Operator = &sFilter_Operator
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var Instance = &sInstance
+var Instance_AmiId = &sInstance_AmiId
+var Instance_InstanceID = &sInstance_InstanceID
+var Instance_InstanceType = &sInstance_InstanceType
+var Instance_AccountID = &sInstance_AccountID
+var Instance_Status = &sInstance_Status
+var Instance_Region = &sInstance_Region
+var Instance_UsageOperation = &sInstance_UsageOperation
+var Instance_ProductCode = &sInstance_ProductCode
+var Instance_LastUpdatedTime = &sInstance_LastUpdatedTime
+var Instance_SubscriptionName = &sInstance_SubscriptionName
+var Instance_OsVersion = &sInstance_OsVersion
+var Instance_SubscriptionProviderCreateTime = &sInstance_SubscriptionProviderCreateTime
+var Instance_SubscriptionProviderUpdateTime = &sInstance_SubscriptionProviderUpdateTime
+var Instance_DualSubscription = &sInstance_DualSubscription
+var Instance_RegisteredWithSubscriptionProvider = &sInstance_RegisteredWithSubscriptionProvider
+
+var _InstanceList = &s_InstanceList
+var _InstanceList_member = &s_InstanceList_member
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _LinuxSubscriptionsDiscovery = &s_LinuxSubscriptionsDiscovery
+
+var LinuxSubscriptionsDiscoverySettings = &sLinuxSubscriptionsDiscoverySettings
+var LinuxSubscriptionsDiscoverySettings_SourceRegions = &sLinuxSubscriptionsDiscoverySettings_SourceRegions
+var LinuxSubscriptionsDiscoverySettings_OrganizationIntegration = &sLinuxSubscriptionsDiscoverySettings_OrganizationIntegration
+
+var _Operator = &s_Operator
+
+var _OrganizationIntegration = &s_OrganizationIntegration
+
+var _ProductCodeList = &s_ProductCodeList
+var _ProductCodeList_member = &s_ProductCodeList_member
+
+var RegisteredSubscriptionProvider = &sRegisteredSubscriptionProvider
+var RegisteredSubscriptionProvider_SubscriptionProviderArn = &sRegisteredSubscriptionProvider_SubscriptionProviderArn
+var RegisteredSubscriptionProvider_SubscriptionProviderSource = &sRegisteredSubscriptionProvider_SubscriptionProviderSource
+var RegisteredSubscriptionProvider_SecretArn = &sRegisteredSubscriptionProvider_SecretArn
+var RegisteredSubscriptionProvider_SubscriptionProviderStatus = &sRegisteredSubscriptionProvider_SubscriptionProviderStatus
+var RegisteredSubscriptionProvider_SubscriptionProviderStatusMessage = &sRegisteredSubscriptionProvider_SubscriptionProviderStatusMessage
+var RegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime = &sRegisteredSubscriptionProvider_LastSuccessfulDataRetrievalTime
+
+var _RegisteredSubscriptionProviderList = &s_RegisteredSubscriptionProviderList
+var _RegisteredSubscriptionProviderList_member = &s_RegisteredSubscriptionProviderList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _SecretArn = &s_SecretArn
+
+var _Status = &s_Status
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _StringMap = &s_StringMap
+var _StringMap_key = &s_StringMap_key
+var _StringMap_value = &s_StringMap_value
+
+var Subscription = &sSubscription
+var Subscription_Name = &sSubscription_Name
+var Subscription_Type = &sSubscription_Type
+var Subscription_InstanceCount = &sSubscription_InstanceCount
+
+var _SubscriptionList = &s_SubscriptionList
+var _SubscriptionList_member = &s_SubscriptionList_member
+
+var _SubscriptionProviderArn = &s_SubscriptionProviderArn
+
+var _SubscriptionProviderSource = &s_SubscriptionProviderSource
+
+var _SubscriptionProviderSourceList = &s_SubscriptionProviderSourceList
+var _SubscriptionProviderSourceList_member = &s_SubscriptionProviderSourceList_member
+
+var _SubscriptionProviderStatus = &s_SubscriptionProviderStatus
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _Tags = &s_Tags
+var _Tags_key = &s_Tags_key
+var _Tags_value = &s_Tags_value
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var DeregisterSubscriptionProviderRequest = &sDeregisterSubscriptionProviderRequest
+var DeregisterSubscriptionProviderRequest_SubscriptionProviderArn = &sDeregisterSubscriptionProviderRequest_SubscriptionProviderArn
+
+var DeregisterSubscriptionProviderResponse = &sDeregisterSubscriptionProviderResponse
+
+var GetRegisteredSubscriptionProviderRequest = &sGetRegisteredSubscriptionProviderRequest
+var GetRegisteredSubscriptionProviderRequest_SubscriptionProviderArn = &sGetRegisteredSubscriptionProviderRequest_SubscriptionProviderArn
+
+var GetRegisteredSubscriptionProviderResponse = &sGetRegisteredSubscriptionProviderResponse
+var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderArn = &sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderArn
+var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderSource = &sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderSource
+var GetRegisteredSubscriptionProviderResponse_SecretArn = &sGetRegisteredSubscriptionProviderResponse_SecretArn
+var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatus = &sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatus
+var GetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatusMessage = &sGetRegisteredSubscriptionProviderResponse_SubscriptionProviderStatusMessage
+var GetRegisteredSubscriptionProviderResponse_LastSuccessfulDataRetrievalTime = &sGetRegisteredSubscriptionProviderResponse_LastSuccessfulDataRetrievalTime
+
+var GetServiceSettingsRequest = &sGetServiceSettingsRequest
+
+var GetServiceSettingsResponse = &sGetServiceSettingsResponse
+var GetServiceSettingsResponse_LinuxSubscriptionsDiscovery = &sGetServiceSettingsResponse_LinuxSubscriptionsDiscovery
+var GetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings = &sGetServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings
+var GetServiceSettingsResponse_Status = &sGetServiceSettingsResponse_Status
+var GetServiceSettingsResponse_StatusMessage = &sGetServiceSettingsResponse_StatusMessage
+var GetServiceSettingsResponse_HomeRegions = &sGetServiceSettingsResponse_HomeRegions
+
+var ListLinuxSubscriptionInstancesRequest = &sListLinuxSubscriptionInstancesRequest
+var ListLinuxSubscriptionInstancesRequest_Filters = &sListLinuxSubscriptionInstancesRequest_Filters
+var ListLinuxSubscriptionInstancesRequest_MaxResults = &sListLinuxSubscriptionInstancesRequest_MaxResults
+var ListLinuxSubscriptionInstancesRequest_NextToken = &sListLinuxSubscriptionInstancesRequest_NextToken
+
+var ListLinuxSubscriptionInstancesResponse = &sListLinuxSubscriptionInstancesResponse
+var ListLinuxSubscriptionInstancesResponse_Instances = &sListLinuxSubscriptionInstancesResponse_Instances
+var ListLinuxSubscriptionInstancesResponse_NextToken = &sListLinuxSubscriptionInstancesResponse_NextToken
+
+var ListLinuxSubscriptionsRequest = &sListLinuxSubscriptionsRequest
+var ListLinuxSubscriptionsRequest_Filters = &sListLinuxSubscriptionsRequest_Filters
+var ListLinuxSubscriptionsRequest_MaxResults = &sListLinuxSubscriptionsRequest_MaxResults
+var ListLinuxSubscriptionsRequest_NextToken = &sListLinuxSubscriptionsRequest_NextToken
+
+var ListLinuxSubscriptionsResponse = &sListLinuxSubscriptionsResponse
+var ListLinuxSubscriptionsResponse_Subscriptions = &sListLinuxSubscriptionsResponse_Subscriptions
+var ListLinuxSubscriptionsResponse_NextToken = &sListLinuxSubscriptionsResponse_NextToken
+
+var ListRegisteredSubscriptionProvidersRequest = &sListRegisteredSubscriptionProvidersRequest
+var ListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources = &sListRegisteredSubscriptionProvidersRequest_SubscriptionProviderSources
+var ListRegisteredSubscriptionProvidersRequest_MaxResults = &sListRegisteredSubscriptionProvidersRequest_MaxResults
+var ListRegisteredSubscriptionProvidersRequest_NextToken = &sListRegisteredSubscriptionProvidersRequest_NextToken
+
+var ListRegisteredSubscriptionProvidersResponse = &sListRegisteredSubscriptionProvidersResponse
+var ListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders = &sListRegisteredSubscriptionProvidersResponse_RegisteredSubscriptionProviders
+var ListRegisteredSubscriptionProvidersResponse_NextToken = &sListRegisteredSubscriptionProvidersResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RegisterSubscriptionProviderRequest = &sRegisterSubscriptionProviderRequest
+var RegisterSubscriptionProviderRequest_SubscriptionProviderSource = &sRegisterSubscriptionProviderRequest_SubscriptionProviderSource
+var RegisterSubscriptionProviderRequest_SecretArn = &sRegisterSubscriptionProviderRequest_SecretArn
+var RegisterSubscriptionProviderRequest_Tags = &sRegisterSubscriptionProviderRequest_Tags
+
+var RegisterSubscriptionProviderResponse = &sRegisterSubscriptionProviderResponse
+var RegisterSubscriptionProviderResponse_SubscriptionProviderSource = &sRegisterSubscriptionProviderResponse_SubscriptionProviderSource
+var RegisterSubscriptionProviderResponse_SubscriptionProviderArn = &sRegisterSubscriptionProviderResponse_SubscriptionProviderArn
+var RegisterSubscriptionProviderResponse_SubscriptionProviderStatus = &sRegisterSubscriptionProviderResponse_SubscriptionProviderStatus
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateServiceSettingsRequest = &sUpdateServiceSettingsRequest
+var UpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery = &sUpdateServiceSettingsRequest_LinuxSubscriptionsDiscovery
+var UpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings = &sUpdateServiceSettingsRequest_LinuxSubscriptionsDiscoverySettings
+var UpdateServiceSettingsRequest_AllowUpdate = &sUpdateServiceSettingsRequest_AllowUpdate
+
+var UpdateServiceSettingsResponse = &sUpdateServiceSettingsResponse
+var UpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery = &sUpdateServiceSettingsResponse_LinuxSubscriptionsDiscovery
+var UpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings = &sUpdateServiceSettingsResponse_LinuxSubscriptionsDiscoverySettings
+var UpdateServiceSettingsResponse_Status = &sUpdateServiceSettingsResponse_Status
+var UpdateServiceSettingsResponse_StatusMessage = &sUpdateServiceSettingsResponse_StatusMessage
+var UpdateServiceSettingsResponse_HomeRegions = &sUpdateServiceSettingsResponse_HomeRegions
+
+var LicenseManagerLinuxSubscriptions = &smithy.ServiceSchema{Schema: &s_LicenseManagerLinuxSubscriptions, Version: "2018-05-10"}

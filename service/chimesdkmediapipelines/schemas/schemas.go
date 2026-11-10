@@ -4,3513 +4,2609 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateMediaCapturePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaCapturePipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
-	URI:  "/sdk-media-capture-pipelines",
-	Code: 201})
+var (
+	iCreateMediaCapturePipeline                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaCapturePipeline"}
+	iCreateMediaConcatenationPipeline                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaConcatenationPipeline"}
+	iCreateMediaInsightsPipeline                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaInsightsPipeline"}
+	iCreateMediaInsightsPipelineConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaInsightsPipelineConfiguration"}
+	iCreateMediaLiveConnectorPipeline                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaLiveConnectorPipeline"}
+	iCreateMediaPipelineKinesisVideoStreamPool             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaPipelineKinesisVideoStreamPool"}
+	iCreateMediaStreamPipeline                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaStreamPipeline"}
+	iDeleteMediaCapturePipeline                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaCapturePipeline"}
+	iDeleteMediaInsightsPipelineConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaInsightsPipelineConfiguration"}
+	iDeleteMediaPipeline                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaPipeline"}
+	iDeleteMediaPipelineKinesisVideoStreamPool             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaPipelineKinesisVideoStreamPool"}
+	iGetMediaCapturePipeline                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaCapturePipeline"}
+	iGetMediaInsightsPipelineConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaInsightsPipelineConfiguration"}
+	iGetMediaPipeline                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaPipeline"}
+	iGetMediaPipelineKinesisVideoStreamPool                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaPipelineKinesisVideoStreamPool"}
+	iGetSpeakerSearchTask                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetSpeakerSearchTask"}
+	iGetVoiceToneAnalysisTask                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetVoiceToneAnalysisTask"}
+	iListMediaCapturePipelines                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaCapturePipelines"}
+	iListMediaInsightsPipelineConfigurations               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaInsightsPipelineConfigurations"}
+	iListMediaPipelineKinesisVideoStreamPools              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaPipelineKinesisVideoStreamPools"}
+	iListMediaPipelines                                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaPipelines"}
+	iListTagsForResource                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListTagsForResource"}
+	iStartSpeakerSearchTask                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StartSpeakerSearchTask"}
+	iStartVoiceToneAnalysisTask                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StartVoiceToneAnalysisTask"}
+	iStopSpeakerSearchTask                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StopSpeakerSearchTask"}
+	iStopVoiceToneAnalysisTask                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StopVoiceToneAnalysisTask"}
+	iTagResource                                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TagResource"}
+	iUntagResource                                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UntagResource"}
+	iUpdateMediaInsightsPipelineConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaInsightsPipelineConfiguration"}
+	iUpdateMediaInsightsPipelineStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaInsightsPipelineStatus"}
+	iUpdateMediaPipelineKinesisVideoStreamPool             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaPipelineKinesisVideoStreamPool"}
+	i_ChimeSDKMediaPipelinesService                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ChimeSDKMediaPipelinesService"}
+	iActiveSpeakerOnlyConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ActiveSpeakerOnlyConfiguration"}
+	iActiveSpeakerPosition                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ActiveSpeakerPosition"}
+	i_AmazonResourceName                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AmazonResourceName"}
+	iAmazonTranscribeCallAnalyticsProcessorConfiguration   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AmazonTranscribeCallAnalyticsProcessorConfiguration"}
+	iAmazonTranscribeProcessorConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AmazonTranscribeProcessorConfiguration"}
+	i_Arn                                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "Arn"}
+	iArtifactsConcatenationConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ArtifactsConcatenationConfiguration"}
+	iArtifactsConcatenationState                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ArtifactsConcatenationState"}
+	iArtifactsConfiguration                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ArtifactsConfiguration"}
+	iArtifactsState                                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ArtifactsState"}
+	i_AttendeeIdList                                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AttendeeIdList"}
+	iAudioArtifactsConcatenationState                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AudioArtifactsConcatenationState"}
+	iAudioArtifactsConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AudioArtifactsConfiguration"}
+	iAudioChannelsOption                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AudioChannelsOption"}
+	iAudioConcatenationConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AudioConcatenationConfiguration"}
+	iAudioMuxType                                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AudioMuxType"}
+	i_AudioSampleRateOption                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AudioSampleRateOption"}
+	i_AwsRegion                                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "AwsRegion"}
+	iBadRequestException                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "BadRequestException"}
+	i_Boolean                                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "Boolean"}
+	iBorderColor                                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "BorderColor"}
+	i_BorderThickness                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "BorderThickness"}
+	iCallAnalyticsLanguageCode                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CallAnalyticsLanguageCode"}
+	iCanvasOrientation                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CanvasOrientation"}
+	i_CategoryName                                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CategoryName"}
+	i_CategoryNameList                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CategoryNameList"}
+	iChannelDefinition                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ChannelDefinition"}
+	i_ChannelDefinitions                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ChannelDefinitions"}
+	i_ChannelId                                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ChannelId"}
+	iChimeSdkMeetingConcatenationConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ChimeSdkMeetingConcatenationConfiguration"}
+	iChimeSdkMeetingConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ChimeSdkMeetingConfiguration"}
+	iChimeSdkMeetingLiveConnectorConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ChimeSdkMeetingLiveConnectorConfiguration"}
+	i_ClientRequestToken                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ClientRequestToken"}
+	iCompositedVideoArtifactsConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CompositedVideoArtifactsConfiguration"}
+	iCompositedVideoConcatenationConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CompositedVideoConcatenationConfiguration"}
+	iConcatenationSink                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ConcatenationSink"}
+	i_ConcatenationSinkList                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ConcatenationSinkList"}
+	iConcatenationSinkType                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ConcatenationSinkType"}
+	iConcatenationSource                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ConcatenationSource"}
+	i_ConcatenationSourceList                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ConcatenationSourceList"}
+	iConcatenationSourceType                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ConcatenationSourceType"}
+	iConflictException                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ConflictException"}
+	iContentArtifactsConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ContentArtifactsConfiguration"}
+	iContentConcatenationConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ContentConcatenationConfiguration"}
+	iContentMuxType                                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ContentMuxType"}
+	iContentRedactionOutput                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ContentRedactionOutput"}
+	iContentShareLayoutOption                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ContentShareLayoutOption"}
+	iContentType                                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ContentType"}
+	i_CornerRadius                                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CornerRadius"}
+	iDataChannelConcatenationConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DataChannelConcatenationConfiguration"}
+	i_DataRetentionChangeInHours                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DataRetentionChangeInHours"}
+	i_DataRetentionInHours                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DataRetentionInHours"}
+	iErrorCode                                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ErrorCode"}
+	i_ExternalUserIdList                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ExternalUserIdList"}
+	i_ExternalUserIdType                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ExternalUserIdType"}
+	iForbiddenException                                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ForbiddenException"}
+	i_FragmentNumberString                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "FragmentNumberString"}
+	iFragmentSelector                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "FragmentSelector"}
+	iFragmentSelectorType                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "FragmentSelectorType"}
+	iGridViewConfiguration                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GridViewConfiguration"}
+	i_GuidString                                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GuidString"}
+	iHighlightColor                                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "HighlightColor"}
+	iHorizontalLayoutConfiguration                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "HorizontalLayoutConfiguration"}
+	iHorizontalTilePosition                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "HorizontalTilePosition"}
+	i_Iso8601Timestamp                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "Iso8601Timestamp"}
+	iIssueDetectionConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "IssueDetectionConfiguration"}
+	i_Keyword                                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "Keyword"}
+	iKeywordMatchConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KeywordMatchConfiguration"}
+	i_KeywordMatchWordList                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KeywordMatchWordList"}
+	iKinesisDataStreamSinkConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisDataStreamSinkConfiguration"}
+	i_KinesisVideoStreamArn                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamArn"}
+	iKinesisVideoStreamConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamConfiguration"}
+	iKinesisVideoStreamConfigurationUpdate                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamConfigurationUpdate"}
+	iKinesisVideoStreamPoolConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamPoolConfiguration"}
+	i_KinesisVideoStreamPoolId                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamPoolId"}
+	i_KinesisVideoStreamPoolName                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamPoolName"}
+	i_KinesisVideoStreamPoolSize                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamPoolSize"}
+	iKinesisVideoStreamPoolStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamPoolStatus"}
+	iKinesisVideoStreamPoolSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamPoolSummary"}
+	i_KinesisVideoStreamPoolSummaryList                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamPoolSummaryList"}
+	iKinesisVideoStreamRecordingSourceRuntimeConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamRecordingSourceRuntimeConfiguration"}
+	iKinesisVideoStreamSourceRuntimeConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamSourceRuntimeConfiguration"}
+	iKinesisVideoStreamSourceTaskConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "KinesisVideoStreamSourceTaskConfiguration"}
+	iLambdaFunctionSinkConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LambdaFunctionSinkConfiguration"}
+	i_LanguageOptions                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LanguageOptions"}
+	iLayoutOption                                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LayoutOption"}
+	iLiveConnectorMuxType                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorMuxType"}
+	iLiveConnectorRTMPConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorRTMPConfiguration"}
+	iLiveConnectorSinkConfiguration                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorSinkConfiguration"}
+	i_LiveConnectorSinkList                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorSinkList"}
+	iLiveConnectorSinkType                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorSinkType"}
+	iLiveConnectorSourceConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorSourceConfiguration"}
+	i_LiveConnectorSourceList                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorSourceList"}
+	iLiveConnectorSourceType                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "LiveConnectorSourceType"}
+	iMediaCapturePipeline                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaCapturePipeline"}
+	iMediaCapturePipelineSourceConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaCapturePipelineSourceConfiguration"}
+	iMediaCapturePipelineSummary                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaCapturePipelineSummary"}
+	i_MediaCapturePipelineSummaryList                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaCapturePipelineSummaryList"}
+	iMediaConcatenationPipeline                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaConcatenationPipeline"}
+	iMediaEncoding                                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaEncoding"}
+	iMediaInsightsPipeline                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipeline"}
+	iMediaInsightsPipelineConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineConfiguration"}
+	iMediaInsightsPipelineConfigurationElement             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineConfigurationElement"}
+	i_MediaInsightsPipelineConfigurationElements           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineConfigurationElements"}
+	iMediaInsightsPipelineConfigurationElementType         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineConfigurationElementType"}
+	i_MediaInsightsPipelineConfigurationNameString         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineConfigurationNameString"}
+	iMediaInsightsPipelineConfigurationSummary             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineConfigurationSummary"}
+	i_MediaInsightsPipelineConfigurationSummaryList        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineConfigurationSummaryList"}
+	iMediaInsightsPipelineElementStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineElementStatus"}
+	i_MediaInsightsPipelineElementStatuses                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsPipelineElementStatuses"}
+	i_MediaInsightsRuntimeMetadata                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaInsightsRuntimeMetadata"}
+	iMediaLiveConnectorPipeline                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaLiveConnectorPipeline"}
+	iMediaPipeline                                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipeline"}
+	iMediaPipelineElementStatus                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineElementStatus"}
+	i_MediaPipelineList                                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineList"}
+	iMediaPipelineSinkType                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineSinkType"}
+	iMediaPipelineSourceType                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineSourceType"}
+	iMediaPipelineStatus                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineStatus"}
+	iMediaPipelineStatusUpdate                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineStatusUpdate"}
+	iMediaPipelineSummary                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineSummary"}
+	iMediaPipelineTaskStatus                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaPipelineTaskStatus"}
+	i_MediaSampleRateHertz                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaSampleRateHertz"}
+	iMediaStreamPipeline                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaStreamPipeline"}
+	iMediaStreamPipelineSinkType                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaStreamPipelineSinkType"}
+	iMediaStreamSink                                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaStreamSink"}
+	i_MediaStreamSinkList                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaStreamSinkList"}
+	iMediaStreamSource                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaStreamSource"}
+	i_MediaStreamSourceList                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaStreamSourceList"}
+	iMediaStreamType                                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MediaStreamType"}
+	iMeetingEventsConcatenationConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "MeetingEventsConcatenationConfiguration"}
+	i_ModelName                                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ModelName"}
+	i_NonEmptyString                                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "NonEmptyString"}
+	iNotFoundException                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "NotFoundException"}
+	i_NumberOfChannels                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "NumberOfChannels"}
+	iPartialResultsStability                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "PartialResultsStability"}
+	iParticipantRole                                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ParticipantRole"}
+	i_PiiEntityTypes                                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "PiiEntityTypes"}
+	iPostCallAnalyticsSettings                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "PostCallAnalyticsSettings"}
+	iPresenterOnlyConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "PresenterOnlyConfiguration"}
+	iPresenterPosition                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "PresenterPosition"}
+	iRealTimeAlertConfiguration                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RealTimeAlertConfiguration"}
+	iRealTimeAlertRule                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RealTimeAlertRule"}
+	i_RealTimeAlertRuleList                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RealTimeAlertRuleList"}
+	iRealTimeAlertRuleType                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RealTimeAlertRuleType"}
+	iRecordingFileFormat                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RecordingFileFormat"}
+	iRecordingStreamConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RecordingStreamConfiguration"}
+	i_RecordingStreamList                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RecordingStreamList"}
+	i_ReservedStreamCapacity                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ReservedStreamCapacity"}
+	iResolutionOption                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ResolutionOption"}
+	iResourceLimitExceededException                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ResourceLimitExceededException"}
+	i_ResultMax                                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ResultMax"}
+	i_RuleName                                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "RuleName"}
+	iS3BucketSinkConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "S3BucketSinkConfiguration"}
+	iS3RecordingSinkConfiguration                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "S3RecordingSinkConfiguration"}
+	iS3RecordingSinkRuntimeConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "S3RecordingSinkRuntimeConfiguration"}
+	iSelectedVideoStreams                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SelectedVideoStreams"}
+	i_SensitiveString                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SensitiveString"}
+	iSentimentConfiguration                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SentimentConfiguration"}
+	i_SentimentTimePeriodInSeconds                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SentimentTimePeriodInSeconds"}
+	iSentimentType                                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SentimentType"}
+	iServiceFailureException                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ServiceFailureException"}
+	iServiceUnavailableException                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ServiceUnavailableException"}
+	iSnsTopicSinkConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SnsTopicSinkConfiguration"}
+	iSourceConfiguration                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SourceConfiguration"}
+	iSpeakerSearchTask                                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SpeakerSearchTask"}
+	iSqsQueueSinkConfiguration                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SqsQueueSinkConfiguration"}
+	iSseAwsKeyManagementParams                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "SseAwsKeyManagementParams"}
+	iStreamChannelDefinition                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StreamChannelDefinition"}
+	iStreamConfiguration                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StreamConfiguration"}
+	i_Streams                                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "Streams"}
+	i_String                                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "String"}
+	iTag                                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "Tag"}
+	i_TagKey                                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TagKey"}
+	i_TagKeyList                                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TagKeyList"}
+	i_TagList                                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TagList"}
+	i_TagValue                                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TagValue"}
+	iThrottledClientException                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ThrottledClientException"}
+	i_TileAspectRatio                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TileAspectRatio"}
+	i_TileCount                                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TileCount"}
+	iTileOrder                                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TileOrder"}
+	i_Timestamp                                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "Timestamp"}
+	iTimestampRange                                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TimestampRange"}
+	iTranscriptionMessagesConcatenationConfiguration       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TranscriptionMessagesConcatenationConfiguration"}
+	iUnauthorizedClientException                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UnauthorizedClientException"}
+	iVerticalLayoutConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VerticalLayoutConfiguration"}
+	iVerticalTilePosition                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VerticalTilePosition"}
+	iVideoArtifactsConfiguration                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VideoArtifactsConfiguration"}
+	iVideoAttribute                                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VideoAttribute"}
+	iVideoConcatenationConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VideoConcatenationConfiguration"}
+	iVideoMuxType                                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VideoMuxType"}
+	iVocabularyFilterMethod                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VocabularyFilterMethod"}
+	i_VocabularyFilterName                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VocabularyFilterName"}
+	i_VocabularyFilterNames                                = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VocabularyFilterNames"}
+	i_VocabularyName                                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VocabularyName"}
+	i_VocabularyNames                                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VocabularyNames"}
+	iVoiceAnalyticsConfigurationStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VoiceAnalyticsConfigurationStatus"}
+	iVoiceAnalyticsLanguageCode                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VoiceAnalyticsLanguageCode"}
+	iVoiceAnalyticsProcessorConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VoiceAnalyticsProcessorConfiguration"}
+	iVoiceEnhancementSinkConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VoiceEnhancementSinkConfiguration"}
+	iVoiceToneAnalysisTask                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "VoiceToneAnalysisTask"}
+	iCreateMediaCapturePipelineRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaCapturePipelineRequest"}
+	iCreateMediaCapturePipelineResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaCapturePipelineResponse"}
+	iCreateMediaConcatenationPipelineRequest               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaConcatenationPipelineRequest"}
+	iCreateMediaConcatenationPipelineResponse              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaConcatenationPipelineResponse"}
+	iCreateMediaInsightsPipelineConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaInsightsPipelineConfigurationRequest"}
+	iCreateMediaInsightsPipelineConfigurationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaInsightsPipelineConfigurationResponse"}
+	iCreateMediaInsightsPipelineRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaInsightsPipelineRequest"}
+	iCreateMediaInsightsPipelineResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaInsightsPipelineResponse"}
+	iCreateMediaLiveConnectorPipelineRequest               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaLiveConnectorPipelineRequest"}
+	iCreateMediaLiveConnectorPipelineResponse              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaLiveConnectorPipelineResponse"}
+	iCreateMediaPipelineKinesisVideoStreamPoolRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaPipelineKinesisVideoStreamPoolRequest"}
+	iCreateMediaPipelineKinesisVideoStreamPoolResponse     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaPipelineKinesisVideoStreamPoolResponse"}
+	iCreateMediaStreamPipelineRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaStreamPipelineRequest"}
+	iCreateMediaStreamPipelineResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "CreateMediaStreamPipelineResponse"}
+	iDeleteMediaCapturePipelineRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaCapturePipelineRequest"}
+	iDeleteMediaInsightsPipelineConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaInsightsPipelineConfigurationRequest"}
+	iDeleteMediaPipelineRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaPipelineRequest"}
+	iDeleteMediaPipelineKinesisVideoStreamPoolRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "DeleteMediaPipelineKinesisVideoStreamPoolRequest"}
+	iGetMediaCapturePipelineRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaCapturePipelineRequest"}
+	iGetMediaCapturePipelineResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaCapturePipelineResponse"}
+	iGetMediaInsightsPipelineConfigurationRequest          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaInsightsPipelineConfigurationRequest"}
+	iGetMediaInsightsPipelineConfigurationResponse         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaInsightsPipelineConfigurationResponse"}
+	iGetMediaPipelineRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaPipelineRequest"}
+	iGetMediaPipelineKinesisVideoStreamPoolRequest         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaPipelineKinesisVideoStreamPoolRequest"}
+	iGetMediaPipelineKinesisVideoStreamPoolResponse        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaPipelineKinesisVideoStreamPoolResponse"}
+	iGetMediaPipelineResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetMediaPipelineResponse"}
+	iGetSpeakerSearchTaskRequest                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetSpeakerSearchTaskRequest"}
+	iGetSpeakerSearchTaskResponse                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetSpeakerSearchTaskResponse"}
+	iGetVoiceToneAnalysisTaskRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetVoiceToneAnalysisTaskRequest"}
+	iGetVoiceToneAnalysisTaskResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "GetVoiceToneAnalysisTaskResponse"}
+	iListMediaCapturePipelinesRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaCapturePipelinesRequest"}
+	iListMediaCapturePipelinesResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaCapturePipelinesResponse"}
+	iListMediaInsightsPipelineConfigurationsRequest        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaInsightsPipelineConfigurationsRequest"}
+	iListMediaInsightsPipelineConfigurationsResponse       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaInsightsPipelineConfigurationsResponse"}
+	iListMediaPipelineKinesisVideoStreamPoolsRequest       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaPipelineKinesisVideoStreamPoolsRequest"}
+	iListMediaPipelineKinesisVideoStreamPoolsResponse      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaPipelineKinesisVideoStreamPoolsResponse"}
+	iListMediaPipelinesRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaPipelinesRequest"}
+	iListMediaPipelinesResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListMediaPipelinesResponse"}
+	iListTagsForResourceRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "ListTagsForResourceResponse"}
+	iStartSpeakerSearchTaskRequest                         = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StartSpeakerSearchTaskRequest"}
+	iStartSpeakerSearchTaskResponse                        = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StartSpeakerSearchTaskResponse"}
+	iStartVoiceToneAnalysisTaskRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StartVoiceToneAnalysisTaskRequest"}
+	iStartVoiceToneAnalysisTaskResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StartVoiceToneAnalysisTaskResponse"}
+	iStopSpeakerSearchTaskRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StopSpeakerSearchTaskRequest"}
+	iStopVoiceToneAnalysisTaskRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "StopVoiceToneAnalysisTaskRequest"}
+	iTagResourceRequest                                    = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TagResourceRequest"}
+	iTagResourceResponse                                   = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UntagResourceResponse"}
+	iUpdateMediaInsightsPipelineConfigurationRequest       = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaInsightsPipelineConfigurationRequest"}
+	iUpdateMediaInsightsPipelineConfigurationResponse      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaInsightsPipelineConfigurationResponse"}
+	iUpdateMediaInsightsPipelineStatusRequest              = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaInsightsPipelineStatusRequest"}
+	iUpdateMediaPipelineKinesisVideoStreamPoolRequest      = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaPipelineKinesisVideoStreamPoolRequest"}
+	iUpdateMediaPipelineKinesisVideoStreamPoolResponse     = smithy.ShapeID{Namespace: "com.amazonaws.chimesdkmediapipelines", Name: "UpdateMediaPipelineKinesisVideoStreamPoolResponse"}
+	pUnit                                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var CreateMediaConcatenationPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaConcatenationPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
+	URI:  "/sdk-media-capture-pipelines",
+	Code: 201}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sdk-media-concatenation-pipelines",
-	Code: 201})
-
-var CreateMediaInsightsPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaInsightsPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/media-insights-pipelines",
-	Code: 201})
-
-var CreateMediaInsightsPipelineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaInsightsPipelineConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/media-insights-pipeline-configurations",
-	Code: 201})
-
-var CreateMediaLiveConnectorPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaLiveConnectorPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sdk-media-live-connector-pipelines",
-	Code: 201})
-
-var CreateMediaPipelineKinesisVideoStreamPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaPipelineKinesisVideoStreamPool",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/media-pipeline-kinesis-video-stream-pools",
-	Code: 201})
-
-var CreateMediaStreamPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaStreamPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/sdk-media-stream-pipelines",
-	Code: 201})
-
-var DeleteMediaCapturePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaCapturePipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/sdk-media-capture-pipelines/{MediaPipelineId}",
-	Code: 204})
-
-var DeleteMediaInsightsPipelineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaInsightsPipelineConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/media-insights-pipeline-configurations/{Identifier}",
-	Code: 204})
-
-var DeleteMediaPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/sdk-media-pipelines/{MediaPipelineId}",
-	Code: 204})
-
-var DeleteMediaPipelineKinesisVideoStreamPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaPipelineKinesisVideoStreamPool",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/media-pipeline-kinesis-video-stream-pools/{Identifier}",
-	Code: 204})
-
-var GetMediaCapturePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaCapturePipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sdk-media-capture-pipelines/{MediaPipelineId}",
-	Code: 200})
-
-var GetMediaInsightsPipelineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaInsightsPipelineConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/media-insights-pipeline-configurations/{Identifier}",
-	Code: 200})
-
-var GetMediaPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaPipeline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sdk-media-pipelines/{MediaPipelineId}",
-	Code: 200})
-
-var GetMediaPipelineKinesisVideoStreamPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaPipelineKinesisVideoStreamPool",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/media-pipeline-kinesis-video-stream-pools/{Identifier}",
-	Code: 200})
-
-var GetSpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetSpeakerSearchTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/media-insights-pipelines/{Identifier}/speaker-search-tasks/{SpeakerSearchTaskId}",
-	Code: 200})
-
-var GetVoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetVoiceToneAnalysisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/media-insights-pipelines/{Identifier}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}",
-	Code: 200})
-
-var ListMediaCapturePipelines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaCapturePipelines",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sdk-media-capture-pipelines",
-	Code: 200})
-
-var ListMediaInsightsPipelineConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaInsightsPipelineConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/media-insights-pipeline-configurations",
-	Code: 200})
-
-var ListMediaPipelineKinesisVideoStreamPools = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaPipelineKinesisVideoStreamPools",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/media-pipeline-kinesis-video-stream-pools",
-	Code: 200})
-
-var ListMediaPipelines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaPipelines",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/sdk-media-pipelines",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags",
-	Code: 200})
-
-var StartSpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StartSpeakerSearchTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/media-insights-pipelines/{Identifier}/speaker-search-tasks?operation=start",
-	Code: 201})
-
-var StartVoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StartVoiceToneAnalysisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/media-insights-pipelines/{Identifier}/voice-tone-analysis-tasks?operation=start",
-	Code: 201})
-
-var StopSpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StopSpeakerSearchTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/media-insights-pipelines/{Identifier}/speaker-search-tasks/{SpeakerSearchTaskId}?operation=stop",
-	Code: 204})
-
-var StopVoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StopVoiceToneAnalysisTask",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/media-insights-pipelines/{Identifier}/voice-tone-analysis-tasks/{VoiceToneAnalysisTaskId}?operation=stop",
-	Code: 204})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags?operation=tag-resource",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags?operation=untag-resource",
-	Code: 204})
-
-var UpdateMediaInsightsPipelineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaInsightsPipelineConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/media-insights-pipeline-configurations/{Identifier}",
-	Code: 200})
-
-var UpdateMediaInsightsPipelineStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaInsightsPipelineStatus",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/media-insights-pipeline-status/{Identifier}",
-	Code: 200})
-
-var UpdateMediaPipelineKinesisVideoStreamPool = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaPipelineKinesisVideoStreamPool",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/media-pipeline-kinesis-video-stream-pools/{Identifier}",
-	Code: 200})
-
-var _ChimeSDKMediaPipelinesService = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ChimeSDKMediaPipelinesService",
-}, smithy.ShapeTypeService, 0)
-
-var ChimeSDKMediaPipelinesService = smithy.NewServiceSchema(_ChimeSDKMediaPipelinesService, "2021-07-15")
-
-var ActiveSpeakerOnlyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ActiveSpeakerOnlyConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition *smithy.Schema
-
-var ActiveSpeakerPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ActiveSpeakerPosition",
-}, smithy.ShapeTypeEnum, 4)
-var ActiveSpeakerPosition_TopLeft *smithy.Schema
-
-var ActiveSpeakerPosition_TopRight *smithy.Schema
-
-var ActiveSpeakerPosition_BottomLeft *smithy.Schema
-
-var ActiveSpeakerPosition_BottomRight *smithy.Schema
-
-var _AmazonResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AmazonResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AmazonTranscribeCallAnalyticsProcessorConfiguration",
-}, smithy.ShapeTypeStructure, 13)
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings *smithy.Schema
-
-var AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AmazonTranscribeProcessorConfiguration",
-}, smithy.ShapeTypeStructure, 18)
-var AmazonTranscribeProcessorConfiguration_LanguageCode *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_VocabularyName *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_VocabularyFilterName *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_VocabularyFilterMethod *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_ShowSpeakerLabel *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_PartialResultsStability *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_ContentIdentificationType *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_ContentRedactionType *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_PiiEntityTypes *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_LanguageModelName *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_FilterPartialResults *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_IdentifyLanguage *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_LanguageOptions *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_PreferredLanguage *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_VocabularyNames *smithy.Schema
-
-var AmazonTranscribeProcessorConfiguration_VocabularyFilterNames *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ArtifactsConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ArtifactsConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var ArtifactsConcatenationConfiguration_Audio *smithy.Schema
-
-var ArtifactsConcatenationConfiguration_Video *smithy.Schema
-
-var ArtifactsConcatenationConfiguration_Content *smithy.Schema
-
-var ArtifactsConcatenationConfiguration_DataChannel *smithy.Schema
-
-var ArtifactsConcatenationConfiguration_TranscriptionMessages *smithy.Schema
-
-var ArtifactsConcatenationConfiguration_MeetingEvents *smithy.Schema
-
-var ArtifactsConcatenationConfiguration_CompositedVideo *smithy.Schema
-
-var ArtifactsConcatenationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ArtifactsConcatenationState",
-}, smithy.ShapeTypeEnum, 2)
-var ArtifactsConcatenationState_Enabled *smithy.Schema
-
-var ArtifactsConcatenationState_Disabled *smithy.Schema
-
-var ArtifactsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ArtifactsConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ArtifactsConfiguration_Audio *smithy.Schema
-
-var ArtifactsConfiguration_Video *smithy.Schema
-
-var ArtifactsConfiguration_Content *smithy.Schema
-
-var ArtifactsConfiguration_CompositedVideo *smithy.Schema
-
-var ArtifactsState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ArtifactsState",
-}, smithy.ShapeTypeEnum, 2)
-var ArtifactsState_Enabled *smithy.Schema
-
-var ArtifactsState_Disabled *smithy.Schema
-
-var _AttendeeIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AttendeeIdList",
-}, smithy.ShapeTypeList, 1)
-var _AttendeeIdList_member *smithy.Schema
-
-var AudioArtifactsConcatenationState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AudioArtifactsConcatenationState",
-}, smithy.ShapeTypeEnum, 1)
-var AudioArtifactsConcatenationState_Enabled *smithy.Schema
-
-var AudioArtifactsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AudioArtifactsConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AudioArtifactsConfiguration_MuxType *smithy.Schema
-
-var AudioChannelsOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AudioChannelsOption",
-}, smithy.ShapeTypeEnum, 2)
-var AudioChannelsOption_Stereo *smithy.Schema
-
-var AudioChannelsOption_Mono *smithy.Schema
-
-var AudioConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AudioConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var AudioConcatenationConfiguration_State *smithy.Schema
-
-var AudioMuxType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AudioMuxType",
-}, smithy.ShapeTypeEnum, 3)
-var AudioMuxType_AudioOnly *smithy.Schema
-
-var AudioMuxType_AudioWithActiveSpeakerVideo *smithy.Schema
-
-var AudioMuxType_AudioWithCompositedVideo *smithy.Schema
-
-var _AudioSampleRateOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AudioSampleRateOption",
-}, smithy.ShapeTypeString, 0)
-
-var _AwsRegion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "AwsRegion",
-}, smithy.ShapeTypeString, 0)
-
-var BadRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "BadRequestException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var BadRequestException_Code *smithy.Schema
-
-var BadRequestException_Message *smithy.Schema
-
-var BadRequestException_RequestId *smithy.Schema
-
-var _Boolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "Boolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var BorderColor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "BorderColor",
-}, smithy.ShapeTypeEnum, 6)
-var BorderColor_Black *smithy.Schema
-
-var BorderColor_Blue *smithy.Schema
-
-var BorderColor_Red *smithy.Schema
-
-var BorderColor_Green *smithy.Schema
-
-var BorderColor_White *smithy.Schema
-
-var BorderColor_Yellow *smithy.Schema
-
-var _BorderThickness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "BorderThickness",
-}, smithy.ShapeTypeInteger, 0)
-
-var CallAnalyticsLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CallAnalyticsLanguageCode",
-}, smithy.ShapeTypeEnum, 9)
-var CallAnalyticsLanguageCode_EN_US *smithy.Schema
-
-var CallAnalyticsLanguageCode_EN_GB *smithy.Schema
-
-var CallAnalyticsLanguageCode_ES_US *smithy.Schema
-
-var CallAnalyticsLanguageCode_FR_CA *smithy.Schema
-
-var CallAnalyticsLanguageCode_FR_FR *smithy.Schema
-
-var CallAnalyticsLanguageCode_EN_AU *smithy.Schema
-
-var CallAnalyticsLanguageCode_IT_IT *smithy.Schema
-
-var CallAnalyticsLanguageCode_DE_DE *smithy.Schema
-
-var CallAnalyticsLanguageCode_PT_BR *smithy.Schema
-
-var CanvasOrientation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CanvasOrientation",
-}, smithy.ShapeTypeEnum, 2)
-var CanvasOrientation_Landscape *smithy.Schema
-
-var CanvasOrientation_Portrait *smithy.Schema
-
-var _CategoryName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CategoryName",
-}, smithy.ShapeTypeString, 0)
-
-var _CategoryNameList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CategoryNameList",
-}, smithy.ShapeTypeList, 1)
-var _CategoryNameList_member *smithy.Schema
-
-var ChannelDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ChannelDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var ChannelDefinition_ChannelId *smithy.Schema
-
-var ChannelDefinition_ParticipantRole *smithy.Schema
-
-var _ChannelDefinitions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ChannelDefinitions",
-}, smithy.ShapeTypeList, 1)
-var _ChannelDefinitions_member *smithy.Schema
-
-var _ChannelId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ChannelId",
-}, smithy.ShapeTypeInteger, 0)
-
-var ChimeSdkMeetingConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ChimeSdkMeetingConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration *smithy.Schema
-
-var ChimeSdkMeetingConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ChimeSdkMeetingConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ChimeSdkMeetingConfiguration_SourceConfiguration *smithy.Schema
-
-var ChimeSdkMeetingConfiguration_ArtifactsConfiguration *smithy.Schema
-
-var ChimeSdkMeetingLiveConnectorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ChimeSdkMeetingLiveConnectorConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var ChimeSdkMeetingLiveConnectorConfiguration_Arn *smithy.Schema
-
-var ChimeSdkMeetingLiveConnectorConfiguration_MuxType *smithy.Schema
-
-var ChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo *smithy.Schema
-
-var ChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration *smithy.Schema
-
-var _ClientRequestToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ClientRequestToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var CompositedVideoArtifactsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CompositedVideoArtifactsConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var CompositedVideoArtifactsConfiguration_Layout *smithy.Schema
-
-var CompositedVideoArtifactsConfiguration_Resolution *smithy.Schema
-
-var CompositedVideoArtifactsConfiguration_GridViewConfiguration *smithy.Schema
-
-var CompositedVideoConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CompositedVideoConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var CompositedVideoConcatenationConfiguration_State *smithy.Schema
-
-var ConcatenationSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ConcatenationSink",
-}, smithy.ShapeTypeStructure, 2)
-var ConcatenationSink_Type *smithy.Schema
-
-var ConcatenationSink_S3BucketSinkConfiguration *smithy.Schema
-
-var _ConcatenationSinkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ConcatenationSinkList",
-}, smithy.ShapeTypeList, 1)
-var _ConcatenationSinkList_member *smithy.Schema
-
-var ConcatenationSinkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ConcatenationSinkType",
-}, smithy.ShapeTypeEnum, 1)
-var ConcatenationSinkType_S3Bucket *smithy.Schema
-
-var ConcatenationSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ConcatenationSource",
-}, smithy.ShapeTypeStructure, 2)
-var ConcatenationSource_Type *smithy.Schema
-
-var ConcatenationSource_MediaCapturePipelineSourceConfiguration *smithy.Schema
-
-var _ConcatenationSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ConcatenationSourceList",
-}, smithy.ShapeTypeList, 1)
-var _ConcatenationSourceList_member *smithy.Schema
-
-var ConcatenationSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ConcatenationSourceType",
-}, smithy.ShapeTypeEnum, 1)
-var ConcatenationSourceType_MediaCapturePipeline *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Code *smithy.Schema
-
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_RequestId *smithy.Schema
-
-var ContentArtifactsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ContentArtifactsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ContentArtifactsConfiguration_State *smithy.Schema
-
-var ContentArtifactsConfiguration_MuxType *smithy.Schema
-
-var ContentConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ContentConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ContentConcatenationConfiguration_State *smithy.Schema
-
-var ContentMuxType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ContentMuxType",
-}, smithy.ShapeTypeEnum, 1)
-var ContentMuxType_ContentOnly *smithy.Schema
-
-var ContentRedactionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ContentRedactionOutput",
-}, smithy.ShapeTypeEnum, 2)
-var ContentRedactionOutput_REDACTED *smithy.Schema
-
-var ContentRedactionOutput_REDACTED_AND_UNREDACTED *smithy.Schema
-
-var ContentShareLayoutOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ContentShareLayoutOption",
-}, smithy.ShapeTypeEnum, 4)
-var ContentShareLayoutOption_PresenterOnly *smithy.Schema
-
-var ContentShareLayoutOption_Horizontal *smithy.Schema
-
-var ContentShareLayoutOption_Vertical *smithy.Schema
-
-var ContentShareLayoutOption_ActiveSpeakerOnly *smithy.Schema
-
-var ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ContentType",
-}, smithy.ShapeTypeEnum, 1)
-var ContentType_PII *smithy.Schema
-
-var _CornerRadius = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CornerRadius",
-}, smithy.ShapeTypeInteger, 0)
-
-var DataChannelConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DataChannelConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DataChannelConcatenationConfiguration_State *smithy.Schema
-
-var _DataRetentionChangeInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DataRetentionChangeInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var _DataRetentionInHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DataRetentionInHours",
-}, smithy.ShapeTypeInteger, 0)
-
-var ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeEnum, 7)
-var ErrorCode_BadRequest *smithy.Schema
-
-var ErrorCode_Forbidden *smithy.Schema
-
-var ErrorCode_NotFound *smithy.Schema
-
-var ErrorCode_ResourceLimitExceeded *smithy.Schema
-
-var ErrorCode_ServiceFailure *smithy.Schema
-
-var ErrorCode_ServiceUnavailable *smithy.Schema
-
-var ErrorCode_Throttling *smithy.Schema
-
-var _ExternalUserIdList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ExternalUserIdList",
-}, smithy.ShapeTypeList, 1)
-var _ExternalUserIdList_member *smithy.Schema
-
-var _ExternalUserIdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ExternalUserIdType",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var ForbiddenException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ForbiddenException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var ForbiddenException_Code *smithy.Schema
-
-var ForbiddenException_Message *smithy.Schema
-
-var ForbiddenException_RequestId *smithy.Schema
-
-var _FragmentNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "FragmentNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var FragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "FragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var FragmentSelector_FragmentSelectorType *smithy.Schema
-
-var FragmentSelector_TimestampRange *smithy.Schema
-
-var FragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "FragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var FragmentSelectorType_ProducerTimestamp *smithy.Schema
-
-var FragmentSelectorType_ServerTimestamp *smithy.Schema
-
-var GridViewConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GridViewConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var GridViewConfiguration_ContentShareLayout *smithy.Schema
-
-var GridViewConfiguration_PresenterOnlyConfiguration *smithy.Schema
-
-var GridViewConfiguration_ActiveSpeakerOnlyConfiguration *smithy.Schema
-
-var GridViewConfiguration_HorizontalLayoutConfiguration *smithy.Schema
-
-var GridViewConfiguration_VerticalLayoutConfiguration *smithy.Schema
-
-var GridViewConfiguration_VideoAttribute *smithy.Schema
-
-var GridViewConfiguration_CanvasOrientation *smithy.Schema
-
-var _GuidString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GuidString",
-}, smithy.ShapeTypeString, 0)
-
-var HighlightColor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "HighlightColor",
-}, smithy.ShapeTypeEnum, 6)
-var HighlightColor_Black *smithy.Schema
-
-var HighlightColor_Blue *smithy.Schema
-
-var HighlightColor_Red *smithy.Schema
-
-var HighlightColor_Green *smithy.Schema
-
-var HighlightColor_White *smithy.Schema
-
-var HighlightColor_Yellow *smithy.Schema
-
-var HorizontalLayoutConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "HorizontalLayoutConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var HorizontalLayoutConfiguration_TileOrder *smithy.Schema
-
-var HorizontalLayoutConfiguration_TilePosition *smithy.Schema
-
-var HorizontalLayoutConfiguration_TileCount *smithy.Schema
-
-var HorizontalLayoutConfiguration_TileAspectRatio *smithy.Schema
-
-var HorizontalTilePosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "HorizontalTilePosition",
-}, smithy.ShapeTypeEnum, 2)
-var HorizontalTilePosition_Top *smithy.Schema
-
-var HorizontalTilePosition_Bottom *smithy.Schema
-
-var _Iso8601Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "Iso8601Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var IssueDetectionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "IssueDetectionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var IssueDetectionConfiguration_RuleName *smithy.Schema
-
-var _Keyword = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "Keyword",
-}, smithy.ShapeTypeString, 0)
-
-var KeywordMatchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KeywordMatchConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var KeywordMatchConfiguration_RuleName *smithy.Schema
-
-var KeywordMatchConfiguration_Keywords *smithy.Schema
-
-var KeywordMatchConfiguration_Negate *smithy.Schema
-
-var _KeywordMatchWordList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KeywordMatchWordList",
-}, smithy.ShapeTypeList, 1)
-var _KeywordMatchWordList_member *smithy.Schema
-
-var KinesisDataStreamSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisDataStreamSinkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var KinesisDataStreamSinkConfiguration_InsightsTarget *smithy.Schema
-
-var _KinesisVideoStreamArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamArn",
-}, smithy.ShapeTypeString, 0)
-
-var KinesisVideoStreamConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var KinesisVideoStreamConfiguration_Region *smithy.Schema
-
-var KinesisVideoStreamConfiguration_DataRetentionInHours *smithy.Schema
-
-var KinesisVideoStreamConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamConfigurationUpdate",
-}, smithy.ShapeTypeStructure, 1)
-var KinesisVideoStreamConfigurationUpdate_DataRetentionInHours *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamPoolConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var KinesisVideoStreamPoolConfiguration_PoolArn *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration_PoolName *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration_PoolId *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration_PoolStatus *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration_PoolSize *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration_StreamConfiguration *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration_CreatedTimestamp *smithy.Schema
-
-var KinesisVideoStreamPoolConfiguration_UpdatedTimestamp *smithy.Schema
-
-var _KinesisVideoStreamPoolId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamPoolId",
-}, smithy.ShapeTypeString, 0)
-
-var _KinesisVideoStreamPoolName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamPoolName",
-}, smithy.ShapeTypeString, 0)
-
-var _KinesisVideoStreamPoolSize = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamPoolSize",
-}, smithy.ShapeTypeInteger, 0)
-
-var KinesisVideoStreamPoolStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamPoolStatus",
-}, smithy.ShapeTypeEnum, 5)
-var KinesisVideoStreamPoolStatus_CREATING *smithy.Schema
-
-var KinesisVideoStreamPoolStatus_ACTIVE *smithy.Schema
-
-var KinesisVideoStreamPoolStatus_UPDATING *smithy.Schema
-
-var KinesisVideoStreamPoolStatus_DELETING *smithy.Schema
-
-var KinesisVideoStreamPoolStatus_FAILED *smithy.Schema
-
-var KinesisVideoStreamPoolSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamPoolSummary",
-}, smithy.ShapeTypeStructure, 3)
-var KinesisVideoStreamPoolSummary_PoolName *smithy.Schema
-
-var KinesisVideoStreamPoolSummary_PoolId *smithy.Schema
-
-var KinesisVideoStreamPoolSummary_PoolArn *smithy.Schema
-
-var _KinesisVideoStreamPoolSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamPoolSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _KinesisVideoStreamPoolSummaryList_member *smithy.Schema
-
-var KinesisVideoStreamRecordingSourceRuntimeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamRecordingSourceRuntimeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams *smithy.Schema
-
-var KinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector *smithy.Schema
-
-var KinesisVideoStreamSourceRuntimeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamSourceRuntimeConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var KinesisVideoStreamSourceRuntimeConfiguration_Streams *smithy.Schema
-
-var KinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding *smithy.Schema
-
-var KinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate *smithy.Schema
-
-var KinesisVideoStreamSourceTaskConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "KinesisVideoStreamSourceTaskConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var KinesisVideoStreamSourceTaskConfiguration_StreamArn *smithy.Schema
-
-var KinesisVideoStreamSourceTaskConfiguration_ChannelId *smithy.Schema
-
-var KinesisVideoStreamSourceTaskConfiguration_FragmentNumber *smithy.Schema
-
-var LambdaFunctionSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LambdaFunctionSinkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var LambdaFunctionSinkConfiguration_InsightsTarget *smithy.Schema
-
-var _LanguageOptions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LanguageOptions",
-}, smithy.ShapeTypeString, 0)
-
-var LayoutOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LayoutOption",
-}, smithy.ShapeTypeEnum, 1)
-var LayoutOption_GridView *smithy.Schema
-
-var LiveConnectorMuxType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorMuxType",
-}, smithy.ShapeTypeEnum, 2)
-var LiveConnectorMuxType_AudioWithCompositedVideo *smithy.Schema
-
-var LiveConnectorMuxType_AudioWithActiveSpeakerVideo *smithy.Schema
-
-var LiveConnectorRTMPConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorRTMPConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var LiveConnectorRTMPConfiguration_Url *smithy.Schema
-
-var LiveConnectorRTMPConfiguration_AudioChannels *smithy.Schema
-
-var LiveConnectorRTMPConfiguration_AudioSampleRate *smithy.Schema
-
-var LiveConnectorSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorSinkConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LiveConnectorSinkConfiguration_SinkType *smithy.Schema
-
-var LiveConnectorSinkConfiguration_RTMPConfiguration *smithy.Schema
-
-var _LiveConnectorSinkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorSinkList",
-}, smithy.ShapeTypeList, 1)
-var _LiveConnectorSinkList_member *smithy.Schema
-
-var LiveConnectorSinkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorSinkType",
-}, smithy.ShapeTypeEnum, 1)
-var LiveConnectorSinkType_RTMP *smithy.Schema
-
-var LiveConnectorSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorSourceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LiveConnectorSourceConfiguration_SourceType *smithy.Schema
-
-var LiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration *smithy.Schema
-
-var _LiveConnectorSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorSourceList",
-}, smithy.ShapeTypeList, 1)
-var _LiveConnectorSourceList_member *smithy.Schema
-
-var LiveConnectorSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "LiveConnectorSourceType",
-}, smithy.ShapeTypeEnum, 1)
-var LiveConnectorSourceType_ChimeSdkMeeting *smithy.Schema
-
-var MediaCapturePipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaCapturePipeline",
-}, smithy.ShapeTypeStructure, 12)
-var MediaCapturePipeline_MediaPipelineId *smithy.Schema
-
-var MediaCapturePipeline_MediaPipelineArn *smithy.Schema
-
-var MediaCapturePipeline_SourceType *smithy.Schema
-
-var MediaCapturePipeline_SourceArn *smithy.Schema
-
-var MediaCapturePipeline_Status *smithy.Schema
-
-var MediaCapturePipeline_SinkType *smithy.Schema
-
-var MediaCapturePipeline_SinkArn *smithy.Schema
-
-var MediaCapturePipeline_CreatedTimestamp *smithy.Schema
-
-var MediaCapturePipeline_UpdatedTimestamp *smithy.Schema
-
-var MediaCapturePipeline_ChimeSdkMeetingConfiguration *smithy.Schema
-
-var MediaCapturePipeline_SseAwsKeyManagementParams *smithy.Schema
-
-var MediaCapturePipeline_SinkIamRoleArn *smithy.Schema
-
-var MediaCapturePipelineSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaCapturePipelineSourceConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MediaCapturePipelineSourceConfiguration_MediaPipelineArn *smithy.Schema
-
-var MediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration *smithy.Schema
-
-var MediaCapturePipelineSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaCapturePipelineSummary",
-}, smithy.ShapeTypeStructure, 2)
-var MediaCapturePipelineSummary_MediaPipelineId *smithy.Schema
-
-var MediaCapturePipelineSummary_MediaPipelineArn *smithy.Schema
-
-var _MediaCapturePipelineSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaCapturePipelineSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MediaCapturePipelineSummaryList_member *smithy.Schema
-
-var MediaConcatenationPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaConcatenationPipeline",
-}, smithy.ShapeTypeStructure, 7)
-var MediaConcatenationPipeline_MediaPipelineId *smithy.Schema
-
-var MediaConcatenationPipeline_MediaPipelineArn *smithy.Schema
-
-var MediaConcatenationPipeline_Sources *smithy.Schema
-
-var MediaConcatenationPipeline_Sinks *smithy.Schema
-
-var MediaConcatenationPipeline_Status *smithy.Schema
-
-var MediaConcatenationPipeline_CreatedTimestamp *smithy.Schema
-
-var MediaConcatenationPipeline_UpdatedTimestamp *smithy.Schema
-
-var MediaEncoding = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaEncoding",
-}, smithy.ShapeTypeEnum, 1)
-var MediaEncoding_PCM *smithy.Schema
-
-var MediaInsightsPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipeline",
-}, smithy.ShapeTypeStructure, 10)
-var MediaInsightsPipeline_MediaPipelineId *smithy.Schema
-
-var MediaInsightsPipeline_MediaPipelineArn *smithy.Schema
-
-var MediaInsightsPipeline_MediaInsightsPipelineConfigurationArn *smithy.Schema
-
-var MediaInsightsPipeline_Status *smithy.Schema
-
-var MediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration *smithy.Schema
-
-var MediaInsightsPipeline_MediaInsightsRuntimeMetadata *smithy.Schema
-
-var MediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration *smithy.Schema
-
-var MediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration *smithy.Schema
-
-var MediaInsightsPipeline_CreatedTimestamp *smithy.Schema
-
-var MediaInsightsPipeline_ElementStatuses *smithy.Schema
-
-var MediaInsightsPipelineConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineConfiguration",
-}, smithy.ShapeTypeStructure, 8)
-var MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName *smithy.Schema
-
-var MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn *smithy.Schema
-
-var MediaInsightsPipelineConfiguration_ResourceAccessRoleArn *smithy.Schema
-
-var MediaInsightsPipelineConfiguration_RealTimeAlertConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfiguration_Elements *smithy.Schema
-
-var MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId *smithy.Schema
-
-var MediaInsightsPipelineConfiguration_CreatedTimestamp *smithy.Schema
-
-var MediaInsightsPipelineConfiguration_UpdatedTimestamp *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineConfigurationElement",
-}, smithy.ShapeTypeStructure, 10)
-var MediaInsightsPipelineConfigurationElement_Type *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration *smithy.Schema
-
-var _MediaInsightsPipelineConfigurationElements = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineConfigurationElements",
-}, smithy.ShapeTypeList, 1)
-var _MediaInsightsPipelineConfigurationElements_member *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineConfigurationElementType",
-}, smithy.ShapeTypeEnum, 9)
-var MediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_VOICE_ANALYTICS_PROCESSOR *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_PROCESSOR *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_KINESIS_DATA_STREAM_SINK *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_LAMBDA_FUNCTION_SINK *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_SQS_QUEUE_SINK *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_SNS_TOPIC_SINK *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_S3_RECORDING_SINK *smithy.Schema
-
-var MediaInsightsPipelineConfigurationElementType_VOICE_ENHANCEMENT_SINK *smithy.Schema
-
-var _MediaInsightsPipelineConfigurationNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineConfigurationNameString",
-}, smithy.ShapeTypeString, 0)
-
-var MediaInsightsPipelineConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineConfigurationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName *smithy.Schema
-
-var MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId *smithy.Schema
-
-var MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn *smithy.Schema
-
-var _MediaInsightsPipelineConfigurationSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineConfigurationSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MediaInsightsPipelineConfigurationSummaryList_member *smithy.Schema
-
-var MediaInsightsPipelineElementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineElementStatus",
-}, smithy.ShapeTypeStructure, 2)
-var MediaInsightsPipelineElementStatus_Type *smithy.Schema
-
-var MediaInsightsPipelineElementStatus_Status *smithy.Schema
-
-var _MediaInsightsPipelineElementStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsPipelineElementStatuses",
-}, smithy.ShapeTypeList, 1)
-var _MediaInsightsPipelineElementStatuses_member *smithy.Schema
-
-var _MediaInsightsRuntimeMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaInsightsRuntimeMetadata",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _MediaInsightsRuntimeMetadata_key *smithy.Schema
-
-var _MediaInsightsRuntimeMetadata_value *smithy.Schema
-
-var MediaLiveConnectorPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaLiveConnectorPipeline",
-}, smithy.ShapeTypeStructure, 7)
-var MediaLiveConnectorPipeline_Sources *smithy.Schema
-
-var MediaLiveConnectorPipeline_Sinks *smithy.Schema
-
-var MediaLiveConnectorPipeline_MediaPipelineId *smithy.Schema
-
-var MediaLiveConnectorPipeline_MediaPipelineArn *smithy.Schema
-
-var MediaLiveConnectorPipeline_Status *smithy.Schema
-
-var MediaLiveConnectorPipeline_CreatedTimestamp *smithy.Schema
-
-var MediaLiveConnectorPipeline_UpdatedTimestamp *smithy.Schema
-
-var MediaPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipeline",
-}, smithy.ShapeTypeStructure, 5)
-var MediaPipeline_MediaCapturePipeline *smithy.Schema
-
-var MediaPipeline_MediaLiveConnectorPipeline *smithy.Schema
-
-var MediaPipeline_MediaConcatenationPipeline *smithy.Schema
-
-var MediaPipeline_MediaInsightsPipeline *smithy.Schema
-
-var MediaPipeline_MediaStreamPipeline *smithy.Schema
-
-var MediaPipelineElementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineElementStatus",
-}, smithy.ShapeTypeEnum, 8)
-var MediaPipelineElementStatus_NotStarted *smithy.Schema
-
-var MediaPipelineElementStatus_NotSupported *smithy.Schema
-
-var MediaPipelineElementStatus_Initializing *smithy.Schema
-
-var MediaPipelineElementStatus_InProgress *smithy.Schema
-
-var MediaPipelineElementStatus_Failed *smithy.Schema
-
-var MediaPipelineElementStatus_Stopping *smithy.Schema
-
-var MediaPipelineElementStatus_Stopped *smithy.Schema
-
-var MediaPipelineElementStatus_Paused *smithy.Schema
-
-var _MediaPipelineList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineList",
-}, smithy.ShapeTypeList, 1)
-var _MediaPipelineList_member *smithy.Schema
-
-var MediaPipelineSinkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineSinkType",
-}, smithy.ShapeTypeEnum, 1)
-var MediaPipelineSinkType_S3Bucket *smithy.Schema
-
-var MediaPipelineSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineSourceType",
-}, smithy.ShapeTypeEnum, 1)
-var MediaPipelineSourceType_ChimeSdkMeeting *smithy.Schema
-
-var MediaPipelineStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineStatus",
-}, smithy.ShapeTypeEnum, 7)
-var MediaPipelineStatus_Initializing *smithy.Schema
-
-var MediaPipelineStatus_InProgress *smithy.Schema
-
-var MediaPipelineStatus_Failed *smithy.Schema
-
-var MediaPipelineStatus_Stopping *smithy.Schema
-
-var MediaPipelineStatus_Stopped *smithy.Schema
-
-var MediaPipelineStatus_Paused *smithy.Schema
-
-var MediaPipelineStatus_NotStarted *smithy.Schema
-
-var MediaPipelineStatusUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineStatusUpdate",
-}, smithy.ShapeTypeEnum, 2)
-var MediaPipelineStatusUpdate_Pause *smithy.Schema
-
-var MediaPipelineStatusUpdate_Resume *smithy.Schema
-
-var MediaPipelineSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineSummary",
-}, smithy.ShapeTypeStructure, 2)
-var MediaPipelineSummary_MediaPipelineId *smithy.Schema
-
-var MediaPipelineSummary_MediaPipelineArn *smithy.Schema
-
-var MediaPipelineTaskStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaPipelineTaskStatus",
-}, smithy.ShapeTypeEnum, 6)
-var MediaPipelineTaskStatus_NotStarted *smithy.Schema
-
-var MediaPipelineTaskStatus_Initializing *smithy.Schema
-
-var MediaPipelineTaskStatus_InProgress *smithy.Schema
-
-var MediaPipelineTaskStatus_Failed *smithy.Schema
-
-var MediaPipelineTaskStatus_Stopping *smithy.Schema
-
-var MediaPipelineTaskStatus_Stopped *smithy.Schema
-
-var _MediaSampleRateHertz = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaSampleRateHertz",
-}, smithy.ShapeTypeInteger, 0)
-
-var MediaStreamPipeline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaStreamPipeline",
-}, smithy.ShapeTypeStructure, 7)
-var MediaStreamPipeline_MediaPipelineId *smithy.Schema
-
-var MediaStreamPipeline_MediaPipelineArn *smithy.Schema
-
-var MediaStreamPipeline_CreatedTimestamp *smithy.Schema
-
-var MediaStreamPipeline_UpdatedTimestamp *smithy.Schema
-
-var MediaStreamPipeline_Status *smithy.Schema
-
-var MediaStreamPipeline_Sources *smithy.Schema
-
-var MediaStreamPipeline_Sinks *smithy.Schema
-
-var MediaStreamPipelineSinkType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaStreamPipelineSinkType",
-}, smithy.ShapeTypeEnum, 1)
-var MediaStreamPipelineSinkType_KinesisVideoStreamPool *smithy.Schema
-
-var MediaStreamSink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaStreamSink",
-}, smithy.ShapeTypeStructure, 4)
-var MediaStreamSink_SinkArn *smithy.Schema
-
-var MediaStreamSink_SinkType *smithy.Schema
-
-var MediaStreamSink_ReservedStreamCapacity *smithy.Schema
-
-var MediaStreamSink_MediaStreamType *smithy.Schema
-
-var _MediaStreamSinkList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaStreamSinkList",
-}, smithy.ShapeTypeList, 1)
-var _MediaStreamSinkList_member *smithy.Schema
-
-var MediaStreamSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaStreamSource",
-}, smithy.ShapeTypeStructure, 2)
-var MediaStreamSource_SourceType *smithy.Schema
-
-var MediaStreamSource_SourceArn *smithy.Schema
-
-var _MediaStreamSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaStreamSourceList",
-}, smithy.ShapeTypeList, 1)
-var _MediaStreamSourceList_member *smithy.Schema
-
-var MediaStreamType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MediaStreamType",
-}, smithy.ShapeTypeEnum, 2)
-var MediaStreamType_MixedAudio *smithy.Schema
-
-var MediaStreamType_IndividualAudio *smithy.Schema
-
-var MeetingEventsConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "MeetingEventsConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var MeetingEventsConcatenationConfiguration_State *smithy.Schema
-
-var _ModelName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ModelName",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var NotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "NotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var NotFoundException_Code *smithy.Schema
-
-var NotFoundException_Message *smithy.Schema
-
-var NotFoundException_RequestId *smithy.Schema
-
-var _NumberOfChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "NumberOfChannels",
-}, smithy.ShapeTypeInteger, 0)
-
-var PartialResultsStability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "PartialResultsStability",
-}, smithy.ShapeTypeEnum, 3)
-var PartialResultsStability_HIGH *smithy.Schema
-
-var PartialResultsStability_MEDIUM *smithy.Schema
-
-var PartialResultsStability_LOW *smithy.Schema
-
-var ParticipantRole = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ParticipantRole",
-}, smithy.ShapeTypeEnum, 2)
-var ParticipantRole_AGENT *smithy.Schema
-
-var ParticipantRole_CUSTOMER *smithy.Schema
-
-var _PiiEntityTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "PiiEntityTypes",
-}, smithy.ShapeTypeString, 0)
-
-var PostCallAnalyticsSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "PostCallAnalyticsSettings",
-}, smithy.ShapeTypeStructure, 4)
-var PostCallAnalyticsSettings_OutputLocation *smithy.Schema
-
-var PostCallAnalyticsSettings_DataAccessRoleArn *smithy.Schema
-
-var PostCallAnalyticsSettings_ContentRedactionOutput *smithy.Schema
-
-var PostCallAnalyticsSettings_OutputEncryptionKMSKeyId *smithy.Schema
-
-var PresenterOnlyConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "PresenterOnlyConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var PresenterOnlyConfiguration_PresenterPosition *smithy.Schema
-
-var PresenterPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "PresenterPosition",
-}, smithy.ShapeTypeEnum, 4)
-var PresenterPosition_TopLeft *smithy.Schema
-
-var PresenterPosition_TopRight *smithy.Schema
-
-var PresenterPosition_BottomLeft *smithy.Schema
-
-var PresenterPosition_BottomRight *smithy.Schema
-
-var RealTimeAlertConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RealTimeAlertConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var RealTimeAlertConfiguration_Disabled *smithy.Schema
-
-var RealTimeAlertConfiguration_Rules *smithy.Schema
-
-var RealTimeAlertRule = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RealTimeAlertRule",
-}, smithy.ShapeTypeStructure, 4)
-var RealTimeAlertRule_Type *smithy.Schema
-
-var RealTimeAlertRule_KeywordMatchConfiguration *smithy.Schema
-
-var RealTimeAlertRule_SentimentConfiguration *smithy.Schema
-
-var RealTimeAlertRule_IssueDetectionConfiguration *smithy.Schema
-
-var _RealTimeAlertRuleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RealTimeAlertRuleList",
-}, smithy.ShapeTypeList, 1)
-var _RealTimeAlertRuleList_member *smithy.Schema
-
-var RealTimeAlertRuleType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RealTimeAlertRuleType",
-}, smithy.ShapeTypeEnum, 3)
-var RealTimeAlertRuleType_KeywordMatch *smithy.Schema
-
-var RealTimeAlertRuleType_Sentiment *smithy.Schema
-
-var RealTimeAlertRuleType_IssueDetection *smithy.Schema
-
-var RecordingFileFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RecordingFileFormat",
-}, smithy.ShapeTypeEnum, 2)
-var RecordingFileFormat_Wav *smithy.Schema
-
-var RecordingFileFormat_Opus *smithy.Schema
-
-var RecordingStreamConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RecordingStreamConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var RecordingStreamConfiguration_StreamArn *smithy.Schema
-
-var _RecordingStreamList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RecordingStreamList",
-}, smithy.ShapeTypeList, 1)
-var _RecordingStreamList_member *smithy.Schema
-
-var _ReservedStreamCapacity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ReservedStreamCapacity",
-}, smithy.ShapeTypeInteger, 0)
-
-var ResolutionOption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ResolutionOption",
-}, smithy.ShapeTypeEnum, 2)
-var ResolutionOption_HD *smithy.Schema
-
-var ResolutionOption_FHD *smithy.Schema
-
-var ResourceLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ResourceLimitExceededException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ResourceLimitExceededException_Code *smithy.Schema
-
-var ResourceLimitExceededException_Message *smithy.Schema
-
-var ResourceLimitExceededException_RequestId *smithy.Schema
-
-var _ResultMax = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ResultMax",
-}, smithy.ShapeTypeInteger, 0)
-
-var _RuleName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "RuleName",
-}, smithy.ShapeTypeString, 0)
-
-var S3BucketSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "S3BucketSinkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var S3BucketSinkConfiguration_Destination *smithy.Schema
-
-var S3RecordingSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "S3RecordingSinkConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var S3RecordingSinkConfiguration_Destination *smithy.Schema
-
-var S3RecordingSinkConfiguration_RecordingFileFormat *smithy.Schema
-
-var S3RecordingSinkRuntimeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "S3RecordingSinkRuntimeConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var S3RecordingSinkRuntimeConfiguration_Destination *smithy.Schema
-
-var S3RecordingSinkRuntimeConfiguration_RecordingFileFormat *smithy.Schema
-
-var SelectedVideoStreams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SelectedVideoStreams",
-}, smithy.ShapeTypeStructure, 2)
-var SelectedVideoStreams_AttendeeIds *smithy.Schema
-
-var SelectedVideoStreams_ExternalUserIds *smithy.Schema
-
-var _SensitiveString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SensitiveString",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var SentimentConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SentimentConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var SentimentConfiguration_RuleName *smithy.Schema
-
-var SentimentConfiguration_SentimentType *smithy.Schema
-
-var SentimentConfiguration_TimePeriod *smithy.Schema
-
-var _SentimentTimePeriodInSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SentimentTimePeriodInSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var SentimentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SentimentType",
-}, smithy.ShapeTypeEnum, 1)
-var SentimentType_NEGATIVE *smithy.Schema
-
-var ServiceFailureException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ServiceFailureException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var ServiceFailureException_Code *smithy.Schema
-
-var ServiceFailureException_Message *smithy.Schema
-
-var ServiceFailureException_RequestId *smithy.Schema
-
-var ServiceUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ServiceUnavailableException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 503})
-var ServiceUnavailableException_Code *smithy.Schema
-
-var ServiceUnavailableException_Message *smithy.Schema
-
-var ServiceUnavailableException_RequestId *smithy.Schema
-
-var SnsTopicSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SnsTopicSinkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SnsTopicSinkConfiguration_InsightsTarget *smithy.Schema
-
-var SourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SourceConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SourceConfiguration_SelectedVideoStreams *smithy.Schema
-
-var SpeakerSearchTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SpeakerSearchTask",
-}, smithy.ShapeTypeStructure, 4)
-var SpeakerSearchTask_SpeakerSearchTaskId *smithy.Schema
-
-var SpeakerSearchTask_SpeakerSearchTaskStatus *smithy.Schema
-
-var SpeakerSearchTask_CreatedTimestamp *smithy.Schema
-
-var SpeakerSearchTask_UpdatedTimestamp *smithy.Schema
-
-var SqsQueueSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SqsQueueSinkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var SqsQueueSinkConfiguration_InsightsTarget *smithy.Schema
-
-var SseAwsKeyManagementParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "SseAwsKeyManagementParams",
-}, smithy.ShapeTypeStructure, 2)
-var SseAwsKeyManagementParams_AwsKmsKeyId *smithy.Schema
-
-var SseAwsKeyManagementParams_AwsKmsEncryptionContext *smithy.Schema
-
-var StreamChannelDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StreamChannelDefinition",
-}, smithy.ShapeTypeStructure, 2)
-var StreamChannelDefinition_NumberOfChannels *smithy.Schema
-
-var StreamChannelDefinition_ChannelDefinitions *smithy.Schema
-
-var StreamConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StreamConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var StreamConfiguration_StreamArn *smithy.Schema
-
-var StreamConfiguration_FragmentNumber *smithy.Schema
-
-var StreamConfiguration_StreamChannelDefinition *smithy.Schema
-
-var _Streams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "Streams",
-}, smithy.ShapeTypeList, 1)
-var _Streams_member *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_Key *smithy.Schema
-
-var Tag_Value *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottledClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ThrottledClientException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottledClientException_Code *smithy.Schema
-
-var ThrottledClientException_Message *smithy.Schema
-
-var ThrottledClientException_RequestId *smithy.Schema
-
-var _TileAspectRatio = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TileAspectRatio",
-}, smithy.ShapeTypeString, 0)
-
-var _TileCount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TileCount",
-}, smithy.ShapeTypeInteger, 0)
-
-var TileOrder = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TileOrder",
-}, smithy.ShapeTypeEnum, 2)
-var TileOrder_JoinSequence *smithy.Schema
-
-var TileOrder_SpeakerSequence *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimestampRange_StartTimestamp *smithy.Schema
-
-var TimestampRange_EndTimestamp *smithy.Schema
-
-var TranscriptionMessagesConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TranscriptionMessagesConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var TranscriptionMessagesConcatenationConfiguration_State *smithy.Schema
-
-var UnauthorizedClientException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UnauthorizedClientException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var UnauthorizedClientException_Code *smithy.Schema
-
-var UnauthorizedClientException_Message *smithy.Schema
-
-var UnauthorizedClientException_RequestId *smithy.Schema
-
-var VerticalLayoutConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VerticalLayoutConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var VerticalLayoutConfiguration_TileOrder *smithy.Schema
-
-var VerticalLayoutConfiguration_TilePosition *smithy.Schema
-
-var VerticalLayoutConfiguration_TileCount *smithy.Schema
-
-var VerticalLayoutConfiguration_TileAspectRatio *smithy.Schema
-
-var VerticalTilePosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VerticalTilePosition",
-}, smithy.ShapeTypeEnum, 2)
-var VerticalTilePosition_Left *smithy.Schema
-
-var VerticalTilePosition_Right *smithy.Schema
-
-var VideoArtifactsConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VideoArtifactsConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var VideoArtifactsConfiguration_State *smithy.Schema
-
-var VideoArtifactsConfiguration_MuxType *smithy.Schema
-
-var VideoAttribute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VideoAttribute",
-}, smithy.ShapeTypeStructure, 4)
-var VideoAttribute_CornerRadius *smithy.Schema
-
-var VideoAttribute_BorderColor *smithy.Schema
-
-var VideoAttribute_HighlightColor *smithy.Schema
-
-var VideoAttribute_BorderThickness *smithy.Schema
-
-var VideoConcatenationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VideoConcatenationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var VideoConcatenationConfiguration_State *smithy.Schema
-
-var VideoMuxType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VideoMuxType",
-}, smithy.ShapeTypeEnum, 1)
-var VideoMuxType_VideoOnly *smithy.Schema
-
-var VocabularyFilterMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VocabularyFilterMethod",
-}, smithy.ShapeTypeEnum, 3)
-var VocabularyFilterMethod_REMOVE *smithy.Schema
-
-var VocabularyFilterMethod_MASK *smithy.Schema
-
-var VocabularyFilterMethod_TAG *smithy.Schema
-
-var _VocabularyFilterName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VocabularyFilterName",
-}, smithy.ShapeTypeString, 0)
-
-var _VocabularyFilterNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VocabularyFilterNames",
-}, smithy.ShapeTypeString, 0)
-
-var _VocabularyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VocabularyName",
-}, smithy.ShapeTypeString, 0)
-
-var _VocabularyNames = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VocabularyNames",
-}, smithy.ShapeTypeString, 0)
-
-var VoiceAnalyticsConfigurationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VoiceAnalyticsConfigurationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var VoiceAnalyticsConfigurationStatus_ENABLED *smithy.Schema
-
-var VoiceAnalyticsConfigurationStatus_DISABLED *smithy.Schema
-
-var VoiceAnalyticsLanguageCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VoiceAnalyticsLanguageCode",
-}, smithy.ShapeTypeEnum, 1)
-var VoiceAnalyticsLanguageCode_EN_US *smithy.Schema
-
-var VoiceAnalyticsProcessorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VoiceAnalyticsProcessorConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var VoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus *smithy.Schema
-
-var VoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus *smithy.Schema
-
-var VoiceEnhancementSinkConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VoiceEnhancementSinkConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var VoiceEnhancementSinkConfiguration_Disabled *smithy.Schema
-
-var VoiceToneAnalysisTask = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "VoiceToneAnalysisTask",
-}, smithy.ShapeTypeStructure, 4)
-var VoiceToneAnalysisTask_VoiceToneAnalysisTaskId *smithy.Schema
-
-var VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus *smithy.Schema
-
-var VoiceToneAnalysisTask_CreatedTimestamp *smithy.Schema
-
-var VoiceToneAnalysisTask_UpdatedTimestamp *smithy.Schema
-
-var CreateMediaCapturePipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaCapturePipelineRequest",
-}, smithy.ShapeTypeStructure, 9)
-var CreateMediaCapturePipelineRequest_SourceType *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_SourceArn *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_SinkType *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_SinkArn *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_ClientRequestToken *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_ChimeSdkMeetingConfiguration *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_SseAwsKeyManagementParams *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_SinkIamRoleArn *smithy.Schema
-
-var CreateMediaCapturePipelineRequest_Tags *smithy.Schema
-
-var CreateMediaCapturePipelineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaCapturePipelineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMediaCapturePipelineResponse_MediaCapturePipeline *smithy.Schema
-
-var CreateMediaConcatenationPipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaConcatenationPipelineRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMediaConcatenationPipelineRequest_Sources *smithy.Schema
-
-var CreateMediaConcatenationPipelineRequest_Sinks *smithy.Schema
-
-var CreateMediaConcatenationPipelineRequest_ClientRequestToken *smithy.Schema
-
-var CreateMediaConcatenationPipelineRequest_Tags *smithy.Schema
-
-var CreateMediaConcatenationPipelineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaConcatenationPipelineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline *smithy.Schema
-
-var CreateMediaInsightsPipelineConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaInsightsPipelineConfigurationRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateMediaInsightsPipelineConfigurationRequest_MediaInsightsPipelineConfigurationName *smithy.Schema
-
-var CreateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn *smithy.Schema
-
-var CreateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration *smithy.Schema
-
-var CreateMediaInsightsPipelineConfigurationRequest_Elements *smithy.Schema
-
-var CreateMediaInsightsPipelineConfigurationRequest_Tags *smithy.Schema
-
-var CreateMediaInsightsPipelineConfigurationRequest_ClientRequestToken *smithy.Schema
-
-var CreateMediaInsightsPipelineConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaInsightsPipelineConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration *smithy.Schema
-
-var CreateMediaInsightsPipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaInsightsPipelineRequest",
-}, smithy.ShapeTypeStructure, 7)
-var CreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn *smithy.Schema
-
-var CreateMediaInsightsPipelineRequest_KinesisVideoStreamSourceRuntimeConfiguration *smithy.Schema
-
-var CreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata *smithy.Schema
-
-var CreateMediaInsightsPipelineRequest_KinesisVideoStreamRecordingSourceRuntimeConfiguration *smithy.Schema
-
-var CreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration *smithy.Schema
-
-var CreateMediaInsightsPipelineRequest_Tags *smithy.Schema
-
-var CreateMediaInsightsPipelineRequest_ClientRequestToken *smithy.Schema
-
-var CreateMediaInsightsPipelineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaInsightsPipelineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMediaInsightsPipelineResponse_MediaInsightsPipeline *smithy.Schema
-
-var CreateMediaLiveConnectorPipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaLiveConnectorPipelineRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMediaLiveConnectorPipelineRequest_Sources *smithy.Schema
-
-var CreateMediaLiveConnectorPipelineRequest_Sinks *smithy.Schema
-
-var CreateMediaLiveConnectorPipelineRequest_ClientRequestToken *smithy.Schema
-
-var CreateMediaLiveConnectorPipelineRequest_Tags *smithy.Schema
-
-var CreateMediaLiveConnectorPipelineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaLiveConnectorPipelineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline *smithy.Schema
-
-var CreateMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaPipelineKinesisVideoStreamPoolRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration *smithy.Schema
-
-var CreateMediaPipelineKinesisVideoStreamPoolRequest_PoolName *smithy.Schema
-
-var CreateMediaPipelineKinesisVideoStreamPoolRequest_ClientRequestToken *smithy.Schema
-
-var CreateMediaPipelineKinesisVideoStreamPoolRequest_Tags *smithy.Schema
-
-var CreateMediaPipelineKinesisVideoStreamPoolResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaPipelineKinesisVideoStreamPoolResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration *smithy.Schema
-
-var CreateMediaStreamPipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaStreamPipelineRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMediaStreamPipelineRequest_Sources *smithy.Schema
-
-var CreateMediaStreamPipelineRequest_Sinks *smithy.Schema
-
-var CreateMediaStreamPipelineRequest_ClientRequestToken *smithy.Schema
-
-var CreateMediaStreamPipelineRequest_Tags *smithy.Schema
-
-var CreateMediaStreamPipelineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "CreateMediaStreamPipelineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CreateMediaStreamPipelineResponse_MediaStreamPipeline *smithy.Schema
-
-var DeleteMediaCapturePipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaCapturePipelineRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMediaCapturePipelineRequest_MediaPipelineId *smithy.Schema
-
-var DeleteMediaInsightsPipelineConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaInsightsPipelineConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMediaInsightsPipelineConfigurationRequest_Identifier *smithy.Schema
-
-var DeleteMediaPipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaPipelineRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMediaPipelineRequest_MediaPipelineId *smithy.Schema
-
-var DeleteMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "DeleteMediaPipelineKinesisVideoStreamPoolRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteMediaPipelineKinesisVideoStreamPoolRequest_Identifier *smithy.Schema
-
-var GetMediaCapturePipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaCapturePipelineRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaCapturePipelineRequest_MediaPipelineId *smithy.Schema
-
-var GetMediaCapturePipelineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaCapturePipelineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaCapturePipelineResponse_MediaCapturePipeline *smithy.Schema
-
-var GetMediaInsightsPipelineConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaInsightsPipelineConfigurationRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaInsightsPipelineConfigurationRequest_Identifier *smithy.Schema
-
-var GetMediaInsightsPipelineConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaInsightsPipelineConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration *smithy.Schema
-
-var GetMediaPipelineRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaPipelineRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaPipelineRequest_MediaPipelineId *smithy.Schema
-
-var GetMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaPipelineKinesisVideoStreamPoolRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaPipelineKinesisVideoStreamPoolRequest_Identifier *smithy.Schema
-
-var GetMediaPipelineKinesisVideoStreamPoolResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaPipelineKinesisVideoStreamPoolResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration *smithy.Schema
-
-var GetMediaPipelineResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetMediaPipelineResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetMediaPipelineResponse_MediaPipeline *smithy.Schema
-
-var GetSpeakerSearchTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetSpeakerSearchTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetSpeakerSearchTaskRequest_Identifier *smithy.Schema
-
-var GetSpeakerSearchTaskRequest_SpeakerSearchTaskId *smithy.Schema
-
-var GetSpeakerSearchTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetSpeakerSearchTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetSpeakerSearchTaskResponse_SpeakerSearchTask *smithy.Schema
-
-var GetVoiceToneAnalysisTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetVoiceToneAnalysisTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetVoiceToneAnalysisTaskRequest_Identifier *smithy.Schema
-
-var GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId *smithy.Schema
-
-var GetVoiceToneAnalysisTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "GetVoiceToneAnalysisTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask *smithy.Schema
-
-var ListMediaCapturePipelinesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaCapturePipelinesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaCapturePipelinesRequest_NextToken *smithy.Schema
-
-var ListMediaCapturePipelinesRequest_MaxResults *smithy.Schema
-
-var ListMediaCapturePipelinesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaCapturePipelinesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaCapturePipelinesResponse_MediaCapturePipelines *smithy.Schema
-
-var ListMediaCapturePipelinesResponse_NextToken *smithy.Schema
-
-var ListMediaInsightsPipelineConfigurationsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaInsightsPipelineConfigurationsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaInsightsPipelineConfigurationsRequest_NextToken *smithy.Schema
-
-var ListMediaInsightsPipelineConfigurationsRequest_MaxResults *smithy.Schema
-
-var ListMediaInsightsPipelineConfigurationsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaInsightsPipelineConfigurationsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations *smithy.Schema
-
-var ListMediaInsightsPipelineConfigurationsResponse_NextToken *smithy.Schema
-
-var ListMediaPipelineKinesisVideoStreamPoolsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaPipelineKinesisVideoStreamPoolsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaPipelineKinesisVideoStreamPoolsRequest_NextToken *smithy.Schema
-
-var ListMediaPipelineKinesisVideoStreamPoolsRequest_MaxResults *smithy.Schema
-
-var ListMediaPipelineKinesisVideoStreamPoolsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaPipelineKinesisVideoStreamPoolsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools *smithy.Schema
-
-var ListMediaPipelineKinesisVideoStreamPoolsResponse_NextToken *smithy.Schema
-
-var ListMediaPipelinesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaPipelinesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaPipelinesRequest_NextToken *smithy.Schema
-
-var ListMediaPipelinesRequest_MaxResults *smithy.Schema
-
-var ListMediaPipelinesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListMediaPipelinesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListMediaPipelinesResponse_MediaPipelines *smithy.Schema
-
-var ListMediaPipelinesResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceARN *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var StartSpeakerSearchTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StartSpeakerSearchTaskRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartSpeakerSearchTaskRequest_Identifier *smithy.Schema
-
-var StartSpeakerSearchTaskRequest_VoiceProfileDomainArn *smithy.Schema
-
-var StartSpeakerSearchTaskRequest_KinesisVideoStreamSourceTaskConfiguration *smithy.Schema
-
-var StartSpeakerSearchTaskRequest_ClientRequestToken *smithy.Schema
-
-var StartSpeakerSearchTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StartSpeakerSearchTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartSpeakerSearchTaskResponse_SpeakerSearchTask *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StartVoiceToneAnalysisTaskRequest",
-}, smithy.ShapeTypeStructure, 4)
-var StartVoiceToneAnalysisTaskRequest_Identifier *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest_LanguageCode *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest_KinesisVideoStreamSourceTaskConfiguration *smithy.Schema
-
-var StartVoiceToneAnalysisTaskRequest_ClientRequestToken *smithy.Schema
-
-var StartVoiceToneAnalysisTaskResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StartVoiceToneAnalysisTaskResponse",
-}, smithy.ShapeTypeStructure, 1)
-var StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask *smithy.Schema
-
-var StopSpeakerSearchTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StopSpeakerSearchTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopSpeakerSearchTaskRequest_Identifier *smithy.Schema
-
-var StopSpeakerSearchTaskRequest_SpeakerSearchTaskId *smithy.Schema
-
-var StopVoiceToneAnalysisTaskRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "StopVoiceToneAnalysisTaskRequest",
-}, smithy.ShapeTypeStructure, 2)
-var StopVoiceToneAnalysisTaskRequest_Identifier *smithy.Schema
-
-var StopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceARN *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceARN *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateMediaInsightsPipelineConfigurationRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaInsightsPipelineConfigurationRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateMediaInsightsPipelineConfigurationRequest_Identifier *smithy.Schema
-
-var UpdateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn *smithy.Schema
-
-var UpdateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration *smithy.Schema
-
-var UpdateMediaInsightsPipelineConfigurationRequest_Elements *smithy.Schema
-
-var UpdateMediaInsightsPipelineConfigurationResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaInsightsPipelineConfigurationResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration *smithy.Schema
-
-var UpdateMediaInsightsPipelineStatusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaInsightsPipelineStatusRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateMediaInsightsPipelineStatusRequest_Identifier *smithy.Schema
-
-var UpdateMediaInsightsPipelineStatusRequest_UpdateStatus *smithy.Schema
-
-var UpdateMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaPipelineKinesisVideoStreamPoolRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateMediaPipelineKinesisVideoStreamPoolRequest_Identifier *smithy.Schema
-
-var UpdateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration *smithy.Schema
-
-var UpdateMediaPipelineKinesisVideoStreamPoolResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.chimesdkmediapipelines",
-	Name:      "UpdateMediaPipelineKinesisVideoStreamPoolResponse",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ActiveSpeakerPosition_TopLeft = ActiveSpeakerPosition.AddMember("TopLeft", smithyprelude.Unit)
-
-	ActiveSpeakerPosition_TopRight = ActiveSpeakerPosition.AddMember("TopRight", smithyprelude.Unit)
-
-	ActiveSpeakerPosition_BottomLeft = ActiveSpeakerPosition.AddMember("BottomLeft", smithyprelude.Unit)
-
-	ActiveSpeakerPosition_BottomRight = ActiveSpeakerPosition.AddMember("BottomRight", smithyprelude.Unit)
-
-	ActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition = ActiveSpeakerOnlyConfiguration.AddMember("ActiveSpeakerPosition", ActiveSpeakerPosition)
-
-	CallAnalyticsLanguageCode_EN_US = CallAnalyticsLanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_EN_GB = CallAnalyticsLanguageCode.AddMember("EN_GB", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_ES_US = CallAnalyticsLanguageCode.AddMember("ES_US", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_FR_CA = CallAnalyticsLanguageCode.AddMember("FR_CA", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_FR_FR = CallAnalyticsLanguageCode.AddMember("FR_FR", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_EN_AU = CallAnalyticsLanguageCode.AddMember("EN_AU", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_IT_IT = CallAnalyticsLanguageCode.AddMember("IT_IT", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_DE_DE = CallAnalyticsLanguageCode.AddMember("DE_DE", smithyprelude.Unit)
-
-	CallAnalyticsLanguageCode_PT_BR = CallAnalyticsLanguageCode.AddMember("PT_BR", smithyprelude.Unit)
-
-	VocabularyFilterMethod_REMOVE = VocabularyFilterMethod.AddMember("REMOVE", smithyprelude.Unit)
-
-	VocabularyFilterMethod_MASK = VocabularyFilterMethod.AddMember("MASK", smithyprelude.Unit)
-
-	VocabularyFilterMethod_TAG = VocabularyFilterMethod.AddMember("TAG", smithyprelude.Unit)
-
-	PartialResultsStability_HIGH = PartialResultsStability.AddMember("HIGH", smithyprelude.Unit)
-
-	PartialResultsStability_MEDIUM = PartialResultsStability.AddMember("MEDIUM", smithyprelude.Unit)
-
-	PartialResultsStability_LOW = PartialResultsStability.AddMember("LOW", smithyprelude.Unit)
-
-	ContentType_PII = ContentType.AddMember("PII", smithyprelude.Unit)
-
-	ContentRedactionOutput_REDACTED = ContentRedactionOutput.AddMember("REDACTED", smithyprelude.Unit)
-
-	ContentRedactionOutput_REDACTED_AND_UNREDACTED = ContentRedactionOutput.AddMember("REDACTED_AND_UNREDACTED", smithyprelude.Unit)
-
-	PostCallAnalyticsSettings_OutputLocation = PostCallAnalyticsSettings.AddMember("OutputLocation", _String)
-
-	PostCallAnalyticsSettings_DataAccessRoleArn = PostCallAnalyticsSettings.AddMember("DataAccessRoleArn", _String)
-
-	PostCallAnalyticsSettings_ContentRedactionOutput = PostCallAnalyticsSettings.AddMember("ContentRedactionOutput", ContentRedactionOutput)
-
-	PostCallAnalyticsSettings_OutputEncryptionKMSKeyId = PostCallAnalyticsSettings.AddMember("OutputEncryptionKMSKeyId", _String)
-
-	_CategoryNameList_member = _CategoryNameList.AddMember("member", _CategoryName)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("LanguageCode", CallAnalyticsLanguageCode)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("VocabularyName", _VocabularyName)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("VocabularyFilterMethod", VocabularyFilterMethod)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("LanguageModelName", _ModelName)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("EnablePartialResultsStabilization", _Boolean)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("PartialResultsStability", PartialResultsStability)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("ContentIdentificationType", ContentType)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("ContentRedactionType", ContentType)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("PiiEntityTypes", _PiiEntityTypes)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("FilterPartialResults", _Boolean)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("PostCallAnalyticsSettings", PostCallAnalyticsSettings)
-
-	AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories = AmazonTranscribeCallAnalyticsProcessorConfiguration.AddMember("CallAnalyticsStreamCategories", _CategoryNameList)
-
-	AmazonTranscribeProcessorConfiguration_LanguageCode = AmazonTranscribeProcessorConfiguration.AddMember("LanguageCode", CallAnalyticsLanguageCode)
-
-	AmazonTranscribeProcessorConfiguration_VocabularyName = AmazonTranscribeProcessorConfiguration.AddMember("VocabularyName", _VocabularyName)
-
-	AmazonTranscribeProcessorConfiguration_VocabularyFilterName = AmazonTranscribeProcessorConfiguration.AddMember("VocabularyFilterName", _VocabularyFilterName)
-
-	AmazonTranscribeProcessorConfiguration_VocabularyFilterMethod = AmazonTranscribeProcessorConfiguration.AddMember("VocabularyFilterMethod", VocabularyFilterMethod)
-
-	AmazonTranscribeProcessorConfiguration_ShowSpeakerLabel = AmazonTranscribeProcessorConfiguration.AddMember("ShowSpeakerLabel", _Boolean)
-
-	AmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization = AmazonTranscribeProcessorConfiguration.AddMember("EnablePartialResultsStabilization", _Boolean)
-
-	AmazonTranscribeProcessorConfiguration_PartialResultsStability = AmazonTranscribeProcessorConfiguration.AddMember("PartialResultsStability", PartialResultsStability)
-
-	AmazonTranscribeProcessorConfiguration_ContentIdentificationType = AmazonTranscribeProcessorConfiguration.AddMember("ContentIdentificationType", ContentType)
-
-	AmazonTranscribeProcessorConfiguration_ContentRedactionType = AmazonTranscribeProcessorConfiguration.AddMember("ContentRedactionType", ContentType)
-
-	AmazonTranscribeProcessorConfiguration_PiiEntityTypes = AmazonTranscribeProcessorConfiguration.AddMember("PiiEntityTypes", _PiiEntityTypes)
-
-	AmazonTranscribeProcessorConfiguration_LanguageModelName = AmazonTranscribeProcessorConfiguration.AddMember("LanguageModelName", _ModelName)
-
-	AmazonTranscribeProcessorConfiguration_FilterPartialResults = AmazonTranscribeProcessorConfiguration.AddMember("FilterPartialResults", _Boolean)
-
-	AmazonTranscribeProcessorConfiguration_IdentifyLanguage = AmazonTranscribeProcessorConfiguration.AddMember("IdentifyLanguage", _Boolean)
-
-	AmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages = AmazonTranscribeProcessorConfiguration.AddMember("IdentifyMultipleLanguages", _Boolean)
-
-	AmazonTranscribeProcessorConfiguration_LanguageOptions = AmazonTranscribeProcessorConfiguration.AddMember("LanguageOptions", _LanguageOptions)
-
-	AmazonTranscribeProcessorConfiguration_PreferredLanguage = AmazonTranscribeProcessorConfiguration.AddMember("PreferredLanguage", CallAnalyticsLanguageCode)
-
-	AmazonTranscribeProcessorConfiguration_VocabularyNames = AmazonTranscribeProcessorConfiguration.AddMember("VocabularyNames", _VocabularyNames)
-
-	AmazonTranscribeProcessorConfiguration_VocabularyFilterNames = AmazonTranscribeProcessorConfiguration.AddMember("VocabularyFilterNames", _VocabularyFilterNames)
-
-	AudioArtifactsConcatenationState_Enabled = AudioArtifactsConcatenationState.AddMember("Enabled", smithyprelude.Unit)
-
-	AudioConcatenationConfiguration_State = AudioConcatenationConfiguration.AddMember("State", AudioArtifactsConcatenationState)
-
-	ArtifactsConcatenationState_Enabled = ArtifactsConcatenationState.AddMember("Enabled", smithyprelude.Unit)
-
-	ArtifactsConcatenationState_Disabled = ArtifactsConcatenationState.AddMember("Disabled", smithyprelude.Unit)
-
-	VideoConcatenationConfiguration_State = VideoConcatenationConfiguration.AddMember("State", ArtifactsConcatenationState)
-
-	ContentConcatenationConfiguration_State = ContentConcatenationConfiguration.AddMember("State", ArtifactsConcatenationState)
-
-	DataChannelConcatenationConfiguration_State = DataChannelConcatenationConfiguration.AddMember("State", ArtifactsConcatenationState)
-
-	TranscriptionMessagesConcatenationConfiguration_State = TranscriptionMessagesConcatenationConfiguration.AddMember("State", ArtifactsConcatenationState)
-
-	MeetingEventsConcatenationConfiguration_State = MeetingEventsConcatenationConfiguration.AddMember("State", ArtifactsConcatenationState)
-
-	CompositedVideoConcatenationConfiguration_State = CompositedVideoConcatenationConfiguration.AddMember("State", ArtifactsConcatenationState)
-
-	ArtifactsConcatenationConfiguration_Audio = ArtifactsConcatenationConfiguration.AddMember("Audio", AudioConcatenationConfiguration)
-
-	ArtifactsConcatenationConfiguration_Video = ArtifactsConcatenationConfiguration.AddMember("Video", VideoConcatenationConfiguration)
-
-	ArtifactsConcatenationConfiguration_Content = ArtifactsConcatenationConfiguration.AddMember("Content", ContentConcatenationConfiguration)
-
-	ArtifactsConcatenationConfiguration_DataChannel = ArtifactsConcatenationConfiguration.AddMember("DataChannel", DataChannelConcatenationConfiguration)
-
-	ArtifactsConcatenationConfiguration_TranscriptionMessages = ArtifactsConcatenationConfiguration.AddMember("TranscriptionMessages", TranscriptionMessagesConcatenationConfiguration)
-
-	ArtifactsConcatenationConfiguration_MeetingEvents = ArtifactsConcatenationConfiguration.AddMember("MeetingEvents", MeetingEventsConcatenationConfiguration)
-
-	ArtifactsConcatenationConfiguration_CompositedVideo = ArtifactsConcatenationConfiguration.AddMember("CompositedVideo", CompositedVideoConcatenationConfiguration)
-
-	AudioMuxType_AudioOnly = AudioMuxType.AddMember("AudioOnly", smithyprelude.Unit)
-
-	AudioMuxType_AudioWithActiveSpeakerVideo = AudioMuxType.AddMember("AudioWithActiveSpeakerVideo", smithyprelude.Unit)
-
-	AudioMuxType_AudioWithCompositedVideo = AudioMuxType.AddMember("AudioWithCompositedVideo", smithyprelude.Unit)
-
-	AudioArtifactsConfiguration_MuxType = AudioArtifactsConfiguration.AddMember("MuxType", AudioMuxType)
-
-	ArtifactsState_Enabled = ArtifactsState.AddMember("Enabled", smithyprelude.Unit)
-
-	ArtifactsState_Disabled = ArtifactsState.AddMember("Disabled", smithyprelude.Unit)
-
-	VideoMuxType_VideoOnly = VideoMuxType.AddMember("VideoOnly", smithyprelude.Unit)
-
-	VideoArtifactsConfiguration_State = VideoArtifactsConfiguration.AddMember("State", ArtifactsState)
-
-	VideoArtifactsConfiguration_MuxType = VideoArtifactsConfiguration.AddMember("MuxType", VideoMuxType)
-
-	ContentMuxType_ContentOnly = ContentMuxType.AddMember("ContentOnly", smithyprelude.Unit)
-
-	ContentArtifactsConfiguration_State = ContentArtifactsConfiguration.AddMember("State", ArtifactsState)
-
-	ContentArtifactsConfiguration_MuxType = ContentArtifactsConfiguration.AddMember("MuxType", ContentMuxType)
-
-	LayoutOption_GridView = LayoutOption.AddMember("GridView", smithyprelude.Unit)
-
-	ResolutionOption_HD = ResolutionOption.AddMember("HD", smithyprelude.Unit)
-
-	ResolutionOption_FHD = ResolutionOption.AddMember("FHD", smithyprelude.Unit)
-
-	ContentShareLayoutOption_PresenterOnly = ContentShareLayoutOption.AddMember("PresenterOnly", smithyprelude.Unit)
-
-	ContentShareLayoutOption_Horizontal = ContentShareLayoutOption.AddMember("Horizontal", smithyprelude.Unit)
-
-	ContentShareLayoutOption_Vertical = ContentShareLayoutOption.AddMember("Vertical", smithyprelude.Unit)
-
-	ContentShareLayoutOption_ActiveSpeakerOnly = ContentShareLayoutOption.AddMember("ActiveSpeakerOnly", smithyprelude.Unit)
-
-	PresenterPosition_TopLeft = PresenterPosition.AddMember("TopLeft", smithyprelude.Unit)
-
-	PresenterPosition_TopRight = PresenterPosition.AddMember("TopRight", smithyprelude.Unit)
-
-	PresenterPosition_BottomLeft = PresenterPosition.AddMember("BottomLeft", smithyprelude.Unit)
-
-	PresenterPosition_BottomRight = PresenterPosition.AddMember("BottomRight", smithyprelude.Unit)
-
-	PresenterOnlyConfiguration_PresenterPosition = PresenterOnlyConfiguration.AddMember("PresenterPosition", PresenterPosition)
-
-	TileOrder_JoinSequence = TileOrder.AddMember("JoinSequence", smithyprelude.Unit)
-
-	TileOrder_SpeakerSequence = TileOrder.AddMember("SpeakerSequence", smithyprelude.Unit)
-
-	HorizontalTilePosition_Top = HorizontalTilePosition.AddMember("Top", smithyprelude.Unit)
-
-	HorizontalTilePosition_Bottom = HorizontalTilePosition.AddMember("Bottom", smithyprelude.Unit)
-
-	HorizontalLayoutConfiguration_TileOrder = HorizontalLayoutConfiguration.AddMember("TileOrder", TileOrder)
-
-	HorizontalLayoutConfiguration_TilePosition = HorizontalLayoutConfiguration.AddMember("TilePosition", HorizontalTilePosition)
-
-	HorizontalLayoutConfiguration_TileCount = HorizontalLayoutConfiguration.AddMember("TileCount", _TileCount)
-
-	HorizontalLayoutConfiguration_TileAspectRatio = HorizontalLayoutConfiguration.AddMember("TileAspectRatio", _TileAspectRatio)
-
-	VerticalTilePosition_Left = VerticalTilePosition.AddMember("Left", smithyprelude.Unit)
-
-	VerticalTilePosition_Right = VerticalTilePosition.AddMember("Right", smithyprelude.Unit)
-
-	VerticalLayoutConfiguration_TileOrder = VerticalLayoutConfiguration.AddMember("TileOrder", TileOrder)
-
-	VerticalLayoutConfiguration_TilePosition = VerticalLayoutConfiguration.AddMember("TilePosition", VerticalTilePosition)
-
-	VerticalLayoutConfiguration_TileCount = VerticalLayoutConfiguration.AddMember("TileCount", _TileCount)
-
-	VerticalLayoutConfiguration_TileAspectRatio = VerticalLayoutConfiguration.AddMember("TileAspectRatio", _TileAspectRatio)
-
-	BorderColor_Black = BorderColor.AddMember("Black", smithyprelude.Unit)
-
-	BorderColor_Blue = BorderColor.AddMember("Blue", smithyprelude.Unit)
-
-	BorderColor_Red = BorderColor.AddMember("Red", smithyprelude.Unit)
-
-	BorderColor_Green = BorderColor.AddMember("Green", smithyprelude.Unit)
-
-	BorderColor_White = BorderColor.AddMember("White", smithyprelude.Unit)
-
-	BorderColor_Yellow = BorderColor.AddMember("Yellow", smithyprelude.Unit)
-
-	HighlightColor_Black = HighlightColor.AddMember("Black", smithyprelude.Unit)
-
-	HighlightColor_Blue = HighlightColor.AddMember("Blue", smithyprelude.Unit)
-
-	HighlightColor_Red = HighlightColor.AddMember("Red", smithyprelude.Unit)
-
-	HighlightColor_Green = HighlightColor.AddMember("Green", smithyprelude.Unit)
-
-	HighlightColor_White = HighlightColor.AddMember("White", smithyprelude.Unit)
-
-	HighlightColor_Yellow = HighlightColor.AddMember("Yellow", smithyprelude.Unit)
-
-	VideoAttribute_CornerRadius = VideoAttribute.AddMember("CornerRadius", _CornerRadius)
-
-	VideoAttribute_BorderColor = VideoAttribute.AddMember("BorderColor", BorderColor)
-
-	VideoAttribute_HighlightColor = VideoAttribute.AddMember("HighlightColor", HighlightColor)
-
-	VideoAttribute_BorderThickness = VideoAttribute.AddMember("BorderThickness", _BorderThickness)
-
-	CanvasOrientation_Landscape = CanvasOrientation.AddMember("Landscape", smithyprelude.Unit)
-
-	CanvasOrientation_Portrait = CanvasOrientation.AddMember("Portrait", smithyprelude.Unit)
-
-	GridViewConfiguration_ContentShareLayout = GridViewConfiguration.AddMember("ContentShareLayout", ContentShareLayoutOption)
-
-	GridViewConfiguration_PresenterOnlyConfiguration = GridViewConfiguration.AddMember("PresenterOnlyConfiguration", PresenterOnlyConfiguration)
-
-	GridViewConfiguration_ActiveSpeakerOnlyConfiguration = GridViewConfiguration.AddMember("ActiveSpeakerOnlyConfiguration", ActiveSpeakerOnlyConfiguration)
-
-	GridViewConfiguration_HorizontalLayoutConfiguration = GridViewConfiguration.AddMember("HorizontalLayoutConfiguration", HorizontalLayoutConfiguration)
-
-	GridViewConfiguration_VerticalLayoutConfiguration = GridViewConfiguration.AddMember("VerticalLayoutConfiguration", VerticalLayoutConfiguration)
-
-	GridViewConfiguration_VideoAttribute = GridViewConfiguration.AddMember("VideoAttribute", VideoAttribute)
-
-	GridViewConfiguration_CanvasOrientation = GridViewConfiguration.AddMember("CanvasOrientation", CanvasOrientation)
-
-	CompositedVideoArtifactsConfiguration_Layout = CompositedVideoArtifactsConfiguration.AddMember("Layout", LayoutOption)
-
-	CompositedVideoArtifactsConfiguration_Resolution = CompositedVideoArtifactsConfiguration.AddMember("Resolution", ResolutionOption)
-
-	CompositedVideoArtifactsConfiguration_GridViewConfiguration = CompositedVideoArtifactsConfiguration.AddMember("GridViewConfiguration", GridViewConfiguration)
-
-	ArtifactsConfiguration_Audio = ArtifactsConfiguration.AddMember("Audio", AudioArtifactsConfiguration)
-
-	ArtifactsConfiguration_Video = ArtifactsConfiguration.AddMember("Video", VideoArtifactsConfiguration)
-
-	ArtifactsConfiguration_Content = ArtifactsConfiguration.AddMember("Content", ContentArtifactsConfiguration)
-
-	ArtifactsConfiguration_CompositedVideo = ArtifactsConfiguration.AddMember("CompositedVideo", CompositedVideoArtifactsConfiguration)
-
-	_AttendeeIdList_member = _AttendeeIdList.AddMember("member", _GuidString)
-
-	AudioChannelsOption_Stereo = AudioChannelsOption.AddMember("Stereo", smithyprelude.Unit)
-
-	AudioChannelsOption_Mono = AudioChannelsOption.AddMember("Mono", smithyprelude.Unit)
-
-	ErrorCode_BadRequest = ErrorCode.AddMember("BadRequest", smithyprelude.Unit)
-
-	ErrorCode_Forbidden = ErrorCode.AddMember("Forbidden", smithyprelude.Unit)
-
-	ErrorCode_NotFound = ErrorCode.AddMember("NotFound", smithyprelude.Unit)
-
-	ErrorCode_ResourceLimitExceeded = ErrorCode.AddMember("ResourceLimitExceeded", smithyprelude.Unit)
-
-	ErrorCode_ServiceFailure = ErrorCode.AddMember("ServiceFailure", smithyprelude.Unit)
-
-	ErrorCode_ServiceUnavailable = ErrorCode.AddMember("ServiceUnavailable", smithyprelude.Unit)
-
-	ErrorCode_Throttling = ErrorCode.AddMember("Throttling", smithyprelude.Unit)
-
-	BadRequestException_Code = BadRequestException.AddMember("Code", ErrorCode)
-
-	BadRequestException_Message = BadRequestException.AddMember("Message", _String)
-
-	BadRequestException_RequestId = BadRequestException.AddMember("RequestId", _String)
-
-	ParticipantRole_AGENT = ParticipantRole.AddMember("AGENT", smithyprelude.Unit)
-
-	ParticipantRole_CUSTOMER = ParticipantRole.AddMember("CUSTOMER", smithyprelude.Unit)
-
-	ChannelDefinition_ChannelId = ChannelDefinition.AddMember("ChannelId", _ChannelId)
-
-	ChannelDefinition_ParticipantRole = ChannelDefinition.AddMember("ParticipantRole", ParticipantRole)
-
-	_ChannelDefinitions_member = _ChannelDefinitions.AddMember("member", ChannelDefinition)
-
-	ChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration = ChimeSdkMeetingConcatenationConfiguration.AddMember("ArtifactsConfiguration", ArtifactsConcatenationConfiguration)
-
-	_ExternalUserIdList_member = _ExternalUserIdList.AddMember("member", _ExternalUserIdType)
-
-	SelectedVideoStreams_AttendeeIds = SelectedVideoStreams.AddMember("AttendeeIds", _AttendeeIdList)
-
-	SelectedVideoStreams_ExternalUserIds = SelectedVideoStreams.AddMember("ExternalUserIds", _ExternalUserIdList)
-
-	SourceConfiguration_SelectedVideoStreams = SourceConfiguration.AddMember("SelectedVideoStreams", SelectedVideoStreams)
-
-	ChimeSdkMeetingConfiguration_SourceConfiguration = ChimeSdkMeetingConfiguration.AddMember("SourceConfiguration", SourceConfiguration)
-
-	ChimeSdkMeetingConfiguration_ArtifactsConfiguration = ChimeSdkMeetingConfiguration.AddMember("ArtifactsConfiguration", ArtifactsConfiguration)
-
-	LiveConnectorMuxType_AudioWithCompositedVideo = LiveConnectorMuxType.AddMember("AudioWithCompositedVideo", smithyprelude.Unit)
-
-	LiveConnectorMuxType_AudioWithActiveSpeakerVideo = LiveConnectorMuxType.AddMember("AudioWithActiveSpeakerVideo", smithyprelude.Unit)
-
-	ChimeSdkMeetingLiveConnectorConfiguration_Arn = ChimeSdkMeetingLiveConnectorConfiguration.AddMember("Arn", _Arn)
-
-	ChimeSdkMeetingLiveConnectorConfiguration_MuxType = ChimeSdkMeetingLiveConnectorConfiguration.AddMember("MuxType", LiveConnectorMuxType)
-
-	ChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo = ChimeSdkMeetingLiveConnectorConfiguration.AddMember("CompositedVideo", CompositedVideoArtifactsConfiguration)
-
-	ChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration = ChimeSdkMeetingLiveConnectorConfiguration.AddMember("SourceConfiguration", SourceConfiguration)
-
-	ConcatenationSinkType_S3Bucket = ConcatenationSinkType.AddMember("S3Bucket", smithyprelude.Unit)
-
-	S3BucketSinkConfiguration_Destination = S3BucketSinkConfiguration.AddMember("Destination", _Arn)
-
-	ConcatenationSink_Type = ConcatenationSink.AddMember("Type", ConcatenationSinkType)
-
-	ConcatenationSink_S3BucketSinkConfiguration = ConcatenationSink.AddMember("S3BucketSinkConfiguration", S3BucketSinkConfiguration)
-
-	_ConcatenationSinkList_member = _ConcatenationSinkList.AddMember("member", ConcatenationSink)
-
-	ConcatenationSourceType_MediaCapturePipeline = ConcatenationSourceType.AddMember("MediaCapturePipeline", smithyprelude.Unit)
-
-	MediaCapturePipelineSourceConfiguration_MediaPipelineArn = MediaCapturePipelineSourceConfiguration.AddMember("MediaPipelineArn", _Arn)
-
-	MediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration = MediaCapturePipelineSourceConfiguration.AddMember("ChimeSdkMeetingConfiguration", ChimeSdkMeetingConcatenationConfiguration)
-
-	ConcatenationSource_Type = ConcatenationSource.AddMember("Type", ConcatenationSourceType)
-
-	ConcatenationSource_MediaCapturePipelineSourceConfiguration = ConcatenationSource.AddMember("MediaCapturePipelineSourceConfiguration", MediaCapturePipelineSourceConfiguration)
-
-	_ConcatenationSourceList_member = _ConcatenationSourceList.AddMember("member", ConcatenationSource)
-
-	ConflictException_Code = ConflictException.AddMember("Code", ErrorCode)
-
-	ConflictException_Message = ConflictException.AddMember("Message", _String)
-
-	ConflictException_RequestId = ConflictException.AddMember("RequestId", _String)
-
-	ForbiddenException_Code = ForbiddenException.AddMember("Code", ErrorCode)
-
-	ForbiddenException_Message = ForbiddenException.AddMember("Message", _String)
-
-	ForbiddenException_RequestId = ForbiddenException.AddMember("RequestId", _String)
-
-	FragmentSelectorType_ProducerTimestamp = FragmentSelectorType.AddMember("ProducerTimestamp", smithyprelude.Unit)
-
-	FragmentSelectorType_ServerTimestamp = FragmentSelectorType.AddMember("ServerTimestamp", smithyprelude.Unit)
-
-	TimestampRange_StartTimestamp = TimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	TimestampRange_EndTimestamp = TimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	FragmentSelector_FragmentSelectorType = FragmentSelector.AddMember("FragmentSelectorType", FragmentSelectorType)
-
-	FragmentSelector_TimestampRange = FragmentSelector.AddMember("TimestampRange", TimestampRange)
-
-	IssueDetectionConfiguration_RuleName = IssueDetectionConfiguration.AddMember("RuleName", _RuleName)
-
-	_KeywordMatchWordList_member = _KeywordMatchWordList.AddMember("member", _Keyword)
-
-	KeywordMatchConfiguration_RuleName = KeywordMatchConfiguration.AddMember("RuleName", _RuleName)
-
-	KeywordMatchConfiguration_Keywords = KeywordMatchConfiguration.AddMember("Keywords", _KeywordMatchWordList)
-
-	KeywordMatchConfiguration_Negate = KeywordMatchConfiguration.AddMember("Negate", _Boolean)
-
-	KinesisDataStreamSinkConfiguration_InsightsTarget = KinesisDataStreamSinkConfiguration.AddMember("InsightsTarget", _Arn)
-
-	KinesisVideoStreamConfiguration_Region = KinesisVideoStreamConfiguration.AddMember("Region", _AwsRegion)
-
-	KinesisVideoStreamConfiguration_DataRetentionInHours = KinesisVideoStreamConfiguration.AddMember("DataRetentionInHours", _DataRetentionInHours)
-
-	KinesisVideoStreamConfigurationUpdate_DataRetentionInHours = KinesisVideoStreamConfigurationUpdate.AddMember("DataRetentionInHours", _DataRetentionChangeInHours)
-
-	KinesisVideoStreamPoolStatus_CREATING = KinesisVideoStreamPoolStatus.AddMember("CREATING", smithyprelude.Unit)
-
-	KinesisVideoStreamPoolStatus_ACTIVE = KinesisVideoStreamPoolStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	KinesisVideoStreamPoolStatus_UPDATING = KinesisVideoStreamPoolStatus.AddMember("UPDATING", smithyprelude.Unit)
-
-	KinesisVideoStreamPoolStatus_DELETING = KinesisVideoStreamPoolStatus.AddMember("DELETING", smithyprelude.Unit)
-
-	KinesisVideoStreamPoolStatus_FAILED = KinesisVideoStreamPoolStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	KinesisVideoStreamPoolConfiguration_PoolArn = KinesisVideoStreamPoolConfiguration.AddMember("PoolArn", _Arn)
-
-	KinesisVideoStreamPoolConfiguration_PoolName = KinesisVideoStreamPoolConfiguration.AddMember("PoolName", _KinesisVideoStreamPoolName)
-
-	KinesisVideoStreamPoolConfiguration_PoolId = KinesisVideoStreamPoolConfiguration.AddMember("PoolId", _KinesisVideoStreamPoolId)
-
-	KinesisVideoStreamPoolConfiguration_PoolStatus = KinesisVideoStreamPoolConfiguration.AddMember("PoolStatus", KinesisVideoStreamPoolStatus)
-
-	KinesisVideoStreamPoolConfiguration_PoolSize = KinesisVideoStreamPoolConfiguration.AddMember("PoolSize", _KinesisVideoStreamPoolSize)
-
-	KinesisVideoStreamPoolConfiguration_StreamConfiguration = KinesisVideoStreamPoolConfiguration.AddMember("StreamConfiguration", KinesisVideoStreamConfiguration)
-
-	KinesisVideoStreamPoolConfiguration_CreatedTimestamp = KinesisVideoStreamPoolConfiguration.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	KinesisVideoStreamPoolConfiguration_UpdatedTimestamp = KinesisVideoStreamPoolConfiguration.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	KinesisVideoStreamPoolSummary_PoolName = KinesisVideoStreamPoolSummary.AddMember("PoolName", _KinesisVideoStreamPoolName)
-
-	KinesisVideoStreamPoolSummary_PoolId = KinesisVideoStreamPoolSummary.AddMember("PoolId", _KinesisVideoStreamPoolId)
-
-	KinesisVideoStreamPoolSummary_PoolArn = KinesisVideoStreamPoolSummary.AddMember("PoolArn", _Arn)
-
-	_KinesisVideoStreamPoolSummaryList_member = _KinesisVideoStreamPoolSummaryList.AddMember("member", KinesisVideoStreamPoolSummary)
-
-	RecordingStreamConfiguration_StreamArn = RecordingStreamConfiguration.AddMember("StreamArn", _KinesisVideoStreamArn)
-
-	_RecordingStreamList_member = _RecordingStreamList.AddMember("member", RecordingStreamConfiguration)
-
-	KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams = KinesisVideoStreamRecordingSourceRuntimeConfiguration.AddMember("Streams", _RecordingStreamList)
-
-	KinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector = KinesisVideoStreamRecordingSourceRuntimeConfiguration.AddMember("FragmentSelector", FragmentSelector)
-
-	StreamChannelDefinition_NumberOfChannels = StreamChannelDefinition.AddMember("NumberOfChannels", _NumberOfChannels)
-
-	StreamChannelDefinition_ChannelDefinitions = StreamChannelDefinition.AddMember("ChannelDefinitions", _ChannelDefinitions)
-
-	StreamConfiguration_StreamArn = StreamConfiguration.AddMember("StreamArn", _KinesisVideoStreamArn)
-
-	StreamConfiguration_FragmentNumber = StreamConfiguration.AddMember("FragmentNumber", _FragmentNumberString)
-
-	StreamConfiguration_StreamChannelDefinition = StreamConfiguration.AddMember("StreamChannelDefinition", StreamChannelDefinition)
-
-	_Streams_member = _Streams.AddMember("member", StreamConfiguration)
-
-	MediaEncoding_PCM = MediaEncoding.AddMember("PCM", smithyprelude.Unit)
-
-	KinesisVideoStreamSourceRuntimeConfiguration_Streams = KinesisVideoStreamSourceRuntimeConfiguration.AddMember("Streams", _Streams)
-
-	KinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding = KinesisVideoStreamSourceRuntimeConfiguration.AddMember("MediaEncoding", MediaEncoding)
-
-	KinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate = KinesisVideoStreamSourceRuntimeConfiguration.AddMember("MediaSampleRate", _MediaSampleRateHertz)
-
-	KinesisVideoStreamSourceTaskConfiguration_StreamArn = KinesisVideoStreamSourceTaskConfiguration.AddMember("StreamArn", _KinesisVideoStreamArn)
-
-	KinesisVideoStreamSourceTaskConfiguration_ChannelId = KinesisVideoStreamSourceTaskConfiguration.AddMember("ChannelId", _ChannelId)
-
-	KinesisVideoStreamSourceTaskConfiguration_FragmentNumber = KinesisVideoStreamSourceTaskConfiguration.AddMember("FragmentNumber", _FragmentNumberString)
-
-	LambdaFunctionSinkConfiguration_InsightsTarget = LambdaFunctionSinkConfiguration.AddMember("InsightsTarget", _Arn)
-
-	LiveConnectorRTMPConfiguration_Url = LiveConnectorRTMPConfiguration.AddMember("Url", _SensitiveString)
-
-	LiveConnectorRTMPConfiguration_AudioChannels = LiveConnectorRTMPConfiguration.AddMember("AudioChannels", AudioChannelsOption)
-
-	LiveConnectorRTMPConfiguration_AudioSampleRate = LiveConnectorRTMPConfiguration.AddMember("AudioSampleRate", _AudioSampleRateOption)
-
-	LiveConnectorSinkType_RTMP = LiveConnectorSinkType.AddMember("RTMP", smithyprelude.Unit)
-
-	LiveConnectorSinkConfiguration_SinkType = LiveConnectorSinkConfiguration.AddMember("SinkType", LiveConnectorSinkType)
-
-	LiveConnectorSinkConfiguration_RTMPConfiguration = LiveConnectorSinkConfiguration.AddMember("RTMPConfiguration", LiveConnectorRTMPConfiguration)
-
-	_LiveConnectorSinkList_member = _LiveConnectorSinkList.AddMember("member", LiveConnectorSinkConfiguration)
-
-	LiveConnectorSourceType_ChimeSdkMeeting = LiveConnectorSourceType.AddMember("ChimeSdkMeeting", smithyprelude.Unit)
-
-	LiveConnectorSourceConfiguration_SourceType = LiveConnectorSourceConfiguration.AddMember("SourceType", LiveConnectorSourceType)
-
-	LiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration = LiveConnectorSourceConfiguration.AddMember("ChimeSdkMeetingLiveConnectorConfiguration", ChimeSdkMeetingLiveConnectorConfiguration)
-
-	_LiveConnectorSourceList_member = _LiveConnectorSourceList.AddMember("member", LiveConnectorSourceConfiguration)
-
-	MediaPipelineSourceType_ChimeSdkMeeting = MediaPipelineSourceType.AddMember("ChimeSdkMeeting", smithyprelude.Unit)
-
-	MediaPipelineStatus_Initializing = MediaPipelineStatus.AddMember("Initializing", smithyprelude.Unit)
-
-	MediaPipelineStatus_InProgress = MediaPipelineStatus.AddMember("InProgress", smithyprelude.Unit)
-
-	MediaPipelineStatus_Failed = MediaPipelineStatus.AddMember("Failed", smithyprelude.Unit)
-
-	MediaPipelineStatus_Stopping = MediaPipelineStatus.AddMember("Stopping", smithyprelude.Unit)
-
-	MediaPipelineStatus_Stopped = MediaPipelineStatus.AddMember("Stopped", smithyprelude.Unit)
-
-	MediaPipelineStatus_Paused = MediaPipelineStatus.AddMember("Paused", smithyprelude.Unit)
-
-	MediaPipelineStatus_NotStarted = MediaPipelineStatus.AddMember("NotStarted", smithyprelude.Unit)
-
-	MediaPipelineSinkType_S3Bucket = MediaPipelineSinkType.AddMember("S3Bucket", smithyprelude.Unit)
-
-	SseAwsKeyManagementParams_AwsKmsKeyId = SseAwsKeyManagementParams.AddMember("AwsKmsKeyId", _String)
-
-	SseAwsKeyManagementParams_AwsKmsEncryptionContext = SseAwsKeyManagementParams.AddMember("AwsKmsEncryptionContext", _String)
-
-	MediaCapturePipeline_MediaPipelineId = MediaCapturePipeline.AddMember("MediaPipelineId", _GuidString)
-
-	MediaCapturePipeline_MediaPipelineArn = MediaCapturePipeline.AddMember("MediaPipelineArn", _AmazonResourceName)
-
-	MediaCapturePipeline_SourceType = MediaCapturePipeline.AddMember("SourceType", MediaPipelineSourceType)
-
-	MediaCapturePipeline_SourceArn = MediaCapturePipeline.AddMember("SourceArn", _Arn)
-
-	MediaCapturePipeline_Status = MediaCapturePipeline.AddMember("Status", MediaPipelineStatus)
-
-	MediaCapturePipeline_SinkType = MediaCapturePipeline.AddMember("SinkType", MediaPipelineSinkType)
-
-	MediaCapturePipeline_SinkArn = MediaCapturePipeline.AddMember("SinkArn", _Arn)
-
-	MediaCapturePipeline_CreatedTimestamp = MediaCapturePipeline.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	MediaCapturePipeline_UpdatedTimestamp = MediaCapturePipeline.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	MediaCapturePipeline_ChimeSdkMeetingConfiguration = MediaCapturePipeline.AddMember("ChimeSdkMeetingConfiguration", ChimeSdkMeetingConfiguration)
-
-	MediaCapturePipeline_SseAwsKeyManagementParams = MediaCapturePipeline.AddMember("SseAwsKeyManagementParams", SseAwsKeyManagementParams)
-
-	MediaCapturePipeline_SinkIamRoleArn = MediaCapturePipeline.AddMember("SinkIamRoleArn", _Arn)
-
-	MediaCapturePipelineSummary_MediaPipelineId = MediaCapturePipelineSummary.AddMember("MediaPipelineId", _GuidString)
-
-	MediaCapturePipelineSummary_MediaPipelineArn = MediaCapturePipelineSummary.AddMember("MediaPipelineArn", _AmazonResourceName)
-
-	_MediaCapturePipelineSummaryList_member = _MediaCapturePipelineSummaryList.AddMember("member", MediaCapturePipelineSummary)
-
-	MediaConcatenationPipeline_MediaPipelineId = MediaConcatenationPipeline.AddMember("MediaPipelineId", _GuidString)
-
-	MediaConcatenationPipeline_MediaPipelineArn = MediaConcatenationPipeline.AddMember("MediaPipelineArn", _AmazonResourceName)
-
-	MediaConcatenationPipeline_Sources = MediaConcatenationPipeline.AddMember("Sources", _ConcatenationSourceList)
-
-	MediaConcatenationPipeline_Sinks = MediaConcatenationPipeline.AddMember("Sinks", _ConcatenationSinkList)
-
-	MediaConcatenationPipeline_Status = MediaConcatenationPipeline.AddMember("Status", MediaPipelineStatus)
-
-	MediaConcatenationPipeline_CreatedTimestamp = MediaConcatenationPipeline.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	MediaConcatenationPipeline_UpdatedTimestamp = MediaConcatenationPipeline.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	_MediaInsightsRuntimeMetadata_key = _MediaInsightsRuntimeMetadata.AddMember("key", _NonEmptyString)
-
-	_MediaInsightsRuntimeMetadata_value = _MediaInsightsRuntimeMetadata.AddMember("value", _String)
-
-	RecordingFileFormat_Wav = RecordingFileFormat.AddMember("Wav", smithyprelude.Unit)
-
-	RecordingFileFormat_Opus = RecordingFileFormat.AddMember("Opus", smithyprelude.Unit)
-
-	S3RecordingSinkRuntimeConfiguration_Destination = S3RecordingSinkRuntimeConfiguration.AddMember("Destination", _Arn)
-
-	S3RecordingSinkRuntimeConfiguration_RecordingFileFormat = S3RecordingSinkRuntimeConfiguration.AddMember("RecordingFileFormat", RecordingFileFormat)
-
-	MediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR = MediaInsightsPipelineConfigurationElementType.AddMember("AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_VOICE_ANALYTICS_PROCESSOR = MediaInsightsPipelineConfigurationElementType.AddMember("VOICE_ANALYTICS_PROCESSOR", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_PROCESSOR = MediaInsightsPipelineConfigurationElementType.AddMember("AMAZON_TRANSCRIBE_PROCESSOR", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_KINESIS_DATA_STREAM_SINK = MediaInsightsPipelineConfigurationElementType.AddMember("KINESIS_DATA_STREAM_SINK", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_LAMBDA_FUNCTION_SINK = MediaInsightsPipelineConfigurationElementType.AddMember("LAMBDA_FUNCTION_SINK", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_SQS_QUEUE_SINK = MediaInsightsPipelineConfigurationElementType.AddMember("SQS_QUEUE_SINK", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_SNS_TOPIC_SINK = MediaInsightsPipelineConfigurationElementType.AddMember("SNS_TOPIC_SINK", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_S3_RECORDING_SINK = MediaInsightsPipelineConfigurationElementType.AddMember("S3_RECORDING_SINK", smithyprelude.Unit)
-
-	MediaInsightsPipelineConfigurationElementType_VOICE_ENHANCEMENT_SINK = MediaInsightsPipelineConfigurationElementType.AddMember("VOICE_ENHANCEMENT_SINK", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_NotStarted = MediaPipelineElementStatus.AddMember("NotStarted", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_NotSupported = MediaPipelineElementStatus.AddMember("NotSupported", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_Initializing = MediaPipelineElementStatus.AddMember("Initializing", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_InProgress = MediaPipelineElementStatus.AddMember("InProgress", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_Failed = MediaPipelineElementStatus.AddMember("Failed", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_Stopping = MediaPipelineElementStatus.AddMember("Stopping", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_Stopped = MediaPipelineElementStatus.AddMember("Stopped", smithyprelude.Unit)
-
-	MediaPipelineElementStatus_Paused = MediaPipelineElementStatus.AddMember("Paused", smithyprelude.Unit)
-
-	MediaInsightsPipelineElementStatus_Type = MediaInsightsPipelineElementStatus.AddMember("Type", MediaInsightsPipelineConfigurationElementType)
-
-	MediaInsightsPipelineElementStatus_Status = MediaInsightsPipelineElementStatus.AddMember("Status", MediaPipelineElementStatus)
-
-	_MediaInsightsPipelineElementStatuses_member = _MediaInsightsPipelineElementStatuses.AddMember("member", MediaInsightsPipelineElementStatus)
-
-	MediaInsightsPipeline_MediaPipelineId = MediaInsightsPipeline.AddMember("MediaPipelineId", _GuidString)
-
-	MediaInsightsPipeline_MediaPipelineArn = MediaInsightsPipeline.AddMember("MediaPipelineArn", _Arn)
-
-	MediaInsightsPipeline_MediaInsightsPipelineConfigurationArn = MediaInsightsPipeline.AddMember("MediaInsightsPipelineConfigurationArn", _Arn)
-
-	MediaInsightsPipeline_Status = MediaInsightsPipeline.AddMember("Status", MediaPipelineStatus)
-
-	MediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration = MediaInsightsPipeline.AddMember("KinesisVideoStreamSourceRuntimeConfiguration", KinesisVideoStreamSourceRuntimeConfiguration)
-
-	MediaInsightsPipeline_MediaInsightsRuntimeMetadata = MediaInsightsPipeline.AddMember("MediaInsightsRuntimeMetadata", _MediaInsightsRuntimeMetadata)
-
-	MediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration = MediaInsightsPipeline.AddMember("KinesisVideoStreamRecordingSourceRuntimeConfiguration", KinesisVideoStreamRecordingSourceRuntimeConfiguration)
-
-	MediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration = MediaInsightsPipeline.AddMember("S3RecordingSinkRuntimeConfiguration", S3RecordingSinkRuntimeConfiguration)
-
-	MediaInsightsPipeline_CreatedTimestamp = MediaInsightsPipeline.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	MediaInsightsPipeline_ElementStatuses = MediaInsightsPipeline.AddMember("ElementStatuses", _MediaInsightsPipelineElementStatuses)
-
-	RealTimeAlertRuleType_KeywordMatch = RealTimeAlertRuleType.AddMember("KeywordMatch", smithyprelude.Unit)
-
-	RealTimeAlertRuleType_Sentiment = RealTimeAlertRuleType.AddMember("Sentiment", smithyprelude.Unit)
-
-	RealTimeAlertRuleType_IssueDetection = RealTimeAlertRuleType.AddMember("IssueDetection", smithyprelude.Unit)
-
-	SentimentType_NEGATIVE = SentimentType.AddMember("NEGATIVE", smithyprelude.Unit)
-
-	SentimentConfiguration_RuleName = SentimentConfiguration.AddMember("RuleName", _RuleName)
-
-	SentimentConfiguration_SentimentType = SentimentConfiguration.AddMember("SentimentType", SentimentType)
-
-	SentimentConfiguration_TimePeriod = SentimentConfiguration.AddMember("TimePeriod", _SentimentTimePeriodInSeconds)
-
-	RealTimeAlertRule_Type = RealTimeAlertRule.AddMember("Type", RealTimeAlertRuleType)
-
-	RealTimeAlertRule_KeywordMatchConfiguration = RealTimeAlertRule.AddMember("KeywordMatchConfiguration", KeywordMatchConfiguration)
-
-	RealTimeAlertRule_SentimentConfiguration = RealTimeAlertRule.AddMember("SentimentConfiguration", SentimentConfiguration)
-
-	RealTimeAlertRule_IssueDetectionConfiguration = RealTimeAlertRule.AddMember("IssueDetectionConfiguration", IssueDetectionConfiguration)
-
-	_RealTimeAlertRuleList_member = _RealTimeAlertRuleList.AddMember("member", RealTimeAlertRule)
-
-	RealTimeAlertConfiguration_Disabled = RealTimeAlertConfiguration.AddMember("Disabled", _Boolean)
-
-	RealTimeAlertConfiguration_Rules = RealTimeAlertConfiguration.AddMember("Rules", _RealTimeAlertRuleList)
-
-	S3RecordingSinkConfiguration_Destination = S3RecordingSinkConfiguration.AddMember("Destination", _Arn)
-
-	S3RecordingSinkConfiguration_RecordingFileFormat = S3RecordingSinkConfiguration.AddMember("RecordingFileFormat", RecordingFileFormat)
-
-	VoiceAnalyticsConfigurationStatus_ENABLED = VoiceAnalyticsConfigurationStatus.AddMember("ENABLED", smithyprelude.Unit)
-
-	VoiceAnalyticsConfigurationStatus_DISABLED = VoiceAnalyticsConfigurationStatus.AddMember("DISABLED", smithyprelude.Unit)
-
-	VoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus = VoiceAnalyticsProcessorConfiguration.AddMember("SpeakerSearchStatus", VoiceAnalyticsConfigurationStatus)
-
-	VoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus = VoiceAnalyticsProcessorConfiguration.AddMember("VoiceToneAnalysisStatus", VoiceAnalyticsConfigurationStatus)
-
-	SqsQueueSinkConfiguration_InsightsTarget = SqsQueueSinkConfiguration.AddMember("InsightsTarget", _Arn)
-
-	SnsTopicSinkConfiguration_InsightsTarget = SnsTopicSinkConfiguration.AddMember("InsightsTarget", _Arn)
-
-	VoiceEnhancementSinkConfiguration_Disabled = VoiceEnhancementSinkConfiguration.AddMember("Disabled", _Boolean)
-
-	MediaInsightsPipelineConfigurationElement_Type = MediaInsightsPipelineConfigurationElement.AddMember("Type", MediaInsightsPipelineConfigurationElementType)
-
-	MediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("AmazonTranscribeCallAnalyticsProcessorConfiguration", AmazonTranscribeCallAnalyticsProcessorConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("AmazonTranscribeProcessorConfiguration", AmazonTranscribeProcessorConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("KinesisDataStreamSinkConfiguration", KinesisDataStreamSinkConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("S3RecordingSinkConfiguration", S3RecordingSinkConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("VoiceAnalyticsProcessorConfiguration", VoiceAnalyticsProcessorConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("LambdaFunctionSinkConfiguration", LambdaFunctionSinkConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("SqsQueueSinkConfiguration", SqsQueueSinkConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("SnsTopicSinkConfiguration", SnsTopicSinkConfiguration)
-
-	MediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration = MediaInsightsPipelineConfigurationElement.AddMember("VoiceEnhancementSinkConfiguration", VoiceEnhancementSinkConfiguration)
-
-	_MediaInsightsPipelineConfigurationElements_member = _MediaInsightsPipelineConfigurationElements.AddMember("member", MediaInsightsPipelineConfigurationElement)
-
-	MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName = MediaInsightsPipelineConfiguration.AddMember("MediaInsightsPipelineConfigurationName", _MediaInsightsPipelineConfigurationNameString)
-
-	MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn = MediaInsightsPipelineConfiguration.AddMember("MediaInsightsPipelineConfigurationArn", _Arn)
-
-	MediaInsightsPipelineConfiguration_ResourceAccessRoleArn = MediaInsightsPipelineConfiguration.AddMember("ResourceAccessRoleArn", _Arn)
-
-	MediaInsightsPipelineConfiguration_RealTimeAlertConfiguration = MediaInsightsPipelineConfiguration.AddMember("RealTimeAlertConfiguration", RealTimeAlertConfiguration)
-
-	MediaInsightsPipelineConfiguration_Elements = MediaInsightsPipelineConfiguration.AddMember("Elements", _MediaInsightsPipelineConfigurationElements)
-
-	MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId = MediaInsightsPipelineConfiguration.AddMember("MediaInsightsPipelineConfigurationId", _GuidString)
-
-	MediaInsightsPipelineConfiguration_CreatedTimestamp = MediaInsightsPipelineConfiguration.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	MediaInsightsPipelineConfiguration_UpdatedTimestamp = MediaInsightsPipelineConfiguration.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName = MediaInsightsPipelineConfigurationSummary.AddMember("MediaInsightsPipelineConfigurationName", _MediaInsightsPipelineConfigurationNameString)
-
-	MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId = MediaInsightsPipelineConfigurationSummary.AddMember("MediaInsightsPipelineConfigurationId", _GuidString)
-
-	MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn = MediaInsightsPipelineConfigurationSummary.AddMember("MediaInsightsPipelineConfigurationArn", _Arn)
-
-	_MediaInsightsPipelineConfigurationSummaryList_member = _MediaInsightsPipelineConfigurationSummaryList.AddMember("member", MediaInsightsPipelineConfigurationSummary)
-
-	MediaLiveConnectorPipeline_Sources = MediaLiveConnectorPipeline.AddMember("Sources", _LiveConnectorSourceList)
-
-	MediaLiveConnectorPipeline_Sinks = MediaLiveConnectorPipeline.AddMember("Sinks", _LiveConnectorSinkList)
-
-	MediaLiveConnectorPipeline_MediaPipelineId = MediaLiveConnectorPipeline.AddMember("MediaPipelineId", _GuidString)
-
-	MediaLiveConnectorPipeline_MediaPipelineArn = MediaLiveConnectorPipeline.AddMember("MediaPipelineArn", _AmazonResourceName)
-
-	MediaLiveConnectorPipeline_Status = MediaLiveConnectorPipeline.AddMember("Status", MediaPipelineStatus)
-
-	MediaLiveConnectorPipeline_CreatedTimestamp = MediaLiveConnectorPipeline.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	MediaLiveConnectorPipeline_UpdatedTimestamp = MediaLiveConnectorPipeline.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	MediaStreamSource_SourceType = MediaStreamSource.AddMember("SourceType", MediaPipelineSourceType)
-
-	MediaStreamSource_SourceArn = MediaStreamSource.AddMember("SourceArn", _Arn)
-
-	_MediaStreamSourceList_member = _MediaStreamSourceList.AddMember("member", MediaStreamSource)
-
-	MediaStreamPipelineSinkType_KinesisVideoStreamPool = MediaStreamPipelineSinkType.AddMember("KinesisVideoStreamPool", smithyprelude.Unit)
-
-	MediaStreamType_MixedAudio = MediaStreamType.AddMember("MixedAudio", smithyprelude.Unit)
-
-	MediaStreamType_IndividualAudio = MediaStreamType.AddMember("IndividualAudio", smithyprelude.Unit)
-
-	MediaStreamSink_SinkArn = MediaStreamSink.AddMember("SinkArn", _Arn)
-
-	MediaStreamSink_SinkType = MediaStreamSink.AddMember("SinkType", MediaStreamPipelineSinkType)
-
-	MediaStreamSink_ReservedStreamCapacity = MediaStreamSink.AddMember("ReservedStreamCapacity", _ReservedStreamCapacity)
-
-	MediaStreamSink_MediaStreamType = MediaStreamSink.AddMember("MediaStreamType", MediaStreamType)
-
-	_MediaStreamSinkList_member = _MediaStreamSinkList.AddMember("member", MediaStreamSink)
-
-	MediaStreamPipeline_MediaPipelineId = MediaStreamPipeline.AddMember("MediaPipelineId", _GuidString)
-
-	MediaStreamPipeline_MediaPipelineArn = MediaStreamPipeline.AddMember("MediaPipelineArn", _AmazonResourceName)
-
-	MediaStreamPipeline_CreatedTimestamp = MediaStreamPipeline.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	MediaStreamPipeline_UpdatedTimestamp = MediaStreamPipeline.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	MediaStreamPipeline_Status = MediaStreamPipeline.AddMember("Status", MediaPipelineStatus)
-
-	MediaStreamPipeline_Sources = MediaStreamPipeline.AddMember("Sources", _MediaStreamSourceList)
-
-	MediaStreamPipeline_Sinks = MediaStreamPipeline.AddMember("Sinks", _MediaStreamSinkList)
-
-	MediaPipeline_MediaCapturePipeline = MediaPipeline.AddMember("MediaCapturePipeline", MediaCapturePipeline)
-
-	MediaPipeline_MediaLiveConnectorPipeline = MediaPipeline.AddMember("MediaLiveConnectorPipeline", MediaLiveConnectorPipeline)
-
-	MediaPipeline_MediaConcatenationPipeline = MediaPipeline.AddMember("MediaConcatenationPipeline", MediaConcatenationPipeline)
-
-	MediaPipeline_MediaInsightsPipeline = MediaPipeline.AddMember("MediaInsightsPipeline", MediaInsightsPipeline)
-
-	MediaPipeline_MediaStreamPipeline = MediaPipeline.AddMember("MediaStreamPipeline", MediaStreamPipeline)
-
-	MediaPipelineSummary_MediaPipelineId = MediaPipelineSummary.AddMember("MediaPipelineId", _GuidString)
-
-	MediaPipelineSummary_MediaPipelineArn = MediaPipelineSummary.AddMember("MediaPipelineArn", _AmazonResourceName)
-
-	_MediaPipelineList_member = _MediaPipelineList.AddMember("member", MediaPipelineSummary)
-
-	MediaPipelineStatusUpdate_Pause = MediaPipelineStatusUpdate.AddMember("Pause", smithyprelude.Unit)
-
-	MediaPipelineStatusUpdate_Resume = MediaPipelineStatusUpdate.AddMember("Resume", smithyprelude.Unit)
-
-	MediaPipelineTaskStatus_NotStarted = MediaPipelineTaskStatus.AddMember("NotStarted", smithyprelude.Unit)
-
-	MediaPipelineTaskStatus_Initializing = MediaPipelineTaskStatus.AddMember("Initializing", smithyprelude.Unit)
-
-	MediaPipelineTaskStatus_InProgress = MediaPipelineTaskStatus.AddMember("InProgress", smithyprelude.Unit)
-
-	MediaPipelineTaskStatus_Failed = MediaPipelineTaskStatus.AddMember("Failed", smithyprelude.Unit)
-
-	MediaPipelineTaskStatus_Stopping = MediaPipelineTaskStatus.AddMember("Stopping", smithyprelude.Unit)
-
-	MediaPipelineTaskStatus_Stopped = MediaPipelineTaskStatus.AddMember("Stopped", smithyprelude.Unit)
-
-	NotFoundException_Code = NotFoundException.AddMember("Code", ErrorCode)
-
-	NotFoundException_Message = NotFoundException.AddMember("Message", _String)
-
-	NotFoundException_RequestId = NotFoundException.AddMember("RequestId", _String)
-
-	ResourceLimitExceededException_Code = ResourceLimitExceededException.AddMember("Code", ErrorCode)
-
-	ResourceLimitExceededException_Message = ResourceLimitExceededException.AddMember("Message", _String)
-
-	ResourceLimitExceededException_RequestId = ResourceLimitExceededException.AddMember("RequestId", _String)
-
-	ServiceFailureException_Code = ServiceFailureException.AddMember("Code", ErrorCode)
-
-	ServiceFailureException_Message = ServiceFailureException.AddMember("Message", _String)
-
-	ServiceFailureException_RequestId = ServiceFailureException.AddMember("RequestId", _String)
-
-	ServiceUnavailableException_Code = ServiceUnavailableException.AddMember("Code", ErrorCode)
-
-	ServiceUnavailableException_Message = ServiceUnavailableException.AddMember("Message", _String)
-
-	ServiceUnavailableException_RequestId = ServiceUnavailableException.AddMember("RequestId", _String)
-
-	SpeakerSearchTask_SpeakerSearchTaskId = SpeakerSearchTask.AddMember("SpeakerSearchTaskId", _GuidString)
-
-	SpeakerSearchTask_SpeakerSearchTaskStatus = SpeakerSearchTask.AddMember("SpeakerSearchTaskStatus", MediaPipelineTaskStatus)
-
-	SpeakerSearchTask_CreatedTimestamp = SpeakerSearchTask.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	SpeakerSearchTask_UpdatedTimestamp = SpeakerSearchTask.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	Tag_Key = Tag.AddMember("Key", _TagKey)
-
-	Tag_Value = Tag.AddMember("Value", _TagValue)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	ThrottledClientException_Code = ThrottledClientException.AddMember("Code", ErrorCode)
-
-	ThrottledClientException_Message = ThrottledClientException.AddMember("Message", _String)
-
-	ThrottledClientException_RequestId = ThrottledClientException.AddMember("RequestId", _String)
-
-	UnauthorizedClientException_Code = UnauthorizedClientException.AddMember("Code", ErrorCode)
-
-	UnauthorizedClientException_Message = UnauthorizedClientException.AddMember("Message", _String)
-
-	UnauthorizedClientException_RequestId = UnauthorizedClientException.AddMember("RequestId", _String)
-
-	VoiceAnalyticsLanguageCode_EN_US = VoiceAnalyticsLanguageCode.AddMember("EN_US", smithyprelude.Unit)
-
-	VoiceToneAnalysisTask_VoiceToneAnalysisTaskId = VoiceToneAnalysisTask.AddMember("VoiceToneAnalysisTaskId", _GuidString)
-
-	VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus = VoiceToneAnalysisTask.AddMember("VoiceToneAnalysisTaskStatus", MediaPipelineTaskStatus)
-
-	VoiceToneAnalysisTask_CreatedTimestamp = VoiceToneAnalysisTask.AddMember("CreatedTimestamp", _Iso8601Timestamp)
-
-	VoiceToneAnalysisTask_UpdatedTimestamp = VoiceToneAnalysisTask.AddMember("UpdatedTimestamp", _Iso8601Timestamp)
-
-	CreateMediaCapturePipelineRequest_SourceType = CreateMediaCapturePipelineRequest.AddMember("SourceType", MediaPipelineSourceType)
-
-	CreateMediaCapturePipelineRequest_SourceArn = CreateMediaCapturePipelineRequest.AddMember("SourceArn", _Arn)
-
-	CreateMediaCapturePipelineRequest_SinkType = CreateMediaCapturePipelineRequest.AddMember("SinkType", MediaPipelineSinkType)
-
-	CreateMediaCapturePipelineRequest_SinkArn = CreateMediaCapturePipelineRequest.AddMember("SinkArn", _Arn)
-
-	CreateMediaCapturePipelineRequest_ClientRequestToken = CreateMediaCapturePipelineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateMediaCapturePipelineRequest_ChimeSdkMeetingConfiguration = CreateMediaCapturePipelineRequest.AddMember("ChimeSdkMeetingConfiguration", ChimeSdkMeetingConfiguration)
-
-	CreateMediaCapturePipelineRequest_SseAwsKeyManagementParams = CreateMediaCapturePipelineRequest.AddMember("SseAwsKeyManagementParams", SseAwsKeyManagementParams)
-
-	CreateMediaCapturePipelineRequest_SinkIamRoleArn = CreateMediaCapturePipelineRequest.AddMember("SinkIamRoleArn", _Arn)
-
-	CreateMediaCapturePipelineRequest_Tags = CreateMediaCapturePipelineRequest.AddMember("Tags", _TagList)
-
-	CreateMediaCapturePipelineResponse_MediaCapturePipeline = CreateMediaCapturePipelineResponse.AddMember("MediaCapturePipeline", MediaCapturePipeline)
-
-	CreateMediaConcatenationPipelineRequest_Sources = CreateMediaConcatenationPipelineRequest.AddMember("Sources", _ConcatenationSourceList)
-
-	CreateMediaConcatenationPipelineRequest_Sinks = CreateMediaConcatenationPipelineRequest.AddMember("Sinks", _ConcatenationSinkList)
-
-	CreateMediaConcatenationPipelineRequest_ClientRequestToken = CreateMediaConcatenationPipelineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateMediaConcatenationPipelineRequest_Tags = CreateMediaConcatenationPipelineRequest.AddMember("Tags", _TagList)
-
-	CreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline = CreateMediaConcatenationPipelineResponse.AddMember("MediaConcatenationPipeline", MediaConcatenationPipeline)
-
-	CreateMediaInsightsPipelineConfigurationRequest_MediaInsightsPipelineConfigurationName = CreateMediaInsightsPipelineConfigurationRequest.AddMember("MediaInsightsPipelineConfigurationName", _MediaInsightsPipelineConfigurationNameString)
-
-	CreateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn = CreateMediaInsightsPipelineConfigurationRequest.AddMember("ResourceAccessRoleArn", _Arn)
-
-	CreateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration = CreateMediaInsightsPipelineConfigurationRequest.AddMember("RealTimeAlertConfiguration", RealTimeAlertConfiguration)
-
-	CreateMediaInsightsPipelineConfigurationRequest_Elements = CreateMediaInsightsPipelineConfigurationRequest.AddMember("Elements", _MediaInsightsPipelineConfigurationElements)
-
-	CreateMediaInsightsPipelineConfigurationRequest_Tags = CreateMediaInsightsPipelineConfigurationRequest.AddMember("Tags", _TagList)
-
-	CreateMediaInsightsPipelineConfigurationRequest_ClientRequestToken = CreateMediaInsightsPipelineConfigurationRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = CreateMediaInsightsPipelineConfigurationResponse.AddMember("MediaInsightsPipelineConfiguration", MediaInsightsPipelineConfiguration)
-
-	CreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn = CreateMediaInsightsPipelineRequest.AddMember("MediaInsightsPipelineConfigurationArn", _Arn)
-
-	CreateMediaInsightsPipelineRequest_KinesisVideoStreamSourceRuntimeConfiguration = CreateMediaInsightsPipelineRequest.AddMember("KinesisVideoStreamSourceRuntimeConfiguration", KinesisVideoStreamSourceRuntimeConfiguration)
-
-	CreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata = CreateMediaInsightsPipelineRequest.AddMember("MediaInsightsRuntimeMetadata", _MediaInsightsRuntimeMetadata)
-
-	CreateMediaInsightsPipelineRequest_KinesisVideoStreamRecordingSourceRuntimeConfiguration = CreateMediaInsightsPipelineRequest.AddMember("KinesisVideoStreamRecordingSourceRuntimeConfiguration", KinesisVideoStreamRecordingSourceRuntimeConfiguration)
-
-	CreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration = CreateMediaInsightsPipelineRequest.AddMember("S3RecordingSinkRuntimeConfiguration", S3RecordingSinkRuntimeConfiguration)
-
-	CreateMediaInsightsPipelineRequest_Tags = CreateMediaInsightsPipelineRequest.AddMember("Tags", _TagList)
-
-	CreateMediaInsightsPipelineRequest_ClientRequestToken = CreateMediaInsightsPipelineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateMediaInsightsPipelineResponse_MediaInsightsPipeline = CreateMediaInsightsPipelineResponse.AddMember("MediaInsightsPipeline", MediaInsightsPipeline)
-
-	CreateMediaLiveConnectorPipelineRequest_Sources = CreateMediaLiveConnectorPipelineRequest.AddMember("Sources", _LiveConnectorSourceList)
-
-	CreateMediaLiveConnectorPipelineRequest_Sinks = CreateMediaLiveConnectorPipelineRequest.AddMember("Sinks", _LiveConnectorSinkList)
-
-	CreateMediaLiveConnectorPipelineRequest_ClientRequestToken = CreateMediaLiveConnectorPipelineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateMediaLiveConnectorPipelineRequest_Tags = CreateMediaLiveConnectorPipelineRequest.AddMember("Tags", _TagList)
-
-	CreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline = CreateMediaLiveConnectorPipelineResponse.AddMember("MediaLiveConnectorPipeline", MediaLiveConnectorPipeline)
-
-	CreateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration = CreateMediaPipelineKinesisVideoStreamPoolRequest.AddMember("StreamConfiguration", KinesisVideoStreamConfiguration)
-
-	CreateMediaPipelineKinesisVideoStreamPoolRequest_PoolName = CreateMediaPipelineKinesisVideoStreamPoolRequest.AddMember("PoolName", _KinesisVideoStreamPoolName)
-
-	CreateMediaPipelineKinesisVideoStreamPoolRequest_ClientRequestToken = CreateMediaPipelineKinesisVideoStreamPoolRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateMediaPipelineKinesisVideoStreamPoolRequest_Tags = CreateMediaPipelineKinesisVideoStreamPoolRequest.AddMember("Tags", _TagList)
-
-	CreateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = CreateMediaPipelineKinesisVideoStreamPoolResponse.AddMember("KinesisVideoStreamPoolConfiguration", KinesisVideoStreamPoolConfiguration)
-
-	CreateMediaStreamPipelineRequest_Sources = CreateMediaStreamPipelineRequest.AddMember("Sources", _MediaStreamSourceList)
-
-	CreateMediaStreamPipelineRequest_Sinks = CreateMediaStreamPipelineRequest.AddMember("Sinks", _MediaStreamSinkList)
-
-	CreateMediaStreamPipelineRequest_ClientRequestToken = CreateMediaStreamPipelineRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	CreateMediaStreamPipelineRequest_Tags = CreateMediaStreamPipelineRequest.AddMember("Tags", _TagList)
-
-	CreateMediaStreamPipelineResponse_MediaStreamPipeline = CreateMediaStreamPipelineResponse.AddMember("MediaStreamPipeline", MediaStreamPipeline)
-
-	DeleteMediaCapturePipelineRequest_MediaPipelineId = DeleteMediaCapturePipelineRequest.AddMember("MediaPipelineId", _GuidString, &smithytraits.HTTPLabel{})
-
-	DeleteMediaInsightsPipelineConfigurationRequest_Identifier = DeleteMediaInsightsPipelineConfigurationRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DeleteMediaPipelineRequest_MediaPipelineId = DeleteMediaPipelineRequest.AddMember("MediaPipelineId", _GuidString, &smithytraits.HTTPLabel{})
-
-	DeleteMediaPipelineKinesisVideoStreamPoolRequest_Identifier = DeleteMediaPipelineKinesisVideoStreamPoolRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetMediaCapturePipelineRequest_MediaPipelineId = GetMediaCapturePipelineRequest.AddMember("MediaPipelineId", _GuidString, &smithytraits.HTTPLabel{})
-
-	GetMediaCapturePipelineResponse_MediaCapturePipeline = GetMediaCapturePipelineResponse.AddMember("MediaCapturePipeline", MediaCapturePipeline)
-
-	GetMediaInsightsPipelineConfigurationRequest_Identifier = GetMediaInsightsPipelineConfigurationRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = GetMediaInsightsPipelineConfigurationResponse.AddMember("MediaInsightsPipelineConfiguration", MediaInsightsPipelineConfiguration)
-
-	GetMediaPipelineRequest_MediaPipelineId = GetMediaPipelineRequest.AddMember("MediaPipelineId", _GuidString, &smithytraits.HTTPLabel{})
-
-	GetMediaPipelineKinesisVideoStreamPoolRequest_Identifier = GetMediaPipelineKinesisVideoStreamPoolRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = GetMediaPipelineKinesisVideoStreamPoolResponse.AddMember("KinesisVideoStreamPoolConfiguration", KinesisVideoStreamPoolConfiguration)
-
-	GetMediaPipelineResponse_MediaPipeline = GetMediaPipelineResponse.AddMember("MediaPipeline", MediaPipeline)
-
-	GetSpeakerSearchTaskRequest_Identifier = GetSpeakerSearchTaskRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetSpeakerSearchTaskRequest_SpeakerSearchTaskId = GetSpeakerSearchTaskRequest.AddMember("SpeakerSearchTaskId", _GuidString, &smithytraits.HTTPLabel{})
-
-	GetSpeakerSearchTaskResponse_SpeakerSearchTask = GetSpeakerSearchTaskResponse.AddMember("SpeakerSearchTask", SpeakerSearchTask)
-
-	GetVoiceToneAnalysisTaskRequest_Identifier = GetVoiceToneAnalysisTaskRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = GetVoiceToneAnalysisTaskRequest.AddMember("VoiceToneAnalysisTaskId", _GuidString, &smithytraits.HTTPLabel{})
-
-	GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = GetVoiceToneAnalysisTaskResponse.AddMember("VoiceToneAnalysisTask", VoiceToneAnalysisTask)
-
-	ListMediaCapturePipelinesRequest_NextToken = ListMediaCapturePipelinesRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListMediaCapturePipelinesRequest_MaxResults = ListMediaCapturePipelinesRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListMediaCapturePipelinesResponse_MediaCapturePipelines = ListMediaCapturePipelinesResponse.AddMember("MediaCapturePipelines", _MediaCapturePipelineSummaryList)
-
-	ListMediaCapturePipelinesResponse_NextToken = ListMediaCapturePipelinesResponse.AddMember("NextToken", _String)
-
-	ListMediaInsightsPipelineConfigurationsRequest_NextToken = ListMediaInsightsPipelineConfigurationsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListMediaInsightsPipelineConfigurationsRequest_MaxResults = ListMediaInsightsPipelineConfigurationsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations = ListMediaInsightsPipelineConfigurationsResponse.AddMember("MediaInsightsPipelineConfigurations", _MediaInsightsPipelineConfigurationSummaryList)
-
-	ListMediaInsightsPipelineConfigurationsResponse_NextToken = ListMediaInsightsPipelineConfigurationsResponse.AddMember("NextToken", _String)
-
-	ListMediaPipelineKinesisVideoStreamPoolsRequest_NextToken = ListMediaPipelineKinesisVideoStreamPoolsRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListMediaPipelineKinesisVideoStreamPoolsRequest_MaxResults = ListMediaPipelineKinesisVideoStreamPoolsRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools = ListMediaPipelineKinesisVideoStreamPoolsResponse.AddMember("KinesisVideoStreamPools", _KinesisVideoStreamPoolSummaryList)
-
-	ListMediaPipelineKinesisVideoStreamPoolsResponse_NextToken = ListMediaPipelineKinesisVideoStreamPoolsResponse.AddMember("NextToken", _String)
-
-	ListMediaPipelinesRequest_NextToken = ListMediaPipelinesRequest.AddMember("NextToken", _String, &smithytraits.HTTPQuery{Name: "next-token"})
-
-	ListMediaPipelinesRequest_MaxResults = ListMediaPipelinesRequest.AddMember("MaxResults", _ResultMax, &smithytraits.HTTPQuery{Name: "max-results"})
-
-	ListMediaPipelinesResponse_MediaPipelines = ListMediaPipelinesResponse.AddMember("MediaPipelines", _MediaPipelineList)
-
-	ListMediaPipelinesResponse_NextToken = ListMediaPipelinesResponse.AddMember("NextToken", _String)
-
-	ListTagsForResourceRequest_ResourceARN = ListTagsForResourceRequest.AddMember("ResourceARN", _AmazonResourceName, &smithytraits.HTTPQuery{Name: "arn"})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagList)
-
-	StartSpeakerSearchTaskRequest_Identifier = StartSpeakerSearchTaskRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	StartSpeakerSearchTaskRequest_VoiceProfileDomainArn = StartSpeakerSearchTaskRequest.AddMember("VoiceProfileDomainArn", _Arn)
-
-	StartSpeakerSearchTaskRequest_KinesisVideoStreamSourceTaskConfiguration = StartSpeakerSearchTaskRequest.AddMember("KinesisVideoStreamSourceTaskConfiguration", KinesisVideoStreamSourceTaskConfiguration)
-
-	StartSpeakerSearchTaskRequest_ClientRequestToken = StartSpeakerSearchTaskRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartSpeakerSearchTaskResponse_SpeakerSearchTask = StartSpeakerSearchTaskResponse.AddMember("SpeakerSearchTask", SpeakerSearchTask)
-
-	StartVoiceToneAnalysisTaskRequest_Identifier = StartVoiceToneAnalysisTaskRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	StartVoiceToneAnalysisTaskRequest_LanguageCode = StartVoiceToneAnalysisTaskRequest.AddMember("LanguageCode", VoiceAnalyticsLanguageCode)
-
-	StartVoiceToneAnalysisTaskRequest_KinesisVideoStreamSourceTaskConfiguration = StartVoiceToneAnalysisTaskRequest.AddMember("KinesisVideoStreamSourceTaskConfiguration", KinesisVideoStreamSourceTaskConfiguration)
-
-	StartVoiceToneAnalysisTaskRequest_ClientRequestToken = StartVoiceToneAnalysisTaskRequest.AddMember("ClientRequestToken", _ClientRequestToken)
-
-	StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = StartVoiceToneAnalysisTaskResponse.AddMember("VoiceToneAnalysisTask", VoiceToneAnalysisTask)
-
-	StopSpeakerSearchTaskRequest_Identifier = StopSpeakerSearchTaskRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	StopSpeakerSearchTaskRequest_SpeakerSearchTaskId = StopSpeakerSearchTaskRequest.AddMember("SpeakerSearchTaskId", _GuidString, &smithytraits.HTTPLabel{})
-
-	StopVoiceToneAnalysisTaskRequest_Identifier = StopVoiceToneAnalysisTaskRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	StopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = StopVoiceToneAnalysisTaskRequest.AddMember("VoiceToneAnalysisTaskId", _GuidString, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_ResourceARN = TagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagList)
-
-	UntagResourceRequest_ResourceARN = UntagResourceRequest.AddMember("ResourceARN", _AmazonResourceName)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateMediaInsightsPipelineConfigurationRequest_Identifier = UpdateMediaInsightsPipelineConfigurationRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn = UpdateMediaInsightsPipelineConfigurationRequest.AddMember("ResourceAccessRoleArn", _Arn)
-
-	UpdateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration = UpdateMediaInsightsPipelineConfigurationRequest.AddMember("RealTimeAlertConfiguration", RealTimeAlertConfiguration)
-
-	UpdateMediaInsightsPipelineConfigurationRequest_Elements = UpdateMediaInsightsPipelineConfigurationRequest.AddMember("Elements", _MediaInsightsPipelineConfigurationElements)
-
-	UpdateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = UpdateMediaInsightsPipelineConfigurationResponse.AddMember("MediaInsightsPipelineConfiguration", MediaInsightsPipelineConfiguration)
-
-	UpdateMediaInsightsPipelineStatusRequest_Identifier = UpdateMediaInsightsPipelineStatusRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateMediaInsightsPipelineStatusRequest_UpdateStatus = UpdateMediaInsightsPipelineStatusRequest.AddMember("UpdateStatus", MediaPipelineStatusUpdate)
-
-	UpdateMediaPipelineKinesisVideoStreamPoolRequest_Identifier = UpdateMediaPipelineKinesisVideoStreamPoolRequest.AddMember("Identifier", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	UpdateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration = UpdateMediaPipelineKinesisVideoStreamPoolRequest.AddMember("StreamConfiguration", KinesisVideoStreamConfigurationUpdate)
-
-	UpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = UpdateMediaPipelineKinesisVideoStreamPoolResponse.AddMember("KinesisVideoStreamPoolConfiguration", KinesisVideoStreamPoolConfiguration)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 503}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "next-token"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "max-results"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "arn"}}, DirectMask: 0x10}
+
+var mActiveSpeakerOnlyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition}}
+var mActiveSpeakerPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sActiveSpeakerPosition_TopLeft, &sActiveSpeakerPosition_TopRight, &sActiveSpeakerPosition_BottomLeft, &sActiveSpeakerPosition_BottomRight}}
+var mAmazonTranscribeCallAnalyticsProcessorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings, &sAmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories}, Seed: 1, Slots: []uint16{
+	1, 9, 0, 13, 0, 2, 0, 11, 0, 5, 0, 3, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 4, 0,
+	0, 0, 8, 6, 0, 10, 0, 12,
+}}
+var mAmazonTranscribeProcessorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAmazonTranscribeProcessorConfiguration_LanguageCode, &sAmazonTranscribeProcessorConfiguration_VocabularyName, &sAmazonTranscribeProcessorConfiguration_VocabularyFilterName, &sAmazonTranscribeProcessorConfiguration_VocabularyFilterMethod, &sAmazonTranscribeProcessorConfiguration_ShowSpeakerLabel, &sAmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization, &sAmazonTranscribeProcessorConfiguration_PartialResultsStability, &sAmazonTranscribeProcessorConfiguration_ContentIdentificationType, &sAmazonTranscribeProcessorConfiguration_ContentRedactionType, &sAmazonTranscribeProcessorConfiguration_PiiEntityTypes, &sAmazonTranscribeProcessorConfiguration_LanguageModelName, &sAmazonTranscribeProcessorConfiguration_FilterPartialResults, &sAmazonTranscribeProcessorConfiguration_IdentifyLanguage, &sAmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages, &sAmazonTranscribeProcessorConfiguration_LanguageOptions, &sAmazonTranscribeProcessorConfiguration_PreferredLanguage, &sAmazonTranscribeProcessorConfiguration_VocabularyNames, &sAmazonTranscribeProcessorConfiguration_VocabularyFilterNames}, Seed: 7, Slots: []uint16{
+	0, 5, 0, 0, 17, 0, 0, 14, 13, 9, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 0, 0, 1,
+	0, 0, 0, 8, 0, 0, 0, 18, 4, 0, 6, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 10, 0, 3, 16, 0, 12, 0, 0, 0, 0, 0, 2, 0, 0,
+}}
+var mArtifactsConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactsConcatenationConfiguration_Audio, &sArtifactsConcatenationConfiguration_Video, &sArtifactsConcatenationConfiguration_Content, &sArtifactsConcatenationConfiguration_DataChannel, &sArtifactsConcatenationConfiguration_TranscriptionMessages, &sArtifactsConcatenationConfiguration_MeetingEvents, &sArtifactsConcatenationConfiguration_CompositedVideo}}
+var mArtifactsConcatenationState = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactsConcatenationState_Enabled, &sArtifactsConcatenationState_Disabled}}
+var mArtifactsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactsConfiguration_Audio, &sArtifactsConfiguration_Video, &sArtifactsConfiguration_Content, &sArtifactsConfiguration_CompositedVideo}}
+var mArtifactsState = smithy.SchemaMembers{List: []*smithy.Schema{&sArtifactsState_Enabled, &sArtifactsState_Disabled}}
+var m_AttendeeIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttendeeIdList_member}}
+var mAudioArtifactsConcatenationState = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioArtifactsConcatenationState_Enabled}}
+var mAudioArtifactsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioArtifactsConfiguration_MuxType}}
+var mAudioChannelsOption = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioChannelsOption_Stereo, &sAudioChannelsOption_Mono}}
+var mAudioConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioConcatenationConfiguration_State}}
+var mAudioMuxType = smithy.SchemaMembers{List: []*smithy.Schema{&sAudioMuxType_AudioOnly, &sAudioMuxType_AudioWithActiveSpeakerVideo, &sAudioMuxType_AudioWithCompositedVideo}}
+var mBadRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sBadRequestException_Code, &sBadRequestException_Message, &sBadRequestException_RequestId}}
+var mBorderColor = smithy.SchemaMembers{List: []*smithy.Schema{&sBorderColor_Black, &sBorderColor_Blue, &sBorderColor_Red, &sBorderColor_Green, &sBorderColor_White, &sBorderColor_Yellow}}
+var mCallAnalyticsLanguageCode = smithy.SchemaMembers{List: []*smithy.Schema{&sCallAnalyticsLanguageCode_EN_US, &sCallAnalyticsLanguageCode_EN_GB, &sCallAnalyticsLanguageCode_ES_US, &sCallAnalyticsLanguageCode_FR_CA, &sCallAnalyticsLanguageCode_FR_FR, &sCallAnalyticsLanguageCode_EN_AU, &sCallAnalyticsLanguageCode_IT_IT, &sCallAnalyticsLanguageCode_DE_DE, &sCallAnalyticsLanguageCode_PT_BR}, Seed: 2, Slots: []uint16{
+	3, 0, 0, 0, 0, 4, 0, 0, 7, 0, 1, 0, 0, 0, 0, 0, 0, 9, 0, 8, 0, 0, 0, 0,
+	2, 0, 0, 6, 0, 0, 0, 5,
+}}
+var mCanvasOrientation = smithy.SchemaMembers{List: []*smithy.Schema{&sCanvasOrientation_Landscape, &sCanvasOrientation_Portrait}}
+var m_CategoryNameList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CategoryNameList_member}}
+var mChannelDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelDefinition_ChannelId, &sChannelDefinition_ParticipantRole}}
+var m_ChannelDefinitions = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelDefinitions_member}}
+var mChimeSdkMeetingConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration}}
+var mChimeSdkMeetingConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChimeSdkMeetingConfiguration_SourceConfiguration, &sChimeSdkMeetingConfiguration_ArtifactsConfiguration}}
+var mChimeSdkMeetingLiveConnectorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChimeSdkMeetingLiveConnectorConfiguration_Arn, &sChimeSdkMeetingLiveConnectorConfiguration_MuxType, &sChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo, &sChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration}}
+var mCompositedVideoArtifactsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositedVideoArtifactsConfiguration_Layout, &sCompositedVideoArtifactsConfiguration_Resolution, &sCompositedVideoArtifactsConfiguration_GridViewConfiguration}}
+var mCompositedVideoConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCompositedVideoConcatenationConfiguration_State}}
+var mConcatenationSink = smithy.SchemaMembers{List: []*smithy.Schema{&sConcatenationSink_Type, &sConcatenationSink_S3BucketSinkConfiguration}}
+var m_ConcatenationSinkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConcatenationSinkList_member}}
+var mConcatenationSinkType = smithy.SchemaMembers{List: []*smithy.Schema{&sConcatenationSinkType_S3Bucket}}
+var mConcatenationSource = smithy.SchemaMembers{List: []*smithy.Schema{&sConcatenationSource_Type, &sConcatenationSource_MediaCapturePipelineSourceConfiguration}}
+var m_ConcatenationSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConcatenationSourceList_member}}
+var mConcatenationSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sConcatenationSourceType_MediaCapturePipeline}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Code, &sConflictException_Message, &sConflictException_RequestId}}
+var mContentArtifactsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sContentArtifactsConfiguration_State, &sContentArtifactsConfiguration_MuxType}}
+var mContentConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sContentConcatenationConfiguration_State}}
+var mContentMuxType = smithy.SchemaMembers{List: []*smithy.Schema{&sContentMuxType_ContentOnly}}
+var mContentRedactionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sContentRedactionOutput_REDACTED, &sContentRedactionOutput_REDACTED_AND_UNREDACTED}}
+var mContentShareLayoutOption = smithy.SchemaMembers{List: []*smithy.Schema{&sContentShareLayoutOption_PresenterOnly, &sContentShareLayoutOption_Horizontal, &sContentShareLayoutOption_Vertical, &sContentShareLayoutOption_ActiveSpeakerOnly}}
+var mContentType = smithy.SchemaMembers{List: []*smithy.Schema{&sContentType_PII}}
+var mDataChannelConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDataChannelConcatenationConfiguration_State}}
+var mErrorCode = smithy.SchemaMembers{List: []*smithy.Schema{&sErrorCode_BadRequest, &sErrorCode_Forbidden, &sErrorCode_NotFound, &sErrorCode_ResourceLimitExceeded, &sErrorCode_ServiceFailure, &sErrorCode_ServiceUnavailable, &sErrorCode_Throttling}}
+var m_ExternalUserIdList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ExternalUserIdList_member}}
+var mForbiddenException = smithy.SchemaMembers{List: []*smithy.Schema{&sForbiddenException_Code, &sForbiddenException_Message, &sForbiddenException_RequestId}}
+var mFragmentSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sFragmentSelector_FragmentSelectorType, &sFragmentSelector_TimestampRange}}
+var mFragmentSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sFragmentSelectorType_ProducerTimestamp, &sFragmentSelectorType_ServerTimestamp}}
+var mGridViewConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGridViewConfiguration_ContentShareLayout, &sGridViewConfiguration_PresenterOnlyConfiguration, &sGridViewConfiguration_ActiveSpeakerOnlyConfiguration, &sGridViewConfiguration_HorizontalLayoutConfiguration, &sGridViewConfiguration_VerticalLayoutConfiguration, &sGridViewConfiguration_VideoAttribute, &sGridViewConfiguration_CanvasOrientation}}
+var mHighlightColor = smithy.SchemaMembers{List: []*smithy.Schema{&sHighlightColor_Black, &sHighlightColor_Blue, &sHighlightColor_Red, &sHighlightColor_Green, &sHighlightColor_White, &sHighlightColor_Yellow}}
+var mHorizontalLayoutConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHorizontalLayoutConfiguration_TileOrder, &sHorizontalLayoutConfiguration_TilePosition, &sHorizontalLayoutConfiguration_TileCount, &sHorizontalLayoutConfiguration_TileAspectRatio}}
+var mHorizontalTilePosition = smithy.SchemaMembers{List: []*smithy.Schema{&sHorizontalTilePosition_Top, &sHorizontalTilePosition_Bottom}}
+var mIssueDetectionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sIssueDetectionConfiguration_RuleName}}
+var mKeywordMatchConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKeywordMatchConfiguration_RuleName, &sKeywordMatchConfiguration_Keywords, &sKeywordMatchConfiguration_Negate}}
+var m_KeywordMatchWordList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KeywordMatchWordList_member}}
+var mKinesisDataStreamSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisDataStreamSinkConfiguration_InsightsTarget}}
+var mKinesisVideoStreamConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamConfiguration_Region, &sKinesisVideoStreamConfiguration_DataRetentionInHours}}
+var mKinesisVideoStreamConfigurationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamConfigurationUpdate_DataRetentionInHours}}
+var mKinesisVideoStreamPoolConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamPoolConfiguration_PoolArn, &sKinesisVideoStreamPoolConfiguration_PoolName, &sKinesisVideoStreamPoolConfiguration_PoolId, &sKinesisVideoStreamPoolConfiguration_PoolStatus, &sKinesisVideoStreamPoolConfiguration_PoolSize, &sKinesisVideoStreamPoolConfiguration_StreamConfiguration, &sKinesisVideoStreamPoolConfiguration_CreatedTimestamp, &sKinesisVideoStreamPoolConfiguration_UpdatedTimestamp}}
+var mKinesisVideoStreamPoolStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamPoolStatus_CREATING, &sKinesisVideoStreamPoolStatus_ACTIVE, &sKinesisVideoStreamPoolStatus_UPDATING, &sKinesisVideoStreamPoolStatus_DELETING, &sKinesisVideoStreamPoolStatus_FAILED}}
+var mKinesisVideoStreamPoolSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamPoolSummary_PoolName, &sKinesisVideoStreamPoolSummary_PoolId, &sKinesisVideoStreamPoolSummary_PoolArn}}
+var m_KinesisVideoStreamPoolSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_KinesisVideoStreamPoolSummaryList_member}}
+var mKinesisVideoStreamRecordingSourceRuntimeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams, &sKinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector}}
+var mKinesisVideoStreamSourceRuntimeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamSourceRuntimeConfiguration_Streams, &sKinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding, &sKinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate}}
+var mKinesisVideoStreamSourceTaskConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisVideoStreamSourceTaskConfiguration_StreamArn, &sKinesisVideoStreamSourceTaskConfiguration_ChannelId, &sKinesisVideoStreamSourceTaskConfiguration_FragmentNumber}}
+var mLambdaFunctionSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionSinkConfiguration_InsightsTarget}}
+var mLayoutOption = smithy.SchemaMembers{List: []*smithy.Schema{&sLayoutOption_GridView}}
+var mLiveConnectorMuxType = smithy.SchemaMembers{List: []*smithy.Schema{&sLiveConnectorMuxType_AudioWithCompositedVideo, &sLiveConnectorMuxType_AudioWithActiveSpeakerVideo}}
+var mLiveConnectorRTMPConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLiveConnectorRTMPConfiguration_Url, &sLiveConnectorRTMPConfiguration_AudioChannels, &sLiveConnectorRTMPConfiguration_AudioSampleRate}}
+var mLiveConnectorSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLiveConnectorSinkConfiguration_SinkType, &sLiveConnectorSinkConfiguration_RTMPConfiguration}}
+var m_LiveConnectorSinkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LiveConnectorSinkList_member}}
+var mLiveConnectorSinkType = smithy.SchemaMembers{List: []*smithy.Schema{&sLiveConnectorSinkType_RTMP}}
+var mLiveConnectorSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLiveConnectorSourceConfiguration_SourceType, &sLiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration}}
+var m_LiveConnectorSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LiveConnectorSourceList_member}}
+var mLiveConnectorSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sLiveConnectorSourceType_ChimeSdkMeeting}}
+var mMediaCapturePipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaCapturePipeline_MediaPipelineId, &sMediaCapturePipeline_MediaPipelineArn, &sMediaCapturePipeline_SourceType, &sMediaCapturePipeline_SourceArn, &sMediaCapturePipeline_Status, &sMediaCapturePipeline_SinkType, &sMediaCapturePipeline_SinkArn, &sMediaCapturePipeline_CreatedTimestamp, &sMediaCapturePipeline_UpdatedTimestamp, &sMediaCapturePipeline_ChimeSdkMeetingConfiguration, &sMediaCapturePipeline_SseAwsKeyManagementParams, &sMediaCapturePipeline_SinkIamRoleArn}, Seed: 21, Slots: []uint16{
+	0, 2, 0, 0, 0, 0, 0, 7, 6, 0, 0, 0, 10, 11, 3, 0, 9, 5, 0, 0, 0, 4, 0, 0,
+	0, 0, 0, 0, 8, 0, 12, 1,
+}}
+var mMediaCapturePipelineSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaCapturePipelineSourceConfiguration_MediaPipelineArn, &sMediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration}}
+var mMediaCapturePipelineSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaCapturePipelineSummary_MediaPipelineId, &sMediaCapturePipelineSummary_MediaPipelineArn}}
+var m_MediaCapturePipelineSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaCapturePipelineSummaryList_member}}
+var mMediaConcatenationPipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaConcatenationPipeline_MediaPipelineId, &sMediaConcatenationPipeline_MediaPipelineArn, &sMediaConcatenationPipeline_Sources, &sMediaConcatenationPipeline_Sinks, &sMediaConcatenationPipeline_Status, &sMediaConcatenationPipeline_CreatedTimestamp, &sMediaConcatenationPipeline_UpdatedTimestamp}}
+var mMediaEncoding = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaEncoding_PCM}}
+var mMediaInsightsPipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaInsightsPipeline_MediaPipelineId, &sMediaInsightsPipeline_MediaPipelineArn, &sMediaInsightsPipeline_MediaInsightsPipelineConfigurationArn, &sMediaInsightsPipeline_Status, &sMediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration, &sMediaInsightsPipeline_MediaInsightsRuntimeMetadata, &sMediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration, &sMediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration, &sMediaInsightsPipeline_CreatedTimestamp, &sMediaInsightsPipeline_ElementStatuses}, Seed: 4, Slots: []uint16{
+	9, 0, 0, 0, 0, 0, 0, 4, 0, 1, 0, 3, 6, 2, 7, 0, 10, 8, 0, 0, 0, 0, 0, 0,
+	5, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mMediaInsightsPipelineConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName, &sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn, &sMediaInsightsPipelineConfiguration_ResourceAccessRoleArn, &sMediaInsightsPipelineConfiguration_RealTimeAlertConfiguration, &sMediaInsightsPipelineConfiguration_Elements, &sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId, &sMediaInsightsPipelineConfiguration_CreatedTimestamp, &sMediaInsightsPipelineConfiguration_UpdatedTimestamp}}
+var mMediaInsightsPipelineConfigurationElement = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaInsightsPipelineConfigurationElement_Type, &sMediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration, &sMediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration, &sMediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration, &sMediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration, &sMediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration, &sMediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration, &sMediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration, &sMediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration, &sMediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration}, Seed: 5, Slots: []uint16{
+	9, 0, 0, 0, 3, 5, 7, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 10, 0, 0, 8, 0, 0,
+	1, 0, 0, 0, 0, 4, 2, 0,
+}}
+var m_MediaInsightsPipelineConfigurationElements = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaInsightsPipelineConfigurationElements_member}}
+var mMediaInsightsPipelineConfigurationElementType = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR, &sMediaInsightsPipelineConfigurationElementType_VOICE_ANALYTICS_PROCESSOR, &sMediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_PROCESSOR, &sMediaInsightsPipelineConfigurationElementType_KINESIS_DATA_STREAM_SINK, &sMediaInsightsPipelineConfigurationElementType_LAMBDA_FUNCTION_SINK, &sMediaInsightsPipelineConfigurationElementType_SQS_QUEUE_SINK, &sMediaInsightsPipelineConfigurationElementType_SNS_TOPIC_SINK, &sMediaInsightsPipelineConfigurationElementType_S3_RECORDING_SINK, &sMediaInsightsPipelineConfigurationElementType_VOICE_ENHANCEMENT_SINK}, Seed: 2, Slots: []uint16{
+	1, 0, 0, 6, 0, 0, 0, 0, 0, 8, 0, 5, 0, 0, 9, 4, 0, 0, 2, 7, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 3, 0,
+}}
+var mMediaInsightsPipelineConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName, &sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId, &sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn}}
+var m_MediaInsightsPipelineConfigurationSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaInsightsPipelineConfigurationSummaryList_member}}
+var mMediaInsightsPipelineElementStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaInsightsPipelineElementStatus_Type, &sMediaInsightsPipelineElementStatus_Status}}
+var m_MediaInsightsPipelineElementStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaInsightsPipelineElementStatuses_member}}
+var m_MediaInsightsRuntimeMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaInsightsRuntimeMetadata_key, &s_MediaInsightsRuntimeMetadata_value}}
+var mMediaLiveConnectorPipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaLiveConnectorPipeline_Sources, &sMediaLiveConnectorPipeline_Sinks, &sMediaLiveConnectorPipeline_MediaPipelineId, &sMediaLiveConnectorPipeline_MediaPipelineArn, &sMediaLiveConnectorPipeline_Status, &sMediaLiveConnectorPipeline_CreatedTimestamp, &sMediaLiveConnectorPipeline_UpdatedTimestamp}}
+var mMediaPipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipeline_MediaCapturePipeline, &sMediaPipeline_MediaLiveConnectorPipeline, &sMediaPipeline_MediaConcatenationPipeline, &sMediaPipeline_MediaInsightsPipeline, &sMediaPipeline_MediaStreamPipeline}}
+var mMediaPipelineElementStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipelineElementStatus_NotStarted, &sMediaPipelineElementStatus_NotSupported, &sMediaPipelineElementStatus_Initializing, &sMediaPipelineElementStatus_InProgress, &sMediaPipelineElementStatus_Failed, &sMediaPipelineElementStatus_Stopping, &sMediaPipelineElementStatus_Stopped, &sMediaPipelineElementStatus_Paused}}
+var m_MediaPipelineList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaPipelineList_member}}
+var mMediaPipelineSinkType = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipelineSinkType_S3Bucket}}
+var mMediaPipelineSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipelineSourceType_ChimeSdkMeeting}}
+var mMediaPipelineStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipelineStatus_Initializing, &sMediaPipelineStatus_InProgress, &sMediaPipelineStatus_Failed, &sMediaPipelineStatus_Stopping, &sMediaPipelineStatus_Stopped, &sMediaPipelineStatus_Paused, &sMediaPipelineStatus_NotStarted}}
+var mMediaPipelineStatusUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipelineStatusUpdate_Pause, &sMediaPipelineStatusUpdate_Resume}}
+var mMediaPipelineSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipelineSummary_MediaPipelineId, &sMediaPipelineSummary_MediaPipelineArn}}
+var mMediaPipelineTaskStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaPipelineTaskStatus_NotStarted, &sMediaPipelineTaskStatus_Initializing, &sMediaPipelineTaskStatus_InProgress, &sMediaPipelineTaskStatus_Failed, &sMediaPipelineTaskStatus_Stopping, &sMediaPipelineTaskStatus_Stopped}}
+var mMediaStreamPipeline = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaStreamPipeline_MediaPipelineId, &sMediaStreamPipeline_MediaPipelineArn, &sMediaStreamPipeline_CreatedTimestamp, &sMediaStreamPipeline_UpdatedTimestamp, &sMediaStreamPipeline_Status, &sMediaStreamPipeline_Sources, &sMediaStreamPipeline_Sinks}}
+var mMediaStreamPipelineSinkType = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaStreamPipelineSinkType_KinesisVideoStreamPool}}
+var mMediaStreamSink = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaStreamSink_SinkArn, &sMediaStreamSink_SinkType, &sMediaStreamSink_ReservedStreamCapacity, &sMediaStreamSink_MediaStreamType}}
+var m_MediaStreamSinkList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaStreamSinkList_member}}
+var mMediaStreamSource = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaStreamSource_SourceType, &sMediaStreamSource_SourceArn}}
+var m_MediaStreamSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MediaStreamSourceList_member}}
+var mMediaStreamType = smithy.SchemaMembers{List: []*smithy.Schema{&sMediaStreamType_MixedAudio, &sMediaStreamType_IndividualAudio}}
+var mMeetingEventsConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMeetingEventsConcatenationConfiguration_State}}
+var mNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotFoundException_Code, &sNotFoundException_Message, &sNotFoundException_RequestId}}
+var mPartialResultsStability = smithy.SchemaMembers{List: []*smithy.Schema{&sPartialResultsStability_HIGH, &sPartialResultsStability_MEDIUM, &sPartialResultsStability_LOW}}
+var mParticipantRole = smithy.SchemaMembers{List: []*smithy.Schema{&sParticipantRole_AGENT, &sParticipantRole_CUSTOMER}}
+var mPostCallAnalyticsSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sPostCallAnalyticsSettings_OutputLocation, &sPostCallAnalyticsSettings_DataAccessRoleArn, &sPostCallAnalyticsSettings_ContentRedactionOutput, &sPostCallAnalyticsSettings_OutputEncryptionKMSKeyId}}
+var mPresenterOnlyConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPresenterOnlyConfiguration_PresenterPosition}}
+var mPresenterPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sPresenterPosition_TopLeft, &sPresenterPosition_TopRight, &sPresenterPosition_BottomLeft, &sPresenterPosition_BottomRight}}
+var mRealTimeAlertConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRealTimeAlertConfiguration_Disabled, &sRealTimeAlertConfiguration_Rules}}
+var mRealTimeAlertRule = smithy.SchemaMembers{List: []*smithy.Schema{&sRealTimeAlertRule_Type, &sRealTimeAlertRule_KeywordMatchConfiguration, &sRealTimeAlertRule_SentimentConfiguration, &sRealTimeAlertRule_IssueDetectionConfiguration}}
+var m_RealTimeAlertRuleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RealTimeAlertRuleList_member}}
+var mRealTimeAlertRuleType = smithy.SchemaMembers{List: []*smithy.Schema{&sRealTimeAlertRuleType_KeywordMatch, &sRealTimeAlertRuleType_Sentiment, &sRealTimeAlertRuleType_IssueDetection}}
+var mRecordingFileFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordingFileFormat_Wav, &sRecordingFileFormat_Opus}}
+var mRecordingStreamConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sRecordingStreamConfiguration_StreamArn}}
+var m_RecordingStreamList = smithy.SchemaMembers{List: []*smithy.Schema{&s_RecordingStreamList_member}}
+var mResolutionOption = smithy.SchemaMembers{List: []*smithy.Schema{&sResolutionOption_HD, &sResolutionOption_FHD}}
+var mResourceLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceLimitExceededException_Code, &sResourceLimitExceededException_Message, &sResourceLimitExceededException_RequestId}}
+var mS3BucketSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3BucketSinkConfiguration_Destination}}
+var mS3RecordingSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3RecordingSinkConfiguration_Destination, &sS3RecordingSinkConfiguration_RecordingFileFormat}}
+var mS3RecordingSinkRuntimeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sS3RecordingSinkRuntimeConfiguration_Destination, &sS3RecordingSinkRuntimeConfiguration_RecordingFileFormat}}
+var mSelectedVideoStreams = smithy.SchemaMembers{List: []*smithy.Schema{&sSelectedVideoStreams_AttendeeIds, &sSelectedVideoStreams_ExternalUserIds}}
+var mSentimentConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSentimentConfiguration_RuleName, &sSentimentConfiguration_SentimentType, &sSentimentConfiguration_TimePeriod}}
+var mSentimentType = smithy.SchemaMembers{List: []*smithy.Schema{&sSentimentType_NEGATIVE}}
+var mServiceFailureException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceFailureException_Code, &sServiceFailureException_Message, &sServiceFailureException_RequestId}}
+var mServiceUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceUnavailableException_Code, &sServiceUnavailableException_Message, &sServiceUnavailableException_RequestId}}
+var mSnsTopicSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSnsTopicSinkConfiguration_InsightsTarget}}
+var mSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSourceConfiguration_SelectedVideoStreams}}
+var mSpeakerSearchTask = smithy.SchemaMembers{List: []*smithy.Schema{&sSpeakerSearchTask_SpeakerSearchTaskId, &sSpeakerSearchTask_SpeakerSearchTaskStatus, &sSpeakerSearchTask_CreatedTimestamp, &sSpeakerSearchTask_UpdatedTimestamp}}
+var mSqsQueueSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSqsQueueSinkConfiguration_InsightsTarget}}
+var mSseAwsKeyManagementParams = smithy.SchemaMembers{List: []*smithy.Schema{&sSseAwsKeyManagementParams_AwsKmsKeyId, &sSseAwsKeyManagementParams_AwsKmsEncryptionContext}}
+var mStreamChannelDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamChannelDefinition_NumberOfChannels, &sStreamChannelDefinition_ChannelDefinitions}}
+var mStreamConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamConfiguration_StreamArn, &sStreamConfiguration_FragmentNumber, &sStreamConfiguration_StreamChannelDefinition}}
+var m_Streams = smithy.SchemaMembers{List: []*smithy.Schema{&s_Streams_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_Key, &sTag_Value}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mThrottledClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottledClientException_Code, &sThrottledClientException_Message, &sThrottledClientException_RequestId}}
+var mTileOrder = smithy.SchemaMembers{List: []*smithy.Schema{&sTileOrder_JoinSequence, &sTileOrder_SpeakerSequence}}
+var mTimestampRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestampRange_StartTimestamp, &sTimestampRange_EndTimestamp}}
+var mTranscriptionMessagesConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sTranscriptionMessagesConcatenationConfiguration_State}}
+var mUnauthorizedClientException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnauthorizedClientException_Code, &sUnauthorizedClientException_Message, &sUnauthorizedClientException_RequestId}}
+var mVerticalLayoutConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVerticalLayoutConfiguration_TileOrder, &sVerticalLayoutConfiguration_TilePosition, &sVerticalLayoutConfiguration_TileCount, &sVerticalLayoutConfiguration_TileAspectRatio}}
+var mVerticalTilePosition = smithy.SchemaMembers{List: []*smithy.Schema{&sVerticalTilePosition_Left, &sVerticalTilePosition_Right}}
+var mVideoArtifactsConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoArtifactsConfiguration_State, &sVideoArtifactsConfiguration_MuxType}}
+var mVideoAttribute = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoAttribute_CornerRadius, &sVideoAttribute_BorderColor, &sVideoAttribute_HighlightColor, &sVideoAttribute_BorderThickness}}
+var mVideoConcatenationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoConcatenationConfiguration_State}}
+var mVideoMuxType = smithy.SchemaMembers{List: []*smithy.Schema{&sVideoMuxType_VideoOnly}}
+var mVocabularyFilterMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sVocabularyFilterMethod_REMOVE, &sVocabularyFilterMethod_MASK, &sVocabularyFilterMethod_TAG}}
+var mVoiceAnalyticsConfigurationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceAnalyticsConfigurationStatus_ENABLED, &sVoiceAnalyticsConfigurationStatus_DISABLED}}
+var mVoiceAnalyticsLanguageCode = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceAnalyticsLanguageCode_EN_US}}
+var mVoiceAnalyticsProcessorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus, &sVoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus}}
+var mVoiceEnhancementSinkConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceEnhancementSinkConfiguration_Disabled}}
+var mVoiceToneAnalysisTask = smithy.SchemaMembers{List: []*smithy.Schema{&sVoiceToneAnalysisTask_VoiceToneAnalysisTaskId, &sVoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus, &sVoiceToneAnalysisTask_CreatedTimestamp, &sVoiceToneAnalysisTask_UpdatedTimestamp}}
+var mCreateMediaCapturePipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaCapturePipelineRequest_SourceType, &sCreateMediaCapturePipelineRequest_SourceArn, &sCreateMediaCapturePipelineRequest_SinkType, &sCreateMediaCapturePipelineRequest_SinkArn, &sCreateMediaCapturePipelineRequest_ClientRequestToken, &sCreateMediaCapturePipelineRequest_ChimeSdkMeetingConfiguration, &sCreateMediaCapturePipelineRequest_SseAwsKeyManagementParams, &sCreateMediaCapturePipelineRequest_SinkIamRoleArn, &sCreateMediaCapturePipelineRequest_Tags}, Seed: 3, Slots: []uint16{
+	4, 8, 0, 0, 5, 2, 0, 0, 3, 0, 0, 7, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 6, 1, 0, 0, 0, 0,
+}}
+var mCreateMediaCapturePipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaCapturePipelineResponse_MediaCapturePipeline}}
+var mCreateMediaConcatenationPipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaConcatenationPipelineRequest_Sources, &sCreateMediaConcatenationPipelineRequest_Sinks, &sCreateMediaConcatenationPipelineRequest_ClientRequestToken, &sCreateMediaConcatenationPipelineRequest_Tags}}
+var mCreateMediaConcatenationPipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline}}
+var mCreateMediaInsightsPipelineConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaInsightsPipelineConfigurationRequest_MediaInsightsPipelineConfigurationName, &sCreateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn, &sCreateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration, &sCreateMediaInsightsPipelineConfigurationRequest_Elements, &sCreateMediaInsightsPipelineConfigurationRequest_Tags, &sCreateMediaInsightsPipelineConfigurationRequest_ClientRequestToken}}
+var mCreateMediaInsightsPipelineConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration}}
+var mCreateMediaInsightsPipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn, &sCreateMediaInsightsPipelineRequest_KinesisVideoStreamSourceRuntimeConfiguration, &sCreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata, &sCreateMediaInsightsPipelineRequest_KinesisVideoStreamRecordingSourceRuntimeConfiguration, &sCreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration, &sCreateMediaInsightsPipelineRequest_Tags, &sCreateMediaInsightsPipelineRequest_ClientRequestToken}}
+var mCreateMediaInsightsPipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaInsightsPipelineResponse_MediaInsightsPipeline}}
+var mCreateMediaLiveConnectorPipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaLiveConnectorPipelineRequest_Sources, &sCreateMediaLiveConnectorPipelineRequest_Sinks, &sCreateMediaLiveConnectorPipelineRequest_ClientRequestToken, &sCreateMediaLiveConnectorPipelineRequest_Tags}}
+var mCreateMediaLiveConnectorPipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline}}
+var mCreateMediaPipelineKinesisVideoStreamPoolRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration, &sCreateMediaPipelineKinesisVideoStreamPoolRequest_PoolName, &sCreateMediaPipelineKinesisVideoStreamPoolRequest_ClientRequestToken, &sCreateMediaPipelineKinesisVideoStreamPoolRequest_Tags}}
+var mCreateMediaPipelineKinesisVideoStreamPoolResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration}}
+var mCreateMediaStreamPipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaStreamPipelineRequest_Sources, &sCreateMediaStreamPipelineRequest_Sinks, &sCreateMediaStreamPipelineRequest_ClientRequestToken, &sCreateMediaStreamPipelineRequest_Tags}}
+var mCreateMediaStreamPipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMediaStreamPipelineResponse_MediaStreamPipeline}}
+var mDeleteMediaCapturePipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMediaCapturePipelineRequest_MediaPipelineId}}
+var mDeleteMediaInsightsPipelineConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMediaInsightsPipelineConfigurationRequest_Identifier}}
+var mDeleteMediaPipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMediaPipelineRequest_MediaPipelineId}}
+var mDeleteMediaPipelineKinesisVideoStreamPoolRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteMediaPipelineKinesisVideoStreamPoolRequest_Identifier}}
+var mGetMediaCapturePipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaCapturePipelineRequest_MediaPipelineId}}
+var mGetMediaCapturePipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaCapturePipelineResponse_MediaCapturePipeline}}
+var mGetMediaInsightsPipelineConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaInsightsPipelineConfigurationRequest_Identifier}}
+var mGetMediaInsightsPipelineConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration}}
+var mGetMediaPipelineRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaPipelineRequest_MediaPipelineId}}
+var mGetMediaPipelineKinesisVideoStreamPoolRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaPipelineKinesisVideoStreamPoolRequest_Identifier}}
+var mGetMediaPipelineKinesisVideoStreamPoolResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration}}
+var mGetMediaPipelineResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaPipelineResponse_MediaPipeline}}
+var mGetSpeakerSearchTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpeakerSearchTaskRequest_Identifier, &sGetSpeakerSearchTaskRequest_SpeakerSearchTaskId}}
+var mGetSpeakerSearchTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetSpeakerSearchTaskResponse_SpeakerSearchTask}}
+var mGetVoiceToneAnalysisTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVoiceToneAnalysisTaskRequest_Identifier, &sGetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId}}
+var mGetVoiceToneAnalysisTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask}}
+var mListMediaCapturePipelinesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaCapturePipelinesRequest_NextToken, &sListMediaCapturePipelinesRequest_MaxResults}}
+var mListMediaCapturePipelinesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaCapturePipelinesResponse_MediaCapturePipelines, &sListMediaCapturePipelinesResponse_NextToken}}
+var mListMediaInsightsPipelineConfigurationsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaInsightsPipelineConfigurationsRequest_NextToken, &sListMediaInsightsPipelineConfigurationsRequest_MaxResults}}
+var mListMediaInsightsPipelineConfigurationsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations, &sListMediaInsightsPipelineConfigurationsResponse_NextToken}}
+var mListMediaPipelineKinesisVideoStreamPoolsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaPipelineKinesisVideoStreamPoolsRequest_NextToken, &sListMediaPipelineKinesisVideoStreamPoolsRequest_MaxResults}}
+var mListMediaPipelineKinesisVideoStreamPoolsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools, &sListMediaPipelineKinesisVideoStreamPoolsResponse_NextToken}}
+var mListMediaPipelinesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaPipelinesRequest_NextToken, &sListMediaPipelinesRequest_MaxResults}}
+var mListMediaPipelinesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListMediaPipelinesResponse_MediaPipelines, &sListMediaPipelinesResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceARN}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mStartSpeakerSearchTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeakerSearchTaskRequest_Identifier, &sStartSpeakerSearchTaskRequest_VoiceProfileDomainArn, &sStartSpeakerSearchTaskRequest_KinesisVideoStreamSourceTaskConfiguration, &sStartSpeakerSearchTaskRequest_ClientRequestToken}}
+var mStartSpeakerSearchTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartSpeakerSearchTaskResponse_SpeakerSearchTask}}
+var mStartVoiceToneAnalysisTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStartVoiceToneAnalysisTaskRequest_Identifier, &sStartVoiceToneAnalysisTaskRequest_LanguageCode, &sStartVoiceToneAnalysisTaskRequest_KinesisVideoStreamSourceTaskConfiguration, &sStartVoiceToneAnalysisTaskRequest_ClientRequestToken}}
+var mStartVoiceToneAnalysisTaskResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sStartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask}}
+var mStopSpeakerSearchTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopSpeakerSearchTaskRequest_Identifier, &sStopSpeakerSearchTaskRequest_SpeakerSearchTaskId}}
+var mStopVoiceToneAnalysisTaskRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sStopVoiceToneAnalysisTaskRequest_Identifier, &sStopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceARN, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceARN, &sUntagResourceRequest_TagKeys}}
+var mUpdateMediaInsightsPipelineConfigurationRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMediaInsightsPipelineConfigurationRequest_Identifier, &sUpdateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn, &sUpdateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration, &sUpdateMediaInsightsPipelineConfigurationRequest_Elements}}
+var mUpdateMediaInsightsPipelineConfigurationResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration}}
+var mUpdateMediaInsightsPipelineStatusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMediaInsightsPipelineStatusRequest_Identifier, &sUpdateMediaInsightsPipelineStatusRequest_UpdateStatus}}
+var mUpdateMediaPipelineKinesisVideoStreamPoolRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMediaPipelineKinesisVideoStreamPoolRequest_Identifier, &sUpdateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration}}
+var mUpdateMediaPipelineKinesisVideoStreamPoolResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration}}
+
+var sCreateMediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaCapturePipeline, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateMediaConcatenationPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaConcatenationPipeline, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateMediaInsightsPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaInsightsPipeline, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateMediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaInsightsPipelineConfiguration, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateMediaLiveConnectorPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaLiveConnectorPipeline, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateMediaPipelineKinesisVideoStreamPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaPipelineKinesisVideoStreamPool, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sCreateMediaStreamPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaStreamPipeline, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteMediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaCapturePipeline, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteMediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaInsightsPipelineConfiguration, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteMediaPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaPipeline, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDeleteMediaPipelineKinesisVideoStreamPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaPipelineKinesisVideoStreamPool, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetMediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaCapturePipeline, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetMediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaInsightsPipelineConfiguration, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetMediaPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaPipeline, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetMediaPipelineKinesisVideoStreamPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaPipelineKinesisVideoStreamPool, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTask, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTask, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListMediaCapturePipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaCapturePipelines, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListMediaInsightsPipelineConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaInsightsPipelineConfigurations, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListMediaPipelineKinesisVideoStreamPools = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaPipelineKinesisVideoStreamPools, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListMediaPipelines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaPipelines, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sStartSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTask, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sStartVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTask, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sStopSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSpeakerSearchTask, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sStopVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVoiceToneAnalysisTask, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sUpdateMediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaInsightsPipelineConfiguration, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sUpdateMediaInsightsPipelineStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaInsightsPipelineStatus, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sUpdateMediaPipelineKinesisVideoStreamPool = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaPipelineKinesisVideoStreamPool, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var s_ChimeSDKMediaPipelinesService = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeSDKMediaPipelinesService, Type: smithy.ShapeTypeService})
+var sActiveSpeakerOnlyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveSpeakerOnlyConfiguration, Members: &mActiveSpeakerOnlyConfiguration, Type: smithy.ShapeTypeStructure})
+var sActiveSpeakerPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iActiveSpeakerPosition, Members: &mActiveSpeakerPosition, Type: smithy.ShapeTypeEnum})
+var s_AmazonResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonTranscribeCallAnalyticsProcessorConfiguration, Members: &mAmazonTranscribeCallAnalyticsProcessorConfiguration, Type: smithy.ShapeTypeStructure})
+var sAmazonTranscribeProcessorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAmazonTranscribeProcessorConfiguration, Members: &mAmazonTranscribeProcessorConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Traits: &t31, Type: smithy.ShapeTypeString})
+var sArtifactsConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactsConcatenationConfiguration, Members: &mArtifactsConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactsConcatenationState, Members: &mArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sArtifactsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactsConfiguration, Members: &mArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iArtifactsState, Members: &mArtifactsState, Type: smithy.ShapeTypeEnum})
+var s_AttendeeIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttendeeIdList, Members: &m_AttendeeIdList, Type: smithy.ShapeTypeList})
+var sAudioArtifactsConcatenationState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioArtifactsConcatenationState, Members: &mAudioArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sAudioArtifactsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioArtifactsConfiguration, Members: &mAudioArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sAudioChannelsOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioChannelsOption, Members: &mAudioChannelsOption, Type: smithy.ShapeTypeEnum})
+var sAudioConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioConcatenationConfiguration, Members: &mAudioConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sAudioMuxType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAudioMuxType, Members: &mAudioMuxType, Type: smithy.ShapeTypeEnum})
+var s_AudioSampleRateOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AudioSampleRateOption, Type: smithy.ShapeTypeString})
+var s_AwsRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsRegion, Type: smithy.ShapeTypeString})
+var sBadRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBadRequestException, Members: &mBadRequestException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var s_Boolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sBorderColor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBorderColor, Members: &mBorderColor, Type: smithy.ShapeTypeEnum})
+var s_BorderThickness = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BorderThickness, Type: smithy.ShapeTypeInteger})
+var sCallAnalyticsLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCallAnalyticsLanguageCode, Members: &mCallAnalyticsLanguageCode, Type: smithy.ShapeTypeEnum})
+var sCanvasOrientation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCanvasOrientation, Members: &mCanvasOrientation, Type: smithy.ShapeTypeEnum})
+var s_CategoryName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryName, Type: smithy.ShapeTypeString})
+var s_CategoryNameList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CategoryNameList, Members: &m_CategoryNameList, Type: smithy.ShapeTypeList})
+var sChannelDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelDefinition, Members: &mChannelDefinition, Type: smithy.ShapeTypeStructure})
+var s_ChannelDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelDefinitions, Members: &m_ChannelDefinitions, Type: smithy.ShapeTypeList})
+var s_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelId, Type: smithy.ShapeTypeInteger})
+var sChimeSdkMeetingConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChimeSdkMeetingConcatenationConfiguration, Members: &mChimeSdkMeetingConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sChimeSdkMeetingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChimeSdkMeetingConfiguration, Members: &mChimeSdkMeetingConfiguration, Type: smithy.ShapeTypeStructure})
+var sChimeSdkMeetingLiveConnectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChimeSdkMeetingLiveConnectorConfiguration, Members: &mChimeSdkMeetingLiveConnectorConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientRequestToken, Traits: &t31, Type: smithy.ShapeTypeString})
+var sCompositedVideoArtifactsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositedVideoArtifactsConfiguration, Members: &mCompositedVideoArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sCompositedVideoConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCompositedVideoConcatenationConfiguration, Members: &mCompositedVideoConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sConcatenationSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcatenationSink, Members: &mConcatenationSink, Type: smithy.ShapeTypeStructure})
+var s_ConcatenationSinkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConcatenationSinkList, Members: &m_ConcatenationSinkList, Type: smithy.ShapeTypeList})
+var sConcatenationSinkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcatenationSinkType, Members: &mConcatenationSinkType, Type: smithy.ShapeTypeEnum})
+var sConcatenationSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcatenationSource, Members: &mConcatenationSource, Type: smithy.ShapeTypeStructure})
+var s_ConcatenationSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConcatenationSourceList, Members: &m_ConcatenationSourceList, Type: smithy.ShapeTypeList})
+var sConcatenationSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcatenationSourceType, Members: &mConcatenationSourceType, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sContentArtifactsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentArtifactsConfiguration, Members: &mContentArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sContentConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentConcatenationConfiguration, Members: &mContentConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sContentMuxType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentMuxType, Members: &mContentMuxType, Type: smithy.ShapeTypeEnum})
+var sContentRedactionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentRedactionOutput, Members: &mContentRedactionOutput, Type: smithy.ShapeTypeEnum})
+var sContentShareLayoutOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentShareLayoutOption, Members: &mContentShareLayoutOption, Type: smithy.ShapeTypeEnum})
+var sContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum})
+var s_CornerRadius = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CornerRadius, Type: smithy.ShapeTypeInteger})
+var sDataChannelConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDataChannelConcatenationConfiguration, Members: &mDataChannelConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_DataRetentionChangeInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRetentionChangeInHours, Type: smithy.ShapeTypeInteger})
+var s_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger})
+var sErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var s_ExternalUserIdList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalUserIdList, Members: &m_ExternalUserIdList, Type: smithy.ShapeTypeList})
+var s_ExternalUserIdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ExternalUserIdType, Traits: &t31, Type: smithy.ShapeTypeString})
+var sForbiddenException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForbiddenException, Members: &mForbiddenException, Traits: &t35, Type: smithy.ShapeTypeStructure})
+var s_FragmentNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString})
+var sFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFragmentSelector, Members: &mFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sFragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFragmentSelectorType, Members: &mFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var sGridViewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGridViewConfiguration, Members: &mGridViewConfiguration, Type: smithy.ShapeTypeStructure})
+var s_GuidString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sHighlightColor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHighlightColor, Members: &mHighlightColor, Type: smithy.ShapeTypeEnum})
+var sHorizontalLayoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHorizontalLayoutConfiguration, Members: &mHorizontalLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sHorizontalTilePosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHorizontalTilePosition, Members: &mHorizontalTilePosition, Type: smithy.ShapeTypeEnum})
+var s_Iso8601Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Timestamp, Traits: &t36, Type: smithy.ShapeTypeTimestamp})
+var sIssueDetectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIssueDetectionConfiguration, Members: &mIssueDetectionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Keyword = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Keyword, Type: smithy.ShapeTypeString})
+var sKeywordMatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKeywordMatchConfiguration, Members: &mKeywordMatchConfiguration, Type: smithy.ShapeTypeStructure})
+var s_KeywordMatchWordList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KeywordMatchWordList, Members: &m_KeywordMatchWordList, Type: smithy.ShapeTypeList})
+var sKinesisDataStreamSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisDataStreamSinkConfiguration, Members: &mKinesisDataStreamSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_KinesisVideoStreamArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisVideoStreamArn, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamConfiguration, Members: &mKinesisVideoStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamConfigurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamConfigurationUpdate, Members: &mKinesisVideoStreamConfigurationUpdate, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamPoolConfiguration, Members: &mKinesisVideoStreamPoolConfiguration, Type: smithy.ShapeTypeStructure})
+var s_KinesisVideoStreamPoolId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisVideoStreamPoolId, Type: smithy.ShapeTypeString})
+var s_KinesisVideoStreamPoolName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisVideoStreamPoolName, Type: smithy.ShapeTypeString})
+var s_KinesisVideoStreamPoolSize = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisVideoStreamPoolSize, Type: smithy.ShapeTypeInteger})
+var sKinesisVideoStreamPoolStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamPoolStatus, Members: &mKinesisVideoStreamPoolStatus, Type: smithy.ShapeTypeEnum})
+var sKinesisVideoStreamPoolSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamPoolSummary, Members: &mKinesisVideoStreamPoolSummary, Type: smithy.ShapeTypeStructure})
+var s_KinesisVideoStreamPoolSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KinesisVideoStreamPoolSummaryList, Members: &m_KinesisVideoStreamPoolSummaryList, Type: smithy.ShapeTypeList})
+var sKinesisVideoStreamRecordingSourceRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamRecordingSourceRuntimeConfiguration, Members: &mKinesisVideoStreamRecordingSourceRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamSourceRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamSourceRuntimeConfiguration, Members: &mKinesisVideoStreamSourceRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamSourceTaskConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisVideoStreamSourceTaskConfiguration, Members: &mKinesisVideoStreamSourceTaskConfiguration, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionSinkConfiguration, Members: &mLambdaFunctionSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LanguageOptions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LanguageOptions, Type: smithy.ShapeTypeString})
+var sLayoutOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLayoutOption, Members: &mLayoutOption, Type: smithy.ShapeTypeEnum})
+var sLiveConnectorMuxType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiveConnectorMuxType, Members: &mLiveConnectorMuxType, Type: smithy.ShapeTypeEnum})
+var sLiveConnectorRTMPConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiveConnectorRTMPConfiguration, Members: &mLiveConnectorRTMPConfiguration, Type: smithy.ShapeTypeStructure})
+var sLiveConnectorSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiveConnectorSinkConfiguration, Members: &mLiveConnectorSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LiveConnectorSinkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LiveConnectorSinkList, Members: &m_LiveConnectorSinkList, Type: smithy.ShapeTypeList})
+var sLiveConnectorSinkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiveConnectorSinkType, Members: &mLiveConnectorSinkType, Type: smithy.ShapeTypeEnum})
+var sLiveConnectorSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiveConnectorSourceConfiguration, Members: &mLiveConnectorSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LiveConnectorSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LiveConnectorSourceList, Members: &m_LiveConnectorSourceList, Type: smithy.ShapeTypeList})
+var sLiveConnectorSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLiveConnectorSourceType, Members: &mLiveConnectorSourceType, Type: smithy.ShapeTypeEnum})
+var sMediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaCapturePipeline, Members: &mMediaCapturePipeline, Type: smithy.ShapeTypeStructure})
+var sMediaCapturePipelineSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaCapturePipelineSourceConfiguration, Members: &mMediaCapturePipelineSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaCapturePipelineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaCapturePipelineSummary, Members: &mMediaCapturePipelineSummary, Type: smithy.ShapeTypeStructure})
+var s_MediaCapturePipelineSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaCapturePipelineSummaryList, Members: &m_MediaCapturePipelineSummaryList, Type: smithy.ShapeTypeList})
+var sMediaConcatenationPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaConcatenationPipeline, Members: &mMediaConcatenationPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaEncoding = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaEncoding, Members: &mMediaEncoding, Type: smithy.ShapeTypeEnum})
+var sMediaInsightsPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsPipeline, Members: &mMediaInsightsPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsPipelineConfiguration, Members: &mMediaInsightsPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsPipelineConfigurationElement, Members: &mMediaInsightsPipelineConfigurationElement, Type: smithy.ShapeTypeStructure})
+var s_MediaInsightsPipelineConfigurationElements = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaInsightsPipelineConfigurationElements, Members: &m_MediaInsightsPipelineConfigurationElements, Type: smithy.ShapeTypeList})
+var sMediaInsightsPipelineConfigurationElementType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsPipelineConfigurationElementType, Members: &mMediaInsightsPipelineConfigurationElementType, Type: smithy.ShapeTypeEnum})
+var s_MediaInsightsPipelineConfigurationNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaInsightsPipelineConfigurationNameString, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipelineConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsPipelineConfigurationSummary, Members: &mMediaInsightsPipelineConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var s_MediaInsightsPipelineConfigurationSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaInsightsPipelineConfigurationSummaryList, Members: &m_MediaInsightsPipelineConfigurationSummaryList, Type: smithy.ShapeTypeList})
+var sMediaInsightsPipelineElementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaInsightsPipelineElementStatus, Members: &mMediaInsightsPipelineElementStatus, Type: smithy.ShapeTypeStructure})
+var s_MediaInsightsPipelineElementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaInsightsPipelineElementStatuses, Members: &m_MediaInsightsPipelineElementStatuses, Type: smithy.ShapeTypeList})
+var s_MediaInsightsRuntimeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaInsightsRuntimeMetadata, Members: &m_MediaInsightsRuntimeMetadata, Traits: &t31, Type: smithy.ShapeTypeMap})
+var sMediaLiveConnectorPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaLiveConnectorPipeline, Members: &mMediaLiveConnectorPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipeline, Members: &mMediaPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipelineElementStatus, Members: &mMediaPipelineElementStatus, Type: smithy.ShapeTypeEnum})
+var s_MediaPipelineList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaPipelineList, Members: &m_MediaPipelineList, Type: smithy.ShapeTypeList})
+var sMediaPipelineSinkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipelineSinkType, Members: &mMediaPipelineSinkType, Type: smithy.ShapeTypeEnum})
+var sMediaPipelineSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipelineSourceType, Members: &mMediaPipelineSourceType, Type: smithy.ShapeTypeEnum})
+var sMediaPipelineStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipelineStatus, Members: &mMediaPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sMediaPipelineStatusUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipelineStatusUpdate, Members: &mMediaPipelineStatusUpdate, Type: smithy.ShapeTypeEnum})
+var sMediaPipelineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipelineSummary, Members: &mMediaPipelineSummary, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaPipelineTaskStatus, Members: &mMediaPipelineTaskStatus, Type: smithy.ShapeTypeEnum})
+var s_MediaSampleRateHertz = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaSampleRateHertz, Type: smithy.ShapeTypeInteger})
+var sMediaStreamPipeline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaStreamPipeline, Members: &mMediaStreamPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaStreamPipelineSinkType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaStreamPipelineSinkType, Members: &mMediaStreamPipelineSinkType, Type: smithy.ShapeTypeEnum})
+var sMediaStreamSink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaStreamSink, Members: &mMediaStreamSink, Type: smithy.ShapeTypeStructure})
+var s_MediaStreamSinkList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaStreamSinkList, Members: &m_MediaStreamSinkList, Type: smithy.ShapeTypeList})
+var sMediaStreamSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaStreamSource, Members: &mMediaStreamSource, Type: smithy.ShapeTypeStructure})
+var s_MediaStreamSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MediaStreamSourceList, Members: &m_MediaStreamSourceList, Type: smithy.ShapeTypeList})
+var sMediaStreamType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMediaStreamType, Members: &mMediaStreamType, Type: smithy.ShapeTypeEnum})
+var sMeetingEventsConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMeetingEventsConcatenationConfiguration, Members: &mMeetingEventsConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ModelName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotFoundException, Members: &mNotFoundException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_NumberOfChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NumberOfChannels, Type: smithy.ShapeTypeInteger})
+var sPartialResultsStability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartialResultsStability, Members: &mPartialResultsStability, Type: smithy.ShapeTypeEnum})
+var sParticipantRole = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iParticipantRole, Members: &mParticipantRole, Type: smithy.ShapeTypeEnum})
+var s_PiiEntityTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PiiEntityTypes, Type: smithy.ShapeTypeString})
+var sPostCallAnalyticsSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostCallAnalyticsSettings, Members: &mPostCallAnalyticsSettings, Type: smithy.ShapeTypeStructure})
+var sPresenterOnlyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresenterOnlyConfiguration, Members: &mPresenterOnlyConfiguration, Type: smithy.ShapeTypeStructure})
+var sPresenterPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresenterPosition, Members: &mPresenterPosition, Type: smithy.ShapeTypeEnum})
+var sRealTimeAlertConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRealTimeAlertConfiguration, Members: &mRealTimeAlertConfiguration, Type: smithy.ShapeTypeStructure})
+var sRealTimeAlertRule = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRealTimeAlertRule, Members: &mRealTimeAlertRule, Type: smithy.ShapeTypeStructure})
+var s_RealTimeAlertRuleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RealTimeAlertRuleList, Members: &m_RealTimeAlertRuleList, Type: smithy.ShapeTypeList})
+var sRealTimeAlertRuleType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRealTimeAlertRuleType, Members: &mRealTimeAlertRuleType, Type: smithy.ShapeTypeEnum})
+var sRecordingFileFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordingFileFormat, Members: &mRecordingFileFormat, Type: smithy.ShapeTypeEnum})
+var sRecordingStreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecordingStreamConfiguration, Members: &mRecordingStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var s_RecordingStreamList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecordingStreamList, Members: &m_RecordingStreamList, Type: smithy.ShapeTypeList})
+var s_ReservedStreamCapacity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ReservedStreamCapacity, Type: smithy.ShapeTypeInteger})
+var sResolutionOption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolutionOption, Members: &mResolutionOption, Type: smithy.ShapeTypeEnum})
+var sResourceLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceLimitExceededException, Members: &mResourceLimitExceededException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var s_ResultMax = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResultMax, Type: smithy.ShapeTypeInteger})
+var s_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sS3BucketSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3BucketSinkConfiguration, Members: &mS3BucketSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3RecordingSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3RecordingSinkConfiguration, Members: &mS3RecordingSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sS3RecordingSinkRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3RecordingSinkRuntimeConfiguration, Members: &mS3RecordingSinkRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sSelectedVideoStreams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSelectedVideoStreams, Members: &mSelectedVideoStreams, Type: smithy.ShapeTypeStructure})
+var s_SensitiveString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SensitiveString, Traits: &t31, Type: smithy.ShapeTypeString})
+var sSentimentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentConfiguration, Members: &mSentimentConfiguration, Type: smithy.ShapeTypeStructure})
+var s_SentimentTimePeriodInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SentimentTimePeriodInSeconds, Type: smithy.ShapeTypeInteger})
+var sSentimentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSentimentType, Members: &mSentimentType, Type: smithy.ShapeTypeEnum})
+var sServiceFailureException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceFailureException, Members: &mServiceFailureException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sServiceUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceUnavailableException, Members: &mServiceUnavailableException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var sSnsTopicSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsTopicSinkConfiguration, Members: &mSnsTopicSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sSpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure})
+var sSqsQueueSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqsQueueSinkConfiguration, Members: &mSqsQueueSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sSseAwsKeyManagementParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSseAwsKeyManagementParams, Members: &mSseAwsKeyManagementParams, Type: smithy.ShapeTypeStructure})
+var sStreamChannelDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamChannelDefinition, Members: &mStreamChannelDefinition, Type: smithy.ShapeTypeStructure})
+var sStreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamConfiguration, Members: &mStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var s_Streams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Streams, Members: &m_Streams, Type: smithy.ShapeTypeList})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottledClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledClientException, Members: &mThrottledClientException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var s_TileAspectRatio = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TileAspectRatio, Type: smithy.ShapeTypeString})
+var s_TileCount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TileCount, Type: smithy.ShapeTypeInteger})
+var sTileOrder = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTileOrder, Members: &mTileOrder, Type: smithy.ShapeTypeEnum})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampRange, Members: &mTimestampRange, Type: smithy.ShapeTypeStructure})
+var sTranscriptionMessagesConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTranscriptionMessagesConcatenationConfiguration, Members: &mTranscriptionMessagesConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sUnauthorizedClientException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnauthorizedClientException, Members: &mUnauthorizedClientException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sVerticalLayoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerticalLayoutConfiguration, Members: &mVerticalLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sVerticalTilePosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVerticalTilePosition, Members: &mVerticalTilePosition, Type: smithy.ShapeTypeEnum})
+var sVideoArtifactsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoArtifactsConfiguration, Members: &mVideoArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sVideoAttribute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoAttribute, Members: &mVideoAttribute, Type: smithy.ShapeTypeStructure})
+var sVideoConcatenationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoConcatenationConfiguration, Members: &mVideoConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sVideoMuxType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVideoMuxType, Members: &mVideoMuxType, Type: smithy.ShapeTypeEnum})
+var sVocabularyFilterMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVocabularyFilterMethod, Members: &mVocabularyFilterMethod, Type: smithy.ShapeTypeEnum})
+var s_VocabularyFilterName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VocabularyFilterName, Type: smithy.ShapeTypeString})
+var s_VocabularyFilterNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VocabularyFilterNames, Type: smithy.ShapeTypeString})
+var s_VocabularyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VocabularyName, Type: smithy.ShapeTypeString})
+var s_VocabularyNames = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_VocabularyNames, Type: smithy.ShapeTypeString})
+var sVoiceAnalyticsConfigurationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceAnalyticsConfigurationStatus, Members: &mVoiceAnalyticsConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sVoiceAnalyticsLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceAnalyticsLanguageCode, Members: &mVoiceAnalyticsLanguageCode, Type: smithy.ShapeTypeEnum})
+var sVoiceAnalyticsProcessorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceAnalyticsProcessorConfiguration, Members: &mVoiceAnalyticsProcessorConfiguration, Type: smithy.ShapeTypeStructure})
+var sVoiceEnhancementSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceEnhancementSinkConfiguration, Members: &mVoiceEnhancementSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sVoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure})
+var sCreateMediaCapturePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaCapturePipelineRequest, Members: &mCreateMediaCapturePipelineRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMediaCapturePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaCapturePipelineResponse, Members: &mCreateMediaCapturePipelineResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMediaConcatenationPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaConcatenationPipelineRequest, Members: &mCreateMediaConcatenationPipelineRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMediaConcatenationPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaConcatenationPipelineResponse, Members: &mCreateMediaConcatenationPipelineResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaInsightsPipelineConfigurationRequest, Members: &mCreateMediaInsightsPipelineConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaInsightsPipelineConfigurationResponse, Members: &mCreateMediaInsightsPipelineConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaInsightsPipelineRequest, Members: &mCreateMediaInsightsPipelineRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaInsightsPipelineResponse, Members: &mCreateMediaInsightsPipelineResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMediaLiveConnectorPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaLiveConnectorPipelineRequest, Members: &mCreateMediaLiveConnectorPipelineRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMediaLiveConnectorPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaLiveConnectorPipelineResponse, Members: &mCreateMediaLiveConnectorPipelineResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaPipelineKinesisVideoStreamPoolRequest, Members: &mCreateMediaPipelineKinesisVideoStreamPoolRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMediaPipelineKinesisVideoStreamPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaPipelineKinesisVideoStreamPoolResponse, Members: &mCreateMediaPipelineKinesisVideoStreamPoolResponse, Type: smithy.ShapeTypeStructure})
+var sCreateMediaStreamPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaStreamPipelineRequest, Members: &mCreateMediaStreamPipelineRequest, Type: smithy.ShapeTypeStructure})
+var sCreateMediaStreamPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMediaStreamPipelineResponse, Members: &mCreateMediaStreamPipelineResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteMediaCapturePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaCapturePipelineRequest, Members: &mDeleteMediaCapturePipelineRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMediaInsightsPipelineConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaInsightsPipelineConfigurationRequest, Members: &mDeleteMediaInsightsPipelineConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMediaPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaPipelineRequest, Members: &mDeleteMediaPipelineRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteMediaPipelineKinesisVideoStreamPoolRequest, Members: &mDeleteMediaPipelineKinesisVideoStreamPoolRequest, Type: smithy.ShapeTypeStructure})
+var sGetMediaCapturePipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaCapturePipelineRequest, Members: &mGetMediaCapturePipelineRequest, Type: smithy.ShapeTypeStructure})
+var sGetMediaCapturePipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaCapturePipelineResponse, Members: &mGetMediaCapturePipelineResponse, Type: smithy.ShapeTypeStructure})
+var sGetMediaInsightsPipelineConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaInsightsPipelineConfigurationRequest, Members: &mGetMediaInsightsPipelineConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sGetMediaInsightsPipelineConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaInsightsPipelineConfigurationResponse, Members: &mGetMediaInsightsPipelineConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sGetMediaPipelineRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaPipelineRequest, Members: &mGetMediaPipelineRequest, Type: smithy.ShapeTypeStructure})
+var sGetMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaPipelineKinesisVideoStreamPoolRequest, Members: &mGetMediaPipelineKinesisVideoStreamPoolRequest, Type: smithy.ShapeTypeStructure})
+var sGetMediaPipelineKinesisVideoStreamPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaPipelineKinesisVideoStreamPoolResponse, Members: &mGetMediaPipelineKinesisVideoStreamPoolResponse, Type: smithy.ShapeTypeStructure})
+var sGetMediaPipelineResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaPipelineResponse, Members: &mGetMediaPipelineResponse, Type: smithy.ShapeTypeStructure})
+var sGetSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTaskRequest, Members: &mGetSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure})
+var sGetSpeakerSearchTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetSpeakerSearchTaskResponse, Members: &mGetSpeakerSearchTaskResponse, Type: smithy.ShapeTypeStructure})
+var sGetVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTaskRequest, Members: &mGetVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure})
+var sGetVoiceToneAnalysisTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetVoiceToneAnalysisTaskResponse, Members: &mGetVoiceToneAnalysisTaskResponse, Type: smithy.ShapeTypeStructure})
+var sListMediaCapturePipelinesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaCapturePipelinesRequest, Members: &mListMediaCapturePipelinesRequest, Type: smithy.ShapeTypeStructure})
+var sListMediaCapturePipelinesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaCapturePipelinesResponse, Members: &mListMediaCapturePipelinesResponse, Type: smithy.ShapeTypeStructure})
+var sListMediaInsightsPipelineConfigurationsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaInsightsPipelineConfigurationsRequest, Members: &mListMediaInsightsPipelineConfigurationsRequest, Type: smithy.ShapeTypeStructure})
+var sListMediaInsightsPipelineConfigurationsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaInsightsPipelineConfigurationsResponse, Members: &mListMediaInsightsPipelineConfigurationsResponse, Type: smithy.ShapeTypeStructure})
+var sListMediaPipelineKinesisVideoStreamPoolsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaPipelineKinesisVideoStreamPoolsRequest, Members: &mListMediaPipelineKinesisVideoStreamPoolsRequest, Type: smithy.ShapeTypeStructure})
+var sListMediaPipelineKinesisVideoStreamPoolsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaPipelineKinesisVideoStreamPoolsResponse, Members: &mListMediaPipelineKinesisVideoStreamPoolsResponse, Type: smithy.ShapeTypeStructure})
+var sListMediaPipelinesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaPipelinesRequest, Members: &mListMediaPipelinesRequest, Type: smithy.ShapeTypeStructure})
+var sListMediaPipelinesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMediaPipelinesResponse, Members: &mListMediaPipelinesResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sStartSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTaskRequest, Members: &mStartSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStartSpeakerSearchTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartSpeakerSearchTaskResponse, Members: &mStartSpeakerSearchTaskResponse, Type: smithy.ShapeTypeStructure})
+var sStartVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTaskRequest, Members: &mStartVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStartVoiceToneAnalysisTaskResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartVoiceToneAnalysisTaskResponse, Members: &mStartVoiceToneAnalysisTaskResponse, Type: smithy.ShapeTypeStructure})
+var sStopSpeakerSearchTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopSpeakerSearchTaskRequest, Members: &mStopSpeakerSearchTaskRequest, Type: smithy.ShapeTypeStructure})
+var sStopVoiceToneAnalysisTaskRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopVoiceToneAnalysisTaskRequest, Members: &mStopVoiceToneAnalysisTaskRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaInsightsPipelineConfigurationRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaInsightsPipelineConfigurationRequest, Members: &mUpdateMediaInsightsPipelineConfigurationRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaInsightsPipelineConfigurationResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaInsightsPipelineConfigurationResponse, Members: &mUpdateMediaInsightsPipelineConfigurationResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaInsightsPipelineStatusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaInsightsPipelineStatusRequest, Members: &mUpdateMediaInsightsPipelineStatusRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaPipelineKinesisVideoStreamPoolRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaPipelineKinesisVideoStreamPoolRequest, Members: &mUpdateMediaPipelineKinesisVideoStreamPoolRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaPipelineKinesisVideoStreamPoolResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateMediaPipelineKinesisVideoStreamPoolResponse, Members: &mUpdateMediaPipelineKinesisVideoStreamPoolResponse, Type: smithy.ShapeTypeStructure})
+
+var sActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveSpeakerPosition", ID: &iActiveSpeakerPosition, Members: &mActiveSpeakerPosition, Type: smithy.ShapeTypeEnum})
+var sActiveSpeakerPosition_TopLeft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopLeft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveSpeakerPosition_TopRight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopRight", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveSpeakerPosition_BottomLeft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BottomLeft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sActiveSpeakerPosition_BottomRight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BottomRight", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iCallAnalyticsLanguageCode, Members: &mCallAnalyticsLanguageCode, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyName", ID: &i_VocabularyName, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyFilterName", ID: &i_VocabularyFilterName, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyFilterMethod", ID: &iVocabularyFilterMethod, Members: &mVocabularyFilterMethod, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePartialResultsStabilization", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartialResultsStability", ID: &iPartialResultsStability, Members: &mPartialResultsStability, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentIdentificationType", ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRedactionType", ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PiiEntityTypes", ID: &i_PiiEntityTypes, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterPartialResults", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PostCallAnalyticsSettings", ID: &iPostCallAnalyticsSettings, Members: &mPostCallAnalyticsSettings, Type: smithy.ShapeTypeStructure})
+var sAmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CallAnalyticsStreamCategories", ID: &i_CategoryNameList, Members: &m_CategoryNameList, Type: smithy.ShapeTypeList})
+var sAmazonTranscribeProcessorConfiguration_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iCallAnalyticsLanguageCode, Members: &mCallAnalyticsLanguageCode, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeProcessorConfiguration_VocabularyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyName", ID: &i_VocabularyName, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeProcessorConfiguration_VocabularyFilterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyFilterName", ID: &i_VocabularyFilterName, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeProcessorConfiguration_VocabularyFilterMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyFilterMethod", ID: &iVocabularyFilterMethod, Members: &mVocabularyFilterMethod, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeProcessorConfiguration_ShowSpeakerLabel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ShowSpeakerLabel", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EnablePartialResultsStabilization", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAmazonTranscribeProcessorConfiguration_PartialResultsStability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartialResultsStability", ID: &iPartialResultsStability, Members: &mPartialResultsStability, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeProcessorConfiguration_ContentIdentificationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentIdentificationType", ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeProcessorConfiguration_ContentRedactionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRedactionType", ID: &iContentType, Members: &mContentType, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeProcessorConfiguration_PiiEntityTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PiiEntityTypes", ID: &i_PiiEntityTypes, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeProcessorConfiguration_LanguageModelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageModelName", ID: &i_ModelName, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeProcessorConfiguration_FilterPartialResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterPartialResults", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAmazonTranscribeProcessorConfiguration_IdentifyLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifyLanguage", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IdentifyMultipleLanguages", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sAmazonTranscribeProcessorConfiguration_LanguageOptions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageOptions", ID: &i_LanguageOptions, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeProcessorConfiguration_PreferredLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredLanguage", ID: &iCallAnalyticsLanguageCode, Members: &mCallAnalyticsLanguageCode, Type: smithy.ShapeTypeEnum})
+var sAmazonTranscribeProcessorConfiguration_VocabularyNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyNames", ID: &i_VocabularyNames, Type: smithy.ShapeTypeString})
+var sAmazonTranscribeProcessorConfiguration_VocabularyFilterNames = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VocabularyFilterNames", ID: &i_VocabularyFilterNames, Type: smithy.ShapeTypeString})
+var sArtifactsConcatenationConfiguration_Audio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audio", ID: &iAudioConcatenationConfiguration, Members: &mAudioConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationConfiguration_Video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Video", ID: &iVideoConcatenationConfiguration, Members: &mVideoConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationConfiguration_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iContentConcatenationConfiguration, Members: &mContentConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationConfiguration_DataChannel = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataChannel", ID: &iDataChannelConcatenationConfiguration, Members: &mDataChannelConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationConfiguration_TranscriptionMessages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TranscriptionMessages", ID: &iTranscriptionMessagesConcatenationConfiguration, Members: &mTranscriptionMessagesConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationConfiguration_MeetingEvents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MeetingEvents", ID: &iMeetingEventsConcatenationConfiguration, Members: &mMeetingEventsConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationConfiguration_CompositedVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositedVideo", ID: &iCompositedVideoConcatenationConfiguration, Members: &mCompositedVideoConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationState_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactsConcatenationState_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactsConfiguration_Audio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Audio", ID: &iAudioArtifactsConfiguration, Members: &mAudioArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConfiguration_Video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Video", ID: &iVideoArtifactsConfiguration, Members: &mVideoArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConfiguration_Content = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Content", ID: &iContentArtifactsConfiguration, Members: &mContentArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsConfiguration_CompositedVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositedVideo", ID: &iCompositedVideoArtifactsConfiguration, Members: &mCompositedVideoArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sArtifactsState_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sArtifactsState_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AttendeeIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sAudioArtifactsConcatenationState_Enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Enabled", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudioArtifactsConfiguration_MuxType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuxType", ID: &iAudioMuxType, Members: &mAudioMuxType, Type: smithy.ShapeTypeEnum})
+var sAudioChannelsOption_Stereo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stereo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudioChannelsOption_Mono = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Mono", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudioConcatenationConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iAudioArtifactsConcatenationState, Members: &mAudioArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sAudioMuxType_AudioOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudioMuxType_AudioWithActiveSpeakerVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioWithActiveSpeakerVideo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAudioMuxType_AudioWithCompositedVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioWithCompositedVideo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBadRequestException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sBadRequestException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBadRequestException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sBorderColor_Black = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Black", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBorderColor_Blue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blue", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBorderColor_Red = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Red", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBorderColor_Green = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Green", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBorderColor_White = smithy.NewStaticSchema(smithy.StaticSchema{Member: "White", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBorderColor_Yellow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Yellow", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_EN_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_US", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_EN_GB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_GB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_ES_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ES_US", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_FR_CA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR_CA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_FR_FR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FR_FR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_EN_AU = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_AU", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_IT_IT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IT_IT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_DE_DE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DE_DE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCallAnalyticsLanguageCode_PT_BR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PT_BR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCanvasOrientation_Landscape = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Landscape", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCanvasOrientation_Portrait = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Portrait", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CategoryNameList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CategoryName, Type: smithy.ShapeTypeString})
+var sChannelDefinition_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_ChannelId, Type: smithy.ShapeTypeInteger})
+var sChannelDefinition_ParticipantRole = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ParticipantRole", ID: &iParticipantRole, Members: &mParticipantRole, Type: smithy.ShapeTypeEnum})
+var s_ChannelDefinitions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelDefinition, Members: &mChannelDefinition, Type: smithy.ShapeTypeStructure})
+var sChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactsConfiguration", ID: &iArtifactsConcatenationConfiguration, Members: &mArtifactsConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sChimeSdkMeetingConfiguration_SourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceConfiguration", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sChimeSdkMeetingConfiguration_ArtifactsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ArtifactsConfiguration", ID: &iArtifactsConfiguration, Members: &mArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sChimeSdkMeetingLiveConnectorConfiguration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sChimeSdkMeetingLiveConnectorConfiguration_MuxType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuxType", ID: &iLiveConnectorMuxType, Members: &mLiveConnectorMuxType, Type: smithy.ShapeTypeEnum})
+var sChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CompositedVideo", ID: &iCompositedVideoArtifactsConfiguration, Members: &mCompositedVideoArtifactsConfiguration, Type: smithy.ShapeTypeStructure})
+var sChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceConfiguration", ID: &iSourceConfiguration, Members: &mSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sCompositedVideoArtifactsConfiguration_Layout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Layout", ID: &iLayoutOption, Members: &mLayoutOption, Type: smithy.ShapeTypeEnum})
+var sCompositedVideoArtifactsConfiguration_Resolution = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resolution", ID: &iResolutionOption, Members: &mResolutionOption, Type: smithy.ShapeTypeEnum})
+var sCompositedVideoArtifactsConfiguration_GridViewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GridViewConfiguration", ID: &iGridViewConfiguration, Members: &mGridViewConfiguration, Type: smithy.ShapeTypeStructure})
+var sCompositedVideoConcatenationConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsConcatenationState, Members: &mArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sConcatenationSink_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iConcatenationSinkType, Members: &mConcatenationSinkType, Type: smithy.ShapeTypeEnum})
+var sConcatenationSink_S3BucketSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3BucketSinkConfiguration", ID: &iS3BucketSinkConfiguration, Members: &mS3BucketSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ConcatenationSinkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConcatenationSink, Members: &mConcatenationSink, Type: smithy.ShapeTypeStructure})
+var sConcatenationSinkType_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConcatenationSource_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iConcatenationSourceType, Members: &mConcatenationSourceType, Type: smithy.ShapeTypeEnum})
+var sConcatenationSource_MediaCapturePipelineSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaCapturePipelineSourceConfiguration", ID: &iMediaCapturePipelineSourceConfiguration, Members: &mMediaCapturePipelineSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ConcatenationSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConcatenationSource, Members: &mConcatenationSource, Type: smithy.ShapeTypeStructure})
+var sConcatenationSourceType_MediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaCapturePipeline", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConflictException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sContentArtifactsConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsState, Members: &mArtifactsState, Type: smithy.ShapeTypeEnum})
+var sContentArtifactsConfiguration_MuxType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuxType", ID: &iContentMuxType, Members: &mContentMuxType, Type: smithy.ShapeTypeEnum})
+var sContentConcatenationConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsConcatenationState, Members: &mArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sContentMuxType_ContentOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentRedactionOutput_REDACTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDACTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentRedactionOutput_REDACTED_AND_UNREDACTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REDACTED_AND_UNREDACTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentShareLayoutOption_PresenterOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresenterOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentShareLayoutOption_Horizontal = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Horizontal", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentShareLayoutOption_Vertical = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Vertical", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentShareLayoutOption_ActiveSpeakerOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveSpeakerOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentType_PII = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PII", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDataChannelConcatenationConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsConcatenationState, Members: &mArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sErrorCode_BadRequest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BadRequest", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Forbidden = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Forbidden", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_NotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotFound", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ResourceLimitExceeded = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceLimitExceeded", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ServiceFailure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceFailure", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_ServiceUnavailable = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceUnavailable", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sErrorCode_Throttling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Throttling", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ExternalUserIdList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ExternalUserIdType, Traits: &t33, Type: smithy.ShapeTypeString})
+var sForbiddenException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sForbiddenException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sForbiddenException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sFragmentSelector_FragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSelectorType", ID: &iFragmentSelectorType, Members: &mFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var sFragmentSelector_TimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampRange", ID: &iTimestampRange, Members: &mTimestampRange, Type: smithy.ShapeTypeStructure})
+var sFragmentSelectorType_ProducerTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProducerTimestamp", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFragmentSelectorType_ServerTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerTimestamp", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sGridViewConfiguration_ContentShareLayout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentShareLayout", ID: &iContentShareLayoutOption, Members: &mContentShareLayoutOption, Type: smithy.ShapeTypeEnum})
+var sGridViewConfiguration_PresenterOnlyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresenterOnlyConfiguration", ID: &iPresenterOnlyConfiguration, Members: &mPresenterOnlyConfiguration, Type: smithy.ShapeTypeStructure})
+var sGridViewConfiguration_ActiveSpeakerOnlyConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ActiveSpeakerOnlyConfiguration", ID: &iActiveSpeakerOnlyConfiguration, Members: &mActiveSpeakerOnlyConfiguration, Type: smithy.ShapeTypeStructure})
+var sGridViewConfiguration_HorizontalLayoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HorizontalLayoutConfiguration", ID: &iHorizontalLayoutConfiguration, Members: &mHorizontalLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sGridViewConfiguration_VerticalLayoutConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VerticalLayoutConfiguration", ID: &iVerticalLayoutConfiguration, Members: &mVerticalLayoutConfiguration, Type: smithy.ShapeTypeStructure})
+var sGridViewConfiguration_VideoAttribute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VideoAttribute", ID: &iVideoAttribute, Members: &mVideoAttribute, Type: smithy.ShapeTypeStructure})
+var sGridViewConfiguration_CanvasOrientation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CanvasOrientation", ID: &iCanvasOrientation, Members: &mCanvasOrientation, Type: smithy.ShapeTypeEnum})
+var sHighlightColor_Black = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Black", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHighlightColor_Blue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Blue", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHighlightColor_Red = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Red", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHighlightColor_Green = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Green", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHighlightColor_White = smithy.NewStaticSchema(smithy.StaticSchema{Member: "White", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHighlightColor_Yellow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Yellow", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHorizontalLayoutConfiguration_TileOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TileOrder", ID: &iTileOrder, Members: &mTileOrder, Type: smithy.ShapeTypeEnum})
+var sHorizontalLayoutConfiguration_TilePosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TilePosition", ID: &iHorizontalTilePosition, Members: &mHorizontalTilePosition, Type: smithy.ShapeTypeEnum})
+var sHorizontalLayoutConfiguration_TileCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TileCount", ID: &i_TileCount, Type: smithy.ShapeTypeInteger})
+var sHorizontalLayoutConfiguration_TileAspectRatio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TileAspectRatio", ID: &i_TileAspectRatio, Type: smithy.ShapeTypeString})
+var sHorizontalTilePosition_Top = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Top", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHorizontalTilePosition_Bottom = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Bottom", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIssueDetectionConfiguration_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sKeywordMatchConfiguration_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sKeywordMatchConfiguration_Keywords = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Keywords", ID: &i_KeywordMatchWordList, Members: &m_KeywordMatchWordList, Type: smithy.ShapeTypeList})
+var sKeywordMatchConfiguration_Negate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Negate", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var s_KeywordMatchWordList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Keyword, Type: smithy.ShapeTypeString})
+var sKinesisDataStreamSinkConfiguration_InsightsTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightsTarget", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamConfiguration_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &i_AwsRegion, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamConfiguration_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRetentionInHours", ID: &i_DataRetentionInHours, Type: smithy.ShapeTypeInteger})
+var sKinesisVideoStreamConfigurationUpdate_DataRetentionInHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataRetentionInHours", ID: &i_DataRetentionChangeInHours, Type: smithy.ShapeTypeInteger})
+var sKinesisVideoStreamPoolConfiguration_PoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamPoolConfiguration_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_KinesisVideoStreamPoolName, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamPoolConfiguration_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_KinesisVideoStreamPoolId, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamPoolConfiguration_PoolStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolStatus", ID: &iKinesisVideoStreamPoolStatus, Members: &mKinesisVideoStreamPoolStatus, Type: smithy.ShapeTypeEnum})
+var sKinesisVideoStreamPoolConfiguration_PoolSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolSize", ID: &i_KinesisVideoStreamPoolSize, Type: smithy.ShapeTypeInteger})
+var sKinesisVideoStreamPoolConfiguration_StreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamConfiguration", ID: &iKinesisVideoStreamConfiguration, Members: &mKinesisVideoStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamPoolConfiguration_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sKinesisVideoStreamPoolConfiguration_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sKinesisVideoStreamPoolStatus_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamPoolStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamPoolStatus_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamPoolStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamPoolStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamPoolSummary_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_KinesisVideoStreamPoolName, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamPoolSummary_PoolId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolId", ID: &i_KinesisVideoStreamPoolId, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamPoolSummary_PoolArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var s_KinesisVideoStreamPoolSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iKinesisVideoStreamPoolSummary, Members: &mKinesisVideoStreamPoolSummary, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Streams", ID: &i_RecordingStreamList, Members: &m_RecordingStreamList, Type: smithy.ShapeTypeList})
+var sKinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSelector", ID: &iFragmentSelector, Members: &mFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sKinesisVideoStreamSourceRuntimeConfiguration_Streams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Streams", ID: &i_Streams, Members: &m_Streams, Type: smithy.ShapeTypeList})
+var sKinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaEncoding", ID: &iMediaEncoding, Members: &mMediaEncoding, Type: smithy.ShapeTypeEnum})
+var sKinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaSampleRate", ID: &i_MediaSampleRateHertz, Type: smithy.ShapeTypeInteger})
+var sKinesisVideoStreamSourceTaskConfiguration_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_KinesisVideoStreamArn, Type: smithy.ShapeTypeString})
+var sKinesisVideoStreamSourceTaskConfiguration_ChannelId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelId", ID: &i_ChannelId, Type: smithy.ShapeTypeInteger})
+var sKinesisVideoStreamSourceTaskConfiguration_FragmentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentNumber", ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString})
+var sLambdaFunctionSinkConfiguration_InsightsTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightsTarget", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sLayoutOption_GridView = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GridView", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLiveConnectorMuxType_AudioWithCompositedVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioWithCompositedVideo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLiveConnectorMuxType_AudioWithActiveSpeakerVideo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioWithActiveSpeakerVideo", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLiveConnectorRTMPConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &i_SensitiveString, Traits: &t33, Type: smithy.ShapeTypeString})
+var sLiveConnectorRTMPConfiguration_AudioChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioChannels", ID: &iAudioChannelsOption, Members: &mAudioChannelsOption, Type: smithy.ShapeTypeEnum})
+var sLiveConnectorRTMPConfiguration_AudioSampleRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioSampleRate", ID: &i_AudioSampleRateOption, Type: smithy.ShapeTypeString})
+var sLiveConnectorSinkConfiguration_SinkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkType", ID: &iLiveConnectorSinkType, Members: &mLiveConnectorSinkType, Type: smithy.ShapeTypeEnum})
+var sLiveConnectorSinkConfiguration_RTMPConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RTMPConfiguration", ID: &iLiveConnectorRTMPConfiguration, Members: &mLiveConnectorRTMPConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LiveConnectorSinkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLiveConnectorSinkConfiguration, Members: &mLiveConnectorSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sLiveConnectorSinkType_RTMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RTMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLiveConnectorSourceConfiguration_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iLiveConnectorSourceType, Members: &mLiveConnectorSourceType, Type: smithy.ShapeTypeEnum})
+var sLiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeSdkMeetingLiveConnectorConfiguration", ID: &iChimeSdkMeetingLiveConnectorConfiguration, Members: &mChimeSdkMeetingLiveConnectorConfiguration, Type: smithy.ShapeTypeStructure})
+var s_LiveConnectorSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLiveConnectorSourceConfiguration, Members: &mLiveConnectorSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sLiveConnectorSourceType_ChimeSdkMeeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeSdkMeeting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaCapturePipeline_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaCapturePipeline_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sMediaCapturePipeline_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iMediaPipelineSourceType, Members: &mMediaPipelineSourceType, Type: smithy.ShapeTypeEnum})
+var sMediaCapturePipeline_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaCapturePipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMediaPipelineStatus, Members: &mMediaPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sMediaCapturePipeline_SinkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkType", ID: &iMediaPipelineSinkType, Members: &mMediaPipelineSinkType, Type: smithy.ShapeTypeEnum})
+var sMediaCapturePipeline_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaCapturePipeline_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaCapturePipeline_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaCapturePipeline_ChimeSdkMeetingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeSdkMeetingConfiguration", ID: &iChimeSdkMeetingConfiguration, Members: &mChimeSdkMeetingConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaCapturePipeline_SseAwsKeyManagementParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SseAwsKeyManagementParams", ID: &iSseAwsKeyManagementParams, Members: &mSseAwsKeyManagementParams, Type: smithy.ShapeTypeStructure})
+var sMediaCapturePipeline_SinkIamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkIamRoleArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaCapturePipelineSourceConfiguration_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeSdkMeetingConfiguration", ID: &iChimeSdkMeetingConcatenationConfiguration, Members: &mChimeSdkMeetingConcatenationConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaCapturePipelineSummary_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaCapturePipelineSummary_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var s_MediaCapturePipelineSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaCapturePipelineSummary, Members: &mMediaCapturePipelineSummary, Type: smithy.ShapeTypeStructure})
+var sMediaConcatenationPipeline_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaConcatenationPipeline_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sMediaConcatenationPipeline_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_ConcatenationSourceList, Members: &m_ConcatenationSourceList, Type: smithy.ShapeTypeList})
+var sMediaConcatenationPipeline_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sinks", ID: &i_ConcatenationSinkList, Members: &m_ConcatenationSinkList, Type: smithy.ShapeTypeList})
+var sMediaConcatenationPipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMediaPipelineStatus, Members: &mMediaPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sMediaConcatenationPipeline_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaConcatenationPipeline_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaEncoding_PCM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PCM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipeline_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipeline_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipeline_MediaInsightsPipelineConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMediaPipelineStatus, Members: &mMediaPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sMediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamSourceRuntimeConfiguration", ID: &iKinesisVideoStreamSourceRuntimeConfiguration, Members: &mKinesisVideoStreamSourceRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipeline_MediaInsightsRuntimeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsRuntimeMetadata", ID: &i_MediaInsightsRuntimeMetadata, Members: &m_MediaInsightsRuntimeMetadata, Traits: &t33, Type: smithy.ShapeTypeMap})
+var sMediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamRecordingSourceRuntimeConfiguration", ID: &iKinesisVideoStreamRecordingSourceRuntimeConfiguration, Members: &mKinesisVideoStreamRecordingSourceRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3RecordingSinkRuntimeConfiguration", ID: &iS3RecordingSinkRuntimeConfiguration, Members: &mS3RecordingSinkRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipeline_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaInsightsPipeline_ElementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ElementStatuses", ID: &i_MediaInsightsPipelineElementStatuses, Members: &m_MediaInsightsPipelineElementStatuses, Type: smithy.ShapeTypeList})
+var sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationName", ID: &i_MediaInsightsPipelineConfigurationNameString, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipelineConfiguration_ResourceAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceAccessRoleArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipelineConfiguration_RealTimeAlertConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RealTimeAlertConfiguration", ID: &iRealTimeAlertConfiguration, Members: &mRealTimeAlertConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfiguration_Elements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Elements", ID: &i_MediaInsightsPipelineConfigurationElements, Members: &m_MediaInsightsPipelineConfigurationElements, Type: smithy.ShapeTypeList})
+var sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipelineConfiguration_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaInsightsPipelineConfiguration_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaInsightsPipelineConfigurationElement_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMediaInsightsPipelineConfigurationElementType, Members: &mMediaInsightsPipelineConfigurationElementType, Type: smithy.ShapeTypeEnum})
+var sMediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmazonTranscribeCallAnalyticsProcessorConfiguration", ID: &iAmazonTranscribeCallAnalyticsProcessorConfiguration, Members: &mAmazonTranscribeCallAnalyticsProcessorConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AmazonTranscribeProcessorConfiguration", ID: &iAmazonTranscribeProcessorConfiguration, Members: &mAmazonTranscribeProcessorConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisDataStreamSinkConfiguration", ID: &iKinesisDataStreamSinkConfiguration, Members: &mKinesisDataStreamSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3RecordingSinkConfiguration", ID: &iS3RecordingSinkConfiguration, Members: &mS3RecordingSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceAnalyticsProcessorConfiguration", ID: &iVoiceAnalyticsProcessorConfiguration, Members: &mVoiceAnalyticsProcessorConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaFunctionSinkConfiguration", ID: &iLambdaFunctionSinkConfiguration, Members: &mLambdaFunctionSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsQueueSinkConfiguration", ID: &iSqsQueueSinkConfiguration, Members: &mSqsQueueSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsTopicSinkConfiguration", ID: &iSnsTopicSinkConfiguration, Members: &mSnsTopicSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceEnhancementSinkConfiguration", ID: &iVoiceEnhancementSinkConfiguration, Members: &mVoiceEnhancementSinkConfiguration, Type: smithy.ShapeTypeStructure})
+var s_MediaInsightsPipelineConfigurationElements_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaInsightsPipelineConfigurationElement, Members: &mMediaInsightsPipelineConfigurationElement, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_VOICE_ANALYTICS_PROCESSOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOICE_ANALYTICS_PROCESSOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_PROCESSOR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AMAZON_TRANSCRIBE_PROCESSOR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_KINESIS_DATA_STREAM_SINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KINESIS_DATA_STREAM_SINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_LAMBDA_FUNCTION_SINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAMBDA_FUNCTION_SINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_SQS_QUEUE_SINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SQS_QUEUE_SINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_SNS_TOPIC_SINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SNS_TOPIC_SINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_S3_RECORDING_SINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3_RECORDING_SINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationElementType_VOICE_ENHANCEMENT_SINK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VOICE_ENHANCEMENT_SINK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationName", ID: &i_MediaInsightsPipelineConfigurationNameString, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var s_MediaInsightsPipelineConfigurationSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaInsightsPipelineConfigurationSummary, Members: &mMediaInsightsPipelineConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sMediaInsightsPipelineElementStatus_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iMediaInsightsPipelineConfigurationElementType, Members: &mMediaInsightsPipelineConfigurationElementType, Type: smithy.ShapeTypeEnum})
+var sMediaInsightsPipelineElementStatus_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMediaPipelineElementStatus, Members: &mMediaPipelineElementStatus, Type: smithy.ShapeTypeEnum})
+var s_MediaInsightsPipelineElementStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaInsightsPipelineElementStatus, Members: &mMediaInsightsPipelineElementStatus, Type: smithy.ShapeTypeStructure})
+var s_MediaInsightsRuntimeMetadata_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_MediaInsightsRuntimeMetadata_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sMediaLiveConnectorPipeline_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_LiveConnectorSourceList, Members: &m_LiveConnectorSourceList, Type: smithy.ShapeTypeList})
+var sMediaLiveConnectorPipeline_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sinks", ID: &i_LiveConnectorSinkList, Members: &m_LiveConnectorSinkList, Type: smithy.ShapeTypeList})
+var sMediaLiveConnectorPipeline_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaLiveConnectorPipeline_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sMediaLiveConnectorPipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMediaPipelineStatus, Members: &mMediaPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sMediaLiveConnectorPipeline_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaLiveConnectorPipeline_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaPipeline_MediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaCapturePipeline", ID: &iMediaCapturePipeline, Members: &mMediaCapturePipeline, Type: smithy.ShapeTypeStructure})
+var sMediaPipeline_MediaLiveConnectorPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaLiveConnectorPipeline", ID: &iMediaLiveConnectorPipeline, Members: &mMediaLiveConnectorPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaPipeline_MediaConcatenationPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaConcatenationPipeline", ID: &iMediaConcatenationPipeline, Members: &mMediaConcatenationPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaPipeline_MediaInsightsPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipeline", ID: &iMediaInsightsPipeline, Members: &mMediaInsightsPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaPipeline_MediaStreamPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaStreamPipeline", ID: &iMediaStreamPipeline, Members: &mMediaStreamPipeline, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_NotStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_NotSupported = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotSupported", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_Initializing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Initializing", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_Stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_Stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineElementStatus_Paused = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Paused", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MediaPipelineList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaPipelineSummary, Members: &mMediaPipelineSummary, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineSinkType_S3Bucket = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Bucket", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineSourceType_ChimeSdkMeeting = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeSdkMeeting", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatus_Initializing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Initializing", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatus_Stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatus_Stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatus_Paused = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Paused", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatus_NotStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatusUpdate_Pause = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pause", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineStatusUpdate_Resume = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resume", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineSummary_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaPipelineSummary_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sMediaPipelineTaskStatus_NotStarted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NotStarted", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineTaskStatus_Initializing = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Initializing", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineTaskStatus_InProgress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InProgress", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineTaskStatus_Failed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Failed", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineTaskStatus_Stopping = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopping", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaPipelineTaskStatus_Stopped = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Stopped", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaStreamPipeline_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sMediaStreamPipeline_MediaPipelineArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineArn", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sMediaStreamPipeline_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaStreamPipeline_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sMediaStreamPipeline_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iMediaPipelineStatus, Members: &mMediaPipelineStatus, Type: smithy.ShapeTypeEnum})
+var sMediaStreamPipeline_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_MediaStreamSourceList, Members: &m_MediaStreamSourceList, Type: smithy.ShapeTypeList})
+var sMediaStreamPipeline_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sinks", ID: &i_MediaStreamSinkList, Members: &m_MediaStreamSinkList, Type: smithy.ShapeTypeList})
+var sMediaStreamPipelineSinkType_KinesisVideoStreamPool = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamPool", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaStreamSink_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sMediaStreamSink_SinkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkType", ID: &iMediaStreamPipelineSinkType, Members: &mMediaStreamPipelineSinkType, Type: smithy.ShapeTypeEnum})
+var sMediaStreamSink_ReservedStreamCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReservedStreamCapacity", ID: &i_ReservedStreamCapacity, Type: smithy.ShapeTypeInteger})
+var sMediaStreamSink_MediaStreamType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaStreamType", ID: &iMediaStreamType, Members: &mMediaStreamType, Type: smithy.ShapeTypeEnum})
+var s_MediaStreamSinkList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaStreamSink, Members: &mMediaStreamSink, Type: smithy.ShapeTypeStructure})
+var sMediaStreamSource_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iMediaPipelineSourceType, Members: &mMediaPipelineSourceType, Type: smithy.ShapeTypeEnum})
+var sMediaStreamSource_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var s_MediaStreamSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMediaStreamSource, Members: &mMediaStreamSource, Type: smithy.ShapeTypeStructure})
+var sMediaStreamType_MixedAudio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MixedAudio", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMediaStreamType_IndividualAudio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IndividualAudio", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMeetingEventsConcatenationConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsConcatenationState, Members: &mArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sNotFoundException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sNotFoundException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPartialResultsStability_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPartialResultsStability_MEDIUM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIUM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPartialResultsStability_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sParticipantRole_AGENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AGENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sParticipantRole_CUSTOMER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPostCallAnalyticsSettings_OutputLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLocation", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPostCallAnalyticsSettings_DataAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataAccessRoleArn", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPostCallAnalyticsSettings_ContentRedactionOutput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentRedactionOutput", ID: &iContentRedactionOutput, Members: &mContentRedactionOutput, Type: smithy.ShapeTypeEnum})
+var sPostCallAnalyticsSettings_OutputEncryptionKMSKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputEncryptionKMSKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sPresenterOnlyConfiguration_PresenterPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresenterPosition", ID: &iPresenterPosition, Members: &mPresenterPosition, Type: smithy.ShapeTypeEnum})
+var sPresenterPosition_TopLeft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopLeft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresenterPosition_TopRight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TopRight", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresenterPosition_BottomLeft = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BottomLeft", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresenterPosition_BottomRight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BottomRight", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRealTimeAlertConfiguration_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sRealTimeAlertConfiguration_Rules = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Rules", ID: &i_RealTimeAlertRuleList, Members: &m_RealTimeAlertRuleList, Type: smithy.ShapeTypeList})
+var sRealTimeAlertRule_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iRealTimeAlertRuleType, Members: &mRealTimeAlertRuleType, Type: smithy.ShapeTypeEnum})
+var sRealTimeAlertRule_KeywordMatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeywordMatchConfiguration", ID: &iKeywordMatchConfiguration, Members: &mKeywordMatchConfiguration, Type: smithy.ShapeTypeStructure})
+var sRealTimeAlertRule_SentimentConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SentimentConfiguration", ID: &iSentimentConfiguration, Members: &mSentimentConfiguration, Type: smithy.ShapeTypeStructure})
+var sRealTimeAlertRule_IssueDetectionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssueDetectionConfiguration", ID: &iIssueDetectionConfiguration, Members: &mIssueDetectionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_RealTimeAlertRuleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRealTimeAlertRule, Members: &mRealTimeAlertRule, Type: smithy.ShapeTypeStructure})
+var sRealTimeAlertRuleType_KeywordMatch = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeywordMatch", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRealTimeAlertRuleType_Sentiment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sentiment", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRealTimeAlertRuleType_IssueDetection = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IssueDetection", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordingFileFormat_Wav = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Wav", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordingFileFormat_Opus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Opus", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecordingStreamConfiguration_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_KinesisVideoStreamArn, Type: smithy.ShapeTypeString})
+var s_RecordingStreamList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRecordingStreamConfiguration, Members: &mRecordingStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var sResolutionOption_HD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResolutionOption_FHD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FHD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceLimitExceededException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sResourceLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceLimitExceededException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3BucketSinkConfiguration_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sS3RecordingSinkConfiguration_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sS3RecordingSinkConfiguration_RecordingFileFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordingFileFormat", ID: &iRecordingFileFormat, Members: &mRecordingFileFormat, Type: smithy.ShapeTypeEnum})
+var sS3RecordingSinkRuntimeConfiguration_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sS3RecordingSinkRuntimeConfiguration_RecordingFileFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RecordingFileFormat", ID: &iRecordingFileFormat, Members: &mRecordingFileFormat, Type: smithy.ShapeTypeEnum})
+var sSelectedVideoStreams_AttendeeIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttendeeIds", ID: &i_AttendeeIdList, Members: &m_AttendeeIdList, Type: smithy.ShapeTypeList})
+var sSelectedVideoStreams_ExternalUserIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExternalUserIds", ID: &i_ExternalUserIdList, Members: &m_ExternalUserIdList, Type: smithy.ShapeTypeList})
+var sSentimentConfiguration_RuleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RuleName", ID: &i_RuleName, Type: smithy.ShapeTypeString})
+var sSentimentConfiguration_SentimentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SentimentType", ID: &iSentimentType, Members: &mSentimentType, Type: smithy.ShapeTypeEnum})
+var sSentimentConfiguration_TimePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimePeriod", ID: &i_SentimentTimePeriodInSeconds, Type: smithy.ShapeTypeInteger})
+var sSentimentType_NEGATIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEGATIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceFailureException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sServiceFailureException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceFailureException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sServiceUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceUnavailableException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsTopicSinkConfiguration_InsightsTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightsTarget", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sSourceConfiguration_SelectedVideoStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SelectedVideoStreams", ID: &iSelectedVideoStreams, Members: &mSelectedVideoStreams, Type: smithy.ShapeTypeStructure})
+var sSpeakerSearchTask_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sSpeakerSearchTask_SpeakerSearchTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskStatus", ID: &iMediaPipelineTaskStatus, Members: &mMediaPipelineTaskStatus, Type: smithy.ShapeTypeEnum})
+var sSpeakerSearchTask_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sSpeakerSearchTask_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sSqsQueueSinkConfiguration_InsightsTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InsightsTarget", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sSseAwsKeyManagementParams_AwsKmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsKmsKeyId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSseAwsKeyManagementParams_AwsKmsEncryptionContext = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsKmsEncryptionContext", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStreamChannelDefinition_NumberOfChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NumberOfChannels", ID: &i_NumberOfChannels, Type: smithy.ShapeTypeInteger})
+var sStreamChannelDefinition_ChannelDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelDefinitions", ID: &i_ChannelDefinitions, Members: &m_ChannelDefinitions, Type: smithy.ShapeTypeList})
+var sStreamConfiguration_StreamArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamArn", ID: &i_KinesisVideoStreamArn, Type: smithy.ShapeTypeString})
+var sStreamConfiguration_FragmentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentNumber", ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString})
+var sStreamConfiguration_StreamChannelDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamChannelDefinition", ID: &iStreamChannelDefinition, Members: &mStreamChannelDefinition, Type: smithy.ShapeTypeStructure})
+var s_Streams_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStreamConfiguration, Members: &mStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var sTag_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var sTag_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sThrottledClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sThrottledClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottledClientException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sTileOrder_JoinSequence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JoinSequence", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTileOrder_SpeakerSequence = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSequence", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTimestampRange_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTimestampRange_EndTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTranscriptionMessagesConcatenationConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsConcatenationState, Members: &mArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sUnauthorizedClientException_Code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Code", ID: &iErrorCode, Members: &mErrorCode, Type: smithy.ShapeTypeEnum})
+var sUnauthorizedClientException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUnauthorizedClientException_RequestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RequestId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sVerticalLayoutConfiguration_TileOrder = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TileOrder", ID: &iTileOrder, Members: &mTileOrder, Type: smithy.ShapeTypeEnum})
+var sVerticalLayoutConfiguration_TilePosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TilePosition", ID: &iVerticalTilePosition, Members: &mVerticalTilePosition, Type: smithy.ShapeTypeEnum})
+var sVerticalLayoutConfiguration_TileCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TileCount", ID: &i_TileCount, Type: smithy.ShapeTypeInteger})
+var sVerticalLayoutConfiguration_TileAspectRatio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TileAspectRatio", ID: &i_TileAspectRatio, Type: smithy.ShapeTypeString})
+var sVerticalTilePosition_Left = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Left", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVerticalTilePosition_Right = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Right", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVideoArtifactsConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsState, Members: &mArtifactsState, Type: smithy.ShapeTypeEnum})
+var sVideoArtifactsConfiguration_MuxType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MuxType", ID: &iVideoMuxType, Members: &mVideoMuxType, Type: smithy.ShapeTypeEnum})
+var sVideoAttribute_CornerRadius = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CornerRadius", ID: &i_CornerRadius, Type: smithy.ShapeTypeInteger})
+var sVideoAttribute_BorderColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BorderColor", ID: &iBorderColor, Members: &mBorderColor, Type: smithy.ShapeTypeEnum})
+var sVideoAttribute_HighlightColor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HighlightColor", ID: &iHighlightColor, Members: &mHighlightColor, Type: smithy.ShapeTypeEnum})
+var sVideoAttribute_BorderThickness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BorderThickness", ID: &i_BorderThickness, Type: smithy.ShapeTypeInteger})
+var sVideoConcatenationConfiguration_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iArtifactsConcatenationState, Members: &mArtifactsConcatenationState, Type: smithy.ShapeTypeEnum})
+var sVideoMuxType_VideoOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VideoOnly", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVocabularyFilterMethod_REMOVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REMOVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVocabularyFilterMethod_MASK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MASK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVocabularyFilterMethod_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVoiceAnalyticsConfigurationStatus_ENABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVoiceAnalyticsConfigurationStatus_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVoiceAnalyticsLanguageCode_EN_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EN_US", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchStatus", ID: &iVoiceAnalyticsConfigurationStatus, Members: &mVoiceAnalyticsConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sVoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisStatus", ID: &iVoiceAnalyticsConfigurationStatus, Members: &mVoiceAnalyticsConfigurationStatus, Type: smithy.ShapeTypeEnum})
+var sVoiceEnhancementSinkConfiguration_Disabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Disabled", ID: &i_Boolean, Type: smithy.ShapeTypeBoolean})
+var sVoiceToneAnalysisTask_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_GuidString, Type: smithy.ShapeTypeString})
+var sVoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskStatus", ID: &iMediaPipelineTaskStatus, Members: &mMediaPipelineTaskStatus, Type: smithy.ShapeTypeEnum})
+var sVoiceToneAnalysisTask_CreatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sVoiceToneAnalysisTask_UpdatedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdatedTimestamp", ID: &i_Iso8601Timestamp, Traits: &t37, Type: smithy.ShapeTypeTimestamp})
+var sCreateMediaCapturePipelineRequest_SourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceType", ID: &iMediaPipelineSourceType, Members: &mMediaPipelineSourceType, Type: smithy.ShapeTypeEnum})
+var sCreateMediaCapturePipelineRequest_SourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SourceArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaCapturePipelineRequest_SinkType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkType", ID: &iMediaPipelineSinkType, Members: &mMediaPipelineSinkType, Type: smithy.ShapeTypeEnum})
+var sCreateMediaCapturePipelineRequest_SinkArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaCapturePipelineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaCapturePipelineRequest_ChimeSdkMeetingConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChimeSdkMeetingConfiguration", ID: &iChimeSdkMeetingConfiguration, Members: &mChimeSdkMeetingConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaCapturePipelineRequest_SseAwsKeyManagementParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SseAwsKeyManagementParams", ID: &iSseAwsKeyManagementParams, Members: &mSseAwsKeyManagementParams, Type: smithy.ShapeTypeStructure})
+var sCreateMediaCapturePipelineRequest_SinkIamRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SinkIamRoleArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaCapturePipelineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateMediaCapturePipelineResponse_MediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaCapturePipeline", ID: &iMediaCapturePipeline, Members: &mMediaCapturePipeline, Type: smithy.ShapeTypeStructure})
+var sCreateMediaConcatenationPipelineRequest_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_ConcatenationSourceList, Members: &m_ConcatenationSourceList, Type: smithy.ShapeTypeList})
+var sCreateMediaConcatenationPipelineRequest_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sinks", ID: &i_ConcatenationSinkList, Members: &m_ConcatenationSinkList, Type: smithy.ShapeTypeList})
+var sCreateMediaConcatenationPipelineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaConcatenationPipelineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaConcatenationPipeline", ID: &iMediaConcatenationPipeline, Members: &mMediaConcatenationPipeline, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineConfigurationRequest_MediaInsightsPipelineConfigurationName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationName", ID: &i_MediaInsightsPipelineConfigurationNameString, Type: smithy.ShapeTypeString})
+var sCreateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceAccessRoleArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RealTimeAlertConfiguration", ID: &iRealTimeAlertConfiguration, Members: &mRealTimeAlertConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineConfigurationRequest_Elements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Elements", ID: &i_MediaInsightsPipelineConfigurationElements, Members: &m_MediaInsightsPipelineConfigurationElements, Type: smithy.ShapeTypeList})
+var sCreateMediaInsightsPipelineConfigurationRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateMediaInsightsPipelineConfigurationRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfiguration", ID: &iMediaInsightsPipelineConfiguration, Members: &mMediaInsightsPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurationArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaInsightsPipelineRequest_KinesisVideoStreamSourceRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamSourceRuntimeConfiguration", ID: &iKinesisVideoStreamSourceRuntimeConfiguration, Members: &mKinesisVideoStreamSourceRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsRuntimeMetadata", ID: &i_MediaInsightsRuntimeMetadata, Members: &m_MediaInsightsRuntimeMetadata, Traits: &t33, Type: smithy.ShapeTypeMap})
+var sCreateMediaInsightsPipelineRequest_KinesisVideoStreamRecordingSourceRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamRecordingSourceRuntimeConfiguration", ID: &iKinesisVideoStreamRecordingSourceRuntimeConfiguration, Members: &mKinesisVideoStreamRecordingSourceRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3RecordingSinkRuntimeConfiguration", ID: &iS3RecordingSinkRuntimeConfiguration, Members: &mS3RecordingSinkRuntimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaInsightsPipelineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateMediaInsightsPipelineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaInsightsPipelineResponse_MediaInsightsPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipeline", ID: &iMediaInsightsPipeline, Members: &mMediaInsightsPipeline, Type: smithy.ShapeTypeStructure})
+var sCreateMediaLiveConnectorPipelineRequest_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_LiveConnectorSourceList, Members: &m_LiveConnectorSourceList, Type: smithy.ShapeTypeList})
+var sCreateMediaLiveConnectorPipelineRequest_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sinks", ID: &i_LiveConnectorSinkList, Members: &m_LiveConnectorSinkList, Type: smithy.ShapeTypeList})
+var sCreateMediaLiveConnectorPipelineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaLiveConnectorPipelineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaLiveConnectorPipeline", ID: &iMediaLiveConnectorPipeline, Members: &mMediaLiveConnectorPipeline, Type: smithy.ShapeTypeStructure})
+var sCreateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamConfiguration", ID: &iKinesisVideoStreamConfiguration, Members: &mKinesisVideoStreamConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaPipelineKinesisVideoStreamPoolRequest_PoolName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PoolName", ID: &i_KinesisVideoStreamPoolName, Type: smithy.ShapeTypeString})
+var sCreateMediaPipelineKinesisVideoStreamPoolRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaPipelineKinesisVideoStreamPoolRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamPoolConfiguration", ID: &iKinesisVideoStreamPoolConfiguration, Members: &mKinesisVideoStreamPoolConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMediaStreamPipelineRequest_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_MediaStreamSourceList, Members: &m_MediaStreamSourceList, Type: smithy.ShapeTypeList})
+var sCreateMediaStreamPipelineRequest_Sinks = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sinks", ID: &i_MediaStreamSinkList, Members: &m_MediaStreamSinkList, Type: smithy.ShapeTypeList})
+var sCreateMediaStreamPipelineRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sCreateMediaStreamPipelineRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sCreateMediaStreamPipelineResponse_MediaStreamPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaStreamPipeline", ID: &iMediaStreamPipeline, Members: &mMediaStreamPipeline, Type: smithy.ShapeTypeStructure})
+var sDeleteMediaCapturePipelineRequest_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDeleteMediaInsightsPipelineConfigurationRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDeleteMediaPipelineRequest_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDeleteMediaPipelineKinesisVideoStreamPoolRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetMediaCapturePipelineRequest_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetMediaCapturePipelineResponse_MediaCapturePipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaCapturePipeline", ID: &iMediaCapturePipeline, Members: &mMediaCapturePipeline, Type: smithy.ShapeTypeStructure})
+var sGetMediaInsightsPipelineConfigurationRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfiguration", ID: &iMediaInsightsPipelineConfiguration, Members: &mMediaInsightsPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMediaPipelineRequest_MediaPipelineId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelineId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetMediaPipelineKinesisVideoStreamPoolRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamPoolConfiguration", ID: &iKinesisVideoStreamPoolConfiguration, Members: &mKinesisVideoStreamPoolConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMediaPipelineResponse_MediaPipeline = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipeline", ID: &iMediaPipeline, Members: &mMediaPipeline, Type: smithy.ShapeTypeStructure})
+var sGetSpeakerSearchTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetSpeakerSearchTaskRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetSpeakerSearchTaskResponse_SpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTask", ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure})
+var sGetVoiceToneAnalysisTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTask", ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure})
+var sListMediaCapturePipelinesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t44, Type: smithy.ShapeTypeString})
+var sListMediaCapturePipelinesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t45, Type: smithy.ShapeTypeInteger})
+var sListMediaCapturePipelinesResponse_MediaCapturePipelines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaCapturePipelines", ID: &i_MediaCapturePipelineSummaryList, Members: &m_MediaCapturePipelineSummaryList, Type: smithy.ShapeTypeList})
+var sListMediaCapturePipelinesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListMediaInsightsPipelineConfigurationsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t44, Type: smithy.ShapeTypeString})
+var sListMediaInsightsPipelineConfigurationsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t45, Type: smithy.ShapeTypeInteger})
+var sListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfigurations", ID: &i_MediaInsightsPipelineConfigurationSummaryList, Members: &m_MediaInsightsPipelineConfigurationSummaryList, Type: smithy.ShapeTypeList})
+var sListMediaInsightsPipelineConfigurationsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListMediaPipelineKinesisVideoStreamPoolsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t44, Type: smithy.ShapeTypeString})
+var sListMediaPipelineKinesisVideoStreamPoolsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t45, Type: smithy.ShapeTypeInteger})
+var sListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamPools", ID: &i_KinesisVideoStreamPoolSummaryList, Members: &m_KinesisVideoStreamPoolSummaryList, Type: smithy.ShapeTypeList})
+var sListMediaPipelineKinesisVideoStreamPoolsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListMediaPipelinesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Traits: &t44, Type: smithy.ShapeTypeString})
+var sListMediaPipelinesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ResultMax, Traits: &t45, Type: smithy.ShapeTypeInteger})
+var sListMediaPipelinesResponse_MediaPipelines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaPipelines", ID: &i_MediaPipelineList, Members: &m_MediaPipelineList, Type: smithy.ShapeTypeList})
+var sListMediaPipelinesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_String, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Traits: &t46, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sStartSpeakerSearchTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sStartSpeakerSearchTaskRequest_VoiceProfileDomainArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceProfileDomainArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sStartSpeakerSearchTaskRequest_KinesisVideoStreamSourceTaskConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamSourceTaskConfiguration", ID: &iKinesisVideoStreamSourceTaskConfiguration, Members: &mKinesisVideoStreamSourceTaskConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartSpeakerSearchTaskRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sStartSpeakerSearchTaskResponse_SpeakerSearchTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTask", ID: &iSpeakerSearchTask, Members: &mSpeakerSearchTask, Type: smithy.ShapeTypeStructure})
+var sStartVoiceToneAnalysisTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sStartVoiceToneAnalysisTaskRequest_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &iVoiceAnalyticsLanguageCode, Members: &mVoiceAnalyticsLanguageCode, Type: smithy.ShapeTypeEnum})
+var sStartVoiceToneAnalysisTaskRequest_KinesisVideoStreamSourceTaskConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamSourceTaskConfiguration", ID: &iKinesisVideoStreamSourceTaskConfiguration, Members: &mKinesisVideoStreamSourceTaskConfiguration, Type: smithy.ShapeTypeStructure})
+var sStartVoiceToneAnalysisTaskRequest_ClientRequestToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientRequestToken", ID: &i_ClientRequestToken, Traits: &t33, Type: smithy.ShapeTypeString})
+var sStartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTask", ID: &iVoiceToneAnalysisTask, Members: &mVoiceToneAnalysisTask, Type: smithy.ShapeTypeStructure})
+var sStopSpeakerSearchTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sStopSpeakerSearchTaskRequest_SpeakerSearchTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpeakerSearchTaskId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sStopVoiceToneAnalysisTaskRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sStopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "VoiceToneAnalysisTaskId", ID: &i_GuidString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sUntagResourceRequest_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceARN", ID: &i_AmazonResourceName, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateMediaInsightsPipelineConfigurationRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUpdateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceAccessRoleArn", ID: &i_Arn, Traits: &t33, Type: smithy.ShapeTypeString})
+var sUpdateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RealTimeAlertConfiguration", ID: &iRealTimeAlertConfiguration, Members: &mRealTimeAlertConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaInsightsPipelineConfigurationRequest_Elements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Elements", ID: &i_MediaInsightsPipelineConfigurationElements, Members: &m_MediaInsightsPipelineConfigurationElements, Type: smithy.ShapeTypeList})
+var sUpdateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MediaInsightsPipelineConfiguration", ID: &iMediaInsightsPipelineConfiguration, Members: &mMediaInsightsPipelineConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaInsightsPipelineStatusRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUpdateMediaInsightsPipelineStatusRequest_UpdateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UpdateStatus", ID: &iMediaPipelineStatusUpdate, Members: &mMediaPipelineStatusUpdate, Type: smithy.ShapeTypeEnum})
+var sUpdateMediaPipelineKinesisVideoStreamPoolRequest_Identifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Identifier", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUpdateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamConfiguration", ID: &iKinesisVideoStreamConfigurationUpdate, Members: &mKinesisVideoStreamConfigurationUpdate, Type: smithy.ShapeTypeStructure})
+var sUpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisVideoStreamPoolConfiguration", ID: &iKinesisVideoStreamPoolConfiguration, Members: &mKinesisVideoStreamPoolConfiguration, Type: smithy.ShapeTypeStructure})
+
+var CreateMediaCapturePipeline = &sCreateMediaCapturePipeline
+
+var CreateMediaConcatenationPipeline = &sCreateMediaConcatenationPipeline
+
+var CreateMediaInsightsPipeline = &sCreateMediaInsightsPipeline
+
+var CreateMediaInsightsPipelineConfiguration = &sCreateMediaInsightsPipelineConfiguration
+
+var CreateMediaLiveConnectorPipeline = &sCreateMediaLiveConnectorPipeline
+
+var CreateMediaPipelineKinesisVideoStreamPool = &sCreateMediaPipelineKinesisVideoStreamPool
+
+var CreateMediaStreamPipeline = &sCreateMediaStreamPipeline
+
+var DeleteMediaCapturePipeline = &sDeleteMediaCapturePipeline
+
+var DeleteMediaInsightsPipelineConfiguration = &sDeleteMediaInsightsPipelineConfiguration
+
+var DeleteMediaPipeline = &sDeleteMediaPipeline
+
+var DeleteMediaPipelineKinesisVideoStreamPool = &sDeleteMediaPipelineKinesisVideoStreamPool
+
+var GetMediaCapturePipeline = &sGetMediaCapturePipeline
+
+var GetMediaInsightsPipelineConfiguration = &sGetMediaInsightsPipelineConfiguration
+
+var GetMediaPipeline = &sGetMediaPipeline
+
+var GetMediaPipelineKinesisVideoStreamPool = &sGetMediaPipelineKinesisVideoStreamPool
+
+var GetSpeakerSearchTask = &sGetSpeakerSearchTask
+
+var GetVoiceToneAnalysisTask = &sGetVoiceToneAnalysisTask
+
+var ListMediaCapturePipelines = &sListMediaCapturePipelines
+
+var ListMediaInsightsPipelineConfigurations = &sListMediaInsightsPipelineConfigurations
+
+var ListMediaPipelineKinesisVideoStreamPools = &sListMediaPipelineKinesisVideoStreamPools
+
+var ListMediaPipelines = &sListMediaPipelines
+
+var ListTagsForResource = &sListTagsForResource
+
+var StartSpeakerSearchTask = &sStartSpeakerSearchTask
+
+var StartVoiceToneAnalysisTask = &sStartVoiceToneAnalysisTask
+
+var StopSpeakerSearchTask = &sStopSpeakerSearchTask
+
+var StopVoiceToneAnalysisTask = &sStopVoiceToneAnalysisTask
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateMediaInsightsPipelineConfiguration = &sUpdateMediaInsightsPipelineConfiguration
+
+var UpdateMediaInsightsPipelineStatus = &sUpdateMediaInsightsPipelineStatus
+
+var UpdateMediaPipelineKinesisVideoStreamPool = &sUpdateMediaPipelineKinesisVideoStreamPool
+
+var _ChimeSDKMediaPipelinesService = &s_ChimeSDKMediaPipelinesService
+
+var ActiveSpeakerOnlyConfiguration = &sActiveSpeakerOnlyConfiguration
+var ActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition = &sActiveSpeakerOnlyConfiguration_ActiveSpeakerPosition
+
+var ActiveSpeakerPosition = &sActiveSpeakerPosition
+var ActiveSpeakerPosition_TopLeft = &sActiveSpeakerPosition_TopLeft
+var ActiveSpeakerPosition_TopRight = &sActiveSpeakerPosition_TopRight
+var ActiveSpeakerPosition_BottomLeft = &sActiveSpeakerPosition_BottomLeft
+var ActiveSpeakerPosition_BottomRight = &sActiveSpeakerPosition_BottomRight
+
+var _AmazonResourceName = &s_AmazonResourceName
+
+var AmazonTranscribeCallAnalyticsProcessorConfiguration = &sAmazonTranscribeCallAnalyticsProcessorConfiguration
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageCode
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyName
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterName
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_VocabularyFilterMethod
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_LanguageModelName
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_EnablePartialResultsStabilization
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_PartialResultsStability
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_ContentIdentificationType
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_ContentRedactionType
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_PiiEntityTypes
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_FilterPartialResults
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_PostCallAnalyticsSettings
+var AmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories = &sAmazonTranscribeCallAnalyticsProcessorConfiguration_CallAnalyticsStreamCategories
+
+var AmazonTranscribeProcessorConfiguration = &sAmazonTranscribeProcessorConfiguration
+var AmazonTranscribeProcessorConfiguration_LanguageCode = &sAmazonTranscribeProcessorConfiguration_LanguageCode
+var AmazonTranscribeProcessorConfiguration_VocabularyName = &sAmazonTranscribeProcessorConfiguration_VocabularyName
+var AmazonTranscribeProcessorConfiguration_VocabularyFilterName = &sAmazonTranscribeProcessorConfiguration_VocabularyFilterName
+var AmazonTranscribeProcessorConfiguration_VocabularyFilterMethod = &sAmazonTranscribeProcessorConfiguration_VocabularyFilterMethod
+var AmazonTranscribeProcessorConfiguration_ShowSpeakerLabel = &sAmazonTranscribeProcessorConfiguration_ShowSpeakerLabel
+var AmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization = &sAmazonTranscribeProcessorConfiguration_EnablePartialResultsStabilization
+var AmazonTranscribeProcessorConfiguration_PartialResultsStability = &sAmazonTranscribeProcessorConfiguration_PartialResultsStability
+var AmazonTranscribeProcessorConfiguration_ContentIdentificationType = &sAmazonTranscribeProcessorConfiguration_ContentIdentificationType
+var AmazonTranscribeProcessorConfiguration_ContentRedactionType = &sAmazonTranscribeProcessorConfiguration_ContentRedactionType
+var AmazonTranscribeProcessorConfiguration_PiiEntityTypes = &sAmazonTranscribeProcessorConfiguration_PiiEntityTypes
+var AmazonTranscribeProcessorConfiguration_LanguageModelName = &sAmazonTranscribeProcessorConfiguration_LanguageModelName
+var AmazonTranscribeProcessorConfiguration_FilterPartialResults = &sAmazonTranscribeProcessorConfiguration_FilterPartialResults
+var AmazonTranscribeProcessorConfiguration_IdentifyLanguage = &sAmazonTranscribeProcessorConfiguration_IdentifyLanguage
+var AmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages = &sAmazonTranscribeProcessorConfiguration_IdentifyMultipleLanguages
+var AmazonTranscribeProcessorConfiguration_LanguageOptions = &sAmazonTranscribeProcessorConfiguration_LanguageOptions
+var AmazonTranscribeProcessorConfiguration_PreferredLanguage = &sAmazonTranscribeProcessorConfiguration_PreferredLanguage
+var AmazonTranscribeProcessorConfiguration_VocabularyNames = &sAmazonTranscribeProcessorConfiguration_VocabularyNames
+var AmazonTranscribeProcessorConfiguration_VocabularyFilterNames = &sAmazonTranscribeProcessorConfiguration_VocabularyFilterNames
+
+var _Arn = &s_Arn
+
+var ArtifactsConcatenationConfiguration = &sArtifactsConcatenationConfiguration
+var ArtifactsConcatenationConfiguration_Audio = &sArtifactsConcatenationConfiguration_Audio
+var ArtifactsConcatenationConfiguration_Video = &sArtifactsConcatenationConfiguration_Video
+var ArtifactsConcatenationConfiguration_Content = &sArtifactsConcatenationConfiguration_Content
+var ArtifactsConcatenationConfiguration_DataChannel = &sArtifactsConcatenationConfiguration_DataChannel
+var ArtifactsConcatenationConfiguration_TranscriptionMessages = &sArtifactsConcatenationConfiguration_TranscriptionMessages
+var ArtifactsConcatenationConfiguration_MeetingEvents = &sArtifactsConcatenationConfiguration_MeetingEvents
+var ArtifactsConcatenationConfiguration_CompositedVideo = &sArtifactsConcatenationConfiguration_CompositedVideo
+
+var ArtifactsConcatenationState = &sArtifactsConcatenationState
+var ArtifactsConcatenationState_Enabled = &sArtifactsConcatenationState_Enabled
+var ArtifactsConcatenationState_Disabled = &sArtifactsConcatenationState_Disabled
+
+var ArtifactsConfiguration = &sArtifactsConfiguration
+var ArtifactsConfiguration_Audio = &sArtifactsConfiguration_Audio
+var ArtifactsConfiguration_Video = &sArtifactsConfiguration_Video
+var ArtifactsConfiguration_Content = &sArtifactsConfiguration_Content
+var ArtifactsConfiguration_CompositedVideo = &sArtifactsConfiguration_CompositedVideo
+
+var ArtifactsState = &sArtifactsState
+var ArtifactsState_Enabled = &sArtifactsState_Enabled
+var ArtifactsState_Disabled = &sArtifactsState_Disabled
+
+var _AttendeeIdList = &s_AttendeeIdList
+var _AttendeeIdList_member = &s_AttendeeIdList_member
+
+var AudioArtifactsConcatenationState = &sAudioArtifactsConcatenationState
+var AudioArtifactsConcatenationState_Enabled = &sAudioArtifactsConcatenationState_Enabled
+
+var AudioArtifactsConfiguration = &sAudioArtifactsConfiguration
+var AudioArtifactsConfiguration_MuxType = &sAudioArtifactsConfiguration_MuxType
+
+var AudioChannelsOption = &sAudioChannelsOption
+var AudioChannelsOption_Stereo = &sAudioChannelsOption_Stereo
+var AudioChannelsOption_Mono = &sAudioChannelsOption_Mono
+
+var AudioConcatenationConfiguration = &sAudioConcatenationConfiguration
+var AudioConcatenationConfiguration_State = &sAudioConcatenationConfiguration_State
+
+var AudioMuxType = &sAudioMuxType
+var AudioMuxType_AudioOnly = &sAudioMuxType_AudioOnly
+var AudioMuxType_AudioWithActiveSpeakerVideo = &sAudioMuxType_AudioWithActiveSpeakerVideo
+var AudioMuxType_AudioWithCompositedVideo = &sAudioMuxType_AudioWithCompositedVideo
+
+var _AudioSampleRateOption = &s_AudioSampleRateOption
+
+var _AwsRegion = &s_AwsRegion
+
+var BadRequestException = &sBadRequestException
+var BadRequestException_Code = &sBadRequestException_Code
+var BadRequestException_Message = &sBadRequestException_Message
+var BadRequestException_RequestId = &sBadRequestException_RequestId
+
+var _Boolean = &s_Boolean
+
+var BorderColor = &sBorderColor
+var BorderColor_Black = &sBorderColor_Black
+var BorderColor_Blue = &sBorderColor_Blue
+var BorderColor_Red = &sBorderColor_Red
+var BorderColor_Green = &sBorderColor_Green
+var BorderColor_White = &sBorderColor_White
+var BorderColor_Yellow = &sBorderColor_Yellow
+
+var _BorderThickness = &s_BorderThickness
+
+var CallAnalyticsLanguageCode = &sCallAnalyticsLanguageCode
+var CallAnalyticsLanguageCode_EN_US = &sCallAnalyticsLanguageCode_EN_US
+var CallAnalyticsLanguageCode_EN_GB = &sCallAnalyticsLanguageCode_EN_GB
+var CallAnalyticsLanguageCode_ES_US = &sCallAnalyticsLanguageCode_ES_US
+var CallAnalyticsLanguageCode_FR_CA = &sCallAnalyticsLanguageCode_FR_CA
+var CallAnalyticsLanguageCode_FR_FR = &sCallAnalyticsLanguageCode_FR_FR
+var CallAnalyticsLanguageCode_EN_AU = &sCallAnalyticsLanguageCode_EN_AU
+var CallAnalyticsLanguageCode_IT_IT = &sCallAnalyticsLanguageCode_IT_IT
+var CallAnalyticsLanguageCode_DE_DE = &sCallAnalyticsLanguageCode_DE_DE
+var CallAnalyticsLanguageCode_PT_BR = &sCallAnalyticsLanguageCode_PT_BR
+
+var CanvasOrientation = &sCanvasOrientation
+var CanvasOrientation_Landscape = &sCanvasOrientation_Landscape
+var CanvasOrientation_Portrait = &sCanvasOrientation_Portrait
+
+var _CategoryName = &s_CategoryName
+
+var _CategoryNameList = &s_CategoryNameList
+var _CategoryNameList_member = &s_CategoryNameList_member
+
+var ChannelDefinition = &sChannelDefinition
+var ChannelDefinition_ChannelId = &sChannelDefinition_ChannelId
+var ChannelDefinition_ParticipantRole = &sChannelDefinition_ParticipantRole
+
+var _ChannelDefinitions = &s_ChannelDefinitions
+var _ChannelDefinitions_member = &s_ChannelDefinitions_member
+
+var _ChannelId = &s_ChannelId
+
+var ChimeSdkMeetingConcatenationConfiguration = &sChimeSdkMeetingConcatenationConfiguration
+var ChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration = &sChimeSdkMeetingConcatenationConfiguration_ArtifactsConfiguration
+
+var ChimeSdkMeetingConfiguration = &sChimeSdkMeetingConfiguration
+var ChimeSdkMeetingConfiguration_SourceConfiguration = &sChimeSdkMeetingConfiguration_SourceConfiguration
+var ChimeSdkMeetingConfiguration_ArtifactsConfiguration = &sChimeSdkMeetingConfiguration_ArtifactsConfiguration
+
+var ChimeSdkMeetingLiveConnectorConfiguration = &sChimeSdkMeetingLiveConnectorConfiguration
+var ChimeSdkMeetingLiveConnectorConfiguration_Arn = &sChimeSdkMeetingLiveConnectorConfiguration_Arn
+var ChimeSdkMeetingLiveConnectorConfiguration_MuxType = &sChimeSdkMeetingLiveConnectorConfiguration_MuxType
+var ChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo = &sChimeSdkMeetingLiveConnectorConfiguration_CompositedVideo
+var ChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration = &sChimeSdkMeetingLiveConnectorConfiguration_SourceConfiguration
+
+var _ClientRequestToken = &s_ClientRequestToken
+
+var CompositedVideoArtifactsConfiguration = &sCompositedVideoArtifactsConfiguration
+var CompositedVideoArtifactsConfiguration_Layout = &sCompositedVideoArtifactsConfiguration_Layout
+var CompositedVideoArtifactsConfiguration_Resolution = &sCompositedVideoArtifactsConfiguration_Resolution
+var CompositedVideoArtifactsConfiguration_GridViewConfiguration = &sCompositedVideoArtifactsConfiguration_GridViewConfiguration
+
+var CompositedVideoConcatenationConfiguration = &sCompositedVideoConcatenationConfiguration
+var CompositedVideoConcatenationConfiguration_State = &sCompositedVideoConcatenationConfiguration_State
+
+var ConcatenationSink = &sConcatenationSink
+var ConcatenationSink_Type = &sConcatenationSink_Type
+var ConcatenationSink_S3BucketSinkConfiguration = &sConcatenationSink_S3BucketSinkConfiguration
+
+var _ConcatenationSinkList = &s_ConcatenationSinkList
+var _ConcatenationSinkList_member = &s_ConcatenationSinkList_member
+
+var ConcatenationSinkType = &sConcatenationSinkType
+var ConcatenationSinkType_S3Bucket = &sConcatenationSinkType_S3Bucket
+
+var ConcatenationSource = &sConcatenationSource
+var ConcatenationSource_Type = &sConcatenationSource_Type
+var ConcatenationSource_MediaCapturePipelineSourceConfiguration = &sConcatenationSource_MediaCapturePipelineSourceConfiguration
+
+var _ConcatenationSourceList = &s_ConcatenationSourceList
+var _ConcatenationSourceList_member = &s_ConcatenationSourceList_member
+
+var ConcatenationSourceType = &sConcatenationSourceType
+var ConcatenationSourceType_MediaCapturePipeline = &sConcatenationSourceType_MediaCapturePipeline
+
+var ConflictException = &sConflictException
+var ConflictException_Code = &sConflictException_Code
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_RequestId = &sConflictException_RequestId
+
+var ContentArtifactsConfiguration = &sContentArtifactsConfiguration
+var ContentArtifactsConfiguration_State = &sContentArtifactsConfiguration_State
+var ContentArtifactsConfiguration_MuxType = &sContentArtifactsConfiguration_MuxType
+
+var ContentConcatenationConfiguration = &sContentConcatenationConfiguration
+var ContentConcatenationConfiguration_State = &sContentConcatenationConfiguration_State
+
+var ContentMuxType = &sContentMuxType
+var ContentMuxType_ContentOnly = &sContentMuxType_ContentOnly
+
+var ContentRedactionOutput = &sContentRedactionOutput
+var ContentRedactionOutput_REDACTED = &sContentRedactionOutput_REDACTED
+var ContentRedactionOutput_REDACTED_AND_UNREDACTED = &sContentRedactionOutput_REDACTED_AND_UNREDACTED
+
+var ContentShareLayoutOption = &sContentShareLayoutOption
+var ContentShareLayoutOption_PresenterOnly = &sContentShareLayoutOption_PresenterOnly
+var ContentShareLayoutOption_Horizontal = &sContentShareLayoutOption_Horizontal
+var ContentShareLayoutOption_Vertical = &sContentShareLayoutOption_Vertical
+var ContentShareLayoutOption_ActiveSpeakerOnly = &sContentShareLayoutOption_ActiveSpeakerOnly
+
+var ContentType = &sContentType
+var ContentType_PII = &sContentType_PII
+
+var _CornerRadius = &s_CornerRadius
+
+var DataChannelConcatenationConfiguration = &sDataChannelConcatenationConfiguration
+var DataChannelConcatenationConfiguration_State = &sDataChannelConcatenationConfiguration_State
+
+var _DataRetentionChangeInHours = &s_DataRetentionChangeInHours
+
+var _DataRetentionInHours = &s_DataRetentionInHours
+
+var ErrorCode = &sErrorCode
+var ErrorCode_BadRequest = &sErrorCode_BadRequest
+var ErrorCode_Forbidden = &sErrorCode_Forbidden
+var ErrorCode_NotFound = &sErrorCode_NotFound
+var ErrorCode_ResourceLimitExceeded = &sErrorCode_ResourceLimitExceeded
+var ErrorCode_ServiceFailure = &sErrorCode_ServiceFailure
+var ErrorCode_ServiceUnavailable = &sErrorCode_ServiceUnavailable
+var ErrorCode_Throttling = &sErrorCode_Throttling
+
+var _ExternalUserIdList = &s_ExternalUserIdList
+var _ExternalUserIdList_member = &s_ExternalUserIdList_member
+
+var _ExternalUserIdType = &s_ExternalUserIdType
+
+var ForbiddenException = &sForbiddenException
+var ForbiddenException_Code = &sForbiddenException_Code
+var ForbiddenException_Message = &sForbiddenException_Message
+var ForbiddenException_RequestId = &sForbiddenException_RequestId
+
+var _FragmentNumberString = &s_FragmentNumberString
+
+var FragmentSelector = &sFragmentSelector
+var FragmentSelector_FragmentSelectorType = &sFragmentSelector_FragmentSelectorType
+var FragmentSelector_TimestampRange = &sFragmentSelector_TimestampRange
+
+var FragmentSelectorType = &sFragmentSelectorType
+var FragmentSelectorType_ProducerTimestamp = &sFragmentSelectorType_ProducerTimestamp
+var FragmentSelectorType_ServerTimestamp = &sFragmentSelectorType_ServerTimestamp
+
+var GridViewConfiguration = &sGridViewConfiguration
+var GridViewConfiguration_ContentShareLayout = &sGridViewConfiguration_ContentShareLayout
+var GridViewConfiguration_PresenterOnlyConfiguration = &sGridViewConfiguration_PresenterOnlyConfiguration
+var GridViewConfiguration_ActiveSpeakerOnlyConfiguration = &sGridViewConfiguration_ActiveSpeakerOnlyConfiguration
+var GridViewConfiguration_HorizontalLayoutConfiguration = &sGridViewConfiguration_HorizontalLayoutConfiguration
+var GridViewConfiguration_VerticalLayoutConfiguration = &sGridViewConfiguration_VerticalLayoutConfiguration
+var GridViewConfiguration_VideoAttribute = &sGridViewConfiguration_VideoAttribute
+var GridViewConfiguration_CanvasOrientation = &sGridViewConfiguration_CanvasOrientation
+
+var _GuidString = &s_GuidString
+
+var HighlightColor = &sHighlightColor
+var HighlightColor_Black = &sHighlightColor_Black
+var HighlightColor_Blue = &sHighlightColor_Blue
+var HighlightColor_Red = &sHighlightColor_Red
+var HighlightColor_Green = &sHighlightColor_Green
+var HighlightColor_White = &sHighlightColor_White
+var HighlightColor_Yellow = &sHighlightColor_Yellow
+
+var HorizontalLayoutConfiguration = &sHorizontalLayoutConfiguration
+var HorizontalLayoutConfiguration_TileOrder = &sHorizontalLayoutConfiguration_TileOrder
+var HorizontalLayoutConfiguration_TilePosition = &sHorizontalLayoutConfiguration_TilePosition
+var HorizontalLayoutConfiguration_TileCount = &sHorizontalLayoutConfiguration_TileCount
+var HorizontalLayoutConfiguration_TileAspectRatio = &sHorizontalLayoutConfiguration_TileAspectRatio
+
+var HorizontalTilePosition = &sHorizontalTilePosition
+var HorizontalTilePosition_Top = &sHorizontalTilePosition_Top
+var HorizontalTilePosition_Bottom = &sHorizontalTilePosition_Bottom
+
+var _Iso8601Timestamp = &s_Iso8601Timestamp
+
+var IssueDetectionConfiguration = &sIssueDetectionConfiguration
+var IssueDetectionConfiguration_RuleName = &sIssueDetectionConfiguration_RuleName
+
+var _Keyword = &s_Keyword
+
+var KeywordMatchConfiguration = &sKeywordMatchConfiguration
+var KeywordMatchConfiguration_RuleName = &sKeywordMatchConfiguration_RuleName
+var KeywordMatchConfiguration_Keywords = &sKeywordMatchConfiguration_Keywords
+var KeywordMatchConfiguration_Negate = &sKeywordMatchConfiguration_Negate
+
+var _KeywordMatchWordList = &s_KeywordMatchWordList
+var _KeywordMatchWordList_member = &s_KeywordMatchWordList_member
+
+var KinesisDataStreamSinkConfiguration = &sKinesisDataStreamSinkConfiguration
+var KinesisDataStreamSinkConfiguration_InsightsTarget = &sKinesisDataStreamSinkConfiguration_InsightsTarget
+
+var _KinesisVideoStreamArn = &s_KinesisVideoStreamArn
+
+var KinesisVideoStreamConfiguration = &sKinesisVideoStreamConfiguration
+var KinesisVideoStreamConfiguration_Region = &sKinesisVideoStreamConfiguration_Region
+var KinesisVideoStreamConfiguration_DataRetentionInHours = &sKinesisVideoStreamConfiguration_DataRetentionInHours
+
+var KinesisVideoStreamConfigurationUpdate = &sKinesisVideoStreamConfigurationUpdate
+var KinesisVideoStreamConfigurationUpdate_DataRetentionInHours = &sKinesisVideoStreamConfigurationUpdate_DataRetentionInHours
+
+var KinesisVideoStreamPoolConfiguration = &sKinesisVideoStreamPoolConfiguration
+var KinesisVideoStreamPoolConfiguration_PoolArn = &sKinesisVideoStreamPoolConfiguration_PoolArn
+var KinesisVideoStreamPoolConfiguration_PoolName = &sKinesisVideoStreamPoolConfiguration_PoolName
+var KinesisVideoStreamPoolConfiguration_PoolId = &sKinesisVideoStreamPoolConfiguration_PoolId
+var KinesisVideoStreamPoolConfiguration_PoolStatus = &sKinesisVideoStreamPoolConfiguration_PoolStatus
+var KinesisVideoStreamPoolConfiguration_PoolSize = &sKinesisVideoStreamPoolConfiguration_PoolSize
+var KinesisVideoStreamPoolConfiguration_StreamConfiguration = &sKinesisVideoStreamPoolConfiguration_StreamConfiguration
+var KinesisVideoStreamPoolConfiguration_CreatedTimestamp = &sKinesisVideoStreamPoolConfiguration_CreatedTimestamp
+var KinesisVideoStreamPoolConfiguration_UpdatedTimestamp = &sKinesisVideoStreamPoolConfiguration_UpdatedTimestamp
+
+var _KinesisVideoStreamPoolId = &s_KinesisVideoStreamPoolId
+
+var _KinesisVideoStreamPoolName = &s_KinesisVideoStreamPoolName
+
+var _KinesisVideoStreamPoolSize = &s_KinesisVideoStreamPoolSize
+
+var KinesisVideoStreamPoolStatus = &sKinesisVideoStreamPoolStatus
+var KinesisVideoStreamPoolStatus_CREATING = &sKinesisVideoStreamPoolStatus_CREATING
+var KinesisVideoStreamPoolStatus_ACTIVE = &sKinesisVideoStreamPoolStatus_ACTIVE
+var KinesisVideoStreamPoolStatus_UPDATING = &sKinesisVideoStreamPoolStatus_UPDATING
+var KinesisVideoStreamPoolStatus_DELETING = &sKinesisVideoStreamPoolStatus_DELETING
+var KinesisVideoStreamPoolStatus_FAILED = &sKinesisVideoStreamPoolStatus_FAILED
+
+var KinesisVideoStreamPoolSummary = &sKinesisVideoStreamPoolSummary
+var KinesisVideoStreamPoolSummary_PoolName = &sKinesisVideoStreamPoolSummary_PoolName
+var KinesisVideoStreamPoolSummary_PoolId = &sKinesisVideoStreamPoolSummary_PoolId
+var KinesisVideoStreamPoolSummary_PoolArn = &sKinesisVideoStreamPoolSummary_PoolArn
+
+var _KinesisVideoStreamPoolSummaryList = &s_KinesisVideoStreamPoolSummaryList
+var _KinesisVideoStreamPoolSummaryList_member = &s_KinesisVideoStreamPoolSummaryList_member
+
+var KinesisVideoStreamRecordingSourceRuntimeConfiguration = &sKinesisVideoStreamRecordingSourceRuntimeConfiguration
+var KinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams = &sKinesisVideoStreamRecordingSourceRuntimeConfiguration_Streams
+var KinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector = &sKinesisVideoStreamRecordingSourceRuntimeConfiguration_FragmentSelector
+
+var KinesisVideoStreamSourceRuntimeConfiguration = &sKinesisVideoStreamSourceRuntimeConfiguration
+var KinesisVideoStreamSourceRuntimeConfiguration_Streams = &sKinesisVideoStreamSourceRuntimeConfiguration_Streams
+var KinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding = &sKinesisVideoStreamSourceRuntimeConfiguration_MediaEncoding
+var KinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate = &sKinesisVideoStreamSourceRuntimeConfiguration_MediaSampleRate
+
+var KinesisVideoStreamSourceTaskConfiguration = &sKinesisVideoStreamSourceTaskConfiguration
+var KinesisVideoStreamSourceTaskConfiguration_StreamArn = &sKinesisVideoStreamSourceTaskConfiguration_StreamArn
+var KinesisVideoStreamSourceTaskConfiguration_ChannelId = &sKinesisVideoStreamSourceTaskConfiguration_ChannelId
+var KinesisVideoStreamSourceTaskConfiguration_FragmentNumber = &sKinesisVideoStreamSourceTaskConfiguration_FragmentNumber
+
+var LambdaFunctionSinkConfiguration = &sLambdaFunctionSinkConfiguration
+var LambdaFunctionSinkConfiguration_InsightsTarget = &sLambdaFunctionSinkConfiguration_InsightsTarget
+
+var _LanguageOptions = &s_LanguageOptions
+
+var LayoutOption = &sLayoutOption
+var LayoutOption_GridView = &sLayoutOption_GridView
+
+var LiveConnectorMuxType = &sLiveConnectorMuxType
+var LiveConnectorMuxType_AudioWithCompositedVideo = &sLiveConnectorMuxType_AudioWithCompositedVideo
+var LiveConnectorMuxType_AudioWithActiveSpeakerVideo = &sLiveConnectorMuxType_AudioWithActiveSpeakerVideo
+
+var LiveConnectorRTMPConfiguration = &sLiveConnectorRTMPConfiguration
+var LiveConnectorRTMPConfiguration_Url = &sLiveConnectorRTMPConfiguration_Url
+var LiveConnectorRTMPConfiguration_AudioChannels = &sLiveConnectorRTMPConfiguration_AudioChannels
+var LiveConnectorRTMPConfiguration_AudioSampleRate = &sLiveConnectorRTMPConfiguration_AudioSampleRate
+
+var LiveConnectorSinkConfiguration = &sLiveConnectorSinkConfiguration
+var LiveConnectorSinkConfiguration_SinkType = &sLiveConnectorSinkConfiguration_SinkType
+var LiveConnectorSinkConfiguration_RTMPConfiguration = &sLiveConnectorSinkConfiguration_RTMPConfiguration
+
+var _LiveConnectorSinkList = &s_LiveConnectorSinkList
+var _LiveConnectorSinkList_member = &s_LiveConnectorSinkList_member
+
+var LiveConnectorSinkType = &sLiveConnectorSinkType
+var LiveConnectorSinkType_RTMP = &sLiveConnectorSinkType_RTMP
+
+var LiveConnectorSourceConfiguration = &sLiveConnectorSourceConfiguration
+var LiveConnectorSourceConfiguration_SourceType = &sLiveConnectorSourceConfiguration_SourceType
+var LiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration = &sLiveConnectorSourceConfiguration_ChimeSdkMeetingLiveConnectorConfiguration
+
+var _LiveConnectorSourceList = &s_LiveConnectorSourceList
+var _LiveConnectorSourceList_member = &s_LiveConnectorSourceList_member
+
+var LiveConnectorSourceType = &sLiveConnectorSourceType
+var LiveConnectorSourceType_ChimeSdkMeeting = &sLiveConnectorSourceType_ChimeSdkMeeting
+
+var MediaCapturePipeline = &sMediaCapturePipeline
+var MediaCapturePipeline_MediaPipelineId = &sMediaCapturePipeline_MediaPipelineId
+var MediaCapturePipeline_MediaPipelineArn = &sMediaCapturePipeline_MediaPipelineArn
+var MediaCapturePipeline_SourceType = &sMediaCapturePipeline_SourceType
+var MediaCapturePipeline_SourceArn = &sMediaCapturePipeline_SourceArn
+var MediaCapturePipeline_Status = &sMediaCapturePipeline_Status
+var MediaCapturePipeline_SinkType = &sMediaCapturePipeline_SinkType
+var MediaCapturePipeline_SinkArn = &sMediaCapturePipeline_SinkArn
+var MediaCapturePipeline_CreatedTimestamp = &sMediaCapturePipeline_CreatedTimestamp
+var MediaCapturePipeline_UpdatedTimestamp = &sMediaCapturePipeline_UpdatedTimestamp
+var MediaCapturePipeline_ChimeSdkMeetingConfiguration = &sMediaCapturePipeline_ChimeSdkMeetingConfiguration
+var MediaCapturePipeline_SseAwsKeyManagementParams = &sMediaCapturePipeline_SseAwsKeyManagementParams
+var MediaCapturePipeline_SinkIamRoleArn = &sMediaCapturePipeline_SinkIamRoleArn
+
+var MediaCapturePipelineSourceConfiguration = &sMediaCapturePipelineSourceConfiguration
+var MediaCapturePipelineSourceConfiguration_MediaPipelineArn = &sMediaCapturePipelineSourceConfiguration_MediaPipelineArn
+var MediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration = &sMediaCapturePipelineSourceConfiguration_ChimeSdkMeetingConfiguration
+
+var MediaCapturePipelineSummary = &sMediaCapturePipelineSummary
+var MediaCapturePipelineSummary_MediaPipelineId = &sMediaCapturePipelineSummary_MediaPipelineId
+var MediaCapturePipelineSummary_MediaPipelineArn = &sMediaCapturePipelineSummary_MediaPipelineArn
+
+var _MediaCapturePipelineSummaryList = &s_MediaCapturePipelineSummaryList
+var _MediaCapturePipelineSummaryList_member = &s_MediaCapturePipelineSummaryList_member
+
+var MediaConcatenationPipeline = &sMediaConcatenationPipeline
+var MediaConcatenationPipeline_MediaPipelineId = &sMediaConcatenationPipeline_MediaPipelineId
+var MediaConcatenationPipeline_MediaPipelineArn = &sMediaConcatenationPipeline_MediaPipelineArn
+var MediaConcatenationPipeline_Sources = &sMediaConcatenationPipeline_Sources
+var MediaConcatenationPipeline_Sinks = &sMediaConcatenationPipeline_Sinks
+var MediaConcatenationPipeline_Status = &sMediaConcatenationPipeline_Status
+var MediaConcatenationPipeline_CreatedTimestamp = &sMediaConcatenationPipeline_CreatedTimestamp
+var MediaConcatenationPipeline_UpdatedTimestamp = &sMediaConcatenationPipeline_UpdatedTimestamp
+
+var MediaEncoding = &sMediaEncoding
+var MediaEncoding_PCM = &sMediaEncoding_PCM
+
+var MediaInsightsPipeline = &sMediaInsightsPipeline
+var MediaInsightsPipeline_MediaPipelineId = &sMediaInsightsPipeline_MediaPipelineId
+var MediaInsightsPipeline_MediaPipelineArn = &sMediaInsightsPipeline_MediaPipelineArn
+var MediaInsightsPipeline_MediaInsightsPipelineConfigurationArn = &sMediaInsightsPipeline_MediaInsightsPipelineConfigurationArn
+var MediaInsightsPipeline_Status = &sMediaInsightsPipeline_Status
+var MediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration = &sMediaInsightsPipeline_KinesisVideoStreamSourceRuntimeConfiguration
+var MediaInsightsPipeline_MediaInsightsRuntimeMetadata = &sMediaInsightsPipeline_MediaInsightsRuntimeMetadata
+var MediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration = &sMediaInsightsPipeline_KinesisVideoStreamRecordingSourceRuntimeConfiguration
+var MediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration = &sMediaInsightsPipeline_S3RecordingSinkRuntimeConfiguration
+var MediaInsightsPipeline_CreatedTimestamp = &sMediaInsightsPipeline_CreatedTimestamp
+var MediaInsightsPipeline_ElementStatuses = &sMediaInsightsPipeline_ElementStatuses
+
+var MediaInsightsPipelineConfiguration = &sMediaInsightsPipelineConfiguration
+var MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName = &sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationName
+var MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn = &sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationArn
+var MediaInsightsPipelineConfiguration_ResourceAccessRoleArn = &sMediaInsightsPipelineConfiguration_ResourceAccessRoleArn
+var MediaInsightsPipelineConfiguration_RealTimeAlertConfiguration = &sMediaInsightsPipelineConfiguration_RealTimeAlertConfiguration
+var MediaInsightsPipelineConfiguration_Elements = &sMediaInsightsPipelineConfiguration_Elements
+var MediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId = &sMediaInsightsPipelineConfiguration_MediaInsightsPipelineConfigurationId
+var MediaInsightsPipelineConfiguration_CreatedTimestamp = &sMediaInsightsPipelineConfiguration_CreatedTimestamp
+var MediaInsightsPipelineConfiguration_UpdatedTimestamp = &sMediaInsightsPipelineConfiguration_UpdatedTimestamp
+
+var MediaInsightsPipelineConfigurationElement = &sMediaInsightsPipelineConfigurationElement
+var MediaInsightsPipelineConfigurationElement_Type = &sMediaInsightsPipelineConfigurationElement_Type
+var MediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration = &sMediaInsightsPipelineConfigurationElement_AmazonTranscribeCallAnalyticsProcessorConfiguration
+var MediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration = &sMediaInsightsPipelineConfigurationElement_AmazonTranscribeProcessorConfiguration
+var MediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration = &sMediaInsightsPipelineConfigurationElement_KinesisDataStreamSinkConfiguration
+var MediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration = &sMediaInsightsPipelineConfigurationElement_S3RecordingSinkConfiguration
+var MediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration = &sMediaInsightsPipelineConfigurationElement_VoiceAnalyticsProcessorConfiguration
+var MediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration = &sMediaInsightsPipelineConfigurationElement_LambdaFunctionSinkConfiguration
+var MediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration = &sMediaInsightsPipelineConfigurationElement_SqsQueueSinkConfiguration
+var MediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration = &sMediaInsightsPipelineConfigurationElement_SnsTopicSinkConfiguration
+var MediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration = &sMediaInsightsPipelineConfigurationElement_VoiceEnhancementSinkConfiguration
+
+var _MediaInsightsPipelineConfigurationElements = &s_MediaInsightsPipelineConfigurationElements
+var _MediaInsightsPipelineConfigurationElements_member = &s_MediaInsightsPipelineConfigurationElements_member
+
+var MediaInsightsPipelineConfigurationElementType = &sMediaInsightsPipelineConfigurationElementType
+var MediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR = &sMediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_CALL_ANALYTICS_PROCESSOR
+var MediaInsightsPipelineConfigurationElementType_VOICE_ANALYTICS_PROCESSOR = &sMediaInsightsPipelineConfigurationElementType_VOICE_ANALYTICS_PROCESSOR
+var MediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_PROCESSOR = &sMediaInsightsPipelineConfigurationElementType_AMAZON_TRANSCRIBE_PROCESSOR
+var MediaInsightsPipelineConfigurationElementType_KINESIS_DATA_STREAM_SINK = &sMediaInsightsPipelineConfigurationElementType_KINESIS_DATA_STREAM_SINK
+var MediaInsightsPipelineConfigurationElementType_LAMBDA_FUNCTION_SINK = &sMediaInsightsPipelineConfigurationElementType_LAMBDA_FUNCTION_SINK
+var MediaInsightsPipelineConfigurationElementType_SQS_QUEUE_SINK = &sMediaInsightsPipelineConfigurationElementType_SQS_QUEUE_SINK
+var MediaInsightsPipelineConfigurationElementType_SNS_TOPIC_SINK = &sMediaInsightsPipelineConfigurationElementType_SNS_TOPIC_SINK
+var MediaInsightsPipelineConfigurationElementType_S3_RECORDING_SINK = &sMediaInsightsPipelineConfigurationElementType_S3_RECORDING_SINK
+var MediaInsightsPipelineConfigurationElementType_VOICE_ENHANCEMENT_SINK = &sMediaInsightsPipelineConfigurationElementType_VOICE_ENHANCEMENT_SINK
+
+var _MediaInsightsPipelineConfigurationNameString = &s_MediaInsightsPipelineConfigurationNameString
+
+var MediaInsightsPipelineConfigurationSummary = &sMediaInsightsPipelineConfigurationSummary
+var MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName = &sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationName
+var MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId = &sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationId
+var MediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn = &sMediaInsightsPipelineConfigurationSummary_MediaInsightsPipelineConfigurationArn
+
+var _MediaInsightsPipelineConfigurationSummaryList = &s_MediaInsightsPipelineConfigurationSummaryList
+var _MediaInsightsPipelineConfigurationSummaryList_member = &s_MediaInsightsPipelineConfigurationSummaryList_member
+
+var MediaInsightsPipelineElementStatus = &sMediaInsightsPipelineElementStatus
+var MediaInsightsPipelineElementStatus_Type = &sMediaInsightsPipelineElementStatus_Type
+var MediaInsightsPipelineElementStatus_Status = &sMediaInsightsPipelineElementStatus_Status
+
+var _MediaInsightsPipelineElementStatuses = &s_MediaInsightsPipelineElementStatuses
+var _MediaInsightsPipelineElementStatuses_member = &s_MediaInsightsPipelineElementStatuses_member
+
+var _MediaInsightsRuntimeMetadata = &s_MediaInsightsRuntimeMetadata
+var _MediaInsightsRuntimeMetadata_key = &s_MediaInsightsRuntimeMetadata_key
+var _MediaInsightsRuntimeMetadata_value = &s_MediaInsightsRuntimeMetadata_value
+
+var MediaLiveConnectorPipeline = &sMediaLiveConnectorPipeline
+var MediaLiveConnectorPipeline_Sources = &sMediaLiveConnectorPipeline_Sources
+var MediaLiveConnectorPipeline_Sinks = &sMediaLiveConnectorPipeline_Sinks
+var MediaLiveConnectorPipeline_MediaPipelineId = &sMediaLiveConnectorPipeline_MediaPipelineId
+var MediaLiveConnectorPipeline_MediaPipelineArn = &sMediaLiveConnectorPipeline_MediaPipelineArn
+var MediaLiveConnectorPipeline_Status = &sMediaLiveConnectorPipeline_Status
+var MediaLiveConnectorPipeline_CreatedTimestamp = &sMediaLiveConnectorPipeline_CreatedTimestamp
+var MediaLiveConnectorPipeline_UpdatedTimestamp = &sMediaLiveConnectorPipeline_UpdatedTimestamp
+
+var MediaPipeline = &sMediaPipeline
+var MediaPipeline_MediaCapturePipeline = &sMediaPipeline_MediaCapturePipeline
+var MediaPipeline_MediaLiveConnectorPipeline = &sMediaPipeline_MediaLiveConnectorPipeline
+var MediaPipeline_MediaConcatenationPipeline = &sMediaPipeline_MediaConcatenationPipeline
+var MediaPipeline_MediaInsightsPipeline = &sMediaPipeline_MediaInsightsPipeline
+var MediaPipeline_MediaStreamPipeline = &sMediaPipeline_MediaStreamPipeline
+
+var MediaPipelineElementStatus = &sMediaPipelineElementStatus
+var MediaPipelineElementStatus_NotStarted = &sMediaPipelineElementStatus_NotStarted
+var MediaPipelineElementStatus_NotSupported = &sMediaPipelineElementStatus_NotSupported
+var MediaPipelineElementStatus_Initializing = &sMediaPipelineElementStatus_Initializing
+var MediaPipelineElementStatus_InProgress = &sMediaPipelineElementStatus_InProgress
+var MediaPipelineElementStatus_Failed = &sMediaPipelineElementStatus_Failed
+var MediaPipelineElementStatus_Stopping = &sMediaPipelineElementStatus_Stopping
+var MediaPipelineElementStatus_Stopped = &sMediaPipelineElementStatus_Stopped
+var MediaPipelineElementStatus_Paused = &sMediaPipelineElementStatus_Paused
+
+var _MediaPipelineList = &s_MediaPipelineList
+var _MediaPipelineList_member = &s_MediaPipelineList_member
+
+var MediaPipelineSinkType = &sMediaPipelineSinkType
+var MediaPipelineSinkType_S3Bucket = &sMediaPipelineSinkType_S3Bucket
+
+var MediaPipelineSourceType = &sMediaPipelineSourceType
+var MediaPipelineSourceType_ChimeSdkMeeting = &sMediaPipelineSourceType_ChimeSdkMeeting
+
+var MediaPipelineStatus = &sMediaPipelineStatus
+var MediaPipelineStatus_Initializing = &sMediaPipelineStatus_Initializing
+var MediaPipelineStatus_InProgress = &sMediaPipelineStatus_InProgress
+var MediaPipelineStatus_Failed = &sMediaPipelineStatus_Failed
+var MediaPipelineStatus_Stopping = &sMediaPipelineStatus_Stopping
+var MediaPipelineStatus_Stopped = &sMediaPipelineStatus_Stopped
+var MediaPipelineStatus_Paused = &sMediaPipelineStatus_Paused
+var MediaPipelineStatus_NotStarted = &sMediaPipelineStatus_NotStarted
+
+var MediaPipelineStatusUpdate = &sMediaPipelineStatusUpdate
+var MediaPipelineStatusUpdate_Pause = &sMediaPipelineStatusUpdate_Pause
+var MediaPipelineStatusUpdate_Resume = &sMediaPipelineStatusUpdate_Resume
+
+var MediaPipelineSummary = &sMediaPipelineSummary
+var MediaPipelineSummary_MediaPipelineId = &sMediaPipelineSummary_MediaPipelineId
+var MediaPipelineSummary_MediaPipelineArn = &sMediaPipelineSummary_MediaPipelineArn
+
+var MediaPipelineTaskStatus = &sMediaPipelineTaskStatus
+var MediaPipelineTaskStatus_NotStarted = &sMediaPipelineTaskStatus_NotStarted
+var MediaPipelineTaskStatus_Initializing = &sMediaPipelineTaskStatus_Initializing
+var MediaPipelineTaskStatus_InProgress = &sMediaPipelineTaskStatus_InProgress
+var MediaPipelineTaskStatus_Failed = &sMediaPipelineTaskStatus_Failed
+var MediaPipelineTaskStatus_Stopping = &sMediaPipelineTaskStatus_Stopping
+var MediaPipelineTaskStatus_Stopped = &sMediaPipelineTaskStatus_Stopped
+
+var _MediaSampleRateHertz = &s_MediaSampleRateHertz
+
+var MediaStreamPipeline = &sMediaStreamPipeline
+var MediaStreamPipeline_MediaPipelineId = &sMediaStreamPipeline_MediaPipelineId
+var MediaStreamPipeline_MediaPipelineArn = &sMediaStreamPipeline_MediaPipelineArn
+var MediaStreamPipeline_CreatedTimestamp = &sMediaStreamPipeline_CreatedTimestamp
+var MediaStreamPipeline_UpdatedTimestamp = &sMediaStreamPipeline_UpdatedTimestamp
+var MediaStreamPipeline_Status = &sMediaStreamPipeline_Status
+var MediaStreamPipeline_Sources = &sMediaStreamPipeline_Sources
+var MediaStreamPipeline_Sinks = &sMediaStreamPipeline_Sinks
+
+var MediaStreamPipelineSinkType = &sMediaStreamPipelineSinkType
+var MediaStreamPipelineSinkType_KinesisVideoStreamPool = &sMediaStreamPipelineSinkType_KinesisVideoStreamPool
+
+var MediaStreamSink = &sMediaStreamSink
+var MediaStreamSink_SinkArn = &sMediaStreamSink_SinkArn
+var MediaStreamSink_SinkType = &sMediaStreamSink_SinkType
+var MediaStreamSink_ReservedStreamCapacity = &sMediaStreamSink_ReservedStreamCapacity
+var MediaStreamSink_MediaStreamType = &sMediaStreamSink_MediaStreamType
+
+var _MediaStreamSinkList = &s_MediaStreamSinkList
+var _MediaStreamSinkList_member = &s_MediaStreamSinkList_member
+
+var MediaStreamSource = &sMediaStreamSource
+var MediaStreamSource_SourceType = &sMediaStreamSource_SourceType
+var MediaStreamSource_SourceArn = &sMediaStreamSource_SourceArn
+
+var _MediaStreamSourceList = &s_MediaStreamSourceList
+var _MediaStreamSourceList_member = &s_MediaStreamSourceList_member
+
+var MediaStreamType = &sMediaStreamType
+var MediaStreamType_MixedAudio = &sMediaStreamType_MixedAudio
+var MediaStreamType_IndividualAudio = &sMediaStreamType_IndividualAudio
+
+var MeetingEventsConcatenationConfiguration = &sMeetingEventsConcatenationConfiguration
+var MeetingEventsConcatenationConfiguration_State = &sMeetingEventsConcatenationConfiguration_State
+
+var _ModelName = &s_ModelName
+
+var _NonEmptyString = &s_NonEmptyString
+
+var NotFoundException = &sNotFoundException
+var NotFoundException_Code = &sNotFoundException_Code
+var NotFoundException_Message = &sNotFoundException_Message
+var NotFoundException_RequestId = &sNotFoundException_RequestId
+
+var _NumberOfChannels = &s_NumberOfChannels
+
+var PartialResultsStability = &sPartialResultsStability
+var PartialResultsStability_HIGH = &sPartialResultsStability_HIGH
+var PartialResultsStability_MEDIUM = &sPartialResultsStability_MEDIUM
+var PartialResultsStability_LOW = &sPartialResultsStability_LOW
+
+var ParticipantRole = &sParticipantRole
+var ParticipantRole_AGENT = &sParticipantRole_AGENT
+var ParticipantRole_CUSTOMER = &sParticipantRole_CUSTOMER
+
+var _PiiEntityTypes = &s_PiiEntityTypes
+
+var PostCallAnalyticsSettings = &sPostCallAnalyticsSettings
+var PostCallAnalyticsSettings_OutputLocation = &sPostCallAnalyticsSettings_OutputLocation
+var PostCallAnalyticsSettings_DataAccessRoleArn = &sPostCallAnalyticsSettings_DataAccessRoleArn
+var PostCallAnalyticsSettings_ContentRedactionOutput = &sPostCallAnalyticsSettings_ContentRedactionOutput
+var PostCallAnalyticsSettings_OutputEncryptionKMSKeyId = &sPostCallAnalyticsSettings_OutputEncryptionKMSKeyId
+
+var PresenterOnlyConfiguration = &sPresenterOnlyConfiguration
+var PresenterOnlyConfiguration_PresenterPosition = &sPresenterOnlyConfiguration_PresenterPosition
+
+var PresenterPosition = &sPresenterPosition
+var PresenterPosition_TopLeft = &sPresenterPosition_TopLeft
+var PresenterPosition_TopRight = &sPresenterPosition_TopRight
+var PresenterPosition_BottomLeft = &sPresenterPosition_BottomLeft
+var PresenterPosition_BottomRight = &sPresenterPosition_BottomRight
+
+var RealTimeAlertConfiguration = &sRealTimeAlertConfiguration
+var RealTimeAlertConfiguration_Disabled = &sRealTimeAlertConfiguration_Disabled
+var RealTimeAlertConfiguration_Rules = &sRealTimeAlertConfiguration_Rules
+
+var RealTimeAlertRule = &sRealTimeAlertRule
+var RealTimeAlertRule_Type = &sRealTimeAlertRule_Type
+var RealTimeAlertRule_KeywordMatchConfiguration = &sRealTimeAlertRule_KeywordMatchConfiguration
+var RealTimeAlertRule_SentimentConfiguration = &sRealTimeAlertRule_SentimentConfiguration
+var RealTimeAlertRule_IssueDetectionConfiguration = &sRealTimeAlertRule_IssueDetectionConfiguration
+
+var _RealTimeAlertRuleList = &s_RealTimeAlertRuleList
+var _RealTimeAlertRuleList_member = &s_RealTimeAlertRuleList_member
+
+var RealTimeAlertRuleType = &sRealTimeAlertRuleType
+var RealTimeAlertRuleType_KeywordMatch = &sRealTimeAlertRuleType_KeywordMatch
+var RealTimeAlertRuleType_Sentiment = &sRealTimeAlertRuleType_Sentiment
+var RealTimeAlertRuleType_IssueDetection = &sRealTimeAlertRuleType_IssueDetection
+
+var RecordingFileFormat = &sRecordingFileFormat
+var RecordingFileFormat_Wav = &sRecordingFileFormat_Wav
+var RecordingFileFormat_Opus = &sRecordingFileFormat_Opus
+
+var RecordingStreamConfiguration = &sRecordingStreamConfiguration
+var RecordingStreamConfiguration_StreamArn = &sRecordingStreamConfiguration_StreamArn
+
+var _RecordingStreamList = &s_RecordingStreamList
+var _RecordingStreamList_member = &s_RecordingStreamList_member
+
+var _ReservedStreamCapacity = &s_ReservedStreamCapacity
+
+var ResolutionOption = &sResolutionOption
+var ResolutionOption_HD = &sResolutionOption_HD
+var ResolutionOption_FHD = &sResolutionOption_FHD
+
+var ResourceLimitExceededException = &sResourceLimitExceededException
+var ResourceLimitExceededException_Code = &sResourceLimitExceededException_Code
+var ResourceLimitExceededException_Message = &sResourceLimitExceededException_Message
+var ResourceLimitExceededException_RequestId = &sResourceLimitExceededException_RequestId
+
+var _ResultMax = &s_ResultMax
+
+var _RuleName = &s_RuleName
+
+var S3BucketSinkConfiguration = &sS3BucketSinkConfiguration
+var S3BucketSinkConfiguration_Destination = &sS3BucketSinkConfiguration_Destination
+
+var S3RecordingSinkConfiguration = &sS3RecordingSinkConfiguration
+var S3RecordingSinkConfiguration_Destination = &sS3RecordingSinkConfiguration_Destination
+var S3RecordingSinkConfiguration_RecordingFileFormat = &sS3RecordingSinkConfiguration_RecordingFileFormat
+
+var S3RecordingSinkRuntimeConfiguration = &sS3RecordingSinkRuntimeConfiguration
+var S3RecordingSinkRuntimeConfiguration_Destination = &sS3RecordingSinkRuntimeConfiguration_Destination
+var S3RecordingSinkRuntimeConfiguration_RecordingFileFormat = &sS3RecordingSinkRuntimeConfiguration_RecordingFileFormat
+
+var SelectedVideoStreams = &sSelectedVideoStreams
+var SelectedVideoStreams_AttendeeIds = &sSelectedVideoStreams_AttendeeIds
+var SelectedVideoStreams_ExternalUserIds = &sSelectedVideoStreams_ExternalUserIds
+
+var _SensitiveString = &s_SensitiveString
+
+var SentimentConfiguration = &sSentimentConfiguration
+var SentimentConfiguration_RuleName = &sSentimentConfiguration_RuleName
+var SentimentConfiguration_SentimentType = &sSentimentConfiguration_SentimentType
+var SentimentConfiguration_TimePeriod = &sSentimentConfiguration_TimePeriod
+
+var _SentimentTimePeriodInSeconds = &s_SentimentTimePeriodInSeconds
+
+var SentimentType = &sSentimentType
+var SentimentType_NEGATIVE = &sSentimentType_NEGATIVE
+
+var ServiceFailureException = &sServiceFailureException
+var ServiceFailureException_Code = &sServiceFailureException_Code
+var ServiceFailureException_Message = &sServiceFailureException_Message
+var ServiceFailureException_RequestId = &sServiceFailureException_RequestId
+
+var ServiceUnavailableException = &sServiceUnavailableException
+var ServiceUnavailableException_Code = &sServiceUnavailableException_Code
+var ServiceUnavailableException_Message = &sServiceUnavailableException_Message
+var ServiceUnavailableException_RequestId = &sServiceUnavailableException_RequestId
+
+var SnsTopicSinkConfiguration = &sSnsTopicSinkConfiguration
+var SnsTopicSinkConfiguration_InsightsTarget = &sSnsTopicSinkConfiguration_InsightsTarget
+
+var SourceConfiguration = &sSourceConfiguration
+var SourceConfiguration_SelectedVideoStreams = &sSourceConfiguration_SelectedVideoStreams
+
+var SpeakerSearchTask = &sSpeakerSearchTask
+var SpeakerSearchTask_SpeakerSearchTaskId = &sSpeakerSearchTask_SpeakerSearchTaskId
+var SpeakerSearchTask_SpeakerSearchTaskStatus = &sSpeakerSearchTask_SpeakerSearchTaskStatus
+var SpeakerSearchTask_CreatedTimestamp = &sSpeakerSearchTask_CreatedTimestamp
+var SpeakerSearchTask_UpdatedTimestamp = &sSpeakerSearchTask_UpdatedTimestamp
+
+var SqsQueueSinkConfiguration = &sSqsQueueSinkConfiguration
+var SqsQueueSinkConfiguration_InsightsTarget = &sSqsQueueSinkConfiguration_InsightsTarget
+
+var SseAwsKeyManagementParams = &sSseAwsKeyManagementParams
+var SseAwsKeyManagementParams_AwsKmsKeyId = &sSseAwsKeyManagementParams_AwsKmsKeyId
+var SseAwsKeyManagementParams_AwsKmsEncryptionContext = &sSseAwsKeyManagementParams_AwsKmsEncryptionContext
+
+var StreamChannelDefinition = &sStreamChannelDefinition
+var StreamChannelDefinition_NumberOfChannels = &sStreamChannelDefinition_NumberOfChannels
+var StreamChannelDefinition_ChannelDefinitions = &sStreamChannelDefinition_ChannelDefinitions
+
+var StreamConfiguration = &sStreamConfiguration
+var StreamConfiguration_StreamArn = &sStreamConfiguration_StreamArn
+var StreamConfiguration_FragmentNumber = &sStreamConfiguration_FragmentNumber
+var StreamConfiguration_StreamChannelDefinition = &sStreamConfiguration_StreamChannelDefinition
+
+var _Streams = &s_Streams
+var _Streams_member = &s_Streams_member
+
+var _String = &s_String
+
+var Tag = &sTag
+var Tag_Key = &sTag_Key
+var Tag_Value = &sTag_Value
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var _TagValue = &s_TagValue
+
+var ThrottledClientException = &sThrottledClientException
+var ThrottledClientException_Code = &sThrottledClientException_Code
+var ThrottledClientException_Message = &sThrottledClientException_Message
+var ThrottledClientException_RequestId = &sThrottledClientException_RequestId
+
+var _TileAspectRatio = &s_TileAspectRatio
+
+var _TileCount = &s_TileCount
+
+var TileOrder = &sTileOrder
+var TileOrder_JoinSequence = &sTileOrder_JoinSequence
+var TileOrder_SpeakerSequence = &sTileOrder_SpeakerSequence
+
+var _Timestamp = &s_Timestamp
+
+var TimestampRange = &sTimestampRange
+var TimestampRange_StartTimestamp = &sTimestampRange_StartTimestamp
+var TimestampRange_EndTimestamp = &sTimestampRange_EndTimestamp
+
+var TranscriptionMessagesConcatenationConfiguration = &sTranscriptionMessagesConcatenationConfiguration
+var TranscriptionMessagesConcatenationConfiguration_State = &sTranscriptionMessagesConcatenationConfiguration_State
+
+var UnauthorizedClientException = &sUnauthorizedClientException
+var UnauthorizedClientException_Code = &sUnauthorizedClientException_Code
+var UnauthorizedClientException_Message = &sUnauthorizedClientException_Message
+var UnauthorizedClientException_RequestId = &sUnauthorizedClientException_RequestId
+
+var VerticalLayoutConfiguration = &sVerticalLayoutConfiguration
+var VerticalLayoutConfiguration_TileOrder = &sVerticalLayoutConfiguration_TileOrder
+var VerticalLayoutConfiguration_TilePosition = &sVerticalLayoutConfiguration_TilePosition
+var VerticalLayoutConfiguration_TileCount = &sVerticalLayoutConfiguration_TileCount
+var VerticalLayoutConfiguration_TileAspectRatio = &sVerticalLayoutConfiguration_TileAspectRatio
+
+var VerticalTilePosition = &sVerticalTilePosition
+var VerticalTilePosition_Left = &sVerticalTilePosition_Left
+var VerticalTilePosition_Right = &sVerticalTilePosition_Right
+
+var VideoArtifactsConfiguration = &sVideoArtifactsConfiguration
+var VideoArtifactsConfiguration_State = &sVideoArtifactsConfiguration_State
+var VideoArtifactsConfiguration_MuxType = &sVideoArtifactsConfiguration_MuxType
+
+var VideoAttribute = &sVideoAttribute
+var VideoAttribute_CornerRadius = &sVideoAttribute_CornerRadius
+var VideoAttribute_BorderColor = &sVideoAttribute_BorderColor
+var VideoAttribute_HighlightColor = &sVideoAttribute_HighlightColor
+var VideoAttribute_BorderThickness = &sVideoAttribute_BorderThickness
+
+var VideoConcatenationConfiguration = &sVideoConcatenationConfiguration
+var VideoConcatenationConfiguration_State = &sVideoConcatenationConfiguration_State
+
+var VideoMuxType = &sVideoMuxType
+var VideoMuxType_VideoOnly = &sVideoMuxType_VideoOnly
+
+var VocabularyFilterMethod = &sVocabularyFilterMethod
+var VocabularyFilterMethod_REMOVE = &sVocabularyFilterMethod_REMOVE
+var VocabularyFilterMethod_MASK = &sVocabularyFilterMethod_MASK
+var VocabularyFilterMethod_TAG = &sVocabularyFilterMethod_TAG
+
+var _VocabularyFilterName = &s_VocabularyFilterName
+
+var _VocabularyFilterNames = &s_VocabularyFilterNames
+
+var _VocabularyName = &s_VocabularyName
+
+var _VocabularyNames = &s_VocabularyNames
+
+var VoiceAnalyticsConfigurationStatus = &sVoiceAnalyticsConfigurationStatus
+var VoiceAnalyticsConfigurationStatus_ENABLED = &sVoiceAnalyticsConfigurationStatus_ENABLED
+var VoiceAnalyticsConfigurationStatus_DISABLED = &sVoiceAnalyticsConfigurationStatus_DISABLED
+
+var VoiceAnalyticsLanguageCode = &sVoiceAnalyticsLanguageCode
+var VoiceAnalyticsLanguageCode_EN_US = &sVoiceAnalyticsLanguageCode_EN_US
+
+var VoiceAnalyticsProcessorConfiguration = &sVoiceAnalyticsProcessorConfiguration
+var VoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus = &sVoiceAnalyticsProcessorConfiguration_SpeakerSearchStatus
+var VoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus = &sVoiceAnalyticsProcessorConfiguration_VoiceToneAnalysisStatus
+
+var VoiceEnhancementSinkConfiguration = &sVoiceEnhancementSinkConfiguration
+var VoiceEnhancementSinkConfiguration_Disabled = &sVoiceEnhancementSinkConfiguration_Disabled
+
+var VoiceToneAnalysisTask = &sVoiceToneAnalysisTask
+var VoiceToneAnalysisTask_VoiceToneAnalysisTaskId = &sVoiceToneAnalysisTask_VoiceToneAnalysisTaskId
+var VoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus = &sVoiceToneAnalysisTask_VoiceToneAnalysisTaskStatus
+var VoiceToneAnalysisTask_CreatedTimestamp = &sVoiceToneAnalysisTask_CreatedTimestamp
+var VoiceToneAnalysisTask_UpdatedTimestamp = &sVoiceToneAnalysisTask_UpdatedTimestamp
+
+var CreateMediaCapturePipelineRequest = &sCreateMediaCapturePipelineRequest
+var CreateMediaCapturePipelineRequest_SourceType = &sCreateMediaCapturePipelineRequest_SourceType
+var CreateMediaCapturePipelineRequest_SourceArn = &sCreateMediaCapturePipelineRequest_SourceArn
+var CreateMediaCapturePipelineRequest_SinkType = &sCreateMediaCapturePipelineRequest_SinkType
+var CreateMediaCapturePipelineRequest_SinkArn = &sCreateMediaCapturePipelineRequest_SinkArn
+var CreateMediaCapturePipelineRequest_ClientRequestToken = &sCreateMediaCapturePipelineRequest_ClientRequestToken
+var CreateMediaCapturePipelineRequest_ChimeSdkMeetingConfiguration = &sCreateMediaCapturePipelineRequest_ChimeSdkMeetingConfiguration
+var CreateMediaCapturePipelineRequest_SseAwsKeyManagementParams = &sCreateMediaCapturePipelineRequest_SseAwsKeyManagementParams
+var CreateMediaCapturePipelineRequest_SinkIamRoleArn = &sCreateMediaCapturePipelineRequest_SinkIamRoleArn
+var CreateMediaCapturePipelineRequest_Tags = &sCreateMediaCapturePipelineRequest_Tags
+
+var CreateMediaCapturePipelineResponse = &sCreateMediaCapturePipelineResponse
+var CreateMediaCapturePipelineResponse_MediaCapturePipeline = &sCreateMediaCapturePipelineResponse_MediaCapturePipeline
+
+var CreateMediaConcatenationPipelineRequest = &sCreateMediaConcatenationPipelineRequest
+var CreateMediaConcatenationPipelineRequest_Sources = &sCreateMediaConcatenationPipelineRequest_Sources
+var CreateMediaConcatenationPipelineRequest_Sinks = &sCreateMediaConcatenationPipelineRequest_Sinks
+var CreateMediaConcatenationPipelineRequest_ClientRequestToken = &sCreateMediaConcatenationPipelineRequest_ClientRequestToken
+var CreateMediaConcatenationPipelineRequest_Tags = &sCreateMediaConcatenationPipelineRequest_Tags
+
+var CreateMediaConcatenationPipelineResponse = &sCreateMediaConcatenationPipelineResponse
+var CreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline = &sCreateMediaConcatenationPipelineResponse_MediaConcatenationPipeline
+
+var CreateMediaInsightsPipelineConfigurationRequest = &sCreateMediaInsightsPipelineConfigurationRequest
+var CreateMediaInsightsPipelineConfigurationRequest_MediaInsightsPipelineConfigurationName = &sCreateMediaInsightsPipelineConfigurationRequest_MediaInsightsPipelineConfigurationName
+var CreateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn = &sCreateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn
+var CreateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration = &sCreateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration
+var CreateMediaInsightsPipelineConfigurationRequest_Elements = &sCreateMediaInsightsPipelineConfigurationRequest_Elements
+var CreateMediaInsightsPipelineConfigurationRequest_Tags = &sCreateMediaInsightsPipelineConfigurationRequest_Tags
+var CreateMediaInsightsPipelineConfigurationRequest_ClientRequestToken = &sCreateMediaInsightsPipelineConfigurationRequest_ClientRequestToken
+
+var CreateMediaInsightsPipelineConfigurationResponse = &sCreateMediaInsightsPipelineConfigurationResponse
+var CreateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = &sCreateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration
+
+var CreateMediaInsightsPipelineRequest = &sCreateMediaInsightsPipelineRequest
+var CreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn = &sCreateMediaInsightsPipelineRequest_MediaInsightsPipelineConfigurationArn
+var CreateMediaInsightsPipelineRequest_KinesisVideoStreamSourceRuntimeConfiguration = &sCreateMediaInsightsPipelineRequest_KinesisVideoStreamSourceRuntimeConfiguration
+var CreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata = &sCreateMediaInsightsPipelineRequest_MediaInsightsRuntimeMetadata
+var CreateMediaInsightsPipelineRequest_KinesisVideoStreamRecordingSourceRuntimeConfiguration = &sCreateMediaInsightsPipelineRequest_KinesisVideoStreamRecordingSourceRuntimeConfiguration
+var CreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration = &sCreateMediaInsightsPipelineRequest_S3RecordingSinkRuntimeConfiguration
+var CreateMediaInsightsPipelineRequest_Tags = &sCreateMediaInsightsPipelineRequest_Tags
+var CreateMediaInsightsPipelineRequest_ClientRequestToken = &sCreateMediaInsightsPipelineRequest_ClientRequestToken
+
+var CreateMediaInsightsPipelineResponse = &sCreateMediaInsightsPipelineResponse
+var CreateMediaInsightsPipelineResponse_MediaInsightsPipeline = &sCreateMediaInsightsPipelineResponse_MediaInsightsPipeline
+
+var CreateMediaLiveConnectorPipelineRequest = &sCreateMediaLiveConnectorPipelineRequest
+var CreateMediaLiveConnectorPipelineRequest_Sources = &sCreateMediaLiveConnectorPipelineRequest_Sources
+var CreateMediaLiveConnectorPipelineRequest_Sinks = &sCreateMediaLiveConnectorPipelineRequest_Sinks
+var CreateMediaLiveConnectorPipelineRequest_ClientRequestToken = &sCreateMediaLiveConnectorPipelineRequest_ClientRequestToken
+var CreateMediaLiveConnectorPipelineRequest_Tags = &sCreateMediaLiveConnectorPipelineRequest_Tags
+
+var CreateMediaLiveConnectorPipelineResponse = &sCreateMediaLiveConnectorPipelineResponse
+var CreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline = &sCreateMediaLiveConnectorPipelineResponse_MediaLiveConnectorPipeline
+
+var CreateMediaPipelineKinesisVideoStreamPoolRequest = &sCreateMediaPipelineKinesisVideoStreamPoolRequest
+var CreateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration = &sCreateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration
+var CreateMediaPipelineKinesisVideoStreamPoolRequest_PoolName = &sCreateMediaPipelineKinesisVideoStreamPoolRequest_PoolName
+var CreateMediaPipelineKinesisVideoStreamPoolRequest_ClientRequestToken = &sCreateMediaPipelineKinesisVideoStreamPoolRequest_ClientRequestToken
+var CreateMediaPipelineKinesisVideoStreamPoolRequest_Tags = &sCreateMediaPipelineKinesisVideoStreamPoolRequest_Tags
+
+var CreateMediaPipelineKinesisVideoStreamPoolResponse = &sCreateMediaPipelineKinesisVideoStreamPoolResponse
+var CreateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = &sCreateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration
+
+var CreateMediaStreamPipelineRequest = &sCreateMediaStreamPipelineRequest
+var CreateMediaStreamPipelineRequest_Sources = &sCreateMediaStreamPipelineRequest_Sources
+var CreateMediaStreamPipelineRequest_Sinks = &sCreateMediaStreamPipelineRequest_Sinks
+var CreateMediaStreamPipelineRequest_ClientRequestToken = &sCreateMediaStreamPipelineRequest_ClientRequestToken
+var CreateMediaStreamPipelineRequest_Tags = &sCreateMediaStreamPipelineRequest_Tags
+
+var CreateMediaStreamPipelineResponse = &sCreateMediaStreamPipelineResponse
+var CreateMediaStreamPipelineResponse_MediaStreamPipeline = &sCreateMediaStreamPipelineResponse_MediaStreamPipeline
+
+var DeleteMediaCapturePipelineRequest = &sDeleteMediaCapturePipelineRequest
+var DeleteMediaCapturePipelineRequest_MediaPipelineId = &sDeleteMediaCapturePipelineRequest_MediaPipelineId
+
+var DeleteMediaInsightsPipelineConfigurationRequest = &sDeleteMediaInsightsPipelineConfigurationRequest
+var DeleteMediaInsightsPipelineConfigurationRequest_Identifier = &sDeleteMediaInsightsPipelineConfigurationRequest_Identifier
+
+var DeleteMediaPipelineRequest = &sDeleteMediaPipelineRequest
+var DeleteMediaPipelineRequest_MediaPipelineId = &sDeleteMediaPipelineRequest_MediaPipelineId
+
+var DeleteMediaPipelineKinesisVideoStreamPoolRequest = &sDeleteMediaPipelineKinesisVideoStreamPoolRequest
+var DeleteMediaPipelineKinesisVideoStreamPoolRequest_Identifier = &sDeleteMediaPipelineKinesisVideoStreamPoolRequest_Identifier
+
+var GetMediaCapturePipelineRequest = &sGetMediaCapturePipelineRequest
+var GetMediaCapturePipelineRequest_MediaPipelineId = &sGetMediaCapturePipelineRequest_MediaPipelineId
+
+var GetMediaCapturePipelineResponse = &sGetMediaCapturePipelineResponse
+var GetMediaCapturePipelineResponse_MediaCapturePipeline = &sGetMediaCapturePipelineResponse_MediaCapturePipeline
+
+var GetMediaInsightsPipelineConfigurationRequest = &sGetMediaInsightsPipelineConfigurationRequest
+var GetMediaInsightsPipelineConfigurationRequest_Identifier = &sGetMediaInsightsPipelineConfigurationRequest_Identifier
+
+var GetMediaInsightsPipelineConfigurationResponse = &sGetMediaInsightsPipelineConfigurationResponse
+var GetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = &sGetMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration
+
+var GetMediaPipelineRequest = &sGetMediaPipelineRequest
+var GetMediaPipelineRequest_MediaPipelineId = &sGetMediaPipelineRequest_MediaPipelineId
+
+var GetMediaPipelineKinesisVideoStreamPoolRequest = &sGetMediaPipelineKinesisVideoStreamPoolRequest
+var GetMediaPipelineKinesisVideoStreamPoolRequest_Identifier = &sGetMediaPipelineKinesisVideoStreamPoolRequest_Identifier
+
+var GetMediaPipelineKinesisVideoStreamPoolResponse = &sGetMediaPipelineKinesisVideoStreamPoolResponse
+var GetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = &sGetMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration
+
+var GetMediaPipelineResponse = &sGetMediaPipelineResponse
+var GetMediaPipelineResponse_MediaPipeline = &sGetMediaPipelineResponse_MediaPipeline
+
+var GetSpeakerSearchTaskRequest = &sGetSpeakerSearchTaskRequest
+var GetSpeakerSearchTaskRequest_Identifier = &sGetSpeakerSearchTaskRequest_Identifier
+var GetSpeakerSearchTaskRequest_SpeakerSearchTaskId = &sGetSpeakerSearchTaskRequest_SpeakerSearchTaskId
+
+var GetSpeakerSearchTaskResponse = &sGetSpeakerSearchTaskResponse
+var GetSpeakerSearchTaskResponse_SpeakerSearchTask = &sGetSpeakerSearchTaskResponse_SpeakerSearchTask
+
+var GetVoiceToneAnalysisTaskRequest = &sGetVoiceToneAnalysisTaskRequest
+var GetVoiceToneAnalysisTaskRequest_Identifier = &sGetVoiceToneAnalysisTaskRequest_Identifier
+var GetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = &sGetVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId
+
+var GetVoiceToneAnalysisTaskResponse = &sGetVoiceToneAnalysisTaskResponse
+var GetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = &sGetVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask
+
+var ListMediaCapturePipelinesRequest = &sListMediaCapturePipelinesRequest
+var ListMediaCapturePipelinesRequest_NextToken = &sListMediaCapturePipelinesRequest_NextToken
+var ListMediaCapturePipelinesRequest_MaxResults = &sListMediaCapturePipelinesRequest_MaxResults
+
+var ListMediaCapturePipelinesResponse = &sListMediaCapturePipelinesResponse
+var ListMediaCapturePipelinesResponse_MediaCapturePipelines = &sListMediaCapturePipelinesResponse_MediaCapturePipelines
+var ListMediaCapturePipelinesResponse_NextToken = &sListMediaCapturePipelinesResponse_NextToken
+
+var ListMediaInsightsPipelineConfigurationsRequest = &sListMediaInsightsPipelineConfigurationsRequest
+var ListMediaInsightsPipelineConfigurationsRequest_NextToken = &sListMediaInsightsPipelineConfigurationsRequest_NextToken
+var ListMediaInsightsPipelineConfigurationsRequest_MaxResults = &sListMediaInsightsPipelineConfigurationsRequest_MaxResults
+
+var ListMediaInsightsPipelineConfigurationsResponse = &sListMediaInsightsPipelineConfigurationsResponse
+var ListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations = &sListMediaInsightsPipelineConfigurationsResponse_MediaInsightsPipelineConfigurations
+var ListMediaInsightsPipelineConfigurationsResponse_NextToken = &sListMediaInsightsPipelineConfigurationsResponse_NextToken
+
+var ListMediaPipelineKinesisVideoStreamPoolsRequest = &sListMediaPipelineKinesisVideoStreamPoolsRequest
+var ListMediaPipelineKinesisVideoStreamPoolsRequest_NextToken = &sListMediaPipelineKinesisVideoStreamPoolsRequest_NextToken
+var ListMediaPipelineKinesisVideoStreamPoolsRequest_MaxResults = &sListMediaPipelineKinesisVideoStreamPoolsRequest_MaxResults
+
+var ListMediaPipelineKinesisVideoStreamPoolsResponse = &sListMediaPipelineKinesisVideoStreamPoolsResponse
+var ListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools = &sListMediaPipelineKinesisVideoStreamPoolsResponse_KinesisVideoStreamPools
+var ListMediaPipelineKinesisVideoStreamPoolsResponse_NextToken = &sListMediaPipelineKinesisVideoStreamPoolsResponse_NextToken
+
+var ListMediaPipelinesRequest = &sListMediaPipelinesRequest
+var ListMediaPipelinesRequest_NextToken = &sListMediaPipelinesRequest_NextToken
+var ListMediaPipelinesRequest_MaxResults = &sListMediaPipelinesRequest_MaxResults
+
+var ListMediaPipelinesResponse = &sListMediaPipelinesResponse
+var ListMediaPipelinesResponse_MediaPipelines = &sListMediaPipelinesResponse_MediaPipelines
+var ListMediaPipelinesResponse_NextToken = &sListMediaPipelinesResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceARN = &sListTagsForResourceRequest_ResourceARN
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var StartSpeakerSearchTaskRequest = &sStartSpeakerSearchTaskRequest
+var StartSpeakerSearchTaskRequest_Identifier = &sStartSpeakerSearchTaskRequest_Identifier
+var StartSpeakerSearchTaskRequest_VoiceProfileDomainArn = &sStartSpeakerSearchTaskRequest_VoiceProfileDomainArn
+var StartSpeakerSearchTaskRequest_KinesisVideoStreamSourceTaskConfiguration = &sStartSpeakerSearchTaskRequest_KinesisVideoStreamSourceTaskConfiguration
+var StartSpeakerSearchTaskRequest_ClientRequestToken = &sStartSpeakerSearchTaskRequest_ClientRequestToken
+
+var StartSpeakerSearchTaskResponse = &sStartSpeakerSearchTaskResponse
+var StartSpeakerSearchTaskResponse_SpeakerSearchTask = &sStartSpeakerSearchTaskResponse_SpeakerSearchTask
+
+var StartVoiceToneAnalysisTaskRequest = &sStartVoiceToneAnalysisTaskRequest
+var StartVoiceToneAnalysisTaskRequest_Identifier = &sStartVoiceToneAnalysisTaskRequest_Identifier
+var StartVoiceToneAnalysisTaskRequest_LanguageCode = &sStartVoiceToneAnalysisTaskRequest_LanguageCode
+var StartVoiceToneAnalysisTaskRequest_KinesisVideoStreamSourceTaskConfiguration = &sStartVoiceToneAnalysisTaskRequest_KinesisVideoStreamSourceTaskConfiguration
+var StartVoiceToneAnalysisTaskRequest_ClientRequestToken = &sStartVoiceToneAnalysisTaskRequest_ClientRequestToken
+
+var StartVoiceToneAnalysisTaskResponse = &sStartVoiceToneAnalysisTaskResponse
+var StartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask = &sStartVoiceToneAnalysisTaskResponse_VoiceToneAnalysisTask
+
+var StopSpeakerSearchTaskRequest = &sStopSpeakerSearchTaskRequest
+var StopSpeakerSearchTaskRequest_Identifier = &sStopSpeakerSearchTaskRequest_Identifier
+var StopSpeakerSearchTaskRequest_SpeakerSearchTaskId = &sStopSpeakerSearchTaskRequest_SpeakerSearchTaskId
+
+var StopVoiceToneAnalysisTaskRequest = &sStopVoiceToneAnalysisTaskRequest
+var StopVoiceToneAnalysisTaskRequest_Identifier = &sStopVoiceToneAnalysisTaskRequest_Identifier
+var StopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId = &sStopVoiceToneAnalysisTaskRequest_VoiceToneAnalysisTaskId
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceARN = &sTagResourceRequest_ResourceARN
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceARN = &sUntagResourceRequest_ResourceARN
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateMediaInsightsPipelineConfigurationRequest = &sUpdateMediaInsightsPipelineConfigurationRequest
+var UpdateMediaInsightsPipelineConfigurationRequest_Identifier = &sUpdateMediaInsightsPipelineConfigurationRequest_Identifier
+var UpdateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn = &sUpdateMediaInsightsPipelineConfigurationRequest_ResourceAccessRoleArn
+var UpdateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration = &sUpdateMediaInsightsPipelineConfigurationRequest_RealTimeAlertConfiguration
+var UpdateMediaInsightsPipelineConfigurationRequest_Elements = &sUpdateMediaInsightsPipelineConfigurationRequest_Elements
+
+var UpdateMediaInsightsPipelineConfigurationResponse = &sUpdateMediaInsightsPipelineConfigurationResponse
+var UpdateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration = &sUpdateMediaInsightsPipelineConfigurationResponse_MediaInsightsPipelineConfiguration
+
+var UpdateMediaInsightsPipelineStatusRequest = &sUpdateMediaInsightsPipelineStatusRequest
+var UpdateMediaInsightsPipelineStatusRequest_Identifier = &sUpdateMediaInsightsPipelineStatusRequest_Identifier
+var UpdateMediaInsightsPipelineStatusRequest_UpdateStatus = &sUpdateMediaInsightsPipelineStatusRequest_UpdateStatus
+
+var UpdateMediaPipelineKinesisVideoStreamPoolRequest = &sUpdateMediaPipelineKinesisVideoStreamPoolRequest
+var UpdateMediaPipelineKinesisVideoStreamPoolRequest_Identifier = &sUpdateMediaPipelineKinesisVideoStreamPoolRequest_Identifier
+var UpdateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration = &sUpdateMediaPipelineKinesisVideoStreamPoolRequest_StreamConfiguration
+
+var UpdateMediaPipelineKinesisVideoStreamPoolResponse = &sUpdateMediaPipelineKinesisVideoStreamPoolResponse
+var UpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration = &sUpdateMediaPipelineKinesisVideoStreamPoolResponse_KinesisVideoStreamPoolConfiguration
+
+var ChimeSDKMediaPipelinesService = &smithy.ServiceSchema{Schema: &s_ChimeSDKMediaPipelinesService, Version: "2021-07-15"}

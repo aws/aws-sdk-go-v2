@@ -4,2791 +4,2106 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateServiceRoleToAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateServiceRoleToAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
-	URI:  "/greengrass/servicerole",
-	Code: 200})
+var (
+	iAssociateServiceRoleToAccount                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociateServiceRoleToAccount"}
+	iBatchAssociateClientDeviceWithCoreDevice            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "BatchAssociateClientDeviceWithCoreDevice"}
+	iBatchDisassociateClientDeviceFromCoreDevice         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "BatchDisassociateClientDeviceFromCoreDevice"}
+	iCancelDeployment                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CancelDeployment"}
+	iCreateComponentVersion                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CreateComponentVersion"}
+	iCreateDeployment                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CreateDeployment"}
+	iDeleteComponent                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeleteComponent"}
+	iDeleteCoreDevice                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeleteCoreDevice"}
+	iDeleteDeployment                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeleteDeployment"}
+	iDescribeComponent                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DescribeComponent"}
+	iDisassociateServiceRoleFromAccount                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DisassociateServiceRoleFromAccount"}
+	iGetComponent                                        = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetComponent"}
+	iGetComponentVersionArtifact                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetComponentVersionArtifact"}
+	iGetConnectivityInfo                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetConnectivityInfo"}
+	iGetCoreDevice                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetCoreDevice"}
+	iGetDeployment                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetDeployment"}
+	iGetServiceRoleForAccount                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetServiceRoleForAccount"}
+	iListClientDevicesAssociatedWithCoreDevice           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListClientDevicesAssociatedWithCoreDevice"}
+	iListComponents                                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListComponents"}
+	iListComponentVersions                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListComponentVersions"}
+	iListCoreDevices                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListCoreDevices"}
+	iListDeployments                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListDeployments"}
+	iListEffectiveDeployments                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListEffectiveDeployments"}
+	iListInstalledComponents                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListInstalledComponents"}
+	iListTagsForResource                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListTagsForResource"}
+	iResolveComponentCandidates                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ResolveComponentCandidates"}
+	iTagResource                                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TagResource"}
+	iUntagResource                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "UntagResource"}
+	iUpdateConnectivityInfo                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "UpdateConnectivityInfo"}
+	i_GreengrassV2                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GreengrassV2"}
+	iAccessDeniedException                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AccessDeniedException"}
+	iAssociateClientDeviceWithCoreDeviceEntry            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociateClientDeviceWithCoreDeviceEntry"}
+	i_AssociateClientDeviceWithCoreDeviceEntryList       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociateClientDeviceWithCoreDeviceEntryList"}
+	iAssociateClientDeviceWithCoreDeviceErrorEntry       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociateClientDeviceWithCoreDeviceErrorEntry"}
+	i_AssociateClientDeviceWithCoreDeviceErrorList       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociateClientDeviceWithCoreDeviceErrorList"}
+	iAssociatedClientDevice                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociatedClientDevice"}
+	i_AssociatedClientDeviceList                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociatedClientDeviceList"}
+	i_ClientTokenString                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ClientTokenString"}
+	iCloudComponentState                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CloudComponentState"}
+	iCloudComponentStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CloudComponentStatus"}
+	iComponent                                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "Component"}
+	i_ComponentARN                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentARN"}
+	iComponentCandidate                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentCandidate"}
+	i_ComponentCandidateList                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentCandidateList"}
+	i_ComponentConfigurationPath                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentConfigurationPath"}
+	i_ComponentConfigurationPathList                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentConfigurationPathList"}
+	i_ComponentConfigurationString                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentConfigurationString"}
+	iComponentConfigurationUpdate                        = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentConfigurationUpdate"}
+	i_ComponentDependencyMap                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentDependencyMap"}
+	iComponentDependencyRequirement                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentDependencyRequirement"}
+	iComponentDependencyType                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentDependencyType"}
+	iComponentDeploymentSpecification                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentDeploymentSpecification"}
+	i_ComponentDeploymentSpecifications                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentDeploymentSpecifications"}
+	iComponentLatestVersion                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentLatestVersion"}
+	i_ComponentList                                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentList"}
+	i_ComponentNameString                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentNameString"}
+	iComponentPlatform                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentPlatform"}
+	i_ComponentPlatformList                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentPlatformList"}
+	iComponentRunWith                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentRunWith"}
+	i_ComponentVersionARN                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentVersionARN"}
+	i_ComponentVersionList                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentVersionList"}
+	iComponentVersionListItem                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentVersionListItem"}
+	i_ComponentVersionRequirementMap                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentVersionRequirementMap"}
+	i_ComponentVersionString                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentVersionString"}
+	iComponentVisibilityScope                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ComponentVisibilityScope"}
+	iConflictException                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ConflictException"}
+	iConnectivityInfo                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ConnectivityInfo"}
+	i_connectivityInfoList                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "connectivityInfoList"}
+	iCoreDevice                                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CoreDevice"}
+	i_CoreDeviceArchitectureString                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CoreDeviceArchitectureString"}
+	i_CoreDevicePlatformString                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CoreDevicePlatformString"}
+	i_CoreDeviceRuntimeString                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CoreDeviceRuntimeString"}
+	i_CoreDevicesList                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CoreDevicesList"}
+	iCoreDeviceStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CoreDeviceStatus"}
+	i_CoreDeviceThingName                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CoreDeviceThingName"}
+	i_CPU                                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CPU"}
+	i_DefaultMaxResults                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DefaultMaxResults"}
+	iDeployment                                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "Deployment"}
+	iDeploymentComponentUpdatePolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentComponentUpdatePolicy"}
+	iDeploymentComponentUpdatePolicyAction               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentComponentUpdatePolicyAction"}
+	iDeploymentConfigurationValidationPolicy             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentConfigurationValidationPolicy"}
+	iDeploymentFailureHandlingPolicy                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentFailureHandlingPolicy"}
+	iDeploymentHistoryFilter                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentHistoryFilter"}
+	i_DeploymentID                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentID"}
+	iDeploymentIoTJobConfiguration                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentIoTJobConfiguration"}
+	i_DeploymentList                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentList"}
+	i_DeploymentName                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentName"}
+	i_DeploymentNameString                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentNameString"}
+	iDeploymentPolicies                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentPolicies"}
+	iDeploymentStatus                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeploymentStatus"}
+	i_Description                                        = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "Description"}
+	i_DescriptionString                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DescriptionString"}
+	iDisassociateClientDeviceFromCoreDeviceEntry         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DisassociateClientDeviceFromCoreDeviceEntry"}
+	i_DisassociateClientDeviceFromCoreDeviceEntryList    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DisassociateClientDeviceFromCoreDeviceEntryList"}
+	iDisassociateClientDeviceFromCoreDeviceErrorEntry    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DisassociateClientDeviceFromCoreDeviceErrorEntry"}
+	i_DisassociateClientDeviceFromCoreDeviceErrorList    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DisassociateClientDeviceFromCoreDeviceErrorList"}
+	iEffectiveDeployment                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeployment"}
+	i_EffectiveDeploymentErrorCode                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeploymentErrorCode"}
+	i_EffectiveDeploymentErrorStack                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeploymentErrorStack"}
+	i_EffectiveDeploymentErrorType                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeploymentErrorType"}
+	i_EffectiveDeploymentErrorTypeList                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeploymentErrorTypeList"}
+	iEffectiveDeploymentExecutionStatus                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeploymentExecutionStatus"}
+	i_EffectiveDeploymentsList                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeploymentsList"}
+	iEffectiveDeploymentStatusDetails                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "EffectiveDeploymentStatusDetails"}
+	i_FileSystemPath                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "FileSystemPath"}
+	i_GenericV2ARN                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GenericV2ARN"}
+	i_GGCVersion                                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GGCVersion"}
+	iInstalledComponent                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "InstalledComponent"}
+	iInstalledComponentLifecycleState                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "InstalledComponentLifecycleState"}
+	i_InstalledComponentLifecycleStatusCode              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "InstalledComponentLifecycleStatusCode"}
+	i_InstalledComponentLifecycleStatusCodeList          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "InstalledComponentLifecycleStatusCodeList"}
+	i_InstalledComponentList                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "InstalledComponentList"}
+	iInstalledComponentTopologyFilter                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "InstalledComponentTopologyFilter"}
+	iInternalServerException                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "InternalServerException"}
+	iIotEndpointType                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IotEndpointType"}
+	iIoTJobAbortAction                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobAbortAction"}
+	iIoTJobAbortConfig                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobAbortConfig"}
+	iIoTJobAbortCriteria                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobAbortCriteria"}
+	i_IoTJobAbortCriteriaList                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobAbortCriteriaList"}
+	i_IoTJobAbortThresholdPercentage                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobAbortThresholdPercentage"}
+	i_IoTJobARN                                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobARN"}
+	iIoTJobExecutionFailureType                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobExecutionFailureType"}
+	iIoTJobExecutionsRolloutConfig                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobExecutionsRolloutConfig"}
+	iIoTJobExponentialRolloutRate                        = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobExponentialRolloutRate"}
+	i_IoTJobId                                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobId"}
+	i_IoTJobInProgressTimeoutInMinutes                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobInProgressTimeoutInMinutes"}
+	i_IoTJobMaxExecutionsPerMin                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobMaxExecutionsPerMin"}
+	i_IoTJobMinimumNumberOfExecutedThings                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobMinimumNumberOfExecutedThings"}
+	i_IoTJobNumberOfThings                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobNumberOfThings"}
+	iIoTJobRateIncreaseCriteria                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobRateIncreaseCriteria"}
+	i_IoTJobRolloutBaseRatePerMinute                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobRolloutBaseRatePerMinute"}
+	i_IoTJobRolloutIncrementFactor                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobRolloutIncrementFactor"}
+	iIoTJobTimeoutConfig                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTJobTimeoutConfig"}
+	i_IoTThingName                                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IoTThingName"}
+	i_IsLatestForTarget                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IsLatestForTarget"}
+	i_IsRoot                                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "IsRoot"}
+	iLambdaContainerParams                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaContainerParams"}
+	i_LambdaDeviceList                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaDeviceList"}
+	iLambdaDeviceMount                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaDeviceMount"}
+	i_LambdaEnvironmentVariables                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaEnvironmentVariables"}
+	iLambdaEventSource                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaEventSource"}
+	i_LambdaEventSourceList                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaEventSourceList"}
+	iLambdaEventSourceType                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaEventSourceType"}
+	i_LambdaExecArg                                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaExecArg"}
+	i_LambdaExecArgsList                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaExecArgsList"}
+	iLambdaExecutionParameters                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaExecutionParameters"}
+	iLambdaFilesystemPermission                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaFilesystemPermission"}
+	iLambdaFunctionRecipeSource                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaFunctionRecipeSource"}
+	iLambdaInputPayloadEncodingType                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaInputPayloadEncodingType"}
+	iLambdaIsolationMode                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaIsolationMode"}
+	iLambdaLinuxProcessParams                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaLinuxProcessParams"}
+	i_LambdaVolumeList                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaVolumeList"}
+	iLambdaVolumeMount                                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LambdaVolumeMount"}
+	i_LifecycleStateDetails                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "LifecycleStateDetails"}
+	i_Memory                                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "Memory"}
+	i_NextTokenString                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "NextTokenString"}
+	i_NonEmptyString                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "NonEmptyString"}
+	i_NullableString                                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "NullableString"}
+	i_OptionalBoolean                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "OptionalBoolean"}
+	i_OptionalInteger                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "OptionalInteger"}
+	i_PlatformAttributesMap                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "PlatformAttributesMap"}
+	i_PortNumberInt                                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "PortNumberInt"}
+	i_PublisherString                                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "PublisherString"}
+	i_Reason                                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "Reason"}
+	i_RecipeBlob                                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "RecipeBlob"}
+	iRecipeOutputFormat                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "RecipeOutputFormat"}
+	iRequestAlreadyInProgressException                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "RequestAlreadyInProgressException"}
+	iResolvedComponentVersion                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ResolvedComponentVersion"}
+	i_ResolvedComponentVersionsList                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ResolvedComponentVersionsList"}
+	iResourceNotFoundException                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ResourceNotFoundException"}
+	i_RetryAfterSeconds                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "RetryAfterSeconds"}
+	iS3EndpointType                                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "S3EndpointType"}
+	iServiceQuotaExceededException                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ServiceQuotaExceededException"}
+	i_String                                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "String"}
+	i_StringMap                                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "StringMap"}
+	iSystemResourceLimits                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "SystemResourceLimits"}
+	i_TagKey                                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TagKey"}
+	i_TagKeyList                                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TagKeyList"}
+	i_TagMap                                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TagMap"}
+	i_TagValue                                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TagValue"}
+	i_TargetARN                                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TargetARN"}
+	i_ThingGroupARN                                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ThingGroupARN"}
+	iThrottlingException                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ThrottlingException"}
+	i_Timestamp                                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "Timestamp"}
+	i_TopicString                                        = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TopicString"}
+	iValidationException                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ValidationException"}
+	iValidationExceptionField                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ValidationExceptionFieldList"}
+	iValidationExceptionReason                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ValidationExceptionReason"}
+	iVendorGuidance                                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "VendorGuidance"}
+	iAssociateServiceRoleToAccountRequest                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociateServiceRoleToAccountRequest"}
+	iAssociateServiceRoleToAccountResponse               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "AssociateServiceRoleToAccountResponse"}
+	iBatchAssociateClientDeviceWithCoreDeviceRequest     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "BatchAssociateClientDeviceWithCoreDeviceRequest"}
+	iBatchAssociateClientDeviceWithCoreDeviceResponse    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "BatchAssociateClientDeviceWithCoreDeviceResponse"}
+	iBatchDisassociateClientDeviceFromCoreDeviceRequest  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "BatchDisassociateClientDeviceFromCoreDeviceRequest"}
+	iBatchDisassociateClientDeviceFromCoreDeviceResponse = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "BatchDisassociateClientDeviceFromCoreDeviceResponse"}
+	iCancelDeploymentRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CancelDeploymentRequest"}
+	iCancelDeploymentResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CancelDeploymentResponse"}
+	iCreateComponentVersionRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CreateComponentVersionRequest"}
+	iCreateComponentVersionResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CreateComponentVersionResponse"}
+	iCreateDeploymentRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CreateDeploymentRequest"}
+	iCreateDeploymentResponse                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "CreateDeploymentResponse"}
+	iDeleteComponentRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeleteComponentRequest"}
+	iDeleteCoreDeviceRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeleteCoreDeviceRequest"}
+	iDeleteDeploymentRequest                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DeleteDeploymentRequest"}
+	iDescribeComponentRequest                            = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DescribeComponentRequest"}
+	iDescribeComponentResponse                           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DescribeComponentResponse"}
+	iDisassociateServiceRoleFromAccountRequest           = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DisassociateServiceRoleFromAccountRequest"}
+	iDisassociateServiceRoleFromAccountResponse          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "DisassociateServiceRoleFromAccountResponse"}
+	iGetComponentRequest                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetComponentRequest"}
+	iGetComponentResponse                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetComponentResponse"}
+	iGetComponentVersionArtifactRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetComponentVersionArtifactRequest"}
+	iGetComponentVersionArtifactResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetComponentVersionArtifactResponse"}
+	iGetConnectivityInfoRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetConnectivityInfoRequest"}
+	iGetConnectivityInfoResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetConnectivityInfoResponse"}
+	iGetCoreDeviceRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetCoreDeviceRequest"}
+	iGetCoreDeviceResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetCoreDeviceResponse"}
+	iGetDeploymentRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetDeploymentRequest"}
+	iGetDeploymentResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetDeploymentResponse"}
+	iGetServiceRoleForAccountRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetServiceRoleForAccountRequest"}
+	iGetServiceRoleForAccountResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "GetServiceRoleForAccountResponse"}
+	iListClientDevicesAssociatedWithCoreDeviceRequest    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListClientDevicesAssociatedWithCoreDeviceRequest"}
+	iListClientDevicesAssociatedWithCoreDeviceResponse   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListClientDevicesAssociatedWithCoreDeviceResponse"}
+	iListComponentsRequest                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListComponentsRequest"}
+	iListComponentsResponse                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListComponentsResponse"}
+	iListComponentVersionsRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListComponentVersionsRequest"}
+	iListComponentVersionsResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListComponentVersionsResponse"}
+	iListCoreDevicesRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListCoreDevicesRequest"}
+	iListCoreDevicesResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListCoreDevicesResponse"}
+	iListDeploymentsRequest                              = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListDeploymentsRequest"}
+	iListDeploymentsResponse                             = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListDeploymentsResponse"}
+	iListEffectiveDeploymentsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListEffectiveDeploymentsRequest"}
+	iListEffectiveDeploymentsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListEffectiveDeploymentsResponse"}
+	iListInstalledComponentsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListInstalledComponentsRequest"}
+	iListInstalledComponentsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListInstalledComponentsResponse"}
+	iListTagsForResourceRequest                          = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse                         = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ListTagsForResourceResponse"}
+	iResolveComponentCandidatesRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ResolveComponentCandidatesRequest"}
+	iResolveComponentCandidatesResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "ResolveComponentCandidatesResponse"}
+	iTagResourceRequest                                  = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TagResourceRequest"}
+	iTagResourceResponse                                 = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "TagResourceResponse"}
+	iUntagResourceRequest                                = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                               = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "UntagResourceResponse"}
+	iUpdateConnectivityInfoRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "UpdateConnectivityInfoRequest"}
+	iUpdateConnectivityInfoResponse                      = smithy.ShapeID{Namespace: "com.amazonaws.greengrassv2", Name: "UpdateConnectivityInfoResponse"}
+	pUnit                                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
 
-var BatchAssociateClientDeviceWithCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchAssociateClientDeviceWithCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
+	URI:  "/greengrass/servicerole",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/associateClientDevices",
-	Code: 200})
-
-var BatchDisassociateClientDeviceFromCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchDisassociateClientDeviceFromCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/disassociateClientDevices",
-	Code: 200})
-
-var CancelDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CancelDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/greengrass/v2/deployments/{deploymentId}/cancel",
-	Code: 200})
-
-var CreateComponentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateComponentVersion",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/greengrass/v2/createComponentVersion",
-	Code: 201})
-
-var CreateDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 201}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/greengrass/v2/deployments",
-	Code: 201})
-
-var DeleteComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 201}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/greengrass/v2/components/{arn}",
-	Code: 204})
-
-var DeleteCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}",
-	Code: 204})
-
-var DeleteDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/greengrass/v2/deployments/{deploymentId}",
-	Code: 204})
-
-var DescribeComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescribeComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 204}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/components/{arn}/metadata",
-	Code: 200})
-
-var DisassociateServiceRoleFromAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateServiceRoleFromAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/greengrass/servicerole",
-	Code: 200})
-
-var GetComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/components/{arn}",
-	Code: 200})
-
-var GetComponentVersionArtifact = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentVersionArtifact",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/components/{arn}/artifacts/{artifactName+}",
-	Code: 200})
-
-var GetConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetConnectivityInfo",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/things/{thingName}/connectivityInfo",
-	Code: 200})
-
-var GetCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}",
-	Code: 200})
-
-var GetDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetDeployment",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/deployments/{deploymentId}",
-	Code: 200})
-
-var GetServiceRoleForAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetServiceRoleForAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/servicerole",
-	Code: 200})
-
-var ListClientDevicesAssociatedWithCoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListClientDevicesAssociatedWithCoreDevice",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/associatedClientDevices",
-	Code: 200})
-
-var ListComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/components",
-	Code: 200})
-
-var ListComponentVersions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentVersions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/components/{arn}/versions",
-	Code: 200})
-
-var ListCoreDevices = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListCoreDevices",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/coreDevices",
-	Code: 200})
-
-var ListDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/deployments",
-	Code: 200})
-
-var ListEffectiveDeployments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListEffectiveDeployments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/effectiveDeployments",
-	Code: 200})
-
-var ListInstalledComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListInstalledComponents",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/greengrass/v2/coreDevices/{coreDeviceThingName}/installedComponents",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ResolveComponentCandidates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolveComponentCandidates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/greengrass/v2/resolveComponentCandidates",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UpdateConnectivityInfo",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/greengrass/things/{thingName}/connectivityInfo",
-	Code: 200})
-
-var _GreengrassV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GreengrassV2",
-}, smithy.ShapeTypeService, 0)
-
-var GreengrassV2 = smithy.NewServiceSchema(_GreengrassV2, "2020-11-30")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceEntry",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateClientDeviceWithCoreDeviceEntry_thingName *smithy.Schema
-
-var _AssociateClientDeviceWithCoreDeviceEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceEntryList",
-}, smithy.ShapeTypeList, 1)
-var _AssociateClientDeviceWithCoreDeviceEntryList_member *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceErrorEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceErrorEntry",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateClientDeviceWithCoreDeviceErrorEntry_thingName *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceErrorEntry_code *smithy.Schema
-
-var AssociateClientDeviceWithCoreDeviceErrorEntry_message *smithy.Schema
-
-var _AssociateClientDeviceWithCoreDeviceErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateClientDeviceWithCoreDeviceErrorList",
-}, smithy.ShapeTypeList, 1)
-var _AssociateClientDeviceWithCoreDeviceErrorList_member *smithy.Schema
-
-var AssociatedClientDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociatedClientDevice",
-}, smithy.ShapeTypeStructure, 2)
-var AssociatedClientDevice_thingName *smithy.Schema
-
-var AssociatedClientDevice_associationTimestamp *smithy.Schema
-
-var _AssociatedClientDeviceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociatedClientDeviceList",
-}, smithy.ShapeTypeList, 1)
-var _AssociatedClientDeviceList_member *smithy.Schema
-
-var _ClientTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ClientTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var CloudComponentState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CloudComponentState",
-}, smithy.ShapeTypeEnum, 5)
-var CloudComponentState_REQUESTED *smithy.Schema
-
-var CloudComponentState_INITIATED *smithy.Schema
-
-var CloudComponentState_DEPLOYABLE *smithy.Schema
-
-var CloudComponentState_FAILED *smithy.Schema
-
-var CloudComponentState_DEPRECATED *smithy.Schema
-
-var CloudComponentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CloudComponentStatus",
-}, smithy.ShapeTypeStructure, 5)
-var CloudComponentStatus_componentState *smithy.Schema
-
-var CloudComponentStatus_message *smithy.Schema
-
-var CloudComponentStatus_errors *smithy.Schema
-
-var CloudComponentStatus_vendorGuidance *smithy.Schema
-
-var CloudComponentStatus_vendorGuidanceMessage *smithy.Schema
-
-var Component = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Component",
-}, smithy.ShapeTypeStructure, 3)
-var Component_arn *smithy.Schema
-
-var Component_componentName *smithy.Schema
-
-var Component_latestVersion *smithy.Schema
-
-var _ComponentARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentARN",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentCandidate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentCandidate",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentCandidate_componentName *smithy.Schema
-
-var ComponentCandidate_componentVersion *smithy.Schema
-
-var ComponentCandidate_versionRequirements *smithy.Schema
-
-var _ComponentCandidateList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentCandidateList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentCandidateList_member *smithy.Schema
-
-var _ComponentConfigurationPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationPath",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentConfigurationPathList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationPathList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentConfigurationPathList_member *smithy.Schema
-
-var _ComponentConfigurationString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationString",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentConfigurationUpdate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentConfigurationUpdate",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentConfigurationUpdate_merge *smithy.Schema
-
-var ComponentConfigurationUpdate_reset *smithy.Schema
-
-var _ComponentDependencyMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDependencyMap",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentDependencyMap_key *smithy.Schema
-
-var _ComponentDependencyMap_value *smithy.Schema
-
-var ComponentDependencyRequirement = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDependencyRequirement",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentDependencyRequirement_versionRequirement *smithy.Schema
-
-var ComponentDependencyRequirement_dependencyType *smithy.Schema
-
-var ComponentDependencyType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDependencyType",
-}, smithy.ShapeTypeEnum, 2)
-var ComponentDependencyType_HARD *smithy.Schema
-
-var ComponentDependencyType_SOFT *smithy.Schema
-
-var ComponentDeploymentSpecification = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDeploymentSpecification",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentDeploymentSpecification_componentVersion *smithy.Schema
-
-var ComponentDeploymentSpecification_configurationUpdate *smithy.Schema
-
-var ComponentDeploymentSpecification_runWith *smithy.Schema
-
-var _ComponentDeploymentSpecifications = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentDeploymentSpecifications",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentDeploymentSpecifications_key *smithy.Schema
-
-var _ComponentDeploymentSpecifications_value *smithy.Schema
-
-var ComponentLatestVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentLatestVersion",
-}, smithy.ShapeTypeStructure, 6)
-var ComponentLatestVersion_arn *smithy.Schema
-
-var ComponentLatestVersion_componentVersion *smithy.Schema
-
-var ComponentLatestVersion_creationTimestamp *smithy.Schema
-
-var ComponentLatestVersion_description *smithy.Schema
-
-var ComponentLatestVersion_publisher *smithy.Schema
-
-var ComponentLatestVersion_platforms *smithy.Schema
-
-var _ComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentList_member *smithy.Schema
-
-var _ComponentNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentNameString",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentPlatform = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentPlatform",
-}, smithy.ShapeTypeStructure, 2)
-var ComponentPlatform_name *smithy.Schema
-
-var ComponentPlatform_attributes *smithy.Schema
-
-var _ComponentPlatformList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentPlatformList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentPlatformList_member *smithy.Schema
-
-var ComponentRunWith = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentRunWith",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentRunWith_posixUser *smithy.Schema
-
-var ComponentRunWith_systemResourceLimits *smithy.Schema
-
-var ComponentRunWith_windowsUser *smithy.Schema
-
-var _ComponentVersionARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ComponentVersionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionList",
-}, smithy.ShapeTypeList, 1)
-var _ComponentVersionList_member *smithy.Schema
-
-var ComponentVersionListItem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionListItem",
-}, smithy.ShapeTypeStructure, 3)
-var ComponentVersionListItem_componentName *smithy.Schema
-
-var ComponentVersionListItem_componentVersion *smithy.Schema
-
-var ComponentVersionListItem_arn *smithy.Schema
-
-var _ComponentVersionRequirementMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionRequirementMap",
-}, smithy.ShapeTypeMap, 2)
-var _ComponentVersionRequirementMap_key *smithy.Schema
-
-var _ComponentVersionRequirementMap_value *smithy.Schema
-
-var _ComponentVersionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVersionString",
-}, smithy.ShapeTypeString, 0)
-
-var ComponentVisibilityScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ComponentVisibilityScope",
-}, smithy.ShapeTypeEnum, 2)
-var ComponentVisibilityScope_PRIVATE *smithy.Schema
-
-var ComponentVisibilityScope_PUBLIC *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var ConnectivityInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ConnectivityInfo",
-}, smithy.ShapeTypeStructure, 4)
-var ConnectivityInfo_id *smithy.Schema
-
-var ConnectivityInfo_hostAddress *smithy.Schema
-
-var ConnectivityInfo_portNumber *smithy.Schema
-
-var ConnectivityInfo_metadata *smithy.Schema
-
-var _connectivityInfoList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "connectivityInfoList",
-}, smithy.ShapeTypeList, 1)
-var _connectivityInfoList_member *smithy.Schema
-
-var CoreDevice = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDevice",
-}, smithy.ShapeTypeStructure, 6)
-var CoreDevice_coreDeviceThingName *smithy.Schema
-
-var CoreDevice_status *smithy.Schema
-
-var CoreDevice_lastStatusUpdateTimestamp *smithy.Schema
-
-var CoreDevice_platform *smithy.Schema
-
-var CoreDevice_architecture *smithy.Schema
-
-var CoreDevice_runtime *smithy.Schema
-
-var _CoreDeviceArchitectureString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceArchitectureString",
-}, smithy.ShapeTypeString, 0)
-
-var _CoreDevicePlatformString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDevicePlatformString",
-}, smithy.ShapeTypeString, 0)
-
-var _CoreDeviceRuntimeString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceRuntimeString",
-}, smithy.ShapeTypeString, 0)
-
-var _CoreDevicesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDevicesList",
-}, smithy.ShapeTypeList, 1)
-var _CoreDevicesList_member *smithy.Schema
-
-var CoreDeviceStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceStatus",
-}, smithy.ShapeTypeEnum, 2)
-var CoreDeviceStatus_HEALTHY *smithy.Schema
-
-var CoreDeviceStatus_UNHEALTHY *smithy.Schema
-
-var _CoreDeviceThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CoreDeviceThingName",
-}, smithy.ShapeTypeString, 0)
-
-var _CPU = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CPU",
-}, smithy.ShapeTypeDouble, 0)
-
-var _DefaultMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DefaultMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var Deployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Deployment",
-}, smithy.ShapeTypeStructure, 8)
-var Deployment_targetArn *smithy.Schema
-
-var Deployment_revisionId *smithy.Schema
-
-var Deployment_deploymentId *smithy.Schema
-
-var Deployment_deploymentName *smithy.Schema
-
-var Deployment_creationTimestamp *smithy.Schema
-
-var Deployment_deploymentStatus *smithy.Schema
-
-var Deployment_isLatestForTarget *smithy.Schema
-
-var Deployment_parentTargetArn *smithy.Schema
-
-var DeploymentComponentUpdatePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentComponentUpdatePolicy",
-}, smithy.ShapeTypeStructure, 2)
-var DeploymentComponentUpdatePolicy_timeoutInSeconds *smithy.Schema
-
-var DeploymentComponentUpdatePolicy_action *smithy.Schema
-
-var DeploymentComponentUpdatePolicyAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentComponentUpdatePolicyAction",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS *smithy.Schema
-
-var DeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS *smithy.Schema
-
-var DeploymentConfigurationValidationPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentConfigurationValidationPolicy",
-}, smithy.ShapeTypeStructure, 1)
-var DeploymentConfigurationValidationPolicy_timeoutInSeconds *smithy.Schema
-
-var DeploymentFailureHandlingPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentFailureHandlingPolicy",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentFailureHandlingPolicy_ROLLBACK *smithy.Schema
-
-var DeploymentFailureHandlingPolicy_DO_NOTHING *smithy.Schema
-
-var DeploymentHistoryFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentHistoryFilter",
-}, smithy.ShapeTypeEnum, 2)
-var DeploymentHistoryFilter_ALL *smithy.Schema
-
-var DeploymentHistoryFilter_LATEST_ONLY *smithy.Schema
-
-var _DeploymentID = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentID",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentIoTJobConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentIoTJobConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig *smithy.Schema
-
-var DeploymentIoTJobConfiguration_abortConfig *smithy.Schema
-
-var DeploymentIoTJobConfiguration_timeoutConfig *smithy.Schema
-
-var _DeploymentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentList",
-}, smithy.ShapeTypeList, 1)
-var _DeploymentList_member *smithy.Schema
-
-var _DeploymentName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentName",
-}, smithy.ShapeTypeString, 0)
-
-var _DeploymentNameString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentNameString",
-}, smithy.ShapeTypeString, 0)
-
-var DeploymentPolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentPolicies",
-}, smithy.ShapeTypeStructure, 3)
-var DeploymentPolicies_failureHandlingPolicy *smithy.Schema
-
-var DeploymentPolicies_componentUpdatePolicy *smithy.Schema
-
-var DeploymentPolicies_configurationValidationPolicy *smithy.Schema
-
-var DeploymentStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeploymentStatus",
-}, smithy.ShapeTypeEnum, 5)
-var DeploymentStatus_ACTIVE *smithy.Schema
-
-var DeploymentStatus_COMPLETED *smithy.Schema
-
-var DeploymentStatus_CANCELED *smithy.Schema
-
-var DeploymentStatus_FAILED *smithy.Schema
-
-var DeploymentStatus_INACTIVE *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DescriptionString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescriptionString",
-}, smithy.ShapeTypeString, 0)
-
-var DisassociateClientDeviceFromCoreDeviceEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceEntry",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateClientDeviceFromCoreDeviceEntry_thingName *smithy.Schema
-
-var _DisassociateClientDeviceFromCoreDeviceEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceEntryList",
-}, smithy.ShapeTypeList, 1)
-var _DisassociateClientDeviceFromCoreDeviceEntryList_member *smithy.Schema
-
-var DisassociateClientDeviceFromCoreDeviceErrorEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceErrorEntry",
-}, smithy.ShapeTypeStructure, 3)
-var DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName *smithy.Schema
-
-var DisassociateClientDeviceFromCoreDeviceErrorEntry_code *smithy.Schema
-
-var DisassociateClientDeviceFromCoreDeviceErrorEntry_message *smithy.Schema
-
-var _DisassociateClientDeviceFromCoreDeviceErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateClientDeviceFromCoreDeviceErrorList",
-}, smithy.ShapeTypeList, 1)
-var _DisassociateClientDeviceFromCoreDeviceErrorList_member *smithy.Schema
-
-var EffectiveDeployment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeployment",
-}, smithy.ShapeTypeStructure, 11)
-var EffectiveDeployment_deploymentId *smithy.Schema
-
-var EffectiveDeployment_deploymentName *smithy.Schema
-
-var EffectiveDeployment_iotJobId *smithy.Schema
-
-var EffectiveDeployment_iotJobArn *smithy.Schema
-
-var EffectiveDeployment_description *smithy.Schema
-
-var EffectiveDeployment_targetArn *smithy.Schema
-
-var EffectiveDeployment_coreDeviceExecutionStatus *smithy.Schema
-
-var EffectiveDeployment_reason *smithy.Schema
-
-var EffectiveDeployment_creationTimestamp *smithy.Schema
-
-var EffectiveDeployment_modifiedTimestamp *smithy.Schema
-
-var EffectiveDeployment_statusDetails *smithy.Schema
-
-var _EffectiveDeploymentErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _EffectiveDeploymentErrorStack = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorStack",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveDeploymentErrorStack_member *smithy.Schema
-
-var _EffectiveDeploymentErrorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorType",
-}, smithy.ShapeTypeString, 0)
-
-var _EffectiveDeploymentErrorTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentErrorTypeList",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveDeploymentErrorTypeList_member *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentExecutionStatus",
-}, smithy.ShapeTypeEnum, 8)
-var EffectiveDeploymentExecutionStatus_IN_PROGRESS *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_QUEUED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_FAILED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_COMPLETED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_TIMED_OUT *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_CANCELED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_REJECTED *smithy.Schema
-
-var EffectiveDeploymentExecutionStatus_SUCCEEDED *smithy.Schema
-
-var _EffectiveDeploymentsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentsList",
-}, smithy.ShapeTypeList, 1)
-var _EffectiveDeploymentsList_member *smithy.Schema
-
-var EffectiveDeploymentStatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "EffectiveDeploymentStatusDetails",
-}, smithy.ShapeTypeStructure, 2)
-var EffectiveDeploymentStatusDetails_errorStack *smithy.Schema
-
-var EffectiveDeploymentStatusDetails_errorTypes *smithy.Schema
-
-var _FileSystemPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "FileSystemPath",
-}, smithy.ShapeTypeString, 0)
-
-var _GenericV2ARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GenericV2ARN",
-}, smithy.ShapeTypeString, 0)
-
-var _GGCVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GGCVersion",
-}, smithy.ShapeTypeString, 0)
-
-var InstalledComponent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponent",
-}, smithy.ShapeTypeStructure, 9)
-var InstalledComponent_componentName *smithy.Schema
-
-var InstalledComponent_componentVersion *smithy.Schema
-
-var InstalledComponent_lifecycleState *smithy.Schema
-
-var InstalledComponent_lifecycleStateDetails *smithy.Schema
-
-var InstalledComponent_isRoot *smithy.Schema
-
-var InstalledComponent_lastStatusChangeTimestamp *smithy.Schema
-
-var InstalledComponent_lastReportedTimestamp *smithy.Schema
-
-var InstalledComponent_lastInstallationSource *smithy.Schema
-
-var InstalledComponent_lifecycleStatusCodes *smithy.Schema
-
-var InstalledComponentLifecycleState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentLifecycleState",
-}, smithy.ShapeTypeEnum, 8)
-var InstalledComponentLifecycleState_NEW *smithy.Schema
-
-var InstalledComponentLifecycleState_INSTALLED *smithy.Schema
-
-var InstalledComponentLifecycleState_STARTING *smithy.Schema
-
-var InstalledComponentLifecycleState_RUNNING *smithy.Schema
-
-var InstalledComponentLifecycleState_STOPPING *smithy.Schema
-
-var InstalledComponentLifecycleState_ERRORED *smithy.Schema
-
-var InstalledComponentLifecycleState_BROKEN *smithy.Schema
-
-var InstalledComponentLifecycleState_FINISHED *smithy.Schema
-
-var _InstalledComponentLifecycleStatusCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentLifecycleStatusCode",
-}, smithy.ShapeTypeString, 0)
-
-var _InstalledComponentLifecycleStatusCodeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentLifecycleStatusCodeList",
-}, smithy.ShapeTypeList, 1)
-var _InstalledComponentLifecycleStatusCodeList_member *smithy.Schema
-
-var _InstalledComponentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentList",
-}, smithy.ShapeTypeList, 1)
-var _InstalledComponentList_member *smithy.Schema
-
-var InstalledComponentTopologyFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InstalledComponentTopologyFilter",
-}, smithy.ShapeTypeEnum, 2)
-var InstalledComponentTopologyFilter_ALL *smithy.Schema
-
-var InstalledComponentTopologyFilter_ROOT *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var InternalServerException_retryAfterSeconds *smithy.Schema
-
-var IotEndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IotEndpointType",
-}, smithy.ShapeTypeEnum, 2)
-var IotEndpointType_fips *smithy.Schema
-
-var IotEndpointType_standard *smithy.Schema
-
-var IoTJobAbortAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortAction",
-}, smithy.ShapeTypeEnum, 1)
-var IoTJobAbortAction_CANCEL *smithy.Schema
-
-var IoTJobAbortConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortConfig",
-}, smithy.ShapeTypeStructure, 1)
-var IoTJobAbortConfig_criteriaList *smithy.Schema
-
-var IoTJobAbortCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortCriteria",
-}, smithy.ShapeTypeStructure, 4)
-var IoTJobAbortCriteria_failureType *smithy.Schema
-
-var IoTJobAbortCriteria_action *smithy.Schema
-
-var IoTJobAbortCriteria_thresholdPercentage *smithy.Schema
-
-var IoTJobAbortCriteria_minNumberOfExecutedThings *smithy.Schema
-
-var _IoTJobAbortCriteriaList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortCriteriaList",
-}, smithy.ShapeTypeList, 1)
-var _IoTJobAbortCriteriaList_member *smithy.Schema
-
-var _IoTJobAbortThresholdPercentage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobAbortThresholdPercentage",
-}, smithy.ShapeTypeDouble, 0)
-
-var _IoTJobARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobARN",
-}, smithy.ShapeTypeString, 0)
-
-var IoTJobExecutionFailureType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobExecutionFailureType",
-}, smithy.ShapeTypeEnum, 4)
-var IoTJobExecutionFailureType_FAILED *smithy.Schema
-
-var IoTJobExecutionFailureType_REJECTED *smithy.Schema
-
-var IoTJobExecutionFailureType_TIMED_OUT *smithy.Schema
-
-var IoTJobExecutionFailureType_ALL *smithy.Schema
-
-var IoTJobExecutionsRolloutConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobExecutionsRolloutConfig",
-}, smithy.ShapeTypeStructure, 2)
-var IoTJobExecutionsRolloutConfig_exponentialRate *smithy.Schema
-
-var IoTJobExecutionsRolloutConfig_maximumPerMinute *smithy.Schema
-
-var IoTJobExponentialRolloutRate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobExponentialRolloutRate",
-}, smithy.ShapeTypeStructure, 3)
-var IoTJobExponentialRolloutRate_baseRatePerMinute *smithy.Schema
-
-var IoTJobExponentialRolloutRate_incrementFactor *smithy.Schema
-
-var IoTJobExponentialRolloutRate_rateIncreaseCriteria *smithy.Schema
-
-var _IoTJobId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobId",
-}, smithy.ShapeTypeString, 0)
-
-var _IoTJobInProgressTimeoutInMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobInProgressTimeoutInMinutes",
-}, smithy.ShapeTypeLong, 0)
-
-var _IoTJobMaxExecutionsPerMin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobMaxExecutionsPerMin",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IoTJobMinimumNumberOfExecutedThings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobMinimumNumberOfExecutedThings",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IoTJobNumberOfThings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobNumberOfThings",
-}, smithy.ShapeTypeInteger, 0)
-
-var IoTJobRateIncreaseCriteria = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobRateIncreaseCriteria",
-}, smithy.ShapeTypeStructure, 2)
-var IoTJobRateIncreaseCriteria_numberOfNotifiedThings *smithy.Schema
-
-var IoTJobRateIncreaseCriteria_numberOfSucceededThings *smithy.Schema
-
-var _IoTJobRolloutBaseRatePerMinute = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobRolloutBaseRatePerMinute",
-}, smithy.ShapeTypeInteger, 0)
-
-var _IoTJobRolloutIncrementFactor = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobRolloutIncrementFactor",
-}, smithy.ShapeTypeDouble, 0)
-
-var IoTJobTimeoutConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTJobTimeoutConfig",
-}, smithy.ShapeTypeStructure, 1)
-var IoTJobTimeoutConfig_inProgressTimeoutInMinutes *smithy.Schema
-
-var _IoTThingName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IoTThingName",
-}, smithy.ShapeTypeString, 0)
-
-var _IsLatestForTarget = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IsLatestForTarget",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _IsRoot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "IsRoot",
-}, smithy.ShapeTypeBoolean, 0)
-
-var LambdaContainerParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaContainerParams",
-}, smithy.ShapeTypeStructure, 4)
-var LambdaContainerParams_memorySizeInKB *smithy.Schema
-
-var LambdaContainerParams_mountROSysfs *smithy.Schema
-
-var LambdaContainerParams_volumes *smithy.Schema
-
-var LambdaContainerParams_devices *smithy.Schema
-
-var _LambdaDeviceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaDeviceList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaDeviceList_member *smithy.Schema
-
-var LambdaDeviceMount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaDeviceMount",
-}, smithy.ShapeTypeStructure, 3)
-var LambdaDeviceMount_path *smithy.Schema
-
-var LambdaDeviceMount_permission *smithy.Schema
-
-var LambdaDeviceMount_addGroupOwner *smithy.Schema
-
-var _LambdaEnvironmentVariables = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEnvironmentVariables",
-}, smithy.ShapeTypeMap, 2)
-var _LambdaEnvironmentVariables_key *smithy.Schema
-
-var _LambdaEnvironmentVariables_value *smithy.Schema
-
-var LambdaEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEventSource",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaEventSource_topic *smithy.Schema
-
-var LambdaEventSource_type *smithy.Schema
-
-var _LambdaEventSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEventSourceList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaEventSourceList_member *smithy.Schema
-
-var LambdaEventSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaEventSourceType",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaEventSourceType_PUB_SUB *smithy.Schema
-
-var LambdaEventSourceType_IOT_CORE *smithy.Schema
-
-var _LambdaExecArg = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaExecArg",
-}, smithy.ShapeTypeString, 0)
-
-var _LambdaExecArgsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaExecArgsList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaExecArgsList_member *smithy.Schema
-
-var LambdaExecutionParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaExecutionParameters",
-}, smithy.ShapeTypeStructure, 11)
-var LambdaExecutionParameters_eventSources *smithy.Schema
-
-var LambdaExecutionParameters_maxQueueSize *smithy.Schema
-
-var LambdaExecutionParameters_maxInstancesCount *smithy.Schema
-
-var LambdaExecutionParameters_maxIdleTimeInSeconds *smithy.Schema
-
-var LambdaExecutionParameters_timeoutInSeconds *smithy.Schema
-
-var LambdaExecutionParameters_statusTimeoutInSeconds *smithy.Schema
-
-var LambdaExecutionParameters_pinned *smithy.Schema
-
-var LambdaExecutionParameters_inputPayloadEncodingType *smithy.Schema
-
-var LambdaExecutionParameters_execArgs *smithy.Schema
-
-var LambdaExecutionParameters_environmentVariables *smithy.Schema
-
-var LambdaExecutionParameters_linuxProcessParams *smithy.Schema
-
-var LambdaFilesystemPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaFilesystemPermission",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaFilesystemPermission_RO *smithy.Schema
-
-var LambdaFilesystemPermission_RW *smithy.Schema
-
-var LambdaFunctionRecipeSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaFunctionRecipeSource",
-}, smithy.ShapeTypeStructure, 6)
-var LambdaFunctionRecipeSource_lambdaArn *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentName *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentVersion *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentPlatforms *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentDependencies *smithy.Schema
-
-var LambdaFunctionRecipeSource_componentLambdaParameters *smithy.Schema
-
-var LambdaInputPayloadEncodingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaInputPayloadEncodingType",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaInputPayloadEncodingType_JSON *smithy.Schema
-
-var LambdaInputPayloadEncodingType_BINARY *smithy.Schema
-
-var LambdaIsolationMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaIsolationMode",
-}, smithy.ShapeTypeEnum, 2)
-var LambdaIsolationMode_GREENGRASS_CONTAINER *smithy.Schema
-
-var LambdaIsolationMode_NO_CONTAINER *smithy.Schema
-
-var LambdaLinuxProcessParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaLinuxProcessParams",
-}, smithy.ShapeTypeStructure, 2)
-var LambdaLinuxProcessParams_isolationMode *smithy.Schema
-
-var LambdaLinuxProcessParams_containerParams *smithy.Schema
-
-var _LambdaVolumeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaVolumeList",
-}, smithy.ShapeTypeList, 1)
-var _LambdaVolumeList_member *smithy.Schema
-
-var LambdaVolumeMount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LambdaVolumeMount",
-}, smithy.ShapeTypeStructure, 4)
-var LambdaVolumeMount_sourcePath *smithy.Schema
-
-var LambdaVolumeMount_destinationPath *smithy.Schema
-
-var LambdaVolumeMount_permission *smithy.Schema
-
-var LambdaVolumeMount_addGroupOwner *smithy.Schema
-
-var _LifecycleStateDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "LifecycleStateDetails",
-}, smithy.ShapeTypeString, 0)
-
-var _Memory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Memory",
-}, smithy.ShapeTypeLong, 0)
-
-var _NextTokenString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "NextTokenString",
-}, smithy.ShapeTypeString, 0)
-
-var _NonEmptyString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "NonEmptyString",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "NullableString",
-}, smithy.ShapeTypeString, 0)
-
-var _OptionalBoolean = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "OptionalBoolean",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _OptionalInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "OptionalInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PlatformAttributesMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "PlatformAttributesMap",
-}, smithy.ShapeTypeMap, 2)
-var _PlatformAttributesMap_key *smithy.Schema
-
-var _PlatformAttributesMap_value *smithy.Schema
-
-var _PortNumberInt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "PortNumberInt",
-}, smithy.ShapeTypeInteger, 0)
-
-var _PublisherString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "PublisherString",
-}, smithy.ShapeTypeString, 0)
-
-var _Reason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Reason",
-}, smithy.ShapeTypeString, 0)
-
-var _RecipeBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RecipeBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var RecipeOutputFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RecipeOutputFormat",
-}, smithy.ShapeTypeEnum, 2)
-var RecipeOutputFormat_JSON *smithy.Schema
-
-var RecipeOutputFormat_YAML *smithy.Schema
-
-var RequestAlreadyInProgressException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RequestAlreadyInProgressException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var RequestAlreadyInProgressException_message *smithy.Schema
-
-var ResolvedComponentVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolvedComponentVersion",
-}, smithy.ShapeTypeStructure, 6)
-var ResolvedComponentVersion_arn *smithy.Schema
-
-var ResolvedComponentVersion_componentName *smithy.Schema
-
-var ResolvedComponentVersion_componentVersion *smithy.Schema
-
-var ResolvedComponentVersion_recipe *smithy.Schema
-
-var ResolvedComponentVersion_vendorGuidance *smithy.Schema
-
-var ResolvedComponentVersion_message *smithy.Schema
-
-var _ResolvedComponentVersionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolvedComponentVersionsList",
-}, smithy.ShapeTypeList, 1)
-var _ResolvedComponentVersionsList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var _RetryAfterSeconds = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "RetryAfterSeconds",
-}, smithy.ShapeTypeInteger, 0)
-
-var S3EndpointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "S3EndpointType",
-}, smithy.ShapeTypeEnum, 2)
-var S3EndpointType_REGIONAL *smithy.Schema
-
-var S3EndpointType_GLOBAL *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var ServiceQuotaExceededException_resourceId *smithy.Schema
-
-var ServiceQuotaExceededException_resourceType *smithy.Schema
-
-var ServiceQuotaExceededException_quotaCode *smithy.Schema
-
-var ServiceQuotaExceededException_serviceCode *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _StringMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "StringMap",
-}, smithy.ShapeTypeMap, 2)
-var _StringMap_key *smithy.Schema
-
-var _StringMap_value *smithy.Schema
-
-var SystemResourceLimits = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "SystemResourceLimits",
-}, smithy.ShapeTypeStructure, 2)
-var SystemResourceLimits_memory *smithy.Schema
-
-var SystemResourceLimits_cpus *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TargetARN",
-}, smithy.ShapeTypeString, 0)
-
-var _ThingGroupARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ThingGroupARN",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _TopicString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TopicString",
-}, smithy.ShapeTypeString, 0)
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fields *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeEnum, 4)
-var ValidationExceptionReason_UNKNOWN_OPERATION *smithy.Schema
-
-var ValidationExceptionReason_CANNOT_PARSE *smithy.Schema
-
-var ValidationExceptionReason_FIELD_VALIDATION_FAILED *smithy.Schema
-
-var ValidationExceptionReason_OTHER *smithy.Schema
-
-var VendorGuidance = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "VendorGuidance",
-}, smithy.ShapeTypeEnum, 3)
-var VendorGuidance_ACTIVE *smithy.Schema
-
-var VendorGuidance_DISCONTINUED *smithy.Schema
-
-var VendorGuidance_DELETED *smithy.Schema
-
-var AssociateServiceRoleToAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateServiceRoleToAccountRequest",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateServiceRoleToAccountRequest_roleArn *smithy.Schema
-
-var AssociateServiceRoleToAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "AssociateServiceRoleToAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var AssociateServiceRoleToAccountResponse_associatedAt *smithy.Schema
-
-var BatchAssociateClientDeviceWithCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchAssociateClientDeviceWithCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchAssociateClientDeviceWithCoreDeviceRequest_entries *smithy.Schema
-
-var BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var BatchAssociateClientDeviceWithCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchAssociateClientDeviceWithCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries *smithy.Schema
-
-var BatchDisassociateClientDeviceFromCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchDisassociateClientDeviceFromCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var BatchDisassociateClientDeviceFromCoreDeviceRequest_entries *smithy.Schema
-
-var BatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var BatchDisassociateClientDeviceFromCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "BatchDisassociateClientDeviceFromCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries *smithy.Schema
-
-var CancelDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CancelDeploymentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var CancelDeploymentRequest_deploymentId *smithy.Schema
-
-var CancelDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CancelDeploymentResponse",
-}, smithy.ShapeTypeStructure, 1)
-var CancelDeploymentResponse_message *smithy.Schema
-
-var CreateComponentVersionRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateComponentVersionRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateComponentVersionRequest_inlineRecipe *smithy.Schema
-
-var CreateComponentVersionRequest_lambdaFunction *smithy.Schema
-
-var CreateComponentVersionRequest_tags *smithy.Schema
-
-var CreateComponentVersionRequest_clientToken *smithy.Schema
-
-var CreateComponentVersionResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateComponentVersionResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateComponentVersionResponse_arn *smithy.Schema
-
-var CreateComponentVersionResponse_componentName *smithy.Schema
-
-var CreateComponentVersionResponse_componentVersion *smithy.Schema
-
-var CreateComponentVersionResponse_creationTimestamp *smithy.Schema
-
-var CreateComponentVersionResponse_status *smithy.Schema
-
-var CreateDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateDeploymentRequest",
-}, smithy.ShapeTypeStructure, 8)
-var CreateDeploymentRequest_targetArn *smithy.Schema
-
-var CreateDeploymentRequest_deploymentName *smithy.Schema
-
-var CreateDeploymentRequest_components *smithy.Schema
-
-var CreateDeploymentRequest_iotJobConfiguration *smithy.Schema
-
-var CreateDeploymentRequest_deploymentPolicies *smithy.Schema
-
-var CreateDeploymentRequest_parentTargetArn *smithy.Schema
-
-var CreateDeploymentRequest_tags *smithy.Schema
-
-var CreateDeploymentRequest_clientToken *smithy.Schema
-
-var CreateDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "CreateDeploymentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var CreateDeploymentResponse_deploymentId *smithy.Schema
-
-var CreateDeploymentResponse_iotJobId *smithy.Schema
-
-var CreateDeploymentResponse_iotJobArn *smithy.Schema
-
-var DeleteComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteComponentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteComponentRequest_arn *smithy.Schema
-
-var DeleteCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var DeleteDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DeleteDeploymentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteDeploymentRequest_deploymentId *smithy.Schema
-
-var DescribeComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescribeComponentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeComponentRequest_arn *smithy.Schema
-
-var DescribeComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DescribeComponentResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeComponentResponse_arn *smithy.Schema
-
-var DescribeComponentResponse_componentName *smithy.Schema
-
-var DescribeComponentResponse_componentVersion *smithy.Schema
-
-var DescribeComponentResponse_creationTimestamp *smithy.Schema
-
-var DescribeComponentResponse_publisher *smithy.Schema
-
-var DescribeComponentResponse_description *smithy.Schema
-
-var DescribeComponentResponse_status *smithy.Schema
-
-var DescribeComponentResponse_platforms *smithy.Schema
-
-var DescribeComponentResponse_tags *smithy.Schema
-
-var DisassociateServiceRoleFromAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateServiceRoleFromAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateServiceRoleFromAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "DisassociateServiceRoleFromAccountResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateServiceRoleFromAccountResponse_disassociatedAt *smithy.Schema
-
-var GetComponentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetComponentRequest_recipeOutputFormat *smithy.Schema
-
-var GetComponentRequest_arn *smithy.Schema
-
-var GetComponentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetComponentResponse_recipeOutputFormat *smithy.Schema
-
-var GetComponentResponse_recipe *smithy.Schema
-
-var GetComponentResponse_tags *smithy.Schema
-
-var GetComponentVersionArtifactRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentVersionArtifactRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetComponentVersionArtifactRequest_arn *smithy.Schema
-
-var GetComponentVersionArtifactRequest_artifactName *smithy.Schema
-
-var GetComponentVersionArtifactRequest_s3EndpointType *smithy.Schema
-
-var GetComponentVersionArtifactRequest_iotEndpointType *smithy.Schema
-
-var GetComponentVersionArtifactResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetComponentVersionArtifactResponse",
-}, smithy.ShapeTypeStructure, 1)
-var GetComponentVersionArtifactResponse_preSignedUrl *smithy.Schema
-
-var GetConnectivityInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetConnectivityInfoRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetConnectivityInfoRequest_thingName *smithy.Schema
-
-var GetConnectivityInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetConnectivityInfoResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetConnectivityInfoResponse_connectivityInfo *smithy.Schema
-
-var GetConnectivityInfoResponse_message *smithy.Schema
-
-var GetCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var GetCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetCoreDeviceResponse_coreDeviceThingName *smithy.Schema
-
-var GetCoreDeviceResponse_coreVersion *smithy.Schema
-
-var GetCoreDeviceResponse_platform *smithy.Schema
-
-var GetCoreDeviceResponse_architecture *smithy.Schema
-
-var GetCoreDeviceResponse_runtime *smithy.Schema
-
-var GetCoreDeviceResponse_status *smithy.Schema
-
-var GetCoreDeviceResponse_lastStatusUpdateTimestamp *smithy.Schema
-
-var GetCoreDeviceResponse_tags *smithy.Schema
-
-var GetDeploymentRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetDeploymentRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetDeploymentRequest_deploymentId *smithy.Schema
-
-var GetDeploymentResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetDeploymentResponse",
-}, smithy.ShapeTypeStructure, 14)
-var GetDeploymentResponse_targetArn *smithy.Schema
-
-var GetDeploymentResponse_revisionId *smithy.Schema
-
-var GetDeploymentResponse_deploymentId *smithy.Schema
-
-var GetDeploymentResponse_deploymentName *smithy.Schema
-
-var GetDeploymentResponse_deploymentStatus *smithy.Schema
-
-var GetDeploymentResponse_iotJobId *smithy.Schema
-
-var GetDeploymentResponse_iotJobArn *smithy.Schema
-
-var GetDeploymentResponse_components *smithy.Schema
-
-var GetDeploymentResponse_deploymentPolicies *smithy.Schema
-
-var GetDeploymentResponse_iotJobConfiguration *smithy.Schema
-
-var GetDeploymentResponse_creationTimestamp *smithy.Schema
-
-var GetDeploymentResponse_isLatestForTarget *smithy.Schema
-
-var GetDeploymentResponse_parentTargetArn *smithy.Schema
-
-var GetDeploymentResponse_tags *smithy.Schema
-
-var GetServiceRoleForAccountRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetServiceRoleForAccountRequest",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetServiceRoleForAccountResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "GetServiceRoleForAccountResponse",
-}, smithy.ShapeTypeStructure, 2)
-var GetServiceRoleForAccountResponse_associatedAt *smithy.Schema
-
-var GetServiceRoleForAccountResponse_roleArn *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListClientDevicesAssociatedWithCoreDeviceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceRequest_maxResults *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceRequest_nextToken *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListClientDevicesAssociatedWithCoreDeviceResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices *smithy.Schema
-
-var ListClientDevicesAssociatedWithCoreDeviceResponse_nextToken *smithy.Schema
-
-var ListComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListComponentsRequest_scope *smithy.Schema
-
-var ListComponentsRequest_maxResults *smithy.Schema
-
-var ListComponentsRequest_nextToken *smithy.Schema
-
-var ListComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentsResponse_components *smithy.Schema
-
-var ListComponentsResponse_nextToken *smithy.Schema
-
-var ListComponentVersionsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentVersionsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListComponentVersionsRequest_arn *smithy.Schema
-
-var ListComponentVersionsRequest_maxResults *smithy.Schema
-
-var ListComponentVersionsRequest_nextToken *smithy.Schema
-
-var ListComponentVersionsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListComponentVersionsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListComponentVersionsResponse_componentVersions *smithy.Schema
-
-var ListComponentVersionsResponse_nextToken *smithy.Schema
-
-var ListCoreDevicesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListCoreDevicesRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListCoreDevicesRequest_thingGroupArn *smithy.Schema
-
-var ListCoreDevicesRequest_status *smithy.Schema
-
-var ListCoreDevicesRequest_maxResults *smithy.Schema
-
-var ListCoreDevicesRequest_nextToken *smithy.Schema
-
-var ListCoreDevicesRequest_runtime *smithy.Schema
-
-var ListCoreDevicesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListCoreDevicesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListCoreDevicesResponse_coreDevices *smithy.Schema
-
-var ListCoreDevicesResponse_nextToken *smithy.Schema
-
-var ListDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListDeploymentsRequest",
-}, smithy.ShapeTypeStructure, 5)
-var ListDeploymentsRequest_targetArn *smithy.Schema
-
-var ListDeploymentsRequest_historyFilter *smithy.Schema
-
-var ListDeploymentsRequest_parentTargetArn *smithy.Schema
-
-var ListDeploymentsRequest_maxResults *smithy.Schema
-
-var ListDeploymentsRequest_nextToken *smithy.Schema
-
-var ListDeploymentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListDeploymentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListDeploymentsResponse_deployments *smithy.Schema
-
-var ListDeploymentsResponse_nextToken *smithy.Schema
-
-var ListEffectiveDeploymentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListEffectiveDeploymentsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListEffectiveDeploymentsRequest_coreDeviceThingName *smithy.Schema
-
-var ListEffectiveDeploymentsRequest_maxResults *smithy.Schema
-
-var ListEffectiveDeploymentsRequest_nextToken *smithy.Schema
-
-var ListEffectiveDeploymentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListEffectiveDeploymentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEffectiveDeploymentsResponse_effectiveDeployments *smithy.Schema
-
-var ListEffectiveDeploymentsResponse_nextToken *smithy.Schema
-
-var ListInstalledComponentsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListInstalledComponentsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListInstalledComponentsRequest_coreDeviceThingName *smithy.Schema
-
-var ListInstalledComponentsRequest_maxResults *smithy.Schema
-
-var ListInstalledComponentsRequest_nextToken *smithy.Schema
-
-var ListInstalledComponentsRequest_topologyFilter *smithy.Schema
-
-var ListInstalledComponentsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListInstalledComponentsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListInstalledComponentsResponse_installedComponents *smithy.Schema
-
-var ListInstalledComponentsResponse_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var ResolveComponentCandidatesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolveComponentCandidatesRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ResolveComponentCandidatesRequest_platform *smithy.Schema
-
-var ResolveComponentCandidatesRequest_componentCandidates *smithy.Schema
-
-var ResolveComponentCandidatesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "ResolveComponentCandidatesResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ResolveComponentCandidatesResponse_resolvedComponentVersions *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateConnectivityInfoRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UpdateConnectivityInfoRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectivityInfoRequest_thingName *smithy.Schema
-
-var UpdateConnectivityInfoRequest_connectivityInfo *smithy.Schema
-
-var UpdateConnectivityInfoResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.greengrassv2",
-	Name:      "UpdateConnectivityInfoResponse",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateConnectivityInfoResponse_version *smithy.Schema
-
-var UpdateConnectivityInfoResponse_message *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _String)
-
-	AssociateClientDeviceWithCoreDeviceEntry_thingName = AssociateClientDeviceWithCoreDeviceEntry.AddMember("thingName", _IoTThingName)
-
-	_AssociateClientDeviceWithCoreDeviceEntryList_member = _AssociateClientDeviceWithCoreDeviceEntryList.AddMember("member", AssociateClientDeviceWithCoreDeviceEntry)
-
-	AssociateClientDeviceWithCoreDeviceErrorEntry_thingName = AssociateClientDeviceWithCoreDeviceErrorEntry.AddMember("thingName", _IoTThingName)
-
-	AssociateClientDeviceWithCoreDeviceErrorEntry_code = AssociateClientDeviceWithCoreDeviceErrorEntry.AddMember("code", _NonEmptyString)
-
-	AssociateClientDeviceWithCoreDeviceErrorEntry_message = AssociateClientDeviceWithCoreDeviceErrorEntry.AddMember("message", _NonEmptyString)
-
-	_AssociateClientDeviceWithCoreDeviceErrorList_member = _AssociateClientDeviceWithCoreDeviceErrorList.AddMember("member", AssociateClientDeviceWithCoreDeviceErrorEntry)
-
-	AssociatedClientDevice_thingName = AssociatedClientDevice.AddMember("thingName", _IoTThingName)
-
-	AssociatedClientDevice_associationTimestamp = AssociatedClientDevice.AddMember("associationTimestamp", _Timestamp)
-
-	_AssociatedClientDeviceList_member = _AssociatedClientDeviceList.AddMember("member", AssociatedClientDevice)
-
-	CloudComponentState_REQUESTED = CloudComponentState.AddMember("REQUESTED", smithyprelude.Unit)
-
-	CloudComponentState_INITIATED = CloudComponentState.AddMember("INITIATED", smithyprelude.Unit)
-
-	CloudComponentState_DEPLOYABLE = CloudComponentState.AddMember("DEPLOYABLE", smithyprelude.Unit)
-
-	CloudComponentState_FAILED = CloudComponentState.AddMember("FAILED", smithyprelude.Unit)
-
-	CloudComponentState_DEPRECATED = CloudComponentState.AddMember("DEPRECATED", smithyprelude.Unit)
-
-	_StringMap_key = _StringMap.AddMember("key", _NonEmptyString)
-
-	_StringMap_value = _StringMap.AddMember("value", _NonEmptyString)
-
-	VendorGuidance_ACTIVE = VendorGuidance.AddMember("ACTIVE", smithyprelude.Unit)
-
-	VendorGuidance_DISCONTINUED = VendorGuidance.AddMember("DISCONTINUED", smithyprelude.Unit)
-
-	VendorGuidance_DELETED = VendorGuidance.AddMember("DELETED", smithyprelude.Unit)
-
-	CloudComponentStatus_componentState = CloudComponentStatus.AddMember("componentState", CloudComponentState)
-
-	CloudComponentStatus_message = CloudComponentStatus.AddMember("message", _NonEmptyString)
-
-	CloudComponentStatus_errors = CloudComponentStatus.AddMember("errors", _StringMap)
-
-	CloudComponentStatus_vendorGuidance = CloudComponentStatus.AddMember("vendorGuidance", VendorGuidance)
-
-	CloudComponentStatus_vendorGuidanceMessage = CloudComponentStatus.AddMember("vendorGuidanceMessage", _NonEmptyString)
-
-	_PlatformAttributesMap_key = _PlatformAttributesMap.AddMember("key", _NonEmptyString)
-
-	_PlatformAttributesMap_value = _PlatformAttributesMap.AddMember("value", _NonEmptyString)
-
-	ComponentPlatform_name = ComponentPlatform.AddMember("name", _NonEmptyString)
-
-	ComponentPlatform_attributes = ComponentPlatform.AddMember("attributes", _PlatformAttributesMap)
-
-	_ComponentPlatformList_member = _ComponentPlatformList.AddMember("member", ComponentPlatform)
-
-	ComponentLatestVersion_arn = ComponentLatestVersion.AddMember("arn", _ComponentVersionARN)
-
-	ComponentLatestVersion_componentVersion = ComponentLatestVersion.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentLatestVersion_creationTimestamp = ComponentLatestVersion.AddMember("creationTimestamp", _Timestamp)
-
-	ComponentLatestVersion_description = ComponentLatestVersion.AddMember("description", _NonEmptyString)
-
-	ComponentLatestVersion_publisher = ComponentLatestVersion.AddMember("publisher", _NonEmptyString)
-
-	ComponentLatestVersion_platforms = ComponentLatestVersion.AddMember("platforms", _ComponentPlatformList)
-
-	Component_arn = Component.AddMember("arn", _ComponentARN)
-
-	Component_componentName = Component.AddMember("componentName", _ComponentNameString)
-
-	Component_latestVersion = Component.AddMember("latestVersion", ComponentLatestVersion)
-
-	_ComponentVersionRequirementMap_key = _ComponentVersionRequirementMap.AddMember("key", _NonEmptyString)
-
-	_ComponentVersionRequirementMap_value = _ComponentVersionRequirementMap.AddMember("value", _NonEmptyString)
-
-	ComponentCandidate_componentName = ComponentCandidate.AddMember("componentName", _ComponentNameString)
-
-	ComponentCandidate_componentVersion = ComponentCandidate.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentCandidate_versionRequirements = ComponentCandidate.AddMember("versionRequirements", _ComponentVersionRequirementMap)
-
-	_ComponentCandidateList_member = _ComponentCandidateList.AddMember("member", ComponentCandidate)
-
-	_ComponentConfigurationPathList_member = _ComponentConfigurationPathList.AddMember("member", _ComponentConfigurationPath)
-
-	ComponentConfigurationUpdate_merge = ComponentConfigurationUpdate.AddMember("merge", _ComponentConfigurationString)
-
-	ComponentConfigurationUpdate_reset = ComponentConfigurationUpdate.AddMember("reset", _ComponentConfigurationPathList)
-
-	ComponentDependencyType_HARD = ComponentDependencyType.AddMember("HARD", smithyprelude.Unit)
-
-	ComponentDependencyType_SOFT = ComponentDependencyType.AddMember("SOFT", smithyprelude.Unit)
-
-	ComponentDependencyRequirement_versionRequirement = ComponentDependencyRequirement.AddMember("versionRequirement", _NonEmptyString)
-
-	ComponentDependencyRequirement_dependencyType = ComponentDependencyRequirement.AddMember("dependencyType", ComponentDependencyType)
-
-	_ComponentDependencyMap_key = _ComponentDependencyMap.AddMember("key", _NonEmptyString)
-
-	_ComponentDependencyMap_value = _ComponentDependencyMap.AddMember("value", ComponentDependencyRequirement)
-
-	SystemResourceLimits_memory = SystemResourceLimits.AddMember("memory", _Memory)
-
-	SystemResourceLimits_cpus = SystemResourceLimits.AddMember("cpus", _CPU)
-
-	ComponentRunWith_posixUser = ComponentRunWith.AddMember("posixUser", _NonEmptyString)
-
-	ComponentRunWith_systemResourceLimits = ComponentRunWith.AddMember("systemResourceLimits", SystemResourceLimits)
-
-	ComponentRunWith_windowsUser = ComponentRunWith.AddMember("windowsUser", _NonEmptyString)
-
-	ComponentDeploymentSpecification_componentVersion = ComponentDeploymentSpecification.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentDeploymentSpecification_configurationUpdate = ComponentDeploymentSpecification.AddMember("configurationUpdate", ComponentConfigurationUpdate)
-
-	ComponentDeploymentSpecification_runWith = ComponentDeploymentSpecification.AddMember("runWith", ComponentRunWith)
-
-	_ComponentDeploymentSpecifications_key = _ComponentDeploymentSpecifications.AddMember("key", _NonEmptyString)
-
-	_ComponentDeploymentSpecifications_value = _ComponentDeploymentSpecifications.AddMember("value", ComponentDeploymentSpecification)
-
-	_ComponentList_member = _ComponentList.AddMember("member", Component)
-
-	ComponentVersionListItem_componentName = ComponentVersionListItem.AddMember("componentName", _ComponentNameString)
-
-	ComponentVersionListItem_componentVersion = ComponentVersionListItem.AddMember("componentVersion", _ComponentVersionString)
-
-	ComponentVersionListItem_arn = ComponentVersionListItem.AddMember("arn", _NonEmptyString)
-
-	_ComponentVersionList_member = _ComponentVersionList.AddMember("member", ComponentVersionListItem)
-
-	ComponentVisibilityScope_PRIVATE = ComponentVisibilityScope.AddMember("PRIVATE", smithyprelude.Unit)
-
-	ComponentVisibilityScope_PUBLIC = ComponentVisibilityScope.AddMember("PUBLIC", smithyprelude.Unit)
-
-	ConflictException_message = ConflictException.AddMember("message", _String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", _String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", _String)
-
-	ConnectivityInfo_id = ConnectivityInfo.AddMember("id", _String, &smithytraits.JSONName{Name: "Id"})
-
-	ConnectivityInfo_hostAddress = ConnectivityInfo.AddMember("hostAddress", _String, &smithytraits.JSONName{Name: "HostAddress"})
-
-	ConnectivityInfo_portNumber = ConnectivityInfo.AddMember("portNumber", _PortNumberInt, &smithytraits.JSONName{Name: "PortNumber"})
-
-	ConnectivityInfo_metadata = ConnectivityInfo.AddMember("metadata", _String, &smithytraits.JSONName{Name: "Metadata"})
-
-	_connectivityInfoList_member = _connectivityInfoList.AddMember("member", ConnectivityInfo)
-
-	CoreDeviceStatus_HEALTHY = CoreDeviceStatus.AddMember("HEALTHY", smithyprelude.Unit)
-
-	CoreDeviceStatus_UNHEALTHY = CoreDeviceStatus.AddMember("UNHEALTHY", smithyprelude.Unit)
-
-	CoreDevice_coreDeviceThingName = CoreDevice.AddMember("coreDeviceThingName", _CoreDeviceThingName)
-
-	CoreDevice_status = CoreDevice.AddMember("status", CoreDeviceStatus)
-
-	CoreDevice_lastStatusUpdateTimestamp = CoreDevice.AddMember("lastStatusUpdateTimestamp", _Timestamp)
-
-	CoreDevice_platform = CoreDevice.AddMember("platform", _CoreDevicePlatformString)
-
-	CoreDevice_architecture = CoreDevice.AddMember("architecture", _CoreDeviceArchitectureString)
-
-	CoreDevice_runtime = CoreDevice.AddMember("runtime", _CoreDeviceRuntimeString)
-
-	_CoreDevicesList_member = _CoreDevicesList.AddMember("member", CoreDevice)
-
-	DeploymentStatus_ACTIVE = DeploymentStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	DeploymentStatus_COMPLETED = DeploymentStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	DeploymentStatus_CANCELED = DeploymentStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	DeploymentStatus_FAILED = DeploymentStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	DeploymentStatus_INACTIVE = DeploymentStatus.AddMember("INACTIVE", smithyprelude.Unit)
-
-	Deployment_targetArn = Deployment.AddMember("targetArn", _TargetARN)
-
-	Deployment_revisionId = Deployment.AddMember("revisionId", _NonEmptyString)
-
-	Deployment_deploymentId = Deployment.AddMember("deploymentId", _NonEmptyString)
-
-	Deployment_deploymentName = Deployment.AddMember("deploymentName", _NonEmptyString)
-
-	Deployment_creationTimestamp = Deployment.AddMember("creationTimestamp", _Timestamp)
-
-	Deployment_deploymentStatus = Deployment.AddMember("deploymentStatus", DeploymentStatus)
-
-	Deployment_isLatestForTarget = Deployment.AddMember("isLatestForTarget", _IsLatestForTarget)
-
-	Deployment_parentTargetArn = Deployment.AddMember("parentTargetArn", _ThingGroupARN)
-
-	DeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS = DeploymentComponentUpdatePolicyAction.AddMember("NOTIFY_COMPONENTS", smithyprelude.Unit)
-
-	DeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS = DeploymentComponentUpdatePolicyAction.AddMember("SKIP_NOTIFY_COMPONENTS", smithyprelude.Unit)
-
-	DeploymentComponentUpdatePolicy_timeoutInSeconds = DeploymentComponentUpdatePolicy.AddMember("timeoutInSeconds", _OptionalInteger)
-
-	DeploymentComponentUpdatePolicy_action = DeploymentComponentUpdatePolicy.AddMember("action", DeploymentComponentUpdatePolicyAction)
-
-	DeploymentConfigurationValidationPolicy_timeoutInSeconds = DeploymentConfigurationValidationPolicy.AddMember("timeoutInSeconds", _OptionalInteger)
-
-	DeploymentFailureHandlingPolicy_ROLLBACK = DeploymentFailureHandlingPolicy.AddMember("ROLLBACK", smithyprelude.Unit)
-
-	DeploymentFailureHandlingPolicy_DO_NOTHING = DeploymentFailureHandlingPolicy.AddMember("DO_NOTHING", smithyprelude.Unit)
-
-	DeploymentHistoryFilter_ALL = DeploymentHistoryFilter.AddMember("ALL", smithyprelude.Unit)
-
-	DeploymentHistoryFilter_LATEST_ONLY = DeploymentHistoryFilter.AddMember("LATEST_ONLY", smithyprelude.Unit)
-
-	IoTJobRateIncreaseCriteria_numberOfNotifiedThings = IoTJobRateIncreaseCriteria.AddMember("numberOfNotifiedThings", _IoTJobNumberOfThings)
-
-	IoTJobRateIncreaseCriteria_numberOfSucceededThings = IoTJobRateIncreaseCriteria.AddMember("numberOfSucceededThings", _IoTJobNumberOfThings)
-
-	IoTJobExponentialRolloutRate_baseRatePerMinute = IoTJobExponentialRolloutRate.AddMember("baseRatePerMinute", _IoTJobRolloutBaseRatePerMinute)
-
-	IoTJobExponentialRolloutRate_incrementFactor = IoTJobExponentialRolloutRate.AddMember("incrementFactor", _IoTJobRolloutIncrementFactor)
-
-	IoTJobExponentialRolloutRate_rateIncreaseCriteria = IoTJobExponentialRolloutRate.AddMember("rateIncreaseCriteria", IoTJobRateIncreaseCriteria)
-
-	IoTJobExecutionsRolloutConfig_exponentialRate = IoTJobExecutionsRolloutConfig.AddMember("exponentialRate", IoTJobExponentialRolloutRate)
-
-	IoTJobExecutionsRolloutConfig_maximumPerMinute = IoTJobExecutionsRolloutConfig.AddMember("maximumPerMinute", _IoTJobMaxExecutionsPerMin)
-
-	IoTJobExecutionFailureType_FAILED = IoTJobExecutionFailureType.AddMember("FAILED", smithyprelude.Unit)
-
-	IoTJobExecutionFailureType_REJECTED = IoTJobExecutionFailureType.AddMember("REJECTED", smithyprelude.Unit)
-
-	IoTJobExecutionFailureType_TIMED_OUT = IoTJobExecutionFailureType.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	IoTJobExecutionFailureType_ALL = IoTJobExecutionFailureType.AddMember("ALL", smithyprelude.Unit)
-
-	IoTJobAbortAction_CANCEL = IoTJobAbortAction.AddMember("CANCEL", smithyprelude.Unit)
-
-	IoTJobAbortCriteria_failureType = IoTJobAbortCriteria.AddMember("failureType", IoTJobExecutionFailureType)
-
-	IoTJobAbortCriteria_action = IoTJobAbortCriteria.AddMember("action", IoTJobAbortAction)
-
-	IoTJobAbortCriteria_thresholdPercentage = IoTJobAbortCriteria.AddMember("thresholdPercentage", _IoTJobAbortThresholdPercentage)
-
-	IoTJobAbortCriteria_minNumberOfExecutedThings = IoTJobAbortCriteria.AddMember("minNumberOfExecutedThings", _IoTJobMinimumNumberOfExecutedThings)
-
-	_IoTJobAbortCriteriaList_member = _IoTJobAbortCriteriaList.AddMember("member", IoTJobAbortCriteria)
-
-	IoTJobAbortConfig_criteriaList = IoTJobAbortConfig.AddMember("criteriaList", _IoTJobAbortCriteriaList)
-
-	IoTJobTimeoutConfig_inProgressTimeoutInMinutes = IoTJobTimeoutConfig.AddMember("inProgressTimeoutInMinutes", _IoTJobInProgressTimeoutInMinutes)
-
-	DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig = DeploymentIoTJobConfiguration.AddMember("jobExecutionsRolloutConfig", IoTJobExecutionsRolloutConfig)
-
-	DeploymentIoTJobConfiguration_abortConfig = DeploymentIoTJobConfiguration.AddMember("abortConfig", IoTJobAbortConfig)
-
-	DeploymentIoTJobConfiguration_timeoutConfig = DeploymentIoTJobConfiguration.AddMember("timeoutConfig", IoTJobTimeoutConfig)
-
-	_DeploymentList_member = _DeploymentList.AddMember("member", Deployment)
-
-	DeploymentPolicies_failureHandlingPolicy = DeploymentPolicies.AddMember("failureHandlingPolicy", DeploymentFailureHandlingPolicy)
-
-	DeploymentPolicies_componentUpdatePolicy = DeploymentPolicies.AddMember("componentUpdatePolicy", DeploymentComponentUpdatePolicy)
-
-	DeploymentPolicies_configurationValidationPolicy = DeploymentPolicies.AddMember("configurationValidationPolicy", DeploymentConfigurationValidationPolicy)
-
-	DisassociateClientDeviceFromCoreDeviceEntry_thingName = DisassociateClientDeviceFromCoreDeviceEntry.AddMember("thingName", _IoTThingName)
-
-	_DisassociateClientDeviceFromCoreDeviceEntryList_member = _DisassociateClientDeviceFromCoreDeviceEntryList.AddMember("member", DisassociateClientDeviceFromCoreDeviceEntry)
-
-	DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName = DisassociateClientDeviceFromCoreDeviceErrorEntry.AddMember("thingName", _IoTThingName)
-
-	DisassociateClientDeviceFromCoreDeviceErrorEntry_code = DisassociateClientDeviceFromCoreDeviceErrorEntry.AddMember("code", _NonEmptyString)
-
-	DisassociateClientDeviceFromCoreDeviceErrorEntry_message = DisassociateClientDeviceFromCoreDeviceErrorEntry.AddMember("message", _NonEmptyString)
-
-	_DisassociateClientDeviceFromCoreDeviceErrorList_member = _DisassociateClientDeviceFromCoreDeviceErrorList.AddMember("member", DisassociateClientDeviceFromCoreDeviceErrorEntry)
-
-	EffectiveDeploymentExecutionStatus_IN_PROGRESS = EffectiveDeploymentExecutionStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_QUEUED = EffectiveDeploymentExecutionStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_FAILED = EffectiveDeploymentExecutionStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_COMPLETED = EffectiveDeploymentExecutionStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_TIMED_OUT = EffectiveDeploymentExecutionStatus.AddMember("TIMED_OUT", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_CANCELED = EffectiveDeploymentExecutionStatus.AddMember("CANCELED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_REJECTED = EffectiveDeploymentExecutionStatus.AddMember("REJECTED", smithyprelude.Unit)
-
-	EffectiveDeploymentExecutionStatus_SUCCEEDED = EffectiveDeploymentExecutionStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	_EffectiveDeploymentErrorStack_member = _EffectiveDeploymentErrorStack.AddMember("member", _EffectiveDeploymentErrorCode)
-
-	_EffectiveDeploymentErrorTypeList_member = _EffectiveDeploymentErrorTypeList.AddMember("member", _EffectiveDeploymentErrorType)
-
-	EffectiveDeploymentStatusDetails_errorStack = EffectiveDeploymentStatusDetails.AddMember("errorStack", _EffectiveDeploymentErrorStack)
-
-	EffectiveDeploymentStatusDetails_errorTypes = EffectiveDeploymentStatusDetails.AddMember("errorTypes", _EffectiveDeploymentErrorTypeList)
-
-	EffectiveDeployment_deploymentId = EffectiveDeployment.AddMember("deploymentId", _DeploymentID)
-
-	EffectiveDeployment_deploymentName = EffectiveDeployment.AddMember("deploymentName", _DeploymentName)
-
-	EffectiveDeployment_iotJobId = EffectiveDeployment.AddMember("iotJobId", _IoTJobId)
-
-	EffectiveDeployment_iotJobArn = EffectiveDeployment.AddMember("iotJobArn", _IoTJobARN)
-
-	EffectiveDeployment_description = EffectiveDeployment.AddMember("description", _Description)
-
-	EffectiveDeployment_targetArn = EffectiveDeployment.AddMember("targetArn", _TargetARN)
-
-	EffectiveDeployment_coreDeviceExecutionStatus = EffectiveDeployment.AddMember("coreDeviceExecutionStatus", EffectiveDeploymentExecutionStatus)
-
-	EffectiveDeployment_reason = EffectiveDeployment.AddMember("reason", _Reason)
-
-	EffectiveDeployment_creationTimestamp = EffectiveDeployment.AddMember("creationTimestamp", _Timestamp)
-
-	EffectiveDeployment_modifiedTimestamp = EffectiveDeployment.AddMember("modifiedTimestamp", _Timestamp)
-
-	EffectiveDeployment_statusDetails = EffectiveDeployment.AddMember("statusDetails", EffectiveDeploymentStatusDetails)
-
-	_EffectiveDeploymentsList_member = _EffectiveDeploymentsList.AddMember("member", EffectiveDeployment)
-
-	InstalledComponentLifecycleState_NEW = InstalledComponentLifecycleState.AddMember("NEW", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_INSTALLED = InstalledComponentLifecycleState.AddMember("INSTALLED", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_STARTING = InstalledComponentLifecycleState.AddMember("STARTING", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_RUNNING = InstalledComponentLifecycleState.AddMember("RUNNING", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_STOPPING = InstalledComponentLifecycleState.AddMember("STOPPING", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_ERRORED = InstalledComponentLifecycleState.AddMember("ERRORED", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_BROKEN = InstalledComponentLifecycleState.AddMember("BROKEN", smithyprelude.Unit)
-
-	InstalledComponentLifecycleState_FINISHED = InstalledComponentLifecycleState.AddMember("FINISHED", smithyprelude.Unit)
-
-	_InstalledComponentLifecycleStatusCodeList_member = _InstalledComponentLifecycleStatusCodeList.AddMember("member", _InstalledComponentLifecycleStatusCode)
-
-	InstalledComponent_componentName = InstalledComponent.AddMember("componentName", _ComponentNameString)
-
-	InstalledComponent_componentVersion = InstalledComponent.AddMember("componentVersion", _ComponentVersionString)
-
-	InstalledComponent_lifecycleState = InstalledComponent.AddMember("lifecycleState", InstalledComponentLifecycleState)
-
-	InstalledComponent_lifecycleStateDetails = InstalledComponent.AddMember("lifecycleStateDetails", _LifecycleStateDetails)
-
-	InstalledComponent_isRoot = InstalledComponent.AddMember("isRoot", _IsRoot)
-
-	InstalledComponent_lastStatusChangeTimestamp = InstalledComponent.AddMember("lastStatusChangeTimestamp", _Timestamp)
-
-	InstalledComponent_lastReportedTimestamp = InstalledComponent.AddMember("lastReportedTimestamp", _Timestamp)
-
-	InstalledComponent_lastInstallationSource = InstalledComponent.AddMember("lastInstallationSource", _NonEmptyString)
-
-	InstalledComponent_lifecycleStatusCodes = InstalledComponent.AddMember("lifecycleStatusCodes", _InstalledComponentLifecycleStatusCodeList)
-
-	_InstalledComponentList_member = _InstalledComponentList.AddMember("member", InstalledComponent)
-
-	InstalledComponentTopologyFilter_ALL = InstalledComponentTopologyFilter.AddMember("ALL", smithyprelude.Unit)
-
-	InstalledComponentTopologyFilter_ROOT = InstalledComponentTopologyFilter.AddMember("ROOT", smithyprelude.Unit)
-
-	InternalServerException_message = InternalServerException.AddMember("message", _String)
-
-	InternalServerException_retryAfterSeconds = InternalServerException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	IotEndpointType_fips = IotEndpointType.AddMember("fips", smithyprelude.Unit)
-
-	IotEndpointType_standard = IotEndpointType.AddMember("standard", smithyprelude.Unit)
-
-	LambdaFilesystemPermission_RO = LambdaFilesystemPermission.AddMember("RO", smithyprelude.Unit)
-
-	LambdaFilesystemPermission_RW = LambdaFilesystemPermission.AddMember("RW", smithyprelude.Unit)
-
-	LambdaVolumeMount_sourcePath = LambdaVolumeMount.AddMember("sourcePath", _FileSystemPath)
-
-	LambdaVolumeMount_destinationPath = LambdaVolumeMount.AddMember("destinationPath", _FileSystemPath)
-
-	LambdaVolumeMount_permission = LambdaVolumeMount.AddMember("permission", LambdaFilesystemPermission)
-
-	LambdaVolumeMount_addGroupOwner = LambdaVolumeMount.AddMember("addGroupOwner", _OptionalBoolean)
-
-	_LambdaVolumeList_member = _LambdaVolumeList.AddMember("member", LambdaVolumeMount)
-
-	LambdaDeviceMount_path = LambdaDeviceMount.AddMember("path", _FileSystemPath)
-
-	LambdaDeviceMount_permission = LambdaDeviceMount.AddMember("permission", LambdaFilesystemPermission)
-
-	LambdaDeviceMount_addGroupOwner = LambdaDeviceMount.AddMember("addGroupOwner", _OptionalBoolean)
-
-	_LambdaDeviceList_member = _LambdaDeviceList.AddMember("member", LambdaDeviceMount)
-
-	LambdaContainerParams_memorySizeInKB = LambdaContainerParams.AddMember("memorySizeInKB", _OptionalInteger)
-
-	LambdaContainerParams_mountROSysfs = LambdaContainerParams.AddMember("mountROSysfs", _OptionalBoolean)
-
-	LambdaContainerParams_volumes = LambdaContainerParams.AddMember("volumes", _LambdaVolumeList)
-
-	LambdaContainerParams_devices = LambdaContainerParams.AddMember("devices", _LambdaDeviceList)
-
-	_LambdaEnvironmentVariables_key = _LambdaEnvironmentVariables.AddMember("key", _NonEmptyString)
-
-	_LambdaEnvironmentVariables_value = _LambdaEnvironmentVariables.AddMember("value", _String)
-
-	LambdaEventSourceType_PUB_SUB = LambdaEventSourceType.AddMember("PUB_SUB", smithyprelude.Unit)
-
-	LambdaEventSourceType_IOT_CORE = LambdaEventSourceType.AddMember("IOT_CORE", smithyprelude.Unit)
-
-	LambdaEventSource_topic = LambdaEventSource.AddMember("topic", _TopicString)
-
-	LambdaEventSource_type = LambdaEventSource.AddMember("type", LambdaEventSourceType)
-
-	_LambdaEventSourceList_member = _LambdaEventSourceList.AddMember("member", LambdaEventSource)
-
-	_LambdaExecArgsList_member = _LambdaExecArgsList.AddMember("member", _LambdaExecArg)
-
-	LambdaInputPayloadEncodingType_JSON = LambdaInputPayloadEncodingType.AddMember("JSON", smithyprelude.Unit)
-
-	LambdaInputPayloadEncodingType_BINARY = LambdaInputPayloadEncodingType.AddMember("BINARY", smithyprelude.Unit)
-
-	LambdaIsolationMode_GREENGRASS_CONTAINER = LambdaIsolationMode.AddMember("GREENGRASS_CONTAINER", smithyprelude.Unit)
-
-	LambdaIsolationMode_NO_CONTAINER = LambdaIsolationMode.AddMember("NO_CONTAINER", smithyprelude.Unit)
-
-	LambdaLinuxProcessParams_isolationMode = LambdaLinuxProcessParams.AddMember("isolationMode", LambdaIsolationMode)
-
-	LambdaLinuxProcessParams_containerParams = LambdaLinuxProcessParams.AddMember("containerParams", LambdaContainerParams)
-
-	LambdaExecutionParameters_eventSources = LambdaExecutionParameters.AddMember("eventSources", _LambdaEventSourceList)
-
-	LambdaExecutionParameters_maxQueueSize = LambdaExecutionParameters.AddMember("maxQueueSize", _OptionalInteger)
-
-	LambdaExecutionParameters_maxInstancesCount = LambdaExecutionParameters.AddMember("maxInstancesCount", _OptionalInteger)
-
-	LambdaExecutionParameters_maxIdleTimeInSeconds = LambdaExecutionParameters.AddMember("maxIdleTimeInSeconds", _OptionalInteger)
-
-	LambdaExecutionParameters_timeoutInSeconds = LambdaExecutionParameters.AddMember("timeoutInSeconds", _OptionalInteger)
-
-	LambdaExecutionParameters_statusTimeoutInSeconds = LambdaExecutionParameters.AddMember("statusTimeoutInSeconds", _OptionalInteger)
-
-	LambdaExecutionParameters_pinned = LambdaExecutionParameters.AddMember("pinned", _OptionalBoolean)
-
-	LambdaExecutionParameters_inputPayloadEncodingType = LambdaExecutionParameters.AddMember("inputPayloadEncodingType", LambdaInputPayloadEncodingType)
-
-	LambdaExecutionParameters_execArgs = LambdaExecutionParameters.AddMember("execArgs", _LambdaExecArgsList)
-
-	LambdaExecutionParameters_environmentVariables = LambdaExecutionParameters.AddMember("environmentVariables", _LambdaEnvironmentVariables)
-
-	LambdaExecutionParameters_linuxProcessParams = LambdaExecutionParameters.AddMember("linuxProcessParams", LambdaLinuxProcessParams)
-
-	LambdaFunctionRecipeSource_lambdaArn = LambdaFunctionRecipeSource.AddMember("lambdaArn", _NonEmptyString)
-
-	LambdaFunctionRecipeSource_componentName = LambdaFunctionRecipeSource.AddMember("componentName", _ComponentNameString)
-
-	LambdaFunctionRecipeSource_componentVersion = LambdaFunctionRecipeSource.AddMember("componentVersion", _ComponentVersionString)
-
-	LambdaFunctionRecipeSource_componentPlatforms = LambdaFunctionRecipeSource.AddMember("componentPlatforms", _ComponentPlatformList)
-
-	LambdaFunctionRecipeSource_componentDependencies = LambdaFunctionRecipeSource.AddMember("componentDependencies", _ComponentDependencyMap)
-
-	LambdaFunctionRecipeSource_componentLambdaParameters = LambdaFunctionRecipeSource.AddMember("componentLambdaParameters", LambdaExecutionParameters)
-
-	RecipeOutputFormat_JSON = RecipeOutputFormat.AddMember("JSON", smithyprelude.Unit)
-
-	RecipeOutputFormat_YAML = RecipeOutputFormat.AddMember("YAML", smithyprelude.Unit)
-
-	RequestAlreadyInProgressException_message = RequestAlreadyInProgressException.AddMember("message", _String)
-
-	ResolvedComponentVersion_arn = ResolvedComponentVersion.AddMember("arn", _ComponentVersionARN)
-
-	ResolvedComponentVersion_componentName = ResolvedComponentVersion.AddMember("componentName", _ComponentNameString)
-
-	ResolvedComponentVersion_componentVersion = ResolvedComponentVersion.AddMember("componentVersion", _ComponentVersionString)
-
-	ResolvedComponentVersion_recipe = ResolvedComponentVersion.AddMember("recipe", _RecipeBlob)
-
-	ResolvedComponentVersion_vendorGuidance = ResolvedComponentVersion.AddMember("vendorGuidance", VendorGuidance)
-
-	ResolvedComponentVersion_message = ResolvedComponentVersion.AddMember("message", _NonEmptyString)
-
-	_ResolvedComponentVersionsList_member = _ResolvedComponentVersionsList.AddMember("member", ResolvedComponentVersion)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", _String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", _String)
-
-	S3EndpointType_REGIONAL = S3EndpointType.AddMember("REGIONAL", smithyprelude.Unit)
-
-	S3EndpointType_GLOBAL = S3EndpointType.AddMember("GLOBAL", smithyprelude.Unit)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", _String)
-
-	ServiceQuotaExceededException_resourceId = ServiceQuotaExceededException.AddMember("resourceId", _String)
-
-	ServiceQuotaExceededException_resourceType = ServiceQuotaExceededException.AddMember("resourceType", _String)
-
-	ServiceQuotaExceededException_quotaCode = ServiceQuotaExceededException.AddMember("quotaCode", _String)
-
-	ServiceQuotaExceededException_serviceCode = ServiceQuotaExceededException.AddMember("serviceCode", _String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", _String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", _String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", _String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", _RetryAfterSeconds, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionReason_UNKNOWN_OPERATION = ValidationExceptionReason.AddMember("UNKNOWN_OPERATION", smithyprelude.Unit)
-
-	ValidationExceptionReason_CANNOT_PARSE = ValidationExceptionReason.AddMember("CANNOT_PARSE", smithyprelude.Unit)
-
-	ValidationExceptionReason_FIELD_VALIDATION_FAILED = ValidationExceptionReason.AddMember("FIELD_VALIDATION_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionReason_OTHER = ValidationExceptionReason.AddMember("OTHER", smithyprelude.Unit)
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", _String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", _String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", _String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", ValidationExceptionReason)
-
-	ValidationException_fields = ValidationException.AddMember("fields", _ValidationExceptionFieldList)
-
-	AssociateServiceRoleToAccountRequest_roleArn = AssociateServiceRoleToAccountRequest.AddMember("roleArn", _String, &smithytraits.JSONName{Name: "RoleArn"})
-
-	AssociateServiceRoleToAccountResponse_associatedAt = AssociateServiceRoleToAccountResponse.AddMember("associatedAt", _String, &smithytraits.JSONName{Name: "AssociatedAt"})
-
-	BatchAssociateClientDeviceWithCoreDeviceRequest_entries = BatchAssociateClientDeviceWithCoreDeviceRequest.AddMember("entries", _AssociateClientDeviceWithCoreDeviceEntryList)
-
-	BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName = BatchAssociateClientDeviceWithCoreDeviceRequest.AddMember("coreDeviceThingName", _IoTThingName, &smithytraits.HTTPLabel{})
-
-	BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries = BatchAssociateClientDeviceWithCoreDeviceResponse.AddMember("errorEntries", _AssociateClientDeviceWithCoreDeviceErrorList)
-
-	BatchDisassociateClientDeviceFromCoreDeviceRequest_entries = BatchDisassociateClientDeviceFromCoreDeviceRequest.AddMember("entries", _DisassociateClientDeviceFromCoreDeviceEntryList)
-
-	BatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName = BatchDisassociateClientDeviceFromCoreDeviceRequest.AddMember("coreDeviceThingName", _IoTThingName, &smithytraits.HTTPLabel{})
-
-	BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries = BatchDisassociateClientDeviceFromCoreDeviceResponse.AddMember("errorEntries", _DisassociateClientDeviceFromCoreDeviceErrorList)
-
-	CancelDeploymentRequest_deploymentId = CancelDeploymentRequest.AddMember("deploymentId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	CancelDeploymentResponse_message = CancelDeploymentResponse.AddMember("message", _NonEmptyString)
-
-	CreateComponentVersionRequest_inlineRecipe = CreateComponentVersionRequest.AddMember("inlineRecipe", _RecipeBlob)
-
-	CreateComponentVersionRequest_lambdaFunction = CreateComponentVersionRequest.AddMember("lambdaFunction", LambdaFunctionRecipeSource)
-
-	CreateComponentVersionRequest_tags = CreateComponentVersionRequest.AddMember("tags", _TagMap)
-
-	CreateComponentVersionRequest_clientToken = CreateComponentVersionRequest.AddMember("clientToken", _ClientTokenString)
-
-	CreateComponentVersionResponse_arn = CreateComponentVersionResponse.AddMember("arn", _ComponentVersionARN)
-
-	CreateComponentVersionResponse_componentName = CreateComponentVersionResponse.AddMember("componentName", _ComponentNameString)
-
-	CreateComponentVersionResponse_componentVersion = CreateComponentVersionResponse.AddMember("componentVersion", _ComponentVersionString)
-
-	CreateComponentVersionResponse_creationTimestamp = CreateComponentVersionResponse.AddMember("creationTimestamp", _Timestamp)
-
-	CreateComponentVersionResponse_status = CreateComponentVersionResponse.AddMember("status", CloudComponentStatus)
-
-	CreateDeploymentRequest_targetArn = CreateDeploymentRequest.AddMember("targetArn", _TargetARN)
-
-	CreateDeploymentRequest_deploymentName = CreateDeploymentRequest.AddMember("deploymentName", _DeploymentNameString)
-
-	CreateDeploymentRequest_components = CreateDeploymentRequest.AddMember("components", _ComponentDeploymentSpecifications)
-
-	CreateDeploymentRequest_iotJobConfiguration = CreateDeploymentRequest.AddMember("iotJobConfiguration", DeploymentIoTJobConfiguration)
-
-	CreateDeploymentRequest_deploymentPolicies = CreateDeploymentRequest.AddMember("deploymentPolicies", DeploymentPolicies)
-
-	CreateDeploymentRequest_parentTargetArn = CreateDeploymentRequest.AddMember("parentTargetArn", _ThingGroupARN)
-
-	CreateDeploymentRequest_tags = CreateDeploymentRequest.AddMember("tags", _TagMap)
-
-	CreateDeploymentRequest_clientToken = CreateDeploymentRequest.AddMember("clientToken", _ClientTokenString)
-
-	CreateDeploymentResponse_deploymentId = CreateDeploymentResponse.AddMember("deploymentId", _NonEmptyString)
-
-	CreateDeploymentResponse_iotJobId = CreateDeploymentResponse.AddMember("iotJobId", _NonEmptyString)
-
-	CreateDeploymentResponse_iotJobArn = CreateDeploymentResponse.AddMember("iotJobArn", _IoTJobARN)
-
-	DeleteComponentRequest_arn = DeleteComponentRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	DeleteCoreDeviceRequest_coreDeviceThingName = DeleteCoreDeviceRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	DeleteDeploymentRequest_deploymentId = DeleteDeploymentRequest.AddMember("deploymentId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	DescribeComponentRequest_arn = DescribeComponentRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	DescribeComponentResponse_arn = DescribeComponentResponse.AddMember("arn", _ComponentVersionARN)
-
-	DescribeComponentResponse_componentName = DescribeComponentResponse.AddMember("componentName", _ComponentNameString)
-
-	DescribeComponentResponse_componentVersion = DescribeComponentResponse.AddMember("componentVersion", _ComponentVersionString)
-
-	DescribeComponentResponse_creationTimestamp = DescribeComponentResponse.AddMember("creationTimestamp", _Timestamp)
-
-	DescribeComponentResponse_publisher = DescribeComponentResponse.AddMember("publisher", _PublisherString)
-
-	DescribeComponentResponse_description = DescribeComponentResponse.AddMember("description", _DescriptionString)
-
-	DescribeComponentResponse_status = DescribeComponentResponse.AddMember("status", CloudComponentStatus)
-
-	DescribeComponentResponse_platforms = DescribeComponentResponse.AddMember("platforms", _ComponentPlatformList)
-
-	DescribeComponentResponse_tags = DescribeComponentResponse.AddMember("tags", _TagMap)
-
-	DisassociateServiceRoleFromAccountResponse_disassociatedAt = DisassociateServiceRoleFromAccountResponse.AddMember("disassociatedAt", _String, &smithytraits.JSONName{Name: "DisassociatedAt"})
-
-	GetComponentRequest_recipeOutputFormat = GetComponentRequest.AddMember("recipeOutputFormat", RecipeOutputFormat, &smithytraits.HTTPQuery{Name: "recipeOutputFormat"})
-
-	GetComponentRequest_arn = GetComponentRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	GetComponentResponse_recipeOutputFormat = GetComponentResponse.AddMember("recipeOutputFormat", RecipeOutputFormat)
-
-	GetComponentResponse_recipe = GetComponentResponse.AddMember("recipe", _RecipeBlob)
-
-	GetComponentResponse_tags = GetComponentResponse.AddMember("tags", _TagMap)
-
-	GetComponentVersionArtifactRequest_arn = GetComponentVersionArtifactRequest.AddMember("arn", _ComponentVersionARN, &smithytraits.HTTPLabel{})
-
-	GetComponentVersionArtifactRequest_artifactName = GetComponentVersionArtifactRequest.AddMember("artifactName", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetComponentVersionArtifactRequest_s3EndpointType = GetComponentVersionArtifactRequest.AddMember("s3EndpointType", S3EndpointType, &smithytraits.HTTPQuery{Name: "s3EndpointType"})
-
-	GetComponentVersionArtifactRequest_iotEndpointType = GetComponentVersionArtifactRequest.AddMember("iotEndpointType", IotEndpointType, &smithytraits.HTTPHeader{Name: "x-amz-iot-endpoint-type"})
-
-	GetComponentVersionArtifactResponse_preSignedUrl = GetComponentVersionArtifactResponse.AddMember("preSignedUrl", _NonEmptyString)
-
-	GetConnectivityInfoRequest_thingName = GetConnectivityInfoRequest.AddMember("thingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	GetConnectivityInfoResponse_connectivityInfo = GetConnectivityInfoResponse.AddMember("connectivityInfo", _connectivityInfoList, &smithytraits.JSONName{Name: "ConnectivityInfo"})
-
-	GetConnectivityInfoResponse_message = GetConnectivityInfoResponse.AddMember("message", _String, &smithytraits.JSONName{Name: "Message"})
-
-	GetCoreDeviceRequest_coreDeviceThingName = GetCoreDeviceRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	GetCoreDeviceResponse_coreDeviceThingName = GetCoreDeviceResponse.AddMember("coreDeviceThingName", _CoreDeviceThingName)
-
-	GetCoreDeviceResponse_coreVersion = GetCoreDeviceResponse.AddMember("coreVersion", _GGCVersion)
-
-	GetCoreDeviceResponse_platform = GetCoreDeviceResponse.AddMember("platform", _CoreDevicePlatformString)
-
-	GetCoreDeviceResponse_architecture = GetCoreDeviceResponse.AddMember("architecture", _CoreDeviceArchitectureString)
-
-	GetCoreDeviceResponse_runtime = GetCoreDeviceResponse.AddMember("runtime", _CoreDeviceRuntimeString)
-
-	GetCoreDeviceResponse_status = GetCoreDeviceResponse.AddMember("status", CoreDeviceStatus)
-
-	GetCoreDeviceResponse_lastStatusUpdateTimestamp = GetCoreDeviceResponse.AddMember("lastStatusUpdateTimestamp", _Timestamp)
-
-	GetCoreDeviceResponse_tags = GetCoreDeviceResponse.AddMember("tags", _TagMap)
-
-	GetDeploymentRequest_deploymentId = GetDeploymentRequest.AddMember("deploymentId", _NonEmptyString, &smithytraits.HTTPLabel{})
-
-	GetDeploymentResponse_targetArn = GetDeploymentResponse.AddMember("targetArn", _TargetARN)
-
-	GetDeploymentResponse_revisionId = GetDeploymentResponse.AddMember("revisionId", _NonEmptyString)
-
-	GetDeploymentResponse_deploymentId = GetDeploymentResponse.AddMember("deploymentId", _NonEmptyString)
-
-	GetDeploymentResponse_deploymentName = GetDeploymentResponse.AddMember("deploymentName", _NullableString)
-
-	GetDeploymentResponse_deploymentStatus = GetDeploymentResponse.AddMember("deploymentStatus", DeploymentStatus)
-
-	GetDeploymentResponse_iotJobId = GetDeploymentResponse.AddMember("iotJobId", _NullableString)
-
-	GetDeploymentResponse_iotJobArn = GetDeploymentResponse.AddMember("iotJobArn", _IoTJobARN)
-
-	GetDeploymentResponse_components = GetDeploymentResponse.AddMember("components", _ComponentDeploymentSpecifications)
-
-	GetDeploymentResponse_deploymentPolicies = GetDeploymentResponse.AddMember("deploymentPolicies", DeploymentPolicies)
-
-	GetDeploymentResponse_iotJobConfiguration = GetDeploymentResponse.AddMember("iotJobConfiguration", DeploymentIoTJobConfiguration)
-
-	GetDeploymentResponse_creationTimestamp = GetDeploymentResponse.AddMember("creationTimestamp", _Timestamp)
-
-	GetDeploymentResponse_isLatestForTarget = GetDeploymentResponse.AddMember("isLatestForTarget", _IsLatestForTarget)
-
-	GetDeploymentResponse_parentTargetArn = GetDeploymentResponse.AddMember("parentTargetArn", _ThingGroupARN)
-
-	GetDeploymentResponse_tags = GetDeploymentResponse.AddMember("tags", _TagMap)
-
-	GetServiceRoleForAccountResponse_associatedAt = GetServiceRoleForAccountResponse.AddMember("associatedAt", _String, &smithytraits.JSONName{Name: "AssociatedAt"})
-
-	GetServiceRoleForAccountResponse_roleArn = GetServiceRoleForAccountResponse.AddMember("roleArn", _String, &smithytraits.JSONName{Name: "RoleArn"})
-
-	ListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName = ListClientDevicesAssociatedWithCoreDeviceRequest.AddMember("coreDeviceThingName", _IoTThingName, &smithytraits.HTTPLabel{})
-
-	ListClientDevicesAssociatedWithCoreDeviceRequest_maxResults = ListClientDevicesAssociatedWithCoreDeviceRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClientDevicesAssociatedWithCoreDeviceRequest_nextToken = ListClientDevicesAssociatedWithCoreDeviceRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices = ListClientDevicesAssociatedWithCoreDeviceResponse.AddMember("associatedClientDevices", _AssociatedClientDeviceList)
-
-	ListClientDevicesAssociatedWithCoreDeviceResponse_nextToken = ListClientDevicesAssociatedWithCoreDeviceResponse.AddMember("nextToken", _NextTokenString)
-
-	ListComponentsRequest_scope = ListComponentsRequest.AddMember("scope", ComponentVisibilityScope, &smithytraits.HTTPQuery{Name: "scope"})
-
-	ListComponentsRequest_maxResults = ListComponentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListComponentsRequest_nextToken = ListComponentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListComponentsResponse_components = ListComponentsResponse.AddMember("components", _ComponentList)
-
-	ListComponentsResponse_nextToken = ListComponentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListComponentVersionsRequest_arn = ListComponentVersionsRequest.AddMember("arn", _ComponentARN, &smithytraits.HTTPLabel{})
-
-	ListComponentVersionsRequest_maxResults = ListComponentVersionsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListComponentVersionsRequest_nextToken = ListComponentVersionsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListComponentVersionsResponse_componentVersions = ListComponentVersionsResponse.AddMember("componentVersions", _ComponentVersionList)
-
-	ListComponentVersionsResponse_nextToken = ListComponentVersionsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListCoreDevicesRequest_thingGroupArn = ListCoreDevicesRequest.AddMember("thingGroupArn", _ThingGroupARN, &smithytraits.HTTPQuery{Name: "thingGroupArn"})
-
-	ListCoreDevicesRequest_status = ListCoreDevicesRequest.AddMember("status", CoreDeviceStatus, &smithytraits.HTTPQuery{Name: "status"})
-
-	ListCoreDevicesRequest_maxResults = ListCoreDevicesRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListCoreDevicesRequest_nextToken = ListCoreDevicesRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListCoreDevicesRequest_runtime = ListCoreDevicesRequest.AddMember("runtime", _CoreDeviceRuntimeString, &smithytraits.HTTPQuery{Name: "runtime"})
-
-	ListCoreDevicesResponse_coreDevices = ListCoreDevicesResponse.AddMember("coreDevices", _CoreDevicesList)
-
-	ListCoreDevicesResponse_nextToken = ListCoreDevicesResponse.AddMember("nextToken", _NextTokenString)
-
-	ListDeploymentsRequest_targetArn = ListDeploymentsRequest.AddMember("targetArn", _TargetARN, &smithytraits.HTTPQuery{Name: "targetArn"})
-
-	ListDeploymentsRequest_historyFilter = ListDeploymentsRequest.AddMember("historyFilter", DeploymentHistoryFilter, &smithytraits.HTTPQuery{Name: "historyFilter"})
-
-	ListDeploymentsRequest_parentTargetArn = ListDeploymentsRequest.AddMember("parentTargetArn", _ThingGroupARN, &smithytraits.HTTPQuery{Name: "parentTargetArn"})
-
-	ListDeploymentsRequest_maxResults = ListDeploymentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListDeploymentsRequest_nextToken = ListDeploymentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListDeploymentsResponse_deployments = ListDeploymentsResponse.AddMember("deployments", _DeploymentList)
-
-	ListDeploymentsResponse_nextToken = ListDeploymentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListEffectiveDeploymentsRequest_coreDeviceThingName = ListEffectiveDeploymentsRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	ListEffectiveDeploymentsRequest_maxResults = ListEffectiveDeploymentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListEffectiveDeploymentsRequest_nextToken = ListEffectiveDeploymentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListEffectiveDeploymentsResponse_effectiveDeployments = ListEffectiveDeploymentsResponse.AddMember("effectiveDeployments", _EffectiveDeploymentsList)
-
-	ListEffectiveDeploymentsResponse_nextToken = ListEffectiveDeploymentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListInstalledComponentsRequest_coreDeviceThingName = ListInstalledComponentsRequest.AddMember("coreDeviceThingName", _CoreDeviceThingName, &smithytraits.HTTPLabel{})
-
-	ListInstalledComponentsRequest_maxResults = ListInstalledComponentsRequest.AddMember("maxResults", _DefaultMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListInstalledComponentsRequest_nextToken = ListInstalledComponentsRequest.AddMember("nextToken", _NextTokenString, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListInstalledComponentsRequest_topologyFilter = ListInstalledComponentsRequest.AddMember("topologyFilter", InstalledComponentTopologyFilter, &smithytraits.HTTPQuery{Name: "topologyFilter"})
-
-	ListInstalledComponentsResponse_installedComponents = ListInstalledComponentsResponse.AddMember("installedComponents", _InstalledComponentList)
-
-	ListInstalledComponentsResponse_nextToken = ListInstalledComponentsResponse.AddMember("nextToken", _NextTokenString)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _GenericV2ARN, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	ResolveComponentCandidatesRequest_platform = ResolveComponentCandidatesRequest.AddMember("platform", ComponentPlatform)
-
-	ResolveComponentCandidatesRequest_componentCandidates = ResolveComponentCandidatesRequest.AddMember("componentCandidates", _ComponentCandidateList)
-
-	ResolveComponentCandidatesResponse_resolvedComponentVersions = ResolveComponentCandidatesResponse.AddMember("resolvedComponentVersions", _ResolvedComponentVersionsList)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _GenericV2ARN, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _GenericV2ARN, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateConnectivityInfoRequest_thingName = UpdateConnectivityInfoRequest.AddMember("thingName", _CoreDeviceThingName, &smithytraits.JSONName{Name: "ThingName"},
-
-		&smithytraits.HTTPLabel{})
-
-	UpdateConnectivityInfoRequest_connectivityInfo = UpdateConnectivityInfoRequest.AddMember("connectivityInfo", _connectivityInfoList, &smithytraits.JSONName{Name: "ConnectivityInfo"})
-
-	UpdateConnectivityInfoResponse_version = UpdateConnectivityInfoResponse.AddMember("version", _String, &smithytraits.JSONName{Name: "Version"})
-
-	UpdateConnectivityInfoResponse_message = UpdateConnectivityInfoResponse.AddMember("message", _String, &smithytraits.JSONName{Name: "Message"})
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Id"}}, DirectMask: 0x1}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "HostAddress"}}, DirectMask: 0x1}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "PortNumber"}}, DirectMask: 0x1}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Metadata"}}, DirectMask: 0x1}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "RoleArn"}}, DirectMask: 0x1}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "AssociatedAt"}}, DirectMask: 0x1}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "DisassociatedAt"}}, DirectMask: 0x1}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "recipeOutputFormat"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "s3EndpointType"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amz-iot-endpoint-type"}}, DirectMask: 0x80}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ConnectivityInfo"}}, DirectMask: 0x1}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Message"}}, DirectMask: 0x1}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "scope"}}, DirectMask: 0x10}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "thingGroupArn"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "status"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "runtime"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "targetArn"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "historyFilter"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "parentTargetArn"}}, DirectMask: 0x10}
+var t59 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "topologyFilter"}}, DirectMask: 0x10}
+var t60 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+var t61 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "ThingName"}, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x5}
+var t62 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "Version"}}, DirectMask: 0x1}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mAssociateClientDeviceWithCoreDeviceEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateClientDeviceWithCoreDeviceEntry_thingName}}
+var m_AssociateClientDeviceWithCoreDeviceEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociateClientDeviceWithCoreDeviceEntryList_member}}
+var mAssociateClientDeviceWithCoreDeviceErrorEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateClientDeviceWithCoreDeviceErrorEntry_thingName, &sAssociateClientDeviceWithCoreDeviceErrorEntry_code, &sAssociateClientDeviceWithCoreDeviceErrorEntry_message}}
+var m_AssociateClientDeviceWithCoreDeviceErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociateClientDeviceWithCoreDeviceErrorList_member}}
+var mAssociatedClientDevice = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociatedClientDevice_thingName, &sAssociatedClientDevice_associationTimestamp}}
+var m_AssociatedClientDeviceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AssociatedClientDeviceList_member}}
+var mCloudComponentState = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudComponentState_REQUESTED, &sCloudComponentState_INITIATED, &sCloudComponentState_DEPLOYABLE, &sCloudComponentState_FAILED, &sCloudComponentState_DEPRECATED}}
+var mCloudComponentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCloudComponentStatus_componentState, &sCloudComponentStatus_message, &sCloudComponentStatus_errors, &sCloudComponentStatus_vendorGuidance, &sCloudComponentStatus_vendorGuidanceMessage}}
+var mComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sComponent_arn, &sComponent_componentName, &sComponent_latestVersion}}
+var mComponentCandidate = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentCandidate_componentName, &sComponentCandidate_componentVersion, &sComponentCandidate_versionRequirements}}
+var m_ComponentCandidateList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentCandidateList_member}}
+var m_ComponentConfigurationPathList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentConfigurationPathList_member}}
+var mComponentConfigurationUpdate = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentConfigurationUpdate_merge, &sComponentConfigurationUpdate_reset}}
+var m_ComponentDependencyMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentDependencyMap_key, &s_ComponentDependencyMap_value}}
+var mComponentDependencyRequirement = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentDependencyRequirement_versionRequirement, &sComponentDependencyRequirement_dependencyType}}
+var mComponentDependencyType = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentDependencyType_HARD, &sComponentDependencyType_SOFT}}
+var mComponentDeploymentSpecification = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentDeploymentSpecification_componentVersion, &sComponentDeploymentSpecification_configurationUpdate, &sComponentDeploymentSpecification_runWith}}
+var m_ComponentDeploymentSpecifications = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentDeploymentSpecifications_key, &s_ComponentDeploymentSpecifications_value}}
+var mComponentLatestVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentLatestVersion_arn, &sComponentLatestVersion_componentVersion, &sComponentLatestVersion_creationTimestamp, &sComponentLatestVersion_description, &sComponentLatestVersion_publisher, &sComponentLatestVersion_platforms}}
+var m_ComponentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentList_member}}
+var mComponentPlatform = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentPlatform_name, &sComponentPlatform_attributes}}
+var m_ComponentPlatformList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentPlatformList_member}}
+var mComponentRunWith = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentRunWith_posixUser, &sComponentRunWith_systemResourceLimits, &sComponentRunWith_windowsUser}}
+var m_ComponentVersionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentVersionList_member}}
+var mComponentVersionListItem = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentVersionListItem_componentName, &sComponentVersionListItem_componentVersion, &sComponentVersionListItem_arn}}
+var m_ComponentVersionRequirementMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ComponentVersionRequirementMap_key, &s_ComponentVersionRequirementMap_value}}
+var mComponentVisibilityScope = smithy.SchemaMembers{List: []*smithy.Schema{&sComponentVisibilityScope_PRIVATE, &sComponentVisibilityScope_PUBLIC}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mConnectivityInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sConnectivityInfo_id, &sConnectivityInfo_hostAddress, &sConnectivityInfo_portNumber, &sConnectivityInfo_metadata}}
+var m_connectivityInfoList = smithy.SchemaMembers{List: []*smithy.Schema{&s_connectivityInfoList_member}}
+var mCoreDevice = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreDevice_coreDeviceThingName, &sCoreDevice_status, &sCoreDevice_lastStatusUpdateTimestamp, &sCoreDevice_platform, &sCoreDevice_architecture, &sCoreDevice_runtime}}
+var m_CoreDevicesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CoreDevicesList_member}}
+var mCoreDeviceStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sCoreDeviceStatus_HEALTHY, &sCoreDeviceStatus_UNHEALTHY}}
+var mDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&sDeployment_targetArn, &sDeployment_revisionId, &sDeployment_deploymentId, &sDeployment_deploymentName, &sDeployment_creationTimestamp, &sDeployment_deploymentStatus, &sDeployment_isLatestForTarget, &sDeployment_parentTargetArn}}
+var mDeploymentComponentUpdatePolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentComponentUpdatePolicy_timeoutInSeconds, &sDeploymentComponentUpdatePolicy_action}}
+var mDeploymentComponentUpdatePolicyAction = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS, &sDeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS}}
+var mDeploymentConfigurationValidationPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentConfigurationValidationPolicy_timeoutInSeconds}}
+var mDeploymentFailureHandlingPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentFailureHandlingPolicy_ROLLBACK, &sDeploymentFailureHandlingPolicy_DO_NOTHING}}
+var mDeploymentHistoryFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentHistoryFilter_ALL, &sDeploymentHistoryFilter_LATEST_ONLY}}
+var mDeploymentIoTJobConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentIoTJobConfiguration_jobExecutionsRolloutConfig, &sDeploymentIoTJobConfiguration_abortConfig, &sDeploymentIoTJobConfiguration_timeoutConfig}}
+var m_DeploymentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DeploymentList_member}}
+var mDeploymentPolicies = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentPolicies_failureHandlingPolicy, &sDeploymentPolicies_componentUpdatePolicy, &sDeploymentPolicies_configurationValidationPolicy}}
+var mDeploymentStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDeploymentStatus_ACTIVE, &sDeploymentStatus_COMPLETED, &sDeploymentStatus_CANCELED, &sDeploymentStatus_FAILED, &sDeploymentStatus_INACTIVE}}
+var mDisassociateClientDeviceFromCoreDeviceEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateClientDeviceFromCoreDeviceEntry_thingName}}
+var m_DisassociateClientDeviceFromCoreDeviceEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DisassociateClientDeviceFromCoreDeviceEntryList_member}}
+var mDisassociateClientDeviceFromCoreDeviceErrorEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateClientDeviceFromCoreDeviceErrorEntry_thingName, &sDisassociateClientDeviceFromCoreDeviceErrorEntry_code, &sDisassociateClientDeviceFromCoreDeviceErrorEntry_message}}
+var m_DisassociateClientDeviceFromCoreDeviceErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_DisassociateClientDeviceFromCoreDeviceErrorList_member}}
+var mEffectiveDeployment = smithy.SchemaMembers{List: []*smithy.Schema{&sEffectiveDeployment_deploymentId, &sEffectiveDeployment_deploymentName, &sEffectiveDeployment_iotJobId, &sEffectiveDeployment_iotJobArn, &sEffectiveDeployment_description, &sEffectiveDeployment_targetArn, &sEffectiveDeployment_coreDeviceExecutionStatus, &sEffectiveDeployment_reason, &sEffectiveDeployment_creationTimestamp, &sEffectiveDeployment_modifiedTimestamp, &sEffectiveDeployment_statusDetails}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 2, 0, 0, 4, 0, 10, 0, 0, 3, 1, 5, 8, 0, 7, 9, 0, 0, 0, 0, 0, 0,
+	0, 11, 0, 6, 0, 0, 0, 0,
+}}
+var m_EffectiveDeploymentErrorStack = smithy.SchemaMembers{List: []*smithy.Schema{&s_EffectiveDeploymentErrorStack_member}}
+var m_EffectiveDeploymentErrorTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EffectiveDeploymentErrorTypeList_member}}
+var mEffectiveDeploymentExecutionStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEffectiveDeploymentExecutionStatus_IN_PROGRESS, &sEffectiveDeploymentExecutionStatus_QUEUED, &sEffectiveDeploymentExecutionStatus_FAILED, &sEffectiveDeploymentExecutionStatus_COMPLETED, &sEffectiveDeploymentExecutionStatus_TIMED_OUT, &sEffectiveDeploymentExecutionStatus_CANCELED, &sEffectiveDeploymentExecutionStatus_REJECTED, &sEffectiveDeploymentExecutionStatus_SUCCEEDED}}
+var m_EffectiveDeploymentsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EffectiveDeploymentsList_member}}
+var mEffectiveDeploymentStatusDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEffectiveDeploymentStatusDetails_errorStack, &sEffectiveDeploymentStatusDetails_errorTypes}}
+var mInstalledComponent = smithy.SchemaMembers{List: []*smithy.Schema{&sInstalledComponent_componentName, &sInstalledComponent_componentVersion, &sInstalledComponent_lifecycleState, &sInstalledComponent_lifecycleStateDetails, &sInstalledComponent_isRoot, &sInstalledComponent_lastStatusChangeTimestamp, &sInstalledComponent_lastReportedTimestamp, &sInstalledComponent_lastInstallationSource, &sInstalledComponent_lifecycleStatusCodes}, Seed: 2, Slots: []uint16{
+	0, 0, 0, 0, 0, 7, 6, 0, 3, 0, 0, 2, 0, 4, 9, 0, 0, 0, 0, 8, 0, 0, 0, 0,
+	0, 5, 0, 0, 0, 0, 1, 0,
+}}
+var mInstalledComponentLifecycleState = smithy.SchemaMembers{List: []*smithy.Schema{&sInstalledComponentLifecycleState_NEW, &sInstalledComponentLifecycleState_INSTALLED, &sInstalledComponentLifecycleState_STARTING, &sInstalledComponentLifecycleState_RUNNING, &sInstalledComponentLifecycleState_STOPPING, &sInstalledComponentLifecycleState_ERRORED, &sInstalledComponentLifecycleState_BROKEN, &sInstalledComponentLifecycleState_FINISHED}}
+var m_InstalledComponentLifecycleStatusCodeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstalledComponentLifecycleStatusCodeList_member}}
+var m_InstalledComponentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_InstalledComponentList_member}}
+var mInstalledComponentTopologyFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sInstalledComponentTopologyFilter_ALL, &sInstalledComponentTopologyFilter_ROOT}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message, &sInternalServerException_retryAfterSeconds}}
+var mIotEndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sIotEndpointType_fips, &sIotEndpointType_standard}}
+var mIoTJobAbortAction = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobAbortAction_CANCEL}}
+var mIoTJobAbortConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobAbortConfig_criteriaList}}
+var mIoTJobAbortCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobAbortCriteria_failureType, &sIoTJobAbortCriteria_action, &sIoTJobAbortCriteria_thresholdPercentage, &sIoTJobAbortCriteria_minNumberOfExecutedThings}}
+var m_IoTJobAbortCriteriaList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IoTJobAbortCriteriaList_member}}
+var mIoTJobExecutionFailureType = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobExecutionFailureType_FAILED, &sIoTJobExecutionFailureType_REJECTED, &sIoTJobExecutionFailureType_TIMED_OUT, &sIoTJobExecutionFailureType_ALL}}
+var mIoTJobExecutionsRolloutConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobExecutionsRolloutConfig_exponentialRate, &sIoTJobExecutionsRolloutConfig_maximumPerMinute}}
+var mIoTJobExponentialRolloutRate = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobExponentialRolloutRate_baseRatePerMinute, &sIoTJobExponentialRolloutRate_incrementFactor, &sIoTJobExponentialRolloutRate_rateIncreaseCriteria}}
+var mIoTJobRateIncreaseCriteria = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobRateIncreaseCriteria_numberOfNotifiedThings, &sIoTJobRateIncreaseCriteria_numberOfSucceededThings}}
+var mIoTJobTimeoutConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sIoTJobTimeoutConfig_inProgressTimeoutInMinutes}}
+var mLambdaContainerParams = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaContainerParams_memorySizeInKB, &sLambdaContainerParams_mountROSysfs, &sLambdaContainerParams_volumes, &sLambdaContainerParams_devices}}
+var m_LambdaDeviceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LambdaDeviceList_member}}
+var mLambdaDeviceMount = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaDeviceMount_path, &sLambdaDeviceMount_permission, &sLambdaDeviceMount_addGroupOwner}}
+var m_LambdaEnvironmentVariables = smithy.SchemaMembers{List: []*smithy.Schema{&s_LambdaEnvironmentVariables_key, &s_LambdaEnvironmentVariables_value}}
+var mLambdaEventSource = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaEventSource_topic, &sLambdaEventSource_type}}
+var m_LambdaEventSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LambdaEventSourceList_member}}
+var mLambdaEventSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaEventSourceType_PUB_SUB, &sLambdaEventSourceType_IOT_CORE}}
+var m_LambdaExecArgsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LambdaExecArgsList_member}}
+var mLambdaExecutionParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaExecutionParameters_eventSources, &sLambdaExecutionParameters_maxQueueSize, &sLambdaExecutionParameters_maxInstancesCount, &sLambdaExecutionParameters_maxIdleTimeInSeconds, &sLambdaExecutionParameters_timeoutInSeconds, &sLambdaExecutionParameters_statusTimeoutInSeconds, &sLambdaExecutionParameters_pinned, &sLambdaExecutionParameters_inputPayloadEncodingType, &sLambdaExecutionParameters_execArgs, &sLambdaExecutionParameters_environmentVariables, &sLambdaExecutionParameters_linuxProcessParams}, Seed: 3, Slots: []uint16{
+	6, 11, 5, 0, 7, 0, 0, 4, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 2,
+	0, 1, 0, 0, 0, 0, 3, 9,
+}}
+var mLambdaFilesystemPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFilesystemPermission_RO, &sLambdaFilesystemPermission_RW}}
+var mLambdaFunctionRecipeSource = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaFunctionRecipeSource_lambdaArn, &sLambdaFunctionRecipeSource_componentName, &sLambdaFunctionRecipeSource_componentVersion, &sLambdaFunctionRecipeSource_componentPlatforms, &sLambdaFunctionRecipeSource_componentDependencies, &sLambdaFunctionRecipeSource_componentLambdaParameters}}
+var mLambdaInputPayloadEncodingType = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaInputPayloadEncodingType_JSON, &sLambdaInputPayloadEncodingType_BINARY}}
+var mLambdaIsolationMode = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaIsolationMode_GREENGRASS_CONTAINER, &sLambdaIsolationMode_NO_CONTAINER}}
+var mLambdaLinuxProcessParams = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaLinuxProcessParams_isolationMode, &sLambdaLinuxProcessParams_containerParams}}
+var m_LambdaVolumeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LambdaVolumeList_member}}
+var mLambdaVolumeMount = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaVolumeMount_sourcePath, &sLambdaVolumeMount_destinationPath, &sLambdaVolumeMount_permission, &sLambdaVolumeMount_addGroupOwner}}
+var m_PlatformAttributesMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_PlatformAttributesMap_key, &s_PlatformAttributesMap_value}}
+var mRecipeOutputFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sRecipeOutputFormat_JSON, &sRecipeOutputFormat_YAML}}
+var mRequestAlreadyInProgressException = smithy.SchemaMembers{List: []*smithy.Schema{&sRequestAlreadyInProgressException_message}}
+var mResolvedComponentVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sResolvedComponentVersion_arn, &sResolvedComponentVersion_componentName, &sResolvedComponentVersion_componentVersion, &sResolvedComponentVersion_recipe, &sResolvedComponentVersion_vendorGuidance, &sResolvedComponentVersion_message}}
+var m_ResolvedComponentVersionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResolvedComponentVersionsList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mS3EndpointType = smithy.SchemaMembers{List: []*smithy.Schema{&sS3EndpointType_REGIONAL, &sS3EndpointType_GLOBAL}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message, &sServiceQuotaExceededException_resourceId, &sServiceQuotaExceededException_resourceType, &sServiceQuotaExceededException_quotaCode, &sServiceQuotaExceededException_serviceCode}}
+var m_StringMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringMap_key, &s_StringMap_value}}
+var mSystemResourceLimits = smithy.SchemaMembers{List: []*smithy.Schema{&sSystemResourceLimits_memory, &sSystemResourceLimits_cpus}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_quotaCode, &sThrottlingException_serviceCode, &sThrottlingException_retryAfterSeconds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fields}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mValidationExceptionReason = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionReason_UNKNOWN_OPERATION, &sValidationExceptionReason_CANNOT_PARSE, &sValidationExceptionReason_FIELD_VALIDATION_FAILED, &sValidationExceptionReason_OTHER}}
+var mVendorGuidance = smithy.SchemaMembers{List: []*smithy.Schema{&sVendorGuidance_ACTIVE, &sVendorGuidance_DISCONTINUED, &sVendorGuidance_DELETED}}
+var mAssociateServiceRoleToAccountRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateServiceRoleToAccountRequest_roleArn}}
+var mAssociateServiceRoleToAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateServiceRoleToAccountResponse_associatedAt}}
+var mBatchAssociateClientDeviceWithCoreDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateClientDeviceWithCoreDeviceRequest_entries, &sBatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName}}
+var mBatchAssociateClientDeviceWithCoreDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries}}
+var mBatchDisassociateClientDeviceFromCoreDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateClientDeviceFromCoreDeviceRequest_entries, &sBatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName}}
+var mBatchDisassociateClientDeviceFromCoreDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries}}
+var mCancelDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelDeploymentRequest_deploymentId}}
+var mCancelDeploymentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelDeploymentResponse_message}}
+var mCreateComponentVersionRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentVersionRequest_inlineRecipe, &sCreateComponentVersionRequest_lambdaFunction, &sCreateComponentVersionRequest_tags, &sCreateComponentVersionRequest_clientToken}}
+var mCreateComponentVersionResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateComponentVersionResponse_arn, &sCreateComponentVersionResponse_componentName, &sCreateComponentVersionResponse_componentVersion, &sCreateComponentVersionResponse_creationTimestamp, &sCreateComponentVersionResponse_status}}
+var mCreateDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeploymentRequest_targetArn, &sCreateDeploymentRequest_deploymentName, &sCreateDeploymentRequest_components, &sCreateDeploymentRequest_iotJobConfiguration, &sCreateDeploymentRequest_deploymentPolicies, &sCreateDeploymentRequest_parentTargetArn, &sCreateDeploymentRequest_tags, &sCreateDeploymentRequest_clientToken}}
+var mCreateDeploymentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDeploymentResponse_deploymentId, &sCreateDeploymentResponse_iotJobId, &sCreateDeploymentResponse_iotJobArn}}
+var mDeleteComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteComponentRequest_arn}}
+var mDeleteCoreDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteCoreDeviceRequest_coreDeviceThingName}}
+var mDeleteDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteDeploymentRequest_deploymentId}}
+var mDescribeComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentRequest_arn}}
+var mDescribeComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeComponentResponse_arn, &sDescribeComponentResponse_componentName, &sDescribeComponentResponse_componentVersion, &sDescribeComponentResponse_creationTimestamp, &sDescribeComponentResponse_publisher, &sDescribeComponentResponse_description, &sDescribeComponentResponse_status, &sDescribeComponentResponse_platforms, &sDescribeComponentResponse_tags}, Seed: 1, Slots: []uint16{
+	1, 0, 0, 8, 9, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 5, 0, 7, 0,
+	6, 0, 0, 0, 4, 0, 3, 0,
+}}
+var mDisassociateServiceRoleFromAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateServiceRoleFromAccountResponse_disassociatedAt}}
+var mGetComponentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentRequest_recipeOutputFormat, &sGetComponentRequest_arn}}
+var mGetComponentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentResponse_recipeOutputFormat, &sGetComponentResponse_recipe, &sGetComponentResponse_tags}}
+var mGetComponentVersionArtifactRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentVersionArtifactRequest_arn, &sGetComponentVersionArtifactRequest_artifactName, &sGetComponentVersionArtifactRequest_s3EndpointType, &sGetComponentVersionArtifactRequest_iotEndpointType}}
+var mGetComponentVersionArtifactResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetComponentVersionArtifactResponse_preSignedUrl}}
+var mGetConnectivityInfoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectivityInfoRequest_thingName}}
+var mGetConnectivityInfoResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConnectivityInfoResponse_connectivityInfo, &sGetConnectivityInfoResponse_message}}
+var mGetCoreDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreDeviceRequest_coreDeviceThingName}}
+var mGetCoreDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetCoreDeviceResponse_coreDeviceThingName, &sGetCoreDeviceResponse_coreVersion, &sGetCoreDeviceResponse_platform, &sGetCoreDeviceResponse_architecture, &sGetCoreDeviceResponse_runtime, &sGetCoreDeviceResponse_status, &sGetCoreDeviceResponse_lastStatusUpdateTimestamp, &sGetCoreDeviceResponse_tags}}
+var mGetDeploymentRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentRequest_deploymentId}}
+var mGetDeploymentResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDeploymentResponse_targetArn, &sGetDeploymentResponse_revisionId, &sGetDeploymentResponse_deploymentId, &sGetDeploymentResponse_deploymentName, &sGetDeploymentResponse_deploymentStatus, &sGetDeploymentResponse_iotJobId, &sGetDeploymentResponse_iotJobArn, &sGetDeploymentResponse_components, &sGetDeploymentResponse_deploymentPolicies, &sGetDeploymentResponse_iotJobConfiguration, &sGetDeploymentResponse_creationTimestamp, &sGetDeploymentResponse_isLatestForTarget, &sGetDeploymentResponse_parentTargetArn, &sGetDeploymentResponse_tags}, Seed: 57, Slots: []uint16{
+	0, 0, 0, 0, 3, 5, 4, 0, 0, 9, 0, 8, 2, 0, 0, 10, 1, 0, 6, 0, 0, 0, 0, 11,
+	12, 14, 0, 0, 0, 13, 7, 0,
+}}
+var mGetServiceRoleForAccountResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceRoleForAccountResponse_associatedAt, &sGetServiceRoleForAccountResponse_roleArn}}
+var mListClientDevicesAssociatedWithCoreDeviceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName, &sListClientDevicesAssociatedWithCoreDeviceRequest_maxResults, &sListClientDevicesAssociatedWithCoreDeviceRequest_nextToken}}
+var mListClientDevicesAssociatedWithCoreDeviceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices, &sListClientDevicesAssociatedWithCoreDeviceResponse_nextToken}}
+var mListComponentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsRequest_scope, &sListComponentsRequest_maxResults, &sListComponentsRequest_nextToken}}
+var mListComponentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentsResponse_components, &sListComponentsResponse_nextToken}}
+var mListComponentVersionsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentVersionsRequest_arn, &sListComponentVersionsRequest_maxResults, &sListComponentVersionsRequest_nextToken}}
+var mListComponentVersionsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListComponentVersionsResponse_componentVersions, &sListComponentVersionsResponse_nextToken}}
+var mListCoreDevicesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreDevicesRequest_thingGroupArn, &sListCoreDevicesRequest_status, &sListCoreDevicesRequest_maxResults, &sListCoreDevicesRequest_nextToken, &sListCoreDevicesRequest_runtime}}
+var mListCoreDevicesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListCoreDevicesResponse_coreDevices, &sListCoreDevicesResponse_nextToken}}
+var mListDeploymentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentsRequest_targetArn, &sListDeploymentsRequest_historyFilter, &sListDeploymentsRequest_parentTargetArn, &sListDeploymentsRequest_maxResults, &sListDeploymentsRequest_nextToken}}
+var mListDeploymentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListDeploymentsResponse_deployments, &sListDeploymentsResponse_nextToken}}
+var mListEffectiveDeploymentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEffectiveDeploymentsRequest_coreDeviceThingName, &sListEffectiveDeploymentsRequest_maxResults, &sListEffectiveDeploymentsRequest_nextToken}}
+var mListEffectiveDeploymentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEffectiveDeploymentsResponse_effectiveDeployments, &sListEffectiveDeploymentsResponse_nextToken}}
+var mListInstalledComponentsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListInstalledComponentsRequest_coreDeviceThingName, &sListInstalledComponentsRequest_maxResults, &sListInstalledComponentsRequest_nextToken, &sListInstalledComponentsRequest_topologyFilter}}
+var mListInstalledComponentsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListInstalledComponentsResponse_installedComponents, &sListInstalledComponentsResponse_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mResolveComponentCandidatesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResolveComponentCandidatesRequest_platform, &sResolveComponentCandidatesRequest_componentCandidates}}
+var mResolveComponentCandidatesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResolveComponentCandidatesResponse_resolvedComponentVersions}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateConnectivityInfoRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectivityInfoRequest_thingName, &sUpdateConnectivityInfoRequest_connectivityInfo}}
+var mUpdateConnectivityInfoResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConnectivityInfoResponse_version, &sUpdateConnectivityInfoResponse_message}}
+
+var sAssociateServiceRoleToAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceRoleToAccount, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sBatchAssociateClientDeviceWithCoreDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateClientDeviceWithCoreDevice, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sBatchDisassociateClientDeviceFromCoreDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateClientDeviceFromCoreDevice, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCancelDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDeployment, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateComponentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentVersion, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeployment, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponent, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteCoreDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreDevice, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeployment, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDescribeComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponent, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDisassociateServiceRoleFromAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceRoleFromAccount, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponent, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetComponentVersionArtifact = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentVersionArtifact, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectivityInfo, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetCoreDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreDevice, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeployment, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetServiceRoleForAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceRoleForAccount, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListClientDevicesAssociatedWithCoreDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClientDevicesAssociatedWithCoreDevice, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponents, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListComponentVersions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentVersions, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListCoreDevices = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreDevices, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListDeployments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeployments, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListEffectiveDeployments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEffectiveDeployments, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListInstalledComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstalledComponents, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sResolveComponentCandidates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveComponentCandidates, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sUpdateConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectivityInfo, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var s_GreengrassV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GreengrassV2, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t29, Type: smithy.ShapeTypeStructure})
+var sAssociateClientDeviceWithCoreDeviceEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateClientDeviceWithCoreDeviceEntry, Members: &mAssociateClientDeviceWithCoreDeviceEntry, Type: smithy.ShapeTypeStructure})
+var s_AssociateClientDeviceWithCoreDeviceEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociateClientDeviceWithCoreDeviceEntryList, Members: &m_AssociateClientDeviceWithCoreDeviceEntryList, Type: smithy.ShapeTypeList})
+var sAssociateClientDeviceWithCoreDeviceErrorEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateClientDeviceWithCoreDeviceErrorEntry, Members: &mAssociateClientDeviceWithCoreDeviceErrorEntry, Type: smithy.ShapeTypeStructure})
+var s_AssociateClientDeviceWithCoreDeviceErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociateClientDeviceWithCoreDeviceErrorList, Members: &m_AssociateClientDeviceWithCoreDeviceErrorList, Type: smithy.ShapeTypeList})
+var sAssociatedClientDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociatedClientDevice, Members: &mAssociatedClientDevice, Type: smithy.ShapeTypeStructure})
+var s_AssociatedClientDeviceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociatedClientDeviceList, Members: &m_AssociatedClientDeviceList, Type: smithy.ShapeTypeList})
+var s_ClientTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientTokenString, Type: smithy.ShapeTypeString})
+var sCloudComponentState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudComponentState, Members: &mCloudComponentState, Type: smithy.ShapeTypeEnum})
+var sCloudComponentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCloudComponentStatus, Members: &mCloudComponentStatus, Type: smithy.ShapeTypeStructure})
+var sComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var s_ComponentARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentARN, Type: smithy.ShapeTypeString})
+var sComponentCandidate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentCandidate, Members: &mComponentCandidate, Type: smithy.ShapeTypeStructure})
+var s_ComponentCandidateList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentCandidateList, Members: &m_ComponentCandidateList, Type: smithy.ShapeTypeList})
+var s_ComponentConfigurationPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentConfigurationPath, Type: smithy.ShapeTypeString})
+var s_ComponentConfigurationPathList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentConfigurationPathList, Members: &m_ComponentConfigurationPathList, Type: smithy.ShapeTypeList})
+var s_ComponentConfigurationString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentConfigurationString, Type: smithy.ShapeTypeString})
+var sComponentConfigurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentConfigurationUpdate, Members: &mComponentConfigurationUpdate, Type: smithy.ShapeTypeStructure})
+var s_ComponentDependencyMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentDependencyMap, Members: &m_ComponentDependencyMap, Type: smithy.ShapeTypeMap})
+var sComponentDependencyRequirement = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentDependencyRequirement, Members: &mComponentDependencyRequirement, Type: smithy.ShapeTypeStructure})
+var sComponentDependencyType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentDependencyType, Members: &mComponentDependencyType, Type: smithy.ShapeTypeEnum})
+var sComponentDeploymentSpecification = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentDeploymentSpecification, Members: &mComponentDeploymentSpecification, Type: smithy.ShapeTypeStructure})
+var s_ComponentDeploymentSpecifications = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentDeploymentSpecifications, Members: &m_ComponentDeploymentSpecifications, Type: smithy.ShapeTypeMap})
+var sComponentLatestVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentLatestVersion, Members: &mComponentLatestVersion, Type: smithy.ShapeTypeStructure})
+var s_ComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentList, Members: &m_ComponentList, Type: smithy.ShapeTypeList})
+var s_ComponentNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sComponentPlatform = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentPlatform, Members: &mComponentPlatform, Type: smithy.ShapeTypeStructure})
+var s_ComponentPlatformList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentPlatformList, Members: &m_ComponentPlatformList, Type: smithy.ShapeTypeList})
+var sComponentRunWith = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentRunWith, Members: &mComponentRunWith, Type: smithy.ShapeTypeStructure})
+var s_ComponentVersionARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentVersionARN, Type: smithy.ShapeTypeString})
+var s_ComponentVersionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentVersionList, Members: &m_ComponentVersionList, Type: smithy.ShapeTypeList})
+var sComponentVersionListItem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentVersionListItem, Members: &mComponentVersionListItem, Type: smithy.ShapeTypeStructure})
+var s_ComponentVersionRequirementMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentVersionRequirementMap, Members: &m_ComponentVersionRequirementMap, Type: smithy.ShapeTypeMap})
+var s_ComponentVersionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sComponentVisibilityScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iComponentVisibilityScope, Members: &mComponentVisibilityScope, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var sConnectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConnectivityInfo, Members: &mConnectivityInfo, Type: smithy.ShapeTypeStructure})
+var s_connectivityInfoList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_connectivityInfoList, Members: &m_connectivityInfoList, Type: smithy.ShapeTypeList})
+var sCoreDevice = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreDevice, Members: &mCoreDevice, Type: smithy.ShapeTypeStructure})
+var s_CoreDeviceArchitectureString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreDeviceArchitectureString, Type: smithy.ShapeTypeString})
+var s_CoreDevicePlatformString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreDevicePlatformString, Type: smithy.ShapeTypeString})
+var s_CoreDeviceRuntimeString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreDeviceRuntimeString, Type: smithy.ShapeTypeString})
+var s_CoreDevicesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreDevicesList, Members: &m_CoreDevicesList, Type: smithy.ShapeTypeList})
+var sCoreDeviceStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCoreDeviceStatus, Members: &mCoreDeviceStatus, Type: smithy.ShapeTypeEnum})
+var s_CoreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CoreDeviceThingName, Type: smithy.ShapeTypeString})
+var s_CPU = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CPU, Type: smithy.ShapeTypeDouble})
+var s_DefaultMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DefaultMaxResults, Type: smithy.ShapeTypeInteger})
+var sDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure})
+var sDeploymentComponentUpdatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentComponentUpdatePolicy, Members: &mDeploymentComponentUpdatePolicy, Type: smithy.ShapeTypeStructure})
+var sDeploymentComponentUpdatePolicyAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentComponentUpdatePolicyAction, Members: &mDeploymentComponentUpdatePolicyAction, Type: smithy.ShapeTypeEnum})
+var sDeploymentConfigurationValidationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentConfigurationValidationPolicy, Members: &mDeploymentConfigurationValidationPolicy, Type: smithy.ShapeTypeStructure})
+var sDeploymentFailureHandlingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentFailureHandlingPolicy, Members: &mDeploymentFailureHandlingPolicy, Type: smithy.ShapeTypeEnum})
+var sDeploymentHistoryFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentHistoryFilter, Members: &mDeploymentHistoryFilter, Type: smithy.ShapeTypeEnum})
+var s_DeploymentID = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentID, Type: smithy.ShapeTypeString})
+var sDeploymentIoTJobConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentIoTJobConfiguration, Members: &mDeploymentIoTJobConfiguration, Type: smithy.ShapeTypeStructure})
+var s_DeploymentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentList, Members: &m_DeploymentList, Type: smithy.ShapeTypeList})
+var s_DeploymentName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentName, Type: smithy.ShapeTypeString})
+var s_DeploymentNameString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeploymentNameString, Type: smithy.ShapeTypeString})
+var sDeploymentPolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentPolicies, Members: &mDeploymentPolicies, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_DescriptionString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sDisassociateClientDeviceFromCoreDeviceEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateClientDeviceFromCoreDeviceEntry, Members: &mDisassociateClientDeviceFromCoreDeviceEntry, Type: smithy.ShapeTypeStructure})
+var s_DisassociateClientDeviceFromCoreDeviceEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisassociateClientDeviceFromCoreDeviceEntryList, Members: &m_DisassociateClientDeviceFromCoreDeviceEntryList, Type: smithy.ShapeTypeList})
+var sDisassociateClientDeviceFromCoreDeviceErrorEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateClientDeviceFromCoreDeviceErrorEntry, Members: &mDisassociateClientDeviceFromCoreDeviceErrorEntry, Type: smithy.ShapeTypeStructure})
+var s_DisassociateClientDeviceFromCoreDeviceErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DisassociateClientDeviceFromCoreDeviceErrorList, Members: &m_DisassociateClientDeviceFromCoreDeviceErrorList, Type: smithy.ShapeTypeList})
+var sEffectiveDeployment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEffectiveDeployment, Members: &mEffectiveDeployment, Type: smithy.ShapeTypeStructure})
+var s_EffectiveDeploymentErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EffectiveDeploymentErrorCode, Type: smithy.ShapeTypeString})
+var s_EffectiveDeploymentErrorStack = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EffectiveDeploymentErrorStack, Members: &m_EffectiveDeploymentErrorStack, Type: smithy.ShapeTypeList})
+var s_EffectiveDeploymentErrorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EffectiveDeploymentErrorType, Type: smithy.ShapeTypeString})
+var s_EffectiveDeploymentErrorTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EffectiveDeploymentErrorTypeList, Members: &m_EffectiveDeploymentErrorTypeList, Type: smithy.ShapeTypeList})
+var sEffectiveDeploymentExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEffectiveDeploymentExecutionStatus, Members: &mEffectiveDeploymentExecutionStatus, Type: smithy.ShapeTypeEnum})
+var s_EffectiveDeploymentsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EffectiveDeploymentsList, Members: &m_EffectiveDeploymentsList, Type: smithy.ShapeTypeList})
+var sEffectiveDeploymentStatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEffectiveDeploymentStatusDetails, Members: &mEffectiveDeploymentStatusDetails, Type: smithy.ShapeTypeStructure})
+var s_FileSystemPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FileSystemPath, Type: smithy.ShapeTypeString})
+var s_GenericV2ARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GenericV2ARN, Type: smithy.ShapeTypeString})
+var s_GGCVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GGCVersion, Type: smithy.ShapeTypeString})
+var sInstalledComponent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstalledComponent, Members: &mInstalledComponent, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstalledComponentLifecycleState, Members: &mInstalledComponentLifecycleState, Type: smithy.ShapeTypeEnum})
+var s_InstalledComponentLifecycleStatusCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstalledComponentLifecycleStatusCode, Type: smithy.ShapeTypeString})
+var s_InstalledComponentLifecycleStatusCodeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstalledComponentLifecycleStatusCodeList, Members: &m_InstalledComponentLifecycleStatusCodeList, Type: smithy.ShapeTypeList})
+var s_InstalledComponentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InstalledComponentList, Members: &m_InstalledComponentList, Type: smithy.ShapeTypeList})
+var sInstalledComponentTopologyFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInstalledComponentTopologyFilter, Members: &mInstalledComponentTopologyFilter, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t35, Type: smithy.ShapeTypeStructure})
+var sIotEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIotEndpointType, Members: &mIotEndpointType, Type: smithy.ShapeTypeEnum})
+var sIoTJobAbortAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobAbortAction, Members: &mIoTJobAbortAction, Type: smithy.ShapeTypeEnum})
+var sIoTJobAbortConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobAbortConfig, Members: &mIoTJobAbortConfig, Type: smithy.ShapeTypeStructure})
+var sIoTJobAbortCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobAbortCriteria, Members: &mIoTJobAbortCriteria, Type: smithy.ShapeTypeStructure})
+var s_IoTJobAbortCriteriaList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobAbortCriteriaList, Members: &m_IoTJobAbortCriteriaList, Type: smithy.ShapeTypeList})
+var s_IoTJobAbortThresholdPercentage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobAbortThresholdPercentage, Type: smithy.ShapeTypeDouble})
+var s_IoTJobARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobARN, Type: smithy.ShapeTypeString})
+var sIoTJobExecutionFailureType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobExecutionFailureType, Members: &mIoTJobExecutionFailureType, Type: smithy.ShapeTypeEnum})
+var sIoTJobExecutionsRolloutConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobExecutionsRolloutConfig, Members: &mIoTJobExecutionsRolloutConfig, Type: smithy.ShapeTypeStructure})
+var sIoTJobExponentialRolloutRate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobExponentialRolloutRate, Members: &mIoTJobExponentialRolloutRate, Type: smithy.ShapeTypeStructure})
+var s_IoTJobId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobId, Type: smithy.ShapeTypeString})
+var s_IoTJobInProgressTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobInProgressTimeoutInMinutes, Type: smithy.ShapeTypeLong})
+var s_IoTJobMaxExecutionsPerMin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobMaxExecutionsPerMin, Type: smithy.ShapeTypeInteger})
+var s_IoTJobMinimumNumberOfExecutedThings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobMinimumNumberOfExecutedThings, Type: smithy.ShapeTypeInteger})
+var s_IoTJobNumberOfThings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobNumberOfThings, Type: smithy.ShapeTypeInteger})
+var sIoTJobRateIncreaseCriteria = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobRateIncreaseCriteria, Members: &mIoTJobRateIncreaseCriteria, Type: smithy.ShapeTypeStructure})
+var s_IoTJobRolloutBaseRatePerMinute = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobRolloutBaseRatePerMinute, Type: smithy.ShapeTypeInteger})
+var s_IoTJobRolloutIncrementFactor = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTJobRolloutIncrementFactor, Type: smithy.ShapeTypeDouble})
+var sIoTJobTimeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIoTJobTimeoutConfig, Members: &mIoTJobTimeoutConfig, Type: smithy.ShapeTypeStructure})
+var s_IoTThingName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IoTThingName, Type: smithy.ShapeTypeString})
+var s_IsLatestForTarget = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsLatestForTarget, Type: smithy.ShapeTypeBoolean})
+var s_IsRoot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsRoot, Type: smithy.ShapeTypeBoolean})
+var sLambdaContainerParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaContainerParams, Members: &mLambdaContainerParams, Type: smithy.ShapeTypeStructure})
+var s_LambdaDeviceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaDeviceList, Members: &m_LambdaDeviceList, Type: smithy.ShapeTypeList})
+var sLambdaDeviceMount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaDeviceMount, Members: &mLambdaDeviceMount, Type: smithy.ShapeTypeStructure})
+var s_LambdaEnvironmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaEnvironmentVariables, Members: &m_LambdaEnvironmentVariables, Type: smithy.ShapeTypeMap})
+var sLambdaEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaEventSource, Members: &mLambdaEventSource, Type: smithy.ShapeTypeStructure})
+var s_LambdaEventSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaEventSourceList, Members: &m_LambdaEventSourceList, Type: smithy.ShapeTypeList})
+var sLambdaEventSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaEventSourceType, Members: &mLambdaEventSourceType, Type: smithy.ShapeTypeEnum})
+var s_LambdaExecArg = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaExecArg, Type: smithy.ShapeTypeString})
+var s_LambdaExecArgsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaExecArgsList, Members: &m_LambdaExecArgsList, Type: smithy.ShapeTypeList})
+var sLambdaExecutionParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaExecutionParameters, Members: &mLambdaExecutionParameters, Type: smithy.ShapeTypeStructure})
+var sLambdaFilesystemPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFilesystemPermission, Members: &mLambdaFilesystemPermission, Type: smithy.ShapeTypeEnum})
+var sLambdaFunctionRecipeSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaFunctionRecipeSource, Members: &mLambdaFunctionRecipeSource, Type: smithy.ShapeTypeStructure})
+var sLambdaInputPayloadEncodingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaInputPayloadEncodingType, Members: &mLambdaInputPayloadEncodingType, Type: smithy.ShapeTypeEnum})
+var sLambdaIsolationMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaIsolationMode, Members: &mLambdaIsolationMode, Type: smithy.ShapeTypeEnum})
+var sLambdaLinuxProcessParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaLinuxProcessParams, Members: &mLambdaLinuxProcessParams, Type: smithy.ShapeTypeStructure})
+var s_LambdaVolumeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LambdaVolumeList, Members: &m_LambdaVolumeList, Type: smithy.ShapeTypeList})
+var sLambdaVolumeMount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaVolumeMount, Members: &mLambdaVolumeMount, Type: smithy.ShapeTypeStructure})
+var s_LifecycleStateDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LifecycleStateDetails, Type: smithy.ShapeTypeString})
+var s_Memory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Memory, Type: smithy.ShapeTypeLong})
+var s_NextTokenString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var s_NonEmptyString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_NullableString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableString, Type: smithy.ShapeTypeString})
+var s_OptionalBoolean = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalBoolean, Type: smithy.ShapeTypeBoolean})
+var s_OptionalInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var s_PlatformAttributesMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PlatformAttributesMap, Members: &m_PlatformAttributesMap, Type: smithy.ShapeTypeMap})
+var s_PortNumberInt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PortNumberInt, Type: smithy.ShapeTypeInteger})
+var s_PublisherString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PublisherString, Type: smithy.ShapeTypeString})
+var s_Reason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Reason, Type: smithy.ShapeTypeString})
+var s_RecipeBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RecipeBlob, Type: smithy.ShapeTypeBlob})
+var sRecipeOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRecipeOutputFormat, Members: &mRecipeOutputFormat, Type: smithy.ShapeTypeEnum})
+var sRequestAlreadyInProgressException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRequestAlreadyInProgressException, Members: &mRequestAlreadyInProgressException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sResolvedComponentVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolvedComponentVersion, Members: &mResolvedComponentVersion, Type: smithy.ShapeTypeStructure})
+var s_ResolvedComponentVersionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResolvedComponentVersionsList, Members: &m_ResolvedComponentVersionsList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_RetryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetryAfterSeconds, Type: smithy.ShapeTypeInteger})
+var sS3EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3EndpointType, Members: &mS3EndpointType, Type: smithy.ShapeTypeEnum})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sSystemResourceLimits = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSystemResourceLimits, Members: &mSystemResourceLimits, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var s_ThingGroupARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ThingGroupARN, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_TopicString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TopicString, Type: smithy.ShapeTypeString})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sVendorGuidance = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iVendorGuidance, Members: &mVendorGuidance, Type: smithy.ShapeTypeEnum})
+var sAssociateServiceRoleToAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceRoleToAccountRequest, Members: &mAssociateServiceRoleToAccountRequest, Type: smithy.ShapeTypeStructure})
+var sAssociateServiceRoleToAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateServiceRoleToAccountResponse, Members: &mAssociateServiceRoleToAccountResponse, Type: smithy.ShapeTypeStructure})
+var sBatchAssociateClientDeviceWithCoreDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateClientDeviceWithCoreDeviceRequest, Members: &mBatchAssociateClientDeviceWithCoreDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sBatchAssociateClientDeviceWithCoreDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchAssociateClientDeviceWithCoreDeviceResponse, Members: &mBatchAssociateClientDeviceWithCoreDeviceResponse, Type: smithy.ShapeTypeStructure})
+var sBatchDisassociateClientDeviceFromCoreDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateClientDeviceFromCoreDeviceRequest, Members: &mBatchDisassociateClientDeviceFromCoreDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sBatchDisassociateClientDeviceFromCoreDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchDisassociateClientDeviceFromCoreDeviceResponse, Members: &mBatchDisassociateClientDeviceFromCoreDeviceResponse, Type: smithy.ShapeTypeStructure})
+var sCancelDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDeploymentRequest, Members: &mCancelDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sCancelDeploymentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelDeploymentResponse, Members: &mCancelDeploymentResponse, Type: smithy.ShapeTypeStructure})
+var sCreateComponentVersionRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentVersionRequest, Members: &mCreateComponentVersionRequest, Type: smithy.ShapeTypeStructure})
+var sCreateComponentVersionResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateComponentVersionResponse, Members: &mCreateComponentVersionResponse, Type: smithy.ShapeTypeStructure})
+var sCreateDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentRequest, Members: &mCreateDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sCreateDeploymentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDeploymentResponse, Members: &mCreateDeploymentResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteComponentRequest, Members: &mDeleteComponentRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteCoreDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCoreDeviceRequest, Members: &mDeleteCoreDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteDeploymentRequest, Members: &mDeleteDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentRequest, Members: &mDescribeComponentRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeComponentResponse, Members: &mDescribeComponentResponse, Type: smithy.ShapeTypeStructure})
+var sDisassociateServiceRoleFromAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceRoleFromAccountRequest, Type: smithy.ShapeTypeStructure})
+var sDisassociateServiceRoleFromAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateServiceRoleFromAccountResponse, Members: &mDisassociateServiceRoleFromAccountResponse, Type: smithy.ShapeTypeStructure})
+var sGetComponentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentRequest, Members: &mGetComponentRequest, Type: smithy.ShapeTypeStructure})
+var sGetComponentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentResponse, Members: &mGetComponentResponse, Type: smithy.ShapeTypeStructure})
+var sGetComponentVersionArtifactRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentVersionArtifactRequest, Members: &mGetComponentVersionArtifactRequest, Type: smithy.ShapeTypeStructure})
+var sGetComponentVersionArtifactResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetComponentVersionArtifactResponse, Members: &mGetComponentVersionArtifactResponse, Type: smithy.ShapeTypeStructure})
+var sGetConnectivityInfoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectivityInfoRequest, Members: &mGetConnectivityInfoRequest, Type: smithy.ShapeTypeStructure})
+var sGetConnectivityInfoResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConnectivityInfoResponse, Members: &mGetConnectivityInfoResponse, Type: smithy.ShapeTypeStructure})
+var sGetCoreDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreDeviceRequest, Members: &mGetCoreDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sGetCoreDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCoreDeviceResponse, Members: &mGetCoreDeviceResponse, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentRequest, Members: &mGetDeploymentRequest, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDeploymentResponse, Members: &mGetDeploymentResponse, Type: smithy.ShapeTypeStructure})
+var sGetServiceRoleForAccountRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceRoleForAccountRequest, Type: smithy.ShapeTypeStructure})
+var sGetServiceRoleForAccountResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceRoleForAccountResponse, Members: &mGetServiceRoleForAccountResponse, Type: smithy.ShapeTypeStructure})
+var sListClientDevicesAssociatedWithCoreDeviceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClientDevicesAssociatedWithCoreDeviceRequest, Members: &mListClientDevicesAssociatedWithCoreDeviceRequest, Type: smithy.ShapeTypeStructure})
+var sListClientDevicesAssociatedWithCoreDeviceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClientDevicesAssociatedWithCoreDeviceResponse, Members: &mListClientDevicesAssociatedWithCoreDeviceResponse, Type: smithy.ShapeTypeStructure})
+var sListComponentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsRequest, Members: &mListComponentsRequest, Type: smithy.ShapeTypeStructure})
+var sListComponentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentsResponse, Members: &mListComponentsResponse, Type: smithy.ShapeTypeStructure})
+var sListComponentVersionsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentVersionsRequest, Members: &mListComponentVersionsRequest, Type: smithy.ShapeTypeStructure})
+var sListComponentVersionsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListComponentVersionsResponse, Members: &mListComponentVersionsResponse, Type: smithy.ShapeTypeStructure})
+var sListCoreDevicesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreDevicesRequest, Members: &mListCoreDevicesRequest, Type: smithy.ShapeTypeStructure})
+var sListCoreDevicesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListCoreDevicesResponse, Members: &mListCoreDevicesResponse, Type: smithy.ShapeTypeStructure})
+var sListDeploymentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentsRequest, Members: &mListDeploymentsRequest, Type: smithy.ShapeTypeStructure})
+var sListDeploymentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDeploymentsResponse, Members: &mListDeploymentsResponse, Type: smithy.ShapeTypeStructure})
+var sListEffectiveDeploymentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEffectiveDeploymentsRequest, Members: &mListEffectiveDeploymentsRequest, Type: smithy.ShapeTypeStructure})
+var sListEffectiveDeploymentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEffectiveDeploymentsResponse, Members: &mListEffectiveDeploymentsResponse, Type: smithy.ShapeTypeStructure})
+var sListInstalledComponentsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstalledComponentsRequest, Members: &mListInstalledComponentsRequest, Type: smithy.ShapeTypeStructure})
+var sListInstalledComponentsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListInstalledComponentsResponse, Members: &mListInstalledComponentsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sResolveComponentCandidatesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveComponentCandidatesRequest, Members: &mResolveComponentCandidatesRequest, Type: smithy.ShapeTypeStructure})
+var sResolveComponentCandidatesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResolveComponentCandidatesResponse, Members: &mResolveComponentCandidatesResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectivityInfoRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectivityInfoRequest, Members: &mUpdateConnectivityInfoRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateConnectivityInfoResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConnectivityInfoResponse, Members: &mUpdateConnectivityInfoResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sAssociateClientDeviceWithCoreDeviceEntry_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_IoTThingName, Type: smithy.ShapeTypeString})
+var s_AssociateClientDeviceWithCoreDeviceEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociateClientDeviceWithCoreDeviceEntry, Members: &mAssociateClientDeviceWithCoreDeviceEntry, Type: smithy.ShapeTypeStructure})
+var sAssociateClientDeviceWithCoreDeviceErrorEntry_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_IoTThingName, Type: smithy.ShapeTypeString})
+var sAssociateClientDeviceWithCoreDeviceErrorEntry_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sAssociateClientDeviceWithCoreDeviceErrorEntry_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_AssociateClientDeviceWithCoreDeviceErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociateClientDeviceWithCoreDeviceErrorEntry, Members: &mAssociateClientDeviceWithCoreDeviceErrorEntry, Type: smithy.ShapeTypeStructure})
+var sAssociatedClientDevice_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_IoTThingName, Type: smithy.ShapeTypeString})
+var sAssociatedClientDevice_associationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var s_AssociatedClientDeviceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iAssociatedClientDevice, Members: &mAssociatedClientDevice, Type: smithy.ShapeTypeStructure})
+var sCloudComponentState_REQUESTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUESTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudComponentState_INITIATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudComponentState_DEPLOYABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudComponentState_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudComponentState_DEPRECATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPRECATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCloudComponentStatus_componentState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentState", ID: &iCloudComponentState, Members: &mCloudComponentState, Type: smithy.ShapeTypeEnum})
+var sCloudComponentStatus_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sCloudComponentStatus_errors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errors", ID: &i_StringMap, Members: &m_StringMap, Type: smithy.ShapeTypeMap})
+var sCloudComponentStatus_vendorGuidance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vendorGuidance", ID: &iVendorGuidance, Members: &mVendorGuidance, Type: smithy.ShapeTypeEnum})
+var sCloudComponentStatus_vendorGuidanceMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vendorGuidanceMessage", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sComponent_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentARN, Type: smithy.ShapeTypeString})
+var sComponent_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sComponent_latestVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestVersion", ID: &iComponentLatestVersion, Members: &mComponentLatestVersion, Type: smithy.ShapeTypeStructure})
+var sComponentCandidate_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sComponentCandidate_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sComponentCandidate_versionRequirements = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRequirements", ID: &i_ComponentVersionRequirementMap, Members: &m_ComponentVersionRequirementMap, Type: smithy.ShapeTypeMap})
+var s_ComponentCandidateList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentCandidate, Members: &mComponentCandidate, Type: smithy.ShapeTypeStructure})
+var s_ComponentConfigurationPathList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ComponentConfigurationPath, Type: smithy.ShapeTypeString})
+var sComponentConfigurationUpdate_merge = smithy.NewStaticSchema(smithy.StaticSchema{Member: "merge", ID: &i_ComponentConfigurationString, Type: smithy.ShapeTypeString})
+var sComponentConfigurationUpdate_reset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reset", ID: &i_ComponentConfigurationPathList, Members: &m_ComponentConfigurationPathList, Type: smithy.ShapeTypeList})
+var s_ComponentDependencyMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_ComponentDependencyMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentDependencyRequirement, Members: &mComponentDependencyRequirement, Type: smithy.ShapeTypeStructure})
+var sComponentDependencyRequirement_versionRequirement = smithy.NewStaticSchema(smithy.StaticSchema{Member: "versionRequirement", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sComponentDependencyRequirement_dependencyType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dependencyType", ID: &iComponentDependencyType, Members: &mComponentDependencyType, Type: smithy.ShapeTypeEnum})
+var sComponentDependencyType_HARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComponentDependencyType_SOFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComponentDeploymentSpecification_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sComponentDeploymentSpecification_configurationUpdate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationUpdate", ID: &iComponentConfigurationUpdate, Members: &mComponentConfigurationUpdate, Type: smithy.ShapeTypeStructure})
+var sComponentDeploymentSpecification_runWith = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runWith", ID: &iComponentRunWith, Members: &mComponentRunWith, Type: smithy.ShapeTypeStructure})
+var s_ComponentDeploymentSpecifications_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_ComponentDeploymentSpecifications_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iComponentDeploymentSpecification, Members: &mComponentDeploymentSpecification, Type: smithy.ShapeTypeStructure})
+var sComponentLatestVersion_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Type: smithy.ShapeTypeString})
+var sComponentLatestVersion_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sComponentLatestVersion_creationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sComponentLatestVersion_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sComponentLatestVersion_publisher = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publisher", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sComponentLatestVersion_platforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platforms", ID: &i_ComponentPlatformList, Members: &m_ComponentPlatformList, Type: smithy.ShapeTypeList})
+var s_ComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponent, Members: &mComponent, Type: smithy.ShapeTypeStructure})
+var sComponentPlatform_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sComponentPlatform_attributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "attributes", ID: &i_PlatformAttributesMap, Members: &m_PlatformAttributesMap, Type: smithy.ShapeTypeMap})
+var s_ComponentPlatformList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentPlatform, Members: &mComponentPlatform, Type: smithy.ShapeTypeStructure})
+var sComponentRunWith_posixUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "posixUser", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sComponentRunWith_systemResourceLimits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "systemResourceLimits", ID: &iSystemResourceLimits, Members: &mSystemResourceLimits, Type: smithy.ShapeTypeStructure})
+var sComponentRunWith_windowsUser = smithy.NewStaticSchema(smithy.StaticSchema{Member: "windowsUser", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_ComponentVersionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iComponentVersionListItem, Members: &mComponentVersionListItem, Type: smithy.ShapeTypeStructure})
+var sComponentVersionListItem_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sComponentVersionListItem_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sComponentVersionListItem_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_ComponentVersionRequirementMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_ComponentVersionRequirementMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sComponentVisibilityScope_PRIVATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRIVATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sComponentVisibilityScope_PUBLIC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLIC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sConnectivityInfo_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_String, Traits: &t31, Type: smithy.ShapeTypeString})
+var sConnectivityInfo_hostAddress = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hostAddress", ID: &i_String, Traits: &t32, Type: smithy.ShapeTypeString})
+var sConnectivityInfo_portNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "portNumber", ID: &i_PortNumberInt, Traits: &t33, Type: smithy.ShapeTypeInteger})
+var sConnectivityInfo_metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadata", ID: &i_String, Traits: &t34, Type: smithy.ShapeTypeString})
+var s_connectivityInfoList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConnectivityInfo, Members: &mConnectivityInfo, Type: smithy.ShapeTypeStructure})
+var sCoreDevice_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_CoreDeviceThingName, Type: smithy.ShapeTypeString})
+var sCoreDevice_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCoreDeviceStatus, Members: &mCoreDeviceStatus, Type: smithy.ShapeTypeEnum})
+var sCoreDevice_lastStatusUpdateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusUpdateTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCoreDevice_platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platform", ID: &i_CoreDevicePlatformString, Type: smithy.ShapeTypeString})
+var sCoreDevice_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &i_CoreDeviceArchitectureString, Type: smithy.ShapeTypeString})
+var sCoreDevice_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &i_CoreDeviceRuntimeString, Type: smithy.ShapeTypeString})
+var s_CoreDevicesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCoreDevice, Members: &mCoreDevice, Type: smithy.ShapeTypeStructure})
+var sCoreDeviceStatus_HEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCoreDeviceStatus_UNHEALTHY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNHEALTHY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeployment_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sDeployment_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sDeployment_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sDeployment_deploymentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentName", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sDeployment_creationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeployment_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var sDeployment_isLatestForTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isLatestForTarget", ID: &i_IsLatestForTarget, Type: smithy.ShapeTypeBoolean})
+var sDeployment_parentTargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentTargetArn", ID: &i_ThingGroupARN, Type: smithy.ShapeTypeString})
+var sDeploymentComponentUpdatePolicy_timeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInSeconds", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sDeploymentComponentUpdatePolicy_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iDeploymentComponentUpdatePolicyAction, Members: &mDeploymentComponentUpdatePolicyAction, Type: smithy.ShapeTypeEnum})
+var sDeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOTIFY_COMPONENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SKIP_NOTIFY_COMPONENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentConfigurationValidationPolicy_timeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInSeconds", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sDeploymentFailureHandlingPolicy_ROLLBACK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLLBACK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentFailureHandlingPolicy_DO_NOTHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DO_NOTHING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentHistoryFilter_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentHistoryFilter_LATEST_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentIoTJobConfiguration_jobExecutionsRolloutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jobExecutionsRolloutConfig", ID: &iIoTJobExecutionsRolloutConfig, Members: &mIoTJobExecutionsRolloutConfig, Type: smithy.ShapeTypeStructure})
+var sDeploymentIoTJobConfiguration_abortConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "abortConfig", ID: &iIoTJobAbortConfig, Members: &mIoTJobAbortConfig, Type: smithy.ShapeTypeStructure})
+var sDeploymentIoTJobConfiguration_timeoutConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutConfig", ID: &iIoTJobTimeoutConfig, Members: &mIoTJobTimeoutConfig, Type: smithy.ShapeTypeStructure})
+var s_DeploymentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDeployment, Members: &mDeployment, Type: smithy.ShapeTypeStructure})
+var sDeploymentPolicies_failureHandlingPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureHandlingPolicy", ID: &iDeploymentFailureHandlingPolicy, Members: &mDeploymentFailureHandlingPolicy, Type: smithy.ShapeTypeEnum})
+var sDeploymentPolicies_componentUpdatePolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentUpdatePolicy", ID: &iDeploymentComponentUpdatePolicy, Members: &mDeploymentComponentUpdatePolicy, Type: smithy.ShapeTypeStructure})
+var sDeploymentPolicies_configurationValidationPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "configurationValidationPolicy", ID: &iDeploymentConfigurationValidationPolicy, Members: &mDeploymentConfigurationValidationPolicy, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDeploymentStatus_INACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDisassociateClientDeviceFromCoreDeviceEntry_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_IoTThingName, Type: smithy.ShapeTypeString})
+var s_DisassociateClientDeviceFromCoreDeviceEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDisassociateClientDeviceFromCoreDeviceEntry, Members: &mDisassociateClientDeviceFromCoreDeviceEntry, Type: smithy.ShapeTypeStructure})
+var sDisassociateClientDeviceFromCoreDeviceErrorEntry_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_IoTThingName, Type: smithy.ShapeTypeString})
+var sDisassociateClientDeviceFromCoreDeviceErrorEntry_code = smithy.NewStaticSchema(smithy.StaticSchema{Member: "code", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sDisassociateClientDeviceFromCoreDeviceErrorEntry_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_DisassociateClientDeviceFromCoreDeviceErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDisassociateClientDeviceFromCoreDeviceErrorEntry, Members: &mDisassociateClientDeviceFromCoreDeviceErrorEntry, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeployment_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_DeploymentID, Type: smithy.ShapeTypeString})
+var sEffectiveDeployment_deploymentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentName", ID: &i_DeploymentName, Type: smithy.ShapeTypeString})
+var sEffectiveDeployment_iotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobId", ID: &i_IoTJobId, Type: smithy.ShapeTypeString})
+var sEffectiveDeployment_iotJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobArn", ID: &i_IoTJobARN, Type: smithy.ShapeTypeString})
+var sEffectiveDeployment_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sEffectiveDeployment_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sEffectiveDeployment_coreDeviceExecutionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceExecutionStatus", ID: &iEffectiveDeploymentExecutionStatus, Members: &mEffectiveDeploymentExecutionStatus, Type: smithy.ShapeTypeEnum})
+var sEffectiveDeployment_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_Reason, Type: smithy.ShapeTypeString})
+var sEffectiveDeployment_creationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEffectiveDeployment_modifiedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "modifiedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEffectiveDeployment_statusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusDetails", ID: &iEffectiveDeploymentStatusDetails, Members: &mEffectiveDeploymentStatusDetails, Type: smithy.ShapeTypeStructure})
+var s_EffectiveDeploymentErrorStack_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EffectiveDeploymentErrorCode, Type: smithy.ShapeTypeString})
+var s_EffectiveDeploymentErrorTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EffectiveDeploymentErrorType, Type: smithy.ShapeTypeString})
+var sEffectiveDeploymentExecutionStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentExecutionStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentExecutionStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentExecutionStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentExecutionStatus_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentExecutionStatus_CANCELED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentExecutionStatus_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentExecutionStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EffectiveDeploymentsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEffectiveDeployment, Members: &mEffectiveDeployment, Type: smithy.ShapeTypeStructure})
+var sEffectiveDeploymentStatusDetails_errorStack = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorStack", ID: &i_EffectiveDeploymentErrorStack, Members: &m_EffectiveDeploymentErrorStack, Type: smithy.ShapeTypeList})
+var sEffectiveDeploymentStatusDetails_errorTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorTypes", ID: &i_EffectiveDeploymentErrorTypeList, Members: &m_EffectiveDeploymentErrorTypeList, Type: smithy.ShapeTypeList})
+var sInstalledComponent_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sInstalledComponent_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sInstalledComponent_lifecycleState = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleState", ID: &iInstalledComponentLifecycleState, Members: &mInstalledComponentLifecycleState, Type: smithy.ShapeTypeEnum})
+var sInstalledComponent_lifecycleStateDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleStateDetails", ID: &i_LifecycleStateDetails, Type: smithy.ShapeTypeString})
+var sInstalledComponent_isRoot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isRoot", ID: &i_IsRoot, Type: smithy.ShapeTypeBoolean})
+var sInstalledComponent_lastStatusChangeTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusChangeTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInstalledComponent_lastReportedTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastReportedTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sInstalledComponent_lastInstallationSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastInstallationSource", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sInstalledComponent_lifecycleStatusCodes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lifecycleStatusCodes", ID: &i_InstalledComponentLifecycleStatusCodeList, Members: &m_InstalledComponentLifecycleStatusCodeList, Type: smithy.ShapeTypeList})
+var sInstalledComponentLifecycleState_NEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState_INSTALLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INSTALLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState_STARTING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STARTING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState_ERRORED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERRORED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState_BROKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BROKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentLifecycleState_FINISHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FINISHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_InstalledComponentLifecycleStatusCodeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_InstalledComponentLifecycleStatusCode, Type: smithy.ShapeTypeString})
+var s_InstalledComponentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iInstalledComponent, Members: &mInstalledComponent, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentTopologyFilter_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInstalledComponentTopologyFilter_ROOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sInternalServerException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t36, Type: smithy.ShapeTypeInteger})
+var sIotEndpointType_fips = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fips", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIotEndpointType_standard = smithy.NewStaticSchema(smithy.StaticSchema{Member: "standard", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIoTJobAbortAction_CANCEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIoTJobAbortConfig_criteriaList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "criteriaList", ID: &i_IoTJobAbortCriteriaList, Members: &m_IoTJobAbortCriteriaList, Type: smithy.ShapeTypeList})
+var sIoTJobAbortCriteria_failureType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "failureType", ID: &iIoTJobExecutionFailureType, Members: &mIoTJobExecutionFailureType, Type: smithy.ShapeTypeEnum})
+var sIoTJobAbortCriteria_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &iIoTJobAbortAction, Members: &mIoTJobAbortAction, Type: smithy.ShapeTypeEnum})
+var sIoTJobAbortCriteria_thresholdPercentage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thresholdPercentage", ID: &i_IoTJobAbortThresholdPercentage, Type: smithy.ShapeTypeDouble})
+var sIoTJobAbortCriteria_minNumberOfExecutedThings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minNumberOfExecutedThings", ID: &i_IoTJobMinimumNumberOfExecutedThings, Type: smithy.ShapeTypeInteger})
+var s_IoTJobAbortCriteriaList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIoTJobAbortCriteria, Members: &mIoTJobAbortCriteria, Type: smithy.ShapeTypeStructure})
+var sIoTJobExecutionFailureType_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIoTJobExecutionFailureType_REJECTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REJECTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIoTJobExecutionFailureType_TIMED_OUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMED_OUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIoTJobExecutionFailureType_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIoTJobExecutionsRolloutConfig_exponentialRate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "exponentialRate", ID: &iIoTJobExponentialRolloutRate, Members: &mIoTJobExponentialRolloutRate, Type: smithy.ShapeTypeStructure})
+var sIoTJobExecutionsRolloutConfig_maximumPerMinute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maximumPerMinute", ID: &i_IoTJobMaxExecutionsPerMin, Type: smithy.ShapeTypeInteger})
+var sIoTJobExponentialRolloutRate_baseRatePerMinute = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baseRatePerMinute", ID: &i_IoTJobRolloutBaseRatePerMinute, Type: smithy.ShapeTypeInteger})
+var sIoTJobExponentialRolloutRate_incrementFactor = smithy.NewStaticSchema(smithy.StaticSchema{Member: "incrementFactor", ID: &i_IoTJobRolloutIncrementFactor, Type: smithy.ShapeTypeDouble})
+var sIoTJobExponentialRolloutRate_rateIncreaseCriteria = smithy.NewStaticSchema(smithy.StaticSchema{Member: "rateIncreaseCriteria", ID: &iIoTJobRateIncreaseCriteria, Members: &mIoTJobRateIncreaseCriteria, Type: smithy.ShapeTypeStructure})
+var sIoTJobRateIncreaseCriteria_numberOfNotifiedThings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfNotifiedThings", ID: &i_IoTJobNumberOfThings, Type: smithy.ShapeTypeInteger})
+var sIoTJobRateIncreaseCriteria_numberOfSucceededThings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "numberOfSucceededThings", ID: &i_IoTJobNumberOfThings, Type: smithy.ShapeTypeInteger})
+var sIoTJobTimeoutConfig_inProgressTimeoutInMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inProgressTimeoutInMinutes", ID: &i_IoTJobInProgressTimeoutInMinutes, Type: smithy.ShapeTypeLong})
+var sLambdaContainerParams_memorySizeInKB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memorySizeInKB", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sLambdaContainerParams_mountROSysfs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mountROSysfs", ID: &i_OptionalBoolean, Type: smithy.ShapeTypeBoolean})
+var sLambdaContainerParams_volumes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "volumes", ID: &i_LambdaVolumeList, Members: &m_LambdaVolumeList, Type: smithy.ShapeTypeList})
+var sLambdaContainerParams_devices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "devices", ID: &i_LambdaDeviceList, Members: &m_LambdaDeviceList, Type: smithy.ShapeTypeList})
+var s_LambdaDeviceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLambdaDeviceMount, Members: &mLambdaDeviceMount, Type: smithy.ShapeTypeStructure})
+var sLambdaDeviceMount_path = smithy.NewStaticSchema(smithy.StaticSchema{Member: "path", ID: &i_FileSystemPath, Type: smithy.ShapeTypeString})
+var sLambdaDeviceMount_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &iLambdaFilesystemPermission, Members: &mLambdaFilesystemPermission, Type: smithy.ShapeTypeEnum})
+var sLambdaDeviceMount_addGroupOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addGroupOwner", ID: &i_OptionalBoolean, Type: smithy.ShapeTypeBoolean})
+var s_LambdaEnvironmentVariables_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_LambdaEnvironmentVariables_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLambdaEventSource_topic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topic", ID: &i_TopicString, Type: smithy.ShapeTypeString})
+var sLambdaEventSource_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &iLambdaEventSourceType, Members: &mLambdaEventSourceType, Type: smithy.ShapeTypeEnum})
+var s_LambdaEventSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLambdaEventSource, Members: &mLambdaEventSource, Type: smithy.ShapeTypeStructure})
+var sLambdaEventSourceType_PUB_SUB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUB_SUB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLambdaEventSourceType_IOT_CORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IOT_CORE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LambdaExecArgsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_LambdaExecArg, Type: smithy.ShapeTypeString})
+var sLambdaExecutionParameters_eventSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventSources", ID: &i_LambdaEventSourceList, Members: &m_LambdaEventSourceList, Type: smithy.ShapeTypeList})
+var sLambdaExecutionParameters_maxQueueSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxQueueSize", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sLambdaExecutionParameters_maxInstancesCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxInstancesCount", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sLambdaExecutionParameters_maxIdleTimeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxIdleTimeInSeconds", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sLambdaExecutionParameters_timeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timeoutInSeconds", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sLambdaExecutionParameters_statusTimeoutInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusTimeoutInSeconds", ID: &i_OptionalInteger, Type: smithy.ShapeTypeInteger})
+var sLambdaExecutionParameters_pinned = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pinned", ID: &i_OptionalBoolean, Type: smithy.ShapeTypeBoolean})
+var sLambdaExecutionParameters_inputPayloadEncodingType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inputPayloadEncodingType", ID: &iLambdaInputPayloadEncodingType, Members: &mLambdaInputPayloadEncodingType, Type: smithy.ShapeTypeEnum})
+var sLambdaExecutionParameters_execArgs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "execArgs", ID: &i_LambdaExecArgsList, Members: &m_LambdaExecArgsList, Type: smithy.ShapeTypeList})
+var sLambdaExecutionParameters_environmentVariables = smithy.NewStaticSchema(smithy.StaticSchema{Member: "environmentVariables", ID: &i_LambdaEnvironmentVariables, Members: &m_LambdaEnvironmentVariables, Type: smithy.ShapeTypeMap})
+var sLambdaExecutionParameters_linuxProcessParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linuxProcessParams", ID: &iLambdaLinuxProcessParams, Members: &mLambdaLinuxProcessParams, Type: smithy.ShapeTypeStructure})
+var sLambdaFilesystemPermission_RO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLambdaFilesystemPermission_RW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLambdaFunctionRecipeSource_lambdaArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaArn", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sLambdaFunctionRecipeSource_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sLambdaFunctionRecipeSource_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sLambdaFunctionRecipeSource_componentPlatforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentPlatforms", ID: &i_ComponentPlatformList, Members: &m_ComponentPlatformList, Type: smithy.ShapeTypeList})
+var sLambdaFunctionRecipeSource_componentDependencies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentDependencies", ID: &i_ComponentDependencyMap, Members: &m_ComponentDependencyMap, Type: smithy.ShapeTypeMap})
+var sLambdaFunctionRecipeSource_componentLambdaParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentLambdaParameters", ID: &iLambdaExecutionParameters, Members: &mLambdaExecutionParameters, Type: smithy.ShapeTypeStructure})
+var sLambdaInputPayloadEncodingType_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLambdaInputPayloadEncodingType_BINARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINARY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLambdaIsolationMode_GREENGRASS_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GREENGRASS_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLambdaIsolationMode_NO_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLambdaLinuxProcessParams_isolationMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isolationMode", ID: &iLambdaIsolationMode, Members: &mLambdaIsolationMode, Type: smithy.ShapeTypeEnum})
+var sLambdaLinuxProcessParams_containerParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "containerParams", ID: &iLambdaContainerParams, Members: &mLambdaContainerParams, Type: smithy.ShapeTypeStructure})
+var s_LambdaVolumeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLambdaVolumeMount, Members: &mLambdaVolumeMount, Type: smithy.ShapeTypeStructure})
+var sLambdaVolumeMount_sourcePath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourcePath", ID: &i_FileSystemPath, Type: smithy.ShapeTypeString})
+var sLambdaVolumeMount_destinationPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPath", ID: &i_FileSystemPath, Type: smithy.ShapeTypeString})
+var sLambdaVolumeMount_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &iLambdaFilesystemPermission, Members: &mLambdaFilesystemPermission, Type: smithy.ShapeTypeEnum})
+var sLambdaVolumeMount_addGroupOwner = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addGroupOwner", ID: &i_OptionalBoolean, Type: smithy.ShapeTypeBoolean})
+var s_PlatformAttributesMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_PlatformAttributesMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sRecipeOutputFormat_JSON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRecipeOutputFormat_YAML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "YAML", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRequestAlreadyInProgressException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResolvedComponentVersion_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Type: smithy.ShapeTypeString})
+var sResolvedComponentVersion_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sResolvedComponentVersion_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sResolvedComponentVersion_recipe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recipe", ID: &i_RecipeBlob, Type: smithy.ShapeTypeBlob})
+var sResolvedComponentVersion_vendorGuidance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vendorGuidance", ID: &iVendorGuidance, Members: &mVendorGuidance, Type: smithy.ShapeTypeEnum})
+var sResolvedComponentVersion_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_ResolvedComponentVersionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResolvedComponentVersion, Members: &mResolvedComponentVersion, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sS3EndpointType_REGIONAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REGIONAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3EndpointType_GLOBAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GLOBAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_StringMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var s_StringMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sSystemResourceLimits_memory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "memory", ID: &i_Memory, Type: smithy.ShapeTypeLong})
+var sSystemResourceLimits_cpus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cpus", ID: &i_CPU, Type: smithy.ShapeTypeDouble})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &i_String, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &i_RetryAfterSeconds, Traits: &t36, Type: smithy.ShapeTypeInteger})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &iValidationExceptionReason, Members: &mValidationExceptionReason, Type: smithy.ShapeTypeEnum})
+var sValidationException_fields = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fields", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_UNKNOWN_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_CANNOT_PARSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANNOT_PARSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_FIELD_VALIDATION_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIELD_VALIDATION_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionReason_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVendorGuidance_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVendorGuidance_DISCONTINUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISCONTINUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sVendorGuidance_DELETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAssociateServiceRoleToAccountRequest_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_String, Traits: &t41, Type: smithy.ShapeTypeString})
+var sAssociateServiceRoleToAccountResponse_associatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAt", ID: &i_String, Traits: &t42, Type: smithy.ShapeTypeString})
+var sBatchAssociateClientDeviceWithCoreDeviceRequest_entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entries", ID: &i_AssociateClientDeviceWithCoreDeviceEntryList, Members: &m_AssociateClientDeviceWithCoreDeviceEntryList, Type: smithy.ShapeTypeList})
+var sBatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_IoTThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sBatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorEntries", ID: &i_AssociateClientDeviceWithCoreDeviceErrorList, Members: &m_AssociateClientDeviceWithCoreDeviceErrorList, Type: smithy.ShapeTypeList})
+var sBatchDisassociateClientDeviceFromCoreDeviceRequest_entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entries", ID: &i_DisassociateClientDeviceFromCoreDeviceEntryList, Members: &m_DisassociateClientDeviceFromCoreDeviceEntryList, Type: smithy.ShapeTypeList})
+var sBatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_IoTThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sBatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "errorEntries", ID: &i_DisassociateClientDeviceFromCoreDeviceErrorList, Members: &m_DisassociateClientDeviceFromCoreDeviceErrorList, Type: smithy.ShapeTypeList})
+var sCancelDeploymentRequest_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sCancelDeploymentResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sCreateComponentVersionRequest_inlineRecipe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inlineRecipe", ID: &i_RecipeBlob, Type: smithy.ShapeTypeBlob})
+var sCreateComponentVersionRequest_lambdaFunction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lambdaFunction", ID: &iLambdaFunctionRecipeSource, Members: &mLambdaFunctionRecipeSource, Type: smithy.ShapeTypeStructure})
+var sCreateComponentVersionRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateComponentVersionRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString})
+var sCreateComponentVersionResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Type: smithy.ShapeTypeString})
+var sCreateComponentVersionResponse_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sCreateComponentVersionResponse_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sCreateComponentVersionResponse_creationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateComponentVersionResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCloudComponentStatus, Members: &mCloudComponentStatus, Type: smithy.ShapeTypeStructure})
+var sCreateDeploymentRequest_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sCreateDeploymentRequest_deploymentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentName", ID: &i_DeploymentNameString, Type: smithy.ShapeTypeString})
+var sCreateDeploymentRequest_components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "components", ID: &i_ComponentDeploymentSpecifications, Members: &m_ComponentDeploymentSpecifications, Type: smithy.ShapeTypeMap})
+var sCreateDeploymentRequest_iotJobConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobConfiguration", ID: &iDeploymentIoTJobConfiguration, Members: &mDeploymentIoTJobConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateDeploymentRequest_deploymentPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPolicies", ID: &iDeploymentPolicies, Members: &mDeploymentPolicies, Type: smithy.ShapeTypeStructure})
+var sCreateDeploymentRequest_parentTargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentTargetArn", ID: &i_ThingGroupARN, Type: smithy.ShapeTypeString})
+var sCreateDeploymentRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateDeploymentRequest_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &i_ClientTokenString, Type: smithy.ShapeTypeString})
+var sCreateDeploymentResponse_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sCreateDeploymentResponse_iotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sCreateDeploymentResponse_iotJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobArn", ID: &i_IoTJobARN, Type: smithy.ShapeTypeString})
+var sDeleteComponentRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDeleteCoreDeviceRequest_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_CoreDeviceThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDeleteDeploymentRequest_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDescribeComponentRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sDescribeComponentResponse_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Type: smithy.ShapeTypeString})
+var sDescribeComponentResponse_componentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentName", ID: &i_ComponentNameString, Type: smithy.ShapeTypeString})
+var sDescribeComponentResponse_componentVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersion", ID: &i_ComponentVersionString, Type: smithy.ShapeTypeString})
+var sDescribeComponentResponse_creationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeComponentResponse_publisher = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publisher", ID: &i_PublisherString, Type: smithy.ShapeTypeString})
+var sDescribeComponentResponse_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &i_DescriptionString, Type: smithy.ShapeTypeString})
+var sDescribeComponentResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCloudComponentStatus, Members: &mCloudComponentStatus, Type: smithy.ShapeTypeStructure})
+var sDescribeComponentResponse_platforms = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platforms", ID: &i_ComponentPlatformList, Members: &m_ComponentPlatformList, Type: smithy.ShapeTypeList})
+var sDescribeComponentResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDisassociateServiceRoleFromAccountResponse_disassociatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "disassociatedAt", ID: &i_String, Traits: &t44, Type: smithy.ShapeTypeString})
+var sGetComponentRequest_recipeOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recipeOutputFormat", ID: &iRecipeOutputFormat, Members: &mRecipeOutputFormat, Traits: &t45, Type: smithy.ShapeTypeEnum})
+var sGetComponentRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetComponentResponse_recipeOutputFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recipeOutputFormat", ID: &iRecipeOutputFormat, Members: &mRecipeOutputFormat, Type: smithy.ShapeTypeEnum})
+var sGetComponentResponse_recipe = smithy.NewStaticSchema(smithy.StaticSchema{Member: "recipe", ID: &i_RecipeBlob, Type: smithy.ShapeTypeBlob})
+var sGetComponentResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetComponentVersionArtifactRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentVersionARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetComponentVersionArtifactRequest_artifactName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "artifactName", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetComponentVersionArtifactRequest_s3EndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "s3EndpointType", ID: &iS3EndpointType, Members: &mS3EndpointType, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sGetComponentVersionArtifactRequest_iotEndpointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotEndpointType", ID: &iIotEndpointType, Members: &mIotEndpointType, Traits: &t47, Type: smithy.ShapeTypeEnum})
+var sGetComponentVersionArtifactResponse_preSignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preSignedUrl", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sGetConnectivityInfoRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_CoreDeviceThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetConnectivityInfoResponse_connectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectivityInfo", ID: &i_connectivityInfoList, Members: &m_connectivityInfoList, Traits: &t48, Type: smithy.ShapeTypeList})
+var sGetConnectivityInfoResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString})
+var sGetCoreDeviceRequest_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_CoreDeviceThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetCoreDeviceResponse_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_CoreDeviceThingName, Type: smithy.ShapeTypeString})
+var sGetCoreDeviceResponse_coreVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreVersion", ID: &i_GGCVersion, Type: smithy.ShapeTypeString})
+var sGetCoreDeviceResponse_platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platform", ID: &i_CoreDevicePlatformString, Type: smithy.ShapeTypeString})
+var sGetCoreDeviceResponse_architecture = smithy.NewStaticSchema(smithy.StaticSchema{Member: "architecture", ID: &i_CoreDeviceArchitectureString, Type: smithy.ShapeTypeString})
+var sGetCoreDeviceResponse_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &i_CoreDeviceRuntimeString, Type: smithy.ShapeTypeString})
+var sGetCoreDeviceResponse_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCoreDeviceStatus, Members: &mCoreDeviceStatus, Type: smithy.ShapeTypeEnum})
+var sGetCoreDeviceResponse_lastStatusUpdateTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastStatusUpdateTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetCoreDeviceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetDeploymentRequest_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_NonEmptyString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_TargetARN, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_revisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "revisionId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_deploymentId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentId", ID: &i_NonEmptyString, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_deploymentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentName", ID: &i_NullableString, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_deploymentStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentStatus", ID: &iDeploymentStatus, Members: &mDeploymentStatus, Type: smithy.ShapeTypeEnum})
+var sGetDeploymentResponse_iotJobId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobId", ID: &i_NullableString, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_iotJobArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobArn", ID: &i_IoTJobARN, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "components", ID: &i_ComponentDeploymentSpecifications, Members: &m_ComponentDeploymentSpecifications, Type: smithy.ShapeTypeMap})
+var sGetDeploymentResponse_deploymentPolicies = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deploymentPolicies", ID: &iDeploymentPolicies, Members: &mDeploymentPolicies, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentResponse_iotJobConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "iotJobConfiguration", ID: &iDeploymentIoTJobConfiguration, Members: &mDeploymentIoTJobConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetDeploymentResponse_creationTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "creationTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetDeploymentResponse_isLatestForTarget = smithy.NewStaticSchema(smithy.StaticSchema{Member: "isLatestForTarget", ID: &i_IsLatestForTarget, Type: smithy.ShapeTypeBoolean})
+var sGetDeploymentResponse_parentTargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentTargetArn", ID: &i_ThingGroupARN, Type: smithy.ShapeTypeString})
+var sGetDeploymentResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetServiceRoleForAccountResponse_associatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedAt", ID: &i_String, Traits: &t42, Type: smithy.ShapeTypeString})
+var sGetServiceRoleForAccountResponse_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_String, Traits: &t41, Type: smithy.ShapeTypeString})
+var sListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_IoTThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListClientDevicesAssociatedWithCoreDeviceRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DefaultMaxResults, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListClientDevicesAssociatedWithCoreDeviceRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associatedClientDevices", ID: &i_AssociatedClientDeviceList, Members: &m_AssociatedClientDeviceList, Type: smithy.ShapeTypeList})
+var sListClientDevicesAssociatedWithCoreDeviceResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var sListComponentsRequest_scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "scope", ID: &iComponentVisibilityScope, Members: &mComponentVisibilityScope, Traits: &t52, Type: smithy.ShapeTypeEnum})
+var sListComponentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DefaultMaxResults, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListComponentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListComponentsResponse_components = smithy.NewStaticSchema(smithy.StaticSchema{Member: "components", ID: &i_ComponentList, Members: &m_ComponentList, Type: smithy.ShapeTypeList})
+var sListComponentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var sListComponentVersionsRequest_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_ComponentARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListComponentVersionsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DefaultMaxResults, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListComponentVersionsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListComponentVersionsResponse_componentVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentVersions", ID: &i_ComponentVersionList, Members: &m_ComponentVersionList, Type: smithy.ShapeTypeList})
+var sListComponentVersionsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var sListCoreDevicesRequest_thingGroupArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingGroupArn", ID: &i_ThingGroupARN, Traits: &t53, Type: smithy.ShapeTypeString})
+var sListCoreDevicesRequest_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iCoreDeviceStatus, Members: &mCoreDeviceStatus, Traits: &t54, Type: smithy.ShapeTypeEnum})
+var sListCoreDevicesRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DefaultMaxResults, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListCoreDevicesRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListCoreDevicesRequest_runtime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "runtime", ID: &i_CoreDeviceRuntimeString, Traits: &t55, Type: smithy.ShapeTypeString})
+var sListCoreDevicesResponse_coreDevices = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDevices", ID: &i_CoreDevicesList, Members: &m_CoreDevicesList, Type: smithy.ShapeTypeList})
+var sListCoreDevicesResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var sListDeploymentsRequest_targetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetArn", ID: &i_TargetARN, Traits: &t56, Type: smithy.ShapeTypeString})
+var sListDeploymentsRequest_historyFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "historyFilter", ID: &iDeploymentHistoryFilter, Members: &mDeploymentHistoryFilter, Traits: &t57, Type: smithy.ShapeTypeEnum})
+var sListDeploymentsRequest_parentTargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentTargetArn", ID: &i_ThingGroupARN, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListDeploymentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DefaultMaxResults, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListDeploymentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListDeploymentsResponse_deployments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deployments", ID: &i_DeploymentList, Members: &m_DeploymentList, Type: smithy.ShapeTypeList})
+var sListDeploymentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var sListEffectiveDeploymentsRequest_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_CoreDeviceThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListEffectiveDeploymentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DefaultMaxResults, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListEffectiveDeploymentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListEffectiveDeploymentsResponse_effectiveDeployments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "effectiveDeployments", ID: &i_EffectiveDeploymentsList, Members: &m_EffectiveDeploymentsList, Type: smithy.ShapeTypeList})
+var sListEffectiveDeploymentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var sListInstalledComponentsRequest_coreDeviceThingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "coreDeviceThingName", ID: &i_CoreDeviceThingName, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListInstalledComponentsRequest_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_DefaultMaxResults, Traits: &t50, Type: smithy.ShapeTypeInteger})
+var sListInstalledComponentsRequest_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Traits: &t51, Type: smithy.ShapeTypeString})
+var sListInstalledComponentsRequest_topologyFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "topologyFilter", ID: &iInstalledComponentTopologyFilter, Members: &mInstalledComponentTopologyFilter, Traits: &t59, Type: smithy.ShapeTypeEnum})
+var sListInstalledComponentsResponse_installedComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "installedComponents", ID: &i_InstalledComponentList, Members: &m_InstalledComponentList, Type: smithy.ShapeTypeList})
+var sListInstalledComponentsResponse_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextTokenString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_GenericV2ARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sResolveComponentCandidatesRequest_platform = smithy.NewStaticSchema(smithy.StaticSchema{Member: "platform", ID: &iComponentPlatform, Members: &mComponentPlatform, Type: smithy.ShapeTypeStructure})
+var sResolveComponentCandidatesRequest_componentCandidates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "componentCandidates", ID: &i_ComponentCandidateList, Members: &m_ComponentCandidateList, Type: smithy.ShapeTypeList})
+var sResolveComponentCandidatesResponse_resolvedComponentVersions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resolvedComponentVersions", ID: &i_ResolvedComponentVersionsList, Members: &m_ResolvedComponentVersionsList, Type: smithy.ShapeTypeList})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_GenericV2ARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_GenericV2ARN, Traits: &t43, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t60, Type: smithy.ShapeTypeList})
+var sUpdateConnectivityInfoRequest_thingName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "thingName", ID: &i_CoreDeviceThingName, Traits: &t61, Type: smithy.ShapeTypeString})
+var sUpdateConnectivityInfoRequest_connectivityInfo = smithy.NewStaticSchema(smithy.StaticSchema{Member: "connectivityInfo", ID: &i_connectivityInfoList, Members: &m_connectivityInfoList, Traits: &t48, Type: smithy.ShapeTypeList})
+var sUpdateConnectivityInfoResponse_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_String, Traits: &t62, Type: smithy.ShapeTypeString})
+var sUpdateConnectivityInfoResponse_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_String, Traits: &t49, Type: smithy.ShapeTypeString})
+
+var AssociateServiceRoleToAccount = &sAssociateServiceRoleToAccount
+
+var BatchAssociateClientDeviceWithCoreDevice = &sBatchAssociateClientDeviceWithCoreDevice
+
+var BatchDisassociateClientDeviceFromCoreDevice = &sBatchDisassociateClientDeviceFromCoreDevice
+
+var CancelDeployment = &sCancelDeployment
+
+var CreateComponentVersion = &sCreateComponentVersion
+
+var CreateDeployment = &sCreateDeployment
+
+var DeleteComponent = &sDeleteComponent
+
+var DeleteCoreDevice = &sDeleteCoreDevice
+
+var DeleteDeployment = &sDeleteDeployment
+
+var DescribeComponent = &sDescribeComponent
+
+var DisassociateServiceRoleFromAccount = &sDisassociateServiceRoleFromAccount
+
+var GetComponent = &sGetComponent
+
+var GetComponentVersionArtifact = &sGetComponentVersionArtifact
+
+var GetConnectivityInfo = &sGetConnectivityInfo
+
+var GetCoreDevice = &sGetCoreDevice
+
+var GetDeployment = &sGetDeployment
+
+var GetServiceRoleForAccount = &sGetServiceRoleForAccount
+
+var ListClientDevicesAssociatedWithCoreDevice = &sListClientDevicesAssociatedWithCoreDevice
+
+var ListComponents = &sListComponents
+
+var ListComponentVersions = &sListComponentVersions
+
+var ListCoreDevices = &sListCoreDevices
+
+var ListDeployments = &sListDeployments
+
+var ListEffectiveDeployments = &sListEffectiveDeployments
+
+var ListInstalledComponents = &sListInstalledComponents
+
+var ListTagsForResource = &sListTagsForResource
+
+var ResolveComponentCandidates = &sResolveComponentCandidates
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateConnectivityInfo = &sUpdateConnectivityInfo
+
+var _GreengrassV2 = &s_GreengrassV2
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var AssociateClientDeviceWithCoreDeviceEntry = &sAssociateClientDeviceWithCoreDeviceEntry
+var AssociateClientDeviceWithCoreDeviceEntry_thingName = &sAssociateClientDeviceWithCoreDeviceEntry_thingName
+
+var _AssociateClientDeviceWithCoreDeviceEntryList = &s_AssociateClientDeviceWithCoreDeviceEntryList
+var _AssociateClientDeviceWithCoreDeviceEntryList_member = &s_AssociateClientDeviceWithCoreDeviceEntryList_member
+
+var AssociateClientDeviceWithCoreDeviceErrorEntry = &sAssociateClientDeviceWithCoreDeviceErrorEntry
+var AssociateClientDeviceWithCoreDeviceErrorEntry_thingName = &sAssociateClientDeviceWithCoreDeviceErrorEntry_thingName
+var AssociateClientDeviceWithCoreDeviceErrorEntry_code = &sAssociateClientDeviceWithCoreDeviceErrorEntry_code
+var AssociateClientDeviceWithCoreDeviceErrorEntry_message = &sAssociateClientDeviceWithCoreDeviceErrorEntry_message
+
+var _AssociateClientDeviceWithCoreDeviceErrorList = &s_AssociateClientDeviceWithCoreDeviceErrorList
+var _AssociateClientDeviceWithCoreDeviceErrorList_member = &s_AssociateClientDeviceWithCoreDeviceErrorList_member
+
+var AssociatedClientDevice = &sAssociatedClientDevice
+var AssociatedClientDevice_thingName = &sAssociatedClientDevice_thingName
+var AssociatedClientDevice_associationTimestamp = &sAssociatedClientDevice_associationTimestamp
+
+var _AssociatedClientDeviceList = &s_AssociatedClientDeviceList
+var _AssociatedClientDeviceList_member = &s_AssociatedClientDeviceList_member
+
+var _ClientTokenString = &s_ClientTokenString
+
+var CloudComponentState = &sCloudComponentState
+var CloudComponentState_REQUESTED = &sCloudComponentState_REQUESTED
+var CloudComponentState_INITIATED = &sCloudComponentState_INITIATED
+var CloudComponentState_DEPLOYABLE = &sCloudComponentState_DEPLOYABLE
+var CloudComponentState_FAILED = &sCloudComponentState_FAILED
+var CloudComponentState_DEPRECATED = &sCloudComponentState_DEPRECATED
+
+var CloudComponentStatus = &sCloudComponentStatus
+var CloudComponentStatus_componentState = &sCloudComponentStatus_componentState
+var CloudComponentStatus_message = &sCloudComponentStatus_message
+var CloudComponentStatus_errors = &sCloudComponentStatus_errors
+var CloudComponentStatus_vendorGuidance = &sCloudComponentStatus_vendorGuidance
+var CloudComponentStatus_vendorGuidanceMessage = &sCloudComponentStatus_vendorGuidanceMessage
+
+var Component = &sComponent
+var Component_arn = &sComponent_arn
+var Component_componentName = &sComponent_componentName
+var Component_latestVersion = &sComponent_latestVersion
+
+var _ComponentARN = &s_ComponentARN
+
+var ComponentCandidate = &sComponentCandidate
+var ComponentCandidate_componentName = &sComponentCandidate_componentName
+var ComponentCandidate_componentVersion = &sComponentCandidate_componentVersion
+var ComponentCandidate_versionRequirements = &sComponentCandidate_versionRequirements
+
+var _ComponentCandidateList = &s_ComponentCandidateList
+var _ComponentCandidateList_member = &s_ComponentCandidateList_member
+
+var _ComponentConfigurationPath = &s_ComponentConfigurationPath
+
+var _ComponentConfigurationPathList = &s_ComponentConfigurationPathList
+var _ComponentConfigurationPathList_member = &s_ComponentConfigurationPathList_member
+
+var _ComponentConfigurationString = &s_ComponentConfigurationString
+
+var ComponentConfigurationUpdate = &sComponentConfigurationUpdate
+var ComponentConfigurationUpdate_merge = &sComponentConfigurationUpdate_merge
+var ComponentConfigurationUpdate_reset = &sComponentConfigurationUpdate_reset
+
+var _ComponentDependencyMap = &s_ComponentDependencyMap
+var _ComponentDependencyMap_key = &s_ComponentDependencyMap_key
+var _ComponentDependencyMap_value = &s_ComponentDependencyMap_value
+
+var ComponentDependencyRequirement = &sComponentDependencyRequirement
+var ComponentDependencyRequirement_versionRequirement = &sComponentDependencyRequirement_versionRequirement
+var ComponentDependencyRequirement_dependencyType = &sComponentDependencyRequirement_dependencyType
+
+var ComponentDependencyType = &sComponentDependencyType
+var ComponentDependencyType_HARD = &sComponentDependencyType_HARD
+var ComponentDependencyType_SOFT = &sComponentDependencyType_SOFT
+
+var ComponentDeploymentSpecification = &sComponentDeploymentSpecification
+var ComponentDeploymentSpecification_componentVersion = &sComponentDeploymentSpecification_componentVersion
+var ComponentDeploymentSpecification_configurationUpdate = &sComponentDeploymentSpecification_configurationUpdate
+var ComponentDeploymentSpecification_runWith = &sComponentDeploymentSpecification_runWith
+
+var _ComponentDeploymentSpecifications = &s_ComponentDeploymentSpecifications
+var _ComponentDeploymentSpecifications_key = &s_ComponentDeploymentSpecifications_key
+var _ComponentDeploymentSpecifications_value = &s_ComponentDeploymentSpecifications_value
+
+var ComponentLatestVersion = &sComponentLatestVersion
+var ComponentLatestVersion_arn = &sComponentLatestVersion_arn
+var ComponentLatestVersion_componentVersion = &sComponentLatestVersion_componentVersion
+var ComponentLatestVersion_creationTimestamp = &sComponentLatestVersion_creationTimestamp
+var ComponentLatestVersion_description = &sComponentLatestVersion_description
+var ComponentLatestVersion_publisher = &sComponentLatestVersion_publisher
+var ComponentLatestVersion_platforms = &sComponentLatestVersion_platforms
+
+var _ComponentList = &s_ComponentList
+var _ComponentList_member = &s_ComponentList_member
+
+var _ComponentNameString = &s_ComponentNameString
+
+var ComponentPlatform = &sComponentPlatform
+var ComponentPlatform_name = &sComponentPlatform_name
+var ComponentPlatform_attributes = &sComponentPlatform_attributes
+
+var _ComponentPlatformList = &s_ComponentPlatformList
+var _ComponentPlatformList_member = &s_ComponentPlatformList_member
+
+var ComponentRunWith = &sComponentRunWith
+var ComponentRunWith_posixUser = &sComponentRunWith_posixUser
+var ComponentRunWith_systemResourceLimits = &sComponentRunWith_systemResourceLimits
+var ComponentRunWith_windowsUser = &sComponentRunWith_windowsUser
+
+var _ComponentVersionARN = &s_ComponentVersionARN
+
+var _ComponentVersionList = &s_ComponentVersionList
+var _ComponentVersionList_member = &s_ComponentVersionList_member
+
+var ComponentVersionListItem = &sComponentVersionListItem
+var ComponentVersionListItem_componentName = &sComponentVersionListItem_componentName
+var ComponentVersionListItem_componentVersion = &sComponentVersionListItem_componentVersion
+var ComponentVersionListItem_arn = &sComponentVersionListItem_arn
+
+var _ComponentVersionRequirementMap = &s_ComponentVersionRequirementMap
+var _ComponentVersionRequirementMap_key = &s_ComponentVersionRequirementMap_key
+var _ComponentVersionRequirementMap_value = &s_ComponentVersionRequirementMap_value
+
+var _ComponentVersionString = &s_ComponentVersionString
+
+var ComponentVisibilityScope = &sComponentVisibilityScope
+var ComponentVisibilityScope_PRIVATE = &sComponentVisibilityScope_PRIVATE
+var ComponentVisibilityScope_PUBLIC = &sComponentVisibilityScope_PUBLIC
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var ConnectivityInfo = &sConnectivityInfo
+var ConnectivityInfo_id = &sConnectivityInfo_id
+var ConnectivityInfo_hostAddress = &sConnectivityInfo_hostAddress
+var ConnectivityInfo_portNumber = &sConnectivityInfo_portNumber
+var ConnectivityInfo_metadata = &sConnectivityInfo_metadata
+
+var _connectivityInfoList = &s_connectivityInfoList
+var _connectivityInfoList_member = &s_connectivityInfoList_member
+
+var CoreDevice = &sCoreDevice
+var CoreDevice_coreDeviceThingName = &sCoreDevice_coreDeviceThingName
+var CoreDevice_status = &sCoreDevice_status
+var CoreDevice_lastStatusUpdateTimestamp = &sCoreDevice_lastStatusUpdateTimestamp
+var CoreDevice_platform = &sCoreDevice_platform
+var CoreDevice_architecture = &sCoreDevice_architecture
+var CoreDevice_runtime = &sCoreDevice_runtime
+
+var _CoreDeviceArchitectureString = &s_CoreDeviceArchitectureString
+
+var _CoreDevicePlatformString = &s_CoreDevicePlatformString
+
+var _CoreDeviceRuntimeString = &s_CoreDeviceRuntimeString
+
+var _CoreDevicesList = &s_CoreDevicesList
+var _CoreDevicesList_member = &s_CoreDevicesList_member
+
+var CoreDeviceStatus = &sCoreDeviceStatus
+var CoreDeviceStatus_HEALTHY = &sCoreDeviceStatus_HEALTHY
+var CoreDeviceStatus_UNHEALTHY = &sCoreDeviceStatus_UNHEALTHY
+
+var _CoreDeviceThingName = &s_CoreDeviceThingName
+
+var _CPU = &s_CPU
+
+var _DefaultMaxResults = &s_DefaultMaxResults
+
+var Deployment = &sDeployment
+var Deployment_targetArn = &sDeployment_targetArn
+var Deployment_revisionId = &sDeployment_revisionId
+var Deployment_deploymentId = &sDeployment_deploymentId
+var Deployment_deploymentName = &sDeployment_deploymentName
+var Deployment_creationTimestamp = &sDeployment_creationTimestamp
+var Deployment_deploymentStatus = &sDeployment_deploymentStatus
+var Deployment_isLatestForTarget = &sDeployment_isLatestForTarget
+var Deployment_parentTargetArn = &sDeployment_parentTargetArn
+
+var DeploymentComponentUpdatePolicy = &sDeploymentComponentUpdatePolicy
+var DeploymentComponentUpdatePolicy_timeoutInSeconds = &sDeploymentComponentUpdatePolicy_timeoutInSeconds
+var DeploymentComponentUpdatePolicy_action = &sDeploymentComponentUpdatePolicy_action
+
+var DeploymentComponentUpdatePolicyAction = &sDeploymentComponentUpdatePolicyAction
+var DeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS = &sDeploymentComponentUpdatePolicyAction_NOTIFY_COMPONENTS
+var DeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS = &sDeploymentComponentUpdatePolicyAction_SKIP_NOTIFY_COMPONENTS
+
+var DeploymentConfigurationValidationPolicy = &sDeploymentConfigurationValidationPolicy
+var DeploymentConfigurationValidationPolicy_timeoutInSeconds = &sDeploymentConfigurationValidationPolicy_timeoutInSeconds
+
+var DeploymentFailureHandlingPolicy = &sDeploymentFailureHandlingPolicy
+var DeploymentFailureHandlingPolicy_ROLLBACK = &sDeploymentFailureHandlingPolicy_ROLLBACK
+var DeploymentFailureHandlingPolicy_DO_NOTHING = &sDeploymentFailureHandlingPolicy_DO_NOTHING
+
+var DeploymentHistoryFilter = &sDeploymentHistoryFilter
+var DeploymentHistoryFilter_ALL = &sDeploymentHistoryFilter_ALL
+var DeploymentHistoryFilter_LATEST_ONLY = &sDeploymentHistoryFilter_LATEST_ONLY
+
+var _DeploymentID = &s_DeploymentID
+
+var DeploymentIoTJobConfiguration = &sDeploymentIoTJobConfiguration
+var DeploymentIoTJobConfiguration_jobExecutionsRolloutConfig = &sDeploymentIoTJobConfiguration_jobExecutionsRolloutConfig
+var DeploymentIoTJobConfiguration_abortConfig = &sDeploymentIoTJobConfiguration_abortConfig
+var DeploymentIoTJobConfiguration_timeoutConfig = &sDeploymentIoTJobConfiguration_timeoutConfig
+
+var _DeploymentList = &s_DeploymentList
+var _DeploymentList_member = &s_DeploymentList_member
+
+var _DeploymentName = &s_DeploymentName
+
+var _DeploymentNameString = &s_DeploymentNameString
+
+var DeploymentPolicies = &sDeploymentPolicies
+var DeploymentPolicies_failureHandlingPolicy = &sDeploymentPolicies_failureHandlingPolicy
+var DeploymentPolicies_componentUpdatePolicy = &sDeploymentPolicies_componentUpdatePolicy
+var DeploymentPolicies_configurationValidationPolicy = &sDeploymentPolicies_configurationValidationPolicy
+
+var DeploymentStatus = &sDeploymentStatus
+var DeploymentStatus_ACTIVE = &sDeploymentStatus_ACTIVE
+var DeploymentStatus_COMPLETED = &sDeploymentStatus_COMPLETED
+var DeploymentStatus_CANCELED = &sDeploymentStatus_CANCELED
+var DeploymentStatus_FAILED = &sDeploymentStatus_FAILED
+var DeploymentStatus_INACTIVE = &sDeploymentStatus_INACTIVE
+
+var _Description = &s_Description
+
+var _DescriptionString = &s_DescriptionString
+
+var DisassociateClientDeviceFromCoreDeviceEntry = &sDisassociateClientDeviceFromCoreDeviceEntry
+var DisassociateClientDeviceFromCoreDeviceEntry_thingName = &sDisassociateClientDeviceFromCoreDeviceEntry_thingName
+
+var _DisassociateClientDeviceFromCoreDeviceEntryList = &s_DisassociateClientDeviceFromCoreDeviceEntryList
+var _DisassociateClientDeviceFromCoreDeviceEntryList_member = &s_DisassociateClientDeviceFromCoreDeviceEntryList_member
+
+var DisassociateClientDeviceFromCoreDeviceErrorEntry = &sDisassociateClientDeviceFromCoreDeviceErrorEntry
+var DisassociateClientDeviceFromCoreDeviceErrorEntry_thingName = &sDisassociateClientDeviceFromCoreDeviceErrorEntry_thingName
+var DisassociateClientDeviceFromCoreDeviceErrorEntry_code = &sDisassociateClientDeviceFromCoreDeviceErrorEntry_code
+var DisassociateClientDeviceFromCoreDeviceErrorEntry_message = &sDisassociateClientDeviceFromCoreDeviceErrorEntry_message
+
+var _DisassociateClientDeviceFromCoreDeviceErrorList = &s_DisassociateClientDeviceFromCoreDeviceErrorList
+var _DisassociateClientDeviceFromCoreDeviceErrorList_member = &s_DisassociateClientDeviceFromCoreDeviceErrorList_member
+
+var EffectiveDeployment = &sEffectiveDeployment
+var EffectiveDeployment_deploymentId = &sEffectiveDeployment_deploymentId
+var EffectiveDeployment_deploymentName = &sEffectiveDeployment_deploymentName
+var EffectiveDeployment_iotJobId = &sEffectiveDeployment_iotJobId
+var EffectiveDeployment_iotJobArn = &sEffectiveDeployment_iotJobArn
+var EffectiveDeployment_description = &sEffectiveDeployment_description
+var EffectiveDeployment_targetArn = &sEffectiveDeployment_targetArn
+var EffectiveDeployment_coreDeviceExecutionStatus = &sEffectiveDeployment_coreDeviceExecutionStatus
+var EffectiveDeployment_reason = &sEffectiveDeployment_reason
+var EffectiveDeployment_creationTimestamp = &sEffectiveDeployment_creationTimestamp
+var EffectiveDeployment_modifiedTimestamp = &sEffectiveDeployment_modifiedTimestamp
+var EffectiveDeployment_statusDetails = &sEffectiveDeployment_statusDetails
+
+var _EffectiveDeploymentErrorCode = &s_EffectiveDeploymentErrorCode
+
+var _EffectiveDeploymentErrorStack = &s_EffectiveDeploymentErrorStack
+var _EffectiveDeploymentErrorStack_member = &s_EffectiveDeploymentErrorStack_member
+
+var _EffectiveDeploymentErrorType = &s_EffectiveDeploymentErrorType
+
+var _EffectiveDeploymentErrorTypeList = &s_EffectiveDeploymentErrorTypeList
+var _EffectiveDeploymentErrorTypeList_member = &s_EffectiveDeploymentErrorTypeList_member
+
+var EffectiveDeploymentExecutionStatus = &sEffectiveDeploymentExecutionStatus
+var EffectiveDeploymentExecutionStatus_IN_PROGRESS = &sEffectiveDeploymentExecutionStatus_IN_PROGRESS
+var EffectiveDeploymentExecutionStatus_QUEUED = &sEffectiveDeploymentExecutionStatus_QUEUED
+var EffectiveDeploymentExecutionStatus_FAILED = &sEffectiveDeploymentExecutionStatus_FAILED
+var EffectiveDeploymentExecutionStatus_COMPLETED = &sEffectiveDeploymentExecutionStatus_COMPLETED
+var EffectiveDeploymentExecutionStatus_TIMED_OUT = &sEffectiveDeploymentExecutionStatus_TIMED_OUT
+var EffectiveDeploymentExecutionStatus_CANCELED = &sEffectiveDeploymentExecutionStatus_CANCELED
+var EffectiveDeploymentExecutionStatus_REJECTED = &sEffectiveDeploymentExecutionStatus_REJECTED
+var EffectiveDeploymentExecutionStatus_SUCCEEDED = &sEffectiveDeploymentExecutionStatus_SUCCEEDED
+
+var _EffectiveDeploymentsList = &s_EffectiveDeploymentsList
+var _EffectiveDeploymentsList_member = &s_EffectiveDeploymentsList_member
+
+var EffectiveDeploymentStatusDetails = &sEffectiveDeploymentStatusDetails
+var EffectiveDeploymentStatusDetails_errorStack = &sEffectiveDeploymentStatusDetails_errorStack
+var EffectiveDeploymentStatusDetails_errorTypes = &sEffectiveDeploymentStatusDetails_errorTypes
+
+var _FileSystemPath = &s_FileSystemPath
+
+var _GenericV2ARN = &s_GenericV2ARN
+
+var _GGCVersion = &s_GGCVersion
+
+var InstalledComponent = &sInstalledComponent
+var InstalledComponent_componentName = &sInstalledComponent_componentName
+var InstalledComponent_componentVersion = &sInstalledComponent_componentVersion
+var InstalledComponent_lifecycleState = &sInstalledComponent_lifecycleState
+var InstalledComponent_lifecycleStateDetails = &sInstalledComponent_lifecycleStateDetails
+var InstalledComponent_isRoot = &sInstalledComponent_isRoot
+var InstalledComponent_lastStatusChangeTimestamp = &sInstalledComponent_lastStatusChangeTimestamp
+var InstalledComponent_lastReportedTimestamp = &sInstalledComponent_lastReportedTimestamp
+var InstalledComponent_lastInstallationSource = &sInstalledComponent_lastInstallationSource
+var InstalledComponent_lifecycleStatusCodes = &sInstalledComponent_lifecycleStatusCodes
+
+var InstalledComponentLifecycleState = &sInstalledComponentLifecycleState
+var InstalledComponentLifecycleState_NEW = &sInstalledComponentLifecycleState_NEW
+var InstalledComponentLifecycleState_INSTALLED = &sInstalledComponentLifecycleState_INSTALLED
+var InstalledComponentLifecycleState_STARTING = &sInstalledComponentLifecycleState_STARTING
+var InstalledComponentLifecycleState_RUNNING = &sInstalledComponentLifecycleState_RUNNING
+var InstalledComponentLifecycleState_STOPPING = &sInstalledComponentLifecycleState_STOPPING
+var InstalledComponentLifecycleState_ERRORED = &sInstalledComponentLifecycleState_ERRORED
+var InstalledComponentLifecycleState_BROKEN = &sInstalledComponentLifecycleState_BROKEN
+var InstalledComponentLifecycleState_FINISHED = &sInstalledComponentLifecycleState_FINISHED
+
+var _InstalledComponentLifecycleStatusCode = &s_InstalledComponentLifecycleStatusCode
+
+var _InstalledComponentLifecycleStatusCodeList = &s_InstalledComponentLifecycleStatusCodeList
+var _InstalledComponentLifecycleStatusCodeList_member = &s_InstalledComponentLifecycleStatusCodeList_member
+
+var _InstalledComponentList = &s_InstalledComponentList
+var _InstalledComponentList_member = &s_InstalledComponentList_member
+
+var InstalledComponentTopologyFilter = &sInstalledComponentTopologyFilter
+var InstalledComponentTopologyFilter_ALL = &sInstalledComponentTopologyFilter_ALL
+var InstalledComponentTopologyFilter_ROOT = &sInstalledComponentTopologyFilter_ROOT
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+var InternalServerException_retryAfterSeconds = &sInternalServerException_retryAfterSeconds
+
+var IotEndpointType = &sIotEndpointType
+var IotEndpointType_fips = &sIotEndpointType_fips
+var IotEndpointType_standard = &sIotEndpointType_standard
+
+var IoTJobAbortAction = &sIoTJobAbortAction
+var IoTJobAbortAction_CANCEL = &sIoTJobAbortAction_CANCEL
+
+var IoTJobAbortConfig = &sIoTJobAbortConfig
+var IoTJobAbortConfig_criteriaList = &sIoTJobAbortConfig_criteriaList
+
+var IoTJobAbortCriteria = &sIoTJobAbortCriteria
+var IoTJobAbortCriteria_failureType = &sIoTJobAbortCriteria_failureType
+var IoTJobAbortCriteria_action = &sIoTJobAbortCriteria_action
+var IoTJobAbortCriteria_thresholdPercentage = &sIoTJobAbortCriteria_thresholdPercentage
+var IoTJobAbortCriteria_minNumberOfExecutedThings = &sIoTJobAbortCriteria_minNumberOfExecutedThings
+
+var _IoTJobAbortCriteriaList = &s_IoTJobAbortCriteriaList
+var _IoTJobAbortCriteriaList_member = &s_IoTJobAbortCriteriaList_member
+
+var _IoTJobAbortThresholdPercentage = &s_IoTJobAbortThresholdPercentage
+
+var _IoTJobARN = &s_IoTJobARN
+
+var IoTJobExecutionFailureType = &sIoTJobExecutionFailureType
+var IoTJobExecutionFailureType_FAILED = &sIoTJobExecutionFailureType_FAILED
+var IoTJobExecutionFailureType_REJECTED = &sIoTJobExecutionFailureType_REJECTED
+var IoTJobExecutionFailureType_TIMED_OUT = &sIoTJobExecutionFailureType_TIMED_OUT
+var IoTJobExecutionFailureType_ALL = &sIoTJobExecutionFailureType_ALL
+
+var IoTJobExecutionsRolloutConfig = &sIoTJobExecutionsRolloutConfig
+var IoTJobExecutionsRolloutConfig_exponentialRate = &sIoTJobExecutionsRolloutConfig_exponentialRate
+var IoTJobExecutionsRolloutConfig_maximumPerMinute = &sIoTJobExecutionsRolloutConfig_maximumPerMinute
+
+var IoTJobExponentialRolloutRate = &sIoTJobExponentialRolloutRate
+var IoTJobExponentialRolloutRate_baseRatePerMinute = &sIoTJobExponentialRolloutRate_baseRatePerMinute
+var IoTJobExponentialRolloutRate_incrementFactor = &sIoTJobExponentialRolloutRate_incrementFactor
+var IoTJobExponentialRolloutRate_rateIncreaseCriteria = &sIoTJobExponentialRolloutRate_rateIncreaseCriteria
+
+var _IoTJobId = &s_IoTJobId
+
+var _IoTJobInProgressTimeoutInMinutes = &s_IoTJobInProgressTimeoutInMinutes
+
+var _IoTJobMaxExecutionsPerMin = &s_IoTJobMaxExecutionsPerMin
+
+var _IoTJobMinimumNumberOfExecutedThings = &s_IoTJobMinimumNumberOfExecutedThings
+
+var _IoTJobNumberOfThings = &s_IoTJobNumberOfThings
+
+var IoTJobRateIncreaseCriteria = &sIoTJobRateIncreaseCriteria
+var IoTJobRateIncreaseCriteria_numberOfNotifiedThings = &sIoTJobRateIncreaseCriteria_numberOfNotifiedThings
+var IoTJobRateIncreaseCriteria_numberOfSucceededThings = &sIoTJobRateIncreaseCriteria_numberOfSucceededThings
+
+var _IoTJobRolloutBaseRatePerMinute = &s_IoTJobRolloutBaseRatePerMinute
+
+var _IoTJobRolloutIncrementFactor = &s_IoTJobRolloutIncrementFactor
+
+var IoTJobTimeoutConfig = &sIoTJobTimeoutConfig
+var IoTJobTimeoutConfig_inProgressTimeoutInMinutes = &sIoTJobTimeoutConfig_inProgressTimeoutInMinutes
+
+var _IoTThingName = &s_IoTThingName
+
+var _IsLatestForTarget = &s_IsLatestForTarget
+
+var _IsRoot = &s_IsRoot
+
+var LambdaContainerParams = &sLambdaContainerParams
+var LambdaContainerParams_memorySizeInKB = &sLambdaContainerParams_memorySizeInKB
+var LambdaContainerParams_mountROSysfs = &sLambdaContainerParams_mountROSysfs
+var LambdaContainerParams_volumes = &sLambdaContainerParams_volumes
+var LambdaContainerParams_devices = &sLambdaContainerParams_devices
+
+var _LambdaDeviceList = &s_LambdaDeviceList
+var _LambdaDeviceList_member = &s_LambdaDeviceList_member
+
+var LambdaDeviceMount = &sLambdaDeviceMount
+var LambdaDeviceMount_path = &sLambdaDeviceMount_path
+var LambdaDeviceMount_permission = &sLambdaDeviceMount_permission
+var LambdaDeviceMount_addGroupOwner = &sLambdaDeviceMount_addGroupOwner
+
+var _LambdaEnvironmentVariables = &s_LambdaEnvironmentVariables
+var _LambdaEnvironmentVariables_key = &s_LambdaEnvironmentVariables_key
+var _LambdaEnvironmentVariables_value = &s_LambdaEnvironmentVariables_value
+
+var LambdaEventSource = &sLambdaEventSource
+var LambdaEventSource_topic = &sLambdaEventSource_topic
+var LambdaEventSource_type = &sLambdaEventSource_type
+
+var _LambdaEventSourceList = &s_LambdaEventSourceList
+var _LambdaEventSourceList_member = &s_LambdaEventSourceList_member
+
+var LambdaEventSourceType = &sLambdaEventSourceType
+var LambdaEventSourceType_PUB_SUB = &sLambdaEventSourceType_PUB_SUB
+var LambdaEventSourceType_IOT_CORE = &sLambdaEventSourceType_IOT_CORE
+
+var _LambdaExecArg = &s_LambdaExecArg
+
+var _LambdaExecArgsList = &s_LambdaExecArgsList
+var _LambdaExecArgsList_member = &s_LambdaExecArgsList_member
+
+var LambdaExecutionParameters = &sLambdaExecutionParameters
+var LambdaExecutionParameters_eventSources = &sLambdaExecutionParameters_eventSources
+var LambdaExecutionParameters_maxQueueSize = &sLambdaExecutionParameters_maxQueueSize
+var LambdaExecutionParameters_maxInstancesCount = &sLambdaExecutionParameters_maxInstancesCount
+var LambdaExecutionParameters_maxIdleTimeInSeconds = &sLambdaExecutionParameters_maxIdleTimeInSeconds
+var LambdaExecutionParameters_timeoutInSeconds = &sLambdaExecutionParameters_timeoutInSeconds
+var LambdaExecutionParameters_statusTimeoutInSeconds = &sLambdaExecutionParameters_statusTimeoutInSeconds
+var LambdaExecutionParameters_pinned = &sLambdaExecutionParameters_pinned
+var LambdaExecutionParameters_inputPayloadEncodingType = &sLambdaExecutionParameters_inputPayloadEncodingType
+var LambdaExecutionParameters_execArgs = &sLambdaExecutionParameters_execArgs
+var LambdaExecutionParameters_environmentVariables = &sLambdaExecutionParameters_environmentVariables
+var LambdaExecutionParameters_linuxProcessParams = &sLambdaExecutionParameters_linuxProcessParams
+
+var LambdaFilesystemPermission = &sLambdaFilesystemPermission
+var LambdaFilesystemPermission_RO = &sLambdaFilesystemPermission_RO
+var LambdaFilesystemPermission_RW = &sLambdaFilesystemPermission_RW
+
+var LambdaFunctionRecipeSource = &sLambdaFunctionRecipeSource
+var LambdaFunctionRecipeSource_lambdaArn = &sLambdaFunctionRecipeSource_lambdaArn
+var LambdaFunctionRecipeSource_componentName = &sLambdaFunctionRecipeSource_componentName
+var LambdaFunctionRecipeSource_componentVersion = &sLambdaFunctionRecipeSource_componentVersion
+var LambdaFunctionRecipeSource_componentPlatforms = &sLambdaFunctionRecipeSource_componentPlatforms
+var LambdaFunctionRecipeSource_componentDependencies = &sLambdaFunctionRecipeSource_componentDependencies
+var LambdaFunctionRecipeSource_componentLambdaParameters = &sLambdaFunctionRecipeSource_componentLambdaParameters
+
+var LambdaInputPayloadEncodingType = &sLambdaInputPayloadEncodingType
+var LambdaInputPayloadEncodingType_JSON = &sLambdaInputPayloadEncodingType_JSON
+var LambdaInputPayloadEncodingType_BINARY = &sLambdaInputPayloadEncodingType_BINARY
+
+var LambdaIsolationMode = &sLambdaIsolationMode
+var LambdaIsolationMode_GREENGRASS_CONTAINER = &sLambdaIsolationMode_GREENGRASS_CONTAINER
+var LambdaIsolationMode_NO_CONTAINER = &sLambdaIsolationMode_NO_CONTAINER
+
+var LambdaLinuxProcessParams = &sLambdaLinuxProcessParams
+var LambdaLinuxProcessParams_isolationMode = &sLambdaLinuxProcessParams_isolationMode
+var LambdaLinuxProcessParams_containerParams = &sLambdaLinuxProcessParams_containerParams
+
+var _LambdaVolumeList = &s_LambdaVolumeList
+var _LambdaVolumeList_member = &s_LambdaVolumeList_member
+
+var LambdaVolumeMount = &sLambdaVolumeMount
+var LambdaVolumeMount_sourcePath = &sLambdaVolumeMount_sourcePath
+var LambdaVolumeMount_destinationPath = &sLambdaVolumeMount_destinationPath
+var LambdaVolumeMount_permission = &sLambdaVolumeMount_permission
+var LambdaVolumeMount_addGroupOwner = &sLambdaVolumeMount_addGroupOwner
+
+var _LifecycleStateDetails = &s_LifecycleStateDetails
+
+var _Memory = &s_Memory
+
+var _NextTokenString = &s_NextTokenString
+
+var _NonEmptyString = &s_NonEmptyString
+
+var _NullableString = &s_NullableString
+
+var _OptionalBoolean = &s_OptionalBoolean
+
+var _OptionalInteger = &s_OptionalInteger
+
+var _PlatformAttributesMap = &s_PlatformAttributesMap
+var _PlatformAttributesMap_key = &s_PlatformAttributesMap_key
+var _PlatformAttributesMap_value = &s_PlatformAttributesMap_value
+
+var _PortNumberInt = &s_PortNumberInt
+
+var _PublisherString = &s_PublisherString
+
+var _Reason = &s_Reason
+
+var _RecipeBlob = &s_RecipeBlob
+
+var RecipeOutputFormat = &sRecipeOutputFormat
+var RecipeOutputFormat_JSON = &sRecipeOutputFormat_JSON
+var RecipeOutputFormat_YAML = &sRecipeOutputFormat_YAML
+
+var RequestAlreadyInProgressException = &sRequestAlreadyInProgressException
+var RequestAlreadyInProgressException_message = &sRequestAlreadyInProgressException_message
+
+var ResolvedComponentVersion = &sResolvedComponentVersion
+var ResolvedComponentVersion_arn = &sResolvedComponentVersion_arn
+var ResolvedComponentVersion_componentName = &sResolvedComponentVersion_componentName
+var ResolvedComponentVersion_componentVersion = &sResolvedComponentVersion_componentVersion
+var ResolvedComponentVersion_recipe = &sResolvedComponentVersion_recipe
+var ResolvedComponentVersion_vendorGuidance = &sResolvedComponentVersion_vendorGuidance
+var ResolvedComponentVersion_message = &sResolvedComponentVersion_message
+
+var _ResolvedComponentVersionsList = &s_ResolvedComponentVersionsList
+var _ResolvedComponentVersionsList_member = &s_ResolvedComponentVersionsList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var _RetryAfterSeconds = &s_RetryAfterSeconds
+
+var S3EndpointType = &sS3EndpointType
+var S3EndpointType_REGIONAL = &sS3EndpointType_REGIONAL
+var S3EndpointType_GLOBAL = &sS3EndpointType_GLOBAL
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+var ServiceQuotaExceededException_resourceId = &sServiceQuotaExceededException_resourceId
+var ServiceQuotaExceededException_resourceType = &sServiceQuotaExceededException_resourceType
+var ServiceQuotaExceededException_quotaCode = &sServiceQuotaExceededException_quotaCode
+var ServiceQuotaExceededException_serviceCode = &sServiceQuotaExceededException_serviceCode
+
+var _String = &s_String
+
+var _StringMap = &s_StringMap
+var _StringMap_key = &s_StringMap_key
+var _StringMap_value = &s_StringMap_value
+
+var SystemResourceLimits = &sSystemResourceLimits
+var SystemResourceLimits_memory = &sSystemResourceLimits_memory
+var SystemResourceLimits_cpus = &sSystemResourceLimits_cpus
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TargetARN = &s_TargetARN
+
+var _ThingGroupARN = &s_ThingGroupARN
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _Timestamp = &s_Timestamp
+
+var _TopicString = &s_TopicString
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fields = &sValidationException_fields
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var ValidationExceptionReason = &sValidationExceptionReason
+var ValidationExceptionReason_UNKNOWN_OPERATION = &sValidationExceptionReason_UNKNOWN_OPERATION
+var ValidationExceptionReason_CANNOT_PARSE = &sValidationExceptionReason_CANNOT_PARSE
+var ValidationExceptionReason_FIELD_VALIDATION_FAILED = &sValidationExceptionReason_FIELD_VALIDATION_FAILED
+var ValidationExceptionReason_OTHER = &sValidationExceptionReason_OTHER
+
+var VendorGuidance = &sVendorGuidance
+var VendorGuidance_ACTIVE = &sVendorGuidance_ACTIVE
+var VendorGuidance_DISCONTINUED = &sVendorGuidance_DISCONTINUED
+var VendorGuidance_DELETED = &sVendorGuidance_DELETED
+
+var AssociateServiceRoleToAccountRequest = &sAssociateServiceRoleToAccountRequest
+var AssociateServiceRoleToAccountRequest_roleArn = &sAssociateServiceRoleToAccountRequest_roleArn
+
+var AssociateServiceRoleToAccountResponse = &sAssociateServiceRoleToAccountResponse
+var AssociateServiceRoleToAccountResponse_associatedAt = &sAssociateServiceRoleToAccountResponse_associatedAt
+
+var BatchAssociateClientDeviceWithCoreDeviceRequest = &sBatchAssociateClientDeviceWithCoreDeviceRequest
+var BatchAssociateClientDeviceWithCoreDeviceRequest_entries = &sBatchAssociateClientDeviceWithCoreDeviceRequest_entries
+var BatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName = &sBatchAssociateClientDeviceWithCoreDeviceRequest_coreDeviceThingName
+
+var BatchAssociateClientDeviceWithCoreDeviceResponse = &sBatchAssociateClientDeviceWithCoreDeviceResponse
+var BatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries = &sBatchAssociateClientDeviceWithCoreDeviceResponse_errorEntries
+
+var BatchDisassociateClientDeviceFromCoreDeviceRequest = &sBatchDisassociateClientDeviceFromCoreDeviceRequest
+var BatchDisassociateClientDeviceFromCoreDeviceRequest_entries = &sBatchDisassociateClientDeviceFromCoreDeviceRequest_entries
+var BatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName = &sBatchDisassociateClientDeviceFromCoreDeviceRequest_coreDeviceThingName
+
+var BatchDisassociateClientDeviceFromCoreDeviceResponse = &sBatchDisassociateClientDeviceFromCoreDeviceResponse
+var BatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries = &sBatchDisassociateClientDeviceFromCoreDeviceResponse_errorEntries
+
+var CancelDeploymentRequest = &sCancelDeploymentRequest
+var CancelDeploymentRequest_deploymentId = &sCancelDeploymentRequest_deploymentId
+
+var CancelDeploymentResponse = &sCancelDeploymentResponse
+var CancelDeploymentResponse_message = &sCancelDeploymentResponse_message
+
+var CreateComponentVersionRequest = &sCreateComponentVersionRequest
+var CreateComponentVersionRequest_inlineRecipe = &sCreateComponentVersionRequest_inlineRecipe
+var CreateComponentVersionRequest_lambdaFunction = &sCreateComponentVersionRequest_lambdaFunction
+var CreateComponentVersionRequest_tags = &sCreateComponentVersionRequest_tags
+var CreateComponentVersionRequest_clientToken = &sCreateComponentVersionRequest_clientToken
+
+var CreateComponentVersionResponse = &sCreateComponentVersionResponse
+var CreateComponentVersionResponse_arn = &sCreateComponentVersionResponse_arn
+var CreateComponentVersionResponse_componentName = &sCreateComponentVersionResponse_componentName
+var CreateComponentVersionResponse_componentVersion = &sCreateComponentVersionResponse_componentVersion
+var CreateComponentVersionResponse_creationTimestamp = &sCreateComponentVersionResponse_creationTimestamp
+var CreateComponentVersionResponse_status = &sCreateComponentVersionResponse_status
+
+var CreateDeploymentRequest = &sCreateDeploymentRequest
+var CreateDeploymentRequest_targetArn = &sCreateDeploymentRequest_targetArn
+var CreateDeploymentRequest_deploymentName = &sCreateDeploymentRequest_deploymentName
+var CreateDeploymentRequest_components = &sCreateDeploymentRequest_components
+var CreateDeploymentRequest_iotJobConfiguration = &sCreateDeploymentRequest_iotJobConfiguration
+var CreateDeploymentRequest_deploymentPolicies = &sCreateDeploymentRequest_deploymentPolicies
+var CreateDeploymentRequest_parentTargetArn = &sCreateDeploymentRequest_parentTargetArn
+var CreateDeploymentRequest_tags = &sCreateDeploymentRequest_tags
+var CreateDeploymentRequest_clientToken = &sCreateDeploymentRequest_clientToken
+
+var CreateDeploymentResponse = &sCreateDeploymentResponse
+var CreateDeploymentResponse_deploymentId = &sCreateDeploymentResponse_deploymentId
+var CreateDeploymentResponse_iotJobId = &sCreateDeploymentResponse_iotJobId
+var CreateDeploymentResponse_iotJobArn = &sCreateDeploymentResponse_iotJobArn
+
+var DeleteComponentRequest = &sDeleteComponentRequest
+var DeleteComponentRequest_arn = &sDeleteComponentRequest_arn
+
+var DeleteCoreDeviceRequest = &sDeleteCoreDeviceRequest
+var DeleteCoreDeviceRequest_coreDeviceThingName = &sDeleteCoreDeviceRequest_coreDeviceThingName
+
+var DeleteDeploymentRequest = &sDeleteDeploymentRequest
+var DeleteDeploymentRequest_deploymentId = &sDeleteDeploymentRequest_deploymentId
+
+var DescribeComponentRequest = &sDescribeComponentRequest
+var DescribeComponentRequest_arn = &sDescribeComponentRequest_arn
+
+var DescribeComponentResponse = &sDescribeComponentResponse
+var DescribeComponentResponse_arn = &sDescribeComponentResponse_arn
+var DescribeComponentResponse_componentName = &sDescribeComponentResponse_componentName
+var DescribeComponentResponse_componentVersion = &sDescribeComponentResponse_componentVersion
+var DescribeComponentResponse_creationTimestamp = &sDescribeComponentResponse_creationTimestamp
+var DescribeComponentResponse_publisher = &sDescribeComponentResponse_publisher
+var DescribeComponentResponse_description = &sDescribeComponentResponse_description
+var DescribeComponentResponse_status = &sDescribeComponentResponse_status
+var DescribeComponentResponse_platforms = &sDescribeComponentResponse_platforms
+var DescribeComponentResponse_tags = &sDescribeComponentResponse_tags
+
+var DisassociateServiceRoleFromAccountRequest = &sDisassociateServiceRoleFromAccountRequest
+
+var DisassociateServiceRoleFromAccountResponse = &sDisassociateServiceRoleFromAccountResponse
+var DisassociateServiceRoleFromAccountResponse_disassociatedAt = &sDisassociateServiceRoleFromAccountResponse_disassociatedAt
+
+var GetComponentRequest = &sGetComponentRequest
+var GetComponentRequest_recipeOutputFormat = &sGetComponentRequest_recipeOutputFormat
+var GetComponentRequest_arn = &sGetComponentRequest_arn
+
+var GetComponentResponse = &sGetComponentResponse
+var GetComponentResponse_recipeOutputFormat = &sGetComponentResponse_recipeOutputFormat
+var GetComponentResponse_recipe = &sGetComponentResponse_recipe
+var GetComponentResponse_tags = &sGetComponentResponse_tags
+
+var GetComponentVersionArtifactRequest = &sGetComponentVersionArtifactRequest
+var GetComponentVersionArtifactRequest_arn = &sGetComponentVersionArtifactRequest_arn
+var GetComponentVersionArtifactRequest_artifactName = &sGetComponentVersionArtifactRequest_artifactName
+var GetComponentVersionArtifactRequest_s3EndpointType = &sGetComponentVersionArtifactRequest_s3EndpointType
+var GetComponentVersionArtifactRequest_iotEndpointType = &sGetComponentVersionArtifactRequest_iotEndpointType
+
+var GetComponentVersionArtifactResponse = &sGetComponentVersionArtifactResponse
+var GetComponentVersionArtifactResponse_preSignedUrl = &sGetComponentVersionArtifactResponse_preSignedUrl
+
+var GetConnectivityInfoRequest = &sGetConnectivityInfoRequest
+var GetConnectivityInfoRequest_thingName = &sGetConnectivityInfoRequest_thingName
+
+var GetConnectivityInfoResponse = &sGetConnectivityInfoResponse
+var GetConnectivityInfoResponse_connectivityInfo = &sGetConnectivityInfoResponse_connectivityInfo
+var GetConnectivityInfoResponse_message = &sGetConnectivityInfoResponse_message
+
+var GetCoreDeviceRequest = &sGetCoreDeviceRequest
+var GetCoreDeviceRequest_coreDeviceThingName = &sGetCoreDeviceRequest_coreDeviceThingName
+
+var GetCoreDeviceResponse = &sGetCoreDeviceResponse
+var GetCoreDeviceResponse_coreDeviceThingName = &sGetCoreDeviceResponse_coreDeviceThingName
+var GetCoreDeviceResponse_coreVersion = &sGetCoreDeviceResponse_coreVersion
+var GetCoreDeviceResponse_platform = &sGetCoreDeviceResponse_platform
+var GetCoreDeviceResponse_architecture = &sGetCoreDeviceResponse_architecture
+var GetCoreDeviceResponse_runtime = &sGetCoreDeviceResponse_runtime
+var GetCoreDeviceResponse_status = &sGetCoreDeviceResponse_status
+var GetCoreDeviceResponse_lastStatusUpdateTimestamp = &sGetCoreDeviceResponse_lastStatusUpdateTimestamp
+var GetCoreDeviceResponse_tags = &sGetCoreDeviceResponse_tags
+
+var GetDeploymentRequest = &sGetDeploymentRequest
+var GetDeploymentRequest_deploymentId = &sGetDeploymentRequest_deploymentId
+
+var GetDeploymentResponse = &sGetDeploymentResponse
+var GetDeploymentResponse_targetArn = &sGetDeploymentResponse_targetArn
+var GetDeploymentResponse_revisionId = &sGetDeploymentResponse_revisionId
+var GetDeploymentResponse_deploymentId = &sGetDeploymentResponse_deploymentId
+var GetDeploymentResponse_deploymentName = &sGetDeploymentResponse_deploymentName
+var GetDeploymentResponse_deploymentStatus = &sGetDeploymentResponse_deploymentStatus
+var GetDeploymentResponse_iotJobId = &sGetDeploymentResponse_iotJobId
+var GetDeploymentResponse_iotJobArn = &sGetDeploymentResponse_iotJobArn
+var GetDeploymentResponse_components = &sGetDeploymentResponse_components
+var GetDeploymentResponse_deploymentPolicies = &sGetDeploymentResponse_deploymentPolicies
+var GetDeploymentResponse_iotJobConfiguration = &sGetDeploymentResponse_iotJobConfiguration
+var GetDeploymentResponse_creationTimestamp = &sGetDeploymentResponse_creationTimestamp
+var GetDeploymentResponse_isLatestForTarget = &sGetDeploymentResponse_isLatestForTarget
+var GetDeploymentResponse_parentTargetArn = &sGetDeploymentResponse_parentTargetArn
+var GetDeploymentResponse_tags = &sGetDeploymentResponse_tags
+
+var GetServiceRoleForAccountRequest = &sGetServiceRoleForAccountRequest
+
+var GetServiceRoleForAccountResponse = &sGetServiceRoleForAccountResponse
+var GetServiceRoleForAccountResponse_associatedAt = &sGetServiceRoleForAccountResponse_associatedAt
+var GetServiceRoleForAccountResponse_roleArn = &sGetServiceRoleForAccountResponse_roleArn
+
+var ListClientDevicesAssociatedWithCoreDeviceRequest = &sListClientDevicesAssociatedWithCoreDeviceRequest
+var ListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName = &sListClientDevicesAssociatedWithCoreDeviceRequest_coreDeviceThingName
+var ListClientDevicesAssociatedWithCoreDeviceRequest_maxResults = &sListClientDevicesAssociatedWithCoreDeviceRequest_maxResults
+var ListClientDevicesAssociatedWithCoreDeviceRequest_nextToken = &sListClientDevicesAssociatedWithCoreDeviceRequest_nextToken
+
+var ListClientDevicesAssociatedWithCoreDeviceResponse = &sListClientDevicesAssociatedWithCoreDeviceResponse
+var ListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices = &sListClientDevicesAssociatedWithCoreDeviceResponse_associatedClientDevices
+var ListClientDevicesAssociatedWithCoreDeviceResponse_nextToken = &sListClientDevicesAssociatedWithCoreDeviceResponse_nextToken
+
+var ListComponentsRequest = &sListComponentsRequest
+var ListComponentsRequest_scope = &sListComponentsRequest_scope
+var ListComponentsRequest_maxResults = &sListComponentsRequest_maxResults
+var ListComponentsRequest_nextToken = &sListComponentsRequest_nextToken
+
+var ListComponentsResponse = &sListComponentsResponse
+var ListComponentsResponse_components = &sListComponentsResponse_components
+var ListComponentsResponse_nextToken = &sListComponentsResponse_nextToken
+
+var ListComponentVersionsRequest = &sListComponentVersionsRequest
+var ListComponentVersionsRequest_arn = &sListComponentVersionsRequest_arn
+var ListComponentVersionsRequest_maxResults = &sListComponentVersionsRequest_maxResults
+var ListComponentVersionsRequest_nextToken = &sListComponentVersionsRequest_nextToken
+
+var ListComponentVersionsResponse = &sListComponentVersionsResponse
+var ListComponentVersionsResponse_componentVersions = &sListComponentVersionsResponse_componentVersions
+var ListComponentVersionsResponse_nextToken = &sListComponentVersionsResponse_nextToken
+
+var ListCoreDevicesRequest = &sListCoreDevicesRequest
+var ListCoreDevicesRequest_thingGroupArn = &sListCoreDevicesRequest_thingGroupArn
+var ListCoreDevicesRequest_status = &sListCoreDevicesRequest_status
+var ListCoreDevicesRequest_maxResults = &sListCoreDevicesRequest_maxResults
+var ListCoreDevicesRequest_nextToken = &sListCoreDevicesRequest_nextToken
+var ListCoreDevicesRequest_runtime = &sListCoreDevicesRequest_runtime
+
+var ListCoreDevicesResponse = &sListCoreDevicesResponse
+var ListCoreDevicesResponse_coreDevices = &sListCoreDevicesResponse_coreDevices
+var ListCoreDevicesResponse_nextToken = &sListCoreDevicesResponse_nextToken
+
+var ListDeploymentsRequest = &sListDeploymentsRequest
+var ListDeploymentsRequest_targetArn = &sListDeploymentsRequest_targetArn
+var ListDeploymentsRequest_historyFilter = &sListDeploymentsRequest_historyFilter
+var ListDeploymentsRequest_parentTargetArn = &sListDeploymentsRequest_parentTargetArn
+var ListDeploymentsRequest_maxResults = &sListDeploymentsRequest_maxResults
+var ListDeploymentsRequest_nextToken = &sListDeploymentsRequest_nextToken
+
+var ListDeploymentsResponse = &sListDeploymentsResponse
+var ListDeploymentsResponse_deployments = &sListDeploymentsResponse_deployments
+var ListDeploymentsResponse_nextToken = &sListDeploymentsResponse_nextToken
+
+var ListEffectiveDeploymentsRequest = &sListEffectiveDeploymentsRequest
+var ListEffectiveDeploymentsRequest_coreDeviceThingName = &sListEffectiveDeploymentsRequest_coreDeviceThingName
+var ListEffectiveDeploymentsRequest_maxResults = &sListEffectiveDeploymentsRequest_maxResults
+var ListEffectiveDeploymentsRequest_nextToken = &sListEffectiveDeploymentsRequest_nextToken
+
+var ListEffectiveDeploymentsResponse = &sListEffectiveDeploymentsResponse
+var ListEffectiveDeploymentsResponse_effectiveDeployments = &sListEffectiveDeploymentsResponse_effectiveDeployments
+var ListEffectiveDeploymentsResponse_nextToken = &sListEffectiveDeploymentsResponse_nextToken
+
+var ListInstalledComponentsRequest = &sListInstalledComponentsRequest
+var ListInstalledComponentsRequest_coreDeviceThingName = &sListInstalledComponentsRequest_coreDeviceThingName
+var ListInstalledComponentsRequest_maxResults = &sListInstalledComponentsRequest_maxResults
+var ListInstalledComponentsRequest_nextToken = &sListInstalledComponentsRequest_nextToken
+var ListInstalledComponentsRequest_topologyFilter = &sListInstalledComponentsRequest_topologyFilter
+
+var ListInstalledComponentsResponse = &sListInstalledComponentsResponse
+var ListInstalledComponentsResponse_installedComponents = &sListInstalledComponentsResponse_installedComponents
+var ListInstalledComponentsResponse_nextToken = &sListInstalledComponentsResponse_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var ResolveComponentCandidatesRequest = &sResolveComponentCandidatesRequest
+var ResolveComponentCandidatesRequest_platform = &sResolveComponentCandidatesRequest_platform
+var ResolveComponentCandidatesRequest_componentCandidates = &sResolveComponentCandidatesRequest_componentCandidates
+
+var ResolveComponentCandidatesResponse = &sResolveComponentCandidatesResponse
+var ResolveComponentCandidatesResponse_resolvedComponentVersions = &sResolveComponentCandidatesResponse_resolvedComponentVersions
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateConnectivityInfoRequest = &sUpdateConnectivityInfoRequest
+var UpdateConnectivityInfoRequest_thingName = &sUpdateConnectivityInfoRequest_thingName
+var UpdateConnectivityInfoRequest_connectivityInfo = &sUpdateConnectivityInfoRequest_connectivityInfo
+
+var UpdateConnectivityInfoResponse = &sUpdateConnectivityInfoResponse
+var UpdateConnectivityInfoResponse_version = &sUpdateConnectivityInfoResponse_version
+var UpdateConnectivityInfoResponse_message = &sUpdateConnectivityInfoResponse_message
+
+var GreengrassV2 = &smithy.ServiceSchema{Schema: &s_GreengrassV2, Version: "2020-11-30"}

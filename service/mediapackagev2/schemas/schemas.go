@@ -4,4439 +4,3036 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CancelHarvestJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CancelHarvestJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+var (
+	iCancelHarvestJob                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CancelHarvestJob"}
+	iCreateChannel                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateChannel"}
+	iCreateChannelGroup                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateChannelGroup"}
+	iCreateHarvestJob                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateHarvestJob"}
+	iCreateOriginEndpoint                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateOriginEndpoint"}
+	iDeleteChannel                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannel"}
+	iDeleteChannelGroup                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelGroup"}
+	iDeleteChannelPolicy                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelPolicy"}
+	iDeleteOriginEndpoint                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteOriginEndpoint"}
+	iDeleteOriginEndpointPolicy               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteOriginEndpointPolicy"}
+	iGetChannel                               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannel"}
+	iGetChannelGroup                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelGroup"}
+	iGetChannelPolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelPolicy"}
+	iGetHarvestJob                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetHarvestJob"}
+	iGetOriginEndpoint                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetOriginEndpoint"}
+	iGetOriginEndpointPolicy                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetOriginEndpointPolicy"}
+	iListChannelGroups                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListChannelGroups"}
+	iListChannels                             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListChannels"}
+	iListHarvestJobs                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListHarvestJobs"}
+	iListOriginEndpoints                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListOriginEndpoints"}
+	iListTagsForResource                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListTagsForResource"}
+	iPutChannelPolicy                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PutChannelPolicy"}
+	iPutOriginEndpointPolicy                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PutOriginEndpointPolicy"}
+	iResetChannelState                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResetChannelState"}
+	iResetOriginEndpointState                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResetOriginEndpointState"}
+	iTagResource                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TagResource"}
+	iUntagResource                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UntagResource"}
+	iUpdateChannel                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateChannel"}
+	iUpdateChannelGroup                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateChannelGroup"}
+	iUpdateOriginEndpoint                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateOriginEndpoint"}
+	i_mediapackagev2                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "mediapackagev2"}
+	iAccessDeniedException                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "AccessDeniedException"}
+	iAdMarkerDash                             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "AdMarkerDash"}
+	iAdMarkerHls                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "AdMarkerHls"}
+	i_AttachedMultiviewChannelList            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "AttachedMultiviewChannelList"}
+	iCdnAuthConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CdnAuthConfiguration"}
+	i_CdnIdentifierSecretArn                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CdnIdentifierSecretArn"}
+	i_CdnIdentifierSecretArns                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CdnIdentifierSecretArns"}
+	iChannelGroupListConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ChannelGroupListConfiguration"}
+	i_ChannelGroupsList                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ChannelGroupsList"}
+	i_ChannelList                             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ChannelList"}
+	iChannelListConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ChannelListConfiguration"}
+	iCmafEncryptionMethod                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CmafEncryptionMethod"}
+	iConflictException                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ConflictException"}
+	iConflictExceptionType                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ConflictExceptionType"}
+	iContainerType                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ContainerType"}
+	iContentKeyPeriodConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ContentKeyPeriodConfiguration"}
+	iContentKeyPeriodTiming                   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ContentKeyPeriodTiming"}
+	iCreateDashManifestConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateDashManifestConfiguration"}
+	i_CreateDashManifests                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateDashManifests"}
+	iCreateHlsManifestConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateHlsManifestConfiguration"}
+	i_CreateHlsManifests                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateHlsManifests"}
+	iCreateLowLatencyHlsManifestConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateLowLatencyHlsManifestConfiguration"}
+	i_CreateLowLatencyHlsManifests            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateLowLatencyHlsManifests"}
+	iCreateMssManifestConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateMssManifestConfiguration"}
+	i_CreateMssManifests                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateMssManifests"}
+	iCustomAdType                             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CustomAdType"}
+	i_CustomAdTypeList                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CustomAdTypeList"}
+	iDashAudioTimelinePattern                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashAudioTimelinePattern"}
+	iDashAvailabilityStartTimeConfiguration   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashAvailabilityStartTimeConfiguration"}
+	iDashBaseUrl                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashBaseUrl"}
+	i_DashBaseUrls                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashBaseUrls"}
+	iDashCompactness                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashCompactness"}
+	iDashDrmSignaling                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashDrmSignaling"}
+	i_DashDvbErrorMetrics                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashDvbErrorMetrics"}
+	iDashDvbFontDownload                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashDvbFontDownload"}
+	iDashDvbMetricsReporting                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashDvbMetricsReporting"}
+	iDashDvbSettings                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashDvbSettings"}
+	iDashPeriodTrigger                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashPeriodTrigger"}
+	i_DashPeriodTriggers                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashPeriodTriggers"}
+	iDashProfile                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashProfile"}
+	i_DashProfiles                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashProfiles"}
+	iDashProgramInformation                   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashProgramInformation"}
+	iDashSegmentTemplateFormat                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashSegmentTemplateFormat"}
+	iDashSubtitleConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashSubtitleConfiguration"}
+	iDashTtmlConfiguration                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashTtmlConfiguration"}
+	iDashTtmlProfile                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashTtmlProfile"}
+	iDashUtcTiming                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashUtcTiming"}
+	iDashUtcTimingMode                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DashUtcTimingMode"}
+	iDestination                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "Destination"}
+	iDrmSystem                                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DrmSystem"}
+	i_DrmSystems                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DrmSystems"}
+	iEncryption                               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "Encryption"}
+	iEncryptionContractConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "EncryptionContractConfiguration"}
+	iEncryptionMethod                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "EncryptionMethod"}
+	iEndpointErrorCondition                   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "EndpointErrorCondition"}
+	i_EndpointErrorConditions                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "EndpointErrorConditions"}
+	i_EntityTag                               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "EntityTag"}
+	iFilterConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "FilterConfiguration"}
+	iForceEndpointErrorConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ForceEndpointErrorConfiguration"}
+	iGetDashManifestConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetDashManifestConfiguration"}
+	i_GetDashManifests                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetDashManifests"}
+	iGetHlsManifestConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetHlsManifestConfiguration"}
+	i_GetHlsManifests                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetHlsManifests"}
+	iGetLowLatencyHlsManifestConfiguration    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetLowLatencyHlsManifestConfiguration"}
+	i_GetLowLatencyHlsManifests               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetLowLatencyHlsManifests"}
+	iGetMssManifestConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetMssManifestConfiguration"}
+	i_GetMssManifests                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetMssManifests"}
+	iHarvestedDashManifest                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestedDashManifest"}
+	i_HarvestedDashManifestsList              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestedDashManifestsList"}
+	iHarvestedHlsManifest                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestedHlsManifest"}
+	i_HarvestedHlsManifestsList               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestedHlsManifestsList"}
+	iHarvestedLowLatencyHlsManifest           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestedLowLatencyHlsManifest"}
+	i_HarvestedLowLatencyHlsManifestsList     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestedLowLatencyHlsManifestsList"}
+	iHarvestedManifests                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestedManifests"}
+	iHarvesterScheduleConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvesterScheduleConfiguration"}
+	iHarvestJob                               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestJob"}
+	i_HarvestJobsList                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestJobsList"}
+	iHarvestJobStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "HarvestJobStatus"}
+	i_IdempotencyToken                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "IdempotencyToken"}
+	iIngestEndpoint                           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "IngestEndpoint"}
+	i_IngestEndpointList                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "IngestEndpointList"}
+	iInputSwitchConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "InputSwitchConfiguration"}
+	iInputType                                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "InputType"}
+	iInternalServerException                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "InternalServerException"}
+	iIsmEncryptionMethod                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "IsmEncryptionMethod"}
+	iListDashManifestConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListDashManifestConfiguration"}
+	i_ListDashManifests                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListDashManifests"}
+	iListHlsManifestConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListHlsManifestConfiguration"}
+	i_ListHlsManifests                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListHlsManifests"}
+	iListLowLatencyHlsManifestConfiguration   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListLowLatencyHlsManifestConfiguration"}
+	i_ListLowLatencyHlsManifests              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListLowLatencyHlsManifests"}
+	iListMssManifestConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListMssManifestConfiguration"}
+	i_ListMssManifests                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListMssManifests"}
+	i_ListResourceMaxResults                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListResourceMaxResults"}
+	i_ManifestName                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ManifestName"}
+	iMssManifestLayout                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "MssManifestLayout"}
+	iMultiviewConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "MultiviewConfiguration"}
+	iMultiviewFilterConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "MultiviewFilterConfiguration"}
+	i_MultiviewLayoutList                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "MultiviewLayoutList"}
+	iMultiviewLayoutType                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "MultiviewLayoutType"}
+	i_MultiviewSourceList                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "MultiviewSourceList"}
+	iOriginEndpointListConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "OriginEndpointListConfiguration"}
+	i_OriginEndpointsList                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "OriginEndpointsList"}
+	iOutputHeaderConfiguration                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "OutputHeaderConfiguration"}
+	iOutputLockingMode                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "OutputLockingMode"}
+	iOutputTimestampMode                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "OutputTimestampMode"}
+	i_PolicyText                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PolicyText"}
+	iPresetSpeke20Audio                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PresetSpeke20Audio"}
+	iPresetSpeke20Video                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PresetSpeke20Video"}
+	i_ResourceDescription                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResourceDescription"}
+	i_ResourceName                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResourceName"}
+	iResourceNotFoundException                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResourceNotFoundException"}
+	iResourceTypeNotFound                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResourceTypeNotFound"}
+	i_S3BucketName                            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "S3BucketName"}
+	iS3DestinationConfig                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "S3DestinationConfig"}
+	i_S3DestinationPath                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "S3DestinationPath"}
+	iScte                                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "Scte"}
+	iScteDash                                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ScteDash"}
+	iScteFilter                               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ScteFilter"}
+	i_ScteFilterList                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ScteFilterList"}
+	iScteHls                                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ScteHls"}
+	iScteInManifests                          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ScteInManifests"}
+	iScteInSegments                           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ScteInSegments"}
+	iSegment                                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "Segment"}
+	iServiceQuotaExceededException            = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ServiceQuotaExceededException"}
+	iSpekeKeyProvider                         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "SpekeKeyProvider"}
+	iSpekeVersion                             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "SpekeVersion"}
+	iStartTag                                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "StartTag"}
+	iStreamNameOutputMode                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "StreamNameOutputMode"}
+	i_TagArn                                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TagArn"}
+	i_TagKey                                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TagKey"}
+	i_TagKeyList                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TagKeyList"}
+	i_TagMap                                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TagMap"}
+	i_TagValue                                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TagValue"}
+	iThrottlingException                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ThrottlingException"}
+	iTsEncryptionMethod                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TsEncryptionMethod"}
+	iUriPathType                              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UriPathType"}
+	iUriSeparator                             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UriSeparator"}
+	iValidationException                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ValidationException"}
+	iValidationExceptionType                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ValidationExceptionType"}
+	iCancelHarvestJobRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CancelHarvestJobRequest"}
+	iCancelHarvestJobResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CancelHarvestJobResponse"}
+	iCreateChannelGroupRequest                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateChannelGroupRequest"}
+	iCreateChannelGroupResponse               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateChannelGroupResponse"}
+	iCreateChannelRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateChannelRequest"}
+	iCreateChannelResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateChannelResponse"}
+	iCreateHarvestJobRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateHarvestJobRequest"}
+	iCreateHarvestJobResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateHarvestJobResponse"}
+	iCreateOriginEndpointRequest              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateOriginEndpointRequest"}
+	iCreateOriginEndpointResponse             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "CreateOriginEndpointResponse"}
+	iDeleteChannelGroupRequest                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelGroupRequest"}
+	iDeleteChannelGroupResponse               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelGroupResponse"}
+	iDeleteChannelRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelRequest"}
+	iDeleteChannelResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelResponse"}
+	iDeleteChannelPolicyRequest               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelPolicyRequest"}
+	iDeleteChannelPolicyResponse              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteChannelPolicyResponse"}
+	iDeleteOriginEndpointRequest              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteOriginEndpointRequest"}
+	iDeleteOriginEndpointResponse             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteOriginEndpointResponse"}
+	iDeleteOriginEndpointPolicyRequest        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteOriginEndpointPolicyRequest"}
+	iDeleteOriginEndpointPolicyResponse       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "DeleteOriginEndpointPolicyResponse"}
+	iGetChannelGroupRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelGroupRequest"}
+	iGetChannelGroupResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelGroupResponse"}
+	iGetChannelRequest                        = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelRequest"}
+	iGetChannelResponse                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelResponse"}
+	iGetChannelPolicyRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelPolicyRequest"}
+	iGetChannelPolicyResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetChannelPolicyResponse"}
+	iGetHarvestJobRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetHarvestJobRequest"}
+	iGetHarvestJobResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetHarvestJobResponse"}
+	iGetOriginEndpointRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetOriginEndpointRequest"}
+	iGetOriginEndpointResponse                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetOriginEndpointResponse"}
+	iGetOriginEndpointPolicyRequest           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetOriginEndpointPolicyRequest"}
+	iGetOriginEndpointPolicyResponse          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "GetOriginEndpointPolicyResponse"}
+	iListChannelGroupsRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListChannelGroupsRequest"}
+	iListChannelGroupsResponse                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListChannelGroupsResponse"}
+	iListChannelsRequest                      = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListChannelsRequest"}
+	iListChannelsResponse                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListChannelsResponse"}
+	iListHarvestJobsRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListHarvestJobsRequest"}
+	iListHarvestJobsResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListHarvestJobsResponse"}
+	iListOriginEndpointsRequest               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListOriginEndpointsRequest"}
+	iListOriginEndpointsResponse              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListOriginEndpointsResponse"}
+	iListTagsForResourceRequest               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ListTagsForResourceResponse"}
+	iPutChannelPolicyRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PutChannelPolicyRequest"}
+	iPutChannelPolicyResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PutChannelPolicyResponse"}
+	iPutOriginEndpointPolicyRequest           = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PutOriginEndpointPolicyRequest"}
+	iPutOriginEndpointPolicyResponse          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "PutOriginEndpointPolicyResponse"}
+	iResetChannelStateRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResetChannelStateRequest"}
+	iResetChannelStateResponse                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResetChannelStateResponse"}
+	iResetOriginEndpointStateRequest          = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResetOriginEndpointStateRequest"}
+	iResetOriginEndpointStateResponse         = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "ResetOriginEndpointStateResponse"}
+	iTagResourceRequest                       = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "TagResourceRequest"}
+	iUntagResourceRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UntagResourceRequest"}
+	iUpdateChannelGroupRequest                = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateChannelGroupRequest"}
+	iUpdateChannelGroupResponse               = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateChannelGroupResponse"}
+	iUpdateChannelRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateChannelRequest"}
+	iUpdateChannelResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateChannelResponse"}
+	iUpdateOriginEndpointRequest              = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateOriginEndpointRequest"}
+	iUpdateOriginEndpointResponse             = smithy.ShapeID{Namespace: "com.amazonaws.mediapackagev2", Name: "UpdateOriginEndpointResponse"}
+	pString                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                     = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pTimestamp                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pFloat                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "Float"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}",
-	Code: 200})
-
-var CreateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channelGroup/{ChannelGroupName}/channel",
-	Code: 200})
-
-var CreateChannelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateChannelGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channelGroup",
-	Code: 200})
-
-var CreateHarvestJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateHarvestJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob",
-	Code: 200})
-
-var CreateOriginEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateOriginEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint",
-	Code: 200})
-
-var DeleteChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/",
-	Code: 200})
-
-var DeleteChannelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channelGroup/{ChannelGroupName}",
-	Code: 200})
-
-var DeleteChannelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/policy",
-	Code: 200})
-
-var DeleteOriginEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteOriginEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}",
-	Code: 200})
-
-var DeleteOriginEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteOriginEndpointPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/policy",
-	Code: 200})
-
-var GetChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/",
-	Code: 200})
-
-var GetChannelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}",
-	Code: 200})
-
-var GetChannelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/policy",
-	Code: 200})
-
-var GetHarvestJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetHarvestJob",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/harvestJob/{HarvestJobName}",
-	Code: 200})
-
-var GetOriginEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetOriginEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}",
-	Code: 200})
-
-var GetOriginEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetOriginEndpointPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/policy",
-	Code: 200})
-
-var ListChannelGroups = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListChannelGroups",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup",
-	Code: 200})
-
-var ListChannels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListChannels",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/channel",
-	Code: 200})
-
-var ListHarvestJobs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListHarvestJobs",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/harvestJob",
-	Code: 200})
-
-var ListOriginEndpoints = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListOriginEndpoints",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var PutChannelPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PutChannelPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/policy",
-	Code: 200})
-
-var PutOriginEndpointPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PutOriginEndpointPolicy",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/policy",
-	Code: 200})
-
-var ResetChannelState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResetChannelState",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/reset",
-	Code: 200})
-
-var ResetOriginEndpointState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResetOriginEndpointState",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}/reset",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 204})
-
-var UpdateChannel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateChannel",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 204}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/",
-	Code: 200})
-
-var UpdateChannelGroup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateChannelGroup",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channelGroup/{ChannelGroupName}",
-	Code: 200})
-
-var UpdateOriginEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateOriginEndpoint",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/channelGroup/{ChannelGroupName}/channel/{ChannelName}/originEndpoint/{OriginEndpointName}",
-	Code: 200})
-
-var _mediapackagev2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "mediapackagev2",
-}, smithy.ShapeTypeService, 0)
-
-var Mediapackagev2 = smithy.NewServiceSchema(_mediapackagev2, "2022-12-25")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var AdMarkerDash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "AdMarkerDash",
-}, smithy.ShapeTypeEnum, 2)
-var AdMarkerDash_BINARY *smithy.Schema
-
-var AdMarkerDash_XML *smithy.Schema
-
-var AdMarkerHls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "AdMarkerHls",
-}, smithy.ShapeTypeEnum, 2)
-var AdMarkerHls_DATERANGE *smithy.Schema
-
-var AdMarkerHls_SCTE35_ENHANCED *smithy.Schema
-
-var _AttachedMultiviewChannelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "AttachedMultiviewChannelList",
-}, smithy.ShapeTypeList, 1)
-var _AttachedMultiviewChannelList_member *smithy.Schema
-
-var CdnAuthConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CdnAuthConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var CdnAuthConfiguration_CdnIdentifierSecretArns *smithy.Schema
-
-var CdnAuthConfiguration_SecretsRoleArn *smithy.Schema
-
-var _CdnIdentifierSecretArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CdnIdentifierSecretArn",
-}, smithy.ShapeTypeString, 0)
-
-var _CdnIdentifierSecretArns = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CdnIdentifierSecretArns",
-}, smithy.ShapeTypeList, 1)
-var _CdnIdentifierSecretArns_member *smithy.Schema
-
-var ChannelGroupListConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ChannelGroupListConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var ChannelGroupListConfiguration_ChannelGroupName *smithy.Schema
-
-var ChannelGroupListConfiguration_Arn *smithy.Schema
-
-var ChannelGroupListConfiguration_CreatedAt *smithy.Schema
-
-var ChannelGroupListConfiguration_ModifiedAt *smithy.Schema
-
-var ChannelGroupListConfiguration_Description *smithy.Schema
-
-var _ChannelGroupsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ChannelGroupsList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelGroupsList_member *smithy.Schema
-
-var _ChannelList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ChannelList",
-}, smithy.ShapeTypeList, 1)
-var _ChannelList_member *smithy.Schema
-
-var ChannelListConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ChannelListConfiguration",
-}, smithy.ShapeTypeStructure, 10)
-var ChannelListConfiguration_Arn *smithy.Schema
-
-var ChannelListConfiguration_ChannelName *smithy.Schema
-
-var ChannelListConfiguration_ChannelGroupName *smithy.Schema
-
-var ChannelListConfiguration_CreatedAt *smithy.Schema
-
-var ChannelListConfiguration_ModifiedAt *smithy.Schema
-
-var ChannelListConfiguration_Description *smithy.Schema
-
-var ChannelListConfiguration_InputType *smithy.Schema
-
-var ChannelListConfiguration_OutputLockingMode *smithy.Schema
-
-var ChannelListConfiguration_MultiviewConfiguration *smithy.Schema
-
-var ChannelListConfiguration_AttachedMultiviewChannels *smithy.Schema
-
-var CmafEncryptionMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CmafEncryptionMethod",
-}, smithy.ShapeTypeEnum, 2)
-var CmafEncryptionMethod_CENC *smithy.Schema
-
-var CmafEncryptionMethod_CBCS *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConflictException_ConflictExceptionType *smithy.Schema
-
-var ConflictExceptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ConflictExceptionType",
-}, smithy.ShapeTypeEnum, 4)
-var ConflictExceptionType_RESOURCE_IN_USE *smithy.Schema
-
-var ConflictExceptionType_RESOURCE_ALREADY_EXISTS *smithy.Schema
-
-var ConflictExceptionType_IDEMPOTENT_PARAMETER_MISMATCH *smithy.Schema
-
-var ConflictExceptionType_CONFLICTING_OPERATION *smithy.Schema
-
-var ContainerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ContainerType",
-}, smithy.ShapeTypeEnum, 3)
-var ContainerType_TS *smithy.Schema
-
-var ContainerType_CMAF *smithy.Schema
-
-var ContainerType_ISM *smithy.Schema
-
-var ContentKeyPeriodConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ContentKeyPeriodConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ContentKeyPeriodConfiguration_ContentKeyPeriodTiming *smithy.Schema
-
-var ContentKeyPeriodTiming = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ContentKeyPeriodTiming",
-}, smithy.ShapeTypeEnum, 3)
-var ContentKeyPeriodTiming_INDEX_ONLY *smithy.Schema
-
-var ContentKeyPeriodTiming_START_END_ONLY *smithy.Schema
-
-var ContentKeyPeriodTiming_INDEX_WITH_START_END *smithy.Schema
-
-var CreateDashManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateDashManifestConfiguration",
-}, smithy.ShapeTypeStructure, 20)
-var CreateDashManifestConfiguration_ManifestName *smithy.Schema
-
-var CreateDashManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var CreateDashManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var CreateDashManifestConfiguration_MinUpdatePeriodSeconds *smithy.Schema
-
-var CreateDashManifestConfiguration_MinBufferTimeSeconds *smithy.Schema
-
-var CreateDashManifestConfiguration_SuggestedPresentationDelaySeconds *smithy.Schema
-
-var CreateDashManifestConfiguration_SegmentTemplateFormat *smithy.Schema
-
-var CreateDashManifestConfiguration_PeriodTriggers *smithy.Schema
-
-var CreateDashManifestConfiguration_ScteDash *smithy.Schema
-
-var CreateDashManifestConfiguration_DrmSignaling *smithy.Schema
-
-var CreateDashManifestConfiguration_UtcTiming *smithy.Schema
-
-var CreateDashManifestConfiguration_Profiles *smithy.Schema
-
-var CreateDashManifestConfiguration_BaseUrls *smithy.Schema
-
-var CreateDashManifestConfiguration_ProgramInformation *smithy.Schema
-
-var CreateDashManifestConfiguration_DvbSettings *smithy.Schema
-
-var CreateDashManifestConfiguration_Compactness *smithy.Schema
-
-var CreateDashManifestConfiguration_AudioTimelinePattern *smithy.Schema
-
-var CreateDashManifestConfiguration_SubtitleConfiguration *smithy.Schema
-
-var CreateDashManifestConfiguration_UriPathType *smithy.Schema
-
-var CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration *smithy.Schema
-
-var _CreateDashManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateDashManifests",
-}, smithy.ShapeTypeList, 1)
-var _CreateDashManifests_member *smithy.Schema
-
-var CreateHlsManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateHlsManifestConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var CreateHlsManifestConfiguration_ManifestName *smithy.Schema
-
-var CreateHlsManifestConfiguration_ChildManifestName *smithy.Schema
-
-var CreateHlsManifestConfiguration_ScteHls *smithy.Schema
-
-var CreateHlsManifestConfiguration_StartTag *smithy.Schema
-
-var CreateHlsManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var CreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds *smithy.Schema
-
-var CreateHlsManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var CreateHlsManifestConfiguration_UrlEncodeChildManifest *smithy.Schema
-
-var CreateHlsManifestConfiguration_UriPathType *smithy.Schema
-
-var _CreateHlsManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateHlsManifests",
-}, smithy.ShapeTypeList, 1)
-var _CreateHlsManifests_member *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateLowLatencyHlsManifestConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var CreateLowLatencyHlsManifestConfiguration_ManifestName *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_ChildManifestName *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_ScteHls *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_StartTag *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest *smithy.Schema
-
-var CreateLowLatencyHlsManifestConfiguration_UriPathType *smithy.Schema
-
-var _CreateLowLatencyHlsManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateLowLatencyHlsManifests",
-}, smithy.ShapeTypeList, 1)
-var _CreateLowLatencyHlsManifests_member *smithy.Schema
-
-var CreateMssManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateMssManifestConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var CreateMssManifestConfiguration_ManifestName *smithy.Schema
-
-var CreateMssManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var CreateMssManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var CreateMssManifestConfiguration_ManifestLayout *smithy.Schema
-
-var _CreateMssManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateMssManifests",
-}, smithy.ShapeTypeList, 1)
-var _CreateMssManifests_member *smithy.Schema
-
-var CustomAdType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CustomAdType",
-}, smithy.ShapeTypeEnum, 5)
-var CustomAdType_PROGRAM *smithy.Schema
-
-var CustomAdType_CHAPTER *smithy.Schema
-
-var CustomAdType_UNSCHEDULED_EVENT *smithy.Schema
-
-var CustomAdType_ALTERNATE_CONTENT_OPPORTUNITY *smithy.Schema
-
-var CustomAdType_NETWORK *smithy.Schema
-
-var _CustomAdTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CustomAdTypeList",
-}, smithy.ShapeTypeList, 1)
-var _CustomAdTypeList_member *smithy.Schema
-
-var DashAudioTimelinePattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashAudioTimelinePattern",
-}, smithy.ShapeTypeEnum, 2)
-var DashAudioTimelinePattern_NONE *smithy.Schema
-
-var DashAudioTimelinePattern_PATTERNED *smithy.Schema
-
-var DashAvailabilityStartTimeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashAvailabilityStartTimeConfiguration",
-}, smithy.ShapeTypeUnion, 1)
-var DashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime *smithy.Schema
-
-var DashBaseUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashBaseUrl",
-}, smithy.ShapeTypeStructure, 4)
-var DashBaseUrl_Url *smithy.Schema
-
-var DashBaseUrl_ServiceLocation *smithy.Schema
-
-var DashBaseUrl_DvbPriority *smithy.Schema
-
-var DashBaseUrl_DvbWeight *smithy.Schema
-
-var _DashBaseUrls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashBaseUrls",
-}, smithy.ShapeTypeList, 1)
-var _DashBaseUrls_member *smithy.Schema
-
-var DashCompactness = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashCompactness",
-}, smithy.ShapeTypeEnum, 2)
-var DashCompactness_STANDARD *smithy.Schema
-
-var DashCompactness_NONE *smithy.Schema
-
-var DashDrmSignaling = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashDrmSignaling",
-}, smithy.ShapeTypeEnum, 2)
-var DashDrmSignaling_INDIVIDUAL *smithy.Schema
-
-var DashDrmSignaling_REFERENCED *smithy.Schema
-
-var _DashDvbErrorMetrics = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashDvbErrorMetrics",
-}, smithy.ShapeTypeList, 1)
-var _DashDvbErrorMetrics_member *smithy.Schema
-
-var DashDvbFontDownload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashDvbFontDownload",
-}, smithy.ShapeTypeStructure, 3)
-var DashDvbFontDownload_Url *smithy.Schema
-
-var DashDvbFontDownload_MimeType *smithy.Schema
-
-var DashDvbFontDownload_FontFamily *smithy.Schema
-
-var DashDvbMetricsReporting = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashDvbMetricsReporting",
-}, smithy.ShapeTypeStructure, 2)
-var DashDvbMetricsReporting_ReportingUrl *smithy.Schema
-
-var DashDvbMetricsReporting_Probability *smithy.Schema
-
-var DashDvbSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashDvbSettings",
-}, smithy.ShapeTypeStructure, 2)
-var DashDvbSettings_FontDownload *smithy.Schema
-
-var DashDvbSettings_ErrorMetrics *smithy.Schema
-
-var DashPeriodTrigger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashPeriodTrigger",
-}, smithy.ShapeTypeEnum, 5)
-var DashPeriodTrigger_AVAILS *smithy.Schema
-
-var DashPeriodTrigger_DRM_KEY_ROTATION *smithy.Schema
-
-var DashPeriodTrigger_SOURCE_CHANGES *smithy.Schema
-
-var DashPeriodTrigger_SOURCE_DISRUPTIONS *smithy.Schema
-
-var DashPeriodTrigger_NONE *smithy.Schema
-
-var _DashPeriodTriggers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashPeriodTriggers",
-}, smithy.ShapeTypeList, 1)
-var _DashPeriodTriggers_member *smithy.Schema
-
-var DashProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashProfile",
-}, smithy.ShapeTypeEnum, 1)
-var DashProfile_DVB_DASH *smithy.Schema
-
-var _DashProfiles = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashProfiles",
-}, smithy.ShapeTypeList, 1)
-var _DashProfiles_member *smithy.Schema
-
-var DashProgramInformation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashProgramInformation",
-}, smithy.ShapeTypeStructure, 5)
-var DashProgramInformation_Title *smithy.Schema
-
-var DashProgramInformation_Source *smithy.Schema
-
-var DashProgramInformation_Copyright *smithy.Schema
-
-var DashProgramInformation_LanguageCode *smithy.Schema
-
-var DashProgramInformation_MoreInformationUrl *smithy.Schema
-
-var DashSegmentTemplateFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashSegmentTemplateFormat",
-}, smithy.ShapeTypeEnum, 1)
-var DashSegmentTemplateFormat_NUMBER_WITH_TIMELINE *smithy.Schema
-
-var DashSubtitleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashSubtitleConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DashSubtitleConfiguration_TtmlConfiguration *smithy.Schema
-
-var DashTtmlConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashTtmlConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DashTtmlConfiguration_TtmlProfile *smithy.Schema
-
-var DashTtmlProfile = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashTtmlProfile",
-}, smithy.ShapeTypeEnum, 2)
-var DashTtmlProfile_IMSC_1 *smithy.Schema
-
-var DashTtmlProfile_EBU_TT_D_101 *smithy.Schema
-
-var DashUtcTiming = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashUtcTiming",
-}, smithy.ShapeTypeStructure, 2)
-var DashUtcTiming_TimingMode *smithy.Schema
-
-var DashUtcTiming_TimingSource *smithy.Schema
-
-var DashUtcTimingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DashUtcTimingMode",
-}, smithy.ShapeTypeEnum, 4)
-var DashUtcTimingMode_HTTP_HEAD *smithy.Schema
-
-var DashUtcTimingMode_HTTP_ISO *smithy.Schema
-
-var DashUtcTimingMode_HTTP_XSDATE *smithy.Schema
-
-var DashUtcTimingMode_UTC_DIRECT *smithy.Schema
-
-var Destination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "Destination",
-}, smithy.ShapeTypeStructure, 1)
-var Destination_S3Destination *smithy.Schema
-
-var DrmSystem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DrmSystem",
-}, smithy.ShapeTypeEnum, 5)
-var DrmSystem_CLEAR_KEY_AES_128 *smithy.Schema
-
-var DrmSystem_FAIRPLAY *smithy.Schema
-
-var DrmSystem_PLAYREADY *smithy.Schema
-
-var DrmSystem_WIDEVINE *smithy.Schema
-
-var DrmSystem_IRDETO *smithy.Schema
-
-var _DrmSystems = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DrmSystems",
-}, smithy.ShapeTypeList, 1)
-var _DrmSystems_member *smithy.Schema
-
-var Encryption = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "Encryption",
-}, smithy.ShapeTypeStructure, 5)
-var Encryption_ConstantInitializationVector *smithy.Schema
-
-var Encryption_EncryptionMethod *smithy.Schema
-
-var Encryption_KeyRotationIntervalSeconds *smithy.Schema
-
-var Encryption_CmafExcludeSegmentDrmMetadata *smithy.Schema
-
-var Encryption_SpekeKeyProvider *smithy.Schema
-
-var EncryptionContractConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "EncryptionContractConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var EncryptionContractConfiguration_PresetSpeke20Audio *smithy.Schema
-
-var EncryptionContractConfiguration_PresetSpeke20Video *smithy.Schema
-
-var EncryptionMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "EncryptionMethod",
-}, smithy.ShapeTypeStructure, 3)
-var EncryptionMethod_TsEncryptionMethod *smithy.Schema
-
-var EncryptionMethod_CmafEncryptionMethod *smithy.Schema
-
-var EncryptionMethod_IsmEncryptionMethod *smithy.Schema
-
-var EndpointErrorCondition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "EndpointErrorCondition",
-}, smithy.ShapeTypeEnum, 4)
-var EndpointErrorCondition_STALE_MANIFEST *smithy.Schema
-
-var EndpointErrorCondition_INCOMPLETE_MANIFEST *smithy.Schema
-
-var EndpointErrorCondition_MISSING_DRM_KEY *smithy.Schema
-
-var EndpointErrorCondition_SLATE_INPUT *smithy.Schema
-
-var _EndpointErrorConditions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "EndpointErrorConditions",
-}, smithy.ShapeTypeList, 1)
-var _EndpointErrorConditions_member *smithy.Schema
-
-var _EntityTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "EntityTag",
-}, smithy.ShapeTypeString, 0)
-
-var FilterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "FilterConfiguration",
-}, smithy.ShapeTypeStructure, 7)
-var FilterConfiguration_ManifestFilter *smithy.Schema
-
-var FilterConfiguration_DrmSettings *smithy.Schema
-
-var FilterConfiguration_Start *smithy.Schema
-
-var FilterConfiguration_End *smithy.Schema
-
-var FilterConfiguration_TimeDelaySeconds *smithy.Schema
-
-var FilterConfiguration_ClipStartTime *smithy.Schema
-
-var FilterConfiguration_Multiview *smithy.Schema
-
-var ForceEndpointErrorConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ForceEndpointErrorConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ForceEndpointErrorConfiguration_EndpointErrorConditions *smithy.Schema
-
-var GetDashManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetDashManifestConfiguration",
-}, smithy.ShapeTypeStructure, 21)
-var GetDashManifestConfiguration_ManifestName *smithy.Schema
-
-var GetDashManifestConfiguration_Url *smithy.Schema
-
-var GetDashManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var GetDashManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var GetDashManifestConfiguration_MinUpdatePeriodSeconds *smithy.Schema
-
-var GetDashManifestConfiguration_MinBufferTimeSeconds *smithy.Schema
-
-var GetDashManifestConfiguration_SuggestedPresentationDelaySeconds *smithy.Schema
-
-var GetDashManifestConfiguration_SegmentTemplateFormat *smithy.Schema
-
-var GetDashManifestConfiguration_PeriodTriggers *smithy.Schema
-
-var GetDashManifestConfiguration_ScteDash *smithy.Schema
-
-var GetDashManifestConfiguration_DrmSignaling *smithy.Schema
-
-var GetDashManifestConfiguration_UtcTiming *smithy.Schema
-
-var GetDashManifestConfiguration_Profiles *smithy.Schema
-
-var GetDashManifestConfiguration_BaseUrls *smithy.Schema
-
-var GetDashManifestConfiguration_ProgramInformation *smithy.Schema
-
-var GetDashManifestConfiguration_DvbSettings *smithy.Schema
-
-var GetDashManifestConfiguration_Compactness *smithy.Schema
-
-var GetDashManifestConfiguration_AudioTimelinePattern *smithy.Schema
-
-var GetDashManifestConfiguration_SubtitleConfiguration *smithy.Schema
-
-var GetDashManifestConfiguration_UriPathType *smithy.Schema
-
-var GetDashManifestConfiguration_AvailabilityStartTimeConfiguration *smithy.Schema
-
-var _GetDashManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetDashManifests",
-}, smithy.ShapeTypeList, 1)
-var _GetDashManifests_member *smithy.Schema
-
-var GetHlsManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetHlsManifestConfiguration",
-}, smithy.ShapeTypeStructure, 10)
-var GetHlsManifestConfiguration_ManifestName *smithy.Schema
-
-var GetHlsManifestConfiguration_Url *smithy.Schema
-
-var GetHlsManifestConfiguration_ChildManifestName *smithy.Schema
-
-var GetHlsManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var GetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds *smithy.Schema
-
-var GetHlsManifestConfiguration_ScteHls *smithy.Schema
-
-var GetHlsManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var GetHlsManifestConfiguration_StartTag *smithy.Schema
-
-var GetHlsManifestConfiguration_UrlEncodeChildManifest *smithy.Schema
-
-var GetHlsManifestConfiguration_UriPathType *smithy.Schema
-
-var _GetHlsManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetHlsManifests",
-}, smithy.ShapeTypeList, 1)
-var _GetHlsManifests_member *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetLowLatencyHlsManifestConfiguration",
-}, smithy.ShapeTypeStructure, 10)
-var GetLowLatencyHlsManifestConfiguration_ManifestName *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_Url *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_ChildManifestName *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_ScteHls *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_StartTag *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest *smithy.Schema
-
-var GetLowLatencyHlsManifestConfiguration_UriPathType *smithy.Schema
-
-var _GetLowLatencyHlsManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetLowLatencyHlsManifests",
-}, smithy.ShapeTypeList, 1)
-var _GetLowLatencyHlsManifests_member *smithy.Schema
-
-var GetMssManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetMssManifestConfiguration",
-}, smithy.ShapeTypeStructure, 5)
-var GetMssManifestConfiguration_ManifestName *smithy.Schema
-
-var GetMssManifestConfiguration_Url *smithy.Schema
-
-var GetMssManifestConfiguration_FilterConfiguration *smithy.Schema
-
-var GetMssManifestConfiguration_ManifestWindowSeconds *smithy.Schema
-
-var GetMssManifestConfiguration_ManifestLayout *smithy.Schema
-
-var _GetMssManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetMssManifests",
-}, smithy.ShapeTypeList, 1)
-var _GetMssManifests_member *smithy.Schema
-
-var HarvestedDashManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestedDashManifest",
-}, smithy.ShapeTypeStructure, 1)
-var HarvestedDashManifest_ManifestName *smithy.Schema
-
-var _HarvestedDashManifestsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestedDashManifestsList",
-}, smithy.ShapeTypeList, 1)
-var _HarvestedDashManifestsList_member *smithy.Schema
-
-var HarvestedHlsManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestedHlsManifest",
-}, smithy.ShapeTypeStructure, 1)
-var HarvestedHlsManifest_ManifestName *smithy.Schema
-
-var _HarvestedHlsManifestsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestedHlsManifestsList",
-}, smithy.ShapeTypeList, 1)
-var _HarvestedHlsManifestsList_member *smithy.Schema
-
-var HarvestedLowLatencyHlsManifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestedLowLatencyHlsManifest",
-}, smithy.ShapeTypeStructure, 1)
-var HarvestedLowLatencyHlsManifest_ManifestName *smithy.Schema
-
-var _HarvestedLowLatencyHlsManifestsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestedLowLatencyHlsManifestsList",
-}, smithy.ShapeTypeList, 1)
-var _HarvestedLowLatencyHlsManifestsList_member *smithy.Schema
-
-var HarvestedManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestedManifests",
-}, smithy.ShapeTypeStructure, 3)
-var HarvestedManifests_HlsManifests *smithy.Schema
-
-var HarvestedManifests_DashManifests *smithy.Schema
-
-var HarvestedManifests_LowLatencyHlsManifests *smithy.Schema
-
-var HarvesterScheduleConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvesterScheduleConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var HarvesterScheduleConfiguration_StartTime *smithy.Schema
-
-var HarvesterScheduleConfiguration_EndTime *smithy.Schema
-
-var HarvestJob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestJob",
-}, smithy.ShapeTypeStructure, 14)
-var HarvestJob_ChannelGroupName *smithy.Schema
-
-var HarvestJob_ChannelName *smithy.Schema
-
-var HarvestJob_OriginEndpointName *smithy.Schema
-
-var HarvestJob_Destination *smithy.Schema
-
-var HarvestJob_HarvestJobName *smithy.Schema
-
-var HarvestJob_HarvestedManifests *smithy.Schema
-
-var HarvestJob_Description *smithy.Schema
-
-var HarvestJob_ScheduleConfiguration *smithy.Schema
-
-var HarvestJob_Arn *smithy.Schema
-
-var HarvestJob_CreatedAt *smithy.Schema
-
-var HarvestJob_ModifiedAt *smithy.Schema
-
-var HarvestJob_Status *smithy.Schema
-
-var HarvestJob_ErrorMessage *smithy.Schema
-
-var HarvestJob_ETag *smithy.Schema
-
-var _HarvestJobsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestJobsList",
-}, smithy.ShapeTypeList, 1)
-var _HarvestJobsList_member *smithy.Schema
-
-var HarvestJobStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "HarvestJobStatus",
-}, smithy.ShapeTypeEnum, 5)
-var HarvestJobStatus_QUEUED *smithy.Schema
-
-var HarvestJobStatus_IN_PROGRESS *smithy.Schema
-
-var HarvestJobStatus_CANCELLED *smithy.Schema
-
-var HarvestJobStatus_COMPLETED *smithy.Schema
-
-var HarvestJobStatus_FAILED *smithy.Schema
-
-var _IdempotencyToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "IdempotencyToken",
-}, smithy.ShapeTypeString, 0)
-
-var IngestEndpoint = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "IngestEndpoint",
-}, smithy.ShapeTypeStructure, 2)
-var IngestEndpoint_Id *smithy.Schema
-
-var IngestEndpoint_Url *smithy.Schema
-
-var _IngestEndpointList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "IngestEndpointList",
-}, smithy.ShapeTypeList, 1)
-var _IngestEndpointList_member *smithy.Schema
-
-var InputSwitchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "InputSwitchConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var InputSwitchConfiguration_MQCSInputSwitching *smithy.Schema
-
-var InputSwitchConfiguration_PreferredInput *smithy.Schema
-
-var InputType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "InputType",
-}, smithy.ShapeTypeEnum, 3)
-var InputType_HLS *smithy.Schema
-
-var InputType_CMAF *smithy.Schema
-
-var InputType_MULTIVIEW *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var IsmEncryptionMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "IsmEncryptionMethod",
-}, smithy.ShapeTypeEnum, 1)
-var IsmEncryptionMethod_CENC *smithy.Schema
-
-var ListDashManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListDashManifestConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ListDashManifestConfiguration_ManifestName *smithy.Schema
-
-var ListDashManifestConfiguration_Url *smithy.Schema
-
-var _ListDashManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListDashManifests",
-}, smithy.ShapeTypeList, 1)
-var _ListDashManifests_member *smithy.Schema
-
-var ListHlsManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListHlsManifestConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ListHlsManifestConfiguration_ManifestName *smithy.Schema
-
-var ListHlsManifestConfiguration_ChildManifestName *smithy.Schema
-
-var ListHlsManifestConfiguration_Url *smithy.Schema
-
-var _ListHlsManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListHlsManifests",
-}, smithy.ShapeTypeList, 1)
-var _ListHlsManifests_member *smithy.Schema
-
-var ListLowLatencyHlsManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListLowLatencyHlsManifestConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var ListLowLatencyHlsManifestConfiguration_ManifestName *smithy.Schema
-
-var ListLowLatencyHlsManifestConfiguration_ChildManifestName *smithy.Schema
-
-var ListLowLatencyHlsManifestConfiguration_Url *smithy.Schema
-
-var _ListLowLatencyHlsManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListLowLatencyHlsManifests",
-}, smithy.ShapeTypeList, 1)
-var _ListLowLatencyHlsManifests_member *smithy.Schema
-
-var ListMssManifestConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListMssManifestConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var ListMssManifestConfiguration_ManifestName *smithy.Schema
-
-var ListMssManifestConfiguration_Url *smithy.Schema
-
-var _ListMssManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListMssManifests",
-}, smithy.ShapeTypeList, 1)
-var _ListMssManifests_member *smithy.Schema
-
-var _ListResourceMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListResourceMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ManifestName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ManifestName",
-}, smithy.ShapeTypeString, 0)
-
-var MssManifestLayout = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "MssManifestLayout",
-}, smithy.ShapeTypeEnum, 2)
-var MssManifestLayout_FULL *smithy.Schema
-
-var MssManifestLayout_COMPACT *smithy.Schema
-
-var MultiviewConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "MultiviewConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MultiviewConfiguration_AvailableSources *smithy.Schema
-
-var MultiviewConfiguration_AvailableLayouts *smithy.Schema
-
-var MultiviewFilterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "MultiviewFilterConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var MultiviewFilterConfiguration_Layout *smithy.Schema
-
-var MultiviewFilterConfiguration_Sources *smithy.Schema
-
-var _MultiviewLayoutList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "MultiviewLayoutList",
-}, smithy.ShapeTypeList, 1)
-var _MultiviewLayoutList_member *smithy.Schema
-
-var MultiviewLayoutType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "MultiviewLayoutType",
-}, smithy.ShapeTypeEnum, 6)
-var MultiviewLayoutType_LAYOUT_2EH *smithy.Schema
-
-var MultiviewLayoutType_LAYOUT_2PL *smithy.Schema
-
-var MultiviewLayoutType_LAYOUT_3EL *smithy.Schema
-
-var MultiviewLayoutType_LAYOUT_3PL *smithy.Schema
-
-var MultiviewLayoutType_LAYOUT_4E *smithy.Schema
-
-var MultiviewLayoutType_LAYOUT_4PL *smithy.Schema
-
-var _MultiviewSourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "MultiviewSourceList",
-}, smithy.ShapeTypeList, 1)
-var _MultiviewSourceList_member *smithy.Schema
-
-var OriginEndpointListConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "OriginEndpointListConfiguration",
-}, smithy.ShapeTypeStructure, 15)
-var OriginEndpointListConfiguration_Arn *smithy.Schema
-
-var OriginEndpointListConfiguration_ChannelGroupName *smithy.Schema
-
-var OriginEndpointListConfiguration_ChannelName *smithy.Schema
-
-var OriginEndpointListConfiguration_OriginEndpointName *smithy.Schema
-
-var OriginEndpointListConfiguration_ContainerType *smithy.Schema
-
-var OriginEndpointListConfiguration_Description *smithy.Schema
-
-var OriginEndpointListConfiguration_CreatedAt *smithy.Schema
-
-var OriginEndpointListConfiguration_ModifiedAt *smithy.Schema
-
-var OriginEndpointListConfiguration_HlsManifests *smithy.Schema
-
-var OriginEndpointListConfiguration_LowLatencyHlsManifests *smithy.Schema
-
-var OriginEndpointListConfiguration_DashManifests *smithy.Schema
-
-var OriginEndpointListConfiguration_MssManifests *smithy.Schema
-
-var OriginEndpointListConfiguration_ForceEndpointErrorConfiguration *smithy.Schema
-
-var OriginEndpointListConfiguration_UriSeparator *smithy.Schema
-
-var OriginEndpointListConfiguration_StreamNameOutputMode *smithy.Schema
-
-var _OriginEndpointsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "OriginEndpointsList",
-}, smithy.ShapeTypeList, 1)
-var _OriginEndpointsList_member *smithy.Schema
-
-var OutputHeaderConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "OutputHeaderConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var OutputHeaderConfiguration_PublishMQCS *smithy.Schema
-
-var OutputLockingMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "OutputLockingMode",
-}, smithy.ShapeTypeEnum, 2)
-var OutputLockingMode_EPOCH_LOCKED *smithy.Schema
-
-var OutputLockingMode_NON_EPOCH_LOCKED *smithy.Schema
-
-var OutputTimestampMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "OutputTimestampMode",
-}, smithy.ShapeTypeEnum, 2)
-var OutputTimestampMode_PASSTHROUGH *smithy.Schema
-
-var OutputTimestampMode_REBASED_TO_CHANNEL_START *smithy.Schema
-
-var _PolicyText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PolicyText",
-}, smithy.ShapeTypeString, 0)
-
-var PresetSpeke20Audio = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PresetSpeke20Audio",
-}, smithy.ShapeTypeEnum, 5)
-var PresetSpeke20Audio_PRESET_AUDIO_1 *smithy.Schema
-
-var PresetSpeke20Audio_PRESET_AUDIO_2 *smithy.Schema
-
-var PresetSpeke20Audio_PRESET_AUDIO_3 *smithy.Schema
-
-var PresetSpeke20Audio_SHARED *smithy.Schema
-
-var PresetSpeke20Audio_UNENCRYPTED *smithy.Schema
-
-var PresetSpeke20Video = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PresetSpeke20Video",
-}, smithy.ShapeTypeEnum, 10)
-var PresetSpeke20Video_PRESET_VIDEO_1 *smithy.Schema
-
-var PresetSpeke20Video_PRESET_VIDEO_2 *smithy.Schema
-
-var PresetSpeke20Video_PRESET_VIDEO_3 *smithy.Schema
-
-var PresetSpeke20Video_PRESET_VIDEO_4 *smithy.Schema
-
-var PresetSpeke20Video_PRESET_VIDEO_5 *smithy.Schema
-
-var PresetSpeke20Video_PRESET_VIDEO_6 *smithy.Schema
-
-var PresetSpeke20Video_PRESET_VIDEO_7 *smithy.Schema
-
-var PresetSpeke20Video_PRESET_VIDEO_8 *smithy.Schema
-
-var PresetSpeke20Video_SHARED *smithy.Schema
-
-var PresetSpeke20Video_UNENCRYPTED *smithy.Schema
-
-var _ResourceDescription = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResourceDescription",
-}, smithy.ShapeTypeString, 0)
-
-var _ResourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResourceName",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourceNotFoundException_ResourceTypeNotFound *smithy.Schema
-
-var ResourceTypeNotFound = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResourceTypeNotFound",
-}, smithy.ShapeTypeEnum, 4)
-var ResourceTypeNotFound_CHANNEL_GROUP *smithy.Schema
-
-var ResourceTypeNotFound_CHANNEL *smithy.Schema
-
-var ResourceTypeNotFound_ORIGIN_ENDPOINT *smithy.Schema
-
-var ResourceTypeNotFound_HARVEST_JOB *smithy.Schema
-
-var _S3BucketName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "S3BucketName",
-}, smithy.ShapeTypeString, 0)
-
-var S3DestinationConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "S3DestinationConfig",
-}, smithy.ShapeTypeStructure, 2)
-var S3DestinationConfig_BucketName *smithy.Schema
-
-var S3DestinationConfig_DestinationPath *smithy.Schema
-
-var _S3DestinationPath = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "S3DestinationPath",
-}, smithy.ShapeTypeString, 0)
-
-var Scte = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "Scte",
-}, smithy.ShapeTypeStructure, 3)
-var Scte_ScteFilter *smithy.Schema
-
-var Scte_ScteInSegments *smithy.Schema
-
-var Scte_CustomAdTypes *smithy.Schema
-
-var ScteDash = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ScteDash",
-}, smithy.ShapeTypeStructure, 2)
-var ScteDash_AdMarkerDash *smithy.Schema
-
-var ScteDash_ScteInManifests *smithy.Schema
-
-var ScteFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ScteFilter",
-}, smithy.ShapeTypeEnum, 19)
-var ScteFilter_SPLICE_INSERT *smithy.Schema
-
-var ScteFilter_BREAK *smithy.Schema
-
-var ScteFilter_PROVIDER_ADVERTISEMENT *smithy.Schema
-
-var ScteFilter_DISTRIBUTOR_ADVERTISEMENT *smithy.Schema
-
-var ScteFilter_PROVIDER_PLACEMENT_OPPORTUNITY *smithy.Schema
-
-var ScteFilter_DISTRIBUTOR_PLACEMENT_OPPORTUNITY *smithy.Schema
-
-var ScteFilter_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY *smithy.Schema
-
-var ScteFilter_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY *smithy.Schema
-
-var ScteFilter_PROGRAM *smithy.Schema
-
-var ScteFilter_CHAPTER *smithy.Schema
-
-var ScteFilter_UNSCHEDULED_EVENT *smithy.Schema
-
-var ScteFilter_ALTERNATE_CONTENT_OPPORTUNITY *smithy.Schema
-
-var ScteFilter_NETWORK *smithy.Schema
-
-var ScteFilter_PROVIDER_PROMO *smithy.Schema
-
-var ScteFilter_DISTRIBUTOR_PROMO *smithy.Schema
-
-var ScteFilter_PROVIDER_AD_BLOCK *smithy.Schema
-
-var ScteFilter_DISTRIBUTOR_AD_BLOCK *smithy.Schema
-
-var ScteFilter_CONTENT_IDENTIFICATION *smithy.Schema
-
-var ScteFilter_CALL_AD_SERVER *smithy.Schema
-
-var _ScteFilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ScteFilterList",
-}, smithy.ShapeTypeList, 1)
-var _ScteFilterList_member *smithy.Schema
-
-var ScteHls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ScteHls",
-}, smithy.ShapeTypeStructure, 2)
-var ScteHls_AdMarkerHls *smithy.Schema
-
-var ScteHls_ScteInManifests *smithy.Schema
-
-var ScteInManifests = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ScteInManifests",
-}, smithy.ShapeTypeEnum, 2)
-var ScteInManifests_ALL *smithy.Schema
-
-var ScteInManifests_MATCHES_FILTER *smithy.Schema
-
-var ScteInSegments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ScteInSegments",
-}, smithy.ShapeTypeEnum, 3)
-var ScteInSegments_NONE *smithy.Schema
-
-var ScteInSegments_ALL *smithy.Schema
-
-var ScteInSegments_MATCHES_FILTER *smithy.Schema
-
-var Segment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "Segment",
-}, smithy.ShapeTypeStructure, 8)
-var Segment_SegmentDurationSeconds *smithy.Schema
-
-var Segment_SegmentName *smithy.Schema
-
-var Segment_TsUseAudioRenditionGroup *smithy.Schema
-
-var Segment_IncludeIframeOnlyStreams *smithy.Schema
-
-var Segment_TsIncludeDvbSubtitles *smithy.Schema
-
-var Segment_Scte *smithy.Schema
-
-var Segment_Encryption *smithy.Schema
-
-var Segment_OutputTimestampMode *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_Message *smithy.Schema
-
-var SpekeKeyProvider = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "SpekeKeyProvider",
-}, smithy.ShapeTypeStructure, 8)
-var SpekeKeyProvider_EncryptionContractConfiguration *smithy.Schema
-
-var SpekeKeyProvider_ResourceId *smithy.Schema
-
-var SpekeKeyProvider_DrmSystems *smithy.Schema
-
-var SpekeKeyProvider_RoleArn *smithy.Schema
-
-var SpekeKeyProvider_Url *smithy.Schema
-
-var SpekeKeyProvider_CertificateArn *smithy.Schema
-
-var SpekeKeyProvider_SpekeVersion *smithy.Schema
-
-var SpekeKeyProvider_ContentKeyPeriodConfiguration *smithy.Schema
-
-var SpekeVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "SpekeVersion",
-}, smithy.ShapeTypeEnum, 2)
-var SpekeVersion_V2_0 *smithy.Schema
-
-var SpekeVersion_V2_1 *smithy.Schema
-
-var StartTag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "StartTag",
-}, smithy.ShapeTypeStructure, 2)
-var StartTag_TimeOffset *smithy.Schema
-
-var StartTag_Precise *smithy.Schema
-
-var StreamNameOutputMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "StreamNameOutputMode",
-}, smithy.ShapeTypeEnum, 2)
-var StreamNameOutputMode_INDEX *smithy.Schema
-
-var StreamNameOutputMode_PASSTHROUGH_NAME *smithy.Schema
-
-var _TagArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TagArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var TsEncryptionMethod = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TsEncryptionMethod",
-}, smithy.ShapeTypeEnum, 2)
-var TsEncryptionMethod_AES_128 *smithy.Schema
-
-var TsEncryptionMethod_SAMPLE_AES *smithy.Schema
-
-var UriPathType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UriPathType",
-}, smithy.ShapeTypeEnum, 2)
-var UriPathType_LEAF *smithy.Schema
-
-var UriPathType_ROOT *smithy.Schema
-
-var UriSeparator = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UriSeparator",
-}, smithy.ShapeTypeEnum, 2)
-var UriSeparator_UNDERSCORE *smithy.Schema
-
-var UriSeparator_HYPHEN *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"})
-var ValidationException_Message *smithy.Schema
-
-var ValidationException_ValidationExceptionType *smithy.Schema
-
-var ValidationExceptionType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ValidationExceptionType",
-}, smithy.ShapeTypeEnum, 138)
-var ValidationExceptionType_CONTAINER_TYPE_IMMUTABLE *smithy.Schema
-
-var ValidationExceptionType_INVALID_PAGINATION_TOKEN *smithy.Schema
-
-var ValidationExceptionType_INVALID_PAGINATION_MAX_RESULTS *smithy.Schema
-
-var ValidationExceptionType_INVALID_POLICY *smithy.Schema
-
-var ValidationExceptionType_INVALID_ROLE_ARN *smithy.Schema
-
-var ValidationExceptionType_MANIFEST_NAME_COLLISION *smithy.Schema
-
-var ValidationExceptionType_ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH *smithy.Schema
-
-var ValidationExceptionType_CENC_IV_INCOMPATIBLE *smithy.Schema
-
-var ValidationExceptionType_ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE *smithy.Schema
-
-var ValidationExceptionType_ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE *smithy.Schema
-
-var ValidationExceptionType_ENCRYPTION_CONTRACT_UNENCRYPTED *smithy.Schema
-
-var ValidationExceptionType_ENCRYPTION_CONTRACT_SHARED *smithy.Schema
-
-var ValidationExceptionType_NUM_MANIFESTS_LOW *smithy.Schema
-
-var ValidationExceptionType_NUM_MANIFESTS_HIGH *smithy.Schema
-
-var ValidationExceptionType_MANIFEST_DRM_SYSTEMS_INCOMPATIBLE *smithy.Schema
-
-var ValidationExceptionType_DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE *smithy.Schema
-
-var ValidationExceptionType_ROLE_ARN_NOT_ASSUMABLE *smithy.Schema
-
-var ValidationExceptionType_ROLE_ARN_LENGTH_OUT_OF_RANGE *smithy.Schema
-
-var ValidationExceptionType_ROLE_ARN_INVALID_FORMAT *smithy.Schema
-
-var ValidationExceptionType_URL_INVALID *smithy.Schema
-
-var ValidationExceptionType_URL_SCHEME *smithy.Schema
-
-var ValidationExceptionType_URL_USER_INFO *smithy.Schema
-
-var ValidationExceptionType_URL_PORT *smithy.Schema
-
-var ValidationExceptionType_URL_UNKNOWN_HOST *smithy.Schema
-
-var ValidationExceptionType_URL_LOCAL_ADDRESS *smithy.Schema
-
-var ValidationExceptionType_URL_LOOPBACK_ADDRESS *smithy.Schema
-
-var ValidationExceptionType_URL_LINK_LOCAL_ADDRESS *smithy.Schema
-
-var ValidationExceptionType_URL_MULTICAST_ADDRESS *smithy.Schema
-
-var ValidationExceptionType_MEMBER_INVALID *smithy.Schema
-
-var ValidationExceptionType_MEMBER_MISSING *smithy.Schema
-
-var ValidationExceptionType_MEMBER_MIN_VALUE *smithy.Schema
-
-var ValidationExceptionType_MEMBER_MAX_VALUE *smithy.Schema
-
-var ValidationExceptionType_MEMBER_MIN_LENGTH *smithy.Schema
-
-var ValidationExceptionType_MEMBER_MAX_LENGTH *smithy.Schema
-
-var ValidationExceptionType_MEMBER_INVALID_ENUM_VALUE *smithy.Schema
-
-var ValidationExceptionType_MEMBER_DOES_NOT_MATCH_PATTERN *smithy.Schema
-
-var ValidationExceptionType_INVALID_MANIFEST_FILTER *smithy.Schema
-
-var ValidationExceptionType_INVALID_DRM_SETTINGS *smithy.Schema
-
-var ValidationExceptionType_INVALID_TIME_DELAY_SECONDS *smithy.Schema
-
-var ValidationExceptionType_END_TIME_EARLIER_THAN_START_TIME *smithy.Schema
-
-var ValidationExceptionType_TS_CONTAINER_TYPE_WITH_DASH_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_DIRECT_MODE_WITH_TIMING_SOURCE *smithy.Schema
-
-var ValidationExceptionType_NONE_MODE_WITH_TIMING_SOURCE *smithy.Schema
-
-var ValidationExceptionType_TIMING_SOURCE_MISSING *smithy.Schema
-
-var ValidationExceptionType_UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION *smithy.Schema
-
-var ValidationExceptionType_PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES *smithy.Schema
-
-var ValidationExceptionType_DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS *smithy.Schema
-
-var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY *smithy.Schema
-
-var ValidationExceptionType_HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT *smithy.Schema
-
-var ValidationExceptionType_TOO_MANY_IN_PROGRESS_HARVEST_JOBS *smithy.Schema
-
-var ValidationExceptionType_HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION *smithy.Schema
-
-var ValidationExceptionType_INVALID_HARVEST_JOB_DURATION *smithy.Schema
-
-var ValidationExceptionType_HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE *smithy.Schema
-
-var ValidationExceptionType_HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION *smithy.Schema
-
-var ValidationExceptionType_HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED *smithy.Schema
-
-var ValidationExceptionType_CLIP_START_TIME_WITH_START_OR_END *smithy.Schema
-
-var ValidationExceptionType_START_TAG_TIME_OFFSET_INVALID *smithy.Schema
-
-var ValidationExceptionType_INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE *smithy.Schema
-
-var ValidationExceptionType_INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_INCOMPATIBLE_XML_ENCODING *smithy.Schema
-
-var ValidationExceptionType_CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE *smithy.Schema
-
-var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING *smithy.Schema
-
-var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_TS_CONTAINER_TYPE_WITH_MSS_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_SCTE *smithy.Schema
-
-var ValidationExceptionType_ISM_CONTAINER_WITH_KEY_ROTATION *smithy.Schema
-
-var ValidationExceptionType_BATCH_GET_SECRET_VALUE_DENIED *smithy.Schema
-
-var ValidationExceptionType_GET_SECRET_VALUE_DENIED *smithy.Schema
-
-var ValidationExceptionType_DESCRIBE_SECRET_DENIED *smithy.Schema
-
-var ValidationExceptionType_INVALID_SECRET_FORMAT *smithy.Schema
-
-var ValidationExceptionType_SECRET_IS_NOT_ONE_KEY_VALUE_PAIR *smithy.Schema
-
-var ValidationExceptionType_INVALID_SECRET_KEY *smithy.Schema
-
-var ValidationExceptionType_INVALID_SECRET_VALUE *smithy.Schema
-
-var ValidationExceptionType_SECRET_ARN_RESOURCE_NOT_FOUND *smithy.Schema
-
-var ValidationExceptionType_DECRYPT_SECRET_FAILED *smithy.Schema
-
-var ValidationExceptionType_TOO_MANY_SECRETS *smithy.Schema
-
-var ValidationExceptionType_DUPLICATED_SECRET *smithy.Schema
-
-var ValidationExceptionType_MALFORMED_SECRET_ARN *smithy.Schema
-
-var ValidationExceptionType_SECRET_FROM_DIFFERENT_ACCOUNT *smithy.Schema
-
-var ValidationExceptionType_SECRET_FROM_DIFFERENT_REGION *smithy.Schema
-
-var ValidationExceptionType_INVALID_SECRET *smithy.Schema
-
-var ValidationExceptionType_RESOURCE_NOT_IN_SAME_REGION *smithy.Schema
-
-var ValidationExceptionType_CERTIFICATE_RESOURCE_NOT_FOUND *smithy.Schema
-
-var ValidationExceptionType_CERTIFICATE_ACCESS_DENIED *smithy.Schema
-
-var ValidationExceptionType_DESCRIBE_CERTIFICATE_FAILED *smithy.Schema
-
-var ValidationExceptionType_INVALID_CERTIFICATE_STATUS *smithy.Schema
-
-var ValidationExceptionType_INVALID_CERTIFICATE_KEY_ALGORITHM *smithy.Schema
-
-var ValidationExceptionType_INVALID_CERTIFICATE_SIGNATURE_ALGORITHM *smithy.Schema
-
-var ValidationExceptionType_MISSING_CERTIFICATE_DOMAIN_NAME *smithy.Schema
-
-var ValidationExceptionType_INVALID_ARN *smithy.Schema
-
-var ValidationExceptionType_SCTE_IN_MANIFESTS_INVALID_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_CUSTOM_AD_TYPES_INVALID_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE *smithy.Schema
-
-var ValidationExceptionType_ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE *smithy.Schema
-
-var ValidationExceptionType_OUTPUT_TIMESTAMP_MODE_IMMUTABLE *smithy.Schema
-
-var ValidationExceptionType_NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE *smithy.Schema
-
-var ValidationExceptionType_STREAM_NAME_OUTPUT_MODE_IMMUTABLE *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_CONFIGURATION_REQUIRED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_CONFIGURATION_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_SOURCE_NOT_FOUND *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_SOURCE_INVALID_INPUT_TYPE *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_START_TAG *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_RESET_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_DUPLICATE_SOURCE *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_DUPLICATE_LAYOUT *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INVALID_TIME_DELAY_SECONDS *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_MANIFEST_WINDOW_TOO_LONG *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_SOURCE_NON_EPOCH_LOCKED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER *smithy.Schema
-
-var ValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION *smithy.Schema
-
-var ValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1 *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED *smithy.Schema
-
-var ValidationExceptionType_MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED *smithy.Schema
-
-var CancelHarvestJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CancelHarvestJobRequest",
-}, smithy.ShapeTypeStructure, 5)
-var CancelHarvestJobRequest_ChannelGroupName *smithy.Schema
-
-var CancelHarvestJobRequest_ChannelName *smithy.Schema
-
-var CancelHarvestJobRequest_OriginEndpointName *smithy.Schema
-
-var CancelHarvestJobRequest_HarvestJobName *smithy.Schema
-
-var CancelHarvestJobRequest_ETag *smithy.Schema
-
-var CancelHarvestJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CancelHarvestJobResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var CreateChannelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateChannelGroupRequest",
-}, smithy.ShapeTypeStructure, 4)
-var CreateChannelGroupRequest_ChannelGroupName *smithy.Schema
-
-var CreateChannelGroupRequest_ClientToken *smithy.Schema
-
-var CreateChannelGroupRequest_Description *smithy.Schema
-
-var CreateChannelGroupRequest_Tags *smithy.Schema
-
-var CreateChannelGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateChannelGroupResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateChannelGroupResponse_ChannelGroupName *smithy.Schema
-
-var CreateChannelGroupResponse_Arn *smithy.Schema
-
-var CreateChannelGroupResponse_EgressDomain *smithy.Schema
-
-var CreateChannelGroupResponse_CreatedAt *smithy.Schema
-
-var CreateChannelGroupResponse_ModifiedAt *smithy.Schema
-
-var CreateChannelGroupResponse_ETag *smithy.Schema
-
-var CreateChannelGroupResponse_Description *smithy.Schema
-
-var CreateChannelGroupResponse_Tags *smithy.Schema
-
-var CreateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateChannelRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateChannelRequest_ChannelGroupName *smithy.Schema
-
-var CreateChannelRequest_ChannelName *smithy.Schema
-
-var CreateChannelRequest_ClientToken *smithy.Schema
-
-var CreateChannelRequest_InputType *smithy.Schema
-
-var CreateChannelRequest_Description *smithy.Schema
-
-var CreateChannelRequest_InputSwitchConfiguration *smithy.Schema
-
-var CreateChannelRequest_OutputHeaderConfiguration *smithy.Schema
-
-var CreateChannelRequest_MultiviewConfiguration *smithy.Schema
-
-var CreateChannelRequest_OutputLockingMode *smithy.Schema
-
-var CreateChannelRequest_Tags *smithy.Schema
-
-var CreateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateChannelResponse",
-}, smithy.ShapeTypeStructure, 15)
-var CreateChannelResponse_MultiviewConfiguration *smithy.Schema
-
-var CreateChannelResponse_AttachedMultiviewChannels *smithy.Schema
-
-var CreateChannelResponse_Arn *smithy.Schema
-
-var CreateChannelResponse_ChannelName *smithy.Schema
-
-var CreateChannelResponse_ChannelGroupName *smithy.Schema
-
-var CreateChannelResponse_CreatedAt *smithy.Schema
-
-var CreateChannelResponse_ModifiedAt *smithy.Schema
-
-var CreateChannelResponse_Description *smithy.Schema
-
-var CreateChannelResponse_IngestEndpoints *smithy.Schema
-
-var CreateChannelResponse_InputType *smithy.Schema
-
-var CreateChannelResponse_ETag *smithy.Schema
-
-var CreateChannelResponse_Tags *smithy.Schema
-
-var CreateChannelResponse_InputSwitchConfiguration *smithy.Schema
-
-var CreateChannelResponse_OutputHeaderConfiguration *smithy.Schema
-
-var CreateChannelResponse_OutputLockingMode *smithy.Schema
-
-var CreateHarvestJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateHarvestJobRequest",
-}, smithy.ShapeTypeStructure, 10)
-var CreateHarvestJobRequest_ChannelGroupName *smithy.Schema
-
-var CreateHarvestJobRequest_ChannelName *smithy.Schema
-
-var CreateHarvestJobRequest_OriginEndpointName *smithy.Schema
-
-var CreateHarvestJobRequest_Description *smithy.Schema
-
-var CreateHarvestJobRequest_HarvestedManifests *smithy.Schema
-
-var CreateHarvestJobRequest_ScheduleConfiguration *smithy.Schema
-
-var CreateHarvestJobRequest_Destination *smithy.Schema
-
-var CreateHarvestJobRequest_ClientToken *smithy.Schema
-
-var CreateHarvestJobRequest_HarvestJobName *smithy.Schema
-
-var CreateHarvestJobRequest_Tags *smithy.Schema
-
-var CreateHarvestJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateHarvestJobResponse",
-}, smithy.ShapeTypeStructure, 15)
-var CreateHarvestJobResponse_ChannelGroupName *smithy.Schema
-
-var CreateHarvestJobResponse_ChannelName *smithy.Schema
-
-var CreateHarvestJobResponse_OriginEndpointName *smithy.Schema
-
-var CreateHarvestJobResponse_Destination *smithy.Schema
-
-var CreateHarvestJobResponse_HarvestJobName *smithy.Schema
-
-var CreateHarvestJobResponse_HarvestedManifests *smithy.Schema
-
-var CreateHarvestJobResponse_Description *smithy.Schema
-
-var CreateHarvestJobResponse_ScheduleConfiguration *smithy.Schema
-
-var CreateHarvestJobResponse_Arn *smithy.Schema
-
-var CreateHarvestJobResponse_CreatedAt *smithy.Schema
-
-var CreateHarvestJobResponse_ModifiedAt *smithy.Schema
-
-var CreateHarvestJobResponse_Status *smithy.Schema
-
-var CreateHarvestJobResponse_ErrorMessage *smithy.Schema
-
-var CreateHarvestJobResponse_ETag *smithy.Schema
-
-var CreateHarvestJobResponse_Tags *smithy.Schema
-
-var CreateOriginEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateOriginEndpointRequest",
-}, smithy.ShapeTypeStructure, 16)
-var CreateOriginEndpointRequest_ChannelGroupName *smithy.Schema
-
-var CreateOriginEndpointRequest_ChannelName *smithy.Schema
-
-var CreateOriginEndpointRequest_OriginEndpointName *smithy.Schema
-
-var CreateOriginEndpointRequest_ContainerType *smithy.Schema
-
-var CreateOriginEndpointRequest_Segment *smithy.Schema
-
-var CreateOriginEndpointRequest_ClientToken *smithy.Schema
-
-var CreateOriginEndpointRequest_Description *smithy.Schema
-
-var CreateOriginEndpointRequest_StartoverWindowSeconds *smithy.Schema
-
-var CreateOriginEndpointRequest_HlsManifests *smithy.Schema
-
-var CreateOriginEndpointRequest_LowLatencyHlsManifests *smithy.Schema
-
-var CreateOriginEndpointRequest_DashManifests *smithy.Schema
-
-var CreateOriginEndpointRequest_MssManifests *smithy.Schema
-
-var CreateOriginEndpointRequest_ForceEndpointErrorConfiguration *smithy.Schema
-
-var CreateOriginEndpointRequest_UriSeparator *smithy.Schema
-
-var CreateOriginEndpointRequest_StreamNameOutputMode *smithy.Schema
-
-var CreateOriginEndpointRequest_Tags *smithy.Schema
-
-var CreateOriginEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "CreateOriginEndpointResponse",
-}, smithy.ShapeTypeStructure, 19)
-var CreateOriginEndpointResponse_Arn *smithy.Schema
-
-var CreateOriginEndpointResponse_ChannelGroupName *smithy.Schema
-
-var CreateOriginEndpointResponse_ChannelName *smithy.Schema
-
-var CreateOriginEndpointResponse_OriginEndpointName *smithy.Schema
-
-var CreateOriginEndpointResponse_ContainerType *smithy.Schema
-
-var CreateOriginEndpointResponse_Segment *smithy.Schema
-
-var CreateOriginEndpointResponse_CreatedAt *smithy.Schema
-
-var CreateOriginEndpointResponse_ModifiedAt *smithy.Schema
-
-var CreateOriginEndpointResponse_Description *smithy.Schema
-
-var CreateOriginEndpointResponse_StartoverWindowSeconds *smithy.Schema
-
-var CreateOriginEndpointResponse_HlsManifests *smithy.Schema
-
-var CreateOriginEndpointResponse_LowLatencyHlsManifests *smithy.Schema
-
-var CreateOriginEndpointResponse_DashManifests *smithy.Schema
-
-var CreateOriginEndpointResponse_MssManifests *smithy.Schema
-
-var CreateOriginEndpointResponse_ForceEndpointErrorConfiguration *smithy.Schema
-
-var CreateOriginEndpointResponse_UriSeparator *smithy.Schema
-
-var CreateOriginEndpointResponse_StreamNameOutputMode *smithy.Schema
-
-var CreateOriginEndpointResponse_ETag *smithy.Schema
-
-var CreateOriginEndpointResponse_Tags *smithy.Schema
-
-var DeleteChannelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteChannelGroupRequest_ChannelGroupName *smithy.Schema
-
-var DeleteChannelGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelGroupResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChannelRequest_ChannelGroupName *smithy.Schema
-
-var DeleteChannelRequest_ChannelName *smithy.Schema
-
-var DeleteChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteChannelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteChannelPolicyRequest_ChannelGroupName *smithy.Schema
-
-var DeleteChannelPolicyRequest_ChannelName *smithy.Schema
-
-var DeleteChannelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteChannelPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteOriginEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteOriginEndpointRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteOriginEndpointRequest_ChannelGroupName *smithy.Schema
-
-var DeleteOriginEndpointRequest_ChannelName *smithy.Schema
-
-var DeleteOriginEndpointRequest_OriginEndpointName *smithy.Schema
-
-var DeleteOriginEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteOriginEndpointResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteOriginEndpointPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteOriginEndpointPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteOriginEndpointPolicyRequest_ChannelGroupName *smithy.Schema
-
-var DeleteOriginEndpointPolicyRequest_ChannelName *smithy.Schema
-
-var DeleteOriginEndpointPolicyRequest_OriginEndpointName *smithy.Schema
-
-var DeleteOriginEndpointPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "DeleteOriginEndpointPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetChannelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelGroupRequest",
-}, smithy.ShapeTypeStructure, 1)
-var GetChannelGroupRequest_ChannelGroupName *smithy.Schema
-
-var GetChannelGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelGroupResponse",
-}, smithy.ShapeTypeStructure, 8)
-var GetChannelGroupResponse_ChannelGroupName *smithy.Schema
-
-var GetChannelGroupResponse_Arn *smithy.Schema
-
-var GetChannelGroupResponse_EgressDomain *smithy.Schema
-
-var GetChannelGroupResponse_CreatedAt *smithy.Schema
-
-var GetChannelGroupResponse_ModifiedAt *smithy.Schema
-
-var GetChannelGroupResponse_Description *smithy.Schema
-
-var GetChannelGroupResponse_ETag *smithy.Schema
-
-var GetChannelGroupResponse_Tags *smithy.Schema
-
-var GetChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetChannelRequest_ChannelGroupName *smithy.Schema
-
-var GetChannelRequest_ChannelName *smithy.Schema
-
-var GetChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelResponse",
-}, smithy.ShapeTypeStructure, 16)
-var GetChannelResponse_MultiviewConfiguration *smithy.Schema
-
-var GetChannelResponse_AttachedMultiviewChannels *smithy.Schema
-
-var GetChannelResponse_Arn *smithy.Schema
-
-var GetChannelResponse_ChannelName *smithy.Schema
-
-var GetChannelResponse_ChannelGroupName *smithy.Schema
-
-var GetChannelResponse_CreatedAt *smithy.Schema
-
-var GetChannelResponse_ModifiedAt *smithy.Schema
-
-var GetChannelResponse_ResetAt *smithy.Schema
-
-var GetChannelResponse_Description *smithy.Schema
-
-var GetChannelResponse_IngestEndpoints *smithy.Schema
-
-var GetChannelResponse_InputType *smithy.Schema
-
-var GetChannelResponse_ETag *smithy.Schema
-
-var GetChannelResponse_Tags *smithy.Schema
-
-var GetChannelResponse_InputSwitchConfiguration *smithy.Schema
-
-var GetChannelResponse_OutputHeaderConfiguration *smithy.Schema
-
-var GetChannelResponse_OutputLockingMode *smithy.Schema
-
-var GetChannelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelPolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetChannelPolicyRequest_ChannelGroupName *smithy.Schema
-
-var GetChannelPolicyRequest_ChannelName *smithy.Schema
-
-var GetChannelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetChannelPolicyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var GetChannelPolicyResponse_ChannelGroupName *smithy.Schema
-
-var GetChannelPolicyResponse_ChannelName *smithy.Schema
-
-var GetChannelPolicyResponse_Policy *smithy.Schema
-
-var GetHarvestJobRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetHarvestJobRequest",
-}, smithy.ShapeTypeStructure, 4)
-var GetHarvestJobRequest_ChannelGroupName *smithy.Schema
-
-var GetHarvestJobRequest_ChannelName *smithy.Schema
-
-var GetHarvestJobRequest_OriginEndpointName *smithy.Schema
-
-var GetHarvestJobRequest_HarvestJobName *smithy.Schema
-
-var GetHarvestJobResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetHarvestJobResponse",
-}, smithy.ShapeTypeStructure, 15)
-var GetHarvestJobResponse_ChannelGroupName *smithy.Schema
-
-var GetHarvestJobResponse_ChannelName *smithy.Schema
-
-var GetHarvestJobResponse_OriginEndpointName *smithy.Schema
-
-var GetHarvestJobResponse_Destination *smithy.Schema
-
-var GetHarvestJobResponse_HarvestJobName *smithy.Schema
-
-var GetHarvestJobResponse_HarvestedManifests *smithy.Schema
-
-var GetHarvestJobResponse_Description *smithy.Schema
-
-var GetHarvestJobResponse_ScheduleConfiguration *smithy.Schema
-
-var GetHarvestJobResponse_Arn *smithy.Schema
-
-var GetHarvestJobResponse_CreatedAt *smithy.Schema
-
-var GetHarvestJobResponse_ModifiedAt *smithy.Schema
-
-var GetHarvestJobResponse_Status *smithy.Schema
-
-var GetHarvestJobResponse_ErrorMessage *smithy.Schema
-
-var GetHarvestJobResponse_ETag *smithy.Schema
-
-var GetHarvestJobResponse_Tags *smithy.Schema
-
-var GetOriginEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetOriginEndpointRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetOriginEndpointRequest_ChannelGroupName *smithy.Schema
-
-var GetOriginEndpointRequest_ChannelName *smithy.Schema
-
-var GetOriginEndpointRequest_OriginEndpointName *smithy.Schema
-
-var GetOriginEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetOriginEndpointResponse",
-}, smithy.ShapeTypeStructure, 20)
-var GetOriginEndpointResponse_Arn *smithy.Schema
-
-var GetOriginEndpointResponse_ChannelGroupName *smithy.Schema
-
-var GetOriginEndpointResponse_ChannelName *smithy.Schema
-
-var GetOriginEndpointResponse_OriginEndpointName *smithy.Schema
-
-var GetOriginEndpointResponse_ContainerType *smithy.Schema
-
-var GetOriginEndpointResponse_Segment *smithy.Schema
-
-var GetOriginEndpointResponse_CreatedAt *smithy.Schema
-
-var GetOriginEndpointResponse_ModifiedAt *smithy.Schema
-
-var GetOriginEndpointResponse_ResetAt *smithy.Schema
-
-var GetOriginEndpointResponse_Description *smithy.Schema
-
-var GetOriginEndpointResponse_StartoverWindowSeconds *smithy.Schema
-
-var GetOriginEndpointResponse_HlsManifests *smithy.Schema
-
-var GetOriginEndpointResponse_LowLatencyHlsManifests *smithy.Schema
-
-var GetOriginEndpointResponse_DashManifests *smithy.Schema
-
-var GetOriginEndpointResponse_MssManifests *smithy.Schema
-
-var GetOriginEndpointResponse_ForceEndpointErrorConfiguration *smithy.Schema
-
-var GetOriginEndpointResponse_UriSeparator *smithy.Schema
-
-var GetOriginEndpointResponse_StreamNameOutputMode *smithy.Schema
-
-var GetOriginEndpointResponse_ETag *smithy.Schema
-
-var GetOriginEndpointResponse_Tags *smithy.Schema
-
-var GetOriginEndpointPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetOriginEndpointPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var GetOriginEndpointPolicyRequest_ChannelGroupName *smithy.Schema
-
-var GetOriginEndpointPolicyRequest_ChannelName *smithy.Schema
-
-var GetOriginEndpointPolicyRequest_OriginEndpointName *smithy.Schema
-
-var GetOriginEndpointPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "GetOriginEndpointPolicyResponse",
-}, smithy.ShapeTypeStructure, 5)
-var GetOriginEndpointPolicyResponse_ChannelGroupName *smithy.Schema
-
-var GetOriginEndpointPolicyResponse_ChannelName *smithy.Schema
-
-var GetOriginEndpointPolicyResponse_OriginEndpointName *smithy.Schema
-
-var GetOriginEndpointPolicyResponse_Policy *smithy.Schema
-
-var GetOriginEndpointPolicyResponse_CdnAuthConfiguration *smithy.Schema
-
-var ListChannelGroupsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListChannelGroupsRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelGroupsRequest_MaxResults *smithy.Schema
-
-var ListChannelGroupsRequest_NextToken *smithy.Schema
-
-var ListChannelGroupsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListChannelGroupsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelGroupsResponse_Items *smithy.Schema
-
-var ListChannelGroupsResponse_NextToken *smithy.Schema
-
-var ListChannelsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListChannelsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListChannelsRequest_ChannelGroupName *smithy.Schema
-
-var ListChannelsRequest_MaxResults *smithy.Schema
-
-var ListChannelsRequest_NextToken *smithy.Schema
-
-var ListChannelsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListChannelsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListChannelsResponse_Items *smithy.Schema
-
-var ListChannelsResponse_NextToken *smithy.Schema
-
-var ListHarvestJobsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListHarvestJobsRequest",
-}, smithy.ShapeTypeStructure, 6)
-var ListHarvestJobsRequest_ChannelGroupName *smithy.Schema
-
-var ListHarvestJobsRequest_ChannelName *smithy.Schema
-
-var ListHarvestJobsRequest_OriginEndpointName *smithy.Schema
-
-var ListHarvestJobsRequest_Status *smithy.Schema
-
-var ListHarvestJobsRequest_MaxResults *smithy.Schema
-
-var ListHarvestJobsRequest_NextToken *smithy.Schema
-
-var ListHarvestJobsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListHarvestJobsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListHarvestJobsResponse_Items *smithy.Schema
-
-var ListHarvestJobsResponse_NextToken *smithy.Schema
-
-var ListOriginEndpointsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListOriginEndpointsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListOriginEndpointsRequest_ChannelGroupName *smithy.Schema
-
-var ListOriginEndpointsRequest_ChannelName *smithy.Schema
-
-var ListOriginEndpointsRequest_MaxResults *smithy.Schema
-
-var ListOriginEndpointsRequest_NextToken *smithy.Schema
-
-var ListOriginEndpointsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListOriginEndpointsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListOriginEndpointsResponse_Items *smithy.Schema
-
-var ListOriginEndpointsResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutChannelPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PutChannelPolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutChannelPolicyRequest_ChannelGroupName *smithy.Schema
-
-var PutChannelPolicyRequest_ChannelName *smithy.Schema
-
-var PutChannelPolicyRequest_Policy *smithy.Schema
-
-var PutChannelPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PutChannelPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutOriginEndpointPolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PutOriginEndpointPolicyRequest",
-}, smithy.ShapeTypeStructure, 5)
-var PutOriginEndpointPolicyRequest_ChannelGroupName *smithy.Schema
-
-var PutOriginEndpointPolicyRequest_ChannelName *smithy.Schema
-
-var PutOriginEndpointPolicyRequest_OriginEndpointName *smithy.Schema
-
-var PutOriginEndpointPolicyRequest_Policy *smithy.Schema
-
-var PutOriginEndpointPolicyRequest_CdnAuthConfiguration *smithy.Schema
-
-var PutOriginEndpointPolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "PutOriginEndpointPolicyResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var ResetChannelStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResetChannelStateRequest",
-}, smithy.ShapeTypeStructure, 2)
-var ResetChannelStateRequest_ChannelGroupName *smithy.Schema
-
-var ResetChannelStateRequest_ChannelName *smithy.Schema
-
-var ResetChannelStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResetChannelStateResponse",
-}, smithy.ShapeTypeStructure, 4)
-var ResetChannelStateResponse_ChannelGroupName *smithy.Schema
-
-var ResetChannelStateResponse_ChannelName *smithy.Schema
-
-var ResetChannelStateResponse_Arn *smithy.Schema
-
-var ResetChannelStateResponse_ResetAt *smithy.Schema
-
-var ResetOriginEndpointStateRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResetOriginEndpointStateRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ResetOriginEndpointStateRequest_ChannelGroupName *smithy.Schema
-
-var ResetOriginEndpointStateRequest_ChannelName *smithy.Schema
-
-var ResetOriginEndpointStateRequest_OriginEndpointName *smithy.Schema
-
-var ResetOriginEndpointStateResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "ResetOriginEndpointStateResponse",
-}, smithy.ShapeTypeStructure, 5)
-var ResetOriginEndpointStateResponse_ChannelGroupName *smithy.Schema
-
-var ResetOriginEndpointStateResponse_ChannelName *smithy.Schema
-
-var ResetOriginEndpointStateResponse_OriginEndpointName *smithy.Schema
-
-var ResetOriginEndpointStateResponse_Arn *smithy.Schema
-
-var ResetOriginEndpointStateResponse_ResetAt *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UpdateChannelGroupRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateChannelGroupRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateChannelGroupRequest_ChannelGroupName *smithy.Schema
-
-var UpdateChannelGroupRequest_ETag *smithy.Schema
-
-var UpdateChannelGroupRequest_Description *smithy.Schema
-
-var UpdateChannelGroupResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateChannelGroupResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateChannelGroupResponse_ChannelGroupName *smithy.Schema
-
-var UpdateChannelGroupResponse_Arn *smithy.Schema
-
-var UpdateChannelGroupResponse_EgressDomain *smithy.Schema
-
-var UpdateChannelGroupResponse_CreatedAt *smithy.Schema
-
-var UpdateChannelGroupResponse_ModifiedAt *smithy.Schema
-
-var UpdateChannelGroupResponse_Description *smithy.Schema
-
-var UpdateChannelGroupResponse_ETag *smithy.Schema
-
-var UpdateChannelGroupResponse_Tags *smithy.Schema
-
-var UpdateChannelRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateChannelRequest",
-}, smithy.ShapeTypeStructure, 7)
-var UpdateChannelRequest_ChannelGroupName *smithy.Schema
-
-var UpdateChannelRequest_ChannelName *smithy.Schema
-
-var UpdateChannelRequest_ETag *smithy.Schema
-
-var UpdateChannelRequest_Description *smithy.Schema
-
-var UpdateChannelRequest_InputSwitchConfiguration *smithy.Schema
-
-var UpdateChannelRequest_OutputHeaderConfiguration *smithy.Schema
-
-var UpdateChannelRequest_MultiviewConfiguration *smithy.Schema
-
-var UpdateChannelResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateChannelResponse",
-}, smithy.ShapeTypeStructure, 15)
-var UpdateChannelResponse_MultiviewConfiguration *smithy.Schema
-
-var UpdateChannelResponse_AttachedMultiviewChannels *smithy.Schema
-
-var UpdateChannelResponse_Arn *smithy.Schema
-
-var UpdateChannelResponse_ChannelName *smithy.Schema
-
-var UpdateChannelResponse_ChannelGroupName *smithy.Schema
-
-var UpdateChannelResponse_CreatedAt *smithy.Schema
-
-var UpdateChannelResponse_ModifiedAt *smithy.Schema
-
-var UpdateChannelResponse_Description *smithy.Schema
-
-var UpdateChannelResponse_IngestEndpoints *smithy.Schema
-
-var UpdateChannelResponse_InputType *smithy.Schema
-
-var UpdateChannelResponse_ETag *smithy.Schema
-
-var UpdateChannelResponse_Tags *smithy.Schema
-
-var UpdateChannelResponse_InputSwitchConfiguration *smithy.Schema
-
-var UpdateChannelResponse_OutputHeaderConfiguration *smithy.Schema
-
-var UpdateChannelResponse_OutputLockingMode *smithy.Schema
-
-var UpdateOriginEndpointRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateOriginEndpointRequest",
-}, smithy.ShapeTypeStructure, 15)
-var UpdateOriginEndpointRequest_ChannelGroupName *smithy.Schema
-
-var UpdateOriginEndpointRequest_ChannelName *smithy.Schema
-
-var UpdateOriginEndpointRequest_OriginEndpointName *smithy.Schema
-
-var UpdateOriginEndpointRequest_ContainerType *smithy.Schema
-
-var UpdateOriginEndpointRequest_Segment *smithy.Schema
-
-var UpdateOriginEndpointRequest_Description *smithy.Schema
-
-var UpdateOriginEndpointRequest_StartoverWindowSeconds *smithy.Schema
-
-var UpdateOriginEndpointRequest_HlsManifests *smithy.Schema
-
-var UpdateOriginEndpointRequest_LowLatencyHlsManifests *smithy.Schema
-
-var UpdateOriginEndpointRequest_DashManifests *smithy.Schema
-
-var UpdateOriginEndpointRequest_MssManifests *smithy.Schema
-
-var UpdateOriginEndpointRequest_ForceEndpointErrorConfiguration *smithy.Schema
-
-var UpdateOriginEndpointRequest_UriSeparator *smithy.Schema
-
-var UpdateOriginEndpointRequest_StreamNameOutputMode *smithy.Schema
-
-var UpdateOriginEndpointRequest_ETag *smithy.Schema
-
-var UpdateOriginEndpointResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.mediapackagev2",
-	Name:      "UpdateOriginEndpointResponse",
-}, smithy.ShapeTypeStructure, 19)
-var UpdateOriginEndpointResponse_Arn *smithy.Schema
-
-var UpdateOriginEndpointResponse_ChannelGroupName *smithy.Schema
-
-var UpdateOriginEndpointResponse_ChannelName *smithy.Schema
-
-var UpdateOriginEndpointResponse_OriginEndpointName *smithy.Schema
-
-var UpdateOriginEndpointResponse_ContainerType *smithy.Schema
-
-var UpdateOriginEndpointResponse_Segment *smithy.Schema
-
-var UpdateOriginEndpointResponse_CreatedAt *smithy.Schema
-
-var UpdateOriginEndpointResponse_ModifiedAt *smithy.Schema
-
-var UpdateOriginEndpointResponse_Description *smithy.Schema
-
-var UpdateOriginEndpointResponse_StartoverWindowSeconds *smithy.Schema
-
-var UpdateOriginEndpointResponse_HlsManifests *smithy.Schema
-
-var UpdateOriginEndpointResponse_LowLatencyHlsManifests *smithy.Schema
-
-var UpdateOriginEndpointResponse_MssManifests *smithy.Schema
-
-var UpdateOriginEndpointResponse_ForceEndpointErrorConfiguration *smithy.Schema
-
-var UpdateOriginEndpointResponse_UriSeparator *smithy.Schema
-
-var UpdateOriginEndpointResponse_StreamNameOutputMode *smithy.Schema
-
-var UpdateOriginEndpointResponse_ETag *smithy.Schema
-
-var UpdateOriginEndpointResponse_Tags *smithy.Schema
-
-var UpdateOriginEndpointResponse_DashManifests *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	AdMarkerDash_BINARY = AdMarkerDash.AddMember("BINARY", smithyprelude.Unit)
-
-	AdMarkerDash_XML = AdMarkerDash.AddMember("XML", smithyprelude.Unit)
-
-	AdMarkerHls_DATERANGE = AdMarkerHls.AddMember("DATERANGE", smithyprelude.Unit)
-
-	AdMarkerHls_SCTE35_ENHANCED = AdMarkerHls.AddMember("SCTE35_ENHANCED", smithyprelude.Unit)
-
-	_AttachedMultiviewChannelList_member = _AttachedMultiviewChannelList.AddMember("member", _ResourceName)
-
-	_CdnIdentifierSecretArns_member = _CdnIdentifierSecretArns.AddMember("member", _CdnIdentifierSecretArn)
-
-	CdnAuthConfiguration_CdnIdentifierSecretArns = CdnAuthConfiguration.AddMember("CdnIdentifierSecretArns", _CdnIdentifierSecretArns)
-
-	CdnAuthConfiguration_SecretsRoleArn = CdnAuthConfiguration.AddMember("SecretsRoleArn", smithyprelude.String)
-
-	ChannelGroupListConfiguration_ChannelGroupName = ChannelGroupListConfiguration.AddMember("ChannelGroupName", smithyprelude.String)
-
-	ChannelGroupListConfiguration_Arn = ChannelGroupListConfiguration.AddMember("Arn", smithyprelude.String)
-
-	ChannelGroupListConfiguration_CreatedAt = ChannelGroupListConfiguration.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ChannelGroupListConfiguration_ModifiedAt = ChannelGroupListConfiguration.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	ChannelGroupListConfiguration_Description = ChannelGroupListConfiguration.AddMember("Description", _ResourceDescription)
-
-	_ChannelGroupsList_member = _ChannelGroupsList.AddMember("member", ChannelGroupListConfiguration)
-
-	InputType_HLS = InputType.AddMember("HLS", smithyprelude.Unit)
-
-	InputType_CMAF = InputType.AddMember("CMAF", smithyprelude.Unit)
-
-	InputType_MULTIVIEW = InputType.AddMember("MULTIVIEW", smithyprelude.Unit)
-
-	OutputLockingMode_EPOCH_LOCKED = OutputLockingMode.AddMember("EPOCH_LOCKED", smithyprelude.Unit)
-
-	OutputLockingMode_NON_EPOCH_LOCKED = OutputLockingMode.AddMember("NON_EPOCH_LOCKED", smithyprelude.Unit)
-
-	_MultiviewSourceList_member = _MultiviewSourceList.AddMember("member", _ResourceName)
-
-	MultiviewLayoutType_LAYOUT_2EH = MultiviewLayoutType.AddMember("LAYOUT_2EH", smithyprelude.Unit)
-
-	MultiviewLayoutType_LAYOUT_2PL = MultiviewLayoutType.AddMember("LAYOUT_2PL", smithyprelude.Unit)
-
-	MultiviewLayoutType_LAYOUT_3EL = MultiviewLayoutType.AddMember("LAYOUT_3EL", smithyprelude.Unit)
-
-	MultiviewLayoutType_LAYOUT_3PL = MultiviewLayoutType.AddMember("LAYOUT_3PL", smithyprelude.Unit)
-
-	MultiviewLayoutType_LAYOUT_4E = MultiviewLayoutType.AddMember("LAYOUT_4E", smithyprelude.Unit)
-
-	MultiviewLayoutType_LAYOUT_4PL = MultiviewLayoutType.AddMember("LAYOUT_4PL", smithyprelude.Unit)
-
-	_MultiviewLayoutList_member = _MultiviewLayoutList.AddMember("member", MultiviewLayoutType)
-
-	MultiviewConfiguration_AvailableSources = MultiviewConfiguration.AddMember("AvailableSources", _MultiviewSourceList)
-
-	MultiviewConfiguration_AvailableLayouts = MultiviewConfiguration.AddMember("AvailableLayouts", _MultiviewLayoutList)
-
-	ChannelListConfiguration_Arn = ChannelListConfiguration.AddMember("Arn", smithyprelude.String)
-
-	ChannelListConfiguration_ChannelName = ChannelListConfiguration.AddMember("ChannelName", smithyprelude.String)
-
-	ChannelListConfiguration_ChannelGroupName = ChannelListConfiguration.AddMember("ChannelGroupName", smithyprelude.String)
-
-	ChannelListConfiguration_CreatedAt = ChannelListConfiguration.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	ChannelListConfiguration_ModifiedAt = ChannelListConfiguration.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	ChannelListConfiguration_Description = ChannelListConfiguration.AddMember("Description", _ResourceDescription)
-
-	ChannelListConfiguration_InputType = ChannelListConfiguration.AddMember("InputType", InputType)
-
-	ChannelListConfiguration_OutputLockingMode = ChannelListConfiguration.AddMember("OutputLockingMode", OutputLockingMode)
-
-	ChannelListConfiguration_MultiviewConfiguration = ChannelListConfiguration.AddMember("MultiviewConfiguration", MultiviewConfiguration)
-
-	ChannelListConfiguration_AttachedMultiviewChannels = ChannelListConfiguration.AddMember("AttachedMultiviewChannels", _AttachedMultiviewChannelList)
-
-	_ChannelList_member = _ChannelList.AddMember("member", ChannelListConfiguration)
-
-	CmafEncryptionMethod_CENC = CmafEncryptionMethod.AddMember("CENC", smithyprelude.Unit)
-
-	CmafEncryptionMethod_CBCS = CmafEncryptionMethod.AddMember("CBCS", smithyprelude.Unit)
-
-	ConflictExceptionType_RESOURCE_IN_USE = ConflictExceptionType.AddMember("RESOURCE_IN_USE", smithyprelude.Unit)
-
-	ConflictExceptionType_RESOURCE_ALREADY_EXISTS = ConflictExceptionType.AddMember("RESOURCE_ALREADY_EXISTS", smithyprelude.Unit)
-
-	ConflictExceptionType_IDEMPOTENT_PARAMETER_MISMATCH = ConflictExceptionType.AddMember("IDEMPOTENT_PARAMETER_MISMATCH", smithyprelude.Unit)
-
-	ConflictExceptionType_CONFLICTING_OPERATION = ConflictExceptionType.AddMember("CONFLICTING_OPERATION", smithyprelude.Unit)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_ConflictExceptionType = ConflictException.AddMember("ConflictExceptionType", ConflictExceptionType)
-
-	ContainerType_TS = ContainerType.AddMember("TS", smithyprelude.Unit)
-
-	ContainerType_CMAF = ContainerType.AddMember("CMAF", smithyprelude.Unit)
-
-	ContainerType_ISM = ContainerType.AddMember("ISM", smithyprelude.Unit)
-
-	ContentKeyPeriodTiming_INDEX_ONLY = ContentKeyPeriodTiming.AddMember("INDEX_ONLY", smithyprelude.Unit)
-
-	ContentKeyPeriodTiming_START_END_ONLY = ContentKeyPeriodTiming.AddMember("START_END_ONLY", smithyprelude.Unit)
-
-	ContentKeyPeriodTiming_INDEX_WITH_START_END = ContentKeyPeriodTiming.AddMember("INDEX_WITH_START_END", smithyprelude.Unit)
-
-	ContentKeyPeriodConfiguration_ContentKeyPeriodTiming = ContentKeyPeriodConfiguration.AddMember("ContentKeyPeriodTiming", ContentKeyPeriodTiming)
-
-	MultiviewFilterConfiguration_Layout = MultiviewFilterConfiguration.AddMember("Layout", MultiviewLayoutType)
-
-	MultiviewFilterConfiguration_Sources = MultiviewFilterConfiguration.AddMember("Sources", _MultiviewSourceList)
-
-	FilterConfiguration_ManifestFilter = FilterConfiguration.AddMember("ManifestFilter", smithyprelude.String)
-
-	FilterConfiguration_DrmSettings = FilterConfiguration.AddMember("DrmSettings", smithyprelude.String)
-
-	FilterConfiguration_Start = FilterConfiguration.AddMember("Start", smithyprelude.Timestamp)
-
-	FilterConfiguration_End = FilterConfiguration.AddMember("End", smithyprelude.Timestamp)
-
-	FilterConfiguration_TimeDelaySeconds = FilterConfiguration.AddMember("TimeDelaySeconds", smithyprelude.Integer)
-
-	FilterConfiguration_ClipStartTime = FilterConfiguration.AddMember("ClipStartTime", smithyprelude.Timestamp)
-
-	FilterConfiguration_Multiview = FilterConfiguration.AddMember("Multiview", MultiviewFilterConfiguration)
-
-	DashSegmentTemplateFormat_NUMBER_WITH_TIMELINE = DashSegmentTemplateFormat.AddMember("NUMBER_WITH_TIMELINE", smithyprelude.Unit)
-
-	DashPeriodTrigger_AVAILS = DashPeriodTrigger.AddMember("AVAILS", smithyprelude.Unit)
-
-	DashPeriodTrigger_DRM_KEY_ROTATION = DashPeriodTrigger.AddMember("DRM_KEY_ROTATION", smithyprelude.Unit)
-
-	DashPeriodTrigger_SOURCE_CHANGES = DashPeriodTrigger.AddMember("SOURCE_CHANGES", smithyprelude.Unit)
-
-	DashPeriodTrigger_SOURCE_DISRUPTIONS = DashPeriodTrigger.AddMember("SOURCE_DISRUPTIONS", smithyprelude.Unit)
-
-	DashPeriodTrigger_NONE = DashPeriodTrigger.AddMember("NONE", smithyprelude.Unit)
-
-	_DashPeriodTriggers_member = _DashPeriodTriggers.AddMember("member", DashPeriodTrigger)
-
-	ScteInManifests_ALL = ScteInManifests.AddMember("ALL", smithyprelude.Unit)
-
-	ScteInManifests_MATCHES_FILTER = ScteInManifests.AddMember("MATCHES_FILTER", smithyprelude.Unit)
-
-	ScteDash_AdMarkerDash = ScteDash.AddMember("AdMarkerDash", AdMarkerDash)
-
-	ScteDash_ScteInManifests = ScteDash.AddMember("ScteInManifests", ScteInManifests)
-
-	DashDrmSignaling_INDIVIDUAL = DashDrmSignaling.AddMember("INDIVIDUAL", smithyprelude.Unit)
-
-	DashDrmSignaling_REFERENCED = DashDrmSignaling.AddMember("REFERENCED", smithyprelude.Unit)
-
-	DashUtcTimingMode_HTTP_HEAD = DashUtcTimingMode.AddMember("HTTP_HEAD", smithyprelude.Unit)
-
-	DashUtcTimingMode_HTTP_ISO = DashUtcTimingMode.AddMember("HTTP_ISO", smithyprelude.Unit)
-
-	DashUtcTimingMode_HTTP_XSDATE = DashUtcTimingMode.AddMember("HTTP_XSDATE", smithyprelude.Unit)
-
-	DashUtcTimingMode_UTC_DIRECT = DashUtcTimingMode.AddMember("UTC_DIRECT", smithyprelude.Unit)
-
-	DashUtcTiming_TimingMode = DashUtcTiming.AddMember("TimingMode", DashUtcTimingMode)
-
-	DashUtcTiming_TimingSource = DashUtcTiming.AddMember("TimingSource", smithyprelude.String)
-
-	DashProfile_DVB_DASH = DashProfile.AddMember("DVB_DASH", smithyprelude.Unit)
-
-	_DashProfiles_member = _DashProfiles.AddMember("member", DashProfile)
-
-	DashBaseUrl_Url = DashBaseUrl.AddMember("Url", smithyprelude.String)
-
-	DashBaseUrl_ServiceLocation = DashBaseUrl.AddMember("ServiceLocation", smithyprelude.String)
-
-	DashBaseUrl_DvbPriority = DashBaseUrl.AddMember("DvbPriority", smithyprelude.Integer)
-
-	DashBaseUrl_DvbWeight = DashBaseUrl.AddMember("DvbWeight", smithyprelude.Integer)
-
-	_DashBaseUrls_member = _DashBaseUrls.AddMember("member", DashBaseUrl)
-
-	DashProgramInformation_Title = DashProgramInformation.AddMember("Title", smithyprelude.String)
-
-	DashProgramInformation_Source = DashProgramInformation.AddMember("Source", smithyprelude.String)
-
-	DashProgramInformation_Copyright = DashProgramInformation.AddMember("Copyright", smithyprelude.String)
-
-	DashProgramInformation_LanguageCode = DashProgramInformation.AddMember("LanguageCode", smithyprelude.String)
-
-	DashProgramInformation_MoreInformationUrl = DashProgramInformation.AddMember("MoreInformationUrl", smithyprelude.String)
-
-	DashDvbFontDownload_Url = DashDvbFontDownload.AddMember("Url", smithyprelude.String)
-
-	DashDvbFontDownload_MimeType = DashDvbFontDownload.AddMember("MimeType", smithyprelude.String)
-
-	DashDvbFontDownload_FontFamily = DashDvbFontDownload.AddMember("FontFamily", smithyprelude.String)
-
-	DashDvbMetricsReporting_ReportingUrl = DashDvbMetricsReporting.AddMember("ReportingUrl", smithyprelude.String)
-
-	DashDvbMetricsReporting_Probability = DashDvbMetricsReporting.AddMember("Probability", smithyprelude.Integer)
-
-	_DashDvbErrorMetrics_member = _DashDvbErrorMetrics.AddMember("member", DashDvbMetricsReporting)
-
-	DashDvbSettings_FontDownload = DashDvbSettings.AddMember("FontDownload", DashDvbFontDownload)
-
-	DashDvbSettings_ErrorMetrics = DashDvbSettings.AddMember("ErrorMetrics", _DashDvbErrorMetrics)
-
-	DashCompactness_STANDARD = DashCompactness.AddMember("STANDARD", smithyprelude.Unit)
-
-	DashCompactness_NONE = DashCompactness.AddMember("NONE", smithyprelude.Unit)
-
-	DashAudioTimelinePattern_NONE = DashAudioTimelinePattern.AddMember("NONE", smithyprelude.Unit)
-
-	DashAudioTimelinePattern_PATTERNED = DashAudioTimelinePattern.AddMember("PATTERNED", smithyprelude.Unit)
-
-	DashTtmlProfile_IMSC_1 = DashTtmlProfile.AddMember("IMSC_1", smithyprelude.Unit)
-
-	DashTtmlProfile_EBU_TT_D_101 = DashTtmlProfile.AddMember("EBU_TT_D_101", smithyprelude.Unit)
-
-	DashTtmlConfiguration_TtmlProfile = DashTtmlConfiguration.AddMember("TtmlProfile", DashTtmlProfile)
-
-	DashSubtitleConfiguration_TtmlConfiguration = DashSubtitleConfiguration.AddMember("TtmlConfiguration", DashTtmlConfiguration)
-
-	UriPathType_LEAF = UriPathType.AddMember("LEAF", smithyprelude.Unit)
-
-	UriPathType_ROOT = UriPathType.AddMember("ROOT", smithyprelude.Unit)
-
-	DashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime = DashAvailabilityStartTimeConfiguration.AddMember("FixedAvailabilityStartTime", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	CreateDashManifestConfiguration_ManifestName = CreateDashManifestConfiguration.AddMember("ManifestName", _ManifestName)
-
-	CreateDashManifestConfiguration_ManifestWindowSeconds = CreateDashManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	CreateDashManifestConfiguration_FilterConfiguration = CreateDashManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	CreateDashManifestConfiguration_MinUpdatePeriodSeconds = CreateDashManifestConfiguration.AddMember("MinUpdatePeriodSeconds", smithyprelude.Integer)
-
-	CreateDashManifestConfiguration_MinBufferTimeSeconds = CreateDashManifestConfiguration.AddMember("MinBufferTimeSeconds", smithyprelude.Integer)
-
-	CreateDashManifestConfiguration_SuggestedPresentationDelaySeconds = CreateDashManifestConfiguration.AddMember("SuggestedPresentationDelaySeconds", smithyprelude.Integer)
-
-	CreateDashManifestConfiguration_SegmentTemplateFormat = CreateDashManifestConfiguration.AddMember("SegmentTemplateFormat", DashSegmentTemplateFormat)
-
-	CreateDashManifestConfiguration_PeriodTriggers = CreateDashManifestConfiguration.AddMember("PeriodTriggers", _DashPeriodTriggers)
-
-	CreateDashManifestConfiguration_ScteDash = CreateDashManifestConfiguration.AddMember("ScteDash", ScteDash)
-
-	CreateDashManifestConfiguration_DrmSignaling = CreateDashManifestConfiguration.AddMember("DrmSignaling", DashDrmSignaling)
-
-	CreateDashManifestConfiguration_UtcTiming = CreateDashManifestConfiguration.AddMember("UtcTiming", DashUtcTiming)
-
-	CreateDashManifestConfiguration_Profiles = CreateDashManifestConfiguration.AddMember("Profiles", _DashProfiles)
-
-	CreateDashManifestConfiguration_BaseUrls = CreateDashManifestConfiguration.AddMember("BaseUrls", _DashBaseUrls)
-
-	CreateDashManifestConfiguration_ProgramInformation = CreateDashManifestConfiguration.AddMember("ProgramInformation", DashProgramInformation)
-
-	CreateDashManifestConfiguration_DvbSettings = CreateDashManifestConfiguration.AddMember("DvbSettings", DashDvbSettings)
-
-	CreateDashManifestConfiguration_Compactness = CreateDashManifestConfiguration.AddMember("Compactness", DashCompactness)
-
-	CreateDashManifestConfiguration_AudioTimelinePattern = CreateDashManifestConfiguration.AddMember("AudioTimelinePattern", DashAudioTimelinePattern)
-
-	CreateDashManifestConfiguration_SubtitleConfiguration = CreateDashManifestConfiguration.AddMember("SubtitleConfiguration", DashSubtitleConfiguration)
-
-	CreateDashManifestConfiguration_UriPathType = CreateDashManifestConfiguration.AddMember("UriPathType", UriPathType)
-
-	CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration = CreateDashManifestConfiguration.AddMember("AvailabilityStartTimeConfiguration", DashAvailabilityStartTimeConfiguration)
-
-	_CreateDashManifests_member = _CreateDashManifests.AddMember("member", CreateDashManifestConfiguration)
-
-	ScteHls_AdMarkerHls = ScteHls.AddMember("AdMarkerHls", AdMarkerHls)
-
-	ScteHls_ScteInManifests = ScteHls.AddMember("ScteInManifests", ScteInManifests)
-
-	StartTag_TimeOffset = StartTag.AddMember("TimeOffset", smithyprelude.Float)
-
-	StartTag_Precise = StartTag.AddMember("Precise", smithyprelude.Boolean)
-
-	CreateHlsManifestConfiguration_ManifestName = CreateHlsManifestConfiguration.AddMember("ManifestName", _ManifestName)
-
-	CreateHlsManifestConfiguration_ChildManifestName = CreateHlsManifestConfiguration.AddMember("ChildManifestName", _ManifestName)
-
-	CreateHlsManifestConfiguration_ScteHls = CreateHlsManifestConfiguration.AddMember("ScteHls", ScteHls)
-
-	CreateHlsManifestConfiguration_StartTag = CreateHlsManifestConfiguration.AddMember("StartTag", StartTag)
-
-	CreateHlsManifestConfiguration_ManifestWindowSeconds = CreateHlsManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	CreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = CreateHlsManifestConfiguration.AddMember("ProgramDateTimeIntervalSeconds", smithyprelude.Integer)
-
-	CreateHlsManifestConfiguration_FilterConfiguration = CreateHlsManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	CreateHlsManifestConfiguration_UrlEncodeChildManifest = CreateHlsManifestConfiguration.AddMember("UrlEncodeChildManifest", smithyprelude.Boolean)
-
-	CreateHlsManifestConfiguration_UriPathType = CreateHlsManifestConfiguration.AddMember("UriPathType", UriPathType)
-
-	_CreateHlsManifests_member = _CreateHlsManifests.AddMember("member", CreateHlsManifestConfiguration)
-
-	CreateLowLatencyHlsManifestConfiguration_ManifestName = CreateLowLatencyHlsManifestConfiguration.AddMember("ManifestName", _ManifestName)
-
-	CreateLowLatencyHlsManifestConfiguration_ChildManifestName = CreateLowLatencyHlsManifestConfiguration.AddMember("ChildManifestName", _ManifestName)
-
-	CreateLowLatencyHlsManifestConfiguration_ScteHls = CreateLowLatencyHlsManifestConfiguration.AddMember("ScteHls", ScteHls)
-
-	CreateLowLatencyHlsManifestConfiguration_StartTag = CreateLowLatencyHlsManifestConfiguration.AddMember("StartTag", StartTag)
-
-	CreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds = CreateLowLatencyHlsManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	CreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = CreateLowLatencyHlsManifestConfiguration.AddMember("ProgramDateTimeIntervalSeconds", smithyprelude.Integer)
-
-	CreateLowLatencyHlsManifestConfiguration_FilterConfiguration = CreateLowLatencyHlsManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	CreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest = CreateLowLatencyHlsManifestConfiguration.AddMember("UrlEncodeChildManifest", smithyprelude.Boolean)
-
-	CreateLowLatencyHlsManifestConfiguration_UriPathType = CreateLowLatencyHlsManifestConfiguration.AddMember("UriPathType", UriPathType)
-
-	_CreateLowLatencyHlsManifests_member = _CreateLowLatencyHlsManifests.AddMember("member", CreateLowLatencyHlsManifestConfiguration)
-
-	MssManifestLayout_FULL = MssManifestLayout.AddMember("FULL", smithyprelude.Unit)
-
-	MssManifestLayout_COMPACT = MssManifestLayout.AddMember("COMPACT", smithyprelude.Unit)
-
-	CreateMssManifestConfiguration_ManifestName = CreateMssManifestConfiguration.AddMember("ManifestName", _ManifestName)
-
-	CreateMssManifestConfiguration_ManifestWindowSeconds = CreateMssManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	CreateMssManifestConfiguration_FilterConfiguration = CreateMssManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	CreateMssManifestConfiguration_ManifestLayout = CreateMssManifestConfiguration.AddMember("ManifestLayout", MssManifestLayout)
-
-	_CreateMssManifests_member = _CreateMssManifests.AddMember("member", CreateMssManifestConfiguration)
-
-	CustomAdType_PROGRAM = CustomAdType.AddMember("PROGRAM", smithyprelude.Unit)
-
-	CustomAdType_CHAPTER = CustomAdType.AddMember("CHAPTER", smithyprelude.Unit)
-
-	CustomAdType_UNSCHEDULED_EVENT = CustomAdType.AddMember("UNSCHEDULED_EVENT", smithyprelude.Unit)
-
-	CustomAdType_ALTERNATE_CONTENT_OPPORTUNITY = CustomAdType.AddMember("ALTERNATE_CONTENT_OPPORTUNITY", smithyprelude.Unit)
-
-	CustomAdType_NETWORK = CustomAdType.AddMember("NETWORK", smithyprelude.Unit)
-
-	_CustomAdTypeList_member = _CustomAdTypeList.AddMember("member", CustomAdType)
-
-	S3DestinationConfig_BucketName = S3DestinationConfig.AddMember("BucketName", _S3BucketName)
-
-	S3DestinationConfig_DestinationPath = S3DestinationConfig.AddMember("DestinationPath", _S3DestinationPath)
-
-	Destination_S3Destination = Destination.AddMember("S3Destination", S3DestinationConfig)
-
-	DrmSystem_CLEAR_KEY_AES_128 = DrmSystem.AddMember("CLEAR_KEY_AES_128", smithyprelude.Unit)
-
-	DrmSystem_FAIRPLAY = DrmSystem.AddMember("FAIRPLAY", smithyprelude.Unit)
-
-	DrmSystem_PLAYREADY = DrmSystem.AddMember("PLAYREADY", smithyprelude.Unit)
-
-	DrmSystem_WIDEVINE = DrmSystem.AddMember("WIDEVINE", smithyprelude.Unit)
-
-	DrmSystem_IRDETO = DrmSystem.AddMember("IRDETO", smithyprelude.Unit)
-
-	_DrmSystems_member = _DrmSystems.AddMember("member", DrmSystem)
-
-	TsEncryptionMethod_AES_128 = TsEncryptionMethod.AddMember("AES_128", smithyprelude.Unit)
-
-	TsEncryptionMethod_SAMPLE_AES = TsEncryptionMethod.AddMember("SAMPLE_AES", smithyprelude.Unit)
-
-	IsmEncryptionMethod_CENC = IsmEncryptionMethod.AddMember("CENC", smithyprelude.Unit)
-
-	EncryptionMethod_TsEncryptionMethod = EncryptionMethod.AddMember("TsEncryptionMethod", TsEncryptionMethod)
-
-	EncryptionMethod_CmafEncryptionMethod = EncryptionMethod.AddMember("CmafEncryptionMethod", CmafEncryptionMethod)
-
-	EncryptionMethod_IsmEncryptionMethod = EncryptionMethod.AddMember("IsmEncryptionMethod", IsmEncryptionMethod)
-
-	PresetSpeke20Audio_PRESET_AUDIO_1 = PresetSpeke20Audio.AddMember("PRESET_AUDIO_1", smithyprelude.Unit)
-
-	PresetSpeke20Audio_PRESET_AUDIO_2 = PresetSpeke20Audio.AddMember("PRESET_AUDIO_2", smithyprelude.Unit)
-
-	PresetSpeke20Audio_PRESET_AUDIO_3 = PresetSpeke20Audio.AddMember("PRESET_AUDIO_3", smithyprelude.Unit)
-
-	PresetSpeke20Audio_SHARED = PresetSpeke20Audio.AddMember("SHARED", smithyprelude.Unit)
-
-	PresetSpeke20Audio_UNENCRYPTED = PresetSpeke20Audio.AddMember("UNENCRYPTED", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_1 = PresetSpeke20Video.AddMember("PRESET_VIDEO_1", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_2 = PresetSpeke20Video.AddMember("PRESET_VIDEO_2", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_3 = PresetSpeke20Video.AddMember("PRESET_VIDEO_3", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_4 = PresetSpeke20Video.AddMember("PRESET_VIDEO_4", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_5 = PresetSpeke20Video.AddMember("PRESET_VIDEO_5", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_6 = PresetSpeke20Video.AddMember("PRESET_VIDEO_6", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_7 = PresetSpeke20Video.AddMember("PRESET_VIDEO_7", smithyprelude.Unit)
-
-	PresetSpeke20Video_PRESET_VIDEO_8 = PresetSpeke20Video.AddMember("PRESET_VIDEO_8", smithyprelude.Unit)
-
-	PresetSpeke20Video_SHARED = PresetSpeke20Video.AddMember("SHARED", smithyprelude.Unit)
-
-	PresetSpeke20Video_UNENCRYPTED = PresetSpeke20Video.AddMember("UNENCRYPTED", smithyprelude.Unit)
-
-	EncryptionContractConfiguration_PresetSpeke20Audio = EncryptionContractConfiguration.AddMember("PresetSpeke20Audio", PresetSpeke20Audio)
-
-	EncryptionContractConfiguration_PresetSpeke20Video = EncryptionContractConfiguration.AddMember("PresetSpeke20Video", PresetSpeke20Video)
-
-	SpekeVersion_V2_0 = SpekeVersion.AddMember("V2_0", smithyprelude.Unit)
-
-	SpekeVersion_V2_1 = SpekeVersion.AddMember("V2_1", smithyprelude.Unit)
-
-	SpekeKeyProvider_EncryptionContractConfiguration = SpekeKeyProvider.AddMember("EncryptionContractConfiguration", EncryptionContractConfiguration)
-
-	SpekeKeyProvider_ResourceId = SpekeKeyProvider.AddMember("ResourceId", smithyprelude.String)
-
-	SpekeKeyProvider_DrmSystems = SpekeKeyProvider.AddMember("DrmSystems", _DrmSystems)
-
-	SpekeKeyProvider_RoleArn = SpekeKeyProvider.AddMember("RoleArn", smithyprelude.String)
-
-	SpekeKeyProvider_Url = SpekeKeyProvider.AddMember("Url", smithyprelude.String)
-
-	SpekeKeyProvider_CertificateArn = SpekeKeyProvider.AddMember("CertificateArn", smithyprelude.String)
-
-	SpekeKeyProvider_SpekeVersion = SpekeKeyProvider.AddMember("SpekeVersion", SpekeVersion)
-
-	SpekeKeyProvider_ContentKeyPeriodConfiguration = SpekeKeyProvider.AddMember("ContentKeyPeriodConfiguration", ContentKeyPeriodConfiguration)
-
-	Encryption_ConstantInitializationVector = Encryption.AddMember("ConstantInitializationVector", smithyprelude.String)
-
-	Encryption_EncryptionMethod = Encryption.AddMember("EncryptionMethod", EncryptionMethod)
-
-	Encryption_KeyRotationIntervalSeconds = Encryption.AddMember("KeyRotationIntervalSeconds", smithyprelude.Integer)
-
-	Encryption_CmafExcludeSegmentDrmMetadata = Encryption.AddMember("CmafExcludeSegmentDrmMetadata", smithyprelude.Boolean)
-
-	Encryption_SpekeKeyProvider = Encryption.AddMember("SpekeKeyProvider", SpekeKeyProvider)
-
-	EndpointErrorCondition_STALE_MANIFEST = EndpointErrorCondition.AddMember("STALE_MANIFEST", smithyprelude.Unit)
-
-	EndpointErrorCondition_INCOMPLETE_MANIFEST = EndpointErrorCondition.AddMember("INCOMPLETE_MANIFEST", smithyprelude.Unit)
-
-	EndpointErrorCondition_MISSING_DRM_KEY = EndpointErrorCondition.AddMember("MISSING_DRM_KEY", smithyprelude.Unit)
-
-	EndpointErrorCondition_SLATE_INPUT = EndpointErrorCondition.AddMember("SLATE_INPUT", smithyprelude.Unit)
-
-	_EndpointErrorConditions_member = _EndpointErrorConditions.AddMember("member", EndpointErrorCondition)
-
-	ForceEndpointErrorConfiguration_EndpointErrorConditions = ForceEndpointErrorConfiguration.AddMember("EndpointErrorConditions", _EndpointErrorConditions)
-
-	GetDashManifestConfiguration_ManifestName = GetDashManifestConfiguration.AddMember("ManifestName", _ResourceName)
-
-	GetDashManifestConfiguration_Url = GetDashManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	GetDashManifestConfiguration_ManifestWindowSeconds = GetDashManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	GetDashManifestConfiguration_FilterConfiguration = GetDashManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	GetDashManifestConfiguration_MinUpdatePeriodSeconds = GetDashManifestConfiguration.AddMember("MinUpdatePeriodSeconds", smithyprelude.Integer)
-
-	GetDashManifestConfiguration_MinBufferTimeSeconds = GetDashManifestConfiguration.AddMember("MinBufferTimeSeconds", smithyprelude.Integer)
-
-	GetDashManifestConfiguration_SuggestedPresentationDelaySeconds = GetDashManifestConfiguration.AddMember("SuggestedPresentationDelaySeconds", smithyprelude.Integer)
-
-	GetDashManifestConfiguration_SegmentTemplateFormat = GetDashManifestConfiguration.AddMember("SegmentTemplateFormat", DashSegmentTemplateFormat)
-
-	GetDashManifestConfiguration_PeriodTriggers = GetDashManifestConfiguration.AddMember("PeriodTriggers", _DashPeriodTriggers)
-
-	GetDashManifestConfiguration_ScteDash = GetDashManifestConfiguration.AddMember("ScteDash", ScteDash)
-
-	GetDashManifestConfiguration_DrmSignaling = GetDashManifestConfiguration.AddMember("DrmSignaling", DashDrmSignaling)
-
-	GetDashManifestConfiguration_UtcTiming = GetDashManifestConfiguration.AddMember("UtcTiming", DashUtcTiming)
-
-	GetDashManifestConfiguration_Profiles = GetDashManifestConfiguration.AddMember("Profiles", _DashProfiles)
-
-	GetDashManifestConfiguration_BaseUrls = GetDashManifestConfiguration.AddMember("BaseUrls", _DashBaseUrls)
-
-	GetDashManifestConfiguration_ProgramInformation = GetDashManifestConfiguration.AddMember("ProgramInformation", DashProgramInformation)
-
-	GetDashManifestConfiguration_DvbSettings = GetDashManifestConfiguration.AddMember("DvbSettings", DashDvbSettings)
-
-	GetDashManifestConfiguration_Compactness = GetDashManifestConfiguration.AddMember("Compactness", DashCompactness)
-
-	GetDashManifestConfiguration_AudioTimelinePattern = GetDashManifestConfiguration.AddMember("AudioTimelinePattern", DashAudioTimelinePattern)
-
-	GetDashManifestConfiguration_SubtitleConfiguration = GetDashManifestConfiguration.AddMember("SubtitleConfiguration", DashSubtitleConfiguration)
-
-	GetDashManifestConfiguration_UriPathType = GetDashManifestConfiguration.AddMember("UriPathType", UriPathType)
-
-	GetDashManifestConfiguration_AvailabilityStartTimeConfiguration = GetDashManifestConfiguration.AddMember("AvailabilityStartTimeConfiguration", DashAvailabilityStartTimeConfiguration)
-
-	_GetDashManifests_member = _GetDashManifests.AddMember("member", GetDashManifestConfiguration)
-
-	GetHlsManifestConfiguration_ManifestName = GetHlsManifestConfiguration.AddMember("ManifestName", _ResourceName)
-
-	GetHlsManifestConfiguration_Url = GetHlsManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	GetHlsManifestConfiguration_ChildManifestName = GetHlsManifestConfiguration.AddMember("ChildManifestName", _ResourceName)
-
-	GetHlsManifestConfiguration_ManifestWindowSeconds = GetHlsManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	GetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = GetHlsManifestConfiguration.AddMember("ProgramDateTimeIntervalSeconds", smithyprelude.Integer)
-
-	GetHlsManifestConfiguration_ScteHls = GetHlsManifestConfiguration.AddMember("ScteHls", ScteHls)
-
-	GetHlsManifestConfiguration_FilterConfiguration = GetHlsManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	GetHlsManifestConfiguration_StartTag = GetHlsManifestConfiguration.AddMember("StartTag", StartTag)
-
-	GetHlsManifestConfiguration_UrlEncodeChildManifest = GetHlsManifestConfiguration.AddMember("UrlEncodeChildManifest", smithyprelude.Boolean)
-
-	GetHlsManifestConfiguration_UriPathType = GetHlsManifestConfiguration.AddMember("UriPathType", UriPathType)
-
-	_GetHlsManifests_member = _GetHlsManifests.AddMember("member", GetHlsManifestConfiguration)
-
-	GetLowLatencyHlsManifestConfiguration_ManifestName = GetLowLatencyHlsManifestConfiguration.AddMember("ManifestName", _ResourceName)
-
-	GetLowLatencyHlsManifestConfiguration_Url = GetLowLatencyHlsManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	GetLowLatencyHlsManifestConfiguration_ChildManifestName = GetLowLatencyHlsManifestConfiguration.AddMember("ChildManifestName", _ResourceName)
-
-	GetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds = GetLowLatencyHlsManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	GetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = GetLowLatencyHlsManifestConfiguration.AddMember("ProgramDateTimeIntervalSeconds", smithyprelude.Integer)
-
-	GetLowLatencyHlsManifestConfiguration_ScteHls = GetLowLatencyHlsManifestConfiguration.AddMember("ScteHls", ScteHls)
-
-	GetLowLatencyHlsManifestConfiguration_FilterConfiguration = GetLowLatencyHlsManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	GetLowLatencyHlsManifestConfiguration_StartTag = GetLowLatencyHlsManifestConfiguration.AddMember("StartTag", StartTag)
-
-	GetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest = GetLowLatencyHlsManifestConfiguration.AddMember("UrlEncodeChildManifest", smithyprelude.Boolean)
-
-	GetLowLatencyHlsManifestConfiguration_UriPathType = GetLowLatencyHlsManifestConfiguration.AddMember("UriPathType", UriPathType)
-
-	_GetLowLatencyHlsManifests_member = _GetLowLatencyHlsManifests.AddMember("member", GetLowLatencyHlsManifestConfiguration)
-
-	GetMssManifestConfiguration_ManifestName = GetMssManifestConfiguration.AddMember("ManifestName", _ManifestName)
-
-	GetMssManifestConfiguration_Url = GetMssManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	GetMssManifestConfiguration_FilterConfiguration = GetMssManifestConfiguration.AddMember("FilterConfiguration", FilterConfiguration)
-
-	GetMssManifestConfiguration_ManifestWindowSeconds = GetMssManifestConfiguration.AddMember("ManifestWindowSeconds", smithyprelude.Integer)
-
-	GetMssManifestConfiguration_ManifestLayout = GetMssManifestConfiguration.AddMember("ManifestLayout", MssManifestLayout)
-
-	_GetMssManifests_member = _GetMssManifests.AddMember("member", GetMssManifestConfiguration)
-
-	HarvestedDashManifest_ManifestName = HarvestedDashManifest.AddMember("ManifestName", _ResourceName)
-
-	_HarvestedDashManifestsList_member = _HarvestedDashManifestsList.AddMember("member", HarvestedDashManifest)
-
-	HarvestedHlsManifest_ManifestName = HarvestedHlsManifest.AddMember("ManifestName", _ResourceName)
-
-	_HarvestedHlsManifestsList_member = _HarvestedHlsManifestsList.AddMember("member", HarvestedHlsManifest)
-
-	HarvestedLowLatencyHlsManifest_ManifestName = HarvestedLowLatencyHlsManifest.AddMember("ManifestName", _ResourceName)
-
-	_HarvestedLowLatencyHlsManifestsList_member = _HarvestedLowLatencyHlsManifestsList.AddMember("member", HarvestedLowLatencyHlsManifest)
-
-	HarvestedManifests_HlsManifests = HarvestedManifests.AddMember("HlsManifests", _HarvestedHlsManifestsList)
-
-	HarvestedManifests_DashManifests = HarvestedManifests.AddMember("DashManifests", _HarvestedDashManifestsList)
-
-	HarvestedManifests_LowLatencyHlsManifests = HarvestedManifests.AddMember("LowLatencyHlsManifests", _HarvestedLowLatencyHlsManifestsList)
-
-	HarvesterScheduleConfiguration_StartTime = HarvesterScheduleConfiguration.AddMember("StartTime", smithyprelude.Timestamp)
-
-	HarvesterScheduleConfiguration_EndTime = HarvesterScheduleConfiguration.AddMember("EndTime", smithyprelude.Timestamp)
-
-	HarvestJobStatus_QUEUED = HarvestJobStatus.AddMember("QUEUED", smithyprelude.Unit)
-
-	HarvestJobStatus_IN_PROGRESS = HarvestJobStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	HarvestJobStatus_CANCELLED = HarvestJobStatus.AddMember("CANCELLED", smithyprelude.Unit)
-
-	HarvestJobStatus_COMPLETED = HarvestJobStatus.AddMember("COMPLETED", smithyprelude.Unit)
-
-	HarvestJobStatus_FAILED = HarvestJobStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	HarvestJob_ChannelGroupName = HarvestJob.AddMember("ChannelGroupName", _ResourceName)
-
-	HarvestJob_ChannelName = HarvestJob.AddMember("ChannelName", _ResourceName)
-
-	HarvestJob_OriginEndpointName = HarvestJob.AddMember("OriginEndpointName", _ResourceName)
-
-	HarvestJob_Destination = HarvestJob.AddMember("Destination", Destination)
-
-	HarvestJob_HarvestJobName = HarvestJob.AddMember("HarvestJobName", _ResourceName)
-
-	HarvestJob_HarvestedManifests = HarvestJob.AddMember("HarvestedManifests", HarvestedManifests)
-
-	HarvestJob_Description = HarvestJob.AddMember("Description", _ResourceDescription)
-
-	HarvestJob_ScheduleConfiguration = HarvestJob.AddMember("ScheduleConfiguration", HarvesterScheduleConfiguration)
-
-	HarvestJob_Arn = HarvestJob.AddMember("Arn", smithyprelude.String)
-
-	HarvestJob_CreatedAt = HarvestJob.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	HarvestJob_ModifiedAt = HarvestJob.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	HarvestJob_Status = HarvestJob.AddMember("Status", HarvestJobStatus)
-
-	HarvestJob_ErrorMessage = HarvestJob.AddMember("ErrorMessage", smithyprelude.String)
-
-	HarvestJob_ETag = HarvestJob.AddMember("ETag", _EntityTag)
-
-	_HarvestJobsList_member = _HarvestJobsList.AddMember("member", HarvestJob)
-
-	IngestEndpoint_Id = IngestEndpoint.AddMember("Id", smithyprelude.String)
-
-	IngestEndpoint_Url = IngestEndpoint.AddMember("Url", smithyprelude.String)
-
-	_IngestEndpointList_member = _IngestEndpointList.AddMember("member", IngestEndpoint)
-
-	InputSwitchConfiguration_MQCSInputSwitching = InputSwitchConfiguration.AddMember("MQCSInputSwitching", smithyprelude.Boolean)
-
-	InputSwitchConfiguration_PreferredInput = InputSwitchConfiguration.AddMember("PreferredInput", smithyprelude.Integer)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	ListDashManifestConfiguration_ManifestName = ListDashManifestConfiguration.AddMember("ManifestName", _ResourceName)
-
-	ListDashManifestConfiguration_Url = ListDashManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	_ListDashManifests_member = _ListDashManifests.AddMember("member", ListDashManifestConfiguration)
-
-	ListHlsManifestConfiguration_ManifestName = ListHlsManifestConfiguration.AddMember("ManifestName", _ResourceName)
-
-	ListHlsManifestConfiguration_ChildManifestName = ListHlsManifestConfiguration.AddMember("ChildManifestName", _ResourceName)
-
-	ListHlsManifestConfiguration_Url = ListHlsManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	_ListHlsManifests_member = _ListHlsManifests.AddMember("member", ListHlsManifestConfiguration)
-
-	ListLowLatencyHlsManifestConfiguration_ManifestName = ListLowLatencyHlsManifestConfiguration.AddMember("ManifestName", _ResourceName)
-
-	ListLowLatencyHlsManifestConfiguration_ChildManifestName = ListLowLatencyHlsManifestConfiguration.AddMember("ChildManifestName", _ResourceName)
-
-	ListLowLatencyHlsManifestConfiguration_Url = ListLowLatencyHlsManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	_ListLowLatencyHlsManifests_member = _ListLowLatencyHlsManifests.AddMember("member", ListLowLatencyHlsManifestConfiguration)
-
-	ListMssManifestConfiguration_ManifestName = ListMssManifestConfiguration.AddMember("ManifestName", _ResourceName)
-
-	ListMssManifestConfiguration_Url = ListMssManifestConfiguration.AddMember("Url", smithyprelude.String)
-
-	_ListMssManifests_member = _ListMssManifests.AddMember("member", ListMssManifestConfiguration)
-
-	UriSeparator_UNDERSCORE = UriSeparator.AddMember("UNDERSCORE", smithyprelude.Unit)
-
-	UriSeparator_HYPHEN = UriSeparator.AddMember("HYPHEN", smithyprelude.Unit)
-
-	StreamNameOutputMode_INDEX = StreamNameOutputMode.AddMember("INDEX", smithyprelude.Unit)
-
-	StreamNameOutputMode_PASSTHROUGH_NAME = StreamNameOutputMode.AddMember("PASSTHROUGH_NAME", smithyprelude.Unit)
-
-	OriginEndpointListConfiguration_Arn = OriginEndpointListConfiguration.AddMember("Arn", smithyprelude.String)
-
-	OriginEndpointListConfiguration_ChannelGroupName = OriginEndpointListConfiguration.AddMember("ChannelGroupName", _ResourceName)
-
-	OriginEndpointListConfiguration_ChannelName = OriginEndpointListConfiguration.AddMember("ChannelName", _ResourceName)
-
-	OriginEndpointListConfiguration_OriginEndpointName = OriginEndpointListConfiguration.AddMember("OriginEndpointName", _ResourceName)
-
-	OriginEndpointListConfiguration_ContainerType = OriginEndpointListConfiguration.AddMember("ContainerType", ContainerType)
-
-	OriginEndpointListConfiguration_Description = OriginEndpointListConfiguration.AddMember("Description", _ResourceDescription)
-
-	OriginEndpointListConfiguration_CreatedAt = OriginEndpointListConfiguration.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	OriginEndpointListConfiguration_ModifiedAt = OriginEndpointListConfiguration.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	OriginEndpointListConfiguration_HlsManifests = OriginEndpointListConfiguration.AddMember("HlsManifests", _ListHlsManifests)
-
-	OriginEndpointListConfiguration_LowLatencyHlsManifests = OriginEndpointListConfiguration.AddMember("LowLatencyHlsManifests", _ListLowLatencyHlsManifests)
-
-	OriginEndpointListConfiguration_DashManifests = OriginEndpointListConfiguration.AddMember("DashManifests", _ListDashManifests)
-
-	OriginEndpointListConfiguration_MssManifests = OriginEndpointListConfiguration.AddMember("MssManifests", _ListMssManifests)
-
-	OriginEndpointListConfiguration_ForceEndpointErrorConfiguration = OriginEndpointListConfiguration.AddMember("ForceEndpointErrorConfiguration", ForceEndpointErrorConfiguration)
-
-	OriginEndpointListConfiguration_UriSeparator = OriginEndpointListConfiguration.AddMember("UriSeparator", UriSeparator)
-
-	OriginEndpointListConfiguration_StreamNameOutputMode = OriginEndpointListConfiguration.AddMember("StreamNameOutputMode", StreamNameOutputMode)
-
-	_OriginEndpointsList_member = _OriginEndpointsList.AddMember("member", OriginEndpointListConfiguration)
-
-	OutputHeaderConfiguration_PublishMQCS = OutputHeaderConfiguration.AddMember("PublishMQCS", smithyprelude.Boolean)
-
-	OutputTimestampMode_PASSTHROUGH = OutputTimestampMode.AddMember("PASSTHROUGH", smithyprelude.Unit)
-
-	OutputTimestampMode_REBASED_TO_CHANNEL_START = OutputTimestampMode.AddMember("REBASED_TO_CHANNEL_START", smithyprelude.Unit)
-
-	ResourceTypeNotFound_CHANNEL_GROUP = ResourceTypeNotFound.AddMember("CHANNEL_GROUP", smithyprelude.Unit)
-
-	ResourceTypeNotFound_CHANNEL = ResourceTypeNotFound.AddMember("CHANNEL", smithyprelude.Unit)
-
-	ResourceTypeNotFound_ORIGIN_ENDPOINT = ResourceTypeNotFound.AddMember("ORIGIN_ENDPOINT", smithyprelude.Unit)
-
-	ResourceTypeNotFound_HARVEST_JOB = ResourceTypeNotFound.AddMember("HARVEST_JOB", smithyprelude.Unit)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_ResourceTypeNotFound = ResourceNotFoundException.AddMember("ResourceTypeNotFound", ResourceTypeNotFound)
-
-	ScteFilter_SPLICE_INSERT = ScteFilter.AddMember("SPLICE_INSERT", smithyprelude.Unit)
-
-	ScteFilter_BREAK = ScteFilter.AddMember("BREAK", smithyprelude.Unit)
-
-	ScteFilter_PROVIDER_ADVERTISEMENT = ScteFilter.AddMember("PROVIDER_ADVERTISEMENT", smithyprelude.Unit)
-
-	ScteFilter_DISTRIBUTOR_ADVERTISEMENT = ScteFilter.AddMember("DISTRIBUTOR_ADVERTISEMENT", smithyprelude.Unit)
-
-	ScteFilter_PROVIDER_PLACEMENT_OPPORTUNITY = ScteFilter.AddMember("PROVIDER_PLACEMENT_OPPORTUNITY", smithyprelude.Unit)
-
-	ScteFilter_DISTRIBUTOR_PLACEMENT_OPPORTUNITY = ScteFilter.AddMember("DISTRIBUTOR_PLACEMENT_OPPORTUNITY", smithyprelude.Unit)
-
-	ScteFilter_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY = ScteFilter.AddMember("PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", smithyprelude.Unit)
-
-	ScteFilter_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY = ScteFilter.AddMember("DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", smithyprelude.Unit)
-
-	ScteFilter_PROGRAM = ScteFilter.AddMember("PROGRAM", smithyprelude.Unit)
-
-	ScteFilter_CHAPTER = ScteFilter.AddMember("CHAPTER", smithyprelude.Unit)
-
-	ScteFilter_UNSCHEDULED_EVENT = ScteFilter.AddMember("UNSCHEDULED_EVENT", smithyprelude.Unit)
-
-	ScteFilter_ALTERNATE_CONTENT_OPPORTUNITY = ScteFilter.AddMember("ALTERNATE_CONTENT_OPPORTUNITY", smithyprelude.Unit)
-
-	ScteFilter_NETWORK = ScteFilter.AddMember("NETWORK", smithyprelude.Unit)
-
-	ScteFilter_PROVIDER_PROMO = ScteFilter.AddMember("PROVIDER_PROMO", smithyprelude.Unit)
-
-	ScteFilter_DISTRIBUTOR_PROMO = ScteFilter.AddMember("DISTRIBUTOR_PROMO", smithyprelude.Unit)
-
-	ScteFilter_PROVIDER_AD_BLOCK = ScteFilter.AddMember("PROVIDER_AD_BLOCK", smithyprelude.Unit)
-
-	ScteFilter_DISTRIBUTOR_AD_BLOCK = ScteFilter.AddMember("DISTRIBUTOR_AD_BLOCK", smithyprelude.Unit)
-
-	ScteFilter_CONTENT_IDENTIFICATION = ScteFilter.AddMember("CONTENT_IDENTIFICATION", smithyprelude.Unit)
-
-	ScteFilter_CALL_AD_SERVER = ScteFilter.AddMember("CALL_AD_SERVER", smithyprelude.Unit)
-
-	_ScteFilterList_member = _ScteFilterList.AddMember("member", ScteFilter)
-
-	ScteInSegments_NONE = ScteInSegments.AddMember("NONE", smithyprelude.Unit)
-
-	ScteInSegments_ALL = ScteInSegments.AddMember("ALL", smithyprelude.Unit)
-
-	ScteInSegments_MATCHES_FILTER = ScteInSegments.AddMember("MATCHES_FILTER", smithyprelude.Unit)
-
-	Scte_ScteFilter = Scte.AddMember("ScteFilter", _ScteFilterList)
-
-	Scte_ScteInSegments = Scte.AddMember("ScteInSegments", ScteInSegments)
-
-	Scte_CustomAdTypes = Scte.AddMember("CustomAdTypes", _CustomAdTypeList)
-
-	Segment_SegmentDurationSeconds = Segment.AddMember("SegmentDurationSeconds", smithyprelude.Integer)
-
-	Segment_SegmentName = Segment.AddMember("SegmentName", smithyprelude.String)
-
-	Segment_TsUseAudioRenditionGroup = Segment.AddMember("TsUseAudioRenditionGroup", smithyprelude.Boolean)
-
-	Segment_IncludeIframeOnlyStreams = Segment.AddMember("IncludeIframeOnlyStreams", smithyprelude.Boolean)
-
-	Segment_TsIncludeDvbSubtitles = Segment.AddMember("TsIncludeDvbSubtitles", smithyprelude.Boolean)
-
-	Segment_Scte = Segment.AddMember("Scte", Scte)
-
-	Segment_Encryption = Segment.AddMember("Encryption", Encryption)
-
-	Segment_OutputTimestampMode = Segment.AddMember("OutputTimestampMode", OutputTimestampMode)
-
-	ServiceQuotaExceededException_Message = ServiceQuotaExceededException.AddMember("Message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ValidationExceptionType_CONTAINER_TYPE_IMMUTABLE = ValidationExceptionType.AddMember("CONTAINER_TYPE_IMMUTABLE", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_PAGINATION_TOKEN = ValidationExceptionType.AddMember("INVALID_PAGINATION_TOKEN", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_PAGINATION_MAX_RESULTS = ValidationExceptionType.AddMember("INVALID_PAGINATION_MAX_RESULTS", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_POLICY = ValidationExceptionType.AddMember("INVALID_POLICY", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_ROLE_ARN = ValidationExceptionType.AddMember("INVALID_ROLE_ARN", smithyprelude.Unit)
-
-	ValidationExceptionType_MANIFEST_NAME_COLLISION = ValidationExceptionType.AddMember("MANIFEST_NAME_COLLISION", smithyprelude.Unit)
-
-	ValidationExceptionType_ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH = ValidationExceptionType.AddMember("ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH", smithyprelude.Unit)
-
-	ValidationExceptionType_CENC_IV_INCOMPATIBLE = ValidationExceptionType.AddMember("CENC_IV_INCOMPATIBLE", smithyprelude.Unit)
-
-	ValidationExceptionType_ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE = ValidationExceptionType.AddMember("ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE", smithyprelude.Unit)
-
-	ValidationExceptionType_ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE = ValidationExceptionType.AddMember("ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE", smithyprelude.Unit)
-
-	ValidationExceptionType_ENCRYPTION_CONTRACT_UNENCRYPTED = ValidationExceptionType.AddMember("ENCRYPTION_CONTRACT_UNENCRYPTED", smithyprelude.Unit)
-
-	ValidationExceptionType_ENCRYPTION_CONTRACT_SHARED = ValidationExceptionType.AddMember("ENCRYPTION_CONTRACT_SHARED", smithyprelude.Unit)
-
-	ValidationExceptionType_NUM_MANIFESTS_LOW = ValidationExceptionType.AddMember("NUM_MANIFESTS_LOW", smithyprelude.Unit)
-
-	ValidationExceptionType_NUM_MANIFESTS_HIGH = ValidationExceptionType.AddMember("NUM_MANIFESTS_HIGH", smithyprelude.Unit)
-
-	ValidationExceptionType_MANIFEST_DRM_SYSTEMS_INCOMPATIBLE = ValidationExceptionType.AddMember("MANIFEST_DRM_SYSTEMS_INCOMPATIBLE", smithyprelude.Unit)
-
-	ValidationExceptionType_DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE = ValidationExceptionType.AddMember("DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE", smithyprelude.Unit)
-
-	ValidationExceptionType_ROLE_ARN_NOT_ASSUMABLE = ValidationExceptionType.AddMember("ROLE_ARN_NOT_ASSUMABLE", smithyprelude.Unit)
-
-	ValidationExceptionType_ROLE_ARN_LENGTH_OUT_OF_RANGE = ValidationExceptionType.AddMember("ROLE_ARN_LENGTH_OUT_OF_RANGE", smithyprelude.Unit)
-
-	ValidationExceptionType_ROLE_ARN_INVALID_FORMAT = ValidationExceptionType.AddMember("ROLE_ARN_INVALID_FORMAT", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_INVALID = ValidationExceptionType.AddMember("URL_INVALID", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_SCHEME = ValidationExceptionType.AddMember("URL_SCHEME", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_USER_INFO = ValidationExceptionType.AddMember("URL_USER_INFO", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_PORT = ValidationExceptionType.AddMember("URL_PORT", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_UNKNOWN_HOST = ValidationExceptionType.AddMember("URL_UNKNOWN_HOST", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_LOCAL_ADDRESS = ValidationExceptionType.AddMember("URL_LOCAL_ADDRESS", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_LOOPBACK_ADDRESS = ValidationExceptionType.AddMember("URL_LOOPBACK_ADDRESS", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_LINK_LOCAL_ADDRESS = ValidationExceptionType.AddMember("URL_LINK_LOCAL_ADDRESS", smithyprelude.Unit)
-
-	ValidationExceptionType_URL_MULTICAST_ADDRESS = ValidationExceptionType.AddMember("URL_MULTICAST_ADDRESS", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_INVALID = ValidationExceptionType.AddMember("MEMBER_INVALID", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_MISSING = ValidationExceptionType.AddMember("MEMBER_MISSING", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_MIN_VALUE = ValidationExceptionType.AddMember("MEMBER_MIN_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_MAX_VALUE = ValidationExceptionType.AddMember("MEMBER_MAX_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_MIN_LENGTH = ValidationExceptionType.AddMember("MEMBER_MIN_LENGTH", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_MAX_LENGTH = ValidationExceptionType.AddMember("MEMBER_MAX_LENGTH", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_INVALID_ENUM_VALUE = ValidationExceptionType.AddMember("MEMBER_INVALID_ENUM_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionType_MEMBER_DOES_NOT_MATCH_PATTERN = ValidationExceptionType.AddMember("MEMBER_DOES_NOT_MATCH_PATTERN", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_MANIFEST_FILTER = ValidationExceptionType.AddMember("INVALID_MANIFEST_FILTER", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_DRM_SETTINGS = ValidationExceptionType.AddMember("INVALID_DRM_SETTINGS", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_TIME_DELAY_SECONDS = ValidationExceptionType.AddMember("INVALID_TIME_DELAY_SECONDS", smithyprelude.Unit)
-
-	ValidationExceptionType_END_TIME_EARLIER_THAN_START_TIME = ValidationExceptionType.AddMember("END_TIME_EARLIER_THAN_START_TIME", smithyprelude.Unit)
-
-	ValidationExceptionType_TS_CONTAINER_TYPE_WITH_DASH_MANIFEST = ValidationExceptionType.AddMember("TS_CONTAINER_TYPE_WITH_DASH_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_DIRECT_MODE_WITH_TIMING_SOURCE = ValidationExceptionType.AddMember("DIRECT_MODE_WITH_TIMING_SOURCE", smithyprelude.Unit)
-
-	ValidationExceptionType_NONE_MODE_WITH_TIMING_SOURCE = ValidationExceptionType.AddMember("NONE_MODE_WITH_TIMING_SOURCE", smithyprelude.Unit)
-
-	ValidationExceptionType_TIMING_SOURCE_MISSING = ValidationExceptionType.AddMember("TIMING_SOURCE_MISSING", smithyprelude.Unit)
-
-	ValidationExceptionType_UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION = ValidationExceptionType.AddMember("UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES = ValidationExceptionType.AddMember("PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES", smithyprelude.Unit)
-
-	ValidationExceptionType_DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS = ValidationExceptionType.AddMember("DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS", smithyprelude.Unit)
-
-	ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION = ValidationExceptionType.AddMember("ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY = ValidationExceptionType.AddMember("SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY", smithyprelude.Unit)
-
-	ValidationExceptionType_HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION = ValidationExceptionType.AddMember("HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT = ValidationExceptionType.AddMember("HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT", smithyprelude.Unit)
-
-	ValidationExceptionType_TOO_MANY_IN_PROGRESS_HARVEST_JOBS = ValidationExceptionType.AddMember("TOO_MANY_IN_PROGRESS_HARVEST_JOBS", smithyprelude.Unit)
-
-	ValidationExceptionType_HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION = ValidationExceptionType.AddMember("HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_HARVEST_JOB_DURATION = ValidationExceptionType.AddMember("INVALID_HARVEST_JOB_DURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE = ValidationExceptionType.AddMember("HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE", smithyprelude.Unit)
-
-	ValidationExceptionType_HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION = ValidationExceptionType.AddMember("HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION", smithyprelude.Unit)
-
-	ValidationExceptionType_HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED = ValidationExceptionType.AddMember("HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED", smithyprelude.Unit)
-
-	ValidationExceptionType_CLIP_START_TIME_WITH_START_OR_END = ValidationExceptionType.AddMember("CLIP_START_TIME_WITH_START_OR_END", smithyprelude.Unit)
-
-	ValidationExceptionType_START_TAG_TIME_OFFSET_INVALID = ValidationExceptionType.AddMember("START_TAG_TIME_OFFSET_INVALID", smithyprelude.Unit)
-
-	ValidationExceptionType_INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION = ValidationExceptionType.AddMember("INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE = ValidationExceptionType.AddMember("DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE", smithyprelude.Unit)
-
-	ValidationExceptionType_INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION = ValidationExceptionType.AddMember("INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_INCOMPATIBLE_XML_ENCODING = ValidationExceptionType.AddMember("INCOMPATIBLE_XML_ENCODING", smithyprelude.Unit)
-
-	ValidationExceptionType_CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE = ValidationExceptionType.AddMember("CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE", smithyprelude.Unit)
-
-	ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING = ValidationExceptionType.AddMember("ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING", smithyprelude.Unit)
-
-	ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION = ValidationExceptionType.AddMember("ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION = ValidationExceptionType.AddMember("ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_TS_CONTAINER_TYPE_WITH_MSS_MANIFEST = ValidationExceptionType.AddMember("TS_CONTAINER_TYPE_WITH_MSS_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST = ValidationExceptionType.AddMember("CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST = ValidationExceptionType.AddMember("ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST = ValidationExceptionType.AddMember("ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST = ValidationExceptionType.AddMember("ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_SCTE = ValidationExceptionType.AddMember("ISM_CONTAINER_TYPE_WITH_SCTE", smithyprelude.Unit)
-
-	ValidationExceptionType_ISM_CONTAINER_WITH_KEY_ROTATION = ValidationExceptionType.AddMember("ISM_CONTAINER_WITH_KEY_ROTATION", smithyprelude.Unit)
-
-	ValidationExceptionType_BATCH_GET_SECRET_VALUE_DENIED = ValidationExceptionType.AddMember("BATCH_GET_SECRET_VALUE_DENIED", smithyprelude.Unit)
-
-	ValidationExceptionType_GET_SECRET_VALUE_DENIED = ValidationExceptionType.AddMember("GET_SECRET_VALUE_DENIED", smithyprelude.Unit)
-
-	ValidationExceptionType_DESCRIBE_SECRET_DENIED = ValidationExceptionType.AddMember("DESCRIBE_SECRET_DENIED", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_SECRET_FORMAT = ValidationExceptionType.AddMember("INVALID_SECRET_FORMAT", smithyprelude.Unit)
-
-	ValidationExceptionType_SECRET_IS_NOT_ONE_KEY_VALUE_PAIR = ValidationExceptionType.AddMember("SECRET_IS_NOT_ONE_KEY_VALUE_PAIR", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_SECRET_KEY = ValidationExceptionType.AddMember("INVALID_SECRET_KEY", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_SECRET_VALUE = ValidationExceptionType.AddMember("INVALID_SECRET_VALUE", smithyprelude.Unit)
-
-	ValidationExceptionType_SECRET_ARN_RESOURCE_NOT_FOUND = ValidationExceptionType.AddMember("SECRET_ARN_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ValidationExceptionType_DECRYPT_SECRET_FAILED = ValidationExceptionType.AddMember("DECRYPT_SECRET_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionType_TOO_MANY_SECRETS = ValidationExceptionType.AddMember("TOO_MANY_SECRETS", smithyprelude.Unit)
-
-	ValidationExceptionType_DUPLICATED_SECRET = ValidationExceptionType.AddMember("DUPLICATED_SECRET", smithyprelude.Unit)
-
-	ValidationExceptionType_MALFORMED_SECRET_ARN = ValidationExceptionType.AddMember("MALFORMED_SECRET_ARN", smithyprelude.Unit)
-
-	ValidationExceptionType_SECRET_FROM_DIFFERENT_ACCOUNT = ValidationExceptionType.AddMember("SECRET_FROM_DIFFERENT_ACCOUNT", smithyprelude.Unit)
-
-	ValidationExceptionType_SECRET_FROM_DIFFERENT_REGION = ValidationExceptionType.AddMember("SECRET_FROM_DIFFERENT_REGION", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_SECRET = ValidationExceptionType.AddMember("INVALID_SECRET", smithyprelude.Unit)
-
-	ValidationExceptionType_RESOURCE_NOT_IN_SAME_REGION = ValidationExceptionType.AddMember("RESOURCE_NOT_IN_SAME_REGION", smithyprelude.Unit)
-
-	ValidationExceptionType_CERTIFICATE_RESOURCE_NOT_FOUND = ValidationExceptionType.AddMember("CERTIFICATE_RESOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ValidationExceptionType_CERTIFICATE_ACCESS_DENIED = ValidationExceptionType.AddMember("CERTIFICATE_ACCESS_DENIED", smithyprelude.Unit)
-
-	ValidationExceptionType_DESCRIBE_CERTIFICATE_FAILED = ValidationExceptionType.AddMember("DESCRIBE_CERTIFICATE_FAILED", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_CERTIFICATE_STATUS = ValidationExceptionType.AddMember("INVALID_CERTIFICATE_STATUS", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_CERTIFICATE_KEY_ALGORITHM = ValidationExceptionType.AddMember("INVALID_CERTIFICATE_KEY_ALGORITHM", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_CERTIFICATE_SIGNATURE_ALGORITHM = ValidationExceptionType.AddMember("INVALID_CERTIFICATE_SIGNATURE_ALGORITHM", smithyprelude.Unit)
-
-	ValidationExceptionType_MISSING_CERTIFICATE_DOMAIN_NAME = ValidationExceptionType.AddMember("MISSING_CERTIFICATE_DOMAIN_NAME", smithyprelude.Unit)
-
-	ValidationExceptionType_INVALID_ARN = ValidationExceptionType.AddMember("INVALID_ARN", smithyprelude.Unit)
-
-	ValidationExceptionType_SCTE_IN_MANIFESTS_INVALID_CONFIGURATION = ValidationExceptionType.AddMember("SCTE_IN_MANIFESTS_INVALID_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_CUSTOM_AD_TYPES_INVALID_CONFIGURATION = ValidationExceptionType.AddMember("CUSTOM_AD_TYPES_INVALID_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE = ValidationExceptionType.AddMember("ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE", smithyprelude.Unit)
-
-	ValidationExceptionType_ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE = ValidationExceptionType.AddMember("ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE", smithyprelude.Unit)
-
-	ValidationExceptionType_OUTPUT_TIMESTAMP_MODE_IMMUTABLE = ValidationExceptionType.AddMember("OUTPUT_TIMESTAMP_MODE_IMMUTABLE", smithyprelude.Unit)
-
-	ValidationExceptionType_NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION = ValidationExceptionType.AddMember("NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE = ValidationExceptionType.AddMember("ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE", smithyprelude.Unit)
-
-	ValidationExceptionType_STREAM_NAME_OUTPUT_MODE_IMMUTABLE = ValidationExceptionType.AddMember("STREAM_NAME_OUTPUT_MODE_IMMUTABLE", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_CONFIGURATION_REQUIRED = ValidationExceptionType.AddMember("MULTIVIEW_CONFIGURATION_REQUIRED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_CONFIGURATION_NOT_ALLOWED = ValidationExceptionType.AddMember("MULTIVIEW_CONFIGURATION_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_SOURCE_NOT_FOUND = ValidationExceptionType.AddMember("MULTIVIEW_SOURCE_NOT_FOUND", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_SOURCE_INVALID_INPUT_TYPE = ValidationExceptionType.AddMember("MULTIVIEW_SOURCE_INVALID_INPUT_TYPE", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED = ValidationExceptionType.AddMember("MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_START_TAG = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_START_TAG", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_RESET_NOT_ALLOWED = ValidationExceptionType.AddMember("MULTIVIEW_RESET_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_DUPLICATE_SOURCE = ValidationExceptionType.AddMember("MULTIVIEW_DUPLICATE_SOURCE", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_DUPLICATE_LAYOUT = ValidationExceptionType.AddMember("MULTIVIEW_DUPLICATE_LAYOUT", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED = ValidationExceptionType.AddMember("MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED = ValidationExceptionType.AddMember("MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INVALID_TIME_DELAY_SECONDS = ValidationExceptionType.AddMember("MULTIVIEW_INVALID_TIME_DELAY_SECONDS", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_MANIFEST_WINDOW_TOO_LONG = ValidationExceptionType.AddMember("MULTIVIEW_MANIFEST_WINDOW_TOO_LONG", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION = ValidationExceptionType.AddMember("MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_SOURCE_NON_EPOCH_LOCKED = ValidationExceptionType.AddMember("MULTIVIEW_SOURCE_NON_EPOCH_LOCKED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER = ValidationExceptionType.AddMember("MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER", smithyprelude.Unit)
-
-	ValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION = ValidationExceptionType.AddMember("CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION", smithyprelude.Unit)
-
-	ValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1 = ValidationExceptionType.AddMember("CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED = ValidationExceptionType.AddMember("MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE = ValidationExceptionType.AddMember("MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE = ValidationExceptionType.AddMember("MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH = ValidationExceptionType.AddMember("MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED = ValidationExceptionType.AddMember("MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED", smithyprelude.Unit)
-
-	ValidationExceptionType_MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED = ValidationExceptionType.AddMember("MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED", smithyprelude.Unit)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_ValidationExceptionType = ValidationException.AddMember("ValidationExceptionType", ValidationExceptionType)
-
-	CancelHarvestJobRequest_ChannelGroupName = CancelHarvestJobRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CancelHarvestJobRequest_ChannelName = CancelHarvestJobRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CancelHarvestJobRequest_OriginEndpointName = CancelHarvestJobRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CancelHarvestJobRequest_HarvestJobName = CancelHarvestJobRequest.AddMember("HarvestJobName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CancelHarvestJobRequest_ETag = CancelHarvestJobRequest.AddMember("ETag", _EntityTag, &smithytraits.HTTPHeader{Name: "x-amzn-update-if-match"})
-
-	CreateChannelGroupRequest_ChannelGroupName = CreateChannelGroupRequest.AddMember("ChannelGroupName", _ResourceName)
-
-	CreateChannelGroupRequest_ClientToken = CreateChannelGroupRequest.AddMember("ClientToken", _IdempotencyToken, &smithytraits.HTTPHeader{Name: "x-amzn-client-token"})
-
-	CreateChannelGroupRequest_Description = CreateChannelGroupRequest.AddMember("Description", _ResourceDescription)
-
-	CreateChannelGroupRequest_Tags = CreateChannelGroupRequest.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	CreateChannelGroupResponse_ChannelGroupName = CreateChannelGroupResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	CreateChannelGroupResponse_Arn = CreateChannelGroupResponse.AddMember("Arn", smithyprelude.String)
-
-	CreateChannelGroupResponse_EgressDomain = CreateChannelGroupResponse.AddMember("EgressDomain", smithyprelude.String)
-
-	CreateChannelGroupResponse_CreatedAt = CreateChannelGroupResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	CreateChannelGroupResponse_ModifiedAt = CreateChannelGroupResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	CreateChannelGroupResponse_ETag = CreateChannelGroupResponse.AddMember("ETag", _EntityTag)
-
-	CreateChannelGroupResponse_Description = CreateChannelGroupResponse.AddMember("Description", _ResourceDescription)
-
-	CreateChannelGroupResponse_Tags = CreateChannelGroupResponse.AddMember("Tags", _TagMap)
-
-	CreateChannelRequest_ChannelGroupName = CreateChannelRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateChannelRequest_ChannelName = CreateChannelRequest.AddMember("ChannelName", _ResourceName)
-
-	CreateChannelRequest_ClientToken = CreateChannelRequest.AddMember("ClientToken", _IdempotencyToken, &smithytraits.HTTPHeader{Name: "x-amzn-client-token"})
-
-	CreateChannelRequest_InputType = CreateChannelRequest.AddMember("InputType", InputType)
-
-	CreateChannelRequest_Description = CreateChannelRequest.AddMember("Description", _ResourceDescription)
-
-	CreateChannelRequest_InputSwitchConfiguration = CreateChannelRequest.AddMember("InputSwitchConfiguration", InputSwitchConfiguration)
-
-	CreateChannelRequest_OutputHeaderConfiguration = CreateChannelRequest.AddMember("OutputHeaderConfiguration", OutputHeaderConfiguration)
-
-	CreateChannelRequest_MultiviewConfiguration = CreateChannelRequest.AddMember("MultiviewConfiguration", MultiviewConfiguration)
-
-	CreateChannelRequest_OutputLockingMode = CreateChannelRequest.AddMember("OutputLockingMode", OutputLockingMode)
-
-	CreateChannelRequest_Tags = CreateChannelRequest.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	CreateChannelResponse_MultiviewConfiguration = CreateChannelResponse.AddMember("MultiviewConfiguration", MultiviewConfiguration)
-
-	CreateChannelResponse_AttachedMultiviewChannels = CreateChannelResponse.AddMember("AttachedMultiviewChannels", _AttachedMultiviewChannelList)
-
-	CreateChannelResponse_Arn = CreateChannelResponse.AddMember("Arn", smithyprelude.String)
-
-	CreateChannelResponse_ChannelName = CreateChannelResponse.AddMember("ChannelName", smithyprelude.String)
-
-	CreateChannelResponse_ChannelGroupName = CreateChannelResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	CreateChannelResponse_CreatedAt = CreateChannelResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	CreateChannelResponse_ModifiedAt = CreateChannelResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	CreateChannelResponse_Description = CreateChannelResponse.AddMember("Description", _ResourceDescription)
-
-	CreateChannelResponse_IngestEndpoints = CreateChannelResponse.AddMember("IngestEndpoints", _IngestEndpointList)
-
-	CreateChannelResponse_InputType = CreateChannelResponse.AddMember("InputType", InputType)
-
-	CreateChannelResponse_ETag = CreateChannelResponse.AddMember("ETag", _EntityTag)
-
-	CreateChannelResponse_Tags = CreateChannelResponse.AddMember("Tags", _TagMap)
-
-	CreateChannelResponse_InputSwitchConfiguration = CreateChannelResponse.AddMember("InputSwitchConfiguration", InputSwitchConfiguration)
-
-	CreateChannelResponse_OutputHeaderConfiguration = CreateChannelResponse.AddMember("OutputHeaderConfiguration", OutputHeaderConfiguration)
-
-	CreateChannelResponse_OutputLockingMode = CreateChannelResponse.AddMember("OutputLockingMode", OutputLockingMode)
-
-	CreateHarvestJobRequest_ChannelGroupName = CreateHarvestJobRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateHarvestJobRequest_ChannelName = CreateHarvestJobRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateHarvestJobRequest_OriginEndpointName = CreateHarvestJobRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateHarvestJobRequest_Description = CreateHarvestJobRequest.AddMember("Description", _ResourceDescription)
-
-	CreateHarvestJobRequest_HarvestedManifests = CreateHarvestJobRequest.AddMember("HarvestedManifests", HarvestedManifests)
-
-	CreateHarvestJobRequest_ScheduleConfiguration = CreateHarvestJobRequest.AddMember("ScheduleConfiguration", HarvesterScheduleConfiguration)
-
-	CreateHarvestJobRequest_Destination = CreateHarvestJobRequest.AddMember("Destination", Destination)
-
-	CreateHarvestJobRequest_ClientToken = CreateHarvestJobRequest.AddMember("ClientToken", _IdempotencyToken, &smithytraits.HTTPHeader{Name: "x-amzn-client-token"})
-
-	CreateHarvestJobRequest_HarvestJobName = CreateHarvestJobRequest.AddMember("HarvestJobName", _ResourceName)
-
-	CreateHarvestJobRequest_Tags = CreateHarvestJobRequest.AddMember("Tags", _TagMap)
-
-	CreateHarvestJobResponse_ChannelGroupName = CreateHarvestJobResponse.AddMember("ChannelGroupName", _ResourceName)
-
-	CreateHarvestJobResponse_ChannelName = CreateHarvestJobResponse.AddMember("ChannelName", _ResourceName)
-
-	CreateHarvestJobResponse_OriginEndpointName = CreateHarvestJobResponse.AddMember("OriginEndpointName", _ResourceName)
-
-	CreateHarvestJobResponse_Destination = CreateHarvestJobResponse.AddMember("Destination", Destination)
-
-	CreateHarvestJobResponse_HarvestJobName = CreateHarvestJobResponse.AddMember("HarvestJobName", _ResourceName)
-
-	CreateHarvestJobResponse_HarvestedManifests = CreateHarvestJobResponse.AddMember("HarvestedManifests", HarvestedManifests)
-
-	CreateHarvestJobResponse_Description = CreateHarvestJobResponse.AddMember("Description", _ResourceDescription)
-
-	CreateHarvestJobResponse_ScheduleConfiguration = CreateHarvestJobResponse.AddMember("ScheduleConfiguration", HarvesterScheduleConfiguration)
-
-	CreateHarvestJobResponse_Arn = CreateHarvestJobResponse.AddMember("Arn", smithyprelude.String)
-
-	CreateHarvestJobResponse_CreatedAt = CreateHarvestJobResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	CreateHarvestJobResponse_ModifiedAt = CreateHarvestJobResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	CreateHarvestJobResponse_Status = CreateHarvestJobResponse.AddMember("Status", HarvestJobStatus)
-
-	CreateHarvestJobResponse_ErrorMessage = CreateHarvestJobResponse.AddMember("ErrorMessage", smithyprelude.String)
-
-	CreateHarvestJobResponse_ETag = CreateHarvestJobResponse.AddMember("ETag", _EntityTag)
-
-	CreateHarvestJobResponse_Tags = CreateHarvestJobResponse.AddMember("Tags", _TagMap)
-
-	CreateOriginEndpointRequest_ChannelGroupName = CreateOriginEndpointRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateOriginEndpointRequest_ChannelName = CreateOriginEndpointRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	CreateOriginEndpointRequest_OriginEndpointName = CreateOriginEndpointRequest.AddMember("OriginEndpointName", _ResourceName)
-
-	CreateOriginEndpointRequest_ContainerType = CreateOriginEndpointRequest.AddMember("ContainerType", ContainerType)
-
-	CreateOriginEndpointRequest_Segment = CreateOriginEndpointRequest.AddMember("Segment", Segment)
-
-	CreateOriginEndpointRequest_ClientToken = CreateOriginEndpointRequest.AddMember("ClientToken", _IdempotencyToken, &smithytraits.HTTPHeader{Name: "x-amzn-client-token"})
-
-	CreateOriginEndpointRequest_Description = CreateOriginEndpointRequest.AddMember("Description", _ResourceDescription)
-
-	CreateOriginEndpointRequest_StartoverWindowSeconds = CreateOriginEndpointRequest.AddMember("StartoverWindowSeconds", smithyprelude.Integer)
-
-	CreateOriginEndpointRequest_HlsManifests = CreateOriginEndpointRequest.AddMember("HlsManifests", _CreateHlsManifests)
-
-	CreateOriginEndpointRequest_LowLatencyHlsManifests = CreateOriginEndpointRequest.AddMember("LowLatencyHlsManifests", _CreateLowLatencyHlsManifests)
-
-	CreateOriginEndpointRequest_DashManifests = CreateOriginEndpointRequest.AddMember("DashManifests", _CreateDashManifests)
-
-	CreateOriginEndpointRequest_MssManifests = CreateOriginEndpointRequest.AddMember("MssManifests", _CreateMssManifests)
-
-	CreateOriginEndpointRequest_ForceEndpointErrorConfiguration = CreateOriginEndpointRequest.AddMember("ForceEndpointErrorConfiguration", ForceEndpointErrorConfiguration)
-
-	CreateOriginEndpointRequest_UriSeparator = CreateOriginEndpointRequest.AddMember("UriSeparator", UriSeparator)
-
-	CreateOriginEndpointRequest_StreamNameOutputMode = CreateOriginEndpointRequest.AddMember("StreamNameOutputMode", StreamNameOutputMode)
-
-	CreateOriginEndpointRequest_Tags = CreateOriginEndpointRequest.AddMember("Tags", _TagMap)
-
-	CreateOriginEndpointResponse_Arn = CreateOriginEndpointResponse.AddMember("Arn", smithyprelude.String)
-
-	CreateOriginEndpointResponse_ChannelGroupName = CreateOriginEndpointResponse.AddMember("ChannelGroupName", _ResourceName)
-
-	CreateOriginEndpointResponse_ChannelName = CreateOriginEndpointResponse.AddMember("ChannelName", _ResourceName)
-
-	CreateOriginEndpointResponse_OriginEndpointName = CreateOriginEndpointResponse.AddMember("OriginEndpointName", _ResourceName)
-
-	CreateOriginEndpointResponse_ContainerType = CreateOriginEndpointResponse.AddMember("ContainerType", ContainerType)
-
-	CreateOriginEndpointResponse_Segment = CreateOriginEndpointResponse.AddMember("Segment", Segment)
-
-	CreateOriginEndpointResponse_CreatedAt = CreateOriginEndpointResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	CreateOriginEndpointResponse_ModifiedAt = CreateOriginEndpointResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	CreateOriginEndpointResponse_Description = CreateOriginEndpointResponse.AddMember("Description", _ResourceDescription)
-
-	CreateOriginEndpointResponse_StartoverWindowSeconds = CreateOriginEndpointResponse.AddMember("StartoverWindowSeconds", smithyprelude.Integer)
-
-	CreateOriginEndpointResponse_HlsManifests = CreateOriginEndpointResponse.AddMember("HlsManifests", _GetHlsManifests)
-
-	CreateOriginEndpointResponse_LowLatencyHlsManifests = CreateOriginEndpointResponse.AddMember("LowLatencyHlsManifests", _GetLowLatencyHlsManifests)
-
-	CreateOriginEndpointResponse_DashManifests = CreateOriginEndpointResponse.AddMember("DashManifests", _GetDashManifests)
-
-	CreateOriginEndpointResponse_MssManifests = CreateOriginEndpointResponse.AddMember("MssManifests", _GetMssManifests)
-
-	CreateOriginEndpointResponse_ForceEndpointErrorConfiguration = CreateOriginEndpointResponse.AddMember("ForceEndpointErrorConfiguration", ForceEndpointErrorConfiguration)
-
-	CreateOriginEndpointResponse_UriSeparator = CreateOriginEndpointResponse.AddMember("UriSeparator", UriSeparator)
-
-	CreateOriginEndpointResponse_StreamNameOutputMode = CreateOriginEndpointResponse.AddMember("StreamNameOutputMode", StreamNameOutputMode)
-
-	CreateOriginEndpointResponse_ETag = CreateOriginEndpointResponse.AddMember("ETag", _EntityTag)
-
-	CreateOriginEndpointResponse_Tags = CreateOriginEndpointResponse.AddMember("Tags", _TagMap)
-
-	DeleteChannelGroupRequest_ChannelGroupName = DeleteChannelGroupRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteChannelRequest_ChannelGroupName = DeleteChannelRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteChannelRequest_ChannelName = DeleteChannelRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteChannelPolicyRequest_ChannelGroupName = DeleteChannelPolicyRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteChannelPolicyRequest_ChannelName = DeleteChannelPolicyRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteOriginEndpointRequest_ChannelGroupName = DeleteOriginEndpointRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteOriginEndpointRequest_ChannelName = DeleteOriginEndpointRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteOriginEndpointRequest_OriginEndpointName = DeleteOriginEndpointRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteOriginEndpointPolicyRequest_ChannelGroupName = DeleteOriginEndpointPolicyRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteOriginEndpointPolicyRequest_ChannelName = DeleteOriginEndpointPolicyRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	DeleteOriginEndpointPolicyRequest_OriginEndpointName = DeleteOriginEndpointPolicyRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetChannelGroupRequest_ChannelGroupName = GetChannelGroupRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetChannelGroupResponse_ChannelGroupName = GetChannelGroupResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	GetChannelGroupResponse_Arn = GetChannelGroupResponse.AddMember("Arn", smithyprelude.String)
-
-	GetChannelGroupResponse_EgressDomain = GetChannelGroupResponse.AddMember("EgressDomain", smithyprelude.String)
-
-	GetChannelGroupResponse_CreatedAt = GetChannelGroupResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	GetChannelGroupResponse_ModifiedAt = GetChannelGroupResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	GetChannelGroupResponse_Description = GetChannelGroupResponse.AddMember("Description", _ResourceDescription)
-
-	GetChannelGroupResponse_ETag = GetChannelGroupResponse.AddMember("ETag", _EntityTag)
-
-	GetChannelGroupResponse_Tags = GetChannelGroupResponse.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	GetChannelRequest_ChannelGroupName = GetChannelRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetChannelRequest_ChannelName = GetChannelRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetChannelResponse_MultiviewConfiguration = GetChannelResponse.AddMember("MultiviewConfiguration", MultiviewConfiguration)
-
-	GetChannelResponse_AttachedMultiviewChannels = GetChannelResponse.AddMember("AttachedMultiviewChannels", _AttachedMultiviewChannelList)
-
-	GetChannelResponse_Arn = GetChannelResponse.AddMember("Arn", smithyprelude.String)
-
-	GetChannelResponse_ChannelName = GetChannelResponse.AddMember("ChannelName", smithyprelude.String)
-
-	GetChannelResponse_ChannelGroupName = GetChannelResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	GetChannelResponse_CreatedAt = GetChannelResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	GetChannelResponse_ModifiedAt = GetChannelResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	GetChannelResponse_ResetAt = GetChannelResponse.AddMember("ResetAt", smithyprelude.Timestamp)
-
-	GetChannelResponse_Description = GetChannelResponse.AddMember("Description", _ResourceDescription)
-
-	GetChannelResponse_IngestEndpoints = GetChannelResponse.AddMember("IngestEndpoints", _IngestEndpointList)
-
-	GetChannelResponse_InputType = GetChannelResponse.AddMember("InputType", InputType)
-
-	GetChannelResponse_ETag = GetChannelResponse.AddMember("ETag", _EntityTag)
-
-	GetChannelResponse_Tags = GetChannelResponse.AddMember("Tags", _TagMap)
-
-	GetChannelResponse_InputSwitchConfiguration = GetChannelResponse.AddMember("InputSwitchConfiguration", InputSwitchConfiguration)
-
-	GetChannelResponse_OutputHeaderConfiguration = GetChannelResponse.AddMember("OutputHeaderConfiguration", OutputHeaderConfiguration)
-
-	GetChannelResponse_OutputLockingMode = GetChannelResponse.AddMember("OutputLockingMode", OutputLockingMode)
-
-	GetChannelPolicyRequest_ChannelGroupName = GetChannelPolicyRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetChannelPolicyRequest_ChannelName = GetChannelPolicyRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetChannelPolicyResponse_ChannelGroupName = GetChannelPolicyResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	GetChannelPolicyResponse_ChannelName = GetChannelPolicyResponse.AddMember("ChannelName", smithyprelude.String)
-
-	GetChannelPolicyResponse_Policy = GetChannelPolicyResponse.AddMember("Policy", _PolicyText)
-
-	GetHarvestJobRequest_ChannelGroupName = GetHarvestJobRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetHarvestJobRequest_ChannelName = GetHarvestJobRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetHarvestJobRequest_OriginEndpointName = GetHarvestJobRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetHarvestJobRequest_HarvestJobName = GetHarvestJobRequest.AddMember("HarvestJobName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetHarvestJobResponse_ChannelGroupName = GetHarvestJobResponse.AddMember("ChannelGroupName", _ResourceName)
-
-	GetHarvestJobResponse_ChannelName = GetHarvestJobResponse.AddMember("ChannelName", _ResourceName)
-
-	GetHarvestJobResponse_OriginEndpointName = GetHarvestJobResponse.AddMember("OriginEndpointName", _ResourceName)
-
-	GetHarvestJobResponse_Destination = GetHarvestJobResponse.AddMember("Destination", Destination)
-
-	GetHarvestJobResponse_HarvestJobName = GetHarvestJobResponse.AddMember("HarvestJobName", _ResourceName)
-
-	GetHarvestJobResponse_HarvestedManifests = GetHarvestJobResponse.AddMember("HarvestedManifests", HarvestedManifests)
-
-	GetHarvestJobResponse_Description = GetHarvestJobResponse.AddMember("Description", _ResourceDescription)
-
-	GetHarvestJobResponse_ScheduleConfiguration = GetHarvestJobResponse.AddMember("ScheduleConfiguration", HarvesterScheduleConfiguration)
-
-	GetHarvestJobResponse_Arn = GetHarvestJobResponse.AddMember("Arn", smithyprelude.String)
-
-	GetHarvestJobResponse_CreatedAt = GetHarvestJobResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	GetHarvestJobResponse_ModifiedAt = GetHarvestJobResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	GetHarvestJobResponse_Status = GetHarvestJobResponse.AddMember("Status", HarvestJobStatus)
-
-	GetHarvestJobResponse_ErrorMessage = GetHarvestJobResponse.AddMember("ErrorMessage", smithyprelude.String)
-
-	GetHarvestJobResponse_ETag = GetHarvestJobResponse.AddMember("ETag", _EntityTag)
-
-	GetHarvestJobResponse_Tags = GetHarvestJobResponse.AddMember("Tags", _TagMap)
-
-	GetOriginEndpointRequest_ChannelGroupName = GetOriginEndpointRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetOriginEndpointRequest_ChannelName = GetOriginEndpointRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetOriginEndpointRequest_OriginEndpointName = GetOriginEndpointRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetOriginEndpointResponse_Arn = GetOriginEndpointResponse.AddMember("Arn", smithyprelude.String)
-
-	GetOriginEndpointResponse_ChannelGroupName = GetOriginEndpointResponse.AddMember("ChannelGroupName", _ResourceName)
-
-	GetOriginEndpointResponse_ChannelName = GetOriginEndpointResponse.AddMember("ChannelName", _ResourceName)
-
-	GetOriginEndpointResponse_OriginEndpointName = GetOriginEndpointResponse.AddMember("OriginEndpointName", _ResourceName)
-
-	GetOriginEndpointResponse_ContainerType = GetOriginEndpointResponse.AddMember("ContainerType", ContainerType)
-
-	GetOriginEndpointResponse_Segment = GetOriginEndpointResponse.AddMember("Segment", Segment)
-
-	GetOriginEndpointResponse_CreatedAt = GetOriginEndpointResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	GetOriginEndpointResponse_ModifiedAt = GetOriginEndpointResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	GetOriginEndpointResponse_ResetAt = GetOriginEndpointResponse.AddMember("ResetAt", smithyprelude.Timestamp)
-
-	GetOriginEndpointResponse_Description = GetOriginEndpointResponse.AddMember("Description", _ResourceDescription)
-
-	GetOriginEndpointResponse_StartoverWindowSeconds = GetOriginEndpointResponse.AddMember("StartoverWindowSeconds", smithyprelude.Integer)
-
-	GetOriginEndpointResponse_HlsManifests = GetOriginEndpointResponse.AddMember("HlsManifests", _GetHlsManifests)
-
-	GetOriginEndpointResponse_LowLatencyHlsManifests = GetOriginEndpointResponse.AddMember("LowLatencyHlsManifests", _GetLowLatencyHlsManifests)
-
-	GetOriginEndpointResponse_DashManifests = GetOriginEndpointResponse.AddMember("DashManifests", _GetDashManifests)
-
-	GetOriginEndpointResponse_MssManifests = GetOriginEndpointResponse.AddMember("MssManifests", _GetMssManifests)
-
-	GetOriginEndpointResponse_ForceEndpointErrorConfiguration = GetOriginEndpointResponse.AddMember("ForceEndpointErrorConfiguration", ForceEndpointErrorConfiguration)
-
-	GetOriginEndpointResponse_UriSeparator = GetOriginEndpointResponse.AddMember("UriSeparator", UriSeparator)
-
-	GetOriginEndpointResponse_StreamNameOutputMode = GetOriginEndpointResponse.AddMember("StreamNameOutputMode", StreamNameOutputMode)
-
-	GetOriginEndpointResponse_ETag = GetOriginEndpointResponse.AddMember("ETag", _EntityTag)
-
-	GetOriginEndpointResponse_Tags = GetOriginEndpointResponse.AddMember("Tags", _TagMap)
-
-	GetOriginEndpointPolicyRequest_ChannelGroupName = GetOriginEndpointPolicyRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetOriginEndpointPolicyRequest_ChannelName = GetOriginEndpointPolicyRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetOriginEndpointPolicyRequest_OriginEndpointName = GetOriginEndpointPolicyRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	GetOriginEndpointPolicyResponse_ChannelGroupName = GetOriginEndpointPolicyResponse.AddMember("ChannelGroupName", _ResourceName)
-
-	GetOriginEndpointPolicyResponse_ChannelName = GetOriginEndpointPolicyResponse.AddMember("ChannelName", _ResourceName)
-
-	GetOriginEndpointPolicyResponse_OriginEndpointName = GetOriginEndpointPolicyResponse.AddMember("OriginEndpointName", _ResourceName)
-
-	GetOriginEndpointPolicyResponse_Policy = GetOriginEndpointPolicyResponse.AddMember("Policy", _PolicyText)
-
-	GetOriginEndpointPolicyResponse_CdnAuthConfiguration = GetOriginEndpointPolicyResponse.AddMember("CdnAuthConfiguration", CdnAuthConfiguration)
-
-	ListChannelGroupsRequest_MaxResults = ListChannelGroupsRequest.AddMember("MaxResults", _ListResourceMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelGroupsRequest_NextToken = ListChannelGroupsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelGroupsResponse_Items = ListChannelGroupsResponse.AddMember("Items", _ChannelGroupsList)
-
-	ListChannelGroupsResponse_NextToken = ListChannelGroupsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListChannelsRequest_ChannelGroupName = ListChannelsRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListChannelsRequest_MaxResults = ListChannelsRequest.AddMember("MaxResults", _ListResourceMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListChannelsRequest_NextToken = ListChannelsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListChannelsResponse_Items = ListChannelsResponse.AddMember("Items", _ChannelList)
-
-	ListChannelsResponse_NextToken = ListChannelsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListHarvestJobsRequest_ChannelGroupName = ListHarvestJobsRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListHarvestJobsRequest_ChannelName = ListHarvestJobsRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPQuery{Name: "channelName"})
-
-	ListHarvestJobsRequest_OriginEndpointName = ListHarvestJobsRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPQuery{Name: "originEndpointName"})
-
-	ListHarvestJobsRequest_Status = ListHarvestJobsRequest.AddMember("Status", HarvestJobStatus, &smithytraits.HTTPQuery{Name: "includeStatus"})
-
-	ListHarvestJobsRequest_MaxResults = ListHarvestJobsRequest.AddMember("MaxResults", _ListResourceMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListHarvestJobsRequest_NextToken = ListHarvestJobsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListHarvestJobsResponse_Items = ListHarvestJobsResponse.AddMember("Items", _HarvestJobsList)
-
-	ListHarvestJobsResponse_NextToken = ListHarvestJobsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListOriginEndpointsRequest_ChannelGroupName = ListOriginEndpointsRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListOriginEndpointsRequest_ChannelName = ListOriginEndpointsRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ListOriginEndpointsRequest_MaxResults = ListOriginEndpointsRequest.AddMember("MaxResults", _ListResourceMaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListOriginEndpointsRequest_NextToken = ListOriginEndpointsRequest.AddMember("NextToken", smithyprelude.String, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListOriginEndpointsResponse_Items = ListOriginEndpointsResponse.AddMember("Items", _OriginEndpointsList)
-
-	ListOriginEndpointsResponse_NextToken = ListOriginEndpointsResponse.AddMember("NextToken", smithyprelude.String)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TagArn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	PutChannelPolicyRequest_ChannelGroupName = PutChannelPolicyRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	PutChannelPolicyRequest_ChannelName = PutChannelPolicyRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	PutChannelPolicyRequest_Policy = PutChannelPolicyRequest.AddMember("Policy", _PolicyText)
-
-	PutOriginEndpointPolicyRequest_ChannelGroupName = PutOriginEndpointPolicyRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	PutOriginEndpointPolicyRequest_ChannelName = PutOriginEndpointPolicyRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	PutOriginEndpointPolicyRequest_OriginEndpointName = PutOriginEndpointPolicyRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	PutOriginEndpointPolicyRequest_Policy = PutOriginEndpointPolicyRequest.AddMember("Policy", _PolicyText)
-
-	PutOriginEndpointPolicyRequest_CdnAuthConfiguration = PutOriginEndpointPolicyRequest.AddMember("CdnAuthConfiguration", CdnAuthConfiguration)
-
-	ResetChannelStateRequest_ChannelGroupName = ResetChannelStateRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ResetChannelStateRequest_ChannelName = ResetChannelStateRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ResetChannelStateResponse_ChannelGroupName = ResetChannelStateResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	ResetChannelStateResponse_ChannelName = ResetChannelStateResponse.AddMember("ChannelName", smithyprelude.String)
-
-	ResetChannelStateResponse_Arn = ResetChannelStateResponse.AddMember("Arn", smithyprelude.String)
-
-	ResetChannelStateResponse_ResetAt = ResetChannelStateResponse.AddMember("ResetAt", smithyprelude.Timestamp)
-
-	ResetOriginEndpointStateRequest_ChannelGroupName = ResetOriginEndpointStateRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ResetOriginEndpointStateRequest_ChannelName = ResetOriginEndpointStateRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ResetOriginEndpointStateRequest_OriginEndpointName = ResetOriginEndpointStateRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	ResetOriginEndpointStateResponse_ChannelGroupName = ResetOriginEndpointStateResponse.AddMember("ChannelGroupName", _ResourceName)
-
-	ResetOriginEndpointStateResponse_ChannelName = ResetOriginEndpointStateResponse.AddMember("ChannelName", _ResourceName)
-
-	ResetOriginEndpointStateResponse_OriginEndpointName = ResetOriginEndpointStateResponse.AddMember("OriginEndpointName", _ResourceName)
-
-	ResetOriginEndpointStateResponse_Arn = ResetOriginEndpointStateResponse.AddMember("Arn", smithyprelude.String)
-
-	ResetOriginEndpointStateResponse_ResetAt = ResetOriginEndpointStateResponse.AddMember("ResetAt", smithyprelude.Timestamp)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TagArn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TagArn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateChannelGroupRequest_ChannelGroupName = UpdateChannelGroupRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateChannelGroupRequest_ETag = UpdateChannelGroupRequest.AddMember("ETag", _EntityTag, &smithytraits.HTTPHeader{Name: "x-amzn-update-if-match"})
-
-	UpdateChannelGroupRequest_Description = UpdateChannelGroupRequest.AddMember("Description", _ResourceDescription)
-
-	UpdateChannelGroupResponse_ChannelGroupName = UpdateChannelGroupResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	UpdateChannelGroupResponse_Arn = UpdateChannelGroupResponse.AddMember("Arn", smithyprelude.String)
-
-	UpdateChannelGroupResponse_EgressDomain = UpdateChannelGroupResponse.AddMember("EgressDomain", smithyprelude.String)
-
-	UpdateChannelGroupResponse_CreatedAt = UpdateChannelGroupResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	UpdateChannelGroupResponse_ModifiedAt = UpdateChannelGroupResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	UpdateChannelGroupResponse_Description = UpdateChannelGroupResponse.AddMember("Description", _ResourceDescription)
-
-	UpdateChannelGroupResponse_ETag = UpdateChannelGroupResponse.AddMember("ETag", _EntityTag)
-
-	UpdateChannelGroupResponse_Tags = UpdateChannelGroupResponse.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateChannelRequest_ChannelGroupName = UpdateChannelRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateChannelRequest_ChannelName = UpdateChannelRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateChannelRequest_ETag = UpdateChannelRequest.AddMember("ETag", _EntityTag, &smithytraits.HTTPHeader{Name: "x-amzn-update-if-match"})
-
-	UpdateChannelRequest_Description = UpdateChannelRequest.AddMember("Description", _ResourceDescription)
-
-	UpdateChannelRequest_InputSwitchConfiguration = UpdateChannelRequest.AddMember("InputSwitchConfiguration", InputSwitchConfiguration)
-
-	UpdateChannelRequest_OutputHeaderConfiguration = UpdateChannelRequest.AddMember("OutputHeaderConfiguration", OutputHeaderConfiguration)
-
-	UpdateChannelRequest_MultiviewConfiguration = UpdateChannelRequest.AddMember("MultiviewConfiguration", MultiviewConfiguration)
-
-	UpdateChannelResponse_MultiviewConfiguration = UpdateChannelResponse.AddMember("MultiviewConfiguration", MultiviewConfiguration)
-
-	UpdateChannelResponse_AttachedMultiviewChannels = UpdateChannelResponse.AddMember("AttachedMultiviewChannels", _AttachedMultiviewChannelList)
-
-	UpdateChannelResponse_Arn = UpdateChannelResponse.AddMember("Arn", smithyprelude.String)
-
-	UpdateChannelResponse_ChannelName = UpdateChannelResponse.AddMember("ChannelName", smithyprelude.String)
-
-	UpdateChannelResponse_ChannelGroupName = UpdateChannelResponse.AddMember("ChannelGroupName", smithyprelude.String)
-
-	UpdateChannelResponse_CreatedAt = UpdateChannelResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	UpdateChannelResponse_ModifiedAt = UpdateChannelResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	UpdateChannelResponse_Description = UpdateChannelResponse.AddMember("Description", _ResourceDescription)
-
-	UpdateChannelResponse_IngestEndpoints = UpdateChannelResponse.AddMember("IngestEndpoints", _IngestEndpointList)
-
-	UpdateChannelResponse_InputType = UpdateChannelResponse.AddMember("InputType", InputType)
-
-	UpdateChannelResponse_ETag = UpdateChannelResponse.AddMember("ETag", _EntityTag)
-
-	UpdateChannelResponse_Tags = UpdateChannelResponse.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateChannelResponse_InputSwitchConfiguration = UpdateChannelResponse.AddMember("InputSwitchConfiguration", InputSwitchConfiguration)
-
-	UpdateChannelResponse_OutputHeaderConfiguration = UpdateChannelResponse.AddMember("OutputHeaderConfiguration", OutputHeaderConfiguration)
-
-	UpdateChannelResponse_OutputLockingMode = UpdateChannelResponse.AddMember("OutputLockingMode", OutputLockingMode)
-
-	UpdateOriginEndpointRequest_ChannelGroupName = UpdateOriginEndpointRequest.AddMember("ChannelGroupName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateOriginEndpointRequest_ChannelName = UpdateOriginEndpointRequest.AddMember("ChannelName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateOriginEndpointRequest_OriginEndpointName = UpdateOriginEndpointRequest.AddMember("OriginEndpointName", _ResourceName, &smithytraits.HTTPLabel{})
-
-	UpdateOriginEndpointRequest_ContainerType = UpdateOriginEndpointRequest.AddMember("ContainerType", ContainerType)
-
-	UpdateOriginEndpointRequest_Segment = UpdateOriginEndpointRequest.AddMember("Segment", Segment)
-
-	UpdateOriginEndpointRequest_Description = UpdateOriginEndpointRequest.AddMember("Description", _ResourceDescription)
-
-	UpdateOriginEndpointRequest_StartoverWindowSeconds = UpdateOriginEndpointRequest.AddMember("StartoverWindowSeconds", smithyprelude.Integer)
-
-	UpdateOriginEndpointRequest_HlsManifests = UpdateOriginEndpointRequest.AddMember("HlsManifests", _CreateHlsManifests)
-
-	UpdateOriginEndpointRequest_LowLatencyHlsManifests = UpdateOriginEndpointRequest.AddMember("LowLatencyHlsManifests", _CreateLowLatencyHlsManifests)
-
-	UpdateOriginEndpointRequest_DashManifests = UpdateOriginEndpointRequest.AddMember("DashManifests", _CreateDashManifests)
-
-	UpdateOriginEndpointRequest_MssManifests = UpdateOriginEndpointRequest.AddMember("MssManifests", _CreateMssManifests)
-
-	UpdateOriginEndpointRequest_ForceEndpointErrorConfiguration = UpdateOriginEndpointRequest.AddMember("ForceEndpointErrorConfiguration", ForceEndpointErrorConfiguration)
-
-	UpdateOriginEndpointRequest_UriSeparator = UpdateOriginEndpointRequest.AddMember("UriSeparator", UriSeparator)
-
-	UpdateOriginEndpointRequest_StreamNameOutputMode = UpdateOriginEndpointRequest.AddMember("StreamNameOutputMode", StreamNameOutputMode)
-
-	UpdateOriginEndpointRequest_ETag = UpdateOriginEndpointRequest.AddMember("ETag", _EntityTag, &smithytraits.HTTPHeader{Name: "x-amzn-update-if-match"})
-
-	UpdateOriginEndpointResponse_Arn = UpdateOriginEndpointResponse.AddMember("Arn", smithyprelude.String)
-
-	UpdateOriginEndpointResponse_ChannelGroupName = UpdateOriginEndpointResponse.AddMember("ChannelGroupName", _ResourceName)
-
-	UpdateOriginEndpointResponse_ChannelName = UpdateOriginEndpointResponse.AddMember("ChannelName", _ResourceName)
-
-	UpdateOriginEndpointResponse_OriginEndpointName = UpdateOriginEndpointResponse.AddMember("OriginEndpointName", _ResourceName)
-
-	UpdateOriginEndpointResponse_ContainerType = UpdateOriginEndpointResponse.AddMember("ContainerType", ContainerType)
-
-	UpdateOriginEndpointResponse_Segment = UpdateOriginEndpointResponse.AddMember("Segment", Segment)
-
-	UpdateOriginEndpointResponse_CreatedAt = UpdateOriginEndpointResponse.AddMember("CreatedAt", smithyprelude.Timestamp)
-
-	UpdateOriginEndpointResponse_ModifiedAt = UpdateOriginEndpointResponse.AddMember("ModifiedAt", smithyprelude.Timestamp)
-
-	UpdateOriginEndpointResponse_Description = UpdateOriginEndpointResponse.AddMember("Description", _ResourceDescription)
-
-	UpdateOriginEndpointResponse_StartoverWindowSeconds = UpdateOriginEndpointResponse.AddMember("StartoverWindowSeconds", smithyprelude.Integer)
-
-	UpdateOriginEndpointResponse_HlsManifests = UpdateOriginEndpointResponse.AddMember("HlsManifests", _GetHlsManifests)
-
-	UpdateOriginEndpointResponse_LowLatencyHlsManifests = UpdateOriginEndpointResponse.AddMember("LowLatencyHlsManifests", _GetLowLatencyHlsManifests)
-
-	UpdateOriginEndpointResponse_MssManifests = UpdateOriginEndpointResponse.AddMember("MssManifests", _GetMssManifests)
-
-	UpdateOriginEndpointResponse_ForceEndpointErrorConfiguration = UpdateOriginEndpointResponse.AddMember("ForceEndpointErrorConfiguration", ForceEndpointErrorConfiguration)
-
-	UpdateOriginEndpointResponse_UriSeparator = UpdateOriginEndpointResponse.AddMember("UriSeparator", UriSeparator)
-
-	UpdateOriginEndpointResponse_StreamNameOutputMode = UpdateOriginEndpointResponse.AddMember("StreamNameOutputMode", StreamNameOutputMode)
-
-	UpdateOriginEndpointResponse_ETag = UpdateOriginEndpointResponse.AddMember("ETag", _EntityTag)
-
-	UpdateOriginEndpointResponse_Tags = UpdateOriginEndpointResponse.AddMember("Tags", _TagMap, &smithytraits.JSONName{Name: "tags"})
-
-	UpdateOriginEndpointResponse_DashManifests = UpdateOriginEndpointResponse.AddMember("DashManifests", _GetDashManifests)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t37 = smithy.TraitSet{Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-update-if-match"}}, DirectMask: 0x80}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "x-amzn-client-token"}}, DirectMask: 0x80}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{&smithytraits.JSONName{Name: "tags"}}, DirectMask: 0x1}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "channelName"}}, DirectMask: 0x10}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "originEndpointName"}}, DirectMask: 0x10}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "includeStatus"}}, DirectMask: 0x10}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAdMarkerDash = smithy.SchemaMembers{List: []*smithy.Schema{&sAdMarkerDash_BINARY, &sAdMarkerDash_XML}}
+var mAdMarkerHls = smithy.SchemaMembers{List: []*smithy.Schema{&sAdMarkerHls_DATERANGE, &sAdMarkerHls_SCTE35_ENHANCED}}
+var m_AttachedMultiviewChannelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_AttachedMultiviewChannelList_member}}
+var mCdnAuthConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCdnAuthConfiguration_CdnIdentifierSecretArns, &sCdnAuthConfiguration_SecretsRoleArn}}
+var m_CdnIdentifierSecretArns = smithy.SchemaMembers{List: []*smithy.Schema{&s_CdnIdentifierSecretArns_member}}
+var mChannelGroupListConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelGroupListConfiguration_ChannelGroupName, &sChannelGroupListConfiguration_Arn, &sChannelGroupListConfiguration_CreatedAt, &sChannelGroupListConfiguration_ModifiedAt, &sChannelGroupListConfiguration_Description}}
+var m_ChannelGroupsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelGroupsList_member}}
+var m_ChannelList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ChannelList_member}}
+var mChannelListConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sChannelListConfiguration_Arn, &sChannelListConfiguration_ChannelName, &sChannelListConfiguration_ChannelGroupName, &sChannelListConfiguration_CreatedAt, &sChannelListConfiguration_ModifiedAt, &sChannelListConfiguration_Description, &sChannelListConfiguration_InputType, &sChannelListConfiguration_OutputLockingMode, &sChannelListConfiguration_MultiviewConfiguration, &sChannelListConfiguration_AttachedMultiviewChannels}, Seed: 3, Slots: []uint16{
+	0, 10, 0, 2, 0, 0, 0, 0, 6, 0, 7, 3, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 1, 0,
+	0, 4, 0, 5, 0, 9, 0, 0,
+}}
+var mCmafEncryptionMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sCmafEncryptionMethod_CENC, &sCmafEncryptionMethod_CBCS}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message, &sConflictException_ConflictExceptionType}}
+var mConflictExceptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictExceptionType_RESOURCE_IN_USE, &sConflictExceptionType_RESOURCE_ALREADY_EXISTS, &sConflictExceptionType_IDEMPOTENT_PARAMETER_MISMATCH, &sConflictExceptionType_CONFLICTING_OPERATION}}
+var mContainerType = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerType_TS, &sContainerType_CMAF, &sContainerType_ISM}}
+var mContentKeyPeriodConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sContentKeyPeriodConfiguration_ContentKeyPeriodTiming}}
+var mContentKeyPeriodTiming = smithy.SchemaMembers{List: []*smithy.Schema{&sContentKeyPeriodTiming_INDEX_ONLY, &sContentKeyPeriodTiming_START_END_ONLY, &sContentKeyPeriodTiming_INDEX_WITH_START_END}}
+var mCreateDashManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateDashManifestConfiguration_ManifestName, &sCreateDashManifestConfiguration_ManifestWindowSeconds, &sCreateDashManifestConfiguration_FilterConfiguration, &sCreateDashManifestConfiguration_MinUpdatePeriodSeconds, &sCreateDashManifestConfiguration_MinBufferTimeSeconds, &sCreateDashManifestConfiguration_SuggestedPresentationDelaySeconds, &sCreateDashManifestConfiguration_SegmentTemplateFormat, &sCreateDashManifestConfiguration_PeriodTriggers, &sCreateDashManifestConfiguration_ScteDash, &sCreateDashManifestConfiguration_DrmSignaling, &sCreateDashManifestConfiguration_UtcTiming, &sCreateDashManifestConfiguration_Profiles, &sCreateDashManifestConfiguration_BaseUrls, &sCreateDashManifestConfiguration_ProgramInformation, &sCreateDashManifestConfiguration_DvbSettings, &sCreateDashManifestConfiguration_Compactness, &sCreateDashManifestConfiguration_AudioTimelinePattern, &sCreateDashManifestConfiguration_SubtitleConfiguration, &sCreateDashManifestConfiguration_UriPathType, &sCreateDashManifestConfiguration_AvailabilityStartTimeConfiguration}, Seed: 2, Slots: []uint16{
+	16, 1, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 0, 7, 0, 0, 0, 0, 0, 0, 15, 8, 14,
+	0, 9, 13, 0, 0, 0, 3, 19, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 12, 0, 0, 0, 20,
+	6, 2, 0, 0, 10, 11, 5, 18, 0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var m_CreateDashManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateDashManifests_member}}
+var mCreateHlsManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHlsManifestConfiguration_ManifestName, &sCreateHlsManifestConfiguration_ChildManifestName, &sCreateHlsManifestConfiguration_ScteHls, &sCreateHlsManifestConfiguration_StartTag, &sCreateHlsManifestConfiguration_ManifestWindowSeconds, &sCreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, &sCreateHlsManifestConfiguration_FilterConfiguration, &sCreateHlsManifestConfiguration_UrlEncodeChildManifest, &sCreateHlsManifestConfiguration_UriPathType}, Seed: 6, Slots: []uint16{
+	2, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0, 0, 0, 4, 3, 0, 8, 7,
+	0, 0, 0, 0, 6, 0, 0, 0,
+}}
+var m_CreateHlsManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateHlsManifests_member}}
+var mCreateLowLatencyHlsManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLowLatencyHlsManifestConfiguration_ManifestName, &sCreateLowLatencyHlsManifestConfiguration_ChildManifestName, &sCreateLowLatencyHlsManifestConfiguration_ScteHls, &sCreateLowLatencyHlsManifestConfiguration_StartTag, &sCreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds, &sCreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, &sCreateLowLatencyHlsManifestConfiguration_FilterConfiguration, &sCreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest, &sCreateLowLatencyHlsManifestConfiguration_UriPathType}, Seed: 6, Slots: []uint16{
+	2, 0, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 1, 5, 0, 0, 0, 0, 0, 4, 3, 0, 8, 7,
+	0, 0, 0, 0, 6, 0, 0, 0,
+}}
+var m_CreateLowLatencyHlsManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateLowLatencyHlsManifests_member}}
+var mCreateMssManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateMssManifestConfiguration_ManifestName, &sCreateMssManifestConfiguration_ManifestWindowSeconds, &sCreateMssManifestConfiguration_FilterConfiguration, &sCreateMssManifestConfiguration_ManifestLayout}}
+var m_CreateMssManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_CreateMssManifests_member}}
+var mCustomAdType = smithy.SchemaMembers{List: []*smithy.Schema{&sCustomAdType_PROGRAM, &sCustomAdType_CHAPTER, &sCustomAdType_UNSCHEDULED_EVENT, &sCustomAdType_ALTERNATE_CONTENT_OPPORTUNITY, &sCustomAdType_NETWORK}}
+var m_CustomAdTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_CustomAdTypeList_member}}
+var mDashAudioTimelinePattern = smithy.SchemaMembers{List: []*smithy.Schema{&sDashAudioTimelinePattern_NONE, &sDashAudioTimelinePattern_PATTERNED}}
+var mDashAvailabilityStartTimeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime}}
+var mDashBaseUrl = smithy.SchemaMembers{List: []*smithy.Schema{&sDashBaseUrl_Url, &sDashBaseUrl_ServiceLocation, &sDashBaseUrl_DvbPriority, &sDashBaseUrl_DvbWeight}}
+var m_DashBaseUrls = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashBaseUrls_member}}
+var mDashCompactness = smithy.SchemaMembers{List: []*smithy.Schema{&sDashCompactness_STANDARD, &sDashCompactness_NONE}}
+var mDashDrmSignaling = smithy.SchemaMembers{List: []*smithy.Schema{&sDashDrmSignaling_INDIVIDUAL, &sDashDrmSignaling_REFERENCED}}
+var m_DashDvbErrorMetrics = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashDvbErrorMetrics_member}}
+var mDashDvbFontDownload = smithy.SchemaMembers{List: []*smithy.Schema{&sDashDvbFontDownload_Url, &sDashDvbFontDownload_MimeType, &sDashDvbFontDownload_FontFamily}}
+var mDashDvbMetricsReporting = smithy.SchemaMembers{List: []*smithy.Schema{&sDashDvbMetricsReporting_ReportingUrl, &sDashDvbMetricsReporting_Probability}}
+var mDashDvbSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sDashDvbSettings_FontDownload, &sDashDvbSettings_ErrorMetrics}}
+var mDashPeriodTrigger = smithy.SchemaMembers{List: []*smithy.Schema{&sDashPeriodTrigger_AVAILS, &sDashPeriodTrigger_DRM_KEY_ROTATION, &sDashPeriodTrigger_SOURCE_CHANGES, &sDashPeriodTrigger_SOURCE_DISRUPTIONS, &sDashPeriodTrigger_NONE}}
+var m_DashPeriodTriggers = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashPeriodTriggers_member}}
+var mDashProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sDashProfile_DVB_DASH}}
+var m_DashProfiles = smithy.SchemaMembers{List: []*smithy.Schema{&s_DashProfiles_member}}
+var mDashProgramInformation = smithy.SchemaMembers{List: []*smithy.Schema{&sDashProgramInformation_Title, &sDashProgramInformation_Source, &sDashProgramInformation_Copyright, &sDashProgramInformation_LanguageCode, &sDashProgramInformation_MoreInformationUrl}}
+var mDashSegmentTemplateFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sDashSegmentTemplateFormat_NUMBER_WITH_TIMELINE}}
+var mDashSubtitleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDashSubtitleConfiguration_TtmlConfiguration}}
+var mDashTtmlConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDashTtmlConfiguration_TtmlProfile}}
+var mDashTtmlProfile = smithy.SchemaMembers{List: []*smithy.Schema{&sDashTtmlProfile_IMSC_1, &sDashTtmlProfile_EBU_TT_D_101}}
+var mDashUtcTiming = smithy.SchemaMembers{List: []*smithy.Schema{&sDashUtcTiming_TimingMode, &sDashUtcTiming_TimingSource}}
+var mDashUtcTimingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDashUtcTimingMode_HTTP_HEAD, &sDashUtcTimingMode_HTTP_ISO, &sDashUtcTimingMode_HTTP_XSDATE, &sDashUtcTimingMode_UTC_DIRECT}}
+var mDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sDestination_S3Destination}}
+var mDrmSystem = smithy.SchemaMembers{List: []*smithy.Schema{&sDrmSystem_CLEAR_KEY_AES_128, &sDrmSystem_FAIRPLAY, &sDrmSystem_PLAYREADY, &sDrmSystem_WIDEVINE, &sDrmSystem_IRDETO}}
+var m_DrmSystems = smithy.SchemaMembers{List: []*smithy.Schema{&s_DrmSystems_member}}
+var mEncryption = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryption_ConstantInitializationVector, &sEncryption_EncryptionMethod, &sEncryption_KeyRotationIntervalSeconds, &sEncryption_CmafExcludeSegmentDrmMetadata, &sEncryption_SpekeKeyProvider}}
+var mEncryptionContractConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionContractConfiguration_PresetSpeke20Audio, &sEncryptionContractConfiguration_PresetSpeke20Video}}
+var mEncryptionMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionMethod_TsEncryptionMethod, &sEncryptionMethod_CmafEncryptionMethod, &sEncryptionMethod_IsmEncryptionMethod}}
+var mEndpointErrorCondition = smithy.SchemaMembers{List: []*smithy.Schema{&sEndpointErrorCondition_STALE_MANIFEST, &sEndpointErrorCondition_INCOMPLETE_MANIFEST, &sEndpointErrorCondition_MISSING_DRM_KEY, &sEndpointErrorCondition_SLATE_INPUT}}
+var m_EndpointErrorConditions = smithy.SchemaMembers{List: []*smithy.Schema{&s_EndpointErrorConditions_member}}
+var mFilterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterConfiguration_ManifestFilter, &sFilterConfiguration_DrmSettings, &sFilterConfiguration_Start, &sFilterConfiguration_End, &sFilterConfiguration_TimeDelaySeconds, &sFilterConfiguration_ClipStartTime, &sFilterConfiguration_Multiview}}
+var mForceEndpointErrorConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sForceEndpointErrorConfiguration_EndpointErrorConditions}}
+var mGetDashManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDashManifestConfiguration_ManifestName, &sGetDashManifestConfiguration_Url, &sGetDashManifestConfiguration_ManifestWindowSeconds, &sGetDashManifestConfiguration_FilterConfiguration, &sGetDashManifestConfiguration_MinUpdatePeriodSeconds, &sGetDashManifestConfiguration_MinBufferTimeSeconds, &sGetDashManifestConfiguration_SuggestedPresentationDelaySeconds, &sGetDashManifestConfiguration_SegmentTemplateFormat, &sGetDashManifestConfiguration_PeriodTriggers, &sGetDashManifestConfiguration_ScteDash, &sGetDashManifestConfiguration_DrmSignaling, &sGetDashManifestConfiguration_UtcTiming, &sGetDashManifestConfiguration_Profiles, &sGetDashManifestConfiguration_BaseUrls, &sGetDashManifestConfiguration_ProgramInformation, &sGetDashManifestConfiguration_DvbSettings, &sGetDashManifestConfiguration_Compactness, &sGetDashManifestConfiguration_AudioTimelinePattern, &sGetDashManifestConfiguration_SubtitleConfiguration, &sGetDashManifestConfiguration_UriPathType, &sGetDashManifestConfiguration_AvailabilityStartTimeConfiguration}, Seed: 2, Slots: []uint16{
+	17, 1, 0, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 16, 9, 15,
+	0, 10, 14, 0, 0, 0, 4, 20, 0, 0, 0, 0, 0, 0, 0, 0, 18, 0, 0, 13, 0, 0, 0, 21,
+	7, 3, 0, 0, 11, 12, 6, 19, 0, 0, 0, 2, 0, 0, 0, 0,
+}}
+var m_GetDashManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetDashManifests_member}}
+var mGetHlsManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHlsManifestConfiguration_ManifestName, &sGetHlsManifestConfiguration_Url, &sGetHlsManifestConfiguration_ChildManifestName, &sGetHlsManifestConfiguration_ManifestWindowSeconds, &sGetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, &sGetHlsManifestConfiguration_ScteHls, &sGetHlsManifestConfiguration_FilterConfiguration, &sGetHlsManifestConfiguration_StartTag, &sGetHlsManifestConfiguration_UrlEncodeChildManifest, &sGetHlsManifestConfiguration_UriPathType}, Seed: 6, Slots: []uint16{
+	3, 0, 2, 10, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0, 8, 6, 0, 9, 7,
+	0, 0, 0, 0, 5, 0, 0, 0,
+}}
+var m_GetHlsManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetHlsManifests_member}}
+var mGetLowLatencyHlsManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLowLatencyHlsManifestConfiguration_ManifestName, &sGetLowLatencyHlsManifestConfiguration_Url, &sGetLowLatencyHlsManifestConfiguration_ChildManifestName, &sGetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds, &sGetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds, &sGetLowLatencyHlsManifestConfiguration_ScteHls, &sGetLowLatencyHlsManifestConfiguration_FilterConfiguration, &sGetLowLatencyHlsManifestConfiguration_StartTag, &sGetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest, &sGetLowLatencyHlsManifestConfiguration_UriPathType}, Seed: 6, Slots: []uint16{
+	3, 0, 2, 10, 0, 0, 0, 0, 0, 0, 0, 0, 1, 4, 0, 0, 0, 0, 0, 8, 6, 0, 9, 7,
+	0, 0, 0, 0, 5, 0, 0, 0,
+}}
+var m_GetLowLatencyHlsManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetLowLatencyHlsManifests_member}}
+var mGetMssManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMssManifestConfiguration_ManifestName, &sGetMssManifestConfiguration_Url, &sGetMssManifestConfiguration_FilterConfiguration, &sGetMssManifestConfiguration_ManifestWindowSeconds, &sGetMssManifestConfiguration_ManifestLayout}}
+var m_GetMssManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_GetMssManifests_member}}
+var mHarvestedDashManifest = smithy.SchemaMembers{List: []*smithy.Schema{&sHarvestedDashManifest_ManifestName}}
+var m_HarvestedDashManifestsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HarvestedDashManifestsList_member}}
+var mHarvestedHlsManifest = smithy.SchemaMembers{List: []*smithy.Schema{&sHarvestedHlsManifest_ManifestName}}
+var m_HarvestedHlsManifestsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HarvestedHlsManifestsList_member}}
+var mHarvestedLowLatencyHlsManifest = smithy.SchemaMembers{List: []*smithy.Schema{&sHarvestedLowLatencyHlsManifest_ManifestName}}
+var m_HarvestedLowLatencyHlsManifestsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HarvestedLowLatencyHlsManifestsList_member}}
+var mHarvestedManifests = smithy.SchemaMembers{List: []*smithy.Schema{&sHarvestedManifests_HlsManifests, &sHarvestedManifests_DashManifests, &sHarvestedManifests_LowLatencyHlsManifests}}
+var mHarvesterScheduleConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sHarvesterScheduleConfiguration_StartTime, &sHarvesterScheduleConfiguration_EndTime}}
+var mHarvestJob = smithy.SchemaMembers{List: []*smithy.Schema{&sHarvestJob_ChannelGroupName, &sHarvestJob_ChannelName, &sHarvestJob_OriginEndpointName, &sHarvestJob_Destination, &sHarvestJob_HarvestJobName, &sHarvestJob_HarvestedManifests, &sHarvestJob_Description, &sHarvestJob_ScheduleConfiguration, &sHarvestJob_Arn, &sHarvestJob_CreatedAt, &sHarvestJob_ModifiedAt, &sHarvestJob_Status, &sHarvestJob_ErrorMessage, &sHarvestJob_ETag}, Seed: 10, Slots: []uint16{
+	3, 0, 0, 12, 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 11, 0, 7, 2, 0, 9, 14, 0, 0, 0,
+	13, 0, 0, 8, 6, 4, 0, 10,
+}}
+var m_HarvestJobsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_HarvestJobsList_member}}
+var mHarvestJobStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sHarvestJobStatus_QUEUED, &sHarvestJobStatus_IN_PROGRESS, &sHarvestJobStatus_CANCELLED, &sHarvestJobStatus_COMPLETED, &sHarvestJobStatus_FAILED}}
+var mIngestEndpoint = smithy.SchemaMembers{List: []*smithy.Schema{&sIngestEndpoint_Id, &sIngestEndpoint_Url}}
+var m_IngestEndpointList = smithy.SchemaMembers{List: []*smithy.Schema{&s_IngestEndpointList_member}}
+var mInputSwitchConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInputSwitchConfiguration_MQCSInputSwitching, &sInputSwitchConfiguration_PreferredInput}}
+var mInputType = smithy.SchemaMembers{List: []*smithy.Schema{&sInputType_HLS, &sInputType_CMAF, &sInputType_MULTIVIEW}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var mIsmEncryptionMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sIsmEncryptionMethod_CENC}}
+var mListDashManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sListDashManifestConfiguration_ManifestName, &sListDashManifestConfiguration_Url}}
+var m_ListDashManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListDashManifests_member}}
+var mListHlsManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sListHlsManifestConfiguration_ManifestName, &sListHlsManifestConfiguration_ChildManifestName, &sListHlsManifestConfiguration_Url}}
+var m_ListHlsManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListHlsManifests_member}}
+var mListLowLatencyHlsManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sListLowLatencyHlsManifestConfiguration_ManifestName, &sListLowLatencyHlsManifestConfiguration_ChildManifestName, &sListLowLatencyHlsManifestConfiguration_Url}}
+var m_ListLowLatencyHlsManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListLowLatencyHlsManifests_member}}
+var mListMssManifestConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sListMssManifestConfiguration_ManifestName, &sListMssManifestConfiguration_Url}}
+var m_ListMssManifests = smithy.SchemaMembers{List: []*smithy.Schema{&s_ListMssManifests_member}}
+var mMssManifestLayout = smithy.SchemaMembers{List: []*smithy.Schema{&sMssManifestLayout_FULL, &sMssManifestLayout_COMPACT}}
+var mMultiviewConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiviewConfiguration_AvailableSources, &sMultiviewConfiguration_AvailableLayouts}}
+var mMultiviewFilterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiviewFilterConfiguration_Layout, &sMultiviewFilterConfiguration_Sources}}
+var m_MultiviewLayoutList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MultiviewLayoutList_member}}
+var mMultiviewLayoutType = smithy.SchemaMembers{List: []*smithy.Schema{&sMultiviewLayoutType_LAYOUT_2EH, &sMultiviewLayoutType_LAYOUT_2PL, &sMultiviewLayoutType_LAYOUT_3EL, &sMultiviewLayoutType_LAYOUT_3PL, &sMultiviewLayoutType_LAYOUT_4E, &sMultiviewLayoutType_LAYOUT_4PL}}
+var m_MultiviewSourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MultiviewSourceList_member}}
+var mOriginEndpointListConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOriginEndpointListConfiguration_Arn, &sOriginEndpointListConfiguration_ChannelGroupName, &sOriginEndpointListConfiguration_ChannelName, &sOriginEndpointListConfiguration_OriginEndpointName, &sOriginEndpointListConfiguration_ContainerType, &sOriginEndpointListConfiguration_Description, &sOriginEndpointListConfiguration_CreatedAt, &sOriginEndpointListConfiguration_ModifiedAt, &sOriginEndpointListConfiguration_HlsManifests, &sOriginEndpointListConfiguration_LowLatencyHlsManifests, &sOriginEndpointListConfiguration_DashManifests, &sOriginEndpointListConfiguration_MssManifests, &sOriginEndpointListConfiguration_ForceEndpointErrorConfiguration, &sOriginEndpointListConfiguration_UriSeparator, &sOriginEndpointListConfiguration_StreamNameOutputMode}, Seed: 85, Slots: []uint16{
+	5, 2, 0, 0, 0, 7, 0, 4, 0, 12, 15, 0, 9, 1, 0, 0, 0, 0, 8, 0, 0, 0, 11, 0,
+	3, 6, 13, 14, 0, 0, 10, 0,
+}}
+var m_OriginEndpointsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_OriginEndpointsList_member}}
+var mOutputHeaderConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputHeaderConfiguration_PublishMQCS}}
+var mOutputLockingMode = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputLockingMode_EPOCH_LOCKED, &sOutputLockingMode_NON_EPOCH_LOCKED}}
+var mOutputTimestampMode = smithy.SchemaMembers{List: []*smithy.Schema{&sOutputTimestampMode_PASSTHROUGH, &sOutputTimestampMode_REBASED_TO_CHANNEL_START}}
+var mPresetSpeke20Audio = smithy.SchemaMembers{List: []*smithy.Schema{&sPresetSpeke20Audio_PRESET_AUDIO_1, &sPresetSpeke20Audio_PRESET_AUDIO_2, &sPresetSpeke20Audio_PRESET_AUDIO_3, &sPresetSpeke20Audio_SHARED, &sPresetSpeke20Audio_UNENCRYPTED}}
+var mPresetSpeke20Video = smithy.SchemaMembers{List: []*smithy.Schema{&sPresetSpeke20Video_PRESET_VIDEO_1, &sPresetSpeke20Video_PRESET_VIDEO_2, &sPresetSpeke20Video_PRESET_VIDEO_3, &sPresetSpeke20Video_PRESET_VIDEO_4, &sPresetSpeke20Video_PRESET_VIDEO_5, &sPresetSpeke20Video_PRESET_VIDEO_6, &sPresetSpeke20Video_PRESET_VIDEO_7, &sPresetSpeke20Video_PRESET_VIDEO_8, &sPresetSpeke20Video_SHARED, &sPresetSpeke20Video_UNENCRYPTED}, Seed: 4, Slots: []uint16{
+	0, 7, 0, 10, 0, 9, 4, 0, 0, 0, 1, 0, 5, 0, 0, 0, 8, 2, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 6, 0, 0, 0, 3,
+}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message, &sResourceNotFoundException_ResourceTypeNotFound}}
+var mResourceTypeNotFound = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceTypeNotFound_CHANNEL_GROUP, &sResourceTypeNotFound_CHANNEL, &sResourceTypeNotFound_ORIGIN_ENDPOINT, &sResourceTypeNotFound_HARVEST_JOB}}
+var mS3DestinationConfig = smithy.SchemaMembers{List: []*smithy.Schema{&sS3DestinationConfig_BucketName, &sS3DestinationConfig_DestinationPath}}
+var mScte = smithy.SchemaMembers{List: []*smithy.Schema{&sScte_ScteFilter, &sScte_ScteInSegments, &sScte_CustomAdTypes}}
+var mScteDash = smithy.SchemaMembers{List: []*smithy.Schema{&sScteDash_AdMarkerDash, &sScteDash_ScteInManifests}}
+var mScteFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sScteFilter_SPLICE_INSERT, &sScteFilter_BREAK, &sScteFilter_PROVIDER_ADVERTISEMENT, &sScteFilter_DISTRIBUTOR_ADVERTISEMENT, &sScteFilter_PROVIDER_PLACEMENT_OPPORTUNITY, &sScteFilter_DISTRIBUTOR_PLACEMENT_OPPORTUNITY, &sScteFilter_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY, &sScteFilter_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY, &sScteFilter_PROGRAM, &sScteFilter_CHAPTER, &sScteFilter_UNSCHEDULED_EVENT, &sScteFilter_ALTERNATE_CONTENT_OPPORTUNITY, &sScteFilter_NETWORK, &sScteFilter_PROVIDER_PROMO, &sScteFilter_DISTRIBUTOR_PROMO, &sScteFilter_PROVIDER_AD_BLOCK, &sScteFilter_DISTRIBUTOR_AD_BLOCK, &sScteFilter_CONTENT_IDENTIFICATION, &sScteFilter_CALL_AD_SERVER}, Seed: 16, Slots: []uint16{
+	2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 10, 5, 0, 0, 11, 0, 8, 0, 13,
+	0, 6, 0, 0, 15, 0, 3, 0, 7, 0, 0, 16, 0, 0, 0, 0, 0, 0, 9, 17, 0, 0, 4, 0,
+	18, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 12, 14,
+}}
+var m_ScteFilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ScteFilterList_member}}
+var mScteHls = smithy.SchemaMembers{List: []*smithy.Schema{&sScteHls_AdMarkerHls, &sScteHls_ScteInManifests}}
+var mScteInManifests = smithy.SchemaMembers{List: []*smithy.Schema{&sScteInManifests_ALL, &sScteInManifests_MATCHES_FILTER}}
+var mScteInSegments = smithy.SchemaMembers{List: []*smithy.Schema{&sScteInSegments_NONE, &sScteInSegments_ALL, &sScteInSegments_MATCHES_FILTER}}
+var mSegment = smithy.SchemaMembers{List: []*smithy.Schema{&sSegment_SegmentDurationSeconds, &sSegment_SegmentName, &sSegment_TsUseAudioRenditionGroup, &sSegment_IncludeIframeOnlyStreams, &sSegment_TsIncludeDvbSubtitles, &sSegment_Scte, &sSegment_Encryption, &sSegment_OutputTimestampMode}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_Message}}
+var mSpekeKeyProvider = smithy.SchemaMembers{List: []*smithy.Schema{&sSpekeKeyProvider_EncryptionContractConfiguration, &sSpekeKeyProvider_ResourceId, &sSpekeKeyProvider_DrmSystems, &sSpekeKeyProvider_RoleArn, &sSpekeKeyProvider_Url, &sSpekeKeyProvider_CertificateArn, &sSpekeKeyProvider_SpekeVersion, &sSpekeKeyProvider_ContentKeyPeriodConfiguration}}
+var mSpekeVersion = smithy.SchemaMembers{List: []*smithy.Schema{&sSpekeVersion_V2_0, &sSpekeVersion_V2_1}}
+var mStartTag = smithy.SchemaMembers{List: []*smithy.Schema{&sStartTag_TimeOffset, &sStartTag_Precise}}
+var mStreamNameOutputMode = smithy.SchemaMembers{List: []*smithy.Schema{&sStreamNameOutputMode_INDEX, &sStreamNameOutputMode_PASSTHROUGH_NAME}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTsEncryptionMethod = smithy.SchemaMembers{List: []*smithy.Schema{&sTsEncryptionMethod_AES_128, &sTsEncryptionMethod_SAMPLE_AES}}
+var mUriPathType = smithy.SchemaMembers{List: []*smithy.Schema{&sUriPathType_LEAF, &sUriPathType_ROOT}}
+var mUriSeparator = smithy.SchemaMembers{List: []*smithy.Schema{&sUriSeparator_UNDERSCORE, &sUriSeparator_HYPHEN}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message, &sValidationException_ValidationExceptionType}}
+var mValidationExceptionType = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionType_CONTAINER_TYPE_IMMUTABLE, &sValidationExceptionType_INVALID_PAGINATION_TOKEN, &sValidationExceptionType_INVALID_PAGINATION_MAX_RESULTS, &sValidationExceptionType_INVALID_POLICY, &sValidationExceptionType_INVALID_ROLE_ARN, &sValidationExceptionType_MANIFEST_NAME_COLLISION, &sValidationExceptionType_ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH, &sValidationExceptionType_CENC_IV_INCOMPATIBLE, &sValidationExceptionType_ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE, &sValidationExceptionType_ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE, &sValidationExceptionType_ENCRYPTION_CONTRACT_UNENCRYPTED, &sValidationExceptionType_ENCRYPTION_CONTRACT_SHARED, &sValidationExceptionType_NUM_MANIFESTS_LOW, &sValidationExceptionType_NUM_MANIFESTS_HIGH, &sValidationExceptionType_MANIFEST_DRM_SYSTEMS_INCOMPATIBLE, &sValidationExceptionType_DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE, &sValidationExceptionType_ROLE_ARN_NOT_ASSUMABLE, &sValidationExceptionType_ROLE_ARN_LENGTH_OUT_OF_RANGE, &sValidationExceptionType_ROLE_ARN_INVALID_FORMAT, &sValidationExceptionType_URL_INVALID, &sValidationExceptionType_URL_SCHEME, &sValidationExceptionType_URL_USER_INFO, &sValidationExceptionType_URL_PORT, &sValidationExceptionType_URL_UNKNOWN_HOST, &sValidationExceptionType_URL_LOCAL_ADDRESS, &sValidationExceptionType_URL_LOOPBACK_ADDRESS, &sValidationExceptionType_URL_LINK_LOCAL_ADDRESS, &sValidationExceptionType_URL_MULTICAST_ADDRESS, &sValidationExceptionType_MEMBER_INVALID, &sValidationExceptionType_MEMBER_MISSING, &sValidationExceptionType_MEMBER_MIN_VALUE, &sValidationExceptionType_MEMBER_MAX_VALUE, &sValidationExceptionType_MEMBER_MIN_LENGTH, &sValidationExceptionType_MEMBER_MAX_LENGTH, &sValidationExceptionType_MEMBER_INVALID_ENUM_VALUE, &sValidationExceptionType_MEMBER_DOES_NOT_MATCH_PATTERN, &sValidationExceptionType_INVALID_MANIFEST_FILTER, &sValidationExceptionType_INVALID_DRM_SETTINGS, &sValidationExceptionType_INVALID_TIME_DELAY_SECONDS, &sValidationExceptionType_END_TIME_EARLIER_THAN_START_TIME, &sValidationExceptionType_TS_CONTAINER_TYPE_WITH_DASH_MANIFEST, &sValidationExceptionType_DIRECT_MODE_WITH_TIMING_SOURCE, &sValidationExceptionType_NONE_MODE_WITH_TIMING_SOURCE, &sValidationExceptionType_TIMING_SOURCE_MISSING, &sValidationExceptionType_UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION, &sValidationExceptionType_PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES, &sValidationExceptionType_DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS, &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION, &sValidationExceptionType_SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY, &sValidationExceptionType_HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION, &sValidationExceptionType_HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT, &sValidationExceptionType_TOO_MANY_IN_PROGRESS_HARVEST_JOBS, &sValidationExceptionType_HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION, &sValidationExceptionType_INVALID_HARVEST_JOB_DURATION, &sValidationExceptionType_HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE, &sValidationExceptionType_HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION, &sValidationExceptionType_HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED, &sValidationExceptionType_CLIP_START_TIME_WITH_START_OR_END, &sValidationExceptionType_START_TAG_TIME_OFFSET_INVALID, &sValidationExceptionType_INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION, &sValidationExceptionType_DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE, &sValidationExceptionType_INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION, &sValidationExceptionType_INCOMPATIBLE_XML_ENCODING, &sValidationExceptionType_CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE, &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING, &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION, &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION, &sValidationExceptionType_TS_CONTAINER_TYPE_WITH_MSS_MANIFEST, &sValidationExceptionType_CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST, &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST, &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST, &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST, &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_SCTE, &sValidationExceptionType_ISM_CONTAINER_WITH_KEY_ROTATION, &sValidationExceptionType_BATCH_GET_SECRET_VALUE_DENIED, &sValidationExceptionType_GET_SECRET_VALUE_DENIED, &sValidationExceptionType_DESCRIBE_SECRET_DENIED, &sValidationExceptionType_INVALID_SECRET_FORMAT, &sValidationExceptionType_SECRET_IS_NOT_ONE_KEY_VALUE_PAIR, &sValidationExceptionType_INVALID_SECRET_KEY, &sValidationExceptionType_INVALID_SECRET_VALUE, &sValidationExceptionType_SECRET_ARN_RESOURCE_NOT_FOUND, &sValidationExceptionType_DECRYPT_SECRET_FAILED, &sValidationExceptionType_TOO_MANY_SECRETS, &sValidationExceptionType_DUPLICATED_SECRET, &sValidationExceptionType_MALFORMED_SECRET_ARN, &sValidationExceptionType_SECRET_FROM_DIFFERENT_ACCOUNT, &sValidationExceptionType_SECRET_FROM_DIFFERENT_REGION, &sValidationExceptionType_INVALID_SECRET, &sValidationExceptionType_RESOURCE_NOT_IN_SAME_REGION, &sValidationExceptionType_CERTIFICATE_RESOURCE_NOT_FOUND, &sValidationExceptionType_CERTIFICATE_ACCESS_DENIED, &sValidationExceptionType_DESCRIBE_CERTIFICATE_FAILED, &sValidationExceptionType_INVALID_CERTIFICATE_STATUS, &sValidationExceptionType_INVALID_CERTIFICATE_KEY_ALGORITHM, &sValidationExceptionType_INVALID_CERTIFICATE_SIGNATURE_ALGORITHM, &sValidationExceptionType_MISSING_CERTIFICATE_DOMAIN_NAME, &sValidationExceptionType_INVALID_ARN, &sValidationExceptionType_SCTE_IN_MANIFESTS_INVALID_CONFIGURATION, &sValidationExceptionType_CUSTOM_AD_TYPES_INVALID_CONFIGURATION, &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE, &sValidationExceptionType_ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE, &sValidationExceptionType_OUTPUT_TIMESTAMP_MODE_IMMUTABLE, &sValidationExceptionType_NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION, &sValidationExceptionType_ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE, &sValidationExceptionType_STREAM_NAME_OUTPUT_MODE_IMMUTABLE, &sValidationExceptionType_MULTIVIEW_CONFIGURATION_REQUIRED, &sValidationExceptionType_MULTIVIEW_CONFIGURATION_NOT_ALLOWED, &sValidationExceptionType_MULTIVIEW_SOURCE_NOT_FOUND, &sValidationExceptionType_MULTIVIEW_SOURCE_INVALID_INPUT_TYPE, &sValidationExceptionType_MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_START_TAG, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB, &sValidationExceptionType_MULTIVIEW_RESET_NOT_ALLOWED, &sValidationExceptionType_MULTIVIEW_DUPLICATE_SOURCE, &sValidationExceptionType_MULTIVIEW_DUPLICATE_LAYOUT, &sValidationExceptionType_MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED, &sValidationExceptionType_MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED, &sValidationExceptionType_MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED, &sValidationExceptionType_MULTIVIEW_INVALID_TIME_DELAY_SECONDS, &sValidationExceptionType_MULTIVIEW_MANIFEST_WINDOW_TOO_LONG, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED, &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION, &sValidationExceptionType_MULTIVIEW_SOURCE_NON_EPOCH_LOCKED, &sValidationExceptionType_MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER, &sValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION, &sValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1, &sValidationExceptionType_MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED, &sValidationExceptionType_MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE, &sValidationExceptionType_MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE, &sValidationExceptionType_MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH, &sValidationExceptionType_MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED, &sValidationExceptionType_MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED}, Seed: 1612, Slots: []uint16{
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 82, 113, 94, 0, 96, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 92, 0, 0, 0, 0, 64, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 69,
+	0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 0, 99, 0, 0, 0, 22, 0, 0, 0, 0, 0, 0, 0, 89,
+	0, 0, 0, 0, 0, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 43, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 48, 23, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 122, 0, 20, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 97, 0, 34, 0, 0, 0, 0, 0, 0, 0, 26, 0, 0, 0, 0, 79, 0, 0, 121, 0, 0,
+	31, 123, 55, 0, 0, 7, 0, 0, 0, 0, 0, 19, 0, 0, 0, 0, 0, 0, 0, 0, 77, 0, 0, 0,
+	0, 0, 0, 131, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 110, 0, 124, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0, 107, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 109, 70, 0, 0, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0,
+	0, 13, 0, 75, 0, 0, 0, 0, 0, 32, 0, 0, 0, 0, 3, 111, 0, 0, 0, 0, 133, 0, 0, 59,
+	0, 0, 0, 120, 0, 83, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 53, 0, 0, 0, 106, 0, 0, 0, 0, 33, 0, 0, 0, 0, 0, 0, 0, 0, 71, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 72, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 0, 0, 0, 117,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 91, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 11, 0, 18, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 51, 0, 0, 0,
+	0, 114, 0, 5, 0, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 0, 0, 116, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	90, 0, 28, 0, 0, 0, 44, 0, 135, 54, 0, 0, 0, 0, 132, 56, 93, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 45, 0, 0, 0, 102, 47, 80, 0, 0, 0, 0, 0, 0, 0, 87, 0, 105, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 74, 0, 0, 0, 0, 0, 0, 36, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 65, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 12,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 57, 0, 0, 0, 63, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 68, 0, 0,
+	0, 0, 0, 115, 0, 0, 0, 0, 39, 0, 0, 0, 0, 58, 60, 0, 52, 0, 0, 0, 50, 0, 0, 0,
+	0, 0, 129, 0, 76, 1, 0, 0, 0, 88, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 126, 0, 0, 0, 0, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 27,
+	0, 37, 0, 0, 0, 0, 0, 0, 0, 0, 108, 41, 0, 0, 0, 0, 40, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 112, 4, 0, 0, 66, 0, 81, 0, 0, 0, 0, 0, 0, 24, 0, 0, 0, 0, 29,
+	0, 0, 0, 49, 98, 0, 0, 138, 0, 0, 78, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 134, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 130, 0, 0, 0, 61, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 0, 0, 0, 0,
+	104, 0, 9, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 125, 67, 0, 46, 0, 0,
+	0, 0, 38, 0, 0, 0, 0, 0, 25, 0, 136, 101, 21, 0, 85, 0, 0, 0, 73, 0, 0, 119, 103, 0,
+	0, 84, 0, 0, 0, 0, 0, 0, 86, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 14, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 35, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 42, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 118, 0, 137, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 62, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95, 0,
+}}
+var mCancelHarvestJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCancelHarvestJobRequest_ChannelGroupName, &sCancelHarvestJobRequest_ChannelName, &sCancelHarvestJobRequest_OriginEndpointName, &sCancelHarvestJobRequest_HarvestJobName, &sCancelHarvestJobRequest_ETag}}
+var mCreateChannelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelGroupRequest_ChannelGroupName, &sCreateChannelGroupRequest_ClientToken, &sCreateChannelGroupRequest_Description, &sCreateChannelGroupRequest_Tags}}
+var mCreateChannelGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelGroupResponse_ChannelGroupName, &sCreateChannelGroupResponse_Arn, &sCreateChannelGroupResponse_EgressDomain, &sCreateChannelGroupResponse_CreatedAt, &sCreateChannelGroupResponse_ModifiedAt, &sCreateChannelGroupResponse_ETag, &sCreateChannelGroupResponse_Description, &sCreateChannelGroupResponse_Tags}}
+var mCreateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelRequest_ChannelGroupName, &sCreateChannelRequest_ChannelName, &sCreateChannelRequest_ClientToken, &sCreateChannelRequest_InputType, &sCreateChannelRequest_Description, &sCreateChannelRequest_InputSwitchConfiguration, &sCreateChannelRequest_OutputHeaderConfiguration, &sCreateChannelRequest_MultiviewConfiguration, &sCreateChannelRequest_OutputLockingMode, &sCreateChannelRequest_Tags}, Seed: 3, Slots: []uint16{
+	0, 0, 0, 2, 0, 7, 0, 0, 5, 0, 4, 1, 0, 10, 0, 9, 0, 0, 0, 0, 0, 0, 0, 6,
+	0, 0, 0, 3, 0, 8, 0, 0,
+}}
+var mCreateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateChannelResponse_MultiviewConfiguration, &sCreateChannelResponse_AttachedMultiviewChannels, &sCreateChannelResponse_Arn, &sCreateChannelResponse_ChannelName, &sCreateChannelResponse_ChannelGroupName, &sCreateChannelResponse_CreatedAt, &sCreateChannelResponse_ModifiedAt, &sCreateChannelResponse_Description, &sCreateChannelResponse_IngestEndpoints, &sCreateChannelResponse_InputType, &sCreateChannelResponse_ETag, &sCreateChannelResponse_Tags, &sCreateChannelResponse_InputSwitchConfiguration, &sCreateChannelResponse_OutputHeaderConfiguration, &sCreateChannelResponse_OutputLockingMode}, Seed: 99, Slots: []uint16{
+	0, 0, 3, 7, 0, 11, 0, 0, 5, 12, 9, 0, 1, 4, 0, 0, 10, 0, 0, 0, 13, 0, 0, 2,
+	0, 8, 14, 0, 15, 6, 0, 0,
+}}
+var mCreateHarvestJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHarvestJobRequest_ChannelGroupName, &sCreateHarvestJobRequest_ChannelName, &sCreateHarvestJobRequest_OriginEndpointName, &sCreateHarvestJobRequest_Description, &sCreateHarvestJobRequest_HarvestedManifests, &sCreateHarvestJobRequest_ScheduleConfiguration, &sCreateHarvestJobRequest_Destination, &sCreateHarvestJobRequest_ClientToken, &sCreateHarvestJobRequest_HarvestJobName, &sCreateHarvestJobRequest_Tags}, Seed: 9, Slots: []uint16{
+	3, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0, 0, 10, 9, 0, 0, 0, 7, 2, 0, 1, 0, 0, 0,
+	0, 0, 0, 8, 0, 0, 6, 0,
+}}
+var mCreateHarvestJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateHarvestJobResponse_ChannelGroupName, &sCreateHarvestJobResponse_ChannelName, &sCreateHarvestJobResponse_OriginEndpointName, &sCreateHarvestJobResponse_Destination, &sCreateHarvestJobResponse_HarvestJobName, &sCreateHarvestJobResponse_HarvestedManifests, &sCreateHarvestJobResponse_Description, &sCreateHarvestJobResponse_ScheduleConfiguration, &sCreateHarvestJobResponse_Arn, &sCreateHarvestJobResponse_CreatedAt, &sCreateHarvestJobResponse_ModifiedAt, &sCreateHarvestJobResponse_Status, &sCreateHarvestJobResponse_ErrorMessage, &sCreateHarvestJobResponse_ETag, &sCreateHarvestJobResponse_Tags}, Seed: 11, Slots: []uint16{
+	6, 5, 1, 13, 0, 0, 4, 0, 15, 0, 0, 0, 2, 11, 7, 0, 0, 9, 10, 3, 0, 0, 0, 0,
+	8, 0, 0, 0, 0, 0, 14, 12,
+}}
+var mCreateOriginEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOriginEndpointRequest_ChannelGroupName, &sCreateOriginEndpointRequest_ChannelName, &sCreateOriginEndpointRequest_OriginEndpointName, &sCreateOriginEndpointRequest_ContainerType, &sCreateOriginEndpointRequest_Segment, &sCreateOriginEndpointRequest_ClientToken, &sCreateOriginEndpointRequest_Description, &sCreateOriginEndpointRequest_StartoverWindowSeconds, &sCreateOriginEndpointRequest_HlsManifests, &sCreateOriginEndpointRequest_LowLatencyHlsManifests, &sCreateOriginEndpointRequest_DashManifests, &sCreateOriginEndpointRequest_MssManifests, &sCreateOriginEndpointRequest_ForceEndpointErrorConfiguration, &sCreateOriginEndpointRequest_UriSeparator, &sCreateOriginEndpointRequest_StreamNameOutputMode, &sCreateOriginEndpointRequest_Tags}, Seed: 47, Slots: []uint16{
+	0, 0, 16, 0, 13, 0, 6, 5, 4, 1, 0, 15, 12, 14, 0, 3, 0, 0, 0, 0, 0, 0, 10, 0,
+	0, 0, 11, 7, 8, 9, 2, 0,
+}}
+var mCreateOriginEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateOriginEndpointResponse_Arn, &sCreateOriginEndpointResponse_ChannelGroupName, &sCreateOriginEndpointResponse_ChannelName, &sCreateOriginEndpointResponse_OriginEndpointName, &sCreateOriginEndpointResponse_ContainerType, &sCreateOriginEndpointResponse_Segment, &sCreateOriginEndpointResponse_CreatedAt, &sCreateOriginEndpointResponse_ModifiedAt, &sCreateOriginEndpointResponse_Description, &sCreateOriginEndpointResponse_StartoverWindowSeconds, &sCreateOriginEndpointResponse_HlsManifests, &sCreateOriginEndpointResponse_LowLatencyHlsManifests, &sCreateOriginEndpointResponse_DashManifests, &sCreateOriginEndpointResponse_MssManifests, &sCreateOriginEndpointResponse_ForceEndpointErrorConfiguration, &sCreateOriginEndpointResponse_UriSeparator, &sCreateOriginEndpointResponse_StreamNameOutputMode, &sCreateOriginEndpointResponse_ETag, &sCreateOriginEndpointResponse_Tags}, Seed: 3, Slots: []uint16{
+	0, 18, 0, 12, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 17, 0, 0, 0,
+	10, 0, 6, 8, 0, 0, 16, 0, 0, 0, 0, 3, 14, 0, 0, 0, 9, 0, 0, 2, 0, 19, 13, 0,
+	0, 0, 0, 0, 0, 0, 1, 0, 0, 7, 0, 0, 5, 15, 0, 4,
+}}
+var mDeleteChannelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelGroupRequest_ChannelGroupName}}
+var mDeleteChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelRequest_ChannelGroupName, &sDeleteChannelRequest_ChannelName}}
+var mDeleteChannelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteChannelPolicyRequest_ChannelGroupName, &sDeleteChannelPolicyRequest_ChannelName}}
+var mDeleteOriginEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOriginEndpointRequest_ChannelGroupName, &sDeleteOriginEndpointRequest_ChannelName, &sDeleteOriginEndpointRequest_OriginEndpointName}}
+var mDeleteOriginEndpointPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteOriginEndpointPolicyRequest_ChannelGroupName, &sDeleteOriginEndpointPolicyRequest_ChannelName, &sDeleteOriginEndpointPolicyRequest_OriginEndpointName}}
+var mGetChannelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelGroupRequest_ChannelGroupName}}
+var mGetChannelGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelGroupResponse_ChannelGroupName, &sGetChannelGroupResponse_Arn, &sGetChannelGroupResponse_EgressDomain, &sGetChannelGroupResponse_CreatedAt, &sGetChannelGroupResponse_ModifiedAt, &sGetChannelGroupResponse_Description, &sGetChannelGroupResponse_ETag, &sGetChannelGroupResponse_Tags}}
+var mGetChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelRequest_ChannelGroupName, &sGetChannelRequest_ChannelName}}
+var mGetChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelResponse_MultiviewConfiguration, &sGetChannelResponse_AttachedMultiviewChannels, &sGetChannelResponse_Arn, &sGetChannelResponse_ChannelName, &sGetChannelResponse_ChannelGroupName, &sGetChannelResponse_CreatedAt, &sGetChannelResponse_ModifiedAt, &sGetChannelResponse_ResetAt, &sGetChannelResponse_Description, &sGetChannelResponse_IngestEndpoints, &sGetChannelResponse_InputType, &sGetChannelResponse_ETag, &sGetChannelResponse_Tags, &sGetChannelResponse_InputSwitchConfiguration, &sGetChannelResponse_OutputHeaderConfiguration, &sGetChannelResponse_OutputLockingMode}, Seed: 112, Slots: []uint16{
+	0, 0, 0, 9, 0, 0, 0, 0, 1, 16, 6, 5, 12, 0, 0, 4, 13, 0, 7, 0, 0, 14, 2, 11,
+	0, 3, 0, 15, 8, 0, 10, 0,
+}}
+var mGetChannelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelPolicyRequest_ChannelGroupName, &sGetChannelPolicyRequest_ChannelName}}
+var mGetChannelPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetChannelPolicyResponse_ChannelGroupName, &sGetChannelPolicyResponse_ChannelName, &sGetChannelPolicyResponse_Policy}}
+var mGetHarvestJobRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHarvestJobRequest_ChannelGroupName, &sGetHarvestJobRequest_ChannelName, &sGetHarvestJobRequest_OriginEndpointName, &sGetHarvestJobRequest_HarvestJobName}}
+var mGetHarvestJobResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHarvestJobResponse_ChannelGroupName, &sGetHarvestJobResponse_ChannelName, &sGetHarvestJobResponse_OriginEndpointName, &sGetHarvestJobResponse_Destination, &sGetHarvestJobResponse_HarvestJobName, &sGetHarvestJobResponse_HarvestedManifests, &sGetHarvestJobResponse_Description, &sGetHarvestJobResponse_ScheduleConfiguration, &sGetHarvestJobResponse_Arn, &sGetHarvestJobResponse_CreatedAt, &sGetHarvestJobResponse_ModifiedAt, &sGetHarvestJobResponse_Status, &sGetHarvestJobResponse_ErrorMessage, &sGetHarvestJobResponse_ETag, &sGetHarvestJobResponse_Tags}, Seed: 11, Slots: []uint16{
+	6, 5, 1, 13, 0, 0, 4, 0, 15, 0, 0, 0, 2, 11, 7, 0, 0, 9, 10, 3, 0, 0, 0, 0,
+	8, 0, 0, 0, 0, 0, 14, 12,
+}}
+var mGetOriginEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOriginEndpointRequest_ChannelGroupName, &sGetOriginEndpointRequest_ChannelName, &sGetOriginEndpointRequest_OriginEndpointName}}
+var mGetOriginEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOriginEndpointResponse_Arn, &sGetOriginEndpointResponse_ChannelGroupName, &sGetOriginEndpointResponse_ChannelName, &sGetOriginEndpointResponse_OriginEndpointName, &sGetOriginEndpointResponse_ContainerType, &sGetOriginEndpointResponse_Segment, &sGetOriginEndpointResponse_CreatedAt, &sGetOriginEndpointResponse_ModifiedAt, &sGetOriginEndpointResponse_ResetAt, &sGetOriginEndpointResponse_Description, &sGetOriginEndpointResponse_StartoverWindowSeconds, &sGetOriginEndpointResponse_HlsManifests, &sGetOriginEndpointResponse_LowLatencyHlsManifests, &sGetOriginEndpointResponse_DashManifests, &sGetOriginEndpointResponse_MssManifests, &sGetOriginEndpointResponse_ForceEndpointErrorConfiguration, &sGetOriginEndpointResponse_UriSeparator, &sGetOriginEndpointResponse_StreamNameOutputMode, &sGetOriginEndpointResponse_ETag, &sGetOriginEndpointResponse_Tags}, Seed: 28, Slots: []uint16{
+	0, 0, 0, 0, 18, 0, 0, 0, 0, 2, 16, 17, 0, 0, 0, 0, 19, 0, 0, 9, 0, 0, 0, 0,
+	1, 0, 12, 10, 8, 14, 0, 20, 15, 11, 0, 0, 4, 0, 0, 0, 0, 0, 13, 7, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 3, 0, 0, 6, 0, 0,
+}}
+var mGetOriginEndpointPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOriginEndpointPolicyRequest_ChannelGroupName, &sGetOriginEndpointPolicyRequest_ChannelName, &sGetOriginEndpointPolicyRequest_OriginEndpointName}}
+var mGetOriginEndpointPolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetOriginEndpointPolicyResponse_ChannelGroupName, &sGetOriginEndpointPolicyResponse_ChannelName, &sGetOriginEndpointPolicyResponse_OriginEndpointName, &sGetOriginEndpointPolicyResponse_Policy, &sGetOriginEndpointPolicyResponse_CdnAuthConfiguration}}
+var mListChannelGroupsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelGroupsRequest_MaxResults, &sListChannelGroupsRequest_NextToken}}
+var mListChannelGroupsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelGroupsResponse_Items, &sListChannelGroupsResponse_NextToken}}
+var mListChannelsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsRequest_ChannelGroupName, &sListChannelsRequest_MaxResults, &sListChannelsRequest_NextToken}}
+var mListChannelsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListChannelsResponse_Items, &sListChannelsResponse_NextToken}}
+var mListHarvestJobsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListHarvestJobsRequest_ChannelGroupName, &sListHarvestJobsRequest_ChannelName, &sListHarvestJobsRequest_OriginEndpointName, &sListHarvestJobsRequest_Status, &sListHarvestJobsRequest_MaxResults, &sListHarvestJobsRequest_NextToken}}
+var mListHarvestJobsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListHarvestJobsResponse_Items, &sListHarvestJobsResponse_NextToken}}
+var mListOriginEndpointsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListOriginEndpointsRequest_ChannelGroupName, &sListOriginEndpointsRequest_ChannelName, &sListOriginEndpointsRequest_MaxResults, &sListOriginEndpointsRequest_NextToken}}
+var mListOriginEndpointsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListOriginEndpointsResponse_Items, &sListOriginEndpointsResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutChannelPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutChannelPolicyRequest_ChannelGroupName, &sPutChannelPolicyRequest_ChannelName, &sPutChannelPolicyRequest_Policy}}
+var mPutOriginEndpointPolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutOriginEndpointPolicyRequest_ChannelGroupName, &sPutOriginEndpointPolicyRequest_ChannelName, &sPutOriginEndpointPolicyRequest_OriginEndpointName, &sPutOriginEndpointPolicyRequest_Policy, &sPutOriginEndpointPolicyRequest_CdnAuthConfiguration}}
+var mResetChannelStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetChannelStateRequest_ChannelGroupName, &sResetChannelStateRequest_ChannelName}}
+var mResetChannelStateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResetChannelStateResponse_ChannelGroupName, &sResetChannelStateResponse_ChannelName, &sResetChannelStateResponse_Arn, &sResetChannelStateResponse_ResetAt}}
+var mResetOriginEndpointStateRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sResetOriginEndpointStateRequest_ChannelGroupName, &sResetOriginEndpointStateRequest_ChannelName, &sResetOriginEndpointStateRequest_OriginEndpointName}}
+var mResetOriginEndpointStateResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sResetOriginEndpointStateResponse_ChannelGroupName, &sResetOriginEndpointStateResponse_ChannelName, &sResetOriginEndpointStateResponse_OriginEndpointName, &sResetOriginEndpointStateResponse_Arn, &sResetOriginEndpointStateResponse_ResetAt}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateChannelGroupRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelGroupRequest_ChannelGroupName, &sUpdateChannelGroupRequest_ETag, &sUpdateChannelGroupRequest_Description}}
+var mUpdateChannelGroupResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelGroupResponse_ChannelGroupName, &sUpdateChannelGroupResponse_Arn, &sUpdateChannelGroupResponse_EgressDomain, &sUpdateChannelGroupResponse_CreatedAt, &sUpdateChannelGroupResponse_ModifiedAt, &sUpdateChannelGroupResponse_Description, &sUpdateChannelGroupResponse_ETag, &sUpdateChannelGroupResponse_Tags}}
+var mUpdateChannelRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelRequest_ChannelGroupName, &sUpdateChannelRequest_ChannelName, &sUpdateChannelRequest_ETag, &sUpdateChannelRequest_Description, &sUpdateChannelRequest_InputSwitchConfiguration, &sUpdateChannelRequest_OutputHeaderConfiguration, &sUpdateChannelRequest_MultiviewConfiguration}}
+var mUpdateChannelResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateChannelResponse_MultiviewConfiguration, &sUpdateChannelResponse_AttachedMultiviewChannels, &sUpdateChannelResponse_Arn, &sUpdateChannelResponse_ChannelName, &sUpdateChannelResponse_ChannelGroupName, &sUpdateChannelResponse_CreatedAt, &sUpdateChannelResponse_ModifiedAt, &sUpdateChannelResponse_Description, &sUpdateChannelResponse_IngestEndpoints, &sUpdateChannelResponse_InputType, &sUpdateChannelResponse_ETag, &sUpdateChannelResponse_Tags, &sUpdateChannelResponse_InputSwitchConfiguration, &sUpdateChannelResponse_OutputHeaderConfiguration, &sUpdateChannelResponse_OutputLockingMode}, Seed: 99, Slots: []uint16{
+	0, 0, 3, 7, 0, 11, 0, 0, 5, 12, 9, 0, 1, 4, 0, 0, 10, 0, 0, 0, 13, 0, 0, 2,
+	0, 8, 14, 0, 15, 6, 0, 0,
+}}
+var mUpdateOriginEndpointRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOriginEndpointRequest_ChannelGroupName, &sUpdateOriginEndpointRequest_ChannelName, &sUpdateOriginEndpointRequest_OriginEndpointName, &sUpdateOriginEndpointRequest_ContainerType, &sUpdateOriginEndpointRequest_Segment, &sUpdateOriginEndpointRequest_Description, &sUpdateOriginEndpointRequest_StartoverWindowSeconds, &sUpdateOriginEndpointRequest_HlsManifests, &sUpdateOriginEndpointRequest_LowLatencyHlsManifests, &sUpdateOriginEndpointRequest_DashManifests, &sUpdateOriginEndpointRequest_MssManifests, &sUpdateOriginEndpointRequest_ForceEndpointErrorConfiguration, &sUpdateOriginEndpointRequest_UriSeparator, &sUpdateOriginEndpointRequest_StreamNameOutputMode, &sUpdateOriginEndpointRequest_ETag}, Seed: 55, Slots: []uint16{
+	1, 0, 4, 0, 2, 0, 13, 12, 14, 9, 5, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0, 11, 7, 0,
+	6, 0, 0, 8, 0, 15, 3, 0,
+}}
+var mUpdateOriginEndpointResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateOriginEndpointResponse_Arn, &sUpdateOriginEndpointResponse_ChannelGroupName, &sUpdateOriginEndpointResponse_ChannelName, &sUpdateOriginEndpointResponse_OriginEndpointName, &sUpdateOriginEndpointResponse_ContainerType, &sUpdateOriginEndpointResponse_Segment, &sUpdateOriginEndpointResponse_CreatedAt, &sUpdateOriginEndpointResponse_ModifiedAt, &sUpdateOriginEndpointResponse_Description, &sUpdateOriginEndpointResponse_StartoverWindowSeconds, &sUpdateOriginEndpointResponse_HlsManifests, &sUpdateOriginEndpointResponse_LowLatencyHlsManifests, &sUpdateOriginEndpointResponse_MssManifests, &sUpdateOriginEndpointResponse_ForceEndpointErrorConfiguration, &sUpdateOriginEndpointResponse_UriSeparator, &sUpdateOriginEndpointResponse_StreamNameOutputMode, &sUpdateOriginEndpointResponse_ETag, &sUpdateOriginEndpointResponse_Tags, &sUpdateOriginEndpointResponse_DashManifests}, Seed: 3, Slots: []uint16{
+	0, 17, 0, 12, 0, 0, 11, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0,
+	10, 0, 6, 8, 0, 0, 15, 0, 0, 0, 0, 3, 13, 0, 0, 0, 9, 0, 0, 2, 0, 18, 19, 0,
+	0, 0, 0, 0, 0, 0, 1, 0, 0, 7, 0, 0, 5, 14, 0, 4,
+}}
+
+var sCancelHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelHarvestJob, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannel, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateChannelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelGroup, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJob, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpoint, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannel, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteChannelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelGroup, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteChannelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelPolicy, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpoint, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeleteOriginEndpointPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointPolicy, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sGetChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannel, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetChannelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelGroup, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetChannelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelPolicy, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHarvestJob, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOriginEndpoint, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetOriginEndpointPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOriginEndpointPolicy, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListChannelGroups = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelGroups, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListChannels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannels, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListHarvestJobs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobs, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListOriginEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpoints, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sPutChannelPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelPolicy, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sPutOriginEndpointPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutOriginEndpointPolicy, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sResetChannelState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetChannelState, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sResetOriginEndpointState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetOriginEndpointState, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sUpdateChannel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannel, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sUpdateChannelGroup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelGroup, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sUpdateOriginEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpoint, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var s_mediapackagev2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_mediapackagev2, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var sAdMarkerDash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdMarkerDash, Members: &mAdMarkerDash, Type: smithy.ShapeTypeEnum})
+var sAdMarkerHls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAdMarkerHls, Members: &mAdMarkerHls, Type: smithy.ShapeTypeEnum})
+var s_AttachedMultiviewChannelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AttachedMultiviewChannelList, Members: &m_AttachedMultiviewChannelList, Type: smithy.ShapeTypeList})
+var sCdnAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCdnAuthConfiguration, Members: &mCdnAuthConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CdnIdentifierSecretArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CdnIdentifierSecretArn, Type: smithy.ShapeTypeString})
+var s_CdnIdentifierSecretArns = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CdnIdentifierSecretArns, Members: &m_CdnIdentifierSecretArns, Type: smithy.ShapeTypeList})
+var sChannelGroupListConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelGroupListConfiguration, Members: &mChannelGroupListConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ChannelGroupsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelGroupsList, Members: &m_ChannelGroupsList, Type: smithy.ShapeTypeList})
+var s_ChannelList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChannelList, Members: &m_ChannelList, Type: smithy.ShapeTypeList})
+var sChannelListConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iChannelListConfiguration, Members: &mChannelListConfiguration, Type: smithy.ShapeTypeStructure})
+var sCmafEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCmafEncryptionMethod, Members: &mCmafEncryptionMethod, Type: smithy.ShapeTypeEnum})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t31, Type: smithy.ShapeTypeStructure})
+var sConflictExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictExceptionType, Members: &mConflictExceptionType, Type: smithy.ShapeTypeEnum})
+var sContainerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerType, Members: &mContainerType, Type: smithy.ShapeTypeEnum})
+var sContentKeyPeriodConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentKeyPeriodConfiguration, Members: &mContentKeyPeriodConfiguration, Type: smithy.ShapeTypeStructure})
+var sContentKeyPeriodTiming = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContentKeyPeriodTiming, Members: &mContentKeyPeriodTiming, Type: smithy.ShapeTypeEnum})
+var sCreateDashManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateDashManifestConfiguration, Members: &mCreateDashManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CreateDashManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateDashManifests, Members: &m_CreateDashManifests, Type: smithy.ShapeTypeList})
+var sCreateHlsManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHlsManifestConfiguration, Members: &mCreateHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CreateHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateHlsManifests, Members: &m_CreateHlsManifests, Type: smithy.ShapeTypeList})
+var sCreateLowLatencyHlsManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLowLatencyHlsManifestConfiguration, Members: &mCreateLowLatencyHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CreateLowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateLowLatencyHlsManifests, Members: &m_CreateLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sCreateMssManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateMssManifestConfiguration, Members: &mCreateMssManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_CreateMssManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CreateMssManifests, Members: &m_CreateMssManifests, Type: smithy.ShapeTypeList})
+var sCustomAdType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCustomAdType, Members: &mCustomAdType, Type: smithy.ShapeTypeEnum})
+var s_CustomAdTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CustomAdTypeList, Members: &m_CustomAdTypeList, Type: smithy.ShapeTypeList})
+var sDashAudioTimelinePattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashAudioTimelinePattern, Members: &mDashAudioTimelinePattern, Type: smithy.ShapeTypeEnum})
+var sDashAvailabilityStartTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashAvailabilityStartTimeConfiguration, Members: &mDashAvailabilityStartTimeConfiguration, Type: smithy.ShapeTypeUnion})
+var sDashBaseUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashBaseUrl, Members: &mDashBaseUrl, Type: smithy.ShapeTypeStructure})
+var s_DashBaseUrls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashBaseUrls, Members: &m_DashBaseUrls, Type: smithy.ShapeTypeList})
+var sDashCompactness = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashCompactness, Members: &mDashCompactness, Type: smithy.ShapeTypeEnum})
+var sDashDrmSignaling = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashDrmSignaling, Members: &mDashDrmSignaling, Type: smithy.ShapeTypeEnum})
+var s_DashDvbErrorMetrics = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashDvbErrorMetrics, Members: &m_DashDvbErrorMetrics, Type: smithy.ShapeTypeList})
+var sDashDvbFontDownload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashDvbFontDownload, Members: &mDashDvbFontDownload, Type: smithy.ShapeTypeStructure})
+var sDashDvbMetricsReporting = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashDvbMetricsReporting, Members: &mDashDvbMetricsReporting, Type: smithy.ShapeTypeStructure})
+var sDashDvbSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashDvbSettings, Members: &mDashDvbSettings, Type: smithy.ShapeTypeStructure})
+var sDashPeriodTrigger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashPeriodTrigger, Members: &mDashPeriodTrigger, Type: smithy.ShapeTypeEnum})
+var s_DashPeriodTriggers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashPeriodTriggers, Members: &m_DashPeriodTriggers, Type: smithy.ShapeTypeList})
+var sDashProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashProfile, Members: &mDashProfile, Type: smithy.ShapeTypeEnum})
+var s_DashProfiles = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DashProfiles, Members: &m_DashProfiles, Type: smithy.ShapeTypeList})
+var sDashProgramInformation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashProgramInformation, Members: &mDashProgramInformation, Type: smithy.ShapeTypeStructure})
+var sDashSegmentTemplateFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashSegmentTemplateFormat, Members: &mDashSegmentTemplateFormat, Type: smithy.ShapeTypeEnum})
+var sDashSubtitleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashSubtitleConfiguration, Members: &mDashSubtitleConfiguration, Type: smithy.ShapeTypeStructure})
+var sDashTtmlConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashTtmlConfiguration, Members: &mDashTtmlConfiguration, Type: smithy.ShapeTypeStructure})
+var sDashTtmlProfile = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashTtmlProfile, Members: &mDashTtmlProfile, Type: smithy.ShapeTypeEnum})
+var sDashUtcTiming = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashUtcTiming, Members: &mDashUtcTiming, Type: smithy.ShapeTypeStructure})
+var sDashUtcTimingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDashUtcTimingMode, Members: &mDashUtcTimingMode, Type: smithy.ShapeTypeEnum})
+var sDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sDrmSystem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDrmSystem, Members: &mDrmSystem, Type: smithy.ShapeTypeEnum})
+var s_DrmSystems = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DrmSystems, Members: &m_DrmSystems, Type: smithy.ShapeTypeList})
+var sEncryption = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryption, Members: &mEncryption, Type: smithy.ShapeTypeStructure})
+var sEncryptionContractConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionContractConfiguration, Members: &mEncryptionContractConfiguration, Type: smithy.ShapeTypeStructure})
+var sEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionMethod, Members: &mEncryptionMethod, Type: smithy.ShapeTypeStructure})
+var sEndpointErrorCondition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEndpointErrorCondition, Members: &mEndpointErrorCondition, Type: smithy.ShapeTypeEnum})
+var s_EndpointErrorConditions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EndpointErrorConditions, Members: &m_EndpointErrorConditions, Type: smithy.ShapeTypeList})
+var s_EntityTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sFilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sForceEndpointErrorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iForceEndpointErrorConfiguration, Members: &mForceEndpointErrorConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetDashManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDashManifestConfiguration, Members: &mGetDashManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_GetDashManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetDashManifests, Members: &m_GetDashManifests, Type: smithy.ShapeTypeList})
+var sGetHlsManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHlsManifestConfiguration, Members: &mGetHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_GetHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetHlsManifests, Members: &m_GetHlsManifests, Type: smithy.ShapeTypeList})
+var sGetLowLatencyHlsManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLowLatencyHlsManifestConfiguration, Members: &mGetLowLatencyHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_GetLowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetLowLatencyHlsManifests, Members: &m_GetLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sGetMssManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMssManifestConfiguration, Members: &mGetMssManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_GetMssManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetMssManifests, Members: &m_GetMssManifests, Type: smithy.ShapeTypeList})
+var sHarvestedDashManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestedDashManifest, Members: &mHarvestedDashManifest, Type: smithy.ShapeTypeStructure})
+var s_HarvestedDashManifestsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HarvestedDashManifestsList, Members: &m_HarvestedDashManifestsList, Type: smithy.ShapeTypeList})
+var sHarvestedHlsManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestedHlsManifest, Members: &mHarvestedHlsManifest, Type: smithy.ShapeTypeStructure})
+var s_HarvestedHlsManifestsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HarvestedHlsManifestsList, Members: &m_HarvestedHlsManifestsList, Type: smithy.ShapeTypeList})
+var sHarvestedLowLatencyHlsManifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestedLowLatencyHlsManifest, Members: &mHarvestedLowLatencyHlsManifest, Type: smithy.ShapeTypeStructure})
+var s_HarvestedLowLatencyHlsManifestsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HarvestedLowLatencyHlsManifestsList, Members: &m_HarvestedLowLatencyHlsManifestsList, Type: smithy.ShapeTypeList})
+var sHarvestedManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestedManifests, Members: &mHarvestedManifests, Type: smithy.ShapeTypeStructure})
+var sHarvesterScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvesterScheduleConfiguration, Members: &mHarvesterScheduleConfiguration, Type: smithy.ShapeTypeStructure})
+var sHarvestJob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestJob, Members: &mHarvestJob, Type: smithy.ShapeTypeStructure})
+var s_HarvestJobsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HarvestJobsList, Members: &m_HarvestJobsList, Type: smithy.ShapeTypeList})
+var sHarvestJobStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHarvestJobStatus, Members: &mHarvestJobStatus, Type: smithy.ShapeTypeEnum})
+var s_IdempotencyToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IdempotencyToken, Type: smithy.ShapeTypeString})
+var sIngestEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIngestEndpoint, Members: &mIngestEndpoint, Type: smithy.ShapeTypeStructure})
+var s_IngestEndpointList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IngestEndpointList, Members: &m_IngestEndpointList, Type: smithy.ShapeTypeList})
+var sInputSwitchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputSwitchConfiguration, Members: &mInputSwitchConfiguration, Type: smithy.ShapeTypeStructure})
+var sInputType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInputType, Members: &mInputType, Type: smithy.ShapeTypeEnum})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sIsmEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIsmEncryptionMethod, Members: &mIsmEncryptionMethod, Type: smithy.ShapeTypeEnum})
+var sListDashManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListDashManifestConfiguration, Members: &mListDashManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ListDashManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListDashManifests, Members: &m_ListDashManifests, Type: smithy.ShapeTypeList})
+var sListHlsManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHlsManifestConfiguration, Members: &mListHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ListHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListHlsManifests, Members: &m_ListHlsManifests, Type: smithy.ShapeTypeList})
+var sListLowLatencyHlsManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLowLatencyHlsManifestConfiguration, Members: &mListLowLatencyHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ListLowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLowLatencyHlsManifests, Members: &m_ListLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sListMssManifestConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListMssManifestConfiguration, Members: &mListMssManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ListMssManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListMssManifests, Members: &m_ListMssManifests, Type: smithy.ShapeTypeList})
+var s_ListResourceMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListResourceMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sMssManifestLayout = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMssManifestLayout, Members: &mMssManifestLayout, Type: smithy.ShapeTypeEnum})
+var sMultiviewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiviewConfiguration, Members: &mMultiviewConfiguration, Type: smithy.ShapeTypeStructure})
+var sMultiviewFilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiviewFilterConfiguration, Members: &mMultiviewFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var s_MultiviewLayoutList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiviewLayoutList, Members: &m_MultiviewLayoutList, Type: smithy.ShapeTypeList})
+var sMultiviewLayoutType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMultiviewLayoutType, Members: &mMultiviewLayoutType, Type: smithy.ShapeTypeEnum})
+var s_MultiviewSourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MultiviewSourceList, Members: &m_MultiviewSourceList, Type: smithy.ShapeTypeList})
+var sOriginEndpointListConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOriginEndpointListConfiguration, Members: &mOriginEndpointListConfiguration, Type: smithy.ShapeTypeStructure})
+var s_OriginEndpointsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OriginEndpointsList, Members: &m_OriginEndpointsList, Type: smithy.ShapeTypeList})
+var sOutputHeaderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputHeaderConfiguration, Members: &mOutputHeaderConfiguration, Type: smithy.ShapeTypeStructure})
+var sOutputLockingMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputLockingMode, Members: &mOutputLockingMode, Type: smithy.ShapeTypeEnum})
+var sOutputTimestampMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOutputTimestampMode, Members: &mOutputTimestampMode, Type: smithy.ShapeTypeEnum})
+var s_PolicyText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyText, Type: smithy.ShapeTypeString})
+var sPresetSpeke20Audio = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresetSpeke20Audio, Members: &mPresetSpeke20Audio, Type: smithy.ShapeTypeEnum})
+var sPresetSpeke20Video = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPresetSpeke20Video, Members: &mPresetSpeke20Video, Type: smithy.ShapeTypeEnum})
+var s_ResourceDescription = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var s_ResourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var sResourceTypeNotFound = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceTypeNotFound, Members: &mResourceTypeNotFound, Type: smithy.ShapeTypeEnum})
+var s_S3BucketName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var sS3DestinationConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3DestinationConfig, Members: &mS3DestinationConfig, Type: smithy.ShapeTypeStructure})
+var s_S3DestinationPath = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_S3DestinationPath, Type: smithy.ShapeTypeString})
+var sScte = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScte, Members: &mScte, Type: smithy.ShapeTypeStructure})
+var sScteDash = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScteDash, Members: &mScteDash, Type: smithy.ShapeTypeStructure})
+var sScteFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScteFilter, Members: &mScteFilter, Type: smithy.ShapeTypeEnum})
+var s_ScteFilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ScteFilterList, Members: &m_ScteFilterList, Type: smithy.ShapeTypeList})
+var sScteHls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScteHls, Members: &mScteHls, Type: smithy.ShapeTypeStructure})
+var sScteInManifests = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScteInManifests, Members: &mScteInManifests, Type: smithy.ShapeTypeEnum})
+var sScteInSegments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iScteInSegments, Members: &mScteInSegments, Type: smithy.ShapeTypeEnum})
+var sSegment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSegment, Members: &mSegment, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t35, Type: smithy.ShapeTypeStructure})
+var sSpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Type: smithy.ShapeTypeStructure})
+var sSpekeVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSpekeVersion, Members: &mSpekeVersion, Type: smithy.ShapeTypeEnum})
+var sStartTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartTag, Members: &mStartTag, Type: smithy.ShapeTypeStructure})
+var sStreamNameOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStreamNameOutputMode, Members: &mStreamNameOutputMode, Type: smithy.ShapeTypeEnum})
+var s_TagArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagArn, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t36, Type: smithy.ShapeTypeStructure})
+var sTsEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTsEncryptionMethod, Members: &mTsEncryptionMethod, Type: smithy.ShapeTypeEnum})
+var sUriPathType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUriPathType, Members: &mUriPathType, Type: smithy.ShapeTypeEnum})
+var sUriSeparator = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUriSeparator, Members: &mUriSeparator, Type: smithy.ShapeTypeEnum})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionType, Members: &mValidationExceptionType, Type: smithy.ShapeTypeEnum})
+var sCancelHarvestJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelHarvestJobRequest, Members: &mCancelHarvestJobRequest, Type: smithy.ShapeTypeStructure})
+var sCancelHarvestJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCancelHarvestJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateChannelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelGroupRequest, Members: &mCreateChannelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sCreateChannelGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelGroupResponse, Members: &mCreateChannelGroupResponse, Type: smithy.ShapeTypeStructure})
+var sCreateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelRequest, Members: &mCreateChannelRequest, Type: smithy.ShapeTypeStructure})
+var sCreateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateChannelResponse, Members: &mCreateChannelResponse, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJobRequest, Members: &mCreateHarvestJobRequest, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateHarvestJobResponse, Members: &mCreateHarvestJobResponse, Type: smithy.ShapeTypeStructure})
+var sCreateOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpointRequest, Members: &mCreateOriginEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sCreateOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateOriginEndpointResponse, Members: &mCreateOriginEndpointResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelGroupRequest, Members: &mDeleteChannelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelGroupResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelRequest, Members: &mDeleteChannelRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelPolicyRequest, Members: &mDeleteChannelPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteChannelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteChannelPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointRequest, Members: &mDeleteOriginEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteOriginEndpointPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointPolicyRequest, Members: &mDeleteOriginEndpointPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteOriginEndpointPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteOriginEndpointPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetChannelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelGroupRequest, Members: &mGetChannelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sGetChannelGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelGroupResponse, Members: &mGetChannelGroupResponse, Type: smithy.ShapeTypeStructure})
+var sGetChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelRequest, Members: &mGetChannelRequest, Type: smithy.ShapeTypeStructure})
+var sGetChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelResponse, Members: &mGetChannelResponse, Type: smithy.ShapeTypeStructure})
+var sGetChannelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelPolicyRequest, Members: &mGetChannelPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetChannelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetChannelPolicyResponse, Members: &mGetChannelPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sGetHarvestJobRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHarvestJobRequest, Members: &mGetHarvestJobRequest, Type: smithy.ShapeTypeStructure})
+var sGetHarvestJobResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHarvestJobResponse, Members: &mGetHarvestJobResponse, Type: smithy.ShapeTypeStructure})
+var sGetOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOriginEndpointRequest, Members: &mGetOriginEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sGetOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOriginEndpointResponse, Members: &mGetOriginEndpointResponse, Type: smithy.ShapeTypeStructure})
+var sGetOriginEndpointPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOriginEndpointPolicyRequest, Members: &mGetOriginEndpointPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetOriginEndpointPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetOriginEndpointPolicyResponse, Members: &mGetOriginEndpointPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sListChannelGroupsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelGroupsRequest, Members: &mListChannelGroupsRequest, Type: smithy.ShapeTypeStructure})
+var sListChannelGroupsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelGroupsResponse, Members: &mListChannelGroupsResponse, Type: smithy.ShapeTypeStructure})
+var sListChannelsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsRequest, Members: &mListChannelsRequest, Type: smithy.ShapeTypeStructure})
+var sListChannelsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListChannelsResponse, Members: &mListChannelsResponse, Type: smithy.ShapeTypeStructure})
+var sListHarvestJobsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobsRequest, Members: &mListHarvestJobsRequest, Type: smithy.ShapeTypeStructure})
+var sListHarvestJobsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListHarvestJobsResponse, Members: &mListHarvestJobsResponse, Type: smithy.ShapeTypeStructure})
+var sListOriginEndpointsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpointsRequest, Members: &mListOriginEndpointsRequest, Type: smithy.ShapeTypeStructure})
+var sListOriginEndpointsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListOriginEndpointsResponse, Members: &mListOriginEndpointsResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutChannelPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelPolicyRequest, Members: &mPutChannelPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutChannelPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutChannelPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sPutOriginEndpointPolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutOriginEndpointPolicyRequest, Members: &mPutOriginEndpointPolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutOriginEndpointPolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutOriginEndpointPolicyResponse, Type: smithy.ShapeTypeStructure})
+var sResetChannelStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetChannelStateRequest, Members: &mResetChannelStateRequest, Type: smithy.ShapeTypeStructure})
+var sResetChannelStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetChannelStateResponse, Members: &mResetChannelStateResponse, Type: smithy.ShapeTypeStructure})
+var sResetOriginEndpointStateRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetOriginEndpointStateRequest, Members: &mResetOriginEndpointStateRequest, Type: smithy.ShapeTypeStructure})
+var sResetOriginEndpointStateResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetOriginEndpointStateResponse, Members: &mResetOriginEndpointStateResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelGroupRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelGroupRequest, Members: &mUpdateChannelGroupRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelGroupResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelGroupResponse, Members: &mUpdateChannelGroupResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelRequest, Members: &mUpdateChannelRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateChannelResponse, Members: &mUpdateChannelResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateOriginEndpointRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpointRequest, Members: &mUpdateOriginEndpointRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateOriginEndpointResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateOriginEndpointResponse, Members: &mUpdateOriginEndpointResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAdMarkerDash_BINARY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BINARY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdMarkerDash_XML = smithy.NewStaticSchema(smithy.StaticSchema{Member: "XML", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdMarkerHls_DATERANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATERANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sAdMarkerHls_SCTE35_ENHANCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCTE35_ENHANCED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_AttachedMultiviewChannelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCdnAuthConfiguration_CdnIdentifierSecretArns = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnIdentifierSecretArns", ID: &i_CdnIdentifierSecretArns, Members: &m_CdnIdentifierSecretArns, Type: smithy.ShapeTypeList})
+var sCdnAuthConfiguration_SecretsRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SecretsRoleArn", ID: &pString, Type: smithy.ShapeTypeString})
+var s_CdnIdentifierSecretArns_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_CdnIdentifierSecretArn, Type: smithy.ShapeTypeString})
+var sChannelGroupListConfiguration_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sChannelGroupListConfiguration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sChannelGroupListConfiguration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelGroupListConfiguration_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelGroupListConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var s_ChannelGroupsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelGroupListConfiguration, Members: &mChannelGroupListConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ChannelList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iChannelListConfiguration, Members: &mChannelListConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelListConfiguration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sChannelListConfiguration_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &pString, Type: smithy.ShapeTypeString})
+var sChannelListConfiguration_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sChannelListConfiguration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelListConfiguration_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sChannelListConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sChannelListConfiguration_InputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputType", ID: &iInputType, Members: &mInputType, Type: smithy.ShapeTypeEnum})
+var sChannelListConfiguration_OutputLockingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLockingMode", ID: &iOutputLockingMode, Members: &mOutputLockingMode, Type: smithy.ShapeTypeEnum})
+var sChannelListConfiguration_MultiviewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiviewConfiguration", ID: &iMultiviewConfiguration, Members: &mMultiviewConfiguration, Type: smithy.ShapeTypeStructure})
+var sChannelListConfiguration_AttachedMultiviewChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedMultiviewChannels", ID: &i_AttachedMultiviewChannelList, Members: &m_AttachedMultiviewChannelList, Type: smithy.ShapeTypeList})
+var sCmafEncryptionMethod_CENC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CENC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCmafEncryptionMethod_CBCS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CBCS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_ConflictExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConflictExceptionType", ID: &iConflictExceptionType, Members: &mConflictExceptionType, Type: smithy.ShapeTypeEnum})
+var sConflictExceptionType_RESOURCE_IN_USE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_IN_USE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictExceptionType_RESOURCE_ALREADY_EXISTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_ALREADY_EXISTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictExceptionType_IDEMPOTENT_PARAMETER_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IDEMPOTENT_PARAMETER_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConflictExceptionType_CONFLICTING_OPERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONFLICTING_OPERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerType_TS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerType_CMAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CMAF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerType_ISM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentKeyPeriodConfiguration_ContentKeyPeriodTiming = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentKeyPeriodTiming", ID: &iContentKeyPeriodTiming, Members: &mContentKeyPeriodTiming, Type: smithy.ShapeTypeEnum})
+var sContentKeyPeriodTiming_INDEX_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDEX_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentKeyPeriodTiming_START_END_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_END_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContentKeyPeriodTiming_INDEX_WITH_START_END = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDEX_WITH_START_END", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCreateDashManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sCreateDashManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateDashManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateDashManifestConfiguration_MinUpdatePeriodSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUpdatePeriodSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateDashManifestConfiguration_MinBufferTimeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinBufferTimeSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateDashManifestConfiguration_SuggestedPresentationDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestedPresentationDelaySeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateDashManifestConfiguration_SegmentTemplateFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentTemplateFormat", ID: &iDashSegmentTemplateFormat, Members: &mDashSegmentTemplateFormat, Type: smithy.ShapeTypeEnum})
+var sCreateDashManifestConfiguration_PeriodTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodTriggers", ID: &i_DashPeriodTriggers, Members: &m_DashPeriodTriggers, Type: smithy.ShapeTypeList})
+var sCreateDashManifestConfiguration_ScteDash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteDash", ID: &iScteDash, Members: &mScteDash, Type: smithy.ShapeTypeStructure})
+var sCreateDashManifestConfiguration_DrmSignaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DrmSignaling", ID: &iDashDrmSignaling, Members: &mDashDrmSignaling, Type: smithy.ShapeTypeEnum})
+var sCreateDashManifestConfiguration_UtcTiming = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtcTiming", ID: &iDashUtcTiming, Members: &mDashUtcTiming, Type: smithy.ShapeTypeStructure})
+var sCreateDashManifestConfiguration_Profiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profiles", ID: &i_DashProfiles, Members: &m_DashProfiles, Type: smithy.ShapeTypeList})
+var sCreateDashManifestConfiguration_BaseUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseUrls", ID: &i_DashBaseUrls, Members: &m_DashBaseUrls, Type: smithy.ShapeTypeList})
+var sCreateDashManifestConfiguration_ProgramInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramInformation", ID: &iDashProgramInformation, Members: &mDashProgramInformation, Type: smithy.ShapeTypeStructure})
+var sCreateDashManifestConfiguration_DvbSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DvbSettings", ID: &iDashDvbSettings, Members: &mDashDvbSettings, Type: smithy.ShapeTypeStructure})
+var sCreateDashManifestConfiguration_Compactness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compactness", ID: &iDashCompactness, Members: &mDashCompactness, Type: smithy.ShapeTypeEnum})
+var sCreateDashManifestConfiguration_AudioTimelinePattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioTimelinePattern", ID: &iDashAudioTimelinePattern, Members: &mDashAudioTimelinePattern, Type: smithy.ShapeTypeEnum})
+var sCreateDashManifestConfiguration_SubtitleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubtitleConfiguration", ID: &iDashSubtitleConfiguration, Members: &mDashSubtitleConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateDashManifestConfiguration_UriPathType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPathType", ID: &iUriPathType, Members: &mUriPathType, Type: smithy.ShapeTypeEnum})
+var sCreateDashManifestConfiguration_AvailabilityStartTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityStartTimeConfiguration", ID: &iDashAvailabilityStartTimeConfiguration, Members: &mDashAvailabilityStartTimeConfiguration, Type: smithy.ShapeTypeUnion})
+var s_CreateDashManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateDashManifestConfiguration, Members: &mCreateDashManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateHlsManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sCreateHlsManifestConfiguration_ChildManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildManifestName", ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sCreateHlsManifestConfiguration_ScteHls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteHls", ID: &iScteHls, Members: &mScteHls, Type: smithy.ShapeTypeStructure})
+var sCreateHlsManifestConfiguration_StartTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTag", ID: &iStartTag, Members: &mStartTag, Type: smithy.ShapeTypeStructure})
+var sCreateHlsManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateHlsManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateHlsManifestConfiguration_UrlEncodeChildManifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UrlEncodeChildManifest", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateHlsManifestConfiguration_UriPathType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPathType", ID: &iUriPathType, Members: &mUriPathType, Type: smithy.ShapeTypeEnum})
+var s_CreateHlsManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateHlsManifestConfiguration, Members: &mCreateHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateLowLatencyHlsManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sCreateLowLatencyHlsManifestConfiguration_ChildManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildManifestName", ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sCreateLowLatencyHlsManifestConfiguration_ScteHls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteHls", ID: &iScteHls, Members: &mScteHls, Type: smithy.ShapeTypeStructure})
+var sCreateLowLatencyHlsManifestConfiguration_StartTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTag", ID: &iStartTag, Members: &mStartTag, Type: smithy.ShapeTypeStructure})
+var sCreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateLowLatencyHlsManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UrlEncodeChildManifest", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateLowLatencyHlsManifestConfiguration_UriPathType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPathType", ID: &iUriPathType, Members: &mUriPathType, Type: smithy.ShapeTypeEnum})
+var s_CreateLowLatencyHlsManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateLowLatencyHlsManifestConfiguration, Members: &mCreateLowLatencyHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMssManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sCreateMssManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateMssManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateMssManifestConfiguration_ManifestLayout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestLayout", ID: &iMssManifestLayout, Members: &mMssManifestLayout, Type: smithy.ShapeTypeEnum})
+var s_CreateMssManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCreateMssManifestConfiguration, Members: &mCreateMssManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sCustomAdType_PROGRAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROGRAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomAdType_CHAPTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHAPTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomAdType_UNSCHEDULED_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSCHEDULED_EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomAdType_ALTERNATE_CONTENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALTERNATE_CONTENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCustomAdType_NETWORK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_CustomAdTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iCustomAdType, Members: &mCustomAdType, Type: smithy.ShapeTypeEnum})
+var sDashAudioTimelinePattern_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashAudioTimelinePattern_PATTERNED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PATTERNED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FixedAvailabilityStartTime", ID: &pTimestamp, Traits: &t32, Type: smithy.ShapeTypeTimestamp})
+var sDashBaseUrl_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashBaseUrl_ServiceLocation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceLocation", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashBaseUrl_DvbPriority = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DvbPriority", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sDashBaseUrl_DvbWeight = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DvbWeight", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var s_DashBaseUrls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashBaseUrl, Members: &mDashBaseUrl, Type: smithy.ShapeTypeStructure})
+var sDashCompactness_STANDARD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STANDARD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashCompactness_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashDrmSignaling_INDIVIDUAL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDIVIDUAL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashDrmSignaling_REFERENCED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REFERENCED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DashDvbErrorMetrics_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashDvbMetricsReporting, Members: &mDashDvbMetricsReporting, Type: smithy.ShapeTypeStructure})
+var sDashDvbFontDownload_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashDvbFontDownload_MimeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MimeType", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashDvbFontDownload_FontFamily = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FontFamily", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashDvbMetricsReporting_ReportingUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ReportingUrl", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashDvbMetricsReporting_Probability = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Probability", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sDashDvbSettings_FontDownload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FontDownload", ID: &iDashDvbFontDownload, Members: &mDashDvbFontDownload, Type: smithy.ShapeTypeStructure})
+var sDashDvbSettings_ErrorMetrics = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMetrics", ID: &i_DashDvbErrorMetrics, Members: &m_DashDvbErrorMetrics, Type: smithy.ShapeTypeList})
+var sDashPeriodTrigger_AVAILS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AVAILS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashPeriodTrigger_DRM_KEY_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRM_KEY_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashPeriodTrigger_SOURCE_CHANGES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_CHANGES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashPeriodTrigger_SOURCE_DISRUPTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_DISRUPTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashPeriodTrigger_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DashPeriodTriggers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashPeriodTrigger, Members: &mDashPeriodTrigger, Type: smithy.ShapeTypeEnum})
+var sDashProfile_DVB_DASH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DVB_DASH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DashProfiles_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDashProfile, Members: &mDashProfile, Type: smithy.ShapeTypeEnum})
+var sDashProgramInformation_Title = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Title", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashProgramInformation_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashProgramInformation_Copyright = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Copyright", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashProgramInformation_LanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LanguageCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashProgramInformation_MoreInformationUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MoreInformationUrl", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashSegmentTemplateFormat_NUMBER_WITH_TIMELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUMBER_WITH_TIMELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashSubtitleConfiguration_TtmlConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtmlConfiguration", ID: &iDashTtmlConfiguration, Members: &mDashTtmlConfiguration, Type: smithy.ShapeTypeStructure})
+var sDashTtmlConfiguration_TtmlProfile = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TtmlProfile", ID: &iDashTtmlProfile, Members: &mDashTtmlProfile, Type: smithy.ShapeTypeEnum})
+var sDashTtmlProfile_IMSC_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IMSC_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashTtmlProfile_EBU_TT_D_101 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EBU_TT_D_101", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashUtcTiming_TimingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimingMode", ID: &iDashUtcTimingMode, Members: &mDashUtcTimingMode, Type: smithy.ShapeTypeEnum})
+var sDashUtcTiming_TimingSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimingSource", ID: &pString, Type: smithy.ShapeTypeString})
+var sDashUtcTimingMode_HTTP_HEAD = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_HEAD", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashUtcTimingMode_HTTP_ISO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_ISO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashUtcTimingMode_HTTP_XSDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HTTP_XSDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDashUtcTimingMode_UTC_DIRECT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UTC_DIRECT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDestination_S3Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "S3Destination", ID: &iS3DestinationConfig, Members: &mS3DestinationConfig, Type: smithy.ShapeTypeStructure})
+var sDrmSystem_CLEAR_KEY_AES_128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLEAR_KEY_AES_128", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDrmSystem_FAIRPLAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAIRPLAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDrmSystem_PLAYREADY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PLAYREADY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDrmSystem_WIDEVINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WIDEVINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDrmSystem_IRDETO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IRDETO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DrmSystems_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDrmSystem, Members: &mDrmSystem, Type: smithy.ShapeTypeEnum})
+var sEncryption_ConstantInitializationVector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConstantInitializationVector", ID: &pString, Type: smithy.ShapeTypeString})
+var sEncryption_EncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionMethod", ID: &iEncryptionMethod, Members: &mEncryptionMethod, Type: smithy.ShapeTypeStructure})
+var sEncryption_KeyRotationIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KeyRotationIntervalSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sEncryption_CmafExcludeSegmentDrmMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafExcludeSegmentDrmMetadata", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEncryption_SpekeKeyProvider = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeKeyProvider", ID: &iSpekeKeyProvider, Members: &mSpekeKeyProvider, Type: smithy.ShapeTypeStructure})
+var sEncryptionContractConfiguration_PresetSpeke20Audio = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresetSpeke20Audio", ID: &iPresetSpeke20Audio, Members: &mPresetSpeke20Audio, Type: smithy.ShapeTypeEnum})
+var sEncryptionContractConfiguration_PresetSpeke20Video = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PresetSpeke20Video", ID: &iPresetSpeke20Video, Members: &mPresetSpeke20Video, Type: smithy.ShapeTypeEnum})
+var sEncryptionMethod_TsEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TsEncryptionMethod", ID: &iTsEncryptionMethod, Members: &mTsEncryptionMethod, Type: smithy.ShapeTypeEnum})
+var sEncryptionMethod_CmafEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CmafEncryptionMethod", ID: &iCmafEncryptionMethod, Members: &mCmafEncryptionMethod, Type: smithy.ShapeTypeEnum})
+var sEncryptionMethod_IsmEncryptionMethod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IsmEncryptionMethod", ID: &iIsmEncryptionMethod, Members: &mIsmEncryptionMethod, Type: smithy.ShapeTypeEnum})
+var sEndpointErrorCondition_STALE_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STALE_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointErrorCondition_INCOMPLETE_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPLETE_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointErrorCondition_MISSING_DRM_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_DRM_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEndpointErrorCondition_SLATE_INPUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SLATE_INPUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EndpointErrorConditions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEndpointErrorCondition, Members: &mEndpointErrorCondition, Type: smithy.ShapeTypeEnum})
+var sFilterConfiguration_ManifestFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestFilter", ID: &pString, Type: smithy.ShapeTypeString})
+var sFilterConfiguration_DrmSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DrmSettings", ID: &pString, Type: smithy.ShapeTypeString})
+var sFilterConfiguration_Start = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Start", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sFilterConfiguration_End = smithy.NewStaticSchema(smithy.StaticSchema{Member: "End", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sFilterConfiguration_TimeDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeDelaySeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sFilterConfiguration_ClipStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipStartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sFilterConfiguration_Multiview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Multiview", ID: &iMultiviewFilterConfiguration, Members: &mMultiviewFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sForceEndpointErrorConfiguration_EndpointErrorConditions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndpointErrorConditions", ID: &i_EndpointErrorConditions, Members: &m_EndpointErrorConditions, Type: smithy.ShapeTypeList})
+var sGetDashManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetDashManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetDashManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetDashManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetDashManifestConfiguration_MinUpdatePeriodSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinUpdatePeriodSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetDashManifestConfiguration_MinBufferTimeSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MinBufferTimeSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetDashManifestConfiguration_SuggestedPresentationDelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuggestedPresentationDelaySeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetDashManifestConfiguration_SegmentTemplateFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentTemplateFormat", ID: &iDashSegmentTemplateFormat, Members: &mDashSegmentTemplateFormat, Type: smithy.ShapeTypeEnum})
+var sGetDashManifestConfiguration_PeriodTriggers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PeriodTriggers", ID: &i_DashPeriodTriggers, Members: &m_DashPeriodTriggers, Type: smithy.ShapeTypeList})
+var sGetDashManifestConfiguration_ScteDash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteDash", ID: &iScteDash, Members: &mScteDash, Type: smithy.ShapeTypeStructure})
+var sGetDashManifestConfiguration_DrmSignaling = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DrmSignaling", ID: &iDashDrmSignaling, Members: &mDashDrmSignaling, Type: smithy.ShapeTypeEnum})
+var sGetDashManifestConfiguration_UtcTiming = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UtcTiming", ID: &iDashUtcTiming, Members: &mDashUtcTiming, Type: smithy.ShapeTypeStructure})
+var sGetDashManifestConfiguration_Profiles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Profiles", ID: &i_DashProfiles, Members: &m_DashProfiles, Type: smithy.ShapeTypeList})
+var sGetDashManifestConfiguration_BaseUrls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BaseUrls", ID: &i_DashBaseUrls, Members: &m_DashBaseUrls, Type: smithy.ShapeTypeList})
+var sGetDashManifestConfiguration_ProgramInformation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramInformation", ID: &iDashProgramInformation, Members: &mDashProgramInformation, Type: smithy.ShapeTypeStructure})
+var sGetDashManifestConfiguration_DvbSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DvbSettings", ID: &iDashDvbSettings, Members: &mDashDvbSettings, Type: smithy.ShapeTypeStructure})
+var sGetDashManifestConfiguration_Compactness = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Compactness", ID: &iDashCompactness, Members: &mDashCompactness, Type: smithy.ShapeTypeEnum})
+var sGetDashManifestConfiguration_AudioTimelinePattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AudioTimelinePattern", ID: &iDashAudioTimelinePattern, Members: &mDashAudioTimelinePattern, Type: smithy.ShapeTypeEnum})
+var sGetDashManifestConfiguration_SubtitleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubtitleConfiguration", ID: &iDashSubtitleConfiguration, Members: &mDashSubtitleConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetDashManifestConfiguration_UriPathType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPathType", ID: &iUriPathType, Members: &mUriPathType, Type: smithy.ShapeTypeEnum})
+var sGetDashManifestConfiguration_AvailabilityStartTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailabilityStartTimeConfiguration", ID: &iDashAvailabilityStartTimeConfiguration, Members: &mDashAvailabilityStartTimeConfiguration, Type: smithy.ShapeTypeUnion})
+var s_GetDashManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetDashManifestConfiguration, Members: &mGetDashManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetHlsManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetHlsManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetHlsManifestConfiguration_ChildManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetHlsManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetHlsManifestConfiguration_ScteHls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteHls", ID: &iScteHls, Members: &mScteHls, Type: smithy.ShapeTypeStructure})
+var sGetHlsManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetHlsManifestConfiguration_StartTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTag", ID: &iStartTag, Members: &mStartTag, Type: smithy.ShapeTypeStructure})
+var sGetHlsManifestConfiguration_UrlEncodeChildManifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UrlEncodeChildManifest", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetHlsManifestConfiguration_UriPathType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPathType", ID: &iUriPathType, Members: &mUriPathType, Type: smithy.ShapeTypeEnum})
+var s_GetHlsManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetHlsManifestConfiguration, Members: &mGetHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetLowLatencyHlsManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetLowLatencyHlsManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetLowLatencyHlsManifestConfiguration_ChildManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProgramDateTimeIntervalSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetLowLatencyHlsManifestConfiguration_ScteHls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteHls", ID: &iScteHls, Members: &mScteHls, Type: smithy.ShapeTypeStructure})
+var sGetLowLatencyHlsManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetLowLatencyHlsManifestConfiguration_StartTag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTag", ID: &iStartTag, Members: &mStartTag, Type: smithy.ShapeTypeStructure})
+var sGetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UrlEncodeChildManifest", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetLowLatencyHlsManifestConfiguration_UriPathType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriPathType", ID: &iUriPathType, Members: &mUriPathType, Type: smithy.ShapeTypeEnum})
+var s_GetLowLatencyHlsManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetLowLatencyHlsManifestConfiguration, Members: &mGetLowLatencyHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMssManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ManifestName, Type: smithy.ShapeTypeString})
+var sGetMssManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetMssManifestConfiguration_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetMssManifestConfiguration_ManifestWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetMssManifestConfiguration_ManifestLayout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestLayout", ID: &iMssManifestLayout, Members: &mMssManifestLayout, Type: smithy.ShapeTypeEnum})
+var s_GetMssManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iGetMssManifestConfiguration, Members: &mGetMssManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sHarvestedDashManifest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var s_HarvestedDashManifestsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHarvestedDashManifest, Members: &mHarvestedDashManifest, Type: smithy.ShapeTypeStructure})
+var sHarvestedHlsManifest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var s_HarvestedHlsManifestsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHarvestedHlsManifest, Members: &mHarvestedHlsManifest, Type: smithy.ShapeTypeStructure})
+var sHarvestedLowLatencyHlsManifest_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var s_HarvestedLowLatencyHlsManifestsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHarvestedLowLatencyHlsManifest, Members: &mHarvestedLowLatencyHlsManifest, Type: smithy.ShapeTypeStructure})
+var sHarvestedManifests_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i_HarvestedHlsManifestsList, Members: &m_HarvestedHlsManifestsList, Type: smithy.ShapeTypeList})
+var sHarvestedManifests_DashManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashManifests", ID: &i_HarvestedDashManifestsList, Members: &m_HarvestedDashManifestsList, Type: smithy.ShapeTypeList})
+var sHarvestedManifests_LowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowLatencyHlsManifests", ID: &i_HarvestedLowLatencyHlsManifestsList, Members: &m_HarvestedLowLatencyHlsManifestsList, Type: smithy.ShapeTypeList})
+var sHarvesterScheduleConfiguration_StartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sHarvesterScheduleConfiguration_EndTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sHarvestJob_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sHarvestJob_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sHarvestJob_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sHarvestJob_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sHarvestJob_HarvestJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sHarvestJob_HarvestedManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestedManifests", ID: &iHarvestedManifests, Members: &mHarvestedManifests, Type: smithy.ShapeTypeStructure})
+var sHarvestJob_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sHarvestJob_ScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfiguration", ID: &iHarvesterScheduleConfiguration, Members: &mHarvesterScheduleConfiguration, Type: smithy.ShapeTypeStructure})
+var sHarvestJob_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sHarvestJob_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sHarvestJob_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sHarvestJob_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHarvestJobStatus, Members: &mHarvestJobStatus, Type: smithy.ShapeTypeEnum})
+var sHarvestJob_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sHarvestJob_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var s_HarvestJobsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iHarvestJob, Members: &mHarvestJob, Type: smithy.ShapeTypeStructure})
+var sHarvestJobStatus_QUEUED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QUEUED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHarvestJobStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHarvestJobStatus_CANCELLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CANCELLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHarvestJobStatus_COMPLETED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHarvestJobStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIngestEndpoint_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sIngestEndpoint_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var s_IngestEndpointList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iIngestEndpoint, Members: &mIngestEndpoint, Type: smithy.ShapeTypeStructure})
+var sInputSwitchConfiguration_MQCSInputSwitching = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MQCSInputSwitching", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sInputSwitchConfiguration_PreferredInput = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PreferredInput", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sInputType_HLS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HLS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputType_CMAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CMAF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInputType_MULTIVIEW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIsmEncryptionMethod_CENC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CENC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sListDashManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListDashManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ListDashManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListDashManifestConfiguration, Members: &mListDashManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sListHlsManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListHlsManifestConfiguration_ChildManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListHlsManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ListHlsManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListHlsManifestConfiguration, Members: &mListHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sListLowLatencyHlsManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListLowLatencyHlsManifestConfiguration_ChildManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChildManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListLowLatencyHlsManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ListLowLatencyHlsManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListLowLatencyHlsManifestConfiguration, Members: &mListLowLatencyHlsManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sListMssManifestConfiguration_ManifestName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManifestName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sListMssManifestConfiguration_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ListMssManifests_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iListMssManifestConfiguration, Members: &mListMssManifestConfiguration, Type: smithy.ShapeTypeStructure})
+var sMssManifestLayout_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMssManifestLayout_COMPACT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPACT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMultiviewConfiguration_AvailableSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailableSources", ID: &i_MultiviewSourceList, Members: &m_MultiviewSourceList, Type: smithy.ShapeTypeList})
+var sMultiviewConfiguration_AvailableLayouts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AvailableLayouts", ID: &i_MultiviewLayoutList, Members: &m_MultiviewLayoutList, Type: smithy.ShapeTypeList})
+var sMultiviewFilterConfiguration_Layout = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Layout", ID: &iMultiviewLayoutType, Members: &mMultiviewLayoutType, Type: smithy.ShapeTypeEnum})
+var sMultiviewFilterConfiguration_Sources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Sources", ID: &i_MultiviewSourceList, Members: &m_MultiviewSourceList, Type: smithy.ShapeTypeList})
+var s_MultiviewLayoutList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMultiviewLayoutType, Members: &mMultiviewLayoutType, Type: smithy.ShapeTypeEnum})
+var sMultiviewLayoutType_LAYOUT_2EH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_2EH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMultiviewLayoutType_LAYOUT_2PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_2PL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMultiviewLayoutType_LAYOUT_3EL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_3EL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMultiviewLayoutType_LAYOUT_3PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_3PL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMultiviewLayoutType_LAYOUT_4E = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_4E", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMultiviewLayoutType_LAYOUT_4PL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAYOUT_4PL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MultiviewSourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sOriginEndpointListConfiguration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sOriginEndpointListConfiguration_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sOriginEndpointListConfiguration_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sOriginEndpointListConfiguration_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sOriginEndpointListConfiguration_ContainerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerType", ID: &iContainerType, Members: &mContainerType, Type: smithy.ShapeTypeEnum})
+var sOriginEndpointListConfiguration_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sOriginEndpointListConfiguration_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sOriginEndpointListConfiguration_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sOriginEndpointListConfiguration_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i_ListHlsManifests, Members: &m_ListHlsManifests, Type: smithy.ShapeTypeList})
+var sOriginEndpointListConfiguration_LowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowLatencyHlsManifests", ID: &i_ListLowLatencyHlsManifests, Members: &m_ListLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sOriginEndpointListConfiguration_DashManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashManifests", ID: &i_ListDashManifests, Members: &m_ListDashManifests, Type: smithy.ShapeTypeList})
+var sOriginEndpointListConfiguration_MssManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssManifests", ID: &i_ListMssManifests, Members: &m_ListMssManifests, Type: smithy.ShapeTypeList})
+var sOriginEndpointListConfiguration_ForceEndpointErrorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceEndpointErrorConfiguration", ID: &iForceEndpointErrorConfiguration, Members: &mForceEndpointErrorConfiguration, Type: smithy.ShapeTypeStructure})
+var sOriginEndpointListConfiguration_UriSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriSeparator", ID: &iUriSeparator, Members: &mUriSeparator, Type: smithy.ShapeTypeEnum})
+var sOriginEndpointListConfiguration_StreamNameOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNameOutputMode", ID: &iStreamNameOutputMode, Members: &mStreamNameOutputMode, Type: smithy.ShapeTypeEnum})
+var s_OriginEndpointsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iOriginEndpointListConfiguration, Members: &mOriginEndpointListConfiguration, Type: smithy.ShapeTypeStructure})
+var sOutputHeaderConfiguration_PublishMQCS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PublishMQCS", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sOutputLockingMode_EPOCH_LOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EPOCH_LOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputLockingMode_NON_EPOCH_LOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_EPOCH_LOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputTimestampMode_PASSTHROUGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSTHROUGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOutputTimestampMode_REBASED_TO_CHANNEL_START = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REBASED_TO_CHANNEL_START", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Audio_PRESET_AUDIO_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Audio_PRESET_AUDIO_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Audio_PRESET_AUDIO_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_AUDIO_3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Audio_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Audio_UNENCRYPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNENCRYPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_2 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_2", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_3 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_3", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_5 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_5", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_6 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_6", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_7 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_7", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_PRESET_VIDEO_8 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRESET_VIDEO_8", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPresetSpeke20Video_UNENCRYPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNENCRYPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_ResourceTypeNotFound = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceTypeNotFound", ID: &iResourceTypeNotFound, Members: &mResourceTypeNotFound, Type: smithy.ShapeTypeEnum})
+var sResourceTypeNotFound_CHANNEL_GROUP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANNEL_GROUP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceTypeNotFound_CHANNEL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHANNEL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceTypeNotFound_ORIGIN_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ORIGIN_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceTypeNotFound_HARVEST_JOB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARVEST_JOB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sS3DestinationConfig_BucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BucketName", ID: &i_S3BucketName, Type: smithy.ShapeTypeString})
+var sS3DestinationConfig_DestinationPath = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DestinationPath", ID: &i_S3DestinationPath, Type: smithy.ShapeTypeString})
+var sScte_ScteFilter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteFilter", ID: &i_ScteFilterList, Members: &m_ScteFilterList, Type: smithy.ShapeTypeList})
+var sScte_ScteInSegments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteInSegments", ID: &iScteInSegments, Members: &mScteInSegments, Type: smithy.ShapeTypeEnum})
+var sScte_CustomAdTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CustomAdTypes", ID: &i_CustomAdTypeList, Members: &m_CustomAdTypeList, Type: smithy.ShapeTypeList})
+var sScteDash_AdMarkerDash = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkerDash", ID: &iAdMarkerDash, Members: &mAdMarkerDash, Type: smithy.ShapeTypeEnum})
+var sScteDash_ScteInManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteInManifests", ID: &iScteInManifests, Members: &mScteInManifests, Type: smithy.ShapeTypeEnum})
+var sScteFilter_SPLICE_INSERT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SPLICE_INSERT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_BREAK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BREAK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_PROVIDER_ADVERTISEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_ADVERTISEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_DISTRIBUTOR_ADVERTISEMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_ADVERTISEMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_PROVIDER_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_DISTRIBUTOR_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_PROGRAM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROGRAM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_CHAPTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CHAPTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_UNSCHEDULED_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNSCHEDULED_EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_ALTERNATE_CONTENT_OPPORTUNITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALTERNATE_CONTENT_OPPORTUNITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_NETWORK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NETWORK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_PROVIDER_PROMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_PROMO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_DISTRIBUTOR_PROMO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_PROMO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_PROVIDER_AD_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROVIDER_AD_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_DISTRIBUTOR_AD_BLOCK = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISTRIBUTOR_AD_BLOCK", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_CONTENT_IDENTIFICATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_IDENTIFICATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteFilter_CALL_AD_SERVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CALL_AD_SERVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ScteFilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iScteFilter, Members: &mScteFilter, Type: smithy.ShapeTypeEnum})
+var sScteHls_AdMarkerHls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AdMarkerHls", ID: &iAdMarkerHls, Members: &mAdMarkerHls, Type: smithy.ShapeTypeEnum})
+var sScteHls_ScteInManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScteInManifests", ID: &iScteInManifests, Members: &mScteInManifests, Type: smithy.ShapeTypeEnum})
+var sScteInManifests_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteInManifests_MATCHES_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MATCHES_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteInSegments_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteInSegments_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sScteInSegments_MATCHES_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MATCHES_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSegment_SegmentDurationSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentDurationSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sSegment_SegmentName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SegmentName", ID: &pString, Type: smithy.ShapeTypeString})
+var sSegment_TsUseAudioRenditionGroup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TsUseAudioRenditionGroup", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSegment_IncludeIframeOnlyStreams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludeIframeOnlyStreams", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSegment_TsIncludeDvbSubtitles = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TsIncludeDvbSubtitles", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSegment_Scte = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scte", ID: &iScte, Members: &mScte, Type: smithy.ShapeTypeStructure})
+var sSegment_Encryption = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Encryption", ID: &iEncryption, Members: &mEncryption, Type: smithy.ShapeTypeStructure})
+var sSegment_OutputTimestampMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputTimestampMode", ID: &iOutputTimestampMode, Members: &mOutputTimestampMode, Type: smithy.ShapeTypeEnum})
+var sServiceQuotaExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sSpekeKeyProvider_EncryptionContractConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionContractConfiguration", ID: &iEncryptionContractConfiguration, Members: &mEncryptionContractConfiguration, Type: smithy.ShapeTypeStructure})
+var sSpekeKeyProvider_ResourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sSpekeKeyProvider_DrmSystems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DrmSystems", ID: &i_DrmSystems, Members: &m_DrmSystems, Type: smithy.ShapeTypeList})
+var sSpekeKeyProvider_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sSpekeKeyProvider_Url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Url", ID: &pString, Type: smithy.ShapeTypeString})
+var sSpekeKeyProvider_CertificateArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CertificateArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sSpekeKeyProvider_SpekeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SpekeVersion", ID: &iSpekeVersion, Members: &mSpekeVersion, Type: smithy.ShapeTypeEnum})
+var sSpekeKeyProvider_ContentKeyPeriodConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentKeyPeriodConfiguration", ID: &iContentKeyPeriodConfiguration, Members: &mContentKeyPeriodConfiguration, Type: smithy.ShapeTypeStructure})
+var sSpekeVersion_V2_0 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V2_0", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSpekeVersion_V2_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "V2_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartTag_TimeOffset = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeOffset", ID: &pFloat, Type: smithy.ShapeTypeFloat})
+var sStartTag_Precise = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Precise", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sStreamNameOutputMode_INDEX = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INDEX", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStreamNameOutputMode_PASSTHROUGH_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PASSTHROUGH_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sTsEncryptionMethod_AES_128 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AES_128", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTsEncryptionMethod_SAMPLE_AES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SAMPLE_AES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUriPathType_LEAF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEAF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUriPathType_ROOT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROOT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUriSeparator_UNDERSCORE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDERSCORE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUriSeparator_HYPHEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HYPHEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_ValidationExceptionType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ValidationExceptionType", ID: &iValidationExceptionType, Members: &mValidationExceptionType, Type: smithy.ShapeTypeEnum})
+var sValidationExceptionType_CONTAINER_TYPE_IMMUTABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTAINER_TYPE_IMMUTABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_PAGINATION_TOKEN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PAGINATION_TOKEN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_PAGINATION_MAX_RESULTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_PAGINATION_MAX_RESULTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_POLICY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_POLICY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_ROLE_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ROLE_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MANIFEST_NAME_COLLISION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANIFEST_NAME_COLLISION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CENC_IV_INCOMPATIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CENC_IV_INCOMPATIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ENCRYPTION_CONTRACT_UNENCRYPTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_CONTRACT_UNENCRYPTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ENCRYPTION_CONTRACT_SHARED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENCRYPTION_CONTRACT_SHARED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_NUM_MANIFESTS_LOW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUM_MANIFESTS_LOW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_NUM_MANIFESTS_HIGH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NUM_MANIFESTS_HIGH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MANIFEST_DRM_SYSTEMS_INCOMPATIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MANIFEST_DRM_SYSTEMS_INCOMPATIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ROLE_ARN_NOT_ASSUMABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLE_ARN_NOT_ASSUMABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ROLE_ARN_LENGTH_OUT_OF_RANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLE_ARN_LENGTH_OUT_OF_RANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ROLE_ARN_INVALID_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ROLE_ARN_INVALID_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_SCHEME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_SCHEME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_USER_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_USER_INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_PORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_PORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_UNKNOWN_HOST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_UNKNOWN_HOST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_LOCAL_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_LOCAL_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_LOOPBACK_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_LOOPBACK_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_LINK_LOCAL_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_LINK_LOCAL_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_URL_MULTICAST_ADDRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "URL_MULTICAST_ADDRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_MIN_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_MIN_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_MAX_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_MAX_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_MIN_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_MIN_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_MAX_LENGTH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_MAX_LENGTH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_INVALID_ENUM_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_INVALID_ENUM_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MEMBER_DOES_NOT_MATCH_PATTERN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEMBER_DOES_NOT_MATCH_PATTERN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_MANIFEST_FILTER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_MANIFEST_FILTER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_DRM_SETTINGS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_DRM_SETTINGS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_TIME_DELAY_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_TIME_DELAY_SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_END_TIME_EARLIER_THAN_START_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "END_TIME_EARLIER_THAN_START_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_TS_CONTAINER_TYPE_WITH_DASH_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TS_CONTAINER_TYPE_WITH_DASH_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DIRECT_MODE_WITH_TIMING_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DIRECT_MODE_WITH_TIMING_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_NONE_MODE_WITH_TIMING_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE_MODE_WITH_TIMING_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_TIMING_SOURCE_MISSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMING_SOURCE_MISSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_TOO_MANY_IN_PROGRESS_HARVEST_JOBS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_IN_PROGRESS_HARVEST_JOBS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_HARVEST_JOB_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_HARVEST_JOB_DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CLIP_START_TIME_WITH_START_OR_END = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CLIP_START_TIME_WITH_START_OR_END", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_START_TAG_TIME_OFFSET_INVALID = smithy.NewStaticSchema(smithy.StaticSchema{Member: "START_TAG_TIME_OFFSET_INVALID", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INCOMPATIBLE_XML_ENCODING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPATIBLE_XML_ENCODING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_TS_CONTAINER_TYPE_WITH_MSS_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TS_CONTAINER_TYPE_WITH_MSS_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_SCTE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISM_CONTAINER_TYPE_WITH_SCTE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ISM_CONTAINER_WITH_KEY_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ISM_CONTAINER_WITH_KEY_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_BATCH_GET_SECRET_VALUE_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BATCH_GET_SECRET_VALUE_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_GET_SECRET_VALUE_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "GET_SECRET_VALUE_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DESCRIBE_SECRET_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCRIBE_SECRET_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_SECRET_FORMAT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SECRET_FORMAT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_SECRET_IS_NOT_ONE_KEY_VALUE_PAIR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRET_IS_NOT_ONE_KEY_VALUE_PAIR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_SECRET_KEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SECRET_KEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_SECRET_VALUE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SECRET_VALUE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_SECRET_ARN_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRET_ARN_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DECRYPT_SECRET_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DECRYPT_SECRET_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_TOO_MANY_SECRETS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TOO_MANY_SECRETS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DUPLICATED_SECRET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DUPLICATED_SECRET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MALFORMED_SECRET_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MALFORMED_SECRET_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_SECRET_FROM_DIFFERENT_ACCOUNT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRET_FROM_DIFFERENT_ACCOUNT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_SECRET_FROM_DIFFERENT_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SECRET_FROM_DIFFERENT_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_SECRET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_SECRET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_RESOURCE_NOT_IN_SAME_REGION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESOURCE_NOT_IN_SAME_REGION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CERTIFICATE_RESOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_RESOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CERTIFICATE_ACCESS_DENIED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CERTIFICATE_ACCESS_DENIED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_DESCRIBE_CERTIFICATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DESCRIBE_CERTIFICATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_CERTIFICATE_STATUS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CERTIFICATE_STATUS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_CERTIFICATE_KEY_ALGORITHM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CERTIFICATE_KEY_ALGORITHM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_CERTIFICATE_SIGNATURE_ALGORITHM = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_CERTIFICATE_SIGNATURE_ALGORITHM", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MISSING_CERTIFICATE_DOMAIN_NAME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MISSING_CERTIFICATE_DOMAIN_NAME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_INVALID_ARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INVALID_ARN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_SCTE_IN_MANIFESTS_INVALID_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SCTE_IN_MANIFESTS_INVALID_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CUSTOM_AD_TYPES_INVALID_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOM_AD_TYPES_INVALID_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_OUTPUT_TIMESTAMP_MODE_IMMUTABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OUTPUT_TIMESTAMP_MODE_IMMUTABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_STREAM_NAME_OUTPUT_MODE_IMMUTABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STREAM_NAME_OUTPUT_MODE_IMMUTABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_CONFIGURATION_REQUIRED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_CONFIGURATION_REQUIRED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_CONFIGURATION_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_CONFIGURATION_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_SOURCE_NOT_FOUND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_SOURCE_NOT_FOUND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_SOURCE_INVALID_INPUT_TYPE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_SOURCE_INVALID_INPUT_TYPE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_START_TAG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_START_TAG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_RESET_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_RESET_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_DUPLICATE_SOURCE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_DUPLICATE_SOURCE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_DUPLICATE_LAYOUT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_DUPLICATE_LAYOUT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INVALID_TIME_DELAY_SECONDS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INVALID_TIME_DELAY_SECONDS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_MANIFEST_WINDOW_TOO_LONG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_MANIFEST_WINDOW_TOO_LONG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_SOURCE_NON_EPOCH_LOCKED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_SOURCE_NON_EPOCH_LOCKED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionType_MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sCancelHarvestJobRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCancelHarvestJobRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCancelHarvestJobRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCancelHarvestJobRequest_HarvestJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCancelHarvestJobRequest_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Traits: &t39, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Traits: &t40, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sCreateChannelGroupResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupResponse_EgressDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressDomain", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateChannelGroupResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateChannelGroupResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateChannelGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateChannelRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCreateChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateChannelRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Traits: &t40, Type: smithy.ShapeTypeString})
+var sCreateChannelRequest_InputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputType", ID: &iInputType, Members: &mInputType, Type: smithy.ShapeTypeEnum})
+var sCreateChannelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateChannelRequest_InputSwitchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputSwitchConfiguration", ID: &iInputSwitchConfiguration, Members: &mInputSwitchConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelRequest_OutputHeaderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputHeaderConfiguration", ID: &iOutputHeaderConfiguration, Members: &mOutputHeaderConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelRequest_MultiviewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiviewConfiguration", ID: &iMultiviewConfiguration, Members: &mMultiviewConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelRequest_OutputLockingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLockingMode", ID: &iOutputLockingMode, Members: &mOutputLockingMode, Type: smithy.ShapeTypeEnum})
+var sCreateChannelRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sCreateChannelResponse_MultiviewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiviewConfiguration", ID: &iMultiviewConfiguration, Members: &mMultiviewConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelResponse_AttachedMultiviewChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedMultiviewChannels", ID: &i_AttachedMultiviewChannelList, Members: &m_AttachedMultiviewChannelList, Type: smithy.ShapeTypeList})
+var sCreateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateChannelResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_IngestEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpoints", ID: &i_IngestEndpointList, Members: &m_IngestEndpointList, Type: smithy.ShapeTypeList})
+var sCreateChannelResponse_InputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputType", ID: &iInputType, Members: &mInputType, Type: smithy.ShapeTypeEnum})
+var sCreateChannelResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sCreateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateChannelResponse_InputSwitchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputSwitchConfiguration", ID: &iInputSwitchConfiguration, Members: &mInputSwitchConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelResponse_OutputHeaderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputHeaderConfiguration", ID: &iOutputHeaderConfiguration, Members: &mOutputHeaderConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateChannelResponse_OutputLockingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLockingMode", ID: &iOutputLockingMode, Members: &mOutputLockingMode, Type: smithy.ShapeTypeEnum})
+var sCreateHarvestJobRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobRequest_HarvestedManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestedManifests", ID: &iHarvestedManifests, Members: &mHarvestedManifests, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobRequest_ScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfiguration", ID: &iHarvesterScheduleConfiguration, Members: &mHarvesterScheduleConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobRequest_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Traits: &t40, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobRequest_HarvestJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateHarvestJobResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobResponse_HarvestJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_HarvestedManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestedManifests", ID: &iHarvestedManifests, Members: &mHarvestedManifests, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_ScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfiguration", ID: &iHarvesterScheduleConfiguration, Members: &mHarvesterScheduleConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateHarvestJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateHarvestJobResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateHarvestJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHarvestJobStatus, Members: &mHarvestJobStatus, Type: smithy.ShapeTypeEnum})
+var sCreateHarvestJobResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sCreateHarvestJobResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateOriginEndpointRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointRequest_ContainerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerType", ID: &iContainerType, Members: &mContainerType, Type: smithy.ShapeTypeEnum})
+var sCreateOriginEndpointRequest_Segment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segment", ID: &iSegment, Members: &mSegment, Type: smithy.ShapeTypeStructure})
+var sCreateOriginEndpointRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_IdempotencyToken, Traits: &t40, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointRequest_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateOriginEndpointRequest_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i_CreateHlsManifests, Members: &m_CreateHlsManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointRequest_LowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowLatencyHlsManifests", ID: &i_CreateLowLatencyHlsManifests, Members: &m_CreateLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointRequest_DashManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashManifests", ID: &i_CreateDashManifests, Members: &m_CreateDashManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointRequest_MssManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssManifests", ID: &i_CreateMssManifests, Members: &m_CreateMssManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointRequest_ForceEndpointErrorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceEndpointErrorConfiguration", ID: &iForceEndpointErrorConfiguration, Members: &mForceEndpointErrorConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOriginEndpointRequest_UriSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriSeparator", ID: &iUriSeparator, Members: &mUriSeparator, Type: smithy.ShapeTypeEnum})
+var sCreateOriginEndpointRequest_StreamNameOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNameOutputMode", ID: &iStreamNameOutputMode, Members: &mStreamNameOutputMode, Type: smithy.ShapeTypeEnum})
+var sCreateOriginEndpointRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointResponse_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointResponse_ContainerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerType", ID: &iContainerType, Members: &mContainerType, Type: smithy.ShapeTypeEnum})
+var sCreateOriginEndpointResponse_Segment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segment", ID: &iSegment, Members: &mSegment, Type: smithy.ShapeTypeStructure})
+var sCreateOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateOriginEndpointResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateOriginEndpointResponse_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i_GetHlsManifests, Members: &m_GetHlsManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointResponse_LowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowLatencyHlsManifests", ID: &i_GetLowLatencyHlsManifests, Members: &m_GetLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointResponse_DashManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashManifests", ID: &i_GetDashManifests, Members: &m_GetDashManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointResponse_MssManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssManifests", ID: &i_GetMssManifests, Members: &m_GetMssManifests, Type: smithy.ShapeTypeList})
+var sCreateOriginEndpointResponse_ForceEndpointErrorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceEndpointErrorConfiguration", ID: &iForceEndpointErrorConfiguration, Members: &mForceEndpointErrorConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateOriginEndpointResponse_UriSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriSeparator", ID: &iUriSeparator, Members: &mUriSeparator, Type: smithy.ShapeTypeEnum})
+var sCreateOriginEndpointResponse_StreamNameOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNameOutputMode", ID: &iStreamNameOutputMode, Members: &mStreamNameOutputMode, Type: smithy.ShapeTypeEnum})
+var sCreateOriginEndpointResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sCreateOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sDeleteChannelGroupRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteChannelRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteChannelPolicyRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteChannelPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteOriginEndpointRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteOriginEndpointRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteOriginEndpointRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteOriginEndpointPolicyRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteOriginEndpointPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sDeleteOriginEndpointPolicyRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetChannelGroupRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetChannelGroupResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelGroupResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelGroupResponse_EgressDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressDomain", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelGroupResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetChannelGroupResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetChannelGroupResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetChannelGroupResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sGetChannelGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sGetChannelRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_MultiviewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiviewConfiguration", ID: &iMultiviewConfiguration, Members: &mMultiviewConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetChannelResponse_AttachedMultiviewChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedMultiviewChannels", ID: &i_AttachedMultiviewChannelList, Members: &m_AttachedMultiviewChannelList, Type: smithy.ShapeTypeList})
+var sGetChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetChannelResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetChannelResponse_ResetAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_IngestEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpoints", ID: &i_IngestEndpointList, Members: &m_IngestEndpointList, Type: smithy.ShapeTypeList})
+var sGetChannelResponse_InputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputType", ID: &iInputType, Members: &mInputType, Type: smithy.ShapeTypeEnum})
+var sGetChannelResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sGetChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetChannelResponse_InputSwitchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputSwitchConfiguration", ID: &iInputSwitchConfiguration, Members: &mInputSwitchConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetChannelResponse_OutputHeaderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputHeaderConfiguration", ID: &iOutputHeaderConfiguration, Members: &mOutputHeaderConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetChannelResponse_OutputLockingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLockingMode", ID: &iOutputLockingMode, Members: &mOutputLockingMode, Type: smithy.ShapeTypeEnum})
+var sGetChannelPolicyRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetChannelPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetChannelPolicyResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelPolicyResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetChannelPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyText, Type: smithy.ShapeTypeString})
+var sGetHarvestJobRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetHarvestJobRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetHarvestJobRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetHarvestJobRequest_HarvestJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_Destination = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Destination", ID: &iDestination, Members: &mDestination, Type: smithy.ShapeTypeStructure})
+var sGetHarvestJobResponse_HarvestJobName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestJobName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_HarvestedManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HarvestedManifests", ID: &iHarvestedManifests, Members: &mHarvestedManifests, Type: smithy.ShapeTypeStructure})
+var sGetHarvestJobResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_ScheduleConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ScheduleConfiguration", ID: &iHarvesterScheduleConfiguration, Members: &mHarvesterScheduleConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetHarvestJobResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetHarvestJobResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetHarvestJobResponse_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHarvestJobStatus, Members: &mHarvestJobStatus, Type: smithy.ShapeTypeEnum})
+var sGetHarvestJobResponse_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sGetHarvestJobResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetOriginEndpointRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointResponse_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointResponse_ContainerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerType", ID: &iContainerType, Members: &mContainerType, Type: smithy.ShapeTypeEnum})
+var sGetOriginEndpointResponse_Segment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segment", ID: &iSegment, Members: &mSegment, Type: smithy.ShapeTypeStructure})
+var sGetOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetOriginEndpointResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetOriginEndpointResponse_ResetAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sGetOriginEndpointResponse_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i_GetHlsManifests, Members: &m_GetHlsManifests, Type: smithy.ShapeTypeList})
+var sGetOriginEndpointResponse_LowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowLatencyHlsManifests", ID: &i_GetLowLatencyHlsManifests, Members: &m_GetLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sGetOriginEndpointResponse_DashManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashManifests", ID: &i_GetDashManifests, Members: &m_GetDashManifests, Type: smithy.ShapeTypeList})
+var sGetOriginEndpointResponse_MssManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssManifests", ID: &i_GetMssManifests, Members: &m_GetMssManifests, Type: smithy.ShapeTypeList})
+var sGetOriginEndpointResponse_ForceEndpointErrorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceEndpointErrorConfiguration", ID: &iForceEndpointErrorConfiguration, Members: &mForceEndpointErrorConfiguration, Type: smithy.ShapeTypeStructure})
+var sGetOriginEndpointResponse_UriSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriSeparator", ID: &iUriSeparator, Members: &mUriSeparator, Type: smithy.ShapeTypeEnum})
+var sGetOriginEndpointResponse_StreamNameOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNameOutputMode", ID: &iStreamNameOutputMode, Members: &mStreamNameOutputMode, Type: smithy.ShapeTypeEnum})
+var sGetOriginEndpointResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sGetOriginEndpointPolicyRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointPolicyRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointPolicyResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointPolicyResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointPolicyResponse_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointPolicyResponse_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyText, Type: smithy.ShapeTypeString})
+var sGetOriginEndpointPolicyResponse_CdnAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnAuthConfiguration", ID: &iCdnAuthConfiguration, Members: &mCdnAuthConfiguration, Type: smithy.ShapeTypeStructure})
+var sListChannelGroupsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListResourceMaxResults, Traits: &t42, Type: smithy.ShapeTypeInteger})
+var sListChannelGroupsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListChannelGroupsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ChannelGroupsList, Members: &m_ChannelGroupsList, Type: smithy.ShapeTypeList})
+var sListChannelGroupsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListChannelsRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sListChannelsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListResourceMaxResults, Traits: &t42, Type: smithy.ShapeTypeInteger})
+var sListChannelsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListChannelsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_ChannelList, Members: &m_ChannelList, Type: smithy.ShapeTypeList})
+var sListChannelsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListHarvestJobsRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sListHarvestJobsRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t44, Type: smithy.ShapeTypeString})
+var sListHarvestJobsRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t45, Type: smithy.ShapeTypeString})
+var sListHarvestJobsRequest_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iHarvestJobStatus, Members: &mHarvestJobStatus, Traits: &t46, Type: smithy.ShapeTypeEnum})
+var sListHarvestJobsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListResourceMaxResults, Traits: &t42, Type: smithy.ShapeTypeInteger})
+var sListHarvestJobsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListHarvestJobsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_HarvestJobsList, Members: &m_HarvestJobsList, Type: smithy.ShapeTypeList})
+var sListHarvestJobsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListOriginEndpointsRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sListOriginEndpointsRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sListOriginEndpointsRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListResourceMaxResults, Traits: &t42, Type: smithy.ShapeTypeInteger})
+var sListOriginEndpointsRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Traits: &t43, Type: smithy.ShapeTypeString})
+var sListOriginEndpointsResponse_Items = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Items", ID: &i_OriginEndpointsList, Members: &m_OriginEndpointsList, Type: smithy.ShapeTypeList})
+var sListOriginEndpointsResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagArn, Traits: &t38, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sPutChannelPolicyRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sPutChannelPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sPutChannelPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyText, Type: smithy.ShapeTypeString})
+var sPutOriginEndpointPolicyRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sPutOriginEndpointPolicyRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sPutOriginEndpointPolicyRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sPutOriginEndpointPolicyRequest_Policy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Policy", ID: &i_PolicyText, Type: smithy.ShapeTypeString})
+var sPutOriginEndpointPolicyRequest_CdnAuthConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CdnAuthConfiguration", ID: &iCdnAuthConfiguration, Members: &mCdnAuthConfiguration, Type: smithy.ShapeTypeStructure})
+var sResetChannelStateRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sResetChannelStateRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sResetChannelStateResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sResetChannelStateResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &pString, Type: smithy.ShapeTypeString})
+var sResetChannelStateResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sResetChannelStateResponse_ResetAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sResetOriginEndpointStateRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sResetOriginEndpointStateRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sResetOriginEndpointStateRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sResetOriginEndpointStateResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResetOriginEndpointStateResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResetOriginEndpointStateResponse_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sResetOriginEndpointStateResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sResetOriginEndpointStateResponse_ResetAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResetAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagArn, Traits: &t38, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TagArn, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t47, Type: smithy.ShapeTypeList})
+var sUpdateChannelGroupRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupRequest_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Traits: &t39, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupResponse_EgressDomain = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EgressDomain", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateChannelGroupResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateChannelGroupResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sUpdateChannelGroupResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sUpdateChannelRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUpdateChannelRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUpdateChannelRequest_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Traits: &t39, Type: smithy.ShapeTypeString})
+var sUpdateChannelRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sUpdateChannelRequest_InputSwitchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputSwitchConfiguration", ID: &iInputSwitchConfiguration, Members: &mInputSwitchConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelRequest_OutputHeaderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputHeaderConfiguration", ID: &iOutputHeaderConfiguration, Members: &mOutputHeaderConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelRequest_MultiviewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiviewConfiguration", ID: &iMultiviewConfiguration, Members: &mMultiviewConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelResponse_MultiviewConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MultiviewConfiguration", ID: &iMultiviewConfiguration, Members: &mMultiviewConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelResponse_AttachedMultiviewChannels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AttachedMultiviewChannels", ID: &i_AttachedMultiviewChannelList, Members: &m_AttachedMultiviewChannelList, Type: smithy.ShapeTypeList})
+var sUpdateChannelResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateChannelResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateChannelResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_IngestEndpoints = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IngestEndpoints", ID: &i_IngestEndpointList, Members: &m_IngestEndpointList, Type: smithy.ShapeTypeList})
+var sUpdateChannelResponse_InputType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputType", ID: &iInputType, Members: &mInputType, Type: smithy.ShapeTypeEnum})
+var sUpdateChannelResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sUpdateChannelResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sUpdateChannelResponse_InputSwitchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InputSwitchConfiguration", ID: &iInputSwitchConfiguration, Members: &mInputSwitchConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelResponse_OutputHeaderConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputHeaderConfiguration", ID: &iOutputHeaderConfiguration, Members: &mOutputHeaderConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateChannelResponse_OutputLockingMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OutputLockingMode", ID: &iOutputLockingMode, Members: &mOutputLockingMode, Type: smithy.ShapeTypeEnum})
+var sUpdateOriginEndpointRequest_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointRequest_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointRequest_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointRequest_ContainerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerType", ID: &iContainerType, Members: &mContainerType, Type: smithy.ShapeTypeEnum})
+var sUpdateOriginEndpointRequest_Segment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segment", ID: &iSegment, Members: &mSegment, Type: smithy.ShapeTypeStructure})
+var sUpdateOriginEndpointRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointRequest_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateOriginEndpointRequest_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i_CreateHlsManifests, Members: &m_CreateHlsManifests, Type: smithy.ShapeTypeList})
+var sUpdateOriginEndpointRequest_LowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowLatencyHlsManifests", ID: &i_CreateLowLatencyHlsManifests, Members: &m_CreateLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sUpdateOriginEndpointRequest_DashManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashManifests", ID: &i_CreateDashManifests, Members: &m_CreateDashManifests, Type: smithy.ShapeTypeList})
+var sUpdateOriginEndpointRequest_MssManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssManifests", ID: &i_CreateMssManifests, Members: &m_CreateMssManifests, Type: smithy.ShapeTypeList})
+var sUpdateOriginEndpointRequest_ForceEndpointErrorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceEndpointErrorConfiguration", ID: &iForceEndpointErrorConfiguration, Members: &mForceEndpointErrorConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateOriginEndpointRequest_UriSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriSeparator", ID: &iUriSeparator, Members: &mUriSeparator, Type: smithy.ShapeTypeEnum})
+var sUpdateOriginEndpointRequest_StreamNameOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNameOutputMode", ID: &iStreamNameOutputMode, Members: &mStreamNameOutputMode, Type: smithy.ShapeTypeEnum})
+var sUpdateOriginEndpointRequest_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Traits: &t39, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointResponse_ChannelGroupName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelGroupName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointResponse_ChannelName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ChannelName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointResponse_OriginEndpointName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OriginEndpointName", ID: &i_ResourceName, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointResponse_ContainerType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerType", ID: &iContainerType, Members: &mContainerType, Type: smithy.ShapeTypeEnum})
+var sUpdateOriginEndpointResponse_Segment = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Segment", ID: &iSegment, Members: &mSegment, Type: smithy.ShapeTypeStructure})
+var sUpdateOriginEndpointResponse_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateOriginEndpointResponse_ModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ModifiedAt", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateOriginEndpointResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_ResourceDescription, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointResponse_StartoverWindowSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartoverWindowSeconds", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateOriginEndpointResponse_HlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HlsManifests", ID: &i_GetHlsManifests, Members: &m_GetHlsManifests, Type: smithy.ShapeTypeList})
+var sUpdateOriginEndpointResponse_LowLatencyHlsManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LowLatencyHlsManifests", ID: &i_GetLowLatencyHlsManifests, Members: &m_GetLowLatencyHlsManifests, Type: smithy.ShapeTypeList})
+var sUpdateOriginEndpointResponse_MssManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MssManifests", ID: &i_GetMssManifests, Members: &m_GetMssManifests, Type: smithy.ShapeTypeList})
+var sUpdateOriginEndpointResponse_ForceEndpointErrorConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ForceEndpointErrorConfiguration", ID: &iForceEndpointErrorConfiguration, Members: &mForceEndpointErrorConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateOriginEndpointResponse_UriSeparator = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UriSeparator", ID: &iUriSeparator, Members: &mUriSeparator, Type: smithy.ShapeTypeEnum})
+var sUpdateOriginEndpointResponse_StreamNameOutputMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamNameOutputMode", ID: &iStreamNameOutputMode, Members: &mStreamNameOutputMode, Type: smithy.ShapeTypeEnum})
+var sUpdateOriginEndpointResponse_ETag = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ETag", ID: &i_EntityTag, Type: smithy.ShapeTypeString})
+var sUpdateOriginEndpointResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Traits: &t41, Type: smithy.ShapeTypeMap})
+var sUpdateOriginEndpointResponse_DashManifests = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DashManifests", ID: &i_GetDashManifests, Members: &m_GetDashManifests, Type: smithy.ShapeTypeList})
+
+var CancelHarvestJob = &sCancelHarvestJob
+
+var CreateChannel = &sCreateChannel
+
+var CreateChannelGroup = &sCreateChannelGroup
+
+var CreateHarvestJob = &sCreateHarvestJob
+
+var CreateOriginEndpoint = &sCreateOriginEndpoint
+
+var DeleteChannel = &sDeleteChannel
+
+var DeleteChannelGroup = &sDeleteChannelGroup
+
+var DeleteChannelPolicy = &sDeleteChannelPolicy
+
+var DeleteOriginEndpoint = &sDeleteOriginEndpoint
+
+var DeleteOriginEndpointPolicy = &sDeleteOriginEndpointPolicy
+
+var GetChannel = &sGetChannel
+
+var GetChannelGroup = &sGetChannelGroup
+
+var GetChannelPolicy = &sGetChannelPolicy
+
+var GetHarvestJob = &sGetHarvestJob
+
+var GetOriginEndpoint = &sGetOriginEndpoint
+
+var GetOriginEndpointPolicy = &sGetOriginEndpointPolicy
+
+var ListChannelGroups = &sListChannelGroups
+
+var ListChannels = &sListChannels
+
+var ListHarvestJobs = &sListHarvestJobs
+
+var ListOriginEndpoints = &sListOriginEndpoints
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutChannelPolicy = &sPutChannelPolicy
+
+var PutOriginEndpointPolicy = &sPutOriginEndpointPolicy
+
+var ResetChannelState = &sResetChannelState
+
+var ResetOriginEndpointState = &sResetOriginEndpointState
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateChannel = &sUpdateChannel
+
+var UpdateChannelGroup = &sUpdateChannelGroup
+
+var UpdateOriginEndpoint = &sUpdateOriginEndpoint
+
+var _mediapackagev2 = &s_mediapackagev2
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var AdMarkerDash = &sAdMarkerDash
+var AdMarkerDash_BINARY = &sAdMarkerDash_BINARY
+var AdMarkerDash_XML = &sAdMarkerDash_XML
+
+var AdMarkerHls = &sAdMarkerHls
+var AdMarkerHls_DATERANGE = &sAdMarkerHls_DATERANGE
+var AdMarkerHls_SCTE35_ENHANCED = &sAdMarkerHls_SCTE35_ENHANCED
+
+var _AttachedMultiviewChannelList = &s_AttachedMultiviewChannelList
+var _AttachedMultiviewChannelList_member = &s_AttachedMultiviewChannelList_member
+
+var CdnAuthConfiguration = &sCdnAuthConfiguration
+var CdnAuthConfiguration_CdnIdentifierSecretArns = &sCdnAuthConfiguration_CdnIdentifierSecretArns
+var CdnAuthConfiguration_SecretsRoleArn = &sCdnAuthConfiguration_SecretsRoleArn
+
+var _CdnIdentifierSecretArn = &s_CdnIdentifierSecretArn
+
+var _CdnIdentifierSecretArns = &s_CdnIdentifierSecretArns
+var _CdnIdentifierSecretArns_member = &s_CdnIdentifierSecretArns_member
+
+var ChannelGroupListConfiguration = &sChannelGroupListConfiguration
+var ChannelGroupListConfiguration_ChannelGroupName = &sChannelGroupListConfiguration_ChannelGroupName
+var ChannelGroupListConfiguration_Arn = &sChannelGroupListConfiguration_Arn
+var ChannelGroupListConfiguration_CreatedAt = &sChannelGroupListConfiguration_CreatedAt
+var ChannelGroupListConfiguration_ModifiedAt = &sChannelGroupListConfiguration_ModifiedAt
+var ChannelGroupListConfiguration_Description = &sChannelGroupListConfiguration_Description
+
+var _ChannelGroupsList = &s_ChannelGroupsList
+var _ChannelGroupsList_member = &s_ChannelGroupsList_member
+
+var _ChannelList = &s_ChannelList
+var _ChannelList_member = &s_ChannelList_member
+
+var ChannelListConfiguration = &sChannelListConfiguration
+var ChannelListConfiguration_Arn = &sChannelListConfiguration_Arn
+var ChannelListConfiguration_ChannelName = &sChannelListConfiguration_ChannelName
+var ChannelListConfiguration_ChannelGroupName = &sChannelListConfiguration_ChannelGroupName
+var ChannelListConfiguration_CreatedAt = &sChannelListConfiguration_CreatedAt
+var ChannelListConfiguration_ModifiedAt = &sChannelListConfiguration_ModifiedAt
+var ChannelListConfiguration_Description = &sChannelListConfiguration_Description
+var ChannelListConfiguration_InputType = &sChannelListConfiguration_InputType
+var ChannelListConfiguration_OutputLockingMode = &sChannelListConfiguration_OutputLockingMode
+var ChannelListConfiguration_MultiviewConfiguration = &sChannelListConfiguration_MultiviewConfiguration
+var ChannelListConfiguration_AttachedMultiviewChannels = &sChannelListConfiguration_AttachedMultiviewChannels
+
+var CmafEncryptionMethod = &sCmafEncryptionMethod
+var CmafEncryptionMethod_CENC = &sCmafEncryptionMethod_CENC
+var CmafEncryptionMethod_CBCS = &sCmafEncryptionMethod_CBCS
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+var ConflictException_ConflictExceptionType = &sConflictException_ConflictExceptionType
+
+var ConflictExceptionType = &sConflictExceptionType
+var ConflictExceptionType_RESOURCE_IN_USE = &sConflictExceptionType_RESOURCE_IN_USE
+var ConflictExceptionType_RESOURCE_ALREADY_EXISTS = &sConflictExceptionType_RESOURCE_ALREADY_EXISTS
+var ConflictExceptionType_IDEMPOTENT_PARAMETER_MISMATCH = &sConflictExceptionType_IDEMPOTENT_PARAMETER_MISMATCH
+var ConflictExceptionType_CONFLICTING_OPERATION = &sConflictExceptionType_CONFLICTING_OPERATION
+
+var ContainerType = &sContainerType
+var ContainerType_TS = &sContainerType_TS
+var ContainerType_CMAF = &sContainerType_CMAF
+var ContainerType_ISM = &sContainerType_ISM
+
+var ContentKeyPeriodConfiguration = &sContentKeyPeriodConfiguration
+var ContentKeyPeriodConfiguration_ContentKeyPeriodTiming = &sContentKeyPeriodConfiguration_ContentKeyPeriodTiming
+
+var ContentKeyPeriodTiming = &sContentKeyPeriodTiming
+var ContentKeyPeriodTiming_INDEX_ONLY = &sContentKeyPeriodTiming_INDEX_ONLY
+var ContentKeyPeriodTiming_START_END_ONLY = &sContentKeyPeriodTiming_START_END_ONLY
+var ContentKeyPeriodTiming_INDEX_WITH_START_END = &sContentKeyPeriodTiming_INDEX_WITH_START_END
+
+var CreateDashManifestConfiguration = &sCreateDashManifestConfiguration
+var CreateDashManifestConfiguration_ManifestName = &sCreateDashManifestConfiguration_ManifestName
+var CreateDashManifestConfiguration_ManifestWindowSeconds = &sCreateDashManifestConfiguration_ManifestWindowSeconds
+var CreateDashManifestConfiguration_FilterConfiguration = &sCreateDashManifestConfiguration_FilterConfiguration
+var CreateDashManifestConfiguration_MinUpdatePeriodSeconds = &sCreateDashManifestConfiguration_MinUpdatePeriodSeconds
+var CreateDashManifestConfiguration_MinBufferTimeSeconds = &sCreateDashManifestConfiguration_MinBufferTimeSeconds
+var CreateDashManifestConfiguration_SuggestedPresentationDelaySeconds = &sCreateDashManifestConfiguration_SuggestedPresentationDelaySeconds
+var CreateDashManifestConfiguration_SegmentTemplateFormat = &sCreateDashManifestConfiguration_SegmentTemplateFormat
+var CreateDashManifestConfiguration_PeriodTriggers = &sCreateDashManifestConfiguration_PeriodTriggers
+var CreateDashManifestConfiguration_ScteDash = &sCreateDashManifestConfiguration_ScteDash
+var CreateDashManifestConfiguration_DrmSignaling = &sCreateDashManifestConfiguration_DrmSignaling
+var CreateDashManifestConfiguration_UtcTiming = &sCreateDashManifestConfiguration_UtcTiming
+var CreateDashManifestConfiguration_Profiles = &sCreateDashManifestConfiguration_Profiles
+var CreateDashManifestConfiguration_BaseUrls = &sCreateDashManifestConfiguration_BaseUrls
+var CreateDashManifestConfiguration_ProgramInformation = &sCreateDashManifestConfiguration_ProgramInformation
+var CreateDashManifestConfiguration_DvbSettings = &sCreateDashManifestConfiguration_DvbSettings
+var CreateDashManifestConfiguration_Compactness = &sCreateDashManifestConfiguration_Compactness
+var CreateDashManifestConfiguration_AudioTimelinePattern = &sCreateDashManifestConfiguration_AudioTimelinePattern
+var CreateDashManifestConfiguration_SubtitleConfiguration = &sCreateDashManifestConfiguration_SubtitleConfiguration
+var CreateDashManifestConfiguration_UriPathType = &sCreateDashManifestConfiguration_UriPathType
+var CreateDashManifestConfiguration_AvailabilityStartTimeConfiguration = &sCreateDashManifestConfiguration_AvailabilityStartTimeConfiguration
+
+var _CreateDashManifests = &s_CreateDashManifests
+var _CreateDashManifests_member = &s_CreateDashManifests_member
+
+var CreateHlsManifestConfiguration = &sCreateHlsManifestConfiguration
+var CreateHlsManifestConfiguration_ManifestName = &sCreateHlsManifestConfiguration_ManifestName
+var CreateHlsManifestConfiguration_ChildManifestName = &sCreateHlsManifestConfiguration_ChildManifestName
+var CreateHlsManifestConfiguration_ScteHls = &sCreateHlsManifestConfiguration_ScteHls
+var CreateHlsManifestConfiguration_StartTag = &sCreateHlsManifestConfiguration_StartTag
+var CreateHlsManifestConfiguration_ManifestWindowSeconds = &sCreateHlsManifestConfiguration_ManifestWindowSeconds
+var CreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = &sCreateHlsManifestConfiguration_ProgramDateTimeIntervalSeconds
+var CreateHlsManifestConfiguration_FilterConfiguration = &sCreateHlsManifestConfiguration_FilterConfiguration
+var CreateHlsManifestConfiguration_UrlEncodeChildManifest = &sCreateHlsManifestConfiguration_UrlEncodeChildManifest
+var CreateHlsManifestConfiguration_UriPathType = &sCreateHlsManifestConfiguration_UriPathType
+
+var _CreateHlsManifests = &s_CreateHlsManifests
+var _CreateHlsManifests_member = &s_CreateHlsManifests_member
+
+var CreateLowLatencyHlsManifestConfiguration = &sCreateLowLatencyHlsManifestConfiguration
+var CreateLowLatencyHlsManifestConfiguration_ManifestName = &sCreateLowLatencyHlsManifestConfiguration_ManifestName
+var CreateLowLatencyHlsManifestConfiguration_ChildManifestName = &sCreateLowLatencyHlsManifestConfiguration_ChildManifestName
+var CreateLowLatencyHlsManifestConfiguration_ScteHls = &sCreateLowLatencyHlsManifestConfiguration_ScteHls
+var CreateLowLatencyHlsManifestConfiguration_StartTag = &sCreateLowLatencyHlsManifestConfiguration_StartTag
+var CreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds = &sCreateLowLatencyHlsManifestConfiguration_ManifestWindowSeconds
+var CreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = &sCreateLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds
+var CreateLowLatencyHlsManifestConfiguration_FilterConfiguration = &sCreateLowLatencyHlsManifestConfiguration_FilterConfiguration
+var CreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest = &sCreateLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest
+var CreateLowLatencyHlsManifestConfiguration_UriPathType = &sCreateLowLatencyHlsManifestConfiguration_UriPathType
+
+var _CreateLowLatencyHlsManifests = &s_CreateLowLatencyHlsManifests
+var _CreateLowLatencyHlsManifests_member = &s_CreateLowLatencyHlsManifests_member
+
+var CreateMssManifestConfiguration = &sCreateMssManifestConfiguration
+var CreateMssManifestConfiguration_ManifestName = &sCreateMssManifestConfiguration_ManifestName
+var CreateMssManifestConfiguration_ManifestWindowSeconds = &sCreateMssManifestConfiguration_ManifestWindowSeconds
+var CreateMssManifestConfiguration_FilterConfiguration = &sCreateMssManifestConfiguration_FilterConfiguration
+var CreateMssManifestConfiguration_ManifestLayout = &sCreateMssManifestConfiguration_ManifestLayout
+
+var _CreateMssManifests = &s_CreateMssManifests
+var _CreateMssManifests_member = &s_CreateMssManifests_member
+
+var CustomAdType = &sCustomAdType
+var CustomAdType_PROGRAM = &sCustomAdType_PROGRAM
+var CustomAdType_CHAPTER = &sCustomAdType_CHAPTER
+var CustomAdType_UNSCHEDULED_EVENT = &sCustomAdType_UNSCHEDULED_EVENT
+var CustomAdType_ALTERNATE_CONTENT_OPPORTUNITY = &sCustomAdType_ALTERNATE_CONTENT_OPPORTUNITY
+var CustomAdType_NETWORK = &sCustomAdType_NETWORK
+
+var _CustomAdTypeList = &s_CustomAdTypeList
+var _CustomAdTypeList_member = &s_CustomAdTypeList_member
+
+var DashAudioTimelinePattern = &sDashAudioTimelinePattern
+var DashAudioTimelinePattern_NONE = &sDashAudioTimelinePattern_NONE
+var DashAudioTimelinePattern_PATTERNED = &sDashAudioTimelinePattern_PATTERNED
+
+var DashAvailabilityStartTimeConfiguration = &sDashAvailabilityStartTimeConfiguration
+var DashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime = &sDashAvailabilityStartTimeConfiguration_FixedAvailabilityStartTime
+
+var DashBaseUrl = &sDashBaseUrl
+var DashBaseUrl_Url = &sDashBaseUrl_Url
+var DashBaseUrl_ServiceLocation = &sDashBaseUrl_ServiceLocation
+var DashBaseUrl_DvbPriority = &sDashBaseUrl_DvbPriority
+var DashBaseUrl_DvbWeight = &sDashBaseUrl_DvbWeight
+
+var _DashBaseUrls = &s_DashBaseUrls
+var _DashBaseUrls_member = &s_DashBaseUrls_member
+
+var DashCompactness = &sDashCompactness
+var DashCompactness_STANDARD = &sDashCompactness_STANDARD
+var DashCompactness_NONE = &sDashCompactness_NONE
+
+var DashDrmSignaling = &sDashDrmSignaling
+var DashDrmSignaling_INDIVIDUAL = &sDashDrmSignaling_INDIVIDUAL
+var DashDrmSignaling_REFERENCED = &sDashDrmSignaling_REFERENCED
+
+var _DashDvbErrorMetrics = &s_DashDvbErrorMetrics
+var _DashDvbErrorMetrics_member = &s_DashDvbErrorMetrics_member
+
+var DashDvbFontDownload = &sDashDvbFontDownload
+var DashDvbFontDownload_Url = &sDashDvbFontDownload_Url
+var DashDvbFontDownload_MimeType = &sDashDvbFontDownload_MimeType
+var DashDvbFontDownload_FontFamily = &sDashDvbFontDownload_FontFamily
+
+var DashDvbMetricsReporting = &sDashDvbMetricsReporting
+var DashDvbMetricsReporting_ReportingUrl = &sDashDvbMetricsReporting_ReportingUrl
+var DashDvbMetricsReporting_Probability = &sDashDvbMetricsReporting_Probability
+
+var DashDvbSettings = &sDashDvbSettings
+var DashDvbSettings_FontDownload = &sDashDvbSettings_FontDownload
+var DashDvbSettings_ErrorMetrics = &sDashDvbSettings_ErrorMetrics
+
+var DashPeriodTrigger = &sDashPeriodTrigger
+var DashPeriodTrigger_AVAILS = &sDashPeriodTrigger_AVAILS
+var DashPeriodTrigger_DRM_KEY_ROTATION = &sDashPeriodTrigger_DRM_KEY_ROTATION
+var DashPeriodTrigger_SOURCE_CHANGES = &sDashPeriodTrigger_SOURCE_CHANGES
+var DashPeriodTrigger_SOURCE_DISRUPTIONS = &sDashPeriodTrigger_SOURCE_DISRUPTIONS
+var DashPeriodTrigger_NONE = &sDashPeriodTrigger_NONE
+
+var _DashPeriodTriggers = &s_DashPeriodTriggers
+var _DashPeriodTriggers_member = &s_DashPeriodTriggers_member
+
+var DashProfile = &sDashProfile
+var DashProfile_DVB_DASH = &sDashProfile_DVB_DASH
+
+var _DashProfiles = &s_DashProfiles
+var _DashProfiles_member = &s_DashProfiles_member
+
+var DashProgramInformation = &sDashProgramInformation
+var DashProgramInformation_Title = &sDashProgramInformation_Title
+var DashProgramInformation_Source = &sDashProgramInformation_Source
+var DashProgramInformation_Copyright = &sDashProgramInformation_Copyright
+var DashProgramInformation_LanguageCode = &sDashProgramInformation_LanguageCode
+var DashProgramInformation_MoreInformationUrl = &sDashProgramInformation_MoreInformationUrl
+
+var DashSegmentTemplateFormat = &sDashSegmentTemplateFormat
+var DashSegmentTemplateFormat_NUMBER_WITH_TIMELINE = &sDashSegmentTemplateFormat_NUMBER_WITH_TIMELINE
+
+var DashSubtitleConfiguration = &sDashSubtitleConfiguration
+var DashSubtitleConfiguration_TtmlConfiguration = &sDashSubtitleConfiguration_TtmlConfiguration
+
+var DashTtmlConfiguration = &sDashTtmlConfiguration
+var DashTtmlConfiguration_TtmlProfile = &sDashTtmlConfiguration_TtmlProfile
+
+var DashTtmlProfile = &sDashTtmlProfile
+var DashTtmlProfile_IMSC_1 = &sDashTtmlProfile_IMSC_1
+var DashTtmlProfile_EBU_TT_D_101 = &sDashTtmlProfile_EBU_TT_D_101
+
+var DashUtcTiming = &sDashUtcTiming
+var DashUtcTiming_TimingMode = &sDashUtcTiming_TimingMode
+var DashUtcTiming_TimingSource = &sDashUtcTiming_TimingSource
+
+var DashUtcTimingMode = &sDashUtcTimingMode
+var DashUtcTimingMode_HTTP_HEAD = &sDashUtcTimingMode_HTTP_HEAD
+var DashUtcTimingMode_HTTP_ISO = &sDashUtcTimingMode_HTTP_ISO
+var DashUtcTimingMode_HTTP_XSDATE = &sDashUtcTimingMode_HTTP_XSDATE
+var DashUtcTimingMode_UTC_DIRECT = &sDashUtcTimingMode_UTC_DIRECT
+
+var Destination = &sDestination
+var Destination_S3Destination = &sDestination_S3Destination
+
+var DrmSystem = &sDrmSystem
+var DrmSystem_CLEAR_KEY_AES_128 = &sDrmSystem_CLEAR_KEY_AES_128
+var DrmSystem_FAIRPLAY = &sDrmSystem_FAIRPLAY
+var DrmSystem_PLAYREADY = &sDrmSystem_PLAYREADY
+var DrmSystem_WIDEVINE = &sDrmSystem_WIDEVINE
+var DrmSystem_IRDETO = &sDrmSystem_IRDETO
+
+var _DrmSystems = &s_DrmSystems
+var _DrmSystems_member = &s_DrmSystems_member
+
+var Encryption = &sEncryption
+var Encryption_ConstantInitializationVector = &sEncryption_ConstantInitializationVector
+var Encryption_EncryptionMethod = &sEncryption_EncryptionMethod
+var Encryption_KeyRotationIntervalSeconds = &sEncryption_KeyRotationIntervalSeconds
+var Encryption_CmafExcludeSegmentDrmMetadata = &sEncryption_CmafExcludeSegmentDrmMetadata
+var Encryption_SpekeKeyProvider = &sEncryption_SpekeKeyProvider
+
+var EncryptionContractConfiguration = &sEncryptionContractConfiguration
+var EncryptionContractConfiguration_PresetSpeke20Audio = &sEncryptionContractConfiguration_PresetSpeke20Audio
+var EncryptionContractConfiguration_PresetSpeke20Video = &sEncryptionContractConfiguration_PresetSpeke20Video
+
+var EncryptionMethod = &sEncryptionMethod
+var EncryptionMethod_TsEncryptionMethod = &sEncryptionMethod_TsEncryptionMethod
+var EncryptionMethod_CmafEncryptionMethod = &sEncryptionMethod_CmafEncryptionMethod
+var EncryptionMethod_IsmEncryptionMethod = &sEncryptionMethod_IsmEncryptionMethod
+
+var EndpointErrorCondition = &sEndpointErrorCondition
+var EndpointErrorCondition_STALE_MANIFEST = &sEndpointErrorCondition_STALE_MANIFEST
+var EndpointErrorCondition_INCOMPLETE_MANIFEST = &sEndpointErrorCondition_INCOMPLETE_MANIFEST
+var EndpointErrorCondition_MISSING_DRM_KEY = &sEndpointErrorCondition_MISSING_DRM_KEY
+var EndpointErrorCondition_SLATE_INPUT = &sEndpointErrorCondition_SLATE_INPUT
+
+var _EndpointErrorConditions = &s_EndpointErrorConditions
+var _EndpointErrorConditions_member = &s_EndpointErrorConditions_member
+
+var _EntityTag = &s_EntityTag
+
+var FilterConfiguration = &sFilterConfiguration
+var FilterConfiguration_ManifestFilter = &sFilterConfiguration_ManifestFilter
+var FilterConfiguration_DrmSettings = &sFilterConfiguration_DrmSettings
+var FilterConfiguration_Start = &sFilterConfiguration_Start
+var FilterConfiguration_End = &sFilterConfiguration_End
+var FilterConfiguration_TimeDelaySeconds = &sFilterConfiguration_TimeDelaySeconds
+var FilterConfiguration_ClipStartTime = &sFilterConfiguration_ClipStartTime
+var FilterConfiguration_Multiview = &sFilterConfiguration_Multiview
+
+var ForceEndpointErrorConfiguration = &sForceEndpointErrorConfiguration
+var ForceEndpointErrorConfiguration_EndpointErrorConditions = &sForceEndpointErrorConfiguration_EndpointErrorConditions
+
+var GetDashManifestConfiguration = &sGetDashManifestConfiguration
+var GetDashManifestConfiguration_ManifestName = &sGetDashManifestConfiguration_ManifestName
+var GetDashManifestConfiguration_Url = &sGetDashManifestConfiguration_Url
+var GetDashManifestConfiguration_ManifestWindowSeconds = &sGetDashManifestConfiguration_ManifestWindowSeconds
+var GetDashManifestConfiguration_FilterConfiguration = &sGetDashManifestConfiguration_FilterConfiguration
+var GetDashManifestConfiguration_MinUpdatePeriodSeconds = &sGetDashManifestConfiguration_MinUpdatePeriodSeconds
+var GetDashManifestConfiguration_MinBufferTimeSeconds = &sGetDashManifestConfiguration_MinBufferTimeSeconds
+var GetDashManifestConfiguration_SuggestedPresentationDelaySeconds = &sGetDashManifestConfiguration_SuggestedPresentationDelaySeconds
+var GetDashManifestConfiguration_SegmentTemplateFormat = &sGetDashManifestConfiguration_SegmentTemplateFormat
+var GetDashManifestConfiguration_PeriodTriggers = &sGetDashManifestConfiguration_PeriodTriggers
+var GetDashManifestConfiguration_ScteDash = &sGetDashManifestConfiguration_ScteDash
+var GetDashManifestConfiguration_DrmSignaling = &sGetDashManifestConfiguration_DrmSignaling
+var GetDashManifestConfiguration_UtcTiming = &sGetDashManifestConfiguration_UtcTiming
+var GetDashManifestConfiguration_Profiles = &sGetDashManifestConfiguration_Profiles
+var GetDashManifestConfiguration_BaseUrls = &sGetDashManifestConfiguration_BaseUrls
+var GetDashManifestConfiguration_ProgramInformation = &sGetDashManifestConfiguration_ProgramInformation
+var GetDashManifestConfiguration_DvbSettings = &sGetDashManifestConfiguration_DvbSettings
+var GetDashManifestConfiguration_Compactness = &sGetDashManifestConfiguration_Compactness
+var GetDashManifestConfiguration_AudioTimelinePattern = &sGetDashManifestConfiguration_AudioTimelinePattern
+var GetDashManifestConfiguration_SubtitleConfiguration = &sGetDashManifestConfiguration_SubtitleConfiguration
+var GetDashManifestConfiguration_UriPathType = &sGetDashManifestConfiguration_UriPathType
+var GetDashManifestConfiguration_AvailabilityStartTimeConfiguration = &sGetDashManifestConfiguration_AvailabilityStartTimeConfiguration
+
+var _GetDashManifests = &s_GetDashManifests
+var _GetDashManifests_member = &s_GetDashManifests_member
+
+var GetHlsManifestConfiguration = &sGetHlsManifestConfiguration
+var GetHlsManifestConfiguration_ManifestName = &sGetHlsManifestConfiguration_ManifestName
+var GetHlsManifestConfiguration_Url = &sGetHlsManifestConfiguration_Url
+var GetHlsManifestConfiguration_ChildManifestName = &sGetHlsManifestConfiguration_ChildManifestName
+var GetHlsManifestConfiguration_ManifestWindowSeconds = &sGetHlsManifestConfiguration_ManifestWindowSeconds
+var GetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = &sGetHlsManifestConfiguration_ProgramDateTimeIntervalSeconds
+var GetHlsManifestConfiguration_ScteHls = &sGetHlsManifestConfiguration_ScteHls
+var GetHlsManifestConfiguration_FilterConfiguration = &sGetHlsManifestConfiguration_FilterConfiguration
+var GetHlsManifestConfiguration_StartTag = &sGetHlsManifestConfiguration_StartTag
+var GetHlsManifestConfiguration_UrlEncodeChildManifest = &sGetHlsManifestConfiguration_UrlEncodeChildManifest
+var GetHlsManifestConfiguration_UriPathType = &sGetHlsManifestConfiguration_UriPathType
+
+var _GetHlsManifests = &s_GetHlsManifests
+var _GetHlsManifests_member = &s_GetHlsManifests_member
+
+var GetLowLatencyHlsManifestConfiguration = &sGetLowLatencyHlsManifestConfiguration
+var GetLowLatencyHlsManifestConfiguration_ManifestName = &sGetLowLatencyHlsManifestConfiguration_ManifestName
+var GetLowLatencyHlsManifestConfiguration_Url = &sGetLowLatencyHlsManifestConfiguration_Url
+var GetLowLatencyHlsManifestConfiguration_ChildManifestName = &sGetLowLatencyHlsManifestConfiguration_ChildManifestName
+var GetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds = &sGetLowLatencyHlsManifestConfiguration_ManifestWindowSeconds
+var GetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds = &sGetLowLatencyHlsManifestConfiguration_ProgramDateTimeIntervalSeconds
+var GetLowLatencyHlsManifestConfiguration_ScteHls = &sGetLowLatencyHlsManifestConfiguration_ScteHls
+var GetLowLatencyHlsManifestConfiguration_FilterConfiguration = &sGetLowLatencyHlsManifestConfiguration_FilterConfiguration
+var GetLowLatencyHlsManifestConfiguration_StartTag = &sGetLowLatencyHlsManifestConfiguration_StartTag
+var GetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest = &sGetLowLatencyHlsManifestConfiguration_UrlEncodeChildManifest
+var GetLowLatencyHlsManifestConfiguration_UriPathType = &sGetLowLatencyHlsManifestConfiguration_UriPathType
+
+var _GetLowLatencyHlsManifests = &s_GetLowLatencyHlsManifests
+var _GetLowLatencyHlsManifests_member = &s_GetLowLatencyHlsManifests_member
+
+var GetMssManifestConfiguration = &sGetMssManifestConfiguration
+var GetMssManifestConfiguration_ManifestName = &sGetMssManifestConfiguration_ManifestName
+var GetMssManifestConfiguration_Url = &sGetMssManifestConfiguration_Url
+var GetMssManifestConfiguration_FilterConfiguration = &sGetMssManifestConfiguration_FilterConfiguration
+var GetMssManifestConfiguration_ManifestWindowSeconds = &sGetMssManifestConfiguration_ManifestWindowSeconds
+var GetMssManifestConfiguration_ManifestLayout = &sGetMssManifestConfiguration_ManifestLayout
+
+var _GetMssManifests = &s_GetMssManifests
+var _GetMssManifests_member = &s_GetMssManifests_member
+
+var HarvestedDashManifest = &sHarvestedDashManifest
+var HarvestedDashManifest_ManifestName = &sHarvestedDashManifest_ManifestName
+
+var _HarvestedDashManifestsList = &s_HarvestedDashManifestsList
+var _HarvestedDashManifestsList_member = &s_HarvestedDashManifestsList_member
+
+var HarvestedHlsManifest = &sHarvestedHlsManifest
+var HarvestedHlsManifest_ManifestName = &sHarvestedHlsManifest_ManifestName
+
+var _HarvestedHlsManifestsList = &s_HarvestedHlsManifestsList
+var _HarvestedHlsManifestsList_member = &s_HarvestedHlsManifestsList_member
+
+var HarvestedLowLatencyHlsManifest = &sHarvestedLowLatencyHlsManifest
+var HarvestedLowLatencyHlsManifest_ManifestName = &sHarvestedLowLatencyHlsManifest_ManifestName
+
+var _HarvestedLowLatencyHlsManifestsList = &s_HarvestedLowLatencyHlsManifestsList
+var _HarvestedLowLatencyHlsManifestsList_member = &s_HarvestedLowLatencyHlsManifestsList_member
+
+var HarvestedManifests = &sHarvestedManifests
+var HarvestedManifests_HlsManifests = &sHarvestedManifests_HlsManifests
+var HarvestedManifests_DashManifests = &sHarvestedManifests_DashManifests
+var HarvestedManifests_LowLatencyHlsManifests = &sHarvestedManifests_LowLatencyHlsManifests
+
+var HarvesterScheduleConfiguration = &sHarvesterScheduleConfiguration
+var HarvesterScheduleConfiguration_StartTime = &sHarvesterScheduleConfiguration_StartTime
+var HarvesterScheduleConfiguration_EndTime = &sHarvesterScheduleConfiguration_EndTime
+
+var HarvestJob = &sHarvestJob
+var HarvestJob_ChannelGroupName = &sHarvestJob_ChannelGroupName
+var HarvestJob_ChannelName = &sHarvestJob_ChannelName
+var HarvestJob_OriginEndpointName = &sHarvestJob_OriginEndpointName
+var HarvestJob_Destination = &sHarvestJob_Destination
+var HarvestJob_HarvestJobName = &sHarvestJob_HarvestJobName
+var HarvestJob_HarvestedManifests = &sHarvestJob_HarvestedManifests
+var HarvestJob_Description = &sHarvestJob_Description
+var HarvestJob_ScheduleConfiguration = &sHarvestJob_ScheduleConfiguration
+var HarvestJob_Arn = &sHarvestJob_Arn
+var HarvestJob_CreatedAt = &sHarvestJob_CreatedAt
+var HarvestJob_ModifiedAt = &sHarvestJob_ModifiedAt
+var HarvestJob_Status = &sHarvestJob_Status
+var HarvestJob_ErrorMessage = &sHarvestJob_ErrorMessage
+var HarvestJob_ETag = &sHarvestJob_ETag
+
+var _HarvestJobsList = &s_HarvestJobsList
+var _HarvestJobsList_member = &s_HarvestJobsList_member
+
+var HarvestJobStatus = &sHarvestJobStatus
+var HarvestJobStatus_QUEUED = &sHarvestJobStatus_QUEUED
+var HarvestJobStatus_IN_PROGRESS = &sHarvestJobStatus_IN_PROGRESS
+var HarvestJobStatus_CANCELLED = &sHarvestJobStatus_CANCELLED
+var HarvestJobStatus_COMPLETED = &sHarvestJobStatus_COMPLETED
+var HarvestJobStatus_FAILED = &sHarvestJobStatus_FAILED
+
+var _IdempotencyToken = &s_IdempotencyToken
+
+var IngestEndpoint = &sIngestEndpoint
+var IngestEndpoint_Id = &sIngestEndpoint_Id
+var IngestEndpoint_Url = &sIngestEndpoint_Url
+
+var _IngestEndpointList = &s_IngestEndpointList
+var _IngestEndpointList_member = &s_IngestEndpointList_member
+
+var InputSwitchConfiguration = &sInputSwitchConfiguration
+var InputSwitchConfiguration_MQCSInputSwitching = &sInputSwitchConfiguration_MQCSInputSwitching
+var InputSwitchConfiguration_PreferredInput = &sInputSwitchConfiguration_PreferredInput
+
+var InputType = &sInputType
+var InputType_HLS = &sInputType_HLS
+var InputType_CMAF = &sInputType_CMAF
+var InputType_MULTIVIEW = &sInputType_MULTIVIEW
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var IsmEncryptionMethod = &sIsmEncryptionMethod
+var IsmEncryptionMethod_CENC = &sIsmEncryptionMethod_CENC
+
+var ListDashManifestConfiguration = &sListDashManifestConfiguration
+var ListDashManifestConfiguration_ManifestName = &sListDashManifestConfiguration_ManifestName
+var ListDashManifestConfiguration_Url = &sListDashManifestConfiguration_Url
+
+var _ListDashManifests = &s_ListDashManifests
+var _ListDashManifests_member = &s_ListDashManifests_member
+
+var ListHlsManifestConfiguration = &sListHlsManifestConfiguration
+var ListHlsManifestConfiguration_ManifestName = &sListHlsManifestConfiguration_ManifestName
+var ListHlsManifestConfiguration_ChildManifestName = &sListHlsManifestConfiguration_ChildManifestName
+var ListHlsManifestConfiguration_Url = &sListHlsManifestConfiguration_Url
+
+var _ListHlsManifests = &s_ListHlsManifests
+var _ListHlsManifests_member = &s_ListHlsManifests_member
+
+var ListLowLatencyHlsManifestConfiguration = &sListLowLatencyHlsManifestConfiguration
+var ListLowLatencyHlsManifestConfiguration_ManifestName = &sListLowLatencyHlsManifestConfiguration_ManifestName
+var ListLowLatencyHlsManifestConfiguration_ChildManifestName = &sListLowLatencyHlsManifestConfiguration_ChildManifestName
+var ListLowLatencyHlsManifestConfiguration_Url = &sListLowLatencyHlsManifestConfiguration_Url
+
+var _ListLowLatencyHlsManifests = &s_ListLowLatencyHlsManifests
+var _ListLowLatencyHlsManifests_member = &s_ListLowLatencyHlsManifests_member
+
+var ListMssManifestConfiguration = &sListMssManifestConfiguration
+var ListMssManifestConfiguration_ManifestName = &sListMssManifestConfiguration_ManifestName
+var ListMssManifestConfiguration_Url = &sListMssManifestConfiguration_Url
+
+var _ListMssManifests = &s_ListMssManifests
+var _ListMssManifests_member = &s_ListMssManifests_member
+
+var _ListResourceMaxResults = &s_ListResourceMaxResults
+
+var _ManifestName = &s_ManifestName
+
+var MssManifestLayout = &sMssManifestLayout
+var MssManifestLayout_FULL = &sMssManifestLayout_FULL
+var MssManifestLayout_COMPACT = &sMssManifestLayout_COMPACT
+
+var MultiviewConfiguration = &sMultiviewConfiguration
+var MultiviewConfiguration_AvailableSources = &sMultiviewConfiguration_AvailableSources
+var MultiviewConfiguration_AvailableLayouts = &sMultiviewConfiguration_AvailableLayouts
+
+var MultiviewFilterConfiguration = &sMultiviewFilterConfiguration
+var MultiviewFilterConfiguration_Layout = &sMultiviewFilterConfiguration_Layout
+var MultiviewFilterConfiguration_Sources = &sMultiviewFilterConfiguration_Sources
+
+var _MultiviewLayoutList = &s_MultiviewLayoutList
+var _MultiviewLayoutList_member = &s_MultiviewLayoutList_member
+
+var MultiviewLayoutType = &sMultiviewLayoutType
+var MultiviewLayoutType_LAYOUT_2EH = &sMultiviewLayoutType_LAYOUT_2EH
+var MultiviewLayoutType_LAYOUT_2PL = &sMultiviewLayoutType_LAYOUT_2PL
+var MultiviewLayoutType_LAYOUT_3EL = &sMultiviewLayoutType_LAYOUT_3EL
+var MultiviewLayoutType_LAYOUT_3PL = &sMultiviewLayoutType_LAYOUT_3PL
+var MultiviewLayoutType_LAYOUT_4E = &sMultiviewLayoutType_LAYOUT_4E
+var MultiviewLayoutType_LAYOUT_4PL = &sMultiviewLayoutType_LAYOUT_4PL
+
+var _MultiviewSourceList = &s_MultiviewSourceList
+var _MultiviewSourceList_member = &s_MultiviewSourceList_member
+
+var OriginEndpointListConfiguration = &sOriginEndpointListConfiguration
+var OriginEndpointListConfiguration_Arn = &sOriginEndpointListConfiguration_Arn
+var OriginEndpointListConfiguration_ChannelGroupName = &sOriginEndpointListConfiguration_ChannelGroupName
+var OriginEndpointListConfiguration_ChannelName = &sOriginEndpointListConfiguration_ChannelName
+var OriginEndpointListConfiguration_OriginEndpointName = &sOriginEndpointListConfiguration_OriginEndpointName
+var OriginEndpointListConfiguration_ContainerType = &sOriginEndpointListConfiguration_ContainerType
+var OriginEndpointListConfiguration_Description = &sOriginEndpointListConfiguration_Description
+var OriginEndpointListConfiguration_CreatedAt = &sOriginEndpointListConfiguration_CreatedAt
+var OriginEndpointListConfiguration_ModifiedAt = &sOriginEndpointListConfiguration_ModifiedAt
+var OriginEndpointListConfiguration_HlsManifests = &sOriginEndpointListConfiguration_HlsManifests
+var OriginEndpointListConfiguration_LowLatencyHlsManifests = &sOriginEndpointListConfiguration_LowLatencyHlsManifests
+var OriginEndpointListConfiguration_DashManifests = &sOriginEndpointListConfiguration_DashManifests
+var OriginEndpointListConfiguration_MssManifests = &sOriginEndpointListConfiguration_MssManifests
+var OriginEndpointListConfiguration_ForceEndpointErrorConfiguration = &sOriginEndpointListConfiguration_ForceEndpointErrorConfiguration
+var OriginEndpointListConfiguration_UriSeparator = &sOriginEndpointListConfiguration_UriSeparator
+var OriginEndpointListConfiguration_StreamNameOutputMode = &sOriginEndpointListConfiguration_StreamNameOutputMode
+
+var _OriginEndpointsList = &s_OriginEndpointsList
+var _OriginEndpointsList_member = &s_OriginEndpointsList_member
+
+var OutputHeaderConfiguration = &sOutputHeaderConfiguration
+var OutputHeaderConfiguration_PublishMQCS = &sOutputHeaderConfiguration_PublishMQCS
+
+var OutputLockingMode = &sOutputLockingMode
+var OutputLockingMode_EPOCH_LOCKED = &sOutputLockingMode_EPOCH_LOCKED
+var OutputLockingMode_NON_EPOCH_LOCKED = &sOutputLockingMode_NON_EPOCH_LOCKED
+
+var OutputTimestampMode = &sOutputTimestampMode
+var OutputTimestampMode_PASSTHROUGH = &sOutputTimestampMode_PASSTHROUGH
+var OutputTimestampMode_REBASED_TO_CHANNEL_START = &sOutputTimestampMode_REBASED_TO_CHANNEL_START
+
+var _PolicyText = &s_PolicyText
+
+var PresetSpeke20Audio = &sPresetSpeke20Audio
+var PresetSpeke20Audio_PRESET_AUDIO_1 = &sPresetSpeke20Audio_PRESET_AUDIO_1
+var PresetSpeke20Audio_PRESET_AUDIO_2 = &sPresetSpeke20Audio_PRESET_AUDIO_2
+var PresetSpeke20Audio_PRESET_AUDIO_3 = &sPresetSpeke20Audio_PRESET_AUDIO_3
+var PresetSpeke20Audio_SHARED = &sPresetSpeke20Audio_SHARED
+var PresetSpeke20Audio_UNENCRYPTED = &sPresetSpeke20Audio_UNENCRYPTED
+
+var PresetSpeke20Video = &sPresetSpeke20Video
+var PresetSpeke20Video_PRESET_VIDEO_1 = &sPresetSpeke20Video_PRESET_VIDEO_1
+var PresetSpeke20Video_PRESET_VIDEO_2 = &sPresetSpeke20Video_PRESET_VIDEO_2
+var PresetSpeke20Video_PRESET_VIDEO_3 = &sPresetSpeke20Video_PRESET_VIDEO_3
+var PresetSpeke20Video_PRESET_VIDEO_4 = &sPresetSpeke20Video_PRESET_VIDEO_4
+var PresetSpeke20Video_PRESET_VIDEO_5 = &sPresetSpeke20Video_PRESET_VIDEO_5
+var PresetSpeke20Video_PRESET_VIDEO_6 = &sPresetSpeke20Video_PRESET_VIDEO_6
+var PresetSpeke20Video_PRESET_VIDEO_7 = &sPresetSpeke20Video_PRESET_VIDEO_7
+var PresetSpeke20Video_PRESET_VIDEO_8 = &sPresetSpeke20Video_PRESET_VIDEO_8
+var PresetSpeke20Video_SHARED = &sPresetSpeke20Video_SHARED
+var PresetSpeke20Video_UNENCRYPTED = &sPresetSpeke20Video_UNENCRYPTED
+
+var _ResourceDescription = &s_ResourceDescription
+
+var _ResourceName = &s_ResourceName
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+var ResourceNotFoundException_ResourceTypeNotFound = &sResourceNotFoundException_ResourceTypeNotFound
+
+var ResourceTypeNotFound = &sResourceTypeNotFound
+var ResourceTypeNotFound_CHANNEL_GROUP = &sResourceTypeNotFound_CHANNEL_GROUP
+var ResourceTypeNotFound_CHANNEL = &sResourceTypeNotFound_CHANNEL
+var ResourceTypeNotFound_ORIGIN_ENDPOINT = &sResourceTypeNotFound_ORIGIN_ENDPOINT
+var ResourceTypeNotFound_HARVEST_JOB = &sResourceTypeNotFound_HARVEST_JOB
+
+var _S3BucketName = &s_S3BucketName
+
+var S3DestinationConfig = &sS3DestinationConfig
+var S3DestinationConfig_BucketName = &sS3DestinationConfig_BucketName
+var S3DestinationConfig_DestinationPath = &sS3DestinationConfig_DestinationPath
+
+var _S3DestinationPath = &s_S3DestinationPath
+
+var Scte = &sScte
+var Scte_ScteFilter = &sScte_ScteFilter
+var Scte_ScteInSegments = &sScte_ScteInSegments
+var Scte_CustomAdTypes = &sScte_CustomAdTypes
+
+var ScteDash = &sScteDash
+var ScteDash_AdMarkerDash = &sScteDash_AdMarkerDash
+var ScteDash_ScteInManifests = &sScteDash_ScteInManifests
+
+var ScteFilter = &sScteFilter
+var ScteFilter_SPLICE_INSERT = &sScteFilter_SPLICE_INSERT
+var ScteFilter_BREAK = &sScteFilter_BREAK
+var ScteFilter_PROVIDER_ADVERTISEMENT = &sScteFilter_PROVIDER_ADVERTISEMENT
+var ScteFilter_DISTRIBUTOR_ADVERTISEMENT = &sScteFilter_DISTRIBUTOR_ADVERTISEMENT
+var ScteFilter_PROVIDER_PLACEMENT_OPPORTUNITY = &sScteFilter_PROVIDER_PLACEMENT_OPPORTUNITY
+var ScteFilter_DISTRIBUTOR_PLACEMENT_OPPORTUNITY = &sScteFilter_DISTRIBUTOR_PLACEMENT_OPPORTUNITY
+var ScteFilter_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY = &sScteFilter_PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY
+var ScteFilter_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY = &sScteFilter_DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY
+var ScteFilter_PROGRAM = &sScteFilter_PROGRAM
+var ScteFilter_CHAPTER = &sScteFilter_CHAPTER
+var ScteFilter_UNSCHEDULED_EVENT = &sScteFilter_UNSCHEDULED_EVENT
+var ScteFilter_ALTERNATE_CONTENT_OPPORTUNITY = &sScteFilter_ALTERNATE_CONTENT_OPPORTUNITY
+var ScteFilter_NETWORK = &sScteFilter_NETWORK
+var ScteFilter_PROVIDER_PROMO = &sScteFilter_PROVIDER_PROMO
+var ScteFilter_DISTRIBUTOR_PROMO = &sScteFilter_DISTRIBUTOR_PROMO
+var ScteFilter_PROVIDER_AD_BLOCK = &sScteFilter_PROVIDER_AD_BLOCK
+var ScteFilter_DISTRIBUTOR_AD_BLOCK = &sScteFilter_DISTRIBUTOR_AD_BLOCK
+var ScteFilter_CONTENT_IDENTIFICATION = &sScteFilter_CONTENT_IDENTIFICATION
+var ScteFilter_CALL_AD_SERVER = &sScteFilter_CALL_AD_SERVER
+
+var _ScteFilterList = &s_ScteFilterList
+var _ScteFilterList_member = &s_ScteFilterList_member
+
+var ScteHls = &sScteHls
+var ScteHls_AdMarkerHls = &sScteHls_AdMarkerHls
+var ScteHls_ScteInManifests = &sScteHls_ScteInManifests
+
+var ScteInManifests = &sScteInManifests
+var ScteInManifests_ALL = &sScteInManifests_ALL
+var ScteInManifests_MATCHES_FILTER = &sScteInManifests_MATCHES_FILTER
+
+var ScteInSegments = &sScteInSegments
+var ScteInSegments_NONE = &sScteInSegments_NONE
+var ScteInSegments_ALL = &sScteInSegments_ALL
+var ScteInSegments_MATCHES_FILTER = &sScteInSegments_MATCHES_FILTER
+
+var Segment = &sSegment
+var Segment_SegmentDurationSeconds = &sSegment_SegmentDurationSeconds
+var Segment_SegmentName = &sSegment_SegmentName
+var Segment_TsUseAudioRenditionGroup = &sSegment_TsUseAudioRenditionGroup
+var Segment_IncludeIframeOnlyStreams = &sSegment_IncludeIframeOnlyStreams
+var Segment_TsIncludeDvbSubtitles = &sSegment_TsIncludeDvbSubtitles
+var Segment_Scte = &sSegment_Scte
+var Segment_Encryption = &sSegment_Encryption
+var Segment_OutputTimestampMode = &sSegment_OutputTimestampMode
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_Message = &sServiceQuotaExceededException_Message
+
+var SpekeKeyProvider = &sSpekeKeyProvider
+var SpekeKeyProvider_EncryptionContractConfiguration = &sSpekeKeyProvider_EncryptionContractConfiguration
+var SpekeKeyProvider_ResourceId = &sSpekeKeyProvider_ResourceId
+var SpekeKeyProvider_DrmSystems = &sSpekeKeyProvider_DrmSystems
+var SpekeKeyProvider_RoleArn = &sSpekeKeyProvider_RoleArn
+var SpekeKeyProvider_Url = &sSpekeKeyProvider_Url
+var SpekeKeyProvider_CertificateArn = &sSpekeKeyProvider_CertificateArn
+var SpekeKeyProvider_SpekeVersion = &sSpekeKeyProvider_SpekeVersion
+var SpekeKeyProvider_ContentKeyPeriodConfiguration = &sSpekeKeyProvider_ContentKeyPeriodConfiguration
+
+var SpekeVersion = &sSpekeVersion
+var SpekeVersion_V2_0 = &sSpekeVersion_V2_0
+var SpekeVersion_V2_1 = &sSpekeVersion_V2_1
+
+var StartTag = &sStartTag
+var StartTag_TimeOffset = &sStartTag_TimeOffset
+var StartTag_Precise = &sStartTag_Precise
+
+var StreamNameOutputMode = &sStreamNameOutputMode
+var StreamNameOutputMode_INDEX = &sStreamNameOutputMode_INDEX
+var StreamNameOutputMode_PASSTHROUGH_NAME = &sStreamNameOutputMode_PASSTHROUGH_NAME
+
+var _TagArn = &s_TagArn
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var TsEncryptionMethod = &sTsEncryptionMethod
+var TsEncryptionMethod_AES_128 = &sTsEncryptionMethod_AES_128
+var TsEncryptionMethod_SAMPLE_AES = &sTsEncryptionMethod_SAMPLE_AES
+
+var UriPathType = &sUriPathType
+var UriPathType_LEAF = &sUriPathType_LEAF
+var UriPathType_ROOT = &sUriPathType_ROOT
+
+var UriSeparator = &sUriSeparator
+var UriSeparator_UNDERSCORE = &sUriSeparator_UNDERSCORE
+var UriSeparator_HYPHEN = &sUriSeparator_HYPHEN
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+var ValidationException_ValidationExceptionType = &sValidationException_ValidationExceptionType
+
+var ValidationExceptionType = &sValidationExceptionType
+var ValidationExceptionType_CONTAINER_TYPE_IMMUTABLE = &sValidationExceptionType_CONTAINER_TYPE_IMMUTABLE
+var ValidationExceptionType_INVALID_PAGINATION_TOKEN = &sValidationExceptionType_INVALID_PAGINATION_TOKEN
+var ValidationExceptionType_INVALID_PAGINATION_MAX_RESULTS = &sValidationExceptionType_INVALID_PAGINATION_MAX_RESULTS
+var ValidationExceptionType_INVALID_POLICY = &sValidationExceptionType_INVALID_POLICY
+var ValidationExceptionType_INVALID_ROLE_ARN = &sValidationExceptionType_INVALID_ROLE_ARN
+var ValidationExceptionType_MANIFEST_NAME_COLLISION = &sValidationExceptionType_MANIFEST_NAME_COLLISION
+var ValidationExceptionType_ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH = &sValidationExceptionType_ENCRYPTION_METHOD_CONTAINER_TYPE_MISMATCH
+var ValidationExceptionType_CENC_IV_INCOMPATIBLE = &sValidationExceptionType_CENC_IV_INCOMPATIBLE
+var ValidationExceptionType_ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE = &sValidationExceptionType_ENCRYPTION_CONTRACT_WITHOUT_AUDIO_RENDITION_INCOMPATIBLE
+var ValidationExceptionType_ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE = &sValidationExceptionType_ENCRYPTION_CONTRACT_WITH_ISM_CONTAINER_INCOMPATIBLE
+var ValidationExceptionType_ENCRYPTION_CONTRACT_UNENCRYPTED = &sValidationExceptionType_ENCRYPTION_CONTRACT_UNENCRYPTED
+var ValidationExceptionType_ENCRYPTION_CONTRACT_SHARED = &sValidationExceptionType_ENCRYPTION_CONTRACT_SHARED
+var ValidationExceptionType_NUM_MANIFESTS_LOW = &sValidationExceptionType_NUM_MANIFESTS_LOW
+var ValidationExceptionType_NUM_MANIFESTS_HIGH = &sValidationExceptionType_NUM_MANIFESTS_HIGH
+var ValidationExceptionType_MANIFEST_DRM_SYSTEMS_INCOMPATIBLE = &sValidationExceptionType_MANIFEST_DRM_SYSTEMS_INCOMPATIBLE
+var ValidationExceptionType_DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE = &sValidationExceptionType_DRM_SYSTEMS_ENCRYPTION_METHOD_INCOMPATIBLE
+var ValidationExceptionType_ROLE_ARN_NOT_ASSUMABLE = &sValidationExceptionType_ROLE_ARN_NOT_ASSUMABLE
+var ValidationExceptionType_ROLE_ARN_LENGTH_OUT_OF_RANGE = &sValidationExceptionType_ROLE_ARN_LENGTH_OUT_OF_RANGE
+var ValidationExceptionType_ROLE_ARN_INVALID_FORMAT = &sValidationExceptionType_ROLE_ARN_INVALID_FORMAT
+var ValidationExceptionType_URL_INVALID = &sValidationExceptionType_URL_INVALID
+var ValidationExceptionType_URL_SCHEME = &sValidationExceptionType_URL_SCHEME
+var ValidationExceptionType_URL_USER_INFO = &sValidationExceptionType_URL_USER_INFO
+var ValidationExceptionType_URL_PORT = &sValidationExceptionType_URL_PORT
+var ValidationExceptionType_URL_UNKNOWN_HOST = &sValidationExceptionType_URL_UNKNOWN_HOST
+var ValidationExceptionType_URL_LOCAL_ADDRESS = &sValidationExceptionType_URL_LOCAL_ADDRESS
+var ValidationExceptionType_URL_LOOPBACK_ADDRESS = &sValidationExceptionType_URL_LOOPBACK_ADDRESS
+var ValidationExceptionType_URL_LINK_LOCAL_ADDRESS = &sValidationExceptionType_URL_LINK_LOCAL_ADDRESS
+var ValidationExceptionType_URL_MULTICAST_ADDRESS = &sValidationExceptionType_URL_MULTICAST_ADDRESS
+var ValidationExceptionType_MEMBER_INVALID = &sValidationExceptionType_MEMBER_INVALID
+var ValidationExceptionType_MEMBER_MISSING = &sValidationExceptionType_MEMBER_MISSING
+var ValidationExceptionType_MEMBER_MIN_VALUE = &sValidationExceptionType_MEMBER_MIN_VALUE
+var ValidationExceptionType_MEMBER_MAX_VALUE = &sValidationExceptionType_MEMBER_MAX_VALUE
+var ValidationExceptionType_MEMBER_MIN_LENGTH = &sValidationExceptionType_MEMBER_MIN_LENGTH
+var ValidationExceptionType_MEMBER_MAX_LENGTH = &sValidationExceptionType_MEMBER_MAX_LENGTH
+var ValidationExceptionType_MEMBER_INVALID_ENUM_VALUE = &sValidationExceptionType_MEMBER_INVALID_ENUM_VALUE
+var ValidationExceptionType_MEMBER_DOES_NOT_MATCH_PATTERN = &sValidationExceptionType_MEMBER_DOES_NOT_MATCH_PATTERN
+var ValidationExceptionType_INVALID_MANIFEST_FILTER = &sValidationExceptionType_INVALID_MANIFEST_FILTER
+var ValidationExceptionType_INVALID_DRM_SETTINGS = &sValidationExceptionType_INVALID_DRM_SETTINGS
+var ValidationExceptionType_INVALID_TIME_DELAY_SECONDS = &sValidationExceptionType_INVALID_TIME_DELAY_SECONDS
+var ValidationExceptionType_END_TIME_EARLIER_THAN_START_TIME = &sValidationExceptionType_END_TIME_EARLIER_THAN_START_TIME
+var ValidationExceptionType_TS_CONTAINER_TYPE_WITH_DASH_MANIFEST = &sValidationExceptionType_TS_CONTAINER_TYPE_WITH_DASH_MANIFEST
+var ValidationExceptionType_DIRECT_MODE_WITH_TIMING_SOURCE = &sValidationExceptionType_DIRECT_MODE_WITH_TIMING_SOURCE
+var ValidationExceptionType_NONE_MODE_WITH_TIMING_SOURCE = &sValidationExceptionType_NONE_MODE_WITH_TIMING_SOURCE
+var ValidationExceptionType_TIMING_SOURCE_MISSING = &sValidationExceptionType_TIMING_SOURCE_MISSING
+var ValidationExceptionType_UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION = &sValidationExceptionType_UPDATE_PERIOD_SMALLER_THAN_SEGMENT_DURATION
+var ValidationExceptionType_PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES = &sValidationExceptionType_PERIOD_TRIGGERS_NONE_SPECIFIED_WITH_ADDITIONAL_VALUES
+var ValidationExceptionType_DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS = &sValidationExceptionType_DRM_SIGNALING_MISMATCH_SEGMENT_ENCRYPTION_STATUS
+var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION = &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_FORCE_ENDPOINT_ERROR_CONFIGURATION
+var ValidationExceptionType_SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY = &sValidationExceptionType_SOURCE_DISRUPTIONS_ENABLED_INCORRECTLY
+var ValidationExceptionType_HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION = &sValidationExceptionType_HARVESTED_MANIFEST_HAS_START_END_FILTER_CONFIGURATION
+var ValidationExceptionType_HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT = &sValidationExceptionType_HARVESTED_MANIFEST_NOT_FOUND_ON_ENDPOINT
+var ValidationExceptionType_TOO_MANY_IN_PROGRESS_HARVEST_JOBS = &sValidationExceptionType_TOO_MANY_IN_PROGRESS_HARVEST_JOBS
+var ValidationExceptionType_HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION = &sValidationExceptionType_HARVEST_JOB_INELIGIBLE_FOR_CANCELLATION
+var ValidationExceptionType_INVALID_HARVEST_JOB_DURATION = &sValidationExceptionType_INVALID_HARVEST_JOB_DURATION
+var ValidationExceptionType_HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE = &sValidationExceptionType_HARVEST_JOB_S3_DESTINATION_MISSING_OR_INCOMPLETE
+var ValidationExceptionType_HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION = &sValidationExceptionType_HARVEST_JOB_UNABLE_TO_WRITE_TO_S3_DESTINATION
+var ValidationExceptionType_HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED = &sValidationExceptionType_HARVEST_JOB_CUSTOMER_ENDPOINT_READ_ACCESS_DENIED
+var ValidationExceptionType_CLIP_START_TIME_WITH_START_OR_END = &sValidationExceptionType_CLIP_START_TIME_WITH_START_OR_END
+var ValidationExceptionType_START_TAG_TIME_OFFSET_INVALID = &sValidationExceptionType_START_TAG_TIME_OFFSET_INVALID
+var ValidationExceptionType_INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION = &sValidationExceptionType_INCOMPATIBLE_DASH_PROFILE_DVB_DASH_CONFIGURATION
+var ValidationExceptionType_DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE = &sValidationExceptionType_DASH_DVB_ATTRIBUTES_WITHOUT_DVB_DASH_PROFILE
+var ValidationExceptionType_INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION = &sValidationExceptionType_INCOMPATIBLE_DASH_COMPACTNESS_CONFIGURATION
+var ValidationExceptionType_INCOMPATIBLE_XML_ENCODING = &sValidationExceptionType_INCOMPATIBLE_XML_ENCODING
+var ValidationExceptionType_CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE = &sValidationExceptionType_CMAF_EXCLUDE_SEGMENT_DRM_METADATA_INCOMPATIBLE_CONTAINER_TYPE
+var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING = &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_INPUT_SWITCHING
+var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION = &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_MQCS_OUTPUT_CONFIGURATION
+var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION = &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_PREFERRED_INPUT_CONFIGURATION
+var ValidationExceptionType_TS_CONTAINER_TYPE_WITH_MSS_MANIFEST = &sValidationExceptionType_TS_CONTAINER_TYPE_WITH_MSS_MANIFEST
+var ValidationExceptionType_CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST = &sValidationExceptionType_CMAF_CONTAINER_TYPE_WITH_MSS_MANIFEST
+var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST = &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_HLS_MANIFEST
+var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST = &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_LL_HLS_MANIFEST
+var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST = &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_DASH_MANIFEST
+var ValidationExceptionType_ISM_CONTAINER_TYPE_WITH_SCTE = &sValidationExceptionType_ISM_CONTAINER_TYPE_WITH_SCTE
+var ValidationExceptionType_ISM_CONTAINER_WITH_KEY_ROTATION = &sValidationExceptionType_ISM_CONTAINER_WITH_KEY_ROTATION
+var ValidationExceptionType_BATCH_GET_SECRET_VALUE_DENIED = &sValidationExceptionType_BATCH_GET_SECRET_VALUE_DENIED
+var ValidationExceptionType_GET_SECRET_VALUE_DENIED = &sValidationExceptionType_GET_SECRET_VALUE_DENIED
+var ValidationExceptionType_DESCRIBE_SECRET_DENIED = &sValidationExceptionType_DESCRIBE_SECRET_DENIED
+var ValidationExceptionType_INVALID_SECRET_FORMAT = &sValidationExceptionType_INVALID_SECRET_FORMAT
+var ValidationExceptionType_SECRET_IS_NOT_ONE_KEY_VALUE_PAIR = &sValidationExceptionType_SECRET_IS_NOT_ONE_KEY_VALUE_PAIR
+var ValidationExceptionType_INVALID_SECRET_KEY = &sValidationExceptionType_INVALID_SECRET_KEY
+var ValidationExceptionType_INVALID_SECRET_VALUE = &sValidationExceptionType_INVALID_SECRET_VALUE
+var ValidationExceptionType_SECRET_ARN_RESOURCE_NOT_FOUND = &sValidationExceptionType_SECRET_ARN_RESOURCE_NOT_FOUND
+var ValidationExceptionType_DECRYPT_SECRET_FAILED = &sValidationExceptionType_DECRYPT_SECRET_FAILED
+var ValidationExceptionType_TOO_MANY_SECRETS = &sValidationExceptionType_TOO_MANY_SECRETS
+var ValidationExceptionType_DUPLICATED_SECRET = &sValidationExceptionType_DUPLICATED_SECRET
+var ValidationExceptionType_MALFORMED_SECRET_ARN = &sValidationExceptionType_MALFORMED_SECRET_ARN
+var ValidationExceptionType_SECRET_FROM_DIFFERENT_ACCOUNT = &sValidationExceptionType_SECRET_FROM_DIFFERENT_ACCOUNT
+var ValidationExceptionType_SECRET_FROM_DIFFERENT_REGION = &sValidationExceptionType_SECRET_FROM_DIFFERENT_REGION
+var ValidationExceptionType_INVALID_SECRET = &sValidationExceptionType_INVALID_SECRET
+var ValidationExceptionType_RESOURCE_NOT_IN_SAME_REGION = &sValidationExceptionType_RESOURCE_NOT_IN_SAME_REGION
+var ValidationExceptionType_CERTIFICATE_RESOURCE_NOT_FOUND = &sValidationExceptionType_CERTIFICATE_RESOURCE_NOT_FOUND
+var ValidationExceptionType_CERTIFICATE_ACCESS_DENIED = &sValidationExceptionType_CERTIFICATE_ACCESS_DENIED
+var ValidationExceptionType_DESCRIBE_CERTIFICATE_FAILED = &sValidationExceptionType_DESCRIBE_CERTIFICATE_FAILED
+var ValidationExceptionType_INVALID_CERTIFICATE_STATUS = &sValidationExceptionType_INVALID_CERTIFICATE_STATUS
+var ValidationExceptionType_INVALID_CERTIFICATE_KEY_ALGORITHM = &sValidationExceptionType_INVALID_CERTIFICATE_KEY_ALGORITHM
+var ValidationExceptionType_INVALID_CERTIFICATE_SIGNATURE_ALGORITHM = &sValidationExceptionType_INVALID_CERTIFICATE_SIGNATURE_ALGORITHM
+var ValidationExceptionType_MISSING_CERTIFICATE_DOMAIN_NAME = &sValidationExceptionType_MISSING_CERTIFICATE_DOMAIN_NAME
+var ValidationExceptionType_INVALID_ARN = &sValidationExceptionType_INVALID_ARN
+var ValidationExceptionType_SCTE_IN_MANIFESTS_INVALID_CONFIGURATION = &sValidationExceptionType_SCTE_IN_MANIFESTS_INVALID_CONFIGURATION
+var ValidationExceptionType_CUSTOM_AD_TYPES_INVALID_CONFIGURATION = &sValidationExceptionType_CUSTOM_AD_TYPES_INVALID_CONFIGURATION
+var ValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE = &sValidationExceptionType_ONLY_CMAF_INPUT_TYPE_ALLOW_OUTPUT_LOCKING_MODE
+var ValidationExceptionType_ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE = &sValidationExceptionType_ONLY_NON_EPOCH_LOCKED_ALLOW_OUTPUT_TIMESTAMP_MODE
+var ValidationExceptionType_OUTPUT_TIMESTAMP_MODE_IMMUTABLE = &sValidationExceptionType_OUTPUT_TIMESTAMP_MODE_IMMUTABLE
+var ValidationExceptionType_NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION = &sValidationExceptionType_NON_EPOCH_LOCKED_WITH_FORCE_ENDPOINT_ERROR_CONFIGURATION
+var ValidationExceptionType_ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE = &sValidationExceptionType_ONLY_HLS_INPUT_TYPE_ALLOW_STREAM_NAME_OUTPUT_MODE
+var ValidationExceptionType_STREAM_NAME_OUTPUT_MODE_IMMUTABLE = &sValidationExceptionType_STREAM_NAME_OUTPUT_MODE_IMMUTABLE
+var ValidationExceptionType_MULTIVIEW_CONFIGURATION_REQUIRED = &sValidationExceptionType_MULTIVIEW_CONFIGURATION_REQUIRED
+var ValidationExceptionType_MULTIVIEW_CONFIGURATION_NOT_ALLOWED = &sValidationExceptionType_MULTIVIEW_CONFIGURATION_NOT_ALLOWED
+var ValidationExceptionType_MULTIVIEW_SOURCE_NOT_FOUND = &sValidationExceptionType_MULTIVIEW_SOURCE_NOT_FOUND
+var ValidationExceptionType_MULTIVIEW_SOURCE_INVALID_INPUT_TYPE = &sValidationExceptionType_MULTIVIEW_SOURCE_INVALID_INPUT_TYPE
+var ValidationExceptionType_MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED = &sValidationExceptionType_MULTIVIEW_CHANNEL_POLICY_NOT_ALLOWED
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_LL_HLS_MANIFEST
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_MSS_MANIFEST
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_ISM_CONTAINER
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_FILTER_CONFIGURATION
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_START_TAG = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_START_TAG
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_HARVEST_JOB
+var ValidationExceptionType_MULTIVIEW_RESET_NOT_ALLOWED = &sValidationExceptionType_MULTIVIEW_RESET_NOT_ALLOWED
+var ValidationExceptionType_MULTIVIEW_DUPLICATE_SOURCE = &sValidationExceptionType_MULTIVIEW_DUPLICATE_SOURCE
+var ValidationExceptionType_MULTIVIEW_DUPLICATE_LAYOUT = &sValidationExceptionType_MULTIVIEW_DUPLICATE_LAYOUT
+var ValidationExceptionType_MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED = &sValidationExceptionType_MULTIVIEW_INPUT_SWITCH_NOT_ALLOWED
+var ValidationExceptionType_MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED = &sValidationExceptionType_MULTIVIEW_OUTPUT_HEADER_NOT_ALLOWED
+var ValidationExceptionType_MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED = &sValidationExceptionType_MULTIVIEW_STARTOVER_WINDOW_NOT_ALLOWED
+var ValidationExceptionType_MULTIVIEW_INVALID_TIME_DELAY_SECONDS = &sValidationExceptionType_MULTIVIEW_INVALID_TIME_DELAY_SECONDS
+var ValidationExceptionType_MULTIVIEW_MANIFEST_WINDOW_TOO_LONG = &sValidationExceptionType_MULTIVIEW_MANIFEST_WINDOW_TOO_LONG
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_IFRAME_ONLY_STREAMS
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_NON_EPOCH_LOCKED
+var ValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION = &sValidationExceptionType_MULTIVIEW_INPUT_TYPE_WITH_SEGMENT_DURATION
+var ValidationExceptionType_MULTIVIEW_SOURCE_NON_EPOCH_LOCKED = &sValidationExceptionType_MULTIVIEW_SOURCE_NON_EPOCH_LOCKED
+var ValidationExceptionType_MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER = &sValidationExceptionType_MULTIVIEW_SCTE_REQUIRES_AVAILS_PERIOD_TRIGGER
+var ValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION = &sValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_WITHOUT_KEY_ROTATION
+var ValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1 = &sValidationExceptionType_CONTENT_KEY_PERIOD_TIMING_REQUIRES_SPEKE_V2_1
+var ValidationExceptionType_MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED = &sValidationExceptionType_MULTIVIEW_FILTER_CONFIGURATION_NOT_ALLOWED
+var ValidationExceptionType_MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE = &sValidationExceptionType_MULTIVIEW_FILTER_LAYOUT_NOT_AVAILABLE
+var ValidationExceptionType_MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE = &sValidationExceptionType_MULTIVIEW_FILTER_SOURCE_NOT_AVAILABLE
+var ValidationExceptionType_MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH = &sValidationExceptionType_MULTIVIEW_FILTER_SOURCE_COUNT_MISMATCH
+var ValidationExceptionType_MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED = &sValidationExceptionType_MULTIVIEW_SOURCE_CHANNEL_LIMIT_EXCEEDED
+var ValidationExceptionType_MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED = &sValidationExceptionType_MULTIVIEW_TS_USE_AUDIO_RENDITION_GROUP_DISABLED
+
+var CancelHarvestJobRequest = &sCancelHarvestJobRequest
+var CancelHarvestJobRequest_ChannelGroupName = &sCancelHarvestJobRequest_ChannelGroupName
+var CancelHarvestJobRequest_ChannelName = &sCancelHarvestJobRequest_ChannelName
+var CancelHarvestJobRequest_OriginEndpointName = &sCancelHarvestJobRequest_OriginEndpointName
+var CancelHarvestJobRequest_HarvestJobName = &sCancelHarvestJobRequest_HarvestJobName
+var CancelHarvestJobRequest_ETag = &sCancelHarvestJobRequest_ETag
+
+var CancelHarvestJobResponse = &sCancelHarvestJobResponse
+
+var CreateChannelGroupRequest = &sCreateChannelGroupRequest
+var CreateChannelGroupRequest_ChannelGroupName = &sCreateChannelGroupRequest_ChannelGroupName
+var CreateChannelGroupRequest_ClientToken = &sCreateChannelGroupRequest_ClientToken
+var CreateChannelGroupRequest_Description = &sCreateChannelGroupRequest_Description
+var CreateChannelGroupRequest_Tags = &sCreateChannelGroupRequest_Tags
+
+var CreateChannelGroupResponse = &sCreateChannelGroupResponse
+var CreateChannelGroupResponse_ChannelGroupName = &sCreateChannelGroupResponse_ChannelGroupName
+var CreateChannelGroupResponse_Arn = &sCreateChannelGroupResponse_Arn
+var CreateChannelGroupResponse_EgressDomain = &sCreateChannelGroupResponse_EgressDomain
+var CreateChannelGroupResponse_CreatedAt = &sCreateChannelGroupResponse_CreatedAt
+var CreateChannelGroupResponse_ModifiedAt = &sCreateChannelGroupResponse_ModifiedAt
+var CreateChannelGroupResponse_ETag = &sCreateChannelGroupResponse_ETag
+var CreateChannelGroupResponse_Description = &sCreateChannelGroupResponse_Description
+var CreateChannelGroupResponse_Tags = &sCreateChannelGroupResponse_Tags
+
+var CreateChannelRequest = &sCreateChannelRequest
+var CreateChannelRequest_ChannelGroupName = &sCreateChannelRequest_ChannelGroupName
+var CreateChannelRequest_ChannelName = &sCreateChannelRequest_ChannelName
+var CreateChannelRequest_ClientToken = &sCreateChannelRequest_ClientToken
+var CreateChannelRequest_InputType = &sCreateChannelRequest_InputType
+var CreateChannelRequest_Description = &sCreateChannelRequest_Description
+var CreateChannelRequest_InputSwitchConfiguration = &sCreateChannelRequest_InputSwitchConfiguration
+var CreateChannelRequest_OutputHeaderConfiguration = &sCreateChannelRequest_OutputHeaderConfiguration
+var CreateChannelRequest_MultiviewConfiguration = &sCreateChannelRequest_MultiviewConfiguration
+var CreateChannelRequest_OutputLockingMode = &sCreateChannelRequest_OutputLockingMode
+var CreateChannelRequest_Tags = &sCreateChannelRequest_Tags
+
+var CreateChannelResponse = &sCreateChannelResponse
+var CreateChannelResponse_MultiviewConfiguration = &sCreateChannelResponse_MultiviewConfiguration
+var CreateChannelResponse_AttachedMultiviewChannels = &sCreateChannelResponse_AttachedMultiviewChannels
+var CreateChannelResponse_Arn = &sCreateChannelResponse_Arn
+var CreateChannelResponse_ChannelName = &sCreateChannelResponse_ChannelName
+var CreateChannelResponse_ChannelGroupName = &sCreateChannelResponse_ChannelGroupName
+var CreateChannelResponse_CreatedAt = &sCreateChannelResponse_CreatedAt
+var CreateChannelResponse_ModifiedAt = &sCreateChannelResponse_ModifiedAt
+var CreateChannelResponse_Description = &sCreateChannelResponse_Description
+var CreateChannelResponse_IngestEndpoints = &sCreateChannelResponse_IngestEndpoints
+var CreateChannelResponse_InputType = &sCreateChannelResponse_InputType
+var CreateChannelResponse_ETag = &sCreateChannelResponse_ETag
+var CreateChannelResponse_Tags = &sCreateChannelResponse_Tags
+var CreateChannelResponse_InputSwitchConfiguration = &sCreateChannelResponse_InputSwitchConfiguration
+var CreateChannelResponse_OutputHeaderConfiguration = &sCreateChannelResponse_OutputHeaderConfiguration
+var CreateChannelResponse_OutputLockingMode = &sCreateChannelResponse_OutputLockingMode
+
+var CreateHarvestJobRequest = &sCreateHarvestJobRequest
+var CreateHarvestJobRequest_ChannelGroupName = &sCreateHarvestJobRequest_ChannelGroupName
+var CreateHarvestJobRequest_ChannelName = &sCreateHarvestJobRequest_ChannelName
+var CreateHarvestJobRequest_OriginEndpointName = &sCreateHarvestJobRequest_OriginEndpointName
+var CreateHarvestJobRequest_Description = &sCreateHarvestJobRequest_Description
+var CreateHarvestJobRequest_HarvestedManifests = &sCreateHarvestJobRequest_HarvestedManifests
+var CreateHarvestJobRequest_ScheduleConfiguration = &sCreateHarvestJobRequest_ScheduleConfiguration
+var CreateHarvestJobRequest_Destination = &sCreateHarvestJobRequest_Destination
+var CreateHarvestJobRequest_ClientToken = &sCreateHarvestJobRequest_ClientToken
+var CreateHarvestJobRequest_HarvestJobName = &sCreateHarvestJobRequest_HarvestJobName
+var CreateHarvestJobRequest_Tags = &sCreateHarvestJobRequest_Tags
+
+var CreateHarvestJobResponse = &sCreateHarvestJobResponse
+var CreateHarvestJobResponse_ChannelGroupName = &sCreateHarvestJobResponse_ChannelGroupName
+var CreateHarvestJobResponse_ChannelName = &sCreateHarvestJobResponse_ChannelName
+var CreateHarvestJobResponse_OriginEndpointName = &sCreateHarvestJobResponse_OriginEndpointName
+var CreateHarvestJobResponse_Destination = &sCreateHarvestJobResponse_Destination
+var CreateHarvestJobResponse_HarvestJobName = &sCreateHarvestJobResponse_HarvestJobName
+var CreateHarvestJobResponse_HarvestedManifests = &sCreateHarvestJobResponse_HarvestedManifests
+var CreateHarvestJobResponse_Description = &sCreateHarvestJobResponse_Description
+var CreateHarvestJobResponse_ScheduleConfiguration = &sCreateHarvestJobResponse_ScheduleConfiguration
+var CreateHarvestJobResponse_Arn = &sCreateHarvestJobResponse_Arn
+var CreateHarvestJobResponse_CreatedAt = &sCreateHarvestJobResponse_CreatedAt
+var CreateHarvestJobResponse_ModifiedAt = &sCreateHarvestJobResponse_ModifiedAt
+var CreateHarvestJobResponse_Status = &sCreateHarvestJobResponse_Status
+var CreateHarvestJobResponse_ErrorMessage = &sCreateHarvestJobResponse_ErrorMessage
+var CreateHarvestJobResponse_ETag = &sCreateHarvestJobResponse_ETag
+var CreateHarvestJobResponse_Tags = &sCreateHarvestJobResponse_Tags
+
+var CreateOriginEndpointRequest = &sCreateOriginEndpointRequest
+var CreateOriginEndpointRequest_ChannelGroupName = &sCreateOriginEndpointRequest_ChannelGroupName
+var CreateOriginEndpointRequest_ChannelName = &sCreateOriginEndpointRequest_ChannelName
+var CreateOriginEndpointRequest_OriginEndpointName = &sCreateOriginEndpointRequest_OriginEndpointName
+var CreateOriginEndpointRequest_ContainerType = &sCreateOriginEndpointRequest_ContainerType
+var CreateOriginEndpointRequest_Segment = &sCreateOriginEndpointRequest_Segment
+var CreateOriginEndpointRequest_ClientToken = &sCreateOriginEndpointRequest_ClientToken
+var CreateOriginEndpointRequest_Description = &sCreateOriginEndpointRequest_Description
+var CreateOriginEndpointRequest_StartoverWindowSeconds = &sCreateOriginEndpointRequest_StartoverWindowSeconds
+var CreateOriginEndpointRequest_HlsManifests = &sCreateOriginEndpointRequest_HlsManifests
+var CreateOriginEndpointRequest_LowLatencyHlsManifests = &sCreateOriginEndpointRequest_LowLatencyHlsManifests
+var CreateOriginEndpointRequest_DashManifests = &sCreateOriginEndpointRequest_DashManifests
+var CreateOriginEndpointRequest_MssManifests = &sCreateOriginEndpointRequest_MssManifests
+var CreateOriginEndpointRequest_ForceEndpointErrorConfiguration = &sCreateOriginEndpointRequest_ForceEndpointErrorConfiguration
+var CreateOriginEndpointRequest_UriSeparator = &sCreateOriginEndpointRequest_UriSeparator
+var CreateOriginEndpointRequest_StreamNameOutputMode = &sCreateOriginEndpointRequest_StreamNameOutputMode
+var CreateOriginEndpointRequest_Tags = &sCreateOriginEndpointRequest_Tags
+
+var CreateOriginEndpointResponse = &sCreateOriginEndpointResponse
+var CreateOriginEndpointResponse_Arn = &sCreateOriginEndpointResponse_Arn
+var CreateOriginEndpointResponse_ChannelGroupName = &sCreateOriginEndpointResponse_ChannelGroupName
+var CreateOriginEndpointResponse_ChannelName = &sCreateOriginEndpointResponse_ChannelName
+var CreateOriginEndpointResponse_OriginEndpointName = &sCreateOriginEndpointResponse_OriginEndpointName
+var CreateOriginEndpointResponse_ContainerType = &sCreateOriginEndpointResponse_ContainerType
+var CreateOriginEndpointResponse_Segment = &sCreateOriginEndpointResponse_Segment
+var CreateOriginEndpointResponse_CreatedAt = &sCreateOriginEndpointResponse_CreatedAt
+var CreateOriginEndpointResponse_ModifiedAt = &sCreateOriginEndpointResponse_ModifiedAt
+var CreateOriginEndpointResponse_Description = &sCreateOriginEndpointResponse_Description
+var CreateOriginEndpointResponse_StartoverWindowSeconds = &sCreateOriginEndpointResponse_StartoverWindowSeconds
+var CreateOriginEndpointResponse_HlsManifests = &sCreateOriginEndpointResponse_HlsManifests
+var CreateOriginEndpointResponse_LowLatencyHlsManifests = &sCreateOriginEndpointResponse_LowLatencyHlsManifests
+var CreateOriginEndpointResponse_DashManifests = &sCreateOriginEndpointResponse_DashManifests
+var CreateOriginEndpointResponse_MssManifests = &sCreateOriginEndpointResponse_MssManifests
+var CreateOriginEndpointResponse_ForceEndpointErrorConfiguration = &sCreateOriginEndpointResponse_ForceEndpointErrorConfiguration
+var CreateOriginEndpointResponse_UriSeparator = &sCreateOriginEndpointResponse_UriSeparator
+var CreateOriginEndpointResponse_StreamNameOutputMode = &sCreateOriginEndpointResponse_StreamNameOutputMode
+var CreateOriginEndpointResponse_ETag = &sCreateOriginEndpointResponse_ETag
+var CreateOriginEndpointResponse_Tags = &sCreateOriginEndpointResponse_Tags
+
+var DeleteChannelGroupRequest = &sDeleteChannelGroupRequest
+var DeleteChannelGroupRequest_ChannelGroupName = &sDeleteChannelGroupRequest_ChannelGroupName
+
+var DeleteChannelGroupResponse = &sDeleteChannelGroupResponse
+
+var DeleteChannelRequest = &sDeleteChannelRequest
+var DeleteChannelRequest_ChannelGroupName = &sDeleteChannelRequest_ChannelGroupName
+var DeleteChannelRequest_ChannelName = &sDeleteChannelRequest_ChannelName
+
+var DeleteChannelResponse = &sDeleteChannelResponse
+
+var DeleteChannelPolicyRequest = &sDeleteChannelPolicyRequest
+var DeleteChannelPolicyRequest_ChannelGroupName = &sDeleteChannelPolicyRequest_ChannelGroupName
+var DeleteChannelPolicyRequest_ChannelName = &sDeleteChannelPolicyRequest_ChannelName
+
+var DeleteChannelPolicyResponse = &sDeleteChannelPolicyResponse
+
+var DeleteOriginEndpointRequest = &sDeleteOriginEndpointRequest
+var DeleteOriginEndpointRequest_ChannelGroupName = &sDeleteOriginEndpointRequest_ChannelGroupName
+var DeleteOriginEndpointRequest_ChannelName = &sDeleteOriginEndpointRequest_ChannelName
+var DeleteOriginEndpointRequest_OriginEndpointName = &sDeleteOriginEndpointRequest_OriginEndpointName
+
+var DeleteOriginEndpointResponse = &sDeleteOriginEndpointResponse
+
+var DeleteOriginEndpointPolicyRequest = &sDeleteOriginEndpointPolicyRequest
+var DeleteOriginEndpointPolicyRequest_ChannelGroupName = &sDeleteOriginEndpointPolicyRequest_ChannelGroupName
+var DeleteOriginEndpointPolicyRequest_ChannelName = &sDeleteOriginEndpointPolicyRequest_ChannelName
+var DeleteOriginEndpointPolicyRequest_OriginEndpointName = &sDeleteOriginEndpointPolicyRequest_OriginEndpointName
+
+var DeleteOriginEndpointPolicyResponse = &sDeleteOriginEndpointPolicyResponse
+
+var GetChannelGroupRequest = &sGetChannelGroupRequest
+var GetChannelGroupRequest_ChannelGroupName = &sGetChannelGroupRequest_ChannelGroupName
+
+var GetChannelGroupResponse = &sGetChannelGroupResponse
+var GetChannelGroupResponse_ChannelGroupName = &sGetChannelGroupResponse_ChannelGroupName
+var GetChannelGroupResponse_Arn = &sGetChannelGroupResponse_Arn
+var GetChannelGroupResponse_EgressDomain = &sGetChannelGroupResponse_EgressDomain
+var GetChannelGroupResponse_CreatedAt = &sGetChannelGroupResponse_CreatedAt
+var GetChannelGroupResponse_ModifiedAt = &sGetChannelGroupResponse_ModifiedAt
+var GetChannelGroupResponse_Description = &sGetChannelGroupResponse_Description
+var GetChannelGroupResponse_ETag = &sGetChannelGroupResponse_ETag
+var GetChannelGroupResponse_Tags = &sGetChannelGroupResponse_Tags
+
+var GetChannelRequest = &sGetChannelRequest
+var GetChannelRequest_ChannelGroupName = &sGetChannelRequest_ChannelGroupName
+var GetChannelRequest_ChannelName = &sGetChannelRequest_ChannelName
+
+var GetChannelResponse = &sGetChannelResponse
+var GetChannelResponse_MultiviewConfiguration = &sGetChannelResponse_MultiviewConfiguration
+var GetChannelResponse_AttachedMultiviewChannels = &sGetChannelResponse_AttachedMultiviewChannels
+var GetChannelResponse_Arn = &sGetChannelResponse_Arn
+var GetChannelResponse_ChannelName = &sGetChannelResponse_ChannelName
+var GetChannelResponse_ChannelGroupName = &sGetChannelResponse_ChannelGroupName
+var GetChannelResponse_CreatedAt = &sGetChannelResponse_CreatedAt
+var GetChannelResponse_ModifiedAt = &sGetChannelResponse_ModifiedAt
+var GetChannelResponse_ResetAt = &sGetChannelResponse_ResetAt
+var GetChannelResponse_Description = &sGetChannelResponse_Description
+var GetChannelResponse_IngestEndpoints = &sGetChannelResponse_IngestEndpoints
+var GetChannelResponse_InputType = &sGetChannelResponse_InputType
+var GetChannelResponse_ETag = &sGetChannelResponse_ETag
+var GetChannelResponse_Tags = &sGetChannelResponse_Tags
+var GetChannelResponse_InputSwitchConfiguration = &sGetChannelResponse_InputSwitchConfiguration
+var GetChannelResponse_OutputHeaderConfiguration = &sGetChannelResponse_OutputHeaderConfiguration
+var GetChannelResponse_OutputLockingMode = &sGetChannelResponse_OutputLockingMode
+
+var GetChannelPolicyRequest = &sGetChannelPolicyRequest
+var GetChannelPolicyRequest_ChannelGroupName = &sGetChannelPolicyRequest_ChannelGroupName
+var GetChannelPolicyRequest_ChannelName = &sGetChannelPolicyRequest_ChannelName
+
+var GetChannelPolicyResponse = &sGetChannelPolicyResponse
+var GetChannelPolicyResponse_ChannelGroupName = &sGetChannelPolicyResponse_ChannelGroupName
+var GetChannelPolicyResponse_ChannelName = &sGetChannelPolicyResponse_ChannelName
+var GetChannelPolicyResponse_Policy = &sGetChannelPolicyResponse_Policy
+
+var GetHarvestJobRequest = &sGetHarvestJobRequest
+var GetHarvestJobRequest_ChannelGroupName = &sGetHarvestJobRequest_ChannelGroupName
+var GetHarvestJobRequest_ChannelName = &sGetHarvestJobRequest_ChannelName
+var GetHarvestJobRequest_OriginEndpointName = &sGetHarvestJobRequest_OriginEndpointName
+var GetHarvestJobRequest_HarvestJobName = &sGetHarvestJobRequest_HarvestJobName
+
+var GetHarvestJobResponse = &sGetHarvestJobResponse
+var GetHarvestJobResponse_ChannelGroupName = &sGetHarvestJobResponse_ChannelGroupName
+var GetHarvestJobResponse_ChannelName = &sGetHarvestJobResponse_ChannelName
+var GetHarvestJobResponse_OriginEndpointName = &sGetHarvestJobResponse_OriginEndpointName
+var GetHarvestJobResponse_Destination = &sGetHarvestJobResponse_Destination
+var GetHarvestJobResponse_HarvestJobName = &sGetHarvestJobResponse_HarvestJobName
+var GetHarvestJobResponse_HarvestedManifests = &sGetHarvestJobResponse_HarvestedManifests
+var GetHarvestJobResponse_Description = &sGetHarvestJobResponse_Description
+var GetHarvestJobResponse_ScheduleConfiguration = &sGetHarvestJobResponse_ScheduleConfiguration
+var GetHarvestJobResponse_Arn = &sGetHarvestJobResponse_Arn
+var GetHarvestJobResponse_CreatedAt = &sGetHarvestJobResponse_CreatedAt
+var GetHarvestJobResponse_ModifiedAt = &sGetHarvestJobResponse_ModifiedAt
+var GetHarvestJobResponse_Status = &sGetHarvestJobResponse_Status
+var GetHarvestJobResponse_ErrorMessage = &sGetHarvestJobResponse_ErrorMessage
+var GetHarvestJobResponse_ETag = &sGetHarvestJobResponse_ETag
+var GetHarvestJobResponse_Tags = &sGetHarvestJobResponse_Tags
+
+var GetOriginEndpointRequest = &sGetOriginEndpointRequest
+var GetOriginEndpointRequest_ChannelGroupName = &sGetOriginEndpointRequest_ChannelGroupName
+var GetOriginEndpointRequest_ChannelName = &sGetOriginEndpointRequest_ChannelName
+var GetOriginEndpointRequest_OriginEndpointName = &sGetOriginEndpointRequest_OriginEndpointName
+
+var GetOriginEndpointResponse = &sGetOriginEndpointResponse
+var GetOriginEndpointResponse_Arn = &sGetOriginEndpointResponse_Arn
+var GetOriginEndpointResponse_ChannelGroupName = &sGetOriginEndpointResponse_ChannelGroupName
+var GetOriginEndpointResponse_ChannelName = &sGetOriginEndpointResponse_ChannelName
+var GetOriginEndpointResponse_OriginEndpointName = &sGetOriginEndpointResponse_OriginEndpointName
+var GetOriginEndpointResponse_ContainerType = &sGetOriginEndpointResponse_ContainerType
+var GetOriginEndpointResponse_Segment = &sGetOriginEndpointResponse_Segment
+var GetOriginEndpointResponse_CreatedAt = &sGetOriginEndpointResponse_CreatedAt
+var GetOriginEndpointResponse_ModifiedAt = &sGetOriginEndpointResponse_ModifiedAt
+var GetOriginEndpointResponse_ResetAt = &sGetOriginEndpointResponse_ResetAt
+var GetOriginEndpointResponse_Description = &sGetOriginEndpointResponse_Description
+var GetOriginEndpointResponse_StartoverWindowSeconds = &sGetOriginEndpointResponse_StartoverWindowSeconds
+var GetOriginEndpointResponse_HlsManifests = &sGetOriginEndpointResponse_HlsManifests
+var GetOriginEndpointResponse_LowLatencyHlsManifests = &sGetOriginEndpointResponse_LowLatencyHlsManifests
+var GetOriginEndpointResponse_DashManifests = &sGetOriginEndpointResponse_DashManifests
+var GetOriginEndpointResponse_MssManifests = &sGetOriginEndpointResponse_MssManifests
+var GetOriginEndpointResponse_ForceEndpointErrorConfiguration = &sGetOriginEndpointResponse_ForceEndpointErrorConfiguration
+var GetOriginEndpointResponse_UriSeparator = &sGetOriginEndpointResponse_UriSeparator
+var GetOriginEndpointResponse_StreamNameOutputMode = &sGetOriginEndpointResponse_StreamNameOutputMode
+var GetOriginEndpointResponse_ETag = &sGetOriginEndpointResponse_ETag
+var GetOriginEndpointResponse_Tags = &sGetOriginEndpointResponse_Tags
+
+var GetOriginEndpointPolicyRequest = &sGetOriginEndpointPolicyRequest
+var GetOriginEndpointPolicyRequest_ChannelGroupName = &sGetOriginEndpointPolicyRequest_ChannelGroupName
+var GetOriginEndpointPolicyRequest_ChannelName = &sGetOriginEndpointPolicyRequest_ChannelName
+var GetOriginEndpointPolicyRequest_OriginEndpointName = &sGetOriginEndpointPolicyRequest_OriginEndpointName
+
+var GetOriginEndpointPolicyResponse = &sGetOriginEndpointPolicyResponse
+var GetOriginEndpointPolicyResponse_ChannelGroupName = &sGetOriginEndpointPolicyResponse_ChannelGroupName
+var GetOriginEndpointPolicyResponse_ChannelName = &sGetOriginEndpointPolicyResponse_ChannelName
+var GetOriginEndpointPolicyResponse_OriginEndpointName = &sGetOriginEndpointPolicyResponse_OriginEndpointName
+var GetOriginEndpointPolicyResponse_Policy = &sGetOriginEndpointPolicyResponse_Policy
+var GetOriginEndpointPolicyResponse_CdnAuthConfiguration = &sGetOriginEndpointPolicyResponse_CdnAuthConfiguration
+
+var ListChannelGroupsRequest = &sListChannelGroupsRequest
+var ListChannelGroupsRequest_MaxResults = &sListChannelGroupsRequest_MaxResults
+var ListChannelGroupsRequest_NextToken = &sListChannelGroupsRequest_NextToken
+
+var ListChannelGroupsResponse = &sListChannelGroupsResponse
+var ListChannelGroupsResponse_Items = &sListChannelGroupsResponse_Items
+var ListChannelGroupsResponse_NextToken = &sListChannelGroupsResponse_NextToken
+
+var ListChannelsRequest = &sListChannelsRequest
+var ListChannelsRequest_ChannelGroupName = &sListChannelsRequest_ChannelGroupName
+var ListChannelsRequest_MaxResults = &sListChannelsRequest_MaxResults
+var ListChannelsRequest_NextToken = &sListChannelsRequest_NextToken
+
+var ListChannelsResponse = &sListChannelsResponse
+var ListChannelsResponse_Items = &sListChannelsResponse_Items
+var ListChannelsResponse_NextToken = &sListChannelsResponse_NextToken
+
+var ListHarvestJobsRequest = &sListHarvestJobsRequest
+var ListHarvestJobsRequest_ChannelGroupName = &sListHarvestJobsRequest_ChannelGroupName
+var ListHarvestJobsRequest_ChannelName = &sListHarvestJobsRequest_ChannelName
+var ListHarvestJobsRequest_OriginEndpointName = &sListHarvestJobsRequest_OriginEndpointName
+var ListHarvestJobsRequest_Status = &sListHarvestJobsRequest_Status
+var ListHarvestJobsRequest_MaxResults = &sListHarvestJobsRequest_MaxResults
+var ListHarvestJobsRequest_NextToken = &sListHarvestJobsRequest_NextToken
+
+var ListHarvestJobsResponse = &sListHarvestJobsResponse
+var ListHarvestJobsResponse_Items = &sListHarvestJobsResponse_Items
+var ListHarvestJobsResponse_NextToken = &sListHarvestJobsResponse_NextToken
+
+var ListOriginEndpointsRequest = &sListOriginEndpointsRequest
+var ListOriginEndpointsRequest_ChannelGroupName = &sListOriginEndpointsRequest_ChannelGroupName
+var ListOriginEndpointsRequest_ChannelName = &sListOriginEndpointsRequest_ChannelName
+var ListOriginEndpointsRequest_MaxResults = &sListOriginEndpointsRequest_MaxResults
+var ListOriginEndpointsRequest_NextToken = &sListOriginEndpointsRequest_NextToken
+
+var ListOriginEndpointsResponse = &sListOriginEndpointsResponse
+var ListOriginEndpointsResponse_Items = &sListOriginEndpointsResponse_Items
+var ListOriginEndpointsResponse_NextToken = &sListOriginEndpointsResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutChannelPolicyRequest = &sPutChannelPolicyRequest
+var PutChannelPolicyRequest_ChannelGroupName = &sPutChannelPolicyRequest_ChannelGroupName
+var PutChannelPolicyRequest_ChannelName = &sPutChannelPolicyRequest_ChannelName
+var PutChannelPolicyRequest_Policy = &sPutChannelPolicyRequest_Policy
+
+var PutChannelPolicyResponse = &sPutChannelPolicyResponse
+
+var PutOriginEndpointPolicyRequest = &sPutOriginEndpointPolicyRequest
+var PutOriginEndpointPolicyRequest_ChannelGroupName = &sPutOriginEndpointPolicyRequest_ChannelGroupName
+var PutOriginEndpointPolicyRequest_ChannelName = &sPutOriginEndpointPolicyRequest_ChannelName
+var PutOriginEndpointPolicyRequest_OriginEndpointName = &sPutOriginEndpointPolicyRequest_OriginEndpointName
+var PutOriginEndpointPolicyRequest_Policy = &sPutOriginEndpointPolicyRequest_Policy
+var PutOriginEndpointPolicyRequest_CdnAuthConfiguration = &sPutOriginEndpointPolicyRequest_CdnAuthConfiguration
+
+var PutOriginEndpointPolicyResponse = &sPutOriginEndpointPolicyResponse
+
+var ResetChannelStateRequest = &sResetChannelStateRequest
+var ResetChannelStateRequest_ChannelGroupName = &sResetChannelStateRequest_ChannelGroupName
+var ResetChannelStateRequest_ChannelName = &sResetChannelStateRequest_ChannelName
+
+var ResetChannelStateResponse = &sResetChannelStateResponse
+var ResetChannelStateResponse_ChannelGroupName = &sResetChannelStateResponse_ChannelGroupName
+var ResetChannelStateResponse_ChannelName = &sResetChannelStateResponse_ChannelName
+var ResetChannelStateResponse_Arn = &sResetChannelStateResponse_Arn
+var ResetChannelStateResponse_ResetAt = &sResetChannelStateResponse_ResetAt
+
+var ResetOriginEndpointStateRequest = &sResetOriginEndpointStateRequest
+var ResetOriginEndpointStateRequest_ChannelGroupName = &sResetOriginEndpointStateRequest_ChannelGroupName
+var ResetOriginEndpointStateRequest_ChannelName = &sResetOriginEndpointStateRequest_ChannelName
+var ResetOriginEndpointStateRequest_OriginEndpointName = &sResetOriginEndpointStateRequest_OriginEndpointName
+
+var ResetOriginEndpointStateResponse = &sResetOriginEndpointStateResponse
+var ResetOriginEndpointStateResponse_ChannelGroupName = &sResetOriginEndpointStateResponse_ChannelGroupName
+var ResetOriginEndpointStateResponse_ChannelName = &sResetOriginEndpointStateResponse_ChannelName
+var ResetOriginEndpointStateResponse_OriginEndpointName = &sResetOriginEndpointStateResponse_OriginEndpointName
+var ResetOriginEndpointStateResponse_Arn = &sResetOriginEndpointStateResponse_Arn
+var ResetOriginEndpointStateResponse_ResetAt = &sResetOriginEndpointStateResponse_ResetAt
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UpdateChannelGroupRequest = &sUpdateChannelGroupRequest
+var UpdateChannelGroupRequest_ChannelGroupName = &sUpdateChannelGroupRequest_ChannelGroupName
+var UpdateChannelGroupRequest_ETag = &sUpdateChannelGroupRequest_ETag
+var UpdateChannelGroupRequest_Description = &sUpdateChannelGroupRequest_Description
+
+var UpdateChannelGroupResponse = &sUpdateChannelGroupResponse
+var UpdateChannelGroupResponse_ChannelGroupName = &sUpdateChannelGroupResponse_ChannelGroupName
+var UpdateChannelGroupResponse_Arn = &sUpdateChannelGroupResponse_Arn
+var UpdateChannelGroupResponse_EgressDomain = &sUpdateChannelGroupResponse_EgressDomain
+var UpdateChannelGroupResponse_CreatedAt = &sUpdateChannelGroupResponse_CreatedAt
+var UpdateChannelGroupResponse_ModifiedAt = &sUpdateChannelGroupResponse_ModifiedAt
+var UpdateChannelGroupResponse_Description = &sUpdateChannelGroupResponse_Description
+var UpdateChannelGroupResponse_ETag = &sUpdateChannelGroupResponse_ETag
+var UpdateChannelGroupResponse_Tags = &sUpdateChannelGroupResponse_Tags
+
+var UpdateChannelRequest = &sUpdateChannelRequest
+var UpdateChannelRequest_ChannelGroupName = &sUpdateChannelRequest_ChannelGroupName
+var UpdateChannelRequest_ChannelName = &sUpdateChannelRequest_ChannelName
+var UpdateChannelRequest_ETag = &sUpdateChannelRequest_ETag
+var UpdateChannelRequest_Description = &sUpdateChannelRequest_Description
+var UpdateChannelRequest_InputSwitchConfiguration = &sUpdateChannelRequest_InputSwitchConfiguration
+var UpdateChannelRequest_OutputHeaderConfiguration = &sUpdateChannelRequest_OutputHeaderConfiguration
+var UpdateChannelRequest_MultiviewConfiguration = &sUpdateChannelRequest_MultiviewConfiguration
+
+var UpdateChannelResponse = &sUpdateChannelResponse
+var UpdateChannelResponse_MultiviewConfiguration = &sUpdateChannelResponse_MultiviewConfiguration
+var UpdateChannelResponse_AttachedMultiviewChannels = &sUpdateChannelResponse_AttachedMultiviewChannels
+var UpdateChannelResponse_Arn = &sUpdateChannelResponse_Arn
+var UpdateChannelResponse_ChannelName = &sUpdateChannelResponse_ChannelName
+var UpdateChannelResponse_ChannelGroupName = &sUpdateChannelResponse_ChannelGroupName
+var UpdateChannelResponse_CreatedAt = &sUpdateChannelResponse_CreatedAt
+var UpdateChannelResponse_ModifiedAt = &sUpdateChannelResponse_ModifiedAt
+var UpdateChannelResponse_Description = &sUpdateChannelResponse_Description
+var UpdateChannelResponse_IngestEndpoints = &sUpdateChannelResponse_IngestEndpoints
+var UpdateChannelResponse_InputType = &sUpdateChannelResponse_InputType
+var UpdateChannelResponse_ETag = &sUpdateChannelResponse_ETag
+var UpdateChannelResponse_Tags = &sUpdateChannelResponse_Tags
+var UpdateChannelResponse_InputSwitchConfiguration = &sUpdateChannelResponse_InputSwitchConfiguration
+var UpdateChannelResponse_OutputHeaderConfiguration = &sUpdateChannelResponse_OutputHeaderConfiguration
+var UpdateChannelResponse_OutputLockingMode = &sUpdateChannelResponse_OutputLockingMode
+
+var UpdateOriginEndpointRequest = &sUpdateOriginEndpointRequest
+var UpdateOriginEndpointRequest_ChannelGroupName = &sUpdateOriginEndpointRequest_ChannelGroupName
+var UpdateOriginEndpointRequest_ChannelName = &sUpdateOriginEndpointRequest_ChannelName
+var UpdateOriginEndpointRequest_OriginEndpointName = &sUpdateOriginEndpointRequest_OriginEndpointName
+var UpdateOriginEndpointRequest_ContainerType = &sUpdateOriginEndpointRequest_ContainerType
+var UpdateOriginEndpointRequest_Segment = &sUpdateOriginEndpointRequest_Segment
+var UpdateOriginEndpointRequest_Description = &sUpdateOriginEndpointRequest_Description
+var UpdateOriginEndpointRequest_StartoverWindowSeconds = &sUpdateOriginEndpointRequest_StartoverWindowSeconds
+var UpdateOriginEndpointRequest_HlsManifests = &sUpdateOriginEndpointRequest_HlsManifests
+var UpdateOriginEndpointRequest_LowLatencyHlsManifests = &sUpdateOriginEndpointRequest_LowLatencyHlsManifests
+var UpdateOriginEndpointRequest_DashManifests = &sUpdateOriginEndpointRequest_DashManifests
+var UpdateOriginEndpointRequest_MssManifests = &sUpdateOriginEndpointRequest_MssManifests
+var UpdateOriginEndpointRequest_ForceEndpointErrorConfiguration = &sUpdateOriginEndpointRequest_ForceEndpointErrorConfiguration
+var UpdateOriginEndpointRequest_UriSeparator = &sUpdateOriginEndpointRequest_UriSeparator
+var UpdateOriginEndpointRequest_StreamNameOutputMode = &sUpdateOriginEndpointRequest_StreamNameOutputMode
+var UpdateOriginEndpointRequest_ETag = &sUpdateOriginEndpointRequest_ETag
+
+var UpdateOriginEndpointResponse = &sUpdateOriginEndpointResponse
+var UpdateOriginEndpointResponse_Arn = &sUpdateOriginEndpointResponse_Arn
+var UpdateOriginEndpointResponse_ChannelGroupName = &sUpdateOriginEndpointResponse_ChannelGroupName
+var UpdateOriginEndpointResponse_ChannelName = &sUpdateOriginEndpointResponse_ChannelName
+var UpdateOriginEndpointResponse_OriginEndpointName = &sUpdateOriginEndpointResponse_OriginEndpointName
+var UpdateOriginEndpointResponse_ContainerType = &sUpdateOriginEndpointResponse_ContainerType
+var UpdateOriginEndpointResponse_Segment = &sUpdateOriginEndpointResponse_Segment
+var UpdateOriginEndpointResponse_CreatedAt = &sUpdateOriginEndpointResponse_CreatedAt
+var UpdateOriginEndpointResponse_ModifiedAt = &sUpdateOriginEndpointResponse_ModifiedAt
+var UpdateOriginEndpointResponse_Description = &sUpdateOriginEndpointResponse_Description
+var UpdateOriginEndpointResponse_StartoverWindowSeconds = &sUpdateOriginEndpointResponse_StartoverWindowSeconds
+var UpdateOriginEndpointResponse_HlsManifests = &sUpdateOriginEndpointResponse_HlsManifests
+var UpdateOriginEndpointResponse_LowLatencyHlsManifests = &sUpdateOriginEndpointResponse_LowLatencyHlsManifests
+var UpdateOriginEndpointResponse_MssManifests = &sUpdateOriginEndpointResponse_MssManifests
+var UpdateOriginEndpointResponse_ForceEndpointErrorConfiguration = &sUpdateOriginEndpointResponse_ForceEndpointErrorConfiguration
+var UpdateOriginEndpointResponse_UriSeparator = &sUpdateOriginEndpointResponse_UriSeparator
+var UpdateOriginEndpointResponse_StreamNameOutputMode = &sUpdateOriginEndpointResponse_StreamNameOutputMode
+var UpdateOriginEndpointResponse_ETag = &sUpdateOriginEndpointResponse_ETag
+var UpdateOriginEndpointResponse_Tags = &sUpdateOriginEndpointResponse_Tags
+var UpdateOriginEndpointResponse_DashManifests = &sUpdateOriginEndpointResponse_DashManifests
+
+var Mediapackagev2 = &smithy.ServiceSchema{Schema: &s_mediapackagev2, Version: "2022-12-25"}

@@ -4,2677 +4,1918 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateEventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateEventBus",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var CreateSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateSubscriber",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteEventBus",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var DeleteSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteSubscriber",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeEventBus",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var DescribeSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeSubscriber",
-}, smithy.ShapeTypeOperation, 0)
-
-var GetResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "GetResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEventBuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListEventBuses",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListEventSources = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListEventSources",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListResourcePolicies = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListResourcePolicies",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListSubscribers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListSubscribers",
-}, smithy.ShapeTypeOperation, 0)
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutRawEvents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEvents",
-}, smithy.ShapeTypeOperation, 0)
-
-var PutResourcePolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutResourcePolicy",
-}, smithy.ShapeTypeOperation, 0)
-
-var RevokeResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RevokeResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEventBus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateEventBus",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateEventSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateEventSource",
-}, smithy.ShapeTypeOperation, 0)
-
-var UpdateSubscriber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateSubscriber",
-}, smithy.ShapeTypeOperation, 0)
-
-var _AWSEventsV2 = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "AWSEventsV2",
-}, smithy.ShapeTypeService, 0, &smithytraits.XMLNamespace{URI: "http://eventsv2.amazonaws.com/doc/2025-05-15"})
-
-var AWSEventsV2 = smithy.NewServiceSchema(_AWSEventsV2, "2025-05-15")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var _AccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "AccountId",
-}, smithy.ShapeTypeString, 0)
-
-var AwsServiceEventsSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "AwsServiceEventsSourceConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var AwsServiceEventsSourceConfiguration_AwsService *smithy.Schema
-
-var AwsServiceEventsSourceConfiguration_Pattern *smithy.Schema
-
-var AwsServiceEventsSourceConfiguration_OnFailureConfiguration *smithy.Schema
-
-var _AwsServiceSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "AwsServiceSource",
-}, smithy.ShapeTypeString, 0)
-
-var BatchConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "BatchConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var BatchConfiguration_MaxBatchSize *smithy.Schema
-
-var BatchConfiguration_MaxBatchWindowInSeconds *smithy.Schema
-
-var BusState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "BusState",
-}, smithy.ShapeTypeEnum, 7)
-var BusState_CREATING *smithy.Schema
-
-var BusState_CREATE_FAILED *smithy.Schema
-
-var BusState_UPDATING *smithy.Schema
-
-var BusState_UPDATE_FAILED *smithy.Schema
-
-var BusState_DELETING *smithy.Schema
-
-var BusState_ACTIVE *smithy.Schema
-
-var BusState_DELETE_FAILED *smithy.Schema
-
-var _ClientToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ClientToken",
-}, smithy.ShapeTypeString, 0)
-
-var ConcurrentModificationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ConcurrentModificationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConcurrentModificationException_Message *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var ConfluentPublicRegistryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ConfluentPublicRegistryConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var ConfluentPublicRegistryConfiguration_ConnectionArn *smithy.Schema
-
-var _ConnectionArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ConnectionArn",
-}, smithy.ShapeTypeString, 0)
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var _DeadLetterQueueArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeadLetterQueueArn",
-}, smithy.ShapeTypeString, 0)
-
-var DeduplicationConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeduplicationConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var DeduplicationConfiguration_DeduplicationType *smithy.Schema
-
-var DeduplicationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeduplicationType",
-}, smithy.ShapeTypeEnum, 1)
-var DeduplicationType_CONTENT_BASED *smithy.Schema
-
-var _Description = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "Description",
-}, smithy.ShapeTypeString, 0)
-
-var _DetailType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DetailType",
-}, smithy.ShapeTypeString, 0)
-
-var EncryptionConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EncryptionConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var EncryptionConfiguration_KmsKeyIdentifier *smithy.Schema
-
-var _ErrorCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ErrorCode",
-}, smithy.ShapeTypeString, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventBusArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventBusArn",
-}, smithy.ShapeTypeString, 0)
-
-var _EventBusName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventBusName",
-}, smithy.ShapeTypeString, 0)
-
-var EventBusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventBusSummary",
-}, smithy.ShapeTypeStructure, 8)
-var EventBusSummary_Name *smithy.Schema
-
-var EventBusSummary_EventBusArn *smithy.Schema
-
-var EventBusSummary_Description *smithy.Schema
-
-var EventBusSummary_CreationTime *smithy.Schema
-
-var EventBusSummary_LastModifiedTime *smithy.Schema
-
-var EventBusSummary_State *smithy.Schema
-
-var EventBusSummary_StateReason *smithy.Schema
-
-var EventBusSummary_EventBusAccountId *smithy.Schema
-
-var _EventBusSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventBusSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EventBusSummaryList_member *smithy.Schema
-
-var _EventBusV2MetadataMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventBusV2MetadataMap",
-}, smithy.ShapeTypeMap, 2)
-var _EventBusV2MetadataMap_key *smithy.Schema
-
-var _EventBusV2MetadataMap_value *smithy.Schema
-
-var EventBusV2Parameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventBusV2Parameters",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Sensitive{})
-var EventBusV2Parameters_Metadata *smithy.Schema
-
-var EventBusV2Parameters_SystemMetadata *smithy.Schema
-
-var EventBusV2Parameters_DeduplicationConfiguration *smithy.Schema
-
-var EventBusV2SystemMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventBusV2SystemMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var EventBusV2SystemMetadata_EventGroupId *smithy.Schema
-
-var EventBusV2SystemMetadata_DeduplicationId *smithy.Schema
-
-var _EventData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventData",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _EventDeduplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventDeduplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventDetail",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EventGroupId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventGroupId",
-}, smithy.ShapeTypeString, 0)
-
-var _EventId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventId",
-}, smithy.ShapeTypeString, 0)
-
-var _EventMetadataKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventMetadataKey",
-}, smithy.ShapeTypeString, 0)
-
-var _EventMetadataMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventMetadataMap",
-}, smithy.ShapeTypeMap, 2)
-var _EventMetadataMap_key *smithy.Schema
-
-var _EventMetadataMap_value *smithy.Schema
-
-var _EventMetadataValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventMetadataValue",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EventPattern = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventPattern",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _EventResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventResource",
-}, smithy.ShapeTypeString, 0)
-
-var _EventSourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventSourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var EventSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventSourceConfiguration",
-}, smithy.ShapeTypeUnion, 2)
-var EventSourceConfiguration_AwsServiceEventsConfiguration *smithy.Schema
-
-var EventSourceConfiguration_PartnerEventsConfiguration *smithy.Schema
-
-var _EventSourceName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventSourceName",
-}, smithy.ShapeTypeString, 0)
-
-var EventSourceState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventSourceState",
-}, smithy.ShapeTypeEnum, 7)
-var EventSourceState_CREATING *smithy.Schema
-
-var EventSourceState_ACTIVE *smithy.Schema
-
-var EventSourceState_UPDATING *smithy.Schema
-
-var EventSourceState_CREATE_FAILED *smithy.Schema
-
-var EventSourceState_UPDATE_FAILED *smithy.Schema
-
-var EventSourceState_DELETING *smithy.Schema
-
-var EventSourceState_DELETE_FAILED *smithy.Schema
-
-var EventSourceSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventSourceSummary",
-}, smithy.ShapeTypeStructure, 9)
-var EventSourceSummary_EventSourceArn *smithy.Schema
-
-var EventSourceSummary_Name *smithy.Schema
-
-var EventSourceSummary_EventBusArn *smithy.Schema
-
-var EventSourceSummary_Type *smithy.Schema
-
-var EventSourceSummary_State *smithy.Schema
-
-var EventSourceSummary_Revoked *smithy.Schema
-
-var EventSourceSummary_CreationTime *smithy.Schema
-
-var EventSourceSummary_LastModifiedTime *smithy.Schema
-
-var EventSourceSummary_EventSourceAccountId *smithy.Schema
-
-var _EventSourceSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventSourceSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _EventSourceSummaryList_member *smithy.Schema
-
-var EventSourceType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "EventSourceType",
-}, smithy.ShapeTypeEnum, 2)
-var EventSourceType_AWS_SERVICE_EVENTS *smithy.Schema
-
-var EventSourceType_PARTNER_EVENTS *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Pattern *smithy.Schema
-
-var Filter_Scope *smithy.Schema
-
-var FilterConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "FilterConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var FilterConfiguration_Language *smithy.Schema
-
-var FilterConfiguration_Filters *smithy.Schema
-
-var FilterLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "FilterLanguage",
-}, smithy.ShapeTypeEnum, 1)
-var FilterLanguage_EVENT_BRIDGE_PATTERN *smithy.Schema
-
-var _FilterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "FilterList",
-}, smithy.ShapeTypeList, 1)
-var _FilterList_member *smithy.Schema
-
-var FilterScope = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "FilterScope",
-}, smithy.ShapeTypeEnum, 3)
-var FilterScope_DATA *smithy.Schema
-
-var FilterScope_METADATA *smithy.Schema
-
-var FilterScope_SYSTEM_METADATA *smithy.Schema
-
-var _HeaderKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "HeaderKey",
-}, smithy.ShapeTypeString, 0)
-
-var _HeaderParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "HeaderParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _HeaderParametersMap_key *smithy.Schema
-
-var _HeaderParametersMap_value *smithy.Schema
-
-var _HeaderValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "HeaderValue",
-}, smithy.ShapeTypeString, 0)
-
-var HttpParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "HttpParameters",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var HttpParameters_PathParameterValues *smithy.Schema
-
-var HttpParameters_HeaderParameters *smithy.Schema
-
-var HttpParameters_QueryStringParameters *smithy.Schema
-
-var HttpParameters_InvocationTimeoutSeconds *smithy.Schema
-
-var IdempotentParameterMismatchException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "IdempotentParameterMismatchException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var IdempotentParameterMismatchException_Message *smithy.Schema
-
-var IncludePayload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "IncludePayload",
-}, smithy.ShapeTypeEnum, 2)
-var IncludePayload_FULL *smithy.Schema
-
-var IncludePayload_ON_ERROR_ONLY *smithy.Schema
-
-var _Integer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "Integer",
-}, smithy.ShapeTypeInteger, 0)
-
-var InternalException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "InternalException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalException_Message *smithy.Schema
-
-var InvalidInputException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "InvalidInputException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidInputException_Message *smithy.Schema
-
-var InvalidStateException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "InvalidStateException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var InvalidStateException_Message *smithy.Schema
-
-var InvocationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "InvocationType",
-}, smithy.ShapeTypeEnum, 2)
-var InvocationType_EVENT *smithy.Schema
-
-var InvocationType_REQUEST_RESPONSE *smithy.Schema
-
-var InvokeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "InvokeConfiguration",
-}, smithy.ShapeTypeStructure, 10)
-var InvokeConfiguration_RoleArn *smithy.Schema
-
-var InvokeConfiguration_LambdaParameters *smithy.Schema
-
-var InvokeConfiguration_SqsParameters *smithy.Schema
-
-var InvokeConfiguration_SnsParameters *smithy.Schema
-
-var InvokeConfiguration_KinesisParameters *smithy.Schema
-
-var InvokeConfiguration_StepFunctionsParameters *smithy.Schema
-
-var InvokeConfiguration_HttpParameters *smithy.Schema
-
-var InvokeConfiguration_UniversalTargetParameters *smithy.Schema
-
-var InvokeConfiguration_EventBusV2Parameters *smithy.Schema
-
-var InvokeConfiguration_TargetArn *smithy.Schema
-
-var JsonataConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "JsonataConfiguration",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Sensitive{})
-var JsonataConfiguration_Expression *smithy.Schema
-
-var KinesisParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "KinesisParameters",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var KinesisParameters_PartitionKey *smithy.Schema
-
-var KinesisParameters_ExplicitHashKey *smithy.Schema
-
-var _KmsKeyIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "KmsKeyIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var LambdaParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "LambdaParameters",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
-var LambdaParameters_InvocationType *smithy.Schema
-
-var LambdaParameters_Qualifier *smithy.Schema
-
-var LambdaParameters_DurableExecutionName *smithy.Schema
-
-var LambdaParameters_TenantId *smithy.Schema
-
-var LambdaParameters_InvocationTimeoutSeconds *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_Message *smithy.Schema
-
-var LogConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "LogConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var LogConfiguration_Level *smithy.Schema
-
-var LogConfiguration_IncludePayload *smithy.Schema
-
-var LogLevel = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "LogLevel",
-}, smithy.ShapeTypeEnum, 3)
-var LogLevel_OFF *smithy.Schema
-
-var LogLevel_ERROR *smithy.Schema
-
-var LogLevel_INFO *smithy.Schema
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MessageAttributeName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "MessageAttributeName",
-}, smithy.ShapeTypeString, 0)
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _NullableInteger = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "NullableInteger",
-}, smithy.ShapeTypeInteger, 0)
-
-var OnFailureConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "OnFailureConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var OnFailureConfiguration_Arn *smithy.Schema
-
-var OrderingType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "OrderingType",
-}, smithy.ShapeTypeEnum, 2)
-var OrderingType_FIFO *smithy.Schema
-
-var OrderingType_UNORDERED *smithy.Schema
-
-var _PartnerEventSourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PartnerEventSourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var PartnerEventsSourceConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PartnerEventsSourceConfiguration",
-}, smithy.ShapeTypeStructure, 4)
-var PartnerEventsSourceConfiguration_PartnerEventSourceArn *smithy.Schema
-
-var PartnerEventsSourceConfiguration_Pattern *smithy.Schema
-
-var PartnerEventsSourceConfiguration_PartnerBusKmsKeyIdentifier *smithy.Schema
-
-var PartnerEventsSourceConfiguration_OnFailureConfiguration *smithy.Schema
-
-var _PathParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PathParameter",
-}, smithy.ShapeTypeString, 0)
-
-var _PathParameterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PathParameterList",
-}, smithy.ShapeTypeList, 1)
-var _PathParameterList_member *smithy.Schema
-
-var PointInTimeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PointInTimeConfiguration",
-}, smithy.ShapeTypeStructure, 3)
-var PointInTimeConfiguration_PointType *smithy.Schema
-
-var PointInTimeConfiguration_StartingPoint *smithy.Schema
-
-var PointInTimeConfiguration_EndPoint *smithy.Schema
-
-var PointType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PointType",
-}, smithy.ShapeTypeEnum, 2)
-var PointType_HORIZON *smithy.Schema
-
-var PointType_TIMESTAMP *smithy.Schema
-
-var _PolicyDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PolicyDocument",
-}, smithy.ShapeTypeString, 0)
-
-var PolicyLengthExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PolicyLengthExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var PolicyLengthExceededException_Message *smithy.Schema
-
-var _PolicyName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PolicyName",
-}, smithy.ShapeTypeString, 0)
-
-var _PolicyRevisionId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PolicyRevisionId",
-}, smithy.ShapeTypeString, 0)
-
-var PublicPolicyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PublicPolicyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var PublicPolicyException_Message *smithy.Schema
-
-var PutEventsRequestEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsRequestEntry",
-}, smithy.ShapeTypeStructure, 6)
-var PutEventsRequestEntry_Source *smithy.Schema
-
-var PutEventsRequestEntry_DetailType *smithy.Schema
-
-var PutEventsRequestEntry_Detail *smithy.Schema
-
-var PutEventsRequestEntry_Resources *smithy.Schema
-
-var PutEventsRequestEntry_Time *smithy.Schema
-
-var PutEventsRequestEntry_SystemMetadata *smithy.Schema
-
-var _PutEventsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsRequestEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutEventsRequestEntryList_member *smithy.Schema
-
-var _PutEventsResourceList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsResourceList",
-}, smithy.ShapeTypeList, 1)
-var _PutEventsResourceList_member *smithy.Schema
-
-var PutEventsResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsResultEntry",
-}, smithy.ShapeTypeStructure, 5)
-var PutEventsResultEntry_EventId *smithy.Schema
-
-var PutEventsResultEntry_SequenceNumber *smithy.Schema
-
-var PutEventsResultEntry_SuccessCode *smithy.Schema
-
-var PutEventsResultEntry_ErrorCode *smithy.Schema
-
-var PutEventsResultEntry_ErrorMessage *smithy.Schema
-
-var _PutEventsResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutEventsResultEntryList_member *smithy.Schema
-
-var PutEventsSystemMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsSystemMetadata",
-}, smithy.ShapeTypeStructure, 2)
-var PutEventsSystemMetadata_EventGroupId *smithy.Schema
-
-var PutEventsSystemMetadata_DeduplicationId *smithy.Schema
-
-var PutRawEventsRequestEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEventsRequestEntry",
-}, smithy.ShapeTypeStructure, 3)
-var PutRawEventsRequestEntry_Data *smithy.Schema
-
-var PutRawEventsRequestEntry_Metadata *smithy.Schema
-
-var PutRawEventsRequestEntry_SystemMetadata *smithy.Schema
-
-var _PutRawEventsRequestEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEventsRequestEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutRawEventsRequestEntryList_member *smithy.Schema
-
-var PutRawEventsResultEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEventsResultEntry",
-}, smithy.ShapeTypeStructure, 5)
-var PutRawEventsResultEntry_EventId *smithy.Schema
-
-var PutRawEventsResultEntry_SequenceNumber *smithy.Schema
-
-var PutRawEventsResultEntry_SuccessCode *smithy.Schema
-
-var PutRawEventsResultEntry_ErrorCode *smithy.Schema
-
-var PutRawEventsResultEntry_ErrorMessage *smithy.Schema
-
-var _PutRawEventsResultEntryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEventsResultEntryList",
-}, smithy.ShapeTypeList, 1)
-var _PutRawEventsResultEntryList_member *smithy.Schema
-
-var PutRawEventsSystemMetadata = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEventsSystemMetadata",
-}, smithy.ShapeTypeStructure, 3)
-var PutRawEventsSystemMetadata_ContentType *smithy.Schema
-
-var PutRawEventsSystemMetadata_DeduplicationId *smithy.Schema
-
-var PutRawEventsSystemMetadata_EventGroupId *smithy.Schema
-
-var _QueryStringKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "QueryStringKey",
-}, smithy.ShapeTypeString, 0)
-
-var _QueryStringParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "QueryStringParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _QueryStringParametersMap_key *smithy.Schema
-
-var _QueryStringParametersMap_value *smithy.Schema
-
-var _QueryStringValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "QueryStringValue",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceAlreadyExistsException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ResourceAlreadyExistsException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceAlreadyExistsException_Message *smithy.Schema
-
-var ResourceInUseException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ResourceInUseException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ResourceInUseException_Message *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ResourcePolicySummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ResourcePolicySummary",
-}, smithy.ShapeTypeStructure, 2)
-var ResourcePolicySummary_PolicyName *smithy.Schema
-
-var ResourcePolicySummary_RevisionId *smithy.Schema
-
-var _ResourcePolicySummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ResourcePolicySummaryList",
-}, smithy.ShapeTypeList, 1)
-var _ResourcePolicySummaryList_member *smithy.Schema
-
-var ResumePosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ResumePosition",
-}, smithy.ShapeTypeEnum, 2)
-var ResumePosition_LAST_PROCESSED *smithy.Schema
-
-var ResumePosition_LATEST *smithy.Schema
-
-var _RetentionPeriodInDays = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RetentionPeriodInDays",
-}, smithy.ShapeTypeInteger, 0)
-
-var RetryPolicy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RetryPolicy",
-}, smithy.ShapeTypeStructure, 3)
-var RetryPolicy_MaxRetryAttempts *smithy.Schema
-
-var RetryPolicy_MaxEventAgeInSeconds *smithy.Schema
-
-var RetryPolicy_RetryStrategy *smithy.Schema
-
-var RetryStrategy = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RetryStrategy",
-}, smithy.ShapeTypeEnum, 1)
-var RetryStrategy_ALL *smithy.Schema
-
-var _RevocableResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RevocableResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var SchemaRegistryConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SchemaRegistryConfiguration",
-}, smithy.ShapeTypeStructure, 2)
-var SchemaRegistryConfiguration_RegistryUri *smithy.Schema
-
-var SchemaRegistryConfiguration_ConfluentPublicRegistryConfiguration *smithy.Schema
-
-var SchemaRegistryUnavailableException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SchemaRegistryUnavailableException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var SchemaRegistryUnavailableException_Message *smithy.Schema
-
-var _SchemaRegistryUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SchemaRegistryUri",
-}, smithy.ShapeTypeString, 0)
-
-var _SequenceNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SequenceNumber",
-}, smithy.ShapeTypeString, 0)
-
-var _SnsMessageAttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SnsMessageAttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _SnsMessageAttributeMap_key *smithy.Schema
-
-var _SnsMessageAttributeMap_value *smithy.Schema
-
-var SnsMessageAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SnsMessageAttributeValue",
-}, smithy.ShapeTypeStructure, 3)
-var SnsMessageAttributeValue_DataType *smithy.Schema
-
-var SnsMessageAttributeValue_StringValue *smithy.Schema
-
-var SnsMessageAttributeValue_BinaryValue *smithy.Schema
-
-var SnsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SnsParameters",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
-var SnsParameters_MessageGroupId *smithy.Schema
-
-var SnsParameters_MessageDeduplicationId *smithy.Schema
-
-var SnsParameters_Subject *smithy.Schema
-
-var SnsParameters_MessageStructure *smithy.Schema
-
-var SnsParameters_MessageAttributes *smithy.Schema
-
-var _Source = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "Source",
-}, smithy.ShapeTypeString, 0)
-
-var _SqsMessageAttributeMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SqsMessageAttributeMap",
-}, smithy.ShapeTypeMap, 2)
-var _SqsMessageAttributeMap_key *smithy.Schema
-
-var _SqsMessageAttributeMap_value *smithy.Schema
-
-var SqsMessageAttributeValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SqsMessageAttributeValue",
-}, smithy.ShapeTypeStructure, 3)
-var SqsMessageAttributeValue_DataType *smithy.Schema
-
-var SqsMessageAttributeValue_StringValue *smithy.Schema
-
-var SqsMessageAttributeValue_BinaryValue *smithy.Schema
-
-var SqsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SqsParameters",
-}, smithy.ShapeTypeStructure, 5, &smithytraits.Sensitive{})
-var SqsParameters_MessageGroupId *smithy.Schema
-
-var SqsParameters_MessageDeduplicationId *smithy.Schema
-
-var SqsParameters_DelaySeconds *smithy.Schema
-
-var SqsParameters_MessageAttributes *smithy.Schema
-
-var SqsParameters_MessageSystemAttributes *smithy.Schema
-
-var StartingPosition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "StartingPosition",
-}, smithy.ShapeTypeEnum, 2)
-var StartingPosition_LATEST *smithy.Schema
-
-var StartingPosition_POINT_IN_TIME *smithy.Schema
-
-var _StateReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "StateReason",
-}, smithy.ShapeTypeString, 0)
-
-var StepFunctionsParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "StepFunctionsParameters",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Sensitive{})
-var StepFunctionsParameters_InvocationType *smithy.Schema
-
-var StepFunctionsParameters_Name *smithy.Schema
-
-var StepFunctionsParameters_TraceHeader *smithy.Schema
-
-var StepFunctionsParameters_InvocationTimeoutSeconds *smithy.Schema
-
-var StorageConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "StorageConfiguration",
-}, smithy.ShapeTypeStructure, 1)
-var StorageConfiguration_RetentionPeriodInDays *smithy.Schema
-
-var StorageConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "StorageConfigurationOutput",
-}, smithy.ShapeTypeStructure, 2)
-var StorageConfigurationOutput_RetentionPeriodInDays *smithy.Schema
-
-var StorageConfigurationOutput_RetentionWindowStartTime *smithy.Schema
-
-var _String = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "String",
-}, smithy.ShapeTypeString, 0)
-
-var _SubscriberArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SubscriberArn",
-}, smithy.ShapeTypeString, 0)
-
-var _SubscriberName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SubscriberName",
-}, smithy.ShapeTypeString, 0)
-
-var SubscriberState = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SubscriberState",
-}, smithy.ShapeTypeEnum, 2)
-var SubscriberState_RUNNING *smithy.Schema
-
-var SubscriberState_STOPPED *smithy.Schema
-
-var SubscriberSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SubscriberSummary",
-}, smithy.ShapeTypeStructure, 10)
-var SubscriberSummary_SubscriberArn *smithy.Schema
-
-var SubscriberSummary_Name *smithy.Schema
-
-var SubscriberSummary_EventBusArn *smithy.Schema
-
-var SubscriberSummary_TargetArn *smithy.Schema
-
-var SubscriberSummary_Type *smithy.Schema
-
-var SubscriberSummary_Revoked *smithy.Schema
-
-var SubscriberSummary_State *smithy.Schema
-
-var SubscriberSummary_CreationTime *smithy.Schema
-
-var SubscriberSummary_LastModifiedTime *smithy.Schema
-
-var SubscriberSummary_SubscriberAccountId *smithy.Schema
-
-var _SubscriberSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SubscriberSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _SubscriberSummaryList_member *smithy.Schema
-
-var SuccessCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "SuccessCode",
-}, smithy.ShapeTypeEnum, 2)
-var SuccessCode_PUBLISHED *smithy.Schema
-
-var SuccessCode_DEDUPLICATED *smithy.Schema
-
-var _TaggableResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TaggableResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetResourceArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TargetResourceArn",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var Transformer = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "Transformer",
-}, smithy.ShapeTypeStructure, 2)
-var Transformer_Type *smithy.Schema
-
-var Transformer_JsonataConfiguration *smithy.Schema
-
-var TransformerType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TransformerType",
-}, smithy.ShapeTypeEnum, 3)
-var TransformerType_RAW *smithy.Schema
-
-var TransformerType_WITH_METADATA *smithy.Schema
-
-var TransformerType_JSONATA *smithy.Schema
-
-var _UniversalTargetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UniversalTargetInput",
-}, smithy.ShapeTypeString, 0)
-
-var UniversalTargetParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UniversalTargetParameters",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var UniversalTargetParameters_Input *smithy.Schema
-
-var UniversalTargetParameters_InvocationTimeoutSeconds *smithy.Schema
-
-var UpdateInvokeConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateInvokeConfiguration",
-}, smithy.ShapeTypeStructure, 9)
-var UpdateInvokeConfiguration_RoleArn *smithy.Schema
-
-var UpdateInvokeConfiguration_LambdaParameters *smithy.Schema
-
-var UpdateInvokeConfiguration_SqsParameters *smithy.Schema
-
-var UpdateInvokeConfiguration_SnsParameters *smithy.Schema
-
-var UpdateInvokeConfiguration_KinesisParameters *smithy.Schema
-
-var UpdateInvokeConfiguration_StepFunctionsParameters *smithy.Schema
-
-var UpdateInvokeConfiguration_HttpParameters *smithy.Schema
-
-var UpdateInvokeConfiguration_UniversalTargetParameters *smithy.Schema
-
-var UpdateInvokeConfiguration_EventBusV2Parameters *smithy.Schema
-
-var CreateEventBusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateEventBusRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateEventBusRequest_Name *smithy.Schema
-
-var CreateEventBusRequest_Description *smithy.Schema
-
-var CreateEventBusRequest_EncryptionConfiguration *smithy.Schema
-
-var CreateEventBusRequest_StorageConfiguration *smithy.Schema
-
-var CreateEventBusRequest_Tags *smithy.Schema
-
-var CreateEventBusRequest_ClientToken *smithy.Schema
-
-var CreateEventBusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateEventBusResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateEventBusResponse_EventBusArn *smithy.Schema
-
-var CreateEventBusResponse_Name *smithy.Schema
-
-var CreateEventBusResponse_Description *smithy.Schema
-
-var CreateEventBusResponse_EncryptionConfiguration *smithy.Schema
-
-var CreateEventBusResponse_StorageConfiguration *smithy.Schema
-
-var CreateEventBusResponse_State *smithy.Schema
-
-var CreateEventBusResponse_StateReason *smithy.Schema
-
-var CreateEventBusResponse_CreationTime *smithy.Schema
-
-var CreateEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateEventSourceRequest",
-}, smithy.ShapeTypeStructure, 6)
-var CreateEventSourceRequest_Name *smithy.Schema
-
-var CreateEventSourceRequest_EventBusArn *smithy.Schema
-
-var CreateEventSourceRequest_Configuration *smithy.Schema
-
-var CreateEventSourceRequest_Description *smithy.Schema
-
-var CreateEventSourceRequest_Tags *smithy.Schema
-
-var CreateEventSourceRequest_ClientToken *smithy.Schema
-
-var CreateEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateEventSourceResponse",
-}, smithy.ShapeTypeStructure, 5)
-var CreateEventSourceResponse_EventSourceArn *smithy.Schema
-
-var CreateEventSourceResponse_Name *smithy.Schema
-
-var CreateEventSourceResponse_EventBusArn *smithy.Schema
-
-var CreateEventSourceResponse_State *smithy.Schema
-
-var CreateEventSourceResponse_CreationTime *smithy.Schema
-
-var CreateSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateSubscriberRequest",
-}, smithy.ShapeTypeStructure, 16)
-var CreateSubscriberRequest_Name *smithy.Schema
-
-var CreateSubscriberRequest_EventBusArn *smithy.Schema
-
-var CreateSubscriberRequest_InvokeConfiguration *smithy.Schema
-
-var CreateSubscriberRequest_Description *smithy.Schema
-
-var CreateSubscriberRequest_FilterConfiguration *smithy.Schema
-
-var CreateSubscriberRequest_Type *smithy.Schema
-
-var CreateSubscriberRequest_StartingPosition *smithy.Schema
-
-var CreateSubscriberRequest_PointInTimeConfiguration *smithy.Schema
-
-var CreateSubscriberRequest_BatchConfiguration *smithy.Schema
-
-var CreateSubscriberRequest_Transformer *smithy.Schema
-
-var CreateSubscriberRequest_RetryPolicy *smithy.Schema
-
-var CreateSubscriberRequest_OnFailureConfiguration *smithy.Schema
-
-var CreateSubscriberRequest_LogConfiguration *smithy.Schema
-
-var CreateSubscriberRequest_State *smithy.Schema
-
-var CreateSubscriberRequest_Tags *smithy.Schema
-
-var CreateSubscriberRequest_ClientToken *smithy.Schema
-
-var CreateSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "CreateSubscriberResponse",
-}, smithy.ShapeTypeStructure, 8)
-var CreateSubscriberResponse_SubscriberArn *smithy.Schema
-
-var CreateSubscriberResponse_Name *smithy.Schema
-
-var CreateSubscriberResponse_EventBusArn *smithy.Schema
-
-var CreateSubscriberResponse_Type *smithy.Schema
-
-var CreateSubscriberResponse_StartingPosition *smithy.Schema
-
-var CreateSubscriberResponse_PointInTimeConfiguration *smithy.Schema
-
-var CreateSubscriberResponse_State *smithy.Schema
-
-var CreateSubscriberResponse_CreationTime *smithy.Schema
-
-var DeleteEventBusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteEventBusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventBusRequest_EventBusArn *smithy.Schema
-
-var DeleteEventBusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteEventBusResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteEventSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteEventSourceRequest_EventSourceArn *smithy.Schema
-
-var DeleteEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteEventSourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 3)
-var DeleteResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var DeleteResourcePolicyRequest_PolicyName *smithy.Schema
-
-var DeleteResourcePolicyRequest_ExpectedRevisionId *smithy.Schema
-
-var DeleteResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteResourcePolicyResponse_RevisionId *smithy.Schema
-
-var DeleteSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteSubscriberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteSubscriberRequest_SubscriberArn *smithy.Schema
-
-var DeleteSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DeleteSubscriberResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var DescribeEventBusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeEventBusRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEventBusRequest_EventBusArn *smithy.Schema
-
-var DescribeEventBusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeEventBusResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeEventBusResponse_EventBusArn *smithy.Schema
-
-var DescribeEventBusResponse_Name *smithy.Schema
-
-var DescribeEventBusResponse_Description *smithy.Schema
-
-var DescribeEventBusResponse_EncryptionConfiguration *smithy.Schema
-
-var DescribeEventBusResponse_StorageConfiguration *smithy.Schema
-
-var DescribeEventBusResponse_CreationTime *smithy.Schema
-
-var DescribeEventBusResponse_LastModifiedTime *smithy.Schema
-
-var DescribeEventBusResponse_State *smithy.Schema
-
-var DescribeEventBusResponse_StateReason *smithy.Schema
-
-var DescribeEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeEventSourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeEventSourceRequest_EventSourceArn *smithy.Schema
-
-var DescribeEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeEventSourceResponse",
-}, smithy.ShapeTypeStructure, 9)
-var DescribeEventSourceResponse_EventSourceArn *smithy.Schema
-
-var DescribeEventSourceResponse_Name *smithy.Schema
-
-var DescribeEventSourceResponse_EventBusArn *smithy.Schema
-
-var DescribeEventSourceResponse_Configuration *smithy.Schema
-
-var DescribeEventSourceResponse_Description *smithy.Schema
-
-var DescribeEventSourceResponse_State *smithy.Schema
-
-var DescribeEventSourceResponse_Revoked *smithy.Schema
-
-var DescribeEventSourceResponse_CreationTime *smithy.Schema
-
-var DescribeEventSourceResponse_LastModifiedTime *smithy.Schema
-
-var DescribeSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeSubscriberRequest",
-}, smithy.ShapeTypeStructure, 1)
-var DescribeSubscriberRequest_SubscriberArn *smithy.Schema
-
-var DescribeSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "DescribeSubscriberResponse",
-}, smithy.ShapeTypeStructure, 18)
-var DescribeSubscriberResponse_SubscriberArn *smithy.Schema
-
-var DescribeSubscriberResponse_Name *smithy.Schema
-
-var DescribeSubscriberResponse_EventBusArn *smithy.Schema
-
-var DescribeSubscriberResponse_InvokeConfiguration *smithy.Schema
-
-var DescribeSubscriberResponse_Description *smithy.Schema
-
-var DescribeSubscriberResponse_FilterConfiguration *smithy.Schema
-
-var DescribeSubscriberResponse_Type *smithy.Schema
-
-var DescribeSubscriberResponse_StartingPosition *smithy.Schema
-
-var DescribeSubscriberResponse_PointInTimeConfiguration *smithy.Schema
-
-var DescribeSubscriberResponse_BatchConfiguration *smithy.Schema
-
-var DescribeSubscriberResponse_Transformer *smithy.Schema
-
-var DescribeSubscriberResponse_RetryPolicy *smithy.Schema
-
-var DescribeSubscriberResponse_OnFailureConfiguration *smithy.Schema
-
-var DescribeSubscriberResponse_LogConfiguration *smithy.Schema
-
-var DescribeSubscriberResponse_State *smithy.Schema
-
-var DescribeSubscriberResponse_Revoked *smithy.Schema
-
-var DescribeSubscriberResponse_CreationTime *smithy.Schema
-
-var DescribeSubscriberResponse_LastModifiedTime *smithy.Schema
-
-var GetResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "GetResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 2)
-var GetResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var GetResourcePolicyRequest_PolicyName *smithy.Schema
-
-var GetResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "GetResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 4)
-var GetResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyDocument *smithy.Schema
-
-var GetResourcePolicyResponse_PolicyName *smithy.Schema
-
-var GetResourcePolicyResponse_RevisionId *smithy.Schema
-
-var ListEventBusesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListEventBusesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEventBusesRequest_NamePrefix *smithy.Schema
-
-var ListEventBusesRequest_EventBusAccountId *smithy.Schema
-
-var ListEventBusesRequest_NextToken *smithy.Schema
-
-var ListEventBusesRequest_MaxResults *smithy.Schema
-
-var ListEventBusesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListEventBusesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventBusesResponse_EventBuses *smithy.Schema
-
-var ListEventBusesResponse_NextToken *smithy.Schema
-
-var ListEventSourcesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListEventSourcesRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListEventSourcesRequest_EventBusArn *smithy.Schema
-
-var ListEventSourcesRequest_NamePrefix *smithy.Schema
-
-var ListEventSourcesRequest_NextToken *smithy.Schema
-
-var ListEventSourcesRequest_MaxResults *smithy.Schema
-
-var ListEventSourcesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListEventSourcesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListEventSourcesResponse_EventSources *smithy.Schema
-
-var ListEventSourcesResponse_NextToken *smithy.Schema
-
-var ListResourcePoliciesRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListResourcePoliciesRequest",
-}, smithy.ShapeTypeStructure, 3)
-var ListResourcePoliciesRequest_ResourceArn *smithy.Schema
-
-var ListResourcePoliciesRequest_NextToken *smithy.Schema
-
-var ListResourcePoliciesRequest_MaxResults *smithy.Schema
-
-var ListResourcePoliciesResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListResourcePoliciesResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListResourcePoliciesResponse_PolicySummaries *smithy.Schema
-
-var ListResourcePoliciesResponse_NextToken *smithy.Schema
-
-var ListSubscribersRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListSubscribersRequest",
-}, smithy.ShapeTypeStructure, 4)
-var ListSubscribersRequest_EventBusArn *smithy.Schema
-
-var ListSubscribersRequest_NamePrefix *smithy.Schema
-
-var ListSubscribersRequest_NextToken *smithy.Schema
-
-var ListSubscribersRequest_MaxResults *smithy.Schema
-
-var ListSubscribersResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListSubscribersResponse",
-}, smithy.ShapeTypeStructure, 2)
-var ListSubscribersResponse_Subscribers *smithy.Schema
-
-var ListSubscribersResponse_NextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var PutEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsRequest",
-}, smithy.ShapeTypeStructure, 3)
-var PutEventsRequest_EventBusArn *smithy.Schema
-
-var PutEventsRequest_Entries *smithy.Schema
-
-var PutEventsRequest_DeduplicationConfiguration *smithy.Schema
-
-var PutEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutEventsResponse_FailedEntryCount *smithy.Schema
-
-var PutEventsResponse_Entries *smithy.Schema
-
-var PutRawEventsRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEventsRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutRawEventsRequest_EventBusArn *smithy.Schema
-
-var PutRawEventsRequest_Entries *smithy.Schema
-
-var PutRawEventsRequest_SchemaRegistryConfiguration *smithy.Schema
-
-var PutRawEventsRequest_DeduplicationConfiguration *smithy.Schema
-
-var PutRawEventsResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutRawEventsResponse",
-}, smithy.ShapeTypeStructure, 2)
-var PutRawEventsResponse_FailedEntryCount *smithy.Schema
-
-var PutRawEventsResponse_Entries *smithy.Schema
-
-var PutResourcePolicyRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutResourcePolicyRequest",
-}, smithy.ShapeTypeStructure, 4)
-var PutResourcePolicyRequest_ResourceArn *smithy.Schema
-
-var PutResourcePolicyRequest_PolicyDocument *smithy.Schema
-
-var PutResourcePolicyRequest_PolicyName *smithy.Schema
-
-var PutResourcePolicyRequest_ExpectedRevisionId *smithy.Schema
-
-var PutResourcePolicyResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "PutResourcePolicyResponse",
-}, smithy.ShapeTypeStructure, 3)
-var PutResourcePolicyResponse_ResourceArn *smithy.Schema
-
-var PutResourcePolicyResponse_PolicyName *smithy.Schema
-
-var PutResourcePolicyResponse_RevisionId *smithy.Schema
-
-var RevokeResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RevokeResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var RevokeResourceRequest_Arn *smithy.Schema
-
-var RevokeResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "RevokeResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var RevokeResourceResponse_Arn *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_ResourceArn *smithy.Schema
-
-var TagResourceRequest_Tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_ResourceArn *smithy.Schema
-
-var UntagResourceRequest_TagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateEventBusRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateEventBusRequest",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateEventBusRequest_EventBusArn *smithy.Schema
-
-var UpdateEventBusRequest_Description *smithy.Schema
-
-var UpdateEventBusRequest_EncryptionConfiguration *smithy.Schema
-
-var UpdateEventBusRequest_StorageConfiguration *smithy.Schema
-
-var UpdateEventBusResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateEventBusResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateEventBusResponse_EventBusArn *smithy.Schema
-
-var UpdateEventBusResponse_Name *smithy.Schema
-
-var UpdateEventBusResponse_Description *smithy.Schema
-
-var UpdateEventBusResponse_EncryptionConfiguration *smithy.Schema
-
-var UpdateEventBusResponse_StorageConfiguration *smithy.Schema
-
-var UpdateEventBusResponse_State *smithy.Schema
-
-var UpdateEventBusResponse_StateReason *smithy.Schema
-
-var UpdateEventBusResponse_LastModifiedTime *smithy.Schema
-
-var UpdateEventSourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateEventSourceRequest",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateEventSourceRequest_EventSourceArn *smithy.Schema
-
-var UpdateEventSourceRequest_Configuration *smithy.Schema
-
-var UpdateEventSourceRequest_Description *smithy.Schema
-
-var UpdateEventSourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateEventSourceResponse",
-}, smithy.ShapeTypeStructure, 5)
-var UpdateEventSourceResponse_EventSourceArn *smithy.Schema
-
-var UpdateEventSourceResponse_Name *smithy.Schema
-
-var UpdateEventSourceResponse_EventBusArn *smithy.Schema
-
-var UpdateEventSourceResponse_State *smithy.Schema
-
-var UpdateEventSourceResponse_LastModifiedTime *smithy.Schema
-
-var UpdateSubscriberRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateSubscriberRequest",
-}, smithy.ShapeTypeStructure, 11)
-var UpdateSubscriberRequest_SubscriberArn *smithy.Schema
-
-var UpdateSubscriberRequest_Description *smithy.Schema
-
-var UpdateSubscriberRequest_State *smithy.Schema
-
-var UpdateSubscriberRequest_ResumePosition *smithy.Schema
-
-var UpdateSubscriberRequest_InvokeConfiguration *smithy.Schema
-
-var UpdateSubscriberRequest_FilterConfiguration *smithy.Schema
-
-var UpdateSubscriberRequest_BatchConfiguration *smithy.Schema
-
-var UpdateSubscriberRequest_Transformer *smithy.Schema
-
-var UpdateSubscriberRequest_RetryPolicy *smithy.Schema
-
-var UpdateSubscriberRequest_OnFailureConfiguration *smithy.Schema
-
-var UpdateSubscriberRequest_LogConfiguration *smithy.Schema
-
-var UpdateSubscriberResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.eventbridgev2",
-	Name:      "UpdateSubscriberResponse",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateSubscriberResponse_SubscriberArn *smithy.Schema
-
-var UpdateSubscriberResponse_Name *smithy.Schema
-
-var UpdateSubscriberResponse_EventBusArn *smithy.Schema
-
-var UpdateSubscriberResponse_Type *smithy.Schema
-
-var UpdateSubscriberResponse_StartingPosition *smithy.Schema
-
-var UpdateSubscriberResponse_PointInTimeConfiguration *smithy.Schema
-
-var UpdateSubscriberResponse_State *smithy.Schema
-
-var UpdateSubscriberResponse_LastModifiedTime *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	OnFailureConfiguration_Arn = OnFailureConfiguration.AddMember("Arn", _DeadLetterQueueArn)
-
-	AwsServiceEventsSourceConfiguration_AwsService = AwsServiceEventsSourceConfiguration.AddMember("AwsService", _AwsServiceSource)
-
-	AwsServiceEventsSourceConfiguration_Pattern = AwsServiceEventsSourceConfiguration.AddMember("Pattern", _EventPattern)
-
-	AwsServiceEventsSourceConfiguration_OnFailureConfiguration = AwsServiceEventsSourceConfiguration.AddMember("OnFailureConfiguration", OnFailureConfiguration)
-
-	BatchConfiguration_MaxBatchSize = BatchConfiguration.AddMember("MaxBatchSize", _NullableInteger)
-
-	BatchConfiguration_MaxBatchWindowInSeconds = BatchConfiguration.AddMember("MaxBatchWindowInSeconds", _NullableInteger)
-
-	BusState_CREATING = BusState.AddMember("CREATING", smithyprelude.Unit)
-
-	BusState_CREATE_FAILED = BusState.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	BusState_UPDATING = BusState.AddMember("UPDATING", smithyprelude.Unit)
-
-	BusState_UPDATE_FAILED = BusState.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	BusState_DELETING = BusState.AddMember("DELETING", smithyprelude.Unit)
-
-	BusState_ACTIVE = BusState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	BusState_DELETE_FAILED = BusState.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	ConcurrentModificationException_Message = ConcurrentModificationException.AddMember("Message", smithyprelude.String)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	ConfluentPublicRegistryConfiguration_ConnectionArn = ConfluentPublicRegistryConfiguration.AddMember("ConnectionArn", _ConnectionArn)
-
-	DeduplicationType_CONTENT_BASED = DeduplicationType.AddMember("CONTENT_BASED", smithyprelude.Unit)
-
-	DeduplicationConfiguration_DeduplicationType = DeduplicationConfiguration.AddMember("DeduplicationType", DeduplicationType)
-
-	EncryptionConfiguration_KmsKeyIdentifier = EncryptionConfiguration.AddMember("KmsKeyIdentifier", _KmsKeyIdentifier)
-
-	EventBusSummary_Name = EventBusSummary.AddMember("Name", _EventBusName)
-
-	EventBusSummary_EventBusArn = EventBusSummary.AddMember("EventBusArn", _EventBusArn)
-
-	EventBusSummary_Description = EventBusSummary.AddMember("Description", _Description)
-
-	EventBusSummary_CreationTime = EventBusSummary.AddMember("CreationTime", _Timestamp)
-
-	EventBusSummary_LastModifiedTime = EventBusSummary.AddMember("LastModifiedTime", _Timestamp)
-
-	EventBusSummary_State = EventBusSummary.AddMember("State", BusState)
-
-	EventBusSummary_StateReason = EventBusSummary.AddMember("StateReason", _StateReason)
-
-	EventBusSummary_EventBusAccountId = EventBusSummary.AddMember("EventBusAccountId", _AccountId)
-
-	_EventBusSummaryList_member = _EventBusSummaryList.AddMember("member", EventBusSummary)
-
-	_EventBusV2MetadataMap_key = _EventBusV2MetadataMap.AddMember("key", _String)
-
-	_EventBusV2MetadataMap_value = _EventBusV2MetadataMap.AddMember("value", _String)
-
-	EventBusV2SystemMetadata_EventGroupId = EventBusV2SystemMetadata.AddMember("EventGroupId", _String)
-
-	EventBusV2SystemMetadata_DeduplicationId = EventBusV2SystemMetadata.AddMember("DeduplicationId", _String)
-
-	EventBusV2Parameters_Metadata = EventBusV2Parameters.AddMember("Metadata", _EventBusV2MetadataMap)
-
-	EventBusV2Parameters_SystemMetadata = EventBusV2Parameters.AddMember("SystemMetadata", EventBusV2SystemMetadata)
-
-	EventBusV2Parameters_DeduplicationConfiguration = EventBusV2Parameters.AddMember("DeduplicationConfiguration", DeduplicationConfiguration)
-
-	_EventMetadataMap_key = _EventMetadataMap.AddMember("key", _EventMetadataKey)
-
-	_EventMetadataMap_value = _EventMetadataMap.AddMember("value", _EventMetadataValue)
-
-	PartnerEventsSourceConfiguration_PartnerEventSourceArn = PartnerEventsSourceConfiguration.AddMember("PartnerEventSourceArn", _PartnerEventSourceArn)
-
-	PartnerEventsSourceConfiguration_Pattern = PartnerEventsSourceConfiguration.AddMember("Pattern", _EventPattern)
-
-	PartnerEventsSourceConfiguration_PartnerBusKmsKeyIdentifier = PartnerEventsSourceConfiguration.AddMember("PartnerBusKmsKeyIdentifier", _KmsKeyIdentifier)
-
-	PartnerEventsSourceConfiguration_OnFailureConfiguration = PartnerEventsSourceConfiguration.AddMember("OnFailureConfiguration", OnFailureConfiguration)
-
-	EventSourceConfiguration_AwsServiceEventsConfiguration = EventSourceConfiguration.AddMember("AwsServiceEventsConfiguration", AwsServiceEventsSourceConfiguration)
-
-	EventSourceConfiguration_PartnerEventsConfiguration = EventSourceConfiguration.AddMember("PartnerEventsConfiguration", PartnerEventsSourceConfiguration)
-
-	EventSourceState_CREATING = EventSourceState.AddMember("CREATING", smithyprelude.Unit)
-
-	EventSourceState_ACTIVE = EventSourceState.AddMember("ACTIVE", smithyprelude.Unit)
-
-	EventSourceState_UPDATING = EventSourceState.AddMember("UPDATING", smithyprelude.Unit)
-
-	EventSourceState_CREATE_FAILED = EventSourceState.AddMember("CREATE_FAILED", smithyprelude.Unit)
-
-	EventSourceState_UPDATE_FAILED = EventSourceState.AddMember("UPDATE_FAILED", smithyprelude.Unit)
-
-	EventSourceState_DELETING = EventSourceState.AddMember("DELETING", smithyprelude.Unit)
-
-	EventSourceState_DELETE_FAILED = EventSourceState.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	EventSourceType_AWS_SERVICE_EVENTS = EventSourceType.AddMember("AWS_SERVICE_EVENTS", smithyprelude.Unit)
-
-	EventSourceType_PARTNER_EVENTS = EventSourceType.AddMember("PARTNER_EVENTS", smithyprelude.Unit)
-
-	EventSourceSummary_EventSourceArn = EventSourceSummary.AddMember("EventSourceArn", _EventSourceArn)
-
-	EventSourceSummary_Name = EventSourceSummary.AddMember("Name", _EventSourceName)
-
-	EventSourceSummary_EventBusArn = EventSourceSummary.AddMember("EventBusArn", _EventBusArn)
-
-	EventSourceSummary_Type = EventSourceSummary.AddMember("Type", EventSourceType)
-
-	EventSourceSummary_State = EventSourceSummary.AddMember("State", EventSourceState)
-
-	EventSourceSummary_Revoked = EventSourceSummary.AddMember("Revoked", smithyprelude.Boolean)
-
-	EventSourceSummary_CreationTime = EventSourceSummary.AddMember("CreationTime", _Timestamp)
-
-	EventSourceSummary_LastModifiedTime = EventSourceSummary.AddMember("LastModifiedTime", _Timestamp)
-
-	EventSourceSummary_EventSourceAccountId = EventSourceSummary.AddMember("EventSourceAccountId", _AccountId)
-
-	_EventSourceSummaryList_member = _EventSourceSummaryList.AddMember("member", EventSourceSummary)
-
-	FilterScope_DATA = FilterScope.AddMember("DATA", smithyprelude.Unit)
-
-	FilterScope_METADATA = FilterScope.AddMember("METADATA", smithyprelude.Unit)
-
-	FilterScope_SYSTEM_METADATA = FilterScope.AddMember("SYSTEM_METADATA", smithyprelude.Unit)
-
-	Filter_Pattern = Filter.AddMember("Pattern", _EventPattern)
-
-	Filter_Scope = Filter.AddMember("Scope", FilterScope)
-
-	FilterLanguage_EVENT_BRIDGE_PATTERN = FilterLanguage.AddMember("EVENT_BRIDGE_PATTERN", smithyprelude.Unit)
-
-	_FilterList_member = _FilterList.AddMember("member", Filter)
-
-	FilterConfiguration_Language = FilterConfiguration.AddMember("Language", FilterLanguage)
-
-	FilterConfiguration_Filters = FilterConfiguration.AddMember("Filters", _FilterList)
-
-	_HeaderParametersMap_key = _HeaderParametersMap.AddMember("key", _HeaderKey)
-
-	_HeaderParametersMap_value = _HeaderParametersMap.AddMember("value", _HeaderValue)
-
-	_PathParameterList_member = _PathParameterList.AddMember("member", _PathParameter)
-
-	_QueryStringParametersMap_key = _QueryStringParametersMap.AddMember("key", _QueryStringKey)
-
-	_QueryStringParametersMap_value = _QueryStringParametersMap.AddMember("value", _QueryStringValue)
-
-	HttpParameters_PathParameterValues = HttpParameters.AddMember("PathParameterValues", _PathParameterList)
-
-	HttpParameters_HeaderParameters = HttpParameters.AddMember("HeaderParameters", _HeaderParametersMap)
-
-	HttpParameters_QueryStringParameters = HttpParameters.AddMember("QueryStringParameters", _QueryStringParametersMap)
-
-	HttpParameters_InvocationTimeoutSeconds = HttpParameters.AddMember("InvocationTimeoutSeconds", _String)
-
-	IdempotentParameterMismatchException_Message = IdempotentParameterMismatchException.AddMember("Message", smithyprelude.String)
-
-	IncludePayload_FULL = IncludePayload.AddMember("FULL", smithyprelude.Unit)
-
-	IncludePayload_ON_ERROR_ONLY = IncludePayload.AddMember("ON_ERROR_ONLY", smithyprelude.Unit)
-
-	InternalException_Message = InternalException.AddMember("Message", smithyprelude.String)
-
-	InvalidInputException_Message = InvalidInputException.AddMember("Message", smithyprelude.String)
-
-	InvalidStateException_Message = InvalidStateException.AddMember("Message", smithyprelude.String)
-
-	InvocationType_EVENT = InvocationType.AddMember("EVENT", smithyprelude.Unit)
-
-	InvocationType_REQUEST_RESPONSE = InvocationType.AddMember("REQUEST_RESPONSE", smithyprelude.Unit)
-
-	LambdaParameters_InvocationType = LambdaParameters.AddMember("InvocationType", InvocationType)
-
-	LambdaParameters_Qualifier = LambdaParameters.AddMember("Qualifier", _String)
-
-	LambdaParameters_DurableExecutionName = LambdaParameters.AddMember("DurableExecutionName", _String)
-
-	LambdaParameters_TenantId = LambdaParameters.AddMember("TenantId", _String)
-
-	LambdaParameters_InvocationTimeoutSeconds = LambdaParameters.AddMember("InvocationTimeoutSeconds", _String)
-
-	SqsMessageAttributeValue_DataType = SqsMessageAttributeValue.AddMember("DataType", _String)
-
-	SqsMessageAttributeValue_StringValue = SqsMessageAttributeValue.AddMember("StringValue", _String)
-
-	SqsMessageAttributeValue_BinaryValue = SqsMessageAttributeValue.AddMember("BinaryValue", _String)
-
-	_SqsMessageAttributeMap_key = _SqsMessageAttributeMap.AddMember("key", _MessageAttributeName)
-
-	_SqsMessageAttributeMap_value = _SqsMessageAttributeMap.AddMember("value", SqsMessageAttributeValue)
-
-	SqsParameters_MessageGroupId = SqsParameters.AddMember("MessageGroupId", _String)
-
-	SqsParameters_MessageDeduplicationId = SqsParameters.AddMember("MessageDeduplicationId", _String)
-
-	SqsParameters_DelaySeconds = SqsParameters.AddMember("DelaySeconds", _String)
-
-	SqsParameters_MessageAttributes = SqsParameters.AddMember("MessageAttributes", _SqsMessageAttributeMap)
-
-	SqsParameters_MessageSystemAttributes = SqsParameters.AddMember("MessageSystemAttributes", _SqsMessageAttributeMap)
-
-	SnsMessageAttributeValue_DataType = SnsMessageAttributeValue.AddMember("DataType", _String)
-
-	SnsMessageAttributeValue_StringValue = SnsMessageAttributeValue.AddMember("StringValue", _String)
-
-	SnsMessageAttributeValue_BinaryValue = SnsMessageAttributeValue.AddMember("BinaryValue", _String)
-
-	_SnsMessageAttributeMap_key = _SnsMessageAttributeMap.AddMember("key", _MessageAttributeName)
-
-	_SnsMessageAttributeMap_value = _SnsMessageAttributeMap.AddMember("value", SnsMessageAttributeValue)
-
-	SnsParameters_MessageGroupId = SnsParameters.AddMember("MessageGroupId", _String)
-
-	SnsParameters_MessageDeduplicationId = SnsParameters.AddMember("MessageDeduplicationId", _String)
-
-	SnsParameters_Subject = SnsParameters.AddMember("Subject", _String)
-
-	SnsParameters_MessageStructure = SnsParameters.AddMember("MessageStructure", _String)
-
-	SnsParameters_MessageAttributes = SnsParameters.AddMember("MessageAttributes", _SnsMessageAttributeMap)
-
-	KinesisParameters_PartitionKey = KinesisParameters.AddMember("PartitionKey", _String)
-
-	KinesisParameters_ExplicitHashKey = KinesisParameters.AddMember("ExplicitHashKey", _String)
-
-	StepFunctionsParameters_InvocationType = StepFunctionsParameters.AddMember("InvocationType", InvocationType)
-
-	StepFunctionsParameters_Name = StepFunctionsParameters.AddMember("Name", _String)
-
-	StepFunctionsParameters_TraceHeader = StepFunctionsParameters.AddMember("TraceHeader", _String)
-
-	StepFunctionsParameters_InvocationTimeoutSeconds = StepFunctionsParameters.AddMember("InvocationTimeoutSeconds", _String)
-
-	UniversalTargetParameters_Input = UniversalTargetParameters.AddMember("Input", _UniversalTargetInput)
-
-	UniversalTargetParameters_InvocationTimeoutSeconds = UniversalTargetParameters.AddMember("InvocationTimeoutSeconds", _String)
-
-	InvokeConfiguration_RoleArn = InvokeConfiguration.AddMember("RoleArn", _RoleArn)
-
-	InvokeConfiguration_LambdaParameters = InvokeConfiguration.AddMember("LambdaParameters", LambdaParameters)
-
-	InvokeConfiguration_SqsParameters = InvokeConfiguration.AddMember("SqsParameters", SqsParameters)
-
-	InvokeConfiguration_SnsParameters = InvokeConfiguration.AddMember("SnsParameters", SnsParameters)
-
-	InvokeConfiguration_KinesisParameters = InvokeConfiguration.AddMember("KinesisParameters", KinesisParameters)
-
-	InvokeConfiguration_StepFunctionsParameters = InvokeConfiguration.AddMember("StepFunctionsParameters", StepFunctionsParameters)
-
-	InvokeConfiguration_HttpParameters = InvokeConfiguration.AddMember("HttpParameters", HttpParameters)
-
-	InvokeConfiguration_UniversalTargetParameters = InvokeConfiguration.AddMember("UniversalTargetParameters", UniversalTargetParameters)
-
-	InvokeConfiguration_EventBusV2Parameters = InvokeConfiguration.AddMember("EventBusV2Parameters", EventBusV2Parameters)
-
-	InvokeConfiguration_TargetArn = InvokeConfiguration.AddMember("TargetArn", _TargetResourceArn)
-
-	JsonataConfiguration_Expression = JsonataConfiguration.AddMember("Expression", _String)
-
-	LimitExceededException_Message = LimitExceededException.AddMember("Message", smithyprelude.String)
-
-	LogLevel_OFF = LogLevel.AddMember("OFF", smithyprelude.Unit)
-
-	LogLevel_ERROR = LogLevel.AddMember("ERROR", smithyprelude.Unit)
-
-	LogLevel_INFO = LogLevel.AddMember("INFO", smithyprelude.Unit)
-
-	LogConfiguration_Level = LogConfiguration.AddMember("Level", LogLevel)
-
-	LogConfiguration_IncludePayload = LogConfiguration.AddMember("IncludePayload", IncludePayload)
-
-	OrderingType_FIFO = OrderingType.AddMember("FIFO", smithyprelude.Unit)
-
-	OrderingType_UNORDERED = OrderingType.AddMember("UNORDERED", smithyprelude.Unit)
-
-	PointType_HORIZON = PointType.AddMember("HORIZON", smithyprelude.Unit)
-
-	PointType_TIMESTAMP = PointType.AddMember("TIMESTAMP", smithyprelude.Unit)
-
-	PointInTimeConfiguration_PointType = PointInTimeConfiguration.AddMember("PointType", PointType)
-
-	PointInTimeConfiguration_StartingPoint = PointInTimeConfiguration.AddMember("StartingPoint", _Timestamp)
-
-	PointInTimeConfiguration_EndPoint = PointInTimeConfiguration.AddMember("EndPoint", _Timestamp)
-
-	PolicyLengthExceededException_Message = PolicyLengthExceededException.AddMember("Message", smithyprelude.String)
-
-	PublicPolicyException_Message = PublicPolicyException.AddMember("Message", smithyprelude.String)
-
-	_PutEventsResourceList_member = _PutEventsResourceList.AddMember("member", _EventResource)
-
-	PutEventsSystemMetadata_EventGroupId = PutEventsSystemMetadata.AddMember("EventGroupId", _EventGroupId)
-
-	PutEventsSystemMetadata_DeduplicationId = PutEventsSystemMetadata.AddMember("DeduplicationId", _EventDeduplicationId)
-
-	PutEventsRequestEntry_Source = PutEventsRequestEntry.AddMember("Source", _Source)
-
-	PutEventsRequestEntry_DetailType = PutEventsRequestEntry.AddMember("DetailType", _DetailType)
-
-	PutEventsRequestEntry_Detail = PutEventsRequestEntry.AddMember("Detail", _EventDetail)
-
-	PutEventsRequestEntry_Resources = PutEventsRequestEntry.AddMember("Resources", _PutEventsResourceList)
-
-	PutEventsRequestEntry_Time = PutEventsRequestEntry.AddMember("Time", _Timestamp)
-
-	PutEventsRequestEntry_SystemMetadata = PutEventsRequestEntry.AddMember("SystemMetadata", PutEventsSystemMetadata)
-
-	_PutEventsRequestEntryList_member = _PutEventsRequestEntryList.AddMember("member", PutEventsRequestEntry)
-
-	SuccessCode_PUBLISHED = SuccessCode.AddMember("PUBLISHED", smithyprelude.Unit)
-
-	SuccessCode_DEDUPLICATED = SuccessCode.AddMember("DEDUPLICATED", smithyprelude.Unit)
-
-	PutEventsResultEntry_EventId = PutEventsResultEntry.AddMember("EventId", _EventId)
-
-	PutEventsResultEntry_SequenceNumber = PutEventsResultEntry.AddMember("SequenceNumber", _SequenceNumber)
-
-	PutEventsResultEntry_SuccessCode = PutEventsResultEntry.AddMember("SuccessCode", SuccessCode)
-
-	PutEventsResultEntry_ErrorCode = PutEventsResultEntry.AddMember("ErrorCode", _ErrorCode)
-
-	PutEventsResultEntry_ErrorMessage = PutEventsResultEntry.AddMember("ErrorMessage", _ErrorMessage)
-
-	_PutEventsResultEntryList_member = _PutEventsResultEntryList.AddMember("member", PutEventsResultEntry)
-
-	PutRawEventsSystemMetadata_ContentType = PutRawEventsSystemMetadata.AddMember("ContentType", _ContentType)
-
-	PutRawEventsSystemMetadata_DeduplicationId = PutRawEventsSystemMetadata.AddMember("DeduplicationId", _EventDeduplicationId)
-
-	PutRawEventsSystemMetadata_EventGroupId = PutRawEventsSystemMetadata.AddMember("EventGroupId", _EventGroupId)
-
-	PutRawEventsRequestEntry_Data = PutRawEventsRequestEntry.AddMember("Data", _EventData)
-
-	PutRawEventsRequestEntry_Metadata = PutRawEventsRequestEntry.AddMember("Metadata", _EventMetadataMap)
-
-	PutRawEventsRequestEntry_SystemMetadata = PutRawEventsRequestEntry.AddMember("SystemMetadata", PutRawEventsSystemMetadata)
-
-	_PutRawEventsRequestEntryList_member = _PutRawEventsRequestEntryList.AddMember("member", PutRawEventsRequestEntry)
-
-	PutRawEventsResultEntry_EventId = PutRawEventsResultEntry.AddMember("EventId", _EventId)
-
-	PutRawEventsResultEntry_SequenceNumber = PutRawEventsResultEntry.AddMember("SequenceNumber", _SequenceNumber)
-
-	PutRawEventsResultEntry_SuccessCode = PutRawEventsResultEntry.AddMember("SuccessCode", SuccessCode)
-
-	PutRawEventsResultEntry_ErrorCode = PutRawEventsResultEntry.AddMember("ErrorCode", _ErrorCode)
-
-	PutRawEventsResultEntry_ErrorMessage = PutRawEventsResultEntry.AddMember("ErrorMessage", _ErrorMessage)
-
-	_PutRawEventsResultEntryList_member = _PutRawEventsResultEntryList.AddMember("member", PutRawEventsResultEntry)
-
-	ResourceAlreadyExistsException_Message = ResourceAlreadyExistsException.AddMember("Message", smithyprelude.String)
-
-	ResourceInUseException_Message = ResourceInUseException.AddMember("Message", smithyprelude.String)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ResourcePolicySummary_PolicyName = ResourcePolicySummary.AddMember("PolicyName", _PolicyName)
-
-	ResourcePolicySummary_RevisionId = ResourcePolicySummary.AddMember("RevisionId", _PolicyRevisionId)
-
-	_ResourcePolicySummaryList_member = _ResourcePolicySummaryList.AddMember("member", ResourcePolicySummary)
-
-	ResumePosition_LAST_PROCESSED = ResumePosition.AddMember("LAST_PROCESSED", smithyprelude.Unit)
-
-	ResumePosition_LATEST = ResumePosition.AddMember("LATEST", smithyprelude.Unit)
-
-	RetryStrategy_ALL = RetryStrategy.AddMember("ALL", smithyprelude.Unit)
-
-	RetryPolicy_MaxRetryAttempts = RetryPolicy.AddMember("MaxRetryAttempts", _NullableInteger)
-
-	RetryPolicy_MaxEventAgeInSeconds = RetryPolicy.AddMember("MaxEventAgeInSeconds", _NullableInteger)
-
-	RetryPolicy_RetryStrategy = RetryPolicy.AddMember("RetryStrategy", RetryStrategy)
-
-	SchemaRegistryConfiguration_RegistryUri = SchemaRegistryConfiguration.AddMember("RegistryUri", _SchemaRegistryUri)
-
-	SchemaRegistryConfiguration_ConfluentPublicRegistryConfiguration = SchemaRegistryConfiguration.AddMember("ConfluentPublicRegistryConfiguration", ConfluentPublicRegistryConfiguration)
-
-	SchemaRegistryUnavailableException_Message = SchemaRegistryUnavailableException.AddMember("Message", smithyprelude.String)
-
-	StartingPosition_LATEST = StartingPosition.AddMember("LATEST", smithyprelude.Unit)
-
-	StartingPosition_POINT_IN_TIME = StartingPosition.AddMember("POINT_IN_TIME", smithyprelude.Unit)
-
-	StorageConfiguration_RetentionPeriodInDays = StorageConfiguration.AddMember("RetentionPeriodInDays", _RetentionPeriodInDays)
-
-	StorageConfigurationOutput_RetentionPeriodInDays = StorageConfigurationOutput.AddMember("RetentionPeriodInDays", _RetentionPeriodInDays)
-
-	StorageConfigurationOutput_RetentionWindowStartTime = StorageConfigurationOutput.AddMember("RetentionWindowStartTime", _Timestamp)
-
-	SubscriberState_RUNNING = SubscriberState.AddMember("RUNNING", smithyprelude.Unit)
-
-	SubscriberState_STOPPED = SubscriberState.AddMember("STOPPED", smithyprelude.Unit)
-
-	SubscriberSummary_SubscriberArn = SubscriberSummary.AddMember("SubscriberArn", _SubscriberArn)
-
-	SubscriberSummary_Name = SubscriberSummary.AddMember("Name", _SubscriberName)
-
-	SubscriberSummary_EventBusArn = SubscriberSummary.AddMember("EventBusArn", _EventBusArn)
-
-	SubscriberSummary_TargetArn = SubscriberSummary.AddMember("TargetArn", _TargetResourceArn)
-
-	SubscriberSummary_Type = SubscriberSummary.AddMember("Type", OrderingType)
-
-	SubscriberSummary_Revoked = SubscriberSummary.AddMember("Revoked", smithyprelude.Boolean)
-
-	SubscriberSummary_State = SubscriberSummary.AddMember("State", SubscriberState)
-
-	SubscriberSummary_CreationTime = SubscriberSummary.AddMember("CreationTime", _Timestamp)
-
-	SubscriberSummary_LastModifiedTime = SubscriberSummary.AddMember("LastModifiedTime", _Timestamp)
-
-	SubscriberSummary_SubscriberAccountId = SubscriberSummary.AddMember("SubscriberAccountId", _AccountId)
-
-	_SubscriberSummaryList_member = _SubscriberSummaryList.AddMember("member", SubscriberSummary)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	TransformerType_RAW = TransformerType.AddMember("RAW", smithyprelude.Unit)
-
-	TransformerType_WITH_METADATA = TransformerType.AddMember("WITH_METADATA", smithyprelude.Unit)
-
-	TransformerType_JSONATA = TransformerType.AddMember("JSONATA", smithyprelude.Unit)
-
-	Transformer_Type = Transformer.AddMember("Type", TransformerType)
-
-	Transformer_JsonataConfiguration = Transformer.AddMember("JsonataConfiguration", JsonataConfiguration)
-
-	UpdateInvokeConfiguration_RoleArn = UpdateInvokeConfiguration.AddMember("RoleArn", _RoleArn)
-
-	UpdateInvokeConfiguration_LambdaParameters = UpdateInvokeConfiguration.AddMember("LambdaParameters", LambdaParameters)
-
-	UpdateInvokeConfiguration_SqsParameters = UpdateInvokeConfiguration.AddMember("SqsParameters", SqsParameters)
-
-	UpdateInvokeConfiguration_SnsParameters = UpdateInvokeConfiguration.AddMember("SnsParameters", SnsParameters)
-
-	UpdateInvokeConfiguration_KinesisParameters = UpdateInvokeConfiguration.AddMember("KinesisParameters", KinesisParameters)
-
-	UpdateInvokeConfiguration_StepFunctionsParameters = UpdateInvokeConfiguration.AddMember("StepFunctionsParameters", StepFunctionsParameters)
-
-	UpdateInvokeConfiguration_HttpParameters = UpdateInvokeConfiguration.AddMember("HttpParameters", HttpParameters)
-
-	UpdateInvokeConfiguration_UniversalTargetParameters = UpdateInvokeConfiguration.AddMember("UniversalTargetParameters", UniversalTargetParameters)
-
-	UpdateInvokeConfiguration_EventBusV2Parameters = UpdateInvokeConfiguration.AddMember("EventBusV2Parameters", EventBusV2Parameters)
-
-	CreateEventBusRequest_Name = CreateEventBusRequest.AddMember("Name", _EventBusName)
-
-	CreateEventBusRequest_Description = CreateEventBusRequest.AddMember("Description", _Description)
-
-	CreateEventBusRequest_EncryptionConfiguration = CreateEventBusRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	CreateEventBusRequest_StorageConfiguration = CreateEventBusRequest.AddMember("StorageConfiguration", StorageConfiguration)
-
-	CreateEventBusRequest_Tags = CreateEventBusRequest.AddMember("Tags", _TagMap)
-
-	CreateEventBusRequest_ClientToken = CreateEventBusRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateEventBusResponse_EventBusArn = CreateEventBusResponse.AddMember("EventBusArn", _EventBusArn)
-
-	CreateEventBusResponse_Name = CreateEventBusResponse.AddMember("Name", _EventBusName)
-
-	CreateEventBusResponse_Description = CreateEventBusResponse.AddMember("Description", _Description)
-
-	CreateEventBusResponse_EncryptionConfiguration = CreateEventBusResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	CreateEventBusResponse_StorageConfiguration = CreateEventBusResponse.AddMember("StorageConfiguration", StorageConfigurationOutput)
-
-	CreateEventBusResponse_State = CreateEventBusResponse.AddMember("State", BusState)
-
-	CreateEventBusResponse_StateReason = CreateEventBusResponse.AddMember("StateReason", _StateReason)
-
-	CreateEventBusResponse_CreationTime = CreateEventBusResponse.AddMember("CreationTime", _Timestamp)
-
-	CreateEventSourceRequest_Name = CreateEventSourceRequest.AddMember("Name", _EventSourceName)
-
-	CreateEventSourceRequest_EventBusArn = CreateEventSourceRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	CreateEventSourceRequest_Configuration = CreateEventSourceRequest.AddMember("Configuration", EventSourceConfiguration)
-
-	CreateEventSourceRequest_Description = CreateEventSourceRequest.AddMember("Description", _Description)
-
-	CreateEventSourceRequest_Tags = CreateEventSourceRequest.AddMember("Tags", _TagMap)
-
-	CreateEventSourceRequest_ClientToken = CreateEventSourceRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateEventSourceResponse_EventSourceArn = CreateEventSourceResponse.AddMember("EventSourceArn", _EventSourceArn)
-
-	CreateEventSourceResponse_Name = CreateEventSourceResponse.AddMember("Name", _EventSourceName)
-
-	CreateEventSourceResponse_EventBusArn = CreateEventSourceResponse.AddMember("EventBusArn", _EventBusArn)
-
-	CreateEventSourceResponse_State = CreateEventSourceResponse.AddMember("State", EventSourceState)
-
-	CreateEventSourceResponse_CreationTime = CreateEventSourceResponse.AddMember("CreationTime", _Timestamp)
-
-	CreateSubscriberRequest_Name = CreateSubscriberRequest.AddMember("Name", _SubscriberName)
-
-	CreateSubscriberRequest_EventBusArn = CreateSubscriberRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	CreateSubscriberRequest_InvokeConfiguration = CreateSubscriberRequest.AddMember("InvokeConfiguration", InvokeConfiguration)
-
-	CreateSubscriberRequest_Description = CreateSubscriberRequest.AddMember("Description", _Description)
-
-	CreateSubscriberRequest_FilterConfiguration = CreateSubscriberRequest.AddMember("FilterConfiguration", FilterConfiguration)
-
-	CreateSubscriberRequest_Type = CreateSubscriberRequest.AddMember("Type", OrderingType)
-
-	CreateSubscriberRequest_StartingPosition = CreateSubscriberRequest.AddMember("StartingPosition", StartingPosition)
-
-	CreateSubscriberRequest_PointInTimeConfiguration = CreateSubscriberRequest.AddMember("PointInTimeConfiguration", PointInTimeConfiguration)
-
-	CreateSubscriberRequest_BatchConfiguration = CreateSubscriberRequest.AddMember("BatchConfiguration", BatchConfiguration)
-
-	CreateSubscriberRequest_Transformer = CreateSubscriberRequest.AddMember("Transformer", Transformer)
-
-	CreateSubscriberRequest_RetryPolicy = CreateSubscriberRequest.AddMember("RetryPolicy", RetryPolicy)
-
-	CreateSubscriberRequest_OnFailureConfiguration = CreateSubscriberRequest.AddMember("OnFailureConfiguration", OnFailureConfiguration)
-
-	CreateSubscriberRequest_LogConfiguration = CreateSubscriberRequest.AddMember("LogConfiguration", LogConfiguration)
-
-	CreateSubscriberRequest_State = CreateSubscriberRequest.AddMember("State", SubscriberState)
-
-	CreateSubscriberRequest_Tags = CreateSubscriberRequest.AddMember("Tags", _TagMap)
-
-	CreateSubscriberRequest_ClientToken = CreateSubscriberRequest.AddMember("ClientToken", _ClientToken)
-
-	CreateSubscriberResponse_SubscriberArn = CreateSubscriberResponse.AddMember("SubscriberArn", _SubscriberArn)
-
-	CreateSubscriberResponse_Name = CreateSubscriberResponse.AddMember("Name", _SubscriberName)
-
-	CreateSubscriberResponse_EventBusArn = CreateSubscriberResponse.AddMember("EventBusArn", _EventBusArn)
-
-	CreateSubscriberResponse_Type = CreateSubscriberResponse.AddMember("Type", OrderingType)
-
-	CreateSubscriberResponse_StartingPosition = CreateSubscriberResponse.AddMember("StartingPosition", StartingPosition)
-
-	CreateSubscriberResponse_PointInTimeConfiguration = CreateSubscriberResponse.AddMember("PointInTimeConfiguration", PointInTimeConfiguration)
-
-	CreateSubscriberResponse_State = CreateSubscriberResponse.AddMember("State", SubscriberState)
-
-	CreateSubscriberResponse_CreationTime = CreateSubscriberResponse.AddMember("CreationTime", _Timestamp)
-
-	DeleteEventBusRequest_EventBusArn = DeleteEventBusRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	DeleteEventSourceRequest_EventSourceArn = DeleteEventSourceRequest.AddMember("EventSourceArn", _EventSourceArn)
-
-	DeleteResourcePolicyRequest_ResourceArn = DeleteResourcePolicyRequest.AddMember("ResourceArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	DeleteResourcePolicyRequest_PolicyName = DeleteResourcePolicyRequest.AddMember("PolicyName", _PolicyName)
-
-	DeleteResourcePolicyRequest_ExpectedRevisionId = DeleteResourcePolicyRequest.AddMember("ExpectedRevisionId", _PolicyRevisionId)
-
-	DeleteResourcePolicyResponse_RevisionId = DeleteResourcePolicyResponse.AddMember("RevisionId", _PolicyRevisionId)
-
-	DeleteSubscriberRequest_SubscriberArn = DeleteSubscriberRequest.AddMember("SubscriberArn", _SubscriberArn)
-
-	DescribeEventBusRequest_EventBusArn = DescribeEventBusRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	DescribeEventBusResponse_EventBusArn = DescribeEventBusResponse.AddMember("EventBusArn", _EventBusArn)
-
-	DescribeEventBusResponse_Name = DescribeEventBusResponse.AddMember("Name", _EventBusName)
-
-	DescribeEventBusResponse_Description = DescribeEventBusResponse.AddMember("Description", _Description)
-
-	DescribeEventBusResponse_EncryptionConfiguration = DescribeEventBusResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	DescribeEventBusResponse_StorageConfiguration = DescribeEventBusResponse.AddMember("StorageConfiguration", StorageConfigurationOutput)
-
-	DescribeEventBusResponse_CreationTime = DescribeEventBusResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeEventBusResponse_LastModifiedTime = DescribeEventBusResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DescribeEventBusResponse_State = DescribeEventBusResponse.AddMember("State", BusState)
-
-	DescribeEventBusResponse_StateReason = DescribeEventBusResponse.AddMember("StateReason", _StateReason)
-
-	DescribeEventSourceRequest_EventSourceArn = DescribeEventSourceRequest.AddMember("EventSourceArn", _EventSourceArn)
-
-	DescribeEventSourceResponse_EventSourceArn = DescribeEventSourceResponse.AddMember("EventSourceArn", _EventSourceArn)
-
-	DescribeEventSourceResponse_Name = DescribeEventSourceResponse.AddMember("Name", _EventSourceName)
-
-	DescribeEventSourceResponse_EventBusArn = DescribeEventSourceResponse.AddMember("EventBusArn", _EventBusArn)
-
-	DescribeEventSourceResponse_Configuration = DescribeEventSourceResponse.AddMember("Configuration", EventSourceConfiguration)
-
-	DescribeEventSourceResponse_Description = DescribeEventSourceResponse.AddMember("Description", _Description)
-
-	DescribeEventSourceResponse_State = DescribeEventSourceResponse.AddMember("State", EventSourceState)
-
-	DescribeEventSourceResponse_Revoked = DescribeEventSourceResponse.AddMember("Revoked", smithyprelude.Boolean)
-
-	DescribeEventSourceResponse_CreationTime = DescribeEventSourceResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeEventSourceResponse_LastModifiedTime = DescribeEventSourceResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	DescribeSubscriberRequest_SubscriberArn = DescribeSubscriberRequest.AddMember("SubscriberArn", _SubscriberArn)
-
-	DescribeSubscriberResponse_SubscriberArn = DescribeSubscriberResponse.AddMember("SubscriberArn", _SubscriberArn)
-
-	DescribeSubscriberResponse_Name = DescribeSubscriberResponse.AddMember("Name", _SubscriberName)
-
-	DescribeSubscriberResponse_EventBusArn = DescribeSubscriberResponse.AddMember("EventBusArn", _EventBusArn)
-
-	DescribeSubscriberResponse_InvokeConfiguration = DescribeSubscriberResponse.AddMember("InvokeConfiguration", InvokeConfiguration)
-
-	DescribeSubscriberResponse_Description = DescribeSubscriberResponse.AddMember("Description", _Description)
-
-	DescribeSubscriberResponse_FilterConfiguration = DescribeSubscriberResponse.AddMember("FilterConfiguration", FilterConfiguration)
-
-	DescribeSubscriberResponse_Type = DescribeSubscriberResponse.AddMember("Type", OrderingType)
-
-	DescribeSubscriberResponse_StartingPosition = DescribeSubscriberResponse.AddMember("StartingPosition", StartingPosition)
-
-	DescribeSubscriberResponse_PointInTimeConfiguration = DescribeSubscriberResponse.AddMember("PointInTimeConfiguration", PointInTimeConfiguration)
-
-	DescribeSubscriberResponse_BatchConfiguration = DescribeSubscriberResponse.AddMember("BatchConfiguration", BatchConfiguration)
-
-	DescribeSubscriberResponse_Transformer = DescribeSubscriberResponse.AddMember("Transformer", Transformer)
-
-	DescribeSubscriberResponse_RetryPolicy = DescribeSubscriberResponse.AddMember("RetryPolicy", RetryPolicy)
-
-	DescribeSubscriberResponse_OnFailureConfiguration = DescribeSubscriberResponse.AddMember("OnFailureConfiguration", OnFailureConfiguration)
-
-	DescribeSubscriberResponse_LogConfiguration = DescribeSubscriberResponse.AddMember("LogConfiguration", LogConfiguration)
-
-	DescribeSubscriberResponse_State = DescribeSubscriberResponse.AddMember("State", SubscriberState)
-
-	DescribeSubscriberResponse_Revoked = DescribeSubscriberResponse.AddMember("Revoked", smithyprelude.Boolean)
-
-	DescribeSubscriberResponse_CreationTime = DescribeSubscriberResponse.AddMember("CreationTime", _Timestamp)
-
-	DescribeSubscriberResponse_LastModifiedTime = DescribeSubscriberResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	GetResourcePolicyRequest_ResourceArn = GetResourcePolicyRequest.AddMember("ResourceArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	GetResourcePolicyRequest_PolicyName = GetResourcePolicyRequest.AddMember("PolicyName", _PolicyName)
-
-	GetResourcePolicyResponse_ResourceArn = GetResourcePolicyResponse.AddMember("ResourceArn", _EventBusArn)
-
-	GetResourcePolicyResponse_PolicyDocument = GetResourcePolicyResponse.AddMember("PolicyDocument", _PolicyDocument)
-
-	GetResourcePolicyResponse_PolicyName = GetResourcePolicyResponse.AddMember("PolicyName", _PolicyName)
-
-	GetResourcePolicyResponse_RevisionId = GetResourcePolicyResponse.AddMember("RevisionId", _PolicyRevisionId)
-
-	ListEventBusesRequest_NamePrefix = ListEventBusesRequest.AddMember("NamePrefix", _EventBusName)
-
-	ListEventBusesRequest_EventBusAccountId = ListEventBusesRequest.AddMember("EventBusAccountId", _AccountId)
-
-	ListEventBusesRequest_NextToken = ListEventBusesRequest.AddMember("NextToken", _NextToken)
-
-	ListEventBusesRequest_MaxResults = ListEventBusesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListEventBusesResponse_EventBuses = ListEventBusesResponse.AddMember("EventBuses", _EventBusSummaryList)
-
-	ListEventBusesResponse_NextToken = ListEventBusesResponse.AddMember("NextToken", _NextToken)
-
-	ListEventSourcesRequest_EventBusArn = ListEventSourcesRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	ListEventSourcesRequest_NamePrefix = ListEventSourcesRequest.AddMember("NamePrefix", _EventSourceName)
-
-	ListEventSourcesRequest_NextToken = ListEventSourcesRequest.AddMember("NextToken", _NextToken)
-
-	ListEventSourcesRequest_MaxResults = ListEventSourcesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListEventSourcesResponse_EventSources = ListEventSourcesResponse.AddMember("EventSources", _EventSourceSummaryList)
-
-	ListEventSourcesResponse_NextToken = ListEventSourcesResponse.AddMember("NextToken", _NextToken)
-
-	ListResourcePoliciesRequest_ResourceArn = ListResourcePoliciesRequest.AddMember("ResourceArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	ListResourcePoliciesRequest_NextToken = ListResourcePoliciesRequest.AddMember("NextToken", _NextToken)
-
-	ListResourcePoliciesRequest_MaxResults = ListResourcePoliciesRequest.AddMember("MaxResults", _MaxResults)
-
-	ListResourcePoliciesResponse_PolicySummaries = ListResourcePoliciesResponse.AddMember("PolicySummaries", _ResourcePolicySummaryList)
-
-	ListResourcePoliciesResponse_NextToken = ListResourcePoliciesResponse.AddMember("NextToken", _NextToken)
-
-	ListSubscribersRequest_EventBusArn = ListSubscribersRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	ListSubscribersRequest_NamePrefix = ListSubscribersRequest.AddMember("NamePrefix", _SubscriberName)
-
-	ListSubscribersRequest_NextToken = ListSubscribersRequest.AddMember("NextToken", _NextToken)
-
-	ListSubscribersRequest_MaxResults = ListSubscribersRequest.AddMember("MaxResults", _MaxResults)
-
-	ListSubscribersResponse_Subscribers = ListSubscribersResponse.AddMember("Subscribers", _SubscriberSummaryList)
-
-	ListSubscribersResponse_NextToken = ListSubscribersResponse.AddMember("NextToken", _NextToken)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _TagMap)
-
-	PutEventsRequest_EventBusArn = PutEventsRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	PutEventsRequest_Entries = PutEventsRequest.AddMember("Entries", _PutEventsRequestEntryList)
-
-	PutEventsRequest_DeduplicationConfiguration = PutEventsRequest.AddMember("DeduplicationConfiguration", DeduplicationConfiguration)
-
-	PutEventsResponse_FailedEntryCount = PutEventsResponse.AddMember("FailedEntryCount", _Integer)
-
-	PutEventsResponse_Entries = PutEventsResponse.AddMember("Entries", _PutEventsResultEntryList)
-
-	PutRawEventsRequest_EventBusArn = PutRawEventsRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	PutRawEventsRequest_Entries = PutRawEventsRequest.AddMember("Entries", _PutRawEventsRequestEntryList)
-
-	PutRawEventsRequest_SchemaRegistryConfiguration = PutRawEventsRequest.AddMember("SchemaRegistryConfiguration", SchemaRegistryConfiguration)
-
-	PutRawEventsRequest_DeduplicationConfiguration = PutRawEventsRequest.AddMember("DeduplicationConfiguration", DeduplicationConfiguration)
-
-	PutRawEventsResponse_FailedEntryCount = PutRawEventsResponse.AddMember("FailedEntryCount", _Integer)
-
-	PutRawEventsResponse_Entries = PutRawEventsResponse.AddMember("Entries", _PutRawEventsResultEntryList)
-
-	PutResourcePolicyRequest_ResourceArn = PutResourcePolicyRequest.AddMember("ResourceArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	PutResourcePolicyRequest_PolicyDocument = PutResourcePolicyRequest.AddMember("PolicyDocument", _PolicyDocument)
-
-	PutResourcePolicyRequest_PolicyName = PutResourcePolicyRequest.AddMember("PolicyName", _PolicyName)
-
-	PutResourcePolicyRequest_ExpectedRevisionId = PutResourcePolicyRequest.AddMember("ExpectedRevisionId", _PolicyRevisionId)
-
-	PutResourcePolicyResponse_ResourceArn = PutResourcePolicyResponse.AddMember("ResourceArn", _EventBusArn)
-
-	PutResourcePolicyResponse_PolicyName = PutResourcePolicyResponse.AddMember("PolicyName", _PolicyName)
-
-	PutResourcePolicyResponse_RevisionId = PutResourcePolicyResponse.AddMember("RevisionId", _PolicyRevisionId)
-
-	RevokeResourceRequest_Arn = RevokeResourceRequest.AddMember("Arn", _RevocableResourceArn)
-
-	RevokeResourceResponse_Arn = RevokeResourceResponse.AddMember("Arn", _RevocableResourceArn)
-
-	TagResourceRequest_ResourceArn = TagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	TagResourceRequest_Tags = TagResourceRequest.AddMember("Tags", _TagMap)
-
-	UntagResourceRequest_ResourceArn = UntagResourceRequest.AddMember("ResourceArn", _TaggableResourceArn)
-
-	UntagResourceRequest_TagKeys = UntagResourceRequest.AddMember("TagKeys", _TagKeyList)
-
-	UpdateEventBusRequest_EventBusArn = UpdateEventBusRequest.AddMember("EventBusArn", _EventBusArn, &smithytraits.ContextParam{})
-
-	UpdateEventBusRequest_Description = UpdateEventBusRequest.AddMember("Description", _Description)
-
-	UpdateEventBusRequest_EncryptionConfiguration = UpdateEventBusRequest.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	UpdateEventBusRequest_StorageConfiguration = UpdateEventBusRequest.AddMember("StorageConfiguration", StorageConfiguration)
-
-	UpdateEventBusResponse_EventBusArn = UpdateEventBusResponse.AddMember("EventBusArn", _EventBusArn)
-
-	UpdateEventBusResponse_Name = UpdateEventBusResponse.AddMember("Name", _EventBusName)
-
-	UpdateEventBusResponse_Description = UpdateEventBusResponse.AddMember("Description", _Description)
-
-	UpdateEventBusResponse_EncryptionConfiguration = UpdateEventBusResponse.AddMember("EncryptionConfiguration", EncryptionConfiguration)
-
-	UpdateEventBusResponse_StorageConfiguration = UpdateEventBusResponse.AddMember("StorageConfiguration", StorageConfigurationOutput)
-
-	UpdateEventBusResponse_State = UpdateEventBusResponse.AddMember("State", BusState)
-
-	UpdateEventBusResponse_StateReason = UpdateEventBusResponse.AddMember("StateReason", _StateReason)
-
-	UpdateEventBusResponse_LastModifiedTime = UpdateEventBusResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	UpdateEventSourceRequest_EventSourceArn = UpdateEventSourceRequest.AddMember("EventSourceArn", _EventSourceArn)
-
-	UpdateEventSourceRequest_Configuration = UpdateEventSourceRequest.AddMember("Configuration", EventSourceConfiguration)
-
-	UpdateEventSourceRequest_Description = UpdateEventSourceRequest.AddMember("Description", _Description)
-
-	UpdateEventSourceResponse_EventSourceArn = UpdateEventSourceResponse.AddMember("EventSourceArn", _EventSourceArn)
-
-	UpdateEventSourceResponse_Name = UpdateEventSourceResponse.AddMember("Name", _EventSourceName)
-
-	UpdateEventSourceResponse_EventBusArn = UpdateEventSourceResponse.AddMember("EventBusArn", _EventBusArn)
-
-	UpdateEventSourceResponse_State = UpdateEventSourceResponse.AddMember("State", EventSourceState)
-
-	UpdateEventSourceResponse_LastModifiedTime = UpdateEventSourceResponse.AddMember("LastModifiedTime", _Timestamp)
-
-	UpdateSubscriberRequest_SubscriberArn = UpdateSubscriberRequest.AddMember("SubscriberArn", _SubscriberArn)
-
-	UpdateSubscriberRequest_Description = UpdateSubscriberRequest.AddMember("Description", _Description)
-
-	UpdateSubscriberRequest_State = UpdateSubscriberRequest.AddMember("State", SubscriberState)
-
-	UpdateSubscriberRequest_ResumePosition = UpdateSubscriberRequest.AddMember("ResumePosition", ResumePosition)
-
-	UpdateSubscriberRequest_InvokeConfiguration = UpdateSubscriberRequest.AddMember("InvokeConfiguration", UpdateInvokeConfiguration)
-
-	UpdateSubscriberRequest_FilterConfiguration = UpdateSubscriberRequest.AddMember("FilterConfiguration", FilterConfiguration)
-
-	UpdateSubscriberRequest_BatchConfiguration = UpdateSubscriberRequest.AddMember("BatchConfiguration", BatchConfiguration)
-
-	UpdateSubscriberRequest_Transformer = UpdateSubscriberRequest.AddMember("Transformer", Transformer)
-
-	UpdateSubscriberRequest_RetryPolicy = UpdateSubscriberRequest.AddMember("RetryPolicy", RetryPolicy)
-
-	UpdateSubscriberRequest_OnFailureConfiguration = UpdateSubscriberRequest.AddMember("OnFailureConfiguration", OnFailureConfiguration)
-
-	UpdateSubscriberRequest_LogConfiguration = UpdateSubscriberRequest.AddMember("LogConfiguration", LogConfiguration)
-
-	UpdateSubscriberResponse_SubscriberArn = UpdateSubscriberResponse.AddMember("SubscriberArn", _SubscriberArn)
-
-	UpdateSubscriberResponse_Name = UpdateSubscriberResponse.AddMember("Name", _SubscriberName)
-
-	UpdateSubscriberResponse_EventBusArn = UpdateSubscriberResponse.AddMember("EventBusArn", _EventBusArn)
-
-	UpdateSubscriberResponse_Type = UpdateSubscriberResponse.AddMember("Type", OrderingType)
-
-	UpdateSubscriberResponse_StartingPosition = UpdateSubscriberResponse.AddMember("StartingPosition", StartingPosition)
-
-	UpdateSubscriberResponse_PointInTimeConfiguration = UpdateSubscriberResponse.AddMember("PointInTimeConfiguration", PointInTimeConfiguration)
-
-	UpdateSubscriberResponse_State = UpdateSubscriberResponse.AddMember("State", SubscriberState)
-
-	UpdateSubscriberResponse_LastModifiedTime = UpdateSubscriberResponse.AddMember("LastModifiedTime", _Timestamp)
-
-}
+var (
+	iCreateEventBus                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateEventBus"}
+	iCreateEventSource                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateEventSource"}
+	iCreateSubscriber                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateSubscriber"}
+	iDeleteEventBus                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteEventBus"}
+	iDeleteEventSource                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteEventSource"}
+	iDeleteResourcePolicy                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteResourcePolicy"}
+	iDeleteSubscriber                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteSubscriber"}
+	iDescribeEventBus                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeEventBus"}
+	iDescribeEventSource                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeEventSource"}
+	iDescribeSubscriber                   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeSubscriber"}
+	iGetResourcePolicy                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "GetResourcePolicy"}
+	iListEventBuses                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListEventBuses"}
+	iListEventSources                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListEventSources"}
+	iListResourcePolicies                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListResourcePolicies"}
+	iListSubscribers                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListSubscribers"}
+	iListTagsForResource                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListTagsForResource"}
+	iPutEvents                            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEvents"}
+	iPutRawEvents                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEvents"}
+	iPutResourcePolicy                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutResourcePolicy"}
+	iRevokeResource                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RevokeResource"}
+	iTagResource                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TagResource"}
+	iUntagResource                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UntagResource"}
+	iUpdateEventBus                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateEventBus"}
+	iUpdateEventSource                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateEventSource"}
+	iUpdateSubscriber                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateSubscriber"}
+	i_AWSEventsV2                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "AWSEventsV2"}
+	iAccessDeniedException                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "AccessDeniedException"}
+	i_AccountId                           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "AccountId"}
+	iAwsServiceEventsSourceConfiguration  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "AwsServiceEventsSourceConfiguration"}
+	i_AwsServiceSource                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "AwsServiceSource"}
+	iBatchConfiguration                   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "BatchConfiguration"}
+	iBusState                             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "BusState"}
+	i_ClientToken                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ClientToken"}
+	iConcurrentModificationException      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ConcurrentModificationException"}
+	iConflictException                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ConflictException"}
+	iConfluentPublicRegistryConfiguration = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ConfluentPublicRegistryConfiguration"}
+	i_ConnectionArn                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ConnectionArn"}
+	i_ContentType                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ContentType"}
+	i_DeadLetterQueueArn                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeadLetterQueueArn"}
+	iDeduplicationConfiguration           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeduplicationConfiguration"}
+	iDeduplicationType                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeduplicationType"}
+	i_Description                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "Description"}
+	i_DetailType                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DetailType"}
+	iEncryptionConfiguration              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EncryptionConfiguration"}
+	i_ErrorCode                           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ErrorCode"}
+	i_ErrorMessage                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ErrorMessage"}
+	i_EventBusArn                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventBusArn"}
+	i_EventBusName                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventBusName"}
+	iEventBusSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventBusSummary"}
+	i_EventBusSummaryList                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventBusSummaryList"}
+	i_EventBusV2MetadataMap               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventBusV2MetadataMap"}
+	iEventBusV2Parameters                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventBusV2Parameters"}
+	iEventBusV2SystemMetadata             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventBusV2SystemMetadata"}
+	i_EventData                           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventData"}
+	i_EventDeduplicationId                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventDeduplicationId"}
+	i_EventDetail                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventDetail"}
+	i_EventGroupId                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventGroupId"}
+	i_EventId                             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventId"}
+	i_EventMetadataKey                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventMetadataKey"}
+	i_EventMetadataMap                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventMetadataMap"}
+	i_EventMetadataValue                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventMetadataValue"}
+	i_EventPattern                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventPattern"}
+	i_EventResource                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventResource"}
+	i_EventSourceArn                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventSourceArn"}
+	iEventSourceConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventSourceConfiguration"}
+	i_EventSourceName                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventSourceName"}
+	iEventSourceState                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventSourceState"}
+	iEventSourceSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventSourceSummary"}
+	i_EventSourceSummaryList              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventSourceSummaryList"}
+	iEventSourceType                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "EventSourceType"}
+	iFilter                               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "Filter"}
+	iFilterConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "FilterConfiguration"}
+	iFilterLanguage                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "FilterLanguage"}
+	i_FilterList                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "FilterList"}
+	iFilterScope                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "FilterScope"}
+	i_HeaderKey                           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "HeaderKey"}
+	i_HeaderParametersMap                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "HeaderParametersMap"}
+	i_HeaderValue                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "HeaderValue"}
+	iHttpParameters                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "HttpParameters"}
+	iIdempotentParameterMismatchException = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "IdempotentParameterMismatchException"}
+	iIncludePayload                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "IncludePayload"}
+	i_Integer                             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "Integer"}
+	iInternalException                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "InternalException"}
+	iInvalidInputException                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "InvalidInputException"}
+	iInvalidStateException                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "InvalidStateException"}
+	iInvocationType                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "InvocationType"}
+	iInvokeConfiguration                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "InvokeConfiguration"}
+	iJsonataConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "JsonataConfiguration"}
+	iKinesisParameters                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "KinesisParameters"}
+	i_KmsKeyIdentifier                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "KmsKeyIdentifier"}
+	iLambdaParameters                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "LambdaParameters"}
+	iLimitExceededException               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "LimitExceededException"}
+	iLogConfiguration                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "LogConfiguration"}
+	iLogLevel                             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "LogLevel"}
+	i_MaxResults                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "MaxResults"}
+	i_MessageAttributeName                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "MessageAttributeName"}
+	i_NextToken                           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "NextToken"}
+	i_NullableInteger                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "NullableInteger"}
+	iOnFailureConfiguration               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "OnFailureConfiguration"}
+	iOrderingType                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "OrderingType"}
+	i_PartnerEventSourceArn               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PartnerEventSourceArn"}
+	iPartnerEventsSourceConfiguration     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PartnerEventsSourceConfiguration"}
+	i_PathParameter                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PathParameter"}
+	i_PathParameterList                   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PathParameterList"}
+	iPointInTimeConfiguration             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PointInTimeConfiguration"}
+	iPointType                            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PointType"}
+	i_PolicyDocument                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PolicyDocument"}
+	iPolicyLengthExceededException        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PolicyLengthExceededException"}
+	i_PolicyName                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PolicyName"}
+	i_PolicyRevisionId                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PolicyRevisionId"}
+	iPublicPolicyException                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PublicPolicyException"}
+	iPutEventsRequestEntry                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsRequestEntry"}
+	i_PutEventsRequestEntryList           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsRequestEntryList"}
+	i_PutEventsResourceList               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsResourceList"}
+	iPutEventsResultEntry                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsResultEntry"}
+	i_PutEventsResultEntryList            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsResultEntryList"}
+	iPutEventsSystemMetadata              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsSystemMetadata"}
+	iPutRawEventsRequestEntry             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEventsRequestEntry"}
+	i_PutRawEventsRequestEntryList        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEventsRequestEntryList"}
+	iPutRawEventsResultEntry              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEventsResultEntry"}
+	i_PutRawEventsResultEntryList         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEventsResultEntryList"}
+	iPutRawEventsSystemMetadata           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEventsSystemMetadata"}
+	i_QueryStringKey                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "QueryStringKey"}
+	i_QueryStringParametersMap            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "QueryStringParametersMap"}
+	i_QueryStringValue                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "QueryStringValue"}
+	iResourceAlreadyExistsException       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ResourceAlreadyExistsException"}
+	iResourceInUseException               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ResourceInUseException"}
+	iResourceNotFoundException            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ResourceNotFoundException"}
+	iResourcePolicySummary                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ResourcePolicySummary"}
+	i_ResourcePolicySummaryList           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ResourcePolicySummaryList"}
+	iResumePosition                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ResumePosition"}
+	i_RetentionPeriodInDays               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RetentionPeriodInDays"}
+	iRetryPolicy                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RetryPolicy"}
+	iRetryStrategy                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RetryStrategy"}
+	i_RevocableResourceArn                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RevocableResourceArn"}
+	i_RoleArn                             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RoleArn"}
+	iSchemaRegistryConfiguration          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SchemaRegistryConfiguration"}
+	iSchemaRegistryUnavailableException   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SchemaRegistryUnavailableException"}
+	i_SchemaRegistryUri                   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SchemaRegistryUri"}
+	i_SequenceNumber                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SequenceNumber"}
+	i_SnsMessageAttributeMap              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SnsMessageAttributeMap"}
+	iSnsMessageAttributeValue             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SnsMessageAttributeValue"}
+	iSnsParameters                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SnsParameters"}
+	i_Source                              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "Source"}
+	i_SqsMessageAttributeMap              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SqsMessageAttributeMap"}
+	iSqsMessageAttributeValue             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SqsMessageAttributeValue"}
+	iSqsParameters                        = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SqsParameters"}
+	iStartingPosition                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "StartingPosition"}
+	i_StateReason                         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "StateReason"}
+	iStepFunctionsParameters              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "StepFunctionsParameters"}
+	iStorageConfiguration                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "StorageConfiguration"}
+	iStorageConfigurationOutput           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "StorageConfigurationOutput"}
+	i_String                              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "String"}
+	i_SubscriberArn                       = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SubscriberArn"}
+	i_SubscriberName                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SubscriberName"}
+	iSubscriberState                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SubscriberState"}
+	iSubscriberSummary                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SubscriberSummary"}
+	i_SubscriberSummaryList               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SubscriberSummaryList"}
+	iSuccessCode                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "SuccessCode"}
+	i_TaggableResourceArn                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TaggableResourceArn"}
+	i_TagKey                              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TagKey"}
+	i_TagKeyList                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TagKeyList"}
+	i_TagMap                              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TagMap"}
+	i_TagValue                            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TagValue"}
+	i_TargetResourceArn                   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TargetResourceArn"}
+	iThrottlingException                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ThrottlingException"}
+	i_Timestamp                           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "Timestamp"}
+	iTransformer                          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "Transformer"}
+	iTransformerType                      = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TransformerType"}
+	i_UniversalTargetInput                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UniversalTargetInput"}
+	iUniversalTargetParameters            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UniversalTargetParameters"}
+	iUpdateInvokeConfiguration            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateInvokeConfiguration"}
+	iCreateEventBusRequest                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateEventBusRequest"}
+	iCreateEventBusResponse               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateEventBusResponse"}
+	iCreateEventSourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateEventSourceRequest"}
+	iCreateEventSourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateEventSourceResponse"}
+	iCreateSubscriberRequest              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateSubscriberRequest"}
+	iCreateSubscriberResponse             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "CreateSubscriberResponse"}
+	iDeleteEventBusRequest                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteEventBusRequest"}
+	iDeleteEventBusResponse               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteEventBusResponse"}
+	iDeleteEventSourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteEventSourceRequest"}
+	iDeleteEventSourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteEventSourceResponse"}
+	iDeleteResourcePolicyRequest          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteResourcePolicyRequest"}
+	iDeleteResourcePolicyResponse         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteResourcePolicyResponse"}
+	iDeleteSubscriberRequest              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteSubscriberRequest"}
+	iDeleteSubscriberResponse             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DeleteSubscriberResponse"}
+	iDescribeEventBusRequest              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeEventBusRequest"}
+	iDescribeEventBusResponse             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeEventBusResponse"}
+	iDescribeEventSourceRequest           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeEventSourceRequest"}
+	iDescribeEventSourceResponse          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeEventSourceResponse"}
+	iDescribeSubscriberRequest            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeSubscriberRequest"}
+	iDescribeSubscriberResponse           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "DescribeSubscriberResponse"}
+	iGetResourcePolicyRequest             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "GetResourcePolicyRequest"}
+	iGetResourcePolicyResponse            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "GetResourcePolicyResponse"}
+	iListEventBusesRequest                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListEventBusesRequest"}
+	iListEventBusesResponse               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListEventBusesResponse"}
+	iListEventSourcesRequest              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListEventSourcesRequest"}
+	iListEventSourcesResponse             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListEventSourcesResponse"}
+	iListResourcePoliciesRequest          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListResourcePoliciesRequest"}
+	iListResourcePoliciesResponse         = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListResourcePoliciesResponse"}
+	iListSubscribersRequest               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListSubscribersRequest"}
+	iListSubscribersResponse              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListSubscribersResponse"}
+	iListTagsForResourceRequest           = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse          = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "ListTagsForResourceResponse"}
+	iPutEventsRequest                     = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsRequest"}
+	iPutEventsResponse                    = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutEventsResponse"}
+	iPutRawEventsRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEventsRequest"}
+	iPutRawEventsResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutRawEventsResponse"}
+	iPutResourcePolicyRequest             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutResourcePolicyRequest"}
+	iPutResourcePolicyResponse            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "PutResourcePolicyResponse"}
+	iRevokeResourceRequest                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RevokeResourceRequest"}
+	iRevokeResourceResponse               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "RevokeResourceResponse"}
+	iTagResourceRequest                   = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TagResourceRequest"}
+	iTagResourceResponse                  = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "TagResourceResponse"}
+	iUntagResourceRequest                 = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UntagResourceResponse"}
+	iUpdateEventBusRequest                = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateEventBusRequest"}
+	iUpdateEventBusResponse               = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateEventBusResponse"}
+	iUpdateEventSourceRequest             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateEventSourceRequest"}
+	iUpdateEventSourceResponse            = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateEventSourceResponse"}
+	iUpdateSubscriberRequest              = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateSubscriberRequest"}
+	iUpdateSubscriberResponse             = smithy.ShapeID{Namespace: "com.amazonaws.eventbridgev2", Name: "UpdateSubscriberResponse"}
+	pString                               = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.XMLNamespace{URI: "http://eventsv2.amazonaws.com/doc/2025-05-15"}}, DirectMask: 0x8000}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.ContextParam{}}, DirectMask: 0x1000}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mAwsServiceEventsSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sAwsServiceEventsSourceConfiguration_AwsService, &sAwsServiceEventsSourceConfiguration_Pattern, &sAwsServiceEventsSourceConfiguration_OnFailureConfiguration}}
+var mBatchConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sBatchConfiguration_MaxBatchSize, &sBatchConfiguration_MaxBatchWindowInSeconds}}
+var mBusState = smithy.SchemaMembers{List: []*smithy.Schema{&sBusState_CREATING, &sBusState_CREATE_FAILED, &sBusState_UPDATING, &sBusState_UPDATE_FAILED, &sBusState_DELETING, &sBusState_ACTIVE, &sBusState_DELETE_FAILED}}
+var mConcurrentModificationException = smithy.SchemaMembers{List: []*smithy.Schema{&sConcurrentModificationException_Message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mConfluentPublicRegistryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sConfluentPublicRegistryConfiguration_ConnectionArn}}
+var mDeduplicationConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sDeduplicationConfiguration_DeduplicationType}}
+var mDeduplicationType = smithy.SchemaMembers{List: []*smithy.Schema{&sDeduplicationType_CONTENT_BASED}}
+var mEncryptionConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEncryptionConfiguration_KmsKeyIdentifier}}
+var mEventBusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBusSummary_Name, &sEventBusSummary_EventBusArn, &sEventBusSummary_Description, &sEventBusSummary_CreationTime, &sEventBusSummary_LastModifiedTime, &sEventBusSummary_State, &sEventBusSummary_StateReason, &sEventBusSummary_EventBusAccountId}}
+var m_EventBusSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventBusSummaryList_member}}
+var m_EventBusV2MetadataMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventBusV2MetadataMap_key, &s_EventBusV2MetadataMap_value}}
+var mEventBusV2Parameters = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBusV2Parameters_Metadata, &sEventBusV2Parameters_SystemMetadata, &sEventBusV2Parameters_DeduplicationConfiguration}}
+var mEventBusV2SystemMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sEventBusV2SystemMetadata_EventGroupId, &sEventBusV2SystemMetadata_DeduplicationId}}
+var m_EventMetadataMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventMetadataMap_key, &s_EventMetadataMap_value}}
+var mEventSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSourceConfiguration_AwsServiceEventsConfiguration, &sEventSourceConfiguration_PartnerEventsConfiguration}}
+var mEventSourceState = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSourceState_CREATING, &sEventSourceState_ACTIVE, &sEventSourceState_UPDATING, &sEventSourceState_CREATE_FAILED, &sEventSourceState_UPDATE_FAILED, &sEventSourceState_DELETING, &sEventSourceState_DELETE_FAILED}}
+var mEventSourceSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSourceSummary_EventSourceArn, &sEventSourceSummary_Name, &sEventSourceSummary_EventBusArn, &sEventSourceSummary_Type, &sEventSourceSummary_State, &sEventSourceSummary_Revoked, &sEventSourceSummary_CreationTime, &sEventSourceSummary_LastModifiedTime, &sEventSourceSummary_EventSourceAccountId}, Seed: 3, Slots: []uint16{
+	7, 0, 0, 9, 0, 3, 0, 0, 0, 6, 0, 0, 4, 0, 2, 0, 0, 0, 8, 1, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 5, 0,
+}}
+var m_EventSourceSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_EventSourceSummaryList_member}}
+var mEventSourceType = smithy.SchemaMembers{List: []*smithy.Schema{&sEventSourceType_AWS_SERVICE_EVENTS, &sEventSourceType_PARTNER_EVENTS}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Pattern, &sFilter_Scope}}
+var mFilterConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterConfiguration_Language, &sFilterConfiguration_Filters}}
+var mFilterLanguage = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterLanguage_EVENT_BRIDGE_PATTERN}}
+var m_FilterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterList_member}}
+var mFilterScope = smithy.SchemaMembers{List: []*smithy.Schema{&sFilterScope_DATA, &sFilterScope_METADATA, &sFilterScope_SYSTEM_METADATA}}
+var m_HeaderParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_HeaderParametersMap_key, &s_HeaderParametersMap_value}}
+var mHttpParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sHttpParameters_PathParameterValues, &sHttpParameters_HeaderParameters, &sHttpParameters_QueryStringParameters, &sHttpParameters_InvocationTimeoutSeconds}}
+var mIdempotentParameterMismatchException = smithy.SchemaMembers{List: []*smithy.Schema{&sIdempotentParameterMismatchException_Message}}
+var mIncludePayload = smithy.SchemaMembers{List: []*smithy.Schema{&sIncludePayload_FULL, &sIncludePayload_ON_ERROR_ONLY}}
+var mInternalException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalException_Message}}
+var mInvalidInputException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidInputException_Message}}
+var mInvalidStateException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidStateException_Message}}
+var mInvocationType = smithy.SchemaMembers{List: []*smithy.Schema{&sInvocationType_EVENT, &sInvocationType_REQUEST_RESPONSE}}
+var mInvokeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sInvokeConfiguration_RoleArn, &sInvokeConfiguration_LambdaParameters, &sInvokeConfiguration_SqsParameters, &sInvokeConfiguration_SnsParameters, &sInvokeConfiguration_KinesisParameters, &sInvokeConfiguration_StepFunctionsParameters, &sInvokeConfiguration_HttpParameters, &sInvokeConfiguration_UniversalTargetParameters, &sInvokeConfiguration_EventBusV2Parameters, &sInvokeConfiguration_TargetArn}, Seed: 4, Slots: []uint16{
+	0, 10, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 8, 0, 6, 0, 0, 5, 0, 7, 0, 0,
+	0, 0, 0, 9, 0, 4, 0, 0,
+}}
+var mJsonataConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sJsonataConfiguration_Expression}}
+var mKinesisParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sKinesisParameters_PartitionKey, &sKinesisParameters_ExplicitHashKey}}
+var mLambdaParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sLambdaParameters_InvocationType, &sLambdaParameters_Qualifier, &sLambdaParameters_DurableExecutionName, &sLambdaParameters_TenantId, &sLambdaParameters_InvocationTimeoutSeconds}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_Message}}
+var mLogConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sLogConfiguration_Level, &sLogConfiguration_IncludePayload}}
+var mLogLevel = smithy.SchemaMembers{List: []*smithy.Schema{&sLogLevel_OFF, &sLogLevel_ERROR, &sLogLevel_INFO}}
+var mOnFailureConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sOnFailureConfiguration_Arn}}
+var mOrderingType = smithy.SchemaMembers{List: []*smithy.Schema{&sOrderingType_FIFO, &sOrderingType_UNORDERED}}
+var mPartnerEventsSourceConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPartnerEventsSourceConfiguration_PartnerEventSourceArn, &sPartnerEventsSourceConfiguration_Pattern, &sPartnerEventsSourceConfiguration_PartnerBusKmsKeyIdentifier, &sPartnerEventsSourceConfiguration_OnFailureConfiguration}}
+var m_PathParameterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PathParameterList_member}}
+var mPointInTimeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sPointInTimeConfiguration_PointType, &sPointInTimeConfiguration_StartingPoint, &sPointInTimeConfiguration_EndPoint}}
+var mPointType = smithy.SchemaMembers{List: []*smithy.Schema{&sPointType_HORIZON, &sPointType_TIMESTAMP}}
+var mPolicyLengthExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sPolicyLengthExceededException_Message}}
+var mPublicPolicyException = smithy.SchemaMembers{List: []*smithy.Schema{&sPublicPolicyException_Message}}
+var mPutEventsRequestEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsRequestEntry_Source, &sPutEventsRequestEntry_DetailType, &sPutEventsRequestEntry_Detail, &sPutEventsRequestEntry_Resources, &sPutEventsRequestEntry_Time, &sPutEventsRequestEntry_SystemMetadata}}
+var m_PutEventsRequestEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutEventsRequestEntryList_member}}
+var m_PutEventsResourceList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutEventsResourceList_member}}
+var mPutEventsResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsResultEntry_EventId, &sPutEventsResultEntry_SequenceNumber, &sPutEventsResultEntry_SuccessCode, &sPutEventsResultEntry_ErrorCode, &sPutEventsResultEntry_ErrorMessage}}
+var m_PutEventsResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutEventsResultEntryList_member}}
+var mPutEventsSystemMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsSystemMetadata_EventGroupId, &sPutEventsSystemMetadata_DeduplicationId}}
+var mPutRawEventsRequestEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRawEventsRequestEntry_Data, &sPutRawEventsRequestEntry_Metadata, &sPutRawEventsRequestEntry_SystemMetadata}}
+var m_PutRawEventsRequestEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutRawEventsRequestEntryList_member}}
+var mPutRawEventsResultEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRawEventsResultEntry_EventId, &sPutRawEventsResultEntry_SequenceNumber, &sPutRawEventsResultEntry_SuccessCode, &sPutRawEventsResultEntry_ErrorCode, &sPutRawEventsResultEntry_ErrorMessage}}
+var m_PutRawEventsResultEntryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PutRawEventsResultEntryList_member}}
+var mPutRawEventsSystemMetadata = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRawEventsSystemMetadata_ContentType, &sPutRawEventsSystemMetadata_DeduplicationId, &sPutRawEventsSystemMetadata_EventGroupId}}
+var m_QueryStringParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_QueryStringParametersMap_key, &s_QueryStringParametersMap_value}}
+var mResourceAlreadyExistsException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceAlreadyExistsException_Message}}
+var mResourceInUseException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceInUseException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mResourcePolicySummary = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcePolicySummary_PolicyName, &sResourcePolicySummary_RevisionId}}
+var m_ResourcePolicySummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourcePolicySummaryList_member}}
+var mResumePosition = smithy.SchemaMembers{List: []*smithy.Schema{&sResumePosition_LAST_PROCESSED, &sResumePosition_LATEST}}
+var mRetryPolicy = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryPolicy_MaxRetryAttempts, &sRetryPolicy_MaxEventAgeInSeconds, &sRetryPolicy_RetryStrategy}}
+var mRetryStrategy = smithy.SchemaMembers{List: []*smithy.Schema{&sRetryStrategy_ALL}}
+var mSchemaRegistryConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaRegistryConfiguration_RegistryUri, &sSchemaRegistryConfiguration_ConfluentPublicRegistryConfiguration}}
+var mSchemaRegistryUnavailableException = smithy.SchemaMembers{List: []*smithy.Schema{&sSchemaRegistryUnavailableException_Message}}
+var m_SnsMessageAttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SnsMessageAttributeMap_key, &s_SnsMessageAttributeMap_value}}
+var mSnsMessageAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sSnsMessageAttributeValue_DataType, &sSnsMessageAttributeValue_StringValue, &sSnsMessageAttributeValue_BinaryValue}}
+var mSnsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sSnsParameters_MessageGroupId, &sSnsParameters_MessageDeduplicationId, &sSnsParameters_Subject, &sSnsParameters_MessageStructure, &sSnsParameters_MessageAttributes}}
+var m_SqsMessageAttributeMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_SqsMessageAttributeMap_key, &s_SqsMessageAttributeMap_value}}
+var mSqsMessageAttributeValue = smithy.SchemaMembers{List: []*smithy.Schema{&sSqsMessageAttributeValue_DataType, &sSqsMessageAttributeValue_StringValue, &sSqsMessageAttributeValue_BinaryValue}}
+var mSqsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sSqsParameters_MessageGroupId, &sSqsParameters_MessageDeduplicationId, &sSqsParameters_DelaySeconds, &sSqsParameters_MessageAttributes, &sSqsParameters_MessageSystemAttributes}}
+var mStartingPosition = smithy.SchemaMembers{List: []*smithy.Schema{&sStartingPosition_LATEST, &sStartingPosition_POINT_IN_TIME}}
+var mStepFunctionsParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sStepFunctionsParameters_InvocationType, &sStepFunctionsParameters_Name, &sStepFunctionsParameters_TraceHeader, &sStepFunctionsParameters_InvocationTimeoutSeconds}}
+var mStorageConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageConfiguration_RetentionPeriodInDays}}
+var mStorageConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStorageConfigurationOutput_RetentionPeriodInDays, &sStorageConfigurationOutput_RetentionWindowStartTime}}
+var mSubscriberState = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriberState_RUNNING, &sSubscriberState_STOPPED}}
+var mSubscriberSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sSubscriberSummary_SubscriberArn, &sSubscriberSummary_Name, &sSubscriberSummary_EventBusArn, &sSubscriberSummary_TargetArn, &sSubscriberSummary_Type, &sSubscriberSummary_Revoked, &sSubscriberSummary_State, &sSubscriberSummary_CreationTime, &sSubscriberSummary_LastModifiedTime, &sSubscriberSummary_SubscriberAccountId}, Seed: 1, Slots: []uint16{
+	6, 0, 4, 2, 0, 7, 0, 5, 10, 0, 0, 9, 0, 0, 8, 3, 0, 1, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var m_SubscriberSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_SubscriberSummaryList_member}}
+var mSuccessCode = smithy.SchemaMembers{List: []*smithy.Schema{&sSuccessCode_PUBLISHED, &sSuccessCode_DEDUPLICATED}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mTransformer = smithy.SchemaMembers{List: []*smithy.Schema{&sTransformer_Type, &sTransformer_JsonataConfiguration}}
+var mTransformerType = smithy.SchemaMembers{List: []*smithy.Schema{&sTransformerType_RAW, &sTransformerType_WITH_METADATA, &sTransformerType_JSONATA}}
+var mUniversalTargetParameters = smithy.SchemaMembers{List: []*smithy.Schema{&sUniversalTargetParameters_Input, &sUniversalTargetParameters_InvocationTimeoutSeconds}}
+var mUpdateInvokeConfiguration = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateInvokeConfiguration_RoleArn, &sUpdateInvokeConfiguration_LambdaParameters, &sUpdateInvokeConfiguration_SqsParameters, &sUpdateInvokeConfiguration_SnsParameters, &sUpdateInvokeConfiguration_KinesisParameters, &sUpdateInvokeConfiguration_StepFunctionsParameters, &sUpdateInvokeConfiguration_HttpParameters, &sUpdateInvokeConfiguration_UniversalTargetParameters, &sUpdateInvokeConfiguration_EventBusV2Parameters}, Seed: 4, Slots: []uint16{
+	0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 3, 8, 0, 6, 0, 0, 5, 0, 7, 0, 0,
+	0, 0, 0, 9, 0, 4, 0, 0,
+}}
+var mCreateEventBusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventBusRequest_Name, &sCreateEventBusRequest_Description, &sCreateEventBusRequest_EncryptionConfiguration, &sCreateEventBusRequest_StorageConfiguration, &sCreateEventBusRequest_Tags, &sCreateEventBusRequest_ClientToken}}
+var mCreateEventBusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventBusResponse_EventBusArn, &sCreateEventBusResponse_Name, &sCreateEventBusResponse_Description, &sCreateEventBusResponse_EncryptionConfiguration, &sCreateEventBusResponse_StorageConfiguration, &sCreateEventBusResponse_State, &sCreateEventBusResponse_StateReason, &sCreateEventBusResponse_CreationTime}}
+var mCreateEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventSourceRequest_Name, &sCreateEventSourceRequest_EventBusArn, &sCreateEventSourceRequest_Configuration, &sCreateEventSourceRequest_Description, &sCreateEventSourceRequest_Tags, &sCreateEventSourceRequest_ClientToken}}
+var mCreateEventSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateEventSourceResponse_EventSourceArn, &sCreateEventSourceResponse_Name, &sCreateEventSourceResponse_EventBusArn, &sCreateEventSourceResponse_State, &sCreateEventSourceResponse_CreationTime}}
+var mCreateSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriberRequest_Name, &sCreateSubscriberRequest_EventBusArn, &sCreateSubscriberRequest_InvokeConfiguration, &sCreateSubscriberRequest_Description, &sCreateSubscriberRequest_FilterConfiguration, &sCreateSubscriberRequest_Type, &sCreateSubscriberRequest_StartingPosition, &sCreateSubscriberRequest_PointInTimeConfiguration, &sCreateSubscriberRequest_BatchConfiguration, &sCreateSubscriberRequest_Transformer, &sCreateSubscriberRequest_RetryPolicy, &sCreateSubscriberRequest_OnFailureConfiguration, &sCreateSubscriberRequest_LogConfiguration, &sCreateSubscriberRequest_State, &sCreateSubscriberRequest_Tags, &sCreateSubscriberRequest_ClientToken}, Seed: 92, Slots: []uint16{
+	4, 6, 0, 5, 0, 0, 0, 15, 12, 0, 16, 7, 9, 2, 3, 0, 14, 0, 0, 11, 0, 1, 0, 10,
+	13, 0, 0, 8, 0, 0, 0, 0,
+}}
+var mCreateSubscriberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateSubscriberResponse_SubscriberArn, &sCreateSubscriberResponse_Name, &sCreateSubscriberResponse_EventBusArn, &sCreateSubscriberResponse_Type, &sCreateSubscriberResponse_StartingPosition, &sCreateSubscriberResponse_PointInTimeConfiguration, &sCreateSubscriberResponse_State, &sCreateSubscriberResponse_CreationTime}}
+var mDeleteEventBusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventBusRequest_EventBusArn}}
+var mDeleteEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteEventSourceRequest_EventSourceArn}}
+var mDeleteResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyRequest_ResourceArn, &sDeleteResourcePolicyRequest_PolicyName, &sDeleteResourcePolicyRequest_ExpectedRevisionId}}
+var mDeleteResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteResourcePolicyResponse_RevisionId}}
+var mDeleteSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteSubscriberRequest_SubscriberArn}}
+var mDescribeEventBusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventBusRequest_EventBusArn}}
+var mDescribeEventBusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventBusResponse_EventBusArn, &sDescribeEventBusResponse_Name, &sDescribeEventBusResponse_Description, &sDescribeEventBusResponse_EncryptionConfiguration, &sDescribeEventBusResponse_StorageConfiguration, &sDescribeEventBusResponse_CreationTime, &sDescribeEventBusResponse_LastModifiedTime, &sDescribeEventBusResponse_State, &sDescribeEventBusResponse_StateReason}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 2, 0, 8, 0, 0, 0, 0, 0, 7, 0, 4, 6, 1, 0, 5, 0, 0, 3, 9, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mDescribeEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventSourceRequest_EventSourceArn}}
+var mDescribeEventSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeEventSourceResponse_EventSourceArn, &sDescribeEventSourceResponse_Name, &sDescribeEventSourceResponse_EventBusArn, &sDescribeEventSourceResponse_Configuration, &sDescribeEventSourceResponse_Description, &sDescribeEventSourceResponse_State, &sDescribeEventSourceResponse_Revoked, &sDescribeEventSourceResponse_CreationTime, &sDescribeEventSourceResponse_LastModifiedTime}, Seed: 3, Slots: []uint16{
+	8, 0, 0, 0, 0, 3, 0, 0, 5, 7, 0, 0, 0, 0, 2, 0, 0, 0, 9, 1, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 4, 6, 0,
+}}
+var mDescribeSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSubscriberRequest_SubscriberArn}}
+var mDescribeSubscriberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sDescribeSubscriberResponse_SubscriberArn, &sDescribeSubscriberResponse_Name, &sDescribeSubscriberResponse_EventBusArn, &sDescribeSubscriberResponse_InvokeConfiguration, &sDescribeSubscriberResponse_Description, &sDescribeSubscriberResponse_FilterConfiguration, &sDescribeSubscriberResponse_Type, &sDescribeSubscriberResponse_StartingPosition, &sDescribeSubscriberResponse_PointInTimeConfiguration, &sDescribeSubscriberResponse_BatchConfiguration, &sDescribeSubscriberResponse_Transformer, &sDescribeSubscriberResponse_RetryPolicy, &sDescribeSubscriberResponse_OnFailureConfiguration, &sDescribeSubscriberResponse_LogConfiguration, &sDescribeSubscriberResponse_State, &sDescribeSubscriberResponse_Revoked, &sDescribeSubscriberResponse_CreationTime, &sDescribeSubscriberResponse_LastModifiedTime}, Seed: 1, Slots: []uint16{
+	0, 0, 0, 2, 0, 15, 0, 0, 8, 0, 0, 0, 0, 0, 17, 13, 0, 0, 14, 0, 5, 0, 4, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 0, 0, 6, 0, 7, 12, 0, 0, 18, 0, 0, 0, 3,
+	10, 1, 0, 0, 0, 0, 0, 0, 0, 11, 9, 0, 0, 0, 0, 0,
+}}
+var mGetResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyRequest_ResourceArn, &sGetResourcePolicyRequest_PolicyName}}
+var mGetResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sGetResourcePolicyResponse_ResourceArn, &sGetResourcePolicyResponse_PolicyDocument, &sGetResourcePolicyResponse_PolicyName, &sGetResourcePolicyResponse_RevisionId}}
+var mListEventBusesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventBusesRequest_NamePrefix, &sListEventBusesRequest_EventBusAccountId, &sListEventBusesRequest_NextToken, &sListEventBusesRequest_MaxResults}}
+var mListEventBusesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventBusesResponse_EventBuses, &sListEventBusesResponse_NextToken}}
+var mListEventSourcesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventSourcesRequest_EventBusArn, &sListEventSourcesRequest_NamePrefix, &sListEventSourcesRequest_NextToken, &sListEventSourcesRequest_MaxResults}}
+var mListEventSourcesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListEventSourcesResponse_EventSources, &sListEventSourcesResponse_NextToken}}
+var mListResourcePoliciesRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcePoliciesRequest_ResourceArn, &sListResourcePoliciesRequest_NextToken, &sListResourcePoliciesRequest_MaxResults}}
+var mListResourcePoliciesResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListResourcePoliciesResponse_PolicySummaries, &sListResourcePoliciesResponse_NextToken}}
+var mListSubscribersRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscribersRequest_EventBusArn, &sListSubscribersRequest_NamePrefix, &sListSubscribersRequest_NextToken, &sListSubscribersRequest_MaxResults}}
+var mListSubscribersResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListSubscribersResponse_Subscribers, &sListSubscribersResponse_NextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mPutEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsRequest_EventBusArn, &sPutEventsRequest_Entries, &sPutEventsRequest_DeduplicationConfiguration}}
+var mPutEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutEventsResponse_FailedEntryCount, &sPutEventsResponse_Entries}}
+var mPutRawEventsRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRawEventsRequest_EventBusArn, &sPutRawEventsRequest_Entries, &sPutRawEventsRequest_SchemaRegistryConfiguration, &sPutRawEventsRequest_DeduplicationConfiguration}}
+var mPutRawEventsResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutRawEventsResponse_FailedEntryCount, &sPutRawEventsResponse_Entries}}
+var mPutResourcePolicyRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyRequest_ResourceArn, &sPutResourcePolicyRequest_PolicyDocument, &sPutResourcePolicyRequest_PolicyName, &sPutResourcePolicyRequest_ExpectedRevisionId}}
+var mPutResourcePolicyResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sPutResourcePolicyResponse_ResourceArn, &sPutResourcePolicyResponse_PolicyName, &sPutResourcePolicyResponse_RevisionId}}
+var mRevokeResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeResourceRequest_Arn}}
+var mRevokeResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sRevokeResourceResponse_Arn}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_ResourceArn, &sTagResourceRequest_Tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_ResourceArn, &sUntagResourceRequest_TagKeys}}
+var mUpdateEventBusRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventBusRequest_EventBusArn, &sUpdateEventBusRequest_Description, &sUpdateEventBusRequest_EncryptionConfiguration, &sUpdateEventBusRequest_StorageConfiguration}}
+var mUpdateEventBusResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventBusResponse_EventBusArn, &sUpdateEventBusResponse_Name, &sUpdateEventBusResponse_Description, &sUpdateEventBusResponse_EncryptionConfiguration, &sUpdateEventBusResponse_StorageConfiguration, &sUpdateEventBusResponse_State, &sUpdateEventBusResponse_StateReason, &sUpdateEventBusResponse_LastModifiedTime}}
+var mUpdateEventSourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventSourceRequest_EventSourceArn, &sUpdateEventSourceRequest_Configuration, &sUpdateEventSourceRequest_Description}}
+var mUpdateEventSourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEventSourceResponse_EventSourceArn, &sUpdateEventSourceResponse_Name, &sUpdateEventSourceResponse_EventBusArn, &sUpdateEventSourceResponse_State, &sUpdateEventSourceResponse_LastModifiedTime}}
+var mUpdateSubscriberRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriberRequest_SubscriberArn, &sUpdateSubscriberRequest_Description, &sUpdateSubscriberRequest_State, &sUpdateSubscriberRequest_ResumePosition, &sUpdateSubscriberRequest_InvokeConfiguration, &sUpdateSubscriberRequest_FilterConfiguration, &sUpdateSubscriberRequest_BatchConfiguration, &sUpdateSubscriberRequest_Transformer, &sUpdateSubscriberRequest_RetryPolicy, &sUpdateSubscriberRequest_OnFailureConfiguration, &sUpdateSubscriberRequest_LogConfiguration}, Seed: 4, Slots: []uint16{
+	10, 0, 0, 0, 0, 5, 0, 9, 0, 1, 0, 0, 0, 0, 0, 3, 4, 0, 0, 0, 11, 6, 0, 7,
+	0, 0, 8, 0, 0, 0, 0, 2,
+}}
+var mUpdateSubscriberResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateSubscriberResponse_SubscriberArn, &sUpdateSubscriberResponse_Name, &sUpdateSubscriberResponse_EventBusArn, &sUpdateSubscriberResponse_Type, &sUpdateSubscriberResponse_StartingPosition, &sUpdateSubscriberResponse_PointInTimeConfiguration, &sUpdateSubscriberResponse_State, &sUpdateSubscriberResponse_LastModifiedTime}}
+
+var sCreateEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventBus, Type: smithy.ShapeTypeOperation})
+var sCreateEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventSource, Type: smithy.ShapeTypeOperation})
+var sCreateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriber, Type: smithy.ShapeTypeOperation})
+var sDeleteEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventBus, Type: smithy.ShapeTypeOperation})
+var sDeleteEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventSource, Type: smithy.ShapeTypeOperation})
+var sDeleteResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sDeleteSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriber, Type: smithy.ShapeTypeOperation})
+var sDescribeEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventBus, Type: smithy.ShapeTypeOperation})
+var sDescribeEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSource, Type: smithy.ShapeTypeOperation})
+var sDescribeSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscriber, Type: smithy.ShapeTypeOperation})
+var sGetResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sListEventBuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventBuses, Type: smithy.ShapeTypeOperation})
+var sListEventSources = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventSources, Type: smithy.ShapeTypeOperation})
+var sListResourcePolicies = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePolicies, Type: smithy.ShapeTypeOperation})
+var sListSubscribers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribers, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Type: smithy.ShapeTypeOperation})
+var sPutEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEvents, Type: smithy.ShapeTypeOperation})
+var sPutRawEvents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawEvents, Type: smithy.ShapeTypeOperation})
+var sPutResourcePolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicy, Type: smithy.ShapeTypeOperation})
+var sRevokeResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeResource, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Type: smithy.ShapeTypeOperation})
+var sUpdateEventBus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventBus, Type: smithy.ShapeTypeOperation})
+var sUpdateEventSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventSource, Type: smithy.ShapeTypeOperation})
+var sUpdateSubscriber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriber, Type: smithy.ShapeTypeOperation})
+var s_AWSEventsV2 = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSEventsV2, Traits: &t0, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t1, Type: smithy.ShapeTypeStructure})
+var s_AccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sAwsServiceEventsSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAwsServiceEventsSourceConfiguration, Members: &mAwsServiceEventsSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_AwsServiceSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AwsServiceSource, Type: smithy.ShapeTypeString})
+var sBatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBatchConfiguration, Members: &mBatchConfiguration, Type: smithy.ShapeTypeStructure})
+var sBusState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBusState, Members: &mBusState, Type: smithy.ShapeTypeEnum})
+var s_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sConcurrentModificationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConcurrentModificationException, Members: &mConcurrentModificationException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sConfluentPublicRegistryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfluentPublicRegistryConfiguration, Members: &mConfluentPublicRegistryConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString})
+var s_DeadLetterQueueArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeadLetterQueueArn, Type: smithy.ShapeTypeString})
+var sDeduplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeduplicationConfiguration, Members: &mDeduplicationConfiguration, Type: smithy.ShapeTypeStructure})
+var sDeduplicationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeduplicationType, Members: &mDeduplicationType, Type: smithy.ShapeTypeEnum})
+var s_Description = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Description, Type: smithy.ShapeTypeString})
+var s_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DetailType, Type: smithy.ShapeTypeString})
+var sEncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var s_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var s_EventBusName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sEventBusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBusSummary, Members: &mEventBusSummary, Type: smithy.ShapeTypeStructure})
+var s_EventBusSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBusSummaryList, Members: &m_EventBusSummaryList, Type: smithy.ShapeTypeList})
+var s_EventBusV2MetadataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventBusV2MetadataMap, Members: &m_EventBusV2MetadataMap, Type: smithy.ShapeTypeMap})
+var sEventBusV2Parameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBusV2Parameters, Members: &mEventBusV2Parameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sEventBusV2SystemMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventBusV2SystemMetadata, Members: &mEventBusV2SystemMetadata, Type: smithy.ShapeTypeStructure})
+var s_EventData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventData, Traits: &t4, Type: smithy.ShapeTypeBlob})
+var s_EventDeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDeduplicationId, Type: smithy.ShapeTypeString})
+var s_EventDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDetail, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_EventGroupId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventGroupId, Type: smithy.ShapeTypeString})
+var s_EventId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventId, Type: smithy.ShapeTypeString})
+var s_EventMetadataKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventMetadataKey, Type: smithy.ShapeTypeString})
+var s_EventMetadataMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventMetadataMap, Members: &m_EventMetadataMap, Type: smithy.ShapeTypeMap})
+var s_EventMetadataValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventMetadataValue, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_EventPattern = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventPattern, Traits: &t4, Type: smithy.ShapeTypeString})
+var s_EventResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventResource, Type: smithy.ShapeTypeString})
+var s_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sEventSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSourceConfiguration, Members: &mEventSourceConfiguration, Type: smithy.ShapeTypeUnion})
+var s_EventSourceName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sEventSourceState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var sEventSourceSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSourceSummary, Members: &mEventSourceSummary, Type: smithy.ShapeTypeStructure})
+var s_EventSourceSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventSourceSummaryList, Members: &m_EventSourceSummaryList, Type: smithy.ShapeTypeList})
+var sEventSourceType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEventSourceType, Members: &mEventSourceType, Type: smithy.ShapeTypeEnum})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sFilterLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterLanguage, Members: &mFilterLanguage, Type: smithy.ShapeTypeEnum})
+var s_FilterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sFilterScope = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilterScope, Members: &mFilterScope, Type: smithy.ShapeTypeEnum})
+var s_HeaderKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderKey, Type: smithy.ShapeTypeString})
+var s_HeaderParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderParametersMap, Members: &m_HeaderParametersMap, Type: smithy.ShapeTypeMap})
+var s_HeaderValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeaderValue, Type: smithy.ShapeTypeString})
+var sHttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHttpParameters, Members: &mHttpParameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sIdempotentParameterMismatchException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIdempotentParameterMismatchException, Members: &mIdempotentParameterMismatchException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sIncludePayload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iIncludePayload, Members: &mIncludePayload, Type: smithy.ShapeTypeEnum})
+var s_Integer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sInternalException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalException, Members: &mInternalException, Traits: &t5, Type: smithy.ShapeTypeStructure})
+var sInvalidInputException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidInputException, Members: &mInvalidInputException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sInvalidStateException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidStateException, Members: &mInvalidStateException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sInvocationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvocationType, Members: &mInvocationType, Type: smithy.ShapeTypeEnum})
+var sInvokeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvokeConfiguration, Members: &mInvokeConfiguration, Type: smithy.ShapeTypeStructure})
+var sJsonataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iJsonataConfiguration, Members: &mJsonataConfiguration, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sKinesisParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iKinesisParameters, Members: &mKinesisParameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString})
+var sLambdaParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLambdaParameters, Members: &mLambdaParameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sLogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sLogLevel = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLogLevel, Members: &mLogLevel, Type: smithy.ShapeTypeEnum})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MessageAttributeName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MessageAttributeName, Type: smithy.ShapeTypeString})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_NullableInteger = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger})
+var sOnFailureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOnFailureConfiguration, Members: &mOnFailureConfiguration, Type: smithy.ShapeTypeStructure})
+var sOrderingType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iOrderingType, Members: &mOrderingType, Type: smithy.ShapeTypeEnum})
+var s_PartnerEventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PartnerEventSourceArn, Type: smithy.ShapeTypeString})
+var sPartnerEventsSourceConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPartnerEventsSourceConfiguration, Members: &mPartnerEventsSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var s_PathParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParameter, Type: smithy.ShapeTypeString})
+var s_PathParameterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PathParameterList, Members: &m_PathParameterList, Type: smithy.ShapeTypeList})
+var sPointInTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPointInTimeConfiguration, Members: &mPointInTimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sPointType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPointType, Members: &mPointType, Type: smithy.ShapeTypeEnum})
+var s_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sPolicyLengthExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPolicyLengthExceededException, Members: &mPolicyLengthExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var s_PolicyRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sPublicPolicyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublicPolicyException, Members: &mPublicPolicyException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sPutEventsRequestEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsRequestEntry, Members: &mPutEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var s_PutEventsRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutEventsRequestEntryList, Members: &m_PutEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var s_PutEventsResourceList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutEventsResourceList, Members: &m_PutEventsResourceList, Type: smithy.ShapeTypeList})
+var sPutEventsResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsResultEntry, Members: &mPutEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_PutEventsResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutEventsResultEntryList, Members: &m_PutEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutEventsSystemMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsSystemMetadata, Members: &mPutEventsSystemMetadata, Type: smithy.ShapeTypeStructure})
+var sPutRawEventsRequestEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawEventsRequestEntry, Members: &mPutRawEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var s_PutRawEventsRequestEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRawEventsRequestEntryList, Members: &m_PutRawEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutRawEventsResultEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawEventsResultEntry, Members: &mPutRawEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var s_PutRawEventsResultEntryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PutRawEventsResultEntryList, Members: &m_PutRawEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutRawEventsSystemMetadata = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawEventsSystemMetadata, Members: &mPutRawEventsSystemMetadata, Type: smithy.ShapeTypeStructure})
+var s_QueryStringKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringKey, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringParametersMap, Members: &m_QueryStringParametersMap, Type: smithy.ShapeTypeMap})
+var s_QueryStringValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QueryStringValue, Type: smithy.ShapeTypeString})
+var sResourceAlreadyExistsException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceAlreadyExistsException, Members: &mResourceAlreadyExistsException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sResourceInUseException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceInUseException, Members: &mResourceInUseException, Traits: &t3, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var sResourcePolicySummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcePolicySummary, Members: &mResourcePolicySummary, Type: smithy.ShapeTypeStructure})
+var s_ResourcePolicySummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePolicySummaryList, Members: &m_ResourcePolicySummaryList, Type: smithy.ShapeTypeList})
+var sResumePosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResumePosition, Members: &mResumePosition, Type: smithy.ShapeTypeEnum})
+var s_RetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RetentionPeriodInDays, Type: smithy.ShapeTypeInteger})
+var sRetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var sRetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRetryStrategy, Members: &mRetryStrategy, Type: smithy.ShapeTypeEnum})
+var s_RevocableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RevocableResourceArn, Type: smithy.ShapeTypeString})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sSchemaRegistryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaRegistryConfiguration, Members: &mSchemaRegistryConfiguration, Type: smithy.ShapeTypeStructure})
+var sSchemaRegistryUnavailableException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSchemaRegistryUnavailableException, Members: &mSchemaRegistryUnavailableException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_SchemaRegistryUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SchemaRegistryUri, Type: smithy.ShapeTypeString})
+var s_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var s_SnsMessageAttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnsMessageAttributeMap, Members: &m_SnsMessageAttributeMap, Type: smithy.ShapeTypeMap})
+var sSnsMessageAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsMessageAttributeValue, Members: &mSnsMessageAttributeValue, Type: smithy.ShapeTypeStructure})
+var sSnsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSnsParameters, Members: &mSnsParameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var s_Source = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Source, Type: smithy.ShapeTypeString})
+var s_SqsMessageAttributeMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SqsMessageAttributeMap, Members: &m_SqsMessageAttributeMap, Type: smithy.ShapeTypeMap})
+var sSqsMessageAttributeValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqsMessageAttributeValue, Members: &mSqsMessageAttributeValue, Type: smithy.ShapeTypeStructure})
+var sSqsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSqsParameters, Members: &mSqsParameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sStartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartingPosition, Members: &mStartingPosition, Type: smithy.ShapeTypeEnum})
+var s_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StateReason, Type: smithy.ShapeTypeString})
+var sStepFunctionsParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStepFunctionsParameters, Members: &mStepFunctionsParameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sStorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageConfiguration, Members: &mStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sStorageConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStorageConfigurationOutput, Members: &mStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var s_String = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_String, Type: smithy.ShapeTypeString})
+var s_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var s_SubscriberName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriberName, Type: smithy.ShapeTypeString})
+var sSubscriberState = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriberState, Members: &mSubscriberState, Type: smithy.ShapeTypeEnum})
+var sSubscriberSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSubscriberSummary, Members: &mSubscriberSummary, Type: smithy.ShapeTypeStructure})
+var s_SubscriberSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SubscriberSummaryList, Members: &m_SubscriberSummaryList, Type: smithy.ShapeTypeList})
+var sSuccessCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSuccessCode, Members: &mSuccessCode, Type: smithy.ShapeTypeEnum})
+var s_TaggableResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetResourceArn, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t8, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTransformer = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransformer, Members: &mTransformer, Type: smithy.ShapeTypeStructure})
+var sTransformerType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTransformerType, Members: &mTransformerType, Type: smithy.ShapeTypeEnum})
+var s_UniversalTargetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_UniversalTargetInput, Type: smithy.ShapeTypeString})
+var sUniversalTargetParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUniversalTargetParameters, Members: &mUniversalTargetParameters, Traits: &t4, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateInvokeConfiguration, Members: &mUpdateInvokeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventBusRequest, Members: &mCreateEventBusRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventBusResponse, Members: &mCreateEventBusResponse, Type: smithy.ShapeTypeStructure})
+var sCreateEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventSourceRequest, Members: &mCreateEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sCreateEventSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateEventSourceResponse, Members: &mCreateEventSourceResponse, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberRequest, Members: &mCreateSubscriberRequest, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateSubscriberResponse, Members: &mCreateSubscriberResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEventBusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventBusRequest, Members: &mDeleteEventBusRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteEventBusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventBusResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventSourceRequest, Members: &mDeleteEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteEventSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteEventSourceResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyRequest, Members: &mDeleteResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteResourcePolicyResponse, Members: &mDeleteResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sDeleteSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberRequest, Members: &mDeleteSubscriberRequest, Type: smithy.ShapeTypeStructure})
+var sDeleteSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteSubscriberResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventBusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventBusRequest, Members: &mDescribeEventBusRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventBusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventBusResponse, Members: &mDescribeEventBusResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSourceRequest, Members: &mDescribeEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeEventSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeEventSourceResponse, Members: &mDescribeEventSourceResponse, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscriberRequest, Members: &mDescribeSubscriberRequest, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDescribeSubscriberResponse, Members: &mDescribeSubscriberResponse, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyRequest, Members: &mGetResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sGetResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetResourcePolicyResponse, Members: &mGetResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sListEventBusesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventBusesRequest, Members: &mListEventBusesRequest, Type: smithy.ShapeTypeStructure})
+var sListEventBusesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventBusesResponse, Members: &mListEventBusesResponse, Type: smithy.ShapeTypeStructure})
+var sListEventSourcesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventSourcesRequest, Members: &mListEventSourcesRequest, Type: smithy.ShapeTypeStructure})
+var sListEventSourcesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEventSourcesResponse, Members: &mListEventSourcesResponse, Type: smithy.ShapeTypeStructure})
+var sListResourcePoliciesRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePoliciesRequest, Members: &mListResourcePoliciesRequest, Type: smithy.ShapeTypeStructure})
+var sListResourcePoliciesResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListResourcePoliciesResponse, Members: &mListResourcePoliciesResponse, Type: smithy.ShapeTypeStructure})
+var sListSubscribersRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribersRequest, Members: &mListSubscribersRequest, Type: smithy.ShapeTypeStructure})
+var sListSubscribersResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListSubscribersResponse, Members: &mListSubscribersResponse, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sPutEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsRequest, Members: &mPutEventsRequest, Type: smithy.ShapeTypeStructure})
+var sPutEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutEventsResponse, Members: &mPutEventsResponse, Type: smithy.ShapeTypeStructure})
+var sPutRawEventsRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawEventsRequest, Members: &mPutRawEventsRequest, Type: smithy.ShapeTypeStructure})
+var sPutRawEventsResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutRawEventsResponse, Members: &mPutRawEventsResponse, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyRequest, Members: &mPutResourcePolicyRequest, Type: smithy.ShapeTypeStructure})
+var sPutResourcePolicyResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutResourcePolicyResponse, Members: &mPutResourcePolicyResponse, Type: smithy.ShapeTypeStructure})
+var sRevokeResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeResourceRequest, Members: &mRevokeResourceRequest, Type: smithy.ShapeTypeStructure})
+var sRevokeResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRevokeResourceResponse, Members: &mRevokeResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateEventBusRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventBusRequest, Members: &mUpdateEventBusRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEventBusResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventBusResponse, Members: &mUpdateEventBusResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateEventSourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventSourceRequest, Members: &mUpdateEventSourceRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateEventSourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEventSourceResponse, Members: &mUpdateEventSourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberRequest, Members: &mUpdateSubscriberRequest, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateSubscriberResponse, Members: &mUpdateSubscriberResponse, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sAwsServiceEventsSourceConfiguration_AwsService = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsService", ID: &i_AwsServiceSource, Type: smithy.ShapeTypeString})
+var sAwsServiceEventsSourceConfiguration_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_EventPattern, Traits: &t2, Type: smithy.ShapeTypeString})
+var sAwsServiceEventsSourceConfiguration_OnFailureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnFailureConfiguration", ID: &iOnFailureConfiguration, Members: &mOnFailureConfiguration, Type: smithy.ShapeTypeStructure})
+var sBatchConfiguration_MaxBatchSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxBatchSize", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger})
+var sBatchConfiguration_MaxBatchWindowInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxBatchWindowInSeconds", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger})
+var sBusState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBusState_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBusState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBusState_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBusState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBusState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBusState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sConcurrentModificationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfluentPublicRegistryConfiguration_ConnectionArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConnectionArn", ID: &i_ConnectionArn, Type: smithy.ShapeTypeString})
+var sDeduplicationConfiguration_DeduplicationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeduplicationType", ID: &iDeduplicationType, Members: &mDeduplicationType, Type: smithy.ShapeTypeEnum})
+var sDeduplicationType_CONTENT_BASED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTENT_BASED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEncryptionConfiguration_KmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString})
+var sEventBusSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sEventBusSummary_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sEventBusSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sEventBusSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEventBusSummary_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEventBusSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iBusState, Members: &mBusState, Type: smithy.ShapeTypeEnum})
+var sEventBusSummary_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString})
+var sEventBusSummary_EventBusAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_EventBusSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventBusSummary, Members: &mEventBusSummary, Type: smithy.ShapeTypeStructure})
+var s_EventBusV2MetadataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EventBusV2MetadataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventBusV2Parameters_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_EventBusV2MetadataMap, Members: &m_EventBusV2MetadataMap, Type: smithy.ShapeTypeMap})
+var sEventBusV2Parameters_SystemMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SystemMetadata", ID: &iEventBusV2SystemMetadata, Members: &mEventBusV2SystemMetadata, Type: smithy.ShapeTypeStructure})
+var sEventBusV2Parameters_DeduplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeduplicationConfiguration", ID: &iDeduplicationConfiguration, Members: &mDeduplicationConfiguration, Type: smithy.ShapeTypeStructure})
+var sEventBusV2SystemMetadata_EventGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventGroupId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sEventBusV2SystemMetadata_DeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeduplicationId", ID: &i_String, Type: smithy.ShapeTypeString})
+var s_EventMetadataMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_EventMetadataKey, Type: smithy.ShapeTypeString})
+var s_EventMetadataMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EventMetadataValue, Traits: &t2, Type: smithy.ShapeTypeString})
+var sEventSourceConfiguration_AwsServiceEventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AwsServiceEventsConfiguration", ID: &iAwsServiceEventsSourceConfiguration, Members: &mAwsServiceEventsSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sEventSourceConfiguration_PartnerEventsConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerEventsConfiguration", ID: &iPartnerEventsSourceConfiguration, Members: &mPartnerEventsSourceConfiguration, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_CREATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_UPDATING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_CREATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_UPDATE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceState_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceSummary_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sEventSourceSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sEventSourceSummary_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sEventSourceSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iEventSourceType, Members: &mEventSourceType, Type: smithy.ShapeTypeEnum})
+var sEventSourceSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var sEventSourceSummary_Revoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revoked", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sEventSourceSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEventSourceSummary_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sEventSourceSummary_EventSourceAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_EventSourceSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEventSourceSummary, Members: &mEventSourceSummary, Type: smithy.ShapeTypeStructure})
+var sEventSourceType_AWS_SERVICE_EVENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "AWS_SERVICE_EVENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEventSourceType_PARTNER_EVENTS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PARTNER_EVENTS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilter_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_EventPattern, Traits: &t2, Type: smithy.ShapeTypeString})
+var sFilter_Scope = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Scope", ID: &iFilterScope, Members: &mFilterScope, Type: smithy.ShapeTypeEnum})
+var sFilterConfiguration_Language = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Language", ID: &iFilterLanguage, Members: &mFilterLanguage, Type: smithy.ShapeTypeEnum})
+var sFilterConfiguration_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FilterList, Members: &m_FilterList, Type: smithy.ShapeTypeList})
+var sFilterLanguage_EVENT_BRIDGE_PATTERN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT_BRIDGE_PATTERN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FilterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var sFilterScope_DATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterScope_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFilterScope_SYSTEM_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SYSTEM_METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_HeaderParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_HeaderKey, Type: smithy.ShapeTypeString})
+var s_HeaderParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_HeaderValue, Type: smithy.ShapeTypeString})
+var sHttpParameters_PathParameterValues = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PathParameterValues", ID: &i_PathParameterList, Members: &m_PathParameterList, Type: smithy.ShapeTypeList})
+var sHttpParameters_HeaderParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeaderParameters", ID: &i_HeaderParametersMap, Members: &m_HeaderParametersMap, Type: smithy.ShapeTypeMap})
+var sHttpParameters_QueryStringParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QueryStringParameters", ID: &i_QueryStringParametersMap, Members: &m_QueryStringParametersMap, Type: smithy.ShapeTypeMap})
+var sHttpParameters_InvocationTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationTimeoutSeconds", ID: &i_String, Type: smithy.ShapeTypeString})
+var sIdempotentParameterMismatchException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sIncludePayload_FULL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FULL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sIncludePayload_ON_ERROR_ONLY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_ERROR_ONLY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInternalException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvalidInputException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvalidStateException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sInvocationType_EVENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EVENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvocationType_REQUEST_RESPONSE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "REQUEST_RESPONSE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sInvokeConfiguration_LambdaParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaParameters", ID: &iLambdaParameters, Members: &mLambdaParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_SqsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsParameters", ID: &iSqsParameters, Members: &mSqsParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_SnsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsParameters", ID: &iSnsParameters, Members: &mSnsParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_KinesisParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisParameters", ID: &iKinesisParameters, Members: &mKinesisParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_StepFunctionsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepFunctionsParameters", ID: &iStepFunctionsParameters, Members: &mStepFunctionsParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_HttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpParameters", ID: &iHttpParameters, Members: &mHttpParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_UniversalTargetParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniversalTargetParameters", ID: &iUniversalTargetParameters, Members: &mUniversalTargetParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_EventBusV2Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusV2Parameters", ID: &iEventBusV2Parameters, Members: &mEventBusV2Parameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sInvokeConfiguration_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_TargetResourceArn, Type: smithy.ShapeTypeString})
+var sJsonataConfiguration_Expression = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expression", ID: &i_String, Type: smithy.ShapeTypeString})
+var sKinesisParameters_PartitionKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartitionKey", ID: &i_String, Type: smithy.ShapeTypeString})
+var sKinesisParameters_ExplicitHashKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplicitHashKey", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLambdaParameters_InvocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationType", ID: &iInvocationType, Members: &mInvocationType, Type: smithy.ShapeTypeEnum})
+var sLambdaParameters_Qualifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Qualifier", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLambdaParameters_DurableExecutionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DurableExecutionName", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLambdaParameters_TenantId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TenantId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLambdaParameters_InvocationTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationTimeoutSeconds", ID: &i_String, Type: smithy.ShapeTypeString})
+var sLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sLogConfiguration_Level = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Level", ID: &iLogLevel, Members: &mLogLevel, Type: smithy.ShapeTypeEnum})
+var sLogConfiguration_IncludePayload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IncludePayload", ID: &iIncludePayload, Members: &mIncludePayload, Type: smithy.ShapeTypeEnum})
+var sLogLevel_OFF = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OFF", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogLevel_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLogLevel_INFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INFO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOnFailureConfiguration_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_DeadLetterQueueArn, Type: smithy.ShapeTypeString})
+var sOrderingType_FIFO = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FIFO", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sOrderingType_UNORDERED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNORDERED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPartnerEventsSourceConfiguration_PartnerEventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerEventSourceArn", ID: &i_PartnerEventSourceArn, Type: smithy.ShapeTypeString})
+var sPartnerEventsSourceConfiguration_Pattern = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Pattern", ID: &i_EventPattern, Traits: &t2, Type: smithy.ShapeTypeString})
+var sPartnerEventsSourceConfiguration_PartnerBusKmsKeyIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PartnerBusKmsKeyIdentifier", ID: &i_KmsKeyIdentifier, Type: smithy.ShapeTypeString})
+var sPartnerEventsSourceConfiguration_OnFailureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnFailureConfiguration", ID: &iOnFailureConfiguration, Members: &mOnFailureConfiguration, Type: smithy.ShapeTypeStructure})
+var s_PathParameterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_PathParameter, Type: smithy.ShapeTypeString})
+var sPointInTimeConfiguration_PointType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointType", ID: &iPointType, Members: &mPointType, Type: smithy.ShapeTypeEnum})
+var sPointInTimeConfiguration_StartingPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPoint", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPointInTimeConfiguration_EndPoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndPoint", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPointType_HORIZON = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HORIZON", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPointType_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sPolicyLengthExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sPublicPolicyException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_Source = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Source", ID: &i_Source, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_DetailType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DetailType", ID: &i_DetailType, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_Detail = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Detail", ID: &i_EventDetail, Traits: &t2, Type: smithy.ShapeTypeString})
+var sPutEventsRequestEntry_Resources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Resources", ID: &i_PutEventsResourceList, Members: &m_PutEventsResourceList, Type: smithy.ShapeTypeList})
+var sPutEventsRequestEntry_Time = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Time", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sPutEventsRequestEntry_SystemMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SystemMetadata", ID: &iPutEventsSystemMetadata, Members: &mPutEventsSystemMetadata, Type: smithy.ShapeTypeStructure})
+var s_PutEventsRequestEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutEventsRequestEntry, Members: &mPutEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var s_PutEventsResourceList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_EventResource, Type: smithy.ShapeTypeString})
+var sPutEventsResultEntry_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sPutEventsResultEntry_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sPutEventsResultEntry_SuccessCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessCode", ID: &iSuccessCode, Members: &mSuccessCode, Type: smithy.ShapeTypeEnum})
+var sPutEventsResultEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sPutEventsResultEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_PutEventsResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutEventsResultEntry, Members: &mPutEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var sPutEventsSystemMetadata_EventGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventGroupId", ID: &i_EventGroupId, Type: smithy.ShapeTypeString})
+var sPutEventsSystemMetadata_DeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeduplicationId", ID: &i_EventDeduplicationId, Type: smithy.ShapeTypeString})
+var sPutRawEventsRequestEntry_Data = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Data", ID: &i_EventData, Traits: &t2, Type: smithy.ShapeTypeBlob})
+var sPutRawEventsRequestEntry_Metadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Metadata", ID: &i_EventMetadataMap, Members: &m_EventMetadataMap, Type: smithy.ShapeTypeMap})
+var sPutRawEventsRequestEntry_SystemMetadata = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SystemMetadata", ID: &iPutRawEventsSystemMetadata, Members: &mPutRawEventsSystemMetadata, Type: smithy.ShapeTypeStructure})
+var s_PutRawEventsRequestEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutRawEventsRequestEntry, Members: &mPutRawEventsRequestEntry, Type: smithy.ShapeTypeStructure})
+var sPutRawEventsResultEntry_EventId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventId", ID: &i_EventId, Type: smithy.ShapeTypeString})
+var sPutRawEventsResultEntry_SequenceNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SequenceNumber", ID: &i_SequenceNumber, Type: smithy.ShapeTypeString})
+var sPutRawEventsResultEntry_SuccessCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SuccessCode", ID: &iSuccessCode, Members: &mSuccessCode, Type: smithy.ShapeTypeEnum})
+var sPutRawEventsResultEntry_ErrorCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorCode", ID: &i_ErrorCode, Type: smithy.ShapeTypeString})
+var sPutRawEventsResultEntry_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ErrorMessage", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_PutRawEventsResultEntryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPutRawEventsResultEntry, Members: &mPutRawEventsResultEntry, Type: smithy.ShapeTypeStructure})
+var sPutRawEventsSystemMetadata_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Type: smithy.ShapeTypeString})
+var sPutRawEventsSystemMetadata_DeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeduplicationId", ID: &i_EventDeduplicationId, Type: smithy.ShapeTypeString})
+var sPutRawEventsSystemMetadata_EventGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventGroupId", ID: &i_EventGroupId, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_QueryStringKey, Type: smithy.ShapeTypeString})
+var s_QueryStringParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_QueryStringValue, Type: smithy.ShapeTypeString})
+var sResourceAlreadyExistsException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceInUseException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourcePolicySummary_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sResourcePolicySummary_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var s_ResourcePolicySummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourcePolicySummary, Members: &mResourcePolicySummary, Type: smithy.ShapeTypeStructure})
+var sResumePosition_LAST_PROCESSED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LAST_PROCESSED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResumePosition_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRetryPolicy_MaxRetryAttempts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxRetryAttempts", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger})
+var sRetryPolicy_MaxEventAgeInSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxEventAgeInSeconds", ID: &i_NullableInteger, Type: smithy.ShapeTypeInteger})
+var sRetryPolicy_RetryStrategy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryStrategy", ID: &iRetryStrategy, Members: &mRetryStrategy, Type: smithy.ShapeTypeEnum})
+var sRetryStrategy_ALL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSchemaRegistryConfiguration_RegistryUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RegistryUri", ID: &i_SchemaRegistryUri, Type: smithy.ShapeTypeString})
+var sSchemaRegistryConfiguration_ConfluentPublicRegistryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfluentPublicRegistryConfiguration", ID: &iConfluentPublicRegistryConfiguration, Members: &mConfluentPublicRegistryConfiguration, Type: smithy.ShapeTypeStructure})
+var sSchemaRegistryUnavailableException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SnsMessageAttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_MessageAttributeName, Type: smithy.ShapeTypeString})
+var s_SnsMessageAttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSnsMessageAttributeValue, Members: &mSnsMessageAttributeValue, Type: smithy.ShapeTypeStructure})
+var sSnsMessageAttributeValue_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsMessageAttributeValue_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsMessageAttributeValue_BinaryValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BinaryValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsParameters_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageGroupId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsParameters_MessageDeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageDeduplicationId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsParameters_Subject = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subject", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsParameters_MessageStructure = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageStructure", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSnsParameters_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_SnsMessageAttributeMap, Members: &m_SnsMessageAttributeMap, Type: smithy.ShapeTypeMap})
+var s_SqsMessageAttributeMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_MessageAttributeName, Type: smithy.ShapeTypeString})
+var s_SqsMessageAttributeMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iSqsMessageAttributeValue, Members: &mSqsMessageAttributeValue, Type: smithy.ShapeTypeStructure})
+var sSqsMessageAttributeValue_DataType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DataType", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSqsMessageAttributeValue_StringValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StringValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSqsMessageAttributeValue_BinaryValue = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BinaryValue", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSqsParameters_MessageGroupId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageGroupId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSqsParameters_MessageDeduplicationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageDeduplicationId", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSqsParameters_DelaySeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DelaySeconds", ID: &i_String, Type: smithy.ShapeTypeString})
+var sSqsParameters_MessageAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageAttributes", ID: &i_SqsMessageAttributeMap, Members: &m_SqsMessageAttributeMap, Type: smithy.ShapeTypeMap})
+var sSqsParameters_MessageSystemAttributes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MessageSystemAttributes", ID: &i_SqsMessageAttributeMap, Members: &m_SqsMessageAttributeMap, Type: smithy.ShapeTypeMap})
+var sStartingPosition_LATEST = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LATEST", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStartingPosition_POINT_IN_TIME = smithy.NewStaticSchema(smithy.StaticSchema{Member: "POINT_IN_TIME", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStepFunctionsParameters_InvocationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationType", ID: &iInvocationType, Members: &mInvocationType, Type: smithy.ShapeTypeEnum})
+var sStepFunctionsParameters_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStepFunctionsParameters_TraceHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TraceHeader", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStepFunctionsParameters_InvocationTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationTimeoutSeconds", ID: &i_String, Type: smithy.ShapeTypeString})
+var sStorageConfiguration_RetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodInDays", ID: &i_RetentionPeriodInDays, Type: smithy.ShapeTypeInteger})
+var sStorageConfigurationOutput_RetentionPeriodInDays = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionPeriodInDays", ID: &i_RetentionPeriodInDays, Type: smithy.ShapeTypeInteger})
+var sStorageConfigurationOutput_RetentionWindowStartTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetentionWindowStartTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSubscriberState_RUNNING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RUNNING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubscriberState_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSubscriberSummary_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberArn", ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var sSubscriberSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SubscriberName, Type: smithy.ShapeTypeString})
+var sSubscriberSummary_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sSubscriberSummary_TargetArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TargetArn", ID: &i_TargetResourceArn, Type: smithy.ShapeTypeString})
+var sSubscriberSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOrderingType, Members: &mOrderingType, Type: smithy.ShapeTypeEnum})
+var sSubscriberSummary_Revoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revoked", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sSubscriberSummary_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSubscriberState, Members: &mSubscriberState, Type: smithy.ShapeTypeEnum})
+var sSubscriberSummary_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSubscriberSummary_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sSubscriberSummary_SubscriberAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var s_SubscriberSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iSubscriberSummary, Members: &mSubscriberSummary, Type: smithy.ShapeTypeStructure})
+var sSuccessCode_PUBLISHED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PUBLISHED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sSuccessCode_DEDUPLICATED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEDUPLICATED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sTransformer_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iTransformerType, Members: &mTransformerType, Type: smithy.ShapeTypeEnum})
+var sTransformer_JsonataConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JsonataConfiguration", ID: &iJsonataConfiguration, Members: &mJsonataConfiguration, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sTransformerType_RAW = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RAW", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransformerType_WITH_METADATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WITH_METADATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTransformerType_JSONATA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JSONATA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sUniversalTargetParameters_Input = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Input", ID: &i_UniversalTargetInput, Type: smithy.ShapeTypeString})
+var sUniversalTargetParameters_InvocationTimeoutSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvocationTimeoutSeconds", ID: &i_String, Type: smithy.ShapeTypeString})
+var sUpdateInvokeConfiguration_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RoleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sUpdateInvokeConfiguration_LambdaParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LambdaParameters", ID: &iLambdaParameters, Members: &mLambdaParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration_SqsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SqsParameters", ID: &iSqsParameters, Members: &mSqsParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration_SnsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SnsParameters", ID: &iSnsParameters, Members: &mSnsParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration_KinesisParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "KinesisParameters", ID: &iKinesisParameters, Members: &mKinesisParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration_StepFunctionsParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StepFunctionsParameters", ID: &iStepFunctionsParameters, Members: &mStepFunctionsParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration_HttpParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HttpParameters", ID: &iHttpParameters, Members: &mHttpParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration_UniversalTargetParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UniversalTargetParameters", ID: &iUniversalTargetParameters, Members: &mUniversalTargetParameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sUpdateInvokeConfiguration_EventBusV2Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusV2Parameters", ID: &iEventBusV2Parameters, Members: &mEventBusV2Parameters, Traits: &t2, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sCreateEventBusRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateEventBusRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusRequest_StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConfiguration", ID: &iStorageConfiguration, Members: &mStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateEventBusRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateEventBusResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sCreateEventBusResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sCreateEventBusResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateEventBusResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusResponse_StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConfiguration", ID: &iStorageConfigurationOutput, Members: &mStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sCreateEventBusResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iBusState, Members: &mBusState, Type: smithy.ShapeTypeEnum})
+var sCreateEventBusResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString})
+var sCreateEventBusResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateEventSourceRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sCreateEventSourceRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sCreateEventSourceRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iEventSourceConfiguration, Members: &mEventSourceConfiguration, Type: smithy.ShapeTypeUnion})
+var sCreateEventSourceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateEventSourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateEventSourceRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateEventSourceResponse_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sCreateEventSourceResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sCreateEventSourceResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sCreateEventSourceResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var sCreateEventSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sCreateSubscriberRequest_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SubscriberName, Type: smithy.ShapeTypeString})
+var sCreateSubscriberRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sCreateSubscriberRequest_InvokeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokeConfiguration", ID: &iInvokeConfiguration, Members: &mInvokeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sCreateSubscriberRequest_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOrderingType, Members: &mOrderingType, Type: smithy.ShapeTypeEnum})
+var sCreateSubscriberRequest_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &iStartingPosition, Members: &mStartingPosition, Type: smithy.ShapeTypeEnum})
+var sCreateSubscriberRequest_PointInTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointInTimeConfiguration", ID: &iPointInTimeConfiguration, Members: &mPointInTimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_BatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchConfiguration", ID: &iBatchConfiguration, Members: &mBatchConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_Transformer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transformer", ID: &iTransformer, Members: &mTransformer, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_RetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryPolicy", ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_OnFailureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnFailureConfiguration", ID: &iOnFailureConfiguration, Members: &mOnFailureConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSubscriberState, Members: &mSubscriberState, Type: smithy.ShapeTypeEnum})
+var sCreateSubscriberRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateSubscriberRequest_ClientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClientToken", ID: &i_ClientToken, Type: smithy.ShapeTypeString})
+var sCreateSubscriberResponse_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberArn", ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var sCreateSubscriberResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SubscriberName, Type: smithy.ShapeTypeString})
+var sCreateSubscriberResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sCreateSubscriberResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOrderingType, Members: &mOrderingType, Type: smithy.ShapeTypeEnum})
+var sCreateSubscriberResponse_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &iStartingPosition, Members: &mStartingPosition, Type: smithy.ShapeTypeEnum})
+var sCreateSubscriberResponse_PointInTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointInTimeConfiguration", ID: &iPointInTimeConfiguration, Members: &mPointInTimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sCreateSubscriberResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSubscriberState, Members: &mSubscriberState, Type: smithy.ShapeTypeEnum})
+var sCreateSubscriberResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDeleteEventBusRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sDeleteEventSourceRequest_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyRequest_ExpectedRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sDeleteResourcePolicyResponse_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sDeleteSubscriberRequest_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberArn", ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var sDescribeEventBusRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sDescribeEventBusResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sDescribeEventBusResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sDescribeEventBusResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribeEventBusResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeEventBusResponse_StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConfiguration", ID: &iStorageConfigurationOutput, Members: &mStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sDescribeEventBusResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEventBusResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEventBusResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iBusState, Members: &mBusState, Type: smithy.ShapeTypeEnum})
+var sDescribeEventBusResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceRequest_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iEventSourceConfiguration, Members: &mEventSourceConfiguration, Type: smithy.ShapeTypeUnion})
+var sDescribeEventSourceResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribeEventSourceResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var sDescribeEventSourceResponse_Revoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revoked", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeEventSourceResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeEventSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeSubscriberRequest_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberArn", ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var sDescribeSubscriberResponse_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberArn", ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var sDescribeSubscriberResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SubscriberName, Type: smithy.ShapeTypeString})
+var sDescribeSubscriberResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sDescribeSubscriberResponse_InvokeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokeConfiguration", ID: &iInvokeConfiguration, Members: &mInvokeConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sDescribeSubscriberResponse_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOrderingType, Members: &mOrderingType, Type: smithy.ShapeTypeEnum})
+var sDescribeSubscriberResponse_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &iStartingPosition, Members: &mStartingPosition, Type: smithy.ShapeTypeEnum})
+var sDescribeSubscriberResponse_PointInTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointInTimeConfiguration", ID: &iPointInTimeConfiguration, Members: &mPointInTimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_BatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchConfiguration", ID: &iBatchConfiguration, Members: &mBatchConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_Transformer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transformer", ID: &iTransformer, Members: &mTransformer, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_RetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryPolicy", ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_OnFailureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnFailureConfiguration", ID: &iOnFailureConfiguration, Members: &mOnFailureConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sDescribeSubscriberResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSubscriberState, Members: &mSubscriberState, Type: smithy.ShapeTypeEnum})
+var sDescribeSubscriberResponse_Revoked = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Revoked", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sDescribeSubscriberResponse_CreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreationTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDescribeSubscriberResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sGetResourcePolicyResponse_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sListEventBusesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sListEventBusesRequest_EventBusAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusAccountId", ID: &i_AccountId, Type: smithy.ShapeTypeString})
+var sListEventBusesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEventBusesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListEventBusesResponse_EventBuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBuses", ID: &i_EventBusSummaryList, Members: &m_EventBusSummaryList, Type: smithy.ShapeTypeList})
+var sListEventBusesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEventSourcesRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sListEventSourcesRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sListEventSourcesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListEventSourcesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListEventSourcesResponse_EventSources = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSources", ID: &i_EventSourceSummaryList, Members: &m_EventSourceSummaryList, Type: smithy.ShapeTypeList})
+var sListEventSourcesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourcePoliciesRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sListResourcePoliciesRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListResourcePoliciesRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListResourcePoliciesResponse_PolicySummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicySummaries", ID: &i_ResourcePolicySummaryList, Members: &m_ResourcePolicySummaryList, Type: smithy.ShapeTypeList})
+var sListResourcePoliciesResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSubscribersRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sListSubscribersRequest_NamePrefix = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NamePrefix", ID: &i_SubscriberName, Type: smithy.ShapeTypeString})
+var sListSubscribersRequest_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListSubscribersRequest_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListSubscribersResponse_Subscribers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Subscribers", ID: &i_SubscriberSummaryList, Members: &m_SubscriberSummaryList, Type: smithy.ShapeTypeList})
+var sListSubscribersResponse_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sPutEventsRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sPutEventsRequest_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutEventsRequestEntryList, Members: &m_PutEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutEventsRequest_DeduplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeduplicationConfiguration", ID: &iDeduplicationConfiguration, Members: &mDeduplicationConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutEventsResponse_FailedEntryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntryCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sPutEventsResponse_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutEventsResultEntryList, Members: &m_PutEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutRawEventsRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sPutRawEventsRequest_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutRawEventsRequestEntryList, Members: &m_PutRawEventsRequestEntryList, Type: smithy.ShapeTypeList})
+var sPutRawEventsRequest_SchemaRegistryConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SchemaRegistryConfiguration", ID: &iSchemaRegistryConfiguration, Members: &mSchemaRegistryConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutRawEventsRequest_DeduplicationConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DeduplicationConfiguration", ID: &iDeduplicationConfiguration, Members: &mDeduplicationConfiguration, Type: smithy.ShapeTypeStructure})
+var sPutRawEventsResponse_FailedEntryCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FailedEntryCount", ID: &i_Integer, Type: smithy.ShapeTypeInteger})
+var sPutRawEventsResponse_Entries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Entries", ID: &i_PutRawEventsResultEntryList, Members: &m_PutRawEventsResultEntryList, Type: smithy.ShapeTypeList})
+var sPutResourcePolicyRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_PolicyDocument = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyDocument", ID: &i_PolicyDocument, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyRequest_ExpectedRevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExpectedRevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_PolicyName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PolicyName", ID: &i_PolicyName, Type: smithy.ShapeTypeString})
+var sPutResourcePolicyResponse_RevisionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RevisionId", ID: &i_PolicyRevisionId, Type: smithy.ShapeTypeString})
+var sRevokeResourceRequest_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RevocableResourceArn, Type: smithy.ShapeTypeString})
+var sRevokeResourceResponse_Arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Arn", ID: &i_RevocableResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &i_TaggableResourceArn, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var sUpdateEventBusRequest_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Traits: &t9, Type: smithy.ShapeTypeString})
+var sUpdateEventBusRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateEventBusRequest_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateEventBusRequest_StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConfiguration", ID: &iStorageConfiguration, Members: &mStorageConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateEventBusResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sUpdateEventBusResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventBusName, Type: smithy.ShapeTypeString})
+var sUpdateEventBusResponse_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateEventBusResponse_EncryptionConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EncryptionConfiguration", ID: &iEncryptionConfiguration, Members: &mEncryptionConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateEventBusResponse_StorageConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StorageConfiguration", ID: &iStorageConfigurationOutput, Members: &mStorageConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEventBusResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iBusState, Members: &mBusState, Type: smithy.ShapeTypeEnum})
+var sUpdateEventBusResponse_StateReason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StateReason", ID: &i_StateReason, Type: smithy.ShapeTypeString})
+var sUpdateEventBusResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateEventSourceRequest_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sUpdateEventSourceRequest_Configuration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Configuration", ID: &iEventSourceConfiguration, Members: &mEventSourceConfiguration, Type: smithy.ShapeTypeUnion})
+var sUpdateEventSourceRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateEventSourceResponse_EventSourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventSourceArn", ID: &i_EventSourceArn, Type: smithy.ShapeTypeString})
+var sUpdateEventSourceResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_EventSourceName, Type: smithy.ShapeTypeString})
+var sUpdateEventSourceResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sUpdateEventSourceResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iEventSourceState, Members: &mEventSourceState, Type: smithy.ShapeTypeEnum})
+var sUpdateEventSourceResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUpdateSubscriberRequest_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberArn", ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var sUpdateSubscriberRequest_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &i_Description, Type: smithy.ShapeTypeString})
+var sUpdateSubscriberRequest_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSubscriberState, Members: &mSubscriberState, Type: smithy.ShapeTypeEnum})
+var sUpdateSubscriberRequest_ResumePosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResumePosition", ID: &iResumePosition, Members: &mResumePosition, Type: smithy.ShapeTypeEnum})
+var sUpdateSubscriberRequest_InvokeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "InvokeConfiguration", ID: &iUpdateInvokeConfiguration, Members: &mUpdateInvokeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberRequest_FilterConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FilterConfiguration", ID: &iFilterConfiguration, Members: &mFilterConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberRequest_BatchConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "BatchConfiguration", ID: &iBatchConfiguration, Members: &mBatchConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberRequest_Transformer = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Transformer", ID: &iTransformer, Members: &mTransformer, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberRequest_RetryPolicy = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RetryPolicy", ID: &iRetryPolicy, Members: &mRetryPolicy, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberRequest_OnFailureConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OnFailureConfiguration", ID: &iOnFailureConfiguration, Members: &mOnFailureConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberRequest_LogConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LogConfiguration", ID: &iLogConfiguration, Members: &mLogConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberResponse_SubscriberArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SubscriberArn", ID: &i_SubscriberArn, Type: smithy.ShapeTypeString})
+var sUpdateSubscriberResponse_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &i_SubscriberName, Type: smithy.ShapeTypeString})
+var sUpdateSubscriberResponse_EventBusArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EventBusArn", ID: &i_EventBusArn, Type: smithy.ShapeTypeString})
+var sUpdateSubscriberResponse_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &iOrderingType, Members: &mOrderingType, Type: smithy.ShapeTypeEnum})
+var sUpdateSubscriberResponse_StartingPosition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingPosition", ID: &iStartingPosition, Members: &mStartingPosition, Type: smithy.ShapeTypeEnum})
+var sUpdateSubscriberResponse_PointInTimeConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PointInTimeConfiguration", ID: &iPointInTimeConfiguration, Members: &mPointInTimeConfiguration, Type: smithy.ShapeTypeStructure})
+var sUpdateSubscriberResponse_State = smithy.NewStaticSchema(smithy.StaticSchema{Member: "State", ID: &iSubscriberState, Members: &mSubscriberState, Type: smithy.ShapeTypeEnum})
+var sUpdateSubscriberResponse_LastModifiedTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedTime", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+
+var CreateEventBus = &sCreateEventBus
+
+var CreateEventSource = &sCreateEventSource
+
+var CreateSubscriber = &sCreateSubscriber
+
+var DeleteEventBus = &sDeleteEventBus
+
+var DeleteEventSource = &sDeleteEventSource
+
+var DeleteResourcePolicy = &sDeleteResourcePolicy
+
+var DeleteSubscriber = &sDeleteSubscriber
+
+var DescribeEventBus = &sDescribeEventBus
+
+var DescribeEventSource = &sDescribeEventSource
+
+var DescribeSubscriber = &sDescribeSubscriber
+
+var GetResourcePolicy = &sGetResourcePolicy
+
+var ListEventBuses = &sListEventBuses
+
+var ListEventSources = &sListEventSources
+
+var ListResourcePolicies = &sListResourcePolicies
+
+var ListSubscribers = &sListSubscribers
+
+var ListTagsForResource = &sListTagsForResource
+
+var PutEvents = &sPutEvents
+
+var PutRawEvents = &sPutRawEvents
+
+var PutResourcePolicy = &sPutResourcePolicy
+
+var RevokeResource = &sRevokeResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateEventBus = &sUpdateEventBus
+
+var UpdateEventSource = &sUpdateEventSource
+
+var UpdateSubscriber = &sUpdateSubscriber
+
+var _AWSEventsV2 = &s_AWSEventsV2
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var _AccountId = &s_AccountId
+
+var AwsServiceEventsSourceConfiguration = &sAwsServiceEventsSourceConfiguration
+var AwsServiceEventsSourceConfiguration_AwsService = &sAwsServiceEventsSourceConfiguration_AwsService
+var AwsServiceEventsSourceConfiguration_Pattern = &sAwsServiceEventsSourceConfiguration_Pattern
+var AwsServiceEventsSourceConfiguration_OnFailureConfiguration = &sAwsServiceEventsSourceConfiguration_OnFailureConfiguration
+
+var _AwsServiceSource = &s_AwsServiceSource
+
+var BatchConfiguration = &sBatchConfiguration
+var BatchConfiguration_MaxBatchSize = &sBatchConfiguration_MaxBatchSize
+var BatchConfiguration_MaxBatchWindowInSeconds = &sBatchConfiguration_MaxBatchWindowInSeconds
+
+var BusState = &sBusState
+var BusState_CREATING = &sBusState_CREATING
+var BusState_CREATE_FAILED = &sBusState_CREATE_FAILED
+var BusState_UPDATING = &sBusState_UPDATING
+var BusState_UPDATE_FAILED = &sBusState_UPDATE_FAILED
+var BusState_DELETING = &sBusState_DELETING
+var BusState_ACTIVE = &sBusState_ACTIVE
+var BusState_DELETE_FAILED = &sBusState_DELETE_FAILED
+
+var _ClientToken = &s_ClientToken
+
+var ConcurrentModificationException = &sConcurrentModificationException
+var ConcurrentModificationException_Message = &sConcurrentModificationException_Message
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var ConfluentPublicRegistryConfiguration = &sConfluentPublicRegistryConfiguration
+var ConfluentPublicRegistryConfiguration_ConnectionArn = &sConfluentPublicRegistryConfiguration_ConnectionArn
+
+var _ConnectionArn = &s_ConnectionArn
+
+var _ContentType = &s_ContentType
+
+var _DeadLetterQueueArn = &s_DeadLetterQueueArn
+
+var DeduplicationConfiguration = &sDeduplicationConfiguration
+var DeduplicationConfiguration_DeduplicationType = &sDeduplicationConfiguration_DeduplicationType
+
+var DeduplicationType = &sDeduplicationType
+var DeduplicationType_CONTENT_BASED = &sDeduplicationType_CONTENT_BASED
+
+var _Description = &s_Description
+
+var _DetailType = &s_DetailType
+
+var EncryptionConfiguration = &sEncryptionConfiguration
+var EncryptionConfiguration_KmsKeyIdentifier = &sEncryptionConfiguration_KmsKeyIdentifier
+
+var _ErrorCode = &s_ErrorCode
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _EventBusArn = &s_EventBusArn
+
+var _EventBusName = &s_EventBusName
+
+var EventBusSummary = &sEventBusSummary
+var EventBusSummary_Name = &sEventBusSummary_Name
+var EventBusSummary_EventBusArn = &sEventBusSummary_EventBusArn
+var EventBusSummary_Description = &sEventBusSummary_Description
+var EventBusSummary_CreationTime = &sEventBusSummary_CreationTime
+var EventBusSummary_LastModifiedTime = &sEventBusSummary_LastModifiedTime
+var EventBusSummary_State = &sEventBusSummary_State
+var EventBusSummary_StateReason = &sEventBusSummary_StateReason
+var EventBusSummary_EventBusAccountId = &sEventBusSummary_EventBusAccountId
+
+var _EventBusSummaryList = &s_EventBusSummaryList
+var _EventBusSummaryList_member = &s_EventBusSummaryList_member
+
+var _EventBusV2MetadataMap = &s_EventBusV2MetadataMap
+var _EventBusV2MetadataMap_key = &s_EventBusV2MetadataMap_key
+var _EventBusV2MetadataMap_value = &s_EventBusV2MetadataMap_value
+
+var EventBusV2Parameters = &sEventBusV2Parameters
+var EventBusV2Parameters_Metadata = &sEventBusV2Parameters_Metadata
+var EventBusV2Parameters_SystemMetadata = &sEventBusV2Parameters_SystemMetadata
+var EventBusV2Parameters_DeduplicationConfiguration = &sEventBusV2Parameters_DeduplicationConfiguration
+
+var EventBusV2SystemMetadata = &sEventBusV2SystemMetadata
+var EventBusV2SystemMetadata_EventGroupId = &sEventBusV2SystemMetadata_EventGroupId
+var EventBusV2SystemMetadata_DeduplicationId = &sEventBusV2SystemMetadata_DeduplicationId
+
+var _EventData = &s_EventData
+
+var _EventDeduplicationId = &s_EventDeduplicationId
+
+var _EventDetail = &s_EventDetail
+
+var _EventGroupId = &s_EventGroupId
+
+var _EventId = &s_EventId
+
+var _EventMetadataKey = &s_EventMetadataKey
+
+var _EventMetadataMap = &s_EventMetadataMap
+var _EventMetadataMap_key = &s_EventMetadataMap_key
+var _EventMetadataMap_value = &s_EventMetadataMap_value
+
+var _EventMetadataValue = &s_EventMetadataValue
+
+var _EventPattern = &s_EventPattern
+
+var _EventResource = &s_EventResource
+
+var _EventSourceArn = &s_EventSourceArn
+
+var EventSourceConfiguration = &sEventSourceConfiguration
+var EventSourceConfiguration_AwsServiceEventsConfiguration = &sEventSourceConfiguration_AwsServiceEventsConfiguration
+var EventSourceConfiguration_PartnerEventsConfiguration = &sEventSourceConfiguration_PartnerEventsConfiguration
+
+var _EventSourceName = &s_EventSourceName
+
+var EventSourceState = &sEventSourceState
+var EventSourceState_CREATING = &sEventSourceState_CREATING
+var EventSourceState_ACTIVE = &sEventSourceState_ACTIVE
+var EventSourceState_UPDATING = &sEventSourceState_UPDATING
+var EventSourceState_CREATE_FAILED = &sEventSourceState_CREATE_FAILED
+var EventSourceState_UPDATE_FAILED = &sEventSourceState_UPDATE_FAILED
+var EventSourceState_DELETING = &sEventSourceState_DELETING
+var EventSourceState_DELETE_FAILED = &sEventSourceState_DELETE_FAILED
+
+var EventSourceSummary = &sEventSourceSummary
+var EventSourceSummary_EventSourceArn = &sEventSourceSummary_EventSourceArn
+var EventSourceSummary_Name = &sEventSourceSummary_Name
+var EventSourceSummary_EventBusArn = &sEventSourceSummary_EventBusArn
+var EventSourceSummary_Type = &sEventSourceSummary_Type
+var EventSourceSummary_State = &sEventSourceSummary_State
+var EventSourceSummary_Revoked = &sEventSourceSummary_Revoked
+var EventSourceSummary_CreationTime = &sEventSourceSummary_CreationTime
+var EventSourceSummary_LastModifiedTime = &sEventSourceSummary_LastModifiedTime
+var EventSourceSummary_EventSourceAccountId = &sEventSourceSummary_EventSourceAccountId
+
+var _EventSourceSummaryList = &s_EventSourceSummaryList
+var _EventSourceSummaryList_member = &s_EventSourceSummaryList_member
+
+var EventSourceType = &sEventSourceType
+var EventSourceType_AWS_SERVICE_EVENTS = &sEventSourceType_AWS_SERVICE_EVENTS
+var EventSourceType_PARTNER_EVENTS = &sEventSourceType_PARTNER_EVENTS
+
+var Filter = &sFilter
+var Filter_Pattern = &sFilter_Pattern
+var Filter_Scope = &sFilter_Scope
+
+var FilterConfiguration = &sFilterConfiguration
+var FilterConfiguration_Language = &sFilterConfiguration_Language
+var FilterConfiguration_Filters = &sFilterConfiguration_Filters
+
+var FilterLanguage = &sFilterLanguage
+var FilterLanguage_EVENT_BRIDGE_PATTERN = &sFilterLanguage_EVENT_BRIDGE_PATTERN
+
+var _FilterList = &s_FilterList
+var _FilterList_member = &s_FilterList_member
+
+var FilterScope = &sFilterScope
+var FilterScope_DATA = &sFilterScope_DATA
+var FilterScope_METADATA = &sFilterScope_METADATA
+var FilterScope_SYSTEM_METADATA = &sFilterScope_SYSTEM_METADATA
+
+var _HeaderKey = &s_HeaderKey
+
+var _HeaderParametersMap = &s_HeaderParametersMap
+var _HeaderParametersMap_key = &s_HeaderParametersMap_key
+var _HeaderParametersMap_value = &s_HeaderParametersMap_value
+
+var _HeaderValue = &s_HeaderValue
+
+var HttpParameters = &sHttpParameters
+var HttpParameters_PathParameterValues = &sHttpParameters_PathParameterValues
+var HttpParameters_HeaderParameters = &sHttpParameters_HeaderParameters
+var HttpParameters_QueryStringParameters = &sHttpParameters_QueryStringParameters
+var HttpParameters_InvocationTimeoutSeconds = &sHttpParameters_InvocationTimeoutSeconds
+
+var IdempotentParameterMismatchException = &sIdempotentParameterMismatchException
+var IdempotentParameterMismatchException_Message = &sIdempotentParameterMismatchException_Message
+
+var IncludePayload = &sIncludePayload
+var IncludePayload_FULL = &sIncludePayload_FULL
+var IncludePayload_ON_ERROR_ONLY = &sIncludePayload_ON_ERROR_ONLY
+
+var _Integer = &s_Integer
+
+var InternalException = &sInternalException
+var InternalException_Message = &sInternalException_Message
+
+var InvalidInputException = &sInvalidInputException
+var InvalidInputException_Message = &sInvalidInputException_Message
+
+var InvalidStateException = &sInvalidStateException
+var InvalidStateException_Message = &sInvalidStateException_Message
+
+var InvocationType = &sInvocationType
+var InvocationType_EVENT = &sInvocationType_EVENT
+var InvocationType_REQUEST_RESPONSE = &sInvocationType_REQUEST_RESPONSE
+
+var InvokeConfiguration = &sInvokeConfiguration
+var InvokeConfiguration_RoleArn = &sInvokeConfiguration_RoleArn
+var InvokeConfiguration_LambdaParameters = &sInvokeConfiguration_LambdaParameters
+var InvokeConfiguration_SqsParameters = &sInvokeConfiguration_SqsParameters
+var InvokeConfiguration_SnsParameters = &sInvokeConfiguration_SnsParameters
+var InvokeConfiguration_KinesisParameters = &sInvokeConfiguration_KinesisParameters
+var InvokeConfiguration_StepFunctionsParameters = &sInvokeConfiguration_StepFunctionsParameters
+var InvokeConfiguration_HttpParameters = &sInvokeConfiguration_HttpParameters
+var InvokeConfiguration_UniversalTargetParameters = &sInvokeConfiguration_UniversalTargetParameters
+var InvokeConfiguration_EventBusV2Parameters = &sInvokeConfiguration_EventBusV2Parameters
+var InvokeConfiguration_TargetArn = &sInvokeConfiguration_TargetArn
+
+var JsonataConfiguration = &sJsonataConfiguration
+var JsonataConfiguration_Expression = &sJsonataConfiguration_Expression
+
+var KinesisParameters = &sKinesisParameters
+var KinesisParameters_PartitionKey = &sKinesisParameters_PartitionKey
+var KinesisParameters_ExplicitHashKey = &sKinesisParameters_ExplicitHashKey
+
+var _KmsKeyIdentifier = &s_KmsKeyIdentifier
+
+var LambdaParameters = &sLambdaParameters
+var LambdaParameters_InvocationType = &sLambdaParameters_InvocationType
+var LambdaParameters_Qualifier = &sLambdaParameters_Qualifier
+var LambdaParameters_DurableExecutionName = &sLambdaParameters_DurableExecutionName
+var LambdaParameters_TenantId = &sLambdaParameters_TenantId
+var LambdaParameters_InvocationTimeoutSeconds = &sLambdaParameters_InvocationTimeoutSeconds
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_Message = &sLimitExceededException_Message
+
+var LogConfiguration = &sLogConfiguration
+var LogConfiguration_Level = &sLogConfiguration_Level
+var LogConfiguration_IncludePayload = &sLogConfiguration_IncludePayload
+
+var LogLevel = &sLogLevel
+var LogLevel_OFF = &sLogLevel_OFF
+var LogLevel_ERROR = &sLogLevel_ERROR
+var LogLevel_INFO = &sLogLevel_INFO
+
+var _MaxResults = &s_MaxResults
+
+var _MessageAttributeName = &s_MessageAttributeName
+
+var _NextToken = &s_NextToken
+
+var _NullableInteger = &s_NullableInteger
+
+var OnFailureConfiguration = &sOnFailureConfiguration
+var OnFailureConfiguration_Arn = &sOnFailureConfiguration_Arn
+
+var OrderingType = &sOrderingType
+var OrderingType_FIFO = &sOrderingType_FIFO
+var OrderingType_UNORDERED = &sOrderingType_UNORDERED
+
+var _PartnerEventSourceArn = &s_PartnerEventSourceArn
+
+var PartnerEventsSourceConfiguration = &sPartnerEventsSourceConfiguration
+var PartnerEventsSourceConfiguration_PartnerEventSourceArn = &sPartnerEventsSourceConfiguration_PartnerEventSourceArn
+var PartnerEventsSourceConfiguration_Pattern = &sPartnerEventsSourceConfiguration_Pattern
+var PartnerEventsSourceConfiguration_PartnerBusKmsKeyIdentifier = &sPartnerEventsSourceConfiguration_PartnerBusKmsKeyIdentifier
+var PartnerEventsSourceConfiguration_OnFailureConfiguration = &sPartnerEventsSourceConfiguration_OnFailureConfiguration
+
+var _PathParameter = &s_PathParameter
+
+var _PathParameterList = &s_PathParameterList
+var _PathParameterList_member = &s_PathParameterList_member
+
+var PointInTimeConfiguration = &sPointInTimeConfiguration
+var PointInTimeConfiguration_PointType = &sPointInTimeConfiguration_PointType
+var PointInTimeConfiguration_StartingPoint = &sPointInTimeConfiguration_StartingPoint
+var PointInTimeConfiguration_EndPoint = &sPointInTimeConfiguration_EndPoint
+
+var PointType = &sPointType
+var PointType_HORIZON = &sPointType_HORIZON
+var PointType_TIMESTAMP = &sPointType_TIMESTAMP
+
+var _PolicyDocument = &s_PolicyDocument
+
+var PolicyLengthExceededException = &sPolicyLengthExceededException
+var PolicyLengthExceededException_Message = &sPolicyLengthExceededException_Message
+
+var _PolicyName = &s_PolicyName
+
+var _PolicyRevisionId = &s_PolicyRevisionId
+
+var PublicPolicyException = &sPublicPolicyException
+var PublicPolicyException_Message = &sPublicPolicyException_Message
+
+var PutEventsRequestEntry = &sPutEventsRequestEntry
+var PutEventsRequestEntry_Source = &sPutEventsRequestEntry_Source
+var PutEventsRequestEntry_DetailType = &sPutEventsRequestEntry_DetailType
+var PutEventsRequestEntry_Detail = &sPutEventsRequestEntry_Detail
+var PutEventsRequestEntry_Resources = &sPutEventsRequestEntry_Resources
+var PutEventsRequestEntry_Time = &sPutEventsRequestEntry_Time
+var PutEventsRequestEntry_SystemMetadata = &sPutEventsRequestEntry_SystemMetadata
+
+var _PutEventsRequestEntryList = &s_PutEventsRequestEntryList
+var _PutEventsRequestEntryList_member = &s_PutEventsRequestEntryList_member
+
+var _PutEventsResourceList = &s_PutEventsResourceList
+var _PutEventsResourceList_member = &s_PutEventsResourceList_member
+
+var PutEventsResultEntry = &sPutEventsResultEntry
+var PutEventsResultEntry_EventId = &sPutEventsResultEntry_EventId
+var PutEventsResultEntry_SequenceNumber = &sPutEventsResultEntry_SequenceNumber
+var PutEventsResultEntry_SuccessCode = &sPutEventsResultEntry_SuccessCode
+var PutEventsResultEntry_ErrorCode = &sPutEventsResultEntry_ErrorCode
+var PutEventsResultEntry_ErrorMessage = &sPutEventsResultEntry_ErrorMessage
+
+var _PutEventsResultEntryList = &s_PutEventsResultEntryList
+var _PutEventsResultEntryList_member = &s_PutEventsResultEntryList_member
+
+var PutEventsSystemMetadata = &sPutEventsSystemMetadata
+var PutEventsSystemMetadata_EventGroupId = &sPutEventsSystemMetadata_EventGroupId
+var PutEventsSystemMetadata_DeduplicationId = &sPutEventsSystemMetadata_DeduplicationId
+
+var PutRawEventsRequestEntry = &sPutRawEventsRequestEntry
+var PutRawEventsRequestEntry_Data = &sPutRawEventsRequestEntry_Data
+var PutRawEventsRequestEntry_Metadata = &sPutRawEventsRequestEntry_Metadata
+var PutRawEventsRequestEntry_SystemMetadata = &sPutRawEventsRequestEntry_SystemMetadata
+
+var _PutRawEventsRequestEntryList = &s_PutRawEventsRequestEntryList
+var _PutRawEventsRequestEntryList_member = &s_PutRawEventsRequestEntryList_member
+
+var PutRawEventsResultEntry = &sPutRawEventsResultEntry
+var PutRawEventsResultEntry_EventId = &sPutRawEventsResultEntry_EventId
+var PutRawEventsResultEntry_SequenceNumber = &sPutRawEventsResultEntry_SequenceNumber
+var PutRawEventsResultEntry_SuccessCode = &sPutRawEventsResultEntry_SuccessCode
+var PutRawEventsResultEntry_ErrorCode = &sPutRawEventsResultEntry_ErrorCode
+var PutRawEventsResultEntry_ErrorMessage = &sPutRawEventsResultEntry_ErrorMessage
+
+var _PutRawEventsResultEntryList = &s_PutRawEventsResultEntryList
+var _PutRawEventsResultEntryList_member = &s_PutRawEventsResultEntryList_member
+
+var PutRawEventsSystemMetadata = &sPutRawEventsSystemMetadata
+var PutRawEventsSystemMetadata_ContentType = &sPutRawEventsSystemMetadata_ContentType
+var PutRawEventsSystemMetadata_DeduplicationId = &sPutRawEventsSystemMetadata_DeduplicationId
+var PutRawEventsSystemMetadata_EventGroupId = &sPutRawEventsSystemMetadata_EventGroupId
+
+var _QueryStringKey = &s_QueryStringKey
+
+var _QueryStringParametersMap = &s_QueryStringParametersMap
+var _QueryStringParametersMap_key = &s_QueryStringParametersMap_key
+var _QueryStringParametersMap_value = &s_QueryStringParametersMap_value
+
+var _QueryStringValue = &s_QueryStringValue
+
+var ResourceAlreadyExistsException = &sResourceAlreadyExistsException
+var ResourceAlreadyExistsException_Message = &sResourceAlreadyExistsException_Message
+
+var ResourceInUseException = &sResourceInUseException
+var ResourceInUseException_Message = &sResourceInUseException_Message
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ResourcePolicySummary = &sResourcePolicySummary
+var ResourcePolicySummary_PolicyName = &sResourcePolicySummary_PolicyName
+var ResourcePolicySummary_RevisionId = &sResourcePolicySummary_RevisionId
+
+var _ResourcePolicySummaryList = &s_ResourcePolicySummaryList
+var _ResourcePolicySummaryList_member = &s_ResourcePolicySummaryList_member
+
+var ResumePosition = &sResumePosition
+var ResumePosition_LAST_PROCESSED = &sResumePosition_LAST_PROCESSED
+var ResumePosition_LATEST = &sResumePosition_LATEST
+
+var _RetentionPeriodInDays = &s_RetentionPeriodInDays
+
+var RetryPolicy = &sRetryPolicy
+var RetryPolicy_MaxRetryAttempts = &sRetryPolicy_MaxRetryAttempts
+var RetryPolicy_MaxEventAgeInSeconds = &sRetryPolicy_MaxEventAgeInSeconds
+var RetryPolicy_RetryStrategy = &sRetryPolicy_RetryStrategy
+
+var RetryStrategy = &sRetryStrategy
+var RetryStrategy_ALL = &sRetryStrategy_ALL
+
+var _RevocableResourceArn = &s_RevocableResourceArn
+
+var _RoleArn = &s_RoleArn
+
+var SchemaRegistryConfiguration = &sSchemaRegistryConfiguration
+var SchemaRegistryConfiguration_RegistryUri = &sSchemaRegistryConfiguration_RegistryUri
+var SchemaRegistryConfiguration_ConfluentPublicRegistryConfiguration = &sSchemaRegistryConfiguration_ConfluentPublicRegistryConfiguration
+
+var SchemaRegistryUnavailableException = &sSchemaRegistryUnavailableException
+var SchemaRegistryUnavailableException_Message = &sSchemaRegistryUnavailableException_Message
+
+var _SchemaRegistryUri = &s_SchemaRegistryUri
+
+var _SequenceNumber = &s_SequenceNumber
+
+var _SnsMessageAttributeMap = &s_SnsMessageAttributeMap
+var _SnsMessageAttributeMap_key = &s_SnsMessageAttributeMap_key
+var _SnsMessageAttributeMap_value = &s_SnsMessageAttributeMap_value
+
+var SnsMessageAttributeValue = &sSnsMessageAttributeValue
+var SnsMessageAttributeValue_DataType = &sSnsMessageAttributeValue_DataType
+var SnsMessageAttributeValue_StringValue = &sSnsMessageAttributeValue_StringValue
+var SnsMessageAttributeValue_BinaryValue = &sSnsMessageAttributeValue_BinaryValue
+
+var SnsParameters = &sSnsParameters
+var SnsParameters_MessageGroupId = &sSnsParameters_MessageGroupId
+var SnsParameters_MessageDeduplicationId = &sSnsParameters_MessageDeduplicationId
+var SnsParameters_Subject = &sSnsParameters_Subject
+var SnsParameters_MessageStructure = &sSnsParameters_MessageStructure
+var SnsParameters_MessageAttributes = &sSnsParameters_MessageAttributes
+
+var _Source = &s_Source
+
+var _SqsMessageAttributeMap = &s_SqsMessageAttributeMap
+var _SqsMessageAttributeMap_key = &s_SqsMessageAttributeMap_key
+var _SqsMessageAttributeMap_value = &s_SqsMessageAttributeMap_value
+
+var SqsMessageAttributeValue = &sSqsMessageAttributeValue
+var SqsMessageAttributeValue_DataType = &sSqsMessageAttributeValue_DataType
+var SqsMessageAttributeValue_StringValue = &sSqsMessageAttributeValue_StringValue
+var SqsMessageAttributeValue_BinaryValue = &sSqsMessageAttributeValue_BinaryValue
+
+var SqsParameters = &sSqsParameters
+var SqsParameters_MessageGroupId = &sSqsParameters_MessageGroupId
+var SqsParameters_MessageDeduplicationId = &sSqsParameters_MessageDeduplicationId
+var SqsParameters_DelaySeconds = &sSqsParameters_DelaySeconds
+var SqsParameters_MessageAttributes = &sSqsParameters_MessageAttributes
+var SqsParameters_MessageSystemAttributes = &sSqsParameters_MessageSystemAttributes
+
+var StartingPosition = &sStartingPosition
+var StartingPosition_LATEST = &sStartingPosition_LATEST
+var StartingPosition_POINT_IN_TIME = &sStartingPosition_POINT_IN_TIME
+
+var _StateReason = &s_StateReason
+
+var StepFunctionsParameters = &sStepFunctionsParameters
+var StepFunctionsParameters_InvocationType = &sStepFunctionsParameters_InvocationType
+var StepFunctionsParameters_Name = &sStepFunctionsParameters_Name
+var StepFunctionsParameters_TraceHeader = &sStepFunctionsParameters_TraceHeader
+var StepFunctionsParameters_InvocationTimeoutSeconds = &sStepFunctionsParameters_InvocationTimeoutSeconds
+
+var StorageConfiguration = &sStorageConfiguration
+var StorageConfiguration_RetentionPeriodInDays = &sStorageConfiguration_RetentionPeriodInDays
+
+var StorageConfigurationOutput = &sStorageConfigurationOutput
+var StorageConfigurationOutput_RetentionPeriodInDays = &sStorageConfigurationOutput_RetentionPeriodInDays
+var StorageConfigurationOutput_RetentionWindowStartTime = &sStorageConfigurationOutput_RetentionWindowStartTime
+
+var _String = &s_String
+
+var _SubscriberArn = &s_SubscriberArn
+
+var _SubscriberName = &s_SubscriberName
+
+var SubscriberState = &sSubscriberState
+var SubscriberState_RUNNING = &sSubscriberState_RUNNING
+var SubscriberState_STOPPED = &sSubscriberState_STOPPED
+
+var SubscriberSummary = &sSubscriberSummary
+var SubscriberSummary_SubscriberArn = &sSubscriberSummary_SubscriberArn
+var SubscriberSummary_Name = &sSubscriberSummary_Name
+var SubscriberSummary_EventBusArn = &sSubscriberSummary_EventBusArn
+var SubscriberSummary_TargetArn = &sSubscriberSummary_TargetArn
+var SubscriberSummary_Type = &sSubscriberSummary_Type
+var SubscriberSummary_Revoked = &sSubscriberSummary_Revoked
+var SubscriberSummary_State = &sSubscriberSummary_State
+var SubscriberSummary_CreationTime = &sSubscriberSummary_CreationTime
+var SubscriberSummary_LastModifiedTime = &sSubscriberSummary_LastModifiedTime
+var SubscriberSummary_SubscriberAccountId = &sSubscriberSummary_SubscriberAccountId
+
+var _SubscriberSummaryList = &s_SubscriberSummaryList
+var _SubscriberSummaryList_member = &s_SubscriberSummaryList_member
+
+var SuccessCode = &sSuccessCode
+var SuccessCode_PUBLISHED = &sSuccessCode_PUBLISHED
+var SuccessCode_DEDUPLICATED = &sSuccessCode_DEDUPLICATED
+
+var _TaggableResourceArn = &s_TaggableResourceArn
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TargetResourceArn = &s_TargetResourceArn
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var _Timestamp = &s_Timestamp
+
+var Transformer = &sTransformer
+var Transformer_Type = &sTransformer_Type
+var Transformer_JsonataConfiguration = &sTransformer_JsonataConfiguration
+
+var TransformerType = &sTransformerType
+var TransformerType_RAW = &sTransformerType_RAW
+var TransformerType_WITH_METADATA = &sTransformerType_WITH_METADATA
+var TransformerType_JSONATA = &sTransformerType_JSONATA
+
+var _UniversalTargetInput = &s_UniversalTargetInput
+
+var UniversalTargetParameters = &sUniversalTargetParameters
+var UniversalTargetParameters_Input = &sUniversalTargetParameters_Input
+var UniversalTargetParameters_InvocationTimeoutSeconds = &sUniversalTargetParameters_InvocationTimeoutSeconds
+
+var UpdateInvokeConfiguration = &sUpdateInvokeConfiguration
+var UpdateInvokeConfiguration_RoleArn = &sUpdateInvokeConfiguration_RoleArn
+var UpdateInvokeConfiguration_LambdaParameters = &sUpdateInvokeConfiguration_LambdaParameters
+var UpdateInvokeConfiguration_SqsParameters = &sUpdateInvokeConfiguration_SqsParameters
+var UpdateInvokeConfiguration_SnsParameters = &sUpdateInvokeConfiguration_SnsParameters
+var UpdateInvokeConfiguration_KinesisParameters = &sUpdateInvokeConfiguration_KinesisParameters
+var UpdateInvokeConfiguration_StepFunctionsParameters = &sUpdateInvokeConfiguration_StepFunctionsParameters
+var UpdateInvokeConfiguration_HttpParameters = &sUpdateInvokeConfiguration_HttpParameters
+var UpdateInvokeConfiguration_UniversalTargetParameters = &sUpdateInvokeConfiguration_UniversalTargetParameters
+var UpdateInvokeConfiguration_EventBusV2Parameters = &sUpdateInvokeConfiguration_EventBusV2Parameters
+
+var CreateEventBusRequest = &sCreateEventBusRequest
+var CreateEventBusRequest_Name = &sCreateEventBusRequest_Name
+var CreateEventBusRequest_Description = &sCreateEventBusRequest_Description
+var CreateEventBusRequest_EncryptionConfiguration = &sCreateEventBusRequest_EncryptionConfiguration
+var CreateEventBusRequest_StorageConfiguration = &sCreateEventBusRequest_StorageConfiguration
+var CreateEventBusRequest_Tags = &sCreateEventBusRequest_Tags
+var CreateEventBusRequest_ClientToken = &sCreateEventBusRequest_ClientToken
+
+var CreateEventBusResponse = &sCreateEventBusResponse
+var CreateEventBusResponse_EventBusArn = &sCreateEventBusResponse_EventBusArn
+var CreateEventBusResponse_Name = &sCreateEventBusResponse_Name
+var CreateEventBusResponse_Description = &sCreateEventBusResponse_Description
+var CreateEventBusResponse_EncryptionConfiguration = &sCreateEventBusResponse_EncryptionConfiguration
+var CreateEventBusResponse_StorageConfiguration = &sCreateEventBusResponse_StorageConfiguration
+var CreateEventBusResponse_State = &sCreateEventBusResponse_State
+var CreateEventBusResponse_StateReason = &sCreateEventBusResponse_StateReason
+var CreateEventBusResponse_CreationTime = &sCreateEventBusResponse_CreationTime
+
+var CreateEventSourceRequest = &sCreateEventSourceRequest
+var CreateEventSourceRequest_Name = &sCreateEventSourceRequest_Name
+var CreateEventSourceRequest_EventBusArn = &sCreateEventSourceRequest_EventBusArn
+var CreateEventSourceRequest_Configuration = &sCreateEventSourceRequest_Configuration
+var CreateEventSourceRequest_Description = &sCreateEventSourceRequest_Description
+var CreateEventSourceRequest_Tags = &sCreateEventSourceRequest_Tags
+var CreateEventSourceRequest_ClientToken = &sCreateEventSourceRequest_ClientToken
+
+var CreateEventSourceResponse = &sCreateEventSourceResponse
+var CreateEventSourceResponse_EventSourceArn = &sCreateEventSourceResponse_EventSourceArn
+var CreateEventSourceResponse_Name = &sCreateEventSourceResponse_Name
+var CreateEventSourceResponse_EventBusArn = &sCreateEventSourceResponse_EventBusArn
+var CreateEventSourceResponse_State = &sCreateEventSourceResponse_State
+var CreateEventSourceResponse_CreationTime = &sCreateEventSourceResponse_CreationTime
+
+var CreateSubscriberRequest = &sCreateSubscriberRequest
+var CreateSubscriberRequest_Name = &sCreateSubscriberRequest_Name
+var CreateSubscriberRequest_EventBusArn = &sCreateSubscriberRequest_EventBusArn
+var CreateSubscriberRequest_InvokeConfiguration = &sCreateSubscriberRequest_InvokeConfiguration
+var CreateSubscriberRequest_Description = &sCreateSubscriberRequest_Description
+var CreateSubscriberRequest_FilterConfiguration = &sCreateSubscriberRequest_FilterConfiguration
+var CreateSubscriberRequest_Type = &sCreateSubscriberRequest_Type
+var CreateSubscriberRequest_StartingPosition = &sCreateSubscriberRequest_StartingPosition
+var CreateSubscriberRequest_PointInTimeConfiguration = &sCreateSubscriberRequest_PointInTimeConfiguration
+var CreateSubscriberRequest_BatchConfiguration = &sCreateSubscriberRequest_BatchConfiguration
+var CreateSubscriberRequest_Transformer = &sCreateSubscriberRequest_Transformer
+var CreateSubscriberRequest_RetryPolicy = &sCreateSubscriberRequest_RetryPolicy
+var CreateSubscriberRequest_OnFailureConfiguration = &sCreateSubscriberRequest_OnFailureConfiguration
+var CreateSubscriberRequest_LogConfiguration = &sCreateSubscriberRequest_LogConfiguration
+var CreateSubscriberRequest_State = &sCreateSubscriberRequest_State
+var CreateSubscriberRequest_Tags = &sCreateSubscriberRequest_Tags
+var CreateSubscriberRequest_ClientToken = &sCreateSubscriberRequest_ClientToken
+
+var CreateSubscriberResponse = &sCreateSubscriberResponse
+var CreateSubscriberResponse_SubscriberArn = &sCreateSubscriberResponse_SubscriberArn
+var CreateSubscriberResponse_Name = &sCreateSubscriberResponse_Name
+var CreateSubscriberResponse_EventBusArn = &sCreateSubscriberResponse_EventBusArn
+var CreateSubscriberResponse_Type = &sCreateSubscriberResponse_Type
+var CreateSubscriberResponse_StartingPosition = &sCreateSubscriberResponse_StartingPosition
+var CreateSubscriberResponse_PointInTimeConfiguration = &sCreateSubscriberResponse_PointInTimeConfiguration
+var CreateSubscriberResponse_State = &sCreateSubscriberResponse_State
+var CreateSubscriberResponse_CreationTime = &sCreateSubscriberResponse_CreationTime
+
+var DeleteEventBusRequest = &sDeleteEventBusRequest
+var DeleteEventBusRequest_EventBusArn = &sDeleteEventBusRequest_EventBusArn
+
+var DeleteEventBusResponse = &sDeleteEventBusResponse
+
+var DeleteEventSourceRequest = &sDeleteEventSourceRequest
+var DeleteEventSourceRequest_EventSourceArn = &sDeleteEventSourceRequest_EventSourceArn
+
+var DeleteEventSourceResponse = &sDeleteEventSourceResponse
+
+var DeleteResourcePolicyRequest = &sDeleteResourcePolicyRequest
+var DeleteResourcePolicyRequest_ResourceArn = &sDeleteResourcePolicyRequest_ResourceArn
+var DeleteResourcePolicyRequest_PolicyName = &sDeleteResourcePolicyRequest_PolicyName
+var DeleteResourcePolicyRequest_ExpectedRevisionId = &sDeleteResourcePolicyRequest_ExpectedRevisionId
+
+var DeleteResourcePolicyResponse = &sDeleteResourcePolicyResponse
+var DeleteResourcePolicyResponse_RevisionId = &sDeleteResourcePolicyResponse_RevisionId
+
+var DeleteSubscriberRequest = &sDeleteSubscriberRequest
+var DeleteSubscriberRequest_SubscriberArn = &sDeleteSubscriberRequest_SubscriberArn
+
+var DeleteSubscriberResponse = &sDeleteSubscriberResponse
+
+var DescribeEventBusRequest = &sDescribeEventBusRequest
+var DescribeEventBusRequest_EventBusArn = &sDescribeEventBusRequest_EventBusArn
+
+var DescribeEventBusResponse = &sDescribeEventBusResponse
+var DescribeEventBusResponse_EventBusArn = &sDescribeEventBusResponse_EventBusArn
+var DescribeEventBusResponse_Name = &sDescribeEventBusResponse_Name
+var DescribeEventBusResponse_Description = &sDescribeEventBusResponse_Description
+var DescribeEventBusResponse_EncryptionConfiguration = &sDescribeEventBusResponse_EncryptionConfiguration
+var DescribeEventBusResponse_StorageConfiguration = &sDescribeEventBusResponse_StorageConfiguration
+var DescribeEventBusResponse_CreationTime = &sDescribeEventBusResponse_CreationTime
+var DescribeEventBusResponse_LastModifiedTime = &sDescribeEventBusResponse_LastModifiedTime
+var DescribeEventBusResponse_State = &sDescribeEventBusResponse_State
+var DescribeEventBusResponse_StateReason = &sDescribeEventBusResponse_StateReason
+
+var DescribeEventSourceRequest = &sDescribeEventSourceRequest
+var DescribeEventSourceRequest_EventSourceArn = &sDescribeEventSourceRequest_EventSourceArn
+
+var DescribeEventSourceResponse = &sDescribeEventSourceResponse
+var DescribeEventSourceResponse_EventSourceArn = &sDescribeEventSourceResponse_EventSourceArn
+var DescribeEventSourceResponse_Name = &sDescribeEventSourceResponse_Name
+var DescribeEventSourceResponse_EventBusArn = &sDescribeEventSourceResponse_EventBusArn
+var DescribeEventSourceResponse_Configuration = &sDescribeEventSourceResponse_Configuration
+var DescribeEventSourceResponse_Description = &sDescribeEventSourceResponse_Description
+var DescribeEventSourceResponse_State = &sDescribeEventSourceResponse_State
+var DescribeEventSourceResponse_Revoked = &sDescribeEventSourceResponse_Revoked
+var DescribeEventSourceResponse_CreationTime = &sDescribeEventSourceResponse_CreationTime
+var DescribeEventSourceResponse_LastModifiedTime = &sDescribeEventSourceResponse_LastModifiedTime
+
+var DescribeSubscriberRequest = &sDescribeSubscriberRequest
+var DescribeSubscriberRequest_SubscriberArn = &sDescribeSubscriberRequest_SubscriberArn
+
+var DescribeSubscriberResponse = &sDescribeSubscriberResponse
+var DescribeSubscriberResponse_SubscriberArn = &sDescribeSubscriberResponse_SubscriberArn
+var DescribeSubscriberResponse_Name = &sDescribeSubscriberResponse_Name
+var DescribeSubscriberResponse_EventBusArn = &sDescribeSubscriberResponse_EventBusArn
+var DescribeSubscriberResponse_InvokeConfiguration = &sDescribeSubscriberResponse_InvokeConfiguration
+var DescribeSubscriberResponse_Description = &sDescribeSubscriberResponse_Description
+var DescribeSubscriberResponse_FilterConfiguration = &sDescribeSubscriberResponse_FilterConfiguration
+var DescribeSubscriberResponse_Type = &sDescribeSubscriberResponse_Type
+var DescribeSubscriberResponse_StartingPosition = &sDescribeSubscriberResponse_StartingPosition
+var DescribeSubscriberResponse_PointInTimeConfiguration = &sDescribeSubscriberResponse_PointInTimeConfiguration
+var DescribeSubscriberResponse_BatchConfiguration = &sDescribeSubscriberResponse_BatchConfiguration
+var DescribeSubscriberResponse_Transformer = &sDescribeSubscriberResponse_Transformer
+var DescribeSubscriberResponse_RetryPolicy = &sDescribeSubscriberResponse_RetryPolicy
+var DescribeSubscriberResponse_OnFailureConfiguration = &sDescribeSubscriberResponse_OnFailureConfiguration
+var DescribeSubscriberResponse_LogConfiguration = &sDescribeSubscriberResponse_LogConfiguration
+var DescribeSubscriberResponse_State = &sDescribeSubscriberResponse_State
+var DescribeSubscriberResponse_Revoked = &sDescribeSubscriberResponse_Revoked
+var DescribeSubscriberResponse_CreationTime = &sDescribeSubscriberResponse_CreationTime
+var DescribeSubscriberResponse_LastModifiedTime = &sDescribeSubscriberResponse_LastModifiedTime
+
+var GetResourcePolicyRequest = &sGetResourcePolicyRequest
+var GetResourcePolicyRequest_ResourceArn = &sGetResourcePolicyRequest_ResourceArn
+var GetResourcePolicyRequest_PolicyName = &sGetResourcePolicyRequest_PolicyName
+
+var GetResourcePolicyResponse = &sGetResourcePolicyResponse
+var GetResourcePolicyResponse_ResourceArn = &sGetResourcePolicyResponse_ResourceArn
+var GetResourcePolicyResponse_PolicyDocument = &sGetResourcePolicyResponse_PolicyDocument
+var GetResourcePolicyResponse_PolicyName = &sGetResourcePolicyResponse_PolicyName
+var GetResourcePolicyResponse_RevisionId = &sGetResourcePolicyResponse_RevisionId
+
+var ListEventBusesRequest = &sListEventBusesRequest
+var ListEventBusesRequest_NamePrefix = &sListEventBusesRequest_NamePrefix
+var ListEventBusesRequest_EventBusAccountId = &sListEventBusesRequest_EventBusAccountId
+var ListEventBusesRequest_NextToken = &sListEventBusesRequest_NextToken
+var ListEventBusesRequest_MaxResults = &sListEventBusesRequest_MaxResults
+
+var ListEventBusesResponse = &sListEventBusesResponse
+var ListEventBusesResponse_EventBuses = &sListEventBusesResponse_EventBuses
+var ListEventBusesResponse_NextToken = &sListEventBusesResponse_NextToken
+
+var ListEventSourcesRequest = &sListEventSourcesRequest
+var ListEventSourcesRequest_EventBusArn = &sListEventSourcesRequest_EventBusArn
+var ListEventSourcesRequest_NamePrefix = &sListEventSourcesRequest_NamePrefix
+var ListEventSourcesRequest_NextToken = &sListEventSourcesRequest_NextToken
+var ListEventSourcesRequest_MaxResults = &sListEventSourcesRequest_MaxResults
+
+var ListEventSourcesResponse = &sListEventSourcesResponse
+var ListEventSourcesResponse_EventSources = &sListEventSourcesResponse_EventSources
+var ListEventSourcesResponse_NextToken = &sListEventSourcesResponse_NextToken
+
+var ListResourcePoliciesRequest = &sListResourcePoliciesRequest
+var ListResourcePoliciesRequest_ResourceArn = &sListResourcePoliciesRequest_ResourceArn
+var ListResourcePoliciesRequest_NextToken = &sListResourcePoliciesRequest_NextToken
+var ListResourcePoliciesRequest_MaxResults = &sListResourcePoliciesRequest_MaxResults
+
+var ListResourcePoliciesResponse = &sListResourcePoliciesResponse
+var ListResourcePoliciesResponse_PolicySummaries = &sListResourcePoliciesResponse_PolicySummaries
+var ListResourcePoliciesResponse_NextToken = &sListResourcePoliciesResponse_NextToken
+
+var ListSubscribersRequest = &sListSubscribersRequest
+var ListSubscribersRequest_EventBusArn = &sListSubscribersRequest_EventBusArn
+var ListSubscribersRequest_NamePrefix = &sListSubscribersRequest_NamePrefix
+var ListSubscribersRequest_NextToken = &sListSubscribersRequest_NextToken
+var ListSubscribersRequest_MaxResults = &sListSubscribersRequest_MaxResults
+
+var ListSubscribersResponse = &sListSubscribersResponse
+var ListSubscribersResponse_Subscribers = &sListSubscribersResponse_Subscribers
+var ListSubscribersResponse_NextToken = &sListSubscribersResponse_NextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var PutEventsRequest = &sPutEventsRequest
+var PutEventsRequest_EventBusArn = &sPutEventsRequest_EventBusArn
+var PutEventsRequest_Entries = &sPutEventsRequest_Entries
+var PutEventsRequest_DeduplicationConfiguration = &sPutEventsRequest_DeduplicationConfiguration
+
+var PutEventsResponse = &sPutEventsResponse
+var PutEventsResponse_FailedEntryCount = &sPutEventsResponse_FailedEntryCount
+var PutEventsResponse_Entries = &sPutEventsResponse_Entries
+
+var PutRawEventsRequest = &sPutRawEventsRequest
+var PutRawEventsRequest_EventBusArn = &sPutRawEventsRequest_EventBusArn
+var PutRawEventsRequest_Entries = &sPutRawEventsRequest_Entries
+var PutRawEventsRequest_SchemaRegistryConfiguration = &sPutRawEventsRequest_SchemaRegistryConfiguration
+var PutRawEventsRequest_DeduplicationConfiguration = &sPutRawEventsRequest_DeduplicationConfiguration
+
+var PutRawEventsResponse = &sPutRawEventsResponse
+var PutRawEventsResponse_FailedEntryCount = &sPutRawEventsResponse_FailedEntryCount
+var PutRawEventsResponse_Entries = &sPutRawEventsResponse_Entries
+
+var PutResourcePolicyRequest = &sPutResourcePolicyRequest
+var PutResourcePolicyRequest_ResourceArn = &sPutResourcePolicyRequest_ResourceArn
+var PutResourcePolicyRequest_PolicyDocument = &sPutResourcePolicyRequest_PolicyDocument
+var PutResourcePolicyRequest_PolicyName = &sPutResourcePolicyRequest_PolicyName
+var PutResourcePolicyRequest_ExpectedRevisionId = &sPutResourcePolicyRequest_ExpectedRevisionId
+
+var PutResourcePolicyResponse = &sPutResourcePolicyResponse
+var PutResourcePolicyResponse_ResourceArn = &sPutResourcePolicyResponse_ResourceArn
+var PutResourcePolicyResponse_PolicyName = &sPutResourcePolicyResponse_PolicyName
+var PutResourcePolicyResponse_RevisionId = &sPutResourcePolicyResponse_RevisionId
+
+var RevokeResourceRequest = &sRevokeResourceRequest
+var RevokeResourceRequest_Arn = &sRevokeResourceRequest_Arn
+
+var RevokeResourceResponse = &sRevokeResourceResponse
+var RevokeResourceResponse_Arn = &sRevokeResourceResponse_Arn
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_ResourceArn = &sTagResourceRequest_ResourceArn
+var TagResourceRequest_Tags = &sTagResourceRequest_Tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_ResourceArn = &sUntagResourceRequest_ResourceArn
+var UntagResourceRequest_TagKeys = &sUntagResourceRequest_TagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateEventBusRequest = &sUpdateEventBusRequest
+var UpdateEventBusRequest_EventBusArn = &sUpdateEventBusRequest_EventBusArn
+var UpdateEventBusRequest_Description = &sUpdateEventBusRequest_Description
+var UpdateEventBusRequest_EncryptionConfiguration = &sUpdateEventBusRequest_EncryptionConfiguration
+var UpdateEventBusRequest_StorageConfiguration = &sUpdateEventBusRequest_StorageConfiguration
+
+var UpdateEventBusResponse = &sUpdateEventBusResponse
+var UpdateEventBusResponse_EventBusArn = &sUpdateEventBusResponse_EventBusArn
+var UpdateEventBusResponse_Name = &sUpdateEventBusResponse_Name
+var UpdateEventBusResponse_Description = &sUpdateEventBusResponse_Description
+var UpdateEventBusResponse_EncryptionConfiguration = &sUpdateEventBusResponse_EncryptionConfiguration
+var UpdateEventBusResponse_StorageConfiguration = &sUpdateEventBusResponse_StorageConfiguration
+var UpdateEventBusResponse_State = &sUpdateEventBusResponse_State
+var UpdateEventBusResponse_StateReason = &sUpdateEventBusResponse_StateReason
+var UpdateEventBusResponse_LastModifiedTime = &sUpdateEventBusResponse_LastModifiedTime
+
+var UpdateEventSourceRequest = &sUpdateEventSourceRequest
+var UpdateEventSourceRequest_EventSourceArn = &sUpdateEventSourceRequest_EventSourceArn
+var UpdateEventSourceRequest_Configuration = &sUpdateEventSourceRequest_Configuration
+var UpdateEventSourceRequest_Description = &sUpdateEventSourceRequest_Description
+
+var UpdateEventSourceResponse = &sUpdateEventSourceResponse
+var UpdateEventSourceResponse_EventSourceArn = &sUpdateEventSourceResponse_EventSourceArn
+var UpdateEventSourceResponse_Name = &sUpdateEventSourceResponse_Name
+var UpdateEventSourceResponse_EventBusArn = &sUpdateEventSourceResponse_EventBusArn
+var UpdateEventSourceResponse_State = &sUpdateEventSourceResponse_State
+var UpdateEventSourceResponse_LastModifiedTime = &sUpdateEventSourceResponse_LastModifiedTime
+
+var UpdateSubscriberRequest = &sUpdateSubscriberRequest
+var UpdateSubscriberRequest_SubscriberArn = &sUpdateSubscriberRequest_SubscriberArn
+var UpdateSubscriberRequest_Description = &sUpdateSubscriberRequest_Description
+var UpdateSubscriberRequest_State = &sUpdateSubscriberRequest_State
+var UpdateSubscriberRequest_ResumePosition = &sUpdateSubscriberRequest_ResumePosition
+var UpdateSubscriberRequest_InvokeConfiguration = &sUpdateSubscriberRequest_InvokeConfiguration
+var UpdateSubscriberRequest_FilterConfiguration = &sUpdateSubscriberRequest_FilterConfiguration
+var UpdateSubscriberRequest_BatchConfiguration = &sUpdateSubscriberRequest_BatchConfiguration
+var UpdateSubscriberRequest_Transformer = &sUpdateSubscriberRequest_Transformer
+var UpdateSubscriberRequest_RetryPolicy = &sUpdateSubscriberRequest_RetryPolicy
+var UpdateSubscriberRequest_OnFailureConfiguration = &sUpdateSubscriberRequest_OnFailureConfiguration
+var UpdateSubscriberRequest_LogConfiguration = &sUpdateSubscriberRequest_LogConfiguration
+
+var UpdateSubscriberResponse = &sUpdateSubscriberResponse
+var UpdateSubscriberResponse_SubscriberArn = &sUpdateSubscriberResponse_SubscriberArn
+var UpdateSubscriberResponse_Name = &sUpdateSubscriberResponse_Name
+var UpdateSubscriberResponse_EventBusArn = &sUpdateSubscriberResponse_EventBusArn
+var UpdateSubscriberResponse_Type = &sUpdateSubscriberResponse_Type
+var UpdateSubscriberResponse_StartingPosition = &sUpdateSubscriberResponse_StartingPosition
+var UpdateSubscriberResponse_PointInTimeConfiguration = &sUpdateSubscriberResponse_PointInTimeConfiguration
+var UpdateSubscriberResponse_State = &sUpdateSubscriberResponse_State
+var UpdateSubscriberResponse_LastModifiedTime = &sUpdateSubscriberResponse_LastModifiedTime
+
+var AWSEventsV2 = &smithy.ServiceSchema{Schema: &s_AWSEventsV2, Version: "2025-05-15"}

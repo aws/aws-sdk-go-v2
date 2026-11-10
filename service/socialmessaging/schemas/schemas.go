@@ -4,2893 +4,2203 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var AssociateWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateWhatsAppBusinessAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iAssociateWhatsAppBusinessAccount                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AssociateWhatsAppBusinessAccount"}
+	iCreateWhatsAppDataset                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppDataset"}
+	iCreateWhatsAppFlow                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppFlow"}
+	iCreateWhatsAppMessageTemplate                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplate"}
+	iCreateWhatsAppMessageTemplateFromLibrary                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateFromLibrary"}
+	iCreateWhatsAppMessageTemplateMedia                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateMedia"}
+	iDeleteWhatsAppFlow                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppFlow"}
+	iDeleteWhatsAppMessageMedia                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppMessageMedia"}
+	iDeleteWhatsAppMessageTemplate                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppMessageTemplate"}
+	iDeprecateWhatsAppFlow                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeprecateWhatsAppFlow"}
+	iDisassociateWhatsAppBusinessAccount                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DisassociateWhatsAppBusinessAccount"}
+	iGetLinkedWhatsAppBusinessAccount                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetLinkedWhatsAppBusinessAccount"}
+	iGetLinkedWhatsAppBusinessAccountPhoneNumber               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetLinkedWhatsAppBusinessAccountPhoneNumber"}
+	iGetWhatsAppBusinessPublicKey                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppBusinessPublicKey"}
+	iGetWhatsAppCallPermission                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppCallPermission"}
+	iGetWhatsAppFlow                                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppFlow"}
+	iGetWhatsAppFlowPreview                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppFlowPreview"}
+	iGetWhatsAppMessageMedia                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppMessageMedia"}
+	iGetWhatsAppMessageTemplate                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppMessageTemplate"}
+	iListLinkedWhatsAppBusinessAccounts                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListLinkedWhatsAppBusinessAccounts"}
+	iListTagsForResource                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListTagsForResource"}
+	iListWhatsAppFlowAssets                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppFlowAssets"}
+	iListWhatsAppFlows                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppFlows"}
+	iListWhatsAppMessageTemplates                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppMessageTemplates"}
+	iListWhatsAppTemplateLibrary                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppTemplateLibrary"}
+	iPostWhatsAppMessageMedia                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PostWhatsAppMessageMedia"}
+	iPublishWhatsAppFlow                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PublishWhatsAppFlow"}
+	iPutWhatsAppBusinessAccountEventDestinations               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PutWhatsAppBusinessAccountEventDestinations"}
+	iPutWhatsAppBusinessPublicKey                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PutWhatsAppBusinessPublicKey"}
+	iSendWhatsAppCallEvent                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppCallEvent"}
+	iSendWhatsAppConversionEvent                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppConversionEvent"}
+	iSendWhatsAppMessage                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppMessage"}
+	iTagResource                                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "TagResource"}
+	iUntagResource                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UntagResource"}
+	iUpdateLinkedWhatsAppBusinessAccountPhoneNumber            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateLinkedWhatsAppBusinessAccountPhoneNumber"}
+	iUpdateWhatsAppFlow                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppFlow"}
+	iUpdateWhatsAppFlowAssets                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppFlowAssets"}
+	iUpdateWhatsAppMessageTemplate                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppMessageTemplate"}
+	i_SocialMessaging                                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SocialMessaging"}
+	iAccessDeniedByMetaException                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AccessDeniedByMetaException"}
+	iAccessDeniedException                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AccessDeniedException"}
+	i_AddContactNumber                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AddContactNumber"}
+	i_AddLearnMoreLink                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AddLearnMoreLink"}
+	i_AddSecurityRecommendation                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AddSecurityRecommendation"}
+	i_AddTrackPackageLink                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AddTrackPackageLink"}
+	i_Arn                                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "Arn"}
+	i_AssociateInProgressToken                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AssociateInProgressToken"}
+	i_BusinessPublicKeyPem                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "BusinessPublicKeyPem"}
+	i_BusinessPublicKeySignatureStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "BusinessPublicKeySignatureStatus"}
+	i_ButtonType                                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ButtonType"}
+	i_CodeExpirationMinutes                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CodeExpirationMinutes"}
+	iConflictException                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ConflictException"}
+	i_DeleteAllLanguages                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteAllLanguages"}
+	iDependencyException                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DependencyException"}
+	i_DirectSendEnforcementStatus                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DirectSendEnforcementStatus"}
+	i_DirectSendEnforcementStatusExpiresAt                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DirectSendEnforcementStatusExpiresAt"}
+	i_ErrorMessage                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ErrorMessage"}
+	i_EventDestinationArn                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "EventDestinationArn"}
+	i_Filter                                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "Filter"}
+	i_Headers                                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "Headers"}
+	i_IanaTimezone                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "IanaTimezone"}
+	iInternalServiceException                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "InternalServiceException"}
+	iInvalidParametersException                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "InvalidParametersException"}
+	i_Iso8601Duration                                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "Iso8601Duration"}
+	i_IsoCountryCode                                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "IsoCountryCode"}
+	i_KmsKeyArn                                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "KmsKeyArn"}
+	iLibraryTemplateBodyInputs                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LibraryTemplateBodyInputs"}
+	iLibraryTemplateButtonInput                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LibraryTemplateButtonInput"}
+	iLibraryTemplateButtonList                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LibraryTemplateButtonList"}
+	iLimitExceededException                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LimitExceededException"}
+	i_LinkedAccountWithIncompleteSetup                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedAccountWithIncompleteSetup"}
+	iLinkedWhatsAppBusinessAccount                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedWhatsAppBusinessAccount"}
+	i_LinkedWhatsAppBusinessAccountArn                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedWhatsAppBusinessAccountArn"}
+	i_LinkedWhatsAppBusinessAccountId                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedWhatsAppBusinessAccountId"}
+	iLinkedWhatsAppBusinessAccountIdMetaData                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedWhatsAppBusinessAccountIdMetaData"}
+	iLinkedWhatsAppBusinessAccountSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedWhatsAppBusinessAccountSummary"}
+	i_LinkedWhatsAppBusinessAccountSummaryList                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedWhatsAppBusinessAccountSummaryList"}
+	i_LinkedWhatsAppPhoneNumberArn                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "LinkedWhatsAppPhoneNumberArn"}
+	i_MaxResults                                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MaxResults"}
+	i_MetaFlowApplicationId                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowApplicationId"}
+	iMetaFlowApplicationInfo                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowApplicationInfo"}
+	i_MetaFlowApplicationLink                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowApplicationLink"}
+	i_MetaFlowApplicationName                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowApplicationName"}
+	iMetaFlowAsset                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowAsset"}
+	i_MetaFlowAssetDownloadUrl                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowAssetDownloadUrl"}
+	i_MetaFlowAssetList                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowAssetList"}
+	i_MetaFlowAssetName                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowAssetName"}
+	i_MetaFlowAssetType                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowAssetType"}
+	iMetaFlowCategory                                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowCategory"}
+	i_MetaFlowCategoryList                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowCategoryList"}
+	i_MetaFlowDataApiVersion                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowDataApiVersion"}
+	i_MetaFlowEndpointUri                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowEndpointUri"}
+	iMetaFlowHealthEntity                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowHealthEntity"}
+	i_MetaFlowHealthEntityList                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowHealthEntityList"}
+	i_MetaFlowHealthEntityType                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowHealthEntityType"}
+	iMetaFlowHealthStatus                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowHealthStatus"}
+	i_MetaFlowHealthStatusAvailability                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowHealthStatusAvailability"}
+	i_MetaFlowId                                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowId"}
+	i_MetaFlowJsonBlob                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowJsonBlob"}
+	i_MetaFlowJsonVersion                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowJsonVersion"}
+	i_MetaFlowName                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowName"}
+	iMetaFlowPreviewInfo                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowPreviewInfo"}
+	i_MetaFlowPreviewUrl                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowPreviewUrl"}
+	i_MetaFlowStatus                                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowStatus"}
+	iMetaFlowSummary                                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowSummary"}
+	i_MetaFlowSummaryList                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowSummaryList"}
+	i_MetaFlowTimestamp                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowTimestamp"}
+	i_MetaFlowValidationError                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowValidationError"}
+	i_MetaFlowWabaCurrency                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowWabaCurrency"}
+	i_MetaFlowWabaTemplateNamespace                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowWabaTemplateNamespace"}
+	i_MetaFlowWabaTimezoneId                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowWabaTimezoneId"}
+	iMetaFlowWhatsAppBusinessAccountInfo                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaFlowWhatsAppBusinessAccountInfo"}
+	i_MetaIndustries                                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaIndustries"}
+	i_MetaIndustry                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaIndustry"}
+	iMetaLibraryTemplate                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaLibraryTemplate"}
+	i_MetaLibraryTemplateButtonInputs                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaLibraryTemplateButtonInputs"}
+	i_MetaLibraryTemplateButtonList                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaLibraryTemplateButtonList"}
+	iMetaLibraryTemplateDefinition                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaLibraryTemplateDefinition"}
+	i_MetaLibraryTemplatesList                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaLibraryTemplatesList"}
+	i_MetaParameterFormat                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaParameterFormat"}
+	i_MetaTemplate                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplate"}
+	i_MetaTemplateBody                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateBody"}
+	i_MetaTemplateBodyExampleParams                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateBodyExampleParams"}
+	i_MetaTemplateCategory                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateCategory"}
+	i_MetaTemplateComponents                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateComponents"}
+	i_MetaTemplateCtaLinkTrackingOptedOut                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateCtaLinkTrackingOptedOut"}
+	i_MetaTemplateDefinition                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateDefinition"}
+	i_MetaTemplateHeader                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateHeader"}
+	i_MetaTemplateId                                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateId"}
+	i_MetaTemplateLanguage                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateLanguage"}
+	i_MetaTemplateName                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateName"}
+	i_MetaTemplateQualityScore                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateQualityScore"}
+	i_MetaTemplateSource                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateSource"}
+	i_MetaTemplateStatus                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateStatus"}
+	i_MetaTemplateTopic                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateTopic"}
+	i_MetaTemplateUseCase                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaTemplateUseCase"}
+	i_MetaText                                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaText"}
+	i_MetaUrl                                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaUrl"}
+	i_MetaUrlWithSuffixExample                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "MetaUrlWithSuffixExample"}
+	i_NextToken                                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "NextToken"}
+	i_OtpType                                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "OtpType"}
+	i_PhoneNumber                                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PhoneNumber"}
+	iRegistrationStatus                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "RegistrationStatus"}
+	iResourceNotFoundException                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ResourceNotFoundException"}
+	i_RoleArn                                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "RoleArn"}
+	iS3File                                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "S3File"}
+	iS3PresignedUrl                                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "S3PresignedUrl"}
+	i_StringList                                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "StringList"}
+	i_SupportedApp                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SupportedApp"}
+	i_SupportedApps                                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SupportedApps"}
+	iTag                                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "Tag"}
+	i_TagList                                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "TagList"}
+	iTemplateSummary                                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "TemplateSummary"}
+	i_TemplateSummaryList                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "TemplateSummaryList"}
+	iThrottledRequestException                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ThrottledRequestException"}
+	i_TwoFactorPin                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "TwoFactorPin"}
+	i_ValidationErrorList                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ValidationErrorList"}
+	iValidationException                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ValidationException"}
+	iWabaPhoneNumberSetupFinalization                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WabaPhoneNumberSetupFinalization"}
+	i_WabaPhoneNumberSetupFinalizationList                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WabaPhoneNumberSetupFinalizationList"}
+	iWabaSetupFinalization                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WabaSetupFinalization"}
+	iWhatsAppBusinessAccountEventDestination                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppBusinessAccountEventDestination"}
+	i_WhatsAppBusinessAccountEventDestinations                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppBusinessAccountEventDestinations"}
+	i_WhatsAppBusinessAccountId                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppBusinessAccountId"}
+	i_WhatsAppBusinessAccountLinkDate                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppBusinessAccountLinkDate"}
+	i_WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppBusinessAccountMarketingMessagesOnboardingStatus"}
+	i_WhatsAppBusinessAccountName                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppBusinessAccountName"}
+	i_WhatsAppBusinessScopedUserId                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppBusinessScopedUserId"}
+	i_WhatsAppCallbackPermissionStatus                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallbackPermissionStatus"}
+	i_WhatsAppCallEventBlob                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallEventBlob"}
+	iWhatsAppCallHours                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallHours"}
+	i_WhatsAppCallIconVisibility                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallIconVisibility"}
+	iWhatsAppCallPermission                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallPermission"}
+	iWhatsAppCallPermissionAction                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallPermissionAction"}
+	i_WhatsAppCallPermissionActionList                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallPermissionActionList"}
+	i_WhatsAppCallPermissionActionName                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallPermissionActionName"}
+	iWhatsAppCallPermissionLimit                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallPermissionLimit"}
+	i_WhatsAppCallPermissionLimitList                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallPermissionLimitList"}
+	i_WhatsAppCallPermissionStatus                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallPermissionStatus"}
+	iWhatsAppCallSettings                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppCallSettings"}
+	i_WhatsAppConversionEventBlob                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppConversionEventBlob"}
+	i_WhatsAppDatasetId                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppDatasetId"}
+	i_WhatsAppDate                                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppDate"}
+	iWhatsAppDayOfWeek                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppDayOfWeek"}
+	i_WhatsAppDestinationPhoneNumber                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppDestinationPhoneNumber"}
+	i_WhatsAppDisplayPhoneNumber                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppDisplayPhoneNumber"}
+	iWhatsAppHolidayScheduleEntry                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppHolidayScheduleEntry"}
+	i_WhatsAppHolidayScheduleList                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppHolidayScheduleList"}
+	i_WhatsAppMediaId                                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppMediaId"}
+	i_WhatsAppMessageBlob                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppMessageBlob"}
+	i_WhatsAppPhoneNumber                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumber"}
+	iWhatsAppPhoneNumberDetail                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumberDetail"}
+	i_WhatsAppPhoneNumberDetailList                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumberDetailList"}
+	i_WhatsAppPhoneNumberId                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumberId"}
+	i_WhatsAppPhoneNumberName                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumberName"}
+	i_WhatsAppPhoneNumberQualityRating                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumberQualityRating"}
+	iWhatsAppPhoneNumberSummary                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumberSummary"}
+	i_WhatsAppPhoneNumberSummaryList                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppPhoneNumberSummaryList"}
+	iWhatsAppSetupFinalization                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppSetupFinalization"}
+	iWhatsAppSignupCallback                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppSignupCallback"}
+	iWhatsAppSignupCallbackResult                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppSignupCallbackResult"}
+	iWhatsAppTimeOfDay                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppTimeOfDay"}
+	iWhatsAppWeeklyOperatingHoursEntry                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppWeeklyOperatingHoursEntry"}
+	i_WhatsAppWeeklyOperatingHoursList                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "WhatsAppWeeklyOperatingHoursList"}
+	i_ZeroTapTermsAccepted                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ZeroTapTermsAccepted"}
+	iAssociateWhatsAppBusinessAccountInput                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AssociateWhatsAppBusinessAccountInput"}
+	iAssociateWhatsAppBusinessAccountOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "AssociateWhatsAppBusinessAccountOutput"}
+	iCreateWhatsAppDatasetInput                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppDatasetInput"}
+	iCreateWhatsAppDatasetOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppDatasetOutput"}
+	iCreateWhatsAppFlowInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppFlowInput"}
+	iCreateWhatsAppFlowOutput                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppFlowOutput"}
+	iCreateWhatsAppMessageTemplateFromLibraryInput             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateFromLibraryInput"}
+	iCreateWhatsAppMessageTemplateFromLibraryOutput            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateFromLibraryOutput"}
+	iCreateWhatsAppMessageTemplateInput                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateInput"}
+	iCreateWhatsAppMessageTemplateMediaInput                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateMediaInput"}
+	iCreateWhatsAppMessageTemplateMediaOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateMediaOutput"}
+	iCreateWhatsAppMessageTemplateOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "CreateWhatsAppMessageTemplateOutput"}
+	iDeleteWhatsAppFlowInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppFlowInput"}
+	iDeleteWhatsAppFlowOutput                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppFlowOutput"}
+	iDeleteWhatsAppMessageMediaInput                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppMessageMediaInput"}
+	iDeleteWhatsAppMessageMediaOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppMessageMediaOutput"}
+	iDeleteWhatsAppMessageTemplateInput                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppMessageTemplateInput"}
+	iDeleteWhatsAppMessageTemplateOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeleteWhatsAppMessageTemplateOutput"}
+	iDeprecateWhatsAppFlowInput                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeprecateWhatsAppFlowInput"}
+	iDeprecateWhatsAppFlowOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DeprecateWhatsAppFlowOutput"}
+	iDisassociateWhatsAppBusinessAccountInput                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DisassociateWhatsAppBusinessAccountInput"}
+	iDisassociateWhatsAppBusinessAccountOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "DisassociateWhatsAppBusinessAccountOutput"}
+	iGetLinkedWhatsAppBusinessAccountInput                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetLinkedWhatsAppBusinessAccountInput"}
+	iGetLinkedWhatsAppBusinessAccountOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetLinkedWhatsAppBusinessAccountOutput"}
+	iGetLinkedWhatsAppBusinessAccountPhoneNumberInput          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetLinkedWhatsAppBusinessAccountPhoneNumberInput"}
+	iGetLinkedWhatsAppBusinessAccountPhoneNumberOutput         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetLinkedWhatsAppBusinessAccountPhoneNumberOutput"}
+	iGetWhatsAppBusinessPublicKeyInput                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppBusinessPublicKeyInput"}
+	iGetWhatsAppBusinessPublicKeyOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppBusinessPublicKeyOutput"}
+	iGetWhatsAppCallPermissionInput                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppCallPermissionInput"}
+	iGetWhatsAppCallPermissionOutput                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppCallPermissionOutput"}
+	iGetWhatsAppFlowInput                                      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppFlowInput"}
+	iGetWhatsAppFlowOutput                                     = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppFlowOutput"}
+	iGetWhatsAppFlowPreviewInput                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppFlowPreviewInput"}
+	iGetWhatsAppFlowPreviewOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppFlowPreviewOutput"}
+	iGetWhatsAppMessageMediaInput                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppMessageMediaInput"}
+	iGetWhatsAppMessageMediaOutput                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppMessageMediaOutput"}
+	iGetWhatsAppMessageTemplateInput                           = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppMessageTemplateInput"}
+	iGetWhatsAppMessageTemplateOutput                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "GetWhatsAppMessageTemplateOutput"}
+	iListLinkedWhatsAppBusinessAccountsInput                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListLinkedWhatsAppBusinessAccountsInput"}
+	iListLinkedWhatsAppBusinessAccountsOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListLinkedWhatsAppBusinessAccountsOutput"}
+	iListTagsForResourceInput                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListTagsForResourceOutput"}
+	iListWhatsAppFlowAssetsInput                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppFlowAssetsInput"}
+	iListWhatsAppFlowAssetsOutput                              = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppFlowAssetsOutput"}
+	iListWhatsAppFlowsInput                                    = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppFlowsInput"}
+	iListWhatsAppFlowsOutput                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppFlowsOutput"}
+	iListWhatsAppMessageTemplatesInput                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppMessageTemplatesInput"}
+	iListWhatsAppMessageTemplatesOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppMessageTemplatesOutput"}
+	iListWhatsAppTemplateLibraryInput                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppTemplateLibraryInput"}
+	iListWhatsAppTemplateLibraryOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "ListWhatsAppTemplateLibraryOutput"}
+	iPostWhatsAppMessageMediaInput                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PostWhatsAppMessageMediaInput"}
+	iPostWhatsAppMessageMediaOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PostWhatsAppMessageMediaOutput"}
+	iPublishWhatsAppFlowInput                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PublishWhatsAppFlowInput"}
+	iPublishWhatsAppFlowOutput                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PublishWhatsAppFlowOutput"}
+	iPutWhatsAppBusinessAccountEventDestinationsInput          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PutWhatsAppBusinessAccountEventDestinationsInput"}
+	iPutWhatsAppBusinessAccountEventDestinationsOutput         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PutWhatsAppBusinessAccountEventDestinationsOutput"}
+	iPutWhatsAppBusinessPublicKeyInput                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PutWhatsAppBusinessPublicKeyInput"}
+	iPutWhatsAppBusinessPublicKeyOutput                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "PutWhatsAppBusinessPublicKeyOutput"}
+	iSendWhatsAppCallEventInput                                = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppCallEventInput"}
+	iSendWhatsAppCallEventOutput                               = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppCallEventOutput"}
+	iSendWhatsAppConversionEventInput                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppConversionEventInput"}
+	iSendWhatsAppConversionEventOutput                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppConversionEventOutput"}
+	iSendWhatsAppMessageInput                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppMessageInput"}
+	iSendWhatsAppMessageOutput                                 = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "SendWhatsAppMessageOutput"}
+	iTagResourceInput                                          = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "TagResourceInput"}
+	iTagResourceOutput                                         = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "TagResourceOutput"}
+	iUntagResourceInput                                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UntagResourceInput"}
+	iUntagResourceOutput                                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UntagResourceOutput"}
+	iUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput"}
+	iUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput      = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput"}
+	iUpdateWhatsAppFlowAssetsInput                             = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppFlowAssetsInput"}
+	iUpdateWhatsAppFlowAssetsOutput                            = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppFlowAssetsOutput"}
+	iUpdateWhatsAppFlowInput                                   = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppFlowInput"}
+	iUpdateWhatsAppFlowOutput                                  = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppFlowOutput"}
+	iUpdateWhatsAppMessageTemplateInput                        = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppMessageTemplateInput"}
+	iUpdateWhatsAppMessageTemplateOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.socialmessaging", Name: "UpdateWhatsAppMessageTemplateOutput"}
+	pString                                                    = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pBoolean                                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+	pTimestamp                                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pInteger                                                   = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pLong                                                      = smithy.ShapeID{Namespace: "smithy.api", Name: "Long"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/signup",
-	Code: 200})
-
-var CreateWhatsAppDataset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppDataset",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/waba/dataset",
-	Code: 200})
-
-var CreateWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/flow/create",
-	Code: 200})
-
-var CreateWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/template/put",
-	Code: 200})
-
-var CreateWhatsAppMessageTemplateFromLibrary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateFromLibrary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/template/create",
-	Code: 200})
-
-var CreateWhatsAppMessageTemplateMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/template/media",
-	Code: 200})
-
-var DeleteWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/whatsapp/flow",
-	Code: 200})
-
-var DeleteWhatsAppMessageMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/whatsapp/media",
-	Code: 200})
-
-var DeleteWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/whatsapp/template",
-	Code: 200})
-
-var DeprecateWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeprecateWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/flow/deprecate",
-	Code: 200})
-
-var DisassociateWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DisassociateWhatsAppBusinessAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/v1/whatsapp/waba/disassociate",
-	Code: 200})
-
-var GetLinkedWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccount",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/waba/details",
-	Code: 200})
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountPhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/waba/phone/details",
-	Code: 200})
-
-var GetWhatsAppBusinessPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppBusinessPublicKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/business-public-key",
-	Code: 200})
-
-var GetWhatsAppCallPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppCallPermission",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/call/permission/get",
-	Code: 200})
-
-var GetWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/flow",
-	Code: 200})
-
-var GetWhatsAppFlowPreview = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowPreview",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/flow/preview",
-	Code: 200})
-
-var GetWhatsAppMessageMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/media/get",
-	Code: 200})
-
-var GetWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/template",
-	Code: 200})
-
-var ListLinkedWhatsAppBusinessAccounts = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListLinkedWhatsAppBusinessAccounts",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/waba/list",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/tags/list",
-	Code: 200})
-
-var ListWhatsAppFlowAssets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowAssets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/flow/assets",
-	Code: 200})
-
-var ListWhatsAppFlows = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlows",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/flow/list",
-	Code: 200})
-
-var ListWhatsAppMessageTemplates = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppMessageTemplates",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/v1/whatsapp/template/list",
-	Code: 200})
-
-var ListWhatsAppTemplateLibrary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppTemplateLibrary",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/template/library",
-	Code: 200})
-
-var PostWhatsAppMessageMedia = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PostWhatsAppMessageMedia",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/media",
-	Code: 200})
-
-var PublishWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PublishWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/flow/publish",
-	Code: 200})
-
-var PutWhatsAppBusinessAccountEventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessAccountEventDestinations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/whatsapp/waba/eventdestinations",
-	Code: 200})
-
-var PutWhatsAppBusinessPublicKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessPublicKey",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/whatsapp/business-public-key",
-	Code: 200})
-
-var SendWhatsAppCallEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppCallEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/call/event",
-	Code: 200})
-
-var SendWhatsAppConversionEvent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppConversionEvent",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/waba/dataset/events",
-	Code: 200})
-
-var SendWhatsAppMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppMessage",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/send",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/tag-resource",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/tags/untag-resource",
-	Code: 200})
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateLinkedWhatsAppBusinessAccountPhoneNumber",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/v1/whatsapp/waba/phone",
-	Code: 200})
-
-var UpdateWhatsAppFlow = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlow",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/flow/update",
-	Code: 200})
-
-var UpdateWhatsAppFlowAssets = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowAssets",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/flow/assets/update",
-	Code: 200})
-
-var UpdateWhatsAppMessageTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppMessageTemplate",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/v1/whatsapp/template",
-	Code: 200})
-
-var _SocialMessaging = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SocialMessaging",
-}, smithy.ShapeTypeService, 0)
-
-var SocialMessaging = smithy.NewServiceSchema(_SocialMessaging, "2024-01-01")
-
-var AccessDeniedByMetaException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AccessDeniedByMetaException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedByMetaException_message *smithy.Schema
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _AddContactNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddContactNumber",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AddLearnMoreLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddLearnMoreLink",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AddSecurityRecommendation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddSecurityRecommendation",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _AddTrackPackageLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AddTrackPackageLink",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _AssociateInProgressToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateInProgressToken",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _BusinessPublicKeyPem = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "BusinessPublicKeyPem",
-}, smithy.ShapeTypeString, 0)
-
-var _BusinessPublicKeySignatureStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "BusinessPublicKeySignatureStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _ButtonType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ButtonType",
-}, smithy.ShapeTypeString, 0)
-
-var _CodeExpirationMinutes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CodeExpirationMinutes",
-}, smithy.ShapeTypeInteger, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _DeleteAllLanguages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteAllLanguages",
-}, smithy.ShapeTypeBoolean, 0)
-
-var DependencyException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DependencyException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 502})
-var DependencyException_message *smithy.Schema
-
-var _DirectSendEnforcementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DirectSendEnforcementStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _DirectSendEnforcementStatusExpiresAt = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DirectSendEnforcementStatusExpiresAt",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _EventDestinationArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "EventDestinationArn",
-}, smithy.ShapeTypeString, 0)
-
-var _Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Filter",
-}, smithy.ShapeTypeMap, 2)
-var _Filter_key *smithy.Schema
-
-var _Filter_value *smithy.Schema
-
-var _Headers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Headers",
-}, smithy.ShapeTypeMap, 2)
-var _Headers_key *smithy.Schema
-
-var _Headers_value *smithy.Schema
-
-var _IanaTimezone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "IanaTimezone",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServiceException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "InternalServiceException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServiceException_message *smithy.Schema
-
-var InvalidParametersException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "InvalidParametersException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidParametersException_message *smithy.Schema
-
-var _Iso8601Duration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Iso8601Duration",
-}, smithy.ShapeTypeString, 0)
-
-var _IsoCountryCode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "IsoCountryCode",
-}, smithy.ShapeTypeString, 0)
-
-var _KmsKeyArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "KmsKeyArn",
-}, smithy.ShapeTypeString, 0)
-
-var LibraryTemplateBodyInputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LibraryTemplateBodyInputs",
-}, smithy.ShapeTypeStructure, 5)
-var LibraryTemplateBodyInputs_addContactNumber *smithy.Schema
-
-var LibraryTemplateBodyInputs_addLearnMoreLink *smithy.Schema
-
-var LibraryTemplateBodyInputs_addSecurityRecommendation *smithy.Schema
-
-var LibraryTemplateBodyInputs_addTrackPackageLink *smithy.Schema
-
-var LibraryTemplateBodyInputs_codeExpirationMinutes *smithy.Schema
-
-var LibraryTemplateButtonInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LibraryTemplateButtonInput",
-}, smithy.ShapeTypeStructure, 6)
-var LibraryTemplateButtonInput_type *smithy.Schema
-
-var LibraryTemplateButtonInput_phoneNumber *smithy.Schema
-
-var LibraryTemplateButtonInput_url *smithy.Schema
-
-var LibraryTemplateButtonInput_otpType *smithy.Schema
-
-var LibraryTemplateButtonInput_zeroTapTermsAccepted *smithy.Schema
-
-var LibraryTemplateButtonInput_supportedApps *smithy.Schema
-
-var LibraryTemplateButtonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LibraryTemplateButtonList",
-}, smithy.ShapeTypeStructure, 7)
-var LibraryTemplateButtonList_type *smithy.Schema
-
-var LibraryTemplateButtonList_text *smithy.Schema
-
-var LibraryTemplateButtonList_phoneNumber *smithy.Schema
-
-var LibraryTemplateButtonList_url *smithy.Schema
-
-var LibraryTemplateButtonList_otpType *smithy.Schema
-
-var LibraryTemplateButtonList_zeroTapTermsAccepted *smithy.Schema
-
-var LibraryTemplateButtonList_supportedApps *smithy.Schema
-
-var LimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var LimitExceededException_message *smithy.Schema
-
-var _LinkedAccountWithIncompleteSetup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedAccountWithIncompleteSetup",
-}, smithy.ShapeTypeMap, 2)
-var _LinkedAccountWithIncompleteSetup_key *smithy.Schema
-
-var _LinkedAccountWithIncompleteSetup_value *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccount",
-}, smithy.ShapeTypeStructure, 12)
-var LinkedWhatsAppBusinessAccount_arn *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_id *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_wabaId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_registrationStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_linkDate *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_wabaName *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_eventDestinations *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_directSendEnforcementStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_datasetId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccount_phoneNumbers *smithy.Schema
-
-var _LinkedWhatsAppBusinessAccountArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountArn",
-}, smithy.ShapeTypeString, 0)
-
-var _LinkedWhatsAppBusinessAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var LinkedWhatsAppBusinessAccountIdMetaData = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountIdMetaData",
-}, smithy.ShapeTypeStructure, 4)
-var LinkedWhatsAppBusinessAccountIdMetaData_accountName *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountIdMetaData_wabaId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountSummary",
-}, smithy.ShapeTypeStructure, 11)
-var LinkedWhatsAppBusinessAccountSummary_arn *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_id *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_wabaId *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_registrationStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_linkDate *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_wabaName *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_eventDestinations *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt *smithy.Schema
-
-var LinkedWhatsAppBusinessAccountSummary_datasetId *smithy.Schema
-
-var _LinkedWhatsAppBusinessAccountSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppBusinessAccountSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _LinkedWhatsAppBusinessAccountSummaryList_member *smithy.Schema
-
-var _LinkedWhatsAppPhoneNumberArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "LinkedWhatsAppPhoneNumberArn",
-}, smithy.ShapeTypeString, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _MetaFlowApplicationId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationId",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowApplicationInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationInfo",
-}, smithy.ShapeTypeStructure, 3)
-var MetaFlowApplicationInfo_link *smithy.Schema
-
-var MetaFlowApplicationInfo_name *smithy.Schema
-
-var MetaFlowApplicationInfo_id *smithy.Schema
-
-var _MetaFlowApplicationLink = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationLink",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowApplicationName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowApplicationName",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowAsset = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAsset",
-}, smithy.ShapeTypeStructure, 3)
-var MetaFlowAsset_name *smithy.Schema
-
-var MetaFlowAsset_assetType *smithy.Schema
-
-var MetaFlowAsset_downloadUrl *smithy.Schema
-
-var _MetaFlowAssetDownloadUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetDownloadUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowAssetList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowAssetList_member *smithy.Schema
-
-var _MetaFlowAssetName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowAssetType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowAssetType",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowCategory",
-}, smithy.ShapeTypeEnum, 9)
-var MetaFlowCategory_SIGN_UP *smithy.Schema
-
-var MetaFlowCategory_SIGN_IN *smithy.Schema
-
-var MetaFlowCategory_APPOINTMENT_BOOKING *smithy.Schema
-
-var MetaFlowCategory_LEAD_GENERATION *smithy.Schema
-
-var MetaFlowCategory_SHOPPING *smithy.Schema
-
-var MetaFlowCategory_CONTACT_US *smithy.Schema
-
-var MetaFlowCategory_CUSTOMER_SUPPORT *smithy.Schema
-
-var MetaFlowCategory_SURVEY *smithy.Schema
-
-var MetaFlowCategory_OTHER *smithy.Schema
-
-var _MetaFlowCategoryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowCategoryList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowCategoryList_member *smithy.Schema
-
-var _MetaFlowDataApiVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowDataApiVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowEndpointUri = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowEndpointUri",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowHealthEntity = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthEntity",
-}, smithy.ShapeTypeStructure, 3)
-var MetaFlowHealthEntity_entityType *smithy.Schema
-
-var MetaFlowHealthEntity_id *smithy.Schema
-
-var MetaFlowHealthEntity_canSendMessage *smithy.Schema
-
-var _MetaFlowHealthEntityList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthEntityList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowHealthEntityList_member *smithy.Schema
-
-var _MetaFlowHealthEntityType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthEntityType",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowHealthStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthStatus",
-}, smithy.ShapeTypeStructure, 2)
-var MetaFlowHealthStatus_canSendMessage *smithy.Schema
-
-var MetaFlowHealthStatus_entities *smithy.Schema
-
-var _MetaFlowHealthStatusAvailability = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowHealthStatusAvailability",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowJsonBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowJsonBlob",
-}, smithy.ShapeTypeBlob, 0)
-
-var _MetaFlowJsonVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowJsonVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowName",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowPreviewInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowPreviewInfo",
-}, smithy.ShapeTypeStructure, 2)
-var MetaFlowPreviewInfo_previewUrl *smithy.Schema
-
-var MetaFlowPreviewInfo_expiresAt *smithy.Schema
-
-var _MetaFlowPreviewUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowPreviewUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowStatus",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowSummary",
-}, smithy.ShapeTypeStructure, 5)
-var MetaFlowSummary_flowId *smithy.Schema
-
-var MetaFlowSummary_flowName *smithy.Schema
-
-var MetaFlowSummary_flowStatus *smithy.Schema
-
-var MetaFlowSummary_flowCategories *smithy.Schema
-
-var MetaFlowSummary_validationErrors *smithy.Schema
-
-var _MetaFlowSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _MetaFlowSummaryList_member *smithy.Schema
-
-var _MetaFlowTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowTimestamp",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowValidationError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowValidationError",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowWabaCurrency = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWabaCurrency",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowWabaTemplateNamespace = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWabaTemplateNamespace",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaFlowWabaTimezoneId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWabaTimezoneId",
-}, smithy.ShapeTypeString, 0)
-
-var MetaFlowWhatsAppBusinessAccountInfo = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaFlowWhatsAppBusinessAccountInfo",
-}, smithy.ShapeTypeStructure, 5)
-var MetaFlowWhatsAppBusinessAccountInfo_id *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_name *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_currency *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_timezoneId *smithy.Schema
-
-var MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace *smithy.Schema
-
-var _MetaIndustries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaIndustries",
-}, smithy.ShapeTypeList, 1)
-var _MetaIndustries_member *smithy.Schema
-
-var _MetaIndustry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaIndustry",
-}, smithy.ShapeTypeString, 0)
-
-var MetaLibraryTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplate",
-}, smithy.ShapeTypeStructure, 6)
-var MetaLibraryTemplate_templateName *smithy.Schema
-
-var MetaLibraryTemplate_libraryTemplateName *smithy.Schema
-
-var MetaLibraryTemplate_templateCategory *smithy.Schema
-
-var MetaLibraryTemplate_templateLanguage *smithy.Schema
-
-var MetaLibraryTemplate_libraryTemplateButtonInputs *smithy.Schema
-
-var MetaLibraryTemplate_libraryTemplateBodyInputs *smithy.Schema
-
-var _MetaLibraryTemplateButtonInputs = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplateButtonInputs",
-}, smithy.ShapeTypeList, 1)
-var _MetaLibraryTemplateButtonInputs_member *smithy.Schema
-
-var _MetaLibraryTemplateButtonList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplateButtonList",
-}, smithy.ShapeTypeList, 1)
-var _MetaLibraryTemplateButtonList_member *smithy.Schema
-
-var MetaLibraryTemplateDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplateDefinition",
-}, smithy.ShapeTypeStructure, 11)
-var MetaLibraryTemplateDefinition_templateName *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateLanguage *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateCategory *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateTopic *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateUseCase *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateIndustry *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateHeader *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateBody *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateButtons *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateId *smithy.Schema
-
-var MetaLibraryTemplateDefinition_templateBodyExampleParams *smithy.Schema
-
-var _MetaLibraryTemplatesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaLibraryTemplatesList",
-}, smithy.ShapeTypeList, 1)
-var _MetaLibraryTemplatesList_member *smithy.Schema
-
-var _MetaParameterFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaParameterFormat",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplate",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateBody = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateBody",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateBodyExampleParams = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateBodyExampleParams",
-}, smithy.ShapeTypeList, 1)
-var _MetaTemplateBodyExampleParams_member *smithy.Schema
-
-var _MetaTemplateCategory = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateCategory",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateComponents = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateComponents",
-}, smithy.ShapeTypeBlob, 0)
-
-var _MetaTemplateCtaLinkTrackingOptedOut = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateCtaLinkTrackingOptedOut",
-}, smithy.ShapeTypeBoolean, 0)
-
-var _MetaTemplateDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateDefinition",
-}, smithy.ShapeTypeBlob, 0)
-
-var _MetaTemplateHeader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateHeader",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateId",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateLanguage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateLanguage",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateName",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateQualityScore = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateQualityScore",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateSource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateSource",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateTopic = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateTopic",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaTemplateUseCase = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaTemplateUseCase",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaText = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaText",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaUrl",
-}, smithy.ShapeTypeString, 0)
-
-var _MetaUrlWithSuffixExample = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "MetaUrlWithSuffixExample",
-}, smithy.ShapeTypeMap, 2)
-var _MetaUrlWithSuffixExample_key *smithy.Schema
-
-var _MetaUrlWithSuffixExample_value *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _OtpType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "OtpType",
-}, smithy.ShapeTypeString, 0)
-
-var _PhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PhoneNumber",
-}, smithy.ShapeTypeString, 0)
-
-var RegistrationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "RegistrationStatus",
-}, smithy.ShapeTypeEnum, 2)
-var RegistrationStatus_COMPLETE *smithy.Schema
-
-var RegistrationStatus_INCOMPLETE *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var _RoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "RoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var S3File = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "S3File",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var S3File_bucketName *smithy.Schema
-
-var S3File_key *smithy.Schema
-
-var S3PresignedUrl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "S3PresignedUrl",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var S3PresignedUrl_url *smithy.Schema
-
-var S3PresignedUrl_headers *smithy.Schema
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _SupportedApp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SupportedApp",
-}, smithy.ShapeTypeMap, 2)
-var _SupportedApp_key *smithy.Schema
-
-var _SupportedApp_value *smithy.Schema
-
-var _SupportedApps = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SupportedApps",
-}, smithy.ShapeTypeList, 1)
-var _SupportedApps_member *smithy.Schema
-
-var Tag = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "Tag",
-}, smithy.ShapeTypeStructure, 2)
-var Tag_key *smithy.Schema
-
-var Tag_value *smithy.Schema
-
-var _TagList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagList",
-}, smithy.ShapeTypeList, 1)
-var _TagList_member *smithy.Schema
-
-var TemplateSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TemplateSummary",
-}, smithy.ShapeTypeStructure, 8)
-var TemplateSummary_templateName *smithy.Schema
-
-var TemplateSummary_metaTemplateId *smithy.Schema
-
-var TemplateSummary_templateStatus *smithy.Schema
-
-var TemplateSummary_templateQualityScore *smithy.Schema
-
-var TemplateSummary_templateLanguage *smithy.Schema
-
-var TemplateSummary_templateCategory *smithy.Schema
-
-var TemplateSummary_templateSource *smithy.Schema
-
-var TemplateSummary_correctCategory *smithy.Schema
-
-var _TemplateSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TemplateSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _TemplateSummaryList_member *smithy.Schema
-
-var ThrottledRequestException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ThrottledRequestException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottledRequestException_message *smithy.Schema
-
-var _TwoFactorPin = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TwoFactorPin",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _ValidationErrorList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ValidationErrorList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationErrorList_member *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WabaPhoneNumberSetupFinalization",
-}, smithy.ShapeTypeStructure, 4)
-var WabaPhoneNumberSetupFinalization_id *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization_twoFactorPin *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization_dataLocalizationRegion *smithy.Schema
-
-var WabaPhoneNumberSetupFinalization_tags *smithy.Schema
-
-var _WabaPhoneNumberSetupFinalizationList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WabaPhoneNumberSetupFinalizationList",
-}, smithy.ShapeTypeList, 1)
-var _WabaPhoneNumberSetupFinalizationList_member *smithy.Schema
-
-var WabaSetupFinalization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WabaSetupFinalization",
-}, smithy.ShapeTypeStructure, 3)
-var WabaSetupFinalization_id *smithy.Schema
-
-var WabaSetupFinalization_eventDestinations *smithy.Schema
-
-var WabaSetupFinalization_tags *smithy.Schema
-
-var WhatsAppBusinessAccountEventDestination = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountEventDestination",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppBusinessAccountEventDestination_eventDestinationArn *smithy.Schema
-
-var WhatsAppBusinessAccountEventDestination_roleArn *smithy.Schema
-
-var _WhatsAppBusinessAccountEventDestinations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountEventDestinations",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppBusinessAccountEventDestinations_member *smithy.Schema
-
-var _WhatsAppBusinessAccountId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppBusinessAccountLinkDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountLinkDate",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountMarketingMessagesOnboardingStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppBusinessAccountName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessAccountName",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppBusinessScopedUserId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppBusinessScopedUserId",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppCallbackPermissionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallbackPermissionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppCallEventBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallEventBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var WhatsAppCallHours = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallHours",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppCallHours_enabled *smithy.Schema
-
-var WhatsAppCallHours_timezone *smithy.Schema
-
-var WhatsAppCallHours_weeklyOperatingHours *smithy.Schema
-
-var WhatsAppCallHours_holidaySchedule *smithy.Schema
-
-var _WhatsAppCallIconVisibility = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallIconVisibility",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppCallPermission = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermission",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppCallPermission_status *smithy.Schema
-
-var WhatsAppCallPermission_expirationTime *smithy.Schema
-
-var WhatsAppCallPermissionAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionAction",
-}, smithy.ShapeTypeStructure, 3)
-var WhatsAppCallPermissionAction_actionName *smithy.Schema
-
-var WhatsAppCallPermissionAction_canPerformAction *smithy.Schema
-
-var WhatsAppCallPermissionAction_limits *smithy.Schema
-
-var _WhatsAppCallPermissionActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionActionList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppCallPermissionActionList_member *smithy.Schema
-
-var _WhatsAppCallPermissionActionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionActionName",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppCallPermissionLimit = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionLimit",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppCallPermissionLimit_timePeriod *smithy.Schema
-
-var WhatsAppCallPermissionLimit_maxAllowed *smithy.Schema
-
-var WhatsAppCallPermissionLimit_currentUsage *smithy.Schema
-
-var WhatsAppCallPermissionLimit_limitExpirationTime *smithy.Schema
-
-var _WhatsAppCallPermissionLimitList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionLimitList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppCallPermissionLimitList_member *smithy.Schema
-
-var _WhatsAppCallPermissionStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallPermissionStatus",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppCallSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppCallSettings",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppCallSettings_callEnabled *smithy.Schema
-
-var WhatsAppCallSettings_callHours *smithy.Schema
-
-var WhatsAppCallSettings_callIconVisibility *smithy.Schema
-
-var WhatsAppCallSettings_callbackPermissionStatus *smithy.Schema
-
-var _WhatsAppConversionEventBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppConversionEventBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppDatasetId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDatasetId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppDate = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDate",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppDayOfWeek = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDayOfWeek",
-}, smithy.ShapeTypeEnum, 7)
-var WhatsAppDayOfWeek_MONDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_TUESDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_WEDNESDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_THURSDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_FRIDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_SATURDAY *smithy.Schema
-
-var WhatsAppDayOfWeek_SUNDAY *smithy.Schema
-
-var _WhatsAppDestinationPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDestinationPhoneNumber",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppDisplayPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppDisplayPhoneNumber",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppHolidayScheduleEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppHolidayScheduleEntry",
-}, smithy.ShapeTypeStructure, 3)
-var WhatsAppHolidayScheduleEntry_date *smithy.Schema
-
-var WhatsAppHolidayScheduleEntry_startTime *smithy.Schema
-
-var WhatsAppHolidayScheduleEntry_endTime *smithy.Schema
-
-var _WhatsAppHolidayScheduleList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppHolidayScheduleList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppHolidayScheduleList_member *smithy.Schema
-
-var _WhatsAppMediaId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppMediaId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppMessageBlob = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppMessageBlob",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Sensitive{})
-
-var _WhatsAppPhoneNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumber",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppPhoneNumberDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberDetail",
-}, smithy.ShapeTypeStructure, 8)
-var WhatsAppPhoneNumberDetail_arn *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_phoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_phoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_metaPhoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_displayPhoneNumberName *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_displayPhoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_qualityRating *smithy.Schema
-
-var WhatsAppPhoneNumberDetail_dataLocalizationRegion *smithy.Schema
-
-var _WhatsAppPhoneNumberDetailList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberDetailList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppPhoneNumberDetailList_member *smithy.Schema
-
-var _WhatsAppPhoneNumberId = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberId",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppPhoneNumberName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberName",
-}, smithy.ShapeTypeString, 0)
-
-var _WhatsAppPhoneNumberQualityRating = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberQualityRating",
-}, smithy.ShapeTypeString, 0)
-
-var WhatsAppPhoneNumberSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberSummary",
-}, smithy.ShapeTypeStructure, 8)
-var WhatsAppPhoneNumberSummary_arn *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_phoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_phoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_metaPhoneNumberId *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_displayPhoneNumberName *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_displayPhoneNumber *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_qualityRating *smithy.Schema
-
-var WhatsAppPhoneNumberSummary_dataLocalizationRegion *smithy.Schema
-
-var _WhatsAppPhoneNumberSummaryList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppPhoneNumberSummaryList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppPhoneNumberSummaryList_member *smithy.Schema
-
-var WhatsAppSetupFinalization = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppSetupFinalization",
-}, smithy.ShapeTypeStructure, 4)
-var WhatsAppSetupFinalization_associateInProgressToken *smithy.Schema
-
-var WhatsAppSetupFinalization_phoneNumbers *smithy.Schema
-
-var WhatsAppSetupFinalization_phoneNumberParent *smithy.Schema
-
-var WhatsAppSetupFinalization_waba *smithy.Schema
-
-var WhatsAppSignupCallback = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppSignupCallback",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppSignupCallback_accessToken *smithy.Schema
-
-var WhatsAppSignupCallback_callbackUrl *smithy.Schema
-
-var WhatsAppSignupCallbackResult = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppSignupCallbackResult",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppSignupCallbackResult_associateInProgressToken *smithy.Schema
-
-var WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup *smithy.Schema
-
-var WhatsAppTimeOfDay = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppTimeOfDay",
-}, smithy.ShapeTypeStructure, 2)
-var WhatsAppTimeOfDay_hours *smithy.Schema
-
-var WhatsAppTimeOfDay_minutes *smithy.Schema
-
-var WhatsAppWeeklyOperatingHoursEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppWeeklyOperatingHoursEntry",
-}, smithy.ShapeTypeStructure, 3)
-var WhatsAppWeeklyOperatingHoursEntry_dayOfWeek *smithy.Schema
-
-var WhatsAppWeeklyOperatingHoursEntry_openTime *smithy.Schema
-
-var WhatsAppWeeklyOperatingHoursEntry_closeTime *smithy.Schema
-
-var _WhatsAppWeeklyOperatingHoursList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "WhatsAppWeeklyOperatingHoursList",
-}, smithy.ShapeTypeList, 1)
-var _WhatsAppWeeklyOperatingHoursList_member *smithy.Schema
-
-var _ZeroTapTermsAccepted = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ZeroTapTermsAccepted",
-}, smithy.ShapeTypeBoolean, 0)
-
-var AssociateWhatsAppBusinessAccountInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateWhatsAppBusinessAccountInput",
-}, smithy.ShapeTypeStructure, 2)
-var AssociateWhatsAppBusinessAccountInput_signupCallback *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountInput_setupFinalization *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "AssociateWhatsAppBusinessAccountOutput",
-}, smithy.ShapeTypeStructure, 3)
-var AssociateWhatsAppBusinessAccountOutput_signupCallbackResult *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountOutput_statusCode *smithy.Schema
-
-var AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId *smithy.Schema
-
-var CreateWhatsAppDatasetInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppDatasetInput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatsAppDatasetInput_id *smithy.Schema
-
-var CreateWhatsAppDatasetOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppDatasetOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatsAppDatasetOutput_datasetId *smithy.Schema
-
-var CreateWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 7)
-var CreateWhatsAppFlowInput_id *smithy.Schema
-
-var CreateWhatsAppFlowInput_flowName *smithy.Schema
-
-var CreateWhatsAppFlowInput_categories *smithy.Schema
-
-var CreateWhatsAppFlowInput_flowJson *smithy.Schema
-
-var CreateWhatsAppFlowInput_publish *smithy.Schema
-
-var CreateWhatsAppFlowInput_cloneFlowId *smithy.Schema
-
-var CreateWhatsAppFlowInput_endpointUri *smithy.Schema
-
-var CreateWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppFlowOutput_flowId *smithy.Schema
-
-var CreateWhatsAppFlowOutput_validationErrors *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateFromLibraryInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryInput_id *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateFromLibraryOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus *smithy.Schema
-
-var CreateWhatsAppMessageTemplateFromLibraryOutput_category *smithy.Schema
-
-var CreateWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppMessageTemplateInput_templateDefinition *smithy.Schema
-
-var CreateWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var CreateWhatsAppMessageTemplateMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateMediaInput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateWhatsAppMessageTemplateMediaInput_id *smithy.Schema
-
-var CreateWhatsAppMessageTemplateMediaInput_sourceS3File *smithy.Schema
-
-var CreateWhatsAppMessageTemplateMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateMediaOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle *smithy.Schema
-
-var CreateWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "CreateWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateWhatsAppMessageTemplateOutput_metaTemplateId *smithy.Schema
-
-var CreateWhatsAppMessageTemplateOutput_templateStatus *smithy.Schema
-
-var CreateWhatsAppMessageTemplateOutput_category *smithy.Schema
-
-var DeleteWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWhatsAppFlowInput_id *smithy.Schema
-
-var DeleteWhatsAppFlowInput_flowId *smithy.Schema
-
-var DeleteWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeleteWhatsAppMessageMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageMediaInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeleteWhatsAppMessageMediaInput_mediaId *smithy.Schema
-
-var DeleteWhatsAppMessageMediaInput_originationPhoneNumberId *smithy.Schema
-
-var DeleteWhatsAppMessageMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageMediaOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteWhatsAppMessageMediaOutput_success *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 4)
-var DeleteWhatsAppMessageTemplateInput_metaTemplateId *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput_deleteAllLanguages *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateInput_templateName *smithy.Schema
-
-var DeleteWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeleteWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DeprecateWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeprecateWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var DeprecateWhatsAppFlowInput_id *smithy.Schema
-
-var DeprecateWhatsAppFlowInput_flowId *smithy.Schema
-
-var DeprecateWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DeprecateWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var DisassociateWhatsAppBusinessAccountInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DisassociateWhatsAppBusinessAccountInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisassociateWhatsAppBusinessAccountInput_id *smithy.Schema
-
-var DisassociateWhatsAppBusinessAccountOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "DisassociateWhatsAppBusinessAccountOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var GetLinkedWhatsAppBusinessAccountInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLinkedWhatsAppBusinessAccountInput_id *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLinkedWhatsAppBusinessAccountOutput_account *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetLinkedWhatsAppBusinessAccountPhoneNumberOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId *smithy.Schema
-
-var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings *smithy.Schema
-
-var GetWhatsAppBusinessPublicKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppBusinessPublicKeyInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId *smithy.Schema
-
-var GetWhatsAppBusinessPublicKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppBusinessPublicKeyOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppBusinessPublicKeyOutput_businessPublicKey *smithy.Schema
-
-var GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus *smithy.Schema
-
-var GetWhatsAppCallPermissionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppCallPermissionInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetWhatsAppCallPermissionInput_originationPhoneNumberId *smithy.Schema
-
-var GetWhatsAppCallPermissionInput_destinationPhoneNumber *smithy.Schema
-
-var GetWhatsAppCallPermissionInput_endUserBsuid *smithy.Schema
-
-var GetWhatsAppCallPermissionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppCallPermissionOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppCallPermissionOutput_permission *smithy.Schema
-
-var GetWhatsAppCallPermissionOutput_actions *smithy.Schema
-
-var GetWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppFlowInput_id *smithy.Schema
-
-var GetWhatsAppFlowInput_flowId *smithy.Schema
-
-var GetWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 12)
-var GetWhatsAppFlowOutput_flowId *smithy.Schema
-
-var GetWhatsAppFlowOutput_flowName *smithy.Schema
-
-var GetWhatsAppFlowOutput_flowStatus *smithy.Schema
-
-var GetWhatsAppFlowOutput_categories *smithy.Schema
-
-var GetWhatsAppFlowOutput_validationErrors *smithy.Schema
-
-var GetWhatsAppFlowOutput_jsonVersion *smithy.Schema
-
-var GetWhatsAppFlowOutput_dataApiVersion *smithy.Schema
-
-var GetWhatsAppFlowOutput_endpointUri *smithy.Schema
-
-var GetWhatsAppFlowOutput_preview *smithy.Schema
-
-var GetWhatsAppFlowOutput_whatsAppBusinessAccount *smithy.Schema
-
-var GetWhatsAppFlowOutput_application *smithy.Schema
-
-var GetWhatsAppFlowOutput_healthStatus *smithy.Schema
-
-var GetWhatsAppFlowPreviewInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowPreviewInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetWhatsAppFlowPreviewInput_id *smithy.Schema
-
-var GetWhatsAppFlowPreviewInput_flowId *smithy.Schema
-
-var GetWhatsAppFlowPreviewInput_invalidate *smithy.Schema
-
-var GetWhatsAppFlowPreviewOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppFlowPreviewOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppFlowPreviewOutput_flowId *smithy.Schema
-
-var GetWhatsAppFlowPreviewOutput_preview *smithy.Schema
-
-var GetWhatsAppMessageMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageMediaInput",
-}, smithy.ShapeTypeStructure, 5)
-var GetWhatsAppMessageMediaInput_mediaId *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_originationPhoneNumberId *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_metadataOnly *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_destinationS3PresignedUrl *smithy.Schema
-
-var GetWhatsAppMessageMediaInput_destinationS3File *smithy.Schema
-
-var GetWhatsAppMessageMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageMediaOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetWhatsAppMessageMediaOutput_mimeType *smithy.Schema
-
-var GetWhatsAppMessageMediaOutput_fileSize *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 4)
-var GetWhatsAppMessageTemplateInput_metaTemplateId *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput_templateName *smithy.Schema
-
-var GetWhatsAppMessageTemplateInput_templateLanguageCode *smithy.Schema
-
-var GetWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "GetWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetWhatsAppMessageTemplateOutput_template *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListLinkedWhatsAppBusinessAccountsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinkedWhatsAppBusinessAccountsInput_nextToken *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsInput_maxResults *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListLinkedWhatsAppBusinessAccountsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts *smithy.Schema
-
-var ListLinkedWhatsAppBusinessAccountsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListTagsForResourceOutput_statusCode *smithy.Schema
-
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowAssetsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListWhatsAppFlowAssetsInput_id *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput_flowId *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput_nextToken *smithy.Schema
-
-var ListWhatsAppFlowAssetsInput_maxResults *smithy.Schema
-
-var ListWhatsAppFlowAssetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowAssetsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppFlowAssetsOutput_flowAssets *smithy.Schema
-
-var ListWhatsAppFlowAssetsOutput_nextToken *smithy.Schema
-
-var ListWhatsAppFlowsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListWhatsAppFlowsInput_id *smithy.Schema
-
-var ListWhatsAppFlowsInput_nextToken *smithy.Schema
-
-var ListWhatsAppFlowsInput_maxResults *smithy.Schema
-
-var ListWhatsAppFlowsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppFlowsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppFlowsOutput_flows *smithy.Schema
-
-var ListWhatsAppFlowsOutput_nextToken *smithy.Schema
-
-var ListWhatsAppMessageTemplatesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppMessageTemplatesInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListWhatsAppMessageTemplatesInput_id *smithy.Schema
-
-var ListWhatsAppMessageTemplatesInput_nextToken *smithy.Schema
-
-var ListWhatsAppMessageTemplatesInput_maxResults *smithy.Schema
-
-var ListWhatsAppMessageTemplatesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppMessageTemplatesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppMessageTemplatesOutput_templates *smithy.Schema
-
-var ListWhatsAppMessageTemplatesOutput_nextToken *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppTemplateLibraryInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListWhatsAppTemplateLibraryInput_nextToken *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput_maxResults *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput_id *smithy.Schema
-
-var ListWhatsAppTemplateLibraryInput_filters *smithy.Schema
-
-var ListWhatsAppTemplateLibraryOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "ListWhatsAppTemplateLibraryOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates *smithy.Schema
-
-var ListWhatsAppTemplateLibraryOutput_nextToken *smithy.Schema
-
-var PostWhatsAppMessageMediaInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PostWhatsAppMessageMediaInput",
-}, smithy.ShapeTypeStructure, 3)
-var PostWhatsAppMessageMediaInput_originationPhoneNumberId *smithy.Schema
-
-var PostWhatsAppMessageMediaInput_sourceS3PresignedUrl *smithy.Schema
-
-var PostWhatsAppMessageMediaInput_sourceS3File *smithy.Schema
-
-var PostWhatsAppMessageMediaOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PostWhatsAppMessageMediaOutput",
-}, smithy.ShapeTypeStructure, 1)
-var PostWhatsAppMessageMediaOutput_mediaId *smithy.Schema
-
-var PublishWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PublishWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 2)
-var PublishWhatsAppFlowInput_id *smithy.Schema
-
-var PublishWhatsAppFlowInput_flowId *smithy.Schema
-
-var PublishWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PublishWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutWhatsAppBusinessAccountEventDestinationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessAccountEventDestinationsInput",
-}, smithy.ShapeTypeStructure, 2)
-var PutWhatsAppBusinessAccountEventDestinationsInput_id *smithy.Schema
-
-var PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations *smithy.Schema
-
-var PutWhatsAppBusinessAccountEventDestinationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessAccountEventDestinationsOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var PutWhatsAppBusinessPublicKeyInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessPublicKeyInput",
-}, smithy.ShapeTypeStructure, 3)
-var PutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId *smithy.Schema
-
-var PutWhatsAppBusinessPublicKeyInput_businessPublicKey *smithy.Schema
-
-var PutWhatsAppBusinessPublicKeyInput_kmsKeyArn *smithy.Schema
-
-var PutWhatsAppBusinessPublicKeyOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "PutWhatsAppBusinessPublicKeyOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var SendWhatsAppCallEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppCallEventInput",
-}, smithy.ShapeTypeStructure, 3)
-var SendWhatsAppCallEventInput_originationPhoneNumberId *smithy.Schema
-
-var SendWhatsAppCallEventInput_metaApiVersion *smithy.Schema
-
-var SendWhatsAppCallEventInput_callEvent *smithy.Schema
-
-var SendWhatsAppCallEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppCallEventOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SendWhatsAppCallEventOutput_callId *smithy.Schema
-
-var SendWhatsAppConversionEventInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppConversionEventInput",
-}, smithy.ShapeTypeStructure, 3)
-var SendWhatsAppConversionEventInput_id *smithy.Schema
-
-var SendWhatsAppConversionEventInput_datasetId *smithy.Schema
-
-var SendWhatsAppConversionEventInput_eventData *smithy.Schema
-
-var SendWhatsAppConversionEventOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppConversionEventOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SendWhatsAppConversionEventOutput_requestId *smithy.Schema
-
-var SendWhatsAppMessageInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppMessageInput",
-}, smithy.ShapeTypeStructure, 3)
-var SendWhatsAppMessageInput_originationPhoneNumberId *smithy.Schema
-
-var SendWhatsAppMessageInput_message *smithy.Schema
-
-var SendWhatsAppMessageInput_metaApiVersion *smithy.Schema
-
-var SendWhatsAppMessageOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "SendWhatsAppMessageOutput",
-}, smithy.ShapeTypeStructure, 1)
-var SendWhatsAppMessageOutput_messageId *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var TagResourceOutput_statusCode *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UntagResourceOutput_statusCode *smithy.Schema
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id *smithy.Schema
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings *smithy.Schema
-
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowAssetsInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateWhatsAppFlowAssetsInput_id *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsInput_flowId *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsInput_flowJson *smithy.Schema
-
-var UpdateWhatsAppFlowAssetsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowAssetsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateWhatsAppFlowAssetsOutput_validationErrors *smithy.Schema
-
-var UpdateWhatsAppFlowInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateWhatsAppFlowInput_id *smithy.Schema
-
-var UpdateWhatsAppFlowInput_flowId *smithy.Schema
-
-var UpdateWhatsAppFlowInput_flowName *smithy.Schema
-
-var UpdateWhatsAppFlowInput_categories *smithy.Schema
-
-var UpdateWhatsAppFlowInput_endpointUri *smithy.Schema
-
-var UpdateWhatsAppFlowInput_metaAppId *smithy.Schema
-
-var UpdateWhatsAppFlowOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppFlowOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateWhatsAppMessageTemplateInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppMessageTemplateInput",
-}, smithy.ShapeTypeStructure, 8)
-var UpdateWhatsAppMessageTemplateInput_id *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_metaTemplateId *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateName *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateLanguageCode *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_parameterFormat *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateCategory *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_templateComponents *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut *smithy.Schema
-
-var UpdateWhatsAppMessageTemplateOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.socialmessaging",
-	Name:      "UpdateWhatsAppMessageTemplateOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedByMetaException_message = AccessDeniedByMetaException.AddMember("message", _ErrorMessage)
-
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", _ErrorMessage)
-
-	ConflictException_message = ConflictException.AddMember("message", _ErrorMessage)
-
-	DependencyException_message = DependencyException.AddMember("message", _ErrorMessage)
-
-	_Filter_key = _Filter.AddMember("key", smithyprelude.String)
-
-	_Filter_value = _Filter.AddMember("value", smithyprelude.String)
-
-	_Headers_key = _Headers.AddMember("key", smithyprelude.String)
-
-	_Headers_value = _Headers.AddMember("value", smithyprelude.String)
-
-	InternalServiceException_message = InternalServiceException.AddMember("message", _ErrorMessage)
-
-	InvalidParametersException_message = InvalidParametersException.AddMember("message", _ErrorMessage)
-
-	LibraryTemplateBodyInputs_addContactNumber = LibraryTemplateBodyInputs.AddMember("addContactNumber", _AddContactNumber)
-
-	LibraryTemplateBodyInputs_addLearnMoreLink = LibraryTemplateBodyInputs.AddMember("addLearnMoreLink", _AddLearnMoreLink)
-
-	LibraryTemplateBodyInputs_addSecurityRecommendation = LibraryTemplateBodyInputs.AddMember("addSecurityRecommendation", _AddSecurityRecommendation)
-
-	LibraryTemplateBodyInputs_addTrackPackageLink = LibraryTemplateBodyInputs.AddMember("addTrackPackageLink", _AddTrackPackageLink)
-
-	LibraryTemplateBodyInputs_codeExpirationMinutes = LibraryTemplateBodyInputs.AddMember("codeExpirationMinutes", _CodeExpirationMinutes)
-
-	_MetaUrlWithSuffixExample_key = _MetaUrlWithSuffixExample.AddMember("key", smithyprelude.String)
-
-	_MetaUrlWithSuffixExample_value = _MetaUrlWithSuffixExample.AddMember("value", smithyprelude.String)
-
-	_SupportedApp_key = _SupportedApp.AddMember("key", smithyprelude.String)
-
-	_SupportedApp_value = _SupportedApp.AddMember("value", smithyprelude.String)
-
-	_SupportedApps_member = _SupportedApps.AddMember("member", _SupportedApp)
-
-	LibraryTemplateButtonInput_type = LibraryTemplateButtonInput.AddMember("type", _ButtonType)
-
-	LibraryTemplateButtonInput_phoneNumber = LibraryTemplateButtonInput.AddMember("phoneNumber", _PhoneNumber)
-
-	LibraryTemplateButtonInput_url = LibraryTemplateButtonInput.AddMember("url", _MetaUrlWithSuffixExample)
-
-	LibraryTemplateButtonInput_otpType = LibraryTemplateButtonInput.AddMember("otpType", _OtpType)
-
-	LibraryTemplateButtonInput_zeroTapTermsAccepted = LibraryTemplateButtonInput.AddMember("zeroTapTermsAccepted", _ZeroTapTermsAccepted)
-
-	LibraryTemplateButtonInput_supportedApps = LibraryTemplateButtonInput.AddMember("supportedApps", _SupportedApps)
-
-	LibraryTemplateButtonList_type = LibraryTemplateButtonList.AddMember("type", _ButtonType)
-
-	LibraryTemplateButtonList_text = LibraryTemplateButtonList.AddMember("text", _MetaText)
-
-	LibraryTemplateButtonList_phoneNumber = LibraryTemplateButtonList.AddMember("phoneNumber", _PhoneNumber)
-
-	LibraryTemplateButtonList_url = LibraryTemplateButtonList.AddMember("url", _MetaUrl)
-
-	LibraryTemplateButtonList_otpType = LibraryTemplateButtonList.AddMember("otpType", _OtpType)
-
-	LibraryTemplateButtonList_zeroTapTermsAccepted = LibraryTemplateButtonList.AddMember("zeroTapTermsAccepted", _ZeroTapTermsAccepted)
-
-	LibraryTemplateButtonList_supportedApps = LibraryTemplateButtonList.AddMember("supportedApps", _SupportedApps)
-
-	LimitExceededException_message = LimitExceededException.AddMember("message", _ErrorMessage)
-
-	RegistrationStatus_COMPLETE = RegistrationStatus.AddMember("COMPLETE", smithyprelude.Unit)
-
-	RegistrationStatus_INCOMPLETE = RegistrationStatus.AddMember("INCOMPLETE", smithyprelude.Unit)
-
-	WhatsAppPhoneNumberDetail_arn = WhatsAppPhoneNumberDetail.AddMember("arn", _LinkedWhatsAppPhoneNumberArn)
-
-	WhatsAppPhoneNumberDetail_phoneNumber = WhatsAppPhoneNumberDetail.AddMember("phoneNumber", _PhoneNumber)
-
-	WhatsAppPhoneNumberDetail_phoneNumberId = WhatsAppPhoneNumberDetail.AddMember("phoneNumberId", _WhatsAppPhoneNumberId)
-
-	WhatsAppPhoneNumberDetail_metaPhoneNumberId = WhatsAppPhoneNumberDetail.AddMember("metaPhoneNumberId", _WhatsAppPhoneNumber)
-
-	WhatsAppPhoneNumberDetail_displayPhoneNumberName = WhatsAppPhoneNumberDetail.AddMember("displayPhoneNumberName", _WhatsAppPhoneNumberName)
-
-	WhatsAppPhoneNumberDetail_displayPhoneNumber = WhatsAppPhoneNumberDetail.AddMember("displayPhoneNumber", _WhatsAppDisplayPhoneNumber)
-
-	WhatsAppPhoneNumberDetail_qualityRating = WhatsAppPhoneNumberDetail.AddMember("qualityRating", _WhatsAppPhoneNumberQualityRating)
-
-	WhatsAppPhoneNumberDetail_dataLocalizationRegion = WhatsAppPhoneNumberDetail.AddMember("dataLocalizationRegion", _IsoCountryCode)
-
-	_WhatsAppPhoneNumberDetailList_member = _WhatsAppPhoneNumberDetailList.AddMember("member", WhatsAppPhoneNumberDetail)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_accountName = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("accountName", _WhatsAppBusinessAccountName)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("registrationStatus", RegistrationStatus)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("unregisteredWhatsAppPhoneNumbers", _WhatsAppPhoneNumberDetailList)
-
-	LinkedWhatsAppBusinessAccountIdMetaData_wabaId = LinkedWhatsAppBusinessAccountIdMetaData.AddMember("wabaId", _LinkedWhatsAppBusinessAccountId)
-
-	_LinkedAccountWithIncompleteSetup_key = _LinkedAccountWithIncompleteSetup.AddMember("key", _WhatsAppBusinessAccountId)
-
-	_LinkedAccountWithIncompleteSetup_value = _LinkedAccountWithIncompleteSetup.AddMember("value", LinkedWhatsAppBusinessAccountIdMetaData)
-
-	WhatsAppBusinessAccountEventDestination_eventDestinationArn = WhatsAppBusinessAccountEventDestination.AddMember("eventDestinationArn", _EventDestinationArn)
-
-	WhatsAppBusinessAccountEventDestination_roleArn = WhatsAppBusinessAccountEventDestination.AddMember("roleArn", _RoleArn)
-
-	_WhatsAppBusinessAccountEventDestinations_member = _WhatsAppBusinessAccountEventDestinations.AddMember("member", WhatsAppBusinessAccountEventDestination)
-
-	WhatsAppPhoneNumberSummary_arn = WhatsAppPhoneNumberSummary.AddMember("arn", _LinkedWhatsAppPhoneNumberArn)
-
-	WhatsAppPhoneNumberSummary_phoneNumber = WhatsAppPhoneNumberSummary.AddMember("phoneNumber", _PhoneNumber)
-
-	WhatsAppPhoneNumberSummary_phoneNumberId = WhatsAppPhoneNumberSummary.AddMember("phoneNumberId", _WhatsAppPhoneNumberId)
-
-	WhatsAppPhoneNumberSummary_metaPhoneNumberId = WhatsAppPhoneNumberSummary.AddMember("metaPhoneNumberId", _WhatsAppPhoneNumber)
-
-	WhatsAppPhoneNumberSummary_displayPhoneNumberName = WhatsAppPhoneNumberSummary.AddMember("displayPhoneNumberName", _WhatsAppPhoneNumberName)
-
-	WhatsAppPhoneNumberSummary_displayPhoneNumber = WhatsAppPhoneNumberSummary.AddMember("displayPhoneNumber", _WhatsAppDisplayPhoneNumber)
-
-	WhatsAppPhoneNumberSummary_qualityRating = WhatsAppPhoneNumberSummary.AddMember("qualityRating", _WhatsAppPhoneNumberQualityRating)
-
-	WhatsAppPhoneNumberSummary_dataLocalizationRegion = WhatsAppPhoneNumberSummary.AddMember("dataLocalizationRegion", _IsoCountryCode)
-
-	_WhatsAppPhoneNumberSummaryList_member = _WhatsAppPhoneNumberSummaryList.AddMember("member", WhatsAppPhoneNumberSummary)
-
-	LinkedWhatsAppBusinessAccount_arn = LinkedWhatsAppBusinessAccount.AddMember("arn", _LinkedWhatsAppBusinessAccountArn)
-
-	LinkedWhatsAppBusinessAccount_id = LinkedWhatsAppBusinessAccount.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccount_wabaId = LinkedWhatsAppBusinessAccount.AddMember("wabaId", _WhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccount_registrationStatus = LinkedWhatsAppBusinessAccount.AddMember("registrationStatus", RegistrationStatus)
-
-	LinkedWhatsAppBusinessAccount_linkDate = LinkedWhatsAppBusinessAccount.AddMember("linkDate", _WhatsAppBusinessAccountLinkDate)
-
-	LinkedWhatsAppBusinessAccount_wabaName = LinkedWhatsAppBusinessAccount.AddMember("wabaName", _WhatsAppBusinessAccountName)
-
-	LinkedWhatsAppBusinessAccount_eventDestinations = LinkedWhatsAppBusinessAccount.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus = LinkedWhatsAppBusinessAccount.AddMember("marketingMessagesOnboardingStatus", _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus)
-
-	LinkedWhatsAppBusinessAccount_directSendEnforcementStatus = LinkedWhatsAppBusinessAccount.AddMember("directSendEnforcementStatus", _DirectSendEnforcementStatus)
-
-	LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt = LinkedWhatsAppBusinessAccount.AddMember("directSendEnforcementStatusExpiresAt", _DirectSendEnforcementStatusExpiresAt)
-
-	LinkedWhatsAppBusinessAccount_datasetId = LinkedWhatsAppBusinessAccount.AddMember("datasetId", _WhatsAppDatasetId)
-
-	LinkedWhatsAppBusinessAccount_phoneNumbers = LinkedWhatsAppBusinessAccount.AddMember("phoneNumbers", _WhatsAppPhoneNumberSummaryList)
-
-	LinkedWhatsAppBusinessAccountSummary_arn = LinkedWhatsAppBusinessAccountSummary.AddMember("arn", _LinkedWhatsAppBusinessAccountArn)
-
-	LinkedWhatsAppBusinessAccountSummary_id = LinkedWhatsAppBusinessAccountSummary.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccountSummary_wabaId = LinkedWhatsAppBusinessAccountSummary.AddMember("wabaId", _WhatsAppBusinessAccountId)
-
-	LinkedWhatsAppBusinessAccountSummary_registrationStatus = LinkedWhatsAppBusinessAccountSummary.AddMember("registrationStatus", RegistrationStatus)
-
-	LinkedWhatsAppBusinessAccountSummary_linkDate = LinkedWhatsAppBusinessAccountSummary.AddMember("linkDate", _WhatsAppBusinessAccountLinkDate)
-
-	LinkedWhatsAppBusinessAccountSummary_wabaName = LinkedWhatsAppBusinessAccountSummary.AddMember("wabaName", _WhatsAppBusinessAccountName)
-
-	LinkedWhatsAppBusinessAccountSummary_eventDestinations = LinkedWhatsAppBusinessAccountSummary.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus = LinkedWhatsAppBusinessAccountSummary.AddMember("marketingMessagesOnboardingStatus", _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus)
-
-	LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus = LinkedWhatsAppBusinessAccountSummary.AddMember("directSendEnforcementStatus", _DirectSendEnforcementStatus)
-
-	LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt = LinkedWhatsAppBusinessAccountSummary.AddMember("directSendEnforcementStatusExpiresAt", _DirectSendEnforcementStatusExpiresAt)
-
-	LinkedWhatsAppBusinessAccountSummary_datasetId = LinkedWhatsAppBusinessAccountSummary.AddMember("datasetId", _WhatsAppDatasetId)
-
-	_LinkedWhatsAppBusinessAccountSummaryList_member = _LinkedWhatsAppBusinessAccountSummaryList.AddMember("member", LinkedWhatsAppBusinessAccountSummary)
-
-	MetaFlowApplicationInfo_link = MetaFlowApplicationInfo.AddMember("link", _MetaFlowApplicationLink)
-
-	MetaFlowApplicationInfo_name = MetaFlowApplicationInfo.AddMember("name", _MetaFlowApplicationName)
-
-	MetaFlowApplicationInfo_id = MetaFlowApplicationInfo.AddMember("id", _MetaFlowApplicationId)
-
-	MetaFlowAsset_name = MetaFlowAsset.AddMember("name", _MetaFlowAssetName)
-
-	MetaFlowAsset_assetType = MetaFlowAsset.AddMember("assetType", _MetaFlowAssetType)
-
-	MetaFlowAsset_downloadUrl = MetaFlowAsset.AddMember("downloadUrl", _MetaFlowAssetDownloadUrl)
-
-	_MetaFlowAssetList_member = _MetaFlowAssetList.AddMember("member", MetaFlowAsset)
-
-	MetaFlowCategory_SIGN_UP = MetaFlowCategory.AddMember("SIGN_UP", smithyprelude.Unit)
-
-	MetaFlowCategory_SIGN_IN = MetaFlowCategory.AddMember("SIGN_IN", smithyprelude.Unit)
-
-	MetaFlowCategory_APPOINTMENT_BOOKING = MetaFlowCategory.AddMember("APPOINTMENT_BOOKING", smithyprelude.Unit)
-
-	MetaFlowCategory_LEAD_GENERATION = MetaFlowCategory.AddMember("LEAD_GENERATION", smithyprelude.Unit)
-
-	MetaFlowCategory_SHOPPING = MetaFlowCategory.AddMember("SHOPPING", smithyprelude.Unit)
-
-	MetaFlowCategory_CONTACT_US = MetaFlowCategory.AddMember("CONTACT_US", smithyprelude.Unit)
-
-	MetaFlowCategory_CUSTOMER_SUPPORT = MetaFlowCategory.AddMember("CUSTOMER_SUPPORT", smithyprelude.Unit)
-
-	MetaFlowCategory_SURVEY = MetaFlowCategory.AddMember("SURVEY", smithyprelude.Unit)
-
-	MetaFlowCategory_OTHER = MetaFlowCategory.AddMember("OTHER", smithyprelude.Unit)
-
-	_MetaFlowCategoryList_member = _MetaFlowCategoryList.AddMember("member", MetaFlowCategory)
-
-	MetaFlowHealthEntity_entityType = MetaFlowHealthEntity.AddMember("entityType", _MetaFlowHealthEntityType)
-
-	MetaFlowHealthEntity_id = MetaFlowHealthEntity.AddMember("id", smithyprelude.String)
-
-	MetaFlowHealthEntity_canSendMessage = MetaFlowHealthEntity.AddMember("canSendMessage", _MetaFlowHealthStatusAvailability)
-
-	_MetaFlowHealthEntityList_member = _MetaFlowHealthEntityList.AddMember("member", MetaFlowHealthEntity)
-
-	MetaFlowHealthStatus_canSendMessage = MetaFlowHealthStatus.AddMember("canSendMessage", _MetaFlowHealthStatusAvailability)
-
-	MetaFlowHealthStatus_entities = MetaFlowHealthStatus.AddMember("entities", _MetaFlowHealthEntityList)
-
-	MetaFlowPreviewInfo_previewUrl = MetaFlowPreviewInfo.AddMember("previewUrl", _MetaFlowPreviewUrl)
-
-	MetaFlowPreviewInfo_expiresAt = MetaFlowPreviewInfo.AddMember("expiresAt", _MetaFlowTimestamp)
-
-	_ValidationErrorList_member = _ValidationErrorList.AddMember("member", _MetaFlowValidationError)
-
-	MetaFlowSummary_flowId = MetaFlowSummary.AddMember("flowId", _MetaFlowId)
-
-	MetaFlowSummary_flowName = MetaFlowSummary.AddMember("flowName", _MetaFlowName)
-
-	MetaFlowSummary_flowStatus = MetaFlowSummary.AddMember("flowStatus", _MetaFlowStatus)
-
-	MetaFlowSummary_flowCategories = MetaFlowSummary.AddMember("flowCategories", _MetaFlowCategoryList)
-
-	MetaFlowSummary_validationErrors = MetaFlowSummary.AddMember("validationErrors", _ValidationErrorList)
-
-	_MetaFlowSummaryList_member = _MetaFlowSummaryList.AddMember("member", MetaFlowSummary)
-
-	MetaFlowWhatsAppBusinessAccountInfo_id = MetaFlowWhatsAppBusinessAccountInfo.AddMember("id", _WhatsAppBusinessAccountId)
-
-	MetaFlowWhatsAppBusinessAccountInfo_name = MetaFlowWhatsAppBusinessAccountInfo.AddMember("name", _WhatsAppBusinessAccountName)
-
-	MetaFlowWhatsAppBusinessAccountInfo_currency = MetaFlowWhatsAppBusinessAccountInfo.AddMember("currency", _MetaFlowWabaCurrency)
-
-	MetaFlowWhatsAppBusinessAccountInfo_timezoneId = MetaFlowWhatsAppBusinessAccountInfo.AddMember("timezoneId", _MetaFlowWabaTimezoneId)
-
-	MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace = MetaFlowWhatsAppBusinessAccountInfo.AddMember("messageTemplateNamespace", _MetaFlowWabaTemplateNamespace)
-
-	_MetaIndustries_member = _MetaIndustries.AddMember("member", _MetaIndustry)
-
-	_MetaLibraryTemplateButtonInputs_member = _MetaLibraryTemplateButtonInputs.AddMember("member", LibraryTemplateButtonInput)
-
-	MetaLibraryTemplate_templateName = MetaLibraryTemplate.AddMember("templateName", _MetaTemplateName)
-
-	MetaLibraryTemplate_libraryTemplateName = MetaLibraryTemplate.AddMember("libraryTemplateName", _MetaTemplateName)
-
-	MetaLibraryTemplate_templateCategory = MetaLibraryTemplate.AddMember("templateCategory", _MetaTemplateCategory)
-
-	MetaLibraryTemplate_templateLanguage = MetaLibraryTemplate.AddMember("templateLanguage", _MetaTemplateLanguage)
-
-	MetaLibraryTemplate_libraryTemplateButtonInputs = MetaLibraryTemplate.AddMember("libraryTemplateButtonInputs", _MetaLibraryTemplateButtonInputs)
-
-	MetaLibraryTemplate_libraryTemplateBodyInputs = MetaLibraryTemplate.AddMember("libraryTemplateBodyInputs", LibraryTemplateBodyInputs)
-
-	_MetaLibraryTemplateButtonList_member = _MetaLibraryTemplateButtonList.AddMember("member", LibraryTemplateButtonList)
-
-	_MetaTemplateBodyExampleParams_member = _MetaTemplateBodyExampleParams.AddMember("member", smithyprelude.String)
-
-	MetaLibraryTemplateDefinition_templateName = MetaLibraryTemplateDefinition.AddMember("templateName", _MetaTemplateName)
-
-	MetaLibraryTemplateDefinition_templateLanguage = MetaLibraryTemplateDefinition.AddMember("templateLanguage", _MetaTemplateLanguage)
-
-	MetaLibraryTemplateDefinition_templateCategory = MetaLibraryTemplateDefinition.AddMember("templateCategory", _MetaTemplateCategory)
-
-	MetaLibraryTemplateDefinition_templateTopic = MetaLibraryTemplateDefinition.AddMember("templateTopic", _MetaTemplateTopic)
-
-	MetaLibraryTemplateDefinition_templateUseCase = MetaLibraryTemplateDefinition.AddMember("templateUseCase", _MetaTemplateUseCase)
-
-	MetaLibraryTemplateDefinition_templateIndustry = MetaLibraryTemplateDefinition.AddMember("templateIndustry", _MetaIndustries)
-
-	MetaLibraryTemplateDefinition_templateHeader = MetaLibraryTemplateDefinition.AddMember("templateHeader", _MetaTemplateHeader)
-
-	MetaLibraryTemplateDefinition_templateBody = MetaLibraryTemplateDefinition.AddMember("templateBody", _MetaTemplateBody)
-
-	MetaLibraryTemplateDefinition_templateButtons = MetaLibraryTemplateDefinition.AddMember("templateButtons", _MetaLibraryTemplateButtonList)
-
-	MetaLibraryTemplateDefinition_templateId = MetaLibraryTemplateDefinition.AddMember("templateId", _MetaTemplateId)
-
-	MetaLibraryTemplateDefinition_templateBodyExampleParams = MetaLibraryTemplateDefinition.AddMember("templateBodyExampleParams", _MetaTemplateBodyExampleParams)
-
-	_MetaLibraryTemplatesList_member = _MetaLibraryTemplatesList.AddMember("member", MetaLibraryTemplateDefinition)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", _ErrorMessage)
-
-	S3File_bucketName = S3File.AddMember("bucketName", smithyprelude.String)
-
-	S3File_key = S3File.AddMember("key", smithyprelude.String)
-
-	S3PresignedUrl_url = S3PresignedUrl.AddMember("url", smithyprelude.String)
-
-	S3PresignedUrl_headers = S3PresignedUrl.AddMember("headers", _Headers)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	Tag_key = Tag.AddMember("key", smithyprelude.String)
-
-	Tag_value = Tag.AddMember("value", smithyprelude.String)
-
-	_TagList_member = _TagList.AddMember("member", Tag)
-
-	TemplateSummary_templateName = TemplateSummary.AddMember("templateName", _MetaTemplateName)
-
-	TemplateSummary_metaTemplateId = TemplateSummary.AddMember("metaTemplateId", _MetaTemplateId)
-
-	TemplateSummary_templateStatus = TemplateSummary.AddMember("templateStatus", _MetaTemplateStatus)
-
-	TemplateSummary_templateQualityScore = TemplateSummary.AddMember("templateQualityScore", _MetaTemplateQualityScore)
-
-	TemplateSummary_templateLanguage = TemplateSummary.AddMember("templateLanguage", _MetaTemplateLanguage)
-
-	TemplateSummary_templateCategory = TemplateSummary.AddMember("templateCategory", _MetaTemplateCategory)
-
-	TemplateSummary_templateSource = TemplateSummary.AddMember("templateSource", _MetaTemplateSource)
-
-	TemplateSummary_correctCategory = TemplateSummary.AddMember("correctCategory", _MetaTemplateCategory)
-
-	_TemplateSummaryList_member = _TemplateSummaryList.AddMember("member", TemplateSummary)
-
-	ThrottledRequestException_message = ThrottledRequestException.AddMember("message", _ErrorMessage)
-
-	ValidationException_message = ValidationException.AddMember("message", _ErrorMessage)
-
-	WabaPhoneNumberSetupFinalization_id = WabaPhoneNumberSetupFinalization.AddMember("id", _WhatsAppPhoneNumber)
-
-	WabaPhoneNumberSetupFinalization_twoFactorPin = WabaPhoneNumberSetupFinalization.AddMember("twoFactorPin", _TwoFactorPin)
-
-	WabaPhoneNumberSetupFinalization_dataLocalizationRegion = WabaPhoneNumberSetupFinalization.AddMember("dataLocalizationRegion", _IsoCountryCode)
-
-	WabaPhoneNumberSetupFinalization_tags = WabaPhoneNumberSetupFinalization.AddMember("tags", _TagList)
-
-	_WabaPhoneNumberSetupFinalizationList_member = _WabaPhoneNumberSetupFinalizationList.AddMember("member", WabaPhoneNumberSetupFinalization)
-
-	WabaSetupFinalization_id = WabaSetupFinalization.AddMember("id", _WhatsAppBusinessAccountId)
-
-	WabaSetupFinalization_eventDestinations = WabaSetupFinalization.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	WabaSetupFinalization_tags = WabaSetupFinalization.AddMember("tags", _TagList)
-
-	WhatsAppDayOfWeek_MONDAY = WhatsAppDayOfWeek.AddMember("MONDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_TUESDAY = WhatsAppDayOfWeek.AddMember("TUESDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_WEDNESDAY = WhatsAppDayOfWeek.AddMember("WEDNESDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_THURSDAY = WhatsAppDayOfWeek.AddMember("THURSDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_FRIDAY = WhatsAppDayOfWeek.AddMember("FRIDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_SATURDAY = WhatsAppDayOfWeek.AddMember("SATURDAY", smithyprelude.Unit)
-
-	WhatsAppDayOfWeek_SUNDAY = WhatsAppDayOfWeek.AddMember("SUNDAY", smithyprelude.Unit)
-
-	WhatsAppTimeOfDay_hours = WhatsAppTimeOfDay.AddMember("hours", smithyprelude.Integer)
-
-	WhatsAppTimeOfDay_minutes = WhatsAppTimeOfDay.AddMember("minutes", smithyprelude.Integer)
-
-	WhatsAppWeeklyOperatingHoursEntry_dayOfWeek = WhatsAppWeeklyOperatingHoursEntry.AddMember("dayOfWeek", WhatsAppDayOfWeek)
-
-	WhatsAppWeeklyOperatingHoursEntry_openTime = WhatsAppWeeklyOperatingHoursEntry.AddMember("openTime", WhatsAppTimeOfDay)
-
-	WhatsAppWeeklyOperatingHoursEntry_closeTime = WhatsAppWeeklyOperatingHoursEntry.AddMember("closeTime", WhatsAppTimeOfDay)
-
-	_WhatsAppWeeklyOperatingHoursList_member = _WhatsAppWeeklyOperatingHoursList.AddMember("member", WhatsAppWeeklyOperatingHoursEntry)
-
-	WhatsAppHolidayScheduleEntry_date = WhatsAppHolidayScheduleEntry.AddMember("date", _WhatsAppDate)
-
-	WhatsAppHolidayScheduleEntry_startTime = WhatsAppHolidayScheduleEntry.AddMember("startTime", WhatsAppTimeOfDay)
-
-	WhatsAppHolidayScheduleEntry_endTime = WhatsAppHolidayScheduleEntry.AddMember("endTime", WhatsAppTimeOfDay)
-
-	_WhatsAppHolidayScheduleList_member = _WhatsAppHolidayScheduleList.AddMember("member", WhatsAppHolidayScheduleEntry)
-
-	WhatsAppCallHours_enabled = WhatsAppCallHours.AddMember("enabled", smithyprelude.Boolean)
-
-	WhatsAppCallHours_timezone = WhatsAppCallHours.AddMember("timezone", _IanaTimezone)
-
-	WhatsAppCallHours_weeklyOperatingHours = WhatsAppCallHours.AddMember("weeklyOperatingHours", _WhatsAppWeeklyOperatingHoursList)
-
-	WhatsAppCallHours_holidaySchedule = WhatsAppCallHours.AddMember("holidaySchedule", _WhatsAppHolidayScheduleList)
-
-	WhatsAppCallPermission_status = WhatsAppCallPermission.AddMember("status", _WhatsAppCallPermissionStatus)
-
-	WhatsAppCallPermission_expirationTime = WhatsAppCallPermission.AddMember("expirationTime", smithyprelude.Timestamp)
-
-	WhatsAppCallPermissionLimit_timePeriod = WhatsAppCallPermissionLimit.AddMember("timePeriod", _Iso8601Duration)
-
-	WhatsAppCallPermissionLimit_maxAllowed = WhatsAppCallPermissionLimit.AddMember("maxAllowed", smithyprelude.Integer)
-
-	WhatsAppCallPermissionLimit_currentUsage = WhatsAppCallPermissionLimit.AddMember("currentUsage", smithyprelude.Integer)
-
-	WhatsAppCallPermissionLimit_limitExpirationTime = WhatsAppCallPermissionLimit.AddMember("limitExpirationTime", smithyprelude.Timestamp)
-
-	_WhatsAppCallPermissionLimitList_member = _WhatsAppCallPermissionLimitList.AddMember("member", WhatsAppCallPermissionLimit)
-
-	WhatsAppCallPermissionAction_actionName = WhatsAppCallPermissionAction.AddMember("actionName", _WhatsAppCallPermissionActionName)
-
-	WhatsAppCallPermissionAction_canPerformAction = WhatsAppCallPermissionAction.AddMember("canPerformAction", smithyprelude.Boolean)
-
-	WhatsAppCallPermissionAction_limits = WhatsAppCallPermissionAction.AddMember("limits", _WhatsAppCallPermissionLimitList)
-
-	_WhatsAppCallPermissionActionList_member = _WhatsAppCallPermissionActionList.AddMember("member", WhatsAppCallPermissionAction)
-
-	WhatsAppCallSettings_callEnabled = WhatsAppCallSettings.AddMember("callEnabled", smithyprelude.Boolean)
-
-	WhatsAppCallSettings_callHours = WhatsAppCallSettings.AddMember("callHours", WhatsAppCallHours)
-
-	WhatsAppCallSettings_callIconVisibility = WhatsAppCallSettings.AddMember("callIconVisibility", _WhatsAppCallIconVisibility)
-
-	WhatsAppCallSettings_callbackPermissionStatus = WhatsAppCallSettings.AddMember("callbackPermissionStatus", _WhatsAppCallbackPermissionStatus)
-
-	WhatsAppSetupFinalization_associateInProgressToken = WhatsAppSetupFinalization.AddMember("associateInProgressToken", _AssociateInProgressToken)
-
-	WhatsAppSetupFinalization_phoneNumbers = WhatsAppSetupFinalization.AddMember("phoneNumbers", _WabaPhoneNumberSetupFinalizationList)
-
-	WhatsAppSetupFinalization_phoneNumberParent = WhatsAppSetupFinalization.AddMember("phoneNumberParent", _LinkedWhatsAppBusinessAccountId)
-
-	WhatsAppSetupFinalization_waba = WhatsAppSetupFinalization.AddMember("waba", WabaSetupFinalization)
-
-	WhatsAppSignupCallback_accessToken = WhatsAppSignupCallback.AddMember("accessToken", smithyprelude.String)
-
-	WhatsAppSignupCallback_callbackUrl = WhatsAppSignupCallback.AddMember("callbackUrl", smithyprelude.String)
-
-	WhatsAppSignupCallbackResult_associateInProgressToken = WhatsAppSignupCallbackResult.AddMember("associateInProgressToken", _AssociateInProgressToken)
-
-	WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup = WhatsAppSignupCallbackResult.AddMember("linkedAccountsWithIncompleteSetup", _LinkedAccountWithIncompleteSetup)
-
-	AssociateWhatsAppBusinessAccountInput_signupCallback = AssociateWhatsAppBusinessAccountInput.AddMember("signupCallback", WhatsAppSignupCallback)
-
-	AssociateWhatsAppBusinessAccountInput_setupFinalization = AssociateWhatsAppBusinessAccountInput.AddMember("setupFinalization", WhatsAppSetupFinalization)
-
-	AssociateWhatsAppBusinessAccountOutput_signupCallbackResult = AssociateWhatsAppBusinessAccountOutput.AddMember("signupCallbackResult", WhatsAppSignupCallbackResult)
-
-	AssociateWhatsAppBusinessAccountOutput_statusCode = AssociateWhatsAppBusinessAccountOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId = AssociateWhatsAppBusinessAccountOutput.AddMember("linkedWhatsAppBusinessAccountId", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppDatasetInput_id = CreateWhatsAppDatasetInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppDatasetOutput_datasetId = CreateWhatsAppDatasetOutput.AddMember("datasetId", _WhatsAppDatasetId)
-
-	CreateWhatsAppFlowInput_id = CreateWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppFlowInput_flowName = CreateWhatsAppFlowInput.AddMember("flowName", _MetaFlowName)
-
-	CreateWhatsAppFlowInput_categories = CreateWhatsAppFlowInput.AddMember("categories", _MetaFlowCategoryList)
-
-	CreateWhatsAppFlowInput_flowJson = CreateWhatsAppFlowInput.AddMember("flowJson", _MetaFlowJsonBlob)
-
-	CreateWhatsAppFlowInput_publish = CreateWhatsAppFlowInput.AddMember("publish", smithyprelude.Boolean)
-
-	CreateWhatsAppFlowInput_cloneFlowId = CreateWhatsAppFlowInput.AddMember("cloneFlowId", _MetaFlowId)
-
-	CreateWhatsAppFlowInput_endpointUri = CreateWhatsAppFlowInput.AddMember("endpointUri", _MetaFlowEndpointUri)
-
-	CreateWhatsAppFlowOutput_flowId = CreateWhatsAppFlowOutput.AddMember("flowId", _MetaFlowId)
-
-	CreateWhatsAppFlowOutput_validationErrors = CreateWhatsAppFlowOutput.AddMember("validationErrors", _ValidationErrorList)
-
-	CreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate = CreateWhatsAppMessageTemplateFromLibraryInput.AddMember("metaLibraryTemplate", MetaLibraryTemplate)
-
-	CreateWhatsAppMessageTemplateFromLibraryInput_id = CreateWhatsAppMessageTemplateFromLibraryInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId = CreateWhatsAppMessageTemplateFromLibraryOutput.AddMember("metaTemplateId", _MetaTemplateId)
-
-	CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus = CreateWhatsAppMessageTemplateFromLibraryOutput.AddMember("templateStatus", smithyprelude.String)
-
-	CreateWhatsAppMessageTemplateFromLibraryOutput_category = CreateWhatsAppMessageTemplateFromLibraryOutput.AddMember("category", _MetaTemplateCategory)
-
-	CreateWhatsAppMessageTemplateInput_templateDefinition = CreateWhatsAppMessageTemplateInput.AddMember("templateDefinition", _MetaTemplateDefinition)
-
-	CreateWhatsAppMessageTemplateInput_id = CreateWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppMessageTemplateMediaInput_id = CreateWhatsAppMessageTemplateMediaInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	CreateWhatsAppMessageTemplateMediaInput_sourceS3File = CreateWhatsAppMessageTemplateMediaInput.AddMember("sourceS3File", S3File)
-
-	CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle = CreateWhatsAppMessageTemplateMediaOutput.AddMember("metaHeaderHandle", smithyprelude.String)
-
-	CreateWhatsAppMessageTemplateOutput_metaTemplateId = CreateWhatsAppMessageTemplateOutput.AddMember("metaTemplateId", _MetaTemplateId)
-
-	CreateWhatsAppMessageTemplateOutput_templateStatus = CreateWhatsAppMessageTemplateOutput.AddMember("templateStatus", smithyprelude.String)
-
-	CreateWhatsAppMessageTemplateOutput_category = CreateWhatsAppMessageTemplateOutput.AddMember("category", _MetaTemplateCategory)
-
-	DeleteWhatsAppFlowInput_id = DeleteWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	DeleteWhatsAppFlowInput_flowId = DeleteWhatsAppFlowInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	DeleteWhatsAppMessageMediaInput_mediaId = DeleteWhatsAppMessageMediaInput.AddMember("mediaId", _WhatsAppMediaId, &smithytraits.HTTPQuery{Name: "mediaId"})
-
-	DeleteWhatsAppMessageMediaInput_originationPhoneNumberId = DeleteWhatsAppMessageMediaInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "originationPhoneNumberId"})
-
-	DeleteWhatsAppMessageMediaOutput_success = DeleteWhatsAppMessageMediaOutput.AddMember("success", smithyprelude.Boolean)
-
-	DeleteWhatsAppMessageTemplateInput_metaTemplateId = DeleteWhatsAppMessageTemplateInput.AddMember("metaTemplateId", _MetaTemplateId, &smithytraits.HTTPQuery{Name: "metaTemplateId"})
-
-	DeleteWhatsAppMessageTemplateInput_deleteAllLanguages = DeleteWhatsAppMessageTemplateInput.AddMember("deleteAllLanguages", _DeleteAllLanguages, &smithytraits.HTTPQuery{Name: "deleteAllTemplates"})
-
-	DeleteWhatsAppMessageTemplateInput_id = DeleteWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	DeleteWhatsAppMessageTemplateInput_templateName = DeleteWhatsAppMessageTemplateInput.AddMember("templateName", _MetaTemplateName, &smithytraits.HTTPQuery{Name: "templateName"})
-
-	DeprecateWhatsAppFlowInput_id = DeprecateWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	DeprecateWhatsAppFlowInput_flowId = DeprecateWhatsAppFlowInput.AddMember("flowId", _MetaFlowId)
-
-	DisassociateWhatsAppBusinessAccountInput_id = DisassociateWhatsAppBusinessAccountInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetLinkedWhatsAppBusinessAccountInput_id = GetLinkedWhatsAppBusinessAccountInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetLinkedWhatsAppBusinessAccountOutput_account = GetLinkedWhatsAppBusinessAccountOutput.AddMember("account", LinkedWhatsAppBusinessAccount)
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id = GetLinkedWhatsAppBusinessAccountPhoneNumberInput.AddMember("id", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber = GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("phoneNumber", WhatsAppPhoneNumberDetail)
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId = GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("linkedWhatsAppBusinessAccountId", _LinkedWhatsAppBusinessAccountId)
-
-	GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings = GetLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("callSettings", WhatsAppCallSettings)
-
-	GetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = GetWhatsAppBusinessPublicKeyInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "originationPhoneNumberId"})
-
-	GetWhatsAppBusinessPublicKeyOutput_businessPublicKey = GetWhatsAppBusinessPublicKeyOutput.AddMember("businessPublicKey", _BusinessPublicKeyPem)
-
-	GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus = GetWhatsAppBusinessPublicKeyOutput.AddMember("businessPublicKeySignatureStatus", _BusinessPublicKeySignatureStatus)
-
-	GetWhatsAppCallPermissionInput_originationPhoneNumberId = GetWhatsAppCallPermissionInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	GetWhatsAppCallPermissionInput_destinationPhoneNumber = GetWhatsAppCallPermissionInput.AddMember("destinationPhoneNumber", _WhatsAppDestinationPhoneNumber)
-
-	GetWhatsAppCallPermissionInput_endUserBsuid = GetWhatsAppCallPermissionInput.AddMember("endUserBsuid", _WhatsAppBusinessScopedUserId)
-
-	GetWhatsAppCallPermissionOutput_permission = GetWhatsAppCallPermissionOutput.AddMember("permission", WhatsAppCallPermission)
-
-	GetWhatsAppCallPermissionOutput_actions = GetWhatsAppCallPermissionOutput.AddMember("actions", _WhatsAppCallPermissionActionList)
-
-	GetWhatsAppFlowInput_id = GetWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetWhatsAppFlowInput_flowId = GetWhatsAppFlowInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	GetWhatsAppFlowOutput_flowId = GetWhatsAppFlowOutput.AddMember("flowId", _MetaFlowId)
-
-	GetWhatsAppFlowOutput_flowName = GetWhatsAppFlowOutput.AddMember("flowName", _MetaFlowName)
-
-	GetWhatsAppFlowOutput_flowStatus = GetWhatsAppFlowOutput.AddMember("flowStatus", _MetaFlowStatus)
-
-	GetWhatsAppFlowOutput_categories = GetWhatsAppFlowOutput.AddMember("categories", _MetaFlowCategoryList)
-
-	GetWhatsAppFlowOutput_validationErrors = GetWhatsAppFlowOutput.AddMember("validationErrors", _ValidationErrorList)
-
-	GetWhatsAppFlowOutput_jsonVersion = GetWhatsAppFlowOutput.AddMember("jsonVersion", _MetaFlowJsonVersion)
-
-	GetWhatsAppFlowOutput_dataApiVersion = GetWhatsAppFlowOutput.AddMember("dataApiVersion", _MetaFlowDataApiVersion)
-
-	GetWhatsAppFlowOutput_endpointUri = GetWhatsAppFlowOutput.AddMember("endpointUri", _MetaFlowEndpointUri)
-
-	GetWhatsAppFlowOutput_preview = GetWhatsAppFlowOutput.AddMember("preview", MetaFlowPreviewInfo)
-
-	GetWhatsAppFlowOutput_whatsAppBusinessAccount = GetWhatsAppFlowOutput.AddMember("whatsAppBusinessAccount", MetaFlowWhatsAppBusinessAccountInfo)
-
-	GetWhatsAppFlowOutput_application = GetWhatsAppFlowOutput.AddMember("application", MetaFlowApplicationInfo)
-
-	GetWhatsAppFlowOutput_healthStatus = GetWhatsAppFlowOutput.AddMember("healthStatus", MetaFlowHealthStatus)
-
-	GetWhatsAppFlowPreviewInput_id = GetWhatsAppFlowPreviewInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetWhatsAppFlowPreviewInput_flowId = GetWhatsAppFlowPreviewInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	GetWhatsAppFlowPreviewInput_invalidate = GetWhatsAppFlowPreviewInput.AddMember("invalidate", smithyprelude.Boolean, &smithytraits.HTTPQuery{Name: "invalidate"})
-
-	GetWhatsAppFlowPreviewOutput_flowId = GetWhatsAppFlowPreviewOutput.AddMember("flowId", _MetaFlowId)
-
-	GetWhatsAppFlowPreviewOutput_preview = GetWhatsAppFlowPreviewOutput.AddMember("preview", MetaFlowPreviewInfo)
-
-	GetWhatsAppMessageMediaInput_mediaId = GetWhatsAppMessageMediaInput.AddMember("mediaId", _WhatsAppMediaId)
-
-	GetWhatsAppMessageMediaInput_originationPhoneNumberId = GetWhatsAppMessageMediaInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	GetWhatsAppMessageMediaInput_metadataOnly = GetWhatsAppMessageMediaInput.AddMember("metadataOnly", smithyprelude.Boolean)
-
-	GetWhatsAppMessageMediaInput_destinationS3PresignedUrl = GetWhatsAppMessageMediaInput.AddMember("destinationS3PresignedUrl", S3PresignedUrl)
-
-	GetWhatsAppMessageMediaInput_destinationS3File = GetWhatsAppMessageMediaInput.AddMember("destinationS3File", S3File)
-
-	GetWhatsAppMessageMediaOutput_mimeType = GetWhatsAppMessageMediaOutput.AddMember("mimeType", smithyprelude.String)
-
-	GetWhatsAppMessageMediaOutput_fileSize = GetWhatsAppMessageMediaOutput.AddMember("fileSize", smithyprelude.Long)
-
-	GetWhatsAppMessageTemplateInput_metaTemplateId = GetWhatsAppMessageTemplateInput.AddMember("metaTemplateId", _MetaTemplateId, &smithytraits.HTTPQuery{Name: "metaTemplateId"})
-
-	GetWhatsAppMessageTemplateInput_id = GetWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	GetWhatsAppMessageTemplateInput_templateName = GetWhatsAppMessageTemplateInput.AddMember("templateName", _MetaTemplateName, &smithytraits.HTTPQuery{Name: "templateName"})
-
-	GetWhatsAppMessageTemplateInput_templateLanguageCode = GetWhatsAppMessageTemplateInput.AddMember("templateLanguageCode", _MetaTemplateLanguage, &smithytraits.HTTPQuery{Name: "templateLanguageCode"})
-
-	GetWhatsAppMessageTemplateOutput_template = GetWhatsAppMessageTemplateOutput.AddMember("template", _MetaTemplate)
-
-	ListLinkedWhatsAppBusinessAccountsInput_nextToken = ListLinkedWhatsAppBusinessAccountsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListLinkedWhatsAppBusinessAccountsInput_maxResults = ListLinkedWhatsAppBusinessAccountsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts = ListLinkedWhatsAppBusinessAccountsOutput.AddMember("linkedAccounts", _LinkedWhatsAppBusinessAccountSummaryList)
-
-	ListLinkedWhatsAppBusinessAccountsOutput_nextToken = ListLinkedWhatsAppBusinessAccountsOutput.AddMember("nextToken", _NextToken)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPQuery{Name: "resourceArn"})
-
-	ListTagsForResourceOutput_statusCode = ListTagsForResourceOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagList)
-
-	ListWhatsAppFlowAssetsInput_id = ListWhatsAppFlowAssetsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppFlowAssetsInput_flowId = ListWhatsAppFlowAssetsInput.AddMember("flowId", _MetaFlowId, &smithytraits.HTTPQuery{Name: "flowId"})
-
-	ListWhatsAppFlowAssetsInput_nextToken = ListWhatsAppFlowAssetsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWhatsAppFlowAssetsInput_maxResults = ListWhatsAppFlowAssetsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWhatsAppFlowAssetsOutput_flowAssets = ListWhatsAppFlowAssetsOutput.AddMember("flowAssets", _MetaFlowAssetList)
-
-	ListWhatsAppFlowAssetsOutput_nextToken = ListWhatsAppFlowAssetsOutput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppFlowsInput_id = ListWhatsAppFlowsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppFlowsInput_nextToken = ListWhatsAppFlowsInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWhatsAppFlowsInput_maxResults = ListWhatsAppFlowsInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWhatsAppFlowsOutput_flows = ListWhatsAppFlowsOutput.AddMember("flows", _MetaFlowSummaryList)
-
-	ListWhatsAppFlowsOutput_nextToken = ListWhatsAppFlowsOutput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppMessageTemplatesInput_id = ListWhatsAppMessageTemplatesInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppMessageTemplatesInput_nextToken = ListWhatsAppMessageTemplatesInput.AddMember("nextToken", _NextToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListWhatsAppMessageTemplatesInput_maxResults = ListWhatsAppMessageTemplatesInput.AddMember("maxResults", _MaxResults, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListWhatsAppMessageTemplatesOutput_templates = ListWhatsAppMessageTemplatesOutput.AddMember("templates", _TemplateSummaryList)
-
-	ListWhatsAppMessageTemplatesOutput_nextToken = ListWhatsAppMessageTemplatesOutput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppTemplateLibraryInput_nextToken = ListWhatsAppTemplateLibraryInput.AddMember("nextToken", _NextToken)
-
-	ListWhatsAppTemplateLibraryInput_maxResults = ListWhatsAppTemplateLibraryInput.AddMember("maxResults", _MaxResults)
-
-	ListWhatsAppTemplateLibraryInput_id = ListWhatsAppTemplateLibraryInput.AddMember("id", _LinkedWhatsAppBusinessAccountId, &smithytraits.HTTPQuery{Name: "id"})
-
-	ListWhatsAppTemplateLibraryInput_filters = ListWhatsAppTemplateLibraryInput.AddMember("filters", _Filter)
-
-	ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates = ListWhatsAppTemplateLibraryOutput.AddMember("metaLibraryTemplates", _MetaLibraryTemplatesList)
-
-	ListWhatsAppTemplateLibraryOutput_nextToken = ListWhatsAppTemplateLibraryOutput.AddMember("nextToken", _NextToken)
-
-	PostWhatsAppMessageMediaInput_originationPhoneNumberId = PostWhatsAppMessageMediaInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	PostWhatsAppMessageMediaInput_sourceS3PresignedUrl = PostWhatsAppMessageMediaInput.AddMember("sourceS3PresignedUrl", S3PresignedUrl)
-
-	PostWhatsAppMessageMediaInput_sourceS3File = PostWhatsAppMessageMediaInput.AddMember("sourceS3File", S3File)
-
-	PostWhatsAppMessageMediaOutput_mediaId = PostWhatsAppMessageMediaOutput.AddMember("mediaId", _WhatsAppMediaId)
-
-	PublishWhatsAppFlowInput_id = PublishWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	PublishWhatsAppFlowInput_flowId = PublishWhatsAppFlowInput.AddMember("flowId", _MetaFlowId)
-
-	PutWhatsAppBusinessAccountEventDestinationsInput_id = PutWhatsAppBusinessAccountEventDestinationsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations = PutWhatsAppBusinessAccountEventDestinationsInput.AddMember("eventDestinations", _WhatsAppBusinessAccountEventDestinations)
-
-	PutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = PutWhatsAppBusinessPublicKeyInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	PutWhatsAppBusinessPublicKeyInput_businessPublicKey = PutWhatsAppBusinessPublicKeyInput.AddMember("businessPublicKey", _BusinessPublicKeyPem)
-
-	PutWhatsAppBusinessPublicKeyInput_kmsKeyArn = PutWhatsAppBusinessPublicKeyInput.AddMember("kmsKeyArn", _KmsKeyArn)
-
-	SendWhatsAppCallEventInput_originationPhoneNumberId = SendWhatsAppCallEventInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	SendWhatsAppCallEventInput_metaApiVersion = SendWhatsAppCallEventInput.AddMember("metaApiVersion", smithyprelude.String)
-
-	SendWhatsAppCallEventInput_callEvent = SendWhatsAppCallEventInput.AddMember("callEvent", _WhatsAppCallEventBlob)
-
-	SendWhatsAppCallEventOutput_callId = SendWhatsAppCallEventOutput.AddMember("callId", smithyprelude.String)
-
-	SendWhatsAppConversionEventInput_id = SendWhatsAppConversionEventInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	SendWhatsAppConversionEventInput_datasetId = SendWhatsAppConversionEventInput.AddMember("datasetId", _WhatsAppDatasetId)
-
-	SendWhatsAppConversionEventInput_eventData = SendWhatsAppConversionEventInput.AddMember("eventData", _WhatsAppConversionEventBlob)
-
-	SendWhatsAppConversionEventOutput_requestId = SendWhatsAppConversionEventOutput.AddMember("requestId", smithyprelude.String)
-
-	SendWhatsAppMessageInput_originationPhoneNumberId = SendWhatsAppMessageInput.AddMember("originationPhoneNumberId", _WhatsAppPhoneNumberId)
-
-	SendWhatsAppMessageInput_message = SendWhatsAppMessageInput.AddMember("message", _WhatsAppMessageBlob)
-
-	SendWhatsAppMessageInput_metaApiVersion = SendWhatsAppMessageInput.AddMember("metaApiVersion", smithyprelude.String)
-
-	SendWhatsAppMessageOutput_messageId = SendWhatsAppMessageOutput.AddMember("messageId", smithyprelude.String)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn)
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagList)
-
-	TagResourceOutput_statusCode = TagResourceOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn)
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _StringList)
-
-	UntagResourceOutput_statusCode = UntagResourceOutput.AddMember("statusCode", smithyprelude.Integer)
-
-	UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id = UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput.AddMember("id", _WhatsAppPhoneNumberId, &smithytraits.HTTPQuery{Name: "id"})
-
-	UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings = UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput.AddMember("callSettings", WhatsAppCallSettings)
-
-	UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId = UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput.AddMember("phoneNumberId", _WhatsAppPhoneNumberId)
-
-	UpdateWhatsAppFlowAssetsInput_id = UpdateWhatsAppFlowAssetsInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	UpdateWhatsAppFlowAssetsInput_flowId = UpdateWhatsAppFlowAssetsInput.AddMember("flowId", _MetaFlowId)
-
-	UpdateWhatsAppFlowAssetsInput_flowJson = UpdateWhatsAppFlowAssetsInput.AddMember("flowJson", _MetaFlowJsonBlob)
-
-	UpdateWhatsAppFlowAssetsOutput_validationErrors = UpdateWhatsAppFlowAssetsOutput.AddMember("validationErrors", _ValidationErrorList)
-
-	UpdateWhatsAppFlowInput_id = UpdateWhatsAppFlowInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	UpdateWhatsAppFlowInput_flowId = UpdateWhatsAppFlowInput.AddMember("flowId", _MetaFlowId)
-
-	UpdateWhatsAppFlowInput_flowName = UpdateWhatsAppFlowInput.AddMember("flowName", _MetaFlowName)
-
-	UpdateWhatsAppFlowInput_categories = UpdateWhatsAppFlowInput.AddMember("categories", _MetaFlowCategoryList)
-
-	UpdateWhatsAppFlowInput_endpointUri = UpdateWhatsAppFlowInput.AddMember("endpointUri", _MetaFlowEndpointUri)
-
-	UpdateWhatsAppFlowInput_metaAppId = UpdateWhatsAppFlowInput.AddMember("metaAppId", _MetaFlowApplicationId)
-
-	UpdateWhatsAppMessageTemplateInput_id = UpdateWhatsAppMessageTemplateInput.AddMember("id", _LinkedWhatsAppBusinessAccountId)
-
-	UpdateWhatsAppMessageTemplateInput_metaTemplateId = UpdateWhatsAppMessageTemplateInput.AddMember("metaTemplateId", _MetaTemplateId)
-
-	UpdateWhatsAppMessageTemplateInput_templateName = UpdateWhatsAppMessageTemplateInput.AddMember("templateName", _MetaTemplateName)
-
-	UpdateWhatsAppMessageTemplateInput_templateLanguageCode = UpdateWhatsAppMessageTemplateInput.AddMember("templateLanguageCode", _MetaTemplateLanguage)
-
-	UpdateWhatsAppMessageTemplateInput_parameterFormat = UpdateWhatsAppMessageTemplateInput.AddMember("parameterFormat", _MetaParameterFormat)
-
-	UpdateWhatsAppMessageTemplateInput_templateCategory = UpdateWhatsAppMessageTemplateInput.AddMember("templateCategory", _MetaTemplateCategory)
-
-	UpdateWhatsAppMessageTemplateInput_templateComponents = UpdateWhatsAppMessageTemplateInput.AddMember("templateComponents", _MetaTemplateComponents)
-
-	UpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut = UpdateWhatsAppMessageTemplateInput.AddMember("ctaUrlLinkTrackingOptedOut", _MetaTemplateCtaLinkTrackingOptedOut)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t40 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t41 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 502}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t42 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t43 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t44 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t45 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t46 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t47 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "id"}}, DirectMask: 0x10}
+var t48 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "flowId"}}, DirectMask: 0x10}
+var t49 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "mediaId"}}, DirectMask: 0x10}
+var t50 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "originationPhoneNumberId"}}, DirectMask: 0x10}
+var t51 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "metaTemplateId"}}, DirectMask: 0x10}
+var t52 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "deleteAllTemplates"}}, DirectMask: 0x10}
+var t53 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "templateName"}}, DirectMask: 0x10}
+var t54 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "invalidate"}}, DirectMask: 0x10}
+var t55 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "templateLanguageCode"}}, DirectMask: 0x10}
+var t56 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t57 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t58 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "resourceArn"}}, DirectMask: 0x10}
+
+var mAccessDeniedByMetaException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedByMetaException_message}}
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var mDependencyException = smithy.SchemaMembers{List: []*smithy.Schema{&sDependencyException_message}}
+var m_Filter = smithy.SchemaMembers{List: []*smithy.Schema{&s_Filter_key, &s_Filter_value}}
+var m_Headers = smithy.SchemaMembers{List: []*smithy.Schema{&s_Headers_key, &s_Headers_value}}
+var mInternalServiceException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServiceException_message}}
+var mInvalidParametersException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidParametersException_message}}
+var mLibraryTemplateBodyInputs = smithy.SchemaMembers{List: []*smithy.Schema{&sLibraryTemplateBodyInputs_addContactNumber, &sLibraryTemplateBodyInputs_addLearnMoreLink, &sLibraryTemplateBodyInputs_addSecurityRecommendation, &sLibraryTemplateBodyInputs_addTrackPackageLink, &sLibraryTemplateBodyInputs_codeExpirationMinutes}}
+var mLibraryTemplateButtonInput = smithy.SchemaMembers{List: []*smithy.Schema{&sLibraryTemplateButtonInput_type, &sLibraryTemplateButtonInput_phoneNumber, &sLibraryTemplateButtonInput_url, &sLibraryTemplateButtonInput_otpType, &sLibraryTemplateButtonInput_zeroTapTermsAccepted, &sLibraryTemplateButtonInput_supportedApps}}
+var mLibraryTemplateButtonList = smithy.SchemaMembers{List: []*smithy.Schema{&sLibraryTemplateButtonList_type, &sLibraryTemplateButtonList_text, &sLibraryTemplateButtonList_phoneNumber, &sLibraryTemplateButtonList_url, &sLibraryTemplateButtonList_otpType, &sLibraryTemplateButtonList_zeroTapTermsAccepted, &sLibraryTemplateButtonList_supportedApps}}
+var mLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sLimitExceededException_message}}
+var m_LinkedAccountWithIncompleteSetup = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkedAccountWithIncompleteSetup_key, &s_LinkedAccountWithIncompleteSetup_value}}
+var mLinkedWhatsAppBusinessAccount = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkedWhatsAppBusinessAccount_arn, &sLinkedWhatsAppBusinessAccount_id, &sLinkedWhatsAppBusinessAccount_wabaId, &sLinkedWhatsAppBusinessAccount_registrationStatus, &sLinkedWhatsAppBusinessAccount_linkDate, &sLinkedWhatsAppBusinessAccount_wabaName, &sLinkedWhatsAppBusinessAccount_eventDestinations, &sLinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus, &sLinkedWhatsAppBusinessAccount_directSendEnforcementStatus, &sLinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt, &sLinkedWhatsAppBusinessAccount_datasetId, &sLinkedWhatsAppBusinessAccount_phoneNumbers}, Seed: 3, Slots: []uint16{
+	9, 1, 0, 0, 0, 0, 0, 10, 11, 5, 0, 0, 0, 0, 0, 8, 0, 0, 4, 6, 2, 7, 0, 0,
+	0, 0, 0, 0, 12, 0, 0, 3,
+}}
+var mLinkedWhatsAppBusinessAccountIdMetaData = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkedWhatsAppBusinessAccountIdMetaData_accountName, &sLinkedWhatsAppBusinessAccountIdMetaData_registrationStatus, &sLinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers, &sLinkedWhatsAppBusinessAccountIdMetaData_wabaId}}
+var mLinkedWhatsAppBusinessAccountSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLinkedWhatsAppBusinessAccountSummary_arn, &sLinkedWhatsAppBusinessAccountSummary_id, &sLinkedWhatsAppBusinessAccountSummary_wabaId, &sLinkedWhatsAppBusinessAccountSummary_registrationStatus, &sLinkedWhatsAppBusinessAccountSummary_linkDate, &sLinkedWhatsAppBusinessAccountSummary_wabaName, &sLinkedWhatsAppBusinessAccountSummary_eventDestinations, &sLinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus, &sLinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus, &sLinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt, &sLinkedWhatsAppBusinessAccountSummary_datasetId}, Seed: 3, Slots: []uint16{
+	9, 1, 0, 0, 0, 0, 0, 10, 11, 5, 0, 0, 0, 0, 0, 8, 0, 0, 4, 6, 2, 7, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 3,
+}}
+var m_LinkedWhatsAppBusinessAccountSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_LinkedWhatsAppBusinessAccountSummaryList_member}}
+var mMetaFlowApplicationInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowApplicationInfo_link, &sMetaFlowApplicationInfo_name, &sMetaFlowApplicationInfo_id}}
+var mMetaFlowAsset = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowAsset_name, &sMetaFlowAsset_assetType, &sMetaFlowAsset_downloadUrl}}
+var m_MetaFlowAssetList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaFlowAssetList_member}}
+var mMetaFlowCategory = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowCategory_SIGN_UP, &sMetaFlowCategory_SIGN_IN, &sMetaFlowCategory_APPOINTMENT_BOOKING, &sMetaFlowCategory_LEAD_GENERATION, &sMetaFlowCategory_SHOPPING, &sMetaFlowCategory_CONTACT_US, &sMetaFlowCategory_CUSTOMER_SUPPORT, &sMetaFlowCategory_SURVEY, &sMetaFlowCategory_OTHER}, Seed: 6, Slots: []uint16{
+	0, 7, 2, 0, 0, 0, 0, 5, 0, 0, 0, 3, 0, 9, 0, 1, 0, 0, 4, 0, 0, 0, 6, 0,
+	0, 8, 0, 0, 0, 0, 0, 0,
+}}
+var m_MetaFlowCategoryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaFlowCategoryList_member}}
+var mMetaFlowHealthEntity = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowHealthEntity_entityType, &sMetaFlowHealthEntity_id, &sMetaFlowHealthEntity_canSendMessage}}
+var m_MetaFlowHealthEntityList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaFlowHealthEntityList_member}}
+var mMetaFlowHealthStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowHealthStatus_canSendMessage, &sMetaFlowHealthStatus_entities}}
+var mMetaFlowPreviewInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowPreviewInfo_previewUrl, &sMetaFlowPreviewInfo_expiresAt}}
+var mMetaFlowSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowSummary_flowId, &sMetaFlowSummary_flowName, &sMetaFlowSummary_flowStatus, &sMetaFlowSummary_flowCategories, &sMetaFlowSummary_validationErrors}}
+var m_MetaFlowSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaFlowSummaryList_member}}
+var mMetaFlowWhatsAppBusinessAccountInfo = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaFlowWhatsAppBusinessAccountInfo_id, &sMetaFlowWhatsAppBusinessAccountInfo_name, &sMetaFlowWhatsAppBusinessAccountInfo_currency, &sMetaFlowWhatsAppBusinessAccountInfo_timezoneId, &sMetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace}}
+var m_MetaIndustries = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaIndustries_member}}
+var mMetaLibraryTemplate = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaLibraryTemplate_templateName, &sMetaLibraryTemplate_libraryTemplateName, &sMetaLibraryTemplate_templateCategory, &sMetaLibraryTemplate_templateLanguage, &sMetaLibraryTemplate_libraryTemplateButtonInputs, &sMetaLibraryTemplate_libraryTemplateBodyInputs}}
+var m_MetaLibraryTemplateButtonInputs = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaLibraryTemplateButtonInputs_member}}
+var m_MetaLibraryTemplateButtonList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaLibraryTemplateButtonList_member}}
+var mMetaLibraryTemplateDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sMetaLibraryTemplateDefinition_templateName, &sMetaLibraryTemplateDefinition_templateLanguage, &sMetaLibraryTemplateDefinition_templateCategory, &sMetaLibraryTemplateDefinition_templateTopic, &sMetaLibraryTemplateDefinition_templateUseCase, &sMetaLibraryTemplateDefinition_templateIndustry, &sMetaLibraryTemplateDefinition_templateHeader, &sMetaLibraryTemplateDefinition_templateBody, &sMetaLibraryTemplateDefinition_templateButtons, &sMetaLibraryTemplateDefinition_templateId, &sMetaLibraryTemplateDefinition_templateBodyExampleParams}, Seed: 1, Slots: []uint16{
+	0, 0, 4, 2, 0, 8, 0, 0, 0, 0, 0, 0, 5, 3, 6, 1, 0, 0, 0, 0, 0, 0, 7, 0,
+	0, 0, 0, 10, 0, 0, 11, 9,
+}}
+var m_MetaLibraryTemplatesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaLibraryTemplatesList_member}}
+var m_MetaTemplateBodyExampleParams = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaTemplateBodyExampleParams_member}}
+var m_MetaUrlWithSuffixExample = smithy.SchemaMembers{List: []*smithy.Schema{&s_MetaUrlWithSuffixExample_key, &s_MetaUrlWithSuffixExample_value}}
+var mRegistrationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sRegistrationStatus_COMPLETE, &sRegistrationStatus_INCOMPLETE}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mS3File = smithy.SchemaMembers{List: []*smithy.Schema{&sS3File_bucketName, &sS3File_key}}
+var mS3PresignedUrl = smithy.SchemaMembers{List: []*smithy.Schema{&sS3PresignedUrl_url, &sS3PresignedUrl_headers}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_SupportedApp = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedApp_key, &s_SupportedApp_value}}
+var m_SupportedApps = smithy.SchemaMembers{List: []*smithy.Schema{&s_SupportedApps_member}}
+var mTag = smithy.SchemaMembers{List: []*smithy.Schema{&sTag_key, &sTag_value}}
+var m_TagList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagList_member}}
+var mTemplateSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sTemplateSummary_templateName, &sTemplateSummary_metaTemplateId, &sTemplateSummary_templateStatus, &sTemplateSummary_templateQualityScore, &sTemplateSummary_templateLanguage, &sTemplateSummary_templateCategory, &sTemplateSummary_templateSource, &sTemplateSummary_correctCategory}}
+var m_TemplateSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TemplateSummaryList_member}}
+var mThrottledRequestException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottledRequestException_message}}
+var m_ValidationErrorList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationErrorList_member}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mWabaPhoneNumberSetupFinalization = smithy.SchemaMembers{List: []*smithy.Schema{&sWabaPhoneNumberSetupFinalization_id, &sWabaPhoneNumberSetupFinalization_twoFactorPin, &sWabaPhoneNumberSetupFinalization_dataLocalizationRegion, &sWabaPhoneNumberSetupFinalization_tags}}
+var m_WabaPhoneNumberSetupFinalizationList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WabaPhoneNumberSetupFinalizationList_member}}
+var mWabaSetupFinalization = smithy.SchemaMembers{List: []*smithy.Schema{&sWabaSetupFinalization_id, &sWabaSetupFinalization_eventDestinations, &sWabaSetupFinalization_tags}}
+var mWhatsAppBusinessAccountEventDestination = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppBusinessAccountEventDestination_eventDestinationArn, &sWhatsAppBusinessAccountEventDestination_roleArn}}
+var m_WhatsAppBusinessAccountEventDestinations = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatsAppBusinessAccountEventDestinations_member}}
+var mWhatsAppCallHours = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppCallHours_enabled, &sWhatsAppCallHours_timezone, &sWhatsAppCallHours_weeklyOperatingHours, &sWhatsAppCallHours_holidaySchedule}}
+var mWhatsAppCallPermission = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppCallPermission_status, &sWhatsAppCallPermission_expirationTime}}
+var mWhatsAppCallPermissionAction = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppCallPermissionAction_actionName, &sWhatsAppCallPermissionAction_canPerformAction, &sWhatsAppCallPermissionAction_limits}}
+var m_WhatsAppCallPermissionActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatsAppCallPermissionActionList_member}}
+var mWhatsAppCallPermissionLimit = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppCallPermissionLimit_timePeriod, &sWhatsAppCallPermissionLimit_maxAllowed, &sWhatsAppCallPermissionLimit_currentUsage, &sWhatsAppCallPermissionLimit_limitExpirationTime}}
+var m_WhatsAppCallPermissionLimitList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatsAppCallPermissionLimitList_member}}
+var mWhatsAppCallSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppCallSettings_callEnabled, &sWhatsAppCallSettings_callHours, &sWhatsAppCallSettings_callIconVisibility, &sWhatsAppCallSettings_callbackPermissionStatus}}
+var mWhatsAppDayOfWeek = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppDayOfWeek_MONDAY, &sWhatsAppDayOfWeek_TUESDAY, &sWhatsAppDayOfWeek_WEDNESDAY, &sWhatsAppDayOfWeek_THURSDAY, &sWhatsAppDayOfWeek_FRIDAY, &sWhatsAppDayOfWeek_SATURDAY, &sWhatsAppDayOfWeek_SUNDAY}}
+var mWhatsAppHolidayScheduleEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppHolidayScheduleEntry_date, &sWhatsAppHolidayScheduleEntry_startTime, &sWhatsAppHolidayScheduleEntry_endTime}}
+var m_WhatsAppHolidayScheduleList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatsAppHolidayScheduleList_member}}
+var mWhatsAppPhoneNumberDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppPhoneNumberDetail_arn, &sWhatsAppPhoneNumberDetail_phoneNumber, &sWhatsAppPhoneNumberDetail_phoneNumberId, &sWhatsAppPhoneNumberDetail_metaPhoneNumberId, &sWhatsAppPhoneNumberDetail_displayPhoneNumberName, &sWhatsAppPhoneNumberDetail_displayPhoneNumber, &sWhatsAppPhoneNumberDetail_qualityRating, &sWhatsAppPhoneNumberDetail_dataLocalizationRegion}}
+var m_WhatsAppPhoneNumberDetailList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatsAppPhoneNumberDetailList_member}}
+var mWhatsAppPhoneNumberSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppPhoneNumberSummary_arn, &sWhatsAppPhoneNumberSummary_phoneNumber, &sWhatsAppPhoneNumberSummary_phoneNumberId, &sWhatsAppPhoneNumberSummary_metaPhoneNumberId, &sWhatsAppPhoneNumberSummary_displayPhoneNumberName, &sWhatsAppPhoneNumberSummary_displayPhoneNumber, &sWhatsAppPhoneNumberSummary_qualityRating, &sWhatsAppPhoneNumberSummary_dataLocalizationRegion}}
+var m_WhatsAppPhoneNumberSummaryList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatsAppPhoneNumberSummaryList_member}}
+var mWhatsAppSetupFinalization = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppSetupFinalization_associateInProgressToken, &sWhatsAppSetupFinalization_phoneNumbers, &sWhatsAppSetupFinalization_phoneNumberParent, &sWhatsAppSetupFinalization_waba}}
+var mWhatsAppSignupCallback = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppSignupCallback_accessToken, &sWhatsAppSignupCallback_callbackUrl}}
+var mWhatsAppSignupCallbackResult = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppSignupCallbackResult_associateInProgressToken, &sWhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup}}
+var mWhatsAppTimeOfDay = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppTimeOfDay_hours, &sWhatsAppTimeOfDay_minutes}}
+var mWhatsAppWeeklyOperatingHoursEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sWhatsAppWeeklyOperatingHoursEntry_dayOfWeek, &sWhatsAppWeeklyOperatingHoursEntry_openTime, &sWhatsAppWeeklyOperatingHoursEntry_closeTime}}
+var m_WhatsAppWeeklyOperatingHoursList = smithy.SchemaMembers{List: []*smithy.Schema{&s_WhatsAppWeeklyOperatingHoursList_member}}
+var mAssociateWhatsAppBusinessAccountInput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateWhatsAppBusinessAccountInput_signupCallback, &sAssociateWhatsAppBusinessAccountInput_setupFinalization}}
+var mAssociateWhatsAppBusinessAccountOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sAssociateWhatsAppBusinessAccountOutput_signupCallbackResult, &sAssociateWhatsAppBusinessAccountOutput_statusCode, &sAssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId}}
+var mCreateWhatsAppDatasetInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppDatasetInput_id}}
+var mCreateWhatsAppDatasetOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppDatasetOutput_datasetId}}
+var mCreateWhatsAppFlowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppFlowInput_id, &sCreateWhatsAppFlowInput_flowName, &sCreateWhatsAppFlowInput_categories, &sCreateWhatsAppFlowInput_flowJson, &sCreateWhatsAppFlowInput_publish, &sCreateWhatsAppFlowInput_cloneFlowId, &sCreateWhatsAppFlowInput_endpointUri}}
+var mCreateWhatsAppFlowOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppFlowOutput_flowId, &sCreateWhatsAppFlowOutput_validationErrors}}
+var mCreateWhatsAppMessageTemplateFromLibraryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate, &sCreateWhatsAppMessageTemplateFromLibraryInput_id}}
+var mCreateWhatsAppMessageTemplateFromLibraryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId, &sCreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus, &sCreateWhatsAppMessageTemplateFromLibraryOutput_category}}
+var mCreateWhatsAppMessageTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppMessageTemplateInput_templateDefinition, &sCreateWhatsAppMessageTemplateInput_id}}
+var mCreateWhatsAppMessageTemplateMediaInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppMessageTemplateMediaInput_id, &sCreateWhatsAppMessageTemplateMediaInput_sourceS3File}}
+var mCreateWhatsAppMessageTemplateMediaOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle}}
+var mCreateWhatsAppMessageTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateWhatsAppMessageTemplateOutput_metaTemplateId, &sCreateWhatsAppMessageTemplateOutput_templateStatus, &sCreateWhatsAppMessageTemplateOutput_category}}
+var mDeleteWhatsAppFlowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWhatsAppFlowInput_id, &sDeleteWhatsAppFlowInput_flowId}}
+var mDeleteWhatsAppMessageMediaInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWhatsAppMessageMediaInput_mediaId, &sDeleteWhatsAppMessageMediaInput_originationPhoneNumberId}}
+var mDeleteWhatsAppMessageMediaOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWhatsAppMessageMediaOutput_success}}
+var mDeleteWhatsAppMessageTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteWhatsAppMessageTemplateInput_metaTemplateId, &sDeleteWhatsAppMessageTemplateInput_deleteAllLanguages, &sDeleteWhatsAppMessageTemplateInput_id, &sDeleteWhatsAppMessageTemplateInput_templateName}}
+var mDeprecateWhatsAppFlowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeprecateWhatsAppFlowInput_id, &sDeprecateWhatsAppFlowInput_flowId}}
+var mDisassociateWhatsAppBusinessAccountInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisassociateWhatsAppBusinessAccountInput_id}}
+var mGetLinkedWhatsAppBusinessAccountInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkedWhatsAppBusinessAccountInput_id}}
+var mGetLinkedWhatsAppBusinessAccountOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkedWhatsAppBusinessAccountOutput_account}}
+var mGetLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkedWhatsAppBusinessAccountPhoneNumberInput_id}}
+var mGetLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber, &sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId, &sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings}}
+var mGetWhatsAppBusinessPublicKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId}}
+var mGetWhatsAppBusinessPublicKeyOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppBusinessPublicKeyOutput_businessPublicKey, &sGetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus}}
+var mGetWhatsAppCallPermissionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppCallPermissionInput_originationPhoneNumberId, &sGetWhatsAppCallPermissionInput_destinationPhoneNumber, &sGetWhatsAppCallPermissionInput_endUserBsuid}}
+var mGetWhatsAppCallPermissionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppCallPermissionOutput_permission, &sGetWhatsAppCallPermissionOutput_actions}}
+var mGetWhatsAppFlowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppFlowInput_id, &sGetWhatsAppFlowInput_flowId}}
+var mGetWhatsAppFlowOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppFlowOutput_flowId, &sGetWhatsAppFlowOutput_flowName, &sGetWhatsAppFlowOutput_flowStatus, &sGetWhatsAppFlowOutput_categories, &sGetWhatsAppFlowOutput_validationErrors, &sGetWhatsAppFlowOutput_jsonVersion, &sGetWhatsAppFlowOutput_dataApiVersion, &sGetWhatsAppFlowOutput_endpointUri, &sGetWhatsAppFlowOutput_preview, &sGetWhatsAppFlowOutput_whatsAppBusinessAccount, &sGetWhatsAppFlowOutput_application, &sGetWhatsAppFlowOutput_healthStatus}, Seed: 18, Slots: []uint16{
+	8, 0, 5, 9, 0, 3, 11, 0, 0, 0, 0, 0, 1, 0, 0, 4, 7, 0, 6, 0, 0, 12, 0, 0,
+	0, 0, 0, 0, 0, 2, 0, 10,
+}}
+var mGetWhatsAppFlowPreviewInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppFlowPreviewInput_id, &sGetWhatsAppFlowPreviewInput_flowId, &sGetWhatsAppFlowPreviewInput_invalidate}}
+var mGetWhatsAppFlowPreviewOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppFlowPreviewOutput_flowId, &sGetWhatsAppFlowPreviewOutput_preview}}
+var mGetWhatsAppMessageMediaInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppMessageMediaInput_mediaId, &sGetWhatsAppMessageMediaInput_originationPhoneNumberId, &sGetWhatsAppMessageMediaInput_metadataOnly, &sGetWhatsAppMessageMediaInput_destinationS3PresignedUrl, &sGetWhatsAppMessageMediaInput_destinationS3File}}
+var mGetWhatsAppMessageMediaOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppMessageMediaOutput_mimeType, &sGetWhatsAppMessageMediaOutput_fileSize}}
+var mGetWhatsAppMessageTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppMessageTemplateInput_metaTemplateId, &sGetWhatsAppMessageTemplateInput_id, &sGetWhatsAppMessageTemplateInput_templateName, &sGetWhatsAppMessageTemplateInput_templateLanguageCode}}
+var mGetWhatsAppMessageTemplateOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetWhatsAppMessageTemplateOutput_template}}
+var mListLinkedWhatsAppBusinessAccountsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinkedWhatsAppBusinessAccountsInput_nextToken, &sListLinkedWhatsAppBusinessAccountsInput_maxResults}}
+var mListLinkedWhatsAppBusinessAccountsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts, &sListLinkedWhatsAppBusinessAccountsOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_statusCode, &sListTagsForResourceOutput_tags}}
+var mListWhatsAppFlowAssetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppFlowAssetsInput_id, &sListWhatsAppFlowAssetsInput_flowId, &sListWhatsAppFlowAssetsInput_nextToken, &sListWhatsAppFlowAssetsInput_maxResults}}
+var mListWhatsAppFlowAssetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppFlowAssetsOutput_flowAssets, &sListWhatsAppFlowAssetsOutput_nextToken}}
+var mListWhatsAppFlowsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppFlowsInput_id, &sListWhatsAppFlowsInput_nextToken, &sListWhatsAppFlowsInput_maxResults}}
+var mListWhatsAppFlowsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppFlowsOutput_flows, &sListWhatsAppFlowsOutput_nextToken}}
+var mListWhatsAppMessageTemplatesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppMessageTemplatesInput_id, &sListWhatsAppMessageTemplatesInput_nextToken, &sListWhatsAppMessageTemplatesInput_maxResults}}
+var mListWhatsAppMessageTemplatesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppMessageTemplatesOutput_templates, &sListWhatsAppMessageTemplatesOutput_nextToken}}
+var mListWhatsAppTemplateLibraryInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppTemplateLibraryInput_nextToken, &sListWhatsAppTemplateLibraryInput_maxResults, &sListWhatsAppTemplateLibraryInput_id, &sListWhatsAppTemplateLibraryInput_filters}}
+var mListWhatsAppTemplateLibraryOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListWhatsAppTemplateLibraryOutput_metaLibraryTemplates, &sListWhatsAppTemplateLibraryOutput_nextToken}}
+var mPostWhatsAppMessageMediaInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPostWhatsAppMessageMediaInput_originationPhoneNumberId, &sPostWhatsAppMessageMediaInput_sourceS3PresignedUrl, &sPostWhatsAppMessageMediaInput_sourceS3File}}
+var mPostWhatsAppMessageMediaOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sPostWhatsAppMessageMediaOutput_mediaId}}
+var mPublishWhatsAppFlowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPublishWhatsAppFlowInput_id, &sPublishWhatsAppFlowInput_flowId}}
+var mPutWhatsAppBusinessAccountEventDestinationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutWhatsAppBusinessAccountEventDestinationsInput_id, &sPutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations}}
+var mPutWhatsAppBusinessPublicKeyInput = smithy.SchemaMembers{List: []*smithy.Schema{&sPutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId, &sPutWhatsAppBusinessPublicKeyInput_businessPublicKey, &sPutWhatsAppBusinessPublicKeyInput_kmsKeyArn}}
+var mSendWhatsAppCallEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendWhatsAppCallEventInput_originationPhoneNumberId, &sSendWhatsAppCallEventInput_metaApiVersion, &sSendWhatsAppCallEventInput_callEvent}}
+var mSendWhatsAppCallEventOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendWhatsAppCallEventOutput_callId}}
+var mSendWhatsAppConversionEventInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendWhatsAppConversionEventInput_id, &sSendWhatsAppConversionEventInput_datasetId, &sSendWhatsAppConversionEventInput_eventData}}
+var mSendWhatsAppConversionEventOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendWhatsAppConversionEventOutput_requestId}}
+var mSendWhatsAppMessageInput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendWhatsAppMessageInput_originationPhoneNumberId, &sSendWhatsAppMessageInput_message, &sSendWhatsAppMessageInput_metaApiVersion}}
+var mSendWhatsAppMessageOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sSendWhatsAppMessageOutput_messageId}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mTagResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceOutput_statusCode}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUntagResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceOutput_statusCode}}
+var mUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id, &sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings}}
+var mUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId}}
+var mUpdateWhatsAppFlowAssetsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWhatsAppFlowAssetsInput_id, &sUpdateWhatsAppFlowAssetsInput_flowId, &sUpdateWhatsAppFlowAssetsInput_flowJson}}
+var mUpdateWhatsAppFlowAssetsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWhatsAppFlowAssetsOutput_validationErrors}}
+var mUpdateWhatsAppFlowInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWhatsAppFlowInput_id, &sUpdateWhatsAppFlowInput_flowId, &sUpdateWhatsAppFlowInput_flowName, &sUpdateWhatsAppFlowInput_categories, &sUpdateWhatsAppFlowInput_endpointUri, &sUpdateWhatsAppFlowInput_metaAppId}}
+var mUpdateWhatsAppMessageTemplateInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateWhatsAppMessageTemplateInput_id, &sUpdateWhatsAppMessageTemplateInput_metaTemplateId, &sUpdateWhatsAppMessageTemplateInput_templateName, &sUpdateWhatsAppMessageTemplateInput_templateLanguageCode, &sUpdateWhatsAppMessageTemplateInput_parameterFormat, &sUpdateWhatsAppMessageTemplateInput_templateCategory, &sUpdateWhatsAppMessageTemplateInput_templateComponents, &sUpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut}}
+
+var sAssociateWhatsAppBusinessAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateWhatsAppBusinessAccount, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCreateWhatsAppDataset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppDataset, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateWhatsAppFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppFlow, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateWhatsAppMessageTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplate, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sCreateWhatsAppMessageTemplateFromLibrary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateFromLibrary, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sCreateWhatsAppMessageTemplateMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateMedia, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sDeleteWhatsAppFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppFlow, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sDeleteWhatsAppMessageMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppMessageMedia, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sDeleteWhatsAppMessageTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppMessageTemplate, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sDeprecateWhatsAppFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateWhatsAppFlow, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sDisassociateWhatsAppBusinessAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateWhatsAppBusinessAccount, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetLinkedWhatsAppBusinessAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkedWhatsAppBusinessAccount, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetLinkedWhatsAppBusinessAccountPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkedWhatsAppBusinessAccountPhoneNumber, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sGetWhatsAppBusinessPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppBusinessPublicKey, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sGetWhatsAppCallPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppCallPermission, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sGetWhatsAppFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppFlow, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sGetWhatsAppFlowPreview = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppFlowPreview, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sGetWhatsAppMessageMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppMessageMedia, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sGetWhatsAppMessageTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppMessageTemplate, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListLinkedWhatsAppBusinessAccounts = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinkedWhatsAppBusinessAccounts, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sListWhatsAppFlowAssets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppFlowAssets, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sListWhatsAppFlows = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppFlows, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sListWhatsAppMessageTemplates = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppMessageTemplates, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sListWhatsAppTemplateLibrary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppTemplateLibrary, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sPostWhatsAppMessageMedia = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostWhatsAppMessageMedia, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sPublishWhatsAppFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishWhatsAppFlow, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sPutWhatsAppBusinessAccountEventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWhatsAppBusinessAccountEventDestinations, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var sPutWhatsAppBusinessPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWhatsAppBusinessPublicKey, Traits: &t28, Type: smithy.ShapeTypeOperation})
+var sSendWhatsAppCallEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppCallEvent, Traits: &t29, Type: smithy.ShapeTypeOperation})
+var sSendWhatsAppConversionEvent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppConversionEvent, Traits: &t30, Type: smithy.ShapeTypeOperation})
+var sSendWhatsAppMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppMessage, Traits: &t31, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t32, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t33, Type: smithy.ShapeTypeOperation})
+var sUpdateLinkedWhatsAppBusinessAccountPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkedWhatsAppBusinessAccountPhoneNumber, Traits: &t34, Type: smithy.ShapeTypeOperation})
+var sUpdateWhatsAppFlow = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppFlow, Traits: &t35, Type: smithy.ShapeTypeOperation})
+var sUpdateWhatsAppFlowAssets = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppFlowAssets, Traits: &t36, Type: smithy.ShapeTypeOperation})
+var sUpdateWhatsAppMessageTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppMessageTemplate, Traits: &t37, Type: smithy.ShapeTypeOperation})
+var s_SocialMessaging = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SocialMessaging, Type: smithy.ShapeTypeService})
+var sAccessDeniedByMetaException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedByMetaException, Members: &mAccessDeniedByMetaException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t38, Type: smithy.ShapeTypeStructure})
+var s_AddContactNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddContactNumber, Type: smithy.ShapeTypeBoolean})
+var s_AddLearnMoreLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddLearnMoreLink, Type: smithy.ShapeTypeBoolean})
+var s_AddSecurityRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddSecurityRecommendation, Type: smithy.ShapeTypeBoolean})
+var s_AddTrackPackageLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AddTrackPackageLink, Type: smithy.ShapeTypeBoolean})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_AssociateInProgressToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AssociateInProgressToken, Traits: &t39, Type: smithy.ShapeTypeString})
+var s_BusinessPublicKeyPem = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessPublicKeyPem, Type: smithy.ShapeTypeString})
+var s_BusinessPublicKeySignatureStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BusinessPublicKeySignatureStatus, Type: smithy.ShapeTypeString})
+var s_ButtonType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ButtonType, Type: smithy.ShapeTypeString})
+var s_CodeExpirationMinutes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_CodeExpirationMinutes, Type: smithy.ShapeTypeInteger})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t40, Type: smithy.ShapeTypeStructure})
+var s_DeleteAllLanguages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DeleteAllLanguages, Type: smithy.ShapeTypeBoolean})
+var sDependencyException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDependencyException, Members: &mDependencyException, Traits: &t41, Type: smithy.ShapeTypeStructure})
+var s_DirectSendEnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectSendEnforcementStatus, Type: smithy.ShapeTypeString})
+var s_DirectSendEnforcementStatusExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DirectSendEnforcementStatusExpiresAt, Type: smithy.ShapeTypeTimestamp})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_EventDestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EventDestinationArn, Type: smithy.ShapeTypeString})
+var s_Filter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Filter, Members: &m_Filter, Type: smithy.ShapeTypeMap})
+var s_Headers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Headers, Members: &m_Headers, Type: smithy.ShapeTypeMap})
+var s_IanaTimezone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IanaTimezone, Type: smithy.ShapeTypeString})
+var sInternalServiceException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServiceException, Members: &mInternalServiceException, Traits: &t42, Type: smithy.ShapeTypeStructure})
+var sInvalidParametersException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidParametersException, Members: &mInvalidParametersException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var s_Iso8601Duration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Iso8601Duration, Type: smithy.ShapeTypeString})
+var s_IsoCountryCode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IsoCountryCode, Type: smithy.ShapeTypeString})
+var s_KmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sLibraryTemplateBodyInputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLibraryTemplateBodyInputs, Members: &mLibraryTemplateBodyInputs, Type: smithy.ShapeTypeStructure})
+var sLibraryTemplateButtonInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLibraryTemplateButtonInput, Members: &mLibraryTemplateButtonInput, Type: smithy.ShapeTypeStructure})
+var sLibraryTemplateButtonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLibraryTemplateButtonList, Members: &mLibraryTemplateButtonList, Type: smithy.ShapeTypeStructure})
+var sLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLimitExceededException, Members: &mLimitExceededException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var s_LinkedAccountWithIncompleteSetup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkedAccountWithIncompleteSetup, Members: &m_LinkedAccountWithIncompleteSetup, Type: smithy.ShapeTypeMap})
+var sLinkedWhatsAppBusinessAccount = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkedWhatsAppBusinessAccount, Members: &mLinkedWhatsAppBusinessAccount, Type: smithy.ShapeTypeStructure})
+var s_LinkedWhatsAppBusinessAccountArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkedWhatsAppBusinessAccountArn, Type: smithy.ShapeTypeString})
+var s_LinkedWhatsAppBusinessAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountIdMetaData = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkedWhatsAppBusinessAccountIdMetaData, Members: &mLinkedWhatsAppBusinessAccountIdMetaData, Type: smithy.ShapeTypeStructure})
+var sLinkedWhatsAppBusinessAccountSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLinkedWhatsAppBusinessAccountSummary, Members: &mLinkedWhatsAppBusinessAccountSummary, Type: smithy.ShapeTypeStructure})
+var s_LinkedWhatsAppBusinessAccountSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkedWhatsAppBusinessAccountSummaryList, Members: &m_LinkedWhatsAppBusinessAccountSummaryList, Type: smithy.ShapeTypeList})
+var s_LinkedWhatsAppPhoneNumberArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LinkedWhatsAppPhoneNumberArn, Type: smithy.ShapeTypeString})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_MetaFlowApplicationId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowApplicationId, Type: smithy.ShapeTypeString})
+var sMetaFlowApplicationInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowApplicationInfo, Members: &mMetaFlowApplicationInfo, Type: smithy.ShapeTypeStructure})
+var s_MetaFlowApplicationLink = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowApplicationLink, Type: smithy.ShapeTypeString})
+var s_MetaFlowApplicationName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowApplicationName, Type: smithy.ShapeTypeString})
+var sMetaFlowAsset = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowAsset, Members: &mMetaFlowAsset, Type: smithy.ShapeTypeStructure})
+var s_MetaFlowAssetDownloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowAssetDownloadUrl, Type: smithy.ShapeTypeString})
+var s_MetaFlowAssetList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowAssetList, Members: &m_MetaFlowAssetList, Type: smithy.ShapeTypeList})
+var s_MetaFlowAssetName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowAssetName, Type: smithy.ShapeTypeString})
+var s_MetaFlowAssetType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowAssetType, Type: smithy.ShapeTypeString})
+var sMetaFlowCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowCategory, Members: &mMetaFlowCategory, Type: smithy.ShapeTypeEnum})
+var s_MetaFlowCategoryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowCategoryList, Members: &m_MetaFlowCategoryList, Type: smithy.ShapeTypeList})
+var s_MetaFlowDataApiVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowDataApiVersion, Type: smithy.ShapeTypeString})
+var s_MetaFlowEndpointUri = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowEndpointUri, Type: smithy.ShapeTypeString})
+var sMetaFlowHealthEntity = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowHealthEntity, Members: &mMetaFlowHealthEntity, Type: smithy.ShapeTypeStructure})
+var s_MetaFlowHealthEntityList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowHealthEntityList, Members: &m_MetaFlowHealthEntityList, Type: smithy.ShapeTypeList})
+var s_MetaFlowHealthEntityType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowHealthEntityType, Type: smithy.ShapeTypeString})
+var sMetaFlowHealthStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowHealthStatus, Members: &mMetaFlowHealthStatus, Type: smithy.ShapeTypeStructure})
+var s_MetaFlowHealthStatusAvailability = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowHealthStatusAvailability, Type: smithy.ShapeTypeString})
+var s_MetaFlowId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var s_MetaFlowJsonBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowJsonBlob, Type: smithy.ShapeTypeBlob})
+var s_MetaFlowJsonVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowJsonVersion, Type: smithy.ShapeTypeString})
+var s_MetaFlowName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowName, Type: smithy.ShapeTypeString})
+var sMetaFlowPreviewInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowPreviewInfo, Members: &mMetaFlowPreviewInfo, Type: smithy.ShapeTypeStructure})
+var s_MetaFlowPreviewUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowPreviewUrl, Type: smithy.ShapeTypeString})
+var s_MetaFlowStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowStatus, Type: smithy.ShapeTypeString})
+var sMetaFlowSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowSummary, Members: &mMetaFlowSummary, Type: smithy.ShapeTypeStructure})
+var s_MetaFlowSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowSummaryList, Members: &m_MetaFlowSummaryList, Type: smithy.ShapeTypeList})
+var s_MetaFlowTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowTimestamp, Type: smithy.ShapeTypeString})
+var s_MetaFlowValidationError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowValidationError, Type: smithy.ShapeTypeString})
+var s_MetaFlowWabaCurrency = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowWabaCurrency, Type: smithy.ShapeTypeString})
+var s_MetaFlowWabaTemplateNamespace = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowWabaTemplateNamespace, Type: smithy.ShapeTypeString})
+var s_MetaFlowWabaTimezoneId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaFlowWabaTimezoneId, Type: smithy.ShapeTypeString})
+var sMetaFlowWhatsAppBusinessAccountInfo = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaFlowWhatsAppBusinessAccountInfo, Members: &mMetaFlowWhatsAppBusinessAccountInfo, Type: smithy.ShapeTypeStructure})
+var s_MetaIndustries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaIndustries, Members: &m_MetaIndustries, Type: smithy.ShapeTypeList})
+var s_MetaIndustry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaIndustry, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaLibraryTemplate, Members: &mMetaLibraryTemplate, Type: smithy.ShapeTypeStructure})
+var s_MetaLibraryTemplateButtonInputs = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaLibraryTemplateButtonInputs, Members: &m_MetaLibraryTemplateButtonInputs, Type: smithy.ShapeTypeList})
+var s_MetaLibraryTemplateButtonList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaLibraryTemplateButtonList, Members: &m_MetaLibraryTemplateButtonList, Type: smithy.ShapeTypeList})
+var sMetaLibraryTemplateDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMetaLibraryTemplateDefinition, Members: &mMetaLibraryTemplateDefinition, Type: smithy.ShapeTypeStructure})
+var s_MetaLibraryTemplatesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaLibraryTemplatesList, Members: &m_MetaLibraryTemplatesList, Type: smithy.ShapeTypeList})
+var s_MetaParameterFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaParameterFormat, Type: smithy.ShapeTypeString})
+var s_MetaTemplate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplate, Type: smithy.ShapeTypeString})
+var s_MetaTemplateBody = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateBody, Type: smithy.ShapeTypeString})
+var s_MetaTemplateBodyExampleParams = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateBodyExampleParams, Members: &m_MetaTemplateBodyExampleParams, Type: smithy.ShapeTypeList})
+var s_MetaTemplateCategory = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var s_MetaTemplateComponents = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateComponents, Type: smithy.ShapeTypeBlob})
+var s_MetaTemplateCtaLinkTrackingOptedOut = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateCtaLinkTrackingOptedOut, Type: smithy.ShapeTypeBoolean})
+var s_MetaTemplateDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateDefinition, Type: smithy.ShapeTypeBlob})
+var s_MetaTemplateHeader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateHeader, Type: smithy.ShapeTypeString})
+var s_MetaTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateId, Type: smithy.ShapeTypeString})
+var s_MetaTemplateLanguage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateLanguage, Type: smithy.ShapeTypeString})
+var s_MetaTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateName, Type: smithy.ShapeTypeString})
+var s_MetaTemplateQualityScore = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateQualityScore, Type: smithy.ShapeTypeString})
+var s_MetaTemplateSource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateSource, Type: smithy.ShapeTypeString})
+var s_MetaTemplateStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateStatus, Type: smithy.ShapeTypeString})
+var s_MetaTemplateTopic = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateTopic, Type: smithy.ShapeTypeString})
+var s_MetaTemplateUseCase = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaTemplateUseCase, Type: smithy.ShapeTypeString})
+var s_MetaText = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaText, Type: smithy.ShapeTypeString})
+var s_MetaUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaUrl, Type: smithy.ShapeTypeString})
+var s_MetaUrlWithSuffixExample = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MetaUrlWithSuffixExample, Members: &m_MetaUrlWithSuffixExample, Type: smithy.ShapeTypeMap})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var s_OtpType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OtpType, Type: smithy.ShapeTypeString})
+var s_PhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PhoneNumber, Type: smithy.ShapeTypeString})
+var sRegistrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t44, Type: smithy.ShapeTypeStructure})
+var s_RoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var sS3File = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3File, Members: &mS3File, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var sS3PresignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iS3PresignedUrl, Members: &mS3PresignedUrl, Traits: &t39, Type: smithy.ShapeTypeStructure})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_SupportedApp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedApp, Members: &m_SupportedApp, Type: smithy.ShapeTypeMap})
+var s_SupportedApps = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SupportedApps, Members: &m_SupportedApps, Type: smithy.ShapeTypeList})
+var sTag = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var s_TagList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTemplateSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure})
+var s_TemplateSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList})
+var sThrottledRequestException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottledRequestException, Members: &mThrottledRequestException, Traits: &t45, Type: smithy.ShapeTypeStructure})
+var s_TwoFactorPin = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TwoFactorPin, Traits: &t39, Type: smithy.ShapeTypeString})
+var s_ValidationErrorList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationErrorList, Members: &m_ValidationErrorList, Type: smithy.ShapeTypeList})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t43, Type: smithy.ShapeTypeStructure})
+var sWabaPhoneNumberSetupFinalization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWabaPhoneNumberSetupFinalization, Members: &mWabaPhoneNumberSetupFinalization, Type: smithy.ShapeTypeStructure})
+var s_WabaPhoneNumberSetupFinalizationList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WabaPhoneNumberSetupFinalizationList, Members: &m_WabaPhoneNumberSetupFinalizationList, Type: smithy.ShapeTypeList})
+var sWabaSetupFinalization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWabaSetupFinalization, Members: &mWabaSetupFinalization, Type: smithy.ShapeTypeStructure})
+var sWhatsAppBusinessAccountEventDestination = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppBusinessAccountEventDestination, Members: &mWhatsAppBusinessAccountEventDestination, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppBusinessAccountEventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppBusinessAccountEventDestinations, Members: &m_WhatsAppBusinessAccountEventDestinations, Type: smithy.ShapeTypeList})
+var s_WhatsAppBusinessAccountId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var s_WhatsAppBusinessAccountLinkDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppBusinessAccountLinkDate, Type: smithy.ShapeTypeTimestamp})
+var s_WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, Type: smithy.ShapeTypeString})
+var s_WhatsAppBusinessAccountName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppBusinessAccountName, Type: smithy.ShapeTypeString})
+var s_WhatsAppBusinessScopedUserId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppBusinessScopedUserId, Traits: &t39, Type: smithy.ShapeTypeString})
+var s_WhatsAppCallbackPermissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppCallbackPermissionStatus, Type: smithy.ShapeTypeString})
+var s_WhatsAppCallEventBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppCallEventBlob, Traits: &t39, Type: smithy.ShapeTypeBlob})
+var sWhatsAppCallHours = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppCallHours, Members: &mWhatsAppCallHours, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppCallIconVisibility = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppCallIconVisibility, Type: smithy.ShapeTypeString})
+var sWhatsAppCallPermission = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppCallPermission, Members: &mWhatsAppCallPermission, Type: smithy.ShapeTypeStructure})
+var sWhatsAppCallPermissionAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppCallPermissionAction, Members: &mWhatsAppCallPermissionAction, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppCallPermissionActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppCallPermissionActionList, Members: &m_WhatsAppCallPermissionActionList, Type: smithy.ShapeTypeList})
+var s_WhatsAppCallPermissionActionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppCallPermissionActionName, Type: smithy.ShapeTypeString})
+var sWhatsAppCallPermissionLimit = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppCallPermissionLimit, Members: &mWhatsAppCallPermissionLimit, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppCallPermissionLimitList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppCallPermissionLimitList, Members: &m_WhatsAppCallPermissionLimitList, Type: smithy.ShapeTypeList})
+var s_WhatsAppCallPermissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppCallPermissionStatus, Type: smithy.ShapeTypeString})
+var sWhatsAppCallSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppCallSettings, Members: &mWhatsAppCallSettings, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppConversionEventBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppConversionEventBlob, Traits: &t39, Type: smithy.ShapeTypeBlob})
+var s_WhatsAppDatasetId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppDatasetId, Type: smithy.ShapeTypeString})
+var s_WhatsAppDate = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppDate, Type: smithy.ShapeTypeString})
+var sWhatsAppDayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppDayOfWeek, Members: &mWhatsAppDayOfWeek, Type: smithy.ShapeTypeEnum})
+var s_WhatsAppDestinationPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppDestinationPhoneNumber, Traits: &t39, Type: smithy.ShapeTypeString})
+var s_WhatsAppDisplayPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppDisplayPhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppHolidayScheduleEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppHolidayScheduleEntry, Members: &mWhatsAppHolidayScheduleEntry, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppHolidayScheduleList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppHolidayScheduleList, Members: &m_WhatsAppHolidayScheduleList, Type: smithy.ShapeTypeList})
+var s_WhatsAppMediaId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppMediaId, Type: smithy.ShapeTypeString})
+var s_WhatsAppMessageBlob = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppMessageBlob, Traits: &t39, Type: smithy.ShapeTypeBlob})
+var s_WhatsAppPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppPhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppPhoneNumberDetail, Members: &mWhatsAppPhoneNumberDetail, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppPhoneNumberDetailList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppPhoneNumberDetailList, Members: &m_WhatsAppPhoneNumberDetailList, Type: smithy.ShapeTypeList})
+var s_WhatsAppPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var s_WhatsAppPhoneNumberName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppPhoneNumberName, Type: smithy.ShapeTypeString})
+var s_WhatsAppPhoneNumberQualityRating = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppPhoneNumberQualityRating, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppPhoneNumberSummary, Members: &mWhatsAppPhoneNumberSummary, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppPhoneNumberSummaryList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppPhoneNumberSummaryList, Members: &m_WhatsAppPhoneNumberSummaryList, Type: smithy.ShapeTypeList})
+var sWhatsAppSetupFinalization = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppSetupFinalization, Members: &mWhatsAppSetupFinalization, Type: smithy.ShapeTypeStructure})
+var sWhatsAppSignupCallback = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppSignupCallback, Members: &mWhatsAppSignupCallback, Type: smithy.ShapeTypeStructure})
+var sWhatsAppSignupCallbackResult = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppSignupCallbackResult, Members: &mWhatsAppSignupCallbackResult, Type: smithy.ShapeTypeStructure})
+var sWhatsAppTimeOfDay = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppTimeOfDay, Members: &mWhatsAppTimeOfDay, Type: smithy.ShapeTypeStructure})
+var sWhatsAppWeeklyOperatingHoursEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iWhatsAppWeeklyOperatingHoursEntry, Members: &mWhatsAppWeeklyOperatingHoursEntry, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppWeeklyOperatingHoursList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WhatsAppWeeklyOperatingHoursList, Members: &m_WhatsAppWeeklyOperatingHoursList, Type: smithy.ShapeTypeList})
+var s_ZeroTapTermsAccepted = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ZeroTapTermsAccepted, Type: smithy.ShapeTypeBoolean})
+var sAssociateWhatsAppBusinessAccountInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateWhatsAppBusinessAccountInput, Members: &mAssociateWhatsAppBusinessAccountInput, Type: smithy.ShapeTypeStructure})
+var sAssociateWhatsAppBusinessAccountOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAssociateWhatsAppBusinessAccountOutput, Members: &mAssociateWhatsAppBusinessAccountOutput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppDatasetInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppDatasetInput, Members: &mCreateWhatsAppDatasetInput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppDatasetOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppDatasetOutput, Members: &mCreateWhatsAppDatasetOutput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppFlowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppFlowInput, Members: &mCreateWhatsAppFlowInput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppFlowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppFlowOutput, Members: &mCreateWhatsAppFlowOutput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateFromLibraryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateFromLibraryInput, Members: &mCreateWhatsAppMessageTemplateFromLibraryInput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateFromLibraryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateFromLibraryOutput, Members: &mCreateWhatsAppMessageTemplateFromLibraryOutput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateInput, Members: &mCreateWhatsAppMessageTemplateInput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateMediaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateMediaInput, Members: &mCreateWhatsAppMessageTemplateMediaInput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateMediaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateMediaOutput, Members: &mCreateWhatsAppMessageTemplateMediaOutput, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateWhatsAppMessageTemplateOutput, Members: &mCreateWhatsAppMessageTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteWhatsAppFlowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppFlowInput, Members: &mDeleteWhatsAppFlowInput, Type: smithy.ShapeTypeStructure})
+var sDeleteWhatsAppFlowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppFlowOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteWhatsAppMessageMediaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppMessageMediaInput, Members: &mDeleteWhatsAppMessageMediaInput, Type: smithy.ShapeTypeStructure})
+var sDeleteWhatsAppMessageMediaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppMessageMediaOutput, Members: &mDeleteWhatsAppMessageMediaOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteWhatsAppMessageTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppMessageTemplateInput, Members: &mDeleteWhatsAppMessageTemplateInput, Type: smithy.ShapeTypeStructure})
+var sDeleteWhatsAppMessageTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteWhatsAppMessageTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sDeprecateWhatsAppFlowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateWhatsAppFlowInput, Members: &mDeprecateWhatsAppFlowInput, Type: smithy.ShapeTypeStructure})
+var sDeprecateWhatsAppFlowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeprecateWhatsAppFlowOutput, Type: smithy.ShapeTypeStructure})
+var sDisassociateWhatsAppBusinessAccountInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateWhatsAppBusinessAccountInput, Members: &mDisassociateWhatsAppBusinessAccountInput, Type: smithy.ShapeTypeStructure})
+var sDisassociateWhatsAppBusinessAccountOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisassociateWhatsAppBusinessAccountOutput, Type: smithy.ShapeTypeStructure})
+var sGetLinkedWhatsAppBusinessAccountInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkedWhatsAppBusinessAccountInput, Members: &mGetLinkedWhatsAppBusinessAccountInput, Type: smithy.ShapeTypeStructure})
+var sGetLinkedWhatsAppBusinessAccountOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkedWhatsAppBusinessAccountOutput, Members: &mGetLinkedWhatsAppBusinessAccountOutput, Type: smithy.ShapeTypeStructure})
+var sGetLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkedWhatsAppBusinessAccountPhoneNumberInput, Members: &mGetLinkedWhatsAppBusinessAccountPhoneNumberInput, Type: smithy.ShapeTypeStructure})
+var sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLinkedWhatsAppBusinessAccountPhoneNumberOutput, Members: &mGetLinkedWhatsAppBusinessAccountPhoneNumberOutput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppBusinessPublicKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppBusinessPublicKeyInput, Members: &mGetWhatsAppBusinessPublicKeyInput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppBusinessPublicKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppBusinessPublicKeyOutput, Members: &mGetWhatsAppBusinessPublicKeyOutput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppCallPermissionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppCallPermissionInput, Members: &mGetWhatsAppCallPermissionInput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppCallPermissionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppCallPermissionOutput, Members: &mGetWhatsAppCallPermissionOutput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppFlowInput, Members: &mGetWhatsAppFlowInput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppFlowOutput, Members: &mGetWhatsAppFlowOutput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowPreviewInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppFlowPreviewInput, Members: &mGetWhatsAppFlowPreviewInput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowPreviewOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppFlowPreviewOutput, Members: &mGetWhatsAppFlowPreviewOutput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppMessageMediaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppMessageMediaInput, Members: &mGetWhatsAppMessageMediaInput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppMessageMediaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppMessageMediaOutput, Members: &mGetWhatsAppMessageMediaOutput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppMessageTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppMessageTemplateInput, Members: &mGetWhatsAppMessageTemplateInput, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppMessageTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetWhatsAppMessageTemplateOutput, Members: &mGetWhatsAppMessageTemplateOutput, Type: smithy.ShapeTypeStructure})
+var sListLinkedWhatsAppBusinessAccountsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinkedWhatsAppBusinessAccountsInput, Members: &mListLinkedWhatsAppBusinessAccountsInput, Type: smithy.ShapeTypeStructure})
+var sListLinkedWhatsAppBusinessAccountsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLinkedWhatsAppBusinessAccountsOutput, Members: &mListLinkedWhatsAppBusinessAccountsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppFlowAssetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppFlowAssetsInput, Members: &mListWhatsAppFlowAssetsInput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppFlowAssetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppFlowAssetsOutput, Members: &mListWhatsAppFlowAssetsOutput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppFlowsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppFlowsInput, Members: &mListWhatsAppFlowsInput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppFlowsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppFlowsOutput, Members: &mListWhatsAppFlowsOutput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppMessageTemplatesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppMessageTemplatesInput, Members: &mListWhatsAppMessageTemplatesInput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppMessageTemplatesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppMessageTemplatesOutput, Members: &mListWhatsAppMessageTemplatesOutput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppTemplateLibraryInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppTemplateLibraryInput, Members: &mListWhatsAppTemplateLibraryInput, Type: smithy.ShapeTypeStructure})
+var sListWhatsAppTemplateLibraryOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListWhatsAppTemplateLibraryOutput, Members: &mListWhatsAppTemplateLibraryOutput, Type: smithy.ShapeTypeStructure})
+var sPostWhatsAppMessageMediaInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostWhatsAppMessageMediaInput, Members: &mPostWhatsAppMessageMediaInput, Type: smithy.ShapeTypeStructure})
+var sPostWhatsAppMessageMediaOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPostWhatsAppMessageMediaOutput, Members: &mPostWhatsAppMessageMediaOutput, Type: smithy.ShapeTypeStructure})
+var sPublishWhatsAppFlowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishWhatsAppFlowInput, Members: &mPublishWhatsAppFlowInput, Type: smithy.ShapeTypeStructure})
+var sPublishWhatsAppFlowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPublishWhatsAppFlowOutput, Type: smithy.ShapeTypeStructure})
+var sPutWhatsAppBusinessAccountEventDestinationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWhatsAppBusinessAccountEventDestinationsInput, Members: &mPutWhatsAppBusinessAccountEventDestinationsInput, Type: smithy.ShapeTypeStructure})
+var sPutWhatsAppBusinessAccountEventDestinationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWhatsAppBusinessAccountEventDestinationsOutput, Type: smithy.ShapeTypeStructure})
+var sPutWhatsAppBusinessPublicKeyInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWhatsAppBusinessPublicKeyInput, Members: &mPutWhatsAppBusinessPublicKeyInput, Type: smithy.ShapeTypeStructure})
+var sPutWhatsAppBusinessPublicKeyOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPutWhatsAppBusinessPublicKeyOutput, Type: smithy.ShapeTypeStructure})
+var sSendWhatsAppCallEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppCallEventInput, Members: &mSendWhatsAppCallEventInput, Type: smithy.ShapeTypeStructure})
+var sSendWhatsAppCallEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppCallEventOutput, Members: &mSendWhatsAppCallEventOutput, Type: smithy.ShapeTypeStructure})
+var sSendWhatsAppConversionEventInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppConversionEventInput, Members: &mSendWhatsAppConversionEventInput, Type: smithy.ShapeTypeStructure})
+var sSendWhatsAppConversionEventOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppConversionEventOutput, Members: &mSendWhatsAppConversionEventOutput, Type: smithy.ShapeTypeStructure})
+var sSendWhatsAppMessageInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppMessageInput, Members: &mSendWhatsAppMessageInput, Type: smithy.ShapeTypeStructure})
+var sSendWhatsAppMessageOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iSendWhatsAppMessageOutput, Members: &mSendWhatsAppMessageOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Members: &mTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Members: &mUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput, Members: &mUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput, Members: &mUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateWhatsAppFlowAssetsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppFlowAssetsInput, Members: &mUpdateWhatsAppFlowAssetsInput, Type: smithy.ShapeTypeStructure})
+var sUpdateWhatsAppFlowAssetsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppFlowAssetsOutput, Members: &mUpdateWhatsAppFlowAssetsOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateWhatsAppFlowInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppFlowInput, Members: &mUpdateWhatsAppFlowInput, Type: smithy.ShapeTypeStructure})
+var sUpdateWhatsAppFlowOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppFlowOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateWhatsAppMessageTemplateInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppMessageTemplateInput, Members: &mUpdateWhatsAppMessageTemplateInput, Type: smithy.ShapeTypeStructure})
+var sUpdateWhatsAppMessageTemplateOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateWhatsAppMessageTemplateOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedByMetaException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sDependencyException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Filter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Filter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Headers_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Headers_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServiceException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidParametersException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sLibraryTemplateBodyInputs_addContactNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addContactNumber", ID: &i_AddContactNumber, Type: smithy.ShapeTypeBoolean})
+var sLibraryTemplateBodyInputs_addLearnMoreLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addLearnMoreLink", ID: &i_AddLearnMoreLink, Type: smithy.ShapeTypeBoolean})
+var sLibraryTemplateBodyInputs_addSecurityRecommendation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addSecurityRecommendation", ID: &i_AddSecurityRecommendation, Type: smithy.ShapeTypeBoolean})
+var sLibraryTemplateBodyInputs_addTrackPackageLink = smithy.NewStaticSchema(smithy.StaticSchema{Member: "addTrackPackageLink", ID: &i_AddTrackPackageLink, Type: smithy.ShapeTypeBoolean})
+var sLibraryTemplateBodyInputs_codeExpirationMinutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "codeExpirationMinutes", ID: &i_CodeExpirationMinutes, Type: smithy.ShapeTypeInteger})
+var sLibraryTemplateButtonInput_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ButtonType, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonInput_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_PhoneNumber, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonInput_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_MetaUrlWithSuffixExample, Members: &m_MetaUrlWithSuffixExample, Type: smithy.ShapeTypeMap})
+var sLibraryTemplateButtonInput_otpType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "otpType", ID: &i_OtpType, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonInput_zeroTapTermsAccepted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroTapTermsAccepted", ID: &i_ZeroTapTermsAccepted, Type: smithy.ShapeTypeBoolean})
+var sLibraryTemplateButtonInput_supportedApps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedApps", ID: &i_SupportedApps, Members: &m_SupportedApps, Type: smithy.ShapeTypeList})
+var sLibraryTemplateButtonList_type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "type", ID: &i_ButtonType, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonList_text = smithy.NewStaticSchema(smithy.StaticSchema{Member: "text", ID: &i_MetaText, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonList_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_PhoneNumber, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonList_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &i_MetaUrl, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonList_otpType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "otpType", ID: &i_OtpType, Type: smithy.ShapeTypeString})
+var sLibraryTemplateButtonList_zeroTapTermsAccepted = smithy.NewStaticSchema(smithy.StaticSchema{Member: "zeroTapTermsAccepted", ID: &i_ZeroTapTermsAccepted, Type: smithy.ShapeTypeBoolean})
+var sLibraryTemplateButtonList_supportedApps = smithy.NewStaticSchema(smithy.StaticSchema{Member: "supportedApps", ID: &i_SupportedApps, Members: &m_SupportedApps, Type: smithy.ShapeTypeList})
+var sLimitExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_LinkedAccountWithIncompleteSetup_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_WhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var s_LinkedAccountWithIncompleteSetup_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &iLinkedWhatsAppBusinessAccountIdMetaData, Members: &mLinkedWhatsAppBusinessAccountIdMetaData, Type: smithy.ShapeTypeStructure})
+var sLinkedWhatsAppBusinessAccount_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LinkedWhatsAppBusinessAccountArn, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccount_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccount_wabaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wabaId", ID: &i_WhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccount_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sLinkedWhatsAppBusinessAccount_linkDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkDate", ID: &i_WhatsAppBusinessAccountLinkDate, Type: smithy.ShapeTypeTimestamp})
+var sLinkedWhatsAppBusinessAccount_wabaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wabaName", ID: &i_WhatsAppBusinessAccountName, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccount_eventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDestinations", ID: &i_WhatsAppBusinessAccountEventDestinations, Members: &m_WhatsAppBusinessAccountEventDestinations, Type: smithy.ShapeTypeList})
+var sLinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marketingMessagesOnboardingStatus", ID: &i_WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccount_directSendEnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directSendEnforcementStatus", ID: &i_DirectSendEnforcementStatus, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directSendEnforcementStatusExpiresAt", ID: &i_DirectSendEnforcementStatusExpiresAt, Type: smithy.ShapeTypeTimestamp})
+var sLinkedWhatsAppBusinessAccount_datasetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetId", ID: &i_WhatsAppDatasetId, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccount_phoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumbers", ID: &i_WhatsAppPhoneNumberSummaryList, Members: &m_WhatsAppPhoneNumberSummaryList, Type: smithy.ShapeTypeList})
+var sLinkedWhatsAppBusinessAccountIdMetaData_accountName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accountName", ID: &i_WhatsAppBusinessAccountName, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountIdMetaData_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sLinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "unregisteredWhatsAppPhoneNumbers", ID: &i_WhatsAppPhoneNumberDetailList, Members: &m_WhatsAppPhoneNumberDetailList, Type: smithy.ShapeTypeList})
+var sLinkedWhatsAppBusinessAccountIdMetaData_wabaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wabaId", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LinkedWhatsAppBusinessAccountArn, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountSummary_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountSummary_wabaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wabaId", ID: &i_WhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountSummary_registrationStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "registrationStatus", ID: &iRegistrationStatus, Members: &mRegistrationStatus, Type: smithy.ShapeTypeEnum})
+var sLinkedWhatsAppBusinessAccountSummary_linkDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkDate", ID: &i_WhatsAppBusinessAccountLinkDate, Type: smithy.ShapeTypeTimestamp})
+var sLinkedWhatsAppBusinessAccountSummary_wabaName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "wabaName", ID: &i_WhatsAppBusinessAccountName, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountSummary_eventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDestinations", ID: &i_WhatsAppBusinessAccountEventDestinations, Members: &m_WhatsAppBusinessAccountEventDestinations, Type: smithy.ShapeTypeList})
+var sLinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "marketingMessagesOnboardingStatus", ID: &i_WhatsAppBusinessAccountMarketingMessagesOnboardingStatus, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directSendEnforcementStatus", ID: &i_DirectSendEnforcementStatus, Type: smithy.ShapeTypeString})
+var sLinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "directSendEnforcementStatusExpiresAt", ID: &i_DirectSendEnforcementStatusExpiresAt, Type: smithy.ShapeTypeTimestamp})
+var sLinkedWhatsAppBusinessAccountSummary_datasetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetId", ID: &i_WhatsAppDatasetId, Type: smithy.ShapeTypeString})
+var s_LinkedWhatsAppBusinessAccountSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLinkedWhatsAppBusinessAccountSummary, Members: &mLinkedWhatsAppBusinessAccountSummary, Type: smithy.ShapeTypeStructure})
+var sMetaFlowApplicationInfo_link = smithy.NewStaticSchema(smithy.StaticSchema{Member: "link", ID: &i_MetaFlowApplicationLink, Type: smithy.ShapeTypeString})
+var sMetaFlowApplicationInfo_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_MetaFlowApplicationName, Type: smithy.ShapeTypeString})
+var sMetaFlowApplicationInfo_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_MetaFlowApplicationId, Type: smithy.ShapeTypeString})
+var sMetaFlowAsset_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_MetaFlowAssetName, Type: smithy.ShapeTypeString})
+var sMetaFlowAsset_assetType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "assetType", ID: &i_MetaFlowAssetType, Type: smithy.ShapeTypeString})
+var sMetaFlowAsset_downloadUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "downloadUrl", ID: &i_MetaFlowAssetDownloadUrl, Type: smithy.ShapeTypeString})
+var s_MetaFlowAssetList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetaFlowAsset, Members: &mMetaFlowAsset, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_SIGN_UP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGN_UP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_SIGN_IN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SIGN_IN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_APPOINTMENT_BOOKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "APPOINTMENT_BOOKING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_LEAD_GENERATION = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LEAD_GENERATION", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_SHOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SHOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_CONTACT_US = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CONTACT_US", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_CUSTOMER_SUPPORT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CUSTOMER_SUPPORT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_SURVEY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SURVEY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sMetaFlowCategory_OTHER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "OTHER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_MetaFlowCategoryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetaFlowCategory, Members: &mMetaFlowCategory, Type: smithy.ShapeTypeEnum})
+var sMetaFlowHealthEntity_entityType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entityType", ID: &i_MetaFlowHealthEntityType, Type: smithy.ShapeTypeString})
+var sMetaFlowHealthEntity_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &pString, Type: smithy.ShapeTypeString})
+var sMetaFlowHealthEntity_canSendMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canSendMessage", ID: &i_MetaFlowHealthStatusAvailability, Type: smithy.ShapeTypeString})
+var s_MetaFlowHealthEntityList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetaFlowHealthEntity, Members: &mMetaFlowHealthEntity, Type: smithy.ShapeTypeStructure})
+var sMetaFlowHealthStatus_canSendMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canSendMessage", ID: &i_MetaFlowHealthStatusAvailability, Type: smithy.ShapeTypeString})
+var sMetaFlowHealthStatus_entities = smithy.NewStaticSchema(smithy.StaticSchema{Member: "entities", ID: &i_MetaFlowHealthEntityList, Members: &m_MetaFlowHealthEntityList, Type: smithy.ShapeTypeList})
+var sMetaFlowPreviewInfo_previewUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "previewUrl", ID: &i_MetaFlowPreviewUrl, Type: smithy.ShapeTypeString})
+var sMetaFlowPreviewInfo_expiresAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expiresAt", ID: &i_MetaFlowTimestamp, Type: smithy.ShapeTypeString})
+var sMetaFlowSummary_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sMetaFlowSummary_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_MetaFlowName, Type: smithy.ShapeTypeString})
+var sMetaFlowSummary_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &i_MetaFlowStatus, Type: smithy.ShapeTypeString})
+var sMetaFlowSummary_flowCategories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowCategories", ID: &i_MetaFlowCategoryList, Members: &m_MetaFlowCategoryList, Type: smithy.ShapeTypeList})
+var sMetaFlowSummary_validationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationErrors", ID: &i_ValidationErrorList, Members: &m_ValidationErrorList, Type: smithy.ShapeTypeList})
+var s_MetaFlowSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetaFlowSummary, Members: &mMetaFlowSummary, Type: smithy.ShapeTypeStructure})
+var sMetaFlowWhatsAppBusinessAccountInfo_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_WhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sMetaFlowWhatsAppBusinessAccountInfo_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_WhatsAppBusinessAccountName, Type: smithy.ShapeTypeString})
+var sMetaFlowWhatsAppBusinessAccountInfo_currency = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currency", ID: &i_MetaFlowWabaCurrency, Type: smithy.ShapeTypeString})
+var sMetaFlowWhatsAppBusinessAccountInfo_timezoneId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timezoneId", ID: &i_MetaFlowWabaTimezoneId, Type: smithy.ShapeTypeString})
+var sMetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageTemplateNamespace", ID: &i_MetaFlowWabaTemplateNamespace, Type: smithy.ShapeTypeString})
+var s_MetaIndustries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetaIndustry, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplate_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_MetaTemplateName, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplate_libraryTemplateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "libraryTemplateName", ID: &i_MetaTemplateName, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplate_templateCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateCategory", ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplate_templateLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLanguage", ID: &i_MetaTemplateLanguage, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplate_libraryTemplateButtonInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "libraryTemplateButtonInputs", ID: &i_MetaLibraryTemplateButtonInputs, Members: &m_MetaLibraryTemplateButtonInputs, Type: smithy.ShapeTypeList})
+var sMetaLibraryTemplate_libraryTemplateBodyInputs = smithy.NewStaticSchema(smithy.StaticSchema{Member: "libraryTemplateBodyInputs", ID: &iLibraryTemplateBodyInputs, Members: &mLibraryTemplateBodyInputs, Type: smithy.ShapeTypeStructure})
+var s_MetaLibraryTemplateButtonInputs_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLibraryTemplateButtonInput, Members: &mLibraryTemplateButtonInput, Type: smithy.ShapeTypeStructure})
+var s_MetaLibraryTemplateButtonList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLibraryTemplateButtonList, Members: &mLibraryTemplateButtonList, Type: smithy.ShapeTypeStructure})
+var sMetaLibraryTemplateDefinition_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_MetaTemplateName, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLanguage", ID: &i_MetaTemplateLanguage, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateCategory", ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateTopic = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateTopic", ID: &i_MetaTemplateTopic, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateUseCase = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateUseCase", ID: &i_MetaTemplateUseCase, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateIndustry = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateIndustry", ID: &i_MetaIndustries, Members: &m_MetaIndustries, Type: smithy.ShapeTypeList})
+var sMetaLibraryTemplateDefinition_templateHeader = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateHeader", ID: &i_MetaTemplateHeader, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateBody = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateBody", ID: &i_MetaTemplateBody, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateButtons = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateButtons", ID: &i_MetaLibraryTemplateButtonList, Members: &m_MetaLibraryTemplateButtonList, Type: smithy.ShapeTypeList})
+var sMetaLibraryTemplateDefinition_templateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateId", ID: &i_MetaTemplateId, Type: smithy.ShapeTypeString})
+var sMetaLibraryTemplateDefinition_templateBodyExampleParams = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateBodyExampleParams", ID: &i_MetaTemplateBodyExampleParams, Members: &m_MetaTemplateBodyExampleParams, Type: smithy.ShapeTypeList})
+var s_MetaLibraryTemplatesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iMetaLibraryTemplateDefinition, Members: &mMetaLibraryTemplateDefinition, Type: smithy.ShapeTypeStructure})
+var s_MetaTemplateBodyExampleParams_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_MetaUrlWithSuffixExample_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_MetaUrlWithSuffixExample_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sRegistrationStatus_COMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "COMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sRegistrationStatus_INCOMPLETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INCOMPLETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sS3File_bucketName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "bucketName", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3File_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3PresignedUrl_url = smithy.NewStaticSchema(smithy.StaticSchema{Member: "url", ID: &pString, Type: smithy.ShapeTypeString})
+var sS3PresignedUrl_headers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "headers", ID: &i_Headers, Members: &m_Headers, Type: smithy.ShapeTypeMap})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SupportedApp_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SupportedApp_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_SupportedApps_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_SupportedApp, Members: &m_SupportedApp, Type: smithy.ShapeTypeMap})
+var sTag_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sTag_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTag, Members: &mTag, Type: smithy.ShapeTypeStructure})
+var sTemplateSummary_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_MetaTemplateName, Type: smithy.ShapeTypeString})
+var sTemplateSummary_metaTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaTemplateId", ID: &i_MetaTemplateId, Type: smithy.ShapeTypeString})
+var sTemplateSummary_templateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateStatus", ID: &i_MetaTemplateStatus, Type: smithy.ShapeTypeString})
+var sTemplateSummary_templateQualityScore = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateQualityScore", ID: &i_MetaTemplateQualityScore, Type: smithy.ShapeTypeString})
+var sTemplateSummary_templateLanguage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLanguage", ID: &i_MetaTemplateLanguage, Type: smithy.ShapeTypeString})
+var sTemplateSummary_templateCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateCategory", ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var sTemplateSummary_templateSource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateSource", ID: &i_MetaTemplateSource, Type: smithy.ShapeTypeString})
+var sTemplateSummary_correctCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "correctCategory", ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var s_TemplateSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTemplateSummary, Members: &mTemplateSummary, Type: smithy.ShapeTypeStructure})
+var sThrottledRequestException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_ValidationErrorList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_MetaFlowValidationError, Type: smithy.ShapeTypeString})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sWabaPhoneNumberSetupFinalization_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_WhatsAppPhoneNumber, Type: smithy.ShapeTypeString})
+var sWabaPhoneNumberSetupFinalization_twoFactorPin = smithy.NewStaticSchema(smithy.StaticSchema{Member: "twoFactorPin", ID: &i_TwoFactorPin, Traits: &t46, Type: smithy.ShapeTypeString})
+var sWabaPhoneNumberSetupFinalization_dataLocalizationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLocalizationRegion", ID: &i_IsoCountryCode, Type: smithy.ShapeTypeString})
+var sWabaPhoneNumberSetupFinalization_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var s_WabaPhoneNumberSetupFinalizationList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWabaPhoneNumberSetupFinalization, Members: &mWabaPhoneNumberSetupFinalization, Type: smithy.ShapeTypeStructure})
+var sWabaSetupFinalization_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_WhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sWabaSetupFinalization_eventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDestinations", ID: &i_WhatsAppBusinessAccountEventDestinations, Members: &m_WhatsAppBusinessAccountEventDestinations, Type: smithy.ShapeTypeList})
+var sWabaSetupFinalization_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sWhatsAppBusinessAccountEventDestination_eventDestinationArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDestinationArn", ID: &i_EventDestinationArn, Type: smithy.ShapeTypeString})
+var sWhatsAppBusinessAccountEventDestination_roleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "roleArn", ID: &i_RoleArn, Type: smithy.ShapeTypeString})
+var s_WhatsAppBusinessAccountEventDestinations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatsAppBusinessAccountEventDestination, Members: &mWhatsAppBusinessAccountEventDestination, Type: smithy.ShapeTypeStructure})
+var sWhatsAppCallHours_enabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sWhatsAppCallHours_timezone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timezone", ID: &i_IanaTimezone, Type: smithy.ShapeTypeString})
+var sWhatsAppCallHours_weeklyOperatingHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "weeklyOperatingHours", ID: &i_WhatsAppWeeklyOperatingHoursList, Members: &m_WhatsAppWeeklyOperatingHoursList, Type: smithy.ShapeTypeList})
+var sWhatsAppCallHours_holidaySchedule = smithy.NewStaticSchema(smithy.StaticSchema{Member: "holidaySchedule", ID: &i_WhatsAppHolidayScheduleList, Members: &m_WhatsAppHolidayScheduleList, Type: smithy.ShapeTypeList})
+var sWhatsAppCallPermission_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_WhatsAppCallPermissionStatus, Type: smithy.ShapeTypeString})
+var sWhatsAppCallPermission_expirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "expirationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var sWhatsAppCallPermissionAction_actionName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actionName", ID: &i_WhatsAppCallPermissionActionName, Type: smithy.ShapeTypeString})
+var sWhatsAppCallPermissionAction_canPerformAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "canPerformAction", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sWhatsAppCallPermissionAction_limits = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limits", ID: &i_WhatsAppCallPermissionLimitList, Members: &m_WhatsAppCallPermissionLimitList, Type: smithy.ShapeTypeList})
+var s_WhatsAppCallPermissionActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatsAppCallPermissionAction, Members: &mWhatsAppCallPermissionAction, Type: smithy.ShapeTypeStructure})
+var sWhatsAppCallPermissionLimit_timePeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "timePeriod", ID: &i_Iso8601Duration, Type: smithy.ShapeTypeString})
+var sWhatsAppCallPermissionLimit_maxAllowed = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxAllowed", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sWhatsAppCallPermissionLimit_currentUsage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentUsage", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sWhatsAppCallPermissionLimit_limitExpirationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "limitExpirationTime", ID: &pTimestamp, Type: smithy.ShapeTypeTimestamp})
+var s_WhatsAppCallPermissionLimitList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatsAppCallPermissionLimit, Members: &mWhatsAppCallPermissionLimit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppCallSettings_callEnabled = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callEnabled", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sWhatsAppCallSettings_callHours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callHours", ID: &iWhatsAppCallHours, Members: &mWhatsAppCallHours, Type: smithy.ShapeTypeStructure})
+var sWhatsAppCallSettings_callIconVisibility = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callIconVisibility", ID: &i_WhatsAppCallIconVisibility, Type: smithy.ShapeTypeString})
+var sWhatsAppCallSettings_callbackPermissionStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callbackPermissionStatus", ID: &i_WhatsAppCallbackPermissionStatus, Type: smithy.ShapeTypeString})
+var sWhatsAppDayOfWeek_MONDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MONDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppDayOfWeek_TUESDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TUESDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppDayOfWeek_WEDNESDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WEDNESDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppDayOfWeek_THURSDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "THURSDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppDayOfWeek_FRIDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRIDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppDayOfWeek_SATURDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SATURDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppDayOfWeek_SUNDAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUNDAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sWhatsAppHolidayScheduleEntry_date = smithy.NewStaticSchema(smithy.StaticSchema{Member: "date", ID: &i_WhatsAppDate, Type: smithy.ShapeTypeString})
+var sWhatsAppHolidayScheduleEntry_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &iWhatsAppTimeOfDay, Members: &mWhatsAppTimeOfDay, Type: smithy.ShapeTypeStructure})
+var sWhatsAppHolidayScheduleEntry_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &iWhatsAppTimeOfDay, Members: &mWhatsAppTimeOfDay, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppHolidayScheduleList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatsAppHolidayScheduleEntry, Members: &mWhatsAppHolidayScheduleEntry, Type: smithy.ShapeTypeStructure})
+var sWhatsAppPhoneNumberDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LinkedWhatsAppPhoneNumberArn, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_PhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail_phoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail_metaPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaPhoneNumberId", ID: &i_WhatsAppPhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail_displayPhoneNumberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayPhoneNumberName", ID: &i_WhatsAppPhoneNumberName, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail_displayPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayPhoneNumber", ID: &i_WhatsAppDisplayPhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail_qualityRating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qualityRating", ID: &i_WhatsAppPhoneNumberQualityRating, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberDetail_dataLocalizationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLocalizationRegion", ID: &i_IsoCountryCode, Type: smithy.ShapeTypeString})
+var s_WhatsAppPhoneNumberDetailList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatsAppPhoneNumberDetail, Members: &mWhatsAppPhoneNumberDetail, Type: smithy.ShapeTypeStructure})
+var sWhatsAppPhoneNumberSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_LinkedWhatsAppPhoneNumberArn, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &i_PhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary_phoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary_metaPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaPhoneNumberId", ID: &i_WhatsAppPhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary_displayPhoneNumberName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayPhoneNumberName", ID: &i_WhatsAppPhoneNumberName, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary_displayPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "displayPhoneNumber", ID: &i_WhatsAppDisplayPhoneNumber, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary_qualityRating = smithy.NewStaticSchema(smithy.StaticSchema{Member: "qualityRating", ID: &i_WhatsAppPhoneNumberQualityRating, Type: smithy.ShapeTypeString})
+var sWhatsAppPhoneNumberSummary_dataLocalizationRegion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataLocalizationRegion", ID: &i_IsoCountryCode, Type: smithy.ShapeTypeString})
+var s_WhatsAppPhoneNumberSummaryList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatsAppPhoneNumberSummary, Members: &mWhatsAppPhoneNumberSummary, Type: smithy.ShapeTypeStructure})
+var sWhatsAppSetupFinalization_associateInProgressToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associateInProgressToken", ID: &i_AssociateInProgressToken, Traits: &t46, Type: smithy.ShapeTypeString})
+var sWhatsAppSetupFinalization_phoneNumbers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumbers", ID: &i_WabaPhoneNumberSetupFinalizationList, Members: &m_WabaPhoneNumberSetupFinalizationList, Type: smithy.ShapeTypeList})
+var sWhatsAppSetupFinalization_phoneNumberParent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumberParent", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sWhatsAppSetupFinalization_waba = smithy.NewStaticSchema(smithy.StaticSchema{Member: "waba", ID: &iWabaSetupFinalization, Members: &mWabaSetupFinalization, Type: smithy.ShapeTypeStructure})
+var sWhatsAppSignupCallback_accessToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "accessToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sWhatsAppSignupCallback_callbackUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callbackUrl", ID: &pString, Type: smithy.ShapeTypeString})
+var sWhatsAppSignupCallbackResult_associateInProgressToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "associateInProgressToken", ID: &i_AssociateInProgressToken, Traits: &t46, Type: smithy.ShapeTypeString})
+var sWhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkedAccountsWithIncompleteSetup", ID: &i_LinkedAccountWithIncompleteSetup, Members: &m_LinkedAccountWithIncompleteSetup, Type: smithy.ShapeTypeMap})
+var sWhatsAppTimeOfDay_hours = smithy.NewStaticSchema(smithy.StaticSchema{Member: "hours", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sWhatsAppTimeOfDay_minutes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "minutes", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sWhatsAppWeeklyOperatingHoursEntry_dayOfWeek = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dayOfWeek", ID: &iWhatsAppDayOfWeek, Members: &mWhatsAppDayOfWeek, Type: smithy.ShapeTypeEnum})
+var sWhatsAppWeeklyOperatingHoursEntry_openTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "openTime", ID: &iWhatsAppTimeOfDay, Members: &mWhatsAppTimeOfDay, Type: smithy.ShapeTypeStructure})
+var sWhatsAppWeeklyOperatingHoursEntry_closeTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "closeTime", ID: &iWhatsAppTimeOfDay, Members: &mWhatsAppTimeOfDay, Type: smithy.ShapeTypeStructure})
+var s_WhatsAppWeeklyOperatingHoursList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iWhatsAppWeeklyOperatingHoursEntry, Members: &mWhatsAppWeeklyOperatingHoursEntry, Type: smithy.ShapeTypeStructure})
+var sAssociateWhatsAppBusinessAccountInput_signupCallback = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signupCallback", ID: &iWhatsAppSignupCallback, Members: &mWhatsAppSignupCallback, Type: smithy.ShapeTypeStructure})
+var sAssociateWhatsAppBusinessAccountInput_setupFinalization = smithy.NewStaticSchema(smithy.StaticSchema{Member: "setupFinalization", ID: &iWhatsAppSetupFinalization, Members: &mWhatsAppSetupFinalization, Type: smithy.ShapeTypeStructure})
+var sAssociateWhatsAppBusinessAccountOutput_signupCallbackResult = smithy.NewStaticSchema(smithy.StaticSchema{Member: "signupCallbackResult", ID: &iWhatsAppSignupCallbackResult, Members: &mWhatsAppSignupCallbackResult, Type: smithy.ShapeTypeStructure})
+var sAssociateWhatsAppBusinessAccountOutput_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sAssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkedWhatsAppBusinessAccountId", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppDatasetInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppDatasetOutput_datasetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetId", ID: &i_WhatsAppDatasetId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppFlowInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppFlowInput_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_MetaFlowName, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppFlowInput_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_MetaFlowCategoryList, Members: &m_MetaFlowCategoryList, Type: smithy.ShapeTypeList})
+var sCreateWhatsAppFlowInput_flowJson = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowJson", ID: &i_MetaFlowJsonBlob, Type: smithy.ShapeTypeBlob})
+var sCreateWhatsAppFlowInput_publish = smithy.NewStaticSchema(smithy.StaticSchema{Member: "publish", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCreateWhatsAppFlowInput_cloneFlowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cloneFlowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppFlowInput_endpointUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointUri", ID: &i_MetaFlowEndpointUri, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppFlowOutput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppFlowOutput_validationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationErrors", ID: &i_ValidationErrorList, Members: &m_ValidationErrorList, Type: smithy.ShapeTypeList})
+var sCreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaLibraryTemplate", ID: &iMetaLibraryTemplate, Members: &mMetaLibraryTemplate, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateFromLibraryInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaTemplateId", ID: &i_MetaTemplateId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateStatus", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateFromLibraryOutput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateInput_templateDefinition = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateDefinition", ID: &i_MetaTemplateDefinition, Type: smithy.ShapeTypeBlob})
+var sCreateWhatsAppMessageTemplateInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateMediaInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateMediaInput_sourceS3File = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceS3File", ID: &iS3File, Members: &mS3File, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var sCreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaHeaderHandle", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateOutput_metaTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaTemplateId", ID: &i_MetaTemplateId, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateOutput_templateStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateStatus", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateWhatsAppMessageTemplateOutput_category = smithy.NewStaticSchema(smithy.StaticSchema{Member: "category", ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var sDeleteWhatsAppFlowInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sDeleteWhatsAppFlowInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sDeleteWhatsAppMessageMediaInput_mediaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaId", ID: &i_WhatsAppMediaId, Traits: &t49, Type: smithy.ShapeTypeString})
+var sDeleteWhatsAppMessageMediaInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Traits: &t50, Type: smithy.ShapeTypeString})
+var sDeleteWhatsAppMessageMediaOutput_success = smithy.NewStaticSchema(smithy.StaticSchema{Member: "success", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sDeleteWhatsAppMessageTemplateInput_metaTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaTemplateId", ID: &i_MetaTemplateId, Traits: &t51, Type: smithy.ShapeTypeString})
+var sDeleteWhatsAppMessageTemplateInput_deleteAllLanguages = smithy.NewStaticSchema(smithy.StaticSchema{Member: "deleteAllLanguages", ID: &i_DeleteAllLanguages, Traits: &t52, Type: smithy.ShapeTypeBoolean})
+var sDeleteWhatsAppMessageTemplateInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sDeleteWhatsAppMessageTemplateInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_MetaTemplateName, Traits: &t53, Type: smithy.ShapeTypeString})
+var sDeprecateWhatsAppFlowInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sDeprecateWhatsAppFlowInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sDisassociateWhatsAppBusinessAccountInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetLinkedWhatsAppBusinessAccountInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetLinkedWhatsAppBusinessAccountOutput_account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "account", ID: &iLinkedWhatsAppBusinessAccount, Members: &mLinkedWhatsAppBusinessAccount, Type: smithy.ShapeTypeStructure})
+var sGetLinkedWhatsAppBusinessAccountPhoneNumberInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_WhatsAppPhoneNumberId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumber", ID: &iWhatsAppPhoneNumberDetail, Members: &mWhatsAppPhoneNumberDetail, Type: smithy.ShapeTypeStructure})
+var sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkedWhatsAppBusinessAccountId", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callSettings", ID: &iWhatsAppCallSettings, Members: &mWhatsAppCallSettings, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Traits: &t50, Type: smithy.ShapeTypeString})
+var sGetWhatsAppBusinessPublicKeyOutput_businessPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessPublicKey", ID: &i_BusinessPublicKeyPem, Type: smithy.ShapeTypeString})
+var sGetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessPublicKeySignatureStatus", ID: &i_BusinessPublicKeySignatureStatus, Type: smithy.ShapeTypeString})
+var sGetWhatsAppCallPermissionInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sGetWhatsAppCallPermissionInput_destinationPhoneNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationPhoneNumber", ID: &i_WhatsAppDestinationPhoneNumber, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetWhatsAppCallPermissionInput_endUserBsuid = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endUserBsuid", ID: &i_WhatsAppBusinessScopedUserId, Traits: &t46, Type: smithy.ShapeTypeString})
+var sGetWhatsAppCallPermissionOutput_permission = smithy.NewStaticSchema(smithy.StaticSchema{Member: "permission", ID: &iWhatsAppCallPermission, Members: &mWhatsAppCallPermission, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppCallPermissionOutput_actions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "actions", ID: &i_WhatsAppCallPermissionActionList, Members: &m_WhatsAppCallPermissionActionList, Type: smithy.ShapeTypeList})
+var sGetWhatsAppFlowInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowOutput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowOutput_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_MetaFlowName, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowOutput_flowStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowStatus", ID: &i_MetaFlowStatus, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowOutput_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_MetaFlowCategoryList, Members: &m_MetaFlowCategoryList, Type: smithy.ShapeTypeList})
+var sGetWhatsAppFlowOutput_validationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationErrors", ID: &i_ValidationErrorList, Members: &m_ValidationErrorList, Type: smithy.ShapeTypeList})
+var sGetWhatsAppFlowOutput_jsonVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "jsonVersion", ID: &i_MetaFlowJsonVersion, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowOutput_dataApiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "dataApiVersion", ID: &i_MetaFlowDataApiVersion, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowOutput_endpointUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointUri", ID: &i_MetaFlowEndpointUri, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowOutput_preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preview", ID: &iMetaFlowPreviewInfo, Members: &mMetaFlowPreviewInfo, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowOutput_whatsAppBusinessAccount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "whatsAppBusinessAccount", ID: &iMetaFlowWhatsAppBusinessAccountInfo, Members: &mMetaFlowWhatsAppBusinessAccountInfo, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowOutput_application = smithy.NewStaticSchema(smithy.StaticSchema{Member: "application", ID: &iMetaFlowApplicationInfo, Members: &mMetaFlowApplicationInfo, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowOutput_healthStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "healthStatus", ID: &iMetaFlowHealthStatus, Members: &mMetaFlowHealthStatus, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppFlowPreviewInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowPreviewInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowPreviewInput_invalidate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "invalidate", ID: &pBoolean, Traits: &t54, Type: smithy.ShapeTypeBoolean})
+var sGetWhatsAppFlowPreviewOutput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sGetWhatsAppFlowPreviewOutput_preview = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preview", ID: &iMetaFlowPreviewInfo, Members: &mMetaFlowPreviewInfo, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppMessageMediaInput_mediaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaId", ID: &i_WhatsAppMediaId, Type: smithy.ShapeTypeString})
+var sGetWhatsAppMessageMediaInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sGetWhatsAppMessageMediaInput_metadataOnly = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metadataOnly", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sGetWhatsAppMessageMediaInput_destinationS3PresignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3PresignedUrl", ID: &iS3PresignedUrl, Members: &mS3PresignedUrl, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppMessageMediaInput_destinationS3File = smithy.NewStaticSchema(smithy.StaticSchema{Member: "destinationS3File", ID: &iS3File, Members: &mS3File, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var sGetWhatsAppMessageMediaOutput_mimeType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mimeType", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetWhatsAppMessageMediaOutput_fileSize = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fileSize", ID: &pLong, Type: smithy.ShapeTypeLong})
+var sGetWhatsAppMessageTemplateInput_metaTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaTemplateId", ID: &i_MetaTemplateId, Traits: &t51, Type: smithy.ShapeTypeString})
+var sGetWhatsAppMessageTemplateInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sGetWhatsAppMessageTemplateInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_MetaTemplateName, Traits: &t53, Type: smithy.ShapeTypeString})
+var sGetWhatsAppMessageTemplateInput_templateLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLanguageCode", ID: &i_MetaTemplateLanguage, Traits: &t55, Type: smithy.ShapeTypeString})
+var sGetWhatsAppMessageTemplateOutput_template = smithy.NewStaticSchema(smithy.StaticSchema{Member: "template", ID: &i_MetaTemplate, Type: smithy.ShapeTypeString})
+var sListLinkedWhatsAppBusinessAccountsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString})
+var sListLinkedWhatsAppBusinessAccountsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t57, Type: smithy.ShapeTypeInteger})
+var sListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts = smithy.NewStaticSchema(smithy.StaticSchema{Member: "linkedAccounts", ID: &i_LinkedWhatsAppBusinessAccountSummaryList, Members: &m_LinkedWhatsAppBusinessAccountSummaryList, Type: smithy.ShapeTypeList})
+var sListLinkedWhatsAppBusinessAccountsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t58, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sListWhatsAppFlowAssetsInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sListWhatsAppFlowAssetsInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Traits: &t48, Type: smithy.ShapeTypeString})
+var sListWhatsAppFlowAssetsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString})
+var sListWhatsAppFlowAssetsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t57, Type: smithy.ShapeTypeInteger})
+var sListWhatsAppFlowAssetsOutput_flowAssets = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowAssets", ID: &i_MetaFlowAssetList, Members: &m_MetaFlowAssetList, Type: smithy.ShapeTypeList})
+var sListWhatsAppFlowAssetsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWhatsAppFlowsInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sListWhatsAppFlowsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString})
+var sListWhatsAppFlowsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t57, Type: smithy.ShapeTypeInteger})
+var sListWhatsAppFlowsOutput_flows = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flows", ID: &i_MetaFlowSummaryList, Members: &m_MetaFlowSummaryList, Type: smithy.ShapeTypeList})
+var sListWhatsAppFlowsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWhatsAppMessageTemplatesInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sListWhatsAppMessageTemplatesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Traits: &t56, Type: smithy.ShapeTypeString})
+var sListWhatsAppMessageTemplatesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Traits: &t57, Type: smithy.ShapeTypeInteger})
+var sListWhatsAppMessageTemplatesOutput_templates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templates", ID: &i_TemplateSummaryList, Members: &m_TemplateSummaryList, Type: smithy.ShapeTypeList})
+var sListWhatsAppMessageTemplatesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWhatsAppTemplateLibraryInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListWhatsAppTemplateLibraryInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListWhatsAppTemplateLibraryInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sListWhatsAppTemplateLibraryInput_filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filters", ID: &i_Filter, Members: &m_Filter, Type: smithy.ShapeTypeMap})
+var sListWhatsAppTemplateLibraryOutput_metaLibraryTemplates = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaLibraryTemplates", ID: &i_MetaLibraryTemplatesList, Members: &m_MetaLibraryTemplatesList, Type: smithy.ShapeTypeList})
+var sListWhatsAppTemplateLibraryOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sPostWhatsAppMessageMediaInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sPostWhatsAppMessageMediaInput_sourceS3PresignedUrl = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceS3PresignedUrl", ID: &iS3PresignedUrl, Members: &mS3PresignedUrl, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var sPostWhatsAppMessageMediaInput_sourceS3File = smithy.NewStaticSchema(smithy.StaticSchema{Member: "sourceS3File", ID: &iS3File, Members: &mS3File, Traits: &t46, Type: smithy.ShapeTypeStructure})
+var sPostWhatsAppMessageMediaOutput_mediaId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "mediaId", ID: &i_WhatsAppMediaId, Type: smithy.ShapeTypeString})
+var sPublishWhatsAppFlowInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sPublishWhatsAppFlowInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sPutWhatsAppBusinessAccountEventDestinationsInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sPutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventDestinations", ID: &i_WhatsAppBusinessAccountEventDestinations, Members: &m_WhatsAppBusinessAccountEventDestinations, Type: smithy.ShapeTypeList})
+var sPutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sPutWhatsAppBusinessPublicKeyInput_businessPublicKey = smithy.NewStaticSchema(smithy.StaticSchema{Member: "businessPublicKey", ID: &i_BusinessPublicKeyPem, Type: smithy.ShapeTypeString})
+var sPutWhatsAppBusinessPublicKeyInput_kmsKeyArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyArn", ID: &i_KmsKeyArn, Type: smithy.ShapeTypeString})
+var sSendWhatsAppCallEventInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sSendWhatsAppCallEventInput_metaApiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaApiVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sSendWhatsAppCallEventInput_callEvent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callEvent", ID: &i_WhatsAppCallEventBlob, Traits: &t46, Type: smithy.ShapeTypeBlob})
+var sSendWhatsAppCallEventOutput_callId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callId", ID: &pString, Type: smithy.ShapeTypeString})
+var sSendWhatsAppConversionEventInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sSendWhatsAppConversionEventInput_datasetId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "datasetId", ID: &i_WhatsAppDatasetId, Type: smithy.ShapeTypeString})
+var sSendWhatsAppConversionEventInput_eventData = smithy.NewStaticSchema(smithy.StaticSchema{Member: "eventData", ID: &i_WhatsAppConversionEventBlob, Traits: &t46, Type: smithy.ShapeTypeBlob})
+var sSendWhatsAppConversionEventOutput_requestId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "requestId", ID: &pString, Type: smithy.ShapeTypeString})
+var sSendWhatsAppMessageInput_originationPhoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "originationPhoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sSendWhatsAppMessageInput_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &i_WhatsAppMessageBlob, Traits: &t46, Type: smithy.ShapeTypeBlob})
+var sSendWhatsAppMessageInput_metaApiVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaApiVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sSendWhatsAppMessageOutput_messageId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "messageId", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagList, Members: &m_TagList, Type: smithy.ShapeTypeList})
+var sTagResourceOutput_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sUntagResourceOutput_statusCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusCode", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_WhatsAppPhoneNumberId, Traits: &t47, Type: smithy.ShapeTypeString})
+var sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "callSettings", ID: &iWhatsAppCallSettings, Members: &mWhatsAppCallSettings, Type: smithy.ShapeTypeStructure})
+var sUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "phoneNumberId", ID: &i_WhatsAppPhoneNumberId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppFlowAssetsInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppFlowAssetsInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppFlowAssetsInput_flowJson = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowJson", ID: &i_MetaFlowJsonBlob, Type: smithy.ShapeTypeBlob})
+var sUpdateWhatsAppFlowAssetsOutput_validationErrors = smithy.NewStaticSchema(smithy.StaticSchema{Member: "validationErrors", ID: &i_ValidationErrorList, Members: &m_ValidationErrorList, Type: smithy.ShapeTypeList})
+var sUpdateWhatsAppFlowInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppFlowInput_flowId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowId", ID: &i_MetaFlowId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppFlowInput_flowName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "flowName", ID: &i_MetaFlowName, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppFlowInput_categories = smithy.NewStaticSchema(smithy.StaticSchema{Member: "categories", ID: &i_MetaFlowCategoryList, Members: &m_MetaFlowCategoryList, Type: smithy.ShapeTypeList})
+var sUpdateWhatsAppFlowInput_endpointUri = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endpointUri", ID: &i_MetaFlowEndpointUri, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppFlowInput_metaAppId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaAppId", ID: &i_MetaFlowApplicationId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppMessageTemplateInput_id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "id", ID: &i_LinkedWhatsAppBusinessAccountId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppMessageTemplateInput_metaTemplateId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "metaTemplateId", ID: &i_MetaTemplateId, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppMessageTemplateInput_templateName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateName", ID: &i_MetaTemplateName, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppMessageTemplateInput_templateLanguageCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateLanguageCode", ID: &i_MetaTemplateLanguage, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppMessageTemplateInput_parameterFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameterFormat", ID: &i_MetaParameterFormat, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppMessageTemplateInput_templateCategory = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateCategory", ID: &i_MetaTemplateCategory, Type: smithy.ShapeTypeString})
+var sUpdateWhatsAppMessageTemplateInput_templateComponents = smithy.NewStaticSchema(smithy.StaticSchema{Member: "templateComponents", ID: &i_MetaTemplateComponents, Type: smithy.ShapeTypeBlob})
+var sUpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ctaUrlLinkTrackingOptedOut", ID: &i_MetaTemplateCtaLinkTrackingOptedOut, Type: smithy.ShapeTypeBoolean})
+
+var AssociateWhatsAppBusinessAccount = &sAssociateWhatsAppBusinessAccount
+
+var CreateWhatsAppDataset = &sCreateWhatsAppDataset
+
+var CreateWhatsAppFlow = &sCreateWhatsAppFlow
+
+var CreateWhatsAppMessageTemplate = &sCreateWhatsAppMessageTemplate
+
+var CreateWhatsAppMessageTemplateFromLibrary = &sCreateWhatsAppMessageTemplateFromLibrary
+
+var CreateWhatsAppMessageTemplateMedia = &sCreateWhatsAppMessageTemplateMedia
+
+var DeleteWhatsAppFlow = &sDeleteWhatsAppFlow
+
+var DeleteWhatsAppMessageMedia = &sDeleteWhatsAppMessageMedia
+
+var DeleteWhatsAppMessageTemplate = &sDeleteWhatsAppMessageTemplate
+
+var DeprecateWhatsAppFlow = &sDeprecateWhatsAppFlow
+
+var DisassociateWhatsAppBusinessAccount = &sDisassociateWhatsAppBusinessAccount
+
+var GetLinkedWhatsAppBusinessAccount = &sGetLinkedWhatsAppBusinessAccount
+
+var GetLinkedWhatsAppBusinessAccountPhoneNumber = &sGetLinkedWhatsAppBusinessAccountPhoneNumber
+
+var GetWhatsAppBusinessPublicKey = &sGetWhatsAppBusinessPublicKey
+
+var GetWhatsAppCallPermission = &sGetWhatsAppCallPermission
+
+var GetWhatsAppFlow = &sGetWhatsAppFlow
+
+var GetWhatsAppFlowPreview = &sGetWhatsAppFlowPreview
+
+var GetWhatsAppMessageMedia = &sGetWhatsAppMessageMedia
+
+var GetWhatsAppMessageTemplate = &sGetWhatsAppMessageTemplate
+
+var ListLinkedWhatsAppBusinessAccounts = &sListLinkedWhatsAppBusinessAccounts
+
+var ListTagsForResource = &sListTagsForResource
+
+var ListWhatsAppFlowAssets = &sListWhatsAppFlowAssets
+
+var ListWhatsAppFlows = &sListWhatsAppFlows
+
+var ListWhatsAppMessageTemplates = &sListWhatsAppMessageTemplates
+
+var ListWhatsAppTemplateLibrary = &sListWhatsAppTemplateLibrary
+
+var PostWhatsAppMessageMedia = &sPostWhatsAppMessageMedia
+
+var PublishWhatsAppFlow = &sPublishWhatsAppFlow
+
+var PutWhatsAppBusinessAccountEventDestinations = &sPutWhatsAppBusinessAccountEventDestinations
+
+var PutWhatsAppBusinessPublicKey = &sPutWhatsAppBusinessPublicKey
+
+var SendWhatsAppCallEvent = &sSendWhatsAppCallEvent
+
+var SendWhatsAppConversionEvent = &sSendWhatsAppConversionEvent
+
+var SendWhatsAppMessage = &sSendWhatsAppMessage
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumber = &sUpdateLinkedWhatsAppBusinessAccountPhoneNumber
+
+var UpdateWhatsAppFlow = &sUpdateWhatsAppFlow
+
+var UpdateWhatsAppFlowAssets = &sUpdateWhatsAppFlowAssets
+
+var UpdateWhatsAppMessageTemplate = &sUpdateWhatsAppMessageTemplate
+
+var _SocialMessaging = &s_SocialMessaging
+
+var AccessDeniedByMetaException = &sAccessDeniedByMetaException
+var AccessDeniedByMetaException_message = &sAccessDeniedByMetaException_message
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _AddContactNumber = &s_AddContactNumber
+
+var _AddLearnMoreLink = &s_AddLearnMoreLink
+
+var _AddSecurityRecommendation = &s_AddSecurityRecommendation
+
+var _AddTrackPackageLink = &s_AddTrackPackageLink
+
+var _Arn = &s_Arn
+
+var _AssociateInProgressToken = &s_AssociateInProgressToken
+
+var _BusinessPublicKeyPem = &s_BusinessPublicKeyPem
+
+var _BusinessPublicKeySignatureStatus = &s_BusinessPublicKeySignatureStatus
+
+var _ButtonType = &s_ButtonType
+
+var _CodeExpirationMinutes = &s_CodeExpirationMinutes
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _DeleteAllLanguages = &s_DeleteAllLanguages
+
+var DependencyException = &sDependencyException
+var DependencyException_message = &sDependencyException_message
+
+var _DirectSendEnforcementStatus = &s_DirectSendEnforcementStatus
+
+var _DirectSendEnforcementStatusExpiresAt = &s_DirectSendEnforcementStatusExpiresAt
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _EventDestinationArn = &s_EventDestinationArn
+
+var _Filter = &s_Filter
+var _Filter_key = &s_Filter_key
+var _Filter_value = &s_Filter_value
+
+var _Headers = &s_Headers
+var _Headers_key = &s_Headers_key
+var _Headers_value = &s_Headers_value
+
+var _IanaTimezone = &s_IanaTimezone
+
+var InternalServiceException = &sInternalServiceException
+var InternalServiceException_message = &sInternalServiceException_message
+
+var InvalidParametersException = &sInvalidParametersException
+var InvalidParametersException_message = &sInvalidParametersException_message
+
+var _Iso8601Duration = &s_Iso8601Duration
+
+var _IsoCountryCode = &s_IsoCountryCode
+
+var _KmsKeyArn = &s_KmsKeyArn
+
+var LibraryTemplateBodyInputs = &sLibraryTemplateBodyInputs
+var LibraryTemplateBodyInputs_addContactNumber = &sLibraryTemplateBodyInputs_addContactNumber
+var LibraryTemplateBodyInputs_addLearnMoreLink = &sLibraryTemplateBodyInputs_addLearnMoreLink
+var LibraryTemplateBodyInputs_addSecurityRecommendation = &sLibraryTemplateBodyInputs_addSecurityRecommendation
+var LibraryTemplateBodyInputs_addTrackPackageLink = &sLibraryTemplateBodyInputs_addTrackPackageLink
+var LibraryTemplateBodyInputs_codeExpirationMinutes = &sLibraryTemplateBodyInputs_codeExpirationMinutes
+
+var LibraryTemplateButtonInput = &sLibraryTemplateButtonInput
+var LibraryTemplateButtonInput_type = &sLibraryTemplateButtonInput_type
+var LibraryTemplateButtonInput_phoneNumber = &sLibraryTemplateButtonInput_phoneNumber
+var LibraryTemplateButtonInput_url = &sLibraryTemplateButtonInput_url
+var LibraryTemplateButtonInput_otpType = &sLibraryTemplateButtonInput_otpType
+var LibraryTemplateButtonInput_zeroTapTermsAccepted = &sLibraryTemplateButtonInput_zeroTapTermsAccepted
+var LibraryTemplateButtonInput_supportedApps = &sLibraryTemplateButtonInput_supportedApps
+
+var LibraryTemplateButtonList = &sLibraryTemplateButtonList
+var LibraryTemplateButtonList_type = &sLibraryTemplateButtonList_type
+var LibraryTemplateButtonList_text = &sLibraryTemplateButtonList_text
+var LibraryTemplateButtonList_phoneNumber = &sLibraryTemplateButtonList_phoneNumber
+var LibraryTemplateButtonList_url = &sLibraryTemplateButtonList_url
+var LibraryTemplateButtonList_otpType = &sLibraryTemplateButtonList_otpType
+var LibraryTemplateButtonList_zeroTapTermsAccepted = &sLibraryTemplateButtonList_zeroTapTermsAccepted
+var LibraryTemplateButtonList_supportedApps = &sLibraryTemplateButtonList_supportedApps
+
+var LimitExceededException = &sLimitExceededException
+var LimitExceededException_message = &sLimitExceededException_message
+
+var _LinkedAccountWithIncompleteSetup = &s_LinkedAccountWithIncompleteSetup
+var _LinkedAccountWithIncompleteSetup_key = &s_LinkedAccountWithIncompleteSetup_key
+var _LinkedAccountWithIncompleteSetup_value = &s_LinkedAccountWithIncompleteSetup_value
+
+var LinkedWhatsAppBusinessAccount = &sLinkedWhatsAppBusinessAccount
+var LinkedWhatsAppBusinessAccount_arn = &sLinkedWhatsAppBusinessAccount_arn
+var LinkedWhatsAppBusinessAccount_id = &sLinkedWhatsAppBusinessAccount_id
+var LinkedWhatsAppBusinessAccount_wabaId = &sLinkedWhatsAppBusinessAccount_wabaId
+var LinkedWhatsAppBusinessAccount_registrationStatus = &sLinkedWhatsAppBusinessAccount_registrationStatus
+var LinkedWhatsAppBusinessAccount_linkDate = &sLinkedWhatsAppBusinessAccount_linkDate
+var LinkedWhatsAppBusinessAccount_wabaName = &sLinkedWhatsAppBusinessAccount_wabaName
+var LinkedWhatsAppBusinessAccount_eventDestinations = &sLinkedWhatsAppBusinessAccount_eventDestinations
+var LinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus = &sLinkedWhatsAppBusinessAccount_marketingMessagesOnboardingStatus
+var LinkedWhatsAppBusinessAccount_directSendEnforcementStatus = &sLinkedWhatsAppBusinessAccount_directSendEnforcementStatus
+var LinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt = &sLinkedWhatsAppBusinessAccount_directSendEnforcementStatusExpiresAt
+var LinkedWhatsAppBusinessAccount_datasetId = &sLinkedWhatsAppBusinessAccount_datasetId
+var LinkedWhatsAppBusinessAccount_phoneNumbers = &sLinkedWhatsAppBusinessAccount_phoneNumbers
+
+var _LinkedWhatsAppBusinessAccountArn = &s_LinkedWhatsAppBusinessAccountArn
+
+var _LinkedWhatsAppBusinessAccountId = &s_LinkedWhatsAppBusinessAccountId
+
+var LinkedWhatsAppBusinessAccountIdMetaData = &sLinkedWhatsAppBusinessAccountIdMetaData
+var LinkedWhatsAppBusinessAccountIdMetaData_accountName = &sLinkedWhatsAppBusinessAccountIdMetaData_accountName
+var LinkedWhatsAppBusinessAccountIdMetaData_registrationStatus = &sLinkedWhatsAppBusinessAccountIdMetaData_registrationStatus
+var LinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers = &sLinkedWhatsAppBusinessAccountIdMetaData_unregisteredWhatsAppPhoneNumbers
+var LinkedWhatsAppBusinessAccountIdMetaData_wabaId = &sLinkedWhatsAppBusinessAccountIdMetaData_wabaId
+
+var LinkedWhatsAppBusinessAccountSummary = &sLinkedWhatsAppBusinessAccountSummary
+var LinkedWhatsAppBusinessAccountSummary_arn = &sLinkedWhatsAppBusinessAccountSummary_arn
+var LinkedWhatsAppBusinessAccountSummary_id = &sLinkedWhatsAppBusinessAccountSummary_id
+var LinkedWhatsAppBusinessAccountSummary_wabaId = &sLinkedWhatsAppBusinessAccountSummary_wabaId
+var LinkedWhatsAppBusinessAccountSummary_registrationStatus = &sLinkedWhatsAppBusinessAccountSummary_registrationStatus
+var LinkedWhatsAppBusinessAccountSummary_linkDate = &sLinkedWhatsAppBusinessAccountSummary_linkDate
+var LinkedWhatsAppBusinessAccountSummary_wabaName = &sLinkedWhatsAppBusinessAccountSummary_wabaName
+var LinkedWhatsAppBusinessAccountSummary_eventDestinations = &sLinkedWhatsAppBusinessAccountSummary_eventDestinations
+var LinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus = &sLinkedWhatsAppBusinessAccountSummary_marketingMessagesOnboardingStatus
+var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus = &sLinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatus
+var LinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt = &sLinkedWhatsAppBusinessAccountSummary_directSendEnforcementStatusExpiresAt
+var LinkedWhatsAppBusinessAccountSummary_datasetId = &sLinkedWhatsAppBusinessAccountSummary_datasetId
+
+var _LinkedWhatsAppBusinessAccountSummaryList = &s_LinkedWhatsAppBusinessAccountSummaryList
+var _LinkedWhatsAppBusinessAccountSummaryList_member = &s_LinkedWhatsAppBusinessAccountSummaryList_member
+
+var _LinkedWhatsAppPhoneNumberArn = &s_LinkedWhatsAppPhoneNumberArn
+
+var _MaxResults = &s_MaxResults
+
+var _MetaFlowApplicationId = &s_MetaFlowApplicationId
+
+var MetaFlowApplicationInfo = &sMetaFlowApplicationInfo
+var MetaFlowApplicationInfo_link = &sMetaFlowApplicationInfo_link
+var MetaFlowApplicationInfo_name = &sMetaFlowApplicationInfo_name
+var MetaFlowApplicationInfo_id = &sMetaFlowApplicationInfo_id
+
+var _MetaFlowApplicationLink = &s_MetaFlowApplicationLink
+
+var _MetaFlowApplicationName = &s_MetaFlowApplicationName
+
+var MetaFlowAsset = &sMetaFlowAsset
+var MetaFlowAsset_name = &sMetaFlowAsset_name
+var MetaFlowAsset_assetType = &sMetaFlowAsset_assetType
+var MetaFlowAsset_downloadUrl = &sMetaFlowAsset_downloadUrl
+
+var _MetaFlowAssetDownloadUrl = &s_MetaFlowAssetDownloadUrl
+
+var _MetaFlowAssetList = &s_MetaFlowAssetList
+var _MetaFlowAssetList_member = &s_MetaFlowAssetList_member
+
+var _MetaFlowAssetName = &s_MetaFlowAssetName
+
+var _MetaFlowAssetType = &s_MetaFlowAssetType
+
+var MetaFlowCategory = &sMetaFlowCategory
+var MetaFlowCategory_SIGN_UP = &sMetaFlowCategory_SIGN_UP
+var MetaFlowCategory_SIGN_IN = &sMetaFlowCategory_SIGN_IN
+var MetaFlowCategory_APPOINTMENT_BOOKING = &sMetaFlowCategory_APPOINTMENT_BOOKING
+var MetaFlowCategory_LEAD_GENERATION = &sMetaFlowCategory_LEAD_GENERATION
+var MetaFlowCategory_SHOPPING = &sMetaFlowCategory_SHOPPING
+var MetaFlowCategory_CONTACT_US = &sMetaFlowCategory_CONTACT_US
+var MetaFlowCategory_CUSTOMER_SUPPORT = &sMetaFlowCategory_CUSTOMER_SUPPORT
+var MetaFlowCategory_SURVEY = &sMetaFlowCategory_SURVEY
+var MetaFlowCategory_OTHER = &sMetaFlowCategory_OTHER
+
+var _MetaFlowCategoryList = &s_MetaFlowCategoryList
+var _MetaFlowCategoryList_member = &s_MetaFlowCategoryList_member
+
+var _MetaFlowDataApiVersion = &s_MetaFlowDataApiVersion
+
+var _MetaFlowEndpointUri = &s_MetaFlowEndpointUri
+
+var MetaFlowHealthEntity = &sMetaFlowHealthEntity
+var MetaFlowHealthEntity_entityType = &sMetaFlowHealthEntity_entityType
+var MetaFlowHealthEntity_id = &sMetaFlowHealthEntity_id
+var MetaFlowHealthEntity_canSendMessage = &sMetaFlowHealthEntity_canSendMessage
+
+var _MetaFlowHealthEntityList = &s_MetaFlowHealthEntityList
+var _MetaFlowHealthEntityList_member = &s_MetaFlowHealthEntityList_member
+
+var _MetaFlowHealthEntityType = &s_MetaFlowHealthEntityType
+
+var MetaFlowHealthStatus = &sMetaFlowHealthStatus
+var MetaFlowHealthStatus_canSendMessage = &sMetaFlowHealthStatus_canSendMessage
+var MetaFlowHealthStatus_entities = &sMetaFlowHealthStatus_entities
+
+var _MetaFlowHealthStatusAvailability = &s_MetaFlowHealthStatusAvailability
+
+var _MetaFlowId = &s_MetaFlowId
+
+var _MetaFlowJsonBlob = &s_MetaFlowJsonBlob
+
+var _MetaFlowJsonVersion = &s_MetaFlowJsonVersion
+
+var _MetaFlowName = &s_MetaFlowName
+
+var MetaFlowPreviewInfo = &sMetaFlowPreviewInfo
+var MetaFlowPreviewInfo_previewUrl = &sMetaFlowPreviewInfo_previewUrl
+var MetaFlowPreviewInfo_expiresAt = &sMetaFlowPreviewInfo_expiresAt
+
+var _MetaFlowPreviewUrl = &s_MetaFlowPreviewUrl
+
+var _MetaFlowStatus = &s_MetaFlowStatus
+
+var MetaFlowSummary = &sMetaFlowSummary
+var MetaFlowSummary_flowId = &sMetaFlowSummary_flowId
+var MetaFlowSummary_flowName = &sMetaFlowSummary_flowName
+var MetaFlowSummary_flowStatus = &sMetaFlowSummary_flowStatus
+var MetaFlowSummary_flowCategories = &sMetaFlowSummary_flowCategories
+var MetaFlowSummary_validationErrors = &sMetaFlowSummary_validationErrors
+
+var _MetaFlowSummaryList = &s_MetaFlowSummaryList
+var _MetaFlowSummaryList_member = &s_MetaFlowSummaryList_member
+
+var _MetaFlowTimestamp = &s_MetaFlowTimestamp
+
+var _MetaFlowValidationError = &s_MetaFlowValidationError
+
+var _MetaFlowWabaCurrency = &s_MetaFlowWabaCurrency
+
+var _MetaFlowWabaTemplateNamespace = &s_MetaFlowWabaTemplateNamespace
+
+var _MetaFlowWabaTimezoneId = &s_MetaFlowWabaTimezoneId
+
+var MetaFlowWhatsAppBusinessAccountInfo = &sMetaFlowWhatsAppBusinessAccountInfo
+var MetaFlowWhatsAppBusinessAccountInfo_id = &sMetaFlowWhatsAppBusinessAccountInfo_id
+var MetaFlowWhatsAppBusinessAccountInfo_name = &sMetaFlowWhatsAppBusinessAccountInfo_name
+var MetaFlowWhatsAppBusinessAccountInfo_currency = &sMetaFlowWhatsAppBusinessAccountInfo_currency
+var MetaFlowWhatsAppBusinessAccountInfo_timezoneId = &sMetaFlowWhatsAppBusinessAccountInfo_timezoneId
+var MetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace = &sMetaFlowWhatsAppBusinessAccountInfo_messageTemplateNamespace
+
+var _MetaIndustries = &s_MetaIndustries
+var _MetaIndustries_member = &s_MetaIndustries_member
+
+var _MetaIndustry = &s_MetaIndustry
+
+var MetaLibraryTemplate = &sMetaLibraryTemplate
+var MetaLibraryTemplate_templateName = &sMetaLibraryTemplate_templateName
+var MetaLibraryTemplate_libraryTemplateName = &sMetaLibraryTemplate_libraryTemplateName
+var MetaLibraryTemplate_templateCategory = &sMetaLibraryTemplate_templateCategory
+var MetaLibraryTemplate_templateLanguage = &sMetaLibraryTemplate_templateLanguage
+var MetaLibraryTemplate_libraryTemplateButtonInputs = &sMetaLibraryTemplate_libraryTemplateButtonInputs
+var MetaLibraryTemplate_libraryTemplateBodyInputs = &sMetaLibraryTemplate_libraryTemplateBodyInputs
+
+var _MetaLibraryTemplateButtonInputs = &s_MetaLibraryTemplateButtonInputs
+var _MetaLibraryTemplateButtonInputs_member = &s_MetaLibraryTemplateButtonInputs_member
+
+var _MetaLibraryTemplateButtonList = &s_MetaLibraryTemplateButtonList
+var _MetaLibraryTemplateButtonList_member = &s_MetaLibraryTemplateButtonList_member
+
+var MetaLibraryTemplateDefinition = &sMetaLibraryTemplateDefinition
+var MetaLibraryTemplateDefinition_templateName = &sMetaLibraryTemplateDefinition_templateName
+var MetaLibraryTemplateDefinition_templateLanguage = &sMetaLibraryTemplateDefinition_templateLanguage
+var MetaLibraryTemplateDefinition_templateCategory = &sMetaLibraryTemplateDefinition_templateCategory
+var MetaLibraryTemplateDefinition_templateTopic = &sMetaLibraryTemplateDefinition_templateTopic
+var MetaLibraryTemplateDefinition_templateUseCase = &sMetaLibraryTemplateDefinition_templateUseCase
+var MetaLibraryTemplateDefinition_templateIndustry = &sMetaLibraryTemplateDefinition_templateIndustry
+var MetaLibraryTemplateDefinition_templateHeader = &sMetaLibraryTemplateDefinition_templateHeader
+var MetaLibraryTemplateDefinition_templateBody = &sMetaLibraryTemplateDefinition_templateBody
+var MetaLibraryTemplateDefinition_templateButtons = &sMetaLibraryTemplateDefinition_templateButtons
+var MetaLibraryTemplateDefinition_templateId = &sMetaLibraryTemplateDefinition_templateId
+var MetaLibraryTemplateDefinition_templateBodyExampleParams = &sMetaLibraryTemplateDefinition_templateBodyExampleParams
+
+var _MetaLibraryTemplatesList = &s_MetaLibraryTemplatesList
+var _MetaLibraryTemplatesList_member = &s_MetaLibraryTemplatesList_member
+
+var _MetaParameterFormat = &s_MetaParameterFormat
+
+var _MetaTemplate = &s_MetaTemplate
+
+var _MetaTemplateBody = &s_MetaTemplateBody
+
+var _MetaTemplateBodyExampleParams = &s_MetaTemplateBodyExampleParams
+var _MetaTemplateBodyExampleParams_member = &s_MetaTemplateBodyExampleParams_member
+
+var _MetaTemplateCategory = &s_MetaTemplateCategory
+
+var _MetaTemplateComponents = &s_MetaTemplateComponents
+
+var _MetaTemplateCtaLinkTrackingOptedOut = &s_MetaTemplateCtaLinkTrackingOptedOut
+
+var _MetaTemplateDefinition = &s_MetaTemplateDefinition
+
+var _MetaTemplateHeader = &s_MetaTemplateHeader
+
+var _MetaTemplateId = &s_MetaTemplateId
+
+var _MetaTemplateLanguage = &s_MetaTemplateLanguage
+
+var _MetaTemplateName = &s_MetaTemplateName
+
+var _MetaTemplateQualityScore = &s_MetaTemplateQualityScore
+
+var _MetaTemplateSource = &s_MetaTemplateSource
+
+var _MetaTemplateStatus = &s_MetaTemplateStatus
+
+var _MetaTemplateTopic = &s_MetaTemplateTopic
+
+var _MetaTemplateUseCase = &s_MetaTemplateUseCase
+
+var _MetaText = &s_MetaText
+
+var _MetaUrl = &s_MetaUrl
+
+var _MetaUrlWithSuffixExample = &s_MetaUrlWithSuffixExample
+var _MetaUrlWithSuffixExample_key = &s_MetaUrlWithSuffixExample_key
+var _MetaUrlWithSuffixExample_value = &s_MetaUrlWithSuffixExample_value
+
+var _NextToken = &s_NextToken
+
+var _OtpType = &s_OtpType
+
+var _PhoneNumber = &s_PhoneNumber
+
+var RegistrationStatus = &sRegistrationStatus
+var RegistrationStatus_COMPLETE = &sRegistrationStatus_COMPLETE
+var RegistrationStatus_INCOMPLETE = &sRegistrationStatus_INCOMPLETE
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var _RoleArn = &s_RoleArn
+
+var S3File = &sS3File
+var S3File_bucketName = &sS3File_bucketName
+var S3File_key = &sS3File_key
+
+var S3PresignedUrl = &sS3PresignedUrl
+var S3PresignedUrl_url = &sS3PresignedUrl_url
+var S3PresignedUrl_headers = &sS3PresignedUrl_headers
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _SupportedApp = &s_SupportedApp
+var _SupportedApp_key = &s_SupportedApp_key
+var _SupportedApp_value = &s_SupportedApp_value
+
+var _SupportedApps = &s_SupportedApps
+var _SupportedApps_member = &s_SupportedApps_member
+
+var Tag = &sTag
+var Tag_key = &sTag_key
+var Tag_value = &sTag_value
+
+var _TagList = &s_TagList
+var _TagList_member = &s_TagList_member
+
+var TemplateSummary = &sTemplateSummary
+var TemplateSummary_templateName = &sTemplateSummary_templateName
+var TemplateSummary_metaTemplateId = &sTemplateSummary_metaTemplateId
+var TemplateSummary_templateStatus = &sTemplateSummary_templateStatus
+var TemplateSummary_templateQualityScore = &sTemplateSummary_templateQualityScore
+var TemplateSummary_templateLanguage = &sTemplateSummary_templateLanguage
+var TemplateSummary_templateCategory = &sTemplateSummary_templateCategory
+var TemplateSummary_templateSource = &sTemplateSummary_templateSource
+var TemplateSummary_correctCategory = &sTemplateSummary_correctCategory
+
+var _TemplateSummaryList = &s_TemplateSummaryList
+var _TemplateSummaryList_member = &s_TemplateSummaryList_member
+
+var ThrottledRequestException = &sThrottledRequestException
+var ThrottledRequestException_message = &sThrottledRequestException_message
+
+var _TwoFactorPin = &s_TwoFactorPin
+
+var _ValidationErrorList = &s_ValidationErrorList
+var _ValidationErrorList_member = &s_ValidationErrorList_member
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var WabaPhoneNumberSetupFinalization = &sWabaPhoneNumberSetupFinalization
+var WabaPhoneNumberSetupFinalization_id = &sWabaPhoneNumberSetupFinalization_id
+var WabaPhoneNumberSetupFinalization_twoFactorPin = &sWabaPhoneNumberSetupFinalization_twoFactorPin
+var WabaPhoneNumberSetupFinalization_dataLocalizationRegion = &sWabaPhoneNumberSetupFinalization_dataLocalizationRegion
+var WabaPhoneNumberSetupFinalization_tags = &sWabaPhoneNumberSetupFinalization_tags
+
+var _WabaPhoneNumberSetupFinalizationList = &s_WabaPhoneNumberSetupFinalizationList
+var _WabaPhoneNumberSetupFinalizationList_member = &s_WabaPhoneNumberSetupFinalizationList_member
+
+var WabaSetupFinalization = &sWabaSetupFinalization
+var WabaSetupFinalization_id = &sWabaSetupFinalization_id
+var WabaSetupFinalization_eventDestinations = &sWabaSetupFinalization_eventDestinations
+var WabaSetupFinalization_tags = &sWabaSetupFinalization_tags
+
+var WhatsAppBusinessAccountEventDestination = &sWhatsAppBusinessAccountEventDestination
+var WhatsAppBusinessAccountEventDestination_eventDestinationArn = &sWhatsAppBusinessAccountEventDestination_eventDestinationArn
+var WhatsAppBusinessAccountEventDestination_roleArn = &sWhatsAppBusinessAccountEventDestination_roleArn
+
+var _WhatsAppBusinessAccountEventDestinations = &s_WhatsAppBusinessAccountEventDestinations
+var _WhatsAppBusinessAccountEventDestinations_member = &s_WhatsAppBusinessAccountEventDestinations_member
+
+var _WhatsAppBusinessAccountId = &s_WhatsAppBusinessAccountId
+
+var _WhatsAppBusinessAccountLinkDate = &s_WhatsAppBusinessAccountLinkDate
+
+var _WhatsAppBusinessAccountMarketingMessagesOnboardingStatus = &s_WhatsAppBusinessAccountMarketingMessagesOnboardingStatus
+
+var _WhatsAppBusinessAccountName = &s_WhatsAppBusinessAccountName
+
+var _WhatsAppBusinessScopedUserId = &s_WhatsAppBusinessScopedUserId
+
+var _WhatsAppCallbackPermissionStatus = &s_WhatsAppCallbackPermissionStatus
+
+var _WhatsAppCallEventBlob = &s_WhatsAppCallEventBlob
+
+var WhatsAppCallHours = &sWhatsAppCallHours
+var WhatsAppCallHours_enabled = &sWhatsAppCallHours_enabled
+var WhatsAppCallHours_timezone = &sWhatsAppCallHours_timezone
+var WhatsAppCallHours_weeklyOperatingHours = &sWhatsAppCallHours_weeklyOperatingHours
+var WhatsAppCallHours_holidaySchedule = &sWhatsAppCallHours_holidaySchedule
+
+var _WhatsAppCallIconVisibility = &s_WhatsAppCallIconVisibility
+
+var WhatsAppCallPermission = &sWhatsAppCallPermission
+var WhatsAppCallPermission_status = &sWhatsAppCallPermission_status
+var WhatsAppCallPermission_expirationTime = &sWhatsAppCallPermission_expirationTime
+
+var WhatsAppCallPermissionAction = &sWhatsAppCallPermissionAction
+var WhatsAppCallPermissionAction_actionName = &sWhatsAppCallPermissionAction_actionName
+var WhatsAppCallPermissionAction_canPerformAction = &sWhatsAppCallPermissionAction_canPerformAction
+var WhatsAppCallPermissionAction_limits = &sWhatsAppCallPermissionAction_limits
+
+var _WhatsAppCallPermissionActionList = &s_WhatsAppCallPermissionActionList
+var _WhatsAppCallPermissionActionList_member = &s_WhatsAppCallPermissionActionList_member
+
+var _WhatsAppCallPermissionActionName = &s_WhatsAppCallPermissionActionName
+
+var WhatsAppCallPermissionLimit = &sWhatsAppCallPermissionLimit
+var WhatsAppCallPermissionLimit_timePeriod = &sWhatsAppCallPermissionLimit_timePeriod
+var WhatsAppCallPermissionLimit_maxAllowed = &sWhatsAppCallPermissionLimit_maxAllowed
+var WhatsAppCallPermissionLimit_currentUsage = &sWhatsAppCallPermissionLimit_currentUsage
+var WhatsAppCallPermissionLimit_limitExpirationTime = &sWhatsAppCallPermissionLimit_limitExpirationTime
+
+var _WhatsAppCallPermissionLimitList = &s_WhatsAppCallPermissionLimitList
+var _WhatsAppCallPermissionLimitList_member = &s_WhatsAppCallPermissionLimitList_member
+
+var _WhatsAppCallPermissionStatus = &s_WhatsAppCallPermissionStatus
+
+var WhatsAppCallSettings = &sWhatsAppCallSettings
+var WhatsAppCallSettings_callEnabled = &sWhatsAppCallSettings_callEnabled
+var WhatsAppCallSettings_callHours = &sWhatsAppCallSettings_callHours
+var WhatsAppCallSettings_callIconVisibility = &sWhatsAppCallSettings_callIconVisibility
+var WhatsAppCallSettings_callbackPermissionStatus = &sWhatsAppCallSettings_callbackPermissionStatus
+
+var _WhatsAppConversionEventBlob = &s_WhatsAppConversionEventBlob
+
+var _WhatsAppDatasetId = &s_WhatsAppDatasetId
+
+var _WhatsAppDate = &s_WhatsAppDate
+
+var WhatsAppDayOfWeek = &sWhatsAppDayOfWeek
+var WhatsAppDayOfWeek_MONDAY = &sWhatsAppDayOfWeek_MONDAY
+var WhatsAppDayOfWeek_TUESDAY = &sWhatsAppDayOfWeek_TUESDAY
+var WhatsAppDayOfWeek_WEDNESDAY = &sWhatsAppDayOfWeek_WEDNESDAY
+var WhatsAppDayOfWeek_THURSDAY = &sWhatsAppDayOfWeek_THURSDAY
+var WhatsAppDayOfWeek_FRIDAY = &sWhatsAppDayOfWeek_FRIDAY
+var WhatsAppDayOfWeek_SATURDAY = &sWhatsAppDayOfWeek_SATURDAY
+var WhatsAppDayOfWeek_SUNDAY = &sWhatsAppDayOfWeek_SUNDAY
+
+var _WhatsAppDestinationPhoneNumber = &s_WhatsAppDestinationPhoneNumber
+
+var _WhatsAppDisplayPhoneNumber = &s_WhatsAppDisplayPhoneNumber
+
+var WhatsAppHolidayScheduleEntry = &sWhatsAppHolidayScheduleEntry
+var WhatsAppHolidayScheduleEntry_date = &sWhatsAppHolidayScheduleEntry_date
+var WhatsAppHolidayScheduleEntry_startTime = &sWhatsAppHolidayScheduleEntry_startTime
+var WhatsAppHolidayScheduleEntry_endTime = &sWhatsAppHolidayScheduleEntry_endTime
+
+var _WhatsAppHolidayScheduleList = &s_WhatsAppHolidayScheduleList
+var _WhatsAppHolidayScheduleList_member = &s_WhatsAppHolidayScheduleList_member
+
+var _WhatsAppMediaId = &s_WhatsAppMediaId
+
+var _WhatsAppMessageBlob = &s_WhatsAppMessageBlob
+
+var _WhatsAppPhoneNumber = &s_WhatsAppPhoneNumber
+
+var WhatsAppPhoneNumberDetail = &sWhatsAppPhoneNumberDetail
+var WhatsAppPhoneNumberDetail_arn = &sWhatsAppPhoneNumberDetail_arn
+var WhatsAppPhoneNumberDetail_phoneNumber = &sWhatsAppPhoneNumberDetail_phoneNumber
+var WhatsAppPhoneNumberDetail_phoneNumberId = &sWhatsAppPhoneNumberDetail_phoneNumberId
+var WhatsAppPhoneNumberDetail_metaPhoneNumberId = &sWhatsAppPhoneNumberDetail_metaPhoneNumberId
+var WhatsAppPhoneNumberDetail_displayPhoneNumberName = &sWhatsAppPhoneNumberDetail_displayPhoneNumberName
+var WhatsAppPhoneNumberDetail_displayPhoneNumber = &sWhatsAppPhoneNumberDetail_displayPhoneNumber
+var WhatsAppPhoneNumberDetail_qualityRating = &sWhatsAppPhoneNumberDetail_qualityRating
+var WhatsAppPhoneNumberDetail_dataLocalizationRegion = &sWhatsAppPhoneNumberDetail_dataLocalizationRegion
+
+var _WhatsAppPhoneNumberDetailList = &s_WhatsAppPhoneNumberDetailList
+var _WhatsAppPhoneNumberDetailList_member = &s_WhatsAppPhoneNumberDetailList_member
+
+var _WhatsAppPhoneNumberId = &s_WhatsAppPhoneNumberId
+
+var _WhatsAppPhoneNumberName = &s_WhatsAppPhoneNumberName
+
+var _WhatsAppPhoneNumberQualityRating = &s_WhatsAppPhoneNumberQualityRating
+
+var WhatsAppPhoneNumberSummary = &sWhatsAppPhoneNumberSummary
+var WhatsAppPhoneNumberSummary_arn = &sWhatsAppPhoneNumberSummary_arn
+var WhatsAppPhoneNumberSummary_phoneNumber = &sWhatsAppPhoneNumberSummary_phoneNumber
+var WhatsAppPhoneNumberSummary_phoneNumberId = &sWhatsAppPhoneNumberSummary_phoneNumberId
+var WhatsAppPhoneNumberSummary_metaPhoneNumberId = &sWhatsAppPhoneNumberSummary_metaPhoneNumberId
+var WhatsAppPhoneNumberSummary_displayPhoneNumberName = &sWhatsAppPhoneNumberSummary_displayPhoneNumberName
+var WhatsAppPhoneNumberSummary_displayPhoneNumber = &sWhatsAppPhoneNumberSummary_displayPhoneNumber
+var WhatsAppPhoneNumberSummary_qualityRating = &sWhatsAppPhoneNumberSummary_qualityRating
+var WhatsAppPhoneNumberSummary_dataLocalizationRegion = &sWhatsAppPhoneNumberSummary_dataLocalizationRegion
+
+var _WhatsAppPhoneNumberSummaryList = &s_WhatsAppPhoneNumberSummaryList
+var _WhatsAppPhoneNumberSummaryList_member = &s_WhatsAppPhoneNumberSummaryList_member
+
+var WhatsAppSetupFinalization = &sWhatsAppSetupFinalization
+var WhatsAppSetupFinalization_associateInProgressToken = &sWhatsAppSetupFinalization_associateInProgressToken
+var WhatsAppSetupFinalization_phoneNumbers = &sWhatsAppSetupFinalization_phoneNumbers
+var WhatsAppSetupFinalization_phoneNumberParent = &sWhatsAppSetupFinalization_phoneNumberParent
+var WhatsAppSetupFinalization_waba = &sWhatsAppSetupFinalization_waba
+
+var WhatsAppSignupCallback = &sWhatsAppSignupCallback
+var WhatsAppSignupCallback_accessToken = &sWhatsAppSignupCallback_accessToken
+var WhatsAppSignupCallback_callbackUrl = &sWhatsAppSignupCallback_callbackUrl
+
+var WhatsAppSignupCallbackResult = &sWhatsAppSignupCallbackResult
+var WhatsAppSignupCallbackResult_associateInProgressToken = &sWhatsAppSignupCallbackResult_associateInProgressToken
+var WhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup = &sWhatsAppSignupCallbackResult_linkedAccountsWithIncompleteSetup
+
+var WhatsAppTimeOfDay = &sWhatsAppTimeOfDay
+var WhatsAppTimeOfDay_hours = &sWhatsAppTimeOfDay_hours
+var WhatsAppTimeOfDay_minutes = &sWhatsAppTimeOfDay_minutes
+
+var WhatsAppWeeklyOperatingHoursEntry = &sWhatsAppWeeklyOperatingHoursEntry
+var WhatsAppWeeklyOperatingHoursEntry_dayOfWeek = &sWhatsAppWeeklyOperatingHoursEntry_dayOfWeek
+var WhatsAppWeeklyOperatingHoursEntry_openTime = &sWhatsAppWeeklyOperatingHoursEntry_openTime
+var WhatsAppWeeklyOperatingHoursEntry_closeTime = &sWhatsAppWeeklyOperatingHoursEntry_closeTime
+
+var _WhatsAppWeeklyOperatingHoursList = &s_WhatsAppWeeklyOperatingHoursList
+var _WhatsAppWeeklyOperatingHoursList_member = &s_WhatsAppWeeklyOperatingHoursList_member
+
+var _ZeroTapTermsAccepted = &s_ZeroTapTermsAccepted
+
+var AssociateWhatsAppBusinessAccountInput = &sAssociateWhatsAppBusinessAccountInput
+var AssociateWhatsAppBusinessAccountInput_signupCallback = &sAssociateWhatsAppBusinessAccountInput_signupCallback
+var AssociateWhatsAppBusinessAccountInput_setupFinalization = &sAssociateWhatsAppBusinessAccountInput_setupFinalization
+
+var AssociateWhatsAppBusinessAccountOutput = &sAssociateWhatsAppBusinessAccountOutput
+var AssociateWhatsAppBusinessAccountOutput_signupCallbackResult = &sAssociateWhatsAppBusinessAccountOutput_signupCallbackResult
+var AssociateWhatsAppBusinessAccountOutput_statusCode = &sAssociateWhatsAppBusinessAccountOutput_statusCode
+var AssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId = &sAssociateWhatsAppBusinessAccountOutput_linkedWhatsAppBusinessAccountId
+
+var CreateWhatsAppDatasetInput = &sCreateWhatsAppDatasetInput
+var CreateWhatsAppDatasetInput_id = &sCreateWhatsAppDatasetInput_id
+
+var CreateWhatsAppDatasetOutput = &sCreateWhatsAppDatasetOutput
+var CreateWhatsAppDatasetOutput_datasetId = &sCreateWhatsAppDatasetOutput_datasetId
+
+var CreateWhatsAppFlowInput = &sCreateWhatsAppFlowInput
+var CreateWhatsAppFlowInput_id = &sCreateWhatsAppFlowInput_id
+var CreateWhatsAppFlowInput_flowName = &sCreateWhatsAppFlowInput_flowName
+var CreateWhatsAppFlowInput_categories = &sCreateWhatsAppFlowInput_categories
+var CreateWhatsAppFlowInput_flowJson = &sCreateWhatsAppFlowInput_flowJson
+var CreateWhatsAppFlowInput_publish = &sCreateWhatsAppFlowInput_publish
+var CreateWhatsAppFlowInput_cloneFlowId = &sCreateWhatsAppFlowInput_cloneFlowId
+var CreateWhatsAppFlowInput_endpointUri = &sCreateWhatsAppFlowInput_endpointUri
+
+var CreateWhatsAppFlowOutput = &sCreateWhatsAppFlowOutput
+var CreateWhatsAppFlowOutput_flowId = &sCreateWhatsAppFlowOutput_flowId
+var CreateWhatsAppFlowOutput_validationErrors = &sCreateWhatsAppFlowOutput_validationErrors
+
+var CreateWhatsAppMessageTemplateFromLibraryInput = &sCreateWhatsAppMessageTemplateFromLibraryInput
+var CreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate = &sCreateWhatsAppMessageTemplateFromLibraryInput_metaLibraryTemplate
+var CreateWhatsAppMessageTemplateFromLibraryInput_id = &sCreateWhatsAppMessageTemplateFromLibraryInput_id
+
+var CreateWhatsAppMessageTemplateFromLibraryOutput = &sCreateWhatsAppMessageTemplateFromLibraryOutput
+var CreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId = &sCreateWhatsAppMessageTemplateFromLibraryOutput_metaTemplateId
+var CreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus = &sCreateWhatsAppMessageTemplateFromLibraryOutput_templateStatus
+var CreateWhatsAppMessageTemplateFromLibraryOutput_category = &sCreateWhatsAppMessageTemplateFromLibraryOutput_category
+
+var CreateWhatsAppMessageTemplateInput = &sCreateWhatsAppMessageTemplateInput
+var CreateWhatsAppMessageTemplateInput_templateDefinition = &sCreateWhatsAppMessageTemplateInput_templateDefinition
+var CreateWhatsAppMessageTemplateInput_id = &sCreateWhatsAppMessageTemplateInput_id
+
+var CreateWhatsAppMessageTemplateMediaInput = &sCreateWhatsAppMessageTemplateMediaInput
+var CreateWhatsAppMessageTemplateMediaInput_id = &sCreateWhatsAppMessageTemplateMediaInput_id
+var CreateWhatsAppMessageTemplateMediaInput_sourceS3File = &sCreateWhatsAppMessageTemplateMediaInput_sourceS3File
+
+var CreateWhatsAppMessageTemplateMediaOutput = &sCreateWhatsAppMessageTemplateMediaOutput
+var CreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle = &sCreateWhatsAppMessageTemplateMediaOutput_metaHeaderHandle
+
+var CreateWhatsAppMessageTemplateOutput = &sCreateWhatsAppMessageTemplateOutput
+var CreateWhatsAppMessageTemplateOutput_metaTemplateId = &sCreateWhatsAppMessageTemplateOutput_metaTemplateId
+var CreateWhatsAppMessageTemplateOutput_templateStatus = &sCreateWhatsAppMessageTemplateOutput_templateStatus
+var CreateWhatsAppMessageTemplateOutput_category = &sCreateWhatsAppMessageTemplateOutput_category
+
+var DeleteWhatsAppFlowInput = &sDeleteWhatsAppFlowInput
+var DeleteWhatsAppFlowInput_id = &sDeleteWhatsAppFlowInput_id
+var DeleteWhatsAppFlowInput_flowId = &sDeleteWhatsAppFlowInput_flowId
+
+var DeleteWhatsAppFlowOutput = &sDeleteWhatsAppFlowOutput
+
+var DeleteWhatsAppMessageMediaInput = &sDeleteWhatsAppMessageMediaInput
+var DeleteWhatsAppMessageMediaInput_mediaId = &sDeleteWhatsAppMessageMediaInput_mediaId
+var DeleteWhatsAppMessageMediaInput_originationPhoneNumberId = &sDeleteWhatsAppMessageMediaInput_originationPhoneNumberId
+
+var DeleteWhatsAppMessageMediaOutput = &sDeleteWhatsAppMessageMediaOutput
+var DeleteWhatsAppMessageMediaOutput_success = &sDeleteWhatsAppMessageMediaOutput_success
+
+var DeleteWhatsAppMessageTemplateInput = &sDeleteWhatsAppMessageTemplateInput
+var DeleteWhatsAppMessageTemplateInput_metaTemplateId = &sDeleteWhatsAppMessageTemplateInput_metaTemplateId
+var DeleteWhatsAppMessageTemplateInput_deleteAllLanguages = &sDeleteWhatsAppMessageTemplateInput_deleteAllLanguages
+var DeleteWhatsAppMessageTemplateInput_id = &sDeleteWhatsAppMessageTemplateInput_id
+var DeleteWhatsAppMessageTemplateInput_templateName = &sDeleteWhatsAppMessageTemplateInput_templateName
+
+var DeleteWhatsAppMessageTemplateOutput = &sDeleteWhatsAppMessageTemplateOutput
+
+var DeprecateWhatsAppFlowInput = &sDeprecateWhatsAppFlowInput
+var DeprecateWhatsAppFlowInput_id = &sDeprecateWhatsAppFlowInput_id
+var DeprecateWhatsAppFlowInput_flowId = &sDeprecateWhatsAppFlowInput_flowId
+
+var DeprecateWhatsAppFlowOutput = &sDeprecateWhatsAppFlowOutput
+
+var DisassociateWhatsAppBusinessAccountInput = &sDisassociateWhatsAppBusinessAccountInput
+var DisassociateWhatsAppBusinessAccountInput_id = &sDisassociateWhatsAppBusinessAccountInput_id
+
+var DisassociateWhatsAppBusinessAccountOutput = &sDisassociateWhatsAppBusinessAccountOutput
+
+var GetLinkedWhatsAppBusinessAccountInput = &sGetLinkedWhatsAppBusinessAccountInput
+var GetLinkedWhatsAppBusinessAccountInput_id = &sGetLinkedWhatsAppBusinessAccountInput_id
+
+var GetLinkedWhatsAppBusinessAccountOutput = &sGetLinkedWhatsAppBusinessAccountOutput
+var GetLinkedWhatsAppBusinessAccountOutput_account = &sGetLinkedWhatsAppBusinessAccountOutput_account
+
+var GetLinkedWhatsAppBusinessAccountPhoneNumberInput = &sGetLinkedWhatsAppBusinessAccountPhoneNumberInput
+var GetLinkedWhatsAppBusinessAccountPhoneNumberInput_id = &sGetLinkedWhatsAppBusinessAccountPhoneNumberInput_id
+
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput = &sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber = &sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumber
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId = &sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_linkedWhatsAppBusinessAccountId
+var GetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings = &sGetLinkedWhatsAppBusinessAccountPhoneNumberOutput_callSettings
+
+var GetWhatsAppBusinessPublicKeyInput = &sGetWhatsAppBusinessPublicKeyInput
+var GetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = &sGetWhatsAppBusinessPublicKeyInput_originationPhoneNumberId
+
+var GetWhatsAppBusinessPublicKeyOutput = &sGetWhatsAppBusinessPublicKeyOutput
+var GetWhatsAppBusinessPublicKeyOutput_businessPublicKey = &sGetWhatsAppBusinessPublicKeyOutput_businessPublicKey
+var GetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus = &sGetWhatsAppBusinessPublicKeyOutput_businessPublicKeySignatureStatus
+
+var GetWhatsAppCallPermissionInput = &sGetWhatsAppCallPermissionInput
+var GetWhatsAppCallPermissionInput_originationPhoneNumberId = &sGetWhatsAppCallPermissionInput_originationPhoneNumberId
+var GetWhatsAppCallPermissionInput_destinationPhoneNumber = &sGetWhatsAppCallPermissionInput_destinationPhoneNumber
+var GetWhatsAppCallPermissionInput_endUserBsuid = &sGetWhatsAppCallPermissionInput_endUserBsuid
+
+var GetWhatsAppCallPermissionOutput = &sGetWhatsAppCallPermissionOutput
+var GetWhatsAppCallPermissionOutput_permission = &sGetWhatsAppCallPermissionOutput_permission
+var GetWhatsAppCallPermissionOutput_actions = &sGetWhatsAppCallPermissionOutput_actions
+
+var GetWhatsAppFlowInput = &sGetWhatsAppFlowInput
+var GetWhatsAppFlowInput_id = &sGetWhatsAppFlowInput_id
+var GetWhatsAppFlowInput_flowId = &sGetWhatsAppFlowInput_flowId
+
+var GetWhatsAppFlowOutput = &sGetWhatsAppFlowOutput
+var GetWhatsAppFlowOutput_flowId = &sGetWhatsAppFlowOutput_flowId
+var GetWhatsAppFlowOutput_flowName = &sGetWhatsAppFlowOutput_flowName
+var GetWhatsAppFlowOutput_flowStatus = &sGetWhatsAppFlowOutput_flowStatus
+var GetWhatsAppFlowOutput_categories = &sGetWhatsAppFlowOutput_categories
+var GetWhatsAppFlowOutput_validationErrors = &sGetWhatsAppFlowOutput_validationErrors
+var GetWhatsAppFlowOutput_jsonVersion = &sGetWhatsAppFlowOutput_jsonVersion
+var GetWhatsAppFlowOutput_dataApiVersion = &sGetWhatsAppFlowOutput_dataApiVersion
+var GetWhatsAppFlowOutput_endpointUri = &sGetWhatsAppFlowOutput_endpointUri
+var GetWhatsAppFlowOutput_preview = &sGetWhatsAppFlowOutput_preview
+var GetWhatsAppFlowOutput_whatsAppBusinessAccount = &sGetWhatsAppFlowOutput_whatsAppBusinessAccount
+var GetWhatsAppFlowOutput_application = &sGetWhatsAppFlowOutput_application
+var GetWhatsAppFlowOutput_healthStatus = &sGetWhatsAppFlowOutput_healthStatus
+
+var GetWhatsAppFlowPreviewInput = &sGetWhatsAppFlowPreviewInput
+var GetWhatsAppFlowPreviewInput_id = &sGetWhatsAppFlowPreviewInput_id
+var GetWhatsAppFlowPreviewInput_flowId = &sGetWhatsAppFlowPreviewInput_flowId
+var GetWhatsAppFlowPreviewInput_invalidate = &sGetWhatsAppFlowPreviewInput_invalidate
+
+var GetWhatsAppFlowPreviewOutput = &sGetWhatsAppFlowPreviewOutput
+var GetWhatsAppFlowPreviewOutput_flowId = &sGetWhatsAppFlowPreviewOutput_flowId
+var GetWhatsAppFlowPreviewOutput_preview = &sGetWhatsAppFlowPreviewOutput_preview
+
+var GetWhatsAppMessageMediaInput = &sGetWhatsAppMessageMediaInput
+var GetWhatsAppMessageMediaInput_mediaId = &sGetWhatsAppMessageMediaInput_mediaId
+var GetWhatsAppMessageMediaInput_originationPhoneNumberId = &sGetWhatsAppMessageMediaInput_originationPhoneNumberId
+var GetWhatsAppMessageMediaInput_metadataOnly = &sGetWhatsAppMessageMediaInput_metadataOnly
+var GetWhatsAppMessageMediaInput_destinationS3PresignedUrl = &sGetWhatsAppMessageMediaInput_destinationS3PresignedUrl
+var GetWhatsAppMessageMediaInput_destinationS3File = &sGetWhatsAppMessageMediaInput_destinationS3File
+
+var GetWhatsAppMessageMediaOutput = &sGetWhatsAppMessageMediaOutput
+var GetWhatsAppMessageMediaOutput_mimeType = &sGetWhatsAppMessageMediaOutput_mimeType
+var GetWhatsAppMessageMediaOutput_fileSize = &sGetWhatsAppMessageMediaOutput_fileSize
+
+var GetWhatsAppMessageTemplateInput = &sGetWhatsAppMessageTemplateInput
+var GetWhatsAppMessageTemplateInput_metaTemplateId = &sGetWhatsAppMessageTemplateInput_metaTemplateId
+var GetWhatsAppMessageTemplateInput_id = &sGetWhatsAppMessageTemplateInput_id
+var GetWhatsAppMessageTemplateInput_templateName = &sGetWhatsAppMessageTemplateInput_templateName
+var GetWhatsAppMessageTemplateInput_templateLanguageCode = &sGetWhatsAppMessageTemplateInput_templateLanguageCode
+
+var GetWhatsAppMessageTemplateOutput = &sGetWhatsAppMessageTemplateOutput
+var GetWhatsAppMessageTemplateOutput_template = &sGetWhatsAppMessageTemplateOutput_template
+
+var ListLinkedWhatsAppBusinessAccountsInput = &sListLinkedWhatsAppBusinessAccountsInput
+var ListLinkedWhatsAppBusinessAccountsInput_nextToken = &sListLinkedWhatsAppBusinessAccountsInput_nextToken
+var ListLinkedWhatsAppBusinessAccountsInput_maxResults = &sListLinkedWhatsAppBusinessAccountsInput_maxResults
+
+var ListLinkedWhatsAppBusinessAccountsOutput = &sListLinkedWhatsAppBusinessAccountsOutput
+var ListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts = &sListLinkedWhatsAppBusinessAccountsOutput_linkedAccounts
+var ListLinkedWhatsAppBusinessAccountsOutput_nextToken = &sListLinkedWhatsAppBusinessAccountsOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_statusCode = &sListTagsForResourceOutput_statusCode
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var ListWhatsAppFlowAssetsInput = &sListWhatsAppFlowAssetsInput
+var ListWhatsAppFlowAssetsInput_id = &sListWhatsAppFlowAssetsInput_id
+var ListWhatsAppFlowAssetsInput_flowId = &sListWhatsAppFlowAssetsInput_flowId
+var ListWhatsAppFlowAssetsInput_nextToken = &sListWhatsAppFlowAssetsInput_nextToken
+var ListWhatsAppFlowAssetsInput_maxResults = &sListWhatsAppFlowAssetsInput_maxResults
+
+var ListWhatsAppFlowAssetsOutput = &sListWhatsAppFlowAssetsOutput
+var ListWhatsAppFlowAssetsOutput_flowAssets = &sListWhatsAppFlowAssetsOutput_flowAssets
+var ListWhatsAppFlowAssetsOutput_nextToken = &sListWhatsAppFlowAssetsOutput_nextToken
+
+var ListWhatsAppFlowsInput = &sListWhatsAppFlowsInput
+var ListWhatsAppFlowsInput_id = &sListWhatsAppFlowsInput_id
+var ListWhatsAppFlowsInput_nextToken = &sListWhatsAppFlowsInput_nextToken
+var ListWhatsAppFlowsInput_maxResults = &sListWhatsAppFlowsInput_maxResults
+
+var ListWhatsAppFlowsOutput = &sListWhatsAppFlowsOutput
+var ListWhatsAppFlowsOutput_flows = &sListWhatsAppFlowsOutput_flows
+var ListWhatsAppFlowsOutput_nextToken = &sListWhatsAppFlowsOutput_nextToken
+
+var ListWhatsAppMessageTemplatesInput = &sListWhatsAppMessageTemplatesInput
+var ListWhatsAppMessageTemplatesInput_id = &sListWhatsAppMessageTemplatesInput_id
+var ListWhatsAppMessageTemplatesInput_nextToken = &sListWhatsAppMessageTemplatesInput_nextToken
+var ListWhatsAppMessageTemplatesInput_maxResults = &sListWhatsAppMessageTemplatesInput_maxResults
+
+var ListWhatsAppMessageTemplatesOutput = &sListWhatsAppMessageTemplatesOutput
+var ListWhatsAppMessageTemplatesOutput_templates = &sListWhatsAppMessageTemplatesOutput_templates
+var ListWhatsAppMessageTemplatesOutput_nextToken = &sListWhatsAppMessageTemplatesOutput_nextToken
+
+var ListWhatsAppTemplateLibraryInput = &sListWhatsAppTemplateLibraryInput
+var ListWhatsAppTemplateLibraryInput_nextToken = &sListWhatsAppTemplateLibraryInput_nextToken
+var ListWhatsAppTemplateLibraryInput_maxResults = &sListWhatsAppTemplateLibraryInput_maxResults
+var ListWhatsAppTemplateLibraryInput_id = &sListWhatsAppTemplateLibraryInput_id
+var ListWhatsAppTemplateLibraryInput_filters = &sListWhatsAppTemplateLibraryInput_filters
+
+var ListWhatsAppTemplateLibraryOutput = &sListWhatsAppTemplateLibraryOutput
+var ListWhatsAppTemplateLibraryOutput_metaLibraryTemplates = &sListWhatsAppTemplateLibraryOutput_metaLibraryTemplates
+var ListWhatsAppTemplateLibraryOutput_nextToken = &sListWhatsAppTemplateLibraryOutput_nextToken
+
+var PostWhatsAppMessageMediaInput = &sPostWhatsAppMessageMediaInput
+var PostWhatsAppMessageMediaInput_originationPhoneNumberId = &sPostWhatsAppMessageMediaInput_originationPhoneNumberId
+var PostWhatsAppMessageMediaInput_sourceS3PresignedUrl = &sPostWhatsAppMessageMediaInput_sourceS3PresignedUrl
+var PostWhatsAppMessageMediaInput_sourceS3File = &sPostWhatsAppMessageMediaInput_sourceS3File
+
+var PostWhatsAppMessageMediaOutput = &sPostWhatsAppMessageMediaOutput
+var PostWhatsAppMessageMediaOutput_mediaId = &sPostWhatsAppMessageMediaOutput_mediaId
+
+var PublishWhatsAppFlowInput = &sPublishWhatsAppFlowInput
+var PublishWhatsAppFlowInput_id = &sPublishWhatsAppFlowInput_id
+var PublishWhatsAppFlowInput_flowId = &sPublishWhatsAppFlowInput_flowId
+
+var PublishWhatsAppFlowOutput = &sPublishWhatsAppFlowOutput
+
+var PutWhatsAppBusinessAccountEventDestinationsInput = &sPutWhatsAppBusinessAccountEventDestinationsInput
+var PutWhatsAppBusinessAccountEventDestinationsInput_id = &sPutWhatsAppBusinessAccountEventDestinationsInput_id
+var PutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations = &sPutWhatsAppBusinessAccountEventDestinationsInput_eventDestinations
+
+var PutWhatsAppBusinessAccountEventDestinationsOutput = &sPutWhatsAppBusinessAccountEventDestinationsOutput
+
+var PutWhatsAppBusinessPublicKeyInput = &sPutWhatsAppBusinessPublicKeyInput
+var PutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId = &sPutWhatsAppBusinessPublicKeyInput_originationPhoneNumberId
+var PutWhatsAppBusinessPublicKeyInput_businessPublicKey = &sPutWhatsAppBusinessPublicKeyInput_businessPublicKey
+var PutWhatsAppBusinessPublicKeyInput_kmsKeyArn = &sPutWhatsAppBusinessPublicKeyInput_kmsKeyArn
+
+var PutWhatsAppBusinessPublicKeyOutput = &sPutWhatsAppBusinessPublicKeyOutput
+
+var SendWhatsAppCallEventInput = &sSendWhatsAppCallEventInput
+var SendWhatsAppCallEventInput_originationPhoneNumberId = &sSendWhatsAppCallEventInput_originationPhoneNumberId
+var SendWhatsAppCallEventInput_metaApiVersion = &sSendWhatsAppCallEventInput_metaApiVersion
+var SendWhatsAppCallEventInput_callEvent = &sSendWhatsAppCallEventInput_callEvent
+
+var SendWhatsAppCallEventOutput = &sSendWhatsAppCallEventOutput
+var SendWhatsAppCallEventOutput_callId = &sSendWhatsAppCallEventOutput_callId
+
+var SendWhatsAppConversionEventInput = &sSendWhatsAppConversionEventInput
+var SendWhatsAppConversionEventInput_id = &sSendWhatsAppConversionEventInput_id
+var SendWhatsAppConversionEventInput_datasetId = &sSendWhatsAppConversionEventInput_datasetId
+var SendWhatsAppConversionEventInput_eventData = &sSendWhatsAppConversionEventInput_eventData
+
+var SendWhatsAppConversionEventOutput = &sSendWhatsAppConversionEventOutput
+var SendWhatsAppConversionEventOutput_requestId = &sSendWhatsAppConversionEventOutput_requestId
+
+var SendWhatsAppMessageInput = &sSendWhatsAppMessageInput
+var SendWhatsAppMessageInput_originationPhoneNumberId = &sSendWhatsAppMessageInput_originationPhoneNumberId
+var SendWhatsAppMessageInput_message = &sSendWhatsAppMessageInput_message
+var SendWhatsAppMessageInput_metaApiVersion = &sSendWhatsAppMessageInput_metaApiVersion
+
+var SendWhatsAppMessageOutput = &sSendWhatsAppMessageOutput
+var SendWhatsAppMessageOutput_messageId = &sSendWhatsAppMessageOutput_messageId
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+var TagResourceOutput_statusCode = &sTagResourceOutput_statusCode
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+var UntagResourceOutput_statusCode = &sUntagResourceOutput_statusCode
+
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput = &sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id = &sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_id
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings = &sUpdateLinkedWhatsAppBusinessAccountPhoneNumberInput_callSettings
+
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput = &sUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput
+var UpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId = &sUpdateLinkedWhatsAppBusinessAccountPhoneNumberOutput_phoneNumberId
+
+var UpdateWhatsAppFlowAssetsInput = &sUpdateWhatsAppFlowAssetsInput
+var UpdateWhatsAppFlowAssetsInput_id = &sUpdateWhatsAppFlowAssetsInput_id
+var UpdateWhatsAppFlowAssetsInput_flowId = &sUpdateWhatsAppFlowAssetsInput_flowId
+var UpdateWhatsAppFlowAssetsInput_flowJson = &sUpdateWhatsAppFlowAssetsInput_flowJson
+
+var UpdateWhatsAppFlowAssetsOutput = &sUpdateWhatsAppFlowAssetsOutput
+var UpdateWhatsAppFlowAssetsOutput_validationErrors = &sUpdateWhatsAppFlowAssetsOutput_validationErrors
+
+var UpdateWhatsAppFlowInput = &sUpdateWhatsAppFlowInput
+var UpdateWhatsAppFlowInput_id = &sUpdateWhatsAppFlowInput_id
+var UpdateWhatsAppFlowInput_flowId = &sUpdateWhatsAppFlowInput_flowId
+var UpdateWhatsAppFlowInput_flowName = &sUpdateWhatsAppFlowInput_flowName
+var UpdateWhatsAppFlowInput_categories = &sUpdateWhatsAppFlowInput_categories
+var UpdateWhatsAppFlowInput_endpointUri = &sUpdateWhatsAppFlowInput_endpointUri
+var UpdateWhatsAppFlowInput_metaAppId = &sUpdateWhatsAppFlowInput_metaAppId
+
+var UpdateWhatsAppFlowOutput = &sUpdateWhatsAppFlowOutput
+
+var UpdateWhatsAppMessageTemplateInput = &sUpdateWhatsAppMessageTemplateInput
+var UpdateWhatsAppMessageTemplateInput_id = &sUpdateWhatsAppMessageTemplateInput_id
+var UpdateWhatsAppMessageTemplateInput_metaTemplateId = &sUpdateWhatsAppMessageTemplateInput_metaTemplateId
+var UpdateWhatsAppMessageTemplateInput_templateName = &sUpdateWhatsAppMessageTemplateInput_templateName
+var UpdateWhatsAppMessageTemplateInput_templateLanguageCode = &sUpdateWhatsAppMessageTemplateInput_templateLanguageCode
+var UpdateWhatsAppMessageTemplateInput_parameterFormat = &sUpdateWhatsAppMessageTemplateInput_parameterFormat
+var UpdateWhatsAppMessageTemplateInput_templateCategory = &sUpdateWhatsAppMessageTemplateInput_templateCategory
+var UpdateWhatsAppMessageTemplateInput_templateComponents = &sUpdateWhatsAppMessageTemplateInput_templateComponents
+var UpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut = &sUpdateWhatsAppMessageTemplateInput_ctaUrlLinkTrackingOptedOut
+
+var UpdateWhatsAppMessageTemplateOutput = &sUpdateWhatsAppMessageTemplateOutput
+
+var SocialMessaging = &smithy.ServiceSchema{Schema: &s_SocialMessaging, Version: "2024-01-01"}

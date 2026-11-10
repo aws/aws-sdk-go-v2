@@ -4,854 +4,647 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var GetClip = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetClip",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iGetClip                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetClip"}
+	iGetDASHStreamingSessionURL          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetDASHStreamingSessionURL"}
+	iGetHLSStreamingSessionURL           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetHLSStreamingSessionURL"}
+	iGetImages                           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetImages"}
+	iGetMediaForFragmentList             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetMediaForFragmentList"}
+	iListFragments                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ListFragments"}
+	i_AWSAcuityReader                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "AWSAcuityReader"}
+	iClientLimitExceededException        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ClientLimitExceededException"}
+	iClipFragmentSelector                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ClipFragmentSelector"}
+	iClipFragmentSelectorType            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ClipFragmentSelectorType"}
+	iClipTimestampRange                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ClipTimestampRange"}
+	iContainerFormat                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ContainerFormat"}
+	i_ContentType                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ContentType"}
+	iDASHDisplayFragmentNumber           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHDisplayFragmentNumber"}
+	iDASHDisplayFragmentTimestamp        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHDisplayFragmentTimestamp"}
+	iDASHFragmentSelector                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHFragmentSelector"}
+	iDASHFragmentSelectorType            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHFragmentSelectorType"}
+	i_DASHMaxResults                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHMaxResults"}
+	iDASHPlaybackMode                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHPlaybackMode"}
+	i_DASHStreamingSessionURL            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHStreamingSessionURL"}
+	iDASHTimestampRange                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "DASHTimestampRange"}
+	i_ErrorMessage                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ErrorMessage"}
+	i_Expires                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Expires"}
+	iFormat                              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Format"}
+	i_FormatConfig                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FormatConfig"}
+	iFormatConfigKey                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FormatConfigKey"}
+	i_FormatConfigValue                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FormatConfigValue"}
+	iFragment                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Fragment"}
+	i_FragmentList                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FragmentList"}
+	i_FragmentNumberList                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FragmentNumberList"}
+	i_FragmentNumberString               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FragmentNumberString"}
+	iFragmentSelector                    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FragmentSelector"}
+	iFragmentSelectorType                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "FragmentSelectorType"}
+	i_GetImagesMaxResults                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetImagesMaxResults"}
+	i_HeightPixels                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HeightPixels"}
+	iHLSDiscontinuityMode                = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSDiscontinuityMode"}
+	iHLSDisplayFragmentTimestamp         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSDisplayFragmentTimestamp"}
+	iHLSFragmentSelector                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSFragmentSelector"}
+	iHLSFragmentSelectorType             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSFragmentSelectorType"}
+	i_HLSMaxResults                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSMaxResults"}
+	iHLSPlaybackMode                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSPlaybackMode"}
+	i_HLSStreamingSessionURL             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSStreamingSessionURL"}
+	iHLSTimestampRange                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "HLSTimestampRange"}
+	iImage                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Image"}
+	i_ImageContent                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ImageContent"}
+	iImageError                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ImageError"}
+	i_Images                             = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Images"}
+	iImageSelectorType                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ImageSelectorType"}
+	iInvalidArgumentException            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "InvalidArgumentException"}
+	iInvalidCodecPrivateDataException    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "InvalidCodecPrivateDataException"}
+	iInvalidMediaFrameException          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "InvalidMediaFrameException"}
+	i_ListFragmentsMaxResults            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ListFragmentsMaxResults"}
+	i_Long                               = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Long"}
+	iMissingCodecPrivateDataException    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "MissingCodecPrivateDataException"}
+	i_NextToken                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "NextToken"}
+	iNoDataRetentionException            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "NoDataRetentionException"}
+	iNotAuthorizedException              = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "NotAuthorizedException"}
+	i_Payload                            = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Payload"}
+	i_ResourceARN                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ResourceARN"}
+	iResourceNotFoundException           = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ResourceNotFoundException"}
+	i_SamplingInterval                   = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "SamplingInterval"}
+	i_StreamName                         = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "StreamName"}
+	i_Timestamp                          = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "Timestamp"}
+	iTimestampRange                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "TimestampRange"}
+	iUnsupportedStreamMediaTypeException = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "UnsupportedStreamMediaTypeException"}
+	i_WidthPixels                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "WidthPixels"}
+	iGetClipInput                        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetClipInput"}
+	iGetClipOutput                       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetClipOutput"}
+	iGetDASHStreamingSessionURLInput     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetDASHStreamingSessionURLInput"}
+	iGetDASHStreamingSessionURLOutput    = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetDASHStreamingSessionURLOutput"}
+	iGetHLSStreamingSessionURLInput      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetHLSStreamingSessionURLInput"}
+	iGetHLSStreamingSessionURLOutput     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetHLSStreamingSessionURLOutput"}
+	iGetImagesInput                      = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetImagesInput"}
+	iGetImagesOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetImagesOutput"}
+	iGetMediaForFragmentListInput        = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetMediaForFragmentListInput"}
+	iGetMediaForFragmentListOutput       = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "GetMediaForFragmentListOutput"}
+	iListFragmentsInput                  = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ListFragmentsInput"}
+	iListFragmentsOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.kinesisvideoarchivedmedia", Name: "ListFragmentsOutput"}
+	pUnit                                = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getClip",
-	Code: 200})
-
-var GetDASHStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetDASHStreamingSessionURL",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getDASHStreamingSessionURL",
-	Code: 200})
-
-var GetHLSStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetHLSStreamingSessionURL",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getHLSStreamingSessionURL",
-	Code: 200})
-
-var GetImages = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImages",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getImages",
-	Code: 200})
-
-var GetMediaForFragmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetMediaForFragmentList",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/getMediaForFragmentList",
-	Code: 200})
-
-var ListFragments = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragments",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listFragments",
-	Code: 200})
-
-var _AWSAcuityReader = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "AWSAcuityReader",
-}, smithy.ShapeTypeService, 0)
-
-var AWSAcuityReader = smithy.NewServiceSchema(_AWSAcuityReader, "2017-09-30")
-
-var ClientLimitExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClientLimitExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ClientLimitExceededException_Message *smithy.Schema
-
-var ClipFragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClipFragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var ClipFragmentSelector_FragmentSelectorType *smithy.Schema
-
-var ClipFragmentSelector_TimestampRange *smithy.Schema
-
-var ClipFragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClipFragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var ClipFragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var ClipFragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var ClipTimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ClipTimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var ClipTimestampRange_StartTimestamp *smithy.Schema
-
-var ClipTimestampRange_EndTimestamp *smithy.Schema
-
-var ContainerFormat = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ContainerFormat",
-}, smithy.ShapeTypeEnum, 2)
-var ContainerFormat_FRAGMENTED_MP4 *smithy.Schema
-
-var ContainerFormat_MPEG_TS *smithy.Schema
-
-var _ContentType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ContentType",
-}, smithy.ShapeTypeString, 0)
-
-var DASHDisplayFragmentNumber = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHDisplayFragmentNumber",
-}, smithy.ShapeTypeEnum, 2)
-var DASHDisplayFragmentNumber_ALWAYS *smithy.Schema
-
-var DASHDisplayFragmentNumber_NEVER *smithy.Schema
-
-var DASHDisplayFragmentTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHDisplayFragmentTimestamp",
-}, smithy.ShapeTypeEnum, 2)
-var DASHDisplayFragmentTimestamp_ALWAYS *smithy.Schema
-
-var DASHDisplayFragmentTimestamp_NEVER *smithy.Schema
-
-var DASHFragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHFragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var DASHFragmentSelector_FragmentSelectorType *smithy.Schema
-
-var DASHFragmentSelector_TimestampRange *smithy.Schema
-
-var DASHFragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHFragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var DASHFragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var DASHFragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var _DASHMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var DASHPlaybackMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHPlaybackMode",
-}, smithy.ShapeTypeEnum, 3)
-var DASHPlaybackMode_LIVE *smithy.Schema
-
-var DASHPlaybackMode_LIVE_REPLAY *smithy.Schema
-
-var DASHPlaybackMode_ON_DEMAND *smithy.Schema
-
-var _DASHStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHStreamingSessionURL",
-}, smithy.ShapeTypeString, 0)
-
-var DASHTimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "DASHTimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var DASHTimestampRange_StartTimestamp *smithy.Schema
-
-var DASHTimestampRange_EndTimestamp *smithy.Schema
-
-var _ErrorMessage = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ErrorMessage",
-}, smithy.ShapeTypeString, 0)
-
-var _Expires = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Expires",
-}, smithy.ShapeTypeInteger, 0)
-
-var Format = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Format",
-}, smithy.ShapeTypeEnum, 2)
-var Format_JPEG *smithy.Schema
-
-var Format_PNG *smithy.Schema
-
-var _FormatConfig = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FormatConfig",
-}, smithy.ShapeTypeMap, 2)
-var _FormatConfig_key *smithy.Schema
-
-var _FormatConfig_value *smithy.Schema
-
-var FormatConfigKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FormatConfigKey",
-}, smithy.ShapeTypeEnum, 1)
-var FormatConfigKey_JPEGQuality *smithy.Schema
-
-var _FormatConfigValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FormatConfigValue",
-}, smithy.ShapeTypeString, 0)
-
-var Fragment = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Fragment",
-}, smithy.ShapeTypeStructure, 5)
-var Fragment_FragmentNumber *smithy.Schema
-
-var Fragment_FragmentSizeInBytes *smithy.Schema
-
-var Fragment_ProducerTimestamp *smithy.Schema
-
-var Fragment_ServerTimestamp *smithy.Schema
-
-var Fragment_FragmentLengthInMilliseconds *smithy.Schema
-
-var _FragmentList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentList",
-}, smithy.ShapeTypeList, 1)
-var _FragmentList_member *smithy.Schema
-
-var _FragmentNumberList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentNumberList",
-}, smithy.ShapeTypeList, 1)
-var _FragmentNumberList_member *smithy.Schema
-
-var _FragmentNumberString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentNumberString",
-}, smithy.ShapeTypeString, 0)
-
-var FragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var FragmentSelector_FragmentSelectorType *smithy.Schema
-
-var FragmentSelector_TimestampRange *smithy.Schema
-
-var FragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "FragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var FragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var FragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var _GetImagesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImagesMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var _HeightPixels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HeightPixels",
-}, smithy.ShapeTypeInteger, 0)
-
-var HLSDiscontinuityMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSDiscontinuityMode",
-}, smithy.ShapeTypeEnum, 3)
-var HLSDiscontinuityMode_ALWAYS *smithy.Schema
-
-var HLSDiscontinuityMode_NEVER *smithy.Schema
-
-var HLSDiscontinuityMode_ON_DISCONTINUITY *smithy.Schema
-
-var HLSDisplayFragmentTimestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSDisplayFragmentTimestamp",
-}, smithy.ShapeTypeEnum, 2)
-var HLSDisplayFragmentTimestamp_ALWAYS *smithy.Schema
-
-var HLSDisplayFragmentTimestamp_NEVER *smithy.Schema
-
-var HLSFragmentSelector = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSFragmentSelector",
-}, smithy.ShapeTypeStructure, 2)
-var HLSFragmentSelector_FragmentSelectorType *smithy.Schema
-
-var HLSFragmentSelector_TimestampRange *smithy.Schema
-
-var HLSFragmentSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSFragmentSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var HLSFragmentSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var HLSFragmentSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var _HLSMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var HLSPlaybackMode = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSPlaybackMode",
-}, smithy.ShapeTypeEnum, 3)
-var HLSPlaybackMode_LIVE *smithy.Schema
-
-var HLSPlaybackMode_LIVE_REPLAY *smithy.Schema
-
-var HLSPlaybackMode_ON_DEMAND *smithy.Schema
-
-var _HLSStreamingSessionURL = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSStreamingSessionURL",
-}, smithy.ShapeTypeString, 0)
-
-var HLSTimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "HLSTimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var HLSTimestampRange_StartTimestamp *smithy.Schema
-
-var HLSTimestampRange_EndTimestamp *smithy.Schema
-
-var Image = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Image",
-}, smithy.ShapeTypeStructure, 3)
-var Image_TimeStamp *smithy.Schema
-
-var Image_Error *smithy.Schema
-
-var Image_ImageContent *smithy.Schema
-
-var _ImageContent = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ImageContent",
-}, smithy.ShapeTypeString, 0)
-
-var ImageError = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ImageError",
-}, smithy.ShapeTypeEnum, 2)
-var ImageError_NO_MEDIA *smithy.Schema
-
-var ImageError_MEDIA_ERROR *smithy.Schema
-
-var _Images = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Images",
-}, smithy.ShapeTypeList, 1)
-var _Images_member *smithy.Schema
-
-var ImageSelectorType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ImageSelectorType",
-}, smithy.ShapeTypeEnum, 2)
-var ImageSelectorType_PRODUCER_TIMESTAMP *smithy.Schema
-
-var ImageSelectorType_SERVER_TIMESTAMP *smithy.Schema
-
-var InvalidArgumentException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "InvalidArgumentException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidArgumentException_Message *smithy.Schema
-
-var InvalidCodecPrivateDataException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "InvalidCodecPrivateDataException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidCodecPrivateDataException_Message *smithy.Schema
-
-var InvalidMediaFrameException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "InvalidMediaFrameException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var InvalidMediaFrameException_Message *smithy.Schema
-
-var _ListFragmentsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragmentsMaxResults",
-}, smithy.ShapeTypeLong, 0)
-
-var _Long = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Long",
-}, smithy.ShapeTypeLong, 0)
-
-var MissingCodecPrivateDataException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "MissingCodecPrivateDataException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var MissingCodecPrivateDataException_Message *smithy.Schema
-
-var _NextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "NextToken",
-}, smithy.ShapeTypeString, 0)
-
-var NoDataRetentionException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "NoDataRetentionException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var NoDataRetentionException_Message *smithy.Schema
-
-var NotAuthorizedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "NotAuthorizedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 401})
-var NotAuthorizedException_Message *smithy.Schema
-
-var _Payload = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Payload",
-}, smithy.ShapeTypeBlob, 0, &smithytraits.Streaming{})
-
-var _ResourceARN = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ResourceARN",
-}, smithy.ShapeTypeString, 0)
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var _SamplingInterval = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "SamplingInterval",
-}, smithy.ShapeTypeInteger, 0)
-
-var _StreamName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "StreamName",
-}, smithy.ShapeTypeString, 0)
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0)
-
-var TimestampRange = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "TimestampRange",
-}, smithy.ShapeTypeStructure, 2)
-var TimestampRange_StartTimestamp *smithy.Schema
-
-var TimestampRange_EndTimestamp *smithy.Schema
-
-var UnsupportedStreamMediaTypeException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "UnsupportedStreamMediaTypeException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var UnsupportedStreamMediaTypeException_Message *smithy.Schema
-
-var _WidthPixels = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "WidthPixels",
-}, smithy.ShapeTypeInteger, 0)
-
-var GetClipInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetClipInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetClipInput_StreamName *smithy.Schema
-
-var GetClipInput_StreamARN *smithy.Schema
-
-var GetClipInput_ClipFragmentSelector *smithy.Schema
-
-var GetClipOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetClipOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetClipOutput_ContentType *smithy.Schema
-
-var GetClipOutput_Payload *smithy.Schema
-
-var GetDASHStreamingSessionURLInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetDASHStreamingSessionURLInput",
-}, smithy.ShapeTypeStructure, 8)
-var GetDASHStreamingSessionURLInput_StreamName *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_StreamARN *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_PlaybackMode *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_DisplayFragmentTimestamp *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_DisplayFragmentNumber *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_DASHFragmentSelector *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_Expires *smithy.Schema
-
-var GetDASHStreamingSessionURLInput_MaxManifestFragmentResults *smithy.Schema
-
-var GetDASHStreamingSessionURLOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetDASHStreamingSessionURLOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL *smithy.Schema
-
-var GetHLSStreamingSessionURLInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetHLSStreamingSessionURLInput",
-}, smithy.ShapeTypeStructure, 9)
-var GetHLSStreamingSessionURLInput_StreamName *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_StreamARN *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_PlaybackMode *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_HLSFragmentSelector *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_ContainerFormat *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_DiscontinuityMode *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_Expires *smithy.Schema
-
-var GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults *smithy.Schema
-
-var GetHLSStreamingSessionURLOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetHLSStreamingSessionURLOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL *smithy.Schema
-
-var GetImagesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImagesInput",
-}, smithy.ShapeTypeStructure, 12)
-var GetImagesInput_StreamName *smithy.Schema
-
-var GetImagesInput_StreamARN *smithy.Schema
-
-var GetImagesInput_ImageSelectorType *smithy.Schema
-
-var GetImagesInput_StartTimestamp *smithy.Schema
-
-var GetImagesInput_EndTimestamp *smithy.Schema
-
-var GetImagesInput_SamplingInterval *smithy.Schema
-
-var GetImagesInput_Format *smithy.Schema
-
-var GetImagesInput_FormatConfig *smithy.Schema
-
-var GetImagesInput_WidthPixels *smithy.Schema
-
-var GetImagesInput_HeightPixels *smithy.Schema
-
-var GetImagesInput_MaxResults *smithy.Schema
-
-var GetImagesInput_NextToken *smithy.Schema
-
-var GetImagesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetImagesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetImagesOutput_Images *smithy.Schema
-
-var GetImagesOutput_NextToken *smithy.Schema
-
-var GetMediaForFragmentListInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetMediaForFragmentListInput",
-}, smithy.ShapeTypeStructure, 3)
-var GetMediaForFragmentListInput_StreamName *smithy.Schema
-
-var GetMediaForFragmentListInput_StreamARN *smithy.Schema
-
-var GetMediaForFragmentListInput_Fragments *smithy.Schema
-
-var GetMediaForFragmentListOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "GetMediaForFragmentListOutput",
-}, smithy.ShapeTypeStructure, 2)
-var GetMediaForFragmentListOutput_ContentType *smithy.Schema
-
-var GetMediaForFragmentListOutput_Payload *smithy.Schema
-
-var ListFragmentsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragmentsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListFragmentsInput_StreamName *smithy.Schema
-
-var ListFragmentsInput_StreamARN *smithy.Schema
-
-var ListFragmentsInput_MaxResults *smithy.Schema
-
-var ListFragmentsInput_NextToken *smithy.Schema
-
-var ListFragmentsInput_FragmentSelector *smithy.Schema
-
-var ListFragmentsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.kinesisvideoarchivedmedia",
-	Name:      "ListFragmentsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListFragmentsOutput_Fragments *smithy.Schema
-
-var ListFragmentsOutput_NextToken *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	ClientLimitExceededException_Message = ClientLimitExceededException.AddMember("Message", _ErrorMessage)
-
-	ClipFragmentSelectorType_PRODUCER_TIMESTAMP = ClipFragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	ClipFragmentSelectorType_SERVER_TIMESTAMP = ClipFragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	ClipTimestampRange_StartTimestamp = ClipTimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	ClipTimestampRange_EndTimestamp = ClipTimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	ClipFragmentSelector_FragmentSelectorType = ClipFragmentSelector.AddMember("FragmentSelectorType", ClipFragmentSelectorType)
-
-	ClipFragmentSelector_TimestampRange = ClipFragmentSelector.AddMember("TimestampRange", ClipTimestampRange)
-
-	ContainerFormat_FRAGMENTED_MP4 = ContainerFormat.AddMember("FRAGMENTED_MP4", smithyprelude.Unit)
-
-	ContainerFormat_MPEG_TS = ContainerFormat.AddMember("MPEG_TS", smithyprelude.Unit)
-
-	DASHDisplayFragmentNumber_ALWAYS = DASHDisplayFragmentNumber.AddMember("ALWAYS", smithyprelude.Unit)
-
-	DASHDisplayFragmentNumber_NEVER = DASHDisplayFragmentNumber.AddMember("NEVER", smithyprelude.Unit)
-
-	DASHDisplayFragmentTimestamp_ALWAYS = DASHDisplayFragmentTimestamp.AddMember("ALWAYS", smithyprelude.Unit)
-
-	DASHDisplayFragmentTimestamp_NEVER = DASHDisplayFragmentTimestamp.AddMember("NEVER", smithyprelude.Unit)
-
-	DASHFragmentSelectorType_PRODUCER_TIMESTAMP = DASHFragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	DASHFragmentSelectorType_SERVER_TIMESTAMP = DASHFragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	DASHTimestampRange_StartTimestamp = DASHTimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	DASHTimestampRange_EndTimestamp = DASHTimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	DASHFragmentSelector_FragmentSelectorType = DASHFragmentSelector.AddMember("FragmentSelectorType", DASHFragmentSelectorType)
-
-	DASHFragmentSelector_TimestampRange = DASHFragmentSelector.AddMember("TimestampRange", DASHTimestampRange)
-
-	DASHPlaybackMode_LIVE = DASHPlaybackMode.AddMember("LIVE", smithyprelude.Unit)
-
-	DASHPlaybackMode_LIVE_REPLAY = DASHPlaybackMode.AddMember("LIVE_REPLAY", smithyprelude.Unit)
-
-	DASHPlaybackMode_ON_DEMAND = DASHPlaybackMode.AddMember("ON_DEMAND", smithyprelude.Unit)
-
-	Format_JPEG = Format.AddMember("JPEG", smithyprelude.Unit)
-
-	Format_PNG = Format.AddMember("PNG", smithyprelude.Unit)
-
-	FormatConfigKey_JPEGQuality = FormatConfigKey.AddMember("JPEGQuality", smithyprelude.Unit)
-
-	_FormatConfig_key = _FormatConfig.AddMember("key", FormatConfigKey)
-
-	_FormatConfig_value = _FormatConfig.AddMember("value", _FormatConfigValue)
-
-	Fragment_FragmentNumber = Fragment.AddMember("FragmentNumber", _FragmentNumberString)
-
-	Fragment_FragmentSizeInBytes = Fragment.AddMember("FragmentSizeInBytes", _Long)
-
-	Fragment_ProducerTimestamp = Fragment.AddMember("ProducerTimestamp", _Timestamp)
-
-	Fragment_ServerTimestamp = Fragment.AddMember("ServerTimestamp", _Timestamp)
-
-	Fragment_FragmentLengthInMilliseconds = Fragment.AddMember("FragmentLengthInMilliseconds", _Long)
-
-	_FragmentList_member = _FragmentList.AddMember("member", Fragment)
-
-	_FragmentNumberList_member = _FragmentNumberList.AddMember("member", _FragmentNumberString)
-
-	FragmentSelectorType_PRODUCER_TIMESTAMP = FragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	FragmentSelectorType_SERVER_TIMESTAMP = FragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	TimestampRange_StartTimestamp = TimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	TimestampRange_EndTimestamp = TimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	FragmentSelector_FragmentSelectorType = FragmentSelector.AddMember("FragmentSelectorType", FragmentSelectorType)
-
-	FragmentSelector_TimestampRange = FragmentSelector.AddMember("TimestampRange", TimestampRange)
-
-	HLSDiscontinuityMode_ALWAYS = HLSDiscontinuityMode.AddMember("ALWAYS", smithyprelude.Unit)
-
-	HLSDiscontinuityMode_NEVER = HLSDiscontinuityMode.AddMember("NEVER", smithyprelude.Unit)
-
-	HLSDiscontinuityMode_ON_DISCONTINUITY = HLSDiscontinuityMode.AddMember("ON_DISCONTINUITY", smithyprelude.Unit)
-
-	HLSDisplayFragmentTimestamp_ALWAYS = HLSDisplayFragmentTimestamp.AddMember("ALWAYS", smithyprelude.Unit)
-
-	HLSDisplayFragmentTimestamp_NEVER = HLSDisplayFragmentTimestamp.AddMember("NEVER", smithyprelude.Unit)
-
-	HLSFragmentSelectorType_PRODUCER_TIMESTAMP = HLSFragmentSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	HLSFragmentSelectorType_SERVER_TIMESTAMP = HLSFragmentSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	HLSTimestampRange_StartTimestamp = HLSTimestampRange.AddMember("StartTimestamp", _Timestamp)
-
-	HLSTimestampRange_EndTimestamp = HLSTimestampRange.AddMember("EndTimestamp", _Timestamp)
-
-	HLSFragmentSelector_FragmentSelectorType = HLSFragmentSelector.AddMember("FragmentSelectorType", HLSFragmentSelectorType)
-
-	HLSFragmentSelector_TimestampRange = HLSFragmentSelector.AddMember("TimestampRange", HLSTimestampRange)
-
-	HLSPlaybackMode_LIVE = HLSPlaybackMode.AddMember("LIVE", smithyprelude.Unit)
-
-	HLSPlaybackMode_LIVE_REPLAY = HLSPlaybackMode.AddMember("LIVE_REPLAY", smithyprelude.Unit)
-
-	HLSPlaybackMode_ON_DEMAND = HLSPlaybackMode.AddMember("ON_DEMAND", smithyprelude.Unit)
-
-	ImageError_NO_MEDIA = ImageError.AddMember("NO_MEDIA", smithyprelude.Unit)
-
-	ImageError_MEDIA_ERROR = ImageError.AddMember("MEDIA_ERROR", smithyprelude.Unit)
-
-	Image_TimeStamp = Image.AddMember("TimeStamp", _Timestamp)
-
-	Image_Error = Image.AddMember("Error", ImageError)
-
-	Image_ImageContent = Image.AddMember("ImageContent", _ImageContent)
-
-	_Images_member = _Images.AddMember("member", Image)
-
-	ImageSelectorType_PRODUCER_TIMESTAMP = ImageSelectorType.AddMember("PRODUCER_TIMESTAMP", smithyprelude.Unit)
-
-	ImageSelectorType_SERVER_TIMESTAMP = ImageSelectorType.AddMember("SERVER_TIMESTAMP", smithyprelude.Unit)
-
-	InvalidArgumentException_Message = InvalidArgumentException.AddMember("Message", _ErrorMessage)
-
-	InvalidCodecPrivateDataException_Message = InvalidCodecPrivateDataException.AddMember("Message", _ErrorMessage)
-
-	InvalidMediaFrameException_Message = InvalidMediaFrameException.AddMember("Message", _ErrorMessage)
-
-	MissingCodecPrivateDataException_Message = MissingCodecPrivateDataException.AddMember("Message", _ErrorMessage)
-
-	NoDataRetentionException_Message = NoDataRetentionException.AddMember("Message", _ErrorMessage)
-
-	NotAuthorizedException_Message = NotAuthorizedException.AddMember("Message", _ErrorMessage)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", _ErrorMessage)
-
-	UnsupportedStreamMediaTypeException_Message = UnsupportedStreamMediaTypeException.AddMember("Message", _ErrorMessage)
-
-	GetClipInput_StreamName = GetClipInput.AddMember("StreamName", _StreamName)
-
-	GetClipInput_StreamARN = GetClipInput.AddMember("StreamARN", _ResourceARN)
-
-	GetClipInput_ClipFragmentSelector = GetClipInput.AddMember("ClipFragmentSelector", ClipFragmentSelector)
-
-	GetClipOutput_ContentType = GetClipOutput.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetClipOutput_Payload = GetClipOutput.AddMember("Payload", _Payload, &smithytraits.HTTPPayload{})
-
-	GetDASHStreamingSessionURLInput_StreamName = GetDASHStreamingSessionURLInput.AddMember("StreamName", _StreamName)
-
-	GetDASHStreamingSessionURLInput_StreamARN = GetDASHStreamingSessionURLInput.AddMember("StreamARN", _ResourceARN)
-
-	GetDASHStreamingSessionURLInput_PlaybackMode = GetDASHStreamingSessionURLInput.AddMember("PlaybackMode", DASHPlaybackMode)
-
-	GetDASHStreamingSessionURLInput_DisplayFragmentTimestamp = GetDASHStreamingSessionURLInput.AddMember("DisplayFragmentTimestamp", DASHDisplayFragmentTimestamp)
-
-	GetDASHStreamingSessionURLInput_DisplayFragmentNumber = GetDASHStreamingSessionURLInput.AddMember("DisplayFragmentNumber", DASHDisplayFragmentNumber)
-
-	GetDASHStreamingSessionURLInput_DASHFragmentSelector = GetDASHStreamingSessionURLInput.AddMember("DASHFragmentSelector", DASHFragmentSelector)
-
-	GetDASHStreamingSessionURLInput_Expires = GetDASHStreamingSessionURLInput.AddMember("Expires", _Expires)
-
-	GetDASHStreamingSessionURLInput_MaxManifestFragmentResults = GetDASHStreamingSessionURLInput.AddMember("MaxManifestFragmentResults", _DASHMaxResults)
-
-	GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL = GetDASHStreamingSessionURLOutput.AddMember("DASHStreamingSessionURL", _DASHStreamingSessionURL)
-
-	GetHLSStreamingSessionURLInput_StreamName = GetHLSStreamingSessionURLInput.AddMember("StreamName", _StreamName)
-
-	GetHLSStreamingSessionURLInput_StreamARN = GetHLSStreamingSessionURLInput.AddMember("StreamARN", _ResourceARN)
-
-	GetHLSStreamingSessionURLInput_PlaybackMode = GetHLSStreamingSessionURLInput.AddMember("PlaybackMode", HLSPlaybackMode)
-
-	GetHLSStreamingSessionURLInput_HLSFragmentSelector = GetHLSStreamingSessionURLInput.AddMember("HLSFragmentSelector", HLSFragmentSelector)
-
-	GetHLSStreamingSessionURLInput_ContainerFormat = GetHLSStreamingSessionURLInput.AddMember("ContainerFormat", ContainerFormat)
-
-	GetHLSStreamingSessionURLInput_DiscontinuityMode = GetHLSStreamingSessionURLInput.AddMember("DiscontinuityMode", HLSDiscontinuityMode)
-
-	GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp = GetHLSStreamingSessionURLInput.AddMember("DisplayFragmentTimestamp", HLSDisplayFragmentTimestamp)
-
-	GetHLSStreamingSessionURLInput_Expires = GetHLSStreamingSessionURLInput.AddMember("Expires", _Expires)
-
-	GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults = GetHLSStreamingSessionURLInput.AddMember("MaxMediaPlaylistFragmentResults", _HLSMaxResults)
-
-	GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL = GetHLSStreamingSessionURLOutput.AddMember("HLSStreamingSessionURL", _HLSStreamingSessionURL)
-
-	GetImagesInput_StreamName = GetImagesInput.AddMember("StreamName", _StreamName)
-
-	GetImagesInput_StreamARN = GetImagesInput.AddMember("StreamARN", _ResourceARN)
-
-	GetImagesInput_ImageSelectorType = GetImagesInput.AddMember("ImageSelectorType", ImageSelectorType)
-
-	GetImagesInput_StartTimestamp = GetImagesInput.AddMember("StartTimestamp", _Timestamp)
-
-	GetImagesInput_EndTimestamp = GetImagesInput.AddMember("EndTimestamp", _Timestamp)
-
-	GetImagesInput_SamplingInterval = GetImagesInput.AddMember("SamplingInterval", _SamplingInterval)
-
-	GetImagesInput_Format = GetImagesInput.AddMember("Format", Format)
-
-	GetImagesInput_FormatConfig = GetImagesInput.AddMember("FormatConfig", _FormatConfig)
-
-	GetImagesInput_WidthPixels = GetImagesInput.AddMember("WidthPixels", _WidthPixels)
-
-	GetImagesInput_HeightPixels = GetImagesInput.AddMember("HeightPixels", _HeightPixels)
-
-	GetImagesInput_MaxResults = GetImagesInput.AddMember("MaxResults", _GetImagesMaxResults)
-
-	GetImagesInput_NextToken = GetImagesInput.AddMember("NextToken", _NextToken)
-
-	GetImagesOutput_Images = GetImagesOutput.AddMember("Images", _Images)
-
-	GetImagesOutput_NextToken = GetImagesOutput.AddMember("NextToken", _NextToken)
-
-	GetMediaForFragmentListInput_StreamName = GetMediaForFragmentListInput.AddMember("StreamName", _StreamName)
-
-	GetMediaForFragmentListInput_StreamARN = GetMediaForFragmentListInput.AddMember("StreamARN", _ResourceARN)
-
-	GetMediaForFragmentListInput_Fragments = GetMediaForFragmentListInput.AddMember("Fragments", _FragmentNumberList)
-
-	GetMediaForFragmentListOutput_ContentType = GetMediaForFragmentListOutput.AddMember("ContentType", _ContentType, &smithytraits.HTTPHeader{Name: "Content-Type"})
-
-	GetMediaForFragmentListOutput_Payload = GetMediaForFragmentListOutput.AddMember("Payload", _Payload, &smithytraits.HTTPPayload{})
-
-	ListFragmentsInput_StreamName = ListFragmentsInput.AddMember("StreamName", _StreamName)
-
-	ListFragmentsInput_StreamARN = ListFragmentsInput.AddMember("StreamARN", _ResourceARN)
-
-	ListFragmentsInput_MaxResults = ListFragmentsInput.AddMember("MaxResults", _ListFragmentsMaxResults)
-
-	ListFragmentsInput_NextToken = ListFragmentsInput.AddMember("NextToken", _NextToken)
-
-	ListFragmentsInput_FragmentSelector = ListFragmentsInput.AddMember("FragmentSelector", FragmentSelector)
-
-	ListFragmentsOutput_Fragments = ListFragmentsOutput.AddMember("Fragments", _FragmentList)
-
-	ListFragmentsOutput_NextToken = ListFragmentsOutput.AddMember("NextToken", _NextToken)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 401}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x20000}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Content-Type"}}, DirectMask: 0x80}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPPayload{}, nil, nil, nil, nil, nil, &smithytraits.Streaming{}}, DirectMask: 0x800}
+
+var mClientLimitExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sClientLimitExceededException_Message}}
+var mClipFragmentSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sClipFragmentSelector_FragmentSelectorType, &sClipFragmentSelector_TimestampRange}}
+var mClipFragmentSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sClipFragmentSelectorType_PRODUCER_TIMESTAMP, &sClipFragmentSelectorType_SERVER_TIMESTAMP}}
+var mClipTimestampRange = smithy.SchemaMembers{List: []*smithy.Schema{&sClipTimestampRange_StartTimestamp, &sClipTimestampRange_EndTimestamp}}
+var mContainerFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sContainerFormat_FRAGMENTED_MP4, &sContainerFormat_MPEG_TS}}
+var mDASHDisplayFragmentNumber = smithy.SchemaMembers{List: []*smithy.Schema{&sDASHDisplayFragmentNumber_ALWAYS, &sDASHDisplayFragmentNumber_NEVER}}
+var mDASHDisplayFragmentTimestamp = smithy.SchemaMembers{List: []*smithy.Schema{&sDASHDisplayFragmentTimestamp_ALWAYS, &sDASHDisplayFragmentTimestamp_NEVER}}
+var mDASHFragmentSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sDASHFragmentSelector_FragmentSelectorType, &sDASHFragmentSelector_TimestampRange}}
+var mDASHFragmentSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sDASHFragmentSelectorType_PRODUCER_TIMESTAMP, &sDASHFragmentSelectorType_SERVER_TIMESTAMP}}
+var mDASHPlaybackMode = smithy.SchemaMembers{List: []*smithy.Schema{&sDASHPlaybackMode_LIVE, &sDASHPlaybackMode_LIVE_REPLAY, &sDASHPlaybackMode_ON_DEMAND}}
+var mDASHTimestampRange = smithy.SchemaMembers{List: []*smithy.Schema{&sDASHTimestampRange_StartTimestamp, &sDASHTimestampRange_EndTimestamp}}
+var mFormat = smithy.SchemaMembers{List: []*smithy.Schema{&sFormat_JPEG, &sFormat_PNG}}
+var m_FormatConfig = smithy.SchemaMembers{List: []*smithy.Schema{&s_FormatConfig_key, &s_FormatConfig_value}}
+var mFormatConfigKey = smithy.SchemaMembers{List: []*smithy.Schema{&sFormatConfigKey_JPEGQuality}}
+var mFragment = smithy.SchemaMembers{List: []*smithy.Schema{&sFragment_FragmentNumber, &sFragment_FragmentSizeInBytes, &sFragment_ProducerTimestamp, &sFragment_ServerTimestamp, &sFragment_FragmentLengthInMilliseconds}}
+var m_FragmentList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FragmentList_member}}
+var m_FragmentNumberList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FragmentNumberList_member}}
+var mFragmentSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sFragmentSelector_FragmentSelectorType, &sFragmentSelector_TimestampRange}}
+var mFragmentSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sFragmentSelectorType_PRODUCER_TIMESTAMP, &sFragmentSelectorType_SERVER_TIMESTAMP}}
+var mHLSDiscontinuityMode = smithy.SchemaMembers{List: []*smithy.Schema{&sHLSDiscontinuityMode_ALWAYS, &sHLSDiscontinuityMode_NEVER, &sHLSDiscontinuityMode_ON_DISCONTINUITY}}
+var mHLSDisplayFragmentTimestamp = smithy.SchemaMembers{List: []*smithy.Schema{&sHLSDisplayFragmentTimestamp_ALWAYS, &sHLSDisplayFragmentTimestamp_NEVER}}
+var mHLSFragmentSelector = smithy.SchemaMembers{List: []*smithy.Schema{&sHLSFragmentSelector_FragmentSelectorType, &sHLSFragmentSelector_TimestampRange}}
+var mHLSFragmentSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sHLSFragmentSelectorType_PRODUCER_TIMESTAMP, &sHLSFragmentSelectorType_SERVER_TIMESTAMP}}
+var mHLSPlaybackMode = smithy.SchemaMembers{List: []*smithy.Schema{&sHLSPlaybackMode_LIVE, &sHLSPlaybackMode_LIVE_REPLAY, &sHLSPlaybackMode_ON_DEMAND}}
+var mHLSTimestampRange = smithy.SchemaMembers{List: []*smithy.Schema{&sHLSTimestampRange_StartTimestamp, &sHLSTimestampRange_EndTimestamp}}
+var mImage = smithy.SchemaMembers{List: []*smithy.Schema{&sImage_TimeStamp, &sImage_Error, &sImage_ImageContent}}
+var mImageError = smithy.SchemaMembers{List: []*smithy.Schema{&sImageError_NO_MEDIA, &sImageError_MEDIA_ERROR}}
+var m_Images = smithy.SchemaMembers{List: []*smithy.Schema{&s_Images_member}}
+var mImageSelectorType = smithy.SchemaMembers{List: []*smithy.Schema{&sImageSelectorType_PRODUCER_TIMESTAMP, &sImageSelectorType_SERVER_TIMESTAMP}}
+var mInvalidArgumentException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidArgumentException_Message}}
+var mInvalidCodecPrivateDataException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidCodecPrivateDataException_Message}}
+var mInvalidMediaFrameException = smithy.SchemaMembers{List: []*smithy.Schema{&sInvalidMediaFrameException_Message}}
+var mMissingCodecPrivateDataException = smithy.SchemaMembers{List: []*smithy.Schema{&sMissingCodecPrivateDataException_Message}}
+var mNoDataRetentionException = smithy.SchemaMembers{List: []*smithy.Schema{&sNoDataRetentionException_Message}}
+var mNotAuthorizedException = smithy.SchemaMembers{List: []*smithy.Schema{&sNotAuthorizedException_Message}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mTimestampRange = smithy.SchemaMembers{List: []*smithy.Schema{&sTimestampRange_StartTimestamp, &sTimestampRange_EndTimestamp}}
+var mUnsupportedStreamMediaTypeException = smithy.SchemaMembers{List: []*smithy.Schema{&sUnsupportedStreamMediaTypeException_Message}}
+var mGetClipInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClipInput_StreamName, &sGetClipInput_StreamARN, &sGetClipInput_ClipFragmentSelector}}
+var mGetClipOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClipOutput_ContentType, &sGetClipOutput_Payload}}
+var mGetDASHStreamingSessionURLInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDASHStreamingSessionURLInput_StreamName, &sGetDASHStreamingSessionURLInput_StreamARN, &sGetDASHStreamingSessionURLInput_PlaybackMode, &sGetDASHStreamingSessionURLInput_DisplayFragmentTimestamp, &sGetDASHStreamingSessionURLInput_DisplayFragmentNumber, &sGetDASHStreamingSessionURLInput_DASHFragmentSelector, &sGetDASHStreamingSessionURLInput_Expires, &sGetDASHStreamingSessionURLInput_MaxManifestFragmentResults}}
+var mGetDASHStreamingSessionURLOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetDASHStreamingSessionURLOutput_DASHStreamingSessionURL}}
+var mGetHLSStreamingSessionURLInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHLSStreamingSessionURLInput_StreamName, &sGetHLSStreamingSessionURLInput_StreamARN, &sGetHLSStreamingSessionURLInput_PlaybackMode, &sGetHLSStreamingSessionURLInput_HLSFragmentSelector, &sGetHLSStreamingSessionURLInput_ContainerFormat, &sGetHLSStreamingSessionURLInput_DiscontinuityMode, &sGetHLSStreamingSessionURLInput_DisplayFragmentTimestamp, &sGetHLSStreamingSessionURLInput_Expires, &sGetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults}, Seed: 5, Slots: []uint16{
+	0, 0, 7, 0, 0, 0, 1, 0, 4, 0, 0, 0, 0, 0, 0, 2, 6, 9, 0, 0, 3, 8, 5, 0,
+	0, 0, 0, 0, 0, 0, 0, 0,
+}}
+var mGetHLSStreamingSessionURLOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetHLSStreamingSessionURLOutput_HLSStreamingSessionURL}}
+var mGetImagesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImagesInput_StreamName, &sGetImagesInput_StreamARN, &sGetImagesInput_ImageSelectorType, &sGetImagesInput_StartTimestamp, &sGetImagesInput_EndTimestamp, &sGetImagesInput_SamplingInterval, &sGetImagesInput_Format, &sGetImagesInput_FormatConfig, &sGetImagesInput_WidthPixels, &sGetImagesInput_HeightPixels, &sGetImagesInput_MaxResults, &sGetImagesInput_NextToken}, Seed: 14, Slots: []uint16{
+	0, 5, 9, 10, 0, 0, 0, 0, 0, 0, 12, 8, 0, 4, 11, 0, 6, 0, 0, 0, 0, 0, 0, 0,
+	0, 1, 0, 0, 0, 7, 2, 3,
+}}
+var mGetImagesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetImagesOutput_Images, &sGetImagesOutput_NextToken}}
+var mGetMediaForFragmentListInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaForFragmentListInput_StreamName, &sGetMediaForFragmentListInput_StreamARN, &sGetMediaForFragmentListInput_Fragments}}
+var mGetMediaForFragmentListOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetMediaForFragmentListOutput_ContentType, &sGetMediaForFragmentListOutput_Payload}}
+var mListFragmentsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFragmentsInput_StreamName, &sListFragmentsInput_StreamARN, &sListFragmentsInput_MaxResults, &sListFragmentsInput_NextToken, &sListFragmentsInput_FragmentSelector}}
+var mListFragmentsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListFragmentsOutput_Fragments, &sListFragmentsOutput_NextToken}}
+
+var sGetClip = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClip, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sGetDASHStreamingSessionURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDASHStreamingSessionURL, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sGetHLSStreamingSessionURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHLSStreamingSessionURL, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sGetImages = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImages, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetMediaForFragmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaForFragmentList, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sListFragments = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFragments, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var s_AWSAcuityReader = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSAcuityReader, Type: smithy.ShapeTypeService})
+var sClientLimitExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClientLimitExceededException, Members: &mClientLimitExceededException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sClipFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClipFragmentSelector, Members: &mClipFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sClipFragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClipFragmentSelectorType, Members: &mClipFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var sClipTimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClipTimestampRange, Members: &mClipTimestampRange, Type: smithy.ShapeTypeStructure})
+var sContainerFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iContainerFormat, Members: &mContainerFormat, Type: smithy.ShapeTypeEnum})
+var s_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ContentType, Type: smithy.ShapeTypeString})
+var sDASHDisplayFragmentNumber = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDASHDisplayFragmentNumber, Members: &mDASHDisplayFragmentNumber, Type: smithy.ShapeTypeEnum})
+var sDASHDisplayFragmentTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDASHDisplayFragmentTimestamp, Members: &mDASHDisplayFragmentTimestamp, Type: smithy.ShapeTypeEnum})
+var sDASHFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDASHFragmentSelector, Members: &mDASHFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sDASHFragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDASHFragmentSelectorType, Members: &mDASHFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var s_DASHMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DASHMaxResults, Type: smithy.ShapeTypeLong})
+var sDASHPlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDASHPlaybackMode, Members: &mDASHPlaybackMode, Type: smithy.ShapeTypeEnum})
+var s_DASHStreamingSessionURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DASHStreamingSessionURL, Type: smithy.ShapeTypeString})
+var sDASHTimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDASHTimestampRange, Members: &mDASHTimestampRange, Type: smithy.ShapeTypeStructure})
+var s_ErrorMessage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var s_Expires = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Expires, Type: smithy.ShapeTypeInteger})
+var sFormat = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum})
+var s_FormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormatConfig, Members: &m_FormatConfig, Type: smithy.ShapeTypeMap})
+var sFormatConfigKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFormatConfigKey, Members: &mFormatConfigKey, Type: smithy.ShapeTypeEnum})
+var s_FormatConfigValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FormatConfigValue, Type: smithy.ShapeTypeString})
+var sFragment = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFragment, Members: &mFragment, Type: smithy.ShapeTypeStructure})
+var s_FragmentList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FragmentList, Members: &m_FragmentList, Type: smithy.ShapeTypeList})
+var s_FragmentNumberList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FragmentNumberList, Members: &m_FragmentNumberList, Type: smithy.ShapeTypeList})
+var s_FragmentNumberString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString})
+var sFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFragmentSelector, Members: &mFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sFragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFragmentSelectorType, Members: &mFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var s_GetImagesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_GetImagesMaxResults, Type: smithy.ShapeTypeLong})
+var s_HeightPixels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HeightPixels, Type: smithy.ShapeTypeInteger})
+var sHLSDiscontinuityMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHLSDiscontinuityMode, Members: &mHLSDiscontinuityMode, Type: smithy.ShapeTypeEnum})
+var sHLSDisplayFragmentTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHLSDisplayFragmentTimestamp, Members: &mHLSDisplayFragmentTimestamp, Type: smithy.ShapeTypeEnum})
+var sHLSFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHLSFragmentSelector, Members: &mHLSFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sHLSFragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHLSFragmentSelectorType, Members: &mHLSFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var s_HLSMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HLSMaxResults, Type: smithy.ShapeTypeLong})
+var sHLSPlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHLSPlaybackMode, Members: &mHLSPlaybackMode, Type: smithy.ShapeTypeEnum})
+var s_HLSStreamingSessionURL = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_HLSStreamingSessionURL, Type: smithy.ShapeTypeString})
+var sHLSTimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iHLSTimestampRange, Members: &mHLSTimestampRange, Type: smithy.ShapeTypeStructure})
+var sImage = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImage, Members: &mImage, Type: smithy.ShapeTypeStructure})
+var s_ImageContent = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ImageContent, Type: smithy.ShapeTypeString})
+var sImageError = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageError, Members: &mImageError, Type: smithy.ShapeTypeEnum})
+var s_Images = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Images, Members: &m_Images, Type: smithy.ShapeTypeList})
+var sImageSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iImageSelectorType, Members: &mImageSelectorType, Type: smithy.ShapeTypeEnum})
+var sInvalidArgumentException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidArgumentException, Members: &mInvalidArgumentException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sInvalidCodecPrivateDataException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidCodecPrivateDataException, Members: &mInvalidCodecPrivateDataException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sInvalidMediaFrameException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInvalidMediaFrameException, Members: &mInvalidMediaFrameException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_ListFragmentsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListFragmentsMaxResults, Type: smithy.ShapeTypeLong})
+var s_Long = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sMissingCodecPrivateDataException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iMissingCodecPrivateDataException, Members: &mMissingCodecPrivateDataException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sNoDataRetentionException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNoDataRetentionException, Members: &mNoDataRetentionException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var sNotAuthorizedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iNotAuthorizedException, Members: &mNotAuthorizedException, Traits: &t7, Type: smithy.ShapeTypeStructure})
+var s_Payload = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Payload, Traits: &t8, Type: smithy.ShapeTypeBlob})
+var s_ResourceARN = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t9, Type: smithy.ShapeTypeStructure})
+var s_SamplingInterval = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SamplingInterval, Type: smithy.ShapeTypeInteger})
+var s_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTimestampRange, Members: &mTimestampRange, Type: smithy.ShapeTypeStructure})
+var sUnsupportedStreamMediaTypeException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUnsupportedStreamMediaTypeException, Members: &mUnsupportedStreamMediaTypeException, Traits: &t6, Type: smithy.ShapeTypeStructure})
+var s_WidthPixels = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_WidthPixels, Type: smithy.ShapeTypeInteger})
+var sGetClipInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClipInput, Members: &mGetClipInput, Type: smithy.ShapeTypeStructure})
+var sGetClipOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClipOutput, Members: &mGetClipOutput, Type: smithy.ShapeTypeStructure})
+var sGetDASHStreamingSessionURLInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDASHStreamingSessionURLInput, Members: &mGetDASHStreamingSessionURLInput, Type: smithy.ShapeTypeStructure})
+var sGetDASHStreamingSessionURLOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetDASHStreamingSessionURLOutput, Members: &mGetDASHStreamingSessionURLOutput, Type: smithy.ShapeTypeStructure})
+var sGetHLSStreamingSessionURLInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHLSStreamingSessionURLInput, Members: &mGetHLSStreamingSessionURLInput, Type: smithy.ShapeTypeStructure})
+var sGetHLSStreamingSessionURLOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetHLSStreamingSessionURLOutput, Members: &mGetHLSStreamingSessionURLOutput, Type: smithy.ShapeTypeStructure})
+var sGetImagesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImagesInput, Members: &mGetImagesInput, Type: smithy.ShapeTypeStructure})
+var sGetImagesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetImagesOutput, Members: &mGetImagesOutput, Type: smithy.ShapeTypeStructure})
+var sGetMediaForFragmentListInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaForFragmentListInput, Members: &mGetMediaForFragmentListInput, Type: smithy.ShapeTypeStructure})
+var sGetMediaForFragmentListOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetMediaForFragmentListOutput, Members: &mGetMediaForFragmentListOutput, Type: smithy.ShapeTypeStructure})
+var sListFragmentsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFragmentsInput, Members: &mListFragmentsInput, Type: smithy.ShapeTypeStructure})
+var sListFragmentsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListFragmentsOutput, Members: &mListFragmentsOutput, Type: smithy.ShapeTypeStructure})
+
+var sClientLimitExceededException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sClipFragmentSelector_FragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSelectorType", ID: &iClipFragmentSelectorType, Members: &mClipFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var sClipFragmentSelector_TimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampRange", ID: &iClipTimestampRange, Members: &mClipTimestampRange, Type: smithy.ShapeTypeStructure})
+var sClipFragmentSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClipFragmentSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sClipTimestampRange_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sClipTimestampRange_EndTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sContainerFormat_FRAGMENTED_MP4 = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FRAGMENTED_MP4", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sContainerFormat_MPEG_TS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MPEG_TS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHDisplayFragmentNumber_ALWAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHDisplayFragmentNumber_NEVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHDisplayFragmentTimestamp_ALWAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHDisplayFragmentTimestamp_NEVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHFragmentSelector_FragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSelectorType", ID: &iDASHFragmentSelectorType, Members: &mDASHFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var sDASHFragmentSelector_TimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampRange", ID: &iDASHTimestampRange, Members: &mDASHTimestampRange, Type: smithy.ShapeTypeStructure})
+var sDASHFragmentSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHFragmentSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHPlaybackMode_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHPlaybackMode_LIVE_REPLAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE_REPLAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHPlaybackMode_ON_DEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDASHTimestampRange_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sDASHTimestampRange_EndTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sFormat_JPEG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFormat_PNG = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PNG", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_FormatConfig_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &iFormatConfigKey, Members: &mFormatConfigKey, Type: smithy.ShapeTypeEnum})
+var s_FormatConfig_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_FormatConfigValue, Type: smithy.ShapeTypeString})
+var sFormatConfigKey_JPEGQuality = smithy.NewStaticSchema(smithy.StaticSchema{Member: "JPEGQuality", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFragment_FragmentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentNumber", ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString})
+var sFragment_FragmentSizeInBytes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSizeInBytes", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var sFragment_ProducerTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ProducerTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sFragment_ServerTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServerTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sFragment_FragmentLengthInMilliseconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentLengthInMilliseconds", ID: &i_Long, Type: smithy.ShapeTypeLong})
+var s_FragmentList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFragment, Members: &mFragment, Type: smithy.ShapeTypeStructure})
+var s_FragmentNumberList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_FragmentNumberString, Type: smithy.ShapeTypeString})
+var sFragmentSelector_FragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSelectorType", ID: &iFragmentSelectorType, Members: &mFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var sFragmentSelector_TimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampRange", ID: &iTimestampRange, Members: &mTimestampRange, Type: smithy.ShapeTypeStructure})
+var sFragmentSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sFragmentSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSDiscontinuityMode_ALWAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSDiscontinuityMode_NEVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSDiscontinuityMode_ON_DISCONTINUITY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DISCONTINUITY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSDisplayFragmentTimestamp_ALWAYS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ALWAYS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSDisplayFragmentTimestamp_NEVER = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NEVER", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSFragmentSelector_FragmentSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSelectorType", ID: &iHLSFragmentSelectorType, Members: &mHLSFragmentSelectorType, Type: smithy.ShapeTypeEnum})
+var sHLSFragmentSelector_TimestampRange = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimestampRange", ID: &iHLSTimestampRange, Members: &mHLSTimestampRange, Type: smithy.ShapeTypeStructure})
+var sHLSFragmentSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSFragmentSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSPlaybackMode_LIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSPlaybackMode_LIVE_REPLAY = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LIVE_REPLAY", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSPlaybackMode_ON_DEMAND = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ON_DEMAND", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sHLSTimestampRange_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sHLSTimestampRange_EndTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sImage_TimeStamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TimeStamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sImage_Error = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Error", ID: &iImageError, Members: &mImageError, Type: smithy.ShapeTypeEnum})
+var sImage_ImageContent = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageContent", ID: &i_ImageContent, Type: smithy.ShapeTypeString})
+var sImageError_NO_MEDIA = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NO_MEDIA", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageError_MEDIA_ERROR = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MEDIA_ERROR", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Images_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iImage, Members: &mImage, Type: smithy.ShapeTypeStructure})
+var sImageSelectorType_PRODUCER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PRODUCER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sImageSelectorType_SERVER_TIMESTAMP = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SERVER_TIMESTAMP", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sInvalidArgumentException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidCodecPrivateDataException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sInvalidMediaFrameException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sMissingCodecPrivateDataException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNoDataRetentionException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sNotAuthorizedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sTimestampRange_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sTimestampRange_EndTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sUnsupportedStreamMediaTypeException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &i_ErrorMessage, Type: smithy.ShapeTypeString})
+var sGetClipInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sGetClipInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sGetClipInput_ClipFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ClipFragmentSelector", ID: &iClipFragmentSelector, Members: &mClipFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sGetClipOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t10, Type: smithy.ShapeTypeString})
+var sGetClipOutput_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &i_Payload, Traits: &t11, Type: smithy.ShapeTypeBlob})
+var sGetDASHStreamingSessionURLInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sGetDASHStreamingSessionURLInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sGetDASHStreamingSessionURLInput_PlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackMode", ID: &iDASHPlaybackMode, Members: &mDASHPlaybackMode, Type: smithy.ShapeTypeEnum})
+var sGetDASHStreamingSessionURLInput_DisplayFragmentTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayFragmentTimestamp", ID: &iDASHDisplayFragmentTimestamp, Members: &mDASHDisplayFragmentTimestamp, Type: smithy.ShapeTypeEnum})
+var sGetDASHStreamingSessionURLInput_DisplayFragmentNumber = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayFragmentNumber", ID: &iDASHDisplayFragmentNumber, Members: &mDASHDisplayFragmentNumber, Type: smithy.ShapeTypeEnum})
+var sGetDASHStreamingSessionURLInput_DASHFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DASHFragmentSelector", ID: &iDASHFragmentSelector, Members: &mDASHFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sGetDASHStreamingSessionURLInput_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &i_Expires, Type: smithy.ShapeTypeInteger})
+var sGetDASHStreamingSessionURLInput_MaxManifestFragmentResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxManifestFragmentResults", ID: &i_DASHMaxResults, Type: smithy.ShapeTypeLong})
+var sGetDASHStreamingSessionURLOutput_DASHStreamingSessionURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DASHStreamingSessionURL", ID: &i_DASHStreamingSessionURL, Type: smithy.ShapeTypeString})
+var sGetHLSStreamingSessionURLInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sGetHLSStreamingSessionURLInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sGetHLSStreamingSessionURLInput_PlaybackMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PlaybackMode", ID: &iHLSPlaybackMode, Members: &mHLSPlaybackMode, Type: smithy.ShapeTypeEnum})
+var sGetHLSStreamingSessionURLInput_HLSFragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HLSFragmentSelector", ID: &iHLSFragmentSelector, Members: &mHLSFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sGetHLSStreamingSessionURLInput_ContainerFormat = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContainerFormat", ID: &iContainerFormat, Members: &mContainerFormat, Type: smithy.ShapeTypeEnum})
+var sGetHLSStreamingSessionURLInput_DiscontinuityMode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DiscontinuityMode", ID: &iHLSDiscontinuityMode, Members: &mHLSDiscontinuityMode, Type: smithy.ShapeTypeEnum})
+var sGetHLSStreamingSessionURLInput_DisplayFragmentTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DisplayFragmentTimestamp", ID: &iHLSDisplayFragmentTimestamp, Members: &mHLSDisplayFragmentTimestamp, Type: smithy.ShapeTypeEnum})
+var sGetHLSStreamingSessionURLInput_Expires = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Expires", ID: &i_Expires, Type: smithy.ShapeTypeInteger})
+var sGetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxMediaPlaylistFragmentResults", ID: &i_HLSMaxResults, Type: smithy.ShapeTypeLong})
+var sGetHLSStreamingSessionURLOutput_HLSStreamingSessionURL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HLSStreamingSessionURL", ID: &i_HLSStreamingSessionURL, Type: smithy.ShapeTypeString})
+var sGetImagesInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sGetImagesInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sGetImagesInput_ImageSelectorType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ImageSelectorType", ID: &iImageSelectorType, Members: &mImageSelectorType, Type: smithy.ShapeTypeEnum})
+var sGetImagesInput_StartTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetImagesInput_EndTimestamp = smithy.NewStaticSchema(smithy.StaticSchema{Member: "EndTimestamp", ID: &i_Timestamp, Type: smithy.ShapeTypeTimestamp})
+var sGetImagesInput_SamplingInterval = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SamplingInterval", ID: &i_SamplingInterval, Type: smithy.ShapeTypeInteger})
+var sGetImagesInput_Format = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Format", ID: &iFormat, Members: &mFormat, Type: smithy.ShapeTypeEnum})
+var sGetImagesInput_FormatConfig = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FormatConfig", ID: &i_FormatConfig, Members: &m_FormatConfig, Type: smithy.ShapeTypeMap})
+var sGetImagesInput_WidthPixels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "WidthPixels", ID: &i_WidthPixels, Type: smithy.ShapeTypeInteger})
+var sGetImagesInput_HeightPixels = smithy.NewStaticSchema(smithy.StaticSchema{Member: "HeightPixels", ID: &i_HeightPixels, Type: smithy.ShapeTypeInteger})
+var sGetImagesInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_GetImagesMaxResults, Type: smithy.ShapeTypeLong})
+var sGetImagesInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetImagesOutput_Images = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Images", ID: &i_Images, Members: &m_Images, Type: smithy.ShapeTypeList})
+var sGetImagesOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sGetMediaForFragmentListInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sGetMediaForFragmentListInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sGetMediaForFragmentListInput_Fragments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fragments", ID: &i_FragmentNumberList, Members: &m_FragmentNumberList, Type: smithy.ShapeTypeList})
+var sGetMediaForFragmentListOutput_ContentType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ContentType", ID: &i_ContentType, Traits: &t10, Type: smithy.ShapeTypeString})
+var sGetMediaForFragmentListOutput_Payload = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Payload", ID: &i_Payload, Traits: &t11, Type: smithy.ShapeTypeBlob})
+var sListFragmentsInput_StreamName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamName", ID: &i_StreamName, Type: smithy.ShapeTypeString})
+var sListFragmentsInput_StreamARN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StreamARN", ID: &i_ResourceARN, Type: smithy.ShapeTypeString})
+var sListFragmentsInput_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxResults", ID: &i_ListFragmentsMaxResults, Type: smithy.ShapeTypeLong})
+var sListFragmentsInput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+var sListFragmentsInput_FragmentSelector = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FragmentSelector", ID: &iFragmentSelector, Members: &mFragmentSelector, Type: smithy.ShapeTypeStructure})
+var sListFragmentsOutput_Fragments = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Fragments", ID: &i_FragmentList, Members: &m_FragmentList, Type: smithy.ShapeTypeList})
+var sListFragmentsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &i_NextToken, Type: smithy.ShapeTypeString})
+
+var GetClip = &sGetClip
+
+var GetDASHStreamingSessionURL = &sGetDASHStreamingSessionURL
+
+var GetHLSStreamingSessionURL = &sGetHLSStreamingSessionURL
+
+var GetImages = &sGetImages
+
+var GetMediaForFragmentList = &sGetMediaForFragmentList
+
+var ListFragments = &sListFragments
+
+var _AWSAcuityReader = &s_AWSAcuityReader
+
+var ClientLimitExceededException = &sClientLimitExceededException
+var ClientLimitExceededException_Message = &sClientLimitExceededException_Message
+
+var ClipFragmentSelector = &sClipFragmentSelector
+var ClipFragmentSelector_FragmentSelectorType = &sClipFragmentSelector_FragmentSelectorType
+var ClipFragmentSelector_TimestampRange = &sClipFragmentSelector_TimestampRange
+
+var ClipFragmentSelectorType = &sClipFragmentSelectorType
+var ClipFragmentSelectorType_PRODUCER_TIMESTAMP = &sClipFragmentSelectorType_PRODUCER_TIMESTAMP
+var ClipFragmentSelectorType_SERVER_TIMESTAMP = &sClipFragmentSelectorType_SERVER_TIMESTAMP
+
+var ClipTimestampRange = &sClipTimestampRange
+var ClipTimestampRange_StartTimestamp = &sClipTimestampRange_StartTimestamp
+var ClipTimestampRange_EndTimestamp = &sClipTimestampRange_EndTimestamp
+
+var ContainerFormat = &sContainerFormat
+var ContainerFormat_FRAGMENTED_MP4 = &sContainerFormat_FRAGMENTED_MP4
+var ContainerFormat_MPEG_TS = &sContainerFormat_MPEG_TS
+
+var _ContentType = &s_ContentType
+
+var DASHDisplayFragmentNumber = &sDASHDisplayFragmentNumber
+var DASHDisplayFragmentNumber_ALWAYS = &sDASHDisplayFragmentNumber_ALWAYS
+var DASHDisplayFragmentNumber_NEVER = &sDASHDisplayFragmentNumber_NEVER
+
+var DASHDisplayFragmentTimestamp = &sDASHDisplayFragmentTimestamp
+var DASHDisplayFragmentTimestamp_ALWAYS = &sDASHDisplayFragmentTimestamp_ALWAYS
+var DASHDisplayFragmentTimestamp_NEVER = &sDASHDisplayFragmentTimestamp_NEVER
+
+var DASHFragmentSelector = &sDASHFragmentSelector
+var DASHFragmentSelector_FragmentSelectorType = &sDASHFragmentSelector_FragmentSelectorType
+var DASHFragmentSelector_TimestampRange = &sDASHFragmentSelector_TimestampRange
+
+var DASHFragmentSelectorType = &sDASHFragmentSelectorType
+var DASHFragmentSelectorType_PRODUCER_TIMESTAMP = &sDASHFragmentSelectorType_PRODUCER_TIMESTAMP
+var DASHFragmentSelectorType_SERVER_TIMESTAMP = &sDASHFragmentSelectorType_SERVER_TIMESTAMP
+
+var _DASHMaxResults = &s_DASHMaxResults
+
+var DASHPlaybackMode = &sDASHPlaybackMode
+var DASHPlaybackMode_LIVE = &sDASHPlaybackMode_LIVE
+var DASHPlaybackMode_LIVE_REPLAY = &sDASHPlaybackMode_LIVE_REPLAY
+var DASHPlaybackMode_ON_DEMAND = &sDASHPlaybackMode_ON_DEMAND
+
+var _DASHStreamingSessionURL = &s_DASHStreamingSessionURL
+
+var DASHTimestampRange = &sDASHTimestampRange
+var DASHTimestampRange_StartTimestamp = &sDASHTimestampRange_StartTimestamp
+var DASHTimestampRange_EndTimestamp = &sDASHTimestampRange_EndTimestamp
+
+var _ErrorMessage = &s_ErrorMessage
+
+var _Expires = &s_Expires
+
+var Format = &sFormat
+var Format_JPEG = &sFormat_JPEG
+var Format_PNG = &sFormat_PNG
+
+var _FormatConfig = &s_FormatConfig
+var _FormatConfig_key = &s_FormatConfig_key
+var _FormatConfig_value = &s_FormatConfig_value
+
+var FormatConfigKey = &sFormatConfigKey
+var FormatConfigKey_JPEGQuality = &sFormatConfigKey_JPEGQuality
+
+var _FormatConfigValue = &s_FormatConfigValue
+
+var Fragment = &sFragment
+var Fragment_FragmentNumber = &sFragment_FragmentNumber
+var Fragment_FragmentSizeInBytes = &sFragment_FragmentSizeInBytes
+var Fragment_ProducerTimestamp = &sFragment_ProducerTimestamp
+var Fragment_ServerTimestamp = &sFragment_ServerTimestamp
+var Fragment_FragmentLengthInMilliseconds = &sFragment_FragmentLengthInMilliseconds
+
+var _FragmentList = &s_FragmentList
+var _FragmentList_member = &s_FragmentList_member
+
+var _FragmentNumberList = &s_FragmentNumberList
+var _FragmentNumberList_member = &s_FragmentNumberList_member
+
+var _FragmentNumberString = &s_FragmentNumberString
+
+var FragmentSelector = &sFragmentSelector
+var FragmentSelector_FragmentSelectorType = &sFragmentSelector_FragmentSelectorType
+var FragmentSelector_TimestampRange = &sFragmentSelector_TimestampRange
+
+var FragmentSelectorType = &sFragmentSelectorType
+var FragmentSelectorType_PRODUCER_TIMESTAMP = &sFragmentSelectorType_PRODUCER_TIMESTAMP
+var FragmentSelectorType_SERVER_TIMESTAMP = &sFragmentSelectorType_SERVER_TIMESTAMP
+
+var _GetImagesMaxResults = &s_GetImagesMaxResults
+
+var _HeightPixels = &s_HeightPixels
+
+var HLSDiscontinuityMode = &sHLSDiscontinuityMode
+var HLSDiscontinuityMode_ALWAYS = &sHLSDiscontinuityMode_ALWAYS
+var HLSDiscontinuityMode_NEVER = &sHLSDiscontinuityMode_NEVER
+var HLSDiscontinuityMode_ON_DISCONTINUITY = &sHLSDiscontinuityMode_ON_DISCONTINUITY
+
+var HLSDisplayFragmentTimestamp = &sHLSDisplayFragmentTimestamp
+var HLSDisplayFragmentTimestamp_ALWAYS = &sHLSDisplayFragmentTimestamp_ALWAYS
+var HLSDisplayFragmentTimestamp_NEVER = &sHLSDisplayFragmentTimestamp_NEVER
+
+var HLSFragmentSelector = &sHLSFragmentSelector
+var HLSFragmentSelector_FragmentSelectorType = &sHLSFragmentSelector_FragmentSelectorType
+var HLSFragmentSelector_TimestampRange = &sHLSFragmentSelector_TimestampRange
+
+var HLSFragmentSelectorType = &sHLSFragmentSelectorType
+var HLSFragmentSelectorType_PRODUCER_TIMESTAMP = &sHLSFragmentSelectorType_PRODUCER_TIMESTAMP
+var HLSFragmentSelectorType_SERVER_TIMESTAMP = &sHLSFragmentSelectorType_SERVER_TIMESTAMP
+
+var _HLSMaxResults = &s_HLSMaxResults
+
+var HLSPlaybackMode = &sHLSPlaybackMode
+var HLSPlaybackMode_LIVE = &sHLSPlaybackMode_LIVE
+var HLSPlaybackMode_LIVE_REPLAY = &sHLSPlaybackMode_LIVE_REPLAY
+var HLSPlaybackMode_ON_DEMAND = &sHLSPlaybackMode_ON_DEMAND
+
+var _HLSStreamingSessionURL = &s_HLSStreamingSessionURL
+
+var HLSTimestampRange = &sHLSTimestampRange
+var HLSTimestampRange_StartTimestamp = &sHLSTimestampRange_StartTimestamp
+var HLSTimestampRange_EndTimestamp = &sHLSTimestampRange_EndTimestamp
+
+var Image = &sImage
+var Image_TimeStamp = &sImage_TimeStamp
+var Image_Error = &sImage_Error
+var Image_ImageContent = &sImage_ImageContent
+
+var _ImageContent = &s_ImageContent
+
+var ImageError = &sImageError
+var ImageError_NO_MEDIA = &sImageError_NO_MEDIA
+var ImageError_MEDIA_ERROR = &sImageError_MEDIA_ERROR
+
+var _Images = &s_Images
+var _Images_member = &s_Images_member
+
+var ImageSelectorType = &sImageSelectorType
+var ImageSelectorType_PRODUCER_TIMESTAMP = &sImageSelectorType_PRODUCER_TIMESTAMP
+var ImageSelectorType_SERVER_TIMESTAMP = &sImageSelectorType_SERVER_TIMESTAMP
+
+var InvalidArgumentException = &sInvalidArgumentException
+var InvalidArgumentException_Message = &sInvalidArgumentException_Message
+
+var InvalidCodecPrivateDataException = &sInvalidCodecPrivateDataException
+var InvalidCodecPrivateDataException_Message = &sInvalidCodecPrivateDataException_Message
+
+var InvalidMediaFrameException = &sInvalidMediaFrameException
+var InvalidMediaFrameException_Message = &sInvalidMediaFrameException_Message
+
+var _ListFragmentsMaxResults = &s_ListFragmentsMaxResults
+
+var _Long = &s_Long
+
+var MissingCodecPrivateDataException = &sMissingCodecPrivateDataException
+var MissingCodecPrivateDataException_Message = &sMissingCodecPrivateDataException_Message
+
+var _NextToken = &s_NextToken
+
+var NoDataRetentionException = &sNoDataRetentionException
+var NoDataRetentionException_Message = &sNoDataRetentionException_Message
+
+var NotAuthorizedException = &sNotAuthorizedException
+var NotAuthorizedException_Message = &sNotAuthorizedException_Message
+
+var _Payload = &s_Payload
+
+var _ResourceARN = &s_ResourceARN
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var _SamplingInterval = &s_SamplingInterval
+
+var _StreamName = &s_StreamName
+
+var _Timestamp = &s_Timestamp
+
+var TimestampRange = &sTimestampRange
+var TimestampRange_StartTimestamp = &sTimestampRange_StartTimestamp
+var TimestampRange_EndTimestamp = &sTimestampRange_EndTimestamp
+
+var UnsupportedStreamMediaTypeException = &sUnsupportedStreamMediaTypeException
+var UnsupportedStreamMediaTypeException_Message = &sUnsupportedStreamMediaTypeException_Message
+
+var _WidthPixels = &s_WidthPixels
+
+var GetClipInput = &sGetClipInput
+var GetClipInput_StreamName = &sGetClipInput_StreamName
+var GetClipInput_StreamARN = &sGetClipInput_StreamARN
+var GetClipInput_ClipFragmentSelector = &sGetClipInput_ClipFragmentSelector
+
+var GetClipOutput = &sGetClipOutput
+var GetClipOutput_ContentType = &sGetClipOutput_ContentType
+var GetClipOutput_Payload = &sGetClipOutput_Payload
+
+var GetDASHStreamingSessionURLInput = &sGetDASHStreamingSessionURLInput
+var GetDASHStreamingSessionURLInput_StreamName = &sGetDASHStreamingSessionURLInput_StreamName
+var GetDASHStreamingSessionURLInput_StreamARN = &sGetDASHStreamingSessionURLInput_StreamARN
+var GetDASHStreamingSessionURLInput_PlaybackMode = &sGetDASHStreamingSessionURLInput_PlaybackMode
+var GetDASHStreamingSessionURLInput_DisplayFragmentTimestamp = &sGetDASHStreamingSessionURLInput_DisplayFragmentTimestamp
+var GetDASHStreamingSessionURLInput_DisplayFragmentNumber = &sGetDASHStreamingSessionURLInput_DisplayFragmentNumber
+var GetDASHStreamingSessionURLInput_DASHFragmentSelector = &sGetDASHStreamingSessionURLInput_DASHFragmentSelector
+var GetDASHStreamingSessionURLInput_Expires = &sGetDASHStreamingSessionURLInput_Expires
+var GetDASHStreamingSessionURLInput_MaxManifestFragmentResults = &sGetDASHStreamingSessionURLInput_MaxManifestFragmentResults
+
+var GetDASHStreamingSessionURLOutput = &sGetDASHStreamingSessionURLOutput
+var GetDASHStreamingSessionURLOutput_DASHStreamingSessionURL = &sGetDASHStreamingSessionURLOutput_DASHStreamingSessionURL
+
+var GetHLSStreamingSessionURLInput = &sGetHLSStreamingSessionURLInput
+var GetHLSStreamingSessionURLInput_StreamName = &sGetHLSStreamingSessionURLInput_StreamName
+var GetHLSStreamingSessionURLInput_StreamARN = &sGetHLSStreamingSessionURLInput_StreamARN
+var GetHLSStreamingSessionURLInput_PlaybackMode = &sGetHLSStreamingSessionURLInput_PlaybackMode
+var GetHLSStreamingSessionURLInput_HLSFragmentSelector = &sGetHLSStreamingSessionURLInput_HLSFragmentSelector
+var GetHLSStreamingSessionURLInput_ContainerFormat = &sGetHLSStreamingSessionURLInput_ContainerFormat
+var GetHLSStreamingSessionURLInput_DiscontinuityMode = &sGetHLSStreamingSessionURLInput_DiscontinuityMode
+var GetHLSStreamingSessionURLInput_DisplayFragmentTimestamp = &sGetHLSStreamingSessionURLInput_DisplayFragmentTimestamp
+var GetHLSStreamingSessionURLInput_Expires = &sGetHLSStreamingSessionURLInput_Expires
+var GetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults = &sGetHLSStreamingSessionURLInput_MaxMediaPlaylistFragmentResults
+
+var GetHLSStreamingSessionURLOutput = &sGetHLSStreamingSessionURLOutput
+var GetHLSStreamingSessionURLOutput_HLSStreamingSessionURL = &sGetHLSStreamingSessionURLOutput_HLSStreamingSessionURL
+
+var GetImagesInput = &sGetImagesInput
+var GetImagesInput_StreamName = &sGetImagesInput_StreamName
+var GetImagesInput_StreamARN = &sGetImagesInput_StreamARN
+var GetImagesInput_ImageSelectorType = &sGetImagesInput_ImageSelectorType
+var GetImagesInput_StartTimestamp = &sGetImagesInput_StartTimestamp
+var GetImagesInput_EndTimestamp = &sGetImagesInput_EndTimestamp
+var GetImagesInput_SamplingInterval = &sGetImagesInput_SamplingInterval
+var GetImagesInput_Format = &sGetImagesInput_Format
+var GetImagesInput_FormatConfig = &sGetImagesInput_FormatConfig
+var GetImagesInput_WidthPixels = &sGetImagesInput_WidthPixels
+var GetImagesInput_HeightPixels = &sGetImagesInput_HeightPixels
+var GetImagesInput_MaxResults = &sGetImagesInput_MaxResults
+var GetImagesInput_NextToken = &sGetImagesInput_NextToken
+
+var GetImagesOutput = &sGetImagesOutput
+var GetImagesOutput_Images = &sGetImagesOutput_Images
+var GetImagesOutput_NextToken = &sGetImagesOutput_NextToken
+
+var GetMediaForFragmentListInput = &sGetMediaForFragmentListInput
+var GetMediaForFragmentListInput_StreamName = &sGetMediaForFragmentListInput_StreamName
+var GetMediaForFragmentListInput_StreamARN = &sGetMediaForFragmentListInput_StreamARN
+var GetMediaForFragmentListInput_Fragments = &sGetMediaForFragmentListInput_Fragments
+
+var GetMediaForFragmentListOutput = &sGetMediaForFragmentListOutput
+var GetMediaForFragmentListOutput_ContentType = &sGetMediaForFragmentListOutput_ContentType
+var GetMediaForFragmentListOutput_Payload = &sGetMediaForFragmentListOutput_Payload
+
+var ListFragmentsInput = &sListFragmentsInput
+var ListFragmentsInput_StreamName = &sListFragmentsInput_StreamName
+var ListFragmentsInput_StreamARN = &sListFragmentsInput_StreamARN
+var ListFragmentsInput_MaxResults = &sListFragmentsInput_MaxResults
+var ListFragmentsInput_NextToken = &sListFragmentsInput_NextToken
+var ListFragmentsInput_FragmentSelector = &sListFragmentsInput_FragmentSelector
+
+var ListFragmentsOutput = &sListFragmentsOutput
+var ListFragmentsOutput_Fragments = &sListFragmentsOutput_Fragments
+var ListFragmentsOutput_NextToken = &sListFragmentsOutput_NextToken
+
+var AWSAcuityReader = &smithy.ServiceSchema{Schema: &s_AWSAcuityReader, Version: "2017-09-30"}

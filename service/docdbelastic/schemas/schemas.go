@@ -4,1103 +4,855 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var ApplyPendingMaintenanceAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ApplyPendingMaintenanceAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iApplyPendingMaintenanceAction         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ApplyPendingMaintenanceAction"}
+	iCopyClusterSnapshot                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CopyClusterSnapshot"}
+	iCreateCluster                         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CreateCluster"}
+	iCreateClusterSnapshot                 = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CreateClusterSnapshot"}
+	iDeleteCluster                         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "DeleteCluster"}
+	iDeleteClusterSnapshot                 = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "DeleteClusterSnapshot"}
+	iGetCluster                            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetCluster"}
+	iGetClusterSnapshot                    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetClusterSnapshot"}
+	iGetPendingMaintenanceAction           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetPendingMaintenanceAction"}
+	iListClusters                          = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListClusters"}
+	iListClusterSnapshots                  = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListClusterSnapshots"}
+	iListPendingMaintenanceActions         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListPendingMaintenanceActions"}
+	iListTagsForResource                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListTagsForResource"}
+	iRestoreClusterFromSnapshot            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "RestoreClusterFromSnapshot"}
+	iStartCluster                          = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "StartCluster"}
+	iStopCluster                           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "StopCluster"}
+	iTagResource                           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "TagResource"}
+	iUntagResource                         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "UntagResource"}
+	iUpdateCluster                         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "UpdateCluster"}
+	i_ChimeraDbLionfishServiceLambda       = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ChimeraDbLionfishServiceLambda"}
+	iAccessDeniedException                 = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "AccessDeniedException"}
+	i_Arn                                  = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "Arn"}
+	i_Auth                                 = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "Auth"}
+	iCluster                               = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "Cluster"}
+	iClusterInList                         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ClusterInList"}
+	i_ClusterList                          = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ClusterList"}
+	iClusterSnapshot                       = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ClusterSnapshot"}
+	iClusterSnapshotInList                 = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ClusterSnapshotInList"}
+	i_ClusterSnapshotList                  = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ClusterSnapshotList"}
+	iConflictException                     = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ConflictException"}
+	i_InputString                          = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "InputString"}
+	iInternalServerException               = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "InternalServerException"}
+	i_OptInType                            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "OptInType"}
+	i_PaginationToken                      = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "PaginationToken"}
+	i_Password                             = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "Password"}
+	iPendingMaintenanceActionDetails       = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "PendingMaintenanceActionDetails"}
+	i_PendingMaintenanceActionDetailsList  = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "PendingMaintenanceActionDetailsList"}
+	iResourceNotFoundException             = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ResourceNotFoundException"}
+	iResourcePendingMaintenanceAction      = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ResourcePendingMaintenanceAction"}
+	i_ResourcePendingMaintenanceActionList = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ResourcePendingMaintenanceActionList"}
+	iServiceQuotaExceededException         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ServiceQuotaExceededException"}
+	iShard                                 = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "Shard"}
+	i_ShardList                            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ShardList"}
+	i_SnapshotType                         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "SnapshotType"}
+	i_Status                               = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "Status"}
+	i_StringList                           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "StringList"}
+	i_TagKey                               = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "TagKey"}
+	i_TagKeyList                           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "TagKeyList"}
+	i_TagMap                               = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "TagMap"}
+	i_TagValue                             = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "TagValue"}
+	iThrottlingException                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ThrottlingException"}
+	iValidationException                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ValidationException"}
+	iValidationExceptionField              = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ValidationExceptionField"}
+	i_ValidationExceptionFieldList         = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ValidationExceptionFieldList"}
+	i_ValidationExceptionReason            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ValidationExceptionReason"}
+	iApplyPendingMaintenanceActionInput    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ApplyPendingMaintenanceActionInput"}
+	iApplyPendingMaintenanceActionOutput   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ApplyPendingMaintenanceActionOutput"}
+	iCopyClusterSnapshotInput              = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CopyClusterSnapshotInput"}
+	iCopyClusterSnapshotOutput             = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CopyClusterSnapshotOutput"}
+	iCreateClusterInput                    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CreateClusterInput"}
+	iCreateClusterOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CreateClusterOutput"}
+	iCreateClusterSnapshotInput            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CreateClusterSnapshotInput"}
+	iCreateClusterSnapshotOutput           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "CreateClusterSnapshotOutput"}
+	iDeleteClusterInput                    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "DeleteClusterInput"}
+	iDeleteClusterOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "DeleteClusterOutput"}
+	iDeleteClusterSnapshotInput            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "DeleteClusterSnapshotInput"}
+	iDeleteClusterSnapshotOutput           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "DeleteClusterSnapshotOutput"}
+	iGetClusterInput                       = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetClusterInput"}
+	iGetClusterOutput                      = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetClusterOutput"}
+	iGetClusterSnapshotInput               = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetClusterSnapshotInput"}
+	iGetClusterSnapshotOutput              = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetClusterSnapshotOutput"}
+	iGetPendingMaintenanceActionInput      = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetPendingMaintenanceActionInput"}
+	iGetPendingMaintenanceActionOutput     = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "GetPendingMaintenanceActionOutput"}
+	iListClustersInput                     = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListClustersInput"}
+	iListClusterSnapshotsInput             = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListClusterSnapshotsInput"}
+	iListClusterSnapshotsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListClusterSnapshotsOutput"}
+	iListClustersOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListClustersOutput"}
+	iListPendingMaintenanceActionsInput    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListPendingMaintenanceActionsInput"}
+	iListPendingMaintenanceActionsOutput   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListPendingMaintenanceActionsOutput"}
+	iListTagsForResourceRequest            = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse           = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "ListTagsForResourceResponse"}
+	iRestoreClusterFromSnapshotInput       = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "RestoreClusterFromSnapshotInput"}
+	iRestoreClusterFromSnapshotOutput      = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "RestoreClusterFromSnapshotOutput"}
+	iStartClusterInput                     = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "StartClusterInput"}
+	iStartClusterOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "StartClusterOutput"}
+	iStopClusterInput                      = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "StopClusterInput"}
+	iStopClusterOutput                     = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "StopClusterOutput"}
+	iTagResourceRequest                    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "TagResourceRequest"}
+	iTagResourceResponse                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "TagResourceResponse"}
+	iUntagResourceRequest                  = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "UntagResourceRequest"}
+	iUntagResourceResponse                 = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "UntagResourceResponse"}
+	iUpdateClusterInput                    = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "UpdateClusterInput"}
+	iUpdateClusterOutput                   = smithy.ShapeID{Namespace: "com.amazonaws.docdbelastic", Name: "UpdateClusterOutput"}
+	pString                                = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pInteger                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/pending-action",
-	Code: 200})
-
-var CopyClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CopyClusterSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cluster-snapshot/{snapshotArn}/copy",
-	Code: 200})
-
-var CreateCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CreateCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cluster",
-	Code: 200})
-
-var CreateClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CreateClusterSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cluster-snapshot",
-	Code: 200})
-
-var DeleteCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "DeleteCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/cluster/{clusterArn}",
-	Code: 200})
-
-var DeleteClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "DeleteClusterSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/cluster-snapshot/{snapshotArn}",
-	Code: 200})
-
-var GetCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/cluster/{clusterArn}",
-	Code: 200})
-
-var GetClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetClusterSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/cluster-snapshot/{snapshotArn}",
-	Code: 200})
-
-var GetPendingMaintenanceAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetPendingMaintenanceAction",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/pending-action/{resourceArn}",
-	Code: 200})
-
-var ListClusters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListClusters",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/clusters",
-	Code: 200})
-
-var ListClusterSnapshots = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListClusterSnapshots",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/cluster-snapshots",
-	Code: 200})
-
-var ListPendingMaintenanceActions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListPendingMaintenanceActions",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/pending-actions",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var RestoreClusterFromSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "RestoreClusterFromSnapshot",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cluster-snapshot/{snapshotArn}/restore",
-	Code: 200})
-
-var StartCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "StartCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cluster/{clusterArn}/start",
-	Code: 200})
-
-var StopCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "StopCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/cluster/{clusterArn}/stop",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var UpdateCluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "UpdateCluster",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/cluster/{clusterArn}",
-	Code: 200})
-
-var _ChimeraDbLionfishServiceLambda = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ChimeraDbLionfishServiceLambda",
-}, smithy.ShapeTypeService, 0)
-
-var ChimeraDbLionfishServiceLambda = smithy.NewServiceSchema(_ChimeraDbLionfishServiceLambda, "2022-11-28")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _Auth = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "Auth",
-}, smithy.ShapeTypeString, 0)
-
-var Cluster = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "Cluster",
-}, smithy.ShapeTypeStructure, 17)
-var Cluster_clusterName *smithy.Schema
-
-var Cluster_clusterArn *smithy.Schema
-
-var Cluster_status *smithy.Schema
-
-var Cluster_clusterEndpoint *smithy.Schema
-
-var Cluster_createTime *smithy.Schema
-
-var Cluster_adminUserName *smithy.Schema
-
-var Cluster_authType *smithy.Schema
-
-var Cluster_shardCapacity *smithy.Schema
-
-var Cluster_shardCount *smithy.Schema
-
-var Cluster_vpcSecurityGroupIds *smithy.Schema
-
-var Cluster_subnetIds *smithy.Schema
-
-var Cluster_preferredMaintenanceWindow *smithy.Schema
-
-var Cluster_kmsKeyId *smithy.Schema
-
-var Cluster_shards *smithy.Schema
-
-var Cluster_backupRetentionPeriod *smithy.Schema
-
-var Cluster_preferredBackupWindow *smithy.Schema
-
-var Cluster_shardInstanceCount *smithy.Schema
-
-var ClusterInList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ClusterInList",
-}, smithy.ShapeTypeStructure, 3)
-var ClusterInList_clusterName *smithy.Schema
-
-var ClusterInList_clusterArn *smithy.Schema
-
-var ClusterInList_status *smithy.Schema
-
-var _ClusterList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ClusterList",
-}, smithy.ShapeTypeList, 1)
-var _ClusterList_member *smithy.Schema
-
-var ClusterSnapshot = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ClusterSnapshot",
-}, smithy.ShapeTypeStructure, 11)
-var ClusterSnapshot_subnetIds *smithy.Schema
-
-var ClusterSnapshot_snapshotName *smithy.Schema
-
-var ClusterSnapshot_snapshotArn *smithy.Schema
-
-var ClusterSnapshot_snapshotCreationTime *smithy.Schema
-
-var ClusterSnapshot_clusterArn *smithy.Schema
-
-var ClusterSnapshot_clusterCreationTime *smithy.Schema
-
-var ClusterSnapshot_status *smithy.Schema
-
-var ClusterSnapshot_vpcSecurityGroupIds *smithy.Schema
-
-var ClusterSnapshot_adminUserName *smithy.Schema
-
-var ClusterSnapshot_kmsKeyId *smithy.Schema
-
-var ClusterSnapshot_snapshotType *smithy.Schema
-
-var ClusterSnapshotInList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ClusterSnapshotInList",
-}, smithy.ShapeTypeStructure, 5)
-var ClusterSnapshotInList_snapshotName *smithy.Schema
-
-var ClusterSnapshotInList_snapshotArn *smithy.Schema
-
-var ClusterSnapshotInList_clusterArn *smithy.Schema
-
-var ClusterSnapshotInList_status *smithy.Schema
-
-var ClusterSnapshotInList_snapshotCreationTime *smithy.Schema
-
-var _ClusterSnapshotList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ClusterSnapshotList",
-}, smithy.ShapeTypeList, 1)
-var _ClusterSnapshotList_member *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var ConflictException_resourceId *smithy.Schema
-
-var ConflictException_resourceType *smithy.Schema
-
-var _InputString = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "InputString",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var _OptInType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "OptInType",
-}, smithy.ShapeTypeString, 0)
-
-var _PaginationToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "PaginationToken",
-}, smithy.ShapeTypeString, 0)
-
-var _Password = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "Password",
-}, smithy.ShapeTypeString, 0, &smithytraits.Sensitive{})
-
-var PendingMaintenanceActionDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "PendingMaintenanceActionDetails",
-}, smithy.ShapeTypeStructure, 6)
-var PendingMaintenanceActionDetails_action *smithy.Schema
-
-var PendingMaintenanceActionDetails_autoAppliedAfterDate *smithy.Schema
-
-var PendingMaintenanceActionDetails_forcedApplyDate *smithy.Schema
-
-var PendingMaintenanceActionDetails_optInStatus *smithy.Schema
-
-var PendingMaintenanceActionDetails_currentApplyDate *smithy.Schema
-
-var PendingMaintenanceActionDetails_description *smithy.Schema
-
-var _PendingMaintenanceActionDetailsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "PendingMaintenanceActionDetailsList",
-}, smithy.ShapeTypeList, 1)
-var _PendingMaintenanceActionDetailsList_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ResourceNotFoundException_resourceId *smithy.Schema
-
-var ResourceNotFoundException_resourceType *smithy.Schema
-
-var ResourcePendingMaintenanceAction = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ResourcePendingMaintenanceAction",
-}, smithy.ShapeTypeStructure, 2)
-var ResourcePendingMaintenanceAction_resourceArn *smithy.Schema
-
-var ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails *smithy.Schema
-
-var _ResourcePendingMaintenanceActionList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ResourcePendingMaintenanceActionList",
-}, smithy.ShapeTypeList, 1)
-var _ResourcePendingMaintenanceActionList_member *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var Shard = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "Shard",
-}, smithy.ShapeTypeStructure, 3)
-var Shard_shardId *smithy.Schema
-
-var Shard_createTime *smithy.Schema
-
-var Shard_status *smithy.Schema
-
-var _ShardList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ShardList",
-}, smithy.ShapeTypeList, 1)
-var _ShardList_member *smithy.Schema
-
-var _SnapshotType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "SnapshotType",
-}, smithy.ShapeTypeString, 0)
-
-var _Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "Status",
-}, smithy.ShapeTypeString, 0)
-
-var _StringList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "StringList",
-}, smithy.ShapeTypeList, 1)
-var _StringList_member *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeyList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "TagKeyList",
-}, smithy.ShapeTypeList, 1)
-var _TagKeyList_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 3, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var ValidationException_reason *smithy.Schema
-
-var ValidationException_fieldList *smithy.Schema
-
-var ValidationExceptionField = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ValidationExceptionField",
-}, smithy.ShapeTypeStructure, 2)
-var ValidationExceptionField_name *smithy.Schema
-
-var ValidationExceptionField_message *smithy.Schema
-
-var _ValidationExceptionFieldList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ValidationExceptionFieldList",
-}, smithy.ShapeTypeList, 1)
-var _ValidationExceptionFieldList_member *smithy.Schema
-
-var _ValidationExceptionReason = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ValidationExceptionReason",
-}, smithy.ShapeTypeString, 0)
-
-var ApplyPendingMaintenanceActionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ApplyPendingMaintenanceActionInput",
-}, smithy.ShapeTypeStructure, 4)
-var ApplyPendingMaintenanceActionInput_resourceArn *smithy.Schema
-
-var ApplyPendingMaintenanceActionInput_applyAction *smithy.Schema
-
-var ApplyPendingMaintenanceActionInput_optInType *smithy.Schema
-
-var ApplyPendingMaintenanceActionInput_applyOn *smithy.Schema
-
-var ApplyPendingMaintenanceActionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ApplyPendingMaintenanceActionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ApplyPendingMaintenanceActionOutput_resourcePendingMaintenanceAction *smithy.Schema
-
-var CopyClusterSnapshotInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CopyClusterSnapshotInput",
-}, smithy.ShapeTypeStructure, 5)
-var CopyClusterSnapshotInput_snapshotArn *smithy.Schema
-
-var CopyClusterSnapshotInput_targetSnapshotName *smithy.Schema
-
-var CopyClusterSnapshotInput_kmsKeyId *smithy.Schema
-
-var CopyClusterSnapshotInput_copyTags *smithy.Schema
-
-var CopyClusterSnapshotInput_tags *smithy.Schema
-
-var CopyClusterSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CopyClusterSnapshotOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CopyClusterSnapshotOutput_snapshot *smithy.Schema
-
-var CreateClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CreateClusterInput",
-}, smithy.ShapeTypeStructure, 15)
-var CreateClusterInput_clusterName *smithy.Schema
-
-var CreateClusterInput_authType *smithy.Schema
-
-var CreateClusterInput_adminUserName *smithy.Schema
-
-var CreateClusterInput_adminUserPassword *smithy.Schema
-
-var CreateClusterInput_shardCapacity *smithy.Schema
-
-var CreateClusterInput_shardCount *smithy.Schema
-
-var CreateClusterInput_vpcSecurityGroupIds *smithy.Schema
-
-var CreateClusterInput_subnetIds *smithy.Schema
-
-var CreateClusterInput_kmsKeyId *smithy.Schema
-
-var CreateClusterInput_clientToken *smithy.Schema
-
-var CreateClusterInput_preferredMaintenanceWindow *smithy.Schema
-
-var CreateClusterInput_tags *smithy.Schema
-
-var CreateClusterInput_backupRetentionPeriod *smithy.Schema
-
-var CreateClusterInput_preferredBackupWindow *smithy.Schema
-
-var CreateClusterInput_shardInstanceCount *smithy.Schema
-
-var CreateClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CreateClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateClusterOutput_cluster *smithy.Schema
-
-var CreateClusterSnapshotInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CreateClusterSnapshotInput",
-}, smithy.ShapeTypeStructure, 3)
-var CreateClusterSnapshotInput_clusterArn *smithy.Schema
-
-var CreateClusterSnapshotInput_snapshotName *smithy.Schema
-
-var CreateClusterSnapshotInput_tags *smithy.Schema
-
-var CreateClusterSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "CreateClusterSnapshotOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateClusterSnapshotOutput_snapshot *smithy.Schema
-
-var DeleteClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "DeleteClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteClusterInput_clusterArn *smithy.Schema
-
-var DeleteClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "DeleteClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteClusterOutput_cluster *smithy.Schema
-
-var DeleteClusterSnapshotInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "DeleteClusterSnapshotInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteClusterSnapshotInput_snapshotArn *smithy.Schema
-
-var DeleteClusterSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "DeleteClusterSnapshotOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteClusterSnapshotOutput_snapshot *smithy.Schema
-
-var GetClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetClusterInput_clusterArn *smithy.Schema
-
-var GetClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetClusterOutput_cluster *smithy.Schema
-
-var GetClusterSnapshotInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetClusterSnapshotInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetClusterSnapshotInput_snapshotArn *smithy.Schema
-
-var GetClusterSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetClusterSnapshotOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetClusterSnapshotOutput_snapshot *smithy.Schema
-
-var GetPendingMaintenanceActionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetPendingMaintenanceActionInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetPendingMaintenanceActionInput_resourceArn *smithy.Schema
-
-var GetPendingMaintenanceActionOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "GetPendingMaintenanceActionOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetPendingMaintenanceActionOutput_resourcePendingMaintenanceAction *smithy.Schema
-
-var ListClustersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListClustersInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListClustersInput_nextToken *smithy.Schema
-
-var ListClustersInput_maxResults *smithy.Schema
-
-var ListClusterSnapshotsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListClusterSnapshotsInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListClusterSnapshotsInput_clusterArn *smithy.Schema
-
-var ListClusterSnapshotsInput_nextToken *smithy.Schema
-
-var ListClusterSnapshotsInput_maxResults *smithy.Schema
-
-var ListClusterSnapshotsInput_snapshotType *smithy.Schema
-
-var ListClusterSnapshotsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListClusterSnapshotsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListClusterSnapshotsOutput_snapshots *smithy.Schema
-
-var ListClusterSnapshotsOutput_nextToken *smithy.Schema
-
-var ListClustersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListClustersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListClustersOutput_clusters *smithy.Schema
-
-var ListClustersOutput_nextToken *smithy.Schema
-
-var ListPendingMaintenanceActionsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListPendingMaintenanceActionsInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPendingMaintenanceActionsInput_nextToken *smithy.Schema
-
-var ListPendingMaintenanceActionsInput_maxResults *smithy.Schema
-
-var ListPendingMaintenanceActionsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListPendingMaintenanceActionsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions *smithy.Schema
-
-var ListPendingMaintenanceActionsOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_resourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_tags *smithy.Schema
-
-var RestoreClusterFromSnapshotInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "RestoreClusterFromSnapshotInput",
-}, smithy.ShapeTypeStructure, 8)
-var RestoreClusterFromSnapshotInput_clusterName *smithy.Schema
-
-var RestoreClusterFromSnapshotInput_snapshotArn *smithy.Schema
-
-var RestoreClusterFromSnapshotInput_vpcSecurityGroupIds *smithy.Schema
-
-var RestoreClusterFromSnapshotInput_subnetIds *smithy.Schema
-
-var RestoreClusterFromSnapshotInput_kmsKeyId *smithy.Schema
-
-var RestoreClusterFromSnapshotInput_tags *smithy.Schema
-
-var RestoreClusterFromSnapshotInput_shardCapacity *smithy.Schema
-
-var RestoreClusterFromSnapshotInput_shardInstanceCount *smithy.Schema
-
-var RestoreClusterFromSnapshotOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "RestoreClusterFromSnapshotOutput",
-}, smithy.ShapeTypeStructure, 1)
-var RestoreClusterFromSnapshotOutput_cluster *smithy.Schema
-
-var StartClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "StartClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var StartClusterInput_clusterArn *smithy.Schema
-
-var StartClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "StartClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StartClusterOutput_cluster *smithy.Schema
-
-var StopClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "StopClusterInput",
-}, smithy.ShapeTypeStructure, 1)
-var StopClusterInput_clusterArn *smithy.Schema
-
-var StopClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "StopClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var StopClusterOutput_cluster *smithy.Schema
-
-var TagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "TagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceRequest_resourceArn *smithy.Schema
-
-var TagResourceRequest_tags *smithy.Schema
-
-var TagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "TagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "UntagResourceRequest",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceRequest_resourceArn *smithy.Schema
-
-var UntagResourceRequest_tagKeys *smithy.Schema
-
-var UntagResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "UntagResourceResponse",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateClusterInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "UpdateClusterInput",
-}, smithy.ShapeTypeStructure, 12)
-var UpdateClusterInput_clusterArn *smithy.Schema
-
-var UpdateClusterInput_authType *smithy.Schema
-
-var UpdateClusterInput_shardCapacity *smithy.Schema
-
-var UpdateClusterInput_shardCount *smithy.Schema
-
-var UpdateClusterInput_vpcSecurityGroupIds *smithy.Schema
-
-var UpdateClusterInput_subnetIds *smithy.Schema
-
-var UpdateClusterInput_adminUserPassword *smithy.Schema
-
-var UpdateClusterInput_clientToken *smithy.Schema
-
-var UpdateClusterInput_preferredMaintenanceWindow *smithy.Schema
-
-var UpdateClusterInput_backupRetentionPeriod *smithy.Schema
-
-var UpdateClusterInput_preferredBackupWindow *smithy.Schema
-
-var UpdateClusterInput_shardInstanceCount *smithy.Schema
-
-var UpdateClusterOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.docdbelastic",
-	Name:      "UpdateClusterOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateClusterOutput_cluster *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	_StringList_member = _StringList.AddMember("member", smithyprelude.String)
-
-	Shard_shardId = Shard.AddMember("shardId", smithyprelude.String)
-
-	Shard_createTime = Shard.AddMember("createTime", smithyprelude.String)
-
-	Shard_status = Shard.AddMember("status", _Status)
-
-	_ShardList_member = _ShardList.AddMember("member", Shard)
-
-	Cluster_clusterName = Cluster.AddMember("clusterName", smithyprelude.String)
-
-	Cluster_clusterArn = Cluster.AddMember("clusterArn", smithyprelude.String)
-
-	Cluster_status = Cluster.AddMember("status", _Status)
-
-	Cluster_clusterEndpoint = Cluster.AddMember("clusterEndpoint", smithyprelude.String)
-
-	Cluster_createTime = Cluster.AddMember("createTime", smithyprelude.String)
-
-	Cluster_adminUserName = Cluster.AddMember("adminUserName", smithyprelude.String)
-
-	Cluster_authType = Cluster.AddMember("authType", _Auth)
-
-	Cluster_shardCapacity = Cluster.AddMember("shardCapacity", smithyprelude.Integer)
-
-	Cluster_shardCount = Cluster.AddMember("shardCount", smithyprelude.Integer)
-
-	Cluster_vpcSecurityGroupIds = Cluster.AddMember("vpcSecurityGroupIds", _StringList)
-
-	Cluster_subnetIds = Cluster.AddMember("subnetIds", _StringList)
-
-	Cluster_preferredMaintenanceWindow = Cluster.AddMember("preferredMaintenanceWindow", smithyprelude.String)
-
-	Cluster_kmsKeyId = Cluster.AddMember("kmsKeyId", smithyprelude.String)
-
-	Cluster_shards = Cluster.AddMember("shards", _ShardList)
-
-	Cluster_backupRetentionPeriod = Cluster.AddMember("backupRetentionPeriod", smithyprelude.Integer)
-
-	Cluster_preferredBackupWindow = Cluster.AddMember("preferredBackupWindow", smithyprelude.String)
-
-	Cluster_shardInstanceCount = Cluster.AddMember("shardInstanceCount", smithyprelude.Integer)
-
-	ClusterInList_clusterName = ClusterInList.AddMember("clusterName", smithyprelude.String)
-
-	ClusterInList_clusterArn = ClusterInList.AddMember("clusterArn", smithyprelude.String)
-
-	ClusterInList_status = ClusterInList.AddMember("status", _Status)
-
-	_ClusterList_member = _ClusterList.AddMember("member", ClusterInList)
-
-	ClusterSnapshot_subnetIds = ClusterSnapshot.AddMember("subnetIds", _StringList)
-
-	ClusterSnapshot_snapshotName = ClusterSnapshot.AddMember("snapshotName", smithyprelude.String)
-
-	ClusterSnapshot_snapshotArn = ClusterSnapshot.AddMember("snapshotArn", smithyprelude.String)
-
-	ClusterSnapshot_snapshotCreationTime = ClusterSnapshot.AddMember("snapshotCreationTime", smithyprelude.String)
-
-	ClusterSnapshot_clusterArn = ClusterSnapshot.AddMember("clusterArn", smithyprelude.String)
-
-	ClusterSnapshot_clusterCreationTime = ClusterSnapshot.AddMember("clusterCreationTime", smithyprelude.String)
-
-	ClusterSnapshot_status = ClusterSnapshot.AddMember("status", _Status)
-
-	ClusterSnapshot_vpcSecurityGroupIds = ClusterSnapshot.AddMember("vpcSecurityGroupIds", _StringList)
-
-	ClusterSnapshot_adminUserName = ClusterSnapshot.AddMember("adminUserName", smithyprelude.String)
-
-	ClusterSnapshot_kmsKeyId = ClusterSnapshot.AddMember("kmsKeyId", smithyprelude.String)
-
-	ClusterSnapshot_snapshotType = ClusterSnapshot.AddMember("snapshotType", _SnapshotType)
-
-	ClusterSnapshotInList_snapshotName = ClusterSnapshotInList.AddMember("snapshotName", smithyprelude.String)
-
-	ClusterSnapshotInList_snapshotArn = ClusterSnapshotInList.AddMember("snapshotArn", smithyprelude.String)
-
-	ClusterSnapshotInList_clusterArn = ClusterSnapshotInList.AddMember("clusterArn", smithyprelude.String)
-
-	ClusterSnapshotInList_status = ClusterSnapshotInList.AddMember("status", _Status)
-
-	ClusterSnapshotInList_snapshotCreationTime = ClusterSnapshotInList.AddMember("snapshotCreationTime", smithyprelude.String)
-
-	_ClusterSnapshotList_member = _ClusterSnapshotList.AddMember("member", ClusterSnapshotInList)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	ConflictException_resourceId = ConflictException.AddMember("resourceId", smithyprelude.String)
-
-	ConflictException_resourceType = ConflictException.AddMember("resourceType", smithyprelude.String)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	PendingMaintenanceActionDetails_action = PendingMaintenanceActionDetails.AddMember("action", smithyprelude.String)
-
-	PendingMaintenanceActionDetails_autoAppliedAfterDate = PendingMaintenanceActionDetails.AddMember("autoAppliedAfterDate", smithyprelude.String)
-
-	PendingMaintenanceActionDetails_forcedApplyDate = PendingMaintenanceActionDetails.AddMember("forcedApplyDate", smithyprelude.String)
-
-	PendingMaintenanceActionDetails_optInStatus = PendingMaintenanceActionDetails.AddMember("optInStatus", smithyprelude.String)
-
-	PendingMaintenanceActionDetails_currentApplyDate = PendingMaintenanceActionDetails.AddMember("currentApplyDate", smithyprelude.String)
-
-	PendingMaintenanceActionDetails_description = PendingMaintenanceActionDetails.AddMember("description", smithyprelude.String)
-
-	_PendingMaintenanceActionDetailsList_member = _PendingMaintenanceActionDetailsList.AddMember("member", PendingMaintenanceActionDetails)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ResourceNotFoundException_resourceId = ResourceNotFoundException.AddMember("resourceId", smithyprelude.String)
-
-	ResourceNotFoundException_resourceType = ResourceNotFoundException.AddMember("resourceType", smithyprelude.String)
-
-	ResourcePendingMaintenanceAction_resourceArn = ResourcePendingMaintenanceAction.AddMember("resourceArn", smithyprelude.String)
-
-	ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails = ResourcePendingMaintenanceAction.AddMember("pendingMaintenanceActionDetails", _PendingMaintenanceActionDetailsList)
-
-	_ResourcePendingMaintenanceActionList_member = _ResourcePendingMaintenanceActionList.AddMember("member", ResourcePendingMaintenanceAction)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TagKeyList_member = _TagKeyList.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationExceptionField_name = ValidationExceptionField.AddMember("name", smithyprelude.String)
-
-	ValidationExceptionField_message = ValidationExceptionField.AddMember("message", smithyprelude.String)
-
-	_ValidationExceptionFieldList_member = _ValidationExceptionFieldList.AddMember("member", ValidationExceptionField)
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	ValidationException_reason = ValidationException.AddMember("reason", _ValidationExceptionReason)
-
-	ValidationException_fieldList = ValidationException.AddMember("fieldList", _ValidationExceptionFieldList)
-
-	ApplyPendingMaintenanceActionInput_resourceArn = ApplyPendingMaintenanceActionInput.AddMember("resourceArn", _InputString)
-
-	ApplyPendingMaintenanceActionInput_applyAction = ApplyPendingMaintenanceActionInput.AddMember("applyAction", _InputString)
-
-	ApplyPendingMaintenanceActionInput_optInType = ApplyPendingMaintenanceActionInput.AddMember("optInType", _OptInType)
-
-	ApplyPendingMaintenanceActionInput_applyOn = ApplyPendingMaintenanceActionInput.AddMember("applyOn", _InputString)
-
-	ApplyPendingMaintenanceActionOutput_resourcePendingMaintenanceAction = ApplyPendingMaintenanceActionOutput.AddMember("resourcePendingMaintenanceAction", ResourcePendingMaintenanceAction)
-
-	CopyClusterSnapshotInput_snapshotArn = CopyClusterSnapshotInput.AddMember("snapshotArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	CopyClusterSnapshotInput_targetSnapshotName = CopyClusterSnapshotInput.AddMember("targetSnapshotName", smithyprelude.String)
-
-	CopyClusterSnapshotInput_kmsKeyId = CopyClusterSnapshotInput.AddMember("kmsKeyId", smithyprelude.String)
-
-	CopyClusterSnapshotInput_copyTags = CopyClusterSnapshotInput.AddMember("copyTags", smithyprelude.Boolean)
-
-	CopyClusterSnapshotInput_tags = CopyClusterSnapshotInput.AddMember("tags", _TagMap)
-
-	CopyClusterSnapshotOutput_snapshot = CopyClusterSnapshotOutput.AddMember("snapshot", ClusterSnapshot)
-
-	CreateClusterInput_clusterName = CreateClusterInput.AddMember("clusterName", smithyprelude.String)
-
-	CreateClusterInput_authType = CreateClusterInput.AddMember("authType", _Auth)
-
-	CreateClusterInput_adminUserName = CreateClusterInput.AddMember("adminUserName", smithyprelude.String)
-
-	CreateClusterInput_adminUserPassword = CreateClusterInput.AddMember("adminUserPassword", _Password)
-
-	CreateClusterInput_shardCapacity = CreateClusterInput.AddMember("shardCapacity", smithyprelude.Integer)
-
-	CreateClusterInput_shardCount = CreateClusterInput.AddMember("shardCount", smithyprelude.Integer)
-
-	CreateClusterInput_vpcSecurityGroupIds = CreateClusterInput.AddMember("vpcSecurityGroupIds", _StringList)
-
-	CreateClusterInput_subnetIds = CreateClusterInput.AddMember("subnetIds", _StringList)
-
-	CreateClusterInput_kmsKeyId = CreateClusterInput.AddMember("kmsKeyId", smithyprelude.String)
-
-	CreateClusterInput_clientToken = CreateClusterInput.AddMember("clientToken", smithyprelude.String)
-
-	CreateClusterInput_preferredMaintenanceWindow = CreateClusterInput.AddMember("preferredMaintenanceWindow", smithyprelude.String)
-
-	CreateClusterInput_tags = CreateClusterInput.AddMember("tags", _TagMap)
-
-	CreateClusterInput_backupRetentionPeriod = CreateClusterInput.AddMember("backupRetentionPeriod", smithyprelude.Integer)
-
-	CreateClusterInput_preferredBackupWindow = CreateClusterInput.AddMember("preferredBackupWindow", smithyprelude.String)
-
-	CreateClusterInput_shardInstanceCount = CreateClusterInput.AddMember("shardInstanceCount", smithyprelude.Integer)
-
-	CreateClusterOutput_cluster = CreateClusterOutput.AddMember("cluster", Cluster)
-
-	CreateClusterSnapshotInput_clusterArn = CreateClusterSnapshotInput.AddMember("clusterArn", smithyprelude.String)
-
-	CreateClusterSnapshotInput_snapshotName = CreateClusterSnapshotInput.AddMember("snapshotName", smithyprelude.String)
-
-	CreateClusterSnapshotInput_tags = CreateClusterSnapshotInput.AddMember("tags", _TagMap)
-
-	CreateClusterSnapshotOutput_snapshot = CreateClusterSnapshotOutput.AddMember("snapshot", ClusterSnapshot)
-
-	DeleteClusterInput_clusterArn = DeleteClusterInput.AddMember("clusterArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteClusterOutput_cluster = DeleteClusterOutput.AddMember("cluster", Cluster)
-
-	DeleteClusterSnapshotInput_snapshotArn = DeleteClusterSnapshotInput.AddMember("snapshotArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	DeleteClusterSnapshotOutput_snapshot = DeleteClusterSnapshotOutput.AddMember("snapshot", ClusterSnapshot)
-
-	GetClusterInput_clusterArn = GetClusterInput.AddMember("clusterArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetClusterOutput_cluster = GetClusterOutput.AddMember("cluster", Cluster)
-
-	GetClusterSnapshotInput_snapshotArn = GetClusterSnapshotInput.AddMember("snapshotArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetClusterSnapshotOutput_snapshot = GetClusterSnapshotOutput.AddMember("snapshot", ClusterSnapshot)
-
-	GetPendingMaintenanceActionInput_resourceArn = GetPendingMaintenanceActionInput.AddMember("resourceArn", _InputString, &smithytraits.HTTPLabel{})
-
-	GetPendingMaintenanceActionOutput_resourcePendingMaintenanceAction = GetPendingMaintenanceActionOutput.AddMember("resourcePendingMaintenanceAction", ResourcePendingMaintenanceAction)
-
-	ListClustersInput_nextToken = ListClustersInput.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClustersInput_maxResults = ListClustersInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClusterSnapshotsInput_clusterArn = ListClusterSnapshotsInput.AddMember("clusterArn", smithyprelude.String, &smithytraits.HTTPQuery{Name: "clusterArn"})
-
-	ListClusterSnapshotsInput_nextToken = ListClusterSnapshotsInput.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListClusterSnapshotsInput_maxResults = ListClusterSnapshotsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListClusterSnapshotsInput_snapshotType = ListClusterSnapshotsInput.AddMember("snapshotType", smithyprelude.String, &smithytraits.HTTPQuery{Name: "snapshotType"})
-
-	ListClusterSnapshotsOutput_snapshots = ListClusterSnapshotsOutput.AddMember("snapshots", _ClusterSnapshotList)
-
-	ListClusterSnapshotsOutput_nextToken = ListClusterSnapshotsOutput.AddMember("nextToken", _PaginationToken)
-
-	ListClustersOutput_clusters = ListClustersOutput.AddMember("clusters", _ClusterList)
-
-	ListClustersOutput_nextToken = ListClustersOutput.AddMember("nextToken", _PaginationToken)
-
-	ListPendingMaintenanceActionsInput_nextToken = ListPendingMaintenanceActionsInput.AddMember("nextToken", _PaginationToken, &smithytraits.HTTPQuery{Name: "nextToken"})
-
-	ListPendingMaintenanceActionsInput_maxResults = ListPendingMaintenanceActionsInput.AddMember("maxResults", smithyprelude.Integer, &smithytraits.HTTPQuery{Name: "maxResults"})
-
-	ListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions = ListPendingMaintenanceActionsOutput.AddMember("resourcePendingMaintenanceActions", _ResourcePendingMaintenanceActionList)
-
-	ListPendingMaintenanceActionsOutput_nextToken = ListPendingMaintenanceActionsOutput.AddMember("nextToken", _PaginationToken)
-
-	ListTagsForResourceRequest_resourceArn = ListTagsForResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_tags = ListTagsForResourceResponse.AddMember("tags", _TagMap)
-
-	RestoreClusterFromSnapshotInput_clusterName = RestoreClusterFromSnapshotInput.AddMember("clusterName", smithyprelude.String)
-
-	RestoreClusterFromSnapshotInput_snapshotArn = RestoreClusterFromSnapshotInput.AddMember("snapshotArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	RestoreClusterFromSnapshotInput_vpcSecurityGroupIds = RestoreClusterFromSnapshotInput.AddMember("vpcSecurityGroupIds", _StringList)
-
-	RestoreClusterFromSnapshotInput_subnetIds = RestoreClusterFromSnapshotInput.AddMember("subnetIds", _StringList)
-
-	RestoreClusterFromSnapshotInput_kmsKeyId = RestoreClusterFromSnapshotInput.AddMember("kmsKeyId", smithyprelude.String)
-
-	RestoreClusterFromSnapshotInput_tags = RestoreClusterFromSnapshotInput.AddMember("tags", _TagMap)
-
-	RestoreClusterFromSnapshotInput_shardCapacity = RestoreClusterFromSnapshotInput.AddMember("shardCapacity", smithyprelude.Integer)
-
-	RestoreClusterFromSnapshotInput_shardInstanceCount = RestoreClusterFromSnapshotInput.AddMember("shardInstanceCount", smithyprelude.Integer)
-
-	RestoreClusterFromSnapshotOutput_cluster = RestoreClusterFromSnapshotOutput.AddMember("cluster", Cluster)
-
-	StartClusterInput_clusterArn = StartClusterInput.AddMember("clusterArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	StartClusterOutput_cluster = StartClusterOutput.AddMember("cluster", Cluster)
-
-	StopClusterInput_clusterArn = StopClusterInput.AddMember("clusterArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	StopClusterOutput_cluster = StopClusterOutput.AddMember("cluster", Cluster)
-
-	TagResourceRequest_resourceArn = TagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceRequest_tags = TagResourceRequest.AddMember("tags", _TagMap)
-
-	UntagResourceRequest_resourceArn = UntagResourceRequest.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceRequest_tagKeys = UntagResourceRequest.AddMember("tagKeys", _TagKeyList, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateClusterInput_clusterArn = UpdateClusterInput.AddMember("clusterArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateClusterInput_authType = UpdateClusterInput.AddMember("authType", _Auth)
-
-	UpdateClusterInput_shardCapacity = UpdateClusterInput.AddMember("shardCapacity", smithyprelude.Integer)
-
-	UpdateClusterInput_shardCount = UpdateClusterInput.AddMember("shardCount", smithyprelude.Integer)
-
-	UpdateClusterInput_vpcSecurityGroupIds = UpdateClusterInput.AddMember("vpcSecurityGroupIds", _StringList)
-
-	UpdateClusterInput_subnetIds = UpdateClusterInput.AddMember("subnetIds", _StringList)
-
-	UpdateClusterInput_adminUserPassword = UpdateClusterInput.AddMember("adminUserPassword", _Password)
-
-	UpdateClusterInput_clientToken = UpdateClusterInput.AddMember("clientToken", smithyprelude.String)
-
-	UpdateClusterInput_preferredMaintenanceWindow = UpdateClusterInput.AddMember("preferredMaintenanceWindow", smithyprelude.String)
-
-	UpdateClusterInput_backupRetentionPeriod = UpdateClusterInput.AddMember("backupRetentionPeriod", smithyprelude.Integer)
-
-	UpdateClusterInput_preferredBackupWindow = UpdateClusterInput.AddMember("preferredBackupWindow", smithyprelude.String)
-
-	UpdateClusterInput_shardInstanceCount = UpdateClusterInput.AddMember("shardInstanceCount", smithyprelude.Integer)
-
-	UpdateClusterOutput_cluster = UpdateClusterOutput.AddMember("cluster", Cluster)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "nextToken"}}, DirectMask: 0x10}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "maxResults"}}, DirectMask: 0x10}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "clusterArn"}}, DirectMask: 0x10}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "snapshotType"}}, DirectMask: 0x10}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mCluster = smithy.SchemaMembers{List: []*smithy.Schema{&sCluster_clusterName, &sCluster_clusterArn, &sCluster_status, &sCluster_clusterEndpoint, &sCluster_createTime, &sCluster_adminUserName, &sCluster_authType, &sCluster_shardCapacity, &sCluster_shardCount, &sCluster_vpcSecurityGroupIds, &sCluster_subnetIds, &sCluster_preferredMaintenanceWindow, &sCluster_kmsKeyId, &sCluster_shards, &sCluster_backupRetentionPeriod, &sCluster_preferredBackupWindow, &sCluster_shardInstanceCount}, Seed: 2, Slots: []uint16{
+	1, 0, 0, 0, 0, 0, 0, 0, 16, 0, 0, 2, 0, 9, 8, 0, 0, 0, 12, 14, 0, 0, 0, 0,
+	0, 11, 0, 0, 0, 0, 5, 0, 6, 0, 0, 15, 0, 7, 0, 13, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0, 10, 17, 0, 4, 0,
+}}
+var mClusterInList = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterInList_clusterName, &sClusterInList_clusterArn, &sClusterInList_status}}
+var m_ClusterList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClusterList_member}}
+var mClusterSnapshot = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterSnapshot_subnetIds, &sClusterSnapshot_snapshotName, &sClusterSnapshot_snapshotArn, &sClusterSnapshot_snapshotCreationTime, &sClusterSnapshot_clusterArn, &sClusterSnapshot_clusterCreationTime, &sClusterSnapshot_status, &sClusterSnapshot_vpcSecurityGroupIds, &sClusterSnapshot_adminUserName, &sClusterSnapshot_kmsKeyId, &sClusterSnapshot_snapshotType}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 7, 0, 4, 2, 0, 6, 0, 0, 5, 0, 0, 1, 0, 0, 0, 0, 0, 11, 0, 0,
+	0, 0, 8, 3, 0, 0, 9, 10,
+}}
+var mClusterSnapshotInList = smithy.SchemaMembers{List: []*smithy.Schema{&sClusterSnapshotInList_snapshotName, &sClusterSnapshotInList_snapshotArn, &sClusterSnapshotInList_clusterArn, &sClusterSnapshotInList_status, &sClusterSnapshotInList_snapshotCreationTime}}
+var m_ClusterSnapshotList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ClusterSnapshotList_member}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message, &sConflictException_resourceId, &sConflictException_resourceType}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mPendingMaintenanceActionDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sPendingMaintenanceActionDetails_action, &sPendingMaintenanceActionDetails_autoAppliedAfterDate, &sPendingMaintenanceActionDetails_forcedApplyDate, &sPendingMaintenanceActionDetails_optInStatus, &sPendingMaintenanceActionDetails_currentApplyDate, &sPendingMaintenanceActionDetails_description}}
+var m_PendingMaintenanceActionDetailsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_PendingMaintenanceActionDetailsList_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message, &sResourceNotFoundException_resourceId, &sResourceNotFoundException_resourceType}}
+var mResourcePendingMaintenanceAction = smithy.SchemaMembers{List: []*smithy.Schema{&sResourcePendingMaintenanceAction_resourceArn, &sResourcePendingMaintenanceAction_pendingMaintenanceActionDetails}}
+var m_ResourcePendingMaintenanceActionList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ResourcePendingMaintenanceActionList_member}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var mShard = smithy.SchemaMembers{List: []*smithy.Schema{&sShard_shardId, &sShard_createTime, &sShard_status}}
+var m_ShardList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ShardList_member}}
+var m_StringList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StringList_member}}
+var m_TagKeyList = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeyList_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_retryAfterSeconds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message, &sValidationException_reason, &sValidationException_fieldList}}
+var mValidationExceptionField = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationExceptionField_name, &sValidationExceptionField_message}}
+var m_ValidationExceptionFieldList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ValidationExceptionFieldList_member}}
+var mApplyPendingMaintenanceActionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyPendingMaintenanceActionInput_resourceArn, &sApplyPendingMaintenanceActionInput_applyAction, &sApplyPendingMaintenanceActionInput_optInType, &sApplyPendingMaintenanceActionInput_applyOn}}
+var mApplyPendingMaintenanceActionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sApplyPendingMaintenanceActionOutput_resourcePendingMaintenanceAction}}
+var mCopyClusterSnapshotInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyClusterSnapshotInput_snapshotArn, &sCopyClusterSnapshotInput_targetSnapshotName, &sCopyClusterSnapshotInput_kmsKeyId, &sCopyClusterSnapshotInput_copyTags, &sCopyClusterSnapshotInput_tags}}
+var mCopyClusterSnapshotOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCopyClusterSnapshotOutput_snapshot}}
+var mCreateClusterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterInput_clusterName, &sCreateClusterInput_authType, &sCreateClusterInput_adminUserName, &sCreateClusterInput_adminUserPassword, &sCreateClusterInput_shardCapacity, &sCreateClusterInput_shardCount, &sCreateClusterInput_vpcSecurityGroupIds, &sCreateClusterInput_subnetIds, &sCreateClusterInput_kmsKeyId, &sCreateClusterInput_clientToken, &sCreateClusterInput_preferredMaintenanceWindow, &sCreateClusterInput_tags, &sCreateClusterInput_backupRetentionPeriod, &sCreateClusterInput_preferredBackupWindow, &sCreateClusterInput_shardInstanceCount}, Seed: 6, Slots: []uint16{
+	12, 5, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0, 8, 3, 0, 15, 2, 0, 9, 0, 11, 10, 14, 0,
+	6, 0, 0, 13, 1, 7, 0, 0,
+}}
+var mCreateClusterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterOutput_cluster}}
+var mCreateClusterSnapshotInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterSnapshotInput_clusterArn, &sCreateClusterSnapshotInput_snapshotName, &sCreateClusterSnapshotInput_tags}}
+var mCreateClusterSnapshotOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateClusterSnapshotOutput_snapshot}}
+var mDeleteClusterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteClusterInput_clusterArn}}
+var mDeleteClusterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteClusterOutput_cluster}}
+var mDeleteClusterSnapshotInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteClusterSnapshotInput_snapshotArn}}
+var mDeleteClusterSnapshotOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteClusterSnapshotOutput_snapshot}}
+var mGetClusterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClusterInput_clusterArn}}
+var mGetClusterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClusterOutput_cluster}}
+var mGetClusterSnapshotInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClusterSnapshotInput_snapshotArn}}
+var mGetClusterSnapshotOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetClusterSnapshotOutput_snapshot}}
+var mGetPendingMaintenanceActionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPendingMaintenanceActionInput_resourceArn}}
+var mGetPendingMaintenanceActionOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetPendingMaintenanceActionOutput_resourcePendingMaintenanceAction}}
+var mListClustersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersInput_nextToken, &sListClustersInput_maxResults}}
+var mListClusterSnapshotsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterSnapshotsInput_clusterArn, &sListClusterSnapshotsInput_nextToken, &sListClusterSnapshotsInput_maxResults, &sListClusterSnapshotsInput_snapshotType}}
+var mListClusterSnapshotsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListClusterSnapshotsOutput_snapshots, &sListClusterSnapshotsOutput_nextToken}}
+var mListClustersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListClustersOutput_clusters, &sListClustersOutput_nextToken}}
+var mListPendingMaintenanceActionsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPendingMaintenanceActionsInput_nextToken, &sListPendingMaintenanceActionsInput_maxResults}}
+var mListPendingMaintenanceActionsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions, &sListPendingMaintenanceActionsOutput_nextToken}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_resourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_tags}}
+var mRestoreClusterFromSnapshotInput = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreClusterFromSnapshotInput_clusterName, &sRestoreClusterFromSnapshotInput_snapshotArn, &sRestoreClusterFromSnapshotInput_vpcSecurityGroupIds, &sRestoreClusterFromSnapshotInput_subnetIds, &sRestoreClusterFromSnapshotInput_kmsKeyId, &sRestoreClusterFromSnapshotInput_tags, &sRestoreClusterFromSnapshotInput_shardCapacity, &sRestoreClusterFromSnapshotInput_shardInstanceCount}}
+var mRestoreClusterFromSnapshotOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sRestoreClusterFromSnapshotOutput_cluster}}
+var mStartClusterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartClusterInput_clusterArn}}
+var mStartClusterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStartClusterOutput_cluster}}
+var mStopClusterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopClusterInput_clusterArn}}
+var mStopClusterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sStopClusterOutput_cluster}}
+var mTagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceRequest_resourceArn, &sTagResourceRequest_tags}}
+var mUntagResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceRequest_resourceArn, &sUntagResourceRequest_tagKeys}}
+var mUpdateClusterInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateClusterInput_clusterArn, &sUpdateClusterInput_authType, &sUpdateClusterInput_shardCapacity, &sUpdateClusterInput_shardCount, &sUpdateClusterInput_vpcSecurityGroupIds, &sUpdateClusterInput_subnetIds, &sUpdateClusterInput_adminUserPassword, &sUpdateClusterInput_clientToken, &sUpdateClusterInput_preferredMaintenanceWindow, &sUpdateClusterInput_backupRetentionPeriod, &sUpdateClusterInput_preferredBackupWindow, &sUpdateClusterInput_shardInstanceCount}, Seed: 2, Slots: []uint16{
+	0, 0, 8, 10, 0, 2, 0, 0, 11, 0, 0, 1, 0, 4, 3, 0, 0, 0, 9, 0, 0, 0, 0, 0,
+	0, 6, 0, 5, 12, 0, 0, 7,
+}}
+var mUpdateClusterOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateClusterOutput_cluster}}
+
+var sApplyPendingMaintenanceAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyPendingMaintenanceAction, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sCopyClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyClusterSnapshot, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sCreateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateCluster, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sCreateClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterSnapshot, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sDeleteCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteCluster, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sDeleteClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterSnapshot, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetCluster, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sGetClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterSnapshot, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sGetPendingMaintenanceAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPendingMaintenanceAction, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sListClusters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusters, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sListClusterSnapshots = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterSnapshots, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sListPendingMaintenanceActions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPendingMaintenanceActions, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sRestoreClusterFromSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreClusterFromSnapshot, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sStartCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartCluster, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sStopCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopCluster, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sUpdateCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateCluster, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var s_ChimeraDbLionfishServiceLambda = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ChimeraDbLionfishServiceLambda, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_Auth = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Auth, Type: smithy.ShapeTypeString})
+var sCluster = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+var sClusterInList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterInList, Members: &mClusterInList, Type: smithy.ShapeTypeStructure})
+var s_ClusterList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterList, Members: &m_ClusterList, Type: smithy.ShapeTypeList})
+var sClusterSnapshot = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSnapshot, Members: &mClusterSnapshot, Type: smithy.ShapeTypeStructure})
+var sClusterSnapshotInList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iClusterSnapshotInList, Members: &mClusterSnapshotInList, Type: smithy.ShapeTypeStructure})
+var s_ClusterSnapshotList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ClusterSnapshotList, Members: &m_ClusterSnapshotList, Type: smithy.ShapeTypeList})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var s_InputString = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_InputString, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var s_OptInType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OptInType, Type: smithy.ShapeTypeString})
+var s_PaginationToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var s_Password = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Password, Traits: &t22, Type: smithy.ShapeTypeString})
+var sPendingMaintenanceActionDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iPendingMaintenanceActionDetails, Members: &mPendingMaintenanceActionDetails, Type: smithy.ShapeTypeStructure})
+var s_PendingMaintenanceActionDetailsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_PendingMaintenanceActionDetailsList, Members: &m_PendingMaintenanceActionDetailsList, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t23, Type: smithy.ShapeTypeStructure})
+var sResourcePendingMaintenanceAction = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourcePendingMaintenanceAction, Members: &mResourcePendingMaintenanceAction, Type: smithy.ShapeTypeStructure})
+var s_ResourcePendingMaintenanceActionList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ResourcePendingMaintenanceActionList, Members: &m_ResourcePendingMaintenanceActionList, Type: smithy.ShapeTypeList})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t24, Type: smithy.ShapeTypeStructure})
+var sShard = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure})
+var s_ShardList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ShardList, Members: &m_ShardList, Type: smithy.ShapeTypeList})
+var s_SnapshotType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_SnapshotType, Type: smithy.ShapeTypeString})
+var s_Status = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Status, Type: smithy.ShapeTypeString})
+var s_StringList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeyList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeyList, Members: &m_TagKeyList, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t25, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t27, Type: smithy.ShapeTypeStructure})
+var sValidationExceptionField = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var s_ValidationExceptionFieldList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var s_ValidationExceptionReason = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString})
+var sApplyPendingMaintenanceActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyPendingMaintenanceActionInput, Members: &mApplyPendingMaintenanceActionInput, Type: smithy.ShapeTypeStructure})
+var sApplyPendingMaintenanceActionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iApplyPendingMaintenanceActionOutput, Members: &mApplyPendingMaintenanceActionOutput, Type: smithy.ShapeTypeStructure})
+var sCopyClusterSnapshotInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyClusterSnapshotInput, Members: &mCopyClusterSnapshotInput, Type: smithy.ShapeTypeStructure})
+var sCopyClusterSnapshotOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCopyClusterSnapshotOutput, Members: &mCopyClusterSnapshotOutput, Type: smithy.ShapeTypeStructure})
+var sCreateClusterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterInput, Members: &mCreateClusterInput, Type: smithy.ShapeTypeStructure})
+var sCreateClusterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterOutput, Members: &mCreateClusterOutput, Type: smithy.ShapeTypeStructure})
+var sCreateClusterSnapshotInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterSnapshotInput, Members: &mCreateClusterSnapshotInput, Type: smithy.ShapeTypeStructure})
+var sCreateClusterSnapshotOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateClusterSnapshotOutput, Members: &mCreateClusterSnapshotOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteClusterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterInput, Members: &mDeleteClusterInput, Type: smithy.ShapeTypeStructure})
+var sDeleteClusterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterOutput, Members: &mDeleteClusterOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteClusterSnapshotInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterSnapshotInput, Members: &mDeleteClusterSnapshotInput, Type: smithy.ShapeTypeStructure})
+var sDeleteClusterSnapshotOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteClusterSnapshotOutput, Members: &mDeleteClusterSnapshotOutput, Type: smithy.ShapeTypeStructure})
+var sGetClusterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterInput, Members: &mGetClusterInput, Type: smithy.ShapeTypeStructure})
+var sGetClusterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterOutput, Members: &mGetClusterOutput, Type: smithy.ShapeTypeStructure})
+var sGetClusterSnapshotInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterSnapshotInput, Members: &mGetClusterSnapshotInput, Type: smithy.ShapeTypeStructure})
+var sGetClusterSnapshotOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetClusterSnapshotOutput, Members: &mGetClusterSnapshotOutput, Type: smithy.ShapeTypeStructure})
+var sGetPendingMaintenanceActionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPendingMaintenanceActionInput, Members: &mGetPendingMaintenanceActionInput, Type: smithy.ShapeTypeStructure})
+var sGetPendingMaintenanceActionOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetPendingMaintenanceActionOutput, Members: &mGetPendingMaintenanceActionOutput, Type: smithy.ShapeTypeStructure})
+var sListClustersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersInput, Members: &mListClustersInput, Type: smithy.ShapeTypeStructure})
+var sListClusterSnapshotsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterSnapshotsInput, Members: &mListClusterSnapshotsInput, Type: smithy.ShapeTypeStructure})
+var sListClusterSnapshotsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClusterSnapshotsOutput, Members: &mListClusterSnapshotsOutput, Type: smithy.ShapeTypeStructure})
+var sListClustersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListClustersOutput, Members: &mListClustersOutput, Type: smithy.ShapeTypeStructure})
+var sListPendingMaintenanceActionsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPendingMaintenanceActionsInput, Members: &mListPendingMaintenanceActionsInput, Type: smithy.ShapeTypeStructure})
+var sListPendingMaintenanceActionsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListPendingMaintenanceActionsOutput, Members: &mListPendingMaintenanceActionsOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sRestoreClusterFromSnapshotInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreClusterFromSnapshotInput, Members: &mRestoreClusterFromSnapshotInput, Type: smithy.ShapeTypeStructure})
+var sRestoreClusterFromSnapshotOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRestoreClusterFromSnapshotOutput, Members: &mRestoreClusterFromSnapshotOutput, Type: smithy.ShapeTypeStructure})
+var sStartClusterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartClusterInput, Members: &mStartClusterInput, Type: smithy.ShapeTypeStructure})
+var sStartClusterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStartClusterOutput, Members: &mStartClusterOutput, Type: smithy.ShapeTypeStructure})
+var sStopClusterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopClusterInput, Members: &mStopClusterInput, Type: smithy.ShapeTypeStructure})
+var sStopClusterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStopClusterOutput, Members: &mStopClusterOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceRequest, Members: &mTagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sTagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUntagResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceRequest, Members: &mUntagResourceRequest, Type: smithy.ShapeTypeStructure})
+var sUntagResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceResponse, Type: smithy.ShapeTypeStructure})
+var sUpdateClusterInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterInput, Members: &mUpdateClusterInput, Type: smithy.ShapeTypeStructure})
+var sUpdateClusterOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateClusterOutput, Members: &mUpdateClusterOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sCluster_clusterEndpoint = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterEndpoint", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_adminUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminUserName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &i_Auth, Type: smithy.ShapeTypeString})
+var sCluster_shardCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardCapacity", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCluster_shardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCluster_vpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcSecurityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCluster_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCluster_preferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preferredMaintenanceWindow", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_shards = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shards", ID: &i_ShardList, Members: &m_ShardList, Type: smithy.ShapeTypeList})
+var sCluster_backupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backupRetentionPeriod", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCluster_preferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preferredBackupWindow", ID: &pString, Type: smithy.ShapeTypeString})
+var sCluster_shardInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sClusterInList_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterInList_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterInList_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var s_ClusterList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterInList, Members: &mClusterInList, Type: smithy.ShapeTypeStructure})
+var sClusterSnapshot_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sClusterSnapshot_snapshotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotName", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_snapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_snapshotCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotCreationTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_clusterCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterCreationTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_vpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcSecurityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sClusterSnapshot_adminUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminUserName", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshot_snapshotType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotType", ID: &i_SnapshotType, Type: smithy.ShapeTypeString})
+var sClusterSnapshotInList_snapshotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotName", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshotInList_snapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshotInList_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sClusterSnapshotInList_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var sClusterSnapshotInList_snapshotCreationTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotCreationTime", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ClusterSnapshotList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iClusterSnapshotInList, Members: &mClusterSnapshotInList, Type: smithy.ShapeTypeStructure})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sPendingMaintenanceActionDetails_action = smithy.NewStaticSchema(smithy.StaticSchema{Member: "action", ID: &pString, Type: smithy.ShapeTypeString})
+var sPendingMaintenanceActionDetails_autoAppliedAfterDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "autoAppliedAfterDate", ID: &pString, Type: smithy.ShapeTypeString})
+var sPendingMaintenanceActionDetails_forcedApplyDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "forcedApplyDate", ID: &pString, Type: smithy.ShapeTypeString})
+var sPendingMaintenanceActionDetails_optInStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optInStatus", ID: &pString, Type: smithy.ShapeTypeString})
+var sPendingMaintenanceActionDetails_currentApplyDate = smithy.NewStaticSchema(smithy.StaticSchema{Member: "currentApplyDate", ID: &pString, Type: smithy.ShapeTypeString})
+var sPendingMaintenanceActionDetails_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var s_PendingMaintenanceActionDetailsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iPendingMaintenanceActionDetails, Members: &mPendingMaintenanceActionDetails, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceId", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_resourceType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceType", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourcePendingMaintenanceAction_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourcePendingMaintenanceAction_pendingMaintenanceActionDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "pendingMaintenanceActionDetails", ID: &i_PendingMaintenanceActionDetailsList, Members: &m_PendingMaintenanceActionDetailsList, Type: smithy.ShapeTypeList})
+var s_ResourcePendingMaintenanceActionList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iResourcePendingMaintenanceAction, Members: &mResourcePendingMaintenanceAction, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sShard_shardId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardId", ID: &pString, Type: smithy.ShapeTypeString})
+var sShard_createTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "createTime", ID: &pString, Type: smithy.ShapeTypeString})
+var sShard_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &i_Status, Type: smithy.ShapeTypeString})
+var s_ShardList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iShard, Members: &mShard, Type: smithy.ShapeTypeStructure})
+var s_StringList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagKeyList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t26, Type: smithy.ShapeTypeInteger})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_reason = smithy.NewStaticSchema(smithy.StaticSchema{Member: "reason", ID: &i_ValidationExceptionReason, Type: smithy.ShapeTypeString})
+var sValidationException_fieldList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "fieldList", ID: &i_ValidationExceptionFieldList, Members: &m_ValidationExceptionFieldList, Type: smithy.ShapeTypeList})
+var sValidationExceptionField_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationExceptionField_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ValidationExceptionFieldList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iValidationExceptionField, Members: &mValidationExceptionField, Type: smithy.ShapeTypeStructure})
+var sApplyPendingMaintenanceActionInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_InputString, Type: smithy.ShapeTypeString})
+var sApplyPendingMaintenanceActionInput_applyAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applyAction", ID: &i_InputString, Type: smithy.ShapeTypeString})
+var sApplyPendingMaintenanceActionInput_optInType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "optInType", ID: &i_OptInType, Type: smithy.ShapeTypeString})
+var sApplyPendingMaintenanceActionInput_applyOn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "applyOn", ID: &i_InputString, Type: smithy.ShapeTypeString})
+var sApplyPendingMaintenanceActionOutput_resourcePendingMaintenanceAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePendingMaintenanceAction", ID: &iResourcePendingMaintenanceAction, Members: &mResourcePendingMaintenanceAction, Type: smithy.ShapeTypeStructure})
+var sCopyClusterSnapshotInput_snapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sCopyClusterSnapshotInput_targetSnapshotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetSnapshotName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCopyClusterSnapshotInput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString})
+var sCopyClusterSnapshotInput_copyTags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "copyTags", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sCopyClusterSnapshotInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCopyClusterSnapshotOutput_snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshot", ID: &iClusterSnapshot, Members: &mClusterSnapshot, Type: smithy.ShapeTypeStructure})
+var sCreateClusterInput_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &i_Auth, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_adminUserName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminUserName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_adminUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminUserPassword", ID: &i_Password, Traits: &t29, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_shardCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardCapacity", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateClusterInput_shardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateClusterInput_vpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcSecurityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCreateClusterInput_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sCreateClusterInput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_preferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preferredMaintenanceWindow", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateClusterInput_backupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backupRetentionPeriod", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateClusterInput_preferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preferredBackupWindow", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterInput_shardInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sCreateClusterOutput_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+var sCreateClusterSnapshotInput_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterSnapshotInput_snapshotName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotName", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateClusterSnapshotInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateClusterSnapshotOutput_snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshot", ID: &iClusterSnapshot, Members: &mClusterSnapshot, Type: smithy.ShapeTypeStructure})
+var sDeleteClusterInput_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sDeleteClusterOutput_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+var sDeleteClusterSnapshotInput_snapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sDeleteClusterSnapshotOutput_snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshot", ID: &iClusterSnapshot, Members: &mClusterSnapshot, Type: smithy.ShapeTypeStructure})
+var sGetClusterInput_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetClusterOutput_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+var sGetClusterSnapshotInput_snapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetClusterSnapshotOutput_snapshot = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshot", ID: &iClusterSnapshot, Members: &mClusterSnapshot, Type: smithy.ShapeTypeStructure})
+var sGetPendingMaintenanceActionInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_InputString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sGetPendingMaintenanceActionOutput_resourcePendingMaintenanceAction = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePendingMaintenanceAction", ID: &iResourcePendingMaintenanceAction, Members: &mResourcePendingMaintenanceAction, Type: smithy.ShapeTypeStructure})
+var sListClustersInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListClustersInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sListClusterSnapshotsInput_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Traits: &t32, Type: smithy.ShapeTypeString})
+var sListClusterSnapshotsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListClusterSnapshotsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sListClusterSnapshotsInput_snapshotType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotType", ID: &pString, Traits: &t33, Type: smithy.ShapeTypeString})
+var sListClusterSnapshotsOutput_snapshots = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshots", ID: &i_ClusterSnapshotList, Members: &m_ClusterSnapshotList, Type: smithy.ShapeTypeList})
+var sListClusterSnapshotsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListClustersOutput_clusters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusters", ID: &i_ClusterList, Members: &m_ClusterList, Type: smithy.ShapeTypeList})
+var sListClustersOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListPendingMaintenanceActionsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Traits: &t30, Type: smithy.ShapeTypeString})
+var sListPendingMaintenanceActionsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &pInteger, Traits: &t31, Type: smithy.ShapeTypeInteger})
+var sListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourcePendingMaintenanceActions", ID: &i_ResourcePendingMaintenanceActionList, Members: &m_ResourcePendingMaintenanceActionList, Type: smithy.ShapeTypeList})
+var sListPendingMaintenanceActionsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_PaginationToken, Type: smithy.ShapeTypeString})
+var sListTagsForResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t28, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRestoreClusterFromSnapshotInput_clusterName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterName", ID: &pString, Type: smithy.ShapeTypeString})
+var sRestoreClusterFromSnapshotInput_snapshotArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "snapshotArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sRestoreClusterFromSnapshotInput_vpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcSecurityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sRestoreClusterFromSnapshotInput_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sRestoreClusterFromSnapshotInput_kmsKeyId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "kmsKeyId", ID: &pString, Type: smithy.ShapeTypeString})
+var sRestoreClusterFromSnapshotInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sRestoreClusterFromSnapshotInput_shardCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardCapacity", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRestoreClusterFromSnapshotInput_shardInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sRestoreClusterFromSnapshotOutput_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+var sStartClusterInput_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sStartClusterOutput_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+var sStopClusterInput_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sStopClusterOutput_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+var sTagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t28, Type: smithy.ShapeTypeString})
+var sTagResourceRequest_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceRequest_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUntagResourceRequest_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeyList, Members: &m_TagKeyList, Traits: &t34, Type: smithy.ShapeTypeList})
+var sUpdateClusterInput_clusterArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clusterArn", ID: &pString, Traits: &t28, Type: smithy.ShapeTypeString})
+var sUpdateClusterInput_authType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "authType", ID: &i_Auth, Type: smithy.ShapeTypeString})
+var sUpdateClusterInput_shardCapacity = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardCapacity", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateClusterInput_shardCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateClusterInput_vpcSecurityGroupIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "vpcSecurityGroupIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sUpdateClusterInput_subnetIds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "subnetIds", ID: &i_StringList, Members: &m_StringList, Type: smithy.ShapeTypeList})
+var sUpdateClusterInput_adminUserPassword = smithy.NewStaticSchema(smithy.StaticSchema{Member: "adminUserPassword", ID: &i_Password, Traits: &t29, Type: smithy.ShapeTypeString})
+var sUpdateClusterInput_clientToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "clientToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateClusterInput_preferredMaintenanceWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preferredMaintenanceWindow", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateClusterInput_backupRetentionPeriod = smithy.NewStaticSchema(smithy.StaticSchema{Member: "backupRetentionPeriod", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateClusterInput_preferredBackupWindow = smithy.NewStaticSchema(smithy.StaticSchema{Member: "preferredBackupWindow", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateClusterInput_shardInstanceCount = smithy.NewStaticSchema(smithy.StaticSchema{Member: "shardInstanceCount", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sUpdateClusterOutput_cluster = smithy.NewStaticSchema(smithy.StaticSchema{Member: "cluster", ID: &iCluster, Members: &mCluster, Type: smithy.ShapeTypeStructure})
+
+var ApplyPendingMaintenanceAction = &sApplyPendingMaintenanceAction
+
+var CopyClusterSnapshot = &sCopyClusterSnapshot
+
+var CreateCluster = &sCreateCluster
+
+var CreateClusterSnapshot = &sCreateClusterSnapshot
+
+var DeleteCluster = &sDeleteCluster
+
+var DeleteClusterSnapshot = &sDeleteClusterSnapshot
+
+var GetCluster = &sGetCluster
+
+var GetClusterSnapshot = &sGetClusterSnapshot
+
+var GetPendingMaintenanceAction = &sGetPendingMaintenanceAction
+
+var ListClusters = &sListClusters
+
+var ListClusterSnapshots = &sListClusterSnapshots
+
+var ListPendingMaintenanceActions = &sListPendingMaintenanceActions
+
+var ListTagsForResource = &sListTagsForResource
+
+var RestoreClusterFromSnapshot = &sRestoreClusterFromSnapshot
+
+var StartCluster = &sStartCluster
+
+var StopCluster = &sStopCluster
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateCluster = &sUpdateCluster
+
+var _ChimeraDbLionfishServiceLambda = &s_ChimeraDbLionfishServiceLambda
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _Arn = &s_Arn
+
+var _Auth = &s_Auth
+
+var Cluster = &sCluster
+var Cluster_clusterName = &sCluster_clusterName
+var Cluster_clusterArn = &sCluster_clusterArn
+var Cluster_status = &sCluster_status
+var Cluster_clusterEndpoint = &sCluster_clusterEndpoint
+var Cluster_createTime = &sCluster_createTime
+var Cluster_adminUserName = &sCluster_adminUserName
+var Cluster_authType = &sCluster_authType
+var Cluster_shardCapacity = &sCluster_shardCapacity
+var Cluster_shardCount = &sCluster_shardCount
+var Cluster_vpcSecurityGroupIds = &sCluster_vpcSecurityGroupIds
+var Cluster_subnetIds = &sCluster_subnetIds
+var Cluster_preferredMaintenanceWindow = &sCluster_preferredMaintenanceWindow
+var Cluster_kmsKeyId = &sCluster_kmsKeyId
+var Cluster_shards = &sCluster_shards
+var Cluster_backupRetentionPeriod = &sCluster_backupRetentionPeriod
+var Cluster_preferredBackupWindow = &sCluster_preferredBackupWindow
+var Cluster_shardInstanceCount = &sCluster_shardInstanceCount
+
+var ClusterInList = &sClusterInList
+var ClusterInList_clusterName = &sClusterInList_clusterName
+var ClusterInList_clusterArn = &sClusterInList_clusterArn
+var ClusterInList_status = &sClusterInList_status
+
+var _ClusterList = &s_ClusterList
+var _ClusterList_member = &s_ClusterList_member
+
+var ClusterSnapshot = &sClusterSnapshot
+var ClusterSnapshot_subnetIds = &sClusterSnapshot_subnetIds
+var ClusterSnapshot_snapshotName = &sClusterSnapshot_snapshotName
+var ClusterSnapshot_snapshotArn = &sClusterSnapshot_snapshotArn
+var ClusterSnapshot_snapshotCreationTime = &sClusterSnapshot_snapshotCreationTime
+var ClusterSnapshot_clusterArn = &sClusterSnapshot_clusterArn
+var ClusterSnapshot_clusterCreationTime = &sClusterSnapshot_clusterCreationTime
+var ClusterSnapshot_status = &sClusterSnapshot_status
+var ClusterSnapshot_vpcSecurityGroupIds = &sClusterSnapshot_vpcSecurityGroupIds
+var ClusterSnapshot_adminUserName = &sClusterSnapshot_adminUserName
+var ClusterSnapshot_kmsKeyId = &sClusterSnapshot_kmsKeyId
+var ClusterSnapshot_snapshotType = &sClusterSnapshot_snapshotType
+
+var ClusterSnapshotInList = &sClusterSnapshotInList
+var ClusterSnapshotInList_snapshotName = &sClusterSnapshotInList_snapshotName
+var ClusterSnapshotInList_snapshotArn = &sClusterSnapshotInList_snapshotArn
+var ClusterSnapshotInList_clusterArn = &sClusterSnapshotInList_clusterArn
+var ClusterSnapshotInList_status = &sClusterSnapshotInList_status
+var ClusterSnapshotInList_snapshotCreationTime = &sClusterSnapshotInList_snapshotCreationTime
+
+var _ClusterSnapshotList = &s_ClusterSnapshotList
+var _ClusterSnapshotList_member = &s_ClusterSnapshotList_member
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+var ConflictException_resourceId = &sConflictException_resourceId
+var ConflictException_resourceType = &sConflictException_resourceType
+
+var _InputString = &s_InputString
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var _OptInType = &s_OptInType
+
+var _PaginationToken = &s_PaginationToken
+
+var _Password = &s_Password
+
+var PendingMaintenanceActionDetails = &sPendingMaintenanceActionDetails
+var PendingMaintenanceActionDetails_action = &sPendingMaintenanceActionDetails_action
+var PendingMaintenanceActionDetails_autoAppliedAfterDate = &sPendingMaintenanceActionDetails_autoAppliedAfterDate
+var PendingMaintenanceActionDetails_forcedApplyDate = &sPendingMaintenanceActionDetails_forcedApplyDate
+var PendingMaintenanceActionDetails_optInStatus = &sPendingMaintenanceActionDetails_optInStatus
+var PendingMaintenanceActionDetails_currentApplyDate = &sPendingMaintenanceActionDetails_currentApplyDate
+var PendingMaintenanceActionDetails_description = &sPendingMaintenanceActionDetails_description
+
+var _PendingMaintenanceActionDetailsList = &s_PendingMaintenanceActionDetailsList
+var _PendingMaintenanceActionDetailsList_member = &s_PendingMaintenanceActionDetailsList_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+var ResourceNotFoundException_resourceId = &sResourceNotFoundException_resourceId
+var ResourceNotFoundException_resourceType = &sResourceNotFoundException_resourceType
+
+var ResourcePendingMaintenanceAction = &sResourcePendingMaintenanceAction
+var ResourcePendingMaintenanceAction_resourceArn = &sResourcePendingMaintenanceAction_resourceArn
+var ResourcePendingMaintenanceAction_pendingMaintenanceActionDetails = &sResourcePendingMaintenanceAction_pendingMaintenanceActionDetails
+
+var _ResourcePendingMaintenanceActionList = &s_ResourcePendingMaintenanceActionList
+var _ResourcePendingMaintenanceActionList_member = &s_ResourcePendingMaintenanceActionList_member
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var Shard = &sShard
+var Shard_shardId = &sShard_shardId
+var Shard_createTime = &sShard_createTime
+var Shard_status = &sShard_status
+
+var _ShardList = &s_ShardList
+var _ShardList_member = &s_ShardList_member
+
+var _SnapshotType = &s_SnapshotType
+
+var _Status = &s_Status
+
+var _StringList = &s_StringList
+var _StringList_member = &s_StringList_member
+
+var _TagKey = &s_TagKey
+
+var _TagKeyList = &s_TagKeyList
+var _TagKeyList_member = &s_TagKeyList_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+var ValidationException_reason = &sValidationException_reason
+var ValidationException_fieldList = &sValidationException_fieldList
+
+var ValidationExceptionField = &sValidationExceptionField
+var ValidationExceptionField_name = &sValidationExceptionField_name
+var ValidationExceptionField_message = &sValidationExceptionField_message
+
+var _ValidationExceptionFieldList = &s_ValidationExceptionFieldList
+var _ValidationExceptionFieldList_member = &s_ValidationExceptionFieldList_member
+
+var _ValidationExceptionReason = &s_ValidationExceptionReason
+
+var ApplyPendingMaintenanceActionInput = &sApplyPendingMaintenanceActionInput
+var ApplyPendingMaintenanceActionInput_resourceArn = &sApplyPendingMaintenanceActionInput_resourceArn
+var ApplyPendingMaintenanceActionInput_applyAction = &sApplyPendingMaintenanceActionInput_applyAction
+var ApplyPendingMaintenanceActionInput_optInType = &sApplyPendingMaintenanceActionInput_optInType
+var ApplyPendingMaintenanceActionInput_applyOn = &sApplyPendingMaintenanceActionInput_applyOn
+
+var ApplyPendingMaintenanceActionOutput = &sApplyPendingMaintenanceActionOutput
+var ApplyPendingMaintenanceActionOutput_resourcePendingMaintenanceAction = &sApplyPendingMaintenanceActionOutput_resourcePendingMaintenanceAction
+
+var CopyClusterSnapshotInput = &sCopyClusterSnapshotInput
+var CopyClusterSnapshotInput_snapshotArn = &sCopyClusterSnapshotInput_snapshotArn
+var CopyClusterSnapshotInput_targetSnapshotName = &sCopyClusterSnapshotInput_targetSnapshotName
+var CopyClusterSnapshotInput_kmsKeyId = &sCopyClusterSnapshotInput_kmsKeyId
+var CopyClusterSnapshotInput_copyTags = &sCopyClusterSnapshotInput_copyTags
+var CopyClusterSnapshotInput_tags = &sCopyClusterSnapshotInput_tags
+
+var CopyClusterSnapshotOutput = &sCopyClusterSnapshotOutput
+var CopyClusterSnapshotOutput_snapshot = &sCopyClusterSnapshotOutput_snapshot
+
+var CreateClusterInput = &sCreateClusterInput
+var CreateClusterInput_clusterName = &sCreateClusterInput_clusterName
+var CreateClusterInput_authType = &sCreateClusterInput_authType
+var CreateClusterInput_adminUserName = &sCreateClusterInput_adminUserName
+var CreateClusterInput_adminUserPassword = &sCreateClusterInput_adminUserPassword
+var CreateClusterInput_shardCapacity = &sCreateClusterInput_shardCapacity
+var CreateClusterInput_shardCount = &sCreateClusterInput_shardCount
+var CreateClusterInput_vpcSecurityGroupIds = &sCreateClusterInput_vpcSecurityGroupIds
+var CreateClusterInput_subnetIds = &sCreateClusterInput_subnetIds
+var CreateClusterInput_kmsKeyId = &sCreateClusterInput_kmsKeyId
+var CreateClusterInput_clientToken = &sCreateClusterInput_clientToken
+var CreateClusterInput_preferredMaintenanceWindow = &sCreateClusterInput_preferredMaintenanceWindow
+var CreateClusterInput_tags = &sCreateClusterInput_tags
+var CreateClusterInput_backupRetentionPeriod = &sCreateClusterInput_backupRetentionPeriod
+var CreateClusterInput_preferredBackupWindow = &sCreateClusterInput_preferredBackupWindow
+var CreateClusterInput_shardInstanceCount = &sCreateClusterInput_shardInstanceCount
+
+var CreateClusterOutput = &sCreateClusterOutput
+var CreateClusterOutput_cluster = &sCreateClusterOutput_cluster
+
+var CreateClusterSnapshotInput = &sCreateClusterSnapshotInput
+var CreateClusterSnapshotInput_clusterArn = &sCreateClusterSnapshotInput_clusterArn
+var CreateClusterSnapshotInput_snapshotName = &sCreateClusterSnapshotInput_snapshotName
+var CreateClusterSnapshotInput_tags = &sCreateClusterSnapshotInput_tags
+
+var CreateClusterSnapshotOutput = &sCreateClusterSnapshotOutput
+var CreateClusterSnapshotOutput_snapshot = &sCreateClusterSnapshotOutput_snapshot
+
+var DeleteClusterInput = &sDeleteClusterInput
+var DeleteClusterInput_clusterArn = &sDeleteClusterInput_clusterArn
+
+var DeleteClusterOutput = &sDeleteClusterOutput
+var DeleteClusterOutput_cluster = &sDeleteClusterOutput_cluster
+
+var DeleteClusterSnapshotInput = &sDeleteClusterSnapshotInput
+var DeleteClusterSnapshotInput_snapshotArn = &sDeleteClusterSnapshotInput_snapshotArn
+
+var DeleteClusterSnapshotOutput = &sDeleteClusterSnapshotOutput
+var DeleteClusterSnapshotOutput_snapshot = &sDeleteClusterSnapshotOutput_snapshot
+
+var GetClusterInput = &sGetClusterInput
+var GetClusterInput_clusterArn = &sGetClusterInput_clusterArn
+
+var GetClusterOutput = &sGetClusterOutput
+var GetClusterOutput_cluster = &sGetClusterOutput_cluster
+
+var GetClusterSnapshotInput = &sGetClusterSnapshotInput
+var GetClusterSnapshotInput_snapshotArn = &sGetClusterSnapshotInput_snapshotArn
+
+var GetClusterSnapshotOutput = &sGetClusterSnapshotOutput
+var GetClusterSnapshotOutput_snapshot = &sGetClusterSnapshotOutput_snapshot
+
+var GetPendingMaintenanceActionInput = &sGetPendingMaintenanceActionInput
+var GetPendingMaintenanceActionInput_resourceArn = &sGetPendingMaintenanceActionInput_resourceArn
+
+var GetPendingMaintenanceActionOutput = &sGetPendingMaintenanceActionOutput
+var GetPendingMaintenanceActionOutput_resourcePendingMaintenanceAction = &sGetPendingMaintenanceActionOutput_resourcePendingMaintenanceAction
+
+var ListClustersInput = &sListClustersInput
+var ListClustersInput_nextToken = &sListClustersInput_nextToken
+var ListClustersInput_maxResults = &sListClustersInput_maxResults
+
+var ListClusterSnapshotsInput = &sListClusterSnapshotsInput
+var ListClusterSnapshotsInput_clusterArn = &sListClusterSnapshotsInput_clusterArn
+var ListClusterSnapshotsInput_nextToken = &sListClusterSnapshotsInput_nextToken
+var ListClusterSnapshotsInput_maxResults = &sListClusterSnapshotsInput_maxResults
+var ListClusterSnapshotsInput_snapshotType = &sListClusterSnapshotsInput_snapshotType
+
+var ListClusterSnapshotsOutput = &sListClusterSnapshotsOutput
+var ListClusterSnapshotsOutput_snapshots = &sListClusterSnapshotsOutput_snapshots
+var ListClusterSnapshotsOutput_nextToken = &sListClusterSnapshotsOutput_nextToken
+
+var ListClustersOutput = &sListClustersOutput
+var ListClustersOutput_clusters = &sListClustersOutput_clusters
+var ListClustersOutput_nextToken = &sListClustersOutput_nextToken
+
+var ListPendingMaintenanceActionsInput = &sListPendingMaintenanceActionsInput
+var ListPendingMaintenanceActionsInput_nextToken = &sListPendingMaintenanceActionsInput_nextToken
+var ListPendingMaintenanceActionsInput_maxResults = &sListPendingMaintenanceActionsInput_maxResults
+
+var ListPendingMaintenanceActionsOutput = &sListPendingMaintenanceActionsOutput
+var ListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions = &sListPendingMaintenanceActionsOutput_resourcePendingMaintenanceActions
+var ListPendingMaintenanceActionsOutput_nextToken = &sListPendingMaintenanceActionsOutput_nextToken
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_resourceArn = &sListTagsForResourceRequest_resourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_tags = &sListTagsForResourceResponse_tags
+
+var RestoreClusterFromSnapshotInput = &sRestoreClusterFromSnapshotInput
+var RestoreClusterFromSnapshotInput_clusterName = &sRestoreClusterFromSnapshotInput_clusterName
+var RestoreClusterFromSnapshotInput_snapshotArn = &sRestoreClusterFromSnapshotInput_snapshotArn
+var RestoreClusterFromSnapshotInput_vpcSecurityGroupIds = &sRestoreClusterFromSnapshotInput_vpcSecurityGroupIds
+var RestoreClusterFromSnapshotInput_subnetIds = &sRestoreClusterFromSnapshotInput_subnetIds
+var RestoreClusterFromSnapshotInput_kmsKeyId = &sRestoreClusterFromSnapshotInput_kmsKeyId
+var RestoreClusterFromSnapshotInput_tags = &sRestoreClusterFromSnapshotInput_tags
+var RestoreClusterFromSnapshotInput_shardCapacity = &sRestoreClusterFromSnapshotInput_shardCapacity
+var RestoreClusterFromSnapshotInput_shardInstanceCount = &sRestoreClusterFromSnapshotInput_shardInstanceCount
+
+var RestoreClusterFromSnapshotOutput = &sRestoreClusterFromSnapshotOutput
+var RestoreClusterFromSnapshotOutput_cluster = &sRestoreClusterFromSnapshotOutput_cluster
+
+var StartClusterInput = &sStartClusterInput
+var StartClusterInput_clusterArn = &sStartClusterInput_clusterArn
+
+var StartClusterOutput = &sStartClusterOutput
+var StartClusterOutput_cluster = &sStartClusterOutput_cluster
+
+var StopClusterInput = &sStopClusterInput
+var StopClusterInput_clusterArn = &sStopClusterInput_clusterArn
+
+var StopClusterOutput = &sStopClusterOutput
+var StopClusterOutput_cluster = &sStopClusterOutput_cluster
+
+var TagResourceRequest = &sTagResourceRequest
+var TagResourceRequest_resourceArn = &sTagResourceRequest_resourceArn
+var TagResourceRequest_tags = &sTagResourceRequest_tags
+
+var TagResourceResponse = &sTagResourceResponse
+
+var UntagResourceRequest = &sUntagResourceRequest
+var UntagResourceRequest_resourceArn = &sUntagResourceRequest_resourceArn
+var UntagResourceRequest_tagKeys = &sUntagResourceRequest_tagKeys
+
+var UntagResourceResponse = &sUntagResourceResponse
+
+var UpdateClusterInput = &sUpdateClusterInput
+var UpdateClusterInput_clusterArn = &sUpdateClusterInput_clusterArn
+var UpdateClusterInput_authType = &sUpdateClusterInput_authType
+var UpdateClusterInput_shardCapacity = &sUpdateClusterInput_shardCapacity
+var UpdateClusterInput_shardCount = &sUpdateClusterInput_shardCount
+var UpdateClusterInput_vpcSecurityGroupIds = &sUpdateClusterInput_vpcSecurityGroupIds
+var UpdateClusterInput_subnetIds = &sUpdateClusterInput_subnetIds
+var UpdateClusterInput_adminUserPassword = &sUpdateClusterInput_adminUserPassword
+var UpdateClusterInput_clientToken = &sUpdateClusterInput_clientToken
+var UpdateClusterInput_preferredMaintenanceWindow = &sUpdateClusterInput_preferredMaintenanceWindow
+var UpdateClusterInput_backupRetentionPeriod = &sUpdateClusterInput_backupRetentionPeriod
+var UpdateClusterInput_preferredBackupWindow = &sUpdateClusterInput_preferredBackupWindow
+var UpdateClusterInput_shardInstanceCount = &sUpdateClusterInput_shardInstanceCount
+
+var UpdateClusterOutput = &sUpdateClusterOutput
+var UpdateClusterOutput_cluster = &sUpdateClusterOutput_cluster
+
+var ChimeraDbLionfishServiceLambda = &smithy.ServiceSchema{Schema: &s_ChimeraDbLionfishServiceLambda, Version: "2022-11-28"}

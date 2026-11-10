@@ -4,871 +4,672 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateConfigurationManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "CreateConfigurationManager",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateConfigurationManager            = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "CreateConfigurationManager"}
+	iDeleteConfigurationManager            = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "DeleteConfigurationManager"}
+	iGetConfiguration                      = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetConfiguration"}
+	iGetConfigurationManager               = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetConfigurationManager"}
+	iGetServiceSettings                    = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetServiceSettings"}
+	iListConfigurationManagers             = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListConfigurationManagers"}
+	iListConfigurations                    = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListConfigurations"}
+	iListQuickSetupTypes                   = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListQuickSetupTypes"}
+	iListTagsForResource                   = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListTagsForResource"}
+	iTagResource                           = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "TagResource"}
+	iUntagResource                         = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UntagResource"}
+	iUpdateConfigurationDefinition         = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UpdateConfigurationDefinition"}
+	iUpdateConfigurationManager            = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UpdateConfigurationManager"}
+	iUpdateServiceSettings                 = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UpdateServiceSettings"}
+	i_QuickSetup                           = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "QuickSetup"}
+	iAccessDeniedException                 = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "AccessDeniedException"}
+	iConfigurationDefinition               = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationDefinition"}
+	iConfigurationDefinitionInput          = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationDefinitionInput"}
+	i_ConfigurationDefinitionsInputList    = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationDefinitionsInputList"}
+	i_ConfigurationDefinitionsList         = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationDefinitionsList"}
+	i_ConfigurationDefinitionSummariesList = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationDefinitionSummariesList"}
+	iConfigurationDefinitionSummary        = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationDefinitionSummary"}
+	i_ConfigurationManagerList             = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationManagerList"}
+	iConfigurationManagerSummary           = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationManagerSummary"}
+	i_ConfigurationParametersMap           = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationParametersMap"}
+	i_ConfigurationsList                   = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationsList"}
+	iConfigurationSummary                  = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConfigurationSummary"}
+	iConflictException                     = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ConflictException"}
+	iFilter                                = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "Filter"}
+	i_FiltersList                          = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "FiltersList"}
+	i_FilterValues                         = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "FilterValues"}
+	i_IAMRoleArn                           = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "IAMRoleArn"}
+	iInternalServerException               = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "InternalServerException"}
+	i_QuickSetupTypeList                   = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "QuickSetupTypeList"}
+	iQuickSetupTypeOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "QuickSetupTypeOutput"}
+	iResourceNotFoundException             = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ResourceNotFoundException"}
+	iServiceSettings                       = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ServiceSettings"}
+	iStatus                                = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "Status"}
+	i_StatusDetails                        = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "StatusDetails"}
+	i_StatusSummariesList                  = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "StatusSummariesList"}
+	iStatusSummary                         = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "StatusSummary"}
+	iStatusType                            = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "StatusType"}
+	iTagEntry                              = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "TagEntry"}
+	i_TagKeys                              = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "TagKeys"}
+	i_Tags                                 = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "Tags"}
+	i_TagsMap                              = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "TagsMap"}
+	iThrottlingException                   = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ThrottlingException"}
+	iValidationException                   = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ValidationException"}
+	iCreateConfigurationManagerInput       = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "CreateConfigurationManagerInput"}
+	iCreateConfigurationManagerOutput      = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "CreateConfigurationManagerOutput"}
+	iDeleteConfigurationManagerInput       = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "DeleteConfigurationManagerInput"}
+	iGetConfigurationInput                 = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetConfigurationInput"}
+	iGetConfigurationManagerInput          = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetConfigurationManagerInput"}
+	iGetConfigurationManagerOutput         = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetConfigurationManagerOutput"}
+	iGetConfigurationOutput                = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetConfigurationOutput"}
+	iGetServiceSettingsOutput              = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "GetServiceSettingsOutput"}
+	iListConfigurationManagersInput        = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListConfigurationManagersInput"}
+	iListConfigurationManagersOutput       = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListConfigurationManagersOutput"}
+	iListConfigurationsInput               = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListConfigurationsInput"}
+	iListConfigurationsOutput              = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListConfigurationsOutput"}
+	iListQuickSetupTypesOutput             = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListQuickSetupTypesOutput"}
+	iListTagsForResourceRequest            = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListTagsForResourceRequest"}
+	iListTagsForResourceResponse           = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "ListTagsForResourceResponse"}
+	iTagResourceInput                      = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "TagResourceInput"}
+	iUntagResourceInput                    = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UntagResourceInput"}
+	iUpdateConfigurationDefinitionInput    = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UpdateConfigurationDefinitionInput"}
+	iUpdateConfigurationManagerInput       = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UpdateConfigurationManagerInput"}
+	iUpdateServiceSettingsInput            = smithy.ShapeID{Namespace: "com.amazonaws.ssmquicksetup", Name: "UpdateServiceSettingsInput"}
+	pString                                = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pTimestamp                             = smithy.ShapeID{Namespace: "smithy.api", Name: "Timestamp"}
+	pUnit                                  = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pInteger                               = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/configurationManager",
-	Code: 200})
-
-var DeleteConfigurationManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "DeleteConfigurationManager",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/configurationManager/{ManagerArn}",
-	Code: 200})
-
-var GetConfiguration = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetConfiguration",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/getConfiguration/{ConfigurationId}",
-	Code: 200})
-
-var GetConfigurationManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetConfigurationManager",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/configurationManager/{ManagerArn}",
-	Code: 200})
-
-var GetServiceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetServiceSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/serviceSettings",
-	Code: 200})
-
-var ListConfigurationManagers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListConfigurationManagers",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listConfigurationManagers",
-	Code: 200})
-
-var ListConfigurations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListConfigurations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/listConfigurations",
-	Code: 200})
-
-var ListQuickSetupTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListQuickSetupTypes",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/listQuickSetupTypes",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{ResourceArn}",
-	Code: 200})
-
-var UpdateConfigurationDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UpdateConfigurationDefinition",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/configurationDefinition/{ManagerArn}/{Id}",
-	Code: 200})
-
-var UpdateConfigurationManager = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UpdateConfigurationManager",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/configurationManager/{ManagerArn}",
-	Code: 200})
-
-var UpdateServiceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UpdateServiceSettings",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "PUT",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "PUT",
 	URI:  "/serviceSettings",
-	Code: 200})
-
-var _QuickSetup = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "QuickSetup",
-}, smithy.ShapeTypeService, 0)
-
-var QuickSetup = smithy.NewServiceSchema(_QuickSetup, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_Message *smithy.Schema
-
-var ConfigurationDefinition = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationDefinition",
-}, smithy.ShapeTypeStructure, 6)
-var ConfigurationDefinition_Type *smithy.Schema
-
-var ConfigurationDefinition_Parameters *smithy.Schema
-
-var ConfigurationDefinition_TypeVersion *smithy.Schema
-
-var ConfigurationDefinition_LocalDeploymentExecutionRoleName *smithy.Schema
-
-var ConfigurationDefinition_LocalDeploymentAdministrationRoleArn *smithy.Schema
-
-var ConfigurationDefinition_Id *smithy.Schema
-
-var ConfigurationDefinitionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationDefinitionInput",
-}, smithy.ShapeTypeStructure, 5)
-var ConfigurationDefinitionInput_Type *smithy.Schema
-
-var ConfigurationDefinitionInput_Parameters *smithy.Schema
-
-var ConfigurationDefinitionInput_TypeVersion *smithy.Schema
-
-var ConfigurationDefinitionInput_LocalDeploymentExecutionRoleName *smithy.Schema
-
-var ConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn *smithy.Schema
-
-var _ConfigurationDefinitionsInputList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationDefinitionsInputList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationDefinitionsInputList_member *smithy.Schema
-
-var _ConfigurationDefinitionsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationDefinitionsList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationDefinitionsList_member *smithy.Schema
-
-var _ConfigurationDefinitionSummariesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationDefinitionSummariesList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationDefinitionSummariesList_member *smithy.Schema
-
-var ConfigurationDefinitionSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationDefinitionSummary",
-}, smithy.ShapeTypeStructure, 4)
-var ConfigurationDefinitionSummary_Id *smithy.Schema
-
-var ConfigurationDefinitionSummary_Type *smithy.Schema
-
-var ConfigurationDefinitionSummary_TypeVersion *smithy.Schema
-
-var ConfigurationDefinitionSummary_FirstClassParameters *smithy.Schema
-
-var _ConfigurationManagerList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationManagerList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationManagerList_member *smithy.Schema
-
-var ConfigurationManagerSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationManagerSummary",
-}, smithy.ShapeTypeStructure, 5)
-var ConfigurationManagerSummary_ManagerArn *smithy.Schema
-
-var ConfigurationManagerSummary_Description *smithy.Schema
-
-var ConfigurationManagerSummary_Name *smithy.Schema
-
-var ConfigurationManagerSummary_StatusSummaries *smithy.Schema
-
-var ConfigurationManagerSummary_ConfigurationDefinitionSummaries *smithy.Schema
-
-var _ConfigurationParametersMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationParametersMap",
-}, smithy.ShapeTypeMap, 2)
-var _ConfigurationParametersMap_key *smithy.Schema
-
-var _ConfigurationParametersMap_value *smithy.Schema
-
-var _ConfigurationsList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationsList",
-}, smithy.ShapeTypeList, 1)
-var _ConfigurationsList_member *smithy.Schema
-
-var ConfigurationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConfigurationSummary",
-}, smithy.ShapeTypeStructure, 10)
-var ConfigurationSummary_Id *smithy.Schema
-
-var ConfigurationSummary_ManagerArn *smithy.Schema
-
-var ConfigurationSummary_ConfigurationDefinitionId *smithy.Schema
-
-var ConfigurationSummary_Type *smithy.Schema
-
-var ConfigurationSummary_TypeVersion *smithy.Schema
-
-var ConfigurationSummary_Region *smithy.Schema
-
-var ConfigurationSummary_Account *smithy.Schema
-
-var ConfigurationSummary_CreatedAt *smithy.Schema
-
-var ConfigurationSummary_FirstClassParameters *smithy.Schema
-
-var ConfigurationSummary_StatusSummaries *smithy.Schema
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_Message *smithy.Schema
-
-var Filter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "Filter",
-}, smithy.ShapeTypeStructure, 2)
-var Filter_Key *smithy.Schema
-
-var Filter_Values *smithy.Schema
-
-var _FiltersList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "FiltersList",
-}, smithy.ShapeTypeList, 1)
-var _FiltersList_member *smithy.Schema
-
-var _FilterValues = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "FilterValues",
-}, smithy.ShapeTypeList, 1)
-var _FilterValues_member *smithy.Schema
-
-var _IAMRoleArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "IAMRoleArn",
-}, smithy.ShapeTypeString, 0)
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_Message *smithy.Schema
-
-var _QuickSetupTypeList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "QuickSetupTypeList",
-}, smithy.ShapeTypeList, 1)
-var _QuickSetupTypeList_member *smithy.Schema
-
-var QuickSetupTypeOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "QuickSetupTypeOutput",
-}, smithy.ShapeTypeStructure, 2)
-var QuickSetupTypeOutput_Type *smithy.Schema
-
-var QuickSetupTypeOutput_LatestVersion *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_Message *smithy.Schema
-
-var ServiceSettings = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ServiceSettings",
-}, smithy.ShapeTypeStructure, 1)
-var ServiceSettings_ExplorerEnablingRoleArn *smithy.Schema
-
-var Status = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "Status",
-}, smithy.ShapeTypeEnum, 10)
-var Status_INITIALIZING *smithy.Schema
-
-var Status_DEPLOYING *smithy.Schema
-
-var Status_SUCCEEDED *smithy.Schema
-
-var Status_DELETING *smithy.Schema
-
-var Status_STOPPING *smithy.Schema
-
-var Status_FAILED *smithy.Schema
-
-var Status_STOPPED *smithy.Schema
-
-var Status_DELETE_FAILED *smithy.Schema
-
-var Status_STOP_FAILED *smithy.Schema
-
-var Status_NONE *smithy.Schema
-
-var _StatusDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "StatusDetails",
-}, smithy.ShapeTypeMap, 2)
-var _StatusDetails_key *smithy.Schema
-
-var _StatusDetails_value *smithy.Schema
-
-var _StatusSummariesList = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "StatusSummariesList",
-}, smithy.ShapeTypeList, 1)
-var _StatusSummariesList_member *smithy.Schema
-
-var StatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "StatusSummary",
-}, smithy.ShapeTypeStructure, 5)
-var StatusSummary_StatusType *smithy.Schema
-
-var StatusSummary_Status *smithy.Schema
-
-var StatusSummary_StatusMessage *smithy.Schema
-
-var StatusSummary_LastUpdatedAt *smithy.Schema
-
-var StatusSummary_StatusDetails *smithy.Schema
-
-var StatusType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "StatusType",
-}, smithy.ShapeTypeEnum, 2)
-var StatusType_DEPLOYMENT *smithy.Schema
-
-var StatusType_ASYNC_EXECUTIONS *smithy.Schema
-
-var TagEntry = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "TagEntry",
-}, smithy.ShapeTypeStructure, 2, &smithytraits.Sensitive{})
-var TagEntry_Key *smithy.Schema
-
-var TagEntry_Value *smithy.Schema
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _Tags = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "Tags",
-}, smithy.ShapeTypeList, 1, &smithytraits.Sensitive{})
-var _Tags_member *smithy.Schema
-
-var _TagsMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "TagsMap",
-}, smithy.ShapeTypeMap, 2, &smithytraits.Sensitive{})
-var _TagsMap_key *smithy.Schema
-
-var _TagsMap_value *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_Message *smithy.Schema
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_Message *smithy.Schema
-
-var CreateConfigurationManagerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "CreateConfigurationManagerInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateConfigurationManagerInput_Name *smithy.Schema
-
-var CreateConfigurationManagerInput_Description *smithy.Schema
-
-var CreateConfigurationManagerInput_ConfigurationDefinitions *smithy.Schema
-
-var CreateConfigurationManagerInput_Tags *smithy.Schema
-
-var CreateConfigurationManagerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "CreateConfigurationManagerOutput",
-}, smithy.ShapeTypeStructure, 1)
-var CreateConfigurationManagerOutput_ManagerArn *smithy.Schema
-
-var DeleteConfigurationManagerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "DeleteConfigurationManagerInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteConfigurationManagerInput_ManagerArn *smithy.Schema
-
-var GetConfigurationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetConfigurationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationInput_ConfigurationId *smithy.Schema
-
-var GetConfigurationManagerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetConfigurationManagerInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetConfigurationManagerInput_ManagerArn *smithy.Schema
-
-var GetConfigurationManagerOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetConfigurationManagerOutput",
-}, smithy.ShapeTypeStructure, 8)
-var GetConfigurationManagerOutput_ManagerArn *smithy.Schema
-
-var GetConfigurationManagerOutput_Description *smithy.Schema
-
-var GetConfigurationManagerOutput_Name *smithy.Schema
-
-var GetConfigurationManagerOutput_CreatedAt *smithy.Schema
-
-var GetConfigurationManagerOutput_LastModifiedAt *smithy.Schema
-
-var GetConfigurationManagerOutput_StatusSummaries *smithy.Schema
-
-var GetConfigurationManagerOutput_ConfigurationDefinitions *smithy.Schema
-
-var GetConfigurationManagerOutput_Tags *smithy.Schema
-
-var GetConfigurationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetConfigurationOutput",
-}, smithy.ShapeTypeStructure, 11)
-var GetConfigurationOutput_Id *smithy.Schema
-
-var GetConfigurationOutput_ManagerArn *smithy.Schema
-
-var GetConfigurationOutput_ConfigurationDefinitionId *smithy.Schema
-
-var GetConfigurationOutput_Type *smithy.Schema
-
-var GetConfigurationOutput_TypeVersion *smithy.Schema
-
-var GetConfigurationOutput_Account *smithy.Schema
-
-var GetConfigurationOutput_Region *smithy.Schema
-
-var GetConfigurationOutput_CreatedAt *smithy.Schema
-
-var GetConfigurationOutput_LastModifiedAt *smithy.Schema
-
-var GetConfigurationOutput_StatusSummaries *smithy.Schema
-
-var GetConfigurationOutput_Parameters *smithy.Schema
-
-var GetServiceSettingsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "GetServiceSettingsOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetServiceSettingsOutput_ServiceSettings *smithy.Schema
-
-var ListConfigurationManagersInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListConfigurationManagersInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListConfigurationManagersInput_StartingToken *smithy.Schema
-
-var ListConfigurationManagersInput_MaxItems *smithy.Schema
-
-var ListConfigurationManagersInput_Filters *smithy.Schema
-
-var ListConfigurationManagersOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListConfigurationManagersOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationManagersOutput_ConfigurationManagersList *smithy.Schema
-
-var ListConfigurationManagersOutput_NextToken *smithy.Schema
-
-var ListConfigurationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListConfigurationsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListConfigurationsInput_StartingToken *smithy.Schema
-
-var ListConfigurationsInput_MaxItems *smithy.Schema
-
-var ListConfigurationsInput_Filters *smithy.Schema
-
-var ListConfigurationsInput_ManagerArn *smithy.Schema
-
-var ListConfigurationsInput_ConfigurationDefinitionId *smithy.Schema
-
-var ListConfigurationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListConfigurationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListConfigurationsOutput_ConfigurationsList *smithy.Schema
-
-var ListConfigurationsOutput_NextToken *smithy.Schema
-
-var ListQuickSetupTypesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListQuickSetupTypesOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListQuickSetupTypesOutput_QuickSetupTypeList *smithy.Schema
-
-var ListTagsForResourceRequest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListTagsForResourceRequest",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceRequest_ResourceArn *smithy.Schema
-
-var ListTagsForResourceResponse = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "ListTagsForResourceResponse",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceResponse_Tags *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_ResourceArn *smithy.Schema
-
-var TagResourceInput_Tags *smithy.Schema
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_ResourceArn *smithy.Schema
-
-var UntagResourceInput_TagKeys *smithy.Schema
-
-var UpdateConfigurationDefinitionInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UpdateConfigurationDefinitionInput",
-}, smithy.ShapeTypeStructure, 6)
-var UpdateConfigurationDefinitionInput_ManagerArn *smithy.Schema
-
-var UpdateConfigurationDefinitionInput_Id *smithy.Schema
-
-var UpdateConfigurationDefinitionInput_TypeVersion *smithy.Schema
-
-var UpdateConfigurationDefinitionInput_Parameters *smithy.Schema
-
-var UpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName *smithy.Schema
-
-var UpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn *smithy.Schema
-
-var UpdateConfigurationManagerInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UpdateConfigurationManagerInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateConfigurationManagerInput_ManagerArn *smithy.Schema
-
-var UpdateConfigurationManagerInput_Name *smithy.Schema
-
-var UpdateConfigurationManagerInput_Description *smithy.Schema
-
-var UpdateServiceSettingsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.ssmquicksetup",
-	Name:      "UpdateServiceSettingsInput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateServiceSettingsInput_ExplorerEnablingRoleArn *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_Message = AccessDeniedException.AddMember("Message", smithyprelude.String)
-
-	_ConfigurationParametersMap_key = _ConfigurationParametersMap.AddMember("key", smithyprelude.String)
-
-	_ConfigurationParametersMap_value = _ConfigurationParametersMap.AddMember("value", smithyprelude.String)
-
-	ConfigurationDefinition_Type = ConfigurationDefinition.AddMember("Type", smithyprelude.String)
-
-	ConfigurationDefinition_Parameters = ConfigurationDefinition.AddMember("Parameters", _ConfigurationParametersMap)
-
-	ConfigurationDefinition_TypeVersion = ConfigurationDefinition.AddMember("TypeVersion", smithyprelude.String)
-
-	ConfigurationDefinition_LocalDeploymentExecutionRoleName = ConfigurationDefinition.AddMember("LocalDeploymentExecutionRoleName", smithyprelude.String)
-
-	ConfigurationDefinition_LocalDeploymentAdministrationRoleArn = ConfigurationDefinition.AddMember("LocalDeploymentAdministrationRoleArn", _IAMRoleArn)
-
-	ConfigurationDefinition_Id = ConfigurationDefinition.AddMember("Id", smithyprelude.String)
-
-	ConfigurationDefinitionInput_Type = ConfigurationDefinitionInput.AddMember("Type", smithyprelude.String)
-
-	ConfigurationDefinitionInput_Parameters = ConfigurationDefinitionInput.AddMember("Parameters", _ConfigurationParametersMap)
-
-	ConfigurationDefinitionInput_TypeVersion = ConfigurationDefinitionInput.AddMember("TypeVersion", smithyprelude.String)
-
-	ConfigurationDefinitionInput_LocalDeploymentExecutionRoleName = ConfigurationDefinitionInput.AddMember("LocalDeploymentExecutionRoleName", smithyprelude.String)
-
-	ConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn = ConfigurationDefinitionInput.AddMember("LocalDeploymentAdministrationRoleArn", _IAMRoleArn)
-
-	_ConfigurationDefinitionsInputList_member = _ConfigurationDefinitionsInputList.AddMember("member", ConfigurationDefinitionInput)
-
-	_ConfigurationDefinitionsList_member = _ConfigurationDefinitionsList.AddMember("member", ConfigurationDefinition)
-
-	ConfigurationDefinitionSummary_Id = ConfigurationDefinitionSummary.AddMember("Id", smithyprelude.String)
-
-	ConfigurationDefinitionSummary_Type = ConfigurationDefinitionSummary.AddMember("Type", smithyprelude.String)
-
-	ConfigurationDefinitionSummary_TypeVersion = ConfigurationDefinitionSummary.AddMember("TypeVersion", smithyprelude.String)
-
-	ConfigurationDefinitionSummary_FirstClassParameters = ConfigurationDefinitionSummary.AddMember("FirstClassParameters", _ConfigurationParametersMap)
-
-	_ConfigurationDefinitionSummariesList_member = _ConfigurationDefinitionSummariesList.AddMember("member", ConfigurationDefinitionSummary)
-
-	StatusType_DEPLOYMENT = StatusType.AddMember("DEPLOYMENT", smithyprelude.Unit)
-
-	StatusType_ASYNC_EXECUTIONS = StatusType.AddMember("ASYNC_EXECUTIONS", smithyprelude.Unit)
-
-	Status_INITIALIZING = Status.AddMember("INITIALIZING", smithyprelude.Unit)
-
-	Status_DEPLOYING = Status.AddMember("DEPLOYING", smithyprelude.Unit)
-
-	Status_SUCCEEDED = Status.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	Status_DELETING = Status.AddMember("DELETING", smithyprelude.Unit)
-
-	Status_STOPPING = Status.AddMember("STOPPING", smithyprelude.Unit)
-
-	Status_FAILED = Status.AddMember("FAILED", smithyprelude.Unit)
-
-	Status_STOPPED = Status.AddMember("STOPPED", smithyprelude.Unit)
-
-	Status_DELETE_FAILED = Status.AddMember("DELETE_FAILED", smithyprelude.Unit)
-
-	Status_STOP_FAILED = Status.AddMember("STOP_FAILED", smithyprelude.Unit)
-
-	Status_NONE = Status.AddMember("NONE", smithyprelude.Unit)
-
-	_StatusDetails_key = _StatusDetails.AddMember("key", smithyprelude.String)
-
-	_StatusDetails_value = _StatusDetails.AddMember("value", smithyprelude.String)
-
-	StatusSummary_StatusType = StatusSummary.AddMember("StatusType", StatusType)
-
-	StatusSummary_Status = StatusSummary.AddMember("Status", Status)
-
-	StatusSummary_StatusMessage = StatusSummary.AddMember("StatusMessage", smithyprelude.String)
-
-	StatusSummary_LastUpdatedAt = StatusSummary.AddMember("LastUpdatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	StatusSummary_StatusDetails = StatusSummary.AddMember("StatusDetails", _StatusDetails)
-
-	_StatusSummariesList_member = _StatusSummariesList.AddMember("member", StatusSummary)
-
-	ConfigurationManagerSummary_ManagerArn = ConfigurationManagerSummary.AddMember("ManagerArn", smithyprelude.String)
-
-	ConfigurationManagerSummary_Description = ConfigurationManagerSummary.AddMember("Description", smithyprelude.String)
-
-	ConfigurationManagerSummary_Name = ConfigurationManagerSummary.AddMember("Name", smithyprelude.String)
-
-	ConfigurationManagerSummary_StatusSummaries = ConfigurationManagerSummary.AddMember("StatusSummaries", _StatusSummariesList)
-
-	ConfigurationManagerSummary_ConfigurationDefinitionSummaries = ConfigurationManagerSummary.AddMember("ConfigurationDefinitionSummaries", _ConfigurationDefinitionSummariesList)
-
-	_ConfigurationManagerList_member = _ConfigurationManagerList.AddMember("member", ConfigurationManagerSummary)
-
-	ConfigurationSummary_Id = ConfigurationSummary.AddMember("Id", smithyprelude.String)
-
-	ConfigurationSummary_ManagerArn = ConfigurationSummary.AddMember("ManagerArn", smithyprelude.String)
-
-	ConfigurationSummary_ConfigurationDefinitionId = ConfigurationSummary.AddMember("ConfigurationDefinitionId", smithyprelude.String)
-
-	ConfigurationSummary_Type = ConfigurationSummary.AddMember("Type", smithyprelude.String)
-
-	ConfigurationSummary_TypeVersion = ConfigurationSummary.AddMember("TypeVersion", smithyprelude.String)
-
-	ConfigurationSummary_Region = ConfigurationSummary.AddMember("Region", smithyprelude.String)
-
-	ConfigurationSummary_Account = ConfigurationSummary.AddMember("Account", smithyprelude.String)
-
-	ConfigurationSummary_CreatedAt = ConfigurationSummary.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ConfigurationSummary_FirstClassParameters = ConfigurationSummary.AddMember("FirstClassParameters", _ConfigurationParametersMap)
-
-	ConfigurationSummary_StatusSummaries = ConfigurationSummary.AddMember("StatusSummaries", _StatusSummariesList)
-
-	_ConfigurationsList_member = _ConfigurationsList.AddMember("member", ConfigurationSummary)
-
-	ConflictException_Message = ConflictException.AddMember("Message", smithyprelude.String)
-
-	_FilterValues_member = _FilterValues.AddMember("member", smithyprelude.String)
-
-	Filter_Key = Filter.AddMember("Key", smithyprelude.String)
-
-	Filter_Values = Filter.AddMember("Values", _FilterValues)
-
-	_FiltersList_member = _FiltersList.AddMember("member", Filter)
-
-	InternalServerException_Message = InternalServerException.AddMember("Message", smithyprelude.String)
-
-	QuickSetupTypeOutput_Type = QuickSetupTypeOutput.AddMember("Type", smithyprelude.String)
-
-	QuickSetupTypeOutput_LatestVersion = QuickSetupTypeOutput.AddMember("LatestVersion", smithyprelude.String)
-
-	_QuickSetupTypeList_member = _QuickSetupTypeList.AddMember("member", QuickSetupTypeOutput)
-
-	ResourceNotFoundException_Message = ResourceNotFoundException.AddMember("Message", smithyprelude.String)
-
-	ServiceSettings_ExplorerEnablingRoleArn = ServiceSettings.AddMember("ExplorerEnablingRoleArn", _IAMRoleArn)
-
-	TagEntry_Key = TagEntry.AddMember("Key", smithyprelude.String)
-
-	TagEntry_Value = TagEntry.AddMember("Value", smithyprelude.String)
-
-	_TagKeys_member = _TagKeys.AddMember("member", smithyprelude.String)
-
-	_Tags_member = _Tags.AddMember("member", TagEntry)
-
-	_TagsMap_key = _TagsMap.AddMember("key", smithyprelude.String)
-
-	_TagsMap_value = _TagsMap.AddMember("value", smithyprelude.String)
-
-	ThrottlingException_Message = ThrottlingException.AddMember("Message", smithyprelude.String)
-
-	ValidationException_Message = ValidationException.AddMember("Message", smithyprelude.String)
-
-	CreateConfigurationManagerInput_Name = CreateConfigurationManagerInput.AddMember("Name", smithyprelude.String)
-
-	CreateConfigurationManagerInput_Description = CreateConfigurationManagerInput.AddMember("Description", smithyprelude.String)
-
-	CreateConfigurationManagerInput_ConfigurationDefinitions = CreateConfigurationManagerInput.AddMember("ConfigurationDefinitions", _ConfigurationDefinitionsInputList)
-
-	CreateConfigurationManagerInput_Tags = CreateConfigurationManagerInput.AddMember("Tags", _TagsMap)
-
-	CreateConfigurationManagerOutput_ManagerArn = CreateConfigurationManagerOutput.AddMember("ManagerArn", smithyprelude.String)
-
-	DeleteConfigurationManagerInput_ManagerArn = DeleteConfigurationManagerInput.AddMember("ManagerArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetConfigurationInput_ConfigurationId = GetConfigurationInput.AddMember("ConfigurationId", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetConfigurationManagerInput_ManagerArn = GetConfigurationManagerInput.AddMember("ManagerArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	GetConfigurationManagerOutput_ManagerArn = GetConfigurationManagerOutput.AddMember("ManagerArn", smithyprelude.String)
-
-	GetConfigurationManagerOutput_Description = GetConfigurationManagerOutput.AddMember("Description", smithyprelude.String)
-
-	GetConfigurationManagerOutput_Name = GetConfigurationManagerOutput.AddMember("Name", smithyprelude.String)
-
-	GetConfigurationManagerOutput_CreatedAt = GetConfigurationManagerOutput.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfigurationManagerOutput_LastModifiedAt = GetConfigurationManagerOutput.AddMember("LastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfigurationManagerOutput_StatusSummaries = GetConfigurationManagerOutput.AddMember("StatusSummaries", _StatusSummariesList)
-
-	GetConfigurationManagerOutput_ConfigurationDefinitions = GetConfigurationManagerOutput.AddMember("ConfigurationDefinitions", _ConfigurationDefinitionsList)
-
-	GetConfigurationManagerOutput_Tags = GetConfigurationManagerOutput.AddMember("Tags", _TagsMap)
-
-	GetConfigurationOutput_Id = GetConfigurationOutput.AddMember("Id", smithyprelude.String)
-
-	GetConfigurationOutput_ManagerArn = GetConfigurationOutput.AddMember("ManagerArn", smithyprelude.String)
-
-	GetConfigurationOutput_ConfigurationDefinitionId = GetConfigurationOutput.AddMember("ConfigurationDefinitionId", smithyprelude.String)
-
-	GetConfigurationOutput_Type = GetConfigurationOutput.AddMember("Type", smithyprelude.String)
-
-	GetConfigurationOutput_TypeVersion = GetConfigurationOutput.AddMember("TypeVersion", smithyprelude.String)
-
-	GetConfigurationOutput_Account = GetConfigurationOutput.AddMember("Account", smithyprelude.String)
-
-	GetConfigurationOutput_Region = GetConfigurationOutput.AddMember("Region", smithyprelude.String)
-
-	GetConfigurationOutput_CreatedAt = GetConfigurationOutput.AddMember("CreatedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfigurationOutput_LastModifiedAt = GetConfigurationOutput.AddMember("LastModifiedAt", smithyprelude.Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	GetConfigurationOutput_StatusSummaries = GetConfigurationOutput.AddMember("StatusSummaries", _StatusSummariesList)
-
-	GetConfigurationOutput_Parameters = GetConfigurationOutput.AddMember("Parameters", _ConfigurationParametersMap)
-
-	GetServiceSettingsOutput_ServiceSettings = GetServiceSettingsOutput.AddMember("ServiceSettings", ServiceSettings)
-
-	ListConfigurationManagersInput_StartingToken = ListConfigurationManagersInput.AddMember("StartingToken", smithyprelude.String)
-
-	ListConfigurationManagersInput_MaxItems = ListConfigurationManagersInput.AddMember("MaxItems", smithyprelude.Integer)
-
-	ListConfigurationManagersInput_Filters = ListConfigurationManagersInput.AddMember("Filters", _FiltersList)
-
-	ListConfigurationManagersOutput_ConfigurationManagersList = ListConfigurationManagersOutput.AddMember("ConfigurationManagersList", _ConfigurationManagerList)
-
-	ListConfigurationManagersOutput_NextToken = ListConfigurationManagersOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListConfigurationsInput_StartingToken = ListConfigurationsInput.AddMember("StartingToken", smithyprelude.String)
-
-	ListConfigurationsInput_MaxItems = ListConfigurationsInput.AddMember("MaxItems", smithyprelude.Integer)
-
-	ListConfigurationsInput_Filters = ListConfigurationsInput.AddMember("Filters", _FiltersList)
-
-	ListConfigurationsInput_ManagerArn = ListConfigurationsInput.AddMember("ManagerArn", smithyprelude.String)
-
-	ListConfigurationsInput_ConfigurationDefinitionId = ListConfigurationsInput.AddMember("ConfigurationDefinitionId", smithyprelude.String)
-
-	ListConfigurationsOutput_ConfigurationsList = ListConfigurationsOutput.AddMember("ConfigurationsList", _ConfigurationsList)
-
-	ListConfigurationsOutput_NextToken = ListConfigurationsOutput.AddMember("NextToken", smithyprelude.String)
-
-	ListQuickSetupTypesOutput_QuickSetupTypeList = ListQuickSetupTypesOutput.AddMember("QuickSetupTypeList", _QuickSetupTypeList)
-
-	ListTagsForResourceRequest_ResourceArn = ListTagsForResourceRequest.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceResponse_Tags = ListTagsForResourceResponse.AddMember("Tags", _Tags)
-
-	TagResourceInput_ResourceArn = TagResourceInput.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_Tags = TagResourceInput.AddMember("Tags", _TagsMap)
-
-	UntagResourceInput_ResourceArn = UntagResourceInput.AddMember("ResourceArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_TagKeys = UntagResourceInput.AddMember("TagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateConfigurationDefinitionInput_ManagerArn = UpdateConfigurationDefinitionInput.AddMember("ManagerArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationDefinitionInput_Id = UpdateConfigurationDefinitionInput.AddMember("Id", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationDefinitionInput_TypeVersion = UpdateConfigurationDefinitionInput.AddMember("TypeVersion", smithyprelude.String)
-
-	UpdateConfigurationDefinitionInput_Parameters = UpdateConfigurationDefinitionInput.AddMember("Parameters", _ConfigurationParametersMap)
-
-	UpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName = UpdateConfigurationDefinitionInput.AddMember("LocalDeploymentExecutionRoleName", smithyprelude.String)
-
-	UpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn = UpdateConfigurationDefinitionInput.AddMember("LocalDeploymentAdministrationRoleArn", _IAMRoleArn)
-
-	UpdateConfigurationManagerInput_ManagerArn = UpdateConfigurationManagerInput.AddMember("ManagerArn", smithyprelude.String, &smithytraits.HTTPLabel{})
-
-	UpdateConfigurationManagerInput_Name = UpdateConfigurationManagerInput.AddMember("Name", smithyprelude.String)
-
-	UpdateConfigurationManagerInput_Description = UpdateConfigurationManagerInput.AddMember("Description", smithyprelude.String)
-
-	UpdateServiceSettingsInput_ExplorerEnablingRoleArn = UpdateServiceSettingsInput.AddMember("ExplorerEnablingRoleArn", _IAMRoleArn)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}, DirectMask: 0x100}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.Sensitive{}}}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_Message}}
+var mConfigurationDefinition = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationDefinition_Type, &sConfigurationDefinition_Parameters, &sConfigurationDefinition_TypeVersion, &sConfigurationDefinition_LocalDeploymentExecutionRoleName, &sConfigurationDefinition_LocalDeploymentAdministrationRoleArn, &sConfigurationDefinition_Id}}
+var mConfigurationDefinitionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationDefinitionInput_Type, &sConfigurationDefinitionInput_Parameters, &sConfigurationDefinitionInput_TypeVersion, &sConfigurationDefinitionInput_LocalDeploymentExecutionRoleName, &sConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn}}
+var m_ConfigurationDefinitionsInputList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationDefinitionsInputList_member}}
+var m_ConfigurationDefinitionsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationDefinitionsList_member}}
+var m_ConfigurationDefinitionSummariesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationDefinitionSummariesList_member}}
+var mConfigurationDefinitionSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationDefinitionSummary_Id, &sConfigurationDefinitionSummary_Type, &sConfigurationDefinitionSummary_TypeVersion, &sConfigurationDefinitionSummary_FirstClassParameters}}
+var m_ConfigurationManagerList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationManagerList_member}}
+var mConfigurationManagerSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationManagerSummary_ManagerArn, &sConfigurationManagerSummary_Description, &sConfigurationManagerSummary_Name, &sConfigurationManagerSummary_StatusSummaries, &sConfigurationManagerSummary_ConfigurationDefinitionSummaries}}
+var m_ConfigurationParametersMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationParametersMap_key, &s_ConfigurationParametersMap_value}}
+var m_ConfigurationsList = smithy.SchemaMembers{List: []*smithy.Schema{&s_ConfigurationsList_member}}
+var mConfigurationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sConfigurationSummary_Id, &sConfigurationSummary_ManagerArn, &sConfigurationSummary_ConfigurationDefinitionId, &sConfigurationSummary_Type, &sConfigurationSummary_TypeVersion, &sConfigurationSummary_Region, &sConfigurationSummary_Account, &sConfigurationSummary_CreatedAt, &sConfigurationSummary_FirstClassParameters, &sConfigurationSummary_StatusSummaries}, Seed: 5, Slots: []uint16{
+	0, 0, 0, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 10, 0, 9, 0, 0, 0, 0,
+	4, 6, 0, 7, 1, 2, 0, 8,
+}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_Message}}
+var mFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sFilter_Key, &sFilter_Values}}
+var m_FiltersList = smithy.SchemaMembers{List: []*smithy.Schema{&s_FiltersList_member}}
+var m_FilterValues = smithy.SchemaMembers{List: []*smithy.Schema{&s_FilterValues_member}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_Message}}
+var m_QuickSetupTypeList = smithy.SchemaMembers{List: []*smithy.Schema{&s_QuickSetupTypeList_member}}
+var mQuickSetupTypeOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sQuickSetupTypeOutput_Type, &sQuickSetupTypeOutput_LatestVersion}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_Message}}
+var mServiceSettings = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceSettings_ExplorerEnablingRoleArn}}
+var mStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sStatus_INITIALIZING, &sStatus_DEPLOYING, &sStatus_SUCCEEDED, &sStatus_DELETING, &sStatus_STOPPING, &sStatus_FAILED, &sStatus_STOPPED, &sStatus_DELETE_FAILED, &sStatus_STOP_FAILED, &sStatus_NONE}, Seed: 8, Slots: []uint16{
+	8, 5, 0, 7, 0, 0, 0, 0, 0, 4, 1, 0, 0, 10, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0,
+	0, 0, 9, 0, 3, 0, 0, 6,
+}}
+var m_StatusDetails = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatusDetails_key, &s_StatusDetails_value}}
+var m_StatusSummariesList = smithy.SchemaMembers{List: []*smithy.Schema{&s_StatusSummariesList_member}}
+var mStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusSummary_StatusType, &sStatusSummary_Status, &sStatusSummary_StatusMessage, &sStatusSummary_LastUpdatedAt, &sStatusSummary_StatusDetails}}
+var mStatusType = smithy.SchemaMembers{List: []*smithy.Schema{&sStatusType_DEPLOYMENT, &sStatusType_ASYNC_EXECUTIONS}}
+var mTagEntry = smithy.SchemaMembers{List: []*smithy.Schema{&sTagEntry_Key, &sTagEntry_Value}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_Tags = smithy.SchemaMembers{List: []*smithy.Schema{&s_Tags_member}}
+var m_TagsMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagsMap_key, &s_TagsMap_value}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_Message}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_Message}}
+var mCreateConfigurationManagerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationManagerInput_Name, &sCreateConfigurationManagerInput_Description, &sCreateConfigurationManagerInput_ConfigurationDefinitions, &sCreateConfigurationManagerInput_Tags}}
+var mCreateConfigurationManagerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateConfigurationManagerOutput_ManagerArn}}
+var mDeleteConfigurationManagerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteConfigurationManagerInput_ManagerArn}}
+var mGetConfigurationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationInput_ConfigurationId}}
+var mGetConfigurationManagerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationManagerInput_ManagerArn}}
+var mGetConfigurationManagerOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationManagerOutput_ManagerArn, &sGetConfigurationManagerOutput_Description, &sGetConfigurationManagerOutput_Name, &sGetConfigurationManagerOutput_CreatedAt, &sGetConfigurationManagerOutput_LastModifiedAt, &sGetConfigurationManagerOutput_StatusSummaries, &sGetConfigurationManagerOutput_ConfigurationDefinitions, &sGetConfigurationManagerOutput_Tags}}
+var mGetConfigurationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetConfigurationOutput_Id, &sGetConfigurationOutput_ManagerArn, &sGetConfigurationOutput_ConfigurationDefinitionId, &sGetConfigurationOutput_Type, &sGetConfigurationOutput_TypeVersion, &sGetConfigurationOutput_Account, &sGetConfigurationOutput_Region, &sGetConfigurationOutput_CreatedAt, &sGetConfigurationOutput_LastModifiedAt, &sGetConfigurationOutput_StatusSummaries, &sGetConfigurationOutput_Parameters}, Seed: 4, Slots: []uint16{
+	0, 0, 0, 1, 9, 0, 0, 0, 0, 0, 11, 0, 8, 0, 3, 0, 0, 0, 4, 0, 0, 6, 0, 0,
+	0, 0, 5, 0, 10, 0, 2, 7,
+}}
+var mGetServiceSettingsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetServiceSettingsOutput_ServiceSettings}}
+var mListConfigurationManagersInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationManagersInput_StartingToken, &sListConfigurationManagersInput_MaxItems, &sListConfigurationManagersInput_Filters}}
+var mListConfigurationManagersOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationManagersOutput_ConfigurationManagersList, &sListConfigurationManagersOutput_NextToken}}
+var mListConfigurationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationsInput_StartingToken, &sListConfigurationsInput_MaxItems, &sListConfigurationsInput_Filters, &sListConfigurationsInput_ManagerArn, &sListConfigurationsInput_ConfigurationDefinitionId}}
+var mListConfigurationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListConfigurationsOutput_ConfigurationsList, &sListConfigurationsOutput_NextToken}}
+var mListQuickSetupTypesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListQuickSetupTypesOutput_QuickSetupTypeList}}
+var mListTagsForResourceRequest = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceRequest_ResourceArn}}
+var mListTagsForResourceResponse = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceResponse_Tags}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_ResourceArn, &sTagResourceInput_Tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_ResourceArn, &sUntagResourceInput_TagKeys}}
+var mUpdateConfigurationDefinitionInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationDefinitionInput_ManagerArn, &sUpdateConfigurationDefinitionInput_Id, &sUpdateConfigurationDefinitionInput_TypeVersion, &sUpdateConfigurationDefinitionInput_Parameters, &sUpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName, &sUpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn}}
+var mUpdateConfigurationManagerInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateConfigurationManagerInput_ManagerArn, &sUpdateConfigurationManagerInput_Name, &sUpdateConfigurationManagerInput_Description}}
+var mUpdateServiceSettingsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateServiceSettingsInput_ExplorerEnablingRoleArn}}
+
+var sCreateConfigurationManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationManager, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sDeleteConfigurationManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationManager, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sGetConfiguration = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfiguration, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sGetConfigurationManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationManager, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sGetServiceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSettings, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sListConfigurationManagers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationManagers, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sListConfigurations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurations, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sListQuickSetupTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQuickSetupTypes, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sUpdateConfigurationDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationDefinition, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sUpdateConfigurationManager = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationManager, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sUpdateServiceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSettings, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var s_QuickSetup = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuickSetup, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t14, Type: smithy.ShapeTypeStructure})
+var sConfigurationDefinition = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationDefinition, Members: &mConfigurationDefinition, Type: smithy.ShapeTypeStructure})
+var sConfigurationDefinitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationDefinitionInput, Members: &mConfigurationDefinitionInput, Type: smithy.ShapeTypeStructure})
+var s_ConfigurationDefinitionsInputList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationDefinitionsInputList, Members: &m_ConfigurationDefinitionsInputList, Type: smithy.ShapeTypeList})
+var s_ConfigurationDefinitionsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationDefinitionsList, Members: &m_ConfigurationDefinitionsList, Type: smithy.ShapeTypeList})
+var s_ConfigurationDefinitionSummariesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationDefinitionSummariesList, Members: &m_ConfigurationDefinitionSummariesList, Type: smithy.ShapeTypeList})
+var sConfigurationDefinitionSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationDefinitionSummary, Members: &mConfigurationDefinitionSummary, Type: smithy.ShapeTypeStructure})
+var s_ConfigurationManagerList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationManagerList, Members: &m_ConfigurationManagerList, Type: smithy.ShapeTypeList})
+var sConfigurationManagerSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationManagerSummary, Members: &mConfigurationManagerSummary, Type: smithy.ShapeTypeStructure})
+var s_ConfigurationParametersMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationParametersMap, Members: &m_ConfigurationParametersMap, Type: smithy.ShapeTypeMap})
+var s_ConfigurationsList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ConfigurationsList, Members: &m_ConfigurationsList, Type: smithy.ShapeTypeList})
+var sConfigurationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConfigurationSummary, Members: &mConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t16, Type: smithy.ShapeTypeStructure})
+var sFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var s_FiltersList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FiltersList, Members: &m_FiltersList, Type: smithy.ShapeTypeList})
+var s_FilterValues = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var s_IAMRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t17, Type: smithy.ShapeTypeStructure})
+var s_QuickSetupTypeList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_QuickSetupTypeList, Members: &m_QuickSetupTypeList, Type: smithy.ShapeTypeList})
+var sQuickSetupTypeOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iQuickSetupTypeOutput, Members: &mQuickSetupTypeOutput, Type: smithy.ShapeTypeStructure})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t18, Type: smithy.ShapeTypeStructure})
+var sServiceSettings = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceSettings, Members: &mServiceSettings, Type: smithy.ShapeTypeStructure})
+var sStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var s_StatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusDetails, Members: &m_StatusDetails, Type: smithy.ShapeTypeMap})
+var s_StatusSummariesList = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_StatusSummariesList, Members: &m_StatusSummariesList, Type: smithy.ShapeTypeList})
+var sStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusSummary, Members: &mStatusSummary, Type: smithy.ShapeTypeStructure})
+var sStatusType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum})
+var sTagEntry = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagEntry, Members: &mTagEntry, Traits: &t19, Type: smithy.ShapeTypeStructure})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_Tags = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Tags, Members: &m_Tags, Traits: &t19, Type: smithy.ShapeTypeList})
+var s_TagsMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t19, Type: smithy.ShapeTypeMap})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t21, Type: smithy.ShapeTypeStructure})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t22, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationManagerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationManagerInput, Members: &mCreateConfigurationManagerInput, Type: smithy.ShapeTypeStructure})
+var sCreateConfigurationManagerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateConfigurationManagerOutput, Members: &mCreateConfigurationManagerOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteConfigurationManagerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteConfigurationManagerInput, Members: &mDeleteConfigurationManagerInput, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationInput, Members: &mGetConfigurationInput, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationManagerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationManagerInput, Members: &mGetConfigurationManagerInput, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationManagerOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationManagerOutput, Members: &mGetConfigurationManagerOutput, Type: smithy.ShapeTypeStructure})
+var sGetConfigurationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetConfigurationOutput, Members: &mGetConfigurationOutput, Type: smithy.ShapeTypeStructure})
+var sGetServiceSettingsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetServiceSettingsOutput, Members: &mGetServiceSettingsOutput, Type: smithy.ShapeTypeStructure})
+var sListConfigurationManagersInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationManagersInput, Members: &mListConfigurationManagersInput, Type: smithy.ShapeTypeStructure})
+var sListConfigurationManagersOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationManagersOutput, Members: &mListConfigurationManagersOutput, Type: smithy.ShapeTypeStructure})
+var sListConfigurationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationsInput, Members: &mListConfigurationsInput, Type: smithy.ShapeTypeStructure})
+var sListConfigurationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListConfigurationsOutput, Members: &mListConfigurationsOutput, Type: smithy.ShapeTypeStructure})
+var sListQuickSetupTypesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListQuickSetupTypesOutput, Members: &mListQuickSetupTypesOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceRequest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceRequest, Members: &mListTagsForResourceRequest, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceResponse = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceResponse, Members: &mListTagsForResourceResponse, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUpdateConfigurationDefinitionInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationDefinitionInput, Members: &mUpdateConfigurationDefinitionInput, Type: smithy.ShapeTypeStructure})
+var sUpdateConfigurationManagerInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateConfigurationManagerInput, Members: &mUpdateConfigurationManagerInput, Type: smithy.ShapeTypeStructure})
+var sUpdateServiceSettingsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateServiceSettingsInput, Members: &mUpdateServiceSettingsInput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinition_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinition_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ConfigurationParametersMap, Members: &m_ConfigurationParametersMap, Type: smithy.ShapeTypeMap})
+var sConfigurationDefinition_TypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinition_LocalDeploymentExecutionRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalDeploymentExecutionRoleName", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinition_LocalDeploymentAdministrationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalDeploymentAdministrationRoleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString})
+var sConfigurationDefinition_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinitionInput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinitionInput_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ConfigurationParametersMap, Members: &m_ConfigurationParametersMap, Type: smithy.ShapeTypeMap})
+var sConfigurationDefinitionInput_TypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinitionInput_LocalDeploymentExecutionRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalDeploymentExecutionRoleName", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalDeploymentAdministrationRoleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString})
+var s_ConfigurationDefinitionsInputList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationDefinitionInput, Members: &mConfigurationDefinitionInput, Type: smithy.ShapeTypeStructure})
+var s_ConfigurationDefinitionsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationDefinition, Members: &mConfigurationDefinition, Type: smithy.ShapeTypeStructure})
+var s_ConfigurationDefinitionSummariesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationDefinitionSummary, Members: &mConfigurationDefinitionSummary, Type: smithy.ShapeTypeStructure})
+var sConfigurationDefinitionSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinitionSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinitionSummary_TypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationDefinitionSummary_FirstClassParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstClassParameters", ID: &i_ConfigurationParametersMap, Members: &m_ConfigurationParametersMap, Type: smithy.ShapeTypeMap})
+var s_ConfigurationManagerList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationManagerSummary, Members: &mConfigurationManagerSummary, Type: smithy.ShapeTypeStructure})
+var sConfigurationManagerSummary_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationManagerSummary_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationManagerSummary_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationManagerSummary_StatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusSummaries", ID: &i_StatusSummariesList, Members: &m_StatusSummariesList, Type: smithy.ShapeTypeList})
+var sConfigurationManagerSummary_ConfigurationDefinitionSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationDefinitionSummaries", ID: &i_ConfigurationDefinitionSummariesList, Members: &m_ConfigurationDefinitionSummariesList, Type: smithy.ShapeTypeList})
+var s_ConfigurationParametersMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ConfigurationParametersMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ConfigurationsList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iConfigurationSummary, Members: &mConfigurationSummary, Type: smithy.ShapeTypeStructure})
+var sConfigurationSummary_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationSummary_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationSummary_ConfigurationDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationDefinitionId", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationSummary_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationSummary_TypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationSummary_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationSummary_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &pString, Type: smithy.ShapeTypeString})
+var sConfigurationSummary_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp})
+var sConfigurationSummary_FirstClassParameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FirstClassParameters", ID: &i_ConfigurationParametersMap, Members: &m_ConfigurationParametersMap, Type: smithy.ShapeTypeMap})
+var sConfigurationSummary_StatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusSummaries", ID: &i_StatusSummariesList, Members: &m_StatusSummariesList, Type: smithy.ShapeTypeList})
+var sConflictException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sFilter_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Type: smithy.ShapeTypeString})
+var sFilter_Values = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Values", ID: &i_FilterValues, Members: &m_FilterValues, Type: smithy.ShapeTypeList})
+var s_FiltersList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iFilter, Members: &mFilter, Type: smithy.ShapeTypeStructure})
+var s_FilterValues_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var sInternalServerException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_QuickSetupTypeList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iQuickSetupTypeOutput, Members: &mQuickSetupTypeOutput, Type: smithy.ShapeTypeStructure})
+var sQuickSetupTypeOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sQuickSetupTypeOutput_LatestVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LatestVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sResourceNotFoundException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceSettings_ExplorerEnablingRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplorerEnablingRoleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString})
+var sStatus_INITIALIZING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INITIALIZING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_DEPLOYING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_DELETING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_STOPPING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_STOPPED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOPPED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_DELETE_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_STOP_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "STOP_FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatus_NONE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NONE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_StatusDetails_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_StatusDetails_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_StatusSummariesList_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iStatusSummary, Members: &mStatusSummary, Type: smithy.ShapeTypeStructure})
+var sStatusSummary_StatusType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusType", ID: &iStatusType, Members: &mStatusType, Type: smithy.ShapeTypeEnum})
+var sStatusSummary_Status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Status", ID: &iStatus, Members: &mStatus, Type: smithy.ShapeTypeEnum})
+var sStatusSummary_StatusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sStatusSummary_LastUpdatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastUpdatedAt", ID: &pTimestamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp})
+var sStatusSummary_StatusDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusDetails", ID: &i_StatusDetails, Members: &m_StatusDetails, Type: smithy.ShapeTypeMap})
+var sStatusType_DEPLOYMENT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DEPLOYMENT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sStatusType_ASYNC_EXECUTIONS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ASYNC_EXECUTIONS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sTagEntry_Key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Key", ID: &pString, Type: smithy.ShapeTypeString})
+var sTagEntry_Value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Value", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &pString, Type: smithy.ShapeTypeString})
+var s_Tags_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iTagEntry, Members: &mTagEntry, Traits: &t20, Type: smithy.ShapeTypeStructure})
+var s_TagsMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagsMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sValidationException_Message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateConfigurationManagerInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateConfigurationManagerInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateConfigurationManagerInput_ConfigurationDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationDefinitions", ID: &i_ConfigurationDefinitionsInputList, Members: &m_ConfigurationDefinitionsInputList, Type: smithy.ShapeTypeList})
+var sCreateConfigurationManagerInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t20, Type: smithy.ShapeTypeMap})
+var sCreateConfigurationManagerOutput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeleteConfigurationManagerInput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sGetConfigurationInput_ConfigurationId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationId", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sGetConfigurationManagerInput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sGetConfigurationManagerOutput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationManagerOutput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationManagerOutput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationManagerOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp})
+var sGetConfigurationManagerOutput_LastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedAt", ID: &pTimestamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp})
+var sGetConfigurationManagerOutput_StatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusSummaries", ID: &i_StatusSummariesList, Members: &m_StatusSummariesList, Type: smithy.ShapeTypeList})
+var sGetConfigurationManagerOutput_ConfigurationDefinitions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationDefinitions", ID: &i_ConfigurationDefinitionsList, Members: &m_ConfigurationDefinitionsList, Type: smithy.ShapeTypeList})
+var sGetConfigurationManagerOutput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t20, Type: smithy.ShapeTypeMap})
+var sGetConfigurationOutput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationOutput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationOutput_ConfigurationDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationDefinitionId", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationOutput_Type = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Type", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationOutput_TypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationOutput_Account = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Account", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationOutput_Region = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Region", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetConfigurationOutput_CreatedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CreatedAt", ID: &pTimestamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp})
+var sGetConfigurationOutput_LastModifiedAt = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LastModifiedAt", ID: &pTimestamp, Traits: &t15, Type: smithy.ShapeTypeTimestamp})
+var sGetConfigurationOutput_StatusSummaries = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StatusSummaries", ID: &i_StatusSummariesList, Members: &m_StatusSummariesList, Type: smithy.ShapeTypeList})
+var sGetConfigurationOutput_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ConfigurationParametersMap, Members: &m_ConfigurationParametersMap, Type: smithy.ShapeTypeMap})
+var sGetServiceSettingsOutput_ServiceSettings = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ServiceSettings", ID: &iServiceSettings, Members: &mServiceSettings, Type: smithy.ShapeTypeStructure})
+var sListConfigurationManagersInput_StartingToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListConfigurationManagersInput_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListConfigurationManagersInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FiltersList, Members: &m_FiltersList, Type: smithy.ShapeTypeList})
+var sListConfigurationManagersOutput_ConfigurationManagersList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationManagersList", ID: &i_ConfigurationManagerList, Members: &m_ConfigurationManagerList, Type: smithy.ShapeTypeList})
+var sListConfigurationManagersOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListConfigurationsInput_StartingToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "StartingToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListConfigurationsInput_MaxItems = smithy.NewStaticSchema(smithy.StaticSchema{Member: "MaxItems", ID: &pInteger, Type: smithy.ShapeTypeInteger})
+var sListConfigurationsInput_Filters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Filters", ID: &i_FiltersList, Members: &m_FiltersList, Type: smithy.ShapeTypeList})
+var sListConfigurationsInput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Type: smithy.ShapeTypeString})
+var sListConfigurationsInput_ConfigurationDefinitionId = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationDefinitionId", ID: &pString, Type: smithy.ShapeTypeString})
+var sListConfigurationsOutput_ConfigurationsList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ConfigurationsList", ID: &i_ConfigurationsList, Members: &m_ConfigurationsList, Type: smithy.ShapeTypeList})
+var sListConfigurationsOutput_NextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListQuickSetupTypesOutput_QuickSetupTypeList = smithy.NewStaticSchema(smithy.StaticSchema{Member: "QuickSetupTypeList", ID: &i_QuickSetupTypeList, Members: &m_QuickSetupTypeList, Type: smithy.ShapeTypeList})
+var sListTagsForResourceRequest_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sListTagsForResourceResponse_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_Tags, Members: &m_Tags, Traits: &t20, Type: smithy.ShapeTypeList})
+var sTagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sTagResourceInput_Tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Tags", ID: &i_TagsMap, Members: &m_TagsMap, Traits: &t20, Type: smithy.ShapeTypeMap})
+var sUntagResourceInput_ResourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ResourceArn", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t24, Type: smithy.ShapeTypeList})
+var sUpdateConfigurationDefinitionInput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationDefinitionInput_Id = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Id", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationDefinitionInput_TypeVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "TypeVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationDefinitionInput_Parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Parameters", ID: &i_ConfigurationParametersMap, Members: &m_ConfigurationParametersMap, Type: smithy.ShapeTypeMap})
+var sUpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalDeploymentExecutionRoleName", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "LocalDeploymentAdministrationRoleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationManagerInput_ManagerArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ManagerArn", ID: &pString, Traits: &t23, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationManagerInput_Name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Name", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateConfigurationManagerInput_Description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "Description", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateServiceSettingsInput_ExplorerEnablingRoleArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ExplorerEnablingRoleArn", ID: &i_IAMRoleArn, Type: smithy.ShapeTypeString})
+
+var CreateConfigurationManager = &sCreateConfigurationManager
+
+var DeleteConfigurationManager = &sDeleteConfigurationManager
+
+var GetConfiguration = &sGetConfiguration
+
+var GetConfigurationManager = &sGetConfigurationManager
+
+var GetServiceSettings = &sGetServiceSettings
+
+var ListConfigurationManagers = &sListConfigurationManagers
+
+var ListConfigurations = &sListConfigurations
+
+var ListQuickSetupTypes = &sListQuickSetupTypes
+
+var ListTagsForResource = &sListTagsForResource
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateConfigurationDefinition = &sUpdateConfigurationDefinition
+
+var UpdateConfigurationManager = &sUpdateConfigurationManager
+
+var UpdateServiceSettings = &sUpdateServiceSettings
+
+var _QuickSetup = &s_QuickSetup
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_Message = &sAccessDeniedException_Message
+
+var ConfigurationDefinition = &sConfigurationDefinition
+var ConfigurationDefinition_Type = &sConfigurationDefinition_Type
+var ConfigurationDefinition_Parameters = &sConfigurationDefinition_Parameters
+var ConfigurationDefinition_TypeVersion = &sConfigurationDefinition_TypeVersion
+var ConfigurationDefinition_LocalDeploymentExecutionRoleName = &sConfigurationDefinition_LocalDeploymentExecutionRoleName
+var ConfigurationDefinition_LocalDeploymentAdministrationRoleArn = &sConfigurationDefinition_LocalDeploymentAdministrationRoleArn
+var ConfigurationDefinition_Id = &sConfigurationDefinition_Id
+
+var ConfigurationDefinitionInput = &sConfigurationDefinitionInput
+var ConfigurationDefinitionInput_Type = &sConfigurationDefinitionInput_Type
+var ConfigurationDefinitionInput_Parameters = &sConfigurationDefinitionInput_Parameters
+var ConfigurationDefinitionInput_TypeVersion = &sConfigurationDefinitionInput_TypeVersion
+var ConfigurationDefinitionInput_LocalDeploymentExecutionRoleName = &sConfigurationDefinitionInput_LocalDeploymentExecutionRoleName
+var ConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn = &sConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn
+
+var _ConfigurationDefinitionsInputList = &s_ConfigurationDefinitionsInputList
+var _ConfigurationDefinitionsInputList_member = &s_ConfigurationDefinitionsInputList_member
+
+var _ConfigurationDefinitionsList = &s_ConfigurationDefinitionsList
+var _ConfigurationDefinitionsList_member = &s_ConfigurationDefinitionsList_member
+
+var _ConfigurationDefinitionSummariesList = &s_ConfigurationDefinitionSummariesList
+var _ConfigurationDefinitionSummariesList_member = &s_ConfigurationDefinitionSummariesList_member
+
+var ConfigurationDefinitionSummary = &sConfigurationDefinitionSummary
+var ConfigurationDefinitionSummary_Id = &sConfigurationDefinitionSummary_Id
+var ConfigurationDefinitionSummary_Type = &sConfigurationDefinitionSummary_Type
+var ConfigurationDefinitionSummary_TypeVersion = &sConfigurationDefinitionSummary_TypeVersion
+var ConfigurationDefinitionSummary_FirstClassParameters = &sConfigurationDefinitionSummary_FirstClassParameters
+
+var _ConfigurationManagerList = &s_ConfigurationManagerList
+var _ConfigurationManagerList_member = &s_ConfigurationManagerList_member
+
+var ConfigurationManagerSummary = &sConfigurationManagerSummary
+var ConfigurationManagerSummary_ManagerArn = &sConfigurationManagerSummary_ManagerArn
+var ConfigurationManagerSummary_Description = &sConfigurationManagerSummary_Description
+var ConfigurationManagerSummary_Name = &sConfigurationManagerSummary_Name
+var ConfigurationManagerSummary_StatusSummaries = &sConfigurationManagerSummary_StatusSummaries
+var ConfigurationManagerSummary_ConfigurationDefinitionSummaries = &sConfigurationManagerSummary_ConfigurationDefinitionSummaries
+
+var _ConfigurationParametersMap = &s_ConfigurationParametersMap
+var _ConfigurationParametersMap_key = &s_ConfigurationParametersMap_key
+var _ConfigurationParametersMap_value = &s_ConfigurationParametersMap_value
+
+var _ConfigurationsList = &s_ConfigurationsList
+var _ConfigurationsList_member = &s_ConfigurationsList_member
+
+var ConfigurationSummary = &sConfigurationSummary
+var ConfigurationSummary_Id = &sConfigurationSummary_Id
+var ConfigurationSummary_ManagerArn = &sConfigurationSummary_ManagerArn
+var ConfigurationSummary_ConfigurationDefinitionId = &sConfigurationSummary_ConfigurationDefinitionId
+var ConfigurationSummary_Type = &sConfigurationSummary_Type
+var ConfigurationSummary_TypeVersion = &sConfigurationSummary_TypeVersion
+var ConfigurationSummary_Region = &sConfigurationSummary_Region
+var ConfigurationSummary_Account = &sConfigurationSummary_Account
+var ConfigurationSummary_CreatedAt = &sConfigurationSummary_CreatedAt
+var ConfigurationSummary_FirstClassParameters = &sConfigurationSummary_FirstClassParameters
+var ConfigurationSummary_StatusSummaries = &sConfigurationSummary_StatusSummaries
+
+var ConflictException = &sConflictException
+var ConflictException_Message = &sConflictException_Message
+
+var Filter = &sFilter
+var Filter_Key = &sFilter_Key
+var Filter_Values = &sFilter_Values
+
+var _FiltersList = &s_FiltersList
+var _FiltersList_member = &s_FiltersList_member
+
+var _FilterValues = &s_FilterValues
+var _FilterValues_member = &s_FilterValues_member
+
+var _IAMRoleArn = &s_IAMRoleArn
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_Message = &sInternalServerException_Message
+
+var _QuickSetupTypeList = &s_QuickSetupTypeList
+var _QuickSetupTypeList_member = &s_QuickSetupTypeList_member
+
+var QuickSetupTypeOutput = &sQuickSetupTypeOutput
+var QuickSetupTypeOutput_Type = &sQuickSetupTypeOutput_Type
+var QuickSetupTypeOutput_LatestVersion = &sQuickSetupTypeOutput_LatestVersion
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_Message = &sResourceNotFoundException_Message
+
+var ServiceSettings = &sServiceSettings
+var ServiceSettings_ExplorerEnablingRoleArn = &sServiceSettings_ExplorerEnablingRoleArn
+
+var Status = &sStatus
+var Status_INITIALIZING = &sStatus_INITIALIZING
+var Status_DEPLOYING = &sStatus_DEPLOYING
+var Status_SUCCEEDED = &sStatus_SUCCEEDED
+var Status_DELETING = &sStatus_DELETING
+var Status_STOPPING = &sStatus_STOPPING
+var Status_FAILED = &sStatus_FAILED
+var Status_STOPPED = &sStatus_STOPPED
+var Status_DELETE_FAILED = &sStatus_DELETE_FAILED
+var Status_STOP_FAILED = &sStatus_STOP_FAILED
+var Status_NONE = &sStatus_NONE
+
+var _StatusDetails = &s_StatusDetails
+var _StatusDetails_key = &s_StatusDetails_key
+var _StatusDetails_value = &s_StatusDetails_value
+
+var _StatusSummariesList = &s_StatusSummariesList
+var _StatusSummariesList_member = &s_StatusSummariesList_member
+
+var StatusSummary = &sStatusSummary
+var StatusSummary_StatusType = &sStatusSummary_StatusType
+var StatusSummary_Status = &sStatusSummary_Status
+var StatusSummary_StatusMessage = &sStatusSummary_StatusMessage
+var StatusSummary_LastUpdatedAt = &sStatusSummary_LastUpdatedAt
+var StatusSummary_StatusDetails = &sStatusSummary_StatusDetails
+
+var StatusType = &sStatusType
+var StatusType_DEPLOYMENT = &sStatusType_DEPLOYMENT
+var StatusType_ASYNC_EXECUTIONS = &sStatusType_ASYNC_EXECUTIONS
+
+var TagEntry = &sTagEntry
+var TagEntry_Key = &sTagEntry_Key
+var TagEntry_Value = &sTagEntry_Value
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _Tags = &s_Tags
+var _Tags_member = &s_Tags_member
+
+var _TagsMap = &s_TagsMap
+var _TagsMap_key = &s_TagsMap_key
+var _TagsMap_value = &s_TagsMap_value
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_Message = &sThrottlingException_Message
+
+var ValidationException = &sValidationException
+var ValidationException_Message = &sValidationException_Message
+
+var CreateConfigurationManagerInput = &sCreateConfigurationManagerInput
+var CreateConfigurationManagerInput_Name = &sCreateConfigurationManagerInput_Name
+var CreateConfigurationManagerInput_Description = &sCreateConfigurationManagerInput_Description
+var CreateConfigurationManagerInput_ConfigurationDefinitions = &sCreateConfigurationManagerInput_ConfigurationDefinitions
+var CreateConfigurationManagerInput_Tags = &sCreateConfigurationManagerInput_Tags
+
+var CreateConfigurationManagerOutput = &sCreateConfigurationManagerOutput
+var CreateConfigurationManagerOutput_ManagerArn = &sCreateConfigurationManagerOutput_ManagerArn
+
+var DeleteConfigurationManagerInput = &sDeleteConfigurationManagerInput
+var DeleteConfigurationManagerInput_ManagerArn = &sDeleteConfigurationManagerInput_ManagerArn
+
+var GetConfigurationInput = &sGetConfigurationInput
+var GetConfigurationInput_ConfigurationId = &sGetConfigurationInput_ConfigurationId
+
+var GetConfigurationManagerInput = &sGetConfigurationManagerInput
+var GetConfigurationManagerInput_ManagerArn = &sGetConfigurationManagerInput_ManagerArn
+
+var GetConfigurationManagerOutput = &sGetConfigurationManagerOutput
+var GetConfigurationManagerOutput_ManagerArn = &sGetConfigurationManagerOutput_ManagerArn
+var GetConfigurationManagerOutput_Description = &sGetConfigurationManagerOutput_Description
+var GetConfigurationManagerOutput_Name = &sGetConfigurationManagerOutput_Name
+var GetConfigurationManagerOutput_CreatedAt = &sGetConfigurationManagerOutput_CreatedAt
+var GetConfigurationManagerOutput_LastModifiedAt = &sGetConfigurationManagerOutput_LastModifiedAt
+var GetConfigurationManagerOutput_StatusSummaries = &sGetConfigurationManagerOutput_StatusSummaries
+var GetConfigurationManagerOutput_ConfigurationDefinitions = &sGetConfigurationManagerOutput_ConfigurationDefinitions
+var GetConfigurationManagerOutput_Tags = &sGetConfigurationManagerOutput_Tags
+
+var GetConfigurationOutput = &sGetConfigurationOutput
+var GetConfigurationOutput_Id = &sGetConfigurationOutput_Id
+var GetConfigurationOutput_ManagerArn = &sGetConfigurationOutput_ManagerArn
+var GetConfigurationOutput_ConfigurationDefinitionId = &sGetConfigurationOutput_ConfigurationDefinitionId
+var GetConfigurationOutput_Type = &sGetConfigurationOutput_Type
+var GetConfigurationOutput_TypeVersion = &sGetConfigurationOutput_TypeVersion
+var GetConfigurationOutput_Account = &sGetConfigurationOutput_Account
+var GetConfigurationOutput_Region = &sGetConfigurationOutput_Region
+var GetConfigurationOutput_CreatedAt = &sGetConfigurationOutput_CreatedAt
+var GetConfigurationOutput_LastModifiedAt = &sGetConfigurationOutput_LastModifiedAt
+var GetConfigurationOutput_StatusSummaries = &sGetConfigurationOutput_StatusSummaries
+var GetConfigurationOutput_Parameters = &sGetConfigurationOutput_Parameters
+
+var GetServiceSettingsOutput = &sGetServiceSettingsOutput
+var GetServiceSettingsOutput_ServiceSettings = &sGetServiceSettingsOutput_ServiceSettings
+
+var ListConfigurationManagersInput = &sListConfigurationManagersInput
+var ListConfigurationManagersInput_StartingToken = &sListConfigurationManagersInput_StartingToken
+var ListConfigurationManagersInput_MaxItems = &sListConfigurationManagersInput_MaxItems
+var ListConfigurationManagersInput_Filters = &sListConfigurationManagersInput_Filters
+
+var ListConfigurationManagersOutput = &sListConfigurationManagersOutput
+var ListConfigurationManagersOutput_ConfigurationManagersList = &sListConfigurationManagersOutput_ConfigurationManagersList
+var ListConfigurationManagersOutput_NextToken = &sListConfigurationManagersOutput_NextToken
+
+var ListConfigurationsInput = &sListConfigurationsInput
+var ListConfigurationsInput_StartingToken = &sListConfigurationsInput_StartingToken
+var ListConfigurationsInput_MaxItems = &sListConfigurationsInput_MaxItems
+var ListConfigurationsInput_Filters = &sListConfigurationsInput_Filters
+var ListConfigurationsInput_ManagerArn = &sListConfigurationsInput_ManagerArn
+var ListConfigurationsInput_ConfigurationDefinitionId = &sListConfigurationsInput_ConfigurationDefinitionId
+
+var ListConfigurationsOutput = &sListConfigurationsOutput
+var ListConfigurationsOutput_ConfigurationsList = &sListConfigurationsOutput_ConfigurationsList
+var ListConfigurationsOutput_NextToken = &sListConfigurationsOutput_NextToken
+
+var ListQuickSetupTypesOutput = &sListQuickSetupTypesOutput
+var ListQuickSetupTypesOutput_QuickSetupTypeList = &sListQuickSetupTypesOutput_QuickSetupTypeList
+
+var ListTagsForResourceRequest = &sListTagsForResourceRequest
+var ListTagsForResourceRequest_ResourceArn = &sListTagsForResourceRequest_ResourceArn
+
+var ListTagsForResourceResponse = &sListTagsForResourceResponse
+var ListTagsForResourceResponse_Tags = &sListTagsForResourceResponse_Tags
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_ResourceArn = &sTagResourceInput_ResourceArn
+var TagResourceInput_Tags = &sTagResourceInput_Tags
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_ResourceArn = &sUntagResourceInput_ResourceArn
+var UntagResourceInput_TagKeys = &sUntagResourceInput_TagKeys
+
+var UpdateConfigurationDefinitionInput = &sUpdateConfigurationDefinitionInput
+var UpdateConfigurationDefinitionInput_ManagerArn = &sUpdateConfigurationDefinitionInput_ManagerArn
+var UpdateConfigurationDefinitionInput_Id = &sUpdateConfigurationDefinitionInput_Id
+var UpdateConfigurationDefinitionInput_TypeVersion = &sUpdateConfigurationDefinitionInput_TypeVersion
+var UpdateConfigurationDefinitionInput_Parameters = &sUpdateConfigurationDefinitionInput_Parameters
+var UpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName = &sUpdateConfigurationDefinitionInput_LocalDeploymentExecutionRoleName
+var UpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn = &sUpdateConfigurationDefinitionInput_LocalDeploymentAdministrationRoleArn
+
+var UpdateConfigurationManagerInput = &sUpdateConfigurationManagerInput
+var UpdateConfigurationManagerInput_ManagerArn = &sUpdateConfigurationManagerInput_ManagerArn
+var UpdateConfigurationManagerInput_Name = &sUpdateConfigurationManagerInput_Name
+var UpdateConfigurationManagerInput_Description = &sUpdateConfigurationManagerInput_Description
+
+var UpdateServiceSettingsInput = &sUpdateServiceSettingsInput
+var UpdateServiceSettingsInput_ExplorerEnablingRoleArn = &sUpdateServiceSettingsInput_ExplorerEnablingRoleArn
+
+var QuickSetup = &smithy.ServiceSchema{Schema: &s_QuickSetup, Version: "2018-05-10"}

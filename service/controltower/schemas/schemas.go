@@ -4,2013 +4,1565 @@ package schemas
 
 import (
 	smithy "github.com/aws/smithy-go"
-	smithyprelude "github.com/aws/smithy-go/prelude"
 	smithytraits "github.com/aws/smithy-go/traits"
 )
 
-var CreateLandingZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "CreateLandingZone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+var (
+	iCreateLandingZone                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "CreateLandingZone"}
+	iDeleteLandingZone                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DeleteLandingZone"}
+	iDisableBaseline                      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DisableBaseline"}
+	iDisableControl                       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DisableControl"}
+	iEnableBaseline                       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnableBaseline"}
+	iEnableControl                        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnableControl"}
+	iGetBaseline                          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetBaseline"}
+	iGetBaselineOperation                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetBaselineOperation"}
+	iGetControlOperation                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetControlOperation"}
+	iGetEnabledBaseline                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetEnabledBaseline"}
+	iGetEnabledControl                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetEnabledControl"}
+	iGetLandingZone                       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetLandingZone"}
+	iGetLandingZoneOperation              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetLandingZoneOperation"}
+	iListBaselines                        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListBaselines"}
+	iListControlOperations                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListControlOperations"}
+	iListEnabledBaselines                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledBaselines"}
+	iListEnabledControls                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledControls"}
+	iListLandingZoneOperations            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZoneOperations"}
+	iListLandingZones                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZones"}
+	iListTagsForResource                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListTagsForResource"}
+	iResetEnabledBaseline                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetEnabledBaseline"}
+	iResetEnabledControl                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetEnabledControl"}
+	iResetLandingZone                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetLandingZone"}
+	iTagResource                          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TagResource"}
+	iUntagResource                        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UntagResource"}
+	iUpdateEnabledBaseline                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateEnabledBaseline"}
+	iUpdateEnabledControl                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateEnabledControl"}
+	iUpdateLandingZone                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateLandingZone"}
+	i_AWSControlTowerApis                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "AWSControlTowerApis"}
+	iAccessDeniedException                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "AccessDeniedException"}
+	i_Arn                                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "Arn"}
+	i_BaselineArn                         = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "BaselineArn"}
+	iBaselineOperation                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "BaselineOperation"}
+	iBaselineOperationStatus              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "BaselineOperationStatus"}
+	iBaselineOperationType                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "BaselineOperationType"}
+	i_Baselines                           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "Baselines"}
+	iBaselineSummary                      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "BaselineSummary"}
+	i_BaselineVersion                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "BaselineVersion"}
+	iConflictException                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ConflictException"}
+	i_ControlIdentifier                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlIdentifier"}
+	i_ControlIdentifiers                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlIdentifiers"}
+	iControlOperation                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperation"}
+	iControlOperationFilter               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperationFilter"}
+	i_ControlOperations                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperations"}
+	iControlOperationStatus               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperationStatus"}
+	i_ControlOperationStatuses            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperationStatuses"}
+	iControlOperationSummary              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperationSummary"}
+	iControlOperationType                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperationType"}
+	i_ControlOperationTypes               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ControlOperationTypes"}
+	iDriftStatus                          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DriftStatus"}
+	i_DriftStatuses                       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DriftStatuses"}
+	iDriftStatusSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DriftStatusSummary"}
+	i_EnabledBaselineBaselineIdentifiers  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineBaselineIdentifiers"}
+	iEnabledBaselineDetails               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineDetails"}
+	iEnabledBaselineDriftStatus           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineDriftStatus"}
+	i_EnabledBaselineDriftStatuses        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineDriftStatuses"}
+	iEnabledBaselineDriftStatusSummary    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineDriftStatusSummary"}
+	iEnabledBaselineDriftTypes            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineDriftTypes"}
+	i_EnabledBaselineEnablementStatuses   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineEnablementStatuses"}
+	iEnabledBaselineFilter                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineFilter"}
+	iEnabledBaselineInheritanceDrift      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineInheritanceDrift"}
+	iEnabledBaselineParameter             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineParameter"}
+	i_EnabledBaselineParameterDocument    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineParameterDocument"}
+	i_EnabledBaselineParameters           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineParameters"}
+	i_EnabledBaselineParameterSummaries   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineParameterSummaries"}
+	iEnabledBaselineParameterSummary      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineParameterSummary"}
+	i_EnabledBaselineParentIdentifiers    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineParentIdentifiers"}
+	i_EnabledBaselines                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselines"}
+	iEnabledBaselineSummary               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineSummary"}
+	i_EnabledBaselineTargetIdentifiers    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledBaselineTargetIdentifiers"}
+	iEnabledControlDetails                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlDetails"}
+	iEnabledControlDriftTypes             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlDriftTypes"}
+	iEnabledControlFilter                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlFilter"}
+	i_EnabledControlIdentifiers           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlIdentifiers"}
+	iEnabledControlInheritanceDrift       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlInheritanceDrift"}
+	iEnabledControlParameter              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlParameter"}
+	i_EnabledControlParameters            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlParameters"}
+	i_EnabledControlParameterSummaries    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlParameterSummaries"}
+	iEnabledControlParameterSummary       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlParameterSummary"}
+	iEnabledControlResourceDrift          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlResourceDrift"}
+	i_EnabledControls                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControls"}
+	iEnabledControlSummary                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnabledControlSummary"}
+	iEnablementStatus                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnablementStatus"}
+	i_EnablementStatuses                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnablementStatuses"}
+	iEnablementStatusSummary              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnablementStatusSummary"}
+	iInternalServerException              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "InternalServerException"}
+	iLandingZoneDetail                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneDetail"}
+	iLandingZoneDriftStatus               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneDriftStatus"}
+	iLandingZoneDriftStatusSummary        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneDriftStatusSummary"}
+	iLandingZoneOperationDetail           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperationDetail"}
+	iLandingZoneOperationFilter           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperationFilter"}
+	i_LandingZoneOperations               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperations"}
+	iLandingZoneOperationStatus           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperationStatus"}
+	i_LandingZoneOperationStatuses        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperationStatuses"}
+	iLandingZoneOperationSummary          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperationSummary"}
+	iLandingZoneOperationType             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperationType"}
+	i_LandingZoneOperationTypes           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneOperationTypes"}
+	iLandingZoneStatus                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneStatus"}
+	i_LandingZoneSummaries                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneSummaries"}
+	iLandingZoneSummary                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneSummary"}
+	i_LandingZoneVersion                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "LandingZoneVersion"}
+	i_ListBaselinesMaxResults             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListBaselinesMaxResults"}
+	i_ListControlOperationsMaxResults     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListControlOperationsMaxResults"}
+	i_ListControlOperationsNextToken      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListControlOperationsNextToken"}
+	i_ListEnabledBaselinesMaxResults      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledBaselinesMaxResults"}
+	i_ListEnabledBaselinesNextToken       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledBaselinesNextToken"}
+	i_ListLandingZoneOperationsMaxResults = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZoneOperationsMaxResults"}
+	i_ListLandingZonesMaxResults          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZonesMaxResults"}
+	i_Manifest                            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "Manifest"}
+	i_MaxResults                          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "MaxResults"}
+	i_OperationIdentifier                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "OperationIdentifier"}
+	i_ParentIdentifier                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ParentIdentifier"}
+	i_ParentIdentifiers                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ParentIdentifiers"}
+	iRegion                               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "Region"}
+	i_RegionName                          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "RegionName"}
+	iRemediationType                      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "RemediationType"}
+	i_RemediationTypes                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "RemediationTypes"}
+	iResourceNotFoundException            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResourceNotFoundException"}
+	iServiceQuotaExceededException        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ServiceQuotaExceededException"}
+	i_TagKey                              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TagKey"}
+	i_TagKeys                             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TagKeys"}
+	i_TagMap                              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TagMap"}
+	i_TagValue                            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TagValue"}
+	i_TargetIdentifier                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TargetIdentifier"}
+	i_TargetIdentifiers                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TargetIdentifiers"}
+	i_TargetRegions                       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TargetRegions"}
+	iThrottlingException                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ThrottlingException"}
+	i_Timestamp                           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "Timestamp"}
+	iValidationException                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ValidationException"}
+	iCreateLandingZoneInput               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "CreateLandingZoneInput"}
+	iCreateLandingZoneOutput              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "CreateLandingZoneOutput"}
+	iDeleteLandingZoneInput               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DeleteLandingZoneInput"}
+	iDeleteLandingZoneOutput              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DeleteLandingZoneOutput"}
+	iDisableBaselineInput                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DisableBaselineInput"}
+	iDisableBaselineOutput                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DisableBaselineOutput"}
+	iDisableControlInput                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DisableControlInput"}
+	iDisableControlOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "DisableControlOutput"}
+	iEnableBaselineInput                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnableBaselineInput"}
+	iEnableBaselineOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnableBaselineOutput"}
+	iEnableControlInput                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnableControlInput"}
+	iEnableControlOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "EnableControlOutput"}
+	iGetBaselineInput                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetBaselineInput"}
+	iGetBaselineOperationInput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetBaselineOperationInput"}
+	iGetBaselineOperationOutput           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetBaselineOperationOutput"}
+	iGetBaselineOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetBaselineOutput"}
+	iGetControlOperationInput             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetControlOperationInput"}
+	iGetControlOperationOutput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetControlOperationOutput"}
+	iGetEnabledBaselineInput              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetEnabledBaselineInput"}
+	iGetEnabledBaselineOutput             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetEnabledBaselineOutput"}
+	iGetEnabledControlInput               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetEnabledControlInput"}
+	iGetEnabledControlOutput              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetEnabledControlOutput"}
+	iGetLandingZoneInput                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetLandingZoneInput"}
+	iGetLandingZoneOperationInput         = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetLandingZoneOperationInput"}
+	iGetLandingZoneOperationOutput        = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetLandingZoneOperationOutput"}
+	iGetLandingZoneOutput                 = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "GetLandingZoneOutput"}
+	iListBaselinesInput                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListBaselinesInput"}
+	iListBaselinesOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListBaselinesOutput"}
+	iListControlOperationsInput           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListControlOperationsInput"}
+	iListControlOperationsOutput          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListControlOperationsOutput"}
+	iListEnabledBaselinesInput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledBaselinesInput"}
+	iListEnabledBaselinesOutput           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledBaselinesOutput"}
+	iListEnabledControlsInput             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledControlsInput"}
+	iListEnabledControlsOutput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListEnabledControlsOutput"}
+	iListLandingZoneOperationsInput       = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZoneOperationsInput"}
+	iListLandingZoneOperationsOutput      = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZoneOperationsOutput"}
+	iListLandingZonesInput                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZonesInput"}
+	iListLandingZonesOutput               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListLandingZonesOutput"}
+	iListTagsForResourceInput             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListTagsForResourceInput"}
+	iListTagsForResourceOutput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ListTagsForResourceOutput"}
+	iResetEnabledBaselineInput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetEnabledBaselineInput"}
+	iResetEnabledBaselineOutput           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetEnabledBaselineOutput"}
+	iResetEnabledControlInput             = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetEnabledControlInput"}
+	iResetEnabledControlOutput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetEnabledControlOutput"}
+	iResetLandingZoneInput                = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetLandingZoneInput"}
+	iResetLandingZoneOutput               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "ResetLandingZoneOutput"}
+	iTagResourceInput                     = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TagResourceInput"}
+	iTagResourceOutput                    = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "TagResourceOutput"}
+	iUntagResourceInput                   = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UntagResourceInput"}
+	iUntagResourceOutput                  = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UntagResourceOutput"}
+	iUpdateEnabledBaselineInput           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateEnabledBaselineInput"}
+	iUpdateEnabledBaselineOutput          = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateEnabledBaselineOutput"}
+	iUpdateEnabledControlInput            = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateEnabledControlInput"}
+	iUpdateEnabledControlOutput           = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateEnabledControlOutput"}
+	iUpdateLandingZoneInput               = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateLandingZoneInput"}
+	iUpdateLandingZoneOutput              = smithy.ShapeID{Namespace: "com.amazonaws.controltower", Name: "UpdateLandingZoneOutput"}
+	pString                               = smithy.ShapeID{Namespace: "smithy.api", Name: "String"}
+	pUnit                                 = smithy.ShapeID{Namespace: "smithy.api", Name: "Unit"}
+	pDocument                             = smithy.ShapeID{Namespace: "smithy.api", Name: "Document"}
+	pInteger                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Integer"}
+	pBoolean                              = smithy.ShapeID{Namespace: "smithy.api", Name: "Boolean"}
+)
+
+var t0 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/create-landingzone",
-	Code: 200})
-
-var DeleteLandingZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DeleteLandingZone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t1 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/delete-landingzone",
-	Code: 200})
-
-var DisableBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DisableBaseline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t2 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/disable-baseline",
-	Code: 200})
-
-var DisableControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DisableControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t3 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/disable-control",
-	Code: 200})
-
-var EnableBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnableBaseline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t4 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/enable-baseline",
-	Code: 200})
-
-var EnableControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnableControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t5 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/enable-control",
-	Code: 200})
-
-var GetBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetBaseline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t6 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-baseline",
-	Code: 200})
-
-var GetBaselineOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetBaselineOperation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t7 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-baseline-operation",
-	Code: 200})
-
-var GetControlOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetControlOperation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t8 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-control-operation",
-	Code: 200})
-
-var GetEnabledBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetEnabledBaseline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t9 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-enabled-baseline",
-	Code: 200})
-
-var GetEnabledControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetEnabledControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t10 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-enabled-control",
-	Code: 200})
-
-var GetLandingZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetLandingZone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t11 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-landingzone",
-	Code: 200})
-
-var GetLandingZoneOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetLandingZoneOperation",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t12 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/get-landingzone-operation",
-	Code: 200})
-
-var ListBaselines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListBaselines",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t13 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-baselines",
-	Code: 200})
-
-var ListControlOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListControlOperations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t14 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-control-operations",
-	Code: 200})
-
-var ListEnabledBaselines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledBaselines",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t15 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-enabled-baselines",
-	Code: 200})
-
-var ListEnabledControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledControls",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t16 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-enabled-controls",
-	Code: 200})
-
-var ListLandingZoneOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZoneOperations",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t17 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-landingzone-operations",
-	Code: 200})
-
-var ListLandingZones = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZones",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t18 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/list-landingzones",
-	Code: 200})
-
-var ListTagsForResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListTagsForResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "GET",
+	Code: 200}}, DirectMask: 0x2}
+var t19 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "GET",
 	URI:  "/tags/{resourceArn}",
-	Code: 200})
-
-var ResetEnabledBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetEnabledBaseline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t20 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/reset-enabled-baseline",
-	Code: 200})
-
-var ResetEnabledControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetEnabledControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t21 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/reset-enabled-control",
-	Code: 200})
-
-var ResetLandingZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetLandingZone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t22 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/reset-landingzone",
-	Code: 200})
-
-var TagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t23 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UntagResource = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UntagResource",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "DELETE",
+	Code: 204}}, DirectMask: 0x2}
+var t24 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "DELETE",
 	URI:  "/tags/{resourceArn}",
-	Code: 204})
-
-var UpdateEnabledBaseline = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateEnabledBaseline",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 204}}, DirectMask: 0x2}
+var t25 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-enabled-baseline",
-	Code: 200})
-
-var UpdateEnabledControl = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateEnabledControl",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t26 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-enabled-control",
-	Code: 200})
-
-var UpdateLandingZone = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateLandingZone",
-}, smithy.ShapeTypeOperation, 0, &smithytraits.HTTP{Method: "POST",
+	Code: 200}}, DirectMask: 0x2}
+var t27 = smithy.TraitSet{Indexed: []smithy.Trait{nil, &smithytraits.HTTP{Method: "POST",
 	URI:  "/update-landingzone",
-	Code: 200})
-
-var _AWSControlTowerApis = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "AWSControlTowerApis",
-}, smithy.ShapeTypeService, 0)
-
-var AWSControlTowerApis = smithy.NewServiceSchema(_AWSControlTowerApis, "2018-05-10")
-
-var AccessDeniedException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "AccessDeniedException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 403})
-var AccessDeniedException_message *smithy.Schema
-
-var _Arn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "Arn",
-}, smithy.ShapeTypeString, 0)
-
-var _BaselineArn = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "BaselineArn",
-}, smithy.ShapeTypeString, 0)
-
-var BaselineOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "BaselineOperation",
-}, smithy.ShapeTypeStructure, 6)
-var BaselineOperation_operationIdentifier *smithy.Schema
-
-var BaselineOperation_operationType *smithy.Schema
-
-var BaselineOperation_status *smithy.Schema
-
-var BaselineOperation_startTime *smithy.Schema
-
-var BaselineOperation_endTime *smithy.Schema
-
-var BaselineOperation_statusMessage *smithy.Schema
-
-var BaselineOperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "BaselineOperationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var BaselineOperationStatus_SUCCEEDED *smithy.Schema
-
-var BaselineOperationStatus_FAILED *smithy.Schema
-
-var BaselineOperationStatus_IN_PROGRESS *smithy.Schema
-
-var BaselineOperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "BaselineOperationType",
-}, smithy.ShapeTypeEnum, 4)
-var BaselineOperationType_ENABLE_BASELINE *smithy.Schema
-
-var BaselineOperationType_DISABLE_BASELINE *smithy.Schema
-
-var BaselineOperationType_UPDATE_ENABLED_BASELINE *smithy.Schema
-
-var BaselineOperationType_RESET_ENABLED_BASELINE *smithy.Schema
-
-var _Baselines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "Baselines",
-}, smithy.ShapeTypeList, 1)
-var _Baselines_member *smithy.Schema
-
-var BaselineSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "BaselineSummary",
-}, smithy.ShapeTypeStructure, 3)
-var BaselineSummary_arn *smithy.Schema
-
-var BaselineSummary_name *smithy.Schema
-
-var BaselineSummary_description *smithy.Schema
-
-var _BaselineVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "BaselineVersion",
-}, smithy.ShapeTypeString, 0)
-
-var ConflictException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ConflictException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 409})
-var ConflictException_message *smithy.Schema
-
-var _ControlIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ControlIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _ControlIdentifiers_member *smithy.Schema
-
-var ControlOperation = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperation",
-}, smithy.ShapeTypeStructure, 9)
-var ControlOperation_operationType *smithy.Schema
-
-var ControlOperation_startTime *smithy.Schema
-
-var ControlOperation_endTime *smithy.Schema
-
-var ControlOperation_status *smithy.Schema
-
-var ControlOperation_statusMessage *smithy.Schema
-
-var ControlOperation_operationIdentifier *smithy.Schema
-
-var ControlOperation_controlIdentifier *smithy.Schema
-
-var ControlOperation_targetIdentifier *smithy.Schema
-
-var ControlOperation_enabledControlIdentifier *smithy.Schema
-
-var ControlOperationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperationFilter",
-}, smithy.ShapeTypeStructure, 5)
-var ControlOperationFilter_controlIdentifiers *smithy.Schema
-
-var ControlOperationFilter_targetIdentifiers *smithy.Schema
-
-var ControlOperationFilter_enabledControlIdentifiers *smithy.Schema
-
-var ControlOperationFilter_statuses *smithy.Schema
-
-var ControlOperationFilter_controlOperationTypes *smithy.Schema
-
-var _ControlOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperations",
-}, smithy.ShapeTypeList, 1)
-var _ControlOperations_member *smithy.Schema
-
-var ControlOperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var ControlOperationStatus_SUCCEEDED *smithy.Schema
-
-var ControlOperationStatus_FAILED *smithy.Schema
-
-var ControlOperationStatus_IN_PROGRESS *smithy.Schema
-
-var _ControlOperationStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperationStatuses",
-}, smithy.ShapeTypeList, 1)
-var _ControlOperationStatuses_member *smithy.Schema
-
-var ControlOperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperationSummary",
-}, smithy.ShapeTypeStructure, 9)
-var ControlOperationSummary_operationType *smithy.Schema
-
-var ControlOperationSummary_startTime *smithy.Schema
-
-var ControlOperationSummary_endTime *smithy.Schema
-
-var ControlOperationSummary_status *smithy.Schema
-
-var ControlOperationSummary_statusMessage *smithy.Schema
-
-var ControlOperationSummary_operationIdentifier *smithy.Schema
-
-var ControlOperationSummary_controlIdentifier *smithy.Schema
-
-var ControlOperationSummary_targetIdentifier *smithy.Schema
-
-var ControlOperationSummary_enabledControlIdentifier *smithy.Schema
-
-var ControlOperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperationType",
-}, smithy.ShapeTypeEnum, 4)
-var ControlOperationType_ENABLE_CONTROL *smithy.Schema
-
-var ControlOperationType_DISABLE_CONTROL *smithy.Schema
-
-var ControlOperationType_UPDATE_ENABLED_CONTROL *smithy.Schema
-
-var ControlOperationType_RESET_ENABLED_CONTROL *smithy.Schema
-
-var _ControlOperationTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ControlOperationTypes",
-}, smithy.ShapeTypeList, 1)
-var _ControlOperationTypes_member *smithy.Schema
-
-var DriftStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DriftStatus",
-}, smithy.ShapeTypeEnum, 4)
-var DriftStatus_DRIFTED *smithy.Schema
-
-var DriftStatus_IN_SYNC *smithy.Schema
-
-var DriftStatus_NOT_CHECKING *smithy.Schema
-
-var DriftStatus_UNKNOWN *smithy.Schema
-
-var _DriftStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DriftStatuses",
-}, smithy.ShapeTypeList, 1)
-var _DriftStatuses_member *smithy.Schema
-
-var DriftStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DriftStatusSummary",
-}, smithy.ShapeTypeStructure, 2)
-var DriftStatusSummary_driftStatus *smithy.Schema
-
-var DriftStatusSummary_types *smithy.Schema
-
-var _EnabledBaselineBaselineIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineBaselineIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselineBaselineIdentifiers_member *smithy.Schema
-
-var EnabledBaselineDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineDetails",
-}, smithy.ShapeTypeStructure, 8)
-var EnabledBaselineDetails_arn *smithy.Schema
-
-var EnabledBaselineDetails_baselineIdentifier *smithy.Schema
-
-var EnabledBaselineDetails_baselineVersion *smithy.Schema
-
-var EnabledBaselineDetails_driftStatusSummary *smithy.Schema
-
-var EnabledBaselineDetails_targetIdentifier *smithy.Schema
-
-var EnabledBaselineDetails_parentIdentifier *smithy.Schema
-
-var EnabledBaselineDetails_statusSummary *smithy.Schema
-
-var EnabledBaselineDetails_parameters *smithy.Schema
-
-var EnabledBaselineDriftStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineDriftStatus",
-}, smithy.ShapeTypeEnum, 2)
-var EnabledBaselineDriftStatus_IN_SYNC *smithy.Schema
-
-var EnabledBaselineDriftStatus_DRIFTED *smithy.Schema
-
-var _EnabledBaselineDriftStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineDriftStatuses",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselineDriftStatuses_member *smithy.Schema
-
-var EnabledBaselineDriftStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineDriftStatusSummary",
-}, smithy.ShapeTypeStructure, 1)
-var EnabledBaselineDriftStatusSummary_types *smithy.Schema
-
-var EnabledBaselineDriftTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineDriftTypes",
-}, smithy.ShapeTypeStructure, 1)
-var EnabledBaselineDriftTypes_inheritance *smithy.Schema
-
-var _EnabledBaselineEnablementStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineEnablementStatuses",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselineEnablementStatuses_member *smithy.Schema
-
-var EnabledBaselineFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineFilter",
-}, smithy.ShapeTypeStructure, 5)
-var EnabledBaselineFilter_targetIdentifiers *smithy.Schema
-
-var EnabledBaselineFilter_baselineIdentifiers *smithy.Schema
-
-var EnabledBaselineFilter_parentIdentifiers *smithy.Schema
-
-var EnabledBaselineFilter_statuses *smithy.Schema
-
-var EnabledBaselineFilter_inheritanceDriftStatuses *smithy.Schema
-
-var EnabledBaselineInheritanceDrift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineInheritanceDrift",
-}, smithy.ShapeTypeStructure, 1)
-var EnabledBaselineInheritanceDrift_status *smithy.Schema
-
-var EnabledBaselineParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineParameter",
-}, smithy.ShapeTypeStructure, 2)
-var EnabledBaselineParameter_key *smithy.Schema
-
-var EnabledBaselineParameter_value *smithy.Schema
-
-var _EnabledBaselineParameterDocument = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineParameterDocument",
-}, smithy.ShapeTypeDocument, 0)
-
-var _EnabledBaselineParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineParameters",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselineParameters_member *smithy.Schema
-
-var _EnabledBaselineParameterSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineParameterSummaries",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselineParameterSummaries_member *smithy.Schema
-
-var EnabledBaselineParameterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineParameterSummary",
-}, smithy.ShapeTypeStructure, 2)
-var EnabledBaselineParameterSummary_key *smithy.Schema
-
-var EnabledBaselineParameterSummary_value *smithy.Schema
-
-var _EnabledBaselineParentIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineParentIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselineParentIdentifiers_member *smithy.Schema
-
-var _EnabledBaselines = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselines",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselines_member *smithy.Schema
-
-var EnabledBaselineSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineSummary",
-}, smithy.ShapeTypeStructure, 7)
-var EnabledBaselineSummary_arn *smithy.Schema
-
-var EnabledBaselineSummary_baselineIdentifier *smithy.Schema
-
-var EnabledBaselineSummary_baselineVersion *smithy.Schema
-
-var EnabledBaselineSummary_driftStatusSummary *smithy.Schema
-
-var EnabledBaselineSummary_targetIdentifier *smithy.Schema
-
-var EnabledBaselineSummary_parentIdentifier *smithy.Schema
-
-var EnabledBaselineSummary_statusSummary *smithy.Schema
-
-var _EnabledBaselineTargetIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledBaselineTargetIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _EnabledBaselineTargetIdentifiers_member *smithy.Schema
-
-var EnabledControlDetails = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlDetails",
-}, smithy.ShapeTypeStructure, 8)
-var EnabledControlDetails_arn *smithy.Schema
-
-var EnabledControlDetails_controlIdentifier *smithy.Schema
-
-var EnabledControlDetails_targetIdentifier *smithy.Schema
-
-var EnabledControlDetails_statusSummary *smithy.Schema
-
-var EnabledControlDetails_driftStatusSummary *smithy.Schema
-
-var EnabledControlDetails_parentIdentifier *smithy.Schema
-
-var EnabledControlDetails_targetRegions *smithy.Schema
-
-var EnabledControlDetails_parameters *smithy.Schema
-
-var EnabledControlDriftTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlDriftTypes",
-}, smithy.ShapeTypeStructure, 2)
-var EnabledControlDriftTypes_inheritance *smithy.Schema
-
-var EnabledControlDriftTypes_resource *smithy.Schema
-
-var EnabledControlFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlFilter",
-}, smithy.ShapeTypeStructure, 6)
-var EnabledControlFilter_controlIdentifiers *smithy.Schema
-
-var EnabledControlFilter_statuses *smithy.Schema
-
-var EnabledControlFilter_driftStatuses *smithy.Schema
-
-var EnabledControlFilter_parentIdentifiers *smithy.Schema
-
-var EnabledControlFilter_inheritanceDriftStatuses *smithy.Schema
-
-var EnabledControlFilter_resourceDriftStatuses *smithy.Schema
-
-var _EnabledControlIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _EnabledControlIdentifiers_member *smithy.Schema
-
-var EnabledControlInheritanceDrift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlInheritanceDrift",
-}, smithy.ShapeTypeStructure, 1)
-var EnabledControlInheritanceDrift_status *smithy.Schema
-
-var EnabledControlParameter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlParameter",
-}, smithy.ShapeTypeStructure, 2)
-var EnabledControlParameter_key *smithy.Schema
-
-var EnabledControlParameter_value *smithy.Schema
-
-var _EnabledControlParameters = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlParameters",
-}, smithy.ShapeTypeList, 1)
-var _EnabledControlParameters_member *smithy.Schema
-
-var _EnabledControlParameterSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlParameterSummaries",
-}, smithy.ShapeTypeList, 1)
-var _EnabledControlParameterSummaries_member *smithy.Schema
-
-var EnabledControlParameterSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlParameterSummary",
-}, smithy.ShapeTypeStructure, 2)
-var EnabledControlParameterSummary_key *smithy.Schema
-
-var EnabledControlParameterSummary_value *smithy.Schema
-
-var EnabledControlResourceDrift = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlResourceDrift",
-}, smithy.ShapeTypeStructure, 1)
-var EnabledControlResourceDrift_status *smithy.Schema
-
-var _EnabledControls = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControls",
-}, smithy.ShapeTypeList, 1)
-var _EnabledControls_member *smithy.Schema
-
-var EnabledControlSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnabledControlSummary",
-}, smithy.ShapeTypeStructure, 6)
-var EnabledControlSummary_arn *smithy.Schema
-
-var EnabledControlSummary_controlIdentifier *smithy.Schema
-
-var EnabledControlSummary_targetIdentifier *smithy.Schema
-
-var EnabledControlSummary_statusSummary *smithy.Schema
-
-var EnabledControlSummary_driftStatusSummary *smithy.Schema
-
-var EnabledControlSummary_parentIdentifier *smithy.Schema
-
-var EnablementStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnablementStatus",
-}, smithy.ShapeTypeEnum, 3)
-var EnablementStatus_SUCCEEDED *smithy.Schema
-
-var EnablementStatus_FAILED *smithy.Schema
-
-var EnablementStatus_UNDER_CHANGE *smithy.Schema
-
-var _EnablementStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnablementStatuses",
-}, smithy.ShapeTypeList, 1)
-var _EnablementStatuses_member *smithy.Schema
-
-var EnablementStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnablementStatusSummary",
-}, smithy.ShapeTypeStructure, 2)
-var EnablementStatusSummary_status *smithy.Schema
-
-var EnablementStatusSummary_lastOperationIdentifier *smithy.Schema
-
-var InternalServerException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "InternalServerException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "server"},
-	&smithytraits.HTTPError{Code: 500})
-var InternalServerException_message *smithy.Schema
-
-var LandingZoneDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneDetail",
-}, smithy.ShapeTypeStructure, 7)
-var LandingZoneDetail_version *smithy.Schema
-
-var LandingZoneDetail_remediationTypes *smithy.Schema
-
-var LandingZoneDetail_arn *smithy.Schema
-
-var LandingZoneDetail_status *smithy.Schema
-
-var LandingZoneDetail_latestAvailableVersion *smithy.Schema
-
-var LandingZoneDetail_driftStatus *smithy.Schema
-
-var LandingZoneDetail_manifest *smithy.Schema
-
-var LandingZoneDriftStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneDriftStatus",
-}, smithy.ShapeTypeEnum, 2)
-var LandingZoneDriftStatus_DRIFTED *smithy.Schema
-
-var LandingZoneDriftStatus_IN_SYNC *smithy.Schema
-
-var LandingZoneDriftStatusSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneDriftStatusSummary",
-}, smithy.ShapeTypeStructure, 1)
-var LandingZoneDriftStatusSummary_status *smithy.Schema
-
-var LandingZoneOperationDetail = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperationDetail",
-}, smithy.ShapeTypeStructure, 6)
-var LandingZoneOperationDetail_operationType *smithy.Schema
-
-var LandingZoneOperationDetail_operationIdentifier *smithy.Schema
-
-var LandingZoneOperationDetail_status *smithy.Schema
-
-var LandingZoneOperationDetail_startTime *smithy.Schema
-
-var LandingZoneOperationDetail_endTime *smithy.Schema
-
-var LandingZoneOperationDetail_statusMessage *smithy.Schema
-
-var LandingZoneOperationFilter = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperationFilter",
-}, smithy.ShapeTypeStructure, 2)
-var LandingZoneOperationFilter_types *smithy.Schema
-
-var LandingZoneOperationFilter_statuses *smithy.Schema
-
-var _LandingZoneOperations = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperations",
-}, smithy.ShapeTypeList, 1)
-var _LandingZoneOperations_member *smithy.Schema
-
-var LandingZoneOperationStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperationStatus",
-}, smithy.ShapeTypeEnum, 3)
-var LandingZoneOperationStatus_SUCCEEDED *smithy.Schema
-
-var LandingZoneOperationStatus_FAILED *smithy.Schema
-
-var LandingZoneOperationStatus_IN_PROGRESS *smithy.Schema
-
-var _LandingZoneOperationStatuses = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperationStatuses",
-}, smithy.ShapeTypeList, 1)
-var _LandingZoneOperationStatuses_member *smithy.Schema
-
-var LandingZoneOperationSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperationSummary",
-}, smithy.ShapeTypeStructure, 3)
-var LandingZoneOperationSummary_operationType *smithy.Schema
-
-var LandingZoneOperationSummary_operationIdentifier *smithy.Schema
-
-var LandingZoneOperationSummary_status *smithy.Schema
-
-var LandingZoneOperationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperationType",
-}, smithy.ShapeTypeEnum, 4)
-var LandingZoneOperationType_DELETE *smithy.Schema
-
-var LandingZoneOperationType_CREATE *smithy.Schema
-
-var LandingZoneOperationType_UPDATE *smithy.Schema
-
-var LandingZoneOperationType_RESET *smithy.Schema
-
-var _LandingZoneOperationTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneOperationTypes",
-}, smithy.ShapeTypeList, 1)
-var _LandingZoneOperationTypes_member *smithy.Schema
-
-var LandingZoneStatus = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneStatus",
-}, smithy.ShapeTypeEnum, 3)
-var LandingZoneStatus_ACTIVE *smithy.Schema
-
-var LandingZoneStatus_PROCESSING *smithy.Schema
-
-var LandingZoneStatus_FAILED *smithy.Schema
-
-var _LandingZoneSummaries = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneSummaries",
-}, smithy.ShapeTypeList, 1)
-var _LandingZoneSummaries_member *smithy.Schema
-
-var LandingZoneSummary = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneSummary",
-}, smithy.ShapeTypeStructure, 1)
-var LandingZoneSummary_arn *smithy.Schema
-
-var _LandingZoneVersion = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "LandingZoneVersion",
-}, smithy.ShapeTypeString, 0)
-
-var _ListBaselinesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListBaselinesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListControlOperationsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListControlOperationsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListControlOperationsNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListControlOperationsNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ListEnabledBaselinesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledBaselinesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListEnabledBaselinesNextToken = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledBaselinesNextToken",
-}, smithy.ShapeTypeString, 0)
-
-var _ListLandingZoneOperationsMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZoneOperationsMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _ListLandingZonesMaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZonesMaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _Manifest = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "Manifest",
-}, smithy.ShapeTypeDocument, 0)
-
-var _MaxResults = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "MaxResults",
-}, smithy.ShapeTypeInteger, 0)
-
-var _OperationIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "OperationIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ParentIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ParentIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _ParentIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ParentIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _ParentIdentifiers_member *smithy.Schema
-
-var Region = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "Region",
-}, smithy.ShapeTypeStructure, 1)
-var Region_name *smithy.Schema
-
-var _RegionName = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "RegionName",
-}, smithy.ShapeTypeString, 0)
-
-var RemediationType = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "RemediationType",
-}, smithy.ShapeTypeEnum, 1)
-var RemediationType_INHERITANCE_DRIFT *smithy.Schema
-
-var _RemediationTypes = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "RemediationTypes",
-}, smithy.ShapeTypeList, 1)
-var _RemediationTypes_member *smithy.Schema
-
-var ResourceNotFoundException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResourceNotFoundException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 404})
-var ResourceNotFoundException_message *smithy.Schema
-
-var ServiceQuotaExceededException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ServiceQuotaExceededException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 402})
-var ServiceQuotaExceededException_message *smithy.Schema
-
-var _TagKey = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TagKey",
-}, smithy.ShapeTypeString, 0)
-
-var _TagKeys = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TagKeys",
-}, smithy.ShapeTypeList, 1)
-var _TagKeys_member *smithy.Schema
-
-var _TagMap = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TagMap",
-}, smithy.ShapeTypeMap, 2)
-var _TagMap_key *smithy.Schema
-
-var _TagMap_value *smithy.Schema
-
-var _TagValue = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TagValue",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetIdentifier = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TargetIdentifier",
-}, smithy.ShapeTypeString, 0)
-
-var _TargetIdentifiers = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TargetIdentifiers",
-}, smithy.ShapeTypeList, 1)
-var _TargetIdentifiers_member *smithy.Schema
-
-var _TargetRegions = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TargetRegions",
-}, smithy.ShapeTypeList, 1)
-var _TargetRegions_member *smithy.Schema
-
-var ThrottlingException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ThrottlingException",
-}, smithy.ShapeTypeStructure, 4, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 429})
-var ThrottlingException_message *smithy.Schema
-
-var ThrottlingException_serviceCode *smithy.Schema
-
-var ThrottlingException_quotaCode *smithy.Schema
-
-var ThrottlingException_retryAfterSeconds *smithy.Schema
-
-var _Timestamp = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "Timestamp",
-}, smithy.ShapeTypeTimestamp, 0, &smithytraits.TimestampFormat{Format: "date-time"})
-
-var ValidationException = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ValidationException",
-}, smithy.ShapeTypeStructure, 1, &smithytraits.Error{Type: "client"},
-	&smithytraits.HTTPError{Code: 400})
-var ValidationException_message *smithy.Schema
-
-var CreateLandingZoneInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "CreateLandingZoneInput",
-}, smithy.ShapeTypeStructure, 4)
-var CreateLandingZoneInput_version *smithy.Schema
-
-var CreateLandingZoneInput_remediationTypes *smithy.Schema
-
-var CreateLandingZoneInput_tags *smithy.Schema
-
-var CreateLandingZoneInput_manifest *smithy.Schema
-
-var CreateLandingZoneOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "CreateLandingZoneOutput",
-}, smithy.ShapeTypeStructure, 2)
-var CreateLandingZoneOutput_arn *smithy.Schema
-
-var CreateLandingZoneOutput_operationIdentifier *smithy.Schema
-
-var DeleteLandingZoneInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DeleteLandingZoneInput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLandingZoneInput_landingZoneIdentifier *smithy.Schema
-
-var DeleteLandingZoneOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DeleteLandingZoneOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DeleteLandingZoneOutput_operationIdentifier *smithy.Schema
-
-var DisableBaselineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DisableBaselineInput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableBaselineInput_enabledBaselineIdentifier *smithy.Schema
-
-var DisableBaselineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DisableBaselineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableBaselineOutput_operationIdentifier *smithy.Schema
-
-var DisableControlInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DisableControlInput",
-}, smithy.ShapeTypeStructure, 3)
-var DisableControlInput_controlIdentifier *smithy.Schema
-
-var DisableControlInput_targetIdentifier *smithy.Schema
-
-var DisableControlInput_enabledControlIdentifier *smithy.Schema
-
-var DisableControlOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "DisableControlOutput",
-}, smithy.ShapeTypeStructure, 1)
-var DisableControlOutput_operationIdentifier *smithy.Schema
-
-var EnableBaselineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnableBaselineInput",
-}, smithy.ShapeTypeStructure, 5)
-var EnableBaselineInput_baselineVersion *smithy.Schema
-
-var EnableBaselineInput_parameters *smithy.Schema
-
-var EnableBaselineInput_baselineIdentifier *smithy.Schema
-
-var EnableBaselineInput_targetIdentifier *smithy.Schema
-
-var EnableBaselineInput_tags *smithy.Schema
-
-var EnableBaselineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnableBaselineOutput",
-}, smithy.ShapeTypeStructure, 2)
-var EnableBaselineOutput_operationIdentifier *smithy.Schema
-
-var EnableBaselineOutput_arn *smithy.Schema
-
-var EnableControlInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnableControlInput",
-}, smithy.ShapeTypeStructure, 4)
-var EnableControlInput_controlIdentifier *smithy.Schema
-
-var EnableControlInput_targetIdentifier *smithy.Schema
-
-var EnableControlInput_tags *smithy.Schema
-
-var EnableControlInput_parameters *smithy.Schema
-
-var EnableControlOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "EnableControlOutput",
-}, smithy.ShapeTypeStructure, 2)
-var EnableControlOutput_operationIdentifier *smithy.Schema
-
-var EnableControlOutput_arn *smithy.Schema
-
-var GetBaselineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetBaselineInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetBaselineInput_baselineIdentifier *smithy.Schema
-
-var GetBaselineOperationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetBaselineOperationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetBaselineOperationInput_operationIdentifier *smithy.Schema
-
-var GetBaselineOperationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetBaselineOperationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetBaselineOperationOutput_baselineOperation *smithy.Schema
-
-var GetBaselineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetBaselineOutput",
-}, smithy.ShapeTypeStructure, 3)
-var GetBaselineOutput_arn *smithy.Schema
-
-var GetBaselineOutput_name *smithy.Schema
-
-var GetBaselineOutput_description *smithy.Schema
-
-var GetControlOperationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetControlOperationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetControlOperationInput_operationIdentifier *smithy.Schema
-
-var GetControlOperationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetControlOperationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetControlOperationOutput_controlOperation *smithy.Schema
-
-var GetEnabledBaselineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetEnabledBaselineInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnabledBaselineInput_enabledBaselineIdentifier *smithy.Schema
-
-var GetEnabledBaselineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetEnabledBaselineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnabledBaselineOutput_enabledBaselineDetails *smithy.Schema
-
-var GetEnabledControlInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetEnabledControlInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnabledControlInput_enabledControlIdentifier *smithy.Schema
-
-var GetEnabledControlOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetEnabledControlOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetEnabledControlOutput_enabledControlDetails *smithy.Schema
-
-var GetLandingZoneInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetLandingZoneInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLandingZoneInput_landingZoneIdentifier *smithy.Schema
-
-var GetLandingZoneOperationInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetLandingZoneOperationInput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLandingZoneOperationInput_operationIdentifier *smithy.Schema
-
-var GetLandingZoneOperationOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetLandingZoneOperationOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLandingZoneOperationOutput_operationDetails *smithy.Schema
-
-var GetLandingZoneOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "GetLandingZoneOutput",
-}, smithy.ShapeTypeStructure, 1)
-var GetLandingZoneOutput_landingZone *smithy.Schema
-
-var ListBaselinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListBaselinesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBaselinesInput_nextToken *smithy.Schema
-
-var ListBaselinesInput_maxResults *smithy.Schema
-
-var ListBaselinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListBaselinesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListBaselinesOutput_baselines *smithy.Schema
-
-var ListBaselinesOutput_nextToken *smithy.Schema
-
-var ListControlOperationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListControlOperationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListControlOperationsInput_filter *smithy.Schema
-
-var ListControlOperationsInput_nextToken *smithy.Schema
-
-var ListControlOperationsInput_maxResults *smithy.Schema
-
-var ListControlOperationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListControlOperationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListControlOperationsOutput_controlOperations *smithy.Schema
-
-var ListControlOperationsOutput_nextToken *smithy.Schema
-
-var ListEnabledBaselinesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledBaselinesInput",
-}, smithy.ShapeTypeStructure, 4)
-var ListEnabledBaselinesInput_filter *smithy.Schema
-
-var ListEnabledBaselinesInput_nextToken *smithy.Schema
-
-var ListEnabledBaselinesInput_maxResults *smithy.Schema
-
-var ListEnabledBaselinesInput_includeChildren *smithy.Schema
-
-var ListEnabledBaselinesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledBaselinesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnabledBaselinesOutput_enabledBaselines *smithy.Schema
-
-var ListEnabledBaselinesOutput_nextToken *smithy.Schema
-
-var ListEnabledControlsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledControlsInput",
-}, smithy.ShapeTypeStructure, 5)
-var ListEnabledControlsInput_targetIdentifier *smithy.Schema
-
-var ListEnabledControlsInput_nextToken *smithy.Schema
-
-var ListEnabledControlsInput_maxResults *smithy.Schema
-
-var ListEnabledControlsInput_filter *smithy.Schema
-
-var ListEnabledControlsInput_includeChildren *smithy.Schema
-
-var ListEnabledControlsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListEnabledControlsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListEnabledControlsOutput_enabledControls *smithy.Schema
-
-var ListEnabledControlsOutput_nextToken *smithy.Schema
-
-var ListLandingZoneOperationsInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZoneOperationsInput",
-}, smithy.ShapeTypeStructure, 3)
-var ListLandingZoneOperationsInput_filter *smithy.Schema
-
-var ListLandingZoneOperationsInput_nextToken *smithy.Schema
-
-var ListLandingZoneOperationsInput_maxResults *smithy.Schema
-
-var ListLandingZoneOperationsOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZoneOperationsOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLandingZoneOperationsOutput_landingZoneOperations *smithy.Schema
-
-var ListLandingZoneOperationsOutput_nextToken *smithy.Schema
-
-var ListLandingZonesInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZonesInput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLandingZonesInput_nextToken *smithy.Schema
-
-var ListLandingZonesInput_maxResults *smithy.Schema
-
-var ListLandingZonesOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListLandingZonesOutput",
-}, smithy.ShapeTypeStructure, 2)
-var ListLandingZonesOutput_landingZones *smithy.Schema
-
-var ListLandingZonesOutput_nextToken *smithy.Schema
-
-var ListTagsForResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListTagsForResourceInput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceInput_resourceArn *smithy.Schema
-
-var ListTagsForResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ListTagsForResourceOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ListTagsForResourceOutput_tags *smithy.Schema
-
-var ResetEnabledBaselineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetEnabledBaselineInput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetEnabledBaselineInput_enabledBaselineIdentifier *smithy.Schema
-
-var ResetEnabledBaselineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetEnabledBaselineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetEnabledBaselineOutput_operationIdentifier *smithy.Schema
-
-var ResetEnabledControlInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetEnabledControlInput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetEnabledControlInput_enabledControlIdentifier *smithy.Schema
-
-var ResetEnabledControlOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetEnabledControlOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetEnabledControlOutput_operationIdentifier *smithy.Schema
-
-var ResetLandingZoneInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetLandingZoneInput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetLandingZoneInput_landingZoneIdentifier *smithy.Schema
-
-var ResetLandingZoneOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "ResetLandingZoneOutput",
-}, smithy.ShapeTypeStructure, 1)
-var ResetLandingZoneOutput_operationIdentifier *smithy.Schema
-
-var TagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var TagResourceInput_resourceArn *smithy.Schema
-
-var TagResourceInput_tags *smithy.Schema
-
-var TagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "TagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UntagResourceInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UntagResourceInput",
-}, smithy.ShapeTypeStructure, 2)
-var UntagResourceInput_resourceArn *smithy.Schema
-
-var UntagResourceInput_tagKeys *smithy.Schema
-
-var UntagResourceOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UntagResourceOutput",
-}, smithy.ShapeTypeStructure, 0)
-
-var UpdateEnabledBaselineInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateEnabledBaselineInput",
-}, smithy.ShapeTypeStructure, 3)
-var UpdateEnabledBaselineInput_baselineVersion *smithy.Schema
-
-var UpdateEnabledBaselineInput_parameters *smithy.Schema
-
-var UpdateEnabledBaselineInput_enabledBaselineIdentifier *smithy.Schema
-
-var UpdateEnabledBaselineOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateEnabledBaselineOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnabledBaselineOutput_operationIdentifier *smithy.Schema
-
-var UpdateEnabledControlInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateEnabledControlInput",
-}, smithy.ShapeTypeStructure, 2)
-var UpdateEnabledControlInput_parameters *smithy.Schema
-
-var UpdateEnabledControlInput_enabledControlIdentifier *smithy.Schema
-
-var UpdateEnabledControlOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateEnabledControlOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateEnabledControlOutput_operationIdentifier *smithy.Schema
-
-var UpdateLandingZoneInput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateLandingZoneInput",
-}, smithy.ShapeTypeStructure, 4)
-var UpdateLandingZoneInput_version *smithy.Schema
-
-var UpdateLandingZoneInput_remediationTypes *smithy.Schema
-
-var UpdateLandingZoneInput_landingZoneIdentifier *smithy.Schema
-
-var UpdateLandingZoneInput_manifest *smithy.Schema
-
-var UpdateLandingZoneOutput = smithy.NewSchema(smithy.ShapeID{
-	Namespace: "com.amazonaws.controltower",
-	Name:      "UpdateLandingZoneOutput",
-}, smithy.ShapeTypeStructure, 1)
-var UpdateLandingZoneOutput_operationIdentifier *smithy.Schema
-
-// Initialize schema members after all schemas are declared to avoid
-// initialization cycles
-func init() {
-	AccessDeniedException_message = AccessDeniedException.AddMember("message", smithyprelude.String)
-
-	BaselineOperationType_ENABLE_BASELINE = BaselineOperationType.AddMember("ENABLE_BASELINE", smithyprelude.Unit)
-
-	BaselineOperationType_DISABLE_BASELINE = BaselineOperationType.AddMember("DISABLE_BASELINE", smithyprelude.Unit)
-
-	BaselineOperationType_UPDATE_ENABLED_BASELINE = BaselineOperationType.AddMember("UPDATE_ENABLED_BASELINE", smithyprelude.Unit)
-
-	BaselineOperationType_RESET_ENABLED_BASELINE = BaselineOperationType.AddMember("RESET_ENABLED_BASELINE", smithyprelude.Unit)
-
-	BaselineOperationStatus_SUCCEEDED = BaselineOperationStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	BaselineOperationStatus_FAILED = BaselineOperationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	BaselineOperationStatus_IN_PROGRESS = BaselineOperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	BaselineOperation_operationIdentifier = BaselineOperation.AddMember("operationIdentifier", _OperationIdentifier)
-
-	BaselineOperation_operationType = BaselineOperation.AddMember("operationType", BaselineOperationType)
-
-	BaselineOperation_status = BaselineOperation.AddMember("status", BaselineOperationStatus)
-
-	BaselineOperation_startTime = BaselineOperation.AddMember("startTime", _Timestamp)
-
-	BaselineOperation_endTime = BaselineOperation.AddMember("endTime", _Timestamp)
-
-	BaselineOperation_statusMessage = BaselineOperation.AddMember("statusMessage", smithyprelude.String)
-
-	BaselineSummary_arn = BaselineSummary.AddMember("arn", smithyprelude.String)
-
-	BaselineSummary_name = BaselineSummary.AddMember("name", smithyprelude.String)
-
-	BaselineSummary_description = BaselineSummary.AddMember("description", smithyprelude.String)
-
-	_Baselines_member = _Baselines.AddMember("member", BaselineSummary)
-
-	ConflictException_message = ConflictException.AddMember("message", smithyprelude.String)
-
-	_ControlIdentifiers_member = _ControlIdentifiers.AddMember("member", _ControlIdentifier)
-
-	ControlOperationType_ENABLE_CONTROL = ControlOperationType.AddMember("ENABLE_CONTROL", smithyprelude.Unit)
-
-	ControlOperationType_DISABLE_CONTROL = ControlOperationType.AddMember("DISABLE_CONTROL", smithyprelude.Unit)
-
-	ControlOperationType_UPDATE_ENABLED_CONTROL = ControlOperationType.AddMember("UPDATE_ENABLED_CONTROL", smithyprelude.Unit)
-
-	ControlOperationType_RESET_ENABLED_CONTROL = ControlOperationType.AddMember("RESET_ENABLED_CONTROL", smithyprelude.Unit)
-
-	ControlOperationStatus_SUCCEEDED = ControlOperationStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	ControlOperationStatus_FAILED = ControlOperationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	ControlOperationStatus_IN_PROGRESS = ControlOperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	ControlOperation_operationType = ControlOperation.AddMember("operationType", ControlOperationType)
-
-	ControlOperation_startTime = ControlOperation.AddMember("startTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ControlOperation_endTime = ControlOperation.AddMember("endTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ControlOperation_status = ControlOperation.AddMember("status", ControlOperationStatus)
-
-	ControlOperation_statusMessage = ControlOperation.AddMember("statusMessage", smithyprelude.String)
-
-	ControlOperation_operationIdentifier = ControlOperation.AddMember("operationIdentifier", _OperationIdentifier)
-
-	ControlOperation_controlIdentifier = ControlOperation.AddMember("controlIdentifier", _ControlIdentifier)
-
-	ControlOperation_targetIdentifier = ControlOperation.AddMember("targetIdentifier", _TargetIdentifier)
-
-	ControlOperation_enabledControlIdentifier = ControlOperation.AddMember("enabledControlIdentifier", _Arn)
-
-	_TargetIdentifiers_member = _TargetIdentifiers.AddMember("member", _TargetIdentifier)
-
-	_EnabledControlIdentifiers_member = _EnabledControlIdentifiers.AddMember("member", _Arn)
-
-	_ControlOperationStatuses_member = _ControlOperationStatuses.AddMember("member", ControlOperationStatus)
-
-	_ControlOperationTypes_member = _ControlOperationTypes.AddMember("member", ControlOperationType)
-
-	ControlOperationFilter_controlIdentifiers = ControlOperationFilter.AddMember("controlIdentifiers", _ControlIdentifiers)
-
-	ControlOperationFilter_targetIdentifiers = ControlOperationFilter.AddMember("targetIdentifiers", _TargetIdentifiers)
-
-	ControlOperationFilter_enabledControlIdentifiers = ControlOperationFilter.AddMember("enabledControlIdentifiers", _EnabledControlIdentifiers)
-
-	ControlOperationFilter_statuses = ControlOperationFilter.AddMember("statuses", _ControlOperationStatuses)
-
-	ControlOperationFilter_controlOperationTypes = ControlOperationFilter.AddMember("controlOperationTypes", _ControlOperationTypes)
-
-	ControlOperationSummary_operationType = ControlOperationSummary.AddMember("operationType", ControlOperationType)
-
-	ControlOperationSummary_startTime = ControlOperationSummary.AddMember("startTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ControlOperationSummary_endTime = ControlOperationSummary.AddMember("endTime", _Timestamp, &smithytraits.TimestampFormat{Format: "date-time"})
-
-	ControlOperationSummary_status = ControlOperationSummary.AddMember("status", ControlOperationStatus)
-
-	ControlOperationSummary_statusMessage = ControlOperationSummary.AddMember("statusMessage", smithyprelude.String)
-
-	ControlOperationSummary_operationIdentifier = ControlOperationSummary.AddMember("operationIdentifier", _OperationIdentifier)
-
-	ControlOperationSummary_controlIdentifier = ControlOperationSummary.AddMember("controlIdentifier", _ControlIdentifier)
-
-	ControlOperationSummary_targetIdentifier = ControlOperationSummary.AddMember("targetIdentifier", _TargetIdentifier)
-
-	ControlOperationSummary_enabledControlIdentifier = ControlOperationSummary.AddMember("enabledControlIdentifier", _Arn)
-
-	_ControlOperations_member = _ControlOperations.AddMember("member", ControlOperationSummary)
-
-	DriftStatus_DRIFTED = DriftStatus.AddMember("DRIFTED", smithyprelude.Unit)
-
-	DriftStatus_IN_SYNC = DriftStatus.AddMember("IN_SYNC", smithyprelude.Unit)
-
-	DriftStatus_NOT_CHECKING = DriftStatus.AddMember("NOT_CHECKING", smithyprelude.Unit)
-
-	DriftStatus_UNKNOWN = DriftStatus.AddMember("UNKNOWN", smithyprelude.Unit)
-
-	_DriftStatuses_member = _DriftStatuses.AddMember("member", DriftStatus)
-
-	EnabledControlInheritanceDrift_status = EnabledControlInheritanceDrift.AddMember("status", DriftStatus)
-
-	EnabledControlResourceDrift_status = EnabledControlResourceDrift.AddMember("status", DriftStatus)
-
-	EnabledControlDriftTypes_inheritance = EnabledControlDriftTypes.AddMember("inheritance", EnabledControlInheritanceDrift)
-
-	EnabledControlDriftTypes_resource = EnabledControlDriftTypes.AddMember("resource", EnabledControlResourceDrift)
-
-	DriftStatusSummary_driftStatus = DriftStatusSummary.AddMember("driftStatus", DriftStatus)
-
-	DriftStatusSummary_types = DriftStatusSummary.AddMember("types", EnabledControlDriftTypes)
-
-	_EnabledBaselineBaselineIdentifiers_member = _EnabledBaselineBaselineIdentifiers.AddMember("member", _Arn)
-
-	EnabledBaselineDriftStatus_IN_SYNC = EnabledBaselineDriftStatus.AddMember("IN_SYNC", smithyprelude.Unit)
-
-	EnabledBaselineDriftStatus_DRIFTED = EnabledBaselineDriftStatus.AddMember("DRIFTED", smithyprelude.Unit)
-
-	EnabledBaselineInheritanceDrift_status = EnabledBaselineInheritanceDrift.AddMember("status", EnabledBaselineDriftStatus)
-
-	EnabledBaselineDriftTypes_inheritance = EnabledBaselineDriftTypes.AddMember("inheritance", EnabledBaselineInheritanceDrift)
-
-	EnabledBaselineDriftStatusSummary_types = EnabledBaselineDriftStatusSummary.AddMember("types", EnabledBaselineDriftTypes)
-
-	EnablementStatus_SUCCEEDED = EnablementStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	EnablementStatus_FAILED = EnablementStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	EnablementStatus_UNDER_CHANGE = EnablementStatus.AddMember("UNDER_CHANGE", smithyprelude.Unit)
-
-	EnablementStatusSummary_status = EnablementStatusSummary.AddMember("status", EnablementStatus)
-
-	EnablementStatusSummary_lastOperationIdentifier = EnablementStatusSummary.AddMember("lastOperationIdentifier", _OperationIdentifier)
-
-	EnabledBaselineParameterSummary_key = EnabledBaselineParameterSummary.AddMember("key", smithyprelude.String)
-
-	EnabledBaselineParameterSummary_value = EnabledBaselineParameterSummary.AddMember("value", _EnabledBaselineParameterDocument)
-
-	_EnabledBaselineParameterSummaries_member = _EnabledBaselineParameterSummaries.AddMember("member", EnabledBaselineParameterSummary)
-
-	EnabledBaselineDetails_arn = EnabledBaselineDetails.AddMember("arn", _Arn)
-
-	EnabledBaselineDetails_baselineIdentifier = EnabledBaselineDetails.AddMember("baselineIdentifier", smithyprelude.String)
-
-	EnabledBaselineDetails_baselineVersion = EnabledBaselineDetails.AddMember("baselineVersion", smithyprelude.String)
-
-	EnabledBaselineDetails_driftStatusSummary = EnabledBaselineDetails.AddMember("driftStatusSummary", EnabledBaselineDriftStatusSummary)
-
-	EnabledBaselineDetails_targetIdentifier = EnabledBaselineDetails.AddMember("targetIdentifier", smithyprelude.String)
-
-	EnabledBaselineDetails_parentIdentifier = EnabledBaselineDetails.AddMember("parentIdentifier", _Arn)
-
-	EnabledBaselineDetails_statusSummary = EnabledBaselineDetails.AddMember("statusSummary", EnablementStatusSummary)
-
-	EnabledBaselineDetails_parameters = EnabledBaselineDetails.AddMember("parameters", _EnabledBaselineParameterSummaries)
-
-	_EnabledBaselineDriftStatuses_member = _EnabledBaselineDriftStatuses.AddMember("member", EnabledBaselineDriftStatus)
-
-	_EnabledBaselineEnablementStatuses_member = _EnabledBaselineEnablementStatuses.AddMember("member", EnablementStatus)
-
-	_EnabledBaselineTargetIdentifiers_member = _EnabledBaselineTargetIdentifiers.AddMember("member", _Arn)
-
-	_EnabledBaselineParentIdentifiers_member = _EnabledBaselineParentIdentifiers.AddMember("member", _Arn)
-
-	EnabledBaselineFilter_targetIdentifiers = EnabledBaselineFilter.AddMember("targetIdentifiers", _EnabledBaselineTargetIdentifiers)
-
-	EnabledBaselineFilter_baselineIdentifiers = EnabledBaselineFilter.AddMember("baselineIdentifiers", _EnabledBaselineBaselineIdentifiers)
-
-	EnabledBaselineFilter_parentIdentifiers = EnabledBaselineFilter.AddMember("parentIdentifiers", _EnabledBaselineParentIdentifiers)
-
-	EnabledBaselineFilter_statuses = EnabledBaselineFilter.AddMember("statuses", _EnabledBaselineEnablementStatuses)
-
-	EnabledBaselineFilter_inheritanceDriftStatuses = EnabledBaselineFilter.AddMember("inheritanceDriftStatuses", _EnabledBaselineDriftStatuses)
-
-	EnabledBaselineParameter_key = EnabledBaselineParameter.AddMember("key", smithyprelude.String)
-
-	EnabledBaselineParameter_value = EnabledBaselineParameter.AddMember("value", _EnabledBaselineParameterDocument)
-
-	_EnabledBaselineParameters_member = _EnabledBaselineParameters.AddMember("member", EnabledBaselineParameter)
-
-	EnabledBaselineSummary_arn = EnabledBaselineSummary.AddMember("arn", _Arn)
-
-	EnabledBaselineSummary_baselineIdentifier = EnabledBaselineSummary.AddMember("baselineIdentifier", smithyprelude.String)
-
-	EnabledBaselineSummary_baselineVersion = EnabledBaselineSummary.AddMember("baselineVersion", smithyprelude.String)
-
-	EnabledBaselineSummary_driftStatusSummary = EnabledBaselineSummary.AddMember("driftStatusSummary", EnabledBaselineDriftStatusSummary)
-
-	EnabledBaselineSummary_targetIdentifier = EnabledBaselineSummary.AddMember("targetIdentifier", smithyprelude.String)
-
-	EnabledBaselineSummary_parentIdentifier = EnabledBaselineSummary.AddMember("parentIdentifier", _Arn)
-
-	EnabledBaselineSummary_statusSummary = EnabledBaselineSummary.AddMember("statusSummary", EnablementStatusSummary)
-
-	_EnabledBaselines_member = _EnabledBaselines.AddMember("member", EnabledBaselineSummary)
-
-	Region_name = Region.AddMember("name", _RegionName)
-
-	_TargetRegions_member = _TargetRegions.AddMember("member", Region)
-
-	EnabledControlParameterSummary_key = EnabledControlParameterSummary.AddMember("key", smithyprelude.String)
-
-	EnabledControlParameterSummary_value = EnabledControlParameterSummary.AddMember("value", smithyprelude.Document)
-
-	_EnabledControlParameterSummaries_member = _EnabledControlParameterSummaries.AddMember("member", EnabledControlParameterSummary)
-
-	EnabledControlDetails_arn = EnabledControlDetails.AddMember("arn", _Arn)
-
-	EnabledControlDetails_controlIdentifier = EnabledControlDetails.AddMember("controlIdentifier", _ControlIdentifier)
-
-	EnabledControlDetails_targetIdentifier = EnabledControlDetails.AddMember("targetIdentifier", _TargetIdentifier)
-
-	EnabledControlDetails_statusSummary = EnabledControlDetails.AddMember("statusSummary", EnablementStatusSummary)
-
-	EnabledControlDetails_driftStatusSummary = EnabledControlDetails.AddMember("driftStatusSummary", DriftStatusSummary)
-
-	EnabledControlDetails_parentIdentifier = EnabledControlDetails.AddMember("parentIdentifier", _ParentIdentifier)
-
-	EnabledControlDetails_targetRegions = EnabledControlDetails.AddMember("targetRegions", _TargetRegions)
-
-	EnabledControlDetails_parameters = EnabledControlDetails.AddMember("parameters", _EnabledControlParameterSummaries)
-
-	_EnablementStatuses_member = _EnablementStatuses.AddMember("member", EnablementStatus)
-
-	_ParentIdentifiers_member = _ParentIdentifiers.AddMember("member", _ParentIdentifier)
-
-	EnabledControlFilter_controlIdentifiers = EnabledControlFilter.AddMember("controlIdentifiers", _ControlIdentifiers)
-
-	EnabledControlFilter_statuses = EnabledControlFilter.AddMember("statuses", _EnablementStatuses)
-
-	EnabledControlFilter_driftStatuses = EnabledControlFilter.AddMember("driftStatuses", _DriftStatuses)
-
-	EnabledControlFilter_parentIdentifiers = EnabledControlFilter.AddMember("parentIdentifiers", _ParentIdentifiers)
-
-	EnabledControlFilter_inheritanceDriftStatuses = EnabledControlFilter.AddMember("inheritanceDriftStatuses", _DriftStatuses)
-
-	EnabledControlFilter_resourceDriftStatuses = EnabledControlFilter.AddMember("resourceDriftStatuses", _DriftStatuses)
-
-	EnabledControlParameter_key = EnabledControlParameter.AddMember("key", smithyprelude.String)
-
-	EnabledControlParameter_value = EnabledControlParameter.AddMember("value", smithyprelude.Document)
-
-	_EnabledControlParameters_member = _EnabledControlParameters.AddMember("member", EnabledControlParameter)
-
-	EnabledControlSummary_arn = EnabledControlSummary.AddMember("arn", _Arn)
-
-	EnabledControlSummary_controlIdentifier = EnabledControlSummary.AddMember("controlIdentifier", _ControlIdentifier)
-
-	EnabledControlSummary_targetIdentifier = EnabledControlSummary.AddMember("targetIdentifier", _TargetIdentifier)
-
-	EnabledControlSummary_statusSummary = EnabledControlSummary.AddMember("statusSummary", EnablementStatusSummary)
-
-	EnabledControlSummary_driftStatusSummary = EnabledControlSummary.AddMember("driftStatusSummary", DriftStatusSummary)
-
-	EnabledControlSummary_parentIdentifier = EnabledControlSummary.AddMember("parentIdentifier", _ParentIdentifier)
-
-	_EnabledControls_member = _EnabledControls.AddMember("member", EnabledControlSummary)
-
-	InternalServerException_message = InternalServerException.AddMember("message", smithyprelude.String)
-
-	RemediationType_INHERITANCE_DRIFT = RemediationType.AddMember("INHERITANCE_DRIFT", smithyprelude.Unit)
-
-	_RemediationTypes_member = _RemediationTypes.AddMember("member", RemediationType)
-
-	LandingZoneStatus_ACTIVE = LandingZoneStatus.AddMember("ACTIVE", smithyprelude.Unit)
-
-	LandingZoneStatus_PROCESSING = LandingZoneStatus.AddMember("PROCESSING", smithyprelude.Unit)
-
-	LandingZoneStatus_FAILED = LandingZoneStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	LandingZoneDriftStatus_DRIFTED = LandingZoneDriftStatus.AddMember("DRIFTED", smithyprelude.Unit)
-
-	LandingZoneDriftStatus_IN_SYNC = LandingZoneDriftStatus.AddMember("IN_SYNC", smithyprelude.Unit)
-
-	LandingZoneDriftStatusSummary_status = LandingZoneDriftStatusSummary.AddMember("status", LandingZoneDriftStatus)
-
-	LandingZoneDetail_version = LandingZoneDetail.AddMember("version", _LandingZoneVersion)
-
-	LandingZoneDetail_remediationTypes = LandingZoneDetail.AddMember("remediationTypes", _RemediationTypes)
-
-	LandingZoneDetail_arn = LandingZoneDetail.AddMember("arn", _Arn)
-
-	LandingZoneDetail_status = LandingZoneDetail.AddMember("status", LandingZoneStatus)
-
-	LandingZoneDetail_latestAvailableVersion = LandingZoneDetail.AddMember("latestAvailableVersion", _LandingZoneVersion)
-
-	LandingZoneDetail_driftStatus = LandingZoneDetail.AddMember("driftStatus", LandingZoneDriftStatusSummary)
-
-	LandingZoneDetail_manifest = LandingZoneDetail.AddMember("manifest", _Manifest)
-
-	LandingZoneOperationType_DELETE = LandingZoneOperationType.AddMember("DELETE", smithyprelude.Unit)
-
-	LandingZoneOperationType_CREATE = LandingZoneOperationType.AddMember("CREATE", smithyprelude.Unit)
-
-	LandingZoneOperationType_UPDATE = LandingZoneOperationType.AddMember("UPDATE", smithyprelude.Unit)
-
-	LandingZoneOperationType_RESET = LandingZoneOperationType.AddMember("RESET", smithyprelude.Unit)
-
-	LandingZoneOperationStatus_SUCCEEDED = LandingZoneOperationStatus.AddMember("SUCCEEDED", smithyprelude.Unit)
-
-	LandingZoneOperationStatus_FAILED = LandingZoneOperationStatus.AddMember("FAILED", smithyprelude.Unit)
-
-	LandingZoneOperationStatus_IN_PROGRESS = LandingZoneOperationStatus.AddMember("IN_PROGRESS", smithyprelude.Unit)
-
-	LandingZoneOperationDetail_operationType = LandingZoneOperationDetail.AddMember("operationType", LandingZoneOperationType)
-
-	LandingZoneOperationDetail_operationIdentifier = LandingZoneOperationDetail.AddMember("operationIdentifier", _OperationIdentifier)
-
-	LandingZoneOperationDetail_status = LandingZoneOperationDetail.AddMember("status", LandingZoneOperationStatus)
-
-	LandingZoneOperationDetail_startTime = LandingZoneOperationDetail.AddMember("startTime", _Timestamp)
-
-	LandingZoneOperationDetail_endTime = LandingZoneOperationDetail.AddMember("endTime", _Timestamp)
-
-	LandingZoneOperationDetail_statusMessage = LandingZoneOperationDetail.AddMember("statusMessage", smithyprelude.String)
-
-	_LandingZoneOperationTypes_member = _LandingZoneOperationTypes.AddMember("member", LandingZoneOperationType)
-
-	_LandingZoneOperationStatuses_member = _LandingZoneOperationStatuses.AddMember("member", LandingZoneOperationStatus)
-
-	LandingZoneOperationFilter_types = LandingZoneOperationFilter.AddMember("types", _LandingZoneOperationTypes)
-
-	LandingZoneOperationFilter_statuses = LandingZoneOperationFilter.AddMember("statuses", _LandingZoneOperationStatuses)
-
-	LandingZoneOperationSummary_operationType = LandingZoneOperationSummary.AddMember("operationType", LandingZoneOperationType)
-
-	LandingZoneOperationSummary_operationIdentifier = LandingZoneOperationSummary.AddMember("operationIdentifier", _OperationIdentifier)
-
-	LandingZoneOperationSummary_status = LandingZoneOperationSummary.AddMember("status", LandingZoneOperationStatus)
-
-	_LandingZoneOperations_member = _LandingZoneOperations.AddMember("member", LandingZoneOperationSummary)
-
-	LandingZoneSummary_arn = LandingZoneSummary.AddMember("arn", _Arn)
-
-	_LandingZoneSummaries_member = _LandingZoneSummaries.AddMember("member", LandingZoneSummary)
-
-	ResourceNotFoundException_message = ResourceNotFoundException.AddMember("message", smithyprelude.String)
-
-	ServiceQuotaExceededException_message = ServiceQuotaExceededException.AddMember("message", smithyprelude.String)
-
-	_TagKeys_member = _TagKeys.AddMember("member", _TagKey)
-
-	_TagMap_key = _TagMap.AddMember("key", _TagKey)
-
-	_TagMap_value = _TagMap.AddMember("value", _TagValue)
-
-	ThrottlingException_message = ThrottlingException.AddMember("message", smithyprelude.String)
-
-	ThrottlingException_serviceCode = ThrottlingException.AddMember("serviceCode", smithyprelude.String)
-
-	ThrottlingException_quotaCode = ThrottlingException.AddMember("quotaCode", smithyprelude.String)
-
-	ThrottlingException_retryAfterSeconds = ThrottlingException.AddMember("retryAfterSeconds", smithyprelude.Integer, &smithytraits.HTTPHeader{Name: "Retry-After"})
-
-	ValidationException_message = ValidationException.AddMember("message", smithyprelude.String)
-
-	CreateLandingZoneInput_version = CreateLandingZoneInput.AddMember("version", _LandingZoneVersion)
-
-	CreateLandingZoneInput_remediationTypes = CreateLandingZoneInput.AddMember("remediationTypes", _RemediationTypes)
-
-	CreateLandingZoneInput_tags = CreateLandingZoneInput.AddMember("tags", _TagMap)
-
-	CreateLandingZoneInput_manifest = CreateLandingZoneInput.AddMember("manifest", _Manifest)
-
-	CreateLandingZoneOutput_arn = CreateLandingZoneOutput.AddMember("arn", _Arn)
-
-	CreateLandingZoneOutput_operationIdentifier = CreateLandingZoneOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	DeleteLandingZoneInput_landingZoneIdentifier = DeleteLandingZoneInput.AddMember("landingZoneIdentifier", smithyprelude.String)
-
-	DeleteLandingZoneOutput_operationIdentifier = DeleteLandingZoneOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	DisableBaselineInput_enabledBaselineIdentifier = DisableBaselineInput.AddMember("enabledBaselineIdentifier", _Arn)
-
-	DisableBaselineOutput_operationIdentifier = DisableBaselineOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	DisableControlInput_controlIdentifier = DisableControlInput.AddMember("controlIdentifier", _ControlIdentifier)
-
-	DisableControlInput_targetIdentifier = DisableControlInput.AddMember("targetIdentifier", _TargetIdentifier)
-
-	DisableControlInput_enabledControlIdentifier = DisableControlInput.AddMember("enabledControlIdentifier", _Arn)
-
-	DisableControlOutput_operationIdentifier = DisableControlOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	EnableBaselineInput_baselineVersion = EnableBaselineInput.AddMember("baselineVersion", _BaselineVersion)
-
-	EnableBaselineInput_parameters = EnableBaselineInput.AddMember("parameters", _EnabledBaselineParameters)
-
-	EnableBaselineInput_baselineIdentifier = EnableBaselineInput.AddMember("baselineIdentifier", _Arn)
-
-	EnableBaselineInput_targetIdentifier = EnableBaselineInput.AddMember("targetIdentifier", _Arn)
-
-	EnableBaselineInput_tags = EnableBaselineInput.AddMember("tags", _TagMap)
-
-	EnableBaselineOutput_operationIdentifier = EnableBaselineOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	EnableBaselineOutput_arn = EnableBaselineOutput.AddMember("arn", _Arn)
-
-	EnableControlInput_controlIdentifier = EnableControlInput.AddMember("controlIdentifier", _ControlIdentifier)
-
-	EnableControlInput_targetIdentifier = EnableControlInput.AddMember("targetIdentifier", _TargetIdentifier)
-
-	EnableControlInput_tags = EnableControlInput.AddMember("tags", _TagMap)
-
-	EnableControlInput_parameters = EnableControlInput.AddMember("parameters", _EnabledControlParameters)
-
-	EnableControlOutput_operationIdentifier = EnableControlOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	EnableControlOutput_arn = EnableControlOutput.AddMember("arn", _Arn)
-
-	GetBaselineInput_baselineIdentifier = GetBaselineInput.AddMember("baselineIdentifier", _BaselineArn)
-
-	GetBaselineOperationInput_operationIdentifier = GetBaselineOperationInput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	GetBaselineOperationOutput_baselineOperation = GetBaselineOperationOutput.AddMember("baselineOperation", BaselineOperation)
-
-	GetBaselineOutput_arn = GetBaselineOutput.AddMember("arn", _BaselineArn)
-
-	GetBaselineOutput_name = GetBaselineOutput.AddMember("name", smithyprelude.String)
-
-	GetBaselineOutput_description = GetBaselineOutput.AddMember("description", smithyprelude.String)
-
-	GetControlOperationInput_operationIdentifier = GetControlOperationInput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	GetControlOperationOutput_controlOperation = GetControlOperationOutput.AddMember("controlOperation", ControlOperation)
-
-	GetEnabledBaselineInput_enabledBaselineIdentifier = GetEnabledBaselineInput.AddMember("enabledBaselineIdentifier", _Arn)
-
-	GetEnabledBaselineOutput_enabledBaselineDetails = GetEnabledBaselineOutput.AddMember("enabledBaselineDetails", EnabledBaselineDetails)
-
-	GetEnabledControlInput_enabledControlIdentifier = GetEnabledControlInput.AddMember("enabledControlIdentifier", _Arn)
-
-	GetEnabledControlOutput_enabledControlDetails = GetEnabledControlOutput.AddMember("enabledControlDetails", EnabledControlDetails)
-
-	GetLandingZoneInput_landingZoneIdentifier = GetLandingZoneInput.AddMember("landingZoneIdentifier", smithyprelude.String)
-
-	GetLandingZoneOperationInput_operationIdentifier = GetLandingZoneOperationInput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	GetLandingZoneOperationOutput_operationDetails = GetLandingZoneOperationOutput.AddMember("operationDetails", LandingZoneOperationDetail)
-
-	GetLandingZoneOutput_landingZone = GetLandingZoneOutput.AddMember("landingZone", LandingZoneDetail)
-
-	ListBaselinesInput_nextToken = ListBaselinesInput.AddMember("nextToken", smithyprelude.String)
-
-	ListBaselinesInput_maxResults = ListBaselinesInput.AddMember("maxResults", _ListBaselinesMaxResults)
-
-	ListBaselinesOutput_baselines = ListBaselinesOutput.AddMember("baselines", _Baselines)
-
-	ListBaselinesOutput_nextToken = ListBaselinesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListControlOperationsInput_filter = ListControlOperationsInput.AddMember("filter", ControlOperationFilter)
-
-	ListControlOperationsInput_nextToken = ListControlOperationsInput.AddMember("nextToken", _ListControlOperationsNextToken)
-
-	ListControlOperationsInput_maxResults = ListControlOperationsInput.AddMember("maxResults", _ListControlOperationsMaxResults)
-
-	ListControlOperationsOutput_controlOperations = ListControlOperationsOutput.AddMember("controlOperations", _ControlOperations)
-
-	ListControlOperationsOutput_nextToken = ListControlOperationsOutput.AddMember("nextToken", _ListControlOperationsNextToken)
-
-	ListEnabledBaselinesInput_filter = ListEnabledBaselinesInput.AddMember("filter", EnabledBaselineFilter)
-
-	ListEnabledBaselinesInput_nextToken = ListEnabledBaselinesInput.AddMember("nextToken", _ListEnabledBaselinesNextToken)
-
-	ListEnabledBaselinesInput_maxResults = ListEnabledBaselinesInput.AddMember("maxResults", _ListEnabledBaselinesMaxResults)
-
-	ListEnabledBaselinesInput_includeChildren = ListEnabledBaselinesInput.AddMember("includeChildren", smithyprelude.Boolean)
-
-	ListEnabledBaselinesOutput_enabledBaselines = ListEnabledBaselinesOutput.AddMember("enabledBaselines", _EnabledBaselines)
-
-	ListEnabledBaselinesOutput_nextToken = ListEnabledBaselinesOutput.AddMember("nextToken", _ListEnabledBaselinesNextToken)
-
-	ListEnabledControlsInput_targetIdentifier = ListEnabledControlsInput.AddMember("targetIdentifier", _TargetIdentifier)
-
-	ListEnabledControlsInput_nextToken = ListEnabledControlsInput.AddMember("nextToken", smithyprelude.String)
-
-	ListEnabledControlsInput_maxResults = ListEnabledControlsInput.AddMember("maxResults", _MaxResults)
-
-	ListEnabledControlsInput_filter = ListEnabledControlsInput.AddMember("filter", EnabledControlFilter)
-
-	ListEnabledControlsInput_includeChildren = ListEnabledControlsInput.AddMember("includeChildren", smithyprelude.Boolean)
-
-	ListEnabledControlsOutput_enabledControls = ListEnabledControlsOutput.AddMember("enabledControls", _EnabledControls)
-
-	ListEnabledControlsOutput_nextToken = ListEnabledControlsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListLandingZoneOperationsInput_filter = ListLandingZoneOperationsInput.AddMember("filter", LandingZoneOperationFilter)
-
-	ListLandingZoneOperationsInput_nextToken = ListLandingZoneOperationsInput.AddMember("nextToken", smithyprelude.String)
-
-	ListLandingZoneOperationsInput_maxResults = ListLandingZoneOperationsInput.AddMember("maxResults", _ListLandingZoneOperationsMaxResults)
-
-	ListLandingZoneOperationsOutput_landingZoneOperations = ListLandingZoneOperationsOutput.AddMember("landingZoneOperations", _LandingZoneOperations)
-
-	ListLandingZoneOperationsOutput_nextToken = ListLandingZoneOperationsOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListLandingZonesInput_nextToken = ListLandingZonesInput.AddMember("nextToken", smithyprelude.String)
-
-	ListLandingZonesInput_maxResults = ListLandingZonesInput.AddMember("maxResults", _ListLandingZonesMaxResults)
-
-	ListLandingZonesOutput_landingZones = ListLandingZonesOutput.AddMember("landingZones", _LandingZoneSummaries)
-
-	ListLandingZonesOutput_nextToken = ListLandingZonesOutput.AddMember("nextToken", smithyprelude.String)
-
-	ListTagsForResourceInput_resourceArn = ListTagsForResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	ListTagsForResourceOutput_tags = ListTagsForResourceOutput.AddMember("tags", _TagMap)
-
-	ResetEnabledBaselineInput_enabledBaselineIdentifier = ResetEnabledBaselineInput.AddMember("enabledBaselineIdentifier", _Arn)
-
-	ResetEnabledBaselineOutput_operationIdentifier = ResetEnabledBaselineOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	ResetEnabledControlInput_enabledControlIdentifier = ResetEnabledControlInput.AddMember("enabledControlIdentifier", _Arn)
-
-	ResetEnabledControlOutput_operationIdentifier = ResetEnabledControlOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	ResetLandingZoneInput_landingZoneIdentifier = ResetLandingZoneInput.AddMember("landingZoneIdentifier", smithyprelude.String)
-
-	ResetLandingZoneOutput_operationIdentifier = ResetLandingZoneOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	TagResourceInput_resourceArn = TagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	TagResourceInput_tags = TagResourceInput.AddMember("tags", _TagMap)
-
-	UntagResourceInput_resourceArn = UntagResourceInput.AddMember("resourceArn", _Arn, &smithytraits.HTTPLabel{})
-
-	UntagResourceInput_tagKeys = UntagResourceInput.AddMember("tagKeys", _TagKeys, &smithytraits.HTTPQuery{Name: "tagKeys"})
-
-	UpdateEnabledBaselineInput_baselineVersion = UpdateEnabledBaselineInput.AddMember("baselineVersion", _BaselineVersion)
-
-	UpdateEnabledBaselineInput_parameters = UpdateEnabledBaselineInput.AddMember("parameters", _EnabledBaselineParameters)
-
-	UpdateEnabledBaselineInput_enabledBaselineIdentifier = UpdateEnabledBaselineInput.AddMember("enabledBaselineIdentifier", _Arn)
-
-	UpdateEnabledBaselineOutput_operationIdentifier = UpdateEnabledBaselineOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	UpdateEnabledControlInput_parameters = UpdateEnabledControlInput.AddMember("parameters", _EnabledControlParameters)
-
-	UpdateEnabledControlInput_enabledControlIdentifier = UpdateEnabledControlInput.AddMember("enabledControlIdentifier", _Arn)
-
-	UpdateEnabledControlOutput_operationIdentifier = UpdateEnabledControlOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-	UpdateLandingZoneInput_version = UpdateLandingZoneInput.AddMember("version", _LandingZoneVersion)
-
-	UpdateLandingZoneInput_remediationTypes = UpdateLandingZoneInput.AddMember("remediationTypes", _RemediationTypes)
-
-	UpdateLandingZoneInput_landingZoneIdentifier = UpdateLandingZoneInput.AddMember("landingZoneIdentifier", smithyprelude.String)
-
-	UpdateLandingZoneInput_manifest = UpdateLandingZoneInput.AddMember("manifest", _Manifest)
-
-	UpdateLandingZoneOutput_operationIdentifier = UpdateLandingZoneOutput.AddMember("operationIdentifier", _OperationIdentifier)
-
-}
+	Code: 200}}, DirectMask: 0x2}
+var t28 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 403}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t29 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}}
+var t30 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 409}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t31 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, nil, nil, nil, &smithytraits.TimestampFormat{Format: "date-time"}}, DirectMask: 0x400}
+var t32 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 500}}, Other: []smithy.Trait{&smithytraits.Error{Type: "server"}}, DirectMask: 0x40}
+var t33 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 404}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t34 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 402}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t35 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 429}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t36 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, nil, &smithytraits.HTTPHeader{Name: "Retry-After"}}, DirectMask: 0x80}
+var t37 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, nil, nil, &smithytraits.HTTPError{Code: 400}}, Other: []smithy.Trait{&smithytraits.Error{Type: "client"}}, DirectMask: 0x40}
+var t38 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, &smithytraits.HTTPLabel{}}, DirectMask: 0x4}
+var t39 = smithy.TraitSet{Indexed: []smithy.Trait{nil, nil, nil, nil, &smithytraits.HTTPQuery{Name: "tagKeys"}}, DirectMask: 0x10}
+
+var mAccessDeniedException = smithy.SchemaMembers{List: []*smithy.Schema{&sAccessDeniedException_message}}
+var mBaselineOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sBaselineOperation_operationIdentifier, &sBaselineOperation_operationType, &sBaselineOperation_status, &sBaselineOperation_startTime, &sBaselineOperation_endTime, &sBaselineOperation_statusMessage}}
+var mBaselineOperationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sBaselineOperationStatus_SUCCEEDED, &sBaselineOperationStatus_FAILED, &sBaselineOperationStatus_IN_PROGRESS}}
+var mBaselineOperationType = smithy.SchemaMembers{List: []*smithy.Schema{&sBaselineOperationType_ENABLE_BASELINE, &sBaselineOperationType_DISABLE_BASELINE, &sBaselineOperationType_UPDATE_ENABLED_BASELINE, &sBaselineOperationType_RESET_ENABLED_BASELINE}}
+var m_Baselines = smithy.SchemaMembers{List: []*smithy.Schema{&s_Baselines_member}}
+var mBaselineSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sBaselineSummary_arn, &sBaselineSummary_name, &sBaselineSummary_description}}
+var mConflictException = smithy.SchemaMembers{List: []*smithy.Schema{&sConflictException_message}}
+var m_ControlIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlIdentifiers_member}}
+var mControlOperation = smithy.SchemaMembers{List: []*smithy.Schema{&sControlOperation_operationType, &sControlOperation_startTime, &sControlOperation_endTime, &sControlOperation_status, &sControlOperation_statusMessage, &sControlOperation_operationIdentifier, &sControlOperation_controlIdentifier, &sControlOperation_targetIdentifier, &sControlOperation_enabledControlIdentifier}, Seed: 1, Slots: []uint16{
+	2, 0, 0, 5, 3, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 6, 0, 0, 0, 0, 4, 0,
+	1, 0, 0, 0, 0, 7, 0, 0,
+}}
+var mControlOperationFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sControlOperationFilter_controlIdentifiers, &sControlOperationFilter_targetIdentifiers, &sControlOperationFilter_enabledControlIdentifiers, &sControlOperationFilter_statuses, &sControlOperationFilter_controlOperationTypes}}
+var m_ControlOperations = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlOperations_member}}
+var mControlOperationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sControlOperationStatus_SUCCEEDED, &sControlOperationStatus_FAILED, &sControlOperationStatus_IN_PROGRESS}}
+var m_ControlOperationStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlOperationStatuses_member}}
+var mControlOperationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sControlOperationSummary_operationType, &sControlOperationSummary_startTime, &sControlOperationSummary_endTime, &sControlOperationSummary_status, &sControlOperationSummary_statusMessage, &sControlOperationSummary_operationIdentifier, &sControlOperationSummary_controlIdentifier, &sControlOperationSummary_targetIdentifier, &sControlOperationSummary_enabledControlIdentifier}, Seed: 1, Slots: []uint16{
+	2, 0, 0, 5, 3, 0, 9, 0, 0, 0, 0, 0, 8, 0, 0, 0, 0, 6, 0, 0, 0, 0, 4, 0,
+	1, 0, 0, 0, 0, 7, 0, 0,
+}}
+var mControlOperationType = smithy.SchemaMembers{List: []*smithy.Schema{&sControlOperationType_ENABLE_CONTROL, &sControlOperationType_DISABLE_CONTROL, &sControlOperationType_UPDATE_ENABLED_CONTROL, &sControlOperationType_RESET_ENABLED_CONTROL}}
+var m_ControlOperationTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_ControlOperationTypes_member}}
+var mDriftStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sDriftStatus_DRIFTED, &sDriftStatus_IN_SYNC, &sDriftStatus_NOT_CHECKING, &sDriftStatus_UNKNOWN}}
+var m_DriftStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_DriftStatuses_member}}
+var mDriftStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sDriftStatusSummary_driftStatus, &sDriftStatusSummary_types}}
+var m_EnabledBaselineBaselineIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselineBaselineIdentifiers_member}}
+var mEnabledBaselineDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineDetails_arn, &sEnabledBaselineDetails_baselineIdentifier, &sEnabledBaselineDetails_baselineVersion, &sEnabledBaselineDetails_driftStatusSummary, &sEnabledBaselineDetails_targetIdentifier, &sEnabledBaselineDetails_parentIdentifier, &sEnabledBaselineDetails_statusSummary, &sEnabledBaselineDetails_parameters}}
+var mEnabledBaselineDriftStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineDriftStatus_IN_SYNC, &sEnabledBaselineDriftStatus_DRIFTED}}
+var m_EnabledBaselineDriftStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselineDriftStatuses_member}}
+var mEnabledBaselineDriftStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineDriftStatusSummary_types}}
+var mEnabledBaselineDriftTypes = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineDriftTypes_inheritance}}
+var m_EnabledBaselineEnablementStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselineEnablementStatuses_member}}
+var mEnabledBaselineFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineFilter_targetIdentifiers, &sEnabledBaselineFilter_baselineIdentifiers, &sEnabledBaselineFilter_parentIdentifiers, &sEnabledBaselineFilter_statuses, &sEnabledBaselineFilter_inheritanceDriftStatuses}}
+var mEnabledBaselineInheritanceDrift = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineInheritanceDrift_status}}
+var mEnabledBaselineParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineParameter_key, &sEnabledBaselineParameter_value}}
+var m_EnabledBaselineParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselineParameters_member}}
+var m_EnabledBaselineParameterSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselineParameterSummaries_member}}
+var mEnabledBaselineParameterSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineParameterSummary_key, &sEnabledBaselineParameterSummary_value}}
+var m_EnabledBaselineParentIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselineParentIdentifiers_member}}
+var m_EnabledBaselines = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselines_member}}
+var mEnabledBaselineSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledBaselineSummary_arn, &sEnabledBaselineSummary_baselineIdentifier, &sEnabledBaselineSummary_baselineVersion, &sEnabledBaselineSummary_driftStatusSummary, &sEnabledBaselineSummary_targetIdentifier, &sEnabledBaselineSummary_parentIdentifier, &sEnabledBaselineSummary_statusSummary}}
+var m_EnabledBaselineTargetIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledBaselineTargetIdentifiers_member}}
+var mEnabledControlDetails = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlDetails_arn, &sEnabledControlDetails_controlIdentifier, &sEnabledControlDetails_targetIdentifier, &sEnabledControlDetails_statusSummary, &sEnabledControlDetails_driftStatusSummary, &sEnabledControlDetails_parentIdentifier, &sEnabledControlDetails_targetRegions, &sEnabledControlDetails_parameters}}
+var mEnabledControlDriftTypes = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlDriftTypes_inheritance, &sEnabledControlDriftTypes_resource}}
+var mEnabledControlFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlFilter_controlIdentifiers, &sEnabledControlFilter_statuses, &sEnabledControlFilter_driftStatuses, &sEnabledControlFilter_parentIdentifiers, &sEnabledControlFilter_inheritanceDriftStatuses, &sEnabledControlFilter_resourceDriftStatuses}}
+var m_EnabledControlIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledControlIdentifiers_member}}
+var mEnabledControlInheritanceDrift = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlInheritanceDrift_status}}
+var mEnabledControlParameter = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlParameter_key, &sEnabledControlParameter_value}}
+var m_EnabledControlParameters = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledControlParameters_member}}
+var m_EnabledControlParameterSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledControlParameterSummaries_member}}
+var mEnabledControlParameterSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlParameterSummary_key, &sEnabledControlParameterSummary_value}}
+var mEnabledControlResourceDrift = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlResourceDrift_status}}
+var m_EnabledControls = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnabledControls_member}}
+var mEnabledControlSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnabledControlSummary_arn, &sEnabledControlSummary_controlIdentifier, &sEnabledControlSummary_targetIdentifier, &sEnabledControlSummary_statusSummary, &sEnabledControlSummary_driftStatusSummary, &sEnabledControlSummary_parentIdentifier}}
+var mEnablementStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sEnablementStatus_SUCCEEDED, &sEnablementStatus_FAILED, &sEnablementStatus_UNDER_CHANGE}}
+var m_EnablementStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_EnablementStatuses_member}}
+var mEnablementStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sEnablementStatusSummary_status, &sEnablementStatusSummary_lastOperationIdentifier}}
+var mInternalServerException = smithy.SchemaMembers{List: []*smithy.Schema{&sInternalServerException_message}}
+var mLandingZoneDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneDetail_version, &sLandingZoneDetail_remediationTypes, &sLandingZoneDetail_arn, &sLandingZoneDetail_status, &sLandingZoneDetail_latestAvailableVersion, &sLandingZoneDetail_driftStatus, &sLandingZoneDetail_manifest}}
+var mLandingZoneDriftStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneDriftStatus_DRIFTED, &sLandingZoneDriftStatus_IN_SYNC}}
+var mLandingZoneDriftStatusSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneDriftStatusSummary_status}}
+var mLandingZoneOperationDetail = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneOperationDetail_operationType, &sLandingZoneOperationDetail_operationIdentifier, &sLandingZoneOperationDetail_status, &sLandingZoneOperationDetail_startTime, &sLandingZoneOperationDetail_endTime, &sLandingZoneOperationDetail_statusMessage}}
+var mLandingZoneOperationFilter = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneOperationFilter_types, &sLandingZoneOperationFilter_statuses}}
+var m_LandingZoneOperations = smithy.SchemaMembers{List: []*smithy.Schema{&s_LandingZoneOperations_member}}
+var mLandingZoneOperationStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneOperationStatus_SUCCEEDED, &sLandingZoneOperationStatus_FAILED, &sLandingZoneOperationStatus_IN_PROGRESS}}
+var m_LandingZoneOperationStatuses = smithy.SchemaMembers{List: []*smithy.Schema{&s_LandingZoneOperationStatuses_member}}
+var mLandingZoneOperationSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneOperationSummary_operationType, &sLandingZoneOperationSummary_operationIdentifier, &sLandingZoneOperationSummary_status}}
+var mLandingZoneOperationType = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneOperationType_DELETE, &sLandingZoneOperationType_CREATE, &sLandingZoneOperationType_UPDATE, &sLandingZoneOperationType_RESET}}
+var m_LandingZoneOperationTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_LandingZoneOperationTypes_member}}
+var mLandingZoneStatus = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneStatus_ACTIVE, &sLandingZoneStatus_PROCESSING, &sLandingZoneStatus_FAILED}}
+var m_LandingZoneSummaries = smithy.SchemaMembers{List: []*smithy.Schema{&s_LandingZoneSummaries_member}}
+var mLandingZoneSummary = smithy.SchemaMembers{List: []*smithy.Schema{&sLandingZoneSummary_arn}}
+var m_ParentIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_ParentIdentifiers_member}}
+var mRegion = smithy.SchemaMembers{List: []*smithy.Schema{&sRegion_name}}
+var mRemediationType = smithy.SchemaMembers{List: []*smithy.Schema{&sRemediationType_INHERITANCE_DRIFT}}
+var m_RemediationTypes = smithy.SchemaMembers{List: []*smithy.Schema{&s_RemediationTypes_member}}
+var mResourceNotFoundException = smithy.SchemaMembers{List: []*smithy.Schema{&sResourceNotFoundException_message}}
+var mServiceQuotaExceededException = smithy.SchemaMembers{List: []*smithy.Schema{&sServiceQuotaExceededException_message}}
+var m_TagKeys = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagKeys_member}}
+var m_TagMap = smithy.SchemaMembers{List: []*smithy.Schema{&s_TagMap_key, &s_TagMap_value}}
+var m_TargetIdentifiers = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetIdentifiers_member}}
+var m_TargetRegions = smithy.SchemaMembers{List: []*smithy.Schema{&s_TargetRegions_member}}
+var mThrottlingException = smithy.SchemaMembers{List: []*smithy.Schema{&sThrottlingException_message, &sThrottlingException_serviceCode, &sThrottlingException_quotaCode, &sThrottlingException_retryAfterSeconds}}
+var mValidationException = smithy.SchemaMembers{List: []*smithy.Schema{&sValidationException_message}}
+var mCreateLandingZoneInput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLandingZoneInput_version, &sCreateLandingZoneInput_remediationTypes, &sCreateLandingZoneInput_tags, &sCreateLandingZoneInput_manifest}}
+var mCreateLandingZoneOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sCreateLandingZoneOutput_arn, &sCreateLandingZoneOutput_operationIdentifier}}
+var mDeleteLandingZoneInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLandingZoneInput_landingZoneIdentifier}}
+var mDeleteLandingZoneOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDeleteLandingZoneOutput_operationIdentifier}}
+var mDisableBaselineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableBaselineInput_enabledBaselineIdentifier}}
+var mDisableBaselineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableBaselineOutput_operationIdentifier}}
+var mDisableControlInput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableControlInput_controlIdentifier, &sDisableControlInput_targetIdentifier, &sDisableControlInput_enabledControlIdentifier}}
+var mDisableControlOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sDisableControlOutput_operationIdentifier}}
+var mEnableBaselineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableBaselineInput_baselineVersion, &sEnableBaselineInput_parameters, &sEnableBaselineInput_baselineIdentifier, &sEnableBaselineInput_targetIdentifier, &sEnableBaselineInput_tags}}
+var mEnableBaselineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableBaselineOutput_operationIdentifier, &sEnableBaselineOutput_arn}}
+var mEnableControlInput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableControlInput_controlIdentifier, &sEnableControlInput_targetIdentifier, &sEnableControlInput_tags, &sEnableControlInput_parameters}}
+var mEnableControlOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sEnableControlOutput_operationIdentifier, &sEnableControlOutput_arn}}
+var mGetBaselineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBaselineInput_baselineIdentifier}}
+var mGetBaselineOperationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBaselineOperationInput_operationIdentifier}}
+var mGetBaselineOperationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBaselineOperationOutput_baselineOperation}}
+var mGetBaselineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetBaselineOutput_arn, &sGetBaselineOutput_name, &sGetBaselineOutput_description}}
+var mGetControlOperationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetControlOperationInput_operationIdentifier}}
+var mGetControlOperationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetControlOperationOutput_controlOperation}}
+var mGetEnabledBaselineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnabledBaselineInput_enabledBaselineIdentifier}}
+var mGetEnabledBaselineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnabledBaselineOutput_enabledBaselineDetails}}
+var mGetEnabledControlInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnabledControlInput_enabledControlIdentifier}}
+var mGetEnabledControlOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetEnabledControlOutput_enabledControlDetails}}
+var mGetLandingZoneInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLandingZoneInput_landingZoneIdentifier}}
+var mGetLandingZoneOperationInput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLandingZoneOperationInput_operationIdentifier}}
+var mGetLandingZoneOperationOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLandingZoneOperationOutput_operationDetails}}
+var mGetLandingZoneOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sGetLandingZoneOutput_landingZone}}
+var mListBaselinesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBaselinesInput_nextToken, &sListBaselinesInput_maxResults}}
+var mListBaselinesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListBaselinesOutput_baselines, &sListBaselinesOutput_nextToken}}
+var mListControlOperationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlOperationsInput_filter, &sListControlOperationsInput_nextToken, &sListControlOperationsInput_maxResults}}
+var mListControlOperationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListControlOperationsOutput_controlOperations, &sListControlOperationsOutput_nextToken}}
+var mListEnabledBaselinesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnabledBaselinesInput_filter, &sListEnabledBaselinesInput_nextToken, &sListEnabledBaselinesInput_maxResults, &sListEnabledBaselinesInput_includeChildren}}
+var mListEnabledBaselinesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnabledBaselinesOutput_enabledBaselines, &sListEnabledBaselinesOutput_nextToken}}
+var mListEnabledControlsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnabledControlsInput_targetIdentifier, &sListEnabledControlsInput_nextToken, &sListEnabledControlsInput_maxResults, &sListEnabledControlsInput_filter, &sListEnabledControlsInput_includeChildren}}
+var mListEnabledControlsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListEnabledControlsOutput_enabledControls, &sListEnabledControlsOutput_nextToken}}
+var mListLandingZoneOperationsInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLandingZoneOperationsInput_filter, &sListLandingZoneOperationsInput_nextToken, &sListLandingZoneOperationsInput_maxResults}}
+var mListLandingZoneOperationsOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLandingZoneOperationsOutput_landingZoneOperations, &sListLandingZoneOperationsOutput_nextToken}}
+var mListLandingZonesInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLandingZonesInput_nextToken, &sListLandingZonesInput_maxResults}}
+var mListLandingZonesOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListLandingZonesOutput_landingZones, &sListLandingZonesOutput_nextToken}}
+var mListTagsForResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceInput_resourceArn}}
+var mListTagsForResourceOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sListTagsForResourceOutput_tags}}
+var mResetEnabledBaselineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetEnabledBaselineInput_enabledBaselineIdentifier}}
+var mResetEnabledBaselineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetEnabledBaselineOutput_operationIdentifier}}
+var mResetEnabledControlInput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetEnabledControlInput_enabledControlIdentifier}}
+var mResetEnabledControlOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetEnabledControlOutput_operationIdentifier}}
+var mResetLandingZoneInput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetLandingZoneInput_landingZoneIdentifier}}
+var mResetLandingZoneOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sResetLandingZoneOutput_operationIdentifier}}
+var mTagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sTagResourceInput_resourceArn, &sTagResourceInput_tags}}
+var mUntagResourceInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUntagResourceInput_resourceArn, &sUntagResourceInput_tagKeys}}
+var mUpdateEnabledBaselineInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnabledBaselineInput_baselineVersion, &sUpdateEnabledBaselineInput_parameters, &sUpdateEnabledBaselineInput_enabledBaselineIdentifier}}
+var mUpdateEnabledBaselineOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnabledBaselineOutput_operationIdentifier}}
+var mUpdateEnabledControlInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnabledControlInput_parameters, &sUpdateEnabledControlInput_enabledControlIdentifier}}
+var mUpdateEnabledControlOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateEnabledControlOutput_operationIdentifier}}
+var mUpdateLandingZoneInput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLandingZoneInput_version, &sUpdateLandingZoneInput_remediationTypes, &sUpdateLandingZoneInput_landingZoneIdentifier, &sUpdateLandingZoneInput_manifest}}
+var mUpdateLandingZoneOutput = smithy.SchemaMembers{List: []*smithy.Schema{&sUpdateLandingZoneOutput_operationIdentifier}}
+
+var sCreateLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZone, Traits: &t0, Type: smithy.ShapeTypeOperation})
+var sDeleteLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZone, Traits: &t1, Type: smithy.ShapeTypeOperation})
+var sDisableBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaseline, Traits: &t2, Type: smithy.ShapeTypeOperation})
+var sDisableControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControl, Traits: &t3, Type: smithy.ShapeTypeOperation})
+var sEnableBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaseline, Traits: &t4, Type: smithy.ShapeTypeOperation})
+var sEnableControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControl, Traits: &t5, Type: smithy.ShapeTypeOperation})
+var sGetBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaseline, Traits: &t6, Type: smithy.ShapeTypeOperation})
+var sGetBaselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperation, Traits: &t7, Type: smithy.ShapeTypeOperation})
+var sGetControlOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperation, Traits: &t8, Type: smithy.ShapeTypeOperation})
+var sGetEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaseline, Traits: &t9, Type: smithy.ShapeTypeOperation})
+var sGetEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControl, Traits: &t10, Type: smithy.ShapeTypeOperation})
+var sGetLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZone, Traits: &t11, Type: smithy.ShapeTypeOperation})
+var sGetLandingZoneOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperation, Traits: &t12, Type: smithy.ShapeTypeOperation})
+var sListBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselines, Traits: &t13, Type: smithy.ShapeTypeOperation})
+var sListControlOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperations, Traits: &t14, Type: smithy.ShapeTypeOperation})
+var sListEnabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselines, Traits: &t15, Type: smithy.ShapeTypeOperation})
+var sListEnabledControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControls, Traits: &t16, Type: smithy.ShapeTypeOperation})
+var sListLandingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperations, Traits: &t17, Type: smithy.ShapeTypeOperation})
+var sListLandingZones = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZones, Traits: &t18, Type: smithy.ShapeTypeOperation})
+var sListTagsForResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResource, Traits: &t19, Type: smithy.ShapeTypeOperation})
+var sResetEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaseline, Traits: &t20, Type: smithy.ShapeTypeOperation})
+var sResetEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControl, Traits: &t21, Type: smithy.ShapeTypeOperation})
+var sResetLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZone, Traits: &t22, Type: smithy.ShapeTypeOperation})
+var sTagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResource, Traits: &t23, Type: smithy.ShapeTypeOperation})
+var sUntagResource = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResource, Traits: &t24, Type: smithy.ShapeTypeOperation})
+var sUpdateEnabledBaseline = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaseline, Traits: &t25, Type: smithy.ShapeTypeOperation})
+var sUpdateEnabledControl = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControl, Traits: &t26, Type: smithy.ShapeTypeOperation})
+var sUpdateLandingZone = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZone, Traits: &t27, Type: smithy.ShapeTypeOperation})
+var s_AWSControlTowerApis = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_AWSControlTowerApis, Type: smithy.ShapeTypeService})
+var sAccessDeniedException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iAccessDeniedException, Members: &mAccessDeniedException, Traits: &t28, Type: smithy.ShapeTypeStructure})
+var s_Arn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_BaselineArn = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaselineArn, Type: smithy.ShapeTypeString})
+var sBaselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperation, Members: &mBaselineOperation, Type: smithy.ShapeTypeStructure})
+var sBaselineOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperationStatus, Members: &mBaselineOperationStatus, Type: smithy.ShapeTypeEnum})
+var sBaselineOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineOperationType, Members: &mBaselineOperationType, Type: smithy.ShapeTypeEnum})
+var s_Baselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Baselines, Members: &m_Baselines, Type: smithy.ShapeTypeList})
+var sBaselineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iBaselineSummary, Members: &mBaselineSummary, Type: smithy.ShapeTypeStructure})
+var s_BaselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_BaselineVersion, Type: smithy.ShapeTypeString})
+var sConflictException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iConflictException, Members: &mConflictException, Traits: &t30, Type: smithy.ShapeTypeStructure})
+var s_ControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var s_ControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList})
+var sControlOperation = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperation, Members: &mControlOperation, Type: smithy.ShapeTypeStructure})
+var sControlOperationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationFilter, Members: &mControlOperationFilter, Type: smithy.ShapeTypeStructure})
+var s_ControlOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperations, Members: &m_ControlOperations, Type: smithy.ShapeTypeList})
+var sControlOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum})
+var s_ControlOperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperationStatuses, Members: &m_ControlOperationStatuses, Type: smithy.ShapeTypeList})
+var sControlOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationSummary, Members: &mControlOperationSummary, Type: smithy.ShapeTypeStructure})
+var sControlOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum})
+var s_ControlOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ControlOperationTypes, Members: &m_ControlOperationTypes, Type: smithy.ShapeTypeList})
+var sDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum})
+var s_DriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList})
+var sDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineBaselineIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineBaselineIdentifiers, Members: &m_EnabledBaselineBaselineIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledBaselineDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDetails, Members: &mEnabledBaselineDetails, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum})
+var s_EnabledBaselineDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineDriftStatuses, Members: &m_EnabledBaselineDriftStatuses, Type: smithy.ShapeTypeList})
+var sEnabledBaselineDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineDriftTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineDriftTypes, Members: &mEnabledBaselineDriftTypes, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineEnablementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineEnablementStatuses, Members: &m_EnabledBaselineEnablementStatuses, Type: smithy.ShapeTypeList})
+var sEnabledBaselineFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineFilter, Members: &mEnabledBaselineFilter, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineInheritanceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineInheritanceDrift, Members: &mEnabledBaselineInheritanceDrift, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineParameter, Members: &mEnabledBaselineParameter, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineParameterDocument = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument})
+var s_EnabledBaselineParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList})
+var s_EnabledBaselineParameterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParameterSummaries, Members: &m_EnabledBaselineParameterSummaries, Type: smithy.ShapeTypeList})
+var sEnabledBaselineParameterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineParameterSummary, Members: &mEnabledBaselineParameterSummary, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineParentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineParentIdentifiers, Members: &m_EnabledBaselineParentIdentifiers, Type: smithy.ShapeTypeList})
+var s_EnabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselines, Members: &m_EnabledBaselines, Type: smithy.ShapeTypeList})
+var sEnabledBaselineSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledBaselineSummary, Members: &mEnabledBaselineSummary, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineTargetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledBaselineTargetIdentifiers, Members: &m_EnabledBaselineTargetIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledControlDetails = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlDetails, Members: &mEnabledControlDetails, Type: smithy.ShapeTypeStructure})
+var sEnabledControlDriftTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlDriftTypes, Members: &mEnabledControlDriftTypes, Type: smithy.ShapeTypeStructure})
+var sEnabledControlFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlFilter, Members: &mEnabledControlFilter, Type: smithy.ShapeTypeStructure})
+var s_EnabledControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlIdentifiers, Members: &m_EnabledControlIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledControlInheritanceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlInheritanceDrift, Members: &mEnabledControlInheritanceDrift, Type: smithy.ShapeTypeStructure})
+var sEnabledControlParameter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlParameter, Members: &mEnabledControlParameter, Type: smithy.ShapeTypeStructure})
+var s_EnabledControlParameters = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList})
+var s_EnabledControlParameterSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControlParameterSummaries, Members: &m_EnabledControlParameterSummaries, Type: smithy.ShapeTypeList})
+var sEnabledControlParameterSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlParameterSummary, Members: &mEnabledControlParameterSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledControlResourceDrift = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlResourceDrift, Members: &mEnabledControlResourceDrift, Type: smithy.ShapeTypeStructure})
+var s_EnabledControls = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnabledControls, Members: &m_EnabledControls, Type: smithy.ShapeTypeList})
+var sEnabledControlSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnabledControlSummary, Members: &mEnabledControlSummary, Type: smithy.ShapeTypeStructure})
+var sEnablementStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum})
+var s_EnablementStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_EnablementStatuses, Members: &m_EnablementStatuses, Type: smithy.ShapeTypeList})
+var sEnablementStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure})
+var sInternalServerException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iInternalServerException, Members: &mInternalServerException, Traits: &t32, Type: smithy.ShapeTypeStructure})
+var sLandingZoneDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDetail, Members: &mLandingZoneDetail, Type: smithy.ShapeTypeStructure})
+var sLandingZoneDriftStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDriftStatus, Members: &mLandingZoneDriftStatus, Type: smithy.ShapeTypeEnum})
+var sLandingZoneDriftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneDriftStatusSummary, Members: &mLandingZoneDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationDetail = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationDetail, Members: &mLandingZoneOperationDetail, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationFilter = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationFilter, Members: &mLandingZoneOperationFilter, Type: smithy.ShapeTypeStructure})
+var s_LandingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperations, Members: &m_LandingZoneOperations, Type: smithy.ShapeTypeList})
+var sLandingZoneOperationStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum})
+var s_LandingZoneOperationStatuses = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperationStatuses, Members: &m_LandingZoneOperationStatuses, Type: smithy.ShapeTypeList})
+var sLandingZoneOperationSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationSummary, Members: &mLandingZoneOperationSummary, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum})
+var s_LandingZoneOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneOperationTypes, Members: &m_LandingZoneOperationTypes, Type: smithy.ShapeTypeList})
+var sLandingZoneStatus = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneStatus, Members: &mLandingZoneStatus, Type: smithy.ShapeTypeEnum})
+var s_LandingZoneSummaries = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneSummaries, Members: &m_LandingZoneSummaries, Type: smithy.ShapeTypeList})
+var sLandingZoneSummary = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iLandingZoneSummary, Members: &mLandingZoneSummary, Type: smithy.ShapeTypeStructure})
+var s_LandingZoneVersion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString})
+var s_ListBaselinesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListBaselinesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListControlOperationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListControlOperationsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListControlOperationsNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString})
+var s_ListEnabledBaselinesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEnabledBaselinesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListEnabledBaselinesNextToken = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString})
+var s_ListLandingZoneOperationsMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLandingZoneOperationsMaxResults, Type: smithy.ShapeTypeInteger})
+var s_ListLandingZonesMaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ListLandingZonesMaxResults, Type: smithy.ShapeTypeInteger})
+var s_Manifest = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Manifest, Type: smithy.ShapeTypeDocument})
+var s_MaxResults = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var s_OperationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var s_ParentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString})
+var s_ParentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_ParentIdentifiers, Members: &m_ParentIdentifiers, Type: smithy.ShapeTypeList})
+var sRegion = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure})
+var s_RegionName = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sRemediationType = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iRemediationType, Members: &mRemediationType, Type: smithy.ShapeTypeEnum})
+var s_RemediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList})
+var sResourceNotFoundException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResourceNotFoundException, Members: &mResourceNotFoundException, Traits: &t33, Type: smithy.ShapeTypeStructure})
+var sServiceQuotaExceededException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iServiceQuotaExceededException, Members: &mServiceQuotaExceededException, Traits: &t34, Type: smithy.ShapeTypeStructure})
+var s_TagKey = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagKeys = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagKeys, Members: &m_TagKeys, Type: smithy.ShapeTypeList})
+var s_TagMap = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var s_TagValue = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var s_TargetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetIdentifiers, Members: &m_TargetIdentifiers, Type: smithy.ShapeTypeList})
+var s_TargetRegions = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_TargetRegions, Members: &m_TargetRegions, Type: smithy.ShapeTypeList})
+var sThrottlingException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iThrottlingException, Members: &mThrottlingException, Traits: &t35, Type: smithy.ShapeTypeStructure})
+var s_Timestamp = smithy.NewStaticSchema(smithy.StaticSchema{ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sValidationException = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iValidationException, Members: &mValidationException, Traits: &t37, Type: smithy.ShapeTypeStructure})
+var sCreateLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZoneInput, Members: &mCreateLandingZoneInput, Type: smithy.ShapeTypeStructure})
+var sCreateLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iCreateLandingZoneOutput, Members: &mCreateLandingZoneOutput, Type: smithy.ShapeTypeStructure})
+var sDeleteLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZoneInput, Members: &mDeleteLandingZoneInput, Type: smithy.ShapeTypeStructure})
+var sDeleteLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDeleteLandingZoneOutput, Members: &mDeleteLandingZoneOutput, Type: smithy.ShapeTypeStructure})
+var sDisableBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaselineInput, Members: &mDisableBaselineInput, Type: smithy.ShapeTypeStructure})
+var sDisableBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableBaselineOutput, Members: &mDisableBaselineOutput, Type: smithy.ShapeTypeStructure})
+var sDisableControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControlInput, Members: &mDisableControlInput, Type: smithy.ShapeTypeStructure})
+var sDisableControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iDisableControlOutput, Members: &mDisableControlOutput, Type: smithy.ShapeTypeStructure})
+var sEnableBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaselineInput, Members: &mEnableBaselineInput, Type: smithy.ShapeTypeStructure})
+var sEnableBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableBaselineOutput, Members: &mEnableBaselineOutput, Type: smithy.ShapeTypeStructure})
+var sEnableControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControlInput, Members: &mEnableControlInput, Type: smithy.ShapeTypeStructure})
+var sEnableControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iEnableControlOutput, Members: &mEnableControlOutput, Type: smithy.ShapeTypeStructure})
+var sGetBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineInput, Members: &mGetBaselineInput, Type: smithy.ShapeTypeStructure})
+var sGetBaselineOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperationInput, Members: &mGetBaselineOperationInput, Type: smithy.ShapeTypeStructure})
+var sGetBaselineOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOperationOutput, Members: &mGetBaselineOperationOutput, Type: smithy.ShapeTypeStructure})
+var sGetBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetBaselineOutput, Members: &mGetBaselineOutput, Type: smithy.ShapeTypeStructure})
+var sGetControlOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperationInput, Members: &mGetControlOperationInput, Type: smithy.ShapeTypeStructure})
+var sGetControlOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetControlOperationOutput, Members: &mGetControlOperationOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaselineInput, Members: &mGetEnabledBaselineInput, Type: smithy.ShapeTypeStructure})
+var sGetEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledBaselineOutput, Members: &mGetEnabledBaselineOutput, Type: smithy.ShapeTypeStructure})
+var sGetEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControlInput, Members: &mGetEnabledControlInput, Type: smithy.ShapeTypeStructure})
+var sGetEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetEnabledControlOutput, Members: &mGetEnabledControlOutput, Type: smithy.ShapeTypeStructure})
+var sGetLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneInput, Members: &mGetLandingZoneInput, Type: smithy.ShapeTypeStructure})
+var sGetLandingZoneOperationInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperationInput, Members: &mGetLandingZoneOperationInput, Type: smithy.ShapeTypeStructure})
+var sGetLandingZoneOperationOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOperationOutput, Members: &mGetLandingZoneOperationOutput, Type: smithy.ShapeTypeStructure})
+var sGetLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iGetLandingZoneOutput, Members: &mGetLandingZoneOutput, Type: smithy.ShapeTypeStructure})
+var sListBaselinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselinesInput, Members: &mListBaselinesInput, Type: smithy.ShapeTypeStructure})
+var sListBaselinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListBaselinesOutput, Members: &mListBaselinesOutput, Type: smithy.ShapeTypeStructure})
+var sListControlOperationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperationsInput, Members: &mListControlOperationsInput, Type: smithy.ShapeTypeStructure})
+var sListControlOperationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListControlOperationsOutput, Members: &mListControlOperationsOutput, Type: smithy.ShapeTypeStructure})
+var sListEnabledBaselinesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselinesInput, Members: &mListEnabledBaselinesInput, Type: smithy.ShapeTypeStructure})
+var sListEnabledBaselinesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledBaselinesOutput, Members: &mListEnabledBaselinesOutput, Type: smithy.ShapeTypeStructure})
+var sListEnabledControlsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControlsInput, Members: &mListEnabledControlsInput, Type: smithy.ShapeTypeStructure})
+var sListEnabledControlsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListEnabledControlsOutput, Members: &mListEnabledControlsOutput, Type: smithy.ShapeTypeStructure})
+var sListLandingZoneOperationsInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperationsInput, Members: &mListLandingZoneOperationsInput, Type: smithy.ShapeTypeStructure})
+var sListLandingZoneOperationsOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZoneOperationsOutput, Members: &mListLandingZoneOperationsOutput, Type: smithy.ShapeTypeStructure})
+var sListLandingZonesInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZonesInput, Members: &mListLandingZonesInput, Type: smithy.ShapeTypeStructure})
+var sListLandingZonesOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListLandingZonesOutput, Members: &mListLandingZonesOutput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceInput, Members: &mListTagsForResourceInput, Type: smithy.ShapeTypeStructure})
+var sListTagsForResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iListTagsForResourceOutput, Members: &mListTagsForResourceOutput, Type: smithy.ShapeTypeStructure})
+var sResetEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaselineInput, Members: &mResetEnabledBaselineInput, Type: smithy.ShapeTypeStructure})
+var sResetEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledBaselineOutput, Members: &mResetEnabledBaselineOutput, Type: smithy.ShapeTypeStructure})
+var sResetEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControlInput, Members: &mResetEnabledControlInput, Type: smithy.ShapeTypeStructure})
+var sResetEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetEnabledControlOutput, Members: &mResetEnabledControlOutput, Type: smithy.ShapeTypeStructure})
+var sResetLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZoneInput, Members: &mResetLandingZoneInput, Type: smithy.ShapeTypeStructure})
+var sResetLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iResetLandingZoneOutput, Members: &mResetLandingZoneOutput, Type: smithy.ShapeTypeStructure})
+var sTagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceInput, Members: &mTagResourceInput, Type: smithy.ShapeTypeStructure})
+var sTagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iTagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceInput, Members: &mUntagResourceInput, Type: smithy.ShapeTypeStructure})
+var sUntagResourceOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUntagResourceOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnabledBaselineInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaselineInput, Members: &mUpdateEnabledBaselineInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnabledBaselineOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledBaselineOutput, Members: &mUpdateEnabledBaselineOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnabledControlInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControlInput, Members: &mUpdateEnabledControlInput, Type: smithy.ShapeTypeStructure})
+var sUpdateEnabledControlOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateEnabledControlOutput, Members: &mUpdateEnabledControlOutput, Type: smithy.ShapeTypeStructure})
+var sUpdateLandingZoneInput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZoneInput, Members: &mUpdateLandingZoneInput, Type: smithy.ShapeTypeStructure})
+var sUpdateLandingZoneOutput = smithy.NewStaticSchema(smithy.StaticSchema{ID: &iUpdateLandingZoneOutput, Members: &mUpdateLandingZoneOutput, Type: smithy.ShapeTypeStructure})
+
+var sAccessDeniedException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sBaselineOperation_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sBaselineOperation_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iBaselineOperationType, Members: &mBaselineOperationType, Type: smithy.ShapeTypeEnum})
+var sBaselineOperation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iBaselineOperationStatus, Members: &mBaselineOperationStatus, Type: smithy.ShapeTypeEnum})
+var sBaselineOperation_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp})
+var sBaselineOperation_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp})
+var sBaselineOperation_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sBaselineOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBaselineOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBaselineOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBaselineOperationType_ENABLE_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBaselineOperationType_DISABLE_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBaselineOperationType_UPDATE_ENABLED_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ENABLED_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sBaselineOperationType_RESET_ENABLED_BASELINE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET_ENABLED_BASELINE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_Baselines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iBaselineSummary, Members: &mBaselineSummary, Type: smithy.ShapeTypeStructure})
+var sBaselineSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &pString, Type: smithy.ShapeTypeString})
+var sBaselineSummary_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sBaselineSummary_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sConflictException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_ControlIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var sControlOperation_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum})
+var sControlOperation_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sControlOperation_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sControlOperation_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum})
+var sControlOperation_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sControlOperation_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sControlOperation_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var sControlOperation_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var sControlOperation_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sControlOperationFilter_controlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifiers", ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList})
+var sControlOperationFilter_targetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifiers", ID: &i_TargetIdentifiers, Members: &m_TargetIdentifiers, Type: smithy.ShapeTypeList})
+var sControlOperationFilter_enabledControlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifiers", ID: &i_EnabledControlIdentifiers, Members: &m_EnabledControlIdentifiers, Type: smithy.ShapeTypeList})
+var sControlOperationFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_ControlOperationStatuses, Members: &m_ControlOperationStatuses, Type: smithy.ShapeTypeList})
+var sControlOperationFilter_controlOperationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperationTypes", ID: &i_ControlOperationTypes, Members: &m_ControlOperationTypes, Type: smithy.ShapeTypeList})
+var s_ControlOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationSummary, Members: &mControlOperationSummary, Type: smithy.ShapeTypeStructure})
+var sControlOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ControlOperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum})
+var sControlOperationSummary_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum})
+var sControlOperationSummary_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sControlOperationSummary_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t31, Type: smithy.ShapeTypeTimestamp})
+var sControlOperationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iControlOperationStatus, Members: &mControlOperationStatus, Type: smithy.ShapeTypeEnum})
+var sControlOperationSummary_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sControlOperationSummary_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sControlOperationSummary_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var sControlOperationSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var sControlOperationSummary_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sControlOperationType_ENABLE_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ENABLE_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlOperationType_DISABLE_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DISABLE_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlOperationType_UPDATE_ENABLED_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE_ENABLED_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sControlOperationType_RESET_ENABLED_CONTROL = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET_ENABLED_CONTROL", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_ControlOperationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iControlOperationType, Members: &mControlOperationType, Type: smithy.ShapeTypeEnum})
+var sDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDriftStatus_NOT_CHECKING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "NOT_CHECKING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sDriftStatus_UNKNOWN = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNKNOWN", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_DriftStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum})
+var sDriftStatusSummary_driftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatus", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum})
+var sDriftStatusSummary_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &iEnabledControlDriftTypes, Members: &mEnabledControlDriftTypes, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineBaselineIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledBaselineDetails_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledBaselineDetails_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineDetails_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineDetails_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineDetails_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineDetails_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledBaselineDetails_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineDetails_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameterSummaries, Members: &m_EnabledBaselineParameterSummaries, Type: smithy.ShapeTypeList})
+var sEnabledBaselineDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineDriftStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum})
+var sEnabledBaselineDriftStatusSummary_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &iEnabledBaselineDriftTypes, Members: &mEnabledBaselineDriftTypes, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineDriftTypes_inheritance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritance", ID: &iEnabledBaselineInheritanceDrift, Members: &mEnabledBaselineInheritanceDrift, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineEnablementStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum})
+var sEnabledBaselineFilter_targetIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifiers", ID: &i_EnabledBaselineTargetIdentifiers, Members: &m_EnabledBaselineTargetIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledBaselineFilter_baselineIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifiers", ID: &i_EnabledBaselineBaselineIdentifiers, Members: &m_EnabledBaselineBaselineIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledBaselineFilter_parentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifiers", ID: &i_EnabledBaselineParentIdentifiers, Members: &m_EnabledBaselineParentIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledBaselineFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_EnabledBaselineEnablementStatuses, Members: &m_EnabledBaselineEnablementStatuses, Type: smithy.ShapeTypeList})
+var sEnabledBaselineFilter_inheritanceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritanceDriftStatuses", ID: &i_EnabledBaselineDriftStatuses, Members: &m_EnabledBaselineDriftStatuses, Type: smithy.ShapeTypeList})
+var sEnabledBaselineInheritanceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnabledBaselineDriftStatus, Members: &mEnabledBaselineDriftStatus, Type: smithy.ShapeTypeEnum})
+var sEnabledBaselineParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument})
+var s_EnabledBaselineParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineParameter, Members: &mEnabledBaselineParameter, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineParameterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineParameterSummary, Members: &mEnabledBaselineParameterSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineParameterSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineParameterSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_EnabledBaselineParameterDocument, Type: smithy.ShapeTypeDocument})
+var s_EnabledBaselineParentIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_EnabledBaselines_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledBaselineSummary, Members: &mEnabledBaselineSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledBaselineSummary_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineSummary_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineSummary_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iEnabledBaselineDriftStatusSummary, Members: &mEnabledBaselineDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledBaselineSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledBaselineSummary_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledBaselineSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure})
+var s_EnabledBaselineTargetIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledControlDetails_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledControlDetails_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var sEnabledControlDetails_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var sEnabledControlDetails_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledControlDetails_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledControlDetails_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString})
+var sEnabledControlDetails_targetRegions = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetRegions", ID: &i_TargetRegions, Members: &m_TargetRegions, Type: smithy.ShapeTypeList})
+var sEnabledControlDetails_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameterSummaries, Members: &m_EnabledControlParameterSummaries, Type: smithy.ShapeTypeList})
+var sEnabledControlDriftTypes_inheritance = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritance", ID: &iEnabledControlInheritanceDrift, Members: &mEnabledControlInheritanceDrift, Type: smithy.ShapeTypeStructure})
+var sEnabledControlDriftTypes_resource = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resource", ID: &iEnabledControlResourceDrift, Members: &mEnabledControlResourceDrift, Type: smithy.ShapeTypeStructure})
+var sEnabledControlFilter_controlIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifiers", ID: &i_ControlIdentifiers, Members: &m_ControlIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledControlFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_EnablementStatuses, Members: &m_EnablementStatuses, Type: smithy.ShapeTypeList})
+var sEnabledControlFilter_driftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList})
+var sEnabledControlFilter_parentIdentifiers = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifiers", ID: &i_ParentIdentifiers, Members: &m_ParentIdentifiers, Type: smithy.ShapeTypeList})
+var sEnabledControlFilter_inheritanceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "inheritanceDriftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList})
+var sEnabledControlFilter_resourceDriftStatuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceDriftStatuses", ID: &i_DriftStatuses, Members: &m_DriftStatuses, Type: smithy.ShapeTypeList})
+var s_EnabledControlIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledControlInheritanceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum})
+var sEnabledControlParameter_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledControlParameter_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var s_EnabledControlParameters_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlParameter, Members: &mEnabledControlParameter, Type: smithy.ShapeTypeStructure})
+var s_EnabledControlParameterSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlParameterSummary, Members: &mEnabledControlParameterSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledControlParameterSummary_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &pString, Type: smithy.ShapeTypeString})
+var sEnabledControlParameterSummary_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &pDocument, Type: smithy.ShapeTypeDocument})
+var sEnabledControlResourceDrift_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iDriftStatus, Members: &mDriftStatus, Type: smithy.ShapeTypeEnum})
+var s_EnabledControls_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnabledControlSummary, Members: &mEnabledControlSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledControlSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnabledControlSummary_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var sEnabledControlSummary_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var sEnabledControlSummary_statusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusSummary", ID: &iEnablementStatusSummary, Members: &mEnablementStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledControlSummary_driftStatusSummary = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatusSummary", ID: &iDriftStatusSummary, Members: &mDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var sEnabledControlSummary_parentIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parentIdentifier", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString})
+var sEnablementStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnablementStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sEnablementStatus_UNDER_CHANGE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UNDER_CHANGE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_EnablementStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum})
+var sEnablementStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iEnablementStatus, Members: &mEnablementStatus, Type: smithy.ShapeTypeEnum})
+var sEnablementStatusSummary_lastOperationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "lastOperationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sInternalServerException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sLandingZoneDetail_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString})
+var sLandingZoneDetail_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList})
+var sLandingZoneDetail_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sLandingZoneDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneStatus, Members: &mLandingZoneStatus, Type: smithy.ShapeTypeEnum})
+var sLandingZoneDetail_latestAvailableVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "latestAvailableVersion", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString})
+var sLandingZoneDetail_driftStatus = smithy.NewStaticSchema(smithy.StaticSchema{Member: "driftStatus", ID: &iLandingZoneDriftStatusSummary, Members: &mLandingZoneDriftStatusSummary, Type: smithy.ShapeTypeStructure})
+var sLandingZoneDetail_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument})
+var sLandingZoneDriftStatus_DRIFTED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DRIFTED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneDriftStatus_IN_SYNC = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_SYNC", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneDriftStatusSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneDriftStatus, Members: &mLandingZoneDriftStatus, Type: smithy.ShapeTypeEnum})
+var sLandingZoneOperationDetail_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum})
+var sLandingZoneOperationDetail_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sLandingZoneOperationDetail_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum})
+var sLandingZoneOperationDetail_startTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "startTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp})
+var sLandingZoneOperationDetail_endTime = smithy.NewStaticSchema(smithy.StaticSchema{Member: "endTime", ID: &i_Timestamp, Traits: &t29, Type: smithy.ShapeTypeTimestamp})
+var sLandingZoneOperationDetail_statusMessage = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statusMessage", ID: &pString, Type: smithy.ShapeTypeString})
+var sLandingZoneOperationFilter_types = smithy.NewStaticSchema(smithy.StaticSchema{Member: "types", ID: &i_LandingZoneOperationTypes, Members: &m_LandingZoneOperationTypes, Type: smithy.ShapeTypeList})
+var sLandingZoneOperationFilter_statuses = smithy.NewStaticSchema(smithy.StaticSchema{Member: "statuses", ID: &i_LandingZoneOperationStatuses, Members: &m_LandingZoneOperationStatuses, Type: smithy.ShapeTypeList})
+var s_LandingZoneOperations_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationSummary, Members: &mLandingZoneOperationSummary, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationStatus_SUCCEEDED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "SUCCEEDED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationStatus_IN_PROGRESS = smithy.NewStaticSchema(smithy.StaticSchema{Member: "IN_PROGRESS", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LandingZoneOperationStatuses_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum})
+var sLandingZoneOperationSummary_operationType = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationType", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum})
+var sLandingZoneOperationSummary_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sLandingZoneOperationSummary_status = smithy.NewStaticSchema(smithy.StaticSchema{Member: "status", ID: &iLandingZoneOperationStatus, Members: &mLandingZoneOperationStatus, Type: smithy.ShapeTypeEnum})
+var sLandingZoneOperationType_DELETE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "DELETE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationType_CREATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "CREATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationType_UPDATE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "UPDATE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneOperationType_RESET = smithy.NewStaticSchema(smithy.StaticSchema{Member: "RESET", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LandingZoneOperationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneOperationType, Members: &mLandingZoneOperationType, Type: smithy.ShapeTypeEnum})
+var sLandingZoneStatus_ACTIVE = smithy.NewStaticSchema(smithy.StaticSchema{Member: "ACTIVE", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneStatus_PROCESSING = smithy.NewStaticSchema(smithy.StaticSchema{Member: "PROCESSING", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var sLandingZoneStatus_FAILED = smithy.NewStaticSchema(smithy.StaticSchema{Member: "FAILED", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_LandingZoneSummaries_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iLandingZoneSummary, Members: &mLandingZoneSummary, Type: smithy.ShapeTypeStructure})
+var sLandingZoneSummary_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var s_ParentIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_ParentIdentifier, Type: smithy.ShapeTypeString})
+var sRegion_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &i_RegionName, Type: smithy.ShapeTypeString})
+var sRemediationType_INHERITANCE_DRIFT = smithy.NewStaticSchema(smithy.StaticSchema{Member: "INHERITANCE_DRIFT", ID: &pUnit, Type: smithy.ShapeTypeStructure})
+var s_RemediationTypes_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRemediationType, Members: &mRemediationType, Type: smithy.ShapeTypeEnum})
+var sResourceNotFoundException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sServiceQuotaExceededException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var s_TagKeys_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_key = smithy.NewStaticSchema(smithy.StaticSchema{Member: "key", ID: &i_TagKey, Type: smithy.ShapeTypeString})
+var s_TagMap_value = smithy.NewStaticSchema(smithy.StaticSchema{Member: "value", ID: &i_TagValue, Type: smithy.ShapeTypeString})
+var s_TargetIdentifiers_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var s_TargetRegions_member = smithy.NewStaticSchema(smithy.StaticSchema{Member: "member", ID: &iRegion, Members: &mRegion, Type: smithy.ShapeTypeStructure})
+var sThrottlingException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_serviceCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "serviceCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_quotaCode = smithy.NewStaticSchema(smithy.StaticSchema{Member: "quotaCode", ID: &pString, Type: smithy.ShapeTypeString})
+var sThrottlingException_retryAfterSeconds = smithy.NewStaticSchema(smithy.StaticSchema{Member: "retryAfterSeconds", ID: &pInteger, Traits: &t36, Type: smithy.ShapeTypeInteger})
+var sValidationException_message = smithy.NewStaticSchema(smithy.StaticSchema{Member: "message", ID: &pString, Type: smithy.ShapeTypeString})
+var sCreateLandingZoneInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString})
+var sCreateLandingZoneInput_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList})
+var sCreateLandingZoneInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sCreateLandingZoneInput_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument})
+var sCreateLandingZoneOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sCreateLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sDeleteLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sDeleteLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sDisableBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDisableBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sDisableControlInput_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var sDisableControlInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var sDisableControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sDisableControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sEnableBaselineInput_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &i_BaselineVersion, Type: smithy.ShapeTypeString})
+var sEnableBaselineInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList})
+var sEnableBaselineInput_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnableBaselineInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnableBaselineInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sEnableBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sEnableBaselineOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sEnableControlInput_controlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlIdentifier", ID: &i_ControlIdentifier, Type: smithy.ShapeTypeString})
+var sEnableControlInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var sEnableControlInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sEnableControlInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList})
+var sEnableControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sEnableControlOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetBaselineInput_baselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineIdentifier", ID: &i_BaselineArn, Type: smithy.ShapeTypeString})
+var sGetBaselineOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sGetBaselineOperationOutput_baselineOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineOperation", ID: &iBaselineOperation, Members: &mBaselineOperation, Type: smithy.ShapeTypeStructure})
+var sGetBaselineOutput_arn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "arn", ID: &i_BaselineArn, Type: smithy.ShapeTypeString})
+var sGetBaselineOutput_name = smithy.NewStaticSchema(smithy.StaticSchema{Member: "name", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetBaselineOutput_description = smithy.NewStaticSchema(smithy.StaticSchema{Member: "description", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetControlOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sGetControlOperationOutput_controlOperation = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperation", ID: &iControlOperation, Members: &mControlOperation, Type: smithy.ShapeTypeStructure})
+var sGetEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetEnabledBaselineOutput_enabledBaselineDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineDetails", ID: &iEnabledBaselineDetails, Members: &mEnabledBaselineDetails, Type: smithy.ShapeTypeStructure})
+var sGetEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sGetEnabledControlOutput_enabledControlDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlDetails", ID: &iEnabledControlDetails, Members: &mEnabledControlDetails, Type: smithy.ShapeTypeStructure})
+var sGetLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sGetLandingZoneOperationInput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sGetLandingZoneOperationOutput_operationDetails = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationDetails", ID: &iLandingZoneOperationDetail, Members: &mLandingZoneOperationDetail, Type: smithy.ShapeTypeStructure})
+var sGetLandingZoneOutput_landingZone = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZone", ID: &iLandingZoneDetail, Members: &mLandingZoneDetail, Type: smithy.ShapeTypeStructure})
+var sListBaselinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListBaselinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListBaselinesMaxResults, Type: smithy.ShapeTypeInteger})
+var sListBaselinesOutput_baselines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselines", ID: &i_Baselines, Members: &m_Baselines, Type: smithy.ShapeTypeList})
+var sListBaselinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListControlOperationsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iControlOperationFilter, Members: &mControlOperationFilter, Type: smithy.ShapeTypeStructure})
+var sListControlOperationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString})
+var sListControlOperationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListControlOperationsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListControlOperationsOutput_controlOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "controlOperations", ID: &i_ControlOperations, Members: &m_ControlOperations, Type: smithy.ShapeTypeList})
+var sListControlOperationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListControlOperationsNextToken, Type: smithy.ShapeTypeString})
+var sListEnabledBaselinesInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEnabledBaselineFilter, Members: &mEnabledBaselineFilter, Type: smithy.ShapeTypeStructure})
+var sListEnabledBaselinesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString})
+var sListEnabledBaselinesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListEnabledBaselinesMaxResults, Type: smithy.ShapeTypeInteger})
+var sListEnabledBaselinesInput_includeChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeChildren", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sListEnabledBaselinesOutput_enabledBaselines = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselines", ID: &i_EnabledBaselines, Members: &m_EnabledBaselines, Type: smithy.ShapeTypeList})
+var sListEnabledBaselinesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &i_ListEnabledBaselinesNextToken, Type: smithy.ShapeTypeString})
+var sListEnabledControlsInput_targetIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "targetIdentifier", ID: &i_TargetIdentifier, Type: smithy.ShapeTypeString})
+var sListEnabledControlsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListEnabledControlsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_MaxResults, Type: smithy.ShapeTypeInteger})
+var sListEnabledControlsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iEnabledControlFilter, Members: &mEnabledControlFilter, Type: smithy.ShapeTypeStructure})
+var sListEnabledControlsInput_includeChildren = smithy.NewStaticSchema(smithy.StaticSchema{Member: "includeChildren", ID: &pBoolean, Type: smithy.ShapeTypeBoolean})
+var sListEnabledControlsOutput_enabledControls = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControls", ID: &i_EnabledControls, Members: &m_EnabledControls, Type: smithy.ShapeTypeList})
+var sListEnabledControlsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLandingZoneOperationsInput_filter = smithy.NewStaticSchema(smithy.StaticSchema{Member: "filter", ID: &iLandingZoneOperationFilter, Members: &mLandingZoneOperationFilter, Type: smithy.ShapeTypeStructure})
+var sListLandingZoneOperationsInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLandingZoneOperationsInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListLandingZoneOperationsMaxResults, Type: smithy.ShapeTypeInteger})
+var sListLandingZoneOperationsOutput_landingZoneOperations = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneOperations", ID: &i_LandingZoneOperations, Members: &m_LandingZoneOperations, Type: smithy.ShapeTypeList})
+var sListLandingZoneOperationsOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLandingZonesInput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListLandingZonesInput_maxResults = smithy.NewStaticSchema(smithy.StaticSchema{Member: "maxResults", ID: &i_ListLandingZonesMaxResults, Type: smithy.ShapeTypeInteger})
+var sListLandingZonesOutput_landingZones = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZones", ID: &i_LandingZoneSummaries, Members: &m_LandingZoneSummaries, Type: smithy.ShapeTypeList})
+var sListLandingZonesOutput_nextToken = smithy.NewStaticSchema(smithy.StaticSchema{Member: "nextToken", ID: &pString, Type: smithy.ShapeTypeString})
+var sListTagsForResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString})
+var sListTagsForResourceOutput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sResetEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sResetEnabledBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sResetEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sResetEnabledControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sResetLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sResetLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sTagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString})
+var sTagResourceInput_tags = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tags", ID: &i_TagMap, Members: &m_TagMap, Type: smithy.ShapeTypeMap})
+var sUntagResourceInput_resourceArn = smithy.NewStaticSchema(smithy.StaticSchema{Member: "resourceArn", ID: &i_Arn, Traits: &t38, Type: smithy.ShapeTypeString})
+var sUntagResourceInput_tagKeys = smithy.NewStaticSchema(smithy.StaticSchema{Member: "tagKeys", ID: &i_TagKeys, Members: &m_TagKeys, Traits: &t39, Type: smithy.ShapeTypeList})
+var sUpdateEnabledBaselineInput_baselineVersion = smithy.NewStaticSchema(smithy.StaticSchema{Member: "baselineVersion", ID: &i_BaselineVersion, Type: smithy.ShapeTypeString})
+var sUpdateEnabledBaselineInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledBaselineParameters, Members: &m_EnabledBaselineParameters, Type: smithy.ShapeTypeList})
+var sUpdateEnabledBaselineInput_enabledBaselineIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledBaselineIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateEnabledBaselineOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateEnabledControlInput_parameters = smithy.NewStaticSchema(smithy.StaticSchema{Member: "parameters", ID: &i_EnabledControlParameters, Members: &m_EnabledControlParameters, Type: smithy.ShapeTypeList})
+var sUpdateEnabledControlInput_enabledControlIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "enabledControlIdentifier", ID: &i_Arn, Type: smithy.ShapeTypeString})
+var sUpdateEnabledControlOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+var sUpdateLandingZoneInput_version = smithy.NewStaticSchema(smithy.StaticSchema{Member: "version", ID: &i_LandingZoneVersion, Type: smithy.ShapeTypeString})
+var sUpdateLandingZoneInput_remediationTypes = smithy.NewStaticSchema(smithy.StaticSchema{Member: "remediationTypes", ID: &i_RemediationTypes, Members: &m_RemediationTypes, Type: smithy.ShapeTypeList})
+var sUpdateLandingZoneInput_landingZoneIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "landingZoneIdentifier", ID: &pString, Type: smithy.ShapeTypeString})
+var sUpdateLandingZoneInput_manifest = smithy.NewStaticSchema(smithy.StaticSchema{Member: "manifest", ID: &i_Manifest, Type: smithy.ShapeTypeDocument})
+var sUpdateLandingZoneOutput_operationIdentifier = smithy.NewStaticSchema(smithy.StaticSchema{Member: "operationIdentifier", ID: &i_OperationIdentifier, Type: smithy.ShapeTypeString})
+
+var CreateLandingZone = &sCreateLandingZone
+
+var DeleteLandingZone = &sDeleteLandingZone
+
+var DisableBaseline = &sDisableBaseline
+
+var DisableControl = &sDisableControl
+
+var EnableBaseline = &sEnableBaseline
+
+var EnableControl = &sEnableControl
+
+var GetBaseline = &sGetBaseline
+
+var GetBaselineOperation = &sGetBaselineOperation
+
+var GetControlOperation = &sGetControlOperation
+
+var GetEnabledBaseline = &sGetEnabledBaseline
+
+var GetEnabledControl = &sGetEnabledControl
+
+var GetLandingZone = &sGetLandingZone
+
+var GetLandingZoneOperation = &sGetLandingZoneOperation
+
+var ListBaselines = &sListBaselines
+
+var ListControlOperations = &sListControlOperations
+
+var ListEnabledBaselines = &sListEnabledBaselines
+
+var ListEnabledControls = &sListEnabledControls
+
+var ListLandingZoneOperations = &sListLandingZoneOperations
+
+var ListLandingZones = &sListLandingZones
+
+var ListTagsForResource = &sListTagsForResource
+
+var ResetEnabledBaseline = &sResetEnabledBaseline
+
+var ResetEnabledControl = &sResetEnabledControl
+
+var ResetLandingZone = &sResetLandingZone
+
+var TagResource = &sTagResource
+
+var UntagResource = &sUntagResource
+
+var UpdateEnabledBaseline = &sUpdateEnabledBaseline
+
+var UpdateEnabledControl = &sUpdateEnabledControl
+
+var UpdateLandingZone = &sUpdateLandingZone
+
+var _AWSControlTowerApis = &s_AWSControlTowerApis
+
+var AccessDeniedException = &sAccessDeniedException
+var AccessDeniedException_message = &sAccessDeniedException_message
+
+var _Arn = &s_Arn
+
+var _BaselineArn = &s_BaselineArn
+
+var BaselineOperation = &sBaselineOperation
+var BaselineOperation_operationIdentifier = &sBaselineOperation_operationIdentifier
+var BaselineOperation_operationType = &sBaselineOperation_operationType
+var BaselineOperation_status = &sBaselineOperation_status
+var BaselineOperation_startTime = &sBaselineOperation_startTime
+var BaselineOperation_endTime = &sBaselineOperation_endTime
+var BaselineOperation_statusMessage = &sBaselineOperation_statusMessage
+
+var BaselineOperationStatus = &sBaselineOperationStatus
+var BaselineOperationStatus_SUCCEEDED = &sBaselineOperationStatus_SUCCEEDED
+var BaselineOperationStatus_FAILED = &sBaselineOperationStatus_FAILED
+var BaselineOperationStatus_IN_PROGRESS = &sBaselineOperationStatus_IN_PROGRESS
+
+var BaselineOperationType = &sBaselineOperationType
+var BaselineOperationType_ENABLE_BASELINE = &sBaselineOperationType_ENABLE_BASELINE
+var BaselineOperationType_DISABLE_BASELINE = &sBaselineOperationType_DISABLE_BASELINE
+var BaselineOperationType_UPDATE_ENABLED_BASELINE = &sBaselineOperationType_UPDATE_ENABLED_BASELINE
+var BaselineOperationType_RESET_ENABLED_BASELINE = &sBaselineOperationType_RESET_ENABLED_BASELINE
+
+var _Baselines = &s_Baselines
+var _Baselines_member = &s_Baselines_member
+
+var BaselineSummary = &sBaselineSummary
+var BaselineSummary_arn = &sBaselineSummary_arn
+var BaselineSummary_name = &sBaselineSummary_name
+var BaselineSummary_description = &sBaselineSummary_description
+
+var _BaselineVersion = &s_BaselineVersion
+
+var ConflictException = &sConflictException
+var ConflictException_message = &sConflictException_message
+
+var _ControlIdentifier = &s_ControlIdentifier
+
+var _ControlIdentifiers = &s_ControlIdentifiers
+var _ControlIdentifiers_member = &s_ControlIdentifiers_member
+
+var ControlOperation = &sControlOperation
+var ControlOperation_operationType = &sControlOperation_operationType
+var ControlOperation_startTime = &sControlOperation_startTime
+var ControlOperation_endTime = &sControlOperation_endTime
+var ControlOperation_status = &sControlOperation_status
+var ControlOperation_statusMessage = &sControlOperation_statusMessage
+var ControlOperation_operationIdentifier = &sControlOperation_operationIdentifier
+var ControlOperation_controlIdentifier = &sControlOperation_controlIdentifier
+var ControlOperation_targetIdentifier = &sControlOperation_targetIdentifier
+var ControlOperation_enabledControlIdentifier = &sControlOperation_enabledControlIdentifier
+
+var ControlOperationFilter = &sControlOperationFilter
+var ControlOperationFilter_controlIdentifiers = &sControlOperationFilter_controlIdentifiers
+var ControlOperationFilter_targetIdentifiers = &sControlOperationFilter_targetIdentifiers
+var ControlOperationFilter_enabledControlIdentifiers = &sControlOperationFilter_enabledControlIdentifiers
+var ControlOperationFilter_statuses = &sControlOperationFilter_statuses
+var ControlOperationFilter_controlOperationTypes = &sControlOperationFilter_controlOperationTypes
+
+var _ControlOperations = &s_ControlOperations
+var _ControlOperations_member = &s_ControlOperations_member
+
+var ControlOperationStatus = &sControlOperationStatus
+var ControlOperationStatus_SUCCEEDED = &sControlOperationStatus_SUCCEEDED
+var ControlOperationStatus_FAILED = &sControlOperationStatus_FAILED
+var ControlOperationStatus_IN_PROGRESS = &sControlOperationStatus_IN_PROGRESS
+
+var _ControlOperationStatuses = &s_ControlOperationStatuses
+var _ControlOperationStatuses_member = &s_ControlOperationStatuses_member
+
+var ControlOperationSummary = &sControlOperationSummary
+var ControlOperationSummary_operationType = &sControlOperationSummary_operationType
+var ControlOperationSummary_startTime = &sControlOperationSummary_startTime
+var ControlOperationSummary_endTime = &sControlOperationSummary_endTime
+var ControlOperationSummary_status = &sControlOperationSummary_status
+var ControlOperationSummary_statusMessage = &sControlOperationSummary_statusMessage
+var ControlOperationSummary_operationIdentifier = &sControlOperationSummary_operationIdentifier
+var ControlOperationSummary_controlIdentifier = &sControlOperationSummary_controlIdentifier
+var ControlOperationSummary_targetIdentifier = &sControlOperationSummary_targetIdentifier
+var ControlOperationSummary_enabledControlIdentifier = &sControlOperationSummary_enabledControlIdentifier
+
+var ControlOperationType = &sControlOperationType
+var ControlOperationType_ENABLE_CONTROL = &sControlOperationType_ENABLE_CONTROL
+var ControlOperationType_DISABLE_CONTROL = &sControlOperationType_DISABLE_CONTROL
+var ControlOperationType_UPDATE_ENABLED_CONTROL = &sControlOperationType_UPDATE_ENABLED_CONTROL
+var ControlOperationType_RESET_ENABLED_CONTROL = &sControlOperationType_RESET_ENABLED_CONTROL
+
+var _ControlOperationTypes = &s_ControlOperationTypes
+var _ControlOperationTypes_member = &s_ControlOperationTypes_member
+
+var DriftStatus = &sDriftStatus
+var DriftStatus_DRIFTED = &sDriftStatus_DRIFTED
+var DriftStatus_IN_SYNC = &sDriftStatus_IN_SYNC
+var DriftStatus_NOT_CHECKING = &sDriftStatus_NOT_CHECKING
+var DriftStatus_UNKNOWN = &sDriftStatus_UNKNOWN
+
+var _DriftStatuses = &s_DriftStatuses
+var _DriftStatuses_member = &s_DriftStatuses_member
+
+var DriftStatusSummary = &sDriftStatusSummary
+var DriftStatusSummary_driftStatus = &sDriftStatusSummary_driftStatus
+var DriftStatusSummary_types = &sDriftStatusSummary_types
+
+var _EnabledBaselineBaselineIdentifiers = &s_EnabledBaselineBaselineIdentifiers
+var _EnabledBaselineBaselineIdentifiers_member = &s_EnabledBaselineBaselineIdentifiers_member
+
+var EnabledBaselineDetails = &sEnabledBaselineDetails
+var EnabledBaselineDetails_arn = &sEnabledBaselineDetails_arn
+var EnabledBaselineDetails_baselineIdentifier = &sEnabledBaselineDetails_baselineIdentifier
+var EnabledBaselineDetails_baselineVersion = &sEnabledBaselineDetails_baselineVersion
+var EnabledBaselineDetails_driftStatusSummary = &sEnabledBaselineDetails_driftStatusSummary
+var EnabledBaselineDetails_targetIdentifier = &sEnabledBaselineDetails_targetIdentifier
+var EnabledBaselineDetails_parentIdentifier = &sEnabledBaselineDetails_parentIdentifier
+var EnabledBaselineDetails_statusSummary = &sEnabledBaselineDetails_statusSummary
+var EnabledBaselineDetails_parameters = &sEnabledBaselineDetails_parameters
+
+var EnabledBaselineDriftStatus = &sEnabledBaselineDriftStatus
+var EnabledBaselineDriftStatus_IN_SYNC = &sEnabledBaselineDriftStatus_IN_SYNC
+var EnabledBaselineDriftStatus_DRIFTED = &sEnabledBaselineDriftStatus_DRIFTED
+
+var _EnabledBaselineDriftStatuses = &s_EnabledBaselineDriftStatuses
+var _EnabledBaselineDriftStatuses_member = &s_EnabledBaselineDriftStatuses_member
+
+var EnabledBaselineDriftStatusSummary = &sEnabledBaselineDriftStatusSummary
+var EnabledBaselineDriftStatusSummary_types = &sEnabledBaselineDriftStatusSummary_types
+
+var EnabledBaselineDriftTypes = &sEnabledBaselineDriftTypes
+var EnabledBaselineDriftTypes_inheritance = &sEnabledBaselineDriftTypes_inheritance
+
+var _EnabledBaselineEnablementStatuses = &s_EnabledBaselineEnablementStatuses
+var _EnabledBaselineEnablementStatuses_member = &s_EnabledBaselineEnablementStatuses_member
+
+var EnabledBaselineFilter = &sEnabledBaselineFilter
+var EnabledBaselineFilter_targetIdentifiers = &sEnabledBaselineFilter_targetIdentifiers
+var EnabledBaselineFilter_baselineIdentifiers = &sEnabledBaselineFilter_baselineIdentifiers
+var EnabledBaselineFilter_parentIdentifiers = &sEnabledBaselineFilter_parentIdentifiers
+var EnabledBaselineFilter_statuses = &sEnabledBaselineFilter_statuses
+var EnabledBaselineFilter_inheritanceDriftStatuses = &sEnabledBaselineFilter_inheritanceDriftStatuses
+
+var EnabledBaselineInheritanceDrift = &sEnabledBaselineInheritanceDrift
+var EnabledBaselineInheritanceDrift_status = &sEnabledBaselineInheritanceDrift_status
+
+var EnabledBaselineParameter = &sEnabledBaselineParameter
+var EnabledBaselineParameter_key = &sEnabledBaselineParameter_key
+var EnabledBaselineParameter_value = &sEnabledBaselineParameter_value
+
+var _EnabledBaselineParameterDocument = &s_EnabledBaselineParameterDocument
+
+var _EnabledBaselineParameters = &s_EnabledBaselineParameters
+var _EnabledBaselineParameters_member = &s_EnabledBaselineParameters_member
+
+var _EnabledBaselineParameterSummaries = &s_EnabledBaselineParameterSummaries
+var _EnabledBaselineParameterSummaries_member = &s_EnabledBaselineParameterSummaries_member
+
+var EnabledBaselineParameterSummary = &sEnabledBaselineParameterSummary
+var EnabledBaselineParameterSummary_key = &sEnabledBaselineParameterSummary_key
+var EnabledBaselineParameterSummary_value = &sEnabledBaselineParameterSummary_value
+
+var _EnabledBaselineParentIdentifiers = &s_EnabledBaselineParentIdentifiers
+var _EnabledBaselineParentIdentifiers_member = &s_EnabledBaselineParentIdentifiers_member
+
+var _EnabledBaselines = &s_EnabledBaselines
+var _EnabledBaselines_member = &s_EnabledBaselines_member
+
+var EnabledBaselineSummary = &sEnabledBaselineSummary
+var EnabledBaselineSummary_arn = &sEnabledBaselineSummary_arn
+var EnabledBaselineSummary_baselineIdentifier = &sEnabledBaselineSummary_baselineIdentifier
+var EnabledBaselineSummary_baselineVersion = &sEnabledBaselineSummary_baselineVersion
+var EnabledBaselineSummary_driftStatusSummary = &sEnabledBaselineSummary_driftStatusSummary
+var EnabledBaselineSummary_targetIdentifier = &sEnabledBaselineSummary_targetIdentifier
+var EnabledBaselineSummary_parentIdentifier = &sEnabledBaselineSummary_parentIdentifier
+var EnabledBaselineSummary_statusSummary = &sEnabledBaselineSummary_statusSummary
+
+var _EnabledBaselineTargetIdentifiers = &s_EnabledBaselineTargetIdentifiers
+var _EnabledBaselineTargetIdentifiers_member = &s_EnabledBaselineTargetIdentifiers_member
+
+var EnabledControlDetails = &sEnabledControlDetails
+var EnabledControlDetails_arn = &sEnabledControlDetails_arn
+var EnabledControlDetails_controlIdentifier = &sEnabledControlDetails_controlIdentifier
+var EnabledControlDetails_targetIdentifier = &sEnabledControlDetails_targetIdentifier
+var EnabledControlDetails_statusSummary = &sEnabledControlDetails_statusSummary
+var EnabledControlDetails_driftStatusSummary = &sEnabledControlDetails_driftStatusSummary
+var EnabledControlDetails_parentIdentifier = &sEnabledControlDetails_parentIdentifier
+var EnabledControlDetails_targetRegions = &sEnabledControlDetails_targetRegions
+var EnabledControlDetails_parameters = &sEnabledControlDetails_parameters
+
+var EnabledControlDriftTypes = &sEnabledControlDriftTypes
+var EnabledControlDriftTypes_inheritance = &sEnabledControlDriftTypes_inheritance
+var EnabledControlDriftTypes_resource = &sEnabledControlDriftTypes_resource
+
+var EnabledControlFilter = &sEnabledControlFilter
+var EnabledControlFilter_controlIdentifiers = &sEnabledControlFilter_controlIdentifiers
+var EnabledControlFilter_statuses = &sEnabledControlFilter_statuses
+var EnabledControlFilter_driftStatuses = &sEnabledControlFilter_driftStatuses
+var EnabledControlFilter_parentIdentifiers = &sEnabledControlFilter_parentIdentifiers
+var EnabledControlFilter_inheritanceDriftStatuses = &sEnabledControlFilter_inheritanceDriftStatuses
+var EnabledControlFilter_resourceDriftStatuses = &sEnabledControlFilter_resourceDriftStatuses
+
+var _EnabledControlIdentifiers = &s_EnabledControlIdentifiers
+var _EnabledControlIdentifiers_member = &s_EnabledControlIdentifiers_member
+
+var EnabledControlInheritanceDrift = &sEnabledControlInheritanceDrift
+var EnabledControlInheritanceDrift_status = &sEnabledControlInheritanceDrift_status
+
+var EnabledControlParameter = &sEnabledControlParameter
+var EnabledControlParameter_key = &sEnabledControlParameter_key
+var EnabledControlParameter_value = &sEnabledControlParameter_value
+
+var _EnabledControlParameters = &s_EnabledControlParameters
+var _EnabledControlParameters_member = &s_EnabledControlParameters_member
+
+var _EnabledControlParameterSummaries = &s_EnabledControlParameterSummaries
+var _EnabledControlParameterSummaries_member = &s_EnabledControlParameterSummaries_member
+
+var EnabledControlParameterSummary = &sEnabledControlParameterSummary
+var EnabledControlParameterSummary_key = &sEnabledControlParameterSummary_key
+var EnabledControlParameterSummary_value = &sEnabledControlParameterSummary_value
+
+var EnabledControlResourceDrift = &sEnabledControlResourceDrift
+var EnabledControlResourceDrift_status = &sEnabledControlResourceDrift_status
+
+var _EnabledControls = &s_EnabledControls
+var _EnabledControls_member = &s_EnabledControls_member
+
+var EnabledControlSummary = &sEnabledControlSummary
+var EnabledControlSummary_arn = &sEnabledControlSummary_arn
+var EnabledControlSummary_controlIdentifier = &sEnabledControlSummary_controlIdentifier
+var EnabledControlSummary_targetIdentifier = &sEnabledControlSummary_targetIdentifier
+var EnabledControlSummary_statusSummary = &sEnabledControlSummary_statusSummary
+var EnabledControlSummary_driftStatusSummary = &sEnabledControlSummary_driftStatusSummary
+var EnabledControlSummary_parentIdentifier = &sEnabledControlSummary_parentIdentifier
+
+var EnablementStatus = &sEnablementStatus
+var EnablementStatus_SUCCEEDED = &sEnablementStatus_SUCCEEDED
+var EnablementStatus_FAILED = &sEnablementStatus_FAILED
+var EnablementStatus_UNDER_CHANGE = &sEnablementStatus_UNDER_CHANGE
+
+var _EnablementStatuses = &s_EnablementStatuses
+var _EnablementStatuses_member = &s_EnablementStatuses_member
+
+var EnablementStatusSummary = &sEnablementStatusSummary
+var EnablementStatusSummary_status = &sEnablementStatusSummary_status
+var EnablementStatusSummary_lastOperationIdentifier = &sEnablementStatusSummary_lastOperationIdentifier
+
+var InternalServerException = &sInternalServerException
+var InternalServerException_message = &sInternalServerException_message
+
+var LandingZoneDetail = &sLandingZoneDetail
+var LandingZoneDetail_version = &sLandingZoneDetail_version
+var LandingZoneDetail_remediationTypes = &sLandingZoneDetail_remediationTypes
+var LandingZoneDetail_arn = &sLandingZoneDetail_arn
+var LandingZoneDetail_status = &sLandingZoneDetail_status
+var LandingZoneDetail_latestAvailableVersion = &sLandingZoneDetail_latestAvailableVersion
+var LandingZoneDetail_driftStatus = &sLandingZoneDetail_driftStatus
+var LandingZoneDetail_manifest = &sLandingZoneDetail_manifest
+
+var LandingZoneDriftStatus = &sLandingZoneDriftStatus
+var LandingZoneDriftStatus_DRIFTED = &sLandingZoneDriftStatus_DRIFTED
+var LandingZoneDriftStatus_IN_SYNC = &sLandingZoneDriftStatus_IN_SYNC
+
+var LandingZoneDriftStatusSummary = &sLandingZoneDriftStatusSummary
+var LandingZoneDriftStatusSummary_status = &sLandingZoneDriftStatusSummary_status
+
+var LandingZoneOperationDetail = &sLandingZoneOperationDetail
+var LandingZoneOperationDetail_operationType = &sLandingZoneOperationDetail_operationType
+var LandingZoneOperationDetail_operationIdentifier = &sLandingZoneOperationDetail_operationIdentifier
+var LandingZoneOperationDetail_status = &sLandingZoneOperationDetail_status
+var LandingZoneOperationDetail_startTime = &sLandingZoneOperationDetail_startTime
+var LandingZoneOperationDetail_endTime = &sLandingZoneOperationDetail_endTime
+var LandingZoneOperationDetail_statusMessage = &sLandingZoneOperationDetail_statusMessage
+
+var LandingZoneOperationFilter = &sLandingZoneOperationFilter
+var LandingZoneOperationFilter_types = &sLandingZoneOperationFilter_types
+var LandingZoneOperationFilter_statuses = &sLandingZoneOperationFilter_statuses
+
+var _LandingZoneOperations = &s_LandingZoneOperations
+var _LandingZoneOperations_member = &s_LandingZoneOperations_member
+
+var LandingZoneOperationStatus = &sLandingZoneOperationStatus
+var LandingZoneOperationStatus_SUCCEEDED = &sLandingZoneOperationStatus_SUCCEEDED
+var LandingZoneOperationStatus_FAILED = &sLandingZoneOperationStatus_FAILED
+var LandingZoneOperationStatus_IN_PROGRESS = &sLandingZoneOperationStatus_IN_PROGRESS
+
+var _LandingZoneOperationStatuses = &s_LandingZoneOperationStatuses
+var _LandingZoneOperationStatuses_member = &s_LandingZoneOperationStatuses_member
+
+var LandingZoneOperationSummary = &sLandingZoneOperationSummary
+var LandingZoneOperationSummary_operationType = &sLandingZoneOperationSummary_operationType
+var LandingZoneOperationSummary_operationIdentifier = &sLandingZoneOperationSummary_operationIdentifier
+var LandingZoneOperationSummary_status = &sLandingZoneOperationSummary_status
+
+var LandingZoneOperationType = &sLandingZoneOperationType
+var LandingZoneOperationType_DELETE = &sLandingZoneOperationType_DELETE
+var LandingZoneOperationType_CREATE = &sLandingZoneOperationType_CREATE
+var LandingZoneOperationType_UPDATE = &sLandingZoneOperationType_UPDATE
+var LandingZoneOperationType_RESET = &sLandingZoneOperationType_RESET
+
+var _LandingZoneOperationTypes = &s_LandingZoneOperationTypes
+var _LandingZoneOperationTypes_member = &s_LandingZoneOperationTypes_member
+
+var LandingZoneStatus = &sLandingZoneStatus
+var LandingZoneStatus_ACTIVE = &sLandingZoneStatus_ACTIVE
+var LandingZoneStatus_PROCESSING = &sLandingZoneStatus_PROCESSING
+var LandingZoneStatus_FAILED = &sLandingZoneStatus_FAILED
+
+var _LandingZoneSummaries = &s_LandingZoneSummaries
+var _LandingZoneSummaries_member = &s_LandingZoneSummaries_member
+
+var LandingZoneSummary = &sLandingZoneSummary
+var LandingZoneSummary_arn = &sLandingZoneSummary_arn
+
+var _LandingZoneVersion = &s_LandingZoneVersion
+
+var _ListBaselinesMaxResults = &s_ListBaselinesMaxResults
+
+var _ListControlOperationsMaxResults = &s_ListControlOperationsMaxResults
+
+var _ListControlOperationsNextToken = &s_ListControlOperationsNextToken
+
+var _ListEnabledBaselinesMaxResults = &s_ListEnabledBaselinesMaxResults
+
+var _ListEnabledBaselinesNextToken = &s_ListEnabledBaselinesNextToken
+
+var _ListLandingZoneOperationsMaxResults = &s_ListLandingZoneOperationsMaxResults
+
+var _ListLandingZonesMaxResults = &s_ListLandingZonesMaxResults
+
+var _Manifest = &s_Manifest
+
+var _MaxResults = &s_MaxResults
+
+var _OperationIdentifier = &s_OperationIdentifier
+
+var _ParentIdentifier = &s_ParentIdentifier
+
+var _ParentIdentifiers = &s_ParentIdentifiers
+var _ParentIdentifiers_member = &s_ParentIdentifiers_member
+
+var Region = &sRegion
+var Region_name = &sRegion_name
+
+var _RegionName = &s_RegionName
+
+var RemediationType = &sRemediationType
+var RemediationType_INHERITANCE_DRIFT = &sRemediationType_INHERITANCE_DRIFT
+
+var _RemediationTypes = &s_RemediationTypes
+var _RemediationTypes_member = &s_RemediationTypes_member
+
+var ResourceNotFoundException = &sResourceNotFoundException
+var ResourceNotFoundException_message = &sResourceNotFoundException_message
+
+var ServiceQuotaExceededException = &sServiceQuotaExceededException
+var ServiceQuotaExceededException_message = &sServiceQuotaExceededException_message
+
+var _TagKey = &s_TagKey
+
+var _TagKeys = &s_TagKeys
+var _TagKeys_member = &s_TagKeys_member
+
+var _TagMap = &s_TagMap
+var _TagMap_key = &s_TagMap_key
+var _TagMap_value = &s_TagMap_value
+
+var _TagValue = &s_TagValue
+
+var _TargetIdentifier = &s_TargetIdentifier
+
+var _TargetIdentifiers = &s_TargetIdentifiers
+var _TargetIdentifiers_member = &s_TargetIdentifiers_member
+
+var _TargetRegions = &s_TargetRegions
+var _TargetRegions_member = &s_TargetRegions_member
+
+var ThrottlingException = &sThrottlingException
+var ThrottlingException_message = &sThrottlingException_message
+var ThrottlingException_serviceCode = &sThrottlingException_serviceCode
+var ThrottlingException_quotaCode = &sThrottlingException_quotaCode
+var ThrottlingException_retryAfterSeconds = &sThrottlingException_retryAfterSeconds
+
+var _Timestamp = &s_Timestamp
+
+var ValidationException = &sValidationException
+var ValidationException_message = &sValidationException_message
+
+var CreateLandingZoneInput = &sCreateLandingZoneInput
+var CreateLandingZoneInput_version = &sCreateLandingZoneInput_version
+var CreateLandingZoneInput_remediationTypes = &sCreateLandingZoneInput_remediationTypes
+var CreateLandingZoneInput_tags = &sCreateLandingZoneInput_tags
+var CreateLandingZoneInput_manifest = &sCreateLandingZoneInput_manifest
+
+var CreateLandingZoneOutput = &sCreateLandingZoneOutput
+var CreateLandingZoneOutput_arn = &sCreateLandingZoneOutput_arn
+var CreateLandingZoneOutput_operationIdentifier = &sCreateLandingZoneOutput_operationIdentifier
+
+var DeleteLandingZoneInput = &sDeleteLandingZoneInput
+var DeleteLandingZoneInput_landingZoneIdentifier = &sDeleteLandingZoneInput_landingZoneIdentifier
+
+var DeleteLandingZoneOutput = &sDeleteLandingZoneOutput
+var DeleteLandingZoneOutput_operationIdentifier = &sDeleteLandingZoneOutput_operationIdentifier
+
+var DisableBaselineInput = &sDisableBaselineInput
+var DisableBaselineInput_enabledBaselineIdentifier = &sDisableBaselineInput_enabledBaselineIdentifier
+
+var DisableBaselineOutput = &sDisableBaselineOutput
+var DisableBaselineOutput_operationIdentifier = &sDisableBaselineOutput_operationIdentifier
+
+var DisableControlInput = &sDisableControlInput
+var DisableControlInput_controlIdentifier = &sDisableControlInput_controlIdentifier
+var DisableControlInput_targetIdentifier = &sDisableControlInput_targetIdentifier
+var DisableControlInput_enabledControlIdentifier = &sDisableControlInput_enabledControlIdentifier
+
+var DisableControlOutput = &sDisableControlOutput
+var DisableControlOutput_operationIdentifier = &sDisableControlOutput_operationIdentifier
+
+var EnableBaselineInput = &sEnableBaselineInput
+var EnableBaselineInput_baselineVersion = &sEnableBaselineInput_baselineVersion
+var EnableBaselineInput_parameters = &sEnableBaselineInput_parameters
+var EnableBaselineInput_baselineIdentifier = &sEnableBaselineInput_baselineIdentifier
+var EnableBaselineInput_targetIdentifier = &sEnableBaselineInput_targetIdentifier
+var EnableBaselineInput_tags = &sEnableBaselineInput_tags
+
+var EnableBaselineOutput = &sEnableBaselineOutput
+var EnableBaselineOutput_operationIdentifier = &sEnableBaselineOutput_operationIdentifier
+var EnableBaselineOutput_arn = &sEnableBaselineOutput_arn
+
+var EnableControlInput = &sEnableControlInput
+var EnableControlInput_controlIdentifier = &sEnableControlInput_controlIdentifier
+var EnableControlInput_targetIdentifier = &sEnableControlInput_targetIdentifier
+var EnableControlInput_tags = &sEnableControlInput_tags
+var EnableControlInput_parameters = &sEnableControlInput_parameters
+
+var EnableControlOutput = &sEnableControlOutput
+var EnableControlOutput_operationIdentifier = &sEnableControlOutput_operationIdentifier
+var EnableControlOutput_arn = &sEnableControlOutput_arn
+
+var GetBaselineInput = &sGetBaselineInput
+var GetBaselineInput_baselineIdentifier = &sGetBaselineInput_baselineIdentifier
+
+var GetBaselineOperationInput = &sGetBaselineOperationInput
+var GetBaselineOperationInput_operationIdentifier = &sGetBaselineOperationInput_operationIdentifier
+
+var GetBaselineOperationOutput = &sGetBaselineOperationOutput
+var GetBaselineOperationOutput_baselineOperation = &sGetBaselineOperationOutput_baselineOperation
+
+var GetBaselineOutput = &sGetBaselineOutput
+var GetBaselineOutput_arn = &sGetBaselineOutput_arn
+var GetBaselineOutput_name = &sGetBaselineOutput_name
+var GetBaselineOutput_description = &sGetBaselineOutput_description
+
+var GetControlOperationInput = &sGetControlOperationInput
+var GetControlOperationInput_operationIdentifier = &sGetControlOperationInput_operationIdentifier
+
+var GetControlOperationOutput = &sGetControlOperationOutput
+var GetControlOperationOutput_controlOperation = &sGetControlOperationOutput_controlOperation
+
+var GetEnabledBaselineInput = &sGetEnabledBaselineInput
+var GetEnabledBaselineInput_enabledBaselineIdentifier = &sGetEnabledBaselineInput_enabledBaselineIdentifier
+
+var GetEnabledBaselineOutput = &sGetEnabledBaselineOutput
+var GetEnabledBaselineOutput_enabledBaselineDetails = &sGetEnabledBaselineOutput_enabledBaselineDetails
+
+var GetEnabledControlInput = &sGetEnabledControlInput
+var GetEnabledControlInput_enabledControlIdentifier = &sGetEnabledControlInput_enabledControlIdentifier
+
+var GetEnabledControlOutput = &sGetEnabledControlOutput
+var GetEnabledControlOutput_enabledControlDetails = &sGetEnabledControlOutput_enabledControlDetails
+
+var GetLandingZoneInput = &sGetLandingZoneInput
+var GetLandingZoneInput_landingZoneIdentifier = &sGetLandingZoneInput_landingZoneIdentifier
+
+var GetLandingZoneOperationInput = &sGetLandingZoneOperationInput
+var GetLandingZoneOperationInput_operationIdentifier = &sGetLandingZoneOperationInput_operationIdentifier
+
+var GetLandingZoneOperationOutput = &sGetLandingZoneOperationOutput
+var GetLandingZoneOperationOutput_operationDetails = &sGetLandingZoneOperationOutput_operationDetails
+
+var GetLandingZoneOutput = &sGetLandingZoneOutput
+var GetLandingZoneOutput_landingZone = &sGetLandingZoneOutput_landingZone
+
+var ListBaselinesInput = &sListBaselinesInput
+var ListBaselinesInput_nextToken = &sListBaselinesInput_nextToken
+var ListBaselinesInput_maxResults = &sListBaselinesInput_maxResults
+
+var ListBaselinesOutput = &sListBaselinesOutput
+var ListBaselinesOutput_baselines = &sListBaselinesOutput_baselines
+var ListBaselinesOutput_nextToken = &sListBaselinesOutput_nextToken
+
+var ListControlOperationsInput = &sListControlOperationsInput
+var ListControlOperationsInput_filter = &sListControlOperationsInput_filter
+var ListControlOperationsInput_nextToken = &sListControlOperationsInput_nextToken
+var ListControlOperationsInput_maxResults = &sListControlOperationsInput_maxResults
+
+var ListControlOperationsOutput = &sListControlOperationsOutput
+var ListControlOperationsOutput_controlOperations = &sListControlOperationsOutput_controlOperations
+var ListControlOperationsOutput_nextToken = &sListControlOperationsOutput_nextToken
+
+var ListEnabledBaselinesInput = &sListEnabledBaselinesInput
+var ListEnabledBaselinesInput_filter = &sListEnabledBaselinesInput_filter
+var ListEnabledBaselinesInput_nextToken = &sListEnabledBaselinesInput_nextToken
+var ListEnabledBaselinesInput_maxResults = &sListEnabledBaselinesInput_maxResults
+var ListEnabledBaselinesInput_includeChildren = &sListEnabledBaselinesInput_includeChildren
+
+var ListEnabledBaselinesOutput = &sListEnabledBaselinesOutput
+var ListEnabledBaselinesOutput_enabledBaselines = &sListEnabledBaselinesOutput_enabledBaselines
+var ListEnabledBaselinesOutput_nextToken = &sListEnabledBaselinesOutput_nextToken
+
+var ListEnabledControlsInput = &sListEnabledControlsInput
+var ListEnabledControlsInput_targetIdentifier = &sListEnabledControlsInput_targetIdentifier
+var ListEnabledControlsInput_nextToken = &sListEnabledControlsInput_nextToken
+var ListEnabledControlsInput_maxResults = &sListEnabledControlsInput_maxResults
+var ListEnabledControlsInput_filter = &sListEnabledControlsInput_filter
+var ListEnabledControlsInput_includeChildren = &sListEnabledControlsInput_includeChildren
+
+var ListEnabledControlsOutput = &sListEnabledControlsOutput
+var ListEnabledControlsOutput_enabledControls = &sListEnabledControlsOutput_enabledControls
+var ListEnabledControlsOutput_nextToken = &sListEnabledControlsOutput_nextToken
+
+var ListLandingZoneOperationsInput = &sListLandingZoneOperationsInput
+var ListLandingZoneOperationsInput_filter = &sListLandingZoneOperationsInput_filter
+var ListLandingZoneOperationsInput_nextToken = &sListLandingZoneOperationsInput_nextToken
+var ListLandingZoneOperationsInput_maxResults = &sListLandingZoneOperationsInput_maxResults
+
+var ListLandingZoneOperationsOutput = &sListLandingZoneOperationsOutput
+var ListLandingZoneOperationsOutput_landingZoneOperations = &sListLandingZoneOperationsOutput_landingZoneOperations
+var ListLandingZoneOperationsOutput_nextToken = &sListLandingZoneOperationsOutput_nextToken
+
+var ListLandingZonesInput = &sListLandingZonesInput
+var ListLandingZonesInput_nextToken = &sListLandingZonesInput_nextToken
+var ListLandingZonesInput_maxResults = &sListLandingZonesInput_maxResults
+
+var ListLandingZonesOutput = &sListLandingZonesOutput
+var ListLandingZonesOutput_landingZones = &sListLandingZonesOutput_landingZones
+var ListLandingZonesOutput_nextToken = &sListLandingZonesOutput_nextToken
+
+var ListTagsForResourceInput = &sListTagsForResourceInput
+var ListTagsForResourceInput_resourceArn = &sListTagsForResourceInput_resourceArn
+
+var ListTagsForResourceOutput = &sListTagsForResourceOutput
+var ListTagsForResourceOutput_tags = &sListTagsForResourceOutput_tags
+
+var ResetEnabledBaselineInput = &sResetEnabledBaselineInput
+var ResetEnabledBaselineInput_enabledBaselineIdentifier = &sResetEnabledBaselineInput_enabledBaselineIdentifier
+
+var ResetEnabledBaselineOutput = &sResetEnabledBaselineOutput
+var ResetEnabledBaselineOutput_operationIdentifier = &sResetEnabledBaselineOutput_operationIdentifier
+
+var ResetEnabledControlInput = &sResetEnabledControlInput
+var ResetEnabledControlInput_enabledControlIdentifier = &sResetEnabledControlInput_enabledControlIdentifier
+
+var ResetEnabledControlOutput = &sResetEnabledControlOutput
+var ResetEnabledControlOutput_operationIdentifier = &sResetEnabledControlOutput_operationIdentifier
+
+var ResetLandingZoneInput = &sResetLandingZoneInput
+var ResetLandingZoneInput_landingZoneIdentifier = &sResetLandingZoneInput_landingZoneIdentifier
+
+var ResetLandingZoneOutput = &sResetLandingZoneOutput
+var ResetLandingZoneOutput_operationIdentifier = &sResetLandingZoneOutput_operationIdentifier
+
+var TagResourceInput = &sTagResourceInput
+var TagResourceInput_resourceArn = &sTagResourceInput_resourceArn
+var TagResourceInput_tags = &sTagResourceInput_tags
+
+var TagResourceOutput = &sTagResourceOutput
+
+var UntagResourceInput = &sUntagResourceInput
+var UntagResourceInput_resourceArn = &sUntagResourceInput_resourceArn
+var UntagResourceInput_tagKeys = &sUntagResourceInput_tagKeys
+
+var UntagResourceOutput = &sUntagResourceOutput
+
+var UpdateEnabledBaselineInput = &sUpdateEnabledBaselineInput
+var UpdateEnabledBaselineInput_baselineVersion = &sUpdateEnabledBaselineInput_baselineVersion
+var UpdateEnabledBaselineInput_parameters = &sUpdateEnabledBaselineInput_parameters
+var UpdateEnabledBaselineInput_enabledBaselineIdentifier = &sUpdateEnabledBaselineInput_enabledBaselineIdentifier
+
+var UpdateEnabledBaselineOutput = &sUpdateEnabledBaselineOutput
+var UpdateEnabledBaselineOutput_operationIdentifier = &sUpdateEnabledBaselineOutput_operationIdentifier
+
+var UpdateEnabledControlInput = &sUpdateEnabledControlInput
+var UpdateEnabledControlInput_parameters = &sUpdateEnabledControlInput_parameters
+var UpdateEnabledControlInput_enabledControlIdentifier = &sUpdateEnabledControlInput_enabledControlIdentifier
+
+var UpdateEnabledControlOutput = &sUpdateEnabledControlOutput
+var UpdateEnabledControlOutput_operationIdentifier = &sUpdateEnabledControlOutput_operationIdentifier
+
+var UpdateLandingZoneInput = &sUpdateLandingZoneInput
+var UpdateLandingZoneInput_version = &sUpdateLandingZoneInput_version
+var UpdateLandingZoneInput_remediationTypes = &sUpdateLandingZoneInput_remediationTypes
+var UpdateLandingZoneInput_landingZoneIdentifier = &sUpdateLandingZoneInput_landingZoneIdentifier
+var UpdateLandingZoneInput_manifest = &sUpdateLandingZoneInput_manifest
+
+var UpdateLandingZoneOutput = &sUpdateLandingZoneOutput
+var UpdateLandingZoneOutput_operationIdentifier = &sUpdateLandingZoneOutput_operationIdentifier
+
+var AWSControlTowerApis = &smithy.ServiceSchema{Schema: &s_AWSControlTowerApis, Version: "2018-05-10"}
